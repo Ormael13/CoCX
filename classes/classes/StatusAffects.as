@@ -293,6 +293,16 @@ package classes
 		public static const Web:CombatStatusAffect = mk2("Web");
 		public static const WebSilence:CombatStatusAffect = mk2("Web-Silence");
 		public static const Whispered:CombatStatusAffect = mk2("Whispered");
+		
+		public static const RemovedArmor:CombatStatusAffect = mk2("Removed Armor");
+		public static const JCLustLevel:CombatStatusAffect = mk2("JC Lust Level");
+		public static const MirroredAttack:CombatStatusAffect = mk2("Mirrored Attack");
+		public static const KnockedBack:CombatStatusAffect = mk2("Knocked Back");
+		public static const Tentagrappled:CombatStatusAffect = mk2("Tentagrappled");
+		public static const TentagrappleCooldown:CombatStatusAffect = mk2("Tentagrapple Cooldown");
+		public static const ShowerDotEffect:CombatStatusAffect = mk2("Shower Dot Effect");
+		public static const GardenerSapSpeed:CombatStatusAffect = mk2("Sap Speed");
+		public static const VineHealUsed:CombatStatusAffect = mk2("Vine Heal Used");
 
 		/**
 		 * Creates non-combat status affect

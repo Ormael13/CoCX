@@ -543,7 +543,7 @@ public function exgartuanArmorShift():void {
 		changed = true;
 	}
 	else if(player.armor == armors.SSARMOR){
-		outputText("The fine silk that makes up your armor suddenly undoes itself around your crotch, exposing your  " + cockDescript(0) + " to the open air. The thin strands in the air begin to re-weave themselves around your enormous member, forming a prominent new addition to your protection.", false);
+		outputText("The fine silk that makes up your armor suddenly undoes itself around your crotch, exposing your " + cockDescript(0) + " to the open air. The thin strands in the air begin to re-weave themselves around your enormous member, forming a prominent new addition to your protection.", false);
 		player.modArmorName = "crotch-hugging spider-silk armor";
 		changed = true;
 	}
@@ -1195,7 +1195,7 @@ private function boobgartuanSurprise3():void {
 		//[if vagina >0]
 		else if(player.gender == 2) outputText("fem-spunk", false);
 		else outputText("liquids", false);
-		outputText(" already coating your  " + hipDescript() + ".", false);
+		outputText(" already coating your " + hipDescript() + ".", false);
 	}
 	//else
 	else outputText(".", false);

@@ -143,7 +143,7 @@ package classes.Scenes.Areas.Forest
 		{
 			clearOutput();
 			
-			outputText("As you explore between the tall, ancient trees, you notice a thick fog beginning to spill out  from between the trees and over the mossy ground. As the haze pours forth and flows past your [feet], you notice the forest around you growing distinctly darker and colder. \n\n");
+			outputText("As you explore between the tall, ancient trees, you notice a thick fog beginning to spill out from between the trees and over the mossy ground. As the haze pours forth and flows past your [feet], you notice the forest around you growing distinctly darker and colder. \n\n");
 
 			outputText("A shiver of unnatural fear runs up your spine, just as a hunting horn sounds from the distance.  You gasp, your breath materializing as a puff of fine, white mist.  Just as the echoes of the horn fade, a chorus of canine howls breaks through the");
 			if (model.time.hours >= 0 && model.time.hours <= 10) outputText(" chill morning");
@@ -332,7 +332,7 @@ package classes.Scenes.Areas.Forest
 			// If the PC is a kitsune, bunny, or harpy, disregard Wild Points because the Erlking will ALWAYS opt to do the PC personally.  
 			// The Erlking leaves the PC a nicely-wrapped gift of foxberries or canine peppers,  The Hunt reverts to 0 points.
 
-			outputText("You run through the woods, heart pounding so hard you feel it might leap out of your throat.  Despite your best efforts, though, the fog still closes in.  And with it comes the sound of the hounds, running alongside you, hidden in the thick haze. \n\n");
+			outputText("You run through the woods, heart pounding so hard you feel it might leap out of your throat.  Despite your best efforts, though, the fog still closes in.  With it comes the sound of the hounds, running alongside you, hidden in the thick haze. \n\n");
 
 			outputText("With the Hounds on your right, you juke left, nearly running into a tree, but stumble past it, only to hear the Hounds again on your left.  You turn right, still running, unable to shake the feeling that you’re being driven, but too panicked to figure a way out. \n\n");
 
@@ -369,17 +369,17 @@ package classes.Scenes.Areas.Forest
 			else outputText(" long tongue slapping warmly against your taint");
 			outputText(" before running up to your [asshole].\n\n");
 
-			outputText("You shiver, the fog-born fear still controlling your body.  You feel a rush of strange gratitude—the hounds don’t want to eat you, they just want to sate a different hunger.  And with the mindbending fog inside you, you want desperately to satisfy them.  Your submissive mind even hopes that if you can do a good job, they’ll spare you any further domination.  You’d be repulsed by the idea of fucking two Hounds to exhaustion if you weren’t so damn scared of them.  An errant thought at the back of your mind hopes that the effects of this fog are only temporary.\n\n");
+			outputText("You shiver, the fog-born fear still controlling your body.  You feel a rush of strange gratitude— the hounds don’t want to eat you, they just want to sate a different hunger.  And with the mindbending fog inside you, you want desperately to satisfy them.  Your submissive mind even hopes that if you can do a good job, they’ll spare you any further domination.  You’d be repulsed by the idea of fucking two Hounds to exhaustion if you weren’t so damn scared of them.  An errant thought at the back of your mind hopes that the effects of this fog are only temporary.\n\n");
 
 			outputText("You glance over your shoulder, wanting to make sure the Hound has no trouble getting into you,");
-			if (player.isTaur()) outputText(" and realizing that you’re too tall, fold your legs beneath you, dropping all the way to the ground,");
+			if (player.isTaur()) outputText(" and realizing that you’re too tall, you fold your legs beneath you, dropping all the way to the ground,");
 			outputText(" when the other hound roughly grabs your");
 			if (player.femininity < 30) outputText(" strong jaw");
 			else if (player.femininity > 70) outputText(" delicate chin");
 			else outputText(" chin");
 			outputText(", turning it toward his massive, slimy dog cock.  You get a brief glimpse of a crystal-clear bead of pre before the tip is forced between your lips.\n\n");
 
-			outputText("The Hound begins fucking your face roughly, leaving salty precum on your tongue, cock throbbing between your lips.  You feel grateful that the Hound has chosen to simply fuck you, and you want nothing more than to do the best job possible for the Hound.\n\n");
+			outputText("The Hound begins fucking your face roughly, leaving salty precum on your tongue, his cock throbbing between your lips.  You feel grateful that the Hound has chosen to simply fuck you, and you want nothing more than to do the best job possible for the Hound.\n\n");
 
 			outputText("You groan around the Hound’s dick as you feel a pressure against your [asshole].  The beast squeezes your [ass] cheeks as he shoves his foot-long doggie cock into your rear. ");
 			player.buttChange(12 * 3, true, false, false);
@@ -429,7 +429,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("A reward for all this trouble would definitely be welcome, and as much as you would appreciate a gift, you’d even welcome the opportunity to unwind after the exertion of the hunt.  \n\n");
 
-			outputText("You pause for a moment to consider his words and realize he might be offering you more. If you’re feeling brave, you could ask for him to stop the hunt once and for all.  Or, if the hunt has finally broken your will, you might just submit to the this huntsman forever.\n\n");
+			outputText("You pause for a moment to consider his words and realize he might be offering you more. If you’re feeling brave, you could ask for him to stop the hunt once and for all.  Or, if the hunt has finally broken your will, you might just submit to the huntsman forever.\n\n");
 
 			outputText("Even with so many of these thoughts crowding your mind, there’s still a tiny spark of resentment burning.  You could rush him and turn the tables on this cocky asshole.\n\n");
 
@@ -560,7 +560,7 @@ package classes.Scenes.Areas.Forest
 			if (player.balls == 0) outputText(" new");
 			outputText(" balls and runs halfway up your shiny red pecker, forming a sheath.");
 			if (player.wingType != 0) outputText("  You whine, rolling on your back and with a start, realize that your wings must have fallen off while you were distracted with your cock.");
-			outputText("  You smile and open-mouthed doggie smile, feeling the warm churning of cum building in your throbbing balls.  You ache for release, wanting nothing more than to stroke yourself.  You raise your black-nailed hands to your cock, but stop short, knowing instinctively that masturbating is forbidden.\n\n");
+			outputText("  You smile an open-mouthed doggie smile, feeling the warm churning of cum building in your throbbing balls.  You ache for release, wanting nothing more than to stroke yourself.  You raise your black-nailed hands to your cock, but stop short, knowing instinctively that masturbating is forbidden.\n\n");
 
 			outputText("Instead, you curl your stomach, trying to reach your cock with your mouth.");
 			if (player.faceType != FACE_DOG) outputText("  The world bends alarmingly as your nose pushes out, creating a black-furred muzzle where your mouth once was.");
@@ -618,7 +618,7 @@ package classes.Scenes.Areas.Forest
 
 					outputText("His speed builds, and his strong arms lift you up, sliding you up and down his shaft, letting your own weight fuck you against his dick, over and over.  You moan, body quaking as you cum, his shaft grinding deep against your womb.  After several minutes of steady rhythm, he grunts, pushing you down, and a moment later, he climaxes inside you, pumping you full of hot, thick cum.  You shudder as he floods you with jet after jet of his thick seed.\n\n");
 
-					outputText("You wrap your arms around him, clinging to him as he shifts his grip, bearing you up as you quake with aftershocks of pleasure.  One arm holds you up, close to his muscular chest, his other, gloved hand, strokes your [hair], as the fog rolls in.\n\n");
+					outputText("You wrap your arms around him, clinging to him as he shifts his grip, bearing you up as you quake with aftershocks of pleasure.  One arm holds you up, close to his muscular chest, his other gloved hand strokes your [hair], as the fog rolls in.\n\n");
 
 					outputText("You feel drowsy as the air thickens with chill fog, though the Erlking’s body keeps you warm.  Despite your best efforts, you find yourself drifting to sleep in his arms.  \n\n");
 
@@ -662,7 +662,7 @@ package classes.Scenes.Areas.Forest
 					if (player.biggestLactation() > 0) outputText("  The friction begins milking you, making you ooze milk down the trunk.");
 					outputText("  The mild pain of abrasion couples with the pleasure of his forceful fucking and you feel your climax approaching.\n\n");
 
-					outputText("With a moan, you cum, hugging the tree with all your might, thrusting back with your hindquarters.  With gentlemanly demeanor, the Erlking continues pumping his thick cock in and out of you until your orgasm recedes.  He then cums, himself, filling your insides with his hot spunk. \n\n");
+					outputText("With a moan, you cum, hugging the tree with all your might, thrusting back with your hindquarters.  With gentlemanly demeanor, the Erlking continues pumping his thick cock in and out of you until your orgasm recedes.  He then cums himself, filling your insides with his hot spunk. \n\n");
 
 					outputText("He allows you a moment to catch your breath, the pulls out.  You hear his cock slap wetly against his thigh.  A strong hand takes yours, guiding you across the clearing to a fallen log. Dazed, you follow him, and he sits, guiding you to do the same next to him.  \n\n");
 
@@ -747,7 +747,7 @@ package classes.Scenes.Areas.Forest
 
 				outputText("“<i>On all fours, slut,</i>” you smirk, shoving the huntsman back.  You throw his horns to the side as he stumbles to the mossy ground, visibly weakened without his cane.  Somehow, you don’t think it’s only the loss of his cane making him so submissive.  He looks more like a doe now with his horns gone.\n\n");
 
-				outputText("The Erlking turns over on all fours, his cloak riding up over his shoulders.  Just above his taut buttocks is a tufted deer tail.  You smirk, grabbing the fluffy tail with one hand, and shoving down his leather pants around his knees.  He looks back over his shoulder at you.  The red light has gone out of his eyes, leaving them as wide, doe-brown eyes.  Heavy lashes blink hopefully at you as spread his white-furred rump.\n\n");
+				outputText("The Erlking turns over on all fours, his cloak riding up over his shoulders.  Just above his taut buttocks is a tufted deer tail.  You smirk, grabbing the fluffy tail with one hand, and shoving down his leather pants around his knees.  He looks back over his shoulder at you.  The red light has gone out of his eyes, leaving them as wide, doe-brown eyes.  Heavy lashes blink hopefully at you as you spread his white-furred rump.\n\n");
 
 				outputText("“<i>Not a king anymore, are you?</i>” you growl, smiling.  “<i>You’re more like a Princess now.  A slutty, little Princess,</i>” you grin.  You see a tremble run down his back, and his soft, fluffy tail twitches in your hand.  “<i>Say it,</i>” you order.\n\n");
 
@@ -793,7 +793,7 @@ package classes.Scenes.Areas.Forest
 			if (selector == 0) outputText("The Princess’s pink fur is slathered in smears of saps and juices, and angry red stings pepper her body.  It’s very obvious that she’s fallen prey to the roaming tentacle monsters that haunt the forests.\n\n");
 			else if (selector == 1) outputText("The Princess winces as low branches drag across her ass, and you can see angry red claw marks criss-crossing her pert ass.  It seems she’s run afoul of Akbal, the feline lord of the Deepwoods.\n\n");
 			else if (selector == 2) outputText("The Princess coughs, a trickle of cum running down her lips and chin.  You see bruises on her throat and chin, and tiny claw marks across her body.  It looks like she was caught by a roving gang of imps.");
-			else if (selector == 3) outputText("The Princess’ pink fur is stained with multicolored blotches, and she sways a little bit apparently woozy.  Goblin attacks can leave a person that way for quite some time.\n\n");
+			else if (selector == 3) outputText("The Princess’ pink fur is stained with multicolored blotches, and she sways a little bit, apparently woozy.  Goblin attacks can leave a person that way for quite some time.\n\n");
 			else if (selector == 4) outputText("The Princess’ neck and wrists bear bruises, as if someone had bound her up roughly and repeatedly.");
 			else if (selector == 5) outputText("As she turns to squeeze between two trees, you see that the Princess has numerous claw marks up and down her back.  It looks like, since her transformation, her Hounds have turned on her.");
 
@@ -924,7 +924,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("You begin stroking her thick cock, feeling her pulse through it as it throbs under your fingers.  You squeeze it roughly, drawing a squeal from Princess Gwynn as she bites her bottom lip.  Unsure of what to do with her hands, she runs them through her own hair, looking up at the canopy from under heavy lids.  Her long lashes flutter as she pants shallowly.\n\n");
 
-			outputText("Faster and faster you pump her, until her breath comes in shallow gasps and her body trembles at the edge of orgasm.  You’re immediately seized by a wicked idea, and with your free hand, pull her tail up, raising her ass in the air.  She squeaks in pain but you’re not done yet.  You curl her whole lower body over, and aim her heavy cock at her face.\n\n");
+			outputText("Faster and faster you pump her, until her breath comes in shallow gasps and her body trembles at the edge of orgasm.  You’re immediately seized by a wicked idea, and with your free hand, you pull her tail up, raising her ass in the air.  She squeaks in pain but you’re not done yet.  You curl her whole lower body over, and aim her heavy cock at her face.\n\n");
 
 			outputText("“<i>Oh, nuh-nooo...</i>” she gasps, her knees now planted on either side of her head.\n\n");
 

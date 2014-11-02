@@ -23,6 +23,8 @@
 		public var ifris:Ifris = new Ifris();
 		public var jasun:Jasun = new Jasun();
 		public var katherine:Katherine = new Katherine();
+		public var katherineEmployment:KatherineEmployment = new KatherineEmployment();
+		public var katherineThreesome:KatherineThreesome = new KatherineThreesome();
 		public var library:Library = new Library();
 		public var loppe:Loppe = new Loppe();
 		public var lottie:Lottie = new Lottie();
@@ -166,10 +168,29 @@ public function telAdreMenu():void {
 		kGAMECLASS.urtaPregs.urtaIsAPregnantCopScene();
 	   return;
 	}
-	if(flags[kFLAGS.KATHERINE_UNLOCKED] < 1 && player.gems > 34 && rand(25) == 0 && flags[kFLAGS.KATHERINE_RANDOM_RECRUITMENT_DISABLED] == 0) {
-		if (flags[kFLAGS.KATHERINE_UNLOCKED] == 0) katherine.ambushByVagrantKittyKats()
-		else katherine.repeatAmbushKatherineRecruitMent();
-		return;
+	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
+		case -1:
+		case  0: //Still potentially recruitable
+			if (flags[kFLAGS.KATHERINE_RANDOM_RECRUITMENT_DISABLED] == 0 && player.gems > 34 && rand(25) == 0) {
+				if (flags[kFLAGS.KATHERINE_UNLOCKED] == 0)
+					katherine.ambushByVagrantKittyKats()
+				else katherine.repeatAmbushKatherineRecruitMent();
+				return;
+			}
+		case  1: //In alley behind Oswald's
+		case  2: //You are training her
+		case  3: //You and Urta are training her
+			break;
+		case  4: //Employed
+			if (!katherine.isAt(Katherine.KLOC_KATHS_APT) && flags[kFLAGS.KATHERINE_TRAINING] >= 100) {
+				katherineEmployment.katherineGetsEmployed();
+				return;
+			}
+		default: //Has given you a spare key to her apartment
+			if (model.time.hours < 10 && rand(12) == 0) { //If employed or housed she can sometimes be encountered while on duty
+				katherine.katherineOnDuty();
+				return;
+			}
 	}
 	if(flags[kFLAGS.ARIAN_PARK] == 0 && rand(10) == 0) {
 		kGAMECLASS.arianScene.meetArian();
@@ -192,32 +213,33 @@ public function telAdreMenu():void {
 	spriteSelect( -1);
 	outputText("Tel'Adre is a massive city, though most of its inhabitants tend to hang around the front few city blocks.  It seems the fall of Mareth did not leave the city of Tel'Adre totally unscathed.  A massive tower rises up in the center of the city, shimmering oddly.  From what you overhear in the streets, the covenant's magic-users slave away in that tower, working to keep the city veiled from outside dangers.  There does not seem to be a way to get into the unused portions of the city, but you'll keep your eyes open.\n\n", true);
 	outputText("A sign depicting a hermaphroditic centaur covered in piercings hangs in front of one of the sandstone buildings, and bright pink lettering declares it to be the 'Piercing Studio'.  You glance over and see the wooden facade of Urta's favorite bar, 'The Wet Bitch'.  How strange that those would be what she talks about during a tour.  In any event you can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand, and a foppishly-dressed dog-man with large floppy ears seems to be running some kind of pawnshop in his stand.  Steam boils from the top of a dome-shaped structure near the far end of the street, and simple lettering painted on the dome proclaims it to be a bakery.  Perhaps those shops will be interesting as well.", false);
-	var homes:Boolean = false;
-	var homeB:Function = null;
-	if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2) {
-		if(kGAMECLASS.raphael.RaphaelLikes())
-		{
-			homes = true;
-		}
-		else {
-			outputText("\n\nYou remember Raphael's offer about the Orphanage, but you might want to see about shaping yourself more to his tastes first.  He is a picky fox, after all, and you doubt he would take well to seeing you in your current state.");
-		}
+	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && !kGAMECLASS.raphael.RaphaelLikes()) {
+		outputText("\n\nYou remember Raphael's offer about the Orphanage, but you might want to see about shaping yourself more to his tastes first.  He is a picky fox, after all, and you doubt he would take well to seeing you in your current state.");
 	}
-	if(kGAMECLASS.urtaPregs.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) homes = true;
-	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower()) homes = true;
-	if(homes) homeB = houses;
-	choices("Shops",armorShops,"Bakery",bakeryScene.bakeryuuuuuu,"Bar",enterBarTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",library.visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
-	menu();
-	addButton(0,"Shops",armorShops);
-	addButton(1,"Bakery",bakeryScene.bakeryuuuuuu);
-	addButton(2,"Bar",enterBarTelAdre);
-	addButton(3,"Gym",gymDesc);
-	addButton(4,"Homes",homeB);
-	if(flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5,"Park",kGAMECLASS.arianScene.visitThePark);
-	addButton(6,"Pawn",oswaldPawn);
-	addButton(7,"Tower",library.visitZeMagesTower);
+	telAdreMenuShow();
+}
 
-	addButton(9,"Leave",eventParser,13);
+public function telAdreMenuShow():void { //Just displays the normal Tel'Adre menu options, no special events, no description. Useful if a special event has already played
+	var homes:Boolean = false;
+	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && kGAMECLASS.raphael.RaphaelLikes())
+		homes = true;
+	else if (player.hasKeyItem("Spare Key to Urta's House") >= 0)
+		homes = true;
+	else if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 5)
+		homes = true;
+	else if (flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower())
+		homes = true;
+	menu();
+	addButton(0, "Shops", armorShops);
+	addButton(1, "Bakery", bakeryScene.bakeryuuuuuu);
+	addButton(2, "Bar", enterBarTelAdre);
+	addButton(3, "Gym", gymDesc);
+	if (homes) addButton(4, "Homes", houses);
+	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5, "Park", kGAMECLASS.arianScene.visitThePark);
+	addButton(6, "Pawn", oswaldPawn);
+	addButton(7, "Tower", library.visitZeMagesTower);
+	
+	addButton(9, "Leave", eventParser, 13);
 }
 
 private function armorShops():void {
@@ -254,7 +276,9 @@ public function houses():void {
 	menu();
 	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower()) addButton(0,"Arian's",kGAMECLASS.arianScene.visitAriansHouse);
 	addButton(1,"Orphanage",orphanage);
-	if(kGAMECLASS.urtaPregs.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) addButton(2,"Urta's House",kGAMECLASS.urtaPregs.visitTheHouse);
+	if (kGAMECLASS.urtaPregs.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0)
+		addButton(2, "Urta's House", (katherine.isAt(Katherine.KLOC_URTAS_HOME) ? katherine.katherineAtUrtas : kGAMECLASS.urtaPregs.visitTheHouse));
+	if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 5) addButton(3, "Kath's Apt", katherine.visitAtHome);
 	addButton(9,"Back",telAdreMenu);
 }
 
@@ -985,18 +1009,19 @@ public function oswaldPawn():void {
 	if(player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
 	{
 		outputText("\n\nIn passing, you mention that you're looking for a carrot.\n\nOswald's tophat tips precariously as his ears perk up, and he gladly announces, \"<i>I happen to have come across one recently - something of a rarity in these dark times, you see.  I could let it go for 500 gems, if you're interested.</i>\"");
-		if(player.gems < 500) {
+		if (player.gems < 500) {
 			outputText("\n\n<b>You can't afford that!</b>");
-			eventParser(1065);
+			oswaldPawnMenu(); //eventParser(1065);
 		}
 		else {
 			menu();
-			addButton(0,"Sell",eventParser,1065);
-			addButton(1,"BuyCarrot",buyCarrotFromOswald);
+			addButton(0, "Sell", oswaldPawnMenu);
+			addButton(1, "BuyCarrot", buyCarrotFromOswald);
 		}
 	}
-	else eventParser(1065);
+	else oswaldPawnMenu(); //eventParser(1065);
 }
+
 private function buyCarrotFromOswald():void {
 	player.gems -= 500;
 	statScreenRefresh();
@@ -1007,6 +1032,37 @@ private function buyCarrotFromOswald():void {
 	addButton(0,"Next",oswaldPawn);
 }
 
+private function oswaldPawnMenu():void { //Moved here from Inventory.as
+	spriteSelect(47);
+	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
+	menu();
+	for (var slot:int = 0; slot < 5; slot++) {
+		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value > 1) {
+			outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+			addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+		}
+	}
+	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
+		case 1:
+		case 2: addButton(5, "Kath's Alley", katherine.visitKatherine); break;
+		case 3: addButton(5, "Safehouse", katherineEmployment.katherineTrainingWithUrta);
+		default:
+	}
+	addButton(9, "Back", telAdreMenu);
+}
+
+private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
+	spriteSelect(47);
+	var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
+	clearOutput();
+	if (itemValue == 0)
+		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+	else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
+	player.itemSlots[slot].removeOneItem();
+	player.gems += itemValue;
+	statScreenRefresh();
+	doNext(oswaldPawn);
+}
 
 private function anotherButton(button:int,nam:String,func:*,arg:* = -9000):int {
 	if(button > 8) return 9;
@@ -1019,6 +1075,7 @@ private function enterBarTelAdre():void {
 	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) kGAMECLASS.pigSlutRoastingGreet();
 	else barTelAdre();
 }
+
 public function barTelAdre():void {
 	// Dominka & Edryn both persist their sprites if you back out of doing anything with them -- I
 	// I guess this is good a place as any to catch-all the sprite, because I don't think theres ever a case you get a sprite from just entering the bar?
@@ -1026,14 +1083,18 @@ public function barTelAdre():void {
 
 	hideUpDown();
 	var button:int = 0;
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.LOPPE_DISABLED] == 0 && flags[kFLAGS.LOPPE_MET] == 0 && rand(10) == 0) {
 		loppe.loppeFirstMeeting();
 		return;
 	}
-	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ", false);
-	if(player.humanScore() <= 3) outputText("despite your altered appearance, ", false);
-	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.", false);
+	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ");
+	if (player.humanScore() <= 3) outputText("despite your altered appearance, ");
+	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.");
+	
+	scylla.scyllaBarSelectAction(); //Done before anything else so that other NPCs can check scylla.action to see what she's doing
+		//Thanks to this function and edryn.edrynHeliaThreesomePossible() the bar menu will always display the same possible options until the game time advances.
+		//So it's safe to return to this menu, Helia or Urta can't suddenly disappear or appear just from leaving and re-entering the bar.
 
 	menu();
 	//AMILY!
@@ -1077,15 +1138,28 @@ public function barTelAdre():void {
 			button = anotherButton(button,"Edryn",edryn.edrynBarTalk);
 		}
 	}
+	if (flags[kFLAGS.KATHERINE_LOCATION] == Katherine.KLOC_BAR) {
+		if (flags[kFLAGS.KATHERINE_UNLOCKED] == 4) { 
+			katherine.barFirstEncounter();
+			return;
+		}
+		if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] == 31 && kGAMECLASS.urta.urtaAtBar() && !kGAMECLASS.urta.urtaDrunk() && flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] == 0) {
+			katherine.barKathUrtaLoveAnnounce();
+			return;
+		}
+		katherine.barDescription();
+		button = anotherButton(button, "Katherine", katherine.barApproach);
+    }
 	//trace("HEL FOLLOWER LEVEL: " + flags[kFLAGS.HEL_FOLLOWER_LEVEL] + " HEL FUCKBUDDY: " + flags[kFLAGS.HEL_FUCKBUDDY] + " HARPY QUEEN DEFEATED: " + flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]);
 	//trace("REDUCED ENCOUNTER RATE (DISPLINED): " + flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE]);
 	//HELIA
-	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && (flags[kFLAGS.HEL_FUCKBUDDY] != 0 || kGAMECLASS.helFollower.followerHel()) && !(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]== 0)) {
+//	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && (flags[kFLAGS.HEL_FUCKBUDDY] != 0 || kGAMECLASS.helFollower.followerHel()) && !(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]== 0)) {
+	if (edryn.edrynHeliaThreesomePossible()) {
 		edryn.helAppearance();
 		button = anotherButton(button,"Helia",edryn.approachHelAtZeBitch);
 	}
 	//NANCY
-	if(auntNancy.auntNancy(false)) {
+	if (auntNancy.auntNancy(false)) {
 		auntNancy.auntNancy(true);
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
 		else button = anotherButton(button,"Barkeep",auntNancy.interactWithAuntNancy);
@@ -1093,9 +1167,9 @@ public function barTelAdre():void {
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
 
 	//NIAMH
-	if(model.time.hours >= 8 && model.time.hours <= 16 && flags[kFLAGS.NIAMH_STATUS] == 0) {
+	if (model.time.hours >= 8 && model.time.hours <= 16 && flags[kFLAGS.NIAMH_STATUS] == 0) {
 		niamh.telAdreNiamh();
-		if(flags[kFLAGS.MET_NIAMH] == 0) button = anotherButton(button,"Beer Cat",niamh.approachNiamh);
+		if (flags[kFLAGS.MET_NIAMH] == 0) button = anotherButton(button,"Beer Cat",niamh.approachNiamh);
 		else button = anotherButton(button,"Niamh",niamh.approachNiamh);
 	}
 	//ROGAR #1
@@ -1110,73 +1184,52 @@ public function barTelAdre():void {
 		//Wet Bitch bar text when Ro'gar phase = 4:
 		outputText("\n\nRo'gar is here with his back turned to the door, wearing his usual obscuring cloak.", false);
 	}
-	//Scylla - requires dungeon shut down
-	if(player.totalCocks() > 0 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
-		//Scylla repeat
-		//big dick!
-		if(player.longestCockLength() >= 12) {
-			if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0) {
-				outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.", false);
-				button = anotherButton(button,"Nun",scylla.talkToScylla);
-			}
-			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 1 && rand(5) == 0) {
-				outputText("", true);
-				scylla.scyllaRoundII();
-				return;
-			}
-			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 2 && rand(5) == 0) {
-				outputText("", true);
-				scylla.scyllaRoundThreeCUM();
-				return;
-			}
-			//Round 4 goes here
-			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 3 && rand(5) == 0) {
-				scylla.scyllaRoundIVGo();
-				return;
-			}
-			//Round 6 - catscratch!
-			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 5 && rand(5) == 0) {
-				outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.", false);
-				button = anotherButton(button,"Scylla",scylla.Scylla6);
-			}
-			//Round 5 - repeatable!
-			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && (model.time.hours == 18 || model.time.hours == 19)) {
-				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
-				button = anotherButton(button,"Scylla",scylla.scyllaAdictsAnonV);
-			}
-			//Round 2.5 Repeatable
-			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2 && flags[kFLAGS.FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
-				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
-				button = anotherButton(button,"Scylla",scylla.scyllasFlyingSolo);
-			}
-		}
+
+	switch (scylla.action) { //Scylla - requires dungeon shut down
+		case Scylla.SCYLLA_ACTION_FIRST_TALK:
+			outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.");
+			button = anotherButton(button, "Nun", scylla.talkToScylla);
+			break;
+		case Scylla.SCYLLA_ACTION_ROUND_TWO:
+			scylla.scyllaRoundII();
+			return;
+		case Scylla.SCYLLA_ACTION_ROUND_THREE:
+			scylla.scyllaRoundThreeCUM();
+			return;
+		case Scylla.SCYLLA_ACTION_ROUND_FOUR:
+			scylla.scyllaRoundIVGo();
+			return;
+		case Scylla.SCYLLA_ACTION_MEET_CATS:
+			outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.");
+			button = anotherButton(button, "Scylla", scylla.Scylla6);
+			break;
+		case Scylla.SCYLLA_ACTION_ADICTS_ANON:
+			outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons.  The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now.  You're not sure what she's doing, but you could push your way through to find out.");
+			button = anotherButton(button, "Scylla", scylla.scyllaAdictsAnonV);
+			break;
+		case Scylla.SCYLLA_ACTION_FLYING_SOLO:
+			outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
+			button = anotherButton(button, "Scylla", scylla.scyllasFlyingSolo);
+			break;
+		default:
 	}
 	//Nun cat stuff!
-	if((model.time.hours > 8 || model.time.hours < 18) && player.hasKeyItem("Silver Kitty-Bell") >= 0) {
+	if (katherine.needIntroductionFromScylla()) {
 		katherine.catMorphIntr();
 		button = anotherButton(button,"ScyllaCats",katherine.katherineGreeting);
 	}
 	//URTA
-	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
-		//Scylla + Urta sitting in a tree
-		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (kGAMECLASS.urta.urtaDrunk() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && rand(3) == 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0 && !kGAMECLASS.urta.urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) {
-				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
-			}
-			else {
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0) {
-					outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>", false);
-				}
-				else {
-					outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
-				}
-			}
+	if (kGAMECLASS.urta.urtaAtBar()) {
+		if (scylla.action == Scylla.SCYLLA_ACTION_FUCKING_URTA) {
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0)
+				outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>");
+			else
+				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...");
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 4;
-			button = anotherButton(button,"Back Room",kGAMECLASS.urta.scyllaAndUrtaSittingInATree);
+			button = anotherButton(button, "Back Room", kGAMECLASS.urta.scyllaAndUrtaSittingInATree);
 		}
 		else if (kGAMECLASS.urta.urtaBarDescript()) {
-			if (flags[kFLAGS.URTA_INCUBATION_CELEBRATION] == 0 && kGAMECLASS.urta.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
+			if (auntNancy.auntNancy(false) && flags[kFLAGS.URTA_INCUBATION_CELEBRATION] == 0 && kGAMECLASS.urta.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
 				kGAMECLASS.urtaPregs.urtaIsHappyAboutPregnancyAtTheBar();
 				return;
 			}

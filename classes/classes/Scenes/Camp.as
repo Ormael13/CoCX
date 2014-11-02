@@ -1568,10 +1568,12 @@ public function rest():void {
 				outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n", false);
 			}
 		}
-		//Marble withdrawl
+		//Marble withdrawal
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
+
 			HPChange(timeQ * 5 * multiplier, true);
+
 			dynStats("tou", -.1, "int", -.1);
 			//fatigue
 			fatRecovery /= 2;
@@ -2076,7 +2078,7 @@ private function dungeons():void {
 	//Turn on dungeon 2
 	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", dungeon2.enterDungeon);
 	//Turn on dungeon 3
-	if (flags[kFLAGS.DISCOVERED_DUNGEON_3_LETHICE] > 0) addButton(2, "Lethice Castle", dungeon3.enterDungeon);
+	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", kGAMECLASS.d3.enterD3);
 	//Side dungeons
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon);
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon);

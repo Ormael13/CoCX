@@ -2,6 +2,11 @@
 import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Mountain.Minotaur;
+import classes.Scenes.Dungeons.D3.Doppleganger;
+import classes.Scenes.Dungeons.D3.JeanClaude;
+import classes.Scenes.Dungeons.D3.LivingStatue;
+import classes.Scenes.Dungeons.D3.LivingStatueScenes;
+import classes.Scenes.Dungeons.D3.SuccubusGardener;
 
 import coc.view.MainView;
 import classes.Saves;
@@ -105,6 +110,13 @@ public function checkAchievementDamage(damage:Number):void
 	if (damage >= 100) kGAMECLASS.awardAchievement("Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS);
 	if (damage >= 250) kGAMECLASS.awardAchievement("Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES);
 	if (damage >= 500) kGAMECLASS.awardAchievement("Overkill", kACHIEVEMENTS.COMBAT_OVERKILL);
+public function approachAfterKnockback():void
+{
+	clearOutput();
+	outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.\n\n");
+	player.removeStatusAffect(StatusAffects.KnockedBack);
+	enemyAI();
+	return;
 }
 
 //5000 6999
@@ -145,7 +157,20 @@ public function doCombat(eventNum:Number):void
 				outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
 				attacks = 0;
 			}
-			if (player.findStatusAffect(StatusAffects.PhysicalDisabled) >= 0) {
+			if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0)
+			{
+				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
+				menu();
+				addButton(0, "Approach", approachAfterKnockback);
+				addButton(1, "Tease", eventParser, 5005);
+				addButton(2, "Spells", temp2);
+				addButton(3, "Items", eventParser, 1000);
+				addButton(4, "Run", runAway);
+				addButton(6, "M. Specials", eventParser, 5160);
+				addButton(7, waitT, eventParser, 5071);
+				addButton(8, "Fantasize", eventParser, 5086);
+			}
+			else if (player.findStatusAffect(StatusAffects.PhysicalDisabled) >= 0) {
 				outputText("<b>  Even physical special attacks are out of the question.</b>");
 				pSpecials = 0;
 			}
@@ -188,6 +213,11 @@ public function doCombat(eventNum:Number):void
 				} else if (player.findStatusAffect(StatusAffects.GiantGrabbed) >= 0) {
 					outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
 					choices("Struggle", 5077, "Wait", 5071, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
+				}
+				else if (player.findStatusAffect(StatusAffects.Tentagrappled) >= 0)
+				{
+					outputText("\n<b>The demonesses tentacles are constricting your limbs!</b>");
+					choices ("Struggle", (monster as SuccubusGardener).grappleStruggle, "Wait", (monster as SuccubusGardener).grappleWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 				}
 				
 				//REGULAR MENU
@@ -868,6 +898,11 @@ public function doCombat(eventNum:Number):void
 				enemyAI()
 				return;
 			}
+			else if (monster is Doppleganger)
+			{
+				outputText("You decide not to take any action this round.\n\n", true);
+				(monster as Doppleganger).handlePlayerWait();
+			}
 			else outputText("You decide not to take any action this round.\n\n", true);
 			enemyAI();
 			return;
@@ -1537,11 +1572,23 @@ public function attack():void {
 			else outputText("Though you lose a bit of steam to the display, the drive for dominance still motivates you to follow through on your swing.", false);
 		}
 	}
+
+	// Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
+	if (monster is Doppleganger)
+	{
+		if (damage > 0 && player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+		if (damage > 0) damage = doDamage(damage, false);
+		
+		(monster as Doppleganger).mirrorAttack(damage);
+		return;
+	}
+	
 	if(damage > 0) {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		damage = doDamage(damage);
 	}
+	
 	if(damage <= 0) {
 		damage = 0;
 		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
@@ -1563,6 +1610,7 @@ public function attack():void {
 			//(gain lust, temp lose str/spd)
 			(monster as Anemone).applyVenom((1+rand(2)));
 		}
+		
 		//Lust raising weapon bonuses
 		if(monster.lustVuln > 0) {
 			if(player.weaponPerk == "Aphrodisiac Weapon") {
@@ -1593,14 +1641,53 @@ public function attack():void {
 				monster.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 			}
 			//50% Bleed chance
-			if(player.weaponName == "hooked gauntlets" && rand(2) == 0 && monster.armorDef < 10 && monster.findStatusAffect(StatusAffects.IzmaBleed) < 0) {
-				monster.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
-				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
-				else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
+			if (player.weaponName == "hooked gauntlets" && rand(2) == 0 && monster.armorDef < 10 && monster.findStatusAffect(StatusAffects.IzmaBleed) < 0) 
+			{
+				if (monster is LivingStatue)
+				{
+					outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
+				}
+				else
+				{
+					monster.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
+					if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
+					else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your hooked gauntlets leave behind.", false);
+				}
 			}
 		}
 		
 	}
+	
+	if (monster is JeanClaude && player.findStatusAffect(StatusAffects.FirstAttack) < 0)
+	{
+		if (monster.HP < 1 || monster.lust > 99)
+		{
+			// noop
+		}
+		if (player.lust <= 30)
+		{
+			outputText("\n\nJean-Claude doesn’t even budge when you wade into him with your [weapon].");
+
+			outputText("\n\n“<i>Why are you attacking me, slave?</i>” he says. The basilisk rex sounds genuinely confused. His eyes pulse with hot, yellow light, reaching into you as he opens his arms, staring around as if begging the crowd for an explanation. “<i>You seem lost, unable to understand, lashing out at those who take care of you. Don’t you know who you are? Where you are?</i>” That compulsion in his eyes, that never-ending heat, it’s... it’s changing things. You need to finish this as fast as you can.");
+		}
+		else if (player.lust <= 50)
+		{
+			outputText("\n\nAgain your [weapon] thumps into Jean-Claude. Again it feels wrong. Again it sends an aching chime through you, that you are doing something that revolts your nature.");
+
+			outputText("\n\n“<i>Why are you fighting your master, slave?</i>” he says. He is bigger than he was before. Or maybe you are smaller. “<i>You are confused. Put your weapon down- you are no warrior, you only hurt yourself when you flail around with it. You have forgotten what you were trained to be. Put it down, and let me help you.</i>” He’s right. It does hurt. Your body murmurs that it would feel so much better to open up and bask in the golden eyes fully, let it move you and penetrate you as it may. You grit your teeth and grip your [weapon] harder, but you can’t stop the warmth the hypnotic compulsion is building within you.");
+		}
+		else if (player.lust <= 80)
+		{
+			outputText("\n\n“<i>Do you think I will be angry at you?</i>” growls Jean-Claude lowly. Your senses feel intensified, his wild, musky scent rich in your nose. It’s hard to concentrate... or rather it’s hard not to concentrate on the sweat which runs down his hard, defined frame, the thickness of his bulging cocks, the assured movement of his powerful legs and tail, and the glow, that tantalizing, golden glow, which pulls you in and pushes so much delicious thought and sensation into your head…  “<i>I am not angry. You will have to be punished, yes, but you know that is only right, that in the end you will accept and enjoy being corrected. Come now, slave. You only increase the size of the punishment with this silliness.</i>”");
+		}
+		else
+		{
+			outputText("\n\nYou can’t... there is a reason why you keep raising your weapon against your master, but what was it? It can’t be that you think you can defeat such a powerful, godly alpha male as him. And it would feel so much better to supplicate yourself before the glow, lose yourself in it forever, serve it with your horny slut body, the only thing someone as low and helpless as you could possibly offer him. Master’s mouth is moving but you can no longer tell where his voice ends and the one in your head begins... only there is a reason you cling to like you cling onto your [weapon], whatever it is, however stupid and distant it now seems, a reason to keep fighting...");
+		}
+		
+		dynStats("lus", 25);
+	}
+	
 	outputText("\n", false);
 	checkAchievementDamage(damage);
 	//Kick back to main if no damage occured!
@@ -1788,7 +1875,7 @@ public function combatMisdirect():Boolean {
 }
 
 //DEAL DAMAGE
-public function doDamage(damage:Number):Number {
+public function doDamage(damage:Number, apply:Boolean = true):Number {
 	if(player.findPerk(PerkLib.Sadist) >= 0) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -1811,7 +1898,7 @@ public function doDamage(damage:Number):Number {
 	damage = Math.round(damage);
 	
 	if(damage < 0) damage = 1;
-	monster.HP -= damage;
+	if (apply) monster.HP -= damage;
 	//Isabella gets mad
 	if(monster.short == "Isabella") {
 		flags[kFLAGS.ISABELLA_AFFECTION]--;
@@ -2295,6 +2382,12 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 		else monster.armorDef -= 10;
 	}
 	doNext(1);
+}
+public function startCombatImmediate(monster:Monster, _plotFight:Boolean):void
+{
+	startCombat(monster, _plotFight);
+	menu();
+	eventParser(1);
 }
 public function display():void {
 	if (!monster.checkCalled){
@@ -3834,9 +3927,11 @@ public function tease(justText:Boolean = false):void {
 		}
 		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if(monster.plural) damage *= 1.3;
-		damage = (damage + rand(bonusDamage))*monster.lustVuln;
-		if (!justText) monster.teased(damage);
+		damage = (damage + rand(bonusDamage)) * monster.lustVuln;
 		
+		if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
+		else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(damage, true);
+		else if (!justText) monster.teased(damage);
 		
 		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta()) 
 		{
@@ -3851,7 +3946,10 @@ public function tease(justText:Boolean = false):void {
 	//Nuttin honey
 	else {
 		if (!justText && !urtaQuest.isUrta()) teaseXP(5);
-		if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
+		
+		if (monster is JeanClaude) (monster as JeanClaude).handleTease(0, false);
+		else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);
+		else if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
 	}
 	outputText("\n\n", false);
 }
@@ -4175,8 +4273,41 @@ public function spellBlind():void {
 		enemyAI();
 		return;
 	}
+	if (monster is JeanClaude)
+	{
+		outputText("Jean-Claude howls, reeling backwards before turning back to you, rage clenching his dragon-like face and enflaming his eyes. Your spell seemed to cause him physical pain, but did nothing to blind his lidless sight.");
+
+		outputText("\n\n“<i>You think your hedge magic will work on me, intrus?</i>” he snarls. “<i>Here- let me show you how it’s really done.</i>” The light of anger in his eyes intensifies, burning a retina-frying white as it demands you stare into it...");
+		
+		if (rand(player.spe) >= 50 || rand(player.inte) >= 50)
+		{
+			outputText("\n\nThe light sears into your eyes, but with the discipline of conscious effort you escape the hypnotic pull before it can mesmerize you, before Jean-Claude can blind you.");
+
+			outputText("\n\n“<i>You fight dirty,</i>” the monster snaps. He sounds genuinely outraged. “<i>I was told the interloper was a dangerous warrior, not a little [boy] who accepts duels of honour and then throws sand into his opponent’s eyes. Look into my eyes, little [boy]. Fair is fair.</i>”");
+			
+			monster.HP -= int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
+		}
+		else
+		{
+			outputText("\n\nThe light sears into your eyes and mind as you stare into it. It’s so powerful, so infinite, so exquisitely painful that you wonder why you’d ever want to look at anything else, at anything at- with a mighty effort, you tear yourself away from it, gasping. All you can see is the afterimages, blaring white and yellow across your vision. You swipe around you blindly as you hear Jean-Claude bark with laughter, trying to keep the monster at arm’s length.");
+
+			outputText("\n\n“<i>The taste of your own medicine, it is not so nice, eh? I will show you much nicer things in there in time intrus, don’t worry. Once you have learnt your place.</i>”");
+			
+			player.createStatusAffect(StatusAffects.Blind, rand(4) + 1, 0, 0, 0);
+		}
+		
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
+		if(monster.HP < 1) doNext(endHpVictory);
+		else enemyAI();
+		return;
+	}
 	outputText("You glare at " + monster.a + monster.short + " and point at " + monster.pronoun2 + ".  A bright flash erupts before " + monster.pronoun2 + "!\n", true);
-	if(rand(3) != 0) {
+	if (monster is LivingStatue)
+	{
+		// noop
+	}
+	else if(rand(3) != 0) {
 		outputText(" <b>" + monster.capitalA + monster.short + " ", false);
 		if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>", false);
 		else outputText("is blinded!</b>", false);
@@ -4212,6 +4343,13 @@ public function spellWhitefire():void {
 		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
+		return;
+	}
+	if (monster is Doppleganger)
+	{
+		(monster as Doppleganger).handleSpellResistance("whitefire");
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
 		return;
 	}
 	outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n", true);
@@ -4265,6 +4403,15 @@ public function spellCleansingPalm():void
 			enemyAI();
 			return;
 		}
+	}
+	
+	if (monster is LivingStatue)
+	{
+		outputText("You thrust your palm forward, causing a blast of pure energy to slam against the giant stone statue- to no effect!");
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
+		enemyAI();
+		return;
 	}
 		
 	var corruptionMulti:Number = (monster.cor - 20) / 25;
@@ -4325,6 +4472,12 @@ public function hellFire():void {
 	//Amily!
 	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
+		enemyAI();
+		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("The fire courses over the stone behemoths skin harmlessly. It does leave the surface of the statue glossier in its wake.");
 		enemyAI();
 		return;
 	}
@@ -4576,6 +4729,12 @@ public function nagaBiteAttack():void {
 		enemyAI();
 		return;
 	}
+	if (monster is LivingStatue)
+	{
+		outputText("Your fangs can't even penetrate the giant's flesh.");
+		enemyAI();
+		return;
+	}
 	//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
     if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5) {
 		//(if monster = demons)
@@ -4613,6 +4772,12 @@ public function spiderBiteAttack():void {
 	//Amily!
 	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+		enemyAI();
+		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("Your fangs can't even penetrate the giant's flesh.");
 		enemyAI();
 		return;
 	}
@@ -4660,6 +4825,13 @@ public function superWhisperAttack():void {
 	}
 	if(monster.short == "pod" || monster.inte == 0) {
 		outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n", true);
+		changeFatigue(1);
+		enemyAI();
+		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("There is nothing inside the golem to whisper to.");
 		changeFatigue(1);
 		enemyAI();
 		return;
@@ -4730,6 +4902,12 @@ public function dragonBreath():void {
 	//Amily!
 	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+		enemyAI();
+		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
 		enemyAI();
 		return;
 	}
@@ -4807,6 +4985,12 @@ public function fireballuuuuu():void {
 		enemyAI();
 		return;
 	}
+	if (monster is LivingStatue)
+	{
+		outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
+		enemyAI();
+		return;
+	}
 	//[Failure]
 	//(high damage to self, +20 fatigue)
 	if(rand(5) == 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
@@ -4816,6 +5000,13 @@ public function fireballuuuuu():void {
 		changeFatigue(10);
 		takeDamage(10+rand(20));
 		enemyAI();
+		return;
+	}
+	if (monster is Doppleganger)
+	{
+		(monster as Doppleganger).handleSpellResistance("fireball");
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
 		return;
 	}
 	var damage:Number;
@@ -4974,6 +5165,10 @@ public function possess():void {
 	outputText("", true);
 	if(monster.short == "plain girl" || monster.findPerk(PerkLib.Incorporeality) >= 0) {
 		outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself toward the opponent's frame.  Sadly, it was doomed to fail, as you bounce right off your foe's ghostly form.", false);
+	}
+	else if (monster is LivingStatue)
+	{
+		outputText("There is nothing to possess inside the golem.");
 	}
 	//Sample possession text (>79 int, perhaps?):
 	else if((!monster.hasCock() && !monster.hasVagina()) || monster.lustVuln == 0 || monster.inte == 0 || monster.inte > 100) {

@@ -16,7 +16,7 @@ package classes.Scenes.Monsters
 					combatRoundOver();
 					return;
 				}
-				outputText("Grinning deviously, the succubi cracks her whip with expert skill, landing a painful blow on your ", false);
+				outputText("Grinning deviously, the succubus cracks her whip with expert skill, landing a painful blow on your ", false);
 				var temp:int = rand(6);
 				//Whip yo ass!
 				if (temp == 0) {
@@ -90,7 +90,7 @@ package classes.Scenes.Monsters
 			outputText("The succubus dances forwards, cocking her elbow back for a vicious strike.", false);
 			//avoid!
 			if (player.spe > spe && rand(4) == 0 || (player.findPerk(PerkLib.Evade) >= 0 && rand(4) == 0) || (player.findPerk(PerkLib.Misdirection) >= 0 && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
-				outputText("  You start to sidestep and realize it's a feint.   Ducking low, you slide under her real attack...a kiss?!  ", false);
+				outputText("  You start to sidestep and realize it's a feint.   Ducking low, you slide under her real attack... a kiss?!  ", false);
 				if (player.lust >= 70) outputText("  Maybe you shouldn't have bothered to move, it might have been fun.", false);
 			}
 			//get hit
@@ -156,7 +156,7 @@ package classes.Scenes.Monsters
 			}
 			//Genetals flash!
 			if (temp == 2) {
-				outputText(capitalA + short + " reaches down and strokes her moist lips.  She sighs and licks her fingers clean, giving you a smouldering gaze.", false);
+				outputText(capitalA + short + " reaches down and strokes her moist lips.  She sighs and licks her fingers clean, giving you a smoldering gaze.", false);
 				//Success = 50% + 10% times each cock/vagina
 				//rand(vaginas*2 + cocks*2) + wetness and/or length/6
 				if (rand(101) <= (65 + vaginas.length * 10 + cocks.length * 10)) {

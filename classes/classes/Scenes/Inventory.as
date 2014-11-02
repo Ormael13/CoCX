@@ -78,7 +78,7 @@ public function doItems(eventNo:Number):void {
 			outputText(player.keyItems[temp].keyName + "\n", false);
 			temp++
 		}
-		if(!inCombat() && inDungeon == 0) {
+		if(!inCombat() && inDungeon == false && inRoomedDungeon == false) {
 			if(player.hasKeyItem("Dragon Egg") >= 0) {
 				kGAMECLASS.emberScene.emberCampDesc();
 				ember = kGAMECLASS.emberScene.emberEggInteraction;
@@ -549,8 +549,8 @@ public function doItems(eventNo:Number):void {
 	else if(eventNo == 1063) {
 		slimeBadEnd();
 	}
-	//pawn shop main screen
-	else if(eventNo == 1065) {
+	//pawn shop main screen - Moved to TelAdre.as
+/*	else if(eventNo == 1065) {
 		spriteSelect(47);
 		outputText("\n\n<b><u>Oswald's Estimates</u></b>", false);
 		if(itemSlot1.quantity > 0 && itemSlot1.itype.value > 1) {
@@ -573,7 +573,7 @@ public function doItems(eventNo:Number):void {
 			temp5 = 1070;
 			outputText("\n" + int(itemSlot5.itype.value/2) + " gems for " + itemSlot5.itype.longName + ".", false);
 		}
-		if(flags[kFLAGS.KATHERINE_UNLOCKED] >= 1)
+		if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 1 && flags[kFLAGS.KATHERINE_UNLOCKED] <= 3) 
 			kath = kGAMECLASS.telAdre.katherine.visitKatherine;
 
 		choices((itemSlot1.itype.shortName + " x" + itemSlot1.quantity), temp1,
@@ -581,13 +581,12 @@ public function doItems(eventNo:Number):void {
 				(itemSlot3.itype.shortName + " x" + itemSlot3.quantity), temp3,
 				(itemSlot4.itype.shortName + " x" + itemSlot4.quantity), temp4,
 				(itemSlot5.itype.shortName + " x" + itemSlot5.quantity), temp5,
-				"Kath's Alley", kath,
+				(flags[kFLAGS.KATHERINE_UNLOCKED] == 3 ? "Safehouse" : "Kath's Alley"), kath,
 				"", 0,
 				"", 0,
 				"", 0,
 				"Back", kGAMECLASS.telAdre.telAdreMenu);
 	}
-
 	//Sell item from slots
 	else if ((eventNo == 1066) || (eventNo == 1067) || (eventNo == 1068) || (eventNo == 1069) || (eventNo == 1070))
 	//   slot 1               slot 2                slot 3               slot 4               slot 5
@@ -626,6 +625,7 @@ public function doItems(eventNo:Number):void {
 		player.gems += itemValueTemp;
 		statScreenRefresh();
 	}
+*/
 	//Reducto butt
 	else if(eventNo == 1071) {
 		outputText("You smear the foul-smelling paste onto your " + buttDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);

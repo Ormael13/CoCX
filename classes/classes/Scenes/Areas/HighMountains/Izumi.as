@@ -285,7 +285,7 @@ package classes.Scenes.Areas.HighMountains
 			if (player.isBiped()) outputText(" raise a [leg] and kick her roundly");
 			else if (player.isNaga()) outputText(" raise your tail and slap her solidly");
 			else outputText(" and slap her square");
-			outputText(" in the face.  Izumi drops you, staggering back in surprise.  “Ow !”  She actually yelps, covering her face with her hands.\n\n");
+			outputText(" in the face.  Izumi drops you, staggering back in surprise.  “Ow!”  She actually yelps, covering her face with her hands.\n\n");
 
 			outputText("You drop to the ground and roll away, expecting some form of retribution.  Izumi glares at you from behind her hand for a moment, then snickers.  Slowly, she drops back into her fighting stance and gestures for your bout to continue.");
 			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>")

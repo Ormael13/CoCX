@@ -7,6 +7,7 @@ package classes.Scenes.Dungeons.Factory
 	import classes.Scenes.Dungeons.LethiceCastle;
 	import classes.internals.*;
 	import flash.display.InteractiveObject;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class IncubusMechanic extends Monster 
 	{
@@ -108,48 +109,76 @@ package classes.Scenes.Dungeons.Factory
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] == 0) {
-				if(player.gender == 0) {
-					if (hpVictory){
-						outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
-					} 
-					else {
-						outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
-					}
-					game.simpleChoices("Anally", factory.doRideIncubusAnally, "Orally", factory.doOralIncubus, "", 0, "", 0, "Leave", factory.doLeaveIncubus);
-				}
+			if (flags[kFLAGS.D3_DISCOVERED] == 0)
+			{
+				defeatedInDungeon1(hpVictory);
+			}
+			else
+			{
+				defeatedInDungeon3(hpVictory);
+			}
+		}
+		
+		private function defeatedInDungeon1(hpVictory:Boolean):void
+		{
+			if(player.gender == 0) {
+				if (hpVictory){
+					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
+				} 
 				else {
-					if (hpVictory) {
-						outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?", true);
-						game.dynStats("lus", 1);
-						game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "Nothing", factory.doLeaveIncubus, "", 0);
-					} 
-					else {
-						outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?", true);
-						var temp2:Function = null;
-						if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") temp2 = game.createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,this);
-						game.dynStats("lus", 1);
-						game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "B.Titfuck", temp2, "Nothing", factory.doLeaveIncubus)
-					}
+					outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
+				}
+				game.simpleChoices("Anally", factory.doRideIncubusAnally, "Orally", factory.doOralIncubus, "", 0, "", 0, "Leave", factory.doLeaveIncubus);
+			}
+			else {
+				if (hpVictory) {
+					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?", true);
+					game.dynStats("lus", 1);
+					game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "Nothing", factory.doLeaveIncubus, "", 0);
+				} 
+				else {
+					outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?", true);
+					var temp2:Function = null;
+					if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") temp2 = game.createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,this);
+					game.dynStats("lus", 1);
+					game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "B.Titfuck", temp2, "Nothing", factory.doLeaveIncubus)
 				}
 			}
 			else {
 				game.dungeons.lethicecastle.incubusMechanic.incubusDefeated();
 			}
 		}
+		
+		private function defeatedInDungeon3(hpVictory:Boolean):void
+		{
+			game.d3.incubusMechanic.beatDaMechanic(hpVictory);
+		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] == 0) {
-				if(pcCameWorms){
-					outputText("\n\nYour foe doesn't seem to care...");
-					doNext(game.endLustLoss);
-				} else {
-					factory.doLossIncubus();
-				}
-			} else {
-				game.dungeons.lethicecastle.incubusMechanic.loseToIncubus();
+			if (flags[kFLAGS.D3_DISCOVERED] == 0)
+			{
+				wonInDungeon1(hpVictory, pcCameWorms);
 			}
+			else
+			{
+				wonInDungeon3(hpVictory, pcCameWorms);
+			}
+		}
+		
+		private function wonInDungeon1(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\nYour foe doesn't seem to care...");
+				doNext(game.endLustLoss);
+			} else {
+				game.dungeons.factory.doLossIncubus();
+			}
+		}
+		
+		private function wonInDungeon3(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
 		}
 
 		public function IncubusMechanic() {
@@ -187,18 +216,7 @@ package classes.Scenes.Dungeons.Factory
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 8;
-			if (flags[kFLAGS.LETHICE_CASTLE_INCUBUS_GREETED] > 0) {
-				this.level = 20;
-				this.additionalXP = 150;
-				this.bonusHP = 750;
-				this.weaponAttack = 30;
-				initStrTouSpeInte(85, 60, 65, 105);
-				initLibSensCor(80, 70, 80);
-				this.drop = NO_DROP;
-			}
-			else {
-				this.drop = new WeightedDrop(consumables.GROPLUS, 1);
-			}
+			this.drop = new WeightedDrop(consumables.GROPLUS, 1);
 			this.gems = rand(25)+10;
 			this.special1 = cocktripAttack;
 			this.special2 = cumCannon;

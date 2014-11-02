@@ -5,6 +5,7 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Dungeons.DungeonEngine;
+	import classes.Scenes.Dungeons.D3.D3;
 
 	import classes.CoC_Settings;
 
@@ -108,6 +109,18 @@
 		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		//Any classes that need to be made aware when the game is saved or loaded can add themselves to this array using saveAwareAdd.
+		//	Once in the array they will be notified by Saves.as whenever the game needs them to write or read their data to the flags array.
+		private static var _saveAwareClassList:Vector.<SaveAwareInterface> = new Vector.<SaveAwareInterface>();
+	
+		//Called by the saveGameObject function in Saves
+		public static function saveAllAwareClasses():void { for (var sac:int = 0; sac < _saveAwareClassList.length ; sac++) _saveAwareClassList[sac].updateBeforeSave(); }
+
+		//Called by the loadGameObject function in Saves
+		public static function loadAllAwareClasses():void { for (var sac:int = 0; sac < _saveAwareClassList.length ; sac++) _saveAwareClassList[sac].updateAfterLoad(); }
+
+		public static function saveAwareClassAdd(newEntry:SaveAwareInterface):void { _saveAwareClassList.push(newEntry); }
+	
 		//Any classes that need to be aware of the passage of time can add themselves to this array using timeAwareAdd.
 		//	Once in the array they will be notified as each hour passes, allowing them to update actions, lactation, pregnancy, etc.
 		private static var _timeAwareClassList:Vector.<TimeAwareInterface> = new Vector.<TimeAwareInterface>(); //Accessed by goNext function in eventParser
@@ -144,6 +157,7 @@
 		public var swamp:Swamp = new Swamp();
 		// Scenes/Dungeons
 		public var brigidScene:BrigidScene = new BrigidScene();
+		public var d3:D3 = new D3();
 		// Scenes/Explore/
 		public var gargoyle:Gargoyle = new Gargoyle();
 		public var lumi:Lumi = new Lumi();
@@ -356,8 +370,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.16_mod_0.9";
-			version = ver + " (<b>The MASSIVE update</b>)";
+			ver = "0.9.0_mod_0.9.0";
+			version = ver + " (<b>Lethice's Stronghold</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

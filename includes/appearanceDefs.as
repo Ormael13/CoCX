@@ -49,7 +49,7 @@ public static const FACE_RACCOON:int                                            
 public static const FACE_BUCKTEETH:int                                              =   15;
 public static const FACE_MOUSE:int                                                  =   16;
 public static const FACE_FERRET_MASK:int                                            =   17;
-public static const FACE_FERRET:int                                            =   18;
+public static const FACE_FERRET:int                                            		=   18;
 
 // tongueType
 public static const TONUGE_HUMAN:int                                                =   0;
@@ -113,7 +113,109 @@ public static const TAIL_TYPE_FOX:int                                           
 public static const TAIL_TYPE_DRACONIC:int                                          =  14;
 public static const TAIL_TYPE_RACCOON:int                                           =  15;
 public static const TAIL_TYPE_MOUSE:int                                             =  16;
-public static const TAIL_TYPE_FERRET:int                                                 =  17;
+public static const TAIL_TYPE_FERRET:int                                            =  17;
+
+//breast size
+public static const BREAST_CUP_FLAT:int												=   0;
+public static const BREAST_CUP_A:int												=   1;
+public static const BREAST_CUP_B:int												=   2;
+public static const BREAST_CUP_C:int												=   3;
+public static const BREAST_CUP_D:int												=   4;
+public static const BREAST_CUP_DD:int												=   5;
+public static const BREAST_CUP_DD_BIG:int											=   6;
+public static const BREAST_CUP_E:int												=   7;
+public static const BREAST_CUP_E_BIG:int											=   8;
+public static const BREAST_CUP_EE:int												=   9;
+public static const BREAST_CUP_EE_BIG:int											=  10;
+public static const BREAST_CUP_F:int												=  11;
+public static const BREAST_CUP_F_BIG:int											=  12;
+public static const BREAST_CUP_FF:int												=  13;
+public static const BREAST_CUP_FF_BIG:int											=  14;
+public static const BREAST_CUP_G:int												=  15;
+public static const BREAST_CUP_G_BIG:int											=  16;
+public static const BREAST_CUP_GG:int												=  17;
+public static const BREAST_CUP_GG_BIG:int											=  18;
+public static const BREAST_CUP_H:int												=  19;
+public static const BREAST_CUP_H_BIG:int											=  20;
+public static const BREAST_CUP_HH:int												=  21;
+public static const BREAST_CUP_HH_BIG:int											=  22;
+public static const BREAST_CUP_HHH:int												=  23;
+public static const BREAST_CUP_I:int												=  24;
+public static const BREAST_CUP_I_BIG:int											=  25;
+public static const BREAST_CUP_II:int												=  26;
+public static const BREAST_CUP_II_BIG:int											=  27;
+public static const BREAST_CUP_J:int												=  28;
+public static const BREAST_CUP_J_BIG:int											=  29;
+public static const BREAST_CUP_JJ:int												=  30;
+public static const BREAST_CUP_JJ_BIG:int											=  31;
+public static const BREAST_CUP_K:int												=  32;
+public static const BREAST_CUP_K_BIG:int											=  33;
+public static const BREAST_CUP_KK:int												=  34;
+public static const BREAST_CUP_KK_BIG:int											=  35;
+public static const BREAST_CUP_L:int												=  36;
+public static const BREAST_CUP_L_BIG:int											=  37;
+public static const BREAST_CUP_LL:int												=  38;
+public static const BREAST_CUP_LL_BIG:int											=  39;
+public static const BREAST_CUP_M:int												=  40;
+public static const BREAST_CUP_M_BIG:int											=  41;
+public static const BREAST_CUP_MM:int												=  42;
+public static const BREAST_CUP_MM_BIG:int											=  43;
+public static const BREAST_CUP_MMM:int												=  44;
+public static const BREAST_CUP_MMM_LARGE:int										=  45;
+public static const BREAST_CUP_N:int												=  46;
+public static const BREAST_CUP_N_LARGE:int											=  47;
+public static const BREAST_CUP_NN:int												=  48;
+public static const BREAST_CUP_NN_LARGE:int											=  49;
+public static const BREAST_CUP_O:int												=  50;
+public static const BREAST_CUP_O_LARGE:int											=  51;
+public static const BREAST_CUP_OO:int												=  52;
+public static const BREAST_CUP_OO_LARGE:int											=  53;
+public static const BREAST_CUP_P:int												=  54;
+public static const BREAST_CUP_P_LARGE:int											=  55;
+public static const BREAST_CUP_PP:int												=  56;
+public static const BREAST_CUP_PP_LARGE:int											=  57;
+public static const BREAST_CUP_Q:int												=  58;
+public static const BREAST_CUP_Q_LARGE:int											=  59;
+public static const BREAST_CUP_QQ:int												=  60;
+public static const BREAST_CUP_QQ_LARGE:int											=  61;
+public static const BREAST_CUP_R:int												=  62;
+public static const BREAST_CUP_R_LARGE:int											=  63;
+public static const BREAST_CUP_RR:int												=  64;
+public static const BREAST_CUP_RR_LARGE:int											=  65;
+public static const BREAST_CUP_S:int												=  66;
+public static const BREAST_CUP_S_LARGE:int											=  67;
+public static const BREAST_CUP_SS:int												=  68;
+public static const BREAST_CUP_SS_LARGE:int											=  69;
+public static const BREAST_CUP_T:int												=  70;
+public static const BREAST_CUP_T_LARGE:int											=  71;
+public static const BREAST_CUP_TT:int												=  72;
+public static const BREAST_CUP_TT_LARGE:int											=  73;
+public static const BREAST_CUP_U:int												=  74;
+public static const BREAST_CUP_U_LARGE:int											=  75;
+public static const BREAST_CUP_UU:int												=  76;
+public static const BREAST_CUP_UU_LARGE:int											=  77;
+public static const BREAST_CUP_V:int												=  78;
+public static const BREAST_CUP_V_LARGE:int											=  79;
+public static const BREAST_CUP_VV:int												=  80;
+public static const BREAST_CUP_VV_LARGE:int											=  81;
+public static const BREAST_CUP_W:int												=  82;
+public static const BREAST_CUP_W_LARGE:int											=  83;
+public static const BREAST_CUP_WW:int												=  84;
+public static const BREAST_CUP_WW_LARGE:int											=  85;
+public static const BREAST_CUP_X:int												=  86;
+public static const BREAST_CUP_X_LARGE:int											=  87;
+public static const BREAST_CUP_XX:int												=  88;
+public static const BREAST_CUP_XX_LARGE:int											=  89;
+public static const BREAST_CUP_Y:int												=  90;
+public static const BREAST_CUP_Y_LARGE:int											=  91;
+public static const BREAST_CUP_YY:int												=  92;
+public static const BREAST_CUP_YY_LARGE:int											=  93;
+public static const BREAST_CUP_Z:int												=  94;
+public static const BREAST_CUP_Z_LARGE:int											=  95;
+public static const BREAST_CUP_ZZ:int												=  96;
+public static const BREAST_CUP_ZZ_LARGE:int											=  97;
+public static const BREAST_CUP_ZZZ:int												=  98;
+public static const BREAST_CUP_ZZZ_LARGE:int										=  99;
 
 // wingType
 public static const WING_TYPE_NONE:int                                              =   0;
@@ -218,55 +320,3 @@ public static const BUTT_RATING_INCONCEIVABLY_BIG:int                           
 
 // End Description constants
 
-/*
-
-    <PregnancyTypes>
-      <PregnancyType ID="0"   Name="None"/>
-      <PregnancyType ID="10"  Name="Anemone"/>
-      <PregnancyType ID="14"  Name="Basilisk"/>
-      <PregnancyType ID="18"  Name="Basilisk (Benoit)"/>
-      <PregnancyType ID="9"   Name="Bunny"/>
-      <PregnancyType ID="7"   Name="Centaur (Kelt)"/>
-      <PregnancyType ID="8"   Name="Cowgirls (Marble)"/>
-      <PregnancyType ID="17"  Name="Dragon (Ember)"/>
-      <PregnancyType ID="15"  Name="Drider"/>
-      <PregnancyType ID="20"  Name="Equine-morph (Cotton)"/>
-      <PregnancyType ID="21"  Name="Fox-morph (Urta)"/>
-      <PregnancyType ID="23"  Name="Frog-girl"/>
-      <PregnancyType ID="16"  Name="Goo-girl"/>
-      <PregnancyType ID="6"   Name="Hellhound"/>
-      <PregnancyType ID="1"   Name="Imp"/>
-      <PregnancyType ID="2"   Name="Minotaur"/>
-      <PregnancyType ID="11"  Name="Mouse-morph (Amily)"/>
-      <PregnancyType ID="4"   Name="Mouse-morph (Jojo/Corrupt Amily)"/>
-      <PregnancyType ID="22"  Name="Sand witch"/>
-      <PregnancyType ID="19"  Name="Satyr"/>
-      <PregnancyType ID="13"  Name="Spider-morph"/>
-      <PregnancyType ID="12"  Name="Shark/Tigershark-morph (Izma)"/>
-      <PregnancyType ID="10000" Name="Small brown egg"/>
-      <PregnancyType ID="10001" Name="Large brown egg"/>
-      <PregnancyType ID="10100" Name="Small purple egg"/>
-      <PregnancyType ID="10101" Name="Large purple egg"/>
-      <PregnancyType ID="10200" Name="Small blue egg"/>
-      <PregnancyType ID="10201" Name="Large blue egg"/>
-      <PregnancyType ID="10300" Name="Small pink egg"/>
-      <PregnancyType ID="10301" Name="Large pink egg"/>
-      <PregnancyType ID="10400" Name="Small white egg"/>
-      <PregnancyType ID="10401" Name="Large white egg"/>
-      <PregnancyType ID="10500" Name="Small rubbery black egg"/>
-      <PregnancyType ID="10501" Name="Large rubbery black egg"/>
-    </PregnancyTypes>
-    <!--============================================================================================================================================-->
-    <AnalPregnancyTypes>
-      <AnalPregnancyType ID="0"  Name="None"/>
-      <AnalPregnancyType ID="2"  Name="Bee-girl"/>
-      <AnalPregnancyType ID="3"  Name="Drider"/>
-      <AnalPregnancyType ID="5"  Name="Fake pregnancy (Sand Trap)"/>
-      <AnalPregnancyType ID="23" Name="Frog-girl"/>
-      <AnalPregnancyType ID="4"  Name="Insectoid (Sand Trap)"/>
-      <AnalPregnancyType ID="9"  Name="Neon pink egg (Bunny-girl)"/>
-      <AnalPregnancyType ID="19" Name="Satyr"/>
-    </AnalPregnancyTypes>
-
-
-*/

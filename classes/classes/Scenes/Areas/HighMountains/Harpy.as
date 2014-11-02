@@ -54,6 +54,7 @@
 			var select:Number = 1;
 			if (findStatusAffect(StatusAffects.Uber) >= 0) {
 				harpyUberCharge();
+				return;
 			}
 			super.performCombatAction();
 		}

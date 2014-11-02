@@ -2352,6 +2352,10 @@ public function displayStats(e:MouseEvent = null):void
 			interpersonStats += "100%\n";
 	}
 	
+	if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {
+		interpersonStats += "<b>Katherine Submissiveness:</b> " + telAdre.katherine.submissiveness() + "\n";
+	}
+
 	if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
 		if (player.statusAffectv2(StatusAffects.Kelt) >= 130)
 			interpersonStats += "<b>Submissiveness To Kelt:</b> " + 100 + "%\n";

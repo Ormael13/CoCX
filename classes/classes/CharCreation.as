@@ -76,6 +76,8 @@ public function newGameGo(e:MouseEvent = null):void {
 	//RESET DUNGEON
 	kGAMECLASS.inDungeon = false;
 	kGAMECLASS.dungeonLoc = 0;
+	kGAMECLASS.inRoomedDungeon = false;
+	kGAMECLASS.inRoomedDungeonResume = null;
 	//Hold onto old data for NG+
 	var oldPlayer:Player = player;
 	//Reset all standard stats

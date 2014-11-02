@@ -82,7 +82,7 @@ package classes.Scenes.Areas.Bog
 			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2)
 				outputText("Since he's blind the shot goes horribly wide, missing you entirely.");
 			else if (combatMiss())
-				outputText("You lean back and let the muck ball whip past to one side, avoiding the attack.");
+				outputText("You lean back and let the muck ball whip pass to one side, avoiding the attack.");
 			else if (combatEvade())
 				outputText("You pull back and to the side, blocking the shot with your arm. The muck splatters against it uselessly.");
 			else if (combatMisdirect())
@@ -130,7 +130,7 @@ package classes.Scenes.Areas.Bog
 			if (lustDelta >= 10)
 				outputText("\n\nThe " + this.short + " breaks off its attack in the face of your teasing.  Its drooling member leaves a trail of precum along the ground and you get the feeling it needs to end this fight quickly.");
 			else if (lustDelta >= 5)
-				outputText("\n\nThe " + this.short + " stops its assault for a moment.  A glob of precum oozes from it's cock before it shakes its head and gets ready to attack again.");
+				outputText("\n\nThe " + this.short + " stops its assault for a moment.  A glob of precum oozes from its cock before it shakes its head and gets ready to attack again.");
 			else if (lustDelta > 0)
 				outputText("\n\nThe " + this.short + " hesitates and slows down.  You see its cock twitch and then it readies for the next attack.", false);
 			applyTease(lustDelta);
@@ -188,7 +188,7 @@ package classes.Scenes.Areas.Bog
 				outputText("The bunny morph hops back from you and starts to melt and change.  You blink and see that in front of you there is now a 4 foot tall goat morph.\n\n");
 			}
 			else { //Was a horse
-				outputText("As the horse morph charges towards you it quite suddenly shrinks.  You have to adjust your defence as a 4 foot tall goat morph.\n\n");
+				outputText("As the horse morph charges towards you it quite suddenly shrinks.  You have to adjust your defence as it is now a 4 foot tall goat morph.\n\n");
 			}
 			this.long = "The " + this.short + " is charging back and forth just out of reach, waiting for an opening.  He has the general appearance of a goat with coal black fur.  He has large glossy black horns and a large cock between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
 			this.armorValue = 60;

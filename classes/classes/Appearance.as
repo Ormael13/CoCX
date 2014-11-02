@@ -2124,7 +2124,7 @@
 		}
 
 		public static const BREAST_CUP_NAMES:Array = [
-			"flat, manly breast",//0
+			"flat",//0
 			//				1			2			3			4			5				6			7		8			9
 			"A-cup", "B-cup", "C-cup", "D-cup", "DD-cup", "big DD-cup", "E-cup", "big E-cup", "EE-cup",// 1-9
 			"big EE-cup", "F-cup", "big F-cup", "FF-cup", "big FF-cup", "G-cup", "big G-cup", "GG-cup", "big GG-cup", "H-cup",//10-19
@@ -2140,7 +2140,7 @@
 
 		public static function breastCup(size:Number):String
 		{
-			return BREAST_CUP_NAMES[Math.floor(size)] || BREAST_CUP_NAMES[BREAST_CUP_NAMES.length - 1];
+			return BREAST_CUP_NAMES[Math.min(Math.floor(size), BREAST_CUP_NAMES.length - 1)];
 		}
 
 		/**

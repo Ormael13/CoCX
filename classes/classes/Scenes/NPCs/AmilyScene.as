@@ -4810,7 +4810,10 @@ package classes.Scenes.NPCs
 				else outputText("\"<i>You know, it's not all bad, us both being this way... but remember that I want a turn at that, too.</i>\" She states, staring hungrily at your " + multiCockDescriptLight() + ".\n\n", false);
 			}
 
-			outputText("You smile at her, and indicate that she may want to remove her own clothing. Looking a bit embarrassed, Amily strips herself down, revealing her perky breasts and her straining, eager cock for your own perusal. You step close and reach out to gently stroke the hot, pulsing member, eliciting a pleased groan from the futanari mouse, which entices you to use your grip around it to lead her to the makeshift bed, where you sink down onto your back and spread your " + player.legs() + " in readiness for her. Amily kneels down in between them, easily able to tell what you want.\n\n", false);
+			outputText("You smile at her, and indicate that she may want to remove her own clothing. Looking a bit embarrassed, Amily strips herself down, revealing her perky breasts and her straining, eager cock for your own perusal. You step close and reach out to gently stroke the hot, pulsing member, eliciting a pleased groan from the futanari mouse, which entices you to use your grip around it to lead her to the makeshift bed, where you sink down onto your back and spread your ");
+			if (player.isBiped()) outputText(player.legs() + " in readiness for her.");
+			else outputText(" [cunt] in readiness for her.");
+			outputText(" Amily kneels down in between them, easily able to tell what you want.\n\n", false);
 
 			//(If first time:
 			if(flags[kFLAGS.AMILY_HERM_TIMES_FUCKED_BY_FEMPC] == 0) outputText("\"<i>Er... are you really sure about this? I mean...</i>\" Amily murmurs uncertainly, until, irritated, you suddenly wrap your " + player.legs() + " around her waist and pull her the last few inches needed to slam her dick into your needy pussy. She "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"squeaks":"gasps")+" in shock and tries to pull out, but you still have your grip on her and pull her back, a process that repeats several times until the rhythm of it sinks in and Amily starts to thrust back and forth on her own.\n\n", false);

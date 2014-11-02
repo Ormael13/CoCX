@@ -3,6 +3,7 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
 	import classes.Scenes.Camp;
+	import classes.Scenes.Dungeons.D3.D3;
 	import classes.Scenes.Inventory;
 	import classes.internals.Utils;
 
@@ -57,6 +58,10 @@
 		protected function get camp():Camp {
 			return kGAMECLASS.camp;
 		}
+		
+		protected function get d3():D3 {
+			return kGAMECLASS.d3;
+		}
 
 		public function goNext(time:Number,defNext:Boolean):Boolean
 		{
@@ -107,6 +112,29 @@
 		{
 			return kGAMECLASS.inDungeon;
 		}
+		protected function set inDungeon(v:Boolean):void
+		{
+			kGAMECLASS.inDungeon = v;
+		}
+		
+		protected function get inRoomedDungeon():Boolean
+		{
+			return kGAMECLASS.inRoomedDungeon;
+		}
+		protected function set inRoomedDungeon(v:Boolean):void
+		{
+			kGAMECLASS.inRoomedDungeon = v;
+		}
+		
+		protected function get inRoomedDungeonResume():Function
+		{
+			return kGAMECLASS.inRoomedDungeonResume;
+		}
+		protected function set inRoomedDungeonResume(v:Function):void
+		{
+			kGAMECLASS.inRoomedDungeonResume = v;
+		}
+		
 		protected function get itemSubMenu():Boolean
 		{
 			return kGAMECLASS.itemSubMenu;
@@ -184,9 +212,14 @@
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
 			kGAMECLASS.startCombat(monster_,plotFight_);
 		}
-		
+
 		protected function doBadEnd():void{
 			kGAMECLASS.doBadEnd();
+		}
+		
+		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
+		{
+			kGAMECLASS.startCombatImmediate(monster, _plotFight);
 		}
 
 		// Needed in a few rare cases for dumping text coming from a source that can't properly escape it's brackets

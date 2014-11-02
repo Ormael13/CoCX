@@ -1035,20 +1035,22 @@ package classes.Scenes.NPCs
 		{
 			//Checks for special scenes go here!
 			//If the PC fulfills one of the requirements for the Special Scenes, they occur the moment the player picks the talk option.
-			if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
-				emberBitchesAboutPCBeingFullOfEggs();
-				doNext(13);
-				return;
-			}
-			if (player.pregnancyIncubation < 200 && player.pregnancyType != PregnancyStore.PREGNANCY_EMBER && player.pregnancyType > 0 && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
-				manEmberBitchesAboutPCPregnancy();
-				doNext(13);
-				return;
-			}
-			if (player.pregnancyType == PregnancyStore.PREGNANCY_EMBER && player.pregnancyType < 300 && flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] == 0) {
-				emberTalksToPCAboutPCDragoNPregnancy();
-				doNext(13);
-				return;
+			if (player.isPregnant()) { //Extra check might protect against inappropriate Ember complaints
+				if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
+					emberBitchesAboutPCBeingFullOfEggs();
+					doNext(13);
+					return;
+				}
+				if (player.pregnancyIncubation < 200 && player.pregnancyType != PregnancyStore.PREGNANCY_EMBER && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
+					manEmberBitchesAboutPCPregnancy();
+					doNext(13);
+					return;
+				}
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_EMBER && player.pregnancyType < 300 && flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] == 0) {
+					emberTalksToPCAboutPCDragoNPregnancy();
+					doNext(13);
+					return;
+				}
 			}
 			if (flags[kFLAGS.EMBER_PREGNANT_TALK] == 0 && pregnancy.event > 1) {
 				emberIsPregnantFirstTimeTalkScene();

@@ -1307,13 +1307,9 @@ use namespace kGAMECLASS;
 			var stretched:Boolean = buttChangeNoDisplay(cArea);
 			//STRETCH SUCCESSFUL - begin flavor text if outputting it!
 			if(stretched && display) {
-				if(spacingsF) outputText("  ");
-				if(ass.analLooseness == 5) outputText("<b>Your " + Appearance.assholeDescript(this) + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>");
-				if(ass.analLooseness == 4) outputText("<b>Your " + Appearance.assholeDescript(this) + " becomes so stretched that it gapes continually.</b>", false);
-				if(ass.analLooseness == 3) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now very loose.</b>");
-				if(ass.analLooseness == 2) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now a little loose.</b>");
-				if(ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>", false);
-				if(spacingsB) outputText("  ");
+				if (spacingsF) outputText("  ");
+				buttChangeDisplay();
+				if (spacingsB) outputText("  ");
 			}
 			return stretched;
 		}
@@ -1353,6 +1349,15 @@ use namespace kGAMECLASS;
 			if (hunger < 0) hunger = 0;
 		}
 		
+		public function buttChangeDisplay():void
+		{	//Allows the test for stretching and the text output to be separated
+			if (ass.analLooseness == 5) outputText("<b>Your " + Appearance.assholeDescript(this) + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>");
+			if (ass.analLooseness == 4) outputText("<b>Your " + Appearance.assholeDescript(this) + " becomes so stretched that it gapes continually.</b>", false);
+			if (ass.analLooseness == 3) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now very loose.</b>");
+			if (ass.analLooseness == 2) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now a little loose.</b>");
+			if (ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>", false);
+		}
+
 		public function slimeFeed():void{
 			if(findStatusAffect(StatusAffects.SlimeCraving) >= 0) {
 				//Reset craving value
@@ -1977,6 +1982,7 @@ use namespace kGAMECLASS;
 				// speDown.visible = false;
 				removeStatusAffect(StatusAffects.BasiliskSlow);
 			}
+<<<<<<< HEAD
 			if (findStatusAffect(StatusAffects.GiantGrabbed) >= 0) removeStatusAffect(StatusAffects.GiantGrabbed);
 			if (findStatusAffect(StatusAffects.GiantBoulder) >= 0) removeStatusAffect(StatusAffects.GiantBoulder);
 			if (findStatusAffect(StatusAffects.GiantStrLoss) >= 0) {
@@ -1991,6 +1997,15 @@ use namespace kGAMECLASS;
 				removeStatusAffect(StatusAffects.LizanBlowpipe);
 			}
 			while(findStatusAffect(StatusAffects.IzmaBleed) >= 0) removeStatusAffect(StatusAffects.IzmaBleed);
+=======
+			while (findStatusAffect(StatusAffects.IzmaBleed) >= 0) removeStatusAffect(StatusAffects.IzmaBleed);
+			if (findStatusAffect(StatusAffects.GardenerSapSpeed) >= 0)
+			{
+				spe += statusAffectv1(StatusAffects.GardenerSapSpeed);
+				kGAMECLASS.mainView.statsView.showStatUp('spe');
+				removeStatusAffect(StatusAffects.GardenerSapSpeed);
+			}
+>>>>>>> b12b2abd7e7dce9336c1217a7d41b6e0cbe24838
 		}
 
 		public function consumeItem(itype:ItemType, amount:int=1):Boolean

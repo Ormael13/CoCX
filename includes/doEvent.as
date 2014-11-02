@@ -1648,11 +1648,6 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.edryn.arousedByPregdryn();
 	}
-	else if (eventNo == 2495)
-	{
-		telAdre.edryn.fuckPregEdryn();
-	}
-	
 	else if (eventNo == 2498)
 	{
 		jojoScene.jojoSprite();

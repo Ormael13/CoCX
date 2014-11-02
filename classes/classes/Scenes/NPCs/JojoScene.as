@@ -1069,7 +1069,10 @@ public function jojoRape():void {
 			//Oral
 			outputText("The mousy once-monk kneels as you disrobe, his will nearly broken by desire.  ", false);
 			outputText("You touch his head softly, guiding him to your " + vaginaDescript(0) + ", lips breaking into a grin as he licks his mouth with desire.  You gasp at the feeling of his wet nose as it bumps against your groin, shooting thunderbolts of pleasure from your " + clitDescript() + ".  He attacks with his tongue, thrusting strikes practically attacking your " + vaginaDescript(0) + " with his long, practically serpentine, tongue.  You shudder, knowing a visible sign of corruption when you see it, moisture slicking the mouse's face.\n\n", false);
-			outputText("Jojo moans into your folds as his " + eCockDescript(0) + " brushes against your calf.  You get a devilish idea, ", false);
+			outputText("Jojo moans into your folds as his " + eCockDescript(0));
+			if (player.isBiped()) outputText(" brushes against your calf");
+			else outputText(" brushes against your [leg]");
+			outputText(".  You get a devilish idea, ", false);
 			if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("and push his " + eCockDescript(0) + " in between folds of slime, sandwiching it in a mass of slippery, gooey tightness.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + vaginaDescript(0) + ", tongue swirling over your folds and around your " + clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your goo, doing your best to impart a fetish for being masturbated with someone's lower body on his slowly warping mind.  You feel a hot wetness in your slime, and it grows slicker and wetter every second. Jojo's cum drips out of you, glazing your jello-like form white.  ", false);
 			else outputText("and push his " + eCockDescript(0) + " with your " + player.foot() + ", sandwiching it under one " + player.foot() + " and on top of the other.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + vaginaDescript(0) + ", tongue swirling over your folds and around your " + clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your " + player.feet() + ", doing your best to impart a " + player.foot() + " fetish on his slowly warping mind.  You feel a hot wetness on your " + player.feet() + ", and they grow slicker and wetter every second. Jojo's cum drips out from between them, glazing them white.  ", false);
 			if(player.averageVaginalWetness() <= 1) outputText("You clamp down on his muzzle as you writhe in orgasm.  ", false);
@@ -1182,8 +1185,10 @@ public function jojoRape():void {
 				dynStats("lib", 2, "cor", 1);
 			}
 		}
-		if(player.gender == 2) {
-			outputText("You spread your legs and crook your finger, beckoning him towards your " + vaginaDescript(0) + ".  He looks disheartened, but obediently kneels before you, his whiskers tickling your " + vaginaDescript(0) + ", his wet nose bumping your clit, his tongue taking long licks between your lips.  ", false);
+		if (player.gender == 2) {
+			if (player.isBiped()) outputText("You spread your legs and crook your finger");
+			else outputText("You crook your finger");
+			outputText(", beckoning him towards your " + vaginaDescript(0) + ".  He looks disheartened, but obediently kneels before you, his whiskers tickling your " + vaginaDescript(0) + ", his wet nose bumping your clit, his tongue taking long licks between your lips.  ", false);
 			if(player.biggestTitSize() >= 2) {
 				outputText("You sigh and knead your breasts in pleasure.  ", false);
 			}
@@ -1197,12 +1202,17 @@ public function jojoRape():void {
 			if(player.averageVaginalWetness() > 1 && player.averageVaginalWetness() <= 3) outputText("creaming his tongue liberally with girlcum.", false);
 			if(player.averageVaginalWetness() == 4) outputText("creaming all over him with your slobbering pussy.", false);
 			if(player.averageVaginalWetness() == 5) outputText("splattering him with girlcum from your " + vaginaDescript(0) + ".", false);
-			outputText("\n\nYou pull the cunt-dazed mouse away reluctantly, and bend over, spreading your legs and shaking your rump.  ", false);
+			outputText("\n\nYou pull the cunt-dazed mouse away reluctantly, and bend over,");
+			if (player.isBiped()) outputText(" spreading your legs and");
+			outputText(" shaking your rump.  ", false);
 			if(player.hasLongTail() > 0) outputText("Your tail swishes back and forth teasingly.  ", false);
 			outputText("Your tantalizing backside is too much for him.  He pounces your ass in a second, penetrating your " + vaginaDescript(0) + " forcefully.  The knowledge that your demonic influence is responsible for his state nearly makes you cream all over his cock.  You fantasize about your cunt making his cock grow longer and fatter as it corrupts him further, transforming his morals and values into cock and cum.  Jojo thrashes against you, brutally pounding your " + vaginaDescript(0) + " as he orgasms.  His " + eCockDescript(0) + " erupts inside you, the feeling of being filled with mouse-spunk drives you over the edge with him.  More and more of his cum sprays inside you, unnatural amounts for a creature his size.  Thick streams of the stuff escape down your thighs as your belly distends.  ", false);
 			player.cuntChange(2, true);
 			outputText("\n\n", false);
-			outputText("You let the drained mouse pop free, reveling in the sensation of cum pouring from between your thighs.  Jojo has already passed out behind you.  ", false);
+			outputText("You let the drained mouse pop free, reveling in the sensation of cum pouring from");
+			if (player.isBiped()) outputText(" between your thighs"); 
+			else outputText(" your cunt");
+			outputText(".  Jojo has already passed out behind you.  ", false);
 			if(player.lib > 60 && player.cor > 50) {
 				outputText("You lean down and whisper strange un-words as you stroke his cock.  It spasms and grows, cum pumping from it slowly but constantly.  You walk away, leaving him in a growing puddle of what was once his morals.  You don't know where the words came from, but you do know you're getting better at tempting and corrupting.", false);
 				monk+=1;
@@ -1219,7 +1229,9 @@ public function jojoRape():void {
 			player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 		}
 		if(player.gender == 3) {
-			outputText("You spread your legs and crook your finger, beckoning him towards your " + vaginaDescript(0) + ".  He looks disheartened, but obediently kneels before you, his whiskers tickling, his wet nose bumping your clit, his tongue taking long licks between your lips.  ", false);
+			if (player.isBiped()) outputText("You spread your legs and crook your finger");
+			else outputText("You crook your finger");
+			outputText(", beckoning him towards your " + vaginaDescript(0) + ".  He looks disheartened, but obediently kneels before you, his whiskers tickling, his wet nose bumping your clit, his tongue taking long licks between your lips.  ", false);
 			if(player.cockTotal() == 1) outputText("You sigh as your " + cockDescript(0) + " droops over his head.  ", false);
 			if(player.cockTotal() > 1) outputText("You sigh as your " + multiCockDescriptLight() + " pile atop his head.  ", false);
 			if(player.biggestTitSize() >= 2) {
@@ -1232,14 +1244,19 @@ public function jojoRape():void {
 			if(player.averageVaginalWetness() == 4) outputText("creaming all over him with your slobbering pussy.", false);
 			if(player.averageVaginalWetness() >= 5) outputText("splattering him with you girlcum from your " + vaginaDescript(0) + ".", false);
 			if(player.cockTotal() > 0) outputText("  Thick runners of your pre dribble down his neck, sticking to his fur.  ", false);
-			outputText("\n\nYou pull the cunt-dazed mouse away reluctantly, and bend over, spreading your legs and shaking your rump.  ", false);
+			outputText("\n\nYou pull the cunt-dazed mouse away reluctantly, and bend over,");
+			if (player.isBiped()) outputText(" spreading your legs and");
+			outputText(" shaking your rump.  ", false);
 			if(player.hasLongTail() > 0) outputText("Your tail swishes back and forth teasingly.  ", false);
 			outputText("Your tantalizing backside is too much for him.  He pounces your ass in a second, penetrating your " + vaginaDescript(0) + " forcefully.  The knowledge that your demonic influence is responsible for his state nearly makes you cream all over his cock.  You fantasize about your cunt making his cock grow longer and fatter as it corrupts him further, transforming his morals and values into cock and cum.  Jojo thrashes against you, brutally pounding your " + vaginaDescript(0) + " as he orgasms.  His " + eCockDescript(0) + " erupts inside you, the feeling of being filled with mouse-spunk drives you over the edge with him.  More and more of his cum sprays inside you, unnatural amounts for a creature his size.  Thick streams of the stuff escape down your thighs as your belly distends.  ", false);
 			player.cuntChange(2, true);
 			if(player.cockTotal() == 1) outputText("Your " + cockDescript(0) + " trembles in orgasm, squirting your load into the thick forest loam.  ", false);
 			if(player.cockTotal() > 1) outputText("Your " + multiCockDescriptLight() + " tremble in orgasm, squirting their hot loads all over the thick forest loam.  ", false);
 			outputText("\n\n", false);
-			outputText("You let the drained mouse pop free, reveling in the sensation of cum pouring from between your thighs.  Jojo has already passed out behind you.  ", false);
+			outputText("You let the drained mouse pop free, reveling in the sensation of cum pouring from ");
+			if (player.isBiped()) outputText("between your thighs");
+			else outputText("your cunt");
+			outputText(".  Jojo has already passed out behind you.  ", false);
 			if(player.lib > 60 && player.cor > 50) {
 				outputText("You lean down and whisper strange un-words as you stroke his cock.  It spasms and grows, cum pumping from it slowly but constantly.  You walk away, leaving him in a growing puddle of what was once his morals.  You don't know where the words came from, but you do know you're getting better at tempting and corrupting.", false);
 				monk+=1;
@@ -1580,7 +1597,7 @@ public function acceptOfferOfHelp():void
 	clearOutput();
 	jojoSprite();
 
-	outputText("“Thank Marae, you’re much stronger than I my friend... to hold so much corruption and still retain your will....  But let us not tempt fate,</i>” he says before the two of you get to it.\n\n");
+	outputText("<i>“Thank Marae, you’re much stronger than I my friend... to hold so much corruption and still retain your will....  But let us not tempt fate,”</i> he says before the two of you get to it.\n\n");
 
 	this.doClear = false;
 	eventParser(2151);
