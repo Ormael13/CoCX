@@ -396,12 +396,12 @@ package classes.Scenes.Dungeons.D3
 					outputText("\n\nYour heartbeat quickens as you consider. There is a grid gantry running from where you are right around the room to the other side, where you can see a matching observation booth, presumably containing another exit. But it’s quite a distance, there are stairs leading down to the ground level, and outside the protective glass you would surely be spotted and apprehended");
 					if (player.canFly()) outputText(", even if you tried to fly it"); 
 					outputText(". Wouldn’t you? You can’t outrun the gaze of a thousand basilisks... could you?"); 
-					if (player.hasKeyItem("Laybans")) outputText("  You take the Laybans out of your pouch and hold them up against the glass. It’s exactly as you hoped - they are made of the same material, and are almost certainly what the demons wear when they themselves interact with the basilisks. They would surely help you get across the hall, if you were crazy enough to try.");
+					if (player.hasKeyItem("Laybans") >= 0) outputText("  You take the Laybans out of your pouch and hold them up against the glass. It’s exactly as you hoped - they are made of the same material, and are almost certainly what the demons wear when they themselves interact with the basilisks. They would surely help you get across the hall, if you were crazy enough to try.");
 				}
 				else
 				{
 					outputText("Again you creep up to the tinted glass, again you take in the vast hall with the army of basilisks below hard at work, and again you stare out at the metal gantry, with the exit tantalizingly visible on the other side."); 
-					if (!player.hasKeyItem("Laybans")) outputText("  Are you going to try this?");
+					if (player.hasKeyItem("Laybans") < 0) outputText("  Are you going to try this?");
 					else outputText("  You take the Laybans out of your pocket, turning them around in your hands as you consider. Are you going to try this?");
 				}
 				
@@ -489,7 +489,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("No, there has to be a better way.");
-			if (!player.hasKeyItem("Laybans") && player.inte >= 50) outputText("  Surely the demons themselves are not immune to the basilisks’ glares - the darkened screen is proof of that. How do they interact with the creatures, then? Maybe if you keep poking around, you might find an answer.");
+			if (player.hasKeyItem("Laybans") < 0 && player.inte >= 50) outputText("  Surely the demons themselves are not immune to the basilisks’ glares - the darkened screen is proof of that. How do they interact with the creatures, then? Maybe if you keep poking around, you might find an answer.");
 			outputText("\n\nYou head back through the archway into the gloomy antechamber.");
 			
 			menu();
