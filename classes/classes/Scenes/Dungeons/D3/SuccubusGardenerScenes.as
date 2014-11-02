@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.D3 
+﻿package classes.Scenes.Dungeons.D3 
 {
 	import classes.BaseContent;
 	import classes.StatusAffects;
@@ -335,7 +335,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nThe fleshy spear ravaging your honeypot quivers and slows, then thrusts hard enough to rock your body");
 			if (player.biggestTitSize() > 2) outputText(" and jiggle your tits");
 			outputText(", pressing itself flat against your cervix before finally exploding, creaming your insides with a thick layer of molten-hot seed. You would groan or whimper if your throat wasn't crammed so full of plantcock. Instead, your eyes roll back under their fluttering lids, revealing a narrow band of white as you lose all control. Your body shakes like a seizure victim's, all except for the muscles down south. They're too busy clenching and squeezing the lengthy intrudor, wringing every drop of lust-imbued cum");
-			if (player.isPregnant) outputText(" to splatter against your occupied womb.");
+			if (player.isPregnant()) outputText(" to splatter against your occupied womb.");
 			else outputText(" to fill your womb, to make it round with life so that others can feel what you're feeling.");
 			
 			outputText("\n\nYour girlhoney squirts, splattering over the ground.");
@@ -434,7 +434,7 @@ package classes.Scenes.Dungeons.D3
 			player.tailType = 2;
 			
 			outputText("\n\nPerhaps best, and worst, of all, you aren't going soft in spite of the lack of attention to your bone. It merely hangs under your");
-			if (player.isPregnant) outputText(" pregnant");
+			if (player.isPregnant()) outputText(" pregnant");
 			outputText(" belly, dripping and drooling");
 			if (player.hasVagina()) outputText(", lubricated with a sheen vaginal juices from your forgotten sex organ");
 			outputText(", more ready for use than ever but obedient... waiting for someone, perhaps a mistress, to allow you to use it. Most of the milk is gone now, but your tongue is perfect for prizing the last of the honeyed amber from its muddy bowl. Having such a useful muscle allows you the perfect chance to look up at her while you drink.");

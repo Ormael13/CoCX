@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.D3 
+﻿package classes.Scenes.Dungeons.D3 
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
@@ -316,7 +316,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nTurning around, the demoness gives you a knowing smile even as she deigns to caress your woman-soaked visage with surprisingly gentle fingers.  She commands, \"<i>Present yourself, my sweet little filly.</i>\"  You do so without question, shaking like a leaf in the wind with anticipation.  By now, your copious drippings have turned your quivering [legs] in a glossy mess, soaked in liquid, feminine arousal that only entices your mistress to clop closer as you lift your [butt] high and make your [vagina] ready to be taken.  You grab hold of nearby stones with trembling fingers and fearfully look back over your shoulder as the nine-foot equine monstrosity's shadow looms closer.");
 
-			if (player.isPregnant) outputText("\n\nA tingle runs through your belly as something changes, and a powerful voice smirks, \"<i>One of my other mares will finish bearing that runt for you.  Now, that fertile womb belongs to ME.</i>\"  You... you're no longer pregnant!");
+			if (player.isPregnant()) outputText("\n\nA tingle runs through your belly as something changes, and a powerful voice smirks, \"<i>One of my other mares will finish bearing that runt for you.  Now, that fertile womb belongs to ME.</i>\"  You... you're no longer pregnant!");
 
 			outputText("\n\nShaggy, fur-shrouded hooves stamp down to either side of your hands.  You can see the powerful muscles that drive her massive body above you, shifting beautifully under her fur-clad skin while she positions herself properly.  Her scent, still clinging to your nose and mouth and characteristic stubbornness, only grows stronger in her direct presence, mixed with a salty, masculine musk that radiates from the throbbing shaft above and behind.  Drops of her liquid desire spatter off your [butt], fairly sizzling with the heat of her need, and you feed the flared head tip lower to smear the white goop across your crack and down your lips.  You shake and nearly fall from the avalanche of pleasure, but somehow, you hold your pussy up, craving the cream filling it's so eager for.");
 
