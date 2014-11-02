@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.D3 
+﻿package classes.Scenes.Dungeons.D3 
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
@@ -106,7 +106,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nYour gaze drops from the mirror demon’s wild stare, down to her [chest]. Nice. You lay a comforting but firm hand upon her shoulder as you sink down on top of your clone, your own [chest] pushing into hers, your hardening [cock] pressing and rubbing impatiently against its supple, turgid clone. You find yourself intensely aware of every sensation- exactly how your perverse, hermaphroditic body feels to your own touch.");
 				if (player.isNaga()) outputText("  You sigh at the smooth, pleasurable feeling of your scales rubbing over each other as you sensuously wind yourself around her tail until you are tightly bound together. Twin lithe snake futa wound around each other- all you really need is a paying audience. Or a stick and a hospital. You laugh with a similar tinge of madness that your partner did a short while ago and she groans raggedly in response.");
 				if (player.isDrider()) outputText("  For a moment you consider mounting her from behind, allowing your monstrous instincts to take over and fuck her ovipositor in a deathly arachnid craze, but the tangle of spindly legs in front of you puts you off. Better to do it face-to-face. You want to drink in your mirror image’s every reaction. Your prick pressing against the human softness which rises above her gleaming chitin as your body presses heavily down onto its mirror counterpart, making her groan raggedly.");
-				if (player.skinType = SKIN_TYPE_FUR) outputText("  You clamber on top of her, the rough mingling of your fur sparking deep urges within you, your animal half dreaming of frenzied, bestial mating in the wild. Your dick presses into her digitigrade thigh and she groans raggedly in response.");
+				if (player.skinType == SKIN_TYPE_FUR) outputText("  You clamber on top of her, the rough mingling of your fur sparking deep urges within you, your animal half dreaming of frenzied, bestial mating in the wild. Your dick presses into her digitigrade thigh and she groans raggedly in response.");
 				else outputText(" You clamber on top of her, enjoying the give and take of her "+ (player.isGoo() ? "gooey" : "smooth") + " flesh as you lock your [hips] around their mirror counterparts, making her groan raggedly in response.");
 
 				outputText("\n\n“<i>I cannot believe you are doing this. There- there are demons who wouldn’t do this. What kind of sick bitch even are you?</i>“");

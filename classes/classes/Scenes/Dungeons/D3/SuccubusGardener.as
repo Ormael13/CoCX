@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.D3 
+﻿package classes.Scenes.Dungeons.D3 
 {
 	import classes.Appearance;
 	import classes.Monster;
@@ -267,7 +267,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				var sL:Number = player.lust;
 				game.dynStats("lus+", damage);
-				var sL = player.lust - sL;
+				sL = player.lust - sL;
 				outputText(" The sinuous plant-based tentacles lash at you like a dozen tiny whips! Preparing for stinging pain, you're somewhat taken aback when they pull back at the last moment, sensually caressing your most sensitive places! (" + sL + ")");
 			}
 			else
