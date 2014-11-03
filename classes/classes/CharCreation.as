@@ -217,6 +217,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	//Time reset
 	model.time.days = 0;
 	model.time.hours = 0;
+	model.time.minutes = 0;
 	//Clear cocks
 	while(player.cocks.length > 0)
 	{

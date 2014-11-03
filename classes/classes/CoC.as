@@ -370,7 +370,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.0_mod_0.9.0";
+			ver = "0.9.0_mod_0.9.1";
 			version = ver + " (<b>Lethice's Stronghold + Mod</b>)";
 
 			//Indicates if building for mobile?

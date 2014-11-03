@@ -712,7 +712,7 @@ public function doItems(eventNo:Number):void {
 
 			if(gameState == 4) {
 				//If at giacomo go back to him afterwards
-				doNext(2015);
+				doNext(kGAMECLASS.giacomoShop.encounterGiacomo);
 				return;
 			}
 			if(gameState == 6) {
@@ -917,7 +917,7 @@ public function doItems(eventNo:Number):void {
 			//If at giacomo abandon goes differently...
 			if (gameState == 4)
 			{
-				abandon = 2015;
+				abandon = kGAMECLASS.giacomoShop.encounterGiacomo;
 			}
 			else if (gameState == 6)
 			{
@@ -1402,8 +1402,12 @@ public function doItems(eventNo:Number):void {
 			var offset:Number = type * 9;
 			var goal:Number = 9 + offset;
 			var temp:Number = 0 + offset;
-			while(temp < goal) {
-				if (gearStorage[temp].quantity > 0) return true;
+			while (temp < goal) {
+				if (gearStorage[temp] != undefined) {
+					if (gearStorage[temp].quantity > 0) {
+						return true;
+					}
+				}
 				temp++;
 			}
 			return false;
