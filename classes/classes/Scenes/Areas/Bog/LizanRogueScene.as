@@ -78,10 +78,12 @@ package classes.Scenes.Areas.Bog
 					outputText("You wonder what you should do to the lizan.");
 					addButton(0, "Use Dick", rapeLizanInTheAss);
 					addButton(4, "Leave", cleanupAfterCombat);
+					return;
 				}
 				else {
 					outputText("You rummage through his bag for something valuable.");
 					cleanupAfterCombat();
+					return;
 				}
 			}
 			else {
@@ -91,8 +93,9 @@ package classes.Scenes.Areas.Bog
 					outputText("<b>You could have sex with him if you like to.</b>  ");
 					addButton(0, "Sex", haveSexWithLizan);
 					addButton(4, "Leave", leaveLizanAfterCombat);
+					return;
 				}
-				else leaveLizan();
+				else leaveLizanAfterCombat();
 			}
 		}
 		
