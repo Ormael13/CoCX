@@ -85,10 +85,20 @@ package classes.Scenes.Areas.Bog
 				}
 			}
 			else {
-				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance.  After chatting for a bit the two of you part ways, having gotten a good workout in the process.  ");
+				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance.  ");
 				dynStats("str", 1, "tou", 1);
-				cleanupAfterCombat();
+				if (player.lust >= 33) {
+					outputText("<b>You could have sex with him if you like to.</b>  ");
+					addButton(0, "Sex", haveSexWithLizan);
+					addButton(4, "Leave", leaveLizanAfterCombat);
+				}
+				else leaveLizan();
 			}
+		}
+		
+		public function leaveLizanAfterCombat():void {
+			outputText("After chatting for a bit the two of you part ways, having gotten a good workout in the process.  ");
+			cleanupAfterCombat();			
 		}
 		
 		public function loseToLizan():void {
@@ -106,12 +116,12 @@ package classes.Scenes.Areas.Bog
 		
 		public function haveSexWithLizan():void {
 			clearOutput();
-			outputText("You tell the male lizan you're game as you begin to pull off your [armor].  His bulge becomes more pronounced as your body comes into view.  He quite obviously likes what he sees.  Which one of your body parts do you plan to use on the honry male lizan?");
+			outputText("You tell the male lizan you're game as you begin to pull off your [armor].  His bulge becomes more pronounced as your body comes into view.  He quite obviously likes what he sees.  Which one of your body parts do you plan to use on the horny male lizan?");
 			menu();
 			if (player.hasCock()) addButton(0, "Use Dick", consensualButtfuck);
 			if (player.hasVagina()) addButton(1, "Use Vagina", consensualGetFucked);
 			addButton(2, "Use Ass", consensualGetButtFucked);
-			//if (player.hasVagina()) addButton(3, "Double Penetration", consensualDoublePenetration);
+			if (player.hasVagina()) addButton(3, "Double Penetration", consensualDoublePenetration);
 		}
 		
 		public function consensualButtfuck():void {
@@ -148,19 +158,20 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nSlightly frustrated you shove, causing a sharp yelp to come from your partner. He gives you a withering look before your apologetic smile causes him to smile back at you, excusing your impatience. As you begin again the lizan's hole is finally beginning to open up.  You can tell from the slight edge in his voice that your [cock] is breaching unexplored territory.  You rock yourself in deeper and deeper until you've completely shafted the guy.  His chest heaves as you hold your entire length deep inside of his quivering anal sleeve.  It takes him a few moments to get used to your [cock] and once he gives you the go ahead you begin to fuck him at a medium pace. He trembles and grunts, rolling his hips and convulsing as you big cock makes him practically delirious.");
 				outputText("\n\nAfter a while you decide to pick up the pace.  After a few moderate strokes into the tight wet sleeve you lean forward and press his knees into his chest.  The lizan growls as you begin to fuck his little scaly ass as hard as you can.  Beneath you his two bumpy purple lizan dicks are leaking a heavy river of sticky pale fluid as your madly pumping [cock] causes them to flap around on his toned and heaving stomach.");
 			}
-			outputText("\n\nYour thrusts are a echoing smack against his " + monster.skinTone + " ass as you begin fucking him with the entire length of your [cock].  Soon your abuse of his prostate becomes too much.  His rectal passage clenches tightly as his twin shafts burst, spraying dual torrents of pale cream across everywhere as you fuck him through his orgasm.  His flexing tail hole and the sight of his exploding lizan dicks push you over the edge.");
+			outputText("\n\nYour thrusts are a echoing smack against his " + monster.skinTone + " ass as you begin fucking him with the entire length of your [cock].  Soon, your abuse of his prostate becomes too much.  His rectal passage clenches tightly as his twin shafts burst, spraying dual torrents of pale cream across everywhere as you fuck him through his orgasm.  His flexing tail hole and the sight of his exploding lizan dicks push you over the edge.");
 			if (player.cumQ() < 350) outputText("Your [face] twists around a strained groan and you spray your own impressive load deep into the lizan's bowels.");
 			else if (player.cumQ() < 1000) outputText("Your [face] twists around a deep growl as you pour your load deep into the lizan's bowels. As you fuck your seed deeper into his clenching bowls you can feel some of it gushing out and dripping down your [legs].");
 			else if (player.cumQ() < 2500) outputText("Your [face] twists into a chilling howl as you explode deep within the lizan's bowels. As you fuck your seed deep into his bowels his stomach becomes a little less defined, a testament to how much seed you've poured into him. You can even feel it dripping down your [legs].");
 			else outputText("Your [face] twists into a titanic roar as [eachCock] explodes with enough force to blast out of the lizan's rectal embrace. Torrents of creamy white fluid blast from [eachCock]. Soon the lizan's upturned ass and the base of his tail is covered but you're still going. By the time you're finished the lizan is grinning from ear to ear amidst a small lake of cum.");
 			outputText("\n\nSpent and breathing hard you collapse. For a second you just lie there [fullChest] against his abs and his legs wrapped around your [hips] while lying in the hot glorious mess of his lizan spunk.  Both of you are panting, both of you have been satisfied.  Then you push yourself off of him and go to collect your [armor].  He takes it upon himself to clean your [fullChest] with his tongue and as soon as he is done you pull on your [armor].  Before you leave, you reward him with a deep kiss, snaking your [tongue] into his mouth before heading back to camp.");
 			player.orgasm();
+			if (inCombat()) cleanupAfterCombat();
 			doNext(13);
 		}
 		
 		public function consensualGetFucked():void {
 			clearOutput();
-			outputText("The lizan watches you disrobe with unabashed interest and asks  \"<i>How would you like to do this?</i>\"  you tell him you are going to ride him, which causes a huge grin to spread across his face.  He confidently peels off his loin cloth, exposing two bumpy purple erect lizan dicks not lacking in length or girth. He is a stunning visage with his [lizanSC] scales, powerful tail and dual cocks all on display for you, his audience of one.");
+			outputText("The lizan watches you disrobe with unabashed interest and asks  \"<i>How would you like to do this?</i>\"  you tell him you are going to ride him, which causes a huge grin to spread across his face.  He confidently peels off his loincloth, exposing two bumpy purple erect lizan dicks not lacking in length or girth. He is a stunning visage with his [lizanSC] scales, powerful tail and dual cocks all on display for you, his audience of one.");
 			outputText("\n\nWhen the two of you come together he displays his patience by sliding his hands onto your waist and pulling you into a kiss. As your tongues wrestle he massages your lower back and you feel the tension draining from your body. ");
 			if (player.isLactating()) outputText("\n\nThe lizan begins to paint kisses down your neck, leaving a trail of tender suck marks in his wake. When he reaches your [fullChest] he takes one look at your [nipples] and cocks his head to the side in confusion. His tongue slips out to taste a single bead of creamy white, a taste you see repeated on the next breast. He seems to really like your lactating nipples. He opens his mouth wide and latches on to one of your [nipples], his hand playing with another. The tingling sensation he causes is quite pleasant. He quite happily slurps milk from your [nipples] and massages the soft flesh in a way that is both firm and erotic.");
 			else if (player.hasFuckableNipples()) outputText("\n\nWhen he reaches your [fullChest] he takes one look at your [nipples] and does a double take. For a moment he is at a loss for words but when you clear your throat he quickly collects his wits and sticks his tongue into your fuckable nipples. The sensation is similar to getting your pussy licked but much higher up. You groan as he suckles each nipple in turn while massaging your [chest]");
@@ -206,6 +217,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nFor a second you lie there [fullChest] against his [lizanSC] abs. Around the two of you lies the hot glorious mess of your combined sexual fluids.  Both of you are panting, both of you are satisfied.  Then you push yourself off of him and collect your [armor].  He takes it upon himself to clean your [fullChest] and [vagina] with his long tongue and as soon as he is done you pull on your [armor].  Before you leave you reward him with a deep kiss, snaking your [tongue] into his mouth before heading back to camp.");
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.orgasm();
+			if (inCombat()) cleanupAfterCombat();
 			doNext(13);
 		}
 		
@@ -254,6 +266,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nYour orgasm seems to spur the lizan on.  His thrusts become irregular before he tightens his grip on your waist. He shoves in to the hilt and, yelling like a madman, explodes.  You feel his cum surging into your [asshole] as a hot warmth swells and dribbles out of your [vagina] and down your [legs] in a sticky stream of lizan dick juice.");
 			outputText("\n\nYou spend some time cuddling, the lizan's still on your back with his warm cock in your [asshole]. Eventually, you get up and give him a deep kiss before you return to your camp.");
 			player.orgasm();
+			if (inCombat()) cleanupAfterCombat();
 			doNext(13);
 		}
 		
@@ -312,6 +325,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nWhen you begin to head back to camp you can hear the lizan gleefully whistling behind you as he returns to his home");
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.orgasm();
+			if (inCombat()) cleanupAfterCombat();
 			doNext(13);			
 		}
 		

@@ -21,12 +21,6 @@ package classes.Scenes.Areas.HighMountains
 		{
 			var needNext:Boolean = false;
 			pregnancy.pregnancyAdvance();
-			if (debug) { //Speed up pregnancy 5x for debugging.
-				pregnancy.pregnancyAdvance();
-				pregnancy.pregnancyAdvance();
-				pregnancy.pregnancyAdvance();
-				pregnancy.pregnancyAdvance();
-			}
 			trace("\nMinerva time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.incubation == 0 && pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
 				minervaGivesBirth();
@@ -757,7 +751,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nThinking about it your decide there would be nothing wrong with going for a dip with the curvaceous golden siren. Getting up from the ground you quickly strip off your " + player.armorName + " and jump into the pool. Seeing how eager you are brings a bring toothy smile to Minerva's slightly angular face, the purified herm jumping up and eagerly stripping as well, freeing her big bountiful breasts, before hopping into the water with a energetic splash.");
 			outputText("\n\nThough the water isn't all that deep, only about four feet deep you splash around and swim with the shark-like harpy. Minerva playfully splashing water at you with her tail, laughing as you play and swim, you can't help but look the very curvy siren over, your eyes instinctively falling on her big G-cup breasts, her wide broodmother hips and ass as well as her thick tentacled dick.");
 			outputText("\n\nMinerva's womanly body drenched with water, her ample toned features growing much more defined with all the water clinging to her body. Seeing your stares gives Minerva a kinky thrill, grinning she spins in the water and turns away from you, striking a pose for you and pushing her luscious round ass out, the water beading down her naked body as she looks back at you and gives you her usual sharky grin. \"<i>See anything you like darling?</i>\"");
-			outputText("\n\nGrinning back at her you reach out to try and grab the teasing siren only for her spin away from your grasp and splash through the waters away from you, her delightfully bountiful butt swaying as she wades through the water. Not one to just let such teasing go you give chase, splashing through the water and sending it all over. Your watery games last for a while, both of you splashing around, playing and flirting until you're both tired and retire to simply laying on the soft mossy bank together. \"<i>This was so fun, I\m so glad you came to visit. \"<i> Minerva says to you before rolling over onto her stomach and resting her head in her hands as she just watches you for a bit. You know... I\m feeling a little frisky</i>\" she says before rolling on top of you and drawing a finger gently across your [player.chest] slowly. \"<i>how about we have some fun my love?</i>\"");
+			outputText("\n\nGrinning back at her you reach out to try and grab the teasing siren only for her spin away from your grasp and splash through the waters away from you, her delightfully bountiful butt swaying as she wades through the water. Not one to just let such teasing go you give chase, splashing through the water and sending it all over. Your watery games last for a while, both of you splashing around, playing and flirting until you're both tired and retire to simply laying on the soft mossy bank together. \"<i>This was so fun, I\m so glad you came to visit. \"<i> Minerva says to you before rolling over onto her stomach and resting her head in her hands as she just watches you for a bit. You know... I\m feeling a little frisky</i>\" she says before rolling on top of you and drawing a finger gently across your [chest] slowly. \"<i>how about we have some fun my love?</i>\"");
 			dynStats("cor", -1);
 			fatigue(-10);
 			doYesNo(pureMinervaSexMenu, declineSpringSex);

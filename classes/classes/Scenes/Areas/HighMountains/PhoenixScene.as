@@ -42,6 +42,7 @@ package classes.Scenes.Areas.HighMountains
 		
 		//VICTORY!
 		public function winAgainstPhoenix():void {
+			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
 			outputText("With one final grunt, the phoenix collapses against a nearby rock, barely able to support herself. The once-proud soldier has been reduced to a " + (monster.lust >= 100 ? "dazed, lust-crazed slut, desperately pulling at her clothing in a mad attempt to expose herself": "a beaten, battered heap; completely unable to resist your advances") + ". ");
 			if (player.lust >= 33) {
 				outputText("What do you do?");
@@ -160,6 +161,13 @@ package classes.Scenes.Areas.HighMountains
 		//LOSS! GET RAPED!
 		public function loseToPhoenix():void {
 			clearOutput();
+			if (player.HP < 1) {
+				flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER]++;
+				if (flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] >= 4) {
+					phoenixBadEnd();
+					return;
+				}
+			}
 			outputText("You collapse to the rocky ground, far too " + (player.lust >= 100 ? "turned on": "drained") + " to continue the fight. The phoenix smirks as you drop, carefully shedding her tattered clothing to expose her lush hips and breasts before making her way over to you, swaying sensuously with each step. ");
 			outputText("\n\n\"<i>I was just going to kill you and be done with it,</i>\" her hand grasps your chin as she speaks, turning your head up so that you can see both her gloating face and the throbbing, fully erect lizardcock that juts out above her soaked snatch. \"<i>But after that pathetic performance, I think I've come up with a much better use for you...</i>\"");
 			if (player.hasCock() && rand(2) == 0) {
@@ -247,6 +255,16 @@ package classes.Scenes.Areas.HighMountains
 			dynStats("str", -1);
 			player.orgasm();
 			cleanupAfterCombat();
+		}
+		
+		//Non-sexy bad end, loss by HP 4 times in a row.
+		public function phoenixBadEnd():void {
+			clearOutput();
+			outputText("\"<i>Seriously? I've beaten you several times in a row? I guess... I've made a final decision. You must die. I'm sorry but I have to,</i>\" the phoenix says.");
+			outputText("\n\n\"<i>The harpy queen will be avenged,</i>\" she says with a glare on your face. She raises her scimitar. You look up at the sharp blade. You clearly know where it's going.");
+			outputText("\n\n\"<i>Hasta la vista, baby!</i>\" These are the last words you hear as the speeding scimitar finally makes contact with your neck.");
+			rawOutputText("\n\n[DATA EXPUNGED]");
+			doBadEnd();
 		}
 	}
 

@@ -195,7 +195,9 @@ package classes.Scenes.Dungeons.D3
 			this.hoursSinceCum = player.hoursSinceCum;
 			
 			hipRating = player.hipRating;
+			if (hipRating < 1) hipRating = 1;
 			buttRating = player.buttRating;
+			if (buttRating < 1) buttRating = 1;
 			lowerBody = player.lowerBody;
 			skinDesc = player.skinDesc;
 			initStrTouSpeInte(player.str, player.tou, player.spe, player.inte);

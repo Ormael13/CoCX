@@ -134,14 +134,14 @@ package classes.Scenes.Areas.HighMountains
 			this.weaponName = "scimitar and shield";
 			this.weaponVerb="slash";
 			this.weaponAttack = 30;
-			this.armorName = "full chainmail";
+			this.armorName = "chainmail and loincloth";
 			this.armorDef = 26;
 			this.bonusHP = 750;
 			this.lust = 10;
 			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 23;
-			this.gems = 10 + rand(4);
+			this.gems = 30 + rand(25);
 			this.drop = new ChainedDrop().add(weapons.SCIMITR,1/20)
 					.elseDrop(NO_DROP);
 			this.wingType = WING_TYPE_HARPY;

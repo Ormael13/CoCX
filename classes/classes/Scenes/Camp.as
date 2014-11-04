@@ -1844,7 +1844,7 @@ private function callRathazulAndEscapeBadEnd():void {
 
 //Bad End if you starved to death.
 public function badEndHunger():void {
-	player.hunger = 1; //For Easy Mode/Debug Mode.
+	player.hunger = 0.1; //For Easy Mode/Debug Mode.
 	outputText("Too weak to be able to stand up, you collapse onto the ground. Your vision blurs as the world around you finally fades to black. \n\n", true);
 	if (companionsCount() > 0) {
 		if (companionsCount() > 1) {
@@ -1863,6 +1863,7 @@ public function badEndMinLust():void {
 	outputText("You spend the rest of your life masturbating, unable to stop.", false)
 	player.orgasm();
 	doBadEnd();	
+	removeButton(1); //Can't wake up, must load.
 }
 
 public function nightSuccubiRepeat():void {
@@ -2118,7 +2119,7 @@ public function wakeFromBadEnd():void {
 	outputText("No, it can't be.  It's all just a dream!  You've got to wake up!");
 	outputText("\n\nYou wake up and scream.  You pull out a mirror and take a look at yourself.  Yep, you look normal again.  That was the craziest dream you ever had.");
 	if (flags[kFLAGS.TIMES_BAD_ENDED] >= 2) { //FOURTH WALL BREAKER
-		outputText("\n\nYou mumble to yourself \"<i>Another goddamn bad-end. Why is it that each time I get a bad-end, I wake up?</i>\"");
+		outputText("\n\nYou mumble to yourself \"<i>Another goddamn bad-end.</i>\"");
 	}
 	if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine, you've just had a nightmare.");
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
@@ -2126,9 +2127,11 @@ public function wakeFromBadEnd():void {
 		outputText("\n\nYou realize the consequences of having oversized balls. You need to shrink it right away. Reducto will do.");
 		player.ballSize = (15 + (player.str / 2));
 	}
+	outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
 	model.time.days += 1;
 	model.time.hours = 6;
 	kGAMECLASS.inDungeon = false;
+	gameState = 0;
 	player.HP = player.maxHP();
 	menu();
 	addButton(0, "Next", eventParser, 1);

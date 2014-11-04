@@ -106,6 +106,7 @@ package classes.Scenes.Explore
 			if (player.hasCock()) addButton(4, "D Onahole", promptDeluxeOnahole);
 			if (player.hasCock() && player.hasVagina()) addButton(5, "Dual Belt", promptDualBelt);
 			if (player.hasCock() && player.hasVagina()) addButton(6, "AN Onahole", promptNaturalOnahole);
+			addButton(7, "Condom", promptCondom);
 			addButton(9, "Back", encounterGiacomo);
 			statScreenRefresh();
 		}
@@ -518,6 +519,28 @@ package classes.Scenes.Explore
 			statScreenRefresh();
 			doNext(browseErotica);
 		}
+		
+		public function promptCondom():void {
+			spriteSelect(23);
+			outputText("Giacomo holds up the packet and says, \"<i>Ah, yes! This is a condom. Just slip it on any cocks and have it penetrate any holes. It's guaranteed to prevent the spread of STDs and it will help to prevent pregnancy. I must warn you that it does not completely pregnancy. Rarely, it will fail. However, it will work most of the time. So, <b>ten gems</b>. What do you say?</i>\"", true);
+			doYesNo(buyCondom, browseErotica);
+		}
+		
+		public function buyCondom():void {
+			spriteSelect(23);
+			if (player.gems < 10)
+			{
+				outputText("\n\nGiacomo sighs, indicating you need " + String(10 - player.gems) + " more gems to purchase this item.", true);
+				doNext(browsePotions);
+			}
+			else
+			{
+				player.gems -= 10;
+				inventory.takeItem(useables.CONDOM_);
+				statScreenRefresh();
+			}
+		}
+		
 		
 		//MISC
 		public function wormsRemoval():void {
