@@ -125,7 +125,7 @@ package classes.Scenes.Areas.Bog
 			this.lust = 20;
 			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 14;
+			this.level = 16;
 			this.gems = 10 + rand(50);
 			this.drop = new WeightedDrop().add(consumables.REPTLUM, 5)
 					.add(consumables.SMALL_EGGS, 2)

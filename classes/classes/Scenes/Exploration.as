@@ -194,18 +194,21 @@ package classes.Scenes
 					}
 					//Encounter Gobbalin!
 					else {
-						//50% of the time, goblin assassin!
-						if (player.level >= 10 && rand(2) == 0) {
+						var goblinChooser:int = rand(100);
+						if (player.level < 10 && goblinChooser >= 40) goblinChooser = 39;
+						else if (player.level < 12 && goblinChooser >= 60) goblinChooser = 59;
+						//Goblin assassin!
+						if (goblinChooser >= 40 && goblinChooser < 60) {
 							kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
 							return;
 						}
 						//Goblin warrior!
-						if (player.level >= 12 && rand(2) == 0) {
+						else if (goblinChooser >= 60 && goblinChooser < 80) {
 							kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
 							return;
 						}
 						//Goblin shaman!
-						if (player.level >= 12 && rand(2) == 0) {
+						else if (goblinChooser >= 80) {
 							kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
 							return;
 						}

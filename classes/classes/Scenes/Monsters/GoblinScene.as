@@ -631,7 +631,7 @@ package classes.Scenes.Monsters
 			}
 			else { //Latex condom (item)
 				player.destroyItems(useables.CONDOM_, 1);
-				outputText("you tear open the packet and marvel at the transparent piece of latex. You slide it over your " + cockDescript(x) + ", marveling at how transparent and shiny it is. You don't think the goblin will be able to notice that until it's too late!", false);
+				outputText("you tear open the packet and slide the latex condom over your " + cockDescript(x) + ", marveling at how transparent and shiny it is. You don't think the goblin will be able to notice that until it's too late!", false);
 			}
 			outputText(" Time to give the goblin what she asked for, if not what she wanted.\n\n", false);
 
