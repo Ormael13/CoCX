@@ -75,6 +75,7 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasVagina()) {
 					addButton(1, "RideHisCock", rideYetisCock);
 				}
+				addButton(4, "Leave", cleanupAfterCombat);
 			}
 			else {
 				cleanupAfterCombat();

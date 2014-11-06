@@ -68,6 +68,7 @@ package classes.Scenes.Areas.GlacialRift
 					addButton(2, "Get Licked", valkyrieLicksYou);
 					addButton(3, "Scissor", valkyrieScissor);
 				}
+				addButton(4, "Leave", cleanupAfterCombat);
 			}
 			else {
 				cleanupAfterCombat();
