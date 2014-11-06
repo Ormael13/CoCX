@@ -84,7 +84,7 @@ internal function sharkWinChoices():void {
 		outputText("The shark-girl begins masturbating, giving up on dominating you.  The sight is truly entrancing.", true);
 		dynStats("lus", 15);
 	}
-	if(player.lust >= 33 && player.gender > 0) {
+	if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("  Do you have your way with her or leave?", false);
 		temp = 0;
 		if(player.hasKeyItem("Deluxe Dildo") >= 0) temp = 2264;

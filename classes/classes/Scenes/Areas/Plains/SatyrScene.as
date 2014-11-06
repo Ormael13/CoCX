@@ -237,7 +237,7 @@ internal function defeatASatyr():void {
 	else outputText("Beaten and dazed, the satyr collapses to its caprine knees, shaking his head in a futile attempt to recover himself from the brutal trouncing you've just given him.  The combination of the blows and his previous drunken state mean he's quite incapable of getting back, however.");
 	var butt:Function = null;
 	var faces:Function = null;
-	if(player.lust >= 33 && player.gender > 0) {
+	if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("\n\nYou wonder if you should give the satyr some sort of payback for attempting to rape you... do you take advantage of the helpless goat-man?");
 		//[Male][Female][Leave]
 		if(player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) butt = malesTakeAdvantageOfSatyrs;
@@ -245,7 +245,7 @@ internal function defeatASatyr():void {
 		if(player.hasVagina()) faces = femaleTakesAdvantageOfSatyr;
 	}
 	var bikiniTits:Function = null;
-	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR && flags[kFLAGS.SFW_MODE] <= 0) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 	simpleChoices("FuckHisButt",butt,"Ride Face",faces,"B.Titfuck",bikiniTits,"",0,"Leave",cleanupAfterCombat);
 }
 //Female (Z)

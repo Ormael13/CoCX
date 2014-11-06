@@ -29,7 +29,7 @@ package classes.Scenes.Areas.Forest
 			} else //[Victory via Lust]
 			{
 				outputText("Akbal falls to the ground, unable to go on. Yet a growl still rumbles in his chest, and you quickly recognize the submissive gesture when he bows his head, his cat belly hugging the ground.  His body begins shifting, and soon he has a vaguely humanoid form. You assume this is the form he uses for sex, as his lust is out of control.\n\n", true);
-				if (player.lust >= 33 && player.gender > 0)
+				if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0)
 				{
 					outputText("You walk around Akbal's beaten and lust crazed form with a smile on your face. The demon's growl continues as he awaits your judgment.", false);
 					var vagoo:Function =null;

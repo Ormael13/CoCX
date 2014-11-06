@@ -59,7 +59,7 @@ package classes.Scenes.Areas.GlacialRift
 			//-If Female: [Get Licked] [Scissor]
 			//-If Herm: All Options)
 			menu();
-			if (player.lust >= 33) {
+			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				if (player.hasCock()) {
 					addButton(0, "Aerial Fuck", valkyrieAerialFuck);
 					addButton(1, "Anal Fuck", valkyrieAnalFuck);
@@ -69,8 +69,9 @@ package classes.Scenes.Areas.GlacialRift
 					addButton(3, "Scissor", valkyrieScissor);
 				}
 			}
-			else outputText("<b>You aren't horny enough to have sex with her.</b>", false)
-			addButton(4, "Leave", exitValkyrie);
+			else {
+				cleanupAfterCombat();
+			}
 		}
 		
 		//Aerial Fuck

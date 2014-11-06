@@ -36,6 +36,11 @@ package classes.Scenes.Areas.Lake
 
 		public function cultistRapesYou():void
 		{
+			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
+				clearOutput();
+				cleanupAfterCombat();
+				return;
+			}
 			monster.lust = 1;
 			monster.HP = 10;
 			var changed:Boolean = false;

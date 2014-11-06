@@ -697,7 +697,7 @@ internal function nagaRapeChoice():void {
 	var eggs:Function = null;
 	if(player.canOvipositSpider()) eggs = eggUpANagaSpiderLike;
 	if(player.canOvipositBee() && player.gender > 0) eggs = beePositANagaPlease;
-	if(player.lust >= 33) {
+	if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("Your body aches for further satisfaction - do you rape the snake woman?", false);
 		if(player.lowerBody == LOWER_BODY_TYPE_GOO) {
 			if(player.gender == 0) simpleChoices("Yes",nagaVictoryGenderless,"Gooey Rape",gooNagaRape,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);

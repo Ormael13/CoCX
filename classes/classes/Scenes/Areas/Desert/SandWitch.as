@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.*;
 
 	public class SandWitch extends Monster
 	{
@@ -14,7 +15,7 @@
 				player.removeStatusAffect(StatusAffects.StoneLust);
 			}
 			
-			if (player.lust >= 33){
+			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0){
 				game.desert.sandWitchScene.beatSandwitch();
 			} else {
 				game.finishCombat();

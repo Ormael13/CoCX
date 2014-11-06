@@ -165,7 +165,7 @@ package classes.Scenes.Areas.Plains
 			if (player.hasVagina()) vagoo = victoryRapeHyenaCunnilingus;
 			var penor:Function =null;
 			if (player.hasCock()) penor = hyenaVictoryRapeFellatio;
-			if (player.lust >= 33 && player.gender > 0) {
+			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nUsing the hyena to get off would be easy.  What do you do?", false);
 				simpleChoices("Get BJ", penor, "Get Licked", vagoo, "", 0, "", 0, "Leave", cleanupAfterCombat);
 			}

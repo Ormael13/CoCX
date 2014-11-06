@@ -4,6 +4,8 @@ package classes.Scenes.Dungeons.D3
 	import classes.Items.Consumables.SimpleConsumable;
 	import classes.room;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Dungeons.Factory.IncubusMechanic;
 	import classes.StatusAffects;
 	import classes.PerkLib;
@@ -246,6 +248,8 @@ package classes.Scenes.Dungeons.D3
 		
 		public function enterD3():void
 		{
+			kGAMECLASS.dungeons.setDungeonButtons(); //Ensures the top buttons are visible.
+			menu(); //Clear bottom buttons
 			inRoomedDungeon = true;
 			inRoomedDungeonResume = resumeFromFight;
 			move("entrance");
@@ -265,6 +269,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function generateRoomMenu(tRoom:room):void
 		{
+			kGAMECLASS.dungeons.setTopButtons();
 			if (tRoom.NorthExit != null && tRoom.NorthExit.length > 0)
 			{
 				if (tRoom.NorthExitCondition == null || tRoom.NorthExitCondition())

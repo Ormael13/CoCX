@@ -60,7 +60,7 @@ package classes.Scenes.Monsters
 			}
 			var eggDump:Boolean = false;
 			if(player.canOvipositBee()) eggDump = true;
-			if(nipFuck==null && femaleRape==null && maleRape==null && feeder==null && bikiniTits==null && !eggDump) cleanupAfterCombat();
+			if(nipFuck==null && femaleRape==null && maleRape==null && feeder==null && bikiniTits==null && !eggDump || flags[kFLAGS.SFW_MODE] > 0) cleanupAfterCombat();
 			else {
 				menu();
 				addButton(0,"Male Fuck",maleRape);
@@ -1272,7 +1272,7 @@ package classes.Scenes.Monsters
 		}
 		public function impRapesYou():void {
 			outputText("", true);
-			if ((player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && !player.isTaur() && player.hasVagina()) {
+			if ((player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && !player.isTaur() && player.hasVagina() && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText(images.showImage("imp-loss-female-fuck"), false);
 				outputText("You sink to the ground, assuming a position that feels all too natural to you now, leaning forward to let your " + player.allBreastsDescript() + " hang down slightly. The imp looks you up and down, wickedly eyeing your ready, slightly open lips. He drops his loin-cloth to reveal a hardening cock. Your eyes bulge as it grows larger... and larger... and larger! The imp's cock finally bulges to a full twelve inches... and it's moving closer. You struggle to think... but you just can't! You want that in your mouth, like, so bad!\n\n", false);
 				outputText("Your " + vaginaDescript(0) + " drips in anticipation, and you find yourself involuntarily moving your knees farther apart to prepare yourself to be filled. He smiles and presses his cock against your " + vaginaDescript(0) + ", pushing you back to get a better angle. You try to make words, but your brain can only think of so much at once! Right now, it's thinking of cock, which, naturally, makes you open your mouth and let out a slutty moan.\n\n", false);
@@ -1292,7 +1292,7 @@ package classes.Scenes.Monsters
 				return;
 			}
 			//Lust loss
-			if(player.lust >= 100) {
+			if(player.lust >= 100 && flags[kFLAGS.SFW_MODE] <= 0) {
 				//50% chance of sprocket rape for super-thick people. 
 				if(player.cocks.length >= 1 && rand(2) == 0) {
 					if(player.cocks[0].cockThickness >= 4) {
@@ -1511,14 +1511,14 @@ package classes.Scenes.Monsters
 				outputText("The muscular imp groans in pained arousal, his loincloth being pushed to the side by his thick, powerful dick.  Grabbing the useless clothing, he rips it from his body, discarding it.  The imp's eyes lock on his cock as he becomes completely ignorant of your presence.  His now insatiable lust has completely clouded his judgment.  Wrapping both of his hands around his pulsing member he begins to masturbate furiously, attempting to relieve the pressure you've caused.");
 				//Leave // Rape]
 				menu();
-				if(player.lust >= 33) addButton(0,"Sex",sexAnImpLord);
+				if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0,"Sex",sexAnImpLord);
 				addButton(9,"Leave",cleanupAfterCombat);
 			}
 		}
 		public function loseToAnImpLord():void {
 			clearOutput();
-			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0)) getRapedAsAGirl();
-			else if(player.hasCock()) loseToImpLord();
+			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0) && flags[kFLAGS.SFW_MODE] <= 0) getRapedAsAGirl();
+			else if(player.hasCock() && flags[kFLAGS.SFW_MODE] <= 0) loseToImpLord();
 			else {
 				outputText("Taking a look at your defeated form, the imp lord snarls, \"<i>Useless,</i>\" before kicking you in the head, knocking you out cold.");
 				player.takeDamage(9999);
@@ -1538,7 +1538,7 @@ package classes.Scenes.Monsters
 			menu();
 			//Continues in, Male Anal, Female Vaginal, or Breastfeed
 			addButton(9,"Leave",cleanupAfterCombat);
-			if(player.lust >= 33) {
+			if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				if(player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(0,"FuckHisAss",impLordBumPlug);
 				if(player.hasCock()) addButton(1,"Get Blown",getBlownByAnImpLord);
 				if(player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);

@@ -20,16 +20,17 @@ package classes.Scenes.Areas.GlacialRift
 		public function winAgainstGiant():void {
 			kGAMECLASS.tooltipLoc = "FrostGiant"
 			outputText("The giant staggers and falls down on his knees. You wonder what you should do next.\n\n", true);
+			if (player.weaponName == "fists" && player.armorName == "comfortable underclothes" && player.jewelryName == "nothing") awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
 			menu();
-			if (player.lust >= 33) {
+			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
 			}
-			else outputText("<b>You aren't horny enough to victory-rape him.</b>\n");
-			if (player.weaponName == "fists" && player.armorName == "comfortable underclothes" && player.jewelryName == "nothing") awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
+			else {
+				cleanupAfterCombat();
+			}
 			//addButton(3, "Suck Him Off", suckHimOff);
-			addButton(4, "Leave", exitGiant);
 		}
 		
 		//Males and hermaphrodites

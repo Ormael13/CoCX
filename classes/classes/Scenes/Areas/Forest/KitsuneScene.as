@@ -739,6 +739,11 @@ package classes.Scenes.Areas.Forest
 
 		public function loseToKitsunes():void
 		{
+			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
+				clearOutput();
+				cleanupAfterCombat();
+				return;
+			}
 			var scene:Array = [];
 			//[LOSE FIGHT]
 			//Shared Scenes
@@ -1138,6 +1143,18 @@ package classes.Scenes.Areas.Forest
 			//[Feeder]
 			if (player.findPerk(PerkLib.Feeder) >= 0)
 				button = kitsuneButton(button, "Breastfeed", feederTheKitsunes);
+			//Remove buttons in SFW mode. No rapes!
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				removeButton(0);
+				removeButton(1);
+				removeButton(2);
+				removeButton(3);
+				removeButton(4);
+				removeButton(5);
+				removeButton(6);
+				removeButton(7);
+				removeButton(8);
+			}
 			addButton(9, "Leave", leaveKitsune);
 		}
 

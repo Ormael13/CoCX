@@ -84,7 +84,7 @@ package classes.Scenes.Areas.Forest
 			} else {
 				outputText("Tamani gives up on defeating you and starts masturbating!", true);
 			}
-			if(player.lust >= 33 && player.totalCocks() > 0) {
+			if(player.lust >= 33 && player.totalCocks() > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?", false);
 				var temp:Function = null;
 				var temp2:Function = null;

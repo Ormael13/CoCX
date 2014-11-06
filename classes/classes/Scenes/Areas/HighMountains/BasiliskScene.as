@@ -72,7 +72,7 @@ package classes.Scenes.Areas.HighMountains
 			else outputText("No longer able to control its raging erection, the basilisk closes its eyes and sinks to one knee.  It would probably be attempting to signal its submission to you if it weren't furiously masturbating its long, purple cock, which has emerged straining from the creature's genital slit.", false);
 		
 			//If victory and Player Lust above 30: 
-			if(player.lust >= 33 && player.gender > 0) {
+			if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Certain that the creature won't dare try and turn its eyes on you again, you take your time to look the tall reptile over directly for the first time.  Perhaps you could use it to satisfy your baser urges. If so, what part of it do you choose?", false);
 				//[Tongue][Ass]
 				simpleChoices("Tongue",tongueBasiliskSmex,"Ass",evil,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);

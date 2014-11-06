@@ -186,7 +186,7 @@ package classes.Scenes.Areas.Bog
 				outputText("Too weak to continue fighting, the chameleon girl drops to her knees, exhausted.  Her skin returns to its usual " + monster.skinTone + ", unable to maintain the camouflage.");
 				if (player.lust >= 33) outputText("  Do you use the girl in her weakened state to get yourself off?  Or maybe you could punish her bad attitude with an item from your bags...");
 			}
-			if (player.lust < 33 || player.gender == 0) {
+			if (player.lust < 33 || player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				cleanupAfterCombat();
 				return;
 			}

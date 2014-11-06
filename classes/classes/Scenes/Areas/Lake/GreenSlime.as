@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class GreenSlime extends Monster
 	{
@@ -24,7 +25,7 @@
 				}
 			}
 			//Not a breastfeeder
-			else if(player.lust >= 33 && player.gender > 0) {
+			else if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?", false);
 				game.doYesNo(game.lake.greenSlimeScene.slimeVictoryRape, game.cleanupAfterCombat);
 			}

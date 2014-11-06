@@ -2131,6 +2131,8 @@ public function wakeFromBadEnd():void {
 	model.time.days += 1;
 	model.time.hours = 6;
 	kGAMECLASS.inDungeon = false;
+	inRoomedDungeon = false;
+	inRoomedDungeonResume = null;
 	gameState = 0;
 	player.HP = player.maxHP();
 	menu();

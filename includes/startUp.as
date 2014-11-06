@@ -151,11 +151,11 @@ public function settingsScreen():void
 	if (flags[kFLAGS.GAME_DIFFICULTY] <= 0)
 	{
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG]) outputText("Difficulty: <font color=\"#008000\"><b>Easy</b></font>\n Combat is easier and bad-ends can be ignored.");
-		else outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. Bad-ends can ruin your game.");
+		else outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties.");
 	}
 	else if (flags[kFLAGS.GAME_DIFFICULTY] == 1)
 	{
-		outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 25% more HP and does 15% more damage.");
+		outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 25% more HP and does 15% more damage. Bad-ends can ruin your game.");
 	}
 	else if (flags[kFLAGS.GAME_DIFFICULTY] == 2)
 	{

@@ -1936,10 +1936,11 @@ package classes
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 			{
 				lustCoefficient = (lust + 50) / 5;
+				if (findPerk(PerkLib.PilgrimsBounty) >= 0) lustCoefficient = 30;
 				var percent:Number = 0
 				percent = lustCoefficient + (hoursSinceCum + 10)
 				if (percent > 100)
-					percent = 100
+					percent = 100;
 				if (quantity > cumCapacity()) 
 					quantity = cumCapacity();
 				return (percent / 100) * cumCapacity();

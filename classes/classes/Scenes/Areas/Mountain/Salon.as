@@ -439,8 +439,9 @@ private function cutBeard():void {
 		return;
 	}
 	outputText("Lynnette and her daughters crowd around you with razor-sharp scissors, effortlessly paring down your " + beardDescript() + ".  When they've finished, you're left with ", true);
-	player.beardLength = 0.2;
+	player.beardLength = 0.05;
 	outputText(beardDescript() + ".", false);
+	doNext(13);
 }
 
 private function growBeard(mode:int = 0):void {
@@ -480,7 +481,8 @@ private function growBeard(mode:int = 0):void {
 }
 
 private function changeBeardStyle():void {
-	outputText("What beard style would you like?");
+	outputText("What beard style would you like?", true);
+	menu();
 	addButton(0, "Normal", chooseBeardStyleFinalize, 0);
 	addButton(1, "Goatee", chooseBeardStyleFinalize, 1);
 	addButton(2, "Clean-cut", chooseBeardStyleFinalize, 2);

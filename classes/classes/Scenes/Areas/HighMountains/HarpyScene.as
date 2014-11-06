@@ -46,7 +46,7 @@ package classes.Scenes.Areas.HighMountains
 			if (player.cockThatFits(monster.analCapacity()) >= 0) anal = winAndRapeHarpyAnally;
 
 			//Rape options
-			if (player.lust >= 33) {
+			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  What do you do to her?", false);
 
 				choices("Anal", anal, "Oral", oral, "Pussy", pussy, "Scissor", scissor, "Lay Eggs", eggs, "Clit Fuck", clitFuck, "", 0, "", 0, "", 0, "Nothing", cleanupAfterCombat);

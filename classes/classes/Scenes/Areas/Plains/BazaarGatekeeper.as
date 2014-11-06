@@ -7,7 +7,7 @@ package classes.Scenes.Areas.Plains
 	 * ...
 	 * @author Kitteh6660
 	 */
-	public class BazaarGatekeeper  extends Monster 
+	public class BazaarGatekeeper extends Monster 
 	{
 		
 		public function scimitarSpecial():void {
@@ -33,7 +33,7 @@ package classes.Scenes.Areas.Plains
 			else
 			{
 				outputText("but you fail and get hit instead! ", false);
-				var damage:int = int(str + 100);
+				var damage:int = int(str + weaponAttack + 100);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
@@ -58,7 +58,7 @@ package classes.Scenes.Areas.Plains
 			else
 			{
 				outputText("but you fail and you get hit instead! You are in a lot of pain. ", false);
-				var damage:int = int(str + 250);
+				var damage:int = int(str + weaponAttack + 250);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
@@ -115,7 +115,7 @@ package classes.Scenes.Areas.Plains
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 30;
 			this.additionalXP = 300;
-			this.drop = NO_DROP;
+			this.drop = new WeightedDrop().add(weapons.SCIMITR, 1);
 			this.gems = 250;
 			this.special1 = scimitarSpecial;
 			checkMonster();

@@ -33,6 +33,11 @@ package classes.Scenes.Areas.Mountain
 
 		public function infestedHellhoundLossRape():void
 		{
+			if (flags[kFLAGS.SFW_MODE] > 0 && inCombat()) { //No rape in SFW mode.
+				clearOutput();
+				cleanupAfterCombat();
+				return;
+			}
 			outputText("", true);
 			//[BOTH INFESTED]
 			if (player.totalCocks() > 0 && player.findStatusAffect(StatusAffects.Infested) >= 0) {

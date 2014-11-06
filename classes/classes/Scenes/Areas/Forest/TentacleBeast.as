@@ -3,6 +3,7 @@
 	import classes.*;
 	import classes.internals.*;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class TentacleBeast extends Monster
 	{
@@ -58,7 +59,7 @@
 				game.desert.antsScene.phyllaTentacleDefeat();
 			}
 			else {
-				if(!hpVictory && player.gender > 0) {
+				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
 					game.doYesNo(game.forest.tentacleBeastScene.tentacleVictoryRape,game.cleanupAfterCombat);
 				} else {

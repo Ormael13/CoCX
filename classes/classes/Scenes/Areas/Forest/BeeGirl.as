@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.internals.*;
 
@@ -10,29 +11,29 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(player.gender > 0) {
+			if(player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?", true);
 				} else {
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?", true);
 				}
-				player.lust = 98;
-				game.dynStats("lus", 1);
+				game.dynStats("lus=", 98);
 				var temp2:Function =null;
 				var temp3:Function =null;
 				if(player.findStatusAffect(StatusAffects.Feeder) >= 0) temp3 = game.forest.beeGirlScene.milkAndHoneyAreKindaFunny;
 				if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = kGAMECLASS.beeGirlsGetsDildoed;
-				game.simpleChoices("Rape",game.forest.beeGirlScene.rapeTheBeeGirl,"Dildo Rape",temp2,"",0,"B. Feed",temp3,"Leave",game.cleanupAfterCombat);
+				game.simpleChoices("Rape", game.forest.beeGirlScene.rapeTheBeeGirl, "Dildo Rape", temp2, "", 0, "B. Feed", temp3, "Leave", game.cleanupAfterCombat);
 			}
 			//Genderless can still breastfeed
-			else if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+			else if(player.findStatusAffect(StatusAffects.Feeder) >= 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				if (hpVictory){
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?", true);
 				} else {
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?", true);
 				}
 				game.simpleChoices("B. Feed", game.forest.beeGirlScene.milkAndHoneyAreKindaFunny,"",0,"",0,"",0,"Leave",game.cleanupAfterCombat);
-			} else {
+			}
+			else {
                 game.finishCombat();
             }
 		}

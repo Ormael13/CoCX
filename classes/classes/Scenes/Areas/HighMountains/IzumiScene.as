@@ -1198,7 +1198,11 @@ package classes.Scenes.Areas.HighMountains
 			{
 				addButton(9, "Leave", lossSceneLeave);
 			}
-
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("<b>SFW mode is enabled.</b>");
+				menu();
+				doNext(lossSceneLeave);
+			}
 			
 		}
 

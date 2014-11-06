@@ -2873,7 +2873,7 @@ public function doBadEnd():void {
 		awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
 		menu();
 		addButton(0, "Game Over", eventParser, 9999);
-		if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Wake Up", camp.wakeFromBadEnd);
+		if (flags[kFLAGS.HARDCORE_MODE] <= 0 && flags[kFLAGS.GAME_DIFFICULTY] < 1) addButton(1, "Wake Up", camp.wakeFromBadEnd);
 		//if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(3, "Retry", eventParser, 9999);
 		addButton(2, "NewGamePlus", charCreation.newGamePlus);
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", eventParser, 1);

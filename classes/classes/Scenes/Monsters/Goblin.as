@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.*;
 
 	public class Goblin extends Monster
 	{
@@ -90,7 +91,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0) {
+			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.", false);
 				game.cleanupAfterCombat();
 			} else if (pcCameWorms) {

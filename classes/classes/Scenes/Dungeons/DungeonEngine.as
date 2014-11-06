@@ -116,28 +116,42 @@ package classes.Scenes.Dungeons
 		}
 		
 		/**
-		 * Set the buttons for use in dungeons.
-		 * @param	north
+		 * Set the top buttons for use while in dungeons.
+		 */
+		public function setTopButtons():void { //Set top buttons.
+			mainView.showMenuButton( MainView.MENU_APPEARANCE );
+			mainView.showMenuButton( MainView.MENU_PERKS );
+			mainView.showMenuButton( MainView.MENU_STATS );
+			mainView.hideMenuButton( MainView.MENU_DATA );
+			if(player.XP >= (player.level) * 100 || player.perkPoints > 0 || player.statPoints > 0) {
+				if (player.XP < player.level * 100)
+				{
+					if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
+					else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
+				}
+				else
+					mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
+				mainView.showMenuButton( MainView.MENU_LEVEL );
+				mainView.statsView.showLevelUp();
+			}
+			else {
+				mainView.hideMenuButton( MainView.MENU_LEVEL );
+				mainView.statsView.hideLevelUp();
+			}
+		}
+		
+		/**
+		 * Set the buttons for use in dungeons. The parameters can be used to connect to rooms.
 		 * @param	northFunction
-		 * @param	south
 		 * @param	southFunction
-		 * @param	west
 		 * @param	westFunction
-		 * @param	east
 		 * @param	eastFunction
 		 */
 		public function setDungeonButtons(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null):void {
 			hideUpDown();
 			spriteSelect(-1);
 			menu();
-			mainView.showMenuButton( MainView.MENU_APPEARANCE );
-			mainView.showMenuButton( MainView.MENU_PERKS );
-			mainView.showMenuButton( MainView.MENU_STATS );
-			mainView.hideMenuButton( MainView.MENU_DATA );
-			if(player.XP >= (player.level) * 100) {
-				mainView.showMenuButton( MainView.MENU_LEVEL );
-				mainView.statsView.showLevelUp();
-			}
+			setTopButtons();
 			if (northFunction != null) addButton(0, "North", navigateToRoom, northFunction);
 			if (southFunction != null) addButton(6, "South", navigateToRoom, southFunction);
 			if (westFunction != null) addButton(5, "West", navigateToRoom, westFunction);
@@ -146,6 +160,7 @@ package classes.Scenes.Dungeons
 			if (player.lust >= 30) addButton(9, "Masturbate", eventParser, 10);
 		}
 		
+
 	}
 
 }

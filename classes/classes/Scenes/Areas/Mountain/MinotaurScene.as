@@ -80,12 +80,12 @@ public function minoVictoryRapeChoices():void {
 		outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?", true);
 	}
 	//Not an addict
-	else if((player.lust >= 33 && player.gender > 0) || feedposit == "Lay Eggs") {
+	else if((player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) || (feedposit == "Lay Eggs" && flags[kFLAGS.SFW_MODE] <= 0)) {
 		if(monster.lust > 99) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always fuck the eager bull...\n\nWhat do you do?", true);
 		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\nWhat do you do?", true);
 	}
 	//Not able to rape but a feeder
-	else if(player.findStatusAffect(StatusAffects.Feeder) >= 0 && feedposit == "B. Feed") {
+	else if(player.findStatusAffect(StatusAffects.Feeder) >= 0 && feedposit == "B. Feed" && flags[kFLAGS.SFW_MODE] <= 0) {
 		if(monster.lust > 99) outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nDo you?", true);
 		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWhat do you do?", true);
 	}
@@ -507,6 +507,11 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	//{CHECK: If female or herm PC with big butt and vagina too small to fit minotaur cock, use this}		
 	if (!autoRape)
 	{
+		if (flags[kFLAGS.SFW_MODE] > 0 && inCombat()) { //No rape in SFW mode.
+			clearOutput();
+			cleanupAfterCombat();
+			return;
+		}
 		if(rand(2) == 0 && player.buttRating >= 15 && player.vaginalCapacity() < monster.biggestCockArea() && player.tone < 60) {
 			getMinoHawtDawged();
 			return;
@@ -523,7 +528,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 		dynStats("lus", 10 + player.lib / 5);
 		
 		//Detect minotaur coming
-		if (rand(30) + player.inte / 5 > 18)
+		if (rand(30) + player.inte / 5 > 18 || flags[kFLAGS.SFW_MODE] > 0)
 		{
 			outputText("You spot a shadow moving and spin around to see a minotaur lumbering after you from the back of the cave!", false);
 			if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
@@ -548,7 +553,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 		
 		outputText(" as it grows larger and harder, smearing its pre-cum into your skin and making you shiver.  ", false);
 		//High str escape
-		if (rand(20) + player.str / 3 > 18)
+		if (rand(20) + player.str / 3 > 18 || flags[kFLAGS.SFW_MODE])
 		{
 			outputText("\n\nYou twist around using the additional lubrication and squirm free!  Rolling away, you come up in a crouch, ready to fight!", false);
 			startCombat(new Minotaur());
@@ -557,7 +562,11 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	
 	}
 	
-
+	if (flags[kFLAGS.SFW_MODE] > 0 && inCombat()) { //No rape in SFW mode.
+		clearOutput();
+		cleanupAfterCombat();
+		return;
+	}
 	//Normal RAEP
 	if(player.vaginas.length > 0) {
 		outputText("The bull-man roughly grabs your hair and begins rubbing the flared head of his penis along your " + vaginaDescript(0) + ".  ", false);

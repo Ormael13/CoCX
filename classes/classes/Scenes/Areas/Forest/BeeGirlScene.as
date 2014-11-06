@@ -56,14 +56,15 @@ package classes.Scenes.Areas.Forest
 			//Chance to avoid raaaaeeeeep
 			if ((player.lib + player.cor < 140) || rand(2) == 0) {
 				outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?", false);
-				//Choices - fight, talk, seduce, submit, run
+				if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Giant Bees!</b>")
+				}				
+			//Choices - fight, talk, seduce, submit, run
 				simpleChoices("Fight", 2060, "Talk", beeTalk, "Seduce", 0, "", 0, "Leave", 13);
 			}
 			else beeEncounterLevel3(false);
-			if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Giant Bees!</b>")
-			}
+
 		}
 
 		private function beeEncounterLevel3(clearScreen:Boolean=true):void

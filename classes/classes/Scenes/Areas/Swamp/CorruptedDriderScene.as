@@ -109,7 +109,7 @@ package classes.Scenes.Areas.Swamp
 			}
 
 			//(Qualifies for any rape?:)
-			if (player.lust >= 33) {
+			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nWhat do you do?", false);
 				choices("Butt Fuck", buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK, "Fuck Pussy", vagFuck, "Bondage Fuck", careful, "FuckSpinner", fuckSpinner, "Ride Cock", rideCock, "Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "", 0, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
 			}
@@ -120,6 +120,11 @@ package classes.Scenes.Areas.Swamp
 		public function loseToDrider():void
 		{
 			spriteSelect(77);
+			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
+				clearOutput();
+				cleanupAfterCombat();
+				return;
+			}
 			//Build array of choices
 			var select:Array = [];
 			if (player.hasCock()) select[select.length] = 0;

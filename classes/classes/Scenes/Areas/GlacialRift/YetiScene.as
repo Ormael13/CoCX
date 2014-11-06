@@ -68,7 +68,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("\n\n")
 			//Options
 			menu()
-			if (player.lust >= 33){
+			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0){
 				if (player.hasCock()) {
 					addButton(0, "Buttfuck", fuckYetiInTheAss);
 				}
@@ -76,8 +76,9 @@ package classes.Scenes.Areas.GlacialRift
 					addButton(1, "RideHisCock", rideYetisCock);
 				}
 			}
-			else outputText("<b>You aren't horny enough to consider raping him.</b>", false)
-			addButton(4, "Leave", exitYeti);
+			else {
+				cleanupAfterCombat();
+			}
 		}
 		
 		private function fuckYetiInTheAss():void {

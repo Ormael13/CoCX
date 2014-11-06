@@ -1314,6 +1314,11 @@ use namespace kGAMECLASS;
 			return stretched;
 		}
 
+		/**
+		 * Refills player's hunger. 'amnt' is how much to refill, 'nl' determines if new line should be added before the notification.
+		 * @param	amnt
+		 * @param	nl
+		 */
 		public function refillHunger(amnt:Number = 0, nl:Boolean = true):void {
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 			{
@@ -1344,6 +1349,10 @@ use namespace kGAMECLASS;
 			}
 		}
 		
+		/**
+		 * Damages player's hunger. 'amnt' is how much to deduct.
+		 * @param	amnt
+		 */
 		public function damageHunger(amnt:Number = 0):void {
 			hunger -= amnt;
 			if (hunger < 0) hunger = 0;

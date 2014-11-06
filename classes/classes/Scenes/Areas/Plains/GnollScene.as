@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.Plains
 {
 	import classes.*;
+	import classes.GlobalFlags.*;
 
 	public class GnollScene extends BaseContent
 	{
@@ -107,7 +108,7 @@ package classes.Scenes.Areas.Plains
 			else outputText("The hyena girl heaves a giant breath and takes a single step backwards.  Her club thumps to the ground and her hands fall to her shaft, stroking along its rough length.", false);
 
 			//Do You Rape The Gnoll?
-			if (player.lust >= 33) {
+			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				//(if cockTotal>0 AND vaginas=0)
 				if (player.gender == 1) {
 					if (player.cockThatFits(monster.vaginalCapacity()) != -1) dickDownClit = dickDownGnollClit;

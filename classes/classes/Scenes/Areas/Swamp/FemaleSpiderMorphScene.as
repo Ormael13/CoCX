@@ -451,6 +451,11 @@ package classes.Scenes.Areas.Swamp
 
 		public function loseToFemaleSpiderMorph():void
 		{
+			if (flags[kFLAGS.SFW_MODE] > 0 && inCombat()) { //No rape in SFW mode.
+				clearOutput();
+				cleanupAfterCombat();
+				return;
+			}
 			if (player.hasCock()) {
 				if (player.cockThatFits(monster.vaginalCapacity()) == -1) femaleSpiderMorphTooBigWebRape();
 				else spiderMorphFemaleRidesACawk();
@@ -470,7 +475,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("The spider-girl drops to her knees and wobbles unsteadily", false);
 			if (monster.lust > 99) outputText(", thrusting two of her carapace-covered finger-tips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"", false);
 			else outputText(", too wounded to fight back or run away.", false);
-			if (player.lust >= 33 && player.gender > 0) {
+			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nWhat do you do to her?", false);
 				var scissor:Function =null;
 				var pussyFuck:Function =null;

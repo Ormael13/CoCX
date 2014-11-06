@@ -79,6 +79,11 @@ package classes.Scenes.Areas.Lake
 //Raping the player
 		public function zealotLossRape():void
 		{
+			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
+				clearOutput();
+				cleanupAfterCombat();
+				return;
+			}
 			outputText("", true);
 			var broseph:String = player.mf("dude", "chick");
 			//Pre Rape Scene - lose by hp
@@ -252,7 +257,7 @@ package classes.Scenes.Areas.Lake
 			if (monster.HP < 1) outputText("The zealot collapses from his wounds, too hurt to continue controlling his powers.", false);
 			//Defeated by lust
 			else outputText("The zealot quivers for a moment before collapsing, his desires becoming too great for even him to control.", false);
-			if (player.lust >= 33 && player.gender > 0) {
+			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?", false);
 				var bikiniTits:Function = null;
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);

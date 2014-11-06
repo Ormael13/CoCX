@@ -40,6 +40,11 @@ package classes.Scenes.Areas.Mountain
 
 		public function hellhoundRapesPlayer():void
 		{
+			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
+				clearOutput();
+				cleanupAfterCombat();
+				return;
+			}
 			//Lust or HP loss texts here
 			if (player.lust >= 100) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n", true);
 			else outputText("Too weak to continue fighting, you fall to your knees.\n\n", true);
