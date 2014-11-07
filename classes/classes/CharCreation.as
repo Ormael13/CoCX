@@ -11,7 +11,6 @@
 
 	public class CharCreation extends BaseContent{
 
-	//Hacky solution
 	public var unlockedHerm:Boolean = false;
 	
 public function newGameGo(e:MouseEvent = null):void {
@@ -195,14 +194,6 @@ public function newGameGo(e:MouseEvent = null):void {
 		player.setArmorHiddenField(armors.C_CLOTH);
 		player.setWeaponHiddenField(WeaponLib.FISTS);
 	}
-	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] == 1)
-	{
-		unlockedHerm = true;
-	}
-	else
-	{
-		unlockedHerm = false;
-	}
 	//Clear plot storage array!
 	flags = new DefaultDict();
 
@@ -331,7 +322,7 @@ private function chooseMale():void {
 	player.breastRows[0].breastRating = 0;
 	//Choices
 	outputText("\n\nYou are a man.  Your upbringing has provided you an advantage in strength and toughness.\n\nWhat type of build do you have?", true);
-	simpleChoices("Lean", chooseBodyTypeLean, "Average", chooseBodyTypeAverage, "Thick", chooseBodyTypeThick, "Girly", chooseBodyTypeGirlyOrTomboyish, "Dickgirl", chooseBodyTypeDickgirlOrCuntboy);
+	simpleChoices("Lean", chooseBodyTypeLean, "Average", chooseBodyTypeAverageMale, "Thick", chooseBodyTypeThick, "Girly", chooseBodyTypeGirlyOrTomboyish, "Dickgirl", chooseBodyTypeDickgirlOrCuntboy);
 }
 private function chooseFemale():void {
 	player.gender = 2;
@@ -351,9 +342,10 @@ private function chooseFemale():void {
 	player.breastRows[0].breastRating = 3;
 	//Choices
 	outputText("\n\nYou are a woman.  Your upbringing has provided you an advantage in speed and intellect.\n\nWhat type of build do you have?", true);
-	simpleChoices("Slender", chooseBodyTypeLean, "Average", chooseBodyTypeAverage, "Curvy", chooseBodyTypeThick, "Tomboyish", chooseBodyTypeGirlyOrTomboyish, "Cuntboi", chooseBodyTypeDickgirlOrCuntboy);
+	simpleChoices("Slender", chooseBodyTypeSlender, "Average", chooseBodyTypeAverageFemale, "Curvy", chooseBodyTypeCurvy, "Tomboyish", chooseBodyTypeGirlyOrTomboyish, "Cuntboi", chooseBodyTypeDickgirlOrCuntboy);
 }
 private function chooseHerm():void {
+	kGAMECLASS.tooltipLoc = "HermBuild";
 	player.gender = 3;
 	//Attributes
 	player.str+=1;
@@ -378,77 +370,102 @@ private function chooseHerm():void {
 	player.breastRows[0].breastRating = 2;
 	//Choices
 	outputText("\n\nYou are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?", true);
-	simpleChoices("Slender", chooseBodyTypeLean, "Average", chooseBodyTypeAverage, "Curvy", chooseBodyTypeThick, "Masculine", chooseMasculineHerm, "Feminine", chooseFeminineHerm);
+	menu();
+	addButton(0, "Fem. Slender", chooseBodyTypeSlender);
+	addButton(1, "Fem. Average", chooseBodyTypeAverageFemale);
+	addButton(2, "Fem. Curvy", chooseBodyTypeCurvy);
+	//addButton(4, "Androgynous", chooseBodyTypeAndrogynous);
+	addButton(5, "Mas. Lean", chooseBodyTypeLean);
+	addButton(6, "Mas. Average", chooseBodyTypeAverageMale);
+	addButton(7, "Mas. Thick", chooseBodyTypeThick);
 }
 
 //-----------------
 //-- BODY BUILDS
 //-----------------
+//Lean - Males
 private function chooseBodyTypeLean():void {
-	//lean b-type
-	if (player.gender == 1) {
-		//Body modifiers
-		player.hipRating = 2;
-		player.buttRating = 2;
-		player.femininity = 34;
-		player.thickness = 30;
-	}
-	if (player.gender == 2) {
-		//Body modifiers
-		player.hipRating = 6;
-		player.buttRating = 2;
-		player.femininity = 66;
-		player.thickness = 30;
-		player.tone += 5;
-	}
+	//Body modifiers
+	player.hipRating = 2;
+	player.buttRating = 2;
+	player.femininity = 34;
+	player.thickness = 30;
+	player.breastRows[0].breastRating = 0;
+	player.balls = 2;
+	player.ballSize = 1;
 	//Attribute modifiers
 	player.str -= 1;
 	player.spe += 1;
 	genericStyleCustomizeMenu();
 }
-private function chooseBodyTypeAverage():void {
-	//Average b-type
-	if (player.gender == 1) {
-		//Body modifiers
-		player.hipRating = 4;
-		player.buttRating = 4;
-		player.femininity = 30;
-	}
-	if (player.gender == 2) {
-		//Body modifiers
-		player.hipRating = 6;
-		player.buttRating = 6;
-		player.femininity = 70;
-	}
+//Slender(woman) - Females
+private function chooseBodyTypeSlender():void {
+	//Body modifiers
+	player.hipRating = 6;
+	player.buttRating = 2;
+	player.femininity = 66;
+	player.thickness = 30;
+	player.tone += 5;
+	player.breastRows[0].breastRating = 3;
+	//Attribute modifiers
+	player.str -= 1;
+	player.spe += 1;
 	genericStyleCustomizeMenu();
 }
+
+//Average - Male
+private function chooseBodyTypeAverageMale():void {
+	//Body modifiers
+	player.hipRating = 4;
+	player.buttRating = 4;
+	player.femininity = 30;
+	player.breastRows[0].breastRating = 0;
+	player.balls = 2;
+	player.ballSize = 1;
+	genericStyleCustomizeMenu();
+}
+//Average - Female
+private function chooseBodyTypeAverageFemale():void {
+	//Body modifiers
+	player.hipRating = 6;
+	player.buttRating = 6;
+	player.femininity = 70;
+	player.breastRows[0].breastRating = 3;
+	genericStyleCustomizeMenu();
+}
+
+//Thick - Males
 private function chooseBodyTypeThick():void {
-	if (player.gender == 1) {
-		//Body modifiers
-		player.hipRating = 4;
-		player.buttRating = 6;
-		player.femininity = 29;
-		player.thickness = 70;
-		player.tone -= 5;
-		//Attribute modifiers
-		player.spe -= 4;
-		player.str += 2;
-		player.tou += 2;
-	}
-	if (player.gender == 2) {
-		//Body modifiers
-		player.hipRating = 8;
-		player.buttRating = 8;
-		player.femininity = 71;
-		player.thickness = 70;
-		player.breastRows[0].breastRating++;
-		//Attribute modifiers
-		player.spe -= 2;
-		player.str += 1;
-		player.tou += 1;
-	}
+	//Body modifiers
+	player.hipRating = 4;
+	player.buttRating = 6;
+	player.femininity = 29;
+	player.thickness = 70;
+	player.tone -= 5;
+	player.breastRows[0].breastRating = 0;
+	player.balls = 2;
+	player.ballSize = 1;
+	//Attribute modifiers
+	player.spe -= 4;
+	player.str += 2;
+	player.tou += 2;
 	genericStyleCustomizeMenu();
 }
+//Curvy - Females
+private function chooseBodyTypeCurvy():void {
+	//Body modifiers
+	player.hipRating = 8;
+	player.buttRating = 8;
+	player.femininity = 71;
+	player.thickness = 70;
+	player.breastRows[0].breastRating = 4;
+	//Attribute modifiers
+	player.spe -= 2;
+	player.str += 1;
+	player.tou += 1;
+	genericStyleCustomizeMenu();
+}
+
 private function chooseBodyTypeGirlyOrTomboyish():void {
 	if (player.gender == 1) {
 		//Body modifiers
@@ -498,35 +515,6 @@ private function chooseBodyTypeDickgirlOrCuntboy():void {
 	}
 	genericStyleCustomizeMenu();
 }
-private function chooseAndrogynousHerm():void {
-		player.femininity = 50;
-		player.hipRating = 4;
-		player.buttRating = 2;
-		player.hairLength = 5;
-		player.tone = 50;
-		player.breastRows[0].breastRating = 1;
-	genericStyleCustomizeMenu();
-}
-private function chooseMasculineHerm():void {
-		player.femininity = 30;
-		player.hipRating = 2;
-		player.buttRating = 0;
-		player.hairLength = 1;
-		player.tone = 50;
-		player.breastRows[0].breastRating = 0;
-		player.balls = 2;
-		player.ballSize = 1;
-	genericStyleCustomizeMenu();
-}
-private function chooseFeminineHerm():void {
-		player.femininity = 70;
-		player.hipRating = 4;
-		player.buttRating = 6;
-		player.hairLength = 10;
-		player.tone = 50;
-		player.breastRows[0].breastRating = 3;
-	genericStyleCustomizeMenu();
-}
 
 //-----------------
 //-- GENERAL STYLE
@@ -538,6 +526,10 @@ private function genericStyleCustomizeMenu():void {
 	outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
 	outputText("Skin tone: " + player.skinTone + "\n");
 	outputText("Hair color: " + player.hairColor + "\n");
+	if (player.hasCock()) {
+		outputText("Cock size: " + player.cocks[0].cockLength + "\" long, " + player.cocks[0].cockThickness + "\" thick\n");
+	}
+	outputText("Breast size: " + player.breastCup(0) + "\n");
 	menu();
 	addButton(0, "Complexion", menuSkinComplexion);
 	addButton(1, "Hair Color", menuHairColor);
@@ -548,6 +540,8 @@ private function genericStyleCustomizeMenu():void {
 		addButton(2, "Beard Style", menuBeardSettings);
 	}
 	addButton(3, "Set Height", setHeight);
+	if (player.hasCock()) addButton(5, "Cock Size", menuCockLength);
+	if (player.gender > 1) addButton(6, "Breast Size", menuBreastSize);
 	addButton(9, "Done", menuPerk);
 }
 
@@ -622,7 +616,7 @@ private function menuBeardSettings():void {
 	menu()
 	addButton(0, "Style", menuBeardStyle);
 	addButton(1, "Length", menuBeardLength);
-	addButton(4, "Back", genericStyleCustomizeMenu);
+	addButton(9, "Back", genericStyleCustomizeMenu);
 }
 private function menuBeardStyle():void {
 	outputText("What beard style would you like?", true);
@@ -718,6 +712,52 @@ private function confirmHeight():void {
 	outputText("You'll be " + Math.floor(player.tallness / 12) + " feet and " + player.tallness % 12 + " inches tall. Is this okay with you?", true)
 	doYesNo(genericStyleCustomizeMenu, setHeight);
 }	
+
+//-----------------
+//-- COCK LENGTH
+//-----------------
+private function menuCockLength():void {
+	clearOutput();
+	outputText("You can choose a cock length between 4 and 8 inches. Your starting cock length will also affect starting cock thickness. \n\nCock type and size can be altered later in the game through certain items.");
+	menu();
+	addButton(0, "4\"", chooseCockLength, 4);
+	addButton(1, "4.5\"", chooseCockLength, 4.5);
+	addButton(2, "5\"", chooseCockLength, 5);
+	addButton(3, "5.5\"", chooseCockLength, 5.5);
+	addButton(4, "6\"", chooseCockLength, 6);
+	addButton(5, "6.5\"", chooseCockLength, 6.5);
+	addButton(6, "7\"", chooseCockLength, 7);
+	addButton(7, "7.5\"", chooseCockLength, 7.5);
+	addButton(8, "8\"", chooseCockLength, 8);
+	addButton(9, "Back", genericStyleCustomizeMenu);
+}
+
+private function chooseCockLength(length:Number):void {
+	player.cocks[0].cockLength = length;
+	player.cocks[0].cockThickness = (length / 5);
+	genericStyleCustomizeMenu();
+}
+
+//-----------------
+//-- BREAST SIZE
+//-----------------
+private function menuBreastSize():void {
+	clearOutput();
+	outputText("You can choose a breast size. Breast size may be altered later in the game.");
+	menu();
+	if (player.femininity < 50) addButton(0, "Flat", chooseBreastSize, 0);
+	if (player.femininity < 60) addButton(1, "A-cup", chooseBreastSize, 1);
+	if (player.femininity >= 40) addButton(2, "B-cup", chooseBreastSize, 2);
+	if (player.femininity >= 50) addButton(3, "C-cup", chooseBreastSize, 3);
+	if (player.femininity >= 60) addButton(4, "D-cup", chooseBreastSize, 4);
+	if (player.femininity >= 70) addButton(5, "DD-cup", chooseBreastSize, 5);
+	addButton(9, "Back", genericStyleCustomizeMenu);
+}
+
+private function chooseBreastSize(size:int):void {
+	player.breastRows[0].breastRating = size;
+	genericStyleCustomizeMenu();
+}
 
 //-----------------
 //-- STARTER PERKS
@@ -1034,8 +1074,8 @@ private function confirmName():void {
 			}
 			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 		}
-		newGameGo();
 		outputText("\n\n\n<b>You must select a name.</b>", false);
+		doNext(newGameGo);
 		return;
 	}
 	else if(customName(mainView.nameBox.text)) {
@@ -1049,13 +1089,11 @@ private function confirmName():void {
 	}
 	player.short = mainView.nameBox.text;
 	mainView.nameBox.visible = false;
-	if(unlockedHerm == true){
-		outputText("\n\n\n\nAre you a man or a woman? \n\nOr a hermaphrodite as you've unlocked hermaphrodite option!", true);
-		simpleChoices("Man", chooseMale, "Woman", chooseFemale, "Herm", chooseHerm, "", 0, "", 0);
-	}
-	else{
-		outputText("\n\n\n\nAre you a man or a woman?", true);
-		simpleChoices("Man", chooseMale, "Woman", chooseFemale, "", 0, "", 0, "", 0);			
+	outputText("\n\n\n\nAre you a man or a woman?", true);
+	simpleChoices("Man", chooseMale, "Woman", chooseFemale, "", 0, "", 0, "", 0);
+	if (unlockedHerm) {
+		outputText("\n\nOr a hermaphrodite as you've unlocked hermaphrodite option!");
+		addButton(2, "Herm", chooseHerm);
 	}
 }
 

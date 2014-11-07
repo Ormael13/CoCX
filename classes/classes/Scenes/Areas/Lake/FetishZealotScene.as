@@ -80,7 +80,7 @@ package classes.Scenes.Areas.Lake
 		public function zealotLossRape():void
 		{
 			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
-				clearOutput();
+				doSFWloss();
 				cleanupAfterCombat();
 				return;
 			}

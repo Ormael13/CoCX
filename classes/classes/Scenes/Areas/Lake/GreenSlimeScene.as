@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Areas.Lake{
 	import classes.*;
+	import classes.GlobalFlags.*;
 
 	public class GreenSlimeScene extends AbstractLakeContent{
 //serviceLowCorruption();
@@ -788,6 +789,11 @@ internal function rapeOozeWithMilk():void {
 
 		public function slimeLoss():void
 		{
+			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
+				doSFWloss();
+				cleanupAfterCombat();
+				return;
+			}
 			outputText("", true);
 			doNext(1);
 			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {

@@ -274,7 +274,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.NorthExitCondition == null || tRoom.NorthExitCondition())
 				{
-					addButton(0, "North", move, tRoom.NorthExit);
+					addButton(0, "North", move, tRoom.NorthExit, 1/12);
 				}
 			}
 			
@@ -282,7 +282,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.EastExitCondition == null || tRoom.EastExitCondition())
 				{
-					addButton(1, "East", move, tRoom.EastExit);
+					addButton(1, "East", move, tRoom.EastExit, 1/12);
 				}
 			}
 			
@@ -290,7 +290,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.SouthExitCondition == null || tRoom.SouthExitCondition())
 				{
-					addButton(6, "South", move, tRoom.SouthExit);
+					addButton(6, "South", move, tRoom.SouthExit, 1/12);
 				}
 			}
 			
@@ -298,7 +298,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.WestExitCondition == null || tRoom.WestExitCondition())
 				{
-					addButton(5, "West", move, tRoom.WestExit);
+					addButton(5, "West", move, tRoom.WestExit, 1/12);
 				}
 			}
 			
@@ -311,10 +311,10 @@ package classes.Scenes.Dungeons.D3
 			addButton(9, "Masturbate", eventParser, 10);
 		}
 		
-		public function move(roomName:String):void
+		public function move(roomName:String, timeToPass:Number = 0):void
 		{
 			trace("Entering room", roomName);
-			
+			cheatTime(timeToPass);
 			clearOutput();
 			
 			if (rooms[roomName] == undefined)

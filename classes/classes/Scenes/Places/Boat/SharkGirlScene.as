@@ -257,6 +257,11 @@ Putting it on: (Lust increases)
 -------------------------------*/
 //Loss Rape scenes:
 internal function sharkLossRape():void {
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		doSFWloss();
+		cleanupAfterCombat();
+		return;
+	}
 	outputText("", true);
 	spriteSelect(70);
 	//Genderless:

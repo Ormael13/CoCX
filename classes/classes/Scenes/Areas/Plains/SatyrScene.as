@@ -76,21 +76,25 @@ private function consensualSatyrFuck(loc:int = 0):void {
 	outputText("\n\nIt suddenly dawns upon you that this satyr might not have the most noble intentions... you're pretty sure there's some sort of aphrodisiac inside this beverage he offered you, judging by the heat that spreads through your body.");
 	//Trick him only available to High Int PCs and Skip Foreplay only available to High Libido PCs.
 
-	var trick:Function = null;
 	//(if High Int)
 	if(player.inte > 60 && player.lust <= 99) {
 		outputText("\n\nPerhaps you could trick him into knocking himself out with it?");
-		trick = trickZeSatyr;
+		addButton(0, "Trick Him", trickZeSatyr);
 	}
-	var foreplay:Function = null;
 	//(if High Libido)
 	if(player.lib > 60) {
 		outputText("\n\nThat cock of his looks yummy, though... there's no need for all this ruse, you're pretty sure you know how to handle a dick; maybe you should skip foreplay and let him fill you up...");
-		foreplay = skipForeplay;
+		addButton(2, "Skip Foreplay", skipForeplay);
 	}
+	if (player.lust >= 33) {
+		outputText("\n\nYou could drink just one more and have sex with him if you like.");
+		addButton(3, "Drink & Sex", drinkAndSex);
+	}
+	
 	//What should you do?
 	//[Trick him] [Keep Drinking] [Skip Foreplay] [Leave]
-	simpleChoices("Trick Him",trick,"Keep Drinking",keepDrinking,"Skip Foreplay",foreplay,"",0,"Leave",leavePartySatyr);
+	addButton(1, "Keep Drinking", keepDrinking);
+	addButton(4, "Leave", leavePartySatyr);
 }
 
 //[=Keep Drinking=]
@@ -164,6 +168,20 @@ private function skipForeplay():void {
 	outputText("\n\nThe satyr looks surprised, then grins.  \"<i>Very well, if you insist...</i>\" he purrs, reaching out to grab and push you to the ground, tearing roughly at your [armor] until you are naked.");
 	
 	//Play appropriate willing sex scene//
+	doNext(willinglyBoneSatyr);
+}
+
+private function drinkAndSex():void {
+	clearOutput();
+	spriteSelect(98);
+	outputText("You grin at the satyr's encouragement and continue drinking, setting on a slower pace so you won't spill any more.  You tell him that you'd like to have sex with him.");
+	
+	outputText("\n\nThe satyr gladly takes the empty skin and puts it away.  He nods in agreement, giving you the signal to slowly strip your [armor] off and present your ");
+	if (player.hasCock()) outputText("[cock]");
+	if (player.hasCock() && player.hasVagina()) outputText(", ");
+	if (player.hasVagina()) outputText("[vagina]");
+	if (player.hasCock() || player.hasVagina()) outputText(" and ");
+	outputText("[butt] to the satyr.  He looks up and down at you.  You waste no time caressing his cock and at the same time, he caresses your [butt].");
 	doNext(willinglyBoneSatyr);
 }
 
@@ -320,7 +338,7 @@ private function malesTakeAdvantageOfSatyrs():void {
 
 
 //Willing Sex (Z)
-//from skip foreplay
+//from skip foreplay or drink & sex
 //always impregnates PC
 private function willinglyBoneSatyr():void {
 	clearOutput();

@@ -44,7 +44,13 @@ package classes.Scenes.Monsters
 		//RAEP TEXT 1
 		public function goblinRapesPlayer():void
 		{
+			
 			spriteSelect(24);
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				doSFWloss();
+				cleanupAfterCombat();
+				return;
+			}
 			outputText("", true);
 			if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
 				//[Female Bimbo Loss Against Goblin]

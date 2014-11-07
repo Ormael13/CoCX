@@ -1271,6 +1271,11 @@ package classes.Scenes.Monsters
 			if (inCombat()) cleanupAfterCombat();
 		}
 		public function impRapesYou():void {
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				doSFWloss();
+				cleanupAfterCombat();
+				return;
+			}
 			outputText("", true);
 			if ((player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && !player.isTaur() && player.hasVagina() && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText(images.showImage("imp-loss-female-fuck"), false);
@@ -1798,6 +1803,11 @@ package classes.Scenes.Monsters
 		//MALE LOSE
 		private function loseToImpLord():void {
 			clearOutput();
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				doSFWloss();
+				cleanupAfterCombat();
+				return;
+			}
 			outputText(images.showImage("implord-loss-male"), false);
 			outputText("Unable to control your lust you fall to the ground, remove your " + player.armorName + " and begin masturbating furiously.  The powerful imp saunters over to you smirking evilly as he towers over your fallen form. You look up at him nervously.  He grabs your chin with one of his clawed hands, while the other digs through his satchel.  He pulls out a vial filled with glowing green liquid, and pops the cork stopper off with his thumb. Before you can react, the demon forces open your mouth and pours the liquid in.  Instinct reacts fast then logic and you swallow the substance as it's poured down your throat.");
 			outputText("\n\nYou cough and splutter, grabbing your gut, as a hot pain fills your stomach.  The imp laughs as you roll around in agony for several long moments, before the burning turns to an arousing warmth that spreads to your [hips] and [asshole].  Groaning, you feel your cheeks flush with arousal, and your eyes glaze over once more with insatiable lust.");

@@ -370,8 +370,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.0_mod_0.9.4";
-			version = ver + " (<b>Moar bugfixes</b>)";
+			ver = "0.9.0_mod_0.9.5";
+			version = ver + " (<b>Dungeon Maps</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

@@ -60,6 +60,11 @@ package classes.Scenes.Monsters
 		//[LOSS SEXAHNZ]
 		public function goblinShamanBeatYaUp():void {
 			clearOutput();
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				doSFWloss();
+				cleanupAfterCombat();
+				return;
+			}
 			var x:int;
 			if(player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious shaman saunters up, pink arousing flames glow in her left hand. She exposes your nether regions and throws the pink flames right into your groin! You are unable to fight back. \n\n");
 

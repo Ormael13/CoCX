@@ -61,6 +61,11 @@ package classes.Scenes.Monsters
 		//[LOSS SEXAHNZ]
 		public function gobboWarriorBeatYaUp():void {
 			clearOutput();
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				doSFWloss();
+				cleanupAfterCombat();
+				return;
+			}
 			var x:int;
 			if(player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious warrior saunters up, a pair of fluid filled potions in her hands. She forcibly jams the Lust Drafts, emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
 

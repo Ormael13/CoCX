@@ -57,6 +57,11 @@ package classes.Scenes.Areas.HighMountains
 
 		public function harpyLossU():void
 		{
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				doSFWloss();
+				cleanupAfterCombat();
+				return;
+			}
 			//NO MALE RAPE IF DICK TOO BIG
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());

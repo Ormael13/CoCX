@@ -775,6 +775,29 @@ public function getButtonToolTipText(buttonText:String):String
 
 
 	//-----------
+	//-- CHAR BUILD 
+	//-----------
+	if (kGAMECLASS.tooltipLoc == "HermBuild") {
+		if (buttonText == "Fem. Slender") {
+			toolTipText = "Feminine build. \n\nWill make you a futanari.";
+		}
+		if (buttonText == "Fem. Average") {
+			toolTipText = "Feminine build. \n\nWill make you a futanari.";
+		}
+		if (buttonText == "Fem. Curvy") {
+			toolTipText = "Feminine build. \n\nWill make you a futanari.";
+		}
+		if (buttonText == "Mas. Lean") {
+			toolTipText = "Masculine build. \n\nWill make you a maleherm.";
+		}
+		if (buttonText == "Mas. Average") {
+			toolTipText = "Masculine build. \n\nWill make you a maleherm.";
+		}
+		if (buttonText == "Mas. Thick") {
+			toolTipText = "Masculine build. \n\nWill make you a maleherm.";
+		}
+	}
+	//-----------
 	//-- COMBAT 
 	//-----------
 	//Combat Menu
@@ -1078,11 +1101,13 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("Deep Cave") != -1) {
 		toolTipText = "Visit the cave you've found in the Deepwoods.";
-		if (dungeons.checkDeepCaveClear()) toolTipText += "\n\nZetaz lived in the cave until you've defeated him. \n\nCLEARED";
+		if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) toolTipText += "\n\nZetaz lived in the cave until you've defeated him.";
+		if (dungeons.checkDeepCaveClear()) toolTipText += "\n\nCLEARED";
 	}
 	if(buttonText.indexOf("Stronghold") != -1) {
 		toolTipText = "Visit the stronghold in the high mountains that belongs to Lethice, the demon queen.";
-		//if (dungeons.checkDeepCaveClear()) toolTipText += "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the game! \n\nCLEARED";
+		//if (flags[kFLAGS.LETHICE_DEFEATED] > 0) toolTipText += "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the game!";
+		//if (dungeons.checkStrongholdClear()) toolTipText += "\n\nCLEARED";
 	}
 	if(buttonText.indexOf("Desert Cave") != -1) {
 		toolTipText = "Visit the cave you've found in the desert.";
@@ -1090,7 +1115,7 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("Phoenix Tower") != -1) {
 		toolTipText = "Re-visit the tower you went there as part of Helia's quest.";
-		if (dungeons.checkPhoenixTowerClear()) toolTipText += "\n\nYou've helped Helia in the quest. \n\nCLEARED";
+		if (dungeons.checkPhoenixTowerClear()) toolTipText += "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED";
 	}
 	//FOLLOWERS
 	//Rathazul
@@ -2127,7 +2152,7 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
 		childStats += "<b>Children With Izma (Tigersharks):</b> " + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + "\n";
 	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 && flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
-		childStats += "<b>Total Children with Izma:</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + "\n";
+		childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
 		
 	if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
@@ -2429,7 +2454,7 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.statusAffectv1(StatusAffects.Luststick) > 0)
 		statEffects += "Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining\n";
 		
-	if (player.statusAffectv1(StatusAffects.Luststick) > 0)
+	if (player.statusAffectv1(StatusAffects.LustStickApplied) > 0)
 		statEffects += "Luststick Application - " + Math.round(player.statusAffectv1(StatusAffects.LustStickApplied)) + " hours remaining\n";
 		
 	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0)
@@ -2846,6 +2871,14 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 			}
 			player.vaginas[vIndex].vaginalLooseness++;
 		}
+	}
+}
+
+public function doSFWloss():void {
+	clearOutput();
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		if (player.HP <= 0) outputText("You collapse from your injuries.");
+		else outputText("You collapse from your overwhelming desires.");
 	}
 }
 

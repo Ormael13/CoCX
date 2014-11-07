@@ -4190,7 +4190,7 @@ package classes.Scenes.Dungeons
 			dungeons.setDungeonButtons(roomSandMotherThrone, roomCaveCommons, null, null);
 		}
 		public function roomSandMotherThrone():void {
-			kGAMECLASS.dungeonLoc = 37;
+			kGAMECLASS.dungeonLoc = 38;
 			kGAMECLASS.tooltipLoc = "SandMother"
 			outputText("<b><u>Sand Mother's Throne</u></b>\n", true);
 			outputText("This chamber is lit by swirling vortexes of magical colors, each hue dancing around another in coordinated motions.  The walls are made of hewn sandstone inlaid with ivory engravings that appear to depict what must be flowing milk.  Ahead there is a huge, white throne, also made from ivory.  It is a magnificent piece of craftsmanship.  Clearly, you have found the leader's throne room.  There is a robed figure atop it.");

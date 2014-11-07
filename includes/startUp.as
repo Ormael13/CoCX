@@ -538,6 +538,7 @@ public function creditsScreen():void {
 	outputText("<ul>");
 	outputText("<li> Kitteh6660 (Mod Creator)</li>");
 	outputText("<li> Wastarce (Bug Reporting)</li>");
+	outputText("<li> Sorenant (Bug Reporting)</li>");
 	outputText("</ul>");
 	outputText("<b>Typo Reporting</b>\n");
 	outputText("<ul>");

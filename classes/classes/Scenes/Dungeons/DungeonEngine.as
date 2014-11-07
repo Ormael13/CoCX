@@ -16,6 +16,8 @@ package classes.Scenes.Dungeons
 		//public var lethicecastle:LethiceCastle = new LethiceCastle;
 		public var cabin:YourCabin = new YourCabin;
 		
+		public var map:DungeonMap = new DungeonMap;
+		
 		public function DungeonEngine() 
 		{
 			
@@ -66,28 +68,8 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == 34) desertcave.roomEastHall2();
 			if (kGAMECLASS.dungeonLoc == 35) desertcave.roomCumWitchBedroom();
 			if (kGAMECLASS.dungeonLoc == 36) desertcave.roomCumWitchOffice();
-			if (kGAMECLASS.dungeonLoc == 37) desertcave.roomSandMotherThrone();
-			//Lethice's Castle
-			/*if (kGAMECLASS.dungeonLoc == 38) lethicecastle.roomEntrance();
-			if (kGAMECLASS.dungeonLoc == 39) lethicecastle.roomTunnel1();
-			if (kGAMECLASS.dungeonLoc == 40) lethicecastle.roomTunnel2();
-			if (kGAMECLASS.dungeonLoc == 41) lethicecastle.roomKeepEdge();
-			if (kGAMECLASS.dungeonLoc == 42) lethicecastle.roomEntryway();
-			if (kGAMECLASS.dungeonLoc == 43) lethicecastle.roomSouthCourtyard();
-			if (kGAMECLASS.dungeonLoc == 44) lethicecastle.roomSouthEastCourtyard();
-			if (kGAMECLASS.dungeonLoc == 45) lethicecastle.roomGreatLift();
-			if (kGAMECLASS.dungeonLoc == 46) lethicecastle.roomSouthWestCourtyard();
-			if (kGAMECLASS.dungeonLoc == 47) lethicecastle.roomSouthWestWalk();
-			if (kGAMECLASS.dungeonLoc == 48) lethicecastle.roomWestWalk();
-			if (kGAMECLASS.dungeonLoc == 49) lethicecastle.roomNorthWestWalk();
-			if (kGAMECLASS.dungeonLoc == 50) lethicecastle.roomNorthWestCourtyard();
-			if (kGAMECLASS.dungeonLoc == 51) lethicecastle.roomNorthCourtyard();
-			if (kGAMECLASS.dungeonLoc == 52) lethicecastle.roomNorthEastCourtyard();
-			if (kGAMECLASS.dungeonLoc == 53) lethicecastle.roomNorthEastWalk();
-			if (kGAMECLASS.dungeonLoc == 54) lethicecastle.roomEastWalk();
-			if (kGAMECLASS.dungeonLoc == 55) lethicecastle.roomSouthEastWalk();
-			if (kGAMECLASS.dungeonLoc == 56) lethicecastle.roomCourtyardSquare();*/
-			
+			if (kGAMECLASS.dungeonLoc == 37) desertcave.roomSacrificalAltar();
+			if (kGAMECLASS.dungeonLoc == 38) desertcave.roomSandMotherThrone();
 		}
 		
 		public function checkFactoryClear():Boolean {
@@ -156,6 +138,7 @@ package classes.Scenes.Dungeons
 			if (southFunction != null) addButton(6, "South", navigateToRoom, southFunction);
 			if (westFunction != null) addButton(5, "West", navigateToRoom, westFunction);
 			if (eastFunction != null) addButton(1, "East", navigateToRoom, eastFunction);
+			addButton(7, "Map", map.displayMap);
 			addButton(8, "Inventory", eventParser, 1000);
 			if (player.lust >= 30) addButton(9, "Masturbate", eventParser, 10);
 		}
