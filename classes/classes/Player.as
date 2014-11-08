@@ -1764,7 +1764,7 @@ use namespace kGAMECLASS;
 			var maxInt:int = 100;
 			
 			//Alter max speed if you have oversized parts. (Realistic mode)
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
 				//Balls
 				var tempSpeedCap:Number = 100;
@@ -1818,13 +1818,16 @@ use namespace kGAMECLASS;
 			}
 			if (catScore() >= 4) {
 				maxSpe += 5;
-				maxInt += 5;
+			}
+			if (bunnyScore() >= 4) {
+				maxSpe += 10;
 			}
 			if (raccoonScore() >= 4) {
 				maxSpe += 15;
 			}
 			if (horseScore() >= 4 && !isTaur() && !isNaga()) {
 				maxSpe += 15;
+				maxTou += 10;
 				maxInt -= 10;
 			}
 			if (gooScore() >= 3) {
@@ -1843,7 +1846,7 @@ use namespace kGAMECLASS;
 			if (stats == "str" || stats == "strength") return maxStr;
 			else if (stats == "tou" || stats == "toughness") return maxTou;
 			else if (stats == "spe" || stats == "speed") return maxSpe;
-			else if (stats == "inte" || stats == "intelligence") return maxInt;
+			else if (stats == "inte" || stats == "int" || stats == "intelligence") return maxInt;
 			else return 100;
 		}
 		

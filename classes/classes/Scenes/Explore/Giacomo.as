@@ -372,7 +372,7 @@ package classes.Scenes.Explore
 			if (player.hasKeyItem("All-Natural Self-Stimulation Belt") >= 0)
 			{
 				outputText("<b>You already own an All-Natural Self-Stimulation Belt!</b>", true);
-				doNext(2018);
+				doNext(browseErotica);
 				return;
 			}
 			outputText("The merchant places his bag on the ground. He reaches into one of his purses and pulls out a pair of gloves. After putting them on, he reaches into his bag and pulls out what appears to be a chastity belt. The device has a clearly organic look to it. In the center of the front cover is a nodule. You have heard of similar devices. They normally have a dildo attached to them to pleasure women. ", true);
@@ -411,7 +411,7 @@ package classes.Scenes.Explore
 			if (player.hasKeyItem("Plain Onahole") >= 0)
 			{
 				outputText("<b>You already own a Plain Onahole!</b>", true);
-				doNext(2018);
+				doNext(browseErotica);
 				return;
 			}
 			outputText("Giacomo takes out a pink cylinder from his bag. It appears to be sealed at one end and the cap is topped with a piece of rubber that has a vertical slit. \"<i>Friend</i>,\" Giacomo starts, \"<i>when you do not want to go through all of the shit to bag a woman, this is the thing for you. It never says no, it never bitches and it never takes everything you own in a divorce. All you do is get hard, slip your cock in the slit, work it at your pace and unload. Simple is as simple does. Take the top off for easy clean up and there you go! As you can see it is portable and is much safer than risking some social disease from an errant barmaid. I have plenty of these in stock and I can let it go for 20 gems. What say you?</i>\"", true);
