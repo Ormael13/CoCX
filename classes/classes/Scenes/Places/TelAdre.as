@@ -83,7 +83,7 @@ public function discoverTelAdre():void {
 	else {
 		outputText("While out prowling the desert dunes you manage to spy the desert city of Tel'Adre again.  You could hike over to it again, but some part of you fears being rejected for being 'impure' once again.  Do you try?", false);
 	}
-	doYesNo(encounterTelAdre,13);
+	doYesNo(encounterTelAdre,camp.returnToCampUseOneHour);
 }
 
 //player chose to approach the city in the distance
@@ -113,7 +113,7 @@ private function telAdreCrystal():void {
 	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.cor >= 70) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n", false);
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//-50+ corruption or corrupted Jojo
@@ -232,7 +232,7 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 	addButton(6, "Pawn", oswaldPawn);
 	addButton(7, "Tower", library.visitZeMagesTower);
 	addButton(8, "Weapons", weaponShop);
-	addButton(9, "Leave", eventParser, 13);
+	addButton(9, "Leave", camp.returnToCampUseOneHour);
 }
 
 private function armorShops():void {
@@ -1000,12 +1000,15 @@ private function oswaldPawnMenu():void { //Moved here from Inventory.as
 	spriteSelect(47);
 	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
 	menu();
+	var totalItems:int = 0;
 	for (var slot:int = 0; slot < 5; slot++) {
-		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value > 1) {
+		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 			outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
 			addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+			totalItems += player.itemSlots[slot].quantity;
 		}
 	}
+	if (totalItems > 1) addButton(7, "Sell All", oswaldPawnSellAll);
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
 		case 2: addButton(5, "Kath's Alley", katherine.visitKatherine); break;
@@ -1023,6 +1026,22 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
 	else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 	player.itemSlots[slot].removeOneItem();
+	player.gems += itemValue;
+	statScreenRefresh();
+	doNext(oswaldPawn);
+}
+
+private function oswaldPawnSellAll():void {
+	spriteSelect(47);
+	var itemValue:int = 0;
+	clearOutput();
+	for (var slot:int = 0; slot < 5; slot++) {
+		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+			itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / 2);
+			player.itemSlots[slot].quantity = 0;
+		}
+	}
+	outputText("You lay out all the items you're carrying on the counter in front of Oswald.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 	player.gems += itemValue;
 	statScreenRefresh();
 	doNext(oswaldPawn);
@@ -1447,8 +1466,7 @@ private function debitClothes(itype:ItemType):void {
 	spriteSelect(61);
 	player.gems -= itype.value;
 	statScreenRefresh();
-	menuLoc = 10;
-	inventory.takeItem(itype);
+	inventory.takeItem(itype, tailorShoppe);
 }
 
 public function armorShop():void {
@@ -1510,8 +1528,7 @@ private function debitWeapon(itype:ItemType):void {
 	spriteSelect(80);
 	player.gems -= itype.value;
 	statScreenRefresh();
-	menuLoc = 15;
-	inventory.takeItem(itype);
+	inventory.takeItem(itype, weaponShop);
 }
 private function armorBuy(itype:ItemType):void {
 	spriteSelect(64);
@@ -1534,8 +1551,7 @@ private function debitArmor(itype:ItemType):void {
 	outputText("", true);
 	player.gems -= itype.value;
 	statScreenRefresh();
-	menuLoc = 9;
-	inventory.takeItem(itype);
+	inventory.takeItem(itype, armorShop);
 }
 
 private function urtaIsABadass():void {
@@ -1610,7 +1626,7 @@ private function gymMenu():void {
 	var hyenaB:String = "Hyena";
 	var ifris2:Function =null;
 	var ifrisB:String = "Girl";
-	var lottie2:* = lottie.lottieAppearance(false);
+	var lottie2:Function = lottie.lottieAppearance(false);
 	var lottieB:String = "Pig-Lady";
 	var loppe2:Function =null;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0)
@@ -1642,7 +1658,7 @@ private function gymMenu():void {
 			"Jog",goJogging,
 			"LiftWeights",weightLifting,
 			"Life Member",membership,
-			"Lottie",lottie2,
+			lottieB,lottie2,
 			"Loppe",loppe2,
 			"Leave",telAdreMenu);
 }
@@ -1703,9 +1719,9 @@ private function weightLifting():void {
 		menu();
 		addButton(0,"\"Showers\"",sexMachine.exploreShowers);
 		addButton(1,"Showers",brooke.repeatChooseShower);
-		addButton(4,"Leave",eventParser,13);
+		addButton(4,"Leave",camp.returnToCampUseOneHour);
 	}
-	else doYesNo(sexMachine.exploreShowers,13);
+	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
 }
 
 private function goJogging():void {
@@ -1789,9 +1805,9 @@ private function goJogging():void {
 		menu();
 		addButton(0,"\"Showers\"",sexMachine.exploreShowers);
 		addButton(1,"Showers",brooke.repeatChooseShower);
-		addButton(4,"Leave",eventParser,13);
+		addButton(4,"Leave",camp.returnToCampUseOneHour);
 	}
-	else doYesNo(sexMachine.exploreShowers,13);
+	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
 }
 
 private function yaraSex(girl:Boolean = true):void {
@@ -1973,7 +1989,7 @@ private function fuckYvonneInZeBlacksmith():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.YVONNE_FUCK_COUNTER]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //*Typical buy text goes here. Options are now Yes/No/Flirt*
@@ -2034,7 +2050,7 @@ private function flirtWithVictoria(itype:ItemType):void {
 
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

@@ -251,7 +251,7 @@ package classes.Scenes.Areas.Bog
 				outputText("  Once free you check your gem pouch and realize the " + this.short + " took " + gemsLost + " of your gems.");
 			else if (player.gems == 1)
 				outputText("  Once free you check your gem pouch and realize the " + this.short + " took your only gem.");
-			return 13; //Only use up one hour after combat loss
+			return 1; //Only use up one hour after combat loss
 		}
 		
 		public function Phouka(phoukaName:String)

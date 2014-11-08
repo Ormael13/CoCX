@@ -42,7 +42,7 @@ private function noMeetingKaijus():void {
 	clearOutput();
 	outputText("You continue rowing on, away from the hilly island.");
 	//[There is still a chance of finding the hill later]
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If yes]
@@ -92,7 +92,7 @@ private function insultTheKaijuFirstMeeting():void {
 		outputText("Perhaps not the smartest thing to do towards such a giant, you decide to mock her obvious insecurities over her body image.  The word 'fat' barely has time to leave your lips when in a rage she puffs up her lips and blows, sending you and your boat racing through the lake out of sight.  Sometime later the boat crashes back on shore, your hair and nerves a little windswept from the fast ride.");
 		//[Giant turtle no longer encounter-able]
 		flags[kFLAGS.KAIJU_DISABLED] = 1;
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -105,7 +105,7 @@ private function yesBurnDatClit():void {
 	//[Lust is increased and giant turtle girl is no longer encounter-able][End whitefire scene]
 	dynStats("lus", 15);
 	flags[kFLAGS.KAIJU_DISABLED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If no] (Scene returns to regular blowjob/urethral insertion scene.)
@@ -123,7 +123,7 @@ private function corruptKaijuInsertion():void {
 	//[Corruption increases slightly and giant turtle girl is no longer encounter-able]
 	dynStats("lus", 50, "cor", 1);
 	flags[kFLAGS.KAIJU_DISABLED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If compliment]
@@ -145,7 +145,7 @@ private function stopItPlease():void {
 	spriteSelect(103);
 	outputText("You cry out and wave the inquisitive hand away.  You tell her that you mean no offense, but at such a size and strength disparity you are afraid of what a grip from such a woman could do accidentally.  She seems a bit saddened at that, but makes no further attempt to grab you.");
 	//[Giant turtle girl is still encounter-able]
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If let her]
@@ -194,7 +194,7 @@ private function letKaijuHaveWayWithYou():void {
 	outputText("\n\n\"<i>My, that was a mighty big hug.  I think I'll need another nap.  Come visit me again some time,</i>\" she says, slowly putting you down in your boat.  You slowly roll away as the jolly green giantess giggles and slowly wades off.");
 	//[Giant turtle girl now encounter-able at Boat and Swamp, corruption increases slightly]
 	dynStats("cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If flirt]
@@ -267,7 +267,7 @@ private function flirtWithKaiju():void {
 	outputText("\n\nYou wave goodbye to the giant green girl as you begin to row away.");
 	//[Corruption increases, giant turtle girl now encounter-able at Boat and Swamp]
 	dynStats("cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Second/Repeatable encounter/s at Boat
@@ -334,7 +334,7 @@ private function kaijuRepeatBoobHug():void {
 	outputText("\n\n\"<i>My, that was a mighty big hug.  I think I'll need another nap. Come visit me again some time,</i>\" she says, slowly putting you down in your boat.  You slowly roll away as the jolly green giantess giggles and slowly wades off.");
 	//[Giant turtle girl now encounter-able at Boat and Swamp, corruption increases slightly]
 	flags[kFLAGS.KAIJU_BAD_END_COUNTER]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If Fuck] 
@@ -412,7 +412,7 @@ private function fuckThisGiantYouDumbCunt():void {
 	//[Corruption increases]
 	flags[kFLAGS.KAIJU_BAD_END_COUNTER]++;
 	dynStats("cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If Urethra Fuck]
@@ -443,7 +443,7 @@ private function urethraFuckDatGiantCock():void {
 	flags[kFLAGS.KAIJU_BAD_END_COUNTER]++;
 	player.orgasm();
 	dynStats("cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If Leave]
@@ -451,7 +451,7 @@ private function leaveRepeatKaiju():void {
 	clearOutput();
 	spriteSelect(103);
 	outputText("You politely decline any options and bid the green girl goodbye as you row away.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If Talk] 
@@ -493,7 +493,7 @@ private function talkToKaiju():void {
 		outputText("\n\nShe sighs, the conversation seeming to be at an end.");
 		flags[kFLAGS.KAIJU_TALK_CYCLE] = 0;
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	if(player.inte < 50) dynStats("int", 1);
 	if(player.lib > 50) dynStats("lib", -1);
 }
@@ -538,7 +538,7 @@ private function yesKaijuGimmePeepShowsMoar():void {
 	outputText("You make your appreciation of her exhibition known, indicating that you would like her to continue on.  Smiling at your suggestion, and more than willing to give an encore performance, she brings her hands down to her trembling cock, slowly tracing a finger up the length of her shaft before grabbing onto it with one hand while the other begins to rub the tip of the head with her palm.  Her hand, still slick with her own cunt juice, slides easily across her cock.  She begins to moan again, even more lewdly than last time.  Her hips begin to buck as she practically begins to fuck her hand.  Beads of precum begin to bubble up from her cock head, and she quickly wipes it on the palm of her free hand before bringing it towards her face to lick the mess off her palm, her body trembling from the sheer delight of drinking her own pre.  \"<i>Oh that's good!</i>\" she pants, bringing her hand back down to begin stroking her throbbing dick with both hands.  \"<i>Please, please watch me cum!</i>\" the giantess begs of you as she goes into high gear, giving her cock everything she's got left.  It isn't much longer before she erupts like a geyser, spraying hermy turtle girl cum high into the air, only for it to rain back down on the green girl.  Her hands begin to slide across her torso, gently massaging the sperm into her skin.");
 	//[Increase lust further, end corrupt/herm scene]
 	dynStats("lib", 1, "lus", 33);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If no] (Skip corrupt/herm scene)
@@ -548,7 +548,7 @@ private function noKaijuPeepShows():void {
 	outputText("\"<i>My goodness, it's so much better with a captivated audience!</i>\" she says, breathing heavily.  You thank her for the show as she places you back into your boat and giving it a push.  You row away, considering perhaps coming back for another show.");
 	//[Libido is increased by 1]
 	dynStats("lib", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //One off scenes
@@ -576,7 +576,7 @@ private function dontGetFutaTurtlesOffToday():void {
 	clearOutput();
 	spriteSelect(103);
 	outputText("You shake your head no, politely responding that you do not want to get her off right now.  \"<i>Oh, okay. I understand,</i>\" the giantess states, looking somewhat crestfallen.  You row away, leaving her and her new addition to themselves for the time being.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If Mock] 
@@ -607,7 +607,7 @@ private function mockDatTurtleGirl():void {
 	player.orgasm();
 	dynStats("cor", 1);
 	flags[kFLAGS.KAIJU_DISABLED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If yes]
@@ -636,7 +636,7 @@ private function helpNewFutaKaijuGetOff():void {
 	//[Corruption increases slightly, lust is decreased]
 	player.orgasm();
 	dynStats("cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If Incubi Drafts]
@@ -686,7 +686,7 @@ private function yesTurnKaijuFuta():void {
 	//[Corruption increases slightly, lust is decreased]
 	player.orgasm();
 	dynStats("cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Improved Bad End
@@ -723,7 +723,7 @@ private function flyAwayFromBadEnd():void {
 	clearOutput();
 	spriteSelect(103);
 	outputText("Flapping your wings at max speed you beat a hasty retreat!");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[End wings]

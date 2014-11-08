@@ -22,7 +22,7 @@ package classes.Scenes.Places
 			if(player.cor > 60) outputText(" or fuck", false);
 			outputText(".  The air is fresh, and the grass is cool and soft under your feet.   Soft waves lap against the muddy sand of the lake-shore, as if radiating outward from the lake.   You pass around a few bushes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n", false);
 			outputText("<b>You have discovered the lake boat!</b>\n(You may return and use the boat to explore the lake's interior by using the 'places' menu.)", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function boatExplore():void
 		{
@@ -63,11 +63,11 @@ package classes.Scenes.Places
 			switch (selector) {
 				case 0:
 					outputText("You row for nearly an hour, until your arms practically burn with exhaustion from all the rowing.", false);
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				case 1:
 					outputText("You give up on finding anything interesting, and decide to go check up on your camp.", false);
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				case 2:
 					sharkGirlScene.sharkGirlEncounter(1);

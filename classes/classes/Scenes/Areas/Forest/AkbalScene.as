@@ -719,7 +719,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("The aura pouring forth from this 'Akbal' is anything but god-like; you recognize the demon for what it truly is.  Yet its ivory teeth and sharp claws prove to you that it can make good on its threat.  What do you do?", false);
 			//Talk / Fight / Run
-			simpleChoices("Talk", superAkbalioTalk, "Fight", startuAkabalFightomon, "", 0, "", 0, "Leave", 13);
+			simpleChoices("Talk", superAkbalioTalk, "Fight", startuAkabalFightomon, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
 		}
 
 		//[Talk]
@@ -751,7 +751,7 @@ package classes.Scenes.Areas.Forest
 			outputText("", true);
 			outputText("You shake your head and rub the lust-filled jaguar behind the ear as you tell him you're busy.  The demon's eyes roll, and he licks your " + player.leg() + " before his eyes find an imp in the trees above the two of you.\n\n", false);
 			outputText("Knowing he's found a new toy, Akbal allows you to leave unmolested.", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//[Encounter if previously fought and won/raped him]
@@ -765,7 +765,7 @@ package classes.Scenes.Areas.Forest
 			else
 				outputText("dodging roll places you a good distance away from him.  Do you fight or flee?\n\n", false);
 			//Fight / Flee
-			simpleChoices("Fight", startuAkabalFightomon, "", 0, "", 0, "", 0, "Leave", 13);
+			simpleChoices("Fight", startuAkabalFightomon, "", 0, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
 		}
 
 		//[Encounter if previously fought and lost]
@@ -776,7 +776,7 @@ package classes.Scenes.Areas.Forest
 			outputText("A chorus of laughter sounds inside your mind as the jaguar demon, Akbal, drops to the ground in front of you.  His masculine voice says, \"<i>Well, if it isn't the defiant welp who, in all their great idiocy, has wandered into my territory again.  Will you submit, or do I have to teach you another harsh lesson?</i>\"\n\n", false);
 
 			//Submit / Fight / Run
-			simpleChoices("Submit", akbalSubmit, "Fight", startuAkabalFightomon, "", 0, "", 0, "Leave", 13);
+			simpleChoices("Submit", akbalSubmit, "Fight", startuAkabalFightomon, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
 		}
 
 		//[Fight]
@@ -864,7 +864,7 @@ package classes.Scenes.Areas.Forest
 					player.buttRating++;
 				}
 				player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
-				doNext(16);
+				doNext(camp.returnToCampUseEightHours);
 				return;
 			}
 			//Taur variant goez here
@@ -942,7 +942,7 @@ package classes.Scenes.Areas.Forest
 					player.buttRating++;
 				}
 				player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
-				doNext(16);
+				doNext(camp.returnToCampUseEightHours);
 				return;
 			}
 
@@ -1022,7 +1022,7 @@ package classes.Scenes.Areas.Forest
 				player.buttRating++;
 			}
 			player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
-			doNext(16);
+			doNext(camp.returnToCampUseEightHours);
 		}
 
 		//[General End]
@@ -1121,7 +1121,7 @@ package classes.Scenes.Areas.Forest
 
 				outputText("Jojo howls like a whore in heat, squirming around your still-pumping " + cockDescript(0) + " as his fuzzy sac shrinks, your rough thrusts forcing his body flat against the ground once his sex organs have returned to normal size.\n\nAfter your orgasms have subsided, Jojo smiles up at you and thanks you over and over for 'saving' him.  You pull out, an ocean of creamy white spilling down his already cum-splattered fur, framing his tail hole with leaking gobs of milky liquid.\n\n", false);
 				outputText("As you move away from the mouse, you step into a huge puddle of Jojo's creamy rodent cum and look back. You see that his dick, still trapped under his body and pointing behind the two of you, blasted long ropes of thick mouse spunk far into the depths of the forest.  Feeling the after-effects of your titanic orgasm, you lay next to your mousey whore and close your eyes, allowing him to curl up next to you as you both fall asleep, exhausted and beyond satisfied.\n\n", false);
-				doNext(14);
+				doNext(camp.returnToCampUseTwoHours);
 			}
 			//Without Fertility/Lots of Jizz Perk]
 			else
@@ -1130,7 +1130,7 @@ package classes.Scenes.Areas.Forest
 
 				outputText("Jojo's balls begin to shrink as he shoots his own seed, your weight forcing his body flat against the ground once his sac has shrunk to normal.  His tail still slides around inside your " + buttDescript() + ", spurring you to reward him with a few post-orgasm thrusts.  His bowels are hot and wet from your load, and you grind your " + cockDescript(0) + " around with a look of supreme bliss on your face.  Jojo groans as you pull out, releasing a stream of creamy white that slides down to his now normal sized balls. Well... normal for Jojo.\n\n", false);
 				outputText("As you move away from the mouse, you step into a huge puddle of Jojo's creamy rodent cum and look back. You see that his dick, still trapped under his body and pointing behind the two of you, blasted long ropes of thick mouse spunk far into the depths of the forest.  Feeling beyond satisfied, you give your mouse slut a quick scratch behind the ear as he passes out – cum splattered and smiling.", false);
-				doNext(14);
+				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
 
@@ -1222,7 +1222,7 @@ package classes.Scenes.Areas.Forest
 			dynStats("cor", 5);
 			player.slimeFeed();
 			player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
-			doNext(16);
+			doNext(camp.returnToCampUseEightHours);
 		}
 
 		//2. AKBAL'S MY BITCH
@@ -1256,7 +1256,7 @@ package classes.Scenes.Areas.Forest
 			outputText("You turn back, allowing the demon to finish cleaning himself and thankful he didn’t ambush you this time.");
 			if (player.lust < 33)
 				outputText("  Besides, you aren't aroused right now, anyway.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//{Choose Rape}
@@ -1395,7 +1395,7 @@ package classes.Scenes.Areas.Forest
 
 			player.orgasm();
 			dynStats("cor", 3);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function topAkbitchFromDaBottom():void
@@ -1462,7 +1462,7 @@ package classes.Scenes.Areas.Forest
 			dynStats("cor", 3);
 			if (player.hasVagina())
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//AMB Strength Scene
@@ -1533,7 +1533,7 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\nYou stand and Akbal’s legs flop from where you had them pinned to his chest.  You gather your [armor] and dress before aiming a wicked slap at Akbal’s tender cheeks and leaving him tied up for the imps and goblins you spy watching the two of you from the trees.\n\nYou tell him he is all theirs and share a conspiratorial grin as you head back to camp.");
 				player.orgasm();
 				dynStats("cor", 3);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else
 			{
@@ -1585,7 +1585,7 @@ package classes.Scenes.Areas.Forest
 				dynStats("cor", 3);
 				if (player.hasVagina())
 					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -1685,7 +1685,7 @@ package classes.Scenes.Areas.Forest
 			}
 			player.orgasm();
 			dynStats("cor", 3);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//AMB Toughness Scene
@@ -1837,7 +1837,7 @@ package classes.Scenes.Areas.Forest
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 			player.orgasm();
 			dynStats("cor", 3);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

@@ -136,7 +136,7 @@ private function helpScylla():void {
 	player.orgasm();
 	dynStats("lib", 4, "sen", 3, "cor", 2);
 	player.cumMultiplier += 2;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function dontHelpScylla():void {
@@ -145,7 +145,7 @@ private function dontHelpScylla():void {
 	outputText("", true);
 	outputText("You tell Scylla the demons have addicted her to cum and turn away before she can return.  You melt away into the crowd and leave her to her thoughts, knowing she'll end up on her knees soon enough.  You can't help but wonder if you did the right thing; suppressing your libido and preventing the possibility of taint was good, but then again, the nun looked about ready to starve...\n\nYou wrestle with your decision the whole way back to your camp, feeling fairly turned off by the time you get back.", false);
 	dynStats("lib", -2, "lus", -99);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -217,7 +217,7 @@ private function scyllaRoundIIPartIII():void {
 	player.cumMultiplier += 2;
 	if(model.time.hours > 5) model.time.days++;
 	model.time.hours = 5;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function scyllaRoundThreeCUM():void {
@@ -350,7 +350,7 @@ private function scyllaIIIFinisher():void {
 	outputText("When you finally rouse from your slumber, you understand why all the guys downstairs in the Wet Bitch looked like they'd been sucked dry. Your body is sore and you feel like you haven't had anything to drink in months. Scylla is next to you, plump and happy. She's managed to replace her irredeemably stained robe with a new, larger one, but it too is on the verge of tearing. Though her digestion seems to have handled most of your cum, her breasts have kept some of their weight, each as large as a basketball. Her belly has the slightest paunch, but apparently this is enough to sate her thirst because she gives you an affectionate pat on the shoulder and a smile so bright that the candles in the room seem dim.\n\n", false);
 
 	outputText("\"<i>Thank you so much,</i>\" she gushes. \"<i>Once again, you come to my rescue and teach me how to overcome my trials. You truly are my guardian angel. One of these days, I hope I'll be able to return the favor.</i>\" She favors you with a moist kiss on the forehead and springs from bed, energized and ready to do some good. You groan, roll over, and go back to sleep.", false);
-	doNext(15);
+	doNext(camp.returnToCampUseFourHours);
 }
 
 public function scyllaRoundIVGo():void {
@@ -506,14 +506,14 @@ private function scyllaPtIVEpilogue():void {
 	scyllaSprite();
 	outputText("", true);
 	outputText("You thank Scylla for everything and prepare to head back to Tel'Adre. The Wet Bitch has a long-delayed second drink with your name on it. As you're leaving, Scylla pats the imp Lord's head, still sticking out of her vice-like cleavage. \"<i>I think I will keep you around,</i>\" she muses, \"<i>To give you a chance to atone for your wicked ways. We'll have to keep you from scaring people, though. Maybe stick you in a fluffy teddy bear?</i>\" You shake your head and leave the imp Lord to the nun's tender mercies.", false);
-	doNext(15);
+	doNext(camp.returnToCampUseFourHours);
 }
 
 
 //Scylla- Addicts Anonymous (repeatable)
 public function scyllaAdictsAnonV():void {
 	scyllaSprite();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	if(flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] == 0) scyllaPtVFirstTime();
 	else scyllaPtVRepeat();
 	//Set scylla progression if not set yet!
@@ -629,7 +629,7 @@ private function scyllaPtVTakeAdvantage():void {
 	}
 	player.takeDamage(1);
 	dynStats("lus", -99);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -701,7 +701,7 @@ private function scyllaVTakeAdvantageWithExgartuan4():void {
 	dynStats("cor", 1);
 	player.cumMultiplier += 2;
 	player.changeStatusValue(StatusAffects.Exgartuan,2,24);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Share]	(First time)
@@ -743,7 +743,7 @@ private function scyllaPtVNoDiscussion():void {
 	scyllaSprite();
 	outputText("", true);
 	outputText("You fail to come up with a suitable explanation for your presence and politely excuse yourself.  AWKWARD!", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Marble's Milk]	(First time and Repeat)
 private function scyllaPtVMilk():void {
@@ -819,7 +819,7 @@ private function scyllaPtVMilkV():void {
 	outputText("Feeling pretty pleased with yourself, you add a skip to your step, belly jiggling all the way back to camp.", false);
 	//[Corruption Down]
 	dynStats("lus", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Share- Minotaur cum]	(First time and Repeat)
@@ -898,7 +898,7 @@ private function scyllaPtVCumV():void {
 	//[Sensitivity down ]
 	if(player.sens > 10) dynStats("sen", -1);
 	outputText("Abby weakly protests the theft, but Scylla's eyes are closed, lost in the cum-filled world between the goblin's defenseless legs. Pastie flutters overhead and laughs, drunkenly slurring something about 'just desserts,' but you can't concentrate on anything right now. Sleep sounds like such a good idea that you happily pass out. When you wake, you find the girls have gone, though Scylla cleaned up the room and left you a note and several drinks. She apologizes for any pain that Abby may have caused you, but thanks you for your help in the demonstration. Your body still hurts a bit, but all in all, not a bad session. Abby's right - the minotaurs can't rape you if you use them first. Their cum may be addicting, but you're the Champion: you take what you want.\n\n", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Sex Addiction]	(minimum lust at least 20 or current libido at 85)(First time and Repeat)
@@ -969,7 +969,7 @@ private function scyllaPtVSexIV():void {
 	outputText("When the four of you are ready to leave, Scylla gives you a big hug and thanks you for coming. Pastie, barely able to keep her overinflated form aloft, gives you a drunk kiss on the nose before slowly flying away. Even Abby gives you a friendly smack on the ass, rubbing her own tender rump gingerly. While your travels have guaranteed you'll always - and frequently - need a release, you don't think you're as much a slave to it as you used to be.", false);
 	//[Libido Down]
 	dynStats("lib", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1081,7 +1081,7 @@ private function addictionScyllaTakeAdvantageDicksBonusAndEpilogue():void {
 	}
 	//[Exit text for all encounter scenarios]
 	outputText("The room is a horrible, slimy mess by the time the four of you are done and you doubt if some of those cum-stains are going to ever come out of the carpets. Scylla is still out of it, and you doubt Pastie is going to be able to move for at least 24 hours, but Abby is on her feet again, ready for another ride. You notice a flask sticking out of the busted remains of her leather armor, miraculously intact despite the rough fucking you gave her. The bottle has a little note attached to it by a string and you pluck the vial from the giggling minx, unfolding the note carefully. It reads \"<i>In case of Slut-ification.</i>\" The concoction is thick and swirls with a golden light that reminds you of honey. When the goblin sees the light reflecting in the bottle, her wide eyes turn into dinner plates. \"<i>Oooo... so shiny...</i>\" She jumps up and down eagerly, her swollen breasts and jiggling butt wobbling heavily. You drop the mixture down to Abylon and she gleefully swallows it without hesitation. Her smile slowly fades and she blinks rapidly, eyes narrowing to a furrow. Her lips and breasts deflate to normal proportions, though her rump retains its weighty size. Gradually, the bubble-brained goblin's expression settles back into a familiar scowl of annoyed self-repression. \"<i>Damnit, I knew carrying all tha' potions around would be trouble sooner or later</i>,\" she grumbles, sticking a couple of fingers in her cunny, drawing a sloppy wad of your spunk out. \"<i>At least I wasn't hopped up on mom's baby fertilizer too,</i>\" she sighs. Glancing at her companions, she turns back with an expression of genuine amazement. \"<i>All right, I'll admit it: I'm impressed. Maybe yer not sucha doof after all.</i>\" She gives you a smack on the ass and scoots you out of the room. \"<i>Ya still can't call me Abylon, but I guess I don't mind ya comin' round again.</i>\"  With that, the green girl shoos you out and into the hall, dicks still hanging out, tossing your clothes out after you.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1109,7 +1109,7 @@ private function Scylla6DUCK():void {
 
 	outputText("The cats need no further encouragement, and scatter in terror. You chuckle and brush the dirt from your clothes before helping Scylla back to her feet. The nun looks at you, worried, but places a gentle hand on your shoulder and gives you a stare with her big, blue eyes. \"<i>Thank you, truly, but please take a softer touch with people. Everyone has their own challenges and whenever we can, we should pity and forgive, not threaten and terrify. Um. If that's okay with you?</i>\" She looks embarrassed to be scolding you and hurries away, leaving you to your devices.", false);
 
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //(Normal Characters)
@@ -1160,7 +1160,7 @@ private function lactateAndKickAss():void {
 	outputText("Cracking your neck, you decide to end this right now. Flexing your nearly unholy strength, you easily break the leather collar binding your hands and rise to your feet, dumping the cats pining you down to their asses. The felines hiss and leap backward, fearful of your might. You rub the bridge of your nose with the back of your hand, sniffing. \"<i>I enjoy a good joke,</i>\" you start, speaking slowly and loud enough for your voice to bounce around the cramped alley. \"<i>But you have to be kidding me. Cats? I've beaten demon overlords into bloody pulps. I've nearly torn the head off an imp with my bare hands. I've stomached a lot of crap since I came through the portal, but nothing I've drank or eaten, no matter how foul, has been as hard to swallow as this pathetic little ambush. I'm going to count to three and then I'm going to fuck the closest thing I lay my hands on. And if a hole isn't convenient, I'll make my own. Understand? One.</i>\"\n\n", false);
 
 	outputText("The cats need no further encouragement, and scatter in terror. You chuckle and brush the dirt from your clothes before helping Scylla down from her perch. The nun looks relieved but you can see worry in her big, blue eyes as she places a gentle hand on your shoulder. \"<i>Thank you, truly, but please take a softer touch with people. Life gives everyone challenges and whenever we can, we should pity and forgive, not threaten and harm. Um. If that's okay with you?</i>\" She looks embarrassed to be scolding you and hurries away, leaving you alone in the alley.\n\n", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Yell]
@@ -1182,7 +1182,7 @@ private function Scylla6AfterYellTruth():void {
 	outputText("\"<i>These drifters attacked us in broad daylight,</i>\" you spit in disgust. \"<i>Lock them up, banish them from the city, do whatever it is you do. I never want to see these furry freaks again.</i>\"\n\n", false);
 
 	outputText("\"<i>Gladly,</i>\" the Collie watchwoman replies, her tail wagging rapidly. The watch tie up the cat-morphs and lead them out of the alley in a single-file march. \"<i>Cats,</i>\" the dog curses. You vaguely wonder if that would be considered racist here in Tel'Adre, but decide you really don't care. Scylla looks a little perturbed that you had all the felines arrested, but you suspect the nun would've forgiven them for rape and murder too, if you hadn't called for help. Well, she can just forgive your latest transgression, you grumble to yourself, annoyed by her lack of appreciation. You head back to camp.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Lie]
 private function Scylla6AfterYellLie():void {
@@ -1193,7 +1193,7 @@ private function Scylla6AfterYellLie():void {
 	outputText("\"<i>But I'm going to fine you for this!</i>\" she barks, annoyed. \"<i>Keep your sex life behind closed doors and don't waste the watch's time again!</i>\" She collects her fee and disperses the Guard with another bark before turning to leave herself, tail curled up in irritation. The cats scatter too, but you're pretty sure you'll see them again as long as you're still lactating. Scylla's not sure what you told the watch, but she thanks you for your kindness with a kiss on the forehead and excuses herself; it's been a busy day and she's late for the soup kitchen. You muse that she'll probably end up feeding the same cats just recently denied a meal.", false);
 	player.gems -= 10;
 	statScreenRefresh();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Wait]
 private function Scylla6MilkyWait():void {
@@ -1243,7 +1243,7 @@ private function Scylla6MilkyWaitIII():void {
 	//[Gain gems. End encounter.]
 	player.gems += 25;
 	statScreenRefresh();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Get Help]
@@ -1265,7 +1265,7 @@ private function Scylla6NoMilkTruth():void {
 	outputText("\"<i>These drifters attacked us in broad daylight,</i>\" you spit in disgust. \"<i>Lock them up, banish them from the city, do whatever it is you do. I never want to see these furry freaks again.</i>\"\n\n", false);
 
 	outputText("\"<i>Gladly,</i>\" the Collie watchwoman replies, her tail wagging rapidly. The Watch bind the cat-morphs and lead them out of the alley in a single-file march. \"<i>Cats,</i>\" the canine curses. You vaguely wonder if that would be considered racist here in Tel'Adre, but decide you really don't care. Scylla looks a little perturbed that you had all the felines arrested, but you suspect the nun would've forgiven them for rape too, if you hadn't called for help. Well, she can just forgive your latest transgression, you grumble to yourself, annoyed by her lack of appreciation. You head back to camp to forget about this whole mess.\n\n", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Lie]
 private function Scylla6NoMilkLie():void {
@@ -1275,7 +1275,7 @@ private function Scylla6NoMilkLie():void {
 	outputText("\"<i>But I'm going to fine you for this!</i>\" she barks, annoyed. \"<i>Keep your sex life behind closed doors and don't waste the watch's time again!</i>\" She collects her fee and disperses the Guard with another bark before turning to leave herself, tail curled up in irritation. The cats scatter too, but you're pretty sure you'll see them again. Scylla's not sure what you told the Watch, but she thanks you for your kindness with a kiss on the forehead and excuses herself; it's been a busy day and she's late for the soup kitchen. You muse that she'll probably end up feeding the same cats just recently denied a meal.\n\n", false);
 	player.gems -= 10;
 	statScreenRefresh();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Submit] (Only available to players with vaginas)
@@ -1356,7 +1356,7 @@ private function Scylla6NoMilkSubmitIV():void {
 	player.createKeyItem("Silver Kitty-Bell",0,0,0,0);
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Rape]
@@ -1413,7 +1413,7 @@ private function Scylla6NoMilkRapeIV():void {
 	outputText("\"<i>I'm sorry for this,</i>\" the girl apologizes. It's hard to tell if she's genuinely sorry or just still experiencing the submissive streak you fucked into her. \"<i>We were just so hungry and your friend was so tempting. Please take what we've got. After today, I don't think they'll need to eat for a week.</i>\" She presses a few meager gems into your hand and pulls the silver bell from her collar. \"<i>And carry this, so I can find you again,</i>\" she whispers hopefully, flinching as Scylla's tongue snakes into her asshole to slurp down more of your cum. You leave them to their sticky cleanup with a pleased sigh. If only all trips to the soup kitchen could be so satisfying.", false)
 	flags[kFLAGS.KATHERINE_MET_SCYLLA] = 1;
 	player.createKeyItem("Silver Kitty-Bell",0,0,0,0);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //This scene is available if the player has at least two tentacle dicks, and appears when the player chooses to \"<i>share an addiction</i>\" under the heading [Tentacles].  Additional text becomes available if the player has four or six tentacle dicks.
@@ -1523,7 +1523,7 @@ private function shareTentaclesWithScylla4():void {
 	if(player.tentacleCocks() >= 6) outputText("  Scooping Pastie from the ground, you rest her atop the room's table, her body wobbling like an overfilled water balloon.  It's just as well that she's filled with a half gallon of spunk – she's far too drunk and high to fly without hurting herself.");
 	outputText("  Rather than linger, you take your leave, the restless heat of your indulgence lingering in the air as you close the door, avoiding the curious glances of tavern patrons on the way out.");
 	if(player.cumQ() < 28000) player.cumMultiplier += 2;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1669,7 +1669,7 @@ private function cumFeedScyllaShesACoolGirl():void {
 			//[End Encounter]
 			player.cumMultiplier += 1 + rand(5);
 			if(player.balls > 0) player.ballSize++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//[High Cum production (over 250,000 mL)]
 		else {
@@ -1694,7 +1694,7 @@ private function cumFeedScyllaShesACoolGirl():void {
 			//[End Encounter]
 			player.cumMultiplier += 1 + rand(5);
 			if(player.balls > 0) player.ballSize++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//[High Cum production (over 250,000 mL)]
 		else {
@@ -1716,7 +1716,7 @@ private function cumFeedScyllaShesACoolGirl():void {
 			else {
 				player.cumMultiplier += 1 + rand(5);
 				if(player.balls > 0) player.ballSize++;
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 	}
@@ -1728,7 +1728,7 @@ private function declineToBeASpunkPumpintJizztrocity():void {
 	clearOutput();
 	scyllaSprite();
 	outputText("In retrospect, a thirst like Scylla's is only going to grow as time goes on and you'd just as soon not be accountable for the girl's limitless needs.  She seems capable of taking care of herself in your absence, so there's no reason to formalize the favors you do for her.  You accept the nun's grateful thanks and take your leave.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Offer]
@@ -1742,7 +1742,7 @@ private function beScyllasPersonSemenSquirtingMilkMaid():void {
 	outputText("\n\nRing in hand, you head back to camp.");
 	player.createKeyItem("Opal Ring",0,0,0,0);
 	outputText("\n\n(<b>Gained Key Item: Opal Ring</b>)");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	}
 }

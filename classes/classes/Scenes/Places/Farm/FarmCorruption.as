@@ -405,14 +405,15 @@ package classes.Scenes.Places.Farm
 		{
 			var item:SimpleConsumable = getItemObj(flag);
 			
-			if (flag == kFLAGS.FARM_EGG_STORED)
-			{
-				flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
-			}
-			
+			if (flag == kFLAGS.FARM_EGG_STORED) flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
 			flags[flag]--;
-			kGAMECLASS.menuLoc = 30;
-			inventory.takeItem(item);
+			inventory.takeItem(item, afterTakeItems);
+		}
+		
+		private function afterTakeItems():void {
+			if (collectionAvailable())
+				collectTheGoodies();
+			else rootScene();
 		}
 
 		public function farmProtection():int
@@ -700,7 +701,7 @@ package classes.Scenes.Places.Farm
 			
 			if (player.findStatusAffect(StatusAffects.NoMoreMarble) < 0) flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0; // Don't have to care about recruitment paths -- she'll fuck off based on corruption before the player can corrupt the farm.
 			
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		protected function takeoverPromptLater():void
@@ -709,7 +710,7 @@ package classes.Scenes.Places.Farm
 			
 			outputText("You stare for a moment longer, then turn and head back to camp. You will show mercy she does not deserve... for now.");
 			
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		protected function takeoverPromptNever():void
@@ -721,7 +722,7 @@ package classes.Scenes.Places.Farm
  
 			// (Option never displayed again, -5 Corruption)
 			dynStats("cor-", 5);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function rootScene():void
@@ -885,7 +886,7 @@ package classes.Scenes.Places.Farm
 			if (loversAtFarm()) addButton(7, "Lovers", loversAtFarmMenu);
 			if (followersAtFarm()) addButton(8, "Followers", followersAtFarmMenu);
 			
-			addButton(9, "Leave", eventParser, 13);
+			addButton(9, "Leave", camp.returnToCampUseOneHour);
 		}
 		
 		private function corruptingTheFarmExplore():void
@@ -929,7 +930,7 @@ package classes.Scenes.Places.Farm
 			flags[kFLAGS.KELT_TALKED_FARM_MANAGEMENT] = 1;
 			flags[kFLAGS.FOLLOWER_AT_FARM_KELLY] = 1;
 			
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function numSlavesAtFarm():int
@@ -1039,7 +1040,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.WHITNEY_CORRUPTION_0_30_DROP_MESSAGE] = 1;
 				
 				if (flags[kFLAGS.WHITNEY_LEAVE_0_60] == 0) doNext(dogeNotCorruptLeaveFirstTime);
-				else doNext(13);
+				else doNext(camp.returnToCampUseOneHour);
 
 				return;
 			}
@@ -1053,7 +1054,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\nYou wave in exasperation and leave; if that’s the way she wants it. If she’s working with you and your followers for any length of time, she’ll have to loosen up eventually.");
 
 				if (flags[kFLAGS.WHITNEY_LEAVE_0_60] == 0) doNext(dogeNotCorruptLeaveFirstTime);
-				else doNext(13);
+				else doNext(camp.returnToCampUseOneHour);
 
 				return;
 			}
@@ -1600,7 +1601,7 @@ package classes.Scenes.Places.Farm
 			flags[kFLAGS.WHITNEY_DISABLED_FOR_DAY] = 1;
 			flags[kFLAGS.WHITNEY_DEFURRED] = 1;
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function dontDeFurDoge():void
@@ -1672,7 +1673,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>At once, [master]!</i>” The dog girl is on her feet and off towards the farm in one swift movement, new determination etched into her posture. Your take-over of the farm is complete; you should expect to see a larger share of the profits now that Whitney is your slave taskmaster, entirely bent on serving you.");
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function makeDogeDommy():void
@@ -1715,7 +1716,7 @@ package classes.Scenes.Places.Farm
 
 			flags[kFLAGS.WHITNEY_DOM] = 1;
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function dogeCorruptedMissionComplete(output:Boolean = true):void
@@ -1928,7 +1929,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function cockOralTrainingStageOne():void
@@ -1966,7 +1967,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function firstCockOralTrainingStageTwo():void
@@ -2123,7 +2124,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function cockOralTrainingStageTwo():void
@@ -2183,7 +2184,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function firstCockOralTrainingStageThree():void
@@ -2328,7 +2329,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function cockOralTrainingStageThree():void
@@ -2479,7 +2480,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function cockOralTrainingMaxed():void
@@ -2605,7 +2606,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function firstVaginaOralTraining():void
@@ -2641,7 +2642,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function vaginaOralTrainingStageOne():void
@@ -2671,7 +2672,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function firstVaginaOralTrainingStageTwo():void
@@ -2738,7 +2739,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function vaginaOralTrainingStageTwo():void
@@ -2776,7 +2777,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function firstVaginaOralTrainingStageThree():void
@@ -2827,7 +2828,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function vaginaOralTrainingStageThree():void
@@ -2896,7 +2897,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function vaginaOralTrainingMaxed():void
@@ -2957,7 +2958,7 @@ package classes.Scenes.Places.Farm
 			player.orgasm();
 			dynStats("sen-", 1);
 			if (player.wetness() < 5 && rand(4) == 0) player.vaginas[0].vaginalWetness++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function whitneyDomPleasure():void
@@ -3130,7 +3131,7 @@ package classes.Scenes.Places.Farm
 
 			player.orgasm();
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function whitneyDomStraponDoggy():void
@@ -3255,7 +3256,7 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>I hope you feel suitably relaxed, [master],</i>” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
 
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function whitneyDomRide():void
@@ -3390,7 +3391,7 @@ package classes.Scenes.Places.Farm
 				player.orgasm();
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function brandingMenu():void
@@ -3761,7 +3762,7 @@ package classes.Scenes.Places.Farm
 
 			flags[kFLAGS.QUEUE_BRANDING_UPGRADE] = 1;
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function dontGetBrandingStuff():void
@@ -4266,7 +4267,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou tell her she’s done very well, before turning and leaving.");
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function tribalTattoo(slot:int):void
@@ -4337,7 +4338,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function jojoTribalTattoo(slot:int):void
@@ -4371,7 +4372,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bimboSophieTribalTattoo(slot:int):void
@@ -4408,7 +4409,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.SOPHIE_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function vapulaTribalTattoo(slot:int):void
@@ -4443,7 +4444,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.VAPULA_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function kellyTribalTattoo(slot:int):void
@@ -4478,7 +4479,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.KELLY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function smallMilkyTribalTattoo(slot:int):void
@@ -4522,7 +4523,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bigMilkyTribalTattoo(slot:int):void
@@ -4556,7 +4557,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bigMilkyHeartTattoo(slot:int):void
@@ -4590,7 +4591,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bigMilkyPropertyOfTattoo(slot:int):void
@@ -4624,7 +4625,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bigMilkyBathToyTattoo(slot:int):void
@@ -4658,7 +4659,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bigMilkyMegaMilkTattoo(slot:int):void
@@ -4670,7 +4671,7 @@ package classes.Scenes.Places.Farm
 			flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
 
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bigMilkyCockCozyTattoo(slot:int):void
@@ -4682,7 +4683,7 @@ package classes.Scenes.Places.Farm
 			flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
 
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function heartTattoo(slot:int):void
@@ -4753,7 +4754,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function jojoHeartTattoo(slot:int):void
@@ -4787,7 +4788,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bimboSophieHeartTattoo(slot:int):void
@@ -4824,7 +4825,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.SOPHIE_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function vapulaHeartTattoo(slot:int):void
@@ -4859,7 +4860,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.VAPULA_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function kellyHeartTattoo(slot:int):void
@@ -4894,7 +4895,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.KELLY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function smallMilkyHeartTattoo(slot:int):void
@@ -4938,7 +4939,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function smallMilkyPropertyOfTattoo(slot:int):void
@@ -4982,7 +4983,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function smallMilkyBathToyTattoo(slot:int):void
@@ -5026,7 +5027,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function smallMilkyMegaMilkTattoo(slot:int):void
@@ -5039,7 +5040,7 @@ package classes.Scenes.Places.Farm
 			outputText("“<i>[name],</i>” [bathgirlName] groans with laughter, deep embarrassment coloring her tan cheeks as she looks down at what you’ve written. “<i>Everyone can see that!</i>” That’s the whole point you reply, with a rakish grin. She sighs in exasperation as you kiss her fondly on the forehead and take your leave.");
 			flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function smallMilkyCockCozyTattoo():void
@@ -5052,7 +5053,7 @@ package classes.Scenes.Places.Farm
 			outputText("“<i>[name],</i>” [bathgirlName] groans with laughter, deep embarrassment coloring her tan cheeks as she looks down at what you’ve written. “<i>Everyone can see that!</i>” That’s the whole point you reply, with a rakish grin. She sighs in exasperation as you kiss her fondly on the forehead and take your leave.");
 			flags[kFLAGS.MILKY_TATTOO_COLLARBONE] = tText;
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function numMilkyButterflyTats():int
@@ -5164,7 +5165,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.MILKY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function kellyHorseshoeTattoo(slot:int):void
@@ -5176,7 +5177,7 @@ package classes.Scenes.Places.Farm
 			kellyShouldersIntro();
 			flags[kFLAGS.KELLY_TATTOO_SHOULDERS] = tText;
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function kellyPropertyOfTattoo(slot:int):void
@@ -5211,7 +5212,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.KELLY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function kellyNo1FillyTattoo(slot:int):void
@@ -5246,7 +5247,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.KELLY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function kellyDickWonTattoo(slot:int):void
@@ -5281,7 +5282,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.KELLY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function propertyTattoo(slot:int):void
@@ -5352,7 +5353,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function jojoPropertyTattoo(slot:int):void
@@ -5386,7 +5387,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function jojoSissySlutTattoo(slot:int):void
@@ -5420,7 +5421,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bimboSophiePropertyOfTattoo(slot:int):void
@@ -5457,7 +5458,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.SOPHIE_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function vapulaPropertyOfTattoo(slot:int):void
@@ -5492,7 +5493,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.VAPULA_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function vapulaCumAddictTattoo(slot:int):void
@@ -5527,7 +5528,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.VAPULA_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function vapulaButtslutTattoo(slot:int):void
@@ -5539,7 +5540,7 @@ package classes.Scenes.Places.Farm
 			vapulaLowerBackIntro();
 			flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] = tText;
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function vapulaDildoPolisherTattoo(slot:int):void
@@ -5574,7 +5575,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.VAPULA_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bimboSophieSwallowTattoo(slot:int):void
@@ -5611,7 +5612,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.SOPHIE_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bimboSophieBreedingBitchTattoo(slot:int):void
@@ -5648,7 +5649,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.SOPHIE_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bimboSophieCockGoesHereTattoo(slot:int):void
@@ -5660,7 +5661,7 @@ package classes.Scenes.Places.Farm
 			bimboSophieLowerBackIntro();
 			flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] = tText;
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function bimboSophieWideLoadTattoo(slot:int):void
@@ -5672,7 +5673,7 @@ package classes.Scenes.Places.Farm
 			bimboSophieButtIntro();
 			flags[kFLAGS.SOPHIE_TATTOO_BUTT] = tText;
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function no1Tattoo(slot:int):void
@@ -5743,7 +5744,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function champCocksuckerTattoo(slot:int):void
@@ -5814,7 +5815,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function jojoCockGoesHereTattoo(slot:int):void
@@ -5848,7 +5849,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function amilyMommysGirlTattoo(slot:int):void
@@ -5883,7 +5884,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.AMILY_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function jojoMommysBoyTattoo(slot:int):void
@@ -5917,7 +5918,7 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.JOJO_TATTOO_BUTT] = tText;
 			}
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function champPussylickerTattoo(slot:int):void
@@ -5967,7 +5968,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou tell her she’s done very well, before turning and leaving.");
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function numAmilyTribalTats():int
@@ -6236,7 +6237,7 @@ package classes.Scenes.Places.Farm
 			
 			flags[kFLAGS.QUEUE_ORGYROOM_UPGRADE] = 1;
 			
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function noOrgyRoomPlz():void
@@ -6288,7 +6289,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nReluctantly you pull away before you get too involved, telling her as you head to the door you tell her she had better be prepared for when you come back later to give it a thorough test drive. She just bites her lip to this, and you feel her eyes burning into your back as you leave the farmhouse.");
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function orgyRoomSubMassage():void
@@ -6390,11 +6391,11 @@ package classes.Scenes.Places.Farm
 			if (player.lust >= 33 && (player.hasCock() && player.cockThatFits(whitneyVagCapacity() * 1.33) != -1 || player.hasVagina()))
 			{
 				addButton(0, "Happy Ending", orgyRoomSubMassageHappyEnding);
-				addButton(1, "Leave", eventParser, 13);
+				addButton(1, "Leave", camp.returnToCampUseOneHour);
 			}
 			else
 			{
-				addButton(0, "Next", eventParser, 13);
+				addButton(0, "Next", camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -6539,7 +6540,7 @@ package classes.Scenes.Places.Farm
 			flags[kFLAGS.MASSAGE_HAPPY_ENDINGS]++;
 			player.orgasm();
 			dynStats("sen-", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 	}

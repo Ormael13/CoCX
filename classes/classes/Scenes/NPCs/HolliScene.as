@@ -65,11 +65,11 @@ public function treeMenu(output:Boolean = true):void {
 		menu();
 		addButton(0,"Fight",fightHolli);
 		if(player.hasKeyItem("Jojo's Talisman") >= 0) addButton(1,"Call Jojo",callDatJojo);
-		addButton(4,"Back",eventParser,1000);
+		addButton(4, "Back", inventory.inventoryMenu);
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 1) {
 		if(output) outputText("The sprout looks about the same as when you first noticed it.  It's a simple, leafy shoot that only goes to about knee height.  It looks healthy and strong, with a few dozen branches and shiny green leaves.  If you look closely, the veins on the undersides of the leaf are purplish and pulse slightly with corruption.  You could easily destroy it.");
-		simpleChoices("Burn It",destroyDatFukkinTree,"",0,"",0,"",0,"Back",1000);
+		simpleChoices("Burn It", destroyDatFukkinTree, "", null, "", null, "", null, "Back", inventory.inventoryMenu);
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 2) {
 		//[Fuck It] [Ride Stamen] [Do Nothing] [Destroy It]
@@ -77,7 +77,7 @@ public function treeMenu(output:Boolean = true):void {
 		if(player.hasCock() && player.cockThatFits(100) >= 0 && player.lust >= 33) fuck = fuckFuckingFuckFlowerP2;
 		
 		if(player.hasVagina() && player.lust >= 33) ride = rideDatFuckingFukkFlowerP2;
-		simpleChoices("Fuck It",fuck,"Ride Stamen",ride,"",0,"Destroy It",destroyDatFuckingPlantAtP2,"Back",1000);
+		simpleChoices("Fuck It", fuck, "Ride Stamen", ride, "", null, "Destroy It", destroyDatFuckingPlantAtP2, "Back", inventory.inventoryMenu);
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 3) {
 		if(output) outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  Unfortunately, you can still trace the corrupted veins on their undersides from below.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no sizes of aggression.");
@@ -88,7 +88,7 @@ public function treeMenu(output:Boolean = true):void {
 		if(player.hasCock() && player.lust >= 33) fuck = fuckTheFlower;
 		if(player.hasVagina() && player.lust >= 33) ride = rideTheWalrusP3;
 		//[Fuck flower] [Drink Sap] [Ride Tentacles] [{Torch It}] [Leave It]
-		simpleChoices("Fuck Flower",fuck,"Drink Sap",drinkThePlantGirlsSap,"Ride Tentacle",ride,"Torch It",burnIt, "Leave It", 1000);
+		simpleChoices("Fuck Flower", fuck, "Drink Sap", drinkThePlantGirlsSap, "Ride Tentacle", ride, "Torch It", burnIt, "Leave It", inventory.inventoryMenu);
 	}
 	else {
 		//Camp Menu (edited)
@@ -131,17 +131,18 @@ public function treeMenu(output:Boolean = true):void {
 			burnIt = askHolliToWatch;
 			
 			//[Fuck Her] [Drink] [Tentacle Ride] {Guard Camp} {Threaten} [Leave]
-			choices("Fuck Holli",fuck,"Drink Sap",haveAMapleSyrupSnack,"Ride Tentacles",ride,guardT,burnIt,"Eat A Fruit",eat,"",0,"",0,"",0,"",0,"Leave", 1000);
+			choices("Fuck Holli", fuck, "Drink Sap", haveAMapleSyrupSnack, "Ride Tentacles", ride, guardT, burnIt, "Eat A Fruit", eat,
+				"", null, "", null, "", null, "", null, "Leave", inventory.inventoryMenu);
 		}
 		else {
 			menu();
-			if(player.hasCock() && player.lust >= 33) addButton(0,"Fuck Holli",holliGetsDickDommed);
-			if(player.tentacleCocks() >= 10 && player.lust >= 33) addButton(1,"TentacleBone",fullOnTentacleTasticGangBangForHolli);
-			if(player.hasVagina() && player.lust >= 33) addButton(2,"Ride Holli",vaginalDomHollisTentacruels);
-			addButton(3,"Drink Sap",haveAMapleSyrupSnack);
-			if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4,"Eat A Fruit",eatHolliFruit);
-			addButton(5,"Guarding",askBrokenHolliToGuard);
-			addButton(9,"Leave",eventParser,1000);
+			if(player.hasCock() && player.lust >= 33) addButton(0, "Fuck Holli", holliGetsDickDommed);
+			if(player.tentacleCocks() >= 10 && player.lust >= 33) addButton(1, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
+			if(player.hasVagina() && player.lust >= 33) addButton(2, "Ride Holli", vaginalDomHollisTentacruels);
+			addButton(3, "Drink Sap", haveAMapleSyrupSnack);
+			if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4, "Eat A Fruit", eatHolliFruit);
+			addButton(5, "Guarding", askBrokenHolliToGuard);
+			addButton(9, "Leave", inventory.inventoryMenu);
 		}
 		
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Help", helpWithFarm);
@@ -182,7 +183,7 @@ private function doFarmFuckery():void
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] = 1;
 	
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function noPlzDontFuckWithFarm():void
@@ -239,7 +240,7 @@ private function destroyDatFukkinTree():void {
 	//(-5 corruption)
 	dynStats("cor", -5);
 	flags[kFLAGS.FUCK_FLOWER_KILLED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[No] (edited)
 private function letZeFuckingSproutLive():void {
@@ -284,7 +285,7 @@ private function destroyDatFuckingPlantAtP2():void {
 	//(-5 corruption)
 	dynStats("cor", -5);
 	flags[kFLAGS.FUCK_FLOWER_KILLED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Fuck It (skimmed)
@@ -316,7 +317,7 @@ private function fuckFuckingFuckFlowerP2():void {
 	flags[kFLAGS.TIMES_FUCKED_FLOWER] = 1;
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 4;
 	fatigue(5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Ride It (skimmed)(coded)
@@ -361,7 +362,7 @@ private function rideDatFuckingFukkFlowerP2():void {
 	fatigue(5);
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER] = 1;
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 4;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Phase 3 Intro: (edited)
@@ -441,7 +442,7 @@ private function fuckTheFlower():void {
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
 	flags[kFLAGS.TIMES_FUCKED_FLOWER]++;
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Drink Sap (edited)
@@ -455,7 +456,7 @@ private function drinkThePlantGirlsSap():void {
 	if(silly()) outputText(", tree hugger that you are");
 	outputText(".  The thick 'milk' quickly fills your body with energy, though it runs out nearly as soon as it started.");
 	outputText("\n\nYou wipe your slightly sticky mouth on your arm and sigh with the act done, admiring the slightly rosy tinge of the now-smaller breasts.  This whole thing is weird as hell, but you're as full of energy as ever after the snack.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Ride Tentacles (C)
@@ -481,7 +482,7 @@ private function rideTheWalrusP3():void {
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;;
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Torch It (edited)(C)
@@ -502,7 +503,7 @@ private function torchP3Tree():void {
 	outputText("\n\nThis time, it stays suitably lit.  The tree makes a handy torch for a few hours while it burns to ash, but leaves behind a thick, cloying smoke that takes forever to dissipate.  At least that nuisance plant is gone for good.");
 	fatigue(100);
 	flags[kFLAGS.FUCK_FLOWER_KILLED] = 1;
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 
@@ -690,7 +691,7 @@ private function fuckHolliInZeFlowerPuss():void {
 	fertilizeHolli();
 	player.orgasm();
 	dynStats("sen", -1, "cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Drink From Her (edited)(C)
@@ -710,7 +711,7 @@ private function haveAMapleSyrupSnack():void {
 	//stat changes n' shit
 	dynStats("lib", .5, "sen", 1, "lus", 15, "cor", 1);
 	fatigue(-60);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //Tentacle Ride (looks ok)(C)
@@ -748,7 +749,7 @@ private function level4RideHollisTentacruels():void {
 	fertilizeHolli(false);
 	player.slimeFeed();
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Bear Fruit(C)
@@ -784,7 +785,7 @@ private function eatHolliFruit():void {
 	dynStats("cor", 1);
 	if(player.tou < 50) dynStats("tou", 1);
 	if(player.str < 50) dynStats("str", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Beg Her To Guard (edited)(C)
@@ -847,7 +848,7 @@ private function domUpSomeHolli():void {
 	//{fail} 
 	if(domPowah < 20) {
 		outputText("\n\nRolling her eyes, Holli sinks back into her arboreal core, the bark 'lips' slowly pulling together, creaking ominously.  You grab hold of them and try to wrench them open, but inexorably, each continues on to meet the other.  An inch before the wood crushes around your fingers, you let go, reminded of a tree back home that somehow split a stone with its growth.  The demonic dryad's home is closed to you.  Perhaps, if you were a little more intimidating, it would have worked.");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//{success}
@@ -937,7 +938,7 @@ private function holliGetsDickDommed():void {
 	flags[kFLAGS.TIMES_FUCKED_FLOWER]++;
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	fertilizeHolli();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //.PC Has 10 Tentacle Go Full On Monster With Her
@@ -972,7 +973,7 @@ private function fullOnTentacleTasticGangBangForHolli():void {
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	fertilizeHolli();
 	fertilizeHolli();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Vaginally Dominate Tentacles
 private function vaginalDomHollisTentacruels():void {
@@ -1021,7 +1022,7 @@ private function vaginalDomHollisTentacruels():void {
 	player.slimeFeed();
 	player.orgasm();
 	dynStats("sen", -2, "cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function threatenHolli():void {
@@ -1040,7 +1041,7 @@ private function threatenHolli():void {
 	//{No option to beg for night watch till PC has been imp raped}
 	outputText("\n\n<b>Maybe you should just slap her the next time she refuses to guard the camp and try your luck anyway.</b>");
 	flags[kFLAGS.THREATENED_HOLLI] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 

@@ -243,7 +243,7 @@ private function helpArianWhenYouMeetHim():void {
 	outputText("\n\n(<b>The park has been added to Tel'Adre's menu.</b>)");
 
 	arianHealth(1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Further Park Visits
@@ -339,7 +339,7 @@ public function visitThePark():void {
 	}
 	arianHealth(1);
 	flags[kFLAGS.ARIAN_PARK]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //First Visit
@@ -443,7 +443,7 @@ public function visitAriansHouse():void {
 			//PC returns to Tel'Adre menu screen
 			//PC begins Arian romance quest
 			//1 hour passes.
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		else {
 			//Subsequent Visits
@@ -618,7 +618,7 @@ private function leaveFappingArian():void {
 	outputText("\n\n\"<i>Busy, huh?  Well if you want I could call him for you; master Arian is always happy to see you any time.</i>\"  Boon smiles starting on his way towards Arian's bedroom.  You quickly stop him though, explaining that it's best to let Arian have some privacy for now. \"<i> Are you sure, [name]?  It's no trouble at all, I assure you.</i>\"  You insist that he shouldn't bother Arian right now.  Boon shrugs.  \"<i>If you say so... anyways, do come visit later.  Ever since you started visiting master Arian, he has been a lot less rebellious, not to mention he seems to be getting healthier and happier.</i>\"");
 	outputText("\n\nYou promise to return later and bid him farewell.  You step outside and make your way back to your camp.");
 	//Return to camp
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[=Barge in=]
@@ -808,7 +808,7 @@ private function arianStoryDialogue1():void {
 	//ArianSDialogue++;
 	flags[kFLAGS.ARIAN_S_DIALOGUE]++;
 	//player returns to camp.
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 ////((if ArianHealth >= 20) && (ArianSDialogue == 1)) 
@@ -841,7 +841,7 @@ private function arianStory2DropIt():void {
 	clearOutput();
 	outputText("Though you do feel a little curious, you decide to stop making him uncomfortable, and tell him that it's okay, you'll let him get some sleep now.");
 	outputText("\n\n\"<i>Thanks, [name].  I'll see you later then.</i>\"  Arian tucks himself in.  You watch until he's settled in, and then start the trek back to your home-away-from home in the Marethian wilderness.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //=Pry=
@@ -852,7 +852,7 @@ private function arianStoryPry():void {
 	outputText(".");
 	outputText("\n\nArian closes [Arian eir] eyes and admits.  \"<i>It's someone close!</i>\"  He blurts out, hiding himself under the covers.");
 	outputText("\n\nWell, now, that's intriguing... still, no matter how you try, he won't say anything more and he won't come out.  It's quite clear what's going on so all you can do is sigh, do your best to pat [Arian eir] head through the covers, and tell him you'll come back another day and that you're sorry for being so nosey.  You then turn and walk out the door, heading down the stairs and back to camp.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //((if ArianHealth >= 30) && (ArianSDialogue == 2))
@@ -1043,7 +1043,7 @@ private function arianMagicLessons():void {
 		outputText("\n\nArian raises [Arian eir] hand, stopping you in your tracks.  \"<i>I appreciate your enthusiasm, [name].  But first you must rest and let the lessons of the day sink in.  I promise I'll teach you more tomorrow.</i>\"  Arian smiles at you.");
 		
 		outputText("\n\nMaybe [Arian ey]'s right... you tell [Arian em] you'll ask [Arian em] to teach you more tomorrow and excuse yourself.");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	outputText("\n\nArian nods.  \"<i>Of course!  Now where do I begin....</i>\"");
@@ -1130,7 +1130,7 @@ private function arianMagicLessons():void {
 	dynStats("int", 1);
 	if(player.inte < 75) dynStats("int", 1);
 	if(player.inte < 50) dynStats("int", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Sex:
 //Available after the first time you have sex. (ArianVirgin > 0)
@@ -1267,7 +1267,7 @@ private function sexTalkFinish(newl:Boolean = false):void {
 	if(newl) clearOutput();
 	else outputText("\n\n");
 	outputText("Satisfied with your little chat, you pat the lizan's head and excuse yourself, heading back to camp.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Invite to Camp:
@@ -1348,7 +1348,7 @@ private function takeYerLizardHomePartII():void {
 	outputText("\n\nYou politely excuse yourself, saying you should let the lizan make [Arian emself] comfortable in [Arian eir] new home, and step back outside.");
 	//flag arian as follower
 	flags[kFLAGS.ARIAN_FOLLOWER] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Sex
@@ -1713,7 +1713,7 @@ private function giveArianAnal():void {
 	}
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Get Blown:
@@ -1801,7 +1801,7 @@ private function getBlownByArian():void {
 	else outputText(" out of Arian's tent.");
 	player.orgasm();
 	flags[kFLAGS.ARIAN_HAS_BLOWN]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Penetrate:
@@ -1925,7 +1925,7 @@ private function penetrateArian():void {
 	outputText("\n\nEventually, though, you announce that you should probably get going.  As nice as it is to stay here with her, you have duties to attend to.  Arian smiles at you, and gives you a little peck on the lips.  \"<i>I understand, but come see me again soon, please.</i>\"  You promise her you will and extract yourself from the affectionate lizan's embrace.  You quickly find your clothes and get dressed, then leave.");
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Get Anal:
@@ -2071,7 +2071,7 @@ private function getButtWreckedByArian():void {
 			menu();
 			if(player.cockThatFits(50) >= 0 && player.hasCock()) addButton(0,"Yes",giveArianAnal);
 			else outputText(".  You're too big to fit inside Arian's ass, though.");
-			addButton(1,"No",eventParser,13);
+			addButton(1,"No",camp.returnToCampUseOneHour);
 			return;
 		}
 		else{
@@ -2083,7 +2083,7 @@ private function getButtWreckedByArian():void {
 	}
 	player.orgasm();
 	dynStats("sen", 2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Blow:
@@ -2177,7 +2177,7 @@ private function suckAriansDick():void {
 	outputText("\n\nYou throw [Arian em] a smirk over your shoulder, shake your [ass] for [Arian eir] benefit, and head on out.");
 	
 	dynStats("lus", 10+player.lib/5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Get Penetrated:
@@ -2335,7 +2335,7 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	outputText("\n\nGrinning, you pull [Arian em] into a final kiss, telling [Arian em] this is just something for [Arian em] to think about.  Having said that, you quickly redress and excuse yourself, leaving one flustered lizan behind to rest.");
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Double Pen Arian:
@@ -2472,7 +2472,7 @@ private function doublePenetrateArian():void {
 	}
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Docking
@@ -2575,7 +2575,7 @@ private function arianDocking():void {
 	//Player returns to camp
 	player.orgasm();
 	dynStats("sen", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Give Item
@@ -2985,7 +2985,7 @@ private function giveArianLactaid():void {
 		outputText("\n\nYou agree, and ask if she'll be okay if you show yourself out.  Arian nods and yawns.  \"<i>I'll see you later then, [name].</i>\"");
 		
 		outputText("\n\nYou leave her to get some sleep and quietly show yourself out, planning to work off your meal elsewhere.");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -3296,7 +3296,7 @@ private function giveArianReptilum():void {
 	outputText("\n\nYou gently pull the covers up over the tired lizan, stroke [Arian eir] head fondly, and quietly excuse yourself from [Arian eir] sleeping quarters.");
 	
 	//Player gains Lust.
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Treat Corruption
@@ -3339,7 +3339,7 @@ private function treatCorruption():void {
 		
 		outputText("\n\nYou acknowledge what [Arian ey] is saying, promise you'll try and be more careful in the future, thank [Arian em] once more, and then excuse yourself.");
 		flags[kFLAGS.ARIAN_TREATMENT]++;
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -3410,7 +3410,7 @@ private function arianSpellPlace(spell:String):void {
 		player.removeKeyItem("Arian's Talisman");
 		player.createKeyItem("Arian's Charged Talisman",0,0,0,0);
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function clearCharges():void {
 	if(player.findStatusAffect(StatusAffects.ShieldingSpell) >= 0) player.removeStatusAffect(StatusAffects.ShieldingSpell);
@@ -3873,13 +3873,13 @@ private function pickAnEggArian(color:String = "pink"):void {
 	outputText("\n\nYou thank her for her efforts, give her a quick peck on the cheek, and then encourage her to get some rest.  Arian nods.  \"<i>I should be ready to lay tomorrow, so don't forget to visit.</i>\"");
 	outputText("\n\nYou nod in understanding and wave to her as you leave her tent.");
 	flags[kFLAGS.ARIAN_EGG_COUNTER] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Leave
 private function leaveEggs():void {
 	clearOutput();
 	outputText("You tell her that you don't want any colored eggs from her this month.  The lizan nods, deciding it's not necessary for her to spell out that this means she'll just produce ordinary eggs and eat them for breakfast after she's laid them.  \"<i>So, do you want something?</i>\" she asks.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Display Arian options
@@ -3936,15 +3936,14 @@ public function arianLaysEggs():void {
 	
 	outputText("\n\nYou laugh at Arian's reaction, telling her that you don't mind.  You should go right now.  You turn to pocket the egg and leave Arian's tent, bidding the lizan farewell before you do.\n\n");
 	//(PC obtains (Large) Egg of the [color] asked message.)
-	menuLoc = 2;
 	var itype:ItemType;
-	if(flags[kFLAGS.ARIAN_EGG_COLOR] == "brown") itype = consumables.L_BRNEG;
-	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "purple") itype = consumables.L_PRPEG;
-	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "blue") itype = consumables.L_BLUEG;
-	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "pink") itype = consumables.L_PNKEG;
-	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "white") itype = consumables.L_WHTEG;
-	else if(flags[kFLAGS.ARIAN_EGG_COLOR] == "rubbery black") itype = consumables.L_BLKEG;
-	inventory.takeItem(itype);
+	if (flags[kFLAGS.ARIAN_EGG_COLOR] == "brown") itype = consumables.L_BRNEG;
+	else if (flags[kFLAGS.ARIAN_EGG_COLOR] == "purple") itype = consumables.L_PRPEG;
+	else if (flags[kFLAGS.ARIAN_EGG_COLOR] == "blue") itype = consumables.L_BLUEG;
+	else if (flags[kFLAGS.ARIAN_EGG_COLOR] == "pink") itype = consumables.L_PNKEG;
+	else if (flags[kFLAGS.ARIAN_EGG_COLOR] == "white") itype = consumables.L_WHTEG;
+	else if (flags[kFLAGS.ARIAN_EGG_COLOR] == "rubbery black") itype = consumables.L_BLKEG;
+	inventory.takeItem(itype, camp.returnToCampUseOneHour);
 }
 //DildoFun
 private function arianDildoFun():void {
@@ -4054,7 +4053,7 @@ private function arianDildoFun():void {
 	outputText("\n\nYou heave a sigh of contentment and authoritatively drag your little lizan slut into your arms, wrapping yourself around her in a cuddle and making it quite clear you don't intend to let her go anywhere any time soon.  Fortunately, she seems quite eager to be there, and so you shut your eyes and allow yourself to slowly drift off to sleep.  Before you fully embrace unconsciousness, though, you place a gentle hand on Arian's pussy, stroking her softly - not to arouse her yet again, but just to let her feel a loving touch there, in the place that brings you both such pleasures....");
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

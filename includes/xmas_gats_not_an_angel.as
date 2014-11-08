@@ -43,7 +43,7 @@ public function dontExploreGatsChristmasTale():void {
 	outputText("\n\nIt's certainly warmer there.");
 	//turn dat shit off
 	flags[kFLAGS.GATS_ANGEL_DISABLED] = .5;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //ii. Yes
@@ -93,7 +93,7 @@ public function encounterQuoteUnquoteAngel():void {
 		flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] = 1;
 	}
 	flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //5. Solution
@@ -112,7 +112,7 @@ public function findTheWindUpKey():void {
 	outputText("\n\nOne surprise leads to another when a warm glow breaks free from between your hands.  A swirling of green and red mist is concentrated within the frame of your prize, glowing brightly as they swim endlessly through the key's curves at a variety of velocities.  It's plain to see that this little treasure was the cause for the cave's unnatural brilliance.  You're a little ashamed to rob it of its power source... but not enough to give it a second thought as you crawl back down to the entrance only a few feet away.  The last thing you want is for your magical lantern to dull and leave your naked body blind in this hazard-filled hole.");
 	outputText("\n\nYou carefully re-enter the flooded tunnel, unsure how the supposed key will take to water.  It makes little impact as you submerge it, though the glowing light looks lovely on the pitch black tunnel.  The sight reinvigorates you slightly, though the warmer waters are probably more to blame.  Chalking up yet another simple retrieval asked of your person, you surface back outside, eager to get back into your [armor] and return to the high mountains.");
 	player.createKeyItem("North Star Key",0,0,0,0);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //ii. Bringing the Key Back
@@ -148,7 +148,7 @@ public function giveThatBitchAKeyYo():void {
 		outputText("\n\nThe air remains cold and merciless, and regardless of what you do it would be difficult to stay for much longer.  Turning away, you trot silently back to your camp, wondering how things would've gone - if only you were quicker.");
 		//[BAD END, Can no longer see the Old Woman or this series of events]
 		flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//player.removeKeyItem("North Star Key");
 }
@@ -200,7 +200,7 @@ public function theWorstEndingEverDotJPG():void {
 	//[if (corruption > 49) 
 	if(player.cor > 49) outputText("  More importantly, you have some unsatisfied, pent up lust that you'd like to expend.");
 	dynStats("lus", 2+player.lib/10+player.cor/10, "cor", 10, "resisted", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
 	player.removeKeyItem("North Star Key");
 }
@@ -274,7 +274,7 @@ public function fuckTheAngelBadEndPartII():void {
 	flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
 	player.orgasm();
 	dynStats("cor", 10);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //8. Good End
@@ -384,5 +384,5 @@ public function conclusionOfGiantessGoodEnd():void {
 	//Christmas events are open all year 'round! (some sort of arbitrary limit)
 	//merry christmas everyone <3
 	flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }

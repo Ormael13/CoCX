@@ -328,7 +328,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("You can't decide what to do right now, so you leave the egg where it is and return to your camp.");
 			//(You can restart this quest by randomly encountering this chamber again. It continues to reappear until you either Destroy or Take the egg.)
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[=Destroy it=] (Z)
@@ -340,7 +340,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nWith nothing else in the cave, you prepare to leave, but find yourself stopped by a sudden thought.  The egg yolk, though raw, looks strangely appetizing...");
 			flags[kFLAGS.EGG_BROKEN] = 1;
 			//[Eat][Leave]
-			simpleChoices("Eat It", eatEmbersYolkLikeAnEvenBiggerDick, "", 0, "", 0, "", 0, "Leave", 13);
+			simpleChoices("Eat It", eatEmbersYolkLikeAnEvenBiggerDick, "", 0, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
 		}
 
 //[=Eat=]
@@ -358,7 +358,7 @@ package classes.Scenes.NPCs
 			//(also slimefeed!)
 			dynStats("str", 5 + rand(5), "tou", 5 + rand(5), "int", 5 + rand(5), "cor", 20);
 			player.slimeFeed();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -375,8 +375,7 @@ package classes.Scenes.NPCs
 			player.gems -= 200;
 			statScreenRefresh();
 			player.removeKeyItem("Dragon Eggshell");
-			menuLoc = 9;
-			inventory.takeItem(weapons.DRGNSHL);
+			inventory.takeItem(weapons.DRGNSHL, telAdre.armorShop);
 		}
 
 //Suggested Reward:
@@ -412,7 +411,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou look around over and over and over... but no matter how much you look you don't see anything at all that could even resemble some kind of magic rune, or activation button, or anything that could disable the ward.  You groan in frustration.");
 				outputText("\n\nIt looks like you will have to leave the egg for now until you're better versed in magical methods... or strong enough to knock down a mountain!  You roll it back down the corridor into its shrine to prevent its being seen from the cave entrance.");
 				//Same as taking the Leave option. Must find the egg again to take it.
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			outputText("\n\n(<b>You have now begun the Mysterious Egg quest.  The Mysterious Egg is added to the <i>Items</i> at the Camp.</b>)");
@@ -420,7 +419,7 @@ package classes.Scenes.NPCs
 			player.createKeyItem("Dragon Egg", 0, 0, 0, 0);
 			flags[kFLAGS.TOOK_EMBER_EGG] = 1;
 			flags[kFLAGS.EMBER_COR] = 50;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -600,7 +599,7 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			outputText("You shake your head; it would probably be best not to tamper with it. Returning the items to your pockets, you leave the egg alone.  As you put them away, the egg's glow slows down dramatically, almost as if it were feeling... disappointment?");
-			doNext(1000);
+			doNext(inventory.inventoryMenu);
 		}
 
 //Incubus Draft/Purified Incubus Draft (Z)
@@ -733,7 +732,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			if (player.gender == 0) {
 				outputText("The light pulses decrease in speed as you disrobe and expose your bare crotch, leaving you disappointed after summoning your perversity to bring you this far.  You feel as if you've let it down somehow...  This is confusing!  You decide to go away and deal with this fickle egg another time.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//Nothing changes. PC can go do something else, lose no time.
@@ -798,7 +797,7 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.EMBER_JACKED_ON] = 1;
 			//INCREMENT EMBER FEEDINZ
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //HATCH DAT BITCH
@@ -902,7 +901,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n(<b>Ember has been gained as a follower!</b>)");
 			flags[kFLAGS.EMBER_HATCHED] = 1;
 			player.removeKeyItem("Dragon Egg");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Appearance (shows Ember's appearance, always available)
@@ -1037,23 +1036,23 @@ package classes.Scenes.NPCs
 			if (player.isPregnant()) { //Extra check might protect against inappropriate Ember complaints
 				if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
 					emberBitchesAboutPCBeingFullOfEggs();
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				if (player.pregnancyIncubation < 200 && player.pregnancyType != PregnancyStore.PREGNANCY_EMBER && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
 					manEmberBitchesAboutPCPregnancy();
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				if (player.pregnancyType == PregnancyStore.PREGNANCY_EMBER && player.pregnancyType < 300 && flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] == 0) {
 					emberTalksToPCAboutPCDragoNPregnancy();
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 			}
 			if (flags[kFLAGS.EMBER_PREGNANT_TALK] == 0 && pregnancy.event > 1) {
 				emberIsPregnantFirstTimeTalkScene();
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			clearOutput();
 			outputText("What will you talk about?");
@@ -1106,7 +1105,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou ask if " + emberMF("he", "she") + "'s all right.  \"<i>Huh?  Yes, I'm fine!  Anyways, lesson's over.</i>\"  Ember hurriedly goes back inside " + emberMF("his", "her") + " den.");
 				emberAffection(5);
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Exploration (Z)
@@ -1179,7 +1178,7 @@ package classes.Scenes.NPCs
 				}
 			}
 			outputText("</i>\"");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Talk about Yourself (Z)
@@ -1191,7 +1190,7 @@ package classes.Scenes.NPCs
 			//(Low Affection)
 			if (emberAffection() <= 25) {
 				outputText("\n\n\"<i>You're a waste of time,</i>\" Ember says nonchalantly.  " + emberMF("He", "She") + " walks past you and then flies off.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//There's a points system here, that can range from 0 to 8, this is used to check Ember's final answer after " + emberMF("he","she") + "'s done examining the PC.
@@ -1279,7 +1278,7 @@ package classes.Scenes.NPCs
 				outputText("\"<i>You're quite a catch... if you strolled down the street you'd have dragons fawning all over you...</i>\"  Realizing what " + emberMF("he", "she") + " just said, Ember coughs furiously.  \"<i>I-I mean... lesser dragons might fawn all over you.  You don't meet my standards!</i>\"");
 				emberAffection(5);
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -1508,7 +1507,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou gently ask what " + emberMF("he", "she") + " means by \"<i>strange ideas</i>\".");
 				outputText("\n\n\"<i>The ones you're getting!</i>\" Ember blurts out, before spinning on " + emberMF("his", "her") + " heels and leaving you alone. You watch " + emberMF("him", "her") + " go and smile.");
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function drinkDeeplyOfDagronBlud():void
@@ -1528,7 +1527,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nAs you break the kiss; Ember leans over, supporting " + emberMF("him", "her") + "self on your shoulders.  \"<i>Ugh... I guess we overdid it... I feel woozy.</i>\"");
 				outputText("\n\nYou quickly offer " + emberMF("him", "her") + " a helping hand, inquiring if " + emberMF("he", "she") + " is all right.  Ember accepts your help, using your hand to balance " + emberMF("him", "her") + "self.  \"<i>I-I'll be fine... just, no more sharing for the day...</i>\"");
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //TF messages (Z)
@@ -1796,8 +1795,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber mumbles quietly, \"<i>Next time, fertilize it for me will you?</i>\"  You start at that; did she really just say it aloud?  But, knowing her temper, you decide against asking.  ");
 				//git a dragon egg, small libido-based lust damage
 				dynStats("lus", 10 + player.lib / 10);
-				menuLoc = 2;
-				inventory.takeItem(consumables.DRGNEGG);
+				inventory.takeItem(consumables.DRGNEGG, camp.returnToCampUseOneHour);
 			}
 			//(Medium Affection)
 			else if (emberAffection() < 75) {
@@ -1847,8 +1845,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou just smile and tell her you understand exactly what she meant.  One quick kiss and you head back to the camp proper, leaving one adorably flustered dragon behind you.  ");
 				//git a dragon egg, small libido-based lust damage
 				dynStats("lus", 10 + player.lib / 10);
-				menuLoc = 2;
-				inventory.takeItem(consumables.DRGNEGG);
+				inventory.takeItem(consumables.DRGNEGG, camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -1861,8 +1858,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.EMBER_GENDER] == 3) outputText(".. it even drips with some kind of off-white fluid.");
 			outputText("  \"<i>H-here's your egg.  Use it while it's fresh, okay?</i>\"  Her eyes glaze over a bit at the suggestion, and she giggles.  ");
 			//git a dragon egg, no Ember affection change
-			menuLoc = 2;
-			inventory.takeItem(consumables.DRGNEGG);
+			inventory.takeItem(consumables.DRGNEGG, camp.returnToCampUseOneHour);
 		}
 
 //[Watch]
@@ -1909,8 +1905,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYes, you did, because she asked and she seemed to need your help, as you point out.  Ember doesn't bother coming up with something to say, she just unfurls her wings and jumps into the air with a gust of wind.");
 			outputText("\n\nYou shake your head and sigh softly.  ");
 			//git an egg, moderate lib-based lust damage, Ember affection up
-			menuLoc = 2;
-			inventory.takeItem(consumables.DRGNEGG);
+			inventory.takeItem(consumables.DRGNEGG, camp.returnToCampUseOneHour);
 			emberAffection(5);
 		}
 
@@ -2154,7 +2149,7 @@ package classes.Scenes.NPCs
 				}
 			}
 			emberAffection(1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			//reset Dragonbreath counter to ready, increase lust slightly if low or med affection, add heat/rut if high dragon-score, damage toughness slightly if high affection and low PC corruption
 			if (emberAffection() < 75) dynStats("lus", 20);
 			fatigue(-50);
@@ -2266,7 +2261,7 @@ package classes.Scenes.NPCs
 			//(Low affection)
 			if (emberAffection() <= 25) {
 				outputText("\n\n\"<i>What!?  That is just gross!  Not to mention, it'd never fit!</i>\"  Ember doesn't bother waiting for your reply, shooing you out of " + emberMF("his", "her") + " den.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//(Moderate affection)
@@ -2399,7 +2394,7 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			dynStats("sen", 3);
 			player.slimeFeed();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[Blow Ember] - your shipment of dragon dildoes has arrived
@@ -2503,7 +2498,7 @@ package classes.Scenes.NPCs
 			player.slimeFeed();
 			emberAffection(6);
 			dynStats("lus", 10 + player.lib / 10);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Get Blown - put your dick in the knife drawer, it'll be fun! (Z, with reservation)
@@ -2516,7 +2511,7 @@ package classes.Scenes.NPCs
 			//(Low Affection)
 			if (emberAffection() <= 25) {
 				outputText("\n\n\"<i>Ah.  And... what makes you think I would ever consider that?</i>\"  Ember huffs indignantly and walks away.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//(Medium Affection)
@@ -2616,7 +2611,7 @@ package classes.Scenes.NPCs
 			//lose lust, reset hours since cum
 			player.orgasm();
 			dynStats("sen", -1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -2630,7 +2625,7 @@ package classes.Scenes.NPCs
 			//(Low Affection)
 			if (emberAffection() <= 25) {
 				outputText("\n\n" + emberMF("His", "Her") + " eyes widen.  \"<i>Never!  N-E-V-E-R!  Not even over my dead body!</i>\" Ember exclaims.  The dragon unfurls " + emberMF("his", "her") + " wings and lifts off, beating the air furiously.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//(Medium Affection)
@@ -2772,7 +2767,7 @@ package classes.Scenes.NPCs
 			}
 			player.orgasm();
 			dynStats("sen", -2);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Eat Ember Out - b-baka! (Z)
@@ -2853,7 +2848,7 @@ package classes.Scenes.NPCs
 			player.slimeFeed();
 			emberAffection(6);
 			dynStats("lus", 10 + player.lib / 10);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Get Eaten Out - actually halfway likeable
@@ -2866,7 +2861,7 @@ package classes.Scenes.NPCs
 			if (emberAffection() <= 25) {
 				outputText("\n\n\"<i>No way!  I have no idea what's been there!  Plus, that is just gross!</i>\"  Ember spins on " + emberMF("his", "her") + " heels and walks away.");
 				//End scene
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//(Medium Affection)
@@ -2921,7 +2916,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou smile, hating to see " + emberMF("him", "her") + " go, but so loving to watch " + emberMF("him", "her") + " leave.  Shaking off your pleasurable fantasies, you manage to pull yourself back upright, redress yourself, and return to camp.");
 			//minus some fukkin' lust, reset hours since cum
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Penetrate Her - seems not to accommodate centaurs, more's the pity (Z)
@@ -2936,7 +2931,7 @@ package classes.Scenes.NPCs
 			//(Low Affection)
 			if (emberAffection() <= 25) {
 				outputText("\n\n\"<i>By you?  Ha!  Funny joke!</i>\"  Ember laughs forcibly as she walks away.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//(Medium Affection)
@@ -2995,7 +2990,7 @@ package classes.Scenes.NPCs
 				if (player.cockTotal() == 1) outputText("that");
 				else outputText("those");
 				outputText(" and then come back!</i>\"  Ember turns on her heels and walks away, moodier than usual.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//(else if PC has multiple fit cocks){
@@ -3082,7 +3077,7 @@ package classes.Scenes.NPCs
 				player.orgasm();
 				dynStats("sen", -2);
 				emberAffection(-5);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT]++;
 				return;
 			}
@@ -3141,7 +3136,7 @@ package classes.Scenes.NPCs
 
 			outputText("\n\nYour decency restored, you return to camp.");
 			flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT]++;
-			doNext(14);
+			doNext(camp.returnToCampUseTwoHours);
 		}
 
 //Get Penetrated - also horse-proof, sorry folks! (Z)
@@ -3157,7 +3152,7 @@ package classes.Scenes.NPCs
 			//(Low Affection)
 			if (emberAffection() <= 25) {
 				outputText("\n\n\"<i>Ha!  I'm much more than you can handle!  Talk to me when you have something that can take even half of me.</i>\"  Ember mocks you, as " + emberMF("he", "she") + " walks away.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//(Medium Affection)
@@ -3274,7 +3269,7 @@ package classes.Scenes.NPCs
 
 			outputText("\n\nEmber's eyes widen in terror.  \"<i>What!?  No!  Not again!</i>\" Ember screams, getting up and wasting no time in bolting away, setting into a unsteady flight as soon as " + emberMF("he", "she") + "'s gotten far enough.  You wait until " + emberMF("he", "she") + "'s gone, and then burst out laughing.  Totally worth it... even if you are, as the saying goes, going to be sleeping on the couch for a week as a result.");
 			//slimefeed, preg check, reduce lust, reset hours since cum, drain massive libido
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -4278,7 +4273,7 @@ package classes.Scenes.NPCs
 			if (player.cor < 50) outputText("thank her for being so understanding");
 			else outputText("grunt an acknowledgement");
 			outputText(" and then gather your things before heading off to wash yourself down.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[=Yes=]
@@ -4489,7 +4484,7 @@ package classes.Scenes.NPCs
 			//2 hours pass, PC's fatigue is healed some, Libido is reduced.
 			fatigue(-20);
 			dynStats("lib", -1);
-			doNext(14);
+			doNext(camp.returnToCampUseTwoHours);
 		}
 	}
 }

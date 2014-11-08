@@ -29,7 +29,7 @@ public function doDungeon(eventNo:Number):void {
 		dungeonLoc = 0;
 		if(dungeonLoc == 0) {
 			outputText("You slip out the door and disappear, heading back towards your camp, leaving the hellish factory behind.", true);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		else eventParser(1);
 		return;
@@ -842,7 +842,7 @@ public function doDungeon(eventNo:Number):void {
 		}
 		outputText("Rounding a bend in the mountainous foothills, you stumble upon a large and rusted iron structure belching cloying pink smoke from its tall smokestacks.  A bevy of green-tinged copper pipes stem from the rear of the building, climbing up the steep mountainside and disappearing into a hole in its face.  It must be some kind of demonic factory, though you've no idea what they could be pumping out.  High atop the roof, you spy a huge water tower fed by smaller pipes that run down the building's side and off in the direction of the lake.\n\nThere are no windows to the hellish factory, with only a single iron door adorning the front wall.  If you go inside there will undoubtedly be many demons to fight and little chance to escape. Death or worse awaits should you fall into their hands.\n\nDo you enter the factory or leave?", true);
 		
-		simpleChoices("Enter",11012,"",0,"",0,"",0,"Leave",13);
+		simpleChoices("Enter",11012,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 		return;
 	}
 	//Shut down factory!
@@ -871,14 +871,14 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11061) {
 		if(player.findStatusAffect(StatusAffects.TakenGroPlus) >= 0) player.addStatusValue(StatusAffects.TakenGroPlus,1,-1);
 		else player.createStatusAffect(StatusAffects.TakenGroPlus,4,0,0,0);
-		inventory.takeItem(consumables.GROPLUS);
+		inventory.takeItem(consumables.GROPLUS, camp.campMenu);
 		return;
 	}
 	//Take item from storage
 	if(eventNo == 11062) {
 		if(player.findStatusAffect(StatusAffects.TakenLactaid) >= 0) player.addStatusValue(StatusAffects.TakenLactaid,1,-1);
 		else player.createStatusAffect(StatusAffects.TakenLactaid,4,0,0,0);
-		inventory.takeItem(consumables.LACTAID);
+		inventory.takeItem(consumables.LACTAID, camp.campMenu);
 		return;
 	}
 	//Take incubus in the butt
@@ -918,7 +918,7 @@ public function doDungeon(eventNo:Number):void {
 		dungeonLoc = 0;
 		if(dungeonLoc == 0) {
 			outputText("You leave the cave behind and take off through the deepwoods back towards camp.", true);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		else eventParser(1);
 		return;
@@ -992,7 +992,7 @@ public function doDungeon(eventNo:Number):void {
 		return;
 	}
 	if(eventNo == 11097) {
-		inventory.takeItem(consumables.GODMEAD);
+		inventory.takeItem(consumables.GODMEAD, camp.campMenu);
 		flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED]++;
 		return;
 	}
@@ -1033,17 +1033,17 @@ public function doDungeon(eventNo:Number):void {
 		return;
 	}
 	if(eventNo == 11107) {
-		inventory.takeItem(weapons.SUCWHIP);
+		inventory.takeItem(weapons.SUCWHIP, camp.campMenu);
 		flags[kFLAGS.HEL_DUNGEON_TAKEN_WHIP] = 1;
 		return;
 	}
 	if(eventNo == 11108) {
-		inventory.takeItem(armors.BONSTRP);
+		inventory.takeItem(armors.BONSTRP, camp.campMenu);
 		flags[kFLAGS.HEL_DUNGEON_TAKEN_STRAPS] = 1;
 		return;
 	}
 	if(eventNo == 11109) {
-		inventory.takeItem(weapons.L_DAGGR);
+		inventory.takeItem(weapons.L_DAGGR, camp.campMenu);
 		flags[kFLAGS.HEL_DUNGEON_TAKEN_DAGGER] = 1;
 		return;
 	}
@@ -1160,7 +1160,7 @@ public function doDungeon(eventNo:Number):void {
 		inDungeon = false;
 		dungeonLoc = 0;
 		outputText("You leave the door behind and take off through the desert back towards camp.", true);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	if(eventNo == 11151) {

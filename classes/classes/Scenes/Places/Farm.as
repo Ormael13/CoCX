@@ -39,7 +39,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 	{
 		outputText("Whitney marches up to you as soon as you approach the farm, a stoic expression plastered across her face.");
 		outputText("\n\n\"<i>What the fuck do you think you're doing here [name]? After what you did to Marble you still think you're welcome here? Leave. <b>Now</b>.</i>\"");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	
@@ -56,8 +56,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 			player.addStatusValue(StatusAffects.MetWhitney,1,1);
 			if(player.statusAffectv1(StatusAffects.MetWhitney) == 2) outputText("<b>You've been to the farm enough to easily find it.  You can return by selecting it from the places menu (and will no longer encounter it during random lake exploration)</b>.\n\n", false);
 		}
-		menuLoc = 2;
-		inventory.takeItem(consumables.CANINEP);
+		inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
 	}
 	//Repeat Offender
 	else {
@@ -105,7 +104,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(0,"Explore",exploreFarm);
 		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(6,"Talk",talkWhitney);
 		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(7,"Work",workFarm);
-		addButton(9,"Leave",eventParser,13);		
+		addButton(9,"Leave",camp.returnToCampUseOneHour);		
 	}		
 }
 
@@ -121,14 +120,14 @@ private function whitneyMilkerHookup(breast:Boolean = true):void {
 		player.createKeyItem("Cock Milker - Installed At Whitney's Farm",0,0,0,0);
 		player.removeKeyItem("Cock Milker");
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[NO]
 private function whitneyMilkerRefusal():void {
 	spriteSelect(62);
 	clearOutput();
 	outputText("Whitney shrugs and the two of you resume your conversation.  But like all good things, it has to come to an end.  The two of you go your separate ways.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //TALK
 private function talkWhitney():void {
@@ -152,7 +151,7 @@ private function talkWhitney():void {
 
 		outputText("\n\n“<i>Those two are hard workers, in their own different ways. Doubt I’d be able to keep the farm going without them.</i>” She sighs. “<i>When you are out in the sticks like this, you have to make allowances for the people you find yourself lumped together with. Be understanding, and look for the good in everyone. If you set boundaries and stand firm by 'em you can get by with most anyone.</i>” She looks you in the eye. “<i>You should be careful how much time you spend around just anyone, though. Some folks don’t have your best interests at heart. Some others think they do, and they’re even more dangerous. Know what I mean?</i>” Not particularly, but you get the distinct impression you’re being warned about something. Feeling slightly unsettled, you politely take your leave. Whitney nods once and returns to her book, the picture of placidity.");
 		
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	
@@ -169,7 +168,7 @@ private function talkWhitney():void {
 		
 		outputText("\n\n“<i> I had my reasons. I grew up in the country, </i>” she goes on after a short pause, “<i>and never held much with city life. Particularly not hot, dusty, close ‘n stinky city life. Course farm life is stinky too,</i>” she acknowledges as she heaves up the milk pail and starts to walk it towards a barn. You offer to help, but she shakes her head. “<i> But least here it’s stink you’ve created yourself. I moved out here eight years ago, and never regretted it. As for Urta... well, she was finding better friends at the bottom of bottles by then. </i>” She disappears into the barn with the milk, and you decide to leave it at that.");
 		
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 
@@ -219,7 +218,7 @@ private function talkWhitney():void {
 			outputText("You notice a number of smaller bottles filled with a creamy fluid on the table, arranged in a cargo container. It takes you a moment to realise what it is. “<i>Why d’you think I pay you for it?</i> ” says Whitney with a laugh, catching your expression. “<i>I kin use some of it for my herd, but it’s just as easy to sell it to goblins ‘n harpies. Much better to buy it from me than to waste energy catching and beating it out of a satyr. 'Sides, how'd ya think I kept my hair so luxurious? Goblin hairdressers are top notch.</i>”");
 		}
 		
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	
@@ -238,7 +237,7 @@ private function talkWhitney():void {
 		
 		outputText("\n\nShe stops for such a long while that you wonder whether she’s finished. “<i>Could- could you recognise any of those prisoners? The ones from your town. You said some of em stayed even when you freed em. What did you think about that? I often wonder- is it better never to know what happened to somebody, or find em and discover nothing but a twisted shell of what you remember: a soulless monster who even likes what’s been done to em?</i>” She stops and you think you see tears glittering in eyes still gazing at the lake. You wait a little longer but evidently that’s all you’re getting. You put a hand on her shoulder and then quietly walk away.");
 		
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 
@@ -257,7 +256,7 @@ private function talkWhitney():void {
 
 		outputText("\n\nYou say goodbye with a hug and leave with a funny feeling in your gut.");
 		
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	
@@ -290,11 +289,11 @@ private function talkWhitney():void {
 			outputText("It almost sounds too good to be true.   The farmer-girl nods, reading your expression quite clearly, \"<i>Yes, there is a bit of a catch.  I'll need 250 gems for the parts to get this all set up.   Equipment like this isn't cheap.   Whaddya say, hun?   I understand if you don't want to – you can always just wait for the milk to stop.</i>\"\n\n", false);
 			if(player.gems >= 250) {
 				outputText("Do you purchase a breast-milker from Whitney for 250 gems?", false);
-				doYesNo(2182,2183);
+				doYesNo(breastMilkerPurchase, breastMilkerNoPurchase);
 			}
 			else {
 				outputText("You don't have enough money for the milker.  You apologize and head back to camp, maybe you can get one later.", false);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			return;
 		}
@@ -321,8 +320,26 @@ private function talkWhitney():void {
 	if(player.inte < 30) dynStats("int", .5);
 	if(player.inte < 40) dynStats("int", .5);
 	dynStats("lus", -5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
+}
+
+private function breastMilkerPurchase():void {
+	outputText("Whitney takes the gems and leaves with the promise of having your gear set up within the hour.  She calls back over her shoulder with a cryptic warning, \"<i>Watch how much time you spend getting milked like an animal, lest you wind up like one.</i>\"", true);
+	doNext(camp.returnToCampUseOneHour);
+	player.createKeyItem("Breast Milker - Installed At Whitney's Farm", 0, 0, 0, 0);
+	player.gems -= 250;
+	statScreenRefresh();
+}
+
+private function breastMilkerNoPurchase():void {
+	doNext(camp.returnToCampUseOneHour);
+	outputText("Whitney shrugs and the two of you chat about other things, just passing the time and enjoying a relatively normal chat.", true);
+	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
+	if (player.inte < 15) dynStats("int", 1);
+	if (player.inte < 20) dynStats("int", 1);
+	if (player.inte < 30) dynStats("int", .5);
+	if (player.inte < 40) dynStats("int", .5);
 }
 
 public function workFarm():void {
@@ -399,7 +416,7 @@ public function workFarm():void {
 		//always +1 str till 50, then 50% chance.
 		if(player.str <= 50) dynStats("str", 1);
 		else dynStats("str", rand(2));
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	spriteSelect(62);
@@ -423,8 +440,7 @@ public function workFarm():void {
 		if(temp == 4) itype = consumables.BULBYPP;
 	}
 	trace("FARM SHIT: " + itype.shortName);
-	gameState = 8;
-	inventory.takeItem(itype);
+	inventory.takeItem(itype, camp.returnToCampUseTwoHours);
 }
 
 public function meetMarble():void {
@@ -485,13 +501,13 @@ public function exploreFarm():void {
 	}
 	//Meet Marble First Time
 	if(player.findStatusAffect(StatusAffects.Marble) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0) {
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		marbleScene.encounterMarbleInitially();
 		return;
 	}
 	//Meet kelt 1st time
 	if(rand(2) == 0 && player.findStatusAffect(StatusAffects.Kelt) < 0 && player.findStatusAffect(StatusAffects.KeltOff) < 0) {
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		keltScene.keltEncounter();
 		return;		
 	}
@@ -527,14 +543,14 @@ public function exploreFarm():void {
 			outputText("Whitney falls behind, unable to cope with your speed as you tear around the farm.", false);
 		}
 		outputText("\n\nAfterwards, the both of you lie back against a tree, panting heavily and exchanging pleasantries.  Once you've both had a chance to rest, she bids you farewell and returns to her labors, leaving you to journey home to camp.", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//Other stuff
 	if(explore == 1) {
 		outputText("After wandering around for a while, you find yourself atop a slight rise looking out over the farm and the distant lake. Despite the corruption you know is slowly consuming this land, being here now makes you feel so at peace you wish it could go on forever.", true);
 		dynStats("cor", -rand(3));
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//Cows
@@ -563,7 +579,7 @@ public function exploreFarm():void {
 			dynStats("lus", 3);
 		}
 		outputText("Shaking your head, you clear your thoughts and turn away from the pasture. Cows don't have your problems.", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	if(explore == 3) {
@@ -573,7 +589,7 @@ public function exploreFarm():void {
 	//[NOTHING]
 	else {
 		outputText("You wander around, unable to find anything entertaining on this patch of rural bliss.", true);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -820,7 +836,7 @@ public function getMilked():void {
 	if(player.statusAffectv1(StatusAffects.LactationEndurance) < 1.5) player.addStatusValue(StatusAffects.LactationEndurance,1,.05);
 	player.addStatusValue(StatusAffects.LactationEndurance,1,.05);
 	player.createStatusAffect(StatusAffects.Milked,8,0,0,0);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function cockPumping():void {
@@ -1099,7 +1115,7 @@ public function cockPumping():void {
 	}
 	outputText(" on your way, whistling happily and feeling like taking a nap.", false);
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function cowBadEnd1():void {
@@ -1258,7 +1274,7 @@ private function centaurToysHoooooo():void {
 	outputText("(<b>Key Items Gained: Fake Mare and Centaur Pole</b>)", false);
 	player.createKeyItem("Fake Mare",0,0,0,0);
 	player.createKeyItem("Centaur Pole",0,0,0,0);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

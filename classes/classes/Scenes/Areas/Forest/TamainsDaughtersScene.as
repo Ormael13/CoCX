@@ -140,7 +140,7 @@ private function playDumbToTamanisDaughters():void {
 	if(player.inte/2 + 25 > rand(75)) {
 		outputText("The leader looks you up and down for a moment.  Her face slowly contorts to puzzlement, then rage, \"<i>Tammi you ditz!  I thought you said this was his trail?  Come on girls, we've got a dad to hunt.</i>\"\n\n", false);
 		if(flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] > 1) outputText("They really must not be paying much attention to what you look like.", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	
@@ -352,8 +352,8 @@ private function fuckYoDaughtersHomie():void {
 	if (tamaniPresent) kGAMECLASS.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
 	player.cumMultiplier += .3;
-	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
-	else doNext(15);
+	if (getGame().inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseFourHours);
 }
 
 //[Let them]
@@ -705,8 +705,8 @@ private function legTamanisDaughtersRAEPYou():void {
 	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
 	if (tamaniPresent) kGAMECLASS.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
-	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
-	else doNext(15);
+	if (getGame().inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseFourHours);
 }
 
 //[Lose Combat, Get Your Dick DRAINED]
@@ -1018,8 +1018,8 @@ private function loseToDaughtersWithTamaniThere():void {
 	//daughter countdown reset. 
 	player.orgasm();
 	dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "cor", 1);
-	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 

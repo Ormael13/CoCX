@@ -59,7 +59,7 @@ private function minervaAppearance():void {
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
 	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",eventParser,13);
+	addButton(9,"Leave",camp.returnToCampUseOneHour);
 }
 
 public function encounterMinerva():void {
@@ -95,7 +95,7 @@ private function ignoreMinervasPath():void {
 	clearOutput();
 	outputText("Deciding to play it safe, you turn away from the new path and continue your search elsewhere.");
 	// PC returns to camp.
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Take Path]
 private function takeMinervasPath():void {
@@ -189,7 +189,7 @@ private function leaveMinervasFirstEncounter():void {
 	spriteSelect(95);
 	outputText("You decide that you don't want to risk going into Minerva's lair as, for all you know, it could be a trap.  Therefore, you turn around and skedaddle back down the mountain.  As you leave, Minerva turns and watches you for a bit, a sad look on her face before she turns back and heads inside her home, alone.");
 	// PC returns to camp.
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //1-2 Repeat Encounter 1.  Use any time.
@@ -212,7 +212,7 @@ private function repeatEncounterMinerva():void {
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
 	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",eventParser,13);	
+	addButton(9,"Leave",camp.returnToCampUseOneHour);	
 }
 
 //1-3 Repeat Encounter 2.  Use if 3rd+ time visiting Minerva.
@@ -235,7 +235,7 @@ private function minervaThirdPlusEncounter():void {
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
 	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",eventParser,13);
+	addButton(9,"Leave",camp.returnToCampUseOneHour);
 }
 
 //Romancing scenes encounter with all sub scenes.
@@ -336,7 +336,7 @@ private function rejectMinervasLove():void {
 	outputText("\n\nSlowly, you get up, looking away from the curvy siren as you step out of the pool and leaving Minerva's tower.  Hopefully she won't be upset for too long, it would be best to check up on her later.  As you go, you swear you hear her let out a sob, the pain of your rejection clear as the mist that floats around the mountain.");
 	// PC returns to camp.
 	flags[kFLAGS.MINERVA_LOVE] = -1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -356,7 +356,7 @@ private function dontFlyWithWithMeYouCrazyBitch():void {
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
 	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",eventParser,13);
+	addButton(9,"Leave",camp.returnToCampUseOneHour);
 }
 
 private function fightMinerva():void {
@@ -381,7 +381,7 @@ private function repeatableMinervaRomanceScene():void {
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
 	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",eventParser,13);
+	addButton(9,"Leave",camp.returnToCampUseOneHour);
 }
 
 
@@ -493,7 +493,7 @@ private function talkingToMinervaAboutBackstory():void {
 		// PC returns to camp.
 		flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 1;
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -514,7 +514,7 @@ private function talkAboutTheSpringWithMinerva():void {
 	outputText("\n\nReturning her shining smile, you promise to come back and visit soon, then head out and start the hike back toward your camp.");
 	// PC returns to camp.
 	dynStats("lus", 10+player.lib/10);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //3-3 Talking Scene 3 - talks about her shark girl daughter
@@ -541,7 +541,7 @@ private function talkWithMinervaAboutSharkGirlDaughter():void {
 		outputText("\n\n\"<i>Thank you for listening to me, hun, I'm so happy to have someone like you in my life,</i>\" Minerva whispers to you with a genuine smile on her black lips.");
 		outputText("\n\nThe two of you stay like this for a while, just spending a little time together before you decide you must return to camp and your quest.  Saying your goodbyes, you give Minerva a kiss before heading home.");
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -561,7 +561,7 @@ private function talkToMinervaAboutHerCorruption():void {
 	outputText("\n\nCuddling up to you, the siren slips her arms around you, hugging you tightly.  \"<i>Thank you for listening to me, hun, I'm so happy to have someone like you in my life,</i>\" Minerva whispers to you with a genuine smile on her black lips.  \"<i>Sharing one of my hopes and dreams like that, I can't help but feel closer to you.</i>\"");
 	outputText("\n\nThe two of you stay like this for a while, just spending some time together, before you decide you must return to camp and your quest.  Saying your goodbyes, you give Minerva a kiss before heading home.");
 	// PC returns to camp
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //3-5 Motherhood
@@ -609,7 +609,7 @@ private function minervaMotherhood():void {
 	
 	outputText("\n\nLooking around, you see how late it has gotten and swiftly get up, Minerva's right; you have to get back to your great quest!  Looking at the siren one last time, you tell her that you will be sure to come and visit again later.");
 	// PC returns to camp.
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //3-6 Bath Time - romance only
@@ -649,7 +649,7 @@ private function bathTimeWithMinerva():void {
 	// PC returns to camp.
 	dynStats("lus", 10+player.lib/10);
 	fatigue(-30);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -777,8 +777,9 @@ private function fuckMinervasAsshole():void {
 	flags[kFLAGS.TIMES_BUTTFUCKED_MINERVA]++;
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //4-2= sex scene 2:  Cowgirl
@@ -881,8 +882,9 @@ private function minervaCowgirlSex():void {
 	flags[kFLAGS.TIMES_MINERVA_COWGIRLED]++;
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //SEX SCENE 2.5 female/herm: LAP SEX
@@ -969,8 +971,9 @@ private function minervaLapSex():void {
 	flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //4-5= sex scene 4: Hermy oral 
@@ -1047,8 +1050,9 @@ private function noBallsMinervaAndContinuation(clear:Boolean = true):void {
 	outputText("\n\nFor a long while, you just lay there, cuddled up with the mostly naked siren, the two of you idly chatting about various things that come to mind.  Eventually, you must leave the gentle embrace and return to your duties as a Champion.  Disentangling yourself from Minerva, you straighten your clothes out and, with a smile, tell her you had a wonderful time.  Grinning up at you, Minerva climbs back onto her feet and pulls you into a deep, tongue-tangling goodbye kiss.  \"<i>It was amazing, we have to do this again.  Perhaps next time, I can do you, hmm?</i>\" she suggests, not wanting to be greedy and get all the pleasure.  Giving you another peck on the cheek, the siren sends you on your way after telling you to come back and visit soon.");
 	
 	dynStats("lus", 20);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 	
 //4-6= sex scene 6: Blow job!
@@ -1123,8 +1127,9 @@ private function letMinervaSuckYouOff():void {
 	//PC returns to camp.
 	player.orgasm();
 
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //4-4= sex scene 4:  hand held behind
@@ -1190,8 +1195,9 @@ private function fuckMinervaWithHerHandsBehindHerBack():void {
 	//PC returns to camp
 	dynStats("sen", -1);
 	player.orgasm();
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 	
 //4-9= sex scene 9: lesing out
@@ -1268,8 +1274,9 @@ private function pcGetsEatenOutByMinerva():void {
 	// PC returns to camp
 	dynStats("sen", -2);
 	player.orgasm();
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1283,8 +1290,7 @@ internal function loseToMinerva():void {
 		// return PC to options- no combat option
 		// PC gains 1 Purity peach
 		monster.createStatusAffect(StatusAffects.PeachLootLoss,0,0,0,0);
-		menuLoc = 2;
-		inventory.takeItem(consumables.PURPEAC);
+		inventory.takeItem(consumables.PURPEAC, camp.returnToCampUseOneHour);
 		cleanupAfterCombat();
 	}
 	//PC loss by Lust
@@ -1324,8 +1330,7 @@ private function eatSomethingYouCunt():void {
 	spriteSelect(95);
 	//Acquiring: 
 	outputText("You walk over to the fruit trees surrounding the spring, examining the strange treats.  You decide that one ripe fruit, one resembling a peach, is the best choice, and pluck it from the tree.  Thanking Minerva for letting you have it, you stow it away safely and head back to camp.\n\n");
-	menuLoc = 2;
-	inventory.takeItem(consumables.PURPEAC);
+	inventory.takeItem(consumables.PURPEAC, camp.returnToCampUseOneHour);
 }
 
 /*
@@ -1349,7 +1354,7 @@ private function getADrinkYouBitch():void {
 	dynStats("lus", -25, "cor", -.5, "resisted", false);
 	if(player.cor > 50) dynStats("cor", -1);
 	if(player.cor > 75) dynStats("cor", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 /*
 [Bottle] Pulling out a small waterskin, you dip it into the crystal clear water, filling the container with the cool, clean spring water before placing it in your pack

@@ -373,7 +373,8 @@ public function takeGooArmorAndWearIt():void {
 	//(\"<i>You put a (previous armorName) in your X pouch)
 	outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the dungeon ahead.\n\n");
 	//(PC regains HP)
-	armors.GOOARMR.equip(player,true,false);
+	inventory.takeItem(player.setArmor(armors.GOOARMR), camp.campMenu);
+	//armors.GOOARMR.equip(player,true,false);
 	flags[kFLAGS.MET_VALERIA] = 1;
 	HPChange(1000,false);
 	flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
@@ -1121,7 +1122,7 @@ public function takeQueensStaff():void {
 	clearOutput();
 	outputText("You pick up the Harpy Queen's staff.  It is a tall whitewood staff, nearly six feet in length, and covered in glowing eldritch runes, with a singular shimmering sphere of crystal at its head, which seems to have a swirling mist within.");
 	//(New Weapon: EldritchStaff)
-	inventory.takeItem(weapons.E_STAFF);
+	inventory.takeItem(weapons.E_STAFF, camp.campMenu);
 	//Similar stats to the Wizard's Staff, but with a better Fatigue reduction and a bonus to Magic damage/effect.
 	flags[kFLAGS.TOOK_QUEEN_STAFF] = 1;
 }
@@ -1258,5 +1259,5 @@ public function towerOutro():void {
 	//(PC returns to Camp)
 	//(If PC has Valeria: add \"<i>Valeria</i>\" to Followers menu)
 	inDungeon = false;
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }

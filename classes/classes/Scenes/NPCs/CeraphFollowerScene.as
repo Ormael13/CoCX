@@ -577,7 +577,7 @@ package classes.Scenes.NPCs
 			outputText("Nodding, you give her ass a slap and send her off, noting Ceraph has freed her hands at some point and returned them to their normal position.  She hasn't done anything about the sexual filth coating her body, but knowing her, she probably doesn't want to.", false);
 			player.orgasm();
 			dynStats("sen", -2, "cor", .25);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //*Ceraph TongueFucks The PC (Zeddited)
@@ -628,7 +628,7 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00289]++;
 			player.orgasm();
 			dynStats("sen", -2 ,"cor", .25);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //*Ceraph goes full tentacle and double penetrates herms (+ standard dick BJ if ceraph dick toggle is on) (Zeddited)
@@ -682,12 +682,12 @@ package classes.Scenes.NPCs
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00290] == 0) {
 				outputText("You smirk and wonder if you should punish her for stuffing her cock down your throat.  Do you?", false);
-				simpleChoices("Punish", punishCeraphForSurpriseThroatFuck, "", 0, "", 0, "", 0, "Leave", 13);
+				simpleChoices("Punish", punishCeraphForSurpriseThroatFuck, "", 0, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
 			}
 			//ELSE: 
 			else {
 				outputText("You nod graciously and begin to clean up, dismissing your personal demon... for now.", false);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -699,7 +699,7 @@ package classes.Scenes.NPCs
 			outputText("", true);
 			outputText("You grab hold of Ceraph, bending the surprised demoness over a rock and laying into her ass.  She whimpers, but manages not to cry, even as you turn her purple butt into a black and blue canvas.  With each slap you deliver, you dictate that her cock is only allowed near your mouth at YOUR discretion, not a worthless slave's.  By the end, she's sniffling and nodding, murmuring, \"<i>Yes " + player.mf("Master", "Mistress") + ",</i>\" over and over again.</i>\"\n\n", false);
 			outputText("You let the demon go with her pride bruised.  There's little doubt to be had - she'll never make that mistake again.", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Siamese Catgirl Twins - TDM (Zeddited, nya)
@@ -769,7 +769,7 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			dynStats("lib", -1);
 			//end scene
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -840,7 +840,7 @@ package classes.Scenes.NPCs
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 				trace("PC KNOCKED UP WITH CERAPH IMPS");
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[Sober]
@@ -877,7 +877,7 @@ package classes.Scenes.NPCs
 			outputText("Retrieving your " + player.armorName + ", when you turn around again, Urta is gone, the moment vanishing like a drop of water in an endless sea. \"<i>Thank you, " + player.mf("Master", "Mistress") + ",</i>\" Ceraph's voice demurely whispers, gratitude floating on the wind.", false);
 			player.orgasm();
 			dynStats("lib", -1, "sen", -2, "cor", 2);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Corrupting the Innocent with optional gangbang -Luka (Zeddited) (with Shake N' Bake) (and Shambles helped)
@@ -1014,7 +1014,7 @@ package classes.Scenes.NPCs
 			outputText("Chagrined, she unfurls her wings and flies off, the imps quickly wilting and following suit.", false);
 			//(disable repeat of scene)
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00293] = 1;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[=No=]
@@ -1024,7 +1024,7 @@ package classes.Scenes.NPCs
 			outputText("You tell her you have no interest in granting release to lowly imps.  If they want pleasure, then they should earn it themselves.\n\n", false);
 
 			outputText("\"<i>Sorry boys, " + player.mf("Master's", "Mistress") + " orders.</i>\"  She extends her wings and flies away, and the horny imps follow suit, still busy masturbating.  A 'pit-pat-pat' sound follows them, the noise of their pre-cum hitting the dry dirt from on high.\n\n", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[=Yes=]
@@ -1043,7 +1043,7 @@ package classes.Scenes.NPCs
 
 			outputText("Licking the cum off her body, she sashays towards you to give you a little peck on the cheek.  \"<i>Hmm, you're such a good " + player.mf("Master", "Mistress") + ", I might have to leave Ceraph's harem and join yours instead.  See you around, hot stuff.</i>\"  She rounds up the tired imps and extends her wings, setting off alongside them.", false);
 			dynStats("lus", 5, "cor", 2);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //(not optimized in any way for centaur)
@@ -1165,7 +1165,7 @@ package classes.Scenes.NPCs
 			//end (stat changes?)
 			player.orgasm();
 			dynStats("lib", 1, "sen", -5, "cor", 3);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //NOTES:
@@ -1282,7 +1282,7 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			dynStats("sen", -2, "cor", 2);
 			flags[kFLAGS.CERAPH_ROLEPLAY_AS_DOMINIKA_COUNT]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		/*Ceraph's Harem: Zetsuko
@@ -1388,7 +1388,7 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Zetsuko hopes to taste " + player.mf("Master", "Mistress") + " again sometime...</i>\"", false);
 			player.orgasm();
 			dynStats("lib", .25, "sen", -5, "cor", 2);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //▶[GetTongued] requires vagina
@@ -1443,7 +1443,7 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Zetsuko hopes to taste " + player.mf("Master", "Mistress") + " again sometime...</i>\"", false);
 			player.orgasm();
 			dynStats("lib", .25, "sen", -5, "cor", 2);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //▶[Banana?] silly mode
@@ -1470,7 +1470,7 @@ package classes.Scenes.NPCs
 			outputText("\"<i>FUCK!</i>\"\n\n", false);
 
 			outputText("You'll take that as a yes.\n\n", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function noZetsukoLoveToday():void
@@ -1543,7 +1543,7 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]++;
 			player.removeCock(x, 1);
 			player.genderCheck();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function ceraphFollowerCuntTaking():void
@@ -1561,7 +1561,7 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			dynStats("lib", -2, "sen", -2, "cor", 5);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function ceraphFollowerTitTaking(rowNum:int = 0):void
@@ -1614,7 +1614,7 @@ package classes.Scenes.NPCs
 			//(-1 fetish, +1 tit toy status)
 			dynStats("lus", 20, "cor", 5);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //NippleCunt Stuffing (Ceraph grows dick-nipples to plow your lusty twats!)
@@ -1656,7 +1656,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>Delicious, my [Master],</i>\" the demoness coos as her wings unfurl, \"<i>Please, let's do this again.</i>\"  She leaps into the sky and flies off, no doubt to tend to her own pets.");
 			player.orgasm();
 			dynStats("sen", 2, "cor", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Portal Fuck (AKA Ceraph Hung Out With Cinnabar, Req's PC dick)
@@ -1697,7 +1697,7 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			dynStats("cor", 1);
 			flags[kFLAGS.TIMES_CERAPH_PORTAL_FUCKED]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function layEggsInSlaveCeraph():void
@@ -1746,7 +1746,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nHumming a happy tune to yourself as you walk around Ceraph's twitching form, you grab a handful of her hair and pull her up off the ground.  Her face is crusted with dirt and her sparkling, gem-like eyes stare senselessly at you.  You rub your ovipositor over her head, carefully wiping your mingled lubes off on her hair before retracting the organ back into its holding sleeve.  \"<i>That will be all,</i>\" you tell her, and she smiles dreamily at you.  You turn around to gather your things, and don't bother to look back.");
 			player.dumpEggs();
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -1810,7 +1810,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nCeraph gets up with a shocked expression painted on her violet features.  \"<i>Didn't you have any fun?</i>\" she asks.  \"<i>We were just about to the good part!</i>\"");
 			outputText("\n\nYou tell her that it wasn't fun in the slightest, and you want out.");
 			outputText("\n\n\"<i>Well, okay then... [Master]...</i>\" she grumbles.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[Either Once]
@@ -1945,7 +1945,7 @@ package classes.Scenes.NPCs
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("sen", 2, "cor", 1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[Either Twice]
@@ -2149,7 +2149,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYour collar is removed, and you look around realizing your owner is gone.  Your muscles are sore from the journey and you NEED to masturbate...  You aren't even sure why you did that.");
 			}
 			dynStats("sen", 4, "lus=", 100, "resisted", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

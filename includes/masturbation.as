@@ -20,7 +20,7 @@ public function masturbateMenu():void {
 	button++;
 	//catofellato
 	if(player.hasCock() && (player.findPerk(PerkLib.Flexibility) >= 0 || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
-		addButton(button,"Lick Cock",eventParser,2487);
+		addButton(button,"Lick Cock", catAutoLick);
 		button++;
 	}
 	if(player.hasVagina() && (player.findPerk(PerkLib.Flexibility) >= 0 || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
@@ -48,7 +48,7 @@ public function masturbateMenu():void {
 			if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
 				eventParser(10);
 			else 
-				eventParser(3409);
+				meditate();
 		}
 		else eventParser(10);
 		funcs = new Array();
@@ -114,21 +114,21 @@ public function fappingItems(menus:Boolean = true):Boolean {
 	}
 	if(player.hasKeyItem("Dual Belt") >= 0 && player.gender == 3 && !player.isTaur()) {
 		if(menus) {
-			addButton(button,"Dual Belt",eventParser,2144);
+			addButton(button,"Dual Belt", dualBeltMasturbation);
 			button++;
 		}
 		hasItems = true;
 	}
 	if(player.hasKeyItem("Fake Mare") >= 0 && player.hasCock() && player.isTaur()) {
 		if(menus) {
-			addButton(button,"Fake Mare",eventParser,3415);
+			addButton(button, "Fake Mare", centaurDudesGetHorseAids);
 			button++;
 		}
 		hasItems = true;
 	}
 	if(player.hasKeyItem("Centaur Pole") >= 0 && player.hasVagina() && player.isTaur()) {
 		if(menus) {
-			addButton(button,"C. Pole",eventParser,3414);
+			addButton(button, "C. Pole", centaurGirlsGetHorseAids);
 			button++;
 		}
 		hasItems = true;
@@ -270,20 +270,20 @@ public function onaholeUse():void
 
 	if (player.cocks.length > 1 && player.gender == 3) {
 		switch(rand(2)) {
-			case 0: doNext(2046); break;
-			case 1: doNext(2050); break;
+			case 0: doNext(camp.onaholeMulticockContinuation); break;
+			case 1: doNext(camp.onaholeFutaContinuation); break;
 			default: trace("Onahole to-be-continued unexpected state..."); break;
 		}
 	}
 	else if (player.cocks.length > 1) {
-		doNext(2046);
+		doNext(camp.onaholeMulticockContinuation);
 	}
 	else if (player.gender == 3) {
-		doNext(2050);
+		doNext(camp.onaholeFutaContinuation);
 	}
 	else {
 		player.orgasm();
-		doNext(13)
+		doNext(camp.returnToCampUseOneHour)
 	};
 	
 
@@ -322,20 +322,20 @@ public function deluxeOnaholeUse():void {
 					
 	if (player.cocks.length > 1 && player.gender == 3) { // Multi-cocked herms get random "to be continued" scene...
 		switch(rand(2)) {
-			case 0: doNext(2046); break;
-			case 1: doNext(2050); break;
+			case 0: doNext(camp.onaholeMulticockContinuation); break;
+			case 1: doNext(camp.onaholeFutaContinuation); break;
 			default: trace("Onahole to-be-continued unexpected state..."); break;
 		}
 	}
 	else if (player.cocks.length > 1) {
-		doNext(2046);
+		doNext(camp.onaholeMulticockContinuation);
 	}
 	else if (player.gender == 3) {
-		doNext(2050);
+		doNext(camp.onaholeFutaContinuation);
 	}
 	else {
 		player.orgasm();
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 public function allNaturalOnaholeUse():void {
@@ -370,7 +370,7 @@ public function allNaturalOnaholeUse():void {
 
 	dynStats("lib", -1.5, "sen", .75, "cor", .5);
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 public function stimBeltUse():void {
 	outputText("", true);
@@ -384,7 +384,7 @@ public function stimBeltUse():void {
 			outputText(" tits as your body convulses with multiple orgasms. Savoring every moment, you relish in the pangs of delight searing your body. Eventually, the belt moves slower and slower, until it comes to a stop, along with your fun. You realize that the gears have wound down and the box needs to be wound for your pleasure to continue. Deciding not to overwhelm yourself, you carefully remove your toy and save it for another time.", false);
 			player.orgasm();
 			dynStats("sen", -1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Repeated use!
 		else {
@@ -394,7 +394,7 @@ public function stimBeltUse():void {
 			outputText("Fortunately, you locate the key near your feet, saving you the money of having another made for the device. You put aside your machine, your lusts slaked, for now.", false);
 			player.orgasm();
 			dynStats("sen", -1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		player.cuntChange(1, true, true, false);
 	}
@@ -408,7 +408,7 @@ public function allNaturalStimBeltUse():void {
 			player.createStatusAffect(StatusAffects.UsedNaturalSelfStim, 0,0,0,0);
 			outputText("Brimming with anticipation, you put on the gloves to avoid prematurely triggering the machine. You place the belt down and strip yourself completely. Stepping through the straps of the garment, you pull it up. You take the time to align the nodule with the opening of your womanhood. After settling the knob to the entrance to your pussy, you take off the gloves, lay back and touch the amber pads with your fingers.\n\n", false);
 			outputText("You hear a distinctive squishing sound and you feel the belt tighten around your waist and pelvis. It becomes tighter and tighter until its removal is an impossibility because of your own bulk. While you are concerned, you maintain composure as the belt eventually stops tightening. There is a pause. A couple of minutes go by and little happens. You notice that the entire front of the belt is becoming warm. It is not the typical heat from a blanket or a piece of metal, but it feels like the warmth of flesh on flesh. You hear more squishing and you feel the nodule stir and rub against your opening. Your pleasure slowly begins to build and you are stimulated and amused by the teasing the apparatus seems to produce. Without warning, you feel your cunt stretch open as something thrusts inside you.\n\n", false);
-			doNext(2047);
+			doNext(camp.allNaturalSelfStimulationBeltContinuation);
 		}
 		//Multiple uses
 		else {
@@ -418,7 +418,7 @@ public function allNaturalStimBeltUse():void {
 				outputText("You cry in shock as the creature pushes past your cervix and begins injecting your womb with hot, thick cum... or whatever it is that it shoots inside you.  Unlike before, the very sensation of the fluid acts upon your brain and body strangely. The pain dulls and eventually filters from your mind and only the pleasure of the experience remains. The fluid continues pumping in until it overflows. The flooding of your insides leaves you paradoxically ecstatic and revolted. After an unknown amount of time, the thing stops fucking you and it releases its grip of your pelvis, leaving you a sticky, exhausted mess. A part of you wants to try the belt again, but you are too tired to bother cleaning yourself up.", false);
 				player.orgasm();
 				dynStats("lib", -1, "sen", .75, "cor", 1);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			//High corruption variant
 			else {
@@ -427,9 +427,9 @@ public function allNaturalStimBeltUse():void {
 				player.orgasm();
 				dynStats("lib", -.5, "sen", 1, "cor", 1.5);
 				//Game over if fully corrupt!
-				if(player.cor >= 100) doNext(2042);
+				if(player.cor >= 100) doNext(camp.allNaturalSelfStimulationBeltBadEnd);
 				//Otherwise, 4 hours pass!
-				else doNext(15);
+				else doNext(camp.returnToCampUseFourHours);
 			}
 		}
 	}
@@ -691,7 +691,7 @@ public function masturbateJojo():void {
 			player.cuntChange(36.4, true);
 		}
 	}	
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Genderless people suck!
 public function genderlessMasturbate():void {
@@ -786,18 +786,18 @@ public function masturbateGo():void {
 	}
 	if(player.isTaur()) {
 		if(centaurMasturbation()) {
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		else {
-			doNext(1);
+			doNext(camp.campMenu);
 			return;
 		}
 	}
 	if(player.gender == 0) {
 		genderlessMasturbate();
 		dynStats("lus", -50);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) {
@@ -1270,7 +1270,7 @@ public function masturbateGo():void {
 			outputText("You sigh and drift off to sleep.", false);
 		}
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function titForeplay()  : void
@@ -1954,7 +1954,7 @@ public function deluxeDildo():void {
 			else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.", false);
 		}
 		player.orgasm();
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		outputText("\n", false);
 		player.cuntChange(player.vaginalCapacity() * .9, true);
 	}
@@ -2199,7 +2199,7 @@ public function lickYerGirlParts():void {
 	if(player.findPerk(PerkLib.Flexibility) < 0) {
 		outputText("You undress from your " + player.armorName + " and take a seat down on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea of cats flashes through your brain, putting a naughty smile on your face. You lay on your side and spread your legs, giving you a perfect view of your " + vaginaDescript(0) + " You lean your head down towards the pleasure-hole, only to be stopped half-way there. You stick your tongue out, trying to add a few more inches, but this doesn't do anything except increase your appetite and your lust as a drop of warm saliva falls onto your " + vaginaDescript(0) + ". You stretch and wriggle your tongue out in a fruitless effort to taste your dripping wet cunt, craving the feeling of your tongue caressing your lips and penetrating into your depths... but it is not to be. You sit back up, frustrated and even more aroused than you were before.", false);
 		dynStats("lus", 15);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//[1st time doing this]
@@ -2223,7 +2223,7 @@ public function lickYerGirlParts():void {
 	//DONE!
 	player.orgasm();
 	dynStats("sen", (-0.5));
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 public function catAutoLick():void {
 	outputText("", true);
@@ -2233,7 +2233,7 @@ public function catAutoLick():void {
 		//[Male]
 		outputText("You undress from your " + player.armorName + " and take a seat down on the ground, your " + cockDescript(0) + " pointing straight at your face. You stroke the erect member a few times, but then remember the cats back at the village. You stare at your " + cockDescript(0) + "; the more you look at the cock, the more your mouth craves to suck on it. You open your mouth as wide as you can and lean towards your cock, only to be stopped halfway to the tip. You stick your tongue out and try to lick the head. You pretend you're rolling your tongue around the head, but this only makes your cock harder in eagerness. You throw your head forward in an attempt to flick your tongue against it, but the " + cockDescript(0) + " is pulled back as you go forward. You slump your back onto the ground and let out a frustrated groan. The only thing you've managed to do is make yourself more aroused than when you started.", false);
 		dynStats("lus", 15);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//Male Masturbation
@@ -2326,7 +2326,7 @@ public function catAutoLick():void {
 	//DONE!
 	player.orgasm();
 	dynStats("sen", (-0.5));
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function meditate():void {
@@ -2335,7 +2335,42 @@ public function meditate():void {
 	
 	dynStats("lus", -50, "cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 	if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10) HPChange(50, true);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
+}
+
+private function dualBeltMasturbation():void {
+	clearOutput();
+	outputText("You look at the thing in front of you and sigh, your " + multiCockDescriptLight() + " and " + vaginaDescript(0) + " dripping with fluids. With a nervous sigh you step into the underwear looking device and slip it up your legs, the cold metal feeling so good on your " + player.skinDesc + ", sending a rush of feelings up your body. You slip your " + cockDescript(0) + " down and into a hole on the front of the belt, the extra length sticking out on the other side of it. Underneath the hole and right above your pussy is another metal square with what feels like a small nub on the inside rubbing against your clit. Shivering from the feeling of it, you stay there for a moment, waiting in anticipation. Finally, you reach down to the side of the belt and flick the switch to the on position.\n\n", false);
+	outputText("The belt whirs to life, shaking on your waist, sending jolts of pleasure through your clit as the small inside nub hits it. \"<i>Ohh...</i>\" Suddenly, the ring around your cock vibrates and then tightens hard around your cock, the belt sinking onto your body and locking in place. Worry sets in instantly as you try to wiggle and take it off, but it is no use. You see something black bubble from the edges of the metal, worried even more that it might be some sort of acid. It begins to creep across your skin at a disturbing rate, going down your " + player.legs() + " and encasing them in the blackness, wrapping your cock, ", false);
+	if (player.tailType > TAIL_TYPE_NONE)
+		outputText("covering up your tail, ", false);
+	outputText("and then going up your body, covering your " + allBreastsDescript() + " and neck. The only part of your body unclad by the suit is your head. The blackness feels slick and smooth, almost cold, a strange type of feeling washes over you until you realize that it is a rubber suit.\n\n", false);
+	outputText("Before you can do anything else, the belt activates again and the latex covering of your " + cockDescript(0) + " begins to tighten and pulse around the meat, warming up to feel like a virgin cunt. A moan is dragged from your lips as it begins to ripple and pulse, simulating the feeling of fucking a tight hole as the entire suit molds itself to your body. Before you can get too used to the feeling of the suit milking your cock, the nub that had been teasing your clit suddenly expands and pushes out, the slick feeling of the latex pushing into your pussy.  The hardened black latex splits your tunnel and spreads you wide as it goes in deep. Your eyes widen for a moment as both stop, and then your world explodes in a flash of pleasure. The hardened lump begins to piston in and out of your " + vaginaDescript(0) + ", vibrating wildly as a lump grows in on top in precisely the right spot to rub back and forth on your g-spot.\n\n", false);
+	outputText("Meanwhile the latex around your " + cockDescript(0) + " begins to pulse and ripple faster than ever before. You quake and quiver, " + player.legs() + " giving out as it teases and pulses around your " + allBreastsDescript() + ". Your hands go down your body helplessly and start stroking at your encased cock, rubbing up and down your length. Unfortunately, all things must come to an end as the pleasure gets to be way too much and you feel yourself cum. Your hips buck wildly as you feel cum spurt into the latex, the end swelling up and filling like a ", false);
+	if (player.cumQ() > 200)
+		outputText("massive ", false);
+	outputText("balloon. ", false);
+	if (player.cumQ() >= 1000)
+		outputText("It grows larger and larger until you are sure it will pop, but it doesn't.  It just sloshes around - a huge bubble, nearly waist high. ", false);
+	outputText("Your eyes close in shivered ecstasy as your cunt spasms and clutches down around the hardened section deep inside of you. ", false);
+	//([If high lactation]
+	if (player.biggestLactation() >= 2)
+		outputText("Milk gushes out from your " + breastDescript(0) + " as you orgasm, filling the inside of the suit with a slick layer of milk and forming milk bubbles that hang lewdly off your chest. ", false);
+	outputText("However, the suit is far from over as it keeps up all of its actions, keeping you on an orgasmic plateau, making sure you never stop coming. Your hands fall to the side and your body falls down, unable to keep it up as your consciousness fades, the suit still filling with all your fluids.\n\n", false);
+	outputText("When you wake, the black latex is no longer covering your body and the belt is silent around your waist. Cum drips from the tip of your cock and the top part of your " + player.legs() + " are coated with your feminine juices. ", false);
+	if (player.biggestLactation() >= 2)
+		outputText("Thin streams of creamy milk flow from your " + allBreastsDescript() + ", your torso and midsection dripping wet from the stuff. ", false);
+	outputText("Completely sated, you take off the belt, finding it slides off easily, and put it away in your campsite, eagerly awaiting the time you can next use it and have the suit work you over once more.", false);
+	dynStats("sen", -1, "lus", -300);
+	if (player.lib < 30) dynStats("lib", .5);
+	if (player.lib < 50) dynStats("lib", .5);
+	if (player.lib < 60) dynStats("lib", .5);
+	if (player.sens > 40) player.sens -= 1;
+	if (player.sens > 60) player.sens -= 1;
+	if (player.sens > 80) player.sens -= 1;
+	if (player.tou > 50) dynStats("tou", -1);
+	if (player.tou > 75) dynStats("tou", -1);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Maturbate] -- [Fake Mare] (Cock Centaurs Only)
@@ -2388,7 +2423,7 @@ public function centaurDudesGetHorseAids():void {
 
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	player.addKeyValue("Fake Mare",1,1);
 }
 
@@ -2418,7 +2453,7 @@ public function centaurGirlsGetHorseAids():void {
 	outputText("When your climax finally passes, you've collapsed on all fours, swaying light-headed as the statue continues to leak a steady trickle of spooge onto your " + buttDescript() + ".  You stagger to your legs and begin to disassemble the pole.  You drag it back to your stash, your hips making a lewd squishing noise with every step as globs of fake cum leak out of your horsecunt.\n\n", false);
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	player.addKeyValue("Centaur Pole",1,1);
 	trace("Times Ridden Pole" + player.keyItemv1("Centaur Pole"));
 }
@@ -2559,7 +2594,7 @@ public function getHugeEggsInCawk():void {
 	player.dumpEggs();
 	player.orgasm();
 	flags[kFLAGS.TIMES_EGGED_IN_COCK]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Birth Bee Eggs Out Your Wang: Finished (Slywyn)(edited)
 public function birthBeeEggsOutYourWang():void {
@@ -2712,7 +2747,7 @@ public function layEggsInYerTits():void {
 	player.orgasm();
 	dynStats("sen", 1);
 	player.dumpEggs();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Tentacle In Gina Faps.
@@ -2743,7 +2778,7 @@ public function tentacleSelfFuck():void {
 	{
 		CoC_Settings.error("");
 		outputText("ERROR");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	clearOutput();
@@ -2883,7 +2918,7 @@ public function tentacleSelfFuck():void {
 	//(-2 sens + 1 per tentacle dick, -100 lust)
 	player.orgasm();
 	dynStats("sen", (-1*(1 + player.tentacleCocks())));
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Upon selecting the option to masturbate you should have the option to fuck your own ass if you have a tentacle dick
@@ -2902,7 +2937,7 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 	{
 		CoC_Settings.error("");
 		outputText("ERROR");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	clearOutput();
@@ -2957,7 +2992,7 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 	}
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Unique Masturbation Scene (by Frogapus)
@@ -2991,7 +3026,7 @@ public function gildedCockTurbate():void {
 	player.gems += gems;
 	flags[kFLAGS.GILDED_JERKED]++
 	statScreenRefresh();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function stickADildoInYourVagooSlut():void {
@@ -3036,7 +3071,7 @@ public function stickADildoInYourVagooSlut():void {
 	player.orgasm();
 	dynStats("sen", -1.5);
 	statScreenRefresh();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Dildo in the butt because why not?
@@ -3067,7 +3102,7 @@ public function dildoButts():void
 	player.orgasm();
 	dynStats("sen", 0.5);
 	statScreenRefresh();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function midasCockJackingGemsRoll():int

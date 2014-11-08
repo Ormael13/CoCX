@@ -77,26 +77,26 @@ public function openXmasPresent():void {
 		outputText("Before you can utter a single word of confusion or protest, the elf moans and the cock erupts, spurting a rope of cum into your hair.  The next blast takes you across the nose, then on your lips, then your chin, and finally onto your " + allBreastsDescript() + ".  Shocked and dripping, you stand dumbfounded as the elf plants a kiss on your lips, tears off the box, and runs away with her cock flopping and buzzing in time with each step.  There's no way to catch her in this darkness.\n\n", false);
 		
 		outputText("The empty 'present' is on the ground with the coal still inside.  You wonder if the coal has any special effect. Everything else in this place does.  In the distance you can hear sleigh bells, and you know it's going to be hard to sleep with all that racket on top of the threat of more intruders...\n\n", false);
-		inventory.takeItem(consumables.COAL___);
+		inventory.takeItem(consumables.COAL___, camp.campMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 	else if(player.cor <= 33) {
 		//Great present!
 		outputText("surprise at the box's contents - there's a careful arranged set of equipment here, made from woven spider-silk!  Somebody must think you're pretty good.\n\n");
-		if(rand(2) == 0) inventory.takeItem(armors.SS_ROBE);
-		else inventory.takeItem(armors.SSARMOR);
+		if(rand(2) == 0) inventory.takeItem(armors.SS_ROBE, camp.campMenu);
+		else inventory.takeItem(armors.SSARMOR, camp.campMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 	else if(player.cor < 60) {
 		//[Good present]
 		outputText("surprise at the box's contents – there's a vial labeled gro+.  It looks like it's going to be a 'big' Christmas this year...\n\n", false);
-		inventory.takeItem(consumables.GROPLUS);
+		inventory.takeItem(consumables.GROPLUS, camp.campMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 	else {
 		//[Mediocre Present]
 		outputText("surprise at the box's contents – there is a single vial of succubi's delight packed inside.  It's going to be a white Christmas after all...\n\n", false);
-		inventory.takeItem(consumables.SDELITE);
+		inventory.takeItem(consumables.SDELITE, camp.campMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 }

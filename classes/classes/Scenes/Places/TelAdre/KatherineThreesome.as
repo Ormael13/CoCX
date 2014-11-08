@@ -88,7 +88,7 @@ package classes.Scenes.Places.TelAdre
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3) {
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-				doNext(13); //An additional scene plays afterward if Kath is still being trained by Urta
+				doNext(camp.returnToCampUseOneHour); //An additional scene plays afterward if Kath is still being trained by Urta
 			}
 		}
 	
@@ -133,7 +133,7 @@ package classes.Scenes.Places.TelAdre
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function roastYou():void {
@@ -238,7 +238,7 @@ package classes.Scenes.Places.TelAdre
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function spitroastKath():void { //Works for all except genderless characters
@@ -299,7 +299,7 @@ package classes.Scenes.Places.TelAdre
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function pinAndFuck():void { //Kath is sober, Urta is drunk
@@ -385,7 +385,7 @@ package classes.Scenes.Places.TelAdre
 			player.orgasm();
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function pinAndFuckStuffKath():void { //Plays for any males and for herms who select this option
@@ -431,7 +431,7 @@ package classes.Scenes.Places.TelAdre
 
 			outputText("You lock the door on the way out, " + (flags[kFLAGS.KATHERINE_URTA_AFFECTION] >= 31 ? "knowing that with those two the sex option will eventually win out." : "hoping your sated girlfriends will bond over this."));
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function watch():void { //Kath is sober, Urta is drunk
@@ -463,7 +463,7 @@ package classes.Scenes.Places.TelAdre
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			dynStats("lus", 20 + player.lib / 20);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function knothole():void { //Kath is drunk, Urta is sober
@@ -503,7 +503,7 @@ package classes.Scenes.Places.TelAdre
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function sandwich():void { //Kath is drunk, Urta is sober
@@ -632,7 +632,7 @@ package classes.Scenes.Places.TelAdre
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function orgy():void { //Both Kath and Urta are drunk
@@ -686,7 +686,7 @@ package classes.Scenes.Places.TelAdre
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(14);
+			doNext(camp.returnToCampUseTwoHours);
 		}
 
 
@@ -761,7 +761,7 @@ package classes.Scenes.Places.TelAdre
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.urtaLove(1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function doublePenetrateKath():void { //Both Kath and Urta are drunk
@@ -848,7 +848,7 @@ package classes.Scenes.Places.TelAdre
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function doubleStuffVala():void {
@@ -883,7 +883,7 @@ package classes.Scenes.Places.TelAdre
 			katherine.orgasm();
 			katherine.katherineAndValaHadSex();
 			flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function eatOutVala():void {
@@ -903,7 +903,7 @@ package classes.Scenes.Places.TelAdre
 			katherine.orgasm();
 			katherine.katherineAndValaHadSex();
 			flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function valaCommonStart():void {

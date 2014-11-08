@@ -196,7 +196,20 @@ use namespace kGAMECLASS;
 		{
 			return _armor;
 		}
-
+		
+		public function setArmor(newArmor:Armor):Armor {
+			//Returns the old armor, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldArmor:Armor = _armor.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
+			if (newArmor == null) {
+				CoC_Settings.error(short + ".armor is set to null");
+				newArmor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+			}
+			_armor = newArmor.playerEquip(); //The armor can also choose to equip something else - useful for Ceraph's trap armor
+			return oldArmor;
+		}
+		
+		/*
 		public function set armor(value:Armor):void
 		{
 			if (value == null){
@@ -205,6 +218,7 @@ use namespace kGAMECLASS;
 			}
 			value.equip(this, false, false);
 		}
+		*/
 
 		// in case you don't want to call the value.equip
 		public function setArmorHiddenField(value:Armor):void
@@ -217,6 +231,19 @@ use namespace kGAMECLASS;
 			return _weapon;
 		}
 
+		public function setWeapon(newWeapon:Weapon):Weapon {
+			//Returns the old weapon, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldWeapon:Weapon = _weapon.playerRemove(); //The weapon is responsible for removing any bonuses, perks, etc.
+			if (newWeapon == null) {
+				CoC_Settings.error(short + ".weapon is set to null");
+				newWeapon = WeaponLib.FISTS;
+			}
+			_weapon = newWeapon.playerEquip(); //The weapon can also choose to equip something else
+			return oldWeapon;
+		}
+		
+		/*
 		public function set weapon(value:Weapon):void
 		{
 			if (value == null){
@@ -225,6 +252,7 @@ use namespace kGAMECLASS;
 			}
 			value.equip(this, false, false);
 		}
+		*/
 
 		// in case you don't want to call the value.equip
 		public function setWeaponHiddenField(value:Weapon):void
@@ -301,7 +329,7 @@ use namespace kGAMECLASS;
 				//Prevent negatives
 				if (HP<=0){
 					HP = 0;
-					if (game.gameState == 1 || game.gameState == 2) game.doNext(5010);
+					if (game.inCombat) game.doNext(5010);
 				}
 			}
 			return returnDamage;
@@ -1688,8 +1716,10 @@ use namespace kGAMECLASS;
 			}
 			if(findStatusAffect(StatusAffects.Disarmed) >= 0) {
 				removeStatusAffect(StatusAffects.Disarmed);
-				if(weapon == WeaponLib.FISTS) {
-					weapon = ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon;
+				if (weapon == WeaponLib.FISTS) {
+//					weapon = ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon;
+//					(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon).doEffect(this, false);
+					setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
 				}
 				else {
 					flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];

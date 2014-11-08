@@ -718,8 +718,8 @@
 				if (!handleConstricted()) return;
 			}
 			//If grappling... TODO implement grappling
-			if (game.gameState == 2) {
-				game.gameState = 1;
+//			if (game.gameState == 2) {
+//				game.gameState = 1;
 				//temperment - used for determining grapple behaviors
 				//0 - avoid grapples/break grapple
 				//1 - lust determines > 50 grapple
@@ -735,7 +735,7 @@
 				 mainClassPtr.outputText("Lust Placeholder!!", false);
 				 mainClassPtr.doNext(3);
 				 return;*/
-			}
+//			}
 			performCombatAction();
 		}
 
@@ -833,13 +833,13 @@
 				outputText("Your desire reaches uncontrollable levels, and you end up openly masturbating.\n\nThe lust and pleasure cause you to black out for hours on end.", true);
 				player.lust = 0;
 			}
-			game.gameState = 0;
+			game.inCombat = false;
 			game.clearStatuses(false);
 			var temp:Number = rand(10) + 1;
 			if(temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.", false);
 			player.gems -= temp;
-			game.doNext(16);
+			game.doNext(game.camp.returnToCampUseEightHours);
 		}
 
 		/**
@@ -1229,8 +1229,8 @@
 					outputText(", but after checking your gem pouch, you realize you're missing your only gem.");
 				else outputText(".");
 			}
-			return 16; //This allows different monsters to delay the player by different amounts of time after a combat loss.
-		}				//13 == One hour, 14 == Two hours, 15 == Four hours and 16 == Eight Hours
+			return 8; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an eight hour blackout
+		}
 
 	}
 }

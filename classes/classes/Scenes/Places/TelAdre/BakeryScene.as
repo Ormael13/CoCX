@@ -242,10 +242,9 @@ private function buyCocoa():void {
 		return;
 	}
 	outputText("You pay ten gems for some cocoa.  ");
-	menuLoc = 29;
 	player.gems -= 10;
 	statScreenRefresh();
-	inventory.takeItem(consumables.MOUSECO);
+	inventory.takeItem(consumables.MOUSECO, ingredientsMenu);
 }
 
 private function buyFerretFruit():void {
@@ -258,10 +257,9 @@ private function buyFerretFruit():void {
 		return;
 	}
 	outputText("You pay twenty gems for a single ferret fruit.  ");
-	menuLoc = 29;
 	player.gems -= 20;
 	statScreenRefresh();
-	inventory.takeItem(consumables.FRRTFRT);
+	inventory.takeItem(consumables.FRRTFRT, ingredientsMenu);
 }
 
 private function buyFig():void {
@@ -273,10 +271,9 @@ private function buyFig():void {
 		return;
 	}
 	outputText("You pay five gems for a fig.  ");
-	menuLoc = 29;
 	player.gems -= 5;
 	statScreenRefresh();
-	inventory.takeItem(consumables.RINGFIG);
+	inventory.takeItem(consumables.RINGFIG, ingredientsMenu);
 }
 
 
@@ -294,11 +291,8 @@ private function talkBakeryMenu():void {
 	// I guess it just wouldn't do anything?
 	// FWIW, the flag that has to be set to get rubiIntros to return zero is set in a function that has the comment:
 	//(Will no longer encounter Rubi at the bakery.)
-	var rubiB:Number = telAdre.rubi.rubiIntros();
-	if (rubiB > 0)
-	{
-		addButton(1,rubiT,rubiWrapper,rubiB);
-	}
+	var rubiB:Function = telAdre.rubi.rubiIntros();
+	if (rubiB != null) addButton(1, rubiT, rubiB);
 
 	if(kGAMECLASS.nieveHoliday()) {
 		if(flags[kFLAGS.KAMI_ENCOUNTER] > 0) {
@@ -315,10 +309,6 @@ private function talkBakeryMenu():void {
 	else addButton(3,"PinkGirl",kGAMECLASS.telAdre.frosty.approachFrosty);
 	addButton(9,"Leave",bakeryuuuuuu);
 }
-private function rubiWrapper(rubiB:int = 0):void {
-	eventParser(rubiB);
-}
-
 
 public function nomnomnom(name:String,price:Number):void {
 	flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = name;
@@ -417,8 +407,7 @@ public function buySlutCake():void {
 	outputText("The minotaur chef emerges from the backroom bearing a box that contains your cupcake.  It's too big to scarf down immediately.\n\n", false);
 	player.gems -= 500;
 	statScreenRefresh();
-	menuLoc = 19;
-	inventory.takeItem(consumables.CCUPCAK);
+	inventory.takeItem(consumables.CCUPCAK, bakeryuuuuuu);
 }
 
 private function buyFoxBerry():void {
@@ -430,10 +419,9 @@ private function buyFoxBerry():void {
 		return;
 	}
 	outputText("You pay five gems for a fox berry.  ");
-	menuLoc = 29;
 	player.gems -= 5;
 	statScreenRefresh();
-	inventory.takeItem(consumables.FOXBERY);
+	inventory.takeItem(consumables.FOXBERY, ingredientsMenu);
 }
 
 
@@ -501,7 +489,7 @@ private function malesHelpOutWithEaster():void {
 	player.orgasm();
 	dynStats("lib", 1);
 	player.cumMultiplier += 2;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

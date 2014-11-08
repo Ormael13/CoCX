@@ -63,7 +63,7 @@ public function fountainEncounter():void {
 	outputText("You come closer and discover a placard.  It reads, \"Fountain of Endowment\".  Well, clearly it's supposed to enhance something, but at what cost?\n\n", false);
 	outputText("Do you drink from the fountain?", false);
 	//[Yes] [No]
-	doYesNo(drinkFountainEndowment,13);
+	doYesNo(drinkFountainEndowment,camp.returnToCampUseOneHour);
 }
 
 private function drinkFountainEndowment():void {
@@ -131,7 +131,7 @@ private function drinkFountainEndowment():void {
 		outputText(" now!", false);
 		changed = true;
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function exgartuanInfestDick():void {
 	spriteSelect(15);
@@ -277,7 +277,7 @@ public function exgartuanMasturbation():void {
 		outputText("You blush and redress, noting that Exgartuan seems to be silent and sleeping...  maybe you'll get a little peace now?", false);
 	}
 	player.changeStatusValue(StatusAffects.Exgartuan,2,(12+rand(7)));
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -684,7 +684,7 @@ public function exgartuanBeeRape():void {
 private function freeBeePostRape():void {
 	outputText("", true);
 	outputText("You take pity on the slut and untie her.  Hopefully she'll recover before something worse finds her.  You'd hate to let a tentacle-beast get your sloppy seconds.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	dynStats("cor", -1);
 }
 
@@ -692,7 +692,7 @@ private function freeBeePostRape():void {
 private function leaveBeePostRape():void {
 	outputText("", true);
 	outputText("You smile cruelly and give her glittering vulva a gentle smack before you walk away, leaving her tied up there.  Maybe some lonely imps will find a use for her...", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	dynStats("cor", .5);
 }
 
@@ -1311,7 +1311,7 @@ public function exgartuanNagaStoleMyMasturbation():void {
 	player.changeStatusValue(StatusAffects.Exgartuan,2,(16+rand(7)));
 	player.orgasm();
 	dynStats("lib", .25);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

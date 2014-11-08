@@ -30,15 +30,40 @@
 		{
 			return kGAMECLASS.inventory.hasItemsInStorage();
 		}
+/*
 		protected function hasItemsInRacks(armor:Boolean = false):Boolean
 		{
 			return kGAMECLASS.inventory.hasItemsInRacks(armor);
 		}
+*/
 
 		public function Camp()
 		{
 		}
-
+		
+		public function campMenu():void {
+			kGAMECLASS.eventParser(1);
+		}
+		
+		public function returnToCamp(timeUsed:int):void {
+			clearOutput();
+			if (timeUsed == 1)
+				outputText("An hour passes...\n");
+			else outputText(Num2Text(timeUsed) + " hours pass...\n");
+			if (!getGame().inCombat) spriteSelect(-1);
+			hideMenus();
+			timeQ = timeUsed;
+			goNext(timeUsed, false);
+		}
+		
+		public function returnToCampUseOneHour():void { returnToCamp(1); } //Replacement for event number 13;
+		
+		public function returnToCampUseTwoHours():void { returnToCamp(2); } //Replacement for event number 14;
+		
+		public function returnToCampUseFourHours():void { returnToCamp(4); } //Replacement for event number 15;
+		
+		public function returnToCampUseEightHours():void { returnToCamp(8); } //Replacement for event number 16;
+		
 //  SLEEP_WITH:int = 701;
 
 public function doCamp():void {
@@ -54,7 +79,7 @@ public function doCamp():void {
 		player.removeStatusAffect(StatusAffects.PostAnemoneBeatdown);
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
-	gameState = 0;
+	getGame().inCombat = false;
 	if(kGAMECLASS.inDungeon) {
 		mainView.showMenuButton( MainView.MENU_DATA );
 		mainView.showMenuButton( MainView.MENU_APPEARANCE );
@@ -414,8 +439,8 @@ public function doCamp():void {
 	var followers:* = 0;
 	var lovers:* = 0;
 	var slaves:* = 0;
-	var storage:* = 0;
-	if(stash()) storage = 2951;
+	var storage:Function = null;
+	if (inventory.showStash()) storage = stash;
 	if(places(false)) placesNum = 71; 
 	if(kGAMECLASS.whitney > 0) farm = 7;
 	//Clear stuff
@@ -699,7 +724,8 @@ public function doCamp():void {
 	}
 	//Menu
 
-	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves",slaves, "", 0, baitText, masturbate, restName, restEvent);
+	choices("Explore", explore, "Places", placesNum, "Inventory", inventory.inventoryMenu, "Stash", storage, "Followers", followers,
+		"Lovers", lovers, "Slaves",slaves, "", null, baitText, masturbate, restName, restEvent);
 	//Lovers
 	//Followers
 	//Slaves
@@ -707,99 +733,38 @@ public function doCamp():void {
 }
 
 
-public function stash(exists:Boolean = true):Boolean {
-	
-	//Use to know if to show/hide stash.
-	if(exists) {
-		return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0;
-	}
+public function stash():Boolean {
 	/*Hacked in cheat to enable shit
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;*/
 	//REMOVE THE ABOVE BEFORE RELASE ()
-	var retrieveStuff:Function = null;
-	var storeStuff:Number = 0;
-	if(hasItemsInStorage()) retrieveStuff = kGAMECLASS.inventory.chooseRetrievalSlot;
-	if(itemStorage.length > 0) storeStuff = 1028;
-	var weaponRack:Number = 0;
-	var weaponRetrieve:Function = null;
-	var armorRack:Number = 0;
-	var armorRetrieve:Number = 0;
-	var barrel:* = 0;
-	outputText("", true);
-	if(flags[kFLAGS.ANEMONE_KID] > 0) {
-		//(morning)
-		if(model.time.hours < 6) outputText("Kid A is sleeping in her barrel right now.");
-		else if(model.time.hours <= 10) outputText("Kid A stands next to her barrel, refilling it from one of your waterskins.  A second full skin is slung over her shoulder.  She gives you a grin.\n\n");
-		else if(flags[kFLAGS.KID_SITTER] > 1) outputText("Kid A is absent from her barrel right now, dragooned into babysitting again.\n\n");
-		//(midday)
-		else if(model.time.hours < 16) outputText("Kid A is deep in her barrel with the lid on top, hiding from the midday sun.\n\n");
-		//(night hours)
-		else if(model.time.hours < 22) outputText("Kid A is peeking out of her barrel.  Whenever you make eye contact she breaks into a smile; otherwise she just stares off into the distance, relaxing.\n\n");
-		else outputText("Kid A is here, seated demurely on the rim of her barrel and looking somewhat more purple under the red moon.  She glances slyly at you from time to time.\n\n");
-		barrel = anemoneScene.approachAnemoneBarrel;
-		if(model.time.hours < 6) barrel = 0;
+	clearOutput();
+	spriteSelect(-1);
+	menu();
+	if (flags[kFLAGS.ANEMONE_KID] > 0) {
+		anemoneScene.anemoneBarrelDescription();
+		if (model.time.hours >= 6) addButton(4, "Anemone", anemoneScene.approachAnemoneBarrel);
 	}
-	if(player.hasKeyItem("Camp - Chest") >= 0) outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n", false);
-	var weaponNames:Array = [];
-	//Weapon rack
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) {
-		outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.", false);
-		weaponRack = 1090;
-		if(hasItemsInRacks(false)) {
-			weaponRetrieve = inventory.chooseRacksSlot;
-			temp = 0;
-			outputText("  It currently holds ", false);
-			while(temp < 9) {
-				if(gearStorage[temp].quantity > 0) {
-					weaponNames[weaponNames.length] = gearStorage[temp].itype.longName;
-				}
-				temp++;
-			}
-			if(weaponNames.length == 1) outputText(weaponNames[0], false);
-			else if(weaponNames.length == 2) outputText(weaponNames[0] + " and " + weaponNames[1], false);
-			else {
-				temp = 0;
-				while(temp < weaponNames.length) {
-					outputText(weaponNames[temp], false);
-					if(temp + 2 >= weaponNames.length && temp + 1 < weaponNames.length) outputText(", and ", false);
-					else if(temp + 1 < weaponNames.length) outputText(", ", false);
-					temp++;
-				}
-			}
-		}
-		outputText(".\n\n", false);
+	if (player.hasKeyItem("Camp - Chest") >= 0) {
+		outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n");
+		addButton(0, "Chest Store", inventory.pickItemToPlaceInCampStorage);
+		if (inventory.hasItemsInStorage()) addButton(1, "Chest Take", inventory.pickItemToTakeFromCampStorage);
 	}
-	var armorNames:Array = [];
+	//Weapon Rack
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) {
+		outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
+		addButton(2, "W.Rack Put", inventory.pickItemToPlaceInWeaponRack);
+		if (inventory.weaponRackDescription()) addButton(3, "W.Rack Take", inventory.pickItemToTakeFromWeaponRack);
+		outputText("\n\n");
+	}
 	//Armor Rack
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0) {
-		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.", false);
-		armorRack = 1106;
-		if(hasItemsInRacks(true)) {
-			armorRetrieve = 1107;
-			temp = 9;
-			outputText("  It currently holds ", false);
-			while(temp < 18) {
-				if(gearStorage[temp].quantity > 0) {
-					armorNames[armorNames.length] = gearStorage[temp].itype.longName;
-				}
-				temp++;
-			}
-			if(armorNames.length == 1) outputText(armorNames[0], false);
-			else if(armorNames.length == 2) outputText(armorNames[0] + " and " + armorNames[1], false);
-			else {
-				temp = 0;
-				while(temp < armorNames.length) {
-					outputText(armorNames[temp], false);
-					if(temp + 2 >= armorNames.length && temp + 1 < armorNames.length) outputText(", and ", false);
-					else if(temp + 1 < armorNames.length) outputText(", ", false);
-					temp++;
-				}
-			}
-		}
-		outputText(".\n\n", false);
+		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.");
+		addButton(5, "A.Rack Put", inventory.pickItemToPlaceInArmorRack);
+		if (inventory.armorRackDescription()) addButton(6, "A.Rack Take", inventory.pickItemToTakeFromArmorRack);
+		outputText("\n\n");
 	}
-	choices("Chest Store",storeStuff,"Chest Take",retrieveStuff,"W.Rack Put",weaponRack,"W.Rack Take",weaponRetrieve,"Anemone",barrel,"A.Rack Put",armorRack,"A.Rack Take",armorRetrieve,"",0,"",0,"Back",1);
+	addButton(9, "Back", camp.campMenu);
 	return true;
 }
 	
@@ -853,12 +818,12 @@ public function campLoversMenu():void {
 	var kihaButt:Function = null;
 	var amilyEvent:Function = null;
 	var hel:Function = null;
-	var nieve:int = 0;
+	var nieve:Function = null;
 	clearOutput();
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
 		kGAMECLASS.nieveCampDescs();
 		outputText("\n\n");
-		nieve = 3965;
+		nieve = getGame().approachNieve;
 	}
 	if(kGAMECLASS.helScene.followerHel()) {
 		if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2) {
@@ -993,17 +958,18 @@ public function campLoversMenu():void {
 	if(arianScene.arianFollower()) outputText("Arian's tent is here, if you'd like to go inside.\n\n");
 	//choices("Amily",amilyEvent,"Helia",hel,"Isabella",isabellaButt,"Izma",izmaEvent,"Kiha",kihaButt,"Marble",marbleEvent,"Nieve",nieve,"",0,"",0,"Back",1);	
 	menu();
-	if(amilyEvent != null) addButton(0,"Amily",amilyEvent);
-	if(arianScene.arianFollower()) addButton(1,"Arian",arianScene.visitAriansHouse);
-	if (hel != null) addButton(2,"Helia",hel);
-	if (isabellaButt != null) addButton(3,"Isabella",isabellaButt);
-	if (izmaEvent != null) addButton(4,"Izma",izmaEvent);
-	addButton(5,"Kiha",kihaButt);
-	if (marbleEvent != null) addButton(6,"Marble",marbleEvent);
-	if(nieve > 0) addButton(7,"Nieve",eventParser,nieve);
-	if(flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla",kGAMECLASS.desert.antsScene.introductionToPhyllaFollower);
-	addButton(9,"Back",eventParser,1);
+	if (amilyEvent != null) addButton(0, "Amily", amilyEvent);
+	if (arianScene.arianFollower()) addButton(1, "Arian", arianScene.visitAriansHouse);
+	if (hel != null) addButton(2, "Helia", hel);
+	if (isabellaButt != null) addButton(3, "Isabella", isabellaButt);
+	if (izmaEvent != null) addButton(4, "Izma", izmaEvent);
+	addButton(5, "Kiha", kihaButt);
+	if (marbleEvent != null) addButton(6, "Marble", marbleEvent);
+	if (nieve != null) addButton(7, "Nieve", nieve);
+	if (flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla", getGame().desert.antsScene.introductionToPhyllaFollower);
+	addButton(9, "Back", campMenu);
 }
+
 public function campSlavesMenu():void {
 	clearOutput();
 	var vapula2:Function = null;
@@ -1054,13 +1020,13 @@ public function campSlavesMenu():void {
 }
 
 public function campFollowers():void {
-	var rathazulEvent:Number = 0;
-	var jojoEvent:Number = 0;
+	var rathazulEvent:Function = null;
+	var jojoEvent:Function = null;
 	var valeria2:Function = null;
 	var shouldra:Function = null;
 	var ember:Function = null;
 	clearOutput();
-	gameState = 0;
+	getGame().inCombat = false;
 	//ADD MENU FLAGS/INDIVIDUAL FOLLOWER TEXTS
 	menu();
 	if(emberScene.followerEmber()) {
@@ -1073,12 +1039,12 @@ public function campFollowers():void {
 	//Pure Jojo
 	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
 		outputText("There is a small bedroll for Jojo near your own, though the mouse is probably hanging around the camp's perimeter.\n\n", false);
-		jojoEvent = 2150;
+		jojoEvent = jojoScene.jojoCamp;
 	}
 	//RATHAZUL
 	//if rathazul has joined the camp
 	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
-		rathazulEvent = 2070;
+		rathazulEvent = kGAMECLASS.rathazul.returnToRathazulMenu;
 		if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] <= 1) {
 			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work with his chemicals, working on who knows what.", false);
 			if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1) outputText("  Some kind of spider-silk-based equipment is hanging from a nearby rack.  He's finished with the task you gave him!", false);
@@ -1108,16 +1074,15 @@ public function campFollowers():void {
 		}
 		addButton(5,"Sophie",sophieFollowerScene.followerSophieMainScreen);
 	}
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) valeria2 = valeria.valeriaFollower;
-//choices("Ember",ember,"Jojo",jojoEvent,"Rathazul",rathazulEvent,"Shouldra",shouldra,"Valeria",valeria,"",0,"",0,"",0,"",0,"Back",1);	
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) valeria2 = valeria.valeriaFollower;
 	addButton(0,"Ember",ember);
-	if(helspawnFollower()) addButton(1,flags[kFLAGS.HELSPAWN_NAME],helSpawnScene.helspawnsMainMenu);
-	if(jojoEvent > 0) addButton(2,"Jojo",eventParser,jojoEvent);
-	if(rathazulEvent > 0) addButton(3,"Rathazul",eventParser,rathazulEvent);
-	addButton(4,"Shouldra",shouldra);
+	if (helspawnFollower()) addButton(1, flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
+	addButton(2, "Jojo", jojoScene.jojoCamp);
+	addButton(3, "Rathazul", rathazulEvent);
+	addButton(4, "Shouldra", shouldra);
 	//ABOVE: addButton(4,"Sophie",followerSophieMainScreen);
-	addButton(6,"Valeria",valeria2);
-	addButton(9,"Back",eventParser,1);
+	addButton(6, "Valeria", valeria2);
+	addButton(9, "Back", campMenu);
 }
 
 
@@ -1335,147 +1300,57 @@ public function sleepRecovery(display:Boolean = false):void {
 	}
 }
 
-
-public function nightSuccubiRepeat():void {
-	spriteSelect(8);
-	if(player.gender == 0) {
-		if(flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] == 0) {
-			outputText("\nAs you sleep, your rest becomes increasingly disturbed. You feel a great weight on top of you and you find it difficult to breathe. Stirred to consciousness, your eyes are greeted by an enormous pair of blue-tinged breasts. The nipples are quite long and thick and are surrounded by large, round areola. A deep, feminine voice breaks the silence, \"<i>I was wondering if you would wake up.</i>\" You turn your head to the voice to see the visage of a sharp featured, attractive woman. The woman grins mischievously and speaks again, \"<i>I was hoping that idiot, Giacomo, did not dilute the 'potion' again.</i>\" Your campfire reflects off the woman's face and her beauty contains some sharply contrasting features. The pupils of her eyes are slit like a cat's. As she grins, she bares her teeth, which contain two pairs of long and short fangs. This woman is clearly NOT human! In shock, you attempt to get up, only prompting the woman to prove her inhuman nature by grabbing your shoulders and pinning you to the ground. You see that each finger on her hand also contains a fourth joint, further proving her status. Before you can speak a word, the woman begins mocking your fear and places her face in front of yours. Her face is almost certainly demonic in nature.\n\n", false);
-			outputText("She quickly moves down to your crotch...only to discover no organs down there.\n\n", false);
-			outputText("*record scratch*\n\n", false);
-	
-			outputText("\"<i>Wait a fucking minute.</i>\", the Succubus says, \"<i>Where's your dick?!</i>\"\n\n", false);
-	
-			outputText("As you state your genderless nature, the succubus hops off and from nowhere pulls out a large folder marked \"<i>Corruption of Champions-Script</i>\" and begins thumbing through the pages. After finding the page she is looking for, she reads it and looks off into the distance in disgust.\n\n", false);
-	
-			outputText("\"<i>Hey Fenoxo and Dxasmodeus!!!!!!</i>\", the Succubus crows, \"<i>The goddamn script says that I should be milking someone's DICK!!! Man, futa, herm, I don't give a shit. YOUR OWN FUCKING SCRIPT SAYS I SHOULD BE MOUNTING AND MILKING A COCK!!!! THIS IS A SEX GAME!!!!!! THAT MEANS FUCKING! WHAT THE HELL AM I SUPPOSED TO FUCK???!!!</i>\"\n\n", false);
-	
-			outputText("The Succubus looks at you with utter contempt, \"<i>THIS motherfucker doesn't have a DAMN thing! What am I supposed to do?! I can't exactly order a fucking Happy Meal!!!!!</i>\"\n\n", false); 
-	
-			outputText("Throwing the script down in an utter rage, the tantrum continues, \"<i>Goddammit! I can't believe this shit! HEY!!!!! INTERN!!!! Bring me my robe, aspirins and cancer sticks!!!!</i>\"\n\n", false);
-	
-			outputText("The Succubus walks a few paces away where a plain-dressed woman with a clipboard hands the Succubus a pack of cigarettes and a small bottle of aspirin. She takes a fistful of the painkillers and immediately lights up a smoke. The Succubus takes a couple of drags off the cig and rubs her temples.\n\n", false);
-	
-			outputText("\"<i>You two are killing me!</i>\", she groans in clear frustration, \"<i>I come to work for you perverts based off the promise of MORE perverts to feed from and you do THIS to me! I can't work like this!</i>\"\n\n", false);
-	
-			outputText("The plain woman hands the Succubus a robe, which she crudely puts on as she storms off into the night.\n\n", false);
-	
-			outputText("\"<i>I will discuss this horseshit with my agent.</i>\", the Succubus continues bitching, \"<i>THIS was NOT in my contract.</i>\"\n\n", false);
-	
-			outputText("The Succubus stops, turns and points to you in derision. \"<i>And YOU! You no-cock, no-cunt having pissant! Take your ass back to the lab before they find out you escaped!!!!!</i>\"\n\n", false);
-	
-			outputText("The Succubus resumes her stormy exit. You look at the bottle of Cerulean Potion and wonder if it REALLY had some psychotropics in it. What the hell just happened?!", false);
-			flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] = 1;
-		}
-		//REPEAT
-		else {
-			outputText("\nAs you begin to relax, you hear footsteps behind you, expecting the unholy interloper and pray for a better... and more understanding... encounter.\n\n", false);
-
-			outputText("You turn around, hoping for an exciting encounter only to find a rather short, plain-faced woman with horned-rim glasses and a purple dress on. She appears to be holding a stack of papers in her hand.\n\n", false);
-
-			outputText("\"<i>Ahem.</i>\", the woman says meekly, \"<i>I hate to bother you, but I was sent by the CoC writers and staff to hand you this.</i>\"\n\n", false);
-
-			outputText("Scratching your head, you inquire what the document is. The woman smiles shyly and hands it to you.\n\n", false);
-
-			outputText("\"<i>This is the script and production notes for Corruption of Champions,</i>\" she says with a small bit of pride, \"<i>Apparently, you need to read the highlighted sections. They are important.</i>\"\n\n", false);
-
-			outputText("You take the script, scratching your head at the surreal nature of the moment. You thumb through the pages, finding virtually every aspect of your life and encounters written as if foreseen by great mystics. The accuracy is nothing short of horrifying. You find a highlighted section that appears to be what the woman is referring to. The note is terse and outright blunt.\n\n", false);
-			
-			outputText("\"<i>GENDER NEUTRAL CHARACTERS ARE BUTT-MONKEYS. IF THE ENCOUNTER INVOLVES SEX, EXPECT SOMETHING FUCKED UP TO HAPPEN INSTEAD. ACTORS WHO PLAY NEUTER CHARACTERS SHOULD EXPECT TO PLAY ONLY FOR LULZ</i>.\"\n\n", false);
-
-			outputText("The shock is overwhelming. The script basically says that you will never catch a break. As this reality drapes about you, the script disappears and you hear a cacophony of mocking laughter in all directions. The woman is nowhere to be found.\n\n", false);
-
-			outputText("As the cacophony fades, you only hear one facetiously toned word,\n\n", false);
-
-			outputText("\"<i><b>Problem?</b></i>\"", false);
-		}
-		doNext(1);
-		return;
-	}
+public function allNaturalSelfStimulationBeltContinuation():void {
+	clearOutput();
+	outputText("In shock, you scream as you realize the nodule has instantly grown into a massive, organic dildo. It bottoms out easily and rests against your cervix as you recover from the initial shock of its penetration. As the pangs subside, the infernal appendage begins working itself. It begins undulating in long, slow strokes. It takes great care to adjust itself to fit every curve of your womb. Overwhelmed, your body begins reacting against your conscious thought and slowly thrusts your pelvis in tune to the thing.\n\n", true);
+	outputText("As suddenly as it penetrated you, it shifts into a different phase of operation. It buries itself as deep as it can and begins short, rapid strokes. The toy hammers your insides faster than any man could ever hope to do. You orgasm immediately and produce successive climaxes. Your body loses what motor control it had and bucks and undulates wildly as the device pistons your cunt without end. You scream at the top of your lungs. Each yell calls to creation the depth of your pleasure and lust.\n\n", false);
+	outputText("The fiendish belt shifts again. It buries itself as deep as it can go and you feel pressure against the depths of your womanhood. You feel a hot fluid spray inside you. Reflexively, you shout, \"<b>IT'S CUMMING! IT'S CUMMING INSIDE ME!</b>\" Indeed, each push of the prodding member floods your box with juice. It cums... and cums... and cums... and cums...\n\n", false);
+	outputText("An eternity passes, and your pussy is sore. It is stretched and filled completely with whatever this thing shoots for cum. It retracts itself from your hole and you feel one last pang of pressure as your body now has a chance to force out all of the spunk that it cannot handle. Ooze sprays out from the sides of the belt and leaves you in a smelly, sticky mess. You feel the belt's tension ease up as it loosens. The machine has run its course. You immediately pass out.", false);
+	player.slimeFeed();
 	player.orgasm();
-	dynStats("cor", 2);
-	if(player.gender == 1) {
-		if(player.cor < 66) {
-			outputText("\nAgainst your better judgment, you've again partaken of the cerulean elixir and fallen asleep. You are quickly awakened by a thick nipple being thrust into your mouth and torrents of breast milk gushing down your throat as the succubus returns to have her way with you. Looking up, your eyes meet hers as a hungry manipulative grin stretches across her blue face. Unable to control your lust, your prick jumps to attention, which prompts the demoness to ", false);
-			if(player.isTaur()) outputText(" crouch between your legs and impale herself on your " + cockDescript(0) + " with a wet sound caused by her well-lubricated vulva. Y", false);
-			else outputText(" open her womb and quickly consume your " + cockDescript(0) + ". She embraces you, entrapping your head in her cleavage as y", false);
-			outputText("ou quickly feel her superhuman vaginal muscles work and stroke your " + cockDescript(0) + " better than any human woman or pair of hands could ever hope to accomplish. You are helpless as your unholy embrace milks the both of you in an infernal symphony of debauchery. The familiar cramp of an impending ejaculation grips you and your twitching signals the succubus of your approaching climax.\n\n", false);
-			if(player.isTaur()) outputText("Pushing on your forelegs, she engulfs even more of your " + cockDescript(0), false);
-			else outputText("Almost crushing your pelvis, she wraps her legs around your body", false);
-			outputText(" and her muscles churn mercilessly demanding that you release your 'milk' as freely as she has released hers into you. Stimulated beyond any human ability to maintain control, you bear down and release a milky flood of your own inside the succubus. Moaning in ecstasy, she ", false);
-			if(player.isTaur()) outputText("arches under your belly as you feel your " + cockDescript(0) + " bending pleasurably inside her, and", false);
-			else outputText("releases you from her grip, allowing you to finally breathe deeply, and leans back, arching high to reveal your joined genitals in the moonlight. You visibly see", false);
-			outputText(" her contractions milking your " + cockDescript(0) + " as fiercely as a maid milks a cow! Another torrent of cum pushes its way out of your body and you let out a moan of pleasure and exhaustion.\n\n", false);
-			outputText("As you are passing out, you feel a deep kiss upon your lips from the succubus. \"You taste better each time we join. Call upon me soon, lest I take what I want from you anyway,\", says the lustful creature.\n\n", false);
-			outputText("Fatigue takes you and you collapse into a deep sleep.  ", false);
-		}
-		else {
-			outputText("\nKnowing the succubus will come, you do not even bother trying to sleep. Instead, you prepare a little surprise for her. You briefly jerk off and start edging yourself, preparing a massive batch to unload inside her. Hopefully, she will be the one to get more than she bargained for.\n\n", true);
-			outputText("The succubus comes, as you predicted. Despite her obvious strength and size difference to you, you grab her and push her down to the ground and immediately push your angry cock into her hairy hole. The succubus, surprised and enthralled, laughs at your aggression.\n\n", false);
-			outputText("\"<i>I thought I was the hungry one.</i>\", she chuckles. \"I am all yours, little man. FEED ME!\"\n\n", false);
-			outputText("You begin bucking your ", false);
-			if(player.isTaur()) outputText("flanks", false);
-			else outputText("hips", false);
-			outputText(" in the all-too-familiar rhythm, hammering away at the succubus' cunt. Impressed with your initiative, she chooses to remain submissive as you work up an impressive load of spunk. Trying with all of your might, you continue to hold off your orgasm, painfully, as you continue stimulating your inhuman lover.\n\n", false);
-			outputText("However, she senses your control and immediately brings her own muscles into the little love game. With one good squeeze, she breaks down any control and resistance you have. Sensing you are about to explode, she ", false);
-			if(player.isTaur()) outputText("pushes on your forelegs, impaling herself even deeper on your " + cockDescript(0), false);
-			else outputText("wraps her legs around your hips and bears down", false);
-			outputText(". You feel the head of your prick push past the dilated opening in her cervix, which immediately contracts around your head. Your penis is literally trapped and caught in her womb!\n\n", false);
-			outputText("Groaning loudly, long muscle spasms release the painfully stored semen into the deepest parts of the succubus. The sensation of your hot cum so deep inside her body triggers her peak. ", false);
-			
-			if(player.isTaur()) outputText("She moans inhumanly, and reflexively digs her claws into your forelegs. Searing with lust, the pain means little to you as you only feel the sensation of your body forcing your fluids out of your body and into hers. You press your " + cockDescript(0) + " into her", false);
-			else outputText("She embraces you, moaning inhumanly, and reflexively digs her claws into your back. Searing with lust, the pain means little to you as you only feel the sensation of your body forcing your fluids out of your body and into hers. You slam your pelvis into hers", false);
-			outputText(", as if to force yourself to cum harder than you already are capable of, prompting an equally pleasurable reaction from her.\n\n", false);
-			outputText("For the first time since you have had your 'visits', the succubus appears winded. Without another word, her muscles release your manhood, which she quickly licks clean of your intermingled juices.  She tongues your face in lustful approval and flies away. You quickly fall asleep, utterly spent.  ", false);
-			dynStats("lib", -1);
-		}
-	}
-	else if(player.gender == 3) {
-		//Bad End-Cerulean Succubus Futa/herm
-		//[Conditions: Corruption >50. Drink 10 Cerulean potions over the course of 20 Days. (Other stipulations as required that prevent interference with other events-to be determined)]
-		if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10 && player.cor > 50) {
-			outputText("\nAs the Succubus mounts you, an uncontrollable urge takes over your mind and body. Without any thought, you quickly thrust one of her nipples in your mouth and begin suckling wildly like a newborn child. The Succubus cries in shock and pleasure as you begin feeding from her and quickly begins her ritualistic milking of your dong. The warm milk passes into your mouth and down your throat, where it settles peacefully in your stomach. The sensation of fulfillment from her tits is only eclipsed by the massive load of semen you feel cramping your prostate.", false);
-			//[ (Herm-Dickgirl variant only)
-			if(player.balls > 0) outputText("  Even your nuts are unbearably sore.", false);
-			outputText("  As the milk begins to dry out of the Succubus' tit, you release it from your control and launch an impossible load of cum into the succubus. The demoness releases her hold of your cock and hops off your crotch and jumps to place her mouth over your erupting penis. Reflexively grabbing her head, you push your cock as deep as you can in her mouth and for minutes, pump stream after stream of hot lust into her gullet. After the last load leaves your dong, you pass out.\n\n", false);
-
-			outputText("After a short time, you wake up sore from head to toe. The Succubus is sitting next to you with an utterly satisfied look on her face.\n\n", false);
-
-			outputText("\"<i>Well, this was unexpected.</i>\", she says, \"<i>I did not expect you to change. Normally, men are susceptible to my milk, but apparently it works on herms, too.</i>\"\n\n", false); 
-
-			outputText("As you stand, you feel awkward as your body does not feel right. You look at the Succubus and she no longer appears as large as she once was. Quick to realize a problem, you look at your reflection in a small bucket at your campsite. Other than your own unique facial features, you see ANOTHER Cerulean Succubus looking back at you! You ARE a Cerulean Succubus!", false);
-			//[(if the player has a large number of transformations) 
-			if(player.horseScore() + player.dogScore() + player.nagaScore() + player.goblinScore() + player.sharkScore() + player.minoScore() + player.cowScore() > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.", false);
-			outputText("  As the reality soaks in, you feel a sharp pain in your stomach and your cock. You NEED to feed. Cum, milk, it doesn't matter. Likewise, your dick is hard and you need to cum. Despite your need, you cannot bring yourself to masturbate. You want ANOTHER'S attention.\n\n", false);
-
-			outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.", false);
-			eventParser(5035);
-			return;
-		}
-		else {
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00111]++;
-			flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER]++;
-			outputText("\nAs you begin to relax from a long day of adventuring, the succubus returns and lands squarely in your lap, just missing your throbbing erection. The succubus growls in arousal as she thrusts one of her fat nipples into your mouth. Reflexively, you begin suckling the teat with neither shame nor restraint. Milk floods into your mouth as you sense the weight of the succubus descend upon your cock. The familiar warmth and snugness of her cunt greet your hungry prick as her muscles begin the savory churning to coax your body into producing the 'milk' she needs to sate her own hunger. Your eyes roll back into your head as the torrent of milk pouring down your throat increases the sensitivity in all of your organs, compelling your hips to reflexively buck to press your dick deeper.\n\n", false);
-			
-			outputText("The Succubus restrains you without missing a stroke or disrupting your breastfeeding as the pangs of orgasmic pleasure swell up at the base of your cock. You wrap your arms forcefully around the succubus as you bear down upon your crotch, releasing the painfully stockpiled load of lust into the demoness' cunt for her own sustenance. The succubus lets out an inhuman howl of pleasure as her own orgasm begins to crush your cock, draining every last drop out of you.\n\n", false);
-
-			outputText("Your consciousness begins to fade as the orgasm subsides. The succubus pops her tit out of your mouth and squeezes more of her essence into the empty bottle. She licks your lips and flies away just in time for you to pass out.  ", false);
-			//Clear out any queue'ed events if bad-end
-			//coming.  PC has to dig his own grave.
-			if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10) {
-				player.removeStatusAffect(StatusAffects.SuccubiNight);
-			}
-			fatigue(20);
-			player.cumMultiplier++;
-			//[Maintain first encounter mechanics. New variable to keep track of subsequent encounters within a specific time period]
-		}
-	}
-	menuLoc = 14;
-	inventory.takeItem(consumables.CERUL_P);
-	outputText("\n", false);
-	player.orgasm();
-	dynStats("str", rand(2),"tou", rand(2), "spe", rand(2), "int", rand(2), "cor", 1);
+	dynStats("lib", 1, "sen", (-0.5));
+	doNext(camp.returnToCampUseOneHour);
 }
+
+public function allNaturalSelfStimulationBeltBadEnd():void {
+	spriteSelect(23);
+	clearOutput();
+	outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n", true);
+	outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n", false);
+	outputText("\"<i>Well, well,</i>\" Giacomo says.  \"<i>The Libertines are right.  The creature's fluids are addictive. This poor woman is a total slave to the beast!</i>\"\n\n", false);
+	outputText("Giacomo contemplates the situation as you writhe in backbreaking pleasure before him.  His sharp features brighten as an idea strikes him.\n\n", false);
+	outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n", false);
+	outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live woman who can't stop cumming!</i>\"\n\n", false);
+	outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!", false);
+	eventParser(5035);
+}
+
+public function onaholeMulticockContinuation():void {
+	clearOutput();
+	outputText("You pull the sloppy toy from your dribbling dick and smile, shoving its slippery surface down on another of your " + multiCockDescriptLight() + ".  You rapidly work it around your cocks, orgasming until ", true);
+	if (player.balls > 0)
+		outputText("you pass out with aching, empty balls.", false);
+	else
+		outputText("you pass out with " + multiCockDescriptLight() + " sore from exertion.", false);
+	player.orgasm();
+	dynStats("sen", -1);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function onaholeFutaContinuation():void {
+	if (player.gender == 3)
+	{
+		clearOutput();
+		outputText("\n\nThe blessing - or curse, depending on how you feel - of your gender catches up with you. As with all members of your gender, you are incapable of having just ONE orgasm. You feel the muscles deep in your crotch bear down hard. Your eyes widen as you realize you are about to blow a monumental load. The pressure works its way through you and towards your cock as, with one final push, you force a torrent of semen out of your body. Your grip was not sufficient on the onahole and you launch it ", true);
+		outputText(String(int(((Math.random() * player.str / 12) + player.str / 6) * 10) / 10), false);
+		outputText(" feet away from you. Delirious with pleasure, you continue your 'impression' of a semen volcano, covering yourself and the area with your seed. ", false);
+		outputText(" As your orgasms fade, you find yourself a well-fucked mess, and pass out.", false);
+		player.orgasm();
+		dynStats("sen", -1);
+	}
+	doNext(1);
+}
+		
 //Places menu
 public function places(display:Boolean):Boolean {
 	var farmBarn:* = 0;
@@ -1484,8 +1359,8 @@ public function places(display:Boolean):Boolean {
 	var _boat:Function = null;
 	var barber:* = 0;
 	var telAdre2:* = 0;
-	var ruins:* = 0;
-	var bazaar:* = 0;
+	var ruins:Function = null;
+	var bazaar:Function = null;
 	var owca:* = 0;
 	var dungeonsArg:* = 0;
 	var cathedral:* = 0;
@@ -1506,7 +1381,7 @@ public function places(display:Boolean):Boolean {
 		owca = kGAMECLASS.owca.gangbangVillageStuff;
 	
 	//turn on ruins
-	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = 2371;
+	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = amilyScene.exploreVillageRuin;
 	//turn on teladre
 	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) telAdre2 = kGAMECLASS.telAdre.telAdreMenu;
 	if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) barber = kGAMECLASS.mountain.salon.salonGreeting;
@@ -1524,7 +1399,7 @@ public function places(display:Boolean):Boolean {
 	
 	
 	//Turn on bazaar encounter
-	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = 2855;
+	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = getGame().bazaar.enterTheBazaar;
 	//Return if there is anything enabled in places
 	if(!display) {
 		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm != null || dungeonsArg || _boat || ruins || flags[kFLAGS.BAZAAR_ENTERED] || cathedral;
@@ -1539,7 +1414,7 @@ private function placesPage2():void
 	menu();
 	flags[kFLAGS.PLACES_PAGE] = 1;
 	//turn on ruins
-	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0,"TownRuins",eventParser,2371);
+	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "TownRuins", amilyScene.exploreVillageRuin);
 	addButton(4,"Previous",placesToPage1);
 	addButton(9,"Back",eventParser,1);
 }

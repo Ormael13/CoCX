@@ -228,15 +228,9 @@ package classes.Scenes.Areas.Forest
 
 			fatigue(10);
 			
-			menuLoc = 2;
 			if (waited)
-			{
-				inventory.takeItem(consumables.CANINEP);
-			}
-			else
-			{
-				inventory.takeItem(consumables.FOXBERY);
-			}
+				inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
+			else inventory.takeItem(consumables.FOXBERY, camp.returnToCampUseOneHour);
 		}
 
 		public function repeatWildHuntEncounter():void
@@ -273,7 +267,7 @@ package classes.Scenes.Areas.Forest
 			if (player.inte < 80) player.inte++;
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function repeatWildHuntChase():void
@@ -319,7 +313,7 @@ package classes.Scenes.Areas.Forest
 			}
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function repeatWildHuntCaught(pScore:int):void
@@ -403,14 +397,11 @@ package classes.Scenes.Areas.Forest
 			player.gems -= gemLoss;
 
 			outputText("<b>You’ve lost " + gemLoss + " gems.</b>\n\n");
-			inventory.takeItem(consumables.CANINEP);
+			inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
 			dynStats("sen-", 2, "lib+", 2, "cor+", 1, "lus=", 0);
 			fatigue(10);
 			player.orgasm();
 			player.slimeFeed();
-
-			menu();
-			doNext(13);
 		}
 
 		protected function repeatWildHuntAWinnerIsYou():void
@@ -461,9 +452,9 @@ package classes.Scenes.Areas.Forest
 
 			var selector:int = rand(3);
 
-			if (selector == 0) inventory.takeItem(consumables.CANINEP);
-			if (selector == 1) inventory.takeItem(consumables.FOXBERY);
-			if (selector == 2) inventory.takeItem(consumables.NPNKEGG);
+			if (selector == 0) inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
+			if (selector == 1) inventory.takeItem(consumables.FOXBERY, camp.returnToCampUseOneHour);
+			if (selector == 2) inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
 		}
 
 		protected function stopTheMadness():void
@@ -486,7 +477,7 @@ package classes.Scenes.Areas.Forest
 			outputText("You get the feeling you won’t be seeing him anymore.\n\n");
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function surrenderToTheHounds():void
@@ -695,7 +686,7 @@ package classes.Scenes.Areas.Forest
 			player.slimeFeed();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function howDareYou():void
@@ -777,7 +768,7 @@ package classes.Scenes.Areas.Forest
 			dynStats("lust=", 0);
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function encounterPrincessGwynn():void
@@ -855,7 +846,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function gwynnGetsButtfuxed():void
@@ -881,7 +872,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function gwynnNomsDaCunts():void
@@ -907,7 +898,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function gwynnGetsDickmilked():void
@@ -939,7 +930,7 @@ package classes.Scenes.Areas.Forest
 			//[Lust +20, Libido +2]
 			dynStats("lus+", 20, "lib+", 2);
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function gwynnGibsGifts():void
@@ -958,7 +949,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Before you can stop her, she’s gone, and you pocket the small bottle for later.\n\n");
 
-			inventory.takeItem(consumables.PRNPKR);
+			inventory.takeItem(consumables.PRNPKR, camp.returnToCampUseOneHour);
 		}
 	}
 }

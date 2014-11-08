@@ -73,7 +73,7 @@ INITIATING MONKEY
 	this.monkey.createChaos();
 
 	if (this.player.str) // we're in a game
-		doNext(13);      // so dump out to the camp scene
+		doNext(camp.returnToCampUseOneHour);      // so dump out to the camp scene
 	else
 		doNext(charCreation.newGameGo);   // not in a game, create a char randomly
 }

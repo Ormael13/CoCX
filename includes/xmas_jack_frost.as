@@ -82,7 +82,7 @@ public function noJizzingInMyCampPlease():void {
 	
 	outputText("\n\nSeeing no reason to linger, you return to your camp.");
 	flags[kFLAGS.JACK_FROST_YEAR] = date.fullYear;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[=Yes=]
@@ -93,7 +93,7 @@ public function jizzSnowOnMyCampPlease():void {
 	outputText("\n\nYou thank him for the surprisingly kind gesture, and start to head back down to camp.  Even as you go, you can see the first huge jet of snow arcing its way across the sky...");
 	flags[kFLAGS.JACK_FROST_YEAR] = date.fullYear;
 	flags[kFLAGS.JACK_FROST_PROGRESS] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Back in camp
@@ -116,7 +116,7 @@ public function processJackFrostEvent():void {
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
 		HPChange(maxHP(),false);
 		fatigue(-100);
-		doNext(16);
+		doNext(camp.returnToCampUseEightHours);
 	}
 	//Rathazul
 	else if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && flags[kFLAGS.JACK_FROST_PROGRESS] == 2) {
@@ -535,7 +535,7 @@ public function processJackFrostEvent():void {
 		HPChange(maxHP(),false);
 		fatigue(-100);
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
-		doNext(16);
+		doNext(camp.returnToCampUseEightHours);
 	}
 }
 

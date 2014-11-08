@@ -9,10 +9,6 @@ import classes.Scenes.Dungeons.D3.SuccubusGardener;
 
 import coc.view.MainView;
 
-public function inCombat():Boolean {
-	return gameState == 1 || gameState == 2;
-}
-
 public function endHpVictory():void
 {
 	monster.defeated_(true);
@@ -37,12 +33,13 @@ public function endLustLoss():void
 }
 
 //combat is over. Clear shit out and go to main
-public function cleanupAfterCombat(nextFunc:* = 13):void {
-	if(gameState == 1 || gameState == 2) {
+public function cleanupAfterCombat(nextFunc:Function = null):void {
+	if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
+	if (inCombat) {
 		//clear status
 		clearStatuses(false);
 		//Clear itemswapping in case it hung somehow
-		itemSwapping = false;
+//No longer used:		itemSwapping = false;
 		//Player won
 		if(monster.HP < 1 || monster.lust > 99) {
 			awardPlayer();
@@ -52,7 +49,7 @@ public function cleanupAfterCombat(nextFunc:* = 13):void {
 			if(monster.statusAffectv1(StatusAffects.Sparring) == 2) {
 				outputText("The cow-girl has defeated you in a practice fight!", true);
 				outputText("\n\nYou have to lean on Isabella's shoulder while the two of your hike back to camp.  She clearly won.", false);
-				gameState = 0;
+				inCombat = false;
 				player.HP = 1;
 				statScreenRefresh();
 				doNext(nextFunc);
@@ -60,13 +57,13 @@ public function cleanupAfterCombat(nextFunc:* = 13):void {
 			}
 			//Next button is handled within the minerva loss function
 			if(monster.findStatusAffect(StatusAffects.PeachLootLoss) >= 0) {
-				gameState = 0;
+				inCombat = false;
 				player.HP = 1;
 				statScreenRefresh();
 				return;
 			}
 			if(monster.short == "Ember") {
-				gameState = 0;
+				inCombat = false;
 				player.HP = 1;
 				statScreenRefresh();
 				doNext(nextFunc);
@@ -77,20 +74,19 @@ public function cleanupAfterCombat(nextFunc:* = 13):void {
 			if (temp > player.gems) temp = player.gems;
 			var timePasses:int = monster.handleCombatLossText(inDungeon, temp); //Allows monsters to customize the loss text and the amount of time lost
 			player.gems -= temp;
-			gameState = 0;
+			inCombat = false;
 			//BUNUS XPZ
 			if(flags[kFLAGS.COMBAT_BONUS_XP_VALUE] > 0) {
 				player.XP += flags[kFLAGS.COMBAT_BONUS_XP_VALUE];
-				outputText("  Somehow you managed to gain " + flags[kFLAGS.COMBAT_BONUS_XP_VALUE] + " XP from the situation.", false);
+				outputText("  Somehow you managed to gain " + flags[kFLAGS.COMBAT_BONUS_XP_VALUE] + " XP from the situation.");
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = 0;
 			}
 			//Bonus lewts
-			if(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
-				outputText("  Somehow you came away from the encounter with " + ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]).longName + ".\n\n", false);
-				menuLoc = 18;
-				inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]));
+			if (flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
+				outputText("  Somehow you came away from the encounter with " + ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]).longName + ".\n\n");
+				inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]), createCallBackFunction(camp.returnToCamp, timePasses));
 			}
-			else doNext(timePasses);
+			else doNext(createCallBackFunction(camp.returnToCamp, timePasses));
 		}
 	}
 	//Not actually in combat
@@ -206,7 +202,7 @@ public function doCombat(eventNum:Number):void
 				//REGULAR MENU
 				else {
 					//Tease text should change based on perks!
-					choices("Attack", attacks, "Tease", 5005, "Spells", temp2, "Items", 1000, "Run", runAway, "P. Specials", pSpecials, "M. Specials", 5160, waitT, 5071, "Fantasize", 5086, "Inspect", (CoC_Settings.debugBuild && !debug)? 5166 : 0);
+					choices("Attack", attacks, "Tease", 5005, "Spells", temp2, "Items", inventory.inventoryMenu, "Run", runAway, "P. Specials", pSpecials, "M. Specials", 5160, waitT, 5071, "Fantasize", 5086, "Inspect", (CoC_Settings.debugBuild && !debug)? 5166 : 0);
 				}
 			}
 	}
@@ -475,13 +471,13 @@ public function doCombat(eventNum:Number):void
 				mainView.hideMenuButton(MainView.MENU_LEVEL);
 				mainView.hideMenuButton(MainView.MENU_PERKS);
 
-				gameState = 0;
+				inCombat = false;
 
 				// Prevent ChaosMonkah instances from getting stuck
 			}
 			else {
-				gameState = 0;
-				doNext(13);
+				inCombat = false;
+				doNext(camp.returnToCampUseOneHour);
 
 			}
 
@@ -500,12 +496,12 @@ public function doCombat(eventNum:Number):void
 				mainView.hideMenuButton(MainView.MENU_LEVEL);
 				mainView.hideMenuButton(MainView.MENU_PERKS);
 
-				gameState = 0;
+				inCombat = false;
 			}
 			else {
 				// Prevent ChaosMonkah instances from getting stuck
-				gameState = 0;
-				doNext(13);
+				inCombat = false;
+				doNext(camp.returnToCampUseOneHour);
 			}
 			inDungeon = false;
 	}
@@ -748,13 +744,13 @@ public function doCombat(eventNum:Number):void
 	if(eventNum == 5058) {
 			wormsOn();
 			outputText("You actually think it's kind of a hot idea, and wonder if such creatures actually exist in this land as you make your way back to camp.", true);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 	}
 			//worm toggle off
 	if(eventNum == 5059) {
 			outputText("You shudder in revulsion and figure the sign to be the result of someone's perverted fantasy.", true);
 			wormsOff();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 	}
 			//InfestAttack
 	if(eventNum == 5060) {
@@ -767,7 +763,7 @@ public function doCombat(eventNum:Number):void
 			outputText("You shrug and keep walking, not sure how you feel about the strange sign.", true);
 			player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
 			player.createStatusAffect(StatusAffects.WormsHalf, 0, 0, 0, 0);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 	}
 			//Wait
 	if(eventNum == 5071) {
@@ -1926,13 +1922,14 @@ public function dropItem(monster:Monster):void {
 		if(temp == 12) itype =consumables.L_BLKEG;
 	}
 	//Bonus loot overrides others
-	if(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
+	if (flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
 		itype = ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]);
 	}
 	monster.handleAwardItemText(itype); //Each monster can now override the default award text
-	if(itype != null) {
-		if(!inDungeon) menuLoc = 2;
-		inventory.takeItem(itype);
+	if (itype != null) {
+		if (inDungeon)
+			inventory.takeItem(itype, camp.campMenu);
+		else inventory.takeItem(itype, camp.returnToCampUseOneHour);
 	}
 }
 public function awardPlayer():void
@@ -1945,10 +1942,10 @@ public function awardPlayer():void
 		//trace( "to: " + monster.gems )
 	}
 	monster.handleAwardText(); //Each monster can now override the default award text
-	if(!inDungeon) doNext(13);
+	if(!inDungeon) doNext(camp.returnToCampUseOneHour);
 	else doNext(1);
 	dropItem(monster);
-	gameState = 0;
+	inCombat = false;
 	player.gems += monster.gems;
 	player.XP += monster.XP;
 }
@@ -2282,7 +2279,7 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	mainView.hideMenuButton( MainView.MENU_LEVEL );
 	mainView.hideMenuButton( MainView.MENU_PERKS );
 	//Flag the game as being "in combat"
-	gameState = 1;
+	inCombat = true;
 	monster = monster_;
 	if(monster.short == "Ember") {
 		monster.pronoun1 = emberScene.emberMF("he","she");
@@ -2322,8 +2319,9 @@ public function display():void {
 		//trace("Monster name = ", monsterName);
 		outputText(images.showImage(monsterName), false,false);
 	}
-	if(gameState == 2) outputText("<b>You are grappling with:\n</b>", false);
-	else outputText("<b>You are fighting ", false);
+//	if(gameState == 2) outputText("<b>You are grappling with:\n</b>", false);
+//	else
+	outputText("<b>You are fighting ", false);
 	outputText(monster.a + monster.short + ":</b> (Level: " + monster.level + ")\n");
 	if(player.findStatusAffect(StatusAffects.Blind) >= 0) outputText("It's impossible to see anything!\n");
 	else {
@@ -3878,7 +3876,7 @@ public function teaseXP(XP:Number = 0):void {
 //VICTORY OR DEATH?
 public function combatRoundOver():Boolean {
 	statScreenRefresh();
-	if(gameState < 1) return false;
+	if (!inCombat) return false;
 	if(monster.HP < 1) {
 		doNext(endHpVictory);
 		return true;
@@ -3922,7 +3920,7 @@ public function magicMenu():void {
 	var chargeEvent:Number = 0;
 	var blindEvent:Number = 0;
 	var whitefireEvent:Number = 0;
-	if(inCombat() && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 2) {
+	if (inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 2) {
 		clearOutput();
 		outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was sealed, and now you've wasted a chance to attack!</b>\n\n");
 		enemyAI();
@@ -5088,7 +5086,7 @@ public function runAway(callHook:Boolean = true):void {
 		return;
 	}
 	outputText("", true);
-	if(inCombat() && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 4) {
+	if (inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 4) {
 		clearOutput();
 		outputText("You try to run, but you just can't seem to escape.  <b>Your ability to run was sealed, and now you've wasted a chance to attack!</b>\n\n");
 		enemyAI();
@@ -5104,9 +5102,9 @@ public function runAway(callHook:Boolean = true):void {
 	if(monster.findStatusAffect(StatusAffects.Level) >= 0 && player.canFly()) {
 		clearOutput();
 		outputText("You flex the muscles in your back and, shaking clear of the sand, burst into the air!  Wasting no time you fly free of the sandtrap and its treacherous pit.  \"One day your wings will fall off, little ant,\" the snarling voice of the thwarted androgyne carries up to you as you make your escape.  \"And I will be waiting for you when they do!\"");
-		gameState = 0;
+		inCombat = false;
 		clearStatuses(false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	if(monster.findStatusAffect(StatusAffects.GenericRunDisabled) >= 0 || urtaQuest.isUrta()) {
@@ -5131,9 +5129,9 @@ public function runAway(callHook:Boolean = true):void {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
 		//(Free run away) 
 		outputText("You slink away while the pack of brutes is arguing.  Once they finish that argument, they'll be sorely disappointed!", true);
-		gameState = 0;
+		inCombat = false;
 		clearStatuses(false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	else if(monster.short == "minotaur tribe" && monster.HPRatio() >= 0.75) {
@@ -5189,19 +5187,19 @@ public function runAway(callHook:Boolean = true):void {
 		//Autosuccess - less than 60 lust
 		if(player.lust < 60) {
 			outputText("Marshalling your thoughts, you frown at the strange girl and turn to march up the beach.  After twenty paces inshore you turn back to look at her again.  The anemone is clearly crestfallen by your departure, pouting heavily as she sinks beneath the water's surface.", true);
-			gameState = 0;
+			inCombat = false;
 			clearStatuses(false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		//Speeed dependant
 		else {
 			//Success
 			if(player.spe > rand(monster.spe+escapeMod)) {
-				gameState = 0;
+				inCombat = false;
 				clearStatuses(false);
 				outputText("Marshalling your thoughts, you frown at the strange girl and turn to march up the beach.  After twenty paces inshore you turn back to look at her again.  The anemone is clearly crestfallen by your departure, pouting heavily as she sinks beneath the water's surface.", true);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//Run failed:
@@ -5222,9 +5220,9 @@ public function runAway(callHook:Boolean = true):void {
 			else outputText("Y");
 			outputText("ou easily outpace the dragon, who begins hurling imprecations at you.  \"What the hell, [name], you weenie; are you so scared that you can't even stick out your punishment?\"");
 			outputText("\n\nNot to be outdone, you call back, \"Sucks to you!  If even the mighty Last Ember of Hope can't catch me, why do I need to train?  Later, little bird!\"");
-			gameState = 0;
+			inCombat = false;
 			clearStatuses(false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Fail: 
 		else {
@@ -5246,20 +5244,20 @@ public function runAway(callHook:Boolean = true):void {
 		if(monster.short == "Izma") {
 			outputText("\n\nAs you leave the tigershark behind, her taunting voice rings out after you.  \"<i>Oooh, look at that fine backside!  Are you running or trying to entice me?  Haha, looks like we know who's the superior specimen now!  Remember: next time we meet, you owe me that ass!</i>\"  Your cheek tingles in shame at her catcalls.", false);
 		}
-		gameState = 0;
+		inCombat = false;
 		clearStatuses(false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//Runner perk chance
 	else if(player.findPerk(PerkLib.Runner) >= 0 && rand(100) < 50) {
-		gameState = 0;
+		inCombat = false;
 		outputText("Thanks to your talent for running, you manage to escape.", false);
 		if(monster.short == "Izma") {
 			outputText("\n\nAs you leave the tigershark behind, her taunting voice rings out after you.  \"<i>Oooh, look at that fine backside!  Are you running or trying to entice me?  Haha, looks like we know who's the superior specimen now!  Remember: next time we meet, you owe me that ass!</i>\"  Your cheek tingles in shame at her catcalls.", false);
 		}
 		clearStatuses(false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//FAIL FLEE
@@ -5373,7 +5371,7 @@ public function anemoneSting():void {
 }
 
 public function magicalSpecials():void {
-	if(inCombat() && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 6) {
+	if (inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 6) {
 		clearOutput();
 		outputText("You try to ready a special ability, but wind up stumbling dizzily instead.  <b>Your ability to use magical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
 		enemyAI();
@@ -5438,7 +5436,7 @@ public function physicalSpecials():void {
 	var b7T:String = "";
 	var b8T:String = "";
 	var b9T:String = "";
-	if(inCombat() && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 5) {
+	if (inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 5) {
 		clearOutput();
 		outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
 		enemyAI();

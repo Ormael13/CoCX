@@ -1,6 +1,7 @@
 ﻿import classes.GlobalFlags.kFLAGS;
 import classes.Player;
 import classes.Items.Consumable;
+import classes.Scenes.Areas.Lake;
 
 //Used to jump the fuck out of pregnancy scenarios for menus.
 //const EVENT_PARSER_ESCAPE:int = 800;
@@ -18,12 +19,12 @@ public function eventParser(eventNo:*):void {
 	{
 		//trace("Numeric eventNo "+eventNo+" replace it with function");
 		//Clear sprite if not in combat
-		if(!inCombat() && eventNo != cleanupAfterCombat) spriteSelect(-1);
+		if (!inCombat && eventNo != cleanupAfterCombat) spriteSelect(-1);
 		//Clear pic if not in combat
 		//if(!inCombat() && eventNo != cleanupAfterCombat) clearImages();
 		//Reset newgame buttons till back at camp
 		mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo );
-		if(eventNo != 1) {
+		if (eventNo != 1) {
 			hideMenus();
 		}
 		
@@ -45,8 +46,8 @@ public function eventParser(eventNo:*):void {
 
 
 		if(eventNo < 1000) doSystem(eventNo);
-		if(eventNo >=1000 && eventNo < 2000) inventory.doItems(eventNo);
-		if(eventNo >=2000 && eventNo < 5000) doEvent(eventNo);
+//		if(eventNo >=1000 && eventNo < 2000) inventory.doItems(eventNo);
+		if(eventNo >=2000 && eventNo < 5000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doEvent(eventNo);
 		if(eventNo >=5000 && eventNo < 7000) doCombat(eventNo);
 		if(eventNo >= 10000 && eventNo < 10999) charCreation.doCreation(eventNo);
 		if(eventNo >= 11000) doDungeon(eventNo);
@@ -144,31 +145,35 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 13:
-			//Pass an hour
+			camp.returnToCampUseOneHour();
+/*			//Pass an hour
 			outputText("An hour passes...\n", true);
 			timeQ = 1;
-			goNext(1, false);
+			goNext(1, false); */
 			return;
 
 
 		case 14:
-			outputText("Two hours pass...\n", true);
+			camp.returnToCampUseTwoHours();
+/*			outputText("Two hours pass...\n", true);
 			timeQ = 2;
-			goNext(2, false);
+			goNext(2, false); */
 			return;
 
 
 		case 15:
-			outputText("Four hours pass...\n", true);
+			camp.returnToCampUseFourHours();
+/*			outputText("Four hours pass...\n", true);
 			timeQ = 4;
-			goNext(4, false);
+			goNext(4, false); */
 			return;
 
 
 		case 16:
-			outputText("Eight hours pass...\n", true);
+			camp.returnToCampUseEightHours();
+/*			outputText("Eight hours pass...\n", true);
 			timeQ = 8;
-			goNext(8, false);
+			goNext(8, false); */
 			return;
 
 
@@ -419,7 +424,7 @@ public function errorPrint(details:* = null):void
 		rawOutputText(" (including the above stack trace copy&pasted into the details),");
 	rawOutputText(" to make tracking the issue down easier. Thanks!");
 
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Argument is time passed.  Pass to event parser if nothing happens.
@@ -1248,30 +1253,28 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Slime craving stuff
-		if(player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) {
-			if(player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
-				outputText("\n<b>You realize you no longer crave fluids like you once did.</b>\n", false);
+		if (player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) {
+			if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
+				outputText("\n<b>You realize you no longer crave fluids like you once did.</b>\n");
 				needNext = true;
 				player.removeStatusAffect(StatusAffects.SlimeCraving);
 				player.removeStatusAffect(StatusAffects.SlimeCravingFeed);
 			}
 			else {
 				//Slime core reduces fluid need rate
-				if(player.findPerk(PerkLib.SlimeCore) >= 0) player.addStatusValue(StatusAffects.SlimeCraving,1,.5);
-				else player.addStatusValue(StatusAffects.SlimeCraving,1,1);
-				if(player.statusAffectv1(StatusAffects.SlimeCraving) >= 18) {
-					if(player.findStatusAffect(StatusAffects.SlimeCravingOutput) < 0) {
-						player.createStatusAffect(StatusAffects.SlimeCravingOutput,0,0,0,0);
-						outputText("\n<b>Your craving for the 'fluids' of others grows strong, and you feel yourself getting weaker and slower with every passing hour.</b>\n", false);
+				if (player.findPerk(PerkLib.SlimeCore) >= 0) player.addStatusValue(StatusAffects.SlimeCraving, 1, 0.5);
+				else player.addStatusValue(StatusAffects.SlimeCraving, 1, 1);
+				if (player.statusAffectv1(StatusAffects.SlimeCraving) >= 18) {
+					if (player.findStatusAffect(StatusAffects.SlimeCravingOutput) < 0) {
+						player.createStatusAffect(StatusAffects.SlimeCravingOutput, 0, 0, 0, 0);
+						outputText("\n<b>Your craving for the 'fluids' of others grows strong, and you feel yourself getting weaker and slower with every passing hour.</b>\n");
 						needNext = true;
 					}
-					dynStats("str", -.1,"spe", -.1, "lus", 2);
+					dynStats("str", -0.1,"spe", -0.1, "lus", 2);
 					//Keep track of how much has been taken from speed/strength
-					player.addStatusValue(StatusAffects.SlimeCraving,2,.1);
-					//Bad end!
-					if(player.str <= 1) {
-						outputText("Your entire body wobbles as your strength fails, collapsing into itself.  You struggle to rise, but your form loses more and more rigidity, melting into an amorphous blob.  Without the strength to rise, you've no hope of getting the fluids you need.  The aching craving for moisture drives you to roll to the lake, which you slip into.  With the constant runoff of bodily fluids that enter the lake, you're able to subsist for a time, forgetting about your mission as the all-consuming need devours your personality.", false);
-						doNext(1063);
+					player.addStatusValue(StatusAffects.SlimeCraving, 2, 0.1);
+					if (player.str <= 1) { //Bad end!
+						lake.gooGirlScene.slimeBadEnd();
 						return true;
 					}
 				}
@@ -1691,32 +1694,29 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Dreams on hour 3.
 		if(model.time.hours == 4) {
-			if(player.findStatusAffect(StatusAffects.SuccubiNight) >= 0 && (player.totalCocks() >= 1 || (player.gender == 0))) {
+			if (player.findStatusAffect(StatusAffects.SuccubiNight) >= 0 && (player.totalCocks() >= 1 || (player.gender == 0))) {
 				//Call secksins!
-				if(player.findStatusAffect(StatusAffects.RepeatSuccubi) >= 0) {
+				if (player.findStatusAffect(StatusAffects.RepeatSuccubi) >= 0) {
 					//VapulaSurprise
-					if(vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0)
+					if (vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0)
 						vapula.vapulaAssistsCeruleanSuccubus();
-					//Normal night succubi shit
-					else {
-						doNext(1);
-						camp.nightSuccubiRepeat();
-					}
+					else exploration.giacomo.nightSuccubiRepeat(); //Normal night succubi shit
 				}
 				else {
-					player.createStatusAffect(StatusAffects.SuccubiFirst,0,0,0,0);
-					eventParser(2025);
-					player.createStatusAffect(StatusAffects.RepeatSuccubi,0,0,0,0);
+//					player.createStatusAffect(StatusAffects.SuccubiFirst, 0, 0, 0, 0);
+					exploration.giacomo.nightSuccubiFirstTime(); //Replaces eventParser(2025);
+					player.createStatusAffect(StatusAffects.RepeatSuccubi, 0, 0, 0, 0);
 				}
 				//Lower count if multiples stacked up.
-				if(player.statusAffectv1(StatusAffects.SuccubiNight) > 1) {
-					player.addStatusValue(StatusAffects.SuccubiNight,1,-1);
-				}
+				if (player.statusAffectv1(StatusAffects.SuccubiNight) > 1)
+					player.addStatusValue(StatusAffects.SuccubiNight, 1, -1);
 				else player.removeStatusAffect(StatusAffects.SuccubiNight);
-				if(player.findStatusAffect(StatusAffects.SuccubiFirst) >= 0) {
-					if(player.gender > 0) doNext(2026);
+/*
+				if (player.findStatusAffect(StatusAffects.SuccubiFirst) >= 0) {
+					if (player.gender > 0) doNext(camp.ceruleanSuccubusEncounterPart2);
 					player.removeStatusAffect(StatusAffects.SuccubiFirst);
 				}
+*/
 				return true;
 			}
 			//Exgartuan night time surprise!
@@ -1908,7 +1908,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.removeStatusAffect(StatusAffects.LootEgg);
 			player.removeStatusAffect(StatusAffects.Eggs);
 			trace("TAKEY NAU");
-			inventory.takeItem(itype);
+			inventory.takeItem(itype, camp.campMenu);
 			return true;
 		}
 		// Benoit preggers update
@@ -1929,61 +1929,54 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	}
 	
 	//Drop axe if too short!
-	if(player.tallness < 78 && player.weapon == weapons.L__AXE) {
-		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n", false);
-		player.weapon.unequip(player,true,true);
+	if (player.tallness < 78 && player.weapon == weapons.L__AXE) {
+		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n");
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
 		return true;
 	}
-	if(player.weapon == weapons.L_HAMMR && player.tallness < 60) {
-		outputText("<b>\nYou've become too short to use this hammer anymore.  You can still keep it in your inventory, but you'll need to be taller to effectively wield it.</b>\n", true);
-		player.weapon.unequip(player,true,true);
+	if (player.weapon == weapons.L_HAMMR && player.tallness < 60) {
+		outputText("<b>\nYou've become too short to use this hammer anymore.  You can still keep it in your inventory, but you'll need to be taller to effectively wield it.</b>\n");
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
 		return true;
 	}		
-	if(player.weapon == weapons.CLAYMOR && player.str < 40) {
-		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer, and you're forced to stop using it.</b>\n", true);
-		player.weapon.unequip(player,true,true);
+	if (player.weapon == weapons.CLAYMOR && player.str < 40) {
+		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer, and you're forced to stop using it.</b>\n");
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
 		return true;
 	}
-	if(player.weapon == weapons.WARHAMR && player.str < 80) {
-		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer!</b>\n", true);
-		player.weapon.unequip(player,true,true);
+	if (player.weapon == weapons.WARHAMR && player.str < 80) {
+		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer!</b>\n");
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
 		return true;
 	}
 	//Drop beautiful sword if corrupted!
-	if(player.weaponPerk == "holySword") {
-		if(player.cor >= 35) {
-			outputText("<b>\nThe <u>" + player.weaponName + "</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n", false);
-			var oldWeapon:Weapon = player.weapon;
-			player.weapon.unequip(player,false,true);
-			inventory.takeItem(oldWeapon);
-			return true;
-		}
+	if (player.weaponPerk == "holySword" && player.cor >= 35) {
+		outputText("<b>\nThe <u>" + player.weaponName + "</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
+		return true;
 	}
 	//Unequip Lusty maiden armor
-	if(player.armorName == "lusty maiden's armor") {
+	if (player.armorName == "lusty maiden's armor") {
 		//Removal due to no longer fitting:
 		//Grew Cock or Balls
-		if(player.hasCock() || player.balls > 0) {
+		if (player.hasCock() || player.balls > 0) {
 			outputText("\nYou fidget uncomfortably in the g-string of your lewd bikini - there simply isn't enough room for your ");
-			if(player.hasCock()) outputText("maleness");
+			if (player.hasCock()) outputText("maleness");
 			else outputText("bulgy balls");
 			outputText(" within the imprisoning leather, and it actually hurts to wear it.  <b>You'll have to find some other form of protection!</b>\n\n");
-			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			inventory.takeItem(armors.LMARMOR);
+			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), camp.campMenu);
 			return true;
 		}
 		//Lost pussy
-		else if(!player.hasVagina()) {
+		else if (!player.hasVagina()) {
 			outputText("\nYou fidget uncomfortably as the crease in the gusset of your lewd bikini digs into your sensitive, featureless loins.  There's simply no way you can continue to wear this outfit in comfort - it was expressly designed to press in on the female mons, and without a vagina, <b>you simply can't wear this exotic armor.</b>\n\n");
-			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			inventory.takeItem(armors.LMARMOR);
+			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), camp.campMenu);
 			return true;
 		}
 		//Tits gone or too small
-		else if(player.biggestTitSize() < 4) {
+		else if (player.biggestTitSize() < 4) {
 			outputText("\nThe fine chain that makes up your lewd bikini-top is dangling slack against your flattened chest.  Every movement and step sends it jangling noisily, slapping up against your [nipples], uncomfortably cold after being separated from your " + player.skinFurScales() + " for so long.  <b>There's no two ways about it - you'll need to find something else to wear.</b>\n\n");
-			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			inventory.takeItem(armors.LMARMOR);
+			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), camp.campMenu);
 			return true;
 		}
 	}

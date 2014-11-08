@@ -140,8 +140,8 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			outputText("There's no way you're going to go gallivanting off into the woods after some flame.  You shake your head to clear your thoughts, and warily turn away to head back toward camp.  You could almost swear for a moment the flame looked disappointed, and you chuckle lightly at such a silly thought.");
 			//Advance time 1 hour, return to camp.
-			if (inCombat()) cleanupAfterCombat();
-			doNext(13);
+			if (getGame().inCombat) cleanupAfterCombat();
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[Follow] (C)
@@ -174,7 +174,7 @@ package classes.Scenes.Areas.Forest
 				outputText("How did she get behind you so quickly?  You were staring at her the entire time!  Glancing quickly over your shoulder, you confirm that this is not a case of twins, but when you turn to face her, she has disappeared once again!\n\n");
 				outputText("\"<i>Over here, silly~</i>\" she calls to you with a mischievous tone, beckoning to you as you whip around to face her voice.  \"<i>Don't be shy, I don't bite...  often...</i>\"\n\n");
 				outputText("Her tone is innocuous enough, but her mannerisms are a little disconcerting, somehow.  What are you going to do?");
-				if (!inCombat()) simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", 0, "", 0, "", 0);
+				if (!getGame().inCombat) simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", 0, "", 0, "", 0);
 				else simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", 0, "", 0, "", 0);
 			}
 		}
@@ -226,14 +226,13 @@ package classes.Scenes.Areas.Forest
 
 			outputText("She holds out a small white package tied with string, grinning eagerly.  You hesitate, wondering whether it would be wise to take a gift from this strange woman, but before you can protest, she shoves the package into your hands.  When you look up from the featureless wrapping, there is no sign of her save for the echo of a mischievous giggle through the trees.\n\n");
 			outputText("<b>You have received a Kitsune's Gift!</b>\n");
-			if (inCombat()) {
+			if (getGame().inCombat) {
 				flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.KITGIFT.id;
 				cleanupAfterCombat();
 			}
 			else {
 				//add Kitsune's Gift to inventory
-				menuLoc = 2;
-				inventory.takeItem(consumables.KITGIFT);
+				inventory.takeItem(consumables.KITGIFT, camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -664,7 +663,8 @@ package classes.Scenes.Areas.Forest
 				}
 				model.time.hours = 6;
 				model.time.days++;
-				if (!inCombat()) doNext(13);
+				if (!getGame().inCombat)
+					doNext(camp.returnToCampUseOneHour);
 				else cleanupAfterCombat();
 			}
 		}
@@ -2263,7 +2263,7 @@ package classes.Scenes.Areas.Forest
 			addButton(0, "Read Books", readKitsuneBooks);
 			if (flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(1, "Meditate", meditateLikeAKitsuneEhQuestionMark);
 			if (player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(2, "Statue", stealAStatue);
-			addButton(4, "Leave", eventParser, 13);
+			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}
 
 //[Read Books]
@@ -2277,19 +2277,19 @@ package classes.Scenes.Areas.Forest
 				outputText("It's a rather dry read, but informative.  Chapter after chapter explains the underlying theory of magic, going to almost excruciating levels of detail.  " + ((player.inte < 50) ? "Much of it flies over your head, but the book does manage to clarify a few points.  You close the book and set it back on the shelf, feeling like you've learned something." : "Much of it is merely review, but you do manage to glean a few facts before closing the book and setting it back on the shelf."));
 				//+2 INT, Advance 1hr and return to camp
 				dynStats("int", 2);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else if (choice == 1) {
 				outputText("It seems to be a religious text of some sort.  As you flip through the pages, you read about various rituals and scriptures, familiarizing yourself with the spirits and gods of this land.  You close the tome at last, setting it reverently back on the shelf and reflecting upon the teachings housed within.");
 				//-1 COR, Advance 1hr and return to camp
 				dynStats("cor", -1);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else {
 				outputText("You start to flip through the pages, a deep blush slowly forming on your cheeks the further you read into what is clearly an erotic novella of some form.  Graphic descriptions of women being violated by tentacle beasts abound on almost every page, " + ((player.lib < 50) ? "and you slam the book shut before reading further, already feeling a heat building in your groin." : "and you lick your lips hungrily, poring over every line and word of lascivious prose."));
 				//+ 1 LIB, + 5 LUST, Advance 1hr and return to camp
 				dynStats("lib", 1, "lus", 5);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -2318,14 +2318,14 @@ package classes.Scenes.Areas.Forest
 					dynStats("int", 2, "lus", -20, "cor", -2);
 				}
 				player.consumeItem(consumables.FOXJEWL);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else {
 				//Normal:
 				outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.  As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
 				//-2 COR, -20 LUST, +1 INT, Advance 1hr and return to camp.
 				dynStats("int", 1, "lus", -20, "cor", -2);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -2353,8 +2353,7 @@ package classes.Scenes.Areas.Forest
 			outputText("The thought of how many gems you'll be able to get for it is enough to quickly suppress those feelings, avarice winning out over guilt.");
 			//+10 COR, add Gold Statue to inventory, Advance 1hr and return to camp
 			dynStats("lus", 10);
-			menuLoc = 2;
-			inventory.takeItem(useables.GLDSTAT);
+			inventory.takeItem(useables.GLDSTAT, camp.returnToCampUseOneHour);
 			flags[kFLAGS.TOOK_KITSUNE_STATUE] = 1;
 		}
 
@@ -2366,7 +2365,7 @@ package classes.Scenes.Areas.Forest
 			//Advance 1hr and return to camp.
 			flags[kFLAGS.TOOK_KITSUNE_STATUE] = 0;
 			player.consumeItem(useables.GLDSTAT);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Use:

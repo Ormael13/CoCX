@@ -7,13 +7,38 @@ package classes.Items
 	import classes.PerkLib;
 	import classes.Player;
 
-	public class Armor extends Equipable
+	public class Armor extends Useable //Equipable
 	{
 		private var _def:Number;
 		private var _perk:String;
 		private var _name:String;
-
-		override public function equip(player:Player, returnOldItem:Boolean,output:Boolean):void
+		
+		public function Armor(id:String, shortName:String, name:String, longName:String, def:Number, value:Number = 0, description:String = null, perk:String = "") {
+			super(id, shortName, longName, value, description);
+			this._name = name;
+			this._def = def;
+			this._perk = perk;
+		}
+		
+		public function get def():Number { return _def; }
+		
+		public function get perk():String { return _perk; }
+		
+		public function get name():String { return _name; }
+		
+		public function playerEquip():Armor { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+			return this;
+		}
+		
+		public function playerRemove():Armor { //This item is being removed by the player. Remove any perks, etc. - This function should only handle mechanics, not text output
+			while (game.player.findPerk(PerkLib.BulgeArmor) >= 0) game.player.removePerk(PerkLib.BulgeArmor); //TODO remove this Exgartuan hack
+			return this;
+		}
+		
+		public function removeText():void {} //Produces any text seen when removing the armor normally
+		
+/*
+		override protected function equip(player:Player, returnOldItem:Boolean,output:Boolean):void
 		{
 			if (output) clearOutput();
 			if (canUse(player, true)) {
@@ -25,7 +50,7 @@ package classes.Items
 			}
 		}
 
-		override public function unequip(player:Player, returnToInventory:Boolean, output:Boolean):void
+		override public function unequip(player:Player, returnToInventory:Boolean, output:Boolean = false):void
 		{
 			while(player.findPerk(PerkLib.BulgeArmor) >= 0) player.removePerk(PerkLib.BulgeArmor);// TODO remove this Exgartuan hack
 			if (returnToInventory) {
@@ -41,28 +66,6 @@ package classes.Items
 			if (player.modArmorName.length > 0) player.modArmorName = "";
 			unequipped(player,output);
 		}
-
-		public function Armor(id:String, shortName:String, name:String, longName:String, def:Number, value:Number = 0, description:String = null, perk:String = "")
-		{
-			super(id, shortName, longName, value, description);
-			this._name = name;
-			this._def = def;
-			this._perk = perk;
-		}
-
-		public function get def():Number
-		{
-			return _def;
-		}
-
-		public function get perk():String
-		{
-			return _perk;
-		}
-
-		public function get name():String
-		{
-			return _name;
-		}
+*/
 	}
 }

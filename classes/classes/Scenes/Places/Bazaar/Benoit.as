@@ -296,8 +296,8 @@ public function benoitIntro():void {
 			fem = benoitFeminise;
 		}
 	}
-
-	choices("Buy",benoitsBuyMenu,"Sell",benoitSellMenu,"Talk",talkToBenoit,suggestText,suggest,"Basil. Womb",womb,"Feminize",fem,"",0,"",0,"",0,"Leave",2855);
+	choices("Buy", benoitsBuyMenu, "Sell", benoitSellMenu, "Talk", talkToBenoit, suggestText, suggest, "Basil. Womb", womb,
+		"Feminize", fem, "", null, "", null, "", null, "Leave", bazaar.enterTheBazaar);
 }
 
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
@@ -333,40 +333,24 @@ public function benoitsBuyMenu():void {
 
 private function benoitSellMenu():void {
 	clearOutput();
-	var temp1:Function = null;
-	var temp2:Function = null;
-	var temp3:Function = null;
-	var temp4:Function = null;
-	var temp5:Function = null;
-	if(flags[kFLAGS.BENOIT_EXPLAINED_SHOP] == 0) buyOrSellExplanationFirstTime();
-	else {
-		outputText("\"<i>Let us feel what you are trying to palm off upon me zis time, zen,</i>\" sighs Benoit, sitting down and opening his hand to you.");
-	}
+	if (flags[kFLAGS.BENOIT_EXPLAINED_SHOP] == 0)
+		buyOrSellExplanationFirstTime();
+	else
+		outputText("\"<i>Let us feel what you are trying to palm off upon me zis time, zen,</i>\" sighs Benoit" + benoitMF("", "e") + ", sitting down and opening " + benoitMF("his","her") + " hand to you.");
 	var sellMod:int = 3;
-	if(flags[kFLAGS.BENOIT_EGGS] > 0 || flags[kFLAGS.BENOIT_STATUS] != 0) sellMod = 2;
-	outputText("\n\n<b><u>" + benoitMF("Benoit","Benoite") + "'s Estimates</u></b>", false);
-	if(player.itemSlot1.quantity > 0 && int(player.itemSlot1.itype.value/sellMod) > 0) {
-		outputText("\n" + int(player.itemSlot1.itype.value/sellMod) + " gems for " + player.itemSlot1.itype.longName + ".", false);
-		temp1 = createCallBackFunction(benoitSellTransact,1);
+	if (flags[kFLAGS.BENOIT_EGGS] > 0 || flags[kFLAGS.BENOIT_STATUS] != 0) sellMod = 2;
+	outputText("\n\n<b><u>Benoit" + benoitMF("", "e") + "'s Estimates</u></b>");
+	menu();
+	var totalItems:int = 0;
+	for (var slot:int = 0; slot < 5; slot++) {
+		if (player.itemSlots[slot].quantity > 0 && int(player.itemSlots[slot].itype.value / sellMod) >= 1) {
+			outputText("\n" + int(player.itemSlots[slot].itype.value / sellMod) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+			addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), createCallBackFunction2(benoitSellTransact, slot, sellMod));
+			totalItems += player.itemSlots[slot].quantity;
+		}
 	}
-	if(player.itemSlot2.quantity > 0 && int(player.itemSlot2.itype.value/sellMod) > 0) {
-		outputText("\n" + int(player.itemSlot2.itype.value/sellMod) + " gems for " + player.itemSlot2.itype.longName + ".", false);
-		temp2 = createCallBackFunction(benoitSellTransact,2);
-	}
-	if(player.itemSlot3.quantity > 0 && int(player.itemSlot3.itype.value/sellMod) > 0) {
-		outputText("\n" + int(player.itemSlot3.itype.value/sellMod) + " gems for " + player.itemSlot3.itype.longName + ".", false);
-		temp3 = createCallBackFunction(benoitSellTransact,3);
-	}
-	if(player.itemSlot4.quantity > 0 && int(player.itemSlot4.itype.value/sellMod) > 0) {
-		temp4 = createCallBackFunction(benoitSellTransact,4);
-		outputText("\n" + int(player.itemSlot4.itype.value/sellMod) + " gems for " + player.itemSlot4.itype.longName + ".", false);
-	}
-	if(player.itemSlot5.quantity > 0 && int(player.itemSlot5.itype.value/sellMod) > 0) {
-		temp5 = createCallBackFunction(benoitSellTransact,5);
-		outputText("\n" + int(player.itemSlot5.itype.value/sellMod) + " gems for " + player.itemSlot5.itype.longName + ".", false);
-	}
-	choices((player.itemSlot1.itype.shortName + " x" + player.itemSlot1.quantity), temp1, (player.itemSlot2.itype.shortName + " x" + player.itemSlot2.quantity), temp2, (player.itemSlot3.itype.shortName + " x" + player.itemSlot3.quantity), temp3, (player.itemSlot4.itype.shortName + " x" + player.itemSlot4.quantity), temp4, (player.itemSlot5.itype.shortName + " x" + player.itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", benoitIntro);
-	
+	if (totalItems > 1) addButton(7, "Sell All", createCallBackFunction2(benoitSellAllTransact, totalItems, sellMod));
+	addButton(9, "Back", benoitIntro);
 }
 
 private function benoitTransactBuy(slot:int = 1):void {
@@ -387,43 +371,39 @@ private function benoitTransactBuy(slot:int = 1):void {
 	
 	player.gems -= 2 * itype.value;
 	statScreenRefresh();
-	menuLoc = 26;
-	inventory.takeItem(itype);
+	inventory.takeItem(itype, benoitsBuyMenu);
 }
 
-private function benoitSellTransact(slot:int = 1):void {
+private function benoitSellTransact(slot:int, sellMod:int):void {
 	clearOutput();
-	var sellMod:int = 3;
-	if(flags[kFLAGS.BENOIT_EGGS] > 0) sellMod = 2;
-	if(benoitLover()) outputText("Benoit" + benoitMF("","e") + " gives your object the briefest of goings-over with " + benoitMF("his","her") + " fingers before stowing it away and handing over your gem reward with a trusting smile.");
+	if (benoitLover()) 
+		outputText("Benoit" + benoitMF("", "e") + " gives your object the briefest of goings-over with " + benoitMF("his", "her") + " fingers before stowing it away and handing over your gem reward with a trusting smile.");
 	else outputText("Following a painstaking examination of what you've given him with his hands and nose, Benoit grudgingly accepts it and carefully counts out your reward.");
-	var gems:int = 0;
-	if(slot == 1) {
-		gems = int(player.itemSlot1.itype.value/sellMod);
-		player.itemSlot1.removeOneItem();
-	}
-	if(slot == 2) {
-		gems = int(player.itemSlot2.itype.value/sellMod);
-		player.itemSlot2.removeOneItem();
-	}
-	if(slot == 3) {
-		gems = int(player.itemSlot3.itype.value/sellMod);
-		player.itemSlot3.removeOneItem();
-	}
-	if(slot == 4) {
-		gems = int(player.itemSlot4.itype.value/sellMod);
-		player.itemSlot4.removeOneItem();
-	}
-	if(slot == 5) {
-		gems = int(player.itemSlot5.itype.value/sellMod);
-		player.itemSlot5.removeOneItem();
-	}
-	//add gem price here.
-	player.gems += gems;
+	player.gems += int(player.itemSlots[slot].itype.value / sellMod);
+	player.itemSlots[slot].removeOneItem();
 	statScreenRefresh();
 	//(+1 Affection)
 	benoitAffection(1);
 	doNext(benoitSellMenu);
+}
+
+private function benoitSellAllTransact(totalItems:int, sellMod:int):void {
+	clearOutput();
+	var itemValue:int = 0;
+	for (var slot:int = 0; slot < 5; slot++) {
+		if (player.itemSlots[slot].quantity > 0 && int(player.itemSlots[slot].itype.value / sellMod) >= 1) {
+			itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / sellMod);
+			player.itemSlots[slot].quantity = 0;
+		}
+	}
+	if (benoitLover()) 
+		outputText("Benoit" + benoitMF("", "e") + " gives your objects the briefest of goings-over with " + benoitMF("his", "her") + " fingers before stowing them away and handing over your " + num2Text(itemValue) + " gem reward with a trusting smile.");
+	else outputText("Following a painstaking examination of the items you've given him with his hands and nose, Benoit grudgingly accepts them and carefully counts out your " + num2Text(itemValue) + " gem reward.");
+	player.gems += itemValue;
+	statScreenRefresh();
+	//(+1 Affection per item)
+	benoitAffection(totalItems);
+	doNext(benoitIntro);
 }
 
 //All slots are reset each day.  Benoit buys items at 66% the rate Oswald does.  
@@ -510,7 +490,7 @@ private function talkToBenoit():void {
 			outputText("\n\nYou rack your brain but can't think of anything that could help Benoit, so you end up simply sympathising with him.  \"<i>Do not beat yourself up over it,</i>\" says the basilisk, touching the tips of your fingers and smiling warmly.  \"<i>It is just foolishness.  And anyway, I told you: we are a race of bastards.  We are ze last guys who deserve someone sinking after us.</i>\"");
 			//don't trigger event again until the PC is smart enough!
 		}
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//First time Talk: 
 	else if(flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] == 0) {
@@ -546,7 +526,7 @@ private function talkToBenoit():void {
 	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0 && flags[kFLAGS.FEMOIT_UNLOCKED] == 0)
 	{
 		femoitInitialTalk();
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//Subsequent Talk
@@ -705,7 +685,7 @@ private function talkToBenoit():void {
 			outputText("\n\n“<i>Well, of course I can, zilly,</i>” she says teasingly. “<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>”");
 		}
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -849,7 +829,7 @@ private function eggySuggest():void {
 	else {
 		outputText("  I cannot give you babies unless you 'ave eggs.  I guess I should think a bit more before I go digging for things...</i>\"");
 		//, but if your body goes into 'eat again and you are afraid of 'aving... unwanted experiences... I can sell it to you.</i>\"]
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 
 	}	
 	
@@ -859,7 +839,7 @@ private function takeBenoitsContraceptives():void {
 	clearOutput();
 	outputText("You gladly accept the herbal contraceptive and push it into your mouth, enjoying the pleasantly sharp, citrus flavour.");
 	//  \"<i>I can sell you ze stuff too,</i>\" he says, twiddling his claws.  \"<i>If you want.</i>\"
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //No: 
@@ -871,7 +851,7 @@ private function dontTakeEggtraceptives():void {
 	//[Herbal Contraceptive added to slot 4 of shop]
 	//Standard basilisk preg odds
 	benoitKnocksUpPCCheck();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -943,7 +923,7 @@ private function repeatSexWithBenoitLetHim():void {
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Take charge: 
@@ -1027,7 +1007,7 @@ private function repeatBenoitFuckTakeCharge():void {
 	benoitAffection(2);
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Bas. Womb (not for horses)
@@ -1077,7 +1057,7 @@ private function tryToConvertToBassyWomb():void {
 			return;
 		}
 		else outputText("  You grin and say you're not even sure it worked... but you'll be back at some point to try it out, and he'd better be ready for when you do.  You gently pry yourself out of his grip and leave as deliberately as you can, aware of the beguiling, invisible scent you are leaving for the stunned, silent basilisk to simmer in.");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }	
 
@@ -1140,7 +1120,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 		outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
 	}
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	player.orgasm();
 	dynStats("sen", -2);
 }
@@ -1276,7 +1256,7 @@ public function benoitFeminise():void
 		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] = 1;
 
 		menu();
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -1309,7 +1289,7 @@ public function femoitFirstTimeNo():void
 	outputText("\n\n“<i>No, you are right,</i>” she says in a casual tone, although the color is still very high in her scales. “<i>It would be way too weird zat, wouldn’t it? I will find someone though, never fear.  As I said before...</i>” Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. “<i>I ‘ave a purpose now.</i>”");
 	outputText("\n\nCatching a subtle tone of dissapointment in Benoite's voice, you bid her a quick farewell and head back to camp, deciding to give her some time to recover.");
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function femoitFirstTimeYes():void
@@ -1363,7 +1343,7 @@ public function femoitFirstTimeYes():void
 
 	player.orgasm();
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 // Subsequent Sex
@@ -1497,7 +1477,7 @@ public function femoitSexIntro():void
 	}
 
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Benoite Gives Birth
@@ -1590,7 +1570,7 @@ public function femoitBirths():void
 		clearBenoitPreggers();
 
 		menu();
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 }

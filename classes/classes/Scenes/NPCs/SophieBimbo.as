@@ -435,7 +435,7 @@ private function sendToFarm():void
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 1;
 	
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function backToCamp():void
@@ -503,7 +503,7 @@ private function tellSophieToVisitIzma():void {
 	outputText("You suggest she visit Izma again.  Maybe this time she won't get tied up again?");
 	outputText("\n\nSophie squeals, \"<i>REAAALLY?</i>\" before taking off towards the other side of camp.  This should be good.");
 	flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -667,7 +667,7 @@ private function bimboSophieLicksRugs():void {
 	}
 	else {
 		outputText("What do you do?", false);
-		simpleChoices("Sixtynine",bimboSophieSixtyNineAfterCunnilingus,"",0,"",0,"",0,"Leave",13);
+		simpleChoices("Sixtynine",bimboSophieSixtyNineAfterCunnilingus,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 	}
 }
 //SixtyNine Continuation - GOILS you're a wreckin' machine
@@ -745,7 +745,7 @@ private function bimboSophieSixtyNineAfterCunnilingus():void {
 		dynStats("lib", 1, "sen", -1);
 		sophieScene.luststickApplication(5);
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function buttFuckBimboSophie():void {
@@ -799,7 +799,7 @@ private function buttFuckBimboSophie():void {
 	if(sophieIsInSeason()) sophiePregChance();
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //TitFuck
@@ -842,7 +842,7 @@ private function fuckBimboSophiesTits():void {
 	sophieScene.luststickApplication(5);
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Bimbo Sophie Camp Event – (If the player has an Ovi Elixir)
@@ -893,8 +893,7 @@ private function beBimboSophiesSugarDaddy():void {
 	dynStats("sen", -1);
 	sophieScene.luststickApplication(2);
 	//[player gains random large egg]
-	menuLoc = 2;
-	inventory.takeItem(consumables.LARGE_EGGS[rand(consumables.LARGE_EGGS.length)]);
+	inventory.takeItem(consumables.LARGE_EGGS[rand(consumables.LARGE_EGGS.length)], camp.returnToCampUseOneHour);
 }
  
 //[Mommy]
@@ -917,9 +916,8 @@ private function beBimboSophiesSugarMommy():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	//[player gains random large egg]
-	menuLoc = 2;
 	sophieScene.luststickApplication(2);
-	inventory.takeItem(consumables.LARGE_EGGS[rand(consumables.LARGE_EGGS.length)]);
+	inventory.takeItem(consumables.LARGE_EGGS[rand(consumables.LARGE_EGGS.length)], camp.returnToCampUseOneHour);
 }
 
 
@@ -1080,7 +1078,7 @@ private function rideDatSophieVag(nice:Boolean = false):void {
 	dynStats("lib", .5, "sen", -4);
 	if(!nice && player.cor < 50) dynStats("cor", 1);
 	sophieScene.luststickApplication(5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //PREGNANCY EXPACK
@@ -1272,7 +1270,7 @@ private function postSophieImpreg():void {
 	clearOutput();
 	sophieSprite();
 	outputText("When you wake, Sophie is snuggled up next to you, her arms and legs wrapped around you affectionately.  A cup full of water, along with several strips of dried meat sit nearby... apparently she got them while you were out, knowing how thirsty and hungry you'd be.  You run your fingers through her platinum, down-soft hair.  Having a live-in bimbo isn't really all that bad.");
-	doNext(16);
+	doNext(camp.returnToCampUseEightHours);
 }
 //Too Big Impregnation Sex*
 //Sophie starts grinding on top, hypno-compelling you to get hornier and hornier until you flip her over and full-body titfuck her.  After the first jizz, you get a little winded and lay back, she remounts you and gets you to cum against her entrance, then she snuggles with you and slowly teases and orgasm denials you until you fucking explode and pass out cuddling with her.
@@ -1318,7 +1316,7 @@ private function postSophieTooBigImpreg():void {
 	clearOutput();
 	sophieSprite();
 	outputText("Sophie milks you through three more orgasms before she finally tires, and by that point, you're equally exhausted.  You snuggle up next to her and pass out, barely rousing when she begins kissing your manhood during the nap for a fourth helping of your spillable seed.  When you awaken nearly eight hours later, she's snoring soundly, with a skin of water and strips of dried meat left nearby for you to restore yourself.  Life with a bimbo isn't so bad!");
-	doNext(16);
+	doNext(camp.returnToCampUseEightHours);
 }
 
 //Sophie Move In Request Scene*
@@ -1351,7 +1349,7 @@ private function yesSophieSleepWith():void {
 	}
 	outputText(" midriff and cushiony tits against you.  \"<i>You're awesome, [name], you know that?  You're totally " + player.mf("hunky","cute") + " AND awesome!</i>\"  She spins about, dancing happily and shaking her voluptuous backside in your direction as she goes.");
 	flags[kFLAGS.SLEEP_WITH] = "Sophie";
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //No (Also Used To Kick Her Out Of Bed)*
 private function noSophieSleepWith():void {
@@ -1359,7 +1357,7 @@ private function noSophieSleepWith():void {
 	sophieSprite();
 	outputText("Sophie casts her eyes down and says, \"<i>I get it...  I'll just... sleep over in my nest then.  Alone...</i>\"  She shambles away, her tail feathers limp against her big, bouncing butt as she goes, clearly unhappy with the decision.  You can hear her sniffling even after she vanishes around a rock, trying not to cry.");
 	if(flags[kFLAGS.SLEEP_WITH] == "Sophie") flags[kFLAGS.SLEEP_WITH] = "";
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Option To Move Her In Any Time If Initially Declined*
@@ -1373,7 +1371,7 @@ private function moveSophieInRepeat():void {
 	outputText("\n\n\"<i>Really?  Like, I can snuggle up next to you when you sleep while you use my boobs as pillows?!</i>\" she asks, unable to keep a girlish squeal of delight out of her voice.  Sophie bounces up and down; her wings flapping with wild excitement, nearly blinding you from the cloud of dust they kick up.  \"<i>I promise I won't bother while you sleep or anything, but maybe we could like, have quickies in the morning?</i>\"");
 	outputText("\n\nYou roll your eyes and give her a thumbs up.  After all, you can't really sleep with a sex-crazed bimbo and NOT expect to be 'mounted' at some point.");
 	flags[kFLAGS.SLEEP_WITH] = "Sophie";
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Sophie Morning Sex*
@@ -1430,7 +1428,7 @@ public function sophieFenCraftedSex(morning:Boolean = false):void {
 	player.orgasm();
 	dynStats("sen", -2);
 	if(morning) doNext(1);
-	else doNext(13);
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Pregnant Sophie Morning Sex*
@@ -1499,7 +1497,7 @@ public function fuckYoPregnantHarpyWaifu(morning:Boolean = false):void {
 	player.orgasm();
 	dynStats("sen", -2);
 	if(morning) doNext(1);
-	else doNext(13);
+	else doNext(camp.returnToCampUseOneHour);
 }	
 
 //Very Pregnant Sophie Tit Jobs*
@@ -1583,7 +1581,7 @@ private function goHogWildOnSophieBewbs():void {
 	player.orgasm();
 	dynStats("lib", 1, "sen", -2);
 	sophieScene.luststickApplication(8);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Let Her*
@@ -1649,7 +1647,7 @@ private function letSophieMilkYoDick():void {
 	player.orgasm();
 	dynStats("lib", 1, "sen", -2);
 	sophieScene.luststickApplication(8);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Sophie Births Egg*
@@ -1840,7 +1838,7 @@ public function sophieKidMaturation():void {
 		else {
 			outputText("\n\nYou smile ruefully and direct her to turn her attentions back to her mother, who even now is flapping her wings excitedly, promising her daughter the many delights of adulthood she'll get to sample, once she gets her own mate.  You just hope she doesn't cause any trouble in camp.");
 		}
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//FIRST TIME:
 	else {
@@ -1863,14 +1861,14 @@ private function yesToSophieIncest():void {
 	outputText("is more than happy to return the sudden affection, her hands running over your body as she grinds against you teasingly.  With a firm open-palm spank to her rump, you release her, telling both harpies that you will play with them again very soon.  The two horny girls giggle together before talking about all the fun they will have.");
 	dynStats("lus", 5);
 	flags[kFLAGS.SOPHIE_FAMILY_INCEST] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[nono]
 private function noToSophieIncest():void {
 	clearOutput();
 	sophieSprite();
 	outputText("Sliding your hand up to your daughter's cheek, you stroke her softly before running your fingers through her feathery hair.  Your soft touch draws a gentle, bird-like coo from your daughter.  You guide her down and tell her she should rest after such a transformation.  She should seek mates outside her family.  You don't want to encourage such blatantly sexual behavior so soon, and you sit her down in Sophie's nest to rest.  Instantly, her mother is at her side, fluttering excitedly and drawing her daughter into a conversation about you and all the fun she can have once she finds a mate of her own.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Izma dominating Sophie bondage.

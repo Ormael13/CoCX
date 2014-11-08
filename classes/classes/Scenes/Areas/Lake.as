@@ -39,9 +39,16 @@ package classes.Scenes.Areas
 			}
 			//Egg chooser
 			if (rand(100) < 25 && player.pregnancyIncubation > 1 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
-				outputText("While wandering along the lakeshore, you spy beautiful colored lights swirling under the surface.  You lean over cautiously, and leap back as they flash free of the lake's liquid without making a splash.  The colored lights spin in a circle, surrounding you.  You wonder how you are to fight light, but they stop moving and hover in place around you.  There are numerous colors: Blue, Pink, White, Black, Purple, and Brown.  They appear to be waiting for something; perhaps you could touch one of them?", true);
-				//Blue, Pink, White, Black, Purple, and Brown
-				choices("Blue", 1045, "Pink", 1046, "White", 1051, "Black", 1047, "Purple", 1048, "Brown", 1049, "", 0, "", 0, "", 0, "Escape", 1050);
+				clearOutput();
+				outputText("While wandering along the lakeshore, you spy beautiful colored lights swirling under the surface.  You lean over cautiously, and leap back as they flash free of the lake's liquid without making a splash.  The colored lights spin in a circle, surrounding you.  You wonder how you are to fight light, but they stop moving and hover in place around you.  There are numerous colors: Blue, Pink, White, Black, Purple, and Brown.  They appear to be waiting for something; perhaps you could touch one of them?");
+				menu();
+				addButton(0, "Blue", eggChoose, 2);
+				addButton(1, "Pink", eggChoose, 3);
+				addButton(2, "White", eggChoose, 4);
+				addButton(3, "Black", eggChoose, 5);
+				addButton(4, "Purple", eggChoose, 1);
+				addButton(5, "Brown", eggChoose, 0);
+				addButton(9, "Escape", eggChooseEscape);
 				return;
 			}
 			//Did it already output something?
@@ -182,7 +189,7 @@ package classes.Scenes.Areas
 					outputText("  You bet you could cover the same distance even faster next time.\n", false);
 					dynStats("spe", .75);
 				}
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else if (select == 1) {
 				//No boat, no kaiju
@@ -202,23 +209,14 @@ package classes.Scenes.Areas
 					outputText("into daydreams of raunchy perverted sex, flooding your groin with warmth.", false);
 					dynStats("lus", (player.cor / 10 + player.lib / 10));
 				}
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 
 			}
 			//Find whitney or equinum
 			else if (select == 2) {
 				//40% chance of item, 60 of whitney.
 				if (rand(10) < 4) {
-					if (rand(2) == 0) {
-						outputText("You find a long and oddly flared vial half-buried in the sand.  Written across the middle band of the vial is a single word: 'Equinum'.\n", true);
-						menuLoc = 2;
-						inventory.takeItem(consumables.EQUINUM);
-					}
-					else {
-						outputText("You find an odd, fruit-bearing tree growing near the lake shore.  One of the fruits has fallen on the ground in front of you.  You pick it up.\n", true);
-						menuLoc = 2;
-						inventory.takeItem(consumables.W_FRUIT);
-					}
+					findLakeLoot();
 				}
 				//Find Whitney
 				else {
@@ -227,16 +225,7 @@ package classes.Scenes.Areas
 						//Is the farm in your places menu?
 						if (player.statusAffectv1(StatusAffects.MetWhitney) > 1) {
 							//If so, find equinum or whisker fruit
-							if (rand(2) == 0) {
-								outputText("You find a long and oddly flared vial half-buried in the sand.   Written across the middle band of the vial is a single word, 'Equinum'.\n", true);
-								menuLoc = 2;
-								inventory.takeItem(consumables.EQUINUM);
-							}
-							else {
-								outputText("You find an odd, fruit-bearing tree growing near the lake shore.  One of the fruits has fallen on the ground in front of you.  You pick it up.\n", true);
-								menuLoc = 2;
-								inventory.takeItem(consumables.W_FRUIT);
-							}
+							findLakeLoot();
 						}
 						//If you havent met whitney enough to know the farm....
 						else kGAMECLASS.farm.farmExploreEncounter();
@@ -253,7 +242,7 @@ package classes.Scenes.Areas
 
 					//(increase player lust from the sights they saw)
 					dynStats("lus", 5);
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				fetishCultistScene.fetishCultistEncounter();
@@ -265,6 +254,41 @@ package classes.Scenes.Areas
 				outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the link to report a bug and tell Fen about it.");
 			}
 		}
+		
+		private function findLakeLoot():void {
+			clearOutput();
+			if (rand(2) == 0) {
+				outputText("You find a long and oddly flared vial half-buried in the sand.  Written across the middle band of the vial is a single word: 'Equinum'.\n");
+				inventory.takeItem(consumables.EQUINUM, camp.returnToCampUseOneHour);
+			}
+			else {
+				outputText("You find an odd, fruit-bearing tree growing near the lake shore.  One of the fruits has fallen on the ground in front of you.  You pick it up.\n");
+				inventory.takeItem(consumables.W_FRUIT, camp.returnToCampUseOneHour);
+			}
+		}
+		
+		private function eggChoose(eggType:int):void {
+			clearOutput();
+			outputText("You reach out and touch the ");
+			switch (eggType) {
+				case  0: outputText("brown"); break;
+				case  1: outputText("purple"); break;
+				case  2: outputText("blue"); break;
+				case  3: outputText("pink"); break;
+				case  4: outputText("white"); break;
+				default: outputText("black"); break;
+			}
+			outputText(" light.  Immediately it flows into your skin, glowing through your arm as if it were translucent.  It rushes through your shoulder and torso, down into your pregnant womb.  The other lights vanish.");
+			player.statusAffect(player.findStatusAffect(StatusAffects.Eggs)).value1 = eggType; //Value 1 is the egg type. If pregnant with OviElixir then StatusAffects.Eggs must exist
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function eggChooseEscape():void {
+			clearOutput();
+			outputText("You throw yourself into a roll and take off, leaving the ring of lights hovering in the distance behind you.");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
 		//Just want to do a quick Ottergirl event submission after you mentioned it!
 		private function ottahGirl():void
 		{
@@ -429,8 +453,7 @@ package classes.Scenes.Areas
 			outputText("\n\nYou take a minute to recover before doing the same.  ");
 			player.orgasm();
 			dynStats("sen", -1);
-			menuLoc = 2;
-			inventory.takeItem(consumables.FISHFIL);
+			inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
 		}
 
 		//For Chicks
@@ -489,8 +512,7 @@ package classes.Scenes.Areas
 
 			player.orgasm();
 			dynStats("sen", -1);
-			menuLoc = 2;
-			inventory.takeItem(consumables.FISHFIL);
+			inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
 		}
 
 		//For Pansies
@@ -500,7 +522,7 @@ package classes.Scenes.Areas
 			outputText("You shake your head and explain you can't.  She simply shrugs, \"<i>Ain't no skin off my back.</i>\"");
 
 			outputText("\n\nThe two of you sit in silence for a little while.  It doesn't feel like an awkward silence, just a serene, relaxing void of noise.  The gentle lapping of the water almost puts you to sleep.  Eventually, you stand, say your goodbyes and leave.  As you're leaving, Callu shouts, \"<i>Come round any time, ya hear?</i>\"  You nod absently, then make your way back to camp.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//For Fatties
@@ -514,8 +536,7 @@ package classes.Scenes.Areas
 			outputText("\n\nYou thank Callu for the food and take your leave.  ");
 
 			//(You have gained Fish Fillet!)
-			menuLoc = 2;
-			inventory.takeItem(consumables.FISHFIL);
+			inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
 		}
 	}
 }

@@ -32,7 +32,7 @@ private function oasisRunAway():void {
 	//Run away successfully if fast enough.  80 speed = autosuccess.
 	if(player.spe > 15 && player.spe/2 > rand(40)) {
 		outputText("You bolt out from under your bush and scramble away over the sand. Before long the swishing sounds of pursuit fade away and looking back you see the few demons with the gusto to follow you tramping back to the oasis.", true);	
-		doNext(13);		
+		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
 		outputText("You scramble away from the demons, but are too late. A swift demon with canine features tackles you to the ground.  Luckily he loses his grip as you tumble onto the sand and you slither free, stand up and wheel to face the host of leering demons which begin to advance with malicious intent.", true);
@@ -156,7 +156,7 @@ internal function oasisSexing():void {
 		outputText("You do your best to keep a vague mental catalogue of what has been in where, but eventually it becomes impossible to remember the type or number of demonic dicks that have filled you with their cum. The sand below your ass is wet with seed that has spilled out of your overflowing " + vaginaDescript(0) + " and there is every indication of more to come.\n\n", false);
 	}
 	//If you got here by winning combat!
-	if((monster.HP < 1 || monster.lust > 99) && gameState > 0) {
+	if((monster.HP < 1 || monster.lust > 99) && getGame().inCombat) {
 		outputText("You fuck and fuck until not a single demon is capable of servicing your needs. They lie moaning and panting at the edge of the oasis, unable to move. You survey the fallen fiends with just a touch of pride and a whole lot of satisfaction, your body feeling stronger for the endurance exercise.", false);
 		cleanupAfterCombat();
 		player.orgasm();
@@ -164,8 +164,7 @@ internal function oasisSexing():void {
 		return;
 	}
 	//If you got here by losing combat!
-	else if((player.HP < 1 || player.lust > 99) && gameState > 0 )
-	{
+	else if((player.HP < 1 || player.lust > 99) && getGame().inCombat) {
 		//►Oasis Demons Defeat PC as part of antm
 		//Antmorph stuff
 		if(monster.findStatusAffect(StatusAffects.phyllafight) >= 0) {
@@ -186,7 +185,7 @@ internal function oasisSexing():void {
 	outputText("You fuck for hours; 'feasting' with the demons. Pain, pleasure and exhaustion intermingle and no matter how hard you try to cling to consciousness you are in no state to concentrate. You dangle over the edge for what seems like eternity before another orgasm, stronger than any other, hits you like a solid wall and you black out. For a little while you drift in and out of conscious reality to find your body still the object of demonic attentions until eventually you wake to find that the seemingly endless string of orgasms has stopped. Looking around you see what demons remain awake engaged solely in fucking each other. Tender and sore from the abuse and still finding it hard to concentrate you gather your clothes and steal away, leaving them to the tail end of their orgy. In the aftermath you feel like you've just run an endurance race, but the rubbed raw sensitivity of your brutally fucked body tells another tale.", false);
 	player.orgasm();
 	dynStats("tou", .5, "sen", .5, "cor", 4);
-	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
+	if (getGame().inCombat) cleanupAfterCombat();
 	else doNext(1);
 }
 

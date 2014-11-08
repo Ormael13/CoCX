@@ -74,7 +74,7 @@ package classes.Scenes.Areas.Swamp
 			//Selecting has a 50% chance of displaying the following:
 			if (rand(2) == 0) {
 				outputText("You turn around and flee before she can get any closer.  After running for a few moments, you realize the spider-woman isn't trying to pursue you at all.  The last image you see of her is her looking down at the ground with an expression of incredible melancholy.", false);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			//The other 50% will start combat and then immediately attempt to run.
 			else {
@@ -96,7 +96,7 @@ package classes.Scenes.Areas.Swamp
 					outputText("After you've both had your fill of talk, the spider-girl asks, \"<i>I-I w-was wondering if you'd do me a favor... I have certain... urges, and", false);
 					if (player.gender == 0) {
 						outputText(" o-oh nevermind, you're genderless... crap.</i>\"  She blushes and lifts her abdomen, shooting a web into the trees that she uses to escape from the awkward situation.  You're left utterly alone, once again.", false);
-						doNext(13);
+						doNext(camp.returnToCampUseOneHour);
 						return;
 					}
 					outputText(" well, you're the first sane person I've had a chance to ask.  Oh fuck it, can I tie you up and fuck you? Please?</i>\"\n\n", false);
@@ -106,8 +106,7 @@ package classes.Scenes.Areas.Swamp
 				//(OPTION 2 - GIFT) 
 				else {
 					outputText("After you've both had your fill of talk, the spider-girl smiles and gives you a gentle hug.  She trills, \"<i>Thank you so much for talking to me!  It feels so good to actually... communicate with someone again.  I can't thank you enough, but here, take this.  Maybe it will help you on your journey.</i>\"\n\n", false);
-					menuLoc = 2;
-					inventory.takeItem(consumables.S_GOSSR);
+					inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
 				}
 			}
 			//*Try to Talk - Aggressive Variant
@@ -125,7 +124,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			startCombat(new FemaleSpiderMorph());
 			spriteSelect(73);
-			gameState = 0;
+			getGame().inCombat = false;
 			loseToFemaleSpiderMorph();
 		}
 
@@ -134,7 +133,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			outputText("", true);
 			outputText("You tell the lusty spider-morph that you're not interested in having sex with her now, and though she looks crestfallen, she nods understandingly and zips up a line of webbing into the trees before the situation can become any more awkward.", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -145,7 +144,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("", true);
 			spriteSelect(73);
 			//(Noncombat Intro)
-			if (!inCombat()) {
+			if (!getGame().inCombat) {
 				outputText("You agree to have sex with the poor, pent-up arachnid maid, and ", false);
 				if (player.cor < 33) outputText("nervously", false);
 				else if (player.cor < 66) outputText("playfully", false);
@@ -262,7 +261,8 @@ package classes.Scenes.Areas.Swamp
 			//[end]
 			player.orgasm();
 			dynStats("lib", 2, "sen", 1);
-			if (!inCombat()) doNext(13);
+			if (!getGame().inCombat)
+				doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
 
@@ -275,14 +275,14 @@ package classes.Scenes.Areas.Swamp
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
 			//(Noncombat Intro:) 
-			if (!inCombat()) {
+			if (!getGame().inCombat) {
 				outputText("You shuck your " + player.armorName + " and toss it aside, feeling " + sMultiCockDesc() + " ", false);
 				if (player.lust < 70) outputText("twitch and begin to stiffen in anticipation of sex with the beautiful spider-maid.", false);
 				else outputText("twitch, already hard and aching for the touch of the beautiful spider-maid.", false);
 				outputText("  Striding forward, you close to an arms-length away before she stops you with an outstretched palm.  She says, \"<i>Not yet, lie down over there so I can take you properly.</i>\"\n\n", false);
 			}
 			//(All:) 
-			if (!inCombat()) outputText("You shrug and step back to lay down in the soft moss,", false);
+			if (!getGame().inCombat) outputText("You shrug and step back to lay down in the soft moss,", false);
 			else if (player.HP < 1) outputText("You collapse into the soft moss,", false);
 			else outputText("You collapse into the soft moss and begin to masturbate,", false);
 			outputText(" sinking slightly into it while you watch the arachnid woman turn around and begin to shake her cute backside at you.  It sways entrancingly, the hefty weight of her large abdomen bobbing past with each shake to momentarily obstruct your view.  As you watch, a number of protuberances on the abdomen twist and writhe for a half-second before spraying out a huge quantity of sticky webbing.  It hits you like a hammer, knocking you completely flat and plastering your naked form to the dirt.", false);
@@ -290,7 +290,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("  Once it finishes, you find that your head, chest, and crotch were all left uncovered by the sticky strands.  She unleashes another burst of pearlescent webbing to coat the first, and you're left completely, utterly restrained.\n\n", false);
 
 			outputText("\"<i>Perfect, now that you're nice and comfortable, we can have sex!</i>\" decrees the ", false);
-			if (inCombat()) outputText("victorious arachnid.", false);
+			if (getGame().inCombat) outputText("victorious arachnid.", false);
 			else outputText("arachnid with a dangerous gleam in her eyes.  Why did you agree to this?", false);
 			outputText("\n\n", false);
 
@@ -366,7 +366,8 @@ package classes.Scenes.Areas.Swamp
 
 			player.orgasm();
 			dynStats("lib", 2, "sen", 1);
-			if (!inCombat()) doNext(13);
+			if (!getGame().inCombat)
+				doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
 
@@ -379,7 +380,7 @@ package classes.Scenes.Areas.Swamp
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
 			//(Consensual)
-			if (!inCombat()) {
+			if (!getGame().inCombat) {
 				outputText("You hastily remove your " + player.armorName + " and toss it aside, glad to be able to let " + sMultiCockDesc() + " flop out and breathe.  The spider-girl's eyes widen as she takes in ALL of your ", false);
 				if (player.lust < 70) outputText("expanding", false);
 				else outputText("hard", false);
@@ -441,7 +442,8 @@ package classes.Scenes.Areas.Swamp
 			outputText("  You sigh and fall into a fitful slumber, barely registering the spider-girl cutting your restraints.", false);
 			player.orgasm();
 			dynStats("lib", 2, "sen", 1);
-			if (!inCombat()) doNext(13);
+			if (!getGame().inCombat)
+				doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
 
@@ -538,7 +540,8 @@ package classes.Scenes.Areas.Swamp
 			else if (player.cor < 66) outputText("You feel a little guilty, and before you go, you untie the bindings around her hands so that she'll be able to free herself.", false);
 			else outputText("You leave her there with her hands and feet completely restrained.  Sucks to be her.", false);
 			player.orgasm();
-			if (!inCombat()) doNext(13);
+			if (!getGame().inCombat)
+				doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
 
@@ -604,7 +607,8 @@ package classes.Scenes.Areas.Swamp
 
 			player.orgasm();
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
-			if (!inCombat()) doNext(13);
+			if (!getGame().inCombat)
+				doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
 
@@ -672,7 +676,8 @@ package classes.Scenes.Areas.Swamp
 			outputText(" of seed rushes out of her gaped anus, pooling on the swamp floor as she slowly loses consciousness.  You give her ass an affectionate slap and get dressed, feeling sated and ready to resume your adventures.", false);
 			if (y != 1) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
 			player.orgasm();
-			if (!inCombat()) doNext(13);
+			if (!getGame().inCombat)
+				doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
 		}
 
@@ -685,7 +690,7 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("You're left scratching your head when you realize they were your own children, birthed by the spider-morph you fucked not so long ago.\n\n", false);
 			pregnancy.knockUpForce(); //Clear Spidermorph pregnancy
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		/*Joke Shit

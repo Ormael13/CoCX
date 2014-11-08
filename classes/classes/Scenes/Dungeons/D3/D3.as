@@ -482,7 +482,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("You pluck out " + item.longName + " ");			
 			
 			flags[kFLAGS.D3_EGGS_AVAILABLE] += eggMask;
-			inventory.takeItem(item);
+			inventory.takeItem(item, camp.campMenu); //camp.campMenu is equivalent to doNext(1)
 		}
 		
 		private function fallbackFromMagpieHallS():void

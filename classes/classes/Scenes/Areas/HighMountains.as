@@ -80,10 +80,10 @@ package classes.Scenes.Areas
 				//Cum addictus interruptus!  LOL HARRY POTTERFAG
 				//Withdrawl auto-fuck!
 				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
-					kGAMECLASS.mountain.minotaurScene.minoAddictionFuck();
+					getGame().mountain.minotaurScene.minoAddictionFuck();
 					return;
 				}
-				eventParser(2008);
+				getGame().mountain.minotaurScene.getRapedByMinotaur(true);
 				spriteSelect(44);
 				return;
 			}
@@ -194,8 +194,7 @@ package classes.Scenes.Areas
 			spriteSelect(90);
 			flags[kFLAGS.EGGS_BOUGHT]++;
 			outputText("You take " + itype.longName + ", and the harpy nods in regards to your decision.  Prepping her cart back up for the road, she gives you a final wave goodbye before heading back down through the mountains.\n\n");
-			menuLoc = 27;
-			inventory.takeItem(itype);
+			inventory.takeItem(itype, chickenHarpy);
 		}
 
 		//If No
@@ -205,7 +204,7 @@ package classes.Scenes.Areas
 			spriteSelect(90);
 			outputText("At the polite decline of her offer, the chicken harpy gives a warm smile before picking her cart back up and continuing along the path through the mountains.");
 			outputText("\n\nYou decide to take your own path, heading back to camp while you can.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

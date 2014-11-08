@@ -38,7 +38,7 @@ public function findBazaar():void {
 	}
 	outputText("\n\nDo you approach?", false);
 	//[YES] [NOOOO]
-	doYesNo(approachBazaarGuard,13);
+	doYesNo(approachBazaarGuard,camp.returnToCampUseOneHour);
 }
 
 //[FUCK YES I WILL PUT IT IN YOUR BIZARRE ANUS]
@@ -48,8 +48,19 @@ private function approachBazaarGuard():void {
 	if(player.cor < 33) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.", false);
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.", false);
 	outputText("</i>\"", false);
-	if(player.cor < 33) simpleChoices("",0,"",0,"",0,"",0,"Leave",13);
-	else simpleChoices("Enter",2855,"",0,"",0,"",0,"Leave",13);
+	if(player.cor < 33) simpleChoices("",0,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+	else simpleChoices("Enter",enterTheBazaar,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+}
+
+public function enterTheBazaar():void {
+	if (model.time.hours == 19 || model.time.hours == 20) {
+		flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE]++;
+		if (flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && player.gender == 1) {
+			nightBazaarButtfuck();
+			return;
+		}
+	}
+	enterTheBazaarAndMenu();
 }
 
 //[Enter]
@@ -96,10 +107,10 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 		outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>", false);
 		demon = overHearDemonsAboutSyrena;
 	}
-	var niamh:int = 0;
-	if(flags[kFLAGS.NIAMH_STATUS] > 0 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
-		if(flags[kFLAGS.NIAMH_STATUS] == 2) outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
-		niamh = 3537;
+	var niamh:Function = null;
+	if (flags[kFLAGS.NIAMH_STATUS] > 0 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
+		if (flags[kFLAGS.NIAMH_STATUS] == 2) outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
+		niamh = getGame().telAdre.niamh.bazaarNiamh;
 	}
 	/*[S. Squeeze] [][][] [Leave]
 	choices(benoitT,benoit,rat,cinnabarAppearance(),"GripingDemons",demon,lilium,LiliumText(false),"Niamh",niamh,roxanneT,roxanne,"S. Squeeze",theSlipperySqueeze,"Tent",tent,"",0,"Leave",13);*/
@@ -109,11 +120,11 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	addButton(2,"Greta's",gretasGarments);
 	addButton(3,"GripingDemons",demon);
 	if(lilium.LiliumText(false) != null) addButton(4,lilium2,lilium.LiliumText(false));
-	if(niamh > 0) addButton(5,"Niamh",eventParser,niamh);
+	addButton(5, "Niamh", niamh);
 	addButton(6,roxanneT,roxanne2);
 	addButton(7,"S. Squeeze",theSlipperySqueeze);
 	addButton(8,"Tent",tent);
-	addButton(9,"Leave",eventParser,13);
+	addButton(9,"Leave",camp.returnToCampUseOneHour);
 }	
 
 //Semen Bukkake and Massage Parlor
@@ -174,7 +185,7 @@ private function theSlipperySqueeze():void {
 		if(player.gems < 20) outputText("  You can't afford it.");
 		else addButton(3,"SweetMassage",joeySweetMassage);
 	}  
-	addButton(4,"Leave",eventParser,2855);
+	addButton(4, "Leave", enterTheBazaar);
 }
 
 
@@ -199,7 +210,7 @@ private function noMilkerPlzJoey():void {
 	clearOutput();
 	outputText("You decline; it's not really the sort of thing you need in your camp.  \"<i>Ah well,</i>\" Joey shrugs, \"<i>I'll just have to hang onto it for now I guess.  Shame.  Anyway,</i>\" he resumes his usual grin, \"<i>is there something else you need?  A massage, perhaps?</i>\"");
 	//return to normal options, scene is never brought up again
-	doNext(2855);
+	doNext(enterTheBazaar);
 }
 //[Yes]
 private function buyCockMilker():void {
@@ -209,7 +220,7 @@ private function buyCockMilker():void {
 	player.gems -= 200;
 	statScreenRefresh();
 	player.createKeyItem("Cock Milker",0,0,0,0);
-	simpleChoices("JoeyMassage",joeyMassage,"Androgyny",0,"Joey'sOffer",0,"",0,"Leave",2855);
+	simpleChoices("JoeyMassage",joeyMassage,"Androgyny",0,"Joey'sOffer",0,"",0,"Leave",enterTheBazaar);
 }
 private function joeyAndrogyny():void {
 	outputText("", true);
@@ -233,14 +244,14 @@ private function joeyAndrogyny():void {
 	outputText("Thanking the cute bunny-boy for his help, you hand over the payment and head back to check on camp.", false);
 	player.createPerk(PerkLib.Androgyny,0,0,0,0);
 	dynStats("lus", 5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Joey]
 private function joeyMassage():void {
 	outputText("", true);
 	if(player.gems < 10) {
 		outputText("Joey frowns when you realize you don't have the 10 gems.  He apologizes, \"<i>I'm sorry, " + player.short + " but I can't give freebies - our special potions cost us plenty.", false);
-		doNext(2855);
+		doNext(enterTheBazaar);
 		return;
 	}
 	player.slimeFeed();
@@ -331,7 +342,7 @@ private function joeysMassageWifNoExtraJizz():void {
 	if(player.lib > 80) dynStats("lib", -1);
 	if(player.lib > 60) dynStats("lib", -1);
 	if(player.sens > 40) dynStats("lib", -.5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //[CONTINUE – DRANK JOEY'S SPECIAL POTION]
@@ -383,7 +394,7 @@ private function joeysMassageWithEXTRASpooge():void {
 	if(player.lib > 80) dynStats("lib", -1);
 	if(player.lib > 60) dynStats("lib", -1);
 	if(player.sens > 40) dynStats("sen", -4);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function joeyBigBalls():void {
 	outputText("", true);
@@ -414,9 +425,9 @@ private function joeyWanksItOut():void {
 	outputText("", true);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00349] == 0) {
 		outputText("You tell Joey that if he masturbates to erectness, his body should be able to shoot it out faster.  He smacks his forehead and runs into a back room, his thong disintegrating around his growing testes as he runs. The door slams, leaving you in peace.  A little freaked out, you head back to camp for now.", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
-	else eventParser(13);
+	else camp.returnToCampUseOneHour();
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00349]++;
 }
 //Suck Cum Out (not your garden-variety hoes)
@@ -450,7 +461,7 @@ private function suckOffJoeysGardenHose():void {
 	outputText("\"<i>I cleaned out your balls; you can clean up the floor,</i>\" you joke as you leave, kissing him one last time on the mouth before you go.\n\n", false);
 	outputText("Joey blushes again and begins looking for a mop.", false);
 	dynStats("lus", 70);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function overHearDemonsAboutSyrena():void {
@@ -486,7 +497,7 @@ private function overHearDemonsAboutSyrena():void {
 		outputText("Unwilling to allow herself to be helped, the succubus staggers up and begins waddling away.  The incubus keeps his distance, wearing a predatory grin.\n\n", false);
 	}
 	//enterTheBazaarAndMenu(false);
-	doNext(2855);
+	doNext(enterTheBazaar);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292]++;
 }
 
@@ -567,8 +578,7 @@ private function buyGretasBikini():void {
 	outputText("\n\nYou nod and pull out your gems, counting out the exact amount for her.  As soon as you finish, Greta pulls you over the counter and kisses you on the lips, her tongue sensually assaulting your surprised palate. Before you can react, she pulls back with a hum of pleasure.");
 	outputText("\n\n\"<i>Thanks, sugar!  Have fun and be safe, and if you don't want to be safe, come visit me sometime!</i>\"");
 	outputText("\n\nYou'll have to keep that in mind...  ");
-	menuLoc = 2;
-	inventory.takeItem(armors.LMARMOR);
+	inventory.takeItem(armors.LMARMOR, camp.returnToCampUseOneHour);
 }
 
 //Cock-socks Available - First Time
@@ -925,7 +935,7 @@ private function eggsInButt(eggButt:Boolean = false):void {
 	outputText("\n\nJoey leaves, his rabbit tail bobbing to and fro.  You see his thong is distended, practically packed to the brim with more of his still-drooling chocolatey cum.  As usual, the waterproof thong seems to be pumping it all between his soft thighs and right into his already egg-filled asshole.  He really does like feeling full back there.  Kinky.");
 	player.orgasm();
 	dynStats("lib", -2, "sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Visit the Bizarre Bazaar at night.
@@ -1184,8 +1194,7 @@ private function finalGayFinallee(road:int = 0):void {
 		model.time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
-		menuLoc = 2;
-		inventory.takeItem(consumables.L_DRAFT);
+		inventory.takeItem(consumables.L_DRAFT, camp.returnToCampUseOneHour);
 		//Time set to morning
 		statScreenRefresh();
 	}
@@ -1217,8 +1226,7 @@ private function finalGayFinallee(road:int = 0):void {
 		model.time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
-		menuLoc = 2;
-		inventory.takeItem(consumables.L_DRAFT);
+		inventory.takeItem(consumables.L_DRAFT, camp.returnToCampUseOneHour);
 		//Time set to morning
 		statScreenRefresh();
 	}
@@ -1250,8 +1258,7 @@ private function finalGayFinallee(road:int = 0):void {
 		model.time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
-		menuLoc = 2;
-		inventory.takeItem(consumables.BIMBOLQ);
+		inventory.takeItem(consumables.BIMBOLQ, camp.returnToCampUseOneHour);
 		statScreenRefresh();
 		//Time set to morning
 	}
