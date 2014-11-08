@@ -947,7 +947,7 @@ private function confirmPerk():void {
 //-----------------
 //-- HISTORY PERKS
 //-----------------
-private function menuHistory():void {
+public function menuHistory():void {
 	outputText("Before you became a champion, you had other plans for your life.  What were you doing before?", true);
 	choices("Alchemy",chooseHistoryAlchemy,"Fighting",chooseHistoryFighting,"Healing",chooseHistoryHealing,"Religion",chooseHistoryReligion,"Schooling",chooseHistorySchooling,"Slacking",chooseHistorySlacking,"Smithing",chooseHistorySmithing,"Slutting",chooseHistorySlutting,"Whoring",chooseHistoryWhoring,"Fortune",chooseHistoryFortune);
 }

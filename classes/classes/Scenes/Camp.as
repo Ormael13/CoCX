@@ -733,9 +733,16 @@ public function doCamp():void {
 	}
 	
 	//Hunger check!
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 25)
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
 	{
-		outputText("<b>Your stomach is growling loudly. You have to eat something.</b>\n\n", false);
+		outputText("<b>Your stomach is growling " + (player.hunger <= 0 ? "painfully": "loudly") + ". You have to eat something. </b>", false);
+		if (player.hunger < 10) {
+			outputText("<b>You are getting thinner and you're losing muscles.</b>");
+		}
+		if (player.hunger <= 0) {
+			outputText("<b>You are getting weaker due to starvation. </b>");
+		}
+		outputText("\n\n");
 	}
 	
 	//The uber horny
@@ -1319,7 +1326,8 @@ public function campFollowers():void {
 	if(rathazulEvent > 0) addButton(3,"Rathazul",eventParser,rathazulEvent);
 	addButton(4,"Shouldra",shouldra);
 	//ABOVE: addButton(4,"Sophie",followerSophieMainScreen);
-	addButton(6,"Valeria",valeria2);
+	addButton(6, "Valeria", valeria2);
+	//if (player.armorName == "goo armor") addButton(6, "Valeria (E)", valeria2);
 	addButton(9,"Back",eventParser,1);
 }
 //-----------------
@@ -2444,7 +2452,7 @@ private function updateAchievements():void {
 private function fixHistory():void {
 	outputText("<b>New history perks are available during creation.  Since this character was created before they were available, you may choose one now!</b>", true);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 2;
-	doNext(10036);
+	doNext(kGAMECLASS.charCreation.menuHistory);
 }
 }
 }

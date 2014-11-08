@@ -1103,7 +1103,7 @@ public function doCombat(eventNum:Number):void
 			else outputText(monster.capitalA + monster.short + " looks down at the arrow that now protrudes from " + monster.pronoun3 + " body", false);
 			if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 			if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-			if (player.hasKeyItem("Kelt's Bow") >= 0) damage *= 1.2; //Kelt's Bow does more damage.
+			if (player.hasKeyItem("Kelt's Bow") >= 0) damage *= 1.3; //Kelt's Bow does more damage.
 			damage = Math.round(damage);
 			doDamage(damage);
 			monster.lust -= 20;
@@ -1639,7 +1639,7 @@ public function attack():void {
 			//10% chance
 			if(rand(10) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 				outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.", false);
-				monster.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+				if (monster.findStatusAffect(StatusAffects.Stunned) < 0) monster.createStatusAffect(StatusAffects.Stunned,rand(2),0,0,0);
 			}
 			//50% Bleed chance
 			if (player.weaponName == "hooked gauntlets" && rand(2) == 0 && monster.armorDef < 10 && monster.findStatusAffect(StatusAffects.IzmaBleed) < 0) 
@@ -5581,7 +5581,7 @@ public function physicalSpecials():void {
 		b2T = "Bite";
 	}
 	//Bow attack
-	if(player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow")) {
+	if(player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow") >= 0) {
 		butt3 = 5079;
 		b3T = "Bow";
 	}

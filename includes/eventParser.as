@@ -499,13 +499,15 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Lose HP and makes fatigue go up. Lose body weight and muscles.
 				takeDamage(maxHP() / 25);
 				fatigue(2);
-				player.modThickness(1, 1);
-				player.modTone(1, 1);
 				if (rand(3) == 0) player.buttRating--;
 				if (rand(3) == 0) player.hipRating--;
 				dynStats("str", -0.5);
 				dynStats("tou", -0.5);
 				player.hunger = 0; //Prevents negative
+			}
+			if (player.hunger < 10) {
+				player.modThickness(1, 1);
+				player.modTone(1, 1);
 			}
 			if (player.hunger < 25) {
 				if (player.hunger > 0) flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING]++;
@@ -539,11 +541,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.findStatusAffect(StatusAffects.NoJojo) >= 0) player.removeStatusAffect(StatusAffects.NoJojo);
 		
 		regeneration(false);
-		
-		player.hoursSinceCum++;
-		//Super cumbuilding activate!
-		if(player.findPerk(PerkLib.MaraesGiftProfractory) >= 0) player.hoursSinceCum += 2;
-		if(player.findPerk(PerkLib.FerasBoonAlpha) >= 0) player.hoursSinceCum += 2;
+		if (flags[kFLAGS.HUNGER_ENABLED] <= 0 || player.hunger >= 10) { //If you're starving, your cum won't build up over time.
+			player.hoursSinceCum++;
+			//Super cumbuilding activate!
+			if(player.findPerk(PerkLib.MaraesGiftProfractory) >= 0) player.hoursSinceCum += 2;
+			if (player.findPerk(PerkLib.FerasBoonAlpha) >= 0) player.hoursSinceCum += 2;
+		}
 		//Normal
 		if(player.findPerk(PerkLib.WellAdjusted) < 0) {
 			//Raise lust

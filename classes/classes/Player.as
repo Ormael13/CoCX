@@ -1324,15 +1324,16 @@ use namespace kGAMECLASS;
 			{
 				kGAMECLASS.awardAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN);
 				var oldHunger:Number = hunger;
+				var weightChange:int = 0;
 				if (hunger >= 90) kGAMECLASS.awardAchievement("Glutton", kACHIEVEMENTS.REALISTIC_GLUTTON);
 				hunger += amnt;
 				if (hunger > 100)
 				{
-					while (hunger > 100) {
-						modThickness(100, 1);
-						modTone(100, 1);
+					while (hunger > 110) {
+						weightChange++;
 						hunger -= 10;
 					}
+					modThickness(100, weightChange);
 					hunger = 100;
 				}
 				if (nl) outputText("\n");
@@ -1341,8 +1342,9 @@ use namespace kGAMECLASS;
 				else if (hunger >= 10 && hunger < 25) outputText("<b>You are no longer starving but you still need to eat more. </b>");
 				else if (hunger >= 25 && hunger < 50) outputText("<b>The growling sound in your stomach seems to quiet down. </b>");
 				else if (hunger >= 50 && hunger < 75) outputText("<b>Your stomach no longer growls. </b>");
-				else if (hunger > 75 && hunger <= 90) outputText("<b>You feel so satisfied. </b>");
-				else if (hunger > 90) outputText("<b>Your stomach feels so full. </b>");
+				else if (hunger >= 75 && hunger < 90) outputText("<b>You feel so satisfied. </b>");
+				else if (hunger >= 90) outputText("<b>Your stomach feels so full. </b>");
+				if (weightChange > 0) outputText("<b>You feel like you've put on some weight.</b>");
 				if (oldHunger < 1 && hunger >= 100) kGAMECLASS.awardAchievement("Champion Needs Food Badly", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
 				//kGAMECLASS.mainView.statsView.showStatUp("hunger");
 				kGAMECLASS.statScreenRefresh();

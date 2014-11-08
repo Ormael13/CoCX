@@ -1287,6 +1287,39 @@ public function getButtonToolTipText(buttonText:String):String
 		}
 	}
 	//-----------------
+	//-- ENVIRONMENT INTERACTIONS
+	//-----------------
+	if (kGAMECLASS.tooltipLoc == "LizanRogue") {
+		if (buttonText == "Fight") {
+			toolTipText = "Fight the lizan!";
+		}
+		if (buttonText == "Spar") {
+			toolTipText = "Do a spar session with the lizan!";
+		}
+		if (buttonText == "Sex") {
+			toolTipText = "Have some fun with the oh-so-sexy lizan.";
+		}
+		if (buttonText == "Decline") {
+			toolTipText = "Excuse yourself and leave.";
+		}
+		//Sex
+		if (buttonText == "Use Dick") {
+			toolTipText = "Anally penetrate him with your [cocks].";
+		}
+		if (buttonText == "Use Vagina") {
+			toolTipText = "Have him fuck you vaginally.";
+		}
+		if (buttonText == "Use Ass") {
+			toolTipText = "Have him fuck your wonderful ass.";
+		}
+		if (buttonText == "Dbl.Penetration") {
+			toolTipText = "Have him stuff both your holes with his dual cocks.";
+		}
+		if (buttonText == "Watersports") {
+			toolTipText = "Participate into urine activity with him. \n\nNOTE: Contains watersports!";
+		}
+	}
+	//-----------------
 	//-- DUNGEON INTERACTIONS
 	//-----------------
 	//Factory
@@ -1447,7 +1480,7 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("SFW Toggle") != -1) {                        
 		toolTipText = "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes.";
 	}
-	if(buttonText.indexOf("Watersports") != -1) {                        
+	if(buttonText.indexOf("Watersports") != -1 && kGAMECLASS.tooltipLoc != "LizanRogue") {                        
 		toolTipText = "Toggles watersports scenes. (Scenes related to urine fetish)";
 	}
 	if(buttonText.indexOf("Time Format") != -1) {                        
@@ -2472,8 +2505,12 @@ public function displayStats(e:MouseEvent = null):void
 	if (statEffects != "")
 		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects, false);
 	// End Ongoing Stat Effects
-	
-	doNext(1);
+	menu();
+	if (player.statPoints > 0) {
+		outputText("\n\n<b>You have " + num2Text(player.statPoints) + " stats points to distribute.");
+		addButton(1, "Stat Up", attributeMenu);
+	}
+	addButton(0,"Next",eventParser,1);
 }
 
 public function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false):void {

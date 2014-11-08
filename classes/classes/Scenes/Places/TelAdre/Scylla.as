@@ -37,8 +37,8 @@ public function scyllaBarSelectAction():void {
 	if (model.time.totalTime == scyllaLastActionSelectionTime) return; //Only choose action once per visit to the bar
 	scyllaLastActionSelectionTime = model.time.totalTime;
 	scyllaAction = SCYLLA_NOT_PRESENT;
-	if (player.cocks.length > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
-		if (player.longestCockLength() >= 12) {
+	if (player.cocks.length > 0 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
+		if (player.longestCockLength() >= 12 || (flags[kFLAGS.LOW_STANDARDS_FOR_ALL] > 0 && player.hasCock())) {
 			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0) {
 				scyllaAction = SCYLLA_ACTION_FIRST_TALK;
 				return;

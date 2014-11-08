@@ -814,10 +814,12 @@ private function takeOffDatSock():void {
 	temp = 0;
 	var button:int = 0;
 	menu();
+	addButton(9, "Cancel", gretasGarments);
 	while(button < player.cockTotal()) {
 		if(player.cocks[button].sock != "") addButton(button,String(button+1),removeTargettedSock,button);
 		button++;
 	}
+	
 }
 
 private function removeTargettedSock(index:int):void {
