@@ -102,7 +102,7 @@ package classes.Scenes.Dungeons.D3
 
 				if (player.gems >= 500)
 				{
-					addButton(2, "Pay Toll");
+					addButton(2, "Pay Toll", payDaToll);
 				}
 				else
 				{
