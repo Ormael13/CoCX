@@ -1811,6 +1811,11 @@ public function unFuckSave():void
 			player.addPerkValue(PerkLib.ElvenBounty,2,15);
 		}
 	}
+	
+	if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0)
+	{
+		player.removeStatusAffect(StatusAffects.KnockedBack);
+	}
 
 
 	// Fix issues with corrupt cockTypes caused by a error in the serialization code.

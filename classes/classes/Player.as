@@ -1731,6 +1731,20 @@ use namespace kGAMECLASS;
 				kGAMECLASS.mainView.statsView.showStatUp('spe');
 				removeStatusAffect(StatusAffects.GardenerSapSpeed);
 			}
+			if (findStatusAffect(StatusAffects.KnockedBack) >= 0) removeStatusAffect(StatusAffects.KnockedBack);
+			if (findStatusAffect(StatusAffects.RemovedArmor) >= 0) removeStatusAffect(StatusAffects.KnockedBack);
+			if (findStatusAffect(StatusAffects.JCLustLevel) >= 0) removeStatusAffect(StatusAffects.JCLustLevel);
+			if (findStatusAffect(StatusAffects.MirroredAttack) >= 0) removeStatusAffect(StatusAffects.MirroredAttack);
+			if (findStatusAffect(StatusAffects.Tentagrappled) >= 0) removeStatusAffect(StatusAffects.Tentagrappled);
+			if (findStatusAffect(StatusAffects.TentagrappleCooldown) >= 0) removeStatusAffect(StatusAffects.TentagrappleCooldown);
+			if (findStatusAffect(StatusAffects.ShowerDotEffect) >= 0) removeStatusAffect(StatusAffects.ShowerDotEffect);
+			if (findStatusAffect(StatusAffects.GardenerSapSpeed) >= 0)
+			{
+				spe += statusAffectv1(StatusAffects.GardenerSapSpeed);
+				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				removeStatusAffect(StatusAffects.GardenerSapSpeed);
+			}
+			if (findStatusAffect(StatusAffects.VineHealUsed) >= 0) removeStatusAffect(StatusAffects.VineHealUsed);
 		}
 
 		public function consumeItem(itype:ItemType, amount:int=1):Boolean
