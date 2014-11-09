@@ -5142,7 +5142,7 @@ public function runAway(callHook:Boolean = true):void {
 		doNext(5000);
 		return;
 	}
-	if(inDungeon) {
+	if(inDungeon || inRoomedDungeon) {
 		outputText("You're trapped in your foe's home turf - there is nowhere to run!\n\n", true);
 		enemyAI();
 		return;
