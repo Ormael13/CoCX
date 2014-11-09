@@ -322,9 +322,9 @@ public function benoitsBuyMenu():void {
 		outputText("\"<i>Some may call zis junk,</i>\" says Benoit, indicating his latest wares.  \"<i>Me... I call it garbage.</i>\"");
 	}
 	outputText("\n\n<b><u>" + benoitMF("Benoit","Benoite") + "'s Prices</u></b>", false);
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value);
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value);
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value);
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));
 	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
@@ -372,10 +372,14 @@ private function benoitSellMenu():void {
 private function benoitTransactBuy(slot:int = 1):void {
 	clearOutput();
 	var itype:ItemType;
+	var buyMod:Number = 2;
+	
+	if (flags[kFLAGS.BENOIT_STATUS] == 1) buyMod = 1.66;
+	
 	if(slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
 	else if(slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
 	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
-	if(player.gems < 2 * itype.value) {
+	if(player.gems < int(buyMod * itype.value)) {
 		outputText("You consider making a purchase, but you lack the gems to go through with it.");
 		doNext(benoitsBuyMenu);
 		return;
@@ -385,7 +389,7 @@ private function benoitTransactBuy(slot:int = 1):void {
 	//(+3 Affection)
 	benoitAffection(3);
 	
-	player.gems -= 2 * itype.value;
+	player.gems -= int(buyMod * itype.value);
 	statScreenRefresh();
 	menuLoc = 26;
 	inventory.takeItem(itype);
