@@ -152,6 +152,7 @@ public function doCombat(eventNum:Number):void
 				addButton(2, "Spells", temp2);
 				addButton(3, "Items", eventParser, 1000);
 				addButton(4, "Run", runAway);
+				if (player.hasKeyItem("Bow") >= 0) addButton(5, "Bow", eventParser, 5079);
 				addButton(6, "M. Specials", eventParser, 5160);
 				addButton(7, waitT, eventParser, 5071);
 				addButton(8, "Fantasize", eventParser, 5086);

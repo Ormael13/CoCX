@@ -63,7 +63,7 @@
 			else outputText("  You smile widely at your clone as you begin to shake off your [armor].");
 			outputText("  [He] moans lowly in miserable disbelief, but [he]’s not capable of resisting you as, butt naked, you sit yourself down and methodically repeat the action, sliding your hands over and into [his] replicated clothing, finding [his] warm flesh, clutching and testing it curiously. Obviously you’ve laid your fingers upon this many times before, but touching it now second hand causes an emotion you cannot name to rise in your breast. Is this getting you hot? Yes. In the strangest, most perverse way imaginable, it is.");
 			
-			if (player.hasCock() && !player.hasVagina())
+			if (player.cocks.length >= 1 && !player.hasVagina())
 			{
 				outputText("\n\nYou turn the mirror demon’s wild stare and ragged breath away from you, laying a comforting but firm hand upon his shoulder as, grinning, you lower your eyes to his [butt]. Nice.");
 				if (player.isNaga()) outputText("  You sigh at the smooth, pleasurable feeling of your scales rubbing over each other as you sensuously wind yourself around his tail until you are tightly bound together. Twin lithe snake boys wound around each other- all you really need is a paying audience. Or a stick and a hospital. You laugh with a similar tinge of madness that your partner did a short while ago and he groans raggedly in response.");
@@ -140,7 +140,7 @@
 
 				outputText("\n\nThere is an emphatic shattering sound behind you, the high noise mingling with the demon’s defeated wail, climbing together to an unbearable pitch. You squeeze your eyes shut as you thrust one last time into your defeated clone- and then stagger forward, the flesh you’re clenched into parting like smoke, almost falling straight into the mess you forced the doppelganger to create. Except that’s not there anymore, either- all that you are suddenly left with is you, your oozing, gently aching [cock], and a great deal of broken glass. You slowly get to your feet and gaze at the shattered mirror. It’s difficult to believe looking at it now that it could in any way be an object of dread- indeed, standing here naked in this shabby storage room, you feel faintly ridiculous. Was this all just a really weird fugue? There’s no mistaking the warm fuzz of deep sexual satisfaction at least. Shaking your head, you redress, make sure the protective glasses you came in here for are still in your pocket before heading to the door and leaving.");
 			}
-			else if (player.hasVagina())
+			else if (player.hasVagina() && !player.hasCock())
 			{
 				outputText("\n\nYour gaze drops from the mirror demon’s wild stare, down to her [chest]. Nice. You lay a comforting but firm hand upon her shoulder as you sit yourself down in front of your clone, your own [chest] pushing into hers as, almost mockingly, you cuddle her.");
 				if (player.isNaga()) outputText("  You sigh at the smooth, pleasurable feeling of scales rubbing over each other as you sensuously wind yourself around her tail until you are tightly bound together. Twin lithe snake girls wound around each other- all you really need is a paying audience. Or a stick and a hospital. You laugh with a similar tinge of madness that your partner did a short while ago and she groans raggedly in response.");
