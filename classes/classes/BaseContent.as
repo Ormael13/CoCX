@@ -327,6 +327,10 @@
 			return kGAMECLASS.outputList();
 		}
 		
+		protected function openURL(url:String):void{
+			return kGAMECLASS.openURL(url);
+		}
+		
 		protected function sackDescript():String
 		{
 			return kGAMECLASS.sackDescript();

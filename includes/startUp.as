@@ -41,7 +41,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	outputText("<b>Corruption of Champions (" + version + ")</b>", false);
 	
 	if (CoC_Settings.debugBuild)
-		outputText(" Debug Build.");
+		outputText(" Debug Build");
 	else
 		outputText(" Release Build");
 
@@ -60,17 +60,17 @@ public function mainMenu(e:MouseEvent = undefined):void
 	// since the images haven't loaded yet.
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
-	choices("",  0,
-			"Image Credits", imageCreditsScreen,
-			"Credits", creditsScreen,
-			"", 0,
-			"Instructions", howToPlay,
-			"Debug Info", debugPane,
-			"", 0,
-			"Achievements", achievements.achievementsScreen,
-			"Settings", settingsScreenMain,
-			"Resume", resume);
-
+	menu();
+	if (player.str > 0) addButton(0, "Resume", eventParser, 1);
+	addButton(1, "Settings", settingsScreenMain);
+	addButton(2, "Instructions", howToPlay);
+	addButton(3, "Achievements", achievements.achievementsScreen);
+		
+	addButton(5, "Credits", creditsScreen);
+	addButton(6, "Image Credits", imageCreditsScreen);
+	addButton(7, "Debug Info", debugPane);
+	addButton(8, "Mod Thread", openURL, "http://forum.fenoxo.com/thread-10915.html");
+	
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;
@@ -104,7 +104,7 @@ Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/
 
 **<u>DISCLAIMER</u>**
 <br>- **There are many strange and odd fetishes contained in this flash.  Peruse at own risk.**
-<br>- **Please be 18 or the legal age to view porn before playing.**
+<br>- **Please be 18 or the legal age to view porn before playing. If not, enable SFW Mode.**
 <br>- **Try to keep your keyboard clean.  Think of the children!**
 
 For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. 
@@ -301,8 +301,6 @@ public function settingsScreenGameSettings():void {
 		removeButton(1);
 		removeButton(3);
 		removeButton(4);
-		removeButton(7);
-		removeButton(8);
 		debug = false;
 		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
 		flags[kFLAGS.HYPER_HAPPY] = 0;
@@ -365,12 +363,14 @@ public function difficultySelectionMenu():void {
 	outputText("\n<b>Hard:</b> +25% HP, +15% damage.");
 	outputText("\n<b>Nightmare:</b> +50% HP, +30% damage.");
 	outputText("\n<b>Extreme:</b> +100% HP, +50% damage.");
+	//outputText("\n<b>Up to Eleven:</b> +150% HP, +70% damage. This is the most cruel difficulty of all.");
 	menu();
 	addButton(0, "Easy", chooseDifficulty, -1);
 	addButton(1, "Normal", chooseDifficulty, 0);
 	addButton(2, "Hard", chooseDifficulty, 1);
 	addButton(3, "Nightmare", chooseDifficulty, 2);
 	addButton(4, "EXTREME", chooseDifficulty, 3);
+	//addButton(5, "Up to Eleven", chooseDifficulty, 4);
 	addButton(9, "Back", settingsScreenGameSettings);
 }
 
@@ -539,6 +539,9 @@ public function creditsScreen():void {
 	outputText("<li> Kitteh6660 (Mod Creator)</li>");
 	outputText("<li> Wastarce (Bug Reporting)</li>");
 	outputText("<li> Sorenant (Bug Reporting)</li>");
+	outputText("<li> tadams857 (Bug Reporting)</li>");
+	outputText("<li> SirWolfie (Bug Reporting)</li>");
+	outputText("<li> Atlas1965 (Bug Reporting)</li>");
 	outputText("</ul>");
 	outputText("<b>Typo Reporting</b>\n");
 	outputText("<ul>");

@@ -4416,7 +4416,10 @@ public function spellCleansingPalm():void
 	}
 		
 	var corruptionMulti:Number = (monster.cor - 20) / 25;
-	if (corruptionMulti > 1.5) corruptionMulti = 1.5;
+	if (corruptionMulti > 1.5) {
+		corruptionMulti = 1.5;
+		corruptionMulti += ((monster.cor - 57.5) / 100); //The increase to multiplier is diminished.
+	}
 	
 	temp = int((player.inte / 4 + rand(player.inte / 3)) * (spellMod() * corruptionMulti));
 	
@@ -4426,7 +4429,7 @@ public function spellCleansingPalm():void
 		if ((monster as Monster).plural == true) outputText(" them");
 		else outputText((monster as Monster).mfn(" him", " her", " it"));
 		outputText(" back a few feet.\n\n");
-		
+		if (silly()&& corruptionMulti >= 1.75) outputText("It's super effective!  ");
 		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.\n\n");
 	}
 	else

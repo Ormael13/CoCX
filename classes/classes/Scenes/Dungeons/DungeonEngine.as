@@ -130,6 +130,7 @@ package classes.Scenes.Dungeons
 		 * @param	eastFunction
 		 */
 		public function setDungeonButtons(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null):void {
+			statScreenRefresh();
 			hideUpDown();
 			spriteSelect(-1);
 			menu();

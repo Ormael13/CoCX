@@ -38,8 +38,6 @@ package classes.Scenes.Areas
 			
 			var temp2:Number = 0;
 			
-			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100) chooser = rand(5);
-			
 			if (chooser == 1 && player.level < 2) chooser++;
 			//Every tenth exploration finds a pumpkin if eligible!
 			if (player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 10 == 0 && isHalloween()) {
@@ -59,6 +57,13 @@ package classes.Scenes.Areas
 							return;
 						}
 					}
+				}
+			}
+			//Prevent encountering cutting tree prompt if wood supply is full 75% of the time.
+			if (chooser >= 5) {
+				if (rand(4) > 0 && (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)) {
+					trace("Don't do wood gather prompt");
+					chooser = rand(5);
 				}
 			}
 			//Hel jumps you for sex.
@@ -186,8 +191,10 @@ package classes.Scenes.Areas
 			trace("FOREST EVENT CALLED");
 			var chooser:Number = rand(5);
 			var temp2:Number = 0;
+			
 			//Cut bee encounter rate 50%
 			if (chooser == 3 && rand(2)) chooser = rand(3);
+			
 			//Quick changes:
 			//If monk is fully corrupted, encounter him less (unless haz ferriiite).
 
@@ -197,7 +204,6 @@ package classes.Scenes.Areas
 				if (temp == 1) chooser = 2;
 				if (temp == 2) chooser = 3;
 			}
-			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100) chooser = rand(4);
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
@@ -212,6 +218,13 @@ package classes.Scenes.Areas
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4) chooser = rand(3)
 				else chooser = rand(4)
 				if (chooser >= 1) chooser++;
+			}
+			//Prevent encountering cutting tree prompt if wood supply is full.
+			if (chooser >= 4) {
+				if (rand(4) > 0 && (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)) {
+					trace("Don't do wood gather prompt");
+					chooser = rand(4);
+				}
 			}
 			//Chance to discover deepwoods
 			if ((player.exploredForest >= 20) && player.findStatusAffect(StatusAffects.ExploredDeepwoods) < 0) {
@@ -498,6 +511,7 @@ package classes.Scenes.Areas
 				beeGirlScene.beeEncounter();
 			}
 			if (chooser >= 4) {
+				trace(chooser);
 				trace("Triggering!")
 				cabinProgress.gatherWoods();
 				return;

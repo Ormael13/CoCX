@@ -2108,9 +2108,9 @@ public function cheatTime(time:Number, needNext:Boolean = false):void {
 	minutesToPass = Math.round(minutesToPass)
 	model.time.minutes += minutesToPass;
 	if (model.time.minutes > 59) {
-		timeQ = 1;
-		goNext(timeQ, needNext);
+		timeQ++;
 		model.time.minutes -= 60;
+		goNext(timeQ, needNext);
 	}
 	time = Math.floor(time);
 	//Advance hours

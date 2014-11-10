@@ -1710,7 +1710,7 @@ package classes.Scenes.Dungeons
 				menu();
 				addButton(0,"North Door",openZeDoorToParadize);
 				addButton(1,"Fuck Her",fuckDatSphinx);
-				addButton(4,"Leave",eventParser,11150);
+				addButton(4,"Leave",exitDungeon);
 				
 			}
 		}
@@ -1736,7 +1736,7 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.SANURA_DISABLED] = 1;
 			menu();
 			addButton(0,"Enter",openZeDoorToParadize);
-			addButton(4,"Leave",eventParser,11150);
+			addButton(4,"Leave",exitDungeon);
 		}
 
 		//Fuck Her
@@ -1816,7 +1816,7 @@ package classes.Scenes.Dungeons
 			else {
 				menu();
 				addButton(0,"Enter",openZeDoorToParadize);
-				addButton(4,"Leave",eventParser,11150);
+				addButton(4,"Leave",exitDungeon);
 			}
 		}
 
@@ -1857,7 +1857,7 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			menu();
 			addButton(0,"Enter",openZeDoorToParadize);
-			addButton(4,"Leave",eventParser,11150);
+			addButton(4,"Leave",exitDungeon);
 		}
 
 		//Fuck Dat Lionpussy
@@ -1927,7 +1927,7 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			menu();
 			addButton(0,"Enter",openZeDoorToParadize);
-			addButton(4,"Leave",eventParser,11150);
+			addButton(4,"Leave",exitDungeon);
 		}
 
 		//Submission Options

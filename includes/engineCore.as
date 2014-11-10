@@ -2513,6 +2513,11 @@ public function displayStats(e:MouseEvent = null):void
 	addButton(0,"Next",eventParser,1);
 }
 
+public function openURL(url:String):void
+{
+    navigateToURL(new URLRequest(url), "_blank");
+}
+
 public function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false):void {
 	if (achievements[achievement] != null) {
 		if (achievements[achievement] <= 0) {
