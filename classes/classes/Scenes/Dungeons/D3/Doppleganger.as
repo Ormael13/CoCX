@@ -240,6 +240,7 @@ package classes.Scenes.Dungeons.D3
 				this.createVagina();
 				(this.vaginas[0] as VaginaClass).vaginalLooseness = player.vaginas[0].vaginalLooseness;
 				(this.vaginas[0] as VaginaClass).vaginalWetness = player.vaginas[0].vaginalWetness;
+				(this.vaginas[0] as VaginaClass).virgin = player.vaginas[0].virgin;
 			}
 			
 			this.breastRows = [];
