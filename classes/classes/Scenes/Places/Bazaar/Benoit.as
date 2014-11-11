@@ -228,15 +228,15 @@ public function benoitIntro():void {
 
 			outputText("\n\n\"<i>Don't do zat!</i>\" she complains when she recognizes it's you. \"<i>I almost brained you with zis skittle.</i>\"");
 
-			outputText("You ask her what she's making.");
+			outputText("\n\nYou ask her what she's making.");
 
-			outputText("\"<i>My lunch; an omlette.</i>\" she says.");
+			outputText("\n\n\"<i>My lunch; an omlette,</i>\" she says.");
 
 			outputText("\n\nYour eyes are drawn almost magnetically to her now flat-again stomach and the realization sinks in just where she got the eggs. You ask how she could have done such a thing.");
 
 			// outputText("\n\n\"<i>What? Zey were never fertilised, so, waste not want not.</i>\" she shrugs. When you protest that they could have been her children, she gives you a blank look - though you imagine being blind helps a lot in that regard. \"</i>The, how you say, groinal bleeding of mammal girls could have been their children too; do they get upset about it?</i>\" she asks as a hint of mischievousness sneaks into her smirk. \"<i>Want some?</i>\" she innocently asks, offering you the skillet.");
 
-			outputText("\n\n\"<i>Do what exza- oh. Ooh. Aha, mon Dieu, [name]!</i>\" Benoite chokes out between a mix of chortles and guffaws. \"<i>Non [name], I know what it iz zat you are zinking. Aha,</i>\". She continues whilst still half laughing, but manages to calm herself down after a short pause, trying to return to some degree of seriousness. \"<i>I am just hungry. I am, how you say, having a craving for zees strange items one of my zuppliers has been selling lately. 'Cheeken eggz'? I guess my body knowz what it needs to replenish zat which it has lost?</i>\"");
+			outputText("\n\n\"<i>Do what exza- oh. Ooh. Aha, mon Dieu, [name]!</i>\" Benoite chokes out between a mix of chortles and guffaws. \"<i>Non [name], I know what it iz zat you are zinking. Aha,</i>\" she continues whilst still half laughing, but manages to calm herself down after a short pause, trying to return to some degree of seriousness. \"<i>I am just hungry. I am, how you say, having a craving for zees strange items one of my zuppliers has been selling lately. 'Cheeken eggz'? I guess my body knowz what it needs to replenish zat which it has lost?</i>\"");
 
 			outputText("\n\nShe pats her midriff and you start to put the pieces together. \"<i>Oh. Oooh,</i>\" you mumble back as a response.");
 
