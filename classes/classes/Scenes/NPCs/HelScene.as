@@ -252,13 +252,28 @@ private function helDefeatedCorrupt():void {
 	//[(corruption = high)
 	outputText("By the way she's huffing and puffing, you figure you've got a minute or so to take advantage of her while she's vulnerable...  Do you?", false);
 	//(Display Options: [Rape her Ass(for wangs)] [Get Rimjob] and [Wait])
-	var ass:Function = null;
-	if(player.hasCock() && player.cockThatFits(85) >= 0 && player.lust >= 33) ass = rapingHelsAssMeansYourCorruptCauseAnalIsEvil;
-	if(player.hasCock()) {
-		if(player.lust < 33) outputText("\n\nYou aren't turned on enough to fuck her right now.", false);
-		if(player.cockThatFits(85) == -1) outputText("\n\nYour dick is too big to fuck her anally.", false);
+	
+	menu();
+	
+	if (player.lust < 33)
+	{
+		if (player.lust < 33) outputText("\n\nYou aren't turned on enough to fuck her right now.", false);
 	}
-	simpleChoices("Rape Ass",ass,"Get Rimjob",receiveCorruptRimjobsFromHel,"",0,"",0,"Wait",createCallBackFunction(helDefeatedNormal,true));
+	else
+	{
+		if (player.hasCock() && player.cockThatFits(85) >= 0 && player.lust >= 33)
+		{
+			addButton(0, "Rape Ass", rapingHelsAssMeansYourCorruptCauseAnalIsEvil);
+		}
+		else if (!player.hasCock() || player.cockThatFits(85) == -1)
+		{
+			outputText("\n\nYour dick is too big to fuck her anally.", false);
+		}
+		
+		addButton(1, "Get Rimjob", receiveCorruptRimjobsFromHel);
+	}
+	
+	addButton(4, "Wait", createCallBackFunction(helDefeatedNormal, true));
 	//(Wait takes you to \"<i>normal</i>\" post-victory, below)
 }
 //COMBAT – PLAYER WINS w/ LESS THAN 85 CORRUPTION
