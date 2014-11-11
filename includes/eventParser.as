@@ -1334,7 +1334,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[kFLAGS.GILDED_JERKED] > 0) flags[kFLAGS.GILDED_JERKED] = 0;
 			//Sheila stuff - Now handled in SheilaScene
 			//Urta cum stuff - Now handled in Urta
-			if(flags[kFLAGS.FED_SCYLLA_TODAY] == 1) flags[kFLAGS.FED_SCYLLA_TODAY] = 0;
+			if (flags[kFLAGS.FED_SCYLLA_TODAY] == 1) flags[kFLAGS.FED_SCYLLA_TODAY] = 0;
+			if (flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] != 0) flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] = 0;
 			//Count Kelt being a bitch - Now handled in Kelly
 			//Sand Witch egg pregnancy - Now handled by SandWitchScene
 			//Marae met 2nd time?

@@ -201,6 +201,9 @@ private function dontHelpArianWhenYouMeetHim(never:Boolean = false):void {
 	if (never) {
 		flags[kFLAGS.ARIAN_PARK] = -1;
 	}
+	else {
+		flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] = 1;
+	}
 	//Player enters Tel'Adre main screen
 	menu();
 	addButton(0,"Next",telAdre.telAdreMenu);
