@@ -44,9 +44,9 @@ package classes.Scenes.Dungeons.D3
 
 				outputText("\n\nYou are almost half of the way there when the hush descends. You keep your eyes fixed determinedly upon the exit, trying to wish away the spreading silence, the meadow of deathly grey flowers which has gradually blossomed below you.");
 
-				outputText("\n\n<i>“C’est l’intrus!”</i>");
+				outputText("\n\n<i>“C’est un intrus!”</i>");
 
-				outputText("\n\n<i>“Attrapez-les!”</i>");
+				outputText("\n\n<i>“Attrapez-le!”</i>");
 
 				outputText("\n\nImmediately you break into a run, pelting for the other side, as below you there’s a general rush for the stairs. Your heart feels like it’s going to burst out of your chest as the gantry bounces to your frantic motion, and to the beat of many feet climbing it. The booth is in reach... a sickle claw catches you in the thigh, and you stagger. Growling, you frantically right yourself- only to find yourself staring directly into the face of a basilisk. You punch that one in the nose, wildly tearing your eyes away... to another. And another. They surround you as horrible leaden weights settle on your bones, your body turning into rapidly solidifying cement. You reach for your [weapon], but it’s as if it were a continent away, and the basilisks press into you, grabbing your hands and [hips], forcing you to stare deeper and deeper into the ocean of depthless grey which surrounds you on all sides, and encompasses you, and where you were and what you were doing no longer matters, because the grey permeates your body and soul, and you are just an atom in a sky of peaceful, dove coloured submission, and whether you’re up or down or sideways or down doesn’t matter....");
 
@@ -69,9 +69,9 @@ package classes.Scenes.Dungeons.D3
 
 				outputText("\n\nYou are almost half of the way there when the hush descends. You keep your eyes fixed determinedly upon the exit, trying to wish away the spreading silence, the meadow of deathly grey flowers which has gradually blossomed below you.");
 
-				outputText("\n\n“<i>C’est l’intrus!</i>”");
+				outputText("\n\n“<i>C’est un intrus!</i>”");
 
-				outputText("\n\n“<i>Attrapez-les!</i>” Immediately you break into a run, pelting for the other side, as below you there’s a general rush for the stairs. Your heart feels like it’s going to burst out of your chest as the gantry bounces to your frantic motion, and to the beat of many feet climbing it.");
+				outputText("\n\n“<i>Attrapez-le!</i>” Immediately you break into a run, pelting for the other side, as below you there’s a general rush for the stairs. Your heart feels like it’s going to burst out of your chest as the gantry bounces to your frantic motion, and to the beat of many feet climbing it.");
  
 				if (player.spe < 90)
 				{
@@ -105,9 +105,9 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\n“<i>Que devrions-nous faire?</i>” says one.");
 
-			outputText("\n\n“<i>Chercher le Roi Grossier,</i>” says another, after a heavy pause. A murmur ripples through the hall at that. You have no idea what they’re saying in their raspy, fluid tongue, but you can’t imagine it’s anything good. One in the corner of your vision darts out of sight, and you are left to wait, a statue frozen in the stance of a running struggle. You feel dense apprehension weigh steadily more and more upon you as a heavy footstep thuds towards you.");
+			outputText("\n\n“<i>Chercher le Roi Grossier,</i>” says another, after a heavy pause. A murmur ripples through the hall at that. You have no idea what they’re saying in their raspy, fluid tongue, but you can’t imagine it’s anything good. One in the corner of your vision darts out of sight, and you are left to wait, a statue frozen in the stance of a running struggle. You feel dense apprehension weight steadily more and more upon you as a heavy footstep thuds towards you.");
 
-			outputText("\n\n“<i>J'espère que vous m'avez dérangé pour une bonne raison, soldat, ou je vais vous la peau vivante et baise ta cadavre tremblement. Mes dieux! C'est vrai!</i>” Dry, smooth hands grip you and winch you up so you may see the owner of the thick, rich voice. It’s a basilisk- but bigger, at least a foot taller than those that surround him, heavier built, and obviously simmering deep in corruption. Purple scales slather his shoulders and back like an imperial cloak, and he is clad in a military tunic and ornate brass cuirass. The former does absolutely nothing to disguise his two thick, purple pricks, which unlike those of his brethren swing freely and imposingly between his muscled legs. His long, tapering face gives him a toothy sneer of epic proportions, and his proud head is crowned with a helmet, resplendent with a long, black ponytail. His eyes... you renew your frantic efforts to look away. Leering, the basilisk rex steps closer to you, bathing you in their hungry glare. They are a seething yellow, pupil-less, two eternal, burning suns of depthless corruption.");
+			outputText("\n\n“<i>J'espère que vous m'avez dérangé pour une bonne raison, soldat, ou je vais vous faire la peau et baise votre cadavre tremblant. Mais par les dieux! C'est le cas!</i>” Dry, smooth hands grip you and winch you up so you may see the owner of the thick, rich voice. It’s a basilisk- but bigger, at least a foot taller than those that surround him, heavier built, and obviously simmering deep in corruption. Purple scales slather his shoulders and back like an imperial cloak, and he is clad in a military tunic and ornate brass cuirass. The former does absolutely nothing to disguise his two thick, purple pricks, which unlike those of his brethren swing freely and imposingly between his muscled legs. His long, tapering face gives him a toothy sneer of epic proportions, and his proud head is crowned with a helmet, resplendent with a long, black ponytail. His eyes... you renew your frantic efforts to look away. Leering, the basilisk rex steps closer to you, bathing you in their hungry glare. They are a seething yellow, pupil-less, two eternal, burning suns of depthless corruption.");
 
 			outputText("\n\n“<i>Pouvez-vous me comprendre, intrus? Non? Sprechen de Gnollen? How about now? Ah, yes. Human. The language of masters... and slaves.</i>” His widening sneer leaves you in no doubt which camp he considers you as belonging to. “<i>I am Jean-Claude, the Rude King, if you please. You are the interloper, if you please. Ah, yes! Yes you are! Do not try to deny it!</i>” He laughs richly, his slow, velvety voice rolling around you as he goes on. “<i>You have beat up enough of my scouts that you have left, eh, an impression, shall we say? We do not need orders from the demons to watch out for such a rough player as you!</i>” He moves as fast as a snake, belying his size and frame, to grab you tight around the jaw. His claws dig into your skin as he stares deep into your eyes, encompassing you in their rich, bottomless glow. It glows like your blood glows, rising to the surface of your skin, coursing inexorably to your groin,");
 			if (player.hasCock()) outputText(" [eachCock] stiffening");
