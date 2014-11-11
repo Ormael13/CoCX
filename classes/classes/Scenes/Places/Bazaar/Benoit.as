@@ -385,7 +385,7 @@ private function benoitTransactBuy(slot:int = 1):void {
 		return;
 	}
 	if(benoitLover()) outputText("After examining what you've picked out with " + benoitMF("his","her") + " fingers, " + benoitMF("Benoit","Benoite") + " hands it over and accepts your gems with a grin.");
-	else outputText("After examining what you've picked out with his fingers, Benoit hands it over, names the price and accepts your gems with a curt nod.\n\n");
+	else outputText("After examining what you've picked out with " + benoitMF("his", "her") + " fingers, " + benoitMF("Benoit","Benoite") + " hands it over, names the price and accepts your gems with a curt nod.\n\n");
 	//(+3 Affection)
 	benoitAffection(3);
 	
