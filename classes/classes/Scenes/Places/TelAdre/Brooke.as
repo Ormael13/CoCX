@@ -1354,7 +1354,18 @@ public function brookeVHeckelBrookeWins2():void {
 
 		outputText("\n\nHeckel does her part, trailing her hands down to Brooke's sides and gripping onto her hamstrings, pulling the dog into her with every thrust forward.  But it's no mistake that Brooke is the top between the two of them: she stnds tall over the weak-legged hyena, covering as much of Heckel's body as she can with her own, pumping her hips powerfully into the herm's own.  Every one of Brooke's humps are met with one of your own, and all too quickly the two of you are battering the poor hyena around with your genitals; the locker room echoing a cacophony of wet thrusts, hard fleshy slaps, and perverse moans and sexual grunts.");
 
-		outputText("\n\nYou, for one, don't take the chance to fuck Heckel properly for granted.  Every time you met Heckel, you either went down on her, or had to take her dick up your ass – now, with the rare opportunity to return the favor, you savor every thrust into her tight velvet tunnel.  She's tight, far tighter than you had expected, but she's definitely no virgin either.  You draw your hands down to her hips, gripping and pulling delightedly at her tight muscles as you work her cunt, whetting your " + cockDescript(x) + " with the fruit you've been forbidden all this time.");
+		outputText("\n\nYou, for one, don't take the chance to fuck Heckel properly for granted.");
+		if (flags[kFLAGS.TIMES_FUCKED_HECKEL_BLOWJOB] > 0 || flags[kFLAGS.TIMES_FUCKED_HECKEL_ANAL] > 0)
+		{
+			var bj:Boolean = flags[kFLAGS.TIMES_FUCKED_HECKEL_BLOWJOB] > 0;
+			var anal:Boolean = flags[kFLAGS.TIMES_FUCKED_HECKEL_ANAL] > 0;
+			
+			if (bj && anal)	outputText("  Every time you met Heckel, you either went down on her, or had to take her dick up your ass – now, with the rare opportunity to return the favor, y"); 
+			else if (bj && !anal) outputText("  Every time you met Heckel, you went down on her - now, with the rare opportunity to return the favour, y");
+			else outputText("  Every time you met Heckel, you had to take her dick up your ass - now, with the rare opportunity to return the favour, y");
+		}
+		else outputText("Y");
+		outputText("ou savor every thrust into her tight velvet tunnel.  She's tight, far tighter than you had expected, but she's definitely no virgin either.  You draw your hands down to her hips, gripping and pulling delightedly at her tight muscles as you work her cunt, whetting your " + cockDescript(x) + " with the fruit you've been forbidden all this time.");
 		//[if (cocks >= 2)
 		if(player.cockTotal() >= 2) outputText("  Your extra dick flops lamely up the crack of her ass, hotdogging between her cheeks with every thrust.  You consider the possibility of maybe double-dicking the cocky hyena, but you opt against it, not willing to break the good flow you've got between the three of you.");
 		outputText("\n\nFor her part, Heckel gasps more often when you thrust into her than when Brooke thrusts onto her own cock, although you take that more to mean she's not used to getting fucked than you're outdoing Brooke.");
