@@ -634,7 +634,9 @@ package classes.Scenes.Dungeons.D3
 		
 		private function eastwalkRoomFunc():Boolean
 		{
-			outputText("The smooth, almost flawlessly laid stones split into a T-intersection here, heading north, south, and west. The bushes that hem in the paths are likewise split, though they have been maintained with the same sense of care you’ve seen elsewhere in the garden. One particularly interesting shrub has been trimmed into the shape of a large bust, complete with erect nipples. You shake your head and glance west, where you can spot {a massive statue with an immense hammer/a mound of rubble, the scattered remains of the animated statue that you slew}.");
+			outputText("The smooth, almost flawlessly laid stones split into a T-intersection here, heading north, south, and west. The bushes that hem in the paths are likewise split, though they have been maintained with the same sense of care you’ve seen elsewhere in the garden. One particularly interesting shrub has been trimmed into the shape of a large bust, complete with erect nipples. You shake your head and glance west, where you can spot");
+			if (flags[kFLAGS.D3_STATUE_DEFEATED] == 0) outputText(" a massive statue with an immense hammer.");
+			else outputText(" a mound of rubble, the scattered remains of the animated statue that you slew.");
 			return false;
 		}
 		
