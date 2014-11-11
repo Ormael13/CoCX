@@ -793,12 +793,16 @@ public function doEvent(eventNo:Number):void
 	{
 		spriteSelect(23);
 		outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?", true);
+		
+		var dualBeltNumber:int = 0;
+		if (player.hasKeyItem("Dual Belt") < 0) dualBeltNumber = 2142;
+		
 		if (player.gender == 1)
 			simpleChoices("Dildo", 2035, "Onahole", 2041, "D Onahole", 2044, "", 0, "Back", 2015);
 		if (player.gender == 2)
 			simpleChoices("Dildo", 2035, "Stim-Belt", 2037, "AN Stim-Belt", 2039, "", 0, "Back", 2015);
 		if (player.gender == 3)
-			choices("Onahole", 2041, "D Onahole", 2044, "AN Onahole", 2048, "Stim-Belt", 2037, "AN Stim-Belt", 2039, "Dual Belt", 2142, "", 0, "", 0, "Dildo", 2035, "Back", 2015);
+			choices("Onahole", 2041, "D Onahole", 2044, "AN Onahole", 2048, "Stim-Belt", 2037, "AN Stim-Belt", 2039, "Dual Belt", dualBeltNumber, "", 0, "", 0, "Dildo", 2035, "Back", 2015);
 		if (player.gender == 0)
 			simpleChoices("Dildo", 2035, "Onahole", 2041, "Stim-Belt", 2037, "", 0, "Back", 2015);
 		statScreenRefresh();
