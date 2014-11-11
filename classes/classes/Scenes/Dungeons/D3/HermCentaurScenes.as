@@ -374,7 +374,7 @@
 
 			var y:int = player.cockThatFits(monster.vaginalCapacity());
 
-			if (y <= 0) player.smallestCockIndex();
+			if (y < 0) player.smallestCockIndex();
 
 			outputText("Dropping down, you");
 			if (hpVictory)

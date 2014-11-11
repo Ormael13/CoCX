@@ -387,7 +387,7 @@
 			
 			outputText("\n\nA high-pitched whine of agreement automatically slips off your tongue - anything to get her to continue her ministrations on your crotch. You hold your hands up like paws and splay your [legs] for easier access, humping the 'v' between her big and index toes, rubbing yourself off on the bottom of her foot, knowing full well that's the best the demon is likely to give you.");
 			
-			outputText("\n\n<i>\"Goood " + player.mf("boy", "girl") + ",\"</i> she coos, twisting her foot to rub her heel against your [sheath biggest]. <i>\"You're just so eager to cum that you'll do anything, won't you?\"</i>");
+			outputText("\n\n<i>\"Goood " + player.mf("boy", "girl") + ",\"</i> she coos, twisting her foot to rub her heel against your [sheath]. <i>\"You're just so eager to cum that you'll do anything, won't you?\"</i>");
 			
 			outputText("\n\n<i>\"Yessss,\"</i> you hiss, forgetting your role in the heat of the moment.");
 			

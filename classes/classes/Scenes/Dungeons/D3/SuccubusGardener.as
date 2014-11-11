@@ -269,7 +269,7 @@
 			{
 				var sL:Number = player.lust;
 				game.dynStats("lus+", damage);
-				sL = player.lust - sL;
+				sL = Math.round(player.lust - sL);
 				outputText(" The sinuous plant-based tentacles lash at you like a dozen tiny whips! Preparing for stinging pain, you're somewhat taken aback when they pull back at the last moment, sensually caressing your most sensitive places! (" + sL + ")");
 			}
 			else
