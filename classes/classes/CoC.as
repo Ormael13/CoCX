@@ -210,6 +210,8 @@
 		public var owca:Owca = new Owca();
 		public var telAdre:TelAdre = new TelAdre();
 		public var dungeons:DungeonEngine = new DungeonEngine();
+		public var ingnam:Ingnam = new Ingnam();
+		public var prison:Prison = new Prison();
 		// Scenes/Quests/
 		public var urtaQuest:UrtaQuest = new UrtaQuest();
 		
@@ -370,8 +372,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.0_mod_0.9.8";
-			version = ver + " (<b>Ugh, another fix</b>)";
+			ver = "0.9.0_mod_0.9.9";
+			version = ver + " (<b>Last pre-1.0 fix</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

@@ -13,9 +13,10 @@ package classes.Items
 
 		public const B_SWORD:Weapon = new BeautifulSword();
 		public const CLAYMOR:Weapon = new LargeClaymore();
+		public const DAGGER :Weapon = mk("Dagger ","Dagger","dagger","a dagger","stab",4,40,"A small blade.  Preferred weapon for the rogues. \n\nType: Weapon (Sword) \nAttack: 10 \nBase value: 40");
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
 		public const E_STAFF:EldritchStaff = new EldritchStaff();
-		public const URTAHLB:Weapon = mk("UrtaHlb","UrtaHlb","halberd","a halberd","slash",11,10,null,"Large");
+		public const URTAHLB:Weapon = mk("UrtaHlb","UrtaHlb","halberd","a halberd","slash",11,10,"Urta's halberd. How did you manage to get this?","Large");
 		public const H_GAUNT:Weapon = mk("H.Gaunt","H.Gaunt","hooked gauntlets","a set of hooked gauntlets","clawing punch",8,300,"These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm. \n\nType: Weapon (Gauntlet) \nAttack: 8 \nBase value: 300 \nChance to inflict bleeding status on strike.");
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
 		public const KATANA :Weapon = mk("Katana ","Katana","katana","a katana","keen cut",10,500,"A curved bladed weapon that cuts through flesh with the greatest of ease. \n\nType: Weapon (Sword) \nAttack: 10 \nBase value: 500");

@@ -91,7 +91,9 @@
 			}
 			//[Round 4 Action]
 			else {
+				game.dynStats("lus", 1);
 				player.lust = 100;
+				statScreenRefresh();
 				outputText("What's happening to you definitely isn't rape.  Not any more.  You like it too much.  You lean back against a wall of the pod and thrust your " + game.hipDescript() + " pitifully against a phantom lover, moaning lewdly as you're forcibly pleasured.  You grab hold of the fleshy walls with your hands and try to hold yourself up, but your " + player.legs() + " have the consistency of jello.   They fold neatly underneath you as you slide into the ooze and begin to float inside it.  It's comforting in an odd way, and while you're gasping in between moans, your balance finally gives out.  You sink deeper into the fluid and lose all sense of direction.  Up and down become meaningless constructs that no longer matter to you.\n\n", false);
 				
 				outputText("The thick slime passes over your lips and nose as you sink into the rising tide of bliss, and you find yourself wondering how you'll breathe.  Instinctively, you hold your breath.  Even riddled with sexual bliss and thought-obliterating drugs, you won't let yourself open your mouth when 'underwater'.  The lack of oxygen makes your heart hammer in your chest", false);
@@ -125,7 +127,7 @@
 					else outputText("thickening your fluid-filled prison with nutrients.", false);
 				}
 				//[NEXT – CHOOSE APPRORIATE]
-				doNext(11083);
+				doNext(game.dungeons.deepcave.loseToThisShitPartII);
 				return;
 			}
 			//Set flags for rounds

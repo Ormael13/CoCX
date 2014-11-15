@@ -2149,7 +2149,8 @@ public function wakeFromBadEnd():void {
 
 //Camp population!
 public function getCampPopulation():int {
-	var pop:int = 1; //Start at 1 because of YOU! You count toward the population!
+	var pop:int = 0; //Once you enter Mareth, this will increase to 1.
+	if (flags[kFLAGS.IN_INGNAM] <= 0) pop++; //You count toward the population!
 	pop += companionsCount()
 	//Misc check!
 	if (ceraphIsFollower()) pop--; //Ceraph doesn't stay in your camp.

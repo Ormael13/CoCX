@@ -1133,6 +1133,26 @@ private function startTheGame():void {
 	}
 	flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
 	statScreenRefresh();
+	getBanishedToMarethForReal();
+	//chooseToPlay(); //Will be used in 1.0.
+	return;
+}
+
+public function chooseToPlay():void {
+	clearOutput();
+	outputText("Would you like to play through the new prologue in Ingnam or just skip?");
+	doYesNo(goToIngnam, getBanishedToMarethForReal);
+}
+
+public function goToIngnam():void {
+	model.time.days = -3;
+	model.time.hours = 8;
+	flags[kFLAGS.IN_INGNAM] = 1;
+	kGAMECLASS.ingnam.menuIngnam();
+}
+
+public function getBanishedToMarethForReal():void {
+	clearOutput();
 	model.time.hours = 11;
 	outputText("You are prepared for what is to come.  Most of the last year has been spent honing your body and mind to prepare for the challenges ahead.  You are the Champion of Ingnam.  The one who will journey to the demon realm and guarantee the safety of your friends and family, even though you'll never see them again.  You wipe away a tear as you enter the courtyard and see Elder Nomur waiting for you.  You are ready.\n\n", true);
 	outputText("The walk to the tainted cave is long and silent.  Elder Nomur does not speak.  There is nothing left to say.  The two of you journey in companionable silence.  Slowly the black rock of Mount Ilgast looms closer and closer, and the temperature of the air drops.   You shiver and glance at the Elder, noticing he doesn't betray any sign of the cold.  Despite his age of nearly 80, he maintains the vigor of a man half his age.  You're glad for his strength, as assisting him across this distance would be draining, and you must save your energy for the trials ahead.\n\n", false);
@@ -1144,7 +1164,6 @@ private function startTheGame():void {
 	showStats();
 	dynStats("lus", +15);
 	doNext(2000);
-	return;
 }
 
 public function useCustomProfile():void {
