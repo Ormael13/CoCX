@@ -7658,7 +7658,8 @@
 				else if (mtoneTemp == 2) player.skinTone = "ashen";
 				else if (mtoneTemp == 3) player.skinTone = "sable";
 				else player.skinTone = "milky white";
-				outputText(player.skin() + "!</i>");
+				outputText(player.skin() + "!</b>");
+				changes++;
 			}
 			//Change skin tone if not changed you!
 			else if (!mystic && player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "light" && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
@@ -7667,7 +7668,8 @@
 				if (toneTemp == 0) player.skinTone = "tan";
 				else if (toneTemp == 1) player.skinTone = "olive";
 				else player.skinTone = "light";
-				outputText(player.skin() + "!</i>");
+				outputText(player.skin() + "!</b>");
+				changes++;
 			}
 			//[Change Skin Color: add "Tattoos"]
 			//From Tan, Olive, or Light skin tones
@@ -7676,6 +7678,7 @@
 				if (mystic) outputText("angular");
 				else outputText("curved");
 				outputText(" markings remain, as if etched into your skin.");
+				changes++;
 				//9999 - pending tats system
 			}
 			//Nipples Turn Back:

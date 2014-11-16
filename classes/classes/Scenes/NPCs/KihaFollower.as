@@ -1060,11 +1060,8 @@ private function boneTheShitOutofKihaHolesWithHorsecock():void {
 	outputText("[pg]Kiha ");
 	if(horse) {
 		if(player.isTaur()) outputText("clambers out from beneath you, pulling herself onto a nearby rock, putting herself into position for your horse-body to mount her. She spreads her legs wide, her slick vagina releasing a tantalizing musk that begs for a cock to fill it");
-		else outputText("leans back against a rock and spreads her legs, exposing you to a tantalizing, cock-filling scent");
 	}
-	else {
-		outputText("[if (isTaur = true) \"clambers out from beneath you, pulling herself onto a nearby rock, putting herself into position for your horse-body to mount her. She spreads her legs wide, her slick pussy releasing a tantalizing musk that begs for a cock to fill it.\" else \"leans back against a rock and spreads her legs, exposing you to a tantalizing, cock-filling scent\"]");
-	}
+	else outputText("leans back against a rock and spreads her legs, exposing you to a tantalizing, cock-filling scent");
 	outputText(".  Pre-cum trails from your tip in thick ropes, swaying beneath your bobbing, blood-filled ");
 	if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("horse-");
 	outputText("cock.  That aroma... that wondrous odor.  It fills your nostrils, and as your hormone-flooded consciousness slowly turns it over, you recognize it for what it is - breeding scent.  You're smelling a female... no, a fertile female - a bitch, a ");

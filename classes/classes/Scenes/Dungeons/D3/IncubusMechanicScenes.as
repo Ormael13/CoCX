@@ -102,7 +102,7 @@ package classes.Scenes.Dungeons.D3
 
 				if (player.gems >= 500)
 				{
-					addButton(2, "Pay Toll");
+					addButton(2, "Pay Toll", payDaToll);
 				}
 				else
 				{
@@ -355,7 +355,9 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			outputText("Well, he does have quite the thick, throbbing piece of male genitalia on display for you.... There's no sense in letting a good cock go to waste, right? You stalk over to him, looming over the defeated demon with a predatory grin. Your tongue flicks out to lick your lips. Meanwhile, your lower ones go suddenly and irrevocably slick, excited and instantly ready for a helping of thick demon-cock. Your [vagina] is getting warmer and warmer as you tease the poor demon, leaving him to wonder if you're going to kill him or fuck him. The worry is as obvious on his face as the upraised tumescence that jabs spear-like out from his crotch, aimed straight at you.");
 
-			outputText("\n\nAbruptly, you drop your [butt] down on top of him, sitting square on top of his chest{, tail draped across his face}, and casually begin to undress. Looking over your shoulders, you see hope in his soulless eyes. You tease, \"<i>I wouldn't want to stain my clothes when I finish you off, would I?</i>\" His dick wilts a little at that, and he looks about to faint. Giggling, you toss aside your [armor] and grab hold of his mostly-hard cock, feeling the corrupted, textured nodules that encircle his shaft flaring up at your gentle squeeze. He firms up nicely in your grip, filling back to a pulsating, rigid hardness in seconds.");
+			outputText("\n\nAbruptly, you drop your [butt] down on top of him, sitting square on top of his chest");
+			if (player.tailType != 0) outputText(", tail draped across his face");
+			outputText(", and casually begin to undress. Looking over your shoulders, you see hope in his soulless eyes. You tease, \"<i>I wouldn't want to stain my clothes when I finish you off, would I?</i>\" His dick wilts a little at that, and he looks about to faint. Giggling, you toss aside your [armor] and grab hold of his mostly-hard cock, feeling the corrupted, textured nodules that encircle his shaft flaring up at your gentle squeeze. He firms up nicely in your grip, filling back to a pulsating, rigid hardness in seconds.");
 
 			outputText("\n\n\"<i>Hey, you can transform your dick, right?</i>\" you call over your shoulder.");
 
@@ -415,7 +417,11 @@ package classes.Scenes.Dungeons.D3
 			}
 
 			//ALL CONTINUE TO THIS:
-			outputText("\n\nYou dare not delay any further. Your [vagina] is so hot and slick with lube that it feels almost like it's steaming. It aches for penetration. Lifting yourself up off your [legs], you guide your wanton honeypot up until it's poised just above the [eCockDescript]{, letting your free-flowing lubricant wash over it, lubricating it with your glorious girlcum/, letting your oh-so-juicy vagina drip and dribble, soaking it with your copious girlcum/, letting your lubricant drip over it}. You stuff two fingers inside and stroke deep before pulling them out and using them to spread you wide open. The " + eCockDescript() + " pulsates with every beat of its demonic owner's heart, needing you every bit as much as you now need it.");
+			outputText("\n\nYou dare not delay any further. Your [vagina] is so hot and slick with lube that it feels almost like it's steaming. It aches for penetration. Lifting yourself up off your [legs], you guide your wanton honeypot up until it's poised just above the [eCockDescript]");
+			if (player.wetness() <= 2) outputText(", letting your free-flowing pussyjuice wash over it, lubricating it with your glorious girlcum");
+			else if (player.wetness() <= 3) outputText(", letting your oh-so-juicy vagina drip and dribble, soaking it with your copious girlcum");
+			else outputText(", letting your lubricant drip over it");
+			outputText(". You stuff two fingers inside and stroke deep before pulling them out and using them to spread you wide open. The " + eCockDescript() + " pulsates with every beat of its demonic owner's heart, needing you every bit as much as you now need it.");
 
 			outputText("\n\nLetting your [legs] go slack, you press down upon the incubus' length. His "+eCockHead()+" presses poignantly at your entrance, throbbing gently. Small blooms of warm tickle over your lips, warm and wet as he leaks his liquid excitement into your nethers, lubricating you further. You relax a bit more");
 

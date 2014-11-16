@@ -190,8 +190,18 @@ package classes.Scenes.Dungeons.D3
 			this.plural = false;
 			
 			this.tallness = player.tallness;
-			this.balls = player.balls;
-			this.ballSize = player.ballSize;
+			
+			if (player.balls > 0)
+			{
+				this.balls = player.balls;
+				this.ballSize = player.ballSize;
+			}
+			else
+			{
+				this.balls = 0;
+				this.ballSize = 0;
+			}
+			
 			this.hoursSinceCum = player.hoursSinceCum;
 			
 			hipRating = player.hipRating;
@@ -230,6 +240,7 @@ package classes.Scenes.Dungeons.D3
 				this.createVagina();
 				(this.vaginas[0] as VaginaClass).vaginalLooseness = player.vaginas[0].vaginalLooseness;
 				(this.vaginas[0] as VaginaClass).vaginalWetness = player.vaginas[0].vaginalWetness;
+				(this.vaginas[0] as VaginaClass).virgin = player.vaginas[0].virgin;
 			}
 			
 			this.breastRows = [];
@@ -261,13 +272,7 @@ package classes.Scenes.Dungeons.D3
 			str += String(Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall ");
 			str += player.race() + ", with " + player.bodyType() + ". ";
 			
-			str += player.mf("His", "Her") + " face is " + player.faceDesc() + ", which is";
-			
-			if (player.femininity < 20) str += " strikingly masculine";
-			else if (player.femininity < 40) str += " fairly masculine";
-			else if (player.femininity < 60) str += " androgynous";
-			else if (player.femininity < 80) str += " quite pretty";
-			else str += " sweepingly feminine";
+			str += player.mf("His", "Her") + " face is " + player.faceDesc() + ".";
 			
 			str += ". "  + player.mf("His", "Her") + " " + player.hairDescript() + " is parted by";
 			

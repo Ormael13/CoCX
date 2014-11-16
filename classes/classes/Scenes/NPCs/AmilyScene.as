@@ -594,7 +594,7 @@ package classes.Scenes.NPCs
 			if(flags[kFLAGS.AMILY_PC_GENDER] != player.gender) {
 			//Stripped this out since it was making her flip out weirdly at genderless folks
 			//|| (player.gender == 0 && flags[kFLAGS.AMILY_AFFECTION] < 15)) {
-				doNext(amilyNewGenderConfrontation);
+				amilyNewGenderConfrontation();
 				return;
 			}
 			

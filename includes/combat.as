@@ -148,6 +148,7 @@ public function doCombat(eventNum:Number):void
 				addButton(2, "Spells", temp2);
 				addButton(3, "Items", eventParser, 1000);
 				addButton(4, "Run", runAway);
+				if (player.hasKeyItem("Bow") >= 0) addButton(5, "Bow", eventParser, 5079);
 				addButton(6, "M. Specials", eventParser, 5160);
 				addButton(7, waitT, eventParser, 5071);
 				addButton(8, "Fantasize", eventParser, 5086);
@@ -1502,11 +1503,16 @@ public function attack():void {
 	// Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
 	if (monster is Doppleganger)
 	{
-		if (damage > 0 && player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		if (damage > 0) damage = doDamage(damage, false);
+		if (monster.findStatusAffect(StatusAffects.Stunned) < 0)
+		{
+			if (damage > 0 && player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+			if (damage > 0) damage = doDamage(damage, false);
 		
-		(monster as Doppleganger).mirrorAttack(damage);
-		return;
+			(monster as Doppleganger).mirrorAttack(damage);
+			return;
+		}
+		
+		// Stunning the doppleganger should now "buy" you another round.
 	}
 	
 	if(damage > 0) {
@@ -3836,7 +3842,7 @@ public function tease(justText:Boolean = false):void {
 		damage = (damage + rand(bonusDamage)) * monster.lustVuln;
 		
 		if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
-		else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(damage, true);
+		else if (monster is Doppleganger && monster.findStatusAffect(StatusAffects.Stunned) < 0) (monster as Doppleganger).mirrorTease(damage, true);
 		else if (!justText) monster.teased(damage);
 		
 		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta()) 
@@ -5140,7 +5146,7 @@ public function runAway(callHook:Boolean = true):void {
 		doNext(5000);
 		return;
 	}
-	if(inDungeon) {
+	if(inDungeon || inRoomedDungeon) {
 		outputText("You're trapped in your foe's home turf - there is nowhere to run!\n\n", true);
 		enemyAI();
 		return;
