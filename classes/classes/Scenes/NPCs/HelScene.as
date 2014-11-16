@@ -14,10 +14,13 @@ package classes.Scenes.NPCs{
 												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
 			CoC.timeAwareClassAdd(this);
 		}
-
+		
+		private var checkedHeliaIsabellaThreesome:int;
+		
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
+			checkedHeliaIsabellaThreesome = 0; //Make sure we test just once in timeChangeLarge
 			pregnancy.pregnancyAdvance();
 			trace("\nHelia time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event, false);
 			if (model.time.hours > 23) {
@@ -32,6 +35,11 @@ package classes.Scenes.NPCs{
 		}
 	
 		public function timeChangeLarge():Boolean {
+			//Helia's morning surprise!
+			if (getGame().model.time.hours == 23 && helFollower.followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
+				helSpawnScene.heliaBonusPointsAward();
+				return true;
+			}
 			if (model.time.hours == 8 && helFollower.followerHel() && flags[kFLAGS.HEL_NTR_TRACKER] == 1) {
 				helSpawnScene.helGotKnockedUp();
 				return true;
@@ -49,7 +57,21 @@ package classes.Scenes.NPCs{
 			if (flags[kFLAGS.HELSPAWN_AGE] == 2 && (model.time.hours == 2 || model.time.hours == 3 || model.time.hours == 4) && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7 && flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] == 0) {
 				helSpawnScene.helspawnIsASlut();
 				return true;
-			}		
+			}
+			//Chance of threesomes!
+			if (checkedHeliaIsabellaThreesome++ == 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && getGame().isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
+				trace("ISABELLA/HELL TEST");
+				if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) { //Hell/Izzy threesome intro
+					spriteSelect(31);
+					followrIzzyxSallyThreesomePretext();
+					return true;
+				}
+				else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) { //Propah threesomes here!
+					spriteSelect(31);
+					isabellaXHelThreeSomeCampStart();
+					return true;
+				}
+			}
 			return false;
 		}
 		//End of Interface Implementation

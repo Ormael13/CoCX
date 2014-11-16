@@ -1392,6 +1392,7 @@ package classes.Scenes.NPCs
 					player.hoursSinceCum += 100;
 				}
 			}
+			doNext(camp.campMenu);
 		}
 
 		internal function buttRapeCeraph():void

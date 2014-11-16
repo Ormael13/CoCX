@@ -10,7 +10,7 @@ package classes.Items.Armors
 	public class ComfortableClothes extends Armor {
 		
 		public function ComfortableClothes() {
-			super("C.Cloth", "C.Cloth", "comfortable clothes", "a set of comfortable clothes", 0, 0, "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.  (DEF: +0) (Cost: 0)","Light");
+			super("C.Cloth", "C.Cloth", "comfortable clothes", "a set of comfortable clothes", 0, 0, "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.  (DEF: +0) (Cost: 0)", "Light", true);
 		}
 /*
 		override protected function unequipReturnItem(player:Player,output:Boolean):ItemType

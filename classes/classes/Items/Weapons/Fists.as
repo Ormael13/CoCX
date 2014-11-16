@@ -13,6 +13,8 @@ package classes.Items.Weapons
 			super("Fists  ", "Fists", "fists", "fists", "punch", 0);
 		}
 		
+		override public function useText():void {} //No text for equipping fists
+
 		override public function playerRemove():Weapon {
 			return null;
 		}

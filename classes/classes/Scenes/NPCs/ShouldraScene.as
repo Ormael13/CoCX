@@ -49,19 +49,25 @@
 					shouldraFollower.shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMakeThisFunctionNameQuestionMark();
 					needNext = true;
 				}
+				if (flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] > 0 && getGame().model.time.hours == 3) flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN]--;
 			}
 			return needNext;
 		}
 	
 		public function timeChangeLarge():Boolean {
+			if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] == 0 && getGame().model.time.hours == 3) {
+				flags[kFLAGS.SHOULDRA_PLOT_COUNTDOWN] = -1;
+				shouldraFollower.shouldraDream1();
+				return true;
+			}
 			//Ghostgirl recruitment priority
 			if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] == .5 && model.time.hours == 6) {
-				kGAMECLASS.shouldraFollower.morningShouldraAlert();
+				getGame().shouldraFollower.morningShouldraAlert();
 				return true;
 			}
 			//Ghostgirl pissed off dreams
 			if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0) {
-				kGAMECLASS.shouldraFollower.nightTimeShouldraRapesThePC();
+				getGame().shouldraFollower.nightTimeShouldraRapesThePC();
 				return true;
 			}
 			//Ghostgirl madness

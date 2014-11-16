@@ -655,6 +655,7 @@ public function fellatrixDream():void {
 	outputText("As the weight of the tar covers your eyes the stars above blink into sight. Panting, you realize you have returned to your campsite, sweaty and uncomfortable with the fire burnt out. The dream is over, memories of it already fading. You remember lips, and stars, and the crushing weight of the darkness.\n\n", false);
 
 	outputText("You think you preferred the dreams about the factory.", false);
+	doNext(camp.campMenu);
 }
 
 

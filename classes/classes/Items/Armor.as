@@ -12,12 +12,14 @@ package classes.Items
 		private var _def:Number;
 		private var _perk:String;
 		private var _name:String;
+		private var _supportsBulge:Boolean;
 		
-		public function Armor(id:String, shortName:String, name:String, longName:String, def:Number, value:Number = 0, description:String = null, perk:String = "") {
+		public function Armor(id:String, shortName:String, name:String, longName:String, def:Number, value:Number = 0, description:String = null, perk:String = "", supportsBulge:Boolean = false) {
 			super(id, shortName, longName, value, description);
 			this._name = name;
 			this._def = def;
 			this._perk = perk;
+			_supportsBulge = supportsBulge;
 		}
 		
 		public function get def():Number { return _def; }
@@ -25,6 +27,12 @@ package classes.Items
 		public function get perk():String { return _perk; }
 		
 		public function get name():String { return _name; }
+		
+		public function get supportsBulge():Boolean { return _supportsBulge; }
+		
+		override public function useText():void {
+			outputText("You equip " + longName + ".  ");
+		}
 		
 		public function playerEquip():Armor { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
 			return this;

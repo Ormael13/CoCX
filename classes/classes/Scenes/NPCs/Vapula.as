@@ -34,6 +34,10 @@ package classes.Scenes.NPCs
 				femaleVapulaRecruitmentPartII();
 				return true;
 			}
+			if (model.time.hours == 2 && vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
+				vapulaForceFeeds();
+				return true;
+			}
 			return false;
 		}
 		//End of Interface Implementation

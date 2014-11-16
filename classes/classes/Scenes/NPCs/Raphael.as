@@ -2,11 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Raphael extends NPCAwareContent {
-
-		public function Raphael()
-		{
-		}
+	public class Raphael extends NPCAwareContent implements TimeAwareInterface {
 
 //The event itself:
 //Requirement: Player has found Desert storage chest &
@@ -16,6 +12,76 @@
 //Second requirement:
 //- Player has C,D,DD or E breasts, at least girly/ample thighs, no humongous ass, is between 4 and 6 feet and has a bipedal lower body.
 //- Player does not have a cock or balls, for now
+
+		public function Raphael() {
+			CoC.timeAwareClassAdd(this);
+		}
+		
+		private var checkedRussetRogue:int;
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean {
+			checkedRussetRogue = 0; //Make sure we test just once in timeChangeLarge
+			if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHAEL_DRESS_TIMER]--;
+			if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]--;
+			//Fix 'hangs' - PC is at the bottom of the dress countdown
+			if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0 && RaphaelLikes()) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4;
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			if (checkedRussetRogue++ == 0 && model.time.hours == 6 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusAffectv1(StatusAffects.TelAdre) >= 1) {
+				/*trace("RAPHAEL FINAL COUNTDOWN: " + flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]);
+				trace("RAPHAEL MET: " + flags[kFLAGS.RAPHAEL_MET]);
+				trace("RAPHAEL DRESS TIMER: " + flags[kFLAGS.RAPHAEL_DRESS_TIMER]);
+				trace("RAPHAEL DISGUSTED: " + flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE]);*/
+				if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0) { //Countdown to finale not currently engaged!
+					//If the PC meets his criteria!
+					if (RaphaelLikes()) { //Not yet met!  MEETING TIEM!
+						if (flags[kFLAGS.RAPHAEL_MET] == 0) {
+							outputText("<b>\nSomething unusual happens that morning...</b>\n");
+							doNext(meetRaphael);
+							return true;
+						}
+						else { //Already met!
+							if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 0 && flags[kFLAGS.RAPHAEL_SECOND_DATE] == 0) { //Not given dress yet
+								outputText("<b>\nSomething unusual happens that morning...</b>\n");
+								doNext(RaphaelDress);
+								return true;
+							}
+							//Dress followup - Call picnic date prologue!
+							if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4)) {
+								outputText("<b>\nSomething unusual happens that morning...</b>\n");
+								doNext(RaphaelEncounterIIDressFollowup);
+								return true;
+							}
+						}
+					}
+					else { //If the PC does not currently meet his criteria
+						//Dress countdown - if pc isn't wearing it yet, kick out to
+						//Finale!
+						if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1) {
+							flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
+							flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
+						}
+						//PC get ready for the 2nd encounter and hasn't been
+						//shot down yet?
+						if (player.armor == armors.R_BDYST && flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] == 0) {
+							outputText("<b>\nSomething unusual happens that morning...</b>\n");
+							doNext(RaphaelEncounterIIDressFollowup);
+							return true;
+						}
+					}
+				}
+				else if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 1) { //FINALE
+					outputText("<b>\nSomething unusual happens that morning...</b>\n");
+					doNext(quiksilverFawkesEndGame);
+					return true;
+				}
+			}
+			return false;
+		}
+		//End of Interface Implementation
 
 override public function RaphaelLikes():Boolean {
 	if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL])		
@@ -52,7 +118,7 @@ override public function RaphaelLikes():Boolean {
 //Female PC wakes up. 
 
 //{First encounter}
-public function meetRaphael():void {
+private function meetRaphael():void {
 	outputText("", true);
 	outputText("You stir in your sleep, bothered by a noise. It's the familiar creaking of your camp's storage chest, as if you've just opened it up to fill it with freshly found loot. Groaning, you hog your blankets and twist. Nothing to worry about then. You soon drift back into a pleasant dream about all the spoils you've accumulated over the time here. Life is good.\n\n", false);
 	
@@ -162,7 +228,7 @@ private function RaphaelFirstMeetingTALK():void {
 
 //{Second encounter.} 
 //Again at bedtime
-public function RaphaelDress():void {
+private function RaphaelDress():void {
 	outputText("", true);
 	outputText("A small pebble hits the ground near you, waking you up. When a second one hits, you're sure someone is trying to draw your attention.\n\n", false);
 
@@ -210,7 +276,7 @@ Multiplies evasion ratings. It has crap armor rating.
 ~~~*/
 
 
-public function RaphaelEncounterIIDressFollowup():void {
+private function RaphaelEncounterIIDressFollowup():void {
 	//{Encounter two}
 	//{Requirement: PC is wearing High society bodysuit. 
 	//Sequence: When PC wakes up the next day.})
@@ -1021,7 +1087,7 @@ private function RaphaelThieverySmexPtII():void {
 
 //OH SHIT ENDGAME SHIT HERE SONS!
 //[Quicksilver scene]
-public function quiksilverFawkesEndGame():void {
+private function quiksilverFawkesEndGame():void {
 	outputText("", true);
 	outputText("You wake up to the sound of an ominous cry in the distance, like that of a howling wolf.  It can only mean trouble and you jump out of bed.\n\n", false);
 

@@ -1741,7 +1741,7 @@ package classes.Scenes.NPCs
 				outputText("  Sighing, you turn over and attempt to return to sleep despite the pervading smell of semen.");
 			}
 			dynStats("lus", 50 + player.sens / 2, "resisted", false);
-			doNext(1);
+			doNext(camp.campMenu);
 		}
 
 //Kid-and-kid interaction scenes:

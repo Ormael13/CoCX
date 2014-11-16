@@ -1253,7 +1253,9 @@ package classes.Scenes.Monsters
 					}
 				}
 			}
+			doNext(camp.campMenu);
 		}
+		
 		public function impRapesYou():void {
 			outputText("", true);
 			if ((player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && !player.isTaur() && player.hasVagina()) {

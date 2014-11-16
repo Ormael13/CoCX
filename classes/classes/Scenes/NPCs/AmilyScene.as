@@ -4807,10 +4807,14 @@ package classes.Scenes.NPCs
 
 			outputText("You smile and reach up to stroke her cheek. She smiles back and reaches down to pat you on your belly.", false);
 			//(If player is preg
-			if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) outputText("\"<i>Boy, this is weird. I'm a woman and I'm going to be a dad.", false);
+			if (player.isPregnant()) {
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY)
+					outputText("\"<i>Boy, this is weird.  I'm a woman and I'm going to be a dad.");
+				else outputText("\"<i>After you give birth to this baby come and see me when you're ready for mine.  This is really weird, I'm a woman and I can't wait to be a dad.");
+			}
 			//not preg yet!
 			else {
-				outputText("\"<i>Let's see if you'll be a mommy from this load... If not, well, I guess we'll have to try again.", false);
+				outputText("\"<i>Let's see if you'll be a mommy from this load... If not, well, I guess we'll have to try again.");
 				//PREGGO CHECK HERE
 				player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 			}

@@ -9,6 +9,7 @@ package classes.Scenes
 	import classes.Items.Armor;
 	import classes.Items.Useable;
 	import classes.Items.Weapon;
+	import classes.Items.WeaponLib;
 
 	use namespace kGAMECLASS;
 
@@ -63,6 +64,9 @@ package classes.Scenes
 					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
 					foundItem = true;
 				}
+			}
+			if (player.weapon != WeaponLib.FISTS) {
+				addButton(5, "Unequip", unequipWeapon);
 			}
 			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false) {
 				if (getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
@@ -237,6 +241,11 @@ package classes.Scenes
 				player.itemSlots[slotNum].setItemAndQty(itype, 1);
 			}
 			itemGoNext();
+		}
+		
+		private function unequipWeapon():void {
+			clearOutput();
+			takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
 		}
 		
 		//Check to see if anything is stored

@@ -2,12 +2,33 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Marae extends AbstractBoatContent{
+	public class Marae extends AbstractBoatContent implements TimeAwareInterface {
 
-	public function Marae()
-	{
-	}
+		public function Marae() {
+			CoC.timeAwareClassAdd(this);
+		}
 
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			if (model.time.hours == 0) {
+				if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0) { //Marae met 2nd time?
+					if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) { //If flower hasn't been burned down yet
+						if (flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) { //Grow flower if it isn't fully grown.
+							flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER]++;
+						}
+					}
+				}
+				if (flags[kFLAGS.HOLLI_FUCKED_TODAY] == 1) flags[kFLAGS.HOLLI_FUCKED_TODAY] = 0; //Holli Fuck Tracking
+			}
+			return false;
+		}
+		
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+		
 public function encounterMarae():void {
 	spriteSelect(40);
 	outputText(images.showImage("marae-first-encounter"));

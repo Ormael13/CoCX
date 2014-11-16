@@ -11,7 +11,7 @@ package classes.Items.Armors
 	public class SluttySwimwear extends ArmorWithPerk {
 		
 		public function SluttySwimwear() {
-			super("S.Swmwr", "S.Swmwr", "slutty swimwear", "a skimpy black bikini", 0, ArmorLib.DEFAULT_VALUE, "An impossibly skimpy black bikini. You feel dirty just looking at it... and a little aroused, actually.", "Light", PerkLib.SluttySeduction, 6, 0, 0, 0);
+			super("S.Swmwr", "S.Swmwr", "slutty swimwear", "a skimpy black bikini", 0, ArmorLib.DEFAULT_VALUE, "An impossibly skimpy black bikini. You feel dirty just looking at it... and a little aroused, actually.", "Light", PerkLib.SluttySeduction, 6, 0, 0, 0, "", true);
 		}
 		
 		override public function useText():void { //Produces any text seen when equipping the armor normally

@@ -29,6 +29,10 @@ package classes.Items
 		
 		public function get name():String { return _name; }
 		
+		override public function useText():void {
+			outputText("You equip " + longName + ".  ");
+		}
+		
 		public function playerEquip():Weapon { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
 			return this;
 		}

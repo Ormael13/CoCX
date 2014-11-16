@@ -2,11 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Exgartuan extends NPCAwareContent {
-
-	public function Exgartuan()
-	{
-	}
+	public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 
 //EXGARTUAN STATUS
 //v1 - Location - 1 = dick, 2 = tits
@@ -56,6 +52,125 @@
 --New Breast-focused masturbation scene
 --Random lust increases when time passes, combined with more growth.
 */
+
+		public function Exgartuan() {
+			CoC.timeAwareClassAdd(this);
+		}
+		
+		private var checkedExgartuan:int;
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean {
+			var needNext:Boolean = false;
+			checkedExgartuan = 0; //Make sure we test just once in timeChangeLarge
+			if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0) { //Update Exgartuan stuff
+				trace("EXGARTUAN V1: " + player.statusAffectv1(StatusAffects.Exgartuan) + " V2: " + player.statusAffectv2(StatusAffects.Exgartuan));
+				if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && (!player.hasCock() || player.cockArea(0) < 100)) { //If too small dick, remove him
+					outputText("\n<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.  Perhaps you got too small for Exgartuan to handle?</b>\n");
+					player.removeStatusAffect(StatusAffects.Exgartuan);
+					needNext = true;
+				}
+				else if (player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() < 12) { //Tit removal
+					outputText("\n<b>Black milk dribbles from your " + getGame().nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>");
+					player.removeStatusAffect(StatusAffects.Exgartuan);
+					needNext = true;
+				}		
+				else {
+					if (player.statusAffectv2(StatusAffects.Exgartuan) > 0) { //if sleeping, decrement sleep timer.
+						player.addStatusValue(StatusAffects.Exgartuan, 2, -1);
+						if (player.statusAffectv2(StatusAffects.Exgartuan) == 0) { //The demon awakens!
+							outputText("\n<b>");
+							exgartuanBored();
+							outputText("</b>\n");
+							needNext = true;
+						}
+					}
+					else { //If not sleeping, stuff happens!
+						if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) { //Dude stuff
+							if (player.findStatusAffect(StatusAffects.Infested) >= 0) {
+								outputText("\n<b>");
+								exgartuanWormCure();
+								outputText("</b>\n");
+								needNext = true;
+							}
+							else if (rand(10) == 0 && player.armor.supportsBulge) {
+							/* Old way of doing it.
+							(armorName == "sexy black chitin armor-plating" ||
+							armorName == "glistening gel-armor plates" || 
+							player.armorName == "leather armor segments" || 
+							player.armorName == "comfortable clothes" || 
+							player.armorName == "bondage patient clothes" || 
+							player.armorName == "crotch-revealing clothes" || 
+							player.armorName == "cute servant's clothes" || 
+							player.armorName == "maid's clothes" || 
+							player.armorName == "servant's clothes" || 
+							player.armorName == "maid's clothes" || 
+							player.armorName == "practically indecent steel armor" || 
+							player.armorName == "red, high-society bodysuit" || 
+							player.armorName == "spider-silk armor" || 
+							player.armorName == "slutty swimwear" || 
+							player.armorName == "full-body chainmail" || 
+							player.armorName == "revealing chainmail bikini" || 
+							player.armorName == "full platemail" || 
+							player.armorName == "scale-mail armor" || 
+							player.armorName == "black leather armor surrounded by voluminous robes" || 
+							player.armorName == "rubber fetish clothes" || 
+							player.armorName == "green adventurer's clothes" || 
+							player.armorName == "white shirt and overalls")) {
+							*/
+								outputText("\n<b>");
+								exgartuanArmorShift();
+								outputText("</b>\n");	
+								needNext = true;
+							}
+							else dynStats("lus", 1 + rand(2));
+						}
+						if (player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() >= 12) { //Chick stuff
+							if (model.time.hours % 9 == 0) { //Only once every 9 hours or so.
+								if (rand(3) == 0) { //lactation messing with!
+									outputText("\n<b>");
+									exgartuanLactationAdjustment();
+									outputText("</b>\n");	
+									needNext = true;
+								}
+								else if (rand(3) == 0) {
+									outputText("\n<b>");
+									if (rand(2) == 0)
+										outputText("You feel warm and tingly, good all over.  Wait a second, your hands are playing with your " + getGame().breastDescript(0) + ".  You yank your hands away, but it only makes Exgartuan laugh with demonic pleasure!");
+									else {
+										outputText("Your hands knead and caress your " + getGame().breastDescript(0) + ", eagerly touching every inch of soft flesh.  You gasp when you realize what you're doing and pull them away");
+										if (player.cor < 50) outputText(", angry at yourself for falling prey to the demon's directions");
+										outputText(".");
+										dynStats("lus", 5 + player.sens / 10);
+									}
+									outputText("</b>\n");
+									needNext = true;
+								}
+								else dynStats("lus", 1 + rand(2));
+							}
+						}
+					}
+				}
+			}
+			return needNext;
+		}
+		
+		public function timeChangeLarge():Boolean {
+			if (checkedExgartuan++ == 0) {
+				if (player.hasCock() && player.statusAffectv1(StatusAffects.Exgartuan) == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) { //Exgartuan night time surprise!
+					outputText("\n");
+					exgartuanSleepSurprise();
+					return true;
+				}
+				if (player.statusAffectv1(StatusAffects.Exgartuan) == 2 && rand(3) == 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) { //Boobgartuan night time surprise!
+					outputText("\n");
+					boobGartuanSURPRISE();
+					return true;
+				}
+			}
+			return false;
+		}
+		//End of Interface Implementation
 
 public function fountainEncounter():void {
 	outputText("", true);
@@ -696,7 +811,7 @@ private function leaveBeePostRape():void {
 	dynStats("cor", .5);
 }
 
-public function exgartuanSleepSurprise():void {
+private function exgartuanSleepSurprise():void {
 	spriteSelect(15);
 	//Low corruption
 	if(player.cor <= 20 && player.findPerk(PerkLib.BulgeArmor) >= 0) {
@@ -974,7 +1089,7 @@ private function exgartuanBulgeTortureIV():void {
 //Player going to sleep, duh
 //3:00AM
 
-public function boobGartuanSURPRISE():void {
+private function boobGartuanSURPRISE():void {
 	spriteSelect(15);
 	//[if occurrence ==0]
 	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) {

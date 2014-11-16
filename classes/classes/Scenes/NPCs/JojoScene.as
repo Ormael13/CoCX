@@ -18,6 +18,7 @@
 			pregnancy.pregnancyAdvance();
 			trace("\nJojo time change: Time is " + model.time.hours + ", butt incubation: " + pregnancy.buttIncubation);
 			if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN]--;
+			if (player.findStatusAffect(StatusAffects.NoJojo) >= 0) player.removeStatusAffect(StatusAffects.NoJojo);
 			if (model.time.hours > 23 && player.statusAffectv1(StatusAffects.Meditated) > 0) {
 				player.removeStatusAffect(StatusAffects.Meditated);
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102] == 0) {

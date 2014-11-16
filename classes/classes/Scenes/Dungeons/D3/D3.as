@@ -475,7 +475,7 @@ package classes.Scenes.Dungeons.D3
 			if (eggMask == BROWN) item = consumables.L_BRNEG;
 			if (eggMask == PURPLE) item = consumables.L_PRPEG;
 			
-			menuLoc = 9999;
+			//menuLoc = 9999;
 			// Should actually be handled by the fallthrough of doNext(1) in the takeItem shit
 			
 			clearOutput();

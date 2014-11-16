@@ -28,9 +28,44 @@ package classes.Scenes.Explore {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class Giacomo extends BaseContent {
+	public class Giacomo extends BaseContent implements TimeAwareInterface {
 
-		public function Giacomo() {}
+		public function Giacomo() {
+			CoC.timeAwareClassAdd(this);
+		}
+		
+		private var checkedSuccubi:int;
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			checkedSuccubi = 0; //Make sure we test just once in timeChangeLarge
+			if (model.time.hours == 0) {
+				if (flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 0) flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] -= 0.5; //Reduce bad-end for cerulean herms number
+			}
+			return false;
+		}
+		
+		public function timeChangeLarge():Boolean {
+			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.findStatusAffect(StatusAffects.SuccubiNight) >= 0 && (player.hasCock() || player.gender == 0)) { //Call secksins!
+				if (player.findStatusAffect(StatusAffects.RepeatSuccubi) >= 0) {
+					if (getGame().vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) //VapulaSurprise
+						getGame().vapula.vapulaAssistsCeruleanSuccubus();
+					else nightSuccubiRepeat(); //Normal night succubi shit
+				}
+				else {
+					nightSuccubiFirstTime();
+					player.createStatusAffect(StatusAffects.RepeatSuccubi, 0, 0, 0, 0);
+				}
+				//Lower count if multiples stacked up.
+				if (player.statusAffectv1(StatusAffects.SuccubiNight) > 1)
+					player.addStatusValue(StatusAffects.SuccubiNight, 1, -1);
+				else player.removeStatusAffect(StatusAffects.SuccubiNight);
+				return true;
+			}
+			return false;
+		}
+		//End of Interface Implementation
 		
 		public function giacomoEncounter():void {
 			spriteSelect(23);
@@ -527,7 +562,7 @@ package classes.Scenes.Explore {
 			}
 		}
 		
-		public function nightSuccubiFirstTime():void {
+		private function nightSuccubiFirstTime():void {
 			spriteSelect(8);
 			outputText("\nAs you sleep, your rest becomes increasingly disturbed.  You feel a great weight on top of you and you find it difficult to breathe.  Stirred to consciousness, your eyes are greeted by an enormous pair of blue tinged breasts.  The nipples are quite long and thick and are surrounded by large, round areola.  A deep, feminine voice breaks the silence.  \"<i>I was wondering if you would wake up.</i>\"  You turn your head to the voice to see the visage of a sharp-featured, attractive woman.  The woman grins mischievously and speaks again.  \"<i>I was hoping that idiot, Giacomo, did not dilute the 'potion' again.</i>\"  Your campfire reflects off the woman's face and her beauty contains some sharply contrasting features.  The pupils of her eyes are slit like a cat's.  As she grins, she bares her teeth, which contain two pairs of long and short fangs.  This woman is clearly NOT human!  In shock, you attempt to get up, only prompting the woman to prove her inhuman nature by grabbing your shoulders and pinning you to the ground.  You see that each finger on her hand also contains a fourth joint, further proving her status.  Before you can speak a word, the woman begins mocking your fear and places her face in front of yours.  Her face is almost certainly demonic in nature.\n\n");
 			if (player.gender == 0) {
@@ -619,7 +654,7 @@ package classes.Scenes.Explore {
 			inventory.takeItem(consumables.CERUL_P, camp.campMenu);
 		}
 				
-		public function nightSuccubiRepeat():void {
+		private function nightSuccubiRepeat():void {
 			spriteSelect(8);
 			if(player.gender == 0) {
 				if(flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] == 0) {
