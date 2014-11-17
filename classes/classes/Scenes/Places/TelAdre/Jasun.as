@@ -39,8 +39,8 @@ public function changingRoom():void {
 		outputText("You enter back into the largest of the changing rooms. Everything seems to be as it was the last time you poked your head in here. Everything somehow stays so clean in this particular place despite that so much sex and debauchery goes down in this city. You find it all rather refreshing, quite honestly.", false);
 	}
 	//[Look Around]
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] == 0) simpleChoices("Look Around",meetJasun,"",0,"",0,"",0,"Leave",13);
-	else simpleChoices("Jasun",meetJasun,"",0,"",0,"",0,"Leave",13); 
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] == 0) simpleChoices("Look Around",meetJasun,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+	else simpleChoices("Jasun",meetJasun,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour); 
 }
 
 //AT CHANGING ROOM (SELECTING TO SEE THE SHARK OR LOOK AROUND IF FIRST TIME)
@@ -61,7 +61,7 @@ private function meetJasun():void {
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning back to the mirror.\n\n", false);
 			outputText("You doubt he'd have the nerve to murder someone here, but you feel like you've wasted your time.", false);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] = 0;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		//IF FEMALE
@@ -78,7 +78,7 @@ private function meetJasun():void {
 				//(+15 Lust, back to gym entrance)
 				dynStats("lus", (10+player.lib/10));
 				outputText("You book it out of there.  What a waste.", false);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//IF PASS FITNESS CHECK
@@ -90,7 +90,7 @@ private function meetJasun():void {
 				//(+15 Lust, back to gym entrance)
 				dynStats("lus", (10+player.lib/10));
 				outputText("You book it out of there.  What a waste.", false);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//IF YOU HAVE THE BIKINI ON
@@ -111,7 +111,7 @@ private function meetJasun():void {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it.  He glances your way and smirks.\n\n", false);
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning to walk away.\n\n", false);
 			outputText("You doubt he'd have the nerve to murder someone here, but you feel like you've wasted your time.", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		//IF YOU FAIL TO MEET ANY OF HIS CRITERIA NOW
@@ -125,7 +125,7 @@ private function meetJasun():void {
 			outputText(", we can go swim.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n", false);
 			//(-15 Lust, back to gym entrance)
 			dynStats("lus", -15);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		outputText("Jasun comes out of his stall and smiles when he sees you, already beginning to strain against the skimpy fabric of his bottom.  He asks, \"<i>Would you like to come swimming with me?</i>\" though his tone indicates that swimming may involve more than a few laps.", false);
@@ -139,7 +139,7 @@ private function meetJasun():void {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it.  He glances your way and smirks.\n\n", false);
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning to walk away.\n\n", false);
 			outputText("You doubt he'd have the nerve to murder someone here, but it's clear that so long as you lack a vagina Jasun will have no interest in you.  What a waste.", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		//IF YOU FAIL TO MEET ANY OF HIS CRITERIA NOW
@@ -149,7 +149,7 @@ private function meetJasun():void {
 			outputText("\"<i>" + player.short + ", you know, I see that a lot has changed with you. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe things will be like they were before in time.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n", false);
 			//(-15 Lust, back to gym entrance)
 			dynStats("lus", -15);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		//IF YOU MEET ALL CRITERIA STILL
@@ -182,7 +182,7 @@ private function turnAwayFromAdj():void {
 	outputText("\"<i>I understand,</i>\" he says dejectedly. He steps up and walks back toward the door. He perks up at the last minute, not letting his being rejected hurt his pride in the least, and says, \"<i>If you ever would like to swim, you know where to find me. Farewell.</i>\" He stands at the door and waits for you to leave before leaping into the water alone, as he has done no doubt many times in the past.\n\n", false);
 	//(Back to gym entrance)
 	outputText("You book it out of there.  What a waste.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	return;
 }
 
@@ -231,7 +231,7 @@ private function jasunSecks():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180]++;
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

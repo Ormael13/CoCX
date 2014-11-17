@@ -87,7 +87,7 @@ package classes.Scenes.Places.TelAdre{
 				outputText("  You should try talking to Urta or Edryn; they might be able to help you see if there’s a way to get Katherine into the watch.");
 				flags[kFLAGS.KATHERINE_TRAINING] = 2; //Player will now be able to talk to Edryn and/or Urta about Kath
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		} //KATHERINE_TRAINING gets set to 1 by talking to her about vagrancy
 
 		public function canTalkToEdryn():Boolean {
@@ -201,7 +201,7 @@ package classes.Scenes.Places.TelAdre{
 			}
 			outputText("Having made your point, you say your goodbye and return to camp.");
 			flags[kFLAGS.KATHERINE_TRAINING] |= KBIT_TRAINING_TALK_KATH; //Using a mask so we still know if you’ve talked to Urta. This is important if she’s a lover.
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function initiateTraining():Boolean
@@ -277,7 +277,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You give Kath some more survival instruction while she breaks the tent back down.  Another long march back to the city and Kath is panting by the time you reach the gates.\n\n");
 			outputText("She squeezes your hand and thanks you again for doing this, even if she’s not exactly enjoying it she’s going to keep trying until she can pass that test.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 10;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingStage1Failure():void
@@ -290,7 +290,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("Before returning to Tel’Adre you go over all the mistakes Kath made so that she understands what she did wrong and will be less likely to screw up next time.\n\n");
 			outputText("You almost have to carry her back to the alley behind Oswald’s shop.  Kath flops down onto some softer refuse and curls up for what promises to be a long nap.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 5;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingStage1Horny():void
@@ -323,7 +323,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("When Kath starts to tire you tell her she did well today and pack up the training aids.  If she keeps showing this kind of improvement it won’t take long before she’s a match for any criminal in Tel’Adre and many monsters outside it.\n\n");
 			outputText("She beams at the compliment and the two of you walk back to Tel'Adre arm in arm.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 10;
-			doNext(14); //Use up two hours, go back to camp
+			doNext(camp.returnToCampUseTwoHours); //Use up two hours, go back to camp
 		}
 
 		private function katherineTrainingStage2Failure():void
@@ -335,7 +335,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("When you switch back to the training swords Kath does a bit better.  At least she’s not messing up her blocks as often.  She would still lose in most fair fights but you think she’s learning.\n\n");
 			outputText("When Katherine is tired enough that you can’t continue you pack up and head back for Tel’Adre.  It hasn’t been the best training session, but you know you managed to get some things across.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 5;
-			doNext(14); //Use up two hours, go back to camp
+			doNext(camp.returnToCampUseTwoHours); //Use up two hours, go back to camp
 		}
 
 		private function katherineTrainingStage2Horny():void
@@ -391,7 +391,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You go through a number of other scenarios with her, all based on the rules and cases you researched at the library.  Kath makes mistakes but rarely makes them twice and through it all she maintains the bearing expected of a watch officer.\n\n");
 			outputText("You leave Katherine to practice by herself for a while, thinking that teaching her how to behave might not take as long as you imagined.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 10;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingStage3Failure():void
@@ -405,7 +405,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("As you walk towards the city gates you feel you’ve made little progress today, but what progress you did make was hard won.  Katherine will make it, she just needs more time and training.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 5;
 			if (flags[kFLAGS.KATHERINE_TRAINING] > 99) flags[kFLAGS.KATHERINE_TRAINING] = 99; //Only a successful training session should lead to her completing her training next time.
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -515,7 +515,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("Kath nods and says to you “<i>Yes, there’s so much to do.  I’ve got to get going.</i>”  She gives you another kiss and you can feel a certain bulge pressing against your hip.  “<i>I don’t know where my house will be yet, but Captain Urta is going to be making sure I settle in, so I’ll be here at the bar filling out reports from time to time.</i>”\n\n");
 			outputText("She says, “<i>Thank you,</i>” again, kisses you again and then races off down the street.  Urta gives you a hug and says, “<i>She’s got a lot of energy that one.  I can see why you like her.</i>”  You can feel her horsecock pressing against you as she continues.  “<i>I’m going to get to know her pretty well on the job.  I understand if you don’t want to share - but it sure would be fun.</i>”\n\n");
 			outputText("You run an hand through Urta’s fur and thank her for being so understanding.  Unfortunately you have stayed in town quite a while so you decide that you have to head back to camp to check up on the portal.");
-			doNext(15); //Use up 4 hours, go back to camp
+			doNext(camp.returnToCampUseFourHours); //Use up 4 hours, go back to camp
 		}
 	
 	
@@ -525,7 +525,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You go back to Kath’s alley and pace back and forth, waiting.  Hours later Kath races into the alley and leaps into your arms, nearly knocking you off your feet.  “<i>I did it!  I did it!</i>” she cries while hugging you tight enough to squeeze the breath out of you.  “<i>Oh thank you " + player.short + ", I couldn’t have done it without you.  The tests were hard but I knew what she wanted.</i>”\n\n");
 			outputText("You stroke her hair and Katherine finally calms down enough to show you her new badge.  “<i>I’m starting tomorrow.  Oh - and that’s not even the best part.  I didn’t know about this, but because I’m in the watch they can give me papers that show I have a good job, that I’m a good citizen.  I forget what it’s called, but it means I’ll be able to get a house really soon cause they know I’m good for it and I’ll be earning a wage.</i>”\n\n");
 			outputText("She looks around at the alley and says, “<i>We had some fun times here, but I won’t miss living on the street.</i>”  She gives you a kiss and adds, “<i>I have to run.  I’ve got equipment to pick up and patrol routes to memorize.  Next time you’re in town look for me at the wet bitch, I’ll try to hang around there.</i>”");
-			doNext(15); //Use up 4 hours, go back to camp
+			doNext(camp.returnToCampUseFourHours); //Use up 4 hours, go back to camp
 		}
 		
 		private function katherineTrainingCompleteUrtaThoughtYouDidntLikeHer():void
@@ -556,7 +556,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("There’s an awkward silence for a few moments.  Then Urta says, “<i>Well you sure seem to be good for Kath.  Anyone who can take a street urchin and train her up into a fine watch recruit is in my good books.  Come and talk to me anytime.</i>”");
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 0; //This pair of values can't happen any other way. It puts Urta into friend mode. She is willing to talk
 			flags[kFLAGS.URTA_PC_LOVE_COUNTER] = -1;          //about Kath and share some things about herself but doesn’t assume you want sex when you visit.
-			doNext(15); //Use up 4 hours, go back to camp
+			doNext(camp.returnToCampUseFourHours); //Use up 4 hours, go back to camp
 		}
 
 		private function destroyUrta():void
@@ -564,7 +564,7 @@ package classes.Scenes.Places.TelAdre{
 			clearOutput();
 			outputText("She’s been giving you the cold shoulder all this time and <b>now</b> she wants to make up?  Fuck this fox bitch!  You tell Urta in no uncertain terms that you don't hate herms - you hate her.  She’s a drunk, pushy, ugly bitch and no one will ever love her.  She makes you sick and she’d better leave you and your girl alone.\n\n");
 			outputText("Urta looks like she’s about to fly into a rage, but instead you see tears forming in the corners of her eyes.  Soon she’s sobbing into her drink.  You walk out of the bar and head back to camp, sure that Urta is too devastated to ever talk about this to Kath.");
-			doNext(15); //Use up 4 hours, go back to camp
+			doNext(camp.returnToCampUseFourHours); //Use up 4 hours, go back to camp
 		}
 
 		private function trainKathWithUrta():void
@@ -612,7 +612,7 @@ package classes.Scenes.Places.TelAdre{
 			clearOutput();
 			outputText("Perhaps some other time...  You shake your head and tell Urta that, for now, this is all you had to discuss with her.\n\n");
 			outputText("Urta sighs softly, slumping.  “<i>Okay, lover.  Business before pleasure, I can understand that.  I’ll see you around, okay?</i>”  She concludes in a hopeful tone.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	
 		private function initiateTrainingWithUrta():void
@@ -722,7 +722,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You promptly leave, hoping that the two will be able to come to terms somehow while you’re not there.");
 			flags[kFLAGS.KATHERINE_UNLOCKED] = 3; //Indicates you’re now training her with Urta - This also disables meeting Urta in the Wet Bitch
 			flags[kFLAGS.KATHERINE_TRAINING] = 0;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function katherineTrainingWithUrta():void {
@@ -784,7 +784,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("“<i>Alright, you’re on; I hope you got room for all I’ve got!</i>” Kath cries excitedly, then practically throws herself at the tent equipment.  You sigh and roll your eyes in exasperation; well, either Kath will learn, or she might actually win by sheer dumb luck.  Either way, you decide it’s time you left and gave them a chance to get on with it.\n\n");
 			outputText("You bid farewell to Urta and wish Kath luck, then twists the knob and see yourself out...");
 			flags[kFLAGS.KATHERINE_TRAINING] += 16;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingWithUrtaStage1Failure():void
@@ -801,7 +801,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("“<i>Okay, that’s enough of the fluffy stuff, time to get back to work!</i>” Urta snaps, breaking up your little moment.  Doubtlessly, she’s still not entirely comfortable with seeing you being affectionate with someone else in front of her - and the fact she and Kath aren’t getting along isn't helping, naturally.\n\n");
 			outputText("Feeling like there’s nothing else to be done here at the moment, you bid the girls farewell and return to camp.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 8;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingWithUrtaStage1Horny():void
@@ -849,7 +849,7 @@ package classes.Scenes.Places.TelAdre{
 				outputText("\n\nFiguring you have other things to attend to, and that it gives them a better excuse to bond, you politely tell them that you have to go and then leave.");
 			outputText("\n\nBy this time, both of them are starting to moan, Kath’s dark fingers clenching around the red flesh of Urta’s horse prick and beginning to slide up and down its formidable length; you doubt they even notice you going.");
 			katherine.katherineAndUrtaHadSex(false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function katherineTrainingWithUrtaStage1HornyHelp():void
@@ -870,7 +870,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("“<i>Both of us at the same time?</i>” Urta slowly states, “<i>...You’re kinkier than I thought, pussycat.</i>”\n\n");
 			outputText("“<i>Then why are you getting hard at the idea, prickvixen?</i>”\n\n");
 			outputText("Uuuh... looks like you’d better be going.  Looking around you quickly spot your " + player.armorName + " and get dressed, then bid the girls farewell, hurrying away back to camp before they get any more ideas.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingWithUrtaStage2():void
@@ -910,7 +910,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("The fox-herm lays there on the floor, looking quite stunned indeed.  She finally shakes her head and looks up at Kath.  “<i>I can’t believe that happened - do you know nobody’s ever beaten me before?  Nice job, Kath.</i>”\n\n");
 			outputText("You applaud the cat-herm, clearly the plan worked flawlessly.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 16;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingWithUrtaStage2Failure():void
@@ -923,7 +923,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("Urta just shakes her head.  “<i>Anyway, not a bad move, kitty; if I hadn’t noticed what you were trying, you would have beaten me with that move for sure.  Need to work on your speed,</i>” she concludes.\n\n");
 			outputText("Kath sighs and says, “<i>Well... is some water too much to ask for?</i>”  You promptly head over to the makeshift kitchen, filling a glass from a sizable jug of water there and bring it to her.  Katherine thanks you and proceeds to eagerly drink it down.  When she’s done she gasps for air and wipes her mouth.  “<i>Alright, I’ll keep working on this until I beat you, foxy!</i>” she vows, dramatically pointing a finger at an amused-looking Urta.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 8;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingWithUrtaStage2Horny():void
@@ -948,7 +948,7 @@ package classes.Scenes.Places.TelAdre{
 				outputText("\n\nYou’ve already been away from camp for a while.  You need to get back there and check on the portal.  Besides, Kath and Urta are getting along with each other better every time they have sex.  Katherine starts to lick at one of Urta’s nipples.");
 			outputText("  Urta tries to fight her off, calling out, “<i>" + player.short + "!  I need some backup here.  This is <b>your</b> cock hungry kitty.</i>”  Urta tries to bat Kath’s arms away but she’s clearly turned on and you slip out before you get too horny to leave.  You’re sure they’re getting along just fine without you.");
 			katherine.katherineAndUrtaHadSex(false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingWithUrtaStage3():void
@@ -999,7 +999,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("Kath hugs Urta even harder at that, and starts to purr - much to Urta’s surprise, from the look on the vulpine herm’s face.  You repress a smile and tell Kath and Urta that, if they don’t need you anymore, you’ll head back to camp for now.\n\n");
 			outputText("“<i>Ah, sure, " + player.short + ", go ahead,</i>” Urta replies in a distracted tone, still cuddling the purring cat-herm and looking kind of spooked at the fact.  You wish Kath luck in her upcoming tests, and then head back to camp.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 16;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingWithUrtaStage3Failure():void
@@ -1033,7 +1033,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("“<i>You just better bring that sweet ass of yours around some time soon, y’hear?</i>” Urta adds.  She really must be pent up to overcome her shyness and be that direct in public.");
 			flags[kFLAGS.KATHERINE_TRAINING] += 8;
 			if (flags[kFLAGS.KATHERINE_TRAINING] > 99) flags[kFLAGS.KATHERINE_TRAINING] = 99; //Only a successful training session should lead to her completing her training next time.
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function katherineTrainingWithUrtaStage3Horny():void
@@ -1104,7 +1104,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You apologise to the amorous herms, but you really have to be going...\n\n");
 			outputText("“<i>Aw...</i>” the two sigh, clearly disappointed.  “<i>Well, I guess we’ll just try to have fun without you... but we’ll miss you,</i>” Urta says.  “<i>Yeah, so hurry back, lover,</i>” Kath winks, right before Urta reaches up and, to Kath’s own visible surprise, pulls her into a kiss... damn, but she must be drunk.\n\n");
 			outputText("On the way out, you pay your tab and wave to the two girls, who seem too busy with each other to notice... well... you’ll just find out how this ends via gossip later...");
-			doNext(15); //Return to camp, use up four hours
+			doNext(camp.returnToCampUseFourHours); //Return to camp, use up four hours
 		}
 
 		private function katherineTrainingWithUrtaCompleteStay():void

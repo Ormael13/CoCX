@@ -27,8 +27,8 @@ package classes.Scenes.Places.TelAdre
 			var race3:String = race.substr(0, 3); //Tests for cat, dog, fox
 			var race6:String = race.substr(0, 6); //Tests for dragon, drider, ferret, spider
 			if (race3 == "cat" || race3 == "dog" || race3 == "fox" || race6 == "dragon" || race6 == "drider" || race6 == "ferret" || race6 == "spider" || race == "naga" || race == "kitsune" || race == "demon-morph" || race == "shark-morph" || race.search("lizan") > -1)
-				outputText(", careful not to hurt her with your sharp teeth.");
-			outputText("\n\nUrta giggles.  “<i>Frisky [boy]... mmm, you always did know how to get me ready, didn’t you?</i>” she asks, tail wagging softly behind her, indirectly patting you with its soft, fluffy mass.  Through all this her hand remains firmly attached to Kath’s dick, and she begins to gently slide it up and down, stroking with the ease of someone who has a lot of practice on their own dick.\n\n");
+				outputText(", careful not to hurt her with your sharp teeth");
+			outputText(".\n\nUrta giggles.  “<i>Frisky [boy]... mmm, you always did know how to get me ready, didn’t you?</i>” she asks, tail wagging softly behind her, indirectly patting you with its soft, fluffy mass.  Through all this her hand remains firmly attached to Kath’s dick, and she begins to gently slide it up and down, stroking with the ease of someone who has a lot of practice on their own dick.\n\n");
 			outputText("Urta’s fluffy tail patting you down, is enough to get you in the mood; ");
 			if (player.hasCock()) outputText("[cocks] erect, nice and ready for what’s to come;");
 			if (player.hasVagina()) outputText("your pussy drenched with your juices, some of it dripping on Urta’s tail;");
@@ -64,12 +64,23 @@ package classes.Scenes.Places.TelAdre
 			outputText("“<i>You cheated, " + player.short + "!</i>” Urta complains.\n\n");
 			outputText("“<i>Yeah, what she said!</i>” Kath agrees.\n\n");
 			outputText("Cheated!?  Feigning hurt, you tell them you would never do something like that!  Especially not when it involves a special prize, such as their undivided attention as they focus on YOUR orgasm... speaking of which...  you will be taking your prize right now if they don’t mind.  Getting up and stepping up towards Urta and Kath you raise a brow as if questioning when do they intend to get started.\n\n");
-			outputText("They look at each other, look at you, then look at each other again and grin.  “<i>Alright... if you insist...</i>” they say, their tones ringing with blatantly false innocence, before they suddenly get on all fours, slinking towards you.  Uh oh... you barely have time turn tail and run before you see a pair of blurs, one black and the other gray, jump right at you; with a scream you’re dragged to the ground, in a frenzy of cum-slickened limbs, touching, caressing and kissing.  You moan as a pair of lips close on your own, so overwhelmed you are that you can’t tell who it is, until a canine tongue intrudes upon your mouth.  You kiss Urta back with abandon, moments later she breaks the kiss, only for her lips to be replaced with Kath’s as she kisses and humps you.\n\nYou feel the cum soaking their bodies rubbing off on your own, their breasts massaging your " + (player.hasBreasts() ? player.breastDescript(0) : "chest") + ".  For a moment you feel utter bliss, and then an explosion...\n\n");
-			if (player.cumQ() < 500)
-				outputText("Rope upon rope of hot, white jism erupts from your [cocks] arching through the air to fall back on the three of you.  Adding another small layer of white to your entwined bodies.  Urta and Kath both look at you with wanton eyes, and you know this isn’t finished yet...");
-			else if (player.cumQ() < 1500)
-				outputText("A fountain of cum sprays into the air, raining down upon you and your lovers.  Your [cocks] twich against the lovely ladies, rubbing you all over.  With a groan you force one last spray out of your cock.  You see the white rope of cum arch and fall, heading towards your face only to be stopped by Kath’s head as she kisses you once more; the rope splattering against the back of her head, only to be licked off by Urta, who eyes you with hunger still...");
-			else outputText("A veritable eruption soars forth from your [cocks] spurting so far up, you fear you might end up painting the ceiling; a continuous rope of white spunk falls over you and your lovers, further contributing to the mess and hosing their bodies down with your own orgasm.  You can’t help but look up in bliss, moaning as the girls take turn licking your body and face, until finally, one last spray falls on your chin, only to be licked off by a pair of tongues, who proceed to fight for the last in a kiss, each trying to one-up the other and catch the last drop of cum.  You don’t know who wins... but moments later, they look at you with hunger in their eyes... even after all this, they are not sated yet...");
+			outputText("They look at each other, look at you, then look at each other again and grin.  “<i>Alright... if you insist...</i>” they say, their tones ringing with blatantly false innocence, before they suddenly get on all fours, slinking towards you.  Uh oh... you barely have time turn tail and run before you see a pair of blurs, one black and the other gray, jump right at you; with a scream you’re dragged to the ground, in a frenzy of cum-slickened limbs, touching, caressing and kissing.  You moan as a pair of lips close on your own, so overwhelmed you are that you can’t tell who it is, until a canine tongue intrudes upon your mouth.  You kiss Urta back with abandon, moments later she breaks the kiss, only for her lips to be replaced with Kath’s as she kisses and humps you.\n\nYou feel the cum soaking their bodies rubbing off on your own, their breasts massaging your " + (player.hasBreasts() ? player.breastDescript(0) : "chest") + ".  For a moment you feel utter bliss, and then ");
+			if (player.hasCock() && player.hasVagina()) { //Herm
+				outputText("you're overcome.  Your pussy and hips lock up and you dribble femcum as Urta and Kath's efforts pay off.  You feel hot liquid rushing up from your " + (player.balls > 0 ? "balls" : "prostate") + ", then an explosion...\n\n");
+			}
+			else if (player.hasVagina()) { //Female
+				outputText("you're overcome.  Your pussy and hips lock up and you dribble femcum as Urta and Kath's efforts pay off.\n\n");
+			}
+			else { //Male
+				outputText("an explosion...\n\n");
+			}
+			if (player.hasCock()) { //Male or herm
+				if (player.cumQ() < 500)
+					outputText("Rope upon rope of hot, white jism erupts from your [cocks] arching through the air to fall back on the three of you.  Adding another small layer of white to your entwined bodies.  Urta and Kath both look at you with wanton eyes, and you know this isn’t finished yet...");
+				else if (player.cumQ() < 1500)
+					outputText("A fountain of cum sprays into the air, raining down upon you and your lovers.  Your [cocks] twich against the lovely ladies, rubbing you all over.  With a groan you force one last spray out of your cock.  You see the white rope of cum arch and fall, heading towards your face only to be stopped by Kath’s head as she kisses you once more; the rope splattering against the back of her head, only to be licked off by Urta, who eyes you with hunger still...");
+				else outputText("A veritable eruption soars forth from your [cocks] spurting so far up, you fear you might end up painting the ceiling; a continuous rope of white spunk falls over you and your lovers, further contributing to the mess and hosing their bodies down with your own orgasm.  You can’t help but look up in bliss, moaning as the girls take turn licking your body and face, until finally, one last spray falls on your chin, only to be licked off by a pair of tongues, who proceed to fight for the last in a kiss, each trying to one-up the other and catch the last drop of cum.  You don’t know who wins... but moments later, they look at you with hunger in their eyes... even after all this, they are not sated yet...");
+			}
 			outputText("The two morphic herms moan and growl lustily, eagerly rubbing their stiff, mismatched dicks across your stomach, your " + (player.hasBreasts() ? player.breastDescript(0) : "chest") + ", your [hips]");
 			if (player.hasCock()) outputText(" and especially against your " + player.cockDescript());
 			outputText("; pressed up against you like they are, you can feel their cocks pulsing, their balls swelling...\n\n");
@@ -88,7 +99,7 @@ package classes.Scenes.Places.TelAdre
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3) {
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-				doNext(13); //An additional scene plays afterward if Kath is still being trained by Urta
+				doNext(camp.returnToCampUseOneHour); //An additional scene plays afterward if Kath is still being trained by Urta
 			}
 		}
 	
@@ -133,7 +144,7 @@ package classes.Scenes.Places.TelAdre
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function roastYou():void {
@@ -238,7 +249,7 @@ package classes.Scenes.Places.TelAdre
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function spitroastKath():void { //Works for all except genderless characters
@@ -299,7 +310,7 @@ package classes.Scenes.Places.TelAdre
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function pinAndFuck():void { //Kath is sober, Urta is drunk
@@ -385,7 +396,7 @@ package classes.Scenes.Places.TelAdre
 			player.orgasm();
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function pinAndFuckStuffKath():void { //Plays for any males and for herms who select this option
@@ -431,7 +442,7 @@ package classes.Scenes.Places.TelAdre
 
 			outputText("You lock the door on the way out, " + (flags[kFLAGS.KATHERINE_URTA_AFFECTION] >= 31 ? "knowing that with those two the sex option will eventually win out." : "hoping your sated girlfriends will bond over this."));
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function watch():void { //Kath is sober, Urta is drunk
@@ -463,7 +474,7 @@ package classes.Scenes.Places.TelAdre
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			dynStats("lus", 20 + player.lib / 20);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function knothole():void { //Kath is drunk, Urta is sober
@@ -503,7 +514,7 @@ package classes.Scenes.Places.TelAdre
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function sandwich():void { //Kath is drunk, Urta is sober
@@ -632,7 +643,7 @@ package classes.Scenes.Places.TelAdre
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function orgy():void { //Both Kath and Urta are drunk
@@ -686,7 +697,7 @@ package classes.Scenes.Places.TelAdre
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(14);
+			doNext(camp.returnToCampUseTwoHours);
 		}
 
 
@@ -761,7 +772,7 @@ package classes.Scenes.Places.TelAdre
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.urtaLove(1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function doublePenetrateKath():void { //Both Kath and Urta are drunk
@@ -848,7 +859,7 @@ package classes.Scenes.Places.TelAdre
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function doubleStuffVala():void {
@@ -883,7 +894,7 @@ package classes.Scenes.Places.TelAdre
 			katherine.orgasm();
 			katherine.katherineAndValaHadSex();
 			flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function eatOutVala():void {
@@ -903,7 +914,7 @@ package classes.Scenes.Places.TelAdre
 			katherine.orgasm();
 			katherine.katherineAndValaHadSex();
 			flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function valaCommonStart():void {

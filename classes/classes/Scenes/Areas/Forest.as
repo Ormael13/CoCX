@@ -17,6 +17,7 @@ package classes.Scenes.Areas
 	{
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
+		public var corruptedGlade:CorruptedGlade = new CorruptedGlade();
 		public var essrayle:Essrayle = new Essrayle();
 		public var faerie:Faerie = new Faerie();
 		public var kitsuneScene:KitsuneScene = new KitsuneScene();
@@ -62,7 +63,7 @@ package classes.Scenes.Areas
 			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 5 == 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
 				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.", true);
 				outputText("\n\n<b>You've discovered the location of Zetaz's lair!</b>", false);
-				simpleChoices("Enter", 11076, "", 0, "", 0, "", 0, "Leave", 13);
+				simpleChoices("Enter", 11076, "", 0, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
 				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ]++;
 				return;
 			}
@@ -100,11 +101,11 @@ package classes.Scenes.Areas
 				if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 					trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 					outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", true);
-					simpleChoices("Continue", 2009, "", 0, "", 0, "", 0, "Leave", 13);
+					simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 					return;
 				}
 				else {
-					eventParser(2009);
+					eventParser(tentacleBeastScene.encounter);
 					return;
 				}
 			}
@@ -114,51 +115,7 @@ package classes.Scenes.Areas
 					trappedSatyr();
 					return;
 				}
-				spriteSelect(92);
-				outputText("Walking through the woods, you find a damp patch overgrown with corrupted plant-life.  Every flower seems warped into a colorful imitation of female genitals, each vine appears throbbing and veiny, and every knot on the nearby trees is capped with a nipple-like protrusion, leaking dark sap.", true);
-				//disgusted reaction
-				if (player.cor <= 33) {
-					//Get plant-cum dripped on you if not fast and unlucky!
-					if (player.spe < 60 && rand(player.spe + 50) < 50) {
-						outputText("  Disgusted by this perversion of nature, you turn to leave, catching a faceful of the white goop that's spurting down from the vines above!  It's slimy, gross, and difficult to clear from your eyes, nose, and mouth.  The musky smell and delicious salty flavor are undoubtedly a result of the plant's corruption.  You escape the tainted glade, but feel warmer and warmer as time passes...", false);
-						dynStats("lus", 20 + player.lib / 5);
-					}
-					else {
-						outputText("  Disgusted by this perversion of nature, you turn away to leave, narrowly avoiding a sudden dripping of thick white fluid from the vines overhead.", false);
-						dynStats("lus", 2);
-					}
-					doNext(13);
-					return;
-				}
-				//intrigued reaction
-				if (player.cor > 33 && player.cor <= 66) {
-					outputText("  You explore the glade with equal parts caution and curiosity.  ", false);
-					temp2 = rand(3);
-					//flowers...
-					if (temp2 == 0) {
-						outputText("A group of perverted looking flowers catch your eye, leading you to bend closer for a better look at the intricately folded petals, noting the beads of slick moisture that seem to perspire from inside the plant.  Awed by the corrupt yet beautiful flower, you take a deep breath, inhaling a lungful of its pungent yet sweet scents.  It matches the flower somehow, lingering in your nose even after you pull away.  The smell makes you wonder just how functional the pussy flowers are, as they do have fairly large stalks.\n\nYou sigh and take one last sniff from the flower's honeypot before moving on.  Your body flushes happily with desire as your blood pools in your groin.  You giggle, wishing you could feel like this more often.", false);
-						dynStats("lus", 20 + player.lib / 5, "cor", .5);
-					}
-					//vines...
-					if (temp2 == 1) {
-						outputText("A few vines dangling from the trees catch your eye due to their rather 'unique' tips.  Every single one of them ends in a flared mushroom-like head, each twice as wide as the already thick vine.  You touch a vine gently, musing at its slippery texture and how similar it would be to a penis if the 'head' were smaller.  You encircle the vine with your hand, stroking it and giggling at the absurdity of this place.  The vine suddenly flexes in your grasp, pulsating and contracting as its head grows bigger, turning shiny and red.  Pulling away in shock, you gasp as the vine begins spurting out huge ropes of thick viscous fluid, splattering everywhere.  The plant-gasm ends as suddenly as it started, the 'head' retaining the size it gained and dripping the last of its strange load.  Overcome with curiosity, you sniff at the dripping spunk and swoon at the overpoweringly musky scent.  Gathering your wits, you decide to leave before you end up with one of those inside you.  You escape the corrupted glade, but stay flushed with arousal.", false);
-						dynStats("lus", 20 + player.lib / 5, "cor", .5);
-					}
-					//trees...
-					if (temp2 == 2) {
-						outputText("A cluster of huge breast-like knots on a nearby tree draws your attention.  Unable to resist, you poke one, and burst into giggles as it jiggles like a real breast!  You cautiously begin groping the tree-tit, and smile as it begins leaking sweet-smelling sap.  The scent conjures memories of helping to make maple syrup back home, and before you realize it, you've gathered a drop of the sap on your finger and tasted it.  It's powerfully sweet, making your tongue tingle and heart beat faster.  Unbidden, the thought of suckling the teat dry of its sweet treat comes to mind, but you manage to reject it and stumble away from the corrupted glade.  You have trouble with your tongue for the next hour: it won't stay in your mouth, and keeps licking your lips, seeking any leftover sweetness.  It almost distracts you from the palpable heat gathering between your thighs.", false);
-						dynStats("lus", 20 + player.lib / 5, "cor", .5);
-					}
-					doNext(13);
-					return;
-				}
-				//drink sap/lick flower reaction
-				if (player.cor > 66 && player.cor <= 100) {
-					outputText("  You smile as you enter the glade, wondering which of the forbidden fruits you should try...\n\nThere are flowers that bear more than a passing resemblance to pussies,\nvines with absurdly large penis-like tips,\nand trees covered in breast-like knots, leaking sap.", false);
-					simpleChoices("Flowers", 2012, "Vines", 2013, "Trees", 2084, "", 0, "Leave", 13);
-					return;
-				}
-				//Wallow in decadence reaction - UNFINISHED
+				corruptedGlade.intro();
 			}
 			if (chooser == 3) {
 				akbalScene.supahAkabalEdition();
@@ -205,7 +162,7 @@ package classes.Scenes.Areas
 			if ((player.exploredForest >= 20) && player.findStatusAffect(StatusAffects.ExploredDeepwoods) < 0) {
 				player.createStatusAffect(StatusAffects.ExploredDeepwoods, 0, 0, 0, 0);
 				outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n<b>Deepwoods exploration unlocked!</b>", true);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//Essy every 20 explores or so
@@ -228,7 +185,7 @@ package classes.Scenes.Areas
 				outputText("\n\nShe goes up to the imp, and kicks it once.  Satisfied that the creature isn't moving, she turns around to face you and gives you a smile.  \"<i>Sorry about that, but I prefer to take care of these buggers quickly.  If they get the chance to call on their friends, they can actually become a nuisance.</i>\"  She disappears back into the foliage briefly before reappearing holding two large pile of logs under her arms, with a fire axe and her hammer strapped to her back.  \"<i>I'm gathering firewood for the farm, as you can see; what brings you to the forest, sweetie?</i>\"  You inform her that you're just exploring.");
 				outputText("\n\nShe gives a wistful sigh. \"<i>I haven't really explored much since getting to the farm.  Between the jobs Whitney gives me, keeping in practice with my hammer, milking to make sure I don't get too full, cooking, and beauty sleep, I don't get a lot of free time to do much else.</i>\"  She sighs again.  \"<i>Well, I need to get this back, so I'll see you later!</i>\"");
 				//end event
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			if (chooser == 0) {
@@ -292,7 +249,7 @@ package classes.Scenes.Areas
 				}
 			}
 			if (chooser == 1) {
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				outputText("", true);
 				
 				if (kGAMECLASS.monk == 0) 
@@ -309,7 +266,7 @@ package classes.Scenes.Areas
 						{
 							outputText("You enjoy a peaceful walk in the woods.  It gives you time to think over the recent, disturbing events.", true);
 							dynStats("tou", .5, "int", 1);
-							doNext(13);
+							doNext(camp.returnToCampUseOneHour);
 							return;
 						}
 					}
@@ -322,11 +279,11 @@ package classes.Scenes.Areas
 					outputText("\n\nJojo sighs sadly, \"<i>Enough of my woes.  You are very corrupted.  If you cannot be sufficiently purified you WILL become one of them in time.  Will you let me help you?", false);
 					if (player.gender > 0) {
 						trace("Gender != 0");
-						simpleChoices("Accept", 2003, "Rape Him", kGAMECLASS.jojoScene.jojoRape, "BWUH?", 0, "Decline", 13, "", 0);
+						simpleChoices("Accept", getGame().jojoScene.meditateInForest, "Rape Him", getGame().jojoScene.jojoRape, "BWUH?", 0, "Decline", camp.returnToCampUseOneHour, "", 0);
 					}
 					else {
 						trace("Gender == 0");
-						simpleChoices("Accept", 2003, "Rape Him", 0, "BWUH?", 0, "Decline", 13, "", 0);
+						simpleChoices("Accept", getGame().jojoScene.meditateInForest, "Rape Him", 0, "BWUH?", 0, "Decline", camp.returnToCampUseOneHour, "", 0);
 					}
 					return;
 				}
@@ -335,14 +292,14 @@ package classes.Scenes.Areas
 						kGAMECLASS.jojoScene.jojoSprite();
 						outputText("As you approach the serene monk, you see his nose twitch, disturbing his meditation.\n\n", true);
 						outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body.</i>\", Jojo says flatly. \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may leave lasting impressions upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
-						if (player.gender > 0) simpleChoices("Purge", 2083, "Meditate", 2003, "Rape", kGAMECLASS.jojoScene.jojoRape, "", 0, "Leave", 13);
-						else simpleChoices("Purge", 2083, "Meditate", 2003, "Rape", 0, "", 0, "Leave", 13);
+						if (player.gender > 0) simpleChoices("Purge", getGame().jojoScene.wormRemoval, "Meditate", getGame().jojoScene.meditateInForest, "Rape", getGame().jojoScene.jojoRape, "", 0, "Leave", camp.returnToCampUseOneHour);
+						else simpleChoices("Purge", getGame().jojoScene.wormRemoval, "Meditate", getGame().jojoScene.meditateInForest, "Rape", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
 						return;
 					}
 					kGAMECLASS.jojoScene.jojoSprite();
 					outputText("Jojo the monk appears before you, robes and soft white fur fluttering in the breeze.  He asks, \"<i>Are you ready for a meditation session?</i>\"", false);
-					if (player.gender > 0) simpleChoices("Yes", 2003, "No", 13, "BWUH", 0, "Rape Him", kGAMECLASS.jojoScene.jojoRape, "", 0);
-					else simpleChoices("Yes", 2003, "No", 13, "BWUH", 0, "Rape Him", 0, "", 0);
+					if (player.gender > 0) simpleChoices("Yes", getGame().jojoScene.meditateInForest, "No", camp.returnToCampUseOneHour, "BWUH", 0, "Rape Him", getGame().jojoScene.jojoRape, "", 0);
+					else simpleChoices("Yes", getGame().jojoScene.meditateInForest, "No", camp.returnToCampUseOneHour, "BWUH", 0, "Rape Him", 0, "", 0);
 				}
 				if (kGAMECLASS.monk >= 2) {
 					kGAMECLASS.jojoScene.jojoSprite();
@@ -365,11 +322,11 @@ package classes.Scenes.Areas
 					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 						trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 						outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", false);
-						simpleChoices("Continue", 2009, "", 0, "", 0, "", 0, "Leave", 13);
+						simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 						return;
 					}
 					else {
-						eventParser(2009);
+						eventParser(tentacleBeastScene.encounter);
 						return;
 					}
 				}
@@ -387,7 +344,7 @@ package classes.Scenes.Areas
 						outputText("", false);
 						dynStats("tou", .5, "lib", .25, "lus", player.lib / 5);
 					}
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				//CORRUPTED GLADE
@@ -396,57 +353,13 @@ package classes.Scenes.Areas
 						trappedSatyr();
 						return;
 					}
-					spriteSelect(92);
-					outputText("Walking through the woods, you find a damp patch overgrown with corrupted plant-life.  Every flower seems warped into a colorful imitation of a female's genitals, each vine appears throbbing and veiny, and every knot on the nearby trees is capped with a nipple-like protrusion, leaking dark sap.", false);
-					//disgusted reaction
-					if (player.cor <= 33) {
-						//Get plant-cum dripped on you if not fast and unlucky!
-						if (player.spe < 60 && rand(player.spe + 50) < 50) {
-							outputText("  Disgusted by this perversion of nature, you turn to leave, catching a faceful of the white goop that's spurting down from the vines above!  It's slimy, gross, and difficult to clear from your eyes, nose, and mouth.  The musky smell and delicious salty flavor are undoubtedly a result of the plant's corruption.  You escape the tainted glade, but feel warmer and warmer as time passes...", false);
-							dynStats("lus", 20 + player.lib / 5);
-						}
-						else {
-							outputText("  Disgusted by this perversion of nature, you turn away to leave, narrowly avoiding a sudden dripping of thick white fluid from the vines overhead.", false);
-							dynStats("lus", 2);
-						}
-						doNext(13);
-						return;
-					}
-					//intrigued reaction
-					if (player.cor > 33 && player.cor <= 66) {
-						outputText("  You explore the glade with equal parts caution and curiosity.  ", false);
-						temp2 = rand(3);
-						//flowers...
-						if (temp2 == 0) {
-							outputText("A group of perverted looking flowers catch your eye, leading you to bend closer for a better look at the intricately folded petals, noting the beads of slick moisture that seems to perspire from inside the plant.  Awed by the corrupt yet beautiful flower, you take a deep breath, inhaling a lungful of its pungent yet sweet scents.  It matches the flower somehow, lingering in your nose even after you pull away.  The smell makes you wonder just how functional the pussy flowers are, they do have fairly large stalks.\n\nYou sigh and take one last sniff from the flower's honeypot before moving on.  Your body flushes happily with desire as your blood pools in your groin.  You giggle, wishing you could feel like this more often.", false);
-							dynStats("lus", 20 + player.lib / 5, "cor", .5);
-						}
-						//vines...
-						if (temp2 == 1) {
-							outputText("A few vines dangling from the trees catch your eye due to their rather 'unique' tips.  Every single one of them ends in a flared mushroom-like head, each twice as wide as the already thick vine.  You touch a vine gently, musing at its slippery texture and how similar it would be to a penis if the 'head' were smaller.  You encircle the vine with your hand, stroking it and giggling at the absurdity of this place.  The vine suddenly flexes in your grasp, pulsating and contracting as its head grows bigger, turning shiny and red.  Pulling away in shock, you gasp as the vine begins spurting out huge ropes of thick viscous fluid, splattering everywhere.  The plant-gasm ends as suddenly as it started, the 'head' retaining the size it gained and dripping the last of its strange load.  Overcome with curiosity, you sniff at the dripping spunk and swoon at the overpoweringly musky scent.  Gathering your wits, you decide to leave before you end up with one of those inside you.  You escape the corrupted glade, but stay flushed with arousal.", false);
-							dynStats("lus", 20 + player.lib / 5, "cor", .5);
-						}
-						//trees...
-						if (temp2 == 2) {
-							outputText("A cluster of huge breast-like knots on a nearby tree draws your attention.  Unable to resist, you poke one, and burst into giggles as it jiggles like a real breast!  You cautiously begin groping the tree-tit, and smile as it begins leaking sweet-smelling sap.  The scent conjures memories of helping to make maple syrup back home, and before you realize it, you've gathered a drop of the sap on your finger and tasted it.  It's powerfully sweet, making your tongue tingle and heart beat faster.  Unbidden, the thought of suckling the teat dry of its sweet treat comes to mind, but you manage to reject it and stumble away from the corrupted glade.  You have trouble with your tongue for the next hour: it won't stay in your mouth, and keeps licking your lips, seeking any leftover sweetness.  It almost distracts you from the palpable heat gathering between your thighs.", false);
-							dynStats("lus", 20 + player.lib / 5, "cor", .5);
-						}
-						doNext(13);
-						return;
-					}
-					//drink sap/lick flower reaction
-					if (player.cor > 66 && player.cor <= 100) {
-						outputText("  You smile as you enter the glade, wondering which of the forbidden fruits you should try...\n\nThere are flowers that bear more than a passing resemblance to pussies,\nvines with absurdly large penis-like tips,\nand trees covered in breast-like knots, leaking sap.", false);
-						simpleChoices("Flowers", 2012, "Vines", 2013, "Trees", 2084, "", 0, "Leave", 13);
-						return;
-					}
-					//Wallow in decadence reaction - UNFINISHED
+					corruptedGlade.intro();
 				}
 				//Trip on a root!
 				if (temp == 3) {
 					outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.", false);
 					player.takeDamage(10);
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					trace("FIX MEEEEE");
 					return;
 				}
@@ -454,8 +367,8 @@ package classes.Scenes.Areas
 			//Bee-girl encounter
 			if (chooser == 3) {
 				if (rand(10) == 0) {
-					menuLoc = 2;
-					kGAMECLASS.rathazul.carapaceFind();
+					outputText("You find a large piece of insectile carapace obscured in the ferns to your left.  It's mostly black with a thin border of bright yellow along the outer edge.  There's still a fair portion of yellow fuzz clinging to the chitinous shard.  It feels strong and flexible - maybe someone can make something of it.  ", true);
+					inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
 					return;
 				}
 				beeGirlScene.beeEncounter();
@@ -562,7 +475,7 @@ package classes.Scenes.Areas
 			}
 			dynStats("lus", 25 + rand(player.cor / 5), "resisted", false);
 			fatigue(5);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Catch a Satyr using the corrupt glade and either leave or have your way with him.
 		//Suggested to Fen as the MaleXMale submission.
@@ -577,7 +490,7 @@ package classes.Scenes.Areas
 			//(Player lacks a penis:
 			if(!player.hasCock()) {
 				outputText("You can't really see any way to take advantage of this scenario, so you simply turn back and leave the way you came.", false);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			//Player returns to camp)
 			//(Player has penis:
@@ -597,7 +510,7 @@ package classes.Scenes.Areas
 			else outputText("not feeling inclined to rape some satyr butt right now", false);
 			outputText(", and silently leave him to his pleasures.", false);
 			dynStats("lus", 5+player.lib/20);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Player returns to camp
 		private function rapeSatyr():void {
@@ -659,7 +572,7 @@ package classes.Scenes.Areas
 			outputText("", true);
 			spriteSelect(99);
 			outputText("You've had your fun, and you don't really want to fool around in the forest all day, so you grab your " + player.armorName + " and leave the rutting satyr behind.\n\n", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//[=Again=]
 		private function secondSatyrFuck():void {
@@ -677,7 +590,7 @@ package classes.Scenes.Areas
 			outputText("You give your sensitive member a few trembling, almost-painful strokes... maybe you overdid it a bit.  Shrugging, you gather your " + player.armorName + " and leave the passed-out satyr behind as you go back to your camp.", false);
 			player.orgasm();
 			dynStats("lib", 1, "sen", -5);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

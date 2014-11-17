@@ -1293,7 +1293,7 @@ public function cumWitchDefeated():void {
 	//Female Victory Sex
 	if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex);
 	
-	if(inCombat()) {
+	if (inCombat) {
 		if(monster.HP >= 1) addButton(9,"Leave",declineSandWitch);
 		else addButton(9,"Leave",cleanupAfterCombat);
 	}
@@ -1304,7 +1304,8 @@ public function cumWitchDefeated():void {
 public function declineSandWitch():void {
 	clearOutput();
 	outputText("Dusting yourself off, you lower your [weapon] and leave the cum witch to recover from the humiliation of losing to you.  The haunted, hungry look in her eyes leaves little doubt that she'll challenge you again or that she still wants to fuck you.  For now, she slips down into her own puddled cum, idly touching herself.");
-	if(inCombat()) cleanupAfterCombat();
+	if (inCombat)
+		cleanupAfterCombat();
 	else doNext(1);
 }
 
@@ -1396,13 +1397,15 @@ public function menFuckUpSomeCumWitch():void {
 		else outputText("  You smirk as you wonder if she'll learn anything from this.  You hope not - it's a fun lesson to teach.");
 		player.orgasm();
 	}
-	if(inDungeon) {
-		if(inCombat()) cleanupAfterCombat();
+	if (inDungeon) {
+		if (inCombat)
+			cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) cleanupAfterCombat();
-		else doNext(13);
+		if (inCombat)
+			cleanupAfterCombat();
+		else doNext(camp.returnToCampUseOneHour);
 	}
 }
 //*Male "Too Big" Victory Sex
@@ -1439,13 +1442,15 @@ public function maleTooBigVictorySex():void {
 	
 	outputText("\n\nExhausted at last, you pat your " + cockDescript(x) + " affectionately.  You'd wipe it off on the witch's hair, if it wasn't messier than the " + player.skin() + " you plan to clean.  She begins to lick her fingers and clean the stuff off her face.  You just laugh, and get dressed.  There's still much to do.");
 	player.orgasm();
-	if(inDungeon) {
-		if(inCombat()) cleanupAfterCombat();
+	if (inDungeon) {
+		if (inCombat)
+			cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) cleanupAfterCombat();
-		else doNext(13);
+		if (inCombat)
+			cleanupAfterCombat();
+		else doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -1478,13 +1483,15 @@ public function ladyVictorySex():void {
 	
 	player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 	player.orgasm();
-	if(inDungeon) {
-		if(inCombat()) cleanupAfterCombat();
+	if (inDungeon) {
+		if (inCombat)
+			cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) cleanupAfterCombat();
-		else doNext(13);
+		if (inCombat)
+			cleanupAfterCombat();
+		else doNext(camp.returnToCampUseOneHour);
 	}
 }
 	
@@ -1518,13 +1525,15 @@ public function tentacleVictoryGangbangCumWitch():void {
 	outputText("\n\nYou retract your spent shafts and smirk at the backflow of bukkake that bursts from the cum witch's soiled loins.  She's utterly wrecked, dominated by dick in every sense.  What delicious irony that a sorceress should be taken with the very type of organ she glorifies!  Getting dressed, you give her a lazy wave and invite her to try again some other time.");
 	
 	player.orgasm();
-	if(inDungeon) {
-		if(inCombat()) cleanupAfterCombat();
+	if (inDungeon) {
+		if (inCombat)
+			cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) cleanupAfterCombat();
-		else doNext(13);
+		if (inCombat)
+			cleanupAfterCombat();
+		else doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -1707,7 +1716,7 @@ public function lionpaws(skipped:Boolean = false):void {
 	menu();
 	if(skipped) {
 		inDungeon = false;
-		addButton(0,"Next",eventParser,13);
+		addButton(0,"Next",camp.returnToCampUseOneHour);
 	}
 	else {
 		menu();
@@ -2059,7 +2068,7 @@ public function getBlown(submit:Boolean = false):void {
 	menu();
 	if(submit) {
 		inDungeon = false;
-		addButton(0,"Next",eventParser,13);
+		addButton(0,"Next",camp.returnToCampUseOneHour);
 	}
 	else {
 		menu();
@@ -2274,7 +2283,7 @@ public function fenPutsHisShittyFetishInYoSphinx():void {
 	player.orgasm();
 	inDungeon = false;
 	menu();
-	addButton(0,"Next",eventParser,13);
+	addButton(0,"Next",camp.returnToCampUseOneHour);
 }
 
 //Sand Mother
@@ -2290,7 +2299,7 @@ public function fenPutsHisShittyFetishInYoSphinx():void {
 public function sandWitchMotherFriendlyMenu():void {
 	if(monster.short != "Sand Mother") {
 		startCombat(new SandMother(),true);
-		gameState = 0;
+		inCombat = false;
 		monster.HP = 0;
 	}
 	menu();
@@ -2431,7 +2440,7 @@ public function sexWithFriendlySandMother():void {
 public function sandMotherPOMenu():void {
 	if(monster.short != "Sand Mother") {
 		startCombat(new SandMother(),true);
-		gameState = 0;
+		inCombat = false;
 		monster.HP = 0;
 	}
 	menu();
@@ -2671,7 +2680,7 @@ public function talkDownTheMother():void {
 	statScreenRefresh();
 	//(Set friendly)
 	flags[kFLAGS.SAND_WITCHES_FRIENDLY] = 1;
-	gameState = 0;
+	inCombat = false;
 	sandWitchMotherFriendlyMenu();
 }
 //*Tentacle Gangbang
@@ -2730,16 +2739,17 @@ public function tentacleGangBang():void {
 	flags[kFLAGS.TIMES_TENTACLED_SAND_MOTHER]++;
 	player.orgasm();
 	dynStats("cor", 1);
-	if(!inCombat()) doNext(1);
+	if (!inCombat)
+		doNext(1);
 	else cleanupAfterCombat();
 }
 //*Fuck Her Cunt
 //>Sets to resisting with options for repeat rapes.
 public function fuckTheSandMothersCunt():void {
 	clearOutput();
-	if(!inCombat()) {
+	if (!inCombat) {
 		startCombat(new SandMother(),true);
-		gameState = 0;
+		inCombat = false;
 		monster.HP = 0;
 	}
 	var x:int = player.cockThatFits(monster.vaginalCapacity());
@@ -2808,7 +2818,8 @@ public function fuckTheSandMothersCunt():void {
 	else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 	player.orgasm();
 	dynStats("cor", 1);
-	if(!inCombat()) doNext(1);
+	if (!inCombat)
+		doNext(1);
 	else cleanupAfterCombat();
 }
 
@@ -2858,7 +2869,8 @@ public function scissorAndDrink():void {
 	else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 	player.orgasm();
 	dynStats("cor", 1);
-	if(!inCombat()) doNext(1);
+	if (!inCombat)
+		doNext(1);
 	else cleanupAfterCombat();
 }
 	
@@ -3074,7 +3086,7 @@ public function sandMotherBadEndsLadiesEpilogue():void {
 public function friendlySandMotherFuck():void {
 	clearOutput();
 	startCombat(new SandMother(),true);
-	gameState = 0;
+	inCombat = false;
 	var x:int = player.cockThatFits(monster.vaginalCapacity());
 	var y:int = player.cockThatFits2(monster.vaginalCapacity());
 	//First Time:
@@ -3492,7 +3504,7 @@ public function getLactaidFromWitches():void {
 	outputText("\n\nYou decline the offer and repeat your request for Lactaid, which sours the woman's expression slightly.  The corners of her mouth are still upturned in a half smirk when she procures a bottle and hands it to you.  After, she smooths her hand across her robed lap, and for a split second, you wonder if she's trying to beckon you to take a seat there...  You shake your head as you examine the bottle in your hand.  You got what you came for.\n\n");
 	flags[kFLAGS.SAND_WITCH_LOOT_TAKEN]++;
 	//Receive one lactaid
-	inventory.takeItem(consumables.LACTAID);
+	inventory.takeItem(consumables.LACTAID, camp.campMenu);
 }
 //*Labova
 //>Get Labova
@@ -3510,7 +3522,7 @@ public function getLaBova():void {
 	outputText("\n\n\"<i>That is good.  The ways of beasts offer many boons.  This one is quite useful for enhancing lactation, for instance.  However, there is great risk in reveling in such transformation.  Be sure that you don't lose yourself to it,</i>\" the statuesque sorceress warns.");
 	outputText("\n\nYou nod, and she gives you the La Bova.\n\n");
 	flags[kFLAGS.SAND_WITCH_LOOT_TAKEN]++;
-	inventory.takeItem(consumables.LABOVA_);
+	inventory.takeItem(consumables.LABOVA_, camp.campMenu);
 }
 	
 //TURN EM OFF!
@@ -3542,11 +3554,11 @@ public function takeLaBovaOrLactaid(lactaid:Boolean = true):void {
 	clearOutput();
 	outputText("Smirking, you circle around the Sand Mother's throne towards the secure chests behind her.  She stiffens when you come close but doesn't make a move.  The poor little witch is afraid of you, and with good reason.  You gather the item you came for, condescending patting the sorceress's platinum tresses on your way back in front of her throne.  She glares at you.\n\n");
 	//New lines and take appropriate item.
-	if(lactaid) {
-		inventory.takeItem(consumables.LACTAID);
+	if (lactaid) {
+		inventory.takeItem(consumables.LACTAID, camp.campMenu);
 	}
 	else {
-		inventory.takeItem(consumables.LABOVA_);
+		inventory.takeItem(consumables.LABOVA_, camp.campMenu);
 	}
 
 }

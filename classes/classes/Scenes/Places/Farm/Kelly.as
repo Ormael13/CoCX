@@ -172,7 +172,7 @@ private function neverBreakKeltIntoKelly():void {
 	outputText("You decide that trying to break Kelt is something you'd never want to do.  Besides, he's teaching you a useful skill, and there's just something charming about that bastard...");
 	menu();
 	addButton(0,"Go To Kelt",farm.keltScene.keltEncounter);
-	addButton(1,"Go Home",eventParser,13);
+	addButton(1,"Go Home",camp.returnToCampUseOneHour);
 }
 
 
@@ -303,7 +303,7 @@ private function breakKeltGo():void {
 	player.orgasm();
 	dynStats("cor", 5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Second encounter
@@ -598,7 +598,7 @@ private function finalKeltBreaking():void {
 	player.orgasm();
 	dynStats("cor", 8);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 4;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -718,7 +718,7 @@ private function approachKelly():void {
 	else if(model.time.hours >= 15 && model.time.hours <= 16 && flags[kFLAGS.KELLY_KIDS] >= 4) {
 		outputText("\n\nYou see Kelly standing in the middle of her field, surrounded by her children.  She has the butts set up and, judging by the way she is talking and gesturing with the bow in her hand, is teaching your brood how to shoot.  Trying to, anyway: her big, bare boobs make things a bit difficult.  You see she's actually gone to the trouble of constructing adorable little mini-bows, which the group of centaur children are all threading mini-arrows on as she points, and with expressions of deep concentration, pulling tight, taking aim, and... there's a cacophony of whistling, and arrows wind up everywhere but the target.  The sound of shouting and crying echoes across the field as Kelly begins to ball out the one who somehow managed to shoot an arrow through her braid.");
 		outputText("\n\nYou decide to come back a bit later.  Your kids need all the help they can get.");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//Standard:
@@ -762,7 +762,7 @@ private function approachKelly():void {
 	//Showing up resets Kelly's desire not to fap without you
 	flags[kFLAGS.KELLY_DISOBEYING_COUNTER] = 0;
 
-	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)	addButton(9, "Leave", eventParser, 13);
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)	addButton(9, "Leave", camp.returnToCampUseOneHour);
 	else addButton(9, "Back", farm.farmCorruption.rootScene);
 }
 
@@ -854,7 +854,7 @@ private function fuckKellysCunt():void {
 	outputText("\n\nYou slide back off, landing with a fresh spring in your step.  Then, you pick up your [armor] and head off to find Kelly's blanket - you need something to wipe all the cum and slime off your [legs] with.");
 	player.orgasm();
 	kellyPreggers();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Centaur on Centaur Sex
@@ -905,7 +905,7 @@ private function taurOnTaurSexKelly():void {
 	else outputText("  You snicker and walk away - she's already served her purpose.");
 	kellyPreggers();
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Tentacle
@@ -970,7 +970,7 @@ private function tentaFuckKelly():void {
 	kellyPreggers();
 	player.orgasm();
 	dynStats("sen", -3);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Makes her cunt become horse-like.
@@ -1125,7 +1125,7 @@ private function getARimjobFromKelly():void {
 	}
 	player.orgasm();
 	dynStats("sen", 3, "cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Ride(C)
@@ -1360,7 +1360,7 @@ private function rideKellyForPunishment():void {
 	}
 	player.orgasm();
 	dynStats("sen", -1, "cor", .5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1440,7 +1440,7 @@ private function takeKellysVirginity():void {
 	player.orgasm();
 	dynStats("sen", -3, "cor", .5);
 	flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //TFs
@@ -1481,7 +1481,7 @@ private function giveKellyAPepper():void {
 	}
 	flags[kFLAGS.KELLY_TIMES_PEPPERED]++;
 	player.consumeItem(consumables.CANINEP);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Titjob
@@ -1534,7 +1534,7 @@ private function kellyTitJob():void {
 	}
 	player.orgasm();
 	dynStats("sen", -3);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1573,7 +1573,7 @@ private function kellyPregSex():void {
 	
 	player.orgasm();
 	dynStats("sen", -4);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
  
 //Giving birth
@@ -1749,7 +1749,7 @@ private function talkNHandToKelly():void {
 		}
 	}
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Reward
 //Requirements: PC used “punish” at least once, 3+ days have gone by and “punish” has not proced*
@@ -1973,7 +1973,7 @@ private function giveKellyAppleSauce():void {
 	player.orgasm();
 	dynStats("sen", -2);
 	flags[kFLAGS.KELLY_TIMES_APPLESAUCED]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Blowjob
@@ -2202,7 +2202,7 @@ private function kellyBJsAhoy():void {
 	}
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

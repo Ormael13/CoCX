@@ -1,12 +1,12 @@
 ﻿public function dungeonRoom(roomNo:Number):void {
 	//Dungeon Choices!
-	var choice1:Number = 0;
+	var choice1:* = 0;
 	var text1:String = "";
-	var choice2:Number = 0;
+	var choice2:* = 0;
 	var text2:String = "";
 	var choice3:* = 0;
 	var text3:String = "";
-	var choice4:Number = 0;
+	var choice4:* = 0;
 	var text4:String = "";
 	var choice5:* = 0;
 	var text5:String = "";
@@ -17,7 +17,7 @@
 	var choice8:Number = 0;
 	var text8:String = "";
 	//Always have choices for items or masturbation. 
-	var itemMenu:Number = 1000;
+	var itemMenu:Function = inventory.inventoryMenu;
 	var masturbateMenu:Number = 10;
 		
 	//Display Proper Buttons
@@ -90,11 +90,11 @@
 				text1 = "Fight";
 				choice1 = 11016;
 				text2 = "Go Demon";
-				choice2 = 2191;
+				choice2 = demonBadEnd;
 				text3 = "Hook Up";
 				choice3 = 11015;
 				masturbateMenu = 0;
-				itemMenu = 0;
+				itemMenu = null;
 			}
 			//Not recognized
 			else if(player.humanScore() <= 3) {
@@ -113,7 +113,7 @@
 				text3 = "Leave";
 				choice3 = 11000;
 				masturbateMenu = 0;
-				itemMenu = 0;
+				itemMenu = null;
 			}
 			else {
 				outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ", false);
@@ -127,7 +127,7 @@
 				text3 = "Run";
 				choice3 = 11000;
 				masturbateMenu = 0;
-				itemMenu = 0;
+				itemMenu = null;
 			}
 		}
 	}
@@ -302,14 +302,14 @@
 		//Zetaz gone?  Alchemist shits!
 		if(flags[kFLAGS.DEFEATED_ZETAZ] > 0) {
 			if(flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] == 0) {
-				outputText("\n\nThere's a demon lazing around outside the cave entrance.  Judging by his size and apparent gender, he must be an incubus.  You try to stay hidden for now, but all he's doing is throwing darts at a dartboard he's set up across the way from himself.  What kind of demon sits around playing darts?", false);
+				outputText("\n\nThere's a demon lazing around outside the cave entrance.  Judging by his size and apparent gender, he must be an incubus.  You try to stay hidden for now, but all he's doing is throwing darts at a dartboard he's set up across the way from himself.  What kind of demon sits around playing darts?");
 				text1 = "Investigate";
-				choice1 = 2639;
+				choice1 = theSeanShopOffer;
 			}
 			else if(flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] > 0) {
-				outputText("\n\nThe incubus known as Sean has set up a small stall around the cave entrance, and is busy tending to his shelves and wares.  He's dressed in an incredibly modest, three-piece suit, and nods to you as you approach, \"<i>Let me know if you want to buy anything.  I haven't done much with the cave, so feel free to poke around if you missed anything on your first pass.  I barely use the first room.</i>\"", false);
+				outputText("\n\nThe incubus known as Sean has set up a small stall around the cave entrance, and is busy tending to his shelves and wares.  He's dressed in an incredibly modest, three-piece suit, and nods to you as you approach, \"<i>Let me know if you want to buy anything.  I haven't done much with the cave, so feel free to poke around if you missed anything on your first pass.  I barely use the first room.</i>\"");
 				text3 = "Shop";
-				choice3 = 2642;
+				choice3 = incubusShop;
 			}
 		}
 	}
@@ -382,10 +382,10 @@
 				outputText("You step around her and are startled to see that while the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat. If she weren't chained to the ceiling, you suspect she wouldn't even be able to stand under her own power. Her eyes are open, but she's staring blankly ahead, unaware of the world around her, pupils constricted to pinpricks amid the ocean of her dulled pink irises. Like this, she's no threat to anybody. You suppose you could let her go, though it's unclear if she's self-aware enough to even move. Alternately, you could blow off a little steam.", false);
 				//[Free] [Use] [Leave]
 				text3 = "Free";
-				choice3 = 2594;
+				choice3 = freeValazLooseCoochie;
 				if(player.gender > 0) {
 					text4 = "Use";
-					choice4 = 2595;
+					choice4 = useVala;
 				}
 				if(player.lust >= 33 && shouldraFollower.followerShouldra()) {
 					text5 = "ShouldraVala";
@@ -398,7 +398,7 @@
 				//Option to investigate her
 				//leftValaAlone()
 				text3 = "Faerie";
-				choice3 = 2614;
+				choice3 = leftValaAlone;
 			}
 		}
 		//Not here
@@ -417,10 +417,10 @@
 		if(flags[kFLAGS.DEFEATED_ZETAZ] == 0) outputText("You're going to find Zetaz and pay him back for drugging you on your first day here.  ", false);
 		outputText("A crude door on the southern edge of the tunnel leads back to the imp's sleeping chambers, but the tunnel continues away, curving sharply to the west where a far more lavish door marks the far side of the subterranean passage.", false);
 	
-		if(flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS] == 0) {
-			outputText("\n\nA pair of fetishy, discarded straps lies on the floor, half obscured by dust.  It looks like something a goblin would wear.  Sexy!", false);
+		if (flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS] == 0) {
+			outputText("\n\nA pair of fetishy, discarded straps lies on the floor, half obscured by dust.  It looks like something a goblin would wear.  Sexy!");
 			text3 = "B.Straps";
-			choice3 = 2638;
+			choice3 = takeBondageStraps; //2638;
 		}
 		//(Item: sexy bondage straps/a set of sexy bondage straps/B.Straps? - Seduce ability?)
 		//(Possible effect: +lust every round in combat if afflicted with Ceraph's bondage!)

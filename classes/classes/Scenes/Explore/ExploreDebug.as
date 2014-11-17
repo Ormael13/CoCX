@@ -143,21 +143,21 @@ package classes.Scenes.Explore
 				var m:Monster = allMonsters[monsterIdx]();
 				m.onDefeated = function (hpVictory:Boolean):void
 				{
-					gameState = 0;
+					getGame().inCombat = false;
 					getGame().clearStatuses(false);
 					statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				m.onWon = function (hpVictory:Boolean, pcCameWorms:Boolean):void
 				{
-					gameState = 0;
+					getGame().inCombat = false;
 					getGame().clearStatuses(false);
 					statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				m.onPcRunAttempt = function ():void
 				{
-					gameState = 0;
+					getGame().inCombat = false;
 					getGame().clearStatuses(false);
 					statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);

@@ -105,13 +105,13 @@ public function clone(source:Object):* {
 	return(copier.readObject());
 }
 
+/* Was only used in two places at the start of the game
 public function speech(output:String, speaker:String):void {
 	var speech:String = "";
 	speech = speaker + " says, \"<i>" + output + "</i>\"\n";
 	outputText(speech, false);
 }
-
-
+*/
 	
 public function clearOutput():void {
 	forceUpdate();
@@ -579,14 +579,14 @@ public function getButtonToolTipText( buttonText :String ) :String
 	//combat
 	//wombat
 	if (buttonText == "Attack") {
-		if (gameState != 1) toolTipText = "";
+		if (!inCombat) toolTipText = "";
 		else toolTipText = "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.";
 	}
 	if(buttonText == "Kiss") {                        
 		toolTipText = "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.";
 	}
 	if(buttonText == "Tease") {
-		if (gameState != 1) toolTipText = "";
+		if (!inCombat) toolTipText = "";
 		else toolTipText = "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.";
 	}
 	if(buttonText == "Kick") {                        
@@ -646,7 +646,7 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("Aroused") != -1) {
 	}
 	if(buttonText.indexOf("Arouse") != -1) {                        
-		if (gameState != 1) toolTipText = "";
+		if (!inCombat) toolTipText = "";
 		else toolTipText = "The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
 	}
 	if(buttonText == "Heal") {                        
@@ -656,7 +656,7 @@ public function getButtonToolTipText( buttonText :String ) :String
 		toolTipText = "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  (Fatigue Cost: " + spellCost(25) + ")";
 	}
 	//Wait
-	if(buttonText.indexOf("Wait") != -1 && gameState > 0) {                        
+	if(buttonText.indexOf("Wait") != -1 && inCombat) {                        
 		toolTipText = "Take no action for this round.  Why would you do this?  This is a terrible idea.";
 	}
 	//Sting
@@ -933,6 +933,21 @@ public function removeButton(arg:*):void {
 	mainView.hideBottomButton( buttonToRemove );
 }
 
+public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
+	mainView.hideBottomButton(0);
+	mainView.hideBottomButton(1);
+	mainView.hideBottomButton(2);
+	mainView.hideBottomButton(3);
+	mainView.hideBottomButton(4);
+	mainView.hideBottomButton(5);
+	mainView.hideBottomButton(6);
+	mainView.hideBottomButton(7);
+	mainView.hideBottomButton(8);
+	mainView.hideBottomButton(9);
+	flushOutputTextToGUI();
+}
+
+/*
 // AFICT, menu() isn't called with arguments ANYWHERE in the codebase.
 // WHRYYYYYYY
 public function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, 
@@ -991,7 +1006,7 @@ public function menu(text1:String = "", func1:Function = null, arg1:Number = -90
 	//mainView.setOutputText( currentText );
 	flushOutputTextToGUI();
 }
-
+*/
 
 public function choices(text1:String, butt1:*, 
 						text2:String, butt2:*, 

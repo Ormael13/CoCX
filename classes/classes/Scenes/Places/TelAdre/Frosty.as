@@ -297,7 +297,7 @@ public function frostysHandsAreColdHolyShitWhyDontYouWarmTHoseMitsUp():void
 	//[Player is back at camp]
 	dynStats("sen", -1);
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Mouth]
@@ -373,7 +373,7 @@ public function useFrostysMouth():void
 	//[Player is back at camp]
 	dynStats("sen", -1);
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Back to Frosty’s Special Menu.]
@@ -482,7 +482,7 @@ public function cunnilingateFrosty():void
 	//[Player is back at camp]
 	frostyPoints(-1);
 	dynStats("lus", 33);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 /*Anal (One service genderless can have) -WIP-

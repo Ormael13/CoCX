@@ -82,15 +82,15 @@ internal function sharkWinChoices():void {
 	}
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("  Do you have your way with her or leave?", false);
-		temp = 0;
-		if(player.hasKeyItem("Deluxe Dildo") >= 0) temp = 2264;
-		if(player.gender == 1) simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy w/69",0,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
-		if(player.gender == 2) {
-			simpleChoices("Yes",sharkgirlSixtyNine,"",0,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
+		var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? getGame().sharkGirlGetsDildoed : null);
+		if (player.gender == 1) simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy w/69",0,"Dildo Rape",dildo,"",0,"Leave",cleanupAfterCombat);
+		else if (player.gender == 2) {
+			simpleChoices("Yes",sharkgirlSixtyNine,"",0,"Dildo Rape",dildo,"",0,"Leave",cleanupAfterCombat);
 		}
-		if(player.gender == 3) {
-			if(player.isNaga()) simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy Oral",sharkgirlSixtyNine,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
-			else simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy w/69",sharkgirlSixtyNine,"Dildo Rape",temp,"",0,"Leave",cleanupAfterCombat);
+		else if (player.gender == 3) {
+			if (player.isNaga())
+				simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy Oral",sharkgirlSixtyNine,"Dildo Rape",dildo,"",0,"Leave",cleanupAfterCombat);
+			else simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy w/69",sharkgirlSixtyNine,"Dildo Rape",dildo,"",0,"Leave",cleanupAfterCombat);
 		}
 	}
 	else cleanupAfterCombat();

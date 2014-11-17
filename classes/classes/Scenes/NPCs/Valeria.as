@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.Armor;
 	import classes.Scenes.Areas.Lake.GooGirl;
 
 	public class Valeria extends NPCAwareContent implements TimeAwareInterface {
@@ -254,7 +255,7 @@ private function valeriaGetFucked():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	HPChange(25,false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function gooFlation(clearText:Boolean = true):void {
@@ -283,7 +284,7 @@ private function gooFlation(clearText:Boolean = true):void {
 		player.orgasm();
 		dynStats("sen", 1);
 		HPChange(25,false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -308,7 +309,7 @@ private function penetrateValeria():void {
 	player.orgasm();
 	dynStats("sen", 1);
 	HPChange(25,false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Valeria] -- [Sex] -- [Get Dominated]
@@ -370,7 +371,8 @@ private function valeriaSexDominated():void {
 	HPChange(25,false);
 	player.orgasm();
 	dynStats("sen", 1);
-	if(!inCombat()) doNext(13);
+	if (!getGame().inCombat)
+		doNext(camp.returnToCampUseOneHour);
 	else cleanupAfterCombat();
 }
 
@@ -426,14 +428,17 @@ private function declineValeriasNeeds():void {
 	outputText("You grimace and push the goo-girl away.  You've got no interest in her corrupted 'needs,' especially with a look like that on her face.  She gasps as you push her, nearly falling over; she catches herself and glowers angrily.");
 	outputText("\n\n\"<i>Well, fuck you kindly, [name],</i>\" she says with a huff.  \"<i>Pardon me for being... me.</i>\"  She turns up her chin and saunters off to a part of camp about as far away from you as possible.");
 	//(Disable Valeria sex for 6 hours)
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function takeValeria():void {
 	spriteSelect(79);
-	armors.GOOARMR.equip(player, true, true);
-	if (mainView.bottomButtons[9].labelText.indexOf("Abandon") == -1) doNext(1);
-	//doNext(1);
+	armors.GOOARMR.useText();
+	player.armor.removeText();
+	var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
+	if (item == null)
+		doNext(camp.campMenu);
+	else inventory.takeItem(item, camp.campMenu);
 }
 
 public function valeriaAndGooThreeStuff():void {

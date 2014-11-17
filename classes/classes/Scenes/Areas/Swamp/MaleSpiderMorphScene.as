@@ -30,8 +30,14 @@ package classes.Scenes.Areas.Swamp
 			else {
 				outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"", false);
 				//[Fight] [Talk] [Leave]
-				simpleChoices("Fight", 2997, "Talk", talkToSpiderBoy, "", 0, "", 0, "Leave", 13);
+				simpleChoices("Fight", fightSpiderBoy, "Talk", talkToSpiderBoy, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
 			}
+		}
+		
+		private function fightSpiderBoy():void {
+			startCombat(new MaleSpiderMorph());
+			eventParser(1);
+			spriteSelect(74);
 		}
 
 //Talk
@@ -43,8 +49,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("You talk of your own people, and the good times you had in Ingnam growing up, but you keep coming back to the sadness of losing so many young adults to becoming champions.  Eventually you go over your own selection, training, and eventual journey.  The spider-morph listens with rapt attention the whole way through.\n\n", false);
 			outputText("\"<i>Wow,</i>\" comments the arachnid male, \"<i>that's quite the story.  Thank you so much for talking to me today.  Here, take this.  If you ever want to have your own venom or webbing, eat as much of it as you can.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n", false);
 			outputText("He stands and gives you a bundle of pink fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ", false);
-			menuLoc = 2;
-			inventory.takeItem(consumables.S_GOSSR);
+			inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
 		}
 
 //*Victory Pretext:rr

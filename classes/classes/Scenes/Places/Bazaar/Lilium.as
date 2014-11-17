@@ -70,7 +70,7 @@ private function payForLilium():void {
 		outputText("\"<i>Look, I'm sorry, but I can't really do anything for you right now.  If your, uh, situation changes, come see me again.</i>\"  Lilium then walks off, leaving you alone and naked.\n\n", false);
 
 		outputText("Bummer.", false);
-		doNext(2855);
+		doNext(bazaar.enterTheBazaar);
 		return;
 	}
 	//First time - Pay: 
@@ -106,7 +106,7 @@ private function leaveLilium():void {
 	spriteSelect(93);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\"<i>I'm deathly allergic to fun, unfortunately,</i>\" you reply before moving on to examine more of the bazaar.", false);
 	else outputText("\"<i>Just passing through, and I thought I'd see how you were doing,</i>\" you reply, and leave Lilium alone at her post.", false);
-	doNext(2855);
+	doNext(bazaar.enterTheBazaar);
 }
 
 //#########BUTTFUCK + TONGUEJOB SCENE######### REQUIRES PENIS AND LONG DEMONIC TONGUE
@@ -148,7 +148,7 @@ private function buttFuckTongueJeorb():void {
 	
 	player.orgasm();
 	dynStats("cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //#########DICK RIDE SCENE######### REQUIRES VAGINA
@@ -204,7 +204,7 @@ private function liliumDickRidah():void {
 	dynStats("cor", 1);
 	//(imp preg check)
 	player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 61); //Lilium causes faster pregnancies
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //#########NIPPLE FUCK SCENE######### REQUIRES PENIS
@@ -262,7 +262,7 @@ private function liliumNippleFuck():void {
 
 	outputText("You get dressed again and begin to leave; as you look back over shoulder, Lilium - still seated and leaning against the wall - blows you a kiss.", false);
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

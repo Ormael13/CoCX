@@ -15,7 +15,7 @@
 		//placeholder text for outside the cathedral
 		outputText("You spot an anomaly in the barren wastes; a door that seems to be standing out in the middle of nowhere. Somehow, you figure that it must lead to some other part of the world, and the only reason it's here is because you can't get to where the door should be right now.\n\n", false);
 		outputText("Do you open it?", false);
-		doYesNo(lumiLabChoices,13);
+		doYesNo(lumiLabChoices,camp.returnToCampUseOneHour);
 	}
 	else {
 		//placeholder text for outside the cathedral
@@ -47,14 +47,13 @@ public function lumiLabChoices():void {
 	var enhance:Function =null;
 	if(lumiEnhance(true)) 
 		enhance = lumiEnhance;
-	simpleChoices("Shop",lumiShop,"Enhance",enhance,"",0,"",0,"Leave",13);
+	simpleChoices("Shop",lumiShop,"Enhance",enhance,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 }
 
 public function lumiShop():void {
 	spriteSelect(37);
 	//Set item handling to lumi shop
-	menuLoc = 12;
-	outputText("", true);
+	clearOutput();
 	outputText("You ask Lumi if you can see her potions.  She smiles at you and pulls out several bottles from her desk and shows them to you.\n\n\"<i>Gawantied qwality, made by Lumi herself,</i>\" she says proudly.\n\n", false);
 	outputText("Lust Draft - 15 gems\nGoblin Ale - 20 gems\nOviposition Elixir - 45 gems\n", false);
 	
@@ -68,7 +67,7 @@ public function lumiShop():void {
 //Lust Draft
 private function lumiLustDraftPitch():void {
 	spriteSelect(37);
-	outputText("", true);
+	clearOutput();
 	outputText("You point at the bottle filled with bubble-gum pink fluid.\n\n\"<i>De lust dwaft? Always a favowite, with it you nevar have to worwy about not bein weady for sexy time; one of my fiwst creations. 15 gems each.</i>\"\n\n", false);
 	outputText("Will you buy the lust draft?", false);
 	doYesNo(curry(lumiPurchase,consumables.L_DRAFT),lumiShop);
@@ -76,7 +75,7 @@ private function lumiLustDraftPitch():void {
 //Goblin Ale
 private function lumiPitchGobboAle():void {
 	spriteSelect(37);
-	outputText("", true);
+	clearOutput();
 	outputText("You point at the flagon. \"<i>Oh? Oh thats Lumi's... actually no, dat tispsy stuff for 20 gems. You'll like if you want to be like Lumi. Do you like it?</i>\"\n\n", false);
 	outputText("Will you buy the goblin ale?", false);
 	doYesNo(curry(lumiPurchase,consumables.GOB_ALE),lumiShop);
@@ -84,7 +83,7 @@ private function lumiPitchGobboAle():void {
 //Ovi Elixir
 private function lumiPitchOviElixer():void {
 	spriteSelect(37);
-	outputText("", true);
+	clearOutput();
 	outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n", false);
 	outputText("Will you buy the Ovi Elixir?", false);
 	doYesNo(curry(lumiPurchase,consumables.OVIELIX),lumiShop);
@@ -93,7 +92,7 @@ private function lumiPitchOviElixer():void {
 
 private function lumiPurchase(itype:ItemType):void {
 	spriteSelect(37);
-	outputText("", true);
+	clearOutput();
 	//After choosing, and PC has enough gems
 	var cost:Number = 0;
 	if(itype == consumables.OVIELIX)
@@ -106,7 +105,7 @@ private function lumiPurchase(itype:ItemType):void {
 		outputText("You pay Lumi the gems, and she hands you " + itype.longName + " saying, \"<i>Here ya go!</i>\"\n\n", false);
 		player.gems -= cost;
 		statScreenRefresh();
-		inventory.takeItem(itype);
+		inventory.takeItem(itype, lumiShop, lumiLabChoices);
 	}
 	else {
 		//After choosing, and PC doesn't have enough gems
@@ -236,8 +235,7 @@ private function lumiEnhanceGo(itype:ItemType):void
 	else if(temp == 0) outputText("She starts grabbing things from around the table, seemingly at random, and adds them to " + itype.longName + ".  To your alarm, there is soon a large cloud of smoke coming off it! There is a strong smell to the smoke and it makes it hard to breathe.  Lumi grabs a mask out of a drawer and puts it on, continuing with her work unperturbed.  She suddenly stops and you wonder if she is done, but she takes off her mask and inhales deeply of the smoke, then keels over!  As you go over to help her she suddenly stands up, waves away some of the smoke, and says, \"<i>All dun!</i>\"\n\n", false);
 	else if(temp == 1) outputText("Taking hold of one of the bottles that were sitting where she put the tray, she seems to think for a moment before tossing the bottle into one of the corners of the room.  It shatters just behind the table, and a small puff of smoke goes up into the air.  You're a little nervous about that bottle, but before you have a chance to say anything, two more bottles fly off and join it; this time causing a small explosion. You ask her what she is thinking tossing those aside, and she simply responds, \"<i>Dey were in my way.</i>\"\n\n\"<i>What?!  So you just toss things that explode to the side?</i>\"\n\n<i>\"Don worry, I'll put counter agents in dere at de end of de day.  An I never throw stuff da'll do any damage.  Done!</i>\"\n\n", false);
 	else if(temp == 2) outputText("She adds a few things to the tray before moving down the table.  She adds some reagents to a bubbling chemical reaction, and then adds some more ingredients to that.  You wonder why she just left " + itype.longName + " there to work on something else.  Then Lumi moves back across the table, past where " + itype.longName + " sits, to start adding things to something else.  Before you have a chance to complain, she moves back to " + itype.longName + " and continues.  You decide that it's probably best not to ask about her work ethic and just let her do her thing; she has more experience than you, after all.\n\nPOP! You look over in surprise as the first thing she worked on makes a small explosion.  POW! Now the second experiment has blown up!  You start to move in alarm, wondering if Lumi really knows what she's doing; just before " + itype.longName + " seems to explode with an incredible BOOM.  Lumi stops moving for a moment, looking straight ahead before saying, \"<i>Dat was a gud one, Lumi dun!</i>\"\n\n", false);
-	menuLoc = 13;
-	inventory.takeItem(nextItem);
+	inventory.takeItem(nextItem, lumiEnhance, lumiLabChoices);
 }
 }
 }

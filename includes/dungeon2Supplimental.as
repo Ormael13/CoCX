@@ -669,13 +669,11 @@ public function freeValazLooseCoochie():void {
 	outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again. If you had the right materials, you might be able to mix something to heal the damage her captors have done to the fairy's mind.\n\n", false);
 	
 	//[Heal (if the player has Pure Honey)] [Sex] [Reject]
-	var Heal:Number = 0;
-	if(player.hasItem(consumables.PURHONY,1)) Heal = 2597;
-	if(player.hasItem(consumables.P_PEARL,1)) Heal = 2597;
-	var Sex:Number = 0;
-	if(player.gender > 0) Sex = 2599;
+	var heal:Function = null;
+	if (player.hasItem(consumables.PURHONY, 1)) heal = healVala;
+	if (player.hasItem(consumables.P_PEARL, 1)) heal = healVala;
 	//Choicez go here.  I can haz fucks?
-	simpleChoices("Fix Her",Heal,"Sex",Sex,"Reject",rejectFuckingVala,"",0,"",0);
+	simpleChoices("Fix Her", heal, "Sex", (player.gender > 0 ? ValaGetsSexed : null), "Reject", rejectFuckingVala, "", null, "", null);
 }
 
 //[Heal]
@@ -1137,13 +1135,14 @@ public function leftValaAlone():void {
 	}
 	outputText("\n\nWhat would you like to do to her?", false);
 	//[Heal][Use][Wake][Leave]
-	var Use:Number = 0;
-	var Wake:Number = 0;
-	if(player.gender > 0) Use = 2617;
-	if(player.gender > 0) Wake = 2619;
-	var shouldra:Function = null;
-	if(player.lust >= 33 && shouldraFollower.followerShouldra()) shouldra = shouldraFollower.shouldraMeetsCorruptVala;
-	simpleChoices("Fix Her",tryToHealVala,"Use",Use,"Wake",Wake,"ShouldraVala",shouldra,"Leave",1);
+	menu();
+	addButton(0, "Fix Her", tryToHealVala);
+	if (player.gender > 0) {
+		addButton(1, "Use", useValaOHYEAHSNAPINTOASLIMJIM);
+		addButton(2, "Wake", wakeValaUpBeforeYouGoGo);
+	}
+	if (player.lust >= 33 && shouldraFollower.followerShouldra()) addButton(3, "ShouldraVala", shouldraFollower.shouldraMeetsCorruptVala);
+	addButton(4, "Leave", camp.campMenu);
 }
 
 //[Heal]
@@ -1361,9 +1360,9 @@ public function purifiedFaerieBitchBar():Boolean {
 //[Vala]
 public function chooseValaInBar():void {
 	spriteSelect(60);
-	var cumBath:Number = 0;
-	if(player.hasCock()) cumBath = 3449;
-	outputText("", true);
+	var cumBath:Function = null;
+	if (player.hasCock()) cumBath = valaCumBath;
+	clearOutput();
 	menu();
 	//(First meeting)
 	if(flags[kFLAGS.ENCOUNTERED_VALA_AT_BAR] == 0) {
@@ -1395,17 +1394,16 @@ public function chooseValaInBar():void {
 		if(flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] == 0) {
 			outputText("\n\nA thought occurs to her and she leans in, conspiratorially. \"<i>Actually, some of my sisters are visiting from the forest today. Should we spend some time with them, or do I get you all for myself?</i>\"", false);
 			//[Fairies][You][Leave]
-			simpleChoices("Faeries",faerieOrgyFuck,"You",cleansedValaRepeatBrainFucking,"Cum Bath",cumBath,"",0,"Leave",telAdre.barTelAdre);
+			simpleChoices("Faeries", faerieOrgyFuck, "You", cleansedValaRepeatBrainFucking, "Cum Bath", cumBath, "", null, "Leave", telAdre.barTelAdre);
 		}
-		else simpleChoices("You",2625,"",0,"Cum Bath",cumBath,"",0,"Leave",telAdre.barTelAdre);
+		else simpleChoices("You", cleansedValaRepeatBrainFucking, "", null, "Cum Bath", cumBath, "", null, "Leave", telAdre.barTelAdre);
 		if(flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] == 0)
 			addButton(1,"Faeries",faerieOrgyFuck);		
 	}
 	if(flags[kFLAGS.SHOULDRA_MET_VALA] > 0 && shouldraFollower.followerShouldra())
 		addButton(3,"Big You",valaBigYou);
 	addButton(0,"You",cleansedValaRepeatBrainFucking);
-	if(cumBath > 0) 
-		addButton(2,"Cum Bath",eventParser,cumBath);
+	addButton(2, "Cum Bath", cumBath);
 	addButton(4,"Leave",telAdre.barTelAdre);
 }
 
@@ -1619,6 +1617,12 @@ public function faerieOrgyFuckFemaleContinue():void {
 	cheatTime(1);
 	player.orgasm();
 	doNext(telAdre.barTelAdre);
+}
+
+public function takeBondageStraps():void {
+	clearOutput();
+	flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
+	inventory.takeItem(armors.BONSTRP, camp.campMenu);
 }
 
 //ZETAZ START
@@ -1839,11 +1843,11 @@ public function sexualInterrogation():void {
 	
 	outputText("What do you do?", false);
 	//['Release' him] [Tighten Strap] [End Him]
-	simpleChoices("'Release'",2635,"Tighten",2634,"End Him",2633,"",0,"",0);
+	simpleChoices("'Release'", sexualTortureReleaseZetaz, "Tighten", sexualTortureTightenZetaz, "End Him", endZetaz, "", null, "", null);
 }
 
 //[Release Him]
-public function sexualTortureReleaseZetaz():void {
+private function sexualTortureReleaseZetaz():void {
 	outputText("", true);
 	outputText("In a moment of kindness", false);
 	if(player.lust > 60 || player.lib > 60 || player.cor > 60) outputText(", or perhaps perversion,", false);
@@ -1865,7 +1869,7 @@ public function sexualTortureReleaseZetaz():void {
 }
 
 //[Tighten Strap] 
-public function sexualTortureTightenZetaz():void {
+private function sexualTortureTightenZetaz():void {
 	outputText("", true);
 	outputText("\"<i>Idiot,</i>\" you taunt while you tighten the strap further.  Zetaz actually starts to bawl in anguish while another orgasm worth of cum backs up inside him.  You don't want him to get out of the binding while you search for his map, so you pull the cord under his leg and use the free end to bind his wrists together behind his back.  Fondling his turgid prick one last time for good luck, you leave him to struggle with his need as you search for your map.  It's difficult to blank out all the whines and cries, but you manage.\n\n", false);
 	
@@ -1883,7 +1887,7 @@ public function sexualTortureTightenZetaz():void {
 }
 
 //[END HIM – Ew death!]
-public function endZetaz():void {
+private function endZetaz():void {
 	outputText("", true);
 	outputText("You grab his head in both hands and twist violently, popping his neck in an instant.  Glaring down at the corpse of your first demonic foe, you utter, \"<i>Wish granted.</i>\"\n\n", false);
 	
@@ -2184,77 +2188,77 @@ public function malesZetazOverPtII():void {
 
 public function theSeanShopOffer():void {
 	spriteSelect(52);
-	outputText("", true);
-	outputText("You try to sneak closer to get a closer look at him, but the demon immediately stops what he's doing and stares straight at you.  He laughs, \"<i>Well now I know what happened to all the demons inside.  I really would've expected a bunch of renegades like them to put up a better fight.</i>\"\n\n", false);
+	clearOutput();
+	outputText("You try to sneak closer to get a closer look at him, but the demon immediately stops what he's doing and stares straight at you.  He laughs, \"<i>Well now I know what happened to all the demons inside.  I really would've expected a bunch of renegades like them to put up a better fight.</i>\"\n\n");
 	
-	outputText("Caught, you stand up and ready your " + player.weaponName + ", taking up a defensive stance to ready yourself for whatever new attacks this demon has.  Strangely, he just starts laughing again, and he has to stop to wipe tears from the corners of his eyes before he talks, \"<i>Oh that's rich!  I'm not here to fight you, Champion.  I doubt I'd stand much of a chance anyways.  I heard there were some renegades around this area, so I thought I'd show up to offer my services.  You see, I'm a procurer of strange and rare alchemical solutions.  Of course you beat down everyone before I got here, but I thought I'd stick around and see if some scouts were still around before I high-tailed it out of here.</i>\"\n\n", false);
+	outputText("Caught, you stand up and ready your " + player.weaponName + ", taking up a defensive stance to ready yourself for whatever new attacks this demon has.  Strangely, he just starts laughing again, and he has to stop to wipe tears from the corners of his eyes before he talks, \"<i>Oh that's rich!  I'm not here to fight you, Champion.  I doubt I'd stand much of a chance anyways.  I heard there were some renegades around this area, so I thought I'd show up to offer my services.  You see, I'm a procurer of strange and rare alchemical solutions.  Of course you beat down everyone before I got here, but I thought I'd stick around and see if some scouts were still around before I high-tailed it out of here.</i>\"\n\n");
 	
-	outputText("You stare, blinking your eyes in confusion.  A demon of lust, and he's not interested in fighting or raping you?  He laughs again as he reads your expression and calmly states, \"<i>No, I'm far from your average incubus.  To tell the truth I enjoy a spirited debate or the thrill of discovery over sating my sexual appetite, though of course I do indulge that from time to time.</i>\"\n\n", false);
+	outputText("You stare, blinking your eyes in confusion.  A demon of lust, and he's not interested in fighting or raping you?  He laughs again as he reads your expression and calmly states, \"<i>No, I'm far from your average incubus.  To tell the truth I enjoy a spirited debate or the thrill of discovery over sating my sexual appetite, though of course I do indulge that from time to time.</i>\"\n\n");
 	
-	outputText("The strange incubus flashes you a smile that makes you feel a tad uncomfortable before he finally introduces himself, \"<i>The name's Sean, and as you seem to be kicking the living shit out of Lethice's followers and enemies alike, I'd like to be on your side.  So I propose a mutually beneficial agreement – I'll sell you items you can't get anywhere else, and you let me live in this cave.  What do you say?</i>\"\n\n", false);
+	outputText("The strange incubus flashes you a smile that makes you feel a tad uncomfortable before he finally introduces himself, \"<i>The name's Sean, and as you seem to be kicking the living shit out of Lethice's followers and enemies alike, I'd like to be on your side.  So I propose a mutually beneficial agreement – I'll sell you items you can't get anywhere else, and you let me live in this cave.  What do you say?</i>\"\n\n");
 	
-	simpleChoices("Deal",2640,"No Deal",2641,"",0,"",0,"",0);
+	simpleChoices("Deal", incubusDeal, "No Deal", incubusNoDeal, "", null, "", null,"", null);
 }
 
-public function incubusDeal():void {
+private function incubusDeal():void {
 	spriteSelect(52);
-	outputText("", true);
-	outputText("\"<i>Excellent!  Give me a few moments to gather my things and I'll be open for business!</i>\" exclaims the strange demon.  If his story is true it's no wonder he doesn't get along with the rest of his kind.", false);
+	clearOutput();
+	outputText("\"<i>Excellent!  Give me a few moments to gather my things and I'll be open for business!</i>\" exclaims the strange demon.  If his story is true it's no wonder he doesn't get along with the rest of his kind.");
 	
 	//[Next – to room]
 	flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = 1;
 	doNext(1);
 }
 
-public function incubusNoDeal():void {
+private function incubusNoDeal():void {
 	spriteSelect(52);
-	outputText("", true);
+	clearOutput();
 	flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = -1;
-	outputText("Sean nods, grabs a pack, and takes off running before you have a chance to kill him.", false);
+	outputText("Sean nods, grabs a pack, and takes off running before you have a chance to kill him.");
 	doNext(1);
 }
 
 public function incubusShop():void {
 	spriteSelect(52);
-	if(flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 1) {
+	if (flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 1) {
 		telAdre.niamh.getBimboozeFromSean();
 		return;
 	}
-	outputText("", true);
-	outputText("Sean nods at you and slicks his hair back into place, threading it carefully around the small nubs of his horns before asking, \"<i>What can I do for you?</i>\"", false);
-	var bimbo:Number = 0;
-	if(player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
-	if(player.hasItem(consumables.BIMBOCH,5) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
-		bimbo = 3542;
-		outputText("  Luckily, you do!");
+	clearOutput();
+	outputText("Sean nods at you and slicks his hair back into place, threading it carefully around the small nubs of his horns before asking, \"<i>What can I do for you?</i>\"");
+	menu();
+	addButton(0, consumables.NUMBROX.shortName, incubusBuy, consumables.NUMBROX);
+	addButton(1, consumables.SENSDRF.shortName, incubusBuy, consumables.SENSDRF);
+	addButton(2, consumables.REDUCTO.shortName, incubusBuy, consumables.REDUCTO);
+	addButton(3, weapons.SUCWHIP.shortName, incubusBuy, weapons.SUCWHIP);
+	if (player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
+		outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
+		if (player.hasItem(consumables.BIMBOCH, 5)) {
+			outputText("  Luckily, you do!");
+			addButton(4, consumables.BIMBOLQ.shortName, telAdre.niamh.seanBimboBrewing);
+		}
 	}
-	choices(consumables.NUMBROX.shortName,2643,
-			consumables.SENSDRF.shortName,2644,
-			consumables.REDUCTO.shortName,2645,
-			weapons.SUCWHIP.shortName,2653,
-			consumables.BIMBOLQ.shortName,bimbo,
-			"",0,"",0,"",0,"",0,"Leave",1);
+	addButton(9, "Leave", camp.campMenu);
 }
 
-public function incubusBuy(itype:ItemType):void {
+private function incubusBuy(itype:ItemType):void {
 	spriteSelect(52);
-	outputText("", true);
-	outputText("The incubus lifts " + itype.longName + " from his shelves and says, \"<i>That will be " + (itype.value * 3) + " gems.  Are you sure you want to buy it?</i>\"", false);
+	clearOutput();
+	outputText("The incubus lifts " + itype.longName + " from his shelves and says, \"<i>That will be " + (itype.value * 3) + " gems.  Are you sure you want to buy it?</i>\"");
 	if(player.gems < (itype.value * 3)) {
-		outputText("\n<b>You don't have enough gems...</b>", false);
-		doNext(2642);
+		outputText("\n<b>You don't have enough gems...</b>");
+		doNext(incubusShop);
 		return;
 	}
-	doYesNo(Utils.curry(incubusTransact,itype),2642);
+	doYesNo(Utils.curry(incubusTransact, itype), incubusShop);
 }
 
-public function incubusTransact(itype:ItemType):void {
+private function incubusTransact(itype:ItemType):void {
 	spriteSelect(52);
-	outputText("", true);
+	clearOutput();
 	player.gems -= itype.value * 3;
-	menuLoc = 16;
 	statScreenRefresh();
-	inventory.takeItem(itype);
+	inventory.takeItem(itype, incubusShop);
 }
 
 //[Cum Bath]
@@ -2324,7 +2328,7 @@ public function valaCumBath2():void {
 	flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX]++;
 	player.orgasm();
 	dynStats("lib", -1.5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Big Vala Intro
@@ -2412,7 +2416,7 @@ public function bigValaDomsPC():void {
 	outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
 	player.slimeFeed();
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Big Vala: Lick Me (Requires Penor)
@@ -2465,7 +2469,7 @@ public function bigValaLicksOffDudes():void {
 	outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress and your [armor] back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
 	
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Intro to Vala + Vapula Threesomes
@@ -2530,7 +2534,7 @@ public function valaDommyVapula3Some():void {
 	player.orgasm();
 	dynStats("cor", 1);
 	player.slimeFeed();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Giant Vala + Vapula Threesome - Vala Lovey Dovey
 public function valaLoveyVapula3Some():void {
@@ -2563,7 +2567,7 @@ public function valaLoveyVapula3Some():void {
 	player.orgasm();
 	dynStats("cor", 1);
 	player.slimeFeed();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function kinathisValaStuff():void {
@@ -2667,5 +2671,5 @@ public function valaPartIIWaifuLove():void {
 	outputText("\n\nWith her being as affectionate she is, you can't help but smile and stroke her.  This really was nice; you could see yourself enjoying many more times like this, but unfortunately you do have to get back to your duty.  Pulling Vala into a kiss, you squeeze her and hold her tightly against you for a moment before lifting her off you, telling the girl that you have to go.  She sighs, knowing that you have to get back to being her hero.  \"<i>I know, go and be the big strong hero I know you are, just make sure you come and visit me at the bar whenever you want,</i>\" she says before kissing you one last time and showing you to the door.  Breathing in the morning air, you head back to camp to check up on the place.");
 	
 	//[return to camp][set clock to 7am]
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }

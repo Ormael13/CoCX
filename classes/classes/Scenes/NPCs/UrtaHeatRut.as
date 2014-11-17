@@ -266,7 +266,7 @@ private function stopTeasingDatHornyFox():void {
 
 	outputText("\n\nSeeing her lying there so still makes you concerned and you quickly approach; you didn't want to kill her!  Thankfully, she's still breathing; she just passed out from the overload and from drinking too much.  Looking around you, you can see that an orgy is starting to break out around you, and you quickly make a break for it.  As you go, you can't help but wonder what in the world you were thinking...");
 	dynStats("lust+",20 + player.lib/5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[=Keep Teasing=]
@@ -292,7 +292,7 @@ private function keepTeasingDatHornyFawkes():void {
 
 	//PC loses 1 hour, returns to TelâAdre, gains 15 lust, heat/rut unaffected//
 	dynStats("lust+",15 + player.lib/10);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -432,7 +432,7 @@ private function soberUrtaSatingPCHeat():void {
 	dynStats("lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 6;
 
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Quote:[=Sate Rut with Sober Urta: Cock Too Big=]
@@ -477,7 +477,7 @@ private function sateRutWithSoberUrtaButHuegDicked():void {
 	}
 	dynStats("lib+",1,"sen-",2,"lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	///Player returns to Tel'Adre Menu, usual one hor passes//
 }
 
@@ -543,7 +543,7 @@ private function sateRutWithSoberUrta():void {
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
 	dynStats("lib+",1,"sen-",2,"lust=",0);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 6;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Drunken Urta Variants 
@@ -626,7 +626,7 @@ private function drunkenUrtaFucksPCInHeat():void {
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 24;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
 	urtaLove(1);
-	doNext(15);
+	doNext(camp.returnToCampUseFourHours);
 }
 
 //[Sate Rut with Drunken Urta â Cock too big]
@@ -675,7 +675,7 @@ private function sateRutWithDrunkUrtaWithHugeDick():void {
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 1;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++
 	urtaLove(1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Quote:[Drunken Urta Fucks Cock]
@@ -886,7 +886,7 @@ private function drunkUrtaRidesARutPCsCock():void {
 	urtaLove(1);
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 24;
-	doNext(15);
+	doNext(camp.returnToCampUseFourHours);
 }
 
 

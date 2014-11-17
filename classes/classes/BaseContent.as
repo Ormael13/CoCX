@@ -93,10 +93,12 @@
 			return kGAMECLASS.date;
 		}
 
+/*
 		protected function inCombat():Boolean
 		{
 			return kGAMECLASS.inCombat();
 		}
+*/
 
 		protected function get inDungeon():Boolean
 		{
@@ -125,6 +127,7 @@
 			kGAMECLASS.inRoomedDungeonResume = v;
 		}
 		
+/*
 		protected function get itemSubMenu():Boolean
 		{
 			return kGAMECLASS.itemSubMenu;
@@ -133,6 +136,8 @@
 		{
 			kGAMECLASS.itemSubMenu = value;
 		}
+*/
+		
 		protected function showStats():void
 		{
 			kGAMECLASS.showStats();
@@ -143,7 +148,7 @@
 			kGAMECLASS.statScreenRefresh();
 		}
 
-		protected function cleanupAfterCombat(nextFunc:* = 13):void
+		protected function cleanupAfterCombat(nextFunc:Function = null):void
 		{
 			kGAMECLASS.cleanupAfterCombat(nextFunc);
 		}
@@ -640,6 +645,7 @@
 			return kGAMECLASS.inventory;
 		}
 
+/* No longer used
 		protected function get itemSwapping():Boolean
 		{
 			return kGAMECLASS.itemSwapping;
@@ -649,6 +655,7 @@
 		{
 			kGAMECLASS.itemSwapping = val;
 		}
+*/
 		
 		protected function get time():TimeModel
 		{
@@ -670,6 +677,7 @@
 			kGAMECLASS.menuLoc = val;
 		}
 		
+/* Classes should now use inCombat instead of setting gameState directly
 		protected function get gameState():Number
 		{
 			return kGAMECLASS.gameState;
@@ -679,12 +687,16 @@
 		{
 			kGAMECLASS.gameState = val;
 		}
+*/
 
+/*
 		protected function get itemSlots():Array
 		{
 			return kGAMECLASS.player.itemSlots;
 		}
+*/
 		
+/*
 		protected function get itemStorage():Array
 		{
 			return kGAMECLASS.itemStorage;
@@ -704,6 +716,7 @@
 		{
 			kGAMECLASS.gearStorage = val;
 		}
+*/
 		
 		protected function get temp():int
 		{

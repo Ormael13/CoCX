@@ -86,7 +86,7 @@ public function helpValentinesDay():void {
 public function leaveValentinesDayForever():void {
 	clearOutput();
 	outputText("Ultimately, this is not worth your time.  You wish Scylla good luck, but tell her you won't help her make the holiday more popular in Tel'Adre, as you have other things to do.  Her expression turns sad and she nods in understanding as you turn away and go back into the streets of Tel'Adre.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[next]
@@ -140,7 +140,7 @@ public function goHomeFromVDay():void {
 	//With no other things to do, you go back to camp to rest.
 	//{Small Lust Increase, return to camp, go to sleep}
 	dynStats("lus", 10);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //([Scylla])
@@ -201,7 +201,7 @@ public function cuddleWithScyllaVDay():void {
 	
 	outputText("\n\n(<b>You have gained the Pure and Loving perk!</b>");
 	player.createPerk(PerkLib.PureAndLoving,0,0,0,0);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //[Make out]
@@ -260,7 +260,7 @@ public function makeOutWithScyllaVDayII():void {
 		player.createPerk(PerkLib.SensualLover,0,0,0,0);
 	}
 	
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //[Feed Her!]
@@ -272,7 +272,7 @@ public function feedScyllaVDay():void {
 	player.orgasm();
 	outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
 	player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 
@@ -358,7 +358,7 @@ public function fuckAbbyVDay():void {
 	
 	player.orgasm();
 	dynStats("sen", -3);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //{PLEASURE HER}
@@ -388,7 +388,7 @@ public function pleasureAbbyVDay():void {
 	outputText("\n\n(<b>You've received the Pure and Loving Perk!</b>)");
 	player.createPerk(PerkLib.PureAndLoving,0,0,0,0);
 	dynStats("lus", 80);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //([Pastie])
@@ -408,7 +408,7 @@ public function goVisitPastyVDay():void {
 	}
 	else {
 		outputText("\n\nYou tell Pastie that, regrettably, you only have what she sees.  She nods and says, \"<i>Too bad.  I think I'll better get going, then.  It's been somewhat fun, and I finally get a chance to go to sleep sober and wake up without a hangover.");
-		doNext(14);
+		doNext(camp.returnToCampUseTwoHours);
 	}
 }
 
@@ -517,7 +517,7 @@ public function fuckPastieForVDay():void {
 	player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //[RubDick]
@@ -553,7 +553,7 @@ public function rubPastieOnYourWangDawg():void {
 	player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //[Pussy Dive]
@@ -590,7 +590,7 @@ public function goForAPushayDivePasty():void {
 	
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 /*END!

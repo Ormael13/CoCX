@@ -276,7 +276,7 @@ private function HaveAHellKidPartII():void {
 	
 	outputText("\n\nYou give your lover one last kiss before taking her back to camp proper, never letting her hand slip from yours all the way.");
 	//[Back to Camp menu]
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function getAnotherDad():void {
@@ -427,7 +427,7 @@ private function dontTellMeAboutSpiderboy():void {
 	outputText("at you, holding you tight for a long moment before stepping away, still holding your hands.  \"<i>This is all new to me, [name].  I never pictured myself as a mother, with a mate and a stable, safe home - or as stable and safe as anything these days - but with you by my side, there's nothing I can't take on.</i>\"");
 	
 	outputText("\n\nYou give your lover one last kiss before getting back to your quest.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -472,7 +472,7 @@ private function dontTellMeAboutMai():void {
 	outputText("at you, holding you tight for a long moment before stepping away, still holding your hands.  \"<i>This is all new to me, [name].  I never pictured myself as a mother, with a mate and a stable, safe home - or as stable and safe as anything these days - but with you by my side, there's nothing I can't take on.</i>\"");
 	
 	outputText("\n\nYou give your lover one last kiss before getting back to your quest.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -714,7 +714,7 @@ private function applyHelspawnName():void {
 	
 	outputText("\n\nYou nod and help Helia to her feet, still holding " + flags[kFLAGS.HELSPAWN_NAME] + " to her breast.  Your lover gives you a wink before walking bow-legged back toward her part of camp, and the little crib she's built beside her hammock.");
 	helSpawnsSetup();
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //NOTE: HelSpawn's personality meter & Growing Up
@@ -762,7 +762,7 @@ internal function heliaTalkEight():void {
 	outputText(" little girl's going to be a big girl damn soon.  Let's enjoy it while we can, eh?</i>\"");
 	
 	outputText("\n\nYou nod to your lover, and the both of you walk over to spend some quality time playing with " + flags[kFLAGS.HELSPAWN_NAME] + ".");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //From Hel's menu: [Play with Kid]
@@ -779,7 +779,7 @@ internal function playWithYourKid():void {
 	outputText("\n\n\"<i>We've got to wean this one before she bites my tits off,</i>\" Hel groans as " + flags[kFLAGS.HELSPAWN_NAME] + " latches on, starting to suckle.  \"<i>Those teeth came in fast...</i>\"");
 	
 	outputText("\n\nLaughing, you rustle " + flags[kFLAGS.HELSPAWN_NAME] + "'s fiery hair and leave mother and daughter to finish the meal.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Event: Helspawn Graduates from Baby to Teenager
@@ -811,7 +811,7 @@ public function helSpawnGraduation():void {
 	outputText("\n\nCupping Hel's cheek, you sit beside her, holding your lover tight as her daughter dozes beside her, clearly exhausted after the massive growth spurt she's endured while you were sleeping.");
 	
 	outputText("\n\nIt looks like you've got a teenager, now.  A wide-eyed, impressionable youth.  You can only hope you make the right choices in raising her now, when it counts...");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Event: Helspawn Discovers Booze
@@ -847,7 +847,7 @@ private function scoldHelSpawn():void {
 	outputText("\n\n\"<i>Alright, " + championRef() + ",</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " says, curling up beside you, head resting on your [chest].");
 	//{HelspawnChaste +10}
 	flags[kFLAGS.HELSPAWN_PERSONALITY] -= 10;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Encourage Her
 private function encourageHelspawn():void {
@@ -875,7 +875,7 @@ private function encourageHelspawn():void {
 	outputText("\n\n\"<i>I am so not cleaning this up,</i>\" Hel grumbles, flopping down beside you and fishing out a flask from her cloak.  \"<i>Well, at least you didn't drink </i>everything<i>.</i>\"");
 	//{HelspawnSlutty +10}
 	flags[kFLAGS.HELSPAWN_PERSONALITY] += 10;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Event: Helspawn Chooses a Fighting Style
@@ -948,7 +948,7 @@ private function snipermanders():void {
 	outputText("daughter will be a warrior worthy of her parent");
 	if(flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("s");
 	outputText("."); 
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Teach Her {Sword and Boardmander}
@@ -998,7 +998,7 @@ private function swordAndBoardmander():void {
 	outputText(".");
 	//{HelSpawnChaste +10}
 	flags[kFLAGS.HELSPAWN_PERSONALITY] -= 10;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Berzerker (Das Barbarimander)
@@ -1021,7 +1021,7 @@ private function dasBarbarimander():void {
 		//{HelSpawnSlutty +10}
 		flags[kFLAGS.HELSPAWN_PERSONALITY] += 10;
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 		
 //Event: Helspawn's a Little Slut Like Mommy
@@ -1096,7 +1096,7 @@ private function helSpawnStopFucking():void {
 	outputText("\n\nYou spend a bit more time with the chastened, and hopefully now more chaste, salamander girl before putting her to bed.  Stroking her hair, you slip back to your own bunk, hoping she'll take what you've said to heart.");
 	//{HelspawnChaste +10}
 	flags[kFLAGS.HELSPAWN_PERSONALITY] -= 10;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Capstone Event: Helspawn's All Grown Up
@@ -1115,7 +1115,7 @@ public function helspawnAllGrownUp():void {
 	outputText("\n\n<b>" + flags[kFLAGS.HELSPAWN_NAME] + " has been added to the Followers menu!</b>");
 	flags[kFLAGS.HELSPAWN_AGE] = 3;
 	flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] = 0;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1163,7 +1163,7 @@ private function hugHelspawn():void {
 		
 		outputText("\n\n\"<i>Love you too, " + championRef() + ",</i>\" she laughs, planting a quick kiss on your cheek before letting you go.");
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Talk
@@ -1216,7 +1216,7 @@ private function talkToHelspawn():void {
 		outputText("Imagine whole legions of children reared and raised in the time it takes a goblin to do the same. We might have a fighting chance for once, with numbers to match the demons.</i>\"");
 		
 		outputText("\n\n\"<i>But I suppose that's still out of reach, [name].  She's finished growing, and there's no sign of the exact chemical needed to synthesize the compound.  I'll keep checking up on her for health, though perhaps one day I'll find the means to make accelerated growth safe and widespread.  An old man can hope, yes?</i>\"");
-		doNext(13);		
+		doNext(camp.returnToCampUseOneHour);		
 	}
 	//Talk 4
 	//{Bath Slut w/ DD or HHH must be at camp}
@@ -1249,11 +1249,11 @@ private function talkToHelspawn():void {
 		outputText(" little " + flags[kFLAGS.HELSPAWN_NAME] + ",</i>\" Isabella says, pulling the young 'mander into a great big hug that threatens to smother her betwixt the cowgirl's massive bosoms.  Grinning, you congratulate " + flags[kFLAGS.HELSPAWN_NAME] + " on her performance, showering your girl in praise before you depart, leaving her to Isabella's instruction.  As you walk away, you can't help but notice Helia standing a short ways off, rubbing her eyes.");
 		
 		outputText("\n\nWhen you approach, your lover smiles at you, saying, \"<i>I always wanted to be a bard when I was a little girl.  I'm... I'm glad " + flags[kFLAGS.HELSPAWN_NAME] + "'s getting the chance, at least.</i>\"");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
 		outputText("Unfortunately, there doesn't seem to be anything in particular to talk about at the moment.  The two of you spend the time in companionable quiet, making smalltalk.");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -1264,7 +1264,7 @@ private function helSpawnBoyfriend():void {
 	outputText("\n\n\"<i>Alex?</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " asks, brightening up.  \"<i>I met him on the way to Tel'Adre.  Mom was stopping to, uh, take care of a few stray witches, and I ended up wandering off...</i>\" she says, launching into the tale of her meeting the effeminate spider boy, and the whirlwind romance that brought them giggling back to camp in the middle of the night.  It's typical teen talk, but then, you're not much older than she seems, now, and you remember the days at home when you could have done the same.  You grin as she recounts her first kiss, and note the bright blush on her cheek.");
 	
 	outputText("\n\nMaybe she ought to keep seeing this boy after all...");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1286,7 +1286,7 @@ private function dontFuckAlex():void {
 		
 		outputText("\n\nShe catches herself and sighs.  \"<i>I shouldn't say that.  I'm sorry, I know she tries.  She loves us, even if she has a strange way of showing it.  I'll do better in the future.  I promise.</i>\"");
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Incest / You & Me
@@ -1299,7 +1299,7 @@ private function incestWithHelspawn():void {
 	outputText("\n\nYou kiss her again and send her on her way with a sharp swat on the ass.  She gives it a sexy wiggle as she walks, winking back at you as she saunters off.");
 	dynStats("lus", player.sens/10+5, "resisted", false);
 	flags[kFLAGS.HELSPAWN_INCEST] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Oh God EW]
@@ -1326,7 +1326,7 @@ private function ohGodEwKihaAndHelspawnSuckAtCooking():void {
 	outputText("\n\nKiha gives you an incredulous look, but takes a tentative sip anyway.  Her eyes brighten as she takes a second, and then a third gulp, soon shoveling it in greedily.  \"<i>Told ya, doofus!</i>\" she gloats, putting down the empty bowl.  \"<i>Nothing beats aunt Kiha's special recipe!</i>\"");
 	
 	outputText("\n\nYou just shake your head and grab a bowl, sitting down with the scaly ladies as you enjoy your lunch, trying to ignore the little shit-eating grin " + flags[kFLAGS.HELSPAWN_NAME] + "'s sporting all the while.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function umYum():void {
 	clearOutput();
@@ -1337,14 +1337,14 @@ private function umYum():void {
 	outputText("\n\nAs you're wandering off looking for somewhere to hurl, you hear the tell-tale groans and gagging of a pair of scaly ladies who've just realized what kind of abomination they've created.");
 	
 	outputText("\n\nMaybe you ought to start doing the cooking around here...");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Sure
 private function helSpawnSureMilkHerLater():void {
 	clearOutput();
 	outputText("You chuckle, telling her to let the poor girl sleep.  There'll be plenty of milk later.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Now
@@ -1365,7 +1365,7 @@ private function helSpawnMilkHerNow():void {
 	else outputText("\n\n\"<i>Sorry, " + flags[kFLAGS.MILK_NAME] + ", you know I'm not really into that.  Just turn around and sit back, alright?</i>\"  With a sigh, " + flags[kFLAGS.MILK_NAME] + " does as she's asked, leaning back into " + flags[kFLAGS.HELSPAWN_NAME] + "'s arms as the young salamander goes to work, clawed fingers gently caressing her prominent nubs until a white flow springs fort, splashing her knees as the dusky maid gives a little gasp of pleasure.");
 	
 	outputText("\n\n<i>They seem to get on all right</i>, you think as you watch the pair of them.  It's nice to have someone else around to help keep " + flags[kFLAGS.MILK_NAME] + "'s production under control.  Poor thing just never stops lactating.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Spar
@@ -1480,7 +1480,7 @@ public function maiVisitsHerKids():void {
 	outputText("\n\n\"<i>And you, [name],</i>\" she says, turning to you, \"<i>Thanks for taking care of " + flags[kFLAGS.HELSPAWN_NAME] + ".  I-I mean, I know I was really making her for you and Hel anyway, but still... she's a good kid, and I love her anyway.  Keep her safe, alright?</i>\"");
 	
 	outputText("\n\nYou promise that you will, and with a quick nod, Mai runs after " + flags[kFLAGS.HELSPAWN_NAME] + " to say goodbye for the day.  As she leaves, Helia grins, holding you tight against her.  \"<i>She's a good girl, [name].  Couldn't have picked a better father for our girl.</i>\"");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Spider Bro's Gift
@@ -1501,7 +1501,7 @@ public function spiderBrosGift():void {
 	outputText("\n\nYou shrug, but as she turns away, you grab the corner of the scarf and feel it.  Spider silk, if ever you've felt it.  A grin spreads across your face as you realize who must have made this.");
 	
 	outputText("\n\nThen you realize someone just walked into your camp and could have slaughtered you all.  You should probably fix that.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1569,7 +1569,7 @@ private function goHuntingBitches():void {
 	outputText("\n\n\"<i>R-right!</i>\"");
 	
 	outputText("\n\nWith that settled, you sit down as Hel passes out something that must be akin to dinner for her family - mostly booze and rations - and soon you're enjoying a meal with the rowdy family, laughing at Hel's ribald jokes or Hakon's old war stories.  Eventually, Hakon and Kiri leave, but not before promising to come and get you and the family for their next gnoll hunt.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Maybe not
 private function noHuntingBitches():void {
@@ -1579,7 +1579,7 @@ private function noHuntingBitches():void {
 	outputText("\n\n\"<i>Well, maybe you'll change your mind next time.  Plenty of evil furbags to go around!</i>\" Hel says with a laugh.  \"<i>C'mon, let's find something for the folks to eat, huh?</i>\"");
 	
 	outputText("\n\nWith that settled, you sit down as Hel passes out something that must be akin to dinner for her family - mostly booze and ration - and soon you're enjoying a meal with the rowdy family, laughing at Hel's ribald jokes or Hakon's old war stories.  Eventually, Hakon and Kiri leave, waving goodbye until the next time they can visit.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 

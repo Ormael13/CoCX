@@ -2,6 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.WeaponLib;
 	import classes.Scenes.Places.Owca.*;
 
 	public class Owca extends BaseContent{
@@ -78,7 +79,7 @@ private function gangbangVillageFirstGoRound():void {
 private function dontGoToZeVillage():void {
 	clearOutput();
 	flags[kFLAGS.DECLINED_TO_VISIT_REBECCS_VILLAGE]++;
-	eventParser(13);
+	camp.returnToCampUseOneHour();
 }
 //First plea (Z)
 private function agreeToFollowRebecFirstTime():void {
@@ -155,7 +156,7 @@ private function declineRebeccsPlea():void {
 	//[Attitude is set to 50]
 	if(flags[kFLAGS.OWCAS_ATTITUDE] > 5) flags[kFLAGS.OWCAS_ATTITUDE] -= 5;
 	flags[kFLAGS.TIMES_REFUSED_REBECCS_OFFER]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Accept plea (Z)
 private function acceptRebeccsPlea(firstTime:Boolean = false, sacrificed:Boolean = false):void {
@@ -232,7 +233,8 @@ private function fightZeDemons(sacrifice:Boolean = true):void {
 		//Remove weapon
 		player.createStatusAffect(StatusAffects.Disarmed,0,0,0,0);
 		flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-		player.weapon.unequip(player,false,true);
+		player.setWeapon(WeaponLib.FISTS);
+//		player.weapon.unequip(player,false,true);
 		monster.createStatusAffect(StatusAffects.BowDisabled,0,0,0,0);
 		if(player.str < 80 && player.spe < 80) {
 			monster.createStatusAffect(StatusAffects.AttackDisabled,0,0,0,0);
@@ -343,8 +345,9 @@ private function wakeUpAfterDemonGangBangs():void {
 	fatigue(20);
 	player.slimeFeed();
 	dynStats("str", -2,"tou", -2, "spe", -1, "int", -1, "lib", 1, "sen", 1, "lus=", 100, "cor", 3);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 	//PC is redirected to camp, next morning. No nightly camp scenes or dreams.
 }
 	
@@ -563,9 +566,9 @@ private function owcaMainScreenOn():void {
 	else if(flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] > 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText("  More than a week");
 	if(flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] >= 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText(" has passed since the last offering to the demons; guarding the pit would certainly help improve your relations with the little town's denizens.");
 	//Option: 
-	var pit:* = 0;
-	var herd:* = 0;
-	var tavern:* = 0;
+	var pit:Function = null;
+	var herd:Function = null;
+	var tavern:Function = null;
 	if(model.time.hours >= 16 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) {
 		//Pit. Requires 16:00 or later. Leads to the night gangbang (with possible fight) scene, this time fully equipped and clothed. Attitude is raised by 3.
 		pit = zePit;
@@ -583,7 +586,7 @@ private function owcaMainScreenOn():void {
 		tavern = owcaTavern;
 	}
 	//[Pit][Herds][Rebecc][Tavern]
-	simpleChoices("Pit",pit,"Herds",herd,"Rebecc",rebeccMenu,"Tavern",tavern,"Leave",13);
+	simpleChoices("Pit",pit,"Herds",herd,"Rebecc",rebeccMenu,"Tavern",tavern,"Leave",camp.returnToCampUseOneHour);
 }
 //Tavern (Z)
 public function owcaTavern():void {
@@ -618,13 +621,13 @@ private function owcaBuySetup(item:ItemType):void {
 	else if(item == consumables.BROBREW) buyOwcaShit(item,2000);
 	else buyOwcaShit(item,(300 - flags[kFLAGS.OWCAS_ATTITUDE]));
 }
+
 private function buyOwcaShit(bleh:ItemType,price:Number = 0):void {
 	clearOutput();
 	player.gems -= price;
 	statScreenRefresh();
 	outputText("The bartender hands you a bottle and grabs your gems before attending other clients, leaving you to your own business.\n\n");
-	menuLoc = 25;
-	inventory.takeItem(bleh);
+	inventory.takeItem(bleh, owcaTavern);
 }
 	
 //Herds (Z)
@@ -639,10 +642,9 @@ private function herds():void {
 	//[if attitude > 70]
 	if(flags[kFLAGS.OWCAS_ATTITUDE] > 70) {
 		outputText("\n\nThe villagers thank you for your hard work and one of them hands you a bottle of sheep milk.  \"<i>'Tis good for your health.  Don't worry, it won't... mutate you.</i>\"\n\n");
-		menuLoc = 2;
-		inventory.takeItem(consumables.SHEEPMK);
+		inventory.takeItem(consumables.SHEEPMK, camp.returnToCampUseOneHour);
 	}
-	else doNext(13);
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Pit (Z)
@@ -705,7 +707,7 @@ private function rebeccBathScene():void {
 	//Lust +30, Corr -2, Lib +1, slimefeed
 	dynStats("lib", 1, "lus", 30, "cor", -2);
 	player.slimeFeed();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Rebecc Rape scene (for discerning penises) (Z)
 private function rapeRebecc(outside:Boolean = false):void {
@@ -763,8 +765,9 @@ private function rapeRebecc(outside:Boolean = false):void {
 	dynStats("lib", -2, "cor", 5);
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	
-	if (inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Desperate Villagers (Z)
@@ -872,7 +875,8 @@ private function forgiveOwca():void {
 	flags[kFLAGS.OWCAS_ATTITUDE] = 60;
 	flags[kFLAGS.OWCA_ANGER_DISABLED] = 1;
 	//To main owca menu
-	if (inCombat()) cleanupAfterCombat(gangbangVillageStuff);
+	if (getGame().inCombat)
+		cleanupAfterCombat(gangbangVillageStuff);
 	else doNext(gangbangVillageStuff);
 }
 //Option: Leave (Z)
@@ -880,8 +884,9 @@ private function fuckThisShit():void {
 	clearOutput();
 	outputText("You stare at the wretched, whimpering creature before you for a moment.  There's nothing to say.  Without a word, you head back to your camp, carefully closing Rebecc's door behind you as you leave.");
 	flags[kFLAGS.REBECCS_LAST_PLEA] = 1;
-	if (inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 //Rebecc's Last Plea (Z)
 private function rebeccsLastPlea():void {
@@ -902,7 +907,7 @@ private function leaveRebeccToBeRaped():void {
 	//[Owca Village removed from "Places" menu.]
 	outputText("\n\n(Owca has been removed from the places menu.)");
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Option: Face Down the World (Z)
 private function faceDownHordes():void {

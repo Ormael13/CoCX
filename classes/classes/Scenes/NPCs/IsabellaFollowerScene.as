@@ -105,7 +105,7 @@ internal function isabellaMoovesInGreeting():void {
 			if(player.cocks[player.shortestCockIndex()].cockLength < 9)
 				suck = isabellaScene.izzyGivesSmallWangsFreeOral;
 		}
-		choices("Talk",isabellaScene.talkWithIsabella,"Drink",isabellaScene.nomOnMommaIzzysTits,"Get Licked",suck,"Fight 4 Rape",isabellaScene.fightIsabella,"Offer Oral",isabellaScene.volunteerToSlurpCowCunt,"Accept Offer",moveTheBitchIn,"",0,"",0,"",0,"Leave",13);
+		choices("Talk",isabellaScene.talkWithIsabella,"Drink",isabellaScene.nomOnMommaIzzysTits,"Get Licked",suck,"Fight 4 Rape",isabellaScene.fightIsabella,"Offer Oral",isabellaScene.volunteerToSlurpCowCunt,"Accept Offer",moveTheBitchIn,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 	}
 	flags[kFLAGS.ISABELLA_TIMES_OFFERED_FOLLOWER]++;
 }
@@ -122,7 +122,7 @@ private function turnDownIsabellaFollower():void {
 		if(player.cocks[player.shortestCockIndex()].cockLength < 9)
 			suck = isabellaScene.izzyGivesSmallWangsFreeOral;
 	}
-	choices("Talk",isabellaScene.talkWithIsabella,"Drink",isabellaScene.nomOnMommaIzzysTits,"Get Licked",suck,"Fight 4 Rape",isabellaScene.fightIsabella,"Offer Oral",isabellaScene.volunteerToSlurpCowCunt,"",0,"",0,"",0,"",0,"Leave",13);
+	choices("Talk",isabellaScene.talkWithIsabella,"Drink",isabellaScene.nomOnMommaIzzysTits,"Get Licked",suck,"Fight 4 Rape",isabellaScene.fightIsabella,"Offer Oral",isabellaScene.volunteerToSlurpCowCunt,"",0,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 }
 //Move Ze Bitch In! 
 private function moveTheBitchIn():void {
@@ -137,7 +137,7 @@ private function moveTheBitchIn():void {
 	flags[kFLAGS.ISABELLA_AFFECTION] = 100;
 	flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
 	flags[kFLAGS.ISABELLA_PLAINS_DISABLED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Follower Summoned Text: 
@@ -214,7 +214,7 @@ private function sendToFarm():void
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] = 1;
 	
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function backToCamp():void
@@ -342,7 +342,7 @@ private function isabellasAccentCoaching():void {
 	if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] > 100) flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] = 100;
 	//4 to 12 hour cooldown
 	flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN] = 4 + rand(13);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Morning Wakeup Call 
@@ -515,7 +515,7 @@ private function repeatGermanBratwurstInCamp():void {
 		if(silly() && (player.lust < 50 || player.lib <= 20)) {
 			outputText("  Your cock immediately deflates from her laughable doujin-tier pillow talk and falls out of her buttcheeks.  You'll be posting that line to 4chan later for laughs.", false);
 			dynStats("lus", -99);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		outputText("  She doesn't even let you answer.  Her back-and-forth flexing abruptly halts as she switches to an up and down motion, hotdogging your " + cockDescript(x) + " in the tight vice of her spotted backside.\n\n", false);
@@ -573,7 +573,7 @@ private function repeatGermanBratwurstInCamp():void {
 	flags[kFLAGS.ISABELLA_TIMES_HOTDOGGED]++;
 	player.orgasm();
 	dynStats("lib", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function izzyTentacleRapeBool():Boolean {
@@ -720,7 +720,7 @@ private function tentacleBoneFollowerIzzy():void {
 	outputText("You keep holding her with " + sMultiCockDesc() + " for a moment, both of you enjoying the powerful embrace as you literally dick-hug her.  The entirety of her body is dripping with your jism but she doesn't seem to care.  Eventually, you put her down, letting her splat in the puddle of juices that formed below your junk-prison.  At last, you unfold your arms.\n\n", false);
 	player.orgasm();
 	dynStats("lib", -1, "sen", -1, "cor", .3);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Milking Isabella (dey terk Merble's jerb!)
@@ -745,7 +745,7 @@ private function izzyMilkYourselfDamnit():void {
 	//set Izzy Milked Yet flag to 0
 	//in other words, she handles it herself somehow but it repeats after another ten days without milking her
 	flags[kFLAGS.ISABELLA_MILKED_YET] = 0;
-	eventParser(13);
+	camp.returnToCampUseOneHour();
 }
 //[Yes]
 private function izzyMilkingMeinMilkersMya():void {
@@ -826,8 +826,7 @@ private function AllowIzzyMilkerUse():void {
 	if(player.hasCock()) outputText("(You have a hunch that you might be able to catch her using the milkers at the farm if you 'explore' there, provided she hasn't been recently milked.)\n\n");
 	//get 1 Izzit Milk or Cream? item, set Izzy Milked Yet flag to -1, which adds [GetMilk] button to follower menu
 	flags[kFLAGS.ISABELLA_MILKED_YET] = -1;
-	menuLoc = 2;
-	inventory.takeItem(consumables.IZYMILK);
+	inventory.takeItem(consumables.IZYMILK, camp.returnToCampUseOneHour);
 }
 
 //[Mine Mine MINE!]
@@ -842,8 +841,7 @@ private function noMilkingMilky():void {
 	outputText("arousal at your touch, blushing at putting on such a show in front of Whitney.  The farmer shrugs.  \"<i>Y'all please yourselves.  Milker'll be here if you need it.</i>\"\n\n", false);
 	//get 1 Izzit Milk or Cream? item, set Izzy Milked Yet flag to -2, which adds [GetMilk] button to follower menu
 	flags[kFLAGS.ISABELLA_MILKED_YET] = -2;
-	menuLoc = 2;
-	inventory.takeItem(consumables.IZYMILK);
+	inventory.takeItem(consumables.IZYMILK, camp.returnToCampUseOneHour);
 }
 
 //[GetMilk] 
@@ -881,8 +879,7 @@ private function getMilk():void {
 	//get 1 Izzit Milk or Cream? item, lose some fatigue and gain some lust if Izzy Milked Yet flag = -2
 	flags[kFLAGS.ISABELLA_MILKED_YET] = -2;
 	flags[kFLAGS.ISABELLA_MILK_COOLDOWN] = 7 + rand(4);
-	menuLoc = 2;
-	inventory.takeItem(consumables.IZYMILK);
+	inventory.takeItem(consumables.IZYMILK, camp.returnToCampUseOneHour);
 }
 //TDM's Angry Murble
 public function angryMurble():void {
@@ -1157,7 +1154,7 @@ private function declineIzzysCowBurpApology():void {
 	else {
 		outputText("Despite your strangely inspired lust, you turn the cow-girl down.  Though crestfallen, she takes the news well, apologizing - sincerely and soberly - once more before moving back to her designated camping spot.  Happily, after about an hour, you get back to normal.", false);
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //yes
@@ -1233,7 +1230,7 @@ private function acceptCowpology():void {
 			outputText("A few minutes later both of you stir from your post-orgasmic lethargy, lying in the aftermath of your short-but-sweet adventure.  Without words, Isabella blows a kiss at you and rolls to her feet, shambling back to her bunk.  You lie there for the rest of the hour, feeling the effects of her burpy influence fade slowly away.", false);
 		}
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Get Licked in Return (seems incompatible with centaurs/driders due to lap-sitting)
@@ -1283,7 +1280,7 @@ internal function receiveAllTheCowTOngues():void {
 	if(isabellaAccent()) outputText("  A bit confused, she nonetheless leaves and returns with a drink, setting it beside you before leaving you to your rest.");
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1362,7 +1359,7 @@ private function fuckIsabella():void {
 	outputText("\n\nYou grin and rub the big cow's hair before getting dressed.");
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Isabella at the Farm
@@ -1377,7 +1374,7 @@ public function findIzzyMilking():void {
 	flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] = 1;
 	//[Fuck her] [Leave]
 	addButton(0,"Fuck Her",fuckIsabellaInTheBarn);
-	addButton(4,"Leave",eventParser,13);
+	addButton(4,"Leave",camp.returnToCampUseOneHour);
 	  
 }
 
@@ -1472,7 +1469,7 @@ private function isabellaBarnFuckPartII():void {
 	player.orgasm();
 	dynStats("lib", -1, "sen", -3);
 	fatigue(-25);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 }
 }

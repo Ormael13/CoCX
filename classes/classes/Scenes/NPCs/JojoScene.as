@@ -18,6 +18,7 @@
 			pregnancy.pregnancyAdvance();
 			trace("\nJojo time change: Time is " + model.time.hours + ", butt incubation: " + pregnancy.buttIncubation);
 			if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN]--;
+			if (player.findStatusAffect(StatusAffects.NoJojo) >= 0) player.removeStatusAffect(StatusAffects.NoJojo);
 			if (model.time.hours > 23 && player.statusAffectv1(StatusAffects.Meditated) > 0) {
 				player.removeStatusAffect(StatusAffects.Meditated);
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102] == 0) {
@@ -82,14 +83,18 @@ override public function campCorruptJojo():Boolean {
 }
 
 private function jojoMutationOffer():void {
+	jojoSprite();
 	outputText("A wicked idea comes to mind while thinking of Jojo.  The lethicite you took from the lake goddess – perhaps it could be used to enhance your own budding demonic powers, and twist your mousey fuck-puppet into a truly worthy pet?\n\n<b>Do You?</b> (WARNING: Offered only once & unlocks tentacle content)", true);
-	doYesNo(2134,2135);
+	doYesNo(jojoMutationOfferYes, jojoMutationOfferNo);
 }
-public function jojoMutationOfferNo():void {
+
+private function jojoMutationOfferNo():void {
+	jojoSprite();
 	outputText("There are some lines even you won't cross.  Besides, having a sex-addled mouse with a constantly drooling foot-long cock is all the fun you can handle.\n\nWith that decided you prepare to call on your slut.", true);
 	//Normal jojo sex scene here
-	doNext(2138);
+	doNext(getGame().masturbateJojo);
 }
+
 //CORRUPT CAMP JOJO
 public function corruptCampJojo():void {
 	clearOutput();
@@ -157,8 +162,7 @@ public function corruptCampJojo():void {
 			
 			outputText("\n\n“<i>M-mistress Whitney says s-she'll put the rest with your cut of the farm profits [master].</i>”\n\n");
 			
-			menuLoc = 33;
-			inventory.takeItem(consumables.INCUBID);
+			inventory.takeItem(consumables.INCUBID, corruptCampJojo);
 			return;
 		}
 		else
@@ -167,8 +171,8 @@ public function corruptCampJojo():void {
 		}
 	}
 	
-	var tent:Number = 0;
-	if(tentacleJojo() && player.lust >= 33) tent = 2137;
+	var tent:Function = null;
+	if (tentacleJojo() && player.lust >= 33) tent = useTentacleJojo;
 	var milkHim:Function = null;
 	var tentaMilk:Function = null;
 	var eggs:Function = null;
@@ -182,10 +186,10 @@ public function corruptCampJojo():void {
 		} else milkHim = milkJojoFirst;
 	}
 	var hairCare:Function = null;
-	var sex:Number = 0;
-	if(player.gender > 0 && player.lust >= 33) sex = 2138;
-	if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) hairCare = jojoPaysForPerms;
-	choices("Sex", sex, "TentacleSex", tent, "Milk Him", milkHim, "TentacleMilk", tentaMilk, "HairCare", hairCare, "Lay Eggs", eggs, "", 0, "", 0, "", 0, "Back", camp.campSlavesMenu);
+	var sex:Function = null;
+	if (player.gender > 0 && player.lust >= 33) sex = getGame().masturbateJojo;
+	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) hairCare = jojoPaysForPerms;
+	choices("Sex", sex, "TentacleSex", tent, "Milk Him", milkHim, "TentacleMilk", tentaMilk, "HairCare", hairCare, "Lay Eggs", eggs, "", null, "", null, "", null, "Back", camp.campSlavesMenu);
 	
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) addButton(6, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(6, "Go Camp", backToCamp);
@@ -246,7 +250,7 @@ private function sendToFarm():void
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] = 1;
 	
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function backToCamp():void
@@ -261,7 +265,7 @@ private function backToCamp():void
 	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
-public function jojoMutationOfferYes():void {
+private function jojoMutationOfferYes():void {
 	jojoSprite();
 	player.addKeyValue("Marae's Lethicite",2,1);
 	outputText("There's no question about it, this is a great idea.  It might be coming from the corruption in your blood, but why bother to fight it?  You take Marae's lethicite and grab one of the larger crystalline protrusions.  With a hard yank, you break it off from the main cluster, sending tiny crystalline shards over the campsite.  They vanish into the ground before you have a chance to gather them.\n\n", true);
@@ -288,10 +292,10 @@ public function jojoMutationOfferYes():void {
 		outputText("The dildo disappears back into your inventory, and you smile in wicked anticipation of your next meeting with Jojo.\n", false);
 	}
 	outputText("\n<b>You just can't wait!  You'll call him over now...</b>", false);
-	doNext(2136);
+	doNext(mutateJojo);
 }
 
-public function mutateJojo():void {
+private function mutateJojo():void {
 	jojoSprite();
 	outputText("You call out, and Jojo obediently pads into the camp.  At some point he decided to switch to wearing a loin-cloth, for all the good it has done him – it drapes over his member, barely covering half of it as it twitches and throbs from your presence.  You gesture for him to remove that tiny cloth, and he does immediately.  When he gets within a few feet of you, he drops to his knees with his hands behind his back, his head down submissively.  You see little tics and twitches run through his body as he fights to resist touching himself, so you drag it out and see how long he can wait.\n\n", true);
 	outputText("It doesn't take long.  A plaintive whine escapes him as his hand creeps around his waist.  You grin and push him onto his back, stepping onto his wrist to pin his hand in place.  You drop the crystal dildo onto his chest with a single command, \"<i>Use it</i>\".\n\n", false);
@@ -611,7 +615,7 @@ public function useTentacleJojo():void {
 	player.cuntChange(40, true);
 	player.orgasm();
 	dynStats("cor", .5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Jojo milk payments
@@ -763,7 +767,7 @@ private function milkJojoFirst():void {
 	jojoMilkPay();
 	
 	outputText("o on your way, dragging an exhausted mouse behind you as you head back towards camp.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function repeatMilkJojo(tentacle:Boolean = false):void {
@@ -852,7 +856,7 @@ private function repeatMilkJojo(tentacle:Boolean = false):void {
 		outputText("o on your way, dragging an exhausted mouse behind you as you head back towards camp.", false);
 	}
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Use Jojo to pay for Hair Care 
 private function jojoPaysForPerms():void {
@@ -954,7 +958,7 @@ private function fillAmilysMouth():void {
 	outputText("\n\nThe sperm-filled girl burps and turns to kiss Jojo, the once-pure monk eagerly returning the embrace and getting a good taste for your seed as Amily fervently tongues it into his mouth.  She eventually pulls back to encourage him with an overwrought sigh. \"<i>Maybe if you service [master] better you'll be allowed to receive [his] seed next time.</i>\"  Jojo pants and licks at his lips, hands darting down to tend to his long-neglected phallus.");
 	outputText("\n\nYour personal whore laughs and hugs your leg, whispering, \"<i>Cum-slut thanks you, [master].</i>\"  You pull her up and smile at her, glad she's working to make your budding harem as sexually adept as possible.  She beams and grabs Jojo with her tail, no doubt eager to drag him off for more training.");
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Fill Amily's Twat (requires not short-ass, weak-ass nigga) (Z)
 private function stuffAmilysMouthWithPostBJCUM():void {
@@ -970,7 +974,7 @@ private function stuffAmilysMouthWithPostBJCUM():void {
 	dynStats("sen", -1);
 	//{DONT FORGET PREGNANCY CHECK}
 	amilyScene.amilyPreggoChance();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Fill Jojo's Mouth (Z)
 private function fillJojosMouthWithHotStickyCum():void {
@@ -981,7 +985,7 @@ private function fillJojosMouthWithHotStickyCum():void {
 	outputText("\n\nWhile one of your mouse-toys is polishing your rod, the other is masturbating and panting.  \"<i>Please, [master], may I... may I have some cum?  Can I... I lick him clean?  He's so...</i>\"  She inhales and luridly moans, \"<i>...messy.</i>\"  You give her your assent as you withdraw your spit-shined pecker from Jojo's maw, not caring how the two of them get their rocks off so long as your harem is kept well-trained and willing.");
 	player.orgasm();
 	dynStats("lib", -1, "cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //Scene 2: Amily And Jojo Fuck (w/o Tentacles) (Z)
@@ -1004,11 +1008,62 @@ private function amilyAndJojoFuck():void {
 	player.orgasm();
 	//{DONT FORGET PREGNANCY CHECK}
 	//amilyPreggoChance();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function jojoFollowerMeditate():void {
+	jojoSprite();
+	if (player.statusAffectv1(StatusAffects.Meditated) > 0) {
+		outputText("Jojo smiles and meditates with you.  The experience is calming, but it's so soon after your last session that you don't get much benefit from it.", doClear);
+		if (player.lust > 40) dynStats("lus", -10);
+	}
+	else {
+		outputText("The mouse monk leads you to a quiet spot away from the portal and the two of you sit down, him cross-legged and you mimicking to the best of your ability, back to back.  You close your eyes and meditate for half-an hour, centering your body and mind.  Afterwards, he guides you through stretches and exercises to help keep your bodies fit and healthy.\n\nWhen you are done, Jojo nods to you, and climbs back onto his rock, still thinking.", doClear);
+		//Reduces lust
+		dynStats("lus", -30);
+		var cleanse:int = -2; //Corruption reduction - faster at high corruption
+		if (player.cor > 80)
+			cleanse -= 3;
+		else if (player.cor > 60)
+			cleanse -= 2;
+		else if (player.cor > 40)
+			cleanse -= 1;
+		dynStats("cor", cleanse - player.countCockSocks("alabaster"));
+		if (player.str < 45) dynStats("str", 1); //Str boost to 45
+		if (player.tou < 45) dynStats("tou", 1); //Tou boost to 45
+		if (player.spe < 75) dynStats("spe", 1); //Speed boost to 75
+		if (player.inte < 80) dynStats("int", 1); //Int boost to 80
+		if (player.lib > 15) dynStats("lib", -1); //Libido lower to 15
+		player.createStatusAffect(StatusAffects.Meditated, 1, 0, 0, 0);
+	}
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function jojoDefenseToggle():void {
+	jojoSprite();
+	clearOutput();
+	if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0) {
+		player.removeStatusAffect(StatusAffects.JojoNightWatch);
+		outputText("You tell Jojo that you no longer need him to watch the camp at night.  He nods, then speaks.  \"<i>Alright.  Please let me know if you require my help again.</i>\"");
+	}
+	else {
+		player.createStatusAffect(StatusAffects.JojoNightWatch, 0, 0, 0, 0);
+		outputText("You ask the monk if he could guard the camp for you at night.  He smiles politely.  \"<i>Certainly, [name].</i>\"");
+	}
+	doNext(jojoCamp);
 }
 
 // Hurray var/function hoisting.
 //this.semiglobalReferencer.jojoRape = jojoRape;
+
+public function jojoAtCampRape():void {
+		jojoSprite();
+		player.removeStatusAffect(StatusAffects.JojoNightWatch);
+		player.removeStatusAffect(StatusAffects.PureCampJojo);
+		clearOutput();
+		outputText("You ask Jojo if he'd like to go on a hunt through the woods to clear out some of the corrupted creatures, and the mouse readily agrees.  He asks if you've been getting a bit stir-crazy from having your camp in one place as the two of you walk into the woods...");
+		doNext(jojoRape);
+}
 
 public function jojoRape():void {
 	trace("jojoRape called");
@@ -1425,7 +1480,7 @@ public function jojoRape():void {
 			}
 		}
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Bee on C. Jojo: Finished (Fenoxo) (Zedit)
@@ -1568,23 +1623,70 @@ public function lowCorruptionIntro():void
 	outputText("feel any corruption within you, it’s always best to be prepared.  Would you care to join me in meditation?</i>”\n\n");
 	
 	menu();
-	addButton(0, "Meditate", eventParser, 2003); // OH GOD NO SEND HELP
-	addButton(1, "Leave", eventParser, 13);
+	addButton(0, "Meditate", meditateInForest); // OH GOD NO SEND HELP
+	addButton(1, "Leave", camp.returnToCampUseOneHour);
 	addButton(4, "Rape", jojoRape);
 }
 
-// Some hacky shit to be able to control the text clearing mechanics of the doEvent system... OH GOD WHY.
-private var _doClear:Boolean = true;
-public function get doClear():Boolean
-{
-	var returnVal:Boolean = _doClear;
-	if (_doClear = false) _doClear = true;
+public function meditateInForest():void {
+	jojoSprite();
+	clearOutput();
+	outputText("Jojo smiles and leads you off the path to a small peaceful clearing.  There is a stump in the center, polished smooth and curved in a way to be comfortable.  He gestures for you to sit, and instructs you to meditate.\n\nAn indeterminate amount of time passes, but you feel more in control of yourself.  Jojo congratulates you, but offers a warning as well.  \"<i>Be ever mindful of your current state, and seek me out before you lose yourself to the taints of this world.  Perhaps someday this tainted world can be made right again.</i>\"");
 	
-	return returnVal;
+	dynStats("str", .5, "tou", .5, "int", .5, "lib", -1, "lus", -5, "cor", (-1 - player.countCockSocks("alabaster")));
+	
+	if (player.findStatusAffect(StatusAffects.JojoMeditationCount) < 0)
+		player.createStatusAffect(StatusAffects.JojoMeditationCount, 1, 0, 0, 0);
+	else player.addStatusValue(StatusAffects.JojoMeditationCount, 1, 1);
+		
+	if (player.statusAffectv1(StatusAffects.JojoMeditationCount) >= 5) {
+		outputText("\n\nJojo nods respectfully at you when the meditation session is over and smiles.  ");
+		//Forest Jojo Eligible for Invite After Meditation but There's Trash in Camp -Z
+		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.statusAffectv1(StatusAffects.JojoMeditationCount) % 5 == 0) {
+			//replaces 'Jojo nods respectfully at you [...] "It seems you have quite a talent for this. [...]"' invite paragraphs while Treefingers is getting slut all over your campsite
+			//gives Small Talisman if PC never had follower Jojo or used it and ran from the fight
+			if (player.hasKeyItem("Jojo's Talisman") >= 0) { //[(if PC has Small Talisman)
+				outputText("Jojo smiles at you.  \"<i>[name], well done.  Your talent at focusing is undiminished.  Regarding the other issue... you still have the item I gave you?</i>\"");
+				outputText("\n\nYou hold up the talisman, and he nods.  \"<i>Good.  Stay safe and signal me with it if you need help.</i>\"");
+			}
+			else { //(else no Small Talisman)
+				outputText("Jojo nods at you respectfully.  \"<i>Well done today; your dedication is impressive.  We could meditate together more often.</i>\"");
+				outputText("\n\nAs much as you'd like to, you can't stay in the forest, and you can't invite him back with you right now.  Reluctantly, you mention the stubborn, demonic godseed's presence on the borders of your camp.  Jojo's eyebrows furrow in concentration.");
+				outputText("\n\n\"<i>Yes, that's a problem.  Oh, that we did not have to resist the very spirit of the land!  [name], take this.  Use it to call me if the demon gives you trouble; I will come and render what aid I can.</i>\"  The monk fishes in his robe and places a small talisman into your hand.\n\n(Gained Key Item: Jojo's Talisman)");
+				//get a small talisman if not have one
+				player.createKeyItem("Jojo's Talisman", 0, 0, 0, 0);
+			}
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		else
+			outputText("\"<i>It seems you have quite a talent for this.  We should meditate together more often.</i>\"", false);
+	}
+	if (player.statusAffectv1(StatusAffects.JojoMeditationCount) % 5 == 0)
+	{
+		outputText("\n\nYou ponder and get an idea - the mouse could stay at your camp.  There's safety in numbers, and it would be easier for the two of you to get together for meditation sessions.  Do you want Jojo's company at camp?", false);
+		doYesNo(jojoScene.acceptJojoIntoYourCamp, camp.returnToCampUseTwoHours);
+		return;
+	}
+	else
+		outputText("\n\nHe bows his head sadly and dismisses you.", false);
+	doNext(camp.returnToCampUseTwoHours);
 }
-public function set doClear(v:Boolean):void
-{
-	_doClear = v;
+
+// Some hacky shit to be able to control the text clearing mechanics of the doEvent system... OH GOD WHY. //Gone, gone forever
+private var doClear:Boolean = true;
+
+public function acceptJojoIntoYourCamp():void {
+	jojoSprite();
+	if (player.findStatusAffect(StatusAffects.EverRapedJojo) >= 0 || flags[kFLAGS.JOJO_MOVE_IN_DISABLED] == 1) {
+		outputText("You offer Jojo the chance to stay at your camp, but before you can finish your sentence he shakes his head 'no' and stalks off into the woods, remembering.");
+	}
+	else {
+		clearOutput();
+		outputText("You offer Jojo the chance to stay at your camp.  He cocks his head to the side and thinks, stroking his mousey whiskers.\n\n\"<i>Yes, it would be wise.   We would be safer together, and if you like I could keep watch at night to keep some of the creatures away.  I'll gather my things and be right there!</i>\"\n\nJojo scurries into the bushes, disappearing in a flash.  Knowing him, he'll be at camp before you!");
+		player.createStatusAffect(StatusAffects.PureCampJojo, 0, 0, 0, 0);
+	}
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Jojo In Camp
@@ -1598,7 +1700,7 @@ public function acceptOfferOfHelp():void
 	outputText("<i>“Thank Marae, you’re much stronger than I my friend... to hold so much corruption and still retain your will....  But let us not tempt fate,”</i> he says before the two of you get to it.\n\n");
 
 	this.doClear = false;
-	eventParser(2151);
+	jojoFollowerMeditate();
 }
 
 //[No]
@@ -1608,35 +1710,68 @@ public function refuseOfferOfHelp():void
 	jojoSprite();
 
 	outputText("You assure Jojo you're fine, and that you'll consider his offer.  “<i>But... I-We...  Alright, but please do not let the corruption get the better of you.  You’re my friend and I couldn't bear to lose you to its vile influence.</i>”  Then he recomposes himself and asks, “so... is there anything I can assist you with?”\n\n");
-	
-	//(Display normal Follower choices.)
-	// IF ONLY YOU KNEW HOW MUCH OF A PAIN IN THE ASS THIS WAS :(
-	// I'm not fucking TOUCHING the shit in doEvent to properly refactor this. We'll add it to the list of things to do... eventually... one day.
-	var jojoDefense:String = "N.Watch:";
-	var jojoRapeFuncNum:Number = 0;
-
-	if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0)
-	{
-		jojoDefense += "On";
-		outputText("(Jojo is currently watching for enemies at night.)\n\n", false);
-	}
-	else
-	{
-		jojoDefense += "Off";
-	}
-
-	if (player.lust >= 33 && player.gender > 0)
-	{
-		jojoRapeFuncNum = 2153;
-	}
-
-	menu();
-	simpleChoices("Meditate", 2151, jojoDefense, 2152, "", 0, "Rape", jojoRapeFuncNum, "Leave", 74);
+	jojoCampMenu();
 }
 
+public function jojoCamp():void {
+	clearOutput();
+	jojoSprite();
+	if (flags[kFLAGS.AMILY_MET_PURE_JOJO] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower()) {
+		getGame().followerInteractions.amilyMeetsPureJojo();
+		return;
+	}
+	if (flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 1 && rand(2) == 0) {
+		getGame().followerInteractions.catchRathazulNapping();
+		return;
+	}
+	if (player.findStatusAffect(StatusAffects.Infested) >= 0) { // Worms overrides everything else
+		outputText("As you approach the serene monk, you see his nose twitch.\n\n");
+		outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body,</i>\" Jojo says flatly, \"<i>This is a most unfortunate development.  There is no reason to despair as there are always ways to fight the corruption.  However, great effort will be needed to combat this form of corruption and may have a lasting impact upon you.  If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n");
+		jojoCampMenu();
+		return;
+	}
+	if (player.cor > 10) { //New "offer of help" menu
+		if (player.cor >= 40) {
+			outputText("You approach the boulder where Jojo usually sits, and as soon as you're close Jojo approaches you with urgency.  “<i>By Marae! [name], we must do something! I feel the corruption surrounding you like a dense fog.  We need to meditate or I’m going to lose you!</i>” Jojo pleads.\n\n");
+		}
+		else {
+			outputText("You walk up to the boulder where Jojo usually sits, and see him sitting cross legged with his eyes closed.  He seems to be deep in meditation, but when you approach his eyes open suddenly and he gets up appearing slightly distressed, “<i>Uh... [name], I can feel a bit of corruption within you.  It is not much, but I think you should be concerned about it before it gets out of hand and you do something you might regret.  If you want to I'd be happy to meditate with you as you rid yourself of it.</i>” he offers with a concerned look on his face.\n\n");
+		}
+		outputText("Do you accept Jojo's help?\n\n");
+		simpleChoices("Yes", acceptOfferOfHelp, "No", refuseOfferOfHelp, "", null, "", null, "Rape", (player.lust >= 33 && player.gender > 0 ? jojoAtCampRape : null));
+	}
+	else { //Normal shit
+		switch (rand(3)) {
+			case 0: outputText("You walk toward the boulder where Jojo usually sits, and see him cross legged with his eyes closed.  At first he seems to be deep in meditation, but when you approach his mouth curls into a smile; he gets up and opens his eyes regarding you with a welcoming expression.  “<i>Greetings [name], is there anything I can assist you with?</i>”\n\n");
+					break;
+			case 1: outputText("You walk up to the boulder where Jojo usually sits and find him a few paces behind it. He is standing and practicing his form, gracefully moving from one pose to the next. As you approach him you see his ears visibly perk and he turns his head towards you without breaking his stance, saying, “<i>Greetings [name], is there anything I can assist you with?</i>”\n\n");
+					break;
+			default: outputText("You find Jojo sitting cross-legged on a flat rock with his staff leaning against his shoulder, thinking.  He looks to you and nods, \"<i>Greetings, " + player.short + ".  Is there something I could do to assist you?</i>\"\n\n");
+		}
+		jojoCampMenu();
+	}
+}
 
+private function jojoCampMenu():void {
 //Normal Follower Choices
 //[Appearance] [Talk] [Train] [Meditate] [Night Watch toggle]
+	var jojoDefense:String = "N.Watch:";
+	if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0) {
+		outputText("(Jojo is currently watching for enemies at night.)\n\n");
+		jojoDefense += "On";
+	}
+	else jojoDefense += "Off";
+	menu();
+	addButton(0, "Appearance", jojoAppearance);
+	addButton(1, "Talk", talkMenu);
+	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 1) addButton(2, "Train", apparantlyJojoDOESlift);
+	addButton(3, "Meditate", jojoFollowerMeditate);
+	addButton(4, jojoDefense, jojoDefenseToggle);
+	if (player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(5, "Purge", wormRemoval);
+	addButton(8, "Rape", (player.cor > 10 && player.lust >= 33 && player.gender > 0 ? jojoAtCampRape : null));
+	addButton(9, "Leave", eventParser, 74);
+}
+
 
 //Appearance
 public function jojoAppearance():void
@@ -1651,7 +1786,7 @@ public function jojoAppearance():void
 
 	outputText("His weapons of choice are his fists and a polished wooden staff he wields with practiced hands, right now it is tucked away in his bed roll.\n\n");
 	menu();
-	doNext(2150);
+	doNext(jojoCamp);
 }
 
 public function talkMenu():void
@@ -1666,7 +1801,7 @@ public function talkMenu():void
 	if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) addButton(5, "Factory", jojoTalkFactory);
 	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave);
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift);
-	addButton(9, "Back", eventParser, 2150);
+	addButton(9, "Back", jojoCamp);
 }
 
 //Talk
@@ -1697,7 +1832,7 @@ public function jojoTalkVillage():void
 	}
 
 	menu();
-	doNext(13); // Dunno where exactly to kick back to, fuck it, back to camp yo!
+	doNext(camp.returnToCampUseOneHour); // Dunno where exactly to kick back to, fuck it, back to camp yo!
 }
 
 //Joining the Monks convo
@@ -1715,7 +1850,7 @@ public function jojoTalkJoiningTheMonks():void
 	outputText("Jojo wears this quiet little smile as he finishes.  Then he chuckles and says, “<i>Thank you for the memories, [name].  I enjoy our talks.</i>”\n\n");
 
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Fall of the Monks convo
@@ -1734,7 +1869,7 @@ public function jojoTalkFallOfTheMonks():void
 	outputText("You can tell the story has affected him, but you’re surprised to hear the resolve in his voice and see the defiant strength in his eyes. Excusing yourself, you rise and leave him to do as he will.\n\n");
 
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Forest Convo
@@ -1787,7 +1922,7 @@ public function jojoTalkForestConvo():void
 	outputText("Looking renewed and at peace despite the emotional storm you know must be raging within his tiny frame Jojo returns to what he was doing after thanking you for giving him new purpose.\n\n");
 
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Yourself
@@ -1850,7 +1985,7 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	outputText("Jojo smiles now that he has gotten to know you a little better. After a little bit more small talk, the two of you decide the conversation is over and part ways.\n\n");
 
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Dungeon Convo: Factory
@@ -1880,7 +2015,7 @@ public function jojoTalkFactory():void
 	outputText("Once the two of you are done discussing the demonic factory Jojo excuses himself to think on what you’ve told him.\n\n");
 
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Dungeon Convo: Sand Cave
@@ -1978,7 +2113,7 @@ public function jojoTalkSandCave():void
 	outputText("Having concluded the conversation the two of you stand and Jojo gives you an appreciative pat on the shoulder, seeming more fond of you.\n\n");
 
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Training
@@ -2001,7 +2136,7 @@ public function apparantlyJojoDOESlift():void
 
 			// Kick back to previous menu
 			menu();
-			doNext(2150);
+			doNext(jojoCamp);
 			return;
 		}
 		else
@@ -2010,7 +2145,7 @@ public function apparantlyJojoDOESlift():void
 
 			// Sounds like this should kick back to menu
 			menu();
-			doNext(2150);
+			doNext(jojoCamp);
 			return;
 		}
 	}
@@ -2023,7 +2158,7 @@ public function apparantlyJojoDOESlift():void
 			outputText("“<i>Not yet [name]. Your body must be fit and rested before our training sessions. Rest first, and come back to me later.</i>”\n\n");
 
 			menu();
-			doNext(2150);
+			doNext(jojoCamp);
 			return;
 		}
 
@@ -2033,7 +2168,7 @@ public function apparantlyJojoDOESlift():void
 			outputText("“<i>I fear that your time would be better spend meditating before we continue your training. Would you like to do so now?</i>”\n\n");
 			
 			menu();
-			doYesNo(2003, 2150);
+			doYesNo(meditateInForest, jojoCamp);
 			return;
 		}
 	}
@@ -2132,7 +2267,25 @@ public function apparantlyJojoDOESlift():void
 	}
 	
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function wormRemoval():void {
+	jojoSprite();
+	clearOutput();
+	outputText("\"<i>Excellent, young one,</i>\" Jojo continues. \"<i>Your dedication to purification is admirable. Relax and know that the parasites will leave you soon.</i>\"\n\n");
+	outputText("Jojo gets up and walks over to a backpack hidden in the bushes. He removes a lacquered box. He removes and combines a rather noxious combination of herbs, oils and other concoctions into a mortar and grinds it with a pestle. After a few minutes, he ignites the mixture and uses a feathered fan to blow the fumes over you. The smell of the mix is nauseating and repugnant. Your stomach turns and you fight the urge to vomit. Eventually, you are no longer able to resist and you purge yourself onto the ground. Cramping from your vomiting fits, you wrack with discomfort, which slowly builds to genuine pain. As the pain sets in, you feel a stirring deep in your crotch. The worms inside you are stirring and thus are compelling another unwanted orgasm. Unable to control your body, your cock explodes, launching cum and worms everywhere. Jojo begins fanning faster as he sees the worms leave your body.\n\n");
+	outputText("\"<i>Further endurance is needed, young one,</i>\" Jojo says. \"<i>The root of your problem must leave before you may pursue further purification. Healing is always twice as uncomfortable as the illness requiring attention.</i>\"\n\n");
+	outputText("Your body cramps up as you feel the fat worm struggle. You feel it pushing up your urethra, fighting to escape your fumigated body. The worm rapidly peeks from the end of your penis. With expedience, Jojo quickly grabs the worm and pulls it out of you, triggering one last orgasm. The monk casts the fat worm to the ground and strikes it dead with his staff.\n\n");
+	outputText("\"<i>The culprit has been exorcised and will no longer trouble you. Rest here for a while and join me in some meditation to heal your exhausted body and soul.</i>\"\n\n");
+	outputText("Being too tired for anything else, you join Jojo in meditation, which does much to relive you of your former woes.");
+	//Infestation removed. HP reduced to 50% of MAX. Sensitivity reduced by -25 or reduced to 10, which ever is the smaller reduction.
+	//Infestation purged. Hit Points reduced to 10% of MAX. Corruption -20.
+	if (player.HP > int(player.maxHP() * .5)) player.HP = int(player.maxHP() * .5);
+	player.sens = 11;
+	player.removeStatusAffect(StatusAffects.Infested);
+	dynStats("sen", -1, "lus", -99, "cor", -15);
+	doNext(camp.returnToCampUseOneHour);
 }
 	}
 }

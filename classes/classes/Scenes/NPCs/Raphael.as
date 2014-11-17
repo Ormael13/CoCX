@@ -2,11 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class Raphael extends NPCAwareContent {
-
-		public function Raphael()
-		{
-		}
+	public class Raphael extends NPCAwareContent implements TimeAwareInterface {
 
 //The event itself:
 //Requirement: Player has found Desert storage chest &
@@ -16,6 +12,76 @@
 //Second requirement:
 //- Player has C,D,DD or E breasts, at least girly/ample thighs, no humongous ass, is between 4 and 6 feet and has a bipedal lower body.
 //- Player does not have a cock or balls, for now
+
+		public function Raphael() {
+			CoC.timeAwareClassAdd(this);
+		}
+		
+		private var checkedRussetRogue:int;
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean {
+			checkedRussetRogue = 0; //Make sure we test just once in timeChangeLarge
+			if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHAEL_DRESS_TIMER]--;
+			if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]--;
+			//Fix 'hangs' - PC is at the bottom of the dress countdown
+			if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0 && RaphaelLikes()) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4;
+			return false;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			if (checkedRussetRogue++ == 0 && model.time.hours == 6 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusAffectv1(StatusAffects.TelAdre) >= 1) {
+				/*trace("RAPHAEL FINAL COUNTDOWN: " + flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]);
+				trace("RAPHAEL MET: " + flags[kFLAGS.RAPHAEL_MET]);
+				trace("RAPHAEL DRESS TIMER: " + flags[kFLAGS.RAPHAEL_DRESS_TIMER]);
+				trace("RAPHAEL DISGUSTED: " + flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE]);*/
+				if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0) { //Countdown to finale not currently engaged!
+					//If the PC meets his criteria!
+					if (RaphaelLikes()) { //Not yet met!  MEETING TIEM!
+						if (flags[kFLAGS.RAPHAEL_MET] == 0) {
+							outputText("<b>\nSomething unusual happens that morning...</b>\n");
+							doNext(meetRaphael);
+							return true;
+						}
+						else { //Already met!
+							if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 0 && flags[kFLAGS.RAPHAEL_SECOND_DATE] == 0) { //Not given dress yet
+								outputText("<b>\nSomething unusual happens that morning...</b>\n");
+								doNext(RaphaelDress);
+								return true;
+							}
+							//Dress followup - Call picnic date prologue!
+							if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4)) {
+								outputText("<b>\nSomething unusual happens that morning...</b>\n");
+								doNext(RaphaelEncounterIIDressFollowup);
+								return true;
+							}
+						}
+					}
+					else { //If the PC does not currently meet his criteria
+						//Dress countdown - if pc isn't wearing it yet, kick out to
+						//Finale!
+						if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1) {
+							flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
+							flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
+						}
+						//PC get ready for the 2nd encounter and hasn't been
+						//shot down yet?
+						if (player.armor == armors.R_BDYST && flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] == 0) {
+							outputText("<b>\nSomething unusual happens that morning...</b>\n");
+							doNext(RaphaelEncounterIIDressFollowup);
+							return true;
+						}
+					}
+				}
+				else if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 1) { //FINALE
+					outputText("<b>\nSomething unusual happens that morning...</b>\n");
+					doNext(quiksilverFawkesEndGame);
+					return true;
+				}
+			}
+			return false;
+		}
+		//End of Interface Implementation
 
 override public function RaphaelLikes():Boolean {
 	if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL])		
@@ -52,7 +118,7 @@ override public function RaphaelLikes():Boolean {
 //Female PC wakes up. 
 
 //{First encounter}
-public function meetRaphael():void {
+private function meetRaphael():void {
 	outputText("", true);
 	outputText("You stir in your sleep, bothered by a noise. It's the familiar creaking of your camp's storage chest, as if you've just opened it up to fill it with freshly found loot. Groaning, you hog your blankets and twist. Nothing to worry about then. You soon drift back into a pleasant dream about all the spoils you've accumulated over the time here. Life is good.\n\n", false);
 	
@@ -162,7 +228,7 @@ private function RaphaelFirstMeetingTALK():void {
 
 //{Second encounter.} 
 //Again at bedtime
-public function RaphaelDress():void {
+private function RaphaelDress():void {
 	outputText("", true);
 	outputText("A small pebble hits the ground near you, waking you up. When a second one hits, you're sure someone is trying to draw your attention.\n\n", false);
 
@@ -200,7 +266,7 @@ private function RaphaelDressPtII():void {
 	//{Third encounter unlocked}
 	//Set 'time to wear dress' countdown.
 	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 7;
-	inventory.takeItem(armors.R_BDYST);
+	inventory.takeItem(armors.R_BDYST, camp.campMenu);
 }
 
 /*DRESS HERE
@@ -210,7 +276,7 @@ Multiplies evasion ratings. It has crap armor rating.
 ~~~*/
 
 
-public function RaphaelEncounterIIDressFollowup():void {
+private function RaphaelEncounterIIDressFollowup():void {
 	//{Encounter two}
 	//{Requirement: PC is wearing High society bodysuit. 
 	//Sequence: When PC wakes up the next day.})
@@ -754,7 +820,7 @@ private function postRaphaelCoitus():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RRAPIER);
+		inventory.takeItem(weapons.RRAPIER, camp.campMenu);
 	}
 	//({When player has reached the INT Conversation apex} 
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
@@ -796,7 +862,7 @@ private function declinePuttingOutForRogues():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss. He's bound it with his red sash around the length like a ribbon, like he has now gifted it to you. Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RRAPIER);
+		inventory.takeItem(weapons.RRAPIER, camp.campMenu);
 
 	}
 	//({When player has reached the INT Conversation apex}
@@ -1001,7 +1067,7 @@ private function RaphaelThieverySmexPtII():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RRAPIER);
+		inventory.takeItem(weapons.RRAPIER, camp.campMenu);
 	}
 	//({When player has reached the INT Conversation apex}
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
@@ -1021,7 +1087,7 @@ private function RaphaelThieverySmexPtII():void {
 
 //OH SHIT ENDGAME SHIT HERE SONS!
 //[Quicksilver scene]
-public function quiksilverFawkesEndGame():void {
+private function quiksilverFawkesEndGame():void {
 	outputText("", true);
 	outputText("You wake up to the sound of an ominous cry in the distance, like that of a howling wolf.  It can only mean trouble and you jump out of bed.\n\n", false);
 
@@ -1300,7 +1366,7 @@ private function getTheFuckOutOfDodge():void {
 	clearOutput();
 	outputText("You politely inform Raphael that you have to go, and though he seems crestfallen, he demurs, \"<i>Very well then, ma chère.  I shall await you in the hours of late evening, in case you change your mind.</i>\"");
 	outputText("\n\nWell, that went well.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //RaphSex
@@ -1341,7 +1407,7 @@ private function followupToFirstTimeOrphanageRaphSex():void {
 	outputText("\n\n\"<i>Do you think you can remember which rope I pulled?</i>\" he asks you.  You think you can and Raphael nods.  \"<i>Good.  I wouldn't recommend pulling any other when you want to visit me in the meantime.</i>\" he winks.  \"<i>The russet rogue, he never leaves a lady wanting.  Visit me whenever you see this room lit at dusk, when it's still light enough for you to make your way back to camp afterwards and already dark enough for me to have woken up and prepare to leave for work.</i>\"  He turns his head and upper body around enough for him to look you in the eyes.  \"<i>I would be looking forward to it if you could make it.  Who knows?  Maybe this is your chance to steal into my room for a change and take me by surprise instead, no?</i>\"");
 	
 	outputText("With a wink, Raphael disappears as he lets himself drop from the window.  You walk after him, to see where he went.  It's quite the way down, but he appears to have vanished.  With your promise in hand, you decide you'd better do the same and head back to the portal by way of a nearby extendable ladder that pops right back up the building the moment you remove your weight.  You take care to memorize what room you came from and confirm which rope it was, cleverly hidden alongside a drainpipe.  You may not have gotten much closer to uncovering the secrets of the orphanage, but at least this won't be the last you see of him.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1364,7 +1430,7 @@ private function cunnilingusWithRaphael():void {
 	outputText(".  Raphael backs off a bit afterwards, giving you a few more laps of admiration around the throbbing fissure and cleaning you of any spillage. He ends with a tiny kiss, just inside your inner thigh.");
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Second Raphael variable sex scene: Girl on top:
@@ -1386,7 +1452,7 @@ private function girlOnTopOfRedFoxesOhMy():void {
 	outputText("\n\nLooking him in the eyes again, you slaver on top of the fox.  Raphael simply lays back, lazily fondles your breasts and ass and looks at you to put in the effort around his cock.  Only after minutes of this, almost driving yourself towards the brink, does Raphael suddenly sit up sharply - an anguished snarl on his face - to hold you in a tight embrace and groan conceitedly.  You can feel his cock jerk up and grow an inch in size, before his passion escapes into your womanhood.  Allowing yourself as well, you follow him with a lazy orgasm and join him in his growl, while he squeezes you on your waist.");
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Available side by side to having sex: Dialogue scenes.
 private function talkWithRedFoxLooksOutHesASpy():void {
@@ -1408,7 +1474,7 @@ private function talkWithRedFoxLooksOutHesASpy():void {
 	outputText("\n\nRaphael smirks and turns towards you, leans on one paw and gazes into your eyes.  \"<i>I just can't get enough of tweaking knobs, hitting a lock's sweet spot, or getting my fingers in places where they don't belong, amidst all that splendor.</i>\"");
 	menu();
 	raphaelOrphanageSexMenu();
-	addButton(4,"Leave",eventParser,13);
+	addButton(4,"Leave",camp.returnToCampUseOneHour);
 }
 
 

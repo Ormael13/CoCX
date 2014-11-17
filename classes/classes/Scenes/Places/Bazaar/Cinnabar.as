@@ -40,13 +40,13 @@ private function cinnabarGreeting():void {
 		if(!player.hasCock()) {
 			outputText("You walk over towards the rat-morph, and as you near, she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She licks her lips and sidles alongside you, caressing your body as she offers, \"<i>50 gems for an hour.  That's all it takes to have Cinnabar be your companion...</i>\"  Her voice trails off into a husky vibration as she awaits your response.\n\n", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",2855);
+			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",bazaar.enterTheBazaar);
 		}
 		//(Small Cock)
 		else if(player.biggestCockArea() < 100) {
 			outputText("You walk over towards the rat-morph, and as you near she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She sidles up alongside you, caressing your body until she feels your bulge.  Her hand stops in place and licks her black, glossy lips,  giggling, \"<i>I see you've still got a little boy-cock, huh? Well, 50 gems will get you an hour of my time.  That's all it takes to have Cinnabar be your companion...</i>\"  The slutty rat-girl's voice trails off into a husky vibration while she awaits your response.", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",2855);
+			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",bazaar.enterTheBazaar);
 		}
 		//(Big enough Cock) 
 		else {
@@ -57,9 +57,9 @@ private function cinnabarGreeting():void {
 			outputText(" inside me... the name's Cinnabar, but I'd rather you plug me and call me whatever you want.</i>\"  Her voice trails off into a husky, barely heard vibration as she awaits your response.", false);
 			//[Fuck] [Leave]
 			if(player.cockTotal() > 2 && player.biggestCockArea2() >= 75)
-				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"Multi-Fuck",cinnabarMultiCockPortalFuckFest,"",0,"",0,"Leave",2855);
+				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"Multi-Fuck",cinnabarMultiCockPortalFuckFest,"",0,"",0,"Leave",bazaar.enterTheBazaar);
 			else 
-				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"",0,"",0,"",0,"Leave",2855);
+				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"",0,"",0,"",0,"Leave",bazaar.enterTheBazaar);
 		}
 	}
 	//Not first time
@@ -68,13 +68,13 @@ private function cinnabarGreeting():void {
 		if(!player.hasCock()) {
 			outputText("You walk over towards Cinnabar, and as you near, she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She licks her lips and sidles alongside you, caressing your body as she offers, \"<i>50 gems for an hour.  That's all it takes to have a companion...</i>\"  Her voice trails off into a husky vibration as she awaits your response.\n\n", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",2855);
+			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",bazaar.enterTheBazaar);
 		}
 		//(Small Cock)
 		else if(player.biggestCockArea() < 100) {
 			outputText("You walk over towards Cinnabar, and as you near, she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She sidles up alongside you, caressing your body until she feels your bulge.  Her hand stops in place and licks her black, glossy lips,  giggling, \"<i>I see you've still got a little boy, huh? Well, 50 gems will get you an hour of my time.  That's all it takes to have a VERY skilled companion...</i>\"  The slutty rat-girl's voice trails off into a husky vibration while she awaits your response.", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",2855);
+			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",bazaar.enterTheBazaar);
 		}
 		//(Big enough Cock) 
 		else {
@@ -85,9 +85,9 @@ private function cinnabarGreeting():void {
 			outputText(" inside me... We could sit here and talk, but I'd rather you plug me and call me your slut.</i>\"  Her voice trails off into a husky, barely heard vibration as she awaits your response.", false);
 			//[Fuck] [Leave]
 			if(player.cockTotal() > 2 && player.biggestCockArea2() >= 75)
-				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"Multi-Fuck",cinnabarMultiCockPortalFuckFest,"",0,"",0,"Leave",2855);
+				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"Multi-Fuck",cinnabarMultiCockPortalFuckFest,"",0,"",0,"Leave",bazaar.enterTheBazaar);
 			else 
-				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"",0,"",0,"",0,"Leave",2855);
+				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"",0,"",0,"",0,"Leave",bazaar.enterTheBazaar);
 		}
 	}
 }
@@ -103,7 +103,7 @@ private function cinnabarNonHugeDickings():void {
 	//(Too poor)
 	if(player.gems < 50) {
 		outputText("\"<i>Ooooh... I'm sorry, but you don't have the gems to hire a companion, babe.   You should get some practice spreading your thighs and earn a REAL living,</i>\" Cinnabar teases.", false);
-		doNext(2855);
+		doNext(bazaar.enterTheBazaar);
 		return;
 	}
 	//(Enough cash)
@@ -202,7 +202,7 @@ private function cinnabarNonHugeDickings():void {
 	
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //[FUCK] – tracks if last fuck was huger + corrupteded version
@@ -334,7 +334,7 @@ private function fuckCinnabarHugerAndCorruptedEr():void {
 	player.orgasm();
 	dynStats("sen", 3, "cor", -2);
 	player.takeDamage(25);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //(HUGER)
@@ -385,7 +385,7 @@ private function cinnabarHuger():void {
 	outputText(".", false);
 	player.orgasm();
 	dynStats("sen", -4);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //(HUGE)
@@ -436,7 +436,7 @@ private function cinnabarHuge():void {
 	outputText(".", false);
 	player.orgasm();
 	dynStats("sen", -3);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Multi Cock Portals] – Requires 2 75+ cock area members and at least 3 total.
@@ -534,7 +534,7 @@ private function cinnabarMultiCockPortalFuckFest():void {
 	outputText("While you're getting dressed, the repeated slurps and moans pause enough for Cinnabar to say, \"<i>I didn't mean to be rude... those dicks... those wonderful, plump cocks... they're a gift.  Come back soon " + player.mf("stud","baby") + ", your cream filling tastes gooood.</i>\"  She goes back to licking herself, and you can't help but have a huge grin as you walk out.", false);
 	player.orgasm();
 	dynStats("sen", -6);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

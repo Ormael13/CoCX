@@ -96,7 +96,7 @@ private function Roxanne1stApproach():void {
 	outputText("You hesitantly approach the drinking lizard-folk, taking note of their unusual garments and appearance.  They all wear black jackets with silver trim, tight-fitting leather pants, and tall, black boots.  Oddly, the most feminine of them appears to be the leader.  Her jacket is filled out with large, well-rounded DD-cup breasts, and her boots forgo the traditional shape for a sluttier, higher heel.  Her scales are a dark purple, glittering darkly in the light, and while her head has a lizard-like shape, a pair of dragon-like horns bulge from the back of her skull in place of hair.  The other lizans all appear to be males, but they act as if they're quite intimidated by the feminine leader.\n\n", false);
 	outputText("Suddenly, the alpha-lizan glances up and meets your eye, her expression turning into a leering sneer as she asks, \"<i>See something you like " + player.mf("buddy","girly") + "?  Come on over, tell us your story!</i>\"\n\n", false);
 	outputText("Do you approach?", false);
-	doYesNo(RoxanneChooseApproachOrRepeat,2855);
+	doYesNo(RoxanneChooseApproachOrRepeat, bazaar.enterTheBazaar);
 }
 
 //[Approach] – Flag as Met
@@ -151,10 +151,26 @@ private function RoxanneChooseApproachOrRepeat():void {
 	else outputText("If you're reading this, something broke.", false);
 	//Clear the 'are you losing the contest intionally flag'
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 0;
-	simpleChoices("Yes",roxanneDrinkingContest,"No",2855,"Lose",2884,"",0,"",0);
+	simpleChoices("Yes", roxanneDrinkingContest, "No", roxanneDrinkingContestNo, "Lose", roxanneDrinkingContestLoseDeliberately, "", null, "", null);
 }
 
-public function roxanneDrinkingContest():void {
+private function roxanneDrinkingContestNo():void {
+	if (model.time.hours == 19 || model.time.hours == 20) {
+		flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE]++;
+		if (flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && player.gender == 1) {
+			bazaar.nightBazaarButtfuck();
+			return;
+		}
+	}
+	bazaar.enterTheBazaarAndMenu();
+}
+
+private function roxanneDrinkingContestLoseDeliberately():void {
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 1;
+	roxanneDrinkingContest();
+}
+
+private function roxanneDrinkingContest():void {
 	spriteSelect(78);
 	outputText("", true);
 	outputText("Roxanne ", false);
@@ -283,7 +299,7 @@ private function roxanneGivesABlowjob():void {
 	//(-100 lust, -1 int)
 	player.orgasm();
 	dynStats("int", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Receive Oral – Vaginalingus]
 private function roxanneCunnilingus():void {
@@ -329,7 +345,7 @@ private function roxanneCunnilingus():void {
 	//(-100 lust, -1 int)
 	player.orgasm();
 	dynStats("int", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Receive Oral – SkyrRimjoooooooob]
 private function roxanneRimjob():void {
@@ -382,7 +398,7 @@ private function roxanneRimjob():void {
 	//(-100 lust, -1 int
 	player.orgasm();
 	dynStats("int", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[OH SHIT YOU SO DRUNK AND GETTING REAMED BY LIZARD CAWK]
@@ -464,7 +480,7 @@ private function roxanneReamsYouNormal():void {
 	player.orgasm();
 	dynStats("int", -1);
 	applyHangover();
-	doNext(15);
+	doNext(camp.returnToCampUseFourHours);
 }
 
 //[Roxanne HAS A FUCKING TORPEDO DICK BUTTFUCK]
@@ -528,7 +544,7 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	player.orgasm();
 	dynStats("int", -1);
 	applyHangover();
-	doNext(15);
+	doNext(camp.returnToCampUseFourHours);
 }
 	
 private function applyHangover():void {
@@ -618,7 +634,7 @@ private function bigBootyRoxanneContestLoss():void {
 	player.orgasm();
 	dynStats("int", -1);
 	applyHangover();
-	doNext(15);
+	doNext(camp.returnToCampUseFourHours);
 }
 }
 }

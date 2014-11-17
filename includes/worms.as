@@ -44,7 +44,7 @@ public function wormsFirstTime():void {
 	outputText("As you are exploring, a rather pungent, peaty smell assails your nostrils. You hear a strange rustling and an off-kilter squishing noise in the distance. As you explore the area you come upon a most grotesque sight. Before you is a cohesive mass of writhing, wriggling worms! While normally solitary creatures, these appear to have coalesced into a monstrous living colony!\n\n", true);
 	outputText("You have never before seen such a bizarre freak of nature. You see the mass of annelids creep about across your path. It stops and spreads slightly in your direction before halting. The stench of the mass is indescribable and a thick, viscous slime covers each of the countless worms forming the collective.\n\n", false);
 	outputText("You stop dead in your tracks, wondering what this swarm will do. After a few tense moments, the mass crawls away in a direction opposite of both you and your current path. You breathe a sigh of relief as you are confident that no good could have come from confronting such a zoological travesty.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	dynStats("lus", -10);
 	player.createStatusAffect(StatusAffects.MetWorms,0,0,0,0);
 }
@@ -52,7 +52,7 @@ public function wormsFirstTime():void {
 public function wormsFemale():void {
 	spriteSelect(76);
 	outputText("Making your way, you stumble on another gross mass of worms. The countless struggling creatures bar the path before you. Again, you freeze in place as the horror gropes about on the ground. It appears to have no real interest in your presence and it makes its way in a direction other than yours, much to your relief.", true);	
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function wormsMale():void {
@@ -64,7 +64,7 @@ public function wormsMale():void {
 public function wormsRun():void {
 	if(player.spe > rand(35)) {
 		outputText("Your instincts overwhelm you and you immediately turn around and run like hell in the opposite direction. You look behind you as your heart feels as if it is about to burst only to discover that the creature did not follow you. You take a moment to catch your breath and consider yourself fortunate.", true);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
 		outputText("You turn to run, but before your " + player.feet() + " can get you away, the worms are upon you!  You turn to face them, lest they launch onto your unprotected back.", true);
@@ -118,7 +118,7 @@ public function infestOrgasm():void {
 			}
 		}
 	}
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 	
 }
 
@@ -196,11 +196,9 @@ public function playerInfest():void {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] = 0;
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
 		//clear status
+		inCombat = false;
 		clearStatuses(false);
-		//Clear itemswapping in case it hung somehow
-		itemSwapping = false;
-		gameState = 0;
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	if(monster.findStatusAffect(StatusAffects.TwuWuv) >= 0) {

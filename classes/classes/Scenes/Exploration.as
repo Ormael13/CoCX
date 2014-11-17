@@ -7,11 +7,13 @@ package classes.Scenes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Explore.ExploreDebug;
+	import classes.Scenes.Explore.Giacomo;
 	import classes.Scenes.Monsters.*;
 
 	public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
+		public var giacomo:Giacomo = new Giacomo();
 
 		public function Exploration()
 		{
@@ -85,7 +87,7 @@ package classes.Scenes
 					outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You have discovered the Lake!</b>", true);
 					player.exploredLake = 1;
 					player.explored++;
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert == 0) {
@@ -97,21 +99,21 @@ package classes.Scenes
 					outputText(".\n\n<b>You've discovered the Desert!</b>", false);
 					player.exploredDesert = 1;
 					player.explored++;
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				if (player.exploredDesert >= 1 && rand(3) == 0 && player.exploredMountain == 0) {
 					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You have discovered the mountain!</b>", true);
 					player.explored++;
 					player.exploredMountain = 1;
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				if (player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] == 0) {
 					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 					player.explored++;
 					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>", true);
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				//EXPLOOOOOOORE
@@ -122,7 +124,7 @@ package classes.Scenes
 					outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n", false);
 					outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n", false);
 					outputText("<b>You've discovered the swamp!</b>", false);
-					doNext(14);
+					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
 				//Used for chosing 'repeat' encounters.
@@ -136,7 +138,7 @@ package classes.Scenes
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
-					eventParser(2015);
+					giacomo.giacomoEncounter(); //eventParser(2015);
 					return;
 				}
 				else if (choosey == 1) {
@@ -195,13 +197,13 @@ package classes.Scenes
 				outputText("You wander around, fruitlessly searching for new places.", true);
 			}
 			player.explored++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
 		public function debugOptions():void
 		{
-			inventory.takeItem(consumables.W_FRUIT);
+			inventory.takeItem(consumables.W_FRUIT, camp.campMenu);
 		}
 
 		//Massive bodyparts scene
@@ -266,7 +268,7 @@ package classes.Scenes
 			else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually your body tenses and a light load of jizz erupts from your body, but the orgasm is truly mild compared to what you need.  You're simply too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later " + sMultiCockDesc() + " softens enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the warm sand.", false);
 			dynStats("lus", 25 + rand(player.cor / 5), "resisted", false);
 			fatigue(5);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 

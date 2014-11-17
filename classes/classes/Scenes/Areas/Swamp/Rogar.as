@@ -115,7 +115,7 @@ public function encounterRogarSwamp():void {
 			//set Ro'gar phase = 2
 			flags[kFLAGS.ROGAR_PHASE] = 2;
 			dynStats("lus", 30);
-			doNext(14);
+			doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
 		//((high femininity or breasts >=B-cup, libido less than 50))
@@ -128,7 +128,7 @@ public function encounterRogarSwamp():void {
 			outputText("  You just grin and shake your head at his politeness.  \"<i>It's been too long since I got ta talk with any decent folk.</i>\" Ro'gar says, grinning.  Soon you both have empty mugs.  You can't help but sway where you sit from the alcohol, stronger than anything you've had before.  Ro'gar gives a hearty laugh at you, clearly enjoying your inebriated state.  \"<i>You don't look the heavy drinkin' type.</i>\" Ro'gar smirks, as you sway.  Frowning, you assure him that you can handle it, all the while punctuating your sentences with small hiccups which cause the both of you to break out in laughter.  \"<i>Ya know, I've been in this swamp here for so long.  I'm getting' the itch ta go out inta the world and find greener grass, if'n ya know what I'm sayin'.  Listenin' to yer stories about yer travels ain't helpin' none, either.</i>\"  His tone of voice is distant, almost sounding disappointed with himself.  He gets to his feet with a grunt as he rises.  \"<i>Yer lookin' like yer needin' some shut eye.</i>\"  He helps you to your feet; you manage to get your balance somehow and walk to the door.  \"<i>Y'alright?</i>\" he asks, looking you over.  Through a dumb grin you manage to assure him that you're fine.  \"<i>Well allll-right.</i>\"  Ro'gar nods at you as you turn to leave.  \"<i>Ya take care now.</i>\"  He watches you walk off with concern in his eyes, but you make it back to camp just fine.\n\n", false);
 			//set Ro'gar phase = 2
 			flags[kFLAGS.ROGAR_PHASE] = 2;
-			doNext(14);
+			doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
 		//((androgynous or masculine and breasts <= A-cup, libido less than 50))
@@ -168,7 +168,7 @@ public function encounterRogarSwamp():void {
 		//((high femininity or breasts >=B-cup))
 		if(player.biggestTitSize() >= 2) {
 			outputText("You travel to Ro'gar's hut using the map again, your memory of the earlier trip making the passage much smoother.  When you knock on the door, though, you receive no answer.  In fact, the hut is eerily silent.  Trying the handle, you find the door unlatched.  You peer inside and discover that not only is it quiet and dark, quite a bit is missing.  Ro'gar is nowhere to be found, along with most of his belongings.  Looking around, you find no sign of distress or struggle.  It doesn't seem like anything happened to him.  Perhaps he moved?  Either way, he's not here now and it doesn't look like he's coming back anytime soon.  As you head back to camp you wonder if you'll ever see him again.", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			//move Ro'gar to Wet Bitch, set Ro'gar phase = 3
 			flags[kFLAGS.ROGAR_PHASE] = 3;
 		}
@@ -189,7 +189,7 @@ public function encounterRogarSwamp():void {
 			if(player.statusAffectv1(StatusAffects.TelAdre) <= 0) {
 				outputText("You apologize to Ro'gar; your mind draws a complete blank on the question.  The orc pouts with disappointment.  \"<i>I reckon I could just wander until I find somewhere...</i>\"  You shake your head and suggest he wait here where he's already established, but promise you'll be keeping an eye out for anywhere that might suit him.  Ro'gar beams at the reassurance, his pout twisting into a grin.  \"<i>Mighty fine of you!</i>\"  His thick arms wrap around you in a bear hug over the table.  You spend the rest of your visit chatting with the burly orc, careful to avoid any topics that might stir his wanderlust.\n\n", false);
 				//end scene without updating Ro'gar phase
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			//(if player has been to Tel'Adre)
 			else {
@@ -214,7 +214,7 @@ public function encounterRogarSwamp():void {
 					outputText("You leave Ro'gar to finish packing his things for now.", false);
 					//set Ro'gar phase = 3
 					flags[kFLAGS.ROGAR_PHASE] = 3;
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 				}
 				//(if Dirt Mc Girt = 2) 
 				else {
@@ -230,7 +230,7 @@ public function encounterRogarSwamp():void {
 					//+lust, set Ro'gar phase = 3
 					dynStats("lus", 30);
 					flags[kFLAGS.ROGAR_PHASE] = 3;
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 				}
 			}
 		}
@@ -246,7 +246,7 @@ private function dontWaitForRogar():void {
 	outputText("Instead, you find only more mud.  You return to camp.", false);
 	//<set Crying Game = 1>
 	flags[kFLAGS.ROGAR_DISABLED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
  
 //((Yes))
@@ -274,7 +274,7 @@ private function waitForChunkyOrcLoe():void {
 		outputText("<b>You can now find Ro'gar's hut when wandering the swamp occasionally!</b>", false);
 		//pass 2 hours, set Ro'gar phase flag = 1
 		flags[kFLAGS.ROGAR_PHASE] = 1;
-		doNext(14);
+		doNext(camp.returnToCampUseTwoHours);
 	}
 }
 
@@ -290,7 +290,7 @@ private function ewwwRogarIsGay():void {
 	outputText("Declining in a clipped manner, you get to your feet and make for the door, doing your best to ignore Ro'gar's disappointed face.  He calls out to you, but it only falls on deaf ears as you shut the door quickly behind you, your legs powering through the swamp as you run with all the speed you can muster.  Only once you get back to camp do you realize you've lost the crude map... either in Ro'gar's hut or in the trackless swamp.", false);
 	//<set Crying Game = 1>
 	flags[kFLAGS.ROGAR_DISABLED] = 1;
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
  
 //((No thanks bro))
@@ -301,7 +301,7 @@ private function noSlowBroIDontWantPokeSex():void {
 	//<Continue without sex, set Dirt Mc Girt flag = 1 and Ro'gar phase = 2>
 	flags[kFLAGS.ROGAR_DIRT] = 1;
 	flags[kFLAGS.ROGAR_PHASE] = 2;
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
  
 //((Ok))
@@ -337,9 +337,9 @@ private function okayBroLetsHaveAGayCarwash():void {
 	// set Dirt Mc Girt flag = 2 and Ro'gar phase = 2>
 	flags[kFLAGS.ROGAR_DIRT] = 2;
 	flags[kFLAGS.ROGAR_PHASE] = 2;
-	if(player.inte < 30) doNext(14);
+	if(player.inte < 30) doNext(camp.returnToCampUseTwoHours);
 	//lose 3 hours instead of 1 if int<30
-	else doNext(13);
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //((Third phase)) ([Cloaked Figure] button in Wet Bitch; Ro'gar phase = 3) (edited)
@@ -395,7 +395,7 @@ public function rogarThirdPhase():void {
 			//set Ro'gar phase = 4 and Ro'roh Raggy = 0
 			flags[kFLAGS.ROGAR_PHASE] = 4;
 			flags[kFLAGS.ROGAR_WARNING] = 0;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//(else if Dirt Mc Girt = 1)
 		else if(flags[kFLAGS.ROGAR_DIRT] == 1) {
@@ -403,8 +403,7 @@ public function rogarThirdPhase():void {
 			//set Ro'gar phase = 4 and Ro'roh Raggy = 0, Acquire 1x Bro Brew
 			flags[kFLAGS.ROGAR_PHASE] = 4;
 			flags[kFLAGS.ROGAR_WARNING] = 0;
-			menuLoc = 2;
-			inventory.takeItem(consumables.BROBREW);
+			inventory.takeItem(consumables.BROBREW, camp.returnToCampUseOneHour);
 		}
 		//(else if Dirt Mc Girt = 2)
 		else {
@@ -413,7 +412,7 @@ public function rogarThirdPhase():void {
 			if(player.gender == 2 || player.gender == 0) {
 				outputText("  It stops on your bare mons, and Ro'gar's eyes widen.  \"<i>Wh-wha... there's nothin' here!</i>\"  You color and nod.  His mouth hangs open for a long minute, then he masters himself.  \"<i>Well... I, uh, guess it was good t' see ya again...</i>\" he stammers.  \"<i>Hey, I'm sure you've got things to be doin' so I won't hold you up.</i>\"  As you attempt to protest, he chugs his drink and makes a show of slamming the can down, noisily and forcefully, on the bar.  Nodding at you, he pulls the cloak over his head and leaves the bar.  Apparently it was quite a shock to him.  You wonder if he'll avoid you from now on...", false);
 				flags[kFLAGS.ROGAR_DISABLED] = 1;
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else {
 				outputText("  " + SMultiCockDesc() + " gets a caress from him as he explores, arousing it to mild stiffness.  \"<i>" + player.short + ",</i>\" he grunts.  \"<i>Ah hope ah'll be seein' more of ya.</i>\"  Ro'gar breaks the contact and tips back the remains of his drink while you ", false);
@@ -427,7 +426,7 @@ public function rogarThirdPhase():void {
 				flags[kFLAGS.ROGAR_PHASE] = 4;
 				flags[kFLAGS.ROGAR_WARNING] = 0;
 				dynStats("lus", 30);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 	}
@@ -443,7 +442,7 @@ public function rogarPhaseFour():void {
 		outputText(".  \"<i>Gee, ya look... different.  Been samplin' some of the local foods, huh?</i>\"  You agree cautiously, and he flags the bartender over and buys you a drink.  \"<i>I'm just bein' polite since we're pals,</i>\" the orc ventures.  \"<i>Ya kin pay me back another time.</i>\"  You nod, sip your drink, and converse reservedly with him for a while, then go on your way.", false);
 		//set Ro'roh Raggy = 1
 		flags[kFLAGS.ROGAR_WARNING] = 1;
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//(high fem or breasts >=B-cup and Ro'roh Raggy =1)
 	else if((player.biggestTitSize() >= 2) && flags[kFLAGS.ROGAR_WARNING] == 1) {
@@ -463,7 +462,7 @@ public function rogarPhaseFour():void {
 		//[(if F or U)
 		if(player.gender == 2 || player.gender == 0) {
 			outputText("  It reaches the center without interruption, and Ro'gar colors deeper.  \"<i>Uh... ferget it,</i>\" he mumbles.  \"<i>Didn't mean ta be indecent with you or anythin', miss.</i>\"  He nods to you and quickly departs before you can recover from the surprise.", false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		else {
 			outputText("  " + SMultiCockDesc() + " trembles under his strong touch, as he increases the pressure and looks into your eyes meaningfully.  ", false);
@@ -605,7 +604,7 @@ private function loseButtGinity():void {
 	player.orgasm();
 	dynStats("sen", 2);
 	player.slimeFeed();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //((Scenario 2, [Give Anal]: Fuck Ro'gar))
@@ -631,7 +630,7 @@ private function fuckRogarsButtPussyBoyCuntManMoundSissySlitQueerQuim():void {
 	//[((If biggest cock is less than 4 inches))
 	if(player.longestCockLength() < 4) {
 		outputText("\"<i>Yer serious?</i>\" Ro'gar asks with a quirked eyebrow.  You blink as he suddenly gets up to stare you in the eyes.  \"<i>Not to be rude, " + player.short + ", but I ain't gonna feel nothin'.</i>\"  You can't help but feel a little offended, saying something about motions of large bodies of water.  Ro'gar doesn't seem convinced as he buries his forehead in a palm.  \"<i>Listen, this ain't a really good time for this.  I'm already losin' my mojo.  You come back another time, okay?</i>\"  With that, you are ushered out as politely as possible.  You can't help but feel a little embarrassed as you walk the city streets like this is some sort of walk of shame.", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;		//end if too small
 	}
 	//((else If smallest cock is over 18 inches))
@@ -678,7 +677,7 @@ private function fuckRogarsButtPussyBoyCuntManMoundSissySlitQueerQuim():void {
 	//<Lust sated>
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
  
 //((Scenario 3, [Drink! (sorta)]: Fun with Bro Brew(Requires one bro brew per visit, uses it and turns player into a Bro)))
@@ -697,7 +696,7 @@ private function rogarIsDumb():void {
 
 	outputText("The playful mood broken, you hang out for a while and shoot the breeze, then head back.", false);
 	//end
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Fukkin' Grab It!]
@@ -796,7 +795,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 	}
 	player.orgasm();
 	player.slimeFeed();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //((Scenario 4, [Frot]))
@@ -821,7 +820,7 @@ private function frotWithRogar():void {
 	//lose 100 lust, gain a little back, slimefeed?
 	player.orgasm();
 	dynStats("lus", 20);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //(([Get Tied Up], copy of Scenario 1a))
@@ -880,7 +879,7 @@ private function kinkyWithDaOrc():void {
 	player.orgasm();
 	dynStats("sen", 2);
 	player.slimeFeed();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //(([Orc Rub Down], get some fun with oils))
@@ -916,7 +915,7 @@ private function sexyOrcPitsAreSexy():void {
         dynStats("sen", 2);
 	player.slimeFeed();
 	//end
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Ignore pits]
 private function lickSomeMoreOrcButNoPits():void {
@@ -933,7 +932,7 @@ private function lickSomeMoreOrcButNoPits():void {
 	dynStats("sen", 2);
 	player.slimeFeed();
 	//end
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

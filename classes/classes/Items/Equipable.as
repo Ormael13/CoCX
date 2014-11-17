@@ -1,6 +1,7 @@
 /**
  * Created by aimozg on 09.01.14.
  */
+//No longer used - equipping Weapons and Armor is now handled by the inventoryMenu
 package classes.Items
 {
 	import classes.CoC_Settings;
@@ -52,15 +53,16 @@ package classes.Items
 			unequipEffect(player,output);
 		}
 
-		public function equip(player:Player,returnOldItem:Boolean,output:Boolean):void
+		protected function equip(player:Player,returnOldItem:Boolean,output:Boolean):void
 		{
 			CoC_Settings.errorAMC("Equipable", "equip", id);
 		}
 
 		/**
 		 * @param returnToInventory true if that item should be placed in player's inventory
+		 * @param output true if the unequip function should print to the screen
 		 */
-		public function unequip(player:Player,returnToInventory:Boolean,output:Boolean):void
+		public function unequip(player:Player, returnToInventory:Boolean, output:Boolean = false):void
 		{
 			CoC_Settings.errorAMC("Equipable", "unequip", id);
 		}

@@ -113,7 +113,7 @@ private function tamaniFemaleYes():void {
 	outputText("The goblin leaves you with a warning, \"<i>Be careful, it likes to leak aphrodisiacs like crazy.  Believe me, those are FUN to get addicted to.  Oh, and remember – Tamani owns all the cocks around here, so if you ever grow one, come pay your dues!</i>\"\n\n", false);
 	outputText("(<b>Deluxe Dildo acquired!</b>)", false);
 	player.createKeyItem("Deluxe Dildo",0,0,0,0);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[No] 
 private function tamaniFemaleNo(): void {
@@ -124,7 +124,7 @@ private function tamaniFemaleNo(): void {
 	if(player.cor < 33) outputText("What a slut.", false);
 	else if(player.cor < 66) outputText("How odd.", false);
 	else outputText("You hope she misses a few.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Encounter Tamani – HAZ COCK]
 //[First Time]
@@ -191,7 +191,7 @@ private function tamaniFirstTimeConsentual():void {
 	}
 	player.orgasm();
 	dynStats("lib", .5, "sen", -1, "cor", .5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Refuse – First Time Meeting]
@@ -210,7 +210,7 @@ private function tamaniSecondRefusal(): void {
 	outputText("", true);
 	outputText("The goblin pouts, anger clouding her cute little features.  She turns and storms off, clearly pissed at you, \"<i>Think about it.  Next time that dick better ache for me, or I'll MAKE you want it.</i>\"\n\n", false);
 	outputText("...What?", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[REPEAT MALE ENCOUNTER]
@@ -230,7 +230,13 @@ private function tamaniMaleRepeatEncounter():void {
 	//[Take Her – win sex] 
 	//[Let Her – Get dommed] 
 	//[No – starts fight]
-	simpleChoices("Take Her",tamaniSexWon,"Let Her",tamaniSexLetHer,"No",2203,"",0,"",0);
+	simpleChoices("Take Her", tamaniSexWon, "Let Her", tamaniSexLetHer, "No", tamaniStartFight, "", null, "", null);
+}
+
+private function tamaniStartFight():void {
+	clearOutput();
+	outputText("Tamani adopts a fighting pose and says, \"<i>If I have to I'll beat my children out of you!</b>\"");
+	startCombat(new Tamani());
 }
 
 //[Let Her (Or Combat Rape)]
@@ -240,7 +246,7 @@ internal function tamaniSexLetHer():void {
 	tamaniKnockUp();
 	outputText("", true);
 	//[lost combat]
-	if(gameState == 1 || gameState == 2) {
+	if (getGame().inCombat) {
 		//Taurs
 		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 			if(player.HP < 1) outputText("You stumble, hooves weaving drunkenly as you try to keep your feet.  ", false);
@@ -333,7 +339,7 @@ internal function tamaniSexLetHer():void {
 		}
 		outputText("After a little while you redress, but the scent of horny goblin stays with you for hours.", false);
 		//Combat end: 
-		if(gameState == 1 || gameState == 2) {
+		if (getGame().inCombat) {
 			outputText("  After the stress and strain of a lost fight and the stress of having your seed so expertly stolen, you lie down on your flank and go to sleep.", false);
 			cleanupAfterCombat();
 			player.orgasm();
@@ -342,7 +348,7 @@ internal function tamaniSexLetHer():void {
 		else {
 			player.orgasm();
 			dynStats("lus", +10);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 	//Not-taurs
@@ -376,7 +382,7 @@ internal function tamaniSexLetHer():void {
 			}
 			outputText("</i>\"\n\n", false);
 			//Combat end: 
-			if(gameState == 1 || gameState == 2) {
+			if (getGame().inCombat) {
 				outputText("You black out, exhausted from the ordeal.", false);
 				cleanupAfterCombat();
 				player.orgasm();
@@ -386,7 +392,7 @@ internal function tamaniSexLetHer():void {
 				outputText("You lie there, recovering from the intense sex.  After a little while you manage to get up and redress, but the scent of horny goblin stays with you for hours.", false);
 				player.orgasm();
 				dynStats("lus", +10);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 		//(Doesnt fit)
@@ -428,7 +434,7 @@ internal function tamaniSexLetHer():void {
 			outputText("Tamani eases up off of you, dripping a mixture of sexual fluids and stretching as if she had just completed a long workout.  The slutty goblin winks at you and waves, \"<i>Thanks for the cum.  Be sure and take some time to refill.  I wanna be soaked again next time!</i>\"\n\n", false);
 			
 			//Combat end: 
-			if(gameState == 1 || gameState == 2) {
+			if (getGame().inCombat) {
 				outputText("You black out, exhausted from the ordeal.", false);
 				cleanupAfterCombat();
 				player.orgasm();
@@ -438,7 +444,7 @@ internal function tamaniSexLetHer():void {
 				outputText("You lie there, recovering from the intense sex.  After a little while you manage to get up and redress, but the scent of horny goblin stays with you for hours.", false);
 				player.orgasm();
 				dynStats("lus", +10);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 	}
@@ -531,8 +537,8 @@ internal function tamaniSexWon():void {
 		outputText("any more cream to give to me?</i>\"\n\n", false);
 		outputText("She doesn't give you a chance to answer as she wobbles off, jiggling pleasantly in all the right places, \"<i>Of course you do.  I'll be back for the rest later!</i>\"\n\n", false);
 		player.orgasm();
-		if(gameState > 0) cleanupAfterCombat();
-		else doNext(13);
+		if (getGame().inCombat) cleanupAfterCombat();
+		else doNext(camp.returnToCampUseOneHour);
 	}
 	//Too big? Jerk off with feet and bukkake
 	else {
@@ -559,8 +565,8 @@ internal function tamaniSexWon():void {
 		outputText("Tamani wiggles in the sexiest way as she leaves, arousing your body all over again...", false);
 		player.orgasm();
 		dynStats("lus", 35);
-		if(gameState > 0) cleanupAfterCombat();
-		else doNext(13);
+		if (getGame().inCombat) cleanupAfterCombat();
+		else doNext(camp.returnToCampUseOneHour);
 	}
 }
 
@@ -579,7 +585,7 @@ private function tamaniPregnantRefusal():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("She bursts into tears and waddles away crying.  You aren't sure if you should feel bad or not.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[FUCK HER PREGGERS – Consentual]
 private function tamaniPregnantFuck():void {
@@ -627,7 +633,7 @@ private function tamaniPregnantFuck():void {
 		outputText("Tamani comes over to you and gives you a sloppy goodbye kiss, sending an immediate surge of hardness and desire to your groin.  She looks back and giggles, then waddles off, patting her pouches and dripping with your spooge.", false);
 		player.orgasm();
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Birth Encounter]
@@ -660,7 +666,7 @@ private function tamaniPoopsOutBabies():void {
 	outputText("Tamani sighs and relaxes, enjoying the breastfeeding and waving you away.  You shrug and head back to camp, more than a little aroused.", false);
 	dynStats("lus", player.lib / 10 + player.cor / 10);
 	tamaniGivesBirth();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 internal function tamaniKnockUp():void {
@@ -830,8 +836,8 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 		player.orgasm();
 		dynStats("int", -.5, "sen", -1);
 	}
-	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 internal function tamaniAnalShits():void {
@@ -907,7 +913,7 @@ private function declineZeFacesits():void {
 	outputText("You tell her you're not interested.");
 	outputText("\n\nThe curvy goblin kicks you with a snarl, making you instinctively grab at one [leg] and hop around on the other - until she kicks it too, knocking you down.  \"<i>Fine, bitch. Have it your way. But if I find you taking <b>my</b> cocks again, you're going to be in trouble!</i>\"  She darts off before you can get a word in edgewise, leaving you alone.");
 	//((Needs non-leg and centaur equivalents))
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //(("Accept" choice))
@@ -931,7 +937,7 @@ private function acceptTamaniFacesits():void {
 	outputText("\n\n\"<i>FFFFFFFNNNNNnnnnnnnn!</i>\" the green whore cries out, her thighs clamping down on the sides of your head like a vice.  Her asshole grips down on your invading fingers, holding them in place, and her pussy undulates around your tongue like a living thing, more and more of her juices gushing out as the little slut comes <b>hard</b> before she just... goes limp.");
 	outputText("\n\nYou withdraw your fingers from her ass and let go of her clit, and the little green fuck-doll topples over, falling into the dirt and muttering something incoherently. You sit up and look, admiring the sight of her fat green ass sticking up in the air with her juices still dripping down her thighs, and decide to walk away from the clearly unconscious goblin.");
 	dynStats("lus", 20+player.lib/20);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

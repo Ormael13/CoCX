@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.WeaponLib;
 
 	public class Library extends TelAdreAbstractContent{
 
@@ -123,7 +124,7 @@ private function studyInTA():void {
 		//OR (history) 
 		else outputText("\n\nSelecting a book randomly from the scattered tomes, you find a historical text documenting life in Mareth.  It's dreadfully dull, and though you do your best to learn what you can the dry work is putting you to sleep.  Eventually you close the book and accept that you're not going to be learning anything tonight.");
 		menu();
-		addButton(0,"Next",eventParser,13);
+		addButton(0,"Next",camp.returnToCampUseOneHour);
 	}
 }
 
@@ -139,7 +140,7 @@ private function youOkayBuddy():void {
 	outputText("\n\nQuinn scoffs in return, running a hand up through his hair (and only further disorganizing it).  \"<i>As a member of the Covenant it is my duty – nay, privilege – to look over this city and protect it from the harm the outside world will do.  However, unlike many of my colleagues, I have chosen to take actual responsibilities in the management of this town – and this library.  This makes holing up in one of the tower's rooms and spending my days meditating to maintain the town's defences... untenable.</i>\"  The weary man dusts off the front of his waistcoat with no small amount of pride.  \"<i>Thus, I have taken into my possession a small item which will allow my fellow magisters to siphon from my magical ability and direct it to such a noble purpose.  Should I need to call upon my full capabilities I shall simply remove this object from my person, and the vim and vigor that I am proud to maintain shall spring back and rejuvenate me.</i>\"  He chuckles lightly, rubbing his cheekbones.  \"<i>Until then, I am proud to wear the so-called scars of my station.  Would that everyone had such selflessness.</i>\"");
 
 	outputText("\n\nFinally getting the exposition you were looking for (and then some) you thank him for the information and resolve to talk to him as little as possible in the future.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Mali]
@@ -167,7 +168,7 @@ private function talkToMali():void {
 		
 		outputText("\n\nMali does not talk business for the rest of the visit, instead sharing tea with you and making small talk about life in Tel'adre.  It is polite and pleasant, and quite relaxing.  Eventually you excuse yourself, needing to return to the camp.  Descending back down the long staircase you scare off a crow resting on one of the tower's windowsills.");
 		//[Mali] is added permanently to the tower's menu during the day.
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}	
 	//[[Mali], player has spellblade]
 	else if((player.weaponName == "inscribed spellblade" || player.hasItem(weapons.S_BLADE)) && flags[kFLAGS.MALI_TAKEN_BLADE] == 0) {
@@ -179,15 +180,16 @@ private function talkToMali():void {
 		outputText("\n\n\"<i>I'm going to use this to track her,</i>\" she explains, \"<i>Then gather up some guards and find out just what she's up to.  You should rest up, prepare for lethal danger, then come back.</i>\"  The grin on her face doesn't seem to be going anywhere.  \"<i>I can't imagine doing this without your help now.</i>\"");
 		outputText("\n\n\"<i>Please, come back soon.</i>\"");
 		outputText("\n\n(<b>Conclusion not yet complete...</b>)");
-		if(player.weapon == weapons.S_BLADE) {
-			player.weapon.unequip(player,false,true);
-			player.removePerk(PerkLib.WizardsFocus);
+		if (player.weapon == weapons.S_BLADE) {
+			player.setWeapon(WeaponLib.FISTS);
+//			player.weapon.unequip(player, false, true);
+//			player.removePerk(PerkLib.WizardsFocus);
 		}
 		else {
 			player.consumeItem(weapons.S_BLADE);
 		}
 		flags[kFLAGS.MALI_TAKEN_BLADE] = 1;
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//[[Mali], player does not have spellblade]
 	else {
@@ -196,7 +198,7 @@ private function talkToMali():void {
 		outputText("\n\n\"<i>Ah, how are you?</i>\" Mali smiles at your visit, putting a tome aside.  You don't yet have anything that can help her locate Dominika, but the company is nice.  She puts on some tea and the two of you make small talk.  Mali's laugh is bright, tinkling lightly when you bring it out.  Eventually the time comes to leave.  She thanks you for the visit.");
 		
 		outputText("\n\n\"<i>Remember,</i>\" she says on the way out, \"<i>Anything you can get from Dominika that holds some aspect of her power will help.</i>\"");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	flags[kFLAGS.TIMES_VISITED_MALI]++;
 }

@@ -20,13 +20,13 @@
 			
 				outputText("You suppose you could try to pull it free, do you?", false);
 			
-				doYesNo(tryToTakeSwordInStone,13);
+				doYesNo(tryToTakeSwordInStone,camp.returnToCampUseOneHour);
 			}
 			else 
 			{
 				outputText("While walking along the lake, a massive tree catches your eye.  You carefully circle some bushes, wary of an ambush as you get closer.   As you close the distance, it becomes clear the tree is terribly corrupt.  It weeps black sap from gnashing mouths and clenching distorting twats.  The very center of the tree has a massive knot, as if it had sustained a massive injury there.  You decide to avoid it, given the hungry-looking nature of its mouths, but before you depart you spot the pieces of a broken sword scattered around the trunk, completely covered in rust.", true);
 				
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				
 				player.createStatusAffect(StatusAffects.BSwordBroken,0,0,0,0);
 			}
@@ -46,7 +46,7 @@
 				
 				outputText("but the sword remains stubbornly lodged in its arboreal home.  Frustrated, you give up and resolve to try later.", false);
 				
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			//If not corrupted...
 			else 
@@ -60,12 +60,8 @@
 				outputText("Remarkably the tree's trunk is entirely intact.  While marveling at this new development, a leaf brushes your shoulder.  You look up and watch as every single leaf turns from healthy green, to brilliant orange, and finally changes to brown.  The leaves rain down around you, covering the ground in dead plant-matter, leaving you alone with the withering skeleton of a dead tree.  The sight saddens you, though you cannot fathom why.\n\n", false);
 			
 				outputText("The blade itself is three and a half feet of the purest, shining steel you have ever seen.  It truly is a beautiful blade.\n\n", false);
-			
 				dynStats("lib", -(player.lib/3), "lus", -15);
-			
-				menuLoc = 2;
-				inventory.takeItem(weapons.B_SWORD);
-			
+				inventory.takeItem(weapons.B_SWORD, camp.returnToCampUseOneHour);
 				player.createStatusAffect(StatusAffects.TookBlessedSword,0,0,0,0);
 			}
 		}

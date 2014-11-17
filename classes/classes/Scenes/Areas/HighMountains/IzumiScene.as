@@ -130,7 +130,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Spelunking in random caves around these parts is probably not the best idea; especially considering the kinds of creatures that you keep tripping over whenever you <i>do</i> decide to poke your nose somewhere it doesn't belong.\n\n");
 			
 			outputText("You head back to camp, having found nothing else of interest.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		// Already met, dun wanna get oniraepd again plz
@@ -139,7 +139,7 @@ package classes.Scenes.Areas.HighMountains
 			clearOutput();
 
 			outputText("You decide discretion is the better part of valour and choose not to barge into the strange woman's cave again, opting to slip away before she notices you hanging around outside her home.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		// Introduce the fuckhuge oni
@@ -480,7 +480,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("Spotting an opening, you decide to beat a hasty retreat, as far away from the immense woman as possible.\n\n");
 
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		/**
 		 * FIGHT SHIT
@@ -668,7 +668,7 @@ package classes.Scenes.Areas.HighMountains
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		// Male/Herm scene for cocks <= 10"
@@ -738,7 +738,7 @@ package classes.Scenes.Areas.HighMountains
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		// Male/Herm be a jerk about it split
@@ -772,7 +772,7 @@ package classes.Scenes.Areas.HighMountains
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		// Urtadicks itt
@@ -824,7 +824,7 @@ package classes.Scenes.Areas.HighMountains
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function surrenderOhGodTheFemaleSurrenderContentIsFuckingHugeSendHelp():void
@@ -1066,7 +1066,7 @@ package classes.Scenes.Areas.HighMountains
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		// Female surrender, ask player if which variant they want
@@ -1128,7 +1128,7 @@ package classes.Scenes.Areas.HighMountains
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		/**
