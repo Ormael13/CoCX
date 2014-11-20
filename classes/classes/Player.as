@@ -645,7 +645,7 @@ use namespace kGAMECLASS;
 			}
 			if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 0) {
 				if (armorName == "lusty maiden's armor") {
-					if (game.model.time.hours > 23) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
+					if (game.model.time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
 					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] < 0) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0; //Keep in bounds.
 					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
 				}
