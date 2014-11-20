@@ -11,7 +11,7 @@
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
-			if (model.time.hours == 0) {
+			if (model.time.hours > 23) {
 				if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0) { //Marae met 2nd time?
 					if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) { //If flower hasn't been burned down yet
 						if (flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) { //Grow flower if it isn't fully grown.
