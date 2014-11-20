@@ -16,7 +16,6 @@ package classes {
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
 			var needNext:Boolean = false;
-outputText("\nplayer.timeChange");
 			checkedTurkey = 0;
 			checkedDream = 0;
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
