@@ -122,7 +122,7 @@
 		//Any classes that need to be aware of the passage of time can add themselves to this array using timeAwareAdd.
 		//	Once in the array they will be notified as each hour passes, allowing them to update actions, lactation, pregnancy, etc.
 		private static var _timeAwareClassList:Vector.<TimeAwareInterface> = new Vector.<TimeAwareInterface>(); //Accessed by goNext function in eventParser
-		private static var timeAwareLargeLastEntry:int; //Used by the eventParser in calling timeAwareLarge
+		private static var timeAwareLargeLastEntry:int = -1; //Used by the eventParser in calling timeAwareLarge
 		
 		public static function timeAwareClassAdd(newEntry:TimeAwareInterface):void { _timeAwareClassList.push(newEntry); }
 		
