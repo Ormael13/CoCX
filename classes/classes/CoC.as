@@ -123,6 +123,7 @@
 		//	Once in the array they will be notified as each hour passes, allowing them to update actions, lactation, pregnancy, etc.
 		private static var _timeAwareClassList:Vector.<TimeAwareInterface> = new Vector.<TimeAwareInterface>(); //Accessed by goNext function in eventParser
 		private static var timeAwareLargeLastEntry:int = -1; //Used by the eventParser in calling timeAwareLarge
+		private var playerEvent:PlayerEvents;
 		
 		public static function timeAwareClassAdd(newEntry:TimeAwareInterface):void { _timeAwareClassList.push(newEntry); }
 		
@@ -391,6 +392,7 @@
 			player = new Player();
 			model.player = player;
 			player2 = new Player();
+			playerEvent = new PlayerEvents();
 
 			//Used in perk selection, mainly eventParser, input and engineCore
 			tempPerk = null;
