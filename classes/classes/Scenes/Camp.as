@@ -1077,7 +1077,7 @@ public function campFollowers():void {
 	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) valeria2 = valeria.valeriaFollower;
 	addButton(0,"Ember",ember);
 	if (helspawnFollower()) addButton(1, flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
-	addButton(2, "Jojo", jojoScene.jojoCamp);
+	addButton(2, "Jojo", jojoEvent);
 	addButton(3, "Rathazul", rathazulEvent);
 	addButton(4, "Shouldra", shouldra);
 	//ABOVE: addButton(4,"Sophie",followerSophieMainScreen);

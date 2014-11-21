@@ -40,7 +40,7 @@ package classes.Scenes.Explore {
 		public function timeChange():Boolean
 		{
 			checkedSuccubi = 0; //Make sure we test just once in timeChangeLarge
-			if (model.time.hours == 0) {
+			if (model.time.hours > 23) {
 				if (flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 0) flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] -= 0.5; //Reduce bad-end for cerulean herms number
 			}
 			return false;
