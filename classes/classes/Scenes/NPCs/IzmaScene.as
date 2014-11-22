@@ -27,10 +27,15 @@
 												//Event: 0 (= not pregnant),  1,   2,   3,   4,  5,  6 (< 50)
 			CoC.timeAwareClassAdd(this);
 		}
-
+		
+		private var checkedIzmaLatexy:int; //Make sure we test each of these events just once in timeChangeLarge
+		private var checkedIzmaSophie:int;
+		
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
+			checkedIzmaLatexy = 0;
+			checkedIzmaSophie = 0;
 			pregnancy.pregnancyAdvance();
 			trace("\nIzma time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] > 0) flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE]--; //BOOKURYUUUU COUNTAH For IZMA
@@ -42,12 +47,12 @@
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (sophieBimbo.bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
+			if (checkedIzmaSophie++ == 0 && sophieBimbo.bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && ((flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 0 && rand(10) == 0) || flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 1)) {
 				flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] = 0;
 				sophieBimbo.sophieAndIzmaPlay();
 				return true;
 			}
-			if (izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
+			if (checkedIzmaLatexy++ == 0 && izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0 && (debug || rand(10) == 0)) {
 				izmaDomsLatexy();
 				return true;
 			}
