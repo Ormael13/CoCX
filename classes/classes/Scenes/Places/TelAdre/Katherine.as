@@ -4395,7 +4395,7 @@ public function handjobbiesFurrDemCatFurries():void
 		outputText("tip of her hot shaft.  A few strokes and you’ve spread her copious precum over most of her cock.  While one hand pleasures her prick the other goes lower, slipping " + (flags[kFLAGS.KATHERINE_UNLOCKED] < 1 ? "under her belt and into her pants." : "into her moist snatch."));
 		outputText("\n\nThe heat is intense and Kath’s " + knotAdj() + " knot swells at your ministrations.  Kath’s hips jerk forward, looking for a pussy to pack it into.");
 	}
-	outputText("\n\nKath’s next moan comes from the bottom of her lungs.  Thanks to you she’s already horny and now you decide to overload her senses.  You fingers " + (hasBalls() ? "cup her balls" : "tease her clit") + " for just a moment before slipping into her dripping cunt.");
+	outputText("\n\nKath’s next moan comes from the bottom of her lungs.  Thanks to you she’s already horny and now you decide to overload her senses.  You fingers " + (hasBalls() ? "cup her balls" : "tease her clit") + " for just a moment before slipping " + (cockNumber < 2 ? "back " : "") + "into her dripping cunt.");
 	outputText("\n\nHer head tilts back, and she tries to find your mouth with her own.  As your tongues entwine, you begin to slide your fingers in and out of her slit, making sure to rub hard against her tiny nub.  Your other hand ");
 	if (cockNumber > 1) {
 		outputText("works up and down her " + cockAdj() + "shafts, alternating from one to the other.  Soon you can feel them both twitching, ready to fire their loads into a pair of fertile pussies.");
@@ -4405,14 +4405,20 @@ public function handjobbiesFurrDemCatFurries():void
 		outputText("works up and down her " + cockAdj() + "shaft.  Soon you can feel it twitching, ready to fire its load into a fertile pussy.");
 		outputText("\n\nYou aim Katherine’s dick");
 	}
-	outputText(" at the wall.  You pull your fingers from her pussy and rub her wetness over " + (hasBalls() ? "her fuzzy balls" : "her growing knot") + ".  Pulling your head back you tell Kath to cum for you.  She gasps and you feel " + (hasBalls() ? "that " + ballAdj() + " ballsack contract" : "her cock" + cockMultiple("", "s") + " twitch and harden") + " as Kath lets loose with who knows how much pent up cum.");
-	outputText("\n\nYou’re not done with her yet.  As the first shot splatters against the " + (isAt(KLOC_KATHS_APT) ? "plaster" : "brickwork") + " you slip your fingers back to her cunt and attack her clit.  Despite already being in the midst of one orgasm, Kath’s body tenses up even more.  It feels like a cup of water gushes from her pussy and the next blast from her cock" + cockMultiple("", "s") + " is even stronger, hitting the wall a good six inches higher than the first.");
+	outputText(" at the " + (isAt(KLOC_DESERT) ? "ground" : "wall") + ".  You pull your fingers from her pussy and rub her wetness over " + (hasBalls() ? "her fuzzy balls" : "her growing knot") + ".  Pulling your head back you tell Kath to cum for you.  She gasps and you feel " + (hasBalls() ? "that " + ballAdj() + " ballsack contract" : "her cock" + cockMultiple("", "s") + " twitch and harden") + " as Kath lets loose with who knows how much pent up cum.");
+	outputText("\n\nYou’re not done with her yet.  As the first shot splatters against the ");
+	if (isAt(KLOC_DESERT))
+		outputText((model.time.hours <= 18 ? "hot" : "cool") + " sand");
+	else outputText(isAt(KLOC_KATHS_APT) ? "plaster" : "brickwork");
+	outputText(" you slip your fingers back to her cunt and attack her clit.  Despite already being in the midst of one orgasm, Kath’s body tenses up even more.  It feels like a cup of water gushes from her pussy and the next blast from her cock" + cockMultiple("", "s") + " is even stronger, " + (isAt(KLOC_DESERT) ? "arcing a good six inches further " : "hitting the wall a good six inches higher") + " than the first.");
 
 	outputText("\n\nKath turns to liquid in your arms as several more orgasms wash over her like the aftershocks of an earthquake.  All she can do is look up into your eyes and smile.");
 	if (player.cor < 25) outputText(" You hold her in your arms while she recovers.  You really enjoy seeing the happiness and contentment in her face.");
 	else if (player.cor < 75) outputText(" While you wait for her to recover you pull her shirt up and play with her breasts a bit more.  By the time she can move again her nipples are sticking out like little berries.  She blushes, but clearly enjoys the attention.");
 	else outputText("  Not one to pass up a helpless young herm you " + (flags[kFLAGS.KATHERINE_UNLOCKED] < 1 ? "strip all Katherine’s clothes off.  You" : "") + " play with her tail, eventually growing bored and pushing the tip deep inside her pussy.");
-	outputText("\n\nNext you run your hand over the wall, collect a handful of her still warm spunk and offer it to her.  Kath’s rough tongue licks every drop from your hand while you think of all the things you’d like to do with her body.");
+	outputText("\n\nNext you run your hand " + (isAt(KLOC_DESERT) ? cockMultiple("along her cock", "s along her cocks") : "over the wall") + ", collect some of her still warm spunk and offer it to her.  Kath’s rough tongue licks every drop from your hand while you think of all the things you’d like to do with her body.");
+	if (isAt(KLOC_DESERT))
+	outputText("\n\nWith training over for now you get Katherine to pack up her equipment and lead her back to Tel'Adre.  When you reach her alley Kath throws herself on the pile of softer scraps she's collected and says <i>“Please come back soon " + player.short + ", I'll do better next time.”</i>");
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	dynStats("lus", 33);
