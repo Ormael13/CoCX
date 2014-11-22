@@ -46,11 +46,14 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 												//Event: 0 (= not pregnant),  1,   2,   3,   4,   5,  6 (< 144)
 			CoC.timeAwareClassAdd(this);
 		}
-
+		
+		private var checkedMarbleMilk:int; //Make sure we test each of these events just once in timeChangeLarge
+		
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
 			var needNext:Boolean = false;
+			checkedMarbleMilk = 0;
 			pregnancy.pregnancyAdvance();
 			trace("\nMarble time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
@@ -388,7 +391,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				doNext(1);
 				return true;
 			}
-			if (model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
+			if (checkedMarbleMilk++ == 0 && model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
 				//Marble is at camp
 				if (player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 					postAddictionCampMornings(false);
