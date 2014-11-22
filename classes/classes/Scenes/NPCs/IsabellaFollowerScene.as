@@ -197,7 +197,7 @@ public function callForFollowerIsabella():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(5, "Go Camp", backToCamp);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 	//if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] >= 100) addButton(0, "Accent Uncoach", isabellaAccentUncoaching);
 }
 

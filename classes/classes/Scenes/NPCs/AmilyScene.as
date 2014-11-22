@@ -2619,7 +2619,7 @@ package classes.Scenes.NPCs
 					addButton(5, "Go Camp", backToCamp);
 					if (flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] == 0) addButton(6, "Harvest Milk", harvestMilk);
 					else addButton(6, "Stop Harvest", stopHarvestingMilk);
-					addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+					addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 				}
 			}
 		}

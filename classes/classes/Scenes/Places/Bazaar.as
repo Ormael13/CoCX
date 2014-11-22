@@ -129,7 +129,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	addButton(6,roxanneT,roxanne2);
 	addButton(7,"S. Squeeze",theSlipperySqueeze);
 	addButton(8,"Tent",tent);
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 }	
 
 //Semen Bukkake and Massage Parlor
@@ -551,7 +551,7 @@ private function gretasGarments():void {
 		if(player.hasSock()) addButton(2,"Remove Sock",takeOffDatSock);
 	}
 	if(flags[kFLAGS.OWN_MAIDEN_BIKINI] == 0) addButton(0,"Bikini",askGretaAboutZeBikini);
-	addButton(9,"Back",enterTheBazaarAndMenu);
+	addButton(14,"Back",enterTheBazaarAndMenu);
 	
 }
 //Ask About Inventory
@@ -613,7 +613,7 @@ private function browseDemSocksSon():void {
 	addButton(5,"Cobalt",cobaltCockSock);
 	addButton(6,"Gilded",gildedCockSock);
 	addButton(7,"Purple",amaranthineCockSock);
-	addButton(9,"Back",gretasGarments);
+	addButton(14,"Back",gretasGarments);
 }
 
 //Wool Cock-sock

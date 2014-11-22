@@ -274,7 +274,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.NorthExitCondition == null || tRoom.NorthExitCondition())
 				{
-					addButton(0, "North", move, tRoom.NorthExit, 1/12);
+					addButton(6, "North", move, tRoom.NorthExit, 1/12);
 				}
 			}
 			
@@ -282,7 +282,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.EastExitCondition == null || tRoom.EastExitCondition())
 				{
-					addButton(1, "East", move, tRoom.EastExit, 1/12);
+					addButton(12, "East", move, tRoom.EastExit, 1/12);
 				}
 			}
 			
@@ -290,7 +290,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.SouthExitCondition == null || tRoom.SouthExitCondition())
 				{
-					addButton(6, "South", move, tRoom.SouthExit, 1/12);
+					addButton(11, "South", move, tRoom.SouthExit, 1/12);
 				}
 			}
 			
@@ -298,17 +298,17 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.WestExitCondition == null || tRoom.WestExitCondition())
 				{
-					addButton(5, "West", move, tRoom.WestExit, 1/12);
+					addButton(10, "West", move, tRoom.WestExit, 1/12);
 				}
 			}
 			
 			if (tRoom.RoomName == "entrance")
 			{
-				addButton(5, "Exit", exitD3);
+				addButton(10, "Exit", exitD3);
 			}
 			
-			addButton(8, "Items", eventParser, 1000);
-			addButton(9, "Masturbate", eventParser, 10);
+			addButton(13, "Inventory", eventParser, 1000);
+			if (player.lust >= 30) addButton(8, "Masturbate", eventParser, 10);
 		}
 		
 		public function move(roomName:String, timeToPass:Number = 0):void
@@ -466,7 +466,7 @@ package classes.Scenes.Dungeons.D3
 			if (!(flagNum & BROWN)) addButton(4, "Brown", takeEgg, BROWN);
 			if (!(flagNum & PURPLE)) addButton(5, "Purple", takeEgg, PURPLE);
 			
-			addButton(9, "Back", resumeFromFight);
+			addButton(14, "Back", resumeFromFight);
 		}
 		
 		private function takeEgg(eggMask:int):void

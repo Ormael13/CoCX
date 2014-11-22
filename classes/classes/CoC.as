@@ -219,7 +219,8 @@
 		
 		// Force updates in Pepper Flash ahuehue
 		private var _updateHack:Sprite = new Sprite();
-
+		
+		public var mainViewHack:MainViewHack = new MainViewHack();
 		// Other scenes
 
 		include "../../includes/april_fools.as";
@@ -372,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.0_mod_0.9.9";
-			version = ver + " (<b>Last pre-1.0 fix</b>)";
+			ver = "0.9.0_mod_1.0_indev_20141122";
+			version = ver + " (<b>Ingnam</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

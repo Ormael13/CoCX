@@ -372,7 +372,7 @@ private function genericMenu(display:Boolean = false):void {
 	if (minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
 	if (player.hasKeyItem("Rathazul's Purity Potion") >= 0) addButton(7, "Purify", minervaPurification.purificationByRathazul)
 	if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", minervaPurification.purificationByMarae)
-	addButton(9, "Leave", eventParser, 13);	
+	addButton(14, "Leave", eventParser, 13);	
 }
 
 //1-2 Repeatable Cute, Romantic Encounter. Only if PC accepted Minerva's feelings. Add to normal encounters.
@@ -718,7 +718,7 @@ private function minervaSexMenu(display:Boolean = true):void
 	addButton(btnIdx++, "EatHerOut", goDownOnAHermAndLoveItYouDirtySlutYou);
 	if (player.hasCock())
 		addButton(btnIdx++, "Get BJ", letMinervaSuckYouOff);
-	addButton(9, "Leave", genericMenu, true);
+	addButton(14, "Leave", genericMenu, true);
 }
 
 //4-1= sex scene 1 male/herm:  Anal
@@ -1404,7 +1404,7 @@ internal function loseToMinerva():void {
 		outputText("\n\n\"<i>W-well... don't worry, Minerva is going to take care of you, just tell me how you want it, all right?</i>\" she says earnestly, clearly intending to finish what she started and help you with your battle induced lust.");
 		//Take PC to sex menu
 		minervaSexMenu(false);
-		addButton(9,"Leave",cleanupAfterCombat);
+		addButton(14,"Leave",cleanupAfterCombat);
 	}
 }
 
@@ -1424,7 +1424,7 @@ internal function beatUpDatSharpie():void {
 		outputText("Your final move finishes the horny siren, her shorts bulging obscenely and soaked with her arousal.  Falling to her knees, Minerva desperately grabs hold of her shorts, yanking them from her curvy hips, letting out a gasp of relief and a moan of need.  Between the lusty herm's legs stands her painfully hard cock, all sixteen thick inches throbbing with desperate need, her thighs soaked in womanly juices.  Minerva's hands grab hold of her cock, stroking herself as she slips a pair of fingers into her quivering, slippery quim.  \"<i>Oh, [name], p-please... ohhh... look what you've done.  So mean, getting me so horny like this,</i>\" she says before letting out a long moan.");
 		outputText("\n\nShe's looking up at you with her debilitating lust clear in her eyes.  \"<i>W-well... think you could help little old me with this...  Just tell me what to do, I need it so badly.</i>\"");
 		minervaSexMenu(false);
-		addButton(9,"Leave",cleanupAfterCombat);
+		addButton(14,"Leave",cleanupAfterCombat);
 	}
 }
 

@@ -679,7 +679,7 @@ public function rubisFuckingHouseYouPervert():void {
 		outputText("\n\n<b>You could use your snake-like motions to hypnotize Rubi and turn [rubi em] into a more complacent, eager slut. Doing so is likely irreversible.</b>")
 		addButton(5,"Hypno",hypnoBimboficationForRubiSloots);
 	}
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 }
 
 private function rubiSexMenu():void {
@@ -716,7 +716,7 @@ private function rubiSexMenu():void {
 	//PC hotdogs Rubi's ass
 	//PC must have a penis
 	if(player.hasCock()) addButton(6,"Hotdogging",rubiHotdogging);
-	addButton(9,"Back",rubisFuckingHouseYouPervert);
+	addButton(14,"Back",rubisFuckingHouseYouPervert);
 }
 
 
@@ -765,7 +765,7 @@ private function rubiIsAHe():void {
 	flags[kFLAGS.RUBI_SHE] = 0;
 	outputText("Rubi nods, and will refer to himself as a \"he\" from now on.");
 	menu();
-	addButton(9,"Back",rubisFuckingHouseYouPervert);
+	addButton(14,"Back",rubisFuckingHouseYouPervert);
 }
 //She
 private function rubiIsAShe():void {
@@ -774,7 +774,7 @@ private function rubiIsAShe():void {
 	flags[kFLAGS.RUBI_SHE] = 1;
 	outputText("Rubi nods, and will refer to herself as a \"she\" from now on.");
 	menu();
-	addButton(9,"Back",rubisFuckingHouseYouPervert);
+	addButton(14,"Back",rubisFuckingHouseYouPervert);
 }
 //Sex Scenes Ahoy!
 //There are variants for Normal, Bimbo and Incubus Rubi, as well as smaller variations if you're currently teasing him or not.
@@ -1594,7 +1594,7 @@ private function playDressUp():void {
 		else addButton(8,"More",playDressUp2);
 		button++;
 	}
-	addButton(9,"Back",rubiAppearance);
+	addButton(14,"Back",rubiAppearance);
 }
 private function playDressUp2():void {
 	clearOutput();
@@ -1672,7 +1672,7 @@ private function playDressUp2():void {
 		else if(button <= closet.length) addButton(button-7,buttonNames[button],dressUpRouter,closet[button]);
 		button++;
 	}
-	addButton(9,"Back",rubiAppearance);
+	addButton(14,"Back",rubiAppearance);
 }
 
 private function dressUpRouter(arg:String):void {
@@ -2090,7 +2090,7 @@ private function iceCreamDate():void {
 	outputText("\n\nOnce you're back in the house, Rubi sprawls out on the couch, a devilish grin on [rubi eir] face.  \"<i>So, you plan on giving me a good \"kiss\" good night?\"");
 	//[Go to Sex menu]
 	rubiSexMenu();
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 }
 
 //Fancy Dinner Date
@@ -2128,7 +2128,7 @@ private function fancyDate():void {
 		outputText("\n\nOnce you're back in the house, Rubi sprawls out on the couch, a devilish grin on [rubi eir] face.  \"<i>So, you plan on giving me a good \"kiss\" good night?\"");
 		//[to sex menu]
 		rubiSexMenu();
-		addButton(9,"Leave",eventParser,13);
+		addButton(14,"Leave",eventParser,13);
 	}
 	//Can't Afford It?
 	else {
@@ -2163,7 +2163,7 @@ private function exhibitionistDate():void {
 
 	//[Go to sex menu]
 	rubiSexMenu();
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 }
 
 //Bar Date
@@ -2194,7 +2194,7 @@ private function barDate():void {
 	outputText("\n\nBy the time you enter Rubi's bedroom, [rubi eir] lips are locked with yours.  \"<i>So babe, what are we going to do about this?</i>\"");
 	//[Goto Sex menu]
 	rubiSexMenu();
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 }
 
 //Anal Training
@@ -2882,7 +2882,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		flags[kFLAGS.RUBI_BIMBO] = 1;
 		flags[kFLAGS.RUBI_HAIR] = 1;
 		rubiSexMenu();
-		addButton(9,"Leave",eventParser,13);
+		addButton(14,"Leave",eventParser,13);
 		return;
 	}
 	//Equinum
@@ -3462,7 +3462,7 @@ private function pickAnItemToFeedRubi():void {
 		if(events[counter] != 0) addButton(counter,eventNames[counter],functions[counter],events[counter]);
 		counter++;
 	}
-	addButton(9,"Back",rubiAppearance);
+	addButton(14,"Back",rubiAppearance);
 		//choices(eventNames[0],events[0],eventNames[1],events[1],eventNames[2],events[2],eventNames[3],events[3],eventNames[4],events[4],eventNames[5],events[5],eventNames[6],events[6],eventNames[7],events[7],eventNames[8],events[8],"Back",3898);
 }
 

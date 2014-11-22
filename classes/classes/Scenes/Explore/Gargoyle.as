@@ -280,7 +280,7 @@ public function returnToCathedral(woken:Boolean = false):void {
 		}
 		addButton(3,"Appearance",gargoyleAppearance);
 	}
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 }
 
 //[b]Sex[/b]
@@ -312,12 +312,12 @@ private function gargoyleSexMenu():void {
 		addButton(2,"Titfuck",titFuckTheGargoyle);
 		addButton(3,"Strap-On",strapOnGargoyle);
 		addButton(4,"Tail Fuck",tailFuckGargoyleScene);
-		addButton(9,"Leave",returnToCathedral);
+		addButton(14,"Leave",returnToCathedral);
 	}
 	//(If Genderless, display [Strap-on] [Leave])
 	if(player.gender == 0) {
 		addButton(3,"Strap-On",strapOnGargoyle);
-		addButton(9,"Leave",returnToCathedral);
+		addButton(14,"Leave",returnToCathedral);
 	}
 }
 

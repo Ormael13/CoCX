@@ -854,7 +854,7 @@ public function nieveSexMenu():void {
 	//Any Gender
 	//Nieve's cock is 9x1.5
 	if(flags[kFLAGS.NIEVE_GENDER] == 1 && player.lust >= 33) addButton(1,"Get Fucked",nieveFucksYou);
-	addButton(9,"Back",camp.campLoversMenu);
+	addButton(14,"Back",camp.campLoversMenu);
 }
 
 //Lick Her

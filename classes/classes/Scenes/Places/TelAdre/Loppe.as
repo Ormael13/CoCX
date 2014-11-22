@@ -314,7 +314,7 @@ private function talkWithLoppe():void {
 	//The curse (unfinished; available after choosing \"<i>Loppe</i>\" at least once)
 	//Fondle (after "Loppe"; see appropriate section)
 	if(flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] > 0 && flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(6,"Tease Her",fondleAndTease);
-	addButton(9,"Back",loppeGenericMeetings);
+	addButton(14,"Back",loppeGenericMeetings);
 }
 
 //Loppe (edited) (C)
@@ -481,7 +481,7 @@ private function gossipWithLoppe():void {
 	//Cotton
 	if(flags[kFLAGS.COTTON_MET_FUCKED] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
 	//Back (spacebar default)
-	addButton(9,"Back",talkWithLoppe);
+	addButton(14,"Back",talkWithLoppe);
 }
 
 //Urta:
@@ -879,7 +879,7 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 	if(flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(4,"SqueezeJob",loppeSqueezedickWhateverThatIs);
 	if(player.isTaur() && player.lust >= 33) addButton(5,"TakeAnal",getAssFuckedByLoppeAsACentaur);
 	else if(player.lust >= 33) addButton(5,"TakeAnal",getButtFuckedNonHoarseByLoppe);
-	addButton(9,"Leave",beATeaseAndLeaveLoppeAfterSexInvite);
+	addButton(14,"Leave",beATeaseAndLeaveLoppeAfterSexInvite);
 }
 
 //Male

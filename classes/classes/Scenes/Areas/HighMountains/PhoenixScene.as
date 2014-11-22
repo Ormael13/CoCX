@@ -52,7 +52,7 @@ package classes.Scenes.Areas.HighMountains
 				addButton(3, "Ride Anal", rideAnal);
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
 				//addButton(5, "Suck Her Dick", rideAnal);
-				addButton(9, "Leave", cleanupAfterCombat);
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}

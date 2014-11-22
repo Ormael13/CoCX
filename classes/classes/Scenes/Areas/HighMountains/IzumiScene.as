@@ -1196,7 +1196,7 @@ package classes.Scenes.Areas.HighMountains
 
 			if (player.hasVagina() || player.hasCock())
 			{
-				addButton(9, "Leave", lossSceneLeave);
+				addButton(14, "Leave", lossSceneLeave);
 			}
 			if (flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("<b>SFW mode is enabled.</b>");

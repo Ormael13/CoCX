@@ -1096,7 +1096,7 @@ public function urtaSpecials():void {
 	addButton(3,"Dirt Kick",urtaDirtKick);
 	addButton(4,"Metabolize",urtaMetabolize);
 	addButton(5,"SecondWind",urtaSecondWind);
-	addButton(9,"Back",eventParser,5000);
+	addButton(14,"Back",eventParser,5000);
 }
 
 private function urtaMetabolize():void {

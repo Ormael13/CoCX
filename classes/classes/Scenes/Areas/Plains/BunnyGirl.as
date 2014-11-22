@@ -758,7 +758,7 @@ private function adjathaEggsplosions():void {
 		if(player.cockThatFits(40) >= 0) addButton(2,"Fuck Her",fuckTheEggBoundBun);
 		else outputText("  <b>You're too big to fuck her!</b>");
 	}
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 }
  
 //[Free Her] (Any gender)

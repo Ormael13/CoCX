@@ -5390,7 +5390,7 @@
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
 			}
 			//Remove beard!
-			if (player.hasBeard() ){
+			if (player.hasBeard() && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + beardDescript() + " feels looser and looser until finally, your beard falls out.  ");
 				outputText("(<b>You no longer have a beard!</b>)");
 				player.beardLength = 0;

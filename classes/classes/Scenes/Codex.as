@@ -152,7 +152,7 @@ package classes.Scenes
 			addButton(0, "Races", enterRaces);
 			addButton(1, "Factions", menuFactions);
 			addButton(2, "Others", menuItems);
-			addButton(9, "Back", eventParser, 1);
+			addButton(14, "Back", eventParser, 1);
 		}
 		
 		private function enterRaces():void {
@@ -198,7 +198,7 @@ package classes.Scenes
 				else addButton(8, "Imps", codexEntryImps);
 			}
 			addButton(4, "Page 1/3", menuRacesII);
-			addButton(9, "Back", accessCodexMenu);
+			addButton(14, "Back", accessCodexMenu);
 		}
 		private function menuRacesII():void {
 			menu();
@@ -236,7 +236,7 @@ package classes.Scenes
 				else addButton(8, "Shark Girls", codexEntrySharkGirls);
 			}
 			addButton(4, "Page 2/3", menuRacesIII);
-			addButton(9, "Back", accessCodexMenu);
+			addButton(14, "Back", accessCodexMenu);
 		}
 		
 		private function menuRacesIII():void {
@@ -247,7 +247,7 @@ package classes.Scenes
 				else addButton(0, "Succubus", codexEntrySuccubus);
 			}
 			addButton(4, "Page 3/3", menuRaces);
-			addButton(9, "Back", accessCodexMenu);			
+			addButton(14, "Back", accessCodexMenu);			
 		}
 		
 		private function menuItems():void {
@@ -256,7 +256,7 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Magic") addButton(0, "( Magic )", codexEntryMagic);
 				else addButton(0, "Magic", codexEntryMagic);
 			}
-			addButton(9, "Back", accessCodexMenu);
+			addButton(14, "Back", accessCodexMenu);
 		}
 		private function menuFactions():void {
 			menu();
@@ -268,7 +268,7 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "SandWitches") addButton(1, "( Sand Witches )", codexEntrySandWitches);
 				else addButton(1, "Sand Witches", codexEntrySandWitches);
 			}
-			addButton(9, "Back", accessCodexMenu);
+			addButton(14, "Back", accessCodexMenu);
 		}
 		
 		//CODEX ENTRIES

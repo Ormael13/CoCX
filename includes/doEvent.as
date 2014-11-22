@@ -1412,7 +1412,7 @@ public function doEvent(eventNo:Number):void
 				if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 1) addButton(2, "Train", jojoScene.apparantlyJojoDOESlift);
 				addButton(3, "Meditate", eventParser, 2151);
 				addButton(4, jojoDefense, eventParser, 2152);
-				addButton(9, "Leave", eventParser, 74);
+				addButton(14, "Leave", eventParser, 74);
 			}
 		}
 	}

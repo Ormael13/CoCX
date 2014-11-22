@@ -107,7 +107,7 @@ package classes.Scenes.Explore
 			if (player.hasCock() && player.hasVagina()) addButton(5, "Dual Belt", promptDualBelt);
 			if (player.hasCock() && player.hasVagina()) addButton(6, "AN Onahole", promptNaturalOnahole);
 			addButton(7, "Condom", promptCondom);
-			addButton(9, "Back", encounterGiacomo);
+			addButton(14, "Back", encounterGiacomo);
 			statScreenRefresh();
 		}
 		

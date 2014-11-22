@@ -160,7 +160,7 @@ package classes.Scenes.Camp
 				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n", false) 
 				addButton(2, "Punch Tree", punchTreeMinecraftStyle);
 			}
-			addButton(9, "Leave", noThanks);
+			addButton(14, "Leave", noThanks);
 		}
 		//Silly Mode! Punch trees the Minecraft way!
 		private function punchTreeMinecraftStyle():void {

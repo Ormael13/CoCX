@@ -118,7 +118,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(0,"Explore",exploreFarm);
 		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(6,"Talk",talkWhitney);
 		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(7,"Work",workFarm);
-		addButton(9,"Leave",eventParser,13);		
+		addButton(14,"Leave",eventParser,13);		
 	}		
 }
 

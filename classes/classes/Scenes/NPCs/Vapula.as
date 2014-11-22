@@ -257,7 +257,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 0) addButton(7, "Harvest Milk", harvestMilk);
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 1) addButton(7, "Stop Harvest", stopHarvest);
 					
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 		}
 		
 		private function sendToFarm():void

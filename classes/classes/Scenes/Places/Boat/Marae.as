@@ -95,7 +95,7 @@ package classes.Scenes.Places.Boat
 			this.weaponValue = 25;
 			this.armorName = "bark";
 			this.armorDef = 30;
-			this.bonusHP = 3500;
+			this.bonusHP = 4750;
 			this.lust = 30;
 			this.lustVuln = .02;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

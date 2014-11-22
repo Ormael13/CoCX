@@ -1159,7 +1159,7 @@ package classes.Scenes.NPCs
 				}
 
 			}
-			addButton(9, "Back", eventParser, camp.initiateStash);
+			addButton(14, "Back", eventParser, camp.initiateStash);
 		}
 
 //[Item](only appears if hourssinceKiditem flag >= 16)

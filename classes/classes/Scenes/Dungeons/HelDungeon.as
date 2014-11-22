@@ -1198,10 +1198,10 @@ package classes.Scenes.Dungeons
 			outputText(".  To your surprise, nothing horrifying jumps out and tries to rape you.  You see a few horns of mead slung up in a wine rack - they smell a bit pungent, but alcohol improves with age they say...");
 			if(flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED] < 5) {
 				outputText("(There are " + (5 - flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED]) + "x God's Mead horns here to take.)\n\n");
-				addButton(3, "GodMead", takeGodMead);
+				addButton(0, "GodMead", takeGodMead);
 			}
 			//Display Options: [GodsMead] [Climb Up]
-			addButton(2, "Climb Up", roomGuardHall);
+			addButton(5, "Climb Up", roomGuardHall);
 		}
 		public function roomStairwell():void {
 			kGAMECLASS.dungeonLoc = 19;
@@ -1223,13 +1223,13 @@ package classes.Scenes.Dungeons
 					outputText("There's a pile of drugged, unconscious harpies you've already defeated on the floor, as well as Kiri, the only one that didn't attack you.  You recall that she knows Hel and is here to help the both of you.");
 					//(Display Options: [Talk] [Sex] [Valeria](If Encountered) [Go Upstairs] [Go Downstairs])
 					var valeria:Number = 0;
-					if (player.armorName == "goo armor") addButton(4, "Valeria", talkToValeria);
-					addButton(3, "Kiri", kiriInteraction);
+					if (player.armorName == "goo armor") addButton(1, "Valeria", talkToValeria);
+					addButton(0, "Kiri", kiriInteraction);
 				}
 				else {
 					outputText("There's a pile of drugged, unconscious harpies you've already defeated on the floor.  Kiri appears to have left.");
 				}
-				addButton(2, "Upstairs", roomMezzanine);
+				addButton(5, "Upstairs", roomMezzanine);
 				addButton(7, "Downstairs", roomDungeon);
 			}
 		}
@@ -1252,11 +1252,11 @@ package classes.Scenes.Dungeons
 					outputText("You're standing in a small dungeon room, nearly gagging on the smells of burnt meat and smoke.  A number of nasty torture devices hang on the walls, and a table sits in the middle of the room, ");
 					if(flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] == 0) {
 						outputText("on which the salamander prisoner lies");
-						addButton(3, "Prisoner", helDungeonPrisonerTalk)
+						addButton(0, "Prisoner", helDungeonPrisonerTalk)
 					}
 					else {
 						outputText("on which Hakon lies");
-						addButton(3, "Hakon", helDungeonPrisonerTalk)
+						addButton(0, "Hakon", helDungeonPrisonerTalk)
 					}
 					outputText(".");
 					if (player.hasKeyItem("Harpy Key A") >= 0 && player.hasKeyItem("Harpy Key B") >= 0) outputText("\n\n<b>You have the keys to release the prisoner, but you may want to make sure you have everything from this place that you want before you make your escape.  You doubt you'll be able to return in the future.</b>");
@@ -1265,8 +1265,8 @@ package classes.Scenes.Dungeons
 					outputText("You're standing in a small dungeon room, nearly gagging on the smells of burnt meat and smoke.  A number of nasty torture devices hang on the walls, and an empty table sits in the middle of the room.");
 				}
 				//(Display Options: [Go Upstairs](Back to Stairwell & Kiri) [Prisoner] [Torture Gear]
-				addButton(2, "Upstairs", roomStairwell);
-				addButton(4, "Torture Gear", tortureGear)
+				addButton(5, "Upstairs", roomStairwell);
+				addButton(1, "Torture Gear", tortureGear)
 			}
 		}
 		public function roomMezzanine():void {
@@ -1285,7 +1285,7 @@ package classes.Scenes.Dungeons
 				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) outputText("You're standing in the Mezzanine of the tower, a small terrace with a magnificent view of the High Mountains and the valleys below.  There are stairs leading up and down from here, as well as a pile of defeated phoenixes that don't look like they'll be recovering for a bit.");
 				else outputText("You're standing in the Mezzanine of the tower, a small terrace with a magnificent view of the High Mountains and the valleys below.  There are stairs leading up and down from here.");
 				//(Display Options: [Go Upstairs] [Go Downstairs] [Phoenixes])
-				addButton(2, "Upstairs", roomThroneRoom);
+				addButton(5, "Upstairs", roomThroneRoom);
 				addButton(7, "Downstairs", roomStairwell);
 				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) addButton(3, "Phoenixes", checkOutDemBirdBitches);
 				//(Go Downstairs returns you to the Stairwell; Go Up takes you to the throne room)
@@ -1331,13 +1331,13 @@ package classes.Scenes.Dungeons
 				//[if PC hasn't executed the queen: 
 				if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) {
 					outputText("  The Harpy Queen slumps in her throne, insensate.");
-					addButton(4, "Harpy Queen", harpyQueenAdvantage);
+					addButton(1, "Harpy Queen", harpyQueenAdvantage);
 				}
 				if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) {
-					addButton(3, "Helia", HeliaThroneRoom);
+					addButton(0, "Helia", HeliaThroneRoom);
 				}
 				if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 1 && flags[kFLAGS.TOOK_QUEEN_STAFF] == 0) {
-					addButton(4, "Take Staff", takeQueensStaff);
+					addButton(1, "Take Staff", takeQueensStaff);
 				}
 				addButton(7, "Downstairs", roomMezzanine);
 			}

@@ -288,7 +288,7 @@ private function repeatKaijuEncounter():void {
 	addButton(2,"Fuck",fuckThisGiantYouDumbCunt);
 	if(kaijuCock()) addButton(3,"UrethraFuck",urethraFuckDatGiantCock);
 	addButton(4,"Talk",talkToKaiju);	
-	addButton(9,"Leave",leaveRepeatKaiju);
+	addButton(14,"Leave",leaveRepeatKaiju);
 }
 //[If Hug Boobs]
 private function kaijuRepeatBoobHug():void {

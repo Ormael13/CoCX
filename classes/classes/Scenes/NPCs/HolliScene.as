@@ -141,7 +141,7 @@ public function treeMenu(output:Boolean = true):void {
 			addButton(3,"Drink Sap",haveAMapleSyrupSnack);
 			if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4,"Eat A Fruit",eatHolliFruit);
 			addButton(5,"Guarding",askBrokenHolliToGuard);
-			addButton(9,"Leave",eventParser,1000);
+			addButton(14,"Leave",eventParser,1000);
 		}
 		
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Help", helpWithFarm);

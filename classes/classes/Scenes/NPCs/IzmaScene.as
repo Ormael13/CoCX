@@ -1644,7 +1644,7 @@ public function izmaFollowerMenu():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && !pregnancy.isPregnant) addButton(6, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(6, "Go Camp", backToCamp);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
 private function sendToFarm():void
@@ -1755,7 +1755,7 @@ private function izmaSexMenu():void {
 	addButton(6,"Sixtynine",sixty);
 	addButton(7,"Kids",childToggle);
 	if(flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower()) addButton(8,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu);
-	addButton(9,"Back",izmaFollowerMenu);
+	addButton(14,"Back",izmaFollowerMenu);
 	
 }
 //[Izma mounts the PC]

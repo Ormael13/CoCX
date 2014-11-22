@@ -739,7 +739,7 @@ private function sheilaGettingFamiliar():void {
 	addButton(2,"Curfew?",sheilaFriendlyCurfew);
 	addButton(3,"No Questions",sheilaFriendlyNoQuestions);
 	
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 }
 
 
@@ -2431,7 +2431,7 @@ internal function sheilaGotWhomped():void {
 		}
 		if(player.hasVagina()) addButton(2,"Forced Lick",forcedSheilaOral,false);
 	}
-	addButton(9,"Leave",letSheilaGo);
+	addButton(14,"Leave",letSheilaGo);
 }
 //if choosing Let Her Go and sheila xp > -3, set sheila xp = -1, then give xp/gems and Next button to camp
 private function letSheilaGo():void {

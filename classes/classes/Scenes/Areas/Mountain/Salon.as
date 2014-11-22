@@ -64,7 +64,7 @@ private function salonFavoritesPaymentMenu():void {
 	addButton(3,"Minotaur",gloryholeMinotaur);
 	addButton(4,"Incubus",gloryholeIncubus);
 	addButton(8,"Buy MinoCum",minoCum);
-	addButton(9,"Back",favoriteSalonMenu);
+	addButton(14,"Back",favoriteSalonMenu);
 }
 
 
@@ -81,7 +81,7 @@ private function salonPaymentMenu():void {
 	addButton(3,"Minotaur",gloryholeMinotaur);
 	addButton(4,"Incubus",gloryholeIncubus);
 	addButton(8,"Buy MinoCum",minoCum);
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 	//choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
 }
 		private function buyMinoCum():void{
@@ -136,7 +136,7 @@ public function salonPurchaseMenu():void {
 	addButton(6,"Beard Options",beardMenu);
 	addButton(7,"Mud Facial",mudFacial2);
 	addButton(8,"Sand Facial",sandFacial2);
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 }
 
 private function hairDresserGreeting():void {
@@ -429,7 +429,7 @@ private function beardMenu():void {
 	if (player.hasBeard() && player.beardLength < 6) addButton(1, "Lengthen Beard", growBeard, 0);
 	if (!player.hasBeard()) addButton(1, "Grow Beard", growBeard, 1);
 	if (player.hasBeard()) addButton(2, "Beard Style", changeBeardStyle);
-	addButton(9, "Back", hairDressingMainMenu);
+	addButton(14, "Back", hairDressingMainMenu);
 }
 
 private function cutBeard():void {

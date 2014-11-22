@@ -239,7 +239,7 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 	addButton(6, "Pawn", oswaldPawn);
 	addButton(7, "Tower", library.visitZeMagesTower);
 	
-	addButton(9, "Leave", eventParser, 13);
+	addButton(14, "Leave", eventParser, 13);
 }
 
 private function armorShops():void {
@@ -257,7 +257,7 @@ private function armorShops():void {
 	{
 		addButton(6, "Carpenter", carpentryShopEntry);
 	}
-	addButton(9,"Back",telAdreMenu);
+	addButton(14,"Back",telAdreMenu);
 }
 
 public function houses():void {
@@ -279,7 +279,7 @@ public function houses():void {
 	if (kGAMECLASS.urtaPregs.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0)
 		addButton(2, "Urta's House", (katherine.isAt(Katherine.KLOC_URTAS_HOME) ? katherine.katherineAtUrtas : kGAMECLASS.urtaPregs.visitTheHouse));
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 5) addButton(3, "Kath's Apt", katherine.visitAtHome);
-	addButton(9,"Back",telAdreMenu);
+	addButton(14,"Back",telAdreMenu);
 }
 
 private function piercingStudio():void {
@@ -1048,7 +1048,7 @@ private function oswaldPawnMenu():void { //Moved here from Inventory.as
 		case 3: addButton(5, "Safehouse", katherineEmployment.katherineTrainingWithUrta);
 		default:
 	}
-	addButton(9, "Back", telAdreMenu);
+	addButton(14, "Back", telAdreMenu);
 }
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
@@ -1239,7 +1239,7 @@ public function barTelAdre():void {
 	//VALA
 	if(vala.purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",vala.chooseValaInBar);
 
-	addButton(9,"Leave",telAdreMenu);
+	addButton(14,"Leave",telAdreMenu);
 }
 
 /*
@@ -1800,7 +1800,7 @@ public function carpentryShopBuyNails():void {
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200", false)
 		else outputText("Nails: " + 0 + "/200", false)
 		simpleChoices("Buy 10", carpentryShopBuyNailsA, "Buy 25", carpentryShopBuyNailsB, "Buy 50", carpentryShopBuyNailsC, "Buy 75", carpentryShopBuyNailsD, "Buy 100", carpentryShopBuyNailsE)
-		addButton(9, "Back", carpentryShopInside)
+		addButton(14, "Back", carpentryShopInside)
 	}
 	else
 	{
@@ -1862,7 +1862,7 @@ public function carpentryShopBuyWood():void {
 	outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 25 gems per wood plank.</i>\" \n\n", true);
 	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100", false)
 	simpleChoices("Buy 10", carpentryShopBuyWoodA, "Buy 20", carpentryShopBuyWoodB, "Buy 30", carpentryShopBuyWoodC, "Buy 40", carpentryShopBuyWoodD, "Buy 50", carpentryShopBuyWoodE)
-	addButton(9, "Back", carpentryShopInside)
+	addButton(14, "Back", carpentryShopInside)
 }	
 
 private function carpentryShopBuyWoodA():void {

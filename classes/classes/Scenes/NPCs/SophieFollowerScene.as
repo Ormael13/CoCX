@@ -278,7 +278,7 @@ public function followerSophieMainScreen():void {
 			addButton(8,"NoSleepWith",sleepWithSophieToggle);
 			outputText("\n\nYou're currently sharing your bed with Sophie at night, but you could kick her out, if you wanted.");
 		}
-		addButton(9,"Back",camp.campFollowers);
+		addButton(14,"Back",camp.campFollowers);
 		return;
 	}
 	else if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
@@ -306,8 +306,8 @@ public function followerSophieMainScreen():void {
 	if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 		addButton(7,"Daughter",sophieBimbo.daughterCheckup);
 	}
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(9, "Back", camp.campFollowers);
-	else addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(14, "Back", camp.campFollowers);
+	else addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(2, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1) addButton(2, "Go Camp", backToCamp);
@@ -457,7 +457,7 @@ private function sexWithFollowerSophie():void {
 	}
 	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 && flags[kFLAGS.SOPHIE_FAMILY_INCEST] > 0 && player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0)
 		addButton(8,"DaughterFuck",sophieIncestInHerCooterOrSomethingIDunno);
-	addButton(9,"Back",followerSophieMainScreen);
+	addButton(14,"Back",followerSophieMainScreen);
 }
 
 //Appearance:

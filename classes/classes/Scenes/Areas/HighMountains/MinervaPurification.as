@@ -621,7 +621,7 @@ package classes.Scenes.Areas.HighMountains
 			addButton(5, "Spar", kGAMECLASS.highMountains.minervaScene.fightMinerva);
 			if (kGAMECLASS.highMountains.minervaScene.minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
 			if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", growTreePostPurification);
-			addButton(9, "Leave", eventParser, 13);
+			addButton(14, "Leave", eventParser, 13);
 		}
 		
 		private function pureMinervaAppearance():void {
@@ -892,7 +892,7 @@ package classes.Scenes.Areas.HighMountains
 			addButton(btnIdx++, "EatHerOut", goDownOnAHermAndLoveItYouDirtySlutYou);
 			if (player.hasCock())
 				addButton(btnIdx++, "Get BJ", letMinervaSuckYouOff);
-			addButton(9, "Leave", pureMinervaMenu);
+			addButton(14, "Leave", pureMinervaMenu);
 		}
 		
 		//Same as tainted.

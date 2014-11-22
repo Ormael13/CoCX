@@ -292,7 +292,7 @@ package classes.Scenes.NPCs
 			addButton(7, "Get Penetrated", getPenetrated);
 			if (emberAffection() >= 95 && player.hasCock() && player.cockThatFits(emberVaginalCapacity()) >= 0 && (player.hasItem(consumables.L_DRAFT) || player.lib >= 50 || player.minLust() >= 40))
 				addButton(8, "LustyFuck", highAffectionEmberLustFuck);
-			addButton(9, "Leave", emberCampMenu);
+			addButton(14, "Leave", emberCampMenu);
 
 		}
 

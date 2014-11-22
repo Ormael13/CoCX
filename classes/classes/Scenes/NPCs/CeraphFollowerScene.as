@@ -175,7 +175,7 @@ package classes.Scenes.NPCs
 			addButton(6, "Marble Play", marbles);
 			addButton(7, "Urta Play", urta);
 			//choices("Defeat Her",winRapeChoices,"Lose to Her",ceraphRapesYouBADDAWGYODIGGITY,"",0,"",0,"",0,"",0,"Dominika P.",dominika,"Marble Play",marbles,"Urta Play",urta,"Back",ceraphFollowerAppearance);
-			addButton(9, "Back", ceraphFollowerAppearance);
+			addButton(14, "Back", ceraphFollowerAppearance);
 		}
 
 //*Ceraph is Defeated #4 - Offers Funtimes (Zeddited)

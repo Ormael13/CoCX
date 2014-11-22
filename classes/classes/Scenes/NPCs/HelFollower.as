@@ -515,7 +515,7 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 			if(player.hasCock() && player.cockThatFits(heliaCapacity()) >= 0 && player.lust >= 33 &&
 					!helPregnant() && flags[kFLAGS.HELSPAWN_AGE] == 0) addButton(7,"Have A Kid",helSpawnScene.haveAKid);
 		}
-		addButton(9,"Back",camp.campLoversMenu)
+		addButton(14,"Back",camp.campLoversMenu)
 	}
 	else if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1) {
 		if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1) {
@@ -552,7 +552,7 @@ private function heliaOptions():void {
 	if(flags[kFLAGS.HELSPAWN_AGE] == 1) addButton(7,flags[kFLAGS.HELSPAWN_NAME],helSpawnScene.playWithYourKid);
 	if(flags[kFLAGS.HEL_GUARDING] == 0) addButton(8,"GuardCamp",helGuardToggle);
 	else addButton(8,"NoGuarding",helGuardToggle);
-	addButton(9,"Back",heliaFollowerMenu);
+	addButton(14,"Back",heliaFollowerMenu);
 }
 
 
@@ -906,7 +906,7 @@ private function listenToHelTalkAboutGnolls():void {
 	//Sex options here maybe?
 	flags[kFLAGS.FOLLOWER_HEL_TALKS]++;
 	heliaRoughSex(false);
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 //	doNext(13);
 }
 
@@ -1057,8 +1057,8 @@ private function heliaRoughSex(output:Boolean = true):void {
 		}
 	}
 	if(player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
-	if(inCombat()) addButton(9,"Leave",cleanupAfterCombat);
-	else addButton(9,"Back",heliaFollowerMenu);
+	if(inCombat()) addButton(14,"Leave",cleanupAfterCombat);
+	else addButton(14,"Back",heliaFollowerMenu);
 }
 
 //Note 2 Fen: Copypasta old PC Victory scenes here ^ EXCEPT for Morph-based scenes!
@@ -1341,7 +1341,7 @@ private function boxWithInCampHel():void {
 		//[Display Rough Sex menu]
 		dynStats("str", 1,"tou", 1);
 		heliaRoughSex(false);
-		addButton(9,"Leave",eventParser,13);
+		addButton(14,"Leave",eventParser,13);
 	}
 	//If STR check succeeds:
 	else if(player.str/20 + 1 + rand(20) >= 13) {
@@ -1352,7 +1352,7 @@ private function boxWithInCampHel():void {
 		//Display Rough Sex menu
 		dynStats("str", 2);
 		heliaRoughSex(false);
-		addButton(9,"Leave",eventParser,13);
+		addButton(14,"Leave",eventParser,13);
 	}
 	//If PC fails the Check:  
 	else {
@@ -1367,7 +1367,7 @@ private function boxWithInCampHel():void {
 			}
 		}
 		heliaRoughSex(false);
-		addButton(9,"Leave",eventParser,13);
+		addButton(14,"Leave",eventParser,13);
 	}
 }
 
@@ -1571,7 +1571,7 @@ public function heliaThreesomes():void {
 		addButton(3, "Sophie", helAndSluttyHarpy);
 	}
 	if(player.lust < 33) outputText("\n\n<b>You aren't horny enough to start a threesome.</b>");
-	addButton(9,"Back",heliaFollowerMenu);
+	addButton(14,"Back",heliaFollowerMenu);
 }
 
 
@@ -2201,7 +2201,7 @@ private function helAndSluttyHarpy():void
 	menu();
 	addButton(0, "Cock", helAndSluttyHarpyMale);
 	addButton(1, "Pussy", helAndSluttyHarpyFemale);
-	addButton(9, "Back",  heliaThreesomes);
+	addButton(14, "Back",  heliaThreesomes);
 }
 
 private function helAndSluttyHarpyMale():void

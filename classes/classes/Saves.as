@@ -42,7 +42,7 @@ public var airFile:File;
 public var file:FileReference;
 public var loader:URLLoader;
 
-public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9"];
+public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9", "CoC_10", "CoC_11", "CoC_12", "CoC_13", "CoC_14"];
 public var versionProperties:Object = { "legacy" : 100, "0.8.3f7" : 124, "0.8.3f8" : 125, "0.8.4.3":119, "latest" : 119 };
 public var savedGameDir:String = "data/com.fenoxo.coc";
 
@@ -149,8 +149,14 @@ public function loadScreenAIR():void
 		}
 		i++;
 	}
-	
-	choices("Slot 1", slots[0], 
+	menu();
+	var s:int = 0
+	while (s < 14) {
+		if (slots[s] != 0) addButton(s, "Slot " + (s+1), eventParser, slots[s]);
+		s++;
+	}
+	addButton(14, "Back", eventParser, 30);
+	/*choices("Slot 1", slots[0], 
 	"Slot 2", slots[1], 
 	"Slot 3", slots[2], 
 	"Slot 4", slots[3], 
@@ -159,7 +165,7 @@ public function loadScreenAIR():void
 	"Slot 7", slots[6],
 	"Slot 8", slots[7], 
 	"Slot 9", slots[8], 
-	"Back", 30);
+	"Back", 30);*/
 }
 
 public function getGameObjectFromFile(aFile:File):Object
@@ -213,8 +219,14 @@ public function loadScreen():void
 		else
 			slots[i] = 0;		// You have to set the parameter to 0 to disable the button
 	}
-	
-	choices("Slot 1", slots[0], 
+	menu();
+	var s:int = 0
+	while (s < 14) {
+		if (slots[s] != 0) addButton(s, "Slot " + (s+1), eventParser, slots[s]);
+		s++;
+	}
+	addButton(14, "Back", eventParser, 30);
+	/*choices("Slot 1", slots[0], 
 	"Slot 2", slots[1], 
 	"Slot 3", slots[2], 
 	"Slot 4", slots[3], 
@@ -223,7 +235,7 @@ public function loadScreen():void
 	"Slot 7", slots[6],
 	"Slot 8", slots[7], 
 	"Slot 9", slots[8], 
-	"Back", 30);
+	"Back", 30);*/
 }
 
 public function saveScreen():void
@@ -272,16 +284,13 @@ public function saveScreen():void
 		outputText("\r\r", false);
 	
 	outputText("<b>Leave the notes box blank if you don't wish to change notes.\r<u>NOTES:</u></b>", false);
-	choices("Slot 1", saveFuncs[0], 
-	"Slot 2", saveFuncs[1], 
-	"Slot 3", saveFuncs[2], 
-	"Slot 4", saveFuncs[3], 
-	"Slot 5", saveFuncs[4], 
-	"Slot 6", saveFuncs[5], 
-	"Slot 7", saveFuncs[6], 
-	"Slot 8", saveFuncs[7], 
-	"Slot 9", saveFuncs[8], 
-	"Back", 30);
+	menu();
+	var s:int = 0
+	while (s < 14) {
+		addButton(s, "Slot " + (s+1), eventParser, saveFuncs[s]);
+		s++;
+	}
+	addButton(14, "Back", eventParser, 30);
 }
 
 public function saveLoad(e:MouseEvent = null):void
@@ -319,33 +328,33 @@ public function saveLoad(e:MouseEvent = null):void
 	//addButton(5, "Save to File", eventParser, -20);
 	addButton(6, "Load File", eventParser, -21);
 	//addButton(8, "AutoSave: " + autoSaveSuffix, eventParser, -65);
-	addButton(9, "Back", eventParser, 5025);
+	addButton(14, "Back", eventParser, 5025);
 	
 	
 	if (temp == 777) {
-		addButton(9, "Back", eventParser, 5025);
+		addButton(14, "Back", eventParser, 5025);
 		return;
 	}
 	if (player.str == 0) {
-		addButton(9, "Back", kGAMECLASS.mainMenu);
+		addButton(14, "Back", kGAMECLASS.mainMenu);
 		return;
 	}
 	if (inDungeon) {
-		addButton(9, "Back", eventParser, 1);
+		addButton(14, "Back", eventParser, 1);
 		return;
 	}
 	if (gameState == 3) {
 		addButton(0, "Save", saveScreen);
 		addButton(5, "Save to File", eventParser, -20);
-		addButton(8, "AutoSave: " + autoSaveSuffix, eventParser, 65);
-		addButton(9, "Back", kGAMECLASS.mainMenu);
+		addButton(3, "AutoSave: " + autoSaveSuffix, eventParser, 65);
+		addButton(14, "Back", kGAMECLASS.mainMenu);
 	}
 	else
 	{
 		addButton(0, "Save", saveScreen);
 		addButton(5, "Save to File", eventParser, -20);
-		addButton(8, "AutoSave: " + autoSaveSuffix, eventParser, 65);
-		addButton(9, "Back", eventParser, 1);
+		addButton(3, "AutoSave: " + autoSaveSuffix, eventParser, 65);
+		addButton(14, "Back", eventParser, 1);
 	}
 	if (flags[kFLAGS.HARDCORE_MODE] >= 1) {
 		removeButton(5); //Disable "Save to File" in Hardcore Mode.
@@ -383,16 +392,13 @@ public function deleteScreen():void
 	}
 	
 	outputText("\n<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>", false);
-	choices("Slot 1", delFuncs[0], 
-			"Slot 2", delFuncs[1], 
-			"Slot 3", delFuncs[2], 
-			"Slot 4", delFuncs[3], 
-			"Slot 5", delFuncs[4], 
-			"Slot 6", delFuncs[5], 
-			"Slot 7", delFuncs[6], 
-			"Slot 8", delFuncs[7], 
-			"Slot 9", delFuncs[8], 
-			"Back", 30);
+	menu();
+	var s:int = 0
+	while (s < 14) {
+		if (delFuncs[s] != 0) addButton(s, "Slot " + (s+1), eventParser, delFuncs[s]);
+		s++;
+	}
+	addButton(14, "Back", eventParser, 30);
 }
 
 public function confirmDelete():void

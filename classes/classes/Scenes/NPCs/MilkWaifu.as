@@ -183,8 +183,8 @@ public function milkyMenu():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0 && flags[kFLAGS.MILK_SIZE] > 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1 && flags[kFLAGS.MILK_SIZE] > 0) addButton(5, "Go Camp", backToCamp);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(9, "Back", camp.campSlavesMenu);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(14, "Back", camp.campSlavesMenu);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
 private function sendToFarm():void

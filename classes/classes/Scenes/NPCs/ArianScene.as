@@ -576,8 +576,8 @@ private function arianHomeMenu():void {
 		if(flags[kFLAGS.ARIAN_S_DIALOGUE] >= 5) addButton(4,"Treat Corr.",treatCorruption);
 		if(model.time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
 		if(flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
-		if(!arianFollower()) addButton(9,"Back",telAdre.telAdreMenu);
-		else addButton(9,"Back",camp.campLoversMenu);
+		if(!arianFollower()) addButton(14,"Back",telAdre.telAdreMenu);
+		else addButton(14,"Back",camp.campLoversMenu);
 	}
 }
 
@@ -1034,7 +1034,7 @@ private function talkToArianChoices():void {
 	if(flags[kFLAGS.ARIAN_S_DIALOGUE] >= 3) addButton(1,"Teach Magic",arianMagicLessons);
 	if(!arianFollower() && flags[kFLAGS.ARIAN_S_DIALOGUE] >= 6) addButton(4,"Invite2Camp",inviteArianToCamp);
 	if(flags[kFLAGS.ARIAN_VIRGIN] == 0 && flags[kFLAGS.ARIAN_S_DIALOGUE] < 3) outputText("\n\n<b>Arian doesn't have much to talk about right now.  Maybe you ought to just visit him from time to time or find him an item that would help combat [Arian eir] sickness.</b>");
-	addButton(9,"Back",arianHomeMenu);
+	addButton(14,"Back",arianHomeMenu);
 }
 
 //Magic:
@@ -1431,7 +1431,7 @@ private function arianSexMenu(output:Boolean = true):void {
 			addButton(6,"Dildo Fun",arianDildoFun);
 		}
 	}
-	addButton(9,"Back",arianHomeMenu);
+	addButton(14,"Back",arianHomeMenu);
 }
 
 //Give Anal:
@@ -2641,7 +2641,7 @@ private function giveArianAnItem():void {
 			if(player.hasItem(consumables.REDUCTO)) addButton(4,"Reducto",giveArianReducto);
 			if(player.hasItem(consumables.REPTLUM)) addButton(5,"Reptilum",giveArianReptilum);
 		}
-		addButton(9,"Back",arianHomeMenu);
+		addButton(14,"Back",arianHomeMenu);
 	}
 }
 
@@ -3390,7 +3390,7 @@ private function imbueTalisman():void {
 	menu();
 	if(player.hasItem(useables.B_CHITN,2) && player.hasItem(useables.T_SSILK)) addButton(0,"Shielding",arianSpellPlace,"Shielding Spell");
 	if(player.hasItem(consumables.GOB_ALE,2) && player.hasItem(consumables.S_GOSSR)) addButton(1,"Immolation",arianSpellPlace,"Immolation Spell");
-	addButton(9,"Back",arianHomeMenu);
+	addButton(14,"Back",arianHomeMenu);
 }
 
 private function arianSpellPlace(spell:String):void {

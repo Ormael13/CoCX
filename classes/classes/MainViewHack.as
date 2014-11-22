@@ -1,10 +1,12 @@
-//Hacky code to manipulate and prettify the stats view.
+//The ultimate code to hack the main view. Because the SWC file isn't editable at the time, I've written this code to hack the main view.
 package classes 
 {
 	import classes.*
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import coc.view.CoCButton;
 	import flash.display.Shape;
+	import flash.text.TextFormat;
 	
 	import coc.view.MainView;
 
@@ -17,16 +19,127 @@ package classes
 	
     import flash.text.TextField;
 	import flash.text.AntiAliasType;
+	import flash.text.Font;
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
 	
 	public class MainViewHack extends BaseContent
 	{
 		public var reassigned:Boolean = false;
 		public var minLustBar:* = null;
+		public var initializedThirdRow:Boolean = false;
+		
+		private var _textFormatButton:TextFormat;
+		private var _textFont:Font;
 		
 		public function MainViewHack() 
 		{
 			
 		}
+		
+		//Add third row of buttons. (Buttons #11-15, will use numbers 10-14 for addButtons, only called once. If invoked, it blocks further invokements of this function.)
+		public function addThirdRow():void {
+			if (initializedThirdRow) return;
+			var posOffset:int = 45;
+			InitFormatting();
+			//Push to text field
+			var counter:Number = 0;
+			while (counter < 5) {
+				var field:TextField = new TextField;
+				field.defaultTextFormat = _textFormatButton;
+				field.antiAliasType = AntiAliasType.ADVANCED;
+				field.embedFonts = true;
+				mainView.bottomButtonTexts.push(field);
+				counter++;
+			}
+			counter = 0;
+			while (counter < 5) {
+				mainView.bottomButtonBGs.push(new MovieClip);
+				counter++;
+			}
+			counter = 0;
+			while (counter < 5) {
+				mainView.bottomButtonBGs.push(new MovieClip);
+				counter++;
+			}
+			//Re-position buttons
+			mainView.bottomButtons[5].y = mainView.bottomButtons[0].y + posOffset;
+			mainView.bottomButtons[6].y = mainView.bottomButtons[1].y + posOffset;
+			mainView.bottomButtons[7].y = mainView.bottomButtons[2].y + posOffset;
+			mainView.bottomButtons[8].y = mainView.bottomButtons[3].y + posOffset;
+			mainView.bottomButtons[9].y = mainView.bottomButtons[4].y + posOffset;
+			//Create buttons
+			var button10:CoCButton = new CoCButton(mainView.bottomButtonTexts[10], new buttonBackground0);
+			var button11:CoCButton = new CoCButton(mainView.bottomButtonTexts[11], new buttonBackground1);
+			var button12:CoCButton = new CoCButton(mainView.bottomButtonTexts[12], new buttonBackground2);
+			var button13:CoCButton = new CoCButton(mainView.bottomButtonTexts[13], new buttonBackground3);
+			var button14:CoCButton = new CoCButton(mainView.bottomButtonTexts[14], new buttonBackground4);
+			mainView.bottomButtons.push(button10);
+			mainView.bottomButtons[10].x = mainView.bottomButtons[5].x;
+			mainView.bottomButtons[10].y = mainView.bottomButtons[5].y + posOffset;
+			mainView.bottomButtons[10].width = mainView.bottomButtons[5].width;
+			mainView.addChildAt(button10, 11);
+			mainView.bottomButtons.push(button11);
+			mainView.bottomButtons[11].x = mainView.bottomButtons[6].x;
+			mainView.bottomButtons[11].y = mainView.bottomButtons[6].y + posOffset;
+			mainView.bottomButtons[11].width = mainView.bottomButtons[6].width;
+			mainView.addChildAt(button11, 12);
+			mainView.bottomButtons.push(button12);
+			mainView.bottomButtons[12].x = mainView.bottomButtons[7].x;
+			mainView.bottomButtons[12].y = mainView.bottomButtons[7].y + posOffset;
+			mainView.bottomButtons[12].width = mainView.bottomButtons[7].width;
+			mainView.addChildAt(button12, 13);
+			mainView.bottomButtons.push(button13);
+			mainView.bottomButtons[13].x = mainView.bottomButtons[8].x;
+			mainView.bottomButtons[13].y = mainView.bottomButtons[8].y + posOffset;
+			mainView.bottomButtons[13].width = mainView.bottomButtons[8].width;
+			mainView.addChildAt(button13, 14);
+			mainView.bottomButtons.push(button14);
+			mainView.bottomButtons[14].x = mainView.bottomButtons[9].x;
+			mainView.bottomButtons[14].y = mainView.bottomButtons[9].y + posOffset;
+			mainView.bottomButtons[14].width = mainView.bottomButtons[9].width;
+			mainView.addChildAt(button14, 15);
+			//Make hand cursor show up.
+			mainView.newGameButton.mouseChildren = false;
+			mainView.newGameButton.buttonMode = true;
+			mainView.dataButton.mouseChildren = false;
+			mainView.dataButton.buttonMode = true;
+			mainView.statsButton.mouseChildren = false;
+			mainView.statsButton.buttonMode = true;
+			mainView.levelButton.mouseChildren = false;
+			mainView.levelButton.buttonMode = true;
+			mainView.perksButton.mouseChildren = false;
+			mainView.perksButton.buttonMode = true;
+			mainView.appearanceButton.mouseChildren = false;
+			mainView.appearanceButton.buttonMode = true;
+			var buttonId:Number = 0;
+			while (buttonId < mainView.bottomButtons.length) {
+				mainView.bottomButtons[buttonId].mouseChildren = false;
+				mainView.bottomButtons[buttonId].buttonMode = true;
+				mainView.bottomButtons[buttonId].addEventListener(MouseEvent.ROLL_OVER, hoverButton);
+				mainView.bottomButtons[buttonId].addEventListener(MouseEvent.ROLL_OUT, dimButton);
+				buttonId++;
+			}
+			initializedThirdRow = true;
+		}
+		
+		protected function hoverButton(event:MouseEvent):void {
+			var button:CoCButton;
+
+			button = event.target as CoCButton;
+
+			if(button && button.visible && button.toolTipText) {
+				mainView.toolTipView.text = button.toolTipText;
+				mainView.toolTipView.showForButton(button);
+			}
+			else {
+				mainView.toolTipView.hide();
+			}
+		};
+
+		protected function dimButton(event:MouseEvent):void {
+			mainView.toolTipView.hide();
+		};
 		
 		//Reassign parents
 		private function reassignParents():void {
@@ -66,6 +179,16 @@ package classes
 				mainView.statsView.setChildIndex(mainView.hungerText, 1);
 			}
 			
+		}
+		
+		private function InitFormatting():void
+		{
+			_textFont = new ButtonLabelFont();
+			
+			_textFormatButton = new TextFormat();
+			_textFormatButton.font = _textFont.fontName;
+			_textFormatButton.size = 18;
+			_textFormatButton.align = TextFormatAlign.CENTER;
 		}
 		
 		private function reassignIndex():void {

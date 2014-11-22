@@ -193,7 +193,7 @@ public function corruptCampJojo():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 0) addButton(7, "Harvest Draft", harvestJojoDraft);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_JOJO] == 1) addButton(7, "Stop Harvest", stopHarvestJojoDraft);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
 private function harvestJojoDraft():void
@@ -1670,7 +1670,7 @@ public function talkMenu():void
 	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave);
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift);
 	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
-	addButton(9, "Back", eventParser, 2150);
+	addButton(14, "Back", eventParser, 2150);
 }
 
 //Talk

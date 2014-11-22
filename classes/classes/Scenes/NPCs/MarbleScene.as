@@ -2046,7 +2046,7 @@ private function marbleTalkOverhaul():void {
 		addButton( 2, "Milking", milkMarble );
 	}
 	if(player.cor<50 && player.statusAffectv4(StatusAffects.Marble)<60) addButton(1,"Just Talk",talkWithMarbleAtCamp);
-	addButton(9,"Back",interactWithMarbleAtCamp);
+	addButton(14,"Back",interactWithMarbleAtCamp);
 	if(flags[kFLAGS.SLEEP_WITH] != "Marble") addButton(4,"Sleep With",marbleSleepToggle);
 	else addButton(4,"Sleep Alone",marbleSleepToggle);
 }

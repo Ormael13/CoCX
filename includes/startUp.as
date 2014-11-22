@@ -24,7 +24,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	{
 		mainView.removeChild(mainView.aCb);
 	}
-
+	mainViewHack.addThirdRow();
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
@@ -70,7 +70,6 @@ public function mainMenu(e:MouseEvent = undefined):void
 	addButton(6, "Image Credits", imageCreditsScreen);
 	addButton(7, "Debug Info", debugPane);
 	addButton(8, "Mod Thread", openURL, "http://forum.fenoxo.com/thread-10915.html");
-	
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;
@@ -267,7 +266,7 @@ public function settingsScreenMain():void
 	addButton(4, "Controls", displayControls);
 	
 	//addButton(4, "Next", settingsScreenMainI);
-	addButton(9, "Back", mainMenu);
+	addButton(14, "Back", mainMenu);
 
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) 
 	{
@@ -306,7 +305,7 @@ public function settingsScreenGameSettings():void {
 		flags[kFLAGS.HYPER_HAPPY] = 0;
 		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
 	}
-	addButton(9, "Back", settingsScreenMain);
+	addButton(14, "Back", settingsScreenMain);
 }
 
 public function settingsScreenInterfaceSettings():void {
@@ -318,7 +317,7 @@ public function settingsScreenInterfaceSettings():void {
 	//addButton(3, "Old Sprites", eventParser, 9999); //If I can re-add old sprites, that is.
 	addButton(4, "Time Format", toggleTimeFormat); //If I can re-add old sprites, that is.
 	addButton(5, "Background", cycleBackground);
-	addButton(9, "Back", settingsScreenMain);
+	addButton(14, "Back", settingsScreenMain);
 }
 
 
@@ -371,7 +370,7 @@ public function difficultySelectionMenu():void {
 	addButton(3, "Nightmare", chooseDifficulty, 2);
 	addButton(4, "EXTREME", chooseDifficulty, 3);
 	//addButton(5, "Up to Eleven", chooseDifficulty, 4);
-	addButton(9, "Back", settingsScreenGameSettings);
+	addButton(14, "Back", settingsScreenGameSettings);
 }
 
 

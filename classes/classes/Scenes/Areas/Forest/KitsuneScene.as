@@ -1155,7 +1155,7 @@ package classes.Scenes.Areas.Forest
 				removeButton(7);
 				removeButton(8);
 			}
-			addButton(9, "Leave", leaveKitsune);
+			addButton(14, "Leave", leaveKitsune);
 		}
 
 		private function kitsuneButton(button:int, nam:String, func:*):int

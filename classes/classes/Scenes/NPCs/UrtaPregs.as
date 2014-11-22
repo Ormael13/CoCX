@@ -86,7 +86,7 @@ private function urtaSexMenu():void {
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8,"3SomeSurprise",urta.urtaAndRaphaelSurprise);
 			}
-			addButton(9,"Leave",telAdre.barTelAdre);
+			addButton(14,"Leave",telAdre.barTelAdre);
 		}
 		//FRIEND
 		else {
@@ -101,7 +101,7 @@ private function urtaSexMenu():void {
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8,"3SomeSurprise",urta.urtaAndRaphaelSurprise);
 			}
-			addButton(9,"Leave",telAdre.barTelAdre);
+			addButton(14,"Leave",telAdre.barTelAdre);
 		}
 	}
 }
@@ -140,7 +140,7 @@ internal function urtaPreggoApproached():void {
 					//Display Urta Sexings or Urta Talking as appropriate
 					addButton(0,"Talk",urta.urtaDialogueMenu);
 				}
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 2: 
 		case 3: if (rand(2) == 0) outputText("Urta's sitting side-saddled in her usual seat, dress bulging in a way that makes it clear she's at least half-erect already, a small paunch of a belly stretching out her dress.  She gives you a somewhat embarrassed smile when she sees you looking at it.  \"<i>I just feel horny all the time now,</i>\" she professes.  \"<i>I think it might be something to do with the hormones, though if you'd rather talk instead, I'd be happy to do that.</i>\"");
@@ -149,7 +149,7 @@ internal function urtaPreggoApproached():void {
 				//Display both Urta Sex Options and Urta Talk Options
 				addButton(0,"Sex",urtaSexMenu);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 4: outputText("Urta's moved from her usual table to a private booth, luxuriating in the high-backed chairs and the cushions padding seat and back alike.  The reason for this is obvious; she's quite obviously pregnant now, with her belly visibly rounded and swollen, bulging out into her lap but not truly big enough to interfere with her movements yet.  She rubs her belly and gives you a proudly self-satisfied smirk.  \"<i>We did it, [name]; we're going to have a baby.  After all these years... it's so wonderful.</i>\"  She visibly pats the bump stretching her dress; she's big, but not so big as to need a change of clothes yet. ");
 				if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0) outputText("\n\nHer dress stretches even more as her cock swells out of its sheath, precum already darkening the fabric.  \"<i>Wanna fuck, lover?  Because I sure do...</i>\" She licks her lips at the prospect.");
@@ -158,7 +158,7 @@ internal function urtaPreggoApproached():void {
 				//Pregnant Sex options should probably start displaying either here or in the next stage.
 				addButton(0,"Sex",preggoUrtaSmexOrSomething);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 5:
 				outputText("Urta's still in the private booth she's moved to, and for a good, reason, too - her pregnancy is so obvious you'd have to be blind to miss it, adding what easily has to be around ten inches to her waistline - and straight out, at that.  The black dress she wears is stretching to its limit around her distended belly, pulled tight across the spherical bulge.  She is tucking away eagerly into a glass of fizzy, sweet-smelling orange drink, a picked-clean plate resting before her.  She spots you and nods even as she continues to drink.");
@@ -167,7 +167,7 @@ internal function urtaPreggoApproached():void {
 				else outputText("She places the glass down and licks her lips.  \"<i>Mmm... that stuff tastes a lot better than you think, especially when you're pregnant.  So, sexy, what brings you here?  Wanted to check up on us?</i>\"  She pats her belly with a smile.  \"<i>Or did you maybe want to talk?  ...Or perhaps <b>talk</b> a little?</i>\"  She grins wickedly.");
 				addButton(0,"Sex",preggoUrtaSmexOrSomething);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 6:
 				outputText("The pregnant fox's normal skimpy black dress has given up the ghost; her belly's just too big for her to squeeze into it without tearing it apart.  Instead, she's adopted a much more casual look; a knee-length pleated skirt and a midriff-baring t-shirt that has wispy strands of fishnet trailing under it and resting on the gray-furred expanse of her belly.  The shirt itself looks a little on the damp side where her nipples are; the milk must be coming in.  She rubs her stomach and smiles triumphantly at you.  \"<i>Look at me, lover; I'm really starting to get big now.  This just feels so wonderful; you don't know how long I've been dreaming about this happening to me.</i>\"");
@@ -176,14 +176,14 @@ internal function urtaPreggoApproached():void {
 				else outputText("\n\nShe's got a few glasses of milk next to her, but when she sees you, her expression turns a trifle embarrassed.  \"<i>Hey, [name].  You just missed me tending to my hormones,</i>\" she admits, more than a little sheepishly while pointing at the half-dozen glasses.  Your eyes widen when you realize just what the \"milk\" is.  Urta smirks, a little cockiness showing as she asks, \"<i>So did you want to talk, or see if we can fill up a few more?</i>\"");
 				addButton(0,"Sex",preggoUrtaSmexOrSomething);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 7: 
 				outputText("Urta's belly just keeps getting bigger and bigger; not that she seems to care. Indeed, she proudly flaunts her growing belly, and she's forever rubbing and stroking it.  You can see the occasional bulge or ripple as your child kicks in her womb, growing strong and healthy.  Damp spots have grown on her t-shirt from her budding milk supply, though Urta seems oblivious to it as of yet.  Her pleated skirt has risen high enough to fall back onto itself, leaving her groin totally immodest and undoubtedly aroused.");
 				outputText("\n\nMore pre drips from her length, and she notices you with a start, \"<i>Oh, [name]!  I was just thinking of you!  I never knew pregnancy could make me feel so... sexual.  Being so full of life just seems to make my male half want to make even more, if you know what I mean.  Please, tell me you're here for a quickie?</i>\"  She fidgets.  \"<i>I guess we could talk too... if you want.</i>\"");
 				addButton(0,"Sex",preggoUrtaSmexOrSomething);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 8:
 				outputText("Urta's finally outgrown even her booth, her belly now looking like she swallowed a prize-winning watermelon whole.  She's taken to sitting in a shapeless, very well-stuffed couch in an out-of-the-way nook of the bar.  Her hands stroke her gut and her erect dick at more or less the same time, precum dripping noisily into a bucket positioned under her erection.  She sees you coming and her cock bounces eagerly, belching another spurt of precum into the bucket from a surge in arousal.");
@@ -2356,7 +2356,7 @@ public function visitTheHouse():void {
 	addButton(2,"Sex",sexWithLianna);
 	addButton(4,"Kids",pickKidSceneHere);
 	
-	addButton(9,"Back",telAdre.telAdreMenu);
+	addButton(14,"Back",telAdre.telAdreMenu);
 }
 
 //Lianna
@@ -2366,7 +2366,7 @@ private function liannasAppearance():void {
 	outputText("Lianna is a healthy looking young anthro, a skunk-morph covered in sleek, shiny black fur, with white adorning her swishing, fluffy-looking tail.  Her hair is pure black with streaks of white, tied out of the way into a short ponytail, and her green eyes glitter behind round, silver-rimmed glasses that perch atop her nose.  She wears a conservative short-sleeved blouse, and pants that, while slightly baggy, still manage to show off her nice legs.  They're certainly tight enough that you can tell she's all girl; no hidden surprises here.  She goes without shoes, exposing her paw-like feet.  She has a very nicely rounded, generous handful of an ass, and womanly hips; up top, she is no less stacked, with what are easily E-cup breasts making her even bustier than her employer is; despite all that, she tries to tone them down with her style of dress.");
 	//(Display Options)
 	menu();
-	addButton(9,"Back",visitTheHouse);
+	addButton(14,"Back",visitTheHouse);
 }
 
 private function talkToLiana(output:Boolean = true):void {
@@ -2379,7 +2379,7 @@ private function talkToLiana(output:Boolean = true):void {
 	addButton(1,"HerResearch",talkToLianaAboutHerResearch);
 	if(flags[kFLAGS.LIANNA_HAVESTED_MALES] + flags[kFLAGS.LIANNA_HAVESTED_LADIES] > 0) addButton(2,"Her Spray",talkAboutLiannasLubeSpray);
 	if(flags[kFLAGS.DISCUSSED_LUBE_SPRAY] > 0) addButton(3,"Side Effect",lubeSpraySideEffects);
-	addButton(9,"Back",visitTheHouse);
+	addButton(14,"Back",visitTheHouse);
 }
 
 //Her Job

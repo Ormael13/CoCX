@@ -1079,7 +1079,7 @@ package classes.Scenes.Areas.Desert
 			if (flags[kFLAGS.ANT_KIDS] > 0) addButton(3, "Children", phyllasKidsChildren);
 			addButton(4, "Appearance", phyllaPearance);
 			addButton(5, "Find Gems", phyllaDigsForGems);
-			addButton(9, "Back", camp.campLoversMenu);
+			addButton(14, "Back", camp.campLoversMenu);
 
 			flags[kFLAGS.PHYLLA_CAMP_VISITS]++;
 		}
@@ -1109,7 +1109,7 @@ package classes.Scenes.Areas.Desert
 			//Drider/Bee impregnation scene for Phylla (universal unless otherwise specified, which will include varied intros and stuff.
 			//Sex > [Egg Phylla]
 			if (player.canOvipositSpider()) addButton(5, "Oviposit", eggDatBitch);
-			addButton(9, "Back", introductionToPhyllaFollower);
+			addButton(14, "Back", introductionToPhyllaFollower);
 		}
 
 		private function phyllaTalkChoices():void
@@ -1120,7 +1120,7 @@ package classes.Scenes.Areas.Desert
 			addButton(1, "Mating", talkAboutAntMatingAndRituals);
 			//(Phylla's Life Past & Future)
 			addButton(2, "Her Life", phyllasLifePastAndFuture);
-			addButton(9, "Back", introductionToPhyllaFollower);
+			addButton(14, "Back", introductionToPhyllaFollower);
 		}
 
 //►[Talk]

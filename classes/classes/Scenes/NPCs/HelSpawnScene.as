@@ -1139,7 +1139,7 @@ public function helspawnsMainMenu():void {
 	//[Sex] {?}
 	//[Appearance]
 	addButton(8,"Appearance",helSpawnsAppearanceScreen);
-	addButton(9,"Back",camp.campFollowers);
+	addButton(14,"Back",camp.campFollowers);
 }
 
 //Hug

@@ -511,7 +511,7 @@ public function doCamp():void {
 	}
 	if(model.time.days >= 20) outputText("You've even managed to carve some artwork into the rocks around the camp's perimeter.\n\n", false);
 	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n", false)
-	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 10) outputText("There's an unfinished cabin. It's currently missing window and door.\n\n", false)
+	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 10) outputText("There's an unfinished cabin. It's currently missing windows and door.\n\n", false)
 	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] == 11) outputText("There's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n", false)
 	if(flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12) outputText("Your cabin is situated near the edge of camp.\n\n", false)
 	if(flags[kFLAGS.CLARA_IMPRISONED] > 0) 
@@ -685,7 +685,7 @@ public function doCamp():void {
 	//MOUSEBITCH
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 		if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) outputText("Amily has relocated her grass bedding to the opposite side of the camp from the strange tree; every now and then, she gives it a suspicious glance, as if deciding whether to move even further.");
-		else outputText("A surprisingly tidy nest of soft grasses and sweet-smelling herbs has been built close to your bedroll. A much-patched blanket draped neatly over the top is further proof that Amily sleeps here. She changes the bedding every few days, to ensure it stays as nice as possible.\n\n", false);
+		else outputText("A surprisingly tidy nest of soft grasses and sweet-smelling herbs has been built close to your " + (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "cabin": "bedroll") + ". A much-patched blanket draped neatly over the top is further proof that Amily sleeps here. She changes the bedding every few days, to ensure it stays as nice as possible.\n\n", false);
 	}
 	//Corrupt mousebitch!
 	else if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) {
@@ -701,6 +701,7 @@ public function doCamp():void {
 	//Pure Jojo
 	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
 		outputText("There is a small bedroll for Jojo near your own", false);
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
 		if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n", false);
 		else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n", false);
 	}
@@ -735,7 +736,7 @@ public function doCamp():void {
 	//Hunger check!
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
 	{
-		outputText("<b>Your stomach is growling " + (player.hunger <= 0 ? "painfully": "loudly") + ". You have to eat something. </b>", false);
+		outputText("<b>Your stomach is growling " + (player.hunger < 1 ? "painfully": "loudly") + ". You have to eat something. </b>", false);
 		if (player.hunger < 10) {
 			outputText("<b>You are getting thinner and you're losing muscles.</b>");
 		}
@@ -755,48 +756,21 @@ public function doCamp():void {
 		}
 		else {
 			outputText("<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>\n\n", false);
-			explore = 0;
-			rest = 0;
-			placesNum = 0;
 		}
 	}
-
-	var baitText:String = "Masturbate";
-	if(((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) baitText = "Meditate";
-	//Initialize companions/followers
-	if (model.time.hours > 4 && model.time.hours < 23) {
-		canCampStuff = campActions;
-		if(followersCount() > 0) 
-			followers = campFollowers;
-		if(slavesCount() > 0) 
-			slaves = campSlavesMenu;
-		if(loversCount() > 0) 
-			lovers = campLoversMenu;
-	}
-	var restEvent:Number = 40;
-	var restName:String = "Wait";
 	//Set up rest stuff
 	//Night
 	if(model.time.hours < 6 || model.time.hours > 20) {
 		outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n\n", false);
 		if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
-			outputText("Your camp is silent as your companions are sleeping right now.\n", false)
+			outputText("Your camp is silent as your companions are sleeping right now.\n", false);
 		}
-		restName = "Sleep";
-		restEvent = 41;
-		explore = 0;
-		placesNum = 0;
 	}
 	//Day Time!
 	else {
 		if (model.time.hours == 19) outputText("The sun is close to the horizon, getting ready to set. ", false);
 		if (model.time.hours == 20) outputText("The sun has already set below the horizon. The sky glows orange. ", false);
 		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n", false);
-		
-		if(player.fatigue > 40 || player.HP/player.maxHP() <= .9) {
-			restName = "Rest";
-			restEvent = 11;
-		}
 	}
 	
 	//Unlock cabin.
@@ -819,8 +793,39 @@ public function doCamp():void {
 		}
 	}
 	//Menu
-	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves", slaves, "Camp Actions", canCampStuff, baitText, masturbate, restName, restEvent);
+	//choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves", slaves, "Camp Actions", canCampStuff, baitText, masturbate, restName, restEvent);
+	menu();
+	addButton(0, "Explore", eventParser, explore);
+	if (placesCount() > 0) addButton(1, "Places", places);
+	addButton(2, "Camp Action", campActions);
+	addButton(3, "Inventory", eventParser, 1000);
+	if(stash()) addButton(4, "Stash", initiateStash);
+	if (followersCount() > 0) addButton(5, "Followers", campFollowers);
+	if (loversCount() > 0) addButton(6, "Lovers", campLoversMenu);
+	if (slavesCount() > 0) addButton(7, "Slaves", campSlavesMenu);
+	if (player.lust >= 30) {
+		addButton(8, "Masturbate", eventParser, 10);
+		if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", eventParser, 10);
+	}
+	addButton(9, "Wait", eventParser, 40);
+	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", eventParser, 11);
+	if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", eventParser, 41);
 
+	//Remove buttons according to conditions.
+	if (model.time.hours >= 21 || model.time.hours < 6) {
+		removeButton(0);
+		removeButton(1);
+		if (model.time.hours >= 23 || model.time.hours < 5) {
+			removeButton(4);
+			removeButton(5);
+			removeButton(6);
+			removeButton(7);
+		}
+	}
+	if (player.lust >= 100) {
+		removeButton(0);
+		removeButton(1);
+	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] < kGAMECLASS.modSaveVersion) {
 		promptSaveUpdate();
 	}
@@ -1205,7 +1210,7 @@ public function campLoversMenu():void {
 	if (marbleEvent != null) addButton(6,"Marble",marbleEvent);
 	if(nieve > 0) addButton(7,"Nieve",eventParser,nieve);
 	if(flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla",kGAMECLASS.desert.antsScene.introductionToPhyllaFollower);
-	addButton(9,"Back",eventParser,1);
+	addButton(14,"Back",eventParser,1);
 }
 public function campSlavesMenu():void {
 	hideMenus();
@@ -1256,7 +1261,7 @@ public function campSlavesMenu():void {
 	if (vapula2 != null) addButton(4,"Vapula",vapula2);
 	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(7,flags[kFLAGS.MILK_NAME],milkWaifu.milkyMenu);
 	if (goo != null) addButton(8,flags[kFLAGS.GOO_NAME],goo);
-	addButton(9,"Back",eventParser,1);
+	addButton(14,"Back",eventParser,1);
 }
 
 public function campFollowers():void {
@@ -1328,7 +1333,7 @@ public function campFollowers():void {
 	//ABOVE: addButton(4,"Sophie",followerSophieMainScreen);
 	addButton(6, "Valeria", valeria2);
 	//if (player.armorName == "goo armor") addButton(6, "Valeria (E)", valeria2);
-	addButton(9,"Back",eventParser,1);
+	addButton(14,"Back",eventParser,1);
 }
 //-----------------
 //-- CAMP ACTIONS 
@@ -1337,13 +1342,13 @@ private function campActions():void {
 	hideMenus();
 	menu();
 	outputText("What would you like to do?", true)
-	addButton(0, "SwimInStream", swimInStream);
-	addButton(1, "ExaminePortal", examinePortal); //Examine portal.
-	if (model.time.hours == 19) addButton(2, "Watch Sunset", watchSunset); //Relax and watch at the sunset.
-	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 12) addButton(3, "Build Cabin", cabinProgress.initiateCabin); //Work on cabin.
-	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin); //Enter cabin for furnish.
-	addButton(8, "Read Codex", codex.accessCodexMenu);
-	addButton(9, "Back", eventParser, 1);
+	addButton(0, "SwimInStream", swimInStream, null, null, null, "Swim in stream and relax to pass time.");
+	addButton(1, "ExaminePortal", examinePortal, null, null, null, "Examine the portal. This scene is placeholder."); //Examine portal.
+	if (model.time.hours == 19) addButton(2, "Watch Sunset", watchSunset, null, null, null, "Watch the sunset and relax."); //Relax and watch at the sunset.
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 12) addButton(3, "Build Cabin", cabinProgress.initiateCabin, null, null, null, "Work on your cabin."); //Work on cabin.
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin, null, null, null, "Enter your cabin."); //Enter cabin for furnish.
+	addButton(8, "Read Codex", codex.accessCodexMenu, null, null, null, "Read any codex entries you have unlocked.");
+	addButton(14, "Back", eventParser, 1);
 }
 
 private function swimInStream():void {
@@ -2035,13 +2040,14 @@ public function placesCount():int {
 
 //All cleaned up!
 public function places():void {
+	hideMenus();
 	clearOutput();
 	outputText("Which place would you like to visit?");
-	if(flags[kFLAGS.PLACES_PAGE] != 0)
-	{
-		placesPage2();
-		return;
-	}
+	//if(flags[kFLAGS.PLACES_PAGE] != 0)
+	//{
+	//	placesPage2();
+	//	return;
+	//}
 	//Build menu
 	menu();
 	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(0, "Bazaar", eventParser, 2855);
@@ -2051,7 +2057,8 @@ public function places():void {
 		if (flags[kFLAGS.GAR_NAME] == 0) addButton(2, "Cathedral", kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork);
 		else addButton(2, "Cathedral", kGAMECLASS.gargoyle.returnToCathedral);
 	}
-	if (flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(3, "Dungeons", dungeons);
+	if (flags[kFLAGS.FACTORY_FOUND] > 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 || flags[kFLAGS.DISCOVERED_DUNGEON_3_LETHICE] > 0 || kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(3, "Dungeons", dungeons);
+	
 	if (player.findStatusAffect(StatusAffects.MetWhitney) >= 0) 
 	{
 		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && (flags[kFLAGS.FARM_DISABLED] == 0 || (player.cor >= 70 && player.level >= 12 && kGAMECLASS.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) || player.level >= 20 )) addButton(5, "Farm", kGAMECLASS.farm.farmExploreEncounter);
@@ -2060,8 +2067,11 @@ public function places():void {
 	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(6, "Owca", kGAMECLASS.owca.gangbangVillageStuff);
 	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) addButton(7, "Salon", kGAMECLASS.mountain.salon.salonGreeting);
 	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) addButton(8, "Tel'Adre", kGAMECLASS.telAdre.telAdreMenu);
-	addButton(4, "Next", placesPage2);
-	addButton(9, "Back", eventParser, 1);
+	
+	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(10, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin);
+	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(11, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva);
+	//addButton(13, "Next", placesPage2);
+	addButton(14, "Back", eventParser, 1);
 }
 
 private function placesPage2():void
@@ -2071,8 +2081,8 @@ private function placesPage2():void
 	//turn on ruins
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin);
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(1, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva);
-	addButton(4,"Previous",placesToPage1);
-	addButton(9,"Back",eventParser,1);
+	addButton(12,"Previous",placesToPage1);
+	addButton(14,"Back",eventParser,1);
 }
 private function placesToPage1():void
 {
@@ -2091,7 +2101,7 @@ private function dungeons():void {
 	//Side dungeons
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon);
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon);
-	addButton(9,"Back",eventParser,71);
+	addButton(14,"Back",eventParser,71);
 }
 
 private function exgartuanCampUpdate():void {
@@ -2431,7 +2441,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 25) awardAchievement("Shapeshifty", kACHIEVEMENTS.GENERAL_SHAPESHIFTY);
 	if (flags[kFLAGS.TIMES_MASTURBATED] >= 1) awardAchievement("Fapfapfap", kACHIEVEMENTS.GENERAL_FAPFAPFAP);
 	if (flags[kFLAGS.TIMES_MASTURBATED] >= 10) awardAchievement("Faptastic", kACHIEVEMENTS.GENERAL_FAPTASTIC);
-	if (flags[kFLAGS.TIMES_MASTURBATED] >= 100) awardAchievement("Fapster", kACHIEVEMENTS.GENERAL_FAPSTER);
+	if (flags[kFLAGS.TIMES_MASTURBATED] >= 100) awardAchievement("Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER);
 	
 	if (helspawnFollower()) awardAchievement("Helspawn", kACHIEVEMENTS.GENERAL_HELSPAWN);
 	if (flags[kFLAGS.URTA_KIDS_MALES] + flags[kFLAGS.URTA_KIDS_FEMALES] + flags[kFLAGS.URTA_KIDS_HERMS] > 0) awardAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER);

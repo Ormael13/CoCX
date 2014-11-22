@@ -54,7 +54,7 @@ public function bakeryuuuuuu():void {
 	outputText("What do you do?");
 	addButton(0,"Check Menu",checkBakeryMenu);
 	addButton(1,"Talk",talkBakeryMenu);
-	addButton(9,"Leave",telAdre.telAdreMenu);
+	addButton(14,"Leave",telAdre.telAdreMenu);
 }
 
 private function checkBakeryMenu():void {
@@ -99,7 +99,7 @@ private function checkBakeryMenu():void {
 	addButton(5,"SpecialEclair",minoCum);
 	addButton(6,"GiantCupcake",gcupcake);
 	addButton(8,"Ingredients",ingredientsMenu);
-	addButton(9,"Leave",bakeryuuuuuu);
+	addButton(14,"Leave",bakeryuuuuuu);
 }
 
 public function ingredientsMenu():void {
@@ -114,7 +114,7 @@ public function ingredientsMenu():void {
 	addButton(1,"Ringtail Fig",buyFig);
 	addButton(2,"Mouse Cocoa",buyCocoa);
 	addButton(3,"Ferret Fruit",buyFerretFruit);
-	addButton(9,"Back",checkBakeryMenu);
+	addButton(14,"Back",checkBakeryMenu);
 }
 
 //[Bakery - Talk - Baker]
@@ -313,7 +313,7 @@ private function talkBakeryMenu():void {
 	outputText("\nYou see a bubblegum-pink girl at the bakery, walking around and eagerly trying to hand out fliers to people. Her “uniform” is more like a yellow bikini with frills circling the waist of the bottom half. If this didn’t make her stand out from the crowd then her hair certainly would; it’s a big, poofy, curly, dark pink mess that reaches down to her ass with a huge cupcake hat sitting on top.\n");
 	if(flags[kFLAGS.MET_FROSTY] != 0) addButton(3,"Frosty",kGAMECLASS.telAdre.frosty.approachFrosty);
 	else addButton(3,"PinkGirl",kGAMECLASS.telAdre.frosty.approachFrosty);
-	addButton(9,"Leave",bakeryuuuuuu);
+	addButton(14,"Leave",bakeryuuuuuu);
 }
 private function rubiWrapper(rubiB:int = 0):void {
 	eventParser(rubiB);

@@ -1,4 +1,5 @@
 import classes.GlobalFlags.kGAMECLASS;
+import flash.ui.Keyboard;
 
 use namespace kGAMECLASS;
 
@@ -425,6 +426,58 @@ inputManager.AddBindableControl(
 			executeButtonClick(9);
 		}
 	});
+	
+//Extra buttons
+inputManager.AddBindableControl(
+	"Button 11",
+	"Activate button 11",
+	function():void {
+		if (kGAMECLASS.buttonIsVisible(10))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(10);
+		}
+	});
+inputManager.AddBindableControl(
+	"Button 12",
+	"Activate button 12",
+	function():void {
+		if (kGAMECLASS.buttonIsVisible(11))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(11);
+		}
+	});
+inputManager.AddBindableControl(
+	"Button 13",
+	"Activate button 13",
+	function():void {
+		if (kGAMECLASS.buttonIsVisible(12))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(12);
+		}
+	});
+inputManager.AddBindableControl(
+	"Button 14",
+	"Activate button 14",
+	function():void {
+		if (kGAMECLASS.buttonIsVisible(13))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(13);
+		}
+	});
+inputManager.AddBindableControl(
+	"Button 15",
+	"Activate button 15",
+	function():void {
+		if (kGAMECLASS.buttonIsVisible(14))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(14);
+		}
+	});
 
 inputManager.AddBindableControl(
 	"Cheat! Give Hummus",
@@ -578,10 +631,15 @@ inputManager.BindKeyToControl(55, "Button 7");
 inputManager.BindKeyToControl(56, "Button 8");
 inputManager.BindKeyToControl(57, "Button 9");
 inputManager.BindKeyToControl(48, "Button 10");
-inputManager.BindKeyToControl(81, "Button 6", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(87, "Button 7", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(69, "Button 8", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(82, "Button 9", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(84, "Button 10", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.Q, "Button 6", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.W, "Button 7", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.E, "Button 8", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.R, "Button 9", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.T, "Button 10", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.A, "Button 11", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.S, "Button 12", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.D, "Button 13", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.F, "Button 14", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.G, "Button 15", InputManager.SECONDARYKEY);
 
 inputManager.RegisterDefaults();

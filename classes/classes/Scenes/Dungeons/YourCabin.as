@@ -109,7 +109,7 @@ package classes.Scenes.Dungeons
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] <= 0) addButton(5, "Bookshelf" , constructFurnitureBookshelfPrompt);
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] <= 0) addButton(6, "Desk" , constructFurnitureDeskPrompt);
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] > 0) addButton(7, "Chair 4 Desk" , constructFurnitureChairForDeskPrompt);
-			addButton(9, "Back", enterCabin);
+			addButton(14, "Back", enterCabin);
 		}
 		
 		//CONSTRUCT FURNITURE

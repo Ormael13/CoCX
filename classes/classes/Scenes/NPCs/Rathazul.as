@@ -289,9 +289,9 @@ private function rathazulWorkOffer():Boolean {
 		}
 		if(reductos > 0) addButton(8,"Reducto",eventParser,reductos);
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
-			addButton(9,"Leave",eventParser,74);
+			addButton(14,"Leave",eventParser,74);
 		else
-			addButton(9,"Leave",eventParser,13);
+			addButton(14,"Leave",eventParser,13);
 		gameState = 6;
 		return true;
 	}
@@ -324,7 +324,7 @@ private function purifySomething():void {
 		//laBovaPurify = 2145;
 		addButton(4,"MinoCum",purifyMinoCum);
 	}
-	addButton(9,"Back",rathazulWorkOffer);
+	addButton(14,"Back",rathazulWorkOffer);
 }
 
 //For Minerva purification.
@@ -455,7 +455,7 @@ public function RathazulArmorMenu():void {
 	if (player.hasKeyItem("Tentacled Bark Plates") >= 0) {
 		addButton(3, "T.Bark Armor", craftMaraeArmor);
 	}
-	addButton(9, "Back", eventParser, 2070);
+	addButton(14, "Back", eventParser, 2070);
 }
 private function craftSilkArmor():void {
 	spriteSelect(49);

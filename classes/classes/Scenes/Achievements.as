@@ -154,12 +154,13 @@ package classes.Scenes
 			addAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER, "Cause or witness 3 Bad Ends to various NPCs.");
 			addAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, "Get a Bad End.");
 			addAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, "Urinate at least once in the realm of Mareth.");
+			addAchievement("Smashed", kACHIEVEMENTS.GENERAL_SMASHED, "Get so drunk that you end up urinating.", "", true);
 			addAchievement("What's Happening to Me?", kACHIEVEMENTS.GENERAL_WHATS_HAPPENING_TO_ME, "Transform for the first time.");
 			addAchievement("Transformer", kACHIEVEMENTS.GENERAL_TRANSFORMER, "Transform 10 times.");
 			addAchievement("Shapeshifty", kACHIEVEMENTS.GENERAL_SHAPESHIFTY, "Transform 25 times.");
 			addAchievement("Fapfapfap", kACHIEVEMENTS.GENERAL_FAPFAPFAP, "Masturbate for the first time.");
 			addAchievement("Faptastic", kACHIEVEMENTS.GENERAL_FAPTASTIC, "Masturbate 10 times.");
-			addAchievement("Fapster", kACHIEVEMENTS.GENERAL_FAPSTER, "Masturbate 100 times.");
+			addAchievement("Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER, "Masturbate 100 times.");
 			
 			addAchievement("Helspawn", kACHIEVEMENTS.GENERAL_HELSPAWN, "Have Helia give birth to Helspawn and raise her until adulthood.");
 			addAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR, "Wear the goo armor.");
@@ -194,8 +195,8 @@ package classes.Scenes
 			addAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD, "Punch a tree until wood falls out... Wait, what?", "", true);
 			
 			menu();
-			addButton(8, "" + achievementsEarned + "/" + achievementsTotal + " unlocked", eventParser, 9999);
-			addButton(9, "Back", kGAMECLASS.mainMenu);
+			addButton(13, "" + achievementsEarned + "/" + achievementsTotal + " unlocked", eventParser, 9999);
+			addButton(14, "Back", kGAMECLASS.mainMenu);
 		}
 		
 		public function achievementsStoryline():void {

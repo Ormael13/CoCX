@@ -394,7 +394,7 @@ public function urtaBarApproach():void {
 			if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",slurpFawkesCocksForFunAndInflation);
 			else addButton(1,"Suck Off",blowUrtaUnderTheTableLuv);
 			addButton(2, "Eat Out", eatUrtaOutNomNomPussy);
-			addButton(9, "Leave", telAdre.barTelAdre);
+			addButton(14, "Leave", telAdre.barTelAdre);
 			return;
 		}
 		//[Horny Urta Talk – Drunk]
@@ -418,7 +418,7 @@ public function urtaBarApproach():void {
 				outputText("\n\nYou know Urta and Raphael get along about as well as cats and dogs, but it might be fun to have them double-team you in the dark.");
 				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
-			addButton(9,"Leave",telAdre.barTelAdre);
+			addButton(14,"Leave",telAdre.barTelAdre);
 			return;
 		}
 	}
@@ -457,7 +457,7 @@ public function urtaBarApproach():void {
 			outputText("\n\nYou know Urta and Raphael get along about as well as cats and dogs, but it might be fun to have them double-team you in the dark.");
 			addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 		}
-		addButton(9,"Leave",telAdre.barTelAdre);
+		addButton(14,"Leave",telAdre.barTelAdre);
 		return;
 	}
 	//[URTA COMFORTABLE WITH HOR-COCK]
@@ -2783,7 +2783,7 @@ public function urtaDialogueMenu():void {
 		addButton(4,"Visit Kids",urtaPregs.visitKidsFirstTime);
 	else
 		if(flags[kFLAGS.FIRST_TIME_AT_URTA_HOUSE] > 0) addButton(4,"Her House",urtaPregs.talkToUrtaAboutHerHouse);
-	addButton(9,"Leave",eventParser,13);
+	addButton(14,"Leave",eventParser,13);
 }
 
 //[=Urta=]

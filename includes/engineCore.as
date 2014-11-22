@@ -729,11 +729,20 @@ public function applyPerk(perk:PerkClass):void {
 	doNext(1);
 }
 
-public function buttonText(buttonName:String):String {
-	var matches :*,
-		buttonIndex :int;
+public function buttonIsVisible(index:int):Boolean {
+	if( index < 0 || index > 14 ) {
+		return undefined;
+	}
+	else {
+		return mainView.bottomButtons[index].visible;
+	}
+};
 
-	if( buttonName is String ) {
+public function buttonText(buttonName:String):String {
+	var matches:*,
+		buttonIndex:int;
+
+	if(buttonName is String) {
 		if( /^buttons\[[0-9]\]/.test( buttonName ) ) {
 			matches = /^buttons\[([0-9])\]/.exec( buttonName );
 			buttonIndex = parseInt( matches[ 1 ], 10 );
@@ -746,9 +755,20 @@ public function buttonText(buttonName:String):String {
 		}
 	}
 
-	return (mainView.getButtonText( buttonIndex ) || "NULL");
+	return (getButtonText(buttonIndex) || "NULL");
 }
 
+
+public function getButtonText(index:int):String {
+	var matches:*;
+
+	if(index < 0 || index > 14) {
+		return '';
+	}
+	else {
+		return mainView.bottomButtons[index].labelText;
+	}
+};
 
 // Returns a string or undefined.
 public function getButtonToolTipText(buttonText:String):String
@@ -1075,7 +1095,7 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Dungeons") != -1) {
 		toolTipText = "Delve into dungeons.";
 	}
-	if(buttonText.indexOf("Farm") != -1) {
+	if(buttonText.indexOf("Farm") != -1 && flags[kFLAGS.IN_INGNAM] <= 0) {
 		toolTipText = "Visit Whitney's farm.";
 	}
 	if(buttonText.indexOf("Owca") != -1) {
@@ -1138,25 +1158,6 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Marble (Sex)") != -1) {
 		toolTipText = "Get with marble for a quick cuddle and some sex.";
 	}
-	//CAMP ACTIONS
-	if(buttonText == "SwimInStream") {
-		toolTipText = "Swim in stream and relax to pass time.";
-	}	
-	if(buttonText == "ExaminePortal") {
-		toolTipText = "Examine the portal. This scene is placeholder.";
-	}	
-	if(buttonText == "Watch Sunset") {
-		toolTipText = "Watch the sunset and relax.";
-	}	
-	if(buttonText == "Build Cabin") {
-		toolTipText = "Work on your cabin.";
-	}	
-	if(buttonText == "Enter Cabin") {
-		toolTipText = "Enter your cabin.";
-	}	
-	if(buttonText == "Read Codex") {
-		toolTipText = "Read any codex entries you have unlocked.";
-	}	
 	//-----------------
 	//-- FOLLOWER INTERACTIONS
 	//-----------------
@@ -1322,6 +1323,9 @@ public function getButtonToolTipText(buttonText:String):String
 	//-----------------
 	//-- DUNGEON INTERACTIONS
 	//-----------------
+	if (buttonText == "Map") {
+		toolTipText = "View the map of this dungeon.";
+	}
 	//Factory
 	if(buttonText == "Iron Key") {
 		toolTipText = "Pick up the iron key. It looks like it might unlock the door in this factory.";
@@ -1634,12 +1638,11 @@ public function createCallBackFunction2(func:Function,...args):Function
 	}
 }
 
-public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000):void {
+public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = ""):void {
 	if (func1==null) return;
-	var callback :Function,
-	toolTipText :String;
+	var callback:Function;
 
-	if(pos > 9) {
+	if(pos > 14) {
 		trace("INVALID BUTTON");
 		return;
 	}
@@ -1651,9 +1654,8 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 		}
 	}
 	callback = createCallBackFunction(func1, arg1, arg2, arg3);
-	
 
-	toolTipText = getButtonToolTipText( text );
+	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
 	mainView.showBottomButton( pos, text, callback, toolTipText );
 	//mainView.setOutputText( currentText );
 	flushOutputTextToGUI();
@@ -1678,7 +1680,7 @@ public function removeButton(arg:*):void {
 		buttonToRemove = mainView.indexOfButtonWithLabel( arg as String );
 	}
 	if(arg is Number) {
-		if(arg < 0 || arg > 9) return;
+		if(arg < 0 || arg > 14) return;
 		buttonToRemove = Math.round(arg);
 	}
 	
@@ -1740,6 +1742,11 @@ public function menu(text1:String = "", func1:Function = null, arg1:Number = -90
 	_conditionallyShowButton( 7, text8, func8, arg8 );
 	_conditionallyShowButton( 8, text9, func9, arg9 );
 	_conditionallyShowButton( 9, text0, func0, arg0 );
+	_conditionallyShowButton(10, text0, func0, arg0 );
+	_conditionallyShowButton(11, text0, func0, arg0 );
+	_conditionallyShowButton(12, text0, func0, arg0 );
+	_conditionallyShowButton(13, text0, func0, arg0 );
+	_conditionallyShowButton(14, text0, func0, arg0 );
 
 	//mainView.setOutputText( currentText );
 	flushOutputTextToGUI();

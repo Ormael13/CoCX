@@ -135,13 +135,13 @@ package classes.Scenes.Dungeons
 			spriteSelect(-1);
 			menu();
 			setTopButtons();
-			if (northFunction != null) addButton(0, "North", navigateToRoom, northFunction);
-			if (southFunction != null) addButton(6, "South", navigateToRoom, southFunction);
-			if (westFunction != null) addButton(5, "West", navigateToRoom, westFunction);
-			if (eastFunction != null) addButton(1, "East", navigateToRoom, eastFunction);
-			addButton(7, "Map", map.displayMap);
-			addButton(8, "Inventory", eventParser, 1000);
-			if (player.lust >= 30) addButton(9, "Masturbate", eventParser, 10);
+			if (northFunction != null) addButton(6, "North", navigateToRoom, northFunction);
+			if (southFunction != null) addButton(11, "South", navigateToRoom, southFunction);
+			if (westFunction != null) addButton(10, "West", navigateToRoom, westFunction);
+			if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
+			if (player.lust >= 30) addButton(8, "Masturbate", eventParser, 10);
+			addButton(13, "Inventory", eventParser, 1000);
+			addButton(14, "Map", map.displayMap);
 		}
 		
 

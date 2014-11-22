@@ -405,7 +405,7 @@ package classes.Scenes.Dungeons
 				if(player.hasVagina()) addButton(1,"Forced Lick",forceCunnilingusRimjobClitAndNipple);
 			}
 			//Present PC with Leave and Orgy options
-			addButton(9,"Leave",cleanupAfterCombat);
+			addButton(14,"Leave",cleanupAfterCombat);
 		}
 
 		//Dicked Win Sex
@@ -1046,10 +1046,10 @@ package classes.Scenes.Dungeons
 			if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex);
 			
 			if(inCombat()) {
-				if(monster.HP >= 1) addButton(9,"Leave",declineSandWitch);
-				else addButton(9,"Leave",cleanupAfterCombat);
+				if(monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
+				else addButton(14,"Leave",cleanupAfterCombat);
 			}
-			else addButton(9,"Back",eventParser,1);
+			else addButton(14,"Back",eventParser,1);
 		}
 
 		//*Decline Sex
@@ -2060,7 +2060,7 @@ package classes.Scenes.Dungeons
 				addButton(7,"Free Slaves",slavesDiscussion);
 			if(player.lust >= 33) addButton(8,"Sex",sexWithFriendlySandMother);
 			
-			addButton(9,"Leave",eventParser,1);
+			addButton(14,"Leave",eventParser,1);
 		}
 
 		public function slavesDiscussion():void {
@@ -2202,7 +2202,7 @@ package classes.Scenes.Dungeons
 				addButton(6,"Get Lactaid",takeLaBovaOrLactaid);
 			}
 			if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(7,"Essrayle",kGAMECLASS.forest.essrayle.askMotherToReleaseEssy);
-			addButton(9,"Leave",eventParser,1);
+			addButton(14,"Leave",eventParser,1);
 		}
 
 
@@ -3337,7 +3337,7 @@ package classes.Scenes.Dungeons
 			if(player.cockThatFits(50) >= 0 && player.lust >= 33) addButton(2,"Fuck'EmAll",fuckAllThePregWitches);
 			//[MASS GANGBANG] *Requires lots of cocks of appropriate size and enough lust.
 			//[TENTACLE GANGBANG] *Requires lots of tentacle cocks and enough lust.
-			addButton(9,"Back",eventParser,1);
+			addButton(14,"Back",eventParser,1);
 		}
 
 		//~ FUCK ONE
@@ -3999,8 +3999,9 @@ package classes.Scenes.Dungeons
 					flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] = 1;
 				}
 				//(Display Options: [Riddle Game] [Fight] [Leave])
+				removeButton(6); //Locks north.
 				addButton(0, "Riddle Game", riddleGameGo);
-				addButton(3, "Uh, FIGHT!", fuckItAttack);
+				addButton(1, "Uh, FIGHT!", fuckItAttack);
 			}
 			else {
 				if(flags[kFLAGS.TIMES_SUBMITTED_TO_SANURA] + flags[kFLAGS.TIMES_WINFUCKED_SANURA] > 0) {
@@ -4008,22 +4009,20 @@ package classes.Scenes.Dungeons
 					if(flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) outputText("  Or would you rather skip the formalities?  We both know who's got the sharper wit, I should think.");
 					outputText("</i>\"");
 					//(Display Options: [Riddle Game] [Fight] [Leave])
-					addButton(2, "Riddle Game", riddleGameGo);
+					addButton(0, "Riddle Game", riddleGameGo);
 					if (flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) {
-						addButton(0, "North", roomCaveCommons);
-						addButton(3, "Fuck", fuckDatSphinx);
+						addButton(1, "Fuck", fuckDatSphinx);
 					}
 				}
 				else {
 					outputText("The sphinx, Sanura, is padding around the stone doorframe.  Occasionally she beats her leonine wings or gives a mighty yawn, obviously bored by a present lack of stimulation.  Seeing you standing about, however, Sanura gives you a sultry come-hither look and a seductive wink.  You're not sure if she wants to tempt your mind or your body.");
-					addButton(2, "Riddle Game", riddleGameGo);
+					addButton(0, "Riddle Game", riddleGameGo);
 					if(flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) {
-						addButton(0, "North", roomCaveCommons);
-						addButton(3, "Fuck", fuckDatSphinx);
+						addButton(1, "Fuck", fuckDatSphinx);
 					}
 				}
 			}
-			addButton(5, "Leave", exitDungeon);
+			addButton(11, "Leave", exitDungeon);
 		}
 		public function roomCaveCommons():void {
 			kGAMECLASS.dungeonLoc = 24;
@@ -4040,11 +4039,11 @@ package classes.Scenes.Dungeons
 			outputText("  Cave tunnels lead in to the east and west into more underground chambers.  A path leads south towards the exit.");
 			if(flags[kFLAGS.SANDWITCH_THRONE_UNLOCKED] == 0) {
 				outputText("\n\nA huge stone doorway blocks the path north.  You cannot see a way to open it.");
-				addButton(6, "South", roomEntrance);
+				addButton(11, "South", roomEntrance);
 			}
 			else {
 				outputText("\n\nAn open doorway opens up to the north.  You can faintly see some kind of altar beyond it.");
-				addButton(0, "North", roomSacrificalAltar);
+				addButton(6, "North", roomSacrificalAltar);
 			}
 		}
 		public function roomWestHall1():void {

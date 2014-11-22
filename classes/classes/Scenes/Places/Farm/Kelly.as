@@ -774,8 +774,8 @@ private function approachKelly():void {
 	//Showing up resets Kelly's desire not to fap without you
 	flags[kFLAGS.KELLY_DISOBEYING_COUNTER] = 0;
 
-	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)	addButton(9, "Leave", eventParser, 13);
-	else addButton(9, "Back", farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)	addButton(14, "Leave", eventParser, 13);
+	else addButton(14, "Back", farm.farmCorruption.rootScene);
 }
 
 private function kellySexMenu():void {
@@ -796,7 +796,7 @@ private function kellySexMenu():void {
 		addButton(3,"Blowjob",kellyBJsAhoy);
 		addButton(4,"Talk And HJ",talkNHandToKelly);
 	}
-	addButton(9,"Back",approachKelly);
+	addButton(14,"Back",approachKelly);
 	
 }
 //Regular scenes
@@ -1792,7 +1792,7 @@ private function rewardKelly():void {
 	if(player.hasItem(consumables.PINKDYE) && flags[kFLAGS.KELLY_HAIR_COLOR] != "bright pink") addButton(4,"Pink Dye",dyeKellysBitchAssHair,consumables.PINKDYE);
 	if(player.hasItem(consumables.BROWN_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "chestnut brown") addButton(5,"Brown Dye",dyeKellysBitchAssHair,consumables.BROWN_D);
 	
-	addButton(9,"Back",approachKelly);
+	addButton(14,"Back",approachKelly);
 }
 
 //Hair Dye

@@ -245,32 +245,36 @@ private function chooseSlotHardcore(num:int):void {
 //-- GAME MODES
 //-----------------
 private function chooseModeNormal():void {
-	outputText("You have chosen Normal Mode. This is a classic gameplay mode.", true)
+	outputText("You have chosen Normal Mode. This is a classic gameplay mode. \n\n<b>Difficulty can be adjusted at any time.</b>", true)
 	flags[kFLAGS.HARDCORE_MODE] = 0;
 	flags[kFLAGS.HUNGER_ENABLED] = 0;
+	flags[kFLAGS.GAME_DIFFICULTY] = 0;
 	doNext(startTheGame);
 }	
 
 private function chooseModeSurvival():void {
-	outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled.", true)
+	outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. \n\n<b>Difficulty can be adjusted at any time.</b>", true)
 	flags[kFLAGS.HARDCORE_MODE] = 0;
 	flags[kFLAGS.HUNGER_ENABLED] = 0.5;
+	flags[kFLAGS.GAME_DIFFICULTY] = 0;
 	player.hunger = 80;
 	doNext(startTheGame);
 }	
 
 private function chooseModeRealistic():void {
-	outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Also, your cum production is capped and having oversized parts will weigh you down.", true)
+	outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Also, your cum production is capped and having oversized parts will weigh you down. \n\n<b>Difficulty can be adjusted at any time.</b>", true)
 	flags[kFLAGS.HARDCORE_MODE] = 0;
 	flags[kFLAGS.HUNGER_ENABLED] = 1;
+	flags[kFLAGS.GAME_DIFFICULTY] = 0;
 	player.hunger = 80;
 	doNext(startTheGame);
 }	
 
 private function chooseModeHardcore():void {
-	outputText("You have chosen Hardcore Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. ", true)
+	outputText("You have chosen Hardcore Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to hard.</b>", true)
 	flags[kFLAGS.HARDCORE_MODE] = 1;
 	flags[kFLAGS.HUNGER_ENABLED] = 1;
+	flags[kFLAGS.GAME_DIFFICULTY] = 1;
 	player.hunger = 80;
 	menu()
 	addButton(0, "Slot 1", chooseSlotHardcore, 1);
@@ -282,7 +286,36 @@ private function chooseModeHardcore():void {
 	addButton(6, "Slot 7", chooseSlotHardcore, 7);
 	addButton(7, "Slot 8", chooseSlotHardcore, 8);
 	addButton(8, "Slot 9", chooseSlotHardcore, 9);
-	addButton(9, "Back", chooseGameModes);
+	addButton(9, "Slot 10", chooseSlotHardcore, 10);
+	addButton(10, "Slot 11", chooseSlotHardcore, 11);
+	addButton(11, "Slot 12", chooseSlotHardcore, 12);
+	addButton(12, "Slot 13", chooseSlotHardcore, 13);
+	addButton(13, "Slot 14", chooseSlotHardcore, 14);
+	addButton(14, "Back", chooseGameModes);
+}
+
+private function chooseModeBrutalHardcore():void {
+	outputText("You have chosen Brutal Mode. This is the HARDEST mode of all. \n\n<b>Difficulty is locked to <i>EXTREME</i>.</b>", true)
+	flags[kFLAGS.HARDCORE_MODE] = 1;
+	flags[kFLAGS.HUNGER_ENABLED] = 1;
+	flags[kFLAGS.GAME_DIFFICULTY] = 3;
+	player.hunger = 80;
+	menu()
+	addButton(0, "Slot 1", chooseSlotHardcore, 1);
+	addButton(1, "Slot 2", chooseSlotHardcore, 2);
+	addButton(2, "Slot 3", chooseSlotHardcore, 3);
+	addButton(3, "Slot 4", chooseSlotHardcore, 4);
+	addButton(4, "Slot 5", chooseSlotHardcore, 5);
+	addButton(5, "Slot 6", chooseSlotHardcore, 6);
+	addButton(6, "Slot 7", chooseSlotHardcore, 7);
+	addButton(7, "Slot 8", chooseSlotHardcore, 8);
+	addButton(8, "Slot 9", chooseSlotHardcore, 9);
+	addButton(9, "Slot 10", chooseSlotHardcore, 10);
+	addButton(10, "Slot 11", chooseSlotHardcore, 11);
+	addButton(11, "Slot 12", chooseSlotHardcore, 12);
+	addButton(12, "Slot 13", chooseSlotHardcore, 13);
+	addButton(13, "Slot 14", chooseSlotHardcore, 14);
+	addButton(14, "Back", chooseGameModes);
 }	
 
 //Choose the game mode when called!
@@ -292,8 +325,9 @@ private function chooseGameModes():void {
 	outputText("<b>Survival mode:</b> Like normal but with hunger enabled.\n", false);
 	outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. In addition, it's a bad idea to have oversized parts. \n", false);
 	outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n", false);
+	outputText("<b>Brutal Hardcore mode:</b> The hardest game mode ever. Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n", false);
 	
-	simpleChoices("Normal", chooseModeNormal, "Survival", chooseModeSurvival, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "", 0);
+	simpleChoices("Normal", chooseModeNormal, "Survival", chooseModeSurvival, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "Brutal HC", chooseModeBrutalHardcore);
 }	
 
 //-----------------
@@ -550,7 +584,12 @@ private function genericStyleCustomizeMenu():void {
 //-----------------
 private function menuSkinComplexion():void {
 	outputText("What is your complexion?", true);
-	choices("Light", chooseComplexionLight, "Olive", chooseComplexionOlive, "Dark", chooseComplexionDark, "Ebony", chooseComplexionEbony, "", 0, "", 0, "", 0, "", 0, "", 0, "Back", genericStyleCustomizeMenu);	
+	menu();
+	addButton(0, "Light", chooseComplexionLight);
+	addButton(1, "Olive", chooseComplexionOlive);
+	addButton(2, "Dark", chooseComplexionDark);
+	addButton(3, "Ebony", chooseComplexionEbony);
+	addButton(14, "Back", genericStyleCustomizeMenu);
 }	
 
 private function chooseComplexionLight():void {
@@ -575,35 +614,19 @@ private function chooseComplexionEbony():void {
 //-----------------
 private function menuHairColor():void {
 	outputText("What is your hair color?", true);
-	choices("Blonde", chooseHairBlonde, "Brown", chooseHairBrown, "Black", chooseHairBlack, "Red", chooseHairRed, "Gray", chooseHairGray, "White", chooseHairWhite, "Auburn", chooseHairAuburn, "", 0, "", 0, "Back", genericStyleCustomizeMenu);
-}	
+	menu();
+	addButton(0, "Blonde", chooseHairColor, "blonde");
+	addButton(1, "Brown", chooseHairColor, "brown");
+	addButton(2, "Black", chooseHairColor, "black");
+	addButton(3, "Red", chooseHairColor, "red");
+	addButton(4, "Gray", chooseHairColor, "gray");
+	addButton(5, "White", chooseHairColor, "white");
+	addButton(6, "Auburn", chooseHairColor, "auburn");
+	addButton(14, "Back", genericStyleCustomizeMenu);
+}
 
-private function chooseHairBlonde():void {
-	player.hairColor = "blonde";
-	genericStyleCustomizeMenu();
-}
-private function chooseHairBrown():void {
-	player.hairColor = "brown";
-	genericStyleCustomizeMenu();
-}
-private function chooseHairBlack():void {
-	player.hairColor = "black";
-	genericStyleCustomizeMenu();
-}
-private function chooseHairRed():void {
-	player.hairColor = "red";
-	genericStyleCustomizeMenu();
-}
-private function chooseHairGray():void {
-	player.hairColor = "gray";
-	genericStyleCustomizeMenu();
-}
-private function chooseHairWhite():void {
-	player.hairColor = "white";
-	genericStyleCustomizeMenu();
-}
-private function chooseHairAuburn():void {
-	player.hairColor = "auburn";
+private function chooseHairColor(color:String = ""):void {
+	player.hairColor = color;
 	genericStyleCustomizeMenu();
 }
 
@@ -616,7 +639,7 @@ private function menuBeardSettings():void {
 	menu()
 	addButton(0, "Style", menuBeardStyle);
 	addButton(1, "Length", menuBeardLength);
-	addButton(9, "Back", genericStyleCustomizeMenu);
+	addButton(14, "Back", genericStyleCustomizeMenu);
 }
 private function menuBeardStyle():void {
 	outputText("What beard style would you like?", true);
@@ -625,7 +648,7 @@ private function menuBeardStyle():void {
 	addButton(1, "Goatee", chooseBeardStyle, 1);
 	addButton(2, "Clean-cut", chooseBeardStyle, 2);
 	addButton(3, "Mountainman", chooseBeardStyle, 3);
-	addButton(9, "Back", menuBeardSettings);
+	addButton(14, "Back", menuBeardSettings);
 }
 private function chooseBeardStyle(choiceStyle:int = 0):void {
 	player.beardStyle = choiceStyle;
@@ -641,7 +664,7 @@ private function menuBeardLength():void {
 	addButton(4, "Mod. Long", chooseBeardLength, 1.5);
 	addButton(5, "Long", chooseBeardLength, 3);
 	addButton(6, "Very Long", chooseBeardLength, 6);
-	addButton(9, "Back", chooseBeardLength);
+	addButton(14, "Back", chooseBeardLength);
 }
 private function chooseBeardLength(choiceLength:Number = 0):void {
 	player.beardLength = choiceLength;
@@ -729,7 +752,7 @@ private function menuCockLength():void {
 	addButton(6, "7\"", chooseCockLength, 7);
 	addButton(7, "7.5\"", chooseCockLength, 7.5);
 	addButton(8, "8\"", chooseCockLength, 8);
-	addButton(9, "Back", genericStyleCustomizeMenu);
+	addButton(14, "Back", genericStyleCustomizeMenu);
 }
 
 private function chooseCockLength(length:Number):void {
@@ -751,7 +774,7 @@ private function menuBreastSize():void {
 	if (player.femininity >= 50) addButton(3, "C-cup", chooseBreastSize, 3);
 	if (player.femininity >= 60) addButton(4, "D-cup", chooseBreastSize, 4);
 	if (player.femininity >= 70) addButton(5, "DD-cup", chooseBreastSize, 5);
-	addButton(9, "Back", genericStyleCustomizeMenu);
+	addButton(14, "Back", genericStyleCustomizeMenu);
 }
 
 private function chooseBreastSize(size:int):void {
@@ -775,7 +798,7 @@ private function menuPerk():void {
 	addButton(7, "Perversion", choosePerkCorruptionYouMonster);
 
 	addButton(4, "Next", menuPerkII);
-	addButton(9, "Back", genericStyleCustomizeMenu);
+	addButton(14, "Back", genericStyleCustomizeMenu);
 }	
 
 private function menuPerkII():void {
@@ -803,7 +826,7 @@ private function menuPerkII():void {
 		addButton(6, "Wet Vagina", choosePerkWetgina);
 	}
 	addButton(4, "Previous", menuPerk);
-	addButton(9, "Back", setHeight);
+	addButton(14, "Back", setHeight);
 }
 
 private function choosePerkStrength():void {
@@ -1133,14 +1156,14 @@ private function startTheGame():void {
 	}
 	flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
 	statScreenRefresh();
-	getBanishedToMarethForReal();
-	//chooseToPlay(); //Will be used in 1.0.
+	//getBanishedToMarethForReal();
+	chooseToPlay(); //Will be used in 1.0.
 	return;
 }
 
 public function chooseToPlay():void {
 	clearOutput();
-	outputText("Would you like to play through the new prologue in Ingnam or just skip?");
+	outputText("Would you like to play through the 3-day prologue in Ingnam or just skip?");
 	doYesNo(goToIngnam, getBanishedToMarethForReal);
 }
 

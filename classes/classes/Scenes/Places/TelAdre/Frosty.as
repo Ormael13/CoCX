@@ -73,7 +73,7 @@ public function frostyMainMenu():void
 	if(player.gems >= 200) addButton(3,"x20",cupcakeBuy,20);
 	if(flags[kFLAGS.SIGNED_FROSTYS_CONTRACT] == 0) addButton(8,"Contract",getAFuckingFuckContractFromFucks);
 	else addButton(8,"Specials",frostysLimitedSpecialMenu);
-	addButton(9,"Leave",kGAMECLASS.telAdre.telAdreMenu);
+	addButton(14,"Leave",kGAMECLASS.telAdre.telAdreMenu);
 	
 }
 
@@ -87,7 +87,7 @@ public function frostySpecialsMenu(free:Boolean = false):void
 	if(free || flags[kFLAGS.FROSTY_POINTS] >= 5) addButton(0,"Hand",frostysHandsAreColdHolyShitWhyDontYouWarmTHoseMitsUp);
 	if(free || flags[kFLAGS.FROSTY_POINTS] >= 15) addButton(1,"Mouth",useFrostysMouth);
 	if(free || flags[kFLAGS.FROSTY_POINTS] >= 1) addButton(8,"EatHerOut",cunnilingateFrosty);
-	addButton(9,"Back",approachFrosty);
+	addButton(14,"Back",approachFrosty);
 }
 
 public function cupcakeBuy(arg:int = 1):void 

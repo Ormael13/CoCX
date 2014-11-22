@@ -5539,7 +5539,7 @@ public function magicalSpecials():void {
 	}
 	if(player.findStatusAffect(StatusAffects.ShieldingSpell) >= 0) addButton(8,"Shielding",shieldingSpell);
 	if(player.findStatusAffect(StatusAffects.ImmolationSpell) >= 0) addButton(8,"Immolation",immolationSpell);
-	addButton(9,"Back",eventParser,5000);
+	addButton(14,"Back",eventParser,5000);
 }
 public function physicalSpecials():void {
 	if(urtaQuest.isUrta()) {

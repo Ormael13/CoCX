@@ -6,7 +6,7 @@ public function masturbateMenu():void {
 	menu();
 	var button:int = 0;
 	if(fappingItems(false)) {
-		addButton(8,"Items",fappingItems);
+		addButton(13,"Items",fappingItems);
 	}
 	if (flags[kFLAGS.SFW_MODE] >= 1) {
 		meditate();
@@ -71,7 +71,7 @@ public function masturbateMenu():void {
 		args = new Array();
 		return;
 	}
-	addButton(9,"Back",eventParser,1);
+	addButton(14,"Back",eventParser,1);
 }
 
 public function fappingItems(menus:Boolean = true):Boolean {
@@ -162,7 +162,7 @@ public function fappingItems(menus:Boolean = true):Boolean {
 		}
 		hasItems = true;
 	}
-	if(menus) addButton(9,"Back",masturbateMenu);
+	if(menus) addButton(14,"Back",masturbateMenu);
 	return hasItems;
 }
 	

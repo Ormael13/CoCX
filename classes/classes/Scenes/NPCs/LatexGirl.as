@@ -572,13 +572,13 @@ public function approachLatexy():void {
 	outputText("\n<b>Happiness %:</b> " + Math.round(gooHappiness()));
 	outputText("\n<b>Obedience %:</b> " + Math.round(gooObedience()));
 	menu();
-	addButton(9,"Back",camp.campSlavesMenu);
+	addButton(14,"Back",camp.campSlavesMenu);
 	addButton(0,"Feed Her",feedLatexy);
 	if(player.gender > 0 && player.lust >= 33) addButton(1,"Use Her",useLatexy);
 	addButton(3,"Breast Size",setLatexysBustSize);
 	addButton(4, "Dick Options", changeGooDick);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) addButton(5, "Go Camp", backToCamp);
@@ -677,7 +677,7 @@ private function changeGooDick():void {
 		if(player.hasItem(consumables.INCUBID)) addButton(0,"Incubi Draft",latexyEatsADickItem,consumables.INCUBID);
 		if(player.hasItem(consumables.MINOBLO)) addButton(1,"Mino Blood",latexyEatsADickItem,consumables.MINOBLO);
 	}
-	addButton(9,"Back",approachLatexy);
+	addButton(14,"Back",approachLatexy);
 }
 	
 private function latexyEatsADickItem(item:ItemType):void {
@@ -752,7 +752,7 @@ private function setLatexysBustSize():void {
 	if(gooTitClass(gooTitSize()) != 6) addButton(5,"Huge",changeLatexyTits,24);
 	if(gooTitClass(gooTitSize()) != 7) addButton(6,"Gigantic",changeLatexyTits,35);
 	if(flags[kFLAGS.GOO_PREFERRED_TIT_SIZE] != 0) addButton(7,"Whatever",changeLatexyTits,0);
-	addButton(9,"Back",approachLatexy);
+	addButton(14,"Back",approachLatexy);
 }
 private function gooTitClass(arg:int):int {
 	if(arg >= 35) return 7;
@@ -851,7 +851,7 @@ private function feedLatexy():void {
 	if(player.hasItem(consumables.MINOCUM)) addButton(5,"MinoCum Nic",minotaurCumFeedingGoo, true);
 	if(player.hasItem(consumables.MINOCUM)) addButton(6,"MinoCum Ruf",minotaurCumFeedingGoo, false);
 	
-	addButton(9,"Back",approachLatexy);
+	addButton(14,"Back",approachLatexy);
 }
 
 //Feed Cum Indirectly(F)

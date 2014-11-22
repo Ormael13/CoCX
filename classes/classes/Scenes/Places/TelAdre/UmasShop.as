@@ -213,7 +213,7 @@
 			}
 			
 			//addButton(4, "Train Loppe", trainLoppe); // Unfinished in the doc
-			addButton(9, "Leave", telAdre.telAdreMenu);
+			addButton(14, "Leave", telAdre.telAdreMenu);
 		}
 		
 		/**
@@ -925,7 +925,7 @@
 			addButton(1, "Sexuality", talkSexuality);
 			addButton(2, "Loppe", talkLoppe);
 			addButton(3, "Loppe's Dad", talkLoppesDad);
-			addButton(9, "Back", enterClinic, true);
+			addButton(14, "Back", enterClinic, true);
 		}
 		
 		/**
@@ -1581,7 +1581,7 @@
 				addButton(3, "Handjob", sexHandjob);
 				addButton(4, "Get Blown", sexGetABJFromDisMilfyLesboSlut);
 			}
-			addButton(9,"Back",buildCoreMenu);
+			addButton(14,"Back",buildCoreMenu);
 		}
 
 		/**

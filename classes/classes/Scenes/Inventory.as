@@ -1101,6 +1101,7 @@ public function doItems(eventNo:Number):void {
 			hideUpDown();
 			outputText("What storage slot do you wish to take an item from?", true);
 			choices(slotDescs[0], temp1, slotDescs[1], temp2, slotDescs[2], temp3, slotDescs[3], temp4, "", 0, slotDescs[4], temp5, slotDescs[5], temp6, slotDescs[6], temp7, slotDescs[7], temp8, "Back", camp.initiateStash);
+			
 			menuLoc = 7;
 		}
 		//Grab an item from the selected slot.
@@ -1259,7 +1260,7 @@ public function doItems(eventNo:Number):void {
 			{
 				addButton(2, "Accessory", unequipJewel);
 			}			
-			addButton(9, "Back", returnToItems);
+			addButton(14, "Back", returnToItems);
 			
 		}
 		//Unequip!
@@ -1546,7 +1547,7 @@ public function doItems(eventNo:Number):void {
 				if (type == 2) outputText("jewelry box", false);
 				outputText(".</b>", false);
 			}
-			addButton(9, "Back", camp.initiateStash);
+			addButton(14, "Back", camp.initiateStash);
 			if (type == 0) menuLoc = 21;
 			if (type == 1) menuLoc = 23;
 			if (type == 2) menuLoc = 35;

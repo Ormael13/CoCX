@@ -109,7 +109,7 @@ package classes.Scenes.Dungeons
 			addButton(1, consumables.SENSDRF.shortName, buyItem, 1);
 			addButton(2, consumables.REDUCTO.shortName, buyItem, 2);
 			addButton(3, weapons.SUCWHIP.shortName, buyItem, 3);
-			addButton(9, "Leave", roomEntrance);
+			addButton(14, "Leave", roomEntrance);
 		}		
 		
 		private function buyItem(item:Number = 0):void
@@ -118,7 +118,7 @@ package classes.Scenes.Dungeons
 			if (item == 0) incubusBuy(consumables.NUMBROX);
 			if (item == 1) incubusBuy(consumables.SENSDRF);
 			if (item == 2) incubusBuy(consumables.REDUCTO);
-			if (item == 3) incubusBuy(weapons.SUCWHIP);			
+			if (item == 3) incubusBuy(weapons.SUCWHIP);
 		}
 
 		public function incubusBuy(itype:ItemType):void {
@@ -1004,7 +1004,7 @@ package classes.Scenes.Dungeons
 			outputText("<b><u>The Cave Entrance</u></b>\n", true);
 			outputText("The entrance to this cave is far bigger than the cave itself.  It looks to be a totally natural formation.  Outside, to the south, is a veritable jungle of plant-life.  There are massive trees, vines, and ferns everywhere.  The cave grows narrower the further north you go, until it's little more than a claustrophobic tunnel burrowing deep into the earth.", false);
 			dungeons.setDungeonButtons(roomTunnel, null, null, null);
-			addButton(5, "Leave", exitDungeon);
+			addButton(11, "Leave", exitDungeon);
 			//Zetaz gone?  Alchemist shits!
 			if(flags[kFLAGS.DEFEATED_ZETAZ] > 0) {
 				if(flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] == 0) {

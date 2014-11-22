@@ -187,6 +187,7 @@ package classes
 		public static const DomFight:StatusAffectType = mk("domfight");
 		public static const DrankMinoCum:StatusAffectType = mk("drank mino cum");
 		public static const DrankMinoCum2:StatusAffectType = mk("drank mino cum2")
+		public static const Drunk:StatusAffectType = mk("Drunk");
 		public static const Earthshield:StatusAffectType = mk("Earthshield");
 		public static const Fear:StatusAffectType = mk("Fear");
 		public static const GenericRunDisabled:StatusAffectType = mk("Generic Run Disabled");

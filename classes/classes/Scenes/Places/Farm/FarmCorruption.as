@@ -387,7 +387,7 @@ package classes.Scenes.Places.Farm
 				addButton(3, getItemObj(kFLAGS.FARM_CONTRACEPTIVE_STORED).shortName, takeItems, kFLAGS.FARM_CONTRACEPTIVE_STORED);
 			}
 			
-			addButton(9, "Back", rootScene);
+			addButton(14, "Back", rootScene);
 		}
 		
 		private function getItemObj(flag:int):SimpleConsumable
@@ -885,7 +885,7 @@ package classes.Scenes.Places.Farm
 			if (loversAtFarm()) addButton(7, "Lovers", loversAtFarmMenu);
 			if (followersAtFarm()) addButton(8, "Followers", followersAtFarmMenu);
 			
-			addButton(9, "Leave", eventParser, 13);
+			addButton(14, "Leave", eventParser, 13);
 		}
 		
 		private function corruptingTheFarmExplore():void
@@ -897,7 +897,7 @@ package classes.Scenes.Places.Farm
 			
 			if (flags[kFLAGS.FARM_CORRUPTION_DAYS_SINCE_LAST_PAYOUT] >= 7 || flags[kFLAGS.FARM_SUCCUMILK_STORED] > 0 || flags[kFLAGS.FARM_INCUDRAFT_STORED] > 0 || flags[kFLAGS.FARM_EGG_STORED] > 0 || flags[kFLAGS.FARM_CONTRACEPTIVE_STORED] > 0) addButton(2, "Collect", collectTheGoodies);
 			
-			addButton(9, "Back", farmMenu);
+			addButton(14, "Back", farmMenu);
 		}
 		
 		public function collectionAvailable():Boolean
@@ -968,7 +968,7 @@ package classes.Scenes.Places.Farm
 			
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(5, flags[kFLAGS.MILK_NAME], kGAMECLASS.milkWaifu.milkyMenu);
 			
-			addButton(9, "Back", farmMenu);
+			addButton(14, "Back", farmMenu);
 		}
 		
 		private function numFollowersAtFarm():int
@@ -992,7 +992,7 @@ package classes.Scenes.Places.Farm
 			
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && !kGAMECLASS.sophieBimbo.bimboSophie()) addButton(0, "Sophie", kGAMECLASS.sophieFollowerScene.followerSophieMainScreen);
 			
-			addButton(9, "Back", farmMenu);
+			addButton(14, "Back", farmMenu);
 		}
 		
 		private function numLoversAtFarm():int
@@ -1020,7 +1020,7 @@ package classes.Scenes.Places.Farm
 			
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(1, "Isabella", kGAMECLASS.isabellaFollowerScene.callForFollowerIsabella);
 			
-			addButton(9, "Back", farmMenu);
+			addButton(14, "Back", farmMenu);
 		}
 
 		private function dogeNotCorruptYet():void
@@ -1209,10 +1209,10 @@ package classes.Scenes.Places.Farm
 			
 			if (availableInvestments()) addButton(2, "Investment", investmentMenu);
 
-			addButton(9, "Back", rootScene);
+			addButton(14, "Back", rootScene);
 
-			if (whitneyCorruption() <= 60 && flags[kFLAGS.WHITNEY_LEAVE_0_60] == 0) addButton(9, "Back", dogeNotCorruptLeaveFirstTime);
-			else if (whitneyCorruption() <= 90 && flags[kFLAGS.WHITNEY_LEAVE_61_90] == 0) addButton(9, "Back", dogeNotCorruptLeave6190);
+			if (whitneyCorruption() <= 60 && flags[kFLAGS.WHITNEY_LEAVE_0_60] == 0) addButton(14, "Back", dogeNotCorruptLeaveFirstTime);
+			else if (whitneyCorruption() <= 90 && flags[kFLAGS.WHITNEY_LEAVE_61_90] == 0) addButton(14, "Back", dogeNotCorruptLeave6190);
 		}
 		
 		public function availableInvestments():Boolean
@@ -1306,8 +1306,8 @@ package classes.Scenes.Places.Farm
 			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 0 && flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] == 0) addButton(3, "Contraceptive", investmentContraceptive);
 			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && kGAMECLASS.milkWaifu.milkSlave() && flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] == 0) addButton(4, "MilkTank", investmentMilktank);
 
-			if (!whitneyCorrupt()) addButton(9, "Back", dogeNotCorruptYetMenu);
-			else addButton(9, "Back", dogeCorruptedMissionComplete);
+			if (!whitneyCorrupt()) addButton(14, "Back", dogeNotCorruptYetMenu);
+			else addButton(14, "Back", dogeCorruptedMissionComplete);
 		}
 
 		private function investmentBreastMilker():void
@@ -1759,7 +1759,7 @@ package classes.Scenes.Places.Farm
 			if (whitneyDom()) addButton(3, "Pleasure", whitneyDomPleasure);
 			else addButton(3, "Pleasure", whitneySubPleasure);
 			orgyRoomRouter();
-			addButton(9, "Back", rootScene);
+			addButton(14, "Back", rootScene);
 		}
 
 		private function whitneySubPleasure():void
@@ -3431,7 +3431,7 @@ package classes.Scenes.Places.Farm
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1 && flags[kFLAGS.MILK_SIZE] == 0 && hasFreeTattooSlot("milky")) addButton(6, flags[kFLAGS.MILK_NAME], brandBigMilky);
 				}
 
-				addButton(9, "Back", dogeCorruptedMissionComplete);
+				addButton(14, "Back", dogeCorruptedMissionComplete);
 			}
 		}
 
@@ -3908,7 +3908,7 @@ package classes.Scenes.Places.Farm
 			if (player.hasCock() && whitneyMaxedOralTraining()) addButton(4, "Cocksucker", champCocksuckerTattoo, slot);
 			if (player.hasVagina() && whitneyMaxedOralTraining()) addButton(5, "Pussylicker", champPussylickerTattoo, slot);
 
-			addButton(9, "Back", brandSlotSelect);
+			addButton(14, "Back", brandSlotSelect);
 		}
 
 		public function amilyBrandSelect(slot:int):void
@@ -3925,7 +3925,7 @@ package classes.Scenes.Places.Farm
 			if (player.hasCock() && slot == 2) addButton(4, "Cock Here", amilyCockGoesHereTattoo, slot);
 			if (player.hasVagina()) addButton(5, "Mommy's Girl", amilyMommysGirlTattoo, slot);
 
-			addButton(9, "Back", amilyBrandSlotSelect);
+			addButton(14, "Back", amilyBrandSlotSelect);
 		}
 
 		public function jojoBrandSelect(slot:int):void
@@ -3942,7 +3942,7 @@ package classes.Scenes.Places.Farm
 			if (player.hasCock() && slot == 2) addButton(4, "Cock Here", jojoCockGoesHereTattoo, slot);
 			if (player.hasVagina()) addButton(5, "Mommy's Boy", jojoMommysBoyTattoo, slot);
 
-			addButton(9, "Back", jojoBrandSlotSelect);
+			addButton(14, "Back", jojoBrandSlotSelect);
 		}
 
 		public function bimboSophieBrandSelect(slot:int):void
@@ -3960,7 +3960,7 @@ package classes.Scenes.Places.Farm
 			if (slot == 3) addButton(5, "Wide Load", bimboSophieWideLoadTattoo, slot);
 			if (player.hasCock() && slot == 2) addButton(6, "Cock Goes Here", bimboSophieCockGoesHereTattoo, slot);
 
-			addButton(9, "Back", bimboSophieSlotSelect);
+			addButton(14, "Back", bimboSophieSlotSelect);
 		}
 
 		public function vapulaBrandSelect(slot:int):void
@@ -3977,7 +3977,7 @@ package classes.Scenes.Places.Farm
 			if (slot == 2 || slot == 3) addButton(4, "Buttslut", vapulaButtslutTattoo, slot);
 			if (!player.hasCock()) addButton(5, "Dildo Polisher", vapulaDildoPolisherTattoo, slot);
 
-			addButton(9, "Back", vapulaSlotSelect);
+			addButton(14, "Back", vapulaSlotSelect);
 		}
 
 		public function kellyBrandSelect(slot:int):void
@@ -3994,7 +3994,7 @@ package classes.Scenes.Places.Farm
 			if (silly()) addButton(4, "Dick Won", kellyDickWonTattoo, slot);
 			if (slot == 1) addButton(5, "Horseshoe", kellyHorseshoeTattoo, slot);
 
-			addButton(9, "Back", kellySlotSelect);
+			addButton(14, "Back", kellySlotSelect);
 		}
 
 		public function smallMilkyBrandSelect(slot:int):void
@@ -4012,7 +4012,7 @@ package classes.Scenes.Places.Farm
 			if (slot == 0) addButton(5, "Mega Milk", smallMilkyMegaMilkTattoo, slot);
 			if (slot == 0 && player.hasCock()) addButton(6, "Cock Cozy", smallMilkyCockCozyTattoo, slot);
 
-			addButton(9, "Back", smallMilkySlotSelect);
+			addButton(14, "Back", smallMilkySlotSelect);
 		}
 
 		public function bigMilkyBrandSelect(slot:int):void
@@ -4029,7 +4029,7 @@ package classes.Scenes.Places.Farm
 			if (slot == 0) addButton(4, "Mega Milk", bigMilkyMegaMilkTattoo, slot);
 			if (slot == 0 && player.hasCock()) addButton(5, "Cock Cozy", bigMilkyCockCozyTattoo, slot);
 
-			addButton(9, "Back", bigMilkySlotSelect);
+			addButton(14, "Back", bigMilkySlotSelect);
 		}
 
 		private function collarboneIntro():void

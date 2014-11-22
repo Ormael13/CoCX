@@ -281,8 +281,8 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 	
 	addButton(7, "Appearance", sophieBimboAppearance);
 
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(9, "Leave", camp.campSlavesMenu);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(14, "Leave", camp.campSlavesMenu);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
 //Appearance:
@@ -495,7 +495,7 @@ private function bimboSophieSexMenu():void {
 	}
 	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 && flags[kFLAGS.SOPHIE_FAMILY_INCEST] > 0 && player.cockThatFits(sophieCapacity()) >= 0 && player.hasCock())
 		addButton(8,"DaughterFuck",sophieFollowerScene.sophieIncestInHerCooterOrSomethingIDunno);
-	addButton(9,"Leave",approachBimboSophieInCamp);
+	addButton(14,"Leave",approachBimboSophieInCamp);
 }
 
 private function tellSophieToVisitIzma():void {

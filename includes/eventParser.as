@@ -740,6 +740,18 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				needNext = true;
 			}
 		}
+		if (player.findStatusAffect(StatusAffects.Drunk) >= 0) {
+			player.addStatusValue(StatusAffects.Drunk, 1, -1);
+			if(player.statusAffectv1(StatusAffects.Drunk) <= 0) {
+				outputText("\n<b>You finally sober up.</b>");
+				outputText("\n");
+				dynStats("str", player.statusAffectv3(StatusAffects.Drunk) * -0.1);
+				dynStats("inte", player.statusAffectv3(StatusAffects.Drunk) * 0.5);
+				dynStats("lib", player.statusAffectv3(StatusAffects.Drunk) * -0.25);
+				
+				player.removeStatusAffect(StatusAffects.Drunk);
+			}
+		}
 		//Update urta's PO timer - Now handled in Urta
 		//Update Amily's preggo counter - Now handled by amilyScene
 		//Update Amily's Jojo fixing counter - Now handled by amilyScene
@@ -1689,7 +1701,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//TURKEY SURPRISE
-		if((rand(5) == 0 && (model.time.hours == 18 || model.time.hours == 19)) && (date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && isThanksgiving() && player.gender > 0) {
+		if((rand(5) == 0 && (model.time.hours == 18 || model.time.hours == 19)) && (date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
 			datTurkeyRumpMeeting();
 			return true;
 		}

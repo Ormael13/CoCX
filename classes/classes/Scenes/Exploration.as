@@ -34,34 +34,39 @@ package classes.Scenes
 				return;
 			} else if (player.explored > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.", true);
 
-			if (flags[kFLAGS.EXPLORATION_PAGE] == 2) {
+			/*if (flags[kFLAGS.EXPLORATION_PAGE] == 2) {
 				explorePageII();
 				return;
-			}
+			}*/
 			menu();
 			addButton(0, "Explore", eventParser, 12);
 			if (player.exploredDesert > 0) addButton(1, "Desert", kGAMECLASS.desert.exploreDesert);
 			if (player.exploredForest > 0) addButton(2, "Forest", kGAMECLASS.forest.exploreForest);
 			if (player.exploredLake > 0) addButton(3, "Lake", kGAMECLASS.lake.exploreLake);
-			addButton(4, "Next", explorePageII);
+			
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(5, "Plains", kGAMECLASS.plains.explorePlains);
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp);
 			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(7, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods);
 			if (player.exploredMountain > 0) addButton(8, "Mountain", kGAMECLASS.mountain.exploreMountain);
-			addButton(9, "Back", eventParser, 1);
+			
+			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(10, "Bog", kGAMECLASS.bog.exploreBog);
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(11, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain);
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(12, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift);
+			//if (flags[kFLAGS.VOLCANIC_CRAG_EXPLORED] > 0) addButton(13, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag);
+			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
+			//addButton(4, "Next", explorePageII);
+			addButton(14, "Back", eventParser, 1);
 		}
 
 		private function explorePageII():void
 		{
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			menu();
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(0, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain);
-			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(1, "Bog", kGAMECLASS.bog.exploreBog);
-			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(2, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift);
-			//if (flags[kFLAGS.VOLCANIC_CRAG_EXPLORED] > 0) addButton(3, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag);
-			addButton(4, "Previous", goBackToPageI);
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(0, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift);
+			//if (flags[kFLAGS.VOLCANIC_CRAG_EXPLORED] > 0) addButton(1, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag);
 			if (debug) addButton(8, "Debug", exploreDebug.doExploreDebug);
-			addButton(9, "Back", eventParser, 1);
+			addButton(9, "Previous", goBackToPageI);
+			addButton(14, "Back", eventParser, 1);
 		}
 
 		private function goBackToPageI():void
