@@ -18,9 +18,12 @@
 			CoC.timeAwareClassAdd(this);
 		}
 		
+		private var checkedIsabella:int; //Make sure we test this event just once in timeChangeLarge
+		
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
+			checkedIsabella = 0;
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] > 0) { //Isabella is angry at the player
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260]--;
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] > 300) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 300;
@@ -43,7 +46,7 @@
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.findPerk(PerkLib.MarblesMilk) < 0) && player.shortestCockLength() <= 9) {
+			if (checkedIsabella++ == 0 && model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.findPerk(PerkLib.MarblesMilk) < 0) && player.shortestCockLength() <= 9) {
 				spriteSelect(31);
 				isabellaFollowerScene.isabellaMorningWakeupCall();
 				return true;
