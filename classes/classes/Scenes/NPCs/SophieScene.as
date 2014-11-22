@@ -16,12 +16,15 @@
 												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
 			CoC.timeAwareClassAdd(this);
 		}
-
+		
+		private var checkedSophie:int; //Make sure we test this event just once in timeChangeLarge
+		
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0) return false; //Nothing can happen if she's been kicked out or disappeared off into the mountains
 			var needNext:Boolean = false;
+			checkedSophie = 0;
 			pregnancy.pregnancyAdvance();
 			trace("\nSophie time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER]--;
@@ -110,7 +113,7 @@
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (model.time.hours == 6) {
+			if (checkedSophie++ == 0 && model.time.hours == 6) {
 				if (flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] >= 5 && !pregnancy.isPregnant && player.hasCock() && !sophieAtCamp()) {
 					sophieFollowerScene.sophieFollowerIntro();
 					return true;
