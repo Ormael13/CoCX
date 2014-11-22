@@ -4418,7 +4418,7 @@ public function handjobbiesFurrDemCatFurries():void
 	else outputText("  Not one to pass up a helpless young herm you " + (flags[kFLAGS.KATHERINE_UNLOCKED] < 1 ? "strip all Katherine’s clothes off.  You" : "") + " play with her tail, eventually growing bored and pushing the tip deep inside her pussy.");
 	outputText("\n\nNext you run your hand " + (isAt(KLOC_DESERT) ? cockMultiple("along her cock", "s along her cocks") : "over the wall") + ", collect some of her still warm spunk and offer it to her.  Kath’s rough tongue licks every drop from your hand while you think of all the things you’d like to do with her body.");
 	if (isAt(KLOC_DESERT))
-	outputText("\n\nWith training over for now you get Katherine to pack up her equipment and lead her back to Tel'Adre.  When you reach her alley Kath throws herself on the pile of softer scraps she's collected and says <i>“Please come back soon " + player.short + ", I'll do better next time.”</i>");
+		outputText("\n\nWith training over for now you get Katherine to pack up her equipment and lead her back to Tel'Adre.  When you reach her alley Kath throws herself on the pile of softer scraps she's collected and says <i>“Please come back soon " + player.short + ", I'll do better next time.”</i>");
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	dynStats("lus", 33);
