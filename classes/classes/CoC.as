@@ -367,8 +367,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.0";
-			version = ver + " (<b>Lethice's Stronghold</b>)";
+			ver = "0.9.1";
+			version = ver + " (<b>Lethice's Bugfixan</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
