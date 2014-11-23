@@ -10,7 +10,7 @@ package classes.Items.Consumables
 	public final class WingStick extends Consumable {
 		
 		public function WingStick() {
-			super("W.Stick", "Wingstick", "a wingstick", 16, "A tri-bladed throwing weapon.  Though good for only a single use, it's guaranteed to do high damage if it hits.  (Cost: 16) (DMG: 40-100)");
+			super("W.Stick", "Wingstick", "a wingstick", 16, "A tri-bladed throwing weapon.  Though good for only a single use, it's guaranteed to do high damage if it hits.  \n\nType: Weapon (Thrown) \nDamage: 40-100 \nBase value: 16");
 		}
 		
 		override public function canUse():Boolean {
@@ -18,12 +18,6 @@ package classes.Items.Consumables
 			outputText("There's no one to throw it at!");
 			return false;
 		}
-<<<<<<< HEAD
-
-		public function WingStick()
-		{
-			super("W.Stick","Wingstick","a wingstick",wingStick,16,"A tri-bladed throwing weapon.  Though good for only a single use, it's guaranteed to do high damage if it hits.  \n\nType: Weapon (Thrown) \nDamage: 40-100 \nBase value: 16");
-=======
 		
 		override public function useItem():void {
 			clearOutput();
@@ -39,7 +33,6 @@ package classes.Items.Consumables
 				game.monster.HP -= damage;
 				if (game.monster.HP < 0) game.monster.HP = 0;
 			}
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		}
 	}
 }

@@ -20,13 +20,5 @@ package classes.Items.Armors
 			super.playerRemove();
 			return game.armors.LEATHRA;
 		}
-
-/*
-		override protected function unequipReturnItem(player:Player,output:Boolean):ItemType
-		{
-			outputText("You have your old set of " + game.armors.LEATHRA.longName + " left over.  ");
-			return game.armors.LEATHRA;
-		}
-*/
 	}
 }

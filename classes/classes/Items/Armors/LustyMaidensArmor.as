@@ -14,7 +14,7 @@ package classes.Items.Armors
 	public final class LustyMaidensArmor extends Armor {
 		
 		public function LustyMaidensArmor() {
-			super("LMArmor", "LMArmor", "lusty maiden's armor", "a bikini-like set of armor that could only belong to a lusty maiden", 6, 400, "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\"", "Light");
+			super("LMArmor", "LMArmor", "lusty maiden's armor", "a bikini-like set of armor that could only belong to a lusty maiden", 6, 400, "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\" \n\nType: Light armor \nDefense: Varies \nBase value: 400 \nSpecial: Slutty Seduction and unlocks certain titfuck scenes. \nRequirements: breast size of at least DD-cups and be a female.", "Light");
 		}
 		
 		override public function get def():Number {
@@ -136,39 +136,5 @@ package classes.Items.Armors
 				game.cleanupAfterCombat();
 			else game.doNext(game.camp.returnToCampUseOneHour);
 		}
-
-/*
-		override public function equipEffect(wearer:Player, output:Boolean):void
-		{
-			if(wearer.lib < 50) game.dynStats("lib", 1, "sen", 1);
-			/*Stats: Virgin - 9, Non-Virgin - 5
-
-			//NONVIRGIN:
-			if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk("Slutty Seduction",6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
-			//VIRGIN:
-			if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk("Slutty Seduction",10,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
-			Special Bonus: Every time you use the special titfuck scene, you gain two defense and 2 tease damage up to a max of 8.  Every night you lose half your bonus (minimum 1).
-			Min lust: 30
-			Min libido: 50*/
-/*			if(wearer.hasVirginVagina()) {
-				while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
-				wearer.createPerk(PerkLib.SluttySeduction,10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
-			}
-			else {
-				while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
-				if(wearer.findPerk(PerkLib.SluttySeduction) < 0) wearer.createPerk(PerkLib.SluttySeduction,6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
-			}
-		}
-
-		override public function unequipEffect(wearer:Player, output:Boolean):void
-		{
-<<<<<<< HEAD
-			super("LMArmor","LMArmor","lusty maiden's armor",
-					"a bikini-like set of armor that could only belong to a lusty maiden",6,400,"This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\ \n\nType: Light armor \nDefense: Varies \nBase value: 400 \nSpecial: Slutty Seduction and unlocks certain titfuck scenes. \nRequirements: breast size of at least DD-cups and be a female.","Light");
-=======
-			while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
-		}
-*/
 	}
 }

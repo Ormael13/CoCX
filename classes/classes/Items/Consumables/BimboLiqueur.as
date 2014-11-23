@@ -12,7 +12,7 @@ package classes.Items.Consumables
 	public class BimboLiqueur extends Consumable {
 		
 		public function BimboLiqueur() {
-			super("BimboLq", "BimboLq", "a potent bottle of 'Bimbo Liqueur'", 1000, "This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care.");
+			super("BimboLq", "BimboLq", "a potent bottle of 'Bimbo Liqueur'", 1000, "This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care. \n\nType: Rare Item \nBase value: 1,000");
 		}
 		
 		override public function canUse():Boolean {
@@ -187,16 +187,7 @@ package classes.Items.Consumables
 				//Brain
 				//Max int - 50
 			}
-<<<<<<< HEAD
-			player.genderCheck();
-		}
-
-		public function BimboLiqueur()
-		{
-			super("BimboLq", "BimboLq", "a potent bottle of 'Bimbo Liqueur'", bimboLiquer, 1000,"This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care. \n\nType: Rare Item \nBase value: 1,000");
-=======
 			game.player.genderCheck();
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		}
 	}
 }

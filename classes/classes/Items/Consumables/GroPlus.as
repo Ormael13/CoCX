@@ -12,7 +12,7 @@ package classes.Items.Consumables
 	public final class GroPlus extends Consumable {
 		
 		public function GroPlus() {
-			super("GroPlus", "GroPlus", "a needle filled with Gro+", 50, "This is a small needle with a reservoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious.");
+			super("GroPlus", "GroPlus", "a needle filled with Gro+", 50, "This is a small needle with a reservoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious. \n\nType: Consumable \nBase value: 50");
 		}
 
 		override public function canUse():Boolean {

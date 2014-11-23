@@ -12,7 +12,7 @@ package classes.Items.Consumables
 	public final class Reducto extends Consumable {
 		
 		public function Reducto() {
-			super("Reducto", "Reducto", "a salve marked as 'Reducto'", 30, "This container full of paste can be used to shrink a body part down by a significant amount.");
+			super("Reducto", "Reducto", "a salve marked as 'Reducto'", 30, "This container full of paste can be used to shrink a body part down by a significant amount. \n\nType: Consumable \nBase value: 30");
 		}
 
 		override public function canUse():Boolean {

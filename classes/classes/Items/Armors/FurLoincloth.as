@@ -9,16 +9,14 @@ package classes.Items.Armors
 
 	public final class FurLoincloth extends Armor
 	{
-
-
-		override public function get description():String
-		{
-			return "A pair of loincloths to cover your crotch and " + game.player.buttDescript() + ".  Typically worn by people named 'Conan'. \n\nType: Clothing \nDefense: 0 \nBase value: 100"
-		}
-
 		public function FurLoincloth()
 		{
 			super("FurLoin","FurLoin","revealing fur loincloths","a front and back set of loincloths",0,100,"A pair of loincloths to cover your crotch and butt.  Typically worn by people named 'Conan'. \n\nType: Clothing \nDefense: 0 \nBase value: 100","Light");
+		}
+		
+		override public function get description():String
+		{
+			return "A pair of loincloths to cover your crotch and " + game.player.buttDescript() + ".  Typically worn by people named 'Conan'. \n\nType: Clothing \nDefense: 0 \nBase value: 100"
 		}
 	}
 }

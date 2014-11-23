@@ -11,7 +11,7 @@ package classes.Items.Weapons
 	public class LargeHammer extends Weapon {
 		
 		public function LargeHammer() {
-			super("L.Hammr", "L.Hammr", "large hammer", "Marble's large hammer", "smash", 16, 90, "This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.", "Large");
+			super("L.Hammr", "L.Hammr", "large hammer", "Marble's large hammer", "smash", 16, 90, "This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances. \n\nType: Weapon (Heavy) \nAttack: 16 \nBase value: 90 \nRequires height of 5'0\".", "Large");
 		}
 		
 		override public function canUse():Boolean {
@@ -20,27 +20,5 @@ package classes.Items.Weapons
 			return false;
 		}
 		
-/*
-		override public function canUse(player:Player, printReason:Boolean):Boolean
-		{
-			if (player.tallness < 60){
-				if (printReason) {
-					clearOutput();
-					outputText("This hammer is too large for you to wield effectively.  ");
-				}
-				return false;
-			} else {
-				return true;
-			}
-		}
-<<<<<<< HEAD
-
-		public function LargeHammer()
-		{
-			super("L.Hammr","L.Hammr","large hammer","Marble's large hammer","smash",16,90,"This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances. \n\nType: Weapon (Heavy) \nAttack: 16 \nBase value: 90 \nRequires height of 5'0\".","Large");
-		}
-=======
-*/
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	}
 }

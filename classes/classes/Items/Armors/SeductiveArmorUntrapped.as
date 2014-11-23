@@ -9,7 +9,7 @@ package classes.Items.Armors
 	public class SeductiveArmorUntrapped extends ArmorWithPerk
 	{
 		
-		override public function equipEffect(player:Player, output:Boolean):void
+		override public function useText():void
 		{
 			if(output) {
 				outputText("\n\nYou are relieved to find out that this armor is not trapped.");
