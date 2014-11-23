@@ -70,7 +70,7 @@
 				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] = 30;
 			}
 			//Lower daughter population by 1 every fourth day once population gets high
-			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 40 && model.time.days % 4 == 0) {
+			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 40 && model.time.hours > 23 && model.time.days % 4 == 0) {
 				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS]--;
 			}
 			return false;
