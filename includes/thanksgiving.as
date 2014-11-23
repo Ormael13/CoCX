@@ -82,7 +82,7 @@ public function letZeTurkeyApproach():void {
 public function noThanksTurkeyGal():void {
 	clearOutput();
 	outputText("You reluctantly push her away.  You've no need to ram your dick down some new monstrosity's gullet.  The girl forlornly gobbles one last time, then prances off into the fading evening light, globular ass jiggling.");
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 //Baste Her -McGirt, reluctantly
 public function basteThatTurkeyBooty():void {
@@ -106,7 +106,7 @@ public function basteThatTurkeyBooty():void {
 	outputText("\n\nThe turkey-girl smiles at you and flops onto her back, spreading her meaty thighs to give you a good look at the trimmed red bush between her legs, and the glistening slit of her vagina.  It looks like she wants some stuffing....");
 	player.orgasm();
 	dynStats("sen", -1);
-	simpleChoices("Stuff Her",3803,"",0,"",0,"",0,"That'll Do",3805);
+	simpleChoices("Stuff Her", stuffDatTurkeyWithSpoo, "", null, "", null, "", null, "That'll Do", thatllDoTurkey);
 }
 
 //Stuff Her -McGirt, this is awful by the way.
@@ -141,7 +141,7 @@ public function stuffDatTurkeyWithSpoo():void {
 	dynStats("sen", -1);
 	if(flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0) {
 		outputText("\n\nAs you lay atop the turkey, you hear a faint, almost pleading, \"<i>Gobble?</i>\"  from her. Furrowing your brow, you pick yourself up to look at the cum-slathered turkey.  As soon as you're off her, she rolls over onto her hands and knees, her big bubble butt sticking up in the air for you, her plume of feathers tickling your cheeks.  She... still wants more?</i>\"");
-		simpleChoices("Spit-Roast",3804,"",0,"",0,"",0,"That's Enough",3805);
+		simpleChoices("Spit-Roast", spitRoastThatTurkey, "", null, "", null, "", null, "That's Enough", thatllDoTurkey);
 	}
 	else doNext(thatllDoTurkey);
 }
@@ -187,7 +187,7 @@ public function thatllDoTurkey():void {
 		player.createPerk(PerkLib.PilgrimsBounty,0,0,0,0);
 		outputText("\n\n(<b>Perk Gained: Pilgrim's Bounty - Lower lust values no longer reduce the size of your orgasm.</b>)");
 	}
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //Let her Approach:
@@ -303,7 +303,7 @@ public function haveTurkeyGirlDesertInYourCunt():void {
 	//HP set to full, fatigue to 0?
 	fatigue(-100);
 	HPChange(3000,false);
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //Turkey Girl II: Return of the Cockgobbler (Cockwielders)
@@ -483,7 +483,7 @@ public function turkeyDesertBitches():void {
 	
 	outputText("\n\n“<i>That’ll do, turkey,</i>” you say, patting her jiggling tit and scrapign soem of the excess gravy out of your lunch.  “<i>That’ll do.</i>”");
 	player.orgasm();
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 //Ham Roast: Getting All Up In A Honey Pot (Female and Genderless only)
@@ -730,5 +730,5 @@ public function getDoneEatingOutPigSlut():void {
 	outputText("\n\nYou sigh");
 	if(changed) outputText(", feeling your body expand as you waddle out back towards camp with belly full of sweet syrup");
 	outputText(". For only one gem, that was a pretty good time...");
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }

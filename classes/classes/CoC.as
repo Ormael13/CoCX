@@ -94,7 +94,7 @@
 		include "../../includes/debug.as";
 		
 		include "../../includes/combat.as";
-		include "../../includes/doEvent.as";
+//No longer needed. This file has been chopped up and spread throughout the codebase:		include "../../includes/doEvent.as";
 		include "../../includes/eventParser.as";
 		
 
@@ -124,14 +124,16 @@
 		//Any classes that need to be aware of the passage of time can add themselves to this array using timeAwareAdd.
 		//	Once in the array they will be notified as each hour passes, allowing them to update actions, lactation, pregnancy, etc.
 		private static var _timeAwareClassList:Vector.<TimeAwareInterface> = new Vector.<TimeAwareInterface>(); //Accessed by goNext function in eventParser
-	
+		private static var timeAwareLargeLastEntry:int = -1; //Used by the eventParser in calling timeAwareLarge
+		private var playerEvent:PlayerEvents;
+		
 		public static function timeAwareClassAdd(newEntry:TimeAwareInterface):void { _timeAwareClassList.push(newEntry); }
-	
+		
 		// /
 		private var _perkLib:PerkLib = new PerkLib();// to init the static
 		private var _statusAffects:StatusAffects = new StatusAffects();// to init the static
 		public var charCreation:CharCreation = new CharCreation();
-		public var saves:Saves = new Saves();
+		public var saves:Saves = new Saves(gameStateDirectGet, gameStateDirectSet);
 		// Items/
 		public var mutations:Mutations = new Mutations();
 		public var consumables:ConsumableLib = new ConsumableLib();
@@ -143,7 +145,7 @@
 		// Scenes/
 		public var camp:Camp = new Camp();
 		public var exploration:Exploration = new Exploration();
-		public var inventory:Inventory = new Inventory();
+		public var inventory:Inventory = new Inventory(saves);
 		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
@@ -273,13 +275,17 @@
 		public var player2:Player;
 		public var tempPerk:PerkClass;
 		public var monster:Monster;
-		public var itemSwapping:Boolean;
+//No longer used:		public var itemSwapping:Boolean;
 		public var flags:DefaultDict;
+<<<<<<< HEAD
 		public var achievements:DefaultDict;
 		public var gameState:Number;
+=======
+		private var gameState:int;
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		public var menuLoc:Number;
-		public var itemSubMenu:Boolean;
-		public var supressGoNext:Boolean = false;
+//No longer used:		public var itemSubMenu:Boolean;
+//No longer used:		public var supressGoNext:Boolean = false;
 		public var time :TimeModel;
 		public var currentText:String;
 
@@ -291,10 +297,14 @@
 		public var whitney:Number;
 		public var monk:Number;
 		public var sand:Number;
+<<<<<<< HEAD
 		public var giacomo:Number; //Deprecated
+=======
+		public var giacomo:int;
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		public var beeProgress:Number;
-		public var itemStorage:Array;
-		public var gearStorage:Array;
+//Now in Inventory.as		public var itemStorage:Array;
+//Now in Inventory.as		public var gearStorage:Array;
 		public var temp:int;
 		public var args:Array;
 		public var funcs:Array;
@@ -305,8 +315,20 @@
 		public var testingBlockExiting:Boolean;
 
 		public var kFLAGS_REF:*;
+<<<<<<< HEAD
 		public var kACHIEVEMENTS_REF:*;
 
+=======
+		
+		public function get inCombat():Boolean { return gameState == 1; }
+		
+		public function set inCombat(value:Boolean):void { gameState = (value ? 1 : 0); }
+		
+		private function gameStateDirectGet():int { return gameState; }
+		
+		private function gameStateDirectSet(value:int):void { gameState = value; }
+		
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		public function rand(max:int):int
 		{
 			return Utils.rand(max);
@@ -373,8 +395,13 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
+<<<<<<< HEAD
 			ver = "0.9.0_mod_1.0_indev_20141122";
 			version = ver + " (<b>Ingnam</b>)";
+=======
+			ver = "0.9.1";
+			version = ver + " (<b>Lethice's Bugfixan</b>)";
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -398,6 +425,7 @@
 			player = new Player();
 			model.player = player;
 			player2 = new Player();
+			playerEvent = new PlayerEvents();
 
 			//Used in perk selection, mainly eventParser, input and engineCore
 			tempPerk = null;
@@ -413,7 +441,7 @@
 			//{ region StateVariables
 
 			//User all over the place whenever items come up
-			itemSwapping = false;
+//No longer used:			itemSwapping = false;
 
 			//The extreme flag state array. This needs to go. Holds information about everything, whether it be certain attacks for NPCs 
 			//or state information to do with the game. 
@@ -429,11 +457,11 @@
 			//1 = in combat
 			//2 = in combat in grapple
 			//3 = at start or game over screen
-			//4 = at giacomo
-			//5 = getting succubi potion
-			//6 = at alchemist choices.
-			//7 = item duuuuump
-			//8 = worked at farm
+//GameState 4 eliminated			//4 = at giacomo
+//GameState 5 eliminated			//5 = getting succubi potion
+//GameState 6 eliminated			//6 = at alchemist choices.
+//GameState 7 eliminated			//7 = item duuuuump
+//GameState 8 eliminated			//8 = worked at farm
 			gameState = 0;
 
 			//Another state variable used for menu display used everywhere
@@ -442,30 +470,30 @@
 			//1 - items menu - no heat statuses when leaving it in combat
 			//2 - needs to add an hour after grabbing item
 			//3 - In tease menu - no heat statuses when leaving it.
-			//8 - Find Farm Pepper - 2 hours wait
-			//9 - Armor shop
-			//10- Tailor shop
-			//11- Midsleep loot
-			//12 - lumi potions
-			//13 - lumi enhancements
-			//14 - late night receive item
-			//15 - Weapon shop in TelAdra
-			//16 - Incubus Shop
-			//17 - 4 hours wait
-			//18 - 8 hours wait
-			//19 - Bakery!
-			//20 - weapon rack stuffing
-			//21 - weapon rack taking
-			//24 - Niamh booze
-			//25 - Owca Shop
-			//26 - Benoit Shop
-			//27 - Chicken Harpy Shop
-			//28 - Items menu
+//MenuLoc 8 eliminated			//8 - Find Farm Pepper - 2 hours wait
+//MenuLoc 9 eliminated			//9 - Armor shop
+//MenuLoc 10 eliminated			//10- Tailor shop
+//MenuLoc 11 eliminated			//11- Midsleep loot
+//MenuLoc 12 eliminated			//12 - lumi potions
+//MenuLoc 13 eliminated			//13 - lumi enhancements
+//MenuLoc 14 eliminated			//14 - late night receive item
+//MenuLoc 15 eliminated			//15 - Weapon shop in TelAdra
+//MenuLoc 16 eliminated			//16 - Incubus Shop
+//MenuLoc 17 eliminated			//17 - 4 hours wait
+//MenuLoc 18 eliminated			//18 - 8 hours wait
+//MenuLoc 19 eliminated			//19 - Bakery!
+//MenuLoc 20 eliminated			//20 - weapon rack stuffing
+//MenuLoc 21 eliminated			//21 - weapon rack taking
+//MenuLoc 24 eliminated			//24 - Niamh booze
+//MenuLoc 25 eliminated			//25 - Owca Shop
+//MenuLoc 26 eliminated			//26 - Benoit Shop
+//MenuLoc 27 eliminated			//27 - Chicken Harpy Shop
+//MenuLoc 28 eliminated			//28 - Items menu
 			menuLoc = 0;
 
 			//State variable used to indicate whether inside an item submenu
 			//The item sub menu
-			itemSubMenu = false;
+//			itemSubMenu = false;
 			//} endregion 
 
 			/**
@@ -506,8 +534,8 @@
 			giacomo = 0;
 			beeProgress = 0;
 
-			itemStorage = [];
-			gearStorage = [];
+//			itemStorage = [];
+//			gearStorage = [];
 			//}endregion
 
 

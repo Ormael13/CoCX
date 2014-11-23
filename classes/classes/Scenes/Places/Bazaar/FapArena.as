@@ -37,7 +37,7 @@ public function fapArenaGOOOO():void {
 		//, or consider buying products in our local shop.</i>\"\n\n", false);
 		//outputText("She redirects you to a small stall near the entrance with various potions stored on shelves.  A poster placed on it reads: "Your dick must qualify to the house's standards.  80 gems for a vial of Gro+, 80 for the session of your life!"
 		//Do you buy products? (Yes/No) //Yes gives you a vial of Gro+, No does nothing. In both cases, the PC is redirected to the Bazaar.
-		doNext(2855);
+		doNext(bazaar.enterTheBazaar);
 		return;
 	}
 	//[if dick size >= 8 inches: 1st time] 
@@ -71,7 +71,7 @@ public function fapArenaGOOOO():void {
 		else outputText("By gods, what are you doing here?", false);
 		//end of condition about PC's corr
 		outputText("\n\nDo you stay?", false);
-		doYesNo(fapArenaPageII,2855);
+		doYesNo(fapArenaPageII, bazaar.enterTheBazaar);
 	}
 	//[if dick size > 8 inches: after first time] 
 	else {
@@ -408,20 +408,19 @@ private function fapResults(place:Number = 3):void {
 		}
 		flags[kFLAGS.FAP_ARENA_VICTORIES]++;
 		player.orgasm();
-		menuLoc = 2;
-		inventory.takeItem(itype);
+		inventory.takeItem(itype, camp.returnToCampUseOneHour);
 	}
 	//[if you didn't win]
 	else if(place == 2) {
 		outputText("You awkwardly remove the dick from your ass and start dressing yourself.  Before you go, the cute little referee waves at you, her coy smile and nude body somehow awakening " + sMultiCockDesc() + " again.  Ye Gods, it never ends.  \"<i>I hope you enjoyed this session. Better luck next time...</i>\"", false);
 		player.orgasm();
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//[if you lost]
 	else {
 		outputText("You awkwardly remove the dick from your ass, start cleaning yourself from all the dirt and cum before leaving the tent.  Before you go, the nude referee approaches you and gently squeezes your " + cockDescript(x) + "; you still wince from the pounding it took earlier.  \"<i>Awww, looks like you had a rough time, didn't you?  Well, it happens sometimes.  Hopefully you will get better at this.  See you next game!</i>\"", false);
 		player.orgasm();
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	
 }

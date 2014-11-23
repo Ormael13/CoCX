@@ -673,10 +673,10 @@ package classes.Scenes.NPCs
 				//Normal male: -requires dick of area < 36
 				if (player.cockTotal() > 0) cockRape = rapeAnemoneWithDick;
 				if (player.hasVagina()) vaginaRape = rapeAnemoneWithPussy;
-				simpleChoices("Your ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "", 0, "Leave", 13);
+				simpleChoices("Your ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "", 0, "Leave", camp.returnToCampUseOneHour);
 				return;
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //anal
@@ -1102,7 +1102,20 @@ package classes.Scenes.NPCs
 
 
 //KID A FOLLOWER STUFF
-//tion camp
+		public function anemoneBarrelDescription():void {
+			if (model.time.hours < 6) //(morning)
+				outputText("Kid A is sleeping in her barrel right now.");
+			else if (model.time.hours <= 10)
+				outputText("Kid A stands next to her barrel, refilling it from one of your waterskins.  A second full skin is slung over her shoulder.  She gives you a grin.\n\n");
+			else if (flags[kFLAGS.KID_SITTER] > 1)
+				outputText("Kid A is absent from her barrel right now, dragooned into babysitting again.\n\n");
+			else if (model.time.hours < 16) //(midday)
+				outputText("Kid A is deep in her barrel with the lid on top, hiding from the midday sun.\n\n");
+			else if (model.time.hours < 22) //(night hours)
+				outputText("Kid A is peeking out of her barrel.  Whenever you make eye contact she breaks into a smile; otherwise she just stares off into the distance, relaxing.\n\n");
+			else outputText("Kid A is here, seated demurely on the rim of her barrel and looking somewhat more purple under the red moon.  She glances slyly at you from time to time.\n\n");
+		}
+
 //[Barrel] button in [Stash] menu (appears whenever Kidswag flag >= 1)
 		public function approachAnemoneBarrel():void
 		{
@@ -1159,7 +1172,11 @@ package classes.Scenes.NPCs
 				}
 
 			}
+<<<<<<< HEAD
 			addButton(14, "Back", eventParser, camp.initiateStash);
+=======
+			addButton(9, "Back", camp.stash);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		}
 
 //[Item](only appears if hourssinceKiditem flag >= 16)
@@ -1217,8 +1234,7 @@ package classes.Scenes.NPCs
 			outputText(itype.longName + ".");
 			if (itype == weapons.L__AXE) outputText("  Holy... how did she drag this thing home!?");
 			outputText("\n\n");
-			menuLoc = 0;
-			inventory.takeItem(itype);
+			inventory.takeItem(itype, camp.campMenu);
 			//(set hourssinceKiditem = 0)
 			flags[kFLAGS.KID_ITEM_FIND_HOURS] = 0;
 		}
@@ -1229,12 +1245,6 @@ package classes.Scenes.NPCs
 			clearOutput();
 			spriteSelect(71);
 			outputText("What do you want to give her?");
-			var temp2:Function = null;
-			var temp1:Function = null;
-			var temp3:Function = null;
-			var temp4:Function = null;
-			var temp5:Function = null;
-			var bonus:Number = 0;
 			function giveableToAnemone(itemSlot:ItemSlotClass):Boolean{
 				return itemSlot.quantity>0 &&
 						(itemSlot.itype == consumables.W__BOOK ||
@@ -1243,18 +1253,16 @@ package classes.Scenes.NPCs
 								itemSlot.itype is Weapon);
 			}
 			kGAMECLASS.hideUpDown();
-			if (giveableToAnemone(player.itemSlot1))
-				temp1 = createCallBackFunction(placeInAnemone,1);
-			if (giveableToAnemone(player.itemSlot2))
-				temp2 = createCallBackFunction(placeInAnemone,2);
-			if (giveableToAnemone(player.itemSlot3))
-				temp3 = createCallBackFunction(placeInAnemone,3);
-			if (player.itemSlot4.unlocked && giveableToAnemone(player.itemSlot4))
-				temp4 = createCallBackFunction(placeInAnemone,4);
-			if (player.itemSlot5.unlocked && giveableToAnemone(player.itemSlot5))
-				temp5 = createCallBackFunction(placeInAnemone,5);
-			if (temp1 == null && temp2 == null && temp3 == null && temp4 == null && temp5 == null) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>", false);
-			choices((player.itemSlot1.itype.shortName + " x" + player.itemSlot1.quantity), temp1, (player.itemSlot2.itype.shortName + " x" + player.itemSlot2.quantity), temp2, (player.itemSlot3.itype.shortName + " x" + player.itemSlot3.quantity), temp3, (player.itemSlot4.itype.shortName + " x" + player.itemSlot4.quantity), temp4, (player.itemSlot5.itype.shortName + " x" + player.itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
+			menu();
+			var foundItem:Boolean = false;
+			for (var x:int = 0; x < 5; x++) {
+				if (giveableToAnemone(player.itemSlots[x])) {
+					addButton(x, (player.itemSlots[x].shortName + " x" + player.itemSlots[x].quantity), placeInAnemone, x + 1);
+					foundItem = true;
+				}
+			}
+			if (!foundItem) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>");
+			addButton(9, "Back", camp.stash);
 		}
 
 		public function placeInAnemone(slot:Number = 1):void
@@ -1297,8 +1305,7 @@ package classes.Scenes.NPCs
 				outputText("Your anemone daughter will not be able to guard you at night without a weapon.  If you want her to guard, you'll need to give her a new weapon and tell her to watch at night again.  ");
 				flags[kFLAGS.ANEMONE_WATCH] = 0;
 			}
-			menuLoc = 0;
-			inventory.takeItem(itype);
+			inventory.takeItem(itype, camp.campMenu);
 			//(add weapon to inventory, then revert Kidweapon to empty)
 			flags[kFLAGS.ANEMONE_WEAPON_ID] = 0;
 		}
@@ -1333,7 +1340,7 @@ package classes.Scenes.NPCs
 			//(if lust > 99, output)
 			if (player.lust > 99) {
 				outputText("You're way too horny to focus on any sort of weapon instruction right now, and the anemone can see it in your expression as your gaze wanders over her body; she blushes a deep blue and shrinks into her barrel with a shy glance.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			outputText("The anemone obediently climbs out of her barrel, ");
@@ -1493,7 +1500,7 @@ package classes.Scenes.NPCs
 				outputText("\nYour bleary eyes open to a familiar-looking upside-down blue face.  It takes a minute before your brain can reconstruct the events preceding your lapse in consciousness; as soon as your expression gives a hint of understanding, Kid A sheepishly greets you.");
 				outputText("\n\n\"<i>Um... hi.</i>\"");
 				//(lose 8 hours, restore HP amount consonant with 8hrs rest)
-				doNext(16);
+				doNext(camp.returnToCampUseEightHours);
 				player.createStatusAffect(StatusAffects.PostAnemoneBeatdown, 0, 0, 0, 0);
 				return;
 			}
@@ -1510,14 +1517,14 @@ package classes.Scenes.NPCs
 
 					outputText("\n\nAppearing to reach a decision, she reaches out and pats you apologetically on the head, then stands up and heads back to her barrel.");
 					//no effect on lust, pass 1 hour
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 				}
 			}
 			//else if no HP or lust outcome triggered: pass 1 hour, gain 40 xp, increment fatigue by 10
 			else {
 				if (player.level < 10) player.XP += 30;
 				fatigue(10);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -1558,7 +1565,7 @@ package classes.Scenes.NPCs
 				player.orgasm();
 				dynStats("lus", 30);
 				if (flags[kFLAGS.ANEMONE_KID] < 3) flags[kFLAGS.ANEMONE_KID] = 3;
-				doNext(14);
+				doNext(camp.returnToCampUseTwoHours);
 				return true;
 			}
 			//sex revisited, for when KidXP >= 40 and confidence is mounting
@@ -1641,7 +1648,7 @@ package classes.Scenes.NPCs
 				//lose 100 lust, pass 2 hr, if Kidswag = 1, set Kidswag = 2
 				player.orgasm();
 				if (flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
-				doNext(14);
+				doNext(camp.returnToCampUseTwoHours);
 				return true;
 			}
 			//femsex
@@ -1670,7 +1677,7 @@ package classes.Scenes.NPCs
 				player.slimeFeed();
 				player.orgasm();
 				if (flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
-				doNext(16);
+				doNext(camp.returnToCampUseEightHours);
 				return true;
 			}
 			return false;
@@ -1699,7 +1706,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nThe two girls continue to greet each other in this fashion as their attention shifts away from you, and you wonder exactly what kind of pernicious meme you've inflicted on the anemone community.");
 			//set Kidswag to -1, pass 1 hour
 			flags[kFLAGS.ANEMONE_KID] = -1;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //dreams: possible once KidXP >= 40; function as visible notice of sex-readiness
@@ -1742,7 +1749,7 @@ package classes.Scenes.NPCs
 				outputText("  Sighing, you turn over and attempt to return to sleep despite the pervading smell of semen.");
 			}
 			dynStats("lus", 50 + player.sens / 2, "resisted", false);
-			doNext(1);
+			doNext(camp.campMenu);
 		}
 
 //Kid-and-kid interaction scenes:
@@ -1809,7 +1816,7 @@ package classes.Scenes.NPCs
 			}
 			//(else)
 			else outputText("\n\nThe anemone doesn't hesitate, but bursts into the middle of the shark-girls like a bomb, shrieking and making huge splashes, scattering them in multiple directions.  She quickly scoops up both skins' worth of water and then runs, giggling giddily with the shark-girls dogging her heels until she's halfway back to camp.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 

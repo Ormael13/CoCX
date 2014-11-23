@@ -36,7 +36,7 @@ package classes.Scenes.Areas
 			if ((player.level >= 5 || player.exploredMountain >= 40) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] == 0) {
 				outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)", true);
 				flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			if (isHolidays()) {
@@ -191,7 +191,7 @@ package classes.Scenes.Areas
 						outputText("You stumble in your attempt to escape and realize that you are completely helpless.  The minotaur towers over you and heaves his ax for a <i>coup de grace</i>.  As he readies the blow, another beast-man slams into him from the side.  The two of them begin to fight for the honor of raping you, giving you the opening you need to escape.  You quietly sneak away while they fight – perhaps you should avoid the mountains for now?\n\n", false);
 					}
 					player.createStatusAffect(StatusAffects.TF2, 0, 0, 0, 0);
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				//Mino gangbang
@@ -242,7 +242,7 @@ package classes.Scenes.Areas
 					outputText("She bellows, almost moaning, as the minotaur grabs her cushiony ass-cheeks with both massive hands. Her tail raises to expose a glistening wet snatch, its lips already parted with desire. She moos again as his rapidly hardening bull-cock brushes her crotch. You can't tear your eyes away as he positions himself, his flaring, mushroom-like cock-head eliciting another moan as it pushes against her nether lips.\n\n", false);
 					outputText("With a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings. She screams in half pain, half ecstasy and pushes back, hungry for his full length. After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.\n\n", false);
 					outputText("The pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess. To you it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise. She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits. He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.", false);
-					doNext(2190);
+					doNext(continueMinoVoyeurism);
 					return;
 				}
 				//Cum addictus interruptus!  LOL HARRY POTTERFAG
@@ -251,6 +251,7 @@ package classes.Scenes.Areas
 					minotaurScene.minoAddictionFuck();
 					return;
 				}
+<<<<<<< HEAD
 				//Rare Minotaur Lord
 				if (rand(5) == 0 && player.level >= 10) {
 					outputText("Minding your own business, you walk along the winding paths.  You take your time to enjoy the view until you see a shadow approaching you.  You turn around to see a minotaur!  However, he is much bigger than the other minotaurs you've seen.  You estimate him to be eleven feet tall and he's wielding a chain-whip.  He's intent on raping you!", true);
@@ -258,6 +259,9 @@ package classes.Scenes.Areas
 					return;
 				}
 				eventParser(2008);
+=======
+				minotaurScene.getRapedByMinotaur(true);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 				spriteSelect(44);
 			}
 			//Worms
@@ -273,7 +277,7 @@ package classes.Scenes.Areas
 							outputText("During your hike into the mountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.", true);
 							dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
 						}
-						doNext(13);
+						doNext(camp.returnToCampUseOneHour);
 						return;
 					}
 					eventParser(5052);
@@ -289,7 +293,7 @@ package classes.Scenes.Areas
 							outputText("During your hike into the mountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.", true);
 							dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
 						}
-						doNext(13);
+						doNext(camp.returnToCampUseOneHour);
 					}
 					else {
 						kGAMECLASS.wormToggle();
@@ -440,8 +444,7 @@ package classes.Scenes.Areas
 			}
 			//(Acquired minotaur cum!)
 			model.time.hours++;
-			menuLoc = 2;
-			inventory.takeItem(consumables.MINOCUM);
+			inventory.takeItem(consumables.MINOCUM, camp.returnToCampUseOneHour);
 		}
 
 		private function watchAMinoCumSlut():void
@@ -464,7 +467,26 @@ package classes.Scenes.Areas
 			outputText("\n\nAs you look at the two cum-covered creatures laying there in their exhausted sex-induced stupors, the minotaur's thick horse-cock now slowly deflating, you realize that you've been touching yourself.  You make yourself stop in disgust.");
 			outputText("\n\nOnly now do you notice other faces peeking over ledges and ridges.  You count at least two goblins and one imp who quickly pull back.  From the sounds, they were busy getting themselves off.  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			dynStats("lus", 25);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function continueMinoVoyeurism():void {
+			outputText("They go at it for nearly an hour, oblivious to you watching them, before their intensity heightens as they near orgasm. The results are almost explosive, both of them crying out as they begin twitching uncontrollably. Clinging desperately to the cow-girl's ass, the minotaur pumps so much cum into her depths that it begins spurting out. This accidental lubrication releases his grip and the pair collapse to the ground. Yet the minotaur isn't finished, his man-milk spraying into the air almost like his still-erect dick is a hose and splattering down onto both of them.\n\n", true);
+			outputText("As you look at the two cum-covered creatures laying their in their exhausted sex-induced stupors, the minotaur's thick horse-cock now slowly deflating, you realize that you've been touching yourself.  You make yourself stop ", false);
+			//[low corruption]
+			if (player.cor < 33)
+				outputText("in disgust.", false);
+			else if (player.cor < 66)
+				outputText("in confusion.", false);
+			else
+				outputText("reluctantly.", false);
+			outputText("\n\nOnly now do you notice other faces peeking over ledges and ridges. You count at least two goblins and one imp who quickly pull back. From the sounds, they were busy getting themselves off.", false);
+			//[if first appearance of this event]
+			if (player.statusAffectv1(StatusAffects.MinoPlusCowgirl) == 0)
+				outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.", false);
+			//Lust!
+			dynStats("lus", 5 + player.lib / 20 + player.minoScore() + player.cowScore());
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

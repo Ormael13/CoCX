@@ -91,5 +91,17 @@ package classes.internals
 			}
 			return error;
 		}
+		
+		public static function formatStringArray(stringList:Array):String { //Changes an array of values into "1", "1 and 2" or "1, (x, )y and z"
+			switch (stringList.length) {
+				case  0: return "";
+				case  1: return stringList[0];
+				case  2: return stringList[0] + " and " + stringList[1];
+				default:
+			}
+			var concat:String = stringList[0];
+			for (var x:int = 1; x < stringList.length - 1; x++) concat += ", " + stringList[x];
+			return concat + " and " + stringList[stringList.length - 1];
+		}
 	}
 }

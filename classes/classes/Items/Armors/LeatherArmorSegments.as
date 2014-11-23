@@ -7,18 +7,26 @@ package classes.Items.Armors
 	import classes.Items.Armor;
 	import classes.Player;
 
-	public class LeatherArmorSegments extends Armor
-	{
+	public class LeatherArmorSegments extends Armor {
+		
+		public function LeatherArmorSegments() {
+			super("UrtaLta", "UrtaLta", "leather armor segments", "leather armor segments", 5, 76, null, "Light", true);
+		}
+		override public function removeText():void {
+			outputText("You have your old set of " + game.armors.LEATHRA.longName + " left over.  ");
+		}
+		
+		override public function playerRemove():Armor {
+			super.playerRemove();
+			return game.armors.LEATHRA;
+		}
 
+/*
 		override protected function unequipReturnItem(player:Player,output:Boolean):ItemType
 		{
 			outputText("You have your old set of " + game.armors.LEATHRA.longName + " left over.  ");
 			return game.armors.LEATHRA;
 		}
-
-		public function LeatherArmorSegments()
-		{
-			super("UrtaLta","UrtaLta","leather armor segments","leather armor segments",5,76,null,"Light");
-		}
+*/
 	}
 }

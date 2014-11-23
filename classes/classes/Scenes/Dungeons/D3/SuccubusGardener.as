@@ -4,6 +4,7 @@
 	import classes.Monster;
 	import classes.StatusAffects;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kFLAGS;
 	
 	/**
 	 * ...
@@ -18,7 +19,7 @@
 			this.short = "succubus gardener";
 			this.long = "This succubus has everything you would expect from one of her kind: a bust that would drive women wild with jealousy, hips that could melt a preacher's conviction, an ass so perfectly rounded that it seems designed to be cupped, and a smoldering visage that simultaneously entices whilst wearing a domineering grin. Her raven hair cascades around ram horns that gleam like polished ivory, and her red eyes greedily drink in your every motion. What clothing she wears is only designed to enhance her rampant sexuality, somehow making her look more naked than if she actually were.\n\nBehind her, the shrubbery itself has come to life, revealing corded vines with inhuman strength, some capped with oozing, phallus-like tips. A few are as thick as your arm and tipped with gasping, swollen lips or violet, blooming pussies. Others still bear no ornamentation at all. There is little rhyme or reason to the mass of vegetation: only a theme of rampant, overgrown sexuality encouraged to an obscene degree.";
 			
-			this.createVagina();
+			this.createVagina(false, 3, 3);
 			this.createBreastRow(Appearance.breastCupInverse("FF"));
 			
 			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
@@ -219,6 +220,7 @@
 				player.addStatusValue(StatusAffects.Tentagrappled, 1, 1);
 				player.takeDamage(75 + rand(15));
 				game.dynStats("lus+", 3 + rand(3));
+				if (flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus+", 5);
 				combatRoundOver();
 			}
 		}
@@ -267,7 +269,7 @@
 			{
 				var sL:Number = player.lust;
 				game.dynStats("lus+", damage);
-				sL = player.lust - sL;
+				sL = Math.round(player.lust - sL);
 				outputText(" The sinuous plant-based tentacles lash at you like a dozen tiny whips! Preparing for stinging pain, you're somewhat taken aback when they pull back at the last moment, sensually caressing your most sensitive places! (" + sL + ")");
 			}
 			else

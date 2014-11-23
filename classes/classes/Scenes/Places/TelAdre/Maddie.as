@@ -39,15 +39,16 @@ private function followMinotaurIntoBackroom():void {
 		else outputText("You blush when you realize what he must be using for cream filling.", false);
 		//[Give Them] [Leave]
 		if(player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT)) simpleChoices("Give Them",handOverIngredientsItBeBakingTimeYo,"",0,"",0,"",0,"Leave",nopeAintGotNoneODemSpeculIngredimathings);
-		else simpleChoices("",0,"",0,"",0,"",0,"Leave",13);	
+		else simpleChoices("", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00241] = 1;
 	}
 	//(Explained) 
 	else {
 		outputText("You follow the burly chef through the door, winding through the familiar ovens.  By the time you reach his work area, you're both covered in a fine sheen of sweat and you find yourself responding to the minotaur musk unconsciously.  The strange chef turns to ask, \"<i>You have special ingredients now, yes?</i>\"", false);
 		//[Yes] [Lie – No/Not Yet]
-		if(player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT)) simpleChoices("Yes",2934,"Lie - No",2933,"",0,"",0,"",0);
-		else simpleChoices("No",nopeAintGotNoneODemSpeculIngredimathings,"",0,"",0,"",0,"",0);
+		if (player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT))
+			simpleChoices("Yes", handOverIngredientsItBeBakingTimeYo, "Lie - No", nopeAintGotNoneODemSpeculIngredimathings, "", null, "", null, "", null);
+		else simpleChoices("No", nopeAintGotNoneODemSpeculIngredimathings, "", null, "", null, "", null, "", null);
 	}
 }
 
@@ -88,7 +89,7 @@ private function sneakAwayFromMaddie():void {
 	outputText("You get out before he can find you again.  Whatever he's making is nothing you ever want to taste.", false);
 	//(No more mino chef)
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = -2;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Wait/Next]
 private function waitForSlutCake():void {
@@ -121,7 +122,7 @@ private function runAwayFromMaddiiiieee():void {
 	outputText("", true);
 	outputText("You turn tail to run, evacuating the room before that culinary catastrophe can have her way with you.  A high-pitched whine chases you away as the cupcake-girl cries, \"<i>Nooooo... come back!  I'm making so much filling for you!</i>\"  Her words lend you even greater speed, and you vacate the city in record time.\n\n", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = -1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Followup to run away]
 public function runAwayMaddieFollowup():void {
@@ -228,7 +229,7 @@ private function talkToMaddie():void {
 		outputText(player.modTone(0,10), false);  
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = 3;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Next visit to the bakery...]

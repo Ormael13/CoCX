@@ -534,7 +534,7 @@ public function katherineGreeting():void {
 	flags[kFLAGS.KATHERINE_BALL_SIZE] = 1; */
 	//Player can now encounter Katherine by using the Back Alley button at the Pawn Shop
 	flags[kFLAGS.KATHERINE_UNLOCKED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Seeing Katherine
@@ -2821,7 +2821,7 @@ public function penetrateKatsVag():void {
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //PC Penetrates Kath: Anal
@@ -2897,7 +2897,7 @@ public function pcPenetratesKatAnally():void {
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_RECEIVE_ANAL);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function pcPenetratesKatDoubly():void {
@@ -3048,7 +3048,7 @@ private function pcPenetratesKatDoublyNormalEnd():void {
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function pcPenetratesKatDoublyHighCumCorrupt():void {
@@ -3105,7 +3105,7 @@ private function pcPenetratesKatDoublyHighCumCorrupt():void {
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Suck 'n' Fuck (unavailable if knot > 4")
@@ -3187,7 +3187,7 @@ public function suckNFuck():void {
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_RECEIVE_SUCK_N_FUCK);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Get Penetrated
@@ -3322,7 +3322,7 @@ public function letKatKnotYourCuntPussyFuck():void {
 	player.slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_GIVE_VAGINAL);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Get Penetrated (Anal)
@@ -3408,7 +3408,7 @@ public function getPenetrated():void {
 	player.slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_GIVE_ANAL);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Get Penetrated (Double)
@@ -3480,7 +3480,7 @@ public function getDoublePennedByKat():void {
 	dynStats("sen", -2);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_GIVE_DOUBLE_PEN);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Sucked 'n' Fucked
@@ -3564,7 +3564,7 @@ public function suckedNFuckedByKat():void {
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_GIVE_SUCK_N_FUCK);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Oral
@@ -3773,7 +3773,7 @@ public function giveKatOralPenisWingWang():void {
 	experience(KBIT_TRIED_RECEIVE_ORAL);
 	player.slimeFeed();
 	dynStats("lus", 25);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Katherine performs Oral on PC:
@@ -3801,7 +3801,7 @@ private function katherineGoesDownOnTheGirlsOhYahBabyLesbo():void {
 	outputText("Your pleasure finished, you release her, gasping for breath as she daintly wipes her face clean with her fingers.  “<i>Was it good for you?</i>” she asks, mischief in her eyes.  When you reply, she smirks.  “<i>Did you expect a pussy to be good at eating a pussy?</i>”\n\n");
 
 	outputText("You simply groan at the absolutely terrible pun and get back up, redressing yourself and heading back into the streets after a quick peck to thank her for the time.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	player.orgasm();
 }
@@ -3842,7 +3842,7 @@ private function katherineLicksAllTheBoyPenises():void {
 	//lust -100 regardless of sex, return to wherever
 	player.orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Double Helix
@@ -3978,7 +3978,7 @@ private function katDoubleHelixCraziness():void {
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_DOUBLE_HELIX);
 	dynStats("lib", -1, "sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Suckle
@@ -4036,7 +4036,7 @@ private function suckleTacularKats():void {
 	dynStats("sen", -2, "lus", -40);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	player.milked();
-	doNext(13);	
+	doNext(camp.returnToCampUseOneHour);	
 }
 
 //With Quiet Browser and Adjatha’s permission I have been working on finishing Katherine’s Employment Expansion so that it can be coded into CoC. This document covers a part of that. It has been mentioned before that meeting Katherine is quite complex. Many have suggested having an alternate recruitment route. Since I’m writing even more content for Kath I decided to tackle the recruitment route too.
@@ -4182,7 +4182,7 @@ private function helpKathAfterInterruptu():void
 	outputText("\n\nYou stride out of the alley, hoping that you’ll meet Katherine again.");
 	//[Next]
 	//Proceed to normal Tel’Adre menu
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Leave:
@@ -4400,7 +4400,7 @@ public function handjobbiesFurrDemCatFurries():void
 		outputText("tip of her hot shaft.  A few strokes and you’ve spread her copious precum over most of her cock.  While one hand pleasures her prick the other goes lower, slipping " + (flags[kFLAGS.KATHERINE_UNLOCKED] < 1 ? "under her belt and into her pants." : "into her moist snatch."));
 		outputText("\n\nThe heat is intense and Kath’s " + knotAdj() + " knot swells at your ministrations.  Kath’s hips jerk forward, looking for a pussy to pack it into.");
 	}
-	outputText("\n\nKath’s next moan comes from the bottom of her lungs.  Thanks to you she’s already horny and now you decide to overload her senses.  You fingers " + (hasBalls() ? "cup her balls" : "tease her clit") + " for just a moment before slipping into her dripping cunt.");
+	outputText("\n\nKath’s next moan comes from the bottom of her lungs.  Thanks to you she’s already horny and now you decide to overload her senses.  You fingers " + (hasBalls() ? "cup her balls" : "tease her clit") + " for just a moment before slipping " + (cockNumber < 2 ? "back " : "") + "into her dripping cunt.");
 	outputText("\n\nHer head tilts back, and she tries to find your mouth with her own.  As your tongues entwine, you begin to slide your fingers in and out of her slit, making sure to rub hard against her tiny nub.  Your other hand ");
 	if (cockNumber > 1) {
 		outputText("works up and down her " + cockAdj() + "shafts, alternating from one to the other.  Soon you can feel them both twitching, ready to fire their loads into a pair of fertile pussies.");
@@ -4410,20 +4410,26 @@ public function handjobbiesFurrDemCatFurries():void
 		outputText("works up and down her " + cockAdj() + "shaft.  Soon you can feel it twitching, ready to fire its load into a fertile pussy.");
 		outputText("\n\nYou aim Katherine’s dick");
 	}
-	outputText(" at the wall.  You pull your fingers from her pussy and rub her wetness over " + (hasBalls() ? "her fuzzy balls" : "her growing knot") + ".  Pulling your head back you tell Kath to cum for you.  She gasps and you feel " + (hasBalls() ? "that " + ballAdj() + " ballsack contract" : "her cock" + cockMultiple("", "s") + " twitch and harden") + " as Kath lets loose with who knows how much pent up cum.");
-	outputText("\n\nYou’re not done with her yet.  As the first shot splatters against the " + (isAt(KLOC_KATHS_APT) ? "plaster" : "brickwork") + " you slip your fingers back to her cunt and attack her clit.  Despite already being in the midst of one orgasm, Kath’s body tenses up even more.  It feels like a cup of water gushes from her pussy and the next blast from her cock" + cockMultiple("", "s") + " is even stronger, hitting the wall a good six inches higher than the first.");
+	outputText(" at the " + (isAt(KLOC_DESERT) ? "ground" : "wall") + ".  You pull your fingers from her pussy and rub her wetness over " + (hasBalls() ? "her fuzzy balls" : "her growing knot") + ".  Pulling your head back you tell Kath to cum for you.  She gasps and you feel " + (hasBalls() ? "that " + ballAdj() + " ballsack contract" : "her cock" + cockMultiple("", "s") + " twitch and harden") + " as Kath lets loose with who knows how much pent up cum.");
+	outputText("\n\nYou’re not done with her yet.  As the first shot splatters against the ");
+	if (isAt(KLOC_DESERT))
+		outputText((model.time.hours <= 18 ? "hot" : "cool") + " sand");
+	else outputText(isAt(KLOC_KATHS_APT) ? "plaster" : "brickwork");
+	outputText(" you slip your fingers back to her cunt and attack her clit.  Despite already being in the midst of one orgasm, Kath’s body tenses up even more.  It feels like a cup of water gushes from her pussy and the next blast from her cock" + cockMultiple("", "s") + " is even stronger, " + (isAt(KLOC_DESERT) ? "arcing a good six inches further " : "hitting the wall a good six inches higher") + " than the first.");
 
 	outputText("\n\nKath turns to liquid in your arms as several more orgasms wash over her like the aftershocks of an earthquake.  All she can do is look up into your eyes and smile.");
 	if (player.cor < 25) outputText(" You hold her in your arms while she recovers.  You really enjoy seeing the happiness and contentment in her face.");
 	else if (player.cor < 75) outputText(" While you wait for her to recover you pull her shirt up and play with her breasts a bit more.  By the time she can move again her nipples are sticking out like little berries.  She blushes, but clearly enjoys the attention.");
 	else outputText("  Not one to pass up a helpless young herm you " + (flags[kFLAGS.KATHERINE_UNLOCKED] < 1 ? "strip all Katherine’s clothes off.  You" : "") + " play with her tail, eventually growing bored and pushing the tip deep inside her pussy.");
-	outputText("\n\nNext you run your hand over the wall, collect a handful of her still warm spunk and offer it to her.  Kath’s rough tongue licks every drop from your hand while you think of all the things you’d like to do with her body.");
+	outputText("\n\nNext you run your hand " + (isAt(KLOC_DESERT) ? cockMultiple("along her cock", "s along her cocks") : "over the wall") + ", collect some of her still warm spunk and offer it to her.  Kath’s rough tongue licks every drop from your hand while you think of all the things you’d like to do with her body.");
+	if (isAt(KLOC_DESERT))
+		outputText("\n\nWith training over for now you get Katherine to pack up her equipment and lead her back to Tel'Adre.  When you reach her alley Kath throws herself on the pile of softer scraps she's collected and says <i>“Please come back soon " + player.short + ", I'll do better next time.”</i>");
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	dynStats("lus", 33);
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] == - 1) 
 		doNext(firstTimeWithKatherinePartTwoUltraChampionshipEditionHyperTurbo);
-	else doNext(13);
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //First Time with Katherine (Part 2):
@@ -4458,7 +4464,7 @@ private function firstTimeWithKatherinePartTwoUltraChampionshipEditionHyperTurbo
 	flags[kFLAGS.KATHERINE_BALL_SIZE] = 1; */
 	
 	outputText("\n\n(<b>Katherine can now be encountered behind Oswald's!</b>)");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function bathTime():void {
@@ -4515,7 +4521,7 @@ private function bathTimeCentaurRide():void {
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function bathTimeCentaurPenetrated():void {
@@ -4564,7 +4570,7 @@ private function bathTimeCentaurPenetrated():void {
 	fatigue(15); //Some extra fatigue for dragging your girlfriend's ass halfway home
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function bathTimeFuckKath():void {
@@ -4646,7 +4652,7 @@ private function bathTimeFuckKath():void {
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function bathTimePenetrated():void {
@@ -4726,7 +4732,7 @@ private function bathTimePenetrated():void {
 		orgasm();
 		flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 		experience(KBIT_TRIED_BATH);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	else { //Female or Herm
 		outputText("\n\nIn response you roll your hips so that Kath’s " + cockMultiple("", "uppermost ") + " cock sinks into your folds.  She purrs and tries to drive her shaft deeper but you hold her still and smile at her.  You fully intend to take the reigns on this little outing and Kath is going to have to fall in line.\n\n");
@@ -4786,7 +4792,7 @@ private function bathTimePenetratedNormalEnd():void {
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function bathTimePenetratedDenial():void {
@@ -4821,7 +4827,7 @@ private function bathTimePenetratedDenial():void {
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);
 	addSubmissive(KBIT_SUB_ORGASM_DENIAL);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function bedroomBondage():void {
@@ -4992,7 +4998,7 @@ private function bedroomBondage():void {
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	addSubmissive(KBIT_SUB_BED_BOND);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function drunkFuck():void {
@@ -5109,7 +5115,7 @@ private function drunkFuck():void {
 	player.orgasm();
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Leave 'dese

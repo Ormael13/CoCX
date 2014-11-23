@@ -1,5 +1,6 @@
 package classes.Scenes.Dungeons.D3 
 {
+	import classes.Items.WeaponLib;
 	import classes.Monster;
 	import classes.StatusAffects;
 	import classes.PerkLib;
@@ -163,7 +164,8 @@ package classes.Scenes.Dungeons.D3
 				this.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
-				player.weapon.unequip(player,false,true);
+				player.setWeapon(WeaponLib.FISTS);
+//				player.weapon.unequip(player,false,true);
 			}
 		}
 		

@@ -39,7 +39,7 @@ public function exploreShowers():void {
 private function leaveShowers():void {
 	outputText("", true);
 	outputText("You shake your head.  You've had enough of a workout for the day, and you remember you're in a land where curiosity almost certainly kills (well, more thoroughly rapes) the cat.  You leave the room and continue to search for the showers, eventually finding them and heading back to camp.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function useTheSexMachine():void {
@@ -257,7 +257,7 @@ private function useTheSexMachine():void {
 	}
 	fatigue(10);
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	}
 }

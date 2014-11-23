@@ -16,12 +16,15 @@
 												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
 			CoC.timeAwareClassAdd(this);
 		}
-
+		
+		private var checkedSophie:int; //Make sure we test this event just once in timeChangeLarge
+		
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0) return false; //Nothing can happen if she's been kicked out or disappeared off into the mountains
 			var needNext:Boolean = false;
+			checkedSophie = 0;
 			pregnancy.pregnancyAdvance();
 			trace("\nSophie time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER]--;
@@ -110,7 +113,7 @@
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (model.time.hours == 6) {
+			if (checkedSophie++ == 0 && model.time.hours == 6) {
 				if (flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] >= 5 && !pregnancy.isPregnant && player.hasCock() && !sophieAtCamp()) {
 					sophieFollowerScene.sophieFollowerIntro();
 					return true;
@@ -318,7 +321,7 @@ public function meetSophieRepeat():void {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and warns, \"<i>Cutey, a " + player.mf("neuter","girl") + " like you doesn't belong up here.  The younger harpies don't really get the idea of conversation and see you as competition.</i>\"\n\n", false);
 			
 			outputText("Do you see the wisdom of her words and climb back down the mountain, fight Sophie, or keep climbing?", false);
-			simpleChoices("Fight Sophie",FirstTimeSophieForceSex,"Keep Climbing",PCIgnoresSophieAndHarpyIsFought,"",0,"",0,"Leave",13);
+			simpleChoices("Fight Sophie",FirstTimeSophieForceSex,"Keep Climbing",PCIgnoresSophieAndHarpyIsFought,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 			return;
 		}
 		//(LACTATE)
@@ -331,7 +334,7 @@ public function meetSophieRepeat():void {
 			return;
 		}
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	outputText("SOMETHING SCREWY HAPPENED IN SOPHIE'S MEETING", true);
 	return;
 }
@@ -378,7 +381,7 @@ private function sophieLookingForDemons():void {
 	//Otherwise leave.
 	else {
 		outputText("  You gulp and nod, understanding quite clearly that the harpies don't care for demons in their nesting grounds.  Sophie smiles and turns about, fluffing purple-tinted tail-feathers at you in what is clearly a dismissal.", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	outputText("\"<i>Mmmm, have you gotten bored of the talk, ", false);
@@ -396,7 +399,7 @@ private function shootDownSophieSex():void {
 	sophieBimbo.sophieSprite();
 	outputText("", true);
 	outputText("Sophie pouts for a moment, leaning forward to better display her cleavage. \"<i>Really?  Well if you change your mind, come back and visit me.</i>\"  She turns around and fluffs her tail-feathers at you in what is clearly a dismissal.  You climb down, careful to avoid any other nests as you head back to check on your camp and its portal.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	if(player.lib > 25) dynStats("lib", -1);
 	if(player.lust > 50) dynStats("lus", -5);
 }
@@ -413,10 +416,10 @@ private function sophieMeetingChoseSex():void {
 		if(player.hasVagina()) {
 			outputText("  What do you do?", false);
 			//[Stay&Sex] [Leave]
-			simpleChoices("Force Sex",FirstTimeSophieForceSex,"Leave",13,"",0,"",0,"",0);
+			simpleChoices("Force Sex",FirstTimeSophieForceSex,"Leave",camp.returnToCampUseOneHour,"",0,"",0,"",0);
 			return;
 		}
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//(Haz dick (male futa)) 
@@ -466,7 +469,7 @@ private function sophieMeetingGotLost():void {
 		dynStats("lus", (10+player.lib/4));
 		if(player.inte < 50) dynStats("int", 1);
 		//[Go to camp if neither of the above]
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 	
@@ -481,7 +484,7 @@ private function tellSophieYoureForagingForStuff():void {
 	//(+10 + libmod lust, +1 int up to 50 int))
 	dynStats("lus", (10+player.lib/4));
 	if(player.inte < 50) dynStats("int", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //[Harpy Breastfeeding]
@@ -490,7 +493,7 @@ private function cramANippleInIt():void {
 	player.boostLactation(.01);
 	outputText("", true);
 	//Not a combat win
-	if(gameState != 1 && gameState != 2) outputText("Sophie steps back and drops onto her knees, balancing herself with her wings.   You pull your " + player.armorName + " open with deliberate slowness, exposing your " + allBreastsDescript() + " one at a time.  Sophie licks her lips as she patiently awaits the sharing of your bounty.\n\n", false);
+	if (!getGame().inCombat) outputText("Sophie steps back and drops onto her knees, balancing herself with her wings.   You pull your " + player.armorName + " open with deliberate slowness, exposing your " + allBreastsDescript() + " one at a time.  Sophie licks her lips as she patiently awaits the sharing of your bounty.\n\n", false);
 	//COMBAT
 	else {
 		//(Lust Win)
@@ -547,7 +550,7 @@ private function cramANippleInIt():void {
 	else if(player.biggestLactation() >= 2) outputText("a satisfied burp.", false);
 	else outputText("a satisfied 'ahhh'.", false);
 	outputText("  She wipes a bit of milk from her lips and says, \"<i>", false);
-	if(gameState == 1 || gameState == 2) {
+	if (getGame().inCombat) {
 		//(Fought HP won:
 		if(monster.HP < 1) outputText("You know you don't have to beat me up to get me to drink your milk right? It's too delicious to turn down!</i>\"\n\n", false);
 		//(Fought Lust won:
@@ -584,8 +587,9 @@ private function cramANippleInIt():void {
 	dynStats("lus", -50);
 	//increment times bfed.
 	flags[kFLAGS.BREASTFEAD_SOPHIE_COUNTER]++;
-	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 	//You've now been milked, reset the timer for that
 	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
 		player.addStatusValue(StatusAffects.Feeder,1,1);
@@ -604,7 +608,7 @@ private function consensualHotSophieDickings():void {
 		CoC_Settings.error("");
 		outputText("ERROR: No cock found that fits, yet 'fits' scene was called.", true);
 		doNext(1);
-		gameState = 0;
+		getGame().inCombat = false;
 		return;
 	}
 	else if(x > player.cocks.length-1) 
@@ -612,7 +616,7 @@ private function consensualHotSophieDickings():void {
 		CoC_Settings.error("");
 		outputText("ERROR: Cock above max cocks selected for Sophie sex.  Please report bug on fen's bug report forum.", true);
 		doNext(1);
-		gameState = 0;
+		getGame().inCombat = false;
 		return;
 	}
 
@@ -757,7 +761,7 @@ private function postSophieSexSnuggle():void {
 	dynStats("lib", 1, "sen", 1);
 	
 	//4 hours pass
-	doNext(15);
+	doNext(camp.returnToCampUseFourHours);
 }
 
 //[No]
@@ -767,7 +771,7 @@ private function postSexSophieSnuggleTurnedDown():void {
 	outputText("You turn down her offer and assure her that you'll be fine.  Sophie giggles while you try to get dressed, and you see her amber eyes watching you as try to climb back down the mountain with a stiffy.  She seems greatly amused by your predicament.", false);
 	//(+sensitivity, +libido
 	dynStats("lib", 1, "sen", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //[Consentual Sex No Fito]

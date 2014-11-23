@@ -85,7 +85,7 @@ package classes.Scenes.NPCs {
 		//While on her Purification Route, Marble’s Presents will always be LaBova
 		//Once Marble is purified, the "get presents" option reverts to its default options.
 		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 1;
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 
 	//PC Gives P.Labova
@@ -132,7 +132,7 @@ package classes.Scenes.NPCs {
 		 	outputText(" nipples begin spray milk everywhere - you have to take a step back to avoid being squirted yourself. Finally, Marble’s breasts stop their spraying, leaving the two of you standing in a milky puddle of mud. The cowgirl pulls her shirt back on over her body. \"<i>That stuff still tastes vile, but I guess it’s worth it. I just hope it finishes working soon.</i>\" she tells you. You assure her that you believe in her ability to get through this, and then head back to the main part of your camp.");
 		}
 		flags[kFLAGS.TIMES_GIVEN_MARBLE_PURE_LABOVA]++;
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	
 	
@@ -180,7 +180,7 @@ package classes.Scenes.NPCs {
 	 	flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 3;
 	 	flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] = 24;
 	 	
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 
 	//Rathazul’s Report
@@ -212,7 +212,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nWith that said, the three of you finish your meals.  Rathazul shambles off to get some much-needed sleep.  Marble prepares for her morning training, and you prepare yourself for another day in Mareth.");
 		//Marble now has the "Go" option in her buttons when interacting with her through the "followers" menu
 		//The "Go" button links to the same "Go" scene as choosing "Go" when Rathazul first makes his report
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//[=Go=]
 	public function murbleShouldGoRunAlongAndGetHerCuntySisterSoTheyCanBeCuntsTogether():void
@@ -225,7 +225,7 @@ package classes.Scenes.NPCs {
 		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 4;
 		flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] = 240;
 		flags[kFLAGS.SLEEP_WITH] = "";
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	
 	//Clara Appears in Camp
@@ -1351,12 +1351,12 @@ package classes.Scenes.NPCs {
 		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 5;
 		flags[kFLAGS.MARBLE_PURIFIED] = 1;
 		player.changeStatusValue(StatusAffects.Marble,4,10);
-		gameState = 0;
+		getGame().inCombat = false;
 		player.clearStatuses(false);
 		//Marble's breast size is set to 0 (integer, 0=DD cups, 1=G cups, 2=HH, 3=J)
 		//advance time of day by 4 hours
 		//end event
-		doNext(15);
+		doNext(camp.returnToCampUseFourHours);
 	}
 
 	//Purified Succubus milk
@@ -1367,8 +1367,8 @@ package classes.Scenes.NPCs {
 	 	outputText("Do you want to ask Marble to grow her breasts bigger?");
 		//PC chooses yes or no
 		menu();
-		addButton(0,"Yes",actuallyGrowPureMarblesTittiesForFunzies);
-		addButton(1,"No",eventParser,2128);
+		addButton(0, "Yes", actuallyGrowPureMarblesTittiesForFunzies);
+		addButton(1, "No", marbleScene.giveItem);
 	}
 	//if yes
 	public function actuallyGrowPureMarblesTittiesForFunzies():void
@@ -1407,7 +1407,7 @@ package classes.Scenes.NPCs {
 		 	outputText("\n\n\"<i>Sorry sweetie,</i>\" she says handing the bottle back to you, \"<i>I think my breasts are big enough as they are.</i>\"");
 			//no effect
 		}
-		doNext(2128);
+		doNext(marbleScene.giveItem);
 	}
 
 	//Reducto
@@ -1417,8 +1417,8 @@ package classes.Scenes.NPCs {
 		clearOutput();
 	 	outputText("Do you want to ask Marble to shrink her breasts down?");
 		menu();
-		addButton(0,"Yes",pureMurblePCChoosesYesToShrinkeyTits);
-		addButton(1,"No",eventParser,2128);
+		addButton(0, "Yes", pureMurblePCChoosesYesToShrinkeyTits);
+		addButton(1, "No", marbleScene.giveItem);
 	}
 
 	//if yes
@@ -1455,7 +1455,7 @@ package classes.Scenes.NPCs {
 		{
 		 	outputText("\n\n\"<i>What?  Sweetie, I'm already so tiny, I'm afraid I couldn't bring myself to get any smaller.  Sorry.</i>\"  She hands you back the jar of reducto.");
 		}
-		doNext(2128);
+		doNext(marbleScene.giveItem);
 	}
 
 	//Lactaid
@@ -1470,7 +1470,7 @@ package classes.Scenes.NPCs {
 		flags[kFLAGS.MARBLE_LUST] += 20;
 		if(flags[kFLAGS.MARBLE_LUST] < 0) flags[kFLAGS.MARBLE_LUST] = 0;
 		player.consumeItem(consumables.LACTAID);
-		doNext(2128);
+		doNext(marbleScene.giveItem);
 	}
 
 	//Nursing from Pure Marble
@@ -1517,7 +1517,7 @@ package classes.Scenes.NPCs {
 			flags[kFLAGS.MARBLE_LUST] += 10;
 			flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] = 0;
 			if(flags[kFLAGS.MARBLE_LUST] > 0) flags[kFLAGS.MARBLE_LUST] = 100;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 
@@ -1555,7 +1555,7 @@ package classes.Scenes.NPCs {
 		//Marble and her kids (if any) are removed from the farm and camp, she will only return once the PC's corruption is below 40, and Vapula, Holi, Corrupted Jojo, and Corrupted Amily are not in camp.
 		flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] = 1;
 		player.removeStatusAffect(StatusAffects.CampMarble);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//Marble comes back after your corruption drops below 40
 	public function pureMarbleDecidesToBeLessOfABitch():void
@@ -1575,7 +1575,7 @@ package classes.Scenes.NPCs {
 		flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] = 0;
 		flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] = 0;
 		flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//Clara prison camp descriptions
 	//displayed in the camp description if Clara was imprisoned in camp.

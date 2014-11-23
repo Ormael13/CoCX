@@ -100,7 +100,7 @@ private function nameZeMilkBath():void
 		//[Next time Rath's at camp and PC accesses Milky's meny, play the Arrival w/ Rath scene, sans first sentence]
 	}
 	kGAMECLASS.inDungeon = false;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function ratducto():void {
@@ -202,7 +202,7 @@ private function sendToFarm():void
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 1;
 	
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function backToCamp():void
@@ -314,7 +314,7 @@ private function superReductoUsage():void {
 		//If no Rath: "You tell " + flags[kFLAGS.MILK_NAME] + " to wait a moment, and go digging through your possessions.  It takes a few minutes, but eventually you find some comfortable-looking clothing.  She takes them eagerly, saying she'll trim them down to her size as soon as she's got herself settled down: it's a lot to take in all at once, and she seems eager to experiment with her new, slender body, walking all over camp with a gay smile.  You leave her to exercise, but not before she draws you into a long kiss, holding you tight once again and whispering her heartfelt thanks."}
 	}
 	flags[kFLAGS.MILK_SIZE]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //Milk Bath (HHH or Giant boobs only)
@@ -378,7 +378,7 @@ private function relaxWithMilkWaifu():void {
 	//(+Lust, -Fatigue)
 	dynStats("lus", 10+player.sens/10, "resisted", false);
 	fatigue(-34);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Communal Bath] (PC must have 3+ of the following followers)
@@ -430,7 +430,7 @@ private function communalBath():void {
 	player.refillHunger(50);
 	fatigue(-40);
 	HPChange(player.maxHP()*.33,false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Milk Girl]
@@ -484,7 +484,7 @@ private function dontFuckTheMilkWaifu():void {
 	dynStats("lus", 10+player.sens/10, "resisted", false);
 	HPChange(player.maxHP()*.33,false);
 	fatigue(-20);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Fuck Her] (PC has a Dick)
@@ -507,7 +507,7 @@ private function fuckTheMilkWaifu():void {
 	//[+Lust, +HP, -Fatigue]
 	player.orgasm();
 	HPChange(player.maxHP()*.33,false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Fuck Her] (PC has Cooch & C+cups)
@@ -529,7 +529,7 @@ private function beARugMunchingMilkDyke():void {
 	//[+Lust, +HP, -Fatigue]
 	player.orgasm();
 	HPChange(player.maxHP()*.33,false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //[Drink & Masturbate]
@@ -583,7 +583,7 @@ private function drinkAndFapturbate():void {
 	outputText(".  Smirking and sexually sated, you pop the drain in the tub and stand there while the sex-scented lactic bathwater runs out the drain.  A quick toweling off later, and you're ready to go, feeling slightly refreshed and fairly sated.  It does take you a little longer to get your [armor] equally dry and back in place, but you manage.");
 	player.orgasm();
 	fatigue(-33);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function nyanCatMilkTime():void {
@@ -623,7 +623,7 @@ private function nyanCatMilkTime():void {
 		else outputText("\n\nThough you didn't intend for this to turn communal, " + flags[kFLAGS.MILK_NAME] + " certainly has more than enough to share.  You relax as the last trickles of milk pour into the pool, her breasts looking positively deflated.  You decide to leave the plug in for your friends as you clamber out, figuring they'll want to stockpile a little for the day before you drain it.  With her tits lightened for the moment, " + flags[kFLAGS.MILK_NAME] + " reaches up and pulls you down to her, just long enough to plant a kiss on your cheek and whisper, \"<i>Thank you, [name].  That felt good.</i>\"");
 		fatigue(-50);
 		dynStats("lus", 10+player.sens/10, "resisted", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//Milk Time!  (DD Boobs Ver.)
 	else {
@@ -651,7 +651,7 @@ private function finishMilkNormall():void {
 	outputText("\n\n\"<i>Thank you, [name],</i>\" she says simply as you dry yourself off.");
 	fatigue(-50);
 	dynStats("lus", 10+player.sens/10, "resisted", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Suckle]
 private function suckleDatMilk():void {
@@ -669,7 +669,7 @@ private function suckleDatMilk():void {
 	player.refillHunger(50);
 	fatigue(-50);
 	dynStats("lus", 10+player.sens/10, "resisted", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Fuck Her] (Needs a dick what fits)
 private function fuckDatMilkSlat():void {
@@ -688,7 +688,7 @@ private function fuckDatMilkSlat():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	fatigue(-10);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Titfuck (ie, an Excuse for Savin to use "Lactic Lust" because Fen just taught him that and he has fallen in love) (Requires DD or HHH tittehs & a dick)
@@ -719,7 +719,7 @@ private function titFuckDatMilkSlut():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	fatigue(-10);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 	
 }
 	}

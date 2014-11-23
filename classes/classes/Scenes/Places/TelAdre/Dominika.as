@@ -54,7 +54,7 @@ public function fellatrixBarApproach():void {
 		outputText("The two of you chat for a while longer, making small talk about the things you've seen in the Demon Realm. Eventually you can't help but observe that she doesn't seem to be sporting massive breasts, or thirty cocks, or be mad with lust, and you ask why. She looks you up and down once and laughs. \"<i>You don't have to put everything you find in your mouth, you know,</i>\" she finally answers.\n\n", false);
 
 		outputText("After a bit more conversation she glances outside and says she should go. \"<i>It has been nice, though,</i>\" she adds, \"<i>I would enjoy speaking with you again.</i>\" She rests a hand on your shoulder as she leaves. Her eyes tell you she's smiling at you before she goes.", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150]++;
 		return;
 	}
@@ -93,7 +93,7 @@ public function fellatrixBarApproach():void {
 		return;
 	}
 	outputText("ERROR, ERROR, ALERT THE FENFEN!", true);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[\"<i>No thanks</i>\"]
 private function turnDownDominikasKnowledge():void {
@@ -246,7 +246,7 @@ private function fellatrixSexWarmup():void {
 		outputText("You politely explain that you don't actually have any genitals. Dominika blinks, looks at you, then grabs your crotch. \"<i>Oh. Oh. My uh, my apologies.</i>\" She coughs awkwardly and backs up, rubbing the back of her neck. \"<i>That... that is unfortunate.</i>\" She lowers her skirt slightly, letting you see the top of a chastity belt. \"<i>I can understand to a certain degree but uh... Yikes. At least I can get this taken off if I want.</i>\"\n\n", false);
 
 		outputText("She walks up to you and kisses your cheek. Her full dark lips are devilishly soft and perfectly moist, and you think of the sensation for longer than you expected.  Patting your shoulder, she gives you a half-smile. \"<i>If you solve that, come back some time, eh?</i>\" She helps you out the door and waves goodbye, but you can't help but feel particularly awkward.\n\n", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	simpleChoices("Yes",acceptFellatrixOral,"No",declineFellatrixOral,"",0,"",0,"",0);
@@ -566,7 +566,7 @@ private function acceptFellatrixOral():void {
 	dynStats("lib", -1, "sen", 1);
 
 	if(timesFellatrixSucked() >= 4 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] == 0) doNext(dominidrama);
-	else doNext(14);
+	else doNext(camp.returnToCampUseTwoHours);
 }
 
 
@@ -604,7 +604,7 @@ private function agreeWithDominika():void {
 	}
 	dynStats("lus", 25);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Non-committal]
@@ -617,7 +617,7 @@ private function ehhhhDominika():void {
 
 	outputText("Still, that was some magnificent oral. You idly recall the sensations of those dark lips as you walk through Tel'Adre.\n\n", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] = 2;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Disagree with her]
 private function disagreeDominika():void {
@@ -638,7 +638,7 @@ private function disagreeDominika():void {
 		outputText("On the streets of Tel'adre, you wonder about what she said.  Should you tell someone about that?  You're not certain how much of it was bluster and how much was genuine malice.  There seems to be far more to the sorceress-fellatrix than you first thought, but you're not sure you want to learn the rest.  You don't want to push an issue without justification, though...\n\n", false);
 		outputText("Conflicted, you find yourself walking away from Dominika's apartment without ever thinking about her lips for the first time.", false);
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -655,6 +655,7 @@ public function fellatrixDream():void {
 	outputText("As the weight of the tar covers your eyes the stars above blink into sight. Panting, you realize you have returned to your campsite, sweaty and uncomfortable with the fire burnt out. The dream is over, memories of it already fading. You remember lips, and stars, and the crushing weight of the darkness.\n\n", false);
 
 	outputText("You think you preferred the dreams about the factory.", false);
+	doNext(camp.campMenu);
 }
 
 
@@ -688,7 +689,7 @@ private function dominidramaYes():void {
 
 	outputText("Weary, you continue on your way out of Tel'Adre.", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[No]
 private function dominidramaNo():void {
@@ -702,7 +703,7 @@ private function dominidramaNo():void {
 	outputText("You feel warm inside, filled with a confidence that seemed to come out of nowhere. You can imagine Dominika's dark lips in your mind smiling, opening and curving as if to say \"<i>Good work.</i>\" The thought empowers you. It feels good to protect her, you think to yourself. You stride confidently out of the city.", false);
 	dynStats("lus", 10, "cor", 1);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] = 2;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Binding scene]
@@ -869,7 +870,7 @@ private function dominikaBlowjobs2():void {
 	model.time.days++;
 	model.time.hours = 7;
 	statScreenRefresh();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

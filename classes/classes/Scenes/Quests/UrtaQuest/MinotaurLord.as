@@ -4,6 +4,7 @@ package classes.Scenes.Quests.UrtaQuest
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.internals.*;
+	import classes.Items.WeaponLib;
 
 	use namespace kGAMECLASS;
 

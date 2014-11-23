@@ -150,7 +150,7 @@
 			
 			// Player returns to Camp
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		/**
@@ -396,7 +396,7 @@
 				outputText("Wishing her well, you calmly let yourself out of the shop and head back to camp.");
 				
 				menu();
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			
@@ -462,7 +462,7 @@
 			// Apply bonus & back to camp!
 			applyMassageBonus(selectedMassage);
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 	public static const MAX_MASSAGE_BONUS_DURATION:int = 24;			// Duration of the bonus
@@ -807,7 +807,7 @@
 				outputText("Uma sighs, \"It's okay, dear.  Just come back when you do, my doors are always open.\"");
 				
 				menu();
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 
@@ -904,7 +904,7 @@
 			applyNeedlework(selectedSession);
 			
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		/**
@@ -952,7 +952,7 @@
 			outputText("You promise you'll try, and then head back to camp.");
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		/**
@@ -980,7 +980,7 @@
 			outputText("You promise that you will, and then head out of the quaint little clinic and back to camp.\n\n");
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		/**
@@ -1006,7 +1006,7 @@
 		public function talkLoppeJoiner():void
 		{
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			//addButton(1, "Debugz", talkMenu);
 		}
 		
@@ -1479,7 +1479,7 @@
 			outputText("You tell her to keep hoping; as strong a warrior as Uma described her to be, you're sure that the bunny-herm is still out there, somewhere.  You politely withdraw to give Uma a chance to compose herself, heading back to camp.\n\n");
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		/**
@@ -1655,7 +1655,7 @@
 			player.hoursSinceCum = Math.ceil(hoursSinceCum * 0.75);
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function sexGetFingered():void
@@ -1765,7 +1765,7 @@
 			dynStats("lust=", 0);
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function sexHandjob():void
@@ -1844,7 +1844,7 @@
 			dynStats("lust=", 0);
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Needs Cock.
 		private function sexGetABJFromDisMilfyLesboSlut():void
@@ -2022,7 +2022,7 @@
 			dynStats("lust=", 0);
 			flags[kFLAGS.UMA_TIMES_SUCKED_YOU]++;
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		private function sexEatHerOut():void
 		{
@@ -2070,7 +2070,7 @@
 			dynStats("lust", 30);
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 
 		}
 		/**

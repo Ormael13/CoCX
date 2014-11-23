@@ -228,15 +228,9 @@ package classes.Scenes.Areas.Forest
 
 			fatigue(10);
 			
-			menuLoc = 2;
 			if (waited)
-			{
-				inventory.takeItem(consumables.CANINEP);
-			}
-			else
-			{
-				inventory.takeItem(consumables.FOXBERY);
-			}
+				inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
+			else inventory.takeItem(consumables.FOXBERY, camp.returnToCampUseOneHour);
 		}
 
 		public function repeatWildHuntEncounter():void
@@ -273,7 +267,7 @@ package classes.Scenes.Areas.Forest
 			if (player.inte < 80) player.inte++;
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function repeatWildHuntChase():void
@@ -319,7 +313,7 @@ package classes.Scenes.Areas.Forest
 			}
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function repeatWildHuntCaught(pScore:int):void
@@ -403,14 +397,11 @@ package classes.Scenes.Areas.Forest
 			player.gems -= gemLoss;
 
 			outputText("<b>You’ve lost " + gemLoss + " gems.</b>\n\n");
-			inventory.takeItem(consumables.CANINEP);
+			inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
 			dynStats("sen-", 2, "lib+", 2, "cor+", 1, "lus=", 0);
 			fatigue(10);
 			player.orgasm();
 			player.slimeFeed();
-
-			menu();
-			doNext(13);
 		}
 
 		protected function repeatWildHuntAWinnerIsYou():void
@@ -461,9 +452,9 @@ package classes.Scenes.Areas.Forest
 
 			var selector:int = rand(3);
 
-			if (selector == 0) inventory.takeItem(consumables.CANINEP);
-			if (selector == 1) inventory.takeItem(consumables.FOXBERY);
-			if (selector == 2) inventory.takeItem(consumables.NPNKEGG);
+			if (selector == 0) inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
+			if (selector == 1) inventory.takeItem(consumables.FOXBERY, camp.returnToCampUseOneHour);
+			if (selector == 2) inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
 		}
 
 		protected function stopTheMadness():void
@@ -486,7 +477,7 @@ package classes.Scenes.Areas.Forest
 			outputText("You get the feeling you won’t be seeing him anymore.\n\n");
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function surrenderToTheHounds():void
@@ -695,7 +686,7 @@ package classes.Scenes.Areas.Forest
 			player.slimeFeed();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function howDareYou():void
@@ -777,7 +768,7 @@ package classes.Scenes.Areas.Forest
 			dynStats("lust=", 0);
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function encounterPrincessGwynn():void
@@ -792,10 +783,10 @@ package classes.Scenes.Areas.Forest
 
 			if (selector == 0) outputText("The Princess’s pink fur is slathered in smears of saps and juices, and angry red stings pepper her body.  It’s very obvious that she’s fallen prey to the roaming tentacle monsters that haunt the forests.\n\n");
 			else if (selector == 1) outputText("The Princess winces as low branches drag across her ass, and you can see angry red claw marks criss-crossing her pert ass.  It seems she’s run afoul of Akbal, the feline lord of the Deepwoods.\n\n");
-			else if (selector == 2) outputText("The Princess coughs, a trickle of cum running down her lips and chin.  You see bruises on her throat and chin, and tiny claw marks across her body.  It looks like she was caught by a roving gang of imps.");
+			else if (selector == 2) outputText("The Princess coughs, a trickle of cum running down her lips and chin.  You see bruises on her throat and chin, and tiny claw marks across her body.  It looks like she was caught by a roving gang of imps.\n\n");
 			else if (selector == 3) outputText("The Princess’ pink fur is stained with multicolored blotches, and she sways a little bit, apparently woozy.  Goblin attacks can leave a person that way for quite some time.\n\n");
-			else if (selector == 4) outputText("The Princess’ neck and wrists bear bruises, as if someone had bound her up roughly and repeatedly.");
-			else if (selector == 5) outputText("As she turns to squeeze between two trees, you see that the Princess has numerous claw marks up and down her back.  It looks like, since her transformation, her Hounds have turned on her.");
+			else if (selector == 4) outputText("The Princess’ neck and wrists bear bruises, as if someone had bound her up roughly and repeatedly.\n\n");
+			else if (selector == 5) outputText("As she turns to squeeze between two trees, you see that the Princess has numerous claw marks up and down her back.  It looks like, since her transformation, her Hounds have turned on her.\n\n");
 
 			outputText("Despite that, she looks very happy to see you.  She’s become more feminine since you last saw her.  Her hair is tufted up into a rose-colored pixie cut with two spritely pigtails at the nape of her neck. Her chest is still flat, but she’s lost muscle mass, making her tall, thin, and androgynous.  Her black leathers are gone, and her fur is mostly cotton-candy pink, accented by her white chest, stomach, and thighs.  Her cock swings with each careful movement, a mottled white and pink, matching her fur, with three prepuce rings.  She steps forward, her long, deer legs giving her hips an unintentional sway as she gingerly minces toward you.\n\n");
 
@@ -855,7 +846,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function gwynnGetsButtfuxed():void
@@ -881,7 +872,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function gwynnNomsDaCunts():void
@@ -907,7 +898,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function gwynnGetsDickmilked():void
@@ -939,7 +930,7 @@ package classes.Scenes.Areas.Forest
 			//[Lust +20, Libido +2]
 			dynStats("lus+", 20, "lib+", 2);
 			menu();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function gwynnGibsGifts():void
@@ -958,7 +949,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Before you can stop her, she’s gone, and you pocket the small bottle for later.\n\n");
 
-			inventory.takeItem(consumables.PRNPKR);
+			inventory.takeItem(consumables.PRNPKR, camp.returnToCampUseOneHour);
 		}
 	}
 }

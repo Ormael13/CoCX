@@ -432,6 +432,7 @@ public function dayTenDreams():void {
 	}
 	if(player.cor < 50) dynStats("lus", 10);
 	else dynStats("lus", 25);
+	doNext(camp.campMenu);
 }
 
 public function fuckedUpCockDreamChange():void {

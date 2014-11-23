@@ -94,7 +94,7 @@ private function strongStuff():void {
 		//[+5 Relationship with Aunt Nancy]
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] += 5;
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Light:]
 private function lightStuff():void {
@@ -162,7 +162,7 @@ private function lightStuff():void {
 		if(rand(2) == 0) dynStats("int", 1+rand(2));
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] += 20;
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If Decline]
@@ -172,7 +172,7 @@ private function declineAuntNancyMassage():void {
 
 	outputText("Aunt Nancy raises one of her black-covered hands in front of her mouth, and blows you a kiss before scuttling away.", false);
 	//[Gain 20 Lust.]
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[If Agree]
@@ -477,7 +477,7 @@ private function auntNancyPoonPartIV():void {
 	}
 	//Increment times boned!
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00266] += 1;
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 }
 }

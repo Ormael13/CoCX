@@ -135,7 +135,7 @@ private function leaveWhenMeetingAgressiveKiha():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("You nod and step back, retreating back towards camp.  You've no desire to fight such a fiery opponent.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[Fight]
 internal function meetKihaAndFight():void {
@@ -183,7 +183,7 @@ public function kihaExplore(clearScreen:Boolean = true):void {
 	}	
 	if(event < 5) {
 		outputText("You wander around through the swamp for a while, but you don't find anything.", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//Reducto
@@ -192,8 +192,7 @@ public function kihaExplore(clearScreen:Boolean = true):void {
 	else if(event < 9) itype = consumables.COAL___;
 	else if(event < 10) itype = useables.T_SSILK;
 	outputText("While exploring, you find an item on the ground!  ", false);
-	menuLoc = 2;
-	inventory.takeItem(itype);
+	inventory.takeItem(itype, camp.returnToCampUseOneHour);
 }
 
 //[This was my idea!]

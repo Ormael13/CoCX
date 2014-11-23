@@ -322,15 +322,15 @@
 					dynStats("lib", .5, "sen", 1, "lus", 10);
 				}
 				outputText("\n\nYour mouth curls into a sick smile and, with a voice that isn't your own, speaks, \"<i>I ALWAYS get what I want, dear...</i>\"", false);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else {
 				outputText("Your mouth forms a smile of its own volition, reading, \"<i>nuf erutuf rof riah ydnas, nus tresed eht sa ydnas.</i>\"\n\nYou feel a tingling in your scalp, and realize your hair has become a sandy blonde!", false);
 				player.hairColor = "sandy blonde";
 				outputText("\n\nYour mouth curls with a sick smile, speaking with a voice that isn't your own, \"<i>I ALWAYS get what I want, dear...</i>\"", false);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
-			if (gameState == 0) {
+			if (!kGAMECLASS.inCombat) {
 				//RAEP
 				spriteSelect(50);
 				outputText("\n\nYou hear the soft impact of clothes hitting the ground behind you, and turn to see that the sand witch has found you! You cannot resist a peek at your uninvited guest, beholding a curvy dark-skinned beauty, her form dominated by a quartet of lactating breasts.  Somewhere in your lust-fogged mind you register the top two as something close to double-Ds, and her lower pair to be about Cs.  She smiles and leans over you, pushing you to the ground violently.\n\nShe turns around and drops, planting her slick honey-pot firmly against your mouth.  Her scent is strong, overpowering in its intensity.  Your tongue darts out for a taste and finds a treasure trove of sticky sweetness.  Instinctively you tongue-fuck her, greedily devouring her cunny-juice, shoving your tongue in as far as possible while suckling her clit.  Dimly you feel the milk spattering over you, splashing off you and into the cracked earth.  Everywhere the milk touches feels silky smooth and sensitive, and your hands begin stroking your body, rubbing it in as the witch sprays more and more of it.  You lose track of time, orgasming many times, slick and sticky with sexual fluids.", false);
@@ -381,7 +381,11 @@
 				else outputText("  Slick fluids soak your thighs as your body reacts to this new stimulus.", false);
 			}
 			//(Minotaur fantasy)
+<<<<<<< HEAD
 			if (gameState == 0 && rand(10) == 1 && !purified) {
+=======
+			if (!kGAMECLASS.inCombat && rand(10) == 1) {
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 				outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.", false);
 				dynStats("lib", 1, "lus", rand(5) + player.cor / 20 + flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] / 5);
 			}
@@ -2634,6 +2638,7 @@
 		 5 - rubbery black
 		 6 -
 		 */
+/* Now handled by OvipositionElixir.as
 		public function ovipositionElixer(player:Player):void
 		{
 			player.slimeFeed();
@@ -2688,6 +2693,7 @@
 			}
 			player.refillHunger(10);
 		}
+*/
 
 //butt expansion
 		public function brownEgg(large:Boolean,player:Player):void
@@ -3102,8 +3108,18 @@
 		}
 
 //TODO FIX
-		public function growPlus(player:Player):void
-		{
+/* Moved to new GroPlus item
+		public function growPlus(player:Player):void {
+			var gpBalls:Function = (player.balls > 0 ? growPlusBalls : null);
+			var gpBreasts:Function = (player.breastRows.length > 0 ? growPlusBreasts : null);
+			var gpClit:Function = (player.vaginas.length > 0 ? growPlusClit : null);
+			var gpCock:Function = (player.cockTotal() > 0 ? growPlusCock : null);
+			var gpNipples:Function = (player.totalNipples() > 0 ? growPlusNipples : null);
+			kGAMECLASS.itemSubMenu = true;
+			clearOutput();
+			outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?  ");
+			choices("Balls", gpBalls, "Breasts", gpBreasts, "Clit", gpClit, "Cock", gpCock, "Nipples", gpNipples, "", null, "", null, "", null, "", null, "Nevermind", growPlusCancel);
+*/			/*
 			var ballsEvent:Number = 0;
 			if (player.balls > 0) ballsEvent = 1039;
 			var clitEvent:Number = 0;
@@ -3117,10 +3133,124 @@
 			kGAMECLASS.itemSubMenu = true;
 			outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?  ", true);
 			choices("Balls", ballsEvent, "Breasts", breastEvent, "Clit", clitEvent, "Cock", cockEvent, "Nipples", nipplesEvent, "", 0, "", 0, "", 0, "", 0, "Nevermind", 1038);
+			*/
+/*		}
+		
+		private function growPlusBalls():void {
+			clearOutput();
+			player.slimeFeed();
+			outputText("You sink the needle deep into your " + sackDescript() + ".  It hurts like hell, but you push down the plunger and the pain vanishes as the needles contents flow into you.\n\n");
+			//1 in 4 BIG growth.
+			if (rand(4) == 0) {
+				outputText("You feel a trembling in your " + ballsDescriptLight() + " as the chemicals start to go to work.  You can tell they're going to be VERY effective.\n");
+				player.ballSize += 2 + rand(4);
+				outputText("They shift, stretching your " + sackDescript() + " tight as they gain inches of size.  You step to steady yourself as your center of balance shifts due to your newly enlarged " + ballsDescriptLight() + ".  ");
+			}
+			else {
+				player.ballSize += 1 + rand(2);
+				outputText("You feel your testicles shift, pulling the skin of your " + sackDescript() + " a little bit as they grow to " + ballsDescriptLight() + ".  ");
+			}
+			if (player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.");
+			dynStats("lus", 10);
+			inventory.itemGoNext();
 		}
 
+		private function growPlusBreasts():void {
+			clearOutput();
+			player.slimeFeed();
+			outputText("You sink the needle into the flesh of your " + allBreastsDescript() + " injecting each with a portion of the needle.\n\n");
+			if (player.breastRows.length == 1)
+				player.growTits((1 + rand(5)), 1, true, 1);
+			else
+				player.growTits(1 + rand(2), player.breastRows.length, true, 1);
+			dynStats("lus", 10);
+			inventory.itemGoNext();
+		}
+
+		private function growPlusClit():void {
+			clearOutput();
+			player.slimeFeed();
+			outputText("You sink the needle into your clit, nearly crying with how much it hurts.  You push down the plunger and the pain vanishes as your clit starts to grow.\n\n");
+			player.clitLength++;
+			outputText("Your " + clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.");
+			dynStats("sen", 2, "lus", 10);
+			inventory.itemGoNext();
+		}
+
+		private function growPlusCock():void {
+			clearOutput();
+			player.slimeFeed();
+			outputText("You sink the needle into the base of your " + multiCockDescriptLight() + ".  It hurts like hell, but as you depress the plunger, the pain vanishes, replaced by a tingling pleasure as the chemicals take effect.\n\n");
+			if (player.cocks.length == 1) {
+				outputText("Your " + cockDescript(0) + " twitches and thickens, pouring more than an inch of thick new length from your ");
+			
+				player.increaseCock(0, 4);
+				player.cocks[0].cockLength += 1; // This was forcing "what was said" to match "what actually happened" no matter what increase/growCock /actually/ did.
+				player.cocks[0].cockThickness += 0.5; // And growCock never actually touched thickness. Nor does the new version. Thickness mod was stripped out entirely.
+			}
+			//MULTI
+			else {
+				outputText("Your " + multiCockDescriptLight() + " twitch and thicken, each member pouring out more than an inch of new length from your ");
+			
+				for (var i:int = 0; i < player.cocks.length; i++) {
+					player.increaseCock(i, 2);
+					player.cocks[i].cockLength += 1;
+					player.cocks[i].cockThickness += 0.5;
+				}
+			}
+		
+			if (player.hasSheath()) outputText("sheath.");
+			else outputText("crotch.");
+		
+			dynStats("sen", 2, "lus", 10);
+			inventory.itemGoNext();
+		}
+
+		private function growPlusNipples():void {
+			clearOutput();
+			player.slimeFeed();
+			outputText("You sink the needle into each of your " + nippleDescript(0) + "s in turn, dividing the fluid evenly between them.  Though each injection hurts, the pain is quickly washed away by the potent chemical cocktail.\n\n");
+		//Grow nipples
+			outputText("Your nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.\n\n");
+			player.nippleLength += (rand(2) + 3) / 10;
+			dynStats("lus", 15);
+			//NIPPLECUNTZZZ
+			if (!player.hasFuckableNipples() && rand(4) == 0) {
+				var nowFuckable:Boolean = false;
+				for (var x:int = 0; x < player.breastRows.length; x++) {
+					if (!player.breastRows[x].fuckable && player.nippleLength >= 2) {
+						player.breastRows[x].fuckable = true;
+						nowFuckable = true;
+					}
+				}
+				//Talk about if anything was changed.
+				if (nowFuckable) outputText("Your " + allBreastsDescript() + " tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>\n\n");
+			}
+			inventory.itemGoNext();
+		}
+
+		private function growPlusCancel():void {
+			clearOutput();
+			if (debug) {
+				outputText("You put the vial away.\n\n");
+				if (inCombat()) enemyAI();
+				else doNext(inventory.inventoryMenu);
+			}
+			else {
+				inventory.takeItem(consumables.GROPLUS);
+				itemSwapping = true;
+				if (inCombat()) {
+					outputText("\n\n");
+					enemyAI();
+				}
+			}
+		}
+*/
+		
+/* Moved to new Reducto item
 		public function reducto(player:Player):void
 		{
+<<<<<<< HEAD
 			menu();
 			if (player.cockTotal() > 0 && player.biggestCockArea() > 6) addButton(0, "Cock", eventParser, 1057)
 			if (player.balls > 0 && player.ballSize > 1) addButton(1, "Balls", eventParser, 1054);
@@ -3141,6 +3271,160 @@
 			inventory.itemGoNext();
 		}
 
+=======
+			var rdtBalls:Function = (player.balls > 0 && player.ballSize > 1 ? reductoBalls : null);
+			var rdtBreasts:Function = (player.breastRows.length > 0 && player.biggestTitSize() > 0 ? reductoBreasts : null);
+			var rdtButt:Function = (player.buttRating > 1 ? reductoButt : null);
+			var rdtClit:Function = (player.vaginas.length > 0 && player.clitLength > 0.25 ? reductoClit : null);
+			var rdtCock:Function = (player.cockTotal() > 0 && player.biggestCockArea() > 6 ? reductoCock : null);
+			var rdtHips:Function = (player.hipRating > 2 ? reductoHips : null);
+			var rdtNipples:Function = (player.nippleLength > 0.25 ? reductoNipples : null);
+*/ /*
+			var ballsEvent:Number = 0;
+			if (player.balls > 0 && player.ballSize > 1) ballsEvent = 1054;
+			var clitEvent:Number = 0;
+			if (player.vaginas.length > 0 && player.clitLength > .25) clitEvent = 1056;
+			var breastEvent:Number = 0;
+			if (player.breastRows.length > 0 && player.biggestTitSize() > 0) breastEvent = 1055;
+			var cockEvent:Number = 0;
+			if (player.cockTotal() > 0 && player.biggestCockArea() > 6) cockEvent = 1057;
+			var nippleEvent:Number = 0;
+			if (player.nippleLength > .25) nippleEvent = 1062;
+			var buttEvent:Number = 0;
+			if (player.buttRating > 1) buttEvent = 1071;
+			var hipEvent:int = 0;
+			if (player.hipRating > 2) hipEvent = 1122;
+			*/
+/*
+			kGAMECLASS.itemSubMenu = true;
+			clearOutput();
+			outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?");
+			choices("Balls", rdtBalls, "Breasts", rdtBreasts, "Butt", rdtButt, "Clit", rdtClit, "Cock", rdtCock,
+				"Hips", rdtHips, "Nipples", rdtNipples, "", null, "", null, "Nevermind", reductoCancel);
+		}
+		
+		private function reductoBalls():void {
+			clearOutput();
+			outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n");
+			player.ballSize -= (2 + rand(4));
+			if (player.ballSize < 1) player.ballSize = 1;
+			outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  Within a few seconds the paste has been totally absorbed and the shrinking stops.");
+			dynStats("lib", -2, "lus", -10);
+			inventory.itemGoNext();
+		}
+		
+		private function reductoBreasts():void {
+			clearOutput();
+			outputText("You smear the foul-smelling ointment all over your " + allBreastsDescript() + ", covering them entirely as the paste begins to get absorbed into your " + player.skinDesc + ".\n");
+			player.shrinkTits(true);
+			if (rand(2) == 0 && player.biggestTitSize() >= 1) {
+				outputText("\nThe effects of the paste continue to manifest themselves, and your body begins to change again...");
+				player.shrinkTits(true);
+			}
+			outputText("\nThe last of it wicks away into your skin, completing the changes.");
+			dynStats("sen", -2, "lus", -5);
+			inventory.itemGoNext();
+		}
+		
+		private function reductoButt():void {
+			clearOutput();
+			outputText("You smear the foul-smelling paste onto your " + buttDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n");
+			if (player.buttRating >= 15) {
+				player.buttRating -= (3 + int(player.buttRating / 3));
+				outputText("Within seconds you feel noticeably lighter, and a quick glance shows your ass is significantly smaller.");
+			}
+			else if (player.buttRating >= 10) {
+				player.buttRating -= 3;
+				outputText("You feel much lighter as your " + buttDescript() + " jiggles slightly, adjusting to its smaller size.");
+			}
+			else {
+				player.buttRating -= 1 + rand(3);
+				if (player.buttRating < 1) player.buttRating = 1;
+				outputText("After a few seconds your " + buttDescript() + " has shrunk to a much smaller size!");
+			}
+			dynStats("lib", -2, "lus", -10);
+			inventory.itemGoNext();
+		}
+		
+		private function reductoClit():void {
+			clearOutput();
+			outputText("You carefully apply the paste to your " + clitDescript() + ", being very careful to avoid getting it on your " + vaginaDescript(0) + ".  It burns with heat as it begins to make its effects known...\n\n");
+			player.clitLength /= 1.7;
+			//Set clitlength down to 2 digits in length
+			player.clitLength = int(player.clitLength * 100) / 100;
+			outputText("Your " + clitDescript() + " shrinks rapidly, dwindling down to almost half its old size before it finishes absorbing the paste.");
+			dynStats("sen", 2, "lus", 10);
+			inventory.itemGoNext();
+		}
+		
+		private function reductoCock():void {
+			clearOutput();
+			outputText("You smear the repulsive smelling paste over your " + multiCockDescriptLight() + ".  It immediately begins to grow warm, almost uncomfortably so, as your " + multiCockDescriptLight() + " begins to shrink.\n\n");
+			if (player.cocks.length == 1) {
+				outputText("Your " + cockDescript(0) + " twitches as it shrinks, disappearing steadily into your " + (player.hasSheath() ? "sheath" : "crotch") + " until it has lost about a third of its old size.");
+				player.cocks[0].cockLength *= 2 / 3;
+				player.cocks[0].cockThickness *= 2 / 3;
+			}
+			//MULTI
+			else {
+				outputText("Your " + multiCockDescriptLight() + " twitch and shrink, each member steadily disappearing into your " + (player.hasSheath() ? "sheath" : "crotch") + " until they've lost about a third of their old size.");
+				for (var i:int = 0; i < player.cocks.length; i++) {
+					player.cocks[i].cockLength		*= 2 / 3;
+					player.cocks[i].cockThickness	*= 2 / 3;
+				}
+			}
+			dynStats("sen", -2, "lus", -10);
+			inventory.itemGoNext();
+		}
+		
+		private function reductoHips():void {
+			clearOutput();
+			outputText("You smear the foul-smelling paste onto your [hips].  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n");
+			if (player.hipRating >= 15) {
+				player.hipRating -= (3 + int(player.hipRating / 3));
+				outputText("Within seconds you feel noticeably lighter, and a quick glance at your hips shows they've gotten significantly narrower.");
+			}
+			else if (player.hipRating >= 10) {
+				player.hipRating -= 3;
+				outputText("You feel much lighter as your [hips] shift slightly, adjusting to their smaller size.");
+			}
+			else {
+				player.hipRating -= 1 + rand(3);
+				if (player.hipRating < 1) player.hipRating = 1;
+				outputText("After a few seconds your [hips] have shrunk to a much smaller size!");
+			}
+			dynStats("lib", -2, "lus", -10);
+			inventory.itemGoNext();
+		}
+		
+		private function reductoNipples():void {
+			clearOutput();
+			outputText("You rub the paste evenly over your " + nippleDescript(0) + "s, being sure to cover them completely.\n\n");
+			//Shrink
+			if (player.nippleLength / 2 < 0.25) {
+				outputText("Your nipples continue to shrink down until they stop at 1/4\" long.");
+				player.nippleLength = 0.25;
+			}
+			else {
+				outputText("Your " + nippleDescript(0) + "s get smaller and smaller, stopping when they are roughly half their previous size.");
+				player.nippleLength /= 2;
+			}
+			dynStats("sen", -5, "lus", -5);
+			inventory.itemGoNext();
+		}
+		
+		private function reductoCancel():void {
+			clearOutput();
+			if (debug)
+				eventParser(inventory.inventoryMenu);
+			else {
+				inventory.takeItem(consumables.REDUCTO);
+				itemSwapping = true;
+			}
+		}
+*/
+		
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		public function lactaid(player:Player):void
 		{
 			player.slimeFeed();
@@ -3775,7 +4059,7 @@
 				player.goIntoRut(true);
 			}
 			//ORGAZMO
-			if (player.lust >= 100 && gameState == 0) {
+			if (player.lust >= 100 && !kGAMECLASS.inCombat) {
 				outputText("\n\nThe arousal from the potion overwhelms your senses and causes you to spontaneously orgasm.  You rip off your " + player.armorName + " and look down as your ", false);
 				if (player.cocks.length > 0) {
 					outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you.  ", false);
@@ -4327,7 +4611,7 @@
 			//b) Description while used
 			outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.", false);
 			//(if outside combat)
-			if (gameState == 0) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.", false);
+			if (!kGAMECLASS.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.", false);
 			//+ speed to 70!
 			if (player.spe < 70 && rand(2) == 0) {
 				dynStats("spe", (2 - (player.spe / 10 / 5)));
@@ -4403,6 +4687,7 @@
 			player.refillHunger(5);
 		}
 
+/*
 		public function extensionSerum(player:Player):void
 		{
 			outputText("", true);
@@ -4433,8 +4718,14 @@
 			}
 			if (flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] < 7) flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
 		}
+<<<<<<< HEAD
 
 		public function superHummus(player:Player):void
+=======
+*/
+		
+		public function Hummus(player:Player):void
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		{
 			outputText("", true);
 			if (debug) {
@@ -5502,7 +5793,7 @@
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
-
+/*
 		public function wingStick(player:Player):void
 		{
 			outputText("You toss a wingstick at your foe!  It flies straight and true, almost as if it has a mind of its own as it arcs towards " + monster.a + monster.short + "!\n", true);
@@ -5523,6 +5814,7 @@
 				outputText("You fling the wingstick with all your might and its aim is true. The moment it nears the lizan, though, he catches it with a flick of his wrist.  It appears he is too fast and well trained for normal projectile attacks.");
 			}
 		}
+*/
 
 		public function neonPinkEgg(pregnantChange:Boolean,player:Player):void
 		{
@@ -6703,7 +6995,8 @@
 			player.refillHunger(5);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
-
+		
+/*
 		public function applyLustStick(player:Player):void
 		{
 			outputText("", true);
@@ -6722,6 +7015,7 @@
 			dynStats("lus", 1);
 
 		}
+*/
 
 		public function broBrew(player:Player):void
 		{
@@ -7827,7 +8121,8 @@
 				else if (mtoneTemp == 2) player.skinTone = "ashen";
 				else if (mtoneTemp == 3) player.skinTone = "sable";
 				else player.skinTone = "milky white";
-				outputText(player.skin() + "!</i>");
+				outputText(player.skin() + "!</b>");
+				changes++;
 			}
 			//Change skin tone if not changed you!
 			else if (!mystic && player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "light" && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
@@ -7836,7 +8131,8 @@
 				if (toneTemp == 0) player.skinTone = "tan";
 				else if (toneTemp == 1) player.skinTone = "olive";
 				else player.skinTone = "light";
-				outputText(player.skin() + "!</i>");
+				outputText(player.skin() + "!</b>");
+				changes++;
 			}
 			//[Change Skin Color: add "Tattoos"]
 			//From Tan, Olive, or Light skin tones
@@ -7845,6 +8141,7 @@
 				if (mystic) outputText("angular");
 				else outputText("curved");
 				outputText(" markings remain, as if etched into your skin.");
+				changes++;
 				//9999 - pending tats system
 			}
 			//Nipples Turn Back:
@@ -7871,14 +8168,14 @@
 			clearOutput();
 			outputText("Curiosity gets the best of you, and you decide to open the package.  After all, what's the worst that could happen?\n\n");
 			//Opening the gift randomly results in one of the following:
-			menuLoc = 28;
+//			menuLoc = MENU_LOCATION_KITSUNE_GIFT;
 			
 			switch(rand(12)) {
 			//[Fox Jewel]
 				case 0: 
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, sitting in the center is a small teardrop-shaped jewel!");
 				outputText("\n\n<b>You've received a shining Fox Jewel from the kitsune's gift!  How generous!</b>  ");
-				inventory.takeItem(consumables.FOXJEWL, false);
+				inventory.takeItem(consumables.FOXJEWL, inventory.inventoryMenu);
 				break;
 
 			//[Fox Berries]
@@ -7886,7 +8183,7 @@
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, there is a small cluster of orange-colored berries sitting in the center!");
 				outputText("\n\n<b>You've received a fox berry from the kitsune's gift!  How generous!</b>  ");
 				//add Fox Berries to inventory
-				inventory.takeItem(consumables.FOXBERY, false);
+				inventory.takeItem(consumables.FOXBERY, inventory.inventoryMenu);
 				break;
 
 			//[Gems]
@@ -7904,7 +8201,7 @@
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it contains a small bag of dried tea leaves!");
 				outputText("\n\n<b>You've received a bag of tea from the kitsune's gift!  How thoughtful!</b>  ");
 				//add Kitsune Tea/Scholar's Tea to inventory
-				inventory.takeItem(consumables.SMART_T, false);
+				inventory.takeItem(consumables.SMART_T, inventory.inventoryMenu);
 				break;
 
 			//[Hair Dye]
@@ -7919,7 +8216,7 @@
 
 				outputText("\n\n<b>You've received " + itype.longName + " from the kitsune's gift!  How generous!</b>  ");
 				//add <color> Dye to inventory
-				inventory.takeItem(itype, false);
+				inventory.takeItem(itype, inventory.inventoryMenu);
 				break;
 
 			//[Knowledge Spell]
@@ -7975,7 +8272,7 @@
 				case 11:
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, but to your disappointment, the only other contents appear to be nothing more than twigs, leaves, and other forest refuse.  Upon further investigation, though, you find a shard of shiny black chitinous plating mixed in with the other useless junk.");
 					outputText("\n\n<b>At least you managed to salvage a shard of black chitin from it...</b>  ");
-				inventory.takeItem(useables.B_CHITN, false);
+				inventory.takeItem(useables.B_CHITN, inventory.inventoryMenu);
 				break;
 
 				default: trace("Kitsune's gift roll foobar..."); break;
@@ -8033,6 +8330,7 @@
 		 */
 
 //Unbimbo Yourself:*
+/* Now handled by DeBimbo.as
 		public function deBimbo(player:Player):void
 		{
 			clearOutput();
@@ -8059,12 +8357,16 @@
 				player.removePerk(PerkLib.BroBrains);
 			}
 		}
-
+*/
 //Fish Fillet
 		public function fishFillet(player:Player):void
 		{
 			clearOutput();
+<<<<<<< HEAD
 			if (!inCombat()) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.  ");
+=======
+			if (!getGame().inCombat) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			//(In combat?)
 			else outputText("You produce the fish fillet from your bag.  Rather than unwrap it and savor the taste as you normally would, you take a large bite out of it, leaf wrapping and all.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
 

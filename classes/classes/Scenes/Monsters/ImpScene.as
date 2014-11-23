@@ -1268,8 +1268,13 @@ package classes.Scenes.Monsters
 					}
 				}
 			}
+<<<<<<< HEAD
 			if (inCombat()) cleanupAfterCombat();
+=======
+			doNext(camp.campMenu);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		}
+		
 		public function impRapesYou():void {
 			if (flags[kFLAGS.SFW_MODE] > 0) {
 				doSFWloss();

@@ -167,7 +167,7 @@ private function justFriendsWithAnalTailWaifu():void {
 	
 	outputText("\n\nYou wave as Hel retreats back toward her own home.");
 	flags[kFLAGS.HELIA_FOLLOWER_DISABLED] = .5;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Hel Comes to Camp -- Intro Scenes (Play in Order)
@@ -377,7 +377,7 @@ private function bimboSophieGetsBooted4Firebutt():void {
 		outputText("\n\nGod DAMMIT, Hel.");
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Boot Hel]
@@ -401,7 +401,7 @@ private function bootHelOutForBimboSophie():void {
 	//Block future move ins
 	flags[kFLAGS.HELIA_FOLLOWER_DISABLED] = 1;
 	//Reduces her encounter rate
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Work it Out]
@@ -418,7 +418,7 @@ private function workItOutWithSophieAndFireTits():void {
 	outputText("\n\nHel sighs, and rolls her eyes.  <i>\"I dunno, [name]. I don't like having her around, but - hey, get off - I guess if you're sure she's harmle- DAMMIT woman get your tits out of my face - I guess I can live with he- okay, okay, gimme a minute to settle in and I'll fuck ya already!  Damn!\"</i>");
 	outputText("\n\nWell, maybe they'll get along after all...");
 	flags[kFLAGS.KEEP_HELIA_AND_SOPHIE] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //If Hel is at Camp and Isabella Arrives, neither are cool
@@ -470,7 +470,7 @@ public function angryHelAndIzzyCampHelHereFirst():void {
 	if(isabellaAccent()) outputText("<i>\"You are... velcome,\"</i> Isabella says before collecting some of the scattered belongings from the ground.  You continue your tour, now that the girls are...  not going to murder each other in the middle of the night, at least.");
 	else outputText("<i>\"You're... welcome,\"</i> Isabella says before collecting some of the scattered belongings from the ground.  You continue your tour, now that the girls are...  not going to murder each other in the middle of the night, at least.");
 	flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -844,7 +844,7 @@ private function talkToHel():void {
 	}
 
 	flags[kFLAGS.FOLLOWER_HEL_TALKS]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	
 //Shut up, slut
@@ -864,7 +864,7 @@ private function shutUpHelTalks():void {
 		outputText("\n\nAfter a moment, Hel adds, <i>\"Sorry, lover. I just... get carried away with stories.  Wanted to be a bard, once.  Anyway, uh, sorry.  Didn't wanna make you uncomfortable... I'm sorry, lover.  I'll just, uh, wander off, then.\"</I.  Excusing herself, Hel gets up and heads off to attend to something else.  You don't really know how to feel about Hel's little romp with a gnoll village.  Perhaps it's best that you not dwell on it for too long.");
 	}
 	flags[kFLAGS.FOLLOWER_HEL_TALKS]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Listen In
 private function listenToHelTalkAboutGnolls():void {
@@ -906,7 +906,11 @@ private function listenToHelTalkAboutGnolls():void {
 	//Sex options here maybe?
 	flags[kFLAGS.FOLLOWER_HEL_TALKS]++;
 	heliaRoughSex(false);
+<<<<<<< HEAD
 	addButton(14,"Leave",eventParser,13);
+=======
+	addButton(9,"Leave",camp.returnToCampUseOneHour);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 //	doNext(13);
 }
 
@@ -946,7 +950,7 @@ private function hugASmokeyTail():void {
 		outputText("\n\nAfter a few moments, Hel puts a hand on your back and leans you back, like a gentleman in a storybook, cupping your cheek before pressing her lips to yours.  She holds you in a long, affectionate kiss, her slender tongue wrapping playfully around your own.");
 		outputText("\n\n<i>\"Oh, [name],\"</i> Hel sighs happily, holding you back against her bosom.  <i>\"My cute little [name].\"</i>");
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Talk about futafication, requires 75+ Helia Bonus Points. 
@@ -1056,9 +1060,16 @@ private function heliaRoughSex(output:Boolean = true):void {
 			}
 		}
 	}
+<<<<<<< HEAD
 	if(player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
 	if(inCombat()) addButton(14,"Leave",cleanupAfterCombat);
 	else addButton(14,"Back",heliaFollowerMenu);
+=======
+	if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
+	if (getGame().inCombat)
+		addButton(9, "Leave", cleanupAfterCombat);
+	else addButton(9, "Back", heliaFollowerMenu);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 //Note 2 Fen: Copypasta old PC Victory scenes here ^ EXCEPT for Morph-based scenes!
@@ -1154,8 +1165,9 @@ private function possessIzma():void {
 	
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 	
 
@@ -1193,8 +1205,9 @@ private function inCampHelNagaLuv():void {
 	
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }	
 
 //"Rough" Sex -- Naga Coil (Female w/ Naga Lower Body)
@@ -1222,8 +1235,9 @@ private function nagaCoilForHelCampWithGirls():void {
 	
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }	
 
 
@@ -1263,8 +1277,9 @@ private function centaurMountsCampHel():void {
 	
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }	
 
 //"Rough Sex" -- Centauress-PC & Hel (PC must have Centaur Pole)
@@ -1295,8 +1310,9 @@ private function femtaurPlusCampHel():void {
 	outputText("\n\nBreathing heavily, you pat her on the cheek and stumble off to get cleaned up.");
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Rough Sex -- Tentafuck
@@ -1319,8 +1335,9 @@ private function heliaFollowerTentafuck():void {
 	outputText("\n\nYou roll your eyes and go to get cleaned up.");
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Boxing
@@ -1341,7 +1358,11 @@ private function boxWithInCampHel():void {
 		//[Display Rough Sex menu]
 		dynStats("str", 1,"tou", 1);
 		heliaRoughSex(false);
+<<<<<<< HEAD
 		addButton(14,"Leave",eventParser,13);
+=======
+		addButton(9,"Leave",camp.returnToCampUseOneHour);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	}
 	//If STR check succeeds:
 	else if(player.str/20 + 1 + rand(20) >= 13) {
@@ -1352,7 +1373,11 @@ private function boxWithInCampHel():void {
 		//Display Rough Sex menu
 		dynStats("str", 2);
 		heliaRoughSex(false);
+<<<<<<< HEAD
 		addButton(14,"Leave",eventParser,13);
+=======
+		addButton(9,"Leave",camp.returnToCampUseOneHour);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	}
 	//If PC fails the Check:  
 	else {
@@ -1367,7 +1392,11 @@ private function boxWithInCampHel():void {
 			}
 		}
 		heliaRoughSex(false);
+<<<<<<< HEAD
 		addButton(14,"Leave",eventParser,13);
+=======
+		addButton(9,"Leave",camp.returnToCampUseOneHour);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	}
 }
 
@@ -1439,7 +1468,7 @@ private function muddyLizardFeet():void {
 	
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Take a Bath
@@ -1489,7 +1518,7 @@ private function takeABath():void {
 		//Swim With Hel -- Lust less than 33
 		else {
 			outputText("\n\nYou and Helia cuddle in the steaming river, the minutes passing pleasantly in each other's embrace.  Eventually Hel looks up at you, her bright eyes shining in the misty air, a small smile on her lips.  You kiss her, leaning in as the salamander presses herself against you, ardently returning your show of passion.  \"<i>I wish we could stay like this forever,</i>\" Hel whispers, breaking the kiss to nuzzle against your neck. You stroke her hair and hold her close until your duties as Champion call you back to your work.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }
@@ -1538,7 +1567,7 @@ private function teachHelToSwim():void {
 	outputText("\n\nBefore you know it, you and Hel are splashing each other with abandon, her former fears utterly forgotten as the two of you play happily in the water...");
 	outputText("\n\n(You can now go swimming with Hel!)");
 	flags[kFLAGS.HEL_CAN_SWIM] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1649,7 +1678,7 @@ private function heliaAndVapula():void {
 	}
 	player.orgasm();
 	dynStats("sen", -2, "cor", 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Helia + Kiha
@@ -1714,7 +1743,7 @@ private function girlsThreesomeHelAndKiha():void {
 	outputText("\n\nWith the two lizard-girls distracted, you languidly pull their limp tails out of your holes, relishing the blessedly empty feeling left before you collapse into a pool of your own juices... just to catch your breath, you insist.");
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //Male Helia + Kiha Threesome (Episode III: Revenge of the Footjobs)
 private function dudeHeliaAndKihaThreeSome():void {
@@ -1753,7 +1782,7 @@ private function dudeHeliaAndKihaThreeSome():void {
 	outputText("\n\n\"<i>FIREBUUUUUUUTTT!!!</i>\"");
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Hel x Valeria Threesome
@@ -1807,7 +1836,7 @@ private function helXValeriaFemalePC():void {
 	outputText("\n\nHanging her head, Hel moves with you so that you can both get on all fours. Hel swings a leg over your ass, making it so that you're sitting butt-to-butt, the knots in both your asses slowly deflating - a bit too realistically for comfort...");
 	player.orgasm();
 	dynStats("sen", -3);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Guard Camp / Unguard Camp
@@ -1898,7 +1927,7 @@ private function giveHeliaAnalTraining():void {
 	player.consumeItem(consumables.GOB_ALE,1);
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);	
+	doNext(camp.returnToCampUseOneHour);	
 }
 
 private function heliaGapeSceneChoices():void {
@@ -1926,7 +1955,7 @@ private function noGapeSlutForHelia():void {
 	outputText("You step up and kiss Helia, telling her that she doesn’t have to this for you, at least not right now.");
 	outputText("\n\n“<i>Seriously, lover mine? I thought you’d like to do a little anal adventuring with that massive pole you’re packin’,</i>” the salamander asks while looking at you with some concern. A huge smile suddenly spreads across her mouth as she realizes just what’s going on. “<i>You’re worried about me!</i>” Helia slugs you on the shoulder none too softly before slamming you into a tight hug, pressing you into her heavy breasts and lifting you off the ground, her face nuzzling tenderly against you.");
 	outputText("\n\nYour [feet] hit the ground when the confident salamander drops you, and she says, “<i>Your call. I’m gonna pour these into my still to give it a little extra kick. Don’t fret, the transformative shit should burn off right quick.</i>” She turns and depart, her tail giving you a heat slap on the [butt]. “<i>Catch ya later, [name].</i>”");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1956,7 +1985,7 @@ private function yesMakeHeliaAGapeSlut():void {
 	outputText(" Helia burps. “<i>Fuck me that was awesome! Whoah, don’t mind me, but I, uh... I think I’m gonna stay here for a little while, maybe just rock up and down till I come down off this buzz. She blushes and begins to finger her snatch again. Just let me... just let me get used to.</i>” She shoos you away and goes back to toying with herself, getting used to her new “flexibility”.");
 	outputText("\n\n“<i>You’re gonna fall in love with my asshole, lover mine,</i>” Helia calls after you.");
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //It's Helia's Birthday, Bitch (Or, how Helia officially crossed the Mary Sue line)
@@ -2157,7 +2186,7 @@ private function leaveWithoutSex():void {
 	outputText("\n\nThere's a general murmur of approval as Hel picks up another beer, kicks it back, and then takes your hand. You follow your lover through the crowd, shaking hands and getting patted on the shoulder - and hearing more than a few immature catcalls from the increasingly drunk phoenixes and fox-girls.");
 
 	outputText("\n\nWhen you get to the door, Hel holds you close, snuggling against you as you walk.  \"<i>Thanks for coming, [name].  I love you.</i>\"");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Leave w/ Girls
@@ -2286,7 +2315,7 @@ private function helAndSluttyHarpyMale():void
 
 	player.orgasm();
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function helAndSluttyHarpyFemale():void
@@ -2349,7 +2378,7 @@ private function helAndSluttyHarpyFemale():void
 
 	player.orgasm();
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function helAndSluttyHarpyGenderless():void
@@ -2374,7 +2403,7 @@ outputText("\n\nYour hand slides across Sophie’s stomach to squeeze one of her
 
 	player.orgasm();
 	menu();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 	}
 }

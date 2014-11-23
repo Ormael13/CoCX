@@ -95,20 +95,15 @@ package classes.Scenes.Areas
 			//Pick one
 			choices[rand(choices.length)]();
 		}
-
-		private function plainsLoot():void
-		{
-			//OVI
-			if (rand(2) == 0) {
-				outputText("While exploring the plains you nearly trip over a discarded, hexagonal bottle.  ", false);
-				menuLoc = 2;
-				inventory.takeItem(consumables.OVIELIX);
+		
+		private function plainsLoot():void {
+			if (rand(2) == 0) { //OVI
+				outputText("While exploring the plains you nearly trip over a discarded, hexagonal bottle.  ");
+				inventory.takeItem(consumables.OVIELIX, camp.returnToCampUseOneHour);
 			}
-			// FIND KANGAAA
-			else {
-				outputText("While exploring the plains you come across a strange-looking plant.  As you peer at it, you realize it has some fruit you can get at.  ", false);
-				menuLoc = 2;
-				inventory.takeItem(consumables.KANGAFT);
+			else { //FIND KANGAAA
+				outputText("While exploring the plains you come across a strange-looking plant.  As you peer at it, you realize it has some fruit you can get at.  ");
+				inventory.takeItem(consumables.KANGAFT, camp.returnToCampUseOneHour);
 			}
 		}
 	}

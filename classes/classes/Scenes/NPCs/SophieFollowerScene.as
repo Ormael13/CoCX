@@ -100,8 +100,8 @@ private function bimboSophieAgain():void {
 	flags[kFLAGS.SOPHIE_DEBIMBOED] = 0;
 	flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] = 0;
 	player.consumeItem(consumables.BIMBOLQ);
-	if(inCombat()) cleanupAfterCombat();
-	//(Display Sophie's normal options.You monster)
+	if (getGame().inCombat)
+		cleanupAfterCombat(); //(Display Sophie's normal options.You monster)
 	else sophieBimbo.approachBimboSophieInCamp(false);
 }
 
@@ -179,8 +179,9 @@ private function letDebimboSophieGo():void {
 		}
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Why I Did It (I'm a Monster, you see)*
@@ -200,8 +201,9 @@ private function whyIDidItToDebimboSophie():void {
 	
 	outputText("\n\nYou nod, and tell Sophie to make herself at home.");
 	outputText("\n\n(<b>Sophie has been moved to the \"Followers\" tab!</b>)");
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Apologize (Sorry I'm a Monster)*
@@ -224,8 +226,9 @@ private function apologizeToDebimboSophie():void {
 	outputText("\n\nYou nod, and tell Sophie to make herself at home.");
 	//{Sophie has been moved to the \"Followers\" tab!}
 	outputText("\n\n(<b>Sophie has been moved to the \"Followers\" tab!</b>)");
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -334,7 +337,7 @@ private function sendToFarm():void
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 1;
 	
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function backToCamp():void
@@ -638,7 +641,7 @@ private function sophieVagFollowerFollowup():void {
 	else outputText("It's always better when you have to wait for it, isn't it?");
 	outputText("</i>\"");
 	outputText("\n\nYou'd come up with a snarky reply, but you're just so fucking tired.  You sigh and try to get dressed, having some difficulty getting on your [feet] until Sophie lends a hand.  She kisses you on the cheek and mouths \"<i>thanks</i>\" before flouncing off, fluttering happily.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Blowjob*
@@ -728,7 +731,7 @@ private function sophieBlowsSixtyNine():void {
 	player.orgasm();
 	dynStats("sen", 1);
 	dynStats("lus", 10);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Forceful Blowjob*
@@ -786,7 +789,7 @@ private function forceSophieBlowjob():void {
 	outputText("\n\nYou get dressed with a self-satisfied sigh.");
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //SixtyNine (* Temp until someone writes dis shit)
@@ -989,7 +992,7 @@ private function sophieSpecial():void {
 	player.orgasm();
 	if(sophieBimbo.sophieIsInSeason()) sophieBimbo.sophiePregChance();
 	fatigue(15);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Regular Sophie Follower
@@ -1203,7 +1206,7 @@ private function phaseTwoOfIncest(daughter:int):void {
 	//pass time 1 hour//
 	//return PC to camp interface//
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

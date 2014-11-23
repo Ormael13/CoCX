@@ -140,8 +140,8 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			outputText("There's no way you're going to go gallivanting off into the woods after some flame.  You shake your head to clear your thoughts, and warily turn away to head back toward camp.  You could almost swear for a moment the flame looked disappointed, and you chuckle lightly at such a silly thought.");
 			//Advance time 1 hour, return to camp.
-			if (inCombat()) cleanupAfterCombat();
-			doNext(13);
+			if (getGame().inCombat) cleanupAfterCombat();
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[Follow] (C)
@@ -174,7 +174,7 @@ package classes.Scenes.Areas.Forest
 				outputText("How did she get behind you so quickly?  You were staring at her the entire time!  Glancing quickly over your shoulder, you confirm that this is not a case of twins, but when you turn to face her, she has disappeared once again!\n\n");
 				outputText("\"<i>Over here, silly~</i>\" she calls to you with a mischievous tone, beckoning to you as you whip around to face her voice.  \"<i>Don't be shy, I don't bite...  often...</i>\"\n\n");
 				outputText("Her tone is innocuous enough, but her mannerisms are a little disconcerting, somehow.  What are you going to do?");
-				if (!inCombat()) simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", 0, "", 0, "", 0);
+				if (!getGame().inCombat) simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", 0, "", 0, "", 0);
 				else simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", 0, "", 0, "", 0);
 			}
 		}
@@ -204,7 +204,7 @@ package classes.Scenes.Areas.Forest
 			}
 			//MERGE
 			outputText("You twist away, trying to shake off the tingling sensations that are crawling across your body, impairing your ability to think rationally.\n\n");
-			outputText("\"<i>Oh, you're no fun,</i>\" she says, smirking a bit as you pull away.  \"<i>Won't you come and play?  I promise that you won't be disappointed....  My sisters and I will see to that.</i>\"\n\n");
+			outputText("\"<i>Oh, you're no fun,</i>\" she says, smirking a bit as you pull away.  \"<i>Won't you come and play?  I promise that you won't be disappointed... my sisters and I will see to that.</i>\"\n\n");
 			outputText("Self-preservation battles with curiosity " + ((player.lust > 50) ? "and lust " : "" ) + "as you consider her offer, " + ((player.lib < 50) ? "weighing your chances against the possible dangers." : "eying the voluptuous curves that fill out her robes."));
 
 			//[Follow { mansion(willing = true) }] [Leave]
@@ -226,14 +226,13 @@ package classes.Scenes.Areas.Forest
 
 			outputText("She holds out a small white package tied with string, grinning eagerly.  You hesitate, wondering whether it would be wise to take a gift from this strange woman, but before you can protest, she shoves the package into your hands.  When you look up from the featureless wrapping, there is no sign of her save for the echo of a mischievous giggle through the trees.\n\n");
 			outputText("<b>You have received a Kitsune's Gift!</b>\n");
-			if (inCombat()) {
+			if (getGame().inCombat) {
 				flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.KITGIFT.id;
 				cleanupAfterCombat();
 			}
 			else {
 				//add Kitsune's Gift to inventory
-				menuLoc = 2;
-				inventory.takeItem(consumables.KITGIFT);
+				inventory.takeItem(consumables.KITGIFT, camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -598,7 +597,7 @@ package classes.Scenes.Areas.Forest
 			outputText("\"<i>Oh my!  It looks like we're in for a real treat tonight, sisters...</i>\" the blonde says as she runs her hands along your impressive prehensile endowments.\n\n");
 			outputText("\"<i>Mmm...  tentacles...  my favorite flavor,</i>\" the black-haired one chimes in, rubbing her pudgy belly and licking her lips hungrily.  Slipping into the water next to you, each of them takes one of your hulking tentacles into her hands, grinning eagerly.  Working together, they weave their tails through your brace of writhing appendages, cinching tight around the base of each one as their fingers slide along the flexible shafts.  Trails of blue fire dance across each writhing tentacle, sending you into a shivering, shuddering frenzy, and the three sisters cast each other knowing grins.  Your liquor-addled mind is too foggy by now to resist their advances, " + ((player.lib < 50) ? "slurred protests falling on deaf ears." : "though who would want to?") + "\n\n");
 			outputText("\"<i>Oh, I do so enjoy our work,</i>\" the blonde remarks, running her hand up to the tip of your cock and squeezing the bulbous head experimentally.  She flashes a satisfied smirk at the way your firm flesh yields under her touch, nodding softly.  The tip of one of her tails trails along the underside, tickling you sensually as more coils of fur stroke and knead along the obscene organ.\n\n");
-			outputText("\"<i>We just looooove tentacles,</i>\" the black-haired girl explains to you, giggling like a schoolgirl as one of your obscene tendrils starts moving on its own, sliding down between her legs and threading its way between her expansive ass cheeks.  \"<i>When we see tentacles this thick, long, and...</i>\" she pauses to wrap her lips around the end of your cock, sliding her tongue along the tip, \"<i>...mmm... juicy....  It's just impossible to contain our excitement.</i>\"\n\n");
+			outputText("\"<i>We just looooove tentacles,</i>\" the black-haired girl explains to you, giggling like a schoolgirl as one of your obscene tendrils starts moving on its own, sliding down between her legs and threading its way between her expansive ass cheeks.  \"<i>When we see tentacles this thick, long, and...</i>\" she pauses to wrap her lips around the end of your cock, sliding her tongue along the tip, \"<i>... mmm... juicy.... it's just impossible to contain our excitement.</i>\"\n\n");
 			outputText("As if to illustrate this point, she hungrily swallows almost a foot of your wriggling tentacle, a trail of spittle hanging out lazily from one corner of her mouth as she swallows carefully along your length.  Your writhing shafts are assaulted on all sides by all manner of touches and caresses; fingers, tongues, tails and breasts all working in glorious harmony to tease and pleasure you.  One tendril instinctively coils around one of the blonde's breasts, squeezing it tightly while the tip pokes and prods the soft flesh, teasing her pert pink nipples.  Moaning in response, she slides her fingers along the base, cool blue flames crackling to life across her fingertips and sending chills through your body.  Each of your thick tentacles swells up incredibly, the kitsune's magic sending jolts of pleasure across the surface.  As the pale flames dance across your groin, you feel an odd tension building up, and in a shower of viscous cum, your loins erupt into a monstrous, wriggling mass of at least a dozen undulating tentacles!\n\n");
 			outputText("\"<i>Hehe, that's how we like it!</i>\"  the blonde says with a chuckle, pressing her body to the squirming brace of tentacles and moaning in anticipation.\n\n");
 			outputText("You feel something warm prodding you in the side, and look down to find that the redhead has something between her legs that her sisters are lacking.  With one of your undulating cocks curled down between her legs, she begins to grind herself against you, lining up her thick, throbbing member up against one of yours and rubbing her hips back and forth lewdly.  Grabbing a segment of your ropey dick, she coils it around the base of her own, thrusting through the ring of cock flesh and groaning into your ear.\n\n");
@@ -664,7 +663,8 @@ package classes.Scenes.Areas.Forest
 				}
 				model.time.hours = 6;
 				model.time.days++;
-				if (!inCombat()) doNext(13);
+				if (!getGame().inCombat)
+					doNext(camp.returnToCampUseOneHour);
 				else cleanupAfterCombat();
 			}
 		}
@@ -2280,7 +2280,7 @@ package classes.Scenes.Areas.Forest
 			addButton(0, "Read Books", readKitsuneBooks);
 			if (flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(1, "Meditate", meditateLikeAKitsuneEhQuestionMark);
 			if (player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(2, "Statue", stealAStatue);
-			addButton(4, "Leave", eventParser, 13);
+			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}
 
 //[Read Books]
@@ -2294,19 +2294,19 @@ package classes.Scenes.Areas.Forest
 				outputText("It's a rather dry read, but informative.  Chapter after chapter explains the underlying theory of magic, going to almost excruciating levels of detail.  " + ((player.inte < 50) ? "Much of it flies over your head, but the book does manage to clarify a few points.  You close the book and set it back on the shelf, feeling like you've learned something." : "Much of it is merely review, but you do manage to glean a few facts before closing the book and setting it back on the shelf."));
 				//+2 INT, Advance 1hr and return to camp
 				dynStats("int", 2);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else if (choice == 1) {
 				outputText("It seems to be a religious text of some sort.  As you flip through the pages, you read about various rituals and scriptures, familiarizing yourself with the spirits and gods of this land.  You close the tome at last, setting it reverently back on the shelf and reflecting upon the teachings housed within.");
 				//-1 COR, Advance 1hr and return to camp
 				dynStats("cor", -1);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else {
 				outputText("You start to flip through the pages, a deep blush slowly forming on your cheeks the further you read into what is clearly an erotic novella of some form.  Graphic descriptions of women being violated by tentacle beasts abound on almost every page, " + ((player.lib < 50) ? "and you slam the book shut before reading further, already feeling a heat building in your groin." : "and you lick your lips hungrily, poring over every line and word of lascivious prose."));
 				//+ 1 LIB, + 5 LUST, Advance 1hr and return to camp
 				dynStats("lib", 1, "lus", 5);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -2335,14 +2335,14 @@ package classes.Scenes.Areas.Forest
 					dynStats("int", 2, "lus", -20, "cor", -2);
 				}
 				player.consumeItem(consumables.FOXJEWL);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else {
 				//Normal:
 				outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.  As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
 				//-2 COR, -20 LUST, +1 INT, Advance 1hr and return to camp.
 				dynStats("int", 1, "lus", -20, "cor", -2);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -2370,8 +2370,7 @@ package classes.Scenes.Areas.Forest
 			outputText("The thought of how many gems you'll be able to get for it is enough to quickly suppress those feelings, avarice winning out over guilt.");
 			//+10 COR, add Gold Statue to inventory, Advance 1hr and return to camp
 			dynStats("lus", 10);
-			menuLoc = 2;
-			inventory.takeItem(useables.GLDSTAT);
+			inventory.takeItem(useables.GLDSTAT, camp.returnToCampUseOneHour);
 			flags[kFLAGS.TOOK_KITSUNE_STATUE] = 1;
 		}
 
@@ -2383,7 +2382,7 @@ package classes.Scenes.Areas.Forest
 			//Advance 1hr and return to camp.
 			flags[kFLAGS.TOOK_KITSUNE_STATUE] = 0;
 			player.consumeItem(useables.GLDSTAT);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Use:

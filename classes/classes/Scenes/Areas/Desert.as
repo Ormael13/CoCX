@@ -55,6 +55,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//int over 50?  Chance of alice encounter!
+<<<<<<< HEAD
 			if (rand(4) == 0 && player.inte > 50) {
 				if (flags[kFLAGS.FOUND_WIZARD_STAFF] == 0) {
 					outputText("", true);
@@ -80,6 +81,16 @@ package classes.Scenes.Areas
 					doNext(13);
 					return;
 				}
+=======
+			if (rand(4) == 0 && player.inte > 50 && flags[kFLAGS.FOUND_WIZARD_STAFF] == 0) {
+				outputText("", true);
+				outputText("While exploring the desert, you see a plume of smoke rising in the distance.  You change direction and approach the soot-cloud carefully.  It takes a few moments, but after cresting your fourth dune, you locate the source.  You lie low, so as not to be seen, and crawl closer for a better look.\n\n", false);
+				outputText("A library is burning up, sending flames dozens of feet into the air.  It doesn't look like any of the books will survive, and most of the structure has already been consumed by the hungry flames.  The source of the inferno is curled up next to it.  It's a naga!  She's tall for a naga, at least seven feet if she stands at her full height.  Her purplish-blue skin looks quite exotic, and she wears a flower in her hair.  The naga is holding a stick with a potato on the end, trying to roast the spud on the library-fire.  It doesn't seem to be going well, and the potato quickly lights up from the intense heat.\n\n", false);
+				outputText("The snake-woman tosses the burnt potato away and cries, \"<i>Hora hora.</i>\"  She suddenly turns and looks directly at you.  Her gaze is piercing and intent, but she vanishes before you can react.  The only reminder she was ever there is a burning potato in the sand.   Your curiosity overcomes your caution, and you approach the fiery inferno.  There isn't even a trail in the sand, and the library is going to be an unsalvageable wreck in short order.   Perhaps the only item worth considering is the stick with the burning potato.  It's quite oddly shaped, and when you reach down to touch it you can feel a resonant tingle.  Perhaps it was some kind of wizard's staff?\n\n", false);
+				flags[kFLAGS.FOUND_WIZARD_STAFF]++;
+				inventory.takeItem(weapons.W_STAFF, camp.returnToCampUseOneHour);
+				return;
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			}
 			//Possible chance of boosting camp space!
 			if (player.hasKeyItem("Camp - Chest") < 0 && (rand(100) < 10)) {
@@ -91,7 +102,7 @@ package classes.Scenes.Areas
 				inventory.createStorage();
 				inventory.createStorage();
 				player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//Chance of dick-dragging! 10% + 10% per two foot up to 30%
@@ -107,8 +118,8 @@ package classes.Scenes.Areas
 
 			//Encounter Sandwitch
 			if (flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) {
-				choices[choices.length] = eventParser;
-				args[args.length] = 2005;
+				choices[choices.length] = sandWitchScene.encounter;
+				args[args.length] = -8008;
 			}
 			if (flags[kFLAGS.CUM_WITCHES_FIGHTABLE] > 0) {
 				choices[choices.length] = kGAMECLASS.dungeons.desertcave.fightCumWitch;
@@ -147,7 +158,7 @@ package classes.Scenes.Areas
 			clearOutput();
 			outputText("While exploring the desert, you see a shimmering tower in the distance.  As you rush towards it, it vanishes completely.  It was a mirage!   You sigh, depressed at wasting your time.", true);
 			dynStats("lus", -15);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function walkingDesertStatBoost():void
@@ -167,7 +178,7 @@ package classes.Scenes.Areas
 					dynStats("tou", .5);
 				}
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

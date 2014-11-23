@@ -241,7 +241,7 @@ private function runFromMinotaurs():void {
 	//ESCAPE!
 	if((player.canFly() && player.spe > rand(40)) || (!player.canFly() && player.spe > rand(60))) {
 		outputText("A furry arm nearly catches your " + player.leg() + ", but you slip free and quickly escape your lusty brood.", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//FAIL:
 	else {
@@ -392,11 +392,10 @@ private function nonAddictMinotaurGangBang():void {
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "cor", 1);
 	player.slimeFeed();
 	player.minoCumAddiction(20);
-	if(inCombat()) cleanupAfterCombat();
+	if (getGame().inCombat) cleanupAfterCombat();
 	else {
-		menuLoc = 18;
 		outputText("\n\n", false);
-		inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]));
+		inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]), camp.returnToCampUseEightHours);
 	}
 }
 
@@ -488,8 +487,8 @@ private function loseToMinoMobVeryPregnant():void {
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", 1);
 	player.slimeFeed();
 	player.minoCumAddiction(15);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(16);
+	if (getGame().inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseEightHours);
 }
 		
 //*[Loss Anal And BJ Spearing, Somewhat Preg?] (feels almost the same as the standard loss, added a demi-scene for nipcunts) (otherwise, edited)
@@ -592,8 +591,8 @@ private function analSpearSemiPregMinotaurGangbang():void {
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", 1);
 	player.slimeFeed();
 	player.minoCumAddiction(15);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(16);
+	if (getGame().inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseEightHours);
 }
 
 
@@ -724,11 +723,10 @@ private function victoryMinotaurGangTitFuck():void {
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", .5);
 	player.slimeFeed();
 	player.minoCumAddiction(15);
-	if(inCombat()) cleanupAfterCombat();
+	if (getGame().inCombat) cleanupAfterCombat();
 	else {
-		menuLoc = 2;
 		outputText("\n\n", false);
-		inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]));
+		inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]), camp.returnToCampUseOneHour);
 	}
 }
 
@@ -822,10 +820,9 @@ private function victoryAllThePenetrationsMinotaurGangBang():void {
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "cor", 1);
 	player.slimeFeed();
 	player.minoCumAddiction(20);
-	if(inCombat()) cleanupAfterCombat();
-	else {
-		doNext(13);
-	}
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //*[Victory - Make minitaur oral (M/F/H)] 
@@ -939,10 +936,9 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 	outputText("Finished with him, you push him back to let him fall on the ground, his face wet with your cum.  The poor minitaur is harder than ever, and though his cock looks tempting, you're already satisfied.  You get dressed and blow a kiss to the poor boy.  \"<i>Be good for Momma, okay?</i>\"  He nods dumbly as you saunter away.", false);
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else {
-		doNext(13);
-	}
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //*[Victory- BJ + Nipplefucking] (boring, samey, not actually punishment again, could have been shoving very long nipples into urethras) (edited)
@@ -1008,10 +1004,9 @@ private function victoryBJNippleFuckMinotaurGang():void {
 	dynStats("spe", -.5, "int", -.5, "sen", -1, "cor", 1);
 	player.minoCumAddiction(10);
 	player.slimeFeed();
-	if(inCombat()) cleanupAfterCombat();
-	else {
-		doNext(13);
-	}
+	if (getGame().inCombat)
+		cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Bad End Scene: 

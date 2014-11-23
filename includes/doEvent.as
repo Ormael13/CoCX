@@ -3,6 +3,7 @@
 
 public function doEvent(eventNo:Number):void
 {
+/*
 	var temp2:Number = 0;
 	//New game gooooooo!
 	if (eventNo == 2000)
@@ -79,7 +80,7 @@ public function doEvent(eventNo:Number):void
 		if (player.statusAffectv1(StatusAffects.JojoMeditationCount) % 5 == 0)
 		{
 			outputText("\n\nYou ponder and get an idea - the mouse could stay at your camp.  There's safety in numbers, and it would be easier for the two of you to get together for meditation sessions.  Do you want Jojo's company at camp?", false);
-			doYesNo(2149, 14);
+			doYesNo(jojoScene.acceptJojoIntoYourCamp, 14);
 			return;
 		}
 		else
@@ -107,7 +108,7 @@ public function doEvent(eventNo:Number):void
 			startCombat(new SandWitch());
 		}
 		else
-			doYesNo(2006, 2007);
+			doYesNo(allowSandWitchMagic, refuseSandWitchMagic);
 	}
 	//SANDVICH MAGICK
 	else if (eventNo == 2006)
@@ -204,6 +205,7 @@ public function doEvent(eventNo:Number):void
 		trace("Tentacle event here");
 		outputText("", true);
 		spriteSelect(100);
+*/
 		//Tentacle Encounter - beware legalese!
 		/*
 		   LICENSE
@@ -246,6 +248,7 @@ public function doEvent(eventNo:Number):void
 		
 		   This license supercedes all previous licenses and remains in force.
 		 */
+/*
 		//Gender hilarity chance.
 		if (player.gender == 0 && rand(3) == 0 && !player.isNaga() && !player.isTaur() && !player.isGoo())
 		{
@@ -285,7 +288,7 @@ public function doEvent(eventNo:Number):void
 		if (player.cor > 50)
 		{
 			outputText("Do you joyfully submit or fight back?\n\n", false);
-			simpleChoices("Fight", 2080, "Submit", forest.tentacleBeastScene.tentacleLossRape, "", 0, "", 0, "", 0);
+			simpleChoices("Fight", forest.tentacleBeastScene.startTentacleBeastCombat, "Submit", forest.tentacleBeastScene.tentacleLossRape, "", null, "", null, "", null);
 			return;
 		}
 		startCombat(new TentacleBeast());
@@ -335,7 +338,7 @@ public function doEvent(eventNo:Number):void
 			if (player.vaginas.length > 1)
 				outputText("s", false);
 			outputText(" and your mouth. You are being inseminated by the abomination, but you do not care. The fucking is too good. The hot, musky fluids pour into your mouth. The taste crushes your last bit of resistance and you NEED MORE, not just to swallow, but to devour with your womb. You manage to free one hand, only to grasp the tentacle in your mouth to coax more semen inside you. You feel your stomach distend from the amount of cum you greedily swallow. The beast floods you with more cum than you can handle and proceeds to soak you from head to toe in its fluids as it runs from your overwhelmed orifices.", false);
-			doNext(2011);
+			doNext(tentacleRapeContinuationForFemales);
 			player.slimeFeed();
 			//lactate more from the encounter.
 			player.boostLactation(.3);
@@ -367,7 +370,7 @@ public function doEvent(eventNo:Number):void
 			//lactate more from the encounter.
 			player.boostLactation(.3);
 		}
-		if (gameState > 0)
+		if (inCombat)
 			cleanupAfterCombat();
 		else
 			doNext(13);
@@ -423,7 +426,7 @@ public function doEvent(eventNo:Number):void
 		if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT)
 			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		player.slimeFeed();
-		if (gameState > 0)
+		if (inCombat)
 			cleanupAfterCombat();
 		else
 			doNext(13);
@@ -709,17 +712,182 @@ public function doEvent(eventNo:Number):void
 			doNext(13);
 		}
 	}
-	
-	//A WILD GIACOMO APPEARS - MOVED TO GIACOMO
-	//Potion list! - MOVED TO GIACOMO
-	//Book list! - MOVED TO GIACOMO
-	//Erotica List - Sex Toy Choices! - MOVED TO GIACOMO
-	//Pitch Vitality Tincture - MOVED TO GIACOMO
-	//Purchase Vitality Tincture - MOVED TO GIACOMO
-	//Pitch Scholar's Tea - MOVED TO GIACOMO
-	//Purchase Scholar's Tea - MOVED TO GIACOMO
-	//Pitch cerulean potion - MOVED TO GIACOMO
-	//Purchase cerulean potion - MOVED TO GIACOMO
+	//A WILD GIACOMO APPEARS
+	else if (eventNo == 2015)
+	{
+		spriteSelect(23);
+		//set gamestate to 4, used for making item looting function with his shop
+		gameState = 4;
+		if (giacomo > 0)
+		{
+			//If infested && no worm offer yet
+			if (player.findStatusAffect(StatusAffects.WormOffer) < 0 && player.findStatusAffect(StatusAffects.Infested) >= 0)
+			{
+				outputText("Upon walking up to Giacomo's wagon, he turns to look at you and cocks an eyebrow in curiosity and mild amusement.\n\n", true);
+				outputText("\"<i>Been playing with creatures best left alone, I see</i>,\" he chuckles. \"<i>Infestations of any kind are annoying, yet your plight is quite challenging given the magnitude of corrupt creatures around here. It is not the first time I have seen one infested with THOSE worms.</i>\"\n\n", false);
+				outputText("You ask how he knows of your change and the merchant giggles heartily.\n\n", false);
+				outputText("\"<i>Do not look at me as if I am a mystic,</i>\" Giacomo heckles lightly. \"<i>Your crotch is squirming.</i>\"\n\n", false);
+				outputText("Looking down, you realize how right he is and attempt to cover yourself in embarrassment.\n\n", false);
+				outputText("\"<i>Fear not!</i>\" the purveyor jingles. \"<i>I have something that will cure you of those little bastards. Of course, there is also a chance that it will purge your system in general. This potion is not cheap. I will trade it for 175 gems.</i>\"\n\n", false);
+				//Broke as a joke
+				if (player.gems < 175)
+				{
+					outputText("You realize you don't have enough gems for such a pricey potion, but perhaps there is something else in his inventory you can buy.", false);
+					doNext(2015);
+				}
+				//Can afford
+				else
+				{
+					outputText("Do you purchase his cure?", false);
+					//Remove/No
+					doYesNo(2081, 2015);
+				}
+				player.createStatusAffect(StatusAffects.WormOffer, 0, 0, 0, 0);
+			}
+			else
+			{
+				outputText("You spy the merchant Giacomo in the distance.  He makes a beeline for you, setting up his shop in moments.  ", true);
+				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?", false);
+				//If player is infested and knows of the cure..
+				if (player.findStatusAffect(StatusAffects.WormOffer) >= 0 && player.findStatusAffect(StatusAffects.Infested) >= 0)
+				{
+					simpleChoices("Potions", 2016, "Books", 2017, "Erotica", 2018, "Worm Cure", 2082, "Leave", 13);
+				}
+				//If the cure isnt an option
+				else
+					simpleChoices("Potions", 2016, "Books", 2017, "Erotica", 2018, "", 0, "Leave", 13);
+				statScreenRefresh();
+			}
+		}
+		else
+		{
+			outputText("As you travel, you see another person on the road. He is tethered to a small cart that is overloaded with a hodgepodge of items. He is dressed in a very garish manner, having a broad, multicolored hat, brocaded coat and large, striped pantaloons. His appearance is almost comical and contrasts with his severe and hawkish facial features. The man sees you, smiles and stops his cart.\n", true);
+			outputText("\"<i>Greetings, traveler! My name is Giacomo. I am, as you can see, a humble purveyor of items, curios and other accoutrements. While I am not in a position to show you my full wares as my shop is packed on this push-cart, I do offer some small trinkets for travelers I meet.</i>\"\n\n", false);
+			outputText("The merchant looks at you sharply and cracks a wide, toothy smile you find... unnerving. The merchant twists his way around to access a sack he has around his back. After a moment, he swings the sack from his back to have better access to its contents. Inquisitively, the merchant turns back to you.\n", false);
+			outputText("\"<i>So stranger, be you interested in some drafts to aid you in your travels, some quick pamphlets to warn you of dangers on journeys or...</i>\"\n\n", false);
+			outputText("Giacomo pauses and turns his head in both directions in a mocking gesture of paranoid observation. His little bit of theatrics does make you wonder what he is about to offer.\n", false);
+			outputText("\"<i>...maybe you would be interested in some items that enhance the pleasures of the flesh? Hmmm?</i>\"\n\n", false);
+			outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?", false);
+			simpleChoices("Potions", 2016, "Books", 2017, "Erotica", 2018, "", 0, "Leave", 13);
+			statScreenRefresh();
+			giacomo++;
+		}
+	}
+	//Potion list!
+	else if (eventNo == 2016)
+	{
+		spriteSelect(23);
+		outputText("Which potion or tincture will you examine?", true);
+		if (player.gender == 2)
+			simpleChoices("Vitality T.", 2019, "Scholar's T.", 2021, "Blank", 0, "", 0, "Back", 2015);
+		else
+			simpleChoices("Vitality T.", 2019, "Scholars T.", 2021, "Cerulean P.", 2023, "", 0, "Back", 2015);
+		statScreenRefresh();
+	}
+	//Book list!
+	else if (eventNo == 2017)
+	{
+		spriteSelect(23);
+		outputText("Which book are you interested in perusing?", true);
+		if (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0)
+			simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "Yoga Guide", 2940, "Back", 2015);
+		else
+			simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "", 0, "Back", 2015);
+		statScreenRefresh();
+	}
+	//Erotica List - Sex Toy Choices!
+	else if (eventNo == 2018)
+	{
+		spriteSelect(23);
+		outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?", true);
+		
+		var dualBeltNumber:int = 0;
+		if (player.hasKeyItem("Dual Belt") < 0) dualBeltNumber = 2142;
+		
+		if (player.gender == 1)
+			simpleChoices("Dildo", 2035, "Onahole", 2041, "D Onahole", 2044, "", 0, "Back", 2015);
+		if (player.gender == 2)
+			simpleChoices("Dildo", 2035, "Stim-Belt", 2037, "AN Stim-Belt", 2039, "", 0, "Back", 2015);
+		if (player.gender == 3)
+			choices("Onahole", 2041, "D Onahole", 2044, "AN Onahole", 2048, "Stim-Belt", 2037, "AN Stim-Belt", 2039, "Dual Belt", dualBeltNumber, "", 0, "", 0, "Dildo", 2035, "Back", 2015);
+		if (player.gender == 0)
+			simpleChoices("Dildo", 2035, "Onahole", 2041, "Stim-Belt", 2037, "", 0, "Back", 2015);
+		statScreenRefresh();
+	}
+	//Vitality tincture pitch
+	else if (eventNo == 2019)
+	{
+		spriteSelect(23);
+		outputText("Giacomo holds up the item and says, \"<i>Ah, yes! The quintessential elixir for all travelers, this little bottle of distilled livelihood will aid you in restoring your energy on your journey and, should you be hurt or injured, will aid the body's ability to heal itself. Yes ", true);
+		if (player.gender == 1)
+			outputText("sir, ", false);
+		if (player.gender == 2 || player.gender == 3)
+			outputText("madam, ", false);
+		outputText("this is liquid gold for pilgrim and adventurer alike. Interested? It is <b>15 gems</b></i>.\"  ", false);
+		doYesNo(2020, 2016);
+	}
+	//vitality tincture purchase
+	else if (eventNo == 2020)
+	{
+		spriteSelect(23);
+		if (player.gems < 15)
+		{
+			outputText("\n\nGiacomo sighs, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.", true);
+			doNext(2016);
+		}
+		else
+		{
+			player.gems -= 15;
+			inventory.takeItem(consumables.VITAL_T);
+			statScreenRefresh();
+		}
+	}
+	//Pitch Scholar's Tea
+	else if (eventNo == 2021)
+	{
+		spriteSelect(23);
+		outputText("Giacomo holds up a pouch of dried, fragrant leaves and begins his spiel, \"<i>Have you ever wondered how scholars and other smart folk keep up such a mental effort for so long? They make a tea out of this fine mixture of quality plants and herbs. Nothing but the best, this mysterious mixture of herbs in its Orange Pekoe base makes anyone, short of a lummox, as brainy as the finest minds of the land. All you do is steep the leaves in some water and drink up! Hot or cold, straight or sweetened with honey, your mind will run circles around itself once it has this for fuel. Buy it now and I will throw in the strainer for free!  Interested? Only <b>15 gems</b>!</i>\"  ", true);
+		doYesNo(2022, 2016);
+	}
+	//Purchase Scholar's Tea
+	else if (eventNo == 2022)
+	{
+		spriteSelect(23);
+		if (player.gems < 15)
+		{
+			outputText("\n\nGiacomo sighs, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.  ", true);
+			doNext(2016);
+		}
+		else
+		{
+			player.gems -= 15;
+			inventory.takeItem(consumables.SMART_T);
+			statScreenRefresh();
+		}
+	}
+	//Pitch cerulean potion
+	else if (eventNo == 2023)
+	{
+		spriteSelect(23);
+		outputText("Giacomo makes his comical over-the-shoulder search and holds up a sky-blue bottle. He grins widely as he begins his pitch, \"<i>My friend, you truly have a discerning eye. Even the most successful of men seek to attract more women for pleasure and status. This, my friend, will attract the most discerning and aroused of women. Women attracted by this fine unction will NEVER say no. I GUARANTEE that she will want pleasure every time you demand pleasure! A bit of a caution to you, brother. Some say this works TOO well. If you aren't man enough to handle the women this urn draws to you, you'd best say so now and I will offer something more to your liking. However, if you have the heart for it, I can sell you this little gem for <b>75 gems</b></i>!\"  ", true);
+		doYesNo(2024, 2016);
+	}
+	//Purchase cerulean potion
+	else if (eventNo == 2024)
+	{
+		spriteSelect(23);
+		if (player.gems < 75)
+		{
+			outputText("\n\nGiacomo sighs, indicating you need " + String(75 - player.gems) + " more gems to purchase this item.", true);
+			doNext(2016);
+		}
+		else
+		{
+			inventory.takeItem(consumables.CERUL_P);
+			player.gems -= 75;
+			statScreenRefresh();
+		}
+	}
 	//Cerulean Potion Normal Variant!
 	else if (eventNo == 2025)
 	{
@@ -994,6 +1162,8 @@ public function doEvent(eventNo:Number):void
 		}
 		doNext(1);
 	}
+*/
+/*
 	//You fight the bee!
 	else if (eventNo == 2060)
 	{
@@ -1001,9 +1171,10 @@ public function doEvent(eventNo:Number):void
 		spriteSelect(6);
 		startCombat(new BeeGirl());
 	}
+*/
 	//Do you help the wanderer?
 	
-	//Encounter Rathazul
+/*	//Encounter Rathazul - replaced by returnToRathazulMenu in Rathazul.as
 	else if (eventNo == 2070)
 	{
 		if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
@@ -1011,13 +1182,15 @@ public function doEvent(eventNo:Number):void
 		else
 			rathazul.encounterRathazul();
 	}
+*/
+/* Moved to rathazul.as
 	//Purify Incubi Draft
 	else if (eventNo == 2071)
 	{
 		if (player.gems < 20)
 		{
 			outputText("Rathazul says, \"<i>You do not have enough gems for that service.</i>\"", true);
-			doNext(2070);
+			doNext(rathazul.returnToRathazulMenu);
 			return;
 		}
 		outputText("", true);
@@ -1034,7 +1207,7 @@ public function doEvent(eventNo:Number):void
 		if (player.gems < 20)
 		{
 			outputText("Rathazul says, \"<i>You do not have enough gems for that service.</i>\"", true);
-			doNext(2070);
+			doNext(rathazul.returnToRathazulMenu);
 			return;
 		}
 		outputText("", true);
@@ -1051,7 +1224,7 @@ public function doEvent(eventNo:Number):void
 		if (player.gems < 20)
 		{
 			outputText("Rathazul says, \"<i>You do not have enough gems for that service.</i>\"", true);
-			doNext(2070);
+			doNext(rathazul.returnToRathazulMenu);
 			return;
 		}
 		outputText("", true);
@@ -1062,7 +1235,6 @@ public function doEvent(eventNo:Number):void
 		statScreenRefresh();
 		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
 	}
-	
 	//Grab marae's boob!
 	else if (eventNo == 2075)
 	{
@@ -1163,6 +1335,8 @@ public function doEvent(eventNo:Number):void
 		marbleScene.marbleSex2Continued(2);
 		doNext(13);
 	}
+*/
+/* Moved to rathazul.as
 	else if (eventNo == 2124)
 	{
 		outputText("Rathazul smiles happily back at you and begins packing up his equipment.  He mutters over his shoulder, \"<i>It will take me a while to get my equipment moved over, but you head on back and I'll see you within the hour.  Oh my, yes.</i>\"\n\nHe has the look of someone experiencing hope for the first time in a long time.", true);
@@ -1174,6 +1348,8 @@ public function doEvent(eventNo:Number):void
 		outputText("Rathazul wheezes out a sigh, and nods.\n\n\"<i>Perhaps I'll still be of some use out here after all,</i>\" he mutters as he packs up his camp and prepares to head to another spot along the lake.", true);
 		doNext(13);
 	}
+*/
+/*
 	else if (eventNo == 2128)
 	{
 		var ttemp2:Function = null;
@@ -1251,7 +1427,7 @@ public function doEvent(eventNo:Number):void
 		outputText("The belt whirs to life, shaking on your waist, sending jolts of pleasure through your clit as the small inside nub hits it. \"<i>Ohh...</i>\" Suddenly, the ring around your cock vibrates and then tightens hard around your cock, the belt sinking onto your body and locking in place. Worry sets in instantly as you try to wiggle and take it off, but it is no use. You see something black bubble from the edges of the metal, worried even more that it might be some sort of acid. It begins to creep across your skin at a disturbing rate, going down your " + player.legs() + " and encasing them in the blackness, wrapping your cock, ", false);
 		if (player.tailType > TAIL_TYPE_NONE)
 			outputText("covering up your tail, ", false);
-		outputText("and then going up your body, covering your " + allBreastsDescript() + " and neck. The only part of your body unclad by the suit is your head. The blackness feels slick and smooth, almost coldl a strange type of feeling washes over you until you realize that it is a rubber suit.\n\n", false);
+		outputText("and then going up your body, covering your " + allBreastsDescript() + " and neck. The only part of your body unclad by the suit is your head. The blackness feels slick and smooth, almost cold, a strange type of feeling washes over you until you realize that it is a rubber suit.\n\n", false);
 		outputText("Before you can do anything else, the belt activates again and the latex covering of your " + cockDescript(0) + " begins to tighten and pulse around the meat, warming up to feel like a virgin cunt. A moan is dragged from your lips as it begins to ripple and pulse, simulating the feeling of fucking a tight hole as the entire suit molds itself to your body. Before you can get too used to the feeling of the suit milking your cock, the nub that had been teasing your clit suddenly expands and pushes out, the slick feeling of the latex pushing into your pussy.  The hardened black latex splits your tunnel and spreads you wide as it goes in deep. Your eyes widen for a moment as both stop, and then your world explodes in a flash of pleasure. The hardened lump begins to piston in and out of your " + vaginaDescript(0) + ", vibrating wildly as a lump grows in on top in precisely the right spot to rub back and forth on your g-spot.\n\n", false);
 		outputText("Meanwhile the latex around your " + cockDescript(0) + " begins to pulse and ripple faster than ever before. You quake and quiver, " + player.legs() + " giving out as it teases and pulses around your " + allBreastsDescript() + ". Your hands go down your body helplessly and start stroking at your encased cock, rubbing up and down your length. Unfortunately, all things must come to an end as the pleasure gets to be way too much and you feel yourself cum. Your hips buck wildly as you feel cum spurt into the latex, the end swelling up and filling like a ", false);
 		if (player.cumQ() > 200)
@@ -1287,13 +1463,15 @@ public function doEvent(eventNo:Number):void
 		if (player.tou > 75)
 			dynStats("tou", -1);
 	}
+*/
+/* Moved to rathazul.as
 	//Purify LaBova Draft
 	else if (eventNo == 2145)
 	{
 		if (player.gems < 20)
 		{
 			outputText("Rathazul says, \"<i>You do not have enough gems for that service.</i>\"", true);
-			doNext(2070);
+			doNext(rathazul.returnToRathazulMenu);
 			return;
 		}
 		outputText("", true);
@@ -1304,7 +1482,8 @@ public function doEvent(eventNo:Number):void
 		statScreenRefresh();
 		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
 	}
-	
+*/	
+/*
 	//Move Jojo into camp
 	else if (eventNo == 2149)
 	{
@@ -1352,7 +1531,7 @@ public function doEvent(eventNo:Number):void
 		
 		if (player.lust >= 33 && player.gender > 0)
 		{
-			jojoRapeFuncNum = 2153;
+			jojoRapeFuncNum = jojoScene.jojoAtCampRape;
 		}
 		
 		// Worms overrides everything else
@@ -1362,7 +1541,7 @@ public function doEvent(eventNo:Number):void
 			outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body,</i>\" Jojo says flatly, \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may have a lasting impact upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
 			
 			if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0) outputText("(Jojo is currently watching for enemies at night.)\n\n", false);
-			simpleChoices("Meditate", 2151, jojoDefense, 2152, "Purge", 2083, "Rape", jojoRapeFuncNum, "Leave", 74);
+			simpleChoices("Meditate", jojoScene.jojoFollowerMeditate, jojoDefense, jojoScene.jojoDefenseToggle, "Purge", 2083, "Rape", jojoRapeFuncNum, "Leave", 74);
 		}
 		// Normal shit
 		else
@@ -1413,6 +1592,9 @@ public function doEvent(eventNo:Number):void
 				addButton(3, "Meditate", eventParser, 2151);
 				addButton(4, jojoDefense, eventParser, 2152);
 				addButton(14, "Leave", eventParser, 74);
+				addButton(3, "Meditate", jojoScene.jojoFollowerMeditate);
+				addButton(4, jojoDefense, jojoScene.jojoDefenseToggle);
+				addButton(9, "Leave", eventParser, 74);
 			}
 		}
 	}
@@ -1496,6 +1678,14 @@ public function doEvent(eventNo:Number):void
 		player.removeStatusAffect(StatusAffects.PureCampJojo);
 		outputText("You ask Jojo if he'd like to go on a hunt through the woods to clear out some of the corrupted creatures, and the mouse readily agrees.  He asks if you've been getting a bit stir-crazy from having your camp in one place as the two of you walk into the woods...", true);
 		doNext(jojoScene.jojoRape);
+	}
+*/
+/* Moved to rathazul.as
+	//Rathazul Armor Crafting
+	else if (eventNo == 2180)
+	{
+		doNext(13);
+		rathazul.craftCarapace();
 	}
 	//Buy breast-milker from whitney
 	else if (eventNo == 2182)
@@ -1631,6 +1821,8 @@ public function doEvent(eventNo:Number):void
 	{
 		amilyScene.giveAmilySomePants();
 	}
+*/
+/* Moved to Rathazul.as
 	else if (eventNo == 2486)
 	{
 		player.gems += 50;
@@ -1640,6 +1832,8 @@ public function doEvent(eventNo:Number):void
 		else
 			rathazul.encounterRathazul();
 	}
+*/
+/*
 	else if (eventNo == 2487)
 	{
 		catAutoLick();
@@ -1692,6 +1886,104 @@ public function doEvent(eventNo:Number):void
 	{
 		followerInteractions.BlameMarblezSweetVagoozle();
 	}
+	else if (eventNo == 2594)
+	{
+		freeValazLooseCoochie();
+	}
+	else if (eventNo == 2595)
+	{
+		useVala();
+	}
+	else if (eventNo == 2597)
+	{
+		healVala();
+	}
+	else if (eventNo == 2599)
+	{
+		ValaGetsSexed();
+	}
+	else if (eventNo == 2609)
+	{
+		loseToValaMaleIIGape();
+	}
+	else if (eventNo == 2614)
+	{
+		leftValaAlone();
+	}
+	else if (eventNo == 2617)
+	{
+		useValaOHYEAHSNAPINTOASLIMJIM();
+	}
+	else if (eventNo == 2619)
+	{
+		wakeValaUpBeforeYouGoGo();
+	}
+	else if (eventNo == 2621)
+	{
+		chooseValaInBar();
+	}
+	
+	else if (eventNo == 2625)
+	{
+		cleansedValaRepeatBrainFucking();
+	}
+	else if (eventNo == 2633)
+	{
+		endZetaz();
+	}
+	else if (eventNo == 2634)
+	{
+		sexualTortureTightenZetaz();
+	}
+	else if (eventNo == 2635)
+	{
+		sexualTortureReleaseZetaz();
+	}
+	else if (eventNo == 2638)
+	{
+		clearOutput();
+		flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
+		inventory.takeItem(armors.BONSTRP, );
+	}
+	else if (eventNo == 2639)
+	{
+		spriteSelect(52);
+		theSeanShopOffer();
+	}
+	else if (eventNo == 2640)
+	{
+		spriteSelect(52);
+		incubusDeal();
+	}
+	else if (eventNo == 2641)
+	{
+		spriteSelect(52);
+		incubusNoDeal();
+	}
+	else if (eventNo == 2642)
+	{
+		spriteSelect(52);
+		incubusShop();
+	}
+	else if (eventNo == 2643)
+	{
+		spriteSelect(52);
+		incubusBuy(consumables.NUMBROX);
+	}
+	else if (eventNo == 2644)
+	{
+		spriteSelect(52);
+		incubusBuy(consumables.SENSDRF);
+	}
+	else if (eventNo == 2645)
+	{
+		spriteSelect(52);
+		incubusBuy(consumables.REDUCTO);
+	}
+	else if (eventNo == 2653)
+	{
+		incubusBuy(weapons.SUCWHIP);
+	}
 	else if (eventNo == 2739)
 	{
 		telAdre.dominika.fellatrixBarApproach();
@@ -1725,7 +2017,6 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.heckel.greetHeckel();
 	}
-	
 	else if (eventNo == 2855)
 	{
 		if (model.time.hours == 19 || model.time.hours == 20)
@@ -1883,10 +2174,10 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.lottie.lottiesThirtyMinutePigGasm();
 	}
-	/*else if (eventNo == 3449)
+	else if (eventNo == 3449)
 	{
 		valaCumBath();
-	}*/
+	}
 	else if (eventNo == 3457)
 	{
 		amilyScene.fuckIncestCunts();
@@ -2019,7 +2310,6 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.rubi.releaseRubi();
 	}
-	
 	else if (eventNo == 3904)
 	{
 		telAdre.rubi.dontCareAboutNoCheatingRubis();
@@ -2079,6 +2369,7 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.houses();
 	}
+*/
 	else
 	{
 		//Problem here. Lots of the old code relies on the fall through to proceed forward. Prime offender is the

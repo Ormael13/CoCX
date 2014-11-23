@@ -21,6 +21,7 @@ package classes
 			may be called multiple times on a single tick of the hour, so updates should go in timeChange()
 			and any scene that triggers on timeChangeLarge must make sure it cannot be triggered twice.
 			Returning true indicates that you want the game to pause and display your screen output.
+			When this function returns true it is responsible for calling doNext, menu, choices, etc.
 			Returning false indicates the function has produced no screen output. */
 		function timeChangeLarge():Boolean;
 		

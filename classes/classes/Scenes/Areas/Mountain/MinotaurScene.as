@@ -627,8 +627,8 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	outputText("The bull-man relaxes for a moment, then shoves you off of him and to the cold ground. You pass out as a strange sense of euphoria washes over you while copious quantities of monstrous cum escape your distended ", false);
 	if(player.hasVagina()) outputText("pussy.", false);
 	else outputText("asshole.", false);
-	if(gameState != 0) cleanupAfterCombat();
-	else doNext(15);
+	if (getGame().inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseFourHours);
 }
 
 
@@ -664,8 +664,8 @@ private function getOralRapedByMinotaur():void {
 	player.orgasm();
 	dynStats("sen", 1);
 	minoCumAddiction(10);
-	if(gameState != 0) cleanupAfterCombat();
-	else doNext(15);
+	if (getGame().inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseFourHours);
 }
 
 private function minoGetsTitFucked():void {
@@ -864,7 +864,7 @@ public function minoAddictionBadEndEncounter():void {
 		if(player.inte > 40) outputText("A tiny voice speaks up, warning you that it would be hard to get away from such a gathering.  ", false);
 		outputText("Do you follow the minotaur-scent like the addict that you are?", false);
 		//[Yes] [No]
-		doYesNo(minoAddictionBadEnd2,13);
+		doYesNo(minoAddictionBadEnd2,camp.returnToCampUseOneHour);
 	}
 }
 

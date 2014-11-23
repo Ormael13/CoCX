@@ -107,7 +107,7 @@ package classes.content
 			outputText("\nweaponname [weaponname]");
 			
 			trace("Spammed!");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 	}

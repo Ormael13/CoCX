@@ -110,7 +110,7 @@ private function liftWhileIfrisWatches():void {
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)), false);
 	fatigue(30);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //4b-PC decides to show off, possible strength requirement?-
 private function showOffForIfris():void {
@@ -137,7 +137,7 @@ private function showOffForIfris():void {
 		//Reset 'shown off for ifris'
 		flags[kFLAGS.IFRIS_SHOWED_OFF] = 0;
 		player.takeDamage(10);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}	
 	//4b1-PC fails strength requirement!-
@@ -147,7 +147,7 @@ private function showOffForIfris():void {
 		outputText("\"<i>Oh well...</i>\" She sighs, clearly crestfallen. Cocking one fist on her hip, she gives your " + player.leg() + " a light pat as she leaves your presence, vanishing out the door within moments.\n\n", false);
 
 		outputText("Well, at least you had the good sense to stop before you hurt yourself...\n\n", false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		flags[kFLAGS.IFRIS_SHOWED_OFF] = 0;
 		return;
 	}
@@ -160,7 +160,7 @@ private function showOffForIfris():void {
 		//Body changes here
 		//Muscleness boost!
 		outputText(player.modTone(85,5+rand(5)), false);
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//4b3-PC succeeds! Is male/herm-
@@ -256,7 +256,7 @@ private function showOffForIfris():void {
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)), false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Ifrs double-penetrates herself on you while you work out.
@@ -338,7 +338,7 @@ private function ifrisDP():void {
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)), false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

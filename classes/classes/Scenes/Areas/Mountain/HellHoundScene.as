@@ -133,7 +133,7 @@ package classes.Scenes.Areas.Mountain
 			outputText("", true);
 			outputText("You force the presence out of your mind.  You feel almost a bit lost after it disappears, but giving yourself over to foreign control can never be a good idea, can it?", false);
 			//end event, A can repeat later.
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //choose yes (C)
@@ -163,7 +163,7 @@ package classes.Scenes.Areas.Mountain
 			if (player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3) outputText(" You extract Marae's lethicite from your pack, and wonder if you really want to trade it for the hellfire he offered.", false);
 			//advance to repeat version
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] = 1;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Choose no (E)
@@ -172,7 +172,7 @@ package classes.Scenes.Areas.Mountain
 			outputText("", true);
 			outputText("You push the presence out of your mind.  Maybe later you'll collect the hellfire, but for now you'd rather keep the lethicite.", false);
 			//end event, D can repeat.
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Choose yes (F)
@@ -223,7 +223,7 @@ package classes.Scenes.Areas.Mountain
 			player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
 			//Hellhounds no longer encounterable.
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Merae's Lethicite

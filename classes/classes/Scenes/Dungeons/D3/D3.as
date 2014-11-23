@@ -228,7 +228,11 @@ package classes.Scenes.Dungeons.D3
 		
 		public function discoverD3():Boolean
 		{
+<<<<<<< HEAD
 			if (flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") && rand(10) == 0)
+=======
+			if (flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") && player.level >= 10 && rand(5) == 0)
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			{
 				flags[kFLAGS.D3_DISCOVERED] = 1;
 				
@@ -395,7 +399,7 @@ package classes.Scenes.Dungeons.D3
 					outputText("You creep through the archway. The sound of movement and bustle is closer here; it seems to be coming from directly below you. Ahead is the screen, a large window made from tinted glass. Cautiously you peer through it. You have entered a vast hall, near the very top of it; this seems to be some sort of observation booth set high in the stone wall. It’s designed in the grand, classical tradition, fluted balustrades flanking the walls, each decorated at the top by a carved magpie in flight. Below is - well. You blink, trying to take it all in.");
 
 					outputText("\n\nMany feet below the hall swarms with activity: tall, thin, grey-green reptiles sliding sinuously around each other and the long tables that run the length of the room. There must be hundreds, no, at least a thousand basilisks down there, carrying, analyzing, sorting the vast amount of junk the tables are heaped with.");
-					if (flags[kFLAGS.BENOIT_AFFECTION] == 100) outputText("  This can only be the hall that Benoit once worked in."); 
+					if (flags[kFLAGS.BENOIT_AFFECTION] == 100) outputText("  This can only be the hall that " + getGame().bazaar.benoit.benoitMF("Benoit", "Benoite") + " once worked in."); 
 					outputText("  You get the fright of your life when you think you see a number of depthless pools of grey revolve up to meet yours- but they don’t freeze you, you note as you reflexively turn away. The tinted glass must carry some sort of anti-petrifying charm, and further it must be reflective on the other side, because no one below seems to realize you’re standing there. Relaxing a bit, you continue to absorb the massive room. At the end furthest away from you two huge piles have been created- one of eggs, a massed assortment of every colour and size imaginable, and one of pure junk, presumably everything the basilisks have found whilst scavenging and considered worth keeping. The detritus of a dozen collapsed civilizations must be down there, collected for the demons’ perusal by their scaly custodians. Directly below you, you can see archways like the one you just passed under, through which the basilisks ebb and flow.");
 
 					outputText("\n\nYour heartbeat quickens as you consider. There is a grid gantry running from where you are right around the room to the other side, where you can see a matching observation booth, presumably containing another exit. But it’s quite a distance, there are stairs leading down to the ground level, and outside the protective glass you would surely be spotted and apprehended");
@@ -480,14 +484,14 @@ package classes.Scenes.Dungeons.D3
 			if (eggMask == BROWN) item = consumables.L_BRNEG;
 			if (eggMask == PURPLE) item = consumables.L_PRPEG;
 			
-			menuLoc = 9999;
+			//menuLoc = 9999;
 			// Should actually be handled by the fallthrough of doNext(1) in the takeItem shit
 			
 			clearOutput();
 			outputText("You pluck out " + item.longName + " ");			
 			
 			flags[kFLAGS.D3_EGGS_AVAILABLE] += eggMask;
-			inventory.takeItem(item);
+			inventory.takeItem(item, camp.campMenu); //camp.campMenu is equivalent to doNext(1)
 		}
 		
 		private function fallbackFromMagpieHallS():void
@@ -639,10 +643,16 @@ package classes.Scenes.Dungeons.D3
 		
 		private function eastwalkRoomFunc():Boolean
 		{
+<<<<<<< HEAD
 			outputText("The smooth, almost flawlessly laid stones split into a T-intersection here, heading north, south, and west. The bushes that hem in the paths are likewise split, though they have been maintained with the same sense of care you’ve seen elsewhere in the garden. One particularly interesting shrub has been trimmed into the shape of a large bust, complete with erect nipples. You shake your head and glance west, where you can spot ");
 			if (flags[kFLAGS.D3_STATUE_DEFEATED] == 0) outputText(" see a massive statue with an immense hammer");
 			else outputText(" a mound of rubble, the scattered remains of the animated statue that you slew");
 			outputText(".");
+=======
+			outputText("The smooth, almost flawlessly laid stones split into a T-intersection here, heading north, south, and west. The bushes that hem in the paths are likewise split, though they have been maintained with the same sense of care you’ve seen elsewhere in the garden. One particularly interesting shrub has been trimmed into the shape of a large bust, complete with erect nipples. You shake your head and glance west, where you can spot");
+			if (flags[kFLAGS.D3_STATUE_DEFEATED] == 0) outputText(" a massive statue with an immense hammer.");
+			else outputText(" a mound of rubble, the scattered remains of the animated statue that you slew.");
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			return false;
 		}
 		

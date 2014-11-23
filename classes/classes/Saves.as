@@ -2,6 +2,7 @@
 {
 
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Inventory;
 	import classes.Scenes.Places.TelAdre.Katherine;
 
 	CONFIG::AIR 
@@ -31,10 +32,20 @@ public class Saves extends BaseContent {
 		//Didn't want to include something like this, but an integer is safer than depending on the text version number from the CoC class.
 		//Also, this way the save file version doesn't need updating unless an important structural change happens in the save file.
 	
-	public function Saves()
-	{
+	private var gameStateGet:Function;
+	private var gameStateSet:Function;
+	private var itemStorageGet:Function;
+	private var gearStorageGet:Function;
+	
+	public function Saves(gameStateDirectGet:Function, gameStateDirectSet:Function) {
+		gameStateGet = gameStateDirectGet; //This is so that the save game functions (and nothing else) get direct access to the gameState variable
+		gameStateSet = gameStateDirectSet;
 	}
 
+	public function linkToInventory(itemStorageDirectGet:Function, gearStorageDirectGet:Function):void {
+		itemStorageGet = itemStorageDirectGet;
+		gearStorageGet = gearStorageDirectGet;
+	}
 
 CONFIG::AIR {
 public var airFile:File;
@@ -343,12 +354,26 @@ public function saveLoad(e:MouseEvent = null):void
 		addButton(14, "Back", eventParser, 1);
 		return;
 	}
+<<<<<<< HEAD
 	if (gameState == 3) {
 		addButton(0, "Save", saveScreen);
 		addButton(5, "Save to File", eventParser, -20);
 		addButton(3, "AutoSave: " + autoSaveSuffix, eventParser, 65);
 		addButton(14, "Back", kGAMECLASS.mainMenu);
 	}
+=======
+	if (gameStateGet() == 3)
+		choices("Save",            saveScreen, 
+				"Load",            loadScreen, 
+				"Load File",      -21, 
+				"Delete",          deleteScreen, 
+				"Back",            0, 
+				"Save to File",   -20, 
+				"Load File",      -21, 
+				"",                0, 
+				"",                0, 
+				"",                0);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	else
 	{
 		addButton(0, "Save", saveScreen);
@@ -890,32 +915,32 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.keyItems[i].value4 = player.keyItems[i].value4;
 		}
 		//Set storage slot array
-		for (i = 0; i < itemStorage.length; i++)
+		for (i = 0; i < itemStorageGet().length; i++)
 		{
 			saveFile.data.itemStorage.push([]);
 		}
 		
 		//Populate storage slot array
-		for (i = 0; i < itemStorage.length; i++)
+		for (i = 0; i < itemStorageGet().length; i++)
 		{
 			//saveFile.data.itemStorage[i].shortName = itemStorage[i].itype.id;// For backward compatibility
-			saveFile.data.itemStorage[i].id = (itemStorage[i].itype == null)?null:itemStorage[i].itype.id;
-			saveFile.data.itemStorage[i].quantity = itemStorage[i].quantity;
-			saveFile.data.itemStorage[i].unlocked = itemStorage[i].unlocked;
+			saveFile.data.itemStorage[i].id = (itemStorageGet()[i].itype == null) ? null : itemStorageGet()[i].itype.id;
+			saveFile.data.itemStorage[i].quantity = itemStorageGet()[i].quantity;
+			saveFile.data.itemStorage[i].unlocked = itemStorageGet()[i].unlocked;
 		}
 		//Set gear slot array
-		for (i = 0; i < gearStorage.length; i++)
+		for (i = 0; i < gearStorageGet().length; i++)
 		{
 			saveFile.data.gearStorage.push([]);
 		}
 		
 		//Populate gear slot array
-		for (i = 0; i < gearStorage.length; i++)
+		for (i = 0; i < gearStorageGet().length; i++)
 		{
 			//saveFile.data.gearStorage[i].shortName = gearStorage[i].itype.id;// uncomment for backward compatibility
-			saveFile.data.gearStorage[i].id = (gearStorage[i].isEmpty())?null:gearStorage[i].itype.id;
-			saveFile.data.gearStorage[i].quantity = gearStorage[i].quantity;
-			saveFile.data.gearStorage[i].unlocked = gearStorage[i].unlocked;
+			saveFile.data.gearStorage[i].id = (gearStorageGet()[i].isEmpty()) ? null : gearStorageGet()[i].itype.id;
+			saveFile.data.gearStorage[i].quantity = gearStorageGet()[i].quantity;
+			saveFile.data.gearStorage[i].unlocked = gearStorageGet()[i].unlocked;
 		}
 		saveFile.data.ass.push([]);
 		saveFile.data.ass.analWetness = player.ass.analWetness;
@@ -931,7 +956,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.foundDesert = getGame().foundDesert;
 		saveFile.data.foundMountain = getGame().foundMountain;
 		saveFile.data.foundLake = getGame().foundLake;
-		saveFile.data.gameState = gameState;
+		saveFile.data.gameState = gameStateGet();
 		
 		//Time and Items
 		saveFile.data.minutes = model.time.minutes;
@@ -1280,7 +1305,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.weaponId){
 			player.setWeaponHiddenField((ItemType.lookupItem(saveFile.data.weaponId) as Weapon) || WeaponLib.FISTS);
 		} else {
-			player.weapon = WeaponLib.FISTS;
+			player.setWeapon(WeaponLib.FISTS);
+			//player.weapon = WeaponLib.FISTS;
 			for each (var itype:ItemType in ItemType.getItemLibrary()) {
 				if (itype is Weapon && (itype as Weapon).name == saveFile.data.weaponName){
 					player.setWeaponHiddenField(itype as Weapon || WeaponLib.FISTS);
@@ -1306,7 +1332,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			if (player.armor.name != saveFile.data.armorName) player.modArmorName = saveFile.data.armorName;
 		} else {
 			found = false;
-			player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+			player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES);
+			//player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Armor && (itype as Armor).name == saveFile.data.armorName){
 					player.setArmorHiddenField(itype as Armor || ArmorLib.COMFORTABLE_UNDERCLOTHES);
@@ -1321,7 +1348,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 						if (a.value == saveFile.data.armorValue &&
 								a.def == saveFile.data.armorDef &&
 								a.perk == saveFile.data.armorPerk){
-							player.armor = a;
+							player.setArmor(a);
+							//player.armor = a;
 							player.modArmorName = saveFile.data.armorName;
 							found = true;
 							break;
@@ -1800,7 +1828,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				inventory.createStorage();
-				var storage:ItemSlotClass = itemStorage[i];
+				var storage:ItemSlotClass = itemStorageGet()[i];
 				var savedIS:* = saveFile.data.itemStorage[i];
 				if (savedIS.shortName && savedIS.shortName.indexOf("Gro+") != -1)
 					savedIS.id = "GroPlus";
@@ -1819,16 +1847,20 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		else
 		{
+<<<<<<< HEAD
 			for (i = 0; i < saveFile.data.gearStorage.length && gearStorage.length < 30; i++)
+=======
+			for (i = 0; i < saveFile.data.gearStorage.length && gearStorageGet().length < 20; i++)
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			{
-				gearStorage.push(new ItemSlotClass());
+				gearStorageGet().push(new ItemSlotClass());
 					//trace("Initialize a slot for one of the item storage locations to load.");
 			}
 			//Populate storage slot array
-			for (i = 0; i < saveFile.data.gearStorage.length && i < gearStorage.length; i++)
+			for (i = 0; i < saveFile.data.gearStorage.length && i < gearStorageGet().length; i++)
 			{
 				//trace("Populating a storage slot save with data");
-				storage = gearStorage[i];
+				storage = gearStorageGet()[i];
 				if ((saveFile.data.gearStorage[i].shortName == undefined && saveFile.data.gearStorage[i].id == undefined)
                         || saveFile.data.gearStorage[i].quantity == undefined
 						|| saveFile.data.gearStorage[i].quantity == 0)
@@ -1844,7 +1876,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.ass.fullness = saveFile.data.ass.fullness;
 		
 		//Shit
-		gameState = saveFile.data.gameState;
+		gameStateSet(saveFile.data.gameState);
 		player.exploredLake = saveFile.data.exploredLake;
 		player.exploredMountain = saveFile.data.exploredMountain;
 		player.exploredForest = saveFile.data.exploredForest;
@@ -1936,6 +1968,11 @@ public function unFuckSave():void
 			player.setPerkValue(PerkLib.ElvenBounty,1,0);
 			player.addPerkValue(PerkLib.ElvenBounty,2,15);
 		}
+	}
+	
+	if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0)
+	{
+		player.removeStatusAffect(StatusAffects.KnockedBack);
 	}
 
 	if (isNaN(model.time.minutes)) model.time.minutes = 0;

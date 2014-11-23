@@ -33,7 +33,7 @@
 //const SALON_PAID:int = 441;
 public function hairDresser():void {
 	outputText("While exploring the mountain, you find a cleverly concealed doorway.  From inside you can hear the sound of blades being sharpened.  Do you enter the doorway?", true);
-	doYesNo(salonGreeting,13);
+	doYesNo(salonGreeting,camp.returnToCampUseOneHour);
 }
 public function salonGreeting():void{
 	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0)
@@ -81,7 +81,11 @@ private function salonPaymentMenu():void {
 	addButton(3,"Minotaur",gloryholeMinotaur);
 	addButton(4,"Incubus",gloryholeIncubus);
 	addButton(8,"Buy MinoCum",minoCum);
+<<<<<<< HEAD
 	addButton(14,"Leave",eventParser,13);
+=======
+	addButton(9,"Leave",camp.returnToCampUseOneHour);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	//choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
 }
 		private function buyMinoCum():void{
@@ -95,11 +99,10 @@ private function salonPaymentMenu():void {
 			}
 			else
 			{
-				menuLoc = 2;
 				player.gems -= 60;
 				outputText("You happily give Lynnette 60 gems and pick up the bottle full of glistening, heavenly cum.  ", true);
 				statScreenRefresh();
-				inventory.takeItem(consumables.MINOCUM);
+				inventory.takeItem(consumables.MINOCUM, camp.returnToCampUseOneHour);
 			}
 		}
 public function salonPurchaseMenu():void {
@@ -136,7 +139,11 @@ public function salonPurchaseMenu():void {
 	addButton(6,"Beard Options",beardMenu);
 	addButton(7,"Mud Facial",mudFacial2);
 	addButton(8,"Sand Facial",sandFacial2);
+<<<<<<< HEAD
 	addButton(14,"Leave",eventParser,13);
+=======
+	addButton(9,"Leave",camp.returnToCampUseOneHour);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 private function hairDresserGreeting():void {
@@ -362,7 +369,7 @@ private function cutShort():void {
 	outputText("Lynnette and her daughters crowd around you with razor-sharp scissors, effortlessly paring down your " + hairDescript() + ".  When they've finished, you're left with ", true);
 	player.hairLength = 1;
 	outputText(hairDescript() + ".", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function cutMedium():void {
 	spriteSelect(38);
@@ -375,7 +382,7 @@ private function cutMedium():void {
 	outputText("Lynnette and her daughters crowd around you with razor-sharp scissors, effortlessly paring down your " + hairDescript() + ".  When they've finished, you're left with ", true);
 	player.hairLength = 10;
 	outputText(hairDescript() + ".", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function cutLong():void {
 	spriteSelect(38);
@@ -388,7 +395,7 @@ private function cutLong():void {
 	outputText("Lynnette and her daughters crowd around you with razor-sharp scissors, effortlessly paring down your " + hairDescript() + ".  When they've finished, you're left with ", true);
 	player.hairLength = 25;
 	outputText(hairDescript() + ".", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function hairGrow():void {
 	spriteSelect(38);
@@ -403,16 +410,18 @@ private function hairGrow():void {
 	flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 	player.hairLength += temp;
 	outputText(num2Text(temp) + " more inches of " + player.hairColor + " hair.", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 		private function buyDye(itype:ItemType):void{
 			outputText("", true);
-			inventory.takeItem(itype);
+			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
+		
 private function dyeMenu():void {
 	spriteSelect(38);
 	outputText("", true);
 	outputText("Lynnette pulls open a cabinet in the corner, displaying a wide array of exotic hair-dyes.  Which kind do you want?", false);
+<<<<<<< HEAD
 	menuLoc = 2;
 	choices("Blue",createCallBackFunction(buyDye,consumables.BLUEDYE),
 			"Orange",createCallBackFunction(buyDye,consumables.ORANGDY),
@@ -420,6 +429,15 @@ private function dyeMenu():void {
 			"Purple",createCallBackFunction(buyDye,consumables.PURPDYE),
 			"Green",createCallBackFunction(buyDye,consumables.GREEN_D),
 			"Ext.Serum",createCallBackFunction(buyDye,consumables.EXTSERM),"",0,"",0,"",0,"Back",hairDressingMainMenu);
+=======
+	menu();
+	addButton(0, "Blue", buyDye, consumables.BLUEDYE);
+	addButton(1, "Orange", buyDye, consumables.ORANGDY);
+	addButton(2, "Pink", buyDye, consumables.PINKDYE);
+	addButton(3, "Purple", buyDye, consumables.PURPDYE);
+	addButton(4, "Back", hairDressingMainMenu);
+	addButton(5, "Ext.Serum", buyDye, consumables.EXTSERM);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 private function beardMenu():void {
@@ -606,7 +624,7 @@ private function mudFacial():void {
 
 	outputText("With that finished, the crowd of busty, green-skinned women disperses to leave you in peace.  Time drags on, but eventually the mud hardens and cracks.  As if on cue, tiny hands emerge with wet rags to scrub your face clean.  Once they've finished, you feel like a whole new you! (+10 femininity)", false);
 	player.modFem(100,10);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function sandFacial():void {
@@ -616,7 +634,7 @@ private function sandFacial():void {
 
 	outputText("After a while the goblin girls come back and clean the stuff from your face. (+10 masculinity)", false);
 	player.modFem(0,10);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 /*
 public static const LYNNETTE_PREGNANCY_CYCLE:int                                    = 1022; //0-3 = pregnant. 4-6 = not.

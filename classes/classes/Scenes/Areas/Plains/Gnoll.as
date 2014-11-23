@@ -247,6 +247,7 @@ package classes.Scenes.Areas.Plains
 				combatRoundOver();
 			}
 //If grappling...
+/* Grappling was never included
 			if (game.gameState == 2) {
 				//temperment - used for determining grapple behaviors
 				//0 - avoid grapples/break grapple
@@ -261,6 +262,7 @@ package classes.Scenes.Areas.Plains
 				outputText("Lust Placeholder!!", false);
 				doNext(3);
 			}
+*/
 			if (rand(2) == 0) gnollTease();
 			else {
 				var damage:Number = 0;

@@ -116,7 +116,7 @@ private function comfortUrtaAfterFamFamTalk():void {
 	outputText("\n\nNodding, you give the girl a smile as you stand up to depart.  Her eyes twinkle happily as she watches you go.");
 	urta.urtaLove(5);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 3;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Yeesh(C)*
@@ -135,7 +135,7 @@ private function yeeshUrtaAfterFamFamTalk():void {
 	outputText("\n\nGood bitch...");
 	urta.urtaLove(1);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Who Cares(C)*
@@ -149,7 +149,7 @@ private function whoCaresUrtaAfterFamFamTalk():void {
 	urta.urtaLove(-10);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] -= 5;
 	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 1) flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Infertility Discussion(C)*
@@ -173,7 +173,7 @@ public function infertilityQuestions():void {
 	if (flags[kFLAGS.HARDCORE_MODE] >= 1) outputText("\n\n<b>Because you're playing in Hardcore Mode, you have to be sure if you're prepared. If you fail the quest, Urta is gone for good and you won't be able to reload.</b>");
 	menu();
 	addButton(0,"Look Into It",startUrtaQuest);
-	addButton(1,"Maybe Later",eventParser,13);
+	addButton(1,"Maybe Later",camp.returnToCampUseOneHour);
 }
 
 private function resetToPC():void {
@@ -277,8 +277,10 @@ public function startUrtaQuest():void {
 	player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 
 	//GEAR!
-	player.weapon = weapons.URTAHLB;
-	player.armor = armors.URTALTA;
+	player.setWeapon(weapons.URTAHLB);
+	player.setArmor(armors.URTALTA);
+//	player.weapon = weapons.URTAHLB;
+//	player.armor = armors.URTALTA;
 	
 	//DISPLAY SOME SHIT YO
 	clearOutput();
@@ -1048,13 +1050,13 @@ private function loseToGoblinsPartIVAsUrta():void {
 private function urtaGameOver():void {
 	clearOutput();
 	outputText("<b>Urta has been lost to her fate...  Meanwhile, back at camp...</b>");
-	gameState = 0;
+	getGame().inCombat = false;
 	flags[kFLAGS.URTA_QUEST_STATUS] = -1;
 	model.time.days++;
 	resetToPC();
 	model.time.hours = 6;
 	statScreenRefresh();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1083,10 +1085,10 @@ private function urtaGameOver():void {
 
 public function urtaSpecials():void {
 	menuLoc = 3;
-	if(inCombat() && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 5) {
+	if (getGame().inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 5) {
 		clearOutput();
 		outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
-		kGAMECLASS.enemyAI();
+		getGame().enemyAI();
 		return;
 	}
 	menu();
@@ -2451,7 +2453,8 @@ public function beatMinoLordOnToSuccubi():void {
 
 	outputText("\n\n<b>It's a fight!</b>");
 	kGAMECLASS.clearStatuses(false);
-	player.weapon = weapons.URTAHLB;
+	player.setWeapon(weapons.URTAHLB);
+	//player.weapon = weapons.URTAHLB;
 	startCombat(new MilkySuccubus(),true);
 }
 
@@ -2811,8 +2814,8 @@ private function preggedUrtaWithGodChildEpilogue():void {
 
 	outputText("\n\nYou help her leave the tower, arm in arm, saying goodbye to her only after she's tucked tightly into her bed at home, to rest.  Urta gives you a teary kiss before you leave with a little swagger in your step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
 	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
-	gameState = 0;
-	doNext(13);
+	getGame().inCombat = false;
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Urta Knocks Up PC with God Child
@@ -2981,8 +2984,8 @@ private function getKnockedUpByUrtaEpilogueII():void {
 
 	outputText("\n\nShe helps leave the tower, arm in arm, saying her goodbye only after she's tucked you in to take a rest.  Urta gives you a teary kiss and trots back towards the city with a swagger in her step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
 	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
-	gameState = 0;
-	doNext(13);
+	getGame().inCombat = false;
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Urta Goes to Knock Up Edryn with God Child*
@@ -2993,8 +2996,8 @@ private function urtaAndEdrynGodChild():void {
 	flags[kFLAGS.URTA_FERTILE]        = telAdre.edryn.pregnancy.type;       //Use these two flags to store the pregnancy that Taoth is overriding.
 	flags[kFLAGS.URTA_PREG_EVERYBODY] = telAdre.edryn.pregnancy.incubation; //Since they can't be in use prior to Taoth being born this is fine.
 	telAdre.edryn.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_TAOTH, 24);
-	gameState = 0;
-	doNext(13);
+	getGame().inCombat = false;
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -3044,8 +3047,8 @@ private function urtaAndEdrynGodChildEpilogueII():void {
 	outputText("\n\nYou leave the tower arm in arm, saying your goodbye when Urta stops at her place to rest.  She gives you a teary kiss and sends you on your way with a swagger in your step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
 	//set completed tags!
 	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
-	gameState = 0;
-	doNext(13);
+	getGame().inCombat = false;
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

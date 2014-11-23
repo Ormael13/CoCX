@@ -44,8 +44,8 @@ public function satyrEncounter(location:int = 0):void {
 		else outputText("sodden expanse of the swamp");
 		outputText(" when you hear strange music emanating not far from where you are.  Do you investigate?");
 		//[Yes][No]
-		if(location == 0) doYesNo(createCallBackFunction(consensualSatyrFuck,0),13);
-		else doYesNo(createCallBackFunction(consensualSatyrFuck,0),13);
+		if(location == 0) doYesNo(createCallBackFunction(consensualSatyrFuck,0), camp.returnToCampUseOneHour);
+		else doYesNo(createCallBackFunction(consensualSatyrFuck,0), camp.returnToCampUseOneHour);
 	}
 }
 
@@ -119,7 +119,7 @@ private function keepDrinking():void {
 	outputText(".  This must be the work of that satyr!  Mentally, you remind yourself to watch out for him next time.  You clean yourself up as best as you can and redress, then wobble your way towards your camp, trying to stifle the pain, in your head and elsewhere, along the way.");
 	//(8 hours lost) (PC is pregnant (either vagina or ass) with a satyr, slimefeed)
 	satyrPreggo();
-	doNext(15);
+	doNext(camp.returnToCampUseFourHours);
 }
 
 //[=Leave=]
@@ -157,7 +157,7 @@ private function trickZeSatyr():void {
 	
 	player.gems += 10+rand(10);
 	statScreenRefresh();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[=Skip Foreplay=]
 private function skipForeplay():void {
@@ -412,7 +412,7 @@ private function willinglyBoneSatyr():void {
 	player.slimeFeed();
 	player.orgasm();
 	satyrPreggo();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 

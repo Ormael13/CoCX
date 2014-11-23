@@ -25,7 +25,7 @@ package classes.Scenes.Areas.Forest
 			if (player.hasKeyItem("Traveler's Guide") >= 0 && player.inte / 2 > rand(40)) {
 				outputText("You suddenly remember a passage from the Traveler's Guide about monstrous bees that lay eggs in unmentionable places.  Of course, a brave champion would face any danger.\n\n<b>Do you proceed?</b>", false);
 				//Yes goes to beeEncounterLevel2(), no goes to camp
-				simpleChoices("Yes", beeEncounterLevel2, "No", 0, "", 0, "", 0, "Back", 13);
+				simpleChoices("Yes", beeEncounterLevel2, "No", 0, "", 0, "", 0, "Back", camp.returnToCampUseOneHour);
 			}
 			//If not smart enough, proceed.
 			else beeEncounterLevel2(false);
@@ -43,7 +43,7 @@ package classes.Scenes.Areas.Forest
 					outputText("Your " + cockDescript(0) + " wriggles free of your " + player.armorName + ", as you keep walking forward.  A bodiless voice yells, \"<i>Honeypot, honeypot, ME LOOOOVE HONEYPOOOOOT!</i>\"\n\n", false);
 					outputText("The bee-girl's eyes widen at the sight, shocked by your over-endowed form being dragged towards her as if there were a magnet in your " + cockDescript(0) + ".  She presses herself against the flower's petals, terrified and afraid to put up any meaningful resistance.  The nagging voice pipes up, \"<i>So are we gonna rape her or what, " + player.short + "?  I need some honeyyy!</i>\"\n\n", false);
 					outputText("She seems too surprised to resist.  Will you go along with Exgartuan and rape her?", false);
-					doYesNo(kGAMECLASS.exgartuan.exgartuanBeeRape, 13);
+					doYesNo(kGAMECLASS.exgartuan.exgartuanBeeRape, camp.returnToCampUseOneHour);
 					return;
 				}
 				else {
@@ -56,17 +56,29 @@ package classes.Scenes.Areas.Forest
 			//Chance to avoid raaaaeeeeep
 			if ((player.lib + player.cor < 140) || rand(2) == 0) {
 				outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?", false);
+<<<<<<< HEAD
 				if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
 					outputText("\n\n<b>New codex entry unlocked: Giant Bees!</b>")
 				}				
 			//Choices - fight, talk, seduce, submit, run
 				simpleChoices("Fight", 2060, "Talk", beeTalk, "Seduce", 0, "", 0, "Leave", 13);
+=======
+				//Choices - fight, talk, seduce, submit, run
+				simpleChoices("Fight", fightTheBeeGirl, "Talk", beeTalk, "Seduce", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			}
 			else beeEncounterLevel3(false);
 
 		}
-
+		
+		private function fightTheBeeGirl():void {
+			clearOutput();
+			outputText("You clear your head and resolve to defeat the monstrous bee-woman.");
+			spriteSelect(6);
+			startCombat(new BeeGirl());
+		}
+		
 		private function beeEncounterLevel3(clearScreen:Boolean=true):void
 		{
 			if (clearScreen) clearOutput();
@@ -278,7 +290,7 @@ package classes.Scenes.Areas.Forest
 				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				player.buttChange(25, true);
 			}
-			doNext(15);
+			doNext(camp.returnToCampUseFourHours);
 		}
 
 		//Talk to the bee-girl
@@ -293,13 +305,13 @@ package classes.Scenes.Areas.Forest
 				if (player.cor > 66) outputText("Looking at her through lust-tinted eyes, you're sure she can deliver on her offer.  Getting closer to her scent alone would be worth bearing a few eggs...", false);
 				outputText("\n\nDo you accept her offer?", false);
 				kGAMECLASS.beeProgress++;
-				doYesNo(beeEncounterLevel3, 13);
+				doYesNo(beeEncounterLevel3, camp.returnToCampUseOneHour);
 			}
 			else {
 				//If you get lucky, chance for free honey and -corruption in exchange for lust.
 				if (rand(2) == 0) {
 					outputText("\"<i>Awww, it zzzeemz you've caught me with my 'pants' down,</i>\" she giggles, \"<i>I'm all out of eggzzz.</i>\"  She pats her smaller-sized abdomen for a moment, thinking.\n\nHer eyes light up with inspiration, \"<i>Zzzince I'm ztill zzzo horny, would you like pure undiluted honey? Itzzz very good,</i>\" she says, spreading her legs and exposing the source of the scent – her puffy black vulva dripping with sticky amber fluid.\n\nDo you collect her honey?", true);
-					doYesNo(freeHoneyEvent, 13);
+					doYesNo(freeHoneyEvent, camp.returnToCampUseOneHour);
 				}
 				//If you get unlucky you just get the choice of getting egg-laid.
 				else {
@@ -308,7 +320,7 @@ package classes.Scenes.Areas.Forest
 					if (player.cor >= 33 && player.cor <= 66) outputText("Her offer intrigues you, and the arousing sweetness of her scent makes it difficult to resist.", false);
 					if (player.cor > 66) outputText("Looking at her through lust-tinted eyes, you're sure she can deliver on her offer.  Getting closer to her scent alone would be worth bearing a few eggs...", false);
 					outputText("\n\nDo you accept her offer?", false);
-					doYesNo(beeEncounterLevel3, 13);
+					doYesNo(beeEncounterLevel3, camp.returnToCampUseOneHour);
 				}
 			}
 		}
@@ -318,7 +330,7 @@ package classes.Scenes.Areas.Forest
 			spriteSelect(6);
 			outputText("She pouts and returns to her sing-song buzzing.  Her fingers trace circles between her thighs and the sweet scent intensifies.  You beat a hasty retreat before her efforts overcome your reason.", true);
 			dynStats("lus", (20 + player.lib / 15));
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function freeHoneyEvent():void
@@ -330,8 +342,7 @@ package classes.Scenes.Areas.Forest
 			outputText("You take the vial absently as you kneel between her legs and take in deep breaths of the scent.  It fills your head and groin with its warmth and sticky sweetness.  You part your lips, leaning ever closer to her delicate flower, tensing with anticipation.  When your tongue finally meets the slickened surface of her vulva you swoon.  The taste is better than anything you've ever experienced - sweet, pure, and yet totally sexual.  You dart over her clit, and are rewarded with a burst of heavenly sweetness.  The maddening taste of her ambrosia gets in your veins – you NEED more and you attack her honeypot mercilessly, until at last she squeals in orgasm, clamping her fuzz-covered thighs around your head.\n\n", false);
 			outputText("The force of her orgasm splatters you with the honey, far more than you could possibly try to lap up. You dimly remember the vial she gave to you, and steady it under the dripping fluid.  You catch as much of her sweetness as you can while still mashing your face against her quivering cunt.  You are in heaven, but after a time she pushes you back, smiling contentedly.  Her free hand offers you a small cork.   You reluctantly accept it and cap off the pure honey to save for later.\n\n", false);
 			outputText("She waves and stretches, picking up her pack and buzzing her wings as she takes off.  She blows a kiss over her shoulder and flies away, leaving you to return to your camp...", false);
-			menuLoc = 2;
-			inventory.takeItem(consumables.PURHONY);
+			inventory.takeItem(consumables.PURHONY, camp.returnToCampUseOneHour);
 		}
 
 		private function seduceBeeGirl():void
@@ -356,7 +367,7 @@ package classes.Scenes.Areas.Forest
 				player.slimeFeed();
 				player.orgasm();
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function beeRapesYou():void
@@ -1152,7 +1163,7 @@ package classes.Scenes.Areas.Forest
 				outputText(" and leave the completely exhausted and drenched woman on the forest floor, wings and legs still twitching slightly, sending a fine mist of cum across the ground around her.", false);
 			}
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			cleanupAfterCombat();
 		}
 
@@ -1286,7 +1297,7 @@ package classes.Scenes.Areas.Forest
 			if (player.gender > 0){
 				player.orgasm();
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 			cleanupAfterCombat();
 		}
 

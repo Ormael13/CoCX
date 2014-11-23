@@ -140,7 +140,7 @@ package classes.Scenes.Areas.Desert
 				outputText("After seeing the large pack of demons you decide it's best not to act.  You yourself are in no condition to help the poor creature, and knowing full well what comes after demons 'subdue' their prey, you don't want to stick around either.  You glance over and realize the skirmish has already started.  It's too late to really help her anyway, you argue to yourself, plus she's covered in muscle.");
 				outputText("\n\nAssuring yourself that she'll be fine, you take the opportunity to flee while the demons are distracted, heading back to camp.  Leaving the ant-girl to her fate.");
 				//[End of Event]
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			//►(If Over 41 - Male)
@@ -211,7 +211,7 @@ package classes.Scenes.Areas.Desert
 				player.orgasm();
 				dynStats("sen", -1,  "cor", 3);
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //►[Play Hero]
@@ -271,7 +271,7 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nThe ant queen gives you a dismissive wave with one of her larger arms, giving you reason to think her good will is anything but.  As you turn to leave, your eye catches Phylla's and she shyly smiles at you.  Her mother sees this and delivers a final, cryptic warning.  \"<i>One last thing before you depart, 'Champion'.  Should you fail, the consequences, for you, will be... dire.</i>\"");
 			outputText("\n\nAs you mull over this ominous message, your guide reappears and leads you back through the maze of tunnels, to the exit of the colony.  You leave the anthill behind and head to camp, considering your best course of action.");
 			flags[kFLAGS.PC_READY_FOR_ANT_COLONY_CHALLENGE] = 1;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //The Challenges
@@ -310,7 +310,7 @@ package classes.Scenes.Areas.Desert
 		{
 			clearOutput();
 			outputText("Deciding to better prepare yourself first, you inform the thin fight manager that you will return later.  You leave the colony, heading back to camp.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function antColiseumFight():void
@@ -416,7 +416,7 @@ package classes.Scenes.Areas.Desert
 				flags[kFLAGS.ANTS_PC_BEAT_GNOLL]++;
 			}
 			else if (flags[kFLAGS.ANT_ARENA_WINS] - flags[kFLAGS.ANT_ARENA_LOSSES] >= 2 && flags[kFLAGS.ANT_ARENA_WINS] >= 3 && player.gender > 0) {
-				gameState = 0;
+				getGame().inCombat = false;
 				flags[kFLAGS.ANT_ARENA_WINS]++;
 				antGirlGoodEnd();
 				return;
@@ -974,7 +974,7 @@ package classes.Scenes.Areas.Desert
 			outputText("You smile at her and tell her you would love for her to join you at your camp.  Her face brightens like the sun and she quickly gathers the very few possessions she owns - mostly clothing, the pillows, and some jewelry.  Together you promptly leave the colony and head back to camp.");
 			outputText("\n\n(<b>Phylla has moved in!  She can be found in the lovers tab!</b>)");
 			flags[kFLAGS.ANT_WAIFU] = 1;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //►[Stay Here]
@@ -986,7 +986,7 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nAs you turn to leave she quickly says, \"<i>If you ever feel your camp is safe enough for me to join you, p-please come get me.  If you want.  I mean, I'm not going anywhere... not that I could with my mother watching anyway...</i>\"");
 			outputText("\n\nYou nod and without another word, head back to camp.");
 			flags[kFLAGS.PHYLLA_STAY_HOME] = 1;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //If PC returns to colony after telling her to stay with her mother:
@@ -1195,7 +1195,7 @@ package classes.Scenes.Areas.Desert
 
 				outputText("\n\nTurning to leave back to camp, you hear Phylla crying.  Maybe some time alone with her thoughts will help her see what you're trying to accomplish here.");
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //(Ant Morph Mating Ritual / Inherited Knowledge)
@@ -1283,7 +1283,7 @@ package classes.Scenes.Areas.Desert
 				}
 			}
 			flags[kFLAGS.PHYLLA_INHERITED_KNOWLEDGE] = 1;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //(Phylla's Life Past & Future)
@@ -1374,7 +1374,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nYou mull this over in your head, and you must have been thinking pretty hard.  When you get up to leave you find Phylla has completely passed out on your lap.  You take this opportunity to gently unwrap yourself from her, and head back to camp.");
 
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -1602,7 +1602,7 @@ package classes.Scenes.Areas.Desert
 		{
 			clearOutput();
 			outputText("Placing your hands on your hips, you smirk and tell Phylla that a true queen never spits. Phylla shoots you a slutty look and gulps your load greedily, taking a moment to savor the warmth and texture as it works its way down her throat.  She ahhhs loudly as she rubs her stomach, humming in pleasure as the steamy load spreads its heat to her belly.  \"<i>Thank you, [name].  That hit the spot.</i>\"");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[Spit it out]
@@ -1610,7 +1610,7 @@ package classes.Scenes.Areas.Desert
 		{
 			clearOutput();
 			outputText("Crossing your arms, you tell Phylla to spit your load out.  As you dress yourself back up in your [armor], you hear Phylla frantically dig out a hole in the floor.  She playfully leans over and spits the salty payload into it.  She makes a soft hum when she's finished, before quickly covering it up again.  \"<i>Thank you, [name].  Next time I'll do better, I promise.</i>\"");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Corrupt BJ Ending
@@ -1677,7 +1677,7 @@ package classes.Scenes.Areas.Desert
 			//***Both mode endings converge here***
 			outputText("\n\n...Can you? You muse again, thinking about it.  After a few moments of helping Phylla to the pile of, now very wet, cushions she calls a bed, you finish donning your [armor] and head back to the surface.");
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //\"<i>Use Dick</i>\"
@@ -1796,7 +1796,7 @@ package classes.Scenes.Areas.Desert
 
 			outputText("\n\nPhylla stirs next to you, and groggily says, \"<i>You should come down more often.  I mean...  I miss you sometimes...</i>\"  Her shyness returns as she slowly recovers from the small sex-coma you placed each other in.  You say you'll think about it and wink at her as you get dressed and head back to camp, leaving her to eagerly await the next time you come to take her once again.");
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Straight Sex (Lesbian/Fisting) - Written
@@ -1834,7 +1834,7 @@ package classes.Scenes.Areas.Desert
 
 			outputText("\n\nYou say you'll think about it and wink at her as you get dressed and head back to camp, leaving her to eagerly await the next time you come to take her once again.");
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 
@@ -1936,7 +1936,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nAfter a moment of staggered walking you allow Phylla the courtesy to flop down onto the hard surface of the bed, pausing only for a moment to look over your pregnant little whore.  After a quick remark to her on how she'd better be ready for another round soon, you leave her to the mess you have made as you head back to camp.");
 			}
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //While Giving Birth (Female) - Written
@@ -2112,7 +2112,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nNow that Phylla's quieted down, you tell her you're going to get some sleep; if she's to have another child, she'll need to either keep quiet or leave to another room.  She nods dejectedly as you settle in for your nap.  You swear you hear her go into labor again right before drifting off.");
 			}
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[Orgy w/ Colony - Requires Children]
@@ -2237,7 +2237,7 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nYou might want to stay and watch that, but you've spent too long down here already.  You collect your things, trying your best not to step on the twenty or so passed out ants on the floor as you head back to camp.");
 			player.orgasm();
 			dynStats("sen", -2);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Orgy w/ Colony (Female)
@@ -2358,7 +2358,7 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nYou might want to stay and watch that, but you've spent too long down here already.  You collect your things, trying your best not to step on the twenty or so passed out ants on the floor as you head back to camp.");
 			player.orgasm();
 			dynStats("sen", -1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //►[Lay Eggs / Don't Lay Eggs]
@@ -2390,7 +2390,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nShe pauses and makes a strange face as her abdomen pulses and another egg emerges from the tip.  She blushes deeply.  \"<i>That's the last one!  I mean, I had to get it out, it was already...</i>\"");
 				outputText("\n\nYou cut her off by asking when her abdomen will return to normal size - both because you're curious and because you really didn't want her to finish that sentence.  \"<i>It shouldn't take long.  I can already feel it changing.</i>\"");
 				outputText("\n\nSmiling, you thank her for complying with all your demands.  You leave the colony, heading back to camp.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -2429,7 +2429,7 @@ package classes.Scenes.Areas.Desert
 			flags[kFLAGS.PHYLLA_COOLDOWN] = 12;
 			flags[kFLAGS.ANTS_BIRTHED_FROM_LICKING]++;
 			if (flags[kFLAGS.ANT_KIDS] < 5000) flags[kFLAGS.ANT_KIDS] += 5;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //DON'T LICK THAT!
@@ -2450,7 +2450,7 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nYou remark to Phylla that you might just take her up on that, and wink as you leave your exhausted lover to recuperate, passing several of your children as they scoop up the bundle of eggs that lay huddled together on the floor.");
 			flags[kFLAGS.PHYLLA_COOLDOWN] = 6;
 			flags[kFLAGS.ANT_KIDS]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Phylla lays Drider eggs
@@ -2480,7 +2480,7 @@ package classes.Scenes.Areas.Desert
 				else outputText("\n\nRubbing her now empty belly Phylla remarks on how much she loves giving birth through her 'other hole' and how you should knock her up this way much more often.  Again you feel the maternal warmth radiating from Phylla.");
 
 				outputText("\n\nYour intimate moment with her is interrupted by the crackling and hatching of egg shells as your brood clamors for freedom.  Sighting their mother, they scurry up the bedspread and set up a pecking order for who will get the first go at Phylla's milk filled breasts.  The birthing complete, you kiss Phylla on the lips and thank her for hosting your young.  \"<i>Thank you for helping me achieve my purpose in life.  I know you have other things to do, but just know that... I love you.</i>\" She weakly replies.  You wink at her and nod before heading back up to the surface.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			//PC has more than 75 corruption:
 			else {
@@ -2528,7 +2528,7 @@ package classes.Scenes.Areas.Desert
 			player.dumpEggs();
 			//set phylla drider preggo timer
 			if (!pregnancy.isPregnant) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 8 * 24); //Supposed to be eight days, not eight hours
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Let Phylla Recover:
@@ -2536,7 +2536,7 @@ package classes.Scenes.Areas.Desert
 		{
 			clearOutput();
 			outputText("Working up all of your self control, you decide that Phylla could use the rest.  You wink at Phylla as you leave, telling her that you'll be back to fuck her brains out shortly... once she feeds your children.  She only musters the strength to smile and mutter something about motherhood but you're already halfway out the door.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //►[Children - Only available if Phylla has laid eggs]
@@ -2563,7 +2563,7 @@ package classes.Scenes.Areas.Desert
 			if (flags[kFLAGS.PHYLLA_TIMES_DRIDER_EGG_LAYED] > 10) outputText("\n\nShe sighs forlornly but continues.  \"<i>Some of our drider offspring have even taken it upon themselves to leave the colony and venture out into the world.  Not that I mind; it's just sad seeing them go sometimes.  I know we did a good job raising them, and I hope they take the lessons we taught them to heart, and that they never forget where home is...</i>\"");
 			//Ending for Scene
 			outputText("\n\nYou feel good about this.  Standing up to survey the colony, you can see Phylla is also very content.  You thank her for talking to you and head back to the surface, toward camp.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //►[Appearance]
@@ -2639,7 +2639,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"  She inquires excitedly.");
 			}
 			flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 1;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Drider/Bee impregnation scene for Phylla (universal unless otherwise specified, which will include varied intros and stuff.
@@ -2665,7 +2665,7 @@ package classes.Scenes.Areas.Desert
 				if (pregnancy.isPregnant) outputText("\n\n\"<i>I just can't hold anything else inside me.  I'm sorry!  Please don't be mad... I mean, I will!  Just a-after... this batch.</i>\"");
 				//Else player has not impregnated:
 				else outputText("\n\n\"<i>I mean... I just, don't feel comfortable with that right now. Maybe later, though.</i>\"");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			//Persuasion Success
 			else {
@@ -2698,7 +2698,7 @@ package classes.Scenes.Areas.Desert
 				player.orgasm();
 				player.dumpEggs();
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

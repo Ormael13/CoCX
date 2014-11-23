@@ -1,6 +1,7 @@
 /**
  * Created by aimozg on 11.01.14.
  */
+//Not used in game
 package classes.Items.Armors
 {
 	import classes.Items.Armor;

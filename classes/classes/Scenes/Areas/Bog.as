@@ -54,7 +54,7 @@ package classes.Scenes.Areas
 			else {
 				clearOutput();
 				outputText("You wander around through the humid muck, but you don't run into anything interesting.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 	}

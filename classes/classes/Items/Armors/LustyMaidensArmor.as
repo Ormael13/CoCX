@@ -11,95 +11,77 @@ package classes.Items.Armors
 	import classes.Scenes.Areas.HighMountains.MinotaurMob;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 
-	public final class LustyMaidensArmor extends Armor
-	{
-		override public function canUse(wearer:Player, output:Boolean):Boolean
-		{
-			clearOutput();
-			//{No titties}
-			if (wearer.biggestTitSize() < 1) {
-				if (output) outputText("You slide the bikini top over your chest and buckle it into place, but the material hangs almost comically across your flat chest.  The cold chain dangles away from you, swaying around ridiculously before smacking, cold and hard into your [nipples].  This simply won't do - it doesn't fit you, and you switch back to your old armor.\n\n");
-				return false;
-			}
-			if(wearer.biggestTitSize() < 4) {
-				//{Too small titties}
-				if (output) outputText("You slide the bikini top over your chest, shivering when the cold chains catch on your nipples, stiffening them nicely. The material nicely accentuates your chest, but there's a definite problem.  Your [chest] aren't big enough!  Sure, they look nice done up in glittering silver and gold trim.  If only the metal wasn't hanging loosely around your underbust, flopping around whenever you move.  It doesn't even look that sexy on you!  You'll need a bigger chest to truly make use of this armor.  For now, you switch back to your old equipment.\n\n");
-				return false;
-			}
-			if (output) {
-				outputText("You slide the bikini top over your more than ample chest, shivering at the touch of the cold metal on your sensitive nipples.  It stretches taut around each of your globes, and by the time you're snapping the narrow leather strap behind your back, the exotic metal bra has grown warm enough to make your chest tingle pleasantly.  Your hands find their way to your jiggling, gilded mounds and grab hold, fingers sinking into the shimmering flesh without meaning to.  Your nipples scrape along a diaphanous inner lining so pleasantly that a moan slips out of your mouth as you admire how your cleavage bulges out above the glittery cups.  A narrow band of steel with a shiny black leather thong underneath connects the two halfs of the top, padded for comfort but pulled away from you by the sheer size of your straining bosoms.");
-				outputText("\n\nAs you examine the material, you realize that leather band isn't just padding.  It's as slippery as butter on grease and has a subtle indentation, one that would let it perfectly cushion something round, thick... and throbbing.  Your cheeks color when you catch yourself thinking of titfucking some beast while dressed in this outfit, taking a thick load of monster or dick-girl seed right over your cleavage, face, and hair.  You could even line it up with your mouth and drink down a few swallows if you wanted to.");
-				outputText("\n\nYou shake your head and smile ruefully - maybe once you finish getting dressed!  There's still a bottom to put on, after all.  Regardless, one of your hands keeps coming to rest on your boob, idly groping and fondling your heavy tit whenever you have a free moment.  This sure is some fun armor!");
-				game.dynStats("lus", 25, "resisted", false);
-				outputText("\n\nNow, the bottom is a leather thong and skirt combination.  The thong itself is leather dyed radiant white, with intricate gold filigree covering the front triangle.  On the back triangle, there's a similar pattern, though you could swear that from a distance the pattern looks a bit like arrows pointing towards where your [asshole] will be with golden sperm surrounding them. No, that has to be your imagination.  All this time in this strange land must really be getting to you!  Both pieces are molded to accentuate the female form, with a crease in the gusset that will rest over your vagina, ensuring ");
-			}
-			if (wearer.hasCock() || wearer.balls > 0) {
-				if (output) {
-					// ...Both pieces are moulded to accentuate the female form, with a crease in the gusset that will rest over your vagina, ensuring
-					outputText("that it won't fit you ");
-					if (wearer.hasCock()) outputText("or your " + wearer.multiCockDescriptLight());
-					else outputText("or your [balls]");
-					outputText(" at all!  <b>You put your old gear back on with a sigh</b>.");
-				}
-				return false;
-			} else if (wearer.gender == 0 || !wearer.hasVagina()) {
-				if (output) {
-					// ...Both pieces are moulded to accentuate the female form, with a crease in the gusset that will rest over your vagina, ensuring
-					outputText("that it will dig uncomfortably into your featureless groin.  <b>You put your old gear back on with a sigh</b>.");
-				}
-				return false;
-			} else {
-				if (output){
-					// ...Both pieces are moulded to accentuate the female form, with a crease in the gusset that will rest over your vagina, ensuring
-					outputText("your [vagina] is prominently displaying your camel-toe for all to see.");
-					outputText("\n\nYou don't give it a second thought, sliding the white thong snugly into place.  Snug warmth slides right up against your mound, the perfectly formed crease slipping right into your labia, where it belongs, ");
-					if (wearer.vaginas[0].virgin) {
-						outputText("a tight seal over your chastity, displaying your womanly status while guarding your maidenhead at the same time.  A smug, smile tugs at the corners of your mouth - who would take your virginity when they can tit-fuck your tits or fuck your butt?");
-						if (wearer.cor < 33) outputText("  Wait, that isn't right...");
-					}
-					else {
-						outputText("a tight seal over your previously-claimed cunt.  Regret fills you when you realize you could have kept your chastity intact simply by servicing the lusty studs and monsters with your ass and tits.");
-					}
-					if (wearer.wetness() >= 3) outputText("  The moisture you normally drip seems to soak right into the gusset instead of running down your [legs] like normal, giving you a much more chaste appearance in spite of the lewd garments that even now seem to shape your femininity and [butt] into perfectly arousing shapes.");
-
-					outputText("\n\nLast is the chain skirt - perhaps the easiest part to put on.  It's barely three inches long, such that it exposes your [butt] almost entirely, and when you bend over, fully.  The bottom of your vaginal crease can be spied as well, and should you desire to show yourself off, a simple stretch or tug would put you completely on display.  You wiggle about, watching the reflective material ripple almost hypnotically, one hand still on your boobs, mauling at your own tits with passion.  THIS is how a chaste champion should dress - perfectly modest but full of erotic energy to overwhelm her enemies with!\n\n");
-				}
-			}
-			return true;
+	public final class LustyMaidensArmor extends Armor {
+		
+		public function LustyMaidensArmor() {
+			super("LMArmor", "LMArmor", "lusty maiden's armor", "a bikini-like set of armor that could only belong to a lusty maiden", 6, 400, "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\"", "Light");
 		}
-
-
-		override public function equipEffect(wearer:Player, output:Boolean):void
-		{
-			if(wearer.lib < 50) game.dynStats("lib", 1, "sen", 1);
-			/*Stats: Virgin - 9, Non-Virgin - 5
-
-			//NONVIRGIN:
-			if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk("Slutty Seduction",6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
-			//VIRGIN:
-			if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk("Slutty Seduction",10,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
-			Special Bonus: Every time you use the special titfuck scene, you gain two defense and 2 tease damage up to a max of 8.  Every night you lose half your bonus (minimum 1).
-			Min lust: 30
-			Min libido: 50*/
-			if(wearer.hasVirginVagina()) {
-				while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
-				wearer.createPerk(PerkLib.SluttySeduction,10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
+		
+		override public function get def():Number {
+			if (game.player.hasVirginVagina()) return 9 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
+			return 6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
+		}
+		
+		override public function canUse():Boolean {
+			if (game.player.biggestTitSize() < 1) { //{No titties}
+				outputText("You slide the bikini top over your chest and buckle it into place, but the material hangs almost comically across your flat chest.  The cold chain dangles away from you, swaying around ridiculously before smacking, cold and hard into your [nipples].  This simply won't do - it doesn't fit you, and you switch back to your old armor.\n\n");
+				return false;
+			}
+			if (game.player.biggestTitSize() < 4) { //{Too small titties}
+				outputText("You slide the bikini top over your chest, shivering when the cold chains catch on your nipples, stiffening them nicely. The material nicely accentuates your chest, but there's a definite problem.  Your [chest] aren't big enough!  Sure, they look nice done up in glittering silver and gold trim.  If only the metal wasn't hanging loosely around your underbust, flopping around whenever you move.  It doesn't even look that sexy on you!  You'll need a bigger chest to truly make use of this armor.  For now, you switch back to your old equipment.\n\n");
+				return false;
+			}
+			outputText("You slide the bikini top over your more than ample chest, shivering at the touch of the cold metal on your sensitive nipples.  It stretches taut around each of your globes, and by the time you're snapping the narrow leather strap behind your back, the exotic metal bra has grown warm enough to make your chest tingle pleasantly.  Your hands find their way to your jiggling, gilded mounds and grab hold, fingers sinking into the shimmering flesh without meaning to.  Your nipples scrape along a diaphanous inner lining so pleasantly that a moan slips out of your mouth as you admire how your cleavage bulges out above the glittery cups.  A narrow band of steel with a shiny black leather thong underneath connects the two halfs of the top, padded for comfort but pulled away from you by the sheer size of your straining bosoms.");
+			outputText("\n\nAs you examine the material, you realize that leather band isn't just padding.  It's as slippery as butter on grease and has a subtle indentation, one that would let it perfectly cushion something round, thick... and throbbing.  Your cheeks color when you catch yourself thinking of titfucking some beast while dressed in this outfit, taking a thick load of monster or dick-girl seed right over your cleavage, face, and hair.  You could even line it up with your mouth and drink down a few swallows if you wanted to.");
+			outputText("\n\nYou shake your head and smile ruefully - maybe once you finish getting dressed!  There's still a bottom to put on, after all.  Regardless, one of your hands keeps coming to rest on your boob, idly groping and fondling your heavy tit whenever you have a free moment.  This sure is some fun armor!");
+			game.dynStats("lus", 25, "resisted", false);
+			outputText("\n\nNow, the bottom is a leather thong and skirt combination.  The thong itself is leather dyed radiant white, with intricate gold filigree covering the front triangle.  On the back triangle, there's a similar pattern, though you could swear that from a distance the pattern looks a bit like arrows pointing towards where your [asshole] will be with golden sperm surrounding them. No, that has to be your imagination.  All this time in this strange land must really be getting to you!  Both pieces are molded to accentuate the female form, with a crease in the gusset that will rest over your vagina, ensuring ");
+			if (game.player.hasCock() || game.player.balls > 0) {
+				outputText("that it won't fit you ");
+				if (game.player.hasCock()) outputText("or your " + game.player.multiCockDescriptLight());
+				else outputText("or your [balls]");
+				outputText(" at all!  <b>You put your old gear back on with a sigh</b>.");
+				return false;
+			}
+			else if (game.player.gender == 0 || !game.player.hasVagina()) {
+				outputText("that it will dig uncomfortably into your featureless groin.  <b>You put your old gear back on with a sigh</b>.");
+				return false;
+			}
+			outputText("your [vagina] is prominently displaying your camel-toe for all to see.");
+			outputText("\n\nYou don't give it a second thought, sliding the white thong snugly into place.  Snug warmth slides right up against your mound, the perfectly formed crease slipping right into your labia, where it belongs, ");
+			if (game.player.vaginas[0].virgin) {
+				outputText("a tight seal over your chastity, displaying your womanly status while guarding your maidenhead at the same time.  A smug, smile tugs at the corners of your mouth - who would take your virginity when they can tit-fuck your tits or fuck your butt?");
+				if (game.player.cor < 33) outputText("  Wait, that isn't right...");
 			}
 			else {
-				while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
-				if(wearer.findPerk(PerkLib.SluttySeduction) < 0) wearer.createPerk(PerkLib.SluttySeduction,6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
+				outputText("a tight seal over your previously-claimed cunt.  Regret fills you when you realize you could have kept your chastity intact simply by servicing the lusty studs and monsters with your ass and tits.");
 			}
-		}
+			if (game.player.wetness() >= 3) outputText("  The moisture you normally drip seems to soak right into the gusset instead of running down your [legs] like normal, giving you a much more chaste appearance in spite of the lewd garments that even now seem to shape your femininity and [butt] into perfectly arousing shapes.");
 
-		override public function unequipEffect(wearer:Player, output:Boolean):void
-		{
-			while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
+			outputText("\n\nLast is the chain skirt - perhaps the easiest part to put on.  It's barely three inches long, such that it exposes your [butt] almost entirely, and when you bend over, fully.  The bottom of your vaginal crease can be spied as well, and should you desire to show yourself off, a simple stretch or tug would put you completely on display.  You wiggle about, watching the reflective material ripple almost hypnotically, one hand still on your boobs, mauling at your own tits with passion.  THIS is how a chaste champion should dress - perfectly modest but full of erotic energy to overwhelm her enemies with!\n\n");
+			return true;
 		}
-
+		
+		override public function playerEquip():Armor {
+			while (game.player.findPerk(PerkLib.SluttySeduction) >= 0) game.player.removePerk(PerkLib.SluttySeduction);
+			if (game.player.hasVirginVagina()) {
+				game.player.createPerk(PerkLib.SluttySeduction, 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
+			}
+			else {
+				game.player.createPerk(PerkLib.SluttySeduction, 6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
+			}
+			return super.playerEquip();
+		}
+		
+		override public function playerRemove():Armor {
+			while (game.player.findPerk(PerkLib.SluttySeduction) >= 0) game.player.removePerk(PerkLib.SluttySeduction);
+			return super.playerRemove();
+		}
+		
 		//"Chaste" Paizuri - works for most foes with penises.
-		public function lustyMaidenPaizuri(player:Player=null,monster:Monster=null):void {
-			if (player==null) player = game.player;
-			if (monster==null) monster = game.monster;
+		public function lustyMaidenPaizuri(player:Player = null, monster:Monster = null):void {
+			if (player == null) player = game.player;
+			if (monster == null) monster = game.monster;
 			clearOutput();
 			outputText("You make sure " + monster.a + monster.short + " is comfortably lying down, " + monster.pronoun3 + " " + game.eCockDescript(0) + " exposed to the air");
 			if(monster.lust < 50) outputText(", soft and not yet ready.  You purr throatily as you touch the burgeoning boner, tracing your thumb across the sensitive urethral bulge.  It pulses slowly at your touch, and the base begins to fill with blood, thickening against your palm.  You splay your remaining fingers just under the " + game.eCockHead(0) + ", tickling around the glans until that too is flooding with blood, expanding under your caresses until it slowly lifts away from " + monster.pronoun3 + " abdomen.");
@@ -150,24 +132,43 @@ package classes.Items.Armors
 			if(monster is Minotaur || monster is MinotaurMob) player.minoCumAddiction(3);
 			if(monster.short == "Ceraph") game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
 			//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
-			if(game.inCombat()) game.cleanupAfterCombat();
-			else game.doNext(13);
+			if (game.inCombat)
+				game.cleanupAfterCombat();
+			else game.doNext(game.camp.returnToCampUseOneHour);
 		}
 
-
-		override public function get def():Number
+/*
+		override public function equipEffect(wearer:Player, output:Boolean):void
 		{
-			if (game.player.hasVirginVagina()){
-				return 9 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
-			} else {
-				return 6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
+			if(wearer.lib < 50) game.dynStats("lib", 1, "sen", 1);
+			/*Stats: Virgin - 9, Non-Virgin - 5
+
+			//NONVIRGIN:
+			if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk("Slutty Seduction",6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
+			//VIRGIN:
+			if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk("Slutty Seduction",10,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
+			Special Bonus: Every time you use the special titfuck scene, you gain two defense and 2 tease damage up to a max of 8.  Every night you lose half your bonus (minimum 1).
+			Min lust: 30
+			Min libido: 50*/
+/*			if(wearer.hasVirginVagina()) {
+				while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
+				wearer.createPerk(PerkLib.SluttySeduction,10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
+			}
+			else {
+				while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
+				if(wearer.findPerk(PerkLib.SluttySeduction) < 0) wearer.createPerk(PerkLib.SluttySeduction,6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
 			}
 		}
 
-		public function LustyMaidensArmor()
+		override public function unequipEffect(wearer:Player, output:Boolean):void
 		{
+<<<<<<< HEAD
 			super("LMArmor","LMArmor","lusty maiden's armor",
 					"a bikini-like set of armor that could only belong to a lusty maiden",6,400,"This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\ \n\nType: Light armor \nDefense: Varies \nBase value: 400 \nSpecial: Slutty Seduction and unlocks certain titfuck scenes. \nRequirements: breast size of at least DD-cups and be a female.","Light");
+=======
+			while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		}
+*/
 	}
 }

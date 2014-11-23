@@ -170,7 +170,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	kGAMECLASS.beeProgress = 0;
 	kGAMECLASS.giacomo = 0;
 	//Lets get this bitch started
-	gameState = 0;
+	kGAMECLASS.inCombat = false;
 	//NG+ Clothes reset
 	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] != 0) 
 	{
@@ -180,19 +180,19 @@ public function newGameGo(e:MouseEvent = null):void {
 		
 		if (!(oldPlayer.armor is GooArmor))
 		{
-			player.armor = oldPlayer.armor;
+			player.setArmor(oldPlayer.armor);
 		}
 		else
 		{
-			player.setArmorHiddenField(armors.C_CLOTH);
+			player.setArmor(armors.C_CLOTH);
 		}
 			
-		player.setWeaponHiddenField(oldPlayer.weapon);
+		player.setWeapon(oldPlayer.weapon);
 	}
 	//Clothes clear
 	else {
-		player.setArmorHiddenField(armors.C_CLOTH);
-		player.setWeaponHiddenField(WeaponLib.FISTS);
+		player.setArmor(armors.C_CLOTH);
+		player.setWeapon(WeaponLib.FISTS);
 	}
 	//Clear plot storage array!
 	flags = new DefaultDict();
@@ -1186,7 +1186,7 @@ public function getBanishedToMarethForReal():void {
 	outputText("You were warned of this and press forward, ignoring your body's growing needs.  A glowing purple-pink portal swirls and flares with demonic light along the back wall.  Cringing, you press forward, keenly aware that your body seems to be anticipating coming in contact with the tainted magical construct.  Closing your eyes, you gather your resolve and leap forwards.  Vertigo overwhelms you and you black out...", false);
 	showStats();
 	dynStats("lus", +15);
-	doNext(2000);
+	doNext(startNewGame);
 }
 
 public function useCustomProfile():void {
@@ -1289,9 +1289,36 @@ public function specialName(arg:String):Boolean {
 	return false;
 }
 
+private function startNewGame():void {
+	clearOutput();
+	hideUpDown();
+	dynStats("lus", 40, "cor", 2);
+	model.time.hours = 18;
+	outputText("You wake with a splitting headache and a body full of burning desire.  A shadow darkens your view momentarily and your training kicks in.  You roll to the side across the bare ground and leap to your feet.  A surprised looking imp stands a few feet away, holding an empty vial.  He's completely naked, an improbably sized pulsing red cock hanging between his spindly legs.  You flush with desire as a wave of lust washes over you, your mind reeling as you fight ");
+	if (player.gender == 2)
+		outputText("the urge to chase down his rod and impale yourself on it.\n\n");
+	else
+		outputText("the urge to ram your cock down his throat.  The strangeness of the thought surprises you.\n\n");
+	outputText("The imp says, \"<i>I'm amazed you aren't already chasing down my cock, human.  The last Champion was an eager whore for me by the time she woke up.  This lust draft made sure of it.</i>\"");
+	doNext(startNewGamePartTwo);
+}
 
+private function startNewGamePartTwo():void {
+	clearOutput();
+	hideUpDown();
+	dynStats("lus", -30);
+	outputText("The imp shakes the empty vial to emphasize his point.  You reel in shock at this revelation - you've just entered the demon realm and you've already been drugged!  You tremble with the aching need in your groin, but resist, righteous anger lending you strength.\n\nIn desperation you leap towards the imp, watching with glee as his cocky smile changes to an expression of sheer terror.  The smaller creature is no match for your brute strength as you pummel him mercilessly.  You pick up the diminutive demon and punt him into the air, frowning grimly as he spreads his wings and begins speeding into the distance.\n\n");
+	outputText("The imp says, \"<i>FOOL!  You could have had pleasure unending... but should we ever cross paths again you will regret humiliating me!  Remember the name Zetaz, as you'll soon face the wrath of my master!</i>\"\n\n");
+	outputText("Your pleasure at defeating the demon ebbs as you consider how you've already been defiled.  You swear to yourself you will find the demon responsible for doing this to you and the other Champions, and destroy him AND his pet imp.");
+	doNext(startNewGamePartThree);
+}
 
-
+private function startNewGamePartThree():void {
+	clearOutput();
+	hideUpDown();
+	outputText("You look around, surveying the hellish landscape as you plot your next move.  The portal is a few yards away, nestled between a formation of rocks.  It does not seem to exude the arousing influence it had on the other side.  The ground and sky are both tinted different shades of red, though the earth beneath your feet feels as normal as any other lifeless patch of dirt.   You settle on the idea of making a camp here and fortifying this side of the portal.  No demons will ravage your beloved hometown on your watch.\n\nIt does not take long to set up your tent and a few simple traps.  You'll need to explore and gather more supplies to fortify it any further.  Perhaps you will even manage to track down the demons who have been abducting the other champions!");
+	doNext(camp.campMenu);
+}
 
 }
 }

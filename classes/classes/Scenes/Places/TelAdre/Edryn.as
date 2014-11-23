@@ -128,7 +128,6 @@ public function edrynBarTalk():void {
 		else if(player.cockArea(x) <= 24) {
 			outputText("She looks down, eyes fixating on your crotch for a moment.  Edryn asks, \"<i>When did you get so small?  We can't fuck like this!  ", false);
 			//(Chance of equinum,gro+(twice only),minotaur blood, or purified incubus draft)
-			menuLoc = 2;
 			var itype:ItemType;
 			if(flags[kFLAGS.EDRYN_GIFT_COUNTER] < 2) {
 				outputText("Here, take some of this stuff.  We confiscated it off one of the miscreants we kicked out the other day, and I KNOW it'll get you to be big enough for me.  Just don't go too nuts with it, okay?</i>\"\n\n", false);
@@ -147,17 +146,16 @@ public function edrynBarTalk():void {
 				doNext(telAdre.barTelAdre);
 				return;
 			}
-			inventory.takeItem(itype);
+			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 			return;
 		}
 		//(Too big)
 		else {
 			outputText("She looks down and gasps, \"<i>Holy shit!  Why do you have a monster like that!?  When a centaur is shocked by how big you are it's time to go easy on the dick enlargement pills, dear.</i>\"\n\n", false);
 			if(flags[kFLAGS.EDRYN_GIFT_COUNTER] < 2) {
-				menuLoc = 2;
 				outputText("Her eyes light up and she suggests, \"<i>Take some of this; it ought to take down some of that swelling.</i>\"\n\n", false);
 				flags[kFLAGS.EDRYN_GIFT_COUNTER]++;
-				inventory.takeItem(consumables.REDUCTO);
+				inventory.takeItem(consumables.REDUCTO, camp.returnToCampUseOneHour);
 				return;
 			}
 			//(ALT)
@@ -440,7 +438,7 @@ private function fuckEdrynTaur():void {
 	player.orgasm();
 	dynStats("sen", -3);
 	if(player.lust < 30) player.lust = 30;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function fuckEdrynNonTaur():void {
 	spriteSelect(14);
@@ -497,7 +495,7 @@ private function fuckEdrynNonTaur():void {
 	player.orgasm();
 	dynStats("sen", -3);
 	if(player.lust < 30) player.lust = 30;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function edrynBar():Boolean {
@@ -649,7 +647,7 @@ private function threesomeEdrynAndHel():void {
 	outputText("\"<i>Oh yeah. We... We gotta go again sometime,</i>\" Hel agrees, nearly falling off Edryn's back.  You give each of the girls a long kiss before collecting your " + player.armorName + " and walking off back to camp.\n\n", false);
 	player.orgasm();
 	kGAMECLASS.helFollower.helAffection(5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Pregdryn:
@@ -664,10 +662,9 @@ public function findOutEdrynIsPregnant():void {
 
 	outputText("<b>How do you react?</b>", false);
 
-	var aroused:Number = 0;
-	if(player.totalCocks() > 0) aroused = 2493;
+	var aroused:Function = (player.totalCocks() > 0 ? arousedByPregdryn : null);
 	//[Shocked] [Pleased] [Aroused (Requires Wang)]
-	simpleChoices("Shocked",shockedByEdrynsPregnancy,"Pleased",pleasedbyPregdryn,"Aroused",aroused,"",0,"",0);
+	simpleChoices("Shocked", shockedByEdrynsPregnancy, "Pleased", pleasedbyPregdryn, "Aroused", aroused, "", null, "", null);
 }
 
 //Shocked
@@ -931,7 +928,7 @@ public function fuckPregEdryn():void {
 	}
 	player.orgasm();
 	dynStats("sen", -.5);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //EAT THE BITCH'S CUNT OUT
@@ -996,7 +993,7 @@ private function jizzFromEatingPregdrynOut():void {
 	outputText("\"<i>Turn-about is fair play!</i>\" she exclaims. You leave, unable to dispute the logic.", false);
 	player.orgasm();
 	dynStats("lib", 1, "sen", 2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function edrynPregChance():void {
@@ -1179,7 +1176,7 @@ private function postEdrynEatOutRut():void {
 	edrynPregChance();
 	edrynPregChance();
 	flags[kFLAGS.TIMES_EATEN_EDRYN_PUSSY_RUT]++;
-	doNext(15);
+	doNext(camp.returnToCampUseFourHours);
 }
 }
 }

@@ -91,12 +91,12 @@ public function approachNiamh():void {
 	if(flags[kFLAGS.MET_NIAMH] > 0) outputText("Niamh gives you a friendly, but professional, smile as you draw near.  She smiles and shakes her head knowingly as your gaze inevitably falls to her chest, obviously as full of booze as ever.  Small puddles of alcoholic fluid slowly accumulate from the steady drip of her swollen nipples.  \"<i>Well, hello, consumer - yes, up here - hello, consumer.  Did ye want to try more o' me Black Cat Beer?  Just remember the rules; two bits a glass, treat me gentle, and no sneakin' a drink from 'the tap'.</i>\"");
 	else outputText("You approach the burdened woman, hailing her politely.  Her ears twitch at the sound, and she sends a crooked smile your way.  \"<i>What can I do ya for?</i>\" she asks somewhat tiredly, the lilt of her words hinting at an accent.  \"<i>Up for a bit o' the brew, perhaps?</i>\"  Your question regarding why she's peddling alcohol dies in your throat as your gaze inevitably drops to her dusky-toned bosom.  As you watch, a small droplet of cloudy golden liquid forms at her engorged teat and splashes into the growing puddle under the nipple.  From the array of top-bearing beer mugs placed within reaching distance on the ground, you begin to put the pieces together.  Is she actually... lactating beer?  You glance back up at her; she smirks knowingly, casually resting her forearms against her expansive breast-flesh and using them to push together and amplify the already-incredible cleavage.  She takes a deep breath, then chants in a singsong voice, \"<i>Black cat beer, two bits a glass.  Get it quick, for it's goin' fast.  Just treat me gentle, or you're in for a slap, and no, you can't have it 'straight from the tap'.</i>\"  After a couple moments, you shrug, figuring stranger things have happened in Mareth.");
 
-	var beer:* = 0;
+	var beer:Function = null;
 	if(player.gems >= 2)
-		beer = 3525;
+		beer = getANiamhBeer;
 	else outputText("\n\n<b>You're too poor for beer.</b>");
 	//[Talk] [Get Beer] [Leave]
-	simpleChoices("Talk",talkToNiamh,"Get Beer",beer,"",0,"",0,"Leave",leaveNiamh);
+	simpleChoices("Talk", talkToNiamh, "Get Beer", beer, "", null, "", null, "Leave", leaveNiamh);
 }
 
 //[Get Beer]
@@ -195,7 +195,7 @@ private function drinkNiamhsBeerInTelAdre():void {
 		outputText(" breasts have had the last of their beer squeezed from them.  She sighs in relief, caressing her shrunken breasts; while still hovering at around G-cup size, they're much smaller than they are when the day starts for her.  \"<i>Me thanks for the business; ye got the last mug for today.  Still, I'll be here tomorrow, full as ever.</i>\" She sighs softly.  \"<i>I regret to say that Niamh's Black Cat Beer doesn't look to be going out of business anytime soon.</i>\"  She stands and gathers her coat, slipping her arms into the sleeves.  The nimble girl draws the garment across her buxom chest, buttoning the slightly strained buttons with deceptive ease.  Dressed properly, she starts away, a bag full of gems bouncing against her swaying hips. You watch her go, staring at her back until she walks out the door.");
 	}
 	flags[kFLAGS.MET_NIAMH]++;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //[To Go]
@@ -216,8 +216,7 @@ private function blackCatBeerToGo():void {
 	outputText("\n\n");
 	flags[kFLAGS.MET_NIAMH]++;
 	//PC gains 1x BCB
-	menuLoc = 24;
-	inventory.takeItem(consumables.BC_BEER);
+	inventory.takeItem(consumables.BC_BEER, telAdre.barTelAdre);
 }
 
 //Talk
@@ -248,7 +247,7 @@ private function talkToNiamh():void {
 	var beer:Function =null;
 	if(player.gems >= 2)
 		beer = getANiamhBeer;
-	simpleChoices("Beer",beer,"",0,"",0,"",0,"Leave",13);
+	simpleChoices("Beer",beer,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 }
 //Leave
 private function leaveNiamh():void {
@@ -322,7 +321,7 @@ private function corruptOrBimboNiamhIntro():void {
 	menu();
 	if (player.hasItem(consumables.BIMBOLQ)) addButton(0, "Bimbo", giveNiamphBimboLiquer);
 	if (player.hasItem(consumables.SUCMILK)) addButton(1, "S.Milk", giveNiamphSuccubiMilk);
-	addButton(4, "Back", eventParser, 3532);
+	addButton(4, "Back", eventParser, maybeLaterNiamh);
 }
 //[Maybe Later]
 public function maybeLaterNiamh():void {
@@ -373,7 +372,7 @@ public function taintNiamh(bimbo:Boolean = false):void {
 	}
 	flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] = 25;
 	dynStats("cor", 10);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //24 hours later, random encounter on the Plains
@@ -406,7 +405,7 @@ public function niamhPostTelAdreMoveOut():void {
 private function niamhCorruptMobileSnackTurnDown():void {
 	clearOutput();
 	outputText("You turn her down, fabricating a little tale about how you just got done drinking a delicious beverage, and you couldn't possibly have anything more.  She nods sagely, pauses, and loudly belches.  Even in her soused state, she retains some semblance of manners, so she chuckles nervously while moving a hand to her lips.  \"<i>Sorry 'bout tha'...</i>\" she mutters, slinking off.  You have a feeling you'll see her again.");
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 //[yup]
 private function niamhCorruptedMobileSnackDrinkTime():void {
@@ -444,7 +443,7 @@ private function niamhCorruptedMobileSnackDrinkTime():void {
 		blackCatBeerEffects(player,false,true);
 		//[end encounter]*/
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):void {
 	if(clearScreen) clearOutput();
@@ -541,7 +540,7 @@ public function bazaarNiamh():void {
 	var fuck:Function =null;
 	if(player.hasCock())
 		fuck = bazaarSex;
-	simpleChoices("Get A Drink",drink,"Tit-Fuck",fuck,"",0,"",0,"Back",2855);
+	simpleChoices("Get A Drink",drink,"Tit-Fuck",fuck,"",0,"",0,"Back", getGame().bazaar.enterTheBazaar);
 }
 
 //[bimbo/corrupted beer drink texts]
@@ -558,7 +557,7 @@ private function bazaardNiamhDrink():void {
 	//Corrupt
 	else {
 		outputText("Succubus milk Niamh Not implemented yet");
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 }
 //{If player drinks from the tap:}
@@ -571,7 +570,7 @@ private function drinkFromZeTap():void {
 
 	outputText("\n\nYou push yourself upright and assure the pretty catgirl that you feel, like, super-duper wonderful!  You punctuate this declaration with a burp as the sudden motion makes all the yummy bubbles in your belly dance, and then you giggle at how naughty that was.");
 	bimboChampagne(player,false,false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //grabbing Bim Cham in a to-go box
@@ -582,8 +581,7 @@ private function getBimboChampFromNiamh():void {
 	outputText("\n\nPushing that slightly scary thought to the side, you lean in, firmly grasping one stiff nipple and forcing it to the mouth of your container.  Ignoring her increasingly loud and frequent groans, you dutifully milk the bubbly into the flask, stopper it up, and rise.  Niamh tries to follow you, too aroused by the milking to resist her carnal urges, but you easily push her to the side, her ponderous melons throwing her off balance.");
 	outputText("\n\nShe lands into a big pile of similarly blonde and giggling girls who waste no time in swarming her.  You chuckle and shake your head.  Perhaps you'll come back later.\n\n");
 	//bimbo champagne aqua-aired
-	menuLoc = 2;
-	inventory.takeItem(consumables.BIMBOCH);
+	inventory.takeItem(consumables.BIMBOCH, camp.returnToCampUseOneHour);
 }
 
 //[Bazaar sex]
@@ -609,7 +607,7 @@ private function bazaarSex():void {
 	{
 		outputText("\n\nSuccubi Milk Niamph not implemnted yet.");
 	}
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -620,15 +618,15 @@ public function seanBimboBrewing():void {
 	outputText("The uncharacteristically gentlemanly incubus raises his eyebrow as you produce an armful of filled flasks and drop them onto his mostly-empty table.  \"<i>I assume you'd like me to do something special with these,</i>\" he quips, somewhat dryly.");
 	outputText("\n\nYou smirk and explain to him the nature of the contents of the containers, as well as the nature of your visit.");
 	outputText("\n\nHe picks up one of the flasks and screws off the cap, leaning forward and wafting the drink to his nostrils.  \"<i>Not as potent as the real stuff,</i>\" he confirms, recapping the thing and setting it next to the others.  \"<i>I can do it,</i>\" he decides, \"<i>but it will take a good amount of time and a good amount of effort.  Five hundred gems and I'll have it done by tomorrow.</i>\"");
-	var yep:int = 0;
+	var yep:Function = null;
 	//[Yep][Nope]
-	if(player.gems < 500) outputText("<b>\n\nYou're too poor to get Sean to make you bimbo liqueur.</b>");
-	else yep = 3543;
-	simpleChoices("Yep",yep,"",0,"",0,"",0,"Back",2642);
+	if (player.gems < 500) outputText("<b>\n\nYou're too poor to get Sean to make you bimbo liqueur.</b>");
+	else yep = yeahSeanLetsBimbooze;
+	simpleChoices("Yep", yep, "", null, "", null, "", null, "Back", getGame().incubusShop);
 }
 
 //yeah I got this
-public function yeahSeanLetsBimbooze():void {
+private function yeahSeanLetsBimbooze():void {
 	clearOutput();
 	outputText("\"<i>Perfect!</i>\" he says, moving forward to gather up the flasks.  \"<i>You can go, now.  This is a delicate process, and any mistakes may lead to an outbreak of large-breasted and dim-witted fauna.</i>\"  He pauses, gauging your expression.  \"<i>... Which is <b>not</b> a good thing,</i>\" he adds.  Almost as an afterthought, he extends his hand toward the table, saying, \"<i>I'd like the payment now, if you'd please.</i>\"  You separate out the appropriate number of gems for the demon.  He snatches it up and idly throws it behind him, where you hear a clunk and tinkle as it strikes something and rolls a bit.");
 	outputText("\n\n\"<i>Now shoo, I must do work!</i>\" he scolds, ushering you out of the cave.  \"<i>Come back tomorrow!</i>\"  Satisfied, you leave his shop.");
@@ -653,9 +651,8 @@ public function getBimboozeFromSean():void {
 	outputText("He scoops a familiar-looking bottle from a tabletop, passing it off to you.  \"<i>Be somewhat careful with this,</i>\" he warns as you take it.  \"<i>The original's deleterious effect on the mind has been duplicated, I assure you.</i>\"\n\n");
 	outputText("You drop the vial into a pouch on your person.\n\n");
 	//bimbo liqueur aqcquired
-	menuLoc = 16;
 	flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 0;
-	inventory.takeItem(consumables.BIMBOLQ);
+	inventory.takeItem(consumables.BIMBOLQ, getGame().incubusShop);
 }
 
 // [LEAVE]
@@ -663,7 +660,7 @@ private function leaveWithBeerTits():void {
 	clearOutput();
 	outputText("The offer is tempting but right now you'd much rather deal with your boozy boobs privately.  You take off while trying to keep your [armor] modestly in place over your tits but it's difficult.  Your nipples constantly leak and drip a trail of alcohol all the way back to camp.  Thankfully by the time you arrive the effects seem to have mostly worn off.  Your nipples return to dripping milk, but although they've shrunk back down a bit they don't quite shrink all the way, leaving you with somewhat larger endowments than you had before.");
 	player.growTits(2, player.bRows(), false, 2);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 // [SELL YOUR BOOZE]
@@ -693,7 +690,7 @@ private function sellYourBooze():void {
 		player.growTits(2, player.bRows(), false, 2);
 		outputText("\n\nYou feel flushed from the sensations, but finally you run dry.  Your breasts have shrunk back down, but they still feel a little larger than they were earlier.  As little droplets of milk instead of booze return to dripping from your nipples, Niamh hands you your cut of the gems you earned from the sales.");
 		//[LEAVE]
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//If lust is high
 	else {
@@ -909,7 +906,7 @@ private function barBeerOrgyTits():void {
 		player.growTits(2, player.bRows(), false, 2);
 	}
 	player.orgasm();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 

@@ -8,13 +8,16 @@ package classes.Items.Consumables
 	import classes.PregnancyStore;
 	import classes.StatusAffects;
     import classes.internals.Utils;
+	import classes.Items.Consumable;
 
-    public class PhoukaWhiskey extends SimpleConsumable
-    {
-
-        override public function canUse(player:Player, output:Boolean):Boolean
-        {
-			switch (phoukaWhiskeyAcceptable(player)) {
+	public class PhoukaWhiskey extends Consumable {
+		
+		public function PhoukaWhiskey() {
+			super("P_Whsky", "Ph. Whiskey", "a small bottle of whiskey", 20, "A small, corked glass bottle with a dark amber liquid inside.  The whiskey smells strongly of peat.");
+		}
+		
+        override public function canUse():Boolean {
+			switch (phoukaWhiskeyAcceptable(game.player)) {
 				case -4:
 					outputText("You stare at the bottle for a moment, but decide not to risk harming one of the children growing inside you.\n\n");
 					return false;
@@ -32,6 +35,26 @@ package classes.Items.Consumables
             return true; //Zero and up will return true
         }
 		
+		override public function useItem():void {
+			game.player.slimeFeed();
+			switch (phoukaWhiskeyDrink(game.player)) {
+				case 0: //Player isn't pregnant
+					outputText("You uncork the bottle and drink some whiskey, hoping it will let you relax for a while.\n\nIt's strong stuff and afterwards you worry a bit less about the future.  Surely things will right themselves in the end.");
+					game.dynStats("cor", Utils.rand(2) + 1, "lus", Utils.rand(8) + 1); //These gains are permanent
+					break;
+				case 1: //Child is a phouka or satyr, loves alcohol
+					outputText("You uncork the bottle and drink some whiskey, hoping it will help with the gnawing hunger for alcohol you've had since this baby started growing inside you.\n\nYou down the booze in one shot and a wave of contentment washes over you.  It seems your passenger enjoyed the meal.");
+					break;
+				case 2: //Child is a faerie but will become a phouka with this drink
+					outputText("At first you feel your baby struggle against the whiskey, then it seems to grow content and enjoy it.");
+					break;
+				case 3: //Child is a faerie, hates phouka whiskey
+					outputText("You feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.");
+			}
+			game.flags[kFLAGS.PREGNANCY_CORRUPTION]++; //Faerie or phouka babies become more corrupted, no effect if the player is not pregnant or on other types of babies
+			phoukaWhiskeyAddStatus(game.player);
+        }
+        
 		public function phoukaWhiskeyAcceptable(player:Player):int
 		{ //This function provides a single common test that can be used both by this class and the PhoukaScene class
 			//Returns:	0 = canUse (not pregnant), 1 = canUse (single pregnancy, womb), 2 = canUse (single pregnancy, colon), 3 = canUse (double pregnancy, both OK),
@@ -65,30 +88,7 @@ package classes.Items.Consumables
 			}
 			return 1; //Pregnancy has to be either a satyr or a phouka
 		}
-
         
-		private function phoukaWhiskeyEffect(player:Player):void
-        {
-            clearOutput();
-			player.slimeFeed();
-			switch (phoukaWhiskeyDrink(player)) {
-				case 0: //Player isn't pregnant
-					outputText("You uncork the bottle and drink some whiskey, hoping it will let you relax for a while.\n\nIt's strong stuff and afterwards you worry a bit less about the future.  Surely things will right themselves in the end.");
-					game.dynStats("cor", Utils.rand(2) + 1, "lus", Utils.rand(8) + 1); //These gains are permanent
-					break;
-				case 1: //Child is a phouka or satyr, loves alcohol
-					outputText("You uncork the bottle and drink some whiskey, hoping it will help with the gnawing hunger for alcohol you've had since this baby started growing inside you.\n\nYou down the booze in one shot and a wave of contentment washes over you.  It seems your passenger enjoyed the meal.");
-					break;
-				case 2: //Child is a faerie but will become a phouka with this drink
-					outputText("At first you feel your baby struggle against the whiskey, then it seems to grow content and enjoy it.");
-					break;
-				case 3: //Child is a faerie, hates phouka whiskey
-					outputText("You feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.");
-			}
-			game.flags[kFLAGS.PREGNANCY_CORRUPTION]++; //Faerie or phouka babies become more corrupted, no effect if the player is not pregnant or on other types of babies
-			phoukaWhiskeyAddStatus(player);
-        }
-
         public function phoukaWhiskeyAddStatus(player:Player):void
         {
 			var libidoChange:int = (player.lib + 25 > 100 ? 100 - player.lib : 25);
@@ -114,7 +114,7 @@ package classes.Items.Consumables
 			}
 			game.statScreenRefresh();
         }
-
+		
 		public function phoukaWhiskeyExpires(player:Player):void
 		{
 			var numDrunk:int = player.statusAffectv2(StatusAffects.PhoukaWhiskeyAffect);
@@ -135,12 +135,14 @@ package classes.Items.Consumables
 				outputText("\n<b>The fuzzy, happy feeling ebbs away.  The weight of the world’s problems seems to settle on you once more.  It was nice while it lasted and you wouldn’t mind having another whiskey.</b>\n");
 			game.statScreenRefresh();
 		}
+<<<<<<< HEAD
                 
         public function PhoukaWhiskey()
         {
 			super("P_Whsky", "Ph. Whiskey", "a small bottle of whiskey", phoukaWhiskeyEffect, 20, "A small, corked glass bottle with a dark amber liquid inside.  The whiskey smells strongly of peat. \n\nType: Food & Beverages");
         }
 
+=======
+>>>>>>> a82163c1688c17102ece58f63f28e75c34388695
     }
-
 }
