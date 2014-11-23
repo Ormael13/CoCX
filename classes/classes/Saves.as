@@ -854,27 +854,26 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//ITEMZ. Item1s
 		saveFile.data.itemSlot1 = [];
 		saveFile.data.itemSlot1.quantity = player.itemSlot1.quantity;
-		//saveFile.data.itemSlot1.shortName = player.itemSlot1.itype.id;// uncomment for backward compatibility
 		saveFile.data.itemSlot1.id = player.itemSlot1.itype.id;
-		saveFile.data.itemSlot1.unlocked = player.itemSlot1.unlocked;
+		saveFile.data.itemSlot1.unlocked = true; 
+		
 		saveFile.data.itemSlot2 = [];
 		saveFile.data.itemSlot2.quantity = player.itemSlot2.quantity;
-		//saveFile.data.itemSlot2.shortName = player.itemSlot2.itype.id;// uncomment for backward compatibility
 		saveFile.data.itemSlot2.id = player.itemSlot2.itype.id;
-		saveFile.data.itemSlot2.unlocked = player.itemSlot2.unlocked;
+		saveFile.data.itemSlot2.unlocked = true;
+		
 		saveFile.data.itemSlot3 = [];
 		saveFile.data.itemSlot3.quantity = player.itemSlot3.quantity;
-		//saveFile.data.itemSlot3.shortName = player.itemSlot3.itype.id;// uncomment for backward compatibility
 		saveFile.data.itemSlot3.id = player.itemSlot3.itype.id;
-		saveFile.data.itemSlot3.unlocked = player.itemSlot3.unlocked;
+		saveFile.data.itemSlot3.unlocked = true;
+		
 		saveFile.data.itemSlot4 = [];
 		saveFile.data.itemSlot4.quantity = player.itemSlot4.quantity;
-		//saveFile.data.itemSlot4.shortName = player.itemSlot4.itype.id;// uncomment for backward compatibility
 		saveFile.data.itemSlot4.id = player.itemSlot4.itype.id;
 		saveFile.data.itemSlot4.unlocked = player.itemSlot4.unlocked;
+		
 		saveFile.data.itemSlot5 = [];
 		saveFile.data.itemSlot5.quantity = player.itemSlot5.quantity;
-		//saveFile.data.itemSlot5.shortName = player.itemSlot5.itype.id;// uncomment for backward compatibility
 		saveFile.data.itemSlot5.id = player.itemSlot5.itype.id;
 		saveFile.data.itemSlot5.unlocked = player.itemSlot5.unlocked;
 		
@@ -1777,15 +1776,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			saveFile.data.itemSlot4.id = "GroPlus";
 		if (saveFile.data.itemSlot5.shortName && saveFile.data.itemSlot5.shortName.indexOf("Gro+") != -1)
 			saveFile.data.itemSlot5.id = "GroPlus";
-		player.itemSlot1.unlocked = saveFile.data.itemSlot1.unlocked;
+		player.itemSlot1.unlocked = true;
 		player.itemSlot1.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot1.id || saveFile.data.itemSlot1.shortName),
 				saveFile.data.itemSlot1.quantity);
-		player.itemSlot2.unlocked = saveFile.data.itemSlot2.unlocked;
+		player.itemSlot2.unlocked = true;
 		player.itemSlot2.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot2.id || saveFile.data.itemSlot2.shortName),
 				saveFile.data.itemSlot2.quantity);
-		player.itemSlot3.unlocked = saveFile.data.itemSlot3.unlocked;
+		player.itemSlot3.unlocked = true;
 		player.itemSlot3.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot3.id || saveFile.data.itemSlot3.shortName),
 				saveFile.data.itemSlot3.quantity);
