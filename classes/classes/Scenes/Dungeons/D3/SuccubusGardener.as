@@ -51,13 +51,21 @@
 			createStatusAffect(StatusAffects.TentagrappleCooldown, 10, 0, 0, 0);
 		}
 		
+		private function cleanupEffects():void
+		{
+			if (player.findStatusAffect(StatusAffects.Tentagrappled)) player.removeStatusAffect(StatusAffects.Tentagrappled);
+			if (player.findStatusAffect(StatusAffects.ShowerDotEffect)) player.removeStatusAffect(StatusAffects.ShowerDotEffect);
+		}
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
+			cleanupEffects();
 			game.d3.succubusGardener.fuckUpTheGardener(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
+			cleanupEffects();
 			game.d3.succubusGardener.surrenderToTheGardener(hpVictory);
 		}
 		

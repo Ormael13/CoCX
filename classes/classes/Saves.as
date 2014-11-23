@@ -1829,6 +1829,11 @@ public function unFuckSave():void
 	{
 		player.removeStatusAffect(StatusAffects.KnockedBack);
 	}
+	
+	if (player.findStatusAffect(StatusAffects.Tentagrappled) >= 0)
+	{
+		player.removeStatusAffect(StatusAffects.Tentagrappled);
+	}
 
 
 	// Fix issues with corrupt cockTypes caused by a error in the serialization code.

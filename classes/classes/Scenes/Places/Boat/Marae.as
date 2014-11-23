@@ -74,7 +74,7 @@ public function encounterMarae():void {
 			{
 				//If youve taken her quest already
 				if(player.findStatusAffect(StatusAffects.MaraesQuestStart) >= 0) {
-					outputText("Marae reminds you, \"<i>You need to disable the demon's factory!  It's located in the foothills of the mountain.  Please, I do not know how long I can resist.</i>\"", false);
+					outputText("Marae reminds you, \"<i>You need to disable the demonic factory!  It's located in the foothills of the mountain.  Please, I do not know how long I can resist.</i>\"", false);
 					doNext(camp.returnToCampUseOneHour);
 				}
 				//If not
