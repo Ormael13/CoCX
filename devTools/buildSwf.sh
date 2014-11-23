@@ -30,16 +30,7 @@ rm -rf tmp
 mkdir tmp
 
 # Force the submodules to be up to date.
-GIT_SUBMODULE="\
-classes/showdown \
-"
-for dir in $GIT_SUBMODULE; do
-    if [ ! -e "$dir/.git" ]; then
-	git submodule init $dir
-    else
-	git submodule update $dir
-    fi
-done
+git submodule update --init
 
 # This is intended to be run from the root of the git repo as such:
 # 'devTools/build.sh'
