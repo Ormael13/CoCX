@@ -72,7 +72,7 @@ public function scyllaBarSelectAction():void {
 		if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 3) return; //Minimum Scylla meetings for Urta to fuck her
 		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 1) return; //Together these are the 'No more Scylla' flag
 		if (!getGame().urta.urtaAtBar() || flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] > 0) return;
-		if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] >= 0 || flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] <= 2 || flags[kFLAGS.TIMES_FUCKED_URTA] == 0) return;
+		if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] > 0 || flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] <= 2 || flags[kFLAGS.TIMES_FUCKED_URTA] == 0) return;
 			//She only fucks Scylla if she's horny and you've fucked her enough to make her comfortable
 		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0) { //Never fucked Scylla before
 			if (!getGame().urta.urtaDrunk()) return; //So she has to be drunk
