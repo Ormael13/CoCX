@@ -140,7 +140,7 @@ package classes.Scenes.Dungeons
 			if (westFunction != null) addButton(10, "West", navigateToRoom, westFunction);
 			if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
 			if (player.lust >= 30) addButton(8, "Masturbate", eventParser, 10);
-			addButton(13, "Inventory", eventParser, 1000);
+			addButton(13, "Inventory", inventory.inventoryMenu);
 			addButton(14, "Map", map.displayMap);
 		}
 		

@@ -162,7 +162,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("\n\nYou spend a bit more time with the grateful siren by the pure spring, before reluctantly departing.  After all you have much work to do, as you have to find a way of healing Minerva.");
 				flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] = 1;
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		
@@ -378,7 +378,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\n\"<i>We have a beautiful huge tree now. It'll be the perfect place to sleep under and we have plenty of shade now,</i>\" Minerva says, happily. You smile back at her and let her know that you're going back to your camp.");
 			
 			flags[kFLAGS.MINERVA_TOWER_TREE] = 1; //Will alter scene.
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function agreeToMakeBaby():void {
@@ -421,7 +421,7 @@ package classes.Scenes.Areas.HighMountains
 			else { 
 				outputText("Unfortunately, you tell her that you don't have any sexual endowments.  \"<i>It's a shame that you don't have anything to start a child. Perhaps when you've fixed your gender, you can come back and we can start, love?</i>\" Minerva asks.");
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function declineToMakeBaby():void {
@@ -433,7 +433,7 @@ package classes.Scenes.Areas.HighMountains
 			else outputText("her warm hand reaches down and slips into your " + player.armorName + " only to feel nothing. \"<i>Wait, you don't have anything to help either of us with having a child,</i>\" she says. She adds \"<i>Come back when you've got a gender, okay?</i>\"");
 			outputText("\n\nYou gently pull her hand away from your groin and give her a lingering kiss and a farewell before you leave the tower to make your way back to camp.");
 			dynStats("lus", 30);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Visit tower.
@@ -621,7 +621,7 @@ package classes.Scenes.Areas.HighMountains
 			addButton(5, "Spar", kGAMECLASS.highMountains.minervaScene.fightMinerva);
 			if (kGAMECLASS.highMountains.minervaScene.minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
 			if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", growTreePostPurification);
-			addButton(14, "Leave", eventParser, 13);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		
 		private function pureMinervaAppearance():void {
@@ -733,11 +733,11 @@ package classes.Scenes.Areas.HighMountains
 				flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 1;
 				dynStats("cor", -1);
 				menuLoc = 2;
-				inventory.takeItem(consumables.PURPEAC);
+				inventory.takeItem(consumables.PURPEAC, camp.returnToCampUseOneHour);
 				return;
 			}
 			dynStats("cor", -1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function talkToMinervaAboutSpring():void {
@@ -760,7 +760,7 @@ package classes.Scenes.Areas.HighMountains
 			clearOutput();
 			outputText("Staying like this for a while the two of you just rest and enjoy each others company, idly talking about a few things before you figure that its time you should go. Putting your " + player.armorName + " back on you gather your things as Minerva watches, pouting that you have to leave so soon. \"<i>Thank you so much for coming to visit. I had a lot of fun, don't be a stranger you hear, come back and visit again soon!</i>\" she says before sitting up and sighing contently.");
 			outputText("\n\nSmiling to her you promise to come back and visit soon before heading out and starting the hike back toward your camp.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function talkToMinervaAboutSharkgirl():void {
@@ -778,7 +778,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nShe says with a final sigh before looking to you and hugging you. \"<i>Thank you listening to me darling; I'm so happy to have someone like you in my life.</i>\" Minerva whispers to you with a genuine smile on her luscious black lips.");
 			outputText("\n\nThe two of you stay like this for a while, just spending a little time together before you decide you must return to camp and your quest. Saying your goodbyes you give Minerva a kiss before heading home.");
 			dynStats("cor", -1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function talkToMinervaAboutMotherhood():void {
@@ -799,7 +799,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Hearing your words beings a smile to her black glossy lips \"<i>Thank you so much. That means a lot to me, really, </i>\" she says gently, her hands stroking yours softly before pulling back. \"<i>Well, I guess we have been here for a while. I'm sure you have a great deal of work to do as such a brave champion.</i>\"");
 			outputText("\n\nLooking around you see how late it has gotten and swiftly get up, Minerva's right, you have to get back to your great quest! Looking at the siren one last time you tell her that you will be sure to come and visit again later");
 			dynStats("cor", -1);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function talkToMinervaAboutTree():void {
@@ -818,7 +818,7 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) outputText("as well as tend to her your daughters");
 			outputText(". \n\nYou may even be able to come here and talk to Marae sometimes as well. You're brought from your thoughts by the sound of the goddess and Minerva addressing you again. The three of you spend some time conversing, its strange to think that you're talking to the goddess of Mareth like this along with your siren lover. After some time though you must excuse yourself and head back to camp, leaving Minerva and Marae to their own devices.");
 			dynStats("cor", -3);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Sleep with Minerva!
@@ -843,7 +843,7 @@ package classes.Scenes.Areas.HighMountains
 			awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 			dynStats("cor", -4);
 			sleepWithMinervaHeal();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		private function sleepWithMinervaPostBirthing():void {
 			outputText("<b>Three hours pass...</b>\n\n", true)
@@ -853,7 +853,7 @@ package classes.Scenes.Areas.HighMountains
 			awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 			dynStats("cor", -4);
 			sleepWithMinervaHeal();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		private function sleepWithMinervaProcess():void {
 			clearOutput();
@@ -960,8 +960,8 @@ package classes.Scenes.Areas.HighMountains
 			flags[kFLAGS.TIMES_BUTTFUCKED_MINERVA]++;
 			player.orgasm();
 			dynStats("sen", -1);
-			if(inCombat()) cleanupAfterCombat();
-			else doNext(13);
+			if(getGame().inCombat) cleanupAfterCombat();
+			else doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function minervaCowgirlSex():void {
@@ -1014,7 +1014,7 @@ package classes.Scenes.Areas.HighMountains
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
 			}
 			dynStats("lus", 20);
-			doNext(13);			
+			doNext(camp.returnToCampUseOneHour);			
 		}
 		
 		private function fuckMinervaWithHerHandsBehindHerBack():void {
@@ -1092,8 +1092,8 @@ package classes.Scenes.Areas.HighMountains
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
 			}
 			dynStats("lus", 20);
-			if(inCombat()) cleanupAfterCombat();
-			else doNext(13);
+			if(getGame().inCombat) cleanupAfterCombat();
+			else doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Choose your hole to be stuffed.
@@ -1193,8 +1193,8 @@ package classes.Scenes.Areas.HighMountains
 			flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 			player.orgasm();
 			dynStats("sen", -1);
-			if(inCombat()) cleanupAfterCombat();
-			else doNext(13);
+			if(getGame().inCombat) cleanupAfterCombat();
+			else doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Minerva fucks your ass!
@@ -1286,8 +1286,8 @@ package classes.Scenes.Areas.HighMountains
 			flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 			player.orgasm();
 			dynStats("sen", -1);
-			if(inCombat()) cleanupAfterCombat();
-			else doNext(13);
+			if(getGame().inCombat) cleanupAfterCombat();
+			else doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function goDownOnAHermAndLoveItYouDirtySlutYou():void {
@@ -1361,8 +1361,8 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nFor a long while, you just lay there, cuddled up with the mostly naked siren, the two of you idly chatting about various things that come to mind.  Eventually, you must leave the gentle embrace and return to your duties as a Champion.  Disentangling yourself from Minerva, you straighten your clothes out and, with a smile, tell her you had a wonderful time.  Grinning up at you, Minerva climbs back onto her feet and pulls you into a deep, tongue-tangling goodbye kiss.  \"<i>It was amazing, we have to do this again.  Perhaps next time, I can do you, hmm?</i>\" she suggests, not wanting to be greedy and get all the pleasure.  Giving you another peck on the cheek, the siren sends you on your way after telling you to come back and visit soon.");
 			
 			dynStats("lus", 20);
-			if(inCombat()) cleanupAfterCombat();
-			else doNext(13);
+			if(getGame().inCombat) cleanupAfterCombat();
+			else doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function letMinervaSuckYouOff():void {
@@ -1435,8 +1435,8 @@ package classes.Scenes.Areas.HighMountains
 			//PC returns to camp.
 			player.orgasm();
 
-			if(inCombat()) cleanupAfterCombat();
-			else doNext(13);
+			if(getGame().inCombat) cleanupAfterCombat();
+			else doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//------------------
@@ -1478,7 +1478,7 @@ package classes.Scenes.Areas.HighMountains
 				return;
 			}
 			outputText("\n\nGiving you one final kiss on the lips before finally disentangling herself from you and helping you up, her face brightened by her blush, that grin on her face seemingly unable to be removed. \"<i>Thank you for spending this time with me my love, spending that time with you was very important to me, even now words fail me, I can't tell you happy I am.</i>\" she strokes your cheek softly, holding you there for a moment. \"<i>I know you have to go, back to your important champion duties I know, but... just make sure you come back soon, I wouldn't want you to miss the birth of your baby, or babies by the looks of it.</i>\" she says with a very happy tone, clearly overjoyed at the idea of having more than one growing inside her. Giving you one final long tongue filled kiss she lets you go so that you can head back to your camp.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function pregnancyStage2(repeat:Boolean = false):void {
@@ -1490,7 +1490,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("\n\nOnce again on your back with the loving siren woman pressed against you, clinging to you like some breasty hug monster, the tight soft embrace so enticing and warm, it would be hard to pull yourself away even if Minerva didn't have you in such a tight grip. Clearly wanting to snuggle with the father of her children for a while, it's unlikely she will; be letting go anytime soon, and so you resign yourself to your fate of being hugged and cuddled by the busty pregnant broodmother. The  huggy herm pulling you into another, though more gentle, kissing session.");
 				outputText("\n\nOnce again nearly an hour passes, your time spent in the embrace filled with gentle stroking, kisses, both gentle and tongue tangling, the cool soft cuddle so relaxing you nearly fall asleep, though with all the kisses your kept awake and active throughout. Pulling her lips back from you she slides a hand to your cheek and smiles to you warmly before whispering to you \"<i>I'm sorry for keeping you like this for so long, I'm just, you don't know just how happy you've made me.</i>\" Looking down at you she locks eyes with you, her golden-amber eyes alight with the pure fire of her emotions. \"<i>I know I have said it before my love, but I must tell you again, I love you, I swear that I will sing for you and you alone, none else, for you I would love nothing more than to carry your young forever, For you I will birth all the babies you want, I'll never deny you.</i>\" her words ring true, so passionate and unwavering, you can tell that she is absolutely serious.");
 				outputText("\n\nGiving you one final kiss on the lips before finally disentangling herself from you and helping you up, her face brightened by her blush, that grin on her face seemingly unable to be removed. \"<i>Mhm thank you for spending this time with me my love. Even now words fail me, there is no way to describe how happy you have made me for blessing me...mhm...no.</i>\" Minerva stops and pulls you closer, leaning in herself to plant the sweetest of kisses on your lips before continuing. \"<i>Blessing us with the precious gift that's growing inside me.</i>\" she strokes your cheek softly, holding you there for a moment. \"<i>I know you have to go, back to your important champion duties I know, but... just make sure you come back soon, I wouldn't want you to miss the birth of your your baby, or babies by the looks of it.</i>\" she says with a very happy tone, clearly overjoyed at the idea of having more than one growing inside her. Giving you one final long tongue filled kiss she lets you go so that you can head back to your camp.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			else {
@@ -1503,7 +1503,7 @@ package classes.Scenes.Areas.HighMountains
 				pureMinervaSexMenu();
 				return;
 			}
-			doNext(13); //Failsafe 
+			doNext(camp.returnToCampUseOneHour); //Failsafe 
 		}
 		
 		public function pregnancyStage3(repeat:Boolean = false):void {
@@ -1522,7 +1522,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("\n\nMoving down Minerva's body you plant tender kisses across her, moving from her lips, down between the full motherly swell of her breasts, stopping at the big round pregnant tummy. Smiling up at her you start to stroke her, caressing the soon-to-be mother's tummy and and your offspring that sleep within. Leaning in you start to kiss her belly, laying tender affections upon the siren that make her blush furiously and start to stroke your [hair] softly. \"<i>Oh darling, that's wonderful, mmmm that's actually very relaxing.</i>\" Minerva says gently as she lays her head back, watching you with warm loving eyes as you pay special attention to her pregnancy.");
 				outputText("\n\nMiraculously your touch seems to relax even the rambunctious babies inside Minerva's body, the little ones inside calming their squirms and kicks as if they know their daddy is there and paying special attention to them and their mommy. Before long the kicking and squirming stops completely, the little critters inside Minerva's tummy fast asleep thanks to their daddy, in fact your efforts to calm the excited babies has had more of an effect them you thought, Minerva herself has nodded off, her head resting against the tree , hands still cradling her belly gently even while asleep. Snickering to yourself you look around before moving up closer, taking your place next to Minerva, deciding that you may as well have a nap and spend a little more time with the siren.");
 				outputText("\n\nFor nearly an hour you sleep with Minerva, yawning as you awaken from your nap you look to see that Minerva has cuddled up against you, her round baby baring belly pressed against your body with her arms, and even one of her legs, wrapped around you. The golden herm looking so peaceful, if more than a little horny, as if she wanted nothing more than to be curled up with you forever, but unfortunately you can't stay much longer and have to get back to your duties. Not wanting to wake the herm up you oh so carefully disentangle yourself from her without waking the broodmother, not a small feat by any means. With your skill your able to come free of her hold, not wanting to simply leave her like this though, you pull a blanket from your pack and drape it over her body, leaning in you plant a soft kiss on her lips before taking your leave. With her pregnancy so close to being over, you make a note to return soon so that you can witness the birth of your children.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			else {
@@ -1550,7 +1550,7 @@ package classes.Scenes.Areas.HighMountains
 				doNext(postPregnancyStage3Sex);
 				return;
 			}
-			doNext(13); //Failsafe
+			doNext(camp.returnToCampUseOneHour); //Failsafe
 		}
 		
 		private function postPregnancyStage3Sex():void {
@@ -1577,7 +1577,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nDespite the feeling in your legs you nod your head in affirmation, while it would be nice to rest you have much to do, demons to slay, damsels to save from said demons. Smiling at the strong front you give, Minerva pulls you into a hug. \"<i>That's my strong hero, so brave, so strong. I just know you will save this world and soon there will be some more sirens in the world that will help make things a bit brighter.</i>\" she says with a bright proud grin on her face as she helps you walk, just to make sure you're alright.");
 			outputText("\n\nJust as you're about to leave for your camp you suddenly find yourself wrapped in a warm soft embrace, the heavy pregnant bulge of Minerva's belly pressed against your back. \"<i>I love you, be safe alright, I want my daughters to have their father around when they grow up and I want my mate to give me lots more of those adorable daughters.</i>\" she says before turning you around and pulling you into a deep tongue tangling kiss for a long drawn out moment before the siren reluctantly pulls away from you, a blush on her cheeks. \"<i>Come back soon alright, it will be time to meet both of these sweethearts soon, and I know they will want to see their daddy that rocked them to sleep so often.</i>\" she finishes with her usual sharky grin before finally letting go of you.");
 			outputText("Promising to return as soon as you can you turn and start the trek back to camp, your lusts satisfied and your belly full of food.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		private function processSleepTime():void {
 			while (model.time.hours != 6) {
@@ -1597,7 +1597,7 @@ package classes.Scenes.Areas.HighMountains
 				
 			}
 			outputText("\n\You tell her that you'll be looking forward to see the new daughters soon. You give her a kiss before you leave the tower to make your way back to camp.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//If you're impregnated by Minerva.
@@ -1610,7 +1610,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nFalling onto her back, Minerva takes you with her, laying with you as she holds you tightly, her hands stroking you tenderly. \"<i>My one and only, my special prime-mate, we are going to have a big beautiful family together. I'll give you all the beautiful, sweet little girls you want, I'll never say no to you lover.</i>\" She says with a great grin on her face before leaning up and kissing you tenderly on the lips. The two of you just lay there for a while, holding each other, kissing and stroking each other. Minerva's hands slowly stroking your belly from time to time.");
 
 			outputText("\n\nGiving you one final kiss on the lips before finally disentangling herself from you and helping you up, her face brightened by her blush, that grin on her face seemingly unable to be removed. \"<i>Thank you for spending this time with me my love, spending that time with you was very important to me, even now words fail me, I can't tell you happy I am.</i>\" she strokes your cheek softly, holding you there for a moment. \"<i>I know you have to go, back to your important champion duties I know, but... just make sure you come back soon, I wouldn't want to miss the birth of our baby, or babies by the looks of it.<\i>\" she says with a very happy tone, clearly overjoyed at the idea of having more than one growing inside you. Giving you one final long tongue filled kiss she lets you go so that you can head back to your camp, but not before giving your [ass] a firm, playful spank.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function pregnancyPlayerStage2(repeat:Boolean = false):void {
@@ -1622,7 +1622,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nFalling onto her back, Minerva takes you with her, laying with you as she holds you tightly, her hands stroking you tenderly. \"<i>My one and only, my special prime-mate, we are going to have a big beautiful family together. I'll give you all the beautiful, sweet little girls you want, I'll never say no to you lover.</i>\" She says with a great grin on her face before leaning up and kissing you tenderly on the lips. The two of you just lay there for a while, holding each other, kissing and stroking each other. Minerva's hands slowly stroking your belly from time to time.");
 
 			outputText("\n\nGiving you one final kiss on the lips before finally disentangling herself from you and helping you up, her face brightened by her blush, that grin on her face seemingly unable to be removed. \"<i>Thank you for spending this time with me my love, spending that time with you was very important to me, even now words fail me, I can't tell you happy I am.</i>\" she strokes your cheek softly, holding you there for a moment. \"<i>I know you have to go, back to your important champion duties I know, but... just make sure you come back soon, I wouldn't want to miss the birth of our baby, or babies by the looks of it.<\i>\" she says with a very happy tone, clearly overjoyed at the idea of having more than one growing inside you. Giving you one final long tongue filled kiss she lets you go so that you can head back to your camp, but not before giving your [ass] a firm, playful spank.");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//BIRTHING SCENE! FINALLY!
@@ -1650,7 +1650,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			else {
 				outputText("\n\nThe newborn sirens begin to latch onto Minerva's breasts and suckle milk.  \"<i>They're great. They'll grow up nicely,</i>\" she says. You give her a kiss on the cheek and let her know that you're going back to your camp.  You wave her goodbye and you make your way back to camp.");
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 		
@@ -1676,7 +1676,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nEventually, you get up and give her a kiss. \"<i>Come back later. Our daughters are already excited to see you come back,</i>\" she says. You acknowledge and head back to your camp.");
 			flags[kFLAGS.MINERVA_CHILDREN] += 2;
 			flags[kFLAGS.TIMES_BIRTHED_SHARPIES]++;
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 

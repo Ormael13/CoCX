@@ -354,26 +354,12 @@ public function saveLoad(e:MouseEvent = null):void
 		addButton(14, "Back", eventParser, 1);
 		return;
 	}
-<<<<<<< HEAD
-	if (gameState == 3) {
+	if (gameStateGet() == 3) {
 		addButton(0, "Save", saveScreen);
 		addButton(5, "Save to File", eventParser, -20);
 		addButton(3, "AutoSave: " + autoSaveSuffix, eventParser, 65);
 		addButton(14, "Back", kGAMECLASS.mainMenu);
 	}
-=======
-	if (gameStateGet() == 3)
-		choices("Save",            saveScreen, 
-				"Load",            loadScreen, 
-				"Load File",      -21, 
-				"Delete",          deleteScreen, 
-				"Back",            0, 
-				"Save to File",   -20, 
-				"Load File",      -21, 
-				"",                0, 
-				"",                0, 
-				"",                0);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	else
 	{
 		addButton(0, "Save", saveScreen);
@@ -1318,7 +1304,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.jewelryId){
 			player.setJewelryHiddenField((ItemType.lookupItem(saveFile.data.jewelryId) as Jewelry) || JewelryLib.NOTHING);
 		} else {
-			player.jewelry = JewelryLib.NOTHING;
+			player.setJewelry(JewelryLib.NOTHING);
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName){
 					player.setJewelryHiddenField(itype as Jewelry || JewelryLib.NOTHING);
@@ -1847,11 +1833,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		else
 		{
-<<<<<<< HEAD
-			for (i = 0; i < saveFile.data.gearStorage.length && gearStorage.length < 30; i++)
-=======
-			for (i = 0; i < saveFile.data.gearStorage.length && gearStorageGet().length < 20; i++)
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+			for (i = 0; i < saveFile.data.gearStorage.length && gearStorageGet().length < 30; i++)
 			{
 				gearStorageGet().push(new ItemSlotClass());
 					//trace("Initialize a slot for one of the item storage locations to load.");

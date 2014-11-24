@@ -229,13 +229,8 @@ private function whyWouldDoThis():void {
 	//(-99 lust)
 	dynStats("lus", -99);
 	//(You suck and Jojo died.)
-<<<<<<< HEAD
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 2;	
-	doNext(13);
-=======
-	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;	
 	doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 //[Amily introduces herself to Rathazul – happens at Rathazul]
@@ -439,15 +434,10 @@ private function srslyPimpinGuyz():void {
 	player.itemSlot3.quantity = 0;
 	player.itemSlot4.quantity = 0;
 	player.itemSlot5.quantity = 0;
-<<<<<<< HEAD
-	if (player.armorName != "goo armor") player.armor = armors.C_CLOTH;
-	player.weapon.unequip(player,false,true);
-=======
 	player.setArmor(getGame().armors.C_CLOTH); //Old armor disappears unless it's Valeria
 	player.setWeapon(WeaponLib.FISTS);
 //	player.armor = armors.C_CLOTH;
 //	player.weapon.unequip(player,false,true);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	player.removeStatusAffect(StatusAffects.CampMarble);
 	outputText("\n\nNo doubt Amily ran back to the ruins.  Perhaps you could gather some appropriate drugs to teach her a lesson?", false);
 	if(player.inte >= 45) outputText("  Goblin ale and lust drafts might do the trick.", false);

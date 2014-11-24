@@ -38,24 +38,24 @@ public function encounterMarae():void {
 					outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?", false);
 					simpleChoices("Boob",2075,"",0,"",0,"",0,"Leave",13);
 				}
-				else doNext(13);
+				else doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Second meeting
 		else {
 			outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.   Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n", false);
 			if(player.cor > 66) {
 				outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.", false);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			else
 			{
 				//If youve taken her quest already
 				if(flags[kFLAGS.MARAE_QUEST_START] >= 1) {
 					outputText("Marae reminds you, \"<i>You need to disable the demon's factory!  It's located in the foothills of the mountain.  Please, I do not know how long I can resist.</i>\"", false);
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 				}
 				//If not
 				else {
@@ -75,7 +75,7 @@ public function encounterMarae():void {
 						outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?", false);
 						simpleChoices("Boob",2075,"",0,"",0,"",0,"Leave",13);
 					}
-					else doNext(13);
+					else doNext(camp.returnToCampUseOneHour);
 				}
 			}
 		}
@@ -89,7 +89,7 @@ public function encounterMarae():void {
 			outputText("\"<i>Thank you,</i>\" she says, breaking the hug and turning back to her tree, \"<i>The onslaught has lessened, and I feel more myself already.  Let me thank you for your heroic deeds.</i>\"\n\n", false);
 			outputText("She plunges a hand inside the tree and pulls out a small pearl.  \"<i>This is a pearl from the very depths of the lake, infused with my purity.  If you eat it, it will grant you my aid in resisting the lust and corruption of this land.</i>\"\n\n", false);
 			outputText("Marae pushes the pearl into your hand, and closes your fingers over it gently.  \"<i>Go now, there is still much to be done.  With luck we will not need each other again,</i>\" commands the goddess as she slips back into her tree.  ", false);
-			inventory.takeItem(consumables.P_PEARL);
+			inventory.takeItem(consumables.P_PEARL, camp.returnToCampUseOneHour);
 			flags[kFLAGS.MARAE_QUEST_COMPLETE] = 1;
 		}
 		//Corrupt!
@@ -181,7 +181,7 @@ public function winAgainstMarae():void {
 	awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
 	flags[kFLAGS.CORRUPTED_MARAE_KILLED] = 1;
 	cleanupAfterCombat();
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }	
 
 private function maraeBadEnd():void {
@@ -243,7 +243,7 @@ private function maraeStealLethicite():void {
 		outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You evade the gauntlet of grabbing tentacles that hang from the branches, snatch the large gem in both arms and run for the beach.  You do not hear the sounds of pursuit, only a disappointed sigh.", false);
 		player.createKeyItem("Marae's Lethicite", 0, 0, 0, 0);
 		flags[kFLAGS.MARAE_LETHICITE] = 3;
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	//(FAIL)
 	else {
@@ -292,7 +292,7 @@ private function maraeStealLethicite():void {
 			outputText("She giggles at your expression of horror, \"<i>No, not literally, but it won't take much to make you a mommy, and you'll find the gestation to be quite a bit... shorter.  Now get out of here before I change my mind and lock in an orgasm for the rest of your life.</i>\"\n\n", false);
 			outputText("You are dropped from the tree, and with little choice, you waddle to your boat, doing your best to cover up your violated " + vaginaDescript(0) + ".", false);
 			player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }
@@ -610,14 +610,14 @@ public function talkToMaraeAboutMinervaPurification():void {
 	player.createKeyItem("Marae's Seed", 0, 0, 0, 0);
 	flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] = 3;
 	flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] = 2;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function MaraeIIFlyAway():void {
 	spriteSelect(40);
 	outputText("", true);
 	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!", false);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

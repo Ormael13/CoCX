@@ -33,25 +33,17 @@
 		{
 			return kGAMECLASS.inventory.hasItemsInStorage();
 		}
-<<<<<<< HEAD
-		protected function hasItemsInRacks(type:Number = 0):Boolean
-=======
 /*
 		protected function hasItemsInRacks(armor:Boolean = false):Boolean
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		{
 			return kGAMECLASS.inventory.hasItemsInRacks(type);
 		}
-<<<<<<< HEAD
-=======
 */
 
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		public function Camp()
 		{
 		}
 		
-<<<<<<< HEAD
 		public var cabinProgress:CabinProgress = new CabinProgress();
 		public var codex:Codex = new Codex();
 		public var dungeon1:Factory = new Factory();
@@ -59,7 +51,7 @@
 		//public var dungeon3:LethiceCastle = new LethiceCastle();
 		public var dungeonS:DesertCave = new DesertCave();
 		public var dungeonH:HelDungeon = new HelDungeon();
-=======
+		
 		public function campMenu():void {
 			kGAMECLASS.eventParser(1);
 		}
@@ -82,7 +74,6 @@
 		public function returnToCampUseFourHours():void { returnToCamp(4); } //Replacement for event number 15;
 		
 		public function returnToCampUseEightHours():void { returnToCamp(8); } //Replacement for event number 16;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		
 //  SLEEP_WITH:int = 701;
 
@@ -477,16 +468,9 @@ public function doCamp():void {
 	var followers:* = 0;
 	var lovers:* = 0;
 	var slaves:* = 0;
-<<<<<<< HEAD
-	var storage:* = 0;
-	var canCampStuff:* = 0;
-	if(stash()) storage = initiateStash;
-	if(placesCount() > 0) placesNum = 71; 
-=======
 	var storage:Function = null;
 	if (inventory.showStash()) storage = stash;
-	if(places(false)) placesNum = 71; 
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+	if (placesCount() > 0) placesNum = 71; 
 	if(kGAMECLASS.whitney > 0) farm = 7;
 	//Clear stuff
 	if(player.findStatusAffect(StatusAffects.SlimeCravingOutput) >= 0) player.removeStatusAffect(StatusAffects.SlimeCravingOutput);
@@ -839,8 +823,8 @@ public function doCamp():void {
 	addButton(0, "Explore", eventParser, explore);
 	if (placesCount() > 0) addButton(1, "Places", places);
 	addButton(2, "Camp Action", campActions);
-	addButton(3, "Inventory", eventParser, 1000);
-	if(stash()) addButton(4, "Stash", initiateStash);
+	addButton(3, "Inventory", inventory.inventoryMenu);
+	if (inventory.showStash()) addButton(4, "Stash", stash);
 	if (followersCount() > 0) addButton(5, "Followers", campFollowers);
 	if (loversCount() > 0) addButton(6, "Lovers", campLoversMenu);
 	if (slavesCount() > 0) addButton(7, "Slaves", campSlavesMenu);
@@ -852,7 +836,6 @@ public function doCamp():void {
 	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", eventParser, 11);
 	if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", eventParser, 41);
 
-<<<<<<< HEAD
 	//Remove buttons according to conditions.
 	if (model.time.hours >= 21 || model.time.hours < 6) {
 		removeButton(0);
@@ -890,97 +873,16 @@ public function doCamp():void {
 	{
 		badEndMinLust();
 	}
-=======
-	choices("Explore", explore, "Places", placesNum, "Inventory", inventory.inventoryMenu, "Stash", storage, "Followers", followers,
-		"Lovers", lovers, "Slaves",slaves, "", null, baitText, masturbate, restName, restEvent);
-	//Lovers
-	//Followers
-	//Slaves
-
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 //-----------------
 //-- STORAGE
 //-----------------
-public function initiateStash():void {
-	trace("Initiating stash");
-	stash(false);
-}	
-
-<<<<<<< HEAD
-public function stash(exists:Boolean = true):Boolean {
-	//Use to know if to show/hide stash.
-	if(exists) {
-		return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 || player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0;
-	}
-	hideMenus();
-=======
 public function stash():Boolean {
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	/*Hacked in cheat to enable shit
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;*/
 	//REMOVE THE ABOVE BEFORE RELASE ()
-<<<<<<< HEAD
-	var retrieveStuff:Function = null;
-	var storeStuff:Number = 0;
-	if(hasItemsInStorage()) retrieveStuff = kGAMECLASS.inventory.chooseRetrievalSlot;
-	if(itemStorage.length > 0) storeStuff = 1028;
-	var weaponRack:Function = null;
-	var weaponRetrieve:Function = null;
-	var armorRack:Function = null;
-	var armorRetrieve:Function = null;
-	var jewelBox:Function = null;
-	var jewelRetrieve:Function = null;
-	var barrel:* = 0;
-	outputText("", true);
-	if(flags[kFLAGS.ANEMONE_KID] > 0) {
-		//(morning)
-		if(model.time.hours < 6 || model.time.hours > 22) outputText("Kid A is sleeping in her barrel right now.");
-		else if(model.time.hours <= 10) outputText("Kid A stands next to her barrel, refilling it from one of your waterskins.  A second full skin is slung over her shoulder.  She gives you a grin.\n\n");
-		else if(flags[kFLAGS.KID_SITTER] > 1) outputText("Kid A is absent from her barrel right now, dragooned into babysitting again.\n\n");
-		//(midday)
-		else if(model.time.hours < 16) outputText("Kid A is deep in her barrel with the lid on top, hiding from the midday sun.\n\n");
-		//(night hours)
-		else if(model.time.hours < 22) outputText("Kid A is peeking out of her barrel.  Whenever you make eye contact she breaks into a smile; otherwise she just stares off into the distance, relaxing.\n\n");
-		else outputText("Kid A is here, seated demurely on the rim of her barrel and looking somewhat more purple under the red moon.  She glances slyly at you from time to time.\n\n");
-		barrel = anemoneScene.approachAnemoneBarrel;
-		if(model.time.hours < 6) barrel = 0;
-	}
-	if (player.hasKeyItem("Camp - Chest") >= 0) {
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) outputText("You have a large wood and iron chest to help store excess items located in front of your bed inside your cabin.\n\n", false);
-		else outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n", false);
-	}
-	var weaponNames:Array = [];
-	//Weapon rack
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) {
-		outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.", false);
-		weaponRack = inventory.initiateStoreWeaponRack;
-		if(hasItemsInRacks(0)) {
-			weaponRetrieve = inventory.initiateTakeWeaponRack;
-			temp = 0;
-			outputText("  It currently holds ", false);
-			while(temp < 9) {
-				if(gearStorage[temp].quantity > 0) {
-					weaponNames[weaponNames.length] = gearStorage[temp].itype.longName;
-				}
-				temp++;
-			}
-			if(weaponNames.length == 1) outputText(weaponNames[0], false);
-			else if(weaponNames.length == 2) outputText(weaponNames[0] + " and " + weaponNames[1], false);
-			else {
-				temp = 0;
-				while(temp < weaponNames.length) {
-					outputText(weaponNames[temp], false);
-					if(temp + 2 >= weaponNames.length && temp + 1 < weaponNames.length) outputText(", and ", false);
-					else if(temp + 1 < weaponNames.length) outputText(", ", false);
-					temp++;
-				}
-			}
-		}
-		outputText(".\n\n", false);
-=======
 	clearOutput();
 	spriteSelect(-1);
 	menu();
@@ -999,91 +901,32 @@ public function stash():Boolean {
 		addButton(2, "W.Rack Put", inventory.pickItemToPlaceInWeaponRack);
 		if (inventory.weaponRackDescription()) addButton(3, "W.Rack Take", inventory.pickItemToTakeFromWeaponRack);
 		outputText("\n\n");
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	}
 	//Armor Rack
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0) {
-<<<<<<< HEAD
-		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.", false);
-		armorRack = inventory.initiateStoreArmorRack;
-		if(hasItemsInRacks(1)) {
-			armorRetrieve = inventory.initiateTakeArmorRack;
-			temp = 9;
-			outputText("  It currently holds ", false);
-			while(temp < 18) {
-				if(gearStorage[temp].quantity > 0) {
-					armorNames[armorNames.length] = gearStorage[temp].itype.longName;
-				}
-				temp++;
-			}
-			if(armorNames.length == 1) outputText(armorNames[0], false);
-			else if(armorNames.length == 2) outputText(armorNames[0] + " and " + armorNames[1], false);
-			else {
-				temp = 0;
-				while(temp < armorNames.length) {
-					outputText(armorNames[temp], false);
-					if(temp + 2 >= armorNames.length && temp + 1 < armorNames.length) outputText(", and ", false);
-					else if(temp + 1 < armorNames.length) outputText(", ", false);
-					temp++;
-				}
-			}
-		}
-		outputText(".\n\n", false);
+		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.");
+		addButton(5, "A.Rack Put", inventory.pickItemToPlaceInArmorRack);
+		if (inventory.armorRackDescription()) addButton(6, "A.Rack Take", inventory.pickItemToTakeFromArmorRack);
+		outputText("\n\n");
 	}
-	var jewelNames:Array = [];
-	//Jewelry Box
+	//Jewelry box
 	if(player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
 		outputText("Your jewelry box is located ", false);
 		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED])
 		{
-			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER])
-			{
-				outputText("on your dresser inside your cabin.", false);
-			}
+			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER]) outputText("on your dresser inside your cabin.", false);
 			else
 			{
 				if (flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND]) outputText("on your nightstand inside your cabin.", false);
 				else  outputText("under your bed inside your cabin.", false);
 			}
 		}
-		else
-		{
-			outputText("next to your bedroll.", false);
-		}		
-		jewelBox = inventory.initiateStoreJewelryBox;
-		if(hasItemsInRacks(2)) {
-			jewelRetrieve = inventory.initiateTakeJewelryBox;
-			temp = 18;
-			outputText("  It currently holds ", false);
-			while(temp < 27) {
-				if(gearStorage[temp].quantity > 0) {
-					jewelNames[jewelNames.length] = gearStorage[temp].itype.longName;
-				}
-				temp++;
-			}
-			if(jewelNames.length == 1) outputText(jewelNames[0], false);
-			else if(jewelNames.length == 2) outputText(jewelNames[0] + " and " + jewelNames[1], false);
-			else {
-				temp = 0;
-				while(temp < jewelNames.length) {
-					outputText(jewelNames[temp], false);
-					if(temp + 2 >= jewelNames.length && temp + 1 < jewelNames.length) outputText(", and ", false);
-					else if(temp + 1 < jewelNames.length) outputText(", ", false);
-					temp++;
-				}
-			}
-		}
+		else outputText("next to your bedroll.", false);	
+		addButton(7, "J.Box Put", inventory.pickItemToPlaceInJewelryBox);
+		if (inventory.jewelryBoxDescription()) addButton(8, "J.Box Take", inventory.pickItemToTakeFromJewelryBox);
 		outputText(".\n\n", false);
 	}
-	choices("Chest Store",storeStuff,"Chest Take",retrieveStuff,"W.Rack Put",weaponRack,"W.Rack Take",weaponRetrieve,"Anemone",barrel,"A.Rack Put",armorRack,"A.Rack Take",armorRetrieve,"J.Box Store",jewelBox,"J.Box Take",jewelRetrieve,"Back",1);
-=======
-		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.");
-		addButton(5, "A.Rack Put", inventory.pickItemToPlaceInArmorRack);
-		if (inventory.armorRackDescription()) addButton(6, "A.Rack Take", inventory.pickItemToTakeFromArmorRack);
-		outputText("\n\n");
-	}
-	addButton(9, "Back", camp.campMenu);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+	addButton(14, "Back", camp.campMenu);
 	return true;
 }
 	
@@ -1284,18 +1127,6 @@ public function campLoversMenu():void {
 	if(arianScene.arianFollower()) outputText("Arian's tent is here, if you'd like to go inside.\n\n");
 	//choices("Amily",amilyEvent,"Helia",hel,"Isabella",isabellaButt,"Izma",izmaEvent,"Kiha",kihaButt,"Marble",marbleEvent,"Nieve",nieve,"",0,"",0,"Back",1);	
 	menu();
-<<<<<<< HEAD
-	if(amilyEvent != null) addButton(0,"Amily",amilyEvent);
-	if(arianScene.arianFollower()) addButton(1,"Arian",arianScene.visitAriansHouse);
-	if (hel != null) addButton(2,"Helia",hel);
-	if (isabellaButt != null) addButton(3,"Isabella",isabellaButt);
-	if (izmaEvent != null) addButton(4,"Izma",izmaEvent);
-	addButton(5,"Kiha",kihaButt);
-	if (marbleEvent != null) addButton(6,"Marble",marbleEvent);
-	if(nieve > 0) addButton(7,"Nieve",eventParser,nieve);
-	if(flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla",kGAMECLASS.desert.antsScene.introductionToPhyllaFollower);
-	addButton(14,"Back",eventParser,1);
-=======
 	if (amilyEvent != null) addButton(0, "Amily", amilyEvent);
 	if (arianScene.arianFollower()) addButton(1, "Arian", arianScene.visitAriansHouse);
 	if (hel != null) addButton(2, "Helia", hel);
@@ -1305,8 +1136,7 @@ public function campLoversMenu():void {
 	if (marbleEvent != null) addButton(6, "Marble", marbleEvent);
 	if (nieve != null) addButton(7, "Nieve", nieve);
 	if (flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla", getGame().desert.antsScene.introductionToPhyllaFollower);
-	addButton(9, "Back", campMenu);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+	addButton(14, "Back", campMenu);
 }
 
 public function campSlavesMenu():void {
@@ -1362,16 +1192,11 @@ public function campSlavesMenu():void {
 }
 
 public function campFollowers():void {
-<<<<<<< HEAD
 	hideMenus();
 	kGAMECLASS.tooltipLoc = "";
 	spriteSelect(-1);
-	var rathazulEvent:Number = 0;
-	var jojoEvent:Number = 0;
-=======
 	var rathazulEvent:Function = null;
 	var jojoEvent:Function = null;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	var valeria2:Function = null;
 	var shouldra:Function = null;
 	var ember:Function = null;
@@ -1433,7 +1258,6 @@ public function campFollowers():void {
 	addButton(4, "Shouldra", shouldra);
 	//ABOVE: addButton(4,"Sophie",followerSophieMainScreen);
 	addButton(6, "Valeria", valeria2);
-<<<<<<< HEAD
 	//if (player.armorName == "goo armor") addButton(6, "Valeria (E)", valeria2);
 	addButton(14,"Back",eventParser,1);
 }
@@ -1449,7 +1273,7 @@ private function campActions():void {
 	if (model.time.hours == 19) addButton(2, "Watch Sunset", watchSunset, null, null, null, "Watch the sunset and relax."); //Relax and watch at the sunset.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 12) addButton(3, "Build Cabin", cabinProgress.initiateCabin, null, null, null, "Work on your cabin."); //Work on cabin.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin, null, null, null, "Enter your cabin."); //Enter cabin for furnish.
-	addButton(8, "Read Codex", codex.accessCodexMenu, null, null, null, "Read any codex entries you have unlocked.");
+	addButton(4, "Read Codex", codex.accessCodexMenu, null, null, null, "Read any codex entries you have unlocked.");
 	addButton(14, "Back", eventParser, 1);
 }
 
@@ -1570,14 +1394,14 @@ private function swimInStreamFinish():void {
 	outputText("Eventually, you swim back to the riverbank and dry yourself off", false);
 	if (player.armorName != "slutty swimwear") outputText(" before you re-dress yourself in your " + player.armorName, false);
 	outputText(".", false)
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function examinePortal():void {
 	if (flags[kFLAGS.CAMP_PORTAL_PROGRESS] <= 0) {
 		outputText("You walk over to the portal. You are reminded by how you came. You begin to wonder if you can go back. You start by picking up a small pebble and throw it through the portal. It passes through the portal. As you walk around the portal, you spot the pebble at the other side. Seems like you can't get back right now.", true)
 		flags[kFLAGS.CAMP_PORTAL_PROGRESS] = 1
-		doNext(13);
+		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	else outputText("You walk over to the portal. You are reminded by how you came. You let out a sigh, knowing you can't return to Ingnam.", true)
@@ -1636,10 +1460,7 @@ private function watchSunset():void {
 
 	}
 	outputText("\n\nAfter the thought, you spend a good while relaxing and watching the sun setting. By now, the sun has already set below the horizon. The sky is glowing orange after the sunset. It looks like you could explore more for a while.", false)
-	doNext(13);
-=======
-	addButton(9, "Back", campMenu);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1921,7 +1742,7 @@ public function sleepRecovery(display:Boolean = false):void {
 	}
 }
 
-<<<<<<< HEAD
+
 //Bad End if your balls are too big. Only happens in Realistic Mode.
 public function badEndGIANTBALLZ():void {
 	outputText("You suddenly fall over due to your extremely large " + player.ballsDescriptLight() + ".  You struggle to get back up but the size made it impossible.  Panic spreads through your mind and your heart races.\n\n", true)
@@ -1946,7 +1767,7 @@ private function applyReductoAndEscapeBadEnd():void {
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ", false);
 	dynStats("lib", -2, "lus", -10);
 	player.consumeItem(consumables.REDUCTO, 1);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function callRathazulAndEscapeBadEnd():void {
 	outputText("You shout as loud as you can to call Rathazul.  Your call is answered as the alchemist walks up to you.\n\n", true);
@@ -1958,7 +1779,7 @@ private function callRathazulAndEscapeBadEnd():void {
 	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ", false);
 	outputText("\"<i>Try not to make your balls bigger. If it happens, make sure you have Reducto, </i>\" he says.  He returns to his alchemy equipment, working on who knows what.\n\n", false)
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Bad End if you starved to death.
@@ -1985,63 +1806,6 @@ public function badEndMinLust():void {
 	removeButton(1); //Can't wake up, must load.
 }
 
-public function nightSuccubiRepeat():void {
-	spriteSelect(8);
-	if(player.gender == 0) {
-		if(flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] == 0) {
-			outputText("\nAs you sleep, your rest becomes increasingly disturbed. You feel a great weight on top of you and you find it difficult to breathe. Stirred to consciousness, your eyes are greeted by an enormous pair of blue-tinged breasts. The nipples are quite long and thick and are surrounded by large, round areola. A deep, feminine voice breaks the silence, \"<i>I was wondering if you would wake up.</i>\" You turn your head to the voice to see the visage of a sharp featured, attractive woman. The woman grins mischievously and speaks again, \"<i>I was hoping that idiot, Giacomo, did not dilute the 'potion' again.</i>\" Your campfire reflects off the woman's face and her beauty contains some sharply contrasting features. The pupils of her eyes are slit like a cat's. As she grins, she bares her teeth, which contain two pairs of long and short fangs. This woman is clearly NOT human! In shock, you attempt to get up, only prompting the woman to prove her inhuman nature by grabbing your shoulders and pinning you to the ground. You see that each finger on her hand also contains a fourth joint, further proving her status. Before you can speak a word, the woman begins mocking your fear and places her face in front of yours. Her face is almost certainly demonic in nature.\n\n", false);
-			outputText("She quickly moves down to your crotch...only to discover no organs down there.\n\n", false);
-			outputText("*record scratch*\n\n", false);
-	
-			outputText("\"<i>Wait a fucking minute.</i>\", the Succubus says, \"<i>Where's your dick?!</i>\"\n\n", false);
-	
-			outputText("As you state your genderless nature, the succubus hops off and from nowhere pulls out a large folder marked \"<i>Corruption of Champions-Script</i>\" and begins thumbing through the pages. After finding the page she is looking for, she reads it and looks off into the distance in disgust.\n\n", false);
-	
-			outputText("\"<i>Hey Fenoxo and Dxasmodeus!!!!!!</i>\", the Succubus crows, \"<i>The goddamn script says that I should be milking someone's DICK!!! Man, futa, herm, I don't give a shit. YOUR OWN FUCKING SCRIPT SAYS I SHOULD BE MOUNTING AND MILKING A COCK!!!! THIS IS A SEX GAME!!!!!! THAT MEANS FUCKING! WHAT THE HELL AM I SUPPOSED TO FUCK???!!!</i>\"\n\n", false);
-	
-			outputText("The Succubus looks at you with utter contempt, \"<i>THIS motherfucker doesn't have a DAMN thing! What am I supposed to do?! I can't exactly order a fucking Happy Meal!!!!!</i>\"\n\n", false); 
-	
-			outputText("Throwing the script down in an utter rage, the tantrum continues, \"<i>Goddammit! I can't believe this shit! HEY!!!!! INTERN!!!! Bring me my robe, aspirins and cancer sticks!!!!</i>\"\n\n", false);
-	
-			outputText("The Succubus walks a few paces away where a plain-dressed woman with a clipboard hands the Succubus a pack of cigarettes and a small bottle of aspirin. She takes a fistful of the painkillers and immediately lights up a smoke. The Succubus takes a couple of drags off the cig and rubs her temples.\n\n", false);
-	
-			outputText("\"<i>You two are killing me!</i>\", she groans in clear frustration, \"<i>I come to work for you perverts based off the promise of MORE perverts to feed from and you do THIS to me! I can't work like this!</i>\"\n\n", false);
-	
-			outputText("The plain woman hands the Succubus a robe, which she crudely puts on as she storms off into the night.\n\n", false);
-	
-			outputText("\"<i>I will discuss this horseshit with my agent.</i>\", the Succubus continues bitching, \"<i>THIS was NOT in my contract.</i>\"\n\n", false);
-	
-			outputText("The Succubus stops, turns and points to you in derision. \"<i>And YOU! You no-cock, no-cunt having pissant! Take your ass back to the lab before they find out you escaped!!!!!</i>\"\n\n", false);
-	
-			outputText("The Succubus resumes her stormy exit. You look at the bottle of Cerulean Potion and wonder if it REALLY had some psychotropics in it. What the hell just happened?!", false);
-			flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] = 1;
-		}
-		//REPEAT
-		else {
-			outputText("\nAs you begin to relax, you hear footsteps behind you, expecting the unholy interloper and pray for a better... and more understanding... encounter.\n\n", false);
-
-			outputText("You turn around, hoping for an exciting encounter only to find a rather short, plain-faced woman with horned-rim glasses and a purple dress on. She appears to be holding a stack of papers in her hand.\n\n", false);
-
-			outputText("\"<i>Ahem.</i>\", the woman says meekly, \"<i>I hate to bother you, but I was sent by the CoC writers and staff to hand you this.</i>\"\n\n", false);
-
-			outputText("Scratching your head, you inquire what the document is. The woman smiles shyly and hands it to you.\n\n", false);
-
-			outputText("\"<i>This is the script and production notes for Corruption of Champions,</i>\" she says with a small bit of pride, \"<i>Apparently, you need to read the highlighted sections. They are important.</i>\"\n\n", false);
-
-			outputText("You take the script, scratching your head at the surreal nature of the moment. You thumb through the pages, finding virtually every aspect of your life and encounters written as if foreseen by great mystics. The accuracy is nothing short of horrifying. You find a highlighted section that appears to be what the woman is referring to. The note is terse and outright blunt.\n\n", false);
-			
-			outputText("\"<i>GENDER NEUTRAL CHARACTERS ARE BUTT-MONKEYS. IF THE ENCOUNTER INVOLVES SEX, EXPECT SOMETHING FUCKED UP TO HAPPEN INSTEAD. ACTORS WHO PLAY NEUTER CHARACTERS SHOULD EXPECT TO PLAY ONLY FOR LULZ</i>.\"\n\n", false);
-
-			outputText("The shock is overwhelming. The script basically says that you will never catch a break. As this reality drapes about you, the script disappears and you hear a cacophony of mocking laughter in all directions. The woman is nowhere to be found.\n\n", false);
-
-			outputText("As the cacophony fades, you only hear one facetiously toned word,\n\n", false);
-
-			outputText("\"<i><b>Problem?</b></i>\"", false);
-		}
-		doNext(1);
-		return;
-	}
-=======
 public function allNaturalSelfStimulationBeltContinuation():void {
 	clearOutput();
 	outputText("In shock, you scream as you realize the nodule has instantly grown into a massive, organic dildo. It bottoms out easily and rests against your cervix as you recover from the initial shock of its penetration. As the pangs subside, the infernal appendage begins working itself. It begins undulating in long, slow strokes. It takes great care to adjust itself to fit every curve of your womb. Overwhelmed, your body begins reacting against your conscious thought and slowly thrusts your pelvis in tune to the thing.\n\n", true);
@@ -2049,7 +1813,6 @@ public function allNaturalSelfStimulationBeltContinuation():void {
 	outputText("The fiendish belt shifts again. It buries itself as deep as it can go and you feel pressure against the depths of your womanhood. You feel a hot fluid spray inside you. Reflexively, you shout, \"<b>IT'S CUMMING! IT'S CUMMING INSIDE ME!</b>\" Indeed, each push of the prodding member floods your box with juice. It cums... and cums... and cums... and cums...\n\n", false);
 	outputText("An eternity passes, and your pussy is sore. It is stretched and filled completely with whatever this thing shoots for cum. It retracts itself from your hole and you feel one last pang of pressure as your body now has a chance to force out all of the spunk that it cannot handle. Ooze sprays out from the sides of the belt and leaves you in a smelly, sticky mess. You feel the belt's tension ease up as it loosens. The machine has run its course. You immediately pass out.", false);
 	player.slimeFeed();
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	player.orgasm();
 	dynStats("lib", 1, "sen", (-0.5));
 	doNext(camp.returnToCampUseOneHour);
@@ -2068,18 +1831,6 @@ public function allNaturalSelfStimulationBeltBadEnd():void {
 	eventParser(5035);
 }
 
-<<<<<<< HEAD
-			outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.", false);
-			doBadEnd();
-			return;
-		}
-		else {
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00111]++;
-			flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER]++;
-			outputText("\nAs you begin to relax from a long day of adventuring, the succubus returns and lands squarely in your lap, just missing your throbbing erection. The succubus growls in arousal as she thrusts one of her fat nipples into your mouth. Reflexively, you begin suckling the teat with neither shame nor restraint. Milk floods into your mouth as you sense the weight of the succubus descend upon your cock. The familiar warmth and snugness of her cunt greet your hungry prick as her muscles begin the savory churning to coax your body into producing the 'milk' she needs to sate her own hunger. Your eyes roll back into your head as the torrent of milk pouring down your throat increases the sensitivity in all of your organs, compelling your hips to reflexively buck to press your dick deeper.\n\n", false);
-			
-			outputText("The Succubus restrains you without missing a stroke or disrupting your breastfeeding as the pangs of orgasmic pleasure swell up at the base of your cock. You wrap your arms forcefully around the succubus as you bear down upon your crotch, releasing the painfully stockpiled load of lust into the demoness' cunt for her own sustenance. The succubus lets out an inhuman howl of pleasure as her own orgasm begins to crush your cock, draining every last drop out of you.\n\n", false);
-=======
 public function onaholeMulticockContinuation():void {
 	clearOutput();
 	outputText("You pull the sloppy toy from your dribbling dick and smile, shoving its slippery surface down on another of your " + multiCockDescriptLight() + ".  You rapidly work it around your cocks, orgasming until ", true);
@@ -2091,7 +1842,6 @@ public function onaholeMulticockContinuation():void {
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 
 public function onaholeFutaContinuation():void {
 	if (player.gender == 3)
@@ -2106,23 +1856,6 @@ public function onaholeFutaContinuation():void {
 	}
 	doNext(1);
 }
-<<<<<<< HEAD
-=======
-		
-//Places menu
-public function places(display:Boolean):Boolean {
-	var farmBarn:* = 0;
-	var farmHouse:* = 0;
-	var farm:* = 0;
-	var _boat:Function = null;
-	var barber:* = 0;
-	var telAdre2:* = 0;
-	var ruins:Function = null;
-	var bazaar:Function = null;
-	var owca:* = 0;
-	var dungeonsArg:* = 0;
-	var cathedral:* = 0;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 
 //-----------------
 //-- PLACES MENU
@@ -2143,7 +1876,7 @@ public function placesCount():int {
 }
 
 //All cleaned up!
-public function places():void {
+public function places():Boolean {
 	hideMenus();
 	clearOutput();
 	outputText("Which place would you like to visit?");
@@ -2161,23 +1894,7 @@ public function places():void {
 		if (flags[kFLAGS.GAR_NAME] == 0) addButton(2, "Cathedral", kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork);
 		else addButton(2, "Cathedral", kGAMECLASS.gargoyle.returnToCathedral);
 	}
-<<<<<<< HEAD
 	if (flags[kFLAGS.FACTORY_FOUND] > 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 || flags[kFLAGS.DISCOVERED_DUNGEON_3_LETHICE] > 0 || kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(3, "Dungeons", dungeons);
-=======
-	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || player.findStatusAffect(StatusAffects.FoundFactory) >= 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 || flags[kFLAGS.D3_DISCOVERED] > 0)
-		dungeonsArg = dungeons;
-	if(flags[kFLAGS.OWCA_UNLOCKED] == 1) 
-		owca = kGAMECLASS.owca.gangbangVillageStuff;
-	
-	//turn on ruins
-	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = amilyScene.exploreVillageRuin;
-	//turn on teladre
-	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) telAdre2 = kGAMECLASS.telAdre.telAdreMenu;
-	if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) barber = kGAMECLASS.mountain.salon.salonGreeting;
-	//turn on boat
-	if(player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) _boat = kGAMECLASS.boat.boatExplore;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
-	
 	if (player.findStatusAffect(StatusAffects.MetWhitney) >= 0) 
 	{
 		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && (flags[kFLAGS.FARM_DISABLED] == 0 || (player.cor >= 70 && player.level >= 12 && kGAMECLASS.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) || player.level >= 20 )) addButton(5, "Farm", kGAMECLASS.farm.farmExploreEncounter);
@@ -2187,40 +1904,20 @@ public function places():void {
 	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) addButton(7, "Salon", kGAMECLASS.mountain.salon.salonGreeting);
 	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) addButton(8, "Tel'Adre", kGAMECLASS.telAdre.telAdreMenu);
 	
-<<<<<<< HEAD
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(10, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin);
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(11, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva);
 	//addButton(13, "Next", placesPage2);
 	addButton(14, "Back", eventParser, 1);
-=======
-	
-	//Turn on bazaar encounter
-	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = getGame().bazaar.enterTheBazaar;
-	//Return if there is anything enabled in places
-	if(!display) {
-		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm != null || dungeonsArg || _boat || ruins || flags[kFLAGS.BAZAAR_ENTERED] || cathedral;
-	}
-	//Make choices
-	choices("Bazaar",bazaar,"Boat",_boat,"Cathedral",cathedral,"Dungeons",dungeonsArg,"Next",placesPage2,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre2,"Back",1);
 	return true;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 private function placesPage2():void
 {
 	menu();
 	flags[kFLAGS.PLACES_PAGE] = 1;
-	//turn on ruins
-<<<<<<< HEAD
-	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin);
-	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(1, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva);
-	addButton(12,"Previous",placesToPage1);
-	addButton(14,"Back",eventParser,1);
-=======
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "TownRuins", amilyScene.exploreVillageRuin);
 	addButton(4,"Previous",placesToPage1);
 	addButton(9,"Back",eventParser,1);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 private function placesToPage1():void
 {
@@ -2289,7 +1986,7 @@ public function wakeFromBadEnd():void {
 	kGAMECLASS.inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
-	gameState = 0;
+	getGame().inCombat = false;
 	player.HP = player.maxHP();
 	menu();
 	addButton(0, "Next", eventParser, 1);

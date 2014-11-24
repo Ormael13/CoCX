@@ -774,13 +774,8 @@ private function approachKelly():void {
 	//Showing up resets Kelly's desire not to fap without you
 	flags[kFLAGS.KELLY_DISOBEYING_COUNTER] = 0;
 
-<<<<<<< HEAD
-	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)	addButton(14, "Leave", eventParser, 13);
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)	addButton(14, "Leave", camp.returnToCampUseOneHour);
 	else addButton(14, "Back", farm.farmCorruption.rootScene);
-=======
-	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)	addButton(9, "Leave", camp.returnToCampUseOneHour);
-	else addButton(9, "Back", farm.farmCorruption.rootScene);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 private function kellySexMenu():void {

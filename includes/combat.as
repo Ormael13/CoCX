@@ -500,51 +500,44 @@ public function doCombat(eventNum:Number):void
 			inDungeon = false;
 	}
 	//Soft Game Over - for when you want to leave the text on-screen
-	if(eventNum == 5035) {
-			if (!this.testingBlockExiting) {
-				outputText("\n\n<b>GAME OVER</b>", false);
-				outputText("\n\n<font color=\"#800000\">", false)
-				if (textChoices == 0) outputText("<b>GAME OVER</b>", false);
-				if (textChoices == 1) outputText("<b>Game over, man! Game over!</b>", false);
-				if (textChoices == 2) outputText("<b>You just got Bad Ended!</b>", false);
-				if (textChoices == 3) outputText("<b>Your adventures have came to an end...</b>", false);
-				outputText("</font>", false)
-				//Delete save on hardcore.
-				if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-					outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
-					flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
-					var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
-					if (test.data.exists)
-					{
-						trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
-						test.clear();
-					}
+	if (eventNum == 5035) {
+		var textChoices:int = rand(4);
+		if (!this.testingBlockExiting) {
+			outputText("\n\n<b>GAME OVER</b>", false);
+			outputText("\n\n<font color=\"#800000\">", false)
+			if (textChoices == 0) outputText("<b>GAME OVER</b>", false);
+			if (textChoices == 1) outputText("<b>Game over, man! Game over!</b>", false);
+			if (textChoices == 2) outputText("<b>You just got Bad Ended!</b>", false);
+			if (textChoices == 3) outputText("<b>Your adventures have came to an end...</b>", false);
+			outputText("</font>", false)
+			//Delete save on hardcore.
+			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
+				outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
+				flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
+				var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
+				if (test.data.exists)
+				{
+					trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
+					test.clear();
 				}
-
-				inCombat = false;
 			}
-			else {
-				// Prevent ChaosMonkah instances from getting stuck
-				inCombat = false;
-				doNext(camp.returnToCampUseOneHour);
-			}
-			flags[kFLAGS.TIMES_BAD_ENDED]++;
-			awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
-			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", charCreation.newGamePlus, "", 0, "Debug Cheat", 1);
-			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", charCreation.newGamePlus, "BLAH", 0, "LULZ", 0);
-			mainView.showMenuButton(MainView.MENU_NEW_MAIN);
-			mainView.showMenuButton(MainView.MENU_DATA);
-			mainView.hideMenuButton(MainView.MENU_APPEARANCE);
-			mainView.hideMenuButton(MainView.MENU_LEVEL);
-			mainView.hideMenuButton(MainView.MENU_PERKS);
-			
-			gameState = 0;
+			inCombat = false;
 		}
 		else {
 			// Prevent ChaosMonkah instances from getting stuck
-			gameState = 0;
-			doNext(13);
+			inCombat = false;
+			doNext(camp.returnToCampUseOneHour);
 		}
+		flags[kFLAGS.TIMES_BAD_ENDED]++;
+		awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
+		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", charCreation.newGamePlus, "", 0, "Debug Cheat", 1);
+		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", charCreation.newGamePlus, "BLAH", 0, "LULZ", 0);
+		mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+		mainView.showMenuButton(MainView.MENU_DATA);
+		mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+		mainView.hideMenuButton(MainView.MENU_LEVEL);
+		mainView.hideMenuButton(MainView.MENU_PERKS);
+		
 		inDungeon = false;
 	}
 	//Sand which(lol) end Pt 1

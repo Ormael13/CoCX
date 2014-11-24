@@ -2783,11 +2783,7 @@ public function urtaDialogueMenu():void {
 		addButton(4,"Visit Kids",urtaPregs.visitKidsFirstTime);
 	else
 		if(flags[kFLAGS.FIRST_TIME_AT_URTA_HOUSE] > 0) addButton(4,"Her House",urtaPregs.talkToUrtaAboutHerHouse);
-<<<<<<< HEAD
-	addButton(14,"Leave",eventParser,13);
-=======
-			addButton(9,"Leave",camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
 //[=Urta=]

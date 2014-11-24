@@ -98,12 +98,12 @@ package classes.Scenes.Areas
 				if (itemChooser == 0) {
 					outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag.", true)
 					menuLoc = 2;
-					inventory.takeItem(consumables.ICICLE_);
+					inventory.takeItem(consumables.ICICLE_, camp.returnToCampUseOneHour);
 				}
 				else if (itemChooser == 1) {
 					outputText("As you make your way across the icy wastes, you notice a small corked ivory horn half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horn of mead in your bag and continue on your way.", true)
 					menuLoc = 2;
-					inventory.takeItem(consumables.GODMEAD);					
+					inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);					
 				}
 				else {
 					outputText("You spend an hour exploring the frigid glaciers but you don't find anything interesting.", true)

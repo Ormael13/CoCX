@@ -78,11 +78,7 @@
 		{
 			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_FUCKED;
 
-<<<<<<< HEAD
-			var y:Number = player.cockThatFits(monster.vaginalCapacity());
-=======
 			var y:int = player.cockThatFits(monster.vaginalCapacity());
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 
 			if (y <= 0) y = player.smallestCockIndex();
 

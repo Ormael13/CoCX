@@ -127,13 +127,8 @@ package classes.Scenes
 				if (player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0) {
 					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 					player.explored++;
-<<<<<<< HEAD
-					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the Plains!</b>", true);
-					doNext(13);
-=======
 					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>", true);
 					doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 					return;
 				}
 				//EXPLOOOOOOORE
@@ -143,9 +138,8 @@ package classes.Scenes
 					outputText("", true);
 					outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n", false);
 					outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n", false);
-<<<<<<< HEAD
 					outputText("<b>You've discovered the Swamp!</b>", false);
-					doNext(14);
+					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
 				//Discover Glacial Rift!
@@ -155,11 +149,7 @@ package classes.Scenes
 					outputText("", true);
 					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n", false);
 					outputText("<b>You've discovered the Glacial Rift!</b>", false);
-					doNext(14);
-=======
-					outputText("<b>You've discovered the swamp!</b>", false);
 					doNext(camp.returnToCampUseTwoHours);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 					return;
 				}
 				//Used for chosing 'repeat' encounters.
@@ -173,11 +163,7 @@ package classes.Scenes
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
-<<<<<<< HEAD
-					kGAMECLASS.giacomoShop.encounterGiacomo();
-=======
-					giacomo.giacomoEncounter(); //eventParser(2015);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+					giacomo.giacomoEncounter();
 					return;
 				}
 				else if (choosey == 1) {

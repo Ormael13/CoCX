@@ -906,11 +906,7 @@ private function listenToHelTalkAboutGnolls():void {
 	//Sex options here maybe?
 	flags[kFLAGS.FOLLOWER_HEL_TALKS]++;
 	heliaRoughSex(false);
-<<<<<<< HEAD
-	addButton(14,"Leave",eventParser,13);
-=======
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 //	doNext(13);
 }
 
@@ -986,36 +982,36 @@ private function heliaRoughSex(output:Boolean = true):void {
 	menu();
 	if(player.hasCock() && player.lust >= 33) {
 		//85 vag capacity by base
-		if(player.cockThatFits(heliaCapacity()) >= 0 && buttons < 9)
+		if(player.cockThatFits(heliaCapacity()) >= 0 && buttons < 14)
 		{	
 			addButton(buttons,"FuckVag",helScene.beatUpHelAndStealHerWalletFromHerVagina);
 			buttons++;
 		}
 		//85 ass capacity
-		if(player.cockThatFits(heliaAnalCapacity()) >= 0 && buttons < 9)
+		if(player.cockThatFits(heliaAnalCapacity()) >= 0 && buttons < 14)
 		{
 			addButton(buttons,"Anal",helScene.fuckHelsAss);
 			buttons++;
 		}
-		if(buttons < 9) {
+		if(buttons < 14) {
 			addButton(buttons,"Get Blown",helScene.helBlowsYou);
 			buttons++;
 		}
-		if(player.cockThatFits(heliaCapacity()) >= 0 && player.cockThatFits2(heliaCapacity()) >= 0 && buttons < 9) 
+		if(player.cockThatFits(heliaCapacity()) >= 0 && player.cockThatFits2(heliaCapacity()) >= 0 && buttons < 14) 
 		{
 			addButton(buttons,"DoublePen",helScene.dpHel);
 			buttons++;
 		}
-		if(buttons < 9) {
+		if(buttons < 14) {
 			addButton(buttons,"Tail Wank",helScene.helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora);
 			buttons++;
 		}
 	}
-	if(player.hasVagina() && player.lust >= 33 && buttons < 9) {
+	if(player.hasVagina() && player.lust >= 33 && buttons < 14) {
 		addButton(buttons,"GetLicked",helScene.getLickedByHel);
 		buttons++;
 	}
-	if(player.lust >= 33 && buttons < 9) {
+	if(player.lust >= 33 && buttons < 14) {
 		addButton(buttons,"TailPeg",helScene.helTailPegging);
 		buttons++;
 	}
@@ -1024,17 +1020,17 @@ private function heliaRoughSex(output:Boolean = true):void {
 	{
 		if(player.hasCock()) 
 		{
-			if(player.cockThatFits(heliaCapacity()) >= 0 && buttons < 9) {
+			if(player.cockThatFits(heliaCapacity()) >= 0 && buttons < 14) {
 				addButton(buttons,"Mount Her",centaurMountsCampHel);
 				buttons++;	
 			}
 		}
-		if(player.hasKeyItem("Centaur Pole") >= 0 && player.hasVagina() && buttons < 9) {
+		if(player.hasKeyItem("Centaur Pole") >= 0 && player.hasVagina() && buttons < 14) {
 			addButton(buttons,"CentaurToy",femtaurPlusCampHel);
 			buttons++;	
 		}
 	}
-	if(player.lust >= 33 && player.findPerk(PerkLib.Incorporeality) >= 0 && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && buttons < 9) {
+	if(player.lust >= 33 && player.findPerk(PerkLib.Incorporeality) >= 0 && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && buttons < 14) {
 		addButton(buttons,"Possess",heliaCampPossession);
 		buttons++;
 	}
@@ -1045,14 +1041,14 @@ private function heliaRoughSex(output:Boolean = true):void {
 	if(player.lust >= 33 && player.isNaga()) 
 	{
 		//"Rough" Sex -- Naga Coil (Female w/ Naga Lower Body)
-		if(player.hasVagina() && buttons < 9) 
+		if(player.hasVagina() && buttons < 14) 
 		{
 			addButton(buttons,"NagaCoilF",nagaCoilForHelCampWithGirls);
 			buttons++;	
 		}
 		//"Rough" Sex (Well, it's in the menu, if not in spirit) -- Naga Coil (Male w/ Naga Lower Body)
 		//Male naga shit
-		if(player.hasCock() && buttons < 9) 
+		if(player.hasCock() && buttons < 14) 
 		{
 			if(player.cockThatFits(heliaCapacity()) >= 0) {
 				addButton(buttons,"NagaCoilM",inCampHelNagaLuv);
@@ -1060,16 +1056,10 @@ private function heliaRoughSex(output:Boolean = true):void {
 			}
 		}
 	}
-<<<<<<< HEAD
-	if(player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
-	if(inCombat()) addButton(14,"Leave",cleanupAfterCombat);
-	else addButton(14,"Back",heliaFollowerMenu);
-=======
 	if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
 	if (getGame().inCombat)
-		addButton(9, "Leave", cleanupAfterCombat);
-	else addButton(9, "Back", heliaFollowerMenu);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+		addButton(14, "Leave", cleanupAfterCombat);
+	else addButton(14, "Back", heliaFollowerMenu);
 }
 
 //Note 2 Fen: Copypasta old PC Victory scenes here ^ EXCEPT for Morph-based scenes!
@@ -1358,11 +1348,7 @@ private function boxWithInCampHel():void {
 		//[Display Rough Sex menu]
 		dynStats("str", 1,"tou", 1);
 		heliaRoughSex(false);
-<<<<<<< HEAD
-		addButton(14,"Leave",eventParser,13);
-=======
-		addButton(9,"Leave",camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+		addButton(14,"Leave",camp.returnToCampUseOneHour);
 	}
 	//If STR check succeeds:
 	else if(player.str/20 + 1 + rand(20) >= 13) {
@@ -1373,11 +1359,7 @@ private function boxWithInCampHel():void {
 		//Display Rough Sex menu
 		dynStats("str", 2);
 		heliaRoughSex(false);
-<<<<<<< HEAD
-		addButton(14,"Leave",eventParser,13);
-=======
-		addButton(9,"Leave",camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+		addButton(14,"Leave",camp.returnToCampUseOneHour);
 	}
 	//If PC fails the Check:  
 	else {
@@ -1385,18 +1367,14 @@ private function boxWithInCampHel():void {
 		outputText("\n\n\"<i>Ha! Not today, [name]! You're good, lover, but you're gonna need to practice a lot more to beat me!  Now then.... what shall the victor do with her spoils?</i>\"");
 		//[Proceed to Lose to Hel sex scenes]
 		dynStats("tou", 2);
-		if(player.lust >= 33 && player.hasCock()) {
+		if(player.lust >= 33 && player.hasCock() && rand(2) == 0) {
 			if(player.cockThatFits(helCapacity()) >= 0) {
 				muddyLizardFeet();
 				return;
 			}
 		}
 		heliaRoughSex(false);
-<<<<<<< HEAD
-		addButton(14,"Leave",eventParser,13);
-=======
-		addButton(9,"Leave",camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+		addButton(14,"Leave",camp.returnToCampUseOneHour);
 	}
 }
 

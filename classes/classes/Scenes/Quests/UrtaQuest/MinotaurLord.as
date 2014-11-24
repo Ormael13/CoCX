@@ -52,7 +52,7 @@ package classes.Scenes.Quests.UrtaQuest
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) {
 				outputText("The giant of a minotaur raises his chain threateningly into the air, clearly intent on striking you down.  With your trained reflexes, you quickly move to block his blow with your halberd.  You recoil as the chain impacts your halberd with a loud clang, wrapping around it.  You smile triumphantly at the minotaur, only to glance at his smirk.  With a strong pull, he rips the halberd off your hands and into a corner of the room. Shit!");
 				outputText("\n\nThe succubus laughs maniacally.  \"<i>Good boy, Fido!  Take that fox slut's toys away so she'll be easier to play with!</i>\"  The minotaur puffs his chest, proud of himself for pleasing his mistress.");
-				player.weapon.unequip(player, false, true);
+				player.setWeapon(WeaponLib.FISTS);
 			}
 			else {
 				outputText("The giant of a minotaur raises his chain threateningly into the air, clearly intent on striking you down.  With your trained reflexes, you quickly move to block his blow with your halberd.  You recoil as the chain impacts your halberd with a loud clang, wrapping around it.  You smile triumphantly at the minotaur, only to glance at his smirk.  ");
@@ -60,7 +60,7 @@ package classes.Scenes.Quests.UrtaQuest
 					outputText("With a strong pull, he yanks your " + player.weaponName + " off your hands and into a corner of the room. Shit!");
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
-					player.weapon.unequip(player,false,true);
+					player.setWeapon(WeaponLib.FISTS);
 					player.createStatusAffect(StatusAffects.Disarmed, 2, 0, 0, 0);
 				}
 			}

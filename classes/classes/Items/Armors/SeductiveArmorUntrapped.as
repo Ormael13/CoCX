@@ -11,9 +11,7 @@ package classes.Items.Armors
 		
 		override public function useText():void
 		{
-			if(output) {
-				outputText("\n\nYou are relieved to find out that this armor is not trapped.");
-			}
+			outputText("\n\nYou are relieved to find out that this armor is not trapped.");
 		}
 		
 		public function SeductiveArmorUntrapped() 

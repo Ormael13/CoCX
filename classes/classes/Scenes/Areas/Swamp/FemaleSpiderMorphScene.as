@@ -453,7 +453,7 @@ package classes.Scenes.Areas.Swamp
 
 		public function loseToFemaleSpiderMorph():void
 		{
-			if (flags[kFLAGS.SFW_MODE] > 0 && inCombat()) { //No rape in SFW mode.
+			if (flags[kFLAGS.SFW_MODE] > 0 && getGame().inCombat) { //No rape in SFW mode.
 				clearOutput();
 				cleanupAfterCombat();
 				return;

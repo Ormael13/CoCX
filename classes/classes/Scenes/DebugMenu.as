@@ -8,6 +8,7 @@ package classes.Scenes
 	public class DebugMenu extends BaseContent
 	{
 		public var mainHack:MainViewHack = new MainViewHack()
+		private var lastMenu:Function = null
 		/*
 			addButton(0, "Item1", giveItem, consumables.ITEM);
 			addButton(1, "Item2", giveItem, consumables.ITEM);
@@ -25,7 +26,7 @@ package classes.Scenes
 		
 		public function accessDebugMenu():void {
 			kGAMECLASS.tooltipLoc = ""
-			if ((debug && flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild) && !inCombat()) {
+			if ((debug && flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild) && !getGame().inCombat) {
 				outputText("Welcome to the super secret debug menu!", true);
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu);
@@ -53,6 +54,7 @@ package classes.Scenes
 		}
 		
 		private function itemSpawnTransformativesMenuI():void {
+			lastMenu = itemSpawnTransformativesMenuI;
 			menu();
 			addButton(0, "B.Gossr", giveItem, consumables.B_GOSSR);
 			addButton(1, "BeeHony", giveItem, consumables.BEEHONY);
@@ -74,6 +76,7 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);			
 		}
 		private function itemSpawnTransformativesMenuII():void {
+			lastMenu = itemSpawnTransformativesMenuII;
 			menu();
 			addButton(0, "GoldenSeed", giveItem, consumables.GLDSEED);
 			addButton(1, "Gob.Ale", giveItem, consumables.GOB_ALE);
@@ -95,6 +98,7 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);			
 		}
 		private function itemSpawnTransformativesMenuIII():void {
+			lastMenu = itemSpawnTransformativesMenuIII;
 			menu();
 			addButton(0, "MinoBlo", giveItem, consumables.MINOBLO);
 			addButton(1, "MystJwl", giveItem, consumables.MYSTJWL);
@@ -116,6 +120,7 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);			
 		}
 		private function itemSpawnTransformativesMenuIV():void {
+			lastMenu = itemSpawnTransformativesMenuIV;
 			menu();
 			addButton(0, "Reptilum", giveItem, consumables.REPTLUM);
 			addButton(1, "RingFig", giveItem, consumables.RINGFIG);
@@ -138,6 +143,7 @@ package classes.Scenes
 		}
 
 		private function itemSpawnConsumablesMenuI():void {
+			lastMenu = itemSpawnConsumablesMenuI;
 			menu();
 			addButton(0, "AkbalSlv", giveItem, consumables.AKBALSL);
 			addButton(1, "C. Mint", giveItem, consumables.C__MINT);
@@ -159,6 +165,7 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);
 		}
 		private function itemSpawnConsumablesMenuII():void {
+			lastMenu = itemSpawnConsumablesMenuII;
 			menu();
 			addButton(0, "Lactaid", giveItem, consumables.LACTAID);
 			addButton(1, "LustStk", giveItem, consumables.LUSTSTK);
@@ -180,6 +187,7 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);
 		}
 		private function itemSpawnConsumablesMenuIII():void {
+			lastMenu = itemSpawnConsumablesMenuIII;
 			menu();
 			addButton(0, "BC Beer", giveItem, consumables.BC_BEER);
 			addButton(1, "BimboCh", giveItem, consumables.BIMBOCH);
@@ -201,6 +209,7 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);
 		}
 		private function itemSpawnConsumablesMenuIV():void {
+			lastMenu = itemSpawnConsumablesMenuIV;
 			menu();
 			addButton(0, "NPnkEgg", giveItem, consumables.NPNKEGG);
 			addButton(1, "DrgnEgg", giveItem, consumables.DRGNEGG);
@@ -212,6 +221,7 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);
 		}
 		private function itemSpawnConsumablesMenuV():void {
+			lastMenu = itemSpawnConsumablesMenuV;
 			menu();
 			addButton(0, "BlackEg", giveItem, consumables.BLACKEG);
 			addButton(1, "L.BlkEg", giveItem, consumables.L_BLKEG);
@@ -234,6 +244,7 @@ package classes.Scenes
 		}
 		
 		private function itemSpawnDyesMenuI():void {
+			lastMenu = itemSpawnDyesMenuI;
 			menu();
 			addButton(0, "AuburnD", giveItem, consumables.AUBURND);
 			addButton(1, "Black D", giveItem, consumables.BLACK_D);
@@ -254,6 +265,7 @@ package classes.Scenes
 		}
 		
 		private function itemSpawnMaterialsMenu():void {
+			lastMenu = itemSpawnMaterialsMenu;
 			menu();
 			addButton(0, "GreenGl", giveItem, useables.GREENGL);
 			addButton(1, "B.Chitn", giveItem, useables.B_CHITN);
@@ -263,6 +275,7 @@ package classes.Scenes
 		}
 		
 		private function itemSpawnRaresMenu():void {
+			lastMenu = itemSpawnRaresMenu;
 			menu();
 			addButton(0, "BimboLq", giveItem, consumables.BIMBOLQ);
 			addButton(1, "BroBrew", giveItem, consumables.BROBREW);
@@ -275,6 +288,7 @@ package classes.Scenes
 		}
 		
 		private function itemSpawnWeaponsMenuI():void {
+			lastMenu = itemSpawnWeaponsMenuI;
 			menu();
 			addButton(0, "B.Sword", giveItem, weapons.B_SWORD);
 			addButton(1, "L.Claymore", giveItem, weapons.CLAYMOR);
@@ -296,6 +310,7 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);
 		}
 		private function itemSpawnWeaponsMenuII():void {
+			lastMenu = itemSpawnWeaponsMenuII;
 			menu();
 			addButton(0, "Pitchfork", giveItem, weapons.PTCHFRK);
 			addButton(1, "RidingC", giveItem, weapons.RIDINGC);
@@ -319,6 +334,7 @@ package classes.Scenes
 
 		
 		private function itemSpawnArmoursMenuI():void {
+			lastMenu = itemSpawnArmoursMenuI;
 			menu();
 			addButton(0, "G. Clothes", giveItem, armors.ADVCLTH);
 			addButton(1, "Long Dress", giveItem, armors.B_DRESS);
@@ -340,6 +356,7 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);
 		}
 		private function itemSpawnArmoursMenuII():void {
+			lastMenu = itemSpawnArmoursMenuII;
 			menu();
 			addButton(0, "I.Corst", giveItem, armors.I_CORST);
 			addButton(1, "I.Robes", giveItem, armors.I_ROBES);
@@ -361,6 +378,7 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);
 		}
 		private function itemSpawnArmoursMenuIII():void {
+			lastMenu = itemSpawnArmoursMenuIII;
 			menu();
 			addButton(0, "R.BdySt", giveItem, armors.R_BDYST);
 			addButton(1, "Rbbr Fetish", giveItem, armors.RBBRCLT);
@@ -382,6 +400,7 @@ package classes.Scenes
 		}
 		
 		private function itemSpawnAccessoriesMenuI():void {
+			lastMenu = itemSpawnAccessoriesMenuI;
 			menu();
 			addButton(0, "Crimst.Ring", giveItem, jewelries.CRIMRNG);
 			addButton(1, "FertiteRing", giveItem, jewelries.FERTRNG);
@@ -405,7 +424,7 @@ package classes.Scenes
 
 		private function giveItem(item:*):void {
 			clearOutput();
-			inventory.takeItem(item);
+			inventory.takeItem(item, lastMenu);
 			doNext(itemSpawnMenu);
 		}
 		

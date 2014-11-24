@@ -73,16 +73,8 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Every 5th exploration encounters d2 if hasnt been met yet and factory done
-<<<<<<< HEAD
 			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 5 == 0 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
 				kGAMECLASS.dungeons.enterDeepCave();
-=======
-			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 5 == 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
-				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.", true);
-				outputText("\n\n<b>You've discovered the location of Zetaz's lair!</b>", false);
-				simpleChoices("Enter", 11076, "", 0, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
-				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ]++;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 				return;
 			}
 			//Tamani 20% encounter rate

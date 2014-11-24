@@ -1699,6 +1699,11 @@ public function menu():void { //The newer, simpler menu - blanks all buttons so 
 	mainView.hideBottomButton(7);
 	mainView.hideBottomButton(8);
 	mainView.hideBottomButton(9);
+	mainView.hideBottomButton(10);
+	mainView.hideBottomButton(11);
+	mainView.hideBottomButton(12);
+	mainView.hideBottomButton(13);
+	mainView.hideBottomButton(14);
 	flushOutputTextToGUI();
 }
 

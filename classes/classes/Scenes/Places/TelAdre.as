@@ -192,11 +192,7 @@ public function telAdreMenu():void {
 				return;
 			}
 	}
-<<<<<<< HEAD
-	if(flags[kFLAGS.ARIAN_PARK] == 0 && rand(10) == 0) {
-=======
-	if(flags[kFLAGS.ARIAN_PARK] == 0 && player.level >= 4 && rand(10) == 0 && flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] == 0) {
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+	if(flags[kFLAGS.ARIAN_PARK] == 0 && rand(10) == 0 && flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] == 0) {
 		kGAMECLASS.arianScene.meetArian();
 		return;
 	}
@@ -242,13 +238,8 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5, "Park", kGAMECLASS.arianScene.visitThePark);
 	addButton(6, "Pawn", oswaldPawn);
 	addButton(7, "Tower", library.visitZeMagesTower);
-<<<<<<< HEAD
-	
-	addButton(14, "Leave", eventParser, 13);
-=======
 	addButton(8, "Weapons", weaponShop);
-	addButton(9, "Leave", camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
 private function armorShops():void {
@@ -1565,7 +1556,7 @@ private function debitArmor(itype:ItemType):void {
 	player.gems -= itype.value;
 	statScreenRefresh();
 	menuLoc = 9;
-	inventory.takeItem(itype);
+	inventory.takeItem(itype, armorShop);
 }
 
 //-----------------
@@ -1639,7 +1630,7 @@ private function forgeScarredBladeEnd():void {
 	outputText("Closer examination reveals the veracity of his claim: all the numerous scratches and flaws on the blade have their origins right above the tang, from the smith's abortive attempts at decoration.  Yet though several ugly gashes stop just short of the edge, none of them actually break the perfect arc, as if cutting were all the blade cared about.\n\n")
 	outputText("\"<i>Damnedest thing,</i>\" he repeats, breaking your train of thought.  \"<i>Every time the blade slipped, it would twist toward my hands.  It's as if it's alive and eager to find flesh.  Truth be told... I was debating whether to turn it over to the Covenant and tell you the crystal couldn't be used.  But you're here, so take it and go.\"  Giving you barely enough time to sheathe the blade again, he places a strong hand against your back and all-but-pushes you out to the street.\n\n")
 	menuLoc = 15;
-	inventory.takeItem(weapons.SCARBLD);
+	inventory.takeItem(weapons.SCARBLD, weaponShop);
 }
 
 //-----------------
@@ -1755,12 +1746,7 @@ private function jewelBuy(itype:ItemType):void {
 private function debitJewel(itype:ItemType):void {
 	player.gems -= itype.value;
 	statScreenRefresh();
-<<<<<<< HEAD
-	menuLoc = 34;
-	inventory.takeItem(itype);
-=======
 	inventory.takeItem(itype, armorShop);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 //-----------------

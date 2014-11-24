@@ -754,12 +754,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			addButton(4,"Spar",sparWithKiha);
 			if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha);
 			else addButton(8,"Guard Camp",guardMyCampKiha);
-<<<<<<< HEAD
-			if (leave is Number) addButton(14,"Leave",eventParser,leave);
-			else addButton(14,"Leave",leave);
-=======
-			addButton(9,"Leave",leave);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+			addButton(14,"Leave", leave);
 			return;
 		}
 		//[Proc on the normal chances of finding Kiha in the swamp]

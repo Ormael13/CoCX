@@ -1268,11 +1268,8 @@ package classes.Scenes.Monsters
 					}
 				}
 			}
-<<<<<<< HEAD
-			if (inCombat()) cleanupAfterCombat();
-=======
-			doNext(camp.campMenu);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+			if (getGame().inCombat) cleanupAfterCombat();
+			else doNext(camp.campMenu);
 		}
 		
 		public function impRapesYou():void {

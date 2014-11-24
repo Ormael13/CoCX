@@ -277,12 +277,8 @@
 		public var monster:Monster;
 //No longer used:		public var itemSwapping:Boolean;
 		public var flags:DefaultDict;
-<<<<<<< HEAD
 		public var achievements:DefaultDict;
-		public var gameState:Number;
-=======
 		private var gameState:int;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		public var menuLoc:Number;
 //No longer used:		public var itemSubMenu:Boolean;
 //No longer used:		public var supressGoNext:Boolean = false;
@@ -297,11 +293,7 @@
 		public var whitney:Number;
 		public var monk:Number;
 		public var sand:Number;
-<<<<<<< HEAD
-		public var giacomo:Number; //Deprecated
-=======
 		public var giacomo:int;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		public var beeProgress:Number;
 //Now in Inventory.as		public var itemStorage:Array;
 //Now in Inventory.as		public var gearStorage:Array;
@@ -315,11 +307,8 @@
 		public var testingBlockExiting:Boolean;
 
 		public var kFLAGS_REF:*;
-<<<<<<< HEAD
 		public var kACHIEVEMENTS_REF:*;
 
-=======
-		
 		public function get inCombat():Boolean { return gameState == 1; }
 		
 		public function set inCombat(value:Boolean):void { gameState = (value ? 1 : 0); }
@@ -328,7 +317,6 @@
 		
 		private function gameStateDirectSet(value:int):void { gameState = value; }
 		
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		public function rand(max:int):int
 		{
 			return Utils.rand(max);
@@ -395,13 +383,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-<<<<<<< HEAD
-			ver = "0.9.0_mod_1.0_indev_20141122";
-			version = ver + " (<b>Ingnam</b>)";
-=======
-			ver = "0.9.1";
-			version = ver + " (<b>Lethice's Bugfixan</b>)";
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+			ver = "0.9.1_mod_1.0_indev_20141123";
+			version = ver + " (<b>Lethice's Bugfixan + Mod 1.0 update</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

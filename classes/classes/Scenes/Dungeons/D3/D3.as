@@ -228,11 +228,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function discoverD3():Boolean
 		{
-<<<<<<< HEAD
-			if (flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") && rand(10) == 0)
-=======
-			if (flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") && player.level >= 10 && rand(5) == 0)
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+			if (flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") && rand(5) == 0)
 			{
 				flags[kFLAGS.D3_DISCOVERED] = 1;
 				
@@ -243,7 +239,7 @@ package classes.Scenes.Dungeons.D3
 				
 				menu();
 				addButton(0, "Enter", enterD3);
-				addButton(1, "Leave", eventParser, 13);
+				addButton(1, "Leave", camp.returnToCampUseOneHour);
 				
 				return true;
 			}
@@ -263,7 +259,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			inRoomedDungeon = false;
 			inRoomedDungeonResume = null;
-			eventParser(13);
+			camp.returnToCampUseOneHour();
 		}
 
 		public function resumeFromFight():void
@@ -311,7 +307,7 @@ package classes.Scenes.Dungeons.D3
 				addButton(10, "Exit", exitD3);
 			}
 			
-			addButton(13, "Inventory", eventParser, 1000);
+			addButton(13, "Inventory", inventory.inventoryMenu);
 			if (player.lust >= 30) addButton(8, "Masturbate", eventParser, 10);
 		}
 		
@@ -643,16 +639,9 @@ package classes.Scenes.Dungeons.D3
 		
 		private function eastwalkRoomFunc():Boolean
 		{
-<<<<<<< HEAD
-			outputText("The smooth, almost flawlessly laid stones split into a T-intersection here, heading north, south, and west. The bushes that hem in the paths are likewise split, though they have been maintained with the same sense of care you’ve seen elsewhere in the garden. One particularly interesting shrub has been trimmed into the shape of a large bust, complete with erect nipples. You shake your head and glance west, where you can spot ");
-			if (flags[kFLAGS.D3_STATUE_DEFEATED] == 0) outputText(" see a massive statue with an immense hammer");
-			else outputText(" a mound of rubble, the scattered remains of the animated statue that you slew");
-			outputText(".");
-=======
 			outputText("The smooth, almost flawlessly laid stones split into a T-intersection here, heading north, south, and west. The bushes that hem in the paths are likewise split, though they have been maintained with the same sense of care you’ve seen elsewhere in the garden. One particularly interesting shrub has been trimmed into the shape of a large bust, complete with erect nipples. You shake your head and glance west, where you can spot");
 			if (flags[kFLAGS.D3_STATUE_DEFEATED] == 0) outputText(" a massive statue with an immense hammer.");
 			else outputText(" a mound of rubble, the scattered remains of the animated statue that you slew.");
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			return false;
 		}
 		

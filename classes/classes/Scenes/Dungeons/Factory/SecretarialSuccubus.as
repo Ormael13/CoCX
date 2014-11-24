@@ -17,7 +17,6 @@ package classes.Scenes.Dungeons.Factory
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?", true);
 					game.dynStats("lus", 1);
-<<<<<<< HEAD
 					game.simpleChoices("Yes", factory.doRapeSuccubus, "", 0, "", 0, "", 0, "No", factory.doLeaveSuccubus);
 					if (player.hasKeyItem("Deluxe Dildo") >= 0) game.addButton(1, "Dildo Rape", factory.dildoSuccubus);
 				} else if (player.lust>=33){
@@ -25,13 +24,6 @@ package classes.Scenes.Dungeons.Factory
 					game.dynStats("lus", 1);
 					game.simpleChoices("Yes", factory.doRapeSuccubus, "", 0, "", 0, "", 0, "No", factory.doLeaveSuccubus);
 					if (player.hasKeyItem("Deluxe Dildo") >= 0) game.addButton(1, "Dildo Rape", factory.dildoSuccubus);
-=======
-					game.simpleChoices("Yes", 11023, "Dildo Rape", dildo, "", 0, "", 0, "No", game.cleanupAfterCombat);
-				} else if (player.lust >= 33){
-					outputText("You smile in satisfaction as the " + short + " gives up on fighting you and starts masturbating, begging for you to fuck her.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?", true);
-					game.dynStats("lus", 1);
-					game.simpleChoices("Yes", 11023, "Dildo Rape", dildo, "", 0, "", 0, "No", game.cleanupAfterCombat);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 				} else {
 					doNext(factory.doLeaveSuccubus);
 				}

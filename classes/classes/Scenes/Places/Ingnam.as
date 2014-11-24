@@ -85,7 +85,7 @@ package classes.Scenes.Places
 			outputText("Your time has come.  It's time for you to meet up with the village elders.  You know you are going to get sent to the demon realm and you're most likely not going to return to Ingnam.  You give your family and friends a long farewell.");
 			if (player.weaponName != "fists") {
 				hasWeapon = true;
-				player.weapon.unequip(player, false, false);
+				player.setWeapon(WeaponLib.FISTS);
 			}
 			while (player.hasItem(weapons.DAGGER, 1)) {
 				hasWeapon = true;
@@ -232,13 +232,22 @@ package classes.Scenes.Places
 			}
 		}
 		public function transactionYes(item:ItemType, price:int, shop:int):void {
+			//Determine shop
+			var shopToGo:Function = null
+			if (shop == 1) shopToGo = shopWeapon;
+			else if (shop == 2) shopToGo = shopArmor;
+			else if (shop == 3) shopToGo = shopTailor;
+			else if (shop == 4) shopToGo = shopAlchemist;
+			else if (shop == 5) shopToGo = shopTradingPost;
+			else shopToGo = shopBlackMarket;
+			//Process
 			clearOutput();
 			if (player.gems >= price) {
 				outputText("You have purchased " + item.longName + " for " + price + " gems. ");
 				player.gems -= price;
 				menu();
 				statScreenRefresh();
-				inventory.takeItem(item);
+				inventory.takeItem(item, shopToGo);
 			}
 			else {
 				outputText("You count out your gems and realize it's beyond your price range.");

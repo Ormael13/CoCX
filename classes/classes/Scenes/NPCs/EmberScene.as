@@ -349,6 +349,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("Unsure of where the impulse comes from, but uncaring, you crouch over the ruined shell of your 'kill' and begin messily scooping handfuls of yolk into your mouth.");
 			outputText("\n\nThe taste is incredible; a tinge of bitterness, but rich and velvety, sliding down your throat like the most savory of delicacies.  Each scoop you eat fills you with energy and power, you can almost feel yourself growing stronger.");
+			player.refillHunger(100);
 			outputText("\n\nBefore you realize it, you have eaten as much of it as is possible to eat and the empty halves of the egg lie before you - as you watch, the leftover albumen wicks into the porous shell, disappearing completely.  You pick up the shell, looking at the underside, but not a drop of fluid seeps out.  Interesting...");
 			outputText("\n\nFeeling sated, you get up and prepare to return to your camp, but on a whim, you take the shell with you as a souvenir.");
 			outputText("\n\n(<b>Gained Key Item: Dragon Eggshell</b>)");
@@ -358,12 +359,7 @@ package classes.Scenes.NPCs
 			//(also slimefeed!)
 			dynStats("str", 5 + rand(5), "tou", 5 + rand(5), "int", 5 + rand(5), "cor", 20);
 			player.slimeFeed();
-<<<<<<< HEAD
-			player.refillHunger(100);
-			doNext(13);
-=======
 			doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		}
 
 
@@ -2161,17 +2157,13 @@ package classes.Scenes.NPCs
 				}
 			}
 			emberAffection(1);
-<<<<<<< HEAD
-=======
-			doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			//reset Dragonbreath counter to ready, increase lust slightly if low or med affection, add heat/rut if high dragon-score, damage toughness slightly if high affection and low PC corruption
 			if (emberAffection() < 75) dynStats("lus", 20);
 			fatigue( -50);
 			player.refillHunger(75);
 			player.slimeFeed();
 			HPChange(player.maxHP() * .33, false);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //Sparring text outputs (Z) (FENCODED TO HERE)

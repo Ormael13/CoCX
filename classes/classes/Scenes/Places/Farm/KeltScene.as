@@ -611,14 +611,9 @@ private function keltMainEncounter3():void {
 			else outputText("Of course, Kelt's words only distract you even more from hitting the target.  Not because you are angry... but because you are aroused.  Somehow, his lewd comments and crude jibes make you shiver with anticipation.  He's just so powerful, so masculine.  Kelt seems well aware of the effect he has on you, and once reaches out to slap your ass heartily.  By the end of the training, you feel intensely horny.", false);
 			dynStats("lus", 10);
 			//player.addStatusValue(StatusAffects.Kelt,1,4);
-<<<<<<< HEAD
 			if (player.statusAffectv1(StatusAffects.Kelt) < 90) bowSkill(4);
 			else bowSkill(1);
-			doNext(13);
-=======
-			bowSkill(4);
 			doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			return;
 		}
 		//(No Breasts—Do standard Naked event)
@@ -675,14 +670,10 @@ private function keltMainEncounter3():void {
 			dynStats("lus", 15);
 			player.addStatusValue(StatusAffects.Kelt,2,5);
 			//player.addStatusValue(StatusAffects.Kelt,1,4);
-<<<<<<< HEAD
 			if (player.statusAffectv1(StatusAffects.Kelt) < 90) bowSkill(4);
 			else bowSkill(1);
-			doNext(13);
-=======
 			bowSkill(4);
 			doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			return;
 		}
 	}

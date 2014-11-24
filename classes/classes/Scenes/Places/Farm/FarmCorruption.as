@@ -886,11 +886,7 @@ package classes.Scenes.Places.Farm
 			if (loversAtFarm()) addButton(7, "Lovers", loversAtFarmMenu);
 			if (followersAtFarm()) addButton(8, "Followers", followersAtFarmMenu);
 			
-<<<<<<< HEAD
-			addButton(14, "Leave", eventParser, 13);
-=======
-			addButton(9, "Leave", camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		
 		private function corruptingTheFarmExplore():void

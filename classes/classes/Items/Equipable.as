@@ -67,7 +67,7 @@ package classes.Items
 			CoC_Settings.errorAMC("Equipable", "unequip", id);
 		}
 
-		override public function doEffect(player:Player,output:Boolean):void
+		/*override public function doEffect(player:Player,output:Boolean):void
 		{
 			if (game.debug && !(this is GooArmor)){
 				if (output){
@@ -77,7 +77,7 @@ package classes.Items
 				return;
 			}
 			equip(player,true,output);
-		}
+		}*/
 
 		public function Equipable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null)
 		{

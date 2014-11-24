@@ -75,7 +75,7 @@ package classes.Scenes.Dungeons
 			//Build menu
 			addButton(2, "Furniture", menuFurniture);
 			//addButton(1, "Read Books", eventParser, 0);
-			addButton(3, "Stash", kGAMECLASS.camp.initiateStash);
+			addButton(3, "Stash", kGAMECLASS.camp.stash);
 			addButton(6, "South (Exit)", exitCabin);
 			removeButton(7);
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR2] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] >= 1) removeButton(2);

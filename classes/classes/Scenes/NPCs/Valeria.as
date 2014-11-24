@@ -1,11 +1,8 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-<<<<<<< HEAD
 	import classes.GlobalFlags.kGAMECLASS;
-=======
 	import classes.Items.Armor;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	import classes.Scenes.Areas.Lake.GooGirl;
 
 	public class Valeria extends NPCAwareContent implements TimeAwareInterface {
@@ -380,12 +377,8 @@ public function valeriaSexDominated(offCamp:Boolean = false):void {
 	HPChange(25,false);
 	player.orgasm();
 	dynStats("sen", 1);
-<<<<<<< HEAD
-	if(offCamp || !inCombat()) doNext(13);
-=======
-	if (!getGame().inCombat)
+	if (offCamp || !getGame().inCombat)
 		doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	else cleanupAfterCombat();
 }
 

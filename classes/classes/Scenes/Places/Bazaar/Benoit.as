@@ -317,11 +317,8 @@ public function benoitIntro():void {
 		if (player.hasCock() && player.lust >= 33) addButton(3, "Sex", femoitSexIntro);
 		if (player.hasVagina() && flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0) addButton(4, "Suggest", eggySuggest);
 	}
-<<<<<<< HEAD
-=======
 	choices("Buy", benoitsBuyMenu, "Sell", benoitSellMenu, "Talk", talkToBenoit, suggestText, suggest, "Basil. Womb", womb,
 		"Feminize", fem, "", null, "", null, "", null, "Leave", bazaar.enterTheBazaar);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
 private function buyOrSellExplanationFirstTime():void {
@@ -403,41 +400,10 @@ private function benoitTransactBuy(slot:int = 1):void {
 
 private function benoitSellTransact(slot:int, sellMod:int):void {
 	clearOutput();
-<<<<<<< HEAD
-	var sellMod:int = 3;
-	if(flags[kFLAGS.BENOIT_EGGS] > 0) sellMod = 2;
 	if(benoitLover()) outputText("Benoit" + benoitMF("","e") + " gives your object the briefest of goings-over with " + benoitMF("his","her") + " fingers before stowing it away and handing over your gem reward with a trusting smile.");
 	else outputText("Following a painstaking examination of what you've given " + benoitMF("him","her") + " with his hands and nose, Benoit grudgingly accepts it and carefully counts out your reward.");
-	var gems:int = 0;
-	if(slot == 1) {
-		gems = int(player.itemSlot1.itype.value/sellMod);
-		player.itemSlot1.removeOneItem();
-	}
-	if(slot == 2) {
-		gems = int(player.itemSlot2.itype.value/sellMod);
-		player.itemSlot2.removeOneItem();
-	}
-	if(slot == 3) {
-		gems = int(player.itemSlot3.itype.value/sellMod);
-		player.itemSlot3.removeOneItem();
-	}
-	if(slot == 4) {
-		gems = int(player.itemSlot4.itype.value/sellMod);
-		player.itemSlot4.removeOneItem();
-	}
-	if(slot == 5) {
-		gems = int(player.itemSlot5.itype.value/sellMod);
-		player.itemSlot5.removeOneItem();
-	}
-	//add gem price here.
-	player.gems += gems;
-=======
-	if (benoitLover()) 
-		outputText("Benoit" + benoitMF("", "e") + " gives your object the briefest of goings-over with " + benoitMF("his", "her") + " fingers before stowing it away and handing over your gem reward with a trusting smile.");
-	else outputText("Following a painstaking examination of what you've given him with his hands and nose, Benoit grudgingly accepts it and carefully counts out your reward.");
 	player.gems += int(player.itemSlots[slot].itype.value / sellMod);
 	player.itemSlots[slot].removeOneItem();
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	statScreenRefresh();
 	//(+1 Affection)
 	benoitAffection(1);
@@ -896,13 +862,8 @@ private function eggySuggest():void {
 private function takeBenoitsContraceptives():void {
 	clearOutput();
 	outputText("You gladly accept the herbal contraceptive and push it into your mouth, enjoying the pleasantly sharp, citrus flavour.");
-<<<<<<< HEAD
-	//  \"<i>I can sell you ze stuff too,</i>\" he says, twiddling " + benoitMF("his","her") + " claws.  \"<i>If you want.</i>\"
-	doNext(13);
-=======
 	//  \"<i>I can sell you ze stuff too,</i>\" he says, twiddling his claws.  \"<i>If you want.</i>\"
 	doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 //No: 
@@ -1119,13 +1080,8 @@ private function tryToConvertToBassyWomb():void {
 			doNext(createCallBackFunction(suggestSexAfterBasiWombed,false));
 			return;
 		}
-<<<<<<< HEAD
 		else outputText("  You grin and say you're not even sure it worked... but you'll be back at some point to try it out, and " + benoitMF("he","she") + "'d better be ready for when you do.  You gently pry yourself out of " + benoitMF("his","her") + " grip and leave as deliberately as you can, aware of the beguiling, invisible scent you are leaving for the stunned, silent basilisk to simmer in.");
-		doNext(13);
-=======
-		else outputText("  You grin and say you're not even sure it worked... but you'll be back at some point to try it out, and he'd better be ready for when you do.  You gently pry yourself out of his grip and leave as deliberately as you can, aware of the beguiling, invisible scent you are leaving for the stunned, silent basilisk to simmer in.");
 		doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	}
 }	
 

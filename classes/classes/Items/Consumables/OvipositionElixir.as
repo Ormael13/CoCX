@@ -10,7 +10,7 @@ package classes.Items.Consumables
 	public class OvipositionElixir extends Consumable {
 		
 		public function OvipositionElixir() {
-			super("OviElix", "Ovi Elixir", "a hexagonal crystal bottle tagged with an image of an egg", 30, "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying. \n\nType: Consumable");
+			super("OviElix", "Ovi Elixir", "a hexagonal crystal bottle tagged with an image of an egg", 30, "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying. \n\nType: Consumable \nBase value: 30");
 		}
 		
 		override public function canUse():Boolean {
@@ -18,13 +18,6 @@ package classes.Items.Consumables
 			outputText("You pop the cork and prepare to drink the stuff, but the smell nearly makes you gag.  You cork it hastily.\n\n");
 			return false;
 		}
-<<<<<<< HEAD
-
-		public function OvipositionElixir()
-		{
-			super("OviElix","Ovi Elixir", "a hexagonal crystal bottle tagged with an image of an egg", ovipositionElixer,30, "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying. \n\nType: Consumable \nBase value: 30");
-=======
-		
 		//Oviposition Elixer!
 		/* Notes on StatusAffects.Eggs
 		 v1 = egg type.
@@ -82,7 +75,6 @@ package classes.Items.Consumables
 				game.player.knockUpForce(game.player.pregnancyType, newIncubation);
 				trace("Pregger Count New total:" + game.player.pregnancyIncubation);
 			}
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		}
 	}
 }

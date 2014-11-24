@@ -198,19 +198,19 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function takeGodMead():void {
-			inventory.takeItem(consumables.GODMEAD);
+			inventory.takeItem(consumables.GODMEAD, roomDungeon);
 			flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED]++;
 		}
 		public function takeWhip():void {
-			inventory.takeItem(weapons.SUCWHIP);
+			inventory.takeItem(weapons.SUCWHIP, roomDungeon);
 			flags[kFLAGS.HEL_DUNGEON_TAKEN_WHIP] = 1;
 		}
 		public function takeStraps():void {
-			inventory.takeItem(armors.BONSTRP);
+			inventory.takeItem(armors.BONSTRP, roomDungeon);
 			flags[kFLAGS.HEL_DUNGEON_TAKEN_STRAPS] = 1;
 		}
 		public function takeDagger():void {
-			inventory.takeItem(weapons.L_DAGGR);
+			inventory.takeItem(weapons.L_DAGGR, roomDungeon);
 			flags[kFLAGS.HEL_DUNGEON_TAKEN_DAGGER] = 1;
 		}
 		//[Armor]:
@@ -392,7 +392,7 @@ package classes.Scenes.Dungeons
 			//(\"<i>You put a (previous armorName) in your X pouch)
 			outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the dungeon ahead.\n\n");
 			//(PC regains HP)
-			armors.GOOARMR.equip(player,true,false);
+			player.setArmor(armors.GOOARMR);
 			flags[kFLAGS.MET_VALERIA] = 1;
 			HPChange(1000,false);
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
@@ -1013,7 +1013,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("You pick up the Harpy Queen's staff.  It is a tall whitewood staff, nearly six feet in length, and covered in glowing eldritch runes, with a singular shimmering sphere of crystal at its head, which seems to have a swirling mist within.");
 			//(New Weapon: EldritchStaff)
-			inventory.takeItem(weapons.E_STAFF);
+			inventory.takeItem(weapons.E_STAFF, roomThroneRoom);
 			//Similar stats to the Wizard's Staff, but with a better Fatigue reduction and a bonus to Magic damage/effect.
 			flags[kFLAGS.TOOK_QUEEN_STAFF] = 1;
 		}

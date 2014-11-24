@@ -23,17 +23,7 @@ package classes.Items.Consumables
 			}
 			return true;
 		}
-<<<<<<< HEAD
 
-		private function applyLustStick(player:Player):void{
-			game.mutations.applyLustStick(player);
-		}
-
-		public function LustStick()
-		{
-			super("LustStk","LustStk","a tube of golden lipstick",applyLustStick,ConsumableLib.DEFAULT_VALUE,"This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin. \n\nType: Consumable");
-=======
-		
 		override public function useItem():void {
 			if (game.player.findStatusAffect(StatusAffects.LustStickApplied) >= 0) {
 				game.player.addStatusValue(StatusAffects.LustStickApplied, 1, Utils.rand(12) + 12);
@@ -48,7 +38,6 @@ package classes.Items.Consumables
 				outputText("  You finish and pucker your lips, feeling fairly sexy with your new makeup on.\n\n");
 			}
 			game.dynStats("lus", 1);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		}
 	}
 }

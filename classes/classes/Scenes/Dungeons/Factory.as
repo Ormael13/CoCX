@@ -70,11 +70,11 @@ package classes.Scenes.Dungeons
 		
 		private function takeGroPlus():void {
 			flags[kFLAGS.FACTORY_TAKEN_GROPLUS]++
-			inventory.takeItem(consumables.GROPLUS);			
+			inventory.takeItem(consumables.GROPLUS, roomPremiumStorage);
 		}
 		private function takeLactaid():void {
 			flags[kFLAGS.FACTORY_TAKEN_LACTAID]++
-			inventory.takeItem(consumables.LACTAID);
+			inventory.takeItem(consumables.LACTAID, roomPremiumStorage);
 		}
 		
 		private function drinkCoffee():void {

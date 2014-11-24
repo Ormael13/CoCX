@@ -13,7 +13,7 @@ package classes.Items.Consumables
 	public class PhoukaWhiskey extends Consumable {
 		
 		public function PhoukaWhiskey() {
-			super("P_Whsky", "Ph. Whiskey", "a small bottle of whiskey", 20, "A small, corked glass bottle with a dark amber liquid inside.  The whiskey smells strongly of peat. \n\nType: Consumable");
+			super("P_Whsky", "Ph. Whiskey", "a small bottle of whiskey", 20, "A small, corked glass bottle with a dark amber liquid inside.  The whiskey smells strongly of peat. \n\nType: Food & Beverages");
 		}
 		
         override public function canUse():Boolean {
@@ -135,14 +135,5 @@ package classes.Items.Consumables
 				outputText("\n<b>The fuzzy, happy feeling ebbs away.  The weight of the world’s problems seems to settle on you once more.  It was nice while it lasted and you wouldn’t mind having another whiskey.</b>\n");
 			game.statScreenRefresh();
 		}
-<<<<<<< HEAD
-                
-        public function PhoukaWhiskey()
-        {
-			super("P_Whsky", "Ph. Whiskey", "a small bottle of whiskey", phoukaWhiskeyEffect, 20, "A small, corked glass bottle with a dark amber liquid inside.  The whiskey smells strongly of peat. \n\nType: Food & Beverages");
-        }
-
-=======
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
     }
 }

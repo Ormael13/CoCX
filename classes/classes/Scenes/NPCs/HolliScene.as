@@ -136,15 +136,6 @@ public function treeMenu(output:Boolean = true):void {
 		}
 		else {
 			menu();
-<<<<<<< HEAD
-			if(player.hasCock() && player.lust >= 33) addButton(0,"Fuck Holli",holliGetsDickDommed);
-			if(player.tentacleCocks() >= 10 && player.lust >= 33) addButton(1,"TentacleBone",fullOnTentacleTasticGangBangForHolli);
-			if(player.hasVagina() && player.lust >= 33) addButton(2,"Ride Holli",vaginalDomHollisTentacruels);
-			addButton(3,"Drink Sap",haveAMapleSyrupSnack);
-			if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4,"Eat A Fruit",eatHolliFruit);
-			addButton(5,"Guarding",askBrokenHolliToGuard);
-			addButton(14,"Leave",eventParser,1000);
-=======
 			if(player.hasCock() && player.lust >= 33) addButton(0, "Fuck Holli", holliGetsDickDommed);
 			if(player.tentacleCocks() >= 10 && player.lust >= 33) addButton(1, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
 			if(player.hasVagina() && player.lust >= 33) addButton(2, "Ride Holli", vaginalDomHollisTentacruels);
@@ -152,7 +143,6 @@ public function treeMenu(output:Boolean = true):void {
 			if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4, "Eat A Fruit", eatHolliFruit);
 			addButton(5, "Guarding", askBrokenHolliToGuard);
 			addButton(9, "Leave", inventory.inventoryMenu);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		}
 		
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Help", helpWithFarm);
@@ -715,7 +705,7 @@ private function haveAMapleSyrupSnack():void {
 	outputText("\n\nLooking up at her concerned visage, you wink and bite down on the tender nipple, just hard enough to make her squeak in distress.  The demon's body twists in your grip, but with your arm around the small of her back and her body part of the tree, she has nowhere to go.  You easily restrain her, allowing yourself to fully sample her treats.  Your throat bobs with each gulp of the free-flowing nectar and tingles as your tongue did before.  Soon, your whole body feels alight with energy, just as you finish the first breast.");
 	outputText("\n\nThe nipple pops out of your lips with a weak spray of 'milk', and its owner shudders slightly, her flower blooming against your [legs], weakly grasping.  You let your restraining arm go a bit lower to squeeze Holli's cute little butt.  Her smooth skin feels perfect in your hand, though you can feel that a little lower, her flesh joins with the wood of the tree, becoming quite rough.  How odd.");
 	outputText("\n\nYou quickly tire of fondling the proud creature's body and return to drinking her treasure straight from the tap, suckling hungrily to expedite the process.  Holli's pants can be heard above you, and the slick grinding of her petals over your [hips] adds to the eroticism in the air.  Your own blood is pumping harder and faster, flushing your " + player.skin() + ".  Drinking deeper, you realize you feel vibrantly alive, completely and utterly suffused with energy.  You swallow the last of Holli's syrup and shake slightly, breaking away from the intimate embrace you shared.");
-	
+	player.refillHunger(10);
 	outputText("\n\nHolli is trembling and oozing lubricants from below, her pale-green skin flushed almost purple.  Eyelids hanging heavy over her dilated pupils, she gasps and pants... it appears that she was able to orgasm from that, but still wants more.");
 	outputText("\n\nPerhaps later.  You burp and walk off, having gotten just what you wanted.");
 	//stat changes n' shit

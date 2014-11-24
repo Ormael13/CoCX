@@ -145,12 +145,7 @@ private function rathazulWorkOffer():Boolean {
 	spriteSelect(49);
 	var totalOffers:int = 0;
 	var spoken:Boolean = false;
-<<<<<<< HEAD
-	var gelArmor:Function = null;
-	var beeArmor:Function = null;
-=======
 	var showArmorMenu:Boolean = false;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	var purify:Function = null;
 	var debimbo:int = 0;
 	var reductos:Function = null;
@@ -186,19 +181,15 @@ private function rathazulWorkOffer():Boolean {
 	if(player.hasItem(useables.B_CHITN)) {
 		outputText("The elderly rat looks at you intently and offers, \"<i>I see you've gathered a piece of chitin from the giant bees of the forests.  If you bring me five pieces I could probably craft it into some tough armor.</i>\"\n\n", false);
 		spoken = true;
-<<<<<<< HEAD
-		if(player.hasItem(useables.B_CHITN,5)) {
-			beeArmor = craftCarapace;
-=======
 		if (player.hasItem(useables.B_CHITN, 5)) {
 			showArmorMenu = true;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			totalOffers++;
 		}
 		else {
 			outputText("(You need five pieces of chitin for Rathazul to make you the chitinous armor.)\n\n", false);
 		}
 	}
+	if (player.hasKeyItem("Tentacled Bark Plates") >= 0) showArmorMenu = true;
 	var pCounter:int = 0;
 	//Item purification offer
 	if(player.hasItem(consumables.INCUBID)) {
@@ -255,26 +246,15 @@ private function rathazulWorkOffer():Boolean {
 		reductos = buyReducto;
 	}
 	//SPOIDAH
-<<<<<<< HEAD
-	var silk:Number = 0;
-	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
-		silk = 5;
-=======
-	if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
+	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		showArmorMenu = true;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		spoken = true;
 		totalOffers++;
 		outputText("\"<i>Oooh, is that some webbing from a giant spider or spider-morph?  Most excellent!  With a little bit of alchemical treatment, it is possible I could loosen the fibers enough to weave them into something truly magnificent - armor, or even a marvelous robe,</i>\" offers Rathazul.\n\n", false);
 	}
 	//Vines
-<<<<<<< HEAD
 	if(player.hasKeyItem("Marae's Lethicite") >= 0 && flags[kFLAGS.MARAE_LETHICITE] > 0 && player.findStatusAffect(StatusAffects.DefenseCanopy) < 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
-		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n", false);
-=======
-	if(player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3 && player.findStatusAffect(StatusAffects.DefenseCanopy) < 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n");
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		totalOffers++;
 		spoken = true;
 		lethiciteDefense = growLethiciteDefense;
@@ -308,44 +288,27 @@ private function rathazulWorkOffer():Boolean {
 		doNext(camp.returnToCampUseOneHour);
 		return true;
 	}
-<<<<<<< HEAD
-	if (totalOffers > 0) {
-		kGAMECLASS.tooltipLoc = "Rathazul";
-		var armor:Function = null;
-		if(beeArmor != null || gelArmor != null || silk > 0 || player.hasKeyItem("Tentacled Bark Plates") >= 0) armor = RathazulArmorMenu;
-=======
+	kGAMECLASS.tooltipLoc = "Rathazul"
 	if(totalOffers > 0) {
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		outputText("Will you take him up on an offer or leave?", false);
 		//In camp has no time passage if left.
 		menu();
 		if (showArmorMenu) addButton(0, "Armor", rathazulArmorMenu);
 		if (debimbo > 0) addButton(1, "Debimbo", makeADeBimboDraft);
 		addButton(2,"Buy Dye",dyes);
-<<<<<<< HEAD
-		if (lethiciteDefense > 0) addButton(3, "Lethicite", eventParser, lethiciteDefense);
-		addButton(4,"Purify",purify);
+		if (lethiciteDefense != null) addButton(3, "Lethicite", lethiciteDefense);
+		addButton(4, "Purify", purify);
 		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
 			addButton(5, "Pure Potion", rathazulMakesPurifyPotion);
 		}
 		if (player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2)) {
 			addButton(6, "Pro Lactaid", rathazulMakesMilkPotion);
 		}
-		if(reductos > 0) addButton(8,"Reducto",eventParser,reductos);
-=======
-		if (lethiciteDefense != null) addButton(3, "Lethicite", lethiciteDefense);
-		addButton(4,"Purify",purify);
 		if (reductos != null) addButton(8, "Reducto", reductos);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
 			addButton(14,"Leave",eventParser,74);
 		else
-<<<<<<< HEAD
-			addButton(14,"Leave",eventParser,13);
-		gameState = 6;
-=======
-			addButton(9, "Leave", camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		return true;
 	}
 	return false;
@@ -369,7 +332,10 @@ private function purifySomething():void {
 	if (player.hasItem(consumables.LABOVA_)) {
 		addButton(3, "LaBova", rathazulPurifyLaBova);
 	}
-	addButton(4, "Back", rathazulWorkOffer);
+	if(player.hasItem(consumables.MINOCUM)) {
+		addButton(4,"MinoCum",purifyMinoCum);
+	}
+	addButton(14,"Back",rathazulWorkOffer);
 }
 
 
@@ -380,12 +346,12 @@ private function rathazulPurifyIncubiDraft():void {
 		doNext(returnToRathazulMenu);
 		return;
 	}
-<<<<<<< HEAD
-	if(player.hasItem(consumables.MINOCUM)) {
-		//laBovaPurify = 2145;
-		addButton(4,"MinoCum",purifyMinoCum);
-	}
-	addButton(14,"Back",rathazulWorkOffer);
+	if (!debug)
+		player.destroyItems(consumables.INCUBID, 1);
+	inventory.takeItem(consumables.P_DRAFT, returnToRathazulMenu);
+	player.gems -= 20;
+	statScreenRefresh();
+	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
 }
 
 //For Minerva purification.
@@ -416,15 +382,7 @@ private function rathazulMakesPurifyPotion():void {
 	outputText("\n\nYou concede he has a point and take the potion; all you need to do now is give it to Minerva and hope for the best.");
 	player.createKeyItem("Rathazul's Purity Potion", 0, 0, 0, 0);
 	menu();
-	addButton(0,"Next",campRathazul);
-=======
-	if (!debug)
-		player.destroyItems(consumables.INCUBID, 1);
-	inventory.takeItem(consumables.P_DRAFT, returnToRathazulMenu);
-	player.gems -= 20;
-	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+	addButton(0, "Next", campRathazul);
 }
 
 private function rathazulMakesMilkPotion():void {
@@ -442,7 +400,7 @@ private function rathazulMakesMilkPotion():void {
 	outputText("You hand over the ingredients and 250 gems.");
 	outputText("\n\n\"<i>I'll see what I can do,</i>\" he says as he takes the ingredients and begin brewing something. ");
 	outputText("\n\nA few minutes later, he comes back with the potion.  \"<i>It's ready. If you have some issues with lactation or you want to produce milk forever, drink this. Keep in mind that it might be irreversible,</i>\" he says. He hands you over the potion and goes back to working.  ");
-	inventory.takeItem(consumables.MILKPTN);
+	inventory.takeItem(consumables.MILKPTN, returnToRathazulMenu);
 	//menu();
 	//addButton(0,"Next",campRathazul);
 }
@@ -542,27 +500,20 @@ private function purifyMinoCum():void{
 	}
 	outputText("", true);
 	if (!debug) player.destroyItems(consumables.MINOCUM, 1);
-	inventory.takeItem(consumables.P_M_CUM);
+	inventory.takeItem(consumables.P_M_CUM, returnToRathazulMenu);
 	player.gems -= 20;
 	statScreenRefresh();
 	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
 }
 
-<<<<<<< HEAD
-//ARMOR MENU
-public function RathazulArmorMenu():void {
-	menu();
+public function rathazulArmorMenu():void {
 	spriteSelect(49);
-	//var gelArmor:Function = null;
-	//var beeArmor:Function = null;
-	//var silk:Function = null;
-
-	outputText("Which armor project would you like to pursue with Rathazul?", true);
-	//Item crafting offer
+	clearOutput();
+	outputText("Which armor project would you like to pursue with Rathazul?");
+	menu();
 	if(player.hasItem(useables.GREENGL, 5)) {
 		addButton(0, "GelArmor", craftOozeArmor);
 	}
-	//Item crafting offer
 	if(player.hasItem(useables.B_CHITN, 5)) {
 		addButton(1, "BeeArmor", craftCarapace);
 	}
@@ -572,20 +523,6 @@ public function RathazulArmorMenu():void {
 	if (player.hasKeyItem("Tentacled Bark Plates") >= 0) {
 		addButton(3, "T.Bark Armor", craftMaraeArmor);
 	}
-	addButton(14, "Back", eventParser, 2070);
-=======
-public function rathazulArmorMenu():void {
-	spriteSelect(49);
-	clearOutput();
-	var beeArmor:Function = (player.hasItem(useables.B_CHITN, 5) ? craftCarapace : null);
-	var gelArmor:Function = (player.hasItem(useables.GREENGL, 5) ? craftOozeArmor : null);
-	var silk:Function = null;
-	outputText("Which armor project would you like to pursue with Rathazul?");
-	if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
-		silk = craftSilkArmor;
-	}
-	simpleChoices("BeeArmor", beeArmor, "GelArmor", gelArmor, "SpiderSilk", silk, "", null, "Back", returnToRathazulMenu);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 private function craftSilkArmor():void {
@@ -634,7 +571,6 @@ private function declineSilkArmorCommish():void {
 
 public function chooseArmorOrRobes(robeType:int):void {
 	spriteSelect(49);
-<<<<<<< HEAD
 	outputText("Rathazul grunts in response and goes back to work.  ", true);
 	if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
 	{
@@ -645,14 +581,10 @@ public function chooseArmorOrRobes(robeType:int):void {
 		outputText("You head back to your camp", false);
 	}
 	outputText(", wondering if the old rodent will actually deliver the wondrous item that he's promised you.", false);
-	doNext(13);
-=======
-	outputText("Rathazul grunts in response and goes back to work.  You turn back to the center of your camp, wondering if the old rodent will actually deliver the wondrous item that he's promised you.", true);
-	doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = robeType;
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 24;
 	trace("274: " + flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN]);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function collectRathazulArmor():void {
 	spriteSelect(49);
@@ -702,7 +634,7 @@ private function craftCarapace():void {
 	if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n", false);
 	player.destroyItems(useables.B_CHITN, 5);
 	player.addStatusValue(StatusAffects.MetRathazul,2,1);
-	inventory.takeItem(armors.BEEARMR);
+	inventory.takeItem(armors.BEEARMR, returnToRathazulMenu);
 }
 
 private function craftMaraeArmor():void {
@@ -715,7 +647,7 @@ private function craftMaraeArmor():void {
 	if(player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Rathazul mumbles and looks away, shaking his head.\n\n", false);
 	if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n", false);
 	player.removeKeyItem("Tentacled Bark Plates");
-	inventory.takeItem(armors.TBARMOR);
+	inventory.takeItem(armors.TBARMOR, returnToRathazulMenu);
 }
 
 private function buyDyes():void {
@@ -793,22 +725,5 @@ private function growLethiciteDefenseGuessNot():void {
 	doNext(returnToRathazulMenu);
 }
 
-<<<<<<< HEAD
-
-=======
-public function craftCarapace():void {
-	spriteSelect(49);
-	outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ", true);
-	outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee high boots.  You notice there are no pants.  As you turn to ask him where the pants are, you see him scratching his head and hastily rustling in drawers.  He mutters under his breath, \"<i>I'm sorry, I'm sorry, I got so focused on working on the pauldrons that I forgot to make any leg coverings!  Here, this should look good with it, and it won't restrict your movements.</i>\"  He hands you a silken loincloth", false);
-	if(player.gender >= 2) outputText(" with stockings and garters", false);
-	outputText(".  He still manages to look somewhat pleased with himself in spite of the blunder, even bragging a little bit, \"<i>Let me show you the different lengths of string I used.</i>\"\n\n", false);
-	if(player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Rathazul mumbles and looks away, shaking his head.\n\n", false);
-	if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n", false);
-	player.destroyItems(useables.B_CHITN, 5);
-	player.addStatusValue(StatusAffects.MetRathazul,2,1);
-	inventory.takeItem(armors.BEEARMR, returnToRathazulMenu);
-	doNext(camp.returnToCampUseOneHour);
-}
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 }

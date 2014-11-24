@@ -381,11 +381,7 @@
 				else outputText("  Slick fluids soak your thighs as your body reacts to this new stimulus.", false);
 			}
 			//(Minotaur fantasy)
-<<<<<<< HEAD
-			if (gameState == 0 && rand(10) == 1 && !purified) {
-=======
-			if (!kGAMECLASS.inCombat && rand(10) == 1) {
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+			if (!kGAMECLASS.inCombat && rand(10) == 1 && !purified) {
 				outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.", false);
 				dynStats("lib", 1, "lus", rand(5) + player.cor / 20 + flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] / 5);
 			}
@@ -3250,28 +3246,6 @@
 /* Moved to new Reducto item
 		public function reducto(player:Player):void
 		{
-<<<<<<< HEAD
-			menu();
-			if (player.cockTotal() > 0 && player.biggestCockArea() > 6) addButton(0, "Cock", eventParser, 1057)
-			if (player.balls > 0 && player.ballSize > 1) addButton(1, "Balls", eventParser, 1054);
-			if (player.breastRows.length > 0 && player.biggestTitSize() > 0) addButton(2, "Breasts", eventParser, 1055);
-			if (player.nippleLength > .25) addButton(3, "Nipples", eventParser, 1062);
-			if (player.vaginas.length > 0 && player.clitLength > .25) addButton(4, "Clit", eventParser, 1056); 
-			if (player.buttRating > 1) addButton(5, "Butt", eventParser, 1071);
-			if (player.hipRating > 2) addButton(6, "Hips", eventParser, 1122);
-			if (player.hornType != HORNS_NONE && player.horns > 2) addButton(7, "Horns", shrinkHorns, player);
-			kGAMECLASS.itemSubMenu = true;
-			outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?", true);
-			addButton(9, "Nevermind", eventParser, 1053);
-		}
-		public function shrinkHorns(player:Player):void {
-			outputText("You doubt if the reducto is going to work but you apply the foul-smelling paste all over your horns anyways.\n\n", true)
-			outputText("Incredibly, it works and you can feel your horns receding by an inch.")
-			player.horns -= 1;
-			inventory.itemGoNext();
-		}
-
-=======
 			var rdtBalls:Function = (player.balls > 0 && player.ballSize > 1 ? reductoBalls : null);
 			var rdtBreasts:Function = (player.breastRows.length > 0 && player.biggestTitSize() > 0 ? reductoBreasts : null);
 			var rdtButt:Function = (player.buttRating > 1 ? reductoButt : null);
@@ -3424,7 +3398,6 @@
 		}
 */
 		
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		public function lactaid(player:Player):void
 		{
 			player.slimeFeed();
@@ -4718,14 +4691,9 @@
 			}
 			if (flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] < 7) flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
 		}
-<<<<<<< HEAD
+		*/
 
 		public function superHummus(player:Player):void
-=======
-*/
-		
-		public function Hummus(player:Player):void
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		{
 			outputText("", true);
 			if (debug) {
@@ -8362,11 +8330,7 @@
 		public function fishFillet(player:Player):void
 		{
 			clearOutput();
-<<<<<<< HEAD
-			if (!inCombat()) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.  ");
-=======
 			if (!getGame().inCombat) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 			//(In combat?)
 			else outputText("You produce the fish fillet from your bag.  Rather than unwrap it and savor the taste as you normally would, you take a large bite out of it, leaf wrapping and all.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
 

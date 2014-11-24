@@ -66,7 +66,7 @@ package classes.Scenes.Areas.Bog
 			}
 			else {
 				outputText("You tell the lizan you aren't up for any games.  He shrugs, \"<i>Maybe next time then,</i>\" he says as he rummages around in his pack.  When he finds what he's looking for he takes it out and tosses it towards you.  You catch the small vial and read that it is labeled Reptilium. When you look up the scaly guy is nowhere to be seen.  You head back to camp, smiling at the weird but friendly encounter.");
-				inventory.takeItem(consumables.REPTLUM);
+				inventory.takeItem(consumables.REPTLUM, camp.returnToCampUseOneHour);
 			}
 		}
 		
@@ -171,7 +171,7 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(13);
-			if (inCombat()) cleanupAfterCombat();
+			if (getGame().inCombat) cleanupAfterCombat();
 		}
 		
 		public function consensualGetFucked():void {
@@ -224,7 +224,7 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(13);
-			if (inCombat()) cleanupAfterCombat();
+			if (getGame().inCombat) cleanupAfterCombat();
 		}
 		
 		public function consensualGetButtFucked():void {
@@ -274,7 +274,7 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(13);
-			if (inCombat()) cleanupAfterCombat();
+			if (getGame().inCombat) cleanupAfterCombat();
 		}
 		
 		public function consensualDoublePenetration():void {
@@ -334,7 +334,7 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(13);
-			if (inCombat()) cleanupAfterCombat();
+			if (getGame().inCombat) cleanupAfterCombat();
 		}
 		
 		public function consensualWatersports():void { //Yay watersports!
@@ -359,7 +359,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\n\"<i>I hope you come back later,</i>\" the lizan says with a smile.  You give him a kiss before you return to your camp.");
 			dynStats("lus", 10);
 			doNext(13);
-			if (inCombat()) cleanupAfterCombat();
+			if (getGame().inCombat) cleanupAfterCombat();
 		}
 		
 		public function rapeLizanInTheAss():void {

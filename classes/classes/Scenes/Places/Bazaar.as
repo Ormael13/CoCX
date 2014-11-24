@@ -51,11 +51,7 @@ private function approachBazaarGuard():void {
 	if(player.cor < 33 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.", false);
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.", false);
 	outputText("</i>\"", false);
-<<<<<<< HEAD
-	if(player.cor < 33 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) simpleChoices("FIGHT!",initiateFightGuard,"",0,"",0,"",0,"Leave",13);
-	else simpleChoices("Enter",2855,"",0,"",0,"",0,"Leave",13);
-=======
-	if(player.cor < 33) simpleChoices("",0,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+	if(player.cor < 33 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) simpleChoices("FIGHT!",initiateFightGuard,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 	else simpleChoices("Enter",enterTheBazaar,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 }
 
@@ -68,7 +64,6 @@ public function enterTheBazaar():void {
 		}
 	}
 	enterTheBazaarAndMenu();
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 //Pure? You'll have to fight!
@@ -145,11 +140,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	addButton(6,roxanneT,roxanne2);
 	addButton(7,"S. Squeeze",theSlipperySqueeze);
 	addButton(8,"Tent",tent);
-<<<<<<< HEAD
-	addButton(14,"Leave",eventParser,13);
-=======
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }	
 
 //Semen Bukkake and Massage Parlor
@@ -1030,7 +1021,7 @@ private function assaultYoRapistYo():void {
 		//open options [Leave][Abuse ass(70 or more corruption)]
 		menu();
 		addButton(4,"Leave", assaultWinAndLeave);
-		if(player.cor >= 66) addButton(0,"Abuse Ass",abuseHisAss);
+		if(player.cor >= 66 || flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) addButton(0,"Abuse Ass",abuseHisAss);
 	}
 }
 

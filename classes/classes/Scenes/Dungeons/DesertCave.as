@@ -73,7 +73,7 @@ package classes.Scenes.Dungeons
 		public function exitDungeon():void {
 			kGAMECLASS.inDungeon = false;
 			outputText("You leave the door behind and take off through the desert back towards camp.", true);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		/*Sand Witch Mob
@@ -1045,7 +1045,7 @@ package classes.Scenes.Dungeons
 			//Female Victory Sex
 			if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex);
 			
-			if(inCombat()) {
+			if(getGame().inCombat) {
 				if(monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
 				else addButton(14,"Leave",cleanupAfterCombat);
 			}
@@ -1056,7 +1056,7 @@ package classes.Scenes.Dungeons
 		public function declineSandWitch():void {
 			clearOutput();
 			outputText("Dusting yourself off, you lower your [weapon] and leave the cum witch to recover from the humiliation of losing to you.  The haunted, hungry look in her eyes leaves little doubt that she'll challenge you again or that she still wants to fuck you.  For now, she slips down into her own puddled cum, idly touching herself.");
-			if(inCombat()) cleanupAfterCombat();
+			if(getGame().inCombat) cleanupAfterCombat();
 			else doNext(1);
 		}
 
@@ -1149,12 +1149,12 @@ package classes.Scenes.Dungeons
 				player.orgasm();
 			}
 			if(kGAMECLASS.inDungeon) {
-				if(inCombat()) cleanupAfterCombat();
+				if(getGame().inCombat) cleanupAfterCombat();
 				else doNext(1);
 			}
 			else { 
-				if(inCombat()) cleanupAfterCombat();
-				else doNext(13);
+				if(getGame().inCombat) cleanupAfterCombat();
+				else doNext(camp.returnToCampUseOneHour);
 			}
 		}
 		//*Male "Too Big" Victory Sex
@@ -1192,12 +1192,12 @@ package classes.Scenes.Dungeons
 			outputText("\n\nExhausted at last, you pat your " + cockDescript(x) + " affectionately.  You'd wipe it off on the witch's hair, if it wasn't messier than the " + player.skin() + " you plan to clean.  She begins to lick her fingers and clean the stuff off her face.  You just laugh, and get dressed.  There's still much to do.");
 			player.orgasm();
 			if(kGAMECLASS.inDungeon) {
-				if(inCombat()) cleanupAfterCombat();
+				if(getGame().inCombat) cleanupAfterCombat();
 				else doNext(1);
 			}
 			else { 
-				if(inCombat()) cleanupAfterCombat();
-				else doNext(13);
+				if(getGame().inCombat) cleanupAfterCombat();
+				else doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -1231,12 +1231,12 @@ package classes.Scenes.Dungeons
 			player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 			player.orgasm();
 			if(kGAMECLASS.inDungeon) {
-				if(inCombat()) cleanupAfterCombat();
+				if(getGame().inCombat) cleanupAfterCombat();
 				else doNext(1);
 			}
 			else { 
-				if(inCombat()) cleanupAfterCombat();
-				else doNext(13);
+				if(getGame().inCombat) cleanupAfterCombat();
+				else doNext(camp.returnToCampUseOneHour);
 			}
 		}
 			
@@ -1271,12 +1271,12 @@ package classes.Scenes.Dungeons
 			
 			player.orgasm();
 			if(kGAMECLASS.inDungeon) {
-				if(inCombat()) cleanupAfterCombat();
+				if(getGame().inCombat) cleanupAfterCombat();
 				else doNext(1);
 			}
 			else { 
-				if(inCombat()) cleanupAfterCombat();
-				else doNext(13);
+				if(getGame().inCombat) cleanupAfterCombat();
+				else doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -1459,7 +1459,7 @@ package classes.Scenes.Dungeons
 			menu();
 			if(skipped) {
 				kGAMECLASS.inDungeon = false;
-				addButton(0,"Next",eventParser,13);
+				addButton(0,"Next",camp.returnToCampUseOneHour);
 			}
 			else {
 				menu();
@@ -1811,7 +1811,7 @@ package classes.Scenes.Dungeons
 			menu();
 			if(submit) {
 				kGAMECLASS.inDungeon = false;
-				addButton(0,"Next",eventParser,13);
+				addButton(0,"Next",camp.returnToCampUseOneHour);
 			}
 			else {
 				menu();
@@ -2026,7 +2026,7 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			kGAMECLASS.inDungeon = false;
 			menu();
-			addButton(0,"Next",eventParser,13);
+			addButton(0,"Next",camp.returnToCampUseOneHour);
 		}
 
 		//Sand Mother
@@ -2042,7 +2042,6 @@ package classes.Scenes.Dungeons
 		public function sandWitchMotherFriendlyMenu():void {
 			if(monster.short != "Sand Mother") {
 				startCombat(new SandMother(),true);
-				gameState = 0;
 				monster.HP = 0;
 			}
 			menu();
@@ -2183,7 +2182,6 @@ package classes.Scenes.Dungeons
 		public function sandMotherPOMenu():void {
 			if(monster.short != "Sand Mother") {
 				startCombat(new SandMother(),true);
-				gameState = 0;
 				monster.HP = 0;
 			}
 			menu();
@@ -2327,7 +2325,6 @@ package classes.Scenes.Dungeons
 			statScreenRefresh();
 			//(Set friendly)
 			flags[kFLAGS.SAND_WITCHES_FRIENDLY] = 1;
-			gameState = 0;
 			sandWitchMotherFriendlyMenu();
 		}
 		//*Tentacle Gangbang
@@ -2386,17 +2383,17 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.TIMES_TENTACLED_SAND_MOTHER]++;
 			player.orgasm();
 			dynStats("cor", 1);
-			if(!inCombat()) doNext(1);
+			if(!getGame().inCombat) doNext(1);
 			else cleanupAfterCombat();
 		}
 		//*Fuck Her Cunt
 		//>Sets to resisting with options for repeat rapes.
 		public function fuckTheSandMothersCunt():void {
 			clearOutput();
-			if(!inCombat()) {
+			if(!getGame().inCombat) {
 				startCombat(new SandMother(),true);
-				gameState = 0;
 				monster.HP = 0;
+				getGame().inCombat = false;
 			}
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
@@ -2464,7 +2461,7 @@ package classes.Scenes.Dungeons
 			else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 			player.orgasm();
 			dynStats("cor", 1);
-			if(!inCombat()) doNext(1);
+			if(!getGame().inCombat) doNext(1);
 			else cleanupAfterCombat();
 		}
 
@@ -2500,7 +2497,7 @@ package classes.Scenes.Dungeons
 			else if(player.wetness() >= 2) outputText("drools out in a steady trickles");
 			else outputText("drips out during the cunt-shattering convulsions");
 			outputText(".  Bulging obscenely, your cheeks barely contain the flood of milk, and you swallow it without thinking, acting entirely on instinct.");
-			
+			player.refillHunger(40);
 			outputText("\n\nTwo strong arms encircle the back of your head and press your " + player.face() + " deeper into the gushing chest-flesh until you're left but no choice but to suckle and swallow while the fluttering cooches finish bathing each other in liquified orgasm.  You hum in super-sensitive bliss - well fed and sated, trembling every few seconds whenever your [clit] catches on a fold or the other two rigid buttons.  The Sand Mother's sculpted body slowly goes limper and limper under your attentions until she's on her back and your grinding draws a few, last trembling sparks of pleasure from her body.");
 			
 			outputText("\n\nA few minutes later, you separate from her drained teat and wipe the white from your chin.  That hit the spot.");
@@ -2514,7 +2511,7 @@ package classes.Scenes.Dungeons
 			else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 			player.orgasm();
 			dynStats("cor", 1);
-			if(!inCombat()) doNext(1);
+			if(!getGame().inCombat) doNext(1);
 			else cleanupAfterCombat();
 		}
 			
@@ -2729,8 +2726,8 @@ package classes.Scenes.Dungeons
 		//>Fuck her friendly style.
 		public function friendlySandMotherFuck():void {
 			clearOutput();
-			startCombat(new SandMother(),true);
-			gameState = 0;
+			startCombat(new SandMother(), true);
+			getGame().inCombat = false;
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			//First Time:
@@ -3148,7 +3145,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYou decline the offer and repeat your request for Lactaid, which sours the woman's expression slightly.  The corners of her mouth are still upturned in a half smirk when she procures a bottle and hands it to you.  After, she smooths her hand across her robed lap, and for a split second, you wonder if she's trying to beckon you to take a seat there...  You shake your head as you examine the bottle in your hand.  You got what you came for.\n\n");
 			flags[kFLAGS.SAND_WITCH_LOOT_TAKEN]++;
 			//Receive one lactaid
-			inventory.takeItem(consumables.LACTAID);
+			inventory.takeItem(consumables.LACTAID, roomSandMotherThrone);
 		}
 		//*Labova
 		//>Get Labova
@@ -3166,7 +3163,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\n\"<i>That is good.  The ways of beasts offer many boons.  This one is quite useful for enhancing lactation, for instance.  However, there is great risk in reveling in such transformation.  Be sure that you don't lose yourself to it,</i>\" the statuesque sorceress warns.");
 			outputText("\n\nYou nod, and she gives you the La Bova.\n\n");
 			flags[kFLAGS.SAND_WITCH_LOOT_TAKEN]++;
-			inventory.takeItem(consumables.LABOVA_);
+			inventory.takeItem(consumables.LABOVA_, roomSandMotherThrone);
 		}
 			
 		//TURN EM OFF!
@@ -3199,10 +3196,10 @@ package classes.Scenes.Dungeons
 			outputText("Smirking, you circle around the Sand Mother's throne towards the secure chests behind her.  She stiffens when you come close but doesn't make a move.  The poor little witch is afraid of you, and with good reason.  You gather the item you came for, condescending patting the sorceress's platinum tresses on your way back in front of her throne.  She glares at you.\n\n");
 			//New lines and take appropriate item.
 			if(lactaid) {
-				inventory.takeItem(consumables.LACTAID);
+				inventory.takeItem(consumables.LACTAID, roomSandMotherThrone);
 			}
 			else {
-				inventory.takeItem(consumables.LABOVA_);
+				inventory.takeItem(consumables.LABOVA_, roomSandMotherThrone);
 			}
 
 		}

@@ -12,7 +12,6 @@ package classes.Items
 	public final class ConsumableLib extends BaseContent
 	{
 		public static const DEFAULT_VALUE:Number = 6;
-<<<<<<< HEAD
 		
 		//DEMONIC POTIONS
 		//Tainted
@@ -93,7 +92,7 @@ package classes.Items
 		public const CERUL_P:SimpleConsumable = mk("Cerul P","Cerulean P.", "a cerulean-tinted potion", m.ceruleanPotion, "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly it will make you irresistible, though to what or who you cannot say. \n\nType: Consumable");
 		public const COAL___:SimpleConsumable = mk("Coal   ","Coal", "two pieces of coal", m.coal, "These two pieces of coal may look ordinary but it makes you wonder what happens when you rub them. \n\nType: Consumable");
 		public const DEBIMBO:DeBimbo = new DeBimbo();
-		public const EXTSERM:SimpleConsumable = mk("ExtSerm","ExtSerm", "a bottle of hair extension serum", m.extensionSerum, "This is a bottle of foamy pink liquid, purported by the label to increase the speed at which the user's hair grows. \n\nType: Consumable");
+		public const EXTSERM:HairExtensionSerum = new HairExtensionSerum();
 		public const F_DRAFT:SimpleConsumable = mk("F.Draft","FuckDraft", "a vial of roiling red fluid labeled \"Fuck Draft\"", curry(m.lustDraft, true), "This vial of red fluid bubbles constantly inside the glass, as if eager to escape.  It smells very strongly, though its odor is difficult to identify.  The word \"Fuck\" is inscribed on the side of the vial. \n\nType: Consumable");
 		public const HRBCNT:SimpleConsumable  = mk("HrblCnt", "HrblCnt", "a bundle of verdant green leaves", m.herbalContraceptive, "A small bundle of verdant green leaves. \n\nType: Consumable");
 		public const ICICLE_:SimpleConsumable = mk("Icicle ","Icicle", "an ice shard", m.iceShard,"An icicle that seems to be incapable of melting.  It numbs your hands as you hold it.  \n\nType: Consumable");
@@ -103,7 +102,7 @@ package classes.Items
 		public const LUSTSTK:LustStick        = new LustStick();
 		public const MILKPTN:SimpleConsumable = mk("MilkPtn","ProLactaid", "a bottle labelled \"Pro Lactaid\"", m.milkPotion, "A bottle filled with white liquid which is distilled from Lactaid and LaBovas.  Rathazul mentioned that this potion will greatly improve your lactation. There's the possibility of permanently lactating, even if you're a male. \n\nType: Consumable \nBase value: 120", 120);
 		public const NUMBROX:SimpleConsumable = mk("NumbRox","Numb Rox", "a strange packet of candy called 'Numb Rocks'", m.numbRocks, "This packet of innocuous looking 'candy' guarantees to reduce troublesome sensations and taste delicious. \n\nType: Consumable \nBase value: 15", 15);
-		public const OVIELIX:SimpleConsumable = new OvipositionElixir();
+		public const OVIELIX:OvipositionElixir = new OvipositionElixir();
 		public const PEPPWHT:SimpleConsumable = mk("PeppWht","PeppWht", "a vial of peppermint white", function(player:Player):void{getGame().peppermintWhite(player)}, "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd. \n\nType: Consumable \nBase value: 120", 120);
 		public const PRNPKR :SimpleConsumable  = mk("PrnsPkr", "P.Pucker", "a vial of pinkish fluid", m.princessPucker, "A vial filled with a viscous pink liquid. A label reads \"Princess Pucker\". \n\nType: Consumable");
 		public const SENSDRF:SimpleConsumable = mk("SensDrf","SensDraft", "a bottle of sensitivity draft", m.sensitivityDraft, "This carefully labelled potion is a 'Sensitivity Draft', and if the diagrams are any indication, it will make your body more sensitive. \n\nType: Consumable \nBase value: 15", 15);

@@ -337,25 +337,29 @@ use namespace kGAMECLASS;
 			return _jewelry;
 		}
 
-		public function set jewelry(value:Jewelry):void
+		public function setJewelry(newJewelry:Jewelry):Jewelry {
+			//Returns the old jewelry, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldJewelry:Jewelry = _jewelry.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
+			if (newJewelry == null) {
+				CoC_Settings.error(short + ".jewelry is set to null");
+				newJewelry = JewelryLib.NOTHING;
+			}
+			_jewelry = newJewelry.playerEquip(); //The jewelry can also choose to equip something else - useful for Ceraph's trap armor
+			return oldJewelry;
+		}
+
+		
+		/*public function set jewelry(value:Jewelry):void
 		{
 			if (value == null){
 				CoC_Settings.error(short+".jewelry is set to null");
 				value = JewelryLib.NOTHING;
 			}
 			value.equip(this, false, false);
-		}
-
-<<<<<<< HEAD
-		// in case you don't want to call the value.equip
-		public function setJewelryHiddenField(value:Jewelry):void
-		{
-			this._jewelry = value;
-		}
-
-		
+		}*/
 		// Hacky workaround shit for ByteArray.readObject
-		public function Player()
+		/*public function Player()
 		{
 			//Item things
 			itemSlot1 = new ItemSlotClass();
@@ -366,10 +370,12 @@ use namespace kGAMECLASS;
 
 
 			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5];
+		}*/
+		// in case you don't want to call the value.equip
+		public function setJewelryHiddenField(value:Jewelry):void
+		{
+			this._jewelry = value;
 		}
-
-=======
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 		public function reduceDamage(damage:Number):Number{
 			damage = int(damage - rand(tou) - armorDef);
 			//EZ MOAD half damage

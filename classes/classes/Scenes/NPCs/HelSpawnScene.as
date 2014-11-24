@@ -1326,12 +1326,8 @@ private function ohGodEwKihaAndHelspawnSuckAtCooking():void {
 	outputText("\n\nKiha gives you an incredulous look, but takes a tentative sip anyway.  Her eyes brighten as she takes a second, and then a third gulp, soon shoveling it in greedily.  \"<i>Told ya, doofus!</i>\" she gloats, putting down the empty bowl.  \"<i>Nothing beats aunt Kiha's special recipe!</i>\"");
 	
 	outputText("\n\nYou just shake your head and grab a bowl, sitting down with the scaly ladies as you enjoy your lunch, trying to ignore the little shit-eating grin " + flags[kFLAGS.HELSPAWN_NAME] + "'s sporting all the while.");
-<<<<<<< HEAD
 	player.refillHunger(25);
-	doNext(13);
-=======
 	doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 private function umYum():void {
 	clearOutput();

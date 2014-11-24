@@ -59,16 +59,7 @@ private function minervaAppearance():void {
 	menu();
 	//[Talk] [Sex] [Eat] [Fight] [Leave]
 	//addButton(0,"Appearance",minervaAppearance);
-<<<<<<< HEAD
 	genericMenu();
-=======
-	addButton(1,"Talk",minervaTalkSelect);
-	if(player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
-	addButton(3,"Eat",eatSomethingYouCunt);
-	addButton(4,"Drink",getADrinkYouBitch);
-	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 public function encounterMinerva():void {
@@ -221,18 +212,7 @@ public function repeatEncounterMinerva():void {
 	else outputText("  \"<i>Mmm... my lover has come to see me!  Oh, how I have missed you, my sweet!  Won't you join me for a bath?  Or... is there anything else I can do for you?</i>\"");
 	
 	//[Talk] [Sex] [Eat] [Fight] [Leave]
-<<<<<<< HEAD
 	genericMenu();
-=======
-	menu();
-	addButton(0,"Appearance",minervaAppearance);
-	addButton(1,"Talk",minervaTalkSelect);
-	if(player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
-	addButton(3,"Eat",eatSomethingYouCunt);
-	addButton(4,"Drink",getADrinkYouBitch);
-	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",camp.returnToCampUseOneHour);	
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 //1-3 Repeat Encounter 2.  Use if 3rd+ time visiting Minerva.
@@ -253,17 +233,7 @@ private function minervaThirdPlusEncounter():void {
 	
 	menu();
 	//[Talk] [Sex] [Eat] [Fight] [Leave]
-<<<<<<< HEAD
 	genericMenu();
-=======
-	addButton(0,"Appearance",minervaAppearance);
-	addButton(1,"Talk",minervaTalkSelect);
-	if(player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
-	addButton(3,"Eat",eatSomethingYouCunt);
-	addButton(4,"Drink",getADrinkYouBitch);
-	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 //Romancing scenes encounter with all sub scenes.
@@ -378,17 +348,7 @@ private function dontFlyWithWithMeYouCrazyBitch():void {
 	//Randomly present flying option scene in future interactions. 
 	//[Talk] [Sex] [Eat] [Fight] [Leave]
 	menu();
-<<<<<<< HEAD
 	genericMenu();
-=======
-	addButton(0,"Appearance",minervaAppearance);
-	addButton(1,"Talk",minervaTalkSelect);
-	if(player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
-	addButton(3,"Eat",eatSomethingYouCunt);
-	addButton(4,"Drink",getADrinkYouBitch);
-	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 public function fightMinerva():void {
@@ -412,7 +372,7 @@ private function genericMenu(display:Boolean = false):void {
 	if (minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
 	if (player.hasKeyItem("Rathazul's Purity Potion") >= 0) addButton(7, "Purify", minervaPurification.purificationByRathazul)
 	if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", minervaPurification.purificationByMarae)
-	addButton(14, "Leave", eventParser, 13);	
+	addButton(14, "Leave", camp.returnToCampUseOneHour);	
 }
 
 //1-2 Repeatable Cute, Romantic Encounter. Only if PC accepted Minerva's feelings. Add to normal encounters.
@@ -425,17 +385,7 @@ private function repeatableMinervaRomanceScene():void {
 	
 	menu();
 	//[Talk] [Sex] [Eat] [Fight] [Leave]
-<<<<<<< HEAD
 	genericMenu();
-=======
-	addButton(0,"Appearance",minervaAppearance);
-	addButton(1,"Talk",minervaTalkSelect);
-	if(player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
-	addButton(3,"Eat",eatSomethingYouCunt);
-	addButton(4,"Drink",getADrinkYouBitch);
-	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 
@@ -1437,8 +1387,8 @@ private function getButtFuckedYouSlut():void {
 	flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 	player.orgasm();
 	dynStats("sen", -1);
-	if(inCombat()) cleanupAfterCombat();
-	else doNext(13);
+	if(getGame().inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 internal function loseToMinerva():void {
@@ -1499,19 +1449,13 @@ private function getPurePeach():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("You walk over to the fruit trees surrounding the spring, examining the strange treats.  You decide that one ripe fruit, one resembling a peach, is the best choice, and pluck it from the tree.  Thanking Minerva for letting you have it, you stow it away safely and head back to camp.\n\n");
-<<<<<<< HEAD
-	menuLoc = 2;
-	inventory.takeItem(consumables.PURPEAC);	
-=======
 	inventory.takeItem(consumables.PURPEAC, camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 private function getMint():void {
 	clearOutput();
 	spriteSelect(95);
 	outputText("There are many strange herbs growing around the spring, fed by whatever power resides in the water.  Finally, you locate a sprig of something that resembles mint, but silver in color, and decide to pluck it.  Stowing it carefully amongst your belongings, you thank Minerva for sharing the contents of her 'garden' with you and then head back to camp.", true)
-	menuLoc = 2;
-	inventory.takeItem(consumables.C__MINT);
+	inventory.takeItem(consumables.C__MINT, camp.returnToCampUseOneHour);
 }
 
 
@@ -1543,13 +1487,12 @@ private function drinkDirectly():void {
 	player.refillHunger(15);
 	if(player.cor > 50) dynStats("cor", -1);
 	if(player.cor > 75) dynStats("cor", -1);
-<<<<<<< HEAD
-	doNext(13);	
+	doNext(camp.returnToCampUseOneHour);	
 }
 private function getBottle():void {
 	outputText("Pulling out a small waterskin, you dip it into the crystal clear water, filling the container with the cool, clean spring water before placing it in your pack.  ", true)
 	menuLoc = 2;
-	inventory.takeItem(consumables.S_WATER);
+	inventory.takeItem(consumables.S_WATER, camp.returnToCampUseOneHour);
 }
 
 private function sleepWithMinerva():void {
@@ -1571,10 +1514,7 @@ private function sleepWithMinervaII():void {
 	outputText("and you leave the tower to return to your camp. \n\n", false)
 	awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 	sleepWithMinervaHeal();
-	doNext(13);
-=======
 	doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 private function sleepWithMinervaProcess():void {
 	clearOutput();

@@ -507,7 +507,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	//{CHECK: If female or herm PC with big butt and vagina too small to fit minotaur cock, use this}		
 	if (!autoRape)
 	{
-		if (flags[kFLAGS.SFW_MODE] > 0 && inCombat()) { //No rape in SFW mode.
+		if (flags[kFLAGS.SFW_MODE] > 0 && getGame().inCombat) { //No rape in SFW mode.
 			clearOutput();
 			cleanupAfterCombat();
 			return;
@@ -562,7 +562,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	
 	}
 	
-	if (flags[kFLAGS.SFW_MODE] > 0 && inCombat()) { //No rape in SFW mode.
+	if (flags[kFLAGS.SFW_MODE] > 0 && getGame().inCombat) { //No rape in SFW mode.
 		clearOutput();
 		cleanupAfterCombat();
 		return;

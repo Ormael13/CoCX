@@ -3005,13 +3005,8 @@ private function giveArianLactaid():void {
 		
 		outputText("\n\nYou agree, and ask if [Arian ey]'ll be okay if you show yourself out.  Arian nods and yawns.  \"<i>I'll see you later then, [name].</i>\"");
 		
-<<<<<<< HEAD
 		outputText("\n\nYou leave [Arian em] to get some sleep and quietly show yourself out, planning to work off your meal elsewhere.");
-		doNext(13);
-=======
-		outputText("\n\nYou leave her to get some sleep and quietly show yourself out, planning to work off your meal elsewhere.");
 		doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 	}
 }
 
@@ -3905,13 +3900,8 @@ private function pickAnEggArian(color:String = "pink"):void {
 //Leave
 private function leaveEggs():void {
 	clearOutput();
-<<<<<<< HEAD
 	outputText("You tell [Arian em] that you don't want any colored eggs from [Arian em] this month.  The lizan nods, deciding it's not necessary for [Arian em] to spell out that this means [Arian ey]'ll just produce ordinary eggs and eat them for breakfast after [Arian ey]'s laid them.  \"<i>So, do you want something?</i>\" [Arian ey] asks.");
-	doNext(13);
-=======
-	outputText("You tell her that you don't want any colored eggs from her this month.  The lizan nods, deciding it's not necessary for her to spell out that this means she'll just produce ordinary eggs and eat them for breakfast after she's laid them.  \"<i>So, do you want something?</i>\" she asks.");
 	doNext(camp.returnToCampUseOneHour);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
 }
 
 //Display Arian options

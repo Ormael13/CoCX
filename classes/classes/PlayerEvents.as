@@ -75,7 +75,7 @@ package classes {
 				if (player.hunger <= 0)
 				{
 					//Lose HP and makes fatigue go up. Lose body weight and muscles.
-					takeDamage(maxHP() / 25);
+					player.takeDamage(player.maxHP() / 25);
 					fatigue(2);
 					if (rand(3) == 0) player.buttRating--;
 					if (rand(3) == 0) player.hipRating--;
@@ -792,7 +792,7 @@ package classes {
 				if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 					if (!needNext) needNext = getGame().growHair(0.1);
 					else getGame().growHair(0.1);
-					if (player.beardLength > 0 && player.beardLength < 12) growBeard(0.02);
+					if (player.beardLength > 0 && player.beardLength < 12) getGame().growBeard(0.02);
 				}
 				//Clear dragon breath cooldown!
 				if (player.findStatusAffect(StatusAffects.DragonBreathCooldown) >= 0) player.removeStatusAffect(StatusAffects.DragonBreathCooldown);

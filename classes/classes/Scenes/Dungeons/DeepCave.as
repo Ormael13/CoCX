@@ -43,7 +43,7 @@ package classes.Scenes.Dungeons
 		private function exitDungeon():void {
 			kGAMECLASS.inDungeon = false;
 			outputText("You leave the cave behind and take off through the deepwoods back towards camp.", true);
-			doNext(13);	
+			doNext(camp.returnToCampUseOneHour);	
 		}
 		
 		private function checkDoor1():void {
@@ -59,7 +59,7 @@ package classes.Scenes.Dungeons
 		private function takeBondageStraps():void {
 			outputText("", true);
 			flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
-			inventory.takeItem(armors.BONSTRP);			
+			inventory.takeItem(armors.BONSTRP, roomSecretPassage);			
 		}
 		
 		//Sean the Incubus
@@ -139,7 +139,7 @@ package classes.Scenes.Dungeons
 			player.gems -= itype.value * 3;
 			menuLoc = 16;
 			statScreenRefresh();
-			inventory.takeItem(itype);
+			inventory.takeItem(itype, incubusShop);
 		}
 		
 		private function fightImpHorde():void {

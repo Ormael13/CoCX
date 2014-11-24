@@ -85,11 +85,7 @@ private function urtaSexMenu():void {
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8, "3SomeSurprise", urta.urtaAndRaphaelSurprise);
 			}
-<<<<<<< HEAD
-			addButton(14,"Leave",telAdre.barTelAdre);
-=======
-			addButton(9, "Leave", telAdre.barTelAdre);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+			addButton(14, "Leave", telAdre.barTelAdre);
 		}
 		//FRIEND
 		else {
@@ -101,11 +97,7 @@ private function urtaSexMenu():void {
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8, "3SomeSurprise", urta.urtaAndRaphaelSurprise);
 			}
-<<<<<<< HEAD
-			addButton(14,"Leave",telAdre.barTelAdre);
-=======
-			addButton(9, "Leave", telAdre.barTelAdre);
->>>>>>> a82163c1688c17102ece58f63f28e75c34388695
+			addButton(14, "Leave", telAdre.barTelAdre);
 		}
 	}
 }
