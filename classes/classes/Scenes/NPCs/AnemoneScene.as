@@ -1232,24 +1232,19 @@ package classes.Scenes.NPCs
 		}
 
 //[Give Weapon]
-		private function giveAnemoneWeapon():void
-		{
+		private function giveAnemoneWeapon():void {
 			clearOutput();
 			spriteSelect(71);
 			outputText("What do you want to give her?");
-			function giveableToAnemone(itemSlot:ItemSlotClass):Boolean{
-				return itemSlot.quantity>0 &&
-						(itemSlot.itype == consumables.W__BOOK ||
-								itemSlot.itype == consumables.B__BOOK ||
-								itemSlot.itype == consumables.W_STICK ||
-								itemSlot.itype is Weapon);
+			function giveableToAnemone(item:ItemType):Boolean {
+				return item == consumables.W__BOOK || item == consumables.B__BOOK || item == consumables.W_STICK || item is Weapon;
 			}
-			kGAMECLASS.hideUpDown();
 			menu();
+			kGAMECLASS.hideUpDown();
 			var foundItem:Boolean = false;
 			for (var x:int = 0; x < 5; x++) {
-				if (giveableToAnemone(player.itemSlots[x])) {
-					addButton(x, (player.itemSlots[x].shortName + " x" + player.itemSlots[x].quantity), placeInAnemone, x + 1);
+				if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
+					addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
 					foundItem = true;
 				}
 			}
@@ -1257,32 +1252,13 @@ package classes.Scenes.NPCs
 			addButton(9, "Back", camp.stash);
 		}
 
-		public function placeInAnemone(slot:Number = 1):void
-		{
+		private function placeInAnemone(slot:int):void {
 			clearOutput();
 			outputText("You leave the item by her barrel.");
 			spriteSelect(71);
 			//(set Kidweapon to item name, remove from inventory)
-			if (slot == 1) {
-				flags[kFLAGS.ANEMONE_WEAPON_ID] = player.itemSlot1.itype.id;
-				player.itemSlot1.removeOneItem();
-			}
-			else if (slot == 2) {
-				flags[kFLAGS.ANEMONE_WEAPON_ID] = player.itemSlot2.itype.id;
-				player.itemSlot2.removeOneItem();
-			}
-			else if (slot == 3) {
-				flags[kFLAGS.ANEMONE_WEAPON_ID] = player.itemSlot3.itype.id;
-				player.itemSlot3.removeOneItem();
-			}
-			else if (slot == 4) {
-				flags[kFLAGS.ANEMONE_WEAPON_ID] = player.itemSlot4.itype.id;
-				player.itemSlot4.removeOneItem();
-			}
-			else {
-				flags[kFLAGS.ANEMONE_WEAPON_ID] = player.itemSlot5.itype.id;
-				player.itemSlot5.removeOneItem();
-			}
+			flags[kFLAGS.ANEMONE_WEAPON_ID] = player.itemSlots[slot].itype.id;
+			player.itemSlots[slot].removeOneItem();
 			doNext(approachAnemoneBarrel);
 		}
 
