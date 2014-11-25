@@ -247,6 +247,13 @@ public function settingsScreen():void
 
 	outputText("\n\n");
 	
+	if(flags[kFLAGS.USE_OLD_SPRITES] == 0)
+		outputText("Sprite Type: <b>New</b>\n 16-bit sprites will be used.");
+	else
+		outputText("Sprite Type: <b>Old</b>\n 8-bit sprites will be used.");
+
+	outputText("\n\n");
+	
 	if(flags[kFLAGS.USE_12_HOURS] > 0)
 		outputText("Time Format: <b>12 hours</b>\n Time will display in 12 hours format (AM/PM)");
 	else
@@ -280,15 +287,15 @@ public function settingsScreenMain():void
 public function settingsScreenGameSettings():void {
 	settingsScreen();
 	menu();
-	addButton(0, "Toggle Debug", toggleDebug);
-	if (player.str > 0) addButton(1, "Difficulty", difficultySelectionMenu);
-	//addButton(1, "Easy Mode", toggleEasyModeFlag);	
-	addButton(2, "Silly Toggle", toggleSillyFlag);
+	addButton(0, "Toggle Debug", toggleDebug, null, null, null, "Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
+	if (player.str > 0) addButton(1, "Difficulty", difficultySelectionMenu, "Adjust the game difficulty to make it easier or harder.");
+	//addButton(1, "Easy Mode", toggleEasyModeFlag, null, null, null, "Toggles easy mode.  Enemy damage is halved and bad-ends can be ignored.");	
+	addButton(2, "Silly Toggle", toggleSillyFlag, null, null, null, "Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 	addButton(3, "Low Standards", toggleStandards);
 	addButton(4, "Hyper Happy", toggleHyperHappy);
 	
-	addButton(5, "SFW Toggle", toggleSFW); //Softcore Mode
-	addButton(6, "Watersports", toggleWatersports); //Enables watersports.
+	addButton(5, "SFW Toggle", toggleSFW, null, null, null, "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
+	addButton(6, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
 	if (player.str > 0) addButton(8, "Enable Real", enableRealisticPrompt);	
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
@@ -311,15 +318,14 @@ public function settingsScreenGameSettings():void {
 public function settingsScreenInterfaceSettings():void {
 	settingsScreen();
 	menu();
-	addButton(0, "Side Bar Style", toggleInterface);
-	addButton(1, "Toggle Images", toggleImages);
-	addButton(2, "Toggle Sprites", toggleSpritesFlag);
-	//addButton(3, "Old Sprites", eventParser, 9999); //If I can re-add old sprites, that is.
-	addButton(4, "Time Format", toggleTimeFormat); //If I can re-add old sprites, that is.
-	addButton(5, "Background", cycleBackground);
+	addButton(0, "Side Bar Style", toggleInterface, null, null, null, "Switch between old and new stats bars.");
+	addButton(1, "Toggle Images", toggleImages, null, null, null, "Enable or disable image pack.");
+	addButton(2, "Toggle Sprites", toggleSpritesFlag, null, null, null, "Toggles the pixelated sprites that appears in lower-left corner of the screen and also toggles the pictures if image-pack is found.");
+	addButton(3, "Old Sprites", toggleOldSprites, null, null, null, "Toggle between old and new sprites."); //If I can re-add old sprites, that is.
+	addButton(4, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
+	addButton(5, "Background", cycleBackground, null, null, null, "Cycle through background styles and colors.");
 	addButton(14, "Back", settingsScreenMain);
 }
-
 
 public function toggleInterface():void {
 	if (flags[kFLAGS.USE_OLD_INTERFACE] < 1) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
@@ -346,6 +352,12 @@ public function cycleBackground():void {
 public function toggleImages():void {
 	if (flags[kFLAGS.IMAGEPACK_OFF] < 1) flags[kFLAGS.IMAGEPACK_OFF] = 1;
 	else flags[kFLAGS.IMAGEPACK_OFF] = 0;
+	settingsScreenInterfaceSettings();
+}
+
+public function toggleOldSprites():void {
+	if (flags[kFLAGS.USE_OLD_SPRITES] < 1) flags[kFLAGS.USE_OLD_SPRITES] = 1;
+	else flags[kFLAGS.USE_OLD_SPRITES] = 0;
 	settingsScreenInterfaceSettings();
 }
 

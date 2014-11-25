@@ -2135,8 +2135,8 @@ public static const INGNAM_WEAPONSMITH_TALKED:int                               
 public static const INGNAM_ARMORSMITH_TALKED:int                                    = 2126;
 public static const INGNAM_RUMORS:int                                   			= 2127; //Hear the rumors
 public static const INGNAM_FARMER_MET:int                                   		= 2128; 
-public static const UNKNOWN_FLAG_NUMBER_02129:int                                   = 2129;
-public static const UNKNOWN_FLAG_NUMBER_02130:int                                   = 2130;
+public static const INGNAM_BLACKMARKET_TALKED:int                                   = 2129;
+public static const FORCE_MEDITATE:int                                   			= 2130;
 public static const UNKNOWN_FLAG_NUMBER_02131:int                                   = 2131;
 public static const UNKNOWN_FLAG_NUMBER_02132:int                                   = 2132;
 public static const UNKNOWN_FLAG_NUMBER_02133:int                                   = 2133;

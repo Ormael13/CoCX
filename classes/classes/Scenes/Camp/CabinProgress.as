@@ -55,16 +55,12 @@ package classes.Scenes.Camp
 				}
 				//For stage 4, explore forest.
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 5) { 
-					startCabinPart1() 
-					return;
-					}
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 6) { 
 					startCabinPart2() 
 					return;
-				}
+					}
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) { 
 					startCabinPart3() 
-					return; 
+					return;
 				}
 				//Build cabin!
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) { 
@@ -251,39 +247,9 @@ package classes.Scenes.Camp
 			doNext(1);
 		}
 		
-		//STAGE 5 - Work on cabin part 1, requires 100 wood. Cut wood.
-		private function startCabinPart1():void {
-			outputText("With sufficient wood, you begin to cut wood into planks. You know that it will take hours but in the end, you will have a nice, comfortable cabin.\n\n", true);
-			if (camp.companionsCount() <= 0)
-			{
-				outputText("As you're alone, this will take quite a lot of time. You work up your sweat as you cut one piece of wood at a time.\n\n", false);
-				outputText("<b>Several hours later...</b>\n", false);
-				outputText("It's exhausting but you have finished processing the wood into workable planks. </b>You'll be able to build your cabin!</b>", false);
-				fatigue(100);
-				doNext(15);
-			}
-			if (camp.companionsCount() == 1)
-			{
-				outputText("You call over your only companion to assist you into processing wood.\n\n", false);
-				outputText("<b>Few hours later...</b>\n", false);
-				outputText("You have finished processing the wood into workable planks. It took half the time thanks to your companion for assistance. <b>You'll be able to build your cabin!</b>", false);
-				fatigue(100);
-				doNext(14);
-			}		
-			if (camp.companionsCount() >= 2)
-			{
-				outputText("You call over your companions to assist you into processing wood.\n\n", false);
-				outputText("<b>One hour later...</b>\n", false);
-				outputText("You have finished processing the wood into workable planks. Thanks to your companion, it took only one hour! <b>You'll be able to build your cabin!</b>", false);
-				fatigue(50);
-				doNext(13);
-			}
-			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 6;
-		}
-		
 		//STAGE 6 - Work on cabin part 2. Planning your cabin.
 		private function startCabinPart2():void {
-			outputText("With the wood stacked and prepared, you take out a paper, feather pen, and ink quill. You draw some plans and diagrams. You spend one hour editing and perfecting your plans. You review and make some final changes to your plan before you fold the paper and put it away.", true);
+			outputText("You take out a paper, feather pen, and ink quill. You draw some plans and diagrams. You spend one hour editing and perfecting your plans. You review and make some final changes to your plan before you fold the paper and put it away.", true);
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 7;
 			doNext(13);
 		}

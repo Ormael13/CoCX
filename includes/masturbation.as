@@ -12,7 +12,11 @@ public function masturbateMenu():void {
 		meditate();
 		return;
 	}
-	
+	if (flags[kFLAGS.FORCE_MEDITATE] >= 1) {
+		flags[kFLAGS.FORCE_MEDITATE] = 0;
+		meditate();
+		return;
+	}	
 	//FAP BUTTON GOAADFADHAKDADK
 	if((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
 		if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
@@ -2400,7 +2404,8 @@ private function dualBeltMasturbation():void {
 	if (player.biggestLactation() >= 2)
 		outputText("Thin streams of creamy milk flow from your " + allBreastsDescript() + ", your torso and midsection dripping wet from the stuff. ", false);
 	outputText("Completely sated, you take off the belt, finding it slides off easily, and put it away in your campsite, eagerly awaiting the time you can next use it and have the suit work you over once more.", false);
-	dynStats("sen", -1, "lus", -300);
+	player.orgasm();
+	dynStats("sen", -1);
 	if (player.lib < 30) dynStats("lib", .5);
 	if (player.lib < 50) dynStats("lib", .5);
 	if (player.lib < 60) dynStats("lib", .5);

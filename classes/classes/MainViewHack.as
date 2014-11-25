@@ -546,5 +546,9 @@ package classes
 				}
 			}
 		}
+		
+		public function setOldSprite():void {
+
+		}
 	}
 }

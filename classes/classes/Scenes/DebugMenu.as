@@ -29,9 +29,9 @@ package classes.Scenes
 			if ((debug && flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild) && !getGame().inCombat) {
 				outputText("Welcome to the super secret debug menu!", true);
 				menu();
-				addButton(0, "Spawn Items", itemSpawnMenu);
-				addButton(1, "Change Stats", statChangeMenu);
-				addButton(2, "HACK STUFFZ", styleHackMenu);
+				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
+				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
+				addButton(2, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
 				//addButton(3, "Event Trigger", eventTriggerMenu);
 				addButton(14, "Exit", eventParser, 1);
 			}

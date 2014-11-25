@@ -58,8 +58,8 @@ package classes.Scenes.Places
 			menu();
 			addButton(0, "Explore", exploreIngnam);
 			addButton(1, "Shops", menuShops);
-			addButton(2, "Temple (NYI)", eventParser, 9999);
-			addButton(3, "Tavern", menuTavern);
+			addButton(2, "Temple", menuTemple);
+			addButton(3, "Inn", menuTavern);
 			addButton(4, "Farm", menuFarm);
 			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0) addButton(6, "Return2Camp", getBanishedToMareth);
 			addButton(7, "Inventory", eventParser, 1000);
@@ -111,13 +111,15 @@ package classes.Scenes.Places
 		
 		//Explore Ingnam
 		public function exploreIngnam():void {
+			hideMenus();
 			clearOutput();
 			outputText("Placeholder");
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Shopping time!
 		public function menuShops():void {
+			hideMenus();
 			clearOutput();
 			outputText("Which shop would you like to visit?");
 			menu();
@@ -127,7 +129,7 @@ package classes.Scenes.Places
 			addButton(3, "Alchemist", shopAlchemist);
 			addButton(4, "Trading Post", shopTradingPost);
 			addButton(5, "Black Market", shopBlackMarket);
-			addButton(9, "Back", menuIngnam);
+			addButton(14, "Back", menuIngnam);
 		}
 		
 		public function shopWeapon():void {
@@ -139,15 +141,11 @@ package classes.Scenes.Places
 			}
 			outputText("\n\n\"<i>So, do you want to buy anything?</i>\"");
 			outputText("\n\n<b><u>Weapon shop pricings</u></b>");
-			outputText("\n40 gems - " + weapons.DAGGER.longName);
-			outputText("\n50 gems - " + weapons.PIPE.longName);
-			outputText("\n175 gems - " + weapons.SPEAR.longName);
-			outputText("\n250 gems - " + weapons.KATANA.longName);
 			menu();
-			addButton(0, weapons.DAGGER.shortName, transactionItemConfirmation, weapons.DAGGER, 40, 1);
-			addButton(1, weapons.PIPE.shortName, transactionItemConfirmation, weapons.PIPE, 50, 1);
-			addButton(2, weapons.SPEAR.shortName, transactionItemConfirmation, weapons.SPEAR, 175, 1);
-			addButton(3, weapons.KATANA.shortName, transactionItemConfirmation, weapons.KATANA, 250, 1);
+			addShopItem(weapons.DAGGER, 40, 1);
+			addShopItem(weapons.PIPE, 50, 1);
+			addShopItem(weapons.SPEAR, 175, 1);
+			addShopItem(weapons.KATANA, 250, 1);
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -155,31 +153,24 @@ package classes.Scenes.Places
 			clearOutput();
 			outputText("You enter the armor shop, noting the sign depicting armors.  Few armors are proudly displayed on racks.  You can hear the sound of hammering although it stops shortly after you enter.  A male blacksmith comes from the rear door and steps up to the counter and says, \"<i>Welcome to the armor shop.  In a need of protection?</i>\"");
 			outputText("\n\n<b><u>Armor shop pricings</u></b>");
-			outputText("\n50 gems - " + armors.LEATHRA.longName);
-			outputText("\n150 gems - " + armors.FULLCHN.longName);
-			outputText("\n200 gems - " + armors.SCALEML.longName);
 			menu();
-			addButton(0, armors.LEATHRA.shortName, transactionItemConfirmation, armors.LEATHRA, 50, 2);
-			addButton(1, armors.FULLCHN.shortName, transactionItemConfirmation, armors.FULLCHN, 150, 2);
-			addButton(2, armors.SCALEML.shortName, transactionItemConfirmation, armors.SCALEML, 200, 2);
+			addShopItem(armors.LEATHRA, 50, 2);
+			addShopItem(armors.FULLCHN, 150, 2);
+			addShopItem(armors.SCALEML, 200, 2);
 			addButton(14, "Leave", menuShops);
 		}
 		
 		public function shopTailor():void {
 			clearOutput();
-			outputText("(Placeholder) This is the tailor.");
+			outputText("You enter the tailor shop.  The interior is well-maintained and decorated.  Clothes are displayed on racks without obvious flaws.  A woman behind the counter smiles at you with greet.  ");
+			outputText("\n\nShe says, \"<i>Welcome to my shop.  Need to get outfitted?</i>\"");
 			outputText("\n\n<b><u>Tailor shop pricings</u></b>");
-			outputText("\n10 gems - " + armors.C_CLOTH.longName);
-			outputText("\n75 gems - " + armors.ADVCLTH.longName);
-			outputText("\n40 gems - " + armors.TUBETOP.longName);
-			outputText("\n30 gems - " + armors.OVERALL.longName);
-			outputText("\n75 gems - " + armors.M_ROBES.longName);
 			menu();
-			addButton(0, armors.C_CLOTH.shortName, transactionItemConfirmation, armors.C_CLOTH, 10, 3);
-			addButton(1, armors.ADVCLTH.shortName, transactionItemConfirmation, armors.ADVCLTH, 75, 3);
-			addButton(2, armors.TUBETOP.shortName, transactionItemConfirmation, armors.TUBETOP, 40, 3);
-			addButton(3, armors.OVERALL.shortName, transactionItemConfirmation, armors.OVERALL, 30, 3);
-			addButton(4, armors.M_ROBES.shortName, transactionItemConfirmation, armors.M_ROBES, 75, 3);
+			addShopItem(armors.C_CLOTH, 10, 3);
+			addShopItem(armors.ADVCLTH, 75, 3);
+			addShopItem(armors.TUBETOP, 40, 3);
+			addShopItem(armors.OVERALL, 30, 3);
+			addShopItem(armors.M_ROBES, 75, 3);
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -187,31 +178,43 @@ package classes.Scenes.Places
 			clearOutput();
 			outputText("(Placeholder) This is the alchemist.");
 			outputText("\n\n<b><u>Alchemy shop pricings</u></b>");
-			outputText("\n100 gems - " + consumables.REDUCTO.longName);
-			outputText("\n100 gems - " + consumables.GROPLUS.longName);
-			outputText("\n30 gems - " + consumables.L_DRAFT.longName);
 			menu();
-			addButton(0, consumables.REDUCTO.shortName, transactionItemConfirmation, consumables.REDUCTO, 100, 4);
-			addButton(1, consumables.GROPLUS.shortName, transactionItemConfirmation, consumables.GROPLUS, 100, 4);
-			addButton(2, consumables.L_DRAFT.shortName, transactionItemConfirmation, consumables.L_DRAFT, 30, 5);
+			addShopItem(consumables.REDUCTO, 100, 4);
+			addShopItem(consumables.GROPLUS, 100, 4);
+			addShopItem(consumables.L_DRAFT, 30, 4);
 			addButton(14, "Leave", menuShops);
 		}
 		
 		public function shopTradingPost():void {
 			clearOutput();
 			outputText("(Placeholder) This is the trading post where you can buy goods.");
-			outputText("\n15 gems - " + consumables.VITAL_T.longName);
-			outputText("\n15 gems - " + consumables.SMART_T.longName);
+			outputText("\n\n<b><u>Trading post pricings</u></b>");
 			menu();
-			addButton(0, consumables.VITAL_T.shortName, transactionItemConfirmation, consumables.VITAL_T, 15, 5);
-			addButton(1, consumables.SMART_T.shortName, transactionItemConfirmation, consumables.SMART_T, 15, 5);
+			addShopItem(consumables.VITAL_T, 15, 5);
+			addShopItem(consumables.SMART_T, 15, 5);
 			addButton(14, "Leave", menuShops);
 		}
 		
 		public function shopBlackMarket():void {
 			clearOutput();
-			outputText("(Placeholder) This is the black market where you can buy illegal items.");
+			if (flags[kFLAGS.INGNAM_BLACKMARKET_TALKED] <= 0) {
+				outputText("You walk into an alley you swear you have never explored before.  You swallow your pride as you walk into the alley.");
+				outputText("\n\nYou have an uneasy feeling until you hear a voice.  You look around to see that a man walks from the shadows to approach you.");
+				outputText("\n\n\"<i>Greetings.  I know you.  You're going to be the Champion, right?</i>\" The shady man says.  His face is concealed by a hood.  You tell him that yes, you're going to be the Champion of Ingnam.");
+				outputText("\n\nHe pulls his hood down and says, \"<i>I've managed to sneak into the portal at the mountains.  There are extraordinary goods that can transform you.  I've managed to smuggle these goods.  It take me years of plannings as the portal is only open for a period of time before it closes for the rest of the year.</i>\"  He opens up his coat and shows you the array of goods and says, \"<i>They aren't cheap but I can guarantee, they are the real stuff!  See anything you would like?</i>\"");
+				flags[kFLAGS.INGNAM_BLACKMARKET_TALKED] = 1;
+			}
+			else {
+				outputText("Once again, you walk into the alley where the shady dealer should be.  He approaches you as if he knows you.");
+				outputText("\n\n\"<i>Back, I see?  See any deals you like?</i>\" The shady man asks.");
+			}
+			outputText("\n\n<b><u>Black market pricings</u></b>");
 			menu();
+			addShopItem(consumables.W_FRUIT, 75, 6);
+			addShopItem(consumables.CANINEP, 75, 6);
+			addShopItem(consumables.EQUINUM, 75, 6);
+			addShopItem(consumables.INCUBID, 75, 6);
+			addShopItem(consumables.SUCMILK, 75, 6);
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -264,15 +267,41 @@ package classes.Scenes.Places
 			else shopBlackMarket();
 		}
 		
+		public function addShopItem(item:ItemType, price:int, shop:int):void {
+			outputText("\n" + price + " gems - " + item.longName + "");
+			var button:int = 0;
+			for (var i:int = 0; i < 14; i++) {
+				if (buttonIsVisible(i)) button++;
+			}
+			addButton(button, item.shortName, transactionItemConfirmation, item, price, shop);
+		}
+		
+		//Temple
+		public function menuTemple():void {
+			hideMenus();
+			clearOutput();
+			outputText("The interior of temple is intricately decorated.  There are several mats on the floor to provide soft areas for people to pray on.");
+			menu();
+			addButton(0, "Meditate", startMeditate);
+			addButton(14, "Leave", menuIngnam);
+		}
+		
+		public function startMeditate():void {
+			if (player.findPerk(PerkLib.HistoryReligious) >= 0) dynStats("lib", -0.5, "cor", -0.5); //Bonus points for religious perks.
+			flags[kFLAGS.FORCE_MEDITATE] = 1; //Sets flag to 1 to force meditate. The flag itself is set to 0 after meditate is done.
+			eventParser(10); //Fires the event.
+		}
+		
 		//Tavern
 		public function menuTavern():void {
+			hideMenus();
 			clearOutput();
-			outputText("The tavern is a nice place to be in.  You see several people drinking and chatting about random topics.  The bartender stands behind the wooden counter, serving beverages and cleaning.");
+			outputText("The inn is a nice place to be in.  You see several people drinking and chatting about random topics.  The innkeeper stands behind the wooden counter, serving beverages and cleaning.");
 			menu();
 			addButton(0, "Order Drink", orderDrink, null, null, null, "Buy some refreshing beverages.");
-			addButton(1, "Order Food (NYI)", eventParser, 9999, null, null, "Buy some food" + (flags[kFLAGS.HUNGER_ENABLED] > 0 ? " and curb that hunger of yours!": ".") + "");
-			addButton(2, "Rumors (NYI)", eventParser, 9999, null, null, "Hear some rumors going on.");
-			if (player.findPerk(PerkLib.HistoryWhore) >= 0) addButton(5, "Prostitute", eventParser, 9999, null, null, "Seek someone who's willing to have sex with you for profit.");
+			addButton(1, "Order Food", orderFood, null, null, null, "Buy some food" + (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 50 ? " and curb that hunger of yours!": ".") + "");
+			if (flags[kFLAGS.INGNAM_RUMORS] < 3) addButton(2, "Stories", hearRumors, null, null, null, "Hear the story the innkeeper has to offer.");
+			//if (player.findPerk(PerkLib.HistoryWhore) >= 0) addButton(5, "Prostitute", eventParser, 9999, null, null, "Seek someone who's willing to have sex with you for profit.");
 			addButton(14, "Leave", menuIngnam);
 		}
 		
@@ -288,7 +317,7 @@ package classes.Scenes.Places
 			addButton(0, "Beer", buyBeer);
 			addButton(1, "Milk", buyMilk);
 			addButton(2, "Root Beer", buyRootBeer);
-			addButton(9, "Back", menuTavern);
+			addButton(14, "Back", menuTavern);
 		}
 		
 		public function buyBeer():void {
@@ -299,7 +328,7 @@ package classes.Scenes.Places
 				return;
 			}
 			player.gems -= 5;
-			outputText("\"<i>I'd like a glass of beer please,</i>\" you say.  You hand over the five gems to the bartender and he pours you a glass of beer.");
+			outputText("\"<i>I'd like a glass of beer please,</i>\" you say.  You hand over the five gems to the innkeeper and he pours you a glass of beer.");
 			outputText("\n\nYou kick back and drink the beer slowly.  ");
 			player.refillHunger(10);
 			if (player.findStatusAffect(StatusAffects.Drunk) < 0) {
@@ -314,7 +343,7 @@ package classes.Scenes.Places
 				if (player.statusAffectv2(StatusAffects.Drunk) == 2) {
 					outputText("\n\n<b>You feel a bit drunk. Maybe you should cut back on the beers.</b>");
 				}
-				//Get so drunk you end up peeing!
+				//Get so drunk you end up peeing! Genderless can still urinate.
 				if (player.statusAffectv2(StatusAffects.Drunk) >= 3) {
 					outputText("\n\nYou feel so drunk.  Your vision is blurry and you realize something's not feeling right.  Gasp! You have to piss like a racehorse!  You stumble toward the back door and go outside.  ")
 					if (player.hasVagina() && !player.hasCock()) outputText("You open up your [armor] and squat down while you release your pressure onto the ground.  ");
@@ -338,7 +367,7 @@ package classes.Scenes.Places
 				return;
 			}
 			player.gems -= 2;
-			outputText("\"<i>I'd like a glass of milk please,</i>\" you say.  You hand over the two gems to the bartender and he pours you a glass of milk.");
+			outputText("\"<i>I'd like a glass of milk please,</i>\" you say.  You hand over the two gems to the innkeeper and he pours you a glass of milk.");
 			outputText("\n\nYou drink the cup of milk.  You feel calm and refreshed.  ");
 			fatigue(-15);
 			HPChange(player.maxHP() / 4, false);
@@ -354,7 +383,7 @@ package classes.Scenes.Places
 				return;
 			}
 			player.gems -= 2;
-			outputText("\"<i>I'd like a glass of root beer please,</i>\" you say.  You hand over the three gems to the bartender and he pours you a glass of root beer.");
+			outputText("\"<i>I'd like a glass of root beer please,</i>\" you say.  You hand over the three gems to the innkeeper and he pours you a glass of root beer.");
 			outputText("\n\nYou drink the cup of root beer.  Refreshing!  ");
 			fatigue(-15);
 			HPChange(player.maxHP() / 4, false);
@@ -363,9 +392,79 @@ package classes.Scenes.Places
 			doNext(menuTavern);
 		}
 		
+		public function orderFood():void { //Order food, because you need to be able to fill hunger.
+			clearOutput();
+			outputText("You take a seat and look at the menu. What would you like?");
+			outputText("\n\n<b><u>Pricings</u></b>");
+			outputText("\n5 gems - Sandwich");
+			outputText("\n3 gems - Soup");
+
+			menu();
+			addButton(0, "Sandwich", buySandwich);
+			addButton(1, "Soup", buySoup);
+			addButton(14, "Back", menuTavern);
+		}
+		
+		public function buySandwich():void { //Eat sandwich, refill hunger. The reason it's ambiguous is to let you imagine what sandwich you're eating.
+			clearOutput();
+			if (player.gems < 5) {
+				outputText("You don't have enough gems for that.");
+				doNext(orderDrink);
+				return;
+			}
+			player.gems -= 5;
+			outputText("\"You tell the innkeeper that you would like a sandwich and toss five gems at him.  \"<i>Certainly, " + player.mf("sir", "madam") + ",</i>\" he says as he quickly grabs a plate and assembles a sandwich.  Hey, it's your favorite type!");
+			outputText("\n\nYou eat the sandwich.  Delicious!");
+			HPChange(player.maxHP() / 3, false);
+			player.refillHunger(25);
+			cheatTime(1/12);
+			doNext(menuTavern);
+		}
+		
+		public function buySoup():void { //Eat soup. Again, it's vague to let you imagine what soup you're eating.
+			clearOutput();
+			if (player.gems < 5) {
+				outputText("You don't have enough gems for that.");
+				doNext(orderDrink);
+				return;
+			}
+			player.gems -= 5;
+			outputText("\"You tell the innkeeper that you would like a bowl of soup and toss three gems at him.  \"<i>Certainly, " + player.mf("sir", "madam") + ",</i>\" he says as he grabs a bowl and fills it with steaming soup.  Hey, it's your favorite type!");
+			outputText("\n\nYou take one spoonful at a time, blowing to make sure the soup isn't too hot.  You eventually finish the soup.  Delicious!");
+			HPChange(player.maxHP() / 3, false);
+			player.refillHunger(20);
+			cheatTime(1/12);
+			doNext(menuTavern);
+		}
+		
+		public function hearRumors():void { //Hear rumors. Will be altered after defeating Lethice so he will say "Welcome back".
+			clearOutput();
+			var rumor:int = rand(4);
+			outputText("You ask the innkeeper if he has anything special to tell you.");
+			if (flags[kFLAGS.INGNAM_RUMORS] == 0) {
+				outputText("\n\nHe nods and says, \"<i>Let me tell you.  You know what happens to the so-called 'champions'?</i>\"  ");
+				outputText("\n\nYou nod in response and he continues, \"<i>Well... Nobody ever came.  I've seen twenty people departing over the course of my career.  Twenty years.  None of them ever returned.  Who knows what happened to them?  Some say they're abducted by an evil presence as soon as they set foot into the portal.</i>\"");
+				outputText("\n\nHe looks at you and sniffles.  \"<i>Truth be told, you're going to be the Champion of Ingnam.  You will be sent to the so-called 'portal' that is supposedly located in Mount Ilgast.  I will miss your patronage at the inn.  You're still welcome anytime.</i>\"");
+				flags[kFLAGS.INGNAM_RUMORS] = 1;
+			}
+			else if (flags[kFLAGS.INGNAM_RUMORS] == 1) {
+				outputText("\n\nHe nods and says, \"<i>You know Mount Ilgast?</i>\"  ");
+				outputText("\n\nYou nod in response and he continues, \"<i>Before I began my work as an innkeeper, I was an adventurer.  I've explored Mount Ilgast once.  There was something glowing.  It's a portal but it's no ordinary portal.  Even strange was that there was something stirring in my groin.  Honestly, I swear I never felt that sensation before.  I winded up masturbating at the cave entrance just because of that warmth.  As soon as I go near the portal, the warm sensation came back again.  It's just strange, really strange.  So I've hurried back to Ingnam and never visited the mountain again.</i>\"");
+				outputText("\n\nYou thank him for telling you.");
+				flags[kFLAGS.INGNAM_RUMORS] = 2;
+			}
+			else if (flags[kFLAGS.INGNAM_RUMORS] == 2) {
+				outputText("\n\nHe nods and says, \"<i>Would you really like to know something special?</i>\"  You nod in response and he continues, \"<i>One time I've seen a man with cat ears and a tail.  I thought they were just accessories but he insisted it was real.  So I tugged on his ears and it was... real.  I thought he used a lot of glue but he insisted that it's real.  His ears do feel real.  His tail even swished from side to side like it's an actual cat tail.  He told me about something called 'Whisker Fruit' or something.  So my guess is that the food in the so-called 'demon realm' can change you.</i>\"");
+				outputText("\n\nYou tell him if he has some tips for you.  He says, \"<i>Yes.  If I were you, I would eat them only as last resort.  Even a food that could transform you can make the difference betweeen life and death.</i>\"  You thank him for the advice.");
+				outputText("\n\n\"<i>You're welcome.  I have nothing left to tell you but you're always welcome,</i>\" he says.");
+				flags[kFLAGS.INGNAM_RUMORS] = 3; //Finished
+			}
+			doNext(camp.returnToCampUseOneHour);
+		}
 		
 		//Farm
 		public function menuFarm():void {
+			hideMenus();
 			clearOutput();
 			outputText("The size of the farm is quite the contrast to Ingnam.  Dairy cows are penned up near the barn.  Acres of crops grow on the field for the purpose of being harvested for food.");
 			if (flags[kFLAGS.INGNAM_FARMER_MET] <= 0) {
@@ -431,7 +530,7 @@ package classes.Scenes.Places
 			outputText("\n\nYou walk back to Ingnam.");
 			player.gems += 5;
 			statScreenRefresh();
-			doNext(13);	
+			doNext(doNext(camp.returnToCampUseOneHour));	
 		}
 	}
 

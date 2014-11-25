@@ -1460,43 +1460,6 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Wake Up") != -1) {                        
 		toolTipText = "It's all just a dream.  Wake up.";
 	}
-	//Settings
-	if(buttonText.indexOf("Toggle Debug") != -1) {                        
-		toolTipText = "Turn on debug mode.  Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.";
-	}
-	if(buttonText.indexOf("Silly Toggle") != -1) {                        
-		toolTipText = "Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.";
-	}
-	if(buttonText.indexOf("Easy Mode") != -1) {                        
-		toolTipText = "Toggles easy mode. If enabled, enemy damage is halved and bad-ends can be ignored.";
-	}
-	if(buttonText.indexOf("Toggle Sprites") != -1) {                        
-		toolTipText = "Toggles the pixelated sprites that appears in lower-left corner of the screen and also toggles the pictures if image-pack is found.";
-	}
-	if(buttonText.indexOf("AutoSav") != -1) {                
-		toolTipText = "When autosave is on the game will automatically save your character each night at midnight to the last slot it was saved in.";
-		if(buttonText.indexOf("ON") != -1) toolTipText += " Autosave is currently enabled.  Your game will be saved at midnight.";
-		if(buttonText.indexOf("OFF") != -1) toolTipText += " Autosave is currently off.  Your game will NOT be saved.";
-	}
-	if(buttonText.indexOf("Old Side Bar") != -1) {                
-		toolTipText = "Switch between old and new stats bar.\n\nNOTE: As of mod version 0.9, you no longer have to restart the game.";
-	}
-	if(buttonText.indexOf("SFW Toggle") != -1) {                        
-		toolTipText = "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes.";
-	}
-	if(buttonText.indexOf("Watersports") != -1 && kGAMECLASS.tooltipLoc != "LizanRogue") {                        
-		toolTipText = "Toggles watersports scenes. (Scenes related to urine fetish)";
-	}
-	if(buttonText.indexOf("Time Format") != -1) {                        
-		toolTipText = "Toggles between 12-hour and 24-hour format.";
-	}
-	//Cheat menu
-	if(buttonText.indexOf("Spawn Items") != -1) {
-		toolTipText = "Spawn any items of your choice, including items usually not obtainable through gameplay.";
-	}
-	if(buttonText.indexOf("Change Stats") != -1) {                        
-		toolTipText = "Change your core stats.";
-	}
 	return toolTipText;
 }
 
@@ -3004,6 +2967,7 @@ public function spriteSelect(choice:Number = 0):void {
 	}
 	else
 	{
+		if (flags[kFLAGS.USE_OLD_SPRITES] > 0) choice += 1000;
 		if (choice >= 0)
 		{
 			trace ("hiding sprite because flags");
