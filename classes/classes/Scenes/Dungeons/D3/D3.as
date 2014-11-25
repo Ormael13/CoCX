@@ -228,7 +228,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function discoverD3():Boolean
 		{
-			if (flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") && rand(5) == 0)
+			if (flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0 && rand(5) == 0)
 			{
 				flags[kFLAGS.D3_DISCOVERED] = 1;
 				
