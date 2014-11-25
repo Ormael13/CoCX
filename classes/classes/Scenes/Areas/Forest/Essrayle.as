@@ -102,9 +102,9 @@ private function plantsForMe():void {
 	//(If breasts present)
 	if(player.breastRows[0].breastRating >= 1) {
 		outputText("\n\n\"<i>Oooh, how I adore these,</i>\" she coos to you, taking your breasts into two hands and beginning to squeeze and knead firmly into the pillowy flesh");
-		if(player.bRows() > 0) outputText(" of your uppermost pair");
+		if(player.bRows() > 1) outputText(" of your uppermost pair");
 		outputText(".  You moan, and this only seems to encourage her, as she takes your nipples between thumb and forefinger, twisting and turning them this way and that.  She giggles at how your moans seem to fluctuate by coincidence, continuing to tease them");
-		if(player.bRows() > 0) outputText(", steadily working over the multitude of fleshy mounds on your body");
+		if(player.bRows() > 1) outputText(", steadily working over the multitude of fleshy mounds on your body");
 		outputText(".");
 		if(player.hasFuckableNipples()) outputText("  Her fingers play with your nipples and press gently to tease at them.  She seems quite surprised as they sink in with minimal effort.  A grin spreads over her face as she begins to steadily thrust those digits in and out of your nipples, fingers swirling about the interiors all the while.");
 		outputText("  \"<i>You certainly have a lovely pair, but they could always be better, don't you think?</i>\"");
