@@ -11,5 +11,8 @@ package classes.Items.Jewelries
 			super("nojewel", "nojewel", "nothing", "nothing", 0, 0, 0, "no jewelry", "ring");
 		}
 		
+		override public function playerRemove():Jewelry {
+			return null; //There is nothing!
+		}
 	}
 }

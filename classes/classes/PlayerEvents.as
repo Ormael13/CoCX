@@ -809,7 +809,7 @@ package classes {
 				getGame().xmasBitchEncounter(); //Set it to remember the last year encountered
 				return true;
 			}
-			if (checkedTurkey++ == 0 && (rand(5) == 0 && (getGame().model.time.hours == 18 || getGame().model.time.hours == 19)) && (getGame().date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && getGame().isThanksgiving() && player.gender > 0) {
+			if (checkedTurkey++ == 0 && (rand(5) == 0 && (getGame().model.time.hours == 18 || getGame().model.time.hours == 19)) && (getGame().date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && getGame().isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
 				getGame().datTurkeyRumpMeeting(); //TURKEY SURPRISE
 				return true;
 			}

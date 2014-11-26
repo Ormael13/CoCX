@@ -59,8 +59,8 @@ package classes.Scenes
 			clearOutput();
 			outputText("<b><u>Equipment:</u></b>\n");
 			outputText("<b>Weapon:</b> " + player.weaponName + " (Attack: " + player.weaponAttack + ")\n");
-			outputText("<b>Armour:</b>" + player.armorName + " (Defense: " + player.armorDef + ")\n");
-			outputText("<b>Accessory:</b>" + player.jewelryName + "\n");
+			outputText("<b>Armour:</b> " + player.armorName + " (Defense: " + player.armorDef + ")\n");
+			outputText("<b>Accessory:</b> " + player.jewelryName + "\n");
 			if (player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n");
 			for (x = 0; x < player.keyItems.length; x++) outputText(player.keyItems[x].keyName + "\n");
 			menu();
@@ -70,7 +70,7 @@ package classes.Scenes
 					foundItem = true;
 				}
 			}
-			addButton(5, "Unequip", manageEquipment);
+			
 			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false) {
 				if (getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
 					if (flags[kFLAGS.NIEVE_STAGE] == 1)
@@ -90,9 +90,15 @@ package classes.Scenes
 					foundItem = true;
 				}
 			}
+			if (!getGame().inCombat) {
+				addButton(5, "Unequip", manageEquipment);
+			}
 			if (!foundItem) {
 				outputText("\nYou have no usable items.");
 				doNext(1);
+				if (!getGame().inCombat) {
+					addButton(5, "Unequip", manageEquipment);
+				}
 				return;
 			}
 			if (getGame().inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv1(StatusAffects.Sealed) == 3) {
@@ -144,6 +150,13 @@ package classes.Scenes
 			else if (item is Weapon) {
 				player.weapon.removeText();
 				item = player.setWeapon(item as Weapon); //Item is now the player's old weapon
+				if (item == null)
+					itemGoNext();
+				else takeItem(item, callNext);
+			}
+			else if (item is Jewelry) {
+				player.jewelry.removeText();
+				item = player.setJewelry(item as Jewelry); //Item is now the player's old jewelry
 				if (item == null)
 					itemGoNext();
 				else takeItem(item, callNext);
@@ -340,7 +353,7 @@ package classes.Scenes
 			{
 				addButton(2, "Accessory", unequipJewel);
 			}			
-			addButton(14, "Back", inventoryMenu);
+			addButton(4, "Back", inventoryMenu);
 			
 		}
 		//Unequip!

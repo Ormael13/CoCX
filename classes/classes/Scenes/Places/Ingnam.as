@@ -30,8 +30,9 @@ package classes.Scenes.Places
 				return;
 			}
 			clearOutput();
-			outputText("Ingnam is a rich and prosperous village for its small size.  There is already a good deal of shops.  Temple is established in a district located just across from the shops.  The tavern serves as the hub for people near and far to drink and dance.");
-			outputText("\n\nIn the distance is a mountain known by the locals as Mount Ilgast.  Surrounding Ingnam is a vast expanse of wilderness.");
+			outputText("Ingnam is a rich and prosperous village for its small size.  There is already a good deal of shops.  Temple is established in a district located just across from the shops.  The tavern serves as the hub for people near and far to drink and dance.  One of the paths leads to the large farm.");
+			outputText("\n\nIn the distance is a mountain known by the locals as Mount Ilgast.  Surrounding Ingnam is a vast expanse of wilderness.  ");
+			if (model.time.hours >= 21 || model.time.hours < 6) outputText("\n\nIt's dark outside.  Stars dot the night sky and a moon casts the moonlight, providing little light.  Shops are closed at this time.");
 			mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 			mainView.showMenuButton( MainView.MENU_DATA );
 			mainView.showMenuButton( MainView.MENU_STATS );
@@ -56,26 +57,32 @@ package classes.Scenes.Places
 			}
 			hideUpDown();
 			menu();
-			addButton(0, "Explore", exploreIngnam);
+			//addButton(0, "Explore", exploreIngnam);
 			addButton(1, "Shops", menuShops);
 			addButton(2, "Temple", menuTemple);
 			addButton(3, "Inn", menuTavern);
 			addButton(4, "Farm", menuFarm);
 			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0) addButton(6, "Return2Camp", getBanishedToMareth);
-			addButton(7, "Inventory", eventParser, 1000);
+			addButton(7, "Inventory", inventory.inventoryMenu);
 			if (player.lust >= 30) {
 				if (player.lust >= 100) {
 					outputText("\n\n<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>", false);
 					removeButton(0);
 					removeButton(4);
 				}
-				addButton(8, "Masturbate", eventParser, 10);
-				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", eventParser, 10);
+				addButton(8, "Masturbate", eventParser, 42);
+				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", eventParser, 42);
 			}
 			//Show wait/rest/sleep depending on conditions.
 			addButton(9, "Wait", eventParser, 40);
 			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", eventParser, 11);
-			if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", eventParser, 41);
+			if (model.time.hours >= 21 || model.time.hours < 6) {
+				removeButton(0);
+				removeButton(1);
+				removeButton(2);
+				removeButton(4);
+				addButton(9, "Sleep", eventParser, 41);
+			}
 		}
 		
 		//The end of epilogue, starts the game.
@@ -142,10 +149,18 @@ package classes.Scenes.Places
 			outputText("\n\n\"<i>So, do you want to buy anything?</i>\"");
 			outputText("\n\n<b><u>Weapon shop pricings</u></b>");
 			menu();
-			addShopItem(weapons.DAGGER, 40, 1);
-			addShopItem(weapons.PIPE, 50, 1);
-			addShopItem(weapons.SPEAR, 175, 1);
-			addShopItem(weapons.KATANA, 250, 1);
+			if (player.findPerk(PerkLib.HistoryFighter) >= 0) { //20% discount for History: Fighter
+				addShopItem(weapons.DAGGER, 32, 1);
+				addShopItem(weapons.PIPE, 40, 1);
+				addShopItem(weapons.SPEAR, 140, 1);
+				addShopItem(weapons.KATANA, 200, 1);
+			}
+			else {
+				addShopItem(weapons.DAGGER, 40, 1);
+				addShopItem(weapons.PIPE, 50, 1);
+				addShopItem(weapons.SPEAR, 175, 1);
+				addShopItem(weapons.KATANA, 250, 1);
+			}
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -154,9 +169,16 @@ package classes.Scenes.Places
 			outputText("You enter the armor shop, noting the sign depicting armors.  Few armors are proudly displayed on racks.  You can hear the sound of hammering although it stops shortly after you enter.  A male blacksmith comes from the rear door and steps up to the counter and says, \"<i>Welcome to the armor shop.  In a need of protection?</i>\"");
 			outputText("\n\n<b><u>Armor shop pricings</u></b>");
 			menu();
-			addShopItem(armors.LEATHRA, 50, 2);
-			addShopItem(armors.FULLCHN, 150, 2);
-			addShopItem(armors.SCALEML, 200, 2);
+			if (player.findPerk(PerkLib.HistorySmith) >= 0) { //20% discount for History: Smith perk
+				addShopItem(armors.LEATHRA, 40, 2);
+				addShopItem(armors.FULLCHN, 120, 2);
+				addShopItem(armors.SCALEML, 160, 2);
+			}
+			else {
+				addShopItem(armors.LEATHRA, 50, 2);
+				addShopItem(armors.FULLCHN, 150, 2);
+				addShopItem(armors.SCALEML, 200, 2);
+			}
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -171,27 +193,44 @@ package classes.Scenes.Places
 			addShopItem(armors.TUBETOP, 40, 3);
 			addShopItem(armors.OVERALL, 30, 3);
 			addShopItem(armors.M_ROBES, 75, 3);
+			addShopItem(armors.RBBRCLT, 500, 3);
 			addButton(14, "Leave", menuShops);
 		}
 		
 		public function shopAlchemist():void {
 			clearOutput();
-			outputText("(Placeholder) This is the alchemist.");
+			if (flags[kFLAGS.INGNAM_ALCHEMIST_TALKED] <= 0) {
+				outputText("The smell of potions being brewed hits your nose as you approach the door.  The sign indicates that this is where the potions are made.  You enter what appears to be the place where the alchemist works on potions.");
+				outputText("\n\nYou open the door and enter.  Various alchemy equipment are set up in various locations.");
+				outputText("\n\nA male alchemist is working on something until he hears your presence.  He stops and walks up to the counter.  \"<i>Welcome to my shop,</i>\" he says.");
+				flags[kFLAGS.INGNAM_ALCHEMIST_TALKED] = 1;
+			}
+			else {
+				outputText("Once again, you return to the alchemist.");
+				outputText("\n\nThe alchemist senses your presences and he steps up to the counter and says, \"<i>How may I help you?</i>\"");
+			}
 			outputText("\n\n<b><u>Alchemy shop pricings</u></b>");
 			menu();
-			addShopItem(consumables.REDUCTO, 100, 4);
-			addShopItem(consumables.GROPLUS, 100, 4);
-			addShopItem(consumables.L_DRAFT, 30, 4);
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) { //20% discount for History: Alchemist perk
+				addShopItem(consumables.REDUCTO, 80, 4);
+				addShopItem(consumables.GROPLUS, 80, 4);
+				addShopItem(consumables.L_DRAFT, 25, 4);
+			}
+			else {
+				addShopItem(consumables.REDUCTO, 100, 4);
+				addShopItem(consumables.GROPLUS, 100, 4);
+				addShopItem(consumables.L_DRAFT, 30, 4);
+			}
 			addButton(14, "Leave", menuShops);
 		}
 		
 		public function shopTradingPost():void {
 			clearOutput();
-			outputText("(Placeholder) This is the trading post where you can buy goods.");
+			outputText("The trading post contains a variety of goods, all arranged neatly on shelves.  You suspect you could buy some imported goods here.");
 			outputText("\n\n<b><u>Trading post pricings</u></b>");
 			menu();
-			addShopItem(consumables.VITAL_T, 15, 5);
-			addShopItem(consumables.SMART_T, 15, 5);
+			addShopItem(consumables.VITAL_T, 30, 5);
+			addShopItem(consumables.SMART_T, 30, 5);
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -199,9 +238,9 @@ package classes.Scenes.Places
 			clearOutput();
 			if (flags[kFLAGS.INGNAM_BLACKMARKET_TALKED] <= 0) {
 				outputText("You walk into an alley you swear you have never explored before.  You swallow your pride as you walk into the alley.");
-				outputText("\n\nYou have an uneasy feeling until you hear a voice.  You look around to see that a man walks from the shadows to approach you.");
-				outputText("\n\n\"<i>Greetings.  I know you.  You're going to be the Champion, right?</i>\" The shady man says.  His face is concealed by a hood.  You tell him that yes, you're going to be the Champion of Ingnam.");
-				outputText("\n\nHe pulls his hood down and says, \"<i>I've managed to sneak into the portal at the mountains.  There are extraordinary goods that can transform you.  I've managed to smuggle these goods.  It take me years of plannings as the portal is only open for a period of time before it closes for the rest of the year.</i>\"  He opens up his coat and shows you the array of goods and says, \"<i>They aren't cheap but I can guarantee, they are the real stuff!  See anything you would like?</i>\"");
+				outputText("\n\nYou have an uneasy feeling until you hear a voice.  You look around to see that a hooded figure walks from the shadows to approach you.");
+				outputText("\n\n\"<i>Greetings.  I know you.  You're going to be the Champion, right?</i>\" The hooded figure says.  His face is concealed by the shade of his hood.  You tell him that yes, you're going to be the Champion of Ingnam.");
+				outputText("\n\nHe pulls his hood down and says, \"<i>I've managed to sneak into the portal at the mountains.  There are extraordinary stuff that can transform you.  I've managed to smuggle these goods.  It takes me years of plannings as the portal is only open for a period of time before it closes for the rest of the year.</i>\"  He opens up his coat and shows you the array of goods and says, \"<i>They aren't cheap but I can guarantee, they are the real stuff!  See anything you would like?</i>\"");
 				flags[kFLAGS.INGNAM_BLACKMARKET_TALKED] = 1;
 			}
 			else {
@@ -289,7 +328,7 @@ package classes.Scenes.Places
 		public function startMeditate():void {
 			if (player.findPerk(PerkLib.HistoryReligious) >= 0) dynStats("lib", -0.5, "cor", -0.5); //Bonus points for religious perks.
 			flags[kFLAGS.FORCE_MEDITATE] = 1; //Sets flag to 1 to force meditate. The flag itself is set to 0 after meditate is done.
-			eventParser(10); //Fires the event.
+			eventParser(42); //Fires the event.
 		}
 		
 		//Tavern
@@ -297,6 +336,10 @@ package classes.Scenes.Places
 			hideMenus();
 			clearOutput();
 			outputText("The inn is a nice place to be in.  You see several people drinking and chatting about random topics.  The innkeeper stands behind the wooden counter, serving beverages and cleaning.");
+			if ((player.earType > 0 && player.earType != flags[kFLAGS.INGNAM_EARS_LAST_TYPE] && flags[kFLAGS.INGNAM_EARS_FREAKOUT] <= 0) || (player.tailType > 0 && player.tailType != flags[kFLAGS.INGNAM_TAIL_LAST_TYPE] && flags[kFLAGS.INGNAM_TAIL_FREAKOUT] <= 0)) {
+				appearanceFreakout();
+				return;
+			}
 			menu();
 			addButton(0, "Order Drink", orderDrink, null, null, null, "Buy some refreshing beverages.");
 			addButton(1, "Order Food", orderFood, null, null, null, "Buy some food" + (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 50 ? " and curb that hunger of yours!": ".") + "");
@@ -304,6 +347,35 @@ package classes.Scenes.Places
 			//if (player.findPerk(PerkLib.HistoryWhore) >= 0) addButton(5, "Prostitute", eventParser, 9999, null, null, "Seek someone who's willing to have sex with you for profit.");
 			addButton(14, "Leave", menuIngnam);
 		}
+		
+		public function appearanceFreakout():void {
+			clearOutput();
+			outputText("The innkeeper stands up to see that there's something unusual with your appearance.");
+			if (player.earType > 0) {
+				if (player.earType == EARS_HORSE) {
+					outputText("\n\nHe says, \"<i>Your ears... They look different!  They look like horse's!  I have no idea how your ears changed.</i>\"");
+				}
+				if (player.earType == EARS_DOG) {
+					outputText("\n\nHe says, \"<i>Your ears... They look like dog's!  I have no idea how your ears changed.</i>\"");
+				}
+				if (player.earType == EARS_CAT) {
+					outputText("\n\nHe says, \"<i>Your ears... They look like cat's!  I have no idea how your ears changed but other than that, you look much cuter with cat ears!</i>\"  He walks over to you and scratch your cat-ears.  \"<i>They look and feel so real,</i>\" he says.");
+				}
+				flags[kFLAGS.INGNAM_EARS_LAST_TYPE] = player.earType;
+				flags[kFLAGS.INGNAM_EARS_FREAKOUT] = 1;
+			}
+			if (player.earType > 0 && player.tailType > 0 && player.hasLongTail()) outputText("Next, he walks behind you, taking a glance at your tail.");
+			if (player.tailType > 0) {
+				if (player.hasLongTail()) {
+					outputText("\n\nHe says with a surprised look, \"<i>You have a tail now?  Are you sure this is fake?</i>\"  You tell him that your tail is not fake; it's real.  \"<i>Prove it,</i>\" he says as he tugs your tail.  Ouch! That hurts!  \"<i>Sorry about that,</i>\" he says, \"<i>but that tail definitely looks and feels real!  I think your tail do looks nice.</i>\"");
+					outputText("\n\nYou thank him for the compliment and he goes back to behind the counter.");
+				}
+				flags[kFLAGS.INGNAM_TAIL_LAST_TYPE] = player.earType;
+				flags[kFLAGS.INGNAM_TAIL_FREAKOUT] = 1;
+			}
+			doNext(menuTavern);
+		}
+
 		
 		public function orderDrink():void {
 			clearOutput();
@@ -479,6 +551,11 @@ package classes.Scenes.Places
 		
 		public function workAtFarm():void { //Job at the farm.
 			clearOutput();
+			if (player.fatigue > 70) {
+				outputText("You are too exhausted to work at the farm!");
+				doNext(menuFarm);
+				return;
+			}
 			var chooser:int = rand(3);
 			outputText("You let the farmer know that you're here to work for the farm.");
 			if (chooser == 0) {
@@ -530,7 +607,7 @@ package classes.Scenes.Places
 			outputText("\n\nYou walk back to Ingnam.");
 			player.gems += 5;
 			statScreenRefresh();
-			doNext(doNext(camp.returnToCampUseOneHour));	
+			doNext(camp.returnToCampUseOneHour);	
 		}
 	}
 

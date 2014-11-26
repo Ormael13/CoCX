@@ -1765,13 +1765,13 @@ private function jojoCampMenu():void {
 	}
 	else jojoDefense += "Off";
 	menu();
-	addButton(0, "Appearance", jojoAppearance);
-	addButton(1, "Talk", talkMenu);
-	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 1) addButton(2, "Train", apparantlyJojoDOESlift);
+	addButton(0, "Appearance", jojoAppearance, null, null, null, "Examine Jojo's appearance.");
+	addButton(1, "Talk", talkMenu, null, null, null, "Discuss with him about topics.");
+	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 1) addButton(2, "Train", apparantlyJojoDOESlift, null, null, null, "Join him in a training session.");
 	addButton(3, "Meditate", jojoFollowerMeditate);
-	addButton(4, jojoDefense, jojoDefenseToggle);
-	if (player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(5, "Purge", wormRemoval);
-	addButton(8, "Rape", (player.cor > 10 && player.lust >= 33 && player.gender > 0 ? jojoAtCampRape : null));
+	addButton(4, jojoDefense, jojoDefenseToggle, null, null, null, (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 ? "Request him to stop guarding the camp.": "Request him to guard the camp at night."));
+	if (player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(5, "Purge", wormRemoval, null, null, null, "Request him to purge the worms from your body.");
+	addButton(8, "Rape", (player.cor > 10 && player.lust >= 33 && player.gender > 0 ? jojoAtCampRape : null), null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 20 ? "  Why would you do that?": ""));
 	addButton(9, "Leave", eventParser, 74);
 }
 
@@ -1796,15 +1796,16 @@ public function talkMenu():void
 {
 	jojoSprite();
 	menu();
-	addButton(0, "Village", jojoTalkVillage);
-	addButton(1, "Monks", jojoTalkJoiningTheMonks);
-	addButton(2, "MonksFall", jojoTalkFallOfTheMonks);
-	addButton(3, "Forest", jojoTalkForestConvo);
-	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(4, "You", jojoTalkYourOrigin);
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) addButton(5, "Factory", jojoTalkFactory);
-	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave);
-	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift);
-	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
+	addButton(0, "Village", jojoTalkVillage, null, null, null, "Ask him about the village he was raised in.");
+	addButton(1, "Monks", jojoTalkJoiningTheMonks, null, null, null, "Ask him about how and why he became a monk.");
+	addButton(2, "MonksFall", jojoTalkFallOfTheMonks, null, null, null, "Ask him about the demise of the monks.");
+	addButton(3, "Forest", jojoTalkForestConvo, null, null, null, "Ask him about how he ended up in the forest.");
+	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(4, "You", jojoTalkYourOrigin, null, null, null, "Tell him about Ingnam and your history.");
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) addButton(5, "Factory", jojoTalkFactory, null, null, null, "Tell him about how you've shut down the factory.");
+	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave, null, null, null, "Tell him about your encounter in the Sand Cave in the desert.");
+	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift, null, null, null, "Ask him if he's willing to train you.");
+	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1, null, null, null, "Ask him if he can exorcise the demonic parasite infesting Minerva.");
+	//if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusAffectv1(StatusAffects.JojoMeditationCount) >= 10 && player.cor <= 10) addButton(9, "Sex?", offerSexFirstTime, null, null, null, "You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
 	addButton(14, "Back", jojoCamp);
 }
 
@@ -2290,10 +2291,26 @@ public function wormRemoval():void {
 	//Infestation removed. HP reduced to 50% of MAX. Sensitivity reduced by -25 or reduced to 10, which ever is the smaller reduction.
 	//Infestation purged. Hit Points reduced to 10% of MAX. Corruption -20.
 	if (player.HP > int(player.maxHP() * .5)) player.HP = int(player.maxHP() * .5);
+	player.damageHunger(30);
 	player.sens = 11;
 	player.removeStatusAffect(StatusAffects.Infested);
 	dynStats("sen", -1, "lus", -99, "cor", -15);
+	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
+
+//Consensual Jojo sex scenes! NOT DONE.
+public function offerSexFirstTime():void {
+	jojoSprite();
+	clearOutput();
+	outputText("You've been spending great time with Jojo. You've meditated with him, you've discussed with him and you've even trained with him! Now's the time to ask him.");
+	outputText("\n\nYou approach Jojo. \"Yes, [name]? What is it you need?\" He asks. You ask him if he would like to have sex.");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function confrontChastity():void {
+	
+}
+
 	}
 }

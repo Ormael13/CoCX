@@ -1501,7 +1501,19 @@ package classes.Scenes.Monsters
 			}
 			doNext(1);
 		}
-			
+		
+		//IMP WARLORD
+		public function impWarlordEncounter():void {
+			clearOutput();
+			outputText("A large corrupted imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
+			startCombat(new ImpWarlord());
+			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+			}
+			doNext(1);
+		}
+				
 			
 		//Rewards
 		//+20 XP

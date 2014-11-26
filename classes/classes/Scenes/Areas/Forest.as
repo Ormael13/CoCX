@@ -234,6 +234,11 @@ package classes.Scenes.Areas
 					if (player.level >= 8 && rand(2) == 0) {
 						kGAMECLASS.impScene.impLordEncounter();
 					}
+					else if (player.level >= 12 && rand(2) == 0) {
+						kGAMECLASS.impScene.impWarlordEncounter();
+						spriteSelect(29);
+						return;
+					}
 					else {
 						outputText("An imp leaps out of the bushes and attacks!", true);
 						startCombat(new Imp());

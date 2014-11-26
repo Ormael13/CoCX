@@ -2042,6 +2042,7 @@ private function gymMenu():void {
 private function buyGymLifeTimeMembership():void {
 	outputText("", true);
 	//[Buy LifeTime Membership]
+	if (silly()) outputText("You tell \"Shut up and take my gems!\" as you pull out your gem-pouch. \n\n"); //Shut up and take my gems!
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.", false);
 	if(player.hasCock()) {
 		outputText("  It brings a flush to your face that has nothing to do with exercise.  Maybe you'll be able to con her into some alone time later?", false);
@@ -2093,9 +2094,14 @@ private function weightLifting():void {
 	outputText("\n\nDo you want to hit the showers before you head back to camp?", false);
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
-		addButton(0,"\"Showers\"",sexMachine.exploreShowers);
-		addButton(1,"Showers",brooke.repeatChooseShower);
-		addButton(4,"Leave",camp.returnToCampUseOneHour);
+		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
+			addButton(0,"\"Showers\"",sexMachine.exploreShowers);
+			addButton(1,"Showers",brooke.repeatChooseShower);
+			addButton(4, "Leave", camp.returnToCampUseOneHour);
+		}
+		else {
+			doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
+		}
 	}
 	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
 }

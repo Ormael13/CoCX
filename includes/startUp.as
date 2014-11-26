@@ -288,7 +288,7 @@ public function settingsScreenGameSettings():void {
 	settingsScreen();
 	menu();
 	addButton(0, "Toggle Debug", toggleDebug, null, null, null, "Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
-	if (player.str > 0) addButton(1, "Difficulty", difficultySelectionMenu, "Adjust the game difficulty to make it easier or harder.");
+	if (player.str > 0) addButton(1, "Difficulty", difficultySelectionMenu, null, null, null, "Adjust the game difficulty to make it easier or harder.");
 	//addButton(1, "Easy Mode", toggleEasyModeFlag, null, null, null, "Toggles easy mode.  Enemy damage is halved and bad-ends can be ignored.");	
 	addButton(2, "Silly Toggle", toggleSillyFlag, null, null, null, "Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 	addButton(3, "Low Standards", toggleStandards);
@@ -321,7 +321,7 @@ public function settingsScreenInterfaceSettings():void {
 	addButton(0, "Side Bar Style", toggleInterface, null, null, null, "Switch between old and new stats bars.");
 	addButton(1, "Toggle Images", toggleImages, null, null, null, "Enable or disable image pack.");
 	addButton(2, "Toggle Sprites", toggleSpritesFlag, null, null, null, "Toggles the pixelated sprites that appears in lower-left corner of the screen and also toggles the pictures if image-pack is found.");
-	addButton(3, "Old Sprites", toggleOldSprites, null, null, null, "Toggle between old and new sprites."); //If I can re-add old sprites, that is.
+	addButton(3, "Old Sprites", toggleOldSprites, null, null, null, "Toggle between old and new sprites.  \n\nNOTE: This doesn't work well right now."); //If I can re-add old sprites, that is.
 	addButton(4, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
 	addButton(5, "Background", cycleBackground, null, null, null, "Cycle through background styles and colors.");
 	addButton(14, "Back", settingsScreenMain);

@@ -822,12 +822,12 @@ public function doCamp():void {
 	menu();
 	addButton(0, "Explore", eventParser, explore);
 	if (placesCount() > 0) addButton(1, "Places", places);
-	addButton(2, "Camp Action", campActions);
-	addButton(3, "Inventory", inventory.inventoryMenu);
-	if (inventory.showStash()) addButton(4, "Stash", stash);
-	if (followersCount() > 0) addButton(5, "Followers", campFollowers);
-	if (loversCount() > 0) addButton(6, "Lovers", campLoversMenu);
-	if (slavesCount() > 0) addButton(7, "Slaves", campSlavesMenu);
+	addButton(2, "Inventory", inventory.inventoryMenu);
+	if (inventory.showStash()) addButton(3, "Stash", stash);
+	if (followersCount() > 0) addButton(4, "Followers", campFollowers);
+	if (loversCount() > 0) addButton(5, "Lovers", campLoversMenu);
+	if (slavesCount() > 0) addButton(6, "Slaves", campSlavesMenu);
+	addButton(7, "Camp Actions", campActions);
 	if (player.lust >= 30) {
 		addButton(8, "Masturbate", eventParser, 10);
 		if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", eventParser, 10);

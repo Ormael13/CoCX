@@ -9,17 +9,7 @@ package classes.Scenes
 	{
 		public var mainHack:MainViewHack = new MainViewHack()
 		private var lastMenu:Function = null
-		/*
-			addButton(0, "Item1", giveItem, consumables.ITEM);
-			addButton(1, "Item2", giveItem, consumables.ITEM);
-			addButton(2, "Item3", giveItem, consumables.ITEM);
-			addButton(3, "Item4", giveItem, consumables.ITEM);
-			
-			addButton(5, "Item5", giveItem, consumables.ITEM);
-			addButton(6, "Item6", giveItem, consumables.ITEM);
-			addButton(7, "Item7", giveItem, consumables.ITEM);
-			addButton(8, "Item8", giveItem, consumables.ITEM);
-		 */
+		
 		public function DebugMenu() 
 		{	
 		}
@@ -295,15 +285,15 @@ package classes.Scenes
 			addButton(2, "DrgnShl", giveItem, weapons.DRGNSHL);
 			addButton(3, "E.Staff", giveItem, weapons.E_STAFF);
 			
-			addButton(5, "UrtaHlb", giveItem, weapons.URTAHLB);
-			addButton(6, "H.Gaunt", giveItem, weapons.H_GAUNT);
-			addButton(7, "JRapier", giveItem, weapons.JRAPIER);
-			addButton(8, "Katana", giveItem, weapons.KATANA);
+			addButton(5, "Flintlock", giveItem, weapons.FLINTLK);
+			addButton(6, "UrtaHlb", giveItem, weapons.URTAHLB);
+			addButton(7, "H.Gaunt", giveItem, weapons.H_GAUNT);
+			addButton(8, "JRapier", giveItem, weapons.JRAPIER);
 			
-			addButton(10, "L. Axe", giveItem, weapons.L__AXE);
-			addButton(11, "L.Daggr", giveItem, weapons.L_DAGGR);
-			addButton(12, "L.Hammr", giveItem, weapons.L_HAMMR);
-			addButton(13, "Pipe", giveItem, weapons.PIPE);
+			addButton(10, "Katana", giveItem, weapons.KATANA);
+			addButton(11, "L. Axe", giveItem, weapons.L__AXE);
+			addButton(12, "L.Daggr", giveItem, weapons.L_DAGGR);
+			addButton(13, "L.Hammr", giveItem, weapons.L_HAMMR);
 			
 			addButton(4, "Next", itemSpawnWeaponsMenuII);
 			//addButton(9, "Previous", itemSpawnWeaponsMenuI);
@@ -312,23 +302,32 @@ package classes.Scenes
 		private function itemSpawnWeaponsMenuII():void {
 			lastMenu = itemSpawnWeaponsMenuII;
 			menu();
-			addButton(0, "Pitchfork", giveItem, weapons.PTCHFRK);
-			addButton(1, "RidingC", giveItem, weapons.RIDINGC);
-			addButton(2, "RRapier", giveItem, weapons.RRAPIER);
-			addButton(3, "S.Blade", giveItem, weapons.S_BLADE);
+			addButton(0, "Pipe", giveItem, weapons.PIPE);
+			addButton(1, "Pitchfork", giveItem, weapons.PTCHFRK);
+			addButton(2, "RidingC", giveItem, weapons.RIDINGC);
+			addButton(3, "RRapier", giveItem, weapons.RRAPIER);
 			
-			addButton(5, "S.Gauntlet", giveItem, weapons.S_GAUNT);
-			addButton(6, "ScarBlade", giveItem, weapons.SCARBLD);
-			addButton(7, "Scimitar", giveItem, weapons.SCIMITR);
-			addButton(8, "Spear", giveItem, weapons.SPEAR);
+			addButton(5, "S.Blade", giveItem, weapons.S_BLADE);
+			addButton(6, "S.Gauntlet", giveItem, weapons.S_GAUNT);
+			addButton(7, "ScarBlade", giveItem, weapons.SCARBLD);
+			addButton(8, "Scimitar", giveItem, weapons.SCIMITR);
 			
-			addButton(10, "SucWhip", giveItem, weapons.SUCWHIP);
-			addButton(11, "W.Staff", giveItem, weapons.W_STAFF);
-			addButton(12, "Warhammer", giveItem, weapons.WARHAMR);
-			addButton(13, "Whip", giveItem, weapons.WHIP);			
+			addButton(10, "Spear", giveItem, weapons.SPEAR);
+			addButton(11, "SucWhip", giveItem, weapons.SUCWHIP);
+			addButton(12, "W.Staff", giveItem, weapons.W_STAFF);
+			addButton(13, "Warhammer", giveItem, weapons.WARHAMR);
 
-			//addButton(4, "Next", itemSpawnWeaponsMenuIII);
+			addButton(4, "Next", itemSpawnWeaponsMenuIII);
 			addButton(9, "Previous", itemSpawnWeaponsMenuI);
+			addButton(14, "Back", itemSpawnMenu);
+		}
+		private function itemSpawnWeaponsMenuIII():void {
+			lastMenu = itemSpawnWeaponsMenuIII;
+			menu();
+			addButton(0, "Whip", giveItem, weapons.WHIP);			
+
+			//addButton(4, "Next", itemSpawnWeaponsMenuIV);
+			addButton(9, "Previous", itemSpawnWeaponsMenuII);
 			addButton(14, "Back", itemSpawnMenu);
 		}
 

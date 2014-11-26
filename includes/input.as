@@ -30,7 +30,7 @@ public function displayControls():void
 	mainView.hideAllMenuButtons();
 	inputManager.DisplayBindingPane();
 	
-	choices("Reset Ctrls", resetControls,
+	/*choices("Reset Ctrls", resetControls,
 			"Clear Ctrls", clearControls,
 			"Null", 0,
 			"Null", 0,
@@ -39,7 +39,11 @@ public function displayControls():void
 			"Null", 0,
 			"Null", 0,
 			"Null", 0,
-			"Back", hideControls);
+			"Null", 0);*/
+	menu();
+	addButton(0, "Reset Ctrls", resetControls);
+	addButton(1, "Clear Ctrls", clearControls);
+	addButton(4, "Back", hideControls);
 }
 
 public function hideControls():void

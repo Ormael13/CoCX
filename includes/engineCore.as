@@ -1185,59 +1185,7 @@ public function getButtonToolTipText(buttonText:String):String
 			toolTipText = "Ask him if he can make use of that lethicite you've obtained from Marae.";
 		}
 	}
-	//Jojo
-	if (kGAMECLASS.tooltipLoc == "Jojo") {
-		if (buttonText == "Appearance") {
-			toolTipText = "Examine Jojo's appearance.";
-		}		
-		if (buttonText == "Talk") {
-			toolTipText = "Discuss with him about topics.";
-		}		
-		if (buttonText == "Rape") {
-			toolTipText = "Rape the poor monk mouse-morph.";
-			if (player.cor < 20) toolTipText += "  Why would you do that?";
-		}		
-		if (buttonText == "Train") {
-			toolTipText = "Join him in a training session.";
-		}		
-		if (buttonText == "N.Watch:On") {
-			toolTipText = "Request him to stop guarding the camp.";
-		}		
-		if (buttonText == "N.Watch:Off") {
-			toolTipText = "Request him to guard the camp at night.";
-		}
-		if (buttonText == "Purge") {
-			toolTipText = "Request him to purge the worms from your body.";
-		}
-		//Talk
-		if (buttonText == "Village") {
-			toolTipText = "Ask him about the village he was raised in.";
-		}
-		if (buttonText == "Monks") {
-			toolTipText = "Ask him about how and why he became a monk.";
-		}
-		if (buttonText == "MonksFall") {
-			toolTipText = "Ask him about the demise of the monks.";
-		}
-		if (buttonText == "Forest") {
-			toolTipText = "Ask him about how he ended up in the forest.";
-		}
-		if (buttonText == "You") {
-			toolTipText = "Tell him about Ingnam and your history.";
-		}
-		if (buttonText == "Factory") {
-			toolTipText = "Tell him about how you've shut down the factory.";
-		}
-		if (buttonText == "SandCave") {
-			toolTipText = "Tell him about your encounter in the Sand Cave in the desert.";
-		}
-		if (buttonText == "Training") {
-			toolTipText = "Ask him if he's willing to train you.";
-		}
-		if (buttonText == "Purification") {
-			toolTipText = "Ask him if he can exorcise the demonic parasite infesting Minerva.";
-		}
-	}
+	//Jojo - Moved to addButton in JojoScene.as
 	//Valeria
 	if (kGAMECLASS.tooltipLoc == "Valeria") {
 		//Menu
@@ -2963,11 +2911,11 @@ public function doBadEnd():void {
 public function spriteSelect(choice:Number = 0):void {
 	if (flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
 	{
+		if (flags[kFLAGS.USE_OLD_SPRITES] >= 1) choice += 1000;
 		mainView.selectSprite( choice );
 	}
 	else
 	{
-		if (flags[kFLAGS.USE_OLD_SPRITES] > 0) choice += 1000;
 		if (choice >= 0)
 		{
 			trace ("hiding sprite because flags");

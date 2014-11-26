@@ -188,6 +188,11 @@ package classes.Scenes
 							spriteSelect(29);
 							return;
 						}
+						else if (player.level >= 12 && rand(2) == 0) {
+							kGAMECLASS.impScene.impWarlordEncounter();
+							spriteSelect(29);
+							return;
+						}
 						else {
 							outputText("An imp wings out of the sky and attacks!", true);
 							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
