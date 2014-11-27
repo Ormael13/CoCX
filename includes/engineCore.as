@@ -1750,7 +1750,6 @@ public function choices(text1:String, butt1:*,
 		}
 
 	}
-
 	// funcs = new Array();
 	// args = new Array();
 	//mainView.setOutputText( currentText );

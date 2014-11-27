@@ -2478,8 +2478,11 @@ package classes
 				return mf(male, female);
 		}
 		
+		//Rewritten!
 		public function mf(male:String, female:String):String
 		{
+			//if (femWeight()) return female;
+			//else return male;
 			//Dicks?
 			if (totalCocks() > 0)
 			{
@@ -2501,6 +2504,37 @@ package classes
 				}
 			}
 		}
+		
+		//Used for measuring femininity. If less than 50, returns false for male. Otherwise, returns true for female.
+		/*public function femWeight():Number {
+			//1/2 facial
+			var weighting:Number = femininity;
+			//Tits count up to their rating for femininity
+			if (biggestTitSize() >= 1) {
+				trace("boobs confirmed");
+				if (biggestTitSize() * 3 > 50) weighting += 50;
+				else weighting += biggestTitSize() * 3;
+			}
+			//Flat chest + 20 masculine
+			else if (biggestTitSize() == 0) {
+				trace("no boobs confirmed");
+				weighting -= 20;
+			}
+			//Hips give small boost
+			if (hipRating() >= 6) weighting += hipRating() * 1.5;
+			else weighting -= (6 - hipRating()) * 3;
+			if (hairLength > 8) weighting += (hairLength - 7) * 1.5;
+			else weighting -= (8 - hairLength) * 1.5;
+			if (tone > 70) weighting -= 10;
+			if (tone < 30) weighting += 10;
+			if (lipRating() > 1) weighting += lipRating() * 3;
+			if (hasBeard()) weighting -= 100;
+			trace("Femininity Rating = " + weighting);
+			//Neuters first!
+			if (weighting <= 49) return false;
+			else return true;
+		} */
+		
 		
 		public function boyGirl(caps:Boolean = false):String
 		{

@@ -2597,15 +2597,16 @@ package classes.Scenes.NPCs
 				var eggs:Function = null;
 				if (flags[kFLAGS.AMILY_OVIPOSITION_UNLOCKED] > 0 && player.canOviposit()) eggs = layEggsInAmily;
 				choices("Appearance", amilyAppearance, "Talk", talkToAmilyCamp, "Make Love", fuckTheMouseBitch, "Give Present", giveAmilyAPresent, "Date", date,
-					"Lay Eggs", eggs, "Defur", defur, "", null, "", null, "Back", camp.campLoversMenu);
+					"Lay Eggs", eggs, "Defur", defur, "", null, "", null, "", null);
+				addButton(14, "Leave", camp.campLoversMenu);
 			}
 			//Corrupt
 			else {
 				//outputText("Options:\nAppearance\nGive Item\nSex\nTalk\n", false);
 				//  [Sex] [Give Item] [Talk] [Call Jojo]
 				choices("Appearance", amilyAppearance, "Give Item", giveAmilyAPresent, "Sex", fuckTheMouseBitch, "Talk", talkWithCORRUPTCUNT, "Defur", defur,
-					"", null, "", null, "", null, "", null, "Back", camp.campSlavesMenu);
-				
+					"", null, "", null, "", null, "", null, "", null);
+				addButton(14, "Leave", camp.campLoversMenu);
 				if (!pregnancy.isPregnant && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
 				{
 					addButton(5, "Farm Work", sendCorruptCuntToFarm);
