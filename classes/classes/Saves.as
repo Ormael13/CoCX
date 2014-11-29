@@ -849,7 +849,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.monk = getGame().monk;
 		saveFile.data.sand = getGame().sand;
 		saveFile.data.giacomo = getGame().giacomo;
-		saveFile.data.beeProgress = getGame().beeProgress;
+		saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
 		
 		//ITEMZ. Item1s
 		saveFile.data.itemSlot1 = [];
@@ -1760,11 +1760,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			game.giacomo = 0;
 		else
 			game.giacomo = saveFile.data.giacomo;
-		if (saveFile.data.beeProgress == undefined)
-			game.beeProgress = 0;
-		else
-			game.beeProgress = saveFile.data.beeProgress;
-		
+		if (saveFile.data.beeProgress != undefined && saveFile.data.beeProgress == 1) game.forest.beeGirlScene.setTalked(); //Bee Progress update is now in a flag
+			//The flag will be zero for any older save that still uses beeProgress and newer saves always store a zero in beeProgress, so we only need to update the flag on a value of one.
+			
 		//ITEMZ. Item1
 		if (saveFile.data.itemSlot1.shortName && saveFile.data.itemSlot1.shortName.indexOf("Gro+") != -1)
 			saveFile.data.itemSlot1.id = "GroPlus";

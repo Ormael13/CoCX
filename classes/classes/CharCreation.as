@@ -154,7 +154,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	kGAMECLASS.monk = 0;
 	kGAMECLASS.whitney = 0;
 	kGAMECLASS.sand = 0;
-	kGAMECLASS.beeProgress = 0;
+//Replaced by flag	kGAMECLASS.beeProgress = 0;
 	kGAMECLASS.giacomo = 0;
 	//Lets get this bitch started
 	kGAMECLASS.inCombat = false;

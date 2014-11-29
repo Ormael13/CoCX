@@ -1117,7 +1117,7 @@ package classes.Scenes.NPCs
 		{
 			var item:Function =null;
 			var weaponT:String = "Give Weapon";
-			var weaponB:* = giveAnemoneWeapon;
+			var weaponB:Function = giveAnemoneWeapon;
 			clearOutput();
 			spriteSelect(71);
 			outputText("You walk over to the barrel.  ");

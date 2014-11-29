@@ -77,6 +77,25 @@ package classes {
 					needNext = true;
 				}
 			}
+			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) { //All the hourly bee cock checks except the 'seek out the bee girl' check. That's in timeChangeLarge
+				outputText("\n");
+				if (player.cocks.length > 1) {
+					outputText("You feel a stickiness and some stinging from your cocks.  It seems your bee cock has absorbed your new addition, leaving no trace of it.\n");
+					while (player.cocks.length > 1) player.removeCock(1, 1);
+				}
+				if (player.cocks[0].cockLength < 25 || player.cocks[0].cockThickness < 4) {
+					outputText("Your " + player.cockDescript(0) + " quivers for a moment before growing slightly ");
+					if (player.cocks[0].cockLength < 25 && player.cocks[0].cockThickness < 4)
+						outputText("longer and thicker");
+					else outputText(player.cocks[0].cockLength < 25 ? "longer again" : "wider again");
+					outputText(", a bit of pain passing through you at the same time.  It looks like your bee cock won’t get any smaller.\n");
+					player.cocks[0].cockLength = Math.max(player.cocks[0].cockLength, 25);
+					player.cocks[0].cockThickness = Math.max(player.cocks[0].cockThickness, 4);
+				}
+				outputText("The desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
+				dynStats("lust", 10); //Always gain 10 lust each hour
+				needNext = true;
+			}
 			if (!player.hasVagina() && player.findPerk(PerkLib.Diapause) >= 0) { //Lose diapause
 				outputText("\n<b>With the loss of your womb, you lose your kangaroo-like diapause ability.</b>\n");
 				player.removePerk(PerkLib.Diapause);
@@ -814,6 +833,11 @@ package classes {
 				if (player.lib > 50 || player.lust > 40) { //Randomly generated dreams here
 					if (getGame().dreamSelect()) return true;
 				}
+			}
+			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE && player.lust >= 100) {
+				outputText("\nYou can’t help it anymore, you need to find the bee girl right now.  You rush off to the forest to find the release that you absolutely must have.  Going on instinct you soon find the bee girl's clearing and her in it.\n\n");
+				getGame().forest.beeGirlScene.beeSexForCocks(false);
+				return true;
 			}
 			return false;
 		}
