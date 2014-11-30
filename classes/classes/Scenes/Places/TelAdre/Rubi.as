@@ -1573,11 +1573,11 @@ private function playDressUp():void {
 		outputText("\n");
 	}
 	var button:int = 0;
-	while(button < 9 && button < buttonNames.length) {
+	while(button < 14 && button < buttonNames.length) {
 		trace("BUTTONNAMES: " + buttonNames[button]);
 		trace("CLOSET: " + closet[button]);
-		if(button < 8 || closet.length < 9) addButton(button,buttonNames[button],dressUpRouter,closet[button]);
-		else addButton(8,"More",playDressUp2);
+		if(button < 13 || closet.length < 14) addButton(button,buttonNames[button],dressUpRouter,closet[button]);
+		else addButton(13,"More",playDressUp2);
 		button++;
 	}
 	addButton(14,"Back",rubiAppearance);
@@ -1652,9 +1652,9 @@ private function playDressUp2():void {
 		}
 		outputText("\n");
 	}
-	var button:int = 7;
-	while(button-7 < 9 && button < buttonNames.length) {
-		if(button == 7) addButton(0,"Previous",playDressUp);
+	var button:int = 12;
+	while(button-12 < 14 && button < buttonNames.length) {
+		if(button == 12) addButton(0,"Previous",playDressUp);
 		else if(button <= closet.length) addButton(button-7,buttonNames[button],dressUpRouter,closet[button]);
 		button++;
 	}
@@ -3235,9 +3235,10 @@ private function pickAnItemToFeedRubi():void {
 	
 	if (flags[kFLAGS.RUBI_BIMBO_MINIDRESS] == 1)
 		closet[closet.length] = "A Bimbo Minidress";
-	else
+	else {
 		gifts.push("A Bimbo Minidress"); //No button, must be found in a special event
-	
+		if (player.hasItem(armors.BIMBOSK)) addButton(button++, "BimboSk", giveRubiClothes, armors.BIMBOSK);
+	}
 	if (flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 1)
 		closet[closet.length] = "Bondage Straps";
 	else {
@@ -3269,6 +3270,7 @@ private function pickAnItemToFeedRubi():void {
 	else {
 		outputText("You've given Rubi all the clothes [rubi ey] would want to make use of.");
 		if (silly()) outputText("  (Achievement Unlocked: Dress-tacular)");
+		awardAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR);
 		outputText("\n\n");
 	}
 	

@@ -238,7 +238,6 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5, "Park", kGAMECLASS.arianScene.visitThePark);
 	addButton(6, "Pawn", oswaldPawn);
 	addButton(7, "Tower", library.visitZeMagesTower);
-	addButton(8, "Weapons", weaponShop);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
@@ -1044,11 +1043,11 @@ private function oswaldPawnMenu():void { //Moved here from Inventory.as
 			totalItems += player.itemSlots[slot].quantity;
 		}
 	}
-	if (totalItems > 1) addButton(7, "Sell All", oswaldPawnSellAll);
+	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
-		case 2: addButton(5, "Kath's Alley", katherine.visitKatherine); break;
-		case 3: addButton(5, "Safehouse", katherineEmployment.katherineTrainingWithUrta);
+		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
+		case 3: addButton(10, "Safehouse", katherineEmployment.katherineTrainingWithUrta);
 		default:
 	}
 	addButton(14, "Back", telAdreMenu);
@@ -1476,7 +1475,8 @@ public function tailorShoppe():void {
 			armors.T_BSUIT.shortName,createCallBackFunction(buyClothes,armors.T_BSUIT),
 			armors.M_ROBES.shortName,createCallBackFunction(buyClothes,armors.M_ROBES),
 			armors.LTHRPNT.shortName,createCallBackFunction(buyClothes,armors.LTHRPNT),
-			"Leave",telAdreMenu);
+			armors.BIMBOSK.shortName,createCallBackFunction(buyClothes,armors.BIMBOSK));
+	addButton(14, "Leave", telAdreMenu);
 }
 
 
@@ -1532,7 +1532,8 @@ public function armorShop():void {
 			armors.INDECST.shortName,createCallBackFunction(armorBuy, armors.INDECST),
 			armors.LTHRROB.shortName,createCallBackFunction(armorBuy, armors.LTHRROB),
 			armors.SCALEML.shortName,createCallBackFunction(armorBuy, armors.SCALEML),
-			"",0,"Eggshell",egg,"Flirt",yvonneFlirt,"Leave",telAdreMenu);
+			"", 0, "Eggshell", egg, "Flirt", yvonneFlirt, "", 0);
+	addButton(14, "Leave", telAdreMenu);
 }
 private function armorBuy(itype:ItemType):void {
 	spriteSelect(64);
@@ -1577,7 +1578,8 @@ public function weaponShop():void {
 			weapons.WHIP.shortName,createCallBackFunction(weaponBuy, weapons.WHIP),
 			weapons.W_STAFF.shortName,createCallBackFunction(weaponBuy, weapons.W_STAFF),
 			weapons.S_GAUNT.shortName,createCallBackFunction(weaponBuy, weapons.S_GAUNT),
-			"", 0, "Leave", telAdreMenu);
+			"", 0, "", 0);
+	addButton(14, "Leave", telAdreMenu);
 	if (player.hasKeyItem("Sheila's Lethicite") >= 0 || flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] > 0) {
 		addButton(8, "ScarBlade", forgeScarredBlade);
 	}
@@ -1655,16 +1657,10 @@ public function jewelShopEntry():void {
 public function jewelShopInside():void {
 	outputText("", true);
 	outputText("<i>So what will it be?</i>", false);
-	choices("Normal rings", jewelShopPageI,
-			"Enchanted rings", jewelShopPageII,
-			"", 0,
-			"", 0,
-			"", 0,
-			"Jewelry Box", jewelShopBuyBox,
-			"", 0,
-			"", 0,
-			"", 0,
-			"Leave", telAdreMenu)
+	addButton(0, "Normal rings", jewelShopPageI);
+	addButton(1, "Enchanted rings", jewelShopPageII);
+	addButton(4, "Jewelry box", jewelShopBuyBox);
+	addButton(14, "Leave", telAdreMenu);
 }
 
 public function jewelShopPageI():void {
@@ -1677,7 +1673,8 @@ public function jewelShopPageI():void {
 			"", 0,
 			"", 0,
 			"", 0,
-			"Back",jewelShopInside);	
+			"", 0);
+	addButton(14, "Back", jewelShopInside);
 }	
 public function jewelShopPageII():void {
 	choices(jewelries.CRIMRNG.shortName, createCallBackFunction(jewelBuy, jewelries.CRIMRNG),
@@ -1689,7 +1686,8 @@ public function jewelShopPageII():void {
 			jewelries.MYSTRNG.shortName, createCallBackFunction(jewelBuy, jewelries.MYSTRNG),
 			"", 0,
 			"", 0,
-			"Back",jewelShopInside);	
+			"", 0);
+	addButton(14, "Back", jewelShopInside);
 }	
 
 public function jewelShopBuyBox():void {
@@ -1761,16 +1759,10 @@ public function carpentryShopEntry():void {
 public function carpentryShopInside():void {
 	outputText("", true);
 	outputText("<i>So what will it be?</i>", false);
-	choices("Toolbox", carpentryShopBuySet,
-			"Nails", carpentryShopBuyNails,
-			"Wood", carpentryShopBuyWood,
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0,
-			"Leave", telAdreMenu)
+	addButton(0, "Toolbox", carpentryShopBuySet);
+	addButton(1, "Nails", carpentryShopBuyNails);
+	addButton(2, "Wood", carpentryShopBuyWood);
+	addButton(14, "Leave", telAdreMenu);
 }
 //Buy toolbox
 public function carpentryShopBuySet():void {
@@ -1815,39 +1807,23 @@ public function carpentryShopBuyNails():void {
 		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to two hundred nails. I'll be selling nails at a price of four gems per nail.</i>\" \n\n", true);
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200", false)
 		else outputText("Nails: " + 0 + "/200", false)
-		simpleChoices("Buy 10", carpentryShopBuyNailsA, "Buy 25", carpentryShopBuyNailsB, "Buy 50", carpentryShopBuyNailsC, "Buy 75", carpentryShopBuyNailsD, "Buy 100", carpentryShopBuyNailsE)
+		addButton(0, "Buy 10", carpentryShopBuyNailsAmount, 10);
+		addButton(1, "Buy 25", carpentryShopBuyNailsAmount, 25);
+		addButton(2, "Buy 50", carpentryShopBuyNailsAmount, 50);
+		addButton(3, "Buy 75", carpentryShopBuyNailsAmount, 75);
+		addButton(4, "Buy 100", carpentryShopBuyNailsAmount, 100);
 		addButton(14, "Back", carpentryShopInside)
 	}
 	else
 	{
-		outputText("You ask him if he has nails for sale. He replies \"<i>I'm sorry, my friend. You don't have a toolbox. How are you going to carry nails safely?</i>\" ", true);
+		outputText("You ask him if he has nails for sale. He replies \"<i>I do. But I'm sorry, my friend. You don't have a toolbox. How are you going to carry nails safely?</i>\" ", true);
 		doNext(carpentryShopInside);
 	}
 }	
 
-private function carpentryShopBuyNailsA():void {
-	nails = 10;
-	outputText("You ask him for 10 nails. He replies \"<i>That'll be 40 gems, please.</i>\" \n\nDo you buy the nails?", true);
-	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
-}
-private function carpentryShopBuyNailsB():void {
-	nails = 25;
-	outputText("You ask him for 25 nails. He replies \"<i>That'll be 100 gems, please.</i>\" \n\nDo you buy the nails?", true);
-	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
-}
-private function carpentryShopBuyNailsC():void {
-	nails = 50;
-	outputText("You ask him for 50 nails. He replies \"<i>That'll be 200 gems, please.</i>\" \n\nDo you buy the nails?", true);
-	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
-}
-private function carpentryShopBuyNailsD():void {
-	nails = 75;
-	outputText("You ask him for 75 nails. He replies \"<i>That'll be 300 gems, please.</i>\" \n\nDo you buy the nails?", true);
-	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
-}
-private function carpentryShopBuyNailsE():void {
-	nails = 100;
-	outputText("You ask him for 100 nails. He replies \"<i>That'll be 400 gems, please.</i>\" \n\nDo you buy the nails?", true);
+private function carpentryShopBuyNailsAmount(amount:int):void {
+	nails = amount;
+	outputText("You ask him for " + amount + " nails. He replies \"<i>That'll be " + (amount * 4) + " gems, please.</i>\" \n\nDo you buy the nails?", true);
 	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
 }
 
@@ -1876,34 +1852,18 @@ private function carpentryShopBuyNailsYes():void {
 //Buy wood
 public function carpentryShopBuyWood():void {
 	outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 25 gems per wood plank.</i>\" \n\n", true);
-	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100", false)
-	simpleChoices("Buy 10", carpentryShopBuyWoodA, "Buy 20", carpentryShopBuyWoodB, "Buy 30", carpentryShopBuyWoodC, "Buy 40", carpentryShopBuyWoodD, "Buy 50", carpentryShopBuyWoodE)
+	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100", false);
+	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
+	addButton(1, "Buy 20", carpentryShopBuyWoodAmount, 20);
+	addButton(2, "Buy 30", carpentryShopBuyWoodAmount, 30);
+	addButton(3, "Buy 40", carpentryShopBuyWoodAmount, 40);
+	addButton(4, "Buy 50", carpentryShopBuyWoodAmount, 50);
 	addButton(14, "Back", carpentryShopInside)
 }	
 
-private function carpentryShopBuyWoodA():void {
-	wood = 10;
-	outputText("You ask him for 10 wood planks. He replies \"<i>That'll be 250 gems, please.</i>\" \n\nDo you buy the wood?", true);
-	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
-}
-private function carpentryShopBuyWoodB():void {
-	wood = 20;
-	outputText("You ask him for 20 wood planks. He replies \"<i>That'll be 500 gems, please.</i>\" \n\nDo you buy the wood?", true);
-	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
-}
-private function carpentryShopBuyWoodC():void {
-	wood = 30;
-	outputText("You ask him for 30 wood planks. He replies \"<i>That'll be 750 gems, please.</i>\" \n\nDo you buy the wood?", true);
-	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
-}
-private function carpentryShopBuyWoodD():void {
-	wood = 40;
-	outputText("You ask him for 40 wood planks. He replies \"<i>That'll be 1000 gems, please.</i>\" \n\nDo you buy the wood?", true);
-	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
-}
-private function carpentryShopBuyWoodE():void {
-	wood = 50;
-	outputText("You ask him for 50 wood planks. He replies \"<i>That'll be 1250 gems, please.</i>\" \n\nDo you buy the wood?", true);
+private function carpentryShopBuyWoodAmount(amount:int):void {
+	wood = amount;
+	outputText("You ask him for " + amount + " wood planks. He replies \"<i>That'll be " + (amount * 25) + " gems, please.</i>\" \n\nDo you buy the wood?", true);
 	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
 }
 

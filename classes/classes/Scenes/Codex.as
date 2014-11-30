@@ -158,13 +158,14 @@ package classes.Scenes
 		private function enterRaces():void {
 			if (flags[kFLAGS.CODEX_PAGE_RACES] <= 0) menuRaces()
 			if (flags[kFLAGS.CODEX_PAGE_RACES] == 1) menuRaces();
-			if (flags[kFLAGS.CODEX_PAGE_RACES] == 2) menuRacesII();
-			if (flags[kFLAGS.CODEX_PAGE_RACES] == 3) menuRacesIII();
+			if (flags[kFLAGS.CODEX_PAGE_RACES] >= 2) menuRacesII();
+			//if (flags[kFLAGS.CODEX_PAGE_RACES] == 3) menuRacesIII();
 		}
 		
 		private function menuRaces():void {
 			menu();
 			flags[kFLAGS.CODEX_PAGE_RACES] = 1;
+			//1st row
 			if (flags[kFLAGS.CODEX_ENTRY_ANEMONES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Anemone") addButton(0, "( Anemones )", codexEntryAnemone); //addButton(0, "<font color=\"#00007F\">Anemone</font>", codexEntryAnemone);
 				else addButton(0, "Anemones", codexEntryAnemone);
@@ -181,6 +182,7 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Goblins") addButton(3, "( Goblins )", codexEntryGoblins);
 				else addButton(3, "Goblins", codexEntryGoblins);
 			}
+			//2nd row
 			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "GooGirls") addButton(5, "( Goo Girls )", codexEntryGooGirls);
 				else addButton(5, "Goo Girls", codexEntryGooGirls);
@@ -197,57 +199,55 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Imps") addButton(8, "( Imps )", codexEntryImps);
 				else addButton(8, "Imps", codexEntryImps);
 			}
-			addButton(4, "Page 1/3", menuRacesII);
+			//3rd row
+			if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] > 0) {
+				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Labovines") addButton(10, "( LaBovines )", codexEntryLabovine);
+				else addButton(10, "LaBovines", codexEntryLabovine);
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_LIZANS] > 0) {
+				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Lizans") addButton(11, "( Lizans )", codexEntryLizans);
+				else addButton(11, "Lizans", codexEntryLizans);
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] > 0) {
+				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Minotaurs") addButton(12, "( Minotaurs )", codexEntryMinotaurs);
+				else addButton(12, "Minotaurs", codexEntryMinotaurs);
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_NAGAS] > 0) {
+				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Nagas") addButton(13, "( Nagas )", codexEntryNagas);
+				else addButton(13, "Nagas", codexEntryNagas);
+			}
+			addButton(4, "Next", menuRacesII);
+			//addButton(9, "Previous", menuRaces);
 			addButton(14, "Back", accessCodexMenu);
 		}
 		private function menuRacesII():void {
 			menu();
 			flags[kFLAGS.CODEX_PAGE_RACES] = 2;
-			if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] > 0) {
-				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Labovines") addButton(0, "( LaBovines )", codexEntryLabovine);
-				else addButton(0, "LaBovines", codexEntryLabovine);
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_LIZANS] > 0) {
-				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Lizans") addButton(1, "( Lizans )", codexEntryLizans);
-				else addButton(1, "Lizans", codexEntryLizans);
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] > 0) {
-				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Minotaurs") addButton(2, "( Minotaurs )", codexEntryMinotaurs);
-				else addButton(2, "Minotaurs", codexEntryMinotaurs);
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_NAGAS] > 0) {
-				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Nagas") addButton(3, "( Nagas )", codexEntryNagas);
-				else addButton(3, "Nagas", codexEntryNagas);
-			}
+			//1st row
 			if (flags[kFLAGS.CODEX_ENTRY_ORCS] > 0) {
-				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Orcs") addButton(5, "( Orcs )", codexEntryOrcs);
-				else addButton(5, "Orcs", codexEntryOrcs);
+				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Orcs") addButton(0, "( Orcs )", codexEntryOrcs);
+				else addButton(0, "Orcs", codexEntryOrcs);
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] > 0) {
-				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Salamanders") addButton(6, "( Salamanders )", codexEntrySalamanders);
-				else addButton(6, "Salamanders", codexEntrySalamanders);
+				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Salamanders") addButton(1, "( Salamanders )", codexEntrySalamanders);
+				else addButton(1, "Salamanders", codexEntrySalamanders);
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] > 0) {
-				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Satyrs") addButton(7, "( Satyrs )", codexEntrySatyrs);
-				else addButton(7, "Satyrs", codexEntrySatyrs);
+				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Satyrs") addButton(2, "( Satyrs )", codexEntrySatyrs);
+				else addButton(2, "Satyrs", codexEntrySatyrs);
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] > 0) {
-				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "SharkGirls") addButton(8, "( Shark Girls )", codexEntrySharkGirls);
-				else addButton(8, "Shark Girls", codexEntrySharkGirls);
+				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "SharkGirls") addButton(3, "( Shark Girls )", codexEntrySharkGirls);
+				else addButton(3, "Shark Girls", codexEntrySharkGirls);
 			}
-			addButton(4, "Page 2/3", menuRacesIII);
-			addButton(14, "Back", accessCodexMenu);
-		}
-		
-		private function menuRacesIII():void {
-			menu();
-			flags[kFLAGS.CODEX_PAGE_RACES] = 3;
+			//2nd row
 			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] > 0) {
-				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Succubus") addButton(0, "( Succubus )", codexEntrySuccubus);
-				else addButton(0, "Succubus", codexEntrySuccubus);
+				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Succubus") addButton(5, "( Succubus )", codexEntrySuccubus);
+				else addButton(5, "Succubus", codexEntrySuccubus);
 			}
-			addButton(4, "Page 3/3", menuRaces);
-			addButton(14, "Back", accessCodexMenu);			
+			//addButton(4, "Next", menuRacesIII);
+			addButton(9, "Previous", menuRaces);
+			addButton(14, "Back", accessCodexMenu);
 		}
 		
 		private function menuItems():void {
@@ -508,7 +508,7 @@ package classes.Scenes
 			outputText("Lacta Bovines reproduce by finding a suitable mate and first addicting them to their milk. Once their bodies determine that they are giving milk regularly to a creature they like, they will become fertile and will be able to be impregnated by their partner. Any children that result from this union are almost always new Lacta Bovines, as a secondary effect of milk addiction is that it dilutes down the strength of the drinker’s seed causing their traits to become recessive. However, this is not perfect, and it’s very possible for Lacta Bovines to mate with those who have not been completely diluted down yet. This is where the more human appearing ones originate. A Lacta Bovine pregnancy typically lasts 28 days.");
 			headerSub("Reproduction side note, Minotaurs")
 			outputText("Minotaurs are a common partner with the more bestial Lacta Bovines, and their seed is so strong that it isn’t uncommon for the first child in such a union to be a minotaur, with the rest being Lacta Bovines. At the same time, such unions are often short lived, and it is quite possible for a Lacta Bovine to move to a different mate during a pregnancy. ");
-			menuRacesII();
+			menuRaces();
 		}
 		
 		private function codexEntryLizans():void {
@@ -541,7 +541,7 @@ package classes.Scenes
 			headerSub("Inter-species relationship")
 			outputText("All uncorrupted Lizans hate demons. Personal reasons for doing so vary widely, but the racial reason is simple; the demons’ preventing of the rain for years and years has caused many deaths among their number and rendered it increasingly hard to survive in the hot, dry regions where they live. The race that desert Lizans most interact with is the cult of the Sand Witches, and the relationship there can be said to be one of love/hate. As noted above, many Lizans find lactating breasts to be a fetish, males and herms appreciate the twin pussies that sand witches possess, and all sexes find the abundance of nutrient-rich fluids that can be sucked from a Sand Witch quite helpful in the dry climates of their home. Sand Witches don’t necessarily mind the attention, and rumors say there are more than a few mixed blood Lizans in the desert as a result, but are fiercely possessive of their milk and fixated on adding new recruits to their cult. As a result, more than one male Lizan has spent at least some time as a lactating shemale as a result of underestimating them. Plains Lizans are defined by their constant war against the gnolls. Lacking individual strength by comparison, they have always depended on numbers to fight back against the hyena-morphs, and thus they have given themselves over to corruption.");			
 			outputText("\n\n(Written By: Quiet Browser)")
-			menuRacesII();
+			menuRaces();
 		}
 		
 		private function codexEntryMagic():void {
@@ -577,7 +577,7 @@ package classes.Scenes
 			outputText("Most beings think of minotaurs as stupid brutes, but in truth their intelligence rivals that of humans. This misconception is perpetuated by the fact that minotaurs place a much higher priority on their self-reliance, strength, and sexual release than other races, often leading them to ignore social graces in favor of trying to overpower those around them.");
 			headerSub("Minitaurs")
 			outputText("The bastard runts of the minotaur race, Minitaurs are rare human-sized minotaurs born with straw colored fur and none of the muscular fitness indicative of the rest of the race. Possessing curvy (but breast-less) bodies, they often wind up as cum receptacles for their larger over-bearing cousins. They do not share ‘release’ problem, but tend to have sexual equipment of similar size to normal minotaurs. This makes them a bit disproportional, but much easier for full-minotaurs to catch. They rarely try to escape anyways, due to the addictive and drug-like nature of large doses of minotaur spunk. ");
-			menuRacesII();
+			menuRaces();
 		}
 		
 		private function codexEntryNagas():void {
@@ -601,7 +601,7 @@ package classes.Scenes
 			outputText("The stereotype portrays Nagas as very narcissistic and eccentric, often wearing ornaments made of precious metals and fine fabrics. In reality, Nagas are very modest and are taught that the only valuable things in life are those that can benefit to everyone. Not counting emotional attachment, they usually don’t value what they own. They believe that all Nagas are related in some way and highly respect each other. Nagas rarely come in contact with other sapient species both due to the fact that they live in very inhospitable regions and because of the complex language barrier that refrains them from properly communicating with anyone else.");
 			outputText("\n\n(ElAcechador – Author of the desert’s Naga girl.)")
 			outputText("\n\n(<b>Fenoxo's Note:</b> Player Nagas still have butt-cheeks and their rectum (damn near killed him!) on the back because Fen likes his girls to have junk in the trunk. And also he doesn’t want to rewrite all the anal scenes.")
-			menuRacesII();
+			menuRaces();
 		}
 		
 		private function codexEntryOrcs():void {
@@ -727,7 +727,7 @@ package classes.Scenes
 			outputText("A Succubus' Milk can be an extraordinarily powerful aphrodisiac when drank straight from the source. If it is stored, the aphrodisiacal properties rapidly diminish while its mutagenic properties rapidly rise. Some more powerful succubi are able to use their milk with black magic in order to work changes on their partners.");
 			headerSub("Feeding")
 			outputText("Like most demons, Succubi gain power from corrupting others, and require a steady supply of sexual fluids to survive. In rare cases, if a Succubus has been deprived of ‘food’ for too long, she may find herself too weak to seduce a partner, and enter into an less than advantageous agreement in order to get her food. Amazingly, most succubi will hold themselves to such an agreement after 'eating' their fill. ");
-			menuRacesIII();
+			menuRacesII();
 		}
 	}
 }

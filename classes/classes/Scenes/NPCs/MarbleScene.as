@@ -2258,6 +2258,11 @@ private function talkWithMarbleAtCamp():void {
 		outputText("You tell Marble about your run-in with an old foe in the forest cave.  She tenses up at first, but the obvious fact that you've made it out of there alright relaxes her.  Marble admits that for some reason she felt like you were in great danger, but couldn't figure out why she felt that.  \"<i>Anyway, I'm glad that you managed to take care of your old nemesis... that map sounds interesting, too.  Think it really leads to the demon lord's lair?  It is a bit overwhelming, sweetie, to think that you might actually defeat the demon lord!  Part of me wants to beg you not to go, but I know how driven you are, and I won't stop you from going to fulfill your mission.  Just promise me that you'll make absolutely sure you're ready before you follow that map, okay?</i>\"");
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 6;
 	}
+	//(story) Talk about finding Lethice's stronghold
+	else if(flags[kFLAGS.D3_DISCOVERED] > 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 7) {
+		outputText("You tell Marble about how you've found the stronghold where Lethice might reside.  She looks at you with a worried look on her face.  Marble admits that for some reason she felt like you were in great danger, but couldn't figure out why she felt that.  \"<i>Be careful, sweetie.  It looks like it might be very dangerous there.  Who knows what might happen if you fall victim?  All hope would be lost.</i>\"");
+		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 7;
+	}
 	else if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 && flags[kFLAGS.MARBLE_CORRUPT_MARAE_STORY] == 0) {
 		outputText("You tell Marble about how you've managed to slay Marae. She drops her jaws in surprise. \"<i>Sweetie... REALLY? You've managed to kill a goddess, didn't you?</i>\" You tell her that you did manage to defeat the corrupted goddess for real. She then replies \"<i>If you've managed to defeat a powerful being, that means you could dominate anything, sweetie!</i>\"\n\n")
 		if (player.armorName == "tentacled bark armor")
@@ -2303,6 +2308,8 @@ private function talkWithMarbleAtCamp():void {
 	//(suggestion) if PC has discovered Zetaz's lair but has not cleared the cave(Z)
 	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 && flags[kFLAGS.DEFEATED_ZETAZ] == 0)
 		outputText("\"<i>Well, you haven't finished exploring that cave in the woods yet, have you?  Why don't you go there?</i>\" she offers.  She still seems to be a bit bothered by something, but doesn't voice it.");
+	else if(flags[kFLAGS.DEFEATED_ZETAZ] > 0 && flags[kFLAGS.D3_DISCOVERED] == 0)
+		outputText("\"<i>Well, have you tried exploring the high mountains?  The map looks like it might lead there but be careful as there may be something dangerous there,</i>\" she pleads.");
 	//Nothing to advise!
 	else outputText("\"<i>Sweetie, you've finished all that there is in the main story of the game so far.  You'll have to wait for Fenoxo to add more,</i>\" she says to you winking. \"<i>In the meantime, explore! There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?<i/>\"", false);
 

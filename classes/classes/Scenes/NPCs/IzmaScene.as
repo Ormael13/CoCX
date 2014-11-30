@@ -215,7 +215,8 @@ private function readSharkCuntManual():void {
 		doNext(tradeWithFuckingSharkBitches);
 	}
 	//[Yes/No]
-	else doYesNo(readSharkCuntManual2,tradeWithFuckingSharkBitches);
+	else doYesNo(readSharkCuntManual2, tradeWithFuckingSharkBitches);
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] > 0 && player.hasKeyItem("Izma's Book - Combat Manual") < 0) addButton(2, "Buy", buyBookCombatManual);
 }
 
 private function readSharkCuntManual2():void {
@@ -252,6 +253,30 @@ private function readSharkCuntManual2():void {
 	return;
 }
 
+private function buyBookCombatManual():void {
+	clearOutput();
+	spriteSelect(32);
+	outputText("You ask Izma if she's willing to part with the book so you can have an additional book for your bookshelf.  \"<i>I don't know.  These books are rare.  However, I DO have multiple copies of this type of book.  I'm willing to let go for 400 gems.</i>\"");
+	if (player.gems >= 400) {
+		outputText("\n\nDo you buy it?");
+		doYesNo(confirmBuyCombatManual, tradeWithFuckingSharkBitches);
+	}
+	else {
+		outputText("\n\nUnfortunately, you don't have enough gems.");
+		doNext(tradeWithFuckingSharkBitches);
+	}
+}
+
+private function confirmBuyCombatManual():void {
+	clearOutput();
+	outputText("You tell her that you're definitely going to buy the book.  You hand over the 400 gems and she gives you the book.");
+	outputText("\n\n<b>Key item received: Izma's Book - Combat Manual!</b>");
+	player.createKeyItem("Izma's Book - Combat Manual", 0, 0, 0, 0);
+	player.gems -= 400;
+	statScreenRefresh();
+	doNext(tradeWithFuckingSharkBitches);
+}
+
 //[E.Guide]
 private function sharkEdgingGuideLOL():void {
 	spriteSelect(32);
@@ -263,7 +288,8 @@ private function sharkEdgingGuideLOL():void {
 		doNext(tradeWithFuckingSharkBitches);
 	}
 	//[Yes/No]
-	else doYesNo(readSharkEdgingGuideLOL,tradeWithFuckingSharkBitches);
+	else doYesNo(readSharkEdgingGuideLOL, tradeWithFuckingSharkBitches);
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] > 0 && player.hasKeyItem("Izma's Book - Etiquette Guide") < 0) addButton(2, "Buy", buyBookEtiquetteGuide);
 }
 
 private function readSharkEdgingGuideLOL():void {
@@ -285,6 +311,31 @@ private function readSharkEdgingGuideLOL():void {
 	doNext(camp.returnToCampUseOneHour);
 	return;
 }
+
+private function buyBookEtiquetteGuide():void {
+	clearOutput();
+	spriteSelect(32);
+	outputText("You ask Izma if she's willing to part with the book so you can have an additional book for your bookshelf.  \"<i>I don't know.  These books are hard to come by.  However, I DO have multiple copies of this type of book.  I'm willing to let go for 500 gems.</i>\"");
+	if (player.gems >= 500) {
+		outputText("\n\nDo you buy it?");
+		doYesNo(confirmBuyEtiquetteGuide, tradeWithFuckingSharkBitches);
+	}
+	else {
+		outputText("\n\nUnfortunately, you don't have enough gems.");
+		doNext(tradeWithFuckingSharkBitches);
+	}
+}
+
+private function confirmBuyEtiquetteGuide():void {
+	clearOutput();
+	outputText("You tell her that you're definitely going to buy the book.  You hand over the 500 gems and she gives you the book.");
+	outputText("\n\n<b>Key item received: Izma's Book - Etiquette Guide!</b>");
+	player.createKeyItem("Izma's Book - Etiquette Guide", 0, 0, 0, 0);
+	player.gems -= 500;
+	statScreenRefresh();
+	doNext(tradeWithFuckingSharkBitches);
+}
+
 //[Porn]
 private function sharkgirlPronz():void {
 	spriteSelect(32);
@@ -295,7 +346,8 @@ private function sharkgirlPronz():void {
 		doNext(tradeWithFuckingSharkBitches);
 	}
 	//[Yes/No]
-	else doYesNo(readSharkgirlPornzYouFuckingPervertAsshole,tradeWithFuckingSharkBitches);
+	else doYesNo(readSharkgirlPornzYouFuckingPervertAsshole, tradeWithFuckingSharkBitches);
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] > 0 && player.hasKeyItem("Izma's Book - Porn") < 0) addButton(2, "Buy", buyBookPorn);
 }
 
 private function readSharkgirlPornzYouFuckingPervertAsshole():void {
@@ -326,6 +378,30 @@ private function readSharkgirlPornzYouFuckingPervertAsshole():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230]++;
 	doNext(camp.returnToCampUseOneHour);
 	return;
+}
+
+private function buyBookPorn():void {
+	clearOutput();
+	spriteSelect(32);
+	outputText("You ask Izma if she's willing to part with the book so you can have an additional book for your bookshelf.  \"<i>I don't know.  This type of book is quite the fine type and I normally don't let go of this book.  However, I DO have multiple copies of this type of book.  I'm willing to let go for 400 gems.</i>\"");
+	if (player.gems >= 400) {
+		outputText("\n\nDo you buy it?");
+		doYesNo(confirmBuyPorn, tradeWithFuckingSharkBitches);
+	}
+	else {
+		outputText("\n\nUnfortunately, you don't have enough gems.");
+		doNext(tradeWithFuckingSharkBitches);
+	}
+}
+
+private function confirmBuyPorn():void {
+	clearOutput();
+	outputText("You tell her that you're definitely going to buy the book.  You hand over the 400 gems and she gives you the book.");
+	outputText("\n\n<b>Key item received: Izma's Book - Porn!</b>");
+	player.createKeyItem("Izma's Book - Porn", 0, 0, 0, 0);
+	player.gems -= 400;
+	statScreenRefresh();
+	doNext(tradeWithFuckingSharkBitches);
 }
 
 //[Talk]

@@ -53,9 +53,13 @@ package classes.Scenes.Areas.Bog
 		
 		public function fightLizan(pure:Boolean = false):void {
 			clearOutput();
-			if (!pure) outputText("You ready your [weapon], prepared to let the little punk know just who it is he is dealing with.");
-			else outputText("You tell the male lizan you're game as you ready your [weapon].  His grin spreads into the full toothy smile of a rival as he flashes his claws at you, a taunting gesture.  You are now sparring with a lizan male.");
 			startCombat(new LizanRogue());
+			if (!pure) outputText("You ready your [weapon], prepared to let the little punk know just who it is he is dealing with.");
+			else {
+				outputText("You tell the male lizan you're game as you ready your [weapon].  His grin spreads into the full toothy smile of a rival as he flashes his claws at you, a taunting gesture.  You are now sparring with a lizan male.");
+				monster.createStatusAffect(StatusAffects.Spar,0,0,0,0);
+			}
+			doNext(1);
 		}
 		
 		public function leaveLizan(pure:Boolean = false):void {

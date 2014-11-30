@@ -56,6 +56,9 @@ package classes.Scenes.Dungeons
 				if (player.hasKeyItem("Hentai Comic") >= 0) books++;
 				if (player.hasKeyItem("Yoga Guide") >= 0) books++;
 				if (player.hasKeyItem("Carpenter's Toolbox") >= 0) books++; //Carpenter's Guide is bundled in your toolbox!
+				if (player.hasKeyItem("Izma's Book - Combat Manual") >= 0) books++;
+				if (player.hasKeyItem("Izma's Book - Etiquette Guide") >= 0) books++;
+				if (player.hasKeyItem("Izma's Book - Porn") >= 0) books++;
 				outputText("Located at the corner opposite the door is a bookshelf.  It currently holds " + num2Text(books) + " book", false);
 				if (books > 1) outputText("s", false);
 				outputText(".", false);
@@ -73,10 +76,14 @@ package classes.Scenes.Dungeons
 
 			dungeons.setDungeonButtons(null, null, null, null);
 			//Build menu
-			addButton(2, "Furniture", menuFurniture);
-			//addButton(1, "Read Books", eventParser, 0);
+			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] > 0) addButton(0, "Study", menuStudy);
 			addButton(3, "Stash", kGAMECLASS.camp.stash);
-			addButton(6, "South (Exit)", exitCabin);
+			addButton(4, "Furniture", menuFurniture);
+			addButton(9, "Wait", eventParser, 40); //You can wait/rest/sleep in cabin.
+			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", eventParser, 11);
+			if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", eventParser, 41);
+			addButton(11, "South (Exit)", exitCabin);
+			addButton(14, "Codex", camp.codex.accessCodexMenu);
 			removeButton(7);
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR2] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] >= 1) removeButton(2);
 			
@@ -88,6 +95,64 @@ package classes.Scenes.Dungeons
 			eventParser(1);
 		}
 	
+		private function menuStudy():void {
+			clearOutput();
+			outputText("What would you like to study?");
+			menu();
+			if (player.hasKeyItem("Izma's Book - Combat Manual") >= 0) addButton(0, "C.Manual", studyCombatManual);
+			if (player.hasKeyItem("Izma's Book - Etiquette Guide") >= 0) addButton(1, "E.Guide", studyEtiquetteGuide);
+			if (player.hasKeyItem("Izma's Book - Porn") >= 0) addButton(2, "Porn", studyPorn);
+			addButton(14, "Back", enterCabin);
+		}
+		
+		private function studyCombatManual():void {
+			clearOutput();
+			outputText("You take the book titled 'Combat Manual' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n", false);
+			//(One of the following random effects happens)
+			var choice:Number = rand(3);
+			if(choice == 0) {
+				outputText("You learn a few new guarding stances that seem rather promising.", false);
+				//(+2 Toughness)
+				dynStats("tou", 2);
+			}
+			else if(choice == 1) {
+				outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.", false);
+				//(+2 Intelligence)
+				dynStats("int", 2);
+			}
+			else {
+				outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.", false);
+				//(+2 Strength)
+				dynStats("str", 2);
+			}
+			outputText("\n\nFinished learning what you can from the old rag, you close the book and put it back on your bookshelf.", false);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function studyEtiquetteGuide():void {
+			clearOutput();
+			outputText("You take the book titled 'Etiquette Guide' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n", false);
+				
+			outputText("You peruse the strange book in an attempt to refine your manners, though you're almost offended by the stereotypes depicted within.  Still, the book has some good ideas on how to maintain chastity and decorum in the face of lewd advances.\n\n", false);
+			//(-2 Libido, -2 Corruption)
+			dynStats("lib", -2, "cor", -2);
+			
+			outputText("After reading through the frilly book, you carefully put the book back on your bookshelf.", false);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function studyPorn():void {
+			clearOutput();
+			outputText("You take the book that's clearly labelled as porn from your bookshelf.  You look around to make sure you have complete privacy.\n\n", false);
+	
+			outputText("You wet your lips as you flick through the pages of the book and admire the rather... detailed illustrations inside.  A bee-girl getting gangbanged by imps, a minotaur getting sucked off by a pair of goblins... the artist certainly has a dirty mind.  As you flip the pages you notice the air around you heating up a bit; you attribute this to weather until you finish and close the book.", false);
+			//(+2! Libido and lust gain)
+			dynStats("lib", 2, "lus", (20+player.lib/10));
+			outputText("Your mind is already filled with sexual desires.  You put the pornographic book back in your bookshelf.", false);
+			
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
 		private function menuFurniture():void {
 			menu();
 			outputText("What furniture would you like to construct?\n\n", true)

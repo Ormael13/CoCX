@@ -153,8 +153,8 @@ private function valeriaDickToggle():void {
 	else {
 		flags[kFLAGS.VELARIA_FUTA] = 1;
 		outputText("Struggling to find a less-than-awkward way of phrasing this, you ask Valeria if she wouldn't mind growing a certain extra appendage for you.");
-		//(If PC is female/herm/genderless:)
-		if(player.gender != 1) {
+		//(If PC is female/herm(not maleherm)/genderless:)
+		if(!player.hasCock() || (player.gender == 3 && player.averageBreastSize() >= 2)) {
 			outputText("\n\nShe cocks an eyebrow at you. \"<i>You know, I'm pretty fond of being a girl... But for you, partner, I guess I could manage a little something extra.</i>\"");
 			outputText("\n\nYou watch as, with a grunt of effort, Valeria's crotch expands.  A hefty twelve-inch human-like cock sprouts above her gooey cunt, twitching and dripping gooey pre-cum.  Your armor-goo shudders slightly.");
 			outputText("\n\n\"<i>Well, this is going to be... different. So, what do you say we put this third leg of mine to good use, huh?</i>\"");

@@ -165,7 +165,7 @@ package classes.Scenes
 			addAchievement("Helspawn", kACHIEVEMENTS.GENERAL_HELSPAWN, "Have Helia give birth to Helspawn and raise her until adulthood.");
 			addAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR, "Wear the goo armor.");
 			addAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER, "Complete Urta's infertility quest then have her give birth to a baby fox.");
-			addAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR, "Give Rubi every outfit available.", "", true);
+			addAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR, "Give Rubi every outfit available.");
 			addAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, "Defeat corrupted Marae.", "", true);
 			addAchievement("Follow the Leader", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER, "Get every follower in the game.");
 			addAchievement("Gotta Love 'Em All", kACHIEVEMENTS.GENERAL_GOTTA_LOVE_THEM_ALL, "Get every lover in the game. (Nieve optional)");

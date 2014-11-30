@@ -570,7 +570,7 @@ package classes.Scenes.Places
 					outputText("\n\nYour efforts have helped to improve your stamina.");
 					dynStats("tou", 1);
 				}
-				fatigue(30);
+				fatigue(20);
 			}
 			else if (chooser == 1) {
 				outputText("\n\n\"<i>Great!  I could use a hand harvesting crops,</i>\" she says, \"<i>We need five full baskets of crops.</i>\"");
@@ -584,7 +584,7 @@ package classes.Scenes.Places
 					outputText("\n\nYour efforts have helped to improve your stamina.");
 					dynStats("tou", 1);
 				}
-				fatigue(30);
+				fatigue(20);
 			}
 			else {
 				outputText("\n\n\"<i>Great!  The cows need to be milked.  It should be a simple task,</i>\" she says.  She escorts you to the cow pen and says, \"<i>Fill as much buckets as you can but make sure all the cows are milked.  When you're done, we'll haul the buckets.  I have things to attend.  Good luck!</i>\"");
@@ -602,7 +602,7 @@ package classes.Scenes.Places
 					outputText("\n\nYour efforts have helped to improve your stamina.");
 					dynStats("tou", 1);
 				}
-				fatigue(15);
+				fatigue(10);
 			}
 			outputText("\n\nYou walk back to Ingnam.");
 			player.gems += 5;
