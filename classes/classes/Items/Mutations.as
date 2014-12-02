@@ -4119,7 +4119,7 @@
 			else {
 				if (player.findStatusAffect(StatusAffects.SlimeCraving) < 0) {
 					outputText("\n\nYou feel a growing gnawing in your gut.  You feel... hungry, but not for food.  No, you need something wet and goopy pumped into you.  You NEED it.  You can feel it in your bones.  <b>If you don't feed that need... you'll get weaker and maybe die.</b>", false);
-					player.createStatusAffect(StatusAffects.SlimeCraving, 0, 0, 0, 0);
+					player.createStatusAffect(StatusAffects.SlimeCraving, 0, 0, 0, 1); //Value four indicates this tracks strength and speed separately
 				}
 				else {
 					outputText("\n\nYou feel full for a moment, but you know it's just a temporary respite from your constant need to be 'injected' with fluid.", false);

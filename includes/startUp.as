@@ -324,7 +324,7 @@ public function creditsScreen():void {
 	outputText("<li> ComfyCushion (Muff Wrangler)</li>");
 	outputText("<li> B (Brooke)</li>");
 	outputText("<li> Quiet Browser (Half of Niamh, Ember, Amily The Mouse-girl Breeder, Katherine, Part of Katherine Employment Expansion, Urta's in-bar Dialogue Trees, some of Izma, Loppe)</li>");
-	outputText("<li> Indirect (Alternate Non-Scylla Katherine Recruitment, Part of Katherine Employment Expansion, Phouka)</li>");
+	outputText("<li> Indirect (Alternate Non-Scylla Katherine Recruitment, Part of Katherine Employment Expansion, Phouka, Coding of Bee Girl Expansion)</li>");
 	outputText("<li> Schpadoinkle (Victoria Sex)</li>");
 	outputText("<li> Donto (Ro'gar the Orc, Polar Pete)</li>");
 	outputText("<li> Angel (Additional Amily Scenes)</li>");
@@ -347,7 +347,7 @@ public function creditsScreen():void {
 	outputText("<li> Noogai, Reaper, and Numbers (Nipple-Fucking Victory vs Imp Rape)</li>");
 	outputText("<li> Verse and IAMurow (Bee-Girl MultiCock Rapes)</li>");
 	outputText("<li> Sombrero (Additional Imp Lust Loss Scene (Dick insertion ahoy!)</li>");
-	outputText("<li> The Dark Master (Marble, Fetish Cultist, Fetish Zealot, Hellhound, Lumi, Some Cat Transformations, LaBova, Ceraph's Cat-Slaves, a Cum Witch Scene, Mouse Dreams, Forced Nursing:Imps&Goblins)</li>");
+	outputText("<li> The Dark Master (Marble, Fetish Cultist, Fetish Zealot, Hellhound, Lumi, Some Cat Transformations, LaBova, Ceraph's Cat-Slaves, a Cum Witch Scene, Mouse Dreams, Forced Nursing:Imps&Goblins, Bee Girl Expansion)</li>");
 	outputText("<li> Mr. Fleshcage (Cat Transformation/Masturbation)</li>");
 	outputText("<li> Spy (Cat Masturbation, Forced Nursing: Minotaur, Bee, & Cultist)</li>");
 	outputText("<li> PostNuclearMan (Some Cat TF)</li>");

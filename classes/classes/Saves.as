@@ -1833,6 +1833,10 @@ public function unFuckSave():void
 		player.removeStatusAffect(StatusAffects.Tentagrappled);
 	}
 
+	if (player.findStatusAffect(StatusAffects.SlimeCraving) >= 0 && player.statusAffectv4(StatusAffects.SlimeCraving) == 1) {
+		player.changeStatusValue(StatusAffects.SlimeCraving, 3, player.statusAffectv2(StatusAffects.SlimeCraving)); //Duplicate old combined strength/speed value
+		player.changeStatusValue(StatusAffects.SlimeCraving, 4, 1); //Value four indicates this tracks strength and speed separately
+	}
 
 	// Fix issues with corrupt cockTypes caused by a error in the serialization code.
 		

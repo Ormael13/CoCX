@@ -603,6 +603,7 @@ package classes {
 					outputText("(<b>Gained New Perk: Slime Core - Moisture craving builds at a greatly reduced rate.</b>\n)");
 					player.createPerk(PerkLib.SlimeCore, 0, 0, 0, 0);
 					player.removeKeyItem("Ruby Heart");
+					needNext = true;
 				}
 			}
 			if (player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) { //Slime craving stuff
@@ -617,24 +618,20 @@ package classes {
 						player.addStatusValue(StatusAffects.SlimeCraving, 1, 0.5);
 					else player.addStatusValue(StatusAffects.SlimeCraving, 1, 1);
 					if (player.statusAffectv1(StatusAffects.SlimeCraving) >= 18) {
-						if (player.findStatusAffect(StatusAffects.SlimeCravingOutput) < 0) {
+						if (player.findStatusAffect(StatusAffects.SlimeCravingOutput) < 0) { //Protects against this warning appearing multiple times in the output
 							player.createStatusAffect(StatusAffects.SlimeCravingOutput, 0, 0, 0, 0);
 							outputText("\n<b>Your craving for the 'fluids' of others grows strong, and you feel yourself getting weaker and slower with every passing hour.</b>\n");
 							needNext = true;
 						}
+						if (player.spe > 1) player.addStatusValue(StatusAffects.SlimeCraving, 3, 0.1); //Keep track of how much has been taken from speed
 						getGame().dynStats("str", -0.1,"spe", -0.1, "lus", 2);
-						//Keep track of how much has been taken from speed/strength
-						player.addStatusValue(StatusAffects.SlimeCraving, 2, 0.1);
-						if (player.str <= 1) { //Bad end!
-							getGame().lake.gooGirlScene.slimeBadEnd();
-							return true;
-						}
+						player.addStatusValue(StatusAffects.SlimeCraving, 2, 0.1); //Keep track of how much has been taken from strength
 					}
 				}
 			}
 			if (player.findStatusAffect(StatusAffects.SlimeCravingFeed) >= 0) { //Slime feeding stuff
 				outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n");
-				getGame().dynStats("str", player.statusAffectv2(StatusAffects.SlimeCraving) * 0.5, "spe", player.statusAffectv2(StatusAffects.SlimeCraving)); //Boost speed and restore hp/toughness
+				getGame().dynStats("str", player.statusAffectv2(StatusAffects.SlimeCraving) * 0.5, "spe", player.statusAffectv3(StatusAffects.SlimeCraving)); //Boost speed and restore half the player's lost strength
 				player.removeStatusAffect(StatusAffects.SlimeCravingFeed); //Remove feed succuss status so it can be reset
 				player.changeStatusValue(StatusAffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
@@ -833,6 +830,10 @@ package classes {
 				if (player.lib > 50 || player.lust > 40) { //Randomly generated dreams here
 					if (getGame().dreamSelect()) return true;
 				}
+			}
+			if (player.statusAffectv1(StatusAffects.SlimeCraving) >= 18 && player.str <= 1) { //Bad end!
+				getGame().lake.gooGirlScene.slimeBadEnd();
+				return true;
 			}
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE && player.lust >= 100) {
 				outputText("\nYou can’t help it anymore, you need to find the bee girl right now.  You rush off to the forest to find the release that you absolutely must have.  Going on instinct you soon find the bee girl's clearing and her in it.\n\n");
