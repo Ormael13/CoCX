@@ -21,8 +21,7 @@ package classes.Scenes.Areas.HighMountains
 			//[if attack lands]
 			else {
 				outputText("  Her teeth dig right into your arm!  It's a bit of a struggle, but you're able to free yourself.  The damage doesn't look too serious. ");
-				damage = player.takeDamage(damage);
-				outputText("(" + damage + ")");
+				player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -191,7 +190,8 @@ package classes.Scenes.Areas.HighMountains
 		{
 			this.a = "";
 			this.short = "Minerva";
-			this.imageName = "minerva";
+			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) this.imageName = "minerva";
+			else this.imageName = "minervapure";
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) this.long = "You're fighting the tainted siren, Minerva.  Standing around eight feet and wielding a weapon just as tall, she is a force to be reckoned with.  Her skin is a dark navy blue, though her belly, neck and inner thighs are as white as the clouds in the sky, and a golden piecing decorates her navel.  Orange and white stripes adorn her legs, tail and back.  Two large wings sprout from her back, their feathers an attention-grabbing red and orange mix.  She wears a tube-top that hold back her double d-cups, and short shorts around her wide waist that seem to be holding back a huge bulge.\n\nHer weapon is a halberd, made from a shiny, silvery metal, and seems to have an unnatural glow to it.";
 			else this.long = "You're fighting the purified siren, Minerva.  Standing around eight feet and wielding a weapon just as tall, she is a force to be reckoned with.  Her skin is a golden yellow, though her belly, neck and inner thighs are as white as the clouds in the sky, and a golden piecing decorates her navel.  White stripes adorn her legs, tail and back.  Two large wings sprout from her back, their feathers an attention-grabbing white and .  She wears a tube-top that hold back her G-cups, and short shorts around her wide waist that seem to be holding back a huge bulge.\n\nHer weapon is a halberd, made from a shiny, silvery metal, and seems to have an unnatural glow to it.";
 			// this.plural = false;

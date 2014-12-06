@@ -482,9 +482,9 @@ public function urtaBarApproach():void {
 	//[Under Table BJ] [Public Jerkoff onto your face] [Public Buttfucking (Receiver)] [Tender lovemaking @ Urtas] [Minotaur Cum-Addict Special?] [TABLE FUCK]
 	//simpleChoices("Hidden BJ",blowUrtaUnderTable,"Urta's Place",goBackToUrtasForLuvinz,"",0,"",0,"Leave",barTelAdre);
 	menu();
-	if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(0,"Hidden BJ",slurpFawkesCocksForFunAndInflation);
-	else addButton(0,"Hidden BJ",blowUrtaUnderTable);
-	addButton(1,"Urta's Place",goBackToUrtasForLuvinz);
+	addButton(0,"Urta's Place",goBackToUrtasForLuvinz, "Go to Urta's apartment for sex.");
+	if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Hidden BJ",slurpFawkesCocksForFunAndInflation, null, null, null, "Suck Urta's dick until she cums! \n\nNote: Given how long she hasn't relieved, this is most likely going to fill your belly.");
+	else addButton(1,"Hidden BJ",blowUrtaUnderTable, null, null, null, "Suck Urta's dick until she cums!");
 	addButton(4,"Leave",telAdre.barTelAdre);
 }
 
@@ -3117,10 +3117,15 @@ private function urtaDiscussionTeaseAfterRomance():void {
 	urtaLove(1);
 	//Appropriate sex scene options are given; Hidden Blowjob and Urta's Place for regular Urta and Urta's Place, Suck Off and Eat Out for lover mode Urta
 	menu()
-	if(!urtaLove()) simpleChoices("Hidden BJ",blowUrtaUnderTable,"Urta's Place",goBackToUrtasForLuvinz,"",0,"",0,"",0);
+	if (!urtaLove()) {
+		addButton(0, "Urta's Place", goBackToUrtasForLuvinz, null, null, null, "Go to Urta's apartment for sex.");
+		addButton(1, "Hidden BJ", blowUrtaUnderTable, null, null, null, "Suck Urta's dick until she cums!");
+	}
 	else {
-		if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) simpleChoices("Her Place",goBackToUrtasForLuvinz,"",0,"Eat Out",eatUrtaOutNomNomPussy,"",0,"",0);
-		else simpleChoices("Her Place",goBackToUrtasForLuvinz,"Suck Off",blowUrtaUnderTheTableLuv,"Eat Out",eatUrtaOutNomNomPussy,"",0,"",0);
+		addButton(0, "Her Place", goBackToUrtasForLuvinz, null, null, null, "Go to Urta's apartment for sex.");
+		addButton(1, "Suck Off", blowUrtaUnderTheTableLuv, null, null, null, "Suck Urta's dick until she cums!");
+		addButton(2, "Eat Out", eatUrtaOutNomNomPussy, "Get a taste of Urta's vagina! (And optionally, drink a glass of her cum.)");
+		if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) removeButton(1); //Disables button.
 	}
 	addButton(4, "Leave", telAdre.barTelAdre);
 	dynStats("lus", 25);

@@ -384,6 +384,12 @@ use namespace kGAMECLASS;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.15;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.3;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 3) damage *= 1.5;
+			var crit:Boolean = false; //Opponents can critical too!
+			if(rand(100) <= 4 || (kGAMECLASS.monster.findPerk(PerkLib.Tactician) >= 0 && kGAMECLASS.monster.inte >= 50 && (kGAMECLASS.monster.inte - 50)/5 > rand(100))) {
+				crit = true;
+				damage *= 1.75;
+				flags[kFLAGS.ENEMY_CRITICAL] = 1;
+			}
 			if (findStatusAffect(StatusAffects.Shielding) >= 0) {
 				damage -= 30;
 				if (damage < 1) damage = 1;
@@ -417,7 +423,8 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI) - armorDef);
 			if (findPerk(PerkLib.ChiReflowAttack) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI) - armorDef);
 			damage -= modArmorDef;
-			if (damage<0) damage = 0;
+			if (damage < 0) damage = 0;
+			if (damage < 0 && crit) damage = 1; //Minimum critical damage is 1.
 			return damage;
 		}
 

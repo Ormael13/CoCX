@@ -1470,9 +1470,9 @@ package classes.Scenes.Dungeons
 			if(flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] > 0) {
 				if(player.hasKeyItem("Iron Key") < 0) {
 					outputText("  It seems your opponent dropped a small iron key as she fled.", false);
-					addButton(2, "Iron Key", takeIronKey);
+					addButton(2, "Iron Key", takeIronKey, null, null, null, "Pick up the iron key. It looks like it might unlock the door in this factory.");
 				}
-				addButton(4, "Coffee", drinkCoffee);
+				addButton(4, "Coffee", drinkCoffee, null, null, null, "Drink some coffee.");
 				spriteSelect(96);
 			}
 			else {
@@ -1623,7 +1623,7 @@ package classes.Scenes.Dungeons
 			}
 			else {
 				if (player.hasKeyItem("Supervisor's Key") < 0) {
-					addButton(2, "Desk", takeSupervisorKey);
+					addButton(2, "Desk", takeSupervisorKey, null, null, null, "Check the desk for something.");
 				}
 			}
 		}
@@ -1646,8 +1646,8 @@ package classes.Scenes.Dungeons
 			}
 			dungeons.setDungeonButtons(null, null, roomForemanOffice, null);
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
-				addButton(3, "Valves", factoryOverload);
-				addButton(4, "Shutdown", factoryShutdown);
+				addButton(3, "Valves", factoryOverload, null, null, null, "Overload the valves. This may have unintended consequences but the factory will suffer catastrophe and shut down forever.");
+				addButton(4, "Shutdown", factoryShutdown, null, null, null, "Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.");
 			}
 		}
 		

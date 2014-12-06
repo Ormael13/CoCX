@@ -76,8 +76,101 @@ package classes.Scenes
 			flags[kFLAGS.EXPLORATION_PAGE] = 1;
 			doExplore();
 		}
-
-
+		
+		public function genericGobImpEncounters(even:Boolean = false):void {
+			var impGob:Number = 5;
+			if (!even) {
+				if (player.totalCocks() > 0) impGob--;
+				if (player.hasVagina()) impGob++;
+				if (player.totalFertility() >= 30) impGob++;
+				if (player.cumQ() >= 200) impGob--;
+				if (player.findPerk(PerkLib.PiercedLethite) >= 0) {
+					if (impGob <= 3) impGob += 2;
+					else if (impGob < 7) impGob = 7;
+				}
+			}
+			//Imptacular Encounter
+			if (rand(10) < impGob) {
+				var impChooser:int = rand(100);
+				if (player.level < 20) impChooser += player.level;
+				else impChooser += 20;
+				if (impChooser > 100) impChooser = 100;
+				if (player.level < 8 && impChooser >= 40) impChooser = 39;
+				else if (player.level < 12 && impChooser >= 60) impChooser = 59;
+				else if (player.level < 16 && impChooser >= 80) impChooser = 79;
+				//Imp Lord
+				if (impChooser >= 50 && impChooser < 70) {
+					kGAMECLASS.impScene.impLordEncounter();
+					spriteSelect(29);
+					return;
+				}
+				//Imp Warlord
+				else if (impChooser >= 70 && impChooser < 90) {
+					kGAMECLASS.impScene.impWarlordEncounter();
+					spriteSelect(29);
+					return;
+				}
+				//Imp Overlord (Rare!)
+				else if (impChooser >= 90) {
+					kGAMECLASS.impScene.impOverlordEncounter();
+					spriteSelect(29);
+					return;
+				}
+				else {
+					outputText("An imp wings out of the sky and attacks!", true);
+					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+						outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+					}
+					startCombat(new Imp());
+					spriteSelect(29);
+				}
+				return;
+			}
+			//Encounter Gobbalin!
+			else {
+				var goblinChooser:int = rand(100);
+				if (player.level < 10 && goblinChooser >= 40) goblinChooser = 39;
+				else if (player.level < 12 && goblinChooser >= 60) goblinChooser = 59;
+				//Goblin assassin!
+				if (goblinChooser >= 40 && goblinChooser < 60) {
+					kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
+					return;
+				}
+				//Goblin warrior!
+				else if (goblinChooser >= 60 && goblinChooser < 80) {
+					kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
+					return;
+				}
+				//Goblin shaman!
+				else if (goblinChooser >= 80) {
+					kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
+					return;
+				}
+				if (player.gender > 0) {
+					outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"", true);
+					if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+						outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+					}
+					startCombat(new Goblin());
+					spriteSelect(24);
+					return;
+				}
+				else {
+					outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"", true);
+					if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+						outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+					}
+					startCombat(new Goblin());
+					spriteSelect(24);
+					return;
+				}
+			}
+		}
+		
+		
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
@@ -180,72 +273,8 @@ package classes.Scenes
 				//Monster - 50/50 imp/gob split.
 				else {
 					player.explored++;
-					var impGob:Number = 5;
-					//Imptacular Encounter
-					if (rand(10) < impGob) {
-						if (player.level >= 8 && rand(2) == 0) {
-							kGAMECLASS.impScene.impLordEncounter();
-							spriteSelect(29);
-							return;
-						}
-						else if (player.level >= 12 && rand(2) == 0) {
-							kGAMECLASS.impScene.impWarlordEncounter();
-							spriteSelect(29);
-							return;
-						}
-						else {
-							outputText("An imp wings out of the sky and attacks!", true);
-							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-							}
-							startCombat(new Imp());
-							spriteSelect(29);
-						}
-						return;
-					}
-					//Encounter Gobbalin!
-					else {
-						var goblinChooser:int = rand(100);
-						if (player.level < 10 && goblinChooser >= 40) goblinChooser = 39;
-						else if (player.level < 12 && goblinChooser >= 60) goblinChooser = 59;
-						//Goblin assassin!
-						if (goblinChooser >= 40 && goblinChooser < 60) {
-							kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
-							return;
-						}
-						//Goblin warrior!
-						else if (goblinChooser >= 60 && goblinChooser < 80) {
-							kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
-							return;
-						}
-						//Goblin shaman!
-						else if (goblinChooser >= 80) {
-							kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
-							return;
-						}
-						if (player.gender > 0) {
-							outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"", true);
-							if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
-							}
-							startCombat(new Goblin());
-							spriteSelect(24);
-							return;
-						}
-						else {
-							outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"", true);
-							if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
-							}
-							startCombat(new Goblin());
-							spriteSelect(24);
-							return;
-						}
-					}
-
+					genericGobImpEncounters(true);
+					return;
 				}
 				outputText("You wander around, fruitlessly searching for new places.", true);
 			}

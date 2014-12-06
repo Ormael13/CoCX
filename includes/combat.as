@@ -344,7 +344,10 @@ public function doCombat(eventNum:Number):void
 	//Imp lust magic lust attack
 	if(eventNum == 5019) {
 			outputText("You see " + monster.a + monster.short + " make sudden arcane gestures at you!\n\n", false);
-			dynStats("lus", player.lib / 10 + player.cor / 10 + 10);
+			var lustDmg:Number = (10 + (player.lib / 10) + (player.cor / 10));
+			if (monster.short == "imp warlord") lustDmg *= 1.4;
+			if (monster.short == "imp overlord") lustDmg *= 1.8;
+			dynStats("lus", lustDmg);
 			if (player.lust < 30) outputText("You feel strangely warm.  ", false);
 			if (player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ", false);
 			if (player.lust >= 60) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ", false);
@@ -3973,6 +3976,7 @@ public function teaseXP(XP:Number = 0):void {
 //VICTORY OR DEATH?
 public function combatRoundOver():Boolean {
 	statScreenRefresh();
+	flags[kFLAGS.ENEMY_CRITICAL] = 0;
 	if (!inCombat) return false;
 	if(monster.HP < 1) {
 		doNext(endHpVictory);

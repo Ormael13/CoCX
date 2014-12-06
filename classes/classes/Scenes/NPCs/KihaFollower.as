@@ -725,7 +725,7 @@ private function lovingHugsForRetards():void {
 	outputText("[pg]The reptile-woman's eyes start to roll back, and she exhults, \"<i>Yesssssssss,</i>\" in a triumphant hiss a moment before her whole body begins to thrash.  Her tail twists inside you, pressing against a particularly sensitive spot to trigger an equally intense pleasure-cascade inside you.  Her nipple slips free of your gaping, moaning mouth as you wordlessly revel in sexual bliss with your lover.  You pull yourself tight against her, and the two of you clutch onto each other for dear life as you climax rocks your bodies.");
 	outputText("[pg]As the passion subsides, your scaled companion slowly extricates herself from your [asshole], your heavily violated passage tingling as it gapes wide for a moment.  She rolls to the side with you still in her arms and gives you a quick peck on the lips before admitting, \"<i>That wasn't so bad...</i>\"  Not so bad?  Not so bad!?  That was great!  Her eyelids drift closed as she falls fast asleep, robbing you of a chance to reply.  Oh, Kiha.  You sigh and catch a quick nap next to her.");
 	outputText("[pg]<b>A little later...</b>");
-	outputText("\nKiha flies you back to get your armor.  The search takes a little while, but you eventually recover it.  She looks at you hesitantly before giving you a goodbye kiss.  \"<i>Don't get yourself killed out there.  I'd get bored without you messing everything up all the time.</i>\"", false);
+	outputText("\nKiha flies you back to get your [armor].  The search takes a little while, but you eventually recover it.  She looks at you hesitantly before giving you a goodbye kiss.  \"<i>Don't get yourself killed out there.  I'd get bored without you messing everything up all the time.</i>\"", false);
 	player.orgasm();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
@@ -748,12 +748,12 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			leave = camp.campLoversMenu;
 			//choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
 			menu();
-			addButton(0,"Hang Out",hangOutWithKiha);
-			addButton(1,"Hug",hugFriendWarmKiha);
-			addButton(3,"Sex",kihaSexMenu);
-			addButton(4,"Spar",sparWithKiha);
-			if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha);
-			else addButton(8,"Guard Camp",guardMyCampKiha);
+			addButton(0, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
+			addButton(1, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
+			addButton(3, "Sex", kihaSexMenu, null, null, null, "Initiate sex session with Kiha.");
+			addButton(4, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
+			if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha, null, null, null, "Request her to stop guarding.");
+			else addButton(8,"Guard Camp",guardMyCampKiha, null, null, null, "Request her to guard your camp.");
 			addButton(14,"Leave", leave);
 			return;
 		}
@@ -772,7 +772,13 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 	//   Biggus Dickus // Vaginal // Anal // 69+Tail // Tail Pegging // Item/Morph-specific scenes?
 	//-[Invite to Camp] (If KihaAffection >= 200)
 	//-[Leave])
-	choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
+	addButton(0, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
+	addButton(1, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
+	addButton(2, "InviteCamp", campo, null, null, null, "Invite Kiha to your camp.");
+	addButton(3, "Sex", kihaSexMenu, null, null, null, "Initiate sex session with Kiha.");
+	addButton(4, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
+	addButton(14, "Leave", leave);
+	//choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
 }
 
 
@@ -812,7 +818,10 @@ private function hangOutWithKiha():void {
 		outputText("[pg]\"<i>W-well?  It's good... right?</i>\"");
 		outputText("[pg]You give the stringy, yet juicy, meat a few experimental chews before giving your answer:");
 		//[It's Good] [Blech]
-		simpleChoices("It's Good",itsGood,"Blech",blechKihaYourCooking,"",0,"",0,"",0);
+		menu();
+		addButton(0, "It's Good", itsGood, null, null, null, "The meat is delicious. Tell Kiha that the meat is great.");
+		addButton(1, "Blech", blechKihaYourCooking, null, null, null, "The meat is disgusting! Throw it out and hunt some boars.");
+		//simpleChoices("It's Good",itsGood,"Blech",blechKihaYourCooking,"",0,"",0,"",0);
 		return;
 	}
 	//Hang Out 3

@@ -2028,7 +2028,8 @@ private function marbleTalkOverhaul():void {
 		outputText( "[pg]<b>Marble is fidgeting around uncomfortably, perhaps she needs to be milked?</b>" );
 		addButton( 2, "Milking", milkMarble );
 	}
-	if(player.cor<50 && player.statusAffectv4(StatusAffects.Marble)<60) addButton(1,"Just Talk",talkWithMarbleAtCamp);
+	if (player.cor < 50 && player.statusAffectv4(StatusAffects.Marble) < 60) addButton(1, "Just Talk", talkWithMarbleAtCamp);
+	//if (player.level >= 10) addButton(3, "Her Hammer", eventParser, 9999); //Start hammer quest
 	addButton(14,"Back",interactWithMarbleAtCamp);
 	if(flags[kFLAGS.SLEEP_WITH] != "Marble") addButton(4,"Sleep With",marbleSleepToggle);
 	else addButton(4,"Sleep Alone",marbleSleepToggle);

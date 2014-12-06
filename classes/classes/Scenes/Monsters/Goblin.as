@@ -8,6 +8,10 @@
 	{
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(2);
+			var multiplier:Number = 1; //Higher tier goblins have powerful potions.
+			if (short == "goblin assassin") multiplier += 0.2;
+			if (short == "goblin shaman") multiplier += 0.4;
+			if (short == "goblin warrior") multiplier += 0.5;
 			if(short == "Tamani") temp2 = rand(5);
 			if(short == "Tamani's daughters") temp2 = rand(5);
 			var color:String = "";
@@ -27,7 +31,7 @@
 					outputText("Tamani pulls out a blue vial and uncaps it, then douses the mob with the contents.", false);
 					if(HPRatio() < 1) {
 						outputText("  Though less effective than ingesting it, the potion looks to have helped the goblins recover from their wounds!\n", false);
-						addHP(80);
+						addHP(80 * multiplier);
 					}
 					else outputText("  There doesn't seem to be any effect.\n", false);			
 					outputText("\n", false);
@@ -36,8 +40,8 @@
 					outputText(capitalA + short + " pulls out a blue vial and uncaps it, swiftly downing its contents.", false);
 					if(HPRatio() < 1) {
 						outputText("  She looks to have recovered from some of her wounds!\n", false);
-						addHP(eMaxHP() /4);
-						if(short == "Tamani") addHP(eMaxHP()/4);
+						addHP((eMaxHP() / 4) * multiplier);
+						if (short == "Tamani") addHP((eMaxHP() / 4) * multiplier);
 					}
 					else outputText("  There doesn't seem to be any effect.\n", false);
 					combatRoundOver();
@@ -76,10 +80,26 @@
 		}
 		protected function goblinTeaseAttack():void {
 			var det:Number = rand(3);
-			if(det == 0) outputText(capitalA + short + " runs her hands along her leather-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
-			if(det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility.  She caresses her snatch and gives you a come hither look.", false);
-			if(det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
-			game.dynStats("lus", rand(player.lib/10)+8);
+			if (short == "goblin" || short == "goblin assassin") {
+				if (det == 0) outputText(capitalA + short + " runs her hands along her leather-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
+				if (det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility.  She caresses her snatch and gives you a come hither look.", false);
+				if (det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
+			}
+			else if (short == "goblin warrior") {
+				if (det == 0) outputText(capitalA + short + " runs her hands along her metal-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
+				if (det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility despite the armor she's wearing.  She caresses her snatch and gives you a come hither look.", false);
+				if (det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
+			}
+			else if (short == "goblin shaman") {
+				if (det == 0) outputText(capitalA + short + " runs her hands along her leather-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
+				if (det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility.  She lifts her loincloth and caresses her snatch and gives you a come hither look.", false);
+				if (det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
+			}
+			var lustDmg:int = rand(player.lib / 10) + 8;
+			if (short == "goblin assassin") lustDmg += (2 + rand(3));
+			if (short == "goblin warrior") lustDmg += (5 + rand(5));
+			if (short == "goblin shaman") lustDmg += (5 + rand(5));
+			game.dynStats("lus", lustDmg);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n", false);
 			combatRoundOver();
 		}

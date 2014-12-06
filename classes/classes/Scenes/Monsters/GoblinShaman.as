@@ -31,13 +31,14 @@ package classes.Scenes.Monsters
 			if (spellChooser == 0 && fatigue <= (100 - spellCostCharge)) {
 				outputText("The goblin utters word of power, summoning an electrical charge around her staff. <b>It looks like she'll deal more physical damage now!</b>");
 				createStatusAffect(StatusAffects.ChargeWeapon, 25, 0, 0, 0);
+				this.weaponAttack += 25;
 				fatigue += spellCostCharge;
 			}
 			//Blind
 			else if (spellChooser == 1 && fatigue <= (100 - spellCostBlind)) {
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
 				if (rand(player.inte / 5) <= 4) {
-					outputText("<b>You are blinded!");
+					outputText("<b>You are blinded!</b>");
 					player.createStatusAffect(StatusAffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
 				else {
@@ -78,6 +79,8 @@ package classes.Scenes.Monsters
 				outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 				outputText("The rush of success and power flows through her body.  She feels like she can do anything!", false);
 				createStatusAffect(StatusAffects.Might, 20, 20, 0, 0);
+				str += 20;
+				tou += 20;
 				fatigue += spellCostMight;
 			}
 			combatRoundOver();

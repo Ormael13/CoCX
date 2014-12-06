@@ -73,12 +73,12 @@ package classes.Scenes.NPCs
 			outputText("Izma ducks and jinks, working to close quarters, and clinches you. Unable to get your weapon into play, you can only ", false);
 			if(player.armorDef >= 10 || damage == 0) {
 				//(armor-dependent Health damage, fullplate, chain, scale, and bee chitin armor are unaffected, has a chance to inflict 'Bleed' damage which removes 2-5% of health for the next three turns if successful)
-				damage = player.takeDamage(damage);
 				outputText("writhe as she painfully drags the blades of her glove down your back", false);
 				player.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
 			}
 			else outputText("laugh as her blades scape uselessly at your armor-clad back", false);
-			outputText(" before breaking her embrace and leaping away. (" + damage + ")", false);
+			outputText(" before breaking her embrace and leaping away. ", false);
+			player.takeDamage(damage, true);
 		}
 		private function IzmaSpecials3():void {
 			outputText("Rather than move to attack you, Izma grins at you and grabs her breasts, massaging them as she caresses her long penis with one knee. Her tail thrashes and thumps the sand heavily behind her as she simulates an orgasm, moaning loudly into the air. The whole display leaves you more aroused than before.", false);

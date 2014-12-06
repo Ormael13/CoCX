@@ -145,7 +145,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("You take the book that's clearly labelled as porn from your bookshelf.  You look around to make sure you have complete privacy.\n\n", false);
 	
-			outputText("You wet your lips as you flick through the pages of the book and admire the rather... detailed illustrations inside.  A bee-girl getting gangbanged by imps, a minotaur getting sucked off by a pair of goblins... the artist certainly has a dirty mind.  As you flip the pages you notice the air around you heating up a bit; you attribute this to weather until you finish and close the book.", false);
+			outputText("You wet your lips as you flick through the pages of the book and admire the rather... detailed illustrations inside.  A bee-girl getting gangbanged by imps, a minotaur getting sucked off by a pair of goblins... the artist certainly has a dirty mind.  As you flip the pages you notice the air around you heating up a bit; you attribute this to weather until you finish and close the book.\n\n", false);
 			//(+2! Libido and lust gain)
 			dynStats("lib", 2, "lus", (20+player.lib/10));
 			outputText("Your mind is already filled with sexual desires.  You put the pornographic book back in your bookshelf.", false);

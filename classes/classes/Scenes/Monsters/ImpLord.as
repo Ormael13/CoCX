@@ -86,6 +86,9 @@
 			this.hoursSinceCum = 20;
 			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] >= 10) this.createVagina();
 			createBreastRow(0);
+			this.pronoun1 = "he";
+			this.pronoun2 = "him";
+			this.pronoun3 = "his";
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;

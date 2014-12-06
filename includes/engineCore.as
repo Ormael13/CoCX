@@ -1179,62 +1179,14 @@ public function getButtonToolTipText(buttonText:String):String
 			toolTipText = "Ask him to brew a purification potion for Minerva.";
 		}
 		if (buttonText == "Milk Potion") {
-			toolTipText = "Ask him to brew a milk potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.";
+			toolTipText = "Ask him to brew a special milk potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.";
 		}
 		if (buttonText == "Lethicite") {
 			toolTipText = "Ask him if he can make use of that lethicite you've obtained from Marae.";
 		}
 	}
 	//Jojo - Moved to addButton in JojoScene.as
-	//Valeria
-	if (kGAMECLASS.tooltipLoc == "Valeria") {
-		//Menu
-		if (buttonText == "Appearance") {
-			toolTipText = "Examine Valeria's appearance.";
-		}
-		if (buttonText == "Spar") {
-			toolTipText = "Do a quick battle with Valeria!";
-		}
-		if (buttonText == "Sex") {
-			toolTipText = "Initiate sexy time with the armor-goo.";
-		}
-		if (buttonText == "Talk") {
-			toolTipText = "Discuss with Valeria.";
-		}
-		if (buttonText == "Take") {
-			toolTipText = "This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this! \n\nType: Heavy armor \nDefense: 22 \nSpecial: Regeneration and Increased Fantasize";
-		}
-		//Sex
-		if (buttonText == "PenetrateHer") {
-			toolTipText = "Fuck the goo girl with your penis!";
-		}
-		if (buttonText == "Get Fucked") {
-			if (player.hasVagina()) toolTipText = "Have her penetrate you vaginally.";
-			else toolTipText = "Have her penetrate you anally.";
-		}
-		if (buttonText == "Gooflation") {
-			toolTipText = "Have her stuff your stomach through your ass!";
-		}
-		if (buttonText == "GetDominated") {
-			toolTipText = "Submit to the armor-goo and have her take charge.";
-		}
-		if (buttonText == "Grow Dick") {
-			toolTipText = "Ask her to grow a gooey cock.";
-		}
-		if (buttonText == "Lose Dick") {
-			toolTipText = "Ask her to hide that gooey cock of hers.";
-		}
-		//Talk
-		if (buttonText == "Flirt") {
-			toolTipText = "Flirt with her and initiate sex with her.";
-		}
-		if (buttonText == "Accept") {
-			toolTipText = "Tell her that you're okay with her special needs.";
-		}
-		if (buttonText == "Gross") {
-			toolTipText = "Decline her special needs.";
-		}
-	}
+	//Valeria - Moved to addButton in Valeria.as
 	//-----------------
 	//-- ENVIRONMENT INTERACTIONS
 	//-----------------
@@ -1274,22 +1226,7 @@ public function getButtonToolTipText(buttonText:String):String
 	if (buttonText == "Map") {
 		toolTipText = "View the map of this dungeon.";
 	}
-	//Factory
-	if(buttonText == "Iron Key") {
-		toolTipText = "Pick up the iron key. It looks like it might unlock the door in this factory.";
-	}
-	if(buttonText == "Coffee") {
-		toolTipText = "Drink some coffee.";
-	}
-	if(buttonText == "Desk") {
-		toolTipText = "Check the desk for something.";
-	}
-	if(buttonText == "Valves") {
-		toolTipText = "Overload the valves. This may have unintended consequences but the factory will suffer catastrophe and shut down forever.";
-	}
-	if(buttonText == "Shutdown") {
-		toolTipText = "Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.";
-	}
+	//Factory environment - MOVED
 	if (kGAMECLASS.tooltipLoc == "IncubusMechanic") {
 		if (buttonText == "Orally" || buttonText == "Service Him") {
 			if (player.hasCock()) toolTipText = "Service the incubus orally.";

@@ -43,7 +43,14 @@ public function valeriaFollower():void {
 	var sex:Function = null;
 	if(player.lust > 33) sex = followersValeriaSex;
 	//(Display Options: [Appearance] [Spar] [Sex] [Talk])
-	choices("Appearance",valeriaAppearance,"Spar",valeriaSpar,"Sex",sex,"Talk",talkWithValeria,"Take",takeValeria,"",0,"",0,"",0,"",0,"Back",74);
+	menu();
+	addButton(0, "Appearance", valeriaAppearance, null, null, null, "Examine Valeria's appearance.");
+	addButton(1, "Spar", valeriaSpar, null, null, null, "Do a quick battle with Valeria!");
+	if (player.lust >= 33) addButton(2, "Sex", followersValeriaSex, null, null, null, "Initiate sexy time with the armor-goo.");
+	addButton(3, "Talk", talkWithValeria, null, null, null, "Discuss with Valeria.");
+	addButton(4, "Take", takeValeria, null, null, null, "This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this! \n\nType: Heavy armor \nDefense: 22 \nSpecial: Regeneration and Increased Fantasize");
+	addButton(14, "Back", camp.campFollowers);
+	//choices("Appearance",valeriaAppearance,"Spar",valeriaSpar,"Sex",sex,"Talk",talkWithValeria,"Take",takeValeria,"",0,"",0,"",0,"",0,"Back",74);
 }
 
 //[Valeria] -- [Appearance]
@@ -122,7 +129,7 @@ private function followersValeriaSex(display:Boolean = true):void {
 	}
 	//(Display Options: \"<i>[Penetrate Her](Cockwielder PC Only)  [Get Fucked]  [Gooflation] 
 	//[Get Dominated](Must have a gender)  [Dick/No Dick])
-	var penetrate:Function = null;
+	/*var penetrate:Function = null;
 	if(player.hasCock()) penetrate = penetrateValeria;
 	var getFucked:Function = valeriaGetFucked;
 	var gooFlation:Function = gooFlation;
@@ -132,8 +139,16 @@ private function followersValeriaSex(display:Boolean = true):void {
 	var dickText:String = "Grow Dick";
 	if(flags[kFLAGS.VELARIA_FUTA] == 1) {
 		dickText = "Lose Dick";
-	}
-	choices("PenetrateHer",penetrate,"Get Fucked",getFucked,"Gooflation",gooFlation,"GetDominated",dominated,dickText,dickToggle,"",0,"",0,"",0,"",0,"Back",valeriaFollower);
+	}*/
+	menu();
+	if (player.hasCock()) addButton(0, "PenetrateHer", penetrateValeria, null, null, null, "Fuck the goo girl with your penis!");
+	addButton(1, "Get Fucked", valeriaGetFucked, null, null, null, player.hasVagina() ? "Have her penetrate you vaginally.": "Have her penetrate you anally.");
+	addButton(2, "Gooflation", gooFlation, null, null, null, "Have her stuff your stomach through your ass!");
+	if (player.gender > 0) addButton(3, "GetDominated", valeriaSexDominated, null, null, null, "Submit to the armor-goo and have her take charge.");
+	if (flags[kFLAGS.VELARIA_FUTA] == 1) addButton(4, "Lose Dick", valeriaDickToggle, null, null, null, "Ask her to hide that gooey cock of hers.");
+	else addButton(4, "Grow Dick", valeriaDickToggle, null, null, null, "Ask her to grow a gooey cock.");
+	//choices("PenetrateHer",penetrate,"Get Fucked",getFucked,"Gooflation",gooFlation,"GetDominated",dominated,dickText,dickToggle,"",0,"",0,"",0,"",0,"Back",valeriaFollower);
+	addButton(14, "Back", valeriaFollower);
 }
 
 //Valeria -- [Sex] -- [Dick/No Dick]
@@ -398,8 +413,10 @@ private function talkWithValeria():void {
 	outputText("\n\nValeria chuckles wryly. \"<i>Well, it's not like I'm completely unchanged,</i>\" she whispers huskily, leaning close and looking hungrily at your crotch.  \"<i>After all, I have certain... appetites... now, you know.  I'm not proud of my new needs, but I'm afraid I just can't ignore them...</i>\"");
 	//How do you respond to that?
 	//(Display Options: [Flirt](PC has Gender) [Accept] [Gross])
-	if(player.gender > 0) simpleChoices("Flirt",flirtWithValeria,"Accept",acceptValeriasNeeds,"Gross",declineValeriasNeeds,"",0,"",0);
-	else simpleChoices("",0,"Accept",acceptValeriasNeeds,"Gross",declineValeriasNeeds,"",0,"",0);
+	menu();
+	if (player.gender > 0) addButton(0, "Flirt", flirtWithValeria, null, null, null, "Flirt with Valeria and initiate sex with her.");
+	addButton(1, "Accept", acceptValeriasNeeds, null, null, null, "Tell Valeria that you're okay with her special needs.");
+	addButton(2, "Gross", declineValeriasNeeds, null, null, null, "Decline Valeria's special needs.");
 }
 
 //[Flirt]

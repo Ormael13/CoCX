@@ -68,7 +68,12 @@ public function encounterKiha():void {
 		
 		outputText("What do you do?", false);
 		//[Fight] [Ask Why][Buy Passage][Leave]
-		simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
+		menu();
+		addButton(0, "Fight", meetKihaAndFight, "Fight the dragoness!");
+		addButton(1, "Ask Why", askWhy, null, null, null, "Ask Kiha why she's trying to drive you off.");
+		addButton(2, "Buy Passage", offerToBuyPassageFromKiha, null, null, null, "Try to offer Kiha 200 gems to buy passage.");
+		addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
+		//simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - PC WAS VICTORIOUS LAST FIGHT 
 	else if(flags[kFLAGS.PC_WIN_LAST_KIHA_FIGHT] == 1) {
@@ -82,26 +87,34 @@ public function encounterKiha():void {
 	//Tribute Offer (1st Time) - Req's Kiha not be mad and PC suggested it at some point. 
 	else if(flags[kFLAGS.KIHA_TOLL] == 1 && rand(2) == 0) {
 		outputText("Kiha steps out from behind a tree with her axe on her back and her arms folded across her sizable chest.  \"<i>You again?  I've been thinking about what you said.  How about instead of beating you senseless, you pay me a tribute of 200 gems, and I'll let you pass through my territory unhindered.  Of course, if you stumble into my lair I might have to teach you a lesson.</i>\"  A greedy smile spreads across her dusky visage while her eyes burn with mischievous crimson light.  Wait a moment... wasn't this your idea?\n\n", false);
-		temp = payKihaTribute;
+		menu();
+		addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
+		addButton(1, "Pay", payKihaTribute, null, null, null, "Pay Kiha 200 gems to let you explore her domain?");
 		if(player.gems < 200) {
-			outputText("You can't afford to pay her!", false);
-			temp = null;
+			outputText("\n\nYou can't afford to pay her!", false);
+			removeButton(1);
 		}
+		addButton(2, "My Idea", tellKihaTributeWasYourIdea, null, null, null, "Tell Kiha the whole tribute thing was your idea.");
+		addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
 		//[Pay] [This was my idea] [Leave] [Fight] - Leave uses standard leave text
-		simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
+	//	simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - Tribute Wore off 
 	else if(flags[kFLAGS.KIHA_TOLL] > 1 && 
 		(flags[kFLAGS.KIHA_TOLL_DURATION] == 1 || 
 		(flags[kFLAGS.KIHA_TOLL_DURATION] == 0 && rand(2) == 0))) {
 		outputText("Kiha steps out from behind a tree with her axe on her back and her arms folded across her sizable chest.  \"<i>If you want to explore my territory again, you'll need to pay the fee,</i>\" she flatly states.  This is absurd - she wants more gems already?  You'll go broke like this, AND it was your idea to begin with!  What do you do?", false);
-		temp = payKihaTribute;
+		menu();
+		addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
+		addButton(1, "Pay", payKihaTribute, null, null, null, "Pay Kiha 200 gems to let you explore her domain?");
 		if(player.gems < 200) {
 			outputText("\n\nYou can't afford to pay her again!", false);
-			temp = null;
+			removeButton(1);
 		}
+		addButton(2, "My Idea", tellKihaTributeWasYourIdea, null, null, null, "Tell Kiha the whole tribute thing was your idea.");
+		addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
 		//[Pay Again] [This was my idea] [Leave]  [Fight] - As first time Tribute Offer encounter
-		simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
+		//simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//Generic Repeat Encounter 
 	else {
@@ -112,7 +125,12 @@ public function encounterKiha():void {
 		if(flags[kFLAGS.KIHA_TOLL] == 0) {
 			outputText("If you hurry, you might get a word in edge-wise.  What do you do?", false);
 			//[Fight] [Ask Why][Buy Passage][Leave]
-			simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
+			menu();
+			addButton(0, "Fight", meetKihaAndFight, "Fight the dragoness!");
+			addButton(1, "Ask Why", askWhy, null, null, null, "Ask Kiha why she's trying to drive you off.");
+			addButton(2, "Buy Passage", offerToBuyPassageFromKiha, null, null, null, "Try to offer Kiha 200 gems to buy passage.");
+			addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
+			//simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 		}
 		else {
 			outputText("It's a fight!", false);
@@ -229,34 +247,30 @@ internal function kihaVictoryIntroduction():void {
 	var forceMasturbate:Function = tsundereMasturbationChristmasCarol;
 	outputText("\n\nYou could forcibly masturbate her.", false);
 	//Fems
-	var useHerTail:Function = null;
-	if(player.lust >= 33 && player.hasVagina()) {
+	menu();
+	addButton(0, "Masturbate", tsundereMasturbationChristmasCarol, null, null, null, "Forcibly masturbate Kiha.");
+	if (player.lust >= 33 && player.hasVagina()) { //Fems
 		outputText("\n\nYou could use her tail as a dildo.", false);
-		useHerTail = kihaVictoryPomfTail;
+		addButton(1, "Use Tail", kihaVictoryPomfTail, null, null, null, "Use her tail as a dildo.");
 	}
-	//Vagina with optional double-dick!
-	var fuckHer:Function = null;
-	if(player.hasCock()) {
+	if(player.hasCock()) { //Vagina with optional double-dick!
 		if(player.cockThatFits(monster.vaginalCapacity()) != -1 && player.lust >= 33) {
 			outputText("\n\nYou could fuck her vagina", false);
 			if(player.cockThatFits2(monster.vaginalCapacity()) != -1 && player.cockTotal() > 1)
 				outputText(" and ass", false);
 			outputText(".", false);
-			fuckHer = victoryDickKiha;
+			addButton(2, "FuckHerPussy", victoryDickKiha, null, null, null, "Penetrate Kiha vaginally.");
 		}
 	}
-	var buttFuck:Function = null;
-	//Buttfuck 20 or less
-	if(player.cockThatFits(monster.analCapacity()) >= 0 && player.lust >= 33) {
-		buttFuck = analRapuzulaKiha;
+	if(player.cockThatFits(monster.analCapacity()) >= 0 && player.lust >= 33) { //Buttfuck 20 or less
+		addButton(3, "FuckHerAss", analRapuzulaKiha, null, null, null, "Penetrate Kiha anally.");
 	}
-	//Conversation Only - Emotional Rape! (40- Corruption!)
-	var wordRape:Function = null;
-	if(player.cor < 40) {
+	if(player.cor < 40 || flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) { //Conversation Only - Emotional Rape! (40- Corruption!)
 		outputText("\n\nNow that she's a captive audience, you could always talk to her.", false);
-		wordRape = rapeKihaWithWORDS;
+		addButton(4, "Talk", rapeKihaWithWORDS, null, null, null, "Talk with Kiha and try to make progress.");
 	}
-	choices("Masturbate ",forceMasturbate,"Use Tail",useHerTail,"FuckHerPussy",fuckHer,"FuckHerAss",buttFuck,"Talk",wordRape,"",0,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
+	addButton(14, "Leave", cleanupAfterCombat);
+	//choices("Masturbate ",forceMasturbate,"Use Tail",useHerTail,"FuckHerPussy",fuckHer,"FuckHerAss",buttFuck,"Talk",wordRape,"",0,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
 }
 //*Generic PC Loss Intro 
 internal function kihaLossIntro():void {

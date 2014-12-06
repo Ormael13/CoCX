@@ -629,8 +629,8 @@
 				//Due to toughness or amor...
 				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);
 				else {
-					if (plural) outputText("You deflect and block every " + weaponVerb + " " + a + short + " throw at you.", false);
-					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+					if (plural) outputText("You deflect and block every " + weaponVerb + " " + a + short + " throw at you. ", false);
+					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you. ", false);
 				}
 			}
 			else if (damage < 6) outputText("You are struck a glancing blow by " + a + short + "! ", false);
@@ -649,7 +649,10 @@
 				if (!plural) outputText("s", false);
 				outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
 			}
-			if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+			if (damage > 0) {
+				if (flags[kFLAGS.ENEMY_CRITICAL] > 0) outputText("<b>Critical hit! </b>");
+				outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+			}
 			else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
 		}
 

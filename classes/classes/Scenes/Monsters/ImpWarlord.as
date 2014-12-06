@@ -7,7 +7,47 @@ package classes.Scenes.Monsters
 	
 	public class ImpWarlord extends Imp
 	{
-		
+		public function clawAttack():void {
+			outputText("The imp warlord suddenly charges at you with his claws ready! ");
+			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+				outputText("You manage to avoid his claws thanks to your reaction!");
+				combatRoundOver();
+				return;
+			}
+			else {
+				outputText("The imp manages to swipe you!  You let out a cry in pain. ");
+				var damage:int = rand(50) + str + weaponAttack;
+				damage = player.reduceDamage(damage);
+				if (damage < 20) damage = 20;
+				player.takeDamage(damage, true);
+			}
+			combatRoundOver();
+		}
+
+		public function doubleAttack():void {
+			outputText("The imp warlord suddenly charges at you with his claws ready and sword raised! ");
+			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+				outputText("You manage to dodge his deadly attack!");
+				combatRoundOver();
+				return;
+			}
+			else {
+				outputText("The imp manages to slash you with his sword and his deadly claws!");
+				var damage:int = rand(50) + str + weaponAttack;
+				damage = player.reduceDamage(damage);
+				if (damage < 20) damage = 20; //Min-cap damage.
+				if (damage >= 50) {
+					outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
+					player.createStatusAffect(StatusAffects.IzmaBleed, 2, 0, 0, 0);
+				}
+				else {
+					outputText("Thankfully the wounds aren't that serious. ");
+				}
+				player.takeDamage(damage, true);
+			}
+			combatRoundOver();
+		}
+
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
@@ -51,7 +91,7 @@ package classes.Scenes.Monsters
 			this.weaponAttack = 20;
 			this.armorName = "platemail";
 			this.armorDef = 17;
-			this.bonusHP = 250;
+			this.bonusHP = 300;
 			this.lust = 30;
 			this.lustVuln = .4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -64,6 +104,7 @@ package classes.Scenes.Monsters
 					add(consumables.SUCMILK,6);
 			this.wingType = WING_TYPE_IMP;
 			this.special1 = 5019;
+			this.special2 = clawAttack;
 			checkMonster();
 		}
 		
