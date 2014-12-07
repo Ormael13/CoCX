@@ -210,7 +210,16 @@ package classes.Scenes.NPCs
 			var milk:Function =null;
 			if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || player.hasItem(consumables.OVIELIX, 1)) && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) egg = emberIsAnEggFactory;
 			if (flags[kFLAGS.EMBER_MILK] > 0 /* || (player.hasItem(consumables.LACTAID, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 50)*/) milk = getMilkFromEmber;
-			choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg, "Sex", emberSexMenu, "Spar", decideToSparEmbra, "", 0, "", 0, "Back", 74);
+			menu();
+			addButton(0, "Appearance", embersAppearance, null, null, null, "Examine Ember's appearance.");
+			addButton(1, "Talk", talkToEmber, null, null, null, "Talk to Ember about some topics.");
+			addButton(2, "Drink Blood", bloodForTheBloodGod, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to give you some of her blood to gain powers.");
+			if (flags[kFLAGS.EMBER_MILK] > 0 || (player.hasItem(consumables.LACTAID, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) addButton(3, "Drink Milk", getMilkFromEmber, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to let you drink " + emberMF("his", "her") + " milk." + (flags[kFLAGS.EMBER_MILK] > 0 ? "": "\n\nThis will cost you 1 Lactaid each time you want to suckle milk.") + "");
+			if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || (player.hasItem(consumables.OVIELIX, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) addButton(4, "Get Egg", emberIsAnEggFactory, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to lay an unfertilized egg for you." + (flags[kFLAGS.EMBER_MILK] > 0 ? "": "\n\nThis will cost you 1 Ovi Elixir each time you want " + emberMF("him", "her") + " to lay an unfertilized egg.") + "");
+			addButton(5, "Sex", emberSexMenu, null, null, null, "Get into a sex session with Ember.");
+			addButton(6, "Spar", decideToSparEmbra, null, null, null, "Do a quick battle with Ember!");
+			addButton(14, "Back", camp.campFollowers);
+			//choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg, "Sex", emberSexMenu, "Spar", decideToSparEmbra, "", 0, "", 0, "Back", 74);
 		}
 
 //Approach for sex - initial output when selecting [Sex] menu (Z)
@@ -252,17 +261,17 @@ package classes.Scenes.NPCs
 				else outputText("\n\n\"<i>Depends... what do you have in mind?</i>\"");
 			}
 
-			var catchAnal_:Function = null;
+			/*var catchAnal_:Function = null;
 			var pitchAnal:Function = null;
 			var blowEmber:Function =null;
 			var getBlown:Function =null;
 			var eatOut:Function =null;
 			var getEatenOut:Function =null;
 			var penetrateHer:Function =null;
-			var getPenetrated:Function =null;
+			var getPenetrated:Function =null;*/
 			//Display Options:[Catch Anal][Pitch Anal][Blow Ember][Get Blown][Eat Ember Out][Get Eaten Out][Penetrate Her][Get Penetrated][Leave]
 			//Scenes that require Ember to have a dick
-			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) {
+			/*if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) {
 				blowEmber = suckEmberCock;
 				catchAnal_ = catchAnal;
 				if (player.lust >= 33 && player.hasVagina()) {
@@ -278,18 +287,18 @@ package classes.Scenes.NPCs
 			if (player.hasCock() && player.lust >= 33) {
 				getBlown = stickDickInKnifeDrawer;
 				pitchAnal = stickItInEmbersButt;
-			}
+			}*/
 			//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",emberCampMenu);
 			menu();
 
-			addButton(0, "Catch Anal", catchAnal_);
-			addButton(1, "Pitch Anal", pitchAnal);
-			addButton(2, "Blow Ember", blowEmber);
-			addButton(3, "Get Blown", getBlown);
-			addButton(4, "Eat Her Out", eatOut);
-			addButton(5, "Get Eaten Out", getEatenOut);
-			addButton(6, "Penetrate Her", penetrateHer);
-			addButton(7, "Get Penetrated", getPenetrated);
+			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(0, "Catch Anal", catchAnal, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate your [ass] with that cock of " + emberMF("his", "hers") + ".");
+			if (player.hasCock() && player.lust >= 33) addButton(1, "Pitch Anal", stickItInEmbersButt, null, null, null, "Penetrate Ember anally with your cock.");
+			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(2, "Blow Ember", suckEmberCock, null, null, null, "Suck Ember's cock and get a taste of " + emberMF("his", "her") + " cum. " + (flags[kFLAGS.HUNGER_ENABLED] > 0 ? "\n\nAnd get your belly stuffed, of course!" : "") + "");
+			if (player.hasCock() && player.lust >= 33) addButton(3, "Get Blown", stickDickInKnifeDrawer, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to suck you off.");
+			if (flags[kFLAGS.EMBER_GENDER] >= 2) addButton(4, "Eat Her Out", slurpDraggieCunnies, null, null, null, "Get a taste of Ember vagina!");
+			if (player.hasVagina() && player.lust >= 33) addButton(5, "Get Eaten Out", getEatenOutByEmbra, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to get a taste of your vagina.");
+			if (flags[kFLAGS.EMBER_GENDER] >= 2 && player.hasCock() && player.lust >= 33) addButton(6, "Penetrate Her", penetrateEmbrah, null, null, null, "Penetrate Ember vaginally!");
+			if ((flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) && player.lust >= 33 && player.hasVagina()) addButton(7, "Get Penetrated", getPenetratedByEmberLastSexSceneWoooo, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate you vaginally with that cock of " + emberMF("his", "hers") + ".");
 			if (emberAffection() >= 95 && player.hasCock() && player.cockThatFits(emberVaginalCapacity()) >= 0 && (player.hasItem(consumables.L_DRAFT) || player.lib >= 50 || player.minLust() >= 40))
 				addButton(8, "LustyFuck", highAffectionEmberLustFuck);
 			addButton(14, "Leave", emberCampMenu);
@@ -319,7 +328,11 @@ package classes.Scenes.NPCs
 				outputText("\n\nTrue enough, after a short trek through familiar tunnels you find yourself once again standing before the alleged 'dragon egg'.");
 			}
 			flags[kFLAGS.TIMES_FOUND_EMBERS_EGG]++;
-			simpleChoices("Take It", takeEmbersEggHomeInADoggieBag, "Destroy It", destroyBabyEmberYouMonster, "", 0, "", 0, "Leave", leaveEmbersAssOutToDry);
+			menu();
+			addButton(0, "Take It", takeEmbersEggHomeInADoggieBag, null, null, null, "Take the egg home with you. \n\nYou'll be able to hatch the egg eventually.");
+			addButton(1, "Destroy It", destroyBabyEmberYouMonster, null, null, null, "Destroy the egg. (And optionally eat the egg) \n\nWhy would you do that?");
+			addButton(4, "Leave", leaveEmbersAssOutToDry);
+			//simpleChoices("Take It", takeEmbersEggHomeInADoggieBag, "Destroy It", destroyBabyEmberYouMonster, "", 0, "", 0, "Leave", leaveEmbersAssOutToDry);
 		}
 
 //[=Leave=] (Z)
@@ -1062,6 +1075,7 @@ package classes.Scenes.NPCs
 			//Talk about Exploring
 			//Talk about Yourself
 			simpleChoices("Dragons", talkToEmberAboutDragonzzz, "Exploring", discussExplorationWithEmber, "Yourself", talkToEmberAboutYourself, "", 0, "Back", emberCampMenu);
+			if (flags[kFLAGS.EMBER_AFFECTION] >= 100 && flags[kFLAGS.EGG_BROKEN] < 1) addButton(3, "Eggshell", askEmberForEggshell, null, null, null, "Ask Ember for the eggshell. After all, you should have deserved the eggshell by now.");
 		}
 
 //Talk about Dragons (Z)
@@ -1106,7 +1120,8 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou ask if " + emberMF("he", "she") + "'s all right.  \"<i>Huh?  Yes, I'm fine!  Anyways, lesson's over.</i>\"  Ember hurriedly goes back inside " + emberMF("his", "her") + " den.");
 				emberAffection(5);
 			}
-			doNext(camp.returnToCampUseOneHour);
+			cheatTime(1/6);
+			doNext(camp.campMenu);
 		}
 
 //Exploration (Z)
@@ -1179,7 +1194,8 @@ package classes.Scenes.NPCs
 				}
 			}
 			outputText("</i>\"");
-			doNext(camp.returnToCampUseOneHour);
+			cheatTime(1/6);
+			doNext(camp.campMenu);
 		}
 
 //Talk about Yourself (Z)
@@ -1279,9 +1295,21 @@ package classes.Scenes.NPCs
 				outputText("\"<i>You're quite a catch... if you strolled down the street you'd have dragons fawning all over you...</i>\"  Realizing what " + emberMF("he", "she") + " just said, Ember coughs furiously.  \"<i>I-I mean... lesser dragons might fawn all over you.  You don't meet my standards!</i>\"");
 				emberAffection(5);
 			}
-			doNext(camp.returnToCampUseOneHour);
+			cheatTime(1/6);
+			doNext(camp.campMenu);
 		}
-
+		
+		private function askEmberForEggshell():void {
+			clearOutput();
+			outputText("You ask Ember if " + emberMF("he", "she") + "'s willing to give you the eggshell.  After all, it could be useful for something.");
+			outputText("\n\n\"<i>Fine.  Since I like you, I'll give you the eggshell,</i>\" Ember says.  " + emberMF("He", "She") + " walks into the darkness of the den and she comes back some time later with the eggshell fragments.");
+			outputText("\n\n\"<i>Take these to the armorsmith in that city in the desert,</i>\" " + emberMF("he", "she") + " says.  You thank " + emberMF("him", "her") + " for the eggshell.");
+			flags[kFLAGS.EGG_BROKEN] = 1;
+			outputText("\n\n(<b>Gained Key Item: Dragon Eggshell</b>)");
+			player.createKeyItem("Dragon Eggshell", 0, 0, 0, 0);
+			cheatTime(1/3);
+			doNext(camp.campMenu);
+		}
 
 //Ember Interactions: Special Events (edited, but pending modifications -Z)
 //Most of these scenes occur if you pick the option "Talk" while meeting the conditions, unless otherwise noted.
@@ -1766,7 +1794,9 @@ package classes.Scenes.NPCs
 		private function emberIsAnEggFactory():void
 		{
 			clearOutput();
-			outputText("You ask Ember if she would be willing to lay an egg for you.");
+			outputText("You ask Ember if she would be willing to lay an egg for you");
+			if (flags[kFLAGS.EMBER_OVIPOSITION] <= 0) outputText(" if you give her an oviposition elixir");
+			outputText(".");
 			//(Low Affection)
 			if (emberAffection() <= 25) {
 				outputText("\n\nEmber's eyes darken.  \"<i>How dare you!  Asking me to do something... so... so embarrassing!</i>\"");
@@ -1813,6 +1843,10 @@ package classes.Scenes.NPCs
 			//(High Affection)
 			else {
 				outputText("\n\nDespite Ember's growing embarrassment, she smirks and looks you over.  \"<i>F-Fine... but I expect you to help with it.</i>\"");
+				if (flags[kFLAGS.EMBER_OVIPOSITION] <= 0) {
+					outputText("  She uncorks a bottle of oviposition elixir and gulps down the contents.  Immediately, her belly swells.");
+					player.destroyItems(consumables.OVIELIX, 1);
+				}
 				outputText("\n\nYou ask her what she has in mind.");
 				outputText("\n\n\"<i>Don't be silly!  You know what I mean...</i>\"  Ember's face looks as pinched as a snake's; some moisture runs down her thighs");
 				if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) outputText(", and her cock points you accusingly");
@@ -1923,7 +1957,7 @@ package classes.Scenes.NPCs
 			else {
 				outputText("You think for a few moments, then find your gaze drawn to Ember's round, firm");
 				if (flags[kFLAGS.EMBER_ROUNDFACE] == 0) outputText(", scaly");
-				outputText(" breasts, " + emberMF("his", "her") + " perky nipples bare as always and enticing you.  With a repressed smile, you ask if " + emberMF("he", "she") + "'ll let you suckle " + emberMF("his", "her") + " milk if you give her a Lactaid.");
+				outputText(" breasts, " + emberMF("his", "her") + " perky nipples bare as always and enticing you.  With a repressed smile, you ask if " + emberMF("he", "she") + "'ll let you suckle " + emberMF("his", "her") + " milk if you give " + emberMF("him", "her") + " a Lactaid.");
 			}
 			//Summary:
 			//Usable only through Follower menu
@@ -2004,6 +2038,10 @@ package classes.Scenes.NPCs
 			}
 			//(Medium Affection)
 			else if (emberAffection() < 75) {
+				if (flags[kFLAGS.EMBER_MILK] <= 0) {
+					outputText("\n\nYou give Ember the lactaid and " + emberMF("he", "she") + " says, \"<i>Fine.  I'll drink this but be warned, this is only temporary!</i>\" " + emberMF("He", "She") + " glares at you and drinks the content of Lactaid. " + emberMF("His", "Her") + " breasts swell, looking positively milk-filled.");
+					player.destroyItems(consumables.LACTAID, 1); //Remove 1 Lactaid
+				}
 				outputText("\n\n\"<i>Okay.  I guess I can give you a treat... but no funny ideas!</i>\"  That said, Ember walks into " + emberMF("his", "her") + " den to settle on a pile of soft leaves against the cave wall.");
 				outputText("\n\nYou promise to behave yourself, and seat yourself in " + emberMF("his", "her") + " lap, reaching up to stroke " + emberMF("his", "her") + " bountiful, milk-filled breasts.");
 				outputText("\n\nEmber's eyes widen as " + emberMF("he", "she") + " gasps in pleasure at your initial contact.  \"<i>N-Not so fast!  At least give me a warning before you start.  They're sensitive...</i>\"");
@@ -2032,6 +2070,7 @@ package classes.Scenes.NPCs
 					player.removeStatusAffect(StatusAffects.DragonBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
+				player.refillHunger(50);
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
 				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
@@ -2115,7 +2154,6 @@ package classes.Scenes.NPCs
 					outputText("\n\n\"<i>Ah!  That's good...</i>\"  Ember embraces you in a tight hug, bringing you as close to " + emberMF("him", "her") + " as possible.  You smile around your nipple and enjoy the sensation, languidly suckling from " + emberMF("him", "her") + " less out of an honest thirst for the milk and more to prolong your excuse to be so close to your strangely fuzzy dragon.");
 					outputText("\n\nBy the time you're done Ember has melted into a purring pile, content with simply letting you sit on " + emberMF("his", "her") + " lap.  \"<i>Don't think that just because it felt good, I'm going to let you do this whenever you feel like.</i>\"");
 					outputText("\n\nYou tell " + emberMF("him", "her") + " you wouldn't dream of thinking that, sneaking an opportunity to kiss " + emberMF("him", "her") + " while " + emberMF("his", "her") + " guard is so lax.  Even as you do, your stomach begins to gripe, trying and failing to digest the slow-to-process milk before it begins to turn.  You're going to be sick later, that's for sure...");
-					if (player.tou > 40) dynStats("tou", -1);
 				}
 				//(corrupt jerk)
 				else {
@@ -2125,6 +2163,8 @@ package classes.Scenes.NPCs
 					outputText("\n\n\"<i>D-don't think I'm okay with you spilling my milk like this,</i>\" " + emberMF("he", "she") + " retorts, a tear coming to " + emberMF("his", "her") + " eye at one particularly strong yank.  \"<i>I just... don't want to feel all lopsided and awkward!  It would make me fly funny...</i>\"");
 					outputText("\n\nYeah, yeah.  You finish draining the second breast and then lift it, planting a kiss on the sensitized nipple.");
 				}
+				player.refillHunger(50);
+				if (player.tou > 40) dynStats("tou", -1);
 				//merge wuss and jerk forks
 				outputText("\n\nEmber gets so flustered that " + emberMF("he", "she") + " just stares at you in stunned silence, wearing a goofy smile.  \"<i>Wha... you know, there's no point in saying anything.  I know you'll just sneak another opportunity like this in the future... doesn't mean I won't make you pay for this when I catch you later.</i>\"");
 				outputText("\n\nYou whisper into her ear that you're looking forward to it, and gently raise yourself from " + emberMF("his", "her") + " lap to leave.");
@@ -2160,7 +2200,6 @@ package classes.Scenes.NPCs
 			//reset Dragonbreath counter to ready, increase lust slightly if low or med affection, add heat/rut if high dragon-score, damage toughness slightly if high affection and low PC corruption
 			if (emberAffection() < 75) dynStats("lus", 20);
 			fatigue( -50);
-			player.refillHunger(75);
 			player.slimeFeed();
 			HPChange(player.maxHP() * .33, false);
 			doNext(camp.returnToCampUseOneHour);

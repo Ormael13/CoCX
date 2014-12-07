@@ -883,6 +883,7 @@ public function stash():Boolean {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;*/
 	//REMOVE THE ABOVE BEFORE RELASE ()
+	hideMenus();
 	clearOutput();
 	spriteSelect(-1);
 	menu();

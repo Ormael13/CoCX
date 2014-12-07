@@ -604,6 +604,7 @@ package classes.Scenes.Places
 				}
 				fatigue(10);
 			}
+			if (player.findPerk(PerkLib.HistorySlacker) >= 0) fatigue(-5);
 			outputText("\n\nYou walk back to Ingnam.");
 			player.gems += 5;
 			statScreenRefresh();

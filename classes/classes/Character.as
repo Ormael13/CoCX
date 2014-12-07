@@ -263,12 +263,12 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 				if (femininity < 20)
 				{
 					output += "\n<b>Your incredibly masculine, chiseled features become a little bit softer from your body's changing hormones.";
-					if (hasBeard())
+					/*if (hasBeard())
 					{
 						output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
 						beardLength = 0;
 						beardStyle = 0;
-					}
+					}*/
 					output += "</b>\n";
 					femininity = 20;
 				}

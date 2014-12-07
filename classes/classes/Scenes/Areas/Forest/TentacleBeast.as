@@ -126,14 +126,14 @@
 			this.skinDesc = "bark";
 			this.hairColor = "green";
 			this.hairLength = 1;
-			initStrTouSpeInte(58, 25, 45, 45);
+			initStrTouSpeInte(58, 25, 35, 45);
 			initLibSensCor(90, 20, 100);
 			this.weaponName = "whip-tendril";
 			this.weaponVerb="thorny tendril";
 			this.weaponAttack = 1;
 			this.armorName = "rubbery skin";
 			this.armorDef = 1;
-			this.bonusHP = 350;
+			this.bonusHP = 250;
 			this.lust = 10;
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

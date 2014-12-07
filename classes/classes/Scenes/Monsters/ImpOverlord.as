@@ -87,7 +87,7 @@ package classes.Scenes.Monsters
 		//Imp Fire
 		protected function impFire():void
 		{
-			outputText("The imp mutters something to himself. Before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a painful burn on you torso, as well as an arousing heat in your groin. ");
+			outputText("The imp mutters something to himself. Before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a painful burn on your torso, as well as an arousing heat in your groin. ");
 			//[-HP // +Lust(minor)]
 			var damage:int = 80 + rand(20);
 			player.takeDamage(damage, true);
@@ -165,7 +165,7 @@ package classes.Scenes.Monsters
 			}
 			else {
 				outputText("The imp manages to slash you with his scimitar and his deadly claws!");
-				var damage:int = rand(100) + str + weaponAttack;
+				var damage:int = rand(100) + (str * 1.5) + weaponAttack;
 				damage = player.reduceDamage(damage);
 				if (damage < 30) damage = 30; //Min-cap damage.
 				if (damage >= 50) {

@@ -321,7 +321,7 @@ public function settingsScreenInterfaceSettings():void {
 	addButton(0, "Side Bar Style", toggleInterface, null, null, null, "Switch between old and new stats bars.");
 	addButton(1, "Toggle Images", toggleImages, null, null, null, "Enable or disable image pack.");
 	addButton(2, "Toggle Sprites", toggleSpritesFlag, null, null, null, "Toggles the pixelated sprites that appears in lower-left corner of the screen and also toggles the pictures if image-pack is found.");
-	addButton(3, "Old Sprites", toggleOldSprites, null, null, null, "Toggle between old and new sprites.  \n\nNOTE: This doesn't work well right now."); //If I can re-add old sprites, that is.
+	//addButton(3, "Old Sprites", toggleOldSprites, null, null, null, "Toggle between old and new sprites.  \n\nNOTE: This doesn't work well right now."); //If I can re-add old sprites, that is.
 	addButton(4, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
 	addButton(5, "Background", cycleBackground, null, null, null, "Cycle through background styles and colors.");
 	addButton(14, "Back", settingsScreenMain);

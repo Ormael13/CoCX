@@ -45,6 +45,7 @@ package classes
 		public static const Eggchest:StatusAffectType = mk("eggchest");
 		public static const Eggs:StatusAffectType = mk("eggs");
 		public static const EmberFuckCooldown:StatusAffectType = mk("ember fuck cooldown");
+		public static const EmberMilk:StatusAffectType = mk("Ember's Milk");
 		public static const EmberNapping:StatusAffectType = mk("Ember Napping");
 		public static const EverRapedJojo:StatusAffectType = mk("Ever Raped Jojo");
 		public static const Exgartuan:StatusAffectType = mk("Exgartuan");

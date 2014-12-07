@@ -2142,6 +2142,7 @@ public function displayStats(e:MouseEvent = null):void
 	bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
 	
 	if (player.cumQ() > 0)
+		bodyStats += "<b>Virility Rating:</b> " + Math.round(player.virilityQ() * 100) + "\n";
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + " / " + addComma(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
 		else bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + "mL\n";
 	if (player.lactationQ() > 0)
@@ -2363,6 +2364,9 @@ public function displayStats(e:MouseEvent = null):void
 		
 	if (player.statusAffectv1(StatusAffects.LustStickApplied) > 0)
 		statEffects += "Luststick Application - " + Math.round(player.statusAffectv1(StatusAffects.LustStickApplied)) + " hours remaining\n";
+		
+	if (player.statusAffectv1(StatusAffects.LustyTongue) > 0)
+		statEffects += "Lusty Tongue - " + Math.round(player.statusAffectv1(StatusAffects.LustyTongue)) + " hours remaining\n";
 		
 	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0)
 		statEffects += "Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining (Lust resistance 20% lower, physical resistance 25% higher.)\n";
@@ -2847,7 +2851,7 @@ public function doBadEnd():void {
 public function spriteSelect(choice:Number = 0):void {
 	if (flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
 	{
-		if (flags[kFLAGS.USE_OLD_SPRITES] >= 1) choice += 1000;
+		//if (flags[kFLAGS.USE_OLD_SPRITES] >= 1) choice += 1000;
 		mainView.selectSprite( choice );
 	}
 	else

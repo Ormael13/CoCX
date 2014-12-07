@@ -1896,7 +1896,7 @@ package classes
 				percent += 0.05;
 			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				percent += 0.03;
-			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25)
+			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25) //Reduces virility by 3%.
 				percent -= 0.03;
 			if (findPerk(PerkLib.PiercedFertite) >= 0)
 				percent += 0.03;
@@ -1933,12 +1933,12 @@ package classes
 			//trace("CUM ESTIMATE: " + int(1.25*2*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(no balls), " + int(ballSize*balls*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(withballs)");
 			var lustCoefficient:Number = (lust + 50) / 10;
 			//If realistic mode is enabled, limits cum to capacity.
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
 				lustCoefficient = (lust + 50) / 5;
 				if (findPerk(PerkLib.PilgrimsBounty) >= 0) lustCoefficient = 30;
-				var percent:Number = 0
-				percent = lustCoefficient + (hoursSinceCum + 10)
+				var percent:Number = 0;
+				percent = lustCoefficient + (hoursSinceCum + 10);
 				if (percent > 100)
 					percent = 100;
 				if (quantity > cumCapacity()) 
@@ -1996,7 +1996,7 @@ package classes
 			var cumCap:Number = 0;
 			//Alter capacity by balls.
 			if (balls > 0) cumCap += Math.pow(((4 / 3) * Math.PI * (ballSize / 2)), 3) * balls// * cumMultiplier
-			else cumCap +=  Math.pow(((4 / 3) * Math.PI * 1.25), 3) * 2// * cumMultiplier
+			else cumCap +=  Math.pow(((4 / 3) * Math.PI * 1), 3) * 2// * cumMultiplier
 			//Alter capacity by perks.
 			if (findPerk(PerkLib.BroBody) >= 0) cumCap *= 1.3;
 			if (findPerk(PerkLib.FertilityPlus) >= 0) cumCap *= 1.5;
@@ -2488,7 +2488,11 @@ package classes
 			{
 				if (hasVagina())
 				{
-					if (biggestTitSize() >= 2) return female;	
+					if (biggestTitSize() >= 2) return female;
+					/*else if (biggestTitSize() == 1) {
+						if (femininity > 50) return female;
+						else return male;
+					}*/
 					else return male;
 				}
 				else return male;

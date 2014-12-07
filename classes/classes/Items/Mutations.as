@@ -7417,7 +7417,7 @@
 			}
 			else outputText("You worry it'll make it harder to resist the attentions of a demon.", false);
 			dynStats("sen", 10, "lus", 5);
-			player.refillHunger(15);
+			player.refillHunger(5);
 		}
 
 		public function foxTF(enhanced:Boolean,player:Player):void

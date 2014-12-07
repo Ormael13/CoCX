@@ -430,6 +430,7 @@ private function beardMenu():void {
 	if (player.hasBeard() && player.beardLength < 6) addButton(1, "Lengthen Beard", growBeard, 0);
 	if (!player.hasBeard()) addButton(1, "Grow Beard", growBeard, 1);
 	if (player.hasBeard()) addButton(2, "Beard Style", changeBeardStyle);
+	if (player.hasBeard()) addButton(3, "Remove Beard", removeBeard);
 	addButton(14, "Back", hairDressingMainMenu);
 }
 
@@ -440,7 +441,7 @@ private function cutBeard():void {
 		return;
 	}
 	outputText("Lynnette and her daughters crowd around you with razor-sharp scissors, effortlessly paring down your " + beardDescript() + ".  When they've finished, you're left with ", true);
-	player.beardLength = 0.05;
+	player.beardLength = 0.01;
 	outputText(beardDescript() + ".", false);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -496,6 +497,13 @@ private function chooseBeardStyleFinalize(choiceStyle:int = 0):void {
 	outputText("Lynnette and her daughters begin to mess with your beard with razor-sharp scissors and white fluid while they work to change your beard into what you've wanted.\n\n");
 	player.beardStyle = choiceStyle;
 	outputText("After a while, you now have " + player.beardDescript() + "!");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function removeBeard():void {
+	outputText("You tell Lynnette that you'd like to have your beard removed.\n\n", true);
+	outputText("Lynnette instructs you to take a seat and she applies a special cream all over your " + player.beardDescript() +".  Your beard starts to stiffen and falls out.  She gives your chin a good cleaning afterwards.\n\n");
+	outputText("<b>You no longer have a beard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 

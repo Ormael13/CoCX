@@ -471,11 +471,11 @@ package classes {
 					needNext = true;
 				}
 				if (player.cocks[0].cockLength < 10) { //(Dick rebiggening)
-					outputText("\n<b>As time passes, your cock engorges, flooding with blood and growing until it's at 10 inches long.  ");
+					outputText("\n<b>As time passes, your cock engorges, flooding with blood and growing until it's at 8 inches long.  ");
 					if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("Goddamn, that thing is almost as tough as you!  ");
 					outputText("You really have no control over your dick.</b>\n");
-					player.cocks[0].cockLength = 10;
-					if (player.cocks[0].cockThickness < 2) player.cocks[0].cockThickness = 2;
+					player.cocks[0].cockLength = 8;
+					if (player.cocks[0].cockThickness < 2) player.cocks[0].cockThickness = 1.5;
 					needNext = true;
 				}
 				if (player.balls == 0) { //(Balls regrowth)
@@ -695,7 +695,7 @@ package classes {
 				player.changeStatusValue(StatusAffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
 			}
-			if (getGame().model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0) {
+			if (getGame().model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
 				outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 				player.growTits(1, player.bRows(), false, 2);
 				getGame().dynStats("lus", 10);

@@ -600,18 +600,23 @@ use namespace kGAMECLASS;
 			}
 			if (lowerBody == 11)
 				race = "pony-kin";
-			if (catScore() >= 4)
-				race = "cat-" + mf("boy", "girl");
+			if (catScore() >= 4) 
+			{
+				race = "cat-morph";
+				if (faceType == 0)
+					race = "cat-" + mf("boy", "girl");
+			}
 			if (lizardScore() >= 4)
 			{
-				if (gender == 0)
+				race = "lizan";
+				/*if (gender == 0) 
 					race = "lizan";
 				else if (gender == 1)
 					race = "male lizan";
 				else if (gender == 2)
 					race = "female lizan";
 				else
-					race = "hermaphrodite lizan";
+					race = "hermaphrodite lizan";*/
 			}
 			if (dragonScore() >= 4)
 			{
