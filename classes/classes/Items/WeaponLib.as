@@ -13,7 +13,7 @@ package classes.Items
 
 		public const B_SWORD:Weapon = new BeautifulSword();
 		public const CLAYMOR:Weapon = new LargeClaymore();
-		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",4,40,"A small blade.  Preferred weapon for the rogues. \n\nType: Weapon (Sword) \nAttack: 10 \nBase value: 40");
+		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",4,40,"A small blade.  Preferred weapon for the rogues. \n\nType: Weapon (Sword) \nAttack: 4 \nBase value: 40");
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
 		public const E_STAFF:EldritchStaff = new EldritchStaff();
 		public const FLINTLK:Weapon = new Weapon("Flintlk","Flintlock","flintlock pistol","a flintlock pistol","shot",14,250,"A flintlock pistol. Pew pew pew. \n\nType: Weapon (Gun) \nAttack: 14 \nBase value: 250");

@@ -792,42 +792,32 @@ private function menuPerk():void {
 	addButton(1, "Toughness", choosePerkToughness);
 	addButton(2, "Speed", choosePerkSpeed);
 	addButton(3, "Smarts", choosePerkIntelligence);
-	
-	addButton(5, "Libido", choosePerkLibido);
-	addButton(6, "Touch", choosePerkSensitivity);
-	addButton(7, "Perversion", choosePerkCorruptionYouMonster);
-
-	addButton(4, "Next", menuPerkII);
-	addButton(14, "Back", genericStyleCustomizeMenu);
-}	
-
-private function menuPerkII():void {
-	choices("", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
+	addButton(4, "Libido", choosePerkLibido);
+	addButton(5, "Touch", choosePerkSensitivity);
+	addButton(6, "Perversion", choosePerkCorruptionYouMonster);
 	if (player.gender == 1)
 	{
-		addButton(0, "Big Cock", choosePerkBigCock);
-		addButton(1, "Lots of Jizz", choosePerkMessyOrgasms);
+		addButton(7, "Big Cock", choosePerkBigCock);
+		addButton(8, "Lots of Jizz", choosePerkMessyOrgasms);
 	}
 	if (player.gender == 2)
 	{
-		addButton(0, "Big Breasts", choosePerkBigBoobs);
-		addButton(1, "Big Clit", choosePerkBigClit);
-		addButton(2, "Fertile", choosePerkFertile);
-		addButton(3, "Wet Vagina", choosePerkWetgina);
-	}
+		addButton(7, "Big Breasts", choosePerkBigBoobs);
+		addButton(8, "Big Clit", choosePerkBigClit);
+		addButton(9, "Fertile", choosePerkFertile);
+		addButton(10, "Wet Vagina", choosePerkWetgina);
+	}	
 	if (player.gender == 3)
 	{
-		addButton(0, "Big Cock", choosePerkBigCock);
-		addButton(1, "Lots of Jizz", choosePerkMessyOrgasms);
-		addButton(2, "Big Breasts", choosePerkBigBoobs);
-		addButton(3, "Big Clit", choosePerkBigClit);
-		
-		addButton(5, "Fertile", choosePerkFertile);
-		addButton(6, "Wet Vagina", choosePerkWetgina);
+		addButton(7, "Big Cock", choosePerkBigCock);
+		addButton(8, "Lots of Jizz", choosePerkMessyOrgasms);
+		addButton(9, "Big Breasts", choosePerkBigBoobs);
+		addButton(10, "Big Clit", choosePerkBigClit);
+		addButton(11, "Fertile", choosePerkFertile);
+		addButton(12, "Wet Vagina", choosePerkWetgina);
 	}
-	addButton(4, "Previous", menuPerk);
-	addButton(14, "Back", setHeight);
-}
+	addButton(14, "Back", genericStyleCustomizeMenu);
+}	
 
 private function choosePerkStrength():void {
 	outputText("Are you stronger than normal? (+5 Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.\n", true);
@@ -972,7 +962,8 @@ private function confirmPerk():void {
 //-----------------
 public function menuHistory():void {
 	outputText("Before you became a champion, you had other plans for your life.  What were you doing before?", true);
-	choices("Alchemy",chooseHistoryAlchemy,"Fighting",chooseHistoryFighting,"Healing",chooseHistoryHealing,"Religion",chooseHistoryReligion,"Schooling",chooseHistorySchooling,"Slacking",chooseHistorySlacking,"Smithing",chooseHistorySmithing,"Slutting",chooseHistorySlutting,"Whoring",chooseHistoryWhoring,"Fortune",chooseHistoryFortune);
+	choices("Alchemy", chooseHistoryAlchemy, "Fighting", chooseHistoryFighting, "Healing", chooseHistoryHealing, "Religion", chooseHistoryReligion, "Schooling", chooseHistorySchooling, "Slacking", chooseHistorySlacking, "Smithing", chooseHistorySmithing, "Slutting", chooseHistorySlutting, "Whoring", chooseHistoryWhoring, "Fortune", chooseHistoryFortune);
+	//addButton(14, "Back", menuPerk);
 }
 
 private function chooseHistoryAlchemy():void {

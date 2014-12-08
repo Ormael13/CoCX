@@ -1506,6 +1506,7 @@ package classes.Scenes.Monsters
 		public function impWarlordEncounter():void {
 			clearOutput();
 			outputText("A large corrupted imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
+			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
 			startCombat(new ImpWarlord());
 			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
@@ -1518,6 +1519,7 @@ package classes.Scenes.Monsters
 		public function impOverlordEncounter():void {
 			clearOutput();
 			outputText("A large corrupted imp crosses your path but he is no ordinary imp.  Glowing veins line his body.  He is clad in bee-chitin armor and he's wearing a shark-tooth necklace.  He is also wielding a scimitar in his right hand.  He must be an Imp Overlord!  He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
+			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_OVERLORD]++;
 			startCombat(new ImpOverlord());
 			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;

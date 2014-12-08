@@ -2406,8 +2406,12 @@ package classes
 		
 		public function guyGirl(caps:Boolean = false):String
 		{
+			if (caps)
+				return mf("Guy", "Girl");
+			else 
+				return mf("guy", "girl");
 			//Dicks?
-			if (totalCocks() > 0)
+			/*if (totalCocks() > 0)
 			{
 				if (hasVagina())
 				{
@@ -2467,7 +2471,7 @@ package classes
 					else
 						return "guy";
 				}
-			}
+			}*/
 		}
 		
 		public function mfn(male:String, female:String, neuter:String):String
@@ -2489,10 +2493,10 @@ package classes
 				if (hasVagina())
 				{
 					if (biggestTitSize() >= 2) return female;
-					/*else if (biggestTitSize() == 1) {
-						if (femininity > 50) return female;
+					else if (biggestTitSize() == 1) {
+						if (kGAMECLASS.player.femininity > 50) return female;
 						else return male;
-					}*/
+					}
 					else return male;
 				}
 				else return male;
@@ -2542,8 +2546,10 @@ package classes
 		
 		public function boyGirl(caps:Boolean = false):String
 		{
+			if (caps) return mf("Boy", "Girl");
+			else return mf("boy", "girl");
 			//Dicks?
-			if (totalCocks() > 0)
+			/*if (totalCocks() > 0)
 			{
 				if (hasVagina())
 				{
@@ -2593,13 +2599,15 @@ package classes
 					else
 						return "boy";
 				}
-			}
+			}(*/
 		}
 		
 		public function heShe(caps:Boolean = false):String
 		{
+			if (caps) return mf("He", "She");
+			else return mf("he", "she");
 			//Dicks?
-			if (totalCocks() > 0)
+			/*if (totalCocks() > 0)
 			{
 				if (hasVagina())
 				{
@@ -2649,13 +2657,15 @@ package classes
 					else
 						return "it";
 				}
-			}
+			}*/
 		}
 		
 		public function himHer(caps:Boolean = false):String
 		{
+			if (caps) return mf("Him", "Her");
+			else return mf("him", "her");
 			//Dicks?
-			if (totalCocks() > 0)
+			/*if (totalCocks() > 0)
 			{
 				if (hasVagina())
 				{
@@ -2705,13 +2715,15 @@ package classes
 					else
 						return "him";
 				}
-			}
+			}*/
 		}
 		
 		public function maleFemale(caps:Boolean = false):String
 		{
+			if (caps) return mf("Male", "Female");
+			else return mf("male", "female");
 			//Dicks?
-			if (totalCocks() > 0)
+			/*if (totalCocks() > 0)
 			{
 				if (hasVagina())
 				{
@@ -2761,13 +2773,30 @@ package classes
 					else
 						return "male";
 				}
-			}
+			}*/
 		}
 		
 		public function maleFemaleHerm(caps:Boolean = false):String
 		{
+			if (gender == 0) {
+				if (caps) return mf("Genderless", "Fem-genderless");
+				else return mf("genderless", "fem-genderless");
+			}
+			else if (gender == 1) {
+				if (caps) return mf("Male", "Dickgirl");
+				else return mf("male", "dickgirl");
+			}
+			else if (gender == 2) {
+				if (caps) return mf("Cuntboy", "Female");
+				else return mf("cuntboy", "female");
+			}
+			else if (gender == 3) {
+				if (caps) return mf("Maleherm", "Hermaphrodite");
+				else return mf("maleherm", "hermaphrodite");
+			}
+			else return "<b>Gender error!</b>";
 			//Dicks?
-			if (totalCocks() > 0)
+			/*if (totalCocks() > 0)
 			{
 				if (hasVagina())
 				{
@@ -2817,7 +2846,7 @@ package classes
 					else
 						return "genderless";
 				}
-			}
+			}*/
 		}
 		
 		public function hisHer(caps:Boolean = false):String

@@ -2896,7 +2896,8 @@ public function marbleBadEndFollowup():void {
 	//morph – keeps track of player's form (human, dog-morph, centaur)
 	var morph:String = "human";
 	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur";
-	if(player.dogScore() >= 4) morph = "dog-morph";
+	if (player.dogScore() >= 4) morph = "dog-morph";
+	if (player.catScore() >= 4) morph = "cat-morph";
 	if(player.horseScore() >= 3) {
 		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur-morph";
 		else morph = "equine-morph";
