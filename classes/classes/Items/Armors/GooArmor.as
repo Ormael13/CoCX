@@ -26,7 +26,7 @@ package classes.Items.Armors
 			outputText(", encasing your loins in case you need a little mid-battle release, she says.");
 			outputText("\n\nAfter a few minutes, you and your armor-friend are settled and ready to go.");
 			if (game.flags[kFLAGS.MET_VALERIA] == 0) {
-				outputText("  As you ready yourself for the dungeon ahead, the goo giggles into your ear.  \"<i>Oh shit, silly me.  I forgot, my name's Valeria.  Ser Valeria, if you're feeling fancy.</i>\"  You introduce yourself, awkwardly shaking your own hand by way of pleasantries.");
+				outputText("  As you ready yourself for the " + (getGame().dungeons.checkPhoenixTowerClear() ? "adventures": "dungeon") + " ahead, the goo giggles into your ear.  \"<i>Oh shit, silly me.  I forgot, my name's Valeria.  Ser Valeria, if you're feeling fancy.</i>\"  You introduce yourself, awkwardly shaking your own hand by way of pleasantries.");
 				game.flags[kFLAGS.MET_VALERIA]++;
 			}
 			outputText("\n\n\"<i>Well alright then, [name]!</i>\" Valeria says excitedly, \"<i>Let's go!</i>\"\n\n");

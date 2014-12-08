@@ -425,5 +425,9 @@ package classes.Scenes.Areas
 			dynStats("lus", 5 + player.lib / 20 + player.minoScore() + player.cowScore());
 			doNext(camp.returnToCampUseOneHour);
 		}
+		
+		private function findOre():void { //Not used, will be in 1.1
+			var ore:int = rand(3); //0 = copper, 1 = tin, 2 = iron
+		}
 	}
 }

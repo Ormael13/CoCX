@@ -2145,7 +2145,7 @@ public static const INGNAM_TAIL_LAST_TYPE:int                                   
 public static const DISABLED_JOJO_RAPE:int                                   		= 2136; //If 1, disables Jojo rape for good, locks out corrupt path permanently.
 public static const DISABLED_SEX_MACHINE:int                                   		= 2137;
 public static const ENEMY_CRITICAL:int                                   			= 2138;
-public static const UNKNOWN_FLAG_NUMBER_02139:int                                   = 2139;
+public static const MARBLE_HAMMER_QUEST_PROGRESS:int                                = 2139;
 public static const UNKNOWN_FLAG_NUMBER_02140:int                                   = 2140;
 public static const UNKNOWN_FLAG_NUMBER_02141:int                                   = 2141;
 public static const UNKNOWN_FLAG_NUMBER_02142:int                                   = 2142;

@@ -225,7 +225,7 @@ package classes.Scenes.Explore {
 			else
 			{
 				player.gems -= 10;
-				inventory.takeItem(useables.CONDOM_, eroticaMenu);
+				inventory.takeItem(useables.CONDOM, eroticaMenu);
 				statScreenRefresh();
 			}
 		}

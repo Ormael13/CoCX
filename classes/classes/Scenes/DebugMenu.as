@@ -203,7 +203,7 @@ package classes.Scenes
 			menu();
 			addButton(0, "NPnkEgg", giveItem, consumables.NPNKEGG);
 			addButton(1, "DrgnEgg", giveItem, consumables.DRGNEGG);
-			addButton(2, "Condom", giveItem, useables.CONDOM_);
+			addButton(2, "Condom", giveItem, useables.CONDOM);
 			addButton(3, "MilkPtn", giveItem, consumables.MILKPTN);
 			
 			addButton(4, "Next", itemSpawnConsumablesMenuV);

@@ -713,6 +713,7 @@ private function marblePicksYouUpInitially():void {
 	//(player chose don't resist)
 	outputText("", true);
 	outputText("She gently lifts you up and carries you over to her bed. Laying you down on her lap, she lifts your head to one of her nipples and pushes your lips against it.  She smiles and holds you there firmly as you feel a warm and delicious fluid start to fill your mouth.  Once you've had a taste of her milk, you can't help yourself and eagerly start to gulp it down.  After a little while you hear Marble sigh, \"<i>Oh sweetie, that's just what I needed.  I know it's annoying to stop for a moment, but could you do the other teat too?</i>\"  She pulls her hand back and flips you around on her lap before lifting you to her other nipple.  You don't need any encouragement this time, and start drinking eagerly without hesitation.  \"<i>Drink your fill sweetie, I know we're both enjoying this.</i>\"\n\n", false);
+	player.refillHunger(30);
 	//new paragraph
 	outputText("Once you'd had enough, you take your mouth off her teat and lean against her chest.  Marble puts her hands around you and ", false);
 	if(player.earType > EARS_HUMAN) outputText("gently scratches behind your ears.  ", false);
@@ -743,7 +744,7 @@ private function suckleMarble():void {
 	//[if player is under 5 feet tall]
 	if(player.tallness < 60) outputText("Realizing you might have trouble reaching her breasts, you grab one of the chairs from the table.  ", false);
 	outputText("You walk over to her and lean in to suck from her nipple.  Your mouth is soon filled with a delicious warm fluid, and you eagerly begin to gulp it down.  As you drink, you can hear Marble sighing softly above you. \"<i>Thank you, sweetie.  Could you put your mouth on the other teat too?</i>\"  She says after a few minutes. You eagerly comply, and just like before, the fluid fills your mouth. Her milk is easily the most delicious thing you've ever drunk, and not only that, drinking it from her breast just feels so right.  You hear Marble sigh again, but this time it turns into a moan.  Once you'd had enough, you slowly pull back. You feel very satisfied with your drink, and you can see that Marble is quite satisfied too.  She smiles at you and says \"<i>That was wonderful. You're welcome to come and visit any time.</i>\"  With that, the two of you part company. You feel an odd euphoria as you walk away from the barn.", false);
-	player.refillHunger(25);
+	player.refillHunger(30);
 	//(increase affection by 15)
 	//(increase addiction by 10)
 	marbleStatusChange(15,10);
@@ -2029,7 +2030,7 @@ private function marbleTalkOverhaul():void {
 		addButton( 2, "Milking", milkMarble );
 	}
 	if (player.cor < 50 && player.statusAffectv4(StatusAffects.Marble) < 60) addButton(1, "Just Talk", talkWithMarbleAtCamp);
-	//if (player.level >= 10) addButton(3, "Her Hammer", eventParser, 9999); //Start hammer quest
+	//if (player.level >= 10) addButton(3, "Her Hammer", hammerQuest); //Start hammer quest
 	addButton(14,"Back",interactWithMarbleAtCamp);
 	if(flags[kFLAGS.SLEEP_WITH] != "Marble") addButton(4,"Sleep With",marbleSleepToggle);
 	else addButton(4,"Sleep Alone",marbleSleepToggle);
@@ -4376,6 +4377,17 @@ private function milkMarbleNoMilking():void
 	outputText( "[pg]\"<i>Oh, alright then sweetie, I'll see you later.</i>\"  She takes a seat in the chair in the middle of the room and picks up where she left off in her book.  You excuse yourself and return back to camp." );
 	
 	doNext(camp.returnToCampUseTwoHours);
+}
+
+//Hammer quest!
+private function hammerQuest():void {
+	clearOutput();
+	outputText("You ask Marble about her hammer.");
+	
+	outputText("\n\nShe holds up the hammer. \"<i>This hammer?  Sweetie, that's my precious weapon and I need it the most.  I can't just give it to you.</i>\"");
+	outputText("\n\nYou ask her if she could forge a new hammer just for you.  ");
+	outputText("\n\n\"<i>Sweetie, that would be wonderful!  I still remember how to make a hammer and I think I can forge one like the hammer I have.  But I will need the resources.  Steel ingots will do; the ores can be found at the mountains.  You'll need a pickaxe though.</i>\"");
+	flags[kFLAGS.MARBLE_HAMMER_QUEST_PROGRESS] = 1;
 }
 
 }

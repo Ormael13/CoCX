@@ -2600,26 +2600,52 @@
 			player.refillHunger(15);
 		}
 
+		//Armor materials
 		public function greenGel(player:Player):void
 		{
-			outputText("You examine the gel thoroughly, noting it is tough and resiliant, yet extremely pliable.  Somehow you know eating it would not be a good idea.", true);
+			outputText("You examine the gel thoroughly, noting it is tough and resiliant, yet extremely pliable.  Somehow you know eating it would not be a good idea.  ", true);
+			inventory.takeItem(useables.GREENGL, inventory.inventoryMenu);
+		}
+		
+		public function chitinUseless(player:Player):void
+		{
+			outputText("You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.  ", true);
+			inventory.takeItem(useables.B_CHITN, inventory.inventoryMenu);
 		}
 
 		public function toughSpiderSilk(player:Player):void
 		{
-			outputText("You look over the tough webbing, confusion evident in your expression.  There's really nothing practical you can do with these yourself.  It might be best to find someone more familiar with the odd materials in this land to see if they can make sense of it.", true);
+			outputText("You look over the tough webbing, confusion evident in your expression.  There's really nothing practical you can do with these yourself.  It might be best to find someone more familiar with the odd materials in this land to see if they can make sense of it.  ", true);
+			inventory.takeItem(useables.T_SSILK, inventory.inventoryMenu);
+		}
+		
+		public function toughDragonScale(player:Player):void
+		{
+			outputText("You look over the tough webbing, confusion evident in your expression.  There's really nothing practical you can do with these yourself.  It might be best to find someone more familiar with the odd materials in this land to see if they can make sense of it.  ", true);
+			inventory.takeItem(useables.T_SSILK, inventory.inventoryMenu);
+		}
+		
+		public function examineIngot(player:Player):void
+		{
+			outputText("You look over the metal ingot.  ", true);
+			inventory.takeItem(useables.T_SSILK, inventory.inventoryMenu);
 		}
 
-		public function chitinUseless(player:Player):void
+		//Others
+		public function examineImpSkull(player:Player):void
 		{
-			outputText("You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.  ", true);
+			outputText("You look at the imp skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull.  Yet there are no obvious use for it.  ", true);
+			inventory.takeItem(useables.IMPSKLL, inventory.inventoryMenu);
 		}
 
 		public function examineCondom(player:Player):void
 		{
 			outputText("You look at the unopened packet of condom.  If applicable, you can use the condom to prevent pregnancy most of the time.  ", true);
+			inventory.takeItem(useables.CONDOM, inventory.inventoryMenu);
 		}
 
+
+		
 		//Oviposition Elixer!
 		/*
 		 v1 = egg type.

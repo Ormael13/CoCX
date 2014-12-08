@@ -76,28 +76,28 @@ package classes.Scenes
 					if (flags[kFLAGS.NIEVE_STAGE] == 1)
 						outputText("\nThere's some odd snow here that you could do something with...\n");
 					else outputText("\nYou have a snow" + getGame().nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
-					addButton(6, "Snow", getGame().nieveBuilding);
+					addButton(11, "Snow", getGame().nieveBuilding);
 					foundItem = true;
 				}
 				if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1) {
 					if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) outputText("\nHolli is in her tree at the edges of your camp.  You could go visit her if you want.\n");
-					addButton(7, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), getGame().holliScene.treeMenu);
+					addButton(12, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), getGame().holliScene.treeMenu);
 					foundItem = true;
 				}
 				if (player.hasKeyItem("Dragon Egg") >= 0) {
 					getGame().emberScene.emberCampDesc();
-					addButton(8, "Egg", getGame().emberScene.emberEggInteraction);
+					addButton(13, "Egg", getGame().emberScene.emberEggInteraction);
 					foundItem = true;
 				}
 			}
 			if (!getGame().inCombat) {
-				addButton(5, "Unequip", manageEquipment);
+				addButton(10, "Unequip", manageEquipment);
 			}
 			if (!foundItem) {
 				outputText("\nYou have no usable items.");
 				doNext(1);
 				if (!getGame().inCombat) {
-					addButton(5, "Unequip", manageEquipment);
+					addButton(10, "Unequip", manageEquipment);
 				}
 				return;
 			}
@@ -108,8 +108,8 @@ package classes.Scenes
 			}
 			outputText("\nWhich item will you use?");
 			if (getGame().inCombat)
-				addButton(9, "Back", eventParser, 5000); //Player returns to the combat menu on cancel
-			else addButton(9, "Back", camp.campMenu);
+				addButton(14, "Back", eventParser, 5000); //Player returns to the combat menu on cancel
+			else addButton(14, "Back", camp.campMenu);
 			menuLoc = 1;
 		}
 		
@@ -363,8 +363,12 @@ package classes.Scenes
 		}
 		public function unequipArmor():void {
 			clearOutput();
-			if (player.armorName != "goo armor") takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), inventoryMenu); //Valeria belongs in the camp, not in your inventory!
-			else player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES);
+			if (player.armorName != "goo armor") takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), inventoryMenu); 
+			else { //Valeria belongs in the camp, not in your inventory!
+				player.armor.removeText();
+				player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES);
+				doNext(manageEquipment);
+			}
 		}
 		public function unequipJewel():void {
 			clearOutput();
@@ -399,7 +403,7 @@ package classes.Scenes
 			for (var x:int = startSlot; x < endSlot; x++, button++) {
 				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), createCallBackFunction2(pickFrom, storage, x));
 			}
-			addButton(9, "Back", camp.stash);
+			addButton(14, "Back", camp.stash);
 		}
 		
 		private function pickFrom(storage:Array, slotNum:int):void {
@@ -438,7 +442,7 @@ package classes.Scenes
 				}
 			}
 			if (showEmptyWarning && !foundItem) outputText("\n<b>You have no appropriate items to put in this rack.</b>");
-			addButton(9, "Back", camp.stash);
+			addButton(14, "Back", camp.stash);
 		}
 		
 		private function placeInCampStorage(slotNum:int):void {

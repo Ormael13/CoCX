@@ -504,6 +504,8 @@ private function removeBeard():void {
 	outputText("You tell Lynnette that you'd like to have your beard removed.\n\n", true);
 	outputText("Lynnette instructs you to take a seat and she applies a special cream all over your " + player.beardDescript() +".  Your beard starts to stiffen and falls out.  She gives your chin a good cleaning afterwards.\n\n");
 	outputText("<b>You no longer have a beard!</b>");
+	player.beardStyle = 0;
+	player.beardLength = 0;
 	doNext(camp.returnToCampUseOneHour);
 }
 

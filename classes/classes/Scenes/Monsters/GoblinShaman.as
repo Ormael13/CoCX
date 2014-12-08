@@ -156,7 +156,7 @@ package classes.Scenes.Monsters
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
 			this.special3 = castSpell;
-			checkMonster();			
+			checkMonster();
 		}
 		
 	}

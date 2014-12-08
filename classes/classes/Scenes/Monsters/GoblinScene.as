@@ -258,7 +258,7 @@ package classes.Scenes.Monsters
 					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>", false);
 				choices("Dick Fuck", fitsFuck, "DickTooBig", tooBig, "CorruptDick", corruptTooBig, "Dick In Ass", buttseks, "Jog Fuck", jog, "Breastfeed", feeder, "Web Condom", spiderCondom, "Pussies", cuntFuck, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
-				if (player.hasItem(useables.CONDOM_) && player.cockThatFits(monster.vaginalCapacity()) >= 0) {
+				if (player.hasItem(useables.CONDOM) && player.cockThatFits(monster.vaginalCapacity()) >= 0) {
 					addButton(6, "Use Condom", goblinCondomed, 1);
 				}
 			}
@@ -636,7 +636,7 @@ package classes.Scenes.Monsters
 				outputText("you work your spinnerets, the delicate organ weaving a long, thin sheath of finely meshed spider silk, taking care to leave the sticky strands between the inert layers of the flexible condom. Sliding it over your " + cockDescript(x) + ", you marvel at how light it is! You can even feel the wind's breeze through the silken covering.");
 			}
 			else { //Latex condom (item)
-				player.destroyItems(useables.CONDOM_, 1);
+				player.destroyItems(useables.CONDOM, 1);
 				outputText("you tear open the packet and slide the latex condom over your " + cockDescript(x) + ", marveling at how transparent and shiny it is. You don't think the goblin will be able to notice that until it's too late!", false);
 			}
 			outputText(" Time to give the goblin what she asked for, if not what she wanted.\n\n", false);

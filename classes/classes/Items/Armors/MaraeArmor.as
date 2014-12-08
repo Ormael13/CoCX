@@ -18,7 +18,7 @@ package classes.Items.Armors
 
 		override public function useText():void
 		{
-			outputText("\n\nYou strip yourself naked before you proceed to put on the armor. ");
+			outputText("You strip yourself naked before you proceed to put on the armor. ");
 			if (getGame().player.cor < 33) outputText("You shudder at the idea of wearing armor that is infested with tentacles but you proceed anyway. ");
 			if (getGame().player.cor >= 33 && getGame().player.cor < 66) outputText("You are not sure about the idea of armor that is infested with tentacles. ");
 			if (getGame().player.cor >= 66) outputText("You are eager with the idea of wearing tentacle-infested armor. ");
