@@ -1144,5 +1144,22 @@ package classes.Scenes.Places.TelAdre{
 			telAdre.telAdreMenuShow();
 		}
 
+		public function postTrainingAlleyDescription():void
+		{
+			clearOutput();
+			outputText("You go into the alleyway behind Oswald's shop.  It seems empty without a happy cat-morph to greet you.\n\n");
+			outputText("Looking closely you notice a few of the secret hiding spots among the crates have been emptied.  Kath must have been here to collect some of her more sentimental possessions.\n\n");
+			if (!katherine.isAt(Katherine.KLOC_KATHS_APT)) { //Only possible if she's already been seen on guard duty at the gate and you've slept once since
+				outputText("You see a note tucked into the side of the crate Kath used to sleep on.  It says, 'Hi " + player.short + ", everything is going great!  Come and see me at the Wet Bitch.  I'll try to be there from mid-morning to mid-afternoon.  Can't wait to see you again, love you, bye'.  It's signed with a kiss.");
+			}
+			else if (flags[kFLAGS.KATHERINE_TRAINING] >= 100) {
+				outputText("You guess that Urta and other members of the watch will be keeping her busy for the rest of the day.  Wherever she is you know she's being well taken care of.");
+			}
+			else {
+				outputText("You're guessing that her guard detail at the gate will last all day.");
+			}
+			telAdre.telAdreMenuShow();
+		}
+
 	}
 }

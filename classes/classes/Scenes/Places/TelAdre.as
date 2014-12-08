@@ -1012,7 +1012,8 @@ private function oswaldPawnMenu():void { //Moved here from Inventory.as
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
 		case 2: addButton(5, "Kath's Alley", katherine.visitKatherine); break;
-		case 3: addButton(5, "Safehouse", katherineEmployment.katherineTrainingWithUrta);
+		case 3: addButton(5, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
+		case 4: addButton(5, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
 		default:
 	}
 	addButton(9, "Back", telAdreMenu);
