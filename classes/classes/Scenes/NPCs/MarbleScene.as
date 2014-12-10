@@ -256,6 +256,8 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						outputText("Behavior: <i>The behavior of Lacta Minotaurs varies greatly between each individual.  The only major unifying piece of behavior is their desire to give milk to almost any living creature, and their high libido, common to all corrupted creatures.</i>\n", false);
 						outputText("Special abilities: <i>A lightly corrupted creature, most of the corruption is centered on their breast milk.  It is addictive to those that drink it repeatedly, eventually making them dependent on the one from whom it was drank from.  The milk also strengthens the drinker, makes them better able to find the one who nursed them, and grants limited powers of control over them to the Lacta Minotaur that nursed them.  Finally, the breasts of Lacta Minotaurs are incredibly resilient, healing from almost any damage, even being cut off; they are able to produce milk for their entire life without fail.</i>\n", false);
 						outputText("\nUnderneath the entry is a single line, written in a crude and unsteady hand:     <i>No one will ever drink my milk again.  I'm sorry, sweetie.</i>\n", false);
+						flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
+						outputText("\n\n<b>New codex entry unlocked!</b>");
 						player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 					}
 					//Affection 30-69, version 2
@@ -1204,7 +1206,7 @@ private function marbleChoreHelpChooseMarble():void {
 		player.addStatusValue(StatusAffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusAffect(StatusAffects.BottledMilk,3,0,0,0);
-	doNext(camp.returnToCampUseOneHour);
+	//doNext(camp.returnToCampUseOneHour);
 }
 
 //(player chose to refuse)
@@ -1229,7 +1231,9 @@ private function marbleChoreRefusal():void {
 public function marbleEncounterAddictedNonWithdrawl():void {
 	spriteSelect(41);
 	outputText("", true);
-	outputText("You decide to pay Marble a visit, as it would be nice to spend some time with her while you aren't in withdrawal.  You find her in her room reading a book.  She looks up at you surprised and says, \"<i>You don't look like you need milk right now.  What's up, sweetie?</i>\"  You tell her that you just wanted to spend some time together, and not worry about milk.  She laughs at you and says, \"<i>Sweetie, you'll always be thinking about milk; but I'm fine with pretending for a while.</i>\"  The two of you enjoy a meal together in her room.\n\n", false);
+	outputText("You decide to pay Marble a visit, as it would be nice to spend some time with her while you aren't in withdrawal.  You find her in her room reading a book.  She looks up at you surprised and says, \"<i>You don't look like you need milk right now.  What's up, sweetie?</i>\"  You tell her that you just wanted to spend some time together, and not worry about milk.  She laughs at you and says, \"<i>Sweetie, you'll always be thinking about milk; but I'm fine with pretending for a while.</i>\"  The two of you enjoy a meal together in her room.", false);
+	player.refillHunger(30);
+	outputText("\n\n");
 	if(player.statusAffectv1(StatusAffects.Marble) >= 80) {
 		outputText("As you eat, she looks deeply into your eyes for a moment. You think she is going to say something, but she shakes her head and avoids your questions about it for the rest of your time together.\n\n", false);
 	}
@@ -1399,7 +1403,7 @@ private function ashamedAddictionBegForIt():void {
 		player.addStatusValue(StatusAffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusAffect(StatusAffects.BottledMilk,3,0,0,0);
-	doNext(camp.returnToCampUseOneHour);
+	//doNext(camp.returnToCampUseOneHour);
 }
 
 //Exploration event while addicted (event triggered while addicted, but not suffering withdrawal):
@@ -2894,10 +2898,12 @@ public function marbleBadEndFollowup():void {
 	outputText("", true);
 	//Variables for this function:
 	//morph – keeps track of player's form (human, dog-morph, centaur)
-	var morph:String = "human";
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur";
-	if (player.dogScore() >= 4) morph = "dog-morph";
+	var morph:String = player.race(); //Now uses actual race.
+	//var morph:String = "human";
+	/*if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur";
 	if (player.catScore() >= 4) morph = "cat-morph";
+	if (player.demonScore() >= 4) morph = "demon-morph";
+	if (player.dogScore() >= 4) morph = "dog-morph";
 	if(player.horseScore() >= 3) {
 		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur-morph";
 		else morph = "equine-morph";
@@ -2910,10 +2916,13 @@ public function marbleBadEndFollowup():void {
 		else morph += "girl";
 	}
 	if(player.beeScore() >= 4) morph = "bee-morph";
+	if(player.spiderScore() >= 4) morph = "spider-morph";
+	if (player.raccoonSocre() >= 4) morph = "raccoon-morph";
+	if (player.kitsuneScore() >= 4) morph = "kitsune-morph";
 	if(player.goblinScore() >= 5) morph = "goblin";
 	if(player.humanScore() >= 5 && morph == "corrupted mutant") morph = "somewhat human mutant";
 	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur";	
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur";
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur";*/
 	//gender – keeps track of player's gender (male, female, genderless, or hermaphrodite)
 	//pronouns – holds the proper pronouns for the player's gender, he/she, his/hers, him/her (should probably be multiple
 	//OH FUCK THIS!

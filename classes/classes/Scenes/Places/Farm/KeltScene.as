@@ -164,7 +164,7 @@ private function youBadEndKeltForGood():void {
 	outputText("<b>(You got Kelt's Bow!)</b>", false);
 	player.removeKeyItem("Bow");
 	player.createKeyItem("Kelt's Bow", 0, 0, 0, 0);
-	player.removeStatusAffect(StatusAffects.Kelt);
+	//player.removeStatusAffect(StatusAffects.Kelt);
 	player.createStatusAffect(StatusAffects.KeltOff, 0, 0, 0, 0);
 	dynStats("cor", 10);
 	flags[kFLAGS.KELT_KILLED] = 1;

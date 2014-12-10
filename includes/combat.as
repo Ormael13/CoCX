@@ -1417,7 +1417,7 @@ public function attack():void {
 	}
 	if(monster is Basilisk) {
 		//basilisk counter attack (block attack, significant speed loss): 
-		if(player.inte/5 + rand(20) < 25) {
+		if(player.inte/5 + rand(20) < 25 && monster.findStatusAffect(StatusAffects.Blind) < 0) {
 			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.", false);
 			Basilisk.basiliskSpeed(player,20);
 			player.removeStatusAffect(StatusAffects.FirstAttack);

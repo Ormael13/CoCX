@@ -2291,6 +2291,7 @@ package classes.Scenes.Dungeons
 			if(player.HP < 1) outputText("in exhaustion");
 			else outputText("with lust");
 			outputText(", the Sand Mother sinks back into her throne with sweat and milk staining her silky robes.  She groans softly, the milk-stains slowly spreading as you consider your options.  This woman dared to stand against you.  What do you do?");
+			cleanupAfterCombat();
 			//[Fuck Her Cunt] [ScissorAnDrink] [Talk Her Down]
 			menu();
 			addButton(0,"TalkHerDown",talkDownTheMother);

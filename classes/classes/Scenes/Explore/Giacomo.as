@@ -133,6 +133,7 @@ package classes.Scenes.Explore {
 			spriteSelect(23);
 			clearOutput();
 			outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you.  What are you interested in?");
+			menu();
 			addButton(0, "Dildo", pitchDildo);
 			if (player.hasVagina()) addButton(1, "Stim-Belt", pitchSelfStimulationBelt);
 			if (player.hasVagina()) addButton(2, "AN Stim-Belt", pitchAllNaturalSelfStimulationBelt);

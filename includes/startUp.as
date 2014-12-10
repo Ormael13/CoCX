@@ -217,7 +217,17 @@ public function settingsScreen():void
 	}
 	else 
 		outputText("Watersports: <font color=\"#800000\"><b>Disabled</b></font>\n Watersports scenes are disabled.");
+		
+	outputText("\n\n");
+	
+	if (flags[kFLAGS.AUTO_LEVEL] >= 1)
+	{
+		outputText("Automatic Leveling: <font color=\"#008000\"><b>ON</b></font>\n Leveling up is done automatically once you accumulate enough experience.");
+	}
+	else 
+		outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
 
+		
 	outputText("\n\n");
 	outputText("<b><u>Interface Settings</u></b>\n");
 	outputText("<b>The following flags are saved in a special savefile so you don't have to set it again each time you start up CoC.</b>");
@@ -296,10 +306,16 @@ public function settingsScreenGameSettings():void {
 	
 	addButton(5, "SFW Toggle", toggleSFW, null, null, null, "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 	addButton(6, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
-	if (player.str > 0) addButton(8, "Enable Real", enableRealisticPrompt);	
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+	addButton(7, "Auto level", toggleAutoLevel, null, null, null, "Toggles automatic leveling when you accumulate sufficient experience.");
+	if (player.str > 0) addButton(10, "Enable Surv", enableRealisticPrompt);	
+	if (player.str > 0) addButton(11, "Enable Real", enableRealisticPrompt);	
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5)
 	{
-		removeButton(8);
+		removeButton(10);
+	}
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
+	{
+		removeButton(11);
 	}
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) 
 	{
@@ -527,6 +543,11 @@ public function toggleWatersports():void {
 	settingsScreenGameSettings();
 }
 
+public function toggleAutoLevel():void {
+	if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
+	else flags[kFLAGS.AUTO_LEVEL] = 0;
+	settingsScreenGameSettings();	
+}
 
 public function enableRealisticPrompt():void {
 	outputText("Are you sure you want to enable Realistic Mode?\n\n", true)
@@ -548,11 +569,16 @@ public function creditsScreen():void {
 	outputText("<b>Game Mod</b>\n");
 	outputText("<ul>");
 	outputText("<li> Kitteh6660 (Mod Creator)</li>");
-	outputText("<li> Wastarce (Bug Reporting)</li>");
-	outputText("<li> Sorenant (Bug Reporting)</li>");
-	outputText("<li> tadams857 (Bug Reporting)</li>");
-	outputText("<li> SirWolfie (Bug Reporting)</li>");
-	outputText("<li> Atlas1965 (Bug Reporting)</li>");
+	outputText("<ul>");
+	outputText("<b>Game Mod Bug Reporting</b>\n");
+	outputText("<ul>");
+	outputText("<li> Wastarce</li>");
+	outputText("<li> Sorenant</li>");
+	outputText("<li> tadams857</li>");
+	outputText("<li> SirWolfie</li>");
+	outputText("<li> Atlas1965</li>");
+	outputText("<li> Elitist</li>");
+	outputText("<ul>");
 	outputText("</ul>");
 	outputText("<b>Typo Reporting</b>\n");
 	outputText("<ul>");

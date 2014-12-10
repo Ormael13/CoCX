@@ -2990,7 +2990,7 @@ public static const NEW_GAME_PLUS_BONUS_UNLOCKED_HERM:int                       
 public static const USE_OLD_INTERFACE:int                                   		= 2981; //1 if old interface is used.
 public static const IMAGEPACK_OFF:int                                   			= 2982; //1 if imagepack is disabled.
 public static const USE_OLD_SPRITES:int                                   			= 2983; //1 if old sprites are used.
-public static const UNKNOWN_FLAG_NUMBER_02984:int                                   = 2984;
+public static const AUTO_LEVEL:int                                   				= 2984;
 public static const SFW_MODE:int                                   					= 2985; //1 if softcore is enabled.
 public static const WATERSPORTS_ENABLED:int                                   		= 2986; //1 if watersport scenes are enabled.
 public static const UNKNOWN_FLAG_NUMBER_02987:int                                   = 2987;

@@ -361,6 +361,7 @@ public function fightMinerva():void {
 }
 
 private function genericMenu(display:Boolean = false):void {
+	menu();
 	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) {
 		minervaPurification.pureMinervaMenu();
 		return;
@@ -1461,7 +1462,7 @@ public function eatSomethingYouCunt():void {
 	menu();
 	addButton(0, "PurPeac", getPurePeach);
 	addButton(1, "C. Mint", getMint);
-	addButton(4, "Back", genericMenu);
+	addButton(4, "Back", genericMenu, true);
 }
 private function getPurePeach():void {
 	clearOutput();
@@ -1497,7 +1498,7 @@ public function getADrinkYouBitch():void {
 	menu();
 	addButton(0, "Drink", drinkDirectly);
 	addButton(1, "Bottle", getBottle);
-	addButton(4, "Back", genericMenu);
+	addButton(4, "Back", genericMenu, true);
 }
 private function drinkDirectly():void {
 	outputText("Approaching the pristine pond, you kneel on the shore and dip your hands into the water, cupping them together and lifting them out to scoop up a decent drink.  The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.  ", true);

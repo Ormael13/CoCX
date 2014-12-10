@@ -370,7 +370,8 @@ package classes
 			mainView.obeyBar.y = 608 - posOffset;
 			mainView.obeyBar.alpha = universalAlpha;
 			mainView.obeyBar.height = baseHeight;
-			mainView.obeyBar.width = (((player.XP / (player.level * 100)) * 100) * (baseWidth / 100));
+			if (player.level < kGAMECLASS.levelCap) mainView.obeyBar.width = (((player.XP / (player.level * 100)) * 100) * (baseWidth / 100));
+			else mainView.obeyBar.width = (100 * (baseWidth / 100)); //Level is capped at 100.
 			if (player.XP >= player.level * 100) mainView.obeyBar.width = baseWidth; //Set to 100% if XP exceeds the requirement.
 			//Set numbers
 			mainView.strText.y = basePos + (gapDiff * 1) - posTextOffset;
@@ -424,7 +425,8 @@ package classes
 			
 			mainView.xpNum.x = 1;
 			mainView.xpNum.width = 170;
-			mainView.xpNum.text = Math.floor(player.XP) + "/" + Math.floor(player.level * 100);
+			if (player.level < kGAMECLASS.levelCap) mainView.xpNum.text = Math.floor(player.XP) + "/" + Math.floor(player.level * 100);
+			else mainView.xpNum.text = "MAX";
 			
 			mainView.gemsNum.x = 1;
 			mainView.gemsNum.width = 170;

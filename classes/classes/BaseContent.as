@@ -842,6 +842,10 @@
 			return kGAMECLASS.buttonIsVisible(index);
 		}
 		
+		protected function levelUpGo():void {
+			return kGAMECLASS.levelUpGo();
+		}
+				
 		/**
 		 * PRIMO BULLSHIT FUNCTION ACCESS
 		 */

@@ -192,8 +192,8 @@ package classes.GlobalFlags
 		public static const GENERAL_GAME_BREAKER:int			= 163; //Might be awarded for breaking the game.
 		public static const GENERAL_FUCK_WITH_PORTALS:int		= 164;
 		public static const GENERAL_GETTING_WOOD:int			= 165; //Minecraft reference
-		public static const UNKNOWN_ACHIEVEMENT_166:int			= 166;
-		public static const UNKNOWN_ACHIEVEMENT_167:int			= 167;
+		public static const GENERAL_DICK_BANISHER:int			= 166;
+		public static const GENERAL_ULTRA_PERKY:int				= 167;
 		public static const UNKNOWN_ACHIEVEMENT_168:int			= 168;
 		public static const UNKNOWN_ACHIEVEMENT_169:int			= 169;
 		

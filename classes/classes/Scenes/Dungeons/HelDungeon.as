@@ -133,14 +133,14 @@ package classes.Scenes.Dungeons
 			
 			doNext(1);
 			//(Decrease Player Lust to minimum, increase HP to maximum, etc. etc. You're sleeping, but also fucking. Figure it out.)
-			player.orgasm();
+			if (flags[kFLAGS.TIMES_ORGASMED] > 0) player.orgasm(); //Never calls if you never orgasmed before.
 		}
 			
 		public function morningAfterHeliaDungeonAgreements():void {
 			outputText("\nWhen your eyes flicker open at the crack of dawn, you're pleased to see Helia is lying on your chest, ");
 			//[If PC has >C Cups, \"<i>
 			if(player.biggestTitSize() > 3) outputText("her head nestled between your soft tits and ");
-			outputText("snoring boorishly.  The air around you smells like hot booze and sex, yet you awaken feeling as spirited and lively as you ever have.  You give Hel a little shake, waking her.");
+			outputText("snoring boorishly.  The air around you smells like hot booze" + (flags[kFLAGS.TIMES_ORGASMED] > 0 ? " and sex": "") + ", yet you awaken feeling as spirited and lively as you ever have.  You give Hel a little shake, waking her.");
 
 			outputText("\n\n\"<i>Huh, wha?</i>\" she groans, rubbing her head.  \"<i>Oh, hey there, lover mine,</i>\" she adds after a moment, giving you a long kiss on the lips.  The two of you untangle yourselves, giving each other the occasional tease and playful slap on the ass, flirting shamelessly as you dress and ready yourselves for the coming day.");
 			outputText("\n\nWhen you're dressed and organized, Hel asks, \"<i>So, what's the plan, [name]?</i>\"");

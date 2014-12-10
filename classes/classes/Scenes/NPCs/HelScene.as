@@ -325,10 +325,10 @@ private function helDefeatedNormal(clear:Boolean = false):void {
 		outputText("Suddenly, she looks up at you with her fiery eyes and beams, smiling ear to ear.  \"<i>Damn, you're good,</i>\" she says, suddenly laughing.  \"<i>I almost had you, though.  Next time, watch your ass or I'm liable to stick this bad boy inside it!</i>\"  She gestures crudely with her tail at this last remark.\n\n", false);
 		outputText("\"<i>But, to the victor go the spoils, after all.  What do you say we blow off some steam, huh?  Nothing better after a good fight than a good fuck, you know?</i>\"", false);
 	}
-	if(player.lust < 40) {
+	/*if(player.lust < 40) {
 		player.lust = 40;
 		dynStats("lus", 0.1);
-	}
+	}*/
 	helFuckMenu();
 }
 
@@ -433,6 +433,7 @@ private function declineHelSexings():void {
 	outputText("\"<i>Catch you next time, friend – and maybe we can have some fun, then!</i>\" she calls over her shoulder with a wave.\n\n", false);
 
 	outputText("You nod, and return the wave before heading back to your camp.", false);
+	helFollower.helAffection(1);
 	if (getGame().inCombat)
 		cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);

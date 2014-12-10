@@ -453,7 +453,7 @@ public function levelUpGo(e:MouseEvent = null):void {
 	hideMenus();
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	//Level up
-	if(player.XP >= (player.level) * 100) {
+	if(player.XP >= (player.level) * 100 && player.level < levelCap) {
 		player.level++;
 		player.perkPoints++;
 		player.statPoints += 5;

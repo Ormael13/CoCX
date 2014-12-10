@@ -488,14 +488,19 @@ public function doCamp():void {
 	//clear up/down arrows
 	hideUpDown();
 	//Level junk
-	if(player.XP >= (player.level) * 100 || player.perkPoints > 0 || player.statPoints > 0) {
-		if (player.XP < player.level * 100)
+	if((player.XP >= (player.level) * 100 && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
+		if (player.XP < player.level * 100 || player.level >= kGAMECLASS.levelCap)
 		{
 			if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
 			else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
 		}
-		else
+		else {
 			mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
+			if (flags[kFLAGS.AUTO_LEVEL] > 0) {
+				kGAMECLASS.levelUpGo();
+				return;
+			}
+		}
 		mainView.showMenuButton( MainView.MENU_LEVEL );
 		mainView.statsView.showLevelUp();
 	}
@@ -2127,6 +2132,18 @@ private function promptSaveUpdate():void {
 		eventParser(1);
 		return;
 	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 4) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+		if (flags[kFLAGS.KELT_KILLED] > 0 && player.statusAffectv1(StatusAffects.Kelt) <= 0) {
+			clearOutput();
+			outputText("Due to a bug where your bow skill got reset after you've slain Kelt, your bow skill got reset. Fortunately, this is now fixed. As a compensation, your bow skill is now instantly set to 100!");
+			if (player.statusAffectv1(StatusAffects.Kelt) <= 0) player.createStatusAffect(StatusAffects.Kelt, 100, 0, 0, 0);
+			doNext(camp.campMenu);
+			return;
+		}
+		eventParser(1);
+		return;
+	}
 }
 
 //Updates save. Done to ensure your save doesn't get screwed up.
@@ -2289,6 +2306,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.MANSION_VISITED] >= 3) awardAchievement("Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER);
 	if (player.perks.length >= 20) awardAchievement("Perky", kACHIEVEMENTS.GENERAL_PERKY);
 	if (player.perks.length >= 35) awardAchievement("Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY);
+	if (player.perks.length >= 50) awardAchievement("Ultra Perky", kACHIEVEMENTS.GENERAL_ULTRA_PERKY);
 	if (player.str >= 50 && player.tou >= 50 && player.spe >= 50 && player.inte >= 50) awardAchievement("Jack of All Trades", kACHIEVEMENTS.GENERAL_STATS_50);
 	if (player.str >= 100 && player.tou >= 100 && player.spe >= 100 && player.inte >= 100) awardAchievement("Incredible Stats", kACHIEVEMENTS.GENERAL_STATS_100);
 	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCHIZOPHRENIA] >= 4) awardAchievement("Schizophrenic", kACHIEVEMENTS.GENERAL_SCHIZO);
@@ -2298,6 +2316,15 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
 	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] >= 200) awardAchievement("Nail Scavenger", kACHIEVEMENTS.GENERAL_NAIL_SCAVENGER);
 	if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR2] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] >= 1) awardAchievement("Home Sweet Home", kACHIEVEMENTS.GENERAL_HOME_SWEET_HOME);
+	
+	var NPCsDedicked:int = 0; //Check how many NPCs are dedicked.
+	if (flags[kFLAGS.IZMA_NO_COCK] > 0) NPCsDedicked++;
+	if (flags[kFLAGS.CERAPH_HIDING_DICK] > 0) NPCsDedicked++;
+	if (flags[kFLAGS.RUBI_COCK_SIZE] <= 0) NPCsDedicked++;
+	if (flags[kFLAGS.BENOIT_STATUS] == 1 || flags[kFLAGS.BENOIT_STATUS] == 2) NPCsDedicked++;
+	if (flags[kFLAGS.ARIAN_COCK_SIZE] <= 0) NPCsDedicked++;
+	
+	if (NPCsDedicked >= 3) awardAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER);
 }
 
 private function fixHistory():void {
