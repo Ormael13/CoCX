@@ -19,8 +19,8 @@ package classes.Scenes.Areas.Plains
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou));
 				if(damage > 0) {
-					damage = player.takeDamage(damage);
-					outputText("It feels like you just got hit with a wooden club! (" + damage + ")");
+					outputText("It feels like you just got hit with a wooden club! ");
+					damage = player.takeDamage(damage, true);
 				}
 				else outputText("You successfully block it.");
 			}
@@ -59,14 +59,14 @@ package classes.Scenes.Areas.Plains
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou));
 				if(damage > 0) {
-					damage = player.takeDamage(damage);
 					outputText("He charges at you with a loud bleat, catching you off-guard and sending you flying into the ground.");
 					if(player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) {
 						outputText("  The pain of the impact is so big you feel completely dazed, almost seeing stars.");
 						player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 					}
+					outputText(" ");
+					damage = player.takeDamage(damage, true);
 					//stun PC + hp damage if hit, hp damage dependent on str if miss
-					outputText(" (" + damage + ")");
 				}
 				else outputText("He charges at you, but you successfully deflect it at the last second.");
 			}

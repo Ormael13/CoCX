@@ -2794,12 +2794,16 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 	}
 }
 
-public function doSFWloss():void {
+public function doSFWloss():Boolean {
 	clearOutput();
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (player.HP <= 0) outputText("You collapse from your injuries.");
 		else outputText("You collapse from your overwhelming desires.");
+		if (inCombat) cleanupAfterCombat();
+		else doNext(camp.returnToCampUseOneHour)
+		return true;
 	}
+	else return false;
 }
 
 public function doBadEnd():void {

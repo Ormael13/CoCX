@@ -664,18 +664,7 @@ public function doCombat(eventNum:Number):void
 			}
 			goreAttack();
 	}
-			//Green Slime Lust attack!
-	if(eventNum == 5039) {
-			outputText("The creature surges forward slowly with a swing that you easily manage to avoid.  You notice traces of green liquid spurt from the creature as it does, forming a thin mist that makes your skin tingle with excitement when you inhale it.", false);
-			dynStats("lus", player.lib / 10 + 8);
-			doNext(1);
-	}
-			//Green Slime Lust lossssss!
-	if(eventNum == 5040) {
-			outputText("The creature collapses backwards as its cohesion begins to give out, and the faint outline of eyes and a mouth form on its face.  Its chest heaves as if it were gasping, and the bolt upright erection it sports visibly quivers and pulses before relaxing slightly.", false);
-			monster.lust -= 13;
-			doNext(1);
-	}
+
 			//Demon pack attack
 	if(eventNum == 5043) {
 			//return to combat menu when finished

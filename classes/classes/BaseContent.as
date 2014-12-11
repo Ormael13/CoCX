@@ -218,8 +218,8 @@
 			kGAMECLASS.startCombat(monster_,plotFight_);
 		}
 
-		protected function doSFWloss():void {
-			kGAMECLASS.doSFWloss();
+		protected function doSFWloss():Boolean {
+			return kGAMECLASS.doSFWloss();
 		}
 		
 		protected function doBadEnd():void {

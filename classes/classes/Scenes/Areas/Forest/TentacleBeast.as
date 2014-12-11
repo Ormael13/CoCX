@@ -17,8 +17,8 @@
 			}
 			//Hit
 			else {
-				temp = player.takeDamage(temp);
-				outputText("The tentacles crash upon your body mercilessly for " + temp + " damage.", false);
+				outputText("The tentacles crash upon your body mercilessly. ", false);
+				player.takeDamage(temp, true);
 			}
 			combatRoundOver();
 		}

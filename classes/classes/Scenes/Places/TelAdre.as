@@ -1519,20 +1519,22 @@ public function armorShop():void {
 	outputText("\"<i>What can I make for you?  Platemail?  Or something that breathes a little easier?</i>\" Yvonne asks, fanning herself.");
 
 	var egg:Function =null;
-	if(player.hasKeyItem("Dragon Eggshell") >= 0) {
-		outputText("\n\nThough the pieces on display have their arguable attractions, none of them really interest you.  Yvonne taps her foot impatiently.  \"<i>Well, I could make you something to order... if you have any decent materials, cutie.  200 gems.</i>\"");
-		if(player.gems < 200) {
-			outputText("\n\nYou can't afford that!");
-		}
-		else egg = kGAMECLASS.emberScene.getSomeStuff;
-	}
+
 	choices(armors.CHBIKNI.shortName,createCallBackFunction(armorBuy, armors.CHBIKNI),
 			armors.FULLCHN.shortName,createCallBackFunction(armorBuy, armors.FULLCHN),
 			armors.FULLPLT.shortName,createCallBackFunction(armorBuy, armors.FULLPLT),
 			armors.INDECST.shortName,createCallBackFunction(armorBuy, armors.INDECST),
 			armors.LTHRROB.shortName,createCallBackFunction(armorBuy, armors.LTHRROB),
 			armors.SCALEML.shortName,createCallBackFunction(armorBuy, armors.SCALEML),
-			"", 0, "Eggshell", egg, "Flirt", yvonneFlirt, "", 0);
+			"", 0, "", 0, "", 0, "", 0);
+	if(player.hasKeyItem("Dragon Eggshell") >= 0) {
+		outputText("\n\nThough the pieces on display have their arguable attractions, none of them really interest you.  Yvonne taps her foot impatiently.  \"<i>Well, I could make you something to order... if you have any decent materials, cutie.  200 gems.</i>\"");
+		if(player.gems < 200) {
+			outputText("\n\nYou can't afford that!");
+		}
+		else addButton(10, "Eggshell", kGAMECLASS.emberScene.getSomeStuff);
+	}
+	addButton(13, "Flirt", yvonneFlirt);
 	addButton(14, "Leave", telAdreMenu);
 }
 private function armorBuy(itype:ItemType):void {
@@ -1578,11 +1580,12 @@ public function weaponShop():void {
 			weapons.WHIP.shortName,createCallBackFunction(weaponBuy, weapons.WHIP),
 			weapons.W_STAFF.shortName,createCallBackFunction(weaponBuy, weapons.W_STAFF),
 			weapons.S_GAUNT.shortName,createCallBackFunction(weaponBuy, weapons.S_GAUNT),
-			"", 0, "", 0);
-	addButton(14, "Leave", telAdreMenu);
+			weapons.DAGGER.shortName, createCallBackFunction(weaponBuy, weapons.DAGGER), 
+			weapons.SCIMITR.shortName,createCallBackFunction(weaponBuy, weapons.SCIMITR));
 	if (player.hasKeyItem("Sheila's Lethicite") >= 0 || flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] > 0) {
-		addButton(8, "ScarBlade", forgeScarredBlade);
+		addButton(10, "ScarBlade", forgeScarredBlade);
 	}
+	addButton(14, "Leave", telAdreMenu);
 }
 private function weaponBuy(itype:ItemType):void {
 	outputText("", true);
@@ -1640,20 +1643,12 @@ private function forgeScarredBladeEnd():void {
 //-----------------
 public function jewelShopEntry():void {
 	outputText("", true);
-	outputText("You enter the jewelry store. There are large array of rings and necklaces, all stored in thick glass cases. A male lizan sits behind the counter, watching you as you look around the store. He is nude save for his loincloth and a gold necklace. His chin is pierced with several gold ring piercings. He also wears a diamond ring on one of his fingers.\n\n", false);
+	outputText("You enter the jewelry store. There are large array of rings and necklaces, all stored in thick glass cases. A male lizan sits behind the counter, watching you as you look around the store. He is nude save for his gilded silken loincloth and a gold necklace. His chin is pierced with several gold ring piercings. He also wears a diamond ring on one of his fingers.\n\n", false);
 	outputText("<i>\"Welcome to my jewelry store. Here, I sell rings and necklaces. They can make you look great but not only that, I also have special jewelry that may have magical effect on you. The effect stays on until you take them off,\"</i> the lizan says.", false);
 
-	choices("Next", jewelShopInside,
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0)
+	doNext(jewelShopInside);
 }
+
 public function jewelShopInside():void {
 	outputText("", true);
 	outputText("<i>So what will it be?</i>", false);
@@ -1698,7 +1693,7 @@ public function jewelShopBuyBox():void {
 		doNext(jewelShopInside);
 		return;
 	}
-	outputText("You look around for a while then see something that catches your eyes. A finely-polished jewelry box sits on table. The price tag says that it costs 500 gems. The box comes complete with a hinged lid and several small drawers.\n\n", false);
+	outputText("You look around for a while until you see something that catches your eyes. A finely-polished jewelry box sits on table.  You approach the jewelry box and examine it.  The box comes complete with a hinged lid and several small drawers.  The price tag says that it costs 500 gems.\n\n", false);
 	outputText("The lizan then walks over to you and asks \"<i>See something you'd like to buy?</i>\" You then ask him about the jewelry box. \n\n", false);
 	outputText("\"<i>We have plenty of them. This is a finely crafted box. It's designed to hold nine different rings and amulets. Of course, it's secure! It has combination lock. With the right code, you can unlock it. And it can be yours for only 500 gems!</i>\"\n\n", false);
 	outputText("Do you buy it?", false);

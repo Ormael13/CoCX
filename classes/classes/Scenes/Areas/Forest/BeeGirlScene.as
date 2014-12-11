@@ -369,6 +369,7 @@ package classes.Scenes.Areas.Forest
 		{
 			spriteSelect(6);
 			outputText("", true);
+			if (doSFWloss()) return;
 			var sexed:Boolean = false;
 			//Centaur lost to giant bee:
 			if (player.isTaur()) {

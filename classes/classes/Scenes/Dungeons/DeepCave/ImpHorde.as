@@ -159,9 +159,9 @@
 					if(hits == 2) outputText("Another imp punches you in the gut, hard!", false);
 					if(hits == 1) outputText("Your arm is mauled by the clawing!", false);
 					damage = 20 - rand(player.tou/10);
-					if(damage <= 0) damage = 1;
-					damage = player.takeDamage(damage);
-					outputText(" (" + damage + ")\n", false);
+					if (damage <= 0) damage = 1;
+					outputText(" ");
+					damage = player.takeDamage(damage, true);
 				}
 				hits--;
 			}

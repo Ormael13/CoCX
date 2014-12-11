@@ -1145,6 +1145,7 @@ private function startTheGame():void {
 	{
 		flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1;
 	}
+	kGAMECLASS.saves.loadPermObject();
 	flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
 	statScreenRefresh();
 	//getBanishedToMarethForReal();

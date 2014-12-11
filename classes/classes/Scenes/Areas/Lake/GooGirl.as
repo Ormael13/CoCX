@@ -47,35 +47,35 @@ package classes.Scenes.Areas.Lake
 			//Determine damage - str modified by enemy toughness!
 			if (findPerk(PerkLib.Acid) >= 0) damage = int((str + 10 + weaponAttack) - rand(player.tou) - player.armorDef);
 			else damage = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if (damage > 0) damage = player.takeDamage(damage);
+			
 			if (damage <= 0) {
 				damage = 0;
 				if (findPerk(PerkLib.Acid) >= 0) {
-					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("tries to slap you, but the acid-bearing slap spatters weakly off your " + player.armorName + ".", false);
-					else outputText("tries to slap you with an acid-loaded hand, but it splatters off you ineffectually.", false);
+					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("tries to slap you, but the acid-bearing slap spatters weakly off your " + player.armorName + ". ", false);
+					else outputText("tries to slap you with an acid-loaded hand, but it splatters off you ineffectually. ", false);
 				}
 				else {
 					//Due to toughness or amor...
-					if (rand(player.armorDef + player.tou) < player.armorDef) outputText(", her attack slapping fruitlessly against your " + player.armorName + ".", false);
-					else outputText(", her attack splattering ineffectually against you.", false);
+					if (rand(player.armorDef + player.tou) < player.armorDef) outputText(", her attack slapping fruitlessly against your " + player.armorName + ". ", false);
+					else outputText(", her attack splattering ineffectually against you. ", false);
 				}
 			}
 			//everyone else
 			else {
 				if (findPerk(PerkLib.Acid) >= 0) {
-					outputText("delivers a painful slap across your cheek.  You gasp when the light stinging becomes a searing burn that seems to get worse as time goes on!", false);
+					outputText("delivers a painful slap across your cheek.  You gasp when the light stinging becomes a searing burn that seems to get worse as time goes on! ", false);
 					if (player.findStatusAffect(StatusAffects.AcidSlap) < 0) player.createStatusAffect(StatusAffects.AcidSlap, 0, 0, 0, 0);
 				}
-				else outputText(", painfully smacking her gooey limbs against your head.  You shake your " + player.hairDescript() + ", clearing your head of the dazing slap.", false);
-				outputText(" (" + damage + ")", false);
+				else outputText(", painfully smacking her gooey limbs against your head.  You shake your " + player.hairDescript() + ", clearing your head of the dazing slap. ", false);
 			}
 			if (damage > 0) {
 				if (lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
-					if (!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
-					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.", false);
+					if (!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed. ", false);
+					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed. ", false);
 					lust += 5 * lustVuln;
 				}
 			}
+			if (damage > 0) player.takeDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n", false);
 			combatRoundOver();
@@ -92,9 +92,9 @@ package classes.Scenes.Areas.Lake
 //Throw – 
 		private function gooThrow():void
 		{
-			outputText("The girl reaches into her torso, pulls a large clump of goo out, and chucks it at you like a child throwing mud. The slime splatters on your chest and creeps under your " + player.armorName + ", tickling your skin like fingers dancing across your body.", false);
+			outputText("The girl reaches into her torso, pulls a large clump of goo out, and chucks it at you like a child throwing mud. The slime splatters on your chest and creeps under your " + player.armorName + ", tickling your skin like fingers dancing across your body. ", false);
 			var damage:Number = 1;
-			player.takeDamage(damage);
+			player.takeDamage(damage, true);
 			game.dynStats("lus", 5 + rand(3) + player.sens / 10);
 			combatRoundOver();
 		}

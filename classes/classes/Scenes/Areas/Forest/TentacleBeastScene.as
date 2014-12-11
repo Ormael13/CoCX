@@ -215,6 +215,7 @@ private function futaTentacleEpilogue():void {
 internal function tentacleLossRape():void {
 	clearOutput();
 	spriteSelect(100);
+	if (doSFWloss()) return; //Disables rape in SFW mode.
 	//Genderless madness
 	if(player.gender == 0) {
 		//Taur madness

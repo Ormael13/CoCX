@@ -98,10 +98,11 @@ package classes.Scenes.Monsters
 			this.level = 16;
 			this.gems = rand(20) + 40;
 			this.drop = new WeightedDrop().
-					add(consumables.MINOBLO,1).
-					add(consumables.LABOVA_,1).
-					add(consumables.INCUBID,6).
-					add(consumables.SUCMILK,6);
+					add(consumables.MINOBLO,2).
+					add(consumables.LABOVA_,2).
+					add(consumables.INCUBID,12).
+					add(consumables.SUCMILK,12).
+					add(jewelries.POWRRNG,1);
 			this.wingType = WING_TYPE_IMP;
 			this.special1 = 5019;
 			this.special2 = clawAttack;

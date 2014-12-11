@@ -62,7 +62,8 @@ package classes.Scenes.Areas.Forest
 			var rando:int = rand(select);
 			//Tamani's Daughters get multiattacks!
 			if(rando == 0) {
-				createStatusAffect(StatusAffects.Attacks, int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20),0,0,0);
+				createStatusAffect(StatusAffects.Attacks, int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20), 0, 0, 0);
+				if (statusAffectv1(StatusAffects.Attacks) > 20) addStatusValue(StatusAffects.Attacks, 1, statusAffectv1(StatusAffects.Attacks) - 20);
 				eAttack();
 			}
 			if(rando == 1) game.eventParser(special1);
@@ -115,10 +116,12 @@ package classes.Scenes.Areas.Forest
 			this.weaponVerb="tiny punch";
 			this.armorName = "leather straps";
 			this.bonusHP = 50 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 15);
+			if (bonusHP > 3350) bonusHP = 3350;
 			this.lust = 30;
 			this.lustVuln = .65;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20));
+			if (level > 30) level = 30;
 			this.gems = rand(15) + 5;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).

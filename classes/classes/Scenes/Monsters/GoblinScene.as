@@ -46,12 +46,8 @@ package classes.Scenes.Monsters
 		{
 			
 			spriteSelect(24);
-			if (flags[kFLAGS.SFW_MODE] > 0) {
-				doSFWloss();
-				cleanupAfterCombat();
-				return;
-			}
 			outputText("", true);
+			if (doSFWloss()) return;
 			if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
 				//[Female Bimbo Loss Against Goblin]
 				if (player.hasVagina()) {

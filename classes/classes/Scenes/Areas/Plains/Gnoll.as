@@ -82,9 +82,8 @@ package classes.Scenes.Areas.Plains
 					else {
 						outputText("The gnoll waves her club threateningly, but it's her foot that snaps up from the dusty plain to connect with your gut.", false);
 					}
-					damage = player.takeDamage(damage);
-					outputText(" (" + damage + ")\n", false);
-					
+					outputText(" ");
+					player.takeDamage(damage, true);
 				}
 				game.statScreenRefresh();
 			}
@@ -196,8 +195,8 @@ package classes.Scenes.Areas.Plains
 					else {
 						outputText("The gnoll waves her club threateningly, but it's her foot that snaps up from the dusty plain to connect with your gut.", false);
 					}
-					damage = player.takeDamage(damage);
-					outputText(" (" + damage + ")\n", false);
+					outputText(" ");
+					player.takeDamage(damage, true);
 				}
 				game.statScreenRefresh();
 			}
@@ -335,8 +334,8 @@ package classes.Scenes.Areas.Plains
 						else {
 							outputText("The gnoll waves her club threateningly, but it's her foot that snaps up from the dusty plain to connect with your gut.", false);
 						}
-						damage = player.takeDamage(damage);
-						outputText(" (" + damage + ")\n", false);
+						outputText(" ");
+						player.takeDamage(damage);
 					}
 					game.statScreenRefresh();
 				}

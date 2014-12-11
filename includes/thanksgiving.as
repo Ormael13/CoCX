@@ -58,7 +58,9 @@ public function shooTurkeyAway():void {
 	
 	outputText("\n\nRolling your eyes, you yell at the strange girl until she finally gets the idea and; with a few more sorrowful gobbles, she wobbles off again, looking for someone else to bother.");
 	
-	outputText("\n\nShaking your head, you sit back down and eat.");
+	outputText("\n\nShaking your head, you sit back down and eat. ");
+	if (player.hunger > 60) player.hunger = 70;
+	player.refillHunger(40);
 	doNext(1);
 }
 

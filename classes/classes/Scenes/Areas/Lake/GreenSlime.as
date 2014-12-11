@@ -6,7 +6,18 @@
 
 	public class GreenSlime extends Monster
 	{
-
+		//Green Slime Lust attack!
+		public function slimeLustAttack():void {
+			outputText("The creature surges forward slowly with a swing that you easily manage to avoid.  You notice traces of green liquid spurt from the creature as it does, forming a thin mist that makes your skin tingle with excitement when you inhale it. ", false);
+			game.dynStats("lus", player.lib / 10 + 8);
+			combatRoundOver();
+		}
+				//Green Slime Lust lossssss!
+		public function slimeLustPurge():void {
+			outputText("The creature collapses backwards as its cohesion begins to give out, and the faint outline of eyes and a mouth form on its face.  Its chest heaves as if it were gasping, and the bolt upright erection it sports visibly quivers and pulses before relaxing slightly. ", false);
+			lust -= 13;
+			combatRoundOver();
+		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
@@ -77,9 +88,9 @@
 			this.drop = new ChainedDrop().add(weapons.PIPE, 1 / 10)
 					.add(consumables.WETCLTH, 1 / 2)
 					.elseDrop(useables.GREENGL);
-			this.special1 = 5040;
-			this.special2 = 5039;
-			this.special3 = 5039;
+			this.special1 = slimeLustPurge;
+			this.special2 = slimeLustAttack;
+			this.special3 = slimeLustAttack;
 			checkMonster();
 		}
 

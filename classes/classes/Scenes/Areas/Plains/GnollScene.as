@@ -31,6 +31,7 @@ package classes.Scenes.Areas.Plains
 				return;
 			}
 			outputText("", true);
+			if (doSFWloss()) return;
 			outputText("The sound of the gnoll's mocking laughter grates in your ears as you collapse down on your knees before her.  She circles you with the last scrap of her wariness and then surges forward to knock you over, exposing your ", false);
 			if (player.hasCock()) {
 				outputText(multiCockDescriptLight(), false);

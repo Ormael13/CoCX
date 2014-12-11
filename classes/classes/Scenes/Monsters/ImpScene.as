@@ -1273,12 +1273,8 @@ package classes.Scenes.Monsters
 		}
 		
 		public function impRapesYou():void {
-			if (flags[kFLAGS.SFW_MODE] > 0) {
-				doSFWloss();
-				cleanupAfterCombat();
-				return;
-			}
-			outputText("", true);
+			clearOutput();
+			if (doSFWloss()) return;
 			if ((player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && !player.isTaur() && player.hasVagina() && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText(images.showImage("imp-loss-female-fuck"), false);
 				outputText("You sink to the ground, assuming a position that feels all too natural to you now, leaning forward to let your " + player.allBreastsDescript() + " hang down slightly. The imp looks you up and down, wickedly eyeing your ready, slightly open lips. He drops his loin-cloth to reveal a hardening cock. Your eyes bulge as it grows larger... and larger... and larger! The imp's cock finally bulges to a full twelve inches... and it's moving closer. You struggle to think... but you just can't! You want that in your mouth, like, so bad!\n\n", false);
@@ -1830,11 +1826,7 @@ package classes.Scenes.Monsters
 		//MALE LOSE
 		private function loseToImpLord():void {
 			clearOutput();
-			if (flags[kFLAGS.SFW_MODE] > 0) {
-				doSFWloss();
-				cleanupAfterCombat();
-				return;
-			}
+			if (doSFWloss()) return;
 			outputText(images.showImage("implord-loss-male"), false);
 			outputText("Unable to control your lust you fall to the ground, remove your " + player.armorName + " and begin masturbating furiously.  The powerful imp saunters over to you smirking evilly as he towers over your fallen form. You look up at him nervously.  He grabs your chin with one of his clawed hands, while the other digs through his satchel.  He pulls out a vial filled with glowing green liquid, and pops the cork stopper off with his thumb. Before you can react, the demon forces open your mouth and pours the liquid in.  Instinct reacts fast then logic and you swallow the substance as it's poured down your throat.");
 			outputText("\n\nYou cough and splutter, grabbing your gut, as a hot pain fills your stomach.  The imp laughs as you roll around in agony for several long moments, before the burning turns to an arousing warmth that spreads to your [hips] and [asshole].  Groaning, you feel your cheeks flush with arousal, and your eyes glaze over once more with insatiable lust.");
@@ -1883,6 +1875,7 @@ package classes.Scenes.Monsters
 		//FEMALE LOSE
 		private function getRapedAsAGirl():void {
 			clearOutput();
+			if (doSFWloss()) return;
 			outputText(images.showImage("implord-loss-female"), false);
 			outputText("You collapse from exhaustion, your [vagina] beginning to soak your [armor].  You groan loudly, desperately trying to continue the fight, or flee, but the exhaustion is too much.  You close your eyes for a moment, but hearing a loud thud near your face causes you to painfully open your eyes.  You see a large bestial hoof near your face, while the other hoof is used to roll you onto your back.");
 			
@@ -1989,11 +1982,7 @@ package classes.Scenes.Monsters
 		
 		private function loseToImpOverlord():void {
 			clearOutput();
-			if (flags[kFLAGS.SFW_MODE] > 0) {
-				doSFWloss();
-				cleanupAfterCombat();
-				return;
-			}
+			if (doSFWloss()) return;
 			outputText(images.showImage("impoverlord-loss-male"), false);
 			outputText("Unable to control your lust you fall to the ground, remove your " + player.armorName + " and begin masturbating furiously.  The powerful imp saunters over to you smirking evilly as he towers over your fallen form. You look up at him nervously.  He grabs your chin with one of his clawed hands, while the other digs through his satchel.  He pulls out a vial filled with glowing green liquid, and pops the cork stopper off with his thumb. Before you can react, the demon forces open your mouth and pours the liquid in.  Instinct reacts fast then logic and you swallow the substance as it's poured down your throat.");
 			outputText("\n\nYou cough and splutter, grabbing your gut, as a hot pain fills your stomach.  The imp laughs as you roll around in agony for several long moments, before the burning turns to an arousing warmth that spreads to your [hips] and [asshole].  Groaning, you feel your cheeks flush with arousal, and your eyes glaze over once more with insatiable lust.");
@@ -2042,6 +2031,7 @@ package classes.Scenes.Monsters
 		//FEMALE LOSE
 		private function getRapedAsAGirlByImpOverlord():void {
 			clearOutput();
+			if (doSFWloss()) return;
 			outputText(images.showImage("impoverlord-loss-female"), false);
 			outputText("You collapse from exhaustion, your [vagina] beginning to soak your [armor].  You groan loudly, desperately trying to continue the fight, or flee, but the exhaustion is too much.  You close your eyes for a moment, but hearing a loud thud near your face causes you to painfully open your eyes.  You see a large bestial hoof near your face, while the other hoof is used to roll you onto your back.");
 			

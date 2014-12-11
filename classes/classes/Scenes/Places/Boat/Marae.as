@@ -97,7 +97,7 @@ package classes.Scenes.Places.Boat
 			this.armorDef = 30;
 			this.bonusHP = 4750;
 			this.lust = 30;
-			this.lustVuln = .02;
+			this.lustVuln = .04;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 99;
 			this.additionalXP = 2500;

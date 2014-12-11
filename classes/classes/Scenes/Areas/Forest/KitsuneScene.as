@@ -739,11 +739,8 @@ package classes.Scenes.Areas.Forest
 
 		public function loseToKitsunes():void
 		{
-			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
-				clearOutput();
-				cleanupAfterCombat();
-				return;
-			}
+			clearOutput();
+			if (doSFWloss()) return; //No rape in SFW mode.
 			var scene:Array = [];
 			//[LOSE FIGHT]
 			//Shared Scenes
