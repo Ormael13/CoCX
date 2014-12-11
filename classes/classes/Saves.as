@@ -85,7 +85,7 @@ public function loadSaveDisplay(saveFile:Object, slotName:String):String
 		holding += ":  <b>";
 		holding += saveFile.data.short;
 		holding += "</b> - <i>" + saveFile.data.notes + "</i>\r";
-		holding += "Days - " + saveFile.data.days + "  Gender - ";
+		holding += "Days - " + saveFile.data.days + " | Gender - ";
 		if (saveFile.data.gender == 0)
 			holding += "U";
 		if (saveFile.data.gender == 1)
@@ -94,6 +94,17 @@ public function loadSaveDisplay(saveFile:Object, slotName:String):String
 			holding += "F";
 		if (saveFile.data.gender == 3)
 			holding += "H";
+		holding += " | Difficulty - ";
+		if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 0 || saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == null) {
+			if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "<font color=\"#008000\">Easy</font>";
+			else holding += "<font color=\"#808000\">Normal</font>";
+		}
+		if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 1)
+			holding += "<font color=\"#800000\">Hard</font>";
+		if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 2)
+			holding += "<font color=\"#C00000\">Nightmare</font>";
+		if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] >= 3)
+			holding += "<font color=\"#FF0000\">EXTREME</font>";
 		holding += "\r";
 		return holding;
 	}

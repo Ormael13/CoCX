@@ -63,7 +63,7 @@ package classes.Scenes.Areas.Forest
 			//Tamani's Daughters get multiattacks!
 			if(rando == 0) {
 				createStatusAffect(StatusAffects.Attacks, int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20), 0, 0, 0);
-				if (statusAffectv1(StatusAffects.Attacks) > 20) addStatusValue(StatusAffects.Attacks, 1, statusAffectv1(StatusAffects.Attacks) - 20);
+				if (statusAffectv1(StatusAffects.Attacks) > 20) addStatusValue(StatusAffects.Attacks, 1, -(statusAffectv1(StatusAffects.Attacks) - 20));
 				eAttack();
 			}
 			if(rando == 1) game.eventParser(special1);
