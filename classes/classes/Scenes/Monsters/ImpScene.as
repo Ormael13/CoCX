@@ -1275,7 +1275,7 @@ package classes.Scenes.Monsters
 		public function impRapesYou():void {
 			clearOutput();
 			if (doSFWloss()) return;
-			if ((player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && !player.isTaur() && player.hasVagina() && flags[kFLAGS.SFW_MODE] <= 0) {
+			if ((player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && !player.isTaur() && player.hasVagina()) {
 				outputText(images.showImage("imp-loss-female-fuck"), false);
 				outputText("You sink to the ground, assuming a position that feels all too natural to you now, leaning forward to let your " + player.allBreastsDescript() + " hang down slightly. The imp looks you up and down, wickedly eyeing your ready, slightly open lips. He drops his loin-cloth to reveal a hardening cock. Your eyes bulge as it grows larger... and larger... and larger! The imp's cock finally bulges to a full twelve inches... and it's moving closer. You struggle to think... but you just can't! You want that in your mouth, like, so bad!\n\n", false);
 				outputText("Your " + vaginaDescript(0) + " drips in anticipation, and you find yourself involuntarily moving your knees farther apart to prepare yourself to be filled. He smiles and presses his cock against your " + vaginaDescript(0) + ", pushing you back to get a better angle. You try to make words, but your brain can only think of so much at once! Right now, it's thinking of cock, which, naturally, makes you open your mouth and let out a slutty moan.\n\n", false);
@@ -1295,7 +1295,7 @@ package classes.Scenes.Monsters
 				return;
 			}
 			//Lust loss
-			if(player.lust >= 100 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if(player.lust >= 100) {
 				//50% chance of sprocket rape for super-thick people. 
 				if(player.cocks.length >= 1 && rand(2) == 0) {
 					if(player.cocks[0].cockThickness >= 4) {
@@ -1355,7 +1355,9 @@ package classes.Scenes.Monsters
 						if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("Dropping down to the ground, your " + cockDescript(0) + " trembles against your body to the rhythm of the imp's thrusts, leaving your underbelly smeared with its own pre-cum.\n\n", false);
 						else outputText("On all fours now, your " + cockDescript(0) + " bounces up and down against you to the rhythm of the imp's thrusts, leaving your belly smeared in your own pre-cum.\n\n", false);
 						if(player.ballSize >= 5) outputText("Your huge " + ballsDescriptLight() + " swing heavily against you as well, responding to the force of the imp's thrusts, slapping your own ass and driving your " + cockDescript(0) + " even stiffer with lust, the pre-cum pulsing out of your cock in time with the slapping.\n\n", false);
-						outputText("You begin to feel light-headed from lack of air just as the imp grips your head firmly and begins making rapid, shallow thrusts down your throat, nearing his orgasm. Suddenly he clenches tight, his claws digging into your head and thrusts down your throat as far as he can, holding his massive cock deep in your stomach. Your eyes go wide as you feel the imp's balls on your chin spasm violently.  His cock pulses in your mouth as the thick demon cum is pumped violently down your throat. It feels like an eternity as the imp continues to fill your guts with his hot cum, his orgasm lasting far longer than any human's. He slowly withdraws his still-pumping cock from you, coating your throat and then mouth with an almost continual spray of his unnaturally hot and sticky demon seed. The imp pulls out of your mouth just in time to splatter your face with his cum before his orgasm stops, coating your lips, nose, eyes, and hair with his incredibly thick and sticky cum.\n\n", false);
+						outputText("You begin to feel light-headed from lack of air just as the imp grips your head firmly and begins making rapid, shallow thrusts down your throat, nearing his orgasm. Suddenly he clenches tight, his claws digging into your head and thrusts down your throat as far as he can, holding his massive cock deep in your stomach. Your eyes go wide as you feel the imp's balls on your chin spasm violently.  His cock pulses in your mouth as the thick demon cum is pumped violently down your throat. It feels like an eternity as the imp continues to fill your guts with his hot cum, his orgasm lasting far longer than any human's. ");
+						player.refillHunger(40);
+						outputText("He slowly withdraws his still-pumping cock from you, coating your throat and then mouth with an almost continual spray of his unnaturally hot and sticky demon seed. The imp pulls out of your mouth just in time to splatter your face with his cum before his orgasm stops, coating your lips, nose, eyes, and hair with his incredibly thick and sticky cum.\n\n", false);
 						outputText("You fall to the ground gasping, exhausted and unable to move, the demon cum on your face and inside you still burning with intense heat and corruption. You lose consciousness, your " + cockDescript(0) + " still firmly erect, your lust not sated.", false);
 						dynStats("lus", 20, "cor", 2);
 						cleanupAfterCombat();

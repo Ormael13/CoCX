@@ -840,6 +840,7 @@ private function drinkMarbleMilk():void {
 
 //(player chooses no)
 private function playerRefusesMarbleMilk():void {
+	clearOutput();
 	spriteSelect(41);
 	outputText("Taken aback by your refusal, she gives an annoyed hurumph before continuing on her way to the barn.  You shake your head and return to your explorations.", false);
 	//- either do another explore event, or end event

@@ -34,8 +34,10 @@
 				//Due to toughness or amor...
 				outputText("You somehow manage to deflect and block Marble's massive overhead swing.", false);
 			}
-			if(damage > 0) damage = player.takeDamage(damage);
-			outputText("You are struck by a two-handed overhead swing from the enraged cow-girl.  (" + damage + " damage).", false);
+			if(damage > 0) {
+				outputText("You are struck by a two-handed overhead swing from the enraged cow-girl.  ", false);
+				damage = player.takeDamage(damage, true);
+			}
 			statScreenRefresh();
 			combatRoundOver();
 		}
@@ -60,8 +62,8 @@
 				//Due to toughness or amor...
 				outputText("You easily deflect and block the damage from Marble's wide swing.", false);
 			}
-			outputText("Marble easily hits you with a wide, difficult to avoid swing.  (" + damage + " damage).", false);
-			if(damage > 0) player.takeDamage(damage);
+			outputText("Marble easily hits you with a wide, difficult to avoid swing.  ", false);
+			if(damage > 0) player.takeDamage(damage, true);
 			statScreenRefresh();
 			combatRoundOver();
 		}
