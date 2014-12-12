@@ -21,8 +21,8 @@ package classes.Scenes
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
 				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
-				addButton(2, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
-				//addButton(3, "Event Trigger", eventTriggerMenu);
+				//addButton(2, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
+				addButton(3, "Event Trigger", eventTriggerMenu);
 				addButton(4, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
 				addButton(14, "Exit", eventParser, 1);
 			}
@@ -474,9 +474,10 @@ package classes.Scenes
 		
 		private function eventTriggerMenu():void {
 			menu();
-			addButton(0, "Marae Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByMarae);
-			addButton(1, "Jojo Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
-			addButton(2, "Rathazul Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByRathazul);
+			addButton(0, "Anemone", kGAMECLASS.anemoneScene.anemoneKidBirthPtII);
+			//addButton(0, "Marae Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByMarae);
+			//addButton(1, "Jojo Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
+			//addButton(2, "Rathazul Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByRathazul);
 			
 			addButton(14, "Back", accessDebugMenu);
 		}

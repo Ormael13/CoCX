@@ -23,7 +23,8 @@
 		//Used to determine thickness of knot relative to normal thickness
 		//Used during sex to determine how full it currently is.  For multi-dick sex.
 		public var fullness:Number = 0;
-
+		public var virgin:Boolean = true; //Not used at the moment.
+		
 		public function validate():String {
 			var error:String = "";
 			error += Utils.validateNonNegativeNumberFields(this, "AssClass.validate",[

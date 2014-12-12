@@ -1754,6 +1754,7 @@ public function carpentryShopEntry():void {
 public function carpentryShopInside():void {
 	outputText("", true);
 	outputText("<i>So what will it be?</i>", false);
+	menu();
 	addButton(0, "Toolbox", carpentryShopBuySet);
 	addButton(1, "Nails", carpentryShopBuyNails);
 	addButton(2, "Wood", carpentryShopBuyWood);
@@ -1997,7 +1998,7 @@ private function gymMenu():void {
 private function buyGymLifeTimeMembership():void {
 	outputText("", true);
 	//[Buy LifeTime Membership]
-	if (silly()) outputText("You tell \"Shut up and take my gems!\" as you pull out your gem-pouch. \n\n"); //Shut up and take my gems!
+	if (silly()) outputText("You tell \"<i>Shut up and take my gems!</i>\" as you pull out your gem-pouch. \n\n"); //Shut up and take my gems!
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.", false);
 	if(player.hasCock()) {
 		outputText("  It brings a flush to your face that has nothing to do with exercise.  Maybe you'll be able to con her into some alone time later?", false);

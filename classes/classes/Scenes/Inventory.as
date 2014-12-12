@@ -311,12 +311,16 @@ package classes.Scenes
 
 		
 		private function itemAnyInStorage(storage:Array, startSlot:int, endSlot:int):Boolean {
-			for (var x:int = startSlot; x < endSlot; x++) if (storage[x].quantity > 0) return true;
+			for (var x:int = startSlot; x < endSlot; x++) {
+				if (storage[x] != undefined) if (storage[x].quantity > 0) return true;
+			}
 			return false;
 		}
 		
 		private function itemTypeInStorage(storage:Array, startSlot:int, endSlot:int, itype:ItemType):Boolean {
-			for (var x:int = startSlot; x < endSlot; x++) if (storage[x].quantity > 0 && storage[x].itype == itype) return true;
+			for (var x:int = startSlot; x < endSlot; x++) {
+				if (storage[x] != undefined) if (storage[x].quantity > 0 && storage[x].itype == itype) return true;
+			}
 			return false;
 		}
 		

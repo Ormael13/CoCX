@@ -27,7 +27,7 @@ package classes {
 				if (flags[kFLAGS.SOCK_COUNTER] < 0) flags[kFLAGS.SOCK_COUNTER] = 0;
 				if (flags[kFLAGS.SOCK_COUNTER] > 24) flags[kFLAGS.SOCK_COUNTER] = 24;
 			}
-			if (flags[kFLAGS.HUNGER_ENABLED] <= 0 || player.hunger >= 10) { //If you're starving, your cum won't build up over time.
+			if (flags[kFLAGS.HUNGER_ENABLED] <= 0 || (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger >= 10)) { //If you're starving, your cum won't build up over time.
 				player.hoursSinceCum++;
 				//Super cumbuilding activate!
 				if(player.findPerk(PerkLib.MaraesGiftProfractory) >= 0) player.hoursSinceCum += 2;

@@ -12,6 +12,7 @@ package classes.Items
 		public static const FISTS:Fists = new Fists();
 
 		public const B_SWORD:Weapon = new BeautifulSword();
+		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 1000, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever magical properties in this weapon is gone now but it's still an effective weapon. \n\nType: Weapon (Sword) \nAttack: 12 \nBase value: 1,000");
 		public const CLAYMOR:Weapon = new LargeClaymore();
 		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",4,40,"A small blade.  Preferred weapon for the rogues. \n\nType: Weapon (Sword) \nAttack: 4 \nBase value: 40");
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
@@ -31,7 +32,7 @@ package classes.Items
 		public const RRAPIER:RaphaelsRapier = new RaphaelsRapier();
 		public const S_BLADE:Spellblade = new Spellblade();
 		public const S_GAUNT:Weapon = new Weapon("S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",5,400,"This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent. \n\nType: Weapon (Gauntlet) \nAttack: 5 \nBase value: 400 \nChance to stun your opponent.");
-		public const SCARBLD:Weapon = new Weapon("ScarBld", "ScarBlade", "scarred blade", "a scarred blade", "slash", 19, 1000, "This saber, made from lethicite-imbued metal, eagerly seeks flesh; it resonates with disdain and delivers deep, jagged wounds as it tries to bury itself in the bodies of others. \n\nType: Weapon (Sword) \nAttack: 19 \nBase value: 1,000");
+		public const SCARBLD:Weapon = new Weapon("ScarBld", "ScarBlade", "scarred blade", "a scarred blade", "slash", 20, 1000, "This saber, made from lethicite-imbued metal, eagerly seeks flesh; it resonates with disdain and delivers deep, jagged wounds as it tries to bury itself in the bodies of others. \n\nType: Weapon (Sword) \nAttack: 20 \nBase value: 1,000");
 		public const SCIMITR:Weapon = new Weapon("Scimitr", "Scimitar", "scimitar", "a scimitar", "slash", 15, 500, "This curved sword is made for slashing.  No doubt it'll easily cut through flesh. \n\nType: Weapon (Sword) \nAttack: 15 \nBase value: 500");
 		public const SPEAR  :Weapon = new Weapon("Spear  ","Spear","deadly spear","a deadly spear","piercing stab",8,450,"A staff with a sharp blade at the tip designed to pierce through the toughest armor.  This would ignore most armors.  \n\nType: Weapon (Spear) \nAttack: 8 \nBase value: 450 \nIgnores most armors.");
 		public const SUCWHIP:Weapon = new Weapon("SucWhip","SucWhip","succubi whip","a succubi whip","sexy whipping",10,400,"This coiled length of midnight-black leather practically exudes lust.  Though it looks like it could do a lot of damage, the feel of that slick leather impacting flesh is sure to inspire lust. \n\nType: Weapon \nAttack: 10 \nBase value: 400 \nInflicts lust damage on strike but slowly corrupts the wielder.");

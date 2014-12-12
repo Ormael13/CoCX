@@ -307,7 +307,7 @@ public function settingsScreenGameSettings():void {
 	addButton(5, "SFW Toggle", toggleSFW, null, null, null, "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 	addButton(6, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
 	addButton(7, "Auto level", toggleAutoLevel, null, null, null, "Toggles automatic leveling when you accumulate sufficient experience.");
-	if (player.str > 0) addButton(10, "Enable Surv", enableRealisticPrompt);	
+	if (player.str > 0) addButton(10, "Enable Surv", enableSurvivalPrompt);	
 	if (player.str > 0) addButton(11, "Enable Real", enableRealisticPrompt);	
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5)
 	{
@@ -547,6 +547,19 @@ public function toggleAutoLevel():void {
 	if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
 	else flags[kFLAGS.AUTO_LEVEL] = 0;
 	settingsScreenGameSettings();	
+}
+
+public function enableSurvivalPrompt():void {
+	outputText("Are you sure you want to enable Survival Mode?\n\n", true)
+	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
+	doYesNo(enableSurvivalForReal, settingsScreenGameSettings);
+}
+
+public function enableSurvivalForReal():void {
+	outputText("Survival mode is now enabled.", true)
+	player.hunger = 80;
+	flags[kFLAGS.HUNGER_ENABLED] = 0.5;
+	doNext(settingsScreenGameSettings);
 }
 
 public function enableRealisticPrompt():void {

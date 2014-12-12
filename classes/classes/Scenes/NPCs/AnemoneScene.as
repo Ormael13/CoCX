@@ -1333,6 +1333,8 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.PIPE.id) outputText("pipe");
 				else outputText("stick");
 				outputText(" is still enough to bruise you a bit.");
+				HPChange(-5, false);
+				kidAXP(6);
 			}
 			//(HP - 5, KidXP + 1)
 			//[Riding Crop]
@@ -1352,6 +1354,14 @@ package classes.Scenes.NPCs
 				//(HP -5, lust +10, KidXP + 3)
 				HPChange(-5, false);
 				dynStats("lus", 10, "resisted", false);
+				kidAXP(5);
+			}
+			//[Dagger]
+			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.DAGGER.id) {
+				outputText("\n\nThe dagger is light enough for the anemone to use one-handed, and she makes a good practice of turning aside your mock blows with it while reaching in to stimulate you with her other hand.  For good measure, she nicks you with the blade itself whenever her caress elicits a distracted flush.");
+				//(HP -5, lust +5, KidXP + 3)
+				HPChange(-5, false);
+				dynStats("lus", 5, "resisted", false);
 				kidAXP(5);
 			}
 			//[Beautiful Sword]
@@ -1380,7 +1390,8 @@ package classes.Scenes.NPCs
 			}
 			//[Katana] or [Spellsword]
 			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.KATANA.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.S_BLADE.id) {
+					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.S_BLADE.id ||
+					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SCIMITR.id ) {
 				outputText("\n\nThe light sword and the light anemone seem to be a good match, and she actually manages to make several deft moves with it after your instruction.  One is a bit too deft, as she fails to rein in her swing and delivers a long, drawing cut that connects with your [leg].");
 				//(HP - 20, KidXP + 2)
 				kidAXP(4);
@@ -1443,18 +1454,37 @@ package classes.Scenes.NPCs
 				dynStats("lus", 20);
 				kidAXP(4);
 			}
-			//[Scarred Blade](NYI)
-			else if (9999 == 0) {
+			//[Scarred Blade]
+			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.S_BLADE.id) {
 				outputText("\n\nThe anemone attempts to draw the bloodthirsty saber at your insistence, but as she pulls it free of the scabbard, it jerks from her hands, lashing across her thigh before clattering noisily to the ground and spinning away.  Her shock grows as thick, clear fluid seeps from the cut, and she covers her mouth with her hands, looking up at you with piteous, wet eyes.");
 				//[(if corr <=70)
-				if (player.cor <= 70) outputText("  The blade's edge flashes toward you as well, when you try to pick it up.  After a few frustrated attempts, it becomes clear that you'll have to abandon it for now.");
+				//if (player.cor <= 70) outputText("  The blade's edge flashes toward you as well, when you try to pick it up.  After a few frustrated attempts, it becomes clear that you'll have to abandon it for now.");
 				//empty Kidweapon, KidXP - 5; if corr <=70, set sheilacite = 5, else add Scarred Blade to inventory)
 				flags[kFLAGS.ANEMONE_WEAPON_ID] = 0;
 				kidAXP(-5);
-				if (player.cor <= 70) {
+				/*if (player.cor <= 70) {
 					//9999
 					//9999
+				}*/
+				inventory.takeItem(weapons.SCARBLD, camp.returnToCampUseOneHour);
+				return;
+			}
+			//[Flintlock Pistol] (Because guns are awesome.)
+			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.FLINTLK.id) {
+				outputText("\n\nAs if she already knows how to use a gun, she easily pulls the trigger and fires rounds of ammunition towards you!  ");
+				if (silly()) outputText("Pew pew pew!  ");
+				if (player.spe >= 70) {
+					outputText("You easily dodge the bullets thanks to your speed!");
 				}
+				else if (player.spe >= 40 && player.spe < 70) {
+					outputText("You try to dodge the bullets that are coming towards you.  You manage to dodge some but unfortunately, you've got hit.  You could see yourself bleeding.  You tell her to stop and she obeys.");
+					HPChange(-10, false);
+				}
+				else {
+					outputText("You try your best to avoid but you're unable to at all.  Anemone stops firing when she sees that you're bleeding and gives you a sheepish grin.");
+					HPChange(-40, false);
+				}
+				kidAXP(5);
 			}
 			//[Any new weapon added without text written for it, or any custom item name set by a save editor]
 			else {

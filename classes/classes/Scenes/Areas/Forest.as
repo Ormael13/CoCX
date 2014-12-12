@@ -345,7 +345,6 @@ package classes.Scenes.Areas
 			}
 			if (chooser >= 4) {
 				trace(chooser);
-				trace("Triggering!")
 				cabinProgress.gatherWoods();
 				return;
 			}
