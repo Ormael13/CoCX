@@ -17,8 +17,7 @@ package classes.Scenes.Places.Farm
 
 			//Determine damage - str modified by enemy toughness!
 			var damage:int = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if(damage > 0) damage = player.takeDamage(damage);
-
+			
 			//Block:
 			if(damage <= 0) {
 				outputText("Incredibly, you brace yourself and dig in your [feet].  Kelt slams into you, but you grind his momentum to a half.  His mouth flaps uncomprehendingly for a moment before he backs up, flushing from being so close to you.");
@@ -26,8 +25,9 @@ package classes.Scenes.Places.Farm
 			}
 			//Hit:
 			else {
-				outputText("You can't get out of the way in time, and you're knocked down!  Kelt tramples overtop of you!  (" + damage + ")");
+				outputText("You can't get out of the way in time, and you're knocked down!  Kelt tramples overtop of you!  ");
 			}
+			if(damage > 0) damage = player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 
@@ -52,8 +52,9 @@ package classes.Scenes.Places.Farm
 				return;
 			}
 			//Hit:
-			damage = player.takeDamage(damage);
-			outputText("The arrow bites into you before you can react. (" + damage + ")");
+			
+			outputText("The arrow bites into you before you can react. ");
+			damage = player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 

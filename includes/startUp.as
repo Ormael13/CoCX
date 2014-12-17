@@ -1,6 +1,8 @@
 ﻿import classes.Scenes.Achievements;
 import coc.view.CoCButton;
 import coc.view.MainView;
+import flash.display.Stage;
+import flash.display.StageQuality;
 import flash.text.TextField;
 import flash.text.TextFormat;
 
@@ -25,6 +27,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 		mainView.removeChild(mainView.aCb);
 	}
 	mainViewHack.addThirdRow();
+	mainViewHack.registerShiftKeys();
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
@@ -340,6 +343,7 @@ public function settingsScreenInterfaceSettings():void {
 	//addButton(3, "Old Sprites", toggleOldSprites, null, null, null, "Toggle between old and new sprites.  \n\nNOTE: This doesn't work well right now."); //If I can re-add old sprites, that is.
 	addButton(4, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
 	addButton(5, "Background", cycleBackground, null, null, null, "Cycle through background styles and colors.");
+	//addButton(6, "Quality", cycleQuality, null, null, null, "Set the graphical quality. \n\nCurrent quality: " + stage.quality);
 	addButton(14, "Back", settingsScreenMain);
 }
 
@@ -363,7 +367,14 @@ public function cycleBackground():void {
 		mainView.textBGWhite.visible = false;
 		mainView.textBGTan.visible = false;
 	}		
-};
+}
+
+public function cycleQuality():void {
+	if (stage.quality == StageQuality.LOW) stage.quality = StageQuality.MEDIUM;
+	else if (stage.quality == StageQuality.MEDIUM) stage.quality = StageQuality.HIGH;
+	else if (stage.quality == StageQuality.HIGH) stage.quality = StageQuality.LOW;
+	settingsScreenInterfaceSettings();
+}
 
 public function toggleImages():void {
 	if (flags[kFLAGS.IMAGEPACK_OFF] < 1) flags[kFLAGS.IMAGEPACK_OFF] = 1;

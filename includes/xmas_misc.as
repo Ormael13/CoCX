@@ -441,36 +441,11 @@ public function getWinterPudding():void {
 	}
 	player.gems -= 35;
 	statScreenRefresh();
-	outputText("You opt for a slice of the tasty treat - you've only got until the festivities wade away, so you might as well take one now!");
-	//[1 x 'Winter Pudding' added to player inventory, player loses 35 gems.]
-	//['Winter Pudding' description in player inventory]
-	//A delicious holiday treat made with pure affection.  The tasty-looking piece of confectionery is begging to be eaten, topped with with a very suspicious layer of white marzipan that contrasts the pudding's dark brown texture.
-	//['Winter Pudding' description when eaten.]
-	outputText("\n\nYou stuff the stodgy pudding down your mouth, the taste of brandy cream sauce and bitter black treacle sugar combining in your mouth.  You can tell by its thick spongy texture that it's far from good for you, so its exclusivity is more than likely for the best.");
-	if(player.thickness < 100 || player.tone > 0) {
-		//outputText("\n\nYou feel your waist protrude slightly.  Did you just put on a little weight?  It sure looks like it.");
-		outputText(player.modTone(0,2));
-		outputText(player.modThickness(100,2));
-	}
-	outputText("\n\nYou lick your lips clean, savoring the taste of the Winter Pudding.  You feel kinda antsy...");
-	//[Decrease player tone by 5, Increase Lust by 20, Destroy item.]
-	dynStats("lus", (10+player.lib/10), "resisted", false);
-	
-	//[Optional, give the player antlers! (30% chance) Show this description if the player doesn't have horns already.]
-	if(player.horns == 0 && rand(2) == 0) {
-		outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear.  <b>You've grown antlers!</b>");
-		//[Player horn type changed to Antlers.]
-		player.hornType = HORNS_ANTLERS;
-		player.horns = 4 + rand(12);
-	}
-	//[Show this description instead if the player already had horns when the transformation occurred.] 
-	else if(player.horns > 0 && player.hornType != HORNS_ANTLERS && rand(2) == 0) {
-		outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained antlers!</b>");
-		//[Player horn type changed to Antlers.]
-		player.hornType = HORNS_ANTLERS;
-		player.horns = 4 + rand(12);
-	}
-	doNext(telAdre.bakeryScene.bakeryuuuuuu);
+	outputText("You opt for a slice of the tasty treat - you've only got until the festivities wade away, so you might as well take one now!  Do you eat the treat or save it for later?\n\n");
+	menu();
+	addButton(0, "Eat", mutations.winterPudding, player, true, null, "Eat the delicious Winter Pudding.");
+	addButton(1, "Take", inventory.takeItem, consumables.W_PDDNG, telAdre.bakeryScene.bakeryuuuuuu, null, "Bring the pudding with you.");
+	//doNext(telAdre.bakeryScene.bakeryuuuuuu);
 }
 
 //4. Donto's Polar Pete

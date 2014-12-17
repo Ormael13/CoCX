@@ -23,8 +23,12 @@ package classes
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
+	
 	public class MainViewHack extends BaseContent
 	{
+		public var registeredShiftKey:Boolean = false;
 		public var reassigned:Boolean = false;
 		public var minLustBar:* = null;
 		public var initializedThirdRow:Boolean = false;
@@ -551,6 +555,26 @@ package classes
 		
 		public function setOldSprite():void {
 
+		}
+
+		public function registerShiftKeys():void {
+			if (!registeredShiftKey) {
+				mainView.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
+				mainView.stage.addEventListener(KeyboardEvent.KEY_UP, keyReleased);
+				registeredShiftKey = true;
+			}
+		}
+		
+		//Allows shift key.
+		public function keyPressed(event:KeyboardEvent):void {
+			if(event.keyCode == Keyboard.SHIFT) {
+				flags[kFLAGS.SHIFT_KEY_DOWN] = 1;
+			}
+		}
+		public function keyReleased(event:KeyboardEvent):void {
+			if(event.keyCode == Keyboard.SHIFT) {
+				flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
+			}
 		}
 	}
 }

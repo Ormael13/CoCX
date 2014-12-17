@@ -84,6 +84,9 @@ package classes.Scenes.Dungeons
 		public function checkPhoenixTowerClear():Boolean {
 			return (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0&& flags[kFLAGS.HEL_HARPIES_DEFEATED] > 0 && flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && flags[kFLAGS.HEL_BRIGID_DEFEATED] > 0);
 		}
+		public function checkLethiceStrongholdClear():Boolean { //Let's wait until Lethice's added then implement this!
+			return false;
+		}
 		
 		public function enterFactory():void {
 			factory.enterDungeon();
@@ -106,7 +109,7 @@ package classes.Scenes.Dungeons
 			mainView.showMenuButton( MainView.MENU_STATS );
 			mainView.hideMenuButton( MainView.MENU_DATA );
 			if((player.XP >= (player.level) * 100 && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
-				if (player.XP < player.level * 100)
+				if (player.XP < player.level * 100 || player.level >= kGAMECLASS.levelCap)
 				{
 					if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
 					else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
@@ -139,7 +142,6 @@ package classes.Scenes.Dungeons
 			hideUpDown();
 			spriteSelect(-1);
 			menu();
-			setTopButtons();
 			if (northFunction != null) addButton(6, "North", navigateToRoom, northFunction);
 			if (southFunction != null) addButton(11, "South", navigateToRoom, southFunction);
 			if (westFunction != null) addButton(10, "West", navigateToRoom, westFunction);
@@ -147,9 +149,9 @@ package classes.Scenes.Dungeons
 			if (player.lust >= 30) addButton(8, "Masturbate", eventParser, 10);
 			addButton(13, "Inventory", inventory.inventoryMenu);
 			addButton(14, "Map", map.displayMap);
+			setTopButtons();
 		}
 		
-
 	}
 
 }

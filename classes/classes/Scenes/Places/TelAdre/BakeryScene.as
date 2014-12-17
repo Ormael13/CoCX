@@ -91,7 +91,7 @@ private function checkBakeryMenu():void {
 	menu();
 	//choices("Brownies",createCallBackFunction2(nomnomnom, "brownies", 3),"Cookies",createCallBackFunction2(nomnomnom, "cookies", 4),"Cupcakes",2833,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5),"Pound Cake",createCallBackFunction2(nomnomnom, "pound cake", 4),"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,"",0,"Leave",bakeryuuuuuu);
 	
-	addButton(0,"Brownies",createCallBackFunction2(nomnomnom, "brownies", 5));
+	addButton(0,"Brownies",createCallBackFunction2(nomnomnom, "brownies", 3));
 	addButton(1,"Cookies",createCallBackFunction2(nomnomnom, "cookies", 4));
 	addButton(2,"Cupcakes",createCallBackFunction2(nomnomnom, "cupcakes", 3));
 	addButton(3,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5));
@@ -341,11 +341,11 @@ public function nomnomnom(name:String,price:Number):void {
 		if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "doughnuts") {
 			outputText(player.modTone(0,2), false);
 			outputText(player.modThickness(100,1), false);
-			if(rand(3) == 0 && player.buttRating < 15) {
+			if(rand(3) == 0 && player.buttRating < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles a little bit more than you'd expect.", false);
 				player.buttRating++;
 			}
-			if(rand(3) == 0 && player.hipRating < 15) {
+			if(rand(3) == 0 && player.hipRating < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?", false);
 				player.hipRating++;
 			}
@@ -354,7 +354,7 @@ public function nomnomnom(name:String,price:Number):void {
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "cookies") {
 			outputText(player.modTone(0,1), false);
 			outputText(player.modThickness(100,2), false);
-			if(rand(3) == 0 && player.hipRating < 20) {
+			if(rand(3) == 0 && player.hipRating < 20 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?", false);
 				player.hipRating++;
 			}
@@ -362,7 +362,7 @@ public function nomnomnom(name:String,price:Number):void {
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "brownies") {
 			outputText(player.modThickness(100,4), false);
-			if(rand(2) == 0 && player.hipRating < 30) {
+			if(rand(2) == 0 && player.hipRating < 30 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Your " + hipDescript() + " definitely got wider.", false);
 				player.hipRating += 2;
 			}
@@ -370,7 +370,7 @@ public function nomnomnom(name:String,price:Number):void {
 		}
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "cupcakes") {
 			outputText(player.modTone(0,4), false);
-			if(rand(2) == 0 && player.buttRating < 30) {
+			if(rand(2) == 0 && player.buttRating < 30 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles with a good bit of extra weight.", false);
 				player.buttRating += 2;
 			}
@@ -379,11 +379,11 @@ public function nomnomnom(name:String,price:Number):void {
 		else if(flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "pound cake") {
 			outputText(player.modTone(0,2), false);
 			outputText(player.modThickness(100,2), false);
-			if(rand(3) == 0 && player.buttRating < 25) {
+			if(rand(3) == 0 && player.buttRating < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nWhen you stand back up your " + buttDescript() + " jiggles a little bit more than you'd expect.", false);
 				player.buttRating++;
 			}
-			if(rand(3) == 0 && player.hipRating < 25) {
+			if(rand(3) == 0 && player.hipRating < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
 				outputText("\n\nAfter finishing, you find your gait has changed.  Did your " + hipDescript() + " widen?", false);
 				player.hipRating++;
 			}

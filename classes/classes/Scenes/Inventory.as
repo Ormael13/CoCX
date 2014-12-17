@@ -14,6 +14,8 @@ package classes.Scenes
 	import classes.Items.WeaponLib;
 	import classes.Items.JewelryLib;
 	import classes.Scenes.Dungeons.DungeonEngine;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 
 	use namespace kGAMECLASS;
 
@@ -117,6 +119,10 @@ package classes.Scenes
 			clearOutput();
 			if (player.itemSlots[slotNum].itype is Useable) {
 				var item:Useable = player.itemSlots[slotNum].itype as Useable;
+				if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+					deleteItemPrompt(item, slotNum);
+					return;
+				}
 				if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used
 					if (!debug) player.itemSlots[slotNum].removeOneItem();
 					useItem(item, player.itemSlots[slotNum]);
@@ -136,6 +142,21 @@ package classes.Scenes
 					enemyAI();
 				}
 			}
+		}
+		private function deleteItemPrompt(item:Useable, slotNum:int):void {
+			clearOutput();
+			outputText("Are you sure you want to destroy " + player.itemSlots[slotNum].quantity + "x " + item.shortName + "?  You won't be able to retrieve " + (player.itemSlots[slotNum].quantity == 1 ? "it": "them") + "!");
+			menu();
+			addButton(0, "Yes", deleteItem, item, slotNum);
+			addButton(1, "No", inventoryMenu);
+			//doYesNo(deleteItem, inventoryMenu);
+		}
+		
+		private function deleteItem(item:Useable, slotNum:int):void {
+			clearOutput();
+			outputText(player.itemSlots[slotNum].quantity + "x " + item.shortName + " " + (player.itemSlots[slotNum].quantity == 1 ? "has": "have") + " been destroyed.");
+			player.destroyItems(item, player.itemSlots[slotNum].quantity);
+			doNext(inventoryMenu);
 		}
 		
 		private function useItem(item:Useable, fromSlot:ItemSlotClass):void {

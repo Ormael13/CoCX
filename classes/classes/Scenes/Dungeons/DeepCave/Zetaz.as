@@ -79,9 +79,8 @@ package classes.Scenes.Dungeons.DeepCave
 					if(player.tou > 60) outputText("causing little damage", false);
 					else {
 						var dmg:Number = 1 + rand(6);
-						dmg = player.takeDamage(dmg);
-						outputText("wounding you slightly (" + dmg + ")", false);
-						
+						outputText("wounding you slightly ", false);
+						dmg = player.takeDamage(dmg, true);
 					}
 					outputText(" while the dust gets into your eyes, temporarily blinding you!", false);
 					player.createStatusAffect(StatusAffects.Blind,1,0,0,0);

@@ -1751,7 +1751,7 @@ public function sleepRecovery(display:Boolean = false):void {
 
 //Bad End if your balls are too big. Only happens in Realistic Mode.
 public function badEndGIANTBALLZ():void {
-	outputText("You suddenly fall over due to your extremely large " + player.ballsDescriptLight() + ".  You struggle to get back up but the size made it impossible.  Panic spreads through your mind and your heart races.\n\n", true)
+	outputText("You suddenly fall over due to your extremely large " + player.ballsDescriptLight() + ".  You struggle to get back up but the size made it impossible.  Panic spreads throughout your mind and your heart races.\n\n", true)
 	outputText("You know that you can't move and you're aware that you're going to eventually starve to death.", false)
 	menu();
 	if (player.hasItem(consumables.REDUCTO, 1)) {
@@ -1791,8 +1791,9 @@ private function callRathazulAndEscapeBadEnd():void {
 //Bad End if you starved to death.
 public function badEndHunger():void {
 	player.hunger = 0.1; //For Easy Mode/Debug Mode.
-	outputText("Too weak to be able to stand up, you collapse onto the ground. Your vision blurs as the world around you finally fades to black. \n\n", true);
+	outputText("Too weak to be able to stand up, you collapse onto the ground. Your vision blurs as the world around you finally fades to black. ", true);
 	if (companionsCount() > 0) {
+		outputText("\n\n");
 		if (companionsCount() > 1) {
 			outputText("Your companions gather to mourn over your passing.", false);
 		}
@@ -1802,6 +1803,7 @@ public function badEndHunger():void {
 	}
 	player.HP = 0;
 	doBadEnd();
+	removeButton(1);
 }
 //Bad End if you have 100 min lust.
 public function badEndMinLust():void {

@@ -162,6 +162,7 @@
 					if (damage <= 0) damage = 1;
 					outputText(" ");
 					damage = player.takeDamage(damage, true);
+					outputText("\n");
 				}
 				hits--;
 			}

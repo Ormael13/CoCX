@@ -35,7 +35,6 @@ package classes.Scenes.NPCs
 			else
 			{
 				damage = int((str + weaponAttack) - rand(player.tou/2) - player.armorDef/2);
-				if(damage > 0) damage = player.takeDamage(damage);
 				//No damage
 				if(damage <= 0) {
 					damage = 0;
@@ -44,13 +43,14 @@ package classes.Scenes.NPCs
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 				}
 				//Take Damage
-				else outputText("The salamander lunges at you, sword swinging in a high, savage arc.  You attempt to duck her attack, but she suddenly spins about mid-swing, bringing the sword around on a completely different path.  It bites deep into your flesh, sending you stumbling back. (" + damage + ")", false);
+				else outputText("The salamander lunges at you, sword swinging in a high, savage arc.  You attempt to duck her attack, but she suddenly spins about mid-swing, bringing the sword around on a completely different path.  It bites deep into your flesh, sending you stumbling back. ", false);
 				if(damage > 0) {
 					if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
-						outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
+						outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed. ", false);
 						lust += 5 * lustVuln;
 					}
 				}
+				if(damage > 0) damage = player.takeDamage(damage, true);
 			}
 			
 			statScreenRefresh();
@@ -91,7 +91,6 @@ package classes.Scenes.NPCs
 			}
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str) - rand(player.tou) - player.armorDef);
-			if(damage > 0) damage = player.takeDamage(damage);
 			//No damage
 			if(damage <= 0) {
 				damage = 0;
@@ -100,13 +99,14 @@ package classes.Scenes.NPCs
 				else outputText("The salamander's tail-swipe hits you but fails to move or damage you.", false);
 			}
 			//Take Damage
-			else outputText("The salamander rushes at you, knocking aside your defensive feint and sliding in past your guard.  She lashes out at your feet with her tail, and you can feel the heated wake of the fiery appendage on your ensuing fall toward the now-smouldering grass. (" + damage + ")", false);
+			else outputText("The salamander rushes at you, knocking aside your defensive feint and sliding in past your guard.  She lashes out at your feet with her tail, and you can feel the heated wake of the fiery appendage on your ensuing fall toward the now-smouldering grass. ", false);
 			if(damage > 0) {
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
 					outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
 					lust += 5 * lustVuln;
 				}
 			}
+			if(damage > 0) damage = player.takeDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n", false);
 			combatRoundOver();

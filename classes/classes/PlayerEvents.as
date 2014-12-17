@@ -553,7 +553,7 @@ package classes {
 			if (player.findStatusAffect(StatusAffects.LactationReduction) < 0) { //Lactation reduction
 				if (player.biggestLactation() > 0) player.createStatusAffect(StatusAffects.LactationReduction, 0, 0, 0, 0);
 			}
-			else if (player.biggestLactation() > 0 && player.findStatusAffect(StatusAffects.Feeder) < 0 && player.pregnancyIncubation == 0) {
+			else if (player.biggestLactation() > 0 && player.findStatusAffect(StatusAffects.Feeder) < 0 && player.findPerk(PerkLib.MilkMaid) < 0 && player.pregnancyIncubation == 0) {
 				player.addStatusValue(StatusAffects.LactationReduction, 1, 1);
 				if (player.statusAffectv1(StatusAffects.LactationReduction) >= 48) {
 					if (player.findStatusAffect(StatusAffects.LactationReduc0) < 0) {

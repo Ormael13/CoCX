@@ -207,6 +207,8 @@ package classes.Scenes
 			addButton(2, "Condom", giveItem, useables.CONDOM);
 			addButton(3, "MilkPtn", giveItem, consumables.MILKPTN);
 			
+			addButton(5, "W.Pudding", giveItem, consumables.W_PDDNG);
+			
 			addButton(4, "Next", itemSpawnConsumablesMenuV);
 			addButton(9, "Previous", itemSpawnConsumablesMenuIII);
 			addButton(14, "Back", itemSpawnMenu);

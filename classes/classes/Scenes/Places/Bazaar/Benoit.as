@@ -348,7 +348,8 @@ public function benoitsBuyMenu():void {
 	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
-			"",0,"Back",benoitIntro);
+			"", 0, "", 0);
+	addButton(14, "Back", benoitIntro);
 }
 
 private function benoitSellMenu():void {
@@ -358,6 +359,7 @@ private function benoitSellMenu():void {
 	else
 		outputText("\"<i>Let us feel what you are trying to palm off upon me zis time, zen,</i>\" sighs Benoit" + benoitMF("", "e") + ", sitting down and opening " + benoitMF("his","her") + " hand to you.");
 	var sellMod:int = 3;
+	outputText("\n\n(You can shift-click to sell all items in a stack.)");
 	if (flags[kFLAGS.BENOIT_EGGS] > 0 || flags[kFLAGS.BENOIT_STATUS] != 0) sellMod = 2;
 	outputText("\n\n<b><u>Benoit" + benoitMF("", "e") + "'s Estimates</u></b>");
 	menu();
@@ -369,8 +371,8 @@ private function benoitSellMenu():void {
 			totalItems += player.itemSlots[slot].quantity;
 		}
 	}
-	if (totalItems > 1) addButton(7, "Sell All", createCallBackFunction2(benoitSellAllTransact, totalItems, sellMod));
-	addButton(9, "Back", benoitIntro);
+	if (totalItems > 1) addButton(12, "Sell All", createCallBackFunction2(benoitSellAllTransact, totalItems, sellMod));
+	addButton(14, "Back", benoitIntro);
 }
 
 private function benoitTransactBuy(slot:int = 1):void {
@@ -401,12 +403,21 @@ private function benoitTransactBuy(slot:int = 1):void {
 private function benoitSellTransact(slot:int, sellMod:int):void {
 	clearOutput();
 	if(benoitLover()) outputText("Benoit" + benoitMF("","e") + " gives your object the briefest of goings-over with " + benoitMF("his","her") + " fingers before stowing it away and handing over your gem reward with a trusting smile.");
-	else outputText("Following a painstaking examination of what you've given " + benoitMF("him","her") + " with his hands and nose, Benoit grudgingly accepts it and carefully counts out your reward.");
-	player.gems += int(player.itemSlots[slot].itype.value / sellMod);
-	player.itemSlots[slot].removeOneItem();
+	else outputText("Following a painstaking examination of what you've given " + benoitMF("him", "her") + " with his hands and nose, Benoit grudgingly accepts it and carefully counts out your reward.");
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		while (player.itemSlots[slot].quantity > 0) {
+			player.gems += int(player.itemSlots[slot].itype.value / sellMod);
+			player.itemSlots[slot].removeOneItem();
+			benoitAffection(1);
+		}
+	}
+	else {
+		player.gems += int(player.itemSlots[slot].itype.value / sellMod);
+		player.itemSlots[slot].removeOneItem();
+		//(+1 Affection)
+		benoitAffection(1);
+	}
 	statScreenRefresh();
-	//(+1 Affection)
-	benoitAffection(1);
 	doNext(benoitSellMenu);
 }
 
@@ -479,8 +490,9 @@ public function updateBenoitInventory():void {
 	
 	if(rand(10) == 0) {
 		//There is a 10% chance the following items will appear in Slot 3: Bondage Straps, Nurse Outfit, Red Party Dress
-		temp = rand(2);
-		if(temp == 0) flags[kFLAGS.BENOIT_3] = armors.BONSTRP.id;
+		temp = rand(3);
+		if (temp == 0) flags[kFLAGS.BENOIT_3] = armors.BONSTRP.id;
+		else if (temp == 1) flags[kFLAGS.BENOIT_3] = consumables.W_PDDNG.id;
 		else flags[kFLAGS.BENOIT_3] = armors.NURSECL.id;
 	}
 	//Slot 4 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.

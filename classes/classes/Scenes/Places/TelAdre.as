@@ -1003,7 +1003,7 @@ public function oswaldPawn():void {
 	}
 	else {
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n", false);
-		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.)", false);
+		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)", false);
 	}
 	if(player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
 	{
@@ -1057,11 +1057,22 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 	spriteSelect(47);
 	var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
 	clearOutput();
-	if (itemValue == 0)
-		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
-	else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
-	player.itemSlots[slot].removeOneItem();
-	player.gems += itemValue;
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		if (itemValue == 0)
+			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+		else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
+		while (player.itemSlots[slot].quantity > 0){
+			player.itemSlots[slot].removeOneItem();
+			player.gems += itemValue;
+		}
+	}
+	else {
+		if (itemValue == 0)
+			outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+		else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
+		player.itemSlots[slot].removeOneItem();
+		player.gems += itemValue;
+	}
 	statScreenRefresh();
 	doNext(oswaldPawn);
 }

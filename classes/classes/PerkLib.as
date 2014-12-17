@@ -178,9 +178,7 @@ package classes
 				"Reduces enemy armor by 10. (Req's 25+ Intelligence)",
 				"You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance from armor by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.");
 		public static const Regeneration:RegenerationPerk = new RegenerationPerk();
-		public static const Regeneration2:PerkType = mk("Regeneration 2", "Regeneration 2",
-				"Regenerates further 2% of max HP/hour and 1% of max HP/round.",
-				"You choose the 'Regeneration 2' perk, giving you an additional 1% of max HP per turn in combat and 2% of max HP per hour.");
+		public static const Regeneration2:Regeneration2Perk = new Regeneration2Perk();
 		public static const Resistance:PerkType = mk("Resistance", "Resistance",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Resistance' perk, reducing the rate at which your lust increases by 10%.");

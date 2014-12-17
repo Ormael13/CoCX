@@ -71,6 +71,7 @@ package classes.Items
 		public const PURPEAC:SimpleConsumable = mk("PurPeac","PurPeac", "a pure peach", m.purityPeach, "This is a peach from Minerva's spring, yellowy-orange with red stripes all over it. \n\nType: Food & Beverages \nBase value: 10", 10);
 		public const SHEEPMK:SimpleConsumable = mk("SheepMk","SheepMk", "a bottle of sheep milk", m.sheepMilk,"This bottle of sheep milk is said to have corruption-fighting properties.  It may be useful. \n\nType: Food & Beverages");
 		public const S_WATER:SimpleConsumable = mk("S.Water","SpringWtr", "a waterskin filled with spring water", m.springWater,"A waterskin full of purified water from Minerva's spring.  It's clean and clear, with a faint sweet scent to it.  You're sure it would be a very refreshing drink. \n\nType: Food & Beverages");
+		public const W_PDDNG:SimpleConsumable = mk("W.Pddng","W.Pudding", "a slice of winter pudding", m.winterPudding,"A slice of delicious Winter Pudding.  It smells delicious. \n\nNote: Eating this might cause antlers to grow from your head. \n\nType: Food & Beverages", 35);
 
 		//GROWERS/SHRINKERS
 		public const REDUCTO:Consumable = new Reducto();

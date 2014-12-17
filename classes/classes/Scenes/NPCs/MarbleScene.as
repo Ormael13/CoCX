@@ -484,7 +484,7 @@ public function marbleWarningStateMeeting():void {
 	spriteSelect(41);
 	outputText("While walking through one of the farm's fields, you notice the cow-girl Marble coming out of the barn ahead of you.  When she sees you, she pulls a bit of an irritated face before donning a fake smile and saying, \"<i>Yes?  Can I help you?  Or were you just leaving again?</i>\"  Well... that wasn't terribly nice.  The two of you didn't exactly get off to a good start before, but maybe you'd like to correct that?  On the other hand, she'll probably ask you to suckle her breasts if you do apologize; maybe it would be best to just avoid her for now - or perhaps entirely?  Then again also, you could pick a fight over her behavior towards you.");
 	//PC chooses: apologize, pick a fight, leave, leave forevs
-	simpleChoices("Apologize",apologizetoWalkingTitsIMEANMARBLE,"Pick Fight",pickAFight,"Leave4Ever",pickAFight,"",0,"Leave",leaveNonFriendsMarble);
+	simpleChoices("Apologize",apologizetoWalkingTitsIMEANMARBLE,"Pick Fight",pickAFight,"Leave4Ever",leaveNonFriendsMarble4EVERRRR,"",0,"Leave",leaveNonFriendsMarble);
 }
 //Leave (Z)
 private function leaveNonFriendsMarble():void {
@@ -1418,7 +1418,9 @@ public function marbleEncounterAddictedNonWithdrawlAshamed():void {
 	//[affection >= 30] 
 	if(player.statusAffectv1(StatusAffects.Marble) >= 30) outputText("\"<i>Sweetie, w", false);
 	else outputText("\"<i>W", false);
-	outputText("hy are you here if you don't need my milk?</i>\"  You explain that you just want to enjoy her company like you used to.  She gives a genuine smile that probably hasn't been on her face for a while, and the two of you have a meal together in her room.\n\n", false);
+	outputText("hy are you here if you don't need my milk?</i>\"  You explain that you just want to enjoy her company like you used to.  She gives a genuine smile that probably hasn't been on her face for a while, and the two of you have a meal together in her room. ", false);
+	player.refillHunger(30, false);
+	outputText("\n\n");
 	//[affection is 80 or more]
 	if(player.statusAffectv1(StatusAffects.Marble) >= 80) {
 		outputText("While you're eating, Marble looks into your eyes deeply for a moment and you think she is going to say something, but she shakes her head and seems more reserved for the rest of your time together.\n\n", false);
@@ -1615,7 +1617,7 @@ public function postAddictionCampMornings(extra:Boolean = true):void {
 		dynStats("cor", 1);
 	}
 	if (player.lib < 40) dynStats("lib", .1);
-	player.refillHunger(20)
+	player.refillHunger(20);
 	player.slimeFeed();
 	if(!extra) return;
 	//(if the player has less than 5 bottles of milk in their inventory or storage containers)
@@ -2968,8 +2970,8 @@ public function marbleBadEndFollowup():void {
 		outputText("A tall female cow-girl then steps out of the barn entrance.  The young champion notes just how pretty she is, if a bit imposing, but he also quickly notices that she is quite clearly pregnant.  \n\n", false);
 		outputText("<i>\"Marble,</i>\" the older champion says to her, \"<i>this is a friend, he's actually from my village.  This is Marble, she is the reason I left my mission.  I care about her too much, and she is carrying my child.</i>\"  ", false);
 		//mysterious baby?
-		if(player.gender == 3 && player.biggestTitSize() >= 2 && player.biggestCockArea() < 15) {
-			outputText("\"<i>Wait, your child?!  How?</i>\" the younger champion stammers. The older one grins at him and says, \"<i>So I'm the first you've met?  Well then...</i>\" before dropping her pants and revealing her " + multiCockDescriptLight() + " and her " + vaginaDescript(0) + " to him.  The younger champion's jaw drops and he simply stares at her for a time, during which she giggles at him and says, \"<i>They're fully functional too.  Would you like to see them in action?</i>\"  The younger champion finds he is only able to stammer out an incoherent answer to this.  \"<i>I think I'll take that as a 'yes'. Don't worry, it'll be fun.</i>\" the older champion says, leading the young one along with Marble back inside the barn.  \"<i>Afterwards, maybe I can give you some advice on dealing with this world.</i>\"  ", false);
+		if(player.gender == 3 && player.mf("m", "f") == "f" && player.biggestCockArea() < 15) {
+			outputText("\"<i>Wait, your child?!  How?</i>\" the younger champion stammers. The older one grins at him and says, \"<i>So I'm the first you've met?  Well then...</i>\" before dropping " + player.mf("his", "her") + " pants and revealing " + player.mf("his", "her") + " " + multiCockDescriptLight() + " and " + player.mf("his", "her") + " " + vaginaDescript(0) + " to him.  The younger champion's jaw drops and he simply stares at " + player.mf("him", "her") + " for a time, during which " + player.mf("he", "she") + " giggles at him and says, \"<i>They're fully functional too.  Would you like to see them in action?</i>\"  The younger champion finds he is only able to stammer out an incoherent answer to this.  \"<i>I think I'll take that as a 'yes'. Don't worry, it'll be fun.</i>\" the older champion says, leading the young one along with Marble back inside the barn.  \"<i>Afterwards, maybe I can give you some advice on dealing with this world.</i>\"  ", false);
 		}
 		//if this isn't a herm, then met the family
 		else {
