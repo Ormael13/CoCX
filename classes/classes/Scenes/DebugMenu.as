@@ -4,24 +4,33 @@ package classes.Scenes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.MainViewHack;
+	import flash.utils.describeType;
 	
 	public class DebugMenu extends BaseContent
 	{
-		public var mainHack:MainViewHack = new MainViewHack()
-		private var lastMenu:Function = null
+		public var flagNames:XML = describeType(kFLAGS);
+		public var mainHack:MainViewHack = new MainViewHack();
+		private var lastMenu:Function = null;
+		
 		
 		public function DebugMenu() 
 		{	
 		}
 		
 		public function accessDebugMenu():void {
-			kGAMECLASS.tooltipLoc = ""
+			kGAMECLASS.tooltipLoc = "";
 			if ((debug && flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild) && !getGame().inCombat) {
+				hideMenus();
+				mainView.nameBox.visible = false;
+				mainView.nameBox.text = "";
+				mainView.nameBox.maxChars = 16;
+				mainView.nameBox.restrict = null;
 				outputText("Welcome to the super secret debug menu!", true);
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
 				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
 				//addButton(2, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
+				addButton(2, "Flag Editor", flagEditor);
 				addButton(3, "Event Trigger", eventTriggerMenu);
 				addButton(4, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
 				addButton(14, "Exit", eventParser, 1);
@@ -494,6 +503,46 @@ package classes.Scenes
 				flags[kFLAGS.MEANINGLESS_CORRUPTION] = 0;
 				outputText("<b>Set MEANINGLESS_CORRUPTION flag to 0.</b>");
 			}
+		}
+		
+		private function flagEditor():void {
+			clearOutput();
+			menu();
+			outputText("This is the Flag Editor.  You can edit flags from here.  For flags reference, look at kFLAGS.as class file.  Please input any number from 0 to 2999.");
+			outputText("\n\n<b>WARNING: This might screw up your save file so backup your saves before using this!</b>");
+			mainView.nameBox.visible = true;
+			mainView.nameBox.x = mainView.mainText.x + 5;
+			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+			mainView.nameBox.text = "";
+			mainView.nameBox.maxChars = 4;
+			mainView.nameBox.restrict = "0-9";
+			addButton(0, "OK", editFlag);
+			addButton(4, "Done", accessDebugMenu);
+		}
+		
+		private function editFlag():void {
+			var flagId:int = int(mainView.nameBox.text);
+			clearOutput();
+			menu();
+			if (flagId < 0 || flagId >= 3000) {
+				mainView.nameBox.visible = false;
+				outputText("That flag does not exist!");
+				doNext(flagEditor);
+				return;
+			}
+			mainView.nameBox.visible = true;
+			mainView.nameBox.x = mainView.mainText.x + 5;
+			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+			mainView.nameBox.maxChars = 127;
+			mainView.nameBox.restrict = null;
+			mainView.nameBox.text = flags[flagId];
+			addButton(0, "Save", saveFlag, flagId);
+			addButton(1, "Discard", flagEditor);
+		}
+		
+		private function saveFlag(flagId:int = 0):void {
+			flags[flagId] = mainView.nameBox.text;
+			flagEditor();
 		}
 	}
 

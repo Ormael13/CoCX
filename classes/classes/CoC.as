@@ -383,7 +383,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_1.0.8";
+			ver = "0.9.2_mod_1.0.9";
 			version = ver + " (<b>Batches of fixes</b>)";
 
 			//Indicates if building for mobile?

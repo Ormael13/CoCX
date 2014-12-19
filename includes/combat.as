@@ -1590,7 +1590,7 @@ public function attack():void {
 	}
 	else {
 		outputText("You hit " + monster.a + monster.short + "! ", false);
-		if(crit) outputText(" <b>Critical hit! </b>");
+		if(crit) outputText("<b>Critical hit! </b>");
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
 	}
 	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {

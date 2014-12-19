@@ -5,6 +5,7 @@ package classes.Scenes.Dungeons
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.Items.Armor;
 	import classes.BaseContent;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	import classes.Scenes.Dungeons.DungeonEngine;
@@ -180,6 +181,31 @@ package classes.Scenes.Dungeons
 			doNext(1);
 		}
 		
+		public function retryDungeonFromBadEndPrompt():void {
+			clearOutput();
+			outputText("Would you like to retry?");
+			doYesNo(reallyRetry, declineRetry);
+		}
+		public function reallyRetry():void {
+			dynStats("lus", -100, "resisted", false);
+			player.HP = player.maxHP();
+			statScreenRefresh();
+			//Restart dungeon, resets all encounters.
+			flags[kFLAGS.HEL_HARPIES_DEFEATED] = 0;
+			flags[kFLAGS.HEL_PHOENIXES_DEFEATED] = 0;
+			flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] = 0;
+			flags[kFLAGS.HEL_BRIGID_DEFEATED] = 0;
+			flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] = 0;
+			flags[kFLAGS.HARPY_QUEEN_EXECUTED] = 0;
+			flags[kFLAGS.TOOK_QUEEN_STAFF] = 0;
+			goToHeliaDungeon();
+		}
+		public function declineRetry():void {
+			clearOutput();
+			doBadEnd();
+			removeButton(1);
+		}
+		
 		//For when you want to visit the tower again.
 		public function returnToHeliaDungeon():void {
 			clearOutput()
@@ -344,7 +370,7 @@ package classes.Scenes.Dungeons
 			else {
 				outputText("You tell her to fuck off -- you don't need armor that might try to kill or rape you at night.");
 				outputText("\n\nShe huffs indignantly and scrambles to her feet.  \"<i>Well fine, and fuck you anyway.  I hope you get raped by jotuns, " + player.mf("sir","madam") + ".</i>\"  After a moment, she hesitantly adds, \"<i>But if you change your mind later... Well, I guess I’ll be around here!</i>\"  Before you can stop her, she huffs off to... wherever goo-armor-girl-things would go, you guess.  You make your way back to your camp.");
-				HPChange(1000,false);
+				HPChange(player.maxHP(),false);
 				cleanupAfterCombat();
 				doNext(13);
 			}
@@ -365,7 +391,7 @@ package classes.Scenes.Dungeons
 				outputText("You tell her that... no thanks, not now -- you don't need armor right now.");
 				outputText("\n\nShe huffs indignantly and scrambles to her feet.  \"<i>Well fine, maybe you can take me later, " + player.mf("sir", "madam") + "?</i>\"  After a moment, she hesitantly adds, \"<i>But if you change your mind later... You know where to find me, right?</i>\"  You give her a nod as you make your way back to your camp.");
 			}
-			HPChange(1000,false);
+			HPChange(player.maxHP(),false);
 			cleanupAfterCombat();
 			doNext(1);
 		}
@@ -392,9 +418,12 @@ package classes.Scenes.Dungeons
 			//(\"<i>You put a (previous armorName) in your X pouch)
 			outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the dungeon ahead.\n\n");
 			//(PC regains HP)
-			player.setArmor(armors.GOOARMR);
+			var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
+			if (item == null)
+				doNext(roomGuardHall);
+			else inventory.takeItem(item, roomGuardHall);
 			flags[kFLAGS.MET_VALERIA] = 1;
-			HPChange(1000,false);
+			HPChange(player.maxHP(),false);
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 		}
 
@@ -660,6 +689,7 @@ package classes.Scenes.Dungeons
 		//[Phoenixes]
 		public function checkOutDemBirdBitches():void {
 			clearOutput();
+			menu();
 			outputText("You loom over the defeated heavy infantry, marveling at them.  The half-breeds were probably the most organized and efficient fighting unit you've ever come across here in Mareth, and though you defeated them, you know most denizens of the region wouldn't have stood a chance.");
 			if(player.lust > 33) {
 				outputText("\n\nYou suppose you could use one of them to get yourself off.");
@@ -847,6 +877,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\n\"<i>You've been a good stud since you came to me, [name],</i>\" the Queen laughs airily, patting your swollen nuts.  \"<i>The size of my brood has quadrupled since you and Hel 'volunteered' to help us.  Mmm, a free Mareth will surely have you to thank for the army that will liberate it from the demons.  You might even be something of a hero, if you want. The Champion of Free Mareth, if you will.  That wouldn't be so bad, would it?  After all, that's why you came here...</i>\"");
 			outputText("\n\nBefore you can respond, another orgasm washes over you, and a huge load of seed explodes into the thirty-first slut to claim your seed today.  And over her shoulders, you can see dozens more harpies, half of them your own spawn, waiting their turn.");
 			doBadEnd();
+			if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Retry", retryDungeonFromBadEndPrompt);
 		}
 
 		//HARPY QUEEN -- PC VICTORIOUS
@@ -1174,7 +1205,7 @@ package classes.Scenes.Dungeons
 			if(flags[kFLAGS.WON_GOO_ARMOR_FIGHT] + flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] == 0) {
 				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) {
 					outputText("  However, a suit of half-plate armor has been left up against the eastern wall, hanging loosely on a rack; it seems to be in usable shape.");
-					addButton(3, "Armor", takeGooArmor);
+					addButton(0, "Armor", takeGooArmor);
 				}
 				else outputText("  You recall there was a suit of half-plate armor.  The rack appears to be empty.");
 			}
@@ -1182,7 +1213,7 @@ package classes.Scenes.Dungeons
 			//(Display Options: [North Door] [Trapdoor] [Armor])
 			if (flags[kFLAGS.CLEARED_HEL_TOWER] > 0) {
 				outputText("\n\nYou have already cleared this tower. You can leave if you like to.");
-				addButton(5, "Leave", exitHelTower);
+				addButton(10, "Leave", exitHelTower);
 			}
 			addButton(7, "Trapdoor", roomCellar);
 
@@ -1287,7 +1318,7 @@ package classes.Scenes.Dungeons
 				//(Display Options: [Go Upstairs] [Go Downstairs] [Phoenixes])
 				addButton(5, "Upstairs", roomThroneRoom);
 				addButton(7, "Downstairs", roomStairwell);
-				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) addButton(3, "Phoenixes", checkOutDemBirdBitches);
+				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) addButton(0, "Phoenixes", checkOutDemBirdBitches);
 				//(Go Downstairs returns you to the Stairwell; Go Up takes you to the throne room)
 			}
 		}

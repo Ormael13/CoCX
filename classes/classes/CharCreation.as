@@ -69,6 +69,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	//mainView.nameBox.y = 265;
 	mainView.nameBox.text = "";
 	mainView.nameBox.maxChars = 16;
+	mainView.nameBox.restrict = null;
 	//Reset autosave
 	player.slotName = "VOID";
 	player.autoSave = false;
@@ -556,6 +557,8 @@ private function chooseBodyTypeDickgirlOrCuntboy():void {
 private function genericStyleCustomizeMenu():void {
 	clearOutput();
 	mainView.nameBox.visible = false;
+	mainView.nameBox.maxChars = 16;
+	mainView.nameBox.restrict = null;
 	outputText("Choose a skin complexion, hair color, and set your height before you proceed.\n\n");
 	outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
 	outputText("Skin tone: " + player.skinTone + "\n");
@@ -729,7 +732,7 @@ private function confirmHeight():void {
 		doNext(setHeight);
 		return;
 	}
-	player.tallness = int(mainView.nameBox.text)
+	player.tallness = int(mainView.nameBox.text);
 	mainView.nameBox.maxChars = 16;
 	mainView.nameBox.restrict = null;
 	outputText("You'll be " + Math.floor(player.tallness / 12) + " feet and " + player.tallness % 12 + " inches tall. Is this okay with you?", true)

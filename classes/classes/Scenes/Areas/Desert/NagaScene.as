@@ -26,7 +26,7 @@ public function nagaEncounter():void {
 			if (flags[kFLAGS.CODEX_ENTRY_NAGAS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_NAGAS] = 1;
 				outputText("<b>New codex entry unlocked: Nagas!</b>\n\n")
-			}			
+			}
 			outputText("You wonder how it is that you can understand her now. Perhaps eating and drinking everything you find isn't the greatest idea after all, and as a result you're hallucinating? \"<i>It's been so long since I last saw another of my scaly kin,</i>\" she hisses softly, pulling you out of your introspection. \"<i>I had almost forgotten how good it is to be able to look at the sleek and powerful curves our kind possess. This place can make you forget, if you aren't too careful.</i>\" As strange as it sounds in your head, you are surprised at how she doesn't hold her s's. You aren't quite sure why you thought that would make sense.\n\n", false);
 			outputText("You relax a little as she slithers over to you, though you're still wary of possibly being attacked despite the bright smile on her face. When she is close enough to you, she surprises you again by draping her arms around your shoulders in a friendly hug and pressing her chest firmly against you. You jump slightly at the sudden embrace, but slowly wrap your arms around her waist and pull her closer to you.\n\n", false);
 		}

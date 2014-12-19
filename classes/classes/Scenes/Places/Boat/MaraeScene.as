@@ -1,13 +1,35 @@
-﻿package classes.Scenes.Places.Boat{
+﻿package classes.Scenes.Places.Boat
+{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 
-	public class MaraeScene extends AbstractBoatContent{
+	public class MaraeScene extends AbstractBoatContent implements TimeAwareInterface {
 
-	public function MaraeScene()
-	{
-	}
+		public function MaraeScene() {
+			CoC.timeAwareClassAdd(this);
+		}
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			if (model.time.hours > 23) {
+				if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0) { //Marae met 2nd time?
+					if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) { //If flower hasn't been burned down yet
+						if (flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) { //Grow flower if it isn't fully grown.
+							flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER]++;
+						}
+					}
+				}
+				if (flags[kFLAGS.HOLLI_FUCKED_TODAY] == 1) flags[kFLAGS.HOLLI_FUCKED_TODAY] = 0; //Holli Fuck Tracking
+			}
+			return false;
+		}
+		
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
 
 public function encounterMarae():void {
 	spriteSelect(40);
@@ -104,13 +126,13 @@ public function encounterMarae():void {
 				outputText("Spellbound, you watch as she forces more and more fingers into her hungry flower-hole, \"<i>Ever since then, I've just been drinking in more and corruption, and waiting for someone to come here and help fill my hole.  I've played with my flower for what has felt like days on end.  Every time I come harder and harder.  The more I let go the better it is.  Do you know what I did this morning?  I let my branches grow tentacles to fuck my mouth and pussy at the same time.  I came over and over and over, and then I had my roots pull in all the cum they could find to fill my womb with.</i>\"\n\n", false);
 				outputText("You gasp at the change she has gone through, getting more than a little turned on yourself.  Thinking that a once chaste goddess has been reduced to a horny slut makes you wonder how you stand any chance of victory.  Marae keeps up her show, \"<i>It's so good.  Come join me in it.  I gave in to the pleasure already.  If you look behind me, you can see what's left of my soul.  I could feel it dripping out through my cunny a little bit each time I came.  After a while it flowed together and started to crystalize.  I think the demons call it lethicite, but I just wish I still had a soul so I could do it all over again.  Come fuck me, I want to watch you go mad while you cum out your soul.</i>\"\n\n", false);
 				outputText("It sounds like a very pleasant offer, but it would mean the total abandonment of your reasons for coming here.   You could probably get away if you were to run, she doesn't seem to be nearly as powerful.  Or you could risk trying to steal the lethicite before making your getaway, but it wouldn't be hard for her to catch you that close.", false);
-				simpleChoices("Run",2078,"Lethicite",maraeStealLethicite,"Accept",maraeBadEnd,"FIGHT!",promptFightMarae1,"",0);
+				simpleChoices("Run",runFromMarae,"Lethicite",maraeStealLethicite,"Accept",maraeBadEnd,"FIGHT!",promptFightMarae1,"",0);
 			}
 			//Repeat corrupt meeting
 			else {
 				outputText("Marae smiles and leans forwards, cupping her breasts in her hands.  Amazingly, she flows out from the tree, standing as a free woman before you.  She massages her G-sized breasts, winking lewdly and pinching her shining purplish nipples, squeezing out droplets of honey-colored sap.  She blows you a kiss while the flower at her groin opens welcomingly.  She moans, \"<i>Reconsider my offer yet, " + player.short + "?  I won't force you, but don't you want to spend eternity in heaven with a living goddess?</i>\"", false);
 				//Yes - accept, No- run
-				doYesNo(maraeBadEnd, 2078);
+				doYesNo(maraeBadEnd, runFromMarae);
 				addButton(3, "FIGHT!", promptFightMarae1);
 			}
 		}
@@ -249,9 +271,7 @@ private function maraeStealLethicite():void {
 	else {
 		player.slimeFeed();
 		outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You try to slip by the gauntlet of grabbing tentacles, but fail, getting tripped and ensnared in them like a fly in a spider's web.  You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree.\n\n", false);
-		outputText("\"<i>Awwww, what a nasty deceitful little ", false);
-		if(player.gender <= 1) outputText("boy ", false);
-		else outputText("girl ", false);
+		outputText("\"<i>Awwww, what a nasty deceitful little " + player.mf("boy", "girl"), false);
 		outputText("you are.  You turn me into a steaming hot sex-pot, then have the nerve to come here and try to walk off with my lethicite, all WITHOUT fucking me?  Tsk tsk tsk,</i>\" she scolds, \"<i>I appreciate your ambition, but I can't just let a mortal walk all over me like that.  I'll be taking that,</i>\" she says as she grabs the crystal, and lugs it to the tree underneath you.  She strokes the wood surface lovingly, and a knot dilates until it forms a hole large enough to contain the lethicite.  Marae shoves it inside, and strokes the wood like a pet creature, humming while the bark flows closed, totally concealing the crystal.\n\n", false);
 		outputText("\"<i>Now, that should keep it safe from swift little play-toys like yourself.  What you tried was a bold move, and I respect that; initiative is to be rewarded.   So I'll let you go, just like that,</i>\" she says, snapping her fingers for emphasis.\n\n", false);
 		outputText("The tentacles lower you to the ground, but do not release you from their tight embrace.\n\n", false);
@@ -591,7 +611,7 @@ private function MaraePt2RoundIIIPrizes():void {
 			outputText("<b>(New Perk Gained: Marae's Gift - Fertility)</b>", false);
 		}
 	}
-	doNext(14);
+	doNext(camp.returnToCampUseTwoHours);
 }
 
 public function talkToMaraeAboutMinervaPurification():void {
@@ -619,5 +639,11 @@ private function MaraeIIFlyAway():void {
 	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!", false);
 	doNext(camp.returnToCampUseOneHour);
 }
+
+private function runFromMarae():void {
+	outputText("You turn and run for the boat, leaving the corrupt goddess behind.  High pitched laugher seems to chase you as you row away from the island.", true);
+	doNext(camp.returnToCampUseOneHour);
+}
+
 }
 }

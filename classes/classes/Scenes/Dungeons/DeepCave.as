@@ -1013,7 +1013,7 @@ package classes.Scenes.Dungeons
 				}
 				else if(flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] > 0) {
 					outputText("\n\nThe incubus known as Sean has set up a small stall around the cave entrance, and is busy tending to his shelves and wares.  He's dressed in an incredibly modest, three-piece suit, and nods to you as you approach, \"<i>Let me know if you want to buy anything.  I haven't done much with the cave, so feel free to poke around if you missed anything on your first pass.  I barely use the first room.</i>\"", false);
-					addButton(2, "Shop", incubusShop);
+					addButton(0, "Shop", incubusShop);
 				}
 			}
 		}
@@ -1054,9 +1054,9 @@ package classes.Scenes.Dungeons
 			dungeons.setDungeonButtons(null, null, null, roomGatheringHall);
 			//Had to place the button.
 			if (flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED] == 0) {
-				addButton(2, "Get Sword", getSwordAndGetTrapped);
+				addButton(0, "Get Sword", getSwordAndGetTrapped);
 				if (player.canFly()) {
-					addButton(3, "Fly to Sword", flyToSwordAndGetTrapped);
+					addButton(1, "Fly to Sword", flyToSwordAndGetTrapped);
 				}
 			}
 		}
@@ -1078,10 +1078,10 @@ package classes.Scenes.Dungeons
 					outputText("You step around her and are startled to see that while the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat. If she weren't chained to the ceiling, you suspect she wouldn't even be able to stand under her own power. Her eyes are open, but she's staring blankly ahead, unaware of the world around her, pupils constricted to pinpricks amid the ocean of her dulled pink irises. Like this, she's no threat to anybody. You suppose you could let her go, though it's unclear if she's self-aware enough to even move. Alternately, you could blow off a little steam.", false);
 					//[Free] [Use] [Leave]
 					if (player.gender > 0) {
-						addButton(2, "Free", vala.freeValazLooseCoochie)
+						addButton(0, "Free", vala.freeValazLooseCoochie)
 					}
 					if (player.lust >= 33 && shouldraFollower.followerShouldra()) {
-						addButton(4, "ShouldraVala", shouldraFollower.shouldraMeetsCorruptVala);
+						addButton(1, "ShouldraVala", shouldraFollower.shouldraMeetsCorruptVala);
 					}
 				}
 				//Zetaz defeated 
@@ -1089,7 +1089,7 @@ package classes.Scenes.Dungeons
 					outputText("In the far corner, there is a small woman, her back to you, hanging limply by manacles that keep her suspended in a half-kneel. Rich purple hair hangs in long, clumped strands that sparkle occasionally with a pink glitter. Above her, there is a tarnished bronze nameplate that you think reads 'Vala,' but it's impossible to tell for sure under all the imp graffiti. She does not seem to be conscious.\n\n", false);
 					//Option to investigate her
 					//leftValaAlone()
-					addButton(2, "Faerie", vala.leftValaAlone);
+					addButton(0, "Faerie", vala.leftValaAlone);
 				}
 			}
 			//Not here
@@ -1108,7 +1108,7 @@ package classes.Scenes.Dungeons
 			dungeons.setDungeonButtons(null, roomTortureRoom, roomZetazChamber, null);
 			if(flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS] == 0) {
 				outputText("\n\nA pair of fetishy, discarded straps lies on the floor, half obscured by dust.  It looks like something a goblin would wear.  Sexy!", false);
-				addButton(2, "B.Straps", takeBondageStraps)
+				addButton(0, "B.Straps", takeBondageStraps)
 			}
 		}
 		

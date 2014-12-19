@@ -550,22 +550,35 @@ package classes.Scenes.Dungeons
 			cleanupAfterCombat();
 		}
 
-
+		public function volunteerConfirmation():void {
+			clearOutput();
+			outputText("Are you sure you want to volunteer?  Your adventures will come to an end but you'll contribute to the Sand Witches in expanding their numbers and defeating the demons.");
+			doYesNo(reallyVolunteer, roomCumWitchOffice);
+		}
+		public function reallyVolunteer():void {
+			if(player.hasCock() && (player.gender == 1 || rand(2) == 0)) cumWitchCumPumpBadEnd(true);
+			else turnIntoASammitch(true);
+		}
 		
 		//*PC Loss - Female - Become Sand Witch
-		public function turnIntoASammitch():void {
+		public function turnIntoASammitch(volunteered:Boolean = false):void {
 			clearOutput();
-			outputText("Helplessly, you ");
-			if(player.lust > 99) {
-				if(player.hasVagina()) outputText("dig your hands into your loins, frigging your hungry cunt so hard your juices splatter the Witch's robe.");
-				else outputText("dig your finger into your [asshole], frigging it like your life depended on it.");
+			if (!volunteered) {
+				outputText("Helplessly, you ");
+				if(player.lust > 99) {
+					if(player.hasVagina()) outputText("dig your hands into your loins, frigging your hungry cunt so hard your juices splatter the Witch's robe.");
+					else outputText("dig your finger into your [asshole], frigging it like your life depended on it.");
+				}
+				else outputText("try to rise, but all you manage to do is slip back down to the ground.");
+				outputText("  The Cum Sorceress smiles and releases her staff.  Instead of clattering to the ground, it dematerializes a piece at a time, fading away in a way that would be mesmerizing were you not otherwise occupied.  She hikes her robes up and pulls off her hat with them, shaking her surprisingly light, blonde hair free.  \"<i>Now, all that got me pretty worked up, and I don't think the girls will mind if I give you your first sampling of cum witchery.  What do you think, hun?</i>\" she asks, glancing back towards the comatose witch behind her.");
+				
+				outputText("\n\n\"<i>i'z fine...</i>\" a quiet voice draws, barely loud enough to be heard.");
+				
+				outputText("\n\nYour captor flashes you a smile and giggles, \"<i>See?  I told you they wouldn't mind.  Now, ");
 			}
-			else outputText("try to rise, but all you manage to do is slip back down to the ground.");
-			outputText("  The Cum Sorceress smiles and releases her staff.  Instead of clattering to the ground, it dematerializes a piece at a time, fading away in a way that would be mesmerizing were you not otherwise occupied.  She hikes her robes up and pulls off her hat with them, shaking her surprisingly light, blonde hair free.  \"<i>Now, all that got me pretty worked up, and I don't think the girls will mind if I give you your first sampling of cum witchery.  What do you think, hun?</i>\" she asks, glancing back towards the comatose witch behind her.");
-			
-			outputText("\n\n\"<i>i'z fine...</i>\" a quiet voice draws, barely loud enough to be heard.");
-			
-			outputText("\n\nYour captor flashes you a smile and giggles, \"<i>See?  I told you they wouldn't mind.  Now, ");
+			else {
+				outputText("The Cum Sorceress smiles and giggles, \"<i>So you want to become a Sand Witch?  Good, we need more.  Now, ");
+			}
 			if(player.pregnancyType == 0) outputText("let's go ahead and get your first daughter inside you, shall we?");
 			else outputText("let's go ahead and have some fun, shall we?  We'll have to wait until you pop out whatever's in your womb before I give you your first witch child.");
 			outputText("  There will be plenty of time to make you one of us while we're waiting.</i>\"");
@@ -646,17 +659,23 @@ package classes.Scenes.Dungeons
 			outputText("\n\nStill, as you massage her quaking testes and drink down her delicious jism, you have to think, \"<i>Life is good.</i>\"");
 			
 			doBadEnd();
+			removeButton(1);
 		}
 		//*Male Loss - Turned Into Cum Pump
-		public function cumWitchCumPumpBadEnd():void {
+		public function cumWitchCumPumpBadEnd(volunteered:Boolean = false):void {
 			clearOutput();
-			outputText("Laid low by ");
-			if(player.HP < 1) outputText("your wounds");
-			else outputText("by the lust coursing through your veins");
-			outputText(", you slump over against a desk, leaning heavily on it for support while ");
-			if(player.HP < 1) outputText("you struggle to rise");
-			else outputText("you struggle to get your crotch");
-			outputText(".");
+			if (!volunteered) {
+				outputText("Laid low by ");
+				if(player.HP < 1) outputText("your wounds");
+				else outputText("by the lust coursing through your veins");
+				outputText(", you slump over against a desk, leaning heavily on it for support while ");
+				if(player.HP < 1) outputText("you struggle to rise");
+				else outputText("you struggle to get your crotch");
+				outputText(".");
+			}
+			else {
+				outputText("You tell the Cum Witch that you're going to volunteer in expanding the numbers.  She smiles at you.");
+			}
 			outputText("\n\n\"<i>Let me help you with that,</i>\" the robed beauty whispers as she deftly removes your [armor], leaving you bare and exposed, naked to her casual caresses and lecherous looks.  \"Such a lovely " + player.mf("male","hermaphroditic") + " specimen");
 			if(player.cumQ() > 1000) {
 				if(player.balls > 0) outputText(" and such virile, cum-swollen testes.  An excellent breeder for sure!");
@@ -770,6 +789,7 @@ package classes.Scenes.Dungeons
 			
 			//[GAME OVER]
 			doBadEnd();
+			removeButton(1);
 		}
 		//*Repeat Desert Loss Male
 		public function repeatLoseToCumWitchForDudes():void {
@@ -2040,10 +2060,8 @@ package classes.Scenes.Dungeons
 		//*Encounter:
 
 		public function sandWitchMotherFriendlyMenu():void {
-			if(monster.short != "Sand Mother") {
-				startCombat(new SandMother(),true);
-				monster.HP = 0;
-			}
+			startCombat(new SandMother(),true);
+			getGame().inCombat = false;
 			menu();
 			if(flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) addButton(0,"StopAttacking",leaveAloneSendLackeysToggle);
 			else addButton(0,"StartAttacking",leaveAloneSendLackeysToggle);
@@ -2391,11 +2409,8 @@ package classes.Scenes.Dungeons
 		//>Sets to resisting with options for repeat rapes.
 		public function fuckTheSandMothersCunt():void {
 			clearOutput();
-			if(!getGame().inCombat) {
-				startCombat(new SandMother(),true);
-				monster.HP = 0;
-				getGame().inCombat = false;
-			}
+			startCombat(new SandMother(), true);
+			getGame().inCombat = false;
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			outputText("You admire your prize for a moment, reveling triumphantly in your victory as you hastily disrobe.  The Sand Mother, defeated and weak, declares, \"<i>Fine then, do as you will.  You won't break me.</i>\"  The venom in her voice takes you off-guard - she still thinks you're a demonic agent!  You shrug and roll her over, pulling her up onto her hands and knees.  She can think what she wants, but you're going to tap her super-curvy body regardless.  You smack the weakened Queen through her sheer robes and admire the ripple that moves from one side of her well-endowed tush to the other.");
@@ -4063,7 +4078,7 @@ package classes.Scenes.Dungeons
 			if(silly()) outputText("  Clearly, if you wanted to, you could put some extra meat in a sand witch.");
 			dungeons.setDungeonButtons(roomWestHall1, null, null, null);
 			if (player.hasCock() && player.lust >= 33) {
-				addButton(2, "Fuck Witches", knockUpSomeDoubleStuffedSandWitches);
+				addButton(0, "Fuck Witches", knockUpSomeDoubleStuffedSandWitches);
 			}
 		}
 		public function roomWestHall2():void {
@@ -4081,7 +4096,7 @@ package classes.Scenes.Dungeons
 					return;
 				}
 				outputText("\n\nQuite an unusual sight awaits you in this chamber.  Sitting in an oversized pot is what looks to be the overly busty, plant girl you encountered earlier, Essrayle.  She's changed quite a bit since you last saw her, however.  While her inhumanly smooth, elfin face seems to be unchanged, the rest of her verdant body seems to have been warped into a hyper-sexual parody of a fertility idol, with features that echo the nomadic sand witch tribe.");
-				addButton(2, "Essrayle", kGAMECLASS.forest.essrayle.approachTrappedEssy);
+				addButton(0, "Essrayle", kGAMECLASS.forest.essrayle.approachTrappedEssy);
 			}
 		}
 		public function roomNursery():void {
@@ -4097,10 +4112,10 @@ package classes.Scenes.Dungeons
 			dungeons.setDungeonButtons(roomWestHall2, null, null, null);
 			if(flags[kFLAGS.SANDWITCH_THRONE_UNLOCKED] == 0) {
 				outputText("\n\nThere is also a lever on the floor.  Looking closely at it, it appears that it connects with machinery that leads to the east...");
-				addButton(1, "Pull Lever", pullLever);
+				addButton(0, "Pull Lever", pullLever);
 			}
-			addButton(2, "Brown Pill", takeBarrenPills);
-			addButton(3, "Pink Pill", takeFertilePills);
+			addButton(1, "Brown Pill", takeBarrenPills);
+			addButton(2, "Pink Pill", takeFertilePills);
 		}
 		public function roomEastHall1():void {
 			kGAMECLASS.dungeonLoc = 31;
@@ -4122,7 +4137,7 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.MET_MILK_SLAVE] = 1;
 			if(flags[kFLAGS.MILK_NAME] is Number) {
 				outputText("  There are no faucets or water sources that you can see, but your unasked questions are answered when a heavy, liquid sloshing sound emanates from the corner.  The source of the noise reveals itself to be a tit-encumbered, black-skinned human girl.  She drags her milk-swollen mammaries up to the edge of the tub and asks in a breathy, excited voice, \"<i>Bath time?</i>\"  Whoever she was, the witches seem to have broken her utterly - she's interested in nothing but being milked or lounging in her corner.  The way out lies west.");
-				addButton(2, "Bath Time", milkBathsAhoy);
+				addButton(0, "Bath Time", milkBathsAhoy);
 			}
 		}
 		public function roomEastHall2():void {
@@ -4145,9 +4160,11 @@ package classes.Scenes.Dungeons
 			if(flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) {
 				//{SAND WITCHES NOW FRIENDLY}
 				outputText("The cum witch is here, pounding away at one of her sister's cunts, like usual.  She seems to CONSTANTLY excrete her jism into her partner's many cunt-folds, but as her passion and speed rises, the flow thickens, eventually filling the poor milk-witch's wombs entirely.  They go at it like animals for a few seconds more, then separate after a climactic orgasm that leaves a puddle of spooge inches deep on part of the uneven floor.  The cum-witch moves her insensate sister to rest on a nearby bench before putting on her hat and robes.  She winks at you and offers, \"<i>Well, I hope you enjoyed the show, interloper.  Did you come here for some of my gift, or something else?</i>\"");
+				addButton(12, "East", roomCumWitchBedroom);
 				//{VOLUNTEER FOR SERVICE: BAD-END, BLESSING: +CUM PRODUCTION}
+				addButton(0, "Volunteer", volunteerConfirmation, null, null, null, "Volunteer to become a Cum Witch. \n\nThis will end your adventures.");
 				if (flags[kFLAGS.BEEN_BLESSED_BY_CUM_WITCH] == 0) {
-					addButton(2, "Blessing", friendlyCumWitchBlessing);
+					addButton(1, "Blessing", friendlyCumWitchBlessing, null, null, null, "Receive a blessing from the Cum Witch.");
 				}
 			}
 			else {
@@ -4171,11 +4188,12 @@ package classes.Scenes.Dungeons
 				//{CUM WITCH BEATEN}
 				else {
 					outputText("This room is absolutely, unequivocally inundated with the scent of spunk.  Sure, you note there's a few grates built into the floor to drain off most of it, but it hasn't stopped a number of huge puddles from building up all over this room, likely the result of the two semi-conscious women in this room.  One, a recently-bred sand witch got the fucking of her life from the other, a cum witch.  Both are front-down in jizz, their abused bodies quivering and weak.  The cum witch had tried to fight you, but she was no match for your superior technique.");
+					addButton(12, "East", roomCumWitchBedroom);
 					//Lust:
 					if(player.lust >= 33) {
 						outputText("\n\nYou could probably pull the cum witch up and sate yourself on her, if you wanted.  She doesn't seem in any shape to resist.");
 						//lust win menu.
-						addButton(2, "Sex", cumWitchDefeated);
+						addButton(0, "Sex", cumWitchDefeated, null, null, null, "Use the Cum Witch to get off.");
 					}
 				}
 			}
@@ -4192,7 +4210,7 @@ package classes.Scenes.Dungeons
 			outputText("<b><u>Sand Mother's Throne</u></b>\n", true);
 			outputText("This chamber is lit by swirling vortexes of magical colors, each hue dancing around another in coordinated motions.  The walls are made of hewn sandstone inlaid with ivory engravings that appear to depict what must be flowing milk.  Ahead there is a huge, white throne, also made from ivory.  It is a magnificent piece of craftsmanship.  Clearly, you have found the leader's throne room.  There is a robed figure atop it.");
 			dungeons.setDungeonButtons(null, roomSacrificalAltar, null, null);
-			addButton(2, "Approach", sandMotherStuffGOA);
+			addButton(0, "Approach", sandMotherStuffGOA);
 		}
 	}
 

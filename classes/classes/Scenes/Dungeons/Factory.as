@@ -1470,9 +1470,9 @@ package classes.Scenes.Dungeons
 			if(flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] > 0) {
 				if(player.hasKeyItem("Iron Key") < 0) {
 					outputText("  It seems your opponent dropped a small iron key as she fled.", false);
-					addButton(2, "Iron Key", takeIronKey, null, null, null, "Pick up the iron key. It looks like it might unlock the door in this factory.");
+					addButton(0, "Iron Key", takeIronKey, null, null, null, "Pick up the iron key. It looks like it might unlock the door in this factory.");
 				}
-				addButton(4, "Coffee", drinkCoffee, null, null, null, "Drink some coffee.");
+				addButton(1, "Coffee", drinkCoffee, null, null, null, "Drink some coffee.");
 				spriteSelect(96);
 			}
 			else {
@@ -1573,11 +1573,11 @@ package classes.Scenes.Dungeons
 					outputText("You realize there are enough pieces here to put together a breast-milking pump or a cock-milker.  ", false);
 					if(player.hasKeyItem("Cock Milker") >= 0) outputText("\nYou already have a cock milker.\n", false);
 					else {
-						addButton(3, "Cock Milker", buildCockMilker);
+						addButton(1, "Cock Milker", buildCockMilker);
 					}
 					if(player.hasKeyItem("Breast Milker") >= 0) outputText("\nYou already have a breast milker.\n", false);
 					else {
-						addButton(2, "Breast Milker", buildBreastMilker);
+						addButton(0, "Breast Milker", buildBreastMilker);
 					}
 				}
 			}
@@ -1598,7 +1598,7 @@ package classes.Scenes.Dungeons
 			else {
 				outputText("The chamber is significantly emptier since you've shut down this factory.  Roughly half the girls appear to have left.  The rest seem to be pre-occupied by fucking each other in a massive orgy.  A few enterprising ladies have found leather outfits and appear to be helping to manually administer the chemical cocktails to those engaged in rampant sexual exploits.  It seems some of them preferred a life of near-constant orgasm to their freedom.  There is a door to the east marked as 'EXIT', and a stairwell along the south wall that leads to an overseer's office.", false);
 				outputText("\n\nOne of the leather-clad ladies steps over and offers, 'Would you like a dose?  You look like you need to relieve some tension...", false);
-				addButton(2, "Tension", doTensionRelease);
+				addButton(0, "Tension", doTensionRelease);
 			}
 			addButton(5, "Upstairs", roomForemanOffice);
 		}
@@ -1623,7 +1623,7 @@ package classes.Scenes.Dungeons
 			}
 			else {
 				if (player.hasKeyItem("Supervisor's Key") < 0) {
-					addButton(2, "Desk", takeSupervisorKey, null, null, null, "Check the desk for something.");
+					addButton(0, "Desk", takeSupervisorKey, null, null, null, "Check the desk for something.");
 				}
 			}
 		}
@@ -1646,8 +1646,8 @@ package classes.Scenes.Dungeons
 			}
 			dungeons.setDungeonButtons(null, null, roomForemanOffice, null);
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
-				addButton(3, "Valves", factoryOverload, null, null, null, "Overload the valves. This may have unintended consequences but the factory will suffer catastrophe and shut down forever.");
-				addButton(4, "Shutdown", factoryShutdown, null, null, null, "Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.");
+				addButton(0, "Valves", factoryOverload, null, null, null, "Overload the valves. This may have unintended consequences but the factory will suffer catastrophe and shut down forever.");
+				addButton(1, "Shutdown", factoryShutdown, null, null, null, "Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.");
 			}
 		}
 		
@@ -1659,22 +1659,22 @@ package classes.Scenes.Dungeons
 			if(flags[kFLAGS.FACTORY_TAKEN_LACTAID] > 0) {
 				if(flags[kFLAGS.FACTORY_TAKEN_LACTAID] < 5) {
 					outputText("There is a crate with " + num2Text(5 - flags[kFLAGS.FACTORY_TAKEN_LACTAID]) + " bottles of something called 'Lactaid' inside.\n\n", false);
-					addButton(2, "Lactaid", takeLactaid);
+					addButton(0, "Lactaid", takeLactaid);
 				}
 			}
 			else {
 				outputText("There is an unopened crate with five bottles of something called 'Lactaid' inside.\n\n", false);
-				addButton(2, "Lactaid", takeLactaid);
+				addButton(0, "Lactaid", takeLactaid);
 			}
 			if(flags[kFLAGS.FACTORY_TAKEN_GROPLUS] > 0) {
 				if(flags[kFLAGS.FACTORY_TAKEN_GROPLUS] < 5) {
 					outputText("There is a crate with " + num2Text(5 - flags[kFLAGS.FACTORY_TAKEN_GROPLUS]) + " bottles of something called 'Gro+' inside.\n\n", false);
-					addButton(3, "GroPlus", takeGroPlus);
+					addButton(1, "GroPlus", takeGroPlus);
 				}
 			}
 			else {
 				outputText("There is an unopened crate with five bottles of something called 'Gro+' inside.\n\n", false);
-				addButton(3, "GroPlus", takeGroPlus);
+				addButton(1, "GroPlus", takeGroPlus);
 			}
 		}
 		
