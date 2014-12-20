@@ -2426,7 +2426,7 @@ private function talkAboutLiannasLubeSpray():void {
 	
 	outputText("\n\nShe's been experimenting on her body?  Doesn't that seem kind of reckless, you ask her.");
 	
-	outputText("\n\nShe shrugs.  \"<i>Maybe, but its not like I have anyone else to test my experiments on.  I do suffer from some side-effects due to my experiments, but it's all good... I think.</i>\"");
+	outputText("\n\nShe shrugs.  \"<i>Maybe, but it's not like I have anyone else to test my experiments on.  I do suffer from some side-effects due to my experiments, but it's all good... I think.</i>\"");
 	
 	outputText("\n\nThat still seems a bit foolish, but you decide it's not your place to lecture.");
 	
@@ -2535,7 +2535,7 @@ Aside from the effects you suffered through earlier, you don't notice any other 
 You realize your ass still feels moist and clench your butt, you squeak with surprise as {some/even more} juices are squeezed out of your [asshole].  {<b>Your anus is now permanently wet, ensuring it will always be lubed. </b> / <b>Your anus is even wetter, ensuring even better lubrication</b>}
 }
 {If Increasing vaginal wetness (Must have vagina)
-You notice your vagina is still dripping, and realize that its not getting any drier.  <b>Your vaginal wetness has been increased.</b>
+You notice your vagina is still dripping, and realize that it's not getting any drier.  <b>Your vaginal wetness has been increased.</b>
 }
 {If Increasing Lactation (Must already be lactating)
 Your [breasts] tingle softly, and when you massage them you gasp as a small jet of milk sprays forward, somehow you know that <b>your milk production has increased.</b>
