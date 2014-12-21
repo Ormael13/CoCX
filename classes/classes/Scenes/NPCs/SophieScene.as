@@ -1133,7 +1133,7 @@ private function fuckDatClit():void {
 		else if(player.cumQ() < 250) outputText("It leaves a thick puddle of seed dripping from Sophie's back.  ", false);
 		else outputText("It leaves a thick puddle of seed that splatters off Sophie's back and fills the nest to the brim.  ", false);
 	}
-	outputText("She's breathing hard but hardly close to getting off, and she purrs, \"<i>I'm not done with you yet, cutey.  Just keep that clitty hard inside me and let me squeeze until I cum.  You can pass out if its too much for you.</i>\"\n\n", false);
+	outputText("She's breathing hard but hardly close to getting off, and she purrs, \"<i>I'm not done with you yet, cutey.  Just keep that clitty hard inside me and let me squeeze until I cum.  You can pass out if it's too much for you.</i>\"\n\n", false);
 	
 	outputText("She's not... not done yet?  You try to pull out, but with the compulsion and the exhaustion of your orgasm, it's impossible.  Ah!  She squeezes again and your eyes cross for a moment.  Everything is still so sensitive!  You can't stand this for long.  ", false);
 	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("Juice dribbles down your " + player.legs() + " as your body enjoys the treatment.  ", false);
