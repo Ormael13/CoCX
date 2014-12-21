@@ -30,6 +30,7 @@ package classes.Items.Armors
 				game.flags[kFLAGS.MET_VALERIA]++;
 			}
 			outputText("\n\n\"<i>Well alright then, [name]!</i>\" Valeria says excitedly, \"<i>Let's go!</i>\"\n\n");
+			game.awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
 		}
 		
 		override public function removeText():void { //Produces any text seen when removing the armor normally

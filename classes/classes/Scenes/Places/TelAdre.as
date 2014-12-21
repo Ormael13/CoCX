@@ -1811,7 +1811,7 @@ public function carpentryShopBuySetNo():void {
 public function carpentryShopBuyNails():void {
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0)
 	{
-		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to two hundred nails. I'll be selling nails at a price of four gems per nail.</i>\" \n\n", true);
+		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to two hundred nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n", true);
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200", false)
 		else outputText("Nails: " + 0 + "/200", false)
 		addButton(0, "Buy 10", carpentryShopBuyNailsAmount, 10);
@@ -1830,7 +1830,7 @@ public function carpentryShopBuyNails():void {
 
 private function carpentryShopBuyNailsAmount(amount:int):void {
 	nails = amount;
-	outputText("You ask him for " + amount + " nails. He replies \"<i>That'll be " + (amount * 4) + " gems, please.</i>\" \n\nDo you buy the nails?", true);
+	outputText("You ask him for " + amount + " nails. He replies \"<i>That'll be " + (amount * 2) + " gems, please.</i>\" \n\nDo you buy the nails?", true);
 	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
 }
 
@@ -1842,11 +1842,11 @@ private function carpentryShopBuyNailsYes():void {
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] += nails;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
 		player.addKeyValue("Carpenter's Toolbox", 1, nails);
-		outputText("You hand over " + (nails * 4) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n");
+		outputText("You hand over " + (nails * 2) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n");
 		if (player.keyItemv1("Carpenter's Toolbox") > 200)
 		{
 			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n", false);
-			player.gems += ((player.keyItemv1("Carpenter's Toolbox") - 200) * 4);
+			player.gems += ((player.keyItemv1("Carpenter's Toolbox") - 200) * 2);
 			player.addKeyValue("Carpenter's Toolbox", 1, -(player.keyItemv1("Carpenter's Toolbox") - 200));
 		}
 		outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200");
@@ -1858,7 +1858,7 @@ private function carpentryShopBuyNailsYes():void {
 
 //Buy wood
 public function carpentryShopBuyWood():void {
-	outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 25 gems per wood plank.</i>\" \n\n", true);
+	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 20 gems per wood plank.</i>\" \n\n", true);
 	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100", false);
 	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
 	addButton(1, "Buy 20", carpentryShopBuyWoodAmount, 20);
@@ -1870,22 +1870,22 @@ public function carpentryShopBuyWood():void {
 
 private function carpentryShopBuyWoodAmount(amount:int):void {
 	wood = amount;
-	outputText("You ask him for " + amount + " wood planks. He replies \"<i>That'll be " + (amount * 25) + " gems, please.</i>\" \n\nDo you buy the wood?", true);
+	outputText("You ask him for " + amount + " wood planks. He replies \"<i>That'll be " + (amount * 20) + " gems, please.</i>\" \n\nDo you buy the wood?", true);
 	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
 }
 
 private function carpentryShopBuyWoodYes():void {
-	if (player.gems >= (wood * 25))
+	if (player.gems >= (wood * 20))
 	{
-		player.gems -= (wood * 25);
+		player.gems -= (wood * 20);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] += wood;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
-		outputText("You hand over " + (wood * 25) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n", true);
+		outputText("You hand over " + (wood * 20) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n", true);
 		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 100)
 		{
 			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n", false);
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 100) * 25);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 100) * 20);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 100);
 		}
 		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100");

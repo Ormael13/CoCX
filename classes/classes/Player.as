@@ -1379,7 +1379,7 @@ use namespace kGAMECLASS;
 		 * @param	nl
 		 */
 		public function refillHunger(amnt:Number = 0, nl:Boolean = true):void {
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0)
 			{
 				kGAMECLASS.awardAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN);
 				var oldHunger:Number = hunger;

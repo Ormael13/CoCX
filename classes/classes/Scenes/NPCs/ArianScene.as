@@ -127,6 +127,7 @@ public function arianMF(boy:String,girl:String):String {
 			if (flags[kFLAGS.ARIAN_BREASTS] == 0) return boy;
 			else return girl;
 		}
+		else if (flags[kFLAGS.ARIAN_BREASTS] >= 2) return girl;
 		else return boy;
 	}
 	return girl;

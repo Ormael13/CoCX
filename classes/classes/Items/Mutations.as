@@ -9529,5 +9529,15 @@
 				return;
 			}
 		}
+		
+		public function prisonBread():void {
+			outputText("You eat the stale, flavorless brick of bread. It satisfies your hunger, but not much else.");
+			player.refillHunger(40);
+		}
+		
+		public function prisonCumStew():void {
+			outputText("You look at the bowl full of cum with bits of soggy bread floating in it. The thought of consuming such a thing disgusts and horrifies you, but you know you must eat if it you are going to keep your strength and willpower reserves up. It fills you with shame, but you slowly consume the sticky soup.");
+			player.refillHunger(20);
+		}
 	}
 }

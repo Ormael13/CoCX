@@ -48,7 +48,7 @@ package classes {
 				dynStats("cor", (player.jewelryEffectMagnitude/10));
 			}
 			//Hunger! No effect if hunger is disabled, even if your hunger is at 0/100.
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0) {
 				var multiplier:Number = 1.0
 				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
@@ -74,13 +74,19 @@ package classes {
 				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = 100; //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
 				if (player.hunger <= 0)
 				{
-					//Lose HP and makes fatigue go up. Lose body weight and muscles.
-					player.takeDamage(player.maxHP() / 25);
-					fatigue(2);
-					if (rand(3) == 0) player.buttRating--;
-					if (rand(3) == 0) player.hipRating--;
-					dynStats("str", -0.5);
-					dynStats("tou", -0.5);
+					if (flags[kFLAGS.IN_PRISON] > 0) {
+						kGAMECLASS.prison.changeWillpower(-1);
+						fatigue(2);
+					}
+					else {
+						//Lose HP and makes fatigue go up. Lose body weight and muscles.
+						player.takeDamage(player.maxHP() / 25);
+						fatigue(2);
+						if (rand(3) == 0) player.buttRating--;
+						if (rand(3) == 0) player.hipRating--;
+						dynStats("str", -0.5);
+						dynStats("tou", -0.5);
+					}
 					player.hunger = 0; //Prevents negative
 				}
 				if (player.hunger < 10) {

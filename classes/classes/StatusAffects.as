@@ -122,6 +122,7 @@ package classes
 		public static const PhoukaWhiskeyAffect:StatusAffectType = mk("PhoukaWhiskeyAffect");
 		public static const PostAkbalSubmission:StatusAffectType = mk("Post Akbal Submission");
 		public static const PostAnemoneBeatdown:StatusAffectType = mk("Post Anemone Beatdown");
+		public static const PrisonRestraints:StatusAffectType = mk("Prison Restraints");
 		public static const PureCampJojo:StatusAffectType = mk("PureCampJojo");
 		public static const RathazulArmor:StatusAffectType = mk("RathazulArmor");
 		public static const RepeatSuccubi:StatusAffectType = mk("repeatSuccubi");
