@@ -69,7 +69,7 @@ public function encounterKiha():void {
 		outputText("What do you do?", false);
 		//[Fight] [Ask Why][Buy Passage][Leave]
 		menu();
-		addButton(0, "Fight", meetKihaAndFight, "Fight the dragoness!");
+		addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
 		addButton(1, "Ask Why", askWhy, null, null, null, "Ask Kiha why she's trying to drive you off.");
 		addButton(2, "Buy Passage", offerToBuyPassageFromKiha, null, null, null, "Try to offer Kiha 200 gems to buy passage.");
 		addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
@@ -126,7 +126,7 @@ public function encounterKiha():void {
 			outputText("If you hurry, you might get a word in edge-wise.  What do you do?", false);
 			//[Fight] [Ask Why][Buy Passage][Leave]
 			menu();
-			addButton(0, "Fight", meetKihaAndFight, "Fight the dragoness!");
+			addButton(0, "Fight", meetKihaAndFight, null, null, null, "Fight the dragoness!");
 			addButton(1, "Ask Why", askWhy, null, null, null, "Ask Kiha why she's trying to drive you off.");
 			addButton(2, "Buy Passage", offerToBuyPassageFromKiha, null, null, null, "Try to offer Kiha 200 gems to buy passage.");
 			addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);

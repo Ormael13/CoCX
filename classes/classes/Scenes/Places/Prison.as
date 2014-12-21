@@ -145,6 +145,8 @@ package classes.Scenes.Places
 			mainView.showMenuButton( MainView.MENU_STATS );
 			mainView.showMenuButton( MainView.MENU_PERKS );
 			mainView.showMenuButton( MainView.MENU_APPEARANCE );
+			showStats();
+			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu );
 			if (player.lust >= 30) {
 				if (player.lust >= 100) {
 					outputText("\n\n<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>", false);

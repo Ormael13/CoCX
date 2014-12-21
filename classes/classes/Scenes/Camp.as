@@ -917,17 +917,17 @@ public function stash():Boolean {
 	}
 	//Jewelry box
 	if(player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
-		outputText("Your jewelry box is located ", false);
+		outputText("Your jewelry box is located ");
 		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED])
 		{
-			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER]) outputText("on your dresser inside your cabin.", false);
+			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER]) outputText("on your dresser inside your cabin.");
 			else
 			{
-				if (flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND]) outputText("on your nightstand inside your cabin.", false);
-				else  outputText("under your bed inside your cabin.", false);
+				if (flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND]) outputText("on your nightstand inside your cabin.");
+				else  outputText("under your bed inside your cabin.");
 			}
 		}
-		else outputText("next to your bedroll.", false);	
+		else outputText("next to your bedroll.");	
 		addButton(7, "J.Box Put", inventory.pickItemToPlaceInJewelryBox);
 		if (inventory.jewelryBoxDescription()) addButton(8, "J.Box Take", inventory.pickItemToTakeFromJewelryBox);
 		outputText(".\n\n", false);
@@ -2274,9 +2274,13 @@ private function updateAchievements():void {
 	
 	//Realistic
 	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] >= 168 && flags[kFLAGS.HUNGER_ENABLED] > 0) awardAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING)
-	
+
+	//Holiday
+	if (flags[kFLAGS.NIEVE_STAGE] == 5) awardAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III);
+
 	//General
 	if (flags[kFLAGS.DEMONS_DEFEATED] >= 25 && model.time.days >= 10) awardAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER);
+	
 	
 	var NPCsBadEnds:int = 0; //Check how many NPCs got bad-ended.
 	if (flags[kFLAGS.FACTORY_OMNIBUS_KILLED] > 0) NPCsBadEnds++;

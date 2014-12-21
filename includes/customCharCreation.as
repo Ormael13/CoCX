@@ -78,7 +78,8 @@ public function customPCSetup():void {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 		player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
-	
+		player.createKeyItem("Equipment Storage - Jewelry Box", 0, 0, 0, 0);
+		
 		player.createStatusAffect(StatusAffects.KnowsWhitefire, 0, 0, 0, 0);
 		
 		player.createPerk(PerkLib.HistoryFighter, 		0, 0, 0, 0);

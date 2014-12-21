@@ -772,6 +772,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 	//   Biggus Dickus // Vaginal // Anal // 69+Tail // Tail Pegging // Item/Morph-specific scenes?
 	//-[Invite to Camp] (If KihaAffection >= 200)
 	//-[Leave])
+	menu();
 	addButton(0, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
 	addButton(1, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
 	addButton(2, "InviteCamp", campo, null, null, null, "Invite Kiha to your camp.");
