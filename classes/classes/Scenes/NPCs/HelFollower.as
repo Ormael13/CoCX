@@ -2337,7 +2337,7 @@ private function helAndSluttyHarpyFemale():void
 
 	outputText("\n\nYou slide off of the two insensate girls, using what strength you have left to retrieve your armor. You give Hel a kiss that she returns to the best of her ability, and ruffle Sophie’s head feathers. In a surprising move Helia swirls Sophie around and plants a big kiss on her lips.");
 
-	outputText("\n\n<i>“But dont think this means I want to do it again,”</i> she says before shakily sauntering off to find somewhere to collapse. Sophie simply giggles and curls up to sleep in the puddle of juices the three of you made. You massage your aching muscles and get back to your champion duties.");
+	outputText("\n\n<i>“But don't think this means I want to do it again,”</i> she says before shakily sauntering off to find somewhere to collapse. Sophie simply giggles and curls up to sleep in the puddle of juices the three of you made. You massage your aching muscles and get back to your champion duties.");
 
 	player.orgasm();
 	menu();
