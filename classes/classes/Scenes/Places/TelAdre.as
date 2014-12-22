@@ -1836,9 +1836,9 @@ private function carpentryShopBuyNailsAmount(amount:int):void {
 
 private function carpentryShopBuyNailsYes():void {
 	clearOutput();
-	if (player.gems >= (nails * 4))
+	if (player.gems >= (nails * 2))
 	{
-		player.gems -= (nails * 4);
+		player.gems -= (nails * 2);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] += nails;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
 		player.addKeyValue("Carpenter's Toolbox", 1, nails);
