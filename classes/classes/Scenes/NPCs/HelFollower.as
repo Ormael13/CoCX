@@ -2246,7 +2246,7 @@ private function helAndSluttyHarpyMale():void
 			outputText(" full of cum");
 		 	if (player.cumQ() <= 1000)
 		 	{
-		 		outputText(" untill it overflows");
+		 		outputText(" until it overflows");
 		 		if (player.cumQ() >= 5000) outputText(", pooling around your knees");
 		 	}
 		}
