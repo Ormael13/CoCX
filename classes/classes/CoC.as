@@ -280,7 +280,7 @@
 		public var monk:Number;
 		public var sand:Number;
 		public var giacomo:int;
-		public var beeProgress:Number;
+//Replaced by flag		public var beeProgress:Number;
 //Now in Inventory.as		public var itemStorage:Array;
 //Now in Inventory.as		public var gearStorage:Array;
 		public var temp:int;
@@ -497,7 +497,7 @@
 			monk = 0;
 			sand = 0;
 			giacomo = 0;
-			beeProgress = 0;
+//Replaced by flag			beeProgress = 0;
 
 //			itemStorage = [];
 //			gearStorage = [];

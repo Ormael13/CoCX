@@ -4,6 +4,12 @@
 //Masturbate Menu
 public function masturbateMenu():void {
 	menu();
+	if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE)) {
+		clearOutput();
+		outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch you shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
+		addButton(0, "Next", camp.campMenu);
+		return;
+	}
 	var button:int = 0;
 	if(fappingItems(false)) {
 		addButton(8,"Items",fappingItems);
@@ -778,10 +784,15 @@ public function genderlessMasturbate():void {
 
 //Non-shitty masturbation
 public function masturbateGo():void {
-	outputText("", true);
-	if(inDungeon) {
-		outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.", false);
-		doNext(1);
+	clearOutput();
+	if (player.findStatusAffect(StatusAffects.Dysfunction) >= 0) {
+		outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.");
+		doNext(camp.campMenu);
+		return;
+	}
+	if (inDungeon) {
+		outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.");
+		doNext(camp.campMenu);
 		return;		
 	}
 	if(player.isTaur()) {
