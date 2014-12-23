@@ -428,7 +428,7 @@
 			}
 			else outputText(" your stubby, new tail");
 			outputText(" wagging.");
-			if (player.tailType != 2) outputText(" Never mind that it gets longer and fuzzier with every gulp or that that your");
+			if (player.tailType != 2) outputText(" Never mind that it gets longer and fuzzier with every gulp or that your");
 			else outputText(" Never mind that your");
 			outputText(" tongue is swelling up, wide, flat, and perfect for panting, licking, and lapping up a drink.");
 			player.tailType = 2;

@@ -7,7 +7,7 @@ CoC source from Fenoxo.
 Modifications by everyone at:  
 https://github.com/herp-a-derp/Corruption-of-Champions/graphs/contributors
 
-Check out the wiki for for information and the FAQ.
+Check out the wiki for information and the FAQ.
 
 Everything is copyright Fenoxo (fenoxo.com).
 

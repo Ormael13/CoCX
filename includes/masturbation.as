@@ -1589,7 +1589,7 @@ public function multiTitFuck():Boolean
 			if(holeTotal*2 >= fittableCocks) outputText("You giggle with glee as you realize that you will be able to jam every single one of your " + multiCockDescriptLight() + " into your abused nipples, thanks to double-penetration! ", false);
 			else outputText("With a flash of irritation, you realize that even if you stick two cocks in each hole, you still won't be able to fit all " + num2Text(player.cocks.length) + " of your dicks into your abused tits. Deciding to make the best of it, you prepare to stuff in as many as you can. ", false);
 		} 
-		else outputText("Accepting that you cant do anything about it, you start pushing. ", false);
+		else outputText("Accepting that you can't do anything about it, you start pushing. ", false);
 	}
 	//How wet/milky is this procedure?
 	if(player.averageLactation() == 0)

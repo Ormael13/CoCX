@@ -444,7 +444,7 @@ public function getWinterPudding():void {
 	outputText("You opt for a slice of the tasty treat - you've only got until the festivities wade away, so you might as well take one now!");
 	//[1 x 'Winter Pudding' added to player inventory, player loses 35 gems.]
 	//['Winter Pudding' description in player inventory]
-	//A delicious holiday treat made with pure affection.  The tasty-looking piece of confectionery is begging to be eaten, topped with with a very suspicious layer of white marzipan that contrasts the pudding's dark brown texture.
+	//A delicious holiday treat made with pure affection.  The tasty-looking piece of confectionery is begging to be eaten, topped with a very suspicious layer of white marzipan that contrasts the pudding's dark brown texture.
 	//['Winter Pudding' description when eaten.]
 	outputText("\n\nYou stuff the stodgy pudding down your mouth, the taste of brandy cream sauce and bitter black treacle sugar combining in your mouth.  You can tell by its thick spongy texture that it's far from good for you, so its exclusivity is more than likely for the best.");
 	if(player.thickness < 100 || player.tone > 0) {
