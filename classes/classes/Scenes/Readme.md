@@ -317,7 +317,7 @@ A **Location** is either **Camp**, **Area**, **Place**, **Dungeon**, or **Quest*
 
 ## NPCs
 
-1. If a **NPC** can not be discovered directly by visiting **Location**, put it in _Scenes/NPCs_.
+1. If a **NPC** cannot be discovered directly by visiting **Location**, put it in _Scenes/NPCs_.
 2. If a **NPC** can be made a follower/slave/lover/etc, or contains highly detailed dialogue/scene,
    put it in _Scenes/NPCs_.
 1. If a **NPC** can be met in a specific **Place** or **Dungeon**, put it in its corresponding package.

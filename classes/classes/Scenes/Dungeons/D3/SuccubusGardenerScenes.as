@@ -264,7 +264,7 @@
 			{
 				if (player.wetness() <= 2) outputText(" moistening");
 				else outputText(" soaked");
-				outputText(" crease, and it's all you can not to cry out and thrust back against her.");
+				outputText(" crease, and it's all you can do not to cry out and thrust back against her.");
 			}
 			
 			outputText("\n\nThe succubus idly toys with your [vagina], sometimes rubbing her thumb");
