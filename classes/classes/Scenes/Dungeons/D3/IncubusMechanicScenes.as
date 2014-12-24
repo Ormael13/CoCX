@@ -449,7 +449,7 @@ package classes.Scenes.Dungeons.D3
 			else if (pCuntArea >= (mCockArea * 0.5))
 			{
 				tightFit = true;
-				outputText(" and feel the girthy boner slowly pry your lips further apart. He's so godsdamn big that it feels like its barely fitting inside. The first inch eventually slips into your tightly-clinging lips, forcing an inadvertent clench to run up the length of your channel. Your [vagina] noisily squelches around the slowly inserting member. You're stretched so full, and you're loving every moment of it. His "+ eCockDescript() +" is so goddamn filling, and you've only taken the first few inches! The feel of him sliding through you is so fulfilling, so all-consuming, that you barely notice your [butt] touching down against his crotch");
+				outputText(" and feel the girthy boner slowly pry your lips further apart. He's so goddamn big that it feels like it's barely fitting inside. The first inch eventually slips into your tightly-clinging lips, forcing an inadvertent clench to run up the length of your channel. Your [vagina] noisily squelches around the slowly inserting member. You're stretched so full, and you're loving every moment of it. His "+ eCockDescript() +" is so goddamn filling, and you've only taken the first few inches! The feel of him sliding through you is so fulfilling, so all-consuming, that you barely notice your [butt] touching down against his crotch");
 				if (cType == MECHANIC_HORZ_GOG) outputText(", your belly bulging with his equine shape");
 				else if (cType == MECHANIC_DOG_COCK) outputText(", your lips slurping noisily about his knot");
 				outputText(".");
@@ -792,7 +792,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nThe demon must be able to read the question in your eyes, because he nods understandingly. \"<i>Yes, little mortal, this draught is going to make you wetter and hornier than you can possibly image. That cute little twat you've got is going to be my own personal lubricant-fountain. I suspect you may even manage to learn how to bring yourself off by shifting your [hips] to make your lips rub your [clit] just right.</i>\" He shrugs. \"<i>I don't really care, so long as that cunt of yours stays wet enough to shame the goo-girls at the lake.</i>\" His hand ruffles your hair once more before he steps back to watch you drink this the milky, medicinal goo.");
 
-			outputText("\n\nYou can already feel the first few swallows affecting you. Your [skin] is flushing, worse than before, and your nether-lips are getting so wonderfully slippery that you can feel your moisture beading on your mons. Your [clit] fares little better, swelling up nearly double it's old size");
+			outputText("\n\nYou can already feel the first few swallows affecting you. Your [skin] is flushing, worse than before, and your nether-lips are getting so wonderfully slippery that you can feel your moisture beading on your mons. Your [clit] fares little better, swelling up nearly double its old size");
 			if (player.clitLength > 5) outputText(", even if that makes it truly monstrous indeed");
 			outputText(". It drips long, sticky strands of girlish lust as you swallow, only becoming more soaked as time passes as your body becomes even more productive. A plaintive whimper escapes around the edges of your phallic gag, but your cry falls on deaf ears. The incubus is too busy fitting pipes together beneath you to care.");
 
