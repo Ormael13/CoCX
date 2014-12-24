@@ -834,6 +834,10 @@
 			kGAMECLASS.mainView.statsView.showStatUp(arg);
 		}
 		
+		protected function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
+			return kGAMECLASS.buttonTextIsOneOf(index, possibleLabels);
+		}		
+		
 		protected function getButtonText(index:int):String {
 			return kGAMECLASS.getButtonText(index);
 		}

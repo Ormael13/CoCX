@@ -758,6 +758,14 @@ public function buttonText(buttonName:String):String {
 	return (getButtonText(buttonIndex) || "NULL");
 }
 
+public function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
+	var label:String,
+	buttonText:String;
+
+	buttonText = this.getButtonText(index);
+
+	return (possibleLabels.indexOf(buttonText) != -1);
+}
 
 public function getButtonText(index:int):String {
 	var matches:*;
@@ -768,7 +776,7 @@ public function getButtonText(index:int):String {
 	else {
 		return mainView.bottomButtons[index].labelText;
 	}
-};
+}
 
 // Returns a string or undefined.
 public function getButtonToolTipText(buttonText:String):String

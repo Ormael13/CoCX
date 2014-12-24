@@ -125,7 +125,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 
 			player.gems -= 500;
-
+			statScreenRefresh();
 			outputText("\n\nYou unceremoniously fill a small pouch with 500 gems and toss it to the incubus.");
 
 			outputText("\n\nHe lamely says, \"<i>You know, I wasn't really serious about the gems. Are you sure you don't want to suck my dick instead?</i>\" The demon offers you your bag full of money back.");
@@ -136,8 +136,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nThe platform touches down roughly thirty minutes after your departure, and you head back to camp with all due haste.");
 
-			menu();
-			addButton(0, "Next", getGame().d3.exitD3);
+			doNext(getGame().d3.exitD3);
 		}
 		
 		private function useLiftPostDefeat():void
@@ -148,7 +147,7 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("\n\nThe platform touches down roughly thirty minutes after your departure, and you head back to camp with all due haste.");
 			
-			addButton(0, "Next", getGame().d3.exitD3);
+			doNext(getGame().d3.exitD3);
 		}
 		
 		public function suckIncubusDick():void
@@ -203,8 +202,7 @@ package classes.Scenes.Dungeons.D3
 
 			dynStats("lib+", 5, "cor+", 5, "lus+", 100);
 
-			menu();
-			addButton(0, "Next", getGame().d3.exitD3);
+			doNext(getGame().d3.exitD3);
 		}
 		
 		public function beatDaMechanic(hpVictory:Boolean):void

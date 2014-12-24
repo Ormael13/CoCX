@@ -402,10 +402,348 @@ package classes.Scenes.Dungeons {
 			}
 		}
 		
+		public function chooseRoomToDisplayD3():void {
+			//Basilisk Cave
+			if (getGame().d3._currentRoom == "entrance") {
+				rawOutputText("Basilisk Cave");
+				rawOutputText("\n     [ ]-   ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [ ]    ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [ ]-[ ]");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n-[P]-[ ]    ");
+			}
+			else if (getGame().d3._currentRoom == "tunnel1") {
+				rawOutputText("Basilisk Cave");
+				rawOutputText("\n     [ ]-   ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [ ]    ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [ ]-[ ]");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n-[ ]-[P]    ");
+			}
+			else if (getGame().d3._currentRoom == "antechamber") {
+				rawOutputText("Basilisk Cave");
+				rawOutputText("\n     [ ]-   ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [ ]    ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [P]-[ ]");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n-[ ]-[ ]    ");
+			}
+			else if (getGame().d3._currentRoom == "roomofmirrors") {
+				rawOutputText("Basilisk Cave");
+				rawOutputText("\n     [ ]-   ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [ ]    ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [ ]-[P]");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n-[ ]-[ ]    ");
+			}
+			else if (getGame().d3._currentRoom == "magpiehalls" || getGame().d3._currentRoom == "magpiehalln") {
+				rawOutputText("Basilisk Cave");
+				rawOutputText("\n     [ ]-   ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [P]    ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [ ]-[ ]");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n-[ ]-[ ]    ");
+			}
+			else if (getGame().d3._currentRoom == "tunnel2") {
+				rawOutputText("Basilisk Cave");
+				rawOutputText("\n     [P]-   ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [ ]    ");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n     [ ]-[ ]");
+				rawOutputText("\n      |     ");
+				rawOutputText("\n-[ ]-[ ]    ");
+			}
+			//Lethice's Keep
+			if (getGame().d3._currentRoom == "edgeofkeep") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[P]     ");
+			}
+			else if (getGame().d3._currentRoom == "northentry") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [P] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}			
+			else if (getGame().d3._currentRoom == "southcourtyard") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[P]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}			
+			else if (getGame().d3._currentRoom == "southwestcourtyard") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[P]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "southwestwalk") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [P]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "westwalk") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [P]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "northwestwalk") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[P]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "northwestcourtyard") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [P]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "northcourtyard") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[P]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "northeastcourtyard") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[P] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "northeastwalk") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [P]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "eastwalk") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[P] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "southeastwalk") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [P] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "southeastcourtyard") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[P]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "courtyardsquare") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[P]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "greatlift") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [P] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+		}
+		
 		public function displayMap():void {
 			clearOutput();
 			outputText("<b><font face=\"Courier New\">");
-			chooseRoomToDisplay();
+			if (inRoomedDungeon) chooseRoomToDisplayD3();
+			else chooseRoomToDisplay();
 			outputText("</font></b>");
 			outputText("\n\n<b><u>Legend</u></b>");
 			outputText("\n<font face=\"Courier New\">P</font> - Player Location");

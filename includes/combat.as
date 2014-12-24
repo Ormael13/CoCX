@@ -2020,6 +2020,10 @@ public function awardPlayer():void
 		var bonusGems2:int = monster.gems * 0.15;
 		monster.gems += bonusGems2;
 	}
+	if (player.findPerk(PerkLib.HistoryWhore) >= 0) {
+		var bonusGems3:int = (monster.gems * 0.04) * player.teaseLevel;
+		if (monster.lust >= 100) monster.gems += bonusGems3;
+	}
 	monster.handleAwardText(); //Each monster can now override the default award text
 	if(!inDungeon) doNext(camp.returnToCampUseOneHour);
 	else doNext(1);

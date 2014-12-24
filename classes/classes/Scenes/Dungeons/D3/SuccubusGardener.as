@@ -38,6 +38,7 @@
 			initLibSensCor(85, 60, 100);
 			
 			this.bonusHP = 600;
+			this.fatigue = 0;
 			
 			this.gems = 50 + rand(33);
 			this.level = 20;
@@ -93,7 +94,7 @@
 				if (player.lust >= 100) return;
 			}
 			
-			if (this.HPRatio() <= 0.6)
+			if (this.HPRatio() <= 0.6 && fatigue < 100)
 			{
 				vineHeal();
 			}
@@ -176,6 +177,7 @@
 			
 			this.HP = this.eMaxHP();
 			this.lustVuln += 0.3;
+			this.fatigue += 5;
 		}
 		
 		private function tentagrapple():void

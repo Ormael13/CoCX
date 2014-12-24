@@ -262,7 +262,16 @@ inputManager.AddBindableControl(
 			executeButtonClick(9);
 			return;
 		}
-		
+		// Button 14
+		if (kGAMECLASS.buttonIsVisible(14) && kGAMECLASS.buttonTextIsOneOf(14, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ]))
+		{
+			//trace( "keyboard(): processing space bar for button 9",
+			//	mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
+			//	mainView.getButtonText( 9 ) );
+			mainView.toolTipView.hide();
+			executeButtonClick(14);
+			return;
+		}		
 		// Button 0
 		if (mainView.buttonIsVisible(0) && mainView.buttonTextIsOneOf(0, [ "Next", "Return", "Back" ]))
 		{
