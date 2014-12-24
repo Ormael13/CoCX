@@ -466,8 +466,9 @@ public function turkeyDesertBitches():void {
 	outputText("; her back arches, teats wobbling around your head as she takes your cum, squawking and gobbling gaily as more and more of your virile spunk pours into her, mixing with her own fem-cum and the remnants of the lusty draft your fucked into her.");
 	
 	outputText("\n\n\"<i>Gobble!</i>\" she sighs happily as your cock");
-	if(player.cockTotal() > 1) outputText("s");
-	outputText(" deposite the last of their cream into her, fully stuffing your turkey-girl.  Panting, you let your head rest between her tits a moment long, shaft");
+	if(player.cockTotal() > 1) outputText("s deposit the last of their");
+	else outputText(" deposits the last of its");
+	outputText(" cream into her, fully stuffing your turkey-girl.  Panting, you let your head rest between her tits a moment long, shaft");
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(" wilting inside her until like a broken dam, her cunt");
 	if(player.cockTotal() > 1) outputText(" and ass");
