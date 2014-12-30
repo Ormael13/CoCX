@@ -2443,7 +2443,7 @@ private function lubeSpraySideEffects():void {
 	outputText("So, if she's experimented on herself in the past, that must have gone wrong for her at least once or twice in the past, you comment.");
 	outputText("\n\nShe nods.  \"<i>Yep, it sure did.</i>\"  She rubs her chin in thought.");
 	
-	outputText("\n\n\"<i>One time my tail wound up turning into a tentacle monster... couldn't control it, but it wasn't that bad.</i>\"  You keep your mouth shut, you mind already picturing what she's going to say next.  \"<i>Got me off once or twice...</i>\"  That was predictable, you note to yourself.");
+	outputText("\n\n\"<i>One time my tail wound up turning into a tentacle monster... couldn't control it, but it wasn't that bad.</i>\"  You keep your mouth shut, your mind already picturing what she's going to say next.  \"<i>Got me off once or twice...</i>\"  That was predictable, you note to yourself.");
 	
 	outputText("\n\n\"<i>There was that time when my clit grew so big that I could lick myself without bending over... it was enjoyable for a while.</i>\"  You wonder how she managed to shrink it back down.");
 	outputText("\n\n\"<i>There was that time when I my boobs started vibrating... kinda awkward with my cup size.</i>\"  That would have been a sight to see, but you keep that to myself.");
