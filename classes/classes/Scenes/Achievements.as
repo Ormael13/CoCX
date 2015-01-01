@@ -127,7 +127,7 @@ package classes.Scenes
 			addAchievement("Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS, "Deal 100 damage in one hit.");
 			addAchievement("Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES, "Deal 250 damage in one hit.");
 			addAchievement("Overkill", kACHIEVEMENTS.COMBAT_OVERKILL, "Deal 500 damage in one hit."); //Actually POSSIBLE
-			//addAchievement("Damage Sponge", kACHIEVEMENTS.COMBAT_DAMAGE_SPONGE, "Deal 500 damage in one hit.");
+			//addAchievement("Damage Sponge", kACHIEVEMENTS.COMBAT_DAMAGE_SPONGE, "Take a total of 10,000 damage.");
 			addAchievement("Bloodletter", kACHIEVEMENTS.COMBAT_BLOOD_LETTER, "Deal a total of 50,000 damage.");
 			
 			titleAchievementSection("Holiday Events"); //10 achievements
@@ -195,6 +195,7 @@ package classes.Scenes
 			addAchievement("Now You're Fucking With Portals", kACHIEVEMENTS.GENERAL_FUCK_WITH_PORTALS, "Engage in portal sex with Ceraph.", "", true);
 			addAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD, "Punch a tree until wood falls out... Wait, what?", "", true);
 			addAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER, "Remove cocks from at least three dedickable NPCs. Don't you think they'll miss having their own cocks?", "", true);
+			addAchievement("Up to Eleven", kACHIEVEMENTS.GENERAL_UP_TO_11, "Take your height up to 11 feet.");
 			
 			menu();
 			addButton(13, "" + achievementsEarned + "/" + achievementsTotal + " unlocked", eventParser, 9999);

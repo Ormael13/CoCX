@@ -5,11 +5,14 @@ package classes.Scenes.Places
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
+	import classes.Scenes.Places.Prison.*
 	
 	import coc.view.MainView;
 	
 	public class Prison extends BaseContent
 	{
+		public var ellyScene:EllyScene = new EllyScene()
+		public var scruffyScene:ScruffyScene = new ScruffyScene()
 		
 		public function Prison() 
 		{
@@ -20,6 +23,13 @@ package classes.Scenes.Places
 			flags[kFLAGS.PRISON_STAT_SELFESTEEM] += amount;
 			if (flags[kFLAGS.PRISON_STAT_SELFESTEEM] > 100) flags[kFLAGS.PRISON_STAT_SELFESTEEM] = 100;
 			if (flags[kFLAGS.PRISON_STAT_SELFESTEEM] < 0) flags[kFLAGS.PRISON_STAT_SELFESTEEM] = 0;
+			//Bring up message.
+			if (amount > 0) {
+				
+			}
+			else {
+				
+			}
 		}
 		public function changeWillpower(amount:int = 0):void {
 			flags[kFLAGS.PRISON_STAT_WILLPOWER] += amount;
@@ -27,9 +37,37 @@ package classes.Scenes.Places
 			if (flags[kFLAGS.PRISON_STAT_WILLPOWER] < 0) flags[kFLAGS.PRISON_STAT_WILLPOWER] = 0;
 		}
 		public function changeObedience(amount:int = 0):void {
+			var oldObey:Number = flags[kFLAGS.PRISON_STAT_OBEDIENCE];
 			flags[kFLAGS.PRISON_STAT_OBEDIENCE] += amount;
 			if (flags[kFLAGS.PRISON_STAT_OBEDIENCE] > 100) flags[kFLAGS.PRISON_STAT_OBEDIENCE] = 100;
 			if (flags[kFLAGS.PRISON_STAT_OBEDIENCE] < 0) flags[kFLAGS.PRISON_STAT_OBEDIENCE] = 0;
+			//Bring up message.
+			
+				if(oldObey >= 10 && flags[kFLAGS.PRISON_STAT_OBEDIENCE] < 10)
+				{
+					outputText("\n<b>You now have a strong ability to resist the demands of those who would dominate you.</b>\n", false);
+				}
+				if(oldObey >= 25 && flags[kFLAGS.PRISON_STAT_OBEDIENCE] < 25 || oldObey < 10 && flags[kFLAGS.PRISON_STAT_OBEDIENCE] >= 10)
+				{
+					outputText("\n<b>Your ability to resist the demands of those who would dominate you is now weakened. While you still have a strong innate distaste for being ordered around, you are are finding it hard to see the point in resisting the smaller things.  It's better to conserve your willpower to fight against the truly heinous and demeaning commands... isn't it?</b>", false);
+				}
+				if(oldObey >= 45 && flags[kFLAGS.PRISON_STAT_OBEDIENCE] < 45 || oldObey < 25 && flags[kFLAGS.PRISON_STAT_OBEDIENCE] >= 25)
+				{
+					outputText("\n<b>Your ability to resist the demands of those who would dominate you is now all but broken. The concept of being subservient to another being is still abhorrent to you, but in practice you are finding it far easier to swallow your pride and do as you are to", false);
+				}
+				if(oldObey >= 70 && flags[kFLAGS.PRISON_STAT_OBEDIENCE] < 70 || oldObey < 45 && flags[kFLAGS.PRISON_STAT_OBEDIENCE] >= 45)
+				{
+					outputText("\n<b>Your ability to resist the demands of those who would dominate you is now essentially nonexistent. It still brings you great shame to give up agency over your actions, but you find yourself starting to crave that shame. While you manage to exert the willp", false);
+				}
+				if(oldObey >= 90 && flags[kFLAGS.PRISON_STAT_OBEDIENCE] < 90 || oldObey < 70 && flags[kFLAGS.PRISON_STAT_OBEDIENCE] >= 70)
+				{
+					outputText("\n<b>Your ability to resist the demands of those who would dominate you is now a faint memory. You understand that other people have the ability to determine their own fate, but you instead relish the sweet, shameful, all consuming simplicity of obedience. Whi", false);
+				}
+				if(oldObey < 90 && flags[kFLAGS.PRISON_STAT_OBEDIENCE] >= 90)
+				{
+					outputText("\n<b>The ability to resist the demands of those who would dominate you is now a foreign concept. You are a creature of submission and obedience that exists only to serve at the whim of your betters. On rare occasion you may exert the willpower to resist an ord", false);
+				}
+				
 		}
 		
 		public function prisonCanTrainWorkout():Boolean
@@ -117,9 +155,13 @@ package classes.Scenes.Places
 		
 		public function prisonRoom():void {
 			clearOutput();
+			outputText(images.showImage("prison-cell"), false);
 			outputText("You are in a dimly lit but spacious cell. However, the size of the room is little comfort to you as it is filled with all manner of restraints and torture devices. Eylets, metal rings, bars and hooks are scattered around the ceiling, floor and walls providing a near endless variety of ways to restrain a person. A wooden stockade is installed in the center of the room, a whipping post and a rack stand in one corner, and in another there is a large and ominous floor to ceiling stone box. Mercifully, fresh air and sunlight can enter the room through narrow slit windows opposite the door.\n\n");
-			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] == 0) outputText("The door is locked securely.\n");
-			else outputText("The door is unlocked.\n");
+			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] == 0) outputText("The door is locked securely.\n\n");
+			else outputText("The door is unlocked.\n\n");
+			if (flags[kFLAGS.PRISON_DIRT_LEVEL] == 0) outputText("The room is about as clean as it is going to get.");
+			else if (flags[kFLAGS.PRISON_DIRT_LEVEL] == 1) outputText("The room is a bit messy.");
+			else if (flags[kFLAGS.PRISON_DIRT_LEVEL] >= 2) outputText("The room is <b>unpleasantly dirty.</b>");
 			if(kGAMECLASS.timeQ > 0)
 			{
 				/*if(!kGAMECLASS.campQ)
@@ -165,7 +207,7 @@ package classes.Scenes.Places
 			addButton(0, "Train", trainMenu);
 			addButton(1, "Study", studyMenu);
 			addButton(2, "Restraints", eventParser, 9999, null, null, "Not implemented yet.");
-			addButton(3, "Clean", eventParser, 9999, null, null, "Not implemented yet.");
+			addButton(3, "Clean", cleanCell, null, null, "Not implemented yet.");
 			addButton(4, "Escape", placeholderEscape);
 			addButton(7, "Inventory", inventory.inventoryMenu);
 			addButton(8, "Masturbate", eventParser, 10);
@@ -183,6 +225,10 @@ package classes.Scenes.Places
 			//prisonRoomChoices(_loc_2, _loc_3);
 			//choices(_loc_3[1], _loc_2[1], _loc_3[2], _loc_2[2], _loc_3[3], _loc_2[3], _loc_3[4], _loc_2[4], _loc_3[5], _loc_2[5], _loc_3[6], _loc_2[6], _loc_3[7], _loc_2[7], _loc_3[8], _loc_2[8], _loc_3[9], _loc_2[9], _loc_3[10], _loc_2[10]);
 
+		}
+		
+		private function hopelessPrisoner():void {
+			outputText("\n\nThe muffled screams and moans of one of your fellow prisoners being punished penetrate the thick walls of your cell and echo in the air. The sound reminds you of the hopelessness of your situation.");
 		}
 		
 		//Train physically
@@ -328,9 +374,9 @@ package classes.Scenes.Places
 			menu();
 			addButton(0, "Inner Peace", studyInnerPeace, null, null, null, "Calm your nerves and bring balance to your emotions to improve your self esteem.");
 			addButton(1, "Determination", studyDetermination, null, null, null, "Improve your determination and hone your intelligence.");
-			addButton(2, "Self Pity", eventParser, 9999, null, null, "Not implemented yet.");
-			addButton(3, "Discipline", eventParser, 9999, null, null, "Not implemented yet.");
-			addButton(4, "Manners", eventParser, 9999, null, null, "Not implemented yet.");
+			addButton(2, "Self Pity", studySelfpity, null, null, null, "Attempt to calm your nerves.");
+			addButton(3, "Discipline", studyDiscipline, null, null, null, "Attempt to improve your determination and increase your obedience.");
+			//addButton(5, "Manners", studyManners, null, null, null, "Not implemented yet.");
 			addButton(14, "Back", prisonRoom);
 		}
 		
@@ -342,6 +388,7 @@ package classes.Scenes.Places
 		
 		private function studyDetermination():void {
 			outputText("You turn your thoughts inward in an attempt to improve your determination and strength of will.");
+			changeObedience( -5);
 			//Increase intelligence.
 			if (player.inte < 20) dynStats("inte", 0.5);
 			if (player.inte < 40) dynStats("inte", 0.4);
@@ -351,6 +398,28 @@ package classes.Scenes.Places
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		
+		private function studySelfpity():void {
+			outputText("You turn your thoughts inward in an attempt to calm your nerves and bring balance to your emotions, but end up wallowing in self pity over your hopeless situation instead.");
+			changeSelfEsteem(-5);
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		private function studyDiscipline():void {
+			outputText("You turn your thoughts inward in an attempt to improve your determination, but end up daydreaming about how pleasant it is to be told what to do rather than having to think for yourself.");
+			changeObedience(5);
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		private function studyManners():void {
+			
+		}
+		
+		private function cleanCell():void {
+			clearOutput();
+			outputText("You decide to spend some time cleaning your cell, fearing what your Mistress might do if you let it get too messy.");
+			if (flags[kFLAGS.PRISON_DIRT_LEVEL] > 0) flags[kFLAGS.PRISON_DIRT_LEVEL]--;
+			doNext(camp.returnToCampUseTwoHours);
+		}
 		private function placeholderEscape():void {
 			outputText("Since the prisoner mod is not finished, you will return to your camp.");
 			if (player.findStatusAffect(StatusAffects.PrisonRestraints) >= 0) player.removeStatusAffect(StatusAffects.PrisonRestraints);

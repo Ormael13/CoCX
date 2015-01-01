@@ -194,7 +194,7 @@ package classes.GlobalFlags
 		public static const GENERAL_GETTING_WOOD:int			= 165; //Minecraft reference
 		public static const GENERAL_DICK_BANISHER:int			= 166;
 		public static const GENERAL_ULTRA_PERKY:int				= 167;
-		public static const UNKNOWN_ACHIEVEMENT_168:int			= 168;
+		public static const GENERAL_UP_TO_11:int				= 168; //This one goes to eleven.
 		public static const UNKNOWN_ACHIEVEMENT_169:int			= 169;
 		
 	}

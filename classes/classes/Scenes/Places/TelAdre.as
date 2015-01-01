@@ -1750,7 +1750,7 @@ private function jewelBuy(itype:ItemType):void {
 private function debitJewel(itype:ItemType):void {
 	player.gems -= itype.value;
 	statScreenRefresh();
-	inventory.takeItem(itype, armorShop);
+	inventory.takeItem(itype, jewelShopInside);
 }
 
 //-----------------

@@ -2155,7 +2155,7 @@ public static const PRISON_RESTRAINTS_LEGS:int                                  
 public static const PRISON_RESTRAINTS_ARMS:int                                   	= 2146;
 public static const PRISON_RESTRAINTS_BODY:int                                   	= 2147;
 public static const PRISON_DOOR_UNLOCKED:int                                   		= 2148;
-public static const PRIOSN_DIRT_LEVEL:int                                   		= 2149;
+public static const PRISON_DIRT_LEVEL:int                                   		= 2149;
 public static const UNKNOWN_FLAG_NUMBER_02150:int                                   = 2150;
 public static const UNKNOWN_FLAG_NUMBER_02151:int                                   = 2151;
 public static const UNKNOWN_FLAG_NUMBER_02152:int                                   = 2152;

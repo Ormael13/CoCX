@@ -224,7 +224,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function takeGodMead():void {
-			inventory.takeItem(consumables.GODMEAD, roomDungeon);
+			inventory.takeItem(consumables.GODMEAD, roomCellar);
 			flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED]++;
 		}
 		public function takeWhip():void {
