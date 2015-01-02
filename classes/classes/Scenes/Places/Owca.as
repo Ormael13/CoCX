@@ -185,16 +185,12 @@ private function acceptRebeccsPlea(firstTime:Boolean = false, sacrificed:Boolean
 private function intoTheDemonPit(sacrifice:Boolean = true):void {
 	clearOutput();
 	//N is the number of hours left before night
-	if(model.time.hours < 20) {
-		outputText("<b>" + Num2Text(21-model.time.hours) + " hours pass...</b>\n");
+	if(model.time.hours < 21) {
+		var passed:int = 21 - model.time.hours;
+		outputText("<b>" + Num2Text(passed) + " " + (passed > 1 ? "hours pass" : "hour passes") + "...</b>\n");
 		model.time.hours = 21;
 		statScreenRefresh();
 	}
-    if(model.time.hours == 20) {
-        outputText("<b>" + Num2Text(1) + " hour passes...</b>\n");
-        model.time.hours = 21;
-        statScreenRefresh();
-    }
 	outputText("You are awakened by a sudden cackling, and open your eyes; you are almost entirely surrounded by darkness, and the dim light provided by the menacing red moon only makes the landscape bleaker.");
 	outputText("\n\nYou look around, puzzled.  Nothing seems to break the ever-present, nightly silence.  Then, as if to tease you, the cackling is heard again, this time behind you.  You turn around and eventually spot its origin: a crowd of silhouettes, all rushing in your direction, tittering and giggling like a bunch of naughty kids about to play a dirty trick.  As they get closer and closer to the pit, their colorful bodies and alien features are given a shining outline by the bloody moon; it seems that they are all full demons, sporting horns, claws, tails and wings.  Most of them are naked, shamelessly displaying gigantic erections or cavernous pussies as well as watermelon-sized, milk-dribbling tits.  Some of them are wearing leather straps that barely cover their taboo parts, as if to mock all notions of human prudishness.  You even spot an imp wearing a weird greenish vine like a belt; you stare at him for a few seconds, knowing something is out of place, then realize the belt is actually the imp's very flexible tentacle dick.");
 	outputText("\n\nSoon, they are all gathered in the pit, surrounding you completely and eyeing you with gleeful lust; whatever plans these demons have in mind, they must be dirty.");
