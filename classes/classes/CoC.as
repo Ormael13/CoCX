@@ -135,7 +135,7 @@
 		// Items/
 		public var mutations:Mutations = new Mutations();
 		public var consumables:ConsumableLib = new ConsumableLib();
-		public var useables:UseableLib = new UseableLib();
+		public var useables:UseableLib;
 		public var weapons:WeaponLib = new WeaponLib();
 		public var armors:ArmorLib = new ArmorLib();
 		public var miscItems:MiscItemLib = new MiscItemLib();
@@ -317,6 +317,8 @@
 		{
 			// Cheatmode.
 			kGAMECLASS = this;
+			
+			useables = new UseableLib();
 			
 			this.kFLAGS_REF = kFLAGS; 
 			// cheat for the parser to be able to find kFLAGS
