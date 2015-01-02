@@ -1830,7 +1830,7 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 			if(player.cumQ() < 5) outputText("A few thick spurts of cum burst from your cocks, splattering you liberally.  ", false);
 			if(player.cumQ() >= 5 && player.cumQ() < 7) outputText("The orgasm drags on and on, spurt after spurt of jism coating you from each cock.  ", false);
 			if(player.cumQ() >=7 && player.cumQ() < 10) outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down as the orgasms from each of your members begin to overlap.  Your nearly black out in pleasure.  ", false);
-			if(player.cumQ() >=10) outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  You mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ", false);
+			if(player.cumQ() >=10) outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ", false);
 		}
 	}
 	//Vaginal CUMMING

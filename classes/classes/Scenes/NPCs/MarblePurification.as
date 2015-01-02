@@ -975,7 +975,7 @@ package classes.Scenes.NPCs {
 		if((player.hasCock() && x >= 0) && flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
 		{
 			//n is the index of the PC's biggest cock under 20 area.
-		 	outputText("Eventually you pull her up and sandwich her between your bodies.  Marble expresses an aversion to anal, so you take the backside while she takes the front.  \"<i>Hey, you can't do this to me!  I don't want to loose my virginity to my sister!</i>\" Clara cries out indignantly.");
+		 	outputText("Eventually you pull her up and sandwich her between your bodies.  Marble expresses an aversion to anal, so you take the backside while she takes the front.  \"<i>Hey, you can't do this to me!  I don't want to lose my virginity to my sister!</i>\" Clara cries out indignantly.");
 		 	outputText("\n\n\"<i>Well, are you saying you've learned your lesson?  Are you going to apologize for trying to take my sweetie away from me?</i>\"");
 		 	outputText("\n\n\"<i>What?  Fuck noo, your </i>sweetie<i> should be mine.</i>\"");
 		 	outputText("\n\nMarble looks to the side of her sister's head, and gives you a solemn nod.  You take that as an invitation to begin the violation and grab a good grip of Clara's expansive rear.  Then you prod your " + cockDescript(x) + " at the entrance to her anus, prompting a gasp and plea from the woman you're about to penetrate to stop.  Her sister doesn't heed her begging, and neither do you.");
