@@ -2403,21 +2403,6 @@
 			}
 		}
 
-		public function greenGel(player:Player):void
-		{
-			outputText("You examine the gel thoroughly, noting it is tough and resiliant, yet extremely pliable.  Somehow you know eating it would not be a good idea.", true);
-		}
-
-		public function toughSpiderSilk(player:Player):void
-		{
-			outputText("You look over the tough webbing, confusion evident in your expression.  There's really nothing practical you can do with these yourself.  It might be best to find someone more familiar with the odd materials in this land to see if they can make sense of it.", true);
-		}
-
-		public function chitinUseless(player:Player):void
-		{
-			outputText("You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.  ", true);
-		}
-
 		//Oviposition Elixer!
 		/*
 		 v1 = egg type.
