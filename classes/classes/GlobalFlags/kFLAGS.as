@@ -1263,7 +1263,7 @@ public static const BEE_GIRL_STATUS:int                                         
 public static const BEE_GIRL_COMBAT_WINS_WITH_RAPE:int                              = 1255;
 public static const BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE:int                           = 1256;
 public static const BEE_GIRL_COMBAT_LOSSES:int                                      = 1257;
-public static const UNKNOWN_FLAG_NUMBER_01258:int                                   = 1258;
+public static const KATHERINE_MILK_OPTIONS:int                                      = 1258;
 public static const UNKNOWN_FLAG_NUMBER_01259:int                                   = 1259;
 public static const UNKNOWN_FLAG_NUMBER_01260:int                                   = 1260;
 public static const UNKNOWN_FLAG_NUMBER_01261:int                                   = 1261;
