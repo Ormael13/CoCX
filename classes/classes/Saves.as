@@ -519,7 +519,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 	var backupAborted:Boolean = false;
 	
-	CoC.saveAllAwareClasses(); //Informs each saveAwareClass that it must save its values in the flags array
+	CoC.saveAllAwareClasses(getGame()); //Informs each saveAwareClass that it must save its values in the flags array
 	var counter:Number = player.cocks.length;
 	//Initialize the save file
 	var saveFile:*;
@@ -1795,6 +1795,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				saveFile.data.itemSlot5.id || saveFile.data.itemSlot5.shortName),
 				saveFile.data.itemSlot5.quantity);
 
+		CoC.loadAllAwareClasses(getGame()); //Informs each saveAwareClass that it must load its values from the flags array
 		unFuckSave();
 		
 		// Control Bindings
@@ -1802,8 +1803,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
-		
-		CoC.loadAllAwareClasses(); //Informs each saveAwareClass that it must load its values from the flags array
 		doNext(1);
 	}
 }
@@ -1865,6 +1864,12 @@ public function unFuckSave():void
 		flags[kFLAGS.GOO_DICK_TYPE] = 0;
 	}
 
+	var flagData:Array = String(flags[kFLAGS.KATHERINE_BREAST_SIZE]).split("^");
+	if (flagData.length < 7 && flags[kFLAGS.KATHERINE_BREAST_SIZE] > 0) { //Older format only stored breast size or zero if not yet initialized
+		getGame().telAdre.katherine.breasts.cupSize			= flags[kFLAGS.KATHERINE_BREAST_SIZE];
+		getGame().telAdre.katherine.breasts.lactationLevel	= BreastStore.LACTATION_DISABLED;
+	}
+	
 	if (flags[kFLAGS.SAVE_FILE_INTEGER_FORMAT_VERSION] < 816) {
 		//Older saves don't have pregnancy types for all impregnable NPCs. Have to correct this.
 		//If anything is detected that proves this is a new format save then we can return immediately as all further checks are redundant.
