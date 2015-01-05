@@ -193,7 +193,7 @@
 
 				outputText("\n\n\"<i>P-please... just... fuck it!  Fuck me!  Anything!  Just stop teasing me, damn it!</i>\"");
 
-				outputText("\n\nSmirking, you reply, \"<i>That's more like it,</i>\" even as you shift down, letting the pointed crown of her cock finally taste the juicy vulva of your pussy.  From then on, you let your box do the talking, slowly sliding down and squeezing each freshly devoured inch with deliberate cuntractions.  The knot stops you when it presses on your labia, your unready pussy not quite ready to take it.  Small dollops of warm dick-juice slowly roll out inside you, mixing with your own copious lube as it soaks into the centaurs underfur.");
+				outputText("\n\nSmirking, you reply, \"<i>That's more like it,</i>\" even as you shift down, letting the pointed crown of her cock finally taste the juicy vulva of your pussy.  From then on, you let your box do the talking, slowly sliding down and squeezing each freshly devoured inch with deliberate cuntractions.  The knot stops you when it presses on your labia, your unready pussy not quite ready to take it.  Small dollops of warm dick-juice slowly roll out inside you, mixing with your own copious lube as it soaks into the centaur's underfur.");
 
 				player.cuntChange(player.vaginalCapacity(), true, true, false);
 
@@ -294,7 +294,7 @@
 			
 			if (!player.hasVagina())
 			{
-				outputText(" The pleasant warmth builds with alarming speed, the diffused sensation pooling toward a focused point in your crotch. The heat seems to tunnel deeper into your core before returning to the surface, and with each iteration, the pulsating, almost liquid sensation feels hotter. The warmth quickly makes way to raw, unadulterated heat, which in turn rapidly transforms into a deeply rooted, scalding fire- but it takes on a subtly different tone; a different kind of heat. It’s only when the first traces of wetness begins to roll down the inside of your thigh that you put all the pieces together. <b>The centaurs milk has rooted a cunt into your previously genitalia-void crotch.</b>");
+				outputText(" The pleasant warmth builds with alarming speed, the diffused sensation pooling toward a focused point in your crotch. The heat seems to tunnel deeper into your core before returning to the surface, and with each iteration, the pulsating, almost liquid sensation feels hotter. The warmth quickly makes way to raw, unadulterated heat, which in turn rapidly transforms into a deeply rooted, scalding fire- but it takes on a subtly different tone; a different kind of heat. It’s only when the first traces of wetness begins to roll down the inside of your thigh that you put all the pieces together. <b>The centaur's milk has rooted a cunt into your previously genitalia-void crotch.</b>");
 				player.createVagina();
 				outputText("\n\n");
 			}
@@ -427,7 +427,7 @@
 
 			outputText("\n\nLooking back, the demon gives you a knowing smile, while her horn seems to drink the very light around her.  Abruptly, she begins to trot down the path towards an archway.  You hang on, fucking her to the rhythm of her movements.  It isn't even through your own volition that you get to pound at her pussy - her movements utterly control the tempo of the fuck.  Your only choices are whether to hold on and fuck her or let go and be her anal cocksleeve.  With all the aphrodisiacs she fed you, your dick isn't even giving you that choice.");
 
-			outputText("\n\nIn light of your hapless situation, you cling tight and watch as you're given a rampant, dick-squeezingly tight tour of the demons' headquarters. You're taken past masturbating succubi, fapping incubi, and even snickering imps.  All manner of demons sneer at you, the once champion, now a slave to a centaurs sodden snatch.  The sheer, debauched exhibition of it sends a spike of pleasure to your [balls], the upwelling of desire burning with wet heat that seems to dwarf the roaring furnace that is the demon's thighs.  Your burgeoning orgasmic sensation is brought to a screeching halt along with your mistress when she comes to an abrupt stop.");
+			outputText("\n\nIn light of your hapless situation, you cling tight and watch as you're given a rampant, dick-squeezingly tight tour of the demons' headquarters. You're taken past masturbating succubi, fapping incubi, and even snickering imps.  All manner of demons sneer at you, the once champion, now a slave to a centaur's sodden snatch.  The sheer, debauched exhibition of it sends a spike of pleasure to your [balls], the upwelling of desire burning with wet heat that seems to dwarf the roaring furnace that is the demon's thighs.  Your burgeoning orgasmic sensation is brought to a screeching halt along with your mistress when she comes to an abrupt stop.");
 
 			outputText("\n\nThen, someone else joins you on the centaur's back - it's an omnibus");
 			if (flags[kFLAGS.D1_OMNIBUS_KILLED] != 1) outputText(", and a familiar one at that");
