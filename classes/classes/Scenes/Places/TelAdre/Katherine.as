@@ -1702,11 +1702,11 @@ private function talkMilkShareWithHelena():void {
 
 private function talkMilkShareWithHelenaAnswer(reallyStop:Boolean):void {
 	if (reallyStop) {
-		outputText("\n\nKath looks relieved.  “<i>Thank" + (playerMaster() ? " you [master]" : "s " + player.short) + ", you're the best.</i>”");
+		outputText("\n\nKath nods and says, “<i>Okay, I'll stop.  I do feel sorry for Helena.</i>”");
 		milkOptionClear(KBIT_MILK_SHARE_WITH_HELENA);
 	}
 	else {
-		outputText("\n\nKath nods and says, “<i>Okay, I'll stop.  I do feel sorry for Helena.</i>”");
+		outputText("\n\nKath looks relieved.  “<i>Thank" + (playerMaster() ? " you [master]" : "s " + player.short) + ", you're the best.</i>”");
 	}
 	talkMilkMenu();
 }
