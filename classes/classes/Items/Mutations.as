@@ -2238,6 +2238,7 @@
 			}
 			else {
 				outputText("The food tastes... corrupt, for lack of a better word.\n", false);
+				player.refillHunger(20);
 				HPChange(20 + player.tou / 3, true);
 				dynStats("lus", 3, "cor", 1);
 			}
@@ -4058,7 +4059,7 @@
 				player.goIntoRut(true);
 			}
 			//ORGAZMO
-			if (player.lust >= 100 && !kGAMECLASS.inCombat) {
+			if (player.lust >= player.maxLust() && !kGAMECLASS.inCombat) {
 				outputText("\n\nThe arousal from the potion overwhelms your senses and causes you to spontaneously orgasm.  You rip off your " + player.armorName + " and look down as your ", false);
 				if (player.cocks.length > 0) {
 					outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you.  ", false);
@@ -4075,7 +4076,7 @@
 				player.orgasm();
 				dynStats("lib", 2, "sen", 1);
 			}
-			if (player.lust > 100) player.lust = 100;
+			if (player.lust > player.maxLust()) player.lust = player.maxLust();
 			outputText("\n\n", false);
 			player.refillHunger(5);
 		}

@@ -777,7 +777,7 @@ public function doCamp():void {
 	}
 	
 	//The uber horny
-	if(player.lust >= 100) {
+	if(player.lust >= player.maxLust()) {
 		if(player.findStatusAffect(StatusAffects.Dysfunction) >= 0) {
 			outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n", false);
 		}
@@ -852,7 +852,7 @@ public function doCamp():void {
 			removeButton(7);
 		}
 	}
-	if (player.lust >= 100) {
+	if (player.lust >= player.maxLust()) {
 		removeButton(0);
 		removeButton(1);
 	}

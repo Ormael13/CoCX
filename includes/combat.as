@@ -368,7 +368,7 @@ public function doCombat(eventNum:Number):void
 				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " instantly soak your groin.", false);
 			}
 			outputText("\n", false);
-			if (player.lust > 99) doNext(endLustLoss);
+			if (player.lust >= player.maxLust()) doNext(endLustLoss);
 			else doNext(1);
 	}
 			//Sand which lust magic attack
@@ -445,7 +445,7 @@ public function doCombat(eventNum:Number):void
 			}
 			else {
 				outputText("Jojo grins wickedly as he senses your defeat, " + eCockDescript(0) + " throbbing hard.  ", true);
-				if (player.lust >= 100) {
+				if (player.lust >= player.maxLust()) {
 					if (player.gender == 1) {
 						outputText("Too aroused to think, you just bend over, displaying your bum and letting your " + multiCockDescriptLight() + " dangle freely.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
 						if (player.cockTotal() == 1) outputText("Pre and cum drip from your " + cockDescript(0) + ", forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
@@ -633,7 +633,7 @@ public function doCombat(eventNum:Number):void
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!", false);
 				}
 			}
-			if (player.lust >= 100) doNext(endLustLoss);
+			if (player.lust >= player.maxLust()) doNext(endLustLoss);
 			else doNext(5000);
 	}
 			//Player sting attack
@@ -1263,7 +1263,7 @@ public function fantasize():void {
 	if(temp2 >= 20) outputText("The fantasy is so vivid and pleasurable you wish it was happening now.  You wonder if " + monster.a + monster.short + " can tell what you were thinking.\n\n", false);
 	else outputText("\n", false);
 	dynStats("lus", temp2, "resisted", false);
-	if(player.lust > 99) {
+	if(player.lust >= player.maxLust()) {
 		if(monster.short == "pod") {
 			outputText("<b>You nearly orgasm, but the terror of the situation reasserts itself, muting your body's need for release.  If you don't escape soon, you have no doubt you'll be too fucked up to ever try again!</b>\n\n", false);
 			player.lust = 99;
@@ -2326,7 +2326,7 @@ public function combatStatusesUpdate():void {
 		dynStats("lus", 2);
 	}
 	regeneration(true);
-	if(player.lust >= 100) doNext(endLustLoss);
+	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	if(player.HP <= 0) doNext(endHpLoss);
 }
 
@@ -3993,7 +3993,7 @@ public function combatRoundOver():Boolean {
 		doNext(endHpLoss);
 		return true;
 	}
-	if(player.lust > 99) {
+	if(player.lust >= player.maxLust()) {
 		doNext(endLustLoss);
 		return true;
 	}
@@ -4179,7 +4179,7 @@ public function spellHeal():void {
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
-	if(player.lust >= 100) doNext(endLustLoss);
+	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	else enemyAI();
 	return;
 }
@@ -4235,7 +4235,7 @@ public function spellMight():void {
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
-	if(player.lust >= 100) doNext(endLustLoss);
+	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	else enemyAI();
 	return;
 }

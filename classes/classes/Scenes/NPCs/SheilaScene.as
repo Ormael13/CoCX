@@ -3162,7 +3162,7 @@ private function sheilaForcedOralGeneric():void {
 	//end scene, add fatigue if long tongue, very big lib-based lust gain, gain libido if lust hits 100; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
 	if(player.tongueType > TONUGE_HUMAN) fatigue(15);
 	dynStats("lus", player.lib/3+30, "resisted", false);
-	if(player.lust >= 100) dynStats("lib", 1);
+	if(player.lust >= player.maxLust()) dynStats("lib", 1);
 	sheilaCorruptionUpdate();
 	/*
 	if(player.cor >= 90 || player.cor > sheilaCorruption()) {

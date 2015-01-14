@@ -42,7 +42,7 @@ package classes.Scenes.Areas.Mountain
 			//[BOTH INFESTED]
 			if (player.totalCocks() > 0 && player.findStatusAffect(StatusAffects.Infested) >= 0) {
 				//(LUST)
-				if (player.lust > 99) {
+				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
 					if (player.cor < 33) outputText("In spite of your revulsion ", false);
 					else if (player.cor < 66) outputText("In spite of your better sense ", false);
@@ -63,7 +63,7 @@ package classes.Scenes.Areas.Mountain
 			//[PLAYER'S COCKS ARE BIG ENOUGH TO BE INFECTED]
 			else if (player.findStatusAffect(StatusAffects.Infested) < 0 && player.biggestCockArea() >= 40 && player.hasCock()) {
 				//(LUST)
-				if (player.lust > 99) {
+				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
 					if (player.cor < 33) outputText("In spite of your revulsion ", false);
 					else if (player.cor < 66) outputText("In spite of your better sense ", false);
@@ -120,7 +120,7 @@ package classes.Scenes.Areas.Mountain
 			//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
 			else if (player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody != LOWER_BODY_TYPE_NAGA) {
 				//(LUST) 
-				if (player.lust > 99) {
+				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
 					if (player.cor < 33) outputText("In spite of your revulsion ", false);
 					else if (player.cor < 66) outputText("In spite of your better sense ", false);
@@ -163,7 +163,7 @@ package classes.Scenes.Areas.Mountain
 			//[GENDERLESS OR MALE WITH DICK TOO SMALL]
 			else {
 				//(LUST) 
-				if (player.lust > 99) {
+				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
 					if (player.cor < 33) outputText("In spite of your revulsion ", false);
 					else if (player.cor < 66) outputText("In spite of your better sense ", false);

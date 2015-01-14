@@ -222,7 +222,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nThe voice continues, \"<i>Every pulse, every sloppy discharge, every throb... they're all so sexy, so wet and hot.  The harder you watch, the more arousing it gets... the more you want to touch it.</i>\"");
 				outputText("\n\nGods, you want to touch it.  One of the rigid veins pulsates, and you want to caress it so badly, to feel it twitch in your hand and drip all over you.  It looks so good, so powerful and lusty.  It's making you so horny just looking at it.  How would it feel to fuck it?  To ride it?  To bend over and present yourself to be willingly impaled?");
 	
-				if (player.lust >= 100) outputText("\n\nYou whimper, too horny to care anymore.  You moan in anticipation when you realize she's going to breed you...");
+				if (player.lust >= player.maxLust()) outputText("\n\nYou whimper, too horny to care anymore.  You moan in anticipation when you realize she's going to breed you...");
 				else
 				{
 					outputText("You stumble forward, the movement actually startling you from your lusty haze.  It's just what you need to free yourself from the unholy compulsion, and you ready yourself anew to take down this troublesome foe.  Still, your gaze keeps flicking down.  You'll have a harder time fighting off any similar teases...");

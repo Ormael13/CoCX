@@ -97,7 +97,7 @@ package classes.Scenes.Areas.Swamp
 				if (hasVagina()) outputText("The saucy dominatrix exhausts her supply of aphrodisiac toxin for the moment and finally steps back, admiring her work and giving you a lewd wink.  You ", false);
 				else outputText("The confident male exhausts his supply of aphrodisiac toxin for the moment and finally steps back, admiring his work and giving you a lewd wink.  You ", false);
 				game.dynStats("lus", 60);
-				if (player.lust > 99) outputText("wobble, utterly defeated and about to cave in to your lust.", false);
+				if (player.lust >= player.maxLust()) outputText("wobble, utterly defeated and about to cave in to your lust.", false);
 				else outputText("struggle not to fall down and start masturbating on the spot.", false);
 				outputText("\n", false);
 				combatRoundOver();

@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/13.0">
   <id>com.fenoxo.coc</id>
-  <versionNumber>0.8.9</versionNumber>
-  <versionLabel>CoC_0.8.9</versionLabel>
-  <supportedProfiles>mobileDevice desktop extendedMobileDevice extendedDesktop tv extendedTV</supportedProfiles>
+  <versionNumber>0.9.2</versionNumber>
+  <versionLabel>CoC_0.9.2</versionLabel>
+  <supportedProfiles>desktop extendedDesktop mobileDevice tv extendedTV</supportedProfiles>
   <filename>Corruption of Champions</filename>
   <name>Corruption of Champions</name>
   <customUpdateUI>false</customUpdateUI>
-
   <initialWindow>
     <title>Corruption of Champions</title>
     <!-- Please don't change the following line -->
@@ -16,61 +15,44 @@
     <visible>true</visible>
     <fullScreen>true</fullScreen>
     <autoOrients>true</autoOrients>
-    <aspectRatio>any</aspectRatio>
     <renderMode>direct</renderMode>
     <!--<depthAndStencil>true</depthAndStencil>-->
     <!-- required for 3D -->
     <systemChrome>standard</systemChrome>
   </initialWindow>
-
   <android>
-    <manifestAdditions>
-      <![CDATA[<manifest android:installLocation="auto">
-        <uses-sdk android:minSdkVersion="9" />
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-        <supports-screens 
-          android:normalScreens="true"
-          android:smallScreens="true"
-          android:largeScreens="true"
-          android:xlargeScreens="true"
-          android:anyDensity="true"
-          android:resizeable="true"
-        />
-        <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch" />
-        <application android:enabled="true">
-               <activity android:excludeFromRecents="false">
-                   <intent-filter>
-                       <action android:name="android.intent.action.MAIN"/>
-                       <category android:name= "android.intent.category.LAUNCHER"/>
-                   </intent-filter>
-               </activity>
-           </application>
-      </manifest>]]>
-    </manifestAdditions>
+    <manifestAdditions><![CDATA[<manifest android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="9" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<supports-screens android:normalScreens="true" android:smallScreens="true" android:largeScreens="true" android:xlargeScreens="true" android:anyDensity="true" android:resizeable="true" />
+	<uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch" />
+	<application android:enabled="true">
+		<activity android:excludeFromRecents="false">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+	</application>
+</manifest>]]></manifestAdditions>
   </android>
-  
   <iPhone>
-    <InfoAdditions>
-      <![CDATA[
-        <key>UIStatusBarStyle</key>
-          <string>UIStatusBarStyleBlackOpaque</string>
-        <key>UIRequiresPersistentWiFi</key>
-          <string>NO</string>
-        <key>UIPrerenderedIcon</key>
-          <true />
-        <key>UIApplicationExitsOnSuspend</key>
-          <false />
-        <key>UIDeviceFamily</key>
-          <array>
-           <string>1</string>
-           <string>2</string>
-          </array>
-      ]]>
-    </InfoAdditions>
+    <InfoAdditions><![CDATA[<key>UIStatusBarStyle</key>
+<string>UIStatusBarStyleBlackOpaque</string>
+<key>UIRequiresPersistentWiFi</key>
+<string>NO</string>
+<key>UIPrerenderedIcon</key>
+<true />
+<key>UIApplicationExitsOnSuspend</key>
+<false />
+<key>UIDeviceFamily</key>
+<array>
+	<string>1</string>
+	<string>2</string>
+</array>]]></InfoAdditions>
     <requestedDisplayResolution>high</requestedDisplayResolution>
     <forceCPURenderModeForDevices>iPad1,1 iPhone1,1 iPhone1,2 iPod1,1</forceCPURenderModeForDevices>
   </iPhone>
-
   <icon>
     <image29x29>icons/icon_29.png</image29x29>
     <image57x57>icons/icon_57.png</image57x57>
@@ -78,5 +60,5 @@
     <image144x144>icons/icon_144.png</image144x144>
     <image512x512>icons/icon_512.png</image512x512>
   </icon>
-
+  <description>An interactive text-based fantasy RPG intended for adult audiences. (18+)</description>
 </application>

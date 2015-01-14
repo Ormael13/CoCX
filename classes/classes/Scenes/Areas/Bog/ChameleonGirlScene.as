@@ -67,7 +67,7 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 			spriteSelect(89);
 			//-Lose by lust
-			if (player.lust > 99) {
+			if (player.lust >= player.maxLust()) {
 				outputText("Losing control to your own growing arousal, you fall to your knees and desperately start working to get at your needy body beneath your " + player.armorName + ".");
 			}
 			//Lose by HP
@@ -124,7 +124,7 @@ package classes.Scenes.Areas.Bog
 			var x:int = rand(player.totalCocks());
 			spriteSelect(89);
 			outputText("\n\nRecognizing that you're no danger, her skin shifts back into its natural " + monster.skinTone + " coloration as she walks towards you.  She swings her hips seductively as she splashes slowly through the water and licks her lips with a loud smack of her tongue, then reaches out and forcefully pulls your " + player.armorName + " above your waist before you can even try to resist her advances, and pushes you back against a tree.  With a few quick pulls of fabric she's stripped her own clothes, and she tosses her thong over a low-hanging branch.  The other band of silk she uses to quickly bind your wrists.  Were you in any shape to fight back you could pull free, but you're too ");
-			if (player.lust > 99) outputText("overwhelmed by lust");
+			if (player.lust >= player.maxLust()) outputText("overwhelmed by lust");
 			else outputText("battered");
 			outputText(" to even rip the makeshift binding.");
 

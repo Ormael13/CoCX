@@ -47,7 +47,7 @@ package classes.Scenes.Areas.GlacialRift
 			dynStats("lust", 50);
 			player.gems -= gemPenalty
 			cleanupAfterCombat();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function winAgainstValkyrie():void {

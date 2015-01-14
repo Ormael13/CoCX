@@ -81,7 +81,7 @@
 				outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.", false);
 			}
 			game.dynStats("lus", (player.lib/10 + player.cor/20)+4);
-			if(player.lust >= 100) doNext(game.endLustLoss);
+			if(player.lust >= player.maxLust()) doNext(game.endLustLoss);
 			else doNext(5000);
 		}
 		private function cultistLustTransfer():void {
@@ -106,7 +106,7 @@
 				lust -= 50;
 				if(lust < 0) lust = 10;
 			}
-			if(player.lust >= 100) doNext(game.endLustLoss);
+			if(player.lust >= player.maxLust()) doNext(game.endLustLoss);
 			else doNext(5000);
 		}
 		

@@ -2744,14 +2744,14 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(player.HP > maxHP()) player.HP = maxHP();
 	
 	//Combat bounds
-	if(player.lust > 99) player.lust = 100;
+	if(player.lust > player.maxLust()) player.lust = player.maxLust();
 	//if(player.lust < player.lib) {
 	//        player.lust=player.lib;
 	//
 	//Update to minimum lust if lust falls below it.
 	if(player.lust < minLust()) player.lust = minLust();
 	//worms moved to minLust() in Player.as.
-	if(player.lust > 100) player.lust = 100;
+	if(player.lust > player.maxLust()) player.lust = player.maxLust();
 	if(player.lust < 0) player.lust = 0;
 
 	//Refresh the stat pane with updated values

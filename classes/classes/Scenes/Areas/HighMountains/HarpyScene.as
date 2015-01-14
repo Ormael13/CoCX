@@ -73,7 +73,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			//Dick that fits or has cunt
 			if (x >= 0 || player.hasVagina()) {
-				if (player.lust > 99) harpyLossLust();
+				if (player.lust >= player.maxLust()) harpyLossLust();
 				else harpyDamageLoss();
 			}
 			//No fitu

@@ -270,7 +270,7 @@ internal function tentacleLossRape():void {
 		return;
 	}
 	//Bad end + counter here
-	if(player.lust > 99) {
+	if(player.lust >= player.maxLust()) {
 		temp = player.findStatusAffect(StatusAffects.TentacleBadEndCounter);
 		if(temp < 0) {
 			player.createStatusAffect(StatusAffects.TentacleBadEndCounter,0,0,0,0);

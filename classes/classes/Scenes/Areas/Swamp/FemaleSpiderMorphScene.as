@@ -290,7 +290,7 @@ package classes.Scenes.Areas.Swamp
 			else if (player.HP < 1) outputText("You collapse into the soft moss,", false);
 			else outputText("You collapse into the soft moss and begin to masturbate,", false);
 			outputText(" sinking slightly into it while you watch the arachnid woman turn around and begin to shake her cute backside at you.  It sways entrancingly, the hefty weight of her large abdomen bobbing past with each shake to momentarily obstruct your view.  As you watch, a number of protuberances on the abdomen twist and writhe for a half-second before spraying out a huge quantity of sticky webbing.  It hits you like a hammer, knocking you completely flat and plastering your naked form to the dirt.", false);
-			if (player.lust > 99) outputText("  One of the gossamer strands hits your arm hard enough to rip it away from your groin, and you're left pinned down, unable to touch yourself.", false);
+			if (player.lust >= player.maxLust()) outputText("  One of the gossamer strands hits your arm hard enough to rip it away from your groin, and you're left pinned down, unable to touch yourself.", false);
 			outputText("  Once it finishes, you find that your head, chest, and crotch were all left uncovered by the sticky strands.  She unleashes another burst of pearlescent webbing to coat the first, and you're left completely, utterly restrained.\n\n", false);
 
 			outputText("\"<i>Perfect, now that you're nice and comfortable, we can have sex!</i>\" decrees the ", false);
@@ -401,7 +401,7 @@ package classes.Scenes.Areas.Swamp
 			//(COMBAT LOSS)
 			else {
 				outputText("You drop to the ground and ", false);
-				if (player.lust > 99) outputText("stick your hands into your groin, fondling " + oMultiCockDesc() + " with need", false);
+				if (player.lust >= player.maxLust()) outputText("stick your hands into your groin, fondling " + oMultiCockDesc() + " with need", false);
 				else outputText("groan in obvious pain, unable to move", false);
 				outputText(".  The spider-girl advances, giggling girlishly at your state while she painstakingly removes every piece of armor, visibly gasping at the size of your " + cockDescript(x) + " as it flops out.\n\n", false);
 
@@ -501,7 +501,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("", true);
 			spriteSelect(73);
 			outputText("You laugh at her and push her down with your " + player.legs() + ", enjoying the view of the pale maiden's unblemished skin and dark, fetishy-looking exoskeleton when she bounces in swamp loam.  Her legs scissor closed nervously, a weak effort to conceal her sex from you", false);
-			if (player.lust > 99) outputText(", even as her fingers continue to work her slick lips relentlessly", false);
+			if (player.lust >= player.maxLust()) outputText(", even as her fingers continue to work her slick lips relentlessly", false);
 			outputText(".  You slap her hands away and pry her legs open, getting a nice, close look at her vagina.\n\n", false);
 
 			outputText("Her pussy is dark, like her nipples, though the lips of her sex are closer to a pure midnight-black than the dusky skin of those tiny nubs.  A sheen of feminine lube has built up over her vulva, making her outer labia and skin glisten noticeably in the muted sunlight that filters down to the swamp floor.  Around her vagina, the skin rapidly fades from dark chocolate back to the porcelain white of the rest of her body.  You prod and play with the moist slit, feeling the soft skin part around your fingers like a soft velvet glove.  She grows wetter in response, giving up plaintive little moans at your incursion", false);

@@ -157,6 +157,7 @@
 		public var mountain:Mountain = new Mountain();
 		public var plains:Plains = new Plains();
 		public var swamp:Swamp = new Swamp();
+		public var volcanicCrag:VolcanicCrag = new VolcanicCrag();
 		// Scenes/Dungeons
 		public var brigidScene:BrigidScene = new BrigidScene();
 		public var d3:D3 = new D3();
@@ -383,8 +384,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_1.0.14";
-			version = ver + " (<b>New Years Fix</b>)";
+			ver = "0.9.2_mod_1.1_snapshot_20150113";
+			version = ver + " (<b>Mod version 1.1</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

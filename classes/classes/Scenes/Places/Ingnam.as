@@ -65,7 +65,7 @@ package classes.Scenes.Places
 			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0) addButton(6, "Return2Camp", getBanishedToMareth);
 			addButton(7, "Inventory", inventory.inventoryMenu);
 			if (player.lust >= 30) {
-				if (player.lust >= 100) {
+				if (player.lust >= player.maxLust()) {
 					outputText("\n\n<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>", false);
 					removeButton(0);
 					removeButton(4);

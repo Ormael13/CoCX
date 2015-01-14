@@ -818,14 +818,20 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			if (findPerk(PerkLib.Tank) >= 0) max += 50;
 			if (findPerk(PerkLib.Tank2) >= 0) max += Math.round(tou);
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
-			if (level <= 30) max += level * 15;
-			else max += (30 * 15) + ((level-30) * 5);
+			max += level * 15;
 			if (jewelryEffectId == 5) max += jewelryEffectMagnitude
 			max = Math.round(max);
 			if (max > 9999) max = 9999;
 			return max;
 		}
-
+		
+		public function maxLust():Number
+		{
+			var max:Number = 100;
+			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
+			return max;
+		}
+		
 		public function buttDescript():String
 		{
 			return Appearance.buttDescription(this);

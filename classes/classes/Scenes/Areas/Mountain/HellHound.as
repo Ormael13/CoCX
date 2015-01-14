@@ -39,7 +39,7 @@
 					doNext(game.endHpLoss);
 					return;
 				}
-				if(player.lust >= 100) {
+				if(player.lust >= player.maxLust()) {
 					doNext(game.endLustLoss);
 					return;
 				}		
@@ -81,7 +81,7 @@
 				doNext(endHpLoss);
 				return;
 			}
-			if(player.lust > 100) {
+			if(player.lust > player.maxLust()) {
 				doNext(endLustLoss);
 				return;
 			}

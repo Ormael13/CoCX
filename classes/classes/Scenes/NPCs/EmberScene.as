@@ -102,7 +102,7 @@ package classes.Scenes.NPCs
 					needNext = true;
 				}
 				//At max lust, count up - if ten hours lusty, ember yells at ya!
-				if (player.lust >= 100 && player.gender > 0) {
+				if (player.lust >= player.maxLust() && player.gender > 0) {
 					flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER]++;
 					if (flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER] >= 10) {
 						emberBitchesAtYouAboutLustiness();

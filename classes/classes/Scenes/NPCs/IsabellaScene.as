@@ -630,7 +630,7 @@ public function IsabellaWinsAndSpanks():void {
 		if(player.HP < 1) outputText("You collapse at Isabella's feet, nearly senseless from all the damage you've taken.", false);
 		else outputText("You collapse at Isabella's feet, masturbating pathetically as she glares down at you.", false);
 		outputText("  A hand grabs hold of the back of your " + player.armorName + " and lifts you up, placing you firmly over the cow-girl's fur-covered knee.  You can feel the transition from fur to skin underneath your belly, at the midpoint of her thigh.  ", false);
-		if(player.lust > 99) outputText("You start trying to hump and grind, but the angry cow will have none of it.  ", false);
+		if(player.lust >= player.maxLust()) outputText("You start trying to hump and grind, but the angry cow will have none of it.  ", false);
 		outputText("SMACK!  A powerful impact slams into your " + assDescript() + ", making you gasp out in pain", false);
 		if(player.findPerk(PerkLib.Masochist) >= 0) outputText(" and pleasure", false);
 		outputText(".  The next blow follows shortly after, equally hard but placed upon your other, yet-unbruised butt-cheek.", false);
@@ -690,7 +690,7 @@ public function IsabellaWinsAndSpanks():void {
 		if(player.HP < 1) outputText("You collapse at Isabella's feet, nearly senseless from all the damage you've taken.", false);
 		else outputText("You collapse at Isabella's feet, masturbating pathetically as she glares down at you.", false);
 		outputText("  A hand grabs hold of the back of your " + player.armorName + " and props you up, ass in the air.  ", false);
-		if(player.lust > 99) outputText("You start trying to masturbate yourself, but the angry cow will have none of it.  ", false);
+		if(player.lust >= player.maxLust()) outputText("You start trying to masturbate yourself, but the angry cow will have none of it.  ", false);
 		outputText("SMACK!  A powerful impact slams into your " + assDescript() + ", making you gasp out in pain", false);
 		
 		if(player.findPerk(PerkLib.Masochist) >= 0) outputText(" and pleasure", false);
@@ -764,7 +764,7 @@ public function isabellaRapesYouWithHerAss():void {
 	if(player.HP < 1) outputText("You collapse at Isabella's feet, nearly senseless from all the damage you've taken.", false);
 	else outputText("You collapse at Isabella's feet, masturbating pathetically as she glares down at you.", false);
 	outputText("  The cow-girl plants a hoof on your chest, pinning you into the dusty sod of her camp while she looks you up and down.  The victorious redhead leers at your groin while she begins to tear off your " + player.armorName + ".  It doesn't take her more than a few seconds to expose your " + multiCockDescriptLight() + ".", false);
-	if(player.lust > 99) 
+	if(player.lust >= player.maxLust()) 
 	{
 		outputText("  Your twitching hardness brings a smile to Isabella's face as she coos, \"");
 		if(isabellaAccent()) outputText("<i>Oooh, so eager to be taught a lesson, ja?  Very vell, Izabella vill give you your punishment!</i>\"\n\n", false);

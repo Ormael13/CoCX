@@ -114,6 +114,7 @@ public static const TAIL_TYPE_DRACONIC:int                                      
 public static const TAIL_TYPE_RACCOON:int                                           =  15;
 public static const TAIL_TYPE_MOUSE:int                                             =  16;
 public static const TAIL_TYPE_FERRET:int                                            =  17;
+public static const TAIL_TYPE_BEHEMOTH:int                                          =  18;
 
 //breast size
 public static const BREAST_CUP_FLAT:int												=   0;

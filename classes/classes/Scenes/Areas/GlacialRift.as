@@ -86,7 +86,7 @@ package classes.Scenes.Areas
 				}
 				else {
 					outputText("You spend an hour exploring the frigid glaciers but you don't find anything interesting.", true);
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 			}
@@ -107,12 +107,12 @@ package classes.Scenes.Areas
 				}
 				else {
 					outputText("You spend an hour exploring the frigid glaciers but you don't find anything interesting.", true)
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 				}
 			}
 			else {
 				outputText("You spend an hour exploring the frigid glaciers but you don't find anything interesting.", true);
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 		

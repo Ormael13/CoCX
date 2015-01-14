@@ -493,7 +493,7 @@ public function minoPheromones():void {
 		dynStats("lus", 5+rand(5));
 	}
 	//YOU LOSE!
-	if(player.lust >= 100) doNext(kGAMECLASS.endLustLoss);
+	if(player.lust >= player.maxLust()) doNext(kGAMECLASS.endLustLoss);
 	else doNext(5000);
 }
 public function getRapedByMinotaur(autoRape:Boolean = false):void {
@@ -1056,7 +1056,7 @@ private function layBeeEggsInCowbutt():void {
 //{CHECK: If female or herm PC with big butt and vagina too small to fit minotaur cock, use this}
 private function getMinoHawtDawged():void {
 	clearOutput();
-	if(player.lust > 99) {
+	if(player.lust >= player.maxLust()) {
 		outputText("You collapse to your knees, hands racing to your crotch and your ");
 		//(If Male or Herm: 
 		if(player.hasCock()) outputText("[cock biggest], which you frantically try to stroke and rub through your [armor], its throbbing arousal clearly evident.");

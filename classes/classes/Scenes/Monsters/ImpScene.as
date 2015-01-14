@@ -1295,7 +1295,7 @@ package classes.Scenes.Monsters
 				return;
 			}
 			//Lust loss
-			if(player.lust >= 100) {
+			if(player.lust >= player.maxLust()) {
 				//50% chance of sprocket rape for super-thick people. 
 				if(player.cocks.length >= 1 && rand(2) == 0) {
 					if(player.cocks[0].cockThickness >= 4) {

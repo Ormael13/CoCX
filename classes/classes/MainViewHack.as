@@ -342,11 +342,11 @@ package classes
 			mainView.corBar.y = basePos + (gapDiff * 7) - posOffset;
 			mainView.corBar.alpha = universalAlpha;
 
-			mainView.HPBar.width = (((player.HP / player.maxHP()) * 100) * (baseWidth / 100));
+			mainView.HPBar.width = ((player.HP / player.maxHP() * 100) * (baseWidth / 100));
 			mainView.HPBar.height = baseHeight;
 			mainView.HPBar.y = basePos2 + (gapDiff * 1) - posOffset;
 			mainView.HPBar.alpha = universalAlpha;
-			mainView.lustBar.width = (player.lust * (baseWidth / 100));
+			mainView.lustBar.width = ((player.lust / player.maxLust() * 100) * (baseWidth / 100));
 			mainView.lustBar.height = baseHeight;
 			mainView.lustBar.y = basePos2 + (gapDiff * 2) - posOffset;
 			mainView.lustBar.alpha = universalAlpha;
@@ -359,7 +359,7 @@ package classes
 				mainView.esteemBar.x = mainView.lustBar.x;
 				mainView.esteemBar.y = mainView.lustBar.y;
 				mainView.esteemBar.height = mainView.lustBar.height;
-				mainView.esteemBar.width = (player.minLust() * (baseWidth / 100));
+				mainView.esteemBar.width = ((player.minLust() / player.maxLust() * 100) * (baseWidth / 100));
 				mainView.esteemBar.alpha = universalAlpha;
 			}
 			//Hunger bar
@@ -402,7 +402,7 @@ package classes
 			
 			mainView.lustNum.x = 1;
 			mainView.lustNum.width = 170;
-			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.lustNum.text = Math.floor(player.lust) + "/" + 100;
+			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.lustNum.text = Math.floor(player.lust) + "/" + player.maxLust();
 			else mainView.lustNum.text = "" + Math.floor(player.lust);
 			mainView.lustNum.y = basePos2 + (gapDiff * 2) - posTextOffset;
 			mainView.lustText.y = basePos2 + (gapDiff * 2) - posTextOffset;

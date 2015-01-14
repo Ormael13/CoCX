@@ -279,7 +279,7 @@ package classes.Scenes.NPCs
 			else {
 				outputText("Rubbing yourself through your " + player.armorName + ", you look over the anemone; your attention wanders down her torso to the blue slit between her legs", false);
 				//[(lust victory)
-				if (player.lust > 99) outputText(", which she's currently diddling with the hand she's not using to stroke her cock", false);
+				if (player.lust >= player.maxLust()) outputText(", which she's currently diddling with the hand she's not using to stroke her cock", false);
 				outputText(".  Unfastening your garments, you stroke " + sMultiCockDesc() + " to full hardness and approach her.  The anemone looks up at you, still somewhat befogged; then, as you stand ", false);
 				if (player.tallness > 48) outputText("over", false);
 				else outputText("before", false);
@@ -1310,7 +1310,7 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			//(if lust > 99, output)
-			if (player.lust > 99) {
+			if (player.lust >= player.maxLust()) {
 				outputText("You're way too horny to focus on any sort of weapon instruction right now, and the anemone can see it in your expression as your gaze wanders over her body; she blushes a deep blue and shrinks into her barrel with a shy glance.");
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -1507,11 +1507,11 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Sex scenes, post dream
-			if (flags[kFLAGS.HAD_KID_A_DREAM] > 0 && kidAXP() >= 40 && player.lust > 99) {
+			if (flags[kFLAGS.HAD_KID_A_DREAM] > 0 && kidAXP() >= 40 && player.lust >= player.maxLust()) {
 				if (kidASex()) return;
 				//nothing fits
 				//if KidXP >= 40 and lust > 99 after tutor and PC has only huge dicks of area >= 60 or hasn't got shit
-				else if (kidAXP() >= 40 && player.lust > 99) {
+				else if (kidAXP() >= 40 && player.lust >= player.maxLust()) {
 					outputText("\n\nYou collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, the girl slips a hand into your clothes and down to your crotch.  She stops, wide-eyed, as her fingers initially locate ");
 					if (player.hasCock()) outputText("something too enormous");
 					else outputText("nothing useful");

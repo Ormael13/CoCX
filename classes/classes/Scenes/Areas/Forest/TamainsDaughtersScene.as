@@ -723,7 +723,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	if(player.HP < 1) outputText("defeated", false);
 	else outputText("lust weakened", false);
 	outputText(" form, pulling you off your feet and carrying the whole of your body off.  ", false);
-	if(player.lust > 99) {
+	if(player.lust >= player.maxLust()) {
 		outputText("It doesn't bother you too much... they keep ", false);
 		if(player.balls > 0) outputText("fondling your balls and ", false);
 		outputText("stroking your shaft to keep you nice and excited, squirming helplessly with desire.", false);
@@ -1065,7 +1065,7 @@ internal function combatWinAgainstDaughters():void {
 
 internal function loseToDaughters():void {
 	spriteSelect(57);
-	if(player.lust > 99) {
+	if(player.lust >= player.maxLust()) {
 		//worms r gross mmmmkay?
 		if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 			kGAMECLASS.infestOrgasm();

@@ -1403,8 +1403,9 @@ use namespace kGAMECLASS;
 				else if (hunger >= 50 && hunger < 75) outputText("<b>Your stomach no longer growls. </b>");
 				else if (hunger >= 75 && hunger < 90) outputText("<b>You feel so satisfied. </b>");
 				else if (hunger >= 90) outputText("<b>Your stomach feels so full. </b>");
-				if (weightChange > 0) outputText("<b>You feel like you've put on some weight.</b>");
+				if (weightChange > 0) outputText("<b>You feel like you've put on some weight. </b>");
 				if (oldHunger < 1 && hunger >= 100) kGAMECLASS.awardAchievement("Champion Needs Food Badly", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
+				outputText(" ");
 				//kGAMECLASS.mainView.statsView.showStatUp("hunger");
 				kGAMECLASS.statScreenRefresh();
 			}

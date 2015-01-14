@@ -112,7 +112,7 @@ package classes.Scenes.Dungeons.DeepCave
 				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ", false);
 				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ", false);
 			}
-			if(player.lust >= 100) doNext(game.endLustLoss)
+			if(player.lust >= player.maxLust()) doNext(game.endLustLoss)
 			else doNext(1);
 		}
 

@@ -1145,7 +1145,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				outputText("You fall to the ground, reeling from Izumi’s iron-hard muscles - and other parts besides.  Grinning widely, Izumi visibly relaxes, satisfied that you’re in no fit state to continue fighting.\n\n");
 			}
-			else if (player.lust >= 100)
+			else if (player.lust >= player.maxLust())
 			{
 				outputText("You fall to the ground, too horny to resist further against the Oni’s iron-hard muscles - and other parts beside.  Grinning widely, Izumi visibly relaxes, satisfied that you’re in no fit state to continue fighting.\n\n");
 			}
@@ -1159,7 +1159,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText(" backwards, self-preservation instincts kicking in, intent on escaping the deranged Oni.  To your surprise, rather than snatching or leaping at you, she just blinks and looks at you in confusion.\n\n");
 
 			outputText("“<i>Huh?  What’s the matter?</i>”  She asks, looking genuinely nonplussed.  She reaches out towards you and you shuffle away again, putting a little more distance between the two of you.");
-			if(player.lust >= 100) outputText("  Despite how much the fight with the enormous Oni has turned you on, you’re still hesitant to capitulate to her will entirely.");
+			if(player.lust >= player.maxLust()) outputText("  Despite how much the fight with the enormous Oni has turned you on, you’re still hesitant to capitulate to her will entirely.");
 			outputText("  Izumi actually looks a little hurt.  “<i>You... you really don’t want to do it?</i>”  You can only stare at the oversized giantess in utter confusion as she stammers awkwardly.  “<i>D-Did I do something wrong? I was only playing around, so... we can do it now, right?  What’s wrong?!</i>”  Against all your expectations, Izumi actually backs down, settling back into a seated position on her knees, her expression visibly deflating.\n\n");
 
 			outputText("“<i>Oh, I get it.  It’s me, right?  You don’t find a girl like me attractive.</i>”  Her face falls as she stares at the floor, looking positively morose.  “<i>It’s okay, I don’t blame you.  This whole situation probably seems pretty weird, right?  One minute I’m smacking you around, the next I’m trying to jump you... I forget sometimes that not everyone acts the way Oni do when it comes to stuff like this.</i>”  She sniffs, rubbing one massive palm into her eye and scowling.\n\n");

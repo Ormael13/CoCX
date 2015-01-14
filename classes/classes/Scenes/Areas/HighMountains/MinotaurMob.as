@@ -58,7 +58,7 @@ package classes.Scenes.Areas.HighMountains
 			//(Low damage taken)
 			if(damage <= 8) {
 				outputText("Though your body is tingling from the show the horny beasts are giving you, it doesn't effect you as much as it could have.", false);
-				if(player.lust > 99) outputText("  Still, you're too horny to fight any longer.", false);
+				if(player.lust >= player.maxLust()) outputText("  Still, you're too horny to fight any longer.", false);
 			}
 			//(Medium damage taken)
 			else if(damage <= 14) {
@@ -66,7 +66,7 @@ package classes.Scenes.Areas.HighMountains
 				if(player.lust > 70) outputText(", though you didn't think such a thing was possible", false);
 				else outputText(", feeling like two bullets scraping along the inside of your " + player.armorName, false);
 				outputText(", but it... it could have been worse.  You shudder as a little fantasy of letting them dribble it all over your body works through your mind.", false);
-				if(player.lust > 99) outputText("  Fuck it, they smell so good.  You want, no, NEED more.", false);
+				if(player.lust >= player.maxLust()) outputText("  Fuck it, they smell so good.  You want, no, NEED more.", false);
 				else outputText("  A growing part of you wants to experience that.", false);
 			}
 			//(high damage taken)

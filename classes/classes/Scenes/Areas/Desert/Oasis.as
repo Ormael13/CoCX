@@ -164,7 +164,7 @@ internal function oasisSexing():void {
 		return;
 	}
 	//If you got here by losing combat!
-	else if((player.HP < 1 || player.lust > 99) && getGame().inCombat) {
+	else if((player.HP < 1 || player.lust >= player.maxLust()) && getGame().inCombat) {
 		//►Oasis Demons Defeat PC as part of antm
 		//Antmorph stuff
 		if(monster.findStatusAffect(StatusAffects.phyllafight) >= 0) {

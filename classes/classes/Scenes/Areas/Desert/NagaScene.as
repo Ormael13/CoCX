@@ -490,7 +490,7 @@ internal function nagaFUCKSJOOOOOO():void {
 	//too)
 	else if(player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
 		//(If defeated by lust)
-		if(player.lust > 99) outputText("You fall to your knees, your body shaking with desire.\n\n", false);
+		if(player.lust >= player.maxLust()) outputText("You fall to your knees, your body shaking with desire.\n\n", false);
 		//(If defeated by KO)
 		else outputText("You fall to your knees, your battered body unable to hold itself up any longer.\n\n", false);
 		outputText("You hear the hiss of the naga's laughter as she slithers over to your prone form. Her long tail twists around you and tightens suddenly, pinning your arms to your sides", false);
@@ -501,7 +501,7 @@ internal function nagaFUCKSJOOOOOO():void {
 		}
 		outputText(". You struggle weakly against her grip, but ", false);
 		//(if defeated by lust)
-		if(player.lust > 99) outputText("all your resistance seems to do is make your " + cockDescript(0) + " harder.", false);
+		if(player.lust >= player.maxLust()) outputText("all your resistance seems to do is make your " + cockDescript(0) + " harder.", false);
 		//if defeated by KO)
 		else outputText("you are too weak to do anything to stop her squeezing.", false);
 		outputText("  She leans towards you, gripping your shoulders as she brings her face to your ear. You can feel her serpentine tongue flicking over your ear as she hisses coldly into it.\n\n", false);
@@ -563,7 +563,7 @@ internal function nagaFUCKSJOOOOOO():void {
 	//b) female //http://nekomimichan.org/mg/src/12844585127.jpg
 	else if(player.hasVagina()) {
 		//(If defeated by lust) 
-		if(player.lust > 99) 
+		if(player.lust >= player.maxLust()) 
 		{
 			outputText("You fall to your knees, your body shaking with desire.\n\n", false);
 		}
@@ -582,7 +582,7 @@ internal function nagaFUCKSJOOOOOO():void {
 		else outputText("and while you know you probably won't like it, your " + vaginaDescript(0) + " says otherwise.  ", false);
 		outputText("Now astride the base of her tail and facing towards her, your eyes are drawn to the place on her scaly pelvis where a vagina should be. With one hand the naga begins gently caressing her nether regions, which begin to swell in her excitement into the outlines of a recognizable reptilian vulva. Her expectations are perfectly clear ", false);
 		//(If defeated by lust) 
-		if(player.lust > 99) 
+		if(player.lust >= player.maxLust()) 
 		{
 			outputText("and you can feel the need to have sex with her burn inside you. You quickly strip yourself of your " + player.armorName + " and throw yourself on her awaiting pussy.", false);
 		} 
@@ -670,7 +670,7 @@ internal function nagaFUCKSJOOOOOO():void {
 	//d) genderless
 	else {
 		//(If player loses because of lust) 
-		if(player.lust > 99) 
+		if(player.lust >= player.maxLust()) 
 			outputText("You fall to your knees, your body shaking with desire.\n\n", false);
 		//(If player loses from HP loss)
 		else outputText("You fall to your knees, your battered body unable to hold itself up any longer.\n\n", false);

@@ -733,7 +733,7 @@ package classes.Scenes.Areas.Swamp
 			spriteSelect(77);
 			//Poor males.  All the buttsexes. (yo this is an actual paragraph of the game text right)
 			outputText("", true);
-			if (player.lust > 99) outputText("Unable to resist the desire coursing through your body, you strip off your " + player.armorName + " and start stroking " + sMultiCockDesc() + ", displaying it in the hope that it will draw the drider's attention, while at the same time just trying to get yourself off and attain release.", false);
+			if (player.lust >= player.maxLust()) outputText("Unable to resist the desire coursing through your body, you strip off your " + player.armorName + " and start stroking " + sMultiCockDesc() + ", displaying it in the hope that it will draw the drider's attention, while at the same time just trying to get yourself off and attain release.", false);
 			else {
 				outputText("You slump down, too beat up to mount an effective defense, let alone stay up on your " + player.feet() + ".  The drider skitters over to you and effortlessly peels you out of your " + player.armorName + ", exposing your ", false);
 				if (player.lust < 50) outputText("soft", false);

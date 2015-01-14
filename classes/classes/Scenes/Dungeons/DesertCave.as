@@ -565,7 +565,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			if (!volunteered) {
 				outputText("Helplessly, you ");
-				if(player.lust > 99) {
+				if(player.lust >= player.maxLust()) {
 					if(player.hasVagina()) outputText("dig your hands into your loins, frigging your hungry cunt so hard your juices splatter the Witch's robe.");
 					else outputText("dig your finger into your [asshole], frigging it like your life depended on it.");
 				}
@@ -595,7 +595,7 @@ package classes.Scenes.Dungeons
 			else outputText(" herself, gathering up the constantly-dripping cum and smearing it all over her shaft.");
 			
 			outputText("\n\nHer tongue licks her lips in anticipation as she readies herself, though she stops a moment later when she sees you still have a bit of fight in your eyes");
-			if(player.lust > 99) outputText(", even though your hand is knuckle-deep in your twat");
+			if(player.lust >= player.maxLust()) outputText(", even though your hand is knuckle-deep in your twat");
 			outputText(".");
 			
 			outputText("\n\nKneeling before your helpless form, the mysterious witch sighs and whispers, \"<i>Why can't you just accept it?  You belong with us.  We're going to fix this desert - and Mareth.  The demons can't stop us.  The monsters won't stop us.  They CAN'T.</i>\"  She gently brushes her hand through your hair, smearing you with her sex-juices unthinkingly as she prattles on, \"<i>Just relax, babe.  Here, maybe this will help.</i>\"  The Witch's hands are suddenly holding you by your ears and her lips are moving in nonsensical ways.  Whatever she's saying you can't hear it with how she's holding you.");

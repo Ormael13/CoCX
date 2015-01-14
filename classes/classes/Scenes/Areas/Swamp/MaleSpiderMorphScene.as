@@ -280,7 +280,7 @@ package classes.Scenes.Areas.Swamp
 			if (player.HP < 1) outputText("and silently mouth, \"<i>Please, no.</i>\"", false);
 			else outputText("and give a little nod, too intoxicated by arousal to decline any form of sex.", false);
 			outputText("  His only response is to squeeze tight on your " + buttDescript() + " and press forward until his pre-cum-soaked foreskin is glazing your rim in preparation for the coming penetration.  ", false);
-			if (player.lust > 99) outputText(SMultiCockDesc() + " bounces atop your belly, reacting strongly to the tingling sensation radiating from your " + assholeDescript() + ".", false);
+			if (player.lust >= player.maxLust()) outputText(SMultiCockDesc() + " bounces atop your belly, reacting strongly to the tingling sensation radiating from your " + assholeDescript() + ".", false);
 			else {
 				outputText(SMultiCockDesc() + " ", false);
 				if (player.lust < 50) outputText("slowly fills with blood", false);
@@ -344,7 +344,7 @@ package classes.Scenes.Areas.Swamp
 			if (player.HP < 1) outputText("wounds overwhelm", false);
 			else outputText("lust overwhelms", false);
 			outputText(" you, your " + player.legs() + " grow shaky, then give out entirely.  You flop down on your back", false);
-			if (player.lust > 99) outputText(", caressing yourself with reckless abandon while praying the sexy spider-boy will come violate you with his thick-skinned prick.", false);
+			if (player.lust >= player.maxLust()) outputText(", caressing yourself with reckless abandon while praying the sexy spider-boy will come violate you with his thick-skinned prick.", false);
 			else outputText(", clearly too injured and fatigued by the battle to make more than a few token movements.", false);
 			outputText("  He pounces you, lightning fast, quick enough that you don't even react until he's on top of you.  Chitin-clad legs brush your " + hipDescript() + ", the hard knees sinking deep into the swampy loam.  Grinning happily, the spider-boy leans over you and sucks a " + nippleDescript(0) + " ", false);
 			if (player.hasFuckableNipples()) outputText("into his mouth before plunging his tongue into the tit-pussy's passage", false);

@@ -91,7 +91,7 @@
 			{
 				showerDotEffect();
 				
-				if (player.lust >= 100) return;
+				if (player.lust >= player.maxLust()) return;
 			}
 			
 			if (this.HPRatio() <= 0.6 && fatigue < 100)

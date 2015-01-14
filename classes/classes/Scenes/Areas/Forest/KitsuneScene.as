@@ -153,7 +153,7 @@ package classes.Scenes.Areas.Forest
 				//+15 Lust
 				dynStats("lus", 15);
 			}
-			if ((player.lust >= 100 || player.inte < 20) && !firstTime) {
+			if ((player.lust >= player.maxLust() || player.inte < 20) && !firstTime) {
 				mansion(false, false);
 			}
 			//Else:

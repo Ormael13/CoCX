@@ -111,7 +111,7 @@ package classes.Scenes.Areas.Bog
 		public function loseToLizan():void {
 			clearOutput();
 			if (player.cor > 30) {
-				outputText("Unable to continue fighting, you collapse from " + (player.lust >= 100 ? "overwhelming desires": "your injuries") + ".  The lizan steps over to you, intent on punishing you. ");
+				outputText("Unable to continue fighting, you collapse from " + (player.lust >= player.maxLust() ? "overwhelming desires": "your injuries") + ".  The lizan steps over to you, intent on punishing you. ");
 				cleanupAfterCombat();
 			}
 			else {

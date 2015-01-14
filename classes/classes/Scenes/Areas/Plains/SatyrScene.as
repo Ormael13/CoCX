@@ -192,7 +192,7 @@ internal function loseToSatyr():void {
 	clearOutput();
 	spriteSelect(98);
 	//[Lust loss
-	if(player.lust > 99) outputText("You pant as you begin masturbating furiously, too horny to care about anything the grinning satyr before you has in mind.");
+	if(player.lust >= player.maxLust()) outputText("You pant as you begin masturbating furiously, too horny to care about anything the grinning satyr before you has in mind.");
 	else outputText("You try to steady yourself, clutching your body in pain as the satyr grins at you.");
 	outputText("\n\nThe horned demihuman wastes no time on foreplay or savoring his victory, instead tramping triumphantly forward and pushing you over onto your back.  He squats down and roughly yanks off your [armor] until your crotch is bared.  Impatiently, he ");
 	if(player.isNaga()) outputText("pins down your serpentine body");

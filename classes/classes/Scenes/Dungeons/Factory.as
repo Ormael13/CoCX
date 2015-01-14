@@ -509,7 +509,7 @@ package classes.Scenes.Dungeons
 		public function doLossSuccubus():void {
 			outputText("", true);
 			if(player.cocks.length > 0) {
-				if(player.lust > 99) outputText("Driven half mad with lust, you drop to your knees. Your fingers fly over your body as you pry off every last piece of your " + player.armorName + ", displaying just how hard your alluring opponent has gotten you.  The succubus saunters over, every sinuous step radiating the inhuman sexuality that pours off her skin like heat from a bonfire.\n\n", false);
+				if(player.lust >= player.maxLust()) outputText("Driven half mad with lust, you drop to your knees. Your fingers fly over your body as you pry off every last piece of your " + player.armorName + ", displaying just how hard your alluring opponent has gotten you.  The succubus saunters over, every sinuous step radiating the inhuman sexuality that pours off her skin like heat from a bonfire.\n\n", false);
 				else outputText("Exhausted, you collapse before the succubus.  She effortlessly slices away your " + player.armorName + ", peeling your possessions away with practiced ease.  In moments you are stark naked and wholly exposed to your captor.  In spite of yourself, your body begins to respond to her sultry aura, displaying the hardness of your desire and shame immediately.\n\n", false);
 				outputText("\"<i>Awww, did I get you all <b>HOT</b> and bothered?</i>\" She croons, poising a stocking clad foot above you as her high-heels seem to fade away.  Warm silk begins to press against your groin as slender toes curl around the head of your throbbing maleness, your foe having her way with your desire-saturated form.  You mewl pitifully at the sensation, your hips twitching involuntarily against her demonic sole. The slippery surface of her foot squeezes as she expertly strokes you with her foot, delighting in her complete dominance over your easily controlled member.\n\n", false);  
 				//balls or pussy play
@@ -545,7 +545,7 @@ package classes.Scenes.Dungeons
 				doNext(doBadEndGeneric);
 			}
 			else {
-				if(player.lust > 99) {
+				if(player.lust >= player.maxLust()) {
 					outputText("Driven half mad with lust, you shake yourself free from the trappings of your " + player.armorName + ", first revealing your " + allBreastsDescript() + ", then " + hipDescript() + " and finally your ", false);
 					if(player.vaginas.length > 0) outputText(vaginaDescript(0) + " as the last pieces fall away.\n\n", false);
 					else outputText("bare groin as the last pieces fall away.\n\n", false);
@@ -619,7 +619,7 @@ package classes.Scenes.Dungeons
 			player.slimeFeed();
 			outputText("", true);
 			//Nipplefuck city
-			if(player.hasFuckableNipples() && player.lust >= 100) {
+			if(player.hasFuckableNipples() && player.lust >= player.maxLust()) {
 				outputText("Molten arousal pumps through your veins, burning away your reason with an unquenchable desire to mate.  You drop your top, exposing your " + allBreastsDescript() + " to your foe in a submissive display. Lowering your eyes, you hope you can tempt him to plug your " + nippleDescript(0) + " with his demonic prick.  You roughly squeeze each sensitive tit, trailing your fingers down the sensitive breast-flesh towards your rapidly dampening fuck-holes.\n\n", false);
 				outputText("Your eyes relax as pure sensation overwhelms your already over-excited body.  Your fingers find your nipple-holes, locking around them while tugging and squeezing, stretching them tight with pleasure and pain.  You cast a seductive glance to the incubus' groin, noting that he's been taken in by your wanton display.  He takes a step, his cock rippling and twisting as it shifts and changes before your eyes. It divides it half, splitting into two full-sized pricks.", false);
 				if(player.totalNipples() > 2) outputText("  Each of those divides again, splitting into four prehensile penises.", false);
@@ -638,7 +638,7 @@ package classes.Scenes.Dungeons
 			}
 			//Tentacle gangbang
 			else {
-				if(player.lust > 99) outputText("Molten arousal pumps through your veins, burning away your reason with an unquenchable desire to mate. You drop your top, exposing your " + allBreastsDescript() + " to your foe in a submissive display, ", false);
+				if(player.lust >= player.maxLust()) outputText("Molten arousal pumps through your veins, burning away your reason with an unquenchable desire to mate. You drop your top, exposing your " + allBreastsDescript() + " to your foe in a submissive display, ", false);
 				else outputText("You lower your top, exposing your nubile form to your foe in a submissive display, ", false);
 				outputText("lowering your eyes and fixating on his now-rigid demonic member.  Right before your eyes, it begins splitting and dividing into thinner prehensile penises that squirm about in the air, each one reminding you of a snake on the prowl.  ", false);
 				if(player.cor < 80) outputText("In a disgusting display", false);

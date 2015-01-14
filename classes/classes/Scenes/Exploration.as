@@ -54,8 +54,8 @@ package classes.Scenes
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(10, "Bog", kGAMECLASS.bog.exploreBog);
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(11, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain);
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(12, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift);
-			//if (flags[kFLAGS.VOLCANIC_CRAG_EXPLORED] > 0) addButton(13, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag);
-			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
+			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(13, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag);
+			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
 			//addButton(4, "Next", explorePageII);
 			addButton(14, "Back", eventParser, 1);
 		}
@@ -242,6 +242,16 @@ package classes.Scenes
 					outputText("", true);
 					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n", false);
 					outputText("<b>You've discovered the Glacial Rift!</b>", false);
+					doNext(camp.returnToCampUseTwoHours);
+					return;
+				}
+				//Discover Volcanic Crag!
+				if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0 && rand(4) <= 0 && (player.level >= 15 || model.time.days >= 90) ) {
+					flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
+					player.explored++;
+					outputText("", true);
+					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n", false);
+					outputText("<b>You've discovered the Volcanic Crag!</b>", false);
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}

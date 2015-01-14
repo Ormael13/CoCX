@@ -46,7 +46,7 @@ package classes.Scenes.Areas.Mountain
 				return;
 			}
 			//Lust or HP loss texts here
-			if (player.lust >= 100) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n", true);
+			if (player.lust >= player.maxLust()) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n", true);
 			else outputText("Too weak to continue fighting, you fall to your knees.\n\n", true);
 			outputText("The heads of the hellhound grin with desire as he rises onto his hind legs. As the hellhound stands before you, your eyes widen at the sight of its equipment: a pair of eight-inch long black rods, one above the other, with a sack containing a quad of flaming balls underneath. As the hound swaggers closer, you gulp at the thought of what those fiery balls are going to be pumping into you. You are helpless against the hellhound as he pushes you onto your ", false);
 			if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("hocks and knees", false);

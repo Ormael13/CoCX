@@ -277,7 +277,7 @@ internal function kihaLossIntro():void {
 	outputText("", true);	
 	spriteSelect(72);
 	//(Lust)
-	if(player.lust > 99) outputText("You give up on fighting, too horny to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a shameless slut!  You're lusting after me even in the heat of battle, like a common imp!  You aren't worthy to lick between my foot-claws!</i>\"\n\n", false);
+	if(player.lust >= player.maxLust()) outputText("You give up on fighting, too horny to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a shameless slut!  You're lusting after me even in the heat of battle, like a common imp!  You aren't worthy to lick between my foot-claws!</i>\"\n\n", false);
 	//(HP)
 	else outputText("You collapse, too wounded to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a wimp!  I've barely started fighting and you're already beaten!</i>\"\n\n", false);
 	
@@ -315,7 +315,7 @@ private function kihaMilkTitHumiliation():void {
 	//(Does not use the defeat intro - clear screen)
 	outputText("", true);
 	spriteSelect(72);
-	if(player.lust > 99) outputText("You slide to the ground, too turned on to fight and openly touching yourself.", false);
+	if(player.lust >= player.maxLust()) outputText("You slide to the ground, too turned on to fight and openly touching yourself.", false);
 	else outputText("You slide to the ground, too defeated to continue to fight.", false);
 	outputText("  Kiha snorts, expelling a tiny burst of flame and smoke from a nostril as she towers over your prone body.\n\n", false);
 	
@@ -440,7 +440,7 @@ private function tsundereMasturbationChristmasCarol():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("You walk towards the draconic woman, removing your " + player.armorName + " as you observe her firm, ", false);
-	if(player.lust > 99) outputText("wanton", false);
+	if(player.lust >= player.maxLust()) outputText("wanton", false);
 	else outputText("but dispirited", false);
 	outputText(" figure slumping against the weathered bark behind her.  She eyes you carefully, trying to comprehend the situation before catching note of your ", false);
 	if(player.gender > 0) outputText("aroused genitals", false);

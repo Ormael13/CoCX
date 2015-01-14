@@ -215,7 +215,7 @@ package classes {
 					}
 					getGame().dynStats("lus", .1);
 					player.lust += 20;
-					if (player.lust > 100) player.lust = 100;
+					if (player.lust > player.maxLust()) player.lust = player.maxLust();
 				}
 				if (player.statusAffectv1(StatusAffects.Luststick) <= 0) {
 					player.removeStatusAffect(StatusAffects.Luststick);
@@ -351,7 +351,7 @@ package classes {
 				if (rand(5) == 0) {
 					outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.");
 					getGame().dynStats("lus", 2 + rand(15));
-					if (player.lust >= 100) {
+					if (player.lust >= player.maxLust()) {
 						outputText("  Your knees lock from the pleasure, and you fall back in pleasure, twisting and moaning like a whore as you somehow orgasm from your mouth.  When it finishes, you realize your mouth feels even more sensitive than before.");
 						player.orgasm();
 						getGame().dynStats("sen", 2);

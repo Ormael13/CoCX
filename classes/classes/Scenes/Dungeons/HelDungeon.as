@@ -669,7 +669,7 @@ package classes.Scenes.Dungeons
 		public function phoenixPlatoonMurdersPC():void {
 			clearOutput();
 			outputText("You collapse, too ");
-			if(player.lust > 99) outputText("turned on");
+			if(player.lust >= player.maxLust()) outputText("turned on");
 			else outputText("badly injured");
 			outputText(" to continue the fight.  The platoon of heavy infantry breaks their formation, circling around you with shields still raised, keeping you from making any kind of last-ditch attack.  One prods you with the flat of her blade.  \"<i>Is " + player.mf("he","she") + " down?</i>\"");
 

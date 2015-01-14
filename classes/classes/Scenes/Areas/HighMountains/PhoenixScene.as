@@ -99,7 +99,12 @@ package classes.Scenes.Areas.HighMountains
 		
 		public function fuckPhoenixsButt():void {
 			clearOutput();
-			outputText("(Placeholder) And then you've fucked her ass.");
+			outputText("With your mind made up, you're definitely in control. You tell the phoenix that you're going to fuck her ass. You quickly yank her scimitar away so she's defenseless and loincloth off to expose her tailhole and firm butt-cheeks. You give her a hard shove on the grounds and step on her back like you're dominating. She gives you a glare and yells, \"<i>I'll never submit to you! I never will!</i>\"");
+			if (player.armorName == "goo armor") outputText("\n\nThe goo opens up to reveal your [cock]. ");
+			else outputText("\n\nYou take off the bottom half of your [armor] to reveal your [cock]. ");
+			outputText("You grab her by her rump and lift her tail, caress her butt-cheeks and tell her to get ready for the ordeal ahead.");
+			outputText("\n\nYou push your [cock] into her rear entrance, inch by inch.");
+			outputText("\n\n(PLACEHOLDER) And then you've unloaded in her bowels.");
 			player.orgasm();
 			cleanupAfterCombat();			
 		}
@@ -168,7 +173,7 @@ package classes.Scenes.Areas.HighMountains
 					return;
 				}
 			}
-			outputText("You collapse to the rocky ground, far too " + (player.lust >= 100 ? "turned on": "drained") + " to continue the fight. The phoenix smirks as you drop, carefully shedding her tattered clothing to expose her lush hips and breasts before making her way over to you, swaying sensuously with each step. ");
+			outputText("You collapse to the rocky ground, far too " + (player.lust >= player.maxLust() ? "turned on": "drained") + " to continue the fight. The phoenix smirks as you drop, carefully shedding her tattered clothing to expose her lush hips and breasts before making her way over to you, swaying sensuously with each step. ");
 			outputText("\n\n\"<i>I was just going to kill you and be done with it,</i>\" her hand grasps your chin as she speaks, turning your head up so that you can see both her gloating face and the throbbing, fully erect lizardcock that juts out above her soaked snatch. \"<i>But after that pathetic performance, I think I've come up with a much better use for you...</i>\"");
 			if (player.hasCock() && rand(2) == 0) {
 				doNext(cockwielderLossScenePart1);
@@ -260,7 +265,7 @@ package classes.Scenes.Areas.HighMountains
 		//Non-sexy bad end, loss by HP 4 times in a row.
 		public function phoenixBadEnd():void {
 			clearOutput();
-			outputText("\"<i>Seriously? I've beaten you several times in a row? I guess... I've made a final decision. You must die. I'm sorry but I have to,</i>\" the phoenix says.");
+			outputText("\"<i>Seriously? I've beaten you several times in a row? I guess... I've made a final decision; you must die. I'm sorry but I have to,</i>\" the phoenix says.");
 			outputText("\n\n\"<i>The harpy queen will be avenged,</i>\" she says with a glare on your face. She raises her scimitar. You look up at the sharp blade. You clearly know where it's going.");
 			outputText("\n\n\"<i>Hasta la vista, baby!</i>\" These are the last words you hear as the speeding scimitar finally makes contact with your neck.");
 			rawOutputText("\n\n[DATA EXPUNGED]");

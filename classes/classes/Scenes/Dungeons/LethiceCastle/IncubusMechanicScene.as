@@ -288,7 +288,7 @@ package classes.Scenes.Dungeons.LethiceCastle
 		//Bad end for males and hermaphrodites
 		public function incubusLossMaleBadEndPart1():void {
 			clearOutput();
-			if (player.lust >= 100) {
+			if (player.lust >= player.maxLust()) {
 				outputText("Your [legs] are quivering too wildly to support you anymore, and you collapse, splaying yourself out so that your rigid cock{s} are jutting out enticingly, hard and ready. You shudder, too aroused to fight and certainly too turned on to think straight. Looking longingly at the demon's throbbing-hard member, you unconsciously lick your lips, finding yourself craving its touch unconditionally. Your hands remove your [armor] before falling to your crotch, grabbing, squeezing, and tugging, but in the back of your mind, you realize you'll need his help to orgasm.");
 				outputText("\n\nThe incubus leers, smiling down at you.");
 				if (player.biggestCockLength() < 6) outputText("\n\n\"<i>That's it? You expect to please anyone with such a pitiful endowment? I suppose there may be someone into that, somewhere.</i>\" The incubus sighs. <i>\"Your flaws only make my job harder.</i>\"");
@@ -368,7 +368,7 @@ package classes.Scenes.Dungeons.LethiceCastle
 		public function incubusLossFemaleBadEndPart1():void {
 			clearOutput();
 			if (!player.hasVagina()) {
-				if (player.lust >= 100) {
+				if (player.lust >= player.maxLust()) {
 					outputText("You stagger about drunkenly, stuffing your hand down your [armor] to get at your needy, aching [asshole]. You feel like a molten-hot font of lust and a delirious, jizz-craving slut all at the same time. Nothing short of hours of endlessly rutting on a virile, demonic cock for hours will quench the flames of your ardor and give you the pleasure you now crave. You whimper, looking up at the incubus imploringly as you try to get him to take you, yanking open your [armor] to show off your ready sphincter and busily pumping fingers. You even spread yourself open, beckoning him to stuff you.");
 					outputText("\n\nThe demon uncaps a bottle of succubi milk and presses it into your spread-open sphincter, pouring something into you. Before you try to push it out, you feel buzzing heat in your groin, so strong that it's practically disabling. Slowly, that heat focusing into an incredible, wet sensation. <b>You've grown a pussy!</b> The empty bottle falls to the ground.");
 				}
@@ -385,7 +385,7 @@ package classes.Scenes.Dungeons.LethiceCastle
 				player.createVagina();
 			}
 			else {
-				if (player.lust >= 100) {
+				if (player.lust >= player.maxLust()) {
 					outputText("You stagger about drunkenly, stuffing your hand down your [armor] to get at your needy, aching [vagina]. You feel like a molten-hot font of lust and a delirious, jizz-craving slut all at the same time. Nothing short of hours of endlessly rutting on a virile, demonic cock for hours will quench the flames of your ardor and give you the pleasure you now crave. You whimper, looking up at the incubus imploringly as you try to get him to take you, yanking open your [armor] to show off your splayed-open twat and busily pumping fingers. You even pull them out lick clean, hoping he'll enjoy the show as much as you enjoy your own taste.");
 				}
 				else {

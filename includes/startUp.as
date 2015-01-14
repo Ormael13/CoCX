@@ -47,7 +47,10 @@ public function mainMenu(e:MouseEvent = undefined):void
 		outputText(" Debug Build");
 	else
 		outputText(" Release Build");
-
+	if (CONFIG::AIR)
+		outputText(" (AIR)");
+	if (CONFIG::STANDALONE)
+		outputText(" (Standalone)");
 	//doThatTestingThang();
 
 	startupScreenBody();

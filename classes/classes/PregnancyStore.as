@@ -41,7 +41,8 @@ package classes
 		public static const PREGNANCY_WORM_STUFFED:int          =  33; //Used to fill the player's vagina when the worms take up residence. This prevents any other form of
 																	   //pregnancy from taking hold. Does not respond to ovielixirs.
 		public static const PREGNANCY_MINERVA:int				=  34;
-
+		public static const PREGNANCY_BEHEMOTH:int				=  35;
+		
 		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
 		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs
 		public static const PREG_NO_SIGNS_KNOWN:int             =   2; //NPC is in the first trimester, knows she’s pregnant
@@ -85,6 +86,7 @@ package classes
 		public static const INCUBATION_SHIELA:int               =  72;
 		public static const INCUBATION_SALAMANDER:int           = 336;
 		public static const INCUBATION_MINERVA:int           	= 216; 
+		public static const INCUBATION_BEHEMOTH:int           	= 216; 
 
 		private static const MAX_FLAG_VALUE:int                 = 2999;
 		private static const PREG_TYPE_MASK:int                 = 0x0000FFFF; //Should be safe with 65535 different pregnancy types
