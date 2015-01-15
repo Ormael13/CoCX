@@ -7506,6 +7506,7 @@
 			}
 		}
 
+/* Moved to KitsuneGift.as
 //Kitsune's Gift
 		public function kitsunesGift(player:Player):void
 		{
@@ -7622,7 +7623,7 @@
 				default: trace("Kitsune's gift roll foobar..."); break;
 			}
 		}
-
+*/
 
 		/*
 		 Perk

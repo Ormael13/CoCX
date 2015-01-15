@@ -27,7 +27,7 @@ package classes.Items.Consumables
 			return false;
 		}
 		
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			if (game.player.findPerk(PerkLib.BimboBrains) >= 0) {
 				outputText("\n\n(<b>Perk Removed:  Bimbo Brains - Your intelligence and speech patterns are no longer limited to that of a bimbo.</b>)");
 				game.player.removePerk(PerkLib.BimboBrains);
@@ -36,6 +36,7 @@ package classes.Items.Consumables
 				outputText("\n\n(<b>Perk Removed:  Futa Faculties - Your intelligence and speech patterns are no longer limited to that of a futanari bimbo.</b>)");
 				game.player.removePerk(PerkLib.FutaFaculties);
 			}
+			return(false);
 		}
 		
 		override public function useText():void {

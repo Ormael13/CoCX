@@ -20,7 +20,7 @@ package classes.Items.Consumables
 			return false;
 		}
 		
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			outputText("You open the bottle of hair extension serum and follow the directions carefully, massaging it into your scalp and being careful to keep it from getting on any other skin.  You wash off your hands with lakewater just to be sure.");
 			if (game.flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] <= 0) {
 				outputText("\n\nThe tingling on your head lets you know that it's working!");
@@ -40,6 +40,7 @@ package classes.Items.Consumables
 				outputText("\n\n<b>Somehow you know that your " + game.player.hairDescript() + " is growing again.</b>");
 			}
 			if (game.flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] < 7) game.flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
+			return(false);
 		}
 	}
 }

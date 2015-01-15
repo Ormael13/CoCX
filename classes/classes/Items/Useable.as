@@ -18,10 +18,11 @@ package classes.Items
 		
 		public function canUse():Boolean { return true; } //If an item cannot be used it should provide some description of why not
 		
-		public function hasSubMenu():Boolean { return false; } //Only GroPlus and Reducto use this.
+//		public function hasSubMenu():Boolean { return false; } //Only GroPlus and Reducto use this. //Replaced with a return
 		
-		public function useItem():void {
+		public function useItem():Boolean {
 			CoC_Settings.errorAMC("Useable", "useItem", id);
+			return(false);
 		}
 		
 		public function useText():void {} //Produces any text seen when using or equipping the item normally
