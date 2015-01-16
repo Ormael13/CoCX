@@ -147,8 +147,10 @@ package classes.Scenes
 			}
 			else {
 				currentItemSlot = fromSlot;
-				item.useItem();
-				if (!item.hasSubMenu()) itemGoNext(); //Don't call itemGoNext if there's a sub menu, otherwise it would never be displayed
+				if (!item.useItem()) itemGoNext(); //Items should return true if they have provided some form of sub-menu.
+					//This is used for Reducto and GroPlus (which always present the player with a sub-menu)
+					//and for the Kitsune Gift (which may show a sub-menu if the player has a full inventory)
+//				if (!item.hasSubMenu()) itemGoNext(); //Don't call itemGoNext if there's a sub menu, otherwise it would never be displayed
 			}
 		}
 		

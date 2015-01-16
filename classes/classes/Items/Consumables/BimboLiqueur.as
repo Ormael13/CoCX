@@ -21,7 +21,7 @@ package classes.Items.Consumables
 			return false;
 		}
 
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			if (game.player.findPerk(PerkLib.BroBody) >= 0) {
 				outputText("You wince as the stuff hits your stomach, already feeling the insidious effects beginning to take hold.  A lengthy belch escapes your lips as your stomach gurgles, and you giggle abashedly to yourself.");
 				if (game.player.tallness < 77) {
@@ -188,6 +188,7 @@ package classes.Items.Consumables
 				//Max int - 50
 			}
 			game.player.genderCheck();
+			return(false);
 		}
 	}
 }

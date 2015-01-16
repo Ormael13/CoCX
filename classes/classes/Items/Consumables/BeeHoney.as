@@ -46,7 +46,7 @@ package classes.Items.Consumables
 			return true;
 		}
 		
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			var player:Player = getGame().player;
 			var pure:Boolean = (value == PURE_HONEY_VALUE);
 			var special:Boolean = (value == SPECIAL_HONEY_VALUE);
@@ -77,7 +77,7 @@ package classes.Items.Consumables
 					outputText("\n\nAt first you feel your baby struggle against the honey, then it seems to grow content and enjoy it.");
 				}
 				getGame().flags[kFLAGS.PREGNANCY_CORRUPTION]--;
-				if (pure) return; //No transformative effects for the player because the pure honey was absorbed by the baby - Special honey will keep on giving
+				if (pure) return(false); //No transformative effects for the player because the pure honey was absorbed by the baby - Special honey will keep on giving
 			}
 			//Corruption reduction
 			if (changes < changeLimit && pure) { //Special honey will also reduce corruption, but uses different text and is handled separately
@@ -288,6 +288,7 @@ package classes.Items.Consumables
 				}
 				getGame().dynStats("lust", 0.2 * player.lib + 5);
 			}
+			return(false);
 		}
     }
 }

@@ -17,9 +17,10 @@ package classes.Items.Consumables
 			this.effect = effect;
 		}
 		
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			clearOutput();
 			effect(game.player);
+			return(false); //Any normal consumable does not have a sub-menu. Return true so that the inventory runs the itemDoNext function after useItem.
 		}
 	}
 }

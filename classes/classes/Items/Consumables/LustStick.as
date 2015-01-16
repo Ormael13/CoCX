@@ -24,7 +24,7 @@ package classes.Items.Consumables
 			return true;
 		}
 		
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			if (game.player.findStatusAffect(StatusAffects.LustStickApplied) >= 0) {
 				game.player.addStatusValue(StatusAffects.LustStickApplied, 1, Utils.rand(12) + 12);
 				outputText("You carefully open the sweet-smelling tube and smear the lipstick over the coat you already have on your lips.  <b>No doubt another layer will make it last even longer!</b>  ");
@@ -38,6 +38,7 @@ package classes.Items.Consumables
 				outputText("  You finish and pucker your lips, feeling fairly sexy with your new makeup on.\n\n");
 			}
 			game.dynStats("lus", 1);
+			return(false);
 		}
 	}
 }

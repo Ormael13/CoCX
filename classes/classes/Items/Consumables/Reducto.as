@@ -20,9 +20,9 @@ package classes.Items.Consumables
 			return true;
 		}
 		
-		override public function hasSubMenu():Boolean { return true; } //Only GroPlus and Reducto use this.
+//		override public function hasSubMenu():Boolean { return true; } //Only GroPlus and Reducto use this.
 		
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			var rdtBalls:Function	= (game.player.balls > 0 && game.player.ballSize > 1 ? reductoBalls : null);
 			var rdtBreasts:Function	= (game.player.breastRows.length > 0 && game.player.biggestTitSize() > 0 ? reductoBreasts : null);
 			var rdtButt:Function	= (game.player.buttRating > 1 ? reductoButt : null);
@@ -34,6 +34,7 @@ package classes.Items.Consumables
 			outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?");
 			game.choices("Balls", rdtBalls, "Breasts", rdtBreasts, "Butt", rdtButt, "Clit", rdtClit, "Cock", rdtCock,
 				"Hips", rdtHips, "Nipples", rdtNipples, "", null, "", null, "Nevermind", reductoCancel);
+			return(true);
 		}
 		
 		private function reductoBalls():void {

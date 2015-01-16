@@ -788,11 +788,10 @@ package classes.Scenes.Explore {
 					//[Maintain first encounter mechanics. New variable to keep track of subsequent encounters within a specific time period]
 				}
 			}
-			inventory.takeItem(consumables.CERUL_P, camp.campMenu);
 			outputText("\n", false);
 			player.orgasm();
 			dynStats("str", rand(2),"tou", rand(2), "spe", rand(2), "int", rand(2), "cor", 1);
-			doNext(camp.campMenu);
+			inventory.takeItem(consumables.CERUL_P, camp.campMenu);
 		}
 	}
 }
