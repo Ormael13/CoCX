@@ -363,8 +363,12 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nThe demons voice comes back as a dry, irritated rumble. \"<i>That and more, mortal. Would it please you to shape my cock for your pleasure?</i>\"");
 
-			if (player.findPerk(PerkLib.BimboBrains) >= 0) outputText("\n\nGiggling, you answer, \"<i>Like totally! Let's give you a cock makeover!</i>\"");
-			else outputText("\n\nNodding and languidly stroking his fantastically useful phallus, you answer, \"<i>Maybe. I still haven't decided what to do with you.</i>\"");
+			if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+				outputText("\n\nGiggling, you answer, \"<i>Like totally! Let's give you a cock makeover!</i>\"");
+			}
+			else {
+				outputText("\n\nNodding and languidly stroking his fantastically useful phallus, you answer, \"<i>Maybe. I still haven't decided what to do with you.</i>\"");
+			}
 
 			outputText("\n\nWhat kind of dick would you like the incubus to have when you fuck him?");
 		

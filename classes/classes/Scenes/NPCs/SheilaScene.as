@@ -4127,6 +4127,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 		player.ballSize++;
 		if(player.ballSize < 10) player.ballSize++;
 		player.cumMultiplier++;
+		player.orgasm();
 		dynStats("cor", 10);
 		sheilaCorruption(-10);
 		if (getGame().inCombat)

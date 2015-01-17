@@ -3367,7 +3367,7 @@ package classes.Scenes.NPCs
 //Only available to Medium/High Affection Ember.
 //Only occurs if the PC has a pussy and is in heat; Ember must have a dick; both must not be pregnant.
 //In case Ember and the PC are herms, both being able to impregnate and be impregnated. One of the scenes will be randomly choosen.
-//Ember never fails to impregnate the PC or be impregnated.
+//Ember never fails to impregnate the PC or be impregnated - unless the player is on contraceptives.
 		private function getKnockedUpByEmbrahBroBaby():void
 		{
 			clearOutput();
@@ -3456,7 +3456,7 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			dynStats("sen", -2);
 			//Preg shit goez hurdur
-			player.knockUp(PregnancyStore.PREGNANCY_EMBER, PregnancyStore.INCUBATION_EMBER, 1, 1);
+			player.knockUp(PregnancyStore.PREGNANCY_EMBER, PregnancyStore.INCUBATION_EMBER, 0); //Will always impregnate unless contraceptives are in use
 			player.createStatusAffect(StatusAffects.EmberFuckCooldown, 36, 0, 0, 0);
 			doNext(createCallBackFunction(emberBreedingAfterMathWatchOutForRadioactiveFallout,false));
 		}
