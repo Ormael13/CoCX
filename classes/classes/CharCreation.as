@@ -757,7 +757,7 @@ public function useCustomProfile():void {
 	}
 	else {
 		outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...");
-		outputText("\n\n\n\nAre you a man or a woman?", true);
+		outputText("\n\n\n\nAre you a man or a woman?");
 		simpleChoices("Man", 10000, "Woman", 10001, "", 0, "", 0, "", 0);
 	}
 }
