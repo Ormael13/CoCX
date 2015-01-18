@@ -1279,7 +1279,7 @@ package classes.Scenes.NPCs {
 	public function cageDatCowCunt():void
 	{
 		clearOutput();
-	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll no longer be a threat to anyone anymore.  Marble looks uncertain at you and asks if you're sure she needs to be locked up now that she's been purified.  You say you're certain, and your mate nods to you and says that she trusts your judgement on this matter.");
+	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll no longer be a threat to anyone anymore.  Marble looks uncertain at you and asks if you're sure she needs to be locked up now that she's been purified.  You say you're certain, and your mate nods to you and says that she trusts your judgment on this matter.");
 	 	outputText("\n\nIt takes you and Marble about an hour to fashion a cage out of logs from the forest thanks to her excellent carpentry skills.  You then untie Clara from her bonds and put her into her new home.  She'll be in there for some time, but at least you know she won't be able to hurt anyone that way.  The purified cow-girl offers no resistance this whole time, and is eerily silent once inside her cell.  You do occasionally catch her angrily staring at you.");
 	 	flags[kFLAGS.CLARA_IMPRISONED] = 1;
 		//Clara is marked as having been purified and caged in camp.
@@ -1316,7 +1316,7 @@ package classes.Scenes.NPCs {
 	public function stickUnpurifiedClaraInACage():void
 	{
 		clearOutput();
-	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll be no threat to anyone anymore.  Marble nods to you and says that she trusts your judgement on this matter.");
+	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll be no threat to anyone anymore.  Marble nods to you and says that she trusts your judgment on this matter.");
 	 	outputText("\n\n\"<i>So that's it then.  You're just going to lock me up in a cage?  You can't do that!  I'm fucking Clara, daughter of Hana!  You can't just throw me in a damn cage!</i>\"  Despite her protests, she can't offer any real resistance, bound as she is.");
 	 	outputText("\n\nIt takes you and Marble about an hour to fashion a cage out of logs from the forest thanks to her excellent carpentry skills.  You then untie Clara from her bonds and put her into her new home.  She'll be in there for some time, but at least you know she won't be able to hurt anyone that way.  The bars certainly don't do much to cut out the noise of her taunts and demands, unfortunately.");
 		//Clara is marked as having not been purified and caged in camp
@@ -1330,7 +1330,7 @@ package classes.Scenes.NPCs {
 	public function letCorruptCowCuntGo():void
 	{
 		clearOutput();
-	 	outputText("You say that you're going to let Clara go, but she has to promise to never return, bother you or anyone in your camp ever again.  Marble gives you a look of shock and asks if you're absolutely certain you want to do that.  When you give her the affirmative, she sighs and says that she'll trust your judgement on this matter.");
+	 	outputText("You say that you're going to let Clara go, but she has to promise to never return, bother you or anyone in your camp ever again.  Marble gives you a look of shock and asks if you're absolutely certain you want to do that.  When you give her the affirmative, she sighs and says that she'll trust your judgment on this matter.");
 	 	outputText("\n\n\"<i>Really?  After all that, you're just going to let me go?  Fine.  I promise to never return or bother any of you ever again.</i>\"");
 	 	outputText("\n\nYou release her from her bonds, give her her things, and escort her from the camp.  She gives you a wicked smile, then steps out of the camp and warps away.  You hope that wasn't a mistake.");
 		//Clara is marked as having not been purified and released
