@@ -354,7 +354,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					if (player.statusAffectv1(StatusAffects.Marble) < 30) {
 						//outputText("At your words, Marble's face falls completely.  She looks up at you for a moment before saying \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You hesitate, not sure how to reply to her.  She sighs and invites you to her chest.\n\n", false);
 						//outputText("As you're drinking from Marble's breasts, you hear her say \"<i>Don't you ever leave my side again, sweety.  I'll make it up to you for what happened.</i>\"  As she says this an odd feeling passes through you.  For a brief instant you panic as you realize that any thought not to do as Marble asks is vanishing from your mind.  Then it passes, and without any doubt, you will be staying with Marble for the rest of your life.  There will be no more adventuring for this year's champion.  \n\n", false);
-						outputText("Marble grabs you and pulls your head into her chest.  \"<i>I'm so sorry sweetie, I never meant for this to happen,</i>\" she sobs above you.   \"<i>I'll make this right, I'll make sure nothing else ever hurts you, even if I have to make you stay here with me.</i>\"  An alarm rings in your head; how are you supposed to complete your mission like this?  Marble feels you squirm, and speaks again.  \"<i>I'm sorry, [name], but if you need my milk, this is really the best way... for both of us.</i>\"");
+						outputText("Marble grabs you and pulls your head into her chest.  \"<i>I'm so sorry sweetie, I never meant for this to happen,</i>\" she sobs above you.  \"<i>I'll make this right, I'll make sure nothing else ever hurts you, even if I have to make you stay here with me.</i>\"  An alarm rings in your head; how are you supposed to complete your mission like this?  Marble feels you squirm, and speaks again.  \"<i>I'm sorry, [name], but if you need my milk, this is really the best way... for both of us.</i>\"");
 						doNext(marbleBadEndFollowup);
 						return true;
 					}
@@ -1284,7 +1284,7 @@ private function AshamedAddictionComfort():void {
 	if(player.tallness < 60) outputText("She pulls you into her chest and you feel relieved to see the Marble you know is still in there.  You feel warm drops of water fall on your head and look up to find Marble crying fresh tears, but this time with a big smile on her face.\n\n", false);
 	//[player height greater then or equal to 5 feet]
 	else outputText("You hear her breath start to come in short breaths and look at her face to find Marble crying fresh tears, but this time with a big smile on her face.\n\n", false);
-	outputText("\"<i>Thank you, sweetie.</i>\" She whispers so softly that you almost don't hear it.  Unfortunately, being so close to her starts to remind you of what you so desperately need. The moment feels somewhat ruined as you unsuccessfully try to hold back your shaking.  She pulls back and looks you straight in the eye.  \"<i>Don't worry sweetie, we'll find a way to make this better together,</i>\" she says, holding you tightly in her arms.  You can tell she's putting on a brave face and you don't think she actually has any idea of what to do.  \"<i>Come back when you start to feel a need for my milk again,</i>\"'  she tells you as you leave, little hiccups accompanying her words, \"<i>We will get through this.</i>\"", false);
+	outputText("\"<i>Thank you, sweetie.</i>\" She whispers so softly that you almost don't hear it.  Unfortunately, being so close to her starts to remind you of what you so desperately need. The moment feels somewhat ruined as you unsuccessfully try to hold back your shaking.  She pulls back and looks you straight in the eye.  \"<i>Don't worry sweetie, we'll find a way to make this better together,</i>\" she says, holding you tightly in her arms.  You can tell she's putting on a brave face and you don't think she actually has any idea of what to do.  \"<i>Come back when you start to feel a need for my milk again,</i>\"' she tells you as you leave, little hiccups accompanying her words, \"<i>We will get through this.</i>\"", false);
 	//(increase affection by 10)
 	marbleStatusChange(10,0);
 	//(delay withdrawal effect)
@@ -1492,7 +1492,7 @@ private function extendedMurbelFarmTalkz():void {
 			if(player.cor < 33) outputText("\n\nYou sigh and wonder how to word your response for a few moments before telling her that you think about them almost everyday; that it's thoughts of home and family that keep you going.");
 			else if(player.cor < 66) outputText("\n\nYou pause a moment before telling her that you used to think about them all the time, but you've since tried to push them from your mind so that you can focus on why you came to this world.");
 			else outputText("You chuckle and say that you hardly think of them with all the other fun things to think about.  Then you pause and say that it is in the moments that you do think about them that keep you from forgetting who you once were.");
-			outputText("\n\n\"<i>Hmm, it's nice to hear you care so much about your family.  As for me, I think of them pretty often, especially my daddy.  Don't get me wrong; I do love momma, but she always seemed so bossy around daddy, always giving him orders... and yet he had infinite patience for everyone.  Even after trying hundreds of times to swing straight when I was a little girl he would never lose his patience.</i>\"  She hesitates.  \"<i>No, wait... there was that one time he and momma got into a fight, and afterwards he was really nervous and shaky and he got mad at me.  I cried so much when he scolded me, but the next day he was back to normal - if anything, he was even a bit nicer.</i>\"  She gets misty eyed for a moment.  \"<i>I remember the day where he showed me how to make my first hammer.  I'll never forget what he said then.  'This is a weapon; that means it's for hurting people.  Never raise your hammer against someone unless he is an enemy, and when you do raise it, never hold back and don't give him the chance to hurt you instead.  You need to remember this if you want to survive.</i>\"");
+			outputText("\n\n\"<i>Hmm, it's nice to hear you care so much about your family.  As for me, I think of them pretty often, especially my daddy.  Don't get me wrong; I do love momma, but she always seemed so bossy around daddy, always giving him orders... and yet he had infinite patience for everyone.  Even after trying hundreds of times to swing straight when I was a little girl he would never lose his patience.</i>\"  She hesitates.  \"<i>No, wait... there was that one time he and momma got into a fight, and afterwards he was really nervous and shaky and he got mad at me.  I cried so much when he scolded me, but the next day he was back to normal - if anything, he was even a bit nicer.</i>\"  She gets misty eyed for a moment.  \"<i>I remember the day where he showed me how to make my first hammer.  I'll never forget what he said then. 'This is a weapon; that means it's for hurting people.  Never raise your hammer against someone unless he is an enemy, and when you do raise it, never hold back and don't give him the chance to hurt you instead.  You need to remember this if you want to survive.</i>\"");
 			outputText("\n\nMarble starts, realizing that she'd been staring wistfully off into space, then she makes a double take and looks out the window.  \"<i>I'm sorry sweetie, but I forgot Whitney had a job for me that I need to go help her with.  Why don't we finish this some other time?</i>\"  She seems in a hurry to go, so you bid the friendly cow-girl good day and return to your camp.");
 			break;
 		//--- Third Conversation ---
@@ -3728,7 +3728,7 @@ private function marbleAppearance():void {
 	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] == 0) outputText("6 foot 4 ");
 	else if(flags[kFLAGS.MARBLE_BOVA_LEVEL] == 1) outputText("6 foot 8 ");
 	else outputText("7 foot 4 ");
-	outputText("inch tall cow-girl, and while she isn't very fast, she has very strong muscles; though they are difficult to spot under her skin's layer of fat. <b>She is currently wearing farm-hand clothes and using a large two-handed hammer as a weapon.</b>   ");
+	outputText("inch tall cow-girl, and while she isn't very fast, she has very strong muscles; though they are difficult to spot under her skin's layer of fat. <b>She is currently wearing farm-hand clothes and using a large two-handed hammer as a weapon.</b>  ");
 	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] <= 1) outputText("She has a fairly normal soft human face, with light-colored skin.  ");
 	else outputText("She has a soft face that is a mix of bovine and human features, with thick brown fur covering her body.  ");
 
@@ -4091,7 +4091,7 @@ private function milkMarbleOnTheBar():void
 	
 	outputText( "[pg]You assure her that you'll make it good enough that it will be worth while to let you have complete control." );
 	
-	outputText( "[pg]After a few more moments of thought, Marble gives you a very serious look, \"<i>You don't get complete control, I'll be giving the instructions here, oh, and you'd better do a good job.</i>\"   Suddenly she smiles, \"<i>Otherwise, I'll just have to turn things around!</i>\"" );
+	outputText( "[pg]After a few more moments of thought, Marble gives you a very serious look, \"<i>You don't get complete control, I'll be giving the instructions here, oh, and you'd better do a good job.</i>\"  Suddenly she smiles, \"<i>Otherwise, I'll just have to turn things around!</i>\"" );
 	
 	outputText( "[pg]You wonder if maybe you want her to turn things around while she rests her hands on the bar, then drapes herself over it with her breasts swinging underneath.  She turns her head towards you and swings her ribbon decorated tail back and forth a few times.  You'd best not keep her waiting when she actually took you up on your request, so you strip down and step up behind her." );
 	
@@ -4244,7 +4244,7 @@ private function milkMarbleBarPullTail():void
 	var x:int = player.cockThatFits( marbleCuntCapacity() );
 	clearOutput();
 	
-	outputText( "Probably against your better judgement, you decide to take charge and grab onto Marble's tail, roughly untwisting it off of you and yanking it upwards." );
+	outputText( "Probably against your better judgment, you decide to take charge and grab onto Marble's tail, roughly untwisting it off of you and yanking it upwards." );
 	
 	outputText( "[pg]\"<i>Ow!  What the hell sweetie?!</i>\"" );
 	
