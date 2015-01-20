@@ -952,7 +952,9 @@ private function getEggflated():void {
 	
 	outputText("\n\n");
 	//Futa:
-	if(player.hasCock()) outputText("Your exhausted " + multiCockDescriptLight() + " somehow find the strength for a gushing orgasm of their own, strands of spoo spilling across your own body, white hot spunk bringing a fresh sheen to your sweat-slick [chest].  ");
+	if (player.hasCock()) {
+		outputText("Your exhausted " + multiCockDescriptLight() + " somehow find" + (player.cocks.length > 1 ? "" : "s") + " the strength for a gushing orgasm of " + (player.cocks.length > 1 ? "their" : "its") + " own, strands of spoo spilling across your own body, white hot spunk bringing a fresh sheen to your sweat-slick [chest].  ");
+	}
 	outputText("Eventually, enough of the eggs melt to let you stand under your own power.  You grab your [armor] but hold off on putting it on until you have a chance to shrink down to a more normal size.  Before you leave, you make sure to remove the rope from her wrists, for when she gathers her orgasm-blasted wits.");
 	//[If full bunny morph, End Encounter. Weight up, sensitivity down, fertility up.]
 	if (player.bunnyScore() < 4) {

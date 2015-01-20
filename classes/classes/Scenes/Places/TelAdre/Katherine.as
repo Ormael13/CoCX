@@ -3430,7 +3430,7 @@ public function pcPenetratesKatDoubly():void {
 	//Scene can happen in the streets, at Kath's apartment or at the lake
 	clearOutput();
 	var x:Number = player.cockThatFits(70);
-	outputText("You unfasten your " + player.armorName + ", exposing " + (player.cockAdjective.length == 2 ? "both your hardening cocks" : "your collection of hardening cocks"));
+	outputText("You unfasten your " + player.armorName + ", exposing " + (player.cocks.length == 2 ? "both your hardening cocks" : "your collection of hardening cocks"));
 	if (isAt(KLOC_KATHS_APT))
 		outputText(".  You toss your clothes on the floor and lift an eager Katherine onto her bed");
 	else {

@@ -609,8 +609,8 @@ public function volunteerToSlurpCowCunt():void {
 			return;
 		}
 	}
+	isabellaFollowerScene.isabellaAffection(5);
 	if(!isabellaFollower() || !player.hasVagina() || player.biggestTitSize() < 1) {
-		isabellaFollowerScene.isabellaAffection(5);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else {

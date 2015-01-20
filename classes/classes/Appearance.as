@@ -417,27 +417,28 @@
 
 			//Cocknum 99 to default to boring descriptions!
 			if (i_cockIndex != 99) {
-				if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.HORSE) return horseDescript(i_cockIndex);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.BEE) return cockNoun(CockTypesEnum.BEE);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.DOG) return dogDescript(i_cockIndex);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.FOX) return foxDescript(i_cockIndex);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.TENTACLE) return tentacleDescript(i_cockIndex);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.DEMON) return demonDescript(i_cockIndex)
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.CAT) return catDescript(i_cockIndex);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.LIZARD) return snakeDescript(i_cockIndex);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.ANEMONE) return anemoneDescript(i_cockIndex);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.KANGAROO) return kangaDescript(i_cockIndex);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.DRAGON) return dragonDescript(i_cockIndex);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.DISPLACER) return displacerDescript(i_cockIndex);
-				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.HUMAN) return humanDescript(i_cockIndex);
-				else {
-					CoC_Settings.error("cockDescription failed to describe your cock");
-					trace("ERROR: Cock type failed to match. " + i_creature.cocks[i_cockIndex].cockType);
-					return "cockDescription failed to describe your cock";
+				switch (i_creature.cocks[i_cockIndex].cockType) {
+					case CockTypesEnum.ANEMONE:
+					case CockTypesEnum.BEE:
+					case CockTypesEnum.CAT:
+					case CockTypesEnum.DEMON:
+					case CockTypesEnum.DISPLACER:
+					case CockTypesEnum.DOG:
+					case CockTypesEnum.DRAGON:
+					case CockTypesEnum.FOX:
+					case CockTypesEnum.HORSE:
+					case CockTypesEnum.HUMAN:
+					case CockTypesEnum.KANGAROO:
+					case CockTypesEnum.LIZARD:
+					case CockTypesEnum.TENTACLE:
+						return cockNoun(i_creature.cocks[i_cockIndex].cockType);
+					default:
+						CoC_Settings.error("cockDescription failed to describe your cock");
+						trace("ERROR: Cock type failed to match. " + i_creature.cocks[i_cockIndex].cockType);
+						return "cockDescription failed to describe your cock";
 				}
 			}
-			else
-				i_cockIndex = 0;
+			i_cockIndex = 0; //I'm pretty sure this 99 business never gets used anywhere in the code, so this whole lower part of the function is probably orphaned code.
 
 			var description:String = "";
 			var options:Array;
@@ -1134,7 +1135,7 @@
 				return "<b>ERROR: NO WANGS DETECTED for cockMultiLightDesc()</b>";
 			}
 			if (i_creature.horseCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.HORSE);
-			else if (i_creature.cocks[0] == CockTypesEnum.BEE) description += cockNoun(CockTypesEnum.BEE); //This works because you're only allowed a single bee cock
+			else if (i_creature.cocks[0] == CockTypesEnum.BEE) description += cockNoun(CockTypesEnum.BEE);
 			else if (i_creature.dogCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DOG);
 			else if (i_creature.demonCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DEMON);
 			else if (i_creature.tentacleCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.TENTACLE);
@@ -1975,6 +1976,7 @@
 			return DEFAULT_WING_NAMES[i_creature.wingType] + " wings";
 		}
 
+/* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
 		private static function humanDescript(cockNum:Number):String
 		{
 			var descript:String = "";
@@ -2073,6 +2075,7 @@
 			descript += cockNoun(CockTypesEnum.LIZARD);
 			return descript;
 		}
+*/
 
 		public static const BREAST_CUP_NAMES:Array = [
 			"flat",//0
@@ -2674,8 +2677,8 @@
 			averageThickness /= currCock;
 			//Quantity descriptors
 			if (creature.cockTotal() == 1) {
-				if (dogCocks == 1) return dogDescript(0);
-				if (horseCocks == 1) return horseDescript(0);
+				if (dogCocks == 1) return cockNoun(CockTypesEnum.DOG);
+				if (horseCocks == 1) return cockNoun(CockTypesEnum.HORSE);
 				if (normalCocks == 1) return creature.cockDescript(0);
 				//Failsafe
 				return creature.cockDescript(0);
@@ -2800,8 +2803,8 @@
 			averageThickness /= currCock;
 			//Quantity descriptors
 			if (currCock == 1) {
-				if (dogCocks == 1) return dogDescript(0);
-				if (horseCocks == 1) return horseDescript(0);
+				if (dogCocks == 1) return cockNoun(CockTypesEnum.DOG);
+				if (horseCocks == 1) return cockNoun(CockTypesEnum.HORSE);
 				if (normalCocks == 1) return cockDescript(creature,0);
 				//Catch-all for when I add more cocks.  Let cock descript do the sorting.
 				if (creature.cocks.length == 1) return cockDescript(creature,0);

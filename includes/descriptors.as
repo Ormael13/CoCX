@@ -498,6 +498,7 @@ public function cockDescript(cockNum:Number = 0):String
 	return Appearance.cockDescription(player, cockNum);
 }
 
+/* Not used
 public function humanDescript(cockNum:Number):String 
 {
 	var descript:String = "";
@@ -545,6 +546,7 @@ public function kangaDescript(cockNum:Number):String
 	descript += Appearance.cockNoun(player.cocks[cockNum].cockType);
 	return descript;
 }
+
 public function dogDescript(cockNum:Number):String 
 {
 	var descript:String = "";
@@ -568,6 +570,7 @@ public function dogDescript(cockNum:Number):String
 	descript += Appearance.cockNoun(CockTypesEnum.DOG);
 	return descript;
 }
+
 public function foxDescript(cockNum:Number):String 
 {
 	var descript:String = "";
@@ -789,6 +792,8 @@ public function snakeDescript(cockNum:Number):String
 	descript += Appearance.cockNoun(player.cocks[cockNum].cockType);
 	return descript;
 }
+*/
+
 //Vaginas + Descript
 public function eVaginaDescript(vaginaNum:Number):String {
 	return Appearance.vaginaDescript(monster,vaginaNum);
