@@ -112,9 +112,149 @@ public function approachAfterKnockback():void
 	clearOutput();
 	outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.\n\n");
 	player.removeStatusAffect(StatusAffects.KnockedBack);
+	if (player.weaponName == "flintlock pistol") {
+		if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0) {
+			flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
+			outputText("At the same time, you open the magazine of your pistol to reload the ammunition.  This takes up a turn.\n\n");
+			enemyAI();
+			return;
+		}
+		else {
+			outputText("At the same time, you fire a round at " + monster.short + ". ");
+			attack();
+			return;
+		}
+	}
 	enemyAI();
 	return;
 }
+
+private function isPlayerSilenced():Boolean
+{
+	var temp:Boolean = false;
+	if (player.findStatusAffect(StatusAffects.ThroatPunch) >= 0) temp = true;
+	if (player.findStatusAffect(StatusAffects.WebSilence) >= 0) temp = true;
+	if (player.findStatusAffect(StatusAffects.GooArmorSilence) >= 0) temp = true;
+	return temp;
+}
+
+private function isPlayerBound():Boolean 
+{
+	var temp:Boolean = false;
+	if (player.findStatusAffect(StatusAffects.HarpyBind) >= 0 || player.findStatusAffect(StatusAffects.GooBind) >= 0 || player.findStatusAffect(StatusAffects.TentacleBind) >= 0 || player.findStatusAffect(StatusAffects.NagaBind) >= 0 || monster.findStatusAffect(StatusAffects.QueenBind) >= 0 || monster.findStatusAffect(StatusAffects.PCTailTangle) >= 0) temp = true;
+	if (player.findStatusAffect(StatusAffects.HolliConstrict) >= 0) temp = true;
+	if (player.findStatusAffect(StatusAffects.GooArmorBind) >= 0) temp = true;
+	if (monster.findStatusAffect(StatusAffects.MinotaurEntangled) >= 0) {
+		outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
+		temp = true;
+	}
+	if (player.findStatusAffect(StatusAffects.UBERWEB) >= 0) temp = true;
+	if (player.findStatusAffect(StatusAffects.Bound) >= 0) temp = true;
+	if (player.findStatusAffect(StatusAffects.Chokeslam) >= 0) temp = true;
+	if (player.findStatusAffect(StatusAffects.Titsmother) >= 0) temp = true;
+	if (player.findStatusAffect(StatusAffects.GiantGrabbed) >= 0) {
+		outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
+		temp = true;
+	}
+	if (player.findStatusAffect(StatusAffects.Tentagrappled) >= 0) {
+		outputText("\n<b>The demonesses tentacles are constricting your limbs!</b>");
+		temp = true;
+	}
+	return temp;
+}
+
+private function isPlayerStunned():Boolean 
+{
+	var temp:Boolean = false;
+	if (player.findStatusAffect(StatusAffects.IsabellaStunned) >= 0 || player.findStatusAffect(StatusAffects.Stunned) >= 0) {
+		outputText("\n<b>You're too stunned to attack!</b>  All you can do is wait and try to recover!");
+		temp = true;
+	}
+	if (player.findStatusAffect(StatusAffects.Whispered) >= 0) {
+		outputText("\n<b>Your mind is too addled to focus on combat!</b>  All you can do is try and recover!");
+		temp = true;
+	}
+	if (player.findStatusAffect(StatusAffects.Confusion) >= 0) {
+		outputText("\n<b>You're too confused</b> about who you are to try to attack!");
+		temp = true;
+	}
+	return temp;
+}
+
+public function combatMenu():void {
+	//Standard menu, all cleaned up!
+	addButton(0, "Attack", attack);
+	if (player.weaponName == "flintlock pistol" && flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0) addButton(0, "Reload", attack);
+	addButton(1, "Tease", eventParser, 5005);
+	addButton(2, "Spells", magicMenu);
+	addButton(3, "Items", inventory.inventoryMenu);
+	addButton(4, "Run", runAway);
+	addButton(5, "P. Specials", physicalSpecials);
+	addButton(6, "M. Specials", magicalSpecials);
+	addButton(7, (monster.findStatusAffect(StatusAffects.Level) >= 0 ? "Climb": "Wait"), eventParser, 5071);
+	addButton(8, "Fantasize", eventParser, 5086);
+	if (CoC_Settings.debugBuild && !debug) addButton(9, "Inspect", eventParser, 5166);
+	
+	if (player.findStatusAffect(StatusAffects.AttackDisabled) >= 0) {
+		outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
+		removeButton(0);
+	}
+	if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0)
+	{
+		outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
+		if (player.weaponName == "flintlock pistol") {
+			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] > 0) addButton(0, "Shoot&Approach", approachAfterKnockback);
+			else addButton(0, "Reload&Approach", approachAfterKnockback);
+		}
+		else addButton(0, "Approach", approachAfterKnockback);
+		if (player.hasKeyItem("Bow") >= 0) addButton(5, "Bow", eventParser, 5079);
+	}
+	if (player.findStatusAffect(StatusAffects.PhysicalDisabled) >= 0) {
+		outputText("<b>  Even physical special attacks are out of the question.</b>");
+		removeButton(5);
+	}
+	//Silence: Disables magic menu.
+	if (isPlayerSilenced()) {
+		removeButton(2);
+	}
+	//Stunned: Recover, lose 1 turn.
+	if (isPlayerStunned()) {
+		menu();
+		addButton(0, "Recover", eventParser, 5071);
+	}
+	//Bound: Struggle or wait.
+	if (isPlayerBound()) {
+		menu();
+		addButton(0, "Struggle", eventParser, 5077);
+		addButton(1, "Wait", eventParser, 5071);
+		if (player.findStatusAffect(StatusAffects.UBERWEB) >= 0) {
+			addButton(6, "M. Special", eventParser, 5160);
+		}
+		if (player.findStatusAffect(StatusAffects.Bound) >= 0) {
+			addButton(0, "Struggle", (monster as Ceraph).ceraphBindingStruggle);
+			addButton(1, "Wait", (monster as Ceraph).ceraphBoundWait);
+		}
+		if (player.findStatusAffect(StatusAffects.Chokeslam) >= 0) {
+			addButton(0, "Struggle", (monster as Izumi).chokeSlamStruggle);
+			addButton(1, "Wait", (monster as Izumi).chokeSlamWait);
+		}
+		if (player.findStatusAffect(StatusAffects.Titsmother) >= 0) {
+			addButton(0, "Struggle", (monster as Izumi).titSmotherStruggle);
+			addButton(1, "Wait", (monster as Izumi).titSmotherWait);
+		}
+		if (player.findStatusAffect(StatusAffects.Tentagrappled) >= 0) {
+			addButton(0, "Struggle", (monster as SuccubusGardener).grappleStruggle);
+			addButton(1, "Wait", (monster as SuccubusGardener).grappleWait);
+		}
+	}
+	if (monster.findStatusAffect(StatusAffects.Constricted) >= 0) {
+		menu();
+		addButton(0, "Squeeze", desert.nagaScene.naggaSqueeze);
+		addButton(1, "Tease", desert.nagaScene.naggaTease);
+		addButton(4, "Release", desert.nagaScene.nagaLeggoMyEggo);
+	}
+}
+
 
 //5000 6999
 public function doCombat(eventNum:Number):void
@@ -133,99 +273,19 @@ public function doCombat(eventNum:Number):void
 			mainView.hideMenuButton(MainView.MENU_APPEARANCE);
 			mainView.hideMenuButton(MainView.MENU_PERKS);
 			mainView.hideMenuButton(MainView.MENU_STATS);
-			mainView.setButton(0, "Attack");
-			var waitT:String = "Wait";
-			if (monster.findStatusAffect(StatusAffects.Level) >= 0) waitT = "Climb";
-			outputText("", true);
+
+			clearOutput();
 			hideUpDown();
+			display();
+			statScreenRefresh();
 			//Update Combat Statuses
 			if (menuLoc != 3 && menuLoc != 1) combatStatusesUpdate();
 			//Enemy name, description, and status
-			display();
-			statScreenRefresh();
 			menuLoc = 0;
 			if (combatRoundOver()) return;
-			temp2 = magicMenu;
-			if (player.findStatusAffect(StatusAffects.ThroatPunch) >= 0) temp2 = null;
-			if (player.findStatusAffect(StatusAffects.WebSilence) >= 0) temp2 = null;
-			if (player.findStatusAffect(StatusAffects.GooArmorSilence) >= 0) temp2 = null;
-
-			if (player.findStatusAffect(StatusAffects.AttackDisabled) >= 0) {
-				outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
-				attacks = 0;
-			}
-			if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0)
-			{
-				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
-				menu();
-				addButton(0, "Approach", approachAfterKnockback);
-				addButton(1, "Tease", eventParser, 5005);
-				addButton(2, "Spells", temp2);
-				addButton(3, "Items", eventParser, 1000);
-				addButton(4, "Run", runAway);
-				if (player.hasKeyItem("Bow") >= 0) addButton(5, "Bow", eventParser, 5079);
-				addButton(6, "M. Specials", eventParser, 5160);
-				addButton(7, waitT, eventParser, 5071);
-				addButton(8, "Fantasize", eventParser, 5086);
-			}
-			else if (player.findStatusAffect(StatusAffects.PhysicalDisabled) >= 0) {
-				outputText("<b>  Even physical special attacks are out of the question.</b>");
-				pSpecials = 0;
-			}
-			else if (player.findStatusAffect(StatusAffects.IsabellaStunned) >= 0) {
-				outputText("\n<b>You're too stunned to attack!</b>  All you can do is wait and try to recover!", false);
-				simpleChoices("Recover", 5071, "", 0, "", 0, "", 0, "", 0);
-			}
-			else if (player.findStatusAffect(StatusAffects.Stunned) >= 0) {
-				outputText("\n<b>You're too stunned to attack!</b>  All you can do is wait and try to recover!", false);
-				simpleChoices("Recover", 5071, "", 0, "", 0, "", 0, "", 0);
-			}
-			else if (player.findStatusAffect(StatusAffects.Whispered) >= 0) {
-				outputText("\n<b>Your mind is too addled to focus on combat!</b>  All you can do is try and recover!");
-				simpleChoices("Recover", 5071, "", 0, "", 0, "", 0, "", 0);
-			}
-			else if (player.findStatusAffect(StatusAffects.Confusion) >= 0) {
-				outputText("\nYou're too confused about who you are to try to attack!");
-				simpleChoices("Recover", 5071, "", 0, "", 0, "", 0, "", 0);
-			}
-			else {
-				if (player.findStatusAffect(StatusAffects.HarpyBind) >= 0 || player.findStatusAffect(StatusAffects.GooBind) >= 0 || player.findStatusAffect(StatusAffects.TentacleBind) >= 0 || player.findStatusAffect(StatusAffects.NagaBind) >= 0 || monster.findStatusAffect(StatusAffects.QueenBind) >= 0 || monster.findStatusAffect(StatusAffects.PCTailTangle) >= 0) {
-					choices("Struggle", 5077, "", 0, "", 0, "", 0, "", 0, "Wait", 5071, "", 0, "", 0, "", 0, "", 0);
-				} else if (player.findStatusAffect(StatusAffects.HolliConstrict) >= 0) {
-					choices("Struggle", 5077, "", 0, "", 0, "", 0, "", 0, "Wait", 5071, "", 0, "", 0, "", 0, "", 0);
-				} else if (monster.findStatusAffect(StatusAffects.Constricted) >= 0) {
-					simpleChoices("Squeeze", desert.nagaScene.naggaSqueeze, "Tease", desert.nagaScene.naggaTease, "", 0, "", 0, "Release", desert.nagaScene.nagaLeggoMyEggo);
-				} else if (player.findStatusAffect(StatusAffects.Bound) >= 0) {
-					simpleChoices("Struggle", (monster as Ceraph).ceraphBindingStruggle, "Wait", (monster as Ceraph).ceraphBoundWait, "", 0, "", 0, "", 0);
-				} else if (player.findStatusAffect(StatusAffects.GooArmorBind) >= 0) {
-					choices("Struggle", 5077, "", 0, "", 0, "", 0, "", 0, "Wait", 5071, "", 0, "", 0, "", 0, "", 0);
-				} else if (monster.findStatusAffect(StatusAffects.MinotaurEntangled) >= 0) {
-					outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
-					choices("Struggle", 5077, "", 0, "", 0, "", 0, "", 0, "Wait", 5071, "", 0, "", 0, "", 0, "", 0);
-				} else if (player.findStatusAffect(StatusAffects.UBERWEB) >= 0) {
-					choices("Struggle", 5077, tempText, 0, "Spells", 0, "Items", 0, "Run", 0, "P. Specials", 0, "M. Specials", 5160, "Wait", 0, "Fantasize", 0, "", 0);
-				} else if (player.findStatusAffect(StatusAffects.Chokeslam) >= 0) {
-					choices("Struggle", (monster as Izumi).chokeSlamStruggle, "Wait", (monster as Izumi).chokeSlamWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
-				} else if (player.findStatusAffect(StatusAffects.Titsmother) >= 0) {
-					choices("Struggle", (monster as Izumi).titSmotherStruggle, "Wait", (monster as Izumi).titSmotherWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
-				} else if (player.findStatusAffect(StatusAffects.GiantGrabbed) >= 0) {
-					outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
-					choices("Struggle", 5077, "Wait", 5071, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
-				}
-				else if (player.findStatusAffect(StatusAffects.Tentagrappled) >= 0)
-				{
-					outputText("\n<b>The demonesses tentacles are constricting your limbs!</b>");
-					choices ("Struggle", (monster as SuccubusGardener).grappleStruggle, "Wait", (monster as SuccubusGardener).grappleWait, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
-				}
-				
-				//REGULAR MENU
-				else {
-					//Tease text should change based on perks!
-					choices("Attack", attacks, "Tease", 5005, "Spells", temp2, "Items", inventory.inventoryMenu, "Run", runAway, "P. Specials", pSpecials, "M. Specials", 5160, waitT, 5071, "Fantasize", 5086, "Inspect", (CoC_Settings.debugBuild && !debug)? 5166 : 0);
-				}
-			}
+			combatMenu();
 	}
-			//Special Menu
+	//Special Menu
 	if(eventNum == 5001) {
 			menuLoc = 3;
 			//Reset holding variables for special attacks
@@ -417,131 +477,7 @@ public function doCombat(eventNum:Number):void
 			outputText("  You disrobe and prepare to ", false);
 			if (monk == 5) outputText("fuck your violent little slut senseless.  ", false);
 			else outputText("teach the uppity monk a lesson...\n\n", false);
-			doNext(5023);
-	}
-			//Monk RAEP
-	if(eventNum == 5023) {
-			jojoScene.jojoRape();
-			cleanupAfterCombat();
-	}
-			//Lose to Jojo
-	if(eventNum == 5024) {
-		if(monk == 2 || monk == 3)
-		{
-				outputText("Jojo glares down at you, and begins praying, slowly laying prayer papers all over your battered form.  You feel rage that quickly dissipates, replaced with a calm sense of peace.  You quickly lose consciousness, but are happy he defeated you.\n\nWhen you wake, you discover a note:\n\"<i>The fighting allowed me to exorcise most of your inner demons.  A part of me wanted to seek revenge for what you had done to me, but I know it was the taint on your soul that was responsible.  If we meet again I would be happy to meditate with you.\n\n          -Jojo.</i>\"", true);
-				player.orgasm();
-				dynStats("lib", -10., "cor", -15);
-				if (player.lib < 10) {
-					player.lib = 0;
-					dynStats("lib", 15);
-				}
-				if (player.cockTotal() == 1) player.lib = 15;
-				if (player.vaginas.length == 1) player.lib += 10;
-				if (player.cockTotal() > 1) player.lib += 5;
-				if (player.horseCocks() > 0) player.lib += 3;
-				if (player.dogCocks() > 0) player.lib += 2;
-				if (player.biggestLactation() >= 1) player.lib += 2;
-				monk = 0;
-			}
-			else {
-				outputText("Jojo grins wickedly as he senses your defeat, " + eCockDescript(0) + " throbbing hard.  ", true);
-				if (player.lust >= player.maxLust()) {
-					if (player.gender == 1) {
-						outputText("Too aroused to think, you just bend over, displaying your bum and letting your " + multiCockDescriptLight() + " dangle freely.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
-						if (player.cockTotal() == 1) outputText("Pre and cum drip from your " + cockDescript(0) + ", forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
-						if (player.cockTotal() > 1) outputText("Pre and cum drip from your " + cockDescript(0) + "s, forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
-						player.buttChange(monster.cockArea(0), true);
-					}
-					if (player.gender >= 2) {
-						outputText("Too aroused to think, you bend over, displaying your bum and " + vaginaDescript(0) + " to Jojo as open targets.  The mouse obliges, plunging himself into you, hard.  He fucks you with abandon, pounding your wanton little pussy with no regard for your pleasure.  Despite yourself, you enjoy the rough treatment.  A spasm of warmth erupts inside you as Jojo cums.  You worry he might stop, but as the mouse's orgasm ends he resumes fucking with even greater energy. You cum powerfully, his jizz seeping down your thighs as you begin lose track of yourself.  ", false);
-						if (player.cockTotal() > 1) outputText("Your " + cockDescript(0) + " splatters the ground with cum repeatedly, until both your genders are raw and sore.  ", false);
-						else outputText("Your " + vaginaDescript(0) + " cums on him many more times it until it is sore and tender, dripping with spunk.  ", false);
-						outputText("You black out as Jojo cums AGAIN, forcing a river of spunk from your already over-filled uterus.", false);
-						player.cuntChange(monster.cocks[0].cockThickness, true);
-						//Preggers chance!
-						player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE + 82, 101); //Jojo's kids take longer for some reason
-					}
-					if (player.gender == 0) {
-						outputText("Too aroused to think, you just bend over, displaying your bum and wiggling enticingly.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
-						outputText("You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
-					}
-					player.slimeFeed();
-					hideUpDown();
-					player.orgasm();
-					dynStats("cor", 1);
-					statScreenRefresh();
-				}
-				//HP Defeat
-				else {
-					outputText("You black out from the pain of your injuries.\n\n", false);
-					statScreenRefresh();
-				}
-			}
-			cleanupAfterCombat();
-	}
-	//Sand witch bad end
-	//GAME OVERS
-	if(eventNum == 5025)
-	{
-		if (!this.testingBlockExiting)
-		{
-				outputText("<b>GAME OVER</b>", true);
-				if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", charCreation.newGamePlus, "", 0, "CHEAT", 1);
-				else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", charCreation.newGamePlus, "BLAH", 0, "LULZ", 0);
-				mainView.showMenuButton(MainView.MENU_DATA);
-				mainView.hideMenuButton(MainView.MENU_APPEARANCE);
-				mainView.hideMenuButton(MainView.MENU_LEVEL);
-				mainView.hideMenuButton(MainView.MENU_PERKS);
-				mainView.hideMenuButton(MainView.MENU_STATS);
-				inCombat = false;
-				// Prevent ChaosMonkah instances from getting stuck
-			}
-			else {
-				inCombat = false;
-				doNext(camp.returnToCampUseOneHour);
-			}
-			inDungeon = false;
-	}
-	//Soft Game Over - for when you want to leave the text on-screen
-	if (eventNum == 5035) {
-		var textChoices:int = rand(4);
-		if (!this.testingBlockExiting) {
-			outputText("\n\n<b>GAME OVER</b>", false);
-			outputText("\n\n<font color=\"#800000\">", false)
-			if (textChoices == 0) outputText("<b>GAME OVER</b>", false);
-			if (textChoices == 1) outputText("<b>Game over, man! Game over!</b>", false);
-			if (textChoices == 2) outputText("<b>You just got Bad Ended!</b>", false);
-			if (textChoices == 3) outputText("<b>Your adventures have came to an end...</b>", false);
-			outputText("</font>", false)
-			//Delete save on hardcore.
-			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-				outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
-				flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
-				var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
-				if (test.data.exists)
-				{
-					trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
-					test.clear();
-				}
-			}
-			inCombat = false;
-		}
-		else {
-			// Prevent ChaosMonkah instances from getting stuck
-			inCombat = false;
-			doNext(camp.returnToCampUseOneHour);
-		}
-		flags[kFLAGS.TIMES_BAD_ENDED]++;
-		awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
-		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", charCreation.newGamePlus, "", 0, "Debug Cheat", 1);
-		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", charCreation.newGamePlus, "BLAH", 0, "LULZ", 0);
-		mainView.showMenuButton(MainView.MENU_NEW_MAIN);
-		mainView.showMenuButton(MainView.MENU_DATA);
-		mainView.hideMenuButton(MainView.MENU_APPEARANCE);
-		mainView.hideMenuButton(MainView.MENU_LEVEL);
-		mainView.hideMenuButton(MainView.MENU_PERKS);
-		
-		inDungeon = false;
+			doNext(jojoScene.jojoRape());
 	}
 	//Sand which(lol) end Pt 1
 	if(eventNum == 5026)
@@ -1365,13 +1301,23 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
-	if(flags[kFLAGS.PC_FETISH] >= 3 && !urtaQuest.isUrta()) {
+	if(flags[kFLAGS.PC_FETISH] >= 3 && !urtaQuest.isUrta() && player.weaponName != "flintlock pistol") {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
 	}
+	//Reload
+	if (player.weaponName == "flintlock pistol") {
+		if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0) {
+			flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
+			outputText("You open the magazine of your pistol to reload the ammunition.  This takes up a turn.\n\n");
+			enemyAI();
+			return;
+		}
+		else flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]--;
+	}
 	//Amily!
-	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
+	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0 && player.weaponName != "flintlock pistol") {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
 		enemyAI();
 		return;
@@ -1418,7 +1364,7 @@ public function attack():void {
 			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You twist unexpectedly, bringing your " + player.weaponName + " up at an oblique angle; the basilisk doesn't anticipate this attack!  ", false);
 		}
 	}
-	if (monster.short == "frost giant" && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
 		(monster as FrostGiant).giantBoulderHit(0);
 		enemyAI();
 		return;
@@ -1497,6 +1443,7 @@ public function attack():void {
 		damage = 60.5;
 	}
 	else damage = player.str;
+	if (player.weaponName == "flintlock pistol") damage += (player.spe / 5);
 	//Weapon addition!
 	damage += player.weaponAttack;
 	//Bonus sand trap damage!
@@ -1537,7 +1484,7 @@ public function attack():void {
 	damage = Math.round(damage);
 	
 	//ANEMONE SHIT
-	if(monster.short == "anemone") {
+	if(monster.short == "anemone" && player.weaponName != "flintlock pistol") {
 		//hit successful:
 		//special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
 		if(rand(10) <= 1) {
@@ -2381,6 +2328,7 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 		if(monster.armorDef <= 10) monster.armorDef = 0;
 		else monster.armorDef -= 10;
 	}
+	if (player.weaponName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
 	doNext(1);
 }
 public function startCombatImmediate(monster:Monster, _plotFight:Boolean):void
@@ -3932,7 +3880,7 @@ public function tease(justText:Boolean = false):void {
 		else if (monster is Doppleganger && monster.findStatusAffect(StatusAffects.Stunned) < 0) (monster as Doppleganger).mirrorTease(damage, true);
 		else if (!justText) monster.teased(damage);
 		
-		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta()) 
+		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta() && !player.weaponName == "flintlock pistol") 
 		{
 			if(player.lust < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
 			else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);
@@ -5510,7 +5458,7 @@ public function magicalSpecials():void {
 	
 	//Berserk
 	if(player.findPerk(PerkLib.Berzerker) >= 0) {
-		addButton(0,"Berzerk",berzerk);
+		addButton(0,"Berserk",berzerk);
 	}
 	if(player.findPerk(PerkLib.Dragonfire) >= 0) {
 		addButton(1,"DragonFire",dragonBreath);

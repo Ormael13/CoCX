@@ -130,24 +130,22 @@ package classes.Scenes.Places
 			clearOutput();
 			outputText("Which shop would you like to visit?");
 			menu();
-			addButton(0, "Weapon Shop", shopWeapon);
-			addButton(1, "Armor Shop", shopArmor);
-			addButton(2, "Tailor", shopTailor);
-			addButton(3, "Alchemist", shopAlchemist);
-			addButton(4, "Trading Post", shopTradingPost);
-			addButton(5, "Black Market", shopBlackMarket);
+			addButton(0, "Blacksmith", shopBlacksmith);
+			addButton(1, "Tailor", shopTailor);
+			addButton(2, "Alchemist", shopAlchemist);
+			addButton(3, "Trading Post", shopTradingPost);
+			addButton(4, "Black Market", shopBlackMarket);
 			addButton(14, "Back", menuIngnam);
 		}
 		
-		public function shopWeapon():void {
+		public function shopBlacksmith():void {
 			clearOutput();
-			outputText("You enter the weapon shop, easily indicated by the sign depicting a sword.  A weaponsmith stands at the counter.  You approach him and he says, \"<i>Hi there.</i>\"");
+			outputText("You enter the armor shop, noting the sign depicting armors.  Few armors are proudly displayed on racks.  You can hear the sound of hammering although it stops shortly after you enter.  The local blacksmith, Ben, comes from the rear door and steps up to the counter and says, \"<i>Welcome to the my shop.  In a need of protection?  Or something sharp?</i>\"");
 			if (flags[kFLAGS.INGNAM_WEAPONSMITH_TALKED] <= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
-				outputText("\n\n\"<i>I do sell weapons but I suggest you don't buy weapons. None of the people I've seen who get sent to the portal brought a weapon and you would waste some gems.  Still, if you want to train with weapons, you can go ahead and buy them,</i>\" the blacksmith says.");
+				outputText("\n\n\"I suggest you don't buy weapons. None of the people I've seen who get sent to the portal brought a weapon and you would waste some gems.  Still, if you want to train with weapons, you can go ahead and buy them,</i>\" the blacksmith says.");
 				flags[kFLAGS.INGNAM_WEAPONSMITH_TALKED] = 1;
 			}
-			outputText("\n\n\"<i>So, do you want to buy anything?</i>\"");
-			outputText("\n\n<b><u>Weapon shop pricings</u></b>");
+			outputText("\n\n<b><u>Blacksmith's pricings</u></b>");
 			menu();
 			if (player.findPerk(PerkLib.HistoryFighter) >= 0) { //20% discount for History: Fighter
 				addShopItem(weapons.DAGGER, 32, 1);
@@ -161,14 +159,6 @@ package classes.Scenes.Places
 				addShopItem(weapons.SPEAR, 175, 1);
 				addShopItem(weapons.KATANA, 250, 1);
 			}
-			addButton(14, "Leave", menuShops);
-		}
-		
-		public function shopArmor():void {
-			clearOutput();
-			outputText("You enter the armor shop, noting the sign depicting armors.  Few armors are proudly displayed on racks.  You can hear the sound of hammering although it stops shortly after you enter.  The local blacksmith, Ben, comes from the rear door and steps up to the counter and says, \"<i>Welcome to the armor shop.  In a need of protection?</i>\"");
-			outputText("\n\n<b><u>Armor shop pricings</u></b>");
-			menu();
 			if (player.findPerk(PerkLib.HistorySmith) >= 0) { //20% discount for History: Smith perk
 				addShopItem(armors.LEATHRA, 40, 2);
 				addShopItem(armors.FULLCHN, 120, 2);
@@ -276,8 +266,8 @@ package classes.Scenes.Places
 		public function transactionYes(item:ItemType, price:int, shop:int):void {
 			//Determine shop
 			var shopToGo:Function = null
-			if (shop == 1) shopToGo = shopWeapon;
-			else if (shop == 2) shopToGo = shopArmor;
+			if (shop == 1) shopToGo = shopBlacksmith;
+			else if (shop == 2) shopToGo = shopBlacksmith;
 			else if (shop == 3) shopToGo = shopTailor;
 			else if (shop == 4) shopToGo = shopAlchemist;
 			else if (shop == 5) shopToGo = shopTradingPost;
@@ -298,11 +288,12 @@ package classes.Scenes.Places
 			}
 		}
 		public function transactionNo(shop:int):void {
-			if (shop == 1) shopWeapon();
-			else if (shop == 2) shopArmor();
+			if (shop == 1) shopBlacksmith();
+			else if (shop == 2) shopBlacksmith();
 			else if (shop == 3) shopTailor();
 			else if (shop == 4) shopAlchemist();
 			else if (shop == 5) shopTradingPost();
+			else if (shop == 6) shopBlackMarket();
 			else shopBlackMarket();
 		}
 		

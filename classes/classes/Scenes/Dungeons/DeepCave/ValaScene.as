@@ -720,7 +720,7 @@ package classes.Scenes.Dungeons.DeepCave
 				}
 				//[All characters]
 				outputText("Vala's irrepressible energy is restored in short order, and she re-dresses swiftly, barely noticing the tiny milk spots staining her green dress or the thin trail of cum leaking between her legs as she flutters a foot off the ground. She gives you a kiss on the cheek and winks affectionately. \"<i>Visit me any time, okay " + player.short + "? For a free drink or... anything else,</i>\" she winks. She bundles her hair back up into a sensible bun and flies out of the stockroom, ignoring the curious glances that follow her as she retrieves her plain apron. You sigh appreciatively and retrieve your own clothes only to find that you've grown! Whatever growth drug the imps gave to Vala must not be entirely out of her system, because her milk seems to have added an extra inch to your frame.", false);
-				if(player.tallness >= 120 && player.tallness < 132 && rand(player.tallness-119) == 0) {
+				if(player.tallness >= 120 && player.tallness < 132 && rand(player.tallness-119) > 0) {
 					outputText("\n\nOr was that just your imagination?  On closer examination you're not any bigger, but you were huge to begin with!", false);
 					player.tallness--;
 				}

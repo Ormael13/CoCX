@@ -77,6 +77,7 @@ package classes.Scenes.Dungeons
 			dungeons.setDungeonButtons(null, null, null, null);
 			//Build menu
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] > 0) addButton(0, "Study", menuStudy);
+			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0 && flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) addButton(1, "Set Alarm", menuAlarm);
 			addButton(3, "Stash", kGAMECLASS.camp.stash);
 			addButton(4, "Furniture", menuFurniture);
 			addButton(9, "Wait", eventParser, 40); //You can wait/rest/sleep in cabin.
@@ -96,7 +97,24 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = -1;
 			eventParser(1);
 		}
-	
+		
+		private function menuAlarm():void {
+			clearOutput();
+			outputText("Set the hour the alarm will go off.");
+			menu();
+			addButton(0, "6am", setAlarm, 6);
+			addButton(1, "7am", setAlarm, 7);
+			addButton(2, "8am", setAlarm, 8);
+			addButton(3, "9am", setAlarm, 9);
+			addButton(4, "Back", enterCabin);
+		}
+		private function setAlarm(timeSet:int = 6):void {
+			clearOutput();
+			outputText("Alarm has been set to go off at " + timeSet + "am.");
+			flags[kFLAGS.BENOIT_CLOCK_ALARM] = timeSet;
+			doNext(enterCabin);
+		}
+		
 		private function menuStudy():void {
 			clearOutput();
 			outputText("What would you like to study?");

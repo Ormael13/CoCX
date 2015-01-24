@@ -2312,5 +2312,60 @@ public function confrontChastity():void {
 	
 }
 
+public function loseToJojo():void {
+	if(monk == 2 || monk == 3) {
+		outputText("Jojo glares down at you, and begins praying, slowly laying prayer papers all over your battered form.  You feel rage that quickly dissipates, replaced with a calm sense of peace.  You quickly lose consciousness, but are happy he defeated you.\n\nWhen you wake, you discover a note:\n\"<i>The fighting allowed me to exorcise most of your inner demons.  A part of me wanted to seek revenge for what you had done to me, but I know it was the taint on your soul that was responsible.  If we meet again I would be happy to meditate with you.\n\n          -Jojo.</i>\"", true);
+		player.orgasm();
+		dynStats("lib", -10., "cor", -15);
+		if (player.lib < 10) {
+			player.lib = 0;
+			dynStats("lib", 10);
+		}
+		if (player.cockTotal() == 1) player.lib = 15;
+		if (player.vaginas.length == 1) player.lib += 10;
+		if (player.cockTotal() > 1) player.lib += 5;
+		if (player.horseCocks() > 0) player.lib += 3;
+		if (player.dogCocks() > 0) player.lib += 2;
+		if (player.biggestLactation() >= 1) player.lib += 2;
+		monk = 0;
 	}
+	else {
+		outputText("Jojo grins wickedly as he senses your defeat, " + eCockDescript(0) + " throbbing hard.  ", true);
+		if (player.lust >= player.maxLust()) {
+			if (player.gender == 1) {
+				outputText("Too aroused to think, you just bend over, displaying your bum and letting your " + multiCockDescriptLight() + " dangle freely.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.", false);
+				player.buttChange(monster.cockArea(0), true, true, true);
+				if (player.cockTotal() == 1) outputText("Pre and cum drip from your " + cockDescript(0) + ", forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
+				if (player.cockTotal() > 1) outputText("Pre and cum drip from your " + cockDescript(0) + "s, forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
+			}
+			if (player.gender >= 2) {
+				outputText("Too aroused to think, you bend over, displaying your bum and " + vaginaDescript(0) + " to Jojo as open targets.  The mouse obliges, plunging himself into you, hard.  He fucks you with abandon, pounding your wanton little pussy with no regard for your pleasure.  Despite yourself, you enjoy the rough treatment.  A spasm of warmth erupts inside you as Jojo cums.  You worry he might stop, but as the mouse's orgasm ends he resumes fucking with even greater energy. You cum powerfully, his jizz seeping down your thighs as you begin lose track of yourself.  ", false);
+				if (player.cockTotal() > 1) outputText("Your " + cockDescript(0) + " splatters the ground with cum repeatedly, until both your genders are raw and sore.  ", false);
+				else outputText("Your " + vaginaDescript(0) + " cums on him many more times it until it is sore and tender, dripping with spunk.  ", false);
+				outputText("You black out as Jojo cums AGAIN, forcing a river of spunk from your already over-filled uterus.", false);
+				player.cuntChange(monster.cocks[0].cockThickness, true);
+				//Preggers chance!
+				player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE + 82, 101); //Jojo's kids take longer for some reason
+			}
+			if (player.gender == 0) {
+				outputText("Too aroused to think, you just bend over, displaying your bum and wiggling enticingly.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
+				player.buttChange(monster.cockArea(0), true, true, true);
+				outputText("You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
+			}
+			player.slimeFeed();
+			hideUpDown();
+			player.orgasm();
+			dynStats("cor", 1);
+			statScreenRefresh();
+		}
+		//HP Defeat
+		else {
+			outputText("You black out from the pain of your injuries.\n\n", false);
+			statScreenRefresh();
+		}
+		cleanupAfterCombat();
+	}
+}
+
+}
 }

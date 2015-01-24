@@ -1,10 +1,12 @@
 package classes.Scenes 
 {
 	import classes.*;
+	import classes.Items.*
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.MainViewHack;
 	import flash.utils.describeType;
+	import flash.utils.*
 	
 	public class DebugMenu extends BaseContent
 	{
@@ -12,12 +14,28 @@ package classes.Scenes
 		public var mainHack:MainViewHack = new MainViewHack();
 		private var lastMenu:Function = null;
 		
+		public var setArrays:Boolean = false;
+		//public var consumableXML:XMLList = describeType(classes.Items.ConsumableLib).descendants("constant");
 		
 		public function DebugMenu() 
 		{	
 		}
 		
+		/*public function buildArray():void {
+			if (setArrays) return;
+			trace("Setting arrays");
+			for each(var obj:Object in consumableXML) {
+				trace(getQualifiedClassName(consumables[obj.@name]));
+				if (!(getQualifiedClassName(obj) is Number || getQualifiedClassName(obj) is int || getQualifiedClassName(obj) is Array)) {
+					trace("Added " + obj.@name + "!");
+					kGAMECLASS.consumables.consumableItems.push(consumables[obj.@name]);
+				}
+			}
+			setArrays = true;
+		}*/
+		
 		public function accessDebugMenu():void {
+			//buildArray();
 			kGAMECLASS.tooltipLoc = "";
 			if ((debug && flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild) && !getGame().inCombat) {
 				hideMenus();
@@ -43,6 +61,7 @@ package classes.Scenes
 			outputText("What item would you like to spawn?", true);
 			menu();
 			addButton(0, "Transformatives", itemSpawnTransformativesMenuI)
+			//addButton(0, "Transformatives", itemSpawnConsumableMenu)
 			addButton(1, "Consumables", itemSpawnConsumablesMenuI)
 			addButton(2, "Dyes", itemSpawnDyesMenuI)
 			addButton(3, "Materials", itemSpawnMaterialsMenu)
@@ -52,6 +71,29 @@ package classes.Scenes
 			addButton(7, "Accessories", itemSpawnAccessoriesMenuI)
 			addButton(14, "Back", accessDebugMenu);
 		}
+		
+		/*private function itemSpawnConsumableMenu(page:int = 0):void {
+			var temp:int = 0;
+			var btnTemp:int = 0;
+			var goal:int = 12;
+			var offset:int = 12;
+			menu();
+			while (temp < goal) {
+				if (kGAMECLASS.consumables.consumableItems[temp + (page * offset)] != undefined) {
+					addButton(btnTemp, kGAMECLASS.consumables.consumableItems[temp + (page * offset)].shortName, giveItem, kGAMECLASS.consumables.consumableItems[temp + (page * offset)])
+				}
+				if (kGAMECLASS.consumables.consumableItems[(page * offset) + 12] != undefined) {
+					addButton(4, "Next", itemSpawnConsumableMenu, page+1)
+				}
+				if (kGAMECLASS.consumables.consumableItems[(page * offset) - 1] != undefined) {
+					addButton(9, "Previous", itemSpawnConsumableMenu, page-1)
+				}
+				temp++;
+				btnTemp++;
+				if (btnTemp == 4 || btnTemp == 9) btnTemp++;
+			}
+			addButton(14, "Back", itemSpawnMenu);
+		}*/
 		
 		private function itemSpawnTransformativesMenuI():void {
 			lastMenu = itemSpawnTransformativesMenuI;

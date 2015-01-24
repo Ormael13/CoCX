@@ -45,10 +45,14 @@ package classes.Scenes.Areas.HighMountains
 			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
 			outputText("With one final grunt, the phoenix collapses against a nearby rock, barely able to support herself. The once-proud soldier has been reduced to a " + (monster.lust >= 100 ? "dazed, lust-crazed slut, desperately pulling at her clothing in a mad attempt to expose herself": "a beaten, battered heap; completely unable to resist your advances") + ". ");
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("What do you do?");
-				if (player.hasCock()) addButton(0, "Missionary", missionaryWithPhoenix);
-				if (player.hasCock()) addButton(1, "Fuck Ass", fuckPhoenixsButt);
-				if (player.hasCock()) addButton(2, "Get Wanked", getWanked);
+				outputText("What do you do? \n\n");
+				if (player.hasCock()) {
+					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(0, "Missionary", missionaryWithPhoenix);
+					else outputText("<b>Unfortunately, " + (player.cocks.length == 1 ? "your cock doesn't": "none of your cocks") + " fit in her vagina.</b>\n");
+					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(1, "Fuck Ass", fuckPhoenixsButt);
+					else outputText("<b>Unfortunately, " + (player.cocks.length == 1 ? "your cock doesn't": "none of your cocks") + " fit in her ass.</b>\n");
+					addButton(2, "Get Wanked", getWanked);
+				}
 				addButton(3, "Ride Anal", rideAnal);
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
 				//addButton(5, "Suck Her Dick", rideAnal);
@@ -94,19 +98,26 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nEventually, your orgasm finished, leaving you panting atop the phoenix girl. Finally satisfied, you release the her wrists and heave yourself off her, glancing down to see that she’s passed out from the nigh-unending orgasm. Her leaking, cum-stuffed hole" + (player.cocks.length == 1 ? "": "s") + " still quiver" + (player.cocks.length == 1 ? "s": "") + " around your shaft" + (player.cocks.length == 1 ? "": "s") + ", her thick, purple lizard dick half-erect and spurting cum onto her chest in time with her breathing. Her tits glisten slightly in the sunlight as they rise and fall, sweat, saliva and cum clinging to the wobbling orbs. Grinning, you withdraw yourself from the girl, pulling your cock" + (player.cocks.length == 1 ? "": "s") + " out of her ravaged entrance" + (player.cocks.length == 1 ? "": "s") + ", triggering a rush of your semen as her widened snatch " + (player.cocks.length == 1 ? "": "and ass") + " lose the plugs that held the deluge back. You can still see her labia twitching as your seed drips down her cheeks, the thick goo swiftly pooling between her thighs.");
 			outputText("\n\nYou wipe your cock" + (player.cocks.length == 1 ? "": "s") + " on some of the girl's less-stained feathers before tucking " + (player.cocks.length == 1 ? "it": "them") + " away, snatching a gempurse from her discarded armour before starting on your journey back to camp, whistling all the way.");
 			player.orgasm();
+			dynStats("sens", -2);
 			cleanupAfterCombat();
 		}
 		
 		public function fuckPhoenixsButt():void {
 			clearOutput();
+			var x:int = player.cockThatFits(monster.analCapacity())
+			if (x < 0) x = 0;
 			outputText("With your mind made up, you're definitely in control. You tell the phoenix that you're going to fuck her ass. You quickly yank her scimitar away so she's defenseless and loincloth off to expose her tailhole and firm butt-cheeks. You give her a hard shove on the grounds and step on her back like you're dominating. She gives you a glare and yells, \"<i>I'll never submit to you! I never will!</i>\"");
-			if (player.armorName == "goo armor") outputText("\n\nThe goo opens up to reveal your [cock]. ");
-			else outputText("\n\nYou take off the bottom half of your [armor] to reveal your [cock]. ");
+			if (player.armorName == "goo armor") outputText("\n\nThe goo opens up to reveal your " + player.cockDescript(x) + ". ");
+			else outputText("\n\nYou take off the bottom half of your [armor] to reveal your " + player.cockDescript(x) + ". ");
 			outputText("You grab her by her rump and lift her tail, caress her butt-cheeks and tell her to get ready for the ordeal ahead.");
-			outputText("\n\nYou push your [cock] into her rear entrance, inch by inch.");
-			outputText("\n\n(PLACEHOLDER) And then you've unloaded in her bowels.");
+			outputText("\n\nYou push your " + player.cockDescript(x) + " into her rear entrance, inch by inch until " + (player.cocks[x].cockLength < 12 ? "you hilt into her": "you can push in no more") + ".  You begin to thrust back and forth with abandon as each thrust brings pleasure to the phoenix.  Precum leaks from her reptilian cock and femjuice drips from her vagina. She gives you a glare and yells, \"<i>I still w— yes, fuck my ass harder!</i>\"");
+			outputText("\n\nAs if spurred, you slam harder into her anus, bringing her to a massive pleasure. Her breasts bounce with each thrust, giving her even more pleasure. You fuck her ass hard until you can hold back no more. You arch your back and unleash torrents of cum into the phoenix's bowels.  Your orgasm triggers the phoenix's orgasm as she unleashes her cum and femspunk, forming a puddle of mixed fluids.  Your ejaculates slow down to a halt and you lay down exhausted.");
+			if (player.armorName == "goo armor") outputText("\n\nThe goo closes up around your nether regions.  ");
+			else outputText("\n\nYou take the time to re-dress your lower half.  ");
+			outputText("Satisfied, you make your way back to your camp.");
 			player.orgasm();
-			cleanupAfterCombat();			
+			dynStats("sens", -2);
+			cleanupAfterCombat();
 		}
 		
 		public function getWanked():void {

@@ -10,7 +10,7 @@
 		{
 			if (player.lust > 33 && player.gender > 0) {
 				outputText("You smile in satisfaction as " + a + short + (hpVictory?" collapses, unable to continue fighting":" collapses and begins masturbating feverishly")+".  Sadly you realize your own needs have not been met.  Of course, you could always rape the poor thing...\n\nDo you rape him?", true);
-				game.doYesNo(5022, game.cleanupAfterCombat);
+				game.doYesNo(game.jojoScene.jojoRape, game.cleanupAfterCombat);
 			} else {
 				game.finishCombat();
 			}
@@ -18,7 +18,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.eventParser(5024);
+			game.jojoScene.loseToJojo();
 		}
 
 		public function Jojo()
@@ -46,7 +46,7 @@
 			this.hairColor = "white";
 			this.hairLength = 2;
 			initStrTouSpeInte(35, 40, 65, 55);
-			initLibSensCor(15, 40, 0);
+			initLibSensCor(15, 40, game.monk * 15);
 			this.weaponName = "paw";
 			this.weaponVerb="punch";
 			this.armorName = "robes";
@@ -76,6 +76,7 @@
 				this.cocks[0].cockLength += 5.5;
 				this.str -= 20;
 				this.tou += 30;
+				this.cor += 10;
 				this.HP += 60;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 4;
 				this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";

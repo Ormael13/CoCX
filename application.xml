@@ -41,8 +41,6 @@
 <string>UIStatusBarStyleBlackOpaque</string>
 <key>UIRequiresPersistentWiFi</key>
 <string>NO</string>
-<key>UIPrerenderedIcon</key>
-<true />
 <key>UIApplicationExitsOnSuspend</key>
 <false />
 <key>UIDeviceFamily</key>

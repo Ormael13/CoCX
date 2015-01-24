@@ -307,7 +307,7 @@ public function benoitIntro():void {
 			"", 0, 
 			"", 0, 
 			"", 0, 
-			"Leave", 2855);
+			"Leave", bazaar.enterTheBazaar);
 			
 	//Hermaphrodite Benoite
 	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) {
@@ -349,6 +349,8 @@ public function benoitsBuyMenu():void {
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
 			"", 0, "", 0);
+	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] <= 0) addButton(3, "Flintlock", buyFlintlock);
+	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(4, "Alarm Clock", buyAlarmClock, null, null, null, "This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	addButton(14, "Back", benoitIntro);
 }
 
@@ -498,6 +500,52 @@ public function updateBenoitInventory():void {
 	//Slot 4 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
 }
 
+private function buyFlintlock():void {
+	clearOutput();
+	outputText("You wander " + benoitMF("Benoit", "Benoite") + "'s shop for a good while as you're searching for something interesting until you spot something interesting.");
+	outputText("\n\nYou walk over to pick up whatever caught your attention and show it to " + benoitMF("Benoit", "Benoite") + ".  \"<i>Zis?  I do know that zis a weapon and it originally belonged to a goblin from long time ago,</i>\" " + benoitMF("he", "she") + " says.");
+	outputText("\n\nTime to test this weapon out.  You aim the pistol at one of the empty tin cans and pull the trigger.  A round launches from the pistol and hits the tin can, knocking it off shelf.  " + benoitMF("Benoit", "Benoite") + " looks in surprise and says, \"<i>It works?  200 gems and it can be yours.</i>\"");
+	outputText("\n\nDo you buy the gun?  ");
+	doYesNo(buyFlintlockConfirmation, benoitsBuyMenu);
+}
+private function buyFlintlockConfirmation():void {
+	clearOutput();
+	if (player.gems < 200) {
+		outputText("You count out your gems and realize it's beyond your price range.");
+		doNext(benoitsBuyMenu);
+		return;
+	}
+	outputText("\"<i>Here you go.  I have no need for zis,</i>\" " + benoitMF("Benoit", "Benoite") + " says.");
+	flags[kFLAGS.BENOIT_PISTOL_BOUGHT]++;
+	flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
+	player.gems -= 200;
+	statScreenRefresh();
+	inventory.takeItem(weapons.FLINTLK, benoitsBuyMenu);
+}
+
+private function buyAlarmClock():void {
+	clearOutput();
+	outputText("You wander " + benoitMF("Benoit", "Benoite") + "'s shop for a good while as you're searching for something interesting until you spot something interesting.");
+	outputText("\n\nIt's a mechanical clock.  It has a flip display and there are buttons on top of the clock for the purpose of setting time and alarm.  You wind up the clock and the display flips, indicating that the clock works.  Whoever constructed this clock must have been a genius, you would have even guessed a goblin constructed it before the corruption.  You pick up the clock and show it to " + benoitMF("Benoit", "Benoite") + ".");
+	outputText("\n\n\"<i>It works?  I have no need for zis.  500 gems,</i>\" " + benoitMF("he", "she") + " says.");
+	outputText("\n\nDo you buy the clock?");
+	doYesNo(buyAlarmClockConfirmation, benoitsBuyMenu);
+}
+private function buyAlarmClockConfirmation():void {
+	clearOutput();
+	if (player.gems < 500) {
+		outputText("You count out your gems and realize it's beyond your price range.");
+		doNext(benoitsBuyMenu);
+		return;
+	}
+	outputText("\"<i>Here you go.  I have no need for zis,</i>\" " + benoitMF("Benoit", "Benoite") + " says.");
+	outputText("\n\n<b>You can now set alarm. Go to your cabin to set the alarm. (And change the time when you'll wake up.)</b>");
+	player.gems -= 500;
+	statScreenRefresh();
+	flags[kFLAGS.BENOIT_CLOCK_BOUGHT]++;
+	flags[kFLAGS.BENOIT_CLOCK_ALARM] = 6;
+	doNext(benoitsBuyMenu);
+}
 
 //Talk
 private function talkToBenoit():void {

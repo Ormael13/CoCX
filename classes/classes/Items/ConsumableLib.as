@@ -11,6 +11,8 @@ package classes.Items
 
 	public final class ConsumableLib extends BaseContent
 	{
+		//public var consumableItems:Array = [];
+		
 		public static const DEFAULT_VALUE:Number = 6;
 		
 		//DEMONIC POTIONS
@@ -31,7 +33,7 @@ package classes.Items
 		public const BLUEDYE:SimpleConsumable = mk("BlueDye","BlueDye", "a vial of blue hair dye", curry(m.hairDye, "dark blue"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste. \n\nType: Dye");
 		public const BROWN_D:SimpleConsumable = mk("Brown D","Brown D", "a vial of brown hair dye", curry(m.hairDye, "brown"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste. \n\nType: Dye");
 		public const GRAYDYE:SimpleConsumable = mk("GrayDye","GrayDye", "a vial of gray hair dye", curry(m.hairDye, "gray"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste. \n\nType: Dye");
-		public const GREEN_D:SimpleConsumable = mk("Green D","Green D", "a vial of green hair dye", curry(m.hairDye, "green"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste. \n\nType: Dye"); //Added by Kitteh6660.
+		public const GREEN_D:SimpleConsumable = mk("Green D","Green D", "a vial of green hair dye", curry(m.hairDye, "green"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste. \n\nType: Dye");
 		public const ORANGDY:SimpleConsumable = mk("OrangDy","OrangDy", "a vial of brilliant orange hair dye", curry(m.hairDye, "bright orange"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste. \n\nType: Dye");
 		public const PINKDYE:SimpleConsumable = mk("PinkDye","PinkDye", "a vial of bright pink hair dye", curry(m.hairDye, "neon pink"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste. \n\nType: Dye");
 		public const PURPDYE:SimpleConsumable = mk("PurpDye","PurpDye", "a vial of purple hair dye", curry(m.hairDye, "purple"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste. \n\nType: Dye");
@@ -171,8 +173,8 @@ package classes.Items
 		 * @param effect function(player:Player) called to produce effect
 		 * @param description null to use longName as description
 		 */
-		private static function mk(id:String, shortName:String,longName:String, effect:Function, description:String, value:Number = DEFAULT_VALUE):SimpleConsumable{
-			return new SimpleConsumable(id,shortName,longName,effect,value,description);
+		private static function mk(id:String, shortName:String, longName:String, effect:Function, description:String, value:Number = DEFAULT_VALUE):SimpleConsumable {
+			return new SimpleConsumable(id, shortName, longName, effect, value, description);
 		}
 		private function get m():Mutations{
 			if (mutations == null) {

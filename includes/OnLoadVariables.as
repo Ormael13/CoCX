@@ -46,7 +46,7 @@ public var tooltipLoc:String = "";
 
 //Possibly redundant, not used anywhere else.
 //Input vars
-public var button0Choice:Number = 0;
+/*public var button0Choice:Number = 0;
 public var button1Choice:Number = 0;
 public var button2Choice:Number = 0;
 public var button3Choice:Number = 0;
@@ -56,3 +56,4 @@ public var button6Choice:Number = 0;
 public var button7Choice:Number = 0;
 public var button8Choice:Number = 0;
 public var button9Choice:Number = 0;
+*/

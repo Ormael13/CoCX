@@ -58,7 +58,7 @@ public function encounterMarae():void {
 				outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n", false);
 				if(player.lib + player.cor > 80) {
 					outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?", false);
-					simpleChoices("Boob",2075,"",0,"",0,"",0,"Leave",13);
+					simpleChoices("Boob",grabHerBoob,"",0,"",0,"",0,"Leave",13);
 				}
 				else doNext(camp.returnToCampUseOneHour);
 				return;
@@ -95,7 +95,7 @@ public function encounterMarae():void {
 					outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n", false);
 					if(player.lib + player.cor > 80) {
 						outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?", false);
-						simpleChoices("Boob",2075,"",0,"",0,"",0,"Leave",13);
+						simpleChoices("Boob",grabHerBoob,"",0,"",0,"",0,"Leave",13);
 					}
 					else doNext(camp.returnToCampUseOneHour);
 				}
@@ -126,13 +126,13 @@ public function encounterMarae():void {
 				outputText("Spellbound, you watch as she forces more and more fingers into her hungry flower-hole, \"<i>Ever since then, I've just been drinking in more and corruption, and waiting for someone to come here and help fill my hole.  I've played with my flower for what has felt like days on end.  Every time I come harder and harder.  The more I let go the better it is.  Do you know what I did this morning?  I let my branches grow tentacles to fuck my mouth and pussy at the same time.  I came over and over and over, and then I had my roots pull in all the cum they could find to fill my womb with.</i>\"\n\n", false);
 				outputText("You gasp at the change she has gone through, getting more than a little turned on yourself.  Thinking that a once chaste goddess has been reduced to a horny slut makes you wonder how you stand any chance of victory.  Marae keeps up her show, \"<i>It's so good.  Come join me in it.  I gave in to the pleasure already.  If you look behind me, you can see what's left of my soul.  I could feel it dripping out through my cunny a little bit each time I came.  After a while it flowed together and started to crystalize.  I think the demons call it lethicite, but I just wish I still had a soul so I could do it all over again.  Come fuck me, I want to watch you go mad while you cum out your soul.</i>\"\n\n", false);
 				outputText("It sounds like a very pleasant offer, but it would mean the total abandonment of your reasons for coming here.   You could probably get away if you were to run, she doesn't seem to be nearly as powerful.  Or you could risk trying to steal the lethicite before making your getaway, but it wouldn't be hard for her to catch you that close.", false);
-				simpleChoices("Run",runFromMarae,"Lethicite",maraeStealLethicite,"Accept",maraeBadEnd,"FIGHT!",promptFightMarae1,"",0);
+				simpleChoices("Run",runFromPervertedGoddess,"Lethicite",maraeStealLethicite,"Accept",maraeBadEnd,"FIGHT!",promptFightMarae1,"",0);
 			}
 			//Repeat corrupt meeting
 			else {
 				outputText("Marae smiles and leans forwards, cupping her breasts in her hands.  Amazingly, she flows out from the tree, standing as a free woman before you.  She massages her G-sized breasts, winking lewdly and pinching her shining purplish nipples, squeezing out droplets of honey-colored sap.  She blows you a kiss while the flower at her groin opens welcomingly.  She moans, \"<i>Reconsider my offer yet, " + player.short + "?  I won't force you, but don't you want to spend eternity in heaven with a living goddess?</i>\"", false);
 				//Yes - accept, No- run
-				doYesNo(maraeBadEnd, runFromMarae);
+				doYesNo(maraeBadEnd, runFromPervertedGoddess);
 				addButton(3, "FIGHT!", promptFightMarae1);
 			}
 		}
@@ -640,7 +640,14 @@ private function MaraeIIFlyAway():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-private function runFromMarae():void {
+private function grabHerBoob():void {
+	clearOutput();
+	outputText("You reach forward to cop a feel. The goddess' eyes go wide with fury as a massive branch swings down, catching you in the sternum. It hits you hard enough that you land in your boat and float back a few feet into the water. Nothing to do but leave and hope for another chance at her breasts...");
+	player.takeDamage(player.HP - 1);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function runFromPervertedGoddess():void {
 	outputText("You turn and run for the boat, leaving the corrupt goddess behind.  High pitched laugher seems to chase you as you row away from the island.", true);
 	doNext(camp.returnToCampUseOneHour);
 }

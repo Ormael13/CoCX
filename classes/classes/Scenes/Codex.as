@@ -170,52 +170,64 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Anemone") addButton(0, "( Anemones )", codexEntryAnemone); //addButton(0, "<font color=\"#00007F\">Anemone</font>", codexEntryAnemone);
 				else addButton(0, "Anemones", codexEntryAnemone);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Arachne") addButton(1, "( Arachnes )", codexEntrySpiders);
 				else addButton(1, "Arachnes", codexEntrySpiders);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "GiantBees") addButton(2, "( Giant Bees )", codexEntryBees);
 				else addButton(2, "Giant Bees", codexEntryBees);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Goblins") addButton(3, "( Goblins )", codexEntryGoblins);
 				else addButton(3, "Goblins", codexEntryGoblins);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			//2nd row
 			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "GooGirls") addButton(5, "( Goo Girls )", codexEntryGooGirls);
 				else addButton(5, "Goo Girls", codexEntryGooGirls);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_HARPIES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Harpies") addButton(6, "( Harpies )", codexEntryHarpies);
 				else addButton(6, "Harpies", codexEntryHarpies);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Hellhounds") addButton(7, "( Hellhounds )", codexEntryHellhounds);
 				else addButton(7, "Hellhounds", codexEntryHellhounds);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_IMPS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Imps") addButton(8, "( Imps )", codexEntryImps);
 				else addButton(8, "Imps", codexEntryImps);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			//3rd row
 			if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Labovines") addButton(10, "( LaBovines )", codexEntryLabovine);
 				else addButton(10, "LaBovines", codexEntryLabovine);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_LIZANS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Lizans") addButton(11, "( Lizans )", codexEntryLizans);
 				else addButton(11, "Lizans", codexEntryLizans);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Minotaurs") addButton(12, "( Minotaurs )", codexEntryMinotaurs);
 				else addButton(12, "Minotaurs", codexEntryMinotaurs);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_NAGAS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Nagas") addButton(13, "( Nagas )", codexEntryNagas);
 				else addButton(13, "Nagas", codexEntryNagas);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			addButton(4, "Next", menuRacesII);
 			//addButton(9, "Previous", menuRaces);
 			addButton(14, "Back", accessCodexMenu);
@@ -228,23 +240,28 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Orcs") addButton(0, "( Orcs )", codexEntryOrcs);
 				else addButton(0, "Orcs", codexEntryOrcs);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Salamanders") addButton(1, "( Salamanders )", codexEntrySalamanders);
 				else addButton(1, "Salamanders", codexEntrySalamanders);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Satyrs") addButton(2, "( Satyrs )", codexEntrySatyrs);
 				else addButton(2, "Satyrs", codexEntrySatyrs);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "SharkGirls") addButton(3, "( Shark Girls )", codexEntrySharkGirls);
 				else addButton(3, "Shark Girls", codexEntrySharkGirls);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			//2nd row
 			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Succubus") addButton(5, "( Succubus )", codexEntrySuccubus);
 				else addButton(5, "Succubus", codexEntrySuccubus);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			//addButton(4, "Next", menuRacesIII);
 			addButton(9, "Previous", menuRaces);
 			addButton(14, "Back", accessCodexMenu);
@@ -256,6 +273,7 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Magic") addButton(0, "( Magic )", codexEntryMagic);
 				else addButton(0, "Magic", codexEntryMagic);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			addButton(14, "Back", accessCodexMenu);
 		}
 		private function menuFactions():void {
@@ -264,10 +282,12 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Fetish") addButton(0, "( Fetish Cult )", codexEntryFetish);
 				else addButton(0, "Fetish Cult", codexEntryFetish);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			if (flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "SandWitches") addButton(1, "( Sand Witches )", codexEntrySandWitches);
 				else addButton(1, "Sand Witches", codexEntrySandWitches);
 			}
+			else addButton(0, "LOCKED", eventParser, 9999);
 			addButton(14, "Back", accessCodexMenu);
 		}
 		

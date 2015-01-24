@@ -3124,7 +3124,7 @@ private function urtaDiscussionTeaseAfterRomance():void {
 	else {
 		addButton(0, "Her Place", goBackToUrtasForLuvinz, null, null, null, "Go to Urta's apartment for sex.");
 		addButton(1, "Suck Off", blowUrtaUnderTheTableLuv, null, null, null, "Suck Urta's dick until she cums!");
-		addButton(2, "Eat Out", eatUrtaOutNomNomPussy, "Get a taste of Urta's vagina! (And optionally, drink a glass of her cum.)");
+		addButton(2, "Eat Out", eatUrtaOutNomNomPussy, null, null, null, "Get a taste of Urta's vagina! (And optionally, drink a glass of her cum.)");
 		if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) removeButton(1); //Disables button.
 	}
 	addButton(4, "Leave", telAdre.barTelAdre);

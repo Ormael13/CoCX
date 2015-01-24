@@ -852,7 +852,8 @@ public function doCamp():void {
 			removeButton(7);
 		}
 	}
-	if (player.lust >= player.maxLust()) {
+	var canFap:Boolean = player.findStatusAffect(StatusAffects.Dysfunction) < 0 && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
+	if (player.lust >= player.maxLust() && canFap) {
 		removeButton(0);
 		removeButton(1);
 	}
@@ -1588,6 +1589,9 @@ public function doSleep(clrScreen:Boolean = true):void {
 		if(model.time.hours == 3) timeQ = 3;
 		if(model.time.hours == 4) timeQ = 2;
 		if(model.time.hours == 5) timeQ = 1;
+		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) {
+			timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6)
+		}
 		//Autosave stuff		
 		if (player.slotName != "VOID" && player.autoSave && mainView.getButtonText( 0 ) != "Game Over") 
 		{
@@ -1902,7 +1906,7 @@ public function places():Boolean {
 		if (flags[kFLAGS.GAR_NAME] == 0) addButton(2, "Cathedral", kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork);
 		else addButton(2, "Cathedral", kGAMECLASS.gargoyle.returnToCathedral);
 	}
-	if (flags[kFLAGS.FACTORY_FOUND] > 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 || flags[kFLAGS.DISCOVERED_DUNGEON_3_LETHICE] > 0 || kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(3, "Dungeons", dungeons);
+	if (flags[kFLAGS.FACTORY_FOUND] > 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 || flags[kFLAGS.D3_DISCOVERED] > 0 || kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(3, "Dungeons", dungeons);
 	if (player.findStatusAffect(StatusAffects.MetWhitney) >= 0) 
 	{
 		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && (flags[kFLAGS.FARM_DISABLED] == 0 || (player.cor >= 70 && player.level >= 12 && kGAMECLASS.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) || player.level >= 20 )) addButton(5, "Farm", kGAMECLASS.farm.farmExploreEncounter);

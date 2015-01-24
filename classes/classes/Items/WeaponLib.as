@@ -17,7 +17,7 @@ package classes.Items
 		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",4,40,"A small blade.  Preferred weapon for the rogues. \n\nType: Weapon (Sword) \nAttack: 4 \nBase value: 40");
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
 		public const E_STAFF:EldritchStaff = new EldritchStaff();
-		public const FLINTLK:Weapon = new Weapon("Flintlk","Flintlock","flintlock pistol","a flintlock pistol","shot",14,250,"A flintlock pistol. Pew pew pew. \n\nType: Weapon (Gun) \nAttack: 14 \nBase value: 250");
+		public const FLINTLK:Weapon = new Weapon("Flintlk","Flintlock","flintlock pistol","a flintlock pistol","shot",14,250,"A flintlock pistol. Pew pew pew. \n\nType: Weapon (Gun) \nAttack: 14 \nBase value: 250 \nSpecial: Damage also determined by speed. Can fire four times before a reload is required.");
 		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",11,10,"Urta's halberd. How did you manage to get this?","Large");
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt","H.Gaunt","hooked gauntlets","a set of hooked gauntlets","clawing punch",8,300,"These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm. \n\nType: Weapon (Gauntlet) \nAttack: 8 \nBase value: 300 \nChance to inflict bleeding status on strike.");
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
