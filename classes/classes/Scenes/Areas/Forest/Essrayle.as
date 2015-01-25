@@ -213,17 +213,12 @@ private function plantsForMe2(BE:int = 0):void {
 		//Boost size, set lactation quantity.
 		player.growTits(7,player.bRows(),false,2);
 		player.boostLactation(player.bRows());
-		if(player.biggestTitSize() >= 1) {
-			if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
-				player.addStatusValue(StatusAffects.Feeder,1,1);
-				player.changeStatusValue(StatusAffects.Feeder,2,0);
-			}
-			player.boostLactation(0.01);
-		}
-		
-		
         outputText("\n\nYou sit there for the next hour or two, milking your bloated bosom and giving the flora a generous watering in the process.  When all is taken care of, you stumble back upright with a brief struggle and don your gear once more.  The smell of fresh-cut flowers seems to linger on your [armor] as you depart.");
 	}
+	if (player.hasBreasts() && player.isLactating()) {
+        player.milked();
+        player.boostLactation(0.01);
+    }
 	player.orgasm();
 	dynStats("lib", 1);
 	//Slimefeed!
