@@ -302,7 +302,7 @@ package classes.Scenes.Dungeons.D3
 				addButton(5, "Exit", exitD3);
 			}
 			
-			addButton(8, "Items", eventParser, 1000);
+			addButton(8, "Items", inventory.inventoryMenu);
 			addButton(9, "Masturbate", eventParser, 10);
 		}
 		
