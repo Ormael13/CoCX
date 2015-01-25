@@ -1147,7 +1147,7 @@ public function dungeonSuccubusForceFeed():void {
 	if(player.averageLactation() * player.totalBreasts() < 6) outputText("Her belly bulges slightly from all the breast-milk she's consumed.\n\n", false);
 	else outputText("The succubus looks bloated and pregnant from all the milk you've forced into her.  She sloshes and moans incoherently from the strain of it all.\n\n", false);
 	outputText("Despite the relief your " + allBreastsDescript() + " now feel, your " + vaginaDescript(0), false);
-	if(player.cocks.length > 0) outputText(" and " + multiCockDescriptLight() + " feel hungrier than ever.  ", false);
+	if(player.cocks.length > 0) outputText(" and " + player.multiCockDescriptLight() + " feel hungrier than ever.  ", false);
 	else outputText(" feels hungrier than ever.  ", false);
 	outputText("You shove your crotch into your milk-dazed foe's white-stained visage, grinding your " + vaginaDescript(0) + " into her mouth until you cum all over her", false);
 	if(player.cocks.length == 0) {
@@ -1286,12 +1286,12 @@ public function incubusVictoryRapeSex():void {
 	if(player.cocks.length > 0) {
 		outputText("With a few deft motions, you shift your " + player.armorName + " to expose your ", false);
 		if(player.gender == 3) {
-			if(player.balls > 0) outputText(multiCockDescriptLight() + ", " + ballsDescriptLight() + ", and " + vaginaDescript(0), false);
-			else outputText(multiCockDescriptLight() + " and " + vaginaDescript(0), false);
+			if(player.balls > 0) outputText(player.multiCockDescriptLight() + ", " + ballsDescriptLight() + ", and " + vaginaDescript(0), false);
+			else outputText(player.multiCockDescriptLight() + " and " + vaginaDescript(0), false);
 		}
 		else {
-			if(player.balls > 0) outputText(multiCockDescriptLight() + " and " + ballsDescriptLight(), false);
-			else outputText(multiCockDescriptLight(), false);
+			if(player.balls > 0) outputText(player.multiCockDescriptLight() + " and " + ballsDescriptLight(), false);
+			else outputText(player.multiCockDescriptLight(), false);
 		}
 		outputText(".  Having resolved to take the demon's backdoor, you approach his weakened form with brimming confidence.  He looks up, clearly hoping your plan is to squat on his throbbing member.  You dispel his misguided notion when you grab him by the horns and shove his face against the floor. He struggles weakly until you press down harder, making it clear he is to stay in position - on his knees with his head down and his ass in the air.  Circling your prey, you inspect his flawless body and carefully note that the hole at his crotch actually exposes a fair portion of his very supple and surprisingly feminine-looking backside.\n\n", false);
 		outputText("You don't waste any time, gripping your " + cockDescript(0) + " in one hand and ", false);
@@ -1323,8 +1323,8 @@ public function incubusVictoryRapeSex():void {
 		outputText("With a few deft motions, you shift your " + player.armorName + " to expose your ", false);
 		//Herm
 		if(player.gender == 3) {
-			if(player.balls > 0) outputText(multiCockDescriptLight() + ", " + ballsDescriptLight() + ", and " + vaginaDescript(0), false);
-			else if(player.balls > 0) outputText(multiCockDescriptLight() + " and " + vaginaDescript(0), false);
+			if(player.balls > 0) outputText(player.multiCockDescriptLight() + ", " + ballsDescriptLight() + ", and " + vaginaDescript(0), false);
+			else if(player.balls > 0) outputText(player.multiCockDescriptLight() + " and " + vaginaDescript(0), false);
 		}
 		else {
 			outputText(vaginaDescript(0), false);
@@ -1396,10 +1396,10 @@ public function omnibusLossRape2():void {
 	if(player.cocks.length > 1) {
 		outputText("In her hand is a mass of shining green material.  She turns to face you, bringing it closer and letting you see the lights shift and change on its luminescent surface.\n\n", false);
 		outputText("\"<i>For someone as... different as you, we will have to try this creature.  I've bred it from a mixture of plant-tentacles, dazzle-weed, and what we've taken to calling pussy plants,</i>\" she mentions, her hands working to open the mass on the table.  The interior surface is a mass of slimy undulating protrusions that wriggle feverishly as they are exposed to the air.  She gathers up the thing in her arms while continuing to speak to you, \"<i>You see, my plant will encapsulate your members tightly, wrapping them in sticky wetness.  Its fluids are a perfect blend of aphrodisiacs, lubricants, and will-sapping narcotics.  You'll love it.</i>\"\n\n", false);
-		outputText("You make a desperate attempt to escape her chair, but your body fails to do much more than squirm in place.  She drops the creature squarely into your crotch and hops up onto her desk to watch.  Thousands of tiny wet nodules immediately begin massaging your " + multiCockDescriptLight(), false);
+		outputText("You make a desperate attempt to escape her chair, but your body fails to do much more than squirm in place.  She drops the creature squarely into your crotch and hops up onto her desk to watch.  Thousands of tiny wet nodules immediately begin massaging your " + player.multiCockDescriptLight(), false);
 		if(player.balls > 0) outputText(" and " + ballsDescript(), false);
 		outputText(".  You groan as the pleasure washes over you like a wave.  Your squirming stops as your hips begin twitching into the air, as if begging for even more stimulation.  It's not fair how good this feels... you can't help it, it's just too hard to fight.\n\n", false);
-		outputText("You watch with detached fascination as each of your " + multiCockDescript() + " is wrapped tightly in shiny green material.  The shape of each penis is still clearly defined under the pulsating green stuff, though you can see it shifting and rippling over your lengths as it pleasures you.  It almost looks like some kind of kinky bondage-toy.  Aware of your attentions, the green stuff squeezes you tightly and begins flashing beautiful bioluminescent color patterns across its surface that scatter your thoughts as you watch.  You blink a few times as the green mass rolls more of itself out, curling over your ", false);
+		outputText("You watch with detached fascination as each of your " + player.multiCockDescript() + " is wrapped tightly in shiny green material.  The shape of each penis is still clearly defined under the pulsating green stuff, though you can see it shifting and rippling over your lengths as it pleasures you.  It almost looks like some kind of kinky bondage-toy.  Aware of your attentions, the green stuff squeezes you tightly and begins flashing beautiful bioluminescent color patterns across its surface that scatter your thoughts as you watch.  You blink a few times as the green mass rolls more of itself out, curling over your ", false);
 		if(player.balls > 0) {
 			outputText("balls", false);
 			if(player.vaginas.length > 0) outputText(" and " + vaginaDescript(0), false);
@@ -1409,7 +1409,7 @@ public function omnibusLossRape2():void {
 		outputText(", sliding up your abdomen, and oozing down over your hips.  As it spreads the colors fill more and more of your head, clearing away your thoughts of resistance.\n\n", false);
 		outputText("A soothing female voice talks to you from somewhere, \"<i>Did I mention it's specifically tuned to ensnare the conscious mind with it's pretty colors?  I must have forgot.  Well, I see you've discovered it on your own.  The colors are just so perfect for opening your mind to me, aren't they?  They just chase away your thoughts and let my words slip deep into your subconscious.  I bet it feels nice to just focus on the colors and let my pet tease your cocks, doesn't it?</i>\"\n\n", false);
 		outputText("You nod without any awareness of the act.\n\nThe voice laughs and continues while the creature reaches around your " + hipDescript() + " and slides a feeler between your cheeks, completing the tight loop around your groin, \"<i>That's good.  You want to let the creature cover as much of you as it wants.  Being sex-food for a symbiotic plant is arousing beyond measure.</i>\"  You feel the creature licking at your " + assholeDescript() + " until it relaxes, and then slides something inside.  A warm wetness spreads through your bowels as something begins caressing your prostate from inside you.\n\n", false);
-		outputText("Overloaded with pleasure, you feel your " + multiCockDescriptLight() + " pulse and cum, creating translucent green cum balloons the size of ", false);
+		outputText("Overloaded with pleasure, you feel your " + player.multiCockDescriptLight() + " pulse and cum, creating translucent green cum balloons the size of ", false);
 		if(player.cumQ() < 50) outputText("apples ", false);
 		if(player.cumQ() >= 50 && player.cumQ() < 300) outputText("cantaloupes ", false);
 		if(player.cumQ() >= 300) outputText("watermelons ", false);
@@ -1430,7 +1430,7 @@ public function omnibusLossRape2():void {
 		if(player.breastRows.length == 1) outputText("The wriggling mass slides up the top-most parts of your breasts, narrowing into two tiny tendrils that loop around your neck.\n\n", false);
 		if(player.breastRows.length >= 2) outputText("The wriggling mass climbs your top pair of breasts with ease, wrapping your diamond-hard nipples in slime and sensation.  It continues climbing upward, narrowing into two bands that loop around the back of your neck.\n\n", false);
 		outputText("*FLASH* \"<i>To orgasm is to obey.  You love to orgasm.  You love to obey.  You love to obey my voice more than any other.  Obeying my voice gave you these orgasms.  Since you love to obey me, you must be my pet.</i>\"\n\n", false);
-		outputText("Your mistress' OTHER pet wraps around your neck, forming a choker comprised of shifting green colors.  You smile as you realize it is done - you've become one of her pet cattle.  Your body is wrapped in an emerald sea of shifting pleasure, just like your mistress wanted.  If it weren't for the obvious bulges of your " + multiCockDescriptLight() + ", you'd look to be wearing an extraordinarily revealing one piece swim-suit.  The constant teasing at your crotch continues, and you stay rock-hard, even though you just came.  The idea of being milked to feed your new clothing just turns you on so much that you bet you're leaking constant streams of pre-cum for your new green master.\n\n", false);
+		outputText("Your mistress' OTHER pet wraps around your neck, forming a choker comprised of shifting green colors.  You smile as you realize it is done - you've become one of her pet cattle.  Your body is wrapped in an emerald sea of shifting pleasure, just like your mistress wanted.  If it weren't for the obvious bulges of your " + player.multiCockDescriptLight() + ", you'd look to be wearing an extraordinarily revealing one piece swim-suit.  The constant teasing at your crotch continues, and you stay rock-hard, even though you just came.  The idea of being milked to feed your new clothing just turns you on so much that you bet you're leaking constant streams of pre-cum for your new green master.\n\n", false);
 		outputText("The flashing subsides, and your new thoughts rush into the void.  You immediately begin masturbating your encapsulated members as you seek to obey.  To orgasm is to obey.  To obey is to orgasm.  You discover that you can feel every touch through the skin of your 'clothing'.  You increase the tempo, knowing that your orgasm will be feeding the creature that now lives on you, fulfilling your deepest darkest desires.  You cum again, just as hard as before, inflating " + num2Text(player.cocks.length) + " shiny green balloons with the proof of your obedience.\n\n", false);
 		
 		if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
@@ -1558,14 +1558,14 @@ public function demonBadEnd():void {
 	if(player.gender == 1) {
 		//Multispoooooo
 		if(player.cockTotal() > 1) {
-			outputText(multiCockDescriptLight() + " pulsate, straining for just a touch of the succubus' hand.  She paces around you, giggling and toying with you as your " + multiCockDescript() + " seem to follow her, twitching and thickening any time she takes a step closer.\n\n", false);
+			outputText(player.multiCockDescriptLight() + " pulsate, straining for just a touch of the succubus' hand.  She paces around you, giggling and toying with you as your " + player.multiCockDescript() + " seem to follow her, twitching and thickening any time she takes a step closer.\n\n", false);
 			outputText("She reaches out, cupping the underside of a shaft, slowly stroking your most sensitive places while she stops the bimbo-like voice and teases, \"<i>Awww, so hard and ready.  It looks to me like you're already a slave to your desires.  You're twitching and dripping, just from the soft touches of your enemy's fingers.  Are you truly so in need of release as to willingly offer it to me?  No, don't answer, your " + cockDescript(0) + " already has.</i>\"\n\n", false);
 			outputText("You glance down, seeing just how hard her words have made you.  You squirm your " + hipDescript() + "s pathetically, trying to hump her hand and increase the stimulation.  The succubus immediately releases you and draws back, shedding her secretary's clothes like a snake sheds its skin.  Now clad only in a tight leather corset and thigh-high stockings with garters, the succubus tosses you onto a table, surprising you with her raw strength.  Seemingly from nowhere, she produces a whip, winding it tightly around ", false);
 			if(player.balls > 0) outputText("your " + ballsDescriptLight() + " and ", false);
-			outputText("the bases of your " + multiCockDescriptLight() + ".\n\n", false);
+			outputText("the bases of your " + player.multiCockDescriptLight() + ".\n\n", false);
 			outputText("\"<i>There, that'll make sure you feel every squeeze and caress of my velvet walls, and keep you from getting off until you're ready,</i>\" says the succubus as she climbs the table and straddles your eager form.\n\n", false);
 			outputText("She lifts herself up with her shapely legs and spreads her thighs, proudly revealing her puffy pierced folds.  They drip with demonic nectar as she wiggles over you, spattering you with demon-honey.  Slowly, nearly imperceptibly, she swivels the lewd opening closer and closer, and your cocks, as if possessed, angle themselves upward towards the juicy target.  The grinning succubus looks over her shoulder and asks, \"<i>Ready are we? Ok, I won't keep you waiting.</i>\"\n\n", false);
-			outputText("Marvelous heat and wetness sweeps over you in a fluid motion, wrapping your " + cockDescript(0) + " tightly.  You sigh happily, already lost in the feeling of having a succubus' tight walls wriggling around you.  Were you not already so corrupt, you would probably be coming already, but as it is, you can lie there and enjoy it, reveling in the sensations your unholy lover is spreading through your body.  You shiver, finally approaching your climax, but as it nears you find yourself denied by the whip binding your " + multiCockDescriptLight() + ".  It isn't just the physical tightness either – something else about it keeps your release buried deep, inaccessible.\n\n", false);
+			outputText("Marvelous heat and wetness sweeps over you in a fluid motion, wrapping your " + cockDescript(0) + " tightly.  You sigh happily, already lost in the feeling of having a succubus' tight walls wriggling around you.  Were you not already so corrupt, you would probably be coming already, but as it is, you can lie there and enjoy it, reveling in the sensations your unholy lover is spreading through your body.  You shiver, finally approaching your climax, but as it nears you find yourself denied by the whip binding your " + player.multiCockDescriptLight() + ".  It isn't just the physical tightness either – something else about it keeps your release buried deep, inaccessible.\n\n", false);
 			outputText("\"<i>Have you hit it yet?</i>\" the succubus asks as she rocks on top of you, \"<i>I've placed a block inside you.  Don't worry, it's temporary, it'll only stop you from orgasming for a few days...</i>\"\n\n", false);
 			outputText("You moan pitifully, begging for her to remove it and allow you to cum.\n\n", false);
 			outputText("\"<i>Oh I can't remove it,</i>\" she says, \"<i>The only way you'll be rid of it with any sort of certainty is to melt through it with something stronger.  Something, like, I don't know, the focused remains of your soul and humanity.  Now you think on that while I melt away any doubts you might have.</i>\"\n\n", false);
@@ -1583,7 +1583,7 @@ public function demonBadEnd():void {
 		}
 		//SINGLEZ NITE
 		else {
-			outputText(multiCockDescriptLight() + " pulsates, straining for just a touch of the succubus' hand.  She paces around you, giggling and toying with you as your " + multiCockDescript() + " seems to follow her, twitching and thickening anytime she takes a step closer.\n\n", false);
+			outputText(player.multiCockDescriptLight() + " pulsates, straining for just a touch of the succubus' hand.  She paces around you, giggling and toying with you as your " + player.multiCockDescript() + " seems to follow her, twitching and thickening anytime she takes a step closer.\n\n", false);
 			outputText("She reaches out, cupping the underside of the shaft, slowly stroking your most sensitive places while she stops the bimbo-like voice and teases, \"<i>Awww, so hard and ready.  It looks to me like you're already a slave to your desires.  You're twitching and dripping, just from the soft touches of your enemy's fingers.  Are you truly so in need of release as to willingly offer it to me?  No, don't answer, your " + cockDescript(0) + " already has.</i>\"\n\n", false);
 			outputText("You glance down, seeing just how hard her words have made you.  You squirm your " + hipDescript() + "s pathetically, trying to hump her hand and increase the stimulation.  The succubus immediately releases you and draws back, shedding her secretary's clothes like a snake sheds its skin.  Now clad only in a tight leather corset and thigh-high stockings with garters, the succubus tosses you onto a table, surprising you with her raw strength.  Seemingly from nowhere, she produces a whip, winding it tightly around ", false);
 			if(player.balls > 0) outputText("your " + ballsDescriptLight() + " and ", false);
@@ -1631,7 +1631,7 @@ public function demonBadEnd():void {
 	//[HERM ENDING]
 	else {
 		//Buh.  Zombie fen need brains.
-		outputText(multiCockDescript() + " and " + vaginaDescript(0) + " grow wet and ready, both starting to leak fluids as the succubus' hand traces your inner thigh.  She teases, \"<i>Oh my! You're so wet and ready and I haven't even touched your moist little cum-receptacle.  And that throbbing cock!  How obscene!  You're a slut aren't you?  Who else would be so turned on by the idea of cumming until your humanity is splattered between my legs?</i>\"\n\n", false);
+		outputText(player.multiCockDescript() + " and " + vaginaDescript(0) + " grow wet and ready, both starting to leak fluids as the succubus' hand traces your inner thigh.  She teases, \"<i>Oh my! You're so wet and ready and I haven't even touched your moist little cum-receptacle.  And that throbbing cock!  How obscene!  You're a slut aren't you?  Who else would be so turned on by the idea of cumming until your humanity is splattered between my legs?</i>\"\n\n", false);
 		outputText("The words make you blush hard, shaming you and stoking the growing fire between your legs.  You know two things for certain: she's right and you're more turned on that ever.  You don't resist as the demoness easily lifts you up, setting you down on a table with your legs spread.  \"<i>There,</i>\" she comments, \"<i>now all of your fun-parts are on display.  Maybe I should call in an incubus and a few imps to watch.  I bet you'd like that wouldn't you?</i>\"\n\n", false);
 		outputText("She effortlessly swings her lissomelegs onto the table as she pulls herself up, mounting you in a single swift motion.  You can feel waves of heat rolling off her sex, bathing your " + cockDescript(0) + " in her warmth.  ", false);
 		if(player.clitLength >= 2) outputText("Your " + clitDescript() + " pushes free, nuzzling against her tight asshole and slipping inside, as if drawn in by its desire.  She openly moans, and begins rocking on top of you.  You gasp in delight as she rides your " + clitDescript() + ", fucking her ass and grinding against it.", false);

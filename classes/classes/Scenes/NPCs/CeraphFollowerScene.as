@@ -519,7 +519,7 @@ package classes.Scenes.NPCs
 			else outputText(" and easily lift her, forcing her to straddle you.", false);
 			outputText("  Dragging the demon back, you bring her slutty, sodden puss up to your " + cockDescript(x), false);
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) outputText(", ignoring the rope of dangling pre-cum that hangs from her bumpy prick.", false);
-			else outputText(", feeling the heat washing off her mons and onto your " + cockHead(x) + ".", false);
+			else outputText(", feeling the heat washing off her mons and onto your " + player.cockHead(x) + ".", false);
 			outputText("  Yanking back, you bury all " + num2Text(Math.round(player.cocks[x].cockLength)) + " inches of your " + cockDescript(x) + " into Ceraph's unholy, warm snatch, ", false);
 			if (player.cockArea(x) > 150) outputText("distorting her body around the sheer bulk of your massive member.\n\n", false);
 			else outputText("immersing yourself in the decadent wetness.\n\n", false);

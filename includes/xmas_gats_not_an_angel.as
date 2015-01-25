@@ -223,7 +223,7 @@ public function fuckTheAngelBadEnd():void {
 	if(player.hasCock()) outputText("\n\nTaking out your junk");
 	else outputText("\n\nCaressing your cunt");
 	outputText(", you wander your way towards the giant's mouth-muscle, climbing on top of her warm, pink bed. There's gotta be some kinda magic involved - her mint saliva sends tingles through your body, while dragging your ");
-	if(player.hasCock()) outputText(multiCockDescriptLight());
+	if(player.hasCock()) outputText(player.multiCockDescriptLight());
 	else outputText(vaginaDescript());
 	outputText(" against each bump and curve is beginning to get you hard.  She winces at the taste of your crotch against her tongue, though she's obviously never given oral to something with a heartbeat before.  Well, there's a first time for everything.");
 	outputText("\n\nHer mouth is already lubricated with what appears to be chocolatey saliva, a sweet syrup coating your genitals with a cool, arousing fluid.  It's not hard to guess that her tongue might be incredibly sensitive, and every hump against it seems to be getting the giantess unconsciously excitable.  Her eyes begin to flutter and a groan escapes her lips, while you hug against each wave of her warm breath.  The hypersensitivity of her mouth-muscle begins to take control of her movements, the grinding of your ");
@@ -250,7 +250,7 @@ public function fuckTheAngelBadEnd():void {
 	else outputText("feminine juices");
 	outputText(" all along her starving tongue, your eyes lifting up as you stretch to force as much as you can upon her.  A slick, stubby tendril fits between your [butt], while more of her taste buds rub against you in your squirting ecstasy.  Your ");
 	if(player.hasCock()) {
-		outputText(multiCockDescriptLight());
+		outputText(player.multiCockDescriptLight());
 		if(player.cockTotal() == 1) outputText("throbs");
 		else outputText("throb");
 	}

@@ -109,7 +109,7 @@ public function doDungeon(eventNo:Number):void {
 			if(player.cockArea(0) >= 100) outputText("As you struggle not to lose consciousness, you realize your over-aroused body had pumped most of your blood to your over-sized " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ", which now droops to the floor, pulsing hotly.  ", false);
 		}
 		//DO MULTIZ
-		if(player.cocks.length > 1) outputText("The feeling of light-headedness nearly robs you of consciousness as your " + multiCockDescript() + " fill with blood, pulsating with arousal as they reach full size.  ", false);
+		if(player.cocks.length > 1) outputText("The feeling of light-headedness nearly robs you of consciousness as your " + player.multiCockDescript() + " fill with blood, pulsating with arousal as they reach full size.  ", false);
 		//Vagooooz
 		if(player.vaginas.length > 0) {
 			//'uge clit
@@ -425,7 +425,7 @@ public function doDungeon(eventNo:Number):void {
 				player.growTits(1, (2+rand(3)), true, 1);
 				outputText("  ", false);
 				outputText("Your " + nippleDescript(0) + "s ", false);
-				if(player.cocks.length > 0) outputText("and " + multiCockDescript(), false);
+				if(player.cocks.length > 0) outputText("and " + player.multiCockDescript(), false);
 				outputText(" become rock hard, leaking fluids constantly.  ", false);
 				//MALE
 				if(player.cocks.length > 0 && player.vaginas.length == 0) outputText("Glancing over into the sea of sex, you find yourself drawn to the nearest pussy, as if it was the only thing in the world to matter.  You lose track of the time as you fuck hard dozens of gaping cunts, each of them overflowing with cum from all the participants in this infernal orgy.  ", false);
@@ -435,7 +435,7 @@ public function doDungeon(eventNo:Number):void {
 					player.cuntChange(150, true);
 				}
 				//HERM
-				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ", false);
+				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + player.multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ", false);
 				outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your " + player.armorName + ".  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...", false);
 				player.orgasm();
 				dynStats("int", -2, "lib", 4, "cor", 4);
@@ -447,7 +447,7 @@ public function doDungeon(eventNo:Number):void {
 			else {
 				outputText("Desperate for more of the demon-drugs, you slide into the now-familiar harness and let the needles sink into your skin.   Panting in lust, you beg for them to increase the dosage again.   Desire burns through your veins as the cocktail surges through them", false);
 				if(player.cocks.length > 0) {
-					outputText(", filling your " + multiCockDescriptLight(), false);
+					outputText(", filling your " + player.multiCockDescriptLight(), false);
 					outputText(" with sensation", false);
 					if(player.cockTotal() == 1) outputText("s", false);
 					outputText(" as ", false);
@@ -628,7 +628,7 @@ public function doDungeon(eventNo:Number):void {
 		if(player.cocks.length > 1) {
 			//Already has demoncocks
 			if(player.demonCocks() == player.cockTotal()) {
-				outputText("Your " + multiCockDescriptLight() + " leap forwards, taking to the dark magic with ease.  Inch after inch of new length erupts from your groin as your " + multiCockDescriptLight() + " get longer and thicker.  They pulsate, as if promising dark pleasure as they settle into their new enhanced size.", false);
+				outputText("Your " + player.multiCockDescriptLight() + " leap forwards, taking to the dark magic with ease.  Inch after inch of new length erupts from your groin as your " + player.multiCockDescriptLight() + " get longer and thicker.  They pulsate, as if promising dark pleasure as they settle into their new enhanced size.", false);
 				temp = player.cocks.length;
 				while(temp > 0) {
 					temp--;
@@ -638,10 +638,10 @@ public function doDungeon(eventNo:Number):void {
 			}
 			//Not yet full of demoncocks...
 			else {
-				outputText("You smile, watching your " + multiCockDescriptLight() + " grow longer.  Inches of newfound dick-flesh erupt from your crotch in response to omnibus' dark magics.  Before you can play with your transformed pleasure tools, a wave of burning desire passes through you.  You watch", false);
+				outputText("You smile, watching your " + player.multiCockDescriptLight() + " grow longer.  Inches of newfound dick-flesh erupt from your crotch in response to omnibus' dark magics.  Before you can play with your transformed pleasure tools, a wave of burning desire passes through you.  You watch", false);
 				if(player.cor < 80) outputText(" in horror", false);
 				else outputText(" curiously", false);			
-				outputText(" as the skin of your " + multiCockDescriptLight() + " turns shiny and purplish-black.  Corrupt nodules begin to spring up over the entire length of each dick.  ", false);
+				outputText(" as the skin of your " + player.multiCockDescriptLight() + " turns shiny and purplish-black.  Corrupt nodules begin to spring up over the entire length of each dick.  ", false);
 				temp = player.cocks.length;
 				while(temp > 0) {
 					temp--;
@@ -649,8 +649,8 @@ public function doDungeon(eventNo:Number):void {
 					player.cocks[temp].thickenCock(2);
 					player.cocks[temp].cockType = CockTypesEnum.DEMON;
 				}
-				if(player.cor < 50) outputText("<b>Your dicks are transforming into " + multiCockDescriptLight() + "!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  Unable to do anything but groan with forced pleasure and horror, you can only watch.  One last batch of nodules forms in a ring around the crowns of your " + multiCockDescriptLight() + ", seemingly completing its transformation, until you notice, almost throwing up, that your testicles are also getting covered in black veins under your powerless eyes!  ", false);
-				else outputText("<b>Your dicks are transforming into " + multiCockDescriptLight() + "!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  You pant and moan in happiness as they lengthen one last time.  As you stroke all of their amazing length with both hands, the excitement of possessing such a magnificent pleasure tool makes you cum. You lick your fingers eagerly, tasting your new cum, while a last ring of nodules forms around the crowns of your beautiful " + multiCockDescriptLight() + ".   Your new " + multiCockDescriptLight() + " pulsate darkly with each beat of your heart, but the thick, throbbing veins that are finishing to cover your testicles do not contain blood, but a black liquid which apparently has perverted them. You ponder what its purpose might be, but then you decide, as you stroke a huge, dark, bumpy shaft, that if they feel as good as they look, it doesn't really matter.  ", false);
+				if(player.cor < 50) outputText("<b>Your dicks are transforming into " + player.multiCockDescriptLight() + "!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  Unable to do anything but groan with forced pleasure and horror, you can only watch.  One last batch of nodules forms in a ring around the crowns of your " + player.multiCockDescriptLight() + ", seemingly completing its transformation, until you notice, almost throwing up, that your testicles are also getting covered in black veins under your powerless eyes!  ", false);
+				else outputText("<b>Your dicks are transforming into " + player.multiCockDescriptLight() + "!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  You pant and moan in happiness as they lengthen one last time.  As you stroke all of their amazing length with both hands, the excitement of possessing such a magnificent pleasure tool makes you cum. You lick your fingers eagerly, tasting your new cum, while a last ring of nodules forms around the crowns of your beautiful " + player.multiCockDescriptLight() + ".   Your new " + player.multiCockDescriptLight() + " pulsate darkly with each beat of your heart, but the thick, throbbing veins that are finishing to cover your testicles do not contain blood, but a black liquid which apparently has perverted them. You ponder what its purpose might be, but then you decide, as you stroke a huge, dark, bumpy shaft, that if they feel as good as they look, it doesn't really matter.  ", false);
 			}
 		}
 		eventParser(11055);
@@ -742,7 +742,7 @@ public function doDungeon(eventNo:Number):void {
 		outputText("You feel a strange shivering sensation pass through you.  ", true);
 		//Remove multiple.
 		if(player.cocks.length > 1) {
-			outputText("Your " + multiCockDescriptLight() + " shiver and retract back towards your body.  When the process finishes you are left with only your " + cockDescript(0) + ".  ", false);
+			outputText("Your " + player.multiCockDescriptLight() + " shiver and retract back towards your body.  When the process finishes you are left with only your " + cockDescript(0) + ".  ", false);
 			player.removeCock(1,player.cocks.length-1);
 			genderCheck();
 			temp++;

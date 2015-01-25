@@ -22,14 +22,14 @@ package classes.content
 			
 			outputText("\nsackDescript " + sackDescript());
 			outputText("\ncockClit " + cockClit);
-			outputText("\nballs " + balls(0, 0));
-			outputText("\nsheathDesc " + sheathDesc());
+//			outputText("\nballs " + balls(0, 0));
+			outputText("\nsheathDesc " + player.sheathDesc());
 			outputText("\nchestDesc " + chestDesc());
 			outputText("\nallChestDesc " + allChestDesc());
-			outputText("\nsMultiCockDesc " + sMultiCockDesc());
-			outputText("\nSMultiCockDesc " + SMultiCockDesc());
-			outputText("\noMultiCockDesc " + oMultiCockDesc());
-			outputText("\nOMultiCockDesc " + OMultiCockDesc());
+			outputText("\nsMultiCockDesc " + player.sMultiCockDesc());
+			outputText("\nSMultiCockDesc " + player.SMultiCockDesc());
+			outputText("\noMultiCockDesc " + player.oMultiCockDesc());
+			outputText("\nOMultiCockDesc " + player.OMultiCockDesc());
 			outputText("\ntongueDescript " + tongueDescript());
 			outputText("\nballsDescriptLight false " + ballsDescriptLight(false));
 			outputText("\nballsDescriptLight true " + ballsDescriptLight(true));
@@ -47,12 +47,12 @@ package classes.content
 			outputText("\nvaginaDescript " + vaginaDescript());
 			outputText("\nallVaginaDescript " + allVaginaDescript());
 			outputText("\nmultiCockDescriptLight " + multiCockDescriptLight());
-			outputText("\ncockAdjective " + cockAdjective());
+			outputText("\ncockAdjective " + player.cockAdjective());
 			outputText("\ncockDescript " + cockDescript(0));
 			outputText("\nbiggestBreastSizeDescript " + biggestBreastSizeDescript());
 			outputText("\nbreaseSize 5" + breastSize(5));
 			outputText("\nbreastDescript " + breastDescript(0));
-			outputText("\ncockHead " + cockHead(0));
+			outputText("\ncockHead " + player.cockHead());
 			outputText("\nbreastCup 5 " + breastCup(5));
 			
 			outputText("\n\nParser Tags (Single)L\n");

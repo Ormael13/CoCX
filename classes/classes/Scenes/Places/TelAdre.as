@@ -2028,7 +2028,7 @@ private function flirtWithVictoria(itype:ItemType):void {
 
 	outputText("\n\nShe begins to slowly move her disproportionately massive chest up and down your cock, ");
 	if(player.cocks[x].cockLength > 5)
-		outputText("making sure to give the " + cockHead(x) + " a quick suck every time it breaches her mounds.");
+		outputText("making sure to give the " + player.cockHead(x) + " a quick suck every time it breaches her mounds.");
 	else
 		outputText("pressing her mouth down into her ample cleavage so as to give your hidden tip a quick lick every time it draws near.");
 

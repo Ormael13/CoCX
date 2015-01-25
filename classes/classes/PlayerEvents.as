@@ -147,7 +147,7 @@ package classes {
 				if (rand(2) == 0 && player.hasCock()) { //50% chance to lust spike
 					//Display if haven't displayed
 					if (player.flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED] == 0) {
-						outputText("\nYour body tingles, practically a slave to the effects of harpy lipstick.  Blood surges to " + getGame().sMultiCockDesc() + ", making you groan out loud with forced pleasure.  Unasked-for fantasies assault you, and you spend a few moments fantasizing about fucking feathery women before you come to your senses.\n");
+						outputText("\nYour body tingles, practically a slave to the effects of harpy lipstick.  Blood surges to " + player.sMultiCockDesc() + ", making you groan out loud with forced pleasure.  Unasked-for fantasies assault you, and you spend a few moments fantasizing about fucking feathery women before you come to your senses.\n");
 						flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED]++;
 						needNext = true;
 					}
@@ -343,7 +343,7 @@ package classes {
 					needNext = true;
 				}
 				if (player.balls == 0) { //(Balls regrowth)
-					outputText("\n<b>As time passes, a pressure in your loins intensifies to near painful levels.  The skin beneath " + getGame().sMultiCockDesc() + " grows loose and floppy, and then two testicles roll down to fill your scrotum.</b>\n");
+					outputText("\n<b>As time passes, a pressure in your loins intensifies to near painful levels.  The skin beneath " + player.sMultiCockDesc() + " grows loose and floppy, and then two testicles roll down to fill your scrotum.</b>\n");
 					player.balls = 2;
 					player.ballSize = 3;
 					needNext = true;
@@ -423,7 +423,7 @@ package classes {
 					needNext = true;
 				}
 				if (player.balls == 0) { //(Balls regrowth)
-					outputText("\n<b>As time passes, a pressure in your loins intensifies to near painful levels.  The skin beneath " + getGame().sMultiCockDesc() + " grows loose and floppy, and then two testicles roll down to fill your scrotum.</b>\n");
+					outputText("\n<b>As time passes, a pressure in your loins intensifies to near painful levels.  The skin beneath " + player.sMultiCockDesc() + " grows loose and floppy, and then two testicles roll down to fill your scrotum.</b>\n");
 					player.balls = 2;
 					player.ballSize = 3;
 					needNext = true;
@@ -769,7 +769,7 @@ package classes {
 					
 					outputText("\n\nThe other you grunts and locks up as " + player.mf("his","her") + "... your [cock] begins to spurt inside your honey-drooling cunt, and " + player.mf("he","she") + " falls onto you, bottoming out inside; your vagina likewise clenches and squirts your sweet juices.  As " + player.mf("he","she") + " ejaculates, thrusting weakly, you can feel something shifting in you, filling you with pins and needles... it feels like the warm cum " + player.mf("he","she") + "'s filling you with is permeating your entire groin, working its way back toward your abdomen.  It edges up to your massive buildup of eggs, and your body tightens in a second climax at the thought of having your children fertilized-");
 					
-					outputText("\n\nYou snap awake, sitting bolt upright.  What in the name of... your " + getGame().multiCockDescriptLight() + " is softening rapidly, and as you shift, you can feel your cum sloshing in your [armor].  For fuck's sake.");
+					outputText("\n\nYou snap awake, sitting bolt upright.  What in the name of... your " + player.multiCockDescriptLight() + " is softening rapidly, and as you shift, you can feel your cum sloshing in your [armor].  For fuck's sake.");
 					if (player.cumQ() >= 1000) outputText("  It's completely soaked your bedroll, too... you won't be sleeping on this again until you wash it out.  Grumbling, you roll the soggy, white-stained fabric up and stow it.");
 					outputText("  The sensation of wetness inside your own clothes torments you as you try to return to sleep, driving up your lust and making you half-hard once again... the rumbling of eggs in your abdomen, as if they're ready to be laid, doesn't help either.");
 					player.fertilizeEggs(); //convert eggs to fertilized based on player cum output, reduce lust by 100 and then add 20 lust

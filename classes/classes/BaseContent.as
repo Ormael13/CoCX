@@ -41,15 +41,6 @@
 			return kGAMECLASS.timeQ;
 		}
 
-		protected function Num2Text(number:int):String
-		{
-			return kGAMECLASS.Num2Text(number);
-		}
-		protected  function num2Text2(number:int):String
-		{
-			return kGAMECLASS.num2Text2(number);
-		}
-
 		protected function get camp():Camp {
 			return kGAMECLASS.camp;
 		}
@@ -177,10 +168,14 @@
 			kGAMECLASS.hideUpDown();
 		}
 
+		/* This class extends Utils, no need for a non-static version of this function
 		protected function curry(func:Function,...args):Function
 		{
 			return Utils.curry.apply(null,[func].concat(args));
 		}
+		*/
+		
+		/* None of these functions are called anymore
 		protected function lazyIndex(obj:*,...args):Function
 		{
 			return Utils.lazyIndex.apply(null,[obj].concat(args));
@@ -193,6 +188,7 @@
 		{
 			return Utils.lazyCallIndexCall.apply(null,[func].concat(args));
 		}
+		*/
 
 		protected function createCallBackFunction(func:Function, arg:*):Function
 		{
@@ -296,6 +292,7 @@
 			return kGAMECLASS.hasButton(arg);
 		}
 
+/* Replaced by Utils.formatStringArray, which does almost the same thing in one function
 		protected function clearList():void{
 			kGAMECLASS.clearList();
 		}
@@ -307,10 +304,11 @@
 		protected function outputList():String{
 			return kGAMECLASS.outputList();
 		}
+*/
 		
 		protected function sackDescript():String
 		{
-			return kGAMECLASS.sackDescript();
+			return Appearance.sackDescript(player);
 		}
 		
 		protected function cockClit(value:int = 0):String
@@ -318,25 +316,29 @@
 			return kGAMECLASS.cockClit(value);
 		}
 		
+/* Was only used in Scylla's code. Replaced with conditionals
 		protected function balls(balls:*, noBalls:*):String
 		{
 			return kGAMECLASS.balls(balls, noBalls);
 		}
+*/
 		
 		protected function sheathDesc():String
 		{
-			return kGAMECLASS.sheathDesc();
+			return kGAMECLASS.player.sheathDescription();
 		}
 		
 		protected function chestDesc():String
 		{
-			return kGAMECLASS.chestDesc();
+			return player.chestDesc();
+			//return Appearance.chestDesc(player);
 		}
 		
 		protected function allChestDesc():String
 		{
-			return kGAMECLASS.allChestDesc();
+			return player.allChestDesc();
 		}
+		
 		protected function allBreastsDescript():String
 		{
 			return kGAMECLASS.allBreastsDescript();
@@ -344,22 +346,22 @@
 		
 		protected function sMultiCockDesc():String
 		{
-			return kGAMECLASS.sMultiCockDesc();
+			return kGAMECLASS.player.sMultiCockDesc();
 		}
 		
 		protected function SMultiCockDesc():String
 		{
-			return kGAMECLASS.SMultiCockDesc();
+			return kGAMECLASS.player.SMultiCockDesc();
 		}
 		
 		protected function oMultiCockDesc():String
 		{
-			return kGAMECLASS.oMultiCockDesc();
+			return kGAMECLASS.player.oMultiCockDesc();
 		}
 		
 		protected function OMultiCockDesc():String
 		{
-			return kGAMECLASS.OMultiCockDesc();
+			return kGAMECLASS.player.OMultiCockDesc();
 		}
 		
 		protected function tongueDescript():String
@@ -375,12 +377,17 @@
 			return kGAMECLASS.ballDescript();
 		}
 
+		/* All calls changed to monster.ballsDescriptLight
 		protected function eBallsDescriptLight():String {
 			return kGAMECLASS.eBallsDescriptLight();
 		}
+		*/
+		
+		/* Was never called
 		protected function eBallsDescript():String {
 			return kGAMECLASS.eBallsDescript();
 		}
+		*/
 
 		protected function ballsDescript():String {
 			return kGAMECLASS.ballsDescript();
@@ -395,7 +402,7 @@
 		}
 		
 		protected function eAssholeDescript():String {
-			return kGAMECLASS.eAssholeDescript();
+			return Appearance.assholeDescript(monster);
 		}
 				
 		protected function hipDescript():String {
@@ -414,14 +421,17 @@
 			return Appearance.assholeOrPussy(player);
 		}
 
+/* Replaced by calls to Appearance.breastDescript
 		protected function npcBreastDescript(size:Number):String {
 			return kGAMECLASS.npcBreastDescript(size);
 		}
-		
+*/
+/* Was never used
 		protected  function eButtDescript():String {
-			return kGAMECLASS.eButtDescript();
+			return Appearance.buttDescriptionShort(monster);
 		}
-
+*/
+/* Now in Utils.as
 		protected function num2TextBest(number:int, capitalised:Boolean = false, positional:Boolean = false):String
 		{
 			return kGAMECLASS.num2TextBest(number, capitalised, positional);
@@ -431,32 +441,44 @@
 		{
 			return kGAMECLASS.num2Text(number);
 		}
+		protected function Num2Text(number:int):String
+		{
+			return kGAMECLASS.Num2Text(number);
+		}
+		protected  function num2Text2(number:int):String
+		{
+			return kGAMECLASS.num2Text2(number);
+		}
+*/
 		
 		protected function nippleDescript(rowNum:Number):String
 		{
 			return kGAMECLASS.nippleDescript(rowNum);
 		}
 		
-		protected function cockDescript(cockNum:Number = 0):String
+		protected function cockDescript(cockNum:int = 0):String
 		{
-			return kGAMECLASS.cockDescript(cockNum);
+			return kGAMECLASS.player.cockDescript(cockNum);
 		}
 		
+/*
 		protected function cockAdjective(cockNum:Number = -1):String
 		{
 			return kGAMECLASS.cockAdjective(cockNum);
 		}
+*/
 		
 		protected function multiCockDescript():String
 		{
-			return kGAMECLASS.multiCockDescript();
+			return kGAMECLASS.player.multiCockDescript();
 		}
 		
 		protected function multiCockDescriptLight():String
 		{
-			return kGAMECLASS.multiCockDescriptLight();
+			return kGAMECLASS.player.multiCockDescriptLight();
 		}
 		
+/*
 		protected function eMultiCockDescriptLight():String
 		{
 			return kGAMECLASS.eMultiCockDescriptLight();
@@ -471,25 +493,28 @@
 		{
 			return kGAMECLASS.eCockDescript(cockIndex);
 		}
+*/
 		
 		protected function breastDescript(rowNum:Number):String
 		{
-			return kGAMECLASS.breastDescript(rowNum);
+			return player.breastDescript(rowNum);
 		}
 		
+/*
 		protected function cockHead(cockNum:Number = 0):String
 		{
 			return kGAMECLASS.cockHead(cockNum);
 		}
+*/
 		
 		protected function breastSize(val:Number):String
 		{
-			return kGAMECLASS.breastSize(val);
+			return Appearance.breastSize(val);
 		}
 		
 		protected function biggestBreastSizeDescript():String
 		{
-			return kGAMECLASS.biggestBreastSizeDescript();
+			return Appearance.biggestBreastSizeDescript(player);
 		}
 		
 		protected function hairDescript():String
@@ -517,15 +542,19 @@
 			return kGAMECLASS.allVaginaDescript();
 		}
 		
+/* Now called directly
 		protected function breastCup(val:Number):String
 		{
-			return kGAMECLASS.breastCup(val);
+			return Appearance.breastCup(val);
 		}
-
+*/
+		
+/* Replaced with calls to Appearance.cockDescription
 		protected function NPCCockDescript(cockType:*,cockLength:Number=0,lust:Number=50):String
 		{
 			return kGAMECLASS.NPCCockDescript(cockType,cockLength,lust);
 		}
+*/
 		
 		/**
 		 * Apply statmods to the player. dynStats wraps the regular stats call, but supports "named" arguments of the form:

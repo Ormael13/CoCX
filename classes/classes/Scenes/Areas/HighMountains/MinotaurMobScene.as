@@ -901,7 +901,7 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 		outputText("around the base of your " + multiCockDescriptLight() + ".  It circles up ", false);
 		if(player.cockTotal() > 1) outputText("a", false);
 		else outputText("the", false);
-		outputText(" shaft before stopping at the frenulum.  The wet heat of his tongue seems to seep into your dick-flesh until you feels as if you could melt, but the minitaur is just getting started.  He opens wide and takes your " + cockHead(0) + " into his mouth; it rubs sensually over the remainder of flat tongue still inside, and he sucks expertly at it until you're drooling pre-cum on his tongue.  He shivers at that, but it doesn't make him ", false);
+		outputText(" shaft before stopping at the frenulum.  The wet heat of his tongue seems to seep into your dick-flesh until you feels as if you could melt, but the minitaur is just getting started.  He opens wide and takes your " + player.cockHead() + " into his mouth; it rubs sensually over the remainder of flat tongue still inside, and he sucks expertly at it until you're drooling pre-cum on his tongue.  He shivers at that, but it doesn't make him ", false);
 		if(!player.isTaur()) outputText("break eye-contact or ", false);
 		outputText("slow down in the slightest.\n\n", false);
 	

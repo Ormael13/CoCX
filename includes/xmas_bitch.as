@@ -165,7 +165,7 @@ public function dickXmasElfGo():void {
 	else {
 		//(TOO BIG)
 		outputText("She pushes you down onto your bedroll and whispers, \"<i>Time to enjoy your present.</i>\"\n\n", false);
-		outputText("The elf grabs ahold of your " + cockDescript(0) + " with both hands and cuddles against it as if it were a person, planting kisses along the edge of its " + cockHead(0) + ".  She laughs, \"<i>Oh my, you're so big!  I almost wish I was big enough to take this bad boy.  Believe me, you haven't lived until you've been milked by an elf's cunt.</i>\"\n\n", false);
+		outputText("The elf grabs ahold of your " + cockDescript(0) + " with both hands and cuddles against it as if it were a person, planting kisses along the edge of its " + player.cockHead() + ".  She laughs, \"<i>Oh my, you're so big!  I almost wish I was big enough to take this bad boy.  Believe me, you haven't lived until you've been milked by an elf's cunt.</i>\"\n\n", false);
 		
 		outputText("She wraps her arms around it and begins licking it, squatting down and standing up, jerking you off with her whole body.  Each time her cute bottom bumps your " + allBreastsDescript() + " ", false);
 		if(player.biggestTitSize() >= 2) outputText("making them jiggle", false);
@@ -174,7 +174,7 @@ public function dickXmasElfGo():void {
 		
 		outputText("The elf looks over her shoulder and laughs, \"<i>Someone is feeling a bit naughty.  Well, I guess I'll have to help you drain out all that naughty energy.</i>\"\n\n", false);
 		
-		outputText("Before you can puzzle out her meaning, she takes a big gulp of air, grabs your " + cockHead(0) + " with both hands, and presses her lips into your urethra.  She blows into it with a look of intense concentration.  You can feel your urethra filling, expanding with something, but it feels more like liquid than air, tingling as it slides deep into your shaft towards your ", false);
+		outputText("Before you can puzzle out her meaning, she takes a big gulp of air, grabs your " + player.cockHead() + " with both hands, and presses her lips into your urethra.  She blows into it with a look of intense concentration.  You can feel your urethra filling, expanding with something, but it feels more like liquid than air, tingling as it slides deep into your shaft towards your ", false);
 		if(player.balls > 0) outputText("balls", false);
 		else if(player.hasSheath()) outputText("sheath", false);
 		else outputText("body", false);
@@ -182,7 +182,7 @@ public function dickXmasElfGo():void {
 		
 		outputText("The magic-using elf pulls back with a knowing grin and resumes stroking you, ignoring a dribble of pink fluid that squirts from your tip.   The warmth inside builds higher and you start sweating, even in the cool night air. The uncomfortable heat churns inside you", false);
 		if(player.balls > 0) outputText("r " + ballsDescriptLight(), false);
-		outputText(", a gentle pressure that builds higher and higher until you feel about to explode.  You need to cum, and you squirm in the elf's grasp, trembling and shuddering as one of her hands slips over a particularly sensitive spot. A bead of pre-cum rolls out of your " + cockHead(0) + " and starts sliding down the shaft, followed by another, and another, and another.\n\n", false);
+		outputText(", a gentle pressure that builds higher and higher until you feel about to explode.  You need to cum, and you squirm in the elf's grasp, trembling and shuddering as one of her hands slips over a particularly sensitive spot. A bead of pre-cum rolls out of your " + player.cockHead() + " and starts sliding down the shaft, followed by another, and another, and another.\n\n", false);
 		
 		outputText("Your 'present' asks with gradually rising authority, \"<i>Do you feel the naughtyness leaking out?  It feels good doesn't it?  Yes it does, but that's just the start.  You've got a lot of pent up naughty that needs to come out so you'll be good and see me next year.  So be a good boy and cum out all those bad thoughts for me please.</i>\"\n\n", false);
 		

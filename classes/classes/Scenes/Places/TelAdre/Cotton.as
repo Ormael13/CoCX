@@ -663,7 +663,7 @@ private function fuckCottonInShowerRepeat():void {
 
 		if(player.cockArea(x) >= 100) {
 			//(If PC has one cock)
-			if(player.cockTotal() == 1) outputText("  You feel your " + cockDescript(x) + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  Your " + cockHead(x) + " rubs against her belly, sending ripples of pleasure up your spine.", false);
+			if(player.cockTotal() == 1) outputText("  You feel your " + cockDescript(x) + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  Your " + player.cockHead(x) + " rubs against her belly, sending ripples of pleasure up your spine.", false);
 			//(If PC has multiple cocks)
 			else if(player.cockTotal() > 1) outputText("  You feel your " + multiCockDescriptLight() + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  The group of cocks rubs together as you make out, sending ripples of pleasure up your spine.", false);
 		}
@@ -740,7 +740,7 @@ private function fuckCottonInShowerRepeat():void {
 
 		if(player.cockArea(x) >= 100) {
 			//(If PC has one cock)
-			if(player.cockTotal() == 1) outputText("  You feel your " + cockDescript(x) + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  Your " + cockHead(x) + " rubs against her belly, sending ripples of pleasure up your spine.", false);
+			if(player.cockTotal() == 1) outputText("  You feel your " + cockDescript(x) + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  Your " + player.cockHead(x) + " rubs against her belly, sending ripples of pleasure up your spine.", false);
 			//(If PC has multiple cocks)
 			else if(player.cockTotal() > 1) outputText("  You feel your " + multiCockDescriptLight() + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  The group of cocks rubs together as you make out, sending ripples of pleasure up your spine.", false);
 			//(If PC has a pussy, add the following)

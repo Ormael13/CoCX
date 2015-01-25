@@ -331,9 +331,9 @@ public function doCombat(eventNum:Number):void
 			if (player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ", false);
 			if (player.lust >= 60) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ", false);
 			if (player.cocks.length > 0) {
-				if (player.lust >= 60 && player.cocks.length > 0) outputText("You feel your " + multiCockDescriptLight() + " dribble pre-cum.", false);
-				if (player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText("Your " + cockDescript(0) + " hardens, distracting you further.", false);
-				if (player.lust >= 30 && player.lust < 60 && player.cocks.length > 1) outputText("Your " + multiCockDescriptLight() + " harden uncomfortably.", false);
+				if (player.lust >= 60 && player.cocks.length > 0) outputText("You feel your " + player.multiCockDescriptLight() + " dribble pre-cum.", false);
+				if (player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText("Your " + player.cockDescript(0) + " hardens, distracting you further.", false);
+				if (player.lust >= 30 && player.lust < 60 && player.cocks.length > 1) outputText("Your " + player.multiCockDescriptLight() + " harden uncomfortably.", false);
 				if (player.hasVagina()) outputText("  ", false);
 			}
 			if (player.vaginas.length > 0) {
@@ -381,7 +381,7 @@ public function doCombat(eventNum:Number):void
 				monster.lust += 10;
 			}
 			if (monk == 5) {
-				outputText("Jojo frantically jerks his " + eCockDescript(0) + ", stroking the " + eCockDescript(0) + " as it leaks pre-cum at the sight of you.  ", false);
+				outputText("Jojo frantically jerks his " + monster.cockDescriptShort(0) + ", stroking the " + monster.cockDescriptShort(0) + " as it leaks pre-cum at the sight of you.  ", false);
 				monster.lust += 15;
 			}
 			if (monster.lust > 50 && monster.lust < 60) outputText("The mouse's skin remains flushed with the beginnings of arousal.  ", false);
@@ -423,17 +423,17 @@ public function doCombat(eventNum:Number):void
 				monk = 0;
 			}
 			else {
-				outputText("Jojo grins wickedly as he senses your defeat, " + eCockDescript(0) + " throbbing hard.  ", true);
+				outputText("Jojo grins wickedly as he senses your defeat, " + monster.cockDescriptShort(0) + " throbbing hard.  ", true);
 				if (player.lust >= 100) {
 					if (player.gender == 1) {
-						outputText("Too aroused to think, you just bend over, displaying your bum and letting your " + multiCockDescriptLight() + " dangle freely.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
-						if (player.cockTotal() == 1) outputText("Pre and cum drip from your " + cockDescript(0) + ", forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
-						if (player.cockTotal() > 1) outputText("Pre and cum drip from your " + cockDescript(0) + "s, forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
+						outputText("Too aroused to think, you just bend over, displaying your bum and letting your " + player.multiCockDescriptLight() + " dangle freely.  The mouse doesn't hesitate, and he thrusts his " + monster.cockDescriptShort(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
+						if (player.cockTotal() == 1) outputText("Pre and cum drip from your " + player.cockDescript(0) + ", forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
+						if (player.cockTotal() > 1) outputText("Pre and cum drip from your " + player.cockDescript(0) + "s, forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
 						player.buttChange(monster.cockArea(0), true);
 					}
 					if (player.gender >= 2) {
 						outputText("Too aroused to think, you bend over, displaying your bum and " + vaginaDescript(0) + " to Jojo as open targets.  The mouse obliges, plunging himself into you, hard.  He fucks you with abandon, pounding your wanton little pussy with no regard for your pleasure.  Despite yourself, you enjoy the rough treatment.  A spasm of warmth erupts inside you as Jojo cums.  You worry he might stop, but as the mouse's orgasm ends he resumes fucking with even greater energy. You cum powerfully, his jizz seeping down your thighs as you begin lose track of yourself.  ", false);
-						if (player.cockTotal() > 1) outputText("Your " + cockDescript(0) + " splatters the ground with cum repeatedly, until both your genders are raw and sore.  ", false);
+						if (player.cockTotal() > 1) outputText("Your " + player.cockDescript(0) + " splatters the ground with cum repeatedly, until both your genders are raw and sore.  ", false);
 						else outputText("Your " + vaginaDescript(0) + " cums on him many more times it until it is sore and tender, dripping with spunk.  ", false);
 						outputText("You black out as Jojo cums AGAIN, forcing a river of spunk from your already over-filled uterus.", false);
 						player.cuntChange(monster.cocks[0].cockThickness, true);
@@ -441,7 +441,7 @@ public function doCombat(eventNum:Number):void
 						player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE + 82, 101); //Jojo's kids take longer for some reason
 					}
 					if (player.gender == 0) {
-						outputText("Too aroused to think, you just bend over, displaying your bum and wiggling enticingly.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
+						outputText("Too aroused to think, you just bend over, displaying your bum and wiggling enticingly.  The mouse doesn't hesitate, and he thrusts his " + monster.cockDescriptShort(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
 						outputText("You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
 					}
 					player.slimeFeed();
@@ -696,13 +696,13 @@ public function doCombat(eventNum:Number):void
 			if (player.lust < 35) outputText("The demons press in close against you and although they fail to hit you with an attack, the sensation of their skin rubbing against yours feels highly erotic.", false);
 			if (player.lust >= 35 && player.lust < 65) {
 				outputText("The push of the demons' sweaty, seductive bodies sliding over yours is deliciously arousing and you feel your ", false);
-				if (player.cocks.length > 0) outputText(multiCockDescriptLight() + " hardening ", false);
+				if (player.cocks.length > 0) outputText(player.multiCockDescriptLight() + " hardening ", false);
 				else if (player.vaginas.length > 0) outputText(vaginaDescript(0) + " get wetter ", false);
 				outputText("in response to all the friction.", false);
 			}
 			if (player.lust >= 65) {
 				outputText("As the demons mill around you, their bodies rub constantly over yours, and it becomes harder and harder to keep your thoughts on the fight or resist reaching out to touch a well lubricated cock or pussy as it slips past.  You keep subconsciously moving your ", false);
-				if (player.gender == 1) outputText(multiCockDescriptLight() + " towards the nearest inviting demonic hole.", false);
+				if (player.gender == 1) outputText(player.multiCockDescriptLight() + " towards the nearest inviting demonic hole.", false);
 				if (player.gender == 2) outputText(vaginaDescript(0) + " towards the nearest swinging cock.", false);
 				if (player.gender == 3) outputText("aching cock and thirsty pussy towards the nearest thing willing to fuck it.", false);
 				if (player.gender == 0) outputText("groin, before remember there is nothing there to caress.", false);
@@ -2153,8 +2153,8 @@ public function combatStatusesUpdate():void {
 			player.removeStatusAffect(StatusAffects.Luststick);
 		}		
 		else if(rand(5) == 0) {
-			if(rand(2) == 0) outputText("A fantasy springs up from nowhere, dominating your thoughts for a few moments.  In it, you're lying down in a soft nest.  Gold-rimmed lips are noisily slurping around your " + cockDescript(0) + ", smearing it with her messy aphrodisiac until you're completely coated in it.  She looks up at you knowingly as the two of you get ready to breed the night away...\n\n", false);		
-			else outputText("An idle daydream flutters into your mind.  In it, you're fucking a harpy's asshole, clutching tightly to her wide, feathery flanks as the tight ring of her pucker massages your " + cockDescript(0) + ".  She moans and turns around to kiss you on the lips, ensuring your hardness.  Before long her feverish grunts of pleasure intensify, and you feel the egg she's birthing squeezing against you through her internal walls...\n\n", false);
+			if(rand(2) == 0) outputText("A fantasy springs up from nowhere, dominating your thoughts for a few moments.  In it, you're lying down in a soft nest.  Gold-rimmed lips are noisily slurping around your " + player.cockDescript(0) + ", smearing it with her messy aphrodisiac until you're completely coated in it.  She looks up at you knowingly as the two of you get ready to breed the night away...\n\n", false);		
+			else outputText("An idle daydream flutters into your mind.  In it, you're fucking a harpy's asshole, clutching tightly to her wide, feathery flanks as the tight ring of her pucker massages your " + player.cockDescript(0) + ".  She moans and turns around to kiss you on the lips, ensuring your hardness.  Before long her feverish grunts of pleasure intensify, and you feel the egg she's birthing squeezing against you through her internal walls...\n\n", false);
 			dynStats("lus", 20);
 		}
 	}
@@ -2189,8 +2189,8 @@ public function combatStatusesUpdate():void {
 		dynStats("lus", (rand(player.lib/5) + 3 + rand(5)));
 		if(player.totalCocks() > 1) outputText("Each of y", false);
 		else outputText("Y", false);
-		if(monster.plural) outputText("our " + multiCockDescriptLight() + " dribbles pre-cum as you think about plowing " + monster.a + monster.short + " right here and now, fucking " + monster.pronoun3 + " " + eVaginaDescript(0) + "s until they're totally fertilized and pregnant.\n\n", false);
-		else outputText("our " + multiCockDescriptLight() + " dribbles pre-cum as you think about plowing " + monster.a + monster.short + " right here and now, fucking " + monster.pronoun3 + " " + eVaginaDescript(0) + " until it's totally fertilized and pregnant.\n\n", false);
+		if(monster.plural) outputText("our " + player.multiCockDescriptLight() + " dribbles pre-cum as you think about plowing " + monster.a + monster.short + " right here and now, fucking " + monster.pronoun3 + " " + monster.vaginaDescript() + "s until they're totally fertilized and pregnant.\n\n", false);
+		else outputText("our " + player.multiCockDescriptLight() + " dribbles pre-cum as you think about plowing " + monster.a + monster.short + " right here and now, fucking " + monster.pronoun3 + " " + monster.vaginaDescript() + " until it's totally fertilized and pregnant.\n\n", false);
 	}
 	if(player.findStatusAffect(StatusAffects.NagaVenom) >= 0) {
 		//Chance to cleanse!
@@ -2223,7 +2223,7 @@ public function combatStatusesUpdate():void {
 				outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ", false);
 			}
 			else if(player.totalCocks() > 0) {
-				outputText("Your " + cockDescript(0) + " pulses and twitches, overwhelmed with the desire to breed.  ", false);			
+				outputText("Your " + player.cockDescript(0) + " pulses and twitches, overwhelmed with the desire to breed.  ", false);			
 			}
 			if(player.gender == 0) {
 				outputText("You feel a tingle in your " + assholeDescript() + ", and the need to touch and fill it nearly overwhelms you.  ", false);
@@ -2497,7 +2497,7 @@ public function showMonsterLust():void {
 			}
 			if(monster.vaginas.length > 0) {
 				if(monster.lust >= 70 && monster.lust < 85) outputText(monster.capitalA + monster.short + " are obviously turned on, you can smell " + monster.pronoun3 + " arousal in the air.  ", false);
-				if(monster.lust >= 85) outputText(monster.capitalA + monster.short + "' " + eVaginaDescript(0) + "s are practically soaked with their lustful secretions.  ", false);
+				if(monster.lust >= 85) outputText(monster.capitalA + monster.short + "' " + monster.vaginaDescript() + "s are practically soaked with their lustful secretions.  ", false);
 			}
 		}
 		else {
@@ -2509,7 +2509,7 @@ public function showMonsterLust():void {
 			}
 			if(monster.vaginas.length > 0) {
 				if(monster.lust >= 70 && monster.lust < 85) outputText(monster.capitalA + monster.short + " is obviously turned on, you can smell " + monster.pronoun3 + " arousal in the air.  ", false);
-				if(monster.lust >= 85) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " is practically soaked with her lustful secretions.  ", false);
+				if(monster.lust >= 85) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " is practically soaked with her lustful secretions.  ", false);
 			}
 		}
 	}
@@ -3092,8 +3092,8 @@ public function tease(justText:Boolean = false):void {
 				if(player.cocks.length > 0) {
 					chance++;
 					damage++;
-					if(player.cocks.length == 1) outputText(cockDescript(0), false);
-					if(player.cocks.length > 1) outputText(multiCockDescriptLight(), false);
+					if(player.cocks.length == 1) outputText(player.cockDescript(0), false);
+					if(player.cocks.length > 1) outputText(player.multiCockDescriptLight(), false);
 					outputText(" and ", false);
 					if(player.findPerk(PerkLib.BulgeArmor) >= 0) {
 						damage += 5;
@@ -3113,8 +3113,8 @@ public function tease(justText:Boolean = false):void {
 			}
 			else {
 				outputText("You open your " + player.armorName + ", revealing your ", false);
-				if(player.cocks.length == 1) outputText(cockDescript(0), false);
-				if(player.cocks.length > 1) outputText(multiCockDescriptLight(), false);
+				if(player.cocks.length == 1) outputText(player.cockDescript(0), false);
+				if(player.cocks.length > 1) outputText(player.multiCockDescriptLight(), false);
 				if(player.hasVagina()) outputText(" and ", false);
 				//Bulgy bonus!
 				if(player.findPerk(PerkLib.BulgeArmor) >= 0) {
@@ -3179,7 +3179,7 @@ public function tease(justText:Boolean = false):void {
 			else outputText(monster.capitalA + monster.short + "'s gaze is riveted on your groin as you run your fingers up and down your folds seductively.", false);
 			if(player.clitLength > 3) outputText("  You smile as your " + clitDescript() + " swells out from the folds and stands proudly, begging to be touched.", false);
 			else outputText("  You smile and pull apart your lower-lips to expose your " + clitDescript() + ", giving the perfect view.", false);
-			if(player.cockTotal() > 0) outputText("  Meanwhile, " + sMultiCockDesc() + " bobs back and forth with your gyrating hips, adding to the display.", false);
+			if(player.cockTotal() > 0) outputText("  Meanwhile, " + player.sMultiCockDesc() + " bobs back and forth with your gyrating hips, adding to the display.", false);
 			//BONUSES!
 			if(player.hasCock()) {
 				if(player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 5;
@@ -3216,7 +3216,7 @@ public function tease(justText:Boolean = false):void {
 			break;
 		//10 Bulgy groin thrust
 		case 10:
-			outputText("You lean back and pump your hips at " + monster.a + monster.short + " in an incredibly vulgar display.  The bulging, barely-contained outline of your " + cockDescript(0) + " presses hard into your gear.  ", false);
+			outputText("You lean back and pump your hips at " + monster.a + monster.short + " in an incredibly vulgar display.  The bulging, barely-contained outline of your " + player.cockDescript(0) + " presses hard into your gear.  ", false);
 			if(player.findPerk(PerkLib.BroBrains) >= 0) outputText("No way could " + monster.pronoun1 + " resist your huge cock!", false);
 			else outputText("This is so crude, but at the same time, you know it'll likely be effective.", false);
 			outputText("  You go on like that, humping the air for your foe", false);
@@ -3229,7 +3229,7 @@ public function tease(justText:Boolean = false):void {
 		case 11:
 			if(silly() && rand(2) == 0) outputText("You strike a herculean pose and flex, whispering, \"<i>Do you even lift?</i>\" to " + monster.a + monster.short + ".", false);
 			else {
-				outputText("You open your " + player.armorName + " just enough to let your " + cockDescript(0) + " and " + ballsDescriptLight() + " dangle free.  A shiny rope of pre-cum dangles from your cock, showing that your reproductive system is every bit as fit as the rest of you.  ", false);
+				outputText("You open your " + player.armorName + " just enough to let your " + player.cockDescript(0) + " and " + ballsDescriptLight() + " dangle free.  A shiny rope of pre-cum dangles from your cock, showing that your reproductive system is every bit as fit as the rest of you.  ", false);
 				if(player.findPerk(PerkLib.BroBrains) >= 0) outputText("Bitches love a cum-leaking cock.", false);
 				else outputText("You've got to admit, you look pretty good down there.", false);
 			}
@@ -3359,7 +3359,7 @@ public function tease(justText:Boolean = false):void {
 			break;
 		//TALL WOMAN TEASE
 		case 25:
-			outputText("You move close to your enemy, handily stepping over " + monster.pronoun3 + " defensive strike before leaning right down in " + monster.pronoun3 + " face, giving " + monster.pronoun2 + " a good long view at your cleavage.  \"<i>Hey, there, little " + monster.mf("guy","girl") + ",</i>\" you smile.  Before " + monster.pronoun1 + " can react, you grab " + monster.pronoun2 + " and smoosh " + monster.pronoun3 + " face into your " + allChestDesc() + ", nearly choking " + monster.pronoun2 + " in the canyon of your cleavage.  " + monster.mf("He","She") + " struggles for a moment.  You give " + monster.pronoun2 + " a little kiss on the head and step back, ready for combat.", false);
+			outputText("You move close to your enemy, handily stepping over " + monster.pronoun3 + " defensive strike before leaning right down in " + monster.pronoun3 + " face, giving " + monster.pronoun2 + " a good long view at your cleavage.  \"<i>Hey, there, little " + monster.mf("guy","girl") + ",</i>\" you smile.  Before " + monster.pronoun1 + " can react, you grab " + monster.pronoun2 + " and smoosh " + monster.pronoun3 + " face into your " + player.allChestDesc() + ", nearly choking " + monster.pronoun2 + " in the canyon of your cleavage.  " + monster.mf("He","She") + " struggles for a moment.  You give " + monster.pronoun2 + " a little kiss on the head and step back, ready for combat.", false);
 			breasts = true;
 			chance += 2;
 			damage += 4;
@@ -3422,7 +3422,7 @@ public function tease(justText:Boolean = false):void {
 			break;
 		//35 Servant Boy Clothes (male only)
 		case 35:
-			outputText("You brush aside your crotch flap for a moment, then ask " + monster.a + monster.short + " if, " + player.mf("Master","Mistress") + " would like you to use your " + multiCockDescriptLight() + " on them?", false);
+			outputText("You brush aside your crotch flap for a moment, then ask " + monster.a + monster.short + " if, " + player.mf("Master","Mistress") + " would like you to use your " + player.multiCockDescriptLight() + " on them?", false);
 			penis = true;
 			chance++;
 			damage += 2;
@@ -3468,7 +3468,7 @@ public function tease(justText:Boolean = false):void {
 			break;
 		case 41:
 			outputText( "Smirking coyly, you sway from side to side, running your tongue along your upper teeth seductively.  You hook your thumbs into your " + player.armorName + " and pull them away to partially reveal ");
-			if(player.cockTotal() > 0) outputText(sMultiCockDesc());
+			if(player.cockTotal() > 0) outputText(player.sMultiCockDesc());
 			if(player.gender == 3) outputText(" and ");
 			if(player.gender >= 2) outputText("your " + vaginaDescript(0));
 			outputText(".  Your bushy tail" + ((player.tailVenom > 1) ? "s" : "" ) + " cross" + ((player.tailVenom > 1) ? "": "es") + " in front, wrapping around your genitals and obscuring the view teasingly.");
@@ -4031,24 +4031,24 @@ public function spellArouse():void {
 		outputText(" eyes glaze over with desire for a moment.  ", false);
 	}
 	if(monster.cocks.length > 0) {
-		if(monster.lust >= 60 && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + eMultiCockDescriptLight() + " dribble pre-cum.  ", false);
-		if(monster.lust >= 30 && monster.lust < 60 && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + eCockDescript(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
-		if(monster.lust >= 30 && monster.lust < 60 && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + eMultiCockDescriptLight() + " harden uncomfortably.  ", false);
+		if(monster.lust >= 60 && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ", false);
+		if(monster.lust >= 30 && monster.lust < 60 && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ", false);
+		if(monster.lust >= 30 && monster.lust < 60 && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ", false);
 	}
 	if(monster.vaginas.length > 0) {
 		if(monster.plural) {
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + "s dampen perceptibly.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ", false);
 			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + "s become sloppy and wet.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ", false);
 			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
 		}
 		else {
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " dampens perceptibly.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ", false);
 			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " becomes sloppy and wet.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ", false);
 			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " instantly soaks her groin.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
 		}
 	}
 	outputText("\n\n", false);
@@ -4073,11 +4073,11 @@ public function spellHeal():void {
 		outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ", false);
 		if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
 		if(player.gender == 1) {
-			if(player.cockTotal() == 1) outputText(cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
-			else outputText(multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.", false);
+			if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
+			else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.", false);
 		}
 		if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.", false);
-		if(player.gender == 3) outputText(vaginaDescript(0) + " and " + multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
+		if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
 		dynStats("lib", .25, "lus", 15);
 	}
 	else {
@@ -4114,11 +4114,11 @@ public function spellMight():void {
 		outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ", false);
 		if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
 		if(player.gender == 1) {
-			if(player.cockTotal() == 1) outputText(cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
-			else outputText(multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.", false);
+			if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
+			else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.", false);
 		}
 		if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.", false);
-		if(player.gender == 3) outputText(vaginaDescript(0) + " and " + multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
+		if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
 		dynStats("lib", .25, "lus", 15);
 	}
 	else {

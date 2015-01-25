@@ -860,19 +860,19 @@ private function exgartuanSleepSurprise():void {
 			else outputText("sheath", false);
 			outputText(" instead of pulling it free.  Your eyes cross from the feelings coming off your traitorous, possessed flesh after the accidental caress.  Both hands start to pump away, autonomously jacking the swollen demon-shaft into your mouth", false);
 			if(player.biggestTitSize() >= 2) outputText(" and bouncing your " + allBreastsDescript() + " around it", false);
-			outputText(".  Moans of pleasure vibrate the " + cockHead(0) + " lodged in your throat while bubbles of wetness begin to slide down the lower half of your esophagus into your gullet.\n\n", false);
+			outputText(".  Moans of pleasure vibrate the " + player.cockHead() + " lodged in your throat while bubbles of wetness begin to slide down the lower half of your esophagus into your gullet.\n\n", false);
 		}
 		else {
 			//MED+ COR, NOT DONE A LOT:
 			if(flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN] < 5) {
-				outputText("You grab hold of your over-sized, demon-infested organ with both hands, resigned to this fate.  Even if you managed to stop Exgartuan now, he would just start all over again once you'd fallen asleep.  The pre-slicked, veiny surface slides through your fingers, outputting a cacophony of pleasure through your nervous system.  Your eyes cross from the feeling, and you actually cry moans of need into your own " + cockHead(0) + ".  It vibrates pleasantly, dumping a few loads of pre-cum into your gullet while ", false);
+				outputText("You grab hold of your over-sized, demon-infested organ with both hands, resigned to this fate.  Even if you managed to stop Exgartuan now, he would just start all over again once you'd fallen asleep.  The pre-slicked, veiny surface slides through your fingers, outputting a cacophony of pleasure through your nervous system.  Your eyes cross from the feeling, and you actually cry moans of need into your own " + player.cockHead() + ".  It vibrates pleasantly, dumping a few loads of pre-cum into your gullet while ", false);
 				if(player.biggestTitSize() >= 2) outputText("you squeeze your tits around your " + cockDescript(0) + " with your biceps", false);
 				else outputText("you squeeze and caress your " + cockDescript(0), false);
 				outputText(".  With both hands beginning to stroke faster and faster, you give yourself over to the corrupted lust that's burning in your veins.\n\n", false);
 			}
 			//(MED+COR, DONE A LOT:
 			else {
-				outputText("You grab hold of the swollen flesh with both hands and start to stroke it, reveling at the feel of your palms sliding along the veiny, pre-cum slicked flesh.  You gurgle happily, your moans of pleasure vibrating the " + cockHead(0) + " in your esophagus.  The swollen cock-tip dumps globules of pre-cum down your stretched throat, directly into your hungry gullet.  With both eyes crossed and your hands absorbed in fondling your member, you quickly forget your irritation at being woken up in such a way.  You get to cum SO HARD when you're fucking yourself like this!", false);
+				outputText("You grab hold of the swollen flesh with both hands and start to stroke it, reveling at the feel of your palms sliding along the veiny, pre-cum slicked flesh.  You gurgle happily, your moans of pleasure vibrating the " + player.cockHead() + " in your esophagus.  The swollen cock-tip dumps globules of pre-cum down your stretched throat, directly into your hungry gullet.  With both eyes crossed and your hands absorbed in fondling your member, you quickly forget your irritation at being woken up in such a way.  You get to cum SO HARD when you're fucking yourself like this!", false);
 				if(player.biggestTitSize() >= 2) {
 					outputText("  Your biceps squeeze around your " + allBreastsDescript() + ", mashing them into your " + cockDescript(0) + " and adding to the pleasure.", false);
 					if(player.hasFuckableNipples() && player.biggestLactation() > 1) outputText("  Milk and lubricants ", false);

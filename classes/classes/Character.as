@@ -798,12 +798,6 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			return false;
 		}
 		
-		public function hasSheath():Boolean
-		{
-			return dogCocks() > 0 || horseCocks() > 0 || catCocks() > 0 || kangaCocks() > 0 || displacerCocks() > 0;
-
-		}
-		
 		public function hasKnot(arg:int = 0):Boolean
 		{
 			if (arg > cockTotal() - 1 || arg < 0)

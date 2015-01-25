@@ -435,7 +435,7 @@ private function MaraeIIStageII():void {
 		outputText("Cum boils out of your ", false);
 		if(player.balls > 0) outputText("rapidly contracting balls", false);
 		else outputText("tentacle-squeezed prostate", false);
-		outputText(" and erupts into Marae's womb.  Your hips rock forward, grazing her cervix with your " + cockHead(0) + " to better fill her uterus.  ", false);
+		outputText(" and erupts into Marae's womb.  Your hips rock forward, grazing her cervix with your " + player.cockHead() + " to better fill her uterus.  ", false);
 		if(player.cockTotal() > 1) outputText("The " + cockDescript(1) + " in her ass spasms and explodes with its brother, glazing her slippery colon with a coating of syrupy spunk.  ", false);
 		if(player.cockTotal() > 2) {
 			outputText("Neglected but orgasming, ", false);

@@ -238,14 +238,14 @@ package classes.Items.Consumables
 				}
 				else if (player.cocks.length > 1) {
 					var biggest:int = player.biggestCockIndex();
-					outputText("\n\nThe effects of the honey move towards your groin, and into your " + player.multiCockDescriptLight() + ", causing them to stand at attention.  They quiver for a moment, and feel rather itchy.  Suddenly you are overwhelmed with pleasure as <b>your " + getGame().cockDescript(biggest) + " is absorbed into your " + getGame().cockDescript(0) + "!</b>  You grab onto the merging cock and pump it with your hands as it increases in size and you cum in pleasure.  Your " + getGame().cockDescript(0) + " seems a lot more sensative now...");
+					outputText("\n\nThe effects of the honey move towards your groin, and into your " + player.multiCockDescriptLight() + ", causing them to stand at attention.  They quiver for a moment, and feel rather itchy.  Suddenly you are overwhelmed with pleasure as <b>your " + player.cockDescript(biggest) + " is absorbed into your " + player.cockDescript(0) + "!</b>  You grab onto the merging cock and pump it with your hands as it increases in size and you cum in pleasure.  Your " + player.cockDescript(0) + " seems a lot more sensative now...");
 					player.cocks[0].cockLength		+= 5 * Math.sqrt(0.2 * player.cocks[biggest].cArea());
 					player.cocks[0].cockThickness	+= Math.sqrt(0.2 * player.cocks[biggest].cArea());
 					player.removeCock(biggest, 1);
 					getGame().dynStats("sen", 5);
 				}
 				else if (player.cocks[0].cArea() < 100) {
-					outputText("\n\nYour " + getGame().cockDescript(0) + " suddenly becomes rock hard and incredibly sensitive to the touch.  You pull away your " + player.armorName + ", and start to masturbate furiously as it rapidly swells in size.  When the change finally finishes, you realize that your " + getGame().cockDescript(0) + " has both grown much longer and wider!  <b>");
+					outputText("\n\nYour " + player.cockDescript(0) + " suddenly becomes rock hard and incredibly sensitive to the touch.  You pull away your " + player.armorName + ", and start to masturbate furiously as it rapidly swells in size.  When the change finally finishes, you realize that your " + player.cockDescript(0) + " has both grown much longer and wider!  <b>");
 					if (player.cocks[0].cArea() <= 20)
 						outputText("It now swings as low as your knees!");
 					else if (player.cocks[0].cArea() <= 50)
@@ -257,7 +257,7 @@ package classes.Items.Consumables
 					getGame().dynStats("sen", 5);
 				}
 				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race() == "bee-morph") {
-					outputText("\n\nYour huge member suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your " + player.armorName + " and watch in fascination as your " + getGame().cockDescript(0) + " starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.\n\n");
+					outputText("\n\nYour huge member suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your " + player.armorName + " and watch in fascination as your " + player.cockDescript(0) + " starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.\n\n");
 					outputText("It is entirely different from the usual feeling you get when you’re cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming, and it takes a lot of will not to just run off in search of the bee girl that gave you that special honey right now.  This isn’t good.\n\n");
 					outputText("<b>You now have a bee cock!</b>");
 					player.cocks[0].cockType = CockTypesEnum.BEE;
@@ -266,7 +266,7 @@ package classes.Items.Consumables
 					getGame().dynStats("sen", 15);
 				}
 				else {
-					outputText("\n\nThe effects of the honey don’t seem to focus on your groin this time, but you still feel your "  + getGame().cockDescript(0) + " grow slightly under your " + player.armorName + ".");
+					outputText("\n\nThe effects of the honey don’t seem to focus on your groin this time, but you still feel your "  + player.cockDescript(0) + " grow slightly under your " + player.armorName + ".");
 					player.cocks[0].cockLength += 0.1 * Utils.rand(10) + 1;
 					player.cocks[0].cockThickness += 0.1 * Utils.rand(2) + 0.1;
 					getGame().dynStats("sen", 3);

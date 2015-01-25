@@ -378,7 +378,7 @@ package classes.Scenes.Areas
 			else outputText("\n\n\"<i>Whoa nellie,</i>\" she says, her eyes going wide as they feast upon your giant cock.  \"<i>That.  That right there, darlin', is one grade-A trouser snake.  I've seen centaurs that'd look like geldings next to you.</i>\"");
 			outputText("  She leisurely stretches out across your stomach and chest, letting her cunt come to rest right in front of your face.");
 
-			outputText("\n\nYou feel slender but powerful fingers wrap around your cock, followed shortly after by a pair of lips. They encircle your " + cockHead(x) + " and suck, creating a delightful tingling sensation that travels down your cock and into your core.");
+			outputText("\n\nYou feel slender but powerful fingers wrap around your cock, followed shortly after by a pair of lips. They encircle your " + player.cockHead(x) + " and suck, creating a delightful tingling sensation that travels down your cock and into your core.");
 
 			outputText("\n\n\"<i>Hey darlin', better get to lickin', we want this ");
 			//{(lil dicks)
@@ -406,7 +406,7 @@ package classes.Scenes.Areas
 			else outputText("ass");
 			outputText(" as they dribble down and form a small puddle between your [legs].");
 
-			outputText("\n\nAfter several minutes of this, Callu relinquishes her hold on your member and says, \"<i>Mm, I reckon that'll work just fine.</i>\"  She sits up and positions herself over your " + cockDescript(x) + ".  Slowly she lowers herself, first taking your " + cockHead(x) + ".  Her cunt, slick and aroused as it is, offers no resistance despite its tightness.  Its walls pulse and quiver around you, as though the otter has complete control over it.  Inch by inch she sinks down further, ");
+			outputText("\n\nAfter several minutes of this, Callu relinquishes her hold on your member and says, \"<i>Mm, I reckon that'll work just fine.</i>\"  She sits up and positions herself over your " + cockDescript(x) + ".  Slowly she lowers herself, first taking your " + player.cockHead(x) + ".  Her cunt, slick and aroused as it is, offers no resistance despite its tightness.  Its walls pulse and quiver around you, as though the otter has complete control over it.  Inch by inch she sinks down further, ");
 			//(dicks 10" or less)
 			if (player.cocks[x].cockLength < 10) outputText("until she comes to rest on your lap");
 			//(10"-24")

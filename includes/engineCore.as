@@ -35,6 +35,7 @@ public function silly():Boolean {
 
 }
 
+/* Replaced by Utils.formatStringArray, which does almost the same thing in one function
 public function clearList():void {
 	list = [];
 }
@@ -59,7 +60,7 @@ public function outputList():String {
 	list = [];
 	return stuff;        
 }
-
+*/
 
 public function HPChange(changeNum:Number, display:Boolean):void
 {

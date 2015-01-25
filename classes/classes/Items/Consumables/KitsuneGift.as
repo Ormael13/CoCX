@@ -34,7 +34,7 @@ package classes.Items.Consumables
 				case 2:
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and to your delight, it is filled to the brim with shining gems!");
 				var gems:int = 2 + Utils.rand(20);
-				outputText("\n\n<b>You've received " + game.num2Text(gems) + " shining gems from the kitsune's gift!  How generous!</b>");
+				outputText("\n\n<b>You've received " + Utils.num2Text(gems) + " shining gems from the kitsune's gift!  How generous!</b>");
 				game.player.gems += gems;
 				//add X gems to inventory
 				game.statScreenRefresh();

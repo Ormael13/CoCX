@@ -4408,7 +4408,7 @@ private function katherineLicksAllTheBoyPenises():void {
 	var x:Number = player.biggestCockIndex();
 	clearOutput();
 	outputText(images.showImage("katherine-gives-you-blowjobs/"));
-	outputText("She takes your shaft eagerly, gently stroking it with her fingers to coax it erect, then leaning in to lick the head with her softly bristled tongue, caressing and suckling at the " + cockHead(x) + ".");
+	outputText("She takes your shaft eagerly, gently stroking it with her fingers to coax it erect, then leaning in to lick the head with her softly bristled tongue, caressing and suckling at the " + player.cockHead(x) + ".");
 	if(player.hasVagina()) {
 		outputText("  One of her hands slides down your shaft");
 		if(player.balls > 0) outputText(", past your " + ballsDescriptLight() + ",");
@@ -4537,7 +4537,7 @@ private function katDoubleHelixCraziness():void {
 	}
 	outputText("With the sensation of your full pussy as your guide, it's easy to know when it's finally possible for her to slip free without hurting you; Katherine pulls away and stands on shaky feet.  The jism contained within you spills out in a satisfying cascade of white, that's when you feel a pair of lips touch your sensitive snatch.  Moments later a cat's tongue licks your labia and latches onto it, sucking the jism straight out of you.  You gasp in delight, but keep still, wondering what your lover has in mind.\n\n");
 
-	outputText("Once she's done with your pussy, she moves on to your " + cockDescript(x) + ", taking the tip into her mouth and suckling on it to drain the last bits of cum from your shaft, then she lets go of your " + cockHead(x) + " and begins licking the shaft, cleaning you all the way from the base up");
+	outputText("Once she's done with your pussy, she moves on to your " + cockDescript(x) + ", taking the tip into her mouth and suckling on it to drain the last bits of cum from your shaft, then she lets go of your " + player.cockHead(x) + " and begins licking the shaft, cleaning you all the way from the base up");
 	if (player.balls > 0) outputText(", and even licking your " + ballsDescriptLight() + " clean");
 	outputText(".  You moan and shudder and buck your hips at her ministrations; your ");
 	if (player.balls > 0) outputText("balls are still depleted");

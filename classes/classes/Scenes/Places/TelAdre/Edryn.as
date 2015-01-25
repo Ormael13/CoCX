@@ -178,7 +178,7 @@ public function edrynBarTalk():void {
 		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("pours out of its sheath", false);
 		else outputText("fills near instantaneously", false);
 		outputText(", now rock-hard.  You breathe deeply, your mind subsumed in a sea of equine instincts.  The hard floor squeezes your " + cockDescript(0) + " painfully underneath you, forcing you to rise up onto your hooves.  You can feel more than a few curious gazes sliding along your now fully exposed maleness, and it twitches as if it were happy for the attention.\n\n", false);
-		outputText("Swaying back and forth, alternatively snorting and breathing deeply of the female's scent, your gaze immediately locks onto the returning mare.  Your " + cockDescript(0) + " jumps and bounces underneath you, painfully hard and swollen.  A thick dollop of pre beads on your " + cockHead(0) + ", as if the bar needed your display to be any more overtly sexual.  Edryn looks you over, walking alongside you she talks, \"<i>My my, someone liked what they saw.  Or was it smelled?  I can never tell what it is that gets you " + player.mf("studs","hotties") + " so worked up about me.</i>\"\n\n", false);
+		outputText("Swaying back and forth, alternatively snorting and breathing deeply of the female's scent, your gaze immediately locks onto the returning mare.  Your " + cockDescript(0) + " jumps and bounces underneath you, painfully hard and swollen.  A thick dollop of pre beads on your " + player.cockHead() + ", as if the bar needed your display to be any more overtly sexual.  Edryn looks you over, walking alongside you she talks, \"<i>My my, someone liked what they saw.  Or was it smelled?  I can never tell what it is that gets you " + player.mf("studs","hotties") + " so worked up about me.</i>\"\n\n", false);
 		outputText("A soft hand slides under your belly, hefting your " + cockDescript(0) + " and smearing the bead of pre over it with long slick strokes.  She coos, \"<i>", false);
 		dynStats("lus", 70);
 		edrynOffer();
@@ -415,7 +415,7 @@ private function fuckEdrynTaur():void {
 	else outputText("caresses a breast", false);
 	outputText(" while she caresses the side of your " + player.face() + " with the other.  Your body pumps away while your tongues entwine, tracing saliva over each other's lips.  She pulls back and moans out again, trailing off into a whinny as she orgasms underneath you.\n\n", false);
 
-	outputText("Her cunt locks tightly around you once again, clamping down in a series of rings from the base all the way to your " + cockHead(x) + ".  At once, they start sliding from the base towards the tip, new ones forming along the bottom of the shaft as her pussy milks your " + cockDescript(x) + " hard.  Trapped inside her, all you can do is groan and cum in response to her climax.  You throw back your head as you feel the warmth of your release building in your ", false);
+	outputText("Her cunt locks tightly around you once again, clamping down in a series of rings from the base all the way to your " + player.cockHead(x) + ".  At once, they start sliding from the base towards the tip, new ones forming along the bottom of the shaft as her pussy milks your " + cockDescript(x) + " hard.  Trapped inside her, all you can do is groan and cum in response to her climax.  You throw back your head as you feel the warmth of your release building in your ", false);
 	if(player.balls > 0) outputText(ballsDescriptLight(), false);
 	else outputText("loins", false);
 	outputText(".\n\n", false);
@@ -893,7 +893,7 @@ public function fuckPregEdryn():void {
 	else {
 		outputText("Edryn smiles at you as you close the door behind you.  She stretches and lays out on a large batch of pillows, using them to help support the added weight of her pregnancy.  Her hindquarters are facing towards you, and she twists back to give you a 'come-hither' gesture.  You hesitantly climb down into the soft, padded mass with her and align your body behind hers.  Her position is perfect, and you wrap your arms around her 'human' waist to drag your horse-half into position.  Edryn grabs your face and pulls you into a kiss, her archery-strengthened arms easily maintaining their grip as the two of you get settled into place.\n\n", false);
 
-		outputText("You break the kiss and suck the bottom of her earlobe into your mouth, straining to keep your mouth steady as you pull your " + cockDescript(x) + " into position with her needy sex.  The " + cockHead(x) + " slips into the hot folds, forcing a gasp from your lips that lets Edryn's earlobe escape its oral prison.  She smirks, then nibbles at your shoulder while you slide the rest of the way into her large, slippery channel.  It's a near perfect fit thanks to your similar body types, and the both of you sigh out whinnies of pleasure.\n\n", false);
+		outputText("You break the kiss and suck the bottom of her earlobe into your mouth, straining to keep your mouth steady as you pull your " + cockDescript(x) + " into position with her needy sex.  The " + player.cockHead(x) + " slips into the hot folds, forcing a gasp from your lips that lets Edryn's earlobe escape its oral prison.  She smirks, then nibbles at your shoulder while you slide the rest of the way into her large, slippery channel.  It's a near perfect fit thanks to your similar body types, and the both of you sigh out whinnies of pleasure.\n\n", false);
 
 		outputText("Edryn bites down harder, sending a jolt of pain through your shoulder.  Her hips wiggle against yours, and she begins rhythmically clenching and relaxing her entrance, squeezing you tightly ", false);
 		if(!player.hasSheath()) outputText("by the base", false);
@@ -911,7 +911,7 @@ public function fuckPregEdryn():void {
 		outputText("Your " + cockDescript(x) + " is milked from ", false);
 		if(!player.hasSheath()) outputText("base", false);
 		else outputText("sheath", false);
-		outputText(" to " + cockHead(x) + ", culminating in a tight squeeze at the tip. Then it releases and starts all over again.  Instinctively, you whinny and explode inside the warm, soaking wet tunnel.  The french-kiss turns into a feverish slobber-fest while the two of you mate, lost to orgasm.", false);
+		outputText(" to " + player.cockHead(x) + ", culminating in a tight squeeze at the tip. Then it releases and starts all over again.  Instinctively, you whinny and explode inside the warm, soaking wet tunnel.  The french-kiss turns into a feverish slobber-fest while the two of you mate, lost to orgasm.", false);
 		if(player.cumQ() < 300) {}
 		else if(player.cumQ() < 1000) outputText("Your prodigious jism output soaks her sloppy tunnel and drips from the entrance with the centauress' girlcum.", false);
 		else {

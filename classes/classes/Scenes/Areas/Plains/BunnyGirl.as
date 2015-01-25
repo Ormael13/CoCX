@@ -350,7 +350,7 @@ private function bunbunGetsFucked():void {
 	else outputText(", barely able to restrain yourself as the time for penetration approaches.", false);
 	outputText("\n\n", false);
 	
-	outputText("The nubile bunny's eyes cross as you push forwards, sliding your " + cockHead(x) + " over her love-slicked lips until it has a generous coating and pressing harder.  ", false);
+	outputText("The nubile bunny's eyes cross as you push forwards, sliding your " + player.cockHead(x) + " over her love-slicked lips until it has a generous coating and pressing harder.  ", false);
 	if(y != -1) outputText("She squeaks at the pressure on her tender asshole, but doesn't object as your pre-cum smears over it.  ", false);
 	outputText("At once, her greedy breeding hole relaxes ", false);
 	if(y != -1) outputText("along with her anus ", false);

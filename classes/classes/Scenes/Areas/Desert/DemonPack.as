@@ -56,7 +56,7 @@
 				if(player.cocks.length > 0) {
 					if(player.cockTotal() > 1) outputText("Each of y", false);
 					else outputText("Y", false);
-					outputText("our " + game.multiCockDescriptLight() + " throbs ", false);
+					outputText("our " + player.multiCockDescriptLight() + " throbs ", false);
 					if(player.hasVagina()) outputText(" and your ", false);
 				}
 				if(player.vaginas.length > 0) {
