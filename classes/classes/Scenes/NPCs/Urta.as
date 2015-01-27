@@ -358,7 +358,7 @@ public function urtaBarApproach():void {
 	if(flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] > 0 && !urtaDrunk()) {
 		outputText(images.showImage("urta-bar"), false);
 		//Cockblock marble convo
-		if(player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER] == 0) {
+		if (marbleScene.marbleAtCamp() && flags[kFLAGS.URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER] == 0) {
 			flags[kFLAGS.URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER] = 1;
 			marbleCockuBlockuUrta();
 			return;
