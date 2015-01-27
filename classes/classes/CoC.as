@@ -142,8 +142,9 @@
 		// Scenes/
 		public var camp:Camp = new Camp();
 		public var exploration:Exploration = new Exploration();
-		public var inventory:Inventory = new Inventory(saves);
 		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
+		public var inventory:Inventory = new Inventory(saves);
+		public var masturbation:Masturbation = new Masturbation();
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
@@ -221,7 +222,7 @@
 		include "../../includes/dungeonHelSupplimental.as";
 		include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
-		include "../../includes/masturbation.as";
+//Moved to Scenes/Masturbation.as		include "../../includes/masturbation.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/runa.as";
 		include "../../includes/symGear.as";
@@ -242,7 +243,7 @@
 			certain functions, even though they were in the same scope as the
 			function calling them.
 		****/
-		public var semiglobalReferencer :* = {};
+//Looks like this dangerous little var is no longer used anywhere, huzzah.		public var semiglobalReferencer :* = {};
 
 		public var mainView :MainView;
 

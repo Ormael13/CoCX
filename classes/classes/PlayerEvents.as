@@ -170,7 +170,7 @@ package classes {
 				flags[kFLAGS.DICK_EGG_INCUBATION]--;
 				trace("DICK BIRTH TIMER: " + flags[kFLAGS.DICK_EGG_INCUBATION]);
 				if (flags[kFLAGS.DICK_EGG_INCUBATION] == 1) {
-					getGame().birthBeeEggsOutYourWang();
+					getGame().masturbation.birthBeeEggsOutYourWang();
 					needNext = true;
 				}
 			}

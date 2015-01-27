@@ -303,7 +303,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			
 			addButton(8, "Items", inventory.inventoryMenu);
-			addButton(9, "Masturbate", getGame().masturbateGo);
+			addButton(9, "Masturbate", getGame().masturbation.masturbateGo);
 		}
 		
 		public function move(roomName:String):void

@@ -95,11 +95,11 @@ public function doSystem(eventNo:Number):void {
 			camp.doCamp();
 			return;
 
-
+/* Now called directly
 		case 2:
 			exploration.doExplore();
 			return;
-
+*/
 
 		case 3:
 			desert.exploreDesert();
@@ -121,16 +121,16 @@ public function doSystem(eventNo:Number):void {
 			return;
 
 
+/* Now called directly
 		case 10:
 			masturbateGo(); //Masturbate
 			return;
-
 
 		case 11:
 			//Rest
 			camp.rest();
 			return;
-
+*/
 
 		case 12:
 			//Explore new zones
@@ -208,6 +208,7 @@ public function doSystem(eventNo:Number):void {
 			return;
 
 
+/* Now called directly
 		case 40:
 			//Use wait command
 			//See camp.as
@@ -226,7 +227,7 @@ public function doSystem(eventNo:Number):void {
 			//Choose masturbate options
 			masturbateMenu();
 			return;
-
+*/
 
 		case 44:
 			//Gain +5 Str due to level
@@ -262,6 +263,7 @@ public function doSystem(eventNo:Number):void {
 			return;
 
 
+/* Now called directly
 		case 48:
 			//Use Onahole
 			onaholeUse();
@@ -287,7 +289,7 @@ public function doSystem(eventNo:Number):void {
 		case 52:
 			allNaturalStimBeltUse();
 			return;
-
+*/
 
 		case 65:
 			//turn on/off autosave
@@ -297,6 +299,7 @@ public function doSystem(eventNo:Number):void {
 			return;
 
 
+/* Now called directly
 		case 71:
 			//Places menu
 			camp.places(true);
@@ -313,7 +316,7 @@ public function doSystem(eventNo:Number):void {
 		case 79:
 			deluxeDildo();
 			return;
-
+*/
 
 		case 80:
 			forest.exploreDeepwoods();

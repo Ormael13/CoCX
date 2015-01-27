@@ -275,7 +275,7 @@ private function rathazulWorkOffer():Boolean {
 		addButton(4,"Purify",purify);
 		if (reductos != null) addButton(8, "Reducto", reductos);
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
-			addButton(9,"Leave",eventParser,74);
+			addButton(9,"Leave", camp.campFollowers);
 		else
 			addButton(9, "Leave", camp.returnToCampUseOneHour);
 		return true;
