@@ -31,6 +31,7 @@ package classes.Scenes.Dungeons
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0)
 			{
 				outputText("A nightstand is situated next to your bed. ", false);
+				if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) outputText("An alarm clock rests on your nightstand. It's currently set to go off at " + flags[kFLAGS.BENOIT_CLOCK_ALARM] + "am. ");
 				if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] <= 0) outputText("A jewelry box sits on your nightstand.", false);
 				outputText("\n\n", false)
 			}

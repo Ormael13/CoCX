@@ -710,6 +710,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.armorId = player.armor.id;
 		saveFile.data.weaponId = player.weapon.id;
 		saveFile.data.jewelryId = player.jewelry.id;
+		saveFile.data.shieldId = player.shield.id;
 		saveFile.data.armorName = player.modArmorName;
 		
 		//saveFile.data.weaponName = player.weaponName;// uncomment for backward compatibility
@@ -1325,6 +1326,19 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			for each (var itype:ItemType in ItemType.getItemLibrary()) {
 				if (itype is Weapon && (itype as Weapon).name == saveFile.data.weaponName){
 					player.setWeaponHiddenField(itype as Weapon || WeaponLib.FISTS);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.shieldId){
+			player.setShieldHiddenField((ItemType.lookupItem(saveFile.data.shieldId) as Shield) || ShieldLib.NOTHING);
+		} else {
+			player.setShield(ShieldLib.NOTHING);
+			//player.weapon = WeaponLib.FISTS;
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is Shield && (itype as Shield).name == saveFile.data.shieldName){
+					player.setShieldHiddenField(itype as Shield || ShieldLib.NOTHING);
 					found = true;
 					break;
 				}

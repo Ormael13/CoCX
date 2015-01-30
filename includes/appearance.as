@@ -55,7 +55,8 @@
 	outputText("", true);
 	if(race != "human")	outputText("You began your journey as a human, but gave that up as you explored the dangers of this realm.  ", false);
 	//Height and race.
-	outputText("You are a " + Math.floor(player.tallness/12) + " foot " + player.tallness%12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
+	if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + Math.round(100 * (player.tallness * 2.54) / 100) + " centimetre tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
+	else outputText("You are a " + Math.floor(player.tallness/12) + " foot " + player.tallness%12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 	if(player.armorName == "comfortable clothes") 
 		outputText("  <b>You are currently wearing " + player.armorName + " and using your " + player.weaponName + " as a weapon.</b>", false);
 	else outputText("  <b>You are currently wearing your " + player.armorName + " and using your " + player.weaponName + " as a weapon.</b>", false);
@@ -347,7 +348,8 @@
 	//Lizard horns
 	if(player.hornType == HORNS_DRACONIC_X2) 
 	{
-		outputText("  A pair of " + num2Text(int(player.horns)) + " inch horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
+		if (flags[kFLAGS.USE_METRICS] > 0) outputText("  A pair of " + num2Text(int(player.horns*2.54)) + " centimetre horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
+		else outputText("  A pair of " + num2Text(int(player.horns)) + " inch horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
 	}
 	//Super lizard horns
 	if(player.hornType == HORNS_DRACONIC_X4_12_INCH_LONG) 
@@ -714,7 +716,7 @@
 			}
 			else 
 			{ //Surely Benoit and Cotton deserve their place in this list
-				if (player.pregnancyType == PregnancyStore.PREGNANCY_IZMA || player.pregnancyType == PregnancyStore.PREGNANCY_MOUSE || player.pregnancyType == PregnancyStore.PREGNANCY_AMILY || player.pregnancyType == PregnancyStore.PREGNANCY_EMBER || player.pregnancyType == PregnancyStore.PREGNANCY_BENOIT || player.pregnancyType == PregnancyStore.PREGNANCY_COTTON || player.pregnancyType == PregnancyStore.PREGNANCY_URTA) 
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_IZMA || player.pregnancyType == PregnancyStore.PREGNANCY_MOUSE || player.pregnancyType == PregnancyStore.PREGNANCY_AMILY || player.pregnancyType == PregnancyStore.PREGNANCY_EMBER || player.pregnancyType == PregnancyStore.PREGNANCY_BENOIT || player.pregnancyType == PregnancyStore.PREGNANCY_COTTON || player.pregnancyType == PregnancyStore.PREGNANCY_URTA || player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH) 
 					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>", false);
 				else if(player.pregnancyType != PregnancyStore.PREGNANCY_MARBLE) 
 					outputText("\n<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>", false);
@@ -865,12 +867,20 @@
 	{
 		if(player.lowerBody==LOWER_BODY_TYPE_CENTAUR) 
 			outputText("\nEver since becoming a centaur, your equipment has shifted to lie between your rear legs, like a horse.", false);
-		outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+		if (flags[kFLAGS.USE_METRICS] > 0) outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength*2.54)/10 + " centimetres long and ", false);
+		else outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 		if(Math.round(10*player.cocks[temp].cockThickness)/10 < 2) 
 		{
-			if(Math.round(10*player.cocks[temp].cockThickness)/10 == 1) 
-				outputText(int(10*player.cocks[temp].cockThickness)/10 + " inch thick.", false);
-			else outputText(Math.round(10*player.cocks[temp].cockThickness)/10 + " inches thick.", false);
+			if (flags[kFLAGS.USE_METRICS] > 0) {
+				if(Math.round(10*player.cocks[temp].cockThickness*2.54)/10 == 1) 
+					outputText(int(10*player.cocks[temp].cockThickness*2.54)/10 + " centimetre thick.", false);
+				else outputText(Math.round(10 * player.cocks[temp].cockThickness*2.54) / 10 + " centimetres thick.", false);
+			}
+			else {
+				if(Math.round(10*player.cocks[temp].cockThickness)/10 == 1) 
+					outputText(int(10*player.cocks[temp].cockThickness)/10 + " inch thick.", false);
+				else outputText(Math.round(10 * player.cocks[temp].cockThickness) / 10 + " inches thick.", false);
+			}
 		}
 		else outputText (num2Text(Math.round(10*player.cocks[temp].cockThickness)/10) + " inches wide.", false);
 		//Horsecock flavor
@@ -1122,13 +1132,15 @@
 		if(player.gender == 2 && player.lowerBody == LOWER_BODY_TYPE_CENTAUR) 
 			outputText("\nEver since becoming a centaur, your womanly parts have shifted to lie between your rear legs, in a rather equine fashion.", false);
 		outputText("\n", false);
-		if(player.vaginas.length == 1) 
-			outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10)/10 + "-inch clit", false);
+		if (player.vaginas.length == 1) 
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10*2.54)/10 + "-centimetre clit", false);
+			else outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10)/10 + "-inch clit", false);
 		if(player.vaginas[0].virgin) 
 			outputText(" and an intact hymen", false);
 		outputText(".  ", false);
-		if(player.vaginas.length > 1) 
-			outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10)/10 + "-inch clits each.  ", false);
+		if (player.vaginas.length > 1) 
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10*2.54)/10 + "-centimetre clits each.  ", false);
+			else outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10)/10 + "-inch clits each.  ", false);
 		if(player.lib < 50 && player.lust < 50) //not particularly horny
 		
 		{

@@ -59,6 +59,9 @@
 		protected final function combatMisdirect():Boolean {
 			return game.combatMisdirect();
 		}
+		protected final function combatBlock(doFatigue:Boolean = false):Boolean {
+			return game.combatBlock(doFatigue);
+		}
 		protected function get consumables():ConsumableLib{
 			return game.consumables;
 		}
@@ -625,6 +628,12 @@
 
 		public function outputAttack(damage:int):void
 		{
+			var didBlock:Boolean = combatBlock(true);
+			if (didBlock) {
+				outputText("You block " + a + short + "'s " + weaponVerb + " with your " + player.shieldName + "! ");
+				damage = 0;
+				return;
+			}
 			if (damage <= 0) {
 				//Due to toughness or amor...
 				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);

@@ -10,9 +10,11 @@ package classes.Scenes
 	import classes.Items.Useable;
 	import classes.Items.Weapon;
 	import classes.Items.Jewelry;
+	import classes.Items.Shield;
 	import classes.Items.ArmorLib;
 	import classes.Items.WeaponLib;
 	import classes.Items.JewelryLib;
+	import classes.Items.ShieldLib;
 	import classes.Scenes.Dungeons.DungeonEngine;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
@@ -61,7 +63,10 @@ package classes.Scenes
 			clearOutput();
 			outputText("<b><u>Equipment:</u></b>\n");
 			outputText("<b>Weapon:</b> " + player.weaponName + " (Attack: " + player.weaponAttack + ")\n");
+			outputText("<b>Shield:</b> " + player.shieldName + " (Block Rating: " + player.shieldBlock + ")\n");
 			outputText("<b>Armour:</b> " + player.armorName + " (Defense: " + player.armorDef + ")\n");
+			//outputText("<b>Upper undergarment: </b> " + player.upperGarments + "");
+			//outputText("<b>Lower undergarment: </b> " + player.lowerGarments + "");
 			outputText("<b>Accessory:</b> " + player.jewelryName + "\n");
 			if (player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n");
 			for (x = 0; x < player.keyItems.length; x++) outputText(player.keyItems[x].keyName + "\n");
@@ -178,6 +183,13 @@ package classes.Scenes
 			else if (item is Jewelry) {
 				player.jewelry.removeText();
 				item = player.setJewelry(item as Jewelry); //Item is now the player's old jewelry
+				if (item == null)
+					itemGoNext();
+				else takeItem(item, callNext);
+			}
+			else if (item is Shield) {
+				player.shield.removeText();
+				item = player.setShield(item as Shield); //Item is now the player's old shield
 				if (item == null)
 					itemGoNext();
 				else takeItem(item, callNext);
@@ -370,14 +382,19 @@ package classes.Scenes
 			{
 				addButton(0, "Weapon", unequipWeapon);
 			}
+			if (player.shieldName != "nothing")
+			{
+				addButton(1, "Shield", unequipShield);
+			}
 			if (player.armorName != "comfortable underclothes")
 			{
-				addButton(1, "Armour", unequipArmor);
-			}			
+				addButton(2, "Armour", unequipArmor);
+			}
 			if (player.jewelryName != "nothing")
 			{
-				addButton(2, "Accessory", unequipJewel);
-			}			
+				addButton(3, "Accessory", unequipJewel);
+			}
+
 			addButton(4, "Back", inventoryMenu);
 			
 		}
@@ -399,7 +416,11 @@ package classes.Scenes
 			clearOutput();
 			takeItem(player.setJewelry(JewelryLib.NOTHING), inventoryMenu);
 		}
-
+		public function unequipShield():void {
+			clearOutput();
+			takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
+		}
+		
 		public function pickItemToTakeFromArmorRack():void {
 			callNext = pickItemToTakeFromArmorRack;
 			pickItemToTakeFromStorage(gearStorage, 9, 18, "rack");

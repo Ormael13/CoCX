@@ -69,7 +69,19 @@ package classes.Scenes
 			addButton(5, "Weapons", itemSpawnWeaponsMenuI)
 			addButton(6, "Armours", itemSpawnArmoursMenuI)
 			addButton(7, "Accessories", itemSpawnAccessoriesMenuI)
+			addButton(8, "Shields", itemSpawnShieldsMenu);
 			addButton(14, "Back", accessDebugMenu);
+		}
+		
+		private function addItemButton(item:*):void {
+			var button:int = 0;
+			for (var i:int = 0; i < 14; i++) 
+			{
+				if (buttonIsVisible(i) && i != 4 && i != 9 && i < 13) {
+					button++;
+				}
+			}
+			addButton(button, item.shortName, giveItem, item);
 		}
 		
 		/*private function itemSpawnConsumableMenu(page:int = 0):void {
@@ -98,20 +110,20 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuI():void {
 			lastMenu = itemSpawnTransformativesMenuI;
 			menu();
-			addButton(0, "B.Gossr", giveItem, consumables.B_GOSSR);
-			addButton(1, "BeeHony", giveItem, consumables.BEEHONY);
-			addButton(2, "BlackPp", giveItem, consumables.BLACKPP);
-			addButton(3, "BulbyPp", giveItem, consumables.BULBYPP);
-			
-			addButton(5, "CanineP", giveItem, consumables.CANINEP);
-			addButton(6, "DblPepp", giveItem, consumables.DBLPEPP);
-			addButton(7, "DryTent", giveItem, consumables.DRYTENT);
-			addButton(8, "EctoPls", giveItem, consumables.ECTOPLS);
-			
-			addButton(10, "Equinum", giveItem, consumables.EQUINUM);
-			addButton(11, "Fox Berry", giveItem, consumables.FOXBERY);
-			addButton(12, "FerretFrt", giveItem, consumables.FRRTFRT);
-			addButton(13, "Fox Jewel", giveItem, consumables.FOXJEWL);
+			addItemButton(consumables.B_GOSSR);
+			addItemButton(consumables.BEEHONY);
+			addItemButton(consumables.BLACKPP);
+			addItemButton(consumables.BULBYPP);
+
+			addItemButton(consumables.CANINEP);
+			addItemButton(consumables.DBLPEPP);
+			addItemButton(consumables.DRYTENT);
+			addItemButton(consumables.ECTOPLS);
+
+			addItemButton(consumables.EQUINUM);
+			addItemButton(consumables.FOXBERY);
+			addItemButton(consumables.FRRTFRT);
+			addItemButton(consumables.FOXJEWL);
 			
 			addButton(4, "Next", itemSpawnTransformativesMenuII);
 			//addButton(9, "Previous", itemSpawnTransformativesMenuI);
@@ -334,20 +346,18 @@ package classes.Scenes
 		private function itemSpawnWeaponsMenuI():void {
 			lastMenu = itemSpawnWeaponsMenuI;
 			menu();
-			addButton(0, "B.Sword", giveItem, weapons.B_SWORD);
-			addButton(1, "L.Claymore", giveItem, weapons.CLAYMOR);
-			addButton(2, "DrgnShl", giveItem, weapons.DRGNSHL);
-			addButton(3, "E.Staff", giveItem, weapons.E_STAFF);
-			
-			addButton(5, "Flintlock", giveItem, weapons.FLINTLK);
-			addButton(6, "UrtaHlb", giveItem, weapons.URTAHLB);
-			addButton(7, "H.Gaunt", giveItem, weapons.H_GAUNT);
-			addButton(8, "JRapier", giveItem, weapons.JRAPIER);
-			
-			addButton(10, "Katana", giveItem, weapons.KATANA);
-			addButton(11, "L. Axe", giveItem, weapons.L__AXE);
-			addButton(12, "L.Daggr", giveItem, weapons.L_DAGGR);
-			addButton(13, "L.Hammr", giveItem, weapons.L_HAMMR);
+			addItemButton(weapons.B_SWORD);
+			addItemButton(weapons.CLAYMOR);
+			addItemButton(weapons.CROSSBW);
+			addItemButton(weapons.E_STAFF);
+			addItemButton(weapons.FLAIL);
+			addItemButton(weapons.FLINTLK);
+			addItemButton(weapons.URTAHLB);
+			addItemButton(weapons.H_GAUNT);
+			addItemButton(weapons.JRAPIER);
+			addItemButton(weapons.KATANA);
+			addItemButton(weapons.L__AXE);
+			addItemButton(weapons.L_DAGGR);
 			
 			addButton(4, "Next", itemSpawnWeaponsMenuII);
 			//addButton(9, "Previous", itemSpawnWeaponsMenuI);
@@ -356,21 +366,19 @@ package classes.Scenes
 		private function itemSpawnWeaponsMenuII():void {
 			lastMenu = itemSpawnWeaponsMenuII;
 			menu();
-			addButton(0, "Pipe", giveItem, weapons.PIPE);
-			addButton(1, "Pitchfork", giveItem, weapons.PTCHFRK);
-			addButton(2, "RidingC", giveItem, weapons.RIDINGC);
-			addButton(3, "RRapier", giveItem, weapons.RRAPIER);
+			addItemButton(weapons.L_HAMMR);
+			addItemButton(weapons.MACE);
+			addItemButton(weapons.PIPE);
+			addItemButton(weapons.PTCHFRK);
+			addItemButton(weapons.RIDINGC);
+			addItemButton(weapons.RRAPIER);
+			addItemButton(weapons.S_BLADE);
+			addItemButton(weapons.S_GAUNT);
+			addItemButton(weapons.SCARBLD);
+			addItemButton(weapons.SCIMITR);
+			addItemButton(weapons.SPEAR);
+			addItemButton(weapons.SUCWHIP);
 			
-			addButton(5, "S.Blade", giveItem, weapons.S_BLADE);
-			addButton(6, "S.Gauntlet", giveItem, weapons.S_GAUNT);
-			addButton(7, "ScarBlade", giveItem, weapons.SCARBLD);
-			addButton(8, "Scimitar", giveItem, weapons.SCIMITR);
-			
-			addButton(10, "Spear", giveItem, weapons.SPEAR);
-			addButton(11, "SucWhip", giveItem, weapons.SUCWHIP);
-			addButton(12, "W.Staff", giveItem, weapons.W_STAFF);
-			addButton(13, "Warhammer", giveItem, weapons.WARHAMR);
-
 			addButton(4, "Next", itemSpawnWeaponsMenuIII);
 			addButton(9, "Previous", itemSpawnWeaponsMenuI);
 			addButton(14, "Back", itemSpawnMenu);
@@ -378,7 +386,9 @@ package classes.Scenes
 		private function itemSpawnWeaponsMenuIII():void {
 			lastMenu = itemSpawnWeaponsMenuIII;
 			menu();
-			addButton(0, "Whip", giveItem, weapons.WHIP);			
+			addItemButton(weapons.W_STAFF);
+			addItemButton(weapons.WARHAMR);
+			addItemButton(weapons.WHIP);			
 
 			//addButton(4, "Next", itemSpawnWeaponsMenuIV);
 			addButton(9, "Previous", itemSpawnWeaponsMenuII);
@@ -469,6 +479,20 @@ package classes.Scenes
 			addButton(11, "Lethic.Ring", giveItem, jewelries.LTHCRNG);
 			addButton(12, "Plat Ring", giveItem, jewelries.PLATRNG);
 			addButton(13, "Silver Ring", giveItem, jewelries.SILVRNG);
+			
+			//addButton(4, "Next", itemSpawnAccessoriesMenuII);
+			//addButton(9, "Previous", itemSpawnAccessoriesMenuI);
+			addButton(14, "Back", itemSpawnMenu);
+		}
+		
+		private function itemSpawnShieldsMenu():void {
+			lastMenu = itemSpawnAccessoriesMenuI;
+			menu();
+			addItemButton(shields.BUCKLER);
+			addItemButton(shields.DRGNSHL);
+			addItemButton(shields.GREATSH);
+			addItemButton(shields.KITE_SH);
+			addItemButton(shields.TOWERSH);
 			
 			//addButton(4, "Next", itemSpawnAccessoriesMenuII);
 			//addButton(9, "Previous", itemSpawnAccessoriesMenuI);

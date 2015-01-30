@@ -528,6 +528,12 @@ public function doCombat(eventNum:Number):void
 				combatRoundOver();
 				return;
 			}
+			//Determine if blocked!
+			if (combatBlock(true)) {
+				outputText("You manage to successfully block " + monster.a + monster.short + "'s attacks with your " + player.shieldName + "!");
+				combatRoundOver();
+				return;
+			}
 			//determine if avoided with armor.
 			if (player.armorDef >= 10 && rand(4) > 0) {
 				outputText("Despite her best efforts, " + monster.a + monster.short + "'s sting attack can't penetrate your armor.", false);
@@ -625,6 +631,13 @@ public function doCombat(eventNum:Number):void
 			//Determine if cat'ed
 			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + monster.a + monster.short + "' attacks.", false);
+				combatRoundOver();
+				return;
+			}
+			//Determine if blocked!
+			if (combatBlock()) {
+				outputText("You manage to successfully block " + monster.a + monster.short + "'s attacks with your " + player.shieldName + "!");
+				fatigue(10, 2);
 				combatRoundOver();
 				return;
 			}
@@ -931,7 +944,7 @@ public function doCombat(eventNum:Number):void
 	}
 			//Fire bow - Requires 25 fatigue
 	if(eventNum == 5079) {
-			if (player.fatigue + physicalCost(25) > 100) {
+			if (player.fatigue + physicalCost(25) > player.maxFatigue()) {
 				outputText("You're too fatigued to fire the bow!", true);
 				doNext(5000);
 				return;
@@ -1215,7 +1228,7 @@ public function fantasize():void {
 //Mouf Attack
 // (Similar to the bow attack, high damage but it raises your fatigue).
 public function bite():void {
-	if(player.fatigue + physicalCost(25) > 100) {
+	if(player.fatigue + physicalCost(25) > player.maxFatigue()) {
 		outputText("You're too fatigued to use your shark-like jaws!", true);
 		doNext(5000);
 		return;
@@ -1648,7 +1661,7 @@ public function attack():void {
 }
 //Gore Attack - uses 15 fatigue!
 public function goreAttack():void {
-	if(player.fatigue + physicalCost(15) > 100) {
+	if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
 		outputText("You're too fatigued to use a charge attack!", true);
 		doNext(5000);
 		return;
@@ -1814,6 +1827,19 @@ public function combatFlexibility():Boolean {
 }
 public function combatMisdirect():Boolean {
 	return player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit";
+}
+public function combatBlock(doFatigue:Boolean = false):Boolean {
+	//Set chance
+	var blockChance:int = 20 + player.shieldBlock + Math.floor((player.str - monster.str) / 5);
+	if (blockChance < 10) blockChance = 10;
+	//Fatigue limit
+	var fatigueLimit:int = player.maxFatigue() - 10;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueLimit += 5;
+	if (blockChance >= (rand(100) + 1) && player.fatigue <= fatigueLimit && player.shieldName != "nothing") {
+		if (doFatigue) fatigue(10, 2);
+		return true;
+	}
+	else return false;
 }
 
 //DEAL DAMAGE
@@ -4020,7 +4046,7 @@ public function spellMod():Number {
 	return mod;
 }
 public function spellArouse():void {
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(15) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(15) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
 		return;
@@ -4097,7 +4123,7 @@ public function spellArouse():void {
 	return;	
 }
 public function spellHeal():void {
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
 		return;
@@ -4136,7 +4162,7 @@ public function spellHeal():void {
 //maximum of 15, allows it to exceed the maximum.  Chance of backfiring 
 //and increasing lust by 15.
 public function spellMight():void {
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(25) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(25) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
 		return;
@@ -4190,7 +4216,7 @@ public function spellMight():void {
 
 //(15) Charge Weapon – boosts your weapon attack value by 10 * SpellMod till the end of combat.
 public function spellChargeWeapon():void {
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(15) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(15) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
 		return;
@@ -4207,7 +4233,7 @@ public function spellChargeWeapon():void {
 //(20) Blind – reduces your opponent's accuracy, giving an additional 50% miss chance to physical attacks.
 public function spellBlind():void {
 	outputText("", true);
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
 		return;
@@ -4279,7 +4305,7 @@ public function spellBlind():void {
 //(30) Whitefire – burns the enemy for 10 + int/3 + rand(int/2) * spellMod.
 public function spellWhitefire():void {
 	outputText("", true);
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
 		return;
@@ -4324,7 +4350,7 @@ public function spellWhitefire():void {
 public function spellCleansingPalm():void
 {
 	clearOutput();
-	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > 100) {
+	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
 		return;
@@ -4413,7 +4439,7 @@ public function spellPerkUnlock():void {
 //lust damage to completely corrupt foes, and a mix for those in between.  Its power is based on the PC's corruption and level.  Appearance is slightly changed to mention that the PC's eyes and mouth occasionally show flicks of fire from within them, text could possibly vary based on corruption.
 public function hellFire():void {
 	outputText("", true);
-	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > 100) {
+	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to breathe fire.\n", true);
 		doNext(5000);
 		return;
@@ -4496,7 +4522,7 @@ public function hellFire():void {
 
 public function kick():void {
 	outputText("", true);
-	if(player.fatigue + physicalCost(15) > 100) {
+	if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
 		outputText("You're too fatigued to use a charge attack!", true);
 		doNext(5000);
 		return;
@@ -4667,7 +4693,7 @@ public function PCWebAttack():void {
 public function nagaBiteAttack():void {
 	outputText("", true);
 	//FATIIIIGUE
-	if(player.fatigue + physicalCost(10) > 100) {
+	if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
 		outputText("You just don't have the energy to bite something right now...", true);
 		menuLoc = 1;
 		doNext(5000);
@@ -4713,7 +4739,7 @@ public function nagaBiteAttack():void {
 public function spiderBiteAttack():void {
 	outputText("", true);
 	//FATIIIIGUE
-	if(player.fatigue + physicalCost(10) > 100) {
+	if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
 		outputText("You just don't have the energy to bite something right now...", true);
 		menuLoc = 1;
 		doNext(5000);
@@ -4763,7 +4789,7 @@ public function spiderBiteAttack():void {
 //Whisper 
 public function superWhisperAttack():void {
 	outputText("", true);
-	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(10) > 100)
+	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(10) > player.maxFatigue())
 	{
 		outputText("You are too tired to focus this ability.", true);
 		doNext(5000);
@@ -4824,7 +4850,7 @@ public function superWhisperAttack():void {
 	//Effect of attack: Damages and stuns the enemy for the turn you used this attack on, plus 2 more turns. High chance of success.
 public function dragonBreath():void {
 	clearOutput();
-	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > 100)
+	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue())
 	{
 		outputText("You are too tired to breathe fire.", true);
 		doNext(5000);
@@ -4918,7 +4944,7 @@ public function dragonBreath():void {
 //* Terrestrial Fire
 public function fireballuuuuu():void {
 	outputText("", true);
-	if(player.fatigue + 20 > 100) {
+	if(player.fatigue + 20 > player.maxFatigue()) {
 		outputText("You are too tired to breathe fire.", true);
 		doNext(5000);
 		return;
@@ -4985,6 +5011,12 @@ public function fireballuuuuu():void {
 			outputText("You use your flexibility to barely fold your body out of the way!", false);
 		}
 		else {
+			//Determine if blocked!
+			if (combatBlock(true)) {
+				outputText("You manage to block your own fire with your " + player.shieldName + "!");
+				combatRoundOver();
+				return;
+			}
 			outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 			takeDamage(damage);
 		}
@@ -5494,15 +5526,15 @@ public function physicalSpecials():void {
 		return;
 	}
 	menuLoc = 3;
-	var butt1:Number = 0;
-	var butt2:Number = 0;
-	var butt3:Number = 0;
+	var butt1:* = 0;
+	var butt2:* = 0;
+	var butt3:* = 0;
 	var butt4:* = 0;
-	var butt5:Number = 0;
-	var butt6:Number = 0;
-	var butt7:Number = 0;
-	var butt8:Number = 0;
-	var butt9:Number = 0;
+	var butt5:* = 0;
+	var butt6:* = 0;
+	var butt7:* = 0;
+	var butt8:* = 0;
+	var butt9:* = 0;
 	var b1T:String = "";
 	var b2T:String = "";
 	var b3T:String = "";
@@ -5575,6 +5607,10 @@ public function physicalSpecials():void {
 		butt8 = 5165;
 		b8T = "Tail Whip";
 	}
+	if (player.shieldName != "nothing") {
+		butt9 = shieldBash;
+		b9T = "Shield Bash"
+	}
 	choices(b1T,butt1,b2T,butt2,b3T,butt3,b4T,butt4,b5T,butt5,b6T,butt6,b7T,butt7,b8T,butt8,b9T,butt9,"Back",5000);
 }
 
@@ -5594,7 +5630,7 @@ public function berzerk():void {
 //Corrupted Fox Fire
 public function corruptedFoxFire():void {
 	clearOutput();
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(35) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(35) > player.maxFatigue()) {
 		outputText("You are too tired to use this ability.", true);
 		doNext(5160);
 		return;
@@ -5629,7 +5665,7 @@ public function corruptedFoxFire():void {
 //Fox Fire
 public function foxFire():void {
 	clearOutput();
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(35) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(35) > player.maxFatigue()) {
 		outputText("You are too tired to use this ability.", true);
 		doNext(5160);
 		return;
@@ -5670,7 +5706,7 @@ public function foxFire():void {
 public function kitsuneTerror():void {
 	clearOutput();
 	//Fatigue Cost: 25
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to use this ability.", true);
 		doNext(5160);
 		return;
@@ -5710,7 +5746,7 @@ public function kitsuneTerror():void {
 public function kitsuneIllusion():void {
 	clearOutput();
 	//Fatigue Cost: 25
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(25) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(25) > player.maxFatigue()) {
 		outputText("You are too tired to use this ability.", true);
 		doNext(5160);
 		return;
@@ -5772,6 +5808,39 @@ public function tailWhipAttack():void {
 	enemyAI();
 }
 
+public function shieldBash():void {
+	clearOutput();
+	if (player.fatigue > player.maxFatigue() - 10) {
+		outputText("You are too tired to perform a shield bash.");
+		doNext(5000);
+		return;
+	}
+	outputText("You ready your [shield] and prepare to slam it towards " + monster.a + monster.short + ".  ");
+	if ((player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+		if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
+		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
+		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
+		enemyAI();
+		return;
+	}
+	var damage:int = player.str + (player.shieldBlock * 2);
+	var damageReduction:int = rand(monster.tou) / 2;
+	var chance:int = monster.statusAffectv1(StatusAffects.TimesBashed) + 1;
+	if (chance > 10) chance = 10;
+	if (damage < 1) damage = 1;
+	damage = doDamage(damage);
+	outputText("Your [shield] slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!  ");
+	if (monster.findStatusAffect(StatusAffects.Stunned) < 0 && rand(chance) == 0) {
+		outputText("<b>Your impact also manages to stun " + monster.a + monster.short + "!</b>");
+		monster.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
+		if (monster.findStatusAffect(StatusAffects.TimesBashed) < 0) monster.createStatusAffect(StatusAffects.TimesBashed, 1, 0, 0, 0);
+		else monster.addStatusValue(StatusAffects.TimesBashed, 1, 1);
+	}
+	fatigue(20,2);
+	outputText("\n\n");
+	enemyAI();
+}
+
 //Arian's stuff
 //Using the Talisman in combat
 public function immolationSpell():void {
@@ -5779,7 +5848,7 @@ public function immolationSpell():void {
 	outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of burning flames gathers around " + monster.a + monster.short + ", slowly burning " + monster.pronoun2 + ".");
 	var temp:int = int(75+(player.inte/3 + rand(player.inte/2)) * spellMod());
 	temp = doDamage(temp);
-	outputText(" (" + temp + ")\n\n");
+	outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
 	player.removeStatusAffect(StatusAffects.ImmolationSpell);
 	arianScene.clearTalisman();
 	enemyAI();

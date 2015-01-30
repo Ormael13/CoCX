@@ -389,7 +389,7 @@ package classes.Scenes.NPCs
 			player.gems -= 200;
 			statScreenRefresh();
 			player.removeKeyItem("Dragon Eggshell");
-			inventory.takeItem(weapons.DRGNSHL, telAdre.armorShop);
+			inventory.takeItem(shields.DRGNSHL, telAdre.armorShop);
 		}
 
 //Suggested Reward:

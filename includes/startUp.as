@@ -274,6 +274,13 @@ public function settingsScreen():void
 		outputText("Time Format: <b>24 hours</b>\n Time will display in 24 hours format.");
 		
 	outputText("\n\n");
+	
+	if(flags[kFLAGS.USE_METRICS] > 0)
+		outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
+	else
+		outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
+		
+	outputText("\n\n");
 }
 
 public function settingsScreenMain():void
@@ -311,8 +318,8 @@ public function settingsScreenGameSettings():void {
 	addButton(5, "SFW Toggle", toggleSFW, null, null, null, "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 	addButton(6, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
 	addButton(7, "Auto level", toggleAutoLevel, null, null, null, "Toggles automatic leveling when you accumulate sufficient experience.");
-	if (player.str > 0) addButton(10, "Enable Surv", enableSurvivalPrompt);	
-	if (player.str > 0) addButton(11, "Enable Real", enableRealisticPrompt);	
+	if (player.str > 0) addButton(10, "Enable Surv", enableSurvivalPrompt, null, null, null, "Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");	
+	if (player.str > 0) addButton(11, "Enable Real", enableRealisticPrompt, null, null, null, "Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");	
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5)
 	{
 		removeButton(10);
@@ -345,6 +352,7 @@ public function settingsScreenInterfaceSettings():void {
 	addButton(4, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
 	addButton(5, "Background", cycleBackground, null, null, null, "Cycle through background styles and colors.");
 	//addButton(6, "Quality", cycleQuality, null, null, null, "Set the graphical quality. \n\nCurrent quality: " + stage.quality);
+	addButton(6, "Measurements", toggleMeasurements, null, null, null, "Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 	addButton(14, "Back", settingsScreenMain);
 }
 
@@ -392,6 +400,12 @@ public function toggleOldSprites():void {
 public function toggleTimeFormat():void {
 	if (flags[kFLAGS.USE_12_HOURS] < 1) flags[kFLAGS.USE_12_HOURS] = 1;
 	else flags[kFLAGS.USE_12_HOURS] = 0;
+	settingsScreenInterfaceSettings();
+}
+
+public function toggleMeasurements():void {
+	if (flags[kFLAGS.USE_METRICS] < 1) flags[kFLAGS.USE_METRICS] = 1;
+	else flags[kFLAGS.USE_METRICS] = 0;
 	settingsScreenInterfaceSettings();
 }
 

@@ -16,6 +16,9 @@ package classes.Scenes.Areas.HighMountains
 			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 				outputText("  You get out of the way just in time, Minerva making a loud chomping sound as she only catches the air.");
 			}
+			else if (combatBlock(true)) {
+				outputText("  You raise your " + player.shieldName + " just in time, deflecting her bite.");
+			}
 			//[else block]
 			else if (damage <= 0) outputText("  Your hands lash out, knocking her head to the side as she tries to bite you.  With the bite deflected, Minerva makes a loud chomping sound as she only bites the air.");
 			//[if attack lands]
@@ -40,9 +43,8 @@ package classes.Scenes.Areas.HighMountains
 			else if (damage <= 0) outputText("  Steadying yourself, you reach up, grabbing hold of Minerva as she attempts to land a heavy blow on you.  Grunting hard, you pull against her and toss the siren aside completely, halting her attack.");
 			//[if attack lands]
 			else {
-				outputText("  She hits you square in the chest, knocking you to the ground as her entire weight lands on you.  The bombshell of a woman jumps off your chest, ready to keep fighting.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				outputText("  She hits you square in the chest, knocking you to the ground as her entire weight lands on you.  The bombshell of a woman jumps off your chest, ready to keep fighting. ");
+				damage = player.takeDamage(damage, true);
 			}
 			spe += 70;
 			combatRoundOver();

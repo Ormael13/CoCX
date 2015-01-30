@@ -126,7 +126,7 @@ package classes.Scenes.Monsters
 				combatRoundOver();
 				return;
 			}
-			else if (player.weaponName == "dragon-shell shield" && rand(3) == 0) {
+			else if (player.shieldName == "dragon-shell shield" && rand(3) == 0) {
 				outputText("The shield managed to absorb the cum!");
 				combatRoundOver();
 				return;

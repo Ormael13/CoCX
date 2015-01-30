@@ -4,11 +4,14 @@ package classes.Scenes.Places
 	import classes.*;
 	import classes.GlobalFlags.*;
 	import classes.Items.*;
+	import classes.Scenes.Places.Ingnam.*;
 	
 	import coc.view.MainView;
 	
 	public class Ingnam extends BaseContent
 	{
+		public var ingnamFarm:IngnamFarm = new IngnamFarm();
+		public var thiefScene:ThiefScene = new ThiefScene();
 		
 		public function Ingnam() 
 		{	
@@ -57,12 +60,12 @@ package classes.Scenes.Places
 			}
 			hideUpDown();
 			menu();
-			//addButton(0, "Explore", exploreIngnam);
+			addButton(0, "Explore", exploreIngnam);
 			addButton(1, "Shops", menuShops);
 			addButton(2, "Temple", menuTemple);
 			addButton(3, "Inn", menuTavern);
-			addButton(4, "Farm", menuFarm);
-			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0) addButton(6, "Return2Camp", getBanishedToMareth);
+			addButton(4, "Farm", ingnamFarm.menuFarm);
+			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0) addButton(6, "Return2Camp", returnToMareth);
 			addButton(7, "Inventory", inventory.inventoryMenu);
 			if (player.lust >= 30) {
 				if (player.lust >= player.maxLust()) {
@@ -85,7 +88,7 @@ package classes.Scenes.Places
 			}
 		}
 		
-		//The end of epilogue, starts the game.
+		//The end of prologue, starts the game.
 		public function getBanishedToMareth():void {
 			var hasWeapon:Boolean = false;
 			clearOutput();
@@ -116,11 +119,32 @@ package classes.Scenes.Places
 			doNext(kGAMECLASS.charCreation.getBanishedToMarethForReal);
 		}
 		
+		public function returnToMareth():void {
+			clearOutput();
+			outputText("You make your journey to Mount Ilgast, walk through the portal back to Mareth and return to your camp.");
+			flags[kFLAGS.IN_INGNAM] = 0;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function returnToIngnam():void {
+			clearOutput();
+			outputText("You enter the portal and make your return to Ingnam, thanks to the debug powers.");
+			flags[kFLAGS.IN_INGNAM] = 1;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
 		//Explore Ingnam
 		public function exploreIngnam():void {
 			hideMenus();
 			clearOutput();
-			outputText("Placeholder");
+			var chooser:int = rand(4);
+			if (chooser == 0) {
+				thiefScene.encounterThief();
+				return;
+			}
+			else {
+				outputText("You explore the village of Ingnam for a while but you don't find anything intersting.");
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -152,12 +176,14 @@ package classes.Scenes.Places
 				addShopItem(weapons.PIPE, 40, 1);
 				addShopItem(weapons.SPEAR, 140, 1);
 				addShopItem(weapons.KATANA, 200, 1);
+				addShopItem(weapons.MACE, 80, 1);
 			}
 			else {
 				addShopItem(weapons.DAGGER, 40, 1);
 				addShopItem(weapons.PIPE, 50, 1);
 				addShopItem(weapons.SPEAR, 175, 1);
 				addShopItem(weapons.KATANA, 250, 1);
+				addShopItem(weapons.MACE, 100, 1);
 			}
 			if (player.findPerk(PerkLib.HistorySmith) >= 0) { //20% discount for History: Smith perk
 				addShopItem(armors.LEATHRA, 40, 2);
@@ -327,7 +353,10 @@ package classes.Scenes.Places
 			hideMenus();
 			clearOutput();
 			outputText("The inn is a nice place to be in.  You see several people drinking and chatting about random topics.  The innkeeper stands behind the wooden counter, serving beverages and cleaning.");
-			if ((player.earType > 0 && player.earType != flags[kFLAGS.INGNAM_EARS_LAST_TYPE] && flags[kFLAGS.INGNAM_EARS_FREAKOUT] <= 0) || (player.tailType > 0 && player.tailType != flags[kFLAGS.INGNAM_TAIL_LAST_TYPE] && flags[kFLAGS.INGNAM_TAIL_FREAKOUT] <= 0)) {
+			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0 && flags[kFLAGS.INGNAM_GREETED_AFTER_LONGTIME] <= 0) {
+				welcomeBack();
+			}
+			if ((player.earType > 0 && player.earType != flags[kFLAGS.INGNAM_EARS_LAST_TYPE] && flags[kFLAGS.INGNAM_EARS_FREAKOUT] <= 0) || (player.tailType > 0 && player.tailType != flags[kFLAGS.INGNAM_TAIL_LAST_TYPE] && flags[kFLAGS.INGNAM_TAIL_FREAKOUT] <= 0) && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
 				appearanceFreakout();
 				return;
 			}
@@ -337,6 +366,26 @@ package classes.Scenes.Places
 			if (flags[kFLAGS.INGNAM_RUMORS] < 3) addButton(2, "Stories", hearRumors, null, null, null, "Hear the story the innkeeper has to offer.");
 			//if (player.findPerk(PerkLib.HistoryWhore) >= 0) addButton(5, "Prostitute", eventParser, 9999, null, null, "Seek someone who's willing to have sex with you for profit.");
 			addButton(14, "Leave", menuIngnam);
+		}
+		
+		public function welcomeBack():void {
+			clearOutput();
+			outputText("The innkeeper looks at you and says, \"<i>Welcome back! I've missed you! How did your adventures go?</i>\"");
+			outputText("\n\nYou tell the innkeeper about your adventures and how you've met various denizens in Mareth. ");
+			if (flags[kFLAGS.TIMES_TRANSFORMED] <= 0) outputText("The innkeeper looks at you in awe and says, \"<i>Wow, you haven't changed at all! How did you manage to stay in that strange realm for years and still be normal?</i>\""); 
+			else if (player.race() == "human") {
+				outputText("The innkeeper looks at you and says, \"<i>I can see that you have changed a bit.</i>\" ");
+			}
+			else {
+				outputText("The innkeeper looks at you and says, \"<i>I can see that you have changed quite a lot! Back then, before you left, you were a human. Now look at yourself!</i>\"");
+			}
+			if (player.wingType > 0 && player.wingType != WING_TYPE_SHARK_FIN) {
+				outputText("He looks at your wings that sprout from your back and says, \"<i>Wings? I've never seen a person with wings before!</i>\" ");
+				if (player.canFly()) outputText("You tell him that you can fly. To demonstrate, you guide the innkeeper outside and you grit your teeth with effort as you flap your wings and you finally launch off from the ground and fly around the town! The people of Ingnam, including your family and friends, look at you in shock and some even say, \"<i>" + player.heShe(true) + " can fly!</i>\"");
+			}
+			outputText("\n\nPLACEHOLDER.");
+			flags[kFLAGS.INGNAM_GREETED_AFTER_LONGTIME] = 1;
+			doNext(menuTavern);
 		}
 		
 		public function appearanceFreakout():void {
@@ -358,10 +407,10 @@ package classes.Scenes.Places
 			if (player.earType > 0 && player.tailType > 0 && player.hasLongTail()) outputText("Next, he walks behind you, taking a glance at your tail.");
 			if (player.tailType > 0) {
 				if (player.hasLongTail()) {
-					outputText("\n\nHe says with a surprised look, \"<i>You have a tail now?  Are you sure this is fake?</i>\"  You tell him that your tail is not fake; it's real.  \"<i>Prove it,</i>\" he says as he tugs your tail.  Ouch! That hurts!  \"<i>Sorry about that,</i>\" he says, \"<i>but that tail definitely looks and feels real!  I think your tail do looks nice.</i>\"");
-					outputText("\n\nYou thank him for the compliment and he goes back to behind the counter.");
+					outputText("\n\nHe says with a surprised look, \"<i>You have a tail now?  Are you sure this is fake?</i>\"  You tell him that your tail is not fake; it's real.  \"<i>Prove it,</i>\" he says as he tugs your tail.  Ouch! That hurts!  \"<i>Sorry about that,</i>\" he says, \"<i>but that tail definitely looks and feels real!  I think your tail does look nice.</i>\"");
+					outputText("\n\nYou thank him for the compliment and he walks behind the counter.");
 				}
-				flags[kFLAGS.INGNAM_TAIL_LAST_TYPE] = player.earType;
+				flags[kFLAGS.INGNAM_TAIL_LAST_TYPE] = player.tailType;
 				flags[kFLAGS.INGNAM_TAIL_FREAKOUT] = 1;
 			}
 			doNext(menuTavern);
@@ -412,8 +461,8 @@ package classes.Scenes.Places
 					if (player.hasVagina() && !player.hasCock()) outputText("You open up your [armor] and squat down while you release your pressure onto the ground.  ");
 					else outputText("You open up your [armor] and lean against the wall using one of your arms for support while you release your pressure onto the wall.  ");
 					outputText("It's like as if the floodgate has opened!  ");
-					awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, true);
-					awardAchievement("Smashed", kACHIEVEMENTS.GENERAL_SMASHED, true, true);
+					awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, true, false);
+					awardAchievement("Smashed", kACHIEVEMENTS.GENERAL_SMASHED, true, true, false);
 					outputText("\n\nIt seems to take forever but it eventually stops.  You look down to see that your urine has been absorbed into the ground.  You close up your [armor] and head back inside.");
 					player.removeStatusAffect(StatusAffects.Drunk);
 					cheatTime(1/12);
@@ -525,82 +574,6 @@ package classes.Scenes.Places
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		//Farm
-		public function menuFarm():void {
-			hideMenus();
-			clearOutput();
-			outputText("The size of the farm is quite the contrast to Ingnam.  Dairy cows are penned up near the barn.  Acres of crops grow on the field for the purpose of being harvested for food.");
-			if (flags[kFLAGS.INGNAM_FARMER_MET] <= 0) {
-				outputText("\n\nThe farmer walks up to greet you.  She is a female human with blonde hair. She is modestly garbed in overalls and you're unsure about her breast size but you'd guess they are at C-cups. She says, \"<i>I heard about the rumors that you're going to be the Champion of Ingnam.</i>\" Tears leak from her eyes. \"<i>I'm going to feel sad.  I won't be seeing you again.  But... you can still work here to get some gems.  I'll pay you five gems for each hour you work.  This should help you.</i>\"");
-				flags[kFLAGS.INGNAM_FARMER_MET] = 1;
-			}
-			outputText("\n\nYou could help out the farmer with some work for gems.");
-			menu();
-			addButton(0, "Work", workAtFarm, null, null, null, "Work at the farm for gems.");
-			addButton(14, "Leave", menuIngnam);
-		}
-		
-		public function workAtFarm():void { //Job at the farm.
-			clearOutput();
-			if (player.fatigue > 70) {
-				outputText("You are too exhausted to work at the farm!");
-				doNext(menuFarm);
-				return;
-			}
-			var chooser:int = rand(3);
-			outputText("You let the farmer know that you're here to work for the farm.");
-			if (chooser == 0) {
-				outputText("\n\n\"<i>Great!  The stable needs cleaning.  I understand it's not for the faint of the heart but I promise you'll be rewarded,</i>\" the farmer says.  She guides you to the stables and hands you the shovel for cleaning" + (silly() ? " and a clothespin to clamp your nose shut": "") + ".");
-				outputText("\n\nYou spend half an hour cleaning the muck out of the stable.  When you're finished cleaning the muck, the farmer comes back at you and instructs you to change the straw pile.  You do as she instructs, sweeping all the old straw piles into one large pile.  Finally, you spend the rest of the hour laying a new layer of straw for the horses to lay on.");
-				outputText("\n\n\"<i>I'll take care of these from there.  Thank you for helping me.  You've taken some of the load off my burden.  Here's your payment,</i>\" she says.  She hands you five gems.");
-				if (player.str < 25 && rand(2) == 0) {
-					outputText("\n\nYou feel a bit stronger from all the hard work you've done.");
-					dynStats("str", 1);
-				}
-				if (player.tou < 25 && rand(2) == 0) {
-					outputText("\n\nYour efforts have helped to improve your stamina.");
-					dynStats("tou", 1);
-				}
-				fatigue(20);
-			}
-			else if (chooser == 1) {
-				outputText("\n\n\"<i>Great!  I could use a hand harvesting crops,</i>\" she says, \"<i>We need five full baskets of crops.</i>\"");
-				outputText("\n\nShe escorts you to the field where the crops grow.  She hands you the basket so you can collect the crops.  \"<i>We'll harvest the crops.  You only need to fill three, I'll take care of the rest,</i>\" she says.");
-				outputText("\n\nYou pick the corns from the plant one by one and put them into basket.  This continues until the basket gets full after which you switch to another empty basket.  You get back to harvesting and repeat until all the baskets are full.  The farmer comes to see that you've filled all the baskets.  \"<i>Good work!  I'll take care of things from there.  Here's your payment,</i>\" she says.  She hands you the five gems.");
-				if (player.str < 25 && rand(2) == 0) {
-					outputText("\n\nYou feel a bit stronger from all the hard work you've done.");
-					dynStats("str", 1);
-				}
-				if (player.tou < 25 && rand(2) == 0) {
-					outputText("\n\nYour efforts have helped to improve your stamina.");
-					dynStats("tou", 1);
-				}
-				fatigue(20);
-			}
-			else {
-				outputText("\n\n\"<i>Great!  The cows need to be milked.  It should be a simple task,</i>\" she says.  She escorts you to the cow pen and says, \"<i>Fill as much buckets as you can but make sure all the cows are milked.  When you're done, we'll haul the buckets.  I have things to attend.  Good luck!</i>\"");
-				outputText("\n\nYou place the bucket under one of the cows' udders.  You gently squeeze the udders.  Milk squirts from its udders and into the bucket.  When the milk flow stops, you move on to the next cow.  You repeat the process, cow after cow.");
-				outputText("\n\nBy the time you've finished milking all the cows, you are left with ten full buckets of milk.  The farmer comes back and says, \"<i>Did you milk all these cows?</i>\" You give her a nod and show her the full buckets of milk. \"<i>Thank you. You know what?  You've deserved some free milk!  Now would be a good time for some break,</i>\" She says happily.  She fills a cup with milk and gives it to you.  You promptly drink the milk.  Wow, this stuff is delicious when it's freshly milked!  After a good drink, you strike up some conversation with her.");
-				player.refillHunger(20);
-				player.HP += 50;
-				fatigue(-10);
-				outputText("\n\nAfter a few minutes of chatting, the break is over and you help her with hauling the buckets to her farmhouse, four at a time.  After three trips, she gives you a final task of filling the milk bottles.  You carefully pour the milk through a funnel into the bottle and when you manage to fill it, you move on to the next bottle.  You repeat the process until the buckets are empty.  \"<i>Good work!  You have finished your work!  Here's your payment,</i>\" she says as she hands you the five gems you deserve.");
-				if (player.str < 25 && rand(2) == 0) {
-					outputText("\n\nYou feel a bit stronger from all the hard work you've done.");
-					dynStats("str", 1);
-				}
-				if (player.tou < 25 && rand(2) == 0) {
-					outputText("\n\nYour efforts have helped to improve your stamina.");
-					dynStats("tou", 1);
-				}
-				fatigue(10);
-			}
-			if (player.findPerk(PerkLib.HistorySlacker) >= 0) fatigue(-5);
-			outputText("\n\nYou walk back to Ingnam.");
-			player.gems += 5;
-			statScreenRefresh();
-			doNext(camp.returnToCampUseOneHour);	
-		}
 	}
 
 }

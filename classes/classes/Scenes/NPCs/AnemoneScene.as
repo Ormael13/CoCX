@@ -1327,13 +1327,17 @@ package classes.Scenes.NPCs
 			//duel effects by weapon, output in new PG
 			//[Pipe] or [Wizard Staff] or [Eldritch Staff]
 			if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.PIPE.id ||
+					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE.id ||
 					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.W_STAFF.id ||
 					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.E_STAFF.id) {
 				outputText("\n\nThough she acts like she's not serious and pulls her swings more often than not, the heft of the ");
 				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.PIPE.id) outputText("pipe");
+				else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE.id) outputText("mace");
 				else outputText("stick");
-				outputText(" is still enough to bruise you a bit.");
+				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != weapons.MACE.id) outputText(" is still enough to bruise you a bit.");
+				else outputText(" manages to bruise you a lot.");
 				HPChange(-5, false);
+				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE.id) HPChange(-15, false);
 				kidAXP(6);
 			}
 			//(HP - 5, KidXP + 1)
@@ -1430,7 +1434,7 @@ package classes.Scenes.NPCs
 				kidAXP(5);
 			}
 			//[Dragonshell Shield]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.DRGNSHL.id) {
+			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == shields.DRGNSHL.id) {
 				outputText("\n\nYour protégé takes to the shield quite well, hiding behind it like... well, like a portable water barrel.  Even the way she peeks over the top is reminiscent.  She makes effective use of her cover, pushing forward relentlessly and delivering soft headbutts to spread venom to unprotected areas.");
 				//(lust + 5, temp str/spd down, KidXP + 5)
 				//str/spd loss reverts after clicking Next button
@@ -1467,17 +1471,18 @@ package classes.Scenes.NPCs
 					//9999
 				}*/
 				inventory.takeItem(weapons.SCARBLD, camp.returnToCampUseOneHour);
+				kidAXP(-5);
 				return;
 			}
 			//[Flintlock Pistol] (Because guns are awesome.)
 			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.FLINTLK.id) {
-				outputText("\n\nAs if she already knows how to use a gun, she easily pulls the trigger and fires rounds of ammunition towards you!  ");
+				outputText("\n\nAs if the anemone girl already knows how to use a gun, she easily pulls the trigger and fires rounds of ammunition towards you!  ");
 				if (silly()) outputText("Pew pew pew!  ");
 				if (player.spe >= 70) {
 					outputText("You easily dodge the bullets thanks to your speed!");
 				}
 				else if (player.spe >= 40 && player.spe < 70) {
-					outputText("You try to dodge the bullets that are coming towards you.  You manage to dodge some but unfortunately, you've got hit.  You could see yourself bleeding.  You tell her to stop and she obeys.");
+					outputText("You try to dodge the bullets that are coming towards you.  You manage to dodge some but unfortunately, you've got hit.  You see yourself bleeding.  You tell her to stop and she obeys.");
 					HPChange(-10, false);
 				}
 				else {
@@ -1485,6 +1490,27 @@ package classes.Scenes.NPCs
 					HPChange(-40, false);
 				}
 				kidAXP(5);
+			}
+			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.CROSSBW.id) {
+				outputText("\n\nAs if the anemone girl already knows how to use a crossbow, she easily pulls the lever mechanism and fires a bolt towards you!  She reloads the crossbow and fires again.  ");
+				if (player.spe >= 60) {
+					outputText("You easily dodge the incoming bolts thanks to your speed!");
+				}
+				else if (player.spe >= 30 && player.spe < 60) {
+					outputText("You try to dodge the bolts that are coming towards you.  You manage to dodge some but unfortunately, you've got hit.  You see yourself bleeding.  You tell her to stop and she obeys.");
+					HPChange(-10, false);
+				}
+				else {
+					outputText("You try your best to avoid but you're unable to at all.  Anemone stops firing when she sees that you're bleeding and gives you a sheepish grin.");
+					HPChange(-40, false);
+				}
+				kidAXP(5);
+			}
+			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.FLAIL.id) {
+				outputText("\n\nThe girl holds up the flail with no problem and you teach her how to use the weapon.  However, after dozens of swings, she accidentally hits herself with the spiked ball and looks at you with a whimper.  You tell her to stop; maybe this isn't the right weapon for her?");
+				HPChange(-10, false);
+				kidAXP( -2);
+				return;
 			}
 			//[Any new weapon added without text written for it, or any custom item name set by a save editor]
 			else {

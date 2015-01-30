@@ -65,6 +65,8 @@
 				"race"						: function(thisPtr:*):* { return thisPtr.player.race(); },
 				"sack"						: function(thisPtr:*):* { return thisPtr.sackDescript(); },
 				"sheath"					: function(thisPtr:*):* { return thisPtr.sheathDesc(); },
+				"shield"					: function(thisPtr:*):* { return thisPtr.player.shieldName;},
+				"shieldname"				: function(thisPtr:*):* { return thisPtr.player.shieldName; },
 				"skin"						: function(thisPtr:*):* { return thisPtr.player.skin(); },
 				"skinfurscales"				: function(thisPtr:*):* { return thisPtr.player.skinFurScales(); },
 				"teasetext"					: function(thisPtr:*):* { return thisPtr.teaseText(); },

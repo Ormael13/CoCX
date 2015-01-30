@@ -832,6 +832,12 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			return max;
 		}
 		
+		public function maxFatigue():Number
+		{
+			var max:Number = 100;
+			return max;
+		}
+		
 		public function buttDescript():String
 		{
 			return Appearance.buttDescription(this);

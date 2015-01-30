@@ -24,6 +24,12 @@ package classes.Scenes.Areas.VolcanicCrag
 			combatRoundOver();
 		}
 		
+		public function tease():void {
+			outputText("The behemoth lifts his loincloth to reveal his large prick and waves his cock left and right.  You blush from looking at his cock.");
+			game.dynStats("lus", 10 + (player.cor / 10) + (player.lib / 10));
+			combatRoundOver();
+		}
+		
 		override public function defeated(hpVictory:Boolean):void {
 			game.volcanicCrag.behemothScene.winAgainstBehemoth();
 		}
@@ -81,7 +87,7 @@ package classes.Scenes.Areas.VolcanicCrag
 					.add(consumables.ICICLE_, 1)
 					.add(null, 3);
 			this.special1 = tailWhip;
-			//this.special2 = shieldBash;
+			this.special2 = tease;
 			//this.special3 = aerialRave;
 			checkMonster();
 		}

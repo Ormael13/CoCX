@@ -91,13 +91,13 @@ package classes
 		public static const ArousingAura:PerkType = mk("Arousing Aura", "Arousing Aura",
 				"Exude a lust-inducing aura (Req's corruption of 70 or more)",
 				"You choose the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.");
-		public static const Berzerker:PerkType = mk("Berzerker", "Berzerker",
+		public static const Berzerker:PerkType = mk("Berzerker", "Berserker",
 				"[if(player.str>=75)" +
 						"Grants 'Berserk' ability." +
 						"|" +
 						"<b>You aren't strong enough to benefit from this anymore.</b>" +
 						"]",
-				"You choose the 'Berzerker' perk, which unlocks the 'Berzerk' magical ability.  Berzerking increases attack and lust resistance but reduces physical defenses.");
+				"You choose the 'Berserker' perk, which unlocks the 'Berserk' magical ability.  Berserking increases attack and lust resistance but reduces physical defenses.");
 		public static const BrutalBlows:PerkType = mk("Brutal Blows", "Brutal Blows",
 				"[if(player.str>=75)" +
 						"Reduces enemy armor with each hit." +

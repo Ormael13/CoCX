@@ -68,9 +68,9 @@
 			return kGAMECLASS.goNext(time,defNext);
 		}
 		
-		protected function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false):void
+		protected function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void
 		{
-			return kGAMECLASS.awardAchievement(title, achievement, display, nl);
+			return kGAMECLASS.awardAchievement(title, achievement, display, nl, nl2);
 		}
 		
 		protected function isHalloween():Boolean
@@ -320,6 +320,11 @@
 			return kGAMECLASS.hasButton(arg);
 		}
 
+		protected function addLockedButton(pos:int, toolTipText:String = ""):void
+		{
+			kGAMECLASS.addLockedButton(pos, toolTipText);
+		}
+		
 		protected function clearList():void{
 			kGAMECLASS.clearList();
 		}
@@ -676,6 +681,9 @@
 		}
 		protected function get jewelries():JewelryLib{
 			return kGAMECLASS.jewelries;
+		}
+		protected function get shields():ShieldLib{
+			return kGAMECLASS.shields;
 		}
 		protected function get inventory():Inventory{
 			return kGAMECLASS.inventory;

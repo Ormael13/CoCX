@@ -12,6 +12,9 @@ package classes.Scenes.Areas.HighMountains
 			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 				outputText("You are able to parry one of her blows with enough force to push her back, giving you a little more breathing room.");
 			}
+			if (combatBlock(true)) {
+				outputText("You are able to raise your " + player.shieldName + " in time to block the phoenix's blows.");
+			}
 			else {
 				outputText("Seeing an opening, the phoenix forces her way through your guard with a quick pair of powerful strikes. ");
 				//Get hit

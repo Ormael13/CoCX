@@ -79,6 +79,19 @@ package classes
 		public function set jewelryEffectId(value:Number):void { _jewelryEffectId = value; }
 		public function set jewelryEffectMagnitude(value:Number):void { _jewelryEffectId = value; }
 		public function set jewelryPerk(value:String):void { _jewelryPerk = value; }
+		//Shield!
+		private var _shieldName:String = "";
+		private var _shieldBlock:Number = 0;
+		private var _shieldPerk:String = "";
+		private var _shieldValue:Number = 0;
+		public function get shieldName():String { return _shieldName; }
+		public function get shieldBlock():Number { return _shieldBlock; }
+		public function get shieldPerk():String { return _shieldPerk; }
+		public function get shieldValue():Number { return _shieldValue; }
+		public function set shieldValue(value:Number):void { _shieldValue = value; }
+		public function set shieldName(value:String):void { _shieldName = value; }
+		public function set shieldBlock(value:Number):void { _shieldBlock = value; }
+		public function set shieldPerk(value:String):void { _shieldPerk = value; }
 		//Primary stats
 		public var str:Number = 0;
 		public var tou:Number = 0;

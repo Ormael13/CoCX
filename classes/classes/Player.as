@@ -9,6 +9,8 @@ import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
+import classes.Items.Shield;
+import classes.Items.ShieldLib;
 import classes.Scenes.Places.TelAdre.UmasShop;
 
 use namespace kGAMECLASS;
@@ -79,6 +81,7 @@ use namespace kGAMECLASS;
 		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 		private var _jewelry:Jewelry = JewelryLib.NOTHING;
+		private var _shield:Shield = ShieldLib.NOTHING;
 		private var _modArmorName:String = "";
 
 		//override public function set armors
@@ -152,6 +155,27 @@ use namespace kGAMECLASS;
 		override public function set jewelryValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.jewelryValue.");
+		}
+
+		//override public function set shields
+		override public function set shieldName(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.shieldName.");
+		}
+		
+		override public function set shieldBlock(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.shieldBlock.");
+		}
+		
+		override public function set shieldPerk(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.shieldPerk.");
+		}
+		
+		override public function set shieldValue(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.shieldValue.");
 		}
 		
 		public function get modArmorName():String
@@ -246,7 +270,7 @@ use namespace kGAMECLASS;
 			return _weapon.value;
 		}
 		
-		//override public function get jewelries. Disabled until I can figure fix.
+		//override public function get jewelries.
 		override public function get jewelryName():String {
 			return _jewelry.name;
 		}
@@ -262,7 +286,26 @@ use namespace kGAMECLASS;
 		override public function get jewelryValue():Number {
 			return _jewelry.value;
 		}
-			
+		
+		//override public function get shields
+		override public function get shieldName():String {
+			return _shield.name;
+		}
+		override public function get shieldBlock():Number {
+			var block:Number = _shield.block;
+			return block;
+		}
+		override public function get shieldPerk():String {
+			return _shield.perk;
+		}
+		override public function get shieldValue():Number {
+			return _shield.value;
+		}
+		public function get shield():Shield
+		{
+			return _shield;
+		}
+		
 		public function get armor():Armor
 		{
 			return _armor;
@@ -349,15 +392,6 @@ use namespace kGAMECLASS;
 			return oldJewelry;
 		}
 
-		
-		/*public function set jewelry(value:Jewelry):void
-		{
-			if (value == null){
-				CoC_Settings.error(short+".jewelry is set to null");
-				value = JewelryLib.NOTHING;
-			}
-			value.equip(this, false, false);
-		}*/
 		// Hacky workaround shit for ByteArray.readObject
 		/*public function Player()
 		{
@@ -376,6 +410,25 @@ use namespace kGAMECLASS;
 		{
 			this._jewelry = value;
 		}
+		
+		public function setShield(newShield:Shield):Shield {
+			//Returns the old shield, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldShield:Shield = _shield.playerRemove(); //The shield is responsible for removing any bonuses, perks, etc.
+			if (newShield == null) {
+				CoC_Settings.error(short + ".shield is set to null");
+				newShield = ShieldLib.NOTHING;
+			}
+			_shield = newShield.playerEquip(); //The shield can also choose to equip something else.
+			return oldShield;
+		}
+		
+		// in case you don't want to call the value.equip
+		public function setShieldHiddenField(value:Shield):void
+		{
+			this._shield = value;
+		}
+		
 		public function reduceDamage(damage:Number):Number{
 			damage = int(damage - rand(tou) - armorDef);
 			//EZ MOAD half damage
@@ -594,12 +647,6 @@ use namespace kGAMECLASS;
 		{
 			//Determine race type:
 			var race:String = "human";
-			if (lowerBody == 4) {
-				if (wingType == WING_TYPE_FEATHERED_LARGE) race = "pegataur";
-				else race = "centaur";
-			}
-			if (lowerBody == 11)
-				race = "pony-kin";
 			if (catScore() >= 4) 
 			{
 				race = "cat-morph";
@@ -706,10 +753,16 @@ use namespace kGAMECLASS;
 				else
 					race = "mouse-morph";
 			}
+			if (sirenScore() >= 4)
+				race = "siren";
 			if (lowerBody == 3)
 				race = "naga";
-			if (lowerBody == 4)
-				race = "centaur";
+			if (lowerBody == 4) {
+				if (wingType == WING_TYPE_FEATHERED_LARGE) race = "pegataur";
+				else race = "centaur";
+			}
+			if (lowerBody == 11)
+				race = "pony-kin";
 
 			if (gooScore() >= 3)
 			{
@@ -1302,6 +1355,18 @@ use namespace kGAMECLASS;
 					mutantCounter--;
 			}
 			return mutantCounter--;
+		}
+		
+		public function sirenScore():Number 
+		{
+			var sirenCounter:Number = 0;
+			if (faceType == 4 && tailType == 7 && wingType == WING_TYPE_FEATHERED_LARGE && armType == ARM_TYPE_HARPY)
+				sirenCounter+= 4;
+			if (hasVagina()) 
+				sirenCounter++;
+			//if (hasCock() && findFirstCockType(CockTypesEnum.ANEMONE) >= 0)
+			//	sirenCounter++;
+			return sirenCounter++;
 		}
 		
 		public function lactationQ():Number

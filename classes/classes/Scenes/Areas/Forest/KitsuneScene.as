@@ -637,7 +637,7 @@ package classes.Scenes.Areas.Forest
 			if (player.fatigue > 80 && player.fatigue < 100) {
 				outputText("\n\nYour dreams are haunted by visions of yourself wandering through the halls of an impressive manor, searching desperately for a way out.  No matter where you turn, the twisting hallways all seem to turn back on each other.  You are trapped, forever doomed to wander the halls of this manor, being toyed with at the whims of your three beautiful mistresses.");
 			}
-			if (player.fatigue >= 100) {
+			if (player.fatigue >= player.maxFatigue()) {
 				//mansionBadEnd();
 				doNext(mansionBadEnd);
 			}

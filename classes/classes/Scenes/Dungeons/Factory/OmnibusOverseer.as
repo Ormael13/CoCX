@@ -29,7 +29,7 @@ package classes.Scenes.Dungeons.Factory
 			}
 			//You didn't dodge
 			else {
-				if (player.weaponName == "dragon-shell shield" && rand(2) == 0)
+				if (player.shieldName == "dragon-shell shield" && rand(2) == 0)
 				{
 					outputText("Your shield absorbs the milk!")
 					combatRoundOver()

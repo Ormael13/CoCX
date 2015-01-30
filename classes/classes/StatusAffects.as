@@ -232,6 +232,7 @@ package classes
 		public static const StunCooldown:StatusAffectType = mk("Stun Cooldown");
 		public static const TentacleCoolDown:StatusAffectType = mk("TentacleCoolDown");
 		public static const Timer:StatusAffectType = mk("Timer");
+		public static const TimesBashed:StatusAffectType = mk("TimesBashed");
 		public static const Uber:StatusAffectType = mk("Uber");
 		public static const UrtaSecondWinded:StatusAffectType = mk("Urta Second Winded");
 		public static const UsedTitsmother:StatusAffectType = mk("UsedTitsmother");

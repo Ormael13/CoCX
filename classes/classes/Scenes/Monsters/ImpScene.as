@@ -610,7 +610,10 @@ package classes.Scenes.Monsters
 			monster = new ImpGang();
 			outputText("\n", false);
 			if (!loss) outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest and you awaken suddenly to find yourself surrounded by " + monster.a + monster.short + "</b>!\n\n", false);
-			if (Math.sqrt(player.inte + player.spe) >= rand(16) && !loss) {
+			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) {
+				outputText("You look at the door to see that it's open. Shit. You forgot to lock the door before you've went to sleep!\n\n");
+			}
+			if ((Math.sqrt(player.inte + player.spe) >= rand(16) || rand(3) == 0) && !loss) {
 				outputText("The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a " + eCockDescript(0) + " as long and thick as a man's arm, far oversized for their bodies. Watching an imp trip over its " + eCockDescript(0) + " would be funny, if you weren't surrounded by a horde of leering imps closing in from all sides...\n\n", false);
 				outputText("You quickly get up in time to ready your " + player.weaponName + "! It's a fight!")
 				startCombat(monster, true);

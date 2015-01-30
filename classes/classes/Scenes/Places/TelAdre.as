@@ -1537,7 +1537,10 @@ public function armorShop():void {
 			armors.INDECST.shortName,createCallBackFunction(armorBuy, armors.INDECST),
 			armors.LTHRROB.shortName,createCallBackFunction(armorBuy, armors.LTHRROB),
 			armors.SCALEML.shortName,createCallBackFunction(armorBuy, armors.SCALEML),
-			"", 0, "", 0, "", 0, "", 0);
+			shields.BUCKLER.shortName, createCallBackFunction(armorBuy, shields.BUCKLER),
+			shields.KITE_SH.shortName, createCallBackFunction(armorBuy, shields.KITE_SH),
+			shields.GREATSH.shortName, createCallBackFunction(armorBuy, shields.GREATSH),
+			shields.TOWERSH.shortName, createCallBackFunction(armorBuy, shields.TOWERSH));
 	if(player.hasKeyItem("Dragon Eggshell") >= 0) {
 		outputText("\n\nThough the pieces on display have their arguable attractions, none of them really interest you.  Yvonne taps her foot impatiently.  \"<i>Well, I could make you something to order... if you have any decent materials, cutie.  200 gems.</i>\"");
 		if(player.gems < 200) {
@@ -1592,9 +1595,11 @@ public function weaponShop():void {
 			weapons.W_STAFF.shortName,createCallBackFunction(weaponBuy, weapons.W_STAFF),
 			weapons.S_GAUNT.shortName,createCallBackFunction(weaponBuy, weapons.S_GAUNT),
 			weapons.DAGGER.shortName, createCallBackFunction(weaponBuy, weapons.DAGGER), 
-			weapons.SCIMITR.shortName,createCallBackFunction(weaponBuy, weapons.SCIMITR));
+			weapons.SCIMITR.shortName, createCallBackFunction(weaponBuy, weapons.SCIMITR));
+	addButton(10, weapons.MACE.shortName, weaponBuy, weapons.MACE);
+	addButton(11, weapons.FLAIL.shortName, weaponBuy, weapons.FLAIL);
 	if (player.hasKeyItem("Sheila's Lethicite") >= 0 || flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] > 0) {
-		addButton(10, "ScarBlade", forgeScarredBlade);
+		addButton(13, "ScarBlade", forgeScarredBlade);
 	}
 	addButton(14, "Leave", telAdreMenu);
 }

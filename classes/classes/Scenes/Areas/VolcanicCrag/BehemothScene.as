@@ -121,6 +121,12 @@ package classes.Scenes.Areas.VolcanicCrag
 			doNext(analCatchBehemoth);
 		}
 		
+		public function giveBirthToBehemoth():void {
+			clearOutput();
+			outputText("(Placeholder) You've managed to give birth to a behemoth!");
+			flags[kFLAGS.BEHEMOTH_CHILDREN]++;
+		}
+		
 		//Sex menu
 		private function behemothSexMenu(victory:Boolean = false):void {
 			clearOutput();
@@ -139,10 +145,10 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (player.hasVagina()) addButton(2, "GetVagFucked", vagCatchBehemoth, null, null, null, "Have him penetrate you vaginally.");
 			addButton(3, "Suck His Cock", suckThatBigCock, null, null, null, "Suck his wonderful cock and get stuffed with cum!");
 			if (timesSexed() >= 3) addButton(4, "Cum Bath", haveACumBathLiterally, null, null, null, "Have a (literal) cum bath!");
-			else addButton(4, "LOCKED", eventParser, 9999, null, null, "Have sex with the behemoth enough times to unlock this!");
+			else addLockedButton(4, "Have sex with the behemoth enough times to unlock this!");
 			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0) {
 				if (timesSexed() >= 3) addButton(5, "Watersports", watersportsWithBehemoth, null, null, null, "Do some urine activity with him. (Placeholder)");
-				else addButton(5, "LOCKED", eventParser, 9999, null, null, "Have sex with the behemoth enough times to unlock this!");
+				else addLockedButton(5, "Have sex with the behemoth enough times to unlock this!");
 			}
 			if (!kGAMECLASS.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
 			else addButton(14, "Nevermind", cleanupAfterCombat);
@@ -230,8 +236,8 @@ package classes.Scenes.Areas.VolcanicCrag
 			clearOutput();
 			outputText("You definitely want that " + (silly() ? "dig bick": "big dick") + " in your [vagina].  ");
 			outputText("You strip out of your [armor] until you're naked.  You make sure to toss your [armor] into a neat pile.  You present your naked body and more importantly, your [vagina] to the behemoth.  He shifts his loincloth aside to expose his large pecker and says excitedly, \"<i>Now that's some wonderful pussy you've got there!  I'll go gentle on you and make sure you enjoy the experience.</i>\"");
+			outputText("\n\n(PLACEHOLDER) And then you were vaginally fucked.");
 			player.cuntChange(45, true, true, true);
-			outputText("\n\n(PLACEHOLDER) And then you were vaginally fucked.  ");
 			if (player.hasCock()) outputText("You manage to cum as well.");
 			player.orgasm();
 			player.slimeFeed();
@@ -260,7 +266,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nThe behemoth pulls his cock out of your mouth and the rest of the cum spills all over the earth.  With his orgasm eventually coming to an end, the behemoth looks at you with your swollen belly.  \"<i>I really stuffed you, didn't I?  At least you won't have to eat for a bit,</i>\" he chuckles.  You tell him that yes, he did stuff you with cum!");
 			outputText("\n\nYou lay next to him and rest for an hour before you say your goodbyes to the behemoth and walk back to your camp.");
 			flags[kFLAGS.BEHEMOTH_COCK_SUCKED]++;
-			dynStats("str", 0.5, "tou", 0.5);
+			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
 			if (kGAMECLASS.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
@@ -289,7 +295,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\n<b>One hour later...</b>");
 			outputText("\n\nYou get out of the cum-filled basin and " + (player.isGoo() ? "absorb the cum into your gooey body": "shake the excessive cum off") + " before getting yourself re-dressed into your [armor] and rustle the behemoth's hair.   \"<i>See you later.  Come back anytime for more fun,</i>\" the behemoth says.  You give him a final kiss before you make your way back to camp, already feeling a lot better.");
 			flags[kFLAGS.BEHEMOTH_CUM_BATH]++;
-			HPChange(player.maxHP(), false);
+			HPChange(player.maxHP() / 2, false);
 			fatigue(-50);
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
 			player.slimeFeed();
@@ -318,7 +324,14 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("Bucket, of course!  The behemoth grabs the bucket nearby and says, \"<i>Let's get started.</i>\"  He moves his loincloth aside and lowers the bucket so his cock goes over the rim, pointing towards the inside of the bucket.  Stream of urine flows from his cock into the bucket.");
 			if (player.isTaur()) {
 				outputText("\n\nUnfortunately, you have to wait until the behemoth finishes peeing.  Having a tauric body surely puts you at a disadvantage.");
-				outputText("\n\nPLACEHOLDER");
+				outputText("\n\nThe behemoth is aware of your body type, sighs and says \"<i>I guess it's not a good idea being a 'taur.  We could have peed together.  Oh well, I'll just finish up and let you release the pressure.</i>\"");
+				outputText("\n\nHe eventually finishes peeing and the bucket is filled three-quarter-way with urine before he sets the bucket under your rear legs.");
+				if (player.hasCock()) outputText("\n\nFortunately, having a cock really helps.  The behemoth holds the bucket under your [cock] and you finally release the pressure into the bucket");
+				else if (player.hasVagina()) outputText("\n\nBeing a female centaur, this is getting tricky.  The behemoth says, \"<i>Fortunately, I DO read books and I've learned about the anatomy some time ago.  I can help you.</i>\"  He holds up the bucket so you can release the urine from your [vagina] into the bucket");
+				else outputText("\n\nDespite your genderlessness, you know you can still release.  The behemoth says, \"<i>I know how the genderless release.</i>\"  He holds up the bucket so you can release the pressure");
+				outputText(", your urine mingling with the behemoth's.");
+				outputText(" (PLACEHOLDER)");
+				awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, true);
 			}
 			else {
 				outputText("\n\nYou join him in filling the bucket with warm yellow liquid.  You open up your [armor], ");
@@ -331,9 +344,10 @@ package classes.Scenes.Areas.VolcanicCrag
 				else { //Genderless can still urinate.
 					outputText("move over the bucket and let out the pressure despite your genderlessness as your urine mingles with the behemoth's.");
 				}
-				outputText("  \"<i>I love you,</i>\" the behemoth says with a smile.  You smile back at him and you eventually finish peeing.  The behemoth is still peeing and the bucket is more than halfway full with mixed urine.");
+				awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, true);
+				outputText("\n\n\"<i>I love you,</i>\" the behemoth says with a smile.  You smile back at him and you eventually finish peeing.  The behemoth is still peeing and the bucket is more than halfway full with mixed urine.");
 				outputText("\n\n\"<i>Don't go yet!</i>\" he chuckles,\"<i>After this, we'll do a bit of foreplay.</i>\"  You watch as the bucket is being filled nearly to the brim with urine.  Fortunately, the urine stream does get thinner and stops as the behemoth finishes peeing.  He sets the urine-filled bucket down, walks over to you and gives your [chest] a good caress.");
-				outputText("(PLACEHOLDER)");
+				outputText(" (PLACEHOLDER)");
 			}
 			if (kGAMECLASS.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);

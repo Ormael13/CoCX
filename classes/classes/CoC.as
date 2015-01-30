@@ -141,6 +141,7 @@
 		public var weapons:WeaponLib = new WeaponLib();
 		public var armors:ArmorLib = new ArmorLib();
 		public var jewelries:JewelryLib = new JewelryLib();
+		public var shields:ShieldLib = new ShieldLib();
 		public var miscItems:MiscItemLib = new MiscItemLib();
 		// Scenes/
 		public var camp:Camp = new Camp();
@@ -384,7 +385,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_1.1_snapshot_20150123";
+			ver = "0.9.2_mod_1.1_snapshot_20150130";
 			version = ver + " (<b>Mod Snapshot</b>)";
 
 			//Indicates if building for mobile?

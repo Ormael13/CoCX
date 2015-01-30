@@ -427,7 +427,7 @@ public function updatePregnancy():Boolean {
 					outputText("your chest has begun to feel a bit odd.  Your run your hands over it to find that your breasts have grown to around C-cups at some point when you weren't paying attention!  ", false);
 					player.breastRows[0].breastRating = 3;
 				}
-				else if(player.biggestTitSize() <= 1) {
+				else if(player.biggestTitSize() <= 1 && player.mf("m", "f") == "f") {
 					outputText("your breasts feel oddly tight in your top.  You put a hand to them and are startled when you find that they've grown to C-cups!  ", false);
 					player.breastRows[0].breastRating = 3;
 				}
@@ -1106,6 +1106,51 @@ public function updatePregnancy():Boolean {
 			}
 			if (player.pregnancyIncubation == 24) {
 				outputText("<b>Your belly is as big as it can get.  You have a feeling that you'll give birth to a twin soon.</b>");
+				displayedUpdate = true;
+			}
+			if(player.pregnancyIncubation == 144 || player.pregnancyIncubation == 72 || player.pregnancyIncubation == 85 || player.pregnancyIncubation == 150) {
+				//Increase lactation!
+				if(player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
+					outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You wonder just what kind of creature they're getting ready to feed.\n", false);
+					player.boostLactation(.5);
+				}
+				if(player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() > 0 && player.biggestLactation() < 1) {
+					outputText("\nDrops of breastmilk escape your nipples as your body prepares for the coming birth.\n", false);
+					player.boostLactation(.5);
+				}				
+				//Lactate if large && not lactating
+				if(player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() == 0) {
+					outputText("\n<b>You realize your breasts feel full, and occasionally lactate</b>.  It must be due to the pregnancy.\n", false);
+					player.boostLactation(1);
+				}
+				//Enlarge if too small for lactation
+				if(player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
+					outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n", false);
+					player.growTits(1, 1, false, 3);
+				}
+				//Enlarge if really small!
+				if(player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
+					outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n", false);
+					player.growTits(1, 1, false, 3);
+				}
+			}
+		}
+		//Behemoth Pregnancy
+		else if (player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH) {
+			if (player.pregnancyIncubation == 216) {
+				outputText("<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.</b>");
+				displayedUpdate = true;
+			}
+			if (player.pregnancyIncubation == 144) {
+				outputText("<b>Your distended belly shows obvious signs of pregnancy.</b>");
+				displayedUpdate = true;
+			}
+			if (player.pregnancyIncubation == 72) {
+				outputText("<b>Your belly is getting larger.</b>");
+				displayedUpdate = true;
+			}
+			if (player.pregnancyIncubation == 24) {
+				outputText("<b>Your belly is as big as it can get.  You have a feeling that you'll give birth to a behemoth soon.</b>");
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 144 || player.pregnancyIncubation == 72 || player.pregnancyIncubation == 85 || player.pregnancyIncubation == 150) {
@@ -1878,6 +1923,21 @@ public function updatePregnancy():Boolean {
 			genderCheck();
 		}
 		kGAMECLASS.highMountains.minervaScene.minervaPurification.playerGivesBirth();
+		if(player.hipRating < 10) {
+			player.hipRating++;
+			outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".", false);
+		}
+		player.knockUpForce(); //Clear Pregnancy
+		outputText("\n", false);
+	}
+	//Give birth to behemoth.
+	if (player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH && player.pregnancyIncubation == 1) {
+		if(player.vaginas.length == 0) {
+			outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
+			player.createVagina();
+			genderCheck();
+		}
+		kGAMECLASS.volcanicCrag.behemothScene.giveBirthToBehemoth();
 		if(player.hipRating < 10) {
 			player.hipRating++;
 			outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".", false);

@@ -350,7 +350,7 @@ package classes
 			mainView.lustBar.height = baseHeight;
 			mainView.lustBar.y = basePos2 + (gapDiff * 2) - posOffset;
 			mainView.lustBar.alpha = universalAlpha;
-			mainView.fatigueBar.width = (player.fatigue * (baseWidth / 100));
+			mainView.fatigueBar.width = ((player.fatigue / player.maxFatigue() * 100) * (baseWidth / 100));
 			mainView.fatigueBar.height = baseHeight;
 			mainView.fatigueBar.y = basePos2 + (gapDiff * 3) - posOffset;
 			mainView.fatigueBar.alpha = universalAlpha;
@@ -409,7 +409,7 @@ package classes
 			
 			mainView.fatigueNum.x = 1;
 			mainView.fatigueNum.width = 170;
-			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.fatigueNum.text = Math.floor(player.fatigue) + "/" + 100;
+			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.fatigueNum.text = Math.floor(player.fatigue) + "/" + player.maxFatigue();
 			else Math.floor(player.fatigue);
 			mainView.fatigueNum.y = basePos2 + (gapDiff * 3) - posTextOffset;
 			mainView.fatigueText.y = basePos2 + (gapDiff * 3) - posTextOffset;

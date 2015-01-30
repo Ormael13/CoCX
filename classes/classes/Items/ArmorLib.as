@@ -23,7 +23,8 @@ package classes.Items
 		public const C_CLOTH:ComfortableClothes = new ComfortableClothes();
 		public const CHBIKNI:ArmorWithPerk = new ArmorWithPerk("ChBikni","Chn Bikini","revealing chainmail bikini","a chainmail bikini",2,700,"A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong. \n\nType: Light armor \nDefense: 2 \nBase value: 700 \nSpecial: Slutty Seduction (Seduce)","Light",
 				PerkLib.SluttySeduction,5,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.");
-		public const CLSSYCL:Armor = new Armor("ClssyCl","Suitclothes","classy suitclothes","a set of classy suit-clothes",1,400,"A set of classy suitclothes. \n\nType: Clothing \nDefense: 1 \nBase value: 400","Light");
+		public const CLSSYCL:Armor = new Armor("ClssyCl", "Suitclothes", "classy suitclothes", "a set of classy suit-clothes", 1, 400, "A set of classy suitclothes. \n\nType: Clothing \nDefense: 1 \nBase value: 400", "Light");
+		public const DBARMOR:Armor = new PureMaraeArmor();
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,150,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings. \n\nType: Medium armor \nDefense: 8 \nBase value: 150","Medium");
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,250,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this. \n\nType: Heavy armor \nDefense: 21 \nBase value: 250");
 		public const FURLOIN:Armor = new FurLoincloth(); //Re-implemented
@@ -42,7 +43,7 @@ package classes.Items
 		public const TBARMOR:Armor = new MaraeArmor();
 		public const NURSECL:ArmorWithPerk = new ArmorWithPerk("NurseCl","NurseCl","skimpy nurse's outfit","a nurse's outfit",0,800,"This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble. \n\nType: Clothing \nDefense: 0 \nBase value: 800 \nSpecial: Slutty Seduction (Seduce)","Light",
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy nurse outfit allows you access to an improved form of 'Tease'.");
-		public const OVERALL:Armor = new Armor("Overall","Overalls","white shirt and overalls","a white shirt and overalls",0,60,"A simple white shirt and overalls. \n\nType: Clothing \nDefense: 0 \nBase value: 60","Light");
+		public const OVERALL:Armor = new Armor("Overall", "Overalls", "white shirt and overalls", "a white shirt and overalls", 0, 60, "A simple white shirt and overalls. \n\nType: Clothing \nDefense: 0 \nBase value: 60", "Light");
 		public const R_BDYST:Armor = new Armor("R.BdySt","R.BdySt","red, high-society bodysuit","a red bodysuit for high society",1,1200,"A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature. \n\nType: Clothing \nDefense: 1 \nBase value: 1,200","Light");
 		public const RBBRCLT:ArmorWithPerk = new ArmorWithPerk("RbbrClt","Rbbr Fetish","rubber fetish clothes","a set of revealing rubber fetish clothes",3,1000,"A revealing set of fetish-wear.  Upgrades tease attack to seduce. \n\nType: Clothing \nDefense: 3 \nBase value: 1,000 \nSpecial: Slutty Seduction (Seduce)","Light",
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy rubberwear allows you access to 'Seduce', an improved form of 'Tease'.");

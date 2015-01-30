@@ -1544,6 +1544,10 @@ public function removeButton(arg:*):void {
 	mainView.hideBottomButton( buttonToRemove );
 }
 
+public function addLockedButton(pos:int, toolTipText:String = ""):void {
+	addButton(pos, "LOCKED", doNothing, null, null, null, toolTipText);
+}
+
 public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
 	mainView.hideBottomButton(0);
 	mainView.hideBottomButton(1);
@@ -1968,7 +1972,7 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 	if(type == 2) {
 		mod = physicalCost(mod);
 	}
-	if(player.fatigue >= 100 && mod > 0) return;
+	if(player.fatigue >= player.maxFatigue() && mod > 0) return;
 	if(player.fatigue <= 0 && mod < 0) return;
 	//Fatigue restoration buffs!
 	if (mod < 0) {
@@ -1991,7 +1995,7 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 		// fatigueUp.visible = false;
 	}
 	dynStats("lus", 0, "resisted", false); //Force display fatigue up/down by invoking zero lust change.
-	if(player.fatigue > 100) player.fatigue = 100;
+	if(player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
 	if(player.fatigue < 0) player.fatigue = 0;
 	statScreenRefresh();
 }
@@ -2404,12 +2408,13 @@ public function openURL(url:String):void
     navigateToURL(new URLRequest(url), "_blank");
 }
 
-public function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false):void {
+public function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void {
 	if (achievements[achievement] != null) {
 		if (achievements[achievement] <= 0) {
 			achievements[achievement] = 1;
 			if (nl && display) outputText("\n");
-			if (display) outputText("<b><font color=\"#000080\">Achievement unlocked: " + title + "</font></b>\n");
+			if (display) outputText("<b><font color=\"#000080\">Achievement unlocked: " + title + "</font></b>");
+			if (nl2 && display) outputText("\n");
 			kGAMECLASS.saves.savePermObject(false); //Only save if the achievement hasn't been previously awarded.
 		}
 	}
@@ -2858,6 +2863,10 @@ public function doBadEnd():void {
 		doNext(13);
 	}
 	inDungeon = false;
+}
+
+public function doNothing():void {
+	//This literally does nothing.
 }
 
 public function spriteSelect(choice:Number = 0):void {

@@ -1918,6 +1918,7 @@ public function places():Boolean {
 	
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(10, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin);
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(11, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva);
+	if (debug) addButton(4, "Ingnam", kGAMECLASS.ingnam.returnToIngnam, null, null, null, "Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 	//addButton(12, "Prison", eventParser, 9999);
 	//addButton(13, "Next", placesPage2);
 	addButton(14, "Back", eventParser, 1);
