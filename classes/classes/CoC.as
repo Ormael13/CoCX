@@ -80,7 +80,7 @@
 	{
 
 		// Include the functions. ALL THE FUNCTIONS
-		include "../../includes/customCharCreation.as";
+//No longer needed. Added into CharCreation.as:		include "../../includes/customCharCreation.as";
 		
 		include "../../includes/descriptors.as";
 		include "../../includes/appearance.as";
@@ -261,7 +261,7 @@
 		public var images:ImageManager;
 		public var player:Player;
 		public var player2:Player;
-		public var tempPerk:PerkClass;
+//No longer used:		public var tempPerk:PerkClass;
 		public var monster:Monster;
 //No longer used:		public var itemSwapping:Boolean;
 		public var flags:DefaultDict;
@@ -398,7 +398,7 @@
 			playerEvent = new PlayerEvents();
 
 			//Used in perk selection, mainly eventParser, input and engineCore
-			tempPerk = null;
+			//tempPerk = null;
 
 			//Create monster, used all over the place
 			monster = new Monster();

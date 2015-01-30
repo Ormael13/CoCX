@@ -28,6 +28,7 @@ public function eventParser(eventNo:*):void {
 			hideMenus();
 		}
 		
+		/* Replaced by calls to gameOver()
 		if (eventNo == 9999) // Game over event; overriding whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
 		{
 			mainView.showMenuButton( MainView.MENU_NEW_MAIN );
@@ -36,6 +37,7 @@ public function eventParser(eventNo:*):void {
 			mainView.hideMenuButton( MainView.MENU_LEVEL );
 			mainView.hideMenuButton( MainView.MENU_PERKS );
 		}
+		*/
 		/*if(eventNo == 1000 && gameState == 1 && menuLoc == 1) {
 			menuLoc = 0;
 			outputText("\n\n", false);
@@ -46,10 +48,10 @@ public function eventParser(eventNo:*):void {
 
 
 		if(eventNo < 1000) doSystem(eventNo);
-//		if(eventNo >=1000 && eventNo < 2000) inventory.doItems(eventNo);
+		if(eventNo >=1000 && eventNo < 2000) errorPrint(eventNo); //No events should be in this range anymore. Previously called inventory.doItems(eventNo);
 		if(eventNo >=2000 && eventNo < 5000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doEvent(eventNo);
 		if(eventNo >=5000 && eventNo < 7000) doCombat(eventNo);
-		if(eventNo >= 10000 && eventNo < 10999) charCreation.doCreation(eventNo);
+		if(eventNo >= 10000 && eventNo < 10999) errorPrint(eventNo); //No events should be in this range anymore. Previously called charCreation.doCreation(eventNo);
 		if(eventNo >= 11000) doDungeon(eventNo);
 	}
 
@@ -59,6 +61,13 @@ public function eventParser(eventNo:*):void {
 	}
 }
 
+public function gameOver():void { //Game over event; override whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
+	mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+	mainView.showMenuButton(MainView.MENU_DATA);
+	mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+	mainView.hideMenuButton(MainView.MENU_LEVEL);
+	mainView.hideMenuButton(MainView.MENU_PERKS);
+}
 
 public function doSystem(eventNo:Number):void {
 	//@ camp
@@ -99,7 +108,7 @@ public function doSystem(eventNo:Number):void {
 		case 2:
 			exploration.doExplore();
 			return;
-*/
+
 
 		case 3:
 			desert.exploreDesert();
@@ -121,7 +130,6 @@ public function doSystem(eventNo:Number):void {
 			return;
 
 
-/* Now called directly
 		case 10:
 			masturbateGo(); //Masturbate
 			return;
@@ -130,13 +138,13 @@ public function doSystem(eventNo:Number):void {
 			//Rest
 			camp.rest();
 			return;
-*/
+
 
 		case 12:
 			//Explore new zones
 			exploration.tryDiscover();
 			return;
-
+*/
 
 		case 13:
 			camp.returnToCampUseOneHour();
@@ -227,13 +235,13 @@ public function doSystem(eventNo:Number):void {
 			//Choose masturbate options
 			masturbateMenu();
 			return;
-*/
+
 
 		case 44:
 			//Gain +5 Str due to level
 			dynStats("str", 5);
 			outputText("Your muscles feel significantly stronger from your time adventuring.", true);
-			doNext(116);
+			doNext(perkBuyMenu);
 			return;
 
 
@@ -243,7 +251,7 @@ public function doSystem(eventNo:Number):void {
 			trace("HP: " + player.HP + " MAX HP: " + maxHP());
 			statScreenRefresh();
 			outputText("You feel tougher from all the fights you have endured.", true);
-			doNext(116);
+			doNext(perkBuyMenu);
 			return;
 
 
@@ -251,7 +259,7 @@ public function doSystem(eventNo:Number):void {
 			//Gain +5 Intelligence due to level
 			dynStats("int", 5);
 			outputText("Your time spent fighting the creatures of this realm has sharpened your wit.", true);
-			doNext(116);
+			doNext(perkBuyMenu);
 			return;
 
 
@@ -259,11 +267,10 @@ public function doSystem(eventNo:Number):void {
 			//Gain +5 speed due to level
 			dynStats("spe", 5);
 			outputText("Your time in combat has driven you to move faster.", true);
-			doNext(116);
+			doNext(perkBuyMenu);
 			return;
 
 
-/* Now called directly
 		case 48:
 			//Use Onahole
 			onaholeUse();
@@ -316,7 +323,7 @@ public function doSystem(eventNo:Number):void {
 		case 79:
 			deluxeDildo();
 			return;
-*/
+
 
 		case 80:
 			forest.exploreDeepwoods();
@@ -346,8 +353,8 @@ public function doSystem(eventNo:Number):void {
 		case 111:
 			swamp.exploreSwamp();
 			return;
-
-
+*/
+/* Both moved to engineCore alongside the other perk selection code
 		case 114:
 			stage.focus = null;
 			//mainView.aCb.visible = false;
@@ -367,11 +374,12 @@ public function doSystem(eventNo:Number):void {
 				eventParser(1);
 			}
 			return;
-
+*/
+/* Now called directly
 		case 116:
 			perkBuyMenu();
 			return;
-
+*/
 
 		case 118:
 			if (!monster.hasVagina()) monster.createVagina();

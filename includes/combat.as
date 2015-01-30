@@ -464,47 +464,52 @@ public function doCombat(eventNum:Number):void
 	{
 		if (!this.testingBlockExiting)
 		{
-				outputText("<b>GAME OVER</b>", true);
-				if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", 10035, "", 0, "CHEAT", 1);
-				else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
-				mainView.showMenuButton(MainView.MENU_DATA);
-				mainView.hideMenuButton(MainView.MENU_APPEARANCE);
-				mainView.hideMenuButton(MainView.MENU_LEVEL);
-				mainView.hideMenuButton(MainView.MENU_PERKS);
+			outputText("<b>GAME OVER</b>", true);
+			menu();
+			addButton(0, "Game Over", gameOver);
+			addButton(3, "NewGamePlus", charCreation.newGamePlus);
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "CHEAT", camp.campMenu);
+			
+			mainView.showMenuButton(MainView.MENU_DATA);
+			mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+			mainView.hideMenuButton(MainView.MENU_LEVEL);
+			mainView.hideMenuButton(MainView.MENU_PERKS);
+			
+			inCombat = false;
+        
+			// Prevent ChaosMonkah instances from getting stuck
+		}
+		else {
+			inCombat = false;
+			doNext(camp.returnToCampUseOneHour);
+		}
 
-				inCombat = false;
-
-				// Prevent ChaosMonkah instances from getting stuck
-			}
-			else {
-				inCombat = false;
-				doNext(camp.returnToCampUseOneHour);
-
-			}
-
-			inDungeon = false;
+		inDungeon = false;
 	}
 			//Soft Game Over - for when you want to leave the text on-screen
 	if(eventNum == 5035) {
 
-			if (!this.testingBlockExiting) {
-				outputText("\n\n<b>GAME OVER</b>", false);
-				if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", 10035, "", 0, "Debug Cheat", 1);
-				else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
-				mainView.showMenuButton(MainView.MENU_NEW_MAIN);
-				mainView.showMenuButton(MainView.MENU_DATA);
-				mainView.hideMenuButton(MainView.MENU_APPEARANCE);
-				mainView.hideMenuButton(MainView.MENU_LEVEL);
-				mainView.hideMenuButton(MainView.MENU_PERKS);
-
-				inCombat = false;
-			}
-			else {
-				// Prevent ChaosMonkah instances from getting stuck
-				inCombat = false;
-				doNext(camp.returnToCampUseOneHour);
-			}
-			inDungeon = false;
+		if (!this.testingBlockExiting) {
+			outputText("\n\n<b>GAME OVER</b>", false);
+			menu();
+			addButton(0, "Game Over", gameOver);
+			addButton(3, "NewGamePlus", charCreation.newGamePlus);
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", camp.campMenu);
+			
+			mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+			mainView.showMenuButton(MainView.MENU_DATA);
+			mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+			mainView.hideMenuButton(MainView.MENU_LEVEL);
+			mainView.hideMenuButton(MainView.MENU_PERKS);
+			
+			inCombat = false;
+		}
+		else {
+			// Prevent ChaosMonkah instances from getting stuck
+			inCombat = false;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		inDungeon = false;
 	}
 			//Sand which(lol) end Pt 1
 	if(eventNum == 5026)

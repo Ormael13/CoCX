@@ -89,9 +89,11 @@ public function doCamp():void {
 	//Clear out Izma's saved loot status
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
 	//History perk backup
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] == 0) {
+	if (flags[kFLAGS.HISTORY_PERK_SELECTED] == 0) {
+		flags[kFLAGS.HISTORY_PERK_SELECTED] = 2;
 		hideMenus();
-		fixHistory();
+		getGame().charCreation.chooseHistory();
+//		fixHistory();
 		return;
 	}
 	if(!marbleScene.marbleFollower())
@@ -1396,10 +1398,13 @@ private function exgartuanCampUpdate():void {
 	doNext(1);
 }
 
+/*
 private function fixHistory():void {
 	outputText("<b>New history perks are available during creation.  Since this character was created before they were available, you may choose one now!</b>", true);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 2;
+	menu();
 	doNext(10036);
 }
+*/
 }
 }

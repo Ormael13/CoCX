@@ -423,7 +423,7 @@ public static const BOOBGARTUAN_SURPRISE_COUNT:int                              
 public static const GOTTEN_INQUISITOR_ARMOR:int                                     =  415; // 
 public static const DOMINIKAS_SWORD_GIVEN:int                                       =  416; // 
 public static const HEL_FOXY_FOURSOME_WARNED:int                                    =  417; // 
-public static const UNKNOWN_FLAG_NUMBER_00418:int                                   =  418; // HISTORY PERK SET - tail, fur, or scales.	0=Nothing
+public static const HISTORY_PERK_SELECTED:int                                       =  418; // HISTORY PERK SET - tail, fur, or scales.	0=Nothing
 public static const AMILY_TIMES_BUTTFUCKED_PC:int                                   =  419; // 
 public static const TIMES_FUCKED_AMILYBUTT:int                                      =  420; // 
 public static const KIHA_AFFECTION_LEVEL:int                                        =  421; // 
@@ -764,7 +764,7 @@ public static const SOPHIE_FOLLOWER_PROGRESS:int                                
 public static const KID_A_XP:int                                                    =  756; // 
 public static const KID_SITTER:int                                                  =  757; // 0 = no sitter, 1 = possible, 2 = doing dat shit
 public static const HAD_KID_A_DREAM:int                                             =  758; // 
-public static const CUSTOM_PC_ENABLED:int                                           =  759; // 
+public static const CUSTOM_PC_ENABLED:int                                           =  759; //No longer in use
 public static const SHEILA_CORRUPTION:int                                           =  760; // 
 public static const SHEILA_XP:int                                                   =  761; // 
 public static const SHEILA_PREGNANCY_INCUBATION:int                                 =  762; //Previously SHEILA_PREG

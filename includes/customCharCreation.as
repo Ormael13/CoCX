@@ -1,7 +1,9 @@
-﻿//Set custom stats and display a blurb about them.  No need to set up buttons, handled outside in 10045
+﻿//Moved to CharCreation so all character creation functions are in one file and are not inside the game engine itself
+/*
+//Set custom stats and display a blurb about them.  No need to set up buttons, handled outside in 10045
 public function customPCSetup():void {
 	//Set as having history perk
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
+	flags[kFLAGS.HISTORY_PERK_SELECTED] = 1;
 	
 	if (player.short == "TestChar")
 	{
@@ -597,7 +599,7 @@ public function customPCSetup():void {
 		//human tongue
 		//human face
 		//no tail, fur, or scales"
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 0;
+		flags[kFLAGS.HISTORY_PERK_SELECTED] = 0;
 		player.str = 25;
 		player.tou = 25;
 		player.inte = 25;
@@ -1515,4 +1517,4 @@ public function customPCSetup():void {
 		player.teaseLevel = 3;
 	}
 }
-
+*/

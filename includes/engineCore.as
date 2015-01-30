@@ -208,7 +208,7 @@ public function displayPerks(e:MouseEvent = null):void {
 		outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point", false);
 		if(player.perkPoints > 1) outputText("s", false);
 		outputText(" to spend.</b>", false);
-		addButton(1,"Perk Up",eventParser,116);
+		addButton(1, "Perk Up", perkBuyMenu);
 	}
 	if(player.findPerk(PerkLib.DoubleAttack) >= 0) {
 		outputText("\n<b>You can adjust your double attack settings.</b>");
@@ -259,73 +259,119 @@ public function doubleAttackOff():void {
 }
 
 public function levelUpGo(e:MouseEvent = null):void {
+	clearOutput();
 	hideMenus();
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	//Level up
-	if(player.XP >= (player.level) * 100) {
+	if (player.XP >= (player.level) * 100) {
 		player.level++;
 		player.perkPoints++;
-		outputText("<b>You are now level " + player.level + "!</b>\n\nYou may now apply +5 to one attribute.  Which will you choose?", true);
-		player.XP -= (player.level-1) * 100;
-		simpleChoices("Strength", 44, "Toughness", 45, "Speed", 47, "Intelligence", 46, "", 0);                
+		outputText("<b>You are now level " + player.level + "!</b>\n\nYou may now apply +5 to one attribute.  Which will you choose?");
+		player.XP -= (player.level - 1) * 100;
+		menu();
+		addButton(0, "Strength", levelUpStatStrength);
+		addButton(1, "Toughness", levelUpStatToughness);
+		addButton(2, "Speed", levelUpStatSpeed);
+		addButton(3, "Intelligence", levelUpStatIntelligence);
 	}
 	//Spend perk points
-	else if(player.perkPoints > 0) {
+	else if (player.perkPoints > 0) {
 		perkBuyMenu();
 	}
 	else {
-		outputText("<b>ERROR.  LEVEL UP PUSHED WHEN PC CANNOT LEVEL OR GAIN PERKS.  PLEASE REPORT THE STEPS TO REPRODUCE THIS BUG TO FENOXO@GMAIL.COM OR THE FENOXO.COM BUG REPORT FORUM.</b>", true);
-		doNext(1);
+		outputText("<b>ERROR.  LEVEL UP PUSHED WHEN PC CANNOT LEVEL OR GAIN PERKS.  PLEASE REPORT THE STEPS TO REPRODUCE THIS BUG TO FENOXO@GMAIL.COM OR THE FENOXO.COM BUG REPORT FORUM.</b>");
+		doNext(camp.campMenu);
 	}
-	/*OLD LEVEL UP CODE
-	player.level++;
-	levelText2.visible = false;
-	levelBG.visible = false;
-	dataText.visible = false;
-	dataBG.visible = false;
-	perksText.visible = false;
-	perksBG.visible = false;
-	appearanceText.visible = false;
-	appearanceBG.visible = false;
-	statsBG.visible = false;
-	statsText.visible = false;
-	outputText("<b>You are now level " + player.level + "!</b>\n\nYou may now apply +5 to one attribute.  Which will you choose?", true);
-	player.XP -= (player.level-1) * 100;
-	simpleChoices("Strength", 44, "Toughness", 45, "Speed", 47, "Intelligence", 46, "", 0);
-	*/
 }
 
-public function perkBuyMenu():void {
-	outputText("", true);
-	
+private function levelUpStatStrength():void {
+	dynStats("str", 5); //Gain +5 Str due to level
+	clearOutput();
+	outputText("Your muscles feel significantly stronger from your time adventuring.");
+	doNext(perkBuyMenu);
+}
+
+private function levelUpStatToughness():void {
+	dynStats("tou", 5); //Gain +5 Toughness due to level
+	trace("HP: " + player.HP + " MAX HP: " + maxHP());
+	statScreenRefresh();
+	outputText("You feel tougher from all the fights you have endured.");
+	doNext(perkBuyMenu);
+}
+
+private function levelUpStatSpeed():void {
+	dynStats("spe", 5); //Gain +5 speed due to level
+	clearOutput();
+	outputText("Your time in combat has driven you to move faster.");
+	doNext(perkBuyMenu);
+}
+
+private function levelUpStatIntelligence():void {
+	dynStats("int", 5); //Gain +5 Intelligence due to level
+	clearOutput();
+	outputText("Your time spent fighting the creatures of this realm has sharpened your wit.");
+	doNext(perkBuyMenu);
+}
+
+private function perkBuyMenu():void {
+	clearOutput();
 	var perkList:Array = buildPerkList();
 	
-	if(perkList.length == 0) {
-		outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point", false);
-		if(player.perkPoints > 1) outputText("s", false);
-		outputText(".", false);
-		doNext(1);
+	if (perkList.length == 0) {
+		outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
+		if(player.perkPoints > 1) outputText("s");
+		outputText(".");
+		doNext(camp.campMenu);
 		return;
 	}
-	if (testingBlockExiting){
-		tempPerk = perkList[rand(perkList.length)].perk;
-		doNext(114);
-	} else {
-		outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
+	if (testingBlockExiting) {
+		menu();
+		addButton(0, "Next", perkSelect, perkList[rand(perkList.length)].perk);
+	}
+	else {
+		outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n");
 		mainView.aCb.x = 210;
-		mainView.aCb.y = 108;
+		mainView.aCb.y = 112;
 		
-		//mainView.aCb.visible = true;
-		if (mainView.aCb.parent == null)
-		{
+		if (mainView.aCb.parent == null) {
 			mainView.addChild(mainView.aCb);
 			mainView.aCb.visible = true;
 		}
 		
 		mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
-		simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
+		menu();
+		addButton(1, "Skip", perkSkip);
 	}
 }
+
+private function perkSelect(selected:PerkClass):void {
+	stage.focus = null;
+	if (mainView.aCb.parent != null) {
+		mainView.removeChild(mainView.aCb);
+		applyPerk(selected);
+	}
+}
+
+private function perkSkip():void {
+	stage.focus = null;
+	if (mainView.aCb.parent != null) {
+		mainView.removeChild(mainView.aCb);
+		camp.campMenu();
+	}
+}
+
+private function changeHandler(event:Event):void {
+ 	//Store perk name for later addition
+	clearOutput();
+ 	var selected:PerkClass = ComboBox(event.target).selectedItem.perk;
+	mainView.aCb.move(210, 85);
+	outputText("You have selected the following perk:\n\n");
+	outputText("<b>" + selected.perkName + ":</b> " + selected.perkLongDesc + "\n\nIf you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.");
+	menu();
+	addButton(0, "Okay", perkSelect, selected);
+	addButton(1, "Skip", perkSkip);
+}
+
 public function buildPerkList():Array {
 	var perkList:Array = [];
 	function _add(p:PerkClass):void{
@@ -507,17 +553,18 @@ public function buildPerkList():Array {
 }
 
 public function applyPerk(perk:PerkClass):void {
+	clearOutput();
 	player.perkPoints--;
 	//Apply perk here.
-	outputText("<b>" + perk.perkName + "</b> gained!", true);
-	player.createPerk(perk.ptype,perk.value1,perk.value2,perk.value3,perk.value4);
+	outputText("<b>" + perk.perkName + "</b> gained!");
+	player.createPerk(perk.ptype, perk.value1, perk.value2, perk.value3, perk.value4);
 	if (perk.ptype == PerkLib.StrongBack2) player.itemSlot5.unlocked = true;
 	if (perk.ptype == PerkLib.StrongBack) player.itemSlot4.unlocked = true;
 	if (perk.ptype == PerkLib.Tank2) {
 		HPChange(player.tou, false);
 		statScreenRefresh();
 	}
-	doNext(1);
+	doNext(camp.campMenu);
 }
 
 public function buttonText(buttonName:String):String {
