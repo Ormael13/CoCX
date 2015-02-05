@@ -11,7 +11,7 @@ package classes.Items.Shields
 	public class DragonShellShield extends Shield {
 		
 		public function DragonShellShield() {
-			super("DrgnShl", "DrgnShl", "dragon-shell shield", "a dragon-shell shield", 10, 1500, "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.  Absorbs any fluid attacks you can catch, rendering them useless. \n\nType: Shield \Block: 30 \nBase value: 1,500 \nProtects against 'liquid attacks'.");
+			super("DrgnShl", "DrgnShl", "dragon-shell shield", "a dragon-shell shield", 14, 1500, "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.  Absorbs any fluid attacks you can catch, rendering them useless. \n\nType: Shield \Block: 14 \nBase value: 1,500 \nProtects against 'liquid attacks'.");
 		}
 		
 		override public function useText():void { //Produces any text seen when equipping the armor normally

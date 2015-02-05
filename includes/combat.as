@@ -125,6 +125,11 @@ public function approachAfterKnockback():void
 			return;
 		}
 	}
+	if (player.weaponName == "crossbow") {
+		outputText("At the same time, you fire a bolt at " + monster.short + ". ");
+		attack();
+		return;
+	}
 	enemyAI();
 	return;
 }
@@ -205,6 +210,9 @@ public function combatMenu():void {
 		if (player.weaponName == "flintlock pistol") {
 			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] > 0) addButton(0, "Shoot&Approach", approachAfterKnockback);
 			else addButton(0, "Reload&Approach", approachAfterKnockback);
+		}
+		if (player.weaponName == "crossbow") {
+			addButton(0, "Shoot&Approach", approachAfterKnockback);
 		}
 		else addButton(0, "Approach", approachAfterKnockback);
 		if (player.hasKeyItem("Bow") >= 0) addButton(5, "Bow", eventParser, 5079);
@@ -774,7 +782,7 @@ public function doCombat(eventNum:Number):void
 				clearOutput();
 				temp = 80 + rand(40);
 				temp = takeDamage(temp);
-				outputText("The brood continues to hammer away at your defenseless self. (" + temp + ")");
+				outputText("The brood continues to hammer away at your defenseless self.  <b>(<font color=\"#800000\">" + temp + "</font>)</b>");
 				combatRoundOver();
 				return;
 			}
@@ -785,7 +793,7 @@ public function doCombat(eventNum:Number):void
 			else if (player.findStatusAffect(StatusAffects.GooBind) >= 0) {
 				outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.", true);
 				temp = takeDamage(.35 * maxHP());
-				outputText(" (" + temp + ")", false);
+				outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>", false);
 				combatRoundOver();
 				return;
 			}
@@ -884,7 +892,7 @@ public function doCombat(eventNum:Number):void
 				else {
 					outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.", true);
 					temp = takeDamage(.15 * maxHP());
-					outputText(" (" + temp + ")", false);
+					outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>", false);
 				}
 				combatRoundOver();
 				return;
@@ -1309,12 +1317,12 @@ public function attack():void {
 		outputText("", true);
 		fatigueRecovery();
 	}
-	if(player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 0) {
+	if(player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The kitsune's seals have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
 	}
-	if(flags[kFLAGS.PC_FETISH] >= 3 && !urtaQuest.isUrta() && player.weaponName != "flintlock pistol") {
+	if(flags[kFLAGS.PC_FETISH] >= 3 && !urtaQuest.isUrta() && player.weaponName != "flintlock pistol" && !isWieldingRangedWeapon()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -1456,7 +1464,7 @@ public function attack():void {
 		damage = 60.5;
 	}
 	else damage = player.str;
-	if (player.weaponName == "flintlock pistol") damage += (player.spe / 5);
+	if (isWieldingRangedWeapon()) damage += (player.spe / 5);
 	//Weapon addition!
 	damage += player.weaponAttack;
 	//Bonus sand trap damage!
@@ -1497,7 +1505,7 @@ public function attack():void {
 	damage = Math.round(damage);
 	
 	//ANEMONE SHIT
-	if(monster.short == "anemone" && player.weaponName != "flintlock pistol") {
+	if(monster.short == "anemone" && !isWieldingRangedWeapon()) {
 		//hit successful:
 		//special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
 		if(rand(10) <= 1) {
@@ -1560,7 +1568,7 @@ public function attack():void {
 	}
 	if(damage > 0) {
 		//Lust raised by anemone contact!
-		if(monster.short == "anemone") {
+		if(monster.short == "anemone" && !isWieldingRangedWeapon()) {
 			outputText("\nThough you managed to hit the anemone, several of the tentacles surrounding her body sent home jolts of venom when your swing brushed past them.", false);
 			//(gain lust, temp lose str/spd)
 			(monster as Anemone).applyVenom((1+rand(2)));
@@ -1839,6 +1847,10 @@ public function combatBlock(doFatigue:Boolean = false):Boolean {
 		if (doFatigue) fatigue(10, 2);
 		return true;
 	}
+	else return false;
+}
+public function isWieldingRangedWeapon():Boolean {
+	if (player.weaponName == "flintlock pistol" || player.weaponName == "crossbow") return true;
 	else return false;
 }
 
@@ -2122,12 +2134,12 @@ public function combatStatusesUpdate():void {
 			var bleed:Number = (2 + rand(4))/100;
 			bleed *= player.HP;
 			bleed = takeDamage(bleed);
-			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (" + bleed + ")</b>\n\n", false);
+			outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + temp + "</font>)</b>\n\n", false);
 		}
 	}
 	if(player.findStatusAffect(StatusAffects.AcidSlap) >= 0) {
 		var slap:Number = 3 + (maxHP() * 0.02);
-		outputText("<b>Your muscles twitch in agony as the acid keeps burning you. (" + slap + ")</b>\n\n", false);
+		outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n", false);
 	}
 	if(player.findPerk(PerkLib.ArousingAura) >= 0 && monster.lustVuln > 0 && player.cor >= 70) {
 		if(monster.lust < 50) outputText("Your aura seeps into " + monster.a + monster.short + " but does not have any visible effects just yet.\n\n", false);
@@ -3906,7 +3918,7 @@ public function tease(justText:Boolean = false):void {
 		else if (monster is Doppleganger && monster.findStatusAffect(StatusAffects.Stunned) < 0) (monster as Doppleganger).mirrorTease(damage, true);
 		else if (!justText) monster.teased(damage);
 		
-		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta() && !player.weaponName == "flintlock pistol") 
+		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta()) 
 		{
 			if(player.lust < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
 			else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);
@@ -4623,8 +4635,8 @@ public function kick():void {
 	//LAND A HIT!
 	else {
 		outputText(monster.capitalA + monster.short, false);
-		if(!monster.plural) outputText(" reels from the damaging impact! (" + damage + ")", false);
-		else outputText(" reel from the damaging impact! (" + damage + ")", false);
+		if(!monster.plural) outputText(" reels from the damaging impact! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+		else outputText(" reel from the damaging impact! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 	}
 	if(damage > 0) {
 		//Lust raised by anemone contact!
@@ -5611,7 +5623,8 @@ public function physicalSpecials():void {
 		butt9 = shieldBash;
 		b9T = "Shield Bash"
 	}
-	choices(b1T,butt1,b2T,butt2,b3T,butt3,b4T,butt4,b5T,butt5,b6T,butt6,b7T,butt7,b8T,butt8,b9T,butt9,"Back",5000);
+	choices(b1T, butt1, b2T, butt2, b3T, butt3, b4T, butt4, b5T, butt5, b6T, butt6, b7T, butt7, b8T, butt8, b9T, butt9, "", 0);
+	addButton(14, "Back", eventParser, 5000);
 }
 
 public function berzerk():void {
@@ -5831,11 +5844,12 @@ public function shieldBash():void {
 	damage = doDamage(damage);
 	outputText("Your [shield] slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!  ");
 	if (monster.findStatusAffect(StatusAffects.Stunned) < 0 && rand(chance) == 0) {
-		outputText("<b>Your impact also manages to stun " + monster.a + monster.short + "!</b>");
+		outputText("<b>Your impact also manages to stun " + monster.a + monster.short + "!</b> ");
 		monster.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
 		if (monster.findStatusAffect(StatusAffects.TimesBashed) < 0) monster.createStatusAffect(StatusAffects.TimesBashed, 1, 0, 0, 0);
 		else monster.addStatusValue(StatusAffects.TimesBashed, 1, 1);
 	}
+	checkAchievementDamage(damage);
 	fatigue(20,2);
 	outputText("\n\n");
 	enemyAI();

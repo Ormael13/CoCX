@@ -10,7 +10,7 @@ package classes.Items.Shields
 		
 		public function TowerShield() 
 		{
-			super("TowerSh", "TowerShld", "tower shield", "a tower shield", 16, 500, "A towering metal shield.  It looks heavy!  \n\nType: Shield \nBlock rating: 40 \nValue: 500 \nRequirement: 40 strength");
+			super("TowerSh", "TowerShld", "tower shield", "a tower shield", 16, 500, "A towering metal shield.  It looks heavy!  \n\nType: Shield \nBlock rating: 16 \nValue: 500 \nRequirement: 40 strength");
 		}
 		
 		override public function canUse():Boolean {

@@ -113,7 +113,7 @@ package classes.Scenes
 				getGame().enemyAI();
 				return;
 			}
-			outputText("\nWhich item will you use?");
+			outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
 			if (getGame().inCombat)
 				addButton(14, "Back", eventParser, 5000); //Player returns to the combat menu on cancel
 			else addButton(14, "Back", camp.campMenu);

@@ -127,18 +127,21 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] > 0) {
 				num++;
 			}
+			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] > 0) {
+				num++;
+			}
 			//Factions
 			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] > 0) {
 				num++;
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] > 0) {
 				num++;
-			}			
+			}
 			//Others
 			if (flags[kFLAGS.CODEX_ENTRY_MAGIC] > 0) {
 				num++;
 			}
-			if (num >= 20) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
+			if (num >= 21) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
 			return num;
 		}
 		
@@ -170,64 +173,64 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Anemone") addButton(0, "( Anemones )", codexEntryAnemone); //addButton(0, "<font color=\"#00007F\">Anemone</font>", codexEntryAnemone);
 				else addButton(0, "Anemones", codexEntryAnemone);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(0, "");
 			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Arachne") addButton(1, "( Arachnes )", codexEntrySpiders);
 				else addButton(1, "Arachnes", codexEntrySpiders);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(1, "");
 			if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "GiantBees") addButton(2, "( Giant Bees )", codexEntryBees);
 				else addButton(2, "Giant Bees", codexEntryBees);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(2, "");
 			if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Goblins") addButton(3, "( Goblins )", codexEntryGoblins);
 				else addButton(3, "Goblins", codexEntryGoblins);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(3, "");
 			//2nd row
 			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "GooGirls") addButton(5, "( Goo Girls )", codexEntryGooGirls);
 				else addButton(5, "Goo Girls", codexEntryGooGirls);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(5, "");
 			if (flags[kFLAGS.CODEX_ENTRY_HARPIES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Harpies") addButton(6, "( Harpies )", codexEntryHarpies);
 				else addButton(6, "Harpies", codexEntryHarpies);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(6, "");
 			if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Hellhounds") addButton(7, "( Hellhounds )", codexEntryHellhounds);
 				else addButton(7, "Hellhounds", codexEntryHellhounds);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(7, "");
 			if (flags[kFLAGS.CODEX_ENTRY_IMPS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Imps") addButton(8, "( Imps )", codexEntryImps);
 				else addButton(8, "Imps", codexEntryImps);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(8, "");
 			//3rd row
 			if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Labovines") addButton(10, "( LaBovines )", codexEntryLabovine);
 				else addButton(10, "LaBovines", codexEntryLabovine);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(10, "");
 			if (flags[kFLAGS.CODEX_ENTRY_LIZANS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Lizans") addButton(11, "( Lizans )", codexEntryLizans);
 				else addButton(11, "Lizans", codexEntryLizans);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(11, "");
 			if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Minotaurs") addButton(12, "( Minotaurs )", codexEntryMinotaurs);
 				else addButton(12, "Minotaurs", codexEntryMinotaurs);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(12, "");
 			if (flags[kFLAGS.CODEX_ENTRY_NAGAS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Nagas") addButton(13, "( Nagas )", codexEntryNagas);
 				else addButton(13, "Nagas", codexEntryNagas);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(13, "");
 			addButton(4, "Next", menuRacesII);
 			//addButton(9, "Previous", menuRaces);
 			addButton(14, "Back", accessCodexMenu);
@@ -240,28 +243,33 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Orcs") addButton(0, "( Orcs )", codexEntryOrcs);
 				else addButton(0, "Orcs", codexEntryOrcs);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(0, "");
 			if (flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Salamanders") addButton(1, "( Salamanders )", codexEntrySalamanders);
 				else addButton(1, "Salamanders", codexEntrySalamanders);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(1, "");
 			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Satyrs") addButton(2, "( Satyrs )", codexEntrySatyrs);
 				else addButton(2, "Satyrs", codexEntrySatyrs);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(2, "");
 			if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "SharkGirls") addButton(3, "( Shark Girls )", codexEntrySharkGirls);
 				else addButton(3, "Shark Girls", codexEntrySharkGirls);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(3, "");
 			//2nd row
 			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Succubus") addButton(5, "( Succubus )", codexEntrySuccubus);
 				else addButton(5, "Succubus", codexEntrySuccubus);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(5, "");
+			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] > 0) {
+				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Behemoth") addButton(6, "( Behemoth )", codexEntryBehemoth);
+				else addButton(6, "Behemoth", codexEntryBehemoth);
+			}
+			else addLockedButton(6, "");
 			//addButton(4, "Next", menuRacesIII);
 			addButton(9, "Previous", menuRaces);
 			addButton(14, "Back", accessCodexMenu);
@@ -273,7 +281,7 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Magic") addButton(0, "( Magic )", codexEntryMagic);
 				else addButton(0, "Magic", codexEntryMagic);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(0, "");
 			addButton(14, "Back", accessCodexMenu);
 		}
 		private function menuFactions():void {
@@ -282,12 +290,12 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "Fetish") addButton(0, "( Fetish Cult )", codexEntryFetish);
 				else addButton(0, "Fetish Cult", codexEntryFetish);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(0, "");
 			if (flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] > 0) {
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == "SandWitches") addButton(1, "( Sand Witches )", codexEntrySandWitches);
 				else addButton(1, "Sand Witches", codexEntrySandWitches);
 			}
-			else addButton(0, "LOCKED", eventParser, 9999);
+			else addLockedButton(1, "");
 			addButton(14, "Back", accessCodexMenu);
 		}
 		
@@ -748,6 +756,25 @@ package classes.Scenes
 			headerSub("Feeding")
 			outputText("Like most demons, Succubi gain power from corrupting others, and require a steady supply of sexual fluids to survive. In rare cases, if a Succubus has been deprived of ‘food’ for too long, she may find herself too weak to seduce a partner, and enter into an less than advantageous agreement in order to get her food. Amazingly, most succubi will hold themselves to such an agreement after 'eating' their fill. ");
 			menuRacesII();
+		}
+		
+		private function codexEntryBehemoth():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Behemoth"
+			codexBegin();
+			headerMain("Behemoths");
+			outputText("<b>Genders:</b> Male.\n");
+			outputText("<b>Height:</b> Typically 8 to 10 feet, but 11 feet is not unheard of.\n");
+			outputText("<b>Build:</b> Muscular and athletic\n");
+			outputText("<b>Skin tone:</b> Purple\n");
+			outputText("<b>Hair color:</b> Usually blonde or black.\n");
+			outputText("<b>Eye color:</b> Yellow\n");
+			outputText("<b>Notable features:</b> Horns on head, spikes protruding from back and end of tail.\n");
+			headerSub("Appearance");
+			outputText("Behemoths typically wear little clothing, such as loincloth. The height, horns and spikes all add up to their fearsome appearance that most of the other races don't even dare to approach them.");
+			headerSub("Reproduction");
+			outputText("Like the satyrs, the behemoths are all-male race. Unlike satyrs, they are incapable of impregnating males. To reproduce, they rely on the females of other races as long as they are pure. Gestation period typically lasts two months, much longer than the typical gestation period in Mareth, and it takes two years for the newborn behemoth to fully mature into an adult.");
+			headerSub("Social structure");
+			outputText("Behemoths typically live in villages and caves. The leadership of tribes are determined by which is the strongest of all. Once a year, they host \"Feats of Strength\", a contest consisting of several gauntlets and competitions. Among one of them is the \"Cum-Out\" where the objective is for the behemoths to cum as much as they can in a single orgasm.");
 		}
 	}
 }

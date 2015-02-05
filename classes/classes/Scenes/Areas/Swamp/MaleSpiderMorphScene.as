@@ -86,8 +86,7 @@ package classes.Scenes.Areas.Swamp
 //Loss selector
 		public function loseToMaleSpiderMorph():void
 		{			
-			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
-				clearOutput();
+			if (doSFWloss()) { //No rape in SFW mode.
 				cleanupAfterCombat();
 				return;
 			}

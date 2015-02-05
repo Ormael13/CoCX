@@ -75,11 +75,15 @@ package classes.Scenes
 		
 		private function addItemButton(item:*):void {
 			var button:int = 0;
-			for (var i:int = 0; i < 14; i++) 
+			var temp:int = 0;
+			var goal:int = 14;
+			while (temp < goal)
 			{
-				if (buttonIsVisible(i) && i != 4 && i != 9 && i < 13) {
+				if (buttonIsVisible(temp)) {
 					button++;
 				}
+				if (button == 4 || button == 9) button++;
+				temp++;
 			}
 			addButton(button, item.shortName, giveItem, item);
 		}

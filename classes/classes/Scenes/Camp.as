@@ -3,7 +3,8 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Camp.CabinProgress;
+	import classes.Items.WeaponLib;
+	import classes.Scenes.Camp.*;
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Dungeons.*;
 
@@ -875,7 +876,7 @@ public function doCamp():void {
 		}
 	}
 	//Min Lust Bad End (Must not have any removable/temporary min lust.)
-	if (player.minLust() >= 100 && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.findStatusAffect(StatusAffects.BimboChampagne) >= 0 && !player.findStatusAffect(StatusAffects.Luststick) >= 0 && player.jewelryEffectId != 1)
+	if (player.minLust() >= player.maxLust() && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.findStatusAffect(StatusAffects.BimboChampagne) >= 0 && !player.findStatusAffect(StatusAffects.Luststick) >= 0 && player.jewelryEffectId != 1)
 	{
 		badEndMinLust();
 	}
@@ -1406,12 +1407,12 @@ private function swimInStreamFinish():void {
 
 private function examinePortal():void {
 	if (flags[kFLAGS.CAMP_PORTAL_PROGRESS] <= 0) {
-		outputText("You walk over to the portal. You are reminded by how you came. You begin to wonder if you can go back. You start by picking up a small pebble and throw it through the portal. It passes through the portal. As you walk around the portal, you spot the pebble at the other side. Seems like you can't get back right now.", true)
+		outputText("You walk over to the portal, reminded by how and why you came. You begin to wonder if you can go back. You start by picking up a small pebble and throw it through the portal. It passes through the portal. As you walk around the portal, you spot the pebble at the other side. Seems like you can't get back right now.", true)
 		flags[kFLAGS.CAMP_PORTAL_PROGRESS] = 1
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	else outputText("You walk over to the portal. You are reminded by how you came. You let out a sigh, knowing you can't return to Ingnam.", true)
+	else outputText("You walk over to the portal, reminded by how and why you came. You let out a sigh, knowing you can't return to Ingnam.", true)
 	doNext(1);
 }
 
@@ -1590,7 +1591,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		if(model.time.hours == 4) timeQ = 2;
 		if(model.time.hours == 5) timeQ = 1;
 		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) {
-			timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6)
+			timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 		}
 		//Autosave stuff		
 		if (player.slotName != "VOID" && player.autoSave && mainView.getButtonText( 0 ) != "Game Over") 
@@ -1835,12 +1836,12 @@ public function allNaturalSelfStimulationBeltBadEnd():void {
 	clearOutput();
 	outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n", true);
 	outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n", false);
-	outputText("\"<i>Well, well,</i>\" Giacomo says.  \"<i>The Libertines are right.  The creature's fluids are addictive. This poor woman is a total slave to the beast!</i>\"\n\n", false);
+	outputText("\"<i>Well, well,</i>\" Giacomo says.  \"<i>The Libertines are right.  The creature's fluids are addictive. This poor " + player.mf("man", "woman") + " is a total slave to the beast!</i>\"\n\n", false);
 	outputText("Giacomo contemplates the situation as you writhe in backbreaking pleasure before him.  His sharp features brighten as an idea strikes him.\n\n", false);
 	outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n", false);
-	outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live woman who can't stop cumming!</i>\"\n\n", false);
+	outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live " + player.mf("man", "woman") + " who can't stop cumming!</i>\"\n\n", false);
 	outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!", false);
-	eventParser(5035);
+	doBadEnd();
 }
 
 public function onaholeMulticockContinuation():void {

@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Camp.*;
+	import classes.Items.*;
 
 	public class SheilaScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -5029,6 +5031,59 @@ private function winAgainstDemoNSheilaForVaginas():void {
 	else doNext(camp.returnToCampUseOneHour);
 }
 
+//Scarred blade
+public function badEndScarredBlade():void {
+	outputText("You collapse from your injuries and realize what's the scarred blade's going to do. It's GOING FOR YOU! You scream as the saber thrusts towards you.");
+	rawOutputText("\n\n[DATA EXPUNGED]");
+	if (marbleFollower()) outputText("\n\n\"<i>NOOOOO! Sweetie!</i>\" Marble cries.");
+	getGame().inCombat = false;
+	flags[kFLAGS.SCARRED_BLADE_STATUS] = 1;
+	doBadEnd();
+}
+
+public function breakScarredBlade():void {
+	outputText("The scarred blade falls to the ground, inanimate. You walk over to grab the saber to find out it's still moving faintly. The saber needs to be broken to ensure it poses no further danger and remains usable.\n\n");
+	if (player.str >= 85) outputText("You grab the saber by the blade and bend it with all your might. The metal groans and the lethicite cracks. You repeatedly twist the blade until one segment of the saber finally snaps off.");
+	else {
+		outputText("You grab the saber by the blade and attempt to bend it with all your might. The blade refuses to bend despite your efforts. ");
+		if (followerHel()) outputText("You call Helia over. \"<i>Hey, lover! Need any help?</i>\" she asks. You ask her if she can break the scarred blade. \"<i>Yes, lover. Hold the sword out.</i>\" Helia instructs. You hold out the scarred blade, Hel raises her scimitar up and slashes it cleanly through the scarred blade, cutting off the segment of the blade.");
+		else if (followerKiha()) outputText("You call Kiha over. \"<i>Yes?</i>\"");
+		else if (marbleFollower()) outputText("You call Marble over. \"<i>What is it you need, sweetie?</i>\" she asks. You ask her if she can break the scarred blade. \"<i>Yes, sweetie. I'll get my hammer.</i>\"");
+		outputText("You throw the sword towards the tree and it lodges partway into the tree. With the additional leverage, you push and pull the sword to the side repeatedly. The metal groans and the lethicite cracks. After a few minutes of bending, one segment of the saber finally breaks off.");
+	}
+	outputText("\n\nYou examine the now-broken saber thoroughly to find out that it no longer moves at all. Whatever demonic power inside the scarred blade must be gone now. It looks like the sword is still usable. ");
+	cleanupAfterCombat();
+	//inventory.takeItem(weapons.B_SCARB, camp.returnToCamp);
+}
+
+public function rebellingScarredBlade(wieldAttempt:Boolean = false):void {
+	if (!wieldAttempt) outputText("<b>The scratched sword you carry jerks wildly like a bucking horse, and, tilting hilt-downward, slides itself right out of its scabbard.  Before you can pick it up and re-sheathe it, it lashes out at your hand, cutting you and landing with the point out.  Even when you try to circle it and grab the handle, the uncanny saber spins its edge around to fend you off.  Sighing with irritation, you abandon it for now.</b>\n\n");
+	else outputText("As soon as you try to wield the sword, it jerks wildly like a bucking horse. You quickly put it into your pouches before it can do harm to you.");
+	if (!wieldAttempt) {
+		var dmg:int = 20
+		dmg -= player.armorDef;
+		if (dmg < 1) dmg = 1;
+		HPChange(-dmg, false);
+		player.setWeapon(WeaponLib.FISTS);
+		flags[kFLAGS.SCARRED_BLADE_STATUS] = 1;
+	}
+	doNext(camp.campMenu);
+	addButton(1, "Fight", startCombatImmediate, new ScarredBlade, true, null, "Fight the saber and try to break it. This is going to be a risky battle and a loss can mean your demise.");
+}
+public function findScarredBlade():void {
+	outputText("A nearby flash of light on metal catches your eye.  Drawing closer to it, you find the blade you abandoned before sticking point-down in the dirt.  The tainted saber leans toward you, presenting its hilt almost pleadingly.  Take up the sword again?");
+	doYesNo(takeScarredBlade, leaveScarredBlade);
+}
+private function takeScarredBlade():void {
+	outputText("You grab the bloodthirsty saber and pull it from the ground. ");
+	flags[kFLAGS.SCARRED_BLADE_STATUS] = 0;
+	inventory.takeItem(weapons.SCARBLD, camp.returnToCamp);
+}
+private function leaveScarredBlade():void {
+	outputText("You choose not to take the saber, leaving it to rust. ");
+	flags[kFLAGS.SCARRED_BLADE_STATUS] = -1;
+	doNext(camp.returnToCamp);
+}
 
 /*Sheila's Lethicite:
 

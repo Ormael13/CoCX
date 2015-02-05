@@ -87,7 +87,7 @@ package classes
 		public static const INCUBATION_SHIELA:int               =  72;
 		public static const INCUBATION_SALAMANDER:int           = 336;
 		public static const INCUBATION_MINERVA:int           	= 216; 
-		public static const INCUBATION_BEHEMOTH:int           	= 216; 
+		public static const INCUBATION_BEHEMOTH:int           	=1440; //Longest pregnancy ever. 
 		public static const INCUBATION_PHOENIX:int           	= 168; 
 		
 		private static const MAX_FLAG_VALUE:int                 = 2999;

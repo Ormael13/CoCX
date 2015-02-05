@@ -362,12 +362,13 @@ package classes
 				mainView.esteemBar.width = ((player.minLust() / player.maxLust() * 100) * (baseWidth / 100));
 				mainView.esteemBar.alpha = universalAlpha;
 			}
+			
 			//Hunger bar
 			mainView.hungerBar.x = 6;
 			mainView.hungerBar.y = basePos2 + (gapDiff * 5) - posOffset;
 			mainView.hungerBar.width = (player.hunger * (baseWidth / 100));
 			mainView.hungerBar.height = baseHeight;
-			mainView.hungerBar.alpha = universalAlpha;			
+			mainView.hungerBar.alpha = universalAlpha;
 			
 			//Experience bar.
 			mainView.obeyBar.x = 6;

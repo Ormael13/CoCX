@@ -2180,8 +2180,8 @@ public static const BEHEMOTH_TENT:int                                           
 public static const UNEQUIP_SHIELD_BECAUSE_TWO_HANDED_WEAPON:int                    = 2171;
 public static const THIEF_GEMS:int                                                  = 2172;
 public static const INGNAM_GREETED_AFTER_LONGTIME:int                               = 2173;
-public static const UNKNOWN_FLAG_NUMBER_02174:int                                   = 2174;
-public static const UNKNOWN_FLAG_NUMBER_02175:int                                   = 2175;
+public static const CODEX_ENTRY_BEHEMOTH:int                                        = 2174;
+public static const SCARRED_BLADE_STATUS:int                                        = 2175;
 public static const UNKNOWN_FLAG_NUMBER_02176:int                                   = 2176;
 public static const UNKNOWN_FLAG_NUMBER_02177:int                                   = 2177;
 public static const UNKNOWN_FLAG_NUMBER_02178:int                                   = 2178;

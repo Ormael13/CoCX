@@ -3,6 +3,7 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.Player;
 import classes.Items.Consumable;
 import classes.Scenes.Areas.Lake;
+import classes.Scenes.Camp.ScarredBlade;
 
 //Used to jump the fuck out of pregnancy scenarios for menus.
 //const EVENT_PARSER_ESCAPE:int = 800;
@@ -697,6 +698,15 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 	if (player.weaponPerk == "holySword" && player.cor >= 35) {
 		outputText("<b>\nThe <u>" + player.weaponName + "</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
 		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
+		return true;
+	}
+	//Drop scarred blade if not corrupted enough!
+	if (player.weapon == weapons.SCARBLD && player.cor < 70 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+		kGAMECLASS.sheilaScene.rebellingScarredBlade();
+		return true;
+	}
+	if (flags[kFLAGS.SCARRED_BLADE_STATUS] == 1 && player.cor >= 70) {
+		kGAMECLASS.sheilaScene.findScarredBlade();
 		return true;
 	}
 	//Unequip Lusty maiden armor

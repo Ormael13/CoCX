@@ -620,6 +620,10 @@
 		//appearance
 		outputText("  A naked, " + player.skinTone + " mouse tail pokes from your butt, dragging on the ground and twitching occasionally.");
 	}
+	else if(player.tailType == TAIL_TYPE_BEHEMOTH) 
+	{
+		outputText("  A long seemingly-tapering tail pokes from your butt, ending in spikes just like a behemoth's.");
+	}
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
 		outputText("  Two normal human legs grow down from your waist, ending in normal human feet.", false);
@@ -869,7 +873,7 @@
 			outputText("\nEver since becoming a centaur, your equipment has shifted to lie between your rear legs, like a horse.", false);
 		if (flags[kFLAGS.USE_METRICS] > 0) outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength*2.54)/10 + " centimetres long and ", false);
 		else outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
-		if(Math.round(10*player.cocks[temp].cockThickness)/10 < 2) 
+		if(Math.round(10*player.cocks[temp].cockThickness)/10 < 10) 
 		{
 			if (flags[kFLAGS.USE_METRICS] > 0) {
 				if(Math.round(10*player.cocks[temp].cockThickness*2.54)/10 == 1) 

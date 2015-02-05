@@ -779,3 +779,4 @@ public function howToPlay():void {
 	doNext(mainMenu);
 }
 
+
