@@ -124,7 +124,7 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nYou could watch from where you're hiding, or you could play the hero and step in.");
 			//[Keep Hidden]
 			//[Play Hero]
-			simpleChoices("Play Hero", playHero, "Keep Hidden", keepHidden, "", 0, "", 0, "", 0);
+			simpleChoices("Play Hero", playHero, "Keep Hidden", keepHidden, "", null, "", null, "", null);
 		}
 
 //►[Keep Hidden]
@@ -223,7 +223,7 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nYou are now fighting demons!");
 			startCombat(new DemonPack());
 			monster.createStatusAffect(StatusAffects.phyllafight, 0, 0, 0, 0);
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //►Console ant-morph
@@ -302,7 +302,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\n\"<i>Oh good, you're here.  I was beginning to think you were a coward.</i>\"  Before you can respond to his insult, he cuts you off.  \"<i>We're ready to start when you are.  Let's hope you survive longer than the last guy.</i>\"");
 			}
 			//[Fight] [Leave]
-			simpleChoices("Fight", antColiseumFight, "", 0, "", 0, "", 0, "Leave", leaveAntColony);
+			simpleChoices("Fight", antColiseumFight, "", null, "", null, "", null, "Leave", leaveAntColony);
 		}
 
 //►[Leave]
@@ -345,7 +345,7 @@ package classes.Scenes.Areas.Desert
 				monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
 			}
 			monster.createStatusAffect(StatusAffects.PhyllaFight, 0, 0, 0, 0);
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //(Tentacle Beast - Win) Standard Tentacle Beast Win Scene. (Again we're going to need to adapt the ending so the PC does not go back to camp.)
@@ -470,8 +470,7 @@ package classes.Scenes.Areas.Desert
 
 			outputText("\n\n<b>Epilogue</b>\n");
 			outputText("You live out the rest of your days in blissful ignorance, helping the colony in any way you can. Mostly you're used as an experimental sex toy. They force you to drink an uncountable number of different potions and elixirs. Eventually you start to beg for more as your mind and body crave the sexual liquids. Oftentimes Chylla even puts you in the arena, sometimes to pleasure yourself in front of the whole colony or calling upon you to service as many males as you can please at once. Sometimes you're a male, sometimes you're a female, and sometimes both. Your mind becomes completely consumed with pleasing the colony in any way you can. You never get to see the outside world or Phylla again, but you don't care. You're busy pleasing every cock placed in front of you. As long as you're helping the colony grow and become strong, nothing else matters to you.");
-			//GAME OVER
-			eventParser(5035);
+			getGame().gameOver();
 		}
 
 //Good End

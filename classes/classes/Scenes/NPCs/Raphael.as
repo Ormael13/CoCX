@@ -149,7 +149,7 @@ private function meetRaphaelPtII():void {
 		
 	outputText("What do you do?", false);
 	//[Talk] [Slap] [Swoon]
-	simpleChoices("Talk",RaphaelFirstMeetingTALK,"Slap",RaphaelFirstMeetingSLAP,"Swoon",RaphaelFirstMeetingSWOON,"",0,"",0);
+	simpleChoices("Talk", RaphaelFirstMeetingTALK, "Slap", RaphaelFirstMeetingSLAP, "Swoon", RaphaelFirstMeetingSWOON, "", null, "", null);
 }
 
 //{When Player chooses Slap/refuse after the first encounter}
@@ -173,7 +173,7 @@ private function RaphaelFirstMeetingSLAP():void {
 	//No more meetings + endgame in 21 days
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
 	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //{When player chooses swoon after the first encounter}
@@ -196,7 +196,7 @@ private function RaphaelFirstMeetingSWOON():void {
 	outputText("You hold the hand he touched close to your chest.", false);
 
 	dynStats("str", -1,"tou", -1, "spe", 3, "sen", 1, "lus", 25);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //{When you choose the [Talk] option in the first encounter}
@@ -222,7 +222,7 @@ private function RaphaelFirstMeetingTALK():void {
 	if(player.gems < 0) player.gems = 0;
 	statScreenRefresh();
 	
-	doNext(1);
+	doNext(playerMenu);
 }
 
 
@@ -266,7 +266,7 @@ private function RaphaelDressPtII():void {
 	//{Third encounter unlocked}
 	//Set 'time to wear dress' countdown.
 	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 7;
-	inventory.takeItem(armors.R_BDYST, camp.campMenu);
+	inventory.takeItem(armors.R_BDYST, playerMenu);
 }
 
 /*DRESS HERE
@@ -302,7 +302,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 		outputText("What do you do?", false);
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 0;
 		//[Reject] [Frisk] [Date]
-		simpleChoices("Reject",RaphaelChooseReject,"Frisk",RaphaelChooseFrisk,"Date",RaphaelSelectDate,"",0,"",0);
+		simpleChoices("Reject", RaphaelChooseReject, "Frisk", RaphaelChooseFrisk, "Date", RaphaelSelectDate, "", null, "", null);
 	}
 	//({If player does not meet the first encounter requirements:}
 	else {
@@ -338,7 +338,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 		outputText("You clench your jaw as he vanishes, more than a bit offended.", false);
 
 		//{Game removal untill the PC complies with the requirements again.})
-		doNext(1);
+		doNext(playerMenu);
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 1;
 		//7 days to fix or done with!
 	}
@@ -370,7 +370,7 @@ private function RaphaelChooseReject():void {
 	//{Game Removal.}
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 14;
 	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //{When player chooses [Frisk] after second encounter}
@@ -421,7 +421,7 @@ private function RaphaelChooseFrisk():void {
 		
 		outputText("How do you respond?", false);
 		//Reject] [Accept]
-		simpleChoices("Reject",friskRejectChoice,"Accept",friskAcceptChoice,"",0,"",0,"",0);
+		simpleChoices("Reject", friskRejectChoice, "Accept", friskAcceptChoice, "", null, "", null, "", null);
 	}
 	//{If player's corruption is higher than 19 and higher than Intelligence.}
 	else {
@@ -433,7 +433,7 @@ private function RaphaelChooseFrisk():void {
 
 		outputText("What do you do?", false);
 		//[Squeeze] [Fondle]
-		simpleChoices("Squeeze",friskSqueezeChoice,"Fondle",friskFondleChoice,"",0,"",0,"",0);
+		simpleChoices("Squeeze", friskSqueezeChoice, "Fondle", friskFondleChoice, "", null, "", null, "", null);
 	}
 }
 
@@ -471,7 +471,7 @@ private function friskRejectChoice():void {
 	//{Game removal}
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 14;
 	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-	doNext(1);
+	doNext(playerMenu);
 
 }
 
@@ -510,7 +510,7 @@ private function friskSqueezeChoice():void {
 	//{Game removal}
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 14;
 	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 private function RaphaelPicnic():void {
@@ -533,7 +533,7 @@ private function RaphaelPicnicII():void {
 
 	outputText("Curious and certain he has a great deal of knowledge on Mareth, you begin asking Raphael questions about his craft and his experiences. Soon enough, two distinct subjects come up as possible topics. Then again, the wine goes straight to your head and this seems like the perfect time to enjoy more leisurely activities and simply enjoy yourself.\n\n", false);
 	//[Discuss] [Skill] [Flirt]
-	simpleChoices("Fencing",RaphaelPicnicSkill,"Thieving",RaphaelPicnicChooseThieving,"Flirt",0,"",0,"",0);
+	simpleChoices("Fencing", RaphaelPicnicSkill, "Thieving", RaphaelPicnicChooseThieving, "Flirt", null, "", null, "", null);
 }
 private function RaphaelPicnicEnd():void {
 	outputText("", true);
@@ -561,7 +561,7 @@ private function RaphaelPicnicEnd():void {
 
 		outputText("You recollect yourself and head back to camp.", false);	
 	}
-	doNext(1);
+	doNext(playerMenu);
 }
 
 	//{Player chooses [Skill]}
@@ -707,7 +707,7 @@ private function RaphaelPicnicSkill():void {
 		outputText("What do you do?", false);
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
 		//[Fence] [Discuss]
-		simpleChoices("Fence",fenceRaphaelSexily,"Discus",fenceOfferChangeToDiscuss,"",0,"",0,"",0);
+		simpleChoices("Fence", fenceRaphaelSexily, "Discus", fenceOfferChangeToDiscuss, "", null, "", null, "", null);
 		return;
 	}
 	doNext(RaphaelPicnicEnd);
@@ -820,7 +820,7 @@ private function postRaphaelCoitus():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RRAPIER, camp.campMenu);
+		inventory.takeItem(weapons.RRAPIER, playerMenu);
 	}
 	//({When player has reached the INT Conversation apex} 
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
@@ -832,7 +832,7 @@ private function postRaphaelCoitus():void {
 	//[Removes Raph from the game. 7 days later, the Quicksilver scene plays out.]
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
 	//Next button if not taking Rapier
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(1);
+	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(playerMenu);
 }
 
 
@@ -862,7 +862,7 @@ private function declinePuttingOutForRogues():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss. He's bound it with his red sash around the length like a ribbon, like he has now gifted it to you. Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RRAPIER, camp.campMenu);
+		inventory.takeItem(weapons.RRAPIER, playerMenu);
 
 	}
 	//({When player has reached the INT Conversation apex}
@@ -879,7 +879,7 @@ private function declinePuttingOutForRogues():void {
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
 	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
 	//Next button if not looting!
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(1);
+	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(playerMenu);
 }
 
 //{Player chooses [Thieving] while in the picnic}
@@ -988,10 +988,10 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		//[Fencing] [Flirt]
 		//[Fencing] {Leads to Fencing Variables}
 		//[Flirt] Leads towards the final Int Sex scene. 
-		simpleChoices("Fencing",RaphaelPicnicSkill,"Flirt",thieveryEnding,"",0,"",0,"",0);
+		simpleChoices("Fencing", RaphaelPicnicSkill, "Flirt", thieveryEnding, "", null, "", null, "", null);
 		return;
 	}
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //{High Int picnic ending}
@@ -1067,7 +1067,7 @@ private function RaphaelThieverySmexPtII():void {
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
 		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RRAPIER, camp.campMenu);
+		inventory.takeItem(weapons.RRAPIER, playerMenu);
 	}
 	//({When player has reached the INT Conversation apex}
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
@@ -1081,7 +1081,7 @@ private function RaphaelThieverySmexPtII():void {
 	//[Removes Raphael from game. In 7 days, the quicksilver scene plays out]
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
 	//If not taking item, go next.
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(1);
+	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(playerMenu);
 }
 
 
@@ -1159,7 +1159,7 @@ private function QuiksilverFawkesPtII():void {
 	outputText("You could sell Raphael out, or you could cover for him.  What do you do?", false);
 
 	//[Cover] [Sell out] 
-	simpleChoices("Cover",coverForRaphael,"Sell Out",betrayRaphael,"",0,"",0,"",0);
+	simpleChoices("Cover", coverForRaphael, "Sell Out", betrayRaphael, "", null, "", null, "", null);
 }
 
 //{PC chooses to cover for Raphael}
@@ -1211,7 +1211,7 @@ private function coverForRaphaelII():void {
 	outputText("You blink as he fades off into the mist and you're left to absorb the morning's events by yourself.  For a minute you're concerned with the wolves, but at least you've managed to keep Raphael as a friend.  Though, you are curious what he means by 'orphanage'.", false);
 	//Concludify things
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = -2;
-	doNext(1);	
+	doNext(playerMenu);
 }
 //{PC chooses to betray Raphael}
 private function betrayRaphael():void {
@@ -1236,7 +1236,7 @@ private function betrayRaphael():void {
 	outputText("You blink as he fades and you're left to reflect on these morning's events by yourself.  For a minute you're concerned for the fox, but the wolves don't seem like the types to harm him... much.  You are curious what they plan to do with him and what his 'sentence' might be, though.", false); 
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = -1;
 	//1k gems?
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Intro

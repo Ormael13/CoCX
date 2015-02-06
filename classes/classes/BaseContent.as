@@ -95,10 +95,12 @@
 		{
 			return kGAMECLASS.inDungeon;
 		}
+/* inDungeon is now read only
 		protected function set inDungeon(v:Boolean):void
 		{
 			kGAMECLASS.inDungeon = v;
 		}
+*/
 		
 		protected function get inRoomedDungeon():Boolean
 		{
@@ -226,7 +228,7 @@
 			kGAMECLASS.mainView.clearOutputText();
 		}
 		
-		protected function doNext(eventNo:*):void
+		protected function doNext(eventNo:Function):void //Now typesafe
 		{
 			kGAMECLASS.doNext(eventNo);
 		}
@@ -240,17 +242,16 @@
 		{
 			kGAMECLASS.hideMenus();
 		}
-		protected function choices(text1:String, butt1:*,
-								text2:String, butt2:*,
-								text3:String, butt3:*,
-								text4:String, butt4:*,
-								text5:String, butt5:*,
-								text6:String, butt6:*,
-								text7:String, butt7:*,
-								text8:String, butt8:*,
-								text9:String, butt9:*,
-								text0:String, butt0:*):void
-		{
+		protected function choices(text1:String, butt1:Function,
+								text2:String, butt2:Function,
+								text3:String, butt3:Function,
+								text4:String, butt4:Function,
+								text5:String, butt5:Function,
+								text6:String, butt6:Function,
+								text7:String, butt7:Function,
+								text8:String, butt8:Function,
+								text9:String, butt9:Function,
+								text0:String, butt0:Function):void { //Now typesafe
 			kGAMECLASS.choices(
 					text1, butt1,
 					text2, butt2,
@@ -265,12 +266,11 @@
 			);
 		}
 
-		protected function simpleChoices(text1:String, butt1:*,
-								text2:String, butt2:*,
-								text3:String, butt3:*,
-								text4:String, butt4:*,
-								text5:String, butt5:*):void
-		{
+		protected function simpleChoices(text1:String, butt1:Function,
+								text2:String, butt2:Function,
+								text3:String, butt3:Function,
+								text4:String, butt4:Function,
+								text5:String, butt5:Function):void { //Now typesafe
 			kGAMECLASS.simpleChoices(text1, butt1,
 					text2, butt2,
 					text3, butt3,
@@ -278,8 +278,8 @@
 					text5, butt5);
 		}
 
-		protected function doYesNo(eventYes:*, eventNo:*):void {
-			kGAMECLASS.doYesNo(eventYes,eventNo);
+		protected function doYesNo(eventYes:Function, eventNo:Function):void { //Now typesafe
+			kGAMECLASS.doYesNo(eventYes, eventNo);
 		}
 
 		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void
@@ -593,10 +593,14 @@
 		}
 
 
+/*
 		protected function get eventParser():Function
 		{
 			return kGAMECLASS.eventParser;
 		}
+*/
+		
+		protected function playerMenu():void { kGAMECLASS.playerMenu(); }
 		
 		protected function get player():Player
 		{
@@ -696,6 +700,7 @@
 			kGAMECLASS.time = val;
 		}
 		
+/* Finally got rid of this var
 		protected function get menuLoc():Number
 		{
 			return kGAMECLASS.menuLoc;
@@ -705,6 +710,7 @@
 		{
 			kGAMECLASS.menuLoc = val;
 		}
+*/
 		
 /* Classes should now use inCombat instead of setting gameState directly
 		protected function get gameState():Number

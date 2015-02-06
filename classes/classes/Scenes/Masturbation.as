@@ -13,7 +13,7 @@ package classes.Scenes {
 			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE)) {
 				clearOutput();
 				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch you shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
-				addButton(0, "Next", camp.campMenu);
+				addButton(0, "Next", playerMenu);
 				return;
 			}
 			var button:int = 0;
@@ -57,7 +57,7 @@ package classes.Scenes {
 				args = new Array();
 				return;
 			}
-			addButton(9, "Back", camp.campMenu);
+			addButton(9, "Back", playerMenu);
 		}
 		
 		private function fappingItems(menus:Boolean = true):Boolean {
@@ -115,23 +115,23 @@ package classes.Scenes {
 			clearOutput();
 			if (player.findStatusAffect(StatusAffects.Dysfunction) >= 0) {
 				outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.");
-				doNext(camp.campMenu);
+				doNext(playerMenu);
 				return;
 			}
 			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE)) {
 				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch you shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
-				doNext(camp.campMenu);
+				doNext(playerMenu);
 				return;
 			}
 			if (inDungeon) {
 				outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.");
-				doNext(camp.campMenu);
+				doNext(playerMenu);
 				return;		
 			}
 			if (player.isTaur()) {
 				if (centaurMasturbation())
 					doNext(camp.returnToCampUseOneHour);
-				else doNext(camp.campMenu);
+				else doNext(playerMenu);
 				return;
 			}
 			if (player.gender == 0) {
@@ -2048,7 +2048,7 @@ package classes.Scenes {
 			outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n");
 			outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live woman who can't stop cumming!</i>\"\n\n");
 			outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!");
-			eventParser(5035);
+			getGame().gameOver();
 		}
 		
 		private function lickYerGirlParts():void { //Female cat masturbation

@@ -126,8 +126,8 @@ package classes.Scenes.Areas.Swamp
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 18;
 			this.gems = rand(25)+40;
-			this.special1 = 5043;
-			this.special2 = 5044;
+			this.special1 = game.packAttack;
+			this.special2 = game.lustAttack;
 			this.tailType = TAIL_TYPE_SPIDER_ADBOMEN;
 			this.drop = NO_DROP;
 			checkMonster();

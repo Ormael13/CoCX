@@ -480,7 +480,7 @@
 			else
 			{
 				var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
-				var bonusValue:*;
+				var bonusValue:Number;
 				
 				// Remove the old massage bonus if present
 				if (statIndex >= 0)
@@ -514,7 +514,7 @@
 					bonusValue = MASSAGE_POWER_BONUS;
 				}
 				
-				if (bonusValue != undefined)
+				if (bonusValue != 0)
 				{
 					player.createStatusAffect(StatusAffects.UmasMassage, selectedMassage, bonusValue, MAX_MASSAGE_BONUS_DURATION, 0);
 					flags[kFLAGS.UMA_TIMES_MASSAGED]++;

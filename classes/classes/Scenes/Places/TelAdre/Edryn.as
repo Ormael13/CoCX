@@ -570,7 +570,7 @@ public function approachHelAtZeBitch():void {
 		outputText("  Eventually, though, Hel gives you a sultry look and asks if you're up for a little group activity.  Are you?\n\n", false);
 	}
 	//(Display Options: [Threesome] [Leave]
-	simpleChoices("Edryn3Some",edryn,"Fox Girls",kGAMECLASS.helScene.heliaPlusFoxyFluffs,"",0,"",0,"Leave",leaveHelInZeBitch);
+	simpleChoices("Edryn3Some", edryn, "Fox Girls", kGAMECLASS.helScene.heliaPlusFoxyFluffs, "", null, "", null, "Leave", leaveHelInZeBitch);
 }
 
 //First Time - Leave
@@ -675,7 +675,7 @@ private function shockedByEdrynsPregnancy():void {
 
 	outputText("\n\n<b>What do you do?</b>", false);
 	//[Accept it] [Reject it]
-	simpleChoices("Accept It",shockedByPregdrynThenAccept,"Reject It",beAnAssholeToPregdryn,"",0,"",0,"",0);
+	simpleChoices("Accept It", shockedByPregdrynThenAccept, "Reject It", beAnAssholeToPregdryn, "", null, "", null, "", null);
 }
 //Accept it
 private function shockedByPregdrynThenAccept():void {

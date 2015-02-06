@@ -182,7 +182,7 @@ private function specialRelationship20scene():void {
 	outputText("\n\nYou're a little surprised, but it does make sense.  She... he is pretty flat-chested, and you'd often wondered if you'd seen a bulge of some sort in her skirt from time to time...");
 	flags[kFLAGS.RUBI_ADMITTED_GENDER] = 1;
 	//(Accept) or (Reject)
-	simpleChoices("Accept",acceptRubi,"Reject",rejectRubi,"",0,"",0,"",0);
+	simpleChoices("Accept", acceptRubi, "Reject", rejectRubi, "", null, "", null, "", null);
 }
 //[If Accept]
 private function acceptRubi():void {
@@ -1197,7 +1197,7 @@ private function findBimboCheatster():void {
 	outputText("\n\nThere she is, Rubi, splayed out on the couch, naked with two fingers buried deep inside her pussy.  You shift around a bit, and see nearby her a tanned man in the process of taking off his shirt.  So, you got to them before they did anything.  Rubi moans, running a hand through her platinum blonde hair and staring at the tanned man.");
 	outputText("\n\nYou could interrupt them before they go any further, or wait until it's over.");
 	//[Interrupt] [Wait]
-	simpleChoices("Interrupt",interruptTheNTRsYouCrazyFool,"Watch n Wait",waitAndGetNTRedLikeTheBoyBitchYouAre,"",0,"",0,"",0);
+	simpleChoices("Interrupt", interruptTheNTRsYouCrazyFool, "Watch n Wait", waitAndGetNTRedLikeTheBoyBitchYouAre, "", null, "", null, "", null);
 }
 //(Interrupt)
 private function interruptTheNTRsYouCrazyFool():void {
@@ -1268,7 +1268,7 @@ private function NTRbimboBitchResolution():void {
 	outputText("\n\nRubi hugs the cushion close, apparently done with her speech.  So how do you react?");
 	outputText("\n\nYou could tell her no, forbidding her to see anyone else.  Or you could say yes, letting her sleep with anyone.  You could always break up with her.  Or there might be a fourth option...");
 	//[No] [Yes] [Break Up] [Pimp]
-	simpleChoices("No",noBimboNTR,"Yes",yesBimboNTR,"Break Up",breakUpWithRubi,"Pimp",pimpOutRubi,"",0);
+	simpleChoices("No", noBimboNTR, "Yes", yesBimboNTR, "Break Up", breakUpWithRubi, "Pimp", pimpOutRubi, "", null);
 }
 
 //(No)
@@ -2028,7 +2028,7 @@ private function cookingDate():void {
 }
 
 //Dates
-private function dateIntro(date:*):void {
+private function dateIntro(date:Function):void {
 	clearOutput();
 	rubiSprite();
 	//(First Time)

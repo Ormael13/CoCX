@@ -678,7 +678,7 @@ private function bimboSophieLicksRugs():void {
 	}
 	else {
 		outputText("What do you do?", false);
-		simpleChoices("Sixtynine",bimboSophieSixtyNineAfterCunnilingus,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+		simpleChoices("Sixtynine", bimboSophieSixtyNineAfterCunnilingus, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 	}
 }
 //SixtyNine Continuation - GOILS you're a wreckin' machine
@@ -875,7 +875,7 @@ public function sophieEggApocalypse():void {
 	flags[kFLAGS.TIMES_SOPHIE_HAS_DRUNK_OVI_ELIXIR]++;
 	if(player.hasCock()) daddy = beBimboSophiesSugarDaddy;
 	if(player.hasVagina()) mommy = beBimboSophiesSugarMommy;
-	simpleChoices("Daddy",daddy,"Mommy",mommy,"",0,"",0,"Leave",1);
+	simpleChoices("Daddy", daddy, "Mommy", mommy, "", null, "", null, "Leave", playerMenu);
 }
 	
 //[Daddy]
@@ -1438,7 +1438,7 @@ public function sophieFenCraftedSex(morning:Boolean = false):void {
 	if(sophieIsInSeason()) sophiePregChance();
 	player.orgasm();
 	dynStats("sen", -2);
-	if(morning) doNext(1);
+	if(morning) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1507,7 +1507,7 @@ public function fuckYoPregnantHarpyWaifu(morning:Boolean = false):void {
 	else outputText(" when you go to get dressed.  You'll have to make sure to wash clean at some point, but for now you enjoy the sweet scent of your pet bimbo's cum.");
 	player.orgasm();
 	dynStats("sen", -2);
-	if(morning) doNext(1);
+	if(morning) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);
 }	
 
@@ -1938,7 +1938,7 @@ private function interruptSophieIzma():void {
 	outputText("\n\nYou narrow your eyes at them and look to the large-breasted slut and ask if this is true.  \"<i>No, [name], but I'm just <b>so</b> horny!</i>\"");
 	
 	outputText("\n\nYou toss an icy stare at Izma and order her to cut Sophie down.  She does so, albeit reluctantly.  You remind Izma that you're HER Alpha, not the other way around, and that she should keep her hands off the merchandise.  You grope the bimbo's ample ass and lead her away from Izma's section of the camp, whispering that she'll get hers in due time.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //(Watch like the voyeur you are)
@@ -1979,7 +1979,7 @@ private function watchIzmaSophie():void {
 	
 	player.orgasm();
 	dynStats("sen", -1);
-	doNext(1);
+	doNext(playerMenu);
 }
 }
 }

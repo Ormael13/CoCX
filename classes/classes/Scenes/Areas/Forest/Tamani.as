@@ -93,7 +93,7 @@ package classes.Scenes.Areas.Forest
 				if (!game.forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) {
 					temp2 = game.forest.tamaniScene.tamaniBeaten;
 				}
-				game.simpleChoices("Fuck",game.forest.tamaniScene.tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",game.cleanupAfterCombat);
+				game.simpleChoices("Fuck", game.forest.tamaniScene.tamaniSexWon, "Buttfuck", temp, "", null, "Lay Eggs", temp2, "Leave", game.cleanupAfterCombat);
 			}
 			else game.cleanupAfterCombat();
 		}

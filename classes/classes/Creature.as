@@ -2574,35 +2574,35 @@ import classes.PerkType;
 		public function isBiped():Boolean
 		{
 			//Naga/Centaur
-			if (lowerBody == 3 || lowerBody == 4)
+			if (lowerBody == LOWER_BODY_TYPE_NAGA || lowerBody == LOWER_BODY_TYPE_CENTAUR)
 				return false;
-			if (lowerBody == 8 || lowerBody == 11)
+			if (lowerBody == LOWER_BODY_TYPE_GOO || lowerBody == LOWER_BODY_TYPE_PONY)
 				return false;
 			return true;
 		}
 
 		public function isNaga():Boolean
 		{
-			if (lowerBody == 3)
+			if (lowerBody == LOWER_BODY_TYPE_NAGA)
 				return true;
 			return false;
 		}
 
 		public function isTaur():Boolean
 		{
-			if (lowerBody == 4 || lowerBody == 11)
+			if (lowerBody == LOWER_BODY_TYPE_CENTAUR || lowerBody == LOWER_BODY_TYPE_PONY)
 				return true;
 			return false;
 		}
 
 		public function isDrider():Boolean
 		{
-			return (lowerBody == 16);
+			return (lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY);
 		}
 
 		public function isGoo():Boolean
 		{
-			if (lowerBody == 8)
+			if (lowerBody == LOWER_BODY_TYPE_GOO)
 				return true;
 			return false;
 		}

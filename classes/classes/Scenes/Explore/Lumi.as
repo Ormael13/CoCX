@@ -47,7 +47,7 @@ public function lumiLabChoices():void {
 	var enhance:Function =null;
 	if(lumiEnhance(true)) 
 		enhance = lumiEnhance;
-	simpleChoices("Shop",lumiShop,"Enhance",enhance,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+	simpleChoices("Shop", lumiShop, "Enhance", enhance, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 }
 
 public function lumiShop():void {
@@ -61,7 +61,7 @@ public function lumiShop():void {
 	simpleChoices(consumables.L_DRAFT.shortName,lumiLustDraftPitch,
 			consumables.GOB_ALE.shortName,lumiPitchGobboAle,
 			consumables.OVIELIX.shortName,lumiPitchOviElixer,
-			"",0,"Leave",lumiLabChoices);
+			"", null, "Leave", lumiLabChoices);
 }
 
 //Lust Draft
@@ -156,15 +156,15 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	else {
 		outputText("You nod and Lumi gives an excited yell, \"<i>Yay! Lumi loves to do enhancement, what you want to be bettar?</i>\"\n\n", false);
 		//The player chooses an item that can be enhanced from a list, regardless of which is chosen, the text for the next part is the same.
-		choices(consumables.FOXBERY.shortName,fox,
-				consumables.FOXJEWL.shortName,kitsune,
-				consumables.GLDSEED.shortName,seed,
-				consumables.KANGAFT.shortName,kanga,
-				consumables.L_DRAFT.shortName,lustDraft,
-				consumables.LABOVA_.shortName,laBova,
-				consumables.OVIELIX.shortName,oviElix,
-				consumables.SDELITE.shortName,succuDelight,
-				"",0,"Back",lumiLabChoices);
+		choices(consumables.FOXBERY.shortName, fox,
+				consumables.FOXJEWL.shortName, kitsune,
+				consumables.GLDSEED.shortName, seed,
+				consumables.KANGAFT.shortName, kanga,
+				consumables.L_DRAFT.shortName, lustDraft,
+				consumables.LABOVA_.shortName, laBova,
+				consumables.OVIELIX.shortName, oviElix,
+				consumables.SDELITE.shortName, succuDelight,
+				"", null, "Back", lumiLabChoices);
 		return true;
 	}
 }

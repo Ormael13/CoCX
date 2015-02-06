@@ -41,18 +41,18 @@ public function xmasBitchEncounter():void
 		outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n", false);
 		if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("Here we go again...\n\n");
 		//[Open Present] [Unwrap Elf] [Decline]
-		simpleChoices("OpenPresent", openXmasPresent, "", 0, "Decline", declineXmasPresent, "", 0, "", 0);
+		simpleChoices("OpenPresent", openXmasPresent, "", null, "Decline", declineXmasPresent, "", null, "", null);
 		return;
 	}
 	if (player.gender == 0)
 	{
 		outputText("She nods, bouncing up in down in excitement, \"<i>Yup!  Just open it up!  Are you ready?</i>\"\n\n", false);
-		simpleChoices("OpenPresent", openXmasPresent, "", 0, "Decline", declineXmasPresent, "", 0, "", 0);
+		simpleChoices("OpenPresent", openXmasPresent, "", null, "Decline", declineXmasPresent, "", null, "", null);
 		return;
 	}
 	outputText("She nods, bouncing up in down in excitement, \"<i>Yup!  You can unwrap it or unwrap me.  What'll it be?</i>\"\n\n", false);
 	//[Open Present] [Unwrap Elf] [Decline]
-	simpleChoices("OpenPresent", openXmasPresent, "Unwrap Elf", unwrapElfyPresent, "Decline", declineXmasPresent, "", 0, "", 0);
+	simpleChoices("OpenPresent", openXmasPresent, "Unwrap Elf", unwrapElfyPresent, "Decline", declineXmasPresent, "", null, "", null);
 }
 
 //[Decline]
@@ -63,7 +63,7 @@ public function declineXmasPresent():void {
 	
 	outputText("Before you can react, she sprints off into the darkness.", false);
 	flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
-	doNext(1);
+	doNext(playerMenu);
 }
 //[Open Present]
 public function openXmasPresent():void {
@@ -77,26 +77,26 @@ public function openXmasPresent():void {
 		outputText("Before you can utter a single word of confusion or protest, the elf moans and the cock erupts, spurting a rope of cum into your hair.  The next blast takes you across the nose, then on your lips, then your chin, and finally onto your " + allBreastsDescript() + ".  Shocked and dripping, you stand dumbfounded as the elf plants a kiss on your lips, tears off the box, and runs away with her cock flopping and buzzing in time with each step.  There's no way to catch her in this darkness.\n\n", false);
 		
 		outputText("The empty 'present' is on the ground with the coal still inside.  You wonder if the coal has any special effect. Everything else in this place does.  In the distance you can hear sleigh bells, and you know it's going to be hard to sleep with all that racket on top of the threat of more intruders...\n\n", false);
-		inventory.takeItem(consumables.COAL___, camp.campMenu);
+		inventory.takeItem(consumables.COAL___, playerMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 	else if(player.cor <= 33) {
 		//Great present!
 		outputText("surprise at the box's contents - there's a careful arranged set of equipment here, made from woven spider-silk!  Somebody must think you're pretty good.\n\n");
-		if(rand(2) == 0) inventory.takeItem(armors.SS_ROBE, camp.campMenu);
-		else inventory.takeItem(armors.SSARMOR, camp.campMenu);
+		if(rand(2) == 0) inventory.takeItem(armors.SS_ROBE, playerMenu);
+		else inventory.takeItem(armors.SSARMOR, playerMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 	else if(player.cor < 60) {
 		//[Good present]
 		outputText("surprise at the box's contents – there's a vial labeled gro+.  It looks like it's going to be a 'big' Christmas this year...\n\n", false);
-		inventory.takeItem(consumables.GROPLUS, camp.campMenu);
+		inventory.takeItem(consumables.GROPLUS, playerMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 	else {
 		//[Mediocre Present]
 		outputText("surprise at the box's contents – there is a single vial of succubi's delight packed inside.  It's going to be a white Christmas after all...\n\n", false);
-		inventory.takeItem(consumables.SDELITE, camp.campMenu);
+		inventory.takeItem(consumables.SDELITE, playerMenu);
 		flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	}
 }
@@ -285,11 +285,11 @@ public function xmasPerkM():void {
 		}
 		
 	}
-	doNext(1);
+	doNext(playerMenu);
 }
 public function xmasSmart():void {
 	hideUpDown();
 	outputText("You nod to yourself, feeling pretty smart about your decision.", true);
-	doNext(1);
+	doNext(playerMenu);
 	dynStats("int", 15);
 }

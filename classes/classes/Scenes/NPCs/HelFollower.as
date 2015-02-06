@@ -109,7 +109,7 @@ private function iCantLetFireButtsRapeMyCampsButt():void {
 	
 	outputText("\n\nYou nod and tell your fiery lover you'll be sure to do just that.");
 	flags[kFLAGS.HELIA_FOLLOWER_DISABLED] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Come2Camp] -Dirty
@@ -146,7 +146,7 @@ private function afterMoveInBoningAnalFireTail():void {
 	
 	outputText("\n\n(<b>Hel has been added to the Lovers menu!</b>)");
 	flags[kFLAGS.HEL_FOLLOWER_LEVEL] = 2;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Just Friends] -Dirt
@@ -324,7 +324,7 @@ public function helFollowersIntro():void {
 	}
 	else {
 		flags[kFLAGS.HEL_INTROS_LEVEL] = 9001;
-		camp.doCamp();
+		playerMenu();
 		return;
 	}
 	menu();
@@ -520,7 +520,7 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 			if(display) outputText("You approach Hel as she's pacing around camp.  She's clad in her normal field attire: a simple scale bikini top and leather thong which supports her scimitar's scabbard.  Her cloak is loosely thrown over her shoulders, giving her a slight measure of protection from the mountain's harsh environs.");
 			if(display) outputText("\n\n\"<i>Heya, [name]! Ready to hit the road?</i>\"");
 			//(Display Options: [Dungeon] [Not Yet])
-			simpleChoices("Dungeon",kGAMECLASS.goToHeliaDungeon,"",0,"",0,"",0,"Not Yet",kGAMECLASS.notYet);
+			simpleChoices("Dungeon", kGAMECLASS.goToHeliaDungeon, "", null, "", null, "", null, "Not Yet", kGAMECLASS.notYet);
 		}
 	}
 }
@@ -573,7 +573,6 @@ private function sparWithHeliaFirebuttsAreHot():void {
 	//No gems.
 	monster.XP = 1;
 	monster.gems = 0;
-	doNext(1);
 }
 
 //Hel Whips [name]'s Ass
@@ -1977,7 +1976,7 @@ public function heliasBirthday():void {
 private function stayHomeFromHeliaParty():void {
 	clearOutput();
 	outputText("\"<i>Aww, lame,</i>\" Hel groans, sighing.  \"<i>Fiiiiiine.  I guess I'll just go have awesome fun and party hard without you. Don't stick too hard into that mud, lover,</i>\" she chuckles, giving you a reassuringly affectionate kiss on the cheek before trucking off.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 private function helPartyMenu():void {
@@ -2172,7 +2171,7 @@ private function leaveWithGirls():void {
 	if(player.gender == 3) {
 		outputText("\n\n\"<i>So what parts do you want to use?</i>\" she asks, looking to your mixed endowments.", false);
 		//(Display Options: [As Male] [As Female])
-		simpleChoices("As Male",helScene.foxyFluffsFoursomeAsMale,"As Female",helScene.foxyFluffGirlsFuckSex,"",0,"",0,"",0);
+		simpleChoices("As Male", helScene.foxyFluffsFoursomeAsMale, "As Female", helScene.foxyFluffGirlsFuckSex, "", null, "", null, "", null);
 	}
 	else if(player.gender == 2) doNext(helScene.foxyFluffGirlsFuckSex);
 	else doNext(helScene.foxyFluffsFoursomeAsMale);

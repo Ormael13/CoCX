@@ -115,7 +115,6 @@ private function beatSophieAroundYouMonster():void {
 	startCombat(new Sophie());
 	monster.createStatusAffect(StatusAffects.BimboBrawl,0,0,0,0);
 	monster.createStatusAffect(StatusAffects.GenericRunDisabled,0,0,0,0);
-	doNext(1);
 }
 
 //Successful Beat the Shit Out of Sophie (You Monster)
@@ -881,7 +880,7 @@ public function sophieSmallDongTeases():void {
 	flags[kFLAGS.TIMES_MORNING_SOPHIE_FEMDOMMED]++;
 	player.orgasm();
 	dynStats("lib", -1, "sen", 3);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Alert Message For Going Into Season☼
@@ -1019,7 +1018,7 @@ private function getOutSophieRecruitment():void {
 	outputText("\n\nWith that, she darts above the camp, flying back to her home in the high mountains.  You were having such a nice dream, too.");
 	dynStats("lus", -5);
 	flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Kiss Her
@@ -1057,7 +1056,7 @@ private function sophieRecruitmentFinale():void {
 	outputText(".");
 	outputText("\n\n(<b>Sophie is now available in the followers tab!</b>)");
 	flags[kFLAGS.SOPHIE_RECRUITED_PURE] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 /*Sophie daughter incest.  scenes

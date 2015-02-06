@@ -89,8 +89,9 @@
 		override protected function performCombatAction():void
 		{
 			//tentacle beasts have special AI
-			if (rand(2) == 0 || findStatusAffect(StatusAffects.TentacleCoolDown) >= 0) game.eventParser(special1);
-			else game.eventParser(special2);
+			if (rand(2) == 0 || findStatusAffect(StatusAffects.TentacleCoolDown) >= 0)
+				special1();
+			else special2();
 		}
 
 		public function TentacleBeast()

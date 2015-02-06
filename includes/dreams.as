@@ -354,7 +354,7 @@ public function dreamSelect():Boolean {
 				}
 			}
 		}
-		doNext(1);
+		doNext(playerMenu);
 		return true;
 	}
 	return false;
@@ -432,7 +432,7 @@ public function dayTenDreams():void {
 	}
 	if(player.cor < 50) dynStats("lus", 10);
 	else dynStats("lus", 25);
-	doNext(camp.campMenu);
+	doNext(playerMenu);
 }
 
 public function fuckedUpCockDreamChange():void {
@@ -496,5 +496,5 @@ public function displacerDreamIII():void {
 			player.cocks[x].cockType = CockTypesEnum.DISPLACER;
 		}
 	}
-	doNext(1);
+	doNext(playerMenu);
 }

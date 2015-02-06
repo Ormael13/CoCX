@@ -1,5 +1,13 @@
 ﻿import classes.internals.Utils;
 
+private static const DUNGEON_CAVE_ENTRANCE:int			= 10;
+private static const DUNGEON_CAVE_TUNNEL:int			= 11;
+private static const DUNGEON_CAVE_GATHERING_HALL:int	= 12;
+private static const DUNGEON_CAVE_FUNGUS_CAVERN:int		= 13;
+private static const DUNGEON_CAVE_TORTURE_ROOM:int		= 14;
+private static const DUNGEON_CAVE_SECRET_TUNNEL:int		= 15;
+private static const DUNGEON_CAVE_ZETAZ_CHAMBER:int		= 16;
+
 //Index:
 //-Imp Gang
 //-Plant - "Encapsulation Start"
@@ -11,6 +19,25 @@
 // VALA_CUMBATH_TIMES:int = 433;
 // TIMES_VALA_CONSENSUAL_BIG:int = 767;
 // TIMES_VAPULA_AND_GIANT_VALA:int = 768;
+
+public function enterZetazsLair():void {
+//	inDungeon = true;
+	dungeonEnterRoom(DUNGEON_CAVE_ENTRANCE);
+//	dungeonLoc = 10;
+//	eventParser(1);
+}
+
+public function leaveZetazsLair():void {
+//	inDungeon = false;
+	dungeonLoc = 0;
+	clearOutput();
+	outputText("You leave the cave behind and take off through the deepwoods back towards camp.");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function impHordeStartCombat():void {
+	startCombat(new ImpHorde(), true);
+}
 
 public function impGangAI():void {
 	if(monster.findStatusAffect(StatusAffects.ImpUber) >= 0) impGangUber();
@@ -252,7 +279,7 @@ public function loseToImpMob():void {
 	outputText("Powerless and in the throes of post-coital bliss, you don't object as you're lifted on the table", false);
 	if(!player.hasVagina()) outputText(" and forced to start drinking bottle after bottle of succubi milk", false);
 	outputText(".  You pass out just as round two is getting started, but the demons don't seem to mind....", false);
-	doNext(11080);
+	doNext(loseToImpMobII);
 }
 //[IMP GANGBANG VOL 2]
 public function loseToImpMobII():void {
@@ -283,8 +310,7 @@ public function loseToImpMobII():void {
 	outputText("You gladly live out the rest of your life, fucking and birthing imps over and over as their live-in broodmother.", false);
 	player.orgasm();
 	player.HP += 100;
-	//GAME OVER NERD
-	eventParser(5035);
+	gameOver();
 }
 
 //WIN
@@ -296,9 +322,9 @@ public function impGangVICTORY():void {
 	else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.", false);
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?", false);
-		if(player.gender == 1) simpleChoices("Rape",11078,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
-		if(player.gender == 2) simpleChoices("Rape",11079,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
-		if(player.gender == 3) simpleChoices("Male Rape",11078,"Female Rape",11079,"",0,"",0,"Leave",cleanupAfterCombat);
+		if (player.gender == 1) simpleChoices("Rape", impGangGetsRapedByMale, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
+		if (player.gender == 2) simpleChoices("Rape", impGangGetsRapedByFemale, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
+		if (player.gender == 3) simpleChoices("Male Rape", impGangGetsRapedByMale, "Female Rape", impGangGetsRapedByFemale, "", null, "", null, "Leave", cleanupAfterCombat);
 	}
 	else cleanupAfterCombat();
 }
@@ -354,6 +380,16 @@ public function impGangGetsRapedByFemale():void {
 	cleanupAfterCombat();
 }
 
+public function enterZetazsRoomFromTheSouth():void {
+	if (flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] == 0) {
+		clearOutput();
+		outputText("The door won't budge.");
+		doNext(playerMenu);
+		return;
+	}
+	else dungeonEnterRoom(DUNGEON_CAVE_ZETAZ_CHAMBER);
+//	else dungeonLoc = 16;
+}
 
 //Encapsulation Start
 //[Get it]
@@ -495,7 +531,7 @@ public function encapsulationPodAI():void {
 			else outputText("thickening your fluid-filled prison with nutrients.", false);
 		}
 		//[NEXT – CHOOSE APPRORIATE]
-		doNext(11083);
+		doNext(loseToThisShitPartII);
 		return;
 	}
 	//Set flags for rounds
@@ -560,8 +596,7 @@ public function loseToThisShitPartII():void {
 		outputText(".  With such stimulation coming so closely on the heels of your last orgasm, [eachCock] is suffering painful levels of pleasure.  Your whole body shakes from the sensory overload; though with your muscles so completely shut down, it's more of a shiver.\n\n", false);
 		
 		outputText("Another wave of sperm begins the slow escape from your helpless, pinned form, drawn out by the fungus' constant sexual ministrations.  The fluid inside your pod gurgles noisily as the fluids are exchanged, but the sensory input doesn't register to your overloaded, drugged-out shell of a mind.  You've lost yourself to mindless pleasure, and repeated, endless orgasms.  The rest of your life is spent floating in an artificial womb, orgasming over and over to feed your fungus prison, and enjoying the pleasure that long ago eroded your ability to reason.", false);
-		eventParser(5035);
-		//GAME OVER 
+		gameOver();
 	}
 	//(FEM)
 	else {
@@ -570,8 +605,7 @@ public function loseToThisShitPartII():void {
 		outputText("The steady rhythm of your penetration sends rockets of bliss-powered pleasure up your spinal cord and straight into your brain, where it explodes in orgasm.  Your body barely twitches, too relaxed to work up any muscle response, involuntary or otherwise.  A moment to rest never presents itself.  The cruel fungus never relents.  It never slows, unless it's only the briefest pause to intensify the next thrust.  Were you in the open air, away from the strange fluid you're now breathing, you'd be twisting and screaming with pleasure.  Instead you float and cum in silence.\n\n", false);
 	
 		outputText("Fluids gurgle and shift inside the pod as they are exchanged.  If you were capable of noticing the sound or change, you might wonder if it's harvesting your sexual fluids, but even those thoughts are beyond you now. You've lost yourself to mindless pleasure, and repeated, endless orgasms.  The rest of your life is spent floating in an artificial womb, orgasming over and over to feed your fungus prison, and enjoying the pleasure that long ago eroded your ability to reason.", false);
-		eventParser(5035);
-		//GAME OVER 
+		gameOver();
 	}
 }
 
@@ -657,7 +691,7 @@ public function useValaPtII():void {
 		outputText("You clutch your " + allBreastsDescript() + " and squeeze the " + nippleDescript(0) + " until they hurt, the agony giving you strength to drive the dildo back into the fairy. She cums before you do, her pulsing walls locking down and driving the dildo out, inch by painful inch, deeper into your body until the base is so far against your gut that it is pushed into your furthest recesses with a toe-curling, wet slap. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength redoubles and you thrust back, your " + cockDescript(0) + " penetrating her spongy, well-used cervix, her womb sucking you inside it. You release the knotted tension, spraying your spunk deep inside her. You slap your " + buttDescript() + " against hers with each pulsing load, your pussy clenching at the dildo stuffing it even as your empty your seed into the chained slave.  You try to go limp, but the double penetrated girl keeps you from pulling out, both holes clenching you against her until every last drop of your sperm has filled her greedy womb. Fairy cum drips down your length, while the flared tip deep inside her large intestine keeps your pussy twitching against her posterior. You jill your " + clitDescript() + " for a few minutes afterward, just enjoying the afterglow as your strength returns and the fairy's body unclenches, releasing you from your breeder's embrace, the minotaur dildo still halfway up her ass. You remind yourself to clean your " + player.armorName + " after this is over, sliding into them with wet, squishing noises. Giving your drooling fairy girl's rump a slap on the way out, you head back into the dungeon- you've got demons to stomp.", false);
 	}
 	flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Free]
@@ -705,7 +739,7 @@ public function healVala():void {
 
 		//(Vala unlocked in The Wet Bitch)[End Encounter]
 		flags[kFLAGS.FREED_VALA] = 1;
-		doNext(1);
+		doNext(playerMenu);
 	}
 	
 }
@@ -717,7 +751,7 @@ public function healValaPartTwoTheHealingHealsOfRevenge():void {
 	outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it is the lives you save that really make you feel like a hero. You sigh contentedly and press on. You've got demons to dethrone.", false);
 	//[End Encounter]
 	flags[kFLAGS.FREED_VALA] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Sex]
@@ -800,7 +834,7 @@ public function valaGetsSexedPtDuece():void {
 	}
 	//[End Encounter]
 	flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Reject]
@@ -821,7 +855,7 @@ public function rejectFuckingVala():void {
 	}
 	//Initiate fight
 	startCombat(new Vala(),true);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 
@@ -971,8 +1005,7 @@ public function badEndValaNumber1():void {
 
 	outputText("You giggle, mindlessly, and let your Mistress sate her unquenchable lust with your yielding body, savoring the submission. She rides you raw, fucking your drug and sex-addled body hard enough to knock the memories of the day out of your head, just as she did yesterday and the day before that. With each passing day, you lose more of yourself to your Mistress and, in time, all that is left is the warped fairy's broken Pet.", false);  
 	
-	//GAME OVER.
-	eventParser(5035);
+	gameOver();
 }
 
 //BAD END 2-
@@ -1005,8 +1038,7 @@ public function badEndValaNumber2Pt2():void {
 	
 	outputText("\"<i>You're looking more like her by the second,</i>\" Zetaz compliments, stroking your now-flawless face. \"<i>Don't worry about that pesky mind of yours- I don't like using drugs to wipe that imperfection away like some of my kin. No, we'll just use you until you break. Perhaps I'll let Vala have you from time to time, too. Won't that be fun? The two of you will grow to be inseparable, I'm sure.</i>\" Zetaz steps back and signals the imps clinging to the fairy to come down. \"<i>Why don't we get started?</i>\"", false);
 	
-	//GAME OVER.
-	eventParser(5035);
+	gameOver();
 }
 
 //Fight Win-
@@ -1018,7 +1050,7 @@ public function fightValaVictory():void {
 	//[Fuck] [Leave]
 	if(player.gender > 0) {
 		outputText(" What will you do?", false);
-		simpleChoices("Fuck",valaFightVictoryFuck,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
+		simpleChoices("Fuck", valaFightVictoryFuck, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
 	}
 	else cleanupAfterCombat();
 	
@@ -1142,7 +1174,7 @@ public function leftValaAlone():void {
 		addButton(2, "Wake", wakeValaUpBeforeYouGoGo);
 	}
 	if (player.lust >= 33 && shouldraFollower.followerShouldra()) addButton(3, "ShouldraVala", shouldraFollower.shouldraMeetsCorruptVala);
-	addButton(4, "Leave", camp.campMenu);
+	addButton(4, "Leave", playerMenu);
 }
 
 //[Heal]
@@ -1152,7 +1184,7 @@ public function tryToHealVala():void {
 	//(Without Pure Honey)
 	if(!(player.hasItem(consumables.PURHONY,1) || player.hasItem(consumables.P_PEARL,1))) {
 		outputText("You try your best with what you've got, but nothing seems to restore the broken fairy's mind to her sex-addled  body. You're going to have to go out and gather more materials. Surely there's something that can break the damage the imps have done to Vala.", false);
-		doNext(1);
+		doNext(playerMenu);
 	}
 	//(With Pure Honey)
 	else if(player.hasItem(consumables.PURHONY,1)) {
@@ -1176,7 +1208,7 @@ public function tryToHealVala():void {
 		outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.", false);
 		//(Vala unlocked in The Wet Bitch)[End Encounter]
 		flags[kFLAGS.FREED_VALA] = 1;
-		doNext(1);
+		doNext(playerMenu);
 	}
 }
 
@@ -1189,7 +1221,7 @@ public function tryToHealValaWHoney2():void {
 	//(Vala unlocked in The Wet Bitch)
 	flags[kFLAGS.FREED_VALA] = 1;
 	//[End Encounter]
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Use]
@@ -1251,7 +1283,7 @@ public function useValaOHYEAHKOOLAIDPTII():void {
 	//DAH END
 	player.orgasm();
 	dynStats("cor", 1);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Wake]
@@ -1335,7 +1367,7 @@ public function wakeMeUpBeforeValaGoGosPtII():void {
 	player.orgasm();
 	dynStats("cor", 1);
 	flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Answers the simpler question 'Is Vala at the bar right now' rather than 'can Vala have sex with you right now'
@@ -1420,7 +1452,7 @@ public function cleansedFirstRemeet():void {
 
 	outputText("\"<i>I've been looking forward to this,</i>\" she whispers, flying up to steal a kiss from you, her soft, fey lips leaving a taste of pure, spring rain on the tip of your tongue. Piece by piece, she strips the clothes from your shoulders and hips, leaving warm kisses on your exposed skin with every piece she removes. When your body is laid bare before her, the pixie raises her hands to her own dress. She hesitates to expose the permanent scars the imps left on her, but sighing, she laughs and a sweet wind sweeps through the storeroom. \"<i>Silly to be bashful around you, of all people,</i>\" she chuckles, sliding out of her verdant silk, pulling pins from her bun to let long, violet tresses spill down her shoulders with a shake of her head. She bats her eyes at you over one shoulder and flashes a wry little smile. \"<i>If we can replace every hash mark on my back with one of your visits, I'll switch to backless dresses,</i>\" she teases. Flying over you, she lands her delicate legs and plump, breeder's rear in your lap, wrapping her arms around your shoulders and hugging you tightly. \"<i>So, what's on your mind, hero?</i>\"", false);
 	//[You][Leave]
-	simpleChoices("You",cleansedValaFuckHerBrainsOut,"",0,"",0,"",0,"Leave",telAdre.barTelAdre);
+	simpleChoices("You", cleansedValaFuckHerBrainsOut, "", null, "", null, "", null, "Leave", telAdre.barTelAdre);
 }
 
 //[You] 
@@ -1567,7 +1599,7 @@ public function faerieOrgyFuck():void {
 	//[Herm]
 	if(player.gender == 3) {
 		outputText("Vala folds her arms across her breast. \"<i>But which one should we use?</i>\" she ponders. \"<i>I wouldn't advise trying both- your mind wouldn't be able to take it. You'd end up worse than just mind-broken, you'd be a drooling shell. And I'd never do that to my hero,</i>\" she smiles and gives you a wink. \"<i>So, what would you prefer?</i>\"\n\n", false);
-		simpleChoices("Male",faerieOrgyFuckMaleContinue,"Female",faerieOrgyFuckFemaleContinue,"",0,"",0,"",0);
+		simpleChoices("Male", faerieOrgyFuckMaleContinue, "Female", faerieOrgyFuckFemaleContinue, "", null, "", null, "", null);
 	}
 	else if(player.gender == 2) doNext(faerieOrgyFuckFemaleContinue);
 	else if(player.gender == 1) doNext(faerieOrgyFuckMaleContinue);
@@ -1622,7 +1654,7 @@ public function faerieOrgyFuckFemaleContinue():void {
 public function takeBondageStraps():void {
 	clearOutput();
 	flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
-	inventory.takeItem(armors.BONSTRP, camp.campMenu);
+	inventory.takeItem(armors.BONSTRP, playerMenu);
 }
 
 //ZETAZ START
@@ -1757,7 +1789,7 @@ public function gigaArouse():void {
 		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + monster.a + monster.short + "'s dick when it's rammed inside you?  ", false);
 	}
 	if(player.lust >= 100) doNext(endLustLoss)
-	else doNext(1);
+	else doNext(playerMenu);
 }
 
 
@@ -1776,7 +1808,7 @@ public function defeatZetaz():void {
 	outputText(", you need to find her and bring her down.  What do you do?", false);
 	outputText("\n\n(Sexually Interrogate, Kill Him, or Offer Safety for Information?)\n", false);
 	//[Sexual Interrogation] [Brutal Interrogation] [Release for Info]
-	simpleChoices("Sexual",sexualInterrogation,"End Him",endZetaz,"Safety",releaseZForInfo,"",0,"",0);
+	simpleChoices("Sexual", sexualInterrogation, "End Him", endZetaz, "Safety", releaseZForInfo, "", null, "", null);
 }
 
 //[Release Zetaz 4 Info Win]
@@ -2026,7 +2058,7 @@ public function zetazBadEndEpilogue():void {
 	}
 	player.orgasm();
 	player.HP += 150;
-	eventParser(5035);
+	gameOver();
 }
 
 //[HERMS]
@@ -2207,7 +2239,7 @@ private function incubusDeal():void {
 	
 	//[Next – to room]
 	flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 private function incubusNoDeal():void {
@@ -2215,7 +2247,7 @@ private function incubusNoDeal():void {
 	clearOutput();
 	flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = -1;
 	outputText("Sean nods, grabs a pack, and takes off running before you have a chance to kill him.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 public function incubusShop():void {
@@ -2238,7 +2270,7 @@ public function incubusShop():void {
 			addButton(4, consumables.BIMBOLQ.shortName, telAdre.niamh.seanBimboBrewing);
 		}
 	}
-	addButton(9, "Leave", camp.campMenu);
+	addButton(9, "Leave", playerMenu);
 }
 
 private function incubusBuy(itype:ItemType):void {

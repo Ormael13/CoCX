@@ -32,7 +32,7 @@ public function arriveWithLacticWaifuAtCamp():void {
 	
 	//[Name Field.  If left empty, defaults to "Bath Slut"]
 	menu();
-	addButton(0,"Next",nameZeMilkBath);
+	addButton(0, "Next", nameZeMilkBath);
 	mainView.nameBox.text = "";
 }
 
@@ -99,7 +99,7 @@ private function nameZeMilkBath():void
 		
 		//[Next time Rath's at camp and PC accesses Milky's meny, play the Arrival w/ Rath scene, sans first sentence]
 	}
-	kGAMECLASS.inDungeon = false;
+	//Set before this function is called:	kGAMECLASS.inDungeon = false;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -123,7 +123,7 @@ public function ratducto():void {
 	//{Plot Item gained: "Super Reducto"}
 	player.createKeyItem("Super Reducto",0,0,0,0);
 	outputText("\n\n(<b>Key Item Acquired: Super Reducto</b>)");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 

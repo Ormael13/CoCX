@@ -25,8 +25,8 @@ public var date:Date = new Date();
 //if ( ApplicationDomain.currentDomain.hasDefinition("Creature")) trace("Class exists");
 
 //dungeoneering variables
-public var inDungeon:Boolean = false;
-public var dungeonLoc:Number = 0;
+//Setting dungeonLoc = 0 handles this:	public var inDungeon:Boolean = false;
+public var dungeonLoc:int = 0;
 
 // To save shitting up a lot of code...
 public var inRoomedDungeon:Boolean = false;

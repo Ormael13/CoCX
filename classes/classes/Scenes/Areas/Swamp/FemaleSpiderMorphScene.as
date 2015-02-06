@@ -53,7 +53,7 @@ package classes.Scenes.Areas.Swamp
 			else outputText("You go exploring in the swamp, and before you get far, a female spider-morph appears!  She's clearly different than the last one you ran into, though many of her features remain the same.  You realize she's no more than a dozen paces away and slowly approaching with a strange glint in her eye.\n\n", false);
 			//Menu for either
 			outputText("What do you do?", false);
-			simpleChoices("Fight", fightFSpiderMorph, "Try to Talk", talkToFSpiderMorph, "", 0, "", 0, "Leave", runFromFSpiderMorph);
+			simpleChoices("Fight", fightFSpiderMorph, "Try to Talk", talkToFSpiderMorph, "", null, "", null, "Leave", runFromFSpiderMorph);
 			//Incremement 'times encountered spider-girls'
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00270]++;
 		}
@@ -63,7 +63,6 @@ package classes.Scenes.Areas.Swamp
 		{
 			startCombat(new FemaleSpiderMorph());
 			spriteSelect(73);
-			eventParser(1);
 		}
 
 		//Run
@@ -101,7 +100,7 @@ package classes.Scenes.Areas.Swamp
 					}
 					outputText(" well, you're the first sane person I've had a chance to ask.  Oh fuck it, can I tie you up and fuck you? Please?</i>\"\n\n", false);
 					outputText("Do you let her fuck you?", false);
-					simpleChoices("Yes", voluntaryFemaleSpiderMorphRapesYou, "", 0, "", 0, "", 0, "Leave", declinedCrazyFemaleSpiderMorphSexFunTimes);
+					simpleChoices("Yes", voluntaryFemaleSpiderMorphRapesYou, "", null, "", null, "", null, "Leave", declinedCrazyFemaleSpiderMorphSexFunTimes);
 				}
 				//(OPTION 2 - GIFT) 
 				else {
@@ -480,7 +479,7 @@ package classes.Scenes.Areas.Swamp
 					if (player.cockThatFits(monster.analCapacity()) != -1) analFuck = evilSpiderGirlVictoryAnal;
 					else outputText("  <b>Her ass is too tight for you to fit inside.</b>", false);
 				}
-				simpleChoices("Fuck Ass", analFuck, "Fuck Pussy", pussyFuck, "Scissor", scissor, "", 0, "Leave", cleanupAfterCombat);
+				simpleChoices("Fuck Ass", analFuck, "Fuck Pussy", pussyFuck, "Scissor", scissor, "", null, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}

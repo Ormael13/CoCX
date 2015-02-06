@@ -47,9 +47,9 @@ public function mainMenu(e:MouseEvent = undefined):void
 
 	startupScreenBody();
 
-	var resume:Number = 0;
-	if(player.str > 0)  //we're in a game, allow resume.
-		resume = 1;
+	var resume:Function = null;
+	if (player.str > 0)  //we're in a game, allow resume.
+		resume = playerMenu;
 
 
 	// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
@@ -57,14 +57,14 @@ public function mainMenu(e:MouseEvent = undefined):void
 	// since the images haven't loaded yet.
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
-	choices("",  0,
+	choices("", null,
 			"Image Credits", imageCreditsScreen,
 			"Credits", creditsScreen,
-			"", 0,
+			"", null,
 			"Instructions", howToPlay,
 			"Debug Info", debugPane,
-			"", 0,
-			"", 0,
+			"", null,
+			"", null,
 			"Settings", settingsScreen,
 			"Resume", resume);
 

@@ -128,10 +128,10 @@ private function keltRequiresNakedness():void {
 	outputText("Do you obey his demand?", false);
 	if(player.cor > 70 && player.inte > 40 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-		simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "Fight Back", keltResistance, "", 0, "Never", keltRefuseNakedness);
+		simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "Fight Back", keltResistance, "", null, "Never", keltRefuseNakedness);
 		return;
 	}
-	else simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "", 0, "", 0, "Never", keltRefuseNakedness);
+	else simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "", null, "", null, "Never", keltRefuseNakedness);
 	//(Corruption higher than 60 automatically chooses eagerly)
 	if(player.cor + player.lib + player.lust >= 180) {
 		outputText(" Of course you do.  You love putting on a show.", false);
@@ -284,9 +284,9 @@ private function keltRequiresBlowjobs():void {
 	//Never!			Shamefully			Eagerly
 	if(player.inte > 40 && player.cor > 70 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-		simpleChoices("Shamefully",keltBlowjobRequirementShamefully,"Eagerly",keltBlowjobRequirementEagerly,"Fight Back",keltResistance,"",0,"Never!",keltBlowjobRequirementNever);
+		simpleChoices("Shamefully", keltBlowjobRequirementShamefully, "Eagerly", keltBlowjobRequirementEagerly, "Fight Back", keltResistance, "", null, "Never!", keltBlowjobRequirementNever);
 	}
-	else simpleChoices("Shamefully",keltBlowjobRequirementShamefully,"Eagerly",keltBlowjobRequirementEagerly,"Resist",0,"",0,"Never!",keltBlowjobRequirementNever);
+	else simpleChoices("Shamefully", keltBlowjobRequirementShamefully, "Eagerly", keltBlowjobRequirementEagerly, "Resist", null, "", null, "Never!", keltBlowjobRequirementNever);
 }
 
 //Blowjob Requirement, Never
@@ -420,7 +420,7 @@ private function keltMainEncounterAfterNakedReq():void {
 				
 				if(player.inte > 40 && player.cor > 70 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 					outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-					simpleChoices("Yes",keltReluctantlyGetNaked,"No",keltRefuseNakedness,"Fight Back",keltResistance,"",0,"",0);
+					simpleChoices("Yes", keltReluctantlyGetNaked, "No", keltRefuseNakedness, "Fight Back", keltResistance, "", null, "", null);
 				}
 				else doYesNo(keltReluctantlyGetNaked,keltRefuseNakedness);
 				return;
@@ -699,7 +699,7 @@ private function keltMainEncounterPostBlowjob():void {
 		else {
 			outputText("Despite the need, despite the desire, you are still in control of yourself enough to make a choice.  Do you submit to the centaur's will, and your own hunger?  Or will you somehow find the strength to walk away?", false);
 			//Submit				Resist!
-			simpleChoices("Submit",keltSubmitGivingBJ,"Resist",keltResistGivingBJ,"",0,"",0,"",0);
+			simpleChoices("Submit", keltSubmitGivingBJ, "Resist", keltResistGivingBJ, "", null, "", null, "", null);
 			return;
 		}
 	}
@@ -839,7 +839,7 @@ private function keltBadEndEpilogue():void {
 	outputText("The centaur noticed her looking, and grinned.  \"<i>You like what you see?  Maybe I could teach you a few things.  If you're not as stupid as that slut, of course.</i>\"\r\r", false);
 	outputText("He waved confidently at the mare, still nursing her young with a rapturous look on her face.  Cum slowly oozed out of her pussy, pooling on the ground beneath her, and the heroine felt a little envious for a moment.  Most horses had harems, the virile male satisfying many women at once.  How many times a day was this mare fucked?\r\r", false);
 	outputText("The centaur grinned, knowingly.  His musk was heavy on the air, a thick, animalistic scent of masculinity.  \"<i>Well, I could do with a little distraction anyway.  Stupid whore may be a good fuck, but a man needs to... spread out a little.  Come back tomorrow, and maybe I can knock some fucking sense into that empty head of yours.  My name's Kelt.</i>\"\r\r", false);
-	eventParser(5035);
+	getGame().gameOver();
 }
 //Requires 40+ int & 70+ corruption to resist his 'aura'.
 private function keltResistance():void {

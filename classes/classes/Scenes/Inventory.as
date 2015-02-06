@@ -43,12 +43,12 @@ package classes.Scenes
 		public function inventoryMenu():void {
 			var x:int;
 			var foundItem:Boolean = false;
-			if (!getGame().inCombat) {
-				spriteSelect(-1);
-				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
+			if (getGame().inCombat) {
+				callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
-				callNext = camp.campMenu; //Player will return to combat after item use
+				spriteSelect(-1);
+				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
 			}
 			hideMenus();
 			hideUpDown();
@@ -89,7 +89,7 @@ package classes.Scenes
 			}
 			if (!foundItem) {
 				outputText("\nYou have no usable items.");
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			if (getGame().inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv1(StatusAffects.Sealed) == 3) {
@@ -99,9 +99,9 @@ package classes.Scenes
 			}
 			outputText("\nWhich item will you use?");
 			if (getGame().inCombat)
-				addButton(9, "Back", eventParser, 5000); //Player returns to the combat menu on cancel
-			else addButton(9, "Back", camp.campMenu);
-			menuLoc = 1;
+				addButton(9, "Back", kGAMECLASS.combatMenu, false); //Player returns to the combat menu on cancel
+			else addButton(9, "Back", playerMenu);
+//Gone			menuLoc = 1;
 		}
 		
 		private function useItemInInventory(slotNum:int):void {
@@ -117,15 +117,22 @@ package classes.Scenes
 			else {
 				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
 			}
-			if (!getGame().inCombat) {
-				itemGoNext();
-			}
+			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
+/* menuLoc is no longer needed, after enemyAI game will always move to the next round			
 			else if (menuLoc == 1) {
 				menuLoc = 0;
 				if (!combatRoundOver()) {
 					outputText("\n\n");
 					enemyAI();
 				}
+			}
+*/
+		}
+		
+		private function inventoryCombatHandler():void {
+			if (!combatRoundOver()) { //Check if the battle is over. If not then go to the enemy's action.
+				outputText("\n\n");
+				enemyAI();
 			}
 		}
 		
@@ -162,7 +169,7 @@ package classes.Scenes
 			if (itype == ItemType.NOTHING) return;
 			if (nextAction != null)
 				callNext = nextAction;
-			else callNext = camp.campMenu;
+			else callNext = playerMenu;
 			//Check for an existing stack with room in the inventory and return the value for it.
 			var temp:int = player.roomInExistingStack(itype);
 			if (temp >= 0) { //First slot go!
@@ -323,7 +330,7 @@ package classes.Scenes
 			clearOutput(); //Selects an item from a gear slot. Rewritten so that it no longer needs to use numbered events
 			hideUpDown();
 			if (!itemAnyInStorage(storage, startSlot, endSlot)) { //If no items are left then return to the camp menu. Can only happen if the player removes the last item.
-				camp.campMenu();
+				playerMenu();
 				return;
 			}
 			outputText("What " + text + " slot do you wish to take an item from?");
@@ -418,18 +425,18 @@ package classes.Scenes
 		public function giveHumanizer():void {
 			if(flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
 				outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
-				eventParser(5035);
+				getGame().gameOver();
 				return;
 			}
 			outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n", true);
-			inventory.takeItem(consumables.HUMMUS_, camp.campMenu);
+			inventory.takeItem(consumables.HUMMUS_, playerMenu);
 			flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
 		}
 		
 		//Create a storage slot
 		public function createStorage():Boolean {
 			if (itemStorage.length >= 16) return false;
-			var newSlot:* = new ItemSlotClass();
+			var newSlot:ItemSlotClass = new ItemSlotClass();
 			itemStorage.push(newSlot);
 			return true;
 		}
@@ -461,7 +468,7 @@ package classes.Scenes
 				gearStorage.splice(0, gearStorage.length);
 			}
 			//Rebuild a new one!
-			var newSlot:*;
+			var newSlot:ItemSlotClass;
 			while (gearStorage.length < 18) {
 				newSlot = new ItemSlotClass();
 				gearStorage.push(newSlot);

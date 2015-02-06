@@ -50,7 +50,7 @@ public function approachIfris():void {
 	}
 	outputText("(You could go ahead and work out while she watches, ask her to join you, or leave.)", false);
 	//Work out || Ask Her To Join || Leave?
-	simpleChoices("Work Out",workOutForIfris,"Join Me?",askIfrisToJoinYou,"",0,"",0,"Leave",telAdre.gymDesc);
+	simpleChoices("Work Out", workOutForIfris, "Join Me?", askIfrisToJoinYou, "", null, "", null, "Leave", telAdre.gymDesc);
 }
 //3a-PC responds they want to work out-
 private function workOutForIfris():void {
@@ -67,7 +67,7 @@ private function workOutForIfris():void {
 
 	outputText("\"<i>I hope you don't mind if I keep you company. I'd love to... see you in action.</i>\"\n\n", false);
 	//WORK OUT or SHOW OFF?
-	simpleChoices("Work Out",liftWhileIfrisWatches,"Show Off",showOffForIfris,"",0,"",0,"",0);
+	simpleChoices("Work Out", liftWhileIfrisWatches, "Show Off", showOffForIfris, "", null, "", null, "", null);
 }
 //3b-PC asks if she'd like to join them-
 private function askIfrisToJoinYou():void {
@@ -84,7 +84,7 @@ private function askIfrisToJoinYou():void {
 
 	outputText("You shrug at her response, but there's something about the way she eyes you now...", false);
 	//WORK OUT or SHOW OFF?
-	simpleChoices("Work Out",liftWhileIfrisWatches,"Show Off",showOffForIfris,"",0,"",0,"",0);
+	simpleChoices("Work Out", liftWhileIfrisWatches, "Show Off", showOffForIfris, "", null, "", null, "", null);
 }
 
 //4a-PC does a modest work out-

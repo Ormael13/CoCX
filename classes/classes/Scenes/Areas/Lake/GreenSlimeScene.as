@@ -789,7 +789,7 @@ internal function rapeOozeWithMilk():void {
 		public function slimeLoss():void
 		{
 			outputText("", true);
-			doNext(1);
+			doNext(playerMenu);
 			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
 				temp = rand(3);
 				if (temp == 0) oozeRapesYouVaginally();

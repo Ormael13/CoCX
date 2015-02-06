@@ -325,7 +325,7 @@ use namespace kGAMECLASS;
 				//Prevent negatives
 				if (HP<=0){
 					HP = 0;
-					if (game.inCombat) game.doNext(5010);
+					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
 				}
 			}
 			return returnDamage;
@@ -1773,10 +1773,28 @@ use namespace kGAMECLASS;
 			if (findStatusAffect(StatusAffects.VineHealUsed) >= 0) removeStatusAffect(StatusAffects.VineHealUsed);
 		}
 
-		public function consumeItem(itype:ItemType, amount:int=1):Boolean
-		{
+		public function consumeItem(itype:ItemType, amount:int = 1):Boolean {
+			if (!hasItem(itype, amount)) {
+				CoC_Settings.error("ERROR: consumeItem attempting to find " + amount + " item" + (amount > 1 ? "s" : "") + " to remove when the player has " + itemCount(itype) + ".");
+				return false;
+			}
+			//From here we can be sure the player has enough of the item in inventory
+			var slot:ItemSlotClass;
+			while (amount > 0) {
+				slot = getLowestSlot(itype); //Always draw from the least filled slots first
+				if (slot.quantity > amount) {
+					slot.quantity -= amount;
+					amount = 0;
+				}
+				else { //If the slot holds the amount needed then amount will be zero after this
+					amount -= slot.quantity;
+					slot.emptySlot();
+				}
+			}
+			return true;
+/*			
 			var consumed:Boolean = false;
-			var slot:*;
+			var slot:ItemSlotClass;
 			while (amount > 0)
 			{
 				if(!hasItem(itype,1))
@@ -1786,7 +1804,7 @@ use namespace kGAMECLASS;
 				}
 				trace("FINDING A NEW SLOT! (ITEMS LEFT: " + amount + ")");
 				slot = getLowestSlot(itype);
-				while (slot != undefined && amount > 0 && slot.quantity > 0)
+				while (slot != null && amount > 0 && slot.quantity > 0)
 				{
 					amount--;
 					slot.quantity--;
@@ -1799,23 +1817,26 @@ use namespace kGAMECLASS;
 			}
 			if(amount == 0) consumed = true;
 			return consumed;
+*/
 		}
 
 		public function getLowestSlot(itype:ItemType):ItemSlotClass
 		{
 			var minslot:ItemSlotClass = null;
-			for each (var slot:ItemSlotClass in itemSlots){
-				if (slot.itype == itype){
-					if (minslot == null || slot.quantity<minslot.quantity){
+			for each (var slot:ItemSlotClass in itemSlots) {
+				if (slot.itype == itype) {
+					if (minslot == null || slot.quantity < minslot.quantity) {
 						minslot = slot;
 					}
 				}
 			}
 			return minslot;
 		}
-		public function hasItem(itype:ItemType, minQuantity:Number=1):Boolean {
-			return itemCount(itype)>=minQuantity;
+		
+		public function hasItem(itype:ItemType, minQuantity:int = 1):Boolean {
+			return itemCount(itype) >= minQuantity;
 		}
+		
 		public function itemCount(itype:ItemType):int {
 			var count:int = 0;
 			for each (var itemSlot:ItemSlotClass in itemSlots){

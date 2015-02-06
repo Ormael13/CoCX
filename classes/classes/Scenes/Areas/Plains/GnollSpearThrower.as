@@ -12,7 +12,7 @@ package classes.Scenes.Areas.Plains
 		private function hyenaPhysicalAttack():void {
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(1);
+			doNext(game.playerMenu);
 			//Blind dodge change
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
@@ -222,7 +222,7 @@ package classes.Scenes.Areas.Plains
 		{
 			var damage:Number = 0;
 //return to combat menu when finished
-			doNext(1);
+			doNext(game.playerMenu);
 //Blind dodge change
 			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);

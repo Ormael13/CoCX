@@ -278,7 +278,7 @@ package classes.Scenes.Monsters
 			else if(player.hasVagina() && x < 0) centaurOnImpFemale();
 			else {
 				outputText("Do you focus on your maleness or girl-parts?", false);
-				simpleChoices("Male",createCallBackFunction(centaurOnImpMale,true),"Female",createCallBackFunction(centaurOnImpFemale,true),"",0,"",0,"",0);
+				simpleChoices("Male", createCallBackFunction(centaurOnImpMale, true), "Female", createCallBackFunction(centaurOnImpFemale, true), "", null, "", null, "", null);
 			}
 		}
 		
@@ -1253,7 +1253,7 @@ package classes.Scenes.Monsters
 					}
 				}
 			}
-			doNext(camp.campMenu);
+			doNext(playerMenu);
 		}
 		
 		public function impRapesYou():void {
@@ -1467,7 +1467,6 @@ package classes.Scenes.Monsters
 			clearOutput();
 			outputText("A large corrupted imp crosses your path. He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
 			startCombat(new ImpLord());
-			doNext(1);
 		}
 		
 		

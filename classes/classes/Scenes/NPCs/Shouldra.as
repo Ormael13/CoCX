@@ -14,7 +14,7 @@ package classes.Scenes.NPCs
 		private function shouldrattack():void {
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(1);
+			doNext(game.playerMenu);
 			//Determine if dodged!
 			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
 				outputText("The girl wades in for a swing, but you deftly dodge to the side. She recovers quickly, spinning back at you.", false);

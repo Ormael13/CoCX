@@ -350,19 +350,18 @@ private function dontFlyWithWithMeYouCrazyBitch():void {
 	//Randomly present flying option scene in future interactions. 
 	//[Talk] [Sex] [Eat] [Fight] [Leave]
 	menu();
-	addButton(0,"Appearance",minervaAppearance);
-	addButton(1,"Talk",minervaTalkSelect);
-	if(player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
-	addButton(3,"Eat",eatSomethingYouCunt);
-	addButton(4,"Drink",getADrinkYouBitch);
-	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
+	addButton(0, "Appearance", minervaAppearance);
+	addButton(1, "Talk", minervaTalkSelect);
+	if(player.lust >= 33) addButton(2, "Sex", minervaSexMenu);
+	addButton(3, "Eat", eatSomethingYouCunt);
+	addButton(4, "Drink", getADrinkYouBitch);
+	addButton(5, "Spar", fightMinerva);
+	addButton(9, "Leave", camp.returnToCampUseOneHour);
 }
 
 private function fightMinerva():void {
 	startCombat(new Minerva(),true);
 	spriteSelect(95);
-	eventParser(1);
 }
 
 //1-2 Repeatable Cute, Romantic Encounter. Only if PC accepted Minerva's feelings. Add to normal encounters.

@@ -494,13 +494,15 @@
 			return cockNoun(cockType);
 		}
 
-		public static function cockNoun(cockType:*):String
+		public static function cockNoun(cockType:CockTypesEnum):String
 		{
+			/*
 			if (cockType is int) {
 				trace("Someone is still calling cockNoun with an integer cock type");
 				trace("Fix this shit already, dammit!")
 				cockType = CockTypesEnum.ParseConstantByIndex(cockType);
 			}
+			*/
 			if (cockType == CockTypesEnum.HUMAN) {
 				// Yeah, this is kind of messy
 				// there is no other easy way to preserve the weighting fenoxo did
@@ -987,13 +989,15 @@
 			return description;
 		}
 
-		public static function cockMultiNoun(cockType:*):String
+		public static function cockMultiNoun(cockType:CockTypesEnum):String
 		{
+			/*
 			if (cockType is int) {
 				trace("Someone is still calling cockNoun with an integer cock type");
 				trace("Fix this shit already, dammit!");
 				cockType = CockTypesEnum.ParseConstantByIndex(cockType);
 			}
+			*/
 			var options:Array;
 			var description:String = "";
 			if (cockType == CockTypesEnum.HUMAN) {

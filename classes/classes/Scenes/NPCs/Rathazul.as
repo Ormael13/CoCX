@@ -132,10 +132,11 @@ public function campRathazul():void {
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, " + player.short + "?</i>\"\n\n", true);
 	//player.createStatusAffect(StatusAffects.metRathazul,0,0,0,0);
 	offered = rathazulWorkOffer();
-	if(!offered) {
+	if (!offered) {
 		outputText("He sighs dejectedly, \"<i>I don't think there is.  Why don't you leave me be for a time, and I will see if I can find something to aid you.</i>\"", false);
-		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) doNext(74);
-		else doNext(1);
+		if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
+			doNext(camp.campFollowers);
+		else doNext(playerMenu);
 	}
 
 }
@@ -574,7 +575,7 @@ private function growLethiciteDefenseYesYesYes():void {
 	outputText("Rathazul nods and produces a mallet and chisel from his robes.  With surprisingly steady hands for one so old, he holds the chisel against the crystal and taps it, easily cracking off a large shard.  Rathazul gathers it into his hands before slamming it down into the dirt, until only the smallest tip of the crystal is visible.  He produces vials of various substances from his robe, as if by magic, and begins pouring them over the crystal.  In a few seconds, he finishes, and runs back towards his equipment.\n\n\"<i>You may want to take a step back,</i>\" he warns, but before you have a chance to do anything, a thick trunk covered in thorny vines erupts from the ground.  Thousands of vine-like branches split off the main trunk as it reaches thirty feet in the air, radiating away from the trunk and intertwining with their neighbors as they curve back towards the ground.  In the span of a few minutes, your camp gained a thorn tree and a thick mesh of barbed vines preventing access from above.");
 	player.createStatusAffect(StatusAffects.DefenseCanopy, 0, 0, 0, 0);
 	player.addStatusValue(StatusAffects.MaraesLethicite, 2, 1);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 private function growLethiciteDefenseGuessNot():void {

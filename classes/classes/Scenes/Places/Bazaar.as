@@ -48,8 +48,8 @@ private function approachBazaarGuard():void {
 	if(player.cor < 33) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.", false);
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.", false);
 	outputText("</i>\"", false);
-	if(player.cor < 33) simpleChoices("",0,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
-	else simpleChoices("Enter",enterTheBazaar,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+	if (player.cor < 33) simpleChoices("", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+	else simpleChoices("Enter", enterTheBazaar, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 }
 
 public function enterTheBazaar():void {
@@ -220,8 +220,9 @@ private function buyCockMilker():void {
 	player.gems -= 200;
 	statScreenRefresh();
 	player.createKeyItem("Cock Milker",0,0,0,0);
-	simpleChoices("JoeyMassage",joeyMassage,"Androgyny",0,"Joey'sOffer",0,"",0,"Leave",enterTheBazaar);
+	simpleChoices("JoeyMassage", joeyMassage, "Androgyny", null, "Joey'sOffer", null, "", null, "Leave", enterTheBazaar);
 }
+
 private function joeyAndrogyny():void {
 	outputText("", true);
 	if(player.gems < 500) {
@@ -409,13 +410,13 @@ private function joeyBigBalls():void {
 		if(player.cor > 70) outputText("; you won't get to watch him fountaining all that pearly spunk like a perverted statue", false);
 		outputText(".  What do you decide?", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut",suckOffJoeysGardenHose,"MasturbateOut",joeyWanksItOut,"",0,"",0,"",0);
+		simpleChoices("SuckCumOut", suckOffJoeysGardenHose, "MasturbateOut", joeyWanksItOut, "", null, "", null, "", null);
 	}
 	//(Sucked Joey once) 
 	else {
 		outputText("As soon as you enter The Slippery Squeeze, you know somehow that something is amiss.  Joey staggers out from a back-room, his balls once again swollen huge and round.  He looks at you and admits, \"<i>Someone's <b>got</b> to be sabotaging me... gods, this hurts!  Could you help me, or should I go in the back and jerk it out myself?</i>\"\n\n", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut",suckOffJoeysGardenHose,"MasturbateOut",joeyWanksItOut,"",0,"",0,"",0);
+		simpleChoices("SuckCumOut", suckOffJoeysGardenHose, "MasturbateOut", joeyWanksItOut, "", null, "", null, "", null);
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00348]++;	
 }

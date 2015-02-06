@@ -424,7 +424,7 @@ package coc.view {
 		};
 
 		public function getButtonText( index :int ) :String {
-			var matches :*;
+//			var matches :*;
 
 			if( index < 0 || index > BOTTOM_BUTTON_COUNT ) {
 				return '';

@@ -136,7 +136,6 @@ public function encounterAJerkInThePlains():void {
 	}
 	//FIRST COMBAT – Main Screen
 	startCombat(new Hel());
-	doNext(1);
 }
 
 //FUCKBUDDY GREETING (edited)
@@ -158,11 +157,11 @@ private function greetHelAsFuckbuddies():void {
 private function postHelFuckBuddyFollowup():void {
 	spriteSelect(68);
 	if(followerHel()) {
-		eventParser(camp.returnToCampUseOneHour);
+		camp.returnToCampUseOneHour();
 		return;
 	}
 	if(flags[kFLAGS.HEL_FUCKBUDDY] == 0) {
-		eventParser(camp.returnToCampUseOneHour);
+		camp.returnToCampUseOneHour();
 		return;
 	}
 	outputText("", true);
@@ -327,7 +326,7 @@ private function helFuckMenu():void {
 	
 	if(player.lust < 33) {
 		outputText("\n\n<b>You aren't really up for sex right now.</b>", false);
-		simpleChoices("",0,"",0,"",0,"",0,"Leave",leave);
+		simpleChoices("", null, "", null, "", null, "", null, "Leave", leave);
 		return;
 	}
 	var getLicked:Function = null;
@@ -976,9 +975,10 @@ private function helMinotaurThreesome():void {
 
 	///Player's Options:
 	//Male/Herm – [Fuck her Ass] [Mino Lick] [Leave]
-	if(player.hasCock() && player.cockThatFits(85) >= 0) simpleChoices("FuckHerAss",fuckHerAss,"Mino Lick",helMinoThreeSomeLickItsDick,"",0,"",0,"Nope",leaveMinotaurHelThreesome);
+	if (player.hasCock() && player.cockThatFits(85) >= 0)
+		simpleChoices("FuckHerAss", fuckHerAss, "Mino Lick", helMinoThreeSomeLickItsDick, "", null, "", null, "Nope", leaveMinotaurHelThreesome);
 	//Female/Genderless – [Mino Lick] [Leave]
-	else simpleChoices("",0,"Mino Lick",helMinoThreeSomeLickItsDick,"",0,"",0,"Nope",leaveMinotaurHelThreesome);
+	else simpleChoices("", null, "Mino Lick", helMinoThreeSomeLickItsDick, "", null, "", null, "Nope", leaveMinotaurHelThreesome);
 }
 //[Leave]
 private function leaveMinotaurHelThreesome():void {
@@ -1129,19 +1129,20 @@ private function askHelAboutAttackingYou():void {
 	outputText("You suppose you could ask her to stop attacking you anyway, though.  One less threat out here couldn't hurt, and maybe – just maybe – you could skip the formalities when you meet and go straight to the really fun part.\n\n", false);
 	flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] = 1;
 	//[Stop] [Say Nothing]
-	simpleChoices("Stop",telHelSTOPATTACKINGMEYOUBITCH,"Say Nothing",helChatMenu,"",0,"",0,"",0);
+	simpleChoices("Stop",telHelSTOPATTACKINGMEYOUBITCH,"Say Nothing",helChatMenu,"",null,"",null,"",null);
 }
 
 //[Say Nothing]
 private function helChatMenu():void {
 	spriteSelect(68);
-	if(flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 0) simpleChoices("About Her",askHelAboutHer,"",0,"",0,"",0,"Leave",bugOutAfterHelMinoThreesome);
+	if (flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 0)
+		simpleChoices("About Her", askHelAboutHer, "", null, "", null, "", null, "Leave", bugOutAfterHelMinoThreesome);
 	else {
 		var zerk:Function = null;
 		var attackin:Function = null;
-		if(flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] == 0) attackin = askHelAboutAttackingYou;
-		if(flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] == 0) zerk = berserkMode;
-		choices("",0,"Berserking?",zerk,"Y Attack Me",attackin,"Seconds",askMommaHelForSecondsAfterDinner,"MinosRBad",telHelToGetOffTheMInoCock,"",0,"",0,"",0,"",0,"Leave",leaveHelAfterMinoThreeSomeChat);
+		if (flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] == 0) attackin = askHelAboutAttackingYou;
+		if (flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] == 0) zerk = berserkMode;
+		choices("", null, "Berserking?", zerk, "Y Attack Me", attackin, "Seconds", askMommaHelForSecondsAfterDinner, "MinosRBad", telHelToGetOffTheMInoCock, "", null, "", null, "", null, "", null, "Leave", leaveHelAfterMinoThreeSomeChat);
 	}
 }
 
@@ -1218,7 +1219,7 @@ public function salamanderXIsabellaPlainsIntro():void {
 
 	outputText("Before Isabella can say any more, the salamander leaps into the air and slams her sword down upon the cow-girl's narrowly-interposed shield.  The force of the blow staggers both of them, giving you a moment to intervene before there's bloodshed!", false);
 	//(Display Options: [Diplomacy] [Watch] [Leave])
-	simpleChoices("Diplomacy",salamanderXIsabellaDiplomacy,"Watch",watchIsabellaAndHelFight,"",0,"",0,"Leave",skipTownOnIsabellaAndHelsFight);
+	simpleChoices("Diplomacy", salamanderXIsabellaDiplomacy, "Watch", watchIsabellaAndHelFight, "", null, "", null, "Leave", skipTownOnIsabellaAndHelsFight);
 }
 
 //Diplomacy (edited)
@@ -1375,7 +1376,7 @@ public function followrIzzyxSallyThreesomePretext():void {
 
 	outputText("\"<i>You are... welcome,</i>\" Isabella says as Hel disappears into the night.  Heaving a relieved sigh, you return to the camp proper and try to get some shut-eye before the sun rises.", false);
 	flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Isabella x Hel Threesome Scene – Beginning in the Plains (edited)
@@ -1390,7 +1391,7 @@ public function isabellaXHelThreeSomePlainsStart():void {
 
 	outputText("You certainly do feel thirsty, and Isabella's invitation is certainly... enticing, and is made all the more exciting by the busty salamander you'll be sharing a meal with.", false);
 	//(Display Options: [Drink] [Leave])
-	simpleChoices("Drink",nomOnIzzyTitWithSallyMancer,"",0,"",0,"",0,"Leave",leaveIsabellaSallyBehind);
+	simpleChoices("Drink", nomOnIzzyTitWithSallyMancer, "", null, "", null, "", null, "Leave", leaveIsabellaSallyBehind);
 }
 //Isabella x Hel Threesome Scene – Beginning at Camp (edited)
 //(Has a 10% chance to play when the player chooses [Sleep] while Isabella is at camp)
@@ -1407,7 +1408,7 @@ public function isabellaXHelThreeSomeCampStart():void {
 
 	outputText("You certainly do feel thirsty, and Isabella's invitation is certainly... enticing, and is made all the more exciting by the busty salamander you'll be sharing a meal with.", false);
 	//(Display Options: [Drink] [Leave])
-	simpleChoices("Drink",nomOnIzzyTitWithSallyMancer,"",0,"",0,"",0,"Leave",1);
+	simpleChoices("Drink", nomOnIzzyTitWithSallyMancer, "", null, "", null, "", null, "Leave", playerMenu);
 }
 
 //[Leave]
@@ -1415,7 +1416,7 @@ private function leaveIsabellaSallyBehind():void {
 	spriteSelect(68);
 	outputText("", true);
 	outputText("You decline the cow-girl's offer, but tell the redheads to have fun without you.  Though a bit disappointed, they both wave as you make your way back to camp.", false);
-	if(model.time.hours < 6) doNext(1);
+	if(model.time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1462,7 +1463,7 @@ private function nomOnIzzyTitWithSallyMancer():void {
 	//(If PC is genderless: Unfortunately, you don't have much to contribute...)
 	else outputText("Unfortunately, you don't have much to contribute...", false);
 	//(Display Appropriate Options: [1 Dick] [2 Dicks] [4 Dicks] [Vagina] [Leave])
-	simpleChoices("Dick",dick,"",0,"",0,"Vagina",vag,"Leave",noThreesomeSexWithSallyAndIssyLastMinute);
+	simpleChoices("Dick", dick, "", null, "", null, "Vagina", vag, "Leave", noThreesomeSexWithSallyAndIssyLastMinute);
 	//(Dick scenes have a common open, then branch out before a common end between all genders)
 }
 
@@ -1475,7 +1476,7 @@ private function noThreesomeSexWithSallyAndIssyLastMinute():void {
 	outputText("With a chuckle, you head on back to camp with a full belly", false);
 	if(player.balls > 0) outputText(" and balls bluer than the lake", false);
 	outputText(".", false);
-	if(model.time.hours < 6) doNext(1);
+	if(model.time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1605,7 +1606,7 @@ private function izzySallyThreeSomeFollowup():void {
 
 	outputText("\"<i>Yeah.  Resting is... resting is good,</i>\" Hel says, trying and failing to suppress a yawn of her own.  Smiling, you wrap your arms around your two beautiful, busty redheads and let sleep overcome you.", false);
 	//(Either return PC to camp or advance to the next day, if in plains or camp, respectively)
-	if(model.time.hours < 6) doNext(1);
+	if(model.time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseFourHours);
 }
 //VAGINA (edited)
@@ -1648,7 +1649,7 @@ private function izzySallyThreeSomeVagoozlaz():void {
 	//Bump up follower tracking affection too
 	isabellaFollowerScene.isabellaAffection(4);
 	helFollower.helAffection(5);
-	if(model.time.hours < 6) doNext(1);
+	if(model.time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseFourHours);
 }
 //Fox Girls -- First Time Intro
@@ -1663,7 +1664,7 @@ public function heliaPlusFoxyFluffs():void {
 	
 		outputText("\"<i>Mmm, wanna play with Sister and I?</i>\" Mai purrs, nuzzling your neck after a long swig of beer.  Hel and Miko both give you hopeful, expectant looks.  Do you?\n\n", false);
 		//(Display Options: [Foursome] [Leave])
-		simpleChoices("Foursome",heliasFoxyFourSomeFluffs,"",0,"",0,"",0,"Leave",runAwayFromFoxGirls);
+		simpleChoices("Foursome", heliasFoxyFourSomeFluffs, "", null, "", null, "", null, "Leave", runAwayFromFoxGirls);
 	}
 	//(Leave because cocks are a new reveal; should give those grossed out by futa an escape; doesn't appear afterwards to save horny gamers a click)
 	//Fox Girls -- Repeat Intro
@@ -1693,12 +1694,12 @@ private function heliasFoxyFourSomeFluffs():void {
 	outputText("The four of you slide into your room for the evening, a small affair with a large, plush bed.  The fox-twins waste no time in undressing, revealing their large D-cups, 8-inch red cocks, and glistening loose cunts.  Hel tosses her scale bikini aside, letting her hefty E-cups bounce free, and puts an arm around the twins' lithe, tan shoulders so all three nude bodies are on display together for you.\n\n", false);
 	
 	//[If Herm]
-	if(player.gender == 3) {
+	if (player.gender == 3) {
 		outputText("\"<i>So what parts do you want to use?</i>\" she asks, looking to your mixed endowments.", false);
 		//(Display Options: [As Male] [As Female])
-		simpleChoices("As Male",foxyFluffsFoursomeAsMale,"As Female",foxyFluffGirlsFuckSex,"",0,"",0,"",0);
+		simpleChoices("As Male", foxyFluffsFoursomeAsMale, "As Female", foxyFluffGirlsFuckSex, "", null, "", null, "", null);
 	}
-	else if(player.gender == 2) doNext(foxyFluffGirlsFuckSex);
+	else if (player.gender == 2) doNext(foxyFluffGirlsFuckSex);
 	else doNext(foxyFluffsFoursomeAsMale);
 }
 

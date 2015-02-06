@@ -1131,7 +1131,7 @@ private function cowBadEnd2():void {
 	outputText("You moo happily, shivering at the intensity of the fond memories and in anticipation of tonight's activities.  But first you need to get your swollen nipples emptied!  The straps to the harness hang there in front of you – how do you work them again?  Your happy moos turn to moos of confusion and stress, but thankfully Whitney pads into the barn before you have a chance to panic.  She looks down and sighs, filling you with confusion.  You weren't a bad cow, were you?\n\n", false);
 	outputText("The anthropomorphic country-girl gives you a gentle pat on the head as she works the straps, talking to herself as she does, \"<i>Don't worry girl, I'm not mad.  I reckon I should've given you a stronger warning is all.  But now the damage is done – what's left of your brains was mushed up by all that milking.  Don't worry none honey, there will always be a spot in my stall for you.  I'll just have to make sure you don't get out with the animals again, won't I?</i>\"\n\n", false);
 	outputText("You nod happily, determined to find someone or something that can stuff you as full as your bulls did.  Whitney gives a resigned sigh as she turns the machine on, watching your determined stare melt into a dopey painting of relief...", false);
-	eventParser(5035);
+	getGame().gameOver();
 }
 private function milkerBadEnd1():void {
 	var cumQ:Number = player.cumQ();
@@ -1248,7 +1248,7 @@ private function milkerBadEnd1():void {
 		outputText(" like yours, why worry about anything else for the moment?", false);
 		dynStats("lib", 20, "sen", 10, "lus", 80, "cor", 100);
 	}
-	eventParser(5035);
+	getGame().gameOver();
 }
 
 //Introduction: Finding the Toys @ The Farm

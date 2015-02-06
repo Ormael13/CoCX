@@ -792,7 +792,7 @@ public function exgartuanBeeRape():void {
 	outputText("You redress, whistling happily as you prepare to leave.  Your victim is practically unconscious, still shaking from the intense experience and leaking eggs and honey from the organ on her backside.  Do you cut her down or leave her bound up for the locals to enjoy?", false);
 	player.orgasm();
 	dynStats("lib", 1, "cor", 2);
-	simpleChoices("Leave Her",leaveBeePostRape,"Free Her",freeBeePostRape,"",0,"",0,"",0);
+	simpleChoices("Leave Her", leaveBeePostRape, "Free Her", freeBeePostRape, "", null, "", null, "", null);
 }
 
 //[Free Her] (negates some corruption gain)
@@ -958,7 +958,7 @@ private function exgartuanSleepSurprise():void {
 		player.slimeFeed();
 	}
 	player.changeStatusValue(StatusAffects.Exgartuan,2,25);
-	doNext(1);
+	doNext(playerMenu);
 }
 private function exgartuanBulgeTortureII():void {
 	outputText("", true);
@@ -1080,7 +1080,7 @@ private function exgartuanBulgeTortureIV():void {
 	outputText("  You pay one more glance to Exgartuan, the " + cockDescript(0) + " comfortably resting away in your outfit.\n\n", false);
 	outputText("Damn demons.", false);
 	player.changeStatusValue(StatusAffects.Exgartuan,2,25);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Exgartuan in breasts
@@ -1325,7 +1325,7 @@ private function boobgartuanSurprise3():void {
 	dynStats("lus", 5, "cor", 2);
 	flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT]++;
 	player.changeStatusValue(StatusAffects.Exgartuan,2,25);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Requirements:

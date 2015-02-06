@@ -373,7 +373,7 @@ package classes.Scenes.NPCs
 			outputText("Ceraph wiggles out from between the bushes, holding a bondage harness and openly eyeing your body.  She suggestively says, \"<i>Well, aren't you just a cute little slave-to-be.  Are you ready to put yourself in your slave harness and join my harem?  I've got a few more piercings I think would look great on you.  Maybe I could give you an oral fixation and a foot fetish.  Wouldn't that be nice?  Or maybe I can just keep you tied up and parade you around Mareth.  You know I'll make sure you love every minute baby, just come put this on.</i>\"\n\n", false);
 
 			outputText("It shames you to admit it, but you desperately want to be naked and restrained, paraded around to tease and amuse Ceraph's enemies.  You know the desires were forced on you by her cursed piercings, but it doesn't make it any easier to deny the feelings they've brought out in you.  The sexy demon-dom would be happy to feed you foreign desires and stoke them into a burning blaze that would burn away your doubts and worries.  Do you give in and become her bondage slave?\n\n", false);
-			simpleChoices("Yes", agreeToBecomeCeraphsFuckpetBondageToyBitchSlut, "No", finalCeraphEncounterChoiceNo, "Fight", finalCeraphEncounterStartFight, "", 0, "", 0);
+			simpleChoices("Yes", agreeToBecomeCeraphsFuckpetBondageToyBitchSlut, "No", finalCeraphEncounterChoiceNo, "Fight", finalCeraphEncounterStartFight, "", null, "", null);
 		}
 
 //[no]
@@ -446,7 +446,7 @@ package classes.Scenes.NPCs
 			outputText(".  Two weeks of drug and bondage induced edging nearly broke pet's mind, but Mistress was nice and let " + player.mf("him", "her") + " cum over and over after getting a new piercing and worshiping her feet for a few hours.\n\n", false);
 
 			outputText("The champion that left Ingnam so long ago is totally unrecognizable, body and soul.  The spirit that once burned bright with the desire to save the innocents of the village has been warped and twisted beyond repair.  The once-champion known only as 'pet', not even worthy of a proper name, spends all " + player.mf("his", "her") + " time lusting after Mistress Ceraph, taking part in her depraved orgies and willingly submitting to any kinks or debaucheries that are presented to " + player.mf("him", "her") + ".  Pet's life of individuality and choice is over, all that remains is pleasure and pain.", false);
-			eventParser(5035);
+			getGame().gameOver();
 		}
 
 //[Initial Meeting Text]
@@ -632,7 +632,7 @@ package classes.Scenes.NPCs
 		public function winRapeChoices():void
 		{
 			//FOLLOWER CHANCE:
-			var leave:* = cleanupAfterCombat;
+			var leave:Function = cleanupAfterCombat;
 			if (!getGame().inCombat) {
 				//Load ceraph and set up win conditions
 				startCombat(new Ceraph());
@@ -885,14 +885,13 @@ package classes.Scenes.NPCs
 			outputText("The demoness lifts one heeled foot high onto a boulder and winks at you, letting her whip rub up and down her hard, nodule-studded shaft.  Her tail rises languidly between her perfect, lissomelegs, rubbing the glistening wet delta of her sex enticingly.  The demon coos, \"<i>Oh, I do love putting on a show for my future pets.  Tell me, did you really come up here to fight?  I'd rather lie back in the sunlight, rubbing my fingers over my glistening skin and showing everyone just how wondrous sex with me would be.  You can even go if you want, or maybe you'd have something worth trading with me?</i>\"", false);
 			dynStats("lus", (5 + player.cor / 10 + player.lib / 20), "cor", 0)
 			//[Fight] [Trade] [Run]
-			simpleChoices("Fight", startAFightWithCeraph, "Trade", tradeCeraphSomething, "", 0, "", 0, "Run", runFromCeraphsNiceDeal);
+			simpleChoices("Fight", startAFightWithCeraph, "Trade", tradeCeraphSomething, "", null, "", null, "Run", runFromCeraphsNiceDeal);
 		}
 
 //[Fight] → Cue normal Ceraph fight
 		private function startAFightWithCeraph():void
 		{
 			startCombat(new Ceraph());
-			eventParser(1);
 			spriteSelect(7);
 		}
 
@@ -946,7 +945,7 @@ package classes.Scenes.NPCs
 				outputText("</i>\"\n\n", false);
 			}
 			//Leave uses the run text!
-			simpleChoices("Liqueur", liqueur, "Endowment", endowment, "Armor", armor, "", 0, "Leave", runFromCeraphsNiceDeal);
+			simpleChoices("Liqueur", liqueur, "Endowment", endowment, "Armor", armor, "", null, "Leave", runFromCeraphsNiceDeal);
 		}
 
 
@@ -1392,7 +1391,7 @@ package classes.Scenes.NPCs
 					player.hoursSinceCum += 100;
 				}
 			}
-			doNext(camp.campMenu);
+			doNext(playerMenu);
 		}
 
 		internal function buttRapeCeraph():void

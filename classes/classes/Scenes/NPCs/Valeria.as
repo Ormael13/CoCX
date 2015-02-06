@@ -41,7 +41,7 @@ public function valeriaFollower():void {
 	var sex:Function = null;
 	if(player.lust > 33) sex = followersValeriaSex;
 	//(Display Options: [Appearance] [Spar] [Sex] [Talk])
-	choices("Appearance",valeriaAppearance,"Spar",valeriaSpar,"Sex",sex,"Talk",talkWithValeria,"Take",takeValeria,"",0,"",0,"",0,"",0,"Back",74);
+	choices("Appearance", valeriaAppearance, "Spar", valeriaSpar, "Sex", sex, "Talk", talkWithValeria, "Take", takeValeria, "", null, "", null, "", null, "", null, "Back", camp.campFollowers);
 }
 
 //[Valeria] -- [Appearance]
@@ -67,7 +67,7 @@ private function valeriaSpar():void {
 	startCombat(new GooArmor());
 	monster.createStatusAffect(StatusAffects.Spar,0,0,0,0);
 	monster.gems = 0;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Valeria] -- [Spar] -- PC Victorious
@@ -129,7 +129,8 @@ private function followersValeriaSex(display:Boolean = true):void {
 	if(flags[kFLAGS.VELARIA_FUTA] == 1) {
 		dickText = "Lose Dick";
 	}
-	choices("PenetrateHer",penetrate,"Get Fucked",getFucked,"Gooflation",gooFlation,"GetDominated",dominated,dickText,dickToggle,"",0,"",0,"",0,"",0,"Back",valeriaFollower);
+	choices("PenetrateHer", penetrate, "Get Fucked", getFucked, "Gooflation", gooFlation, "GetDominated", dominated, dickText, dickToggle,
+		"", null, "", null, "", null, "", null, "Back", valeriaFollower);
 }
 
 //Valeria -- [Sex] -- [Dick/No Dick]
@@ -392,8 +393,8 @@ private function talkWithValeria():void {
 	outputText("\n\nValeria chuckles wryly. \"<i>Well, it's not like I'm completely unchanged,</i>\" she whispers huskily, leaning close and looking hungrily at your crotch.  \"<i>After all, I have certain... appetites... now, you know.  I'm not proud of my new needs, but I'm afraid I just can't ignore them...</i>\"");
 	//How do you respond to that?
 	//(Display Options: [Flirt](PC has Gender) [Accept] [Gross])
-	if(player.gender > 0) simpleChoices("Flirt",flirtWithValeria,"Accept",acceptValeriasNeeds,"Gross",declineValeriasNeeds,"",0,"",0);
-	else simpleChoices("",0,"Accept",acceptValeriasNeeds,"Gross",declineValeriasNeeds,"",0,"",0);
+	if (player.gender > 0) simpleChoices("Flirt", flirtWithValeria, "Accept", acceptValeriasNeeds, "Gross", declineValeriasNeeds, "", null, "", null);
+	else simpleChoices("", null, "Accept", acceptValeriasNeeds, "Gross", declineValeriasNeeds, "", null, "", null);
 }
 
 //[Flirt]
@@ -437,8 +438,8 @@ private function takeValeria():void {
 	player.armor.removeText();
 	var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
 	if (item == null)
-		doNext(camp.campMenu);
-	else inventory.takeItem(item, camp.campMenu);
+		doNext(playerMenu);
+	else inventory.takeItem(item, playerMenu);
 }
 
 public function valeriaAndGooThreeStuff():void {

@@ -17,7 +17,7 @@ package classes.Scenes.Areas.Lake
 		{
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(1);
+			doNext(game.playerMenu);
 			if (findPerk(PerkLib.Acid) >= 0) outputText("Her body quivering from your flames, the goo-girl ", false);
 			else outputText("The slime holds its hands up and they morph into a replica of your " + player.weaponName + ".  Happily, she swings at you", false);
 			//Determine if dodged!
@@ -183,9 +183,11 @@ package classes.Scenes.Areas.Lake
 			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)
 					.add(consumables.WETCLTH,1/2)
 					.elseDrop(useables.GREENGL);
+/* These are actually green slime functions and were never called in GooGirl due to override of performCombatAction
 			this.special1 = 5040;
 			this.special2 = 5039;
 			this.special3 = 5039;
+*/
 			checkMonster();
 		}
 

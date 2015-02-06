@@ -237,7 +237,7 @@ package classes.Scenes.Dungeons.D3
 				
 				menu();
 				addButton(0, "Enter", enterD3);
-				addButton(1, "Leave", eventParser, 13);
+				addButton(1, "Leave", camp.returnToCampUseOneHour);
 				
 				return true;
 			}
@@ -255,7 +255,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			inRoomedDungeon = false;
 			inRoomedDungeonResume = null;
-			eventParser(13);
+			camp.returnToCampUseOneHour();
 		}
 
 		public function resumeFromFight():void
@@ -482,7 +482,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("You pluck out " + item.longName + " ");			
 			
 			flags[kFLAGS.D3_EGGS_AVAILABLE] += eggMask;
-			inventory.takeItem(item, camp.campMenu); //camp.campMenu is equivalent to doNext(1)
+			inventory.takeItem(item, playerMenu); //playerMenu is equivalent to doNext(1)
 		}
 		
 		private function fallbackFromMagpieHallS():void

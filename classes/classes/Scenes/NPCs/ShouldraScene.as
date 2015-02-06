@@ -126,7 +126,7 @@ internal function shouldraGreeting():void {
 			if(flags[kFLAGS.TIMES_BEATEN_SHOULDRA] == 3) outputText("You can't say you saw that coming.  It seems she has offered to forego the fight in lieu of sexings.  ", false);
 			outputText("Would you like to accept her offer, or do you want to fight her regardless?", false);
 			//Now back to the good part!
-			simpleChoices("Accept",yankeeEchoPapa,"Fight",novemberAlphaHotel,"",0,"",0,"",0);
+			simpleChoices("Accept", yankeeEchoPapa, "Fight", novemberAlphaHotel, "", null, "", null, "", null);
 		}
 		else {
 			//FIGHT!
@@ -178,7 +178,7 @@ internal function defeatDannyPhantom():void {
 		}
 		else {
 			outputText("What do you do?", false);
-			simpleChoices("Let Her In",littlePigLittlePigLetMeIn,"Deny",noSlimingSlimer,"",0,"",0,"",0);
+			simpleChoices("Let Her In", littlePigLittlePigLetMeIn, "Deny", noSlimingSlimer, "", null, "", null, "", null);
 		}
 	}
 	flags[kFLAGS.TIMES_BEATEN_SHOULDRA]++;
@@ -229,7 +229,7 @@ private function littlePigLittlePigLetMeIn():void {
 	else if(player.gender == 3) gender = hermaphroditeGhostsCumEctoplasm;
 	
 	flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA]++;
-	simpleChoices("Sex Here",gender,"Lake",lake,"",0,"",0,"",0);
+	simpleChoices("Sex Here", gender, "Lake", lake, "", null, "", null, "", null);
 }
 //Lake Victory Scenes
 private function nowOnVickiLake():void {
@@ -249,7 +249,7 @@ private function nowOnVickiLake():void {
 	if(flags[kFLAGS.TIMES_MET_OOZE] > 0) ooze = ghostGooGurlzDuckfaces;
 	if(ooze != null && shark != null) {
 		outputText("You recall the experiences of both the slime and the shark girl. Which encounter would you wish to seek out?", false);
-		simpleChoices("Shark",shark,"Ooze",ooze,"",0,"",0,"",0);
+		simpleChoices("Shark", shark, "Ooze", ooze, "", null, "", null, "", null);
 	}
 	else if(ooze != null) doNext(ooze);
 	else doNext(shark);
@@ -271,7 +271,7 @@ private function sharkbustersVictory():void {
 	if(player.hasCock() && player.hasVagina()) {
 		outputText("Which gender would you like to focus on?", false);
 		//male / female)
-		simpleChoices("Male",ghostIzmaPenis,"Female",sharkyEctoginas,"",0,"",0,"",0);
+		simpleChoices("Male", ghostIzmaPenis, "Female", sharkyEctoginas, "", null, "", null, "", null);
 	}
 	else if(player.hasVagina()) doNext(sharkyEctoginas);
 	else if(player.hasCock()) doNext(ghostIzmaPenis);
@@ -599,7 +599,7 @@ private function penisLossThatIsntALoss():void {
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?", false);
 		
-		simpleChoices("LetHerCum",letShouldraIn,"KeepHerOut",kickShouldraOut,"",0,"",0,"",0);
+		simpleChoices("LetHerCum", letShouldraIn, "KeepHerOut", kickShouldraOut, "", null, "", null, "", null);
 		return;
 	}
 	outputText("\n\n", false);
@@ -797,7 +797,7 @@ private function hermaphroditeGhostsCumEctoplasm():void {
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?", false);
 		
-		simpleChoices("LetHerCum",letShouldraIn,"KeepHerOut",kickShouldraOut,"",0,"",0,"",0);
+		simpleChoices("LetHerCum", letShouldraIn, "KeepHerOut", kickShouldraOut, "", null, "", null, "", null);
 		return;
 	}
 	outputText("\n\n", false);
@@ -1197,7 +1197,7 @@ public function paladinModeFollowup():void {
 	outputText("Her eyes light up, the brown orbs becoming two unholy amber flames as she laughs at your completely stunned expression. With a devilish wink and a proclamation of, \"<i>I'm going ghost!</i>\" she fades into intangibility and is swept away by a gust of wind. As you track her wispy path, you set your jaw determinedly. Looks like \"<i>undead</i>\" will be back on your \"<i>vindictive eradication</i>\" list... though, you have to admit, she gave pretty good consensual sex in the missionary position for the sole purpose of procreation. For an abomination.", false);
 	if(model.time.hours < 6 || model.time.hours >= 23) outputText("\n\nYou rage fap and consider going back to bed.", false);
 	player.orgasm();
-	doNext(1);
+	doNext(playerMenu);
 }
 
 

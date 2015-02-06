@@ -109,7 +109,7 @@ public function encounterTamanisDaughters():void {
 		if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] >= 10) outputText(", your wife", false);
 		outputText(".  You realize now that the other goblins must be your daughters.  Another crowd of small women emerges from the bushes, closing in a ring around you, preventing any chance of escape.  The largest of the younger goblin-women steps forwards, her " + tdCup() + " breasts jiggling, barely contained by the bondage ropes she has tied around herself.  She stops once she's next to her mother and Tamani explains, \"<i>I just can't keep their aching cunts at home anymore!  They're fertile adults now and they're wanting to get some experience with real dicks.  I figured you wouldn't mind helping them out a little.</i>\"\n\nWhat do you do? (Fight them off, Fuck them willingly, Let them fuck you)", false);
 		//[Fuck Them] [Let Them] [Fight]
-		simpleChoices("Fight",fightTamanisDaughters, "Fuck Them",fuckYoDaughtersHomie,"Let Them",legTamanisDaughtersRAEPYou,"",0,"",0);
+		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Let Them", legTamanisDaughtersRAEPYou, "", null, "", null);
 		return;
 	}
 	tamaniPresent = false;
@@ -122,11 +122,11 @@ public function encounterTamanisDaughters():void {
 	if(flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS] == 0) {
 		outputText("She calls out, \"<i>We're tired of getting leftovers, so we're coming to the source.  Are you going to give us what we want?</i>\"\n\n", false);
 		//[Fuck them] [Fight] [Play Dumb]
-		simpleChoices("Fight",fightTamanisDaughters, "Fuck Them",fuckYoDaughtersHomie,"Play Dumb",playDumbToTamanisDaughters,"Let Them",legTamanisDaughtersRAEPYou,"",0);
+		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Play Dumb", playDumbToTamanisDaughters, "Let Them", legTamanisDaughtersRAEPYou, "", null);
 	}
 	else {
 		outputText("She calls out, \"<i>We came back for more cream!  Come on, let's fuck again!</i>\"\n\nIt doesn't look like 'no' is a word they understand.  What do you do?</i>", false);
-		simpleChoices("Fight",fightTamanisDaughters,"Fuck Them",fuckYoDaughtersHomie,"Let Them",legTamanisDaughtersRAEPYou,"",0,"",0);
+		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Let Them", legTamanisDaughtersRAEPYou, "", null, "", null);
 	}
 }
 
@@ -149,7 +149,7 @@ private function playDumbToTamanisDaughters():void {
 	outputText("litters one way or another!</i>\"\n\n", false);
 	
 	//[Fuck them] [Fight] [Let them have their way with you]
-	simpleChoices("Fuck Them",fuckYoDaughtersHomie,"Fight",fightTamanisDaughters,"",0,"Let Them",legTamanisDaughtersRAEPYou,"",0);
+	simpleChoices("Fuck Them", fuckYoDaughtersHomie, "Fight", fightTamanisDaughters, "", null, "Let Them", legTamanisDaughtersRAEPYou, "", null);
 }
 
 //[Fight Them]
@@ -859,8 +859,9 @@ private function tamaniDaughtersBadEndChoice():void {
 	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("Exgartuan barks, \"<i>Hell yes I do!</i>\" but the goblin only smirks down for a moment before looking back at you.\n\n", false);
 	
 	outputText("(Options: Yes, No, I'd rather fill your cunts individually & personally)", false);
-	simpleChoices("Yes",tamaniDaughtersYesBadEndMePlease,"No",tamaniDaughtersDeclineBadEnd,"Individual",tamanisDaughtersFillIndividuallyBADEND,"",0,"",0);
+	simpleChoices("Yes", tamaniDaughtersYesBadEndMePlease, "No", tamaniDaughtersDeclineBadEnd, "Individual", tamanisDaughtersFillIndividuallyBADEND, "", null, "", null);
 }
+
 //[Yes]
 private function tamaniDaughtersYesBadEndMePlease():void {
 	spriteSelect(57);
@@ -871,7 +872,7 @@ private function tamaniDaughtersYesBadEndMePlease():void {
 	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("Exgartuan moans, \"<i>Ohhhhhh yeeeeaaaaahhhh...</i>\" before slipping into silence.\n\n", false);
 	
 	outputText("You spend the rest of your life trapped in orgasm, constantly feeding the growth of what becomes the biggest goblin tribe in all the land of Mareth.  Even when every single one of them is pregnant, they let you enjoy your reward.  Over time your capacity for memory, morals, or anything other feeling besides pleasure dwindles.  Trapped in a heaven of your own choosing, you gave up everything that you were for never-ending bliss.", false);
-	eventParser(5035);
+	getGame().gameOver();
 }
 
 //[NO]
@@ -908,8 +909,7 @@ private function tamanisDaughtersFillIndividuallyBADEND():void {
 	outputText("A cheer reverberates off the ceiling as your daughters crowd around you, pressing their buxom chests and rounded backsides against you.  You're led to a secluded corner and fed food and strange drinks, while being kept incredibly horny for hours as you await Tamani's return.  True to her word, your daughter is on top of you in a flash once the clan's matriarch enters the room, and you're helpless to do anything but submit to her velvet pussy.  You cum loudly and messily, creaming her walls and flooding the area around you with spunk while Tamani is forced to watch with a jealous look on her face.\n\n", false);
 	
 	outputText("The rest of your life continues on in a similar fashion – you're kept happily fed, full, and pleasured by your hundreds of pregnant wives as your harem grows.  There's no shortage of sex, and no shortage of desire thanks to your wives' alchemical talents.  Within the span of a month you've utterly forgotten about your quest – it's hard to focus on anything but cuddling with your wives and daughters while you await your next fuck.", false);
-	//GAME OVER.
-	eventParser(5035);
+	getGame().gameOver();
 }
 
 //[Lose to Daughters With Tamani There]

@@ -319,8 +319,7 @@ package classes.Scenes.Dungeons.D3
 			if (player.hasVagina()) outputText(" and [vagina]");
 			outputText(", it disappears into the depths forever. Your mind is a blank canvas of pure, submissive pleasure and it, like your limitless future, is golden.");
 			
-			menu();
-			eventParser(5035);
+			getGame().gameOver();
 		}
 		
 		private function bwombBadEnd():void
@@ -365,10 +364,7 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("\n\nAn excited, breathless murmur spreads through the hall to these words, whilst yellow tinted images push their way into your head, of being surrounded by tight, smooth lizard flesh, of hard, hot dick pushing urgently into every hole you have, all night long... you can’t help it. Your [vagina] convulses around Jean-Claude’s thick dick, surges of helpless pleasure pulsing through your body, and he roars with renewed laughter even as he continues to drive into you. “<i>She DOES like the sound of that! So behave yourself, boys. If you do real good for me, who knows? Maybe I’ll let you have some quality time with the queen!</i>” So saying, he thrusts himself upwards to his own orgasm, burying himself deep into you as he fills you full of his hot spunk. You buck your [hips] into him happily, unable to think of anything but of getting more of his seed, of being packed full of new life, of serving your new master. Your mind is a blank canvas of pure, submissive pleasure and it, like your future, is golden.");
 
-			//THE END
-			// 9999
-			menu();
-			eventParser(5035);
+			getGame().gameOver();
 		}
 		
 	}

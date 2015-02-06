@@ -167,7 +167,7 @@ package classes.Scenes.Areas.Plains
 			if (player.hasCock()) penor = hyenaVictoryRapeFellatio;
 			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nUsing the hyena to get off would be easy.  What do you do?", false);
-				simpleChoices("Get BJ", penor, "Get Licked", vagoo, "", 0, "", 0, "Leave", cleanupAfterCombat);
+				simpleChoices("Get BJ", penor, "Get Licked", vagoo, "", null, "", null, "Leave", cleanupAfterCombat);
 			}
 			else doNext(cleanupAfterCombat);
 		}

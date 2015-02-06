@@ -75,7 +75,7 @@ package classes.Scenes.Areas.HighMountains
 			if(player.lust >= 33 && player.gender > 0) {
 				outputText("  Certain that the creature won't dare try and turn its eyes on you again, you take your time to look the tall reptile over directly for the first time.  Perhaps you could use it to satisfy your baser urges. If so, what part of it do you choose?", false);
 				//[Tongue][Ass]
-				simpleChoices("Tongue",tongueBasiliskSmex,"Ass",evil,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
+				simpleChoices("Tongue", tongueBasiliskSmex, "Ass", evil, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}
@@ -383,7 +383,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("A pale blue finger traces the line of your frozen chin before a leering, female face swallows up your line of vision.  \"<i>Well, well, well. Look at what we have here,</i>\" purrs the succubus into your cold, marble ear.  Other shapes prowl into view, stalking reptile shapes, as the demon runs her hands sensually over your form, testing every smooth surface, protuberance and cranny that she can reach.  You cannot feel a thing, except an overwhelming sense of dread.  \"<i>Played with the lizards a bit too much did we, friend?  I hope you learnt your lesson.  It's a real shame, when you think about it.</i>\"  The succubus actually sounds almost upset as she looks you over.  \"<i>You would have made a fine slave.  The things we would have done to you... ah well.  Que sera sera. Remove this!</i>\" she straightens up smartly and claps her hands.  \"<i>Take this statue to Lethice's castle.  I am sure it will look excellent in her front hall, and I know she will appreciate the present.</i>\"  The basilisks snake up to you and then heave you into their arms.  As they haul you into the night, the succubus's voice reaches you.  \"<i>Did you know that marble is a metamorphic rock, statue? It takes tens of thousands of years to wear down. Meta-MORPH-ic, get it? Hahahahahaha!</i>\"\n\n", false);
 		
 			outputText("You have no voice, and you must scream.", false);
-			eventParser(5035);
+			getGame().gameOver();
 		}
 		//Defeated, Taken Advantage of: nobody
 		private function basiliskAdvantageNobody():void {

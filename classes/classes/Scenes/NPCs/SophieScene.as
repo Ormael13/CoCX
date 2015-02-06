@@ -257,7 +257,7 @@ public function meetSophie():void {
 	outputText("you wrench your gaze away from her breasts and introduce yourself.  It's hard to stay focused on introduction while she's wrapping her wing-like arms around her tits and squeezing them together, amplifying her cleavage.  The matronly harpy is looking at you expectantly, and it occurs to you that she's still waiting on an answer to her question.  Why did you come here?\n\n", false);
 	
 	//[Looking for Demons] [Sex] [Got Lost] [Foraging]
-	simpleChoices("Foraging",tellSophieYoureForagingForStuff,"Got Lost",sophieMeetingGotLost,"Look4Demons",sophieLookingForDemons,"Sex",sophieMeetingChoseSex,"",0);
+	simpleChoices("Foraging", tellSophieYoureForagingForStuff, "Got Lost", sophieMeetingGotLost, "Look4Demons", sophieLookingForDemons, "Sex", sophieMeetingChoseSex, "", null);
 }
 
 //[Repeat Meeting]
@@ -267,7 +267,6 @@ public function meetSophieRepeat():void {
 	//(Pissed)
 	if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) {
 		outputText("During your exploration of the mountains you wind up passing close to the harpy nests again.  Uh oh.  There's a constant, irritating buzz in the background that makes it hard to focus on what you're doing.  You crest a ledge and find yourself back on the edge of Sophie's nest.  Shit.  She glowers at you and raises one of her talons.  It's a fight!\n\n", false);
-		doNext(1);
 		startCombat(new Sophie());
 		return;
 	}
@@ -284,7 +283,7 @@ public function meetSophieRepeat():void {
 			if(player.lust < 60 || rand(3) <= 1) {
 				outputText("Her need amplifies the compulsion, making it difficult to resist.  It looks like if you turned her down now she'd probably try to force herself on you anyway.  Do you give in to her demand?", false);
 				//[Yes-Consentual sex] [No - fight]
-				simpleChoices("Yes",consensualSexSelector,"No",fightSophie,"",0,"",0,"",0);
+				simpleChoices("Yes", consensualSexSelector, "No", fightSophie, "", null, "", null, "", null);
 			}
 			//(high lust?)
 			else {
@@ -311,7 +310,7 @@ public function meetSophieRepeat():void {
 		outputText("(Her words sink into you, and a desire to go with her threatens to overcome your self-control.  You take a deep breath and clear your head.  Do you go with her, turn her down, or try to take control and be the dominant one?  You'll probably have to fight her in order to dominate her...)", false);
 		dynStats("lus", 20);
 		//[Yes – consentacle sex] [No – sad harpy]
-		simpleChoices("Yes",consensualSexSelector,"No",shootDownSophieSex,"Dominate",fightSophie,"",0,"",0);
+		simpleChoices("Yes", consensualSexSelector, "No", shootDownSophieSex, "Dominate", fightSophie, "", null, "", null);
 		return;
 	}
 	//(NO DICK)
@@ -321,14 +320,14 @@ public function meetSophieRepeat():void {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and warns, \"<i>Cutey, a " + player.mf("neuter","girl") + " like you doesn't belong up here.  The younger harpies don't really get the idea of conversation and see you as competition.</i>\"\n\n", false);
 			
 			outputText("Do you see the wisdom of her words and climb back down the mountain, fight Sophie, or keep climbing?", false);
-			simpleChoices("Fight Sophie",FirstTimeSophieForceSex,"Keep Climbing",PCIgnoresSophieAndHarpyIsFought,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+			simpleChoices("Fight Sophie", FirstTimeSophieForceSex, "Keep Climbing", PCIgnoresSophieAndHarpyIsFought, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 			return;
 		}
 		//(LACTATE)
 		else {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and licks her lips hungrily.  She asks, \"<i>Would you mind coming up to my nest and sharing some of your milk?  I've worked up quite a craving for cute girl-milk.</i>\"\n\n", false);
 			outputText("Do you agree to breastfeed the hungry harpy?", false);
-			simpleChoices("Yes",cramANippleInIt,"No",shootDownSophieSex,"Fight Her",FirstTimeSophieForceSex,"",0,"",0);
+			simpleChoices("Yes", cramANippleInIt, "No", shootDownSophieSex, "Fight Her", FirstTimeSophieForceSex, "", null, "", null);
 			//No(cramANippleInIt,shootDownSophieSex);
 			//[Yes][No]
 			return;
@@ -348,7 +347,6 @@ private function fightSophie():void {
 	sophieBimbo.sophieSprite();
 	startCombat(new Sophie());
 	flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(24);
-	eventParser(1);
 }
 
 //[Yes]
@@ -364,7 +362,6 @@ private function PCIgnoresSophieAndHarpyIsFought():void {
 	outputText("A harpy wings out of the sky and attacks!", true);
 	startCombat(new Harpy());
 	spriteSelect(26);
-	doNext(1);
 }
 
 
@@ -416,7 +413,7 @@ private function sophieMeetingChoseSex():void {
 		if(player.hasVagina()) {
 			outputText("  What do you do?", false);
 			//[Stay&Sex] [Leave]
-			simpleChoices("Force Sex",FirstTimeSophieForceSex,"Leave",camp.returnToCampUseOneHour,"",0,"",0,"",0);
+			simpleChoices("Force Sex", FirstTimeSophieForceSex, "Leave", camp.returnToCampUseOneHour, "", null, "", null, "", null);
 			return;
 		}
 		doNext(camp.returnToCampUseOneHour);
@@ -441,7 +438,6 @@ private function FirstTimeSophieForceSex():void {
 	outputText("Sophie's large eyes widen in surprise at your statement, and her wings unfold as she counters, \"<i>Then you'll have to hope you can handle me.</i>\"  Her foot comes up warningly.\n\n", false);
 	outputText("It's going to be a fight!", false);
 	startCombat(new Sophie());
-	doNext(1);
 }
 
 //[Got Lost]
@@ -607,7 +603,7 @@ private function consensualHotSophieDickings():void {
 	{
 		CoC_Settings.error("");
 		outputText("ERROR: No cock found that fits, yet 'fits' scene was called.", true);
-		doNext(1);
+		doNext(playerMenu);
 		getGame().inCombat = false;
 		return;
 	}
@@ -615,7 +611,7 @@ private function consensualHotSophieDickings():void {
 	{
 		CoC_Settings.error("");
 		outputText("ERROR: Cock above max cocks selected for Sophie sex.  Please report bug on fen's bug report forum.", true);
-		doNext(1);
+		doNext(playerMenu);
 		getGame().inCombat = false;
 		return;
 	}

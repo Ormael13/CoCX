@@ -120,7 +120,7 @@ public function eventTester():void {
 ]]>;
 
 	;
-	simpleChoices("Proceed",eventTesterGo,"",0,"",0,"",0,"Back",eventTesterExit);
+	simpleChoices("Proceed",eventTesterGo,"",null,"",null,"",null,"Back",eventTesterExit);
 }
 
 public function eventTesterGo():void

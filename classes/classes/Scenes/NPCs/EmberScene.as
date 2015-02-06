@@ -210,7 +210,8 @@ package classes.Scenes.NPCs
 			var milk:Function =null;
 			if (flags[kFLAGS.EMBER_OVIPOSITION] > 0 && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) egg = emberIsAnEggFactory;
 			if (flags[kFLAGS.EMBER_MILK] > 0) milk = getMilkFromEmber;
-			choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg, "Sex", emberSexMenu, "Spar", decideToSparEmbra, "", 0, "", 0, "Back", 74);
+			choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg,
+				"Sex", emberSexMenu, "Spar", decideToSparEmbra, "", null, "", null, "Back", camp.campFollowers);
 		}
 
 //Approach for sex - initial output when selecting [Sex] menu (Z)
@@ -319,7 +320,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nTrue enough, after a short trek through familiar tunnels you find yourself once again standing before the alleged 'dragon egg'.");
 			}
 			flags[kFLAGS.TIMES_FOUND_EMBERS_EGG]++;
-			simpleChoices("Take It", takeEmbersEggHomeInADoggieBag, "Destroy It", destroyBabyEmberYouMonster, "", 0, "", 0, "Leave", leaveEmbersAssOutToDry);
+			simpleChoices("Take It", takeEmbersEggHomeInADoggieBag, "Destroy It", destroyBabyEmberYouMonster, "", null, "", null, "Leave", leaveEmbersAssOutToDry);
 		}
 
 //[=Leave=] (Z)
@@ -340,7 +341,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nWith nothing else in the cave, you prepare to leave, but find yourself stopped by a sudden thought.  The egg yolk, though raw, looks strangely appetizing...");
 			flags[kFLAGS.EGG_BROKEN] = 1;
 			//[Eat][Leave]
-			simpleChoices("Eat It", eatEmbersYolkLikeAnEvenBiggerDick, "", 0, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
+			simpleChoices("Eat It", eatEmbersYolkLikeAnEvenBiggerDick, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 		}
 
 //[=Eat=]
@@ -626,7 +627,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.EMBER_GENDER] = 3;
 			}
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Succubi Milk/Purified Succubi Milk (Z)
@@ -655,7 +656,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.EMBER_GENDER] = 3;
 			}
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Ovi Elixir (Z)
@@ -667,7 +668,7 @@ package classes.Scenes.NPCs
 			outputText("Uncorking the crystalline bottle, you pour the strange green liquid inside onto the egg, briefly wondering what on earth it could want with this stuff, before catching your fallacy.  It's an egg, right?  It can't want things...  The fluid spills all over the shell, coating it, and then seeps inside, leaving the egg's previously pale surface marked with small green splotches.");
 			flags[kFLAGS.EMBER_OVIPOSITION] = 1;
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Lactaid (Z)
@@ -679,7 +680,7 @@ package classes.Scenes.NPCs
 			outputText("Feeling a little bemused, you pour the creamy fluid onto the egg.  It is absorbed through the shell, and a spiderwork of creamy yellow vein-like markings suddenly forms on the shell's surface.");
 			flags[kFLAGS.EMBER_MILK] = 1;
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Hair Extension Serum (Z)
@@ -699,7 +700,7 @@ package classes.Scenes.NPCs
 			}
 			outputText(" on the egg.");
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Your Blood (Z)
@@ -722,7 +723,7 @@ package classes.Scenes.NPCs
 			//(Token HP Loss, can't drop below 1 HP.)
 			player.takeDamage(10);
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Masturbate Onto the Egg (Z)
@@ -1060,7 +1061,7 @@ package classes.Scenes.NPCs
 			//Talk about Dragons
 			//Talk about Exploring
 			//Talk about Yourself
-			simpleChoices("Dragons", talkToEmberAboutDragonzzz, "Exploring", discussExplorationWithEmber, "Yourself", talkToEmberAboutYourself, "", 0, "Back", emberCampMenu);
+			simpleChoices("Dragons", talkToEmberAboutDragonzzz, "Exploring", discussExplorationWithEmber, "Yourself", talkToEmberAboutYourself, "", null, "Back", emberCampMenu);
 		}
 
 //Talk about Dragons (Z)
@@ -1453,13 +1454,13 @@ package classes.Scenes.NPCs
 			//(If Ember hasn't recovered from the last time " + emberMF("he","she") + " shared her blood)
 			if (flags[kFLAGS.DRANK_EMBER_BLOOD_TODAY] == 1 && !debug) {
 				outputText("\n\n\"<i>Sorry, but I'm still recovering from last time, so no blood for you,</i>\" Ember states matter-of-factly.");
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			//(Low Affection)
 			if (emberAffection() <= 25) {
 				outputText("\n\n\"<i>What!?  Why should I hurt myself for you?!</i>\"  Ember indignantly blows a small ring of flames at you and walks away.");
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			//(Medium Affection)
@@ -1472,7 +1473,7 @@ package classes.Scenes.NPCs
 
 				outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking...");
 				//[Continue][Stop]
-				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", 0, "", 0, "", 0);
+				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", null, "", null, "", null);
 			}
 			//(High Affection)
 			else {
@@ -1482,7 +1483,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber kisses you back; " + emberMF("his", "her") + " bleeding tongue stroking yours lovingly.");
 				outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking?");
 				//[Continue][Stop]
-				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", 0, "", 0, "", 0);
+				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", null, "", null, "", null);
 			}
 			//Flag as drinking her blood today!
 			flags[kFLAGS.DRANK_EMBER_BLOOD_TODAY] = 1;
@@ -1807,7 +1808,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber bites her lips and says once more, a bit louder this time, \"<i>Would you like to watch?</i>\"");
 				outputText("\n\nYou blink at the offer, then give her your most winning smile.  You could agree, or just smooth-talk your way out of it.");
 				//[Watch][Fob Off]
-				simpleChoices("Watch", watchMediumAffectionEmberEggLay, "Don't Watch", dontWatchEmberLayEgg, "", 0, "", 0, "", 0);
+				simpleChoices("Watch", watchMediumAffectionEmberEggLay, "Don't Watch", dontWatchEmberLayEgg, "", null, "", null, "", null);
 			}
 			//(High Affection)
 			else {
@@ -3305,7 +3306,7 @@ package classes.Scenes.NPCs
 			dynStats("lus", 10 + player.lib / 10);
 			outputText("\n\nWhat do you say?");
 			//[Accept] [Deny]
-			simpleChoices("Accept", timeToPuffTheMagicDragon, "Deny", fuckOffEmberIWantANap, "", 0, "", 0, "", 0);
+			simpleChoices("Accept", timeToPuffTheMagicDragon, "Deny", fuckOffEmberIWantANap, "", null, "", null, "", null);
 		}
 
 //[=Deny=]
@@ -3330,7 +3331,7 @@ package classes.Scenes.NPCs
 			emberAffection(-10);
 			//Set some cooldown so this doesn't proc all the goddamn time!
 			player.createStatusAffect(StatusAffects.EmberFuckCooldown, 12, 0, 0, 0);
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //[=Accept=]
@@ -3348,7 +3349,7 @@ package classes.Scenes.NPCs
 			if (player.pregnancyIncubation == 0 && !pregnancy.isPregnant && flags[kFLAGS.EMBER_GENDER] == 3 && player.gender == 3) {
 				outputText("\n\n(Who should bear the kids?)");
 				//[Ember] [You]
-				simpleChoices("Ember", breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding, "You", getKnockedUpByEmbrahBroBaby, "", 0, "", 0, "", 0);
+				simpleChoices("Ember", breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding, "You", getKnockedUpByEmbrahBroBaby, "", null, "", null, "", null);
 			}
 			//[Play appropriate breeding scene.]
 			//Female Breeding Scene:
@@ -3617,7 +3618,7 @@ package classes.Scenes.NPCs
 			outputText(" once more.  \"<i>D-don't get ahead of yourself!</i>\" " + emberMF("he", "she") + " yells indignantly, then gets up and rushes away.  You watch and give a smile; " + emberMF("he", "she") + " is champing at the bit to make children with you, but can't bring " + emberMF("himself", "herself") + " to confess how " + emberMF("he", "she") + " really feels.  Still, you're quite certain your efforts took.");
 			//(if PC now pregnant:
 			if (!emberPregged) outputText("  You touch your belly with a smirk.  Very certain they took indeed...");
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		private function emberPregUpdate():Boolean

@@ -24,19 +24,17 @@ package classes.Scenes.Areas.Swamp
 				outputText("A moment later, he flips down onto his feet and advances, touching his half-hard, foreskin-shrouded cock.  Judging from the glint in his eyes, he plans to force himself upon you!", false);
 				//- auto fight
 				startCombat(new MaleSpiderMorph());
-				doNext(1);
 			}
 			//NICE GUY MODE: 
 			else {
 				outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"", false);
 				//[Fight] [Talk] [Leave]
-				simpleChoices("Fight", fightSpiderBoy, "Talk", talkToSpiderBoy, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
+				simpleChoices("Fight", fightSpiderBoy, "Talk", talkToSpiderBoy, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 			}
 		}
 		
 		private function fightSpiderBoy():void {
 			startCombat(new MaleSpiderMorph());
-			eventParser(1);
 			spriteSelect(74);
 		}
 

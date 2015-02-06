@@ -252,7 +252,7 @@ private function roxanneDrinkingContest():void {
 		var cunnilingus:Function = null;
 		if(player.hasCock()) fellatio = roxanneGivesABlowjob;
 		if(player.hasVagina()) cunnilingus = roxanneCunnilingus;
-		simpleChoices("Cunnilingus",cunnilingus,"Fellatio",fellatio,"Rimming",roxanneRimjob,"",0,"",0);
+		simpleChoices("Cunnilingus", cunnilingus, "Fellatio", fellatio, "Rimming", roxanneRimjob, "", null, "", null);
 	}
 }
 

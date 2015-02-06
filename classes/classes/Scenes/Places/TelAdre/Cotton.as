@@ -273,7 +273,7 @@ private function acceptYoga():void {
 		if(player.gender > 0)
 			getFucked = cottonFucksYouInShowerRepeat;
 		//if(player.spe >= 50 && !player.isTaur()) option3 = 2819;
-		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
+		simpleChoices("Fuck Her", fuckHer, "Get Fucked", getFucked, "Tantric Sex", option3, "", null, "Leave", leaveCotton);
 	}
 	//First time
 	else if(flags[kFLAGS.TIMES_HAD_YOGA] == 0) {
@@ -292,7 +292,7 @@ private function acceptYoga():void {
 
 		outputText("\"<i>Oh, that's too bad. But you've done pretty good for a beginner,</i>\" she helps you up off the mat and pats you gently on the back. \"<i>Want to hit the showers then?</i>\" Despite having done little more than stretching, you find you are sweating quite a bit... but something makes you wonder if her idea of hitting the shower is the same as yours.", false);
 		//[Shower] or [Leave]
-		simpleChoices("Shower",cottonShowerFunTimes,"",0,"",0,"",0,"Leave",leaveAfterYoga);
+		simpleChoices("Shower", cottonShowerFunTimes, "", null, "", null, "", null, "Leave", leaveAfterYoga);
 	}
 	//(Repeat Encounter (Didn't have sex))
 	//Done yoga > 0 && met type = 1
@@ -307,7 +307,7 @@ private function acceptYoga():void {
 			getFucked = cottonFucksYouInShowerRepeat;
 		if(player.spe >= 50 && !player.isTaur())
 			option3 = cottonTantricSex;
-		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
+		simpleChoices("Fuck Her", fuckHer, "Get Fucked", getFucked, "Tantric Sex", option3, "", null, "Leave", leaveCotton);
 	}
 	//(Repeat Encounter (Had Sex))
 	else {
@@ -329,7 +329,7 @@ private function acceptYoga():void {
 			getFucked = cottonFucksYouInShowerRepeat;
 		if(player.spe >= 50 && !player.isTaur())
 			option3 = cottonTantricSex;
-		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
+		simpleChoices("Fuck Her", fuckHer, "Get Fucked", getFucked, "Tantric Sex", option3, "", null, "Leave", leaveCotton);
 	}
 	//(Increases muscle tone up to 50, speed and feminine features.)
 	player.modTone(52,1);
@@ -423,7 +423,7 @@ private function cottonShowerFunTimes():void {
 		option1 = cottonFirstTimeFuckHer;
 	if(player.gender > 0)
 		option2 = cottonFucksYou;
-	simpleChoices("Fuck Her",option1,"Get Fucked",option2,"ServiceHer",serviceFirstTimeCotton,"",0,"Refuse",refuseFirstTimeCotton);
+	simpleChoices("Fuck Her", option1, "Get Fucked", option2, "ServiceHer", serviceFirstTimeCotton, "", null, "Refuse", refuseFirstTimeCotton);
 }
 
 //(Fuck Her)
@@ -1135,7 +1135,7 @@ public function nomSomeTitMilkCereal():void {
 		player.addStatusValue(StatusAffects.Feeder,1,1);
 		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //COTTON PREGNANCY

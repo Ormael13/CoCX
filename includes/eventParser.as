@@ -7,7 +7,30 @@ import classes.Scenes.Areas.Lake;
 //const EVENT_PARSER_ESCAPE:int = 800;
 //const PHYLLA_GEMS_HUNTED_TODAY:int = 893;
 
-public function eventParser(eventNo:*):void {
+public function playerMenu():void {
+	if (!inCombat) spriteSelect(-1);
+	mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo);
+	mainView.nameBox.visible = false;
+	if (gameState == 1 || gameState == 2) {
+		combatMenu();
+		return;
+	}
+	//Clear restriction on item overlaps if not in combat
+	plotFight = false;
+	if (inDungeon) {
+		dungeonMenu();
+		return;
+	}
+	else if (inRoomedDungeon) {
+		if (inRoomedDungeonResume != null) inRoomedDungeonResume();
+		return;
+	}
+	flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
+	doCamp();
+}
+
+/* All calls replaced by calls to playerMenu
+public function eventParser(eventNo:Function):void {
 	//Clear banked buttons
 
 	//trace("EVENT CODE: " + eventNo);
@@ -27,7 +50,7 @@ public function eventParser(eventNo:*):void {
 		if (eventNo != 1) {
 			hideMenus();
 		}
-		
+*/		
 		/* Replaced by calls to gameOver()
 		if (eventNo == 9999) // Game over event; overriding whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
 		{
@@ -46,13 +69,13 @@ public function eventParser(eventNo:*):void {
 			return;
 		}*/
 
-
+/*
 		if(eventNo < 1000) doSystem(eventNo);
 		if(eventNo >=1000 && eventNo < 2000) errorPrint(eventNo); //No events should be in this range anymore. Previously called inventory.doItems(eventNo);
 		if(eventNo >=2000 && eventNo < 5000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doEvent(eventNo);
-		if(eventNo >=5000 && eventNo < 7000) doCombat(eventNo);
+		if(eventNo >=5000 && eventNo < 7000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doCombat(eventNo);
 		if(eventNo >= 10000 && eventNo < 10999) errorPrint(eventNo); //No events should be in this range anymore. Previously called charCreation.doCreation(eventNo);
-		if(eventNo >= 11000) doDungeon(eventNo);
+		if(eventNo >= 11000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doDungeon(eventNo);
 	}
 
 	else
@@ -60,8 +83,27 @@ public function eventParser(eventNo:*):void {
 		errorPrint(eventNo);		// Dump the system state to the window so the player can file a decent bug-report
 	}
 }
+*/
 
-public function gameOver():void { //Game over event; override whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
+public function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
+	if (testingBlockExiting) {
+		doNext(camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
+	}
+	else {
+		if (clear) clearOutput();
+		outputText("\n\n<b>GAME OVER</b>");
+		menu();
+		addButton(0, "Game Over", gameOverMenuOverride);
+		addButton(3, "NewGamePlus", charCreation.newGamePlus);
+		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", playerMenu);
+		gameOverMenuOverride();
+		
+	}
+	inCombat = false;
+	dungeonLoc = 0; //Replaces inDungeon = false;
+}
+
+private function gameOverMenuOverride():void { //Game over event; override whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
 	mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 	mainView.showMenuButton(MainView.MENU_DATA);
 	mainView.hideMenuButton(MainView.MENU_APPEARANCE);
@@ -69,6 +111,7 @@ public function gameOver():void { //Game over event; override whatever the fuck 
 	mainView.hideMenuButton(MainView.MENU_PERKS);
 }
 
+/*
 public function doSystem(eventNo:Number):void {
 	//@ camp
 	//(clear data/appearance buttons if not at camp
@@ -82,24 +125,24 @@ public function doSystem(eventNo:Number):void {
 		case 1:
 			mainView.nameBox.visible = false;
 			if (gameState == 1 || gameState == 2) {
-				menuLoc = 0;
-				eventParser(5000);
+//This is now automatic - newRound arg defaults to true				menuLoc = 0;
+				combatMenu();
 				return;
 			}
 			//Clear restriction on item overlaps if not in combat
 			plotFight = false;
 			if (inDungeon) {
-				menuLoc = 0;
-				dungeonRoom(dungeonLoc);
+//This is now automatic - newRound arg defaults to true				menuLoc = 0;
+				dungeonMenu();
 				return;
 			}
 			else if (inRoomedDungeon)
 			{
-				menuLoc = 0;
+//This is now automatic - newRound arg defaults to true				menuLoc = 0;
 				if (inRoomedDungeonResume != null) inRoomedDungeonResume();
 				return;
 			}
-			menuLoc = 0;
+//This is now automatic - newRound arg defaults to true			menuLoc = 0;
 			flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
 			camp.doCamp();
 			return;
@@ -146,45 +189,46 @@ public function doSystem(eventNo:Number):void {
 			return;
 */
 
-		case 13:
-			camp.returnToCampUseOneHour();
+//		case 13:
+//			camp.returnToCampUseOneHour();
 /*			//Pass an hour
 			outputText("An hour passes...\n", true);
 			timeQ = 1;
 			goNext(1, false); */
-			return;
+//			return;
 
 
-		case 14:
-			camp.returnToCampUseTwoHours();
+//		case 14:
+//			camp.returnToCampUseTwoHours();
 /*			outputText("Two hours pass...\n", true);
 			timeQ = 2;
 			goNext(2, false); */
-			return;
+//			return;
 
 
-		case 15:
-			camp.returnToCampUseFourHours();
+//		case 15:
+//			camp.returnToCampUseFourHours();
 /*			outputText("Four hours pass...\n", true);
 			timeQ = 4;
 			goNext(4, false); */
-			return;
+//			return;
 
 
-		case 16:
-			camp.returnToCampUseEightHours();
+//		case 16:
+//			camp.returnToCampUseEightHours();
 /*			outputText("Eight hours pass...\n", true);
 			timeQ = 8;
 			goNext(8, false); */
-			return;
+/*			return;
 
 
 		case 17:
 			outputText("", true);
 			goNext(24, false);
 			return;
+*/
 
-
+/* Now called directly
 		case 19:
 			//Load menu
 			saves.loadScreen();
@@ -210,13 +254,12 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 30:
-			// I have NO idea what could call this. I don't see anything that passes 30 as an event number anywhere
+			//Was used in the save system to return to the menu // I have NO idea what could call this. I don't see anything that passes 30 as an event number anywhere
 			var f:MouseEvent;
 			saves.saveLoad(f);
 			return;
 
 
-/* Now called directly
 		case 40:
 			//Use wait command
 			//See camp.as
@@ -296,7 +339,7 @@ public function doSystem(eventNo:Number):void {
 		case 52:
 			allNaturalStimBeltUse();
 			return;
-*/
+
 
 		case 65:
 			//turn on/off autosave
@@ -306,7 +349,6 @@ public function doSystem(eventNo:Number):void {
 			return;
 
 
-/* Now called directly
 		case 71:
 			//Places menu
 			camp.places(true);
@@ -380,7 +422,7 @@ public function doSystem(eventNo:Number):void {
 			perkBuyMenu();
 			return;
 */
-
+/* Were never called
 		case 118:
 			if (!monster.hasVagina()) monster.createVagina();
 			monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
@@ -397,11 +439,12 @@ public function doSystem(eventNo:Number):void {
 			mainView.eventTestInput.y = -1055.1;
 			mainMenu();
 			return;
-
-	}
+*/
+/*	}
 
 	errorPrint(eventNo);		// Dump the system state to the window so the player can file a decent bug-report
 }
+*/
 
 public function getCurrentStackTrace():String		// Fuck, stack-traces only work in the debug player.
 {
@@ -492,7 +535,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			else if (temp > rand(100) && player.findStatusAffect(StatusAffects.DefenseCanopy) < 0) {
 				if (player.gender > 0 && (player.findStatusAffect(StatusAffects.JojoNightWatch) < 0 || player.findStatusAffect(StatusAffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha())) {
 					impScene.impGangabangaEXPLOSIONS();
-					doNext(1);
+					doNext(playerMenu);
 					return true;
 				}
 				else if (flags[kFLAGS.KIHA_CAMP_WATCH] > 0 && kihaFollower.followerKiha()) {
@@ -645,7 +688,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			player.removeStatusAffect(StatusAffects.LootEgg);
 			player.removeStatusAffect(StatusAffects.Eggs);
 			trace("TAKEY NAU");
-			inventory.takeItem(itype, camp.campMenu);
+			inventory.takeItem(itype, playerMenu);
 			return true;
 		}
 		// Benoit preggers update
@@ -668,28 +711,28 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 	//Drop axe if too short!
 	if (player.tallness < 78 && player.weapon == weapons.L__AXE) {
 		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n");
-		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
 	}
 	if (player.weapon == weapons.L_HAMMR && player.tallness < 60) {
 		outputText("<b>\nYou've become too short to use this hammer anymore.  You can still keep it in your inventory, but you'll need to be taller to effectively wield it.</b>\n");
-		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
 	}		
 	if (player.weapon == weapons.CLAYMOR && player.str < 40) {
 		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer, and you're forced to stop using it.</b>\n");
-		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
 	}
 	if (player.weapon == weapons.WARHAMR && player.str < 80) {
 		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer!</b>\n");
-		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
 	}
 	//Drop beautiful sword if corrupted!
 	if (player.weaponPerk == "holySword" && player.cor >= 35) {
 		outputText("<b>\nThe <u>" + player.weaponName + "</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
-		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), camp.campMenu);
+		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
 	}
 	//Unequip Lusty maiden armor
@@ -701,19 +744,19 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			if (player.hasCock()) outputText("maleness");
 			else outputText("bulgy balls");
 			outputText(" within the imprisoning leather, and it actually hurts to wear it.  <b>You'll have to find some other form of protection!</b>\n\n");
-			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), camp.campMenu);
+			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), playerMenu);
 			return true;
 		}
 		//Lost pussy
 		else if (!player.hasVagina()) {
 			outputText("\nYou fidget uncomfortably as the crease in the gusset of your lewd bikini digs into your sensitive, featureless loins.  There's simply no way you can continue to wear this outfit in comfort - it was expressly designed to press in on the female mons, and without a vagina, <b>you simply can't wear this exotic armor.</b>\n\n");
-			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), camp.campMenu);
+			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), playerMenu);
 			return true;
 		}
 		//Tits gone or too small
 		else if (player.biggestTitSize() < 4) {
 			outputText("\nThe fine chain that makes up your lewd bikini-top is dangling slack against your flattened chest.  Every movement and step sends it jangling noisily, slapping up against your [nipples], uncomfortably cold after being separated from your " + player.skinFurScales() + " for so long.  <b>There's no two ways about it - you'll need to find something else to wear.</b>\n\n");
-			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), camp.campMenu);
+			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), playerMenu);
 			return true;
 		}
 	}
@@ -738,10 +781,10 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 	}	
 	statScreenRefresh();
 	if (needNext) {
-		doNext(1);
+		doNext(playerMenu);
 		return true;
 	}
-	eventParser(1);
+	playerMenu();
 	return false;
 }
 

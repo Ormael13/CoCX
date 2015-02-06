@@ -688,17 +688,17 @@ internal function nagaRapeChoice():void {
 	if(player.lust >= 33) {
 		outputText("Your body aches for further satisfaction - do you rape the snake woman?", false);
 		if(player.lowerBody == LOWER_BODY_TYPE_GOO) {
-			if(player.gender == 0) simpleChoices("Yes",nagaVictoryGenderless,"Gooey Rape",gooNagaRape,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
-			if(player.gender == 1) simpleChoices("Yes",nagaVictoryMale,"Gooey Rape",gooNagaRape,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
-			if(player.gender == 2) simpleChoices("Yes",nagaVictoryFemale,"Gooey Rape",gooNagaRape,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
-			if(player.gender == 3) simpleChoices("As Male",nagaVictoryMale,"As Female",nagaVictoryFemale,"Gooey Rape",gooNagaRape,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
-			return;	
+			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
+			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
+			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
+			if (player.gender == 3) simpleChoices("As Male", nagaVictoryMale, "As Female", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
+			return;
 		}
 		else {
-			if(player.gender == 0) simpleChoices("Yes",nagaVictoryGenderless,"",0,"",0,"Lay Eggs",eggs,"No",cleanupAfterCombat);
-			if(player.gender == 1) simpleChoices("Yes",nagaVictoryMale,"",0,"",0,"Lay Eggs",eggs,"No",cleanupAfterCombat);
-			if(player.gender == 2) simpleChoices("Yes",nagaVictoryFemale,"",0,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
-			if(player.gender == 3) simpleChoices("As Male",nagaVictoryMale,"As Female",nagaVictoryFemale,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
+			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "", null, "", null, "Lay Eggs", eggs, "No", cleanupAfterCombat);
+			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "", null, "", null, "Lay Eggs", eggs, "No", cleanupAfterCombat);
+			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "", null, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
+			if (player.gender == 3) simpleChoices("As Male", nagaVictoryMale, "As Female", nagaVictoryFemale, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
 			return;	
 		}
 	}
@@ -709,21 +709,23 @@ public function nagaPlayerConstrict():void {
 	outputText("", true);
 	if(player.fatigue + kGAMECLASS.physicalCost(10) > 100) {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...", true);
-		menuLoc = 1;
-		doNext(5000);
+//Gone		menuLoc = 1;
+		menu();
+		addButton(0, "Next", kGAMECLASS.combatMenu, false);
 		return;
 	}
 	//Cannot be used on plural enemies
 	if(monster.plural) {
-		outputText("You launch yourself at " + monster.a+monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You hastily slither backwards before you expose yourself to danger.", true);
+		outputText("You launch yourself at " + monster.a + monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You hastily slither backwards before you expose yourself to danger.", true);
 		outputText("\n\n", false);
 		kGAMECLASS.enemyAI();
 		return;
 	}
 	if(monster.short == "pod") {
 		outputText("You can't constrict something you're trapped inside of!", true);
-		menuLoc = 1;
-		doNext(5000);
+//Gone		menuLoc = 1;
+		menu();
+		addButton(0, "Next", kGAMECLASS.combatMenu, false);
 		return;
 	}
 	fatigue(10,2);

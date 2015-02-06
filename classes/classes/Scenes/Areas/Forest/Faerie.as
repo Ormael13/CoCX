@@ -44,8 +44,8 @@ public function encounterFaerie():void {
 	outputText("The faerie slows the beating of her wings and hovers towards you. You dismiss your fearful notions, certain a small faerie is quite harmless to you.\n\n", false);
 	outputText("How do you react?", false);
 	//Shoo Away, Nothing, RAEP
-	if(player.hasVagina()) simpleChoices("Shoo Away",faerieShooAway,"Nothing",faerieDoNothing,"Rape",faerieRAEP,"",0,"",0);
-	else simpleChoices("Shoo Away",faerieShooAway,"Nothing",faerieDoNothing,"",0,"",0,"",0);
+	if (player.hasVagina()) simpleChoices("Shoo Away", faerieShooAway, "Nothing", faerieDoNothing, "Rape", faerieRAEP, "", null, "", null);
+	else simpleChoices("Shoo Away", faerieShooAway, "Nothing", faerieDoNothing, "", null, "", null, "", null);
 }
 
 private function faerieRAEP():void {

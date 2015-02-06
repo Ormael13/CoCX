@@ -384,7 +384,6 @@ private function sheila1ndEncLookCloserPtIITalkLeave():void {
 private function sheila1ndEncLookCloserPtIITalkFight():void {
 	clearOutput();
 	startCombat(new Sheila());
-	eventParser(5000);
 }
 
 //XP-1: PC's apology (sheila xp = -1 and demon sheila = 0):
@@ -452,7 +451,6 @@ private function apologySheilaSlapSult():void {
 	//set sheila xp = -3, go to fight
 	flags[kFLAGS.SHEILA_XP] = -3;
 	startCombat(new Sheila());
-	doNext(1);
 }
 
 //[XP-1 - Nothing]
@@ -520,7 +518,6 @@ private function sheilaPologyFight():void {
 	//go to fight, set sheila xp = -3
 	flags[kFLAGS.SHEILA_XP] = -3;
 	startCombat(new Sheila());
-	doNext(1);
 }
 
 //[XP-2 - Cast Arouse]
@@ -630,7 +627,6 @@ private function sheilaReallyMadStandGround():void {
 	}
 	//go to fight; if silly mode, heal 20 hp and 10 fatigue on PC and set sheila HP = 120%
 	startCombat(new Sheila());
-	doNext(1);
 	if(silly()) {
 		monster.HP *= 1.2;
 		fatigue(-10);
@@ -1235,7 +1231,7 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 	if(model.time.hours > 6) model.time.days++;
 	model.time.hours = 6;
 	statScreenRefresh();
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[XP3 - Guard Duty]
@@ -3409,7 +3405,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOut():void {
 	}
 	//pass 4 hours and reduce corruption or something, give 3 hrs rest if naga, increase archery skill and increase fatigue by a lot (50-60+) if angel of death
 	dynStats("cor", -2);
-	if(model.time.hours + 4 < 21) doNext(15);
+	if(model.time.hours + 4 < 21) doNext(camp.returnToCampUseFourHours);
 	else {
 		//(if time after adding 4 hours >= 21:00 or = 0:00, additionally output)
 		outputText("\n\n<b>\"<i>Oh, god dammit.</i>\"</b>");
@@ -3647,7 +3643,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	camp.sleepRecovery(false);
 	model.time.hours = 7;
 	model.time.days++;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //demonization Sheila transformation (output when demon sheila = 0 and sheila corruption is about to hit 100 with the PC):

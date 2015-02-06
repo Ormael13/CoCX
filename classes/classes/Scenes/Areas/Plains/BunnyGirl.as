@@ -29,7 +29,7 @@ public function bunnbunbunMeet():void {
 		
 		outputText("Even though nearly a minute has passed, the bunny-lass is STILL frozen and staring.  She hasn't done anything since realizing that you're looking at her.  Well, it looks like the ball's in your court.  What do you do?", false);
 		//[Talk] [Rape Her]
-		simpleChoices("Talk",talkToBunnyBunBun,"Rape Her",rapeBunBun,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+		simpleChoices("Talk", talkToBunnyBunBun, "Rape Her", rapeBunBun, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 	}
 	//Met her
 	else {
@@ -75,7 +75,8 @@ public function bunnbunbunMeet():void {
 		outputText("  Her dick in your ass?)", false);
 		//var Ass:Number = 0;
 		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		choices("Your Vagina",DickInV,"Her Vagina",Vagina,"69",sixtyNine,"LayYourEggs",eggs,"Your Ass",bunbunFucksPCInAss,"",0,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);		
+		choices("Your Vagina", DickInV, "Her Vagina", Vagina, "69", sixtyNine, "LayYourEggs", eggs, "Your Ass", bunbunFucksPCInAss,
+			"", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 	}
 }
 //[Talk]

@@ -214,7 +214,7 @@ public function displayPerks(e:MouseEvent = null):void {
 		outputText("\n<b>You can adjust your double attack settings.</b>");
 		addButton(2,"Dbl Options",doubleAttackOptions);
 	}
-	addButton(0,"Next",eventParser,1);
+	addButton(0, "Next", playerMenu);
 }
 
 public function doubleAttackOptions():void {
@@ -242,7 +242,7 @@ public function doubleAttackOptions():void {
 		addButton(1,"Dynamic",doubleAttackDynamic);
 	}
 	var e:MouseEvent;
-	addButton(4,"Back",displayPerks,e);
+	addButton(4, "Back", displayPerks);
 }
 
 public function doubleAttackForce():void {
@@ -280,7 +280,7 @@ public function levelUpGo(e:MouseEvent = null):void {
 	}
 	else {
 		outputText("<b>ERROR.  LEVEL UP PUSHED WHEN PC CANNOT LEVEL OR GAIN PERKS.  PLEASE REPORT THE STEPS TO REPRODUCE THIS BUG TO FENOXO@GMAIL.COM OR THE FENOXO.COM BUG REPORT FORUM.</b>");
-		doNext(camp.campMenu);
+		doNext(playerMenu);
 	}
 }
 
@@ -321,7 +321,7 @@ private function perkBuyMenu():void {
 		outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 		if(player.perkPoints > 1) outputText("s");
 		outputText(".");
-		doNext(camp.campMenu);
+		doNext(playerMenu);
 		return;
 	}
 	if (testingBlockExiting) {
@@ -356,7 +356,7 @@ private function perkSkip():void {
 	stage.focus = null;
 	if (mainView.aCb.parent != null) {
 		mainView.removeChild(mainView.aCb);
-		camp.campMenu();
+		playerMenu();
 	}
 }
 
@@ -564,7 +564,7 @@ public function applyPerk(perk:PerkClass):void {
 		HPChange(player.tou, false);
 		statScreenRefresh();
 	}
-	doNext(camp.campMenu);
+	doNext(playerMenu);
 }
 
 public function buttonText(buttonName:String):String {
@@ -902,9 +902,9 @@ public function createCallBackFunction(func:Function, arg:*):Function
 	}
 	if( arg == -9000 || arg == null )
 	{
-		if (func == eventParser){
+/*		if (func == eventParser){
 			CoC_Settings.error("createCallBackFunction(eventParser,"+arg+")");
-		}
+		} */
 		return function ():*
 		{ 
 			if (CoC_Settings.haltOnErrors) 
@@ -1056,18 +1056,29 @@ public function menu(text1:String = "", func1:Function = null, arg1:Number = -90
 }
 */
 
-public function choices(text1:String, butt1:*, 
-						text2:String, butt2:*, 
-						text3:String, butt3:*, 
-						text4:String, butt4:*, 
-						text5:String, butt5:*, 
-						text6:String, butt6:*, 
-						text7:String, butt7:*, 
-						text8:String, butt8:*, 
-						text9:String, butt9:*, 
-						text0:String, butt0:*):void 
-{
-
+public function choices(text1:String, butt1:Function,
+						text2:String, butt2:Function,
+						text3:String, butt3:Function,
+						text4:String, butt4:Function,
+						text5:String, butt5:Function,
+						text6:String, butt6:Function,
+						text7:String, butt7:Function,
+						text8:String, butt8:Function,
+						text9:String, butt9:Function,
+						text0:String, butt0:Function):void { //New typesafe version
+							
+	menu();	
+	addButton(0, text1, butt1);
+	addButton(1, text2, butt2);
+	addButton(2, text3, butt3);
+	addButton(3, text4, butt4);
+	addButton(4, text5, butt5);
+	addButton(5, text6, butt6);
+	addButton(6, text7, butt7);
+	addButton(7, text8, butt8);
+	addButton(8, text9, butt9);
+	addButton(9, text0, butt0);
+/*
 	var callback :Function;
 	var toolTipText :String;
 
@@ -1125,6 +1136,7 @@ public function choices(text1:String, butt1:*,
 	// args = new Array();
 	//mainView.setOutputText( currentText );
 	flushOutputTextToGUI();
+*/
 }
 
 /****
@@ -1250,15 +1262,14 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 }
 
 // simpleChoices and doYesNo are convenience functions. They shouldn't re-implement code from choices()
-public function simpleChoices(text1:String, butt1:*, 
-						text2:String, butt2:*, 
-						text3:String, butt3:*, 
-						text4:String, butt4:*, 
-						text5:String, butt5:*):void 
-{
+public function simpleChoices(text1:String, butt1:Function, 
+						text2:String, butt2:Function, 
+						text3:String, butt3:Function, 
+						text4:String, butt4:Function, 
+						text5:String, butt5:Function):void { //New typesafe version
 
 	//trace("SimpleChoices");
-	choices(text1,butt1,
+/*	choices(text1,butt1,
 			text2,butt2,
 			text3,butt3,
 			text4,butt4,
@@ -1267,10 +1278,20 @@ public function simpleChoices(text1:String, butt1:*,
 			"",0,
 			"",0,
 			"",0,
-			"",0);
+			"",0);*/
+	menu();
+	addButton(0, text1, butt1);
+	addButton(1, text2, butt2);
+	addButton(2, text3, butt3);
+	addButton(3, text4, butt4);
+	addButton(4, text5, butt5);
 }
 
-public function doYesNo(eventYes:*, eventNo:*):void {
+public function doYesNo(eventYes:Function, eventNo:Function):void { //New typesafe version
+	menu();
+	addButton(0, "Yes", eventYes);
+	addButton(1, "No", eventNo);
+/*
 	//Make buttons 1-2 visible and hide the rest.
 
 	//trace("doYesNo");
@@ -1286,20 +1307,23 @@ public function doYesNo(eventYes:*, eventNo:*):void {
 			"",0);
 
 }
+*/
+}
 
-
-
-public function doNext(eventNo:*):void {
+public function doNext(event:Function):void { //Now typesafe
 	//Prevent new events in combat from automatically overwriting a game over. 
-	if(mainView.getButtonText( 0 ).indexOf("Game Over") != -1) {
+	if (mainView.getButtonText(0).indexOf("Game Over") != -1) {
 		trace("Do next setup cancelled by game over");
 		return;
 	}
 	
 	//trace("DoNext have item:", eventNo);
-	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
+	//choices("Next", event, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
+	menu();
+	addButton(0, "Next", event);
 }
 
+/* Was never called
 public function doNextClear(eventNo:*):void 
 {
 	outputText("", true, true);
@@ -1307,6 +1331,7 @@ public function doNextClear(eventNo:*):void
 	//trace("DoNext have item:", eventNo);
 	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 }
+*/
 
 public function invertGo():void{ 
 	mainView.invert();
@@ -1761,7 +1786,7 @@ public function displayStats(e:MouseEvent = null):void
 		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects, false);
 	// End Ongoing Stat Effects
 	
-	doNext(1);
+	doNext(playerMenu);
 }
 
 public function lustPercent():Number {
@@ -1846,7 +1871,7 @@ public function testDynStatsEvent():void {
 	dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25,"lust/",2);
 	outputText("Mod: 0 1 +2 -3 *2 =25 /2\n");
 	outputText("New: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 /**

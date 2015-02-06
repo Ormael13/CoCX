@@ -25,13 +25,13 @@ public function displayControls():void
 	
 	choices("Reset Ctrls", resetControls,
 			"Clear Ctrls", clearControls,
-			"Null", 0,
-			"Null", 0,
-			"Null", 0,
-			"Null", 0,
-			"Null", 0,
-			"Null", 0,
-			"Null", 0,
+			"Null", null,
+			"Null", null,
+			"Null", null,
+			"Null", null,
+			"Null", null,
+			"Null", null,
+			"Null", null,
 			"Back", hideControls);
 }
 

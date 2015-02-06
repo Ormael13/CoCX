@@ -49,7 +49,6 @@
 private function fightHolli():void {
 	flags[kFLAGS.FOUGHT_HOLLI] = 1;
 	startCombat(new Holli());
-	eventParser(1);
 }
 
 public function treeMenu(output:Boolean = true):void {
@@ -229,7 +228,7 @@ public function getASprout():void {
 	flags[kFLAGS.FUCK_FLOWER_LEVEL] = 1;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
 	//[Yes] [No]
-	simpleChoices("Yes",destroyDatFukkinTree,"No",letZeFuckingSproutLive,"",0,"",0,"",0);
+	simpleChoices("Yes", destroyDatFukkinTree, "No", letZeFuckingSproutLive, "", null, "", null, "", null);
 }
 //[Yes] Destroy Tree (edited)
 private function destroyDatFukkinTree():void {
@@ -247,7 +246,7 @@ private function letZeFuckingSproutLive():void {
 	clearOutput();
 	outputText("Looking down at the sapling, you stay your wrath.  It may be corrupt, but it hasn't done anything to harm you just yet.  You give it a little pat on the uppermost leaves and leave it be.  It's not like it's going anywhere.");
 	outputText("\n\n(<b>'Plant' added to your items menu</b>.  It's too small to know what it will grow into yet.  You can currently remove it at your leisure.)");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Phase 2: Pussy Tentacle Flower Phase (edited)
@@ -270,8 +269,7 @@ public function fuckPlantGrowsToLevel2():void {
 	if(player.hasCock() && player.cockThatFits(100) >= 0 && player.lust >= 33) fuck = fuckFuckingFuckFlowerP2;
 	var ride:Function = null;
 	if(player.hasVagina() && player.lust >= 33) ride = rideDatFuckingFukkFlowerP2;
-	simpleChoices("Fuck It",fuck,"Ride Stamen",ride,"Do Nothing",1,"Destroy It",destroyDatFuckingPlantAtP2,"",0);
-	
+	simpleChoices("Fuck It", fuck, "Ride Stamen", ride, "Do Nothing", playerMenu, "Destroy It", destroyDatFuckingPlantAtP2, "", null);
 }
 
 
@@ -386,7 +384,7 @@ public function flowerGrowsToP3():void {
 	if(player.hasCock() && player.lust >= 33) fuck = fuckTheFlower;
 	if(player.hasVagina() && player.lust >= 33) ride = rideTheWalrusP3;
 	//[Fuck flower] [Drink Sap] [Ride Tentacles] [{Torch It}] [Leave It]
-	simpleChoices("Fuck Flower",fuck,"Drink Sap",drinkThePlantGirlsSap,"Ride Tentacle",ride,"Torch It",burnIt, "Leave It", 1);
+	simpleChoices("Fuck Flower", fuck, "Drink Sap", drinkThePlantGirlsSap, "Ride Tentacle", ride, "Torch It", burnIt, "Leave It", playerMenu);
 }
 
 //Fuck Flower (skimmed)
@@ -564,7 +562,7 @@ public function JojoTransformAndRollOut():void {
 	player.removeStatusAffect(StatusAffects.PureCampJojo);
 	player.createKeyItem("Jojo's Talisman",0,0,0,0);
 	
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Amily Hates Trees -Z
@@ -577,7 +575,7 @@ public function amilyHatesTreeFucking():void {
 	outputText("\n\nNo matter how you try to interrupt, Amily's not even giving you a chance to answer...");
 	
 	//[Stay Quiet][Slap Her]
-	simpleChoices("Stay Quiet",stayQuietWhileAmilyBitchesAboutFuckingArborday,"Slap Her",slapAmilysWhoreFace,"",0,"",0,"",0);
+	simpleChoices("Stay Quiet", stayQuietWhileAmilyBitchesAboutFuckingArborday, "Slap Her", slapAmilysWhoreFace, "", null, "", null, "", null);
 }
 //[Stay Quiet]
 private function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
@@ -595,7 +593,7 @@ private function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	//Change to plain mouse birth!
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Slapaho]
@@ -617,7 +615,7 @@ private function slapAmilysWhoreFace():void {
 	flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
 	//no more classes, no more books; no more Amily's dirty looks
 	//bitch goes in ruined village
-	doNext(1);
+	doNext(playerMenu);
 }
 
 
@@ -1352,7 +1350,7 @@ private function holliPlaysWithPenisesBadEnd():void {
 	outputText("\n\n\"<i>Simple-minded fool,</i>\" Holli spits at the distant, retreating back of the newest Champion, stroking the erect shaft of her partner.  \"<i>I'm eager to see where and when she will take root.  Though, I wonder if your seed will impregnate her before mine can absorb it all?</i>\"");
 	
 	//--[Game Over], man! [Game Over]!--
-	eventParser(5035);
+	getGame().gameOver();
 }
 
 private function girlsGetANiceManToBadEnd():void {
@@ -1480,7 +1478,7 @@ private function girlsGetANiceManToBadEnd():void {
 	outputText("\n\nHolli watches him until he's out of sight.  \"<i>When something seems too good to be true... it probably is.  Stupid imbecile.</i>\"  She turns to the figure in the tree, who is frowning deeply.  \"<i>Oh my... I was just lying before, but <b>do</b> you actually like him?  Well, you'll meet him again - when he sprouts and joins with Marae's roots.  In the meanwhile, I'm eager to see what the child of a pure human man and a once-human dryad like you will be.  I wonder if its tree will be more interesting than those of the imp- and beast-spawns you've given birth to already?</i>\"");
 	
 	//--Oh shit, it's already... [Game Over]--
-	eventParser(5035);
+	getGame().gameOver();
 }
 
 private function holliAndGenderlessSittingInATree():void {
@@ -1519,7 +1517,7 @@ private function holliAndGenderlessSittingInATree():void {
 	outputText("...");
 	
 	//--Dante's Purgatorio is an epic poem about [Game Over]--
-	eventParser(5035);
+	getGame().gameOver();
 }
 
 public function amilyComesBack():void {
@@ -1529,7 +1527,7 @@ public function amilyComesBack():void {
 	flags[kFLAGS.AMILY_FOLLOWER] = 1;
 	//Enable village encounters
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 }
 }

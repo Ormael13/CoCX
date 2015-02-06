@@ -226,9 +226,9 @@
 			}
 			if (player.hasCock() && findStatusAffect(StatusAffects.BimboBrawl) < 0) rando = 1 + rand(3);
 			else rando = 1 + rand(2);
-			if (rando == 1) game.eventParser(special1);
-			if (rando == 2) game.eventParser(special2);
-			if (rando == 3) game.eventParser(special3);
+			if (rando == 1) special1();
+			if (rando == 2) special2();
+			if (rando == 3) special3();
 			combatRoundOver();
 		}
 

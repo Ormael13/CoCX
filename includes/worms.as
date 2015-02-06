@@ -25,51 +25,80 @@ As Fenoxo has made his game code open source, this license DOES NOT transfer to 
 
 For further information and license requests, Dxasmodeus may be contacted through private message at the Futanari Palace. http://www.futanaripalace.com/forum.php. */
 
+public function wormEncounter():void {
+	spriteSelect(76);
+	clearOutput();
+	if (player.findStatusAffect(StatusAffects.MetWorms) < 0) { //First encounter
+		outputText("As you are exploring, a rather pungent, peaty smell assails your nostrils. You hear a strange rustling and an off-kilter squishing noise in the distance. As you explore the area you come upon a most grotesque sight. Before you is a cohesive mass of writhing, wriggling worms! While normally solitary creatures, these appear to have coalesced into a monstrous living colony!\n\n");
+		outputText("You have never before seen such a bizarre freak of nature. You see the mass of annelids creep about across your path. It stops and spreads slightly in your direction before halting. The stench of the mass is indescribable and a thick, viscous slime covers each of the countless worms forming the collective.\n\n");
+		outputText("You stop dead in your tracks, wondering what this swarm will do. After a few tense moments, the mass crawls away in a direction opposite of both you and your current path. You breathe a sigh of relief as you are confident that no good could have come from confronting such a zoological travesty.");
+		dynStats("lus", -10);
+		player.createStatusAffect(StatusAffects.MetWorms, 0, 0, 0, 0);
+		doNext(camp.returnToCampUseOneHour);
+	}
+	else if (player.hasCock()) {
+		outputText("Minding your own business, you make your way through the mountain and you find yourself stopped by another mass of the sickly worms. The collective stops, apparently sensing your presence and briefly ebbs in your direction. After a few tense moments, the mass begins moving again... straight towards you at an alarming rate!\n\n");
+		outputText("What do you do?");
+		simpleChoices("Confront", wormsConfront, "Do Nothing", wormsDoNothing, "", null, "", null, "Run", wormsRun);
+	}
+	else {
+		outputText("Making your way, you stumble on another gross mass of worms. The countless struggling creatures bar the path before you. Again, you freeze in place as the horror gropes about on the ground. It appears to have no real interest in your presence and it makes its way in a direction other than yours, much to your relief.");
+		doNext(camp.returnToCampUseOneHour);
+	}
+}
+
 public function wormToggle():void {
 	spriteSelect(76);
-	outputText("While wandering, you come across a crudely illustrated sign.  It depicts an imp in obvious discomfort, covered in white little worms.  It looks as if one of them is even crawling into the imp's penis!\n\nHow do you feel about that?", true);
-	simpleChoices("Aroused",5058,"Grossed Out",5059,"Who Cares?",5061,"",0,"",0);
+	clearOutput();
+	outputText("While wandering, you come across a crudely illustrated sign.  It depicts an imp in obvious discomfort, covered in white little worms.  It looks as if one of them is even crawling into the imp's penis!\n\nHow do you feel about that?");
+	simpleChoices("Aroused", wormsOn, "Grossed Out", wormsOff, "Who Cares?", wormsPartiallyOn, "", null, "", null);
 }
 
-public function wormsOn():void {
-	player.createStatusAffect(StatusAffects.WormsOn,0,0,0,0);
-}
-public function wormsOff():void {
-	player.createStatusAffect(StatusAffects.WormsOff,0,0,0,0);
+private function wormsOn():void {
+	clearOutput();
+	outputText("You actually think it's kind of a hot idea, and wonder if such creatures actually exist in this land as you make your way back to camp.");
+	player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
+	doNext(camp.returnToCampUseOneHour);
 }
 
+private function wormsPartiallyOn():void {
+	clearOutput();
+	outputText("You shrug and keep walking, not sure how you feel about the strange sign.");
+	player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
+	player.createStatusAffect(StatusAffects.WormsHalf, 0, 0, 0, 0);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function wormsOff():void {
+	clearOutput();
+	outputText("You shudder in revulsion and figure the sign to be the result of someone's perverted fantasy.");
+	player.createStatusAffect(StatusAffects.WormsOff, 0, 0, 0, 0);
+	doNext(camp.returnToCampUseOneHour);
+}
 	
-public function wormsFirstTime():void {
+private function wormsConfront():void {
 	spriteSelect(76);
-	outputText("As you are exploring, a rather pungent, peaty smell assails your nostrils. You hear a strange rustling and an off-kilter squishing noise in the distance. As you explore the area you come upon a most grotesque sight. Before you is a cohesive mass of writhing, wriggling worms! While normally solitary creatures, these appear to have coalesced into a monstrous living colony!\n\n", true);
-	outputText("You have never before seen such a bizarre freak of nature. You see the mass of annelids creep about across your path. It stops and spreads slightly in your direction before halting. The stench of the mass is indescribable and a thick, viscous slime covers each of the countless worms forming the collective.\n\n", false);
-	outputText("You stop dead in your tracks, wondering what this swarm will do. After a few tense moments, the mass crawls away in a direction opposite of both you and your current path. You breathe a sigh of relief as you are confident that no good could have come from confronting such a zoological travesty.", false);
-	doNext(camp.returnToCampUseOneHour);
-	dynStats("lus", -10);
-	player.createStatusAffect(StatusAffects.MetWorms,0,0,0,0);
+	clearOutput();
+	outputText("You turn to confront the worms and combat begins!");
+	startCombat(new WormMass());
 }
 
-public function wormsFemale():void {
+private function wormsDoNothing():void {
 	spriteSelect(76);
-	outputText("Making your way, you stumble on another gross mass of worms. The countless struggling creatures bar the path before you. Again, you freeze in place as the horror gropes about on the ground. It appears to have no real interest in your presence and it makes its way in a direction other than yours, much to your relief.", true);	
-	doNext(camp.returnToCampUseOneHour);
+	clearOutput();
+	outputText("You do nothing, allowing the worms to enter combat range!");
+	startCombat(new WormMass());
 }
 
-public function wormsMale():void {
-	spriteSelect(76);
-	outputText("Minding your own business, you make your way through the mountain and you find yourself stopped by another mass of the sickly worms. The collective stops, apparently sensing your presence and briefly ebbs in your direction. After a few tense moments, the mass begins moving again... straight towards you at an alarming rate!\n\n", true);
-	outputText("What do you do?", false);
-	simpleChoices("Confront", 5056, "Do Nothing",5057,"",0,"",0,"Run",5053);
-}
-public function wormsRun():void {
+private function wormsRun():void {
+	clearOutput();
 	if(player.spe > rand(35)) {
-		outputText("Your instincts overwhelm you and you immediately turn around and run like hell in the opposite direction. You look behind you as your heart feels as if it is about to burst only to discover that the creature did not follow you. You take a moment to catch your breath and consider yourself fortunate.", true);
+		outputText("Your instincts overwhelm you and you immediately turn around and run like hell in the opposite direction. You look behind you as your heart feels as if it is about to burst only to discover that the creature did not follow you. You take a moment to catch your breath and consider yourself fortunate.");
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
-		outputText("You turn to run, but before your " + player.feet() + " can get you away, the worms are upon you!  You turn to face them, lest they launch onto your unprotected back.", true);
+		outputText("You turn to run, but before your " + player.feet() + " can get you away, the worms are upon you!  You turn to face them, lest they launch onto your unprotected back.");
 		startCombat(new WormMass());
-		doNext(1);
 	}
 }
 
@@ -181,6 +210,8 @@ public function wormsEntice():void {
 
 public function playerInfest():void {
 	spriteSelect(76);
+	//Keep logic sane if this attack brings victory
+//Gone	menuLoc = 0;
 	if(player.fatigue + physicalCost(40) > 100) {
 		outputText("You try to summon up an orgasm, but you're too tired and waste your time trying!");
 		fatigue(100-player.fatigue);
@@ -293,5 +324,5 @@ public function nightTimeInfestation():void {
 		dynStats("cor", 2);
 		player.cor = 25;
 	}
-	doNext(1);
+	doNext(playerMenu);
 }

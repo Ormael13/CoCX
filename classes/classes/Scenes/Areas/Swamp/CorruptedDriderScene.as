@@ -107,7 +107,8 @@ package classes.Scenes.Areas.Swamp
 			//(Qualifies for any rape?:)
 			if (player.lust >= 33) {
 				outputText("\n\nWhat do you do?", false);
-				choices("Butt Fuck", buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK, "Fuck Pussy", vagFuck, "Bondage Fuck", careful, "FuckSpinner", fuckSpinner, "Ride Cock", rideCock, "Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "", 0, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+				choices("Butt Fuck", buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK, "Fuck Pussy", vagFuck, "Bondage Fuck", careful, "FuckSpinner", fuckSpinner, "Ride Cock", rideCock,
+					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "", null, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}

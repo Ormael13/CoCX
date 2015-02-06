@@ -256,7 +256,7 @@ package classes.Scenes.Monsters
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
 				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>", false);
 				else outputText("your abdomen aches with the desire to impregnate her full of insect eggs.  Do you?</b>");
-				simpleChoices("Feed", feeder, "Lay Eggs", eggs, "", 0, "", 0, "Leave", cleanupAfterCombat);
+				simpleChoices("Feed", feeder, "Lay Eggs", eggs, "", null, "", null, "Leave", cleanupAfterCombat);
 				//doYesNo(feeder,cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();

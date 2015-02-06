@@ -228,8 +228,7 @@
 		outputText("\n\nWith your body and brain full of memory of how to defeat demons, coupled with [his] own knowledge and thirst for revenge, your impostor surprises Lethice and manages to destroy her, taking her place and ruling the mountains and beyond with a mania born of horizons and insanity she never knew. You know all this because [Name] is true to [his] promise not to inflict the same suffering [he] endured upon you, and you don’t have to stand in the mirror room for very long (although being a deserted storage chamber, you quickly learn, makes a mockery of concepts like “very long”). [He] has your glass prison brought to [his] lavish inner chambers and installs you there- nailed to the ceiling above [his] bed, specifically. From your vantage point you mimic [his] orgies, each more deranged than the last. You experience sensation even the doppelganger [him]self never knows, because you are forced to embody everything in the room. Not just every slave girl, boy and favored demon there, every bulging prick and tight, eager hole, not just your old body bucking, slithering and glorying in it all, but every dildo, butt-plug, whip, bead, chain, every satin sheet upon which soft flesh is urgently pressed. You encompass everyone’s thoughts, the slavering succulence of total submission, the coursing power and glory of [Name]’s maddened domineering, every mind-wiping orgasm and sensation bordering between screaming pain and ecstatic pleasure is yours to endure. ");
 
 			outputText("\n\nYou quickly go completely insane, just like your bodysnatcher did, although not in a way [he] ever knew. You will never be able to express that insanity though. Every hour there is a new scene of complete depravity for you to reflect, personify and act out. A demon’s dearest wish - an eternity of constantly changing, mind-boggling sex - is your final fate.");
-
-			eventParser(5035);
+			getGame().gameOver();
 		}
 	}
 

@@ -3802,7 +3802,7 @@ public function wakeUpAfterArianSleep():void {
 		}
 	}
 	flags[kFLAGS.ARIAN_MORNING] = 0;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Egging Event

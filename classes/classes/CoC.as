@@ -127,6 +127,9 @@
 		
 		public static function timeAwareClassAdd(newEntry:TimeAwareInterface):void { _timeAwareClassList.push(newEntry); }
 		
+		private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
+		private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }
+		
 		// /
 		private var _perkLib:PerkLib = new PerkLib();// to init the static
 		private var _statusAffects:StatusAffects = new StatusAffects();// to init the static
@@ -140,7 +143,7 @@
 		public var armors:ArmorLib = new ArmorLib();
 		public var miscItems:MiscItemLib = new MiscItemLib();
 		// Scenes/
-		public var camp:Camp = new Camp();
+		public var camp:Camp = new Camp(campInitialize);
 		public var exploration:Exploration = new Exploration();
 		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
 		public var inventory:Inventory = new Inventory(saves);
@@ -218,7 +221,7 @@
 		include "../../includes/dreams.as";
 		include "../../includes/dungeon2Supplimental.as";
 		include "../../includes/dungeonCore.as";
-		include "../../includes/dungeonEvents.as";
+//No longer needed. This file has been chopped up and spread throughout the codebase:		include "../../includes/dungeonEvents.as";
 		include "../../includes/dungeonHelSupplimental.as";
 		include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
@@ -266,7 +269,7 @@
 //No longer used:		public var itemSwapping:Boolean;
 		public var flags:DefaultDict;
 		private var gameState:int;
-		public var menuLoc:Number;
+//Gone, last use replaced by newRound arg for combatMenu:		public var menuLoc:Number;
 //No longer used:		public var itemSubMenu:Boolean;
 //No longer used:		public var supressGoNext:Boolean = false;
 		public var time :TimeModel;
@@ -432,6 +435,7 @@
 //GameState 8 eliminated			//8 = worked at farm
 			gameState = 0;
 
+//Gone, last use replaced by newRound arg for combatMenu
 			//Another state variable used for menu display used everywhere
 			//menuLoc
 			//0 - normal
@@ -457,7 +461,7 @@
 //MenuLoc 26 eliminated			//26 - Benoit Shop
 //MenuLoc 27 eliminated			//27 - Chicken Harpy Shop
 //MenuLoc 28 eliminated			//28 - Items menu
-			menuLoc = 0;
+//			menuLoc = 0;
 
 			//State variable used to indicate whether inside an item submenu
 			//The item sub menu

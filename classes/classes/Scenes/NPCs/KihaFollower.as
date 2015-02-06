@@ -88,7 +88,6 @@ internal function kihaSpiderEventIntro():void {
 	startCombat(new Kiha());
 	//Flag this status to differentiate what happens on defeat or loss!
 	monster.createStatusAffect(StatusAffects.spiderfight,0,0,0,0);
-	doNext(1);
 }
 //(Play normal Kiha combat scenario, but instead of the normal results at the end...)
 
@@ -104,7 +103,7 @@ internal function loseKihaPreSpiderFight():void {
 
 	outputText("You could warn Kiha of the approaching mob - or you could let them jump her and scamper away in the confusion, leaving Kiha to whatever horrible fate awaits her.  What do you do?", false);
 	//(Display Options: [Warn Kiha] [Let Them])
-	simpleChoices("Warn Kiha",warnKihaOfHerImpendingDemise,"Let Them",letTheSpidersHaveTheirWayWithKiha,"",0,"",0,"",0);
+	simpleChoices("Warn Kiha", warnKihaOfHerImpendingDemise, "Let Them", letTheSpidersHaveTheirWayWithKiha, "", null, "", null, "", null);
 }
 
 //Player Wins Against Kiha (Z)
@@ -123,7 +122,7 @@ internal function playerBeatsUpKihaPreSpiderFight():void {
 
 	outputText("You could make like a baker and move your buns, but Gods knows what will happen to Kiha if you do.", false);
 	//(Display Options: [Help Kiha] [Leave Her]
-	simpleChoices("Help Kiha",helpKihaAgainstSpoidahs,"Leave Her",leaveKihaToSpoidahHorde,"",0,"",0,"",0);
+	simpleChoices("Help Kiha", helpKihaAgainstSpoidahs, "Leave Her", leaveKihaToSpoidahHorde, "", null, "", null, "", null);
 }
 
 //Warn Kiha (Z)
@@ -148,7 +147,6 @@ private function warnKihaOfHerImpendingDemise():void {
 	HPChange(100,false);
 	fatigue(-30);
 	dynStats("lus", -40);
-	doNext(1);
 }
 
 //Let Them (Z)
@@ -184,7 +182,6 @@ private function helpKihaAgainstSpoidahs():void {
 	HPChange(100,false);
 	fatigue(-30);
 	dynStats("lus", -40);
-	doNext(1);
 }
 //Leave Her (Z)
 private function leaveKihaToSpoidahHorde():void {
@@ -300,7 +297,7 @@ internal function kihaFriendlyGreeting(output:Boolean = true):void {
 	var talk:Function = null;
 	if(flags[kFLAGS.KIHA_TALK_STAGE] < 6) talk = talkToFriendlyKiha;
 	//(Display Options: [Talk] [Spar] [Hug] [Leave]
-	simpleChoices("Talk",talk,"Spar",sparWithKiha,"Hug",hugFriendWarmKiha,"",0,"Leave",camp.returnToCampUseOneHour);
+	simpleChoices("Talk", talk, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "", null, "Leave", camp.returnToCampUseOneHour);
 }
 //Spar with Friendly Kiha - Intro (Z)
 private function sparWithKiha():void {
@@ -432,7 +429,7 @@ public function kihaXSalamander():void {
 	outputText("[pg]You consider warning the dragoness, but too late!  The mysterious figure leaps from the brush and shoulder-slams into Kiha, throwing her right off you and into the mud.  Before you can even say a word to your new friend, she grabs you by the scruff of your neck and throws you to the ground behind her, putting herself between you and Kiha.", false);
 	outputText("[pg]You could just lie there, but you're not sure how well you'd fare against two powerful warriors at once - you could end up dominated, at the very least.  You could instead try and get the jump on the fighters before they jump you... Or, you suppose you could get the fuck out while you have the chance.", false);
 	//(Display Options: [Lie There] [Jump Them] [GTFO])
-	simpleChoices("Lie There",lieThere,"Jump Them",jumpDaBitches,"GTFO",GTFO,"",0,"",0);
+	simpleChoices("Lie There", lieThere, "Jump Them", jumpDaBitches, "GTFO", GTFO, "", null, "", null);
 }
 
 //GTFO (Z)
@@ -579,7 +576,7 @@ private function kihaAdmitsSheLikesYourWang():void {
 		outputText("Kiha lightly drops out of the trees in front of you, kicking up a small splash of fetid water as she comes to rest a few feet away.  She rests her axe over her shoulder nonchalantly and smiles as she says, \"<i>Did you come back to get your ass kicked?  You wouldn't be the first to throw fights so you could check me out while you're lying on the ground.</i>\"  Her tail swings around to playfully catch you on the " + buttDescript() + ", a hint of crimson spreading on her dark skin, matching the ruby hue of her shimmering scales.  Kiha strikes a battle-ready pose that looks a bit more lewd than normal as she asks, \"<i>So, you here to fight, or waste more time talking?</i>\"");
 		outputText("[pg]Do you hug her, and potentially take things to the next level, or would you rather do something else?");
 	}
-	simpleChoices("Talk",0,"Spar",sparWithKiha,"Hug",hugFriendWarmKiha,"LovinHug",lovinHugKiha,"Leave",camp.returnToCampUseOneHour);
+	simpleChoices("Talk", null, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "LovinHug", lovinHugKiha, "Leave", camp.returnToCampUseOneHour);
 }
 //Loving Hug
 private function lovinHugKiha():void {
@@ -772,7 +769,8 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 	//   Biggus Dickus // Vaginal // Anal // 69+Tail // Tail Pegging // Item/Morph-specific scenes?
 	//-[Invite to Camp] (If KihaAffection >= 200)
 	//-[Leave])
-	choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
+	choices("Hang Out", hangOutWithKiha, "Hug", hugFriendWarmKiha, "InviteCamp", campo, "Sex", kihaSexMenu, "Spar", sparWithKiha,
+		"", null, "", null, "", null, "", null, "Leave", leave);
 }
 
 
@@ -812,7 +810,7 @@ private function hangOutWithKiha():void {
 		outputText("[pg]\"<i>W-well?  It's good... right?</i>\"");
 		outputText("[pg]You give the stringy, yet juicy, meat a few experimental chews before giving your answer:");
 		//[It's Good] [Blech]
-		simpleChoices("It's Good",itsGood,"Blech",blechKihaYourCooking,"",0,"",0,"",0);
+		simpleChoices("It's Good", itsGood, "Blech", blechKihaYourCooking, "", null, "", null, "", null);
 		return;
 	}
 	//Hang Out 3
@@ -1574,7 +1572,7 @@ private function ghostboobiesKiha():void {
 	//{if no ghost legs (whadda fag)}
 	if(player.findPerk(PerkLib.Incorporeality) < 0) {
 		outputText("[pg]Shaking your head in disappointment, you shuffle away, replacing the Gro+ in your pack with a sigh.  Maybe some day.");
-		doNext(1);
+		doNext(playerMenu);
 		return;
 	}
 	//{if you've got that ghost shit down}
@@ -1615,12 +1613,12 @@ internal function kihaBitchesOutCorruptPCs():void {
 		outputText("[pg]\"<i>[name].</i>\"  She says flatly, planting the haft of her axe in the ground, leaning heavily upon it.");
 		outputText("[pg]You say hello, looking nervously around.  Something isn't right here, and your hand drifts toward your [weaponName].");
 		outputText("[pg]\"<i>Listen, [name],</i>\" Kiha says, eyeing you from behind her axe.  \"<i>Maybe we've gotten to be friends lately, but... something's changed about you.  I can SMELL the corruption on you, the lust... I-I can't do it, [name].  I can't be around someone that could turn into someTHING at any moment, someone who's just letting themselves go like... like you are. Please j-just go, [name].</i>\"  You try to protest, to reason with the fiery warrior, but she only lifts up her axe and levels it at you...  \"<i>J-JUST GO!</i>\"");
-		simpleChoices("Fight",kihaScene.meetKihaAndFight,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+		simpleChoices("Fight", kihaScene.meetKihaAndFight, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 	}
 	else {
 		outputText("Kiha approaches you, her belongings gathered in her hands.  The sexy dragoness seems visibly upset, and before you can say a word, she interrupts, \"<i>Don't say a word, [name].  You're corrupt.  I can smell the corruption rolling off you from over here.  I won't be here when you turn into a demon, and I don't want to fight you... but if you come after me, I won't hesitate to defend myself!</i>\"");
 		outputText("[pg]Kiha closes her eyes and launches herself into the air, only leaving a few tears for the parched wasteland to claim.");
-		doNext(1);
+		doNext(playerMenu);
 	}
 	flags[kFLAGS.KIHA_CORRUPTION_BITCH] = 1;
 	//(Display Options: [Fight!] [Leave])
@@ -1676,7 +1674,7 @@ private function dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWr
 	outputText("[pg]\"<i>If you want have your way with me, you'll need to earn it, just like anyone else,</i>\" Kiha explains.  She narrows her eyes at you and questions, \"<i>The question is, are you " + player.mf("man","woman") + " enough to take what you want?  I wouldn't want you to get hurt.</i>\"");
 	outputText("[pg]That seems like a challenge.  Will you rise to it, or will you back down?");
 	//[Back down]    [Fight for position]
-	simpleChoices("Back Down",beABitchDumbass,"FightForDom",fightForDominanceWithDragonCunnies,"",0,"",0,"",0);
+	simpleChoices("Back Down", beABitchDumbass, "FightForDom", fightForDominanceWithDragonCunnies, "", null, "", null, "", null);
 }
 
 //[Back down]
@@ -1697,7 +1695,6 @@ private function fightForDominanceWithDragonCunnies():void {
 	//[Leads to a fight]
 	startCombat(new Kiha());
 	monster.createStatusAffect(StatusAffects.DomFight,0,0,0,0);
-	doNext(1);
 }
 
 //[PC loses the fight]

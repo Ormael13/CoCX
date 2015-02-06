@@ -42,7 +42,7 @@ public function datTurkeyRumpMeeting():void {
 	outputText("\n\n\"<i>G-gobble?</i>\"  she asks quietly, her big blue eyes pleading at you.");
 	
 	//[Shoo her Off] [Let her Approach]
-	simpleChoices("Let Approach",letZeTurkeyApproach,"Shoo Away",shooTurkeyAway,"",0,"",0,"",0);
+	simpleChoices("Let Approach", letZeTurkeyApproach, "Shoo Away", shooTurkeyAway, "", null, "", null, "", null);
 }
 
 //Shoo her Off -McGirt
@@ -55,7 +55,7 @@ public function shooTurkeyAway():void {
 	outputText("\n\nRolling your eyes, you yell at the strange girl until she finally gets the idea and; with a few more sorrowful gobbles, she wobbles off again, looking for someone else to bother.");
 	
 	outputText("\n\nShaking your head, you sit back down and eat.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Let her Approach
@@ -72,7 +72,7 @@ public function letZeTurkeyApproach():void {
 	outputText("\n\n\"<i>Gobble?</i>\"  she asks again, her hand drifting onto your leg.  You feel [eachCock] involuntarily stiffening as her slender, alabaster fingers slide along your thigh.  \"<i>Gobble,</i>\" she repeats, brushing your stiffening prick through your [armor].  Oh, is that what she wants?  Well then....");
 	
 	//(Baste Her) (That's Enough)
-	simpleChoices("Baste Her",basteThatTurkeyBooty,"No Thanks",noThanksTurkeyGal,"",0,"",0,"",0);
+	simpleChoices("Baste Her", basteThatTurkeyBooty, "No Thanks", noThanksTurkeyGal, "", null, "", null, "", null);
 }
 
 public function noThanksTurkeyGal():void {
@@ -199,7 +199,7 @@ public function femaleLetZeTurkeyGalApproach():void {
 	
 	outputText("\n\nIt looks like you've found yourself a dinner guest...");
 	//[Appetiser] [Main Course] [Dessert]
-	simpleChoices("Appetizer",turkeyAppetizer,"Main Course",femaleAndTurkeyMainCourse,"Dessert",haveTurkeyGirlDesertInYourCunt,"",0,"",0);
+	simpleChoices("Appetizer", turkeyAppetizer, "Main Course", femaleAndTurkeyMainCourse, "Dessert", haveTurkeyGirlDesertInYourCunt, "", null, "", null);
 }
 
 //Appetiser:

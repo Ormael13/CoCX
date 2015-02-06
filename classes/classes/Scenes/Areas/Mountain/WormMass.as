@@ -9,7 +9,9 @@
 		override protected function performCombatAction():void
 		{
 			//Worms have different AI
-			game.eventParser((rand(2) == 0) ? special1 : special2);
+			if (rand(2) == 0)
+				special1();
+			else special2();
 		}
 
 
@@ -53,8 +55,8 @@
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 3;
 			this.gems = 0;
-			this.special1 = 5054;
-			this.special2 = 5055;
+			this.special1 = game.wormAttack;
+			this.special2 = game.wormsEntice;
 			this.drop = NO_DROP;
 			checkMonster();
 		}

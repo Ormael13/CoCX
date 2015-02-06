@@ -37,13 +37,15 @@
 		}
 */
 
-		public function Camp()
-		{
+		public function Camp(campInitialize:Function) {
+			campInitialize(doCamp); //Pass the doCamp function up to CoC. This way doCamp is private but the CoC class itself can call it.
 		}
 		
+/* Replaced with calls to playerMenu
 		public function campMenu():void {
 			kGAMECLASS.eventParser(1);
 		}
+*/
 		
 		public function returnToCamp(timeUsed:int):void {
 			clearOutput();
@@ -66,7 +68,7 @@
 		
 //  SLEEP_WITH:int = 701;
 
-public function doCamp():void {
+private function doCamp():void { //Only called by playerMenu
 	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	if(player.findStatusAffect(StatusAffects.PostAkbalSubmission) >= 0) {
@@ -80,12 +82,14 @@ public function doCamp():void {
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
 	getGame().inCombat = false;
-	if(kGAMECLASS.inDungeon) {
+/* Can't happen - playerMenu will call dungeon appropriate menu instead of doCamp while inDungeon is true
+	if (kGAMECLASS.inDungeon) {
 		mainView.showMenuButton( MainView.MENU_DATA );
 		mainView.showMenuButton( MainView.MENU_APPEARANCE );
-		kGAMECLASS.dungeonRoom(kGAMECLASS.dungeonLoc);
+		kGAMECLASS.playerMenu();
 		return;
 	}
+*/
 	//Clear out Izma's saved loot status
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
 	//History perk backup
@@ -727,7 +731,6 @@ public function doCamp():void {
 
 }
 
-
 public function stash():Boolean {
 	/*Hacked in cheat to enable shit
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
@@ -759,16 +762,18 @@ public function stash():Boolean {
 		if (inventory.armorRackDescription()) addButton(6, "A.Rack Take", inventory.pickItemToTakeFromArmorRack);
 		outputText("\n\n");
 	}
-	addButton(9, "Back", camp.campMenu);
+	addButton(9, "Back", playerMenu);
 	return true;
 }
 	
 public function hasCompanions():Boolean {
 	return companionsCount() > 0;
 }
+
 public function companionsCount():Number {
 	return followersCount() + slavesCount() + loversCount();
 }
+
 public function followersCount():Number {
 	var counter:Number = 0;
 	if(emberScene.followerEmber()) counter++;
@@ -780,6 +785,7 @@ public function followersCount():Number {
 	if(helspawnFollower()) counter++;
 	return counter;
 }
+
 public function slavesCount():Number {
 	var counter:Number = 0;
 	if(latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) counter++;
@@ -792,6 +798,7 @@ public function slavesCount():Number {
 	if(milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
 	return counter;
 }
+
 public function loversCount():Number {
 	var counter:Number = 0;
 	if(arianScene.arianFollower()) counter++;
@@ -806,6 +813,7 @@ public function loversCount():Number {
 	if(flags[kFLAGS.ANT_WAIFU] > 0) counter++;
 	return counter;
 }
+
 public function campLoversMenu():void {
 	var isabellaButt:Function = null;
 	var marbleEvent:Function = null;
@@ -878,7 +886,7 @@ public function campLoversMenu():void {
 			//Base choice - book
 			izzyCreeps[izzyCreeps.length] = 5;
 			//Select!
-			var choice:* = rand(izzyCreeps.length);
+			var choice:int = rand(izzyCreeps.length);
 				
 			if(izzyCreeps[choice] == 0) outputText("is sitting down with Rathazul, chatting amiably about the weather.", false);
 			else if(izzyCreeps[choice] == 1) outputText("is sitting down with Jojo, smiling knowingly as the mouse struggles to keep his eyes on her face.", false);
@@ -962,7 +970,7 @@ public function campLoversMenu():void {
 	if (marbleEvent != null) addButton(6, "Marble", marbleEvent);
 	if (nieve != null) addButton(7, "Nieve", nieve);
 	if (flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla", getGame().desert.antsScene.introductionToPhyllaFollower);
-	addButton(9, "Back", campMenu);
+	addButton(9, "Back", playerMenu);
 }
 
 public function campSlavesMenu():void {
@@ -1011,7 +1019,7 @@ public function campSlavesMenu():void {
 	if (vapula2 != null) addButton(4,"Vapula",vapula2);
 	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(7,flags[kFLAGS.MILK_NAME],milkWaifu.milkyMenu);
 	if (goo != null) addButton(8,flags[kFLAGS.GOO_NAME],goo);
-	addButton(9, "Back", campMenu);
+	addButton(9, "Back", playerMenu);
 }
 
 public function campFollowers():void {
@@ -1077,11 +1085,10 @@ public function campFollowers():void {
 	addButton(4, "Shouldra", shouldra);
 	//ABOVE: addButton(4,"Sophie",followerSophieMainScreen);
 	addButton(6, "Valeria", valeria2);
-	addButton(9, "Back", campMenu);
+	addButton(9, "Back", playerMenu);
 }
 
-
-public function rest():void {
+private function rest():void {
 	campQ = true;
 	if(timeQ == 0) {
 		outputText("You lie down to rest for four hours.\n", true);
@@ -1109,7 +1116,8 @@ public function rest():void {
 	}
 	goNext(timeQ,true);
 }
-public function doWait():void {
+
+private function doWait():void {
 	campQ = true;
 	outputText("", true);
 	if(timeQ == 0) {
@@ -1345,7 +1353,7 @@ private function places():void { //Displays a menu for all known places
 	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(6, "Owca", getGame().owca.gangbangVillageStuff);
 	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) addButton(7, "Salon", getGame().mountain.salon.salonGreeting);
 	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) addButton(8, "Tel'Adre", getGame().telAdre.telAdreMenu);
-	addButton(9, "Back", campMenu);
+	addButton(9, "Back", playerMenu);
 }
 
 private function placesPage2():void {
@@ -1354,7 +1362,7 @@ private function placesPage2():void {
 	//turn on ruins
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "TownRuins", amilyScene.exploreVillageRuin);
 	addButton(4, "Previous", placesToPage1);
-	addButton(9, "Back", campMenu);
+	addButton(9, "Back", playerMenu);
 }
 
 private function placesToPage1():void {
@@ -1364,10 +1372,9 @@ private function placesToPage1():void {
 
 private function dungeons():void {
 	menu();
-	//Turn on d2
-	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0,"Deep Cave",eventParser,11076);
-	//Turn on dungeon
-	if(player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(1,"Factory",eventParser,11057);
+	//Turn on dungeons
+	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0, "Deep Cave", kGAMECLASS.enterZetazsLair);
+	if (player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(1, "Factory", kGAMECLASS.enterFactory);
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(2, "Desert Cave", kGAMECLASS.enterBoobsDungeon);
 	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", kGAMECLASS.d3.enterD3);
 	addButton(9, "Back", places);
@@ -1395,7 +1402,7 @@ private function exgartuanCampUpdate():void {
 			player.removeStatusAffect(StatusAffects.Exgartuan);
 		}		
 	}
-	doNext(1);
+	doNext(playerMenu);
 }
 
 /*

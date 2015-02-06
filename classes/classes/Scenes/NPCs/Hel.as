@@ -10,7 +10,7 @@ package classes.Scenes.NPCs
 		private function helAttack():void {
 			var damage:Number;
 			//return to combat menu when finished
-			doNext(1);
+			doNext(game.playerMenu);
 			//Blind dodge change
 			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
@@ -63,7 +63,7 @@ package classes.Scenes.NPCs
 		private function helAttack2():void {
 			var damage:Number;
 			//return to combat menu when finished
-			doNext(1);
+			doNext(game.playerMenu);
 			//Blind dodge change
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);

@@ -6,7 +6,7 @@ public function poniesYN():Boolean {
 		outputText("", true);
 		outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n", false);
 		//(option: Approach? Leave them Be?)
-		simpleChoices("Approach",approachPonies,"",0,"",0,"",0,"Leave",leavePonies);
+		simpleChoices("Approach",approachPonies,"",null,"",null,"",null,"Leave",leavePonies);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00118]++;
 		return true;
 	}
@@ -43,7 +43,7 @@ public function approachPonies():void {
 	//Option one: Leave Politely
 	//Option Two: Too creepy...
 	//Option three: Yay, party?
-	simpleChoices("Too creepy",derpCreepy,"Yay Party!",derpyParty,"",0,"",0,"Leave",derpPolitely);
+	simpleChoices("Too creepy",derpCreepy,"Yay Party!",derpyParty,"",null,"",null,"Leave",derpPolitely);
 }
 
 public function derpPolitely():void {

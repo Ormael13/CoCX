@@ -43,7 +43,7 @@ package classes.Scenes.Areas.Forest
 			// -> Standard Imp Battle
 			startCombat(new Imp());
 			monster.createStatusAffect(StatusAffects.KitsuneFight, 0, 0, 0, 0);
-			doNext(1);
+			doNext(playerMenu);
 			flags[kFLAGS.MET_KITSUNES]++;
 		}
 
@@ -129,7 +129,7 @@ package classes.Scenes.Areas.Forest
 			if (player.hasKeyItem("Traveler's Guide") >= 0) {
 				outputText("\n\nYour mind is jogged out of its haze when you remember a note from the Traveler's Guide.  It warned about mysterious flames in the forest that lead hapless adventurers astray.  You hesitate now, wondering what to do.");
 				//[Turn Back] [Follow] //automatically follow without traveler's guide.
-				simpleChoices("Turn Back", turnBackFromWillOWisp, "Follow", followTheWillOWisp, "", 0, "", 0, "", 0);
+				simpleChoices("Turn Back", turnBackFromWillOWisp, "Follow", followTheWillOWisp, "", null, "", null, "", null);
 			}
 			else doNext(followTheWillOWisp);
 		}
@@ -174,8 +174,8 @@ package classes.Scenes.Areas.Forest
 				outputText("How did she get behind you so quickly?  You were staring at her the entire time!  Glancing quickly over your shoulder, you confirm that this is not a case of twins, but when you turn to face her, she has disappeared once again!\n\n");
 				outputText("\"<i>Over here, silly~</i>\" she calls to you with a mischievous tone, beckoning to you as you whip around to face her voice.  \"<i>Don't be shy, I don't bite...  often...</i>\"\n\n");
 				outputText("Her tone is innocuous enough, but her mannerisms are a little disconcerting, somehow.  What are you going to do?");
-				if (!getGame().inCombat) simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", 0, "", 0, "", 0);
-				else simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", 0, "", 0, "", 0);
+				if (!getGame().inCombat) simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", null, "", null, "", null);
+				else simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", null, "", null, "", null);
 			}
 		}
 
@@ -208,7 +208,7 @@ package classes.Scenes.Areas.Forest
 			outputText("Self-preservation battles with curiosity " + ((player.lust > 50) ? "and lust " : "" ) + "as you consider her offer, " + ((player.lib < 50) ? "weighing your chances against the possible dangers." : "eying the voluptuous curves that fill out her robes."));
 
 			//[Follow { mansion(willing = true) }] [Leave]
-			simpleChoices("Follow", createCallBackFunction2(mansion,true, false), "", 0, "", 0, "", 0, "Leave", createCallBackFunction(leaveKitsune,true));
+			simpleChoices("Follow", createCallBackFunction2(mansion,true, false), "", null, "", null, "", null, "Leave", createCallBackFunction(leaveKitsune,true));
 		}
 
 //[Leave] (C)
@@ -311,7 +311,7 @@ package classes.Scenes.Areas.Forest
 				// display choices:
 				//["Let Her" ] ["Shove Her" ]
 				simpleChoices("Let Her", createCallBackFunction(kitSuneLetHerMansion,willing),
-						"Shove Her", createCallBackFunction(kitsuneShoveHerMansion, willing), "", 0, "", 0, "", 0);
+						"Shove Her", createCallBackFunction(kitsuneShoveHerMansion, willing), "", null, "", null, "", null);
 			}
 			else {
 				doNext(createCallBackFunction(kitSuneLetHerMansion,true));
@@ -499,7 +499,7 @@ package classes.Scenes.Areas.Forest
 				// display choices:
 				//["Let Her" = letHer() ] ["Shove Her" = shoveHer() ]
 				simpleChoices("Let Her", createCallBackFunction(kitsunesGenderlessLetHer, willing),
-						"Shove Her", createCallBackFunction(kitsunesGenderlessShoverHer, willing), "", 0, "", 0, "", 0);
+						"Shove Her", createCallBackFunction(kitsunesGenderlessShoverHer, willing), "", null, "", null, "", null);
 			}
 			else {
 				doNext(createCallBackFunction(kitsunesGenderlessLetHer, true));
@@ -707,7 +707,7 @@ package classes.Scenes.Areas.Forest
 			outputText("The glimmer of your past is long forgotten, and all you are left with is the depravity with which they use your many-limbed body, an abominable form they themselves bestowed upon you.  Each night they ravage you to the point of exhaustion, their twisted magic sustaining you well beyond the endurance of a mortal, to fuel their own twisted desires.\n\n");
 			outputText("You are forever the sisters' servant now, a beast of pure perversion cultivated for the sole purpose of providing them pleasure.\n\n");
 			outputText("<b>THE END</b>");
-			eventParser(5035);
+			getGame().gameOver();
 		}
 
 
@@ -733,7 +733,7 @@ package classes.Scenes.Areas.Forest
 			else if (monster.hairColor == "black") outputText("black-haired");
 			else outputText("red-haired");
 			outputText(" kitsune!</b>");
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 
@@ -1141,7 +1141,7 @@ package classes.Scenes.Areas.Forest
 			addButton(9, "Leave", leaveKitsune);
 		}
 
-		private function kitsuneButton(button:int, nam:String, func:*):int
+		private function kitsuneButton(button:int, nam:String, func:Function):int
 		{
 			if (button > 8) return 9;
 			addButton(button, nam, func);
