@@ -85,7 +85,7 @@
 		include "../../includes/descriptors.as";
 		include "../../includes/appearance.as";
 
-		include "../../includes/InitialiseUI.as";
+//No longer needed:		include "../../includes/InitialiseUI.as";
 		include "../../includes/input.as";
 		include "../../includes/OnLoadVariables.as";
 		include "../../includes/startUp.as";

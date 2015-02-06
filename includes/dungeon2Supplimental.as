@@ -352,6 +352,7 @@ public function impGangGetsRapedByMale():void {
 	outputText("\n\n", false);
 	
 	outputText("Satisfied, you redress and prepare to continue with your exploration of the cave.", false);
+	dynStats("cor", 1);
 	player.orgasm();
 	cleanupAfterCombat();
 }
@@ -374,7 +375,8 @@ public function impGangGetsRapedByFemale():void {
 	outputText("The two of you lie together, trembling happily as you're filled to the brim with tainted fluids.\n\n", false);
 	
 	outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.", false);
-	if(player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.", false);
+	if (player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.", false);
+	dynStats("cor", 1);
 	player.orgasm();
 	player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
 	cleanupAfterCombat();

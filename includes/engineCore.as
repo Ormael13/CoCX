@@ -936,15 +936,15 @@ public function createCallBackFunction2(func:Function,...args):Function
 
 
 public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void {
-	if (func1==null) return;
-	var callback :Function,
-	toolTipText :String;
-
+	if (func1 == null) return;
+	var callback: Function;
+	var toolTipText: String;
+/* Let the mainView decide if index is valid
 	if(pos > 9) {
 		trace("INVALID BUTTON");
 		return;
 	}
-
+*/
 	callback = createCallBackFunction(func1, arg1);
 	
 

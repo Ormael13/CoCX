@@ -728,7 +728,11 @@ private function doCamp():void { //Only called by playerMenu
 	//Lovers
 	//Followers
 	//Slaves
-
+	addButton(10, "Test 10", exploreEvent);
+	addButton(11, "Test 11", placesEvent);
+	addButton(12, "Test 12", inventory.inventoryMenu);
+	addButton(13, "Test 13", storage);
+	addButton(14, "Test 14", followers);
 }
 
 public function stash():Boolean {

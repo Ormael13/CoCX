@@ -319,10 +319,11 @@ private function helDefeatedNormal(clear:Boolean = false):void {
 	helFuckMenu();
 }
 
-private function helFuckMenu():void {
+private function helFuckMenu(isAmbush:Boolean = false):void {
 	spriteSelect(68);
 	//Leave appropriate way
 	var leave:Function = declineHelSexings;
+	if (isAmbush) leave = pussyOutOfHelSexAmbush;
 	
 	if(player.lust < 33) {
 		outputText("\n\n<b>You aren't really up for sex right now.</b>", false);
@@ -1858,8 +1859,8 @@ public function helSexualAmbush():void {
 
 	// TODO Fix this?
 	// Why is this the only place in the whole game where buttonEvents is directly written to?
-	kGAMECLASS.buttonEvents[9] = pussyOutOfHelSexAmbush;
-	helFuckMenu();
+//Got rid of this, now handled by passing true:	kGAMECLASS.buttonEvents[9] = pussyOutOfHelSexAmbush;
+	helFuckMenu(true);
 }
 
 //[Leave] (From Sexual Ambush)

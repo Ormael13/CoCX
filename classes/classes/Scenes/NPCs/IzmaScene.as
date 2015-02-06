@@ -1111,7 +1111,7 @@ private function acceptIzmaAsYourBitch():void {
 
 		outputText("\"<i>You have a point there...</i>\" Amily mumbles, staring at Izma with obvious curiosity.  \"<i>Hmm... well, I should keep an eye on her, but I guess she's earned the right to the benefit of the doubt.  It might be nice to have somebody else to talk to here in the camp...</i>\"  She trails off, mumbling, as Izma finally finishes setting up her spot and comes back to you.\n\n", false);
 
-		outputText("What makes you curious is how she decided to keep her bed at a distance from your own.  You give her a wave and tell her it's okay to sleep near you.  She looks at you quizzically in response.  \"<i>Well...</i>\" she stammers, \"<i>I thought my Alpha would want me to sleep some distance away,</i>\" she says.  With a hasty reassurance, you inisist that she place her bed closer. Eager to serve, she drags the bedroll adjacent to your own and smiles at you bashfully.", false);
+		outputText("What makes you curious is how she decided to keep her bed at a distance from your own.  You give her a wave and tell her it's okay to sleep near you.  She looks at you quizzically in response.  \"<i>Well...</i>\" she stammers, \"<i>I thought my Alpha would want me to sleep some distance away,</i>\" she says.  With a hasty reassurance, you insist that she place her bed closer. Eager to serve, she drags the bedroll adjacent to your own and smiles at you bashfully.", false);
 		//Flag that amily bitchfit has happened.
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00236] = -1;
 	}
@@ -1156,7 +1156,7 @@ private function acceptIzmaAsYourBitch():void {
 
 		outputText("You can't help but chuckle at how eager she is to live with you as you guide her to your camp, and she never seems to shut up talking about how fun it'll be and how much the two of you will be able to fuck.  The tigershark wastes no time setting up her trunk at the farthest edge of the camp from you and then sets her bedroll up.\n\n", false);
 
-		outputText("What makes you curious is how she decides to keep her bed at a distance from your own.  You give her a wave and tell her it's okay to sleep near you.  She looks at you quizzically in response.  \"<i>Well...</i>\" she stammers, \"<i>I thought my Alpha would want me to sleep some distance away,</i>\" she says.  With a hasty reassurance, you inisist that she place her bed closer. Eager to serve, she drags the bedroll adjacent to your own and smiles at you bashfully.\n\n", false);
+		outputText("What makes you curious is how she decides to keep her bed at a distance from your own.  You give her a wave and tell her it's okay to sleep near you.  She looks at you quizzically in response.  \"<i>Well...</i>\" she stammers, \"<i>I thought my Alpha would want me to sleep some distance away,</i>\" she says.  With a hasty reassurance, you insist that she place her bed closer. Eager to serve, she drags the bedroll adjacent to your own and smiles at you bashfully.\n\n", false);
 	}		
 	//Set 'camp Izma' flag
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] = 1;

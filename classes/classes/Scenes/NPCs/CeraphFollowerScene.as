@@ -1488,7 +1488,14 @@ package classes.Scenes.NPCs
 		{
 			spriteSelect(87);
 			clearOutput();
-			outputText("You ask Ceraph just what all giving up a body-part would entail.  Your submissive demonic slut presses herself against you, stroking her hands under your " + player.armorName + " as she answers, \"<i>Well, [Master], I would use my body-shifting black magics to remove a choice portion of your 'fun-bits', if you know my meaning.[if (hasCock = true) I could take your cock.][if (hasVagina = true)  I could remove your snatch.  Don't worry, once it's off of you, anything I put in it won't wind up in your womb.][if (hasBreasts = true) I could even make off with your tits if you like.][if (gender = 0) [if  (hasBreasts = false) Sadly, you don't have anything that would be worth taking right now.  A true shame, my [Master].]</i>\"");
+			outputText("You ask Ceraph just what all giving up a body-part would entail.  Your submissive demonic slut presses herself against you, stroking her hands under your " + player.armorName + " as she answers, \"<i>Well, [Master], I would use my body-shifting black magics to remove a choice portion of your 'fun-bits', if you know my meaning.");
+			if (player.hasCock() || player.hasVagina() || player.hasBreasts()) {
+				if (player.hasCock()) outputText("  I could take your cock.");
+				if (player.hasVagina()) outputText("  I could remove your snatch.  Don't worry, once it's off of you, anything I put in it won't wind up in your womb.");
+				if (player.hasBreasts()) outputText("  I could even make off with your tits if you like.");
+			}
+			else outputText("  Sadly, you don't have anything that would be worth taking right now.  A true shame, my [Master].");
+			outputText("</i>\"");
 			if (player.gender > 0 || player.biggestTitSize() > 0) {
 				outputText("\n\nYou scratch your head as she prattles on, growing more animated and a touch aroused. \"<i>Then, I can fly back to the harem and add them to my collection.  My pets do so love when I give them an exotic endowment and then spend all night teasing it.  Could you imagine it?  Going to bed at night and dreaming of all the debauched things my slaves and I are doing, over and over?</i>\"");
 				outputText("\n\nWell, that's quite the pitch she's put together.  Do you want to give her something?\n");
