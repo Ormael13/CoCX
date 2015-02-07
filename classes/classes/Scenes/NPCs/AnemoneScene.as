@@ -1169,7 +1169,7 @@ package classes.Scenes.NPCs
 				}
 
 			}
-			addButton(9, "Back", camp.stash);
+			addButton(9, "Back", inventory.stash);
 		}
 
 //[Item](only appears if hourssinceKiditem flag >= 16)
@@ -1250,7 +1250,7 @@ package classes.Scenes.NPCs
 				}
 			}
 			if (!foundItem) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>");
-			addButton(9, "Back", camp.stash);
+			addButton(9, "Back", inventory.stash);
 		}
 
 		private function placeInAnemone(slot:int):void {

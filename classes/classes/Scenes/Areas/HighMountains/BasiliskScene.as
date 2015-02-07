@@ -332,9 +332,9 @@ package classes.Scenes.Areas.HighMountains
 					}
 					//[Not first time: 
 					else {
-						outputText("\n\nBenoit places the eggs into a blanket swaddled basket with the same painstaking care he did with the others, before turning back to you.");
-						outputText("\n\nThe blind basilisk reaches out, finds your hand, and then squeezes it.  \"<i>[name], you must be more careful in ze future,</i>\" he says.  \"<i>Please understand I am not saying zis because I am jealous or angry or anything so zilly.  You 'ave done a great sing to change your body to 'elp my people, but if you keep getting attacked by my bruzzers and zey find out... if zey work out what you are... I do not like to sink about it.</i>\"  You tell him you'll be more on guard in the future and he seems to accept this.  He gestures to the corner where he has put together a serviceable stove from scrap.");
-						outputText("\n\n“Ungry?”");
+						outputText("\n\nBenoit places the eggs into a blanket-swaddled basket with the same painstaking care he did with the others, before turning back to you.");
+						outputText("\n\nThe blind basilisk reaches out, finds your hand, and then squeezes it.  \"<i>[name], you must be more careful in ze future,</i>\" he says.  \"<i>Please understand I am not saying zis because I am jealous or angry or anysing so zilly.  You 'ave done a great sing to change your body to 'elp my people, but if you keep getting attacked by my bruzzers and zey find out... if zey work out what you are... I do not like to sink about it.</i>\"  You tell him you'll be more on guard in the future and he seems to accept this.  He gestures to the corner where he has put together a serviceable stove from scrap.");
+						outputText("\n\n“<i>'Ungry?</i>”");
 						outputText("\n\nYou linger long enough to share breakfast with him, and then return to camp.");
 					}
 				}

@@ -1513,7 +1513,7 @@ private function teachHelToSwim():void {
 	
 	//If PC has Izma follower:
 	if(izmaFollower()) {
-		outputText("\n\nJust as Hel is about to put her foot in, a large red fin pokes out of the water.  You have just enough time to grab Hel and yank her back before a familiar shark-girl breaches the water, leaping onto shore with a wolfish grin.  \"<i>Heyya, Alpha,</i>\" Izma says, inclining her head to you as she wrings her hair out, grabbing a towl from behind a nearby rock.  \"<i>Oh, hi, Hel.  Don't see you around here much!</i>\"");
+		outputText("\n\nJust as Hel is about to put her foot in, a large red fin pokes out of the water.  You have just enough time to grab Hel and yank her back before a familiar shark-girl breaches the water, leaping onto shore with a wolfish grin.  \"<i>Heyya, Alpha,</i>\" Izma says, inclining her head to you as she wrings her hair out, grabbing a towel from behind a nearby rock.  \"<i>Oh, hi, Hel.  Don't see you around here much!</i>\"");
 		outputText("\n\n\"<i>Uh, yeah,</i>\" Hel groans, blushing a brighter shade of red.  With a chuckle, Izma gives the two of you a wink and wanders off back to camp, leaving you alone with Hel once more.");
 	}
 	//If PC don't have no shark dominatrix: 

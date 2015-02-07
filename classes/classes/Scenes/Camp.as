@@ -26,11 +26,11 @@
 		{
 			return kGAMECLASS.inventory.hasItemInStorage(itype);
 		}
+/*
 		protected function hasItemsInStorage():Boolean
 		{
 			return kGAMECLASS.inventory.hasItemsInStorage();
 		}
-/*
 		protected function hasItemsInRacks(armor:Boolean = false):Boolean
 		{
 			return kGAMECLASS.inventory.hasItemsInRacks(armor);
@@ -444,7 +444,7 @@ private function doCamp():void { //Only called by playerMenu
 	var lovers:Function = null;
 	var slaves:Function = null;
 	var storage:Function = null;
-	if (inventory.showStash()) storage = stash;
+	if (inventory.showStash()) storage = inventory.stash;
 	//Clear stuff
 	if(player.findStatusAffect(StatusAffects.SlimeCravingOutput) >= 0) player.removeStatusAffect(StatusAffects.SlimeCravingOutput);
 	//Reset luststick display status (see event parser)
@@ -735,41 +735,6 @@ private function doCamp():void { //Only called by playerMenu
 	addButton(14, "Test 14", followers);
 }
 
-public function stash():Boolean {
-	/*Hacked in cheat to enable shit
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;*/
-	//REMOVE THE ABOVE BEFORE RELASE ()
-	clearOutput();
-	spriteSelect(-1);
-	menu();
-	if (flags[kFLAGS.ANEMONE_KID] > 0) {
-		anemoneScene.anemoneBarrelDescription();
-		if (model.time.hours >= 6) addButton(4, "Anemone", anemoneScene.approachAnemoneBarrel);
-	}
-	if (player.hasKeyItem("Camp - Chest") >= 0) {
-		outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n");
-		addButton(0, "Chest Store", inventory.pickItemToPlaceInCampStorage);
-		if (inventory.hasItemsInStorage()) addButton(1, "Chest Take", inventory.pickItemToTakeFromCampStorage);
-	}
-	//Weapon Rack
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) {
-		outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
-		addButton(2, "W.Rack Put", inventory.pickItemToPlaceInWeaponRack);
-		if (inventory.weaponRackDescription()) addButton(3, "W.Rack Take", inventory.pickItemToTakeFromWeaponRack);
-		outputText("\n\n");
-	}
-	//Armor Rack
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0) {
-		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.");
-		addButton(5, "A.Rack Put", inventory.pickItemToPlaceInArmorRack);
-		if (inventory.armorRackDescription()) addButton(6, "A.Rack Take", inventory.pickItemToTakeFromArmorRack);
-		outputText("\n\n");
-	}
-	addButton(9, "Back", playerMenu);
-	return true;
-}
-	
 public function hasCompanions():Boolean {
 	return companionsCount() > 0;
 }
