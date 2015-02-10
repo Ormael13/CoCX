@@ -429,8 +429,9 @@ use namespace kGAMECLASS;
 			this._shield = value;
 		}
 		
-		public function reduceDamage(damage:Number):Number{
-			damage = int(damage - rand(tou) - armorDef);
+		public function reduceDamage(damage:Number):Number {
+			if (tou < 100) damage = int(damage - rand(tou) - armorDef);
+			else damage = int(damage - rand(100) - armorDef);
 			//EZ MOAD half damage
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
 			//Difficulty modifier flags.
@@ -1964,8 +1965,20 @@ use namespace kGAMECLASS;
 			}
 			if (isNaga()) maxSpe += 10;
 			if (isTaur()) maxSpe += 20;
-			
-			
+			//Apply New Game+
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] <= 3) {
+				maxStr += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				maxTou += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				maxSpe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				maxInt += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) {
+				maxStr += 75;
+				maxTou += 75;
+				maxSpe += 75;
+				maxInt += 75;
+			}
+			//Might
 			if (findStatusAffect(StatusAffects.Might) >= 0) {
 				maxStr += statusAffectv1(StatusAffects.Might);
 				maxTou += statusAffectv2(StatusAffects.Might);

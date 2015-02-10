@@ -13,15 +13,12 @@ package classes.Items.Armors
 	{
 		public function PureMaraeArmor() 
 		{
-			super("DB.Armr","D.B.Armor","divine bark armor","a suit of divine bark armor",25,1000,"This suit of armor is finely made from the white bark you've received from Marae as a reward. \n\nType: Heavy armor \nDefense: 27 \nBase value: 1,000");
+			super("DB.Armr","D.B.Armor","divine bark armor","a suit of divine bark armor",30,1100,"This suit of armor is finely made from the white bark you've received from Marae as a reward. \n\nType: Heavy armor \nDefense: 30 \nBase value: 1,100");
 		}
 
 		override public function useText():void
 		{
 			outputText("You strip yourself naked before you proceed to put on the armor. ");
-			if (getGame().player.cor < 33) outputText("You shudder at the idea of wearing armor that is infested with tentacles but you proceed anyway. ");
-			if (getGame().player.cor >= 33 && getGame().player.cor < 66) outputText("You are not sure about the idea of armor that is infested with tentacles. ");
-			if (getGame().player.cor >= 66) outputText("You are eager with the idea of wearing tentacle-infested armor. ");
 			
 			outputText("\n\nFirst, you clamber into the breastplate. ");
 			if (getGame().player.isBiped()) //Some variants.

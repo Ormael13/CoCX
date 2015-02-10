@@ -327,9 +327,10 @@ package classes.Scenes
 		private function itemSpawnMaterialsMenu():void {
 			lastMenu = itemSpawnMaterialsMenu;
 			menu();
-			addButton(0, "GreenGl", giveItem, useables.GREENGL);
-			addButton(1, "B.Chitn", giveItem, useables.B_CHITN);
-			addButton(2, "T.SSilk", giveItem, useables.T_SSILK);
+			addItemButton(useables.GREENGL);
+			addItemButton(useables.B_CHITN);
+			addItemButton(useables.T_SSILK);
+			addItemButton(useables.IMPSKLL);
 			
 			addButton(14, "Back", itemSpawnMenu);
 		}

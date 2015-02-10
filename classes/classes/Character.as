@@ -829,6 +829,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 		{
 			var max:Number = 100;
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
+			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
 			return max;
 		}
 		

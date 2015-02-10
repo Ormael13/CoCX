@@ -47,6 +47,10 @@ package classes {
 			{
 				dynStats("cor", (player.jewelryEffectMagnitude/10));
 			}
+			if (player.armor == armors.DBARMOR)
+			{
+				dynStats("cor", -0.1);
+			}
 			//Hunger! No effect if hunger is disabled, even if your hunger is at 0/100.
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0) {
 				var multiplier:Number = 1.0

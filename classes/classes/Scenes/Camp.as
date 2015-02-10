@@ -1371,7 +1371,7 @@ private function swimInStreamPrank1():void {
 	}
 	if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false && marbleJoinsStream == true)
 	{
-		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She replies \"<i>You're naughty, you know, sweetie!</i>\"", false);
+		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She says, \"<i>You're naughty, you know, sweetie!</i>\"", false);
 		pranked = true;
 	}
 	/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false && amilyJoinsStream == true)
@@ -1391,7 +1391,7 @@ private function swimInStreamFap():void {
 }
 
 private function swimInStreamFinish():void {
-	outputText("", true);
+	clearOutput();
 	//Blown up factory? Corruption gains.
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && player.cor < 50) 
 	{
@@ -1407,7 +1407,7 @@ private function swimInStreamFinish():void {
 
 private function examinePortal():void {
 	if (flags[kFLAGS.CAMP_PORTAL_PROGRESS] <= 0) {
-		outputText("You walk over to the portal, reminded by how and why you came. You begin to wonder if you can go back. You start by picking up a small pebble and throw it through the portal. It passes through the portal. As you walk around the portal, you spot the pebble at the other side. Seems like you can't get back right now.", true)
+		outputText("You walk over to the portal, reminded by how and why you came. You wonder if you can go back to Ingnam. You start by picking up a small pebble and throw it through the portal. It passes through the portal. As you walk around the portal, you spot the pebble at the other side. Seems like you can't get back right now.", true)
 		flags[kFLAGS.CAMP_PORTAL_PROGRESS] = 1
 		doNext(camp.returnToCampUseOneHour);
 		return;
@@ -1434,7 +1434,7 @@ private function watchSunset():void {
 		}
 		if (player.cor >= 66) 
 		{
-			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood. Suddenly, your memories twist into some of the dark and perverted moments. You chuckle at that moment but you suddenly shake your head and focus on relaxing.", false);
+			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood. Suddenly, your memories twist into some of the dark and perverted moments. You chuckle at that moment but you shake your head and focus on relaxing.", false);
 			dynStats("cor", 0, "lib", -1, "lust", -10, "resisted", false);
 		}
 	}

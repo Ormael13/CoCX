@@ -52,6 +52,10 @@ package classes.Scenes.Places
 				marae.talkToMaraeAboutMinervaPurification();
 				return;
 			}
+			if (rand(10) <= 2 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] != 1 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2 && player.level >= 30) {
+				marae.encounterPureMaraeEndgame();
+				return;
+			}
 			//10% chance of corrupt Marae followups
 			if ((debug || rand(10) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
 				marae.level2MaraeEncounter();

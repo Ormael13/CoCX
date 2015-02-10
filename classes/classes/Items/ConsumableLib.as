@@ -60,7 +60,8 @@ package classes.Items
 		public const NPNKEGG:SimpleConsumable = mk("NPnkEgg","NPnkEgg", "a neon pink egg", curry(m.neonPinkEgg,false), "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky. \n\nType: Egg");
 
 		//FOOD & BEVERAGES
-		public const BC_BEER:SimpleConsumable = mk("BC Beer","BC Beer", "a mug of Black Cat Beer", function(player:Player):void{getGame().telAdre.niamh.blackCatBeerEffects(player)}, "A capped mug containing an alcoholic drink secreted from the breasts of Niamh.  It smells tasty. \n\nType: Food & Beverages", 1);
+		public const BC_BEER:SimpleConsumable = mk("BC Beer", "BC Beer", "a mug of Black Cat Beer", function(player:Player):void { getGame().telAdre.niamh.blackCatBeerEffects(player) }, "A capped mug containing an alcoholic drink secreted from the breasts of Niamh.  It smells tasty. \n\nType: Food & Beverages", 1);
+		public const BHMTCUM:SimpleConsumable = mk("BhmtCum", "BhmtCum", "a sealed bottle of behemoth cum", m.behemothCum, "This bottle of behemoth cum looks thick and viscous.  You suspect that it might boost your strength and toughness.  It also has delicious taste. \n\nType: Food & Beverages? \nBase value: 15", 15);
 		public const BIMBOCH:SimpleConsumable = mk("BimboCh","BimboCh", "a bottle of bimbo champagne", curry(function(player:Player):void{getGame().telAdre.niamh.bimboChampagne(player,true,true)}), "A bottle of bimbo champagne. Drinking this might incur temporary bimbofication.", 1);
 		public const C_BREAD:SimpleConsumable = mk("C.Bread","C.Bread", "a bowl of cum with bread pieces floating in it", m.prisonCumStew, "A bowl of cum with pieces of bread floating in it.  Eating this would take the edge off your hunger but damage your dignity. \n\nType: Food & Beverages");
 		public const CCUPCAK:SimpleConsumable = mk("CCupcak","CCupcak", "a gigantic, chocolate cupcake", m.giantChocolateCupcake, "A gigantic, chocolate cupcake. You could easily get full from eating this! \n\nType: Food & Beverages", 250);
@@ -74,7 +75,8 @@ package classes.Items
 		public const P_WHSKY:PhoukaWhiskey    = new PhoukaWhiskey();
 		public const PURPEAC:SimpleConsumable = mk("PurPeac","PurPeac", "a pure peach", m.purityPeach, "This is a peach from Minerva's spring, yellowy-orange with red stripes all over it. \n\nType: Food & Beverages \nBase value: 10", 10);
 		public const SHEEPMK:SimpleConsumable = mk("SheepMk","SheepMk", "a bottle of sheep milk", m.sheepMilk,"This bottle of sheep milk is said to have corruption-fighting properties.  It may be useful. \n\nType: Food & Beverages");
-		public const S_WATER:SimpleConsumable = mk("S.Water","SpringWtr", "a waterskin filled with spring water", m.springWater,"A waterskin full of purified water from Minerva's spring.  It's clean and clear, with a faint sweet scent to it.  You're sure it would be a very refreshing drink. \n\nType: Food & Beverages");
+		public const S_WATER:SimpleConsumable = mk("S.Water", "SpringWtr", "a waterskin filled with spring water", m.springWater, "A waterskin full of purified water from Minerva's spring.  It's clean and clear, with a faint sweet scent to it.  You're sure it would be a very refreshing drink. \n\nType: Food & Beverages");
+		public const URTACUM:SimpleConsumable = mk("UrtaCum", "UrtaCum", "a sealed bottle of Urta's cum", m.urtaCum, "This bottle of Urta's cum looks thick and viscous.  It's quite delicious. \n\nType: Food & Beverages? \nBase value: 15", 15);
 		public const W_PDDNG:SimpleConsumable = mk("W.Pddng","W.Pudding", "a slice of winter pudding", m.winterPudding,"A slice of delicious Winter Pudding.  It smells delicious. \n\nNote: Eating this might cause antlers to grow from your head. \n\nType: Food & Beverages", 35);
 
 		//GROWERS/SHRINKERS

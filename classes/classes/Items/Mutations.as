@@ -8365,11 +8365,31 @@
 			//(Slight chance at increasing Toughness?)
 			//(If lake has been tainted, +1 Corruption?)
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) dynStats("cor", 0.5);
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) dynStats("cor", -0.1);
 			dynStats("cor", 0.1);
 			HPChange(Math.round(player.maxHP() * .25), true);
 			player.refillHunger(30);
 		}
-
+		//Behemoth Cum
+		public function behemothCum(player:Player):void
+		{
+			clearOutput();
+			outputText("You uncork the bottle and drink the behemoth cum; it tastes great and by the time you've finished drinking, you feel a bit stronger. ");
+			dynStats("str", 0.5, "tou", 0.5);
+			HPChange(Math.round(player.maxHP() * .25), true);
+			player.slimeFeed();
+			player.refillHunger(25);
+		}
+		//Urta's Cum
+		public function urtaCum(player:Player):void
+		{
+			clearOutput();
+			outputText("You uncork the bottle and drink the vulpine cum; it tastes great. Urta definitely produces good-tasting cum!");
+			dynStats("str", 0.5, "tou", 0.5);
+			HPChange(Math.round(player.maxHP() * .25), true);
+			player.slimeFeed();
+			player.refillHunger(25);
+		}
 //Trap Oil
 //Flavour Description: A round, opaque glass vial filled with a clear, viscous fluid.  It has a symbol inscribed on it, a circle with a cross and arrow pointing out of it in opposite directions.  It looks and smells entirely innocuous.
 		public function trapOil(player:Player):void

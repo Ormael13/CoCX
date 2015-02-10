@@ -22,6 +22,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			addButton(0, "Fight", startFight, null, null, null, "Challenge the Behemoth.");
 			addButton(1, "Talk", talkToBehemothMenu, null, null, null, "Talk to Behemoth and discuss.");
 			if (player.lust >= 33) addButton(2, "Sex", behemothSexMenu, false, null, null, "Initiate sexy time with the Behemoth.");
+			if (flags[kFLAGS.BEHEMOTH_TALKED_ABOUT_CUM] > 0) addButton(3, "Get Cum", getCum, null, null, null, "Get some of Behemoth's cum!");
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -47,8 +48,8 @@ package classes.Scenes.Areas.VolcanicCrag
 			addButton(1, "Behemoth", talkAboutBehemoth, null, null, null, "Talk to the behemoth about himself.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] >= 1) addButton(2, "His Past", talkAboutSadStory, null, null, null, "Talk to the behemoth about his past.");
 			else addLockedButton(2, "Talk to the behemoth at least once to unlock this.");
-			//if (timesSexed() >= 2) addButton(3, "His Cum", talkAboutHisCum, null, null, null, "Talk to the behemoth about the special properties of his cum and how he managed to cum that much despite his ball size."); 
-			//else addLockedButton(3, "Have sex with the behemoth at least twice to unlock this.");
+			if (timesSexed() >= 2) addButton(3, "His Cum", talkAboutHisCum, null, null, null, "Talk to the behemoth about the special properties of his cum and how he managed to cum that much despite his ball size."); 
+			else addLockedButton(3, "Have sex with the behemoth at least twice to unlock this.");
 			addButton(14, "Back", behemothMenu);
 		}
 		
@@ -85,7 +86,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				outputText("\n\n<b>New codex entry unlocked: Behemoths!</b>");
 			}
 			outputText("\n\n\"<i>I suggest you read the codex entry; it contains detailed information,</i>\" the behemoth says.");
-			outputText("You thank him for the codex entry. \"<i>You're always welcome,</i>\" the behemoth says with a smile. His face begins to shift from a happy to a sad look. \"<i>Something wrong?</i>\" you ask. The behemoth replies, \"<i>Well... I had a rough past. I'd rather not talk about it for now. Why not come back later?</i>\" You nod and wrap your arms around the behemoth, giving him a hug before you say farewell and make your way back to camp.");
+			outputText("\n\nYou thank him for the codex entry. \"<i>You're always welcome,</i>\" the behemoth says with a smile. His face begins to shift from a happy to a sad look. \"<i>Something wrong?</i>\" you ask. The behemoth replies, \"<i>Well... I had a rough past. I'd rather not talk about it for now. Why not come back later?</i>\" You nod and wrap your arms around the behemoth, giving him a hug before you say farewell and make your way back to camp.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] <= 1) flags[kFLAGS.BEHEMOTH_TALK_LEVEL]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -109,15 +110,37 @@ package classes.Scenes.Areas.VolcanicCrag
 			}
 			//Behemoth the Imp Slayer!
 			outputText("\n\n\"<i>When I'm taking a stroll on the path to visit various regions, I've seen imps. All of them ran away from me except for one. I let the imp approach me but I could see his face twisting into a grin and he tries to force himself. It's a HUGE mistake for him. I punched him square in the chin and he reels back. But he gets up and tries to force himself on me again so I picked him up and ripped him with my strength. I let out a laugh like this,</i>\" the behemoth laughs like a beast and says, \"<i>I even took his skull to remind the imps to never mess with me.</i>\" The behemoth gets up and grabs the imp skull and shows it to you and says, \"<i>This is real. You can see the horns protruding from this skull.</i>\" You look at the skull; it definitely looks and feels real. The behemoth gets up, puts the imp skull away and sits down.");
-			outputText("\"<i>Anything else?</i>\" you ask.");
-			outputText("\"<i>I'm afraid not. Wait until the next snapshot! We can chat later,</i>\" the behemoth says. You thank him for telling you the story. \"<i>You're always welcome,</i>\" the behemoth says with a smile. You give him a farewell and walk back to camp.");
+			outputText("\n\n\"<i>Anything else?</i>\" you ask.");
+			//Sad story.
+			outputText("\n\n\"<i>This part is tragic. By the time I'm allowed to go back through the portal, I was horrified to find out what happened. My village... destroyed. My tribe... dead. The whole landscape is ravaged. I've spent time searching for survivors but to no avail. Not a trace of life. So I give my family a proper burial and packed up all my stuff before finally moving back to Mareth and locked away the portal,</i>\" the behemoth says, tears leaking from his eyes.");
+			outputText("\n\nThis is quite sad. You wrap your arms around the behemoth and give him an assuring hug. He says, \"<i>Thank you for comforting me. I needed some company anyways.</i>\" You ask him if he has anything left.");
+			outputText("\n\n\"<i>I'm afraid that's pretty much my entire story but I only hope to find someone who's pure and willing to bear children and start a new family,</i>\" the behemoth says. You thank him for telling you the story. \"<i>You're always welcome,</i>\" the behemoth says with a smile. You give him a farewell and walk back to camp.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] <= 2) flags[kFLAGS.BEHEMOTH_TALK_LEVEL]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function talkAboutHisCum():void {
 			clearOutput();
+			outputText("You ask the behemoth about the properties of his cum and how he can cum that much.");
+			outputText("\n\n\"<i>My cum makes people stronger. Whenever I get the cum inside their bodies or people drink my cum, they gain a bit of strength and toughness. For the question about how I can cum that much, that's a natural for our race. In fact, we end up using our cum for sauce and for bathing. My balls may be three inches across but I can definitely cum as much as I want to, up to two hundred litres!</i>\" the behemoth says, \"<i>Hey, want some of my cum? You'll get to bring it with you!</i>\"");
+			outputText("\n\nSeems like the behemoth is offering you his cum. Do you want it?");
+			flags[kFLAGS.BEHEMOTH_TALKED_ABOUT_CUM] = 1;
+			doYesNo(getCum, noThanks);
+		}
+		
+		//Cum offer
+		private function getCum():void {
+			clearOutput();
+			outputText("You definitely want his cum! The behemoth smiles at you and says, \"<i>I'll start.</i>\" He moves his loincloth aside and begins stroking his cock to full mast.");
+			outputText("\n\nThe behemoth moans in pleasure as he squeezes his balls and jerks himself off with his hands. He yells, \"<i>I'm going to cum! Get the bottle!</i>\"");
+			outputText("\n\nYou pull out an empty bottle and points his cock towards the bottle opening. The behemoth finally reaches his orgasm as he cums, filling the bottle entirely and it overflows, the excessive cum spilling all over the thirsty earth. The behemoth eventually finishes orgasming and says, \"<i>If you ever need more, feel free to ask.</i>\" ");
+			inventory.takeItem(consumables.BHMTCUM, camp.returnToCampUseOneHour);
+		}
+		private function noThanks():void {
+			clearOutput();
+			outputText("You politely decline the offer. \"<i>All right. Just come back anytime, okay?</i>\" the behemoth says. You say your goodbye to the behemoth and make your way back to your camp.");
 			doNext(camp.returnToCampUseOneHour);
 		}
+		
 		//Combat
 		private function startFight():void {
 			clearOutput();

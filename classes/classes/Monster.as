@@ -145,10 +145,23 @@
 
 		public function eMaxHP():Number
 		{
-			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) return this.tou * 2 + 50 + this.bonusHP;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) return this.tou * 2.5 + 75 + (this.bonusHP * 1.25);
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) return this.tou * 3 + 100 + (this.bonusHP * 1.5);
-			else  return this.tou * 4 + 200 + (this.bonusHP * 2);
+			//Base HP
+			var temp:Number = 50 + this.bonusHP;
+			temp += (this.tou * 2);
+			//Apply perks
+			if (findPerk(PerkLib.Tank) >= 0) temp += 50;
+			if (findPerk(PerkLib.Tank2) >= 0) temp += this.tou;
+			//Apply NG+, NG++, NG+++, etc.
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp += 1000;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp += 2000;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) temp += 3000;
+			//Apply difficulty
+			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) temp *= 1.0;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.25;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 1.5;
+			else temp *= 2.0;
+			temp = Math.round(temp);
+			return temp;
 		}
 
 		public function addHP(hp:Number):void{
@@ -178,7 +191,7 @@
 			return player.reduceDamage(eBaseDamage());
 		}
 
-		protected function totalXP(playerLevel:Number=-1):Number
+		public function totalXP(playerLevel:Number=-1):Number
 		{
 			if (playerLevel == -1) playerLevel = game.player.level;
 			//

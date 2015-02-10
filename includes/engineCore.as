@@ -399,19 +399,19 @@ private function attributeMenu():void {
 	outputText("You have " + (player.statPoints) + " left to spend.\n\n", true)
 	
 	outputText("Strength: ", false)
-	if (player.str < 100) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n", false)
+	if (player.str < player.getMaxStats("str")) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n", false)
 	else outputText("" + Math.floor(player.str) + " (Maximum)\n", false)
 	
 	outputText("Toughness: ", false)
-	if (player.tou < 100) outputText("" + Math.floor(player.tou) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.tou + player.tempTou) + "\n", false)
+	if (player.tou < player.getMaxStats("tou")) outputText("" + Math.floor(player.tou) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.tou + player.tempTou) + "\n", false)
 	else outputText("" + Math.floor(player.tou) + " (Maximum)\n", false)
 	
 	outputText("Speed: ", false)
-	if (player.spe < 100) outputText("" + Math.floor(player.spe) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.spe + player.tempSpe) + "\n", false)
+	if (player.spe < player.getMaxStats("spe")) outputText("" + Math.floor(player.spe) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.spe + player.tempSpe) + "\n", false)
 	else outputText("" + Math.floor(player.spe) + " (Maximum)\n", false)
 	
 	outputText("Intelligence: ", false)
-	if (player.inte < 100) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n", false)
+	if (player.inte < player.getMaxStats("int")) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n", false)
 	else outputText("" + Math.floor(player.inte) + " (Maximum)\n", false)
 
 	choices("Add Strength", addStr, "Add Tough", addTou, "Add Speed", addSpe, "Add Intel", addInt, "Reset", resetAttributes, "Sub Strength", subStr, "Sub Tough", subTou, "Sub Speed", subSpe, "Sub Intel", subInt, "Done", finishAttributes); 
@@ -2044,6 +2044,9 @@ public function displayStats(e:MouseEvent = null):void
 		
 	if (flags[kFLAGS.AMILY_MET] > 0)
 		childStats += "<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n";
+
+	if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0)
+		childStats += "<b>Children With Behemoth:</b> " + flags[kFLAGS.BEHEMOTH_CHILDREN] + "\n";
 		
 	if (flags[kFLAGS.BENOIT_EGGS] > 0)
 		childStats += "<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n";
@@ -2472,7 +2475,10 @@ public function lustPercent():Number {
 	{
 		lust *= 1 - (player.jewelryEffectMagnitude / 100);
 	}	
-	
+	if (player.armor == armors.DBARMOR)
+	{
+		lust *= 0.9
+	}
 	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
 	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);

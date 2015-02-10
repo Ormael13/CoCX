@@ -1548,7 +1548,6 @@ public function attack():void {
 	
 	if(damage > 0) {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		damage = doDamage(damage);
 	}
 	
@@ -2366,6 +2365,25 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 		if(monster.armorDef <= 10) monster.armorDef = 0;
 		else monster.armorDef -= 10;
 	}
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] <= 3) {
+		monster.str += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		monster.tou += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		monster.spe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		monster.inte += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		monster.level += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		monster.HP = monster.eMaxHP();
+		monster.XP = monster.totalXP();
+	}
+	else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) {
+		monster.str += 75;
+		monster.tou += 75;
+		monster.spe += 75;
+		monster.inte += 75;
+		monster.level += 90;
+		if (monster.level < 100) monster.level = 100;
+		monster.HP = monster.eMaxHP();
+		monster.XP = monster.totalXP();
+	}
 	if (player.weaponName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
 	doNext(1);
 }
@@ -2671,7 +2689,8 @@ public function tease(justText:Boolean = false):void {
 		damage += 5;
 		bimbo = true;
 	}
-	damage += player.level;
+	if (player.level < 30) damage += player.level;
+	else damage += 30 + ((player.level-30) / 2);
 	damage += player.teaseLevel*2;
 	//==============================
 	//TEASE SELECT CHOICES

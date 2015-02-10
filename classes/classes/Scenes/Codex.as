@@ -151,9 +151,9 @@ package classes.Scenes
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0
 			outputText("You open your codex. Which topic would you like to read?\n\n", true)
-			outputText("Codex entries unlocked: " + checkUnlocked() + "/20", false)
+			outputText("Codex entries unlocked: " + checkUnlocked() + "/21", false)
 			addButton(0, "Races", enterRaces);
-			addButton(1, "Factions", menuFactions);
+			addButton(1, "Cults", menuFactions);
 			addButton(2, "Others", menuItems);
 			addButton(14, "Back", eventParser, 1);
 		}
@@ -775,6 +775,7 @@ package classes.Scenes
 			outputText("Like the satyrs, the behemoths are all-male race. Unlike satyrs, they are incapable of impregnating males. To reproduce, they rely on the females of other races as long as they are pure. Gestation period typically lasts two months, much longer than the typical gestation period in Mareth, and it takes two years for the newborn behemoth to fully mature into an adult.");
 			headerSub("Social structure");
 			outputText("Behemoths typically live in villages and caves. The leadership of tribes are determined by which is the strongest of all. Once a year, they host \"Feats of Strength\", a contest consisting of several gauntlets and competitions. Among one of them is the \"Cum-Out\" where the objective is for the behemoths to cum as much as they can in a single orgasm.");
+			menuRacesII();
 		}
 	}
 }

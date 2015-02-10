@@ -214,9 +214,17 @@ package classes.Scenes.Areas
 				return;
 			}
 			if (chooser == 0) {
+				//Tamani 25% of all goblin encounters encounter rate
+				if (rand(4) <= 0 && flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
+					if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
+						tamaniDaughtersScene.encounterTamanisDaughters();
+					}
+					else
+						tamaniScene.encounterTamani();
+					return;
+				}
 				//Determines likelyhood of imp/goblins
 				kGAMECLASS.exploration.genericGobImpEncounters();
-				return;
 			}
 			if (chooser == 1) {
 				doNext(camp.returnToCampUseOneHour);

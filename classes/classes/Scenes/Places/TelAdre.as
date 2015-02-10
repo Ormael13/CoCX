@@ -1668,6 +1668,7 @@ public function jewelShopEntry():void {
 public function jewelShopInside():void {
 	outputText("", true);
 	outputText("<i>So what will it be?</i>", false);
+	menu();
 	addButton(0, "Normal rings", jewelShopPageI);
 	addButton(1, "Enchanted rings", jewelShopPageII);
 	addButton(4, "Jewelry box", jewelShopBuyBox);

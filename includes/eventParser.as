@@ -713,7 +713,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 	if (player.armorName == "lusty maiden's armor") {
 		//Removal due to no longer fitting:
 		//Grew Cock or Balls
-		if (player.hasCock() || player.balls > 0) {
+		if ((player.hasCock() && !player.hasSheath()) || player.balls > 0) {
 			outputText("\nYou fidget uncomfortably in the g-string of your lewd bikini - there simply isn't enough room for your ");
 			if (player.hasCock()) outputText("maleness");
 			else outputText("bulgy balls");

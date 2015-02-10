@@ -41,7 +41,7 @@ public function encounterMarae():void {
 		if(flags[kFLAGS.MET_MARAE] <= 0) {
 			flags[kFLAGS.MET_MARAE] = 1;
 			outputText("You approach the tree and note that its bark is unusually smooth.  Every leaf of the tree is particularly vibrant, bright green with life and color.   You reach out to touch the bark and circle around it, noting a complete lack of knots or discoloration.  As you finish the circle, you are surprised to see the silhouette of a woman growing from the bark.  The transformation stops, exposing the front half a woman from the waist up.   You give a start when she opens her eyes – revealing totally white irises, the only part of her NOT textured with bark.\n\n", false);
-			if(player.cor > 66) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!", false);
+			if(player.cor > 66 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!", false);
 			//Explain the dungeon scenario
 			else {
 				flags[kFLAGS.MARAE_QUEST_START] = 1;
@@ -58,7 +58,7 @@ public function encounterMarae():void {
 				outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n", false);
 				if(player.lib + player.cor > 80) {
 					outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?", false);
-					simpleChoices("Boob",grabHerBoob,"",0,"",0,"",0,"Leave",13);
+					simpleChoices("Boob",grabHerBoob,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 				}
 				else doNext(camp.returnToCampUseOneHour);
 				return;
@@ -68,8 +68,9 @@ public function encounterMarae():void {
 		//Second meeting
 		else {
 			outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.   Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n", false);
-			if(player.cor > 66) {
+			if(player.cor > 66 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
 				outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.", false);
+				if (player.level >= 30) outputText("\n\nOf course, you could probably try to overthrow her."); 
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else
@@ -95,7 +96,7 @@ public function encounterMarae():void {
 					outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n", false);
 					if(player.lib + player.cor > 80) {
 						outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?", false);
-						simpleChoices("Boob",grabHerBoob,"",0,"",0,"",0,"Leave",13);
+						simpleChoices("Boob",grabHerBoob,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
 					}
 					else doNext(camp.returnToCampUseOneHour);
 				}
@@ -152,58 +153,86 @@ private function promptFightMarae2():void {
 
 //FIGHT!
 public function initiateFightMarae():void {
-	outputText("You ready your " + player.weaponName + " and assume a combat stance! \"<i>Pity. You're dealing with a goddess,</i>\" she coos.", true);
-	outputText("\n\nTentacles come up to keep your boat in place so you can't flee.", false)
+	clearOutput();
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
+		outputText("You ready your " + player.weaponName + " and assume a combat stance! \"<i>Pity. You're dealing with a goddess,</i>\" she coos.");
+		outputText("\n\nTentacles come up to keep your boat in place so you can't flee.")
+	}
+	else {
+		outputText("Marae looks at you with a smile. \"<i>Get ready! I won't hold back!</i>\"");
+	}
 	outputText("\n\nIt's a fight!", false)
 	startCombat(new Marae(), true);
 }	
 
-public function loseAgainstMaraeByHP():void {
-	outputText("You collapse, too weak to continue fighting. You know that your journey will be over. ", true)
-	doNext(maraeBadEnd);
+//Lose against Marae
+public function loseAgainstMarae():void {
+	clearOutput();
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
+		if (player.HP <= 0) outputText("You collapse, too weak to continue fighting. You know that your journey will be over. ", true)
+		else outputText("Your desire to keep fighting has been slain by your overwhelming lust and you collapse. You know that your journey will be over. ", true)
+		doNext(maraeBadEnd);
+	}
+	else {
+		if (player.HP <= 0) outputText("You collapse, too weak to continue fighting. \"<i>Get some rest, champion,</i>\" Marae says. You finally black out. \n\nBy the time you wake up, you find yourself in your camp.", true)
+		else outputText("Your desire to keep fighting has been slain by your overwhelming lust and you collapse. \"<i>Control your urges and get some rest, champion,</i>\" Marae says. You finally black out from your lust. \n\nBy the time you wake up, you find yourself in your camp.", true)
+		doNext(camp.returnToCampUseOneHour);
+	}
+	doNext(camp.returnToCampUseOneHour); //Failsafe
 }
 
-public function loseAgainstMaraeByLust():void {
-	outputText("Your desires to fighting has been slain by your overwhelming lust and you collapse. You know that your journey will be over. ", true)
-	doNext(maraeBadEnd);
-}
+
 
 public function winAgainstMarae():void {
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("marae-defeated"));
-	outputText("\"<i>NO! How can a mortal just defeated me?! That's IMPOSSIBLE!</i>\" Marae yells. You tell her that just because she's a goddess doesn't mean a mortal can't defeat her.", true);
-	if (silly())
-	{
-		outputText("\n\n<b>Did you just punch out Cthulhu? Or in this case, Marae?</b>\n\n", false);
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
+		outputText("\"<i>NO! How can a mortal just defeated me?! That's IMPOSSIBLE!</i>\" Marae yells. You tell her that just because she's a goddess doesn't mean a mortal can't defeat her.", true);
+		if (silly())
+		{
+			outputText("\n\n<b>Did you just punch out Cthulhu? Or in this case, Marae?</b>\n\n", false);
+		}
+		if (player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0)
+		{
+			outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.", false);
+		}
+		else 
+		{
+			outputText("You raise your " + player.weaponName + " and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up and die. Afterwards, you turn your attention elsewhere.", false)
+		}
+		if (!player.hasKeyItem("Marae's Lethicite") >= 0) 
+		{
+			outputText("\n\nYou see something large and shining. You manage to pick up a large crystal and examine it closer. Clearly, this has to be Marae's lethicite!", false)
+			outputText("\n<b>(Key Item Gained: Marae's Lethicite!)</b>", false)
+			
+			player.createKeyItem("Marae's Lethicite", 0, 0, 0, 0);
+			flags[kFLAGS.MARAE_LETHICITE] = 3;
+		}
+		outputText("\n\nAfter the death of a corrupted physical goddess, you see something odd. There is a pile of intact shards of bark. They looks large and thick enough to be workable. You give it an experiment punch. ")
+		if (player.str < 40) outputText("You scream as your hand hits the chitin. Maybe it's because you're not strong enough? ")
+		if (player.str >= 40 && player.str < 70) outputText("In spite of your decent strength, the bark refuses to bend or break. ")
+		if (player.str >= 70) outputText("Despite your incredible strength, the bark refuses to bend or break. ")
+		outputText("The bark is quite strong. Maybe someone can work this into armor? However, there are tentacles attached, still alive. You're not sure if you want armor that has tentacles in it.");
+		outputText("\n<b>(Key Item Gained: Tentacled Bark Plates!)</b>", false)
+		player.createKeyItem("Tentacled Bark Plates", 0, 0, 0, 0);
+		outputText("\n\nWith the tentacles blocking your boat gone, you get into your boat and sail back to the shore and return to your camp.", false)
+		awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
+		flags[kFLAGS.CORRUPTED_MARAE_KILLED] = 1;
+		cleanupAfterCombat();
+		doNext(camp.returnToCampUseOneHour);
 	}
-	if (player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0)
-	{
-		outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.", false);
+	else {
+		if (monster.HP <= 0) outputText("Marae reels back from the incredible amount of damage you've dealt to her.");
+		else outputText("Marae clearly shows signs of her overwhelming arousal and reels back.");
+		outputText("\n\n\"<i>You have managed to defeat me, champion,</i>\" Marae says, \"<i>Now for the rewards.</i>\"");
+		outputText("\n\nThe deity sheds a layer of bark, one piece at a time. \"<i>Take these and bring them to the alchemist Rathazul; he should be able to make armor for you. With luck, we won't need to meet again. I need a long rest after the battle. Farewell,</i>\" Marae says smilingly.");
+		outputText("\n\nYou pick up the bark and examine it thoroughly. It's unusually strong for a bark. You thank Marae for the bark, get on your boat and ferry back to the shore.");
+		outputText("\n\n<b>(Key Item Gained: Divine Bark Plates!)</b>");
+		player.createKeyItem("Divine Bark Plates", 0, 0, 0, 0);
+		awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
+		flags[kFLAGS.PURE_MARAE_ENDGAME] = 2;
+		cleanupAfterCombat();
 	}
-	else 
-	{
-		outputText("You raise your " + player.weaponName + " and you manage to finish Marae off at last. The corrupted goddess is no more. All the tentacles shrivel up and die. Afterwards, you turn your attention elsewhere.", false)
-	}
-	if (!player.hasKeyItem("Marae's Lethicite") >= 0) 
-	{
-		outputText("\n\nYou see something large and shining. You manage to pick up a large crystal and examine it closer. Clearly, this has to be Marae's lethicite!", false)
-		outputText("\n<b>(Key Item Gained: Marae's Lethicite!)</b>", false)
-		
-		player.createKeyItem("Marae's Lethicite", 0, 0, 0, 0);
-		flags[kFLAGS.MARAE_LETHICITE] = 3;
-	}
-	outputText("\n\nAfter the death of a corrupted physical goddess, you see something odd. There is a pile of intact shards of bark. They looks large and thick enough to be workable. You give it an experiment punch. ")
-	if (player.str < 40) outputText("You scream as your hand hits the chitin. Maybe it's because you're not strong enough? ")
-	if (player.str >= 40 && player.str < 70) outputText("In spite of your decent strength, the bark refuses to bend or break. ")
-	if (player.str >= 70) outputText("Despite your incredible strength, the bark refuses to bend or break. ")
-	outputText("The bark is quite strong. Maybe someone can work this into armor? However, there are tentacles attached, still alive. You're not sure if you want armor that has tentacles in it.");
-	outputText("\n<b>(Key Item Gained: Divine Bark Plates!)</b>", false)
-	player.createKeyItem("Tentacled Bark Plates", 0, 0, 0, 0);
-	outputText("\n\nWith the tentacles blocking your boat gone, you get into your boat and sail back to the shore and return to your camp.", false)
-	awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
-	flags[kFLAGS.CORRUPTED_MARAE_KILLED] = 1;
-	cleanupAfterCombat();
-	doNext(camp.returnToCampUseOneHour);
 }	
 
 private function maraeBadEnd():void {
@@ -614,6 +643,25 @@ private function MaraePt2RoundIIIPrizes():void {
 	doNext(camp.returnToCampUseTwoHours);
 }
 
+private function MaraeIIFlyAway():void {
+	spriteSelect(40);
+	outputText("", true);
+	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!", false);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function grabHerBoob():void {
+	clearOutput();
+	outputText("You reach forward to cop a feel. The goddess' eyes go wide with fury as a massive branch swings down, catching you in the sternum. It hits you hard enough that you land in your boat and float back a few feet into the water. Nothing to do but leave and hope for another chance at her breasts...");
+	player.takeDamage(player.HP - 1);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function runFromPervertedGoddess():void {
+	outputText("You turn and run for the boat, leaving the corrupt goddess behind.  High pitched laugher seems to chase you as you row away from the island.", true);
+	doNext(camp.returnToCampUseOneHour);
+}
+
 public function talkToMaraeAboutMinervaPurification():void {
 	spriteSelect(40);
 	outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. She may be Minerva’s best chance of being healed. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
@@ -633,23 +681,22 @@ public function talkToMaraeAboutMinervaPurification():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-private function MaraeIIFlyAway():void {
+public function encounterPureMaraeEndgame():void {
 	spriteSelect(40);
-	outputText("", true);
-	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!", false);
-	doNext(camp.returnToCampUseOneHour);
-}
-
-private function grabHerBoob():void {
 	clearOutput();
-	outputText("You reach forward to cop a feel. The goddess' eyes go wide with fury as a massive branch swings down, catching you in the sternum. It hits you hard enough that you land in your boat and float back a few feet into the water. Nothing to do but leave and hope for another chance at her breasts...");
-	player.takeDamage(player.HP - 1);
-	doNext(camp.returnToCampUseOneHour);
-}
-
-private function runFromPervertedGoddess():void {
-	outputText("You turn and run for the boat, leaving the corrupt goddess behind.  High pitched laugher seems to chase you as you row away from the island.", true);
-	doNext(camp.returnToCampUseOneHour);
+	outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. After all, you need a good challenge. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
+	if (flags[kFLAGS.PURE_MARAE_ENDGAME] == 0) {
+		outputText("\n\n\"<i>What brings you here, champion?</i> the deity gently asks you.");
+		outputText("\n\nYou let Marae know that you're looking for a challenge.");
+		outputText("\n\n\"<i>Very well, I deem you worthy to fight me. If you can manage to defeat me, you shall be rewarded greatly,</i>\" she says.");
+	}
+	else {
+		outputText("\n\n\"<i>Are you ready for the challenge, champion?</i> the deity gently asks you.");
+	}
+	flags[kFLAGS.PURE_MARAE_ENDGAME] = 1;
+	menu();
+	addButton(0, "Bring it on!", initiateFightMarae, null, null, null, "Challenge Marae to a fight. This is going to be an extremely HARD boss fight! \n\nRecommended level: 30+");
+	addButton(1, "Not yet!", camp.returnToCampUseOneHour);
 }
 
 }

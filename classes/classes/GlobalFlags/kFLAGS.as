@@ -2182,8 +2182,8 @@ public static const THIEF_GEMS:int                                              
 public static const INGNAM_GREETED_AFTER_LONGTIME:int                               = 2173;
 public static const CODEX_ENTRY_BEHEMOTH:int                                        = 2174;
 public static const SCARRED_BLADE_STATUS:int                                        = 2175;
-public static const UNKNOWN_FLAG_NUMBER_02176:int                                   = 2176;
-public static const UNKNOWN_FLAG_NUMBER_02177:int                                   = 2177;
+public static const PURE_MARAE_ENDGAME:int                                          = 2176; //1 if met, 2 if defeated.
+public static const BEHEMOTH_TALKED_ABOUT_CUM:int                                   = 2177;
 public static const UNKNOWN_FLAG_NUMBER_02178:int                                   = 2178;
 public static const UNKNOWN_FLAG_NUMBER_02179:int                                   = 2179;
 public static const UNKNOWN_FLAG_NUMBER_02180:int                                   = 2180;
@@ -2985,7 +2985,7 @@ public static const UNKNOWN_FLAG_NUMBER_02975:int                               
 public static const UNKNOWN_FLAG_NUMBER_02976:int                                   = 2976;
 public static const UNKNOWN_FLAG_NUMBER_02977:int                                   = 2977;
 public static const UNKNOWN_FLAG_NUMBER_02978:int                                   = 2978;
-public static const UNKNOWN_FLAG_NUMBER_02979:int                                   = 2979;
+public static const NEW_GAME_PLUS_LEVEL:int                                         = 2979;
 public static const NEW_GAME_PLUS_BONUS_UNLOCKED_HERM:int                           = 2980; //Unlocked hermaphrodite.
 public static const USE_OLD_INTERFACE:int                                   		= 2981; //1 if old interface is used.
 public static const IMAGEPACK_OFF:int                                   			= 2982; //1 if imagepack is disabled.
