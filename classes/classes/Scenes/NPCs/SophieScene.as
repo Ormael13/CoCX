@@ -347,6 +347,7 @@ private function fightSophie():void {
 	sophieBimbo.sophieSprite();
 	startCombat(new Sophie());
 	flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(24);
+	playerMenu();
 }
 
 //[Yes]

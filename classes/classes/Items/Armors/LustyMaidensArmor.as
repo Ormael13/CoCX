@@ -5,6 +5,7 @@ package classes.Items.Armors
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armor;
+	import classes.CoC;
 	import classes.Monster;
 	import classes.PerkLib;
 	import classes.Player;
@@ -23,11 +24,11 @@ package classes.Items.Armors
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.biggestTitSize() < 1) { //{No titties}
+			if (game.player.biggestTitSize() < CoC.BREAST_CUP_A) { //{No titties}
 				outputText("You slide the bikini top over your chest and buckle it into place, but the material hangs almost comically across your flat chest.  The cold chain dangles away from you, swaying around ridiculously before smacking, cold and hard into your [nipples].  This simply won't do - it doesn't fit you, and you switch back to your old armor.\n\n");
 				return false;
 			}
-			if (game.player.biggestTitSize() < 4) { //{Too small titties}
+			if (game.player.biggestTitSize() < CoC.BREAST_CUP_D) { //{Too small titties}
 				outputText("You slide the bikini top over your chest, shivering when the cold chains catch on your nipples, stiffening them nicely. The material nicely accentuates your chest, but there's a definite problem.  Your [chest] aren't big enough!  Sure, they look nice done up in glittering silver and gold trim.  If only the metal wasn't hanging loosely around your underbust, flopping around whenever you move.  It doesn't even look that sexy on you!  You'll need a bigger chest to truly make use of this armor.  For now, you switch back to your old equipment.\n\n");
 				return false;
 			}
@@ -43,7 +44,7 @@ package classes.Items.Armors
 				outputText(" at all!  <b>You put your old gear back on with a sigh</b>.");
 				return false;
 			}
-			else if (game.player.gender == 0 || !game.player.hasVagina()) {
+			else if (!game.player.hasVagina()) {
 				outputText("that it will dig uncomfortably into your featureless groin.  <b>You put your old gear back on with a sigh</b>.");
 				return false;
 			}

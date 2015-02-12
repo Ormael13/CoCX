@@ -399,7 +399,7 @@
 			player.thickness = 30;
 			player.tone += 5;
 			
-			player.breastRows[0].breastRating = BREAST_CUP_C;
+			player.breastRows[0].breastRating = BREAST_CUP_B;
 			player.buttRating = BUTT_RATING_TIGHT;
 			player.hipRating = HIP_RATING_AMPLE;
 			chooseComplexion();
@@ -450,7 +450,7 @@
 			
 			player.breastRows[0].breastRating = BREAST_CUP_D;
 			player.buttRating = BUTT_RATING_LARGE;
-			player.hipRating = 8;
+			player.hipRating = HIP_RATING_CURVY;
 			chooseComplexion();
 		}
 
@@ -469,12 +469,15 @@
 		}
 
 		private function buildTomboyishFemale():void {
+			player.str += 1;
+			player.spe -= 1;
+			
 			player.femininity = 56;
 			player.thickness = 50;
 			player.tone = 50;
 			
-			player.breastRows[0].breastRating = BREAST_CUP_B;
-			player.buttRating = BUTT_RATING_BUTTLESS;
+			player.breastRows[0].breastRating = BREAST_CUP_A;
+			player.buttRating = BUTT_RATING_TIGHT;
 			player.hipRating = HIP_RATING_SLENDER;
 			chooseComplexion();
 		}

@@ -229,22 +229,22 @@ private function fightZeDemons(sacrifice:Boolean = true):void {
 	//When acting as sacrifice, Item button is disabled; Fight, Run, and Phys Special buttons are disabled unless PC has str >= 80; Run is furthermore prevented entirely if PC is non-winged; outputs text: \"<i>You'd like to run, but you can't scale the walls of the pit with so many demonic hands pulling you down!</i>\"
 	//PC's weapon is temporarily set to fists and armor to comfortable clothes during a Horde Fight if he triggered it in response to a sacrifice request, but not if triggered through volunteering to guard the pit later once the village is unlocked
 	startCombat(new LustyDemons());
-	if(sacrifice) {
+	if (sacrifice) {
 		//Remove weapon
-		player.createStatusAffect(StatusAffects.Disarmed,0,0,0,0);
+		player.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 		flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 		player.setWeapon(WeaponLib.FISTS);
-//		player.weapon.unequip(player,false,true);
-		monster.createStatusAffect(StatusAffects.BowDisabled,0,0,0,0);
-		if(player.str < 80 && player.spe < 80) {
-			monster.createStatusAffect(StatusAffects.AttackDisabled,0,0,0,0);
-			monster.createStatusAffect(StatusAffects.RunDisabled,0,0,0,0);
-			monster.createStatusAffect(StatusAffects.PhysicalDisabled,0,0,0,0);
+		monster.createStatusAffect(StatusAffects.BowDisabled, 0, 0, 0, 0);
+		if (player.str < 80 && player.spe < 80) {
+			monster.createStatusAffect(StatusAffects.AttackDisabled, 0, 0, 0, 0);
+			monster.createStatusAffect(StatusAffects.RunDisabled, 0, 0, 0, 0);
+			monster.createStatusAffect(StatusAffects.PhysicalDisabled, 0, 0, 0, 0);
 		}
 		else {
-			if(!player.canFly()) monster.createStatusAffect(StatusAffects.RunDisabled,0,0,0,0);
+			if (!player.canFly()) monster.createStatusAffect(StatusAffects.RunDisabled, 0, 0, 0, 0);
 		}
 	}
+	playerMenu(); //Avoid showing the next button. Must call it here, after setting up all the statuses, so the first round combat menu is correct
 }
 
 

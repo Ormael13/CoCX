@@ -15,30 +15,65 @@ package classes.Scenes.Monsters
 		public function ImpScene()
 		{
 		}
+		
 		public function impVictory():void {
-			if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
-				if(player.lust >= 33) outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing, but it might be more fun to force it to guzzle your breast-milk.\n\nWhat do you do?", true);
-				else outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.  You're not really turned on enough to rape it, but it might be fun to force it to guzzle your breast-milk.\n\nDo you breastfeed it?", true);
+			clearOutput();
+			var canFeed:Boolean = (player.findStatusAffect(StatusAffects.Feeder) >= 0);
+			var canBikiniTits:Boolean = (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor);
+			outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.");
+			if (canFeed) {
+				if (player.lust >= 33)
+					outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing, but it might be more fun to force it to guzzle your breast-milk.\n\nWhat do you do?");
+				else outputText("  You're not really turned on enough to rape it, but it might be fun to force it to guzzle your breast-milk.\n\nDo you breastfeed it?");
 			}
-			else if(player.lust >= 33) outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\nDo you rape him?", true);
+			else if (player.lust >= 33 || canBikiniTits || player.canOvipositBee()) {
+				outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\nDo you rape him?");
+			}
 			else {
-				outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.", true);
 				cleanupAfterCombat();
 				return;
 			}
+			menu();
+			if (player.lust > 33) {
+				var maleRape:Function = null;
+				if (player.hasCock()) {
+					if (player.cockThatFits(monster.analCapacity()) == -1)
+						outputText("\n\n<b>You're too big to rape an imp with " + oMultiCockDesc() + ".</b>");
+					else maleRape = (player.isTaur() ? centaurOnImpStart : rapeImpWithDick);
+				}
+				if (player.hasVagina()) {
+					if (player.isTaur()) {
+						maleRape = centaurOnImpStart;
+						addButton(1, "Group Vaginal", centaurGirlOnImps);
+					}
+					else addButton(1, "Female Rape", rapeImpWithPussy);
+				}
+				else if (maleRape == null && !player.hasFuckableNipples() && !canFeed && !canBikiniTits && !player.canOvipositBee()) {
+					cleanupAfterCombat(); //Only happens when there's no way to fuck the imp
+					return;
+				}
+				addButton(0, (player.isTaur() ? "Centaur Rape" : "Male Rape"), maleRape);
+				if (player.hasFuckableNipples()) addButton(2, "NippleFuck", noogaisNippleRape);
+			}
+			if (canFeed) addButton(3, "Breastfeed", areImpsLactoseIntolerant);
+			if (canBikiniTits) addButton(4, "B.Titfuck" (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
+			addButton(9, "Leave", cleanupAfterCombat);
+			
+			/* The old way
 			var maleRape:Function =null;
 			var femaleRape:Function =null;
 			var centaurGang:Function =null;
 			var feeder:Function =null;
 			var nipFuck:Function =null;
 			var bikiniTits:Function =null;
-			if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-			if(player.hasFuckableNipples() && player.lust >= 33) nipFuck = noogaisNippleRape;
-			if(player.findStatusAffect(StatusAffects.Feeder) >= 0) feeder = areImpsLactoseIntolerant;
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+			if (player.hasFuckableNipples() && player.lust >= 33) nipFuck = noogaisNippleRape;
+			if (player.findStatusAffect(StatusAffects.Feeder) >= 0) feeder = areImpsLactoseIntolerant;
 			//Taurs have different scenes
 			if(player.isTaur()) {
 				if(player.hasCock() && player.lust >= 33) {
-					if(player.cockThatFits(monster.analCapacity()) == -1) outputText("\n\n<b>You're too big to rape an imp with " + oMultiCockDesc() + ".</b>", false);
+					if(player.cockThatFits(monster.analCapacity()) == -1) outputText("\n\n<b>You're too big to rape an imp with " + oMultiCockDesc() + ".</b>");
 					else maleRape = centaurOnImpStart;
 				}
 				if(player.hasVagina() && player.lust >= 33) {
@@ -52,7 +87,7 @@ package classes.Scenes.Monsters
 			//Regular folks!
 			else {
 				if(player.hasCock() && player.lust >= 33) {
-					if(player.cockThatFits(monster.analCapacity()) == -1) outputText("\n\n<b>You're too big to rape an imp with " + oMultiCockDesc() + ".</b>", false);
+					if(player.cockThatFits(monster.analCapacity()) == -1) outputText("\n\n<b>You're too big to rape an imp with " + oMultiCockDesc() + ".</b>");
 					else maleRape = rapeImpWithDick;
 				}
 				if(player.hasVagina()) femaleRape = rapeImpWithPussy;
@@ -71,7 +106,9 @@ package classes.Scenes.Monsters
 				addButton(9,"Leave",cleanupAfterCombat);
 				//choices("Male Rape",maleRape,"Female Rape",femaleRape,"NippleFuck",nipFuck,"Breastfeed",feeder,"B.Titfuck",bikiniTits,"",0,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
 			}
+			*/
 		}
+		
 		private function rapeImpWithDick():void {
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if(x < 0) x = 0;

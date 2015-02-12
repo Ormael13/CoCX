@@ -1067,10 +1067,10 @@
 			if(findStatusAffect(StatusAffects.Blind) >= 0) {
 				addStatusValue(StatusAffects.Blind,1,-1);
 				if(statusAffectv1(StatusAffects.Blind) <= 0) {
-					outputText("<b>" + capitalA + short + " is no longer blind!</b>\n\n", false);
+					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer blind!</b>\n\n", false);
 					removeStatusAffect(StatusAffects.Blind);
 				}
-				else outputText("<b>" + capitalA + short + " is currently blind!</b>\n\n", false);
+				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently blind!</b>\n\n", false);
 			}
 			if(findStatusAffect(StatusAffects.Earthshield) >= 0) {
 				outputText("<b>" + capitalA + short + " is protected by a shield of rocks!</b>\n\n");

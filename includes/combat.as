@@ -129,9 +129,13 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	var magic:Function = (canUseMagic() ? magicMenu : null);
 	var pSpecials:Function = physicalSpecials;
     
-	if (player.findStatusAffect(StatusAffects.AttackDisabled) >= 0) {
+	if (monster.findStatusAffect(StatusAffects.AttackDisabled) >= 0) {
 		outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
 		attacks = null;
+	}
+	if (monster.findStatusAffect(StatusAffects.PhysicalDisabled) >= 0) {
+		outputText("<b>  Even physical special attacks are out of the question.</b>");
+		pSpecials = null;
 	}
 	if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0) {
 		outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
@@ -144,10 +148,6 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		addButton(6, "M. Specials", magicalSpecials);
 		addButton(7, "Wait", wait);
 		addButton(8, "Fantasize", fantasize);
-	}
-	else if (player.findStatusAffect(StatusAffects.PhysicalDisabled) >= 0) {
-		outputText("<b>  Even physical special attacks are out of the question.</b>");
-		pSpecials = null;
 	}
 	else if (player.findStatusAffect(StatusAffects.IsabellaStunned) >= 0 || player.findStatusAffect(StatusAffects.Stunned) >= 0) {
 		outputText("\n<b>You're too stunned to attack!</b>  All you can do is wait and try to recover!");
