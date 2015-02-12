@@ -787,6 +787,7 @@ private function fightZeVillagers():void {
 	//You are fighting the villagers (level 14):
 	startCombat(new Farmers());
 	monster.createStatusAffect(StatusAffects.GenericRunDisabled,0,0,0,0);
+	playerMenu();
 	//~500 HP, 6 different attacks at 20 hp, can't run, 100% lust resistance (can't arouse), ~200 xp
 }
 

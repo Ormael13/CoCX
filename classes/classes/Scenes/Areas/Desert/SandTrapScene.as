@@ -117,6 +117,7 @@ private function dontSaveTheTarps():void {
 
 private function startSandTarpFight():void {
 	startCombat(new SandTrap());
+	playerMenu();
 	spriteSelect(97);
 }
 

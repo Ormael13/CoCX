@@ -254,6 +254,7 @@ private function runFromMinotaurs():void {
 private function fightOTaurs():void {
 	startCombat(new MinotaurMob());
 	spriteSelect(94);
+	playerMenu();
 }
 
 //[Submit]

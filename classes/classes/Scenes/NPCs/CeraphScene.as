@@ -893,6 +893,7 @@ package classes.Scenes.NPCs
 		{
 			startCombat(new Ceraph());
 			spriteSelect(7);
+			playerMenu();
 		}
 
 //[Run] → 

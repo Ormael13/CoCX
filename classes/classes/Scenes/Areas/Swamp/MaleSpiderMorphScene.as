@@ -36,6 +36,7 @@ package classes.Scenes.Areas.Swamp
 		private function fightSpiderBoy():void {
 			startCombat(new MaleSpiderMorph());
 			spriteSelect(74);
+			playerMenu();
 		}
 
 //Talk

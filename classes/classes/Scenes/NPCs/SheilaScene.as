@@ -384,6 +384,7 @@ private function sheila1ndEncLookCloserPtIITalkLeave():void {
 private function sheila1ndEncLookCloserPtIITalkFight():void {
 	clearOutput();
 	startCombat(new Sheila());
+	playerMenu();
 }
 
 //XP-1: PC's apology (sheila xp = -1 and demon sheila = 0):

@@ -362,6 +362,7 @@ private function dontFlyWithWithMeYouCrazyBitch():void {
 private function fightMinerva():void {
 	startCombat(new Minerva(),true);
 	spriteSelect(95);
+	playerMenu();
 }
 
 //1-2 Repeatable Cute, Romantic Encounter. Only if PC accepted Minerva's feelings. Add to normal encounters.

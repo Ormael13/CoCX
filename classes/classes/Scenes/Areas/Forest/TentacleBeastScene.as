@@ -103,6 +103,7 @@ public function encounter():void {
 
 private function startTentacleBeastCombat():void {
 	startCombat(new TentacleBeast());
+	playerMenu();
 }
 
 private function tentacleEntice():void {

@@ -63,6 +63,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			startCombat(new FemaleSpiderMorph());
 			spriteSelect(73);
+			playerMenu();
 		}
 
 		//Run

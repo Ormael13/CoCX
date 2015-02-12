@@ -24,6 +24,7 @@
 		private function chooseToFight():void{
 			startCombat(new DemonPack());
 			spriteSelect(46);
+			playerMenu();
 		}
 
 private function oasisRunAway():void {
