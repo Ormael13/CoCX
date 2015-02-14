@@ -409,7 +409,7 @@ package classes.Scenes.Areas
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) {
-					outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  Your " + ballsDescriptLight() + " pulse with the need to release their sperm through your " + multiCockDescriptLight() + " and ", false);
+					outputText("  Your " + player.skinTone + " " + sackDescript() + " rests beneath your raised " + buttDescript() + ".  Your " + ballsDescriptLight() + " pulse with the need to release their sperm through your " + multiCockDescriptLight() + " and ", false);
 					if (lake) outputText("into the waters of the nearby lake.", false);
 					else outputText("onto the fertile soil of the forest.", false);
 				}

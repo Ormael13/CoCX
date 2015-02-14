@@ -221,7 +221,7 @@ public function dreamSelect():Boolean {
 
 			outputText("You cum.  You scream in glorious and divine pleasure, granted by your immaculate god.  The acolytes watching masturbate themselves, in awe of the raptured orgasm Akbal has granted you.  Your tongue lolls out as he pounds into you, the haze of delight briefly devouring your thoughts in all-consuming green fire.\n\n", false);
 
-			outputText("\"<i>Glory unto Akbal</i>\", Buttslut whispers.\n\n", false);
+			outputText("\"<i>Glory unto Akbal,</i>\" Buttslut whispers.\n\n", false);
 
 			outputText("You awake with a start, grumbling slightly before turning over and trying to get back to sleep.  Your asshole twitches.", false);
 		}

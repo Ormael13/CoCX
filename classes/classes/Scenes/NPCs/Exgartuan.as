@@ -156,13 +156,14 @@
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (checkedExgartuan++ == 0) {
+			if (checkedExgartuan++ == 0 && player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && model.time.hours == 4) {
+				//Exgartuan must be present, must be awake and it must be night time
 				if (player.hasCock() && player.statusAffectv1(StatusAffects.Exgartuan) == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) { //Exgartuan night time surprise!
 					outputText("\n");
 					exgartuanSleepSurprise();
 					return true;
 				}
-				if (player.statusAffectv1(StatusAffects.Exgartuan) == 2 && rand(3) == 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) { //Boobgartuan night time surprise!
+				if (player.statusAffectv1(StatusAffects.Exgartuan) == 2 && rand(3) == 0) { //Boobgartuan night time surprise!
 					outputText("\n");
 					boobGartuanSURPRISE();
 					return true;
@@ -830,7 +831,7 @@ private function exgartuanSleepSurprise():void {
 		return;
 	}
 	else {
-		outputText("Something interrupts your relatively peaceful sleep midway through the night.  Once pleasant dreams shift and morph towards nightmares in a heartbeat!  You're gagging, choking even, and no matter how you twist and struggle you can't breathe!   Spikes of terror jump-start your heart and propel you back to wakefulness at breakneck speed.  Your eyes snap open and you try to sit up, but pain lances through your groin and throat, holding you in position.  Completely panicked, you look as far down as your restricted vision will allow and recoil in horror.  The bulging, veiny mass of your " + cockDescript(0) + " is lodged deep in your throat, arching and twitching hard enough to slide itself in and out with gentle half-strokes.\n\n", false);
+		outputText("Something interrupts your relatively peaceful sleep midway through the night.  Once pleasant dreams shift and morph to nightmares in a heartbeat!  You're gagging, choking even, and no matter how you twist and struggle you can't breathe!   Spikes of terror jump-start your heart and propel you back to wakefulness at breakneck speed.  Your eyes snap open and you try to sit up, but pain lances through your groin and throat, holding you in position.  Completely panicked, you look as far down as your restricted vision will allow and recoil in horror.  The bulging, veiny mass of your " + cockDescript(0) + " is lodged deep in your throat, arching and twitching hard enough to slide itself in and out with gentle half-strokes.\n\n", false);
 		
 		outputText("With your diaphragm spasming wildly, you strain to pull in a single breath.  It doesn't work, and  the suction only makes your demon-infested dick bigger and thicker inside the constricting rings of your throat.  The taste is thick on your tongue, and the pleasure rises in equal parts with your panic until black rims the edge of your vision.  Your back arches with your body's struggles, and the rear of your airway opens enough for you to inhale a lungful of air through your nostrils.  The knowledge that you aren't going to suffocate on your own swollen cock-meat washes away the panic, leaving only the pleasure of the forced fellatio in its wake.\n\n", false);
 		

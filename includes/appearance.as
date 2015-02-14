@@ -934,8 +934,8 @@
 			//middle cock description
 			if(rando == 0) 
 			{
-				if(temp == 0)outputText("-Your first ", false);
-				else outputText("-Your next ", false);
+				if(temp == 0)outputText("--Your first ", false);
+				else outputText("--Your next ", false);
 				outputText(player.cockDescript(temp), false);
 				outputText(" is ", false);
 				outputText(int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
@@ -950,7 +950,7 @@
 			}
 			if(rando == 1) 
 			{
-				outputText("-One of your ", false);
+				outputText("--One of your ", false);
 				outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2) 
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.", false);
@@ -964,8 +964,8 @@
 			if(rando == 2) 
 			{
 				if(temp > 0) 
-					outputText("-Another of your ", false);
-				else outputText("-One of your ", false);
+					outputText("--Another of your ", false);
+				else outputText("--One of your ", false);
 				outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2) 
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.", false);
@@ -979,8 +979,8 @@
 			if(rando == 3) 
 			{
 				if(temp > 0) 
-					outputText("-Your next ", false);
-				else outputText("-Your first ", false);
+					outputText("--Your next ", false);
+				else outputText("--Your first ", false);
 				outputText(player.cockDescript(temp) + " is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2) 
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches in diameter.", false);
