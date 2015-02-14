@@ -2599,6 +2599,7 @@ package classes.Scenes.NPCs
 				choices("Appearance", amilyAppearance, "Talk", talkToAmilyCamp, "Make Love", fuckTheMouseBitch, "Give Present", giveAmilyAPresent, "Date", date,
 					"Lay Eggs", eggs, "Defur", defur, "", null, "", null, "", null);
 				addButton(14, "Leave", camp.campLoversMenu);
+				if (player.hasItem(consumables.MOUSECO, 2) && flags[kFLAGS.AMILY_NOT_FURRY] > 0) addButton(4, "Refuzz", refuzzAmily);
 			}
 			//Corrupt
 			else {
@@ -2607,6 +2608,7 @@ package classes.Scenes.NPCs
 				choices("Appearance", amilyAppearance, "Give Item", giveAmilyAPresent, "Sex", fuckTheMouseBitch, "Talk", talkWithCORRUPTCUNT, "Defur", defur,
 					"", null, "", null, "", null, "", null, "", null);
 				addButton(14, "Leave", camp.campLoversMenu);
+				if (player.hasItem(consumables.MOUSECO, 2) && flags[kFLAGS.AMILY_NOT_FURRY] > 0) addButton(4, "Refuzz", refuzzAmily);
 				if (!pregnancy.isPregnant && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
 				{
 					addButton(5, "Farm Work", sendCorruptCuntToFarm);
@@ -6888,6 +6890,22 @@ package classes.Scenes.NPCs
 			amilySprite();
 			doNext(amilyFollowerEncounter);
 		}
+		public function refuzzAmily():void {
+			player.consumeItem(consumables.MOUSECO, 2);
+			if (amilyCorrupt())
+			{
+				var master:String = player.mf("master","mistress");
+				outputText("Beckoning your furry little slut over to you, you inform her that she should be changed back to the way she was before you've even met her. You produce the two batches of mouse cocoa and give them to Amily, telling her to just suck on it. \n\nEagerly, she sucks on the mouse cocoa and her eyes widen. Her face changes, rodent snout and whiskers grow. Fur grows all over her body and her hands warp into more paw-like. <b>Amily is now back to her former mouse self albeit corrupted.</b>", true);
+			} else {
+				outputText("She squares up to you with a hand planted on her slender hip, looking to you expectantly.  Without words, you reach into your pack and produce the batches of mouse cocoa.  You pass them to the mouse girl, and she looks over them curiously.  \"<i>Are you sure you want me to change back?</i>\" she asks somewhat nervously.  Your nod is the only urging she needs.  She sucks on the mouse cocoa, savouring the chocolatey taste.\n\n", true);
+				outputText("Her face changes, rodent snout and whiskers grow. Fur grows all over her body and her hands warp into more paw-like. <b>Amily is now back to her former mouse self.</b>");
+			}
+			flags[kFLAGS.AMILY_NOT_FURRY] = 0;
+			flags[kFLAGS.AMILY_OFFERED_DEFURRY] = 1;
+			amilySprite();
+			doNext(amilyFollowerEncounter);
+		}
+		
 		//Amily/Urta Interaction
 		//Must have Pure Amily as follower
 		//Must have "UrtaSexed" flagged

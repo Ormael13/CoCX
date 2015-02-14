@@ -551,52 +551,66 @@ public function doCamp():void {
 	}
 	//Nursery
 	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
-		outputText("  Marble has built a fairly secure nursery amongst the rocks to house your ",false);
+		outputText("Marble has built a fairly secure nursery amongst the rocks to house your ",false);
 		if(flags[kFLAGS.MARBLE_KIDS] == 0) outputText("future children", false);
 		else {
 			outputText(num2Text(flags[kFLAGS.MARBLE_KIDS]) + " child", false);
 			if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("ren", false);
 		}
-		outputText(".", false);
+		outputText(".  ", false);
 	}
 	//HARPY ROOKERY
 	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0) {
 		//Rookery Descriptions (Short)
 		//Small (1 mature daughter)
 		if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 1) {
-			outputText("  There's a smallish harpy nest that your daughter has built up with rocks piled high near the fringes of your camp.  It's kind of pathetic, but she seems proud of her accomplishment.");
+			outputText("There's a smallish harpy nest that your daughter has built up with rocks piled high near the fringes of your camp.  It's kind of pathetic, but she seems proud of her accomplishment.  ");
 		}
 		//Medium (2-3 mature daughters)
 		else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 3) {
-			outputText("  There's a growing pile of stones built up at the fringes of your camp.  It's big enough to be considered a small hill by this point, dotted with a couple small harpy nests just barely big enough for two.");
+			outputText("There's a growing pile of stones built up at the fringes of your camp.  It's big enough to be considered a small hill by this point, dotted with a couple small harpy nests just barely big enough for two.  ");
 		}
 		//Big (4 mature daughters)
 		else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 4) {
-			outputText("  The harpy rookery at the edge of camp has gotten pretty big.  It's taller than most of the standing stones that surround the portal, and there's more nests than harpies at this point.  Every now and then you see the four of them managing a boulder they dragged in from somewhere to add to it.");
+			outputText("The harpy rookery at the edge of camp has gotten pretty big.  It's taller than most of the standing stones that surround the portal, and there's more nests than harpies at this point.  Every now and then you see the four of them managing a boulder they dragged in from somewhere to add to it.  ");
 		}
 		//Large (5-10 mature daughters)
 		else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 10) {
-			outputText("  The rookery has gotten quite large.  It stands nearly two stories tall at this point, dotted with nests and hollowed out places in the center.  It's surrounded by the many feathers the assembled harpies leave behind.");
+			outputText("The rookery has gotten quite large.  It stands nearly two stories tall at this point, dotted with nests and hollowed out places in the center.  It's surrounded by the many feathers the assembled harpies leave behind.  ");
 		}
 		//Giant (11-20 mature daughters)
 		else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 20) {
-			outputText("  A towering harpy rookery has risen up at the fringes of your camp, filled with all of your harpy brood.  It's at least three stories tall at this point, and it has actually begun to resemble a secure structure.  These harpies are always rebuilding and adding onto it.");
+			outputText("A towering harpy rookery has risen up at the fringes of your camp, filled with all of your harpy brood.  It's at least three stories tall at this point, and it has actually begun to resemble a secure structure.  These harpies are always rebuilding and adding onto it.  ");
 		}
 		//Massive (21-50 mature daughters)
 		else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 50) {
-			outputText("  A massive harpy rookery towers over the edges of your camp.  It's almost entirely built out of stones that are fit seamlessly into each other, with many ledges and overhangs for nests.  There's a constant hum of activity over there day or night.");
+			outputText("A massive harpy rookery towers over the edges of your camp.  It's almost entirely built out of stones that are fit seamlessly into each other, with many ledges and overhangs for nests.  There's a constant hum of activity over there day or night.  ");
 		}
 		//Immense (51+ Mature daughters)
 		else {
-			outputText("  An immense harpy rookery dominates the edge of your camp, towering over the rest of it.  Innumerable harpies flit around it, always working on it, assisted from below by the few sisters unlucky enough to be flightless.");
+			outputText("An immense harpy rookery dominates the edge of your camp, towering over the rest of it.  Innumerable harpies flit around it, always working on it, assisted from below by the few sisters unlucky enough to be flightless.  ");
 		}
 	}
 	//Traps
 	if(player.findStatusAffect(StatusAffects.DefenseCanopy) >= 0) {
-		outputText("  A thorny tree has sprouted near the center of the camp, growing a protective canopy of spiky vines around the portal and your camp.", false);
+		outputText("A thorny tree has sprouted near the center of the camp, growing a protective canopy of spiky vines around the portal and your camp.  ", false);
 	}
-	else outputText("  You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.", false);
-	outputText("  The portal shimmers in the background as it always does, looking menacing and reminding you of why you came.\n\n", false);
+	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 20 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) outputText("Thick wooden wall have been erect. It is not complete but it does provide some defense.  ");
+	else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
+		outputText("Thick wooden wall has been erect; it surrounds one half of your camp perimeter.  ");
+		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the wall that gets closed at night to keep any invaders out.  ");
+		if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
+			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted near the gateway");
+			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5) outputText("Few imp skulls have been mounted near the gateway");
+			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 10) outputText("Several imp skulls have been mounted near the gateway");
+			else outputText("Many imp skulls decorate the gateway and wall, some even impaled on wooden spikes");
+			outputText(" to serve as deterrence.  ");
+			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
+			else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
+		}
+	}
+	else outputText("You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.", false);
+	outputText("The portal shimmers in the background as it always does, looking menacing and reminding you of why you came.\n\n", false);
 
 	//Ember's anti-minotaur crusade!
 	if(flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
@@ -1279,9 +1293,13 @@ private function campActions():void {
 	addButton(0, "SwimInStream", swimInStream, null, null, null, "Swim in stream and relax to pass time.");
 	addButton(1, "ExaminePortal", examinePortal, null, null, null, "Examine the portal. This scene is placeholder."); //Examine portal.
 	if (model.time.hours == 19) addButton(2, "Watch Sunset", watchSunset, null, null, null, "Watch the sunset and relax."); //Relax and watch at the sunset.
+	else addLockedButton(2, "The option to watch sunset is available at 7pm.");
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 12) addButton(3, "Build Cabin", cabinProgress.initiateCabin, null, null, null, "Work on your cabin."); //Work on cabin.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin, null, null, null, "Enter your cabin."); //Enter cabin for furnish.
 	addButton(4, "Read Codex", codex.accessCodexMenu, null, null, null, "Read any codex entries you have unlocked.");
+	if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100 && getCampPopulation() >= 4) addButton(5, "Build Wall", buildCampWallPrompt, null, null, null, "Build a wall around your camp to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 20 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS]/20) + "/5 complete": "") + "");
+	if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_GATE] <= 0) addButton(5, "Build Gate", buildCampGatePrompt, null, null, null, "Build a gate to complete your camp defense.");
+	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && player.hasItem(useables.IMPSKLL, 1)) addButton(6, "AddImpSkull", promptHangImpSkull, null, null, null, "Add an imp skull to decorate the wall and to serve as deterrent for imps.");
 	addButton(14, "Back", eventParser, 1);
 }
 
@@ -1322,9 +1340,9 @@ private function swimInStream():void {
 	//Amily! (Must not be corrupted and must have given Slutty Swimwear.)
 	if (rand(2) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)
 	{
-		outputText("\n\nYour mouse-girl lover Amily is standing at the riverbank. She looks flattering in her bikini.  ", false)
-		if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("Especially when her penis is exposed.  ", false)
-		outputText("She walks into the waters and swims.  ", false)
+		outputText("\n\nYour mouse-girl lover Amily is standing at the riverbank. She looks flattering in her bikini", false)
+		if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", especially when her penis is exposed", false)
+		outputText(". She walks into the waters and swims.  ", false)
 		amilyJoinsStream = true;
 	}
 	//Pranks!
@@ -1919,7 +1937,7 @@ public function places():Boolean {
 	
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(10, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin);
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(11, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva);
-	if (debug) addButton(4, "Ingnam", kGAMECLASS.ingnam.returnToIngnam, null, null, null, "Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
+	if (debug) addButton(12, "Ingnam", kGAMECLASS.ingnam.returnToIngnam, null, null, null, "Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 	//addButton(12, "Prison", eventParser, 9999);
 	//addButton(13, "Next", placesPage2);
 	addButton(14, "Back", eventParser, 1);
@@ -1989,7 +2007,7 @@ public function wakeFromBadEnd():void {
 	if (flags[kFLAGS.TIMES_BAD_ENDED] >= 2) { //FOURTH WALL BREAKER
 		outputText("\n\nYou mumble to yourself \"<i>Another goddamn bad-end.</i>\"");
 	}
-	if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine, you've just had a nightmare.");
+	if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine; you've just had a nightmare.");
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2))) {
 		outputText("\n\nYou realize the consequences of having oversized balls. You need to shrink it right away. Reducto will do.");
@@ -2006,6 +2024,192 @@ public function wakeFromBadEnd():void {
 	menu();
 	addButton(0, "Next", eventParser, 1);
 }
+
+//Camp wall
+private function buildCampWallPrompt():void {
+	clearOutput();
+	if (player.fatigue >= player.maxFatigue() - 50) {
+		outputText("You are too exhausted to work on your camp wall!");
+		doNext(camp.campMenu);
+		return;
+	}
+	if (flags[kFLAGS.CAMP_WALL_PROGRESS] == 0) {
+		outputText("A feeling of unrest grows within you as the population of your camp is growing. Maybe it's time you build a wall to secure the perimeter?\n\n");
+		flags[kFLAGS.CAMP_WALL_PROGRESS] = 1;
+	}
+	else {
+		outputText("You can continue work on building the wall that surrounds your camp.\n\n");
+		outputText("Segments complete: " + Math.floor(flags[kFLAGS.CAMP_WALL_PROGRESS] / 20) + "/5\n");
+	}
+	kGAMECLASS.camp.cabinProgress.checkMaterials();
+	outputText("\n\nIt will cost 200 nails and 100 wood to work on a segment of the wall.\n\n");
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 200) {
+		doYesNo(buildCampWall, camp.campMenu);
+	}
+	else {
+		outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
+		doNext(camp.campMenu);
+	}
+}
+
+private function buildCampWall():void {
+	var helpers:int = 0;
+	var temp:int = 0;
+	if (marbleFollower()) helpers++;
+	if (followerHel()) helpers++;
+	if (followerKiha()) helpers++;
+	temp = helpers;
+	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
+	player.addKeyValue("Carpenter's Toolbox", 1, -200);
+	clearOutput();
+	if (flags[kFLAGS.CAMP_WALL_PROGRESS] == 1) {
+		outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a wall. You spend minutes looking at the instructions and memorize the procedures.");
+		flags[kFLAGS.CAMP_WALL_PROGRESS] = 20;
+	}
+	else {
+		outputText("You remember the procedure for building a wall.");
+		flags[kFLAGS.CAMP_WALL_PROGRESS] += 20;
+	}
+	outputText("\n\nYou dig four holes, six inches deep and one foot wide each, before putting up wood posts, twelve feet high and one foot thick each. You take the wood from supplies, saw the wood and cut them into planks before nailing them to the wooden posts.");
+	if (helpers > 0) {
+		outputText("\n\n");
+		if (marbleFollower()) {
+			outputText("Marble");
+			if (temp >= 2) outputText(", ");
+			else if (temp == 1) outputText(", and ");
+			temp--;
+		}
+		if (followerHel()) {
+			outputText("Helia");
+			if (temp >= 2) outputText(", ");
+			else if (temp == 1) outputText(", and ");
+			temp--;
+		}
+		if (followerKiha()) {
+			outputText("Kiha");
+			if (temp >= 2) outputText(", ");
+			else if (temp == 1) outputText(", and ");
+			temp--;
+		}
+		outputText(" " + (helpers == 1 ? "assists" : "assist") + " you with building the wall, helping to speed up the process and make construction less fatiguing.");
+	}
+	//Gain fatigue.
+	var fatigueAmount:int = 100;
+	fatigueAmount -= player.str / 5;
+	fatigueAmount -= player.tou / 10;
+	fatigueAmount -= player.spe / 10;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	fatigueAmount /= (helpers + 1);
+	if (fatigueAmount < 15) fatigueAmount = 15;
+	fatigue(fatigueAmount);
+	if (helpers >= 2) {
+		outputText("\n\nThanks to your assistants, the construction takes only one hour!");
+		doNext(camp.returnToCampUseOneHour);
+	}
+	else if (helpers == 1) {
+		outputText("\n\nThanks to your assistant, the construction takes only two hours.");
+		doNext(camp.returnToCampUseTwoHours);
+	}
+	else {
+		outputText("\n\nIt's " + (fatigueAmount >= 75 ? "a daunting" : "an easy") + " task but you eventually manage to finish building a segment of the wall for your camp!");
+		doNext(camp.returnToCampUseFourHours);
+	}
+	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
+		outputText("\n\n<b>Well done! You have finished the wall! You can build a gate and decorate wall with imp skulls to further deter whoever might try to come and rape you.</b>");
+		flushOutputTextToGUI();
+	}
+}
+
+//Camp gate
+private function buildCampGatePrompt():void {
+	clearOutput();
+	if (player.fatigue >= player.maxFatigue() - 50) {
+		outputText("You are too exhausted to work on your camp wall!");
+		doNext(camp.campMenu);
+		return;
+	}
+	outputText("You can build a gate to further secure your camp by having it closed at night.\n\n");
+	kGAMECLASS.camp.cabinProgress.checkMaterials();
+	outputText("\n\nIt will cost 200 nails and 100 wood to build a gate.\n\n");
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 200) {
+		doYesNo(buildCampGate, camp.campMenu);
+	}
+	else {
+		outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
+		doNext(camp.campMenu);
+	}
+
+}
+
+private function buildCampGate():void {
+	var helpers:int = 0;
+	var temp:int = 0;
+	if (marbleFollower()) helpers++;
+	if (followerHel()) helpers++;
+	if (followerKiha()) helpers++;
+	temp = helpers;
+	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
+	player.addKeyValue("Carpenter's Toolbox", 1, -200);
+	clearOutput();
+	outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a gate that can be opened and closed. You spend minutes looking at the instructions and memorize the procedures.");
+	flags[kFLAGS.CAMP_WALL_GATE] = 1;
+	outputText("\n\nYou take the wood from supplies, saw the wood and cut them into planks before nailing them together. ");
+	if (helpers > 0) {
+		outputText("\n\n");
+		if (marbleFollower()) {
+			outputText("Marble");
+			if (temp >= 2) outputText(", ");
+			else if (temp == 1) outputText(", and ");
+			temp--;
+		}
+		if (followerHel()) {
+			outputText("Helia");
+			if (temp >= 2) outputText(", ");
+			else if (temp == 1) outputText(", and ");
+			temp--;
+		}
+		if (followerKiha()) {
+			outputText("Kiha");
+			if (temp >= 2) outputText(", ");
+			else if (temp == 1) outputText(", and ");
+			temp--;
+		}
+		outputText(" " + (helpers == 1 ? "assists" : "assist") + " you with building the gate, helping to speed up the process and make construction less fatiguing.");
+	}
+	outputText("\n\nYou eventually finish building the gate.");
+	//Gain fatigue.
+	var fatigueAmount:int = 100;
+	fatigueAmount -= player.str / 5;
+	fatigueAmount -= player.tou / 10;
+	fatigueAmount -= player.spe / 10;
+	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+	fatigueAmount /= (helpers + 1);
+	if (fatigueAmount < 15) fatigueAmount = 15;
+	fatigue(fatigueAmount);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function promptHangImpSkull():void {
+	clearOutput();
+	if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 100) {
+		outputText("There is no room; you have already hung a total of 100 imp skulls! No imp shall dare approaching you at night!");
+		doNext(camp.campMenu);
+		return;
+	}
+	outputText("Would you like to hang the skull of an imp onto wall? ");
+	if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) outputText("There " + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "is" : "are") + " currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " imp skull" + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "" : "s") + " hung on the wall, serving to deter any imps who might try to rape you.");
+	doYesNo(hangImpSkull, camp.campMenu);
+}
+
+private function hangImpSkull():void {
+	clearOutput();
+	outputText("You hang the skull of an imp on the wall. ");
+	player.consumeItem(useables.IMPSKLL, 1);
+	flags[kFLAGS.CAMP_WALL_SKULLS]++;
+	outputText("There " + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "is" : "are") + " currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " imp skull" + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "" : "s") + " hung on the wall, serving to deter any imps who might try to rape you.");
+	doNext(camp.campMenu);
+}
+
 
 //Camp population!
 public function getCampPopulation():int {
@@ -2124,7 +2328,7 @@ private function promptSaveUpdate():void {
 		outputText("\n\nSome achievements, however, will require you to do it again.");
 		updateAchievements();
 		outputText("\n\nAchievements are saved in a special savefile so no matter what savefile you're on, any earned achievements will be added to that special savefile.");
-		outputText("\n\nTry restarting the game and check the achievements without loading! You'll see! It's permanent.");
+		outputText("\n\nTry restarting the game and check the achievements without loading! You'll see, it's permanent!");
 		flags[kFLAGS.MOD_SAVE_VERSION] = 3;
 		menu();
 		doNext(1);

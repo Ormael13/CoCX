@@ -11,7 +11,6 @@ package classes.Scenes
 	public class DebugMenu extends BaseContent
 	{
 		public var flagNames:XML = describeType(kFLAGS);
-		public var mainHack:MainViewHack = new MainViewHack();
 		private var lastMenu:Function = null;
 		
 		public var setArrays:Boolean = false;
@@ -47,10 +46,11 @@ package classes.Scenes
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
 				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
-				//addButton(2, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
 				addButton(2, "Flag Editor", flagEditor);
 				addButton(3, "Event Trigger", eventTriggerMenu);
 				addButton(4, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
+				//addButton(5, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
+				addButton(5, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
 				addButton(14, "Exit", eventParser, 1);
 			}
 		}
@@ -548,9 +548,11 @@ package classes.Scenes
 		private function styleHackMenu():void {
 			menu()
 			outputText("TEST STUFFZ", true);
-			addButton(0, "HackSideBar", mainHack.refreshStats);
+			addButton(0, "HackSideBar", kGAMECLASS.mainViewHack.refreshStats);
 			addButton(1, "ASPLODE", styleHackMenu);
-			addButton(2, "Advance Minute", cheatTime, 0.25);
+			addButton(2, "TweenSideBarIn", kGAMECLASS.mainViewHack.tweenInStats);
+			addButton(3, "TweenSideBarOut", kGAMECLASS.mainViewHack.tweenOutStats);
+			addButton(4, "TweenButtons", kGAMECLASS.mainViewHack.startUpButtons);
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -576,6 +578,57 @@ package classes.Scenes
 			}
 		}
 		
+		private function resetNPCMenu():void {
+			clearOutput();
+			outputText("Which NPC would you like to reset?");
+			menu();
+			if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 0 || flags[kFLAGS.URTA_QUEST_STATUS] == -1) addButton(0, "Urta", resetUrta);
+			if (flags[kFLAGS.SHEILA_DISABLED] > 0 || flags[kFLAGS.SHEILA_DEMON] > 0 || flags[kFLAGS.SHEILA_CITE] < 0 || flags[kFLAGS.SHEILA_CITE] >= 6) addButton(6, "Sheila", resetSheila);
+			addButton(14, "Back", accessDebugMenu);
+		}
+		
+		private function resetUrta():void {
+			clearOutput();
+			outputText("Did you do something wrong and get Urta heartbroken or did you fail Urta's quest? You can reset if you want to.");
+			doYesNo(reallyResetUrta, resetNPCMenu);
+		}
+		private function reallyResetUrta():void {
+			clearOutput();
+			if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) {
+				outputText("Somehow, you have a feeling that Urta somehow went back to Tel'Adre.  ");
+				flags[kFLAGS.URTA_QUEST_STATUS] = 0;
+			}
+			if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 0) {
+				outputText("You have a feeling that Urta finally got over with her depression and went back to normal.  ");
+				flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 0;
+			}
+			doNext(resetNPCMenu);
+		}
+		
+		private function resetSheila():void {
+			clearOutput();
+			outputText("Did you do something wrong with Sheila? Turned her into demon? Lost the opportunity to get her lethicite? No problem, you can just reset her!");
+			doYesNo(reallyResetSheila, resetNPCMenu);
+		}
+		private function reallyResetSheila():void {
+			clearOutput();
+			if (flags[kFLAGS.SHEILA_DISABLED] > 0) {
+				outputText("You can finally encounter Sheila again!  ");
+				flags[kFLAGS.SHEILA_DISABLED] = 0;
+			}
+			if (flags[kFLAGS.SHEILA_DEMON] > 0) {
+				outputText("Sheila is no longer a demon; she is now back to normal.  ");
+				flags[kFLAGS.SHEILA_DEMON] = 0;
+				flags[kFLAGS.SHEILA_CORRUPTION] = 30;
+			}
+			if (flags[kFLAGS.SHEILA_CITE] < 0) {
+				outputText("Any lost Lethicite opportunity is now regained.  ");
+				flags[kFLAGS.SHEILA_CITE] = 0;
+			}
+			doNext(resetNPCMenu);
+		}
+		
+		//[Flag Editor]
 		private function flagEditor():void {
 			clearOutput();
 			menu();

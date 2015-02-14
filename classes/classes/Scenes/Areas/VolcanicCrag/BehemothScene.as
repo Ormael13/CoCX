@@ -50,6 +50,8 @@ package classes.Scenes.Areas.VolcanicCrag
 			else addLockedButton(2, "Talk to the behemoth at least once to unlock this.");
 			if (timesSexed() >= 2) addButton(3, "His Cum", talkAboutHisCum, null, null, null, "Talk to the behemoth about the special properties of his cum and how he managed to cum that much despite his ball size."); 
 			else addLockedButton(3, "Have sex with the behemoth at least twice to unlock this.");
+			if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0) addButton(4, "Children", talkAboutHisChildren, null, null, null, "Talk to the behemoth about his son" + (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1 ? "" : "s") + ".");
+			else addLockedButton(4, "Have at least 1 child with him to unlock this.");
 			addButton(14, "Back", behemothMenu);
 		}
 		
@@ -126,7 +128,22 @@ package classes.Scenes.Areas.VolcanicCrag
 			flags[kFLAGS.BEHEMOTH_TALKED_ABOUT_CUM] = 1;
 			doYesNo(getCum, noThanks);
 		}
-		
+		private function talkAboutHisChildren():void {
+			clearOutput();
+			outputText("You ask the behemoth how his son" + (flags[kFLAGS.BEHEMOTH_CHILDREN] > 1 ? "s are": " is") + " doing.");
+			if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1) outputText("\n\n\"<i>He's doing great</i>\"");
+			else outputText("\n\n\"<i>They're doing great</i>\"");
+			outputText(", the behemoth says smilingly. You are happy to know that your family is going well and you're going to spend quality time.");
+			//Interact!
+			var chooser:int = rand(4);
+			if (chooser == 0) {
+				//Story-telling!
+				
+			}
+			outputText("\n\nPLACEHOLDER");
+			dynStats("lib", -1, "lus", -20, "resisted", false, "noBimbo", true);
+			doNext(camp.returnToCampUseOneHour);
+		}
 		//Cum offer
 		private function getCum():void {
 			clearOutput();
@@ -183,8 +200,26 @@ package classes.Scenes.Areas.VolcanicCrag
 		
 		public function giveBirthToBehemoth():void {
 			clearOutput();
-			outputText("(Placeholder) You've managed to give birth to a behemoth!");
+			outputText("The pain in your womb is getting unbearable. You realize it's time for you to give birth to the behemoth! You make your way to the behemoth's tent in the volcanic crag to see the behemoth smiling at you.");
+			outputText("\n\n\"<i>I'll help you. Lay on my bed,</i>\" the behemoth says as he assists you in removing your [armor]. You lay on the bed and spread your [legs]. The labour is getting intense but you know the behemoth is already excited.");
+			outputText("\n\n\"<i>Push,</i>\" the behemoth instructs. That's your encouragement as you start pushing, taking deep breath between pushes. Eventually, your ordeal is over as the newborn behemoth finally comes out of your womb. \"<i>You've done great!</i>\" the behemoth says, smilingly.");
+			player.cuntChange(48, true);
 			flags[kFLAGS.BEHEMOTH_CHILDREN]++;
+			if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1) {
+				outputText("\n\n\"<i>Look at that. Our first child. I'm finally happy to finally have a family! You're now a mother,</i>\" the behemoth says. You smile at him and you spend some time breastfeeding your newborn.");
+				flags[kFLAGS.BEHEMOTH_CHILD_1_BIRTH_DAY] = model.time.days;
+			}
+			else if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 2) {
+				outputText("\n\n\"<i>My second child! Now my first son won't be lonely!</i>\" the behemoth says smilingly. ");
+				flags[kFLAGS.BEHEMOTH_CHILD_2_BIRTH_DAY] = model.time.days;
+			}
+			else if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 3) {
+				outputText("\n\n\"<i>My third child! I think I have enough children, thank you. I love you,</i>\" the behemoth says smilingly as he gives you a kiss.");
+				flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = model.time.days;
+			}
+			outputText("\n\nYou rest for a while and breastfeed your newborn. Eventually, you know you should return to your camp. \"<i>I'll take good care of him,</i>\" the behemoth says. You give him a goodbye and walk back to your camp.");
+			player.knockUpForce(); //Clear!
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Sex menu
@@ -209,7 +244,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (timesSexed() >= 3) addButton(4, "Cum Bath", haveACumBathLiterally, null, null, null, "Have a (literal) cum bath!");
 			else addLockedButton(4, "Have sex with the behemoth enough times to unlock this!");
 			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0) {
-				if (timesSexed() >= 3) addButton(5, "Watersports", watersportsWithBehemoth, null, null, null, "Do some urine activity with him. (Placeholder)");
+				if (timesSexed() >= 3) addButton(5, "Watersports", watersportsWithBehemoth, null, null, null, "Do some urine activity with him.");
 				else addLockedButton(5, "Have sex with the behemoth enough times to unlock this!");
 			}
 			if (!kGAMECLASS.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
@@ -313,7 +348,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nYou wake up from a nap and give the behemoth a kiss before you redress yourself in your [armor] and make your way back to your camp.");
 			player.orgasm();
 			player.slimeFeed();
-			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15));
+			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
 			flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH]++;
 			dynStats("str", 0.5, "tou", 0.5);
 			HPChange(50 + (player.maxHP() / 5), false);
@@ -324,6 +359,8 @@ package classes.Scenes.Areas.VolcanicCrag
 		
 		private function suckThatBigCock():void {
 			clearOutput();
+			var hungerRefill:int = 100 - player.hunger;
+			if (hungerRefill < 40) hungerRefill = 40;
 			outputText("Your eyes draw near the big bulge in his loincloth and you lick your lips as if you're hungry. ");
 			if (player.findStatusAffect(StatusAffects.LustyTongue) >= 0) {
 				outputText("Your body tingles with arousal as your " + tongueDescript() + " makes contact with your lips. ");
@@ -334,7 +371,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nSatisfied with the precum leaking, you slowly slide his cock into your mouth, trying to suppress your gag reflex. His cock slides in inch by inch until it reaches the back of your mouth. \"<i>Whoa, ease up, " + player.boyGirl() + ". I don't want you to choke on my cock. You know you don't have to swallow my entire cock length,</i>\" he says with a smile.");
 			outputText("\n\nYour " + tongueDescript() + " swirls around his cock and you bob your head up and down eagerly; the behemoth lets out a purr and moan happily as you're giving his cock a good sucking.");
 			outputText("\n\nYou continue to suck his meaty cock until the behemoth announces, \"Gonna cum! Prepare to get stuffed!\" Your eyes widen as cum erupts from his cock and into your mouth. You have no choice but to swallow the delicious behemoth-cum and you lose count after the tenth jet of cum. Your belly practically inflates with cum.");
-			player.refillHunger(100);
+			player.refillHunger(hungerRefill);
 			player.slimeFeed();
 			outputText("\n\nThe behemoth pulls his cock out of your mouth and the rest of the cum spills all over the earth. With his orgasm eventually coming to an end, the behemoth looks at you with your swollen belly. \"<i>I really stuffed you, didn't I? At least you won't have to eat for a bit,</i>\" he chuckles. You tell him that yes, he did stuff you with cum!");
 			outputText("\n\nYou lay next to him and rest for an hour before you say your goodbyes to the behemoth and walk back to your camp.");

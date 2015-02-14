@@ -31,6 +31,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
+	mainViewHack.startUpButtons();
 	kGAMECLASS.saves.loadPermObject();
 	//Reset newgame buttons
 	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo );
@@ -617,6 +618,8 @@ public function creditsScreen():void {
 	outputText("<li> SirWolfie</li>");
 	outputText("<li> Atlas1965</li>");
 	outputText("<li> Elitist</li>");
+	outputText("<li> Bsword</li>");
+	outputText("<li> stationpass</li>");
 	outputText("<ul>");
 	outputText("</ul>");
 	outputText("<b>Typo Reporting</b>\n");

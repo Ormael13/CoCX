@@ -216,7 +216,7 @@ public function winAgainstMarae():void {
 		outputText("\n<b>(Key Item Gained: Tentacled Bark Plates!)</b>", false)
 		player.createKeyItem("Tentacled Bark Plates", 0, 0, 0, 0);
 		outputText("\n\nWith the tentacles blocking your boat gone, you get into your boat and sail back to the shore and return to your camp.", false)
-		awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
+		awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
 		flags[kFLAGS.CORRUPTED_MARAE_KILLED] = 1;
 		cleanupAfterCombat();
 		doNext(camp.returnToCampUseOneHour);
@@ -229,7 +229,7 @@ public function winAgainstMarae():void {
 		outputText("\n\nYou pick up the bark and examine it thoroughly. It's unusually strong for a bark. You thank Marae for the bark, get on your boat and ferry back to the shore.");
 		outputText("\n\n<b>(Key Item Gained: Divine Bark Plates!)</b>");
 		player.createKeyItem("Divine Bark Plates", 0, 0, 0, 0);
-		awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
+		awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
 		flags[kFLAGS.PURE_MARAE_ENDGAME] = 2;
 		cleanupAfterCombat();
 	}

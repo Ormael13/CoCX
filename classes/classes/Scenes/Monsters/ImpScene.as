@@ -4,6 +4,7 @@
 package classes.Scenes.Monsters
 {
 	import classes.*;
+	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
@@ -71,7 +72,8 @@ package classes.Scenes.Monsters
 				if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) {
 					addButton(5, "Use Condom", maleRape, 1);
 				}
-				if(eggDump > 0) addButton(8,"Oviposit",putBeeEggsInAnImpYouMonster);
+				if (eggDump > 0) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
+				if (monster.HP <= 0) addButton(6, "Kill Him", killImp);
 				addButton(14,"Leave",cleanupAfterCombat);
 				//choices("Male Rape",maleRape,"Female Rape",femaleRape,"NippleFuck",nipFuck,"Breastfeed",feeder,"B.Titfuck",bikiniTits,"",0,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
 			}
@@ -2077,6 +2079,18 @@ package classes.Scenes.Monsters
 			dynStats("cor", 1);
 			player.slimeFeed();
 			cleanupAfterCombat();
+		}
+		
+		private function killImp():void {
+			clearOutput();
+			outputText("You make a quick work of the imp before dragging the corpse away. ");
+			menu();
+			addButton(0, "Take Skull", takeSkull);
+			addButton(1, "Leave", cleanupAfterCombat);
+		}
+		private function takeSkull():void {
+			rawOutputText("\n\n[DATA EXPUNGED]\n\n");
+			inventory.takeItem(useables.IMPSKLL, cleanupAfterCombat);
 		}
 	}
 }

@@ -141,6 +141,9 @@ public function num2Text2(number:int):String {
 public function Num2Text(number:int):String {
 	return num2TextBest(number, true);
 }
+public function Num2Text2(number:int):String {
+	return num2TextBest(number, true, true);
+}
 public function addComma(num:uint):String{
     var str:String = "";
 	if (num <= 0) return "0";

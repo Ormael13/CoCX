@@ -35,7 +35,7 @@ package classes.Scenes.Camp
 				kGAMECLASS.dungeons.cabin.enterCabin();
 				return;
 			}
-			if (player.fatigue <= 50)
+			if (player.fatigue <= player.maxFatigue() - 50)
 			{
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 1) { 
 					startWork() 
@@ -114,7 +114,7 @@ package classes.Scenes.Camp
 			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") outputText("\n\nYour large axe will suffice for the daunting task of gathering materials.", false);
 			else 
 			{	
-				outputText("\n\nYou realize something; ou need an axe!", false);
+				outputText("\n\nYou realize something; you need an axe!", false);
 				if (camp.followerKiha())
 				{
 					outputText("\n\nYour dragoness lover, Kiha, might be able to assist you.", false);
@@ -207,11 +207,9 @@ package classes.Scenes.Camp
 			}
 		}	
 		
-		private function checkMaterials():void {
+		public function checkMaterials():void {
 			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100\n");
 			outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200 \n");
-			checkToolbox();
-			doNext(1);
 		}
 		
 		//Get help from Kiha.

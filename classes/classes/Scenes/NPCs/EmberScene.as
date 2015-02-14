@@ -2008,6 +2008,7 @@ package classes.Scenes.NPCs
 					player.removeStatusAffect(StatusAffects.DragonBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
+				player.refillHunger(25);
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
 				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");

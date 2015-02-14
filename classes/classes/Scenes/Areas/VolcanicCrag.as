@@ -1,5 +1,5 @@
 /**
- * Created by Kitteh6660. Volcanic Crag is a new endgame area with level 20-25 encounters.
+ * Created by Kitteh6660. Volcanic Crag is a new endgame area with level 25 encounters.
  * Currently a Work in Progress.
  * 
  * This zone was mentioned in Glacial Rift doc.

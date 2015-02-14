@@ -192,13 +192,12 @@ public function callForFollowerIsabella():void {
 		pro = isabellaBurps;
 		outputText("\n\n<b>Isabella would probably drink a bottle of Pro Bova if you gave it to her.</b>", false);
 	}
-	choices("Accent Coach", accent, "Get Milk", milk, "GiveProBova", pro, "Sex", campIzzySexMenu, "Spar", isabellaSparMenu, "", 0, "", 0, "", 0, "", 0, "Back", camp.campLoversMenu);
+	choices("Accent Coach", accent, "Get Milk", milk, "GiveProBova", pro, "Sex", campIzzySexMenu, "Spar", isabellaSparMenu, "Accent Uncoach", (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] >= 100 ? isabellaAccentUncoaching : 0), "", 0, "", 0, "", 0, "Back", camp.campLoversMenu);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(5, "Go Camp", backToCamp);
 	
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
-	//if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] >= 100) addButton(0, "Accent Uncoach", isabellaAccentUncoaching);
 }
 
 private function sendToFarm():void
@@ -348,10 +347,10 @@ private function isabellasAccentCoaching():void {
 
 //Reverse Isabella's accent back to her normal accent.
 private function isabellaAccentUncoaching():void {
-	outputText("You tell Isabella that she can go back to her old accent however she likes.\n\n", true)
-	outputText("<b>Isabella's accent is now reverted. You'll have to coach her all over again if you change your mind.</b>", false)
+	outputText("You tell Isabella that she can go back to her old accent however she likes. Her eyes widen and says, \"<i>Zank you, " + player.short + "!</i>\"\n\n", true)
+	outputText("<b>Isabella's accent is now reverted. You'll have to coach her all over again if you ever change your mind.</b>", false)
 	flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] = 0;
-	doNext(13);
+	doNext(camp.returnToCamp);
 }	
 
 //Morning Wakeup Call 

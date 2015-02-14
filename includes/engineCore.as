@@ -1899,10 +1899,12 @@ public function statScreenRefresh():void {
 public function showStats():void {
 	mainView.statsView.show();
 	styleHack.refreshStats();
+	mainViewHack.tweenInStats();
 }
 
 public function hideStats():void {
-	mainView.statsView.hide();
+	if (!mainViewHack.buttonsTweened) mainView.statsView.hide();
+	mainViewHack.tweenOutStats();
 }
 
 public function hideMenus():void {
@@ -2390,7 +2392,7 @@ public function displayStats(e:MouseEvent = null):void
 		statEffects += "Izumi's Pipe Smoke - " + player.statusAffectv1(StatusAffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
 
 	if (player.statusAffectv1(StatusAffects.UmasMassage) > 0) 
-		statEffects += "Uma's Massage - " + player.statusAffectv1(StatusAffects.UmasMassage) + " hours remaining.\n";
+		statEffects += "Uma's Massage - " + player.statusAffectv3(StatusAffects.UmasMassage) + " hours remaining.\n";
 		
 	if (player.statusAffectv1(StatusAffects.Dysfunction) > 0) 
 		statEffects += "Dysfunction - " + player.statusAffectv1(StatusAffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";

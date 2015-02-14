@@ -623,6 +623,8 @@ private function browseDemSocksSon():void {
 	addButton(5,"Cobalt",cobaltCockSock);
 	addButton(6,"Gilded",gildedCockSock);
 	addButton(7,"Purple",amaranthineCockSock);
+//	addButton(8, "Green", greenCockSock);
+//	addButton(9, "Red", redCockSock);
 	addButton(14,"Back",gretasGarments);
 }
 
@@ -691,10 +693,25 @@ private function amaranthineCockSock():void {
 	cockSelectionMenu();
 }
 
+//Green, new cocksock from mod.
+private function greenCockSock():void {
+	clearOutput();
+	outputText("You pick up one sock and inspect it.  It's dark green in color and interlaced with brighter green highlights.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.  If you're unsure of your endurance, this might help.  I'll sell it to you for 500 gems.</i>\"");
+	//Increase HP by 2%, stacks additively.
+	flags[kFLAGS.SOCK_HOLDING] = "green";
+	cockSelectionMenu();
+}
+private function redCockSock():void {
+	clearOutput();
+	outputText("You pick up one sock and inspect it.  It's dark red in color and interlaced with brighter red highlights.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.  If you're unsure of your endurance, this might help.  I'll sell it to you for 500 gems.</i>\"");
+	//Increase attack power by 2%, stacks additively.
+	flags[kFLAGS.SOCK_HOLDING] = "red";
+	cockSelectionMenu();
+}
 
 private function cockSelectionMenu():void {
 	menu();
-	if((flags[kFLAGS.SOCK_HOLDING] == "amaranthine" && player.gems >= 1000) || (flags[kFLAGS.SOCK_HOLDING] == "gilded" && player.gems >= 3000) || (flags[kFLAGS.SOCK_HOLDING] == "cobalt" && player.gems >= 250) || (flags[kFLAGS.SOCK_HOLDING] == "scarlet" && player.gems >= 250) || (flags[kFLAGS.SOCK_HOLDING] == "viridian" && player.gems >= 1000) || (flags[kFLAGS.SOCK_HOLDING] == "cockring" && player.gems >= 100) || (flags[kFLAGS.SOCK_HOLDING] == "alabaster" && player.gems >= 25) || (flags[kFLAGS.SOCK_HOLDING] == "wool" && player.gems >= 10)) addButton(0,"Buy",pickACockForSock);
+	if((flags[kFLAGS.SOCK_HOLDING] == "amaranthine" && player.gems >= 1000) || (flags[kFLAGS.SOCK_HOLDING] == "gilded" && player.gems >= 3000) || (flags[kFLAGS.SOCK_HOLDING] == "cobalt" && player.gems >= 250) || (flags[kFLAGS.SOCK_HOLDING] == "scarlet" && player.gems >= 250) || (flags[kFLAGS.SOCK_HOLDING] == "viridian" && player.gems >= 1000) || (flags[kFLAGS.SOCK_HOLDING] == "cockring" && player.gems >= 100) || (flags[kFLAGS.SOCK_HOLDING] == "alabaster" && player.gems >= 25) || (flags[kFLAGS.SOCK_HOLDING] == "wool" && player.gems >= 10) || (flags[kFLAGS.SOCK_HOLDING] == "green" && player.gems >= 500) || (flags[kFLAGS.SOCK_HOLDING] == "red" && player.gems >= 500)) addButton(0,"Buy",pickACockForSock);
 	else outputText("\n\n<b>You can't afford that.</b>");
 	addButton(4,"Back",browseDemSocksSon);
 }
@@ -824,11 +841,11 @@ private function takeOffDatSock():void {
 	temp = 0;
 	var button:int = 0;
 	menu();
-	addButton(9, "Cancel", gretasGarments);
 	while(button < player.cockTotal()) {
 		if(player.cocks[button].sock != "") addButton(button,String(button+1),removeTargettedSock,button);
 		button++;
 	}
+	addButton(14, "Cancel", gretasGarments);
 	
 }
 

@@ -1653,6 +1653,7 @@
 			var hoursSinceCum:int = player.hoursSinceCum;
 			dynStats("lust=", 0);
 			player.hoursSinceCum = Math.ceil(hoursSinceCum * 0.75);
+			flags[kFLAGS.TIMES_ORGASMED]++;
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);

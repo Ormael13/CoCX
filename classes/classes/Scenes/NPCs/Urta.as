@@ -1644,7 +1644,7 @@ public function eatUrtaOutNomNomPussy():void {
 
 	outputText("Finished at last, Urta's member rapidly deflates, the scent of her cum on your " + hairDescript() + " and her juice on your " + player.face() + " lingers.  You slide up into the booth next to your blissed out lover.", false);
 	//[Give Glass] [Drink Glass] [Set Aside]
-	simpleChoices("Give Glass",giveUrtaCumGlass,"Drink Glass",drinkUrtasCumGlass,"Set Aside",setAsideUrtaCumGlass,"",0,"",0);
+	simpleChoices("Give Glass",giveUrtaCumGlass,"Drink Glass",drinkUrtasCumGlass,"Set Aside",setAsideUrtaCumGlass,"TakeSomeHome",takeUrtasCumHomeWithYou,"",0);
 }
 
 //[GIVE GLASS]
@@ -1688,6 +1688,17 @@ private function setAsideUrtaCumGlass():void {
 
 	doNext(camp.returnToCampUseOneHour);
 }
+private function takeUrtasCumHomeWithYou():void {
+	urtaSprite();
+	urtaLove(0.5);
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+	clearOutput();
+	outputText("You give her a kiss and let her know that you're going to take her cum home with you.");
+	outputText("\n\nUrta smiles at you and says, \"Okay, lover. I love you!\"");
+	outputText("\n\nYou smile knowingly and leave, intent on cleaning up a little back at camp.");
+	inventory.takeItem(consumables.URTACUM, camp.returnToCampUseOneHour);
+}
+
 //[Under Table BJ]
 public function blowUrtaUnderTheTableLuv():void {
 	urtaSprite();

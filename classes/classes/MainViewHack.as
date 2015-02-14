@@ -6,6 +6,7 @@ package classes
 	import classes.GlobalFlags.kGAMECLASS;
 	import coc.view.CoCButton;
 	import flash.display.Shape;
+	import flash.events.TimerEvent;
 	import flash.text.TextFormat;
 	
 	import coc.view.MainView;
@@ -26,6 +27,11 @@ package classes
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	
+	import flash.utils.Timer;
+	
+	//import fl.transition.Tween;
+	//import fl.transition.easing.*
+	
 	public class MainViewHack extends BaseContent
 	{
 		public var registeredShiftKey:Boolean = false;
@@ -35,6 +41,9 @@ package classes
 		
 		private var _textFormatButton:TextFormat;
 		private var _textFont:Font;
+		
+		public var statsHidden:Boolean = false;
+		public var buttonsTweened:Boolean = false;
 		
 		public function MainViewHack() 
 		{
@@ -557,7 +566,46 @@ package classes
 		public function setOldSprite():void {
 
 		}
-
+		
+		//Show/hide stats bars.
+		public function tweenInStats():void {
+			var t:Timer = new Timer(20, 21);
+			if (!statsHidden) return;
+			statsHidden = false;
+			t.addEventListener(TimerEvent.TIMER, function():void { mainView.statsView.x += 10; mainView.statsView.alpha += 0.05; if (mainView.statsView.alpha > 1) mainView.statsView.alpha = 1;} );
+			t.start();
+		}
+		public function tweenOutStats():void {
+			var t:Timer = new Timer(20, 21);
+			if (statsHidden) return;
+			statsHidden = true;
+			t.addEventListener(TimerEvent.TIMER, function():void { mainView.statsView.x -= 10; mainView.statsView.alpha -= 0.05; if (mainView.statsView.alpha < 0) mainView.statsView.alpha = 0; } );
+			t.start();
+		}
+		
+		//Animate buttons for startup!
+		public function startUpButtons():void {
+			if (buttonsTweened) return;
+			buttonsTweened = true;
+			for (var i:int = 0; i < 15; i++) {
+				mainView.bottomButtons[i].y += 140;
+			}
+			var t:Timer = new Timer(1000, 1);
+			t.addEventListener(TimerEvent.TIMER, tweenButtonsIn);
+			t.start();
+		}
+		private function tweenButtonsIn(e:TimerEvent = null):void {
+			var t:Timer = new Timer(20, 28);
+			t.addEventListener(TimerEvent.TIMER, moveButtonsIn);
+			t.start();
+		}
+		private function moveButtonsIn(e:TimerEvent):void {
+			for (var i:int = 0; i < 15; i++) {
+				mainView.bottomButtons[i].y -= 5;
+			}
+		}
+		
+		//Allows shift key.
 		public function registerShiftKeys():void {
 			if (!registeredShiftKey) {
 				mainView.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
@@ -566,7 +614,6 @@ package classes
 			}
 		}
 		
-		//Allows shift key.
 		public function keyPressed(event:KeyboardEvent):void {
 			if(event.keyCode == Keyboard.SHIFT) {
 				flags[kFLAGS.SHIFT_KEY_DOWN] = 1;

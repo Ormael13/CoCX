@@ -1316,7 +1316,32 @@
 			}
 			player.refillHunger(15);
 		}
-
+		
+		public function taurinum(player:Player):void 
+		{
+			var changes:Number = 0;
+			var changeLimit:Number = 1;
+			if (rand(3) == 0) changeLimit++;
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			player.slimeFeed();
+			outputText("You down the potion, grimacing at the strong taste.", true);
+			if (changes < changeLimit && rand(2) == 0 && player.spe < 80) {
+				changes++;
+				outputText("\n\nAfter drinking the potion, you feel a bit faster.");
+				dynStats("spe", 1);
+			}
+			//Centaur
+			if (changes < changeLimit && rand(2) == 0) {
+				changes++;
+				outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.", false);
+				if (player.gender > 0) {
+					outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.", false);
+				}
+				dynStats("spe", 3);
+				player.lowerBody = LOWER_BODY_TYPE_CENTAUR;
+			}
+		}
+		
 		public function succubiMilk(tainted:Boolean,player:Player):void
 		{
 			player.slimeFeed();
@@ -8375,7 +8400,7 @@
 		{
 			clearOutput();
 			outputText("You uncork the bottle and drink the behemoth cum; it tastes great and by the time you've finished drinking, you feel a bit stronger. ");
-			dynStats("str", 0.5, "tou", 0.5);
+			dynStats("str", 0.5, "tou", 0.5, "lus", 5 + (player.cor / 5));
 			HPChange(Math.round(player.maxHP() * .25), true);
 			player.slimeFeed();
 			player.refillHunger(25);
@@ -8385,7 +8410,7 @@
 		{
 			clearOutput();
 			outputText("You uncork the bottle and drink the vulpine cum; it tastes great. Urta definitely produces good-tasting cum!");
-			dynStats("str", 0.5, "tou", 0.5);
+			dynStats("sens", 1, "lus", 5 + (player.cor / 5));
 			HPChange(Math.round(player.maxHP() * .25), true);
 			player.slimeFeed();
 			player.refillHunger(25);

@@ -772,7 +772,7 @@ package classes.Scenes
 			headerSub("Appearance");
 			outputText("Behemoths typically wear little clothing, such as loincloth. The height, horns and spikes all add up to their fearsome appearance that most of the other races don't even dare to approach them.");
 			headerSub("Reproduction");
-			outputText("Like the satyrs, the behemoths are all-male race. Unlike satyrs, they are incapable of impregnating males. To reproduce, they rely on the females of other races as long as they are pure. Gestation period typically lasts two months, much longer than the typical gestation period in Mareth, and it takes two years for the newborn behemoth to fully mature into an adult.");
+			outputText("Like the satyrs, the behemoth are all-male race. Unlike satyrs, they are incapable of impregnating males. To reproduce, they rely on the females of other races as long as they are pure. Gestation period typically lasts two months, much longer than the typical gestation period in Mareth, and it takes two years for the newborn behemoth to fully mature into an adult.");
 			headerSub("Social structure");
 			outputText("Behemoths typically live in villages and caves. The leadership of tribes are determined by which is the strongest of all. Once a year, they host \"Feats of Strength\", a contest consisting of several gauntlets and competitions. Among one of them is the \"Cum-Out\" where the objective is for the behemoths to cum as much as they can in a single orgasm.");
 			menuRacesII();

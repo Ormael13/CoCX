@@ -488,6 +488,10 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 		if (player.findPerk(PerkLib.PiercedLethite) >= 0) temp += 4;
 		if (player.inHeat) temp += 2;
 		if (vapula.vapulaSlave()) temp += 7;
+		//Reduce chance
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] > 0) temp /= 1 + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 100);
+		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) temp /= 2;
+		if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) temp *= 1 - (flags[kFLAGS.CAMP_WALL_SKULLS] / 100);
 		if (model.time.hours == 2) {
 			if (model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
 				anemoneScene.goblinNightAnemone();

@@ -235,6 +235,9 @@ private function rathazulWorkOffer():Boolean {
 		totalOffers++;
 		dyes = buyDyes;
 	}
+	if (player.hasItem(consumables.EQUINUM, 2)) {
+		outputText("The rat mentions, \"<i>You know, I could make something new if you're willing to hand over two of vials labeled \"Equinum\" and one hundred gems.</i>\"");
+	}
 	//Reducto
 	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
 		outputText("The rat hurries over to his supplies and produces a container of paste, looking rather proud of himself, \"<i>Good news everyone!  I've developed a paste you could use to shrink down any, ah, oversized body parts.  The materials are expensive though, so I'll need ");
@@ -304,6 +307,7 @@ private function rathazulWorkOffer():Boolean {
 		if (player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2)) {
 			addButton(6, "Pro Lactaid", rathazulMakesMilkPotion);
 		}
+		if (player.hasItem(consumables.EQUINUM, 2) && player.gems >= 100) addButton(7, "Taurinum", makeTaurPotion);
 		if (reductos != null) addButton(8, "Reducto", reductos);
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
 			addButton(14,"Leave",eventParser,74);
@@ -695,10 +699,21 @@ private function buyDye(dye:ItemType):void {
 private function buyDyeNevermind():void {
 	spriteSelect(49);
 	clearOutput();
-	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n(<b>+50 Gems</b>)");
+	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
 	doNext(returnToRathazulMenu);
+}
+
+private function makeTaurPotion():void {
+	spriteSelect(49);
+	clearOutput();
+	player.destroyItems(consumables.TAURICO, 2);
+	player.gems -= 100;
+	statScreenRefresh();
+	outputText("You hand over two vials of Equinum and one hundred gems to Rathazul, which he gingerly takes them and proceeds to make a special potion for you.");
+	outputText("\n\nAfter a while, the rat hands you a vial labeled \"Taurinum\" and nods.");
+	inventory.takeItem(consumables.TAURICO, returnToRathazulMenu);
 }
 
 private function buyReducto():void {

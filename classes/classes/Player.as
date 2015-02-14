@@ -1963,6 +1963,25 @@ use namespace kGAMECLASS;
 				maxTou += 10;
 				maxSpe -= 10;
 			}
+			if (kitsuneScore() >= 4) {
+				if (tailType == 13) {
+					if (tailVenom == 1) {
+						maxStr -= 2;
+						maxSpe += 2;
+						maxInt += 1;
+					}
+					else if (tailVenom >= 2 && tailVenom < 9) {
+						maxStr -= tailVenom + 1;
+						maxSpe += tailVenom + 1;
+						maxInt += (tailVenom/2) + 0.5;
+					}
+					else if (tailVenom >= 9) {
+						maxStr -= 10;
+						maxSpe += 10;
+						maxInt += 5;
+					}
+				}
+			}
 			if (isNaga()) maxSpe += 10;
 			if (isTaur()) maxSpe += 20;
 			//Apply New Game+

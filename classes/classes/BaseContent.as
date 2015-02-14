@@ -49,7 +49,10 @@
 		{
 			return kGAMECLASS.num2Text2(number);
 		}
-		
+		protected function Num2Text2(number:int):String
+		{
+			return kGAMECLASS.Num2Text2(number);
+		}
 		protected function addComma(number:uint):String
 		{
 			return kGAMECLASS.addComma(number);
@@ -247,6 +250,10 @@
 		{
 			kGAMECLASS.currentText = "";
 			kGAMECLASS.mainView.clearOutputText();
+		}
+		
+		protected function flushOutputTextToGUI():void {
+			kGAMECLASS.flushOutputTextToGUI();
 		}
 		
 		protected function doNext(eventNo:*):void
