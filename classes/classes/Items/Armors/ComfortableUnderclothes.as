@@ -10,7 +10,7 @@ package classes.Items.Armors
 	public final class ComfortableUnderclothes extends Armor {
 		
 		public function ComfortableUnderclothes() {
-			super("c.under", "c.under", "comfortable underclothes", "comfortable underclothes", 0, 0, "comfortable underclothes", "");
+			super("c.under", "c.under", "comfortable underclothes", "comfortable underclothes", 0, 0, "comfortable underclothes", "Light");
 		}
 		
 		override public function playerRemove():Armor {

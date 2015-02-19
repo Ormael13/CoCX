@@ -92,6 +92,26 @@ package classes
 		public function set shieldName(value:String):void { _shieldName = value; }
 		public function set shieldBlock(value:Number):void { _shieldBlock = value; }
 		public function set shieldPerk(value:String):void { _shieldPerk = value; }
+		//Undergarments!
+		private var _upperGarmentName:String = "";
+		private var _upperGarmentPerk:String = "";
+		private var _upperGarmentValue:Number = 0;
+		public function get upperGarmentName():String { return _upperGarmentName; }
+		public function get upperGarmentPerk():String { return _upperGarmentPerk; }
+		public function get upperGarmentValue():Number { return _upperGarmentValue; }
+		public function set upperGarmentName(value:String):void { _upperGarmentName = value; }
+		public function set upperGarmentPerk(value:String):void { _upperGarmentPerk = value; }
+		public function set upperGarmentValue(value:Number):void { _upperGarmentValue = value; }
+		
+		private var _lowerGarmentName:String = "";
+		private var _lowerGarmentPerk:String = "";
+		private var _lowerGarmentValue:Number = 0;
+		public function get lowerGarmentName():String { return _lowerGarmentName; }
+		public function get lowerGarmentPerk():String { return _lowerGarmentPerk; }
+		public function get lowerGarmentValue():Number { return _lowerGarmentValue; }
+		public function set lowerGarmentName(value:String):void { _lowerGarmentName = value; }
+		public function set lowerGarmentPerk(value:String):void { _lowerGarmentPerk = value; }
+		public function set lowerGarmentValue(value:Number):void { _lowerGarmentValue = value; }
 		//Primary stats
 		public var str:Number = 0;
 		public var tou:Number = 0;

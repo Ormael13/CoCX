@@ -1771,7 +1771,8 @@ private function jojoCampMenu():void {
 	addButton(3, "Meditate", jojoFollowerMeditate);
 	addButton(4, jojoDefense, jojoDefenseToggle, null, null, null, (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 ? "Request him to stop guarding the camp.": "Request him to guard the camp at night."));
 	if (player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(5, "Purge", wormRemoval, null, null, null, "Request him to purge the worms from your body.");
-	addButton(8, "Rape", (player.cor > 10 && player.lust >= 33 && player.gender > 0 ? jojoAtCampRape : null), null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 20 ? "  Why would you do that?": ""));
+	addButton(8, "Rape", (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 ? jojoAtCampRape : null), null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 20 ? "  Why would you do that?": ""));
+	if (player.lust >= 33 && monk <= -3) addButton(8, "Sex", pureJojoSexMenu, null, null, null, "Initiate sexy time with the mouse-morph.");
 	addButton(9, "Leave", eventParser, 74);
 }
 
@@ -1805,7 +1806,8 @@ public function talkMenu():void
 	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave, null, null, null, "Tell him about your encounter in the Sand Cave in the desert.");
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift, null, null, null, "Ask him if he's willing to train you.");
 	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1, null, null, null, "Ask him if he can exorcise the demonic parasite infesting Minerva.");
-	//if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusAffectv1(StatusAffects.JojoMeditationCount) >= 10 && player.cor <= 10) addButton(9, "Sex?", offerSexFirstTime, null, null, null, "You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
+	if (player.cor <= 10 && player.lust >= 33) addButton(9, "Sex?", offerSexFirstTime);
+	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusAffectv1(StatusAffects.JojoMeditationCount) >= 10 && monk > -3 && player.cor <= 10 && player.lust >= 33) addButton(9, "Sex?", offerSexFirstTimeHighAffection, null, null, null, "You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
 	addButton(14, "Back", jojoCamp);
 }
 
@@ -2303,13 +2305,96 @@ public function wormRemoval():void {
 public function offerSexFirstTime():void {
 	jojoSprite();
 	clearOutput();
-	outputText("You've been spending great time with Jojo. You've meditated with him, you've discussed with him and you've even trained with him! Now's the time to ask him.");
-	outputText("\n\nYou approach Jojo. \"Yes, [name]? What is it you need?\" He asks. You ask him if he would like to have sex.");
-	doNext(camp.returnToCampUseOneHour);
+	outputText("You ask Jojo if he would be willing to help you with a... personal problem.");
+	outputText("\n\n\"<i>Yes, of course! What is it, [name]?</i>\"");
+	outputText("\n\nYou tell him that it has to do with certain... needs of yours. Desires that need slaking. You would much rather something consensual, with a friendly face, than to go out and offer yourself to the depraved interests of whatever corrupted being you find, or to engage in the uncomfortably demonic act of beating down and then raping one of the degenerates that roam this corrupted land.");
+	outputText("\n\nJojo's eyes open wide in realization and he blushes so hard you can even see it through his white fur. \"<i>I... I'm flattered you would consider me for this... and I think you're really " + (player.femininity >= 50 ? "beautiful" : "handsome") + ", " + ((player.thickness >= 60 && player.tone < 60) ? "although you should work harder to keep yourself in shape." : "and you obviously keep yourself in good shape.") + " You're also nice to me and I do find you attractive but...</i>\"");
+	outputText("\n\nBut...? You press. After all, isn't it better for the both of you to turn to each other to slake your lusts then to bottle things up or go to the monsters who roam this land?");
+	outputText("\n\n\"<i>I-I can't... I made a vow of chastity... I can't simply break my vows... please understand, [name]...</i>\" he says gazing at you apologetically, though you detect just the slightest hint of desire in his eyes before he averts his gaze and shakes his head of whatever thoughts could be plaguing it.");
+	outputText("\n\nYou acknowledge his position and excuse yourself, but before you can leave he calls out to you. \"<i>Wait, [name]!</i>\" he says getting up and moving towards you. \"<i>While I can't really have sex with you, that doesn't mean I can't help you. If you want we could meditate to help you... umm... restrain your needs?</i>\" he suggests.");
+	monk = -1;
+	doYesNo(agreeToMeditate, noThanksToMeditate);
+}
+private function agreeToMeditate():void {
+	jojoSprite();
+	clearOutput();
+	outputText("You decide that it would help you clear your head, and accept his offer. He motions for you to sit down beside him.");
+	doNext(jojoFollowerMeditate);
+}
+private function noThanksToMeditate():void {
+	jojoSprite();
+	clearOutput();
+	outputText("You shake your head, telling him that it'll be fine, and leave.");
+	cheatTime(0.25);
+	doNext(camp.campMenu);
+}
+
+public function offerSexFirstTimeHighAffection():void {
+	jojoSprite();
+	clearOutput();
+	outputText("You've been spending great time with Jojo. You've meditated with him, you've discussed with him and you've even trained with him! Now's the time to ask him out.");
+	outputText("\n\nYou approach Jojo. \"Yes, [name]? What is it you need?\" Jojo asks. You ask him if he would like to have sex.");
+	outputText("\n\n\"<i>I'm sorry. I still can't break my vows of chastity,</i>\" he says apologetically.");
+	monk = -2;
+	menu();
+	addButton(0, "Meditate", jojoFollowerMeditate);
+	addButton(1, "Drop It", noThanksToMeditate);
+	if (player.inte >= 60 && player.cor <= 10) addButton(2, "Confront", confrontChastity);
 }
 
 public function confrontChastity():void {
-	
+	jojoSprite();
+	clearOutput();
+	outputText("He cannot keep his vows forever. After all, he's missing out on the pleasure! He probably never knew how he would feel if he has a perfect cock that fits perfectly in his butthole or his cock that fits perfectly in a vagina or an anus. He should be fine as long as he stays faithful to you.");
+	outputText("\n\n\"<i>What about pleasure? You're missing out!</i>\" you say. Jojo stares deeply into your eyes for a good moment.");
+	outputText("\n\n\"<i>Well... young one, you're right. You did spend time together with me. We've meditated, I've taught you some important lessons and now we're here,</i>\" Jojo says hesitantly but he starts to smile, \"<i>Let's have sex; I want to experience.</i>\"");
+	outputText("\n\nYou smile back at Jojo, knowing that you can have sex with him.");
+	outputText("\n\n<b>You have unlocked Jojo sex menu!</b>");
+	flags[kFLAGS.DISABLED_JOJO_RAPE] = 1;
+	monk = -3;
+	doNext(pureJojoSexMenu);
+}
+
+private function pureJojoSexMenu():void {
+	jojoSprite();
+	clearOutput();
+	outputText("(Currently, the scenes are placeholder.)");
+	menu();
+	addButton(0, "Anal Pitch", anallyFuckTheMouseButtSlut);
+	if (player.hasCock()) addButton(1, "Anal Catch", getAnallyFuckedByMouse);
+	if (player.hasVagina()) addButton(2, "Vaginal Catch", getVagFuckedByMouse);
+	addButton(14, "Nevermind", camp.returnToCamp);
+}
+
+private function anallyFuckTheMouseButtSlut():void {
+	jojoSprite();
+	clearOutput();
+	outputText("(Placeholder) And then you've fucked and cummed into the mouse's butthole.");
+	dynStats("cor", -1);
+	player.orgasm();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function getAnallyFuckedByMouse():void {
+	jojoSprite();
+	clearOutput();
+	outputText("(Placeholder) And then you've got your ass fucked and stuffed with Jojo's cum.");
+	player.buttChange(12, true);
+	dynStats("cor", -1);
+	player.orgasm();
+	player.slimeFeed();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function getVagFuckedByMouse():void {
+	jojoSprite();
+	clearOutput();
+	outputText("(Placeholder) And then you've got vaginally penetrated and stuffed with Jojo's cum.");
+	player.cuntChange(12, true);
+	dynStats("cor", -1);
+	player.orgasm();
+	player.slimeFeed();
+	doNext(camp.returnToCampUseOneHour);
 }
 
 public function loseToJojo():void {

@@ -317,8 +317,6 @@ public function benoitIntro():void {
 		if (player.hasCock() && player.lust >= 33) addButton(3, "Sex", femoitSexIntro);
 		if (player.hasVagina() && flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0) addButton(4, "Suggest", eggySuggest);
 	}
-	choices("Buy", benoitsBuyMenu, "Sell", benoitSellMenu, "Talk", talkToBenoit, suggestText, suggest, "Basil. Womb", womb,
-		"Feminize", fem, "", null, "", null, "", null, "Leave", bazaar.enterTheBazaar);
 }
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
 private function buyOrSellExplanationFirstTime():void {

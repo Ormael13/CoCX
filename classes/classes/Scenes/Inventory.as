@@ -11,10 +11,12 @@ package classes.Scenes
 	import classes.Items.Weapon;
 	import classes.Items.Jewelry;
 	import classes.Items.Shield;
+	import classes.Items.Undergarment;
 	import classes.Items.ArmorLib;
 	import classes.Items.WeaponLib;
 	import classes.Items.JewelryLib;
 	import classes.Items.ShieldLib;
+	import classes.Items.UndergarmentLib;
 	import classes.Scenes.Dungeons.DungeonEngine;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
@@ -65,8 +67,8 @@ package classes.Scenes
 			outputText("<b>Weapon:</b> " + player.weaponName + " (Attack: " + player.weaponAttack + ")\n");
 			outputText("<b>Shield:</b> " + player.shieldName + " (Block Rating: " + player.shieldBlock + ")\n");
 			outputText("<b>Armour:</b> " + player.armorName + " (Defense: " + player.armorDef + ")\n");
-			//outputText("<b>Upper undergarment: </b> " + player.upperGarments + "");
-			//outputText("<b>Lower undergarment: </b> " + player.lowerGarments + "");
+			outputText("<b>Upper underwear:</b> " + player.upperGarmentName + "\n");
+			outputText("<b>Lower underwear:</b> " + player.lowerGarmentName + "\n");
 			outputText("<b>Accessory:</b> " + player.jewelryName + "\n");
 			if (player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n");
 			for (x = 0; x < player.keyItems.length; x++) outputText(player.keyItems[x].keyName + "\n");
@@ -190,6 +192,14 @@ package classes.Scenes
 			else if (item is Shield) {
 				player.shield.removeText();
 				item = player.setShield(item as Shield); //Item is now the player's old shield
+				if (item == null)
+					itemGoNext();
+				else takeItem(item, callNext);
+			}
+			else if (item is Undergarment) {
+				if (item["type"] == 0) player.upperGarment.removeText();
+				else player.lowerGarment.removeText();
+				item = player.setUndergarment(item as Undergarment, item["type"]); //Item is now the player's old shield
 				if (item == null)
 					itemGoNext();
 				else takeItem(item, callNext);
@@ -386,16 +396,23 @@ package classes.Scenes
 			{
 				addButton(1, "Shield", unequipShield);
 			}
-			if (player.armorName != "comfortable underclothes")
-			{
-				addButton(2, "Armour", unequipArmor);
-			}
 			if (player.jewelryName != "nothing")
 			{
-				addButton(3, "Accessory", unequipJewel);
+				addButton(2, "Accessory", unequipJewel);
 			}
-
-			addButton(4, "Back", inventoryMenu);
+			if (player.armorName != "nothing")
+			{
+				addButton(5, "Armour", unequipArmor);
+			}
+			if (player.upperGarmentName != "nothing")
+			{
+				addButton(6, "Upperwear", unequipUpperwear);
+			}
+			if (player.lowerGarmentName != "nothing")
+			{
+				addButton(7, "Lowerwear", unequipLowerwear);
+			}			
+			addButton(14, "Back", inventoryMenu);
 			
 		}
 		//Unequip!
@@ -405,12 +422,20 @@ package classes.Scenes
 		}
 		public function unequipArmor():void {
 			clearOutput();
-			if (player.armorName != "goo armor") takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), inventoryMenu); 
+			if (player.armorName != "goo armor") takeItem(player.setArmor(ArmorLib.NOTHING), inventoryMenu); 
 			else { //Valeria belongs in the camp, not in your inventory!
 				player.armor.removeText();
-				player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES);
+				player.setArmor(ArmorLib.NOTHING);
 				doNext(manageEquipment);
 			}
+		}
+		public function unequipUpperwear():void {
+			clearOutput();
+			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), inventoryMenu);
+		}
+		public function unequipLowerwear():void {
+			clearOutput();
+			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), inventoryMenu);
 		}
 		public function unequipJewel():void {
 			clearOutput();
@@ -420,7 +445,7 @@ package classes.Scenes
 			clearOutput();
 			takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
 		}
-		
+
 		public function pickItemToTakeFromArmorRack():void {
 			callNext = pickItemToTakeFromArmorRack;
 			pickItemToTakeFromStorage(gearStorage, 9, 18, "rack");

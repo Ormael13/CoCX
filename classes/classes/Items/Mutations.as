@@ -1340,6 +1340,21 @@
 				dynStats("spe", 3);
 				player.lowerBody = LOWER_BODY_TYPE_CENTAUR;
 			}
+			//Give the player hooves
+			if (player.lowerBody != LOWER_BODY_TYPE_HOOFED && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+				if (changes < changeLimit && rand(3) == 0) {
+					changes++;
+					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
+					if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
+					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!", false);
+					//Catch-all
+					if (player.lowerBody > LOWER_BODY_TYPE_NAGA) outputText("\n\nYou stagger as your " + player.feet() + " change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
+					outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>", false);
+					player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+					dynStats("cor", 0);
+					changes++;
+				}
+			}
 		}
 		
 		public function succubiMilk(tainted:Boolean,player:Player):void

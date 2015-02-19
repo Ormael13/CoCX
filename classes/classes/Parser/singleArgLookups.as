@@ -17,7 +17,7 @@
 				// Note: all key strings MUST be ENTIRELY lowercase.
 
 				"agility"					: function(thisPtr:*):* { return "[Agility]"; },
-				"armor"						: function(thisPtr:*):* { return thisPtr.player.armorName;},
+				"armor"						: function(thisPtr:*):* { return thisPtr.player.armorDescript();},
 				"armorname"					: function(thisPtr:*):* { return thisPtr.player.armorName;},
 				"ass"						: function(thisPtr:*):* { return thisPtr.buttDescript();},
 				"asshole"					: function(thisPtr:*):* { return thisPtr.assholeDescript(); },

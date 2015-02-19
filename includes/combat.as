@@ -1049,6 +1049,7 @@ public function doCombat(eventNum:Number):void
 			else outputText(monster.capitalA + monster.short + " looks down at the arrow that now protrudes from " + monster.pronoun3 + " body", false);
 			if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 			if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			if (player.hasKeyItem("Kelt's Bow") >= 0) damage *= 1.3; //Kelt's Bow does more damage.
 			damage = Math.round(damage);
 			doDamage(damage);
@@ -1273,6 +1274,7 @@ public function bite():void {
 	if(damage > 0) {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 		damage = doDamage(damage);
 	}
 	
@@ -1338,12 +1340,12 @@ public function attack():void {
 		else flags[kFLAGS.FLINTLOCK_PISTOL_AMMO]--;
 	}
 	//Amily!
-	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0 && player.weaponName != "flintlock pistol") {
+	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0 && !isWieldingRangedWeapon()) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
 		enemyAI();
 		return;
 	}
-	if(monster.findStatusAffect(StatusAffects.Level) >= 0 && player.findStatusAffect(StatusAffects.FirstAttack) < 0) {
+	if(monster.findStatusAffect(StatusAffects.Level) >= 0 && player.findStatusAffect(StatusAffects.FirstAttack) < 0 && !isWieldingRangedWeapon()) {
 		outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
 		(monster as SandTrap).trapLevel(-4);
 	}
@@ -1501,6 +1503,7 @@ public function attack():void {
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
 	if (player.findPerk(PerkLib.ChiReflowAttack) >= 0) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
 	if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+	if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 	//One final round
 	damage = Math.round(damage);
 	
@@ -1537,6 +1540,7 @@ public function attack():void {
 		if (monster.findStatusAffect(StatusAffects.Stunned) < 0)
 		{
 			if (damage > 0 && player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			if (damage > 0) damage = doDamage(damage, false);
 		
 			(monster as Doppleganger).mirrorAttack(damage);
@@ -1735,6 +1739,7 @@ public function goreAttack():void {
 		if(damage > 0) {
 			if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 			if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			damage = doDamage(damage);
 		}
 		//Different horn damage messages
@@ -4074,6 +4079,7 @@ public function spellMod():Number {
 	}
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 	if (player.jewelryEffectId == 9) mod += (player.jewelryEffectMagnitude / 100);
+	if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 	return mod;
 }
 public function spellArouse():void {
@@ -4640,6 +4646,7 @@ public function kick():void {
 	//Damage post processing!
 	if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 	if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+	if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 	//(None yet!)
 	if(damage > 0) damage = doDamage(damage);
 	
@@ -4929,13 +4936,17 @@ public function dragonBreath():void {
 		outputText("  Despite the heavy impact caused by your roar, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
 	}
 	//Special enemy avoidances
-	else if(monster.short == "Vala") {
+	else if(monster.short == "Vala" && !monster.findStatusAffect(StatusAffects.Stunned) >= 0) {
 		outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ", false);		
 		if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 			outputText("You dive out of the way and evade it!", false);
 		}
 		else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
 			outputText("You use your flexibility to barely fold your body out of the way!", false);
+		}
+		//Determine if blocked!
+		else if (combatBlock(true)) {
+			outputText("You manage to block your own fire with your " + player.shieldName + "!");
 		}
 		else {
 			damage = takeDamage(damage);

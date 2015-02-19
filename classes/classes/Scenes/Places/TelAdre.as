@@ -1477,19 +1477,38 @@ public function tailorShoppe():void {
 		outputText("at Victoria the Corgi Tailor.  As usual, she's dressed in a stylish low-cut dress and sporting her feathery hat.", false);
 	}
 	outputText("\n\n(What do you want to buy?)", false);
-	choices(armors.CLSSYCL.shortName,createCallBackFunction(buyClothes,armors.CLSSYCL),
-			armors.RBBRCLT.shortName,createCallBackFunction(buyClothes,armors.RBBRCLT),
-			armors.ADVCLTH.shortName,createCallBackFunction(buyClothes,armors.ADVCLTH),
-			armors.TUBETOP.shortName,createCallBackFunction(buyClothes,armors.TUBETOP),
-			armors.OVERALL.shortName,createCallBackFunction(buyClothes,armors.OVERALL),
-			armors.B_DRESS.shortName,createCallBackFunction(buyClothes,armors.B_DRESS),
-			armors.T_BSUIT.shortName,createCallBackFunction(buyClothes,armors.T_BSUIT),
-			armors.M_ROBES.shortName,createCallBackFunction(buyClothes,armors.M_ROBES),
-			armors.LTHRPNT.shortName,createCallBackFunction(buyClothes,armors.LTHRPNT),
-			armors.BIMBOSK.shortName,createCallBackFunction(buyClothes,armors.BIMBOSK));
+	menu();
+	addButton(0, armors.CLSSYCL.shortName, buyClothes, armors.CLSSYCL);
+	addButton(1, armors.RBBRCLT.shortName, buyClothes, armors.RBBRCLT);
+	addButton(2, armors.ADVCLTH.shortName, buyClothes, armors.ADVCLTH);
+	addButton(3, armors.TUBETOP.shortName, buyClothes, armors.TUBETOP);
+
+	addButton(5, armors.OVERALL.shortName, buyClothes, armors.OVERALL);
+	addButton(6, armors.B_DRESS.shortName, buyClothes, armors.B_DRESS);
+	addButton(7, armors.T_BSUIT.shortName, buyClothes, armors.T_BSUIT);
+	addButton(8, armors.M_ROBES.shortName, buyClothes, armors.M_ROBES);
+	
+	addButton(10, armors.LTHRPNT.shortName, buyClothes, armors.LTHRPNT);
+	addButton(11, armors.BIMBOSK.shortName, buyClothes, armors.BIMBOSK);
+	
+	addButton(4, "Next", undergarmentSection);
 	addButton(14, "Leave", telAdreMenu);
 }
-
+private function undergarmentSection():void {
+	menu();
+	addButton(0, undergarments.C_BRA.shortName, buyClothes, undergarments.C_BRA);
+	addButton(1, undergarments.C_PANTY.shortName, buyClothes, undergarments.C_PANTY);
+	addButton(2, undergarments.C_LOIN.shortName, buyClothes, undergarments.C_LOIN);
+	addButton(3, undergarments.FURLOIN.shortName, buyClothes, undergarments.FURLOIN);
+	
+	addButton(5, undergarments.GARTERS.shortName, buyClothes, undergarments.GARTERS);
+	addButton(6, undergarments.LTX_BRA.shortName, buyClothes, undergarments.LTX_BRA);
+	addButton(7, undergarments.LTXSHRT.shortName, buyClothes, undergarments.LTXSHRT);
+	addButton(8, undergarments.LTXTHNG.shortName, buyClothes, undergarments.LTXTHNG);
+	
+	addButton(9, "Previous", tailorShoppe);
+	addButton(14, "Leave", telAdreMenu);
+}
 
 private function buyClothes(itype:ItemType):void {
 	outputText("", true);

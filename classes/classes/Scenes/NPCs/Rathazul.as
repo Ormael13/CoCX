@@ -236,7 +236,7 @@ private function rathazulWorkOffer():Boolean {
 		dyes = buyDyes;
 	}
 	if (player.hasItem(consumables.EQUINUM, 2)) {
-		outputText("The rat mentions, \"<i>You know, I could make something new if you're willing to hand over two of vials labeled \"Equinum\" and one hundred gems.</i>\"");
+		outputText("The rat mentions, \"<i>You know, I could make something new if you're willing to hand over two of vials labeled \"Equinum\", one vial of minotaur blood and one hundred gems.</i>\"");
 	}
 	//Reducto
 	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
@@ -307,7 +307,7 @@ private function rathazulWorkOffer():Boolean {
 		if (player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2)) {
 			addButton(6, "Pro Lactaid", rathazulMakesMilkPotion);
 		}
-		if (player.hasItem(consumables.EQUINUM, 2) && player.gems >= 100) addButton(7, "Taurinum", makeTaurPotion);
+		if (player.hasItem(consumables.EQUINUM, 2) && player.hasItem(consumables.MINOBLO, 1) && player.gems >= 100) addButton(7, "Taurinum", makeTaurPotion);
 		if (reductos != null) addButton(8, "Reducto", reductos);
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
 			addButton(14,"Leave",eventParser,74);
@@ -560,13 +560,17 @@ private function craftSilkArmor():void {
 private function commissionSilkArmorForReal():void {
 	spriteSelect(49);
 	outputText("", true);
-	outputText("You sort 500 gems into a pouch and toss them to Rathazul, along with the rest of the webbing.  The wizened alchemist snaps the items out of the air with lightning-fast movements and goes to work immediately.  He bustles about with enormous energy, invigorated by the challenging task before him.  It seems Rathazul has completely forgotten about you, but as you turn to leave, he calls out, \"<i>What did you want me to make?  A mage's robe or some nigh-impenetrable armor?</i>\"\n\n", false);
+	outputText("You sort 500 gems into a pouch and toss them to Rathazul, along with the rest of the webbing.  The wizened alchemist snaps the items out of the air with lightning-fast movements and goes to work immediately.  He bustles about with enormous energy, invigorated by the challenging task before him.  It seems Rathazul has completely forgotten about you, but as you turn to leave, he calls out, \"<i>What did you want me to make?  A mage's robe or some nigh-impenetrable armor?  Or undergarments if you want.</i>\"\n\n", false);
 	player.gems -= 500;
 	statScreenRefresh();
 	player.destroyItems(useables.T_SSILK, 5);
 	menu();
 	addButton(0, "Armor", chooseArmorOrRobes, 1);
 	addButton(1, "Robes", chooseArmorOrRobes, 2);
+	addButton(2, "Bra", chooseArmorOrRobes, 3);
+	addButton(3, "Panties", chooseArmorOrRobes, 4);
+	addButton(4, "Loincloth", chooseArmorOrRobes, 5);
+
 }
 
 private function declineSilkArmorCommish():void {
@@ -598,11 +602,34 @@ private function collectRathazulArmor():void {
 	outputText("", true);
 	outputText("Rathazul beams and ejaculates, \"<i>Good news everyone!  Your ", false);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 1) outputText("armor", false);
-	else outputText("robe", false);
+	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 2) outputText("robe", false);
+	else outputText("undergarment", false);
 	outputText(" is finished!</i>\"\n\n", false);
-	//Robe
+	
 	var itype:ItemType;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 2) {
+	//Loincloth
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 5) {
+		outputText("On a table is a white loincloth.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
+		
+		outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This loincloth is very durable and should be comfortable as well.</i>\"\n\n", false);
+		itype = undergarments.SS_LOIN;
+	}
+	//Panties
+	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 4) {
+		outputText("On a table is a pair of white panties.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
+		
+		outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  These panties are very durable and should be comfortable as well.</i>\"\n\n", false);
+		itype = undergarments.SSPANTY;
+	}
+	//Bra
+	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 3) {
+		outputText("On a table is a pair of white bra.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
+		
+		outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  These bras are very durable and should be comfortable as well.</i>\"\n\n", false);
+		itype = undergarments.SS_BRA;
+	}
+	//Robe
+	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 2) {
 		outputText("Hanging from a small rack is a long, flowing robe.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  The sleeves match the cowl, circled with intricate threads laid out in arcane patterns.\n\n", false);
 		
 		outputText("Rathazul gingerly takes down the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This robe is tougher than many armors, and the spider-silk's properties may even help you in your spell-casting as well.</i>\"\n\n", false);
@@ -709,9 +736,10 @@ private function makeTaurPotion():void {
 	spriteSelect(49);
 	clearOutput();
 	player.destroyItems(consumables.TAURICO, 2);
+	player.destroyItems(consumables.MINOBLO, 1);
 	player.gems -= 100;
 	statScreenRefresh();
-	outputText("You hand over two vials of Equinum and one hundred gems to Rathazul, which he gingerly takes them and proceeds to make a special potion for you.");
+	outputText("You hand over two vials of Equinum, one vial of Minotaur Blood and one hundred gems to Rathazul, which he gingerly takes them and proceeds to make a special potion for you.");
 	outputText("\n\nAfter a while, the rat hands you a vial labeled \"Taurinum\" and nods.");
 	inventory.takeItem(consumables.TAURICO, returnToRathazulMenu);
 }

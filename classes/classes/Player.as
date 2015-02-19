@@ -11,6 +11,8 @@ import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
 import classes.Items.Shield;
 import classes.Items.ShieldLib;
+import classes.Items.Undergarment;
+import classes.Items.UndergarmentLib;
 import classes.Scenes.Places.TelAdre.UmasShop;
 
 use namespace kGAMECLASS;
@@ -82,6 +84,8 @@ use namespace kGAMECLASS;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
 		private var _jewelry:Jewelry = JewelryLib.NOTHING;
 		private var _shield:Shield = ShieldLib.NOTHING;
+		private var _upperGarment:Undergarment = UndergarmentLib.NOTHING;
+		private var _lowerGarment:Undergarment = UndergarmentLib.NOTHING;
 		private var _modArmorName:String = "";
 
 		//override public function set armors
@@ -178,6 +182,38 @@ use namespace kGAMECLASS;
 			CoC_Settings.error("ERROR: attempt to directly set player.shieldValue.");
 		}
 		
+		//override public function set undergarments
+		override public function set upperGarmentName(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.upperGarmentName.");
+		}
+		
+		override public function set upperGarmentPerk(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.upperGarmentPerk.");
+		}
+		
+		override public function set upperGarmentValue(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.upperGarmentValue.");
+		}
+
+		override public function set lowerGarmentName(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.lowerGarmentName.");
+		}
+		
+		override public function set lowerGarmentPerk(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.lowerGarmentPerk.");
+		}
+		
+		override public function set lowerGarmentValue(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.lowerGarmentValue.");
+		}
+		
+		
 		public function get modArmorName():String
 		{
 			if (_modArmorName == null) _modArmorName = "";
@@ -197,6 +233,8 @@ use namespace kGAMECLASS;
 		}
 		override public function get armorDef():Number {
 			var armorDef:Number = _armor.def;
+			if (upperGarmentName == "spider-silk bra") armorDef += 1;
+			if (lowerGarmentName == "spider-silk panties" || lowerGarmentName == "spider-silk loincloth") armorDef += 1;
 			//Blacksmith history!
 			if(armorDef > 0 && findPerk(PerkLib.HistorySmith) >= 0) {
 				armorDef = Math.round(armorDef * 1.1);
@@ -305,6 +343,35 @@ use namespace kGAMECLASS;
 		{
 			return _shield;
 		}
+
+		//override public function get undergarment
+		override public function get upperGarmentName():String {
+			return _upperGarment.name;
+		}
+		override public function get upperGarmentPerk():String {
+			return _upperGarment.perk;
+		}
+		override public function get upperGarmentValue():Number {
+			return _upperGarment.value;
+		}
+		public function get upperGarment():Undergarment
+		{
+			return _upperGarment;
+		}
+		
+		override public function get lowerGarmentName():String {
+			return _lowerGarment.name;
+		}
+		override public function get lowerGarmentPerk():String {
+			return _lowerGarment.perk;
+		}
+		override public function get lowerGarmentValue():Number {
+			return _lowerGarment.value;
+		}
+		public function get lowerGarment():Undergarment
+		{
+			return _lowerGarment;
+		}
 		
 		public function get armor():Armor
 		{
@@ -391,20 +458,6 @@ use namespace kGAMECLASS;
 			_jewelry = newJewelry.playerEquip(); //The jewelry can also choose to equip something else - useful for Ceraph's trap armor
 			return oldJewelry;
 		}
-
-		// Hacky workaround shit for ByteArray.readObject
-		/*public function Player()
-		{
-			//Item things
-			itemSlot1 = new ItemSlotClass();
-			itemSlot2 = new ItemSlotClass();
-			itemSlot3 = new ItemSlotClass();
-			itemSlot4 = new ItemSlotClass();
-			itemSlot5 = new ItemSlotClass();
-
-
-			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5];
-		}*/
 		// in case you don't want to call the value.equip
 		public function setJewelryHiddenField(value:Jewelry):void
 		{
@@ -427,6 +480,36 @@ use namespace kGAMECLASS;
 		public function setShieldHiddenField(value:Shield):void
 		{
 			this._shield = value;
+		}
+
+		public function setUndergarment(newUndergarment:Undergarment, typeOverride:int = -1):Undergarment {
+			//Returns the old undergarment, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldUndergarment:Undergarment = UndergarmentLib.NOTHING;
+			if (newUndergarment.type == UndergarmentLib.TYPE_UPPERWEAR || typeOverride == 0) { 
+				oldUndergarment = _upperGarment.playerRemove(); //The undergarment is responsible for removing any bonuses, perks, etc.
+				if (newUndergarment == null) {
+					CoC_Settings.error(short + ".upperGarment is set to null");
+					newUndergarment = UndergarmentLib.NOTHING;
+				}
+				_upperGarment = newUndergarment.playerEquip(); //The undergarment can also choose to equip something else.
+			}
+			else if (newUndergarment.type == UndergarmentLib.TYPE_LOWERWEAR || typeOverride == 1) { 
+				oldUndergarment = _lowerGarment.playerRemove(); //The undergarment is responsible for removing any bonuses, perks, etc.
+				if (newUndergarment == null) {
+					CoC_Settings.error(short + ".lowerGarment is set to null");
+					newUndergarment = UndergarmentLib.NOTHING;
+				}
+				_lowerGarment = newUndergarment.playerEquip(); //The undergarment can also choose to equip something else.
+			}
+			return oldUndergarment;
+		}
+		
+		// in case you don't want to call the value.equip
+		public function setUndergarmentHiddenField(value:Undergarment, type:int):void
+		{
+			if (type == UndergarmentLib.TYPE_UPPERWEAR) this._upperGarment = value;
+			else this._lowerGarment = value;
 		}
 		
 		public function reduceDamage(damage:Number):Number {
@@ -1565,6 +1648,24 @@ use namespace kGAMECLASS;
 			return Appearance.beardDescription(this);
 		}
 
+		public function armorDescript(nakedText:String = "gear"):String
+		{
+			var text:String = "";
+			if (armor != ArmorLib.NOTHING) text += armorName;
+			//Join text.
+			if (upperGarment != UndergarmentLib.NOTHING && lowerGarment != UndergarmentLib.NOTHING && armor != ArmorLib.NOTHING) text += ", "
+			else if (((upperGarment != UndergarmentLib.NOTHING && lowerGarment == UndergarmentLib.NOTHING) || (upperGarment == UndergarmentLib.NOTHING && lowerGarment != UndergarmentLib.NOTHING)) && armor != ArmorLib.NOTHING) text += " and ";
+			//Show upper undergarment first.
+			if (upperGarment != UndergarmentLib.NOTHING) text += upperGarmentName;
+			//Join if you're wearing both.
+			if (upperGarment != UndergarmentLib.NOTHING && lowerGarment != UndergarmentLib.NOTHING && armor != ArmorLib.NOTHING) text += " and ";
+			//Show lower undergarment last.
+			if (lowerGarment != UndergarmentLib.NOTHING) text += lowerGarmentName;
+			//Naked?
+			if (upperGarment == UndergarmentLib.NOTHING && lowerGarment == UndergarmentLib.NOTHING && armor == ArmorLib.NOTHING) text = nakedText;
+			return text;
+		}
+		
 		public function shrinkTits(ignore_hyper_happy:Boolean=false):void
 		{
 			if (flags[kFLAGS.HYPER_HAPPY] && !ignore_hyper_happy)

@@ -70,6 +70,7 @@ package classes.Scenes
 			addButton(6, "Armours", itemSpawnArmoursMenuI)
 			addButton(7, "Accessories", itemSpawnAccessoriesMenuI)
 			addButton(8, "Shields", itemSpawnShieldsMenu);
+			addButton(9, "Undergarments", itemSpawnUndergarmentsMenu);
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -491,7 +492,7 @@ package classes.Scenes
 		}
 		
 		private function itemSpawnShieldsMenu():void {
-			lastMenu = itemSpawnAccessoriesMenuI;
+			lastMenu = itemSpawnShieldsMenu;
 			menu();
 			addItemButton(shields.BUCKLER);
 			addItemButton(shields.DRGNSHL);
@@ -504,10 +505,27 @@ package classes.Scenes
 			addButton(14, "Back", itemSpawnMenu);
 		}
 
+		private function itemSpawnUndergarmentsMenu():void {
+			lastMenu = itemSpawnUndergarmentsMenu;
+			menu();
+			addItemButton(undergarments.C_BRA);
+			addItemButton(undergarments.C_LOIN);
+			addItemButton(undergarments.C_PANTY);
+			addItemButton(undergarments.FURLOIN);
+			addItemButton(undergarments.GARTERS);
+			addItemButton(undergarments.LTX_BRA);
+			addItemButton(undergarments.LTXSHRT);
+			addItemButton(undergarments.LTXTHNG);
+			addItemButton(undergarments.SS_BRA);
+			addItemButton(undergarments.SS_LOIN);
+			addItemButton(undergarments.SSPANTY);
+			
+			addButton(14, "Back", itemSpawnMenu);
+		}
+		
 		private function giveItem(item:*):void {
 			clearOutput();
 			inventory.takeItem(item, lastMenu);
-			doNext(itemSpawnMenu);
 		}
 		
 		private function statChangeMenu():void {

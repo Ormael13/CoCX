@@ -13,7 +13,6 @@ package classes.Scenes.Dungeons
 		public var deepcave:DeepCave = new DeepCave;
 		public var desertcave:DesertCave = new DesertCave;
 		public var heltower:HelDungeon = new HelDungeon;
-		//public var lethicecastle:LethiceCastle = new LethiceCastle;
 		public var cabin:YourCabin = new YourCabin;
 		
 		public var map:DungeonMap = new DungeonMap;

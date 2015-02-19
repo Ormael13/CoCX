@@ -16,6 +16,8 @@
 				"corruption"		: function(thisPtr:*):* {return  thisPtr.player.cor;},
 				"fatigue"			: function(thisPtr:*):* {return  thisPtr.player.fatigue;},
 				"hp"				: function(thisPtr:*):* {return  thisPtr.player.HP;},
+				"hunger"			: function(thisPtr:*):* {return  thisPtr.player.hunger;},
+				"minute"			: function(thisPtr:*):* {return  thisPtr.model.time.minutes;},
 				"hour"				: function(thisPtr:*):* {return  thisPtr.model.time.hours;},
 				"days"				: function(thisPtr:*):* {return  thisPtr.model.time.days;},
 				"tallness"			: function(thisPtr:*):* {return  thisPtr.player.tallness;},

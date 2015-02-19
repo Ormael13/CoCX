@@ -692,6 +692,9 @@
 		protected function get shields():ShieldLib{
 			return kGAMECLASS.shields;
 		}
+		protected function get undergarments():UndergarmentLib{
+			return kGAMECLASS.undergarments;
+		}
 		protected function get inventory():Inventory{
 			return kGAMECLASS.inventory;
 		}

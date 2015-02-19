@@ -83,9 +83,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 25;
 			this.gems = 60 + rand(30);
-			this.drop = new WeightedDrop()
-					.add(consumables.ICICLE_, 1)
-					.add(null, 3);
+			this.drop = NO_DROP;
 			this.special1 = tailWhip;
 			this.special2 = tease;
 			//this.special3 = aerialRave;

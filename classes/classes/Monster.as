@@ -7,6 +7,7 @@
 	import classes.Items.JewelryLib;
 	import classes.Items.UseableLib;
 	import classes.Items.WeaponLib;
+	import classes.Items.UndergarmentLib;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 	import classes.Scenes.NPCs.Kiha;
 	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
@@ -76,6 +77,9 @@
 		}
 		protected function get jewelries():JewelryLib{
 			return game.jewelries;
+		}
+		protected function get undergarments():UndergarmentLib{
+			return game.undergarments;
 		}
 		//For enemies
 		public var bonusHP:Number = 0;

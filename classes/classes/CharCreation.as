@@ -559,6 +559,7 @@ private function genericStyleCustomizeMenu():void {
 	mainView.nameBox.visible = false;
 	mainView.nameBox.maxChars = 16;
 	mainView.nameBox.restrict = null;
+	
 	outputText("Choose a skin complexion, hair color, and set your height before you proceed.\n\n");
 	outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
 	outputText("Skin tone: " + player.skinTone + "\n");
@@ -1157,6 +1158,9 @@ private function startTheGame():void {
 }
 
 public function chooseToPlay():void {
+	if (player.femininity >= 55) player.setUndergarment(undergarments.C_PANTY);
+	else player.setUndergarment(undergarments.C_LOIN);
+	if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
 	clearOutput();
 	outputText("Would you like to play through the 3-day prologue in Ingnam or just skip?");
 	doYesNo(goToIngnam, getBanishedToMarethForReal);

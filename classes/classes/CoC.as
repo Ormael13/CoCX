@@ -140,6 +140,7 @@
 		public var useables:UseableLib = new UseableLib();
 		public var weapons:WeaponLib = new WeaponLib();
 		public var armors:ArmorLib = new ArmorLib();
+		public var undergarments:UndergarmentLib = new UndergarmentLib();
 		public var jewelries:JewelryLib = new JewelryLib();
 		public var shields:ShieldLib = new ShieldLib();
 		public var miscItems:MiscItemLib = new MiscItemLib();
@@ -385,8 +386,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_1.1_snapshot_20150214";
-			version = ver + " (<b>Mod Snapshot</b>)";
+			ver = "0.9.2_mod_1.1_snapshot_20150218";
+			version = ver + " (<b>Almost there...</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

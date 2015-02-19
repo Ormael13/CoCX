@@ -56,10 +56,9 @@
 	if(race != "human")	outputText("You began your journey as a human, but gave that up as you explored the dangers of this realm.  ", false);
 	//Height and race.
 	if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + Math.round(100 * (player.tallness * 2.54) / 100) + " centimetre tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
-	else outputText("You are a " + Math.floor(player.tallness/12) + " foot " + player.tallness%12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
-	if(player.armorName == "comfortable clothes") 
-		outputText("  <b>You are currently wearing " + player.armorName + " and using your " + player.weaponName + " as a weapon.</b>", false);
-	else outputText("  <b>You are currently wearing your " + player.armorName + " and using your " + player.weaponName + " as a weapon.</b>", false);
+	else outputText("You are a " + Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
+	
+	outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a weapon.</b>", false);
 	if (player.jewelryName != "nothing") 
 		outputText("<b> Girding one of your fingers is " + player.jewelryName + ".</b> ")
 	//Face

@@ -3,7 +3,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.WeaponLib;
+	import classes.Items.*;
 	import classes.Scenes.Camp.*;
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Dungeons.*;
@@ -49,7 +49,6 @@
 		public var codex:Codex = new Codex();
 		public var dungeon1:Factory = new Factory();
 		public var dungeon2:DeepCave = new DeepCave();
-		//public var dungeon3:LethiceCastle = new LethiceCastle();
 		public var dungeonS:DesertCave = new DesertCave();
 		public var dungeonH:HelDungeon = new HelDungeon();
 		
@@ -2331,7 +2330,7 @@ private function promptSaveUpdate():void {
 		outputText("\n\nTry restarting the game and check the achievements without loading! You'll see, it's permanent!");
 		flags[kFLAGS.MOD_SAVE_VERSION] = 3;
 		menu();
-		doNext(1);
+		doNext(camp.campMenu);
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 3) {
@@ -2342,7 +2341,7 @@ private function promptSaveUpdate():void {
 		flags[kFLAGS.PHOENIX_WANKED_COUNTER] = 0;
 		if (kGAMECLASS.giacomo > 0) flags[kFLAGS.GIACOMO_MET] = 1;
 		flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
-		eventParser(1);
+		camp.campMenu();
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 4) {
@@ -2354,7 +2353,22 @@ private function promptSaveUpdate():void {
 			doNext(camp.campMenu);
 			return;
 		}
-		eventParser(1);
+		camp.campMenu();
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 5) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+		if (player.armorName == "revealing fur loincloths" || player.armorName == "comfortable underclothes" || player.weaponName == "dragon-shell shield") {
+			clearOutput();
+			outputText("Due to a bit of restructing regarding equipment, any reclassified equipment (eggshell shield and fur loincloth) that was equipped are now unequipped.");
+			if (player.armorName == "comfortable underclothes") player.setArmor(ArmorLib.NOTHING);
+			if (player.armorName == "revealing fur loincloths") inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), promptSaveUpdate);
+			if (player.weaponName == "dragon-shell shield") inventory.takeItem(player.setWeapon(WeaponLib.FISTS), promptSaveUpdate);
+			
+			doNext(camp.campMenu);
+			return;
+		}
+		camp.campMenu();
 		return;
 	}
 }

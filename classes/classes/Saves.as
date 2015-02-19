@@ -579,11 +579,12 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 		saveFile.data.flags[kFLAGS.USE_12_HOURS] = flags[kFLAGS.USE_12_HOURS];
 		saveFile.data.flags[kFLAGS.AUTO_LEVEL] = flags[kFLAGS.AUTO_LEVEL];
+		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
 		//achievements
 		saveFile.data.achievements = [];
 		for (i = 0; i < achievements.length; i++)
 		{
-			// Don't save unset/default flags
+			// Don't save unset/default achievements
 			if (achievements[i] != 0)
 			{
 				saveFile.data.achievements[i] = achievements[i];
@@ -620,6 +621,7 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] != undefined) flags[kFLAGS.WATERSPORTS_ENABLED] = saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED];
 			if (saveFile.data.flags[kFLAGS.USE_12_HOURS] != undefined) flags[kFLAGS.USE_12_HOURS] = saveFile.data.flags[kFLAGS.USE_12_HOURS];
 			if (saveFile.data.flags[kFLAGS.AUTO_LEVEL] != undefined) flags[kFLAGS.AUTO_LEVEL] = saveFile.data.flags[kFLAGS.AUTO_LEVEL];
+			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
 		}
 		//achievements, will check if achievement exists.
 		if (saveFile.data.achievements) {
@@ -711,6 +713,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.weaponId = player.weapon.id;
 		saveFile.data.jewelryId = player.jewelry.id;
 		saveFile.data.shieldId = player.shield.id;
+		saveFile.data.upperGarmentId = player.upperGarment.id;
+		saveFile.data.lowerGarmentId = player.lowerGarment.id;
 		saveFile.data.armorName = player.modArmorName;
 		
 		//saveFile.data.weaponName = player.weaponName;// uncomment for backward compatibility
@@ -1351,6 +1355,30 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName){
 					player.setJewelryHiddenField(itype as Jewelry || JewelryLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.upperGarmentId){
+			player.setUndergarmentHiddenField((ItemType.lookupItem(saveFile.data.upperGarmentId) as Undergarment) || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
+		} else {
+			player.setUndergarment(UndergarmentLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is Undergarment && (itype as Undergarment).name == saveFile.data.upperGarmentName){
+					player.setUndergarmentHiddenField(itype as Undergarment || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.lowerGarmentId){
+			player.setUndergarmentHiddenField((ItemType.lookupItem(saveFile.data.lowerGarmentId) as Undergarment) || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
+		} else {
+			player.setUndergarment(UndergarmentLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is Undergarment && (itype as Undergarment).name == saveFile.data.lowerGarmentName){
+					player.setUndergarmentHiddenField(itype as Undergarment || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
 					found = true;
 					break;
 				}

@@ -12,6 +12,7 @@ package classes.Items
 		public static const DEFAULT_VALUE:Number = 6;
 
 		public static const COMFORTABLE_UNDERCLOTHES:Armor = new ComfortableUnderclothes();
+		public static const NOTHING:Armor = new Nothing();
 
 		public const ADVCLTH:Armor = new Armor("AdvClth","G. Clothes","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,200,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat! \n\nType: Clothing \nDefense: 2 \nBase value: 200","Light");
 		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,1200,"A long ballroom dress patterned with sequins.  Perfect for important occassions. \n\nType: Clothing \nDefense: 2 \nBase value: 1,200","Medium");
@@ -27,7 +28,7 @@ package classes.Items
 		public const DBARMOR:Armor = new PureMaraeArmor();
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,150,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings. \n\nType: Medium armor \nDefense: 8 \nBase value: 150","Medium");
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,250,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this. \n\nType: Heavy armor \nDefense: 21 \nBase value: 250");
-		public const FURLOIN:Armor = new FurLoincloth(); //Re-implemented
+		//public const FURLOIN:Armor = new FurLoincloth(); //Moved to undergarments.
 		public const GELARMR:Armor = new Armor("GelArmr","GelArmr","glistening gel-armor plates","a suit of gel armor",10,150,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant. \n\nType: Heavy armor \nDefense: 10 \nBase value: 150");
 		public const GOOARMR:GooArmor = new GooArmor();
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
