@@ -907,6 +907,7 @@ public function stash():Boolean {
 	clearOutput();
 	spriteSelect(-1);
 	menu();
+	
 	if (flags[kFLAGS.ANEMONE_KID] > 0) {
 		anemoneScene.anemoneBarrelDescription();
 		if (model.time.hours >= 6) addButton(4, "Anemone", anemoneScene.approachAnemoneBarrel);
@@ -945,7 +946,14 @@ public function stash():Boolean {
 		else outputText("next to your bedroll.");	
 		addButton(7, "J.Box Put", inventory.pickItemToPlaceInJewelryBox);
 		if (inventory.jewelryBoxDescription()) addButton(8, "J.Box Take", inventory.pickItemToTakeFromJewelryBox);
-		outputText(".\n\n", false);
+		outputText("\n\n", false);
+	}
+	//Dresser
+	if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0) {
+		outputText("You have a dresser inside your cabin to store nine different types of undergarments.");
+		addButton(10, "Dresser Put", inventory.pickItemToPlaceInDresser);
+		if (inventory.dresserDescription()) addButton(11, "Dresser Take", inventory.pickItemToTakeFromDresser);
+		outputText("\n\n");
 	}
 	addButton(14, "Back", camp.campMenu);
 	return true;

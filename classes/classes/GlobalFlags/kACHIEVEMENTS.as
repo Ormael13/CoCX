@@ -44,10 +44,10 @@ package classes.GlobalFlags
 		public static const LEVEL_APPRENTICE:int				= 032; //Level 10
 		public static const LEVEL_JOURNEYMAN:int				= 033; //Level 15
 		public static const LEVEL_EXPERT:int					= 034; //Level 20
-		public static const LEVEL_MASTER:int					= 035; //Level 25
-		public static const LEVEL_GRANDMASTER:int				= 036; //Level 30
-		public static const LEVEL_ILLUSTRIOUS:int				= 037; //Level 40
-		public static const LEVEL_OVERLORD:int					= 038; //Level 50
+		public static const LEVEL_MASTER:int					= 035; //Level 30
+		public static const LEVEL_GRANDMASTER:int				= 036; //Level 40
+		public static const LEVEL_ILLUSTRIOUS:int				= 037; //Level 50
+		public static const LEVEL_OVERLORD:int					= 038; //Level 60
 		public static const LEVEL_ARE_YOU_A_GOD:int				= 039; //Level 100 (shadow achievement)
 		
 		//Population Achievements (040-049)

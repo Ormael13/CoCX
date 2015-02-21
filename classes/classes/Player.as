@@ -229,6 +229,8 @@ use namespace kGAMECLASS;
 		//override public function get armors
 		override public function get armorName():String {
 			if (_modArmorName.length > 0) return modArmorName;
+			else if (_armor.name == "nothing" && lowerGarmentName != "nothing") return lowerGarmentName;
+			else if (_armor.name == "nothing" && lowerGarmentName == "nothing") return "gear";
 			return _armor.name;
 		}
 		override public function get armorDef():Number {

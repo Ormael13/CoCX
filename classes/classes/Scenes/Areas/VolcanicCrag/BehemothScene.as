@@ -275,7 +275,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		}
 		
 		private function analCatchBehemoth():void {
-			var isVirgin:Boolean = false
+			var isVirgin:Boolean = (player.looseness(false) == 0);
 			clearOutput();
 			if (player.HP <= 0 || player.lust >= player.maxLust()) {
 				outputText("You have no choice but to accept the fact that the behemoth is going to penetrate you anally. He looks at you with a grin and says, \"<i>Go on, strip for me. I want to see your wonderful butt, " + player.mf("dude", "chick") + ".</i>\"\n\n");

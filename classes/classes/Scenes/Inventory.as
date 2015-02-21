@@ -39,7 +39,7 @@ package classes.Scenes
 		}
 		
 		public function showStash():Boolean {
-			return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0;
+			return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0 || player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0 || flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0;
 		}
 		
 		private function itemStorageDirectGet():Array { return itemStorage; }
@@ -64,11 +64,11 @@ package classes.Scenes
 			hideUpDown();
 			clearOutput();
 			outputText("<b><u>Equipment:</u></b>\n");
-			outputText("<b>Weapon:</b> " + player.weaponName + " (Attack: " + player.weaponAttack + ")\n");
-			outputText("<b>Shield:</b> " + player.shieldName + " (Block Rating: " + player.shieldBlock + ")\n");
-			outputText("<b>Armour:</b> " + player.armorName + " (Defense: " + player.armorDef + ")\n");
-			outputText("<b>Upper underwear:</b> " + player.upperGarmentName + "\n");
-			outputText("<b>Lower underwear:</b> " + player.lowerGarmentName + "\n");
+			outputText("<b>Weapon:</b> " + player.weapon.name + " (Attack: " + player.weaponAttack + ")\n");
+			outputText("<b>Shield:</b> " + player.shield.name + " (Block Rating: " + player.shieldBlock + ")\n");
+			outputText("<b>Armour:</b> " + player.armor.name + " (Defense: " + player.armorDef + ")\n");
+			outputText("<b>Upper underwear:</b> " + player.upperGarment.name + "\n");
+			outputText("<b>Lower underwear:</b> " + player.lowerGarment.name + "\n");
 			outputText("<b>Accessory:</b> " + player.jewelryName + "\n");
 			if (player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n");
 			for (x = 0; x < player.keyItems.length; x++) outputText(player.keyItems[x].keyName + "\n");
@@ -351,7 +351,17 @@ package classes.Scenes
 			}
 			return false;
 		}
-
+		
+		public function dresserDescription():Boolean {
+			if (itemAnyInStorage(gearStorage, 27, 36)) {
+				var itemList:Array = [];
+				for (var x:int = 27; x < 36; x++)
+					if (gearStorage[x].quantity > 0) itemList[itemList.length] = gearStorage[x].itype.longName;
+				outputText("  It currently holds " + formatStringArray(itemList) + ".");
+				return true;
+			}
+			return false;
+		}
 		
 		private function itemAnyInStorage(storage:Array, startSlot:int, endSlot:int):Boolean {
 			for (var x:int = startSlot; x < endSlot; x++) {
@@ -387,7 +397,6 @@ package classes.Scenes
 		public function manageEquipment():void {
 			outputText("Which would you like to unequip?", true)
 			menu();
-			menuLoc = 37;
 			if (player.weaponName != "fists")
 			{
 				addButton(0, "Weapon", unequipWeapon);
@@ -458,7 +467,12 @@ package classes.Scenes
 		
 		public function pickItemToTakeFromJewelryBox():void {
 			callNext = pickItemToTakeFromJewelryBox;
-			pickItemToTakeFromStorage(gearStorage, 18, 27, "rack");
+			pickItemToTakeFromStorage(gearStorage, 18, 27, "box");
+		}
+		
+		public function pickItemToTakeFromDresser():void {
+			callNext = pickItemToTakeFromDresser;
+			pickItemToTakeFromStorage(gearStorage, 27, 36, "dresser");
 		}
 		
 		private function pickItemToTakeFromStorage(storage:Array, startSlot:int, endSlot:int, text:String):void {
@@ -492,6 +506,8 @@ package classes.Scenes
 		
 		public function pickItemToPlaceInJewelryBox():void { pickItemToPlaceInStorage(placeInJewelryBox, jewelryAcceptable, "jewelry box", true); }
 		
+		public function pickItemToPlaceInDresser():void { pickItemToPlaceInStorage(placeInDresser, undergarmentAcceptable, "dresser", true); }
+		
 		private function allAcceptable(itype:ItemType):Boolean { return true; }
 		
 		private function armorAcceptable(itype:ItemType):Boolean { return itype is Armor; }
@@ -499,6 +515,8 @@ package classes.Scenes
 		private function weaponAcceptable(itype:ItemType):Boolean { return itype is Weapon; }
 		
 		private function jewelryAcceptable(itype:ItemType):Boolean { return itype is Jewelry; }
+		
+		private function undergarmentAcceptable(itype:ItemType):Boolean { return itype is Undergarment; }
 		
 		private function pickItemToPlaceInStorage(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean):void {
 			clearOutput(); //Selects an item to place in a gear slot. Rewritten so that it no longer needs to use numbered events
@@ -534,6 +552,11 @@ package classes.Scenes
 		private function placeInJewelryBox(slotNum:int):void {
 			placeIn(gearStorage, 18, 27, slotNum);
 			doNext(pickItemToPlaceInJewelryBox);
+		}
+		
+		private function placeInDresser(slotNum:int):void {
+			placeIn(gearStorage, 27, 36, slotNum);
+			doNext(pickItemToPlaceInDresser);
 		}
 		
 		private function placeIn(storage:Array, startSlot:int, endSlot:int, slotNum:int):void {
@@ -615,7 +638,7 @@ package classes.Scenes
 			}
 			//Rebuild a new one!
 			var newSlot:*;
-			while (gearStorage.length < 27) {
+			while (gearStorage.length < 36) {
 				newSlot = new ItemSlotClass();
 				gearStorage.push(newSlot);
 			}

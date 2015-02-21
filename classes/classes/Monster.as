@@ -653,7 +653,7 @@
 			}
 			if (damage <= 0) {
 				//Due to toughness or amor...
-				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);
+				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + (player.armor != ArmorLib.NOTHING ? player.armor.name : player.armorName) + ".", false);
 				else {
 					if (plural) outputText("You deflect and block every " + weaponVerb + " " + a + short + " throw at you. ", false);
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you. ", false);

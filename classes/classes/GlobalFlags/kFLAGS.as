@@ -2190,8 +2190,8 @@ public static const CAMP_WALL_SKULLS:int                                        
 public static const BEHEMOTH_CHILD_1_BIRTH_DAY:int                                  = 2181;
 public static const BEHEMOTH_CHILD_2_BIRTH_DAY:int                                  = 2182;
 public static const BEHEMOTH_CHILD_3_BIRTH_DAY:int                                  = 2183;
-public static const UNKNOWN_FLAG_NUMBER_02184:int                                   = 2184;
-public static const UNKNOWN_FLAG_NUMBER_02185:int                                   = 2185;
+public static const JOJO_SEX_COUNTER:int                                            = 2184;
+public static const JOJO_ANAL_XP:int                                                = 2185;
 public static const UNKNOWN_FLAG_NUMBER_02186:int                                   = 2186;
 public static const UNKNOWN_FLAG_NUMBER_02187:int                                   = 2187;
 public static const UNKNOWN_FLAG_NUMBER_02188:int                                   = 2188;

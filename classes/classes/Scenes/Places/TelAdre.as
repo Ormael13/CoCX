@@ -1883,7 +1883,7 @@ private function carpentryShopBuyNailsYes():void {
 
 //Buy wood
 public function carpentryShopBuyWood():void {
-	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 20 gems per wood plank.</i>\" \n\n", true);
+	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 10 gems per wood plank.</i>\" \n\n", true);
 	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100", false);
 	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
 	addButton(1, "Buy 20", carpentryShopBuyWoodAmount, 20);
@@ -1895,22 +1895,22 @@ public function carpentryShopBuyWood():void {
 
 private function carpentryShopBuyWoodAmount(amount:int):void {
 	wood = amount;
-	outputText("You ask him for " + amount + " wood planks. He replies \"<i>That'll be " + (amount * 20) + " gems, please.</i>\" \n\nDo you buy the wood?", true);
+	outputText("You ask him for " + amount + " wood planks. He replies \"<i>That'll be " + (amount * 10) + " gems, please.</i>\" \n\nDo you buy the wood?", true);
 	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
 }
 
 private function carpentryShopBuyWoodYes():void {
-	if (player.gems >= (wood * 20))
+	if (player.gems >= (wood * 10))
 	{
-		player.gems -= (wood * 20);
+		player.gems -= (wood * 10);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] += wood;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
-		outputText("You hand over " + (wood * 20) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n", true);
+		outputText("You hand over " + (wood * 10) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n", true);
 		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 100)
 		{
 			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n", false);
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 100) * 20);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 100) * 10);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 100);
 		}
 		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100");

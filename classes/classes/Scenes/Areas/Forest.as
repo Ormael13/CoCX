@@ -230,7 +230,7 @@ package classes.Scenes.Areas
 				doNext(camp.returnToCampUseOneHour);
 				outputText("", true);
 				
-				if (kGAMECLASS.monk == 0) 
+				if (kGAMECLASS.monk <= 0) 
 				{	
 					if (player.cor < 25)
 					{

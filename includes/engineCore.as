@@ -415,19 +415,19 @@ private function attributeMenu():void {
 	else outputText("" + Math.floor(player.inte) + " (Maximum)\n", false)
 
 	choices("Add Strength", addStr, "Add Tough", addTou, "Add Speed", addSpe, "Add Intel", addInt, "Reset", resetAttributes, "Sub Strength", subStr, "Sub Tough", subTou, "Sub Speed", subSpe, "Sub Intel", subInt, "Done", finishAttributes); 
-	if ((player.str + player.tempStr) >= 100 || player.statPoints <= 0)
+	if ((player.str + player.tempStr) >= player.getMaxStats("str") || player.statPoints <= 0)
 	{
 		removeButton(0);
 	}
-	if ((player.tou + player.tempTou) >= 100 || player.statPoints <= 0)
+	if ((player.tou + player.tempTou) >= player.getMaxStats("tou") || player.statPoints <= 0)
 	{
 		removeButton(1);
 	}
-	if ((player.spe + player.tempSpe) >= 100 || player.statPoints <= 0)
+	if ((player.spe + player.tempSpe) >= player.getMaxStats("spe") || player.statPoints <= 0)
 	{
 		removeButton(2);
 	}
-	if ((player.inte + player.tempInt) >= 100 || player.statPoints <= 0)
+	if ((player.inte + player.tempInt) >= player.getMaxStats("int") || player.statPoints <= 0)
 	{
 		removeButton(3);
 	}

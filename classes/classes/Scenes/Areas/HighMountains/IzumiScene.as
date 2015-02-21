@@ -396,7 +396,7 @@ package classes.Scenes.Areas.HighMountains
 				player.lib -= player.statusAffect(affectIndex).value4;
 				
 				if (player.sens > 100) player.sens = 100;
-				if (player.spe > 100) player.spe = 100;
+				if (player.spe > player.getMaxStats("spe")) player.spe = player.getMaxStats("spe");
 				if (player.lib <= 0) player.lib = 1;
 				
 				showStatUp('spe');
