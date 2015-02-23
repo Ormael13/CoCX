@@ -408,7 +408,7 @@ private function beAPimpMarbleLovesIt():void {
 
 	//Pimp -> PC is addicted (B2)
 	if(player.findPerk(PerkLib.MarblesMilk) >= 0) {
-		outputText("Marble blinks before saying \"<i>" + player.short + ", try again, I know you're better then that.</i>\"  You blink in response and wonder yourself what possessed you to say that.\n\n", false);
+		outputText("Marble blinks before saying \"<i>" + player.short + ", try again, I know you're better than that.</i>\"  You blink in response and wonder yourself what possessed you to say that.\n\n", false);
 		//Player chooses stay silent (A1) or explain (C1)
 		simpleChoices("StaySilent",marbleIsPissyAndYourTooDumbToTalk,"Explain",LucyYouGotSomeSplainingToDo,"",0,"",0,"",0);
 	}

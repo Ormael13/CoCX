@@ -472,6 +472,7 @@
 			//Cocknum 99 to default to boring descriptions!
 			if (i_cockIndex != 99) {
 				if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.HORSE) return horseDescript(i_cockIndex);
+				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.BEE) return cockNoun(CockTypesEnum.BEE);
 				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.DOG) return dogDescript(i_cockIndex);
 				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.FOX) return foxDescript(i_cockIndex);
 				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.TENTACLE) return tentacleDescript(i_cockIndex);
@@ -542,6 +543,16 @@
 					"shaft",
 					"shaft",
 					"shaft"];
+				description += randomChoice(options);
+			}
+			else if (cockType == CockTypesEnum.BEE) {
+				options = ["bee prick",
+					"bee prick",
+					"bee prick",
+					"bee prick",
+					"insectoid cock",
+					"insectoid cock",
+					"furred monster"];
 				description += randomChoice(options);
 			}
 			else if (cockType == CockTypesEnum.DOG) {
@@ -1042,6 +1053,16 @@
 					"shaft"];
 				description += randomChoice(options);
 			}
+			else if (cockType == CockTypesEnum.BEE) {
+				options = ["bee prick",
+					"bee prick",
+					"bee prick",
+					"bee prick",
+					"insectoid cock",
+					"insectoid cock",
+					"furred monster"];
+				description += randomChoice(options);
+			}
 			else if (cockType == CockTypesEnum.DOG) {
 				options = ["doggie dong",
 					"canine shaft",
@@ -1166,6 +1187,7 @@
 				return "<b>ERROR: NO WANGS DETECTED for cockMultiLightDesc()</b>";
 			}
 			if (i_creature.horseCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.HORSE);
+			else if (i_creature.cocks[0] == CockTypesEnum.BEE) description += cockNoun(CockTypesEnum.BEE); //This works because you're only allowed a single bee cock
 			else if (i_creature.dogCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DOG);
 			else if (i_creature.demonCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DEMON);
 			else if (i_creature.tentacleCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.TENTACLE);

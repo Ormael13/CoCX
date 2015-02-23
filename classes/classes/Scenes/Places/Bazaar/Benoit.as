@@ -750,7 +750,7 @@ private function talkToBenoit():void {
 			else
 			{
 				outputText("\n\nShe smiles shyly at you. “<i>Listen to me, ow you say, riveting on.  You I am guessing do not see what ze big fuss is- you ‘umans can chop and change whenever you feel like, so to speak.  Must be nice.</i>”");
-				outputText("\n\nYou point out that that your mutability is not always an advantage- it can be used against you, and this land is full of types who would be only too keen to do so.");
+				outputText("\n\nYou point out that your mutability is not always an advantage- it can be used against you, and this land is full of types who would be only too keen to do so.");
 				outputText("\n\nBenoite nods thoughtfully. “<i>I never sought about it like zat.  Ze demons just love slaves zey can change wizzer a few potions, don’t zey? You are right [name], I will count my blessings in ze future.</i>”");
 			}
 		}

@@ -128,13 +128,7 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 10:
-			//Masturbate
-			if (player.findStatusAffect(StatusAffects.Dysfunction) >= 0) {
-				outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.", true);
-				doNext(1);
-				return;
-			}
-			masturbateGo();
+			masturbateGo(); //Masturbate
 			return;
 
 

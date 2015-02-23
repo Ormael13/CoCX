@@ -19,9 +19,9 @@ package classes.Items.Consumables
 			return true;
 		}
 		
-		override public function hasSubMenu():Boolean { return true; } //Only GroPlus and Reducto use this.
+//		override public function hasSubMenu():Boolean { return true; } //Only GroPlus and Reducto use this.
 		
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			var gpBalls:Function	= (game.player.balls > 0 ? growPlusBalls : null);
 			var gpBreasts:Function	= (game.player.breastRows.length > 0 ? growPlusBreasts : null);
 			var gpClit:Function		= (game.player.vaginas.length > 0 ? growPlusClit : null);
@@ -30,6 +30,7 @@ package classes.Items.Consumables
 			clearOutput();
 			outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?  ");
 			game.choices("Balls", gpBalls, "Breasts", gpBreasts, "Clit", gpClit, "Cock", gpCock, "Nipples", gpNipples, "", null, "", null, "", null, "", null, "Nevermind", growPlusCancel);
+			return(true);
 		}
 		
 		private function growPlusBalls():void {

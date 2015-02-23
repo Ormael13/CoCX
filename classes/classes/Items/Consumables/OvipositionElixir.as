@@ -31,22 +31,22 @@ package classes.Items.Consumables
 		 4 - white - breast growth.  If lactating increases lactation.
 		 5 - rubbery black
 		 */
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			game.player.slimeFeed();
 			outputText("You pop the cork and gulp down the thick greenish fluid.  The taste is unusual and unlike anything you've tasted before.");
 			if (game.player.pregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) {
 				outputText("\n\nFor a moment you feel even more bloated than you already are.  That feeling is soon replaced by a dull throbbing pain.  It seems that with Valeria's goo filling your womb the ovielixir is unable to work its magic on you.");
-				return;
+				return(false);
 			}
 			if (game.player.pregnancyType == PregnancyStore.PREGNANCY_WORM_STUFFED) {
 				outputText("\n\nFor a moment you feel even more bloated than you already are.  That feeling is soon replaced by a dull throbbing pain.  It seems that with the worms filling your womb the ovielixir is unable to work its magic on you.");
-				return;
+				return(false);
 			}
 			if (game.player.pregnancyIncubation == 0) { //If the player is not pregnant, get preggers with eggs!
 				outputText("\n\nThe elixir has an immediate effect on your belly, causing it to swell out slightly as if pregnant.  You guess you'll be laying eggs sometime soon!");
 				game.player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 				game.player.createStatusAffect(StatusAffects.Eggs, Utils.rand(6), 0, Utils.rand(3) + 5, 0);
-				return;
+				return(false);
 			}
 			var changeOccurred:Boolean = false;
 			if (game.player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //If player already has eggs, chance of size increase!
@@ -75,6 +75,7 @@ package classes.Items.Consumables
 				game.player.knockUpForce(game.player.pregnancyType, newIncubation);
 				trace("Pregger Count New total:" + game.player.pregnancyIncubation);
 			}
+			return(false);
 		}
 	}
 }

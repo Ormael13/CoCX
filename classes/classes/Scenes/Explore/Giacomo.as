@@ -524,6 +524,11 @@ package classes.Scenes.Explore {
 		private function pitchDualStimulationBelt():void {
 			spriteSelect(23);
 			clearOutput();
+			if (player.hasKeyItem("Dual Belt") >= 0) {
+				outputText("<b>You already own a dual belt!</b>");
+				doNext(eroticaMenu);
+				return;
+			}
 			outputText("Giacomo smiles widely as you look through his wares seeing a strange looking device sitting there.  \"<i>Ahh, I see you have spotted our latest piece of equipment.  Members of the third gender had a hard time finding enough pleasure to suit their special needs.  With this little device, you will never have to worry about satisfying your needs ever again.</i>\"  He grins widely at you.  \"<i>The deluxe dual belt will have you shaking in the throes of orgasm hours after a simple stim belt would leave you dry.  You will cum in this thing, and it will leave you running back to it anytime you need sexual gratification.  Everything else may as well be sandpaper on your skin.  Simply flick this switch here on the side to start it up and send yourself to heaven.  And you can have it for the low price of 50 gems.</i>\"  He smiles again at you.  \"<i>So, shall I hand it over to you?</i>\" he asks.");
 			doYesNo(buyDualStimulationBelt, eroticaMenu);
 		}
@@ -531,10 +536,7 @@ package classes.Scenes.Explore {
 		private function buyDualStimulationBelt():void {
 			spriteSelect(23);
 			clearOutput();
-			if (player.hasKeyItem("Dual Belt") >= 0) {
-				outputText("<b>You already own a dual belt!</b>");
-			}
-			else if (player.gems < 50) {
+			if (player.gems < 50) {
 				outputText("You do not have enough gems to purchase this item.");
 			}
 			else {
@@ -813,11 +815,10 @@ package classes.Scenes.Explore {
 					//[Maintain first encounter mechanics. New variable to keep track of subsequent encounters within a specific time period]
 				}
 			}
-			inventory.takeItem(consumables.CERUL_P, camp.campMenu);
 			outputText("\n", false);
 			player.orgasm();
 			dynStats("str", rand(2),"tou", rand(2), "spe", rand(2), "int", rand(2), "cor", 1);
-			doNext(camp.campMenu);
+			inventory.takeItem(consumables.CERUL_P, camp.campMenu);
 		}
 	}
 }

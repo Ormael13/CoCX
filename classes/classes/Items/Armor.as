@@ -40,6 +40,7 @@ package classes.Items
 		
 		public function playerRemove():Armor { //This item is being removed by the player. Remove any perks, etc. - This function should only handle mechanics, not text output
 			while (game.player.findPerk(PerkLib.BulgeArmor) >= 0) game.player.removePerk(PerkLib.BulgeArmor); //TODO remove this Exgartuan hack
+			if (game.player.modArmorName.length > 0) game.player.modArmorName = "";
 			return this;
 		}
 		

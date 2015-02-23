@@ -3262,7 +3262,9 @@ public function tease(justText:Boolean = false):void {
 			break;
 		//6 pussy flash
 		case 6:
-			if(player.findPerk(PerkLib.BimboBrains) >= 0) outputText("You coyly open your " + player.armorName + " and giggle, \"<i>Is this, like, what you wanted to see?</i>\"  ", false);
+			if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+				outputText("You coyly open your " + player.armorName + " and giggle, \"<i>Is this, like, what you wanted to see?</i>\"  ", false);
+			}
 			else {
 				outputText("You coyly open your " + player.armorName + " and purr, \"<i>Does the thought of a hot, ", false);
 				if(futa) outputText("futanari ", false);

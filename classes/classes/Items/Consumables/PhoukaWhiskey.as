@@ -35,7 +35,7 @@ package classes.Items.Consumables
             return true; //Zero and up will return true
         }
 		
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			game.player.slimeFeed();
 			switch (phoukaWhiskeyDrink(game.player)) {
 				case 0: //Player isn't pregnant
@@ -53,6 +53,7 @@ package classes.Items.Consumables
 			}
 			game.flags[kFLAGS.PREGNANCY_CORRUPTION]++; //Faerie or phouka babies become more corrupted, no effect if the player is not pregnant or on other types of babies
 			phoukaWhiskeyAddStatus(game.player);
+			return(false);
         }
         
 		public function phoukaWhiskeyAcceptable(player:Player):int

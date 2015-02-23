@@ -4,10 +4,6 @@
 //Masturbate Menu
 public function masturbateMenu():void {
 	menu();
-	var button:int = 0;
-	if(fappingItems(false)) {
-		addButton(13,"Items",fappingItems);
-	}
 	if (flags[kFLAGS.SFW_MODE] >= 1) {
 		meditate();
 		return;
@@ -17,6 +13,17 @@ public function masturbateMenu():void {
 		meditate();
 		return;
 	}	
+	if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !fappingItems(false)) {
+		clearOutput();
+		outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
+		addButton(0, "Next", camp.campMenu);
+		if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY)) addButton(1, "Use Honey", fapWithHoney);
+		return;
+	}
+	var button:int = 0;
+	if(fappingItems(false)) {
+		addButton(13,"Items",fappingItems);
+	}
 	//FAP BUTTON GOAADFADHAKDADK
 	if((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
 		if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
@@ -819,9 +826,14 @@ public function genderlessMasturbate():void {
 //Non-shitty masturbation
 public function masturbateGo():void {
 	clearOutput();
-	if(inDungeon && dungeonLoc != -10) {
-		outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.", false);
-		doNext(1);
+	if (player.findStatusAffect(StatusAffects.Dysfunction) >= 0) {
+		outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.");
+		doNext(camp.campMenu);
+		return;
+	}
+	if (inDungeon && dungeonLoc != -10) {
+		outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.");
+		doNext(camp.campMenu);
 		return;		
 	}
 	if(player.isTaur()) {
@@ -859,6 +871,11 @@ public function masturbateGo():void {
 	titForeplay();
 	//Touch our various junks
 	if(player.cocks.length > 0) {
+		if (player.cocks[0].cockType == CockTypesEnum.BEE && (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY))) {
+			if (player.hasItem(consumables.BEEHONY)) player.consumeItem(consumables.BEEHONY, 1);
+			else if (player.hasItem(consumables.PURHONY)) player.consumeItem(consumables.PURHONY, 1);
+			outputText("You take out a vial of honey and smear it all over your bee cock. It feels great and the pain quickly recedes. ");
+		}
 		if(player.cocks.length == 1) {
 			outputText("You stroke your " + cockDescript(0), false);
 			if(player.lib < 45) outputText(" eagerly, quickly bringing yourself to a full, throbbing state.  ", false);
@@ -1627,7 +1644,7 @@ public function multiTitFuck():Boolean
 			if(holeTotal*2 >= fittableCocks) outputText("You giggle with glee as you realize that you will be able to jam every single one of your " + multiCockDescriptLight() + " into your abused nipples, thanks to double-penetration! ", false);
 			else outputText("With a flash of irritation, you realize that even if you stick two cocks in each hole, you still won't be able to fit all " + num2Text(player.cocks.length) + " of your dicks into your abused tits. Deciding to make the best of it, you prepare to stuff in as many as you can. ", false);
 		} 
-		else outputText("Accepting that you cant do anything about it, you start pushing. ", false);
+		else outputText("Accepting that you can't do anything about it, you start pushing. ", false);
 	}
 	//How wet/milky is this procedure?
 	if(player.averageLactation() == 0)
@@ -1859,7 +1876,7 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 			if(player.cumQ() < 5) outputText("A few thick spurts of cum burst from your cocks, splattering you liberally.  ", false);
 			if(player.cumQ() >= 5 && player.cumQ() < 7) outputText("The orgasm drags on and on, spurt after spurt of jism coating you from each cock.  ", false);
 			if(player.cumQ() >=7 && player.cumQ() < 10) outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down as the orgasms from each of your members begin to overlap.  Your nearly black out in pleasure.  ", false);
-			if(player.cumQ() >=10) outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  You mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ", false);
+			if(player.cumQ() >=10) outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ", false);
 		}
 	}
 	//Vaginal CUMMING

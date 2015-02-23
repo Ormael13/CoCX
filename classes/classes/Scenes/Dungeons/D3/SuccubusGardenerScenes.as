@@ -264,7 +264,7 @@
 			{
 				if (player.wetness() <= 2) outputText(" moistening");
 				else outputText(" soaked");
-				outputText(" crease, and it's all you can not to cry out and thrust back against her.");
+				outputText(" crease, and it's all you can do not to cry out and thrust back against her.");
 			}
 			
 			outputText("\n\nThe succubus idly toys with your [vagina], sometimes rubbing her thumb");
@@ -428,7 +428,7 @@
 			}
 			else outputText(" your stubby, new tail");
 			outputText(" wagging.");
-			if (player.tailType != 2) outputText(" Never mind that it gets longer and fuzzier with every gulp or that that your");
+			if (player.tailType != 2) outputText(" Never mind that it gets longer and fuzzier with every gulp or that your");
 			else outputText(" Never mind that your");
 			outputText(" tongue is swelling up, wide, flat, and perfect for panting, licking, and lapping up a drink.");
 			player.tailType = 2;

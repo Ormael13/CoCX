@@ -5,6 +5,7 @@ package classes.Items.Consumables
 {
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
+	import classes.CockTypesEnum;
 	import classes.PerkLib;
 	import classes.Player;
 	import classes.internals.Utils;
@@ -19,9 +20,9 @@ package classes.Items.Consumables
 			return true;
 		}
 		
-		override public function hasSubMenu():Boolean { return true; } //Only GroPlus and Reducto use this.
+//		override public function hasSubMenu():Boolean { return true; } //Only GroPlus and Reducto use this.
 		
-		override public function useItem():void {
+		override public function useItem():Boolean {
 			var rdtBalls:Function	= (game.player.balls > 0 && game.player.ballSize > 1 ? reductoBalls : null);
 			var rdtBreasts:Function	= (game.player.breastRows.length > 0 && game.player.biggestTitSize() > 0 ? reductoBreasts : null);
 			var rdtButt:Function	= (game.player.buttRating > 1 ? reductoButt : null);
@@ -34,7 +35,7 @@ package classes.Items.Consumables
 			outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?");
 			game.choices("Balls", rdtBalls, "Breasts", rdtBreasts, "Butt", rdtButt, "Clit", rdtClit, "Cock", rdtCock,
 				"Hips", rdtHips, "Nipples", rdtNipples, "Horns", rdtHorns, "", null, "Nevermind", reductoCancel);
-				
+			return(true);
 		}
 		
 		private function reductoBalls():void {
@@ -93,18 +94,23 @@ package classes.Items.Consumables
 		
 		private function reductoCock():void {
 			clearOutput();
-			outputText("You smear the repulsive smelling paste over your " + game.player.multiCockDescriptLight() + ".  It immediately begins to grow warm, almost uncomfortably so, as your " + game.player.multiCockDescriptLight() + " begins to shrink.\n\n");
-			if (game.player.cocks.length == 1) {
-				outputText("Your " + game.player.cockDescript(0) + " twitches as it shrinks, disappearing steadily into your " + (game.player.hasSheath() ? "sheath" : "crotch") + " until it has lost about a third of its old size.");
-				game.player.cocks[0].cockLength *= 2 / 3;
-				game.player.cocks[0].cockThickness *= 2 / 3;
+			if (game.player.cocks[0].cockType == CockTypesEnum.BEE) {
+				outputText("The gel produces an odd effect when you rub it into your " + game.player.cockDescript(0) + ".  It actually seems to calm the need that usually fills you.  In fact, as your " + game.player.cockDescript(0) + " shrinks, its skin tone changes to be more in line with yours and the bee hair that covered it falls out.  <b>You now have a human cock!</b>");
+				game.player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			}
-			//MULTI
 			else {
-				outputText("Your " + game.player.multiCockDescriptLight() + " twitch and shrink, each member steadily disappearing into your " + (game.player.hasSheath() ? "sheath" : "crotch") + " until they've lost about a third of their old size.");
-				for (var i:int = 0; i < game.player.cocks.length; i++) {
-					game.player.cocks[i].cockLength		*= 2 / 3;
-					game.player.cocks[i].cockThickness	*= 2 / 3;
+				outputText("You smear the repulsive smelling paste over your " + game.player.multiCockDescriptLight() + ".  It immediately begins to grow warm, almost uncomfortably so, as your " + game.player.multiCockDescriptLight() + " begins to shrink.\n\n");
+				if (game.player.cocks.length == 1) {
+					outputText("Your " + game.player.cockDescript(0) + " twitches as it shrinks, disappearing steadily into your " + (game.player.hasSheath() ? "sheath" : "crotch") + " until it has lost about a third of its old size.");
+					game.player.cocks[0].cockLength *= 2 / 3;
+					game.player.cocks[0].cockThickness *= 2 / 3;
+				}
+				else { //MULTI
+					outputText("Your " + game.player.multiCockDescriptLight() + " twitch and shrink, each member steadily disappearing into your " + (game.player.hasSheath() ? "sheath" : "crotch") + " until they've lost about a third of their old size.");
+					for (var i:int = 0; i < game.player.cocks.length; i++) {
+						game.player.cocks[i].cockLength		*= 2 / 3;
+						game.player.cocks[i].cockThickness	*= 2 / 3;
+					}
 				}
 			}
 			game.dynStats("sen", -2, "lus", -10);

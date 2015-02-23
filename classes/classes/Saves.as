@@ -648,7 +648,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 	var backupAborted:Boolean = false;
 	
-	CoC.saveAllAwareClasses(); //Informs each saveAwareClass that it must save its values in the flags array
+	CoC.saveAllAwareClasses(getGame()); //Informs each saveAwareClass that it must save its values in the flags array
 	var counter:Number = player.cocks.length;
 	//Initialize the save file
 	var saveFile:*;
@@ -990,7 +990,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.monk = getGame().monk;
 		saveFile.data.sand = getGame().sand;
 		saveFile.data.giacomo = getGame().giacomo;
-		saveFile.data.beeProgress = getGame().beeProgress;
+		saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
 		
 		//ITEMZ. Item1s
 		saveFile.data.itemSlot1 = [];
@@ -1958,11 +1958,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			game.giacomo = 0;
 		else
 			game.giacomo = saveFile.data.giacomo;
-		if (saveFile.data.beeProgress == undefined)
-			game.beeProgress = 0;
-		else
-			game.beeProgress = saveFile.data.beeProgress;
-		
+		if (saveFile.data.beeProgress != undefined && saveFile.data.beeProgress == 1) game.forest.beeGirlScene.setTalked(); //Bee Progress update is now in a flag
+			//The flag will be zero for any older save that still uses beeProgress and newer saves always store a zero in beeProgress, so we only need to update the flag on a value of one.
+			
 		//ITEMZ. Item1
 		if (saveFile.data.itemSlot1.shortName && saveFile.data.itemSlot1.shortName.indexOf("Gro+") != -1)
 			saveFile.data.itemSlot1.id = "GroPlus";
@@ -1995,6 +1993,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				saveFile.data.itemSlot5.id || saveFile.data.itemSlot5.shortName),
 				saveFile.data.itemSlot5.quantity);
 
+		CoC.loadAllAwareClasses(getGame()); //Informs each saveAwareClass that it must load its values from the flags array
 		unFuckSave();
 		
 		// Control Bindings
@@ -2002,8 +2001,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
-		
-		CoC.loadAllAwareClasses(); //Informs each saveAwareClass that it must load its values from the flags array
 		doNext(1);
 	}
 }
@@ -2037,6 +2034,11 @@ public function unFuckSave():void
 	if (isNaN(model.time.hours)) model.time.hours = 0;
 	if (isNaN(model.time.days)) model.time.days = 0;
 
+	if (player.findStatusAffect(StatusAffects.SlimeCraving) >= 0 && player.statusAffectv4(StatusAffects.SlimeCraving) == 1) {
+		player.changeStatusValue(StatusAffects.SlimeCraving, 3, player.statusAffectv2(StatusAffects.SlimeCraving)); //Duplicate old combined strength/speed value
+		player.changeStatusValue(StatusAffects.SlimeCraving, 4, 1); //Value four indicates this tracks strength and speed separately
+	}
+	
 	// Fix issues with corrupt cockTypes caused by a error in the serialization code.
 		
 	//trace("CockInfo = ", flags[kFLAGS.RUBI_COCK_TYPE]);
@@ -2064,6 +2066,12 @@ public function unFuckSave():void
 		flags[kFLAGS.GOO_DICK_TYPE] = 0;
 	}
 
+	var flagData:Array = String(flags[kFLAGS.KATHERINE_BREAST_SIZE]).split("^");
+	if (flagData.length < 7 && flags[kFLAGS.KATHERINE_BREAST_SIZE] > 0) { //Older format only stored breast size or zero if not yet initialized
+		getGame().telAdre.katherine.breasts.cupSize			= flags[kFLAGS.KATHERINE_BREAST_SIZE];
+		getGame().telAdre.katherine.breasts.lactationLevel	= BreastStore.LACTATION_DISABLED;
+	}
+	
 	if (flags[kFLAGS.SAVE_FILE_INTEGER_FORMAT_VERSION] < 816) {
 		//Older saves don't have pregnancy types for all impregnable NPCs. Have to correct this.
 		//If anything is detected that proves this is a new format save then we can return immediately as all further checks are redundant.

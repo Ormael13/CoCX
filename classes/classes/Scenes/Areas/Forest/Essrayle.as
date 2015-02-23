@@ -213,16 +213,16 @@ private function plantsForMe2(BE:int = 0):void {
 		//Boost size, set lactation quantity.
 		player.growTits(7,player.bRows(),false,2);
 		player.boostLactation(player.bRows());
+		if(player.biggestTitSize() >= 1) {
+			if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+				player.addStatusValue(StatusAffects.Feeder,1,1);
+				player.changeStatusValue(StatusAffects.Feeder,2,0);
+			}
+			player.boostLactation(0.01);
+		}
 		
 		
         outputText("\n\nYou sit there for the next hour or two, milking your bloated bosom and giving the flora a generous watering in the process.  When all is taken care of, you stumble back upright with a brief struggle and don your gear once more.  The smell of fresh-cut flowers seems to linger on your [armor] as you depart.");
-	}
-	if(player.biggestTitSize() >= 1) {
-		if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
-			player.addStatusValue(StatusAffects.Feeder,1,1);
-			player.changeStatusValue(StatusAffects.Feeder,2,0);
-		}
-		player.boostLactation(0.01);
 	}
 	player.orgasm();
 	dynStats("lib", 1);
@@ -435,7 +435,7 @@ public function askMotherToReleaseEssy():void {
 	clearOutput();
 	if(flags[kFLAGS.SAND_WITCHES_COWED] == 0) {
 		outputText("You point out that the witches have a friend of yours trapped here with magic and you'd like her released.");
-		outputText("\n\nThe Sand Mother cocks her head to the side before understanding dawns on her luminescent eyes.  \"<i>The plant-woman?  She seeks pleasure like a demon, yet lacks the corruption we would expect.  I can give the order to turn her loose, but see her out, and should she return, I can not promise her freedom again.</i>\"");
+		outputText("\n\nThe Sand Mother cocks her head to the side before understanding dawns on her luminescent eyes.  \"<i>The plant-woman?  She seeks pleasure like a demon, yet lacks the corruption we would expect.  I can give the order to turn her loose, but see her out, and should she return, I cannot promise her freedom again.</i>\"");
 		outputText("\n\nThat'll have to do.");
 	}
 	else {

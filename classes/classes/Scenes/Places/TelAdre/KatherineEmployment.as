@@ -715,7 +715,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You clarify that you thought the original plan was Kath would wear the belt for a training session and then take it off; is she going to make her keep it on until the entire course of training is over, given how much of a fuss Kath just kicked up over putting it on?\n\n");
 			outputText("“<i>Definitely.  If we have to go through that every time we come here to train, we’ll never get any actual training done,</i>” Urta huffs.\n\n");
 			outputText("“<i>I’ll be good,</i>” Katherine meekly promises.  “<i>Just don’t make me keep this on - days with no sex? I couldn’t take it!</i>” she pleads.  Urta shakes her head.  “<i>Sorry kitty, I gave you a chance, but you didn’t take it.  So if you want any relief from that belt, you’d better do as we say and train diligently.</i>”\n\n");
-			outputText("“<i>I will!  I swear it!  Please, just, please, don’t make me stay in this thing all the time!</i>” the cat whimpers.  Urta pays no heed to Kath’s pleas though.  “<i>If you perform well during the training, I’ll let you off the belt to blow some steam, but until until then - get used to it.</i>”\n\n");
+			outputText("“<i>I will!  I swear it!  Please, just, please, don’t make me stay in this thing all the time!</i>” the cat whimpers.  Urta pays no heed to Kath’s pleas though.  “<i>If you perform well during the training, I’ll let you off the belt to blow some steam, but until then - get used to it.</i>”\n\n");
 			outputText("Kath mewls sadly, but nods her head in dismayed agreement.  For her sake, you hope she’ll try to get back into Urta’s good books.\n\n");
 			outputText("Urta turns to you.  “<i>I got things here, lover.  If you want to you can see yourself out, I’ll make sure miss paws here understands fully what she’s gotten herself into.  Don’t forget to visit every once in awhile, I may need your help with one thing or another.</i>”\n\n");
 			outputText("You nod your head in understanding.  Turning to Katherine, you wish her well and ask her to try her best; you want her to get this job, for her sake and yours.  You then promise Urta to drop by and see how the training is going; if you can, you’ll try and help out.  “<i>It’s a date, bye lover.</i>”  Urta waves you off, before turning to the whimpering cat-herm on the ground.\n\n");
@@ -918,7 +918,7 @@ package classes.Scenes.Places.TelAdre{
 			clearOutput();
 			outputText("Kath lunges at Urta, aiming a punch straight at the vixen’s face.  Urta ducks under the blow effortlessly, then charges Kath.  With a confident smirk, Kath intercepts Urta and pulls her down and over her body, trying to throw the surprised vixen over her head, but unfortunately, Urta twists her body around and pins the helpless cat-herm under her into a submission hold.\n\n");
 			outputText("“<i>In a hold like this, you’re helpless.  Time to give up, kitty,</i>” Urta says in a matter of fact tone of voice.\n\n");
-			outputText("“<i>No way!  I’m not a coward - I wont give up that easily!</i>” Kath protests indignantly.\n\n");
+			outputText("“<i>No way!  I’m not a coward - I won't give up that easily!</i>” Kath protests indignantly.\n\n");
 			outputText("Urta sighs softly and begins to tighten her hold.  “<i>You can give up, or you can get hurt, that’s the way this move works.</i>”  Kath furiously struggles and wriggles in the fox’s grip, but eventually decides Urta’s right.  “<i>Alright, aunty, aunty, I give!</i>” she pleads.  Urta promptly lets her go and stands up.  “<i>...Aunty?</i>” she asks, curious.  Kath gets up and shrugs; “<i>I don’t have an uncle,</i>” she replies.\n\n");
 			outputText("Urta just shakes her head.  “<i>Anyway, not a bad move, kitty; if I hadn’t noticed what you were trying, you would have beaten me with that move for sure.  Need to work on your speed,</i>” she concludes.\n\n");
 			outputText("Kath sighs and says, “<i>Well... is some water too much to ask for?</i>”  You promptly head over to the makeshift kitchen, filling a glass from a sizable jug of water there and bring it to her.  Katherine thanks you and proceeds to eagerly drink it down.  When she’s done she gasps for air and wipes her mouth.  “<i>Alright, I’ll keep working on this until I beat you, foxy!</i>” she vows, dramatically pointing a finger at an amused-looking Urta.");
@@ -1141,6 +1141,23 @@ package classes.Scenes.Places.TelAdre{
 			flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_KATHS_APT; //Once again she disappears for the rest of the day so we don't find her at the bar right after seeing this encounter
 			katherine.giveClothing(Katherine.KBIT_CLOTHES_UNIFORM);
 			katherine.giveClothing(Katherine.KBIT_CLOTHES_C_CLOTH);
+			telAdre.telAdreMenuShow();
+		}
+
+		public function postTrainingAlleyDescription():void
+		{
+			clearOutput();
+			outputText("You go into the alleyway behind Oswald's shop.  It seems empty without a happy cat-morph to greet you.\n\n");
+			outputText("Looking closely you notice a few of the secret hiding spots among the crates have been emptied.  Kath must have been here to collect some of her more sentimental possessions.\n\n");
+			if (!katherine.isAt(Katherine.KLOC_KATHS_APT)) { //Only possible if she's already been seen on guard duty at the gate and you've slept once since
+				outputText("You see a note tucked into the side of the crate Kath used to sleep on.  It says, 'Hi " + player.short + ", everything is going great!  Come and see me at the Wet Bitch.  I'll try to be there from mid-morning to mid-afternoon.  Can't wait to see you again, love you, bye'.  It's signed with a kiss.");
+			}
+			else if (flags[kFLAGS.KATHERINE_TRAINING] >= 100) {
+				outputText("You guess that Urta and other members of the watch will be keeping her busy for the rest of the day.  Wherever she is you know she's being well taken care of.");
+			}
+			else {
+				outputText("You're guessing that her guard detail at the gate will last all day.");
+			}
 			telAdre.telAdreMenuShow();
 		}
 

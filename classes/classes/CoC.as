@@ -114,10 +114,10 @@
 		private static var _saveAwareClassList:Vector.<SaveAwareInterface> = new Vector.<SaveAwareInterface>();
 	
 		//Called by the saveGameObject function in Saves
-		public static function saveAllAwareClasses():void { for (var sac:int = 0; sac < _saveAwareClassList.length ; sac++) _saveAwareClassList[sac].updateBeforeSave(); }
+		public static function saveAllAwareClasses(game:CoC):void { for (var sac:int = 0; sac < _saveAwareClassList.length ; sac++) _saveAwareClassList[sac].updateBeforeSave(game); }
 
 		//Called by the loadGameObject function in Saves
-		public static function loadAllAwareClasses():void { for (var sac:int = 0; sac < _saveAwareClassList.length ; sac++) _saveAwareClassList[sac].updateAfterLoad(); }
+		public static function loadAllAwareClasses(game:CoC):void { for (var sac:int = 0; sac < _saveAwareClassList.length ; sac++) _saveAwareClassList[sac].updateAfterLoad(game); }
 
 		public static function saveAwareClassAdd(newEntry:SaveAwareInterface):void { _saveAwareClassList.push(newEntry); }
 	
@@ -137,7 +137,7 @@
 		// Items/
 		public var mutations:Mutations = new Mutations();
 		public var consumables:ConsumableLib = new ConsumableLib();
-		public var useables:UseableLib = new UseableLib();
+		public var useables:UseableLib;
 		public var weapons:WeaponLib = new WeaponLib();
 		public var armors:ArmorLib = new ArmorLib();
 		public var undergarments:UndergarmentLib = new UndergarmentLib();
@@ -297,7 +297,7 @@
 		public var monk:Number;
 		public var sand:Number;
 		public var giacomo:int;
-		public var beeProgress:Number;
+//Replaced by flag		public var beeProgress:Number;
 //Now in Inventory.as		public var itemStorage:Array;
 //Now in Inventory.as		public var gearStorage:Array;
 		public var temp:int;
@@ -335,6 +335,8 @@
 		{
 			// Cheatmode.
 			kGAMECLASS = this;
+			
+			useables = new UseableLib();
 			
 			this.kFLAGS_REF = kFLAGS; 
 			this.kACHIEVEMENTS_REF = kACHIEVEMENTS; 
@@ -518,7 +520,7 @@
 			monk = 0;
 			sand = 0;
 			giacomo = 0;
-			beeProgress = 0;
+//Replaced by flag			beeProgress = 0;
 
 //			itemStorage = [];
 //			gearStorage = [];

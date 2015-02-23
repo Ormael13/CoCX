@@ -2431,7 +2431,7 @@ private function talkAboutLiannasLubeSpray():void {
 	
 	outputText("\n\nShe's been experimenting on her body?  Doesn't that seem kind of reckless, you ask her.");
 	
-	outputText("\n\nShe shrugs.  \"<i>Maybe, but its not like I have anyone else to test my experiments on.  I do suffer from some side-effects due to my experiments, but it's all good... I think.</i>\"");
+	outputText("\n\nShe shrugs.  \"<i>Maybe, but it's not like I have anyone else to test my experiments on.  I do suffer from some side-effects due to my experiments, but it's all good... I think.</i>\"");
 	
 	outputText("\n\nThat still seems a bit foolish, but you decide it's not your place to lecture.");
 	
@@ -2448,7 +2448,7 @@ private function lubeSpraySideEffects():void {
 	outputText("So, if she's experimented on herself in the past, that must have gone wrong for her at least once or twice in the past, you comment.");
 	outputText("\n\nShe nods.  \"<i>Yep, it sure did.</i>\"  She rubs her chin in thought.");
 	
-	outputText("\n\n\"<i>One time my tail wound up turning into a tentacle monster... couldn't control it, but it wasn't that bad.</i>\"  You keep your mouth shut, you mind already picturing what she's going to say next.  \"<i>Got me off once or twice...</i>\"  That was predictable, you note to yourself.");
+	outputText("\n\n\"<i>One time my tail wound up turning into a tentacle monster... couldn't control it, but it wasn't that bad.</i>\"  You keep your mouth shut, your mind already picturing what she's going to say next.  \"<i>Got me off once or twice...</i>\"  That was predictable, you note to yourself.");
 	
 	outputText("\n\n\"<i>There was that time when my clit grew so big that I could lick myself without bending over... it was enjoyable for a while.</i>\"  You wonder how she managed to shrink it back down.");
 	outputText("\n\n\"<i>There was that time when I my boobs started vibrating... kinda awkward with my cup size.</i>\"  That would have been a sight to see, but you keep that to myself.");
@@ -2540,7 +2540,7 @@ Aside from the effects you suffered through earlier, you don't notice any other 
 You realize your ass still feels moist and clench your butt, you squeak with surprise as {some/even more} juices are squeezed out of your [asshole].  {<b>Your anus is now permanently wet, ensuring it will always be lubed. </b> / <b>Your anus is even wetter, ensuring even better lubrication</b>}
 }
 {If Increasing vaginal wetness (Must have vagina)
-You notice your vagina is still dripping, and realize that its not getting any drier.  <b>Your vaginal wetness has been increased.</b>
+You notice your vagina is still dripping, and realize that it's not getting any drier.  <b>Your vaginal wetness has been increased.</b>
 }
 {If Increasing Lactation (Must already be lactating)
 Your [breasts] tingle softly, and when you massage them you gasp as a small jet of milk sprays forward, somehow you know that <b>your milk production has increased.</b>

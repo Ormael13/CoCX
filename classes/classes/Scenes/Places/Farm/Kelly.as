@@ -1122,7 +1122,7 @@ private function getARimjobFromKelly():void {
 	
 	//[First time: 
 	if(flags[kFLAGS.TIMES_RIM_JOBBED_BY_KELLY] == 1) {
-		outputText("\n\nTh- thank you for the lesson, [Master],</i>\" she says.  You shake your head, smiling at her ignorance.");
+		outputText("\n\n\"<i>Th- thank you for the lesson, [Master],</i>\" she says.  You shake your head, smiling at her ignorance.");
 		
 		outputText("\n\n\"<i>That wasn't the lesson.</i>\"  You wave at the rivulets of your own cum in front of you casually.  ");
 		if(player.cumQ() >= 700) outputText("You, as ever, have produced a veritable oozing lake of the stuff.  ");

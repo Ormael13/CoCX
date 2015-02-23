@@ -13,37 +13,34 @@ package classes.Items
 
 	public final class UseableLib extends BaseContent
 	{
-		public static const DEFAULT_VALUE:Number = 6;
-		//CRAFTING MATERIALS
-		public const GREENGL:SimpleUseable = mk("GreenGl","GreenGl","a clump of green gel", m.greenGel,"This tough substance has no obvious use that you can discern. \n\nType: Material");
-		public const B_CHITN:SimpleUseable = mk("B.Chitn","B.Chitn","a large shard of chitinous plating", m.chitinUseless,"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it. \n\nType: Material");
-		public const T_SSILK:SimpleUseable = mk("T.SSilk", "T.SSilk", "a bundle of tough spider-silk", m.toughSpiderSilk, "This bundle of fibrous silk is incredibly tough and strong, though somehow not sticky in the slightest.  You have no idea how to work these tough little strands into anything usable.  Perhaps one of this land's natives might have an idea? \n\nType: Material");
-
-		public const D_SCALE:SimpleUseable = mk("D.Scale", "Dragonscale", "a freshly-shed dragonscale", m.toughDragonScale, "This sheet of dragon scale is incredibly strong and flexible.  No dragons were harmed in the acquisition of this item. \n\nType: Material");
-		public const IMPSKLL:SimpleUseable = mk("ImpSkll", "ImpSkull", "an imp skull", m.examineImpSkull, "A skull taken from a slain imp. \n\nType: Material", 100);
-		public const LETHITE:SimpleUseable = mk("Lethite", "Lethicite", "a chunk of lethicite", m.examineImpSkull, "A chunk of lethicite.  It's very rare as lethicite is only produced when a mortal becomes a demon and cums their souls out.  \n\nType: Material", 1000);
-		//Ores
-		//public const COPPORE:SimpleUseable = mk("CoppOre", "Copper Ore", "a cluster of copper ore", m.examineCopperOre, "A raw metal ore that's ready to be processed into ingots. \n\nType: Material", 10);
-		//public const IRONORE:SimpleUseable = mk("IronOre", "Iron Ore", "a cluster of iron ore", m.examineIronOre, "A raw metal ore that's ready to be processed into ingots. \n\nType: Material", 20);
-		//public const TIN_ORE:SimpleUseable = mk("Tin Ore", "Tin Ore", "a cluster of tin ore", m.examineTinOre, "A raw metal ore that's ready to be processed into ingots. \n\nType: Material", 10);
-		//Ingots
-		//public const BRONBAR:SimpleUseable = mk("BronBar", "Bronze Bar", "a bronze ingot", m.examineBronzeBar, "A refined bronze ingot ready to be used for crafting. \n\nType: Material", 30);
-		//public const IRONBAR:SimpleUseable = mk("IronBar", "Iron Bar", "an iron ingot", m.examineIronBar, "A refined iron ingot ready to be used for crafting. \n\nType: Material", 40);
-		//public const STL_BAR:SimpleUseable = mk("Stl.Bar", "Steel Bar", "a steel ingot", m.examineSteelBar, "A refined steel ingot ready to be used for crafting. \n\nType: Material", 50);
-		//Miscellaneous
-		public const GLDSTAT:SimpleUseable = mk("GldStat","GldStat","a golden statue",function(player:Player):void{getGame().forest.kitsuneScene.kitsuneStatue(player)},"An intricate golden idol of an androgynous humanoid figure with nine long tails.  It probably had some spiritual significance to its owner. \n\nType: Rare item \nBase value: 600",600);
-		public const CONDOM :SimpleUseable = mk("Condom ","Condom","a packet of condom",m.examineCondom,"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes. \n\nType: Consumable",DEFAULT_VALUE);
-		private var mutations:Mutations;
-
-		private static function mk(id:String, shortName:String,longName:String, effect:Function, description:String, value:Number = DEFAULT_VALUE):SimpleUseable{
-			return new SimpleUseable(id,shortName,longName,effect,value,description);
-		}
-		private function get m():Mutations{
-			if (mutations == null) mutations = new Mutations();
-			return mutations;
-		}
-		public function UseableLib()
-		{
-		}
+		public function UseableLib() {}
+		
+		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 6,
+			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it. \n\nType: Material",
+			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");
+		public const GLDSTAT:SimpleUseable = new SimpleUseable("GldStat", "GldStat", "a golden statue", 600,
+			"An intricate golden idol of an androgynous humanoid figure with nine long tails.  It probably had some spiritual significance to its owner. \n\nType: Miscellaneous \nBase value: 600",
+			"", kGAMECLASS.forest.kitsuneScene.kitsuneStatue);
+		public const GREENGL:SimpleUseable = new SimpleUseable("GreenGl", "GreenGl", "a clump of green gel", 6,
+			"This tough substance has no obvious use that you can discern. \n\nType: Material",
+			"You examine the gel thoroughly, noting it is tough and resiliant, yet extremely pliable.  Somehow you know eating it would not be a good idea.");
+		public const T_SSILK:SimpleUseable = new SimpleUseable("T.SSilk", "T.SSilk", "a bundle of tough spider-silk", 6,
+			"This bundle of fibrous silk is incredibly tough and strong, though somehow not sticky in the slightest.  You have no idea how to work these tough little strands into anything usable.  Perhaps one of this land's natives might have an idea? \n\nType: Material",
+			"You look over the tough webbing, confusion evident in your expression.  There's really nothing practical you can do with these yourself.  It might be best to find someone more familiar with the odd materials in this land to see if they can make sense of it.");
+		
+		//Extra stuff!
+		public const D_SCALE:SimpleUseable = mk("D.Scale", "Dragonscale", "a freshly-shed dragonscale", 6, 
+			"This sheet of dragon scale is incredibly strong and flexible.  No dragons were harmed in the acquisition of this item. \n\nType: Material", 
+			"You look over the sheet of dragon scale. You've seen various legends about how the scales can be worked into tough armor or used in alchemy.");
+		public const IMPSKLL:SimpleUseable = mk("ImpSkll", "ImpSkull", "an imp skull", 25, 
+			"A skull taken from a slain imp. \n\nType: Material",
+			"You look at the imp skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
+		public const LETHITE:SimpleUseable = mk("Lethite", "Lethicite", "a chunk of lethicite", 1000, 
+			"A chunk of lethicite.  It's very rare as lethicite is only produced when a mortal becomes a demon and cums their souls out.  \n\nType: Material \nBase value: 1,000",
+			"You examine the pinkish-purple crystal. It must be lethicite. You know that demons like to consume them but you're sure there might be a use for it.");
+		//Condom! Yay!
+		public const CONDOM :SimpleUseable = mk("Condom ", "Condom", "a packet of condom", 6,
+			"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes. \n\nType: Miscellaneous",
+			"You look at the unopened packet of condom.  If applicable, you can use the condom to prevent pregnancy most of the time.");
 	}
 }

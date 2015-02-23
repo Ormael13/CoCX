@@ -168,7 +168,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	kGAMECLASS.monk = 0;
 	kGAMECLASS.whitney = 0;
 	kGAMECLASS.sand = 0;
-	kGAMECLASS.beeProgress = 0;
+//Replaced by flag	kGAMECLASS.beeProgress = 0;
 	kGAMECLASS.giacomo = 0;
 	//Lets get this bitch started
 	kGAMECLASS.inCombat = false;
@@ -1201,7 +1201,7 @@ public function useCustomProfile():void {
 	}
 	else {
 		outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...");
-		outputText("\n\n\n\nAre you a man or a woman?", true);
+		outputText("\n\n\n\nAre you a man or a woman?");
 		simpleChoices("Man", chooseMale, "Woman", chooseFemale, "", 0, "", 0, "", 0);
 	}
 }
