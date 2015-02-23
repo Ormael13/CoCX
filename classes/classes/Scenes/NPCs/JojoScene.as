@@ -1810,8 +1810,15 @@ public function talkMenu():void
 	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave, null, null, null, "Tell him about your encounter in the Sand Cave in the desert.");
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift, null, null, null, "Ask him if he's willing to train you.");
 	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1, null, null, null, "Ask him if he can exorcise the demonic parasite infesting Minerva.");
-	if (player.cor <= 10 && player.lust >= 33 && player.findStatusAffect(StatusAffects.EverRapedJojo) < 0) addButton(9, "Sex?", offerSexFirstTime);
-	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusAffectv1(StatusAffects.JojoMeditationCount) >= 10 && monk > -3 && player.cor <= 10 && player.lust >= 33 && player.findStatusAffect(StatusAffects.EverRapedJojo) < 0) addButton(9, "Sex?", offerSexFirstTimeHighAffection, null, null, null, "You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
+	//Sex button
+	if (player.cor <= 10 && player.lust >= 33) {
+		addButton(9, "Sex?", offerSexFirstTime, null, null, null, "Ask him if he's willing to have sex with you.");
+		if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] < 4) addLockedButton(9, "You should socialize with Jojo a bit more.");
+		//if (player.findStatusAffect(StatusAffects.EverRapedJojo) >= 0) addLockedButton(9, "You've raped Jojo in the past, now you can't ask him out.");
+	}
+	if (player.cor <= 10 && player.lust >= 33 && monk == -1) addLockedButton(9, "You need to spend more time with Jojo. \n\nTalk sessions: " + flags[kFLAGS.TIMES_TALKED_WITH_JOJO] + "/6 \nTraining sessions: " + flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] + "/10 \nMeditation sessions: " + player.statusAffectv1(StatusAffects.JojoMeditationCount) + "/10 \nYou must be pure enough and have sufficient lust as well.");
+	if (player.cor <= 10 && player.lust >= 33 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusAffectv1(StatusAffects.JojoMeditationCount) >= 10 && monk > -3) addButton(9, "Sex?", offerSexFirstTimeHighAffection, null, null, null, "You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
+	if (monk <= -3) removeButton(9);
 	addButton(14, "Back", jojoCamp);
 }
 
@@ -2350,7 +2357,7 @@ public function confrontChastity():void {
 	jojoSprite();
 	clearOutput();
 	outputText("He cannot keep his vows forever. After all, he's missing out on the pleasure! He probably never knew how he would feel if he has a perfect cock that fits perfectly in his butthole or his cock that fits perfectly in a vagina or an anus. He should be fine as long as he stays faithful to you.");
-	outputText("\n\n\"<i>What about pleasure? You're missing out!</i>\" you say. Jojo stares deeply into your eyes for a good moment.");
+	outputText("\n\n\"<i>What about pleasure? " + (player.hasVagina() ? "How about potential mate like me? " : "") +"You're missing out!</i>\" you say. Jojo stares deeply into your eyes for a good moment.");
 	outputText("\n\n\"<i>Well... young one, you're right. You did spend time together with me. We've meditated, I've taught you some important lessons and now we're here,</i>\" Jojo says hesitantly but he starts to smile, \"<i>Let's have sex; I want to experience.</i>\"");
 	outputText("\n\nYou smile back at Jojo, knowing that you can have sex with him.");
 	outputText("\n\n<b>You have unlocked Jojo sex menu!</b>");
@@ -2361,6 +2368,11 @@ public function confrontChastity():void {
 }
 
 private function pureJojoSexMenu():void {
+	//Capacity
+	var capacity:int = 40;
+	if (flags[kFLAGS.JOJO_ANAL_XP] < 10) capacity += (flags[kFLAGS.JOJO_ANAL_XP] * 3);
+	else capacity += 30; //Caps at 70.
+	//Begin
 	jojoSprite();
 	clearOutput();
 	outputText("You ask Jojo if he's in the mood for sex right now. ");
@@ -2369,7 +2381,7 @@ private function pureJojoSexMenu():void {
 	outputText("\n\nJojo escorts you to the forest and chooses the area with the most privacy.");
 	outputText("\n\n<n>What way should you have with Jojo?</n>");
 	menu();
-	if (player.hasCock() && player.cockThatFits(40) >= 0) addButton(0, "Anal Pitch", anallyFuckTheMouseButtSlut, null, null, null, "Fuck the monk mouse-morph's butt.");
+	if (player.hasCock() && player.cockThatFits(capacity) >= 0) addButton(0, "Anal Pitch", anallyFuckTheMouseButtSlut, null, null, null, "Fuck the monk mouse-morph's butt.");
 	addButton(1, "Anal Catch", getAnallyFuckedByMouseYouSlut, null, null, null, "Have Jojo penetrate you anally.");
 	if (player.hasVagina()) addButton(2, "Vaginal Catch", getVagFuckedByMouse, null, null, null, "Have Jojo penetrate you vaginally.");
 	//addButton(3, "Blow Him", suckJojosCock, null, null, null, "Suck Jojo's cock and get a taste of mouse cum! (Placeholder)");
@@ -2377,18 +2389,68 @@ private function pureJojoSexMenu():void {
 }
 
 private function anallyFuckTheMouseButtSlut():void {
+	//Capacity
+	var capacity:int = 40;
+	if (flags[kFLAGS.JOJO_ANAL_XP] < 10) capacity += (flags[kFLAGS.JOJO_ANAL_XP] * 3);
+	else capacity += 30; //Caps at 70.
+	var x:int = player.cockThatFits(40);
+	//Begin
 	jojoSprite();
 	clearOutput();
-	var x:int = player.cockThatFits(40);
-	outputText("You finally make up your mind; you want to stuff your cock into that ass of his. You remove your " + player.armorName + " and Jojo hesitantly strips out of his robe, revealing his naked form.");
-	if (flags[kFLAGS.JOJO_ANAL_XP] < 1) outputText("\n\n\"<i>Just go gentle,</i>\" Jojo says with a whimpered look on his face as he gets down on all fours.");
-	else if (flags[kFLAGS.JOJO_ANAL_XP] < 3) outputText("\n\n\"<i>Even though we've done it before, still, just go gentle please,</i>\" Jojo says with a whimpered look on his face as he gets down on all fours.");
-	else outputText("\n\n\"<i>All right, I'm getting ready,</i>\" Jojo says with a smile as he gets down on all fours.");
-	outputText("\n\nYou gently caress Jojo's butt-cheeks and get a good glance at his anus. You spit on your hands and apply saliva evenly all over your " + cockDescript(x) + " to get it all lubed up. Deeming the lubrication sufficient, you let Jojo know that you're going to start and you slowly slide your " + player.cockDescript(x) + " into Jojo's butthole. ");
-	if (flags[kFLAGS.JOJO_ANAL_XP] < 1) outputText("By Marae, that's tight! <b>Jojo has lost his anal virginity.</b>");
-	outputText("\n\nYou ask him if he's all right. \"<i>Yes. It feels good! Keep fucking me,</i>\" Jojo says. His cock reaches full erection, ready to cum at any time. You smile at him and start to pick up the pace while keeping it at comfortable level.");
-	outputText("\n\nEventually, you can hold back no more and you unleash your seed right into his bowels. Jojo achieves orgasm as well, cumming all over the grass.");
-	outputText("\n\nNow spent, you lay next to Jojo. \"<i>It's a great experience. We can do it again someday,</i>\" Jojo says smilingly. ")
+	if (flags[kFLAGS.JOJO_ANAL_XP] == 0) outputText("You finally make up your mind; you want to stuff your cock into that tight ass of his. You remove your [armor] and Jojo hesitantly strips out of his robe, revealing his naked form.");
+	else if (flags[kFLAGS.JOJO_ANAL_XP] == 1) outputText("You decide that you want to stuff your cock into that tight ass of his again. You remove your [armor] and Jojo hesitantly strips out of his robe, revealing his naked form.");
+	else if (flags[kFLAGS.JOJO_ANAL_XP] >= 2) outputText("You decide that you want to stuff your cock into that tight ass of his again. You remove your [armor] and Jojo without hesitation strips out of his robe, revealing his naked form.");
+	//First and second time
+	if (flags[kFLAGS.JOJO_ANAL_XP] < 3) {
+		//Intro
+		if (flags[kFLAGS.JOJO_ANAL_XP] < 1) outputText("\n\n\"<i>Just go gentle,</i>\" Jojo says with a whimpered look on his face as he gets down on all fours.");
+		else outputText("\n\n\"<i>Even though we've done it before, still, just go gentle please,</i>\" Jojo says with a whimpered look on his face as he gets down on all fours.");
+		//Check anal tightness
+		outputText("\n\nYou gently caress Jojo’s toned, quivering butt-cheeks and get a good glance at his anus. ");
+		if (flags[kFLAGS.JOJO_ANAL_XP] < 1) outputText("It’s a bit too tight to suddenly insert your " + player.cockDescript(x) + " into. You’ll have to stretch it out a little. You warn Jojo that you’ll be inserting your hand in first. Jojo feels like he was almost regretting this, but nods. You slick your fingers up with some saliva, and then gently start to probe Jojo’s pucker, trying to stretch it out a little. ");
+		else outputText("You decide to test it out again. You warn Jojo that you’ll be inserting your hand in first. Jojo says, \"<i>If you have to.</i>\" You slick your fingers up with some saliva, and then gently start to probe Jojo’s pucker, testing out the looseness.");
+		//Anal fingering and stretching
+		outputText("\n\nThe second your digits invade Jojo’s bowels, his cock starts leaking precum. Jojo’s face kept flickering between pain and arousal. Jojo must really be sensitive. "); 
+		if (flags[kFLAGS.JOJO_ANAL_XP] < 1) outputText("You stretch out Jojo’s bowels as much as you can and it should be just enough for insertion. ");
+		else outputText("Hmm... his ass seems more stretched out compared to last time; you should be able to insert without worry. ");
+		//Get lubed up and get your cock into Jojo's anus.
+		outputText("\n\nYou spit on your hands and apply saliva evenly all over your " + player.cockDescript(x) + " to get it all lubed up. Deeming the lubrication sufficient, you let Jojo know that you’re going to start and you slowly slide your " + player.cockDescript(x) + " into Jojo’s butthole. " + (flags[kFLAGS.JOJO_ANAL_XP] > 0 ? "His sphincter closes around you tightly. By Marae, he’s tight as ever!" : "By Marae, he's tight!") + " ");
+		if (flags[kFLAGS.JOJO_ANAL_XP] < 1) {
+			outputText("<b>Jojo has lost his anal virginity!</b>");
+			outputText("\n\nYou ask him if he’s all right. \"<i>Yes. It feels strange and it hurt a little... but it’s not bad! Keep going,</i>\" Jojo says. ");
+		}
+		else {
+			outputText("\n\nJojo starts panting in arousal. You ask him is he’s ok. Jojo gives you a thumbs-up. \"<i>I’m... fine. Keep going.</i>\" ");
+		}
+		outputText("His cock reaches full erection, ready to cum at any time. You smile at him and start to pick up the pace while keeping it at comfortable level. As you feel his loosening up, you decide to go faster and harder. Jojo starts moaning in both ecstasy and pain, releasing a shrill squeak with every thrust.");
+		//ORGASM!
+		outputText("\n\nEventually, you can’t hold back any more and you unleash your seed right into his bowels. ");
+		if (flags[kFLAGS.JOJO_ANAL_XP] < 1) {
+			outputText("Jojo orgasms as well, cumming all over the grass.");
+			outputText("\n\nNow spent, you lay next to Jojo. There’s small trail of cum leaking out of Jojo’s ass. \"<i>It’s a new experience. I’m willing to try it again,</i>\" Jojo says smilingly. You smile knowingly; you knew the two of you will do this often.");
+		}
+		else {
+			outputText("Jojo starts pumping his hips in order to suck on the cum into his bowels. He, soon, orgasms as well, cumming all over the grass.");
+			outputText("\n\nNow spent, you lay next to Jojo. There’s small trail of cum leaking out of Jojo’s ass. You tell Jojo that he’s seems to really like anal. Jojo blushes. You laugh, telling your little butt slut that there more in store for him.");
+		}
+	}
+	//Third+ time
+	else {
+		outputText("\n\nJojo gets on all fours in a hurry, sticking his firm ass in the air for you to see. Jojo is such an anal slut. Jojo starts stretching his butt cheeks apart, looking at you with an eager face.");
+		//Check anal tightness
+		outputText("\n\nHis eagerness makes your " + player.multiCockDescriptLight() + " hard. You gently caress Jojo’s toned, quivering butt-cheeks and get a good glance at his anus. You decide to test it out again. You warn Jojo that you’ll be inserting your hand in first. Jojo says, “Hurry up.” You smile at his response. You slick your fingers up with some saliva, and then gently start to probe Jojo’s pucker, testing out the looseness.");
+		//Anal fingering and stretching
+		outputText("\n\nThe second your digits invade Jojo’s bowels, his cock starts leaking precum. Jojo’s face kept flickering between pain and arousal. Jojo must really be sensitive. "); 
+		outputText("Hmm... his ass seems more stretched out compared to second time; you should be able to insert without worry. ");
+		//Get lubed up and get your cock into Jojo's anus.
+		outputText("\n\nYou spit on your hands and apply saliva evenly all over your " + player.cockDescript(x) + " to get it all lubed up. Deeming the lubrication sufficient, you let Jojo know that you’re going to start and you slowly slide your " + player.cockDescript(x) + " into Jojo’s butthole. His sphincter closes around you tightly. By Marae, he’s tight as ever! ");
+		outputText("\n\nJojo starts panting in arousal. You ask him is he’s ok. Jojo gives you a thumbs-up. \"<i>I’m... fine. Keep going.</i>\" His cock reaches full erection, ready to cum at any time. You smile at him and start to pick up the pace while keeping it at comfortable level. As you feel his loosening up, you decide to go faster and harder. Jojo starts moaning in both ecstasy and pain, releasing a shrill squeak with every thrust. ");
+		//ORGASM!
+		outputText("\n\nEventually, you can’t hold back any more and you unleash your seed right into his bowels. ");
+		outputText("Jojo starts pumping his hips in order to suck on the cum into his bowels and he wraps his long tail around you to pull you closer. He, soon, orgasms as well, cumming all over the grass.");
+		outputText("\n\nNow spent, you lay next to Jojo. There’s small trail of cum leaking out of Jojo’s ass. You laugh, telling your little butt slut that there more in store for him.");
+	}
+	//The End
 	if (flags[kFLAGS.JOJO_SEX_COUNTER] >= 4) outputText("He plants a kiss on your lips.");
 	outputText("\n\nEventually, the two of you redress before returning to camp.");
 	dynStats("cor", -1);

@@ -2089,7 +2089,6 @@ package classes.Scenes.Monsters
 			addButton(1, "Leave", cleanupAfterCombat);
 		}
 		private function takeSkull():void {
-			rawOutputText("\n\n[DATA EXPUNGED]\n\n");
 			inventory.takeItem(useables.IMPSKLL, cleanupAfterCombat);
 		}
 	}

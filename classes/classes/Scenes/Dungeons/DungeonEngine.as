@@ -81,10 +81,10 @@ package classes.Scenes.Dungeons
 			return (flags[kFLAGS.CUM_WITCH_DEFEATED] > 0 && (flags[kFLAGS.ESSRAYLE_ESCAPED_DUNGEON] > 0 || flags[kFLAGS.MET_ESSY] == 0) && flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0);
 		}
 		public function checkPhoenixTowerClear():Boolean {
-			return (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0&& flags[kFLAGS.HEL_HARPIES_DEFEATED] > 0 && flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && flags[kFLAGS.HEL_BRIGID_DEFEATED] > 0);
+			return (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 && flags[kFLAGS.HEL_HARPIES_DEFEATED] > 0 && flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && flags[kFLAGS.HEL_BRIGID_DEFEATED] > 0);
 		}
 		public function checkLethiceStrongholdClear():Boolean { //Let's wait until Lethice's added then implement this!
-			return false;
+			return (flags[kFLAGS.D3_MIRRORS_SHATTERED] > 0 && flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] > 0 && flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] > 0 && flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.LETHICE_DEFEATED] > 0);
 		}
 		
 		public function enterFactory():void {

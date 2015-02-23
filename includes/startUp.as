@@ -609,7 +609,11 @@ public function creditsScreen():void {
 	outputText("<b>Game Mod</b>\n");
 	outputText("<ul>");
 	outputText("<li> Kitteh6660 (Mod Creator)</li>");
+	outputText("</ul>");
+	outputText("<b>Game Mod Contributors</b>\n");
 	outputText("<ul>");
+	outputText("<li> Parth37955 (Pure Jojo anal pitch scene, Behemoth's vaginal catch scene)</li>");
+	outputText("</ul>");
 	outputText("<b>Game Mod Bug Reporting</b>\n");
 	outputText("<ul>");
 	outputText("<li> Wastarce</li>");

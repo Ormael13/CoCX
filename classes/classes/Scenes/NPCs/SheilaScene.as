@@ -5034,7 +5034,7 @@ private function winAgainstDemoNSheilaForVaginas():void {
 //Scarred blade
 public function badEndScarredBlade():void {
 	outputText("You collapse from your injuries and realize what's the scarred blade's going to do. It's GOING FOR YOU! You scream as the saber thrusts towards you.");
-	rawOutputText("\n\n[DATA EXPUNGED]");
+	if (silly()) rawOutputText("\n\n[DATA EXPUNGED]");
 	if (marbleFollower()) outputText("\n\n\"<i>NOOOOO! Sweetie!</i>\" Marble cries.");
 	getGame().inCombat = false;
 	flags[kFLAGS.SCARRED_BLADE_STATUS] = 1;

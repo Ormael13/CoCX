@@ -386,7 +386,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_1.1";
+			ver = "0.9.2_mod_1.1.1";
 			version = ver + " (<b>The Behemoth Update</b>)";
 
 			//Indicates if building for mobile?

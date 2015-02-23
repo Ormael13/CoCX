@@ -84,6 +84,11 @@ package classes.Scenes.Places.Boat
 		}
 		
 		override public function doAI():void {
+			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
+				removeStatusAffect(StatusAffects.Stunned);
+				combatRoundOver();
+				return;
+			}
 			var chooser:int = rand(10);
 			if (findStatusAffect(StatusAffects.Uber) >= 0) {
 				smiteHit();
@@ -109,12 +114,12 @@ package classes.Scenes.Places.Boat
 			this.short = "Marae";
 			this.imageName = "marae";
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-				this.long = "This being is known as the goddess of Marae. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion."
+				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion."
 				this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("G"));
 			}
 			else {
-				this.long = "This being is known as the goddess of Marae. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized."
+				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized."
 				this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
 			}

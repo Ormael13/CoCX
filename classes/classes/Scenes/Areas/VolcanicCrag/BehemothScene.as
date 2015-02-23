@@ -336,7 +336,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			//Sorry, no centaur variant.
 			outputText("You definitely want that " + (silly() ? "dig bick": "big dick") + " in your [vagina]. ");
 			outputText("\n\nYou strip out of your [armor] until you're naked. You make sure to toss your [armor] into a neat pile. You present your naked body and more importantly, your [vagina] to the behemoth.  You notice that his erection is tenting under his loincloth. He shifts it aside to expose his large pecker and says excitedly, \"<i>Now that's some wonderful pussy you've got there! I'll go gentle on you and make sure you enjoy the experience.</i>\"");
-			outputText("\n\nThe behemoth guides you to his bed and instructs you to lie down on the bed, which you follows obediently. You spread your [legs] to expose your womanhood" + (player.hasCock() ? " and manhood": "") + ". The behemoth gives you a smile and slowly slides his cock into your [vagina]. The Behemoth gives you a smile and slowly slides his long, prehensile tongue into your muff. \"<i>Gotta loosen you up first. Learned that the hard way with those goblins. Poor gals never stood a chance.</i>\" Ecstasy floods your system as he licks your [pussy]. Behemoth’s rough tongue slowly inches its way in, rubbing in all your pleasure spots. You end up cumming when the tongue forces it way into your womb. Behemoth slowly stands up and removes his femcum covered tongue out of your [pussy]. He licks his lips and says, “Delicious... that should do it. Now for the main course.” Behemoth holds his massive cock in his hand and positions it right outside your vagina. You can’t take it anymore and yell \"<i>Stop teasing me and fuck me with your ginormous cock already!</i>\" That was all the motivation Behemoth needed. In one quick stroke he penetrates your cooter and pushes it in all the way to your womb.");
+			outputText("\n\nThe behemoth guides you to his bed and instructs you to lie down on the bed, which you follows obediently. You spread your [legs] to expose your womanhood" + (player.hasCock() ? " and manhood": "") + ". The Behemoth gives you a smile and slowly slides his long, prehensile tongue into your muff. \"<i>Gotta loosen you up first. Learned that the hard way with those goblins. Poor gals never stood a chance.</i>\" Ecstasy floods your system as he licks your [pussy]. Behemoth’s rough tongue slowly inches its way in, rubbing in all your pleasure spots. You end up cumming when the tongue forces it way into your womb. Behemoth slowly stands up and removes his femcum covered tongue out of your [pussy]. He licks his lips and says, “Delicious... that should do it. Now for the main course.” Behemoth holds his massive cock in his hand and positions it right outside your vagina. You can’t take it anymore and yell \"<i>Stop teasing me and fuck me with your ginormous cock already!</i>\" That was all the motivation Behemoth needed. In one quick stroke he penetrates your cooter and pushes it in all the way to your womb.");
 			player.cuntChange(45, true, true);
 			if (isVirgin) outputText("\n\n\"<i>I'm so glad you've saved your virginity for me. By the time people reached the endgame levels, none of them are virgin,</i>\" the behemoth says with a smile. ");
 			outputText("\n\nThe Behemoth starts to piston inside and out of your [pussy] and picks up the pace gradually. ");
@@ -388,7 +388,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("The behemoth looks at you and says, \"<i>Really? You want a cum bath? " + (flags[kFLAGS.BEHEMOTH_CUM_BATH] <= 0 ? "You're in luck as I can make a cum bath, literally! Yes, a literal cum bath. Don't let the size of my balls fool you; I can cum much higher than what you think my balls can hold." : "No problem, I'm going to give you another cum bath.") + "</i>\"");
 			if (flags[kFLAGS.BEHEMOTH_CUM_BATH] <= 0) {
 				outputText("\n\nYou are already eager for a literal cum bath! ");
-				if (silly()) outputText("There has never been a literal cum bath in this game!");
+				if (silly()) outputText("There has never been a literal cum bath in this game! ");
 				outputText("You are curious to what it actually feels like.");
 			}
 			outputText("\n\n\"<i>Come to my tent, I have something,</i>\" the behemoth says. You give him a nod and " + (player.isGoo() || player.isNaga() ? "slither": "walk") + " with him all the way to his tent. " + (flags[kFLAGS.BEHEMOTH_CUM_BATH] <= 0 ? "The tent is fairly large and looks like several people could comfortably sleep in there.": "") + " The behemoth gestures for you to enter and you enter along with him.");
@@ -435,7 +435,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		}
 		
 		private function watersportsBucket():void {
-			clearOutput();
+			//clearOutput();
 			outputText("The behemoth grabs the bucket nearby and says, \"<i>Let's get started.</i>\" He moves his loincloth aside and lowers the bucket so his cock goes over the rim, pointing towards the inside of the bucket. Stream of urine flows from his cock into the bucket.");
 			if (player.isTaur()) {
 				outputText("\n\nUnfortunately, you have to wait until the behemoth finishes peeing. Having a tauric body surely puts you at a disadvantage.");

@@ -2000,7 +2000,7 @@ use namespace kGAMECLASS;
 			{
 				//Balls
 				var tempSpeedCap:Number = 100;
-				if (ballSize > 3) maxSpe -= (ballSize - 3);
+				if (ballSize > 4) maxSpe -= Math.round((ballSize - 4) / 2);
 				//Breasts
 				if (hasBreasts())
 				{	
@@ -2045,8 +2045,9 @@ use namespace kGAMECLASS;
 				maxInt += 10;
 			}
 			if (dogScore() >= 4 || foxScore() >= 4) {
+				maxTou -= 10;
 				maxSpe += 10;
-				maxInt -= 5;
+				maxInt += 10;
 			}
 			if (catScore() >= 4) {
 				maxSpe += 5;

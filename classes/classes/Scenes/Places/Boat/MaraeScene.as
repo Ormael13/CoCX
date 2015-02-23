@@ -176,9 +176,9 @@ public function loseAgainstMarae():void {
 	else {
 		if (player.HP <= 0) outputText("You collapse, too weak to continue fighting. \"<i>Get some rest, champion,</i>\" Marae says. You finally black out. \n\nBy the time you wake up, you find yourself in your camp.", true)
 		else outputText("Your desire to keep fighting has been slain by your overwhelming lust and you collapse. \"<i>Control your urges and get some rest, champion,</i>\" Marae says. You finally black out from your lust. \n\nBy the time you wake up, you find yourself in your camp.", true)
-		doNext(camp.returnToCampUseOneHour);
+		cleanupAfterCombat();
 	}
-	doNext(camp.returnToCampUseOneHour); //Failsafe
+	cleanupAfterCombat(); //Failsafe
 }
 
 

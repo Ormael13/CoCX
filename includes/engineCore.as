@@ -1134,8 +1134,8 @@ public function getButtonToolTipText(buttonText:String):String
 	}
 	if(buttonText.indexOf("Stronghold") != -1) {
 		toolTipText = "Visit the stronghold in the high mountains that belongs to Lethice, the demon queen.";
-		//if (flags[kFLAGS.LETHICE_DEFEATED] > 0) toolTipText += "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the game!";
-		//if (dungeons.checkStrongholdClear()) toolTipText += "\n\nCLEARED";
+		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) toolTipText += "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!";
+		if (dungeons.checkLethiceStrongholdClear()) toolTipText += "\n\nCLEARED";
 	}
 	if(buttonText.indexOf("Desert Cave") != -1) {
 		toolTipText = "Visit the cave you've found in the desert.";
@@ -2077,6 +2077,9 @@ public function displayStats(e:MouseEvent = null):void
 		childStats += "<b>Children With Izma (Tigersharks):</b> " + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] + "\n";
 	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 && flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
 		childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
+		
+	if (flags[kFLAGS.JOJO_LITTERS] > 0)
+		childStats += "<b>Litters with Jojo:</b> " + flags[kFLAGS.JOJO_LITTERS] + "\n";
 		
 	if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
