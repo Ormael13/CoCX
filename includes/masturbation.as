@@ -288,7 +288,7 @@ public function doStripCheck():void
 public function onaholeUse():void
 {
 	//Clear text for new stuff
-	outputText("", true);
+	clearOutput();
 	
 	//Flag after first use!
 	if (player.findStatusAffect(StatusAffects.PlainOnaholeUsed) < 0) {
@@ -338,7 +338,7 @@ public function onaholeUse():void
 		
 }
 public function deluxeOnaholeUse():void {
-	outputText("", true);
+	clearOutput();
 	
 	//Flag after first use!
 	if (player.findStatusAffect(StatusAffects.DeluxeOnaholeUsed) < 0) {
@@ -387,7 +387,7 @@ public function deluxeOnaholeUse():void {
 	}
 }
 public function allNaturalOnaholeUse():void {
-	outputText("", true);
+	clearOutput();
 	//First use!
 	if (player.findStatusAffect(StatusAffects.AllNaturalOnaholeUsed) < 0) {
 			
@@ -421,7 +421,7 @@ public function allNaturalOnaholeUse():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function stimBeltUse():void {
-	outputText("", true);
+	clearOutput();
 	//FIRST TIME USAGE
 	if((player.hasKeyItem("Self-Stimulation Belt") >= 0)) {
 		//First use! Flag after first use!
@@ -448,7 +448,7 @@ public function stimBeltUse():void {
 	}
 }
 public function allNaturalStimBeltUse():void {
-	outputText("", true);
+	clearOutput();
 	if(player.hasKeyItem("All-Natural Self-Stimulation Belt") >= 0) {
 		//First time!
 		if(player.findStatusAffect(StatusAffects.UsedNaturalSelfStim) < 0) {
@@ -488,7 +488,7 @@ public function allNaturalStimBeltUse():void {
 //Jojo masturbation!
 public function masturbateJojo():void {
 	jojoScene.jojoSprite();
-	outputText("", true);
+	clearOutput();
 	player.orgasm();
 	dynStats("cor", .5);
 	if(player.totalCocks() > 0 && player.findPerk(PerkLib.Whispered) >= 0 && rand(4) == 0) {
@@ -744,7 +744,7 @@ public function masturbateJojo():void {
 //Genderless people suck!
 public function genderlessMasturbate():void {
 	//first time as a genderless person - 
-	outputText("", true);
+	clearOutput();
 	//Early prep
 	doStripCheck();
 	//Tit foreplay
@@ -818,7 +818,7 @@ public function genderlessMasturbate():void {
 
 //Non-shitty masturbation
 public function masturbateGo():void {
-	outputText("", true);
+	clearOutput();
 	if(inDungeon && dungeonLoc != -10) {
 		outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.", false);
 		doNext(1);
@@ -1932,7 +1932,7 @@ public function titCum(cumQuantity:Number = 3):void
 //(D. Dildo) – a floppy pink dildo with aphrodisiac reservoir
 public function deluxeDildo():void {
 	player.slimeFeed();
-	outputText("", true);
+	clearOutput();
 	//[USE FEMALE]
 	if(player.hasVagina()) {
 		//(highcor)
@@ -2001,7 +2001,7 @@ public function deluxeDildo():void {
 }
 
 public function centaurMasturbation():Boolean {
-	outputText("", true);
+	clearOutput();
 	var plural:Boolean = false;
 	var primary:Number = -1;
 	//Array of possible choices..
@@ -2268,7 +2268,7 @@ public function lickYerGirlParts():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function catAutoLick():void {
-	outputText("", true);
+	clearOutput();
 	//NOT FEXIBLE
 	if(player.findPerk(PerkLib.Flexibility) < 0) {
 		//Fails [Herm has a 50/50 chance of getting either.]
@@ -2373,7 +2373,7 @@ public function catAutoLick():void {
 }
 
 public function meditate():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You find a flat, comfortable rock to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up two hours of the day.", false);
 	
 	dynStats("lus", -50, "cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
@@ -2420,7 +2420,7 @@ private function dualBeltMasturbation():void {
 //[Maturbate] -- [Fake Mare] (Cock Centaurs Only)
 public function centaurDudesGetHorseAids():void {
 	var x:Number = player.biggestCockIndex();
-	outputText("", true);
+	clearOutput();
 	if(player.keyItemv1("Fake Mare") == 0) {
 		if(player.cor < 50) outputText("Deciding to give the mare-like cocksleeve you got from Whitney a try, you spend a few awkward minutes dragging the lump of metal off to someplace secluded and setting it up.  When you're done, you stand behind a wood-and-iron replica of a mare, adjusted to the perfect height for you.  Looking \"<i>her</i>\" over, your eyes are drawn to the slick black lips of the Onahole between her legs, craftily shaped like a horsecunt, and what looks like a second, smaller one above it simulating an anus.\n\n", false);
 		//[If Med-High Corruption:] 
@@ -2474,7 +2474,7 @@ public function centaurDudesGetHorseAids():void {
 
 //[Masturbate] -- [CentaurPole] -- [Fem/Herm Centaurs]
 public function centaurGirlsGetHorseAids():void {
-	outputText("", true);
+	clearOutput();
 	if(player.keyItemv1("Centaur Pole") == 0) {
 		//[If low Corruption:] 
 		if(player.cor < 50) outputText("Feeling a bit antsy, you decide to give Whitney's so-called \"<i>Centaur Pole</i>\" a try.  You dig it out of your stash and spend a few awkward minutes dragging it off someplace secluded and setting it up.\n\n", false);

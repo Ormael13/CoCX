@@ -228,7 +228,7 @@ package classes.Scenes.Areas
 			}
 			if (chooser == 1) {
 				doNext(camp.returnToCampUseOneHour);
-				outputText("", true);
+				clearOutput();
 				
 				if (kGAMECLASS.monk <= 0) 
 				{	
@@ -292,7 +292,7 @@ package classes.Scenes.Areas
 			//Tentacles 25% of the time...
 			if (chooser == 2) {
 				trace("TRACE TENTACRUELS");
-				outputText("", true);
+				clearOutput();
 				temp = rand(4);
 				//Oh noes, tentacles!
 				if (temp == 0) {
@@ -361,7 +361,7 @@ package classes.Scenes.Areas
 //[RANDOM SCENE IF CHARACTER HAS AT LEAST ONE COCK LARGER THAN THEIR HEIGHT, AND THE TOTAL COMBINED WIDTH OF ALL THEIR COCKS IS TWELVE INCHES OR GREATER]
 		internal function bigJunkForestScene(lake:Boolean = false):void
 		{
-			outputText("", true);
+			clearOutput();
 			var x:Number = player.longestCock();
 
 			//PARAGRAPH 1
@@ -464,7 +464,7 @@ package classes.Scenes.Areas
 		//Suggested to Fen as the MaleXMale submission.
 		//Will be standalone
 		private function trappedSatyr():void {
-			outputText("", true);
+			clearOutput();
 			spriteSelect(99);
 			outputText("As you wander through the woods, you find yourself straying into yet another corrupt glade.  However, this time the perverse grove isn't unoccupied; loud bleatings and brayings of pleasure split the air, and as you push past a bush covered in dripping, glans-shaped berries, you spot the source.\n\n", false);
 
@@ -489,7 +489,7 @@ package classes.Scenes.Areas
 
 		//[=No=]
 		private function ignoreSatyr():void {
-			outputText("", true);
+			clearOutput();
 			spriteSelect(99);
 			outputText("You shake your head, ", false);
 			if(player.cor < 50) outputText("disgusted by the strange thoughts this place seems to put into your mind", false);
@@ -500,7 +500,7 @@ package classes.Scenes.Areas
 		}
 		//Player returns to camp
 		private function rapeSatyr():void {
-			outputText("", true);
+			clearOutput();
 			spriteSelect(99);
 			var x:Number = player.biggestCockIndex();
 
@@ -555,7 +555,7 @@ package classes.Scenes.Areas
 
 		//[=Leave=]
 		private function dontRepeatFuckSatyr():void {
-			outputText("", true);
+			clearOutput();
 			spriteSelect(99);
 			outputText("You've had your fun, and you don't really want to fool around in the forest all day, so you grab your " + player.armorName + " and leave the rutting satyr behind.\n\n", false);
 			doNext(camp.returnToCampUseOneHour);
@@ -564,7 +564,7 @@ package classes.Scenes.Areas
 		private function secondSatyrFuck():void {
 			var x:int = player.cockThatFits(monster.analCapacity());
 			if(x < 0) x = player.smallestCockIndex();
-			outputText("", true);
+			clearOutput();
 			outputText("There's no harm in using the helpless goat once more... This time though, you decide you'll use his mouth.  With a yank on his horns, you forcefully dislodge him from the breast-plant and force him to his knees, turning his head towards you; he doesn't put up much resistance and when you present your erect shaft to him, he licks his lips in excitement and latches onto your " + cockDescript(x) + ".\n\n", false);
 
 			outputText("His mouth is exquisite; it feels slippery and warm and his lips are soft while his tongue wriggles about your shaft, trying to embrace and massage it.  He gloms onto your manhood with eager hunger, desperate to ravish you with his mouth.  Quivers of pleasure ripple and shudder through his body as he slobbers and gulps - and no wonder!  From the remnants of sap still in his mouth, you can feel currents of arousal tingling down your cock; if he's been drinking it straight, his mouth must be as sensitive as a cunt from the effects of this stuff.\n\n", false);

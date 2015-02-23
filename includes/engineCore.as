@@ -205,7 +205,7 @@ public function flushOutputTextToGUI():void
 
 public function displayPerks(e:MouseEvent = null):void {
 	var temp:int = 0;
-	outputText("", true);
+	clearOutput();
 	while(temp < player.perks.length) {
 		outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n", false);
 		temp++;
@@ -333,7 +333,7 @@ private function subInt():void {
 }
 
 private function finishAttributes():void {
-	outputText("", true)
+	clearOutput()
 	if (player.tempStr > 0)
 	{
 		if (player.tempStr >= 3) outputText("Your muscles feel significantly stronger from your time adventuring.\n", false);
@@ -491,7 +491,7 @@ public function levelUpGo(e:MouseEvent = null):void {
 }
 
 public function perkBuyMenu():void {
-	outputText("", true);
+	clearOutput();
 	
 	var perkList:Array = buildPerkList();
 	
@@ -2012,7 +2012,7 @@ public function minLust():Number {
 public function displayStats(e:MouseEvent = null):void
 {
 	spriteSelect(-1);
-	outputText("", true);
+	clearOutput();
 	
 	// Begin Combat Stats
 	var combatStats:String = "";

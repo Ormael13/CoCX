@@ -110,7 +110,7 @@ package classes.Scenes.NPCs
 		public function mortalAnemoneeeeee():void
 		{
 			spriteSelect(4);
-			outputText("", true);
+			clearOutput();
 			if (flags[kFLAGS.TIMES_MET_ANEMONE] == 0 || player.hasItem(consumables.MINOCUM)) {
 				flags[kFLAGS.TIMES_MET_ANEMONE]++;
 				outputText("You step into the boat and begin to slip off the mooring rope when you are distracted by a swirl of bright colors under the surface of the lake.  As you peer over the side to get a better look at the oscillating mass of greens and purples, the swirl begins drawing closer to the boat as if reciprocating your interest; it grows larger and brighter as it closes the distance.  The cloud parts to reveal an attractive feminine face cast in a deep blue shade.  It lightens responsively as its gaze takes you in from the depths of two opaque eyes.  The confusing mass of colors resolves itself into tresses of two-inch-thick anemone tentacles sprouting from the head in place of hair!\n\n", false);
@@ -145,7 +145,7 @@ package classes.Scenes.NPCs
 		//victory:
 		public function defeatAnemone():void
 		{
-			outputText("", true);
+			clearOutput();
 			//Win by HP:
 			if (monster.HP < 1) outputText("The anemone's knees buckle and she collapses, planting her hands behind her with a splash.  You stand over her, victorious.\n\n", false);
 			//win by lust:
@@ -175,7 +175,7 @@ package classes.Scenes.NPCs
 		private function victoryButtholeRape():void
 		{
 			spriteSelect(4);
-			outputText("", true);
+			clearOutput();
 			outputText(images.showImage("anemone-getanal"), false);
 			outputText("You look over the anemone in front of you.  Your attention focuses on her blue shaft; those smaller tentacles should have plenty of pleasing venom in them as well.  Stripping off your " + player.armorName + ", you approach her and push her backwards.  Her gills slide off her breasts and float at her sides. revealing a pair of cute nipples.  You take the opportunity to stroke the shaft of her penis and rub her vagina a bit, soaking up some venom and making your hands tingle.\n\n", false);
 
@@ -221,7 +221,7 @@ package classes.Scenes.NPCs
 		private function rapeAnemoneWithDick():void
 		{
 			spriteSelect(4);
-			outputText("", true);
+			clearOutput();
 			outputText(images.showImage("anemone-male-fuck"), false);
 			if (player.cockThatFits(36) >= 0) {
 				var x:Number = player.cockThatFits(36);
@@ -326,7 +326,7 @@ package classes.Scenes.NPCs
 		private function rapeAnemoneWithPussy():void
 		{
 			spriteSelect(4);
-			outputText("", true);
+			clearOutput();
 			outputText(images.showImage("anemone-female-fuck"), false);
 			outputText("As you review your handiwork, the stirrings in your feminine side focus your attention on the anemone's penis.  Those smaller tentacles on it should have plenty of pleasing venom in them as well.  You make up your mind to put them to use for you.\n\n", false);
 
@@ -397,7 +397,7 @@ package classes.Scenes.NPCs
 		{
 			spriteSelect(4);
 			var x:Number = player.cockThatFits(36);
-			outputText("", true);
+			clearOutput();
 			//loss via hp (only possible if PC engages her while already being at zero or kills himself with Akbal powers):
 			if (player.HP < 1) {
 				outputText("You collapse face-first into the lake, weakened by your damage.  The last thing you hear before passing out is a faint <i>\"What?\"</i>\n\n", false);
@@ -639,7 +639,7 @@ package classes.Scenes.NPCs
 		private function dontGiveMino():void
 		{
 			spriteSelect(4);
-			outputText("", true);
+			clearOutput();
 			outputText("You look sternly at the blue girl and hold out your hand.  As she realizes you don't intend to let her have the bottle, her face changes to a half-pout, half-frown.  When you don't react, she throws the bottle at your feet and shouts, \"<i>Mean!</i>\"  You bend down to pick it, and the other items, up, and when you straighten back up, she looks quite angry and her tentacles are waving all over the place.  Uh-oh.  You raise your weapon as the anemone giggles sadistically and attacks!\n\n", false);
 			//(proceed to combat)
 			var anemone:Anemone = new Anemone();
@@ -653,7 +653,7 @@ package classes.Scenes.NPCs
 		private function giveMino():void
 		{
 			spriteSelect(4);
-			outputText("", true);
+			clearOutput();
 			player.consumeItem(consumables.MINOCUM);
 			outputText("You nod at the girl and she smiles and responds with a very quiet \"<i>Yay.</i>\"  As you pick up the rest of your stuff, she takes the top off of the bottle and chugs it like a champ, without even stopping to breathe.  Her eyes widen a bit as the drug hits her system, then narrow into a heavy-lidded stare.  Dropping the bottle with a splash, she falls to her knees with another.  She looks at you and licks her lips as she begins playing with her nipples. Obviously, she's feelin' good.  ", false);
 			//[(lust<30)

@@ -516,7 +516,7 @@ public function doCamp():void {
 	var explore:* = 2;
 	if(player.fatigue > 50) rest = 11;	
 	if(player.lust > 30) masturbate = 42;
-	outputText("", true);
+	clearOutput();
 	updateAchievements();
 	
 	outputText(images.showImage("camping"), false);
@@ -1411,7 +1411,7 @@ private function swimInStreamPrank1():void {
 }
 
 private function swimInStreamFap():void {
-	outputText("", true)
+	clearOutput()
 	doNext(swimInStreamFinish);
 }
 
@@ -1504,7 +1504,7 @@ private function watchSunset():void {
 //-----------------
 public function rest():void {
 	campQ = true;
-	outputText("", true);
+	clearOutput();
 	//Multiplier
 	var multiplier:Number = 1.0;
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
@@ -1569,7 +1569,7 @@ public function rest():void {
 //-----------------
 public function doWait():void {
 	campQ = true;
-	outputText("", true);
+	clearOutput();
 	//Fatigue recovery
 	var fatRecovery:Number = 2;
 	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery *= 1.5;
@@ -1626,7 +1626,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			getGame().saves.saveGame(player.slotName);
 		}
 		//Clear screen
-		if(clrScreen) outputText("", true);
+		if(clrScreen) clearOutput();
 		/******************************************************************/
 		/*       ONE TIME SPECIAL EVENTS                                  */
 		/******************************************************************/
@@ -1987,7 +1987,7 @@ private function exgartuanCampUpdate():void {
 		//if too small dick, remove him
 		if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0))
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.", false);
 			if(player.hasCock()) outputText("  Perhaps you got too small for Exgartuan to handle?</b>\n", false);
 			else outputText("  It looks like the demon didn't want to stick around without your manhood.</b>\n", false);
@@ -1997,7 +1997,7 @@ private function exgartuanCampUpdate():void {
 		//Tit removal
 		else if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() < 12)
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("<b>Black milk dribbles from your " + nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>", false);
 			player.removeStatusAffect(StatusAffects.Exgartuan);
 		}		

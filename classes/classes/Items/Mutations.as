@@ -343,7 +343,7 @@
 		public function minotaurCum(purified:Boolean, player:Player):void
 		{
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			//Minotaur cum addiction
 			if (!purified) player.minoCumAddiction(7);
 			outputText("As soon as you crack the seal on the bottled white fluid, a ", false);
@@ -1580,7 +1580,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			//Initial outputs & crit level
-			outputText("", true);
+			clearOutput();
 			if (type == 0) {
 				if (rand(100) < 15) {
 					crit = int(Math.random() * 20) / 10 + 2;
@@ -2249,7 +2249,7 @@
 
 		public function impFood(player:Player):void
 		{
-			outputText("", true);
+			clearOutput();
 			if (player.cocks.length > 0) {
 				outputText("The food tastes strange and corrupt - you can't really think of a better word for it, but it's unclean.", false);
 				player.refillHunger(20);
@@ -2301,7 +2301,7 @@
 		public function pureHoney(pure:Boolean, player:Player):void
 		{
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			//Chances of boosting the change limit.
@@ -3542,7 +3542,7 @@
 			player.slimeFeed();
 			//Bottle of Marble's milk - item
 			//Description: "A clear bottle of milk from Marble's breasts.  It smells delicious.  "
-			outputText("", true);
+			clearOutput();
 			//Text for when the player uses the bottle:
 			//[before the player is addicted, Addiction < 30]
 			if (player.statusAffectv2(StatusAffects.Marble) < 30 && player.statusAffectv3(StatusAffects.Marble) == 0) outputText("You gulp down the bottle's contents; Marble makes some good tasting milk.\n\n", false);
@@ -4642,7 +4642,7 @@
 		public function snakeOil(player:Player):void
 		{
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			if (rand(2) == 0) changeLimit++;
@@ -4730,7 +4730,7 @@
 /*
 		public function extensionSerum(player:Player):void
 		{
-			outputText("", true);
+			clearOutput();
 			if (flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] > 2) {
 				outputText("<b>No way!</b>  Your head itches like mad from using the rest of these, and you will NOT use another.\n", false);
 				if (!debug) {
@@ -4762,7 +4762,7 @@
 
 		public function superHummus(player:Player):void
 		{
-			outputText("", true);
+			clearOutput();
 			if (debug) {
 				outputText("You're about to eat the humus when you see it has bugs in it. Not wanting to eat bugged humus or try to debug it you throw it into the portal and find something else to eat.", false);
 				player.destroyItems(consumables.HUMMUS_, 1);
@@ -4862,13 +4862,13 @@
 		public function Hummus(player:Player):void
 		{
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			outputText("", true);
+			clearOutput();
 			outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.", false);
 			player.refillHunger(20);
 			if (player.humanScore() > 4) {
@@ -5116,7 +5116,7 @@
 		public function coal(player:Player):void
 		{
 			var changes:Number = 0;
-			outputText("", true);
+			clearOutput();
 			outputText("You handle the coal rocks experimentally and they crumble to dust in your hands!  You cough as you breathe in the cloud, sputtering and wheezing.  After a minute of terrible coughing, you recover and realize there's no remaining trace of the rocks, not even a sooty stain on your hands!", false);
 			//Try to go into intense heat
 			if(player.goIntoHeat(true, 2)) {
@@ -5151,7 +5151,7 @@
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			//Text go!
-			outputText("", true);
+			clearOutput();
 			outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.", false);
 			//Speed raises up to 75
 			if (player.spe < 75 && rand(3) == 0 && changes < changeLimit) {
@@ -5458,7 +5458,7 @@
 			if (rand(4) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			//clear screen
-			outputText("", true);
+			clearOutput();
 			outputText("You uncork the vial of fluid and drink it down.  The taste is sour, like a dry wine with an aftertaste not entirely dissimilar to alcohol.  Instead of the warmth you'd expect, it leaves your throat feeling cold and a little numb.", false);
 
 			//Statistical changes:
@@ -5860,7 +5860,7 @@
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			//If this is a pregnancy change, only 1 change per proc.
 			if (pregnantChange) changeLimit = 1;
-			else outputText("", true);
+			else clearOutput();
 			//If not pregnancy, mention eating it.
 			if (!pregnantChange) outputText("You eat the neon pink egg, and to your delight it tastes sweet, like candy.  In seconds you've gobbled down the entire thing, and you lick your fingers clean before you realize you ate the shell – and it still tasted like candy.", false);
 			//If pregnancy, warning!
@@ -6200,7 +6200,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			//Generic eating text:
-			outputText("", true);
+			clearOutput();
 			outputText("You pop the nut into your mouth, chewing the delicious treat and swallowing it quickly.  No wonder harpies love these things so much!", false);
 			//****************
 			//Stats:
@@ -6534,7 +6534,7 @@
 		 -Roo face*/
 		public function kangaFruit(type:Number,player:Player):void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You squeeze the pod around the middle, forcing the end open.  Scooping out a handful of the yeasty-smelling seeds, you shovel them in your mouth.  Blech!  Tastes like soggy burnt bread... and yet, you find yourself going for another handful...", false);
 			//Used to track changes and the max
 			var changes:Number = 0;
@@ -6755,7 +6755,7 @@
 //[Giant Chocolate Cupcake] – 500 gems
 		public function giantChocolateCupcake(player:Player):void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You look down at the massive chocolate cupcake and wonder just how you can possibly eat it all.  It fills the over-sized wrapper and bulges out over the top, somehow looking obscene even though it's merely a baked treat.  There is a single candle positioned atop its summit, and it bursts into flame as if by magic.  Eight red gumdrops ring the outer edge of the cupcake, illuminated by the flame.\n\n", false);
 			outputText("You hesitantly take a bite.  It's sweet, as you'd expect, but there's also a slightly salty, chocolaty undercurrent of flavor.  Even knowing what the minotaur put in Maddie's mix, you find yourself grateful that this new creation doesn't seem to have any of his 'special seasonings'.  It wouldn't do to be getting drugged up while you're slowly devouring the massive, muffin-molded masterpiece. Before you know it, most of the cupcake is gone and you polish off the last chocolaty bites before licking your fingers clean.\n\n", false);
 			outputText("Gods, you feel heavy!  You waddle slightly as your body begins thickening, swelling until you feel as wide as a house.  Lethargy spreads through your limbs, and you're forced to sit still a little while until you let out a lazy burp.\n\n", false);
@@ -6767,7 +6767,7 @@
 
 		public function sweetGossamer(type:Number,player:Player):void
 		{
-			outputText("", true);
+			clearOutput();
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
 			if (rand(2) == 0) changeLimit++;
@@ -7034,7 +7034,7 @@
 /*
 		public function applyLustStick(player:Player):void
 		{
-			outputText("", true);
+			clearOutput();
 			if (player.findStatusAffect(StatusAffects.LustStickApplied) >= 0) {
 				player.addStatusValue(StatusAffects.LustStickApplied, 1, 12 + rand(12));
 				outputText("You carefully open the sweet-smelling tube and smear the lipstick over the coat you already have on your lips.  <b>No doubt another layer will make it last even longer!</b>  ", false);
@@ -7055,7 +7055,7 @@
 		public function broBrew(player:Player):void
 		{
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			//no drink for bimbos!
 			if (player.findPerk(PerkLib.BimboBody) >= 0) {
 				outputText("The stuff hits you like a giant cube, nearly staggering you as it begins to settle.", false);
@@ -7224,7 +7224,7 @@
 		public function ectoplasm(player:Player):void
 		{
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			outputText("You grimace and uncork the bottle, doing your best to ignore the unearthly smell drifting up to your nostrils. Steeling yourself, you raise the container to your lips and chug the contents, shivering at the feel of the stuff sliding down your throat.  Its taste, at least, is unexpectedly pleasant.  Almost tastes like oranges.", false);
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
@@ -7312,7 +7312,7 @@
 		public function isabellaMilk(player:Player):void
 		{
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			outputText("You swallow down the bottle of Isabella's milk.", false);
 			if (player.fatigue > 0) outputText("  You feel much less tired! (-33 fatigue)", false);
 			fatigue(-33);
@@ -7324,7 +7324,7 @@
 //tooltip:
 		public function shriveledTentacle(player:Player):void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You chew on the rubbery tentacle; its texture and taste are somewhat comparable to squid, but the half-dormant nematocysts cause your mouth to tingle sensitively.", false);
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
@@ -7413,7 +7413,7 @@
 //Numb Rocks
 		public function numbRocks(player:Player):void
 		{
-			outputText("", true);
+			clearOutput();
 			//Numb rocks lower lust significantly but have a chance of inducing the masturbation preventing effect from minotaur.
 			outputText("You pop open the package of numb rocks and dump it into your waiting mouth.  The strange candy fizzes and pops, leaving the nerves on your tongue feeling a bit deadened as you swallow the sweet mess.", false);
 
@@ -7463,7 +7463,7 @@
 		public function sensitivityDraft(player:Player):void
 		{
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			outputText("You pop the cork on this small vial and drink down the clear liquid.  It makes your lips and tongue tingle strangely, letting you feel each globule of spit in your mouth and each breath of air as it slides past your lips.", false);
 
 			if (player.findStatusAffect(StatusAffects.Dysfunction) >= 0) {

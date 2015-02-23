@@ -390,7 +390,7 @@ public function doCombat(eventNum:Number):void
 	//}
 			//Attack
 	if(eventNum == 5012) {
-			outputText("", true);
+			clearOutput();
 			attack();
 	}
 			//FUCK
@@ -970,7 +970,7 @@ public function doCombat(eventNum:Number):void
 				enemyAI();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			//Keep logic sane if this attack brings victory
 			menuLoc = 0;
 			//Prep messages vary by skill.
@@ -1186,7 +1186,7 @@ public function doCombat(eventNum:Number):void
 //Fantasize
 public function fantasize():void {
 	var temp2:Number = 0;
-	outputText("", true);
+	clearOutput();
 	if (monster.short == "frost giant" && (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0)) {
 		temp2 = 10 + rand(player.lib / 5 + player.cor / 8);
 		dynStats("lus", temp2, "resisted", false);
@@ -1316,7 +1316,7 @@ public function fatigueRecovery():void {
 //ATTACK
 public function attack():void {
 	if(player.findStatusAffect(StatusAffects.FirstAttack) < 0) {
-		outputText("", true);
+		clearOutput();
 		fatigueRecovery();
 	}
 	if(player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
@@ -1678,7 +1678,7 @@ public function goreAttack():void {
 		return;
 	}
 	fatigue(15,2);
-	outputText("", true);
+	clearOutput();
 	menuLoc = 0;
 	var damage:Number = 0;
 	//Amily!
@@ -1770,7 +1770,7 @@ public function goreAttack():void {
 public function playerStinger():void {
 	menuLoc = 0;
 	//Clear Text
-	outputText("", true);
+	clearOutput();
 	//Determine if dodged!
 	//Amily!
 	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
@@ -2620,7 +2620,7 @@ public function teaseText():String
 
 // Just text should force the function to purely emit the test text to the output display, and not have any other side effects
 public function tease(justText:Boolean = false):void {
-	if (!justText) outputText("", true);
+	if (!justText) clearOutput();
 	//You cant tease a blind guy!
 	if(monster.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText("You do your best to tease " + monster.a + monster.short + " with your body.  It doesn't work - you blinded " + monster.pronoun2 + ", remember?\n\n", true);
@@ -4269,7 +4269,7 @@ public function spellChargeWeapon():void {
 }
 //(20) Blind – reduces your opponent's accuracy, giving an additional 50% miss chance to physical attacks.
 public function spellBlind():void {
-	outputText("", true);
+	clearOutput();
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
@@ -4341,7 +4341,7 @@ public function spellBlind():void {
 }
 //(30) Whitefire – burns the enemy for 10 + int/3 + rand(int/2) * spellMod.
 public function spellWhitefire():void {
-	outputText("", true);
+	clearOutput();
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
@@ -4475,7 +4475,7 @@ public function spellPerkUnlock():void {
 //Hellfire deals physical damage to completely pure foes, 
 //lust damage to completely corrupt foes, and a mix for those in between.  Its power is based on the PC's corruption and level.  Appearance is slightly changed to mention that the PC's eyes and mouth occasionally show flicks of fire from within them, text could possibly vary based on corruption.
 public function hellFire():void {
-	outputText("", true);
+	clearOutput();
 	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to breathe fire.\n", true);
 		doNext(5000);
@@ -4558,7 +4558,7 @@ public function hellFire():void {
 }
 
 public function kick():void {
-	outputText("", true);
+	clearOutput();
 	if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
 		outputText("You're too fatigued to use a charge attack!", true);
 		doNext(5000);
@@ -4679,7 +4679,7 @@ public function kick():void {
 }
 
 public function PCWebAttack():void {
-	outputText("", true);
+	clearOutput();
 	//Keep logic sane if this attack brings victory
 	if(player.tailVenom < 33) {
 		outputText("You do not have enough webbing to shoot right now!", true);
@@ -4729,7 +4729,7 @@ public function PCWebAttack():void {
 	else enemyAI();
 }
 public function nagaBiteAttack():void {
-	outputText("", true);
+	clearOutput();
 	//FATIIIIGUE
 	if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
 		outputText("You just don't have the energy to bite something right now...", true);
@@ -4775,7 +4775,7 @@ public function nagaBiteAttack():void {
 	else enemyAI();
 }
 public function spiderBiteAttack():void {
-	outputText("", true);
+	clearOutput();
 	//FATIIIIGUE
 	if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
 		outputText("You just don't have the energy to bite something right now...", true);
@@ -4826,7 +4826,7 @@ public function spiderBiteAttack():void {
 //[Abilities]
 //Whisper 
 public function superWhisperAttack():void {
-	outputText("", true);
+	clearOutput();
 	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(10) > player.maxFatigue())
 	{
 		outputText("You are too tired to focus this ability.", true);
@@ -4985,7 +4985,7 @@ public function dragonBreath():void {
 
 //* Terrestrial Fire
 public function fireballuuuuu():void {
-	outputText("", true);
+	clearOutput();
 	if(player.fatigue + 20 > player.maxFatigue()) {
 		outputText("You are too tired to breathe fire.", true);
 		doNext(5000);
@@ -5093,7 +5093,7 @@ public function kissAttack():void {
 		doNext(5161);
 		return;
 	}
-	outputText("", true);
+	clearOutput();
 	var attack:Number = rand(6);
 	switch(attack) {
 		case 1:
@@ -5187,7 +5187,7 @@ public function kissAttack():void {
 	if(!combatRoundOver()) enemyAI();
 }
 public function possess():void {
-	outputText("", true);
+	clearOutput();
 	if(monster.short == "plain girl" || monster.findPerk(PerkLib.Incorporeality) >= 0) {
 		outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself toward the opponent's frame.  Sadly, it was doomed to fail, as you bounce right off your foe's ghostly form.", false);
 	}
@@ -5219,7 +5219,7 @@ public function runAway(callHook:Boolean = true):void {
 		monster.onPcRunAttempt();
 		return;
 	}
-	outputText("", true);
+	clearOutput();
 	if (inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 4) {
 		clearOutput();
 		outputText("You try to run, but you just can't seem to escape.  <b>Your ability to run was sealed, and now you've wasted a chance to attack!</b>\n\n");
@@ -5474,7 +5474,7 @@ public function runAway(callHook:Boolean = true):void {
 }
 
 public function anemoneSting():void {
-	outputText("", true);
+	clearOutput();
 	//-sting with hair (combines both bee-sting effects, but weaker than either one separately):
 	//Fail!
 	//25% base fail chance

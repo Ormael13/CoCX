@@ -26,7 +26,7 @@ package classes.Scenes.Areas.Swamp
 		public function driderEncounter():void
 		{
 			spriteSelect(77);
-			outputText("", true);
+			clearOutput();
 			//Load monster stats so we can display things like eye/hide color!
 			var drider:CorruptedDrider = new CorruptedDrider();
 			//First time
@@ -66,7 +66,7 @@ package classes.Scenes.Areas.Swamp
 		public function defeatDriderIntro():void
 		{
 			spriteSelect(77);
-			outputText("", true);
+			clearOutput();
 			outputText("All eight of the drider's black and " + monster.hairColor + " striped legs collapse under her weight while she struggles ", false);
 			if (monster.HP < 1) outputText("to try to continue the fight, her movements slowed by pain and weakness.", false);
 			else outputText("to masturbate her swollen pussy-lips and the thick, juicy demon-cock that's sprouted in place of her clit.  She's so focused on getting off that she utterly gives up on the idea of fighting back, let alone dominating you as she seemed to plan originally.", false);
@@ -148,7 +148,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
 			spriteSelect(77);
-			outputText("", true);
+			clearOutput();
 			//*Summary: Fuck her cunt with a wang that fits it, lose control of the 
 			//situation when she kisses you with potent, envenomed lips.  Get 
 			//moderately hypno'ed into cumming into her over and over again?
@@ -288,7 +288,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
 			spriteSelect(77);
-			outputText("", true);
+			clearOutput();
 			outputText("<b>Sometime Later...</b>\n", false);
 
 			outputText("Pistoning your hips violently, you continue to ravage the unconscious spider, fucking her in a brutal, beast-like manner that centers entirely upon your own pleasure.  You cum, dumping a fresh batch of jizz into her already-stuffed twat, grinning when a few more rivulets of ooze roll over her inflamed pussy-lips to drip into the growing puddle.  Still hard, " + sMultiCockDesc() + " continues to twitch, hungry for more, and you don't deny it.  You grab the arachnid bitch and stuff your dick into her mouth, shivering while her venom seeps into your dick, keeping you hard and ready to blow.  Whatever special, immobilizing venom she had earlier, it seems exhausted, and the only response your body has to the onslaught of toxin is to erupt, spouting a huge load of semen into her mouth.\n\n", false);
@@ -316,7 +316,7 @@ package classes.Scenes.Areas.Swamp
 		private function winVSDriderTakeItsCockInCunt():void
 		{
 			spriteSelect(77);
-			outputText("", true);
+			clearOutput();
 			outputText("Your eyes lower towards the drider-woman's thick, demonic shaft lying exposed to your wicked intention.  Easing yourself over to the defeated arachnid, you slowly reach out and squeeze her pained member, a quiet, unwanted moan escaping from between her soft lips.  Gently caressing her length, you make sure to trace your fingers around every bump and curve of the corrupted tool that throbs heatedly in your palm, using your thumb to apply pressure underneath her growing cock.  The drider lies fully erect in no time at all, and you respond by hastily jerking her pride before relinquishing your grip and moving away from your new toy.  Any reluctance she may have held before has vanished with your gratuitous touch, the exhausted spider-lady now humping aimlessly at the air in an attempt to relieve herself - using her trembling hands to fondle her breasts while whining pathetically at her lack of sexual gratification.  An idea sparks in your head - you figure it'd be more satisfying to watch the spidertaur squirm than to give her relief straight away.\n\n", false);
 
 			outputText("Avoiding the desperate drider's spindly legs, you walk around to grab onto her limp torso, pulling it over until she lands on her back with her lewd figure in full display.  The girl pauses hesitantly, cupping one of her heaving tits in her hand while placing a finger to her lips with the other as she waits for you to make your move - in her current state, it's unlikely she can retaliate even if she wanted to.  The drider's corrupted cock twitches with excitement, a thick rod standing tall amidst the collapsed heap of its owner.  A bead of pre-cum oozes from the tip as evidence of your quick work, reminding you it would be rude to leave the job unfinished.  Swaying your " + hipDescript() + " enticingly, you move slowly down towards her lower torso, reaching over and propping yourself on top of the spider-woman with your " + assDescript() + " pressing against her slick devil-dick.  You look into her eager eyes, the aroused pet almost screaming for relief with her pained stare and the equally responsive cock grinding along your " + vaginaDescript(0) + ".  Reaching behind you, you grab the base of her member and pull, eliciting a yelp and an involuntary thrust from your victim that almost forces her tip inside.  It misses, however, and instead slips out in front of you, the nubs of her cock pushing along your lips and accidentally brushing along your " + clitDescript() + ".  You stifle a moan - she'll pay for that.\n\n", false);
@@ -352,7 +352,7 @@ package classes.Scenes.Areas.Swamp
 		private function victoryVSDriderRideOviVaginal():void
 		{
 			spriteSelect(77);
-			outputText("", true);
+			clearOutput();
 			//*Summary:  Roll the drider over and squat on an ovipositor - reuse anal intro? (fuck you bitch, i'm taking your shitty kids to the lake and turning them pink)	
 			player.slimeFeed();
 			outputText("Eyeing the small lump of the spider's retracted ovipositor, you resolve to have a little fun with it, even if it means giving the spider exactly what she wants in a way that she doesn't.  You tear off your " + player.armorName + " while the drider watches with ", false);
@@ -425,7 +425,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			spriteSelect(77);
 			//*Summary: Force the drider onto her back and then fish out her ovipositor, jerk it off, then climb on top for some egg-based buttlovin'
-			outputText("", true);
+			clearOutput();
 			outputText("Eyeing the small lump of the spider's retracted ovipositor, you resolve to have a little fun with it, even if it means giving the spider exactly what she wants in a way that she doesn't.  You tear off your " + player.armorName + " while the drider watches with ", false);
 			if (monster.HP < 1) outputText("hate", false);
 			else outputText("lust", false);
@@ -527,7 +527,7 @@ package classes.Scenes.Areas.Swamp
 		private function victoryVSDriderStickDickInSpinneret():void
 		{
 			spriteSelect(77);
-			outputText("", true);
+			clearOutput();
 			var x:Number = player.smallestCockIndex();
 			outputText("Quickly shedding your " + player.armorName + ", you eye up the incapacitated drider, wondering how best to take advantage of your successes.  A remarkably nasty thought strikes you, and your lips nearly curl into a devious grin then and there.  You stride toward your trophy, taking pleasure in the simmering hatred in her eyes as she glares up at you.  A sudden bout of mocking laughter stops your progress; the drider seems to have noticed ", false);
 			if (player.cockTotal() == 1) outputText("your", false);
@@ -579,7 +579,7 @@ package classes.Scenes.Areas.Swamp
 		private function loseVSDriderGetAnalledOvi():void
 		{
 			spriteSelect(77);
-			outputText("", true);
+			clearOutput();
 			outputText("You fall to the ground, defeated by the agile arachnid-woman as she slowly advances towards you, her engorged clit growing larger and larger as it throbs in your direction.  You've managed to find yourself crumpled face down in the dirt, your " + buttDescript() + " in full display of the aroused drider while she grins lustfully at your broken figure.  Grunting, you begin to pull yourself off the ground, only to hear your attacker 'tsk' before feeling the warm stickiness of her web launch upon your limbs, gluing your hands to your ankles and leaving you completely vulnerable.  You struggle against the bindings, but to no avail.  Lifting your head, you turn to see the drider stroking her now fully-enlarged demon cock, replacing the hardened clit that once adorned her moist pussy.\n\n", false);
 			outputText("\"<i>You just had to make it harder for yourself, didn't you?</i>\"\n\n", false);
 
@@ -636,7 +636,7 @@ package classes.Scenes.Areas.Swamp
 		private function loseVSDriderAndVaginallyImpreggleOvi():void
 		{
 			spriteSelect(77);
-			outputText("", true);
+			clearOutput();
 			//FAST FACTS: Drider uses webbing to spread eagle you then oviposits your womb while making you suck some dick.
 			//SYMNOTE: I think I've done a proper naga pass on this but it was really late so don't trust me 100% on that. I honestly can't imagine the way this scene is set up ever working for centaur, the posing would have to be completely different, but if someone else wants to try to centaurify it you are welcome to. I think there could probably stand to be a few offhand references to your cock and tits if you have them in the later parts, I'm not good at sewing those in. (done)
 			//(No reason it wouldn't work for hoers. The ovipositor is two feet, flexible, and at the tail end of her long-ass abdomen, while her genitals are all the way in front. She could DP a horsemans (or another drider) no problem if she tethered the human head to the bound forelegs. It won't be very comfortable, but this is a loss. So, in you get. -Z)
@@ -732,7 +732,7 @@ package classes.Scenes.Areas.Swamp
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
 			spriteSelect(77);
 			//Poor males.  All the buttsexes. (yo this is an actual paragraph of the game text right)
-			outputText("", true);
+			clearOutput();
 			if (player.lust >= player.maxLust()) outputText("Unable to resist the desire coursing through your body, you strip off your " + player.armorName + " and start stroking " + sMultiCockDesc() + ", displaying it in the hope that it will draw the drider's attention, while at the same time just trying to get yourself off and attain release.", false);
 			else {
 				outputText("You slump down, too beat up to mount an effective defense, let alone stay up on your " + player.feet() + ".  The drider skitters over to you and effortlessly peels you out of your " + player.armorName + ", exposing your ", false);
@@ -853,7 +853,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			var x:int = player.cockThatFits(monster.analCapacity());
 			spriteSelect(77);
-			outputText("", true);
+			clearOutput();
 			outputText("As soon as the drider-girl goes down, you leap into action.  Before she has a chance to recover, you run over and leap onto her back, balancing shakily as the drider stumbles back up onto her many legs, trying to shake you off.  You grab onto the drider's hair for support, pulling tight each time you're nearly displaced.  Yelping in agony, she soon learns her lesson and settles down, submitting to your dominance.\n\n", false);
 
 			outputText("Now that she's calmed down, you give her a hard shove, putting her on her drider-belly so you're not nearly thrown off her every other moment.  With that done, you put your hands on her human back, pushing her forward and exposing her human-like bubble-butt, seated just above where woman meets spider. Greedily, you pull her cheeks apart, revealing the tiny star of her puckered asshole.  You pull your " + cockDescript(x) + " out of your " + player.armorName + ", already hardening from the thought of you pounding her tight little backdoor.\n\n", false);

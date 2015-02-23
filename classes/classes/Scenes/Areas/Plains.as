@@ -22,7 +22,7 @@ package classes.Scenes.Areas
 		}
 		public function explorePlains():void
 		{
-			outputText("", true);
+			clearOutput();
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS]++;
 			//Dem Kangasluts!  Force Sheila relationship phase!
 			if (flags[kFLAGS.SHEILA_DEMON] == 0 && flags[kFLAGS.SHEILA_XP] == 3 && model.time.hours == 20 && flags[kFLAGS.SHEILA_CLOCK] >= 0) {

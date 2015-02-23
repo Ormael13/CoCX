@@ -150,7 +150,7 @@ private function faerieShooAway():void {
 
 private function faerieDoNothing():void {
 	spriteSelect(17);
-	outputText("", true);
+	clearOutput();
 	if(player.nippleLength >= 1) {
 		outputText("She looks you over, stopping at your upper torso and letting out a cry of glee. She lands on your chest, her exposed pussy coming to rest on your nipple. With one hand she grabs hold of you above her head and uses her other hand to guide the rapidly hardening nub between her legs. She sighs in delight as her tight confines squeeze your nipple hard, the feeling somewhere between pinching fingers and suckling lips. You gasp in delight yourself, and you notice she can exercise amazing control with her groin muscles as a rippling feeling courses through your nipple.\n\n", false);
 		outputText("Your nipple starts to get sloppy and wet as if someone's tongue were around it, but it's really the faerie's love juices dribbling down, some running down your breast and some down her legs. She starts thrusting against you, and you notice her clit getting hard and pushing into your soft flesh. With a free hand you grab the area around your nipple and squeeze it harder, forcing more into her.\n\n", false);
@@ -196,7 +196,7 @@ private function faerieDoNothing():void {
 //[No] *(let her go)
 private function letFaerieGo():void {
 	spriteSelect(17);
-	outputText("", true);
+	clearOutput();
 	outputText("You apologize and release her, letting her fly away on gossamer wings.  She thanks you, buzzing up to your lips and planting a chaste kiss on your mouth.  She zips away into the woods without a glance back...", false);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -205,7 +205,7 @@ private function faerieCaptureHJ():void {
 	spriteSelect(17);
 	if(player.findStatusAffect(StatusAffects.FaerieFucked) >= 0) player.addStatusValue(StatusAffects.FaerieFucked,1,2);
 	else player.createStatusAffect(StatusAffects.FaerieFucked,2,0,0,0);
-	outputText("", true);
+	clearOutput();
 	if(player.statusAffectv1(StatusAffects.FaerieFucked) < 15) {
 		outputText("You hold her tightly and scold her, \"<i>If you don't like hard cocks, you shouldn't be dressed up like a such a slut, flying around and teasing me like that.  You should be ashamed of yourself.  Now you've got me all worked up - so you better make it up to me and take care of my little 'problem'</i>.\"\n\n", false);
 		outputText("She looks up at you and gulps before nodding silently, unwilling or unable to resist your command.   ", false);

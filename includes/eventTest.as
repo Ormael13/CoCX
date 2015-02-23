@@ -103,7 +103,7 @@ consequatur aut perferendis doloribus asperiores repellat.
 */
 
 public function eventTester():void {
-	outputText("", true);
+	clearOutput();
 	mainView.showTestInputPanel();
 	mainView.eventTestInput.text = <![CDATA[
 [screen startup |

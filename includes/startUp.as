@@ -40,7 +40,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainView.showMenuButton( MainView.MENU_DATA );
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("coc-logo"), false);
 	outputText("<b>Corruption of Champions (" + version + ")</b>", false);
 	
@@ -141,7 +141,7 @@ public function settingsScreen():void
 {
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	mainView.showMenuButton( MainView.MENU_DATA );
-	outputText("", true)
+	clearOutput()
 	outputText("<font size=\"36\" face=\"Georgia\">Settings</font>\n", false)
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
 
@@ -777,7 +777,7 @@ public function imageCreditsScreen():void
 }
 
 public function howToPlay():void {
-	outputText("", true);
+	clearOutput();
 	outputText("<font size=\"36\" face=\"Georgia\">Instructions</font>\n", false)
 	outputText("<b><u>How To Play:</u></b>\nClick the buttons corresponding to the actions you want to take.  Your 'goal' is to obviously put an end to the demonic corruption around you, but do whatever the hell you want.  There is a story but sometimes it's fun to ignore it.\n\n", false);
 	outputText("<b>Exploration:</b>\nThe lake is a safe zone when you start the game.  It's a good place to explore, and Whitney's farm can offer some nice stat boosts to help get you on your feet. Once you feel comfortable, the forest is probably the next safest area, but beware of tentacle monsters.  The desert is the next toughest area, and the mountains offer further challenges.  There are more areas beyond that, but that's a good way to get started.  You'll uncover plenty of new 'places' exploring, which can be accessed from the <b>Places</b> menu.  You'll also find some interesting characters when you try to discover new explorable locations by choosing <b>Explore</b> twice.\n\n", false);

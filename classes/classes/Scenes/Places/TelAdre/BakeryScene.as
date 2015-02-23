@@ -33,7 +33,7 @@ public function bakeryuuuuuu():void {
 		telAdre.maddie.bakeryEpilogue();
 		return;
 	}
-	outputText("", true);
+	clearOutput();
 	menu();
 	//First time
 	if(flags[kFLAGS.TIMES_VISITED_BAKERY] == 0) {
@@ -313,7 +313,7 @@ private function talkBakeryMenu():void {
 public function nomnomnom(name:String,price:Number):void {
 	flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] = name;
 	flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = price;
-	outputText("", true);
+	clearOutput();
 	if(player.gems < flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE]) {
 		outputText("You don't have enough gems to order that!", false);
 		//doNext(bakeryuuuuuu);
@@ -402,7 +402,7 @@ public function nomnomnom(name:String,price:Number):void {
 [mino cum eclair] – helps your cravings and – tone!, LUST!*/
 
 public function buySlutCake():void {
-	outputText("", true);
+	clearOutput();
 	if(player.gems < 500) {
 		outputText("You don't have enough gems for one of those!", false);
 		//doNext(bakeryuuuuuu);

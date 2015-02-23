@@ -29,7 +29,7 @@ public function auntNancy(display:Boolean = true):Boolean {
 }
 
 public function interactWithAuntNancy():void {
-	outputText("", true);
+	clearOutput();
 	//[Interaction 2]
 	//[If Time = 1400, Relationship with Aunt Nancy >= 30, and PillowTalk= 0]
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] >= 30 && model.time.hours == 14 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00266] == 0) {
@@ -65,7 +65,7 @@ public function interactWithAuntNancy():void {
 
 //[Strong:]
 private function strongStuff():void {
-	outputText("", true);
+	clearOutput();
 	//[Lose 5 Gems.]
 	if(player.gems < 5) {
 		outputText("You start to ask for a strong drink and then remember you can't afford it.", false);
@@ -98,7 +98,7 @@ private function strongStuff():void {
 }
 //[Light:]
 private function lightStuff():void {
-	outputText("", true);
+	clearOutput();
 	//[Lose 5 Gems.]
 	if(player.gems < 5) {
 		outputText("You start to ask for a light drink and then remember you can't afford it.", false);
@@ -167,7 +167,7 @@ private function lightStuff():void {
 
 //[If Decline]
 private function declineAuntNancyMassage():void {
-	outputText("", true);
+	clearOutput();
 	outputText("Aunt Nancy listens as you politely turn her down, and nods her head, the hungry look fading from her eyes.  \"<i>I understand completely.  Sorry to have bothered you.</i>\"  She starts to walk out of the bar, stops, and turns back to size you up again.  \"<i>Of course,</i>\" she says, \"<i>if you ever change your mind... just come by whenever my shift's over.</i>\"\n\n", false);
 
 	outputText("Aunt Nancy raises one of her black-covered hands in front of her mouth, and blows you a kiss before scuttling away.", false);
@@ -177,7 +177,7 @@ private function declineAuntNancyMassage():void {
 
 //[If Agree]
 private function timeForAuntNancySpiderCooch():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You look the still-beautiful spider-lady in the eye, and, half-mesmerized, nod in agreement.  She smiles broadly (and, you can't help but notice, quite lewdly) and puts one of her lower arms through one of yours, while putting the upper one on your shoulder.  \"<i>Well then,</i>\" Aunt Nancy says, \"<i>I suppose we should be off.</i>\"\n\n", false);
 
 	outputText("She leads you through the streets of Tel'Adre, weaving through crowds and back alleys, before you finally end up just outside a modest little adobe building tucked away in a side street.  Slowly, she wraps all four of her arms around you, giving you a gentle hug", false);
@@ -193,7 +193,7 @@ private function timeForAuntNancySpiderCooch():void {
 	doNext(auntNancyPoonPartII);
 }
 private function auntNancyPoonPartII():void {
-	outputText("", true);
+	clearOutput();
 	outputText("Slowly, you follow Aunt Nancy into her home. Inside, the building is fairly dark and gloomy, even in the middle of the day, with thick curtains of unidentifiable white matter keeping most of the sun outside. Blinded, your vision still attuned to the bright desert, you can discern little of the house's insides before you hear a sudden skittering sound behind you and, as you turn to face it, are pushed further into the gloom. Your heel is caught by a thick strand of what feels like rope, and you fall flat onto your back, arms and legs splayed out to either side of you, as you land on some sort of taut net.\n\n", false);
 
 	outputText("You try to climb back up, only to find that your flesh and " + player.armorName + " alike are caught fast against the adhesive matter of the net, which, you suddenly realize, is actually a thick web, spread across the house's floor. You feel a surge of panic and begin to pull and struggle, when suddenly you feel a smooth, cool hand on your face. Your night vision is beginning to recover, and you make out Aunt Nancy's face, her pale skin seeming to glow in the gloom, as she leans over you, staring into your eyes with hers, one finger trailing across your face before covering your lips in a gesture for quiet.\n\n", false); 
@@ -348,7 +348,7 @@ private function auntNancyPoonPartII():void {
 }
 
 private function auntNancyPoonPartIII():void {
-	outputText("", true);
+	clearOutput();
 	//[If PC has a cock]
 	if(player.hasCock()) {
 		var x:Number = player.shortestCockIndex();
@@ -443,7 +443,7 @@ private function auntNancyPoonPartIII():void {
 	doNext(auntNancyPoonPartIV);
 }
 private function auntNancyPoonPartIV():void {
-	outputText("", true);
+	clearOutput();
 	outputText("<b>Two passionate, sticky hours pass...</b>\n\n", false);
 	
 	//[70 % for Toughness, Strength to increase 2-6 points]

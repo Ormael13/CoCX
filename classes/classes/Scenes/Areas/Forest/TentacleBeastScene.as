@@ -136,7 +136,7 @@ private function tentacleEntice():void {
 }
 
 internal function tentacleVictoryRape():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	//Male/Herm
 	if(player.gender == 1 || player.gender == 3) {
@@ -175,7 +175,7 @@ internal function tentacleVictoryRape():void {
 //Spoiler for Bad End-Tentacle Monster: 
 //[CONDITIONS: Futa/Herm, Corruption > 50, Lust Defeat Only, Obtained 3 previous Lust Defeats to Tentacle Monster.]
 private function futaTentacleBadEnd():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	outputText("Having repeatedly been ravaged by the tentacle beast in your travels, you surrender yourself to yet another savage session of forced pleasure. However, the beast lunges forward with its great maw open. Utterly surprised, you do not have time to react before the creature's tentacles seize you and swallow you whole!!!\n\n", false);
 	outputText("The last rays of light fade as the creature closes its beak, trapping you inside. You begin flailing and fighting in sheer panic at the prospect of being eaten alive. As you struggle, countless tentacles wrap around your arms and legs, essentially binding you inside the creature. A thick tentacle forces its way down your mouth and you feel the familiar sensation of salty lust being emptied into your mouth. Your " + cockDescript(0) + " instantly becomes erect, triggering a tentacle to encapsulate your member completely. As this occurs, another limb buries itself deep within your ass.\n\n", false);
@@ -188,7 +188,7 @@ private function futaTentacleBadEnd():void {
 }
 
 private function futaTentacleEpilogue():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	//[Met Giacomo at least once]
 	if(flags[kFLAGS.GIACOMO_MET] > 0) {
@@ -656,7 +656,7 @@ private function tentacleRapeContinuationForFemales():void {
 
 //Centaur v. Tentacle Monster: (display if pc is unsexed centaur)
 private function centaurGenderlessRetardation():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] == 0 || player.balls == 0) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 1;
@@ -723,7 +723,7 @@ private function centaurGenderlessRetardation():void {
 
 //Naga v. Tentacle Monster:
 private function genderlessHilarityForNagaKenDolls():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	outputText("Out of nowhere tentacles bind your arms and tail, holding you firm in a matter of seconds.  You struggle to free yourself but can do nothing against the strength of the beast holding you in your current state.  More of the appendages start teasing around your body, as if looking for something.  A handful test the entrance to your " + assholeDescript() + " but evidently that's not what they're after.\n\n", false);
 
@@ -743,7 +743,7 @@ private function genderlessHilarityForNagaKenDolls():void {
 
 //Goo v. Tentacle Monster:
 private function tentacularGenderGooTimes():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	outputText("All of a sudden, tentacles come whipping out of the undergrowth to grab you.  Though, they're moving a little too fast, and manage to compress your body walls so far together that you're almost squeezed in half.\n\n", false);
 

@@ -49,7 +49,7 @@ public function sharkGirlEncounter(exploreLoc:Number = 0):* {
 		return;
 	}
 	//exploreLoc = 0 for lake, 1 for boat
-	outputText("", true);
+	clearOutput();
 	spriteSelect(70);
 	//Rowboat
 	if(exploreLoc == 1) {
@@ -103,7 +103,7 @@ internal function sharkWinChoices():void {
 //Male and Herm: 
 private function sharkgirlDickFuck():void {
 	player.addStatusValue(StatusAffects.SharkGirl,1,1);
-	outputText("", true);
+	clearOutput();
 	spriteSelect(70);
 	//Naga get a different version of this scene.
 	if(player.isNaga()) {
@@ -138,7 +138,7 @@ private function sharkgirlDickFuck():void {
 }
 
 private function sharkgirlSixtyNine():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(70);
 	//Nagas don't actually get to 69!
 	if(player.isNaga()) {
@@ -178,7 +178,7 @@ private function sharkgirlSixtyNine():void {
 //Requirements: Have vaginal sex with 7 Shark girls in one day (Loss rape for males also counts toward this)
 //Scene triggers automatically after the seventh Shark girl
 private function sharkBadEnd():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(70);
 	outputText("Several weeks pass by and you once again find yourself at the lake, your loins aching for another shark girl to swim by. Just thinking of their incredible sexual organs and the sense of domination you get from them makes you feel aroused. Sadly though, there's no sign of one, so you instead decide to take a nap.\n\n", false);
 	outputText("You're awoken a short time later by something warm wriggling around inside your mouth. Your eyes pop open, worried that you might've swallowed a bug or something. However, when your vision swims back into focus, you become quite aware that it is actually someone's tongue probing around your mouth. It seems to be a young shark girl in her early teens, judging by her modest measurements and short stature. She pulls her head back and grins at you before exclaiming, \"<i>Hi, daddy!</i>\" You raise an eyebrow at that. Then you turn and you see several more teenage shark girls, each pinning your arms and legs down.\n\n", false);
@@ -190,7 +190,7 @@ private function sharkBadEnd():void {
 
 //[Next]
 private function sharkBadEnd2():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(70);
 	outputText("Several months and mutations later...\n\n", false);
 	outputText("You plunge your cock into yet another shark girl, the third one in the past hour, and finger two others at the same time. You've been fucking without stop for weeks now. Ever since you were morphed into a shark man, sex is almost the only thing you can think about. At one point you recalled that you had a name, and you vaguely remember having to do something important... Not as important as this, though. Not as important as breeding your harem.\n\n", false);
@@ -262,7 +262,7 @@ internal function sharkLossRape():void {
 		cleanupAfterCombat();
 		return;
 	}
-	outputText("", true);
+	clearOutput();
 	spriteSelect(70);
 	//Genderless:
 	if(player.gender == 0) {

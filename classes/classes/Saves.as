@@ -171,7 +171,7 @@ public function loadScreenAIR():void
 				slots[i] = function() : void 		// Anonymous functions FTW
 				{
 					trace("Loading save with name ", fileList[fileCount].url, " at index ", i);
-					outputText("", true);
+					clearOutput();
 					loadGameObject(gameObjects[i]);
 					outputText("Slot " + String(i+1) + " Loaded!");
 					statScreenRefresh();
@@ -291,7 +291,7 @@ public function saveScreen():void
 		return;
 	}
 	
-	outputText("", true);
+	clearOutput();
 	if (player.slotName != "VOID")
 		outputText("<b>Last saved or loaded from: " + player.slotName + "</b>\r\r", false);
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", false);
@@ -340,7 +340,7 @@ public function saveLoad(e:MouseEvent = null):void
 	if (player.autoSave) autoSaveSuffix = "ON";
 	else autoSaveSuffix = "OFF";
 	
-	outputText("", true);
+	clearOutput();
 	outputText("<b>Where are my saves located?</b>\n", false);
 	outputText("<i>In Windows Vista/7 (IE/FireFox/Other): <pre>Users/{username}/Appdata/Roaming/Macromedia/Flash Player/#Shared Objects/{GIBBERISH}/</pre>\n\n", false);
 	outputText("In Windows Vista/7 (Chrome): <pre>Users/{username}/AppData/Local/Google/Chrome/User Data/Default/Pepper Data/Shockwave Flash/WritableRoot/#SharedObjects/{GIBBERISH}/</pre>\n\n", false);
@@ -517,7 +517,7 @@ public function loadGame(slot:String):void
 		trace("Got " + numProps + " file properties -- success!");
 		// I want to be able to write some debug stuff to the GUI during the loading process
 		// Therefore, we clear the display *before* calling loadGameObject
-		outputText("", true);
+		clearOutput();
 
 		loadGameObject(saveFile, slot);
 		outputText("Game Loaded");

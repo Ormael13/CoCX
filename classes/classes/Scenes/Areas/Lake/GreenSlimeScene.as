@@ -691,7 +691,7 @@ private function oozeRapesYouVaginally():void
 
 
 internal function rapeOozeWithMilk():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You look over the ooze, wondering what to do about your need to nurse now that it has lost cohesion. After a while of puzzling things out, you decide to wing it, removing the top of your " + player.armorName + " and pressing the mess of a monster to your " + breastDescript(0) + " and giving it a squeeze to get the milk to it. The slime responds almost immediately, applying pressure from the base of your " + breastDescript(0) + " to the tip of your " + nippleDescript(0) + ", earning it a shot of milk to your immense satisfaction. As it tends to your " + nippleDescript(0) + ", it slowly works its way down your body, almost lovingly ", false);
 
 	// [If male- 
@@ -774,13 +774,13 @@ internal function rapeOozeWithMilk():void {
 		{
 			//Service for lower corruption
 			if (player.cor <= 33) {
-				outputText("", true);
+				clearOutput();
 				if (player.lust < 60) serviceLowCorruption();
 				else serviceLowCorruptionHighLust();
 			}
 			//higher corruption raaaaeeeep
 			else {
-				outputText("", true);
+				clearOutput();
 				//male or futa
 				if (player.gender == 1 || (player.gender == 3 && rand(2) == 0)) maleRapesOoze();
 				//female or futa
@@ -797,7 +797,7 @@ internal function rapeOozeWithMilk():void {
 				cleanupAfterCombat();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			doNext(1);
 			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
 				temp = rand(3);

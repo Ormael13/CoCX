@@ -682,7 +682,7 @@ private function jojoCumQ():Number {
 private function milkJojoFirst():void {
 	jojoSprite();
 	var x:Number = player.cockThatFits(40);
-	outputText("", true);
+	clearOutput();
 	outputText("A wicked idea comes to mind, and you call for your favorite mousey ", false);
 	if(tentacleJojo()) outputText("tentacle", false);
 	else outputText("boy", false);
@@ -772,7 +772,7 @@ private function milkJojoFirst():void {
 
 private function repeatMilkJojo(tentacle:Boolean = false):void {
 	jojoSprite();
-	outputText("", true);
+	clearOutput();
 	//Jojo Repeat Milking - Non Tentacle (edited)
 	if(!tentacle || !tentacleJojo()) {
 		outputText("You call for your corruption-filled mouse-pet, and Jojo immediately bounds out of the woods on all fours, his bloated dick practically dragging the ground as it dribbles behind him. He looks up at you with eyes full of hope, still remembering the pleasure of his last trip to the farm.  You sigh and say, \"<i>Yes, I'm going to take you for another milking.  Are your balls nice and full?  I expect you to earn me a few gems, my little cum-cow.</i>\"\n\n", false);
@@ -861,7 +861,7 @@ private function repeatMilkJojo(tentacle:Boolean = false):void {
 //Use Jojo to pay for Hair Care 
 private function jojoPaysForPerms():void {
 	jojoSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("Lynnette the goblin answers the door and lets you in, waving you deeper into her shop.  Her shining black dress barely contains her fertile-hips and jiggling chest as she greets you, \"<i>Welcome back honey!  Who's the cutie?</i>\"\n\n", false);
 	
 	outputText("You answer that your pet mouse, Jojo will be taking care of payment for you today.  Lynnette looks doubtful, but she quickly drops to her knees in front of the mouse, determined to get her payment one way or another.  Jojo's forearm-length erection immediately makes itself apparent.  The goblin matron coos at the sight, humming happily once she sees the rivulets of pre-cum streaming down your slut's cock.  In one smooth motion, she devours the heavy mouse-shaft, sliding her lips down all the way to the base.\n\n", false);

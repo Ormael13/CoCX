@@ -52,7 +52,7 @@
 
 	race = player.race();
 	//Discuss race
-	outputText("", true);
+	clearOutput();
 	if(race != "human")	outputText("You began your journey as a human, but gave that up as you explored the dangers of this realm.  ", false);
 	//Height and race.
 	if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + Math.round(100 * (player.tallness * 2.54) / 100) + " centimetre tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);

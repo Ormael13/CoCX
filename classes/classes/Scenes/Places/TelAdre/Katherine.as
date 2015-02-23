@@ -496,7 +496,7 @@ public function catMorphIntr():void {
 }
 
 public function katherineGreeting():void {
-	outputText("", true);
+	clearOutput();
 	//[If Player chooses 'Scylla' button]
 	outputText("Scylla smiles when she sees you approaching, and politely greets you.  “<i>Why, hello, " + player.short + "; it's good to see you.  Do you need something?</i>”\n\n", false);
 
@@ -833,7 +833,7 @@ private function talkToKatherine():void {
 //Talk Scenes
 //Racial Tension
 private function katherineDefur():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You comment to Katherine that you can't help but notice that she and all of her.... ah, 'friends' are cats, and the city seems to be mainly populated by dogs.  Does that have anything to do with her basically being a vagrant?\n\n", false);
 
 	outputText("“<i>Ah... well, I wouldn't go so far as to say it's entirely to blame for us being on the streets, but I confess that it's definitely had a role to play.  Most of the watch are canines of some description and, well, they do tend to think the worst of any cats they suspect of causing trouble.</i>” Katherine shrugs.\n\n", false);
@@ -849,7 +849,7 @@ private function katherineDefur():void {
 
 //Her History
 private function katherinesHistory():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You tell Katherine you're curious about her.  How did she end up on the streets?  Was she born there - or did she simply lose her family?\n\n", false);
 
 	outputText("“<i>No, no, nothing quite so dramatic as that.</i>”  The cat-woman laughs.  “<i>My people basically all moved to Tel'Adre before I was born - mother used to complain I was kicking in her womb all the way - when our own cities were ransacked by the demons.  We had to settle in the bad parts of the city - we were lucky Tel'Adre had already lost a lot of people, or they might have turned us away.   I was born in the streets, and I've grown up here,</i>” she explains.\n\n", false);
@@ -869,7 +869,7 @@ private function katherinesHistory():void {
 
 //Gang
 private function askKatherineAboutGang():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You ask Katherine if she can tell you anything about the gang of cats you found her running with.\n\n", false);
 
 	outputText("She looks around, as if expecting them to suddenly appear.  “<i>Okay... just, promise me you won't tell them anything I tell you?</i>”  When you give your word, she sighs softly.  “<i>Well, we're basically just what we look like; a bunch of homeless cats who figured out there was strength in numbers.  We're not really friends, exactly, we just know we can trust each other and we band together to do what we need to do.</i>”\n\n", false);
@@ -917,7 +917,7 @@ private function askKatherineAboutGang():void {
 
 //Dog Cock
 private function askKatherineAboutDogCock():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You confess to Katherine that you're curious about her dog cock.  How did a cat end up with a canine penis?\n\n", false);
 
 	outputText("Katherine sighs softly.  “<i>I knew you would ask this eventually.  Well, to answer the obvious question right away, I was born a herm - and no, I never got any grief over it.  The other part happened not too long after I ran away from home to become a street-cat; I was starving hungry, and I was hanging around the markets - one of the traders had managed to bring a load of produce through, so I snuck in and grabbed the first crate of food I could carry on my own before running away.</i>”  She shrugs.  “<i>It was full of canine peppers, but my belly was growling, so I started tucking in... Unfortunately, I was too naive to realise that raw canine peppers have their transformative effects, and these were raw peppers. Native Marethians are resistant to interspecies transformation, but that didn't stop me from changing in my most vital part.</i>”\n\n", false);
@@ -939,7 +939,7 @@ private function askKatherineAboutDogCock():void {
 
 //Vagrancy
 private function askKatherineAboutVagrancy():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You ask Katherine to explain to you how exactly she and her friends can be vagrants; with all the empty houses left in the city, you'd think it would be easy for them to find a house in.\n\n", false);
 
 	outputText("Katherine scowls.  “<i>It's the government's idea.  Basically, they've repossessed all of the houses that are empty, and you can't get into them until and unless you prove you can make enough money to pay taxes and buy a lease.  No money, no house - that's why we, and many others like us, live on the street.  The Watch spends more time cracking vagrants over the head and expelling us from perfectly good empty houses than doing anything useful.</i>”\n\n", false);
@@ -952,7 +952,7 @@ private function askKatherineAboutVagrancy():void {
 
 //Love & Lust
 private function askKatherineAboutLoveAndLust():void {
-	outputText("", true);
+	clearOutput();
 	outputText("Trying to phrase your question politely, you ask why it was that Katherine wanted to see you again, particularly given the circumstances under which you met.\n\n", false);
 
 	outputText("The dog-dicked herm cat blushes and scrapes one foot nervously along the ground in embarrassment.  “<i>Well, I... uh...  Truth be told?  You're basically the only person I've ever had sex with.</i>”\n\n", false);

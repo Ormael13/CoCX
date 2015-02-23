@@ -57,7 +57,7 @@ package classes.Scenes.Areas.Forest
 		public function akbalWon(hpVictory:Boolean,pcCameWorms:Boolean):void{
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = -1;
 			flags[kFLAGS.AKBAL_BITCH_Q] = 0;
-			outputText("", true);
+			clearOutput();
 			if(pcCameWorms){
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
 				doNext(loseToAckballllllz);
@@ -72,7 +72,7 @@ package classes.Scenes.Areas.Forest
 		private function rapeAkbalForcedFemaleOral():void
 		{
 			flags[kFLAGS.AKBAL_BITCH_Q]++;
-			outputText("", true);
+			clearOutput();
 			//Naga RAPPUUUUUU
 			if (player.isNaga())
 			{
@@ -139,7 +139,7 @@ package classes.Scenes.Areas.Forest
 			var primary:Number = player.cockThatFits(50);
 			if (primary < 0)
 				primary = 0;
-			outputText("", true);
+			clearOutput();
 			//Naga RAPPUUUUUU
 			if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
 			{
@@ -364,7 +364,7 @@ package classes.Scenes.Areas.Forest
 		private function girlsRapeAkbal():void
 		{
 			flags[kFLAGS.AKBAL_BITCH_Q]++;
-			outputText("", true);
+			clearOutput();
 			outputText("You smirk to yourself quietly as the so called \"God of Terrestrial Fire\" lays in a twitching heap on the ground, his flesh squirming as he shifts into his more humanoid form. Removing your " + player.armorName + ", your hand lowers to your feminine slit, pondering how to make use of him.\n\n", false);
 			//{If Centaur}
 			outputText(images.showImage("akbal-deepwoods-female-bindakbal"));
@@ -449,7 +449,7 @@ package classes.Scenes.Areas.Forest
 
 		private function girlsRapeAkbalPart2():void
 		{
-			outputText("", true);
+			clearOutput();
 			kGAMECLASS.hideUpDown();
 			//Centaur
 			outputText(images.showImage("akbal-deepwoods-female-taur-bindakbal"));
@@ -706,7 +706,7 @@ package classes.Scenes.Areas.Forest
 				ackbalRepeatAfterLoss();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			//(Player should be level 4 or greater before encounter
 			//chance is activated)
 			outputText("As you are walking through the forest, a twig suddenly snaps overhead.  You quickly look up towards the source of the noise, only to be met by a pair of glowing emerald eyes hidden in the shadowed canopy of a tree.  A demonic force sweeps over you, keeping you frozen in place as a single jaguar paw emerges from the darkness.  The graceful killer stalks across the branch of its tree and soon is fully exposed to you.  Bathed in the sunlight filtering through the trees overhead, the creature holds you within its gaze – a gaze far too intelligent to belong to a mere wild animal.  A chorus of whispering voices tickles your ear, but too quietly for you to make out what is being said.\n\n", false);
@@ -726,7 +726,7 @@ package classes.Scenes.Areas.Forest
 		private function superAkbalioTalk():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("After a few moments of silence you ask, \"<i>What do you mean, 'submit'?</i>\" Akbal grins, revealing a row of wicked ivory teeth as he opens his mouth. You suddenly feel the demon's powerful body pinning you down, a wide tongue licking your neck and claws tickling your back in a way that is both horrifying and sensual. Yet after a moment of taking it in, you realize that he is still there in front of you, unmoved and grinning. You can guess what the image means: he wants you to become his mate for a day to make up for invading his territory.  What do you do?\n\n", false);
 
 			//Submit / Fight
@@ -737,7 +737,7 @@ package classes.Scenes.Areas.Forest
 		private function repeatAkbalPostSubmission():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("As you walk through the forest, you hear a purring coming from behind you.  Turning around reveals that Akbal has come to find you.  He uses his head to push you in the direction of his territory, obviously wanting to dominate you again.\n\n", false);
 			outputText("What do you do?", false);
 			//Submit / Deny / Fight
@@ -748,7 +748,7 @@ package classes.Scenes.Areas.Forest
 		private function akbalDeny():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("You shake your head and rub the lust-filled jaguar behind the ear as you tell him you're busy.  The demon's eyes roll, and he licks your " + player.leg() + " before his eyes find an imp in the trees above the two of you.\n\n", false);
 			outputText("Knowing he's found a new toy, Akbal allows you to leave unmolested.", false);
 			doNext(camp.returnToCampUseOneHour);
@@ -758,7 +758,7 @@ package classes.Scenes.Areas.Forest
 		private function ackbalRepeatAfterWin():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("As you walk through the forest, you hear a snarl and look up just in time to dodge a surprise attack by the jaguar demon, Akbal.  Your ", false);
 			if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
 				outputText("equine leap places you a good distance away from him.  Do you fight or flee?\n\n", false);
@@ -772,7 +772,7 @@ package classes.Scenes.Areas.Forest
 		private function ackbalRepeatAfterLoss():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("A chorus of laughter sounds inside your mind as the jaguar demon, Akbal, drops to the ground in front of you.  His masculine voice says, \"<i>Well, if it isn't the defiant welp who, in all their great idiocy, has wandered into my territory again.  Will you submit, or do I have to teach you another harsh lesson?</i>\"\n\n", false);
 
 			//Submit / Fight / Run
@@ -783,7 +783,7 @@ package classes.Scenes.Areas.Forest
 		private function startuAkabalFightomon():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("You ready your " + player.weaponName + " and prepare to battle the demon jaguar.", false);
 			//[battle ensues]
 			startCombat(new Akbal());
@@ -804,7 +804,7 @@ package classes.Scenes.Areas.Forest
 				akbalBigButtSubmit();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			//Naga variant goez here
 			if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
 			{
@@ -1031,7 +1031,7 @@ package classes.Scenes.Areas.Forest
 		public function akbalSubmissionFollowup():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] < 4)
 			{
 				outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.", false);
@@ -1081,7 +1081,7 @@ package classes.Scenes.Areas.Forest
 		//(Requires the Whispered perk and Jojo as follower)
 		public function whisperJojobait():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText(images.showImage("akbal-deepwoods-male-jojosex"));
 			outputText("You close your eyes and begin to think of Jojo.  You can feel the former monk's presence far away in the forest, futilely trying to meditate and rid himself of the corruption you so generously bestowed upon him.  He is sitting with one paw on his knee, and the other on his rigid tool.\n\n", false);
 			outputText("He flinches as a chorus of voices begin whispering in his ear.  He looks around, wondering if he truly heard something or if he's just imagining the many beings saying such lewd things about him.  As you begin to visualize his body being dominated and forcibly made to submit to your every twisted whim, he begins to squirm as a stream of clear mouse-pre starts leaking down his ridged shaft.  After a moment's hesitation, he starts to head in your direction.\n\n", false);

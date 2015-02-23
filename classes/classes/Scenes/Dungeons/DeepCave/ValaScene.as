@@ -18,7 +18,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//Vala
 		public function useVala():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			dynStats("lus", 20);
 			//(Male)
 			if(player.gender == 1) {
@@ -44,7 +44,7 @@ package classes.Scenes.Dungeons.DeepCave
 		}
 		public function useValaPtII():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			hideUpDown();
 			fatigue(5,0);
 			player.orgasm();
@@ -76,7 +76,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Free]
 		public function freeValazLooseCoochie():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("You search the room for a way to free the fairy from her shackles and find an ugly, iron key that looks like a promising candidate. Opening the rusted metal with a teeth-clenching screech, the girl slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You try to explain that she's free, but it's clear that thoughts are travelling through a pretty thick haze of abuse, so you take a moment to let her gather herself. When she's managed to assemble what wits are left to her, she slowly curls her mouth into a hopeful smile. \"<i>How can Bitch please Master?</i>\" she asks in an innocent voice tainted by husky desire.\n\n", false);
 			outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again. If you had the right materials, you might be able to mix something to heal the damage her captors have done to the fairy's mind.\n\n", false);
 			//Choicez go here.  I can haz fucks?
@@ -88,7 +88,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Heal]
 		public function healVala():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			if(player.hasItem(consumables.PURHONY,1)) {
 				player.consumeItem(consumables.PURHONY, 1);
 				flags[kFLAGS.VALA_HEALED_HONEY] = 1;
@@ -119,7 +119,7 @@ package classes.Scenes.Dungeons.DeepCave
 		}
 		public function healValaPartTwoTheHealingHealsOfRevenge():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformity is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The lord of this place, in his dark designs, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow to a more pleasing size. They bound me in this room with these,</i>\" she cups her absurdly large tits, \"<i>weights. When my wings grew strong enough to carry my inflated body, they switched to chains instead. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead. \"<i>I must taste the sweet open air and return to my sisters, but please try to find me once you are done here. I wish to repay your kindness.</i>\"\n\n", false);
 
 			outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it is the lives you save that really make you feel like a hero. You sigh contentedly and press on. You've got demons to dethrone.", false);
@@ -131,7 +131,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Sex]
 		public function ValaGetsSexed():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			//(Herm/Male)
 			if(player.totalCocks() > 0) {
 				outputText("The fairy's grinding and the sweet scent leaking out of her honey pot is getting under your skin, irritating an itch that's been building for a while now. Surely it wouldn't hurt to throw the mind-broken girl a pity fuck? It's not like she's one of the demons or anything. You push the girl back, gently and nod your head, stripping your " + player.armorName + " piece by piece, teasing the fairy with your slowness. As you disrobe, you glance back at the spot she'd been chained up and see the placard on the wall again. \"<i>Vala?</i>\" you ask. \"<i>Is that your name?</i>\" She stares blankly, unresponsive.\n\n", false);
@@ -156,7 +156,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 		public function valaGetsSexedPtDuece():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			hideUpDown();
 			player.orgasm();
 			fatigue(5,0);
@@ -213,7 +213,7 @@ package classes.Scenes.Dungeons.DeepCave
 		
 		public function leftValaAlone():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			//first post meeting
 			if(flags[kFLAGS.INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED] == 0 || flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] == 0) {
 				outputText("Having dispatched the foul master of this cavern, you return to the broken fairy. She is lying as you left her, apparently still as oblivious to the world beyond her pussy and asshole as before. You try to rouse the girl from her near comatose state, but she responds only in terse, disjointed phrases. When you urge her to leave the dungeon, she seems confused and refuses. When you offer to shelter her at your camp, she grows panicked, apparently so inured to her captivity that the thought of freedom frightens her into paralysis. Nothing you say seems to reach her dulled brain and you realize that even if she were willing to come with you, having a broken, drugged, branded fairy at your camp might alienate your friends or send the wrong message to potential allies. There's nothing for it- you're going to have to leave her here.\n\n", false);
@@ -243,7 +243,7 @@ package classes.Scenes.Dungeons.DeepCave
 		
 		public function tryToHealVala():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			//(Without Pure Honey)
 			if(!(player.hasItem(consumables.PURHONY,1) || player.hasItem(consumables.P_PEARL,1))) {
 				outputText("You try your best with what you've got, but nothing seems to restore the broken fairy's mind to her sex-addled  body. You're going to have to go out and gather more materials. Surely there's something that can break the damage the imps have done to Vala.", false);
@@ -276,7 +276,7 @@ package classes.Scenes.Dungeons.DeepCave
 		}
 		public function tryToHealValaWHoney2():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n", false);;
 
 			outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.\n\n", false);
@@ -288,7 +288,7 @@ package classes.Scenes.Dungeons.DeepCave
 		
 		public function useValaOHYEAHSNAPINTOASLIMJIM():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			//(Male)
 			if(player.gender == 1) {
 				outputText("You shrug. The girl is so hopelessly lost in pleasure that you doubt she could ever return to the real world anyway. Since Val has been so kind as to string herself up for you, it's easy enough to take her rape-broadened hips into your hands and slide your " + cockDescript(0) + " up her thin thighs, toward her drooling pussy. The fairy girl has been playing with the toys around her chamber, you realize, and recently at that. You try to slide in and find virtually no resistance. Apparently in the imps' absence she's been simulating their frenzied lusts, penetrating her gash with two or three dildos at a time. That, or maybe she's been using the minotaur-sized one. Either way, the ruined vagina gapes far too widely for enough friction to get you off. It looks like her asshole is in no better shape. Well, you are nothing if not resourceful.\n\n", false);
@@ -315,7 +315,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 		public function useValaOHYEAHKOOLAIDPTII():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			hideUpDown();
 			//m2
 			if(player.gender == 1) {
@@ -349,7 +349,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Wake]
 		public function wakeValaUpBeforeYouGoGo():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			//(Male)
 			if(player.gender == 1) {
 				outputText("You don't bother searching the room for a key to her shackles, knowing she's just clapped them over her limbs for the feel of the metal. You pull them open and, predictably, Vala slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You give her a moment to gather herself but when she's managed to assemble what wits she's got left, it's clear she only recognizes you as her pleasure giver. She slowly curls her mouth into a hopeful smile. \"<i>How can Vala please Master?</i>\" she asks in an innocent voice tainted by husky desire. It seems she still shows no sign of improvement. Well, at least you can both take some enjoyment from your visit.\n\n", false);
@@ -385,11 +385,11 @@ package classes.Scenes.Dungeons.DeepCave
 
 		public function wakeMeUpBeforeValaGoGosPtII():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			hideUpDown();
 			//m2
 			if(player.gender == 1) {
-				outputText("", true);
+				clearOutput();
 				outputText("You spot an unsecured set of chained manacles on the floor and an idea strikes you. Vala still sliding along your shaft, you bend down and grab the fetters, snapping one around the girl's neck like a collar. With a shudder at the cold, you lift the fairy up and lock the other end of the shackles around the root of your " + cockDescript(0) + ", steel snapping around your base tightly. The makeshift cock-ring works perfectly as your " + hipDescript() + " quiver, your body trying to orgasm but denied release by the metal loop. The fairy, meanwhile, thrashes atop your groin, the chain of her collar swinging between her tits, buffeting them with enough force to spray small white streams as she rides you. Her purple hair glimmers pink in the dull light of the dungeon as it bounces right along with her rocking hips. Even the diminished pulses of sunlight streaming from her stained and tattooed skin seems brighter as she is filled labia to cervix by your straining fuckpole.\n\n", false);
 
 				outputText("She moans in a series of small, cute gasps and her pussy clenches your " + cockDescript(0) + " as tightly as the makeshift cock-ring. You savor the sweet shivers that run up her spritely body, fingers clenching around your arms and legs wrapping about your " + buttDescript() + " to slam deeper, even taking the chained shackle at your base into her cumming slit. It feels like a flood is released from the fairy's gaping box, warm fluid splashing around your bulging length and raining down to leave a thin, clear puddle under you. You bite your lip and slide your fingers into her vice-like pussy, to unhook the shackle around your cock, and the added insertion gives the girl enough to cum again, her body shaking violently against yours, squirting her hot girl cum over your hand. Vala notices what you're trying to do and she slams down onto your hand with added force, making it difficult to spring the catch. The pressure in your loins is getting painful now, and you lean against a wall, using both hands to try to unclap the fetters around your " + cockDescript(0) + ". Between her wings and the chain, she manages to stay firmly locked onto your root, grinding orgasmically as more fingers push past her pulsing lips and fumble at the cock-ring.\n\n", false);
@@ -433,7 +433,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Reject]
 		public function rejectFuckingVala():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) {
 				outputText("The fairy's weak insistence has begun to get obnoxious. What kind of prisoner dry humps her rescuer? Actually, if the heavy flow of lubricating girl cum dripping out of her pussy is any indication, it's the wettest humping you've had with your " + player.armorName + " still on. You seize the girl's shoulders and hold her up, pushing her away from your goo-stained lower body. You assure the girl that you won't be having sex with her here. It's far too dangerous, you tell her, to leave yourself vulnerable right now. You'll take her to safety when the demons are defeated. You try to impress on her the importance of speed and stealth, but you might as well be talking to a big-breasted brick wall. When she makes a grab at your crotch, you've had enough and throw her back.\n\n", false);
 
@@ -454,7 +454,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Fuck]
 		public function valaFightVictoryFuck():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			//(Female) 
 			if(player.gender == 2) {
 				outputText("If the girl's got energy to spare, you'd better try to wear her down or she might alert more demons after you leave. Time to see just how strong her drug-fuelled wings have become. Stripping down, you step up to the fairy and present your " + vaginaDescript(0) + " to her. She's all too happy to lavish kisses on your lower lips, hot tongue sliding along your labia and tip teasing your " + clitDescript() + " with lapping flicks. Licking your lips, you bend over and pull her legs up, forcing her into a hand-stand as you raise the girl's gushing sex to your head. It's startling how light the fairy is; even her flesh-slapping titties are practically weightless as you loop an arm around her impossibly thin waist and bury your face in her groin, breathing in her honey-sweet nectar as she squirts hard enough to splash you with her warm juice. You bear down on her stimulation-swollen clit and suck the joy buzzer hard enough to pull it from the thin skin sheath. Biting lightly on the engorged button, you whisper into the fairy's cunt, \"<i>Let's fly.</i>\"\n\n", false);
@@ -496,7 +496,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Fuck]
 		public function valaFightVictoryFuckPtII():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			//fem2
 			if(player.gender == 2) {
 				outputText("One by one, you curl your fingers into a ball, tightening your hand into a fist within the girl's pink tunnel, sensitive walls parting before your hardening grip. The fairy's wings spasm as she orgasms under your clenching fist, nearly dropping the two of you back onto the stone floor, before she catches herself and pulls up. You pump your fist into her tunnel, thick as a minotaur's cock, and the girl's pussy gushes in ecstasy. You can feel her inner walls flexing against your arm, coiled rings of muscle tightening in pinching contractions, actually pulling your arm deeper into her cunt. You pull back, reminding her greedy cunny who the Mistress is, fist stretching her abdomen in a way that brings a shuddering orgasm to your quivering sex. Your own walls tighten around the fairy's fair features, trapping her tongue inside you as your " + vaginaDescript(0) + " squirts down her lips and across her face. She begins to spin in mid-air and the force of the rotation is nearly enough to shake you off of the oversexed girl's body.\n\n", false); 
@@ -565,7 +565,7 @@ package classes.Scenes.Dungeons.DeepCave
 			spriteSelect(60);
 			var cumBath:Function = null;
 			if(player.hasCock()) cumBath = valaCumBath;
-			outputText("", true);
+			clearOutput();
 			menu();
 			//(First meeting)
 			if(flags[kFLAGS.ENCOUNTERED_VALA_AT_BAR] == 0) {
@@ -613,7 +613,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 		public function cleansedFirstRemeet():void {
 			spriteSelect(60);
-			outputText("", true);
+			clearOutput();
 
 			outputText("When Vala finishes delivering drinks and making sure everybody is set, she lets the bartender know that she'll be taking a break and leaves her apron behind the bar. She leads you to a store room in back and closes the door behind you. Offering you the only chair in the room, a low, wide stool, she seems content to flutter in the air while the two of you talk, her obscene strength making constant flight trivial.  ", false);
 			//(NAGA/CENTAUR
@@ -630,7 +630,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[You] 
 		public function cleansedValaFuckHerBrainsOut():void {
 			spriteSelect(60);
-			outputText("", true);
+			clearOutput();
 			//[Male/Herm Growth scene]
 			if(player.totalCocks() > 0) {
 				outputText("You don't even have to speak, she reads your desire as plainly as you can read hers. She flutters her wings in eager anticipation as she slides her hands up your chest and over your arms, thumbs tracing the curve of your muscles while fingertips dance across your " + player.skinFurScales() + ". With anxious quickness, she gently caresses your body with every breath. Vala leans in to kiss your neck and shoulders while shifting to straddle you, her enormous breasts hotter than her kisses as she presses into you. She savors the nearness for a long moment, just feeling your heartbeat against hers, sighing happily in your arms, before she wraps her legs around your waist and begins to grind her ass into your crotch. Time has not abated the torrential flow of clear lube leaking from her aroused pussy, and your lower body is soaked by her rose-petal labia, her ample rear spreading the warm liquid across your lap and over your stiffening length. You hiss in teased excitement and reach your hands across her broad, breeder's hips to clutch her bubble-bottom cheeks. She rocks up and down, her drooling lower lips sucking at your shaft with each motion, heat pouring out of her cunny.\n\n", false);
@@ -689,7 +689,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//Part 2
 		public function cleansedValaFuckHerBrainsOutPtII():void {
 			spriteSelect(60);
-			outputText("", true);
+			clearOutput();
 			//dicks + growth
 			if(player.totalCocks() > 0) {
 				outputText("Vala leans way back and grabs the edge of the stool while she locks her legs behind your waist, the fairy's startling strength pinning the two of you together. She slaps her generous butt onto your dick in long, slow motions, making sure you feel every inch of her rippling passage", false);
@@ -755,7 +755,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[You]
 		public function cleansedValaRepeatBrainFucking():void {
 			spriteSelect(60);
-			outputText("", true);
+			clearOutput();
 			outputText("She flashes a beautiful smile and tells the bartender that she'll be taking her break early. Grabbing you by the hand, she rushes to the stockroom and sheds her dress without any trace of her former shame about her tattooed back. When you're too slow taking off your " + player.armorName + ", she helps, deft hands made all the quicker by eagerness. When the two of you are naked, she pushes you onto the well-worn stool and sits in your lap, staring into your eyes with a small smile.", false);
 			//[Next] (go to Growth scene)
 			doNext(cleansedValaFuckHerBrainsOut);
@@ -763,7 +763,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Fairies]
 		public function faerieOrgyFuck():void {
 			spriteSelect(60);
-			outputText("", true);
+			clearOutput();
 			outputText("Vala giggles and nods to the bartender to indicate she'll be taking her break. Taking you by the hand, she flutters upstairs to one of the far rooms of the tavern. When she opens the door, you're startled to find the room is virtually filled with fairies. Unlike Vala, they're the type you're more used to seeing- three to four inches tall, the girls are clothed in shiny black leather straps and wear tiny sable stockings tipped with crystalline heels. There's quite a variety of them and dozens of eyes settle on you as Vala pulls you into the room, closing the door behind you. \"<i>These are my sisters, from the deep forest,</i>\" she introduces. \"<i>In my state, a monster or other predator of the woods would surely catch me or, worse, use me to lure my sisters to danger. But with a few complimentary bottles of whiskey, the captain of Tel'Adre's city guard was willing to give them passage to visit me in the city once a week, as long as they stay out of mischief.</i>\" The fairies lift off and buzz around you, teeny voices introducing themselves, asking your name, marveling at your huge muscles, or otherwise fawning over you. It's a bit much, truth be told.\n\n", false);
 			outputText("You thank Vala for introducing you, but you've really got to be going, you claim. Demons to defeat, maidens to rescue, all that. The large fairy chuckles and gives you a squeeze. \"<i>You're so cute when you're flustered. Don't worry, we're not going to all jump you at once- you'd probably end up like I did! No, I asked my sisters here to help me with a little forest magic. Don't you want to see how fairies masturbate?</i>\" You're a little taken aback by the question, but you nod all the same. \"<i>All right girls, the petals please.</i>\" The cloud of fairies in front of you disperses, each winged vixen scattering to different corners of the room to retrieve hidden flower petals. Each blossom, you note, matches the hair color of the fairy holding it, creating a dizzying array of  hues as they form circles around the two of you. Vala guides you to the bed and gently removes your " + player.armorName + " before instructing you to lie down.\n\n", false);
 			flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] = 6;
@@ -779,7 +779,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Male]
 		public function faerieOrgyFuckMaleContinue():void {
 			spriteSelect(60);
-			outputText("", true);
+			clearOutput();
 			outputText("The fairy girl lands at the edge of the bed, settling on her knees and resting her weighty chest on the mattress. Leaning in, she spreads your " + player.legs() + " with warm, delicate hands, fingertips stroking the insides of your thighs. You shiver and squeeze the bedspread between your fingers, a little nervous about this 'forest magic.' One of the fairies flutters down to Vala and hands her a pale white lily petal with a tittering giggle. The larger fairy takes the soft white bloom and, whispering a silken word to it, licks the cream-colored surface. Slithering further between your legs, she reaches your " + cockDescript(0) + " and brushes the petal against your throbbing glans with a teasing caress. Then, much to your surprise, she places it on the tip of her forefinger and places it on the base of your cock. You gasp, the petal's soft surface rubbing sensitive skin with a warmth you were unprepared for. After the briefest delay, you lose your breath as the tremor of a small, barely contained orgasm rumbles through your gut. Without hesitation, the fairy barmaid takes a rose petal and repeats the process, another almost-orgasm seizing you and leaving you panting. \"<i>Normally we only need the one petal, but since you and I are so much larger than the average fairy, I had my sisters bring lots. All for you,</i>\" she whispers, coyly.\n\n", false);
 
 			//[If the Player has unlocked Scylla's Addiction Counseling event]
@@ -806,7 +806,7 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Female]
 		public function faerieOrgyFuckFemaleContinue():void {
 			spriteSelect(60);
-			outputText("", true);
+			clearOutput();
 			outputText("The fairy girl lands at the edge of the bed, settling on her knees and resting her weighty chest on the mattress. Leaning in, she spreads your " + player.legs() + " with warm, delicate hands, fingertips stroking the insides of your thighs. You shiver and hug your arms under your breasts, a little nervous about this 'forest magic.' One of the fairies flutters down to Vala and hands her a pale white lily petal with a tittering giggle. The larger fairy takes the soft white bloom and, whispering a silken word to it, licks the cream-colored surface. Slithering further between your legs, she reaches your " + vaginaDescript(0) + " and brushes the petal against your " + clitDescript() + " with a teasing caress. Then, much to your surprise, she places it on the tip of her forefinger and slides it into your pussy. You gasp, the petal's soft surface rubbing your inner walls with a warmth you were unprepared for. Vala presses lightly on a spot inside your vagina and you lose your breath as the tremor of a small orgasm rumbles through your gut. Without explanation, the fairy barmaid takes a rose petal and repeats the process, another orgasm seizing you and leaving you panting. \"<i>Normally we only need the one petal, but since you and I are so much larger than the average fairy, I had my sisters bring lots. All for you,</i>\" she whispers, coyly.\n\n", false);
 			
 			//[If the Player has unlocked Scylla's Addiction Counseling event] 

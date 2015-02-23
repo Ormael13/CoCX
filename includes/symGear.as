@@ -3,7 +3,7 @@
 
 //[INTRO]
 public function inquisitorRobesDiscovery():void {
-	outputText("", true);
+	clearOutput();
 	outputText("Cutting your way through the swamps in the hopes of finding something that isn't a spider, you are pleasantly surprised when you actually succeed.  You discover what seems to be a mossy stone door in a low hillside, adorned with some sort of complex puzzle lock composed of multiple stone circles decorated with animal symbols.  You don't know what lurks beyond the door, but if adventuring has taught you nothing else it is that something cool is always behind a puzzle.\n\n", false);
 
 	//[Intelligence less than 60]
@@ -57,7 +57,7 @@ public function inquisitorRobesDiscovery():void {
 
 //[No]
 public function noThankYouSirIDontWantAwesomeArmors():void {
-	outputText("", true);
+	clearOutput();
 	outputText("Uninterested in the proffered reward, you turn and leave the way you came.  At the entrance, you replace the moss, doing your best to conceal the portal in the event you wish to return, or at least to keep any items of power inside from the hands of hostile swamp denizens.  You may as well not have spent the effort, for as you're walking away, you hear the stones grinding and shifting behind you.  Sure enough, an inspection affirms that the door has sealed itself again.\n\n", false);
 	//allows player to find again later, like the B.Sword
 	doNext(camp.returnToCampUseOneHour);
@@ -65,7 +65,7 @@ public function noThankYouSirIDontWantAwesomeArmors():void {
 
 //[Retribution]
 public function retributionArmorIsCoolShit():void {
-	outputText("", true);
+	clearOutput();
 	outputText("With your word, the chest clicks.  Moving to lift the lid, you start when it does so of its own will.  Gleaming, brilliant light floods the room.  You had expected there to be a bit of showiness from the magic, yes, but having the robes actually rise up out of the chest seems excessive.  Dark red fabric stretches up as though on a mannequin - or a ghost.  Golden trim runs along its edges.  The back of the gloves feature clearly embroidered sigils that you do not recognize, but which you suspect meant something to a culture long forgotten.  It seems to be constructed primarily of two main portions - a sleeveless high-collared undershirt and skirt, and a hooded overcoat and mantle.  You gather the robes and place them in your pack to inspect further at camp.\n\n", false);
 
 	outputText("Turning to leave, you're startled by apparitions standing between you and the stairwell.  Faceless, translucent figures wearing the same robes you just discovered watch you carefully.  You brace yourself for a fight, but one by one they step to the side.  Carefully, you continue forward.  Each one bows as you pass them.\n\n", false);
@@ -78,7 +78,7 @@ public function retributionArmorIsCoolShit():void {
 
 //[Carnality]
 public function carnalityArmorIsCoolShitToo():void {
-	outputText("", true);
+	clearOutput();
 	outputText("With your word, the chest clicks.  Moving to lift the lid, you start when it does so of its own will.  Gleaming, brilliant light floods the room.  You had expected there to be a bit of showiness from the magic, yes, but having the robes actually rise up out of the chest seems excessive.  A dark red posture collar attached to sleeves floats above it as though on a mannequin - or a ghost.  The corset that rises beneath it looks perfectly fitted to you", false);
 	if(player.biggestTitSize() < 1) outputText(", which strikes you as unusual given your flat chest", false);
 	outputText(".  Red like dried blood, it looks devilishly tight.  A golden trim runs over the... well, the trim.  Similarly colored laces run down the back.  It connects naturally to a belt with a symbol you don't recognize emblazoned on the front, which in turn is affixed to a wavy skirt aligned to the side.  There don't actually seem to be any bottoms, and the skirt looks as though it will cover approximately nothing between your legs - but given your choice, that's probably to be expected.  A high pair of heeled boots completes the outfit, echoing a similar dark red lace along the side. You gather the ensemble and place them in your pack to inspect further at camp.\n\n", false);
@@ -98,7 +98,7 @@ public function carnalityArmorIsCoolShitToo():void {
 
 //[Approach Dominika post-D2 in bar, requires having used her at least once before?]
 public function dominikaSpellblade():void {
-	outputText("", true);
+	clearOutput();
 	//[Approach Dominika post-D2 in bar, on Dominika's \"<i>I'm a racist bitch</i>\" list]
 	if((player.minoScore() >= 3 && player.faceType == FACE_COW_MINOTAUR && player.gender == 1) || !player.isBiped()) {
 		outputText("You greet Dominika and make small talk, but as usual she seems distracted and the conversation is strained at best.  Drumming her fingers on the table and glancing outside her attention is constantly drawn away from you, and eventually she outright cuts the conversation off.  \"<i>I need to go, I'm afraid,</i>\" she says quickly, and half-heartedly adds, \"<i>It was nice talking to you.</i>\"\n\n", false);

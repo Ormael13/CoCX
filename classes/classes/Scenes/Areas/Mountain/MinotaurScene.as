@@ -133,7 +133,7 @@ private function rapeMinotaurTentacles():void {
 	}
 	var mismatched:Boolean = false;
 	var temp2:Number = 0;
-	outputText("", true);
+	clearOutput();
 	if(monster.HP <= 0) outputText("The minotaur collapses backwards after your last blow. Defeated and tired, he can barely stand up as you approach.  ", false);
 	else {
 		outputText("The minotaur drops his arm", false);
@@ -201,7 +201,7 @@ private function rapeMinotaurTentacle():void {
 		}
 		counter++;
 	}
-	outputText("", true);
+	clearOutput();
 	outputText("You stand before the defeated minotaur and your tentacle dick begins to lash back and forth quickly, showing your excitement.  You see the hardness of his dick, and decide to do something about it... for both of you.  ", false);
 	outputText("You come up behind him and wrap your tentacle dick around his huge member, squeezing him tightly at his dick's base pump even more blood to it.  Then you wrap yourself around his massive erection a few more times and you're ready. You jerk him up and down, varying the pace, place, and strength of your grip, milking his dick for all he is worth.  ", false);
 	outputText("The minotaur's balls begin to spasm, so you wrap the base of your tentacle around him tightly, preventing his " + eCockDescript(0) + " from cumming, driving the minotaur mad with desire.  Your own " + cockDescript(x) + " delights in the feeling of the fur of his balls and the hardness of his " + eCockDescript(0) + ".  ", false);
@@ -261,7 +261,7 @@ private function rapeMinotaurTentacle():void {
 
 private function AddictNagaOnMinotaur():void {
 	spriteSelect(44);
-	outputText("", true);
+	clearOutput();
 	//[if(monster.lust >= 99)
 	if(monster.lust > 99) outputText("You slither towards the fallen monster, wishing to taste his addictive semen.  He's currently engaged in stroking his enormous shaft up and down with both of his hands, but offers little resistance when you push him over to a sitting position.  You pull his hands away and replace them with yours, running your fingers up and down along his thickness, working yourself up with anticipation.  He leans back and exhales loudly, clearly appreciative.\n\n", false);
 	else outputText("You slither towards the fallen monster, wishing to taste his addictive semen.  You notice that, despite the beating you just gave him, his huge cock is fully erect.  Delighted, you gently run both of your hands up and down its long shaft.  He exhales loudly, signaling his appreciation.\n\n", false);
@@ -340,7 +340,7 @@ private function minoUrethralPen():void {
 
 private function minoRapeIntro():void {	
 	spriteSelect(44);
-	outputText("", true);
+	clearOutput();
 	//Monster got ass whupped
 	if(monster.HP <= 0) {
 		outputText("You roll the barely conscious beast over, lifting his ass up above his knees.  The loincloth flops open, giving you a perfect view of his hardening member.  In most ways it looks like a horse's dick, though it seems to be textured with multiple rings of prepuce along its length.  The scent boiling off that marvelously thickening endowment is pleasant yet musky, and overpoweringly strong.", true);
@@ -634,7 +634,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 
 private function getOralRapedByMinotaur():void {
 	spriteSelect(44);
-	outputText("", true);
+	clearOutput();
 	outputText("The huge bull-man grabs you around the waist with one hand and flips you over. You hang upside down in his grip, your " + player.legs() + " splayed in the air.  The minotaur rubs your face across his sweat-slick balls, smearing his musk into your skin. Each of the minotaur's testicles is bigger than a man's head, and the skin of his sack is pulled taut over his cum-filled balls.\n\n", false);
 	outputText("The minotaur traps your " + player.legs() + " in one hand and slams your back against the cold cave wall. You gasp, spraying drops of musky sweat from your lips. Dragging you against the rough stone, the minotaur lifts you higher and bends your " + player.legs() + " back over a rock ledge. You are pinned against the cave wall, " + player.legs() + " held in one of the minotaur's hands while his other roughly gropes your stretched-out body.", false);
 	if(player.hasBreasts()) outputText("  The bull-man grabs your " + biggestBreastSizeDescript() + ", squeezing and mauling them with his calloused hand.", false);
@@ -676,7 +676,7 @@ private function minoGetsTitFucked():void {
 		return;
 	}
 	//(Rape – titfuck) Requires F+ cup breasts or DD+ breasts on top two rows.  
-	outputText("", true);
+	clearOutput();
 	outputText("The helpless minotaur lays in the dirt, ", false);
 	if(monster.HP < 1) outputText("defeated.  ", false);
 	else outputText("masturbating uncontrollably.  ", false);
@@ -708,7 +708,7 @@ private function minoGetsTitFucked():void {
 //(Direct Injection) – GIGITY!
 private function takeMinoCumDirectly():void {
 	spriteSelect(44);
-	outputText("", true);
+	clearOutput();
 	outputText("Relishing your victory, you breathe deeply, shivering and stretching.  ", false);
 	if(monster.HP < 1) outputText("The beast-man has fallen on his back, comatose and insensate, though his shaft has risen to full erectness, displacing his loincloth.", false);
 	else outputText("The beast-man is on his back with his legs splayed, masturbating hopelessly.  His anguished moans tell you all you need to know – he'll never get off alone.", false);
@@ -836,7 +836,7 @@ public function minoCumUpdate():Boolean {
 
 public function minoAddictionFuck():void {
 	spriteSelect(44);
-	outputText("", true);
+	clearOutput();
 	outputText("While exploring the mountains, a familiar musky scent works its way into your nostrils.   Sniffing hungrily, you begin shaking, nearly convulsing with need.   You don't think, you act, sprinting heedlessly around the rock obstructions that litter the jagged mountain-side, chasing down your need.  Rounding a sharp bend, you sigh happily as the smell noticably increases in strength.  A few feet away is a minotaur, covered in shaggy fur and snacking on fruit.  Ecstatic, you scrabble forwards, sending tiny rocks everywhere.   The minotaur looks up, at first with a frown, then with a gradually widening grin as he recognizes the look in your eyes.\n\n", false);
 		
 	outputText("He tosses aside the fruit, forgotten as his veiny shaft forces aside his loincloth, proud and dripping.   You NEED him, and you drop to your knees and masturbate, knowing that soon he'll be filling you full of what you need.   The blatant sexual show does the trick, and you shudder as the drooling horse-cock gets closer and closer to you.   At the last moment the minotaur picks you up, and tosses you backwards, into a cave.  Your hope sinks, but then he starts to advance upon you again, and you know the time for waiting is over...", false);
@@ -851,7 +851,7 @@ public function minoAddictionFuck():void {
 //[Optional Bad-End For Uber-Addicted]
 public function minoAddictionBadEndEncounter():void {
 	spriteSelect(44);
-	outputText("", true);
+	clearOutput();
 	outputText("While exploring the mountains you catch a strong whiff of your favorite scent.  Tipping your head to the side, you take in a few deep lungfuls and sigh.   Judging by the strength of the smell, there must be MANY minotaurs gathered together.   Immediate visions of being surrounded by the muscly monsters fill your mind.   In your fantasy your holes are plugged and you're soaked in their wondrous stuff.  You desperately want it to be a reality, and all you need to do is follow your nose...\n\n", false);
 
 	//(Withdrawal) 
@@ -870,7 +870,7 @@ public function minoAddictionBadEndEncounter():void {
 
 private function minoAddictionBadEnd2():void {
 	spriteSelect(44);
-	outputText("", true);
+	clearOutput();
 	outputText("You grin and stumble up the mountain, inhaling deep breaths from moment to moment to make sure you're on the right track.  The scent gets stronger and stronger, making you ", false);
 	if(player.hasVagina()) {
 		outputText("wet ", false);
@@ -904,7 +904,7 @@ private function minoAddictionBadEnd2():void {
 private function minoCumAddictBadEnd3():void {
 	spriteSelect(44);
 	hideUpDown();
-	outputText("", true);
+	clearOutput();
 	outputText("Days and weeks pass in a half-remembered haze.  You're violated countless time, and after the first day they don't even bother to keep you on a leash.  Why would they need to restrain such an eager slave?  You're tossed to the side whenever you're not needed as a cum-dump, but as soon as you start to come out of your daze, you crawl back, gaping, dripping, and ready for another dose.  For their part, your new masters seem happy to take care of your needs.  The only time you aren't drugged is when the minotaurs are sleeping, but the minitaurs seem all too happy to let you suckle the pre from their tiny horse-cocks in the huddled slave-pile.\n\n", false);
 	
 	outputText("You are no longer the Champion of your village.  The only thing you're a champion of is cum-guzzling.  You take immense pride in showing the other cum-sluts just how many thick loads you can coax from your horny masters every day.  Life couldn't be any better.", false);
@@ -914,7 +914,7 @@ private function minoCumAddictBadEnd3():void {
 
 private function minotaurDrinksMilkNewsAtEleven():void {
 	spriteSelect(44);
-	outputText("", true);
+	clearOutput();
 	outputText("You kneel next to the exhausted minotaur, lifting his head up to your " + breastDescript(0) + ". He turns his muzzle away from them, still trying to defy you. You force his head back toward your chest and push your " + nippleDescript(0) + " against his mouth, but he keeps his lips tightly shut. You pound your fist on his stomach, forcing a gasp of air out of his mouth as you cram your nipple inside. The minotaur is trying to shake his head to free up his mouth but you're holding his fur too firmly for him to wriggle free. His struggling only causes sips of milk to trickle down into his mouth. You squeeze your breast and send streams of milk down his throat. He soon stops fighting and just starts nursing. He's sucking hard, pulling the milk out of you, and stopping every few minutes to take a deep breath. He soon empties that teat and you put the other one up to his mouth. He obediently begins to nurse on that one, but he's a bit winded from the other, so his suckling is gentle and soothing. It takes him a bit longer for him to empty this nipple, but having such a strong minotaur reduced to a weak, suckling calf pleases you greatly for some reason.\n\n", false);
 
 	outputText("You pop your " + nippleDescript(0) + " from the dazed minotaur's mouth and leave him there to enjoy the afteraffects of his meal.", false);
@@ -930,7 +930,7 @@ private function minotaurDrinksMilkNewsAtEleven():void {
 //should be restricted to PCs with 36" cocks or less (arm length-ish) since you're holding the minotaur's horns; centaur addition matches to same length because you're welcome
 private function minotaurBlowjob():void {
 	spriteSelect(44);
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.cockThatFits(80);
 	outputText("You step towards the minotaur, ", false);
 	if(!player.isTaur()) outputText("peeling away your " + player.armorName + " and ", false);

@@ -19,7 +19,7 @@ package classes.Scenes.Areas.HighMountains
 //*If genderless, rape options are Finger Her*
 		public function harpyVictoryuuuuu():void
 		{
-			outputText("", true);
+			clearOutput();
 			//(Enemy defeated by damage) 
 			if (monster.HP < 1) outputText("The harpy screams out in one last, pained cry before her wings give way, the feathered woman collapsing into a weary heap.", true);
 			//(Enemy defeated by lust)
@@ -85,7 +85,7 @@ package classes.Scenes.Areas.HighMountains
 
 		private function harpyGooGenderlessLoss():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("The triumphant harpy looks down at your goopy form, ready to take you.  She seems a little confused though, and begins poking at your gelatinous body.\n\n", false);
 
 			outputText("\"<i>Penis?</i>\" she eventually asks.\n\n", false);
@@ -108,7 +108,7 @@ package classes.Scenes.Areas.HighMountains
 //Requires pussy or cock small enough for harpy!
 		private function harpyLossLust():void
 		{
-			outputText("", true);
+			clearOutput();
 			//Merauder wroted.
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
@@ -168,7 +168,7 @@ package classes.Scenes.Areas.HighMountains
 //No genderless folks.
 		private function harpyDamageLoss():void
 		{
-			outputText("", true);
+			clearOutput();
 
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
@@ -303,7 +303,7 @@ package classes.Scenes.Areas.HighMountains
 				else y--;
 			}
 
-			outputText("", true);
+			clearOutput();
 			outputText("You step over the now-submissive feathered beauty and grin, your " + hipDescript() + " swaying from side to side idly as you eye up the sweet curves of your latest conquest. Stripping off your " + player.armorName + " and tossing it aside carelessly, you waste no time with words, pushing her roughly down to the ground face-down and rubbing your " + multiCockDescriptLight() + " in anticipation. She raises her magnificently-plumed head and turns it, looking at you pathetically with a glint of fear in her eye, squawking and crooning as if pleading with you. This passes unnoticed to you, however, as the sight of her thick, fluffy ass and meaty thighs has captured your attention FAR more effectively.\n\n", false);
 
 			outputText("Wrapping your arms around those immense, motherly hips, you drag her rump up so that it sways and jiggles in the air, forcing the big-butted bird-girl into the doggy position. Her cheeks burn red with embarrassment, but the way she is jiggling and shaking her blubbery bottom at you tells you she wants it just as much as you do. Finally getting a really good view of it, your eyes widen as you run your hands over every inch of her bouncy rear - it's more like standing behind a horse than a harpy! An ass this fine isn't to be wasted, and so you lean down and bury your " + player.face() + " between those luxurious orbs, planting your mouth firmly over her drooling pussy and tasting her sweet juices, suckling and kissing around her beautifully-formed clit and breathing her intoxicating feminine scent in with enjoyment, letting it fill your lungs as your expert ministrations coax a plethora of moans and subtle squawks from your partner.\n\n", false);
@@ -368,7 +368,7 @@ package classes.Scenes.Areas.HighMountains
 
 		private function winAndRapeHarpyAnally():void
 		{
-			outputText("", true);
+			clearOutput();
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
@@ -426,7 +426,7 @@ package classes.Scenes.Areas.HighMountains
 
 		private function WinOnHarpyAndOralRape():void
 		{
-			outputText("", true);
+			clearOutput();
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.analCapacity());
 			var y:Number = x + 1;

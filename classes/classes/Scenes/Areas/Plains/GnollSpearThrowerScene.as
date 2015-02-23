@@ -29,7 +29,7 @@ package classes.Scenes.Areas.Plains
 		public function gnoll2Encounter():void
 		{
 			spriteSelect(54);
-			outputText("", true);
+			clearOutput();
 			//<First Encounter>
 			if (flags[kFLAGS.HAVE_ENCOUNTERED_GNOLL_PLAINS] == 0) {
 				flags[kFLAGS.HAVE_ENCOUNTERED_GNOLL_PLAINS]++;
@@ -70,7 +70,7 @@ package classes.Scenes.Areas.Plains
 				kGAMECLASS.plains.gnollScene.yoDawgIHeardULiekGNollBallzzzdahdakjldh();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			if (doSFWloss()) return;
 			outputText("The gnoll laughs, a sharp, barking sound of mocking, as you sink to ground, ", false);
 			//<Physical Defeat> 
@@ -157,7 +157,7 @@ package classes.Scenes.Areas.Plains
 		public function hyenaVictory():void
 		{
 			spriteSelect(54);
-			outputText("", true);
+			clearOutput();
 			outputText("The gnoll draws one final javelin, the sharp point distinct as it points at you.  The javelin drops, sticking deep into the dry ground, as the amazon is too");
 			if (monster.HP <= 0) outputText(" dazed");
 			else outputText(" aroused");
@@ -184,7 +184,7 @@ package classes.Scenes.Areas.Plains
 				y = 0;
 				if (y == x) y = 1;
 			}
-			outputText("", true);
+			clearOutput();
 			outputText("Sensing the gnoll's will has broken, you impulsively order her to strip.  Tawny, spotted paws fall to the leather band around her waist, deftly untying the loincloth.  The material falls away from her groin, exposing a long, black shaft slipping free from a furred sheath.  You gaze in wonder, realizing that this hardening member is not a cock, but instead a long, thick clit.  The barrel-like tip of her pseudopenis is actually the entrance to her pussy.  You begin to understand why bondage and dominance are so ingrained in the culture of this savage race.\n\n", false);
 
 			outputText("Dark brown eyes watch your hands as you slowly slip out of your " + player.armorName + ".  The potent smell of hyena musk starts to fill the air as the dark shaft of the gnoll's pseudopenis slides from her sheath.  Eyes of brown fire fix on your now exposed " + multiCockDescriptLight() + ".  Her pink tongue slides along her powerful teeth and dark lips, giving you pause, but her gaze is filled with nothing but lust and need.  Soft whines escape from her lips as she all but strains towards your " + cockDescript(x) + ".  Her spotted paws slide up to her heavy breasts, squeezing the orbs as the now submissive amazon tries to tempt you.\n\n", false);
@@ -247,7 +247,7 @@ package classes.Scenes.Areas.Plains
 		private function victoryRapeHyenaCunnilingus():void
 		{
 			spriteSelect(54);
-			outputText("", true);
+			clearOutput();
 			outputText("Dark brown eyes watch your approach, already slightly glazed in lust.  Slowly, the tawny head bows before you, acknowledging you as dominant.  It amazes you that this powerful, feral woman who fought so hard would now be so meek, but part of you knows that this submission will not last forever.\n\n", false);
 
 			outputText("It slowly dawns on you just how much power you have over this submissive warrior.  With a simple command, she stands with her head still bowed.  Unable to help yourself, you bring your right hand up to fondle one of the hyena's heavy breasts.  The large orbs are covered in soft fur with a black nipple poking through the cream colored pelt.  Impulsively, you lean forward, giving the already hard teat a lick.  The hyena moans softly into the savanna air as your tongue slides along her perky tit.\n\n", false);

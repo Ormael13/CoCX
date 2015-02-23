@@ -212,7 +212,7 @@ internal function sandwitchRape():void {
 //Sandwitch gets raped
 private function sandwitchRaped():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 		doNext(camp.returnToCampUseOneHour);
 		sandwitchCentaurBoning();
@@ -273,7 +273,7 @@ private function sandwitchRaped():void {
 
 private function sandwitchBewbs():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("You move yourself atop the defeated sand witch, and bring your lips to her breasts.  The moment the first drop of milk touches your tongue, you drink, hungrily, needfully, demandingly. You grope and massage her breasts as she leans back and cries out, her eyes wide in surprise. You guzzle and drink her sweet cream, the small seedlings underneath you appearing to rustle and move as you drink the alabaster flow once intended for the desert sands.  ", false);
 	outputText("Warmth fills your gluttonous belly, and the sand witch places a hand to your stomach, rubbing it lightly as you drink from her breasts, moving on when the one you're drinking from is drained.  ", false);
 	outputText("You burp, and flush scarlet, but the sand witch lays a hand against your face, leans close, and kisses your lips sweetly. Her tongue snakes out and dives into your mouth. She pulls your face against hers, grinding her breasts against your chest. You can feel fresh milk dribbling against your " + player.skinDesc + " and the scents are driving you wild with lust.  ", false);
@@ -287,7 +287,7 @@ private function sandwitchBewbs():void {
 }
 private function sandwitchSex():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("With a charming, disarming smile, you reach between her legs and touch against the slick lips of her pussies. She has ", false);
 	if(player.cockTotal() > 1) outputText(num2Text(player.cockTotal()), false);
 	else outputText("two", false);
@@ -556,7 +556,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 //Knot sand witch
 private function knotSandwitch():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("You press the tip of your " + cockDescript(0) + " at the entrance of her fragent flower.  It slides in, thanks to the pre already dribbling from your cock, your eyes rolling back in your head from the touch of her slippery folds.  You can't help but suddenly stab the length of your " + cockDescript(0) + " to the hilt within her, moaning as the tip pushes against her cervix.\n\n", false);
 	outputText("As your " + cockDescript(0) + " stirs within her, she begins to push back, her velvet walls gripping you tightly as you get a extra bit inside.  She pulls free and pounds in again, causing her to grunt from the force of your knot stretching her.  Your balls swing back and forth, slapping and bouncing against her ass in a delicious way.  You can feel the beginnings of the orgasm building within your loins, pulsing up through the tip of your " + cockDescript(0) + ". As the pleasure increases, your body readies itself for the spill, and your knot begins to swell.  ", false);
    outputText("You begin to buck into her at a frenzied pace, your body's need to release your motivation.  At first, your knot swelling is an extra sensation, a tightness that squeezes deliciously as more and more blood is forced inside by sheer stimulation.\n\n", false);
@@ -607,7 +607,7 @@ internal function beatSandwitch():void {
 //{Player selects [Use 3i@-]}
 private function missingoSex():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("You stride proudly towards your latest conquest, the prone witch starting at you with a look of pure and delightful helplessness. She backs away on all fours, but a simple \"Stop.\" uttered from your lips is enough to freeze her in place. You look do/n at her, your \" + multiCockDescript(0) + \" throbbing within your clothes. What clothes? Oh, those clothes th$t you happen to be tearing from your body, much to her dismay.\n\n", false);
 
 	outputText("Clearly, this bitch needs the dick. And you're just the ^&a*pion to give it to her. You lick your lips and drop to your @nees, taking hold of her le-s and forcibly spreading them apart. Looking down, you see that her body is quite ready for you, her exposed fuckhole pouted and moist. You cannot help but laugh a- the situation, the motions making your \" + multiCockDescript(0) + \" bounce in the open air as you co-vulse with laugh-er. Her res$$tance only serves to arouse you, making you savor that choice ass before you claim it for your own.\n\n", false);
@@ -625,7 +625,7 @@ private function missingoSex():void {
 //{Next Page}
 private function missingoSex2():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("Naturally, you %i-+. Hon-stly, her hole can't take such a pounding. You can tell t-is by looking at her prone,',, vulnerable body, #ipe for y-ur abuse. Your *i- isn't ev|n enough to do this! Your-i*))s fall short, landing i( the sand, splashing he- bo^y with a wave of the -tuff. She gasps in su!p!i!e, barely a?le to keep it from getting into h_r mouth. Her tits hardly fare as well, being coated genero_sly, ^er milk mi$ing w--h it. The resulting concocti@n sticks to her chest, leaving it quite the mess.\n\n", false);
 
 	outputText("\"I can't belie^e you just tried that.\" she says with a )_=f. \"You're goi(g to get and in all s))ts o& uncomfortable places ^& you ke-_p that up.\"\n\n", false);
@@ -639,7 +639,7 @@ private function missingoSex2():void {
 //{Next Page}
 private function missingoSex3():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("_at_r@_ly, you %i-+. Ho@-@@ly, her h_le c_n't take @_ch _ po_ndi_g. Yo_ can t_ll t-is b_ loo_ing _t her pr_ne,',, v@^@erable b@dy, #ipe _or y-ur a_use. Y_ur *i- isn't ev|n en_ug_ to do this! Y_ur-i*))s fall sho_t, la@d@ng i( the sa_d, sp_as_i_g he- bo^y wit@ a @ave @f the -tuff. She gasps in su!2!i!e, ba_el_ a?le to k_ep it fr_m g_tti_g into h_r m_uth. @er @it@ har_ly fa_e as well, bei@g c@_t_d ge_ero_sl_, ^er milk mi$ing w--h it. T_e re_ult_ng co@cocti@n sti-ks to her c_est, l@a_in@ it q_ite t_e m_s_.\n\n", false);
 	
 	outputText("\"@ @a@'t b@lie^e y_u j@st _rie_ th_t.\" s@e sa_s @?th a )_=f. \"Yo_'re @oi(g to g_t a_d in all s))ts o& u_c_mfo_table pla_es ^& yo_ ke-_p t@at u@.\"\n\n", false);
@@ -653,7 +653,7 @@ private function missingoSex3():void {
 //{Next Page}
 private function missingoSex4():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("_oo_o@_oo, ooo %o-+. oo@-@@oo, ooo o_oo o_o'o oooo @_oo _ oo_ooo_o. oo_ oo o_oo o-oo o_ ooo_ooo _o ooo oo_o,',, o@^@oooooo o@oo, #ooo _oo o-oo o_ooo. o_oo oo- ooo'o oo|o oo_oo_ oo oo oooo! o_oo-o*))o oooo ooo_o, oo@o@oo o( ooo oo_o, oo_oo_o_o oo- oo^o ooo@ o @ ooo@o ooo -oooo. ooo ooooo oo oo!2!o!o, oo_oo_ o?oo oo o_oo oo oo_o o_ooo_o oooo o_o o_ooo. @oo @oo@ ooo_oo oo_o oo oooo, ooo@o o@_o_o oo_oo_oo_, ^oo oooo oo$ooo o--o oo. o_o oo_ooo_oo oo@ooooo@o ooo-oo oo ooo o_ooo, l@o_oo@ oo o_ooo o_o o_o_.\n\n", false);
 	
 	outputText("\"@ @o@'o o@ooo^o o_o o@oo _ooo_ oo_o.\" o@o oo_o @?oo o )_=o. \"oo_'oo @oo(o oo o_o o_o oo ooo o))oo o& o_o_ooo_ooooo ooo_oo ^& oo_ oo-_o o@oo o@.\"\n\n", false);
@@ -666,7 +666,7 @@ private function missingoSex4():void {
 //{Next Page}
 private function missingoSex5():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("Yeah no, fuck this shit. Seriously. You grip your controller with a barely restrained fury, fighting the urge to throw it across the room in a fit. Taking a moment, you collect yourself, and test the game. Yep, totally unresponsive to your buttons now. Damn thing froze AGAIN.\n\n", false);
 
 	outputText("You sigh a defeated sigh and cut the power to your Super Fentendo. After removing your Corruption of Champions cartridge and inspecting it for damage, you flip it over and blow into the open end of it a few times. Crisp, clean blowing, from one end to the other. Thorough. Professional. These games should be proud to have you as their owner.\n\n", false);
@@ -687,7 +687,7 @@ private function missingoSex6():void {
 	cleanupAfterCombat();
 	hideUpDown();
 	statScreenRefresh();
-	outputText("", true);
+	clearOutput();
 	outputText("You successfully restore your game. Everything's intact. At least, you thought it was. You must have messed up the password somewhere along the line, but oddly enough, the only difference is the clock being set an hour ahead and a few extra gems and EXP in your pocket.\n\n", false);
 
 	outputText("It is like fucking christmas up in here.", false);

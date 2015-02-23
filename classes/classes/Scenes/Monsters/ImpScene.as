@@ -132,7 +132,7 @@ package classes.Scenes.Monsters
 			cleanupAfterCombat();
 		}
 		private function rapeImpWithPussy():void {
-			outputText("", true);
+			clearOutput();
 			outputText(images.showImage("imp-win-female-fuck"), false);
 			player.slimeFeed();
 			outputText("You shed your " + player.armorName+ " without a thought and approach the masturbating imp, looming over him menacingly.  Your " + vaginaDescript(0) + " moistens in anticipation as you gaze down upon his splendid rod. With no hesitation, you lower yourself until your lips are spread wide by his demon-head, the hot pre-cum tingling deliciously.", false);
@@ -163,7 +163,7 @@ package classes.Scenes.Monsters
 		
 		private function sprocketImp():void {
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			outputText("You fall to your knees, lost in thoughts of what you want the imp to do to you.  Your body burns with desire, ready for the anal assault to come.  At least that's what you think.  You reach a hand out to the imp, wanting to pull him to you, to make him take you the way you need to be taken.  But he doesn't, not this time.\n\n", false);
 			//New PG
 			outputText("Much to your surprise, the imp flutters upward on his small leathery wings and rushes toward you.  ", false);
@@ -216,7 +216,7 @@ package classes.Scenes.Monsters
 			cleanupAfterCombat();
 		}
 		private function centaurGirlOnImps():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You stand over the thoroughly defeated demon and get an amusing idea. The tiny creatures are far from a threat, but their features seem like they might be useful. You pick the imp up and place him in a tree with explicit orders to him to stay, much to his confusion. Once you're sure he won't move, you wolf whistle and wait.\n\n", false);
 			outputText("A goblin appears from the underbrush behind you, but a swift kick sends her flying; she's not what you're after. You're soon rewarded with a trio of imps, who fly up to you, cocks at the ready.  Grabbing the defeated imp by the head, you explain your need to the group and waft a bit of your scent over to them with your tail. They confer among themselves only briefly, clear on the decision, as you toss their weaker fellow underneath them. The larger of the three, evidently the leader, smiles lewdly at you and agrees to your 'demands'.\n\n", false);
 			//[Female:
@@ -271,7 +271,7 @@ package classes.Scenes.Monsters
 			cleanupAfterCombat();
 		}
 		private function centaurOnImpStart():void {
-			outputText("", true);
+			clearOutput();
 			//Event: Centaur-Imp: Player Raping
 			outputText("As the imp collapses in front of you, ", false);
 			if(monster.HP == 0) outputText("panting in exhaustion", false);
@@ -297,7 +297,7 @@ package classes.Scenes.Monsters
 		private function centaurOnImpMale(vape:Boolean = false):void {
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if(x < 0) x = 0;
-			if(vape) outputText("", true);
+			if(vape) clearOutput();
 			outputText("As your shadow falls over the imp, it looks between your " + player.legs() + " with a hint of fear.  ", false);
 			if(player.cockArea(x) <= 15) {
 				outputText("Relief washes over it followed by intense lust as is throws itself onto a mossy rock and eagerly presents its " + eAssholeDescript() + ".   The sound of your hooves moving on either side of its body seems to send the creature into a frenzy as it begins humping the air while small mewling sounds escape its lips.  ", false);
@@ -420,7 +420,7 @@ package classes.Scenes.Monsters
 		}
 		//CUNTS
 		private function centaurOnImpFemale(vape:Boolean = false):void {
-			if(vape) outputText("", true);
+			if(vape) clearOutput();
 			//PREGGERS CHANCE HERE - unfinished
 			//{{Player has a cunt}}
 			player.slimeFeed();
@@ -583,7 +583,7 @@ package classes.Scenes.Monsters
 		}
 		
 		private function areImpsLactoseIntolerant():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You advance on the masturbating imp, baring your " + player.allBreastsDescript() + " and swinging them from side to side. The little creature watches them, mesmerized as he masturbates his foot-long erection.\n\n", false);
 		
 			outputText("You sit down in front of the little creature and grab ahold of his hair. The imp squeals slightly in pain before his cries are silenced with a " + nippleDescript(0) + ".  It fills his mouth as he yields, defeated. At once he starts to drink down as much of your milk as he can.\n\n", false);
@@ -1404,7 +1404,7 @@ package classes.Scenes.Monsters
 		
 		//noogai McNipple-holes
 		private function noogaisNippleRape():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You slowly walk over to the masturbating imp, your " + hipDescript() + " and " + buttDescript() + " swaying suggestively with every step.\n\n", false);
 			
 			outputText("Shedding your clothes you push the imp to the ground and straddle him, keeping his hands away from his twitching pecker while you quickly tie him up with his own loincloth.  The lust-addled demon utterly incapacitated, you start to use both of your hands to toy freely with your slimy nipple-holes, as well as your ", false);

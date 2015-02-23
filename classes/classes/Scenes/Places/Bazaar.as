@@ -25,7 +25,7 @@ public function Bazaar(){
 
 //[Find Travelling Bazaar]
 public function findBazaar():void {
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.BAZAAR_ENCOUNTERED] == 0) {
 		flags[kFLAGS.BAZAAR_ENCOUNTERED]++;
 		outputText("Warm, earthy breezes drift by as you explore the wind-blown grasses of the plains.  Though it seems you can see for miles, with the grasses subtly shifting between a few feet and over a dozen feet tall, it's impossible to tell what you'll stumble into next.  You trust your ears and your nose as much as your oft-blocked vision at this point, and before long you catch a whiff of blackened meat and aromatic spices.  There's some kind of camp not far away!\n\n", false);
@@ -46,7 +46,7 @@ public function findBazaar():void {
 
 //[FUCK YES I WILL PUT IT IN YOUR BIZARRE ANUS]
 private function approachBazaarGuard():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You step from concealment and walk up to the strange man, calling out in greeting.  He folds his arms across his chest and looks you up and down, peering at you with intense, black eyes.  They aren't solid onyx, but his irises are just as dark as the seemingly bottomless depths of his pupils.  His appraising gaze watches you, unblinking as second after second ticks by.  Just when you start to wonder if he speaks your language, he interrupts you by saying, \"<i>", false);
 	if(player.cor < 33 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.", false);
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.", false);
@@ -73,7 +73,7 @@ public function initiateFightGuard():void {
 }	
 
 public function winAgainstGuard():void {
-	outputText("", true);
+	clearOutput();
 	cleanupAfterCombat();
 	outputText("\n\nWith the gatekeeper defeated, you walk right past the unconscious guard and enter...", false);
 	doNext(enterTheBazaarAndMenu);
@@ -81,7 +81,7 @@ public function winAgainstGuard():void {
 
 //[Enter]
 public function enterTheBazaarAndMenu(demons:Boolean = true):void {
-	outputText("", true);
+	clearOutput();
 	var rat:String = "Rat";
 	var lilium2:String = "Demon";
 	if(model.time.hours >= 15 && model.time.hours <= 20 && flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0) rat = "Cinnabar";
@@ -152,7 +152,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 //(find/replace curly quotes/apo for straights -Z)
 //[The Slippery Squeeze!]
 private function theSlipperySqueeze():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You walk into one wagon whose sign clearly denotes it as 'The Slippery Squeeze'.  It's one of the largest contraptions in the bazaar, and with your first step inside you can see why.  It's built like a regular business, with a lobby in the front and numerous oak doors that lead to back rooms.  The walls are painted a soothing salmon color and a purple, fringed rug covers the wood floor.  It feels soft under your " + player.feet() + " after so much walking, letting you loosen up and relax.  Incense burns on the counter, filling the air with strange, fragrant aromas that tickle at your nose.\n\n", false);
 	var androgyny:Function = null;
 	var milker:Function = null;
@@ -239,7 +239,7 @@ private function buyCockMilker():void {
 	simpleChoices("JoeyMassage",joeyMassage,"Androgyny",0,"Joey'sOffer",0,"",0,"Leave",enterTheBazaar);
 }
 private function joeyAndrogyny():void {
-	outputText("", true);
+	clearOutput();
 	if(player.gems < 500) {
 		outputText("You haven't got enough gems for that treatment!", false);
 		doNext(theSlipperySqueeze);
@@ -264,7 +264,7 @@ private function joeyAndrogyny():void {
 }
 //[Joey]
 private function joeyMassage():void {
-	outputText("", true);
+	clearOutput();
 	if(player.gems < 10) {
 		outputText("Joey frowns when you realize you don't have the 10 gems.  He apologizes, \"<i>I'm sorry, " + player.short + " but I can't give freebies - our special potions cost us plenty.", false);
 		doNext(enterTheBazaar);
@@ -288,7 +288,7 @@ private function joeyMassage():void {
 }
 
 private function joeysMassageWifNoExtraJizz():void {
-	outputText("", true);
+	clearOutput();
 	//(Continue as NoWang)
 	outputText("The rabbit-eared fem-boy climbs back onto the table and strokes himself a few times over your " + assDescript() + "; the first drops of his 'special oil' feel hot as they land on the curves of your butt cheeks.  He climbs over you, touching himself just enough to stay hard while his cum-drooling cock stops dripping and starts genuinely leaking.  A long trail of bunny-spunk is dripped onto your " + assDescript() + " until you're glazed with thick ropes of it.  You spot his discarded thong on the floor and giggle as you feel him flip around to put his cute bunny-butt on your shoulders.  His spunk immediately runs down your spine, even as his hands smear it all over your " + player.skinDesc + ".\n\n", false);
 	outputText("The massage heads back towards your " + buttDescript() + "; Joey's hands fill with your flesh as he fondles and strokes, spreading the jism into every nook and cranny, even your " + assholeDescript(), false);
@@ -363,7 +363,7 @@ private function joeysMassageWifNoExtraJizz():void {
 	
 //[CONTINUE – DRANK JOEY'S SPECIAL POTION]
 private function joeysMassageWithEXTRASpooge():void {
-	outputText("", true);
+	clearOutput();
 	outputText("The rabbit-eared fem-boy pulls the cork on another bottle and helps you to roll to your side to drink it.  He holds the lip of the bottle to your lips and raises the bottom slowly, giving you just enough time to guzzle it without drowning.  It's sweet and syrupy, though there's an undertone of spicy strangeness that you can't quite place.  Whatever the secret ingredients are, you'll never figure them out from taste alone.  You feel warmth once you've finished, and a tightness settles ", false);
 	if(player.balls == 0) outputText("inside you", false);
 	else outputText("in your " + ballsDescriptLight(), false);
@@ -413,7 +413,7 @@ private function joeysMassageWithEXTRASpooge():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 private function joeyBigBalls():void {
-	outputText("", true);
+	clearOutput();
 	//(FIRST TIME) 
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00348] == 0) {
 		outputText("Before you can even clear the door-frame, Joey the bunny-boy masseuse launches himself into you, his hands clutching wildly at your " + player.armorName + ".  You look down at him, and his wide, open eyes stare back with panic; namely, the look of someone in over their head with no idea how to save themselves.  Worse still, his trademark thong is bulging out obscenely, cum spilling down the sides while his immensely swollen gonads threaten to burst free of the garment's fraying threads.  Joey babbles, \"<i>Help!  I was testing the potions, and-and-and... I dunno what went wrong, b-b-but my balls are backing up faster than it dribbles out.  They feel like they're going to burst!!  Help meeeeee!</i>\"\n\n", false);
@@ -438,7 +438,7 @@ private function joeyBigBalls():void {
 
 //Masturbate It Out (work it out on the floor)
 private function joeyWanksItOut():void {
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00349] == 0) {
 		outputText("You tell Joey that if he masturbates to erectness, his body should be able to shoot it out faster.  He smacks his forehead and runs into a back room, his thong disintegrating around his growing testes as he runs. The door slams, leaving you in peace.  A little freaked out, you head back to camp for now.", false);
 		doNext(camp.returnToCampUseOneHour);
@@ -448,7 +448,7 @@ private function joeyWanksItOut():void {
 }
 //Suck Cum Out (not your garden-variety hoes)
 private function suckOffJoeysGardenHose():void {
-	outputText("", true);
+	clearOutput();
 	outputText("Smiling impishly, you say \"<i>I'll just have to suck all that cum out then, won't I?</i>\"  Joey blushes, cheeks reddening to match his plump lips as you yank his rapidly disintegrating thong down to the ground.  Popping free, his half-hard member bobs before your eyes, trailing a thick trail of man-slime the whole way to the ground.  The semi-turgid mass starts at only about four and a half inches long, but as your hot breath washes over it, the twitching, slimy cock grows to its full six-inch size.  Joey moans as the flow from his cock thickens.  His balls keep right on growing, and you realize that they're at least as big as basketballs now.\n\n", false);
 	outputText("You grab the bunny-boy's pert ass-cheeks and pull your mouth onto his cock, his member easily sliding along your tongue, lubricated by the unholy flow of dick-juice it drips.   Sealing your lips down on his base into a vacuum-tight O-ring, you start to suck, ever-so-slightly ratcheting up the pressure on Joey's poor, backed up penis.  Thanks to your oral cock-pump, he quickly swells beyond his normal max.   Seven inches of dick push towards your throat, and like a valve suddenly becoming unstuck, that cock's cumslit suddenly dilates wide, stretched out to handle the heavy flow.\n\n", false);
 	outputText("Gurgling in surprise, you nearly choke from the deluge of spooge flooding your throat.  Your tongue tingles from the salty aftertaste while you gulp down the rest of the bunny-cream.  Joey pants and pleads, \"<i>Oooh... it's... it's... so good.  Feels so amazing... don't stop!  Please don't stop!</i>\"\n\n", false);
@@ -481,7 +481,7 @@ private function suckOffJoeysGardenHose():void {
 }
 
 private function overHearDemonsAboutSyrena():void {
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 0) {
 		outputText("A whisper of conversation catches your ear while you're wandering the bazaar, and overcome by curiosity, you veer towards it.\n\n", false);
 		outputText("As you're closing in on the voices, the dialogue grows clear enough to understand.\n\n", false);

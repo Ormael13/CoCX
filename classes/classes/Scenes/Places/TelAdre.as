@@ -82,7 +82,7 @@ public var piercingType:Number = 0;
 //}endregion
 
 public function discoverTelAdre():void {
-	outputText("", true);
+	clearOutput();
 	if(player.findStatusAffect(StatusAffects.TelAdre) < 0) {
 		outputText("The merciless desert sands grind uncomfortably under your " + player.feet() + " as you walk the dunes, searching the trackless sands to uncover their mysteries.  All of a sudden, you can see the outline of a small city in the distance, ringed in sandstone walls.  Strangely it wasn't there a few moments before.  It's probably just a mirage brought on by the heat.  Then again, you don't have any specific direction you're heading, what could it hurt to go that way?", false);
 		outputText("\n\nDo you investigate the city in the distance?", false);
@@ -95,7 +95,7 @@ public function discoverTelAdre():void {
 
 //player chose to approach the city in the distance
 private function encounterTelAdre():void {
-	outputText("", true);
+	clearOutput();
 	if(player.findStatusAffect(StatusAffects.TelAdre) < 0) {
 		outputText("You slog through the shifting sands for a long time, not really seeming to get that close.  Just when you're about to give up, you crest a large dune and come upon the walls of the city you saw before.  It's definitely NOT a mirage.  There are sandstone walls at least fifty feet tall ringing the entire settlement, and the only entrance you can see is a huge gate with thick wooden doors.  The entrance appears to be guarded by a female gray fox who's more busy sipping on something from a bottle than watching the desert.\n\n", false);
 		outputText("As if detecting your thoughts, she drops the bottle and pulls out a halberd much longer than she is tall.\n\n", false);
@@ -142,7 +142,7 @@ private function telAdreCrystal():void {
 
 private function telAdreTour():void {
 	player.changeStatusValue(StatusAffects.TelAdre,1,1);
-	outputText("", true);
+	clearOutput();
 	kGAMECLASS.urta.urtaSprite();
 	outputText("Urta leads you into the streets of Tel'Adre, giving you a brief run-down of her and her city, \"<i>You see, about two decades back, the demons were chewing their way through every settlement and civilization in Mareth.  The covenant, a group of powerful magic-users, realized direct confrontation was doomed to fail.  They hid us in the desert with their magic, and the demons can't corrupt what they can't find.  So we're safe, for now.</i>\"\n\n", false);
 	outputText("The two of you find yourselves in the center of a busy intersection.  Urta explains that this is the main square of the city, and that, although the city is large, a goodly portion of it remains empty.  Much of the population left to assist other settlements in resisting the demons and was lost.  She brushes a lock of stray hair from her eye and guides you down the road, making sure to point out her favorite pub - \"The Wet Bitch\".  You ", false);
@@ -285,7 +285,7 @@ private function piercingStudio():void {
 	spriteSelect(63);
 	var about:Function = null;
 	if(player.findStatusAffect(StatusAffects.Yara) < 0) about = aboutYara;
-	outputText("", true);
+	clearOutput();
 	outputText("The interior of the piercing studio is earthy, leaving the stone floors and walls uncovered, though the windows are covered with woven blankets, sewn from multicolored threads.  There are a number of cushy chairs facing a wall of mirrors, along with a shelf covered in needles, piercings, and strong alcohols.  A brunette prowls about the place, tidying it up during a lull in business.  You dully notice that unlike everyone else in this town, she's mostly human.  Perhaps she came through a portal as well?  She approaches you, and you see a cat tail waving behind her, and a pair of fuzzy feline ears, both covered in piercings, perched atop her head.  Clearly she's been here long enough to pick up some of the local flavor.\n\n", false);
 	outputText("She introduces herself, \"<i>Hello there " + player.mf("sir","cutie") + ", my name is Yara.  Would you like to get a piercing?</i>\"", false);
 	if (!flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
@@ -991,7 +991,7 @@ private function removeVulvaPierce():void {
 
 public function oswaldPawn():void {
 	spriteSelect(47);
-	outputText("", true);
+	clearOutput();
 	if(player.findStatusAffect(StatusAffects.Oswald) < 0) {
 		outputText("Upon closer inspection, you realize the pawnbroker appears to be some kind of golden retriever.  He doesn't look entirely comfortable and he slouches, but he manages to smile the entire time.  His appearance is otherwise immaculate, including his classy suit-jacket and tie, though he doesn't appear to be wearing any pants.  Surprisingly, his man-bits are retracted.  ", false);
 		if(player.cor < 75) outputText("Who would've thought that seeing someone NOT aroused would ever shock you?", false);
@@ -1278,7 +1278,7 @@ private function oldbarTelAdre():void {
 	var urta2:Function = null;
 	var misc1:Function = null;
 	var misc1Name:String = "";
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.LOPPE_DISABLED] == 0 && flags[kFLAGS.LOPPE_MET] == 0 && rand(10) == 0) {
 		loppe.loppeFirstMeeting();
 		return;
@@ -1337,12 +1337,12 @@ private function oldbarTelAdre():void {
 				misc1Name = "Nun";
 			}
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 1 && rand(5) == 0) {
-				outputText("", true);
+				clearOutput();
 				scylla.scyllaRoundII();
 				return;
 			}
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 2 && rand(5) == 0) {
-				outputText("", true);
+				clearOutput();
 				scylla.scyllaRoundThreeCUM();
 				return;
 			}
@@ -1460,7 +1460,7 @@ private function oldbarTelAdre():void {
 //-- TAILOR SHOPPE
 //-----------------
 public function tailorShoppe():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(61);
 	outputText("The inside of the tailor's shop is far cleaner than anything else you've seen in the city.  The walls are painted muted gray, and the floor is carpeted with a sprawling, royal blue rug.  After glancing around, you realize WHY the walls and floor are so muted – the quiet backdrop makes the merchandise look even more amazing.  There are racks and racks of clothing, but much of it is plain comfortable clothing, and not worth spending much time investigating.  A high-pitched voice pipes up, \"<i>Can I help you?</i>\"\n\n", false);
 	if(player.findStatusAffect(StatusAffects.Victoria) < 0) {
@@ -1511,7 +1511,7 @@ private function undergarmentSection():void {
 }
 
 private function buyClothes(itype:ItemType):void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(61);
 	outputText("Victoria nods and pulls a measuring tape off her shoulder.  She moves around you with practiced ease, taking measurements from every conceivable angle.  Thanks to her small stature, it's quite easy for her to take your inseam measurement, though Vicky manages to ", false);
 	if(player.biggestCockArea() > 30 || player.totalCocks() > 1) outputText("fondle your bulging package", false);
@@ -1542,7 +1542,7 @@ private function debitClothes(itype:ItemType):void {
 //-- ARMOUR SHOP
 //-----------------
 public function armorShop():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(64);
 	outputText("The interior of the armory is blisteringly hot, filled with intense heat from the massive forge dominating the far side of the shop.  The bellows are blowing hard as a tall german-shepherd woman works the forge.  Incredibly, she's wearing nothing aside from a ragged leather apron.  It bulges from the front, barely containing her obscene proportions as it protects them from the heat of her forge.  She pulls a piece of metal from the forge and strikes it a few times with a hammer bigger than your head, then tosses it in a bucket filled with water, steam boiling out of it from the hot metal.  At last, the sweating forgemistress notices you and turns around, her breasts jiggling wildly.\n\n", true);
 	//outputText("\"<i>Vat can Yvonne make for you?  Ze platemail?  Or someting a bit lighter?</i>\" she asks you.", false);
@@ -1572,7 +1572,7 @@ public function armorShop():void {
 }
 private function armorBuy(itype:ItemType):void {
 	spriteSelect(64);
-	outputText("", true);
+	clearOutput();
 	outputText("Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.\n\n", false);
 	outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
 	if(player.gems < itype.value) {
@@ -1588,7 +1588,7 @@ private function armorBuy(itype:ItemType):void {
 
 private function debitArmor(itype:ItemType):void {
 	spriteSelect(64);
-	outputText("", true);
+	clearOutput();
 	player.gems -= itype.value;
 	statScreenRefresh();
 	menuLoc = 9;
@@ -1599,7 +1599,7 @@ private function debitArmor(itype:ItemType):void {
 //-- WEAPON SHOP
 //-----------------
 public function weaponShop():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(80);
 	outputText("The high pitched ring of a steel hammer slamming into hot metal assaults your ears as you walk up to the stand.  Sparks are flying with every blow the stand's owner strikes on his current work.  The metal is glowing red hot, and the hammer falls with the relentless, practiced precision of an experienced blacksmith's guiding hand.  Thick gray and white fur ruffles as the blacksmith stands up, revealing the details of his form to you.  He's one of the dog-people that inhabits this city, though his fur and ears remind you of a dog one of your friends had growing up called a husky.  The blacksmith is anything but husky.  He's fairly short, but lean and whip-cord tough.  His right arm is far more thickly muscled than his left thanks to his trade, and he walks with a self-assured gait that can only come with age and experience.\n\n", false);
 
@@ -1623,7 +1623,7 @@ public function weaponShop():void {
 	addButton(14, "Leave", telAdreMenu);
 }
 private function weaponBuy(itype:ItemType):void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(80);
 	outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"", false);
 	if(player.gems < itype.value) {
@@ -1677,7 +1677,7 @@ private function forgeScarredBladeEnd():void {
 //-- JEWELRY STORE
 //-----------------
 public function jewelShopEntry():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You enter the jewelry store. There are large array of rings and necklaces, all stored in thick glass cases. A male lizan sits behind the counter, watching you as you look around the store. He is nude save for his gilded silken loincloth and a gold necklace. His chin is pierced with several gold ring piercings. He also wears a diamond ring on one of his fingers.\n\n", false);
 	outputText("<i>\"Welcome to my jewelry store. Here, I sell rings and necklaces. They can make you look great but not only that, I also have special jewelry that may have magical effect on you. The effect stays on until you take them off,\"</i> the lizan says.", false);
 
@@ -1685,7 +1685,7 @@ public function jewelShopEntry():void {
 }
 
 public function jewelShopInside():void {
-	outputText("", true);
+	clearOutput();
 	outputText("<i>So what will it be?</i>", false);
 	menu();
 	addButton(0, "Normal rings", jewelShopPageI);
@@ -1722,7 +1722,7 @@ public function jewelShopPageII():void {
 }	
 
 public function jewelShopBuyBox():void {
-	outputText("", true);
+	clearOutput();
 	if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0)
 	{
 		outputText("<b>You already own a jewelry box!</b>", true)
@@ -1760,7 +1760,7 @@ public function jewelShopBuyBoxNo():void {
 }	
 
 private function jewelBuy(itype:ItemType):void {
-	outputText("", true);
+	clearOutput();
 	outputText("The lizan escorts you and opens the case to retrieve the ring. He shows you the ring. He says \"<i>That will be... uh... " + itype.value + " gems.</i>\"", false);
 	if(player.gems < itype.value) {
 		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
@@ -1788,7 +1788,7 @@ public function carpentryShopEntry():void {
 }
 
 public function carpentryShopInside():void {
-	outputText("", true);
+	clearOutput();
 	outputText("<i>So what will it be?</i>", false);
 	menu();
 	addButton(0, "Toolbox", carpentryShopBuySet);
@@ -1924,14 +1924,14 @@ private function carpentryShopBuyWoodYes():void {
 
 private function urtaIsABadass():void {
 	flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] = 1;
-	outputText("", true);
+	clearOutput();
 	outputText("There's a commotion in the streets of Tel'Adre.  A dense crowd of onlookers has formed around the center of the street, massed together so tightly that you're unable to see much, aside from the backs the other onlookers' heads.  The sound of blows impacting on flesh can be heard over the crowd's murmuring, alerting you of the fight at the gathering's core.", false);
 	simpleChoices("Investigate",watchUrtaBeABadass,"Who cares?",telAdreMenu,"",0,"",0,"",0);
 }
 
 //[Invetigate]
 private function watchUrtaBeABadass():void {
-	outputText("", true);
+	clearOutput();
 	kGAMECLASS.urta.urtaSprite();
 	outputText("You shoulder past the bulky centaurs, ignore the rough fur of the nearby wolves and hounds as it brushes against you, and press your way through to the center of the crowd.  Eventually the throng parts, revealing the embattled combatants.  A snarling wolf, nearly eight feet tall, towers over Urta.  The comparatively diminutive fox-woman is girded in light leather armor and dripping with sweat.  The larger wolf-man is staggering about, and his dark brown fur is matted with blood.\n\n", false);
 
@@ -1957,7 +1957,7 @@ public function gymDesc():void {
 		return;
 	}
 
-	outputText("", true);
+	clearOutput();
 	outputText("Even though Ingnam, your hometown, was a large, prosperous village, you never saw a gym before coming to Tel'Adre.  The structure itself has numerous architectural differences from the surrounding buildings: short, waist-high walls, an arched ceiling supported by simple columns, and a sand-covered floor.  Perhaps the only 'normal' rooms inside are the changing stands and bathrooms, which ", false);
 	if(player.cor < 35) outputText("thankfully ", false);
 	else if(flags[kFLAGS.PC_FETISH] > 0 || player.cor > 80) outputText("unfortunately ", false);
@@ -2032,7 +2032,7 @@ private function gymMenu():void {
 }
 
 private function buyGymLifeTimeMembership():void {
-	outputText("", true);
+	clearOutput();
 	//[Buy LifeTime Membership]
 	if (silly()) outputText("You tell \"<i>Shut up and take my gems!</i>\" as you pull out your gem-pouch. \n\n"); //Shut up and take my gems!
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.", false);
@@ -2048,7 +2048,7 @@ private function buyGymLifeTimeMembership():void {
 }
 
 private function weightLifting():void {
-	outputText("", true);
+	clearOutput();
 	//Too tired?  Fuck off.
 	if(player.fatigue > 75) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
@@ -2099,7 +2099,7 @@ private function weightLifting():void {
 }
 
 private function goJogging():void {
-	outputText("", true);
+	clearOutput();
 	//Too tired?  Fuck off.
 	if(player.fatigue > 70) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
@@ -2186,7 +2186,7 @@ private function goJogging():void {
 
 private function yaraSex(girl:Boolean = true):void {
 	spriteSelect(63);
-	outputText("", true);
+	clearOutput();
 	outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled. Before you know it, your piercing is done!  You move to rise, retaining a bit of modesty", false);
 	if(flags[kFLAGS.PC_FETISH] > 0) outputText(" despite the guilty thrill", false);
 	outputText(".  \"<i>Hold it,</i>\" Yara commands softly, pressing her hand against your " + chestDesc() + " and pushing you back in your chair.  \"<i>Do you think I'll let you get away without some... field testing?</i>\"\n\n", false);
@@ -2201,7 +2201,7 @@ private function yaraSex(girl:Boolean = true):void {
 
 private function letsDoYaraSex(girl:Boolean = true):void {
 	spriteSelect(63);
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.cockThatFits(36);
 	if (flags[kFLAGS.HYPER_HAPPY])
 	{

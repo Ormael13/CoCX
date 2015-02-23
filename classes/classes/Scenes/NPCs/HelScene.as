@@ -120,7 +120,7 @@ public function encounterAJerkInThePlains():void {
 	}
 	//First time greeting
 	if(flags[kFLAGS.HEL_TIMES_ENCOUNTERED] == 1) {
-		outputText("", true);
+		clearOutput();
 		outputText("The tall grass of the plains seems to stretch out infinitely around you, your view broken only by the softly rolling hills.  If you were not skirting the territory of the Gnolls, you could almost call it a peaceful place.  Your guard is up, however, as you walk carefully across the vast grasslands.\n\n", false);
 		
 		outputText("Suddenly, you hear a piercing cry from over the nearest hill.  Perking up your ears, you can just faintly hear the sound of steel clashing against steel and grunts of effort and pain.  The sounds of a battle!  Well, you're the Champion after all, and damned if that doesn't mean it's your business to find out what's going on.  You steel yourself for battle and, preparing your " + player.weaponName + " for combat, charge up over the hilltop!\n\n", false);
@@ -146,7 +146,7 @@ public function encounterAJerkInThePlains():void {
 //FUCKBUDDY GREETING (edited)
 private function greetHelAsFuckbuddies():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You make your way out onto the wide open plains.  Soon, you're enjoying a walk into hot, dry expanse, slowly meandering through the tall grasses.  But it isn't long before you hear footfalls quickly approaching.  You prepare for violence, but are pleasantly surprised to see Hel break through the tall grasses, her wide hips swaying seductively as she approaches.\n\n", false);
 
 	outputText("\"<i>Hey there, " + player.short + ",</i>\" she says, quickly wrapping you in a tight hug.  You return it, and spend the next few minutes chatting amicably with your salamander lover.  After a while, though, Hel steps back from your embrace and, giving her ample endowments a little shake, asks, \"<i>So, lover mine, care to blow off some steam?</i>\"", false);
@@ -169,7 +169,7 @@ private function postHelFuckBuddyFollowup():void {
 		eventParser(camp.returnToCampUseOneHour);
 		return;
 	}
-	outputText("", true);
+	clearOutput();
 	outputText("You wake up an hour or so later, still snuggled up to Hel, entwined in a post-coitus repose.  You spend a few moments basking in the warmth of her presence, but you know you have duties to attend to.  You give her a peck on the cheek, waking her, and she's quick to escalate your gesture into a long, tongue-entwining kiss.\n\n", false);
 
 	outputText("The two of you redress, teasing and flirting all the while – you give her ample ass a little smack, and she coyly brushes your thighs with her tail – but soon you must part.  Giving Hel another deep kiss, you make your way back to camp as she saunters off into the heart of the plains.", false);
@@ -180,7 +180,7 @@ private function postHelFuckBuddyFollowup():void {
 //FIRST COMBAT – PLAYER LOSES
 internal function loseToSalamander():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	//(If HP loss) 
 	if(player.HP < 1) outputText("You collapse on the ground just a few steps away from the unconscious Gnoll, overwhelmed by pain and exhaustion caused by the berzerker's onslaught.", false);
 	//(If Lust loss)
@@ -273,7 +273,7 @@ internal function loseToSalamander():void {
 
 public function beatUpHel():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	//Various intros
 	if(monster.HP < 1) outputText("Unable to withstand your onslaught, the salamander collapses to a knee, barely supporting her weight on her sword.", false);
 	else outputText("Panting heavily, knees shaking, she collapses onto the ground, heavily leaning upon her sword.", false);	
@@ -313,7 +313,7 @@ private function helDefeatedCorrupt():void {
 //COMBAT – PLAYER WINS w/ LESS THAN 85 CORRUPTION
 private function helDefeatedNormal(clear:Boolean = false):void {
 	spriteSelect(68);
-	if(clear) outputText("", true);
+	if(clear) clearOutput();
 	if(flags[kFLAGS.HEL_TIMES_ENCOUNTERED] == 1) {
 		outputText("Suddenly, she looks up at you with her fiery eyes and beams, smiling ear to ear.  \"<i>That was fucking AWESOME!</i>\" she shouts, bursting into sudden, hearty laughter.  A moment ago, you were worried for your life, but the sight of the enraged berzerker breaking into laughter can't help but make you grin yourself.\n\n", false);
 
@@ -426,7 +426,7 @@ private function helFuckMenu():void {
 //[b]Player Win – Victory Un-Fuck – No Thanks (Any Gender)
 private function declineHelSexings():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You thank her for the offer, but politely decline.\n\n", false);
 
 	if (getGame().inCombat) outputText("\"<i>Aw, hell.  You're no fun,</i>\" she pouts, picking up her sword and sheathing it.  \"<i>Well, at least take this,</i>\" she adds, tossing a few gems your way.  You thank her for the gems as she starts walking over the hill towards wherever it is she's going.  ", false);
@@ -442,7 +442,7 @@ private function declineHelSexings():void {
 //Player Win – Victory Fuck – Fuck her Vag
 internal function beatUpHelAndStealHerWalletFromHerVagina():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.cockThatFits(helFollower.heliaCapacity());
 	outputText("You tell her that, sure, you could blow off some steam.  Still grinning, she tosses off her skimpy scale bikini and flops down on her back, already starting to finger her cunt.  You follow suit, stripping off your " + player.armorName + " and straddling her hips.  She reaches forward and grasps your " + cockDescript(x) + " in her scaly, clawed hands, causing you to miss a heartbeat before, smiling, she starts to pump it.  Her other hand continues to finger her cunt, preparing it for your " + cockDescript(x) + "'s penetration.  Content to let her lead for the moment, you grasp her wide hips just above where the crimson scales turn to soft flesh, tensing up as she begins to guide you into her slit.\n\n", false);
 
@@ -473,7 +473,7 @@ internal function beatUpHelAndStealHerWalletFromHerVagina():void {
 //Player Win – Victory Fuck – Fuck her Ass
 internal function fuckHelsAss():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.cockThatFits(helFollower.heliaAnalCapacity());
 	outputText("You tell her that, yes, you want to blow off some steam, and motion for her to get on hands and knees.\n\n", false);
 
@@ -509,7 +509,7 @@ internal function fuckHelsAss():void {
 internal function helBlowsYou():void {
 	spriteSelect(68);
 	var x:Number = player.biggestCockIndex();
-	outputText("", true);
+	clearOutput();
 	outputText("You agree to her proposition, and tell her to get on her knees as you draw out your " + cockDescript(x) + " and slip out of your " + player.armorName + ".  She grins and drops to her knees, quickly discarding her scaled bikini as you stroke yourself to hardness.  You close the distance between you and the salamander is quick to take your cock into her mouth, lustily sucking it in as she starts to fondle her breasts enticingly.\n\n", false);
 
 	outputText("Her mouth is unnaturally hot, threatening to burn your sensitive " + cockDescript(x) + " even as her long, forked tongue eagerly works your shaft over.  After a few blissful seconds, though, she leans back and grabs your ass, forcing you onto your knees as she flops onto her back, pushing your cock between her tits and into her mouth.\n\n", false);
@@ -539,7 +539,7 @@ internal function dpHel():void {
 	spriteSelect(68);
 	var x:Number = player.cockThatFits(helFollower.heliaCapacity());
 	var y:Number = player.cockThatFits2(helFollower.heliaCapacity());
-	outputText("", true);
+	clearOutput();
 	outputText("You tell her that, yes, you want to blow off some steam.  You start to undo your " + player.armorName + ", and quickly her eyes go wide.  \"<i>You've got something extra, don't ya!</i>\" she laughs, looking mighty impressed.  \"<i>Well, I think we can take care of that " + cockDescript(y) + ", too. Just sit back and relax, lover!</i>\"\n\n", false);
 
 	outputText("You nod, and sit down on the high grass as your salamander lover strips down and straddles you.  She grabs your " + cockDescript(x) + " in her left hand and your " + cockDescript(y) + " in her right, and quickly begins to pump them, bringing them to full hardness and even summoning forth a few dollops of pre-cum.  After perhaps a minute of this treatment, you're as hard as you're likely to get, and seeing this, the salamander grins wolfishly.\n\n", false);
@@ -571,7 +571,7 @@ internal function dpHel():void {
 //Player Win – Get Licked (Vagita) (edited)
 internal function getLickedByHel():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You agree to her proposition, and instruct her to get on her knees as you slip out of your " + player.armorName + ", revealing your " + vaginaDescript(0) + ".  She grins and kneels before you, quickly discarding her scaled bikini as you grasp her shoulders, pressing your womanhood to her lips.  Her long, forked tongue darts forward, teasing your lips.\n\n", false);
 
 	outputText("The salamander grips your " + buttDescript() + " with her smooth, scaly hands as she slips her wonderfully long tongue into your " + vaginaDescript(0) + ", flicking and tickling every inch of your sensitive cunt as she forces in inch after inch, until all eight are pushed inside you, driving you wild with lust as she lustily tonguefucks you.  Gripped by building pleasure, you push her onto her back and smash your cunt against her mouth, bucking your hips as she continues her skilled assault, making you shudder and writhe with pleasure.\n\n", false);
@@ -600,7 +600,7 @@ internal function getLickedByHel():void {
 //Player Win – Tail Wank (dix of any size) (edited)
 internal function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.biggestCockIndex();
 	outputText("You think for a moment, then saunter up to the hot salamander.  She gasps initially, then grins wolfishly as you tell her to put the large, prehensile tail to good use.  You shift your grip to her shoulders and push her down to her knees; she's quick to start pulling you out of your " + player.armorName + ".  After a moment of fiddling, your " + cockDescript(x) + " pops free, already hardening; she wraps her clawed, scaly hands around it and gives a few experimental pumps, but you're quick to remind her that you have a different position in mind.\n\n", false);
 	
@@ -629,7 +629,7 @@ internal function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void 
 //Player Win – Tail Pegging (Anal) (edited)
 internal function helTailPegging(loss:Boolean = false):void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	if (!loss) outputText("You agree to her proposition and, after a moment of thought, strip out of your " + player.armorName + " and ask her if she could fuck you with that long, prehensile tail.  \"<i>Oh, now that's an idea I can get behind!</i>\"  She laughs at her own wit.  \"<i>Well, go on then.  Get on your hands and knees, and spread those ass cheeks.</i>\"\n\n", false);
 	else outputText("\"<i>Get on your hands and knees, and spread those ass cheeks,</i>\" she says.\n\n")
 	outputText("You do as she asks, getting on all fours and giving her a good views of your vulnerable " + buttDescript() + ".  Looking over your shoulder, you can see her smile wolfishly as she brings her tail to bear, now doused of its previous flames, and gives its tip a little suckle, moistening it up as she straddles your hips to fuck you doggy style.  Her tail slips down from her mouth and winds between her legs like a cock as she lines herself up with your " + assholeDescript() + ".\n\n", false);
@@ -667,7 +667,7 @@ internal function helTailPegging(loss:Boolean = false):void {
 //Player Win – Coil her Up (Wang Naga) (edited)
 private function nagaCoilsUpHel():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.cockThatFits(85);
 	var y:Number = player.cockThatFits2(85);
 	outputText("You slither closer to the salamander and tell her that, yeah, you could stand to work off some steam.  She grins at that and closes the distance between you, reaching out to caress your serpentine half.  \"<i>Mmm.  Sexy tail, lover,</i>\" she says, reaching around and giving your " + buttDescript() + " a squeeze in her smooth, scaled hands.  \"<i>It'd be a real shame for such beautiful coils to go unused, you know...</i>\" she adds, giving you a little wink.\n\n", false);
@@ -710,7 +710,7 @@ private function nagaCoilsUpHel():void {
 //Player Win – Coil her Up 69 (anal naga) (edited)
 private function nagaCoilsUpAnalNaga():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You slither closer to the salamander and tell her that, yeah, you could stand to work off some steam.  She grins at that and closes the distance between you, reaching out to caress your serpentine half.  \"<i>Mmm.  Sexy tail, lover,</i>\" she says, reaching around and giving your " + buttDescript() + " a squeeze in her smooth, scaled hands.  \"<i>It'd be a real shame for such beautiful coils to go unused, you know...</i>\" she adds, giving you a little wink.\n\n", false);
 
 	outputText("You get an idea in a hurry, and quickly discard your " + player.armorName + " as she does the same.  She drops to her hands and knees before you, and like a child, snatches at your tail.  Once in hand, she eagerly puts her mouth to it, sucking your tail's tip like a cock.  You shudder at the odd sensation, but when she raises her tail up toward you, you reciprocate the gesture, taking her extinguished tip into your mouth and slathering it with spittle.\n\n", false);
@@ -742,7 +742,7 @@ private function mountHel():void {
 	spriteSelect(68);
 	var x:Number = player.cockThatFits(85);
 	if(x < 0) x = player.smallestCockIndex();
-	outputText("", true);
+	clearOutput();
 	outputText("You trot up to the salamander and, just as you're about to tell her a few of your fantasies you two could enact, she spills one of her own!  \"<i>Oh, Marae,</i>\" she purrs, reaching out to stroke your blank flank, \"<i>I've always wanted my very own warhorse.  What do you say you let me ride you... and maybe I'll let you ride me?</i>\"\n\n", false);
 
 	outputText("Well, that was unexpected, but hey.  You've heard much weirder things since you came to this world, and damned if you don't find many people around who can appreciate your stately equine half.  You give her a nod, and before you know it, the salamander's swung herself up onto your back and wrapped her arms tight around your human waist, pressing her large, soft breasts into your back.\n\n", false); 
@@ -789,7 +789,7 @@ private function mountHel():void {
 //Player Win – Hanging 69 (Vaginataurs of height >= 60</i>\") (edited)
 private function helVaginaTaur69():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You trot up to the salamander and, just as you're about to tell the salamander a few of your fantasies you two could enact, she spills one of her own!  \"<i>Oh, Marae,</i>\" she purrs, reaching out to stroke your blank flank, \"<i>I've always wanted my very own warhorse.  Tell you what – let me ride you, and I'll give you something oh so special...</i>\"\n\n", false);
 
 	outputText("Well, that was unexpected, but... you've heard much weirder things since you came to this world, and damned if you don't find many people around who can appreciate your stately equine half.  You give her a nod, and before you know it, the salamander's swung herself up onto your back and wrapped her arms tight around your human waist, pressing her large, soft breasts into your back.  \"<i>Giddyup,</i>\" she whispers huskily into your ear, and her scaled, clawed feet give your flanks a little poke.\n\n", false);
@@ -842,7 +842,7 @@ private function helVaginaTaur69():void {
 //Player Win – Possession (Ghost Morphs w/ Possession Power) (ehrdaterd)
 private function helPossessionShitPoopCock():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("Taking advantage of the salamander's open state, you will yourself into incorporeality and glide toward her.  \"<i>Hey!  Wait!  What the fuck are you doing?</i>\" she yells as you approach her in your spectral form.\n\n", false);
 
 	outputText("With a sneer, you answer, \"<i>I'M GOING GHOST!</i>\" and lunge into her.\n\n", false);
@@ -903,7 +903,7 @@ private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	spriteSelect(68);
 	var x:Number = player.cockThatFits(85);
 	var y:Number = player.cockThatFits2(85);
-	outputText("", true);
+	clearOutput();
 	
 	outputText("Already getting hard in your " + player.armorName + ", you circle around the downed salamander and give her a rough kick in the scaly back.  She yelps and takes a face-plant, leaving her muscular ass and long, hot tail waggling invitingly in the air.  Grinning, you hastily toss your " + player.armorName + " aside and tear her bikini bottom off, revealing the gash of her pussy, as well as your real prize – her tight little pucker, nearly hidden in the shadow of her tail.  As you get ready to claim the spoils of your victory, the still defiant salamander lashes out with that same tail!\n\n", false);
 	
@@ -938,7 +938,7 @@ private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 //Player Win – Corrupt Rape – Get Rimjob (edited)
 private function receiveCorruptRimjobsFromHel():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("The sight of the salamander berserker on her knees stirs the fire in your loins, and in moments you've stripped out of your " + player.armorName + " and advanced upon her.  She looks up at you, gritting her teeth as if preparing to strike – you preempt her with a hard kick in the chest, knocking her on her back, then kneel down and straddle her, pinning her arms down underneath your knees as you bring your " + assholeDescript() + " to hover over her face.\n\n", false);
 
 	outputText("She gets the idea in a hurry, and you feel her forked, serpentine tongue dart out and begin exploring your thighs, ass cheeks, and crotch.", false);
@@ -974,7 +974,7 @@ private function helMinotaurThreesome():void {
 	//Reset the additional talk options
 	flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] = 0;
 	flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] = 0;
-	outputText("", true);
+	clearOutput();
 	outputText("As you wander the grasslands, you wipe your brow in the hot air, wondering where the normal denizens hereabouts have gotten off to – normally you'd have encountered SOMETHING by now.  Your mind turns faintly toward your salamander friend, if you can call her that after the disjointed encounters you've had, and if the stirring in your loins is any indication, you're fairly sure you kind of miss her.\n\n", false);
 
 	outputText("You continue to walk aimlessly for a few minutes, straying a bit nearer to the mountains than you normally go on the plains.  As you continue to walk, however, you hear a sudden cow-like bellow!  You drop into a combat stance and raise your " + player.weaponName + ", almost sure the roar must be a long-ranging minotaur, but you can see nothing.  You perk your ears, and start to trace the sound as it repeats again, and again.  Your gaze fixes on a nearby hill and you quickly run to its peak, ready to intervene in whatever attack is afoot.\n\n", false);
@@ -996,7 +996,7 @@ private function helMinotaurThreesome():void {
 //[Leave]
 private function leaveMinotaurHelThreesome():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You shake your head with a deprecating smile, and turn to leave her to her pleasures.", false);
 	//(reset Helgate flag to 0)
 	flags[kFLAGS.HEL_AFFECTION] = 0;
@@ -1006,7 +1006,7 @@ private function leaveMinotaurHelThreesome():void {
 //THREESOME – FUCK HER ASS (wang of area =< 85) (edited)
 private function fuckHerAss():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.cockThatFits(85);
 	if(x < 0) x = 0;
 	outputText("Well, damned if you're going to let a chance to fuck her good, hot ass slip by.  You quickly strip out of your " + player.armorName + " and grab your " + cockDescript(x) + ", stroking it to hardness as you approach the salamander and her Minotaur.  You drop to your knees behind the salamander and push her tail out of the way (not an easy task as she bounces happily atop the 'taur) to reveal her other hole.  You slip your cockhead in, meeting more than a little resistance, as your lover has trouble relaxing her muscles mid-fuck, but eventually force your way inside her, eliciting a deep, lusty moan from her lips.\n\n", false);
@@ -1037,7 +1037,7 @@ private function fuckHerAss():void {
 //THREESOME – MINO LICK (Unisex) (edited)
 private function helMinoThreeSomeLickItsDick():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("Well, you're certainly not going to pass an opportunity like this up.  You shed your " + player.armorName + " in a hurry and step up to the poor minotaur.  You only just hold in a laugh at the glazed, half-conscious look on his face.  Looking him over, you can see a veritable pool of bull-spunk beneath his ass or sticking to the salamander's thighs as she continues to bounce on his shaft, indicating that he's been raped a half-dozen times already.  You almost feel bad for the poor thing, but then again, you half suspect your friend would be in the same shape he's in now had he won.  So, with your " + player.armorName + " off, you kneel down over his bull-like muzzle and force his snout into your " + player.assholeOrPussy() + ".\n\n", false);
 
 	outputText("You have to give him a nasty slap on the cheek before he actually does anything, though.  But when he does, it feels heavenly.  His tongue is large, flat, and VERY wet, licking at your thighs and ass so that you shudder at the strange, not altogether unpleasant, feeling.  Finally, though, he comes to his prize.  You shiver with anticipation as he gives your waiting hole an experimental lick, testing the waters.  An encouraging squeeze between your " + hipDescript() + " is enough to set him working.  His massive tongue finally penetrates you, slipping into your waiting, sensitive hole, making you gasp in delight as he slathers your inner walls with his tongue.\n\n", false);
@@ -1068,7 +1068,7 @@ private function helMinoThreeSomeLickItsDick():void {
 //AFTER THREESOME SCENE (edited)
 private function postMinoThreesomeDecisionTime():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("When she breaks the kiss, she leans back on her elbows and smiles at you, surprisingly prettily.  For once, you don't feel cripplingly exhausted after meeting her – no fight to tire you out before sex – so perhaps this would be a good time to interview your red-headed warrioress.\n\n", false);
 
 	//Player's Options (All Genders): (Note: Each option disappears after it is selected once)
@@ -1079,7 +1079,7 @@ private function postMinoThreesomeDecisionTime():void {
 	
 //[I'm Bugging Out]
 private function bugOutAfterHelMinoThreesome():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(68);
 	outputText("On second thought, you'd rather keep it simple for now, even if it means battling back her future advances with force of arms instead of words.  You kiss her once more and give her breasts a squeeze for the road, then wordlessly get up and take your leave.\n\n", false);
 	//(reset Helgate to 0)
@@ -1090,7 +1090,7 @@ private function bugOutAfterHelMinoThreesome():void {
 //[Berserker Mode]
 private function berserkMode():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You take the opportunity to ask about her rather violent, enraged fighting style.\n\n", false);
 
 	outputText("She laughs, a strikingly girlish sound from her.  \"<i>Come on, haven't you ever been so pissed-the-fuck-off that you just want to kill everything?  It's like that.  Every morning when I leave camp, I spend an hour or so thinking about everything I hate – the demons, the gnolls");
@@ -1107,7 +1107,7 @@ private function berserkMode():void {
 //[Her]
 private function askHelAboutHer():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You think for a moment, and then ask her about herself.\n\n", false);
 
 	outputText("\"<i>Who, me?</i>\" she asks, seemingly surprised.  \"<i>What... is the wild, anonymous sex not good enough for you?  Besides, you haven't exactly introduced yourself yet, either.</i>\"\n\n", false);
@@ -1161,7 +1161,7 @@ private function helChatMenu():void {
 //[Stop]
 private function telHelSTOPATTACKINGMEYOUBITCH():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("Even knowing she doesn't want to really hurt you, you ask the salamander to stop attacking you anyway.\n\n", false);
 
 	outputText("She sighs, but pushes her face into your neck and takes a deep, strong breath.  When she's satisfied, she leans back and says, \"<i>I've got your scent, now.  If I smell you ahead of time... I'll try not flip my shit on you.  But if you want me clear-headed, you damn well better be ready to try a different kind of sparring when we meet.  All right?</i>\"\n\n", false);
@@ -1179,7 +1179,7 @@ private function telHelSTOPATTACKINGMEYOUBITCH():void {
 //[Seconds?]
 private function askMommaHelForSecondsAfterDinner():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You reach down and grab the salamander's ample, muscular ass and, grinning, ask her if she's ready for more.\n\n", false);
 
 	outputText("\"<i>Always, lover mine,</i>\" she laughs, giving you a little wink.", false);
@@ -1195,7 +1195,7 @@ private function askMommaHelForSecondsAfterDinner():void {
 //[Leave]
 private function leaveHelAfterMinoThreeSomeChat():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("Sadly, you know you have things to tend to, and so you give your salamander lover a quick peck goodbye as you get to your feet and clean off your " + player.armorName + ".  As you're getting ready to head back to camp, however, you feel her powerful arms wrap around your waist, locking you in place as her long, reptilian tongue snakes out to tease your ear.\n\n", false);
 
 	outputText("\"<i>I'll see you soon, lover mine,</i>\" she whispers, planting a kiss on your neck.\n\n", false);
@@ -1216,7 +1216,7 @@ private function leaveHelAfterMinoThreeSomeChat():void {
 //-Play when exploring the Plains.
 public function salamanderXIsabellaPlainsIntro():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You make your way onto the vast expanse of Mareth's plainsland and soon find yourself submerged in the tall grass, wading through it like a sea of weeds.  After a few minutes of wandering, you hear what sounds like a surprised, throaty moo in the distance, followed shortly by the crack of steel on steel.  Knowing Isabella makes camp not far from here, you ready your " + player.weaponName + " and make best haste toward the cow-girl's camp.\n\n", false);
 
 	outputText("You burst into Isabella's camp, " + player.weaponName + " raised high.  To your horror, the red-headed cow-girl is standing with her massive tower shield braced, eyeing down Hel the salamander.  The salamander stands with sword in hand, poised to strike!\n\n", false);
@@ -1237,7 +1237,7 @@ public function salamanderXIsabellaPlainsIntro():void {
 //Diplomacy (edited)
 private function salamanderXIsabellaDiplomacy():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	//(PC passes a moderate Strength check)
 	if(player.str > 60) {
 		outputText("The two warrior women recover before you expected and charge at each other, both howling with rage.  All you can do is leap between them and try to hold them apart.  You suffer the brunt of their attacks, but manage to hold them off for the moment until they come down off their combat high enough to recognize you.\n\n", false);
@@ -1258,7 +1258,7 @@ private function salamanderXIsabellaDiplomacy():void {
 
 private function salamanderXIsabellaDiplomacy2():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("Now that you have the two redheads' attention, you insist on knowing what, exactly, is going on here.\n\n", false);
 
 	outputText("Glaring at Isabella, Hel says, \"<i>This... cow... stole my bandanna a few months ago and won't give it back.</i>\"\n\n", false);
@@ -1299,7 +1299,7 @@ private function salamanderXIsabellaDiplomacy2():void {
 //Watch (edited)
 private function watchIsabellaAndHelFight():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("Deciding this isn't really any of your business, you bunker down to watch the two redheads beat the shit out of each other.\n\n", false);
 
 	outputText("As the only 'armed' one, Hel takes the initiative, lunging forward with a rapid flurry of blows that Isabella only just manages to turn aside with her shield.  During the last of these attacks, however, the salamander leaves herself open to a bash that sends her flying across the clearing.  The cow-girl charges over before Hel can react and grabs her by the leg, trying to lift her up.  Before she can, however, Hel kicks up, crashing her foot into the underside of Isabella's massive cleavage.\n\n", false);
@@ -1323,7 +1323,7 @@ private function watchIsabellaAndHelFight():void {
 //Leave (edited)
 private function skipTownOnIsabellaAndHelsFight():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("Well, you're sure as hell not going to get involved in this – better to let them duke it out between themselves rather than risk your relationship with either girl.  You head on back to camp, not terribly surprised to hear sharp moos, grunts, and cries for some time in the distance.\n\n", false);
 	//(Return PC to camp, advance time 1 hour. Intro scene will not play again.)
 	flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] = -1;
@@ -1394,7 +1394,7 @@ public function followrIzzyxSallyThreesomePretext():void {
 //Isabella x Hel Threesome Scene – Beginning in the Plains (edited)
 public function isabellaXHelThreeSomePlainsStart():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("While wandering the grasslands, the relative silence of the plains is suddenly broken by a high, throaty moo in the distance.  Momentarily afraid that Isabella and Hel are going to try and rip each other's throat out again, you start running toward the source of the ever-loudening 'moooOOOOOO'.\n\n", false);
 
 	outputText("You burst out of the grass and into Isabella's camp, and are shocked to see Hel sitting on the cow-girl's lap, her hands on Isabella's hefty breasts and one of the her quad-nipples locked in her mouth.  Seeing you approach, Isabella lifts a hand from Hel's hip and gives you a somewhat-abashed wave.\n\n", false);
@@ -1426,7 +1426,7 @@ public function isabellaXHelThreeSomeCampStart():void {
 //[Leave]
 private function leaveIsabellaSallyBehind():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You decline the cow-girl's offer, but tell the redheads to have fun without you.  Though a bit disappointed, they both wave as you make your way back to camp.", false);
 	if(model.time.hours < 6) doNext(1);
 	else doNext(camp.returnToCampUseOneHour);
@@ -1435,7 +1435,7 @@ private function leaveIsabellaSallyBehind():void {
 //[Drink]
 private function nomOnIzzyTitWithSallyMancer():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("Well, that's an offer you can't refuse.  The girls' faces both brighten visibly as you say that you could use a drink.  Hel scoots to the side, allowing you to nestle yourself into Isabella's lap beside her.  You're already salivating slightly by the time Isabella hands her teat off to you", false);
 	if(player.hasCock()) outputText(", and your " + player.armorName + " is tenting visibly, displaying your excitement as you take her soft, delightfully warm and full breast in hand", false);
 	else outputText(", and your nipples stiffen with excitement as you take her soft, delightfully warm and full breast in hand", false);
@@ -1482,7 +1482,7 @@ private function nomOnIzzyTitWithSallyMancer():void {
 //LEAVE before sexing or Unsexed PC
 private function noThreesomeSexWithSallyAndIssyLastMinute():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("With a heavy heart, you tell the girls you'll have to pass.  Though they both look disappointed, Hel is quick to whisper huskily, \"<i>Don't you worry, you big ol' cow.  I'll take gooood care of you...</i>\"\n\n", false);
 
 	outputText("With a chuckle, you head on back to camp with a full belly", false);
@@ -1495,7 +1495,7 @@ private function noThreesomeSexWithSallyAndIssyLastMinute():void {
 //DICK (edited)
 private function stuffIzzyAndSalamanderWithDicks():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	//Hels pussy
 	var x:Number = -1;
 	//Iz pussy
@@ -1608,7 +1608,7 @@ private function stuffIzzyAndSalamanderWithDicks():void {
 
 private function izzySallyThreeSomeFollowup():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("Now a sweat-and-cum soaked mess, the girls collapse onto their backs around you.  Sighing contentedly, Isabella rolls over and nuzzles her head on your chest; a moment later sees Hel doing the same, wrapping her warm tail around your " + cockDescript(0) + " lovingly.\n\n", false);
 
 	outputText("\"<i>That was amazing.  Seriously,</i>\" the salamander says, still panting from the experience.  \"<i>I mean, holy shit you two.  We... we really need to do this more often.</i>\"\n\n", false);
@@ -1624,7 +1624,7 @@ private function izzySallyThreeSomeFollowup():void {
 //VAGINA (edited)
 private function izzySallyThreeSomeVagoozlaz():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You quickly strip out of your " + player.armorName + ", already wet at the sight of the two busty redheads embracing and fondling each other as they await you.  When you're finally rid of interfering fabrics, you drop to your knees and insert yourself between the girls.  With a few carefully considered directions, you get the three of you into something of a triangle shape, with your head nestled between Hel's thighs and Isabella's tongue caressing your " + vaginaDescript() + ".\n\n", false);
 
 	outputText("You shudder as the cow-girl's inhumanly wide tongue drags across your sopping box, giving you an experimental lick.  Across from you, you can see Hel slipping a pair of fingers into Isabella's pussy, eliciting a gasping moo from her.  As Isabella gives you another long, slow lick, you decide to get to work on the salamander's snatch.  You spread her thighs and push her tail back, revealing the gaping slit of her carnal canal.\n\n", false);
@@ -1667,7 +1667,7 @@ private function izzySallyThreeSomeVagoozlaz():void {
 //Fox Girls -- First Time Intro
 public function heliaPlusFoxyFluffs():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.HEL_FOXY_FOURSOME_WARNED] == 0) {
 		flags[kFLAGS.HEL_FOXY_FOURSOME_WARNED] = 1;
 		outputText("You give Hel a wink and ask her to introduce you to her foxy friends.  She lets out a sharp whistle and waves the girls back.  Giggling girlishly, the two fox-girls saunter back with full tankards and lusty smiles.  Hel scoots back, letting one swing drunkenly onto her lap as the other crawls onto you, her hefty breasts pressing against your chest and... hey, wait a goddamn minute!  You look down at the modest, yet rock-hard prick pushing against your belly, its little knot already slightly inflated.  Looks like these herm twins are already ready for action.\n\n", false);
@@ -1692,14 +1692,14 @@ public function heliaPlusFoxyFluffs():void {
 //Fox Girls -- Leave (Only Available First Time)
 private function runAwayFromFoxGirls():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You graciously excuse yourself, saying that you forgot something back at camp.  All three girls say \"<i>Awwww</i>\" in unison, but don't make any special effort to keep you from going.  As you head out, you look over your shoulder in time to see Hel give you a little wink as the fox-herms clamber into her lap.  At least someone's getting laid today.\n\n", false);
 	doNext(telAdre.barTelAdre);
 }
 
 //Foursome Scene Intro (First & Repeat)
 private function heliasFoxyFourSomeFluffs():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(68);
 	outputText("You slip a hand into Mai's loose-fitting tunic, giving her soft D-cups a little squeeze as Hel grabs a room key from the bartender.  You gather up the sexy fox-herms, taking each arm-in-arm, and follow Hel upstairs to the private rooms, getting a unique view of the salamander's barely-clad ass giving a little jiggle with each step.\n\n", false);
 
@@ -1718,7 +1718,7 @@ private function heliasFoxyFourSomeFluffs():void {
 //Foursome Scene -- As Male
 internal function foxyFluffsFoursomeAsMale():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.cockThatFits(85);
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("You strip out of your " + player.armorName + " and grab your " + cockDescript(x) + ".  Giggling drunkenly, Miko flops onto her back on the bed and begins to stroke her knotty cock as Helia and Mai get on their knees, Hel burying herself between Miko's spread legs as her sister wraps her soft hands around your " + cockDescript(x) + " and guides it into her mouth.  You run your hands through Mai's silver hair as she sucks you off, jerking off the base of your cock and flicking her wet tongue across the head and shaft, her full lips wrapped around your girth in a cute little \"<i>O.</i>\" She carries on for another minute, letting you guide the speed and force of her blowjob with your hands planted on her head.\n\n", false);
@@ -1743,7 +1743,7 @@ internal function foxyFluffsFoursomeAsMale():void {
 //Foursome Scene -- As Female
 internal function foxyFluffGirlsFuckSex():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("You strip out of your " + player.armorName + " and playfully push the fox-girls onto the bed and with Hel's help, spread their legs to reveal their rigid cocks.  Nestling yourself between Mai's thighs, you take her cock into your mouth up until the knot parts your lips.  She tastes of musk and sweat and salty pre, sending an electric chill up your spine as the first tasty drops of seed touch your tongue.\n\n", false);
 
 	outputText("You and Hel both fellate the hermaphroditic twins, amused to see the girls holding hands and rolling their heads back at your oral ministrations.  You spend perhaps a minute suckling and licking their doggy cocks, getting them nice and ready for the coming attractions.\n\n", false);
@@ -1776,7 +1776,7 @@ internal function foxyFluffGirlsFuckSex():void {
 //Foursome Scene -- Outro
 private function foxyFluffOutro():void {
 	spriteSelect(68);
-	outputText("", true);
+	clearOutput();
 	outputText("Now a cum- and sweat-soaked mess, you, Hel, and the twins collapse onto the bed, all panting from the exertion of the foursome.  With their thick knots now deflating back to normal sizes, the girls look rather cute as they wipe their own spunk off their smooth breasts and thighs.  Hel moans contentedly as she fingers a bit of foxcream out of her loose cunt.\n\n", false);
 
 	outputText("With a smile, you open your arms, and the fox-twins snuggle up to rest their heads on your " + chestDesc() + ".  Hel, smiling, crawls on top of you, giving you a long and loving kiss.  \"<i>That was wonderful, lovers,</i>\" the salamander whispers, putting her arms around the twins.  They giggle, half-drunk and half-asleep.  Surrounded by three warm, sexy bodies, you soon drift off to sleep.\n\n", false);

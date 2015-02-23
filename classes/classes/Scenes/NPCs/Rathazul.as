@@ -502,7 +502,7 @@ private function purifyMinoCum():void{
 		doNext(2070);
 		return;
 	}
-	outputText("", true);
+	clearOutput();
 	if (!debug) player.destroyItems(consumables.MINOCUM, 1);
 	inventory.takeItem(consumables.P_M_CUM, returnToRathazulMenu);
 	player.gems -= 20;
@@ -534,7 +534,7 @@ public function rathazulArmorMenu():void {
 
 private function craftSilkArmor():void {
 	spriteSelect(49);
-	outputText("", true);
+	clearOutput();
 	outputText("You hand the bundled webbing to Rathazul carefully, lest you damage the elderly mouse.  He gives you a bemused smile and snatches the stuff from your grasp while he mutters, \"<i>I'm not falling apart you know.</i>\"\n\n", false);
 	//(Not enough webs: 
 	if(!player.hasItem(useables.T_SSILK, 5)) {
@@ -559,7 +559,7 @@ private function craftSilkArmor():void {
 }
 private function commissionSilkArmorForReal():void {
 	spriteSelect(49);
-	outputText("", true);
+	clearOutput();
 	outputText("You sort 500 gems into a pouch and toss them to Rathazul, along with the rest of the webbing.  The wizened alchemist snaps the items out of the air with lightning-fast movements and goes to work immediately.  He bustles about with enormous energy, invigorated by the challenging task before him.  It seems Rathazul has completely forgotten about you, but as you turn to leave, he calls out, \"<i>What did you want me to make?  A mage's robe or some nigh-impenetrable armor?  Or undergarments if you want.</i>\"\n\n", false);
 	player.gems -= 500;
 	statScreenRefresh();
@@ -575,7 +575,7 @@ private function commissionSilkArmorForReal():void {
 
 private function declineSilkArmorCommish():void {
 	spriteSelect(49);
-	outputText("", true);
+	clearOutput();
 	outputText("You take the silk back from Rathazul and let him know that you can't spend 500 gems on a project like that right now.  He sighs, giving you a crestfallen look and a slight nod of his hooded muzzle.", false);
 	doNext(returnToRathazulMenu);
 }
@@ -599,7 +599,7 @@ public function chooseArmorOrRobes(robeType:int):void {
 }
 private function collectRathazulArmor():void {
 	spriteSelect(49);
-	outputText("", true);
+	clearOutput();
 	outputText("Rathazul beams and ejaculates, \"<i>Good news everyone!  Your ", false);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 1) outputText("armor", false);
 	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 2) outputText("robe", false);

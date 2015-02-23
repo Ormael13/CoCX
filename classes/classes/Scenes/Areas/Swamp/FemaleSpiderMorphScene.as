@@ -36,7 +36,7 @@ package classes.Scenes.Areas.Swamp
 
 		public function fSpiderMorphGreeting():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			//Egg sack sometimes
 			if (pregnancy.event == 2) { //If she's past event 2 then she has laid the eggs
@@ -73,7 +73,7 @@ package classes.Scenes.Areas.Swamp
 		//Run
 		private function runFromFSpiderMorph():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			//Selecting has a 50% chance of displaying the following:
 			if (rand(2) == 0) {
@@ -90,7 +90,7 @@ package classes.Scenes.Areas.Swamp
 		//*Try to Talk
 		private function talkToFSpiderMorph():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			if (rand(2) == 0) {
 				outputText("You hold up your hands non-threateningly and ask the spider-girl why she's trying to sneak up on you.  Her eyes go wide and she claps her chitinous hands over her mouth in shock before she cries, \"<i>Omigosh, I'm so sorry!</i>\"  You smirk at the decidedly girlish response while she recovers and continues to speak, \"<i>I didn't mean to scare you!  I've been living out here by myself for so long... ever since the demons destroyed our village.  C-could we just... umm... talk for a little while?</i>\"\n\n", false);
@@ -135,7 +135,7 @@ package classes.Scenes.Areas.Swamp
 		//*OPTION 1 No (Declined sex)
 		private function declinedCrazyFemaleSpiderMorphSexFunTimes():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You tell the lusty spider-morph that you're not interested in having sex with her now, and though she looks crestfallen, she nods understandingly and zips up a line of webbing into the trees before the situation can become any more awkward.", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -145,7 +145,7 @@ package classes.Scenes.Areas.Swamp
 		//*Summary: Webs PC down, suckles nipple and injects aphrodisiac into each breast, then sixty-nine's, ending with webbing bukkake?
 		private function defeatFemale():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			//(Noncombat Intro)
 			if (!getGame().inCombat) {
@@ -274,7 +274,7 @@ package classes.Scenes.Areas.Swamp
 		private function spiderMorphFemaleRidesACawk():void
 		{
 			//*SUMMARY:  PC is tied down and has a web-condom sprayed around their dick, then a webbing cock-ring.  The PC is then ridden hard, bit numerous times, and never able to cum until pain lances through his (balls/cock) from the lack of release.  Finally, she bites PC's neck and the PC cums, inflating web-condom of various size.
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
@@ -379,7 +379,7 @@ package classes.Scenes.Areas.Swamp
 		//Summary: web-spooling around dick, then webjob.  
 		private function femaleSpiderMorphTooBigWebRape():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
@@ -472,7 +472,7 @@ package classes.Scenes.Areas.Swamp
 		//*Victory Intro
 		public function defeatASpiderBitch():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			outputText("The spider-girl drops to her knees and wobbles unsteadily", false);
 			if (monster.lust > 99) outputText(", thrusting two of her carapace-covered finger-tips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"", false);
@@ -498,7 +498,7 @@ package classes.Scenes.Areas.Swamp
 		//*Summary: Make her bite herself in the tit and inject aphrodisiac venom, then scissor (or brief clit-fuck)
 		private function fSpiderMorphRape():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			outputText("You laugh at her and push her down with your " + player.legs() + ", enjoying the view of the pale maiden's unblemished skin and dark, fetishy-looking exoskeleton when she bounces in swamp loam.  Her legs scissor closed nervously, a weak effort to conceal her sex from you", false);
 			if (player.lust >= player.maxLust()) outputText(", even as her fingers continue to work her slick lips relentlessly", false);
@@ -560,7 +560,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			outputText("You push the spider-girl onto her back, getting a good long look at your conquest before you take off your " + player.armorName + ".  At the sight of your " + multiCockDescriptLight() + ", she ", false);
 			if (monster.lust <= 99) outputText("relaxes a bit.  The smell of an aroused female wafts up from her, reminding you that is probably what she wanted from the get-go.", false);
@@ -628,7 +628,7 @@ package classes.Scenes.Areas.Swamp
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x == -1) x = 0;
 			var y:Number = player.cockThatFits2(monster.analCapacity());
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			outputText("You peel off your " + player.armorName + " while you gaze disdainfully down at your prize.  ", false);
 			if (monster.lust > 99) outputText("She's moaning plaintively and happily fingering herself, practically offering her juicy box to you.", false);
@@ -693,7 +693,7 @@ package classes.Scenes.Areas.Swamp
 		//*Egg Sack Find
 		private function findASpiderMorphEggSack():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			outputText("You stumble upon a huge, webbed sack hanging from a tree.  Examining it closer, you see that bound up inside it are nearly a dozen webs, each containing a wriggling form.  They start moving faster and faster, perhaps reacting to the nearby movement, before the shells finally shatter and unleash their cargo.  Inside each is a tiny, six inch tall humanoid figure, each resembling a child in miniature.  Remarkably, their features remind you of your own, and before the significance of that fact settles in, they drop to the ground and scurry away on their tiny, carapace-covered legs.\n\n", false);
 

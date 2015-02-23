@@ -409,15 +409,15 @@ package classes.Scenes
 			{
 				addButton(2, "Accessory", unequipJewel);
 			}
-			if (player.armorName != "nothing")
+			if (player.armor != ArmorLib.NOTHING)
 			{
 				addButton(5, "Armour", unequipArmor);
 			}
-			if (player.upperGarmentName != "nothing")
+			if (player.upperGarment != UndergarmentLib.NOTHING)
 			{
 				addButton(6, "Upperwear", unequipUpperwear);
 			}
-			if (player.lowerGarmentName != "nothing")
+			if (player.lowerGarment != UndergarmentLib.NOTHING)
 			{
 				addButton(7, "Lowerwear", unequipLowerwear);
 			}			

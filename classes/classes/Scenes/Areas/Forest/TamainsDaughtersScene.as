@@ -102,7 +102,7 @@ private function tdCup():String {
 public function encounterTamanisDaughters():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS]++;
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] > 0 && rand(10) == 0) {
 		tamaniPresent = true;
 		outputText("While roaming along, you find your path ahead blocked by " + num2Text(int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4)) + " goblins.  At the forefront of the mob is Tamani", false);
@@ -133,7 +133,7 @@ public function encounterTamanisDaughters():void {
 //[Play Dumb]
 private function playDumbToTamanisDaughters():void {
 	spriteSelect(57);
-	outputText("", true);
+	clearOutput();
 	outputText("You shrug and ask, \"<i>What exactly is it you want again?  I'm not sure you have the right " + player.mf("guy","person") + ".</i>\"\n\n", false);
 	
 	//approx 33% chance at 0 int, going up the smarter you are.
@@ -154,7 +154,7 @@ private function playDumbToTamanisDaughters():void {
 
 //[Fight Them]
 private function fightTamanisDaughters():void {
-	outputText("", true);
+	clearOutput();
 	
 	outputText("You whirl around threateningly, intent on putting Tamani's wayward brood back in their place.\n\n", false);
 	startCombat(new TamanisDaughters());
@@ -183,7 +183,7 @@ private function fuckYoDaughtersHomie():void {
 	var cocks:Number = player.totalCocks();
 	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
 	
-	outputText("", true);
+	clearOutput();
 	outputText("You shrug out of your " + player.armorName + " and grab hold of ", false);
 	if(cocks == 1) outputText("your ", false);
 	else outputText("one of your ", false);
@@ -365,7 +365,7 @@ private function legTamanisDaughtersRAEPYou():void {
 	//Find a dick that fits
 	var primary:Number = player.cockThatFits(50);	
 	
-	outputText("", true);
+	clearOutput();
 	outputText("Knowing full well that a ", false);
 	if(daughters > 20) outputText("large ", false);
 	outputText("crowd of goblins isn't going to let you leave while you still have a drop of sperm in your body, you disrobe and walk into their midst, lying down in a soft mossy patch and giving yourself up to the horde completely.  In an instant you're smothered in a sea of supple green flesh, and caressed from head to toe.  The largest of the group is happily stroking ", false);
@@ -713,7 +713,7 @@ private function legTamanisDaughtersRAEPYou():void {
 private function tamaniDaughtersCombatLossDrain():void {
 	spriteSelect(57);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
-	outputText("", true);
+	clearOutput();
 	
 	//Vars
 	var cocks:Number = player.totalCocks();
@@ -864,7 +864,7 @@ private function tamaniDaughtersBadEndChoice():void {
 //[Yes]
 private function tamaniDaughtersYesBadEndMePlease():void {
 	spriteSelect(57);
-	outputText("", true);
+	clearOutput();
 	outputText("\"<i>Wonderful!</i>\" cries the excited pregnant slut.   She gives you a quick peck on the cheek as she prances back over to the machine.  You brace yourself in anticipation, eager to lose yourself to an eternal orgasm.  A switch clicks, and a dial whirs as it's turned up to the maximum.  The fluids pumping into your backside and directly into your veins suddenly jump in pressure, stinging painfully for a moment before the pleasure returns.  Your eyes slowly roll back, your jaw goes slack, and your " + multiCockDescriptLight() + " spew", false);
 	if(player.totalCocks() == 1) outputText("s", false);
 	outputText(" cum into the tubes.\n\n", false);
@@ -877,7 +877,7 @@ private function tamaniDaughtersYesBadEndMePlease():void {
 //[NO]
 private function tamaniDaughtersDeclineBadEnd():void {
 	spriteSelect(57);
-	outputText("", true);
+	clearOutput();
 	outputText("\"<i>Seriously!?</i>\" exclaims the pregnant slut, \"<i>What kind of person wouldn't want to cum all the time?  Fuck, just the idea of it is making me drip!</i>\"\n\n", false);
 	
 	outputText("She sighs, \"<i>Whatever, Dad.  Next time we need you I'm sure you'll remember how much fun this was and come running home.</i>\"\n\n", false);
@@ -890,7 +890,7 @@ private function tamaniDaughtersDeclineBadEnd():void {
 //[Rather Fill Individually]
 private function tamanisDaughtersFillIndividuallyBADEND():void {
 	spriteSelect(57);
-	outputText("", true);
+	clearOutput();
 	outputText("\"<i>Really?</i>\" asks the pregnant goblin before she exclaims, \"<i>You do love us!  Oh Dad, once mom comes home will you fuck all of us?  I want to feel you make love to my drippy, pregnant pussy while she watches!</i>\"\n\n", false);
 	
 	outputText("You agree to do just that, ", false);
@@ -915,7 +915,7 @@ private function tamanisDaughtersFillIndividuallyBADEND():void {
 //[Lose to Daughters With Tamani There]
 private function loseToDaughtersWithTamaniThere():void {
 	spriteSelect(57);
-	outputText("", true);
+	clearOutput();
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	//Find a dick that fits
 	var primary:Number = player.cockThatFits(50);	

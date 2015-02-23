@@ -1022,7 +1022,7 @@ private function chooseHistoryFortune():void {
 }
 
 private function confirmHistory():void {
-	outputText("", true)
+	clearOutput()
 	var historyPerk:*
 	if(temp == 11) historyPerk = PerkLib.HistoryAlchemist;
 	else if (temp == 12) historyPerk = PerkLib.HistoryFighter;

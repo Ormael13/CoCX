@@ -109,7 +109,7 @@ public function cottonsIntro():Boolean {
 
 public function cottonGreeting():void {
 	spriteSelect(12);
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("cotton-greeting"));
 	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("The centauress sees you starting for the horse-girl and says, \"<i>Go ahead and talk, but if you want to work out with her I'll have to charge you.</i>\"\n\n", false);
 	//Greeting (first time):
@@ -229,7 +229,7 @@ private function centaurNagaBodyBookStuff():void {
 //(If No)
 private function turnDownYogaWifCottonFirstTime():void {
 	spriteSelect(12);
-	outputText("", true);
+	clearOutput();
 	outputText("\"<i>That's all right, to each their own.  I'll be here if you ever change your mind.</i>\"  With that, Cotton returns to her mat and continues stretching in various poses.\n\n", false);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -237,7 +237,7 @@ private function turnDownYogaWifCottonFirstTime():void {
 //(If Yes. Improves muscle tone up to 50, speed and feminine features.)
 private function acceptYoga():void {
 	spriteSelect(12);
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("cotton-yoga"));
 	var fuckHer:Function =null;
 	var getFucked:Function =null;
@@ -402,7 +402,7 @@ private function cottonChat():void {
 //(If Leave)
 private function leaveAfterYoga():void {
 	spriteSelect(12);
-	outputText("", true);
+	clearOutput();
 	outputText("\"<i>Suit yourself. You can run around all stinky, meanwhile I'm going to go wash. Feel free to drop by later for some more yoga if you'd like.</i>\"  With that, Cotton heads off to the showers and you leave the gym.\n\n", false);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -412,7 +412,7 @@ private function cottonShowerFunTimes():void {
 	spriteSelect(12);
 	var option1:Function =null;
 	var option2:Function =null;
-	outputText("", true);
+	clearOutput();
 	outputText("\"<i>Perfect! Let's go,</i>\" she takes you by the arm and leads you back into the lockers, and then into the nearby showers, which are apparently unisex. You both strip down and turn on a shower head. After a few moments of scrubbing up, you give your shower buddy a surreptitious glance.\n\n", false);
 
 	outputText("Without the clothes on, you can see her body is quite well toned. Not overly muscular, but you can easily make out the muscles on her belly. She sports a belly ring, and each nipple has a barbell piercing. Looking a bit lower, you finally take in her equine cock. It's quite large, at least a foot long flaccid, as it is now. You wonder how big it gets... She catches you looking and gives you a devilish grin.\n\n", false);
@@ -430,7 +430,7 @@ private function cottonShowerFunTimes():void {
 private function cottonFirstTimeFuckHer():void {
 	spriteSelect(12);
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("cotton-first-fuck"));
 	var x:Number = player.cockThatFits(100);
 	if(x < 0) x = 0;
@@ -456,7 +456,7 @@ private function cottonFirstTimeFuckHer():void {
 private function cottonFucksYou():void {
 	spriteSelect(12);
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("cotton-fucks-you"));
 	player.slimeFeed();
 	if(player.gender == 1) {
@@ -535,7 +535,7 @@ private function serviceFirstTimeCotton():void {
 	spriteSelect(12);
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	player.slimeFeed();
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("cotton-first-time-give-her-blowjob"));
 	outputText("You meekly nod your head in assent, staring at her cock. \"<i>Ooh, interested in that, are we? Well, I wouldn't want to disappoint my little pet.</i>\" She steps back a bit and lets you get under her shower spray before pushing you into a kneeling position. Running a hand along the length of her equine member, she pulls it up until you're face to face with it. \"<i>How about you get it nice and ready to go first?</i>\"\n\n", false);
 
@@ -556,7 +556,7 @@ private function serviceFirstTimeCotton():void {
 //(If Refuse)
 private function refuseFirstTimeCotton():void {
 	spriteSelect(12);
-	outputText("", true);
+	clearOutput();
 	outputText("She looks at you a little sad, \"<i>You certain pet? Well, all right. But you don't know what you're missing.</i>\" The two of you continue your shower with no funny business, then redress and leave the gym. Cotton stops you before you go too far and says, \"<i>Hey, if you want to stop by the gym later for some more yoga, I'd be happy to help.</i>\" Then she heads off down the street, and you head back to camp.", false);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -565,7 +565,7 @@ private function refuseFirstTimeCotton():void {
 private function fuckCottonInShowerRepeat():void {
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	spriteSelect(12);
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("cotton-shower-fuck-repeat"));
 	var x:Number = player.cockThatFits(60);
 	if(x < 0) x = 0;
@@ -822,7 +822,7 @@ private function cottonFucksYouInShowerRepeat():void {
 	spriteSelect(12);
 	player.slimeFeed();
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("cotton-shower-fucks-you-repeat"));
 	/*OLD SEX SCENES HERE
 	if(player.hasCock() && (player.gender != 3 || rand(2) == 0)) {
@@ -990,7 +990,7 @@ private function cottonFucksYouInShowerRepeat():void {
 //(Tantric Sex)
 public function cottonTantricSex():void {
 	spriteSelect(12);
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("cotton-tantric-sex"));
 	player.slimeFeed();
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
@@ -1090,7 +1090,7 @@ public function cottonTantricSex():void {
 //(Leave)
 private function leaveCotton():void {
 	spriteSelect(12);
-	outputText("", true);
+	clearOutput();
 	outputText("You thank Cotton for her time, shower and head back to camp.", false);
 	doNext(camp.returnToCampUseOneHour);
 }

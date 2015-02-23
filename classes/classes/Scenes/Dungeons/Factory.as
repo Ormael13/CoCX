@@ -103,7 +103,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		private function doTensionRelease():void {
-			outputText("", true);
+			clearOutput();
 			//First time...
 			if(player.findStatusAffect(StatusAffects.TensionReleased) < 0) {
 				outputText("You nod and step forwards, allowing her to hook up a modified harness and inject you with the demonic concoction.  In no time heat boils through your veins, pooling on your chest and crotch.  ", false);
@@ -211,7 +211,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		private function goDemon():void {
-			outputText("", true);
+			clearOutput();
 			outputText("Advancing slowly, the succubus gives you a hungry look.  She extends a hand, allowing her fingers to lengthen into razor-sharp claws.  With a single expert slash, she cuts away everything holding together your " + player.armorName + ".  They fall into a discarded pile, already forgotten as your ", false);
 			//[genderless]
 			if(player.gender == 0) {
@@ -354,7 +354,7 @@ package classes.Scenes.Dungeons
 		
 		public function doRapeSuccubus():void {
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			//MALE
 			if(player.cocks.length > 0 && (player.gender != 3 || rand(2))) {
 				//(LUSTY) 
@@ -441,7 +441,7 @@ package classes.Scenes.Dungeons
 			//doNext(roomBreakRoom);
 		}
 		public function doForcefeedSuccubus():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You chuckle as you decide to release some of the pent up pressure in your " + allBreastsDescript() + ".  Laying down over your conquest, you grasp her wrists and pin them to the floor as you shove your tits in her face", false);
 			if(player.biggestTitSize() > 6) outputText(", nearly smothering the succubus with the swell of tit-flesh", false);
 			outputText(".  You jiggle back and forth, lining up a " + nippleDescript(0) + " with the demon's parted lips.  You press your weight down threateningly, making it clear you could suffocate her with a boob.\n\n", false);  
@@ -490,7 +490,7 @@ package classes.Scenes.Dungeons
 			//doNext(roomBreakRoom);
 		}
 		public function dildoSuccubus():void {
-			outputText("", true);
+			clearOutput();
 			outputText("Your defeated opponent eyes you warily as you advance upon her, thrusting her chest forwards lewdly, with a hopeful gleam in her eye.  That gleam vanishes in sudden surprise when you stop and pull the oblong form of Tamani's dildo from your pouches.  The busty demon giggles happily, \"<i>I, like, love those things!  Those little sluts never let me keep one though!  Greedy bitches...</i>\"\n\n", false);
 			outputText("The succubus spreads her fishnet-coated legs, exposing her moist vulva while she reclines against a table, beckoning you forwards.  Well, you certainly didn't expect her to be so willing, but you may as well go through with it!  You push up her tiny skirt for better access and position the toy for a perfect insertion. She begs, \"<i>Quit teasing me and just jam it in me already!  Honey, I just want to feel it stretch me while my hot little box drools all over it.  Would you mind giving my clitty a lick too?  It's aching for a touch.</i>\"\n\n", false);
 			outputText("You see her button poking between her folds, far larger than the mortal women you've met, and you feel more than a little compelled to do as she's asked.   The toy slides in easily, though the further it penetrates her dark-blue cunt, the thicker it gets, and the more difficult it becomes to force it deeper inside.  Eventually you get it the entire way in.  The pair of you, demon and champion, watch together as her glistening cunt-lips are slowly forced apart, stretched wider and wider by the exotic dildo.  She giggles as you watch transfixed, and begins stroking her fingers all over her juicy outer folds while she asks, \"<i>Are you going to rape me or just stare at my cunt all day?</i>\"\n\n", false);
@@ -507,7 +507,7 @@ package classes.Scenes.Dungeons
 			//doNext(roomBreakRoom);
 		}
 		public function doLossSuccubus():void {
-			outputText("", true);
+			clearOutput();
 			if(player.cocks.length > 0) {
 				if(player.lust >= player.maxLust()) outputText("Driven half mad with lust, you drop to your knees. Your fingers fly over your body as you pry off every last piece of your " + player.armorName + ", displaying just how hard your alluring opponent has gotten you.  The succubus saunters over, every sinuous step radiating the inhuman sexuality that pours off her skin like heat from a bonfire.\n\n", false);
 				else outputText("Exhausted, you collapse before the succubus.  She effortlessly slices away your " + player.armorName + ", peeling your possessions away with practiced ease.  In moments you are stark naked and wholly exposed to your captor.  In spite of yourself, your body begins to respond to her sultry aura, displaying the hardness of your desire and shame immediately.\n\n", false);
@@ -617,7 +617,7 @@ package classes.Scenes.Dungeons
 		
 		public function doLossIncubus():void {
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			//Nipplefuck city
 			if(player.hasFuckableNipples() && player.lust >= player.maxLust()) {
 				outputText("Molten arousal pumps through your veins, burning away your reason with an unquenchable desire to mate.  You drop your top, exposing your " + allBreastsDescript() + " to your foe in a submissive display. Lowering your eyes, you hope you can tempt him to plug your " + nippleDescript(0) + " with his demonic prick.  You roughly squeeze each sensitive tit, trailing your fingers down the sensitive breast-flesh towards your rapidly dampening fuck-holes.\n\n", false);
@@ -732,7 +732,7 @@ package classes.Scenes.Dungeons
 			//doNext(roomFurnaceRoom);
 		}
 		public function doRapeIncubus():void {
-			outputText("", true);
+			clearOutput();
 			//RAPE THE DEMON -
 			//(BUTTRAPE - Requires Penis)
 			if(player.cocks.length > 0) {
@@ -801,7 +801,7 @@ package classes.Scenes.Dungeons
 		}
 		public function doOralIncubus():void {
 			player.slimeFeed();
-			outputText("", true);
+			clearOutput();
 			outputText("You lick your lips, moistening them as you decide that the demon will provide your next 'snack'.  Touching the defeated incubus' soft skin, you grab him by the wrists and yank him to his clawed feet. Leaning him back against the wall as he sways unsteadily, you tenderly slide down his body and take the measure of his monstrous meat with your hands. The smooth skin and tiny bumps slide between each finger as his manhood firms and twitches in response.  You glance up and grab his baseball size nuts, caressing the smooth hairless sack that contains them, watching the demon-man sigh and relax with equal parts desire and relief.\n\n", false);
 			outputText("You lean forwards, opening your mouth ", false);
 			if(player.hairLength > 10) outputText("and brushing a strand of " + player.hairColor + " out of the way ", false);
@@ -840,7 +840,7 @@ package classes.Scenes.Dungeons
 		
 		//Choose your poison
 		public function winAgainstOmnibus():void {
-			outputText("", true);
+			clearOutput();
 			if(monster.lust > 99) {
 				outputText("The omnibus trembles where she stands, her proud demonic dick twitching and pulsating as her desires totally overwhelm her.  The tainted nodules covering the purplish hermaphrodite's member ripple and swell from the base towards the tip, culminating with an explosive eruption of sticky, white demon-seed.  She moans with shame and pleasure, pumping larger and larger volumes of cum onto her office's floor.  She drops to her knees, too exhausted and ashamed by her premature orgasm to continue fighting.\n\n", false);
 				outputText("\"<i>Ooooh no.  You can't tell the other demons I got off so easily!  I'll never live it down,</i>\" she cries, \"<i>You've beaten me, please if you let me go and promise not to tell the other demons I'll use my magic to give you a gift!  My magic is powerful, I can do nearly ANYTHING with it when the subject desires the changes.</i>\"\n\n", false);
@@ -855,7 +855,7 @@ package classes.Scenes.Dungeons
 		
 		private function chooseBreasts():void {
 			spriteSelect(16);
-			outputText("", true);
+			clearOutput();
 			//Grow if none
 			if(player.breastRows.length == 0) {
 				outputText("<b>Your chest swells out, forming rounded C-cup globes, capped with tiny erect nipples!</b>", true);
@@ -898,7 +898,7 @@ package classes.Scenes.Dungeons
 		}
 		private function chooseDick():void {
 			spriteSelect(16);
-			outputText("", true);
+			clearOutput();
 			//No dick?  Grow one!
 			if(player.cocks.length == 0) {
 				outputText("A sudden pressure builds in your groin.  You look down in wonder, more than a little turned on by the prospect of growing your own penis.  Your skin ripples and bulges outwards, the sensation turning from pressure to feelings of intense warmth.  The bump distends, turning purple near the tip as it reaches three inches in size.  You touch it and cry out with pleasure, watching it leap forwards another inch in response.  Your tiny dick's crown becomes more and more defined as it grows larger, until you have what looks like a normal six inch dick.  You sigh with happiness and desire at your new addition.  Before you can enjoy it, another wave of heat washes through you, making your new addition respond.  It grows painfully hard as it crests eight inches in length.  ", false);
@@ -960,7 +960,7 @@ package classes.Scenes.Dungeons
 		}
 		private function normalFace():void {
 			spriteSelect(16);
-			outputText("", true);
+			clearOutput();
 			if(player.horns > 0 || player.antennae > ANTENNAE_NONE) {
 				outputText("Your forehead itches intensely.  You cannot help but stratch madly at it.  ", false);
 				if(player.horns > 0) {
@@ -987,7 +987,7 @@ package classes.Scenes.Dungeons
 		}
 		private function normalChest():void {
 			spriteSelect(16);
-			outputText("", true);
+			clearOutput();
 			temp = 0;
 			if(player.breastRows.length > 1) {
 				player.removeBreastRow(1,player.breastRows.length-1);
@@ -1092,7 +1092,7 @@ package classes.Scenes.Dungeons
 		}
 		private function normalLegs():void {
 			spriteSelect(16);
-			outputText("", true);
+			clearOutput();
 			if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("You feel as if you should slap yourself for stupidy.  Your legs are already normal!  You flush hotly as the corrupt magics wash over you, changing nothing.", false);
 			else outputText("You collapse as your " + player.legs() + " are unable to support you.  The sounds of bones breaking and reshaping fills the room, but oddly you feel no pain, only mild arousal.  You blink your eyes and sigh, and when you look down again <b>you have normal human legs</b>!", false);
 			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
@@ -1145,7 +1145,7 @@ package classes.Scenes.Dungeons
 		
 		//BAD ENDS
 		private function doBadEndGeneric():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You crack your sleep-fuzzed eyes, blinking at the sudden light as you try to get your bearings and remember where you are.  A nearby voice is moaning like a bitch in heat, or a drunk slut.  You giggle a bit at the thought as you work at focusing your eyes.  You feel warm and happy, particularly in your chest and groin.  The cobwebs of sleep clear from your mind with agonizing slowness, but you find it hard to worry about with how warm and wonderful you feel.  It's almost like hot wet mouths are latched onto your crotch and breasts, licking and sucking in perfect rhythm.  ", false);
 			if(player.cocks.length == 0 || player.biggestTitSize() <= 1) {
 				outputText("A small inner voice pipes up to remind you that you don't have ", false);
@@ -1281,7 +1281,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		private function doBadEndOmnibusPart2():void {
-			outputText("", true);
+			clearOutput();
 			//(Multi dicks)
 			if(player.cocks.length > 1) {
 				outputText("In her hand is a mass of shining green material.  She turns to face you, bringing it closer and letting you see the lights shift and change on its luminescent surface.\n\n", false);
@@ -1446,7 +1446,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		private function doBadEndDemon():void {
-			outputText("", true);
+			clearOutput();
 			if(player.gender == 1) outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion.", false);
 			else if(player.gender == 2) outputText("Now a full-fledged demon, you leave the factory, setting off on your own.  Over the next year you capture many foolish mortals, and even convince more than a few of them to give up their souls.  With your rapid gain in power, it's easy to rise in the demonic ranks, and in no time flat your power far exceeds that of the succubus that 'turned' you.  You live in luxury, surrounded by a harem of slaves, waiting in your camp for the next victim to step through...", false);
 			else outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion. It should be quite satisfying...", false);

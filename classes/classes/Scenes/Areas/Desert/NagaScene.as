@@ -15,7 +15,7 @@ public function nagaEncounter():void {
 	spriteSelect(45);
 	//Create status if needed
 	if(player.findStatusAffect(StatusAffects.Naga) < 0) player.createStatusAffect(StatusAffects.Naga,0,0,0,0);
-	outputText("", true);
+	clearOutput();
 	if(player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 		//Set 'last fuck as naga'
 		player.changeStatusValue(StatusAffects.Naga,1,1);
@@ -159,7 +159,7 @@ public function nagaEncounter():void {
 }
 
 private function gooNagaRape():void {
-	outputText("", true);
+	clearOutput();
 	player.orgasm();
 	outputText("You look over at the prone form of the naga lying in the sand, her ", false);
 	if(monster.HP < 0) outputText("weak ", false);
@@ -254,7 +254,7 @@ private function gooNagaRape():void {
 
 //3) Victory male
 private function nagaVictoryMale():void {
-	outputText("", true);
+	clearOutput();
 	player.orgasm();
 	//Male or 50% herms
 	if(player.totalCocks() > 0) {
@@ -341,7 +341,7 @@ private function nagaVictoryMale():void {
 }
 
 private function nagaVictoryFemale():void {
-	outputText("", true);
+	clearOutput();
 	//4) Victory female
 	if(player.hasVagina()) {
 		//c) Centaur
@@ -399,7 +399,7 @@ private function nagaVictoryFemale():void {
 }
 
 private function nagaVictoryGenderless():void {
-	outputText("", true);
+	clearOutput();
 	//c)Centaur
 	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 		outputText("You prance over to the prone form of the snake woman, plotting just what you will do to her body before realizing the severe lack of parts to use on her. You let loose a snort of frustration and paw at the ground. This complicates things, but you aren't going to let a little thing like having no genitalia stop you from having some fun.\n\n", false);
@@ -439,7 +439,7 @@ private function nagaVictoryGenderless():void {
 }
 
 internal function nagaFUCKSJOOOOOO():void {
-	outputText("", true);
+	clearOutput();
 	//BIMBO!  LIKE, TOTALLY AWESOME AND CUM!
 	//[Naga-on-Female Bimbo Loss Scene]
 	if((player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && player.hasVagina()) {
@@ -719,7 +719,7 @@ internal function nagaRapeChoice():void {
 }
 
 public function nagaPlayerConstrict():void {
-	outputText("", true);
+	clearOutput();
 	if(player.fatigue + kGAMECLASS.physicalCost(10) > 100) {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...", true);
 		menuLoc = 1;
@@ -772,7 +772,7 @@ public function nagaPlayerConstrict():void {
 }
 
 public function naggaSqueeze():void {
-	outputText("", true);
+	clearOutput();
 	//Squeeze -
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified.", false);
     monster.HP -= monster.eMaxHP() * (.10 + rand(15)/100);
@@ -790,7 +790,7 @@ public function naggaSqueeze():void {
 }
 //Tease
 public function naggaTease():void {
-	outputText("", true);
+	clearOutput();
 	//(if poisoned)
 	if(monster.findStatusAffect(StatusAffects.NagaVenom) >= 0)
 	{
@@ -914,7 +914,7 @@ public function naggaTease():void {
 }
 
 public function nagaLeggoMyEggo():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You release " + monster.a + monster.short + " from " + monster.pronoun3 + " bonds, and " + monster.pronoun1 + " drops to the ground, catching " + monster.pronoun3 + " breath before " + monster.pronoun1 + " stands back up, apparently prepared to fight some more.", false);
 	outputText("\n\n", false);
 	monster.removeStatusAffect(StatusAffects.Constricted);

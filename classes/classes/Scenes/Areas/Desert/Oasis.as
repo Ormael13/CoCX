@@ -78,7 +78,7 @@ internal function oasisSexing():void {
 	spriteSelect(46);
 	player.slimeFeed();
 	//New screen
-	outputText("", true);
+	clearOutput();
 	//For manpartz
 	if(player.cocks.length > 0) {
 		outputText("You feel clawed hands grasp at ", false);

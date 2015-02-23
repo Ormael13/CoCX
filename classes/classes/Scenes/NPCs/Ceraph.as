@@ -82,7 +82,7 @@
 		//(Struggle)
 		public function ceraphBindingStruggle():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You wriggle in the tight binding, trying your best to escape.  ", false);
 			if (player.statusAffectv1(StatusAffects.Bound) - 1 <= 0) {
 				outputText("With a mighty twist and stretch, the whip gives and uncurls from you all at once.  You've regained your freedom", false);
@@ -113,7 +113,7 @@
 //(Wait)
 		public function ceraphBoundWait():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your " + player.skinDesc + ", is intoxicating.", false);
 			if (flags[kFLAGS.PC_FETISH] >= 2) {
 				outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.", false);

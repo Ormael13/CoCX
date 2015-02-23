@@ -16,7 +16,7 @@ package classes.Scenes.Areas.Mountain
 		//turned on and over level 2]
 		public function infestedHellhoundEncounter():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("A low snarl vibrates through your body, ", false);
 			if (player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("making your jello-like body jiggle", false);
 			else outputText("rattling your teeth", false);
@@ -38,7 +38,7 @@ package classes.Scenes.Areas.Mountain
 				cleanupAfterCombat();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			//[BOTH INFESTED]
 			if (player.totalCocks() > 0 && player.findStatusAffect(StatusAffects.Infested) >= 0) {
 				//(LUST)

@@ -237,7 +237,7 @@ public function winAgainstMarae():void {
 
 private function maraeBadEnd():void {
 	spriteSelect(40);
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("marae-bad-end"));
 	if(flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0) outputText("The goddess flows out of the tree, stepping away from it as a living woman, curvy and nude.\n\n", false);
 	outputText("She approaches you, her breasts swinging pendulously and dripping sap.   Mesmerized by her swaying mammaries, you watch until she mashes you into them with an enormous hug.  A hand traces down your chest to your groin", false);
@@ -287,7 +287,7 @@ private function maraeBadEnd():void {
 
 private function maraeStealLethicite():void {
 	spriteSelect(40);
-	outputText("", true);
+	clearOutput();
 	//(SUCCESS)
 	if((player.spe > 35 && (rand(player.spe/3 + 30) > 20)) || (player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2))
 	{
@@ -349,7 +349,7 @@ private function maraeStealLethicite():void {
 public function level2MaraeEncounter():void {
 	spriteSelect(40);
 	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 1;
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("marae-second-encounter"));
 	outputText("While rowing about the lake", false);
 	if(player.str > 70) outputText(" with ease", false);
@@ -402,7 +402,7 @@ public function level2MaraeEncounter():void {
 
 private function MaraeIIStageII():void {
 	spriteSelect(40);
-	outputText("", true);
+	clearOutput();
 	outputText(images.showImage("marae-second-encounter-pt-two"));
 	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 2;
 	//[Girls]
@@ -544,7 +544,7 @@ private function MaraeIIStageII():void {
 
 private function MaraePt2RoundIIIPrizes():void {
 	spriteSelect(40);
-	outputText("", true);
+	clearOutput();
 	//[EPILOGUE]
 	//[Dudes]
 	if(player.gender == 1) {
@@ -645,7 +645,7 @@ private function MaraePt2RoundIIIPrizes():void {
 
 private function MaraeIIFlyAway():void {
 	spriteSelect(40);
-	outputText("", true);
+	clearOutput();
 	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!", false);
 	doNext(camp.returnToCampUseOneHour);
 }

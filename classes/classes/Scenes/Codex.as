@@ -47,7 +47,7 @@ package classes.Scenes
 		
 		//CODEX MODULES & APIs
 		public function codexBegin():void {
-			outputText("", true)
+			clearOutput()
 		}
 		public function headerMain(text:String = ""):void {
 			outputText("<font size=\"36\" face=\"Georgia\">" + text + "</font>\n\n", false)

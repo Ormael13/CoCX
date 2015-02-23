@@ -195,7 +195,7 @@ package classes.Scenes.Monsters
 		public function gobboAssassinRapeIntro():void
 		{
 			spriteSelect(24);
-			outputText("", true);
+			clearOutput();
 			outputText("The assassin falls to her feet, desperately trying to regain her composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around her pillowy breasts now hangs unfastened around her waist, the syringes once adorning it now littered around her. A shattered needle by her side emits a sweet-smelling vapor that soon reaches her nose, causing the girl to blush furiously as lust begins to overcome her senses.")
 				dynStats("lus", 20);
 			//If cant rape or breastfeed
@@ -262,7 +262,7 @@ package classes.Scenes.Monsters
 			}
 		}
 		private function giveGoblinAMilkMustache():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You slowly walk up to the downed goblin, gently telling her that everything will be all right now. She looks at you a bit incredulously and spreads her legs, obviously hoping that you will satisfy the urges that she has. You shake your head at her and instead cup your hands under your " + biggestBreastSizeDescript() + " and tell her that it's feeding time. The goblin looks at you annoyed and says, \"<i>I don't want your breasts! I want your naughty bits!</i>\" You laugh at her and grab her arms, pulling them behind her head.\n\n", false);
 
 			outputText("She struggles against your grip, trying to get something, anything inside her needy pussy while yelling \"<i>Come on " + player.mf("slut","stud") + ", you know you want to - mmph!</i>\"  You cut her off by shoving her mouth onto your " + nippleDescript(0) + ". She gasps involuntarily, filling her mouth with your milk. In an instant she freezes, then slowly swallows the milk in her mouth. She relaxes in your arms a moment later, gently suckling at your nipple. Her old lust-filled self is gone, replaced with a pliant girl who now wants nothing but your milk. You slowly lower your hand and start rubbing at her still-slick pussy. In response, she puts her hand on your other " + nippleDescript(0) + ", playing with it and teasing you.\n\n", false);
@@ -280,7 +280,7 @@ package classes.Scenes.Monsters
 			spriteSelect(24);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
-			outputText("", true);
+			clearOutput();
 			outputText(images.showImage("goblin-win-male-buttsex"));
 			outputText("As usual, you easily defeat another slutty goblin. Was there any doubt you could? Knowing what's about to happen, the goblin braces herself for the inevitable. Her face is flushed from arousal as she licks her lips. To goad you even further, she spreads her legs, revealing more of her sopping cunt.\n\n", false);
 			outputText("\"<i>Fuck me, stud!</i>\" she begs. Though defeated, she has to gall to make demands. \"<i>Pump me full of your baby batter!</i>\" Her defeat doesn't seem to do much to silence her tongue.\n\n", false);
@@ -305,7 +305,7 @@ package classes.Scenes.Monsters
 		private function gobboGetsRapedFem():void
 		{
 			spriteSelect(24);
-			outputText("", true);
+			clearOutput();
 			if (player.isTaur()) {
 				outputText(images.showImage("goblin-win-female-taur-rapedfem"));
 				outputText("You pick up the goblin, holding her tightly against your side with your arm. You tear a piece of supple leather off of her slutty garments and use it to bind her arms behind her back, just to be sure she can't do anything. She looks up at you, her eyes wide and frightened at the thought of being at the mercy of a much larger creature. In spite of it all, she seems more than a little turned on, if the juices staining your flank are any indication. You look down at her and remark, \"<i>So the little skank has a submissive streak huh?</i>\"\n\n", false);
@@ -414,7 +414,7 @@ package classes.Scenes.Monsters
 		private function rapeAGoblinCorruptTooBig():void
 		{
 			var x:Number = player.biggestCockIndex();
-			outputText("", true);
+			clearOutput();
 			spriteSelect(24);
 			outputText(images.showImage("goblin-win-male-corruptedfuck"));
 			outputText("You begin to remove your " + player.armorName + ", looking down on your helpless would-be-attacker and soon-to-be victim while licking your lips hungrily. Your " + multiCockDescriptLight(), false);
@@ -492,7 +492,7 @@ package classes.Scenes.Monsters
 //(TOO BIG – pin the bitch to the ground with your cock, coat it in her potions, and make her lick it clean, then blow your load in her mouth, possible cum inflation.)
 		private function manRapesGoblinTooBig():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText(images.showImage("goblin-win-male-corruptedbj"));
 			var x:Number = player.biggestCockIndex();
 			spriteSelect(24);
@@ -532,7 +532,7 @@ package classes.Scenes.Monsters
 			spriteSelect(24);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.biggestCockIndex();
-			outputText("", true);
+			clearOutput();
 			outputText(images.showImage("goblin-win-male-getridden"));
 			//(FITS( barley) – Get ridden)
 			if (player.cockArea(x) > monster.vaginalCapacity() * .8) {
@@ -612,7 +612,7 @@ package classes.Scenes.Monsters
 		{
 			spriteSelect(24);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
-			outputText("", true);
+			clearOutput();
 			outputText(images.showImage("goblin-win-male-goblincondomed"));
 			outputText("Defeated, the goblin girl's knees give out and she sinks backward, lying on her back with her emerald ankles suspended above her head. \"Use me,\" she begs, \"humiliate, degrade, and debase me! Just, whatever you do, fill me!\" As you strip off your " + player.armorName + ", she spreads her legs as wide as she can, the wanton girl presenting her drooling pussy to you, puffy green lips already dripping with beads of anxious sweat and eager lubrication. She wiggles in the dirt, gripping her plump rear with both hands and lifting her ass into the air for you, hopefully. You can practically feel the heat pouring off the small slut's cum-hungry cunt, her breeding-fever leaving her eyes glassy and unfocused. Standing over her, it's clear that the only things she's even aware of are the pulsing pussy between her legs and your burgeoning erection.\n\n", false);
 
@@ -650,7 +650,7 @@ package classes.Scenes.Monsters
 //REQUIRES: AT LEAST ONE DICK AND A COPY OF ATLAS SHRUGGED - MUST NOT BE MONSTROUSLY HUGE
 		private function gatsGoblinBoners():void
 		{
-			outputText("", true);
+			clearOutput();
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = player.smallestCockIndex();
 			outputText(images.showImage("goblin-win-male-goblinboners"));

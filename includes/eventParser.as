@@ -184,7 +184,7 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 17:
-			outputText("", true);
+			clearOutput();
 			goNext(24, false);
 			return;
 
@@ -441,7 +441,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 	//Update system time
 	//date = new Date();
 	//trace ("MONTH: " + date.month + " DATE: " + date.date + " MINUTES: " + date.minutes);
-	//outputText("", true);
+	//clearOutput();
 	if (timeAwareLargeLastEntry >= 0) { //Finish calling timeChangeLarge before advancing the hour again
 		for (; timeAwareLargeLastEntry < _timeAwareClassList.length; timeAwareLargeLastEntry++) {
 			if (_timeAwareClassList[timeAwareLargeLastEntry].timeChangeLarge()) return true;

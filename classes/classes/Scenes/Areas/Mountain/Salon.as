@@ -252,7 +252,7 @@ private function hairDresserRepeatGreeting():void {
 }
 private function gloryholeImp():void {
 	player.slimeFeed();
-	outputText("", true);
+	clearOutput();
 	outputText("You walk over to the hole in the wall, looking at the erect demon-member you'll have to service.  Judging by the height and constant bobbing up and down it does, the imp must be hovering on the other side, trying pretty damn hard to stay in the hole.\n\n", true);
 	if(player.cor < 33) {
 		outputText("You struggle to force your mouth onto the abomination in front of you, wondering why you chose to do such a thing.  Your head bobs up and down, trying to match the motions of the thick demonic tool as you grab hold and guide it into your mouth.  It's hot, hotter than you'd expect, and dripping with sickly sweet pre-cum that makes you tingle.  You throw yourself into the wretched task, intent on finishing it as quickly as possible.  You circle your tongue over the nodules, holding on as it swells in your mouth, unloading a sticky batch of spooge into your throat.  You cough and sputter, swallowing most of it, but you manage to hang on to enough for your pay.\n\n", false);
@@ -275,7 +275,7 @@ private function gloryholeImp():void {
 
 private function gloryholeDoggie():void {
 	player.slimeFeed();
-	outputText("", true);
+	clearOutput();
 	outputText("You sigh and kneel down to bring yourself level with the dog-dick hanging out of the wall.  It's pointed at the tip with a swollen circular bulb at the base.  As a matter of fact, the dog-dick's owner must be pretty excited to be here - it's dripping cum and the knot has swollen so large that it can't fit back through the hole.\n\n", true);
 	if(player.cor < 33) {
 		outputText("It's a struggle to force your lips apart and take the strange thing in your mouth.  You feel like a freak, but make yourself get to work servicing the male who'll be covering your hair treatment today.  It tastes salty and sweaty and has a potent musky scent that excites you in spite of your better judgement.  You find yourself starting to get into it as you lick and slurp, humming with pleasure.  You reach up to touch the knot and the dog-cock jumps in your mouth, spurting a wad of thick cum into your throat.  You pull back most of the way and pump the cock, collecting the jism in your mouth.\n\n", false);
@@ -295,7 +295,7 @@ private function gloryholeDoggie():void {
 }
 private function gloryholeIncubus():void {
 	player.slimeFeed();
-	outputText("", true);
+	clearOutput();
 	outputText("You kneel down in front of the throbbing demonic dick, ready to earn your pay.\n\n", false);
 	if(player.cor < 33) {
 		outputText("You picked this dick hoping that a male lust demon would be the most pleasurable to service, and judging by the pleasant spicy scent the member gives off, you're right.  You open wide and take it inside your mouth, feeling the ridges around the crown pressing back against your lips. A drop of pre-cum hits your tongue and it tastes divine, spurring you on to please the tainted member.  You grab it with both hands and pump it, feeling the corrupted nodules under your fingers as you lick and suck on the head, eager for more.  You get your reward soon enough, and you eagerly start drinking down the copious waves of fluid.  Thankfully, the incubus' orgasm seems to last forever, and when he finishes, you have a full belly and a mouth full of cream.  You manage to resist this last swallow, as you still need to pay.\n\n", false);
@@ -405,13 +405,13 @@ private function hairGrow():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 		private function buyDye(itype:ItemType):void{
-			outputText("", true);
+			clearOutput();
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
 		
 private function dyeMenu():void {
 	spriteSelect(38);
-	outputText("", true);
+	clearOutput();
 	outputText("Lynnette pulls open a cabinet in the corner, displaying a wide array of exotic hair-dyes.  Which kind do you want?", false);
 	menu();
 	addButton(0, "Blue", buyDye, consumables.BLUEDYE);
@@ -510,7 +510,7 @@ private function removeBeard():void {
 }
 
 private function minotaurCumBukkakeInSalon():void {
-	outputText("", true);
+	clearOutput();
 	player.minoCumAddiction(10);
 	player.slimeFeed();
 	outputText("As the salon door swings closed behind you, a familiar, heavenly scent catches your nose and wicks into your brain, flooding you with need and molten-hot lust.  Lynnette saunters over with her lips slightly pursed and her body jiggling, but you brush her aside.  She's completely forgotten as you close in on the source of your olfactory bliss.  Your sigh dreamily while your pupils slowly dilate from the familiar chemicals pounding through your bloodstream", false);
@@ -595,7 +595,7 @@ private function minotaurCumBukkakeInSalon():void {
 }
 private function minotaurSalonFollowUp():void {
 	spriteSelect(38);
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] == 0) {
 		//Unlock mino cum purchase
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142]++;
@@ -612,7 +612,7 @@ private function minotaurSalonFollowUp():void {
 
 private function mudFacial():void {
 	spriteSelect(38);
-	outputText("", true);
+	clearOutput();
 	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special mud'.  You close your eyes, letting them plaster your " + player.face() + " with the stuff in hopes that it will improve your complexion as much as you've been promised.  A pair of cucumber slices are laid out on your eyes, obscuring your view.\n\n", false);
 
 	outputText("With that finished, the crowd of busty, green-skinned women disperses to leave you in peace.  Time drags on, but eventually the mud hardens and cracks.  As if on cue, tiny hands emerge with wet rags to scrub your face clean.  Once they've finished, you feel like a whole new you! (+10 femininity)", false);
@@ -622,7 +622,7 @@ private function mudFacial():void {
 
 private function sandFacial():void {
 	spriteSelect(38);
-	outputText("", true);
+	clearOutput();
 	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special sand'.  You close your eyes, letting them splatter your " + player.face() + " with the rough, textured goop.  It doesn't feel very good, but that won't matter if it makes you as handsome as it's supposed to.\n\n", false);
 
 	outputText("After a while the goblin girls come back and clean the stuff from your face. (+10 masculinity)", false);

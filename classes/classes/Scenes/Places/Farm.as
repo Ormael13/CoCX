@@ -146,7 +146,7 @@ private function whitneyMilkerRefusal():void {
 private function talkWhitney():void {
 	spriteSelect(62);
 	//[FIND WHITNEY TXT]
-	outputText("", true);
+	clearOutput();
 	//Centaur Hookups!
 	if(player.hasKeyItem("Fake Mare") < 0 && player.isTaur()) {
 		centaurToysHoooooo();
@@ -357,7 +357,7 @@ private function breastMilkerNoPurchase():void {
 
 public function workFarm():void {
 	var marbling:Number = 0;
-	outputText("", true);
+	clearOutput();
 	//In withdrawl odds are higher.
 	if(player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 		if(player.statusAffectv3(StatusAffects.Marble) == 1) marbleScene.addictedEncounterHappy();
@@ -617,7 +617,7 @@ public function getMilked():void {
 	//< 250 'good' output
 	//< 750 'high' output
 	//ELSE milk overload
-	outputText("", true);
+	clearOutput();
 	//First time barn entrance
 	outputText("The barn looms tall ahead of you as you step into its shadow.  ", false);
 	if(player.findStatusAffect(StatusAffects.BreastsMilked) < 0) {
@@ -854,7 +854,7 @@ public function getMilked():void {
 
 public function cockPumping():void {
 	var cumQ:Number = player.cumQ() * (rand(10) + 90) / 100;
-	outputText("", true);
+	clearOutput();
 	//First time barn entrance
 	if(player.findStatusAffect(StatusAffects.CockPumped) < 0) {
 		outputText("The barn looms tall ahead of you as you step into its shadow.  ", false);
@@ -1139,7 +1139,7 @@ private function cowBadEnd1():void {
 }
 
 private function cowBadEnd2():void {
-	outputText("", true);
+	clearOutput();
 	outputText("A day later, you slosh back into the barn with your breasts painfully full and ready to be emptied.  Your cum-filled belly joins your tits in dragging on the floor while you daydream about your time in the minotaur caves last night.  The first one claimed your " + assholeDescript() + ", brutalizing it over and over while the beast emptied his vast reservoirs of seed into your rectum.  Before the beast's equine-like cock could be stuffed halfway inside you, a slightly smaller minotaur was in front of your face, smearing your lips with a thick coating of his tasty pre.  Like a good cow, you opened wide for the bull and gratefully accepted his thick loads, feeling the narcotic-like spunk shut down your ability to think about anything but sex.\n\n", false);
 	outputText("You moo happily, shivering at the intensity of the fond memories and in anticipation of tonight's activities.  But first you need to get your swollen nipples emptied!  The straps to the harness hang there in front of you – how do you work them again?  Your happy moos turn to moos of confusion and stress, but thankfully Whitney pads into the barn before you have a chance to panic.  She looks down and sighs, filling you with confusion.  You weren't a bad cow, were you?\n\n", false);
 	outputText("The anthropomorphic country-girl gives you a gentle pat on the head as she works the straps, talking to herself as she does, \"<i>Don't worry girl, I'm not mad.  I reckon I should've given you a stronger warning is all.  But now the damage is done – what's left of your brains was mushed up by all that milking.  Don't worry none honey, there will always be a spot in my stall for you.  I'll just have to make sure you don't get out with the animals again, won't I?</i>\"\n\n", false);
@@ -1148,7 +1148,7 @@ private function cowBadEnd2():void {
 }
 private function milkerBadEnd1():void {
 	var cumQ:Number = player.cumQ();
-	outputText("", true);
+	clearOutput();
 	outputText("As you roll onto your back the machine delivers an encore performance on your swollen " + multiCockDescriptLight() + ", down to the very same orgasm denial.  Wracked by pleasure but now freed to move, you find yourself trying to thrust aganst the tubes, as best as your feeble grip and exhaustion will allow, in order to try to override the machine's will and achieve release.  Nevertheless, the suction expertly mainpulates your arousal and you can do little except endure it as another oversized batch of cum wells up", false);
 	//[(balls)
 	if(player.balls > 0) outputText(" in your " + ballsDescriptLight(), false);
@@ -1267,7 +1267,7 @@ private function milkerBadEnd1():void {
 //Introduction: Finding the Toys @ The Farm
 private function centaurToysHoooooo():void {
 	spriteSelect(62);
-	outputText("", true);
+	clearOutput();
 	//[Places] - [Farm] - [Talk] If PC = Centaur
 	outputText("You find the dog-morph Whitney standing in the entrance to her barn, scratching her head with consternation.  You approach her and ask what's up.\n\n", false);
 

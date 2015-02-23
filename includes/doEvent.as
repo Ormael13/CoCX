@@ -114,7 +114,7 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2006)
 	{
 		spriteSelect(50);
-		outputText("", true);
+		clearOutput();
 		if (player.hairColor == "sandy blonde")
 		{
 			outputText("She smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n", false);
@@ -203,7 +203,7 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2009)
 	{
 		trace("Tentacle event here");
-		outputText("", true);
+		clearOutput();
 		spriteSelect(100);
 */
 		//Tentacle Encounter - beware legalese!
@@ -948,7 +948,7 @@ public function doEvent(eventNo:Number):void
 	//Cerulean potion continued
 	else if (eventNo == 2026)
 	{
-		outputText("", true);
+		clearOutput();
 		spriteSelect(8);
 		if (player.gender == 1)
 		{
@@ -969,7 +969,7 @@ public function doEvent(eventNo:Number):void
 	//Cerulean potion continued
 	else if (eventNo == 2027)
 	{
-		outputText("", true);
+		clearOutput();
 		spriteSelect(8);
 		if (player.gender == 1)
 		{
@@ -997,7 +997,7 @@ public function doEvent(eventNo:Number):void
 	//Succubi 
 	else if (eventNo == 2028)
 	{
-		outputText("", true);
+		clearOutput();
 		spriteSelect(8);
 		if (player.gender == 1)
 		{
@@ -1193,7 +1193,7 @@ public function doEvent(eventNo:Number):void
 			doNext(rathazul.returnToRathazulMenu);
 			return;
 		}
-		outputText("", true);
+		clearOutput();
 		if (!debug)
 			player.destroyItems(consumables.INCUBID, 1);
 		inventory.takeItem(consumables.P_DRAFT);
@@ -1210,7 +1210,7 @@ public function doEvent(eventNo:Number):void
 			doNext(rathazul.returnToRathazulMenu);
 			return;
 		}
-		outputText("", true);
+		clearOutput();
 		if (!debug)
 			player.destroyItems(consumables.SUCMILK, 1);
 		inventory.takeItem(consumables.P_S_MLK);
@@ -1227,7 +1227,7 @@ public function doEvent(eventNo:Number):void
 			doNext(rathazul.returnToRathazulMenu);
 			return;
 		}
-		outputText("", true);
+		clearOutput();
 		if (!debug)
 			player.destroyItems(consumables.SDELITE, 1);
 		inventory.takeItem(consumables.PSDELIT);
@@ -1277,7 +1277,7 @@ public function doEvent(eventNo:Number):void
 	//Treeboob fun-times
 	else if (eventNo == 2084)
 	{
-		outputText("", true);
+		clearOutput();
 		spriteSelect(92);
 		outputText("Stepping carefully around the other hazards of the glade, you close on the strange trees with equal parts curiosity and desire.  Up close, it's easy to see the strange growths that sprout from the bark – dozens of full ripe-looking breasts, each capped with a swollen and leaking nipple.  You touch one, marveling at the smooth texture of its chocolate-colored skin.   In response a runner of sap oozes free of the nipple and slides down the curved surface.\n\n", false);
 		outputText("You lean forwards and lick around the nipple's surface, sampling the sweetness of the trickling sap.   The stuff nearly overpowers you with a taste like syrupy cream as more sap drips free of the fully-erect tree-nipple.  Unable to resist testing this nonsensical oddity, you engulf the entire nipple between your lips, suckling hard.   The tree seems to oblige your efforts with a fresh discharge of the sticky sap.   Your tongue tingles and vibrates with the sinfully sweet taste in your mouth, dancing in circles around the nipple, coaxing yet more nectar from swollen plant-jug.  It's easy to lose yourself in that taste, falling into a rhythm of alternatively sucking, swallowing, and licking.\n\n", false);
@@ -1325,13 +1325,13 @@ public function doEvent(eventNo:Number):void
 	//MARBLE SHIT STARTS HERE
 	else if (eventNo == 2112)
 	{
-		outputText("", true);
+		clearOutput();
 		marbleScene.marbleSex2Continued(1);
 		doNext(13);
 	}
 	else if (eventNo == 2113)
 	{
-		outputText("", true);
+		clearOutput();
 		marbleScene.marbleSex2Continued(2);
 		doNext(13);
 	}
@@ -1422,7 +1422,7 @@ public function doEvent(eventNo:Number):void
 	//Buy Dual Belt - MOVED TO GIACOMO
 	else if (eventNo == 2144)
 	{
-		outputText("", true);
+		clearOutput();
 		outputText("You look at the thing in front of you and sigh, your " + multiCockDescriptLight() + " and " + vaginaDescript(0) + " dripping with fluids. With a nervous sigh you step into the underwear looking device and slip it up your legs, the cold metal feeling so good on your " + player.skinDesc + ", sending a rush of feelings up your body. You slip your " + cockDescript(0) + " down and into a hole on the front of the belt, the extra length sticking out on the other side of it. Underneath the hole and right above your pussy is another metal square with what feels like a small nub on the inside rubbing against your clit. Shivering from the feeling of it, you stay there for a moment, waiting in anticipation. Finally, you reach down to the side of the belt and flick the switch to the on position.\n\n", false);
 		outputText("The belt whirs to life, shaking on your waist, sending jolts of pleasure through your clit as the small inside nub hits it. \"<i>Ohh...</i>\" Suddenly, the ring around your cock vibrates and then tightens hard around your cock, the belt sinking onto your body and locking in place. Worry sets in instantly as you try to wiggle and take it off, but it is no use. You see something black bubble from the edges of the metal, worried even more that it might be some sort of acid. It begins to creep across your skin at a disturbing rate, going down your " + player.legs() + " and encasing them in the blackness, wrapping your cock, ", false);
 		if (player.tailType > TAIL_TYPE_NONE)
@@ -1474,7 +1474,7 @@ public function doEvent(eventNo:Number):void
 			doNext(rathazul.returnToRathazulMenu);
 			return;
 		}
-		outputText("", true);
+		clearOutput();
 		if (!debug)
 			player.destroyItems(consumables.LABOVA_, 1);
 		inventory.takeItem(consumables.P_LBOVA);

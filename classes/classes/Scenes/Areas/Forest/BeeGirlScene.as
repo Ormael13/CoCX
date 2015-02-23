@@ -33,7 +33,7 @@ package classes.Scenes.Areas.Forest
 
 		private function beeEncounterLevel2(clearScreen:Boolean=true):void
 		{
-			if (clearScreen) outputText("", true);
+			if (clearScreen) clearOutput();
 			spriteSelect(6);
 			//Bee appears!
 			outputText("That's when she comes into view. A great woman, yellow and black, a Bee-like handmaiden would be the best comparison. She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen. Her head is more humanoid than bee, with black eyes, antennae, and luscious black lips that glimmer wetly, bending into a smile as she sees you approach. Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n", false);
@@ -368,7 +368,7 @@ package classes.Scenes.Areas.Forest
 		public function beeRapesYou():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			if (doSFWloss()) return;
 			var sexed:Boolean = false;
 			//Centaur lost to giant bee:
@@ -691,7 +691,7 @@ package classes.Scenes.Areas.Forest
 		private function rapeTheBeeMultiCockStuff():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			//Doubledick special
 			//HermCock supreme by mallowman
 			if (player.cockTotal() >= 5 && player.biggestTitSize() > 2
@@ -726,7 +726,7 @@ package classes.Scenes.Areas.Forest
 		private function rapeTheBeeGirlWithADick():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
 			//TAURS GO!
@@ -880,7 +880,7 @@ package classes.Scenes.Areas.Forest
 		private function rapeABeeGirlWithYourVagina():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			if (player.isTaur()) {
 				outputText("The bee-girl plops onto her flower with her legs splayed out, letting you get a clear look at her dripping honeypot. She watches you nervously as you approach, letting her stinger slide out in a pointless threat. She seems taken aback when you smile down at her, but returns the gesture with a nervous smile of her own.\n\n", false);
 
@@ -951,7 +951,7 @@ package classes.Scenes.Areas.Forest
 		private function futaRapesBeeGirl():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			outputText("Firmly grasping her thighs at the joining of her smooth carapace and soft skin, you force them open, revealing the source of her irresistible scent.   She buzzes pitifully in protest ", false);
 
 			if (player.isTaur()) outputText("as you idly fondle your " + player.allBreastsDescript() + " as you feel your blood-gorged " + multiCockDescriptLight() + " swaying under your belly.  ", false);
@@ -1029,7 +1029,7 @@ package classes.Scenes.Areas.Forest
 		private function beeGirlRapeForTheDistinguishedGentleman():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			//(if win via HP)
 			if (monster.HP < 1) outputText("The bee-maiden staggers backward against her perch and wheezes.  Quickly, you launch yourself forward and pin her bodily against the giant flora, grabbing her feebly thrashing arms.  In a flash of inspiration, you pull a long supple leaf from the underside of the blossom, twisting it lengthwise and managing to bind her hands to the stem above her head with your makeshift cord before she can focus on what's happening.\n\n", false);
 			//(if lust win)
@@ -1167,7 +1167,7 @@ package classes.Scenes.Areas.Forest
 		private function corruptNagaBitchesRapeABee():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 
 			outputText("Now that the bee-girl is unable to flit her wings and create that buzzing drone that seems to rob you of your senses, you can see her for what she truly is: Prey.\n\n", false);
 
@@ -1186,7 +1186,7 @@ package classes.Scenes.Areas.Forest
 		private function nagaRapesPt2TheExtremeContinuationOfAwesome():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			//[Player is male]
 			if (player.gender == 1 || (player.gender == 3 && rand(3) == 0)) {
 				outputText("By now ", false);
@@ -1300,7 +1300,7 @@ package classes.Scenes.Areas.Forest
 		public function milkAndHoneyAreKindaFunny():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			player.slimeFeed();
 			outputText("You sit the bee-girl up; she's a bit dazed from the fight as her head moves in circles.  You kiss her honey-flavored lips, sticking your tongue into her mouth and causing her to snap out of her daze.  She's surprised at this unexpected show of affection, but understanding her situation, she begins kissing you back.  Both of your tongues rub and slide against one another as you occasionally plunge into each other's mouth.  Your hand rubs up her thigh onto her honeypot.  You drive two fingers into it, circling them around.  Making sure they are covered in her sweet love-honey, you pull the two fingers out and raise them up.  The bee-girl sees your honey-covered fingers and slowly pulls back from the kiss.  You suck the honey off the index then you point the middle at her mouth and push forward.  Her lips wrap around the finger and suck it into her mouth as her tongue laps around it, cleaning all the honey off it.  You take the finger out of her mouth and examine the work she did.\n\n", false);
 

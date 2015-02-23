@@ -35,7 +35,7 @@
 
 		private function tryToTakeSwordInStone():void 
 		{
-			outputText("", true);
+			clearOutput();
 			//if corrupted...
 			if (player.cor >= 25) 
 			{

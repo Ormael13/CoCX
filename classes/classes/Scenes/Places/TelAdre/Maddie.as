@@ -13,7 +13,7 @@ public function Maddie(){
 	//, 3 =stayed, 4 = epilogue'ed
 //[Bakery One Off – Madeleine's Creation]
 internal function procMaddieOneIntro():void {
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00240] == 0) {
 		outputText("You enter the bakery, savoring the sweet smells of sugar and baked goods.  A burly, hairy figure steps up beside you and places a strong hand on your shoulder.   The gravelly voice of the stranger says, \"<i>You ain't from around here.  Come.  I need your help.  Show you something.</i>\"  You turn to look, and are quite surprised when you see the horned visage of a minotaur ", false);
 		if(player.tallness < 72) outputText("looking down at", false);
@@ -30,7 +30,7 @@ internal function procMaddieOneIntro():void {
 }
 //[Follow] 
 private function followMinotaurIntoBackroom():void {
-	outputText("", true);
+	clearOutput();
 	//	(Not yet explained) 
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00241] == 0) {
 		outputText("You follow the burly beast through the door, turning several times as he leads you through the blisteringly hot ovens.  The minotaur is sweating heavily by the time you reach his destination, and for that matter so are you.  With all the musk boiling off of him, you find yourself wondering if he was just setting up an elaborate ruse to lure you into a sexual situation.  He grabs a white, fluffy hat and drops it on his head, firmly dispelling that notion as he tries to explain in as few words as possible, \"<i>I am cook.  I make great éclairs, but making masterpiece now.  Need special ingredients.  You get to leave city.  Bring me lust draft and honey.  Not pure stuff, too strong. Go.</i>\"\n\n", false);
@@ -54,7 +54,7 @@ private function followMinotaurIntoBackroom():void {
 
 //[Not Yet/No]
 public function nopeAintGotNoneODemSpeculIngredimathings():void {
-	outputText("", true);
+	clearOutput();
 	outputText("The chef sighs and slams a fist into the counter hard enough to dent the metal and throw the bowls full of dough inches into the air.  A number of empty éclairs bounce and roll everywhere.  The minotaur looks back at you and snorts, \"<i>Best you go.  Don't come without ingredients.</i>\"\n\n", false);
 	
 	outputText("Well, no point in ", false);
@@ -65,7 +65,7 @@ public function nopeAintGotNoneODemSpeculIngredimathings():void {
 }
 //[Yes – baking]
 public function handOverIngredientsItBeBakingTimeYo():void {
-	outputText("", true);
+	clearOutput();
 	player.consumeItem(consumables.BEEHONY);
 	player.consumeItem(consumables.L_DRAFT);
 	outputText("You hand the lust draft and bottled honey to the minotaur, doing your best to ignore his potent, lust-inducing pheromones as you watch him work.  He grabs the batch of dough he had been kneading and pours in the lust draft, snorting aggressively once the bubbling drug's smell reaches his bovine nostrils.  Next, the bull-like chef reaches over to grab a bottle marked 'P.S.M.', uncorking and pouring it in one practiced motion.   The white fluid froths dangerously on contact with the pink lust draft, and a second later the honey is in there too.  Finally, he flips up his loincloth and reaches for the onahole.\n\n", false);
@@ -85,7 +85,7 @@ public function handOverIngredientsItBeBakingTimeYo():void {
 	
 //[Sneak Out]
 private function sneakAwayFromMaddie():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You get out before he can find you again.  Whatever he's making is nothing you ever want to taste.", false);
 	//(No more mino chef)
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = -2;
@@ -94,7 +94,7 @@ private function sneakAwayFromMaddie():void {
 //[Wait/Next]
 private function waitForSlutCake():void {
 	spriteSelect(39);
-	outputText("", true);
+	clearOutput();
 	outputText("You walk back into the bakery proper, feeling more than a little ", false);
 	if(player.cor < 33) outputText("antsy", false);
 	else if(player.cor < 66) outputText("nervous about this whole thing", false);
@@ -119,7 +119,7 @@ private function waitForSlutCake():void {
 //[RUN DAFUQ AWAY]
 private function runAwayFromMaddiiiieee():void {
 	spriteSelect(39);
-	outputText("", true);
+	clearOutput();
 	outputText("You turn tail to run, evacuating the room before that culinary catastrophe can have her way with you.  A high-pitched whine chases you away as the cupcake-girl cries, \"<i>Nooooo... come back!  I'm making so much filling for you!</i>\"  Her words lend you even greater speed, and you vacate the city in record time.\n\n", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = -1;
 	doNext(camp.returnToCampUseOneHour);
@@ -127,7 +127,7 @@ private function runAwayFromMaddiiiieee():void {
 //[Followup to run away]
 public function runAwayMaddieFollowup():void {
 	spriteSelect(39);
-	outputText("", true);
+	clearOutput();
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = -2;
 	outputText("You return to a strange sight indeed.  Urta and Edryn are leading a procession of over thirty city guards, arranged in a loose circle around the cupcake-girl.  Her comparatively tiny, tin-foil fez is gone, along with most of her blue-iced 'armor'.  She looks weak, pathetic, and beaten as she's prodded with spears and escorted from the city, never to return again.  Vanilla-scented tears stain the pavement behind her, leaving a trail the whole way back to the bakery.\n\n", false);
 	doNext(telAdre.telAdreMenu);
@@ -234,7 +234,7 @@ private function talkToMaddie():void {
 
 //[Next visit to the bakery...]
 internal function bakeryEpilogue():void {
-	outputText("", true);
+	clearOutput();
 	outputText("As soon as you enter the bakery, one of the waitresses pulls you aside.  She positively beams as she hands you a note and says, \"<i>One of our chefs wanted me to give you this.  I didn't even know he could write!  I mean, where does a minotaur learn to handle a pen?</i>\"  You smirk, waving her away before you open up the minotaur's note.\n\n", false);  
 	outputText("\"<i>Thanks.  Figured out what went wrong with Maddie's help.  Made masterpiece.  Buy giant cupcake sometime.  Delicious!  Promise it's safe and non-addictive.  Expensive though.  Ingredients rare.\n\n", false);
 	outputText("-X</i>\"", false);

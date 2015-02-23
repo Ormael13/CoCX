@@ -55,7 +55,7 @@ package classes.Scenes.Areas.Lake
 				return;
 			}
 			player.changeStatusValue(StatusAffects.FetishOn, 1, 1);
-			outputText("", true);
+			clearOutput();
 			outputText("As you get close to your boat, you are surprised to find someone standing at the end of the dock.  As you get closer, you see that it's a man wearing some kind of bizarre religious outfit.  He turns to face you as you approach and says \"<i>This has been claimed by the Followers of the Fetish for security reasons, leave at once.</i>\"\n\n\"<i>What?  This is my boat!</i>\" you cry out in surprise.  The zealot seems to take this as an aggressive action on your part and moves to attack you.", false);
 			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] = 1;
@@ -70,7 +70,7 @@ package classes.Scenes.Areas.Lake
 //This is the regular pre combat text for wandering zealots (they'll be a regular mob at the swamp)
 		private function zealotRepeat():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this zealot has been tasked to guard, and now you must fight him.", false);
 			startCombat(new FetishZealot());
 			spriteSelect(20);
@@ -84,7 +84,7 @@ package classes.Scenes.Areas.Lake
 				cleanupAfterCombat();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			var broseph:String = player.mf("dude", "chick");
 			//Pre Rape Scene - lose by hp
 			if (player.HP < 1)
@@ -270,7 +270,7 @@ package classes.Scenes.Areas.Lake
 //Raped by the player
 		private function zealotWinRape():void
 		{
-			outputText("", true);
+			clearOutput();
 			//Religious Costume Rape
 			outputText("The zealot's attire seems to have settled on an outfit similar to those commonly worn by members of religious orders, though you aren't too surprised to see that it has a slit running down the front and back of the outfit that gives you full access to his sizable cock and asshole.\n\n", false);
 			//If player has a dick, chose one of these at random if the player has both

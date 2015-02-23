@@ -511,7 +511,7 @@ package classes.Scenes.Areas.Lake
 		private function plugSwimsuitVag():void
 		{
 			var x:Number = player.biggestCockIndex();
-			outputText("", true);
+			clearOutput();
 			if (player.hasVagina()) outputText("You decline the vibrators; you'd much rather take her incredibly wet pussy.  ", false);
 			else outputText("You tell her you're gonna fuck her.  ", false);
 			outputText("She nods at you and turns around shivering even harder.  You step forward and put your hands on her shoulders, then start to run them over her body, while your " + multiCockDescriptLight() + " pokes her in the back.  \"<i>Oh fuck me, I need you to fuck me now!</i>\" she screams.  Grinning, you push her to the ground and grip her pert, bouncing breasts.  You push her bathing suit to the side so that you have access to her waiting snatch.  You assure her that you'll be fucking her all right, all while you tease and play with her exposed body.\n\n", false);
@@ -544,7 +544,7 @@ package classes.Scenes.Areas.Lake
 		//PC goes for the vagina vibrators
 		private function swimsuitVibrators():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You suggest that you're interested in trying the vaginal vibrators she offered.  The cultist nods, and turns to face you holding two surprisingly large toys in her hands.  They're shaped like a long tube, with a small arm on the side near the handle that points towards the end.  You aren't sure where they came from, but you'd guess she used the same magic that she uses to shift her clothing to get them.\n\n", false);
 			if (player.vaginalCapacity() <= 30) {//PC does not have a very loose or looser vagina)
 				//painful or not, you're going to try! (separate function)
@@ -629,7 +629,7 @@ package classes.Scenes.Areas.Lake
 
 		public function fetishCultistHasAMilkFetish():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You remove your " + player.armorName + ", standing naked in front of the beaten fetish-girl with your lactating " + breastDescript(0) + " dripping milk. You pick the cultist up and sit down on the ground with her resting on your lap, her soft warm ass up against your thighs. You hold the nipple up to her mouth; she suckles on it without the slightest sign of rebellion.\n\n", false);
 
 			outputText("Minutes later, the landscape around you slowly changes into a cozy cabin. There's a fireplace with a bear rug in front of it and you're on a rocking chair in the corner with the Cultist on your lap, still nursing from your breasts. She has a bonnet on with two long black pigtails falling down her milky white body. A black lacy thong is barely covering her pussy with the back string disappearing between her two pleasant cheeks. Black & white striped knee socks cover her legs. Her grateful eyes look up at you, and you notice that they have black eye-liner on that makes her hazel eyes pop like fire.\n\n", false);

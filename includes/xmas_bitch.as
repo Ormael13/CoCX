@@ -8,7 +8,7 @@
 
 public function xmasBitchEncounter():void
 {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(9);
 	outputText("Your sleep is disturbed by something repeatedly smacking into your side.  Groggily at first, you grumble and throw back your blanket.  Then you remember where you are, and snap to full wakefulness.  You launch onto your feet, bring up your fists, and stare bewildered at the sight in front of you.\n\n", false);
 
@@ -61,7 +61,7 @@ public function xmasBitchEncounter():void
 //[Decline]
 public function declineXmasPresent():void {
 	spriteSelect(9);
-	outputText("", true);
+	clearOutput();
 	outputText("You shake your head 'no', and inform the elf that you'll have nothing to do with her 'gifts' or 'surprises'.  She looks on the verge of tears as she whines, \"<i>I'm going to get reamed for this!</i>\"\n\n", false);
 	
 	outputText("Before you can react, she sprints off into the darkness.", false);
@@ -71,7 +71,7 @@ public function declineXmasPresent():void {
 //[Open Present]
 public function openXmasPresent():void {
 	spriteSelect(9);
-	outputText("", true);
+	clearOutput();
 	outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ", false);
 	if(player.cor >= 90 || monk >= 5 || player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
 		//[Bad Present]
@@ -107,7 +107,7 @@ public function openXmasPresent():void {
 //[Unwrap the elf]
 public function unwrapElfyPresent():void {
 	spriteSelect(9);
-	outputText("", true);
+	clearOutput();
 	outputText("The elf tosses the present to the side and saunters up to you, her hips swaying sensually.  She ", false);
 	if(player.tallness > 60) outputText("reaches up and presses herself against you seductively, caressing your body.", false);
 	else outputText("cuddles up alongside, happy to have someone of similar stature to seduce.", false);
@@ -234,7 +234,7 @@ public function vagFuckXmasElf():void {
 //MANTASTIC FOLLOWUP:
 public function xmasFuckFollowup():void {
 	hideUpDown();
-	outputText("", true);
+	clearOutput();
 	outputText("You awaken in the morning, sore and exhausted, but more satisfied than you've ever felt before.  Your body feels INCREDIBLY sensitive from head to toe, but particularly on your well-used " + cockDescript(0) + ".  In spite of the traumatic lovemaking, you feel remarkably clear-headed.\n\n", false);
 	outputText("Did you enjoy being able to cum so much");
 	if(player.findPerk(PerkLib.ElvenBounty) >= 0) outputText(" <b>again</b>");
@@ -252,7 +252,7 @@ public function xmasFuckFollowup():void {
 //FEMTASTIC FOLLOWUP:
 public function xmasFuckFollowupFems():void {
 	hideUpDown();
-	outputText("", true);
+	clearOutput();
 	outputText("You awaken in the morning, sore and exhausted, but more satisfied than you've ever felt before.  Your body feels INCREDIBLY sensitive from head to toe, but particularly in your well-used " + vaginaDescript(0) + ".  In spite of the traumatic lovemaking, you feel remarkably clear-headed.  The dildo appears to have completely dissolved inside you, leaving behind a pinkish fluid that drips from your lips.\n\n", false);
 	
 	outputText("Do you think it might have done anything to you");

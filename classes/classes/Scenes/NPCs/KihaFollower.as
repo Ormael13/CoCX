@@ -62,7 +62,7 @@ private function kihaAffection(changes:Number = 0):Boolean {
 
 //Introduction
 internal function kihaSpiderEventIntro():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("You make your way to the swamp, and soon find yourself submerged waist-deep in a reeking marsh surrounded by tall, vine-covered trees, many of which support strands of thick gossamer webbing.  You wander the bog for what seems like an eternity before you finally stumble across a small island, in what may well be the heart of the swamp.  At this point, you're moments from saying to hell with it and going home, but... why not?\n\n", false);
 
@@ -94,7 +94,7 @@ internal function kihaSpiderEventIntro():void {
 
 //Player Loses to Kiha: (Z)
 internal function loseKihaPreSpiderFight():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("Before you can collapse, Kiha grabs you by the throat and hauls you off the ground.  She slams your back into the bark of a tree, crushing your windpipe with her powerful clawed hand.  She puts her face right up next to yours, so that you can feel her hot, searing breath on your face, nearly enough to blister your skin.\n\n", false);
 
@@ -109,7 +109,7 @@ internal function loseKihaPreSpiderFight():void {
 
 //Player Wins Against Kiha (Z)
 internal function playerBeatsUpKihaPreSpiderFight():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("The dragoness slumps back against one of the trees, her limbs trembling weakly.\n\n", false);
 
@@ -128,7 +128,7 @@ internal function playerBeatsUpKihaPreSpiderFight():void {
 
 //Warn Kiha (Z)
 private function warnKihaOfHerImpendingDemise():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("\"<i>Kiha! Behind you!</i>\" you shout, desperately pointing at the group of monsters closing in behind her.\n\n", false);
 
@@ -153,7 +153,7 @@ private function warnKihaOfHerImpendingDemise():void {
 
 //Let Them (Z)
 private function letTheSpidersHaveTheirWayWithKiha():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	flags[kFLAGS.KIHA_AFFECTION_LEVEL] = -1;
 	outputText("You say nothing to alert the savage dragoness to her impending doom.  Only when one of the driders stalks up behind her does Kiha seem to realize something is amiss, and by then it is far too late.  The drider picks her up by her weapon arm and slaps a wad of wet webbing into her mouth, holding the surprised Kiha for only a moment before throwing her to the mob who descend upon her in a frenzy of muffled screaming and erect penises.\n\n", false);
@@ -166,7 +166,7 @@ private function letTheSpidersHaveTheirWayWithKiha():void {
 }
 //Help Kiha (Z)
 private function helpKihaAgainstSpoidahs():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("Looking from the defeated dragoness to the horde of spider-folk about to, at best, gang-rape her, you lean down and offer Kiha a hand.\n\n", false);
 
@@ -188,7 +188,7 @@ private function helpKihaAgainstSpoidahs():void {
 }
 //Leave Her (Z)
 private function leaveKihaToSpoidahHorde():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	flags[kFLAGS.KIHA_AFFECTION_LEVEL] = -1;
 	outputText("Fuck Kiha, fuck the swamp, and fuck this.  You grab your shit and high-tail it just as the spiders close in on the dragoness.  All you see over your shoulder is a number of spider-boys and driders grabbing their cocks and swarming over Kiha for a good old-fashioned gang-rape.  Whistling a merry tune, you saunter on back to camp to the satisfying sounds of Kiha's muffled screams and pleas wafting over the tree-tops.", false);
@@ -202,7 +202,7 @@ private function leaveKihaToSpoidahHorde():void {
 public function beatSpiderMob():void {
 	flags[kFLAGS.KIHA_AFFECTION_LEVEL] = 1;
 	//SPIDER HORDE - PC VICTORIOUS! (Z)
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("\"<i>Fall back!</i>\" screams the largest of the two driders, clutching a nasty wound you've left on her breast.  \"<i>Let's get out of here!</i>\"[pg]", false);
 
@@ -447,7 +447,7 @@ private function GTFO():void {
 //Lie There
 private function lieThere():void {
 	flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] = 1;
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("You decide to let things take their course.  You look up to the swordsman standing over you...", false);
 	outputText("[pg]Wait, you recognize that tail - and that taut ass!  You grin as you watch Helia the salamander's fiery tail swish over you, her scimitar gripped firmly in both hands.", false);
@@ -507,7 +507,7 @@ private function lieThere():void {
 //Jump Them
 private function jumpDaBitches():void {
 	flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] = 1;
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("Scowling, you pick yourself up from the mud and wipe the grit off your [armorName].  You stalk up behind the mysterious swordsman and grab her by the scruff of the neck.  Suddenly she's yelling and flailing in your arms, a hefty tail thrashing around your [legs].  You tighten your grip on her and drag her over to Kiha as the dragoness is pulling herself out of the mud, reaching for the battleaxe that fell out of her hand.  Before she can find it, you toss the swordsman onto her, barreling Kiha over and leaving the two of them lumped in a pile in the mud.");
 	outputText("[pg]The swordsman's cloak came off in the throw; tossing it aside, you step up to loom over Hel the salamander, her pale face currently mashed between Kiha's big, dusky tits.  \"<i>G-get off of me!</i>\" Kiha snaps, pushing at the salamander's shoulders.", false);
@@ -623,7 +623,7 @@ private function lovinHugKiha():void {
 }
 //Loving Hug Continued: Dicks Ahoy!
 private function lovingHugDickings():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	var x:Number = player.biggestCockIndex();
 	outputText("Kiha laughs, \"<i>", false);
@@ -874,7 +874,7 @@ private function itsGood():void {
 }
 //[Blech]
 private function blechKihaYourCooking():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("You gag and spit, choking up the disgusting, burning chunk of \"<i>meat</i>\" you just tried to eat.  Kiha gapes at you, aghast, until you ");
 	if(player.canFly()) outputText("fly off.  Scowling, Kiha takes to the air too, landing behind you outside");
@@ -1413,7 +1413,7 @@ private function savinTheAnalForKiha():void {
 
 //Warm/Follower Kiha Vagaginaginal
 private function fuckKihasVagInCamp():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("You grab Kiha by the hand, running your fingers across the scaly texture on the outside of her claw while you pull her in close.  She blushes cutely and smirks, \"<i>Couldn't stay away, huh, [name]?</i>\"  Smiling knowingly, you pull her hand down towards your loins.  A look of confusion clouds the dragoness's usual, stormy gaze as you pull her hand inside the bottom of your [armor].  The feel of [oneCock] pulsing hotly against her fingers is all it takes to shatter your lover's haughty demeanor.  ");
 	if(silly()) outputText("She asks in a high-pitched whine, \"<i>Did I do thaaat?</i>\"  Steve Urkel has nothing on her!");
@@ -1445,7 +1445,7 @@ private function fuckKihasVagInCamp():void {
 	
 //Kiha Takes an Incubus Draft (Requires [Pure?] Incubus Draft)
 private function giveKihaIncubusDraft():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("A particularly wicked idea crosses your mind.  Smiling, you approach your draconic lover but, with a feigned look of alarm, point over her shoulder and yell \"<i>HEY, WHAT'S THAT!?!?</i>\"  Grabbing her axe, Kiha spins around, giving you just enough time to grab an incubus draft from your pack and pop the cork.  By the time Kiha rounds on you, fuming, you're ready.  You grab her mouth and shove the draft in, pinching her nose closed so that she has no choice but to swallow.");
 	outputText("[pg]Kiha staggers back, dropping her greataxe and gripping her stomach as the draft sloshes through her system.  You grin as a sudden squirt of fem-lube erupts from her bare pussy, followed by a sudden twitch and shift of the flesh just above her soaked cunt.  \"<i>W-what did you give me, " + player.short + "?  You... you idiot!</i>\" she screams as the skin above her groin violently erupts, a long, hard human-like prick bursting forth into the light.  Kiha lets out a wail of pleasure as her newly-formed prick takes shape, already jetting great white globs of cum onto her thighs and legs.  Her legs give, and Kiha collapses, squirming as her new cock twitches and spasms between her once-powerful legs.");
@@ -1579,7 +1579,7 @@ private function inviteKihaForDickings():void {
 //Possession 'n Boobies
 //REQs ghost TF + gro+
 private function ghostboobiesKiha():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(72);
 	outputText("Gaze flitting between the syringe in your outstretched grasp and your eager face, Kiha seems to be struggling not to punch you in the face.  \"<i>'Gro+'?</i>\" she repeats incredulously, tail swishing in annoyance.  \"<i>And what do you plan to do with that, exactly?</i>\"");
 	outputText("[pg]Not bothered by her predictable response, you try your best to explain how you came across the stuff.  Noting her lack of a response, you change the subject to sex and how interesting it might be with its help.  Kiha shakes her head disappointedly and turns away with a low growl.  She moves away from you without even denying the offer, leaving you and your needle of growth serum in her dust.");

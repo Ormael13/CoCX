@@ -57,7 +57,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		private function takeBondageStraps():void {
-			outputText("", true);
+			clearOutput();
 			flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
 			inventory.takeItem(armors.BONSTRP, roomSecretPassage);			
 		}
@@ -65,7 +65,7 @@ package classes.Scenes.Dungeons
 		//Sean the Incubus
 		private function investigate():void {
 			spriteSelect(52);
-			outputText("", true);
+			clearOutput();
 			outputText("You try to sneak closer to get a closer look at him, but the demon immediately stops what he's doing and stares straight at you.  He laughs, \"<i>Well now I know what happened to all the demons inside.  I really would've expected a bunch of renegades like them to put up a better fight.</i>\"\n\n", false);
 			outputText("Caught, you stand up and ready your " + player.weaponName + ", taking up a defensive stance to ready yourself for whatever new attacks this demon has.  Strangely, he just starts laughing again, and he has to stop to wipe tears from the corners of his eyes before he talks, \"<i>Oh that's rich!  I'm not here to fight you, Champion.  I doubt I'd stand much of a chance anyways.  I heard there were some renegades around this area, so I thought I'd show up to offer my services.  You see, I'm a procurer of strange and rare alchemical solutions.  Of course you beat down everyone before I got here, but I thought I'd stick around and see if some scouts were still around before I high-tailed it out of here.</i>\"\n\n", false);
 			outputText("You stare, blinking your eyes in confusion.  A demon of lust, and he's not interested in fighting or raping you?  He laughs again as he reads your expression and calmly states, \"<i>No, I'm far from your average incubus.  To tell the truth I enjoy a spirited debate or the thrill of discovery over sating my sexual appetite, though of course I do indulge that from time to time.</i>\"\n\n", false);
@@ -75,7 +75,7 @@ package classes.Scenes.Dungeons
 		
 		private function seanDeal():void {
 			spriteSelect(52);
-			outputText("", true);
+			clearOutput();
 			outputText("\"<i>Excellent!  Give me a few moments to gather my things and I'll be open for business!</i>\" exclaims the strange demon.  If his story is true it's no wonder he doesn't get along with the rest of his kind.", false);
 			
 			//[Next – to room]
@@ -84,7 +84,7 @@ package classes.Scenes.Dungeons
 		}
 		private function seanNoDeal():void {
 			spriteSelect(52);
-			outputText("", true);
+			clearOutput();
 			flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = -1;
 			outputText("Sean nods, grabs a pack, and takes off running before you have a chance to kill him.", false);
 			doNext(roomEntrance);
@@ -96,7 +96,7 @@ package classes.Scenes.Dungeons
 				kGAMECLASS.telAdre.niamh.getBimboozeFromSean();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			outputText("Sean nods at you and slicks his hair back into place, threading it carefully around the small nubs of his horns before asking, \"<i>What can I do for you?</i>\"", false);
 			var bimbo:Number = 0;
 			if(player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
@@ -123,7 +123,7 @@ package classes.Scenes.Dungeons
 
 		public function incubusBuy(itype:ItemType):void {
 			spriteSelect(52);
-			outputText("", true);
+			clearOutput();
 			outputText("The incubus lifts " + itype.longName + " from his shelves and says, \"<i>That will be " + (itype.value * 3) + " gems.  Are you sure you want to buy it?</i>\"", false);
 			if(player.gems < (itype.value * 3)) {
 				outputText("\n<b>You don't have enough gems...</b>", false);
@@ -135,7 +135,7 @@ package classes.Scenes.Dungeons
 
 		public function incubusTransact(itype:ItemType):void {
 			spriteSelect(52);
-			outputText("", true);
+			clearOutput();
 			player.gems -= itype.value * 3;
 			menuLoc = 16;
 			statScreenRefresh();
@@ -149,14 +149,14 @@ package classes.Scenes.Dungeons
 		
 		//Encapsulation pod
 		public function getSwordAndGetTrapped():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You start to walk over to the corpse and its discarded weapon, but halfway through your journey, the unexpected happens.   The leaf-like petals shift underfoot, snapping up with lightning-quick speed.  You ", false);
 			if(player.spe < 50) outputText("fall flat on your " + assDescript() + ", slipping on the slick, shifting surface.", false);
 			else outputText("stumble and nearly fall, slipping on the shifting, slick surface.", false);
 			getTrappedContinuation();
 		}
 		public function flyToSwordAndGetTrapped():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You start to fly over to the corpse and its discarded weapon, but about halfway through your flight, the unexpected happens.  One of the leaf-like petals springs up and slaps into your face with stunning force, dropping you to the ground.  You try to pick yourself up, but slip on the shifting, slick surface of another pad.", false);
 			getTrappedContinuation();
 		}
@@ -169,7 +169,7 @@ package classes.Scenes.Dungeons
 		public function encapsulationVictory():void {
 			if(monster.HP <= 0) {
 				flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
-				outputText("", true);
+				clearOutput();
 				outputText("The pod's wall bursts under your onslaught.  The strength goes out of the tentacles holding you at once, giving them all the power of a limp noodle.  The spongy surface of the pod gives out, and the 'petals' split apart, falling down to the ground with a heavy 'thwack'.  You stand there, exulting in your freedom.  You've won!\n\nThe rapier you approached originally still lies there, and you claim your prize.", false);
 			}
 			cleanupAfterCombat();
@@ -182,7 +182,7 @@ package classes.Scenes.Dungeons
 			if(player.gender == 1) loseToValaAsMale();
 			if(player.gender == 2) loseToValaFemale();
 			if(player.gender == 0) {
-				outputText("", true);
+				clearOutput();
 				outputText("Vala forces a bottle into your throat before your defeated form has a chance to react, and you grunt with pleasure as a new gash opens between your " + player.legs() + "!", false);
 				player.createVagina();
 				player.gender = 2;
@@ -193,7 +193,7 @@ package classes.Scenes.Dungeons
 		//(Herm)
 		public function loseToValaAsHerm():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>The masters' will be happy. They will reward their Bitch with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little pet.</i>\"\n\n", false);
 			outputText("With a strength that seems out of place for the girl's rail-thin arms, she drags you to the center of the room and lifts your arms into the air. Licking up and down your " + player.skinDesc + ", she grabs a pair of dangling manacles from the ceiling and claps them around your wrists with a metallic snap that seems horribly final to you. Responding to the sudden weight, the device the manacles are attached to begins to haul upward, pulling your chain into the air and lifting you by your arms into a slouched heap, dangling helplessly. The girl licks down your ribs, over your abdomen, and slathers your " + hipDescript() + " in her saliva. More clapping irons puncture your weakened awareness and you jerk your body to find that she's bound your " + player.legs() + " to the floor. You shiver, hanging in the rusty fetters, fearing what must surely be coming.\n\n", false);
 			outputText("Expecting her to call for the imps at any moment, you are surprised when the fairy flies up to the ceiling and pulls down a long, cow skin hose. The leather pipe is stained, its stitching is crude at best, and bears a small, twistable spigot, but what worries you are the nozzles. Made of a blackened iron, the head of the hose branches into two, forking protrusions, both shaped like the foul, hooked cocks of imps. She licks the device reverently and lowers it toward her own, dripping pussy, nearly stuffing it inside her body before she remembers the rewards her masters are sure to shower her with, perhaps literally.\n\n", false); 
@@ -203,7 +203,7 @@ package classes.Scenes.Dungeons
 		}
 		public function loseToValaAsHermPartII():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("It proves to be so much worse than you thought. Even though the nozzle is at its lowest setting, you can feel hot spunk flowing into your cunt and colon, the hose jerking as globs of the jizz begin to ooze into your recesses. The fairy laughs with a voice that is all the more wicked from the pure, clean, crystal tones it carries. \"<i>The masters' love is so sweet inside us. More future masters for us to birth and so many orgasms.</i>\" She begins to tweak her clit and turns up the crank a notch, the trickle of slimy goo becoming a regular pumping. If not for the coldness of the metal inside you, the heat of the cum would be unbearable. You have the horrible realization that imps must be filling the hidden reservoir even as their fairy slave guides it into you. You scream in disgust and wriggle your " + buttDescript() + ", trying to get the cursed toy out of you.\n\n", false);
 			outputText("The fairy is too aroused by your bondage and she can't help herself from joining in. She pulls the cum pump from your sopping holes and flutters against your chest. Slamming herself on your " + cockDescript(0) + ", she twists the hooking tubes so that one plugs back into your spunk-drooling " + vaginaDescript(0) + " and the other into her ass. The girl screams right along with you, her mindless joy drowning out your dismay as she bucks against your " + hipDescript() + " in time to the cum flooding the two of you. \"<i>We're good sluts,</i>\" she gurgles. \"<i>Maybe- ah- Bitch will keep you secret from t-t-the masters for a while longer. Prepare you- ooo- for them. You will be so o-O-OBEDIENT. You'll learn to love Vala,</i>\" she whispers, a gleam of intellect shining through her broken mind for an instant. She grips the iron shafts and jams them deeper into your bodies, her bloated labia squeezing your " + cockDescript(0) + " all the tighter. The hooked glans at the tip of the pump drive her wild and she begins hard-fucking the two of you with it, parting your cervix even as you slam into hers.\n\n", false); 
 			outputText("She kisses your " + nippleDescript(0) + " and your spine shivers as you hear her twisting the spigot off of the base, releasing the flow. You try to scream, but your voice is ripped from your throat as a cascading geyser of fresh imp cum is blasted into your womb with enough force to launch you forward, straining against the mounted fairy, only held aloft by your chains. Your senses are assaulted by the unholy scene, the sound of creaming seed spurting against your womb carries over the pitched voices with a frothing gush. The firehose of jizz inflates your body with the foaming spunk even as it fills the fairy like an overused onahole, her fey waist bloating against your groin as your abdomen swells to meet it. The pressure of the straining cavities squishes some of the cum back out of your " + vaginaDescript(0) + ", just as you orgasm, splattering your seed into the overstuffed fairy. The mind-erasing cum flood pumping into you feels like it has lit a fire in your body that is searing your womb and working its way up your gut toward your head.\n\n", false); 
@@ -224,7 +224,7 @@ package classes.Scenes.Dungeons
 		}
 		public function loseToValaAsMaleIITight():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			//(tight ass)
 		//	if(player.ass.analLooseness <= 1) {
 			outputText("\"<i>It will never please them like that,</i>\" she scolds. \"<i>You must be made more to their liking or they will never grant you endless joy.</i>\" She grinds her button-stiff clit against your abdomen as she lowers you toward the smallest peg on the rail, an uncarved, lacquered wooden nub an inch wide and three inches long, barely larger than a finger. You try to attack the fairy before she can plug you in, but she simply drops you the rest of the way, and what should've been a relatively painless insertion becomes agonizing as you hit the peg and three inches of hardened wood fill your " + assholeDescript() + ". You gasp and try to get off the device, but the fairy has already grabbed you again and pulls you back into the air. You clench your muscles as you look at the far end of the ladder in horrified fascination at a wooden carving that would shame a minotaur. The fairy moves up a couple of notches.", false);
@@ -235,7 +235,7 @@ package classes.Scenes.Dungeons
 		}
 		public function loseToValaMaleIILoose():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			//(loose ass)
 			outputText("\"<i>Sluts are trained well,</i>\" she sighs, happily. \"<i>This one knows only the pleasures of the masters, now.</i>\" The peg under you would be above average on a normal human- easily 7 inches long and two inches wide. Your " + assholeDescript() + " clenches and you writhe in the fairy's arms, but she lets gravity do her dirty work, lowering you onto the human-sized wooden cock, the varnished surface pulling apart your " + buttDescript() + " and sliding into your nethers with an uncomfortable tight sensation. Despite the humiliation of the rape, the pressure on your prostate begins pumping blood into your " + cockDescript(0) + ", turning your body into a traitor. You don't dare try to pull off, for fear of the damage it might do to your anus, and you are forced to sit in shame on the wooden erection. The girl flutters down and laps at your stiffening cock, trying as hard as she can not to mount you then and there. Her hungry tongue takes some of the building pain from you. Finally, she decides you've had enough and lifts you into the air, but to your dismay, she takes you another few notches down the line.", false);
 			//[Player's ass widens and go to next]
@@ -246,7 +246,7 @@ package classes.Scenes.Dungeons
 		//(Very loose ass)
 		public function loseToValaMaleIIVeryLoose():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("The fairy suspends you over a bulbous cock, at least a foot long and three inches wide, carved to resemble an imp's barbed, demonic shaft. \"<i>The masters are very kind,</i>\" the girl promises, \"<i>They know a slut's limits and gladly help it exceed them. They will rebuild you to their liking.</i>\" The memory of her own training has overwhelmed her dulled expression and she can't help but mount you in the air, swinging her legs around your waist and guiding her slavering pussy to your " + cockDescript(0) + ". Just as your head slides into her cunt, however, she loses her grip and you fall from her arms, landing atop the imp dick, drawing an agonized scream of pain. The twelve inches of wood worn down to a polished gleam vanish up your " + assholeDescript() + " and distort your intestines. You are so full that you feel like you've been speared through the gut, but your prostate does not care about your misery. Full penetration drives your cock wild and it surges to life, pulsing with every heartbeat. You can feel an orgasm building, but all you care about is the crushing pressure in your nethers. Just before you can cum, the fairy lifts you off the terrible prong and you actually sigh in relief, despite being denied release. Your cock twitches in the open air and it feels like a weight has been lifted from your chest. She giggles and flies you all the way to the last prong.\n\n", false);
 			//[Player's ass widens and go to last]
 			player.ass.analLooseness = 5;
@@ -256,7 +256,7 @@ package classes.Scenes.Dungeons
 		//(Gaping asshole)
 		public function loseToValaMaleIIGape():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("The fairy takes you to the final peg along the rail. It is a nightmarish mix of horse, dog, and minotaur cock. It has a flared head, to make the initial penetration all the more painful, a bulging knot on the end to utterly destroy your spincter, and the whole thing stands a foot and a half tall, nearly five inches wide at the tip. You beg the fairy. You plead. There is no way you can go onto that, you say, it will kill you. All dignity flees as you pitifully sob up to her. You'll do whatever the imps want- whatever the Masters want, you correct yourself. You'll be their toy and cum dump, you'll drink every last bit of your masters' love until you can't taste anything else. You will surrender yourself to them, body and soul. Whatever it takes, you implore, just not that peg! The fairy doesn't respond, her pupil-less eyes unchanging and unmoved by your agony, just swirling with pink lust and trained obedience. She lowers you just enough for you to feel the hard, flared tip of the monstrous thing press against your " + assholeDescript() + " and your resolve fails you. You promise the fairy everything. She lifts you up off the terrible final peg and you laugh in relief.\n\n", false);
 			outputText("Turning you around in her arms, the fairy lets you see the full depths of mindless depravity in her empty gaze. She strokes your " + cockDescript(0) + ", bringing it just shy of climax before mounting you, her sopping cunny softer and warmer than anything you can remember. \"<i>Silly toy,</i>\" she whispers to you. \"<i>It has nothing to give. The masters possess everything already.</i>\" She gives you a peck on the cheek and stops flapping her dragon-fly wings, letting the two of you plummet toward the monstrosity. Your world explodes into pain and your cock erupts with a mind-breaking orgasm inside the girl before your vision fails and the merciful oblivion of unconsciousness rushes over you.", false);
 			//[Go to Bad End 2]
@@ -266,7 +266,7 @@ package classes.Scenes.Dungeons
 		//(Female)
 		public function loseToValaFemale():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>It will show you the masters' pleasures. They will reward it with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little Bitch.</i>\"\n\n", false);
 			outputText("The fairy paces around you, a look of false sympathy running across her face like a mask. \"<i>Does it hurt? Come, Bitch will make you feel better.</i>\" She loops one of your arms around her slim shoulders and lifts you with an ease that makes you shudder. With surprising strength, she flies you to a corner of the room and carefully sets you down atop a dingy, cum-stained pillow. Despite the disgusting conditions, it is more comfort than you expected at the mad girl's hands and you allow yourself a sigh as you gather your thoughts, trying to think of a way out of this predicament. You are startled when a loud clank breaks your reprieve and you try to rise, only to be jerked back down to your " + buttDescript() + ". You claw at your neck and find that the fairy has slapped a steel collar around you, with barely two feet of chain keeping it off the ground.\n\n", false);
 			outputText("\"<i>It is so tired after such a big day, aren't you?</i>\" she asks, sweetly. \"<i>Sluts just need a bath and a warm meal. We will be much happier soon.</i>\" The girl lifts her hand to a lever set cleverly into the wall so as to be nearly invisible. You tremble at the implications and are nearly relieved when all it produces is an ice-cold bath from a nozzle in the ceiling above. You gasp at the freezing water and struggle to get out of the downpour, but your collar keeps you under it, the water washing over you and stealing the warmth from your limbs. The cold turns your chest into a crushing weight that squeezes the breath from your lungs. When it finally relents, you pant desperately while the water washes down the drain in the center of the room. You feel like a soggy mess, " + hairDescript() + " wet and icy.\n\n", false);
@@ -277,7 +277,7 @@ package classes.Scenes.Dungeons
 		}
 		public function loseToValueFemalePtII():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("You shiver uncontrollably and hug yourself like a wounded animal. Your " + nippleDescript(0) + " and " + clitDescript() + " burn under the pale goop, rock hard and pulsing with demands for stimulation. The fairy bitch happily places a new bucket next to you, this one fuller than the first. \"<i>It wants a meal?</i>\" she inquires doubtfully, perhaps hoping to keep it for herself. You reluctantly reach for the bucket, nearly lunging when it looks like the fairy is about to pull the lever again. You look into the bucket and shiver as the stench of the spooge assails your nostrils, even more potent than the jizz bath rolling down your bare skin in cream bulbs. You reluctantly take a glob between your fingers and thumb and with a timid motion, you raise your fistful of the odious syrup and spread it over your lips like a soapy lather. Rubbing the vile goo so close to your nose makes you nearly convulse at the reek and you hug at your slime-soaked body, trying to curl up, away from the reeking bucket. Your lower torso becomes a sloppy mess of pale, nearly clear fluid rolling off of your curves in blobby clumps.", false);
 			
 			outputText("You catch yourself rubbing the spooge against your " + player.skinDesc + " and into your " + allBreastsDescript() + " and you shake your head, trying to clear your mind. Remember how horrible it smells, you stress to yourself. It's disgusting and you're only doing it to please the insane fairy. Still, you shiver when you reach your nipples and find your thumbs applying too much pressure to your yielding softness, rubbing the spunk across your " + player.skinDesc + " in tight circles. Your next handful is larger and the next is larger still, until you drag the bucket closer to catch more of its dripping load with your flesh. You rub the warm jizz into your flesh, reveling in the heat it bleeds into your dripping body, the smell curling around your nostrils and filtering into your brain. You slop globs of oily cum across your face and head, rubbing it into your nostrils with your pinkies.\n\n", false);
@@ -290,7 +290,7 @@ package classes.Scenes.Dungeons
 		//Fight Win-
 		public function fightValaVictory():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("The fairy girl collapses, well-drilled obedience robbing her limbs of their fight. She squirms to a crouching bow, fully accepting you as her new " + player.mf("Master","Mistress") + ". The warped fae's empty eyes look up at you, her face a mask of rapture as she anxiously awaits her punishment, wagging her butt in the air as lubrication gushes down her thighs. It seems being defeated has excited the broken creature to a breeding frenzy. Her endurance must be incredible to be this frisky after your battle.", false);
 			flags[kFLAGS.TIMES_PC_DEFEATED_VALA]++;
 			//[Fuck] [Leave]
@@ -303,7 +303,7 @@ package classes.Scenes.Dungeons
 		
 		//Imp gang
 		public function impGangVICTORY():void {
-			outputText("", true);
+			clearOutput();
 			//Flag them defeated!
 			flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] = 1;
 			if(monster.HP < 1) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.", false);
@@ -317,7 +317,7 @@ package classes.Scenes.Dungeons
 			else cleanupAfterCombat();
 		}
 		public function impGangGetsRapedByMale():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You walk around and pick out three of the demons with the cutest, girliest faces.  You set them on a table and pull aside your " + player.armorName + ", revealing your " + multiCockDescriptLight() + ".  You say, \"<i>Lick,</i>\" in a tone that brooks no argument.  The feminine imps nod and open wide, letting their long tongues free.   Narrow and slightly forked at the tips, the slippery tongues wrap around your " + cockDescript(0) + ", slurping wetly as they pass over each other in their attempts to please you.\n\n", false);
 			
 			outputText("Grabbing the center one by his horns, you pull him forwards until your shaft is pressed against the back of his throat.  He gags audibly, but you pull him back before it can overwhelm him, only to slam it in deep again.  ", false);
@@ -342,7 +342,7 @@ package classes.Scenes.Dungeons
 			cleanupAfterCombat();
 		}
 		public function impGangGetsRapedByFemale():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You walk around to one of the demons and push him onto his back.  Your " + player.armorName + " falls to the ground around you as you disrobe, looking over your tiny conquest.  A quick ripping motion disposes of his tiny loincloth, leaving his thick demon-tool totally unprotected. You grab and squat down towards it, rubbing the corrupted tool between your legs ", false);
 			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("and coating it with feminine drool ", false);
 			outputText("as you become more and more aroused.  It parts your lips and slowly slides in.  The ring of tainted nodules tickles you just right as you take the oddly textured member further and further into your willing depths.", false);
@@ -365,7 +365,7 @@ package classes.Scenes.Dungeons
 			cleanupAfterCombat();
 		}
 		public function loseToImpMob():void {
-			outputText("", true);
+			clearOutput();
 			//(HP) 
 			if(player.HP < 1) outputText("Unable to handle your myriad wounds, you collapse with your strength exhausted.\n\n", false);
 			//(LUST)
@@ -443,7 +443,7 @@ package classes.Scenes.Dungeons
 		}
 		//[IMP GANGBANG VOL 2]
 		public function loseToImpMobII():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You wake up, sore from the previous activity and a bit groggy.  You try to move, but find yourself incapable.  Struggling futilely, you thrash around until you realize your arms and legs are strapped down with heavy iron restraints.  You gasp out loud when you look down and discover your ", false);
 			if(player.biggestTitSize() < 1) outputText("new", false);
 			else outputText("much larger", false);
@@ -475,7 +475,7 @@ package classes.Scenes.Dungeons
 		}		
 		public function defeatZetaz():void {
 			flags[kFLAGS.DEFEATED_ZETAZ]++;
-			outputText("", true);
+			clearOutput();
 			//[VICTORY HP]
 			if(monster.HP < 1) outputText("Zetaz sinks down on his knees, too wounded to continue.  He looks up at you with helpless rage in his eyes and asks, \"<i>Are you satisfied now?  Go ahead then, kill me.  My life hasn't been worth living since I met you anyway.</i>\"\n\n", false);
 			//[VICTORY LUST] 
@@ -493,7 +493,7 @@ package classes.Scenes.Dungeons
 
 		//[Release Zetaz 4 Info Win]
 		public function releaseZForInfo():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You look the pathetic imp up and down and smirk.  He closes his eyes, expecting a summary execution, but you present him with an offer instead.  If he gives you more information on Lethice and where to find her, you'll let him go scot-free and avoid him if he doesn't make a nuisance of himself.\n\n", false);
 			
 			outputText("\"<i>Really?</i>\" questions Zetaz in a voice laced with suspicion. \"<i>For fuck's sake, I'm already a renegade.  I'll take your deal.  It's not like it costs me anything I wouldn't give away for free anyway.</i>\"\n\n", false);
@@ -524,7 +524,7 @@ package classes.Scenes.Dungeons
 			
 		//[Sexual Interrogation]
 		public function sexualInterrogation():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You lean down until your face hovers over Zetaz, looking him square in the eyes, and explain, \"<i>I can't have someone who knows the way to the demons' headquarters dying before they tell me how to get there, can I?</i>\"\n\n", false);
 			
 			outputText("\"<i>Piss off!  You won't get shit from me,</i>\" retorts the defeated demon, \"<i>You may as well finish me off – I'll NEVER help a " + player.mf("jackass","bitch") + " like you!</i>\"\n\n", false);
@@ -560,7 +560,7 @@ package classes.Scenes.Dungeons
 
 		//[Release Him]
 		public function sexualTortureReleaseZetaz():void {
-			outputText("", true);
+			clearOutput();
 			outputText("In a moment of kindness", false);
 			if(player.lust > 60 || player.lib > 60 || player.cor > 60) outputText(", or perhaps perversion,", false);
 			outputText(" you release the taut cord and allow it to unravel.  It whips off Zetaz's prick at once, tossed across the chamber by the pressure boiling forth from the imp's shaking hips.   Nodules flare from his prick's base to his tip in a wavelike motion, nearly doubling in size by the time the 'wave' reaches the ring around his crown.  Simultaneously, his urethra parts and unloads the imp's pent-up cargo with cannon-like force.  Sticky spoo rockets upwards, splatters against the ceiling, and hangs for a moment as the first 'jet' glazes the roof.  The eruption slowly peters out, letting the last of the rope fall over Zetaz's form.\n\n", false);
@@ -582,7 +582,7 @@ package classes.Scenes.Dungeons
 
 		//[Tighten Strap] 
 		public function sexualTortureTightenZetaz():void {
-			outputText("", true);
+			clearOutput();
 			outputText("\"<i>Idiot,</i>\" you taunt while you tighten the strap further.  Zetaz actually starts to bawl in anguish while another orgasm worth of cum backs up inside him.  You don't want him to get out of the binding while you search for his map, so you pull the cord under his leg and use the free end to bind his wrists together behind his back.  Fondling his turgid prick one last time for good luck, you leave him to struggle with his need as you search for your map.  It's difficult to blank out all the whines and cries, but you manage.\n\n", false);
 			
 			outputText("Zetaz's desk sits against a wall, just far enough away from the rest of the furniture to give it an aloof appearance.  You get up and walk closer, kicking the imp in the belly on your way in order to get a little peace and quiet.  The desk has two visible drawers with a divider between them, but at a glance there doesn't seem to be enough room in the furniture to contain a hidden drawer or compartment. It will take a more careful examination to uncover this 'map'.\n\n", false);
@@ -600,7 +600,7 @@ package classes.Scenes.Dungeons
 
 		//[END HIM – Ew death!]
 		public function endZetaz():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You grab his head in both hands and twist violently, popping his neck in an instant.  Glaring down at the corpse of your first demonic foe, you utter, \"<i>Wish granted.</i>\"\n\n", false);
 			outputText("With him dead, you'll have to see if there's anything here that could lead you to this 'Lethice', so that you can put an end to the ridiculous plague affecting Mareth once and for all.  Perhaps you'll even get to go home, see your family, and have a rather violent talk with certain elders?  You tear through every drawer, pack, and chest in the place, but all you find are loincloths, extraordinairily fetishist porn, and junk.  Desperate for any clue, you even search under the bed and move the furniture, but it doesn't help.  You take your displeasure out on Zetaz's furnishings, slamming them into one another with all your might.\n\n", false);
 			outputText("The chair in your hands disintegrates, the desk it impacts splinters apart, and you feel a little bit better.  A piece of parchment flutters back and forth in the middle of it all, freed from some hidden compartment and mostly unscathed.  One of the corners is ripped off, and it has a tear half way across, but it's still perfectly legible.  It's a map!  Though the secret diagram is quite crude, it depicts a winding trail that bypasses numerous harpy nests, minotaur caves, and various unrecognizable pitfalls to reach the cloud-shrouded mountain peak.  The drawing loses much of its detail once it gets to the demon fortifications at the top, but it can't be that hard to track down Lethice once you've entered the seat of her power, can it?\n\n", false);
@@ -613,7 +613,7 @@ package classes.Scenes.Dungeons
 
 		//[Lose to Zetaz]
 		public function loseToZetaz():void {
-			outputText("", true);
+			clearOutput();
 			outputText("\"<i>Well, isn't this familiar?</i>\" asks Zetaz as he watches your ", false);
 			if(player.lust >= player.maxLust()) outputText("masturbating", false);
 			else outputText("prone", false);
@@ -683,7 +683,7 @@ package classes.Scenes.Dungeons
 		}
 
 		public function femaleZetazOverPtII():void {
-			outputText("", true);
+			clearOutput();
 			hideUpDown();
 			outputText("While you're gathering your thoughts, Zetaz staggers back down the table and accepts a flask from one of his lackeys.  He guzzles down the bubbling pink fluid in seconds, and the effect is immediate and greatly pleasing to your fuck-happy worldview.  The imp's cock, which had been slowly retracting, thickens at the base and rapidly fills until it's hard and twitching with sexual need.  He glances down at your exposed " + vaginaDescript(0) + " with a hungry look and drops to his knees, lining the nodule-ringed crown of his wondrous dick up with your lust-juiced slit.\n\n", false);
 			
@@ -763,7 +763,7 @@ package classes.Scenes.Dungeons
 
 		public function hermZetazOverPtII():void {
 			hideUpDown();
-			outputText("", true);
+			clearOutput();
 			outputText("You awaken midway through a loud moan and nearly jump out of your " + player.skinDesc + " in surprise, but the fire of your unnaturally stoked libido immediately reasserts yourself.  You twitch your hips to and fro, thrusting against a ", false);
 			if(player.cockTotal() > 1) outputText("number of ", false);
 			outputText("mechanical milking device", false);
@@ -828,7 +828,7 @@ package classes.Scenes.Dungeons
 		}
 
 		public function malesZetazOverPtII():void {
-			outputText("", true);
+			clearOutput();
 			outputText("You wake to a desert-dry, sandpapery feeling in the back of your throat as yet another moan escapes your mouth.   The ring gag is still there, and easily thwarts your tongues attempts to lick at your parched lips, but the jolts of pleasure exploding up your spine make it hard to get upset about it.  Hips rocking, you keep squirting and squirting from your orgasm, feeling each hot blast burst from your manhood until the wave of lust passes and you open your eyes.  You're in a dim cave, the one they used to hold Vala, and chained up to the wall in a similar manner.\n\n", false);
 			
 			outputText("While you observe the room, you realize that the waves of pleasure sliding up your spinal cord haven't stopped, and that your entire body is being shaken rhythmically.  You look down with a look of incredible, still-drugged confusion and behold the last thing you expected to see.  Somehow " + sMultiCockDesc() + " has been shrunk to less than half of its previous size", false);
@@ -867,7 +867,7 @@ package classes.Scenes.Dungeons
 		//BAD ENDS
 		public function badEndValaNumber1():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("When you regain your senses, you're no longer in the cavernous dungeon you passed out in. You blink, trying to adjust to the bright light around you, but it doesn't help. Every sense is aflame and it's impossible for you to move without exciting some nerve ending, sending a thrill of pleasure radiating along your sensitive regions. You try to think, to reason out where you are, but holding a thought in your head for longer than a minute is extremely difficult, as if your mind was muffled by thick wool. You try to remember what happened, but that too is just out of your reach. All this mental exercise is giving you a headache, so you give up, and just drink in the sensations around your body. A shimmering, spritely face comes into view and a thought blazes a clear, white-hot path through your groggy brain. Recognition clears all your doubts and worries away. Your Mistress. This is your Mistress.\n\n", false);
 			outputText("The fairy girl smiles broadly, stroking your face affectionately, her almond-shaped pink eyes full of sweet desire. \"<i>How is my Pet this morning?</i>\" she inquires, voice like silver chimes ringing in your head. \"<i>Aw, are you still waking up with headaches, Pet? Ooo, let your Mistress clear that poor head of yours.</i>\" She uncorks a small vial of pink fluid and places it against your lips, but you hardly need the encouragement. You wrap your mouth around the lust draft and drink greedily, sucking down the wine-sweet draught, fiery passion driving the pain from your mind in a second and you reach out to embrace your dear Mistress. She giggles and shoos you back down with a touch. \"<i>No no, Pet. It's meal time first, remember? Every day I steal more potions from those nasty demons, and we see what they do, don't you recall?</i>\"\n\n", false);
 			outputText("Dimly, in some corner of your mind, you seem to recall having this conversation before, perhaps several times. And didn't your Mistress use to be the one who had difficulty thinking straight? Back before you were simply Pet, didn't people call you something else? A name floats just out of reach, but you shake it away as your Mistress produces a dizzying array of bottles. She feeds you a thick, green beer that fills your tummy with pleasant warmth and makes your head swim. You can feel your body changing, as your " + vaginaDescript(0) + " grows deeper and wider and you giggle, flicking your fingers in and out of your pussy, playing with the hot passage. Your Mistress takes a gulp of her own and coos as the thick white fluid rolls down her throat. She raises her voice in a spritely gasp of pleasant surprise and you can see her tiny joy buzzer of a clit growing longer and thicker before your eyes. It swells to six inches, then eight, before finally settling at 10\". Gradually, it gains definition and its tip broadens into a head, a small slit opening at the top, a bead of pearly cum rolling out and down the bright pink shaft. She strokes the newly grown dick with slim fingers and trembles in excitement, eyeing your body hungrily.", false);
@@ -878,7 +878,7 @@ package classes.Scenes.Dungeons
 		public function badEndValaNumber2():void {
 			spriteSelect(85);
 			//(Imp)
-			outputText("", true);
+			clearOutput();
 			outputText("You come to with a splitting headache and the taste of something foul in your mouth. You struggle, but find that your limbs have been chained up and your " + player.legs() + " bound by a thick, rubber coating, squeezing your lower body painfully. You've been fitted with several rubber pieces of the same sort, in fact- the most notable is the black corset that makes breathing difficult and binds your waist to a hyper-feminine fantasy. You've also been fitted with large, rubber fairy wings attached by straps around your shoulders that pull your chest forward, painfully. An O-ring gag has been latched around your face, connected to a long, clear tube that's been fed a foot or two down your throat. You try to shake it loose, but it's far too deep for you to have a hope of removing it without help.\n\n", false);
 			outputText("Your struggles have alerted your captors that you've awakened. A large imp steps in front of your vision, his arms tucked behind his back, contemplatively, as he admires your predicament. Instead of speaking, he simply produces a bronze placard with your name engraved on it and taps a long finger on the metal plate. Then, he gestures at the contraption you've been hooked to. The tube leading into your mouth winds upward, to a large funnel, with a twistable knob on it. Above the funnel, the four-foot fairy is suspended by new chains, practically covered in a swarm of tiny imps. The demons are barely a foot tall, perhaps immature or half-breeds, and cling onto her skin with a mixture of lust for her flesh and fear of the drop, using any convenient hole both to fuck and keep from falling. Two are using her pussy at once, another at her ass, a fourth on her face, a pair fucking either hand, and half a dozen more, rubbing themselves across her armpits, the back of her knees, even just using her purple hair for added friction as they jerk themselves off. All the spunk from their frantic rutting splashes into a wide basin below, flowing into the funnel connected to your tube.\n\n", false);
 			outputText("The large imp in front of you gives the knob on the funnel a twist and, to your horror, the sloshing flood of imp seed and fairy jizz comes washing down the winding pipe, sliding right past your undefended lips and down your penetrated gullet. Your stomach recoils at the infernal meal, but it just keeps pouring from the over-fucked fairy girl and her precariously perched offspring. As the cum washes down the hose, the silent imp uncorks a little black vial and pours it into the funnel, mixing it with the seething river running into your belly. You try to close your throat, to vomit, to bite through the gag, anything to keep the concoction from reaching you, but your attempts are in vain, and the sable fluid runs into your body. You shudder, mind racing for ways to escape, but your thoughts are interrupted when the apparent leader of the imps leans down and takes your chin in his hand, smiling a wicked grin of jagged, uneven teeth.", false);
@@ -887,7 +887,7 @@ package classes.Scenes.Dungeons
 		}
 		public function badEndValaNumber2Pt2():void {
 			spriteSelect(85);
-			outputText("", true);
+			clearOutput();
 			outputText("\"<i>When we captured Vala, I entertained the thought of breaking her on my dick like a crystalline condom, but I'm rather glad I chose to raise her to be my pet instead.</i>\" The imp's voice is familiar and your mind lurches to the memory of that first violation you suffered when you stepped through the portal to this world. Zetaz. He said never to forget the name Zetaz. You eyes roll in panic, but he holds your chin, his leering face filling your vision. \"<i>As a reward to obedient little Vala, I've decided to remake you in her image. We'll crush all that fatty flesh from your waist, keep your torso bound until you're too weak to walk, and pump you so full of drugs and cum that even seeing your name will be painful,</i>\" he taps the bronze plaque he's prepared for you, a mirror to the fairy's. \"<i>Why, in a few months, we'll be hard pressed to tell the two of you apart.</i>\" A fresh wave of fairy-lubricated imp-seed pumps into your abdomen and the rubber girdle strains, but holds, washing the spunk back up, into your throat, until it feels like you might drown in the frothing cream.\n\n", false);
 			outputText("There's no time to contemplate your fate, however, as the imp's black poison seems to take hold and you feel a burning all along your body. ", false);
 			//(No vagina: 
@@ -905,7 +905,7 @@ package classes.Scenes.Dungeons
 		
 		public function loseToThisShitPartII():void {
 			hideUpDown();
-			outputText("", true);
+			clearOutput();
 			//[OPTIONAL CUM ESCAPE]
 			if(player.cumQ() > 3500) {
 				outputText("Your orgasm drags on for so long that you begin to feel pressure from the cum-slime surrounding you.  It doesn't seem to matter to " + sMultiCockDesc() + ", which is too busy sending bliss to your brain and squirting cum for the tentacles to care.  It actually kind of hurts.  The oscillating purple ambiance flashes brighter in protest for a second, and then everything releases all at once.  The pressure is gone and you're sliding down on a wave of fungal-slime cum, feeling the tentacles being pulled from you by the sudden shift of position.  Moist cave air tickles at your " + player.skinDesc + " as you come to rest on another spongy petal and begin to cough out the sludge.\n\n", false);
@@ -971,7 +971,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function zetazBadEndEpilogue():void {
-			outputText("", true);
+			clearOutput();
 			if(player.gender == 2) {
 				outputText("The once-champion, " + player.short + " was raped repeatedly by every imp that survived her initial assault.  Her mind never recovered from the initial orgy, and she found herself happy to be named 'Fuck-cow'.  She quickly became a favorite of Zetaz's ever growing brood, and surprised them all with her fertility and rapidly decreasing incubation times.  Within a few months, she was popping out litters of tiny masters even faster than Vala.  Within a year, her body was so well trained and her womb so stretched that she could keep multiple litters growing within at all times.\n\n", false);
 			
@@ -1072,7 +1072,7 @@ package classes.Scenes.Dungeons
 				//Not yet defeated zetaz
 				if(flags[kFLAGS.DEFEATED_ZETAZ] == 0) {
 					//Intro:
-					outputText("", true);
+					clearOutput();
 					outputText("In the far corner, there is a small woman, her back to you, hanging limply by manacles that keep her suspended in a half-kneel. Rich purple hair hangs in long, clumped strands that sparkle occasionally with a pink glitter. Above her, there is a tarnished bronze nameplate that you think reads 'Vala,' but it's impossible to tell for sure under all the imp graffiti. She does not seem to be conscious.\n\n", false);
 					outputText("It isn't until you get closer that you notice the large, dragon-fly wings attached to her back and the ephemeral glow of sunlight faintly radiating from her pale skin. If the girl wasn't almost 4' tall, you'd swear she was a fairy, like the ones you've met in the forest. If the cum-clogged drain in the center of the room is any indication, the imps must be using her for their perverted desires. You begin to get an appreciation for what she's endured when you get near enough to see the small, black marks staining her luminance. On her right shoulder blade, the imps have tattooed \"pussy\" and on the left, \"ass.\" All along her back, the imps have tattooed two columns of hash marks, from her shoulders all the way down her ribs, over her ass, down her legs, and even onto the soles of her feet.\n\n", false);
 					outputText("You step around her and are startled to see that while the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat. If she weren't chained to the ceiling, you suspect she wouldn't even be able to stand under her own power. Her eyes are open, but she's staring blankly ahead, unaware of the world around her, pupils constricted to pinpricks amid the ocean of her dulled pink irises. Like this, she's no threat to anybody. You suppose you could let her go, though it's unclear if she's self-aware enough to even move. Alternately, you could blow off a little steam.", false);
