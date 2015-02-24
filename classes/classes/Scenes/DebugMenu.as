@@ -47,9 +47,9 @@ package classes.Scenes
 				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
 				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
 				addButton(2, "Flag Editor", flagEditor);
-				addButton(3, "Event Trigger", eventTriggerMenu);
-				addButton(4, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
-				//addButton(5, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
+				//addButton(5, "Event Trigger", eventTriggerMenu);
+				addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
+				//addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
 				addButton(5, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
 				addButton(14, "Exit", eventParser, 1);
 			}
@@ -188,16 +188,24 @@ package classes.Scenes
 			
 			addItemButton(consumables.SHARK_T);
 			addItemButton(consumables.SNAKOIL);
+			addItemButton(consumables.SPHONEY);
 			addItemButton(consumables.TRAPOIL);
-			addItemButton(consumables.TSCROLL);
 			
+			addItemButton(consumables.TSCROLL);
 			addItemButton(consumables.TSTOOTH);
 			addItemButton(consumables.VIXVIGR);
 			addItemButton(consumables.W_FRUIT);
+
+			addButton(4, "Next", itemSpawnTransformativesMenuV);
+			addButton(9, "Previous", itemSpawnTransformativesMenuIII);
+			addButton(14, "Back", itemSpawnMenu);
+		}
+		private function itemSpawnTransformativesMenuV():void {
+			lastMenu = itemSpawnTransformativesMenuV;
+			menu();
 			addItemButton(consumables.WETCLTH);
 			
-			//addButton(4, "Next", itemSpawnTransformativesMenuV);
-			addButton(9, "Previous", itemSpawnTransformativesMenuIII);
+			addButton(9, "Previous", itemSpawnTransformativesMenuIV);
 			addButton(14, "Back", itemSpawnMenu);
 		}
 
@@ -331,6 +339,8 @@ package classes.Scenes
 			addItemButton(useables.GREENGL);
 			addItemButton(useables.B_CHITN);
 			addItemButton(useables.T_SSILK);
+			addItemButton(useables.D_SCALE);
+			
 			addItemButton(useables.IMPSKLL);
 			
 			addButton(14, "Back", itemSpawnMenu);

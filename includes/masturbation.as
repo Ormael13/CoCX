@@ -17,7 +17,14 @@ public function masturbateMenu():void {
 		clearOutput();
 		outputText("Although your bee cock aches, you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming, images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
 		addButton(0, "Next", camp.campMenu);
-		if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY)) addButton(1, "Use Honey", masturbateGo);
+		if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
+			outputText("\n\nFortunately, you could smear honey all over your " + player.cockDescript() + " and relieve yourself if you want to.");
+			addButton(1, "Use Honey", masturbateGo);
+		}
+		if ((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
+			outputText("\n\nYou could meditate to cleanse your urges.");
+			addButton(2, "Meditate", meditate);
+		}
 		return;
 	}
 	var button:int = 0;
@@ -871,9 +878,10 @@ public function masturbateGo():void {
 	titForeplay();
 	//Touch our various junks
 	if(player.cocks.length > 0) {
-		if (player.cocks[0].cockType == CockTypesEnum.BEE && (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY))) {
+		if (player.cocks[0].cockType == CockTypesEnum.BEE && (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY))) {
 			if (player.hasItem(consumables.BEEHONY)) player.consumeItem(consumables.BEEHONY, 1);
 			else if (player.hasItem(consumables.PURHONY)) player.consumeItem(consumables.PURHONY, 1);
+			else if (player.hasItem(consumables.SPHONEY)) player.consumeItem(consumables.SPHONEY, 1);
 			outputText("You take out a vial of honey and smear it all over your bee cock. It feels great and the pain quickly recedes. ");
 		}
 		if(player.cocks.length == 1) {
@@ -1823,7 +1831,10 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 				if(player.cumQ() >= 25 && player.cumQ() < 250) outputText("You sputter jism from your mouth as your orgasm becomes too much to keep up with, cum filling your mouth to capacity as you swallow and dribble in equal measure.  ", false);
 				if(player.cumQ() >= 250 && player.cumQ() < 500) outputText("Pulse after pulse of cum erupts from your " + cockDescript(0) + " into your mouth.  You swallow what you can but it's too much for you.  Cum runs down your cock to pool on you as your orgasm drags on.  ", false);
 				if (player.cumQ() >= 500) outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + cockDescript(0) + " as it erupts jet after jet of cum into your mouth.  You nearly gag, cum overflowing to spray out in a river, pooling around you.  ", false);
-				player.refillHunger(player.cumQ() / 20);
+				//Refill hunger!
+				if (player.cumQ() < 1000) player.refillHunger(player.cumQ() / 20);
+				else if (player.cumQ() < 3000) player.refillHunger(50 + ((player.cumQ() - 1000) / 40));
+				else player.refillHunger(100);
 			}
 			else if(nippleFuck) {
 				if(player.cumQ() < 25) outputText("You feel multiple thick spurts of cum splash against the inside of your breast. ", false);
@@ -1870,7 +1881,10 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 				if(player.cumQ() >= 25 && player.cumQ() < 250) outputText("You sputter jism from your mouth as your orgasm becomes too much to keep up with, cum filling your mouth to capacity as you swallow and dribble in equal measure.  Cum splatters on you from the rest of your equipment, making you a slimy mess.", false);
 				if(player.cumQ() >= 250 && player.cumQ() < 500) outputText("Pulse after pulse of cum erupts from your " + cockDescript(0) + " into your mouth.  You swallow what you can but it's too much for you.  Cum runs down your " + cockDescript(0) + " to pool on you as your orgasm drags on.  Jizz rains over you the entire time from the rest of your \"equipment\".", false);
 				if (player.cumQ() >= 500) outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + cockDescript(0) + " as it erupts jet after jet of cum into your mouth.  You nearly gag, cum overflowing to spray out in a river, pooling around you.  Your other 'equipment' rains jizz upon you the whole while, soaking you in a cum-puddle.", false);
-				player.refillHunger(player.cumQ() / 20);
+				//Refill hunger!
+				if (player.cumQ() < 1000) player.refillHunger(player.cumQ() / 20);
+				else if (player.cumQ() < 3000) player.refillHunger(50 + ((player.cumQ() - 1000) / 40));
+				else player.refillHunger(100);
 			}
 			//These seem like they should always be displayed regardless of other factors.		
 			if(player.cumQ() < 5) outputText("A few thick spurts of cum burst from your cocks, splattering you liberally.  ", false);

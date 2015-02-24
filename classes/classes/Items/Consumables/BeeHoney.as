@@ -230,19 +230,30 @@ package classes.Items.Consumables
 				changes++;
 			}
 			if (special) { //All the speical honey effects occur after any normal bee transformations (if the player wasn't a full bee morph)
+				//Cock growth multiplier.
+				var mult:int = 1.0;
+				if (player.cocks[0].cArea() >= 140) mult -= 0.2;
+				if (player.cocks[0].cArea() >= 180) mult -= 0.2;
+				if (player.cocks[0].cArea() >= 220) mult -= 0.2;
+				if (player.cocks[0].cArea() >= 260) mult -= 0.2;
+				if (player.cocks[0].cArea() >= 300) mult -= 0.1;
+				if (player.cocks[0].cArea() >= 400) mult -= 0.1; //Cock stops growing at that point.
+				//Begin TF
 				if (!player.hasCock()) {
 					outputText("\n\nYou double over in pain as the effects start to concentrate into your groin.  You need to get release, but what you’ve got just isn’t cutting it.  You fall to the ground and grab at your crotch, trying desperately to get the release you need.  Finally, it happens.  With a sudden burst of intense relief and sexual satisfaction, a new human looking penis bursts from your skin and sprays your seed all over the ground in front of you.  When you’re able to recover and take a look at your new possession.  <b>You now have an eight inch long human cock that is very sensitive to stimulation.</b>");
 					player.createCock();
 					player.cocks[0].cockLength = Utils.rand(3) + 8;
 					player.cocks[0].cockThickness = 2;
+					player.orgasm();
 					getGame().dynStats("sen", 10);
 				}
 				else if (player.cocks.length > 1) {
 					var biggest:int = player.biggestCockIndex();
 					outputText("\n\nThe effects of the honey move towards your groin, and into your " + player.multiCockDescriptLight() + ", causing them to stand at attention.  They quiver for a moment, and feel rather itchy.  Suddenly you are overwhelmed with pleasure as <b>your " + getGame().cockDescript(biggest) + " is absorbed into your " + getGame().cockDescript(0) + "!</b>  You grab onto the merging cock and pump it with your hands as it increases in size and you cum in pleasure.  Your " + getGame().cockDescript(0) + " seems a lot more sensative now...");
-					player.cocks[0].cockLength		+= 5 * Math.sqrt(0.2 * player.cocks[biggest].cArea());
-					player.cocks[0].cockThickness	+= Math.sqrt(0.2 * player.cocks[biggest].cArea());
+					player.cocks[0].cockLength		+= 5 * Math.sqrt(0.2 * player.cocks[biggest].cArea()) * mult;
+					player.cocks[0].cockThickness	+= Math.sqrt(0.2 * player.cocks[biggest].cArea()) * mult;
 					player.removeCock(biggest, 1);
+					player.orgasm();
 					getGame().dynStats("sen", 5);
 				}
 				else if (player.cocks[0].cArea() < 100) {
@@ -253,8 +264,8 @@ package classes.Items.Consumables
 						outputText("While erect, your massive member fills the lower half of your vision.");
 					else outputText("Your member is now simply huge, you wonder what in the world could actually take your massive size now?");
 					outputText("</b>");
-					player.cocks[0].cockLength += Utils.rand(3) + 4; //4 to 6 inches in length
-					player.cocks[0].cockThickness += 0.1 * Utils.rand(5) + 0.5; //0.5 to 1 inches in thickness
+					player.cocks[0].cockLength += (Utils.rand(3) + 4) * mult; //4 to 6 inches in length
+					player.cocks[0].cockThickness += (0.1 * Utils.rand(5) + 0.5) * mult; //0.5 to 1 inches in thickness
 					getGame().dynStats("sen", 5);
 				}
 				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race() == "bee-morph") {
@@ -262,14 +273,19 @@ package classes.Items.Consumables
 					outputText("It is entirely different from the usual feeling you get when your cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming, and it takes a lot of will not to just run off in search of the bee girl that gave you that special honey right now.  This isn’t good.\n\n");
 					outputText("<b>You now have a bee cock!</b>");
 					player.cocks[0].cockType = CockTypesEnum.BEE;
-					player.cocks[0].cockLength += 5;
-					player.cocks[0].cockThickness += 1;
+					player.cocks[0].cockLength += 5 * mult;
+					player.cocks[0].cockThickness += 1 * mult;
 					getGame().dynStats("sen", 15);
 				}
 				else {
-					outputText("\n\nThe effects of the honey don’t seem to focus on your groin this time, but you still feel your "  + getGame().cockDescript(0) + " grow slightly under your " + player.armorName + ".");
-					player.cocks[0].cockLength += 0.1 * Utils.rand(10) + 1;
-					player.cocks[0].cockThickness += 0.1 * Utils.rand(2) + 0.1;
+					if (mult > 0) {
+						outputText("\n\nThe effects of the honey don’t seem to focus on your groin this time, but you still feel your "  + getGame().cockDescript(0) + " grow slightly under your " + player.armorName + ".");
+						player.cocks[0].cockLength += (0.1 * Utils.rand(10) + 1) * mult;
+						player.cocks[0].cockThickness += (0.1 * Utils.rand(2) + 0.1) * mult;
+					}
+					else {
+						outputText("\n\nThe effects of the honey don’t seem to focus on your groin this time and you have a feeling that your " + getGame().cockDescript(0) + " hasn't grown at all! Perhaps you've reached the upper limit of cock growth from special honey?");
+					}
 					getGame().dynStats("sen", 3);
 				}
 				if (player.cor >= 5) {

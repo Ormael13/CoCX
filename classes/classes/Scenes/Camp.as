@@ -1551,6 +1551,9 @@ public function rest():void {
 			fatRecovery /= 2;
 			fatigue(-fatRecovery * timeQ * multiplier);
 		}
+		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
+			outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
+		}
 		//REGULAR HP/FATIGUE RECOVERY
 		else {
 			HPChange(timeQ * 10 * multiplier, true);
@@ -1583,6 +1586,9 @@ public function doWait():void {
 			//fatigue
 			fatRecovery /= 2;
 			fatigue(-fatRecovery * timeQ);
+		}
+		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
+			outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
 		}
 		//REGULAR HP/FATIGUE RECOVERY
 		else {
@@ -1769,6 +1775,9 @@ public function sleepRecovery(display:Boolean = false):void {
 		HPChange(timeQ * 15 * multiplier, true);
 		fatigue(-int(player.fatigue/2)); 
 		if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-int(player.fatigue/4));
+	}
+	if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
+		outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
 	}
 	//REGULAR HP/FATIGUE RECOVERY
 	else {

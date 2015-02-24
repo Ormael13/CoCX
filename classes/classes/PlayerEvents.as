@@ -12,12 +12,14 @@ package classes {
 		
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
+		private var displayedBeeCock:Boolean;
 		
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
 			var needNext:Boolean = false;
 			checkedTurkey = 0;
 			checkedDream = 0;
+			
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 			if (player.ballSize > 400) player.ballSize = 400;
 			if (player.findPerk(PerkLib.StrongBack) >= 0 && !player.itemSlot4.unlocked) player.itemSlot4.unlocked = true;
@@ -107,9 +109,9 @@ package classes {
 				{
 					if (player.hunger < 20)
 					{
-						player.hunger = 25;
 						outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your skin.");
 					}
+					player.hunger = 25;
 				}
 			}
 			//Corruption check for achievement.
@@ -163,13 +165,12 @@ package classes {
 				}
 			}
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) { //All the hourly bee cock checks except the 'seek out the bee girl' check. That's in timeChangeLarge
-				outputText("\n");
 				if (player.cocks.length > 1) {
-					outputText("You feel a stickiness and some stinging from your cocks.  It seems your bee cock has absorbed your new addition, leaving no trace of it.\n");
+					outputText("\nYou feel a stickiness and some stinging from your cocks.  It seems your bee cock has absorbed your new addition, leaving no trace of it.\n");
 					while (player.cocks.length > 1) player.removeCock(1, 1);
 				}
 				if (player.cocks[0].cockLength < 25 || player.cocks[0].cockThickness < 4) {
-					outputText("Your " + player.cockDescript(0) + " quivers for a moment before growing slightly ");
+					outputText("\nYour " + player.cockDescript(0) + " quivers for a moment before growing slightly ");
 					if (player.cocks[0].cockLength < 25 && player.cocks[0].cockThickness < 4)
 						outputText("longer and thicker");
 					else outputText(player.cocks[0].cockLength < 25 ? "longer again" : "wider again");
@@ -177,7 +178,6 @@ package classes {
 					player.cocks[0].cockLength = Math.max(player.cocks[0].cockLength, 25);
 					player.cocks[0].cockThickness = Math.max(player.cocks[0].cockThickness, 4);
 				}
-				outputText("The desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
 				if (player.findPerk(PerkLib.WellAdjusted) >= 0) dynStats("lust", 5); //Reduced to 5 with 'Well Adjusted' perk.
 				else dynStats("lust", 10); //Always gain 10 lust each hour
 				needNext = true;
