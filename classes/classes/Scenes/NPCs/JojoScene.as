@@ -2430,7 +2430,7 @@ private function anallyFuckTheMouseButtSlut():void {
 			outputText("\n\nNow spent, you lay next to Jojo. There’s small trail of cum leaking out of Jojo’s ass. \"<i>It’s a new experience. I’m willing to try it again,</i>\" Jojo says smilingly. You smile knowingly; you knew the two of you will do this often.");
 		}
 		else {
-			outputText("Jojo starts pumping his hips in order to suck on the cum into his bowels. He, soon, orgasms as well, cumming all over the grass.");
+			outputText("Jojo starts pumping his hips in order to suck all the cum into his bowels. He, soon, orgasms as well, cumming all over the grass.");
 			outputText("\n\nNow spent, you lay next to Jojo. There’s small trail of cum leaking out of Jojo’s ass. You tell Jojo that he’s seems to really like anal. Jojo blushes. You laugh, telling your little butt slut that there more in store for him.");
 		}
 	}
@@ -2441,13 +2441,13 @@ private function anallyFuckTheMouseButtSlut():void {
 		outputText("\n\nHis eagerness makes your " + player.multiCockDescriptLight() + " hard. You gently caress Jojo’s toned, quivering butt-cheeks and get a good glance at his anus. You decide to test it out again. You warn Jojo that you’ll be inserting your hand in first. Jojo says, “Hurry up.” You smile at his response. You slick your fingers up with some saliva, and then gently start to probe Jojo’s pucker, testing out the looseness.");
 		//Anal fingering and stretching
 		outputText("\n\nThe second your digits invade Jojo’s bowels, his cock starts leaking precum. Jojo’s face kept flickering between pain and arousal. Jojo must really be sensitive. "); 
-		outputText("Hmm... his ass seems more stretched out compared to second time; you should be able to insert without worry. ");
+		outputText("Hmm... his ass seems more stretched out compared to the second time; you should be able to insert without worry. ");
 		//Get lubed up and get your cock into Jojo's anus.
 		outputText("\n\nYou spit on your hands and apply saliva evenly all over your " + player.cockDescript(x) + " to get it all lubed up. Deeming the lubrication sufficient, you let Jojo know that you’re going to start and you slowly slide your " + player.cockDescript(x) + " into Jojo’s butthole. His sphincter closes around you tightly. By Marae, he’s tight as ever! ");
 		outputText("\n\nJojo starts panting in arousal. You ask him is he’s ok. Jojo gives you a thumbs-up. \"<i>I’m... fine. Keep going.</i>\" His cock reaches full erection, ready to cum at any time. You smile at him and start to pick up the pace while keeping it at comfortable level. As you feel his loosening up, you decide to go faster and harder. Jojo starts moaning in both ecstasy and pain, releasing a shrill squeak with every thrust. ");
 		//ORGASM!
 		outputText("\n\nEventually, you can’t hold back any more and you unleash your seed right into his bowels. ");
-		outputText("Jojo starts pumping his hips in order to suck on the cum into his bowels and he wraps his long tail around you to pull you closer. He, soon, orgasms as well, cumming all over the grass.");
+		outputText("Jojo starts pumping his hips in order to suck all the cum into his bowels and he wraps his long tail around you to pull you closer. He, soon, orgasms as well, cumming all over the grass.");
 		outputText("\n\nNow spent, you lay next to Jojo. There’s small trail of cum leaking out of Jojo’s ass. You laugh, telling your little butt slut that there more in store for him.");
 	}
 	//The End
@@ -2464,21 +2464,20 @@ private function getAnallyFuckedByMouseYouSlut():void {
 	var isVirgin:Boolean = (player.looseness(false) == 0);
 	jojoSprite();
 	clearOutput();
-	outputText("You finally make up your mind; you want his mouse-cock in your [ass]. You remove your " + player.armorName + " and Jojo hesitantly strips out of his robe, revealing his naked form.");
+	outputText("You finally make up your mind; you want his mouse-cock in your [ass]. You remove your [armor] and Jojo hesitantly strips out of his robe, revealing his naked form.");
 	outputText("\n\n\"<i>Get down on all fours and I can begin,</i>\" Jojo instructs. You nod and get down on all fours, presenting your [butt] to Jojo. His cock grows to full erection. \"<i>I'm going to need to get this lubricated first,</i>\" Jojo says. He spits on his hands and applies the saliva evenly across his cock.");
 	outputText("\n\nJojo gently massages your [butt] to assure you that he's going to go gentle. \"<i>Here I come,</i>\" Jojo announces as he slowly slides his cock right into your [ass].");
 	player.buttChange(12, true);
-	if (isVirgin) outputText(" \"<i>That's really tight; I'm going to enjoy your tightness while it lasts,</i>\" Jojo remarks.");
-	else if (player.looseness(false) < 2) outputText(" \"<i>That's tight,</i>\" Jojo says.");
-	outputText("\n\nYou relax and let Jojo gently work his pace. His erect cock slides in and out out of your [ass] smoothly. So far, so good.");
-	outputText("\n\nEventually, you do feel the tension building up and Jojo announces, \"<i>I'm going to cum!</i>\"");
-	outputText("\n\nJojo blows his load right into your [ass]. His orgasm triggers yours too, ");
-	if (player.hasCock()) outputText("your [cocks] launch ropes of seed");
-	if (player.hasCock() && player.hasVagina()) outputText(" while ");
-	if (player.hasVagina()) outputText("your [pussy] spontaneously leaks juices");
-	if (player.gender == 0) outputText("your body rocking with ecstasy");
-	outputText(". ");
-	outputText("Spent, Jojo lays on top of you and whispers into your ear, \"<i>It's good doing this. It's better than I expected.</i>\" You smile and relax for a while.");
+	if (isVirgin) outputText(" \"<i>That's really tight; I'm going to enjoy your tightness while it lasts,</i>\" Jojo remarks. ");
+	else if (player.looseness(false) < 2) outputText(" \"<i>That's tight,</i>\" Jojo says. ");
+	else outputText(" \"<i>That's nice,</i>\" Jojo remarks. ");
+	outputText("Slowly, he begins to rock his hips back and forth, placing his hands on your [hips] for support.");
+	outputText("\"<i>Does it feel good, [name]?</i>\" Jojo asks. You reply that you wish he would go a little faster. Wanting to please you, Jojo start thrusting his erect cock into you farther and faster than before. You start moaning in pleasure as his penis hollows out your insides.");
+	outputText("\n\As the tension builds, Jojo keeps thrusting faster and faster. Not wanting him to be left out, you start moving in time with him and taking his cock up to the hilt. Jojo moans louder and shouts, \"<i>I’m going to cum!</i>\" Jojo rams you one last time hitting your prostate with all he’s got. He starts dumping his massive load into you. With a tremendous shudder, you orgasm, your [asshole] clenching around his member, trying to wring it of all its delicious load. ");
+	if (player.hasCock()) outputText("[EachCock] twitches with pleasure, soaking the ground beneath you with a small lake of cum. ");
+	if (player.hasVagina()) outputText("Your [pussy] spontaneously " + (player.averageVaginalWetness() >= 4 ? "sprays" : "leaks") + " juices all over the ground. ");
+	if (player.gender == 0) outputText("Your body rocks with ecstasy. ");
+	outputText("\n\nHis cock slides out of your [ass] with a pop. Cum start dripping out of your [ass]. \"<i>That was... You were amazing, [name].</i>\" You smile at him while rubbing your inflated belly and tell him he wasn’t too bad himself.");
 	outputText("\n\After a good while of rest, the two of you get redressed and return to your camp.");
 	dynStats("sens", 1, "cor", -1);
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;

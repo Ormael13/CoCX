@@ -15,9 +15,9 @@ public function masturbateMenu():void {
 	}	
 	if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !fappingItems(false)) {
 		clearOutput();
-		outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
+		outputText("Although your bee cock aches, you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming, images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
 		addButton(0, "Next", camp.campMenu);
-		if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY)) addButton(1, "Use Honey", fapWithHoney);
+		if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY)) addButton(1, "Use Honey", masturbateGo);
 		return;
 	}
 	var button:int = 0;

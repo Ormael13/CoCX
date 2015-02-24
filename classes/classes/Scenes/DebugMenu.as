@@ -137,20 +137,20 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuII():void {
 			lastMenu = itemSpawnTransformativesMenuII;
 			menu();
-			addButton(0, "GoldenSeed", giveItem, consumables.GLDSEED);
-			addButton(1, "Gob.Ale", giveItem, consumables.GOB_ALE);
-			addButton(2, "Hummus", giveItem, consumables.HUMMUS_);
-			addButton(3, "ImpFood", giveItem, consumables.IMPFOOD);
+			addItemButton(consumables.GLDSEED);
+			addItemButton(consumables.GOB_ALE);
+			addItemButton(consumables.HUMMUS_);
+			addItemButton(consumables.IMPFOOD);
 			
-			addButton(5, "IncubiD", giveItem, consumables.INCUBID);
-			addButton(6, "KangaFruit", giveItem, consumables.KANGAFT);
-			addButton(7, "KnottyP", giveItem, consumables.KNOTTYP);
-			addButton(8, "La Bova", giveItem, consumables.LABOVA_);
+			addItemButton(consumables.INCUBID);
+			addItemButton(consumables.KANGAFT);
+			addItemButton(consumables.KNOTTYP);
+			addItemButton(consumables.LABOVA_);
 			
-			addButton(10, "LargePp", giveItem, consumables.LARGEPP);
-			addButton(11, "MagSeed", giveItem, consumables.MAGSEED);
-			addButton(12, "MghtyVg", giveItem, consumables.MGHTYVG);
-			addButton(13, "MouseCo", giveItem, consumables.MOUSECO);
+			addItemButton(consumables.LARGEPP);
+			addItemButton(consumables.MAGSEED);
+			addItemButton(consumables.MGHTYVG);
+			addItemButton(consumables.MOUSECO);
 			
 			addButton(4, "Next", itemSpawnTransformativesMenuIII);
 			addButton(9, "Previous", itemSpawnTransformativesMenuI);		
@@ -159,20 +159,20 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuIII():void {
 			lastMenu = itemSpawnTransformativesMenuIII;
 			menu();
-			addButton(0, "MinoBlo", giveItem, consumables.MINOBLO);
-			addButton(1, "MystJwl", giveItem, consumables.MYSTJWL);
-			addButton(2, "P.LBova", giveItem, consumables.P_LBOVA);
-			addButton(3, "PrFruit", giveItem, consumables.PRFRUIT);
+			addItemButton(consumables.MINOBLO);
+			addItemButton(consumables.MYSTJWL);
+			addItemButton(consumables.P_LBOVA);
+			addItemButton(consumables.PRFRUIT);
 			
-			addButton(5, "ProBova", giveItem, consumables.PROBOVA);
-			addButton(6, "P.Draft", giveItem, consumables.P_DRAFT);
-			addButton(7, "P.S.Mlk", giveItem, consumables.P_S_MLK);
-			addButton(8, "PSDelit", giveItem, consumables.PSDELIT);
+			addItemButton(consumables.PROBOVA);
+			addItemButton(consumables.P_DRAFT);
+			addItemButton(consumables.P_S_MLK);
+			addItemButton(consumables.PSDELIT);
 			
-			addButton(10, "PurHony", giveItem, consumables.PURHONY);
-			addButton(11, "S.Delite", giveItem, consumables.SDELITE);
-			addButton(12, "S.Dream", giveItem, consumables.S_DREAM);
-			addButton(13, "SucMilk", giveItem, consumables.SUCMILK);
+			addItemButton(consumables.PURHONY);
+			addItemButton(consumables.SDELITE);
+			addItemButton(consumables.S_DREAM);
+			addItemButton(consumables.SUCMILK);
 			
 			addButton(4, "Next", itemSpawnTransformativesMenuIV);
 			addButton(9, "Previous", itemSpawnTransformativesMenuII);
@@ -181,20 +181,20 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuIV():void {
 			lastMenu = itemSpawnTransformativesMenuIV;
 			menu();
-			addButton(0, "Reptilum", giveItem, consumables.REPTLUM);
-			addButton(1, "RingFig", giveItem, consumables.RINGFIG);
-			addButton(2, "Rizza Root", giveItem, consumables.RIZZART);
-			addButton(3, "S.Gossr", giveItem, consumables.S_GOSSR);
+			addItemButton(consumables.REPTLUM);
+			addItemButton(consumables.RINGFIG);
+			addItemButton(consumables.RIZZART);
+			addItemButton(consumables.S_GOSSR);
 			
-			addButton(5, "Shark.T", giveItem, consumables.SHARK_T);
-			addButton(6, "SnakOil", giveItem, consumables.SNAKOIL);
-			addButton(7, "TrapOil", giveItem, consumables.TRAPOIL);
-			addButton(8, "TScroll", giveItem, consumables.TSCROLL);
+			addItemButton(consumables.SHARK_T);
+			addItemButton(consumables.SNAKOIL);
+			addItemButton(consumables.TRAPOIL);
+			addItemButton(consumables.TSCROLL);
 			
-			addButton(10, "TSTooth", giveItem, consumables.TSTOOTH);
-			addButton(11, "VixVigr", giveItem, consumables.VIXVIGR);
-			addButton(12, "W.Fruit", giveItem, consumables.W_FRUIT);
-			addButton(13, "WetClth", giveItem, consumables.WETCLTH);
+			addItemButton(consumables.TSTOOTH);
+			addItemButton(consumables.VIXVIGR);
+			addItemButton(consumables.W_FRUIT);
+			addItemButton(consumables.WETCLTH);
 			
 			//addButton(4, "Next", itemSpawnTransformativesMenuV);
 			addButton(9, "Previous", itemSpawnTransformativesMenuIII);
@@ -204,20 +204,20 @@ package classes.Scenes
 		private function itemSpawnConsumablesMenuI():void {
 			lastMenu = itemSpawnConsumablesMenuI;
 			menu();
-			addButton(0, "AkbalSlv", giveItem, consumables.AKBALSL);
-			addButton(1, "C. Mint", giveItem, consumables.C__MINT);
-			addButton(2, "Cerulean P.", giveItem, consumables.CERUL_P);
-			addButton(3, "Coal", giveItem, consumables.COAL___);
+			addItemButton(consumables.AKBALSL);
+			addItemButton(consumables.C__MINT);
+			addItemButton(consumables.CERUL_P);
+			addItemButton(consumables.COAL___);
 			
-			addButton(5, "Debimbo", giveItem, consumables.DEBIMBO);
-			addButton(6, "ExtSerm", giveItem, consumables.EXTSERM);
-			addButton(7, "F.Draft", giveItem, consumables.F_DRAFT);
-			addButton(8, "GroPlus", giveItem, consumables.GROPLUS);
+			addItemButton(consumables.DEBIMBO);
+			addItemButton(consumables.EXTSERM);
+			addItemButton(consumables.F_DRAFT);
+			addItemButton(consumables.GROPLUS);
 			
-			addButton(10, "HrblCnt", giveItem, consumables.HRBCNT);
-			addButton(11, "Icicle", giveItem, consumables.ICICLE_);
-			addButton(12, "KitGift", giveItem, consumables.KITGIFT);
-			addButton(13, "LustDraft", giveItem, consumables.L_DRAFT);
+			addItemButton(consumables.HRBCNT);
+			addItemButton(consumables.ICICLE_);
+			addItemButton(consumables.KITGIFT);
+			addItemButton(consumables.L_DRAFT);
 			
 			addButton(4, "Next", itemSpawnConsumablesMenuII);
 			//addButton(9, "Previous", itemSpawnConsumablesMenuI);
@@ -226,20 +226,20 @@ package classes.Scenes
 		private function itemSpawnConsumablesMenuII():void {
 			lastMenu = itemSpawnConsumablesMenuII;
 			menu();
-			addButton(0, "Lactaid", giveItem, consumables.LACTAID);
-			addButton(1, "LustStk", giveItem, consumables.LUSTSTK);
-			addButton(2, "Numb Rox", giveItem, consumables.NUMBROX);
-			addButton(3, "Ovi Elixir", giveItem, consumables.OVIELIX);
+			addItemButton(consumables.LACTAID);
+			addItemButton(consumables.LUSTSTK);
+			addItemButton(consumables.NUMBROX);
+			addItemButton(consumables.OVIELIX);
 			
-			addButton(5, "PeppWht", giveItem, consumables.PEPPWHT);
-			addButton(6, "P.Pucker", giveItem, consumables.PRNPKR);
-			addButton(7, "Reducto", giveItem, consumables.REDUCTO);
-			addButton(8, "SensDraft", giveItem, consumables.SENSDRF);
+			addItemButton(consumables.PEPPWHT);
+			addItemButton(consumables.PRNPKR);
+			addItemButton(consumables.REDUCTO);
+			addItemButton(consumables.SENSDRF);
 			
-			addButton(10, "Scholars T.", giveItem, consumables.SMART_T);
-			addButton(11, "Vitality T.", giveItem, consumables.VITAL_T);
-			addButton(12, "B. Book", giveItem, consumables.B__BOOK);
-			addButton(13, "W. Book", giveItem, consumables.W__BOOK);	
+			addItemButton(consumables.SMART_T);
+			addItemButton(consumables.VITAL_T);
+			addItemButton(consumables.B__BOOK);
+			addItemButton(consumables.W__BOOK);	
 			
 			addButton(4, "Next", itemSpawnConsumablesMenuIII);
 			addButton(9, "Previous", itemSpawnConsumablesMenuI);
@@ -248,20 +248,20 @@ package classes.Scenes
 		private function itemSpawnConsumablesMenuIII():void {
 			lastMenu = itemSpawnConsumablesMenuIII;
 			menu();
-			addButton(0, "BC Beer", giveItem, consumables.BC_BEER);
-			addButton(1, "BimboCh", giveItem, consumables.BIMBOCH);
-			addButton(2, "CCupcak", giveItem, consumables.CCUPCAK);
-			addButton(3, "FishFil", giveItem, consumables.FISHFIL);
+			addItemButton(consumables.BC_BEER);
+			addItemButton(consumables.BIMBOCH);
+			addItemButton(consumables.CCUPCAK);
+			addItemButton(consumables.FISHFIL);
 			
-			addButton(5, "GodMead", giveItem, consumables.GODMEAD);
-			addButton(6, "IzyMilk", giveItem, consumables.IZYMILK);
-			addButton(7, "M. Milk", giveItem, consumables.M__MILK);
-			addButton(8, "MinoCum", giveItem, consumables.MINOCUM);
+			addItemButton(consumables.GODMEAD);
+			addItemButton(consumables.IZYMILK);
+			addItemButton(consumables.M__MILK);
+			addItemButton(consumables.MINOCUM);
 			
-			addButton(10, "Ph. Whiskey", giveItem, consumables.P_WHSKY);
-			addButton(11, "PurPeac", giveItem, consumables.PURPEAC);
-			addButton(12, "SheepMk", giveItem, consumables.SHEEPMK);
-			addButton(13, "SpringWtr", giveItem, consumables.S_WATER);
+			addItemButton(consumables.P_WHSKY);
+			addItemButton(consumables.PURPEAC);
+			addItemButton(consumables.SHEEPMK);
+			addItemButton(consumables.S_WATER);
 			
 			addButton(4, "Next", itemSpawnConsumablesMenuIV);
 			addButton(9, "Previous", itemSpawnConsumablesMenuII);
@@ -270,12 +270,12 @@ package classes.Scenes
 		private function itemSpawnConsumablesMenuIV():void {
 			lastMenu = itemSpawnConsumablesMenuIV;
 			menu();
-			addButton(0, "NPnkEgg", giveItem, consumables.NPNKEGG);
-			addButton(1, "DrgnEgg", giveItem, consumables.DRGNEGG);
-			addButton(2, "Condom", giveItem, useables.CONDOM);
-			addButton(3, "MilkPtn", giveItem, consumables.MILKPTN);
+			addItemButton(consumables.NPNKEGG);
+			addItemButton(consumables.DRGNEGG);
+			addItemButton(useables.CONDOM);
+			addItemButton(consumables.MILKPTN);
 			
-			addButton(5, "W.Pudding", giveItem, consumables.W_PDDNG);
+			addItemButton(consumables.W_PDDNG);
 			
 			addButton(4, "Next", itemSpawnConsumablesMenuV);
 			addButton(9, "Previous", itemSpawnConsumablesMenuIII);
@@ -284,20 +284,20 @@ package classes.Scenes
 		private function itemSpawnConsumablesMenuV():void {
 			lastMenu = itemSpawnConsumablesMenuV;
 			menu();
-			addButton(0, "BlackEg", giveItem, consumables.BLACKEG);
-			addButton(1, "L.BlkEg", giveItem, consumables.L_BLKEG);
-			addButton(2, "BlueEgg", giveItem, consumables.BLUEEGG);
-			addButton(3, "L.BluEg", giveItem, consumables.L_BLUEG);
+			addItemButton(consumables.BLACKEG);
+			addItemButton(consumables.L_BLKEG);
+			addItemButton(consumables.BLUEEGG);
+			addItemButton(consumables.L_BLUEG);
 			
-			addButton(5, "BrownEg", giveItem, consumables.BROWNEG);
-			addButton(6, "L.BrnEg", giveItem, consumables.L_BRNEG);
-			addButton(7, "PinkEgg", giveItem, consumables.PINKEGG);
-			addButton(8, "L.PnkEg", giveItem, consumables.L_PNKEG);
+			addItemButton(consumables.BROWNEG);
+			addItemButton(consumables.L_BRNEG);
+			addItemButton(consumables.PINKEGG);
+			addItemButton(consumables.L_PNKEG);
 			
-			addButton(10, "PurplEg", giveItem, consumables.PURPLEG);
-			addButton(11, "L.PrpEg", giveItem, consumables.L_PRPEG);
-			addButton(12, "WhiteEg", giveItem, consumables.WHITEEG);
-			addButton(13, "L.WhtEg", giveItem, consumables.L_WHTEG);
+			addItemButton(consumables.PURPLEG);
+			addItemButton(consumables.L_PRPEG);
+			addItemButton(consumables.WHITEEG);
+			addItemButton(consumables.L_WHTEG);
 			
 			//addButton(4, "Next", itemSpawnConsumablesMenuVI);
 			addButton(9, "Previous", itemSpawnConsumablesMenuIV);
@@ -307,20 +307,20 @@ package classes.Scenes
 		private function itemSpawnDyesMenuI():void {
 			lastMenu = itemSpawnDyesMenuI;
 			menu();
-			addButton(0, "AuburnD", giveItem, consumables.AUBURND);
-			addButton(1, "Black D", giveItem, consumables.BLACK_D);
-			addButton(2, "Blond D", giveItem, consumables.BLOND_D);
-			addButton(3, "BlueDye", giveItem, consumables.BLUEDYE);
+			addItemButton(consumables.AUBURND);
+			addItemButton(consumables.BLACK_D);
+			addItemButton(consumables.BLOND_D);
+			addItemButton(consumables.BLUEDYE);
 			
-			addButton(5, "Brown D", giveItem, consumables.BROWN_D);
-			addButton(6, "GrayDye", giveItem, consumables.GRAYDYE);
-			addButton(7, "Green D", giveItem, consumables.GREEN_D);
-			addButton(8, "OrangDy", giveItem, consumables.ORANGDY);
+			addItemButton(consumables.BROWN_D);
+			addItemButton(consumables.GRAYDYE);
+			addItemButton(consumables.GREEN_D);
+			addItemButton(consumables.ORANGDY);
 			
-			addButton(10, "PinkDye", giveItem, consumables.PINKDYE);
-			addButton(11, "PurpDye", giveItem, consumables.PURPDYE);
-			addButton(12, "Red Dye", giveItem, consumables.RED_DYE);
-			addButton(13, "WhiteDy", giveItem, consumables.WHITEDY);
+			addItemButton(consumables.PINKDYE);
+			addItemButton(consumables.PURPDYE);
+			addItemButton(consumables.RED_DYE);
+			addItemButton(consumables.WHITEDY);
 			
 			addButton(14, "Back", itemSpawnMenu);
 		}
@@ -339,12 +339,12 @@ package classes.Scenes
 		private function itemSpawnRaresMenu():void {
 			lastMenu = itemSpawnRaresMenu;
 			menu();
-			addButton(0, "BimboLq", giveItem, consumables.BIMBOLQ);
-			addButton(1, "BroBrew", giveItem, consumables.BROBREW);
-			addButton(2, "GldStat", giveItem, useables.GLDSTAT);
-			addButton(3, "S.Hummus", giveItem, consumables.HUMMUS2);
+			addItemButton(consumables.BIMBOLQ);
+			addItemButton(consumables.BROBREW);
+			addItemButton(useables.GLDSTAT);
+			addItemButton(consumables.HUMMUS2);
 			
-			addButton(5, "P.Pearl", giveItem, consumables.P_PEARL);
+			addItemButton(consumables.P_PEARL);
 			
 			addButton(14, "Back", itemSpawnMenu);
 		}
@@ -352,18 +352,20 @@ package classes.Scenes
 		private function itemSpawnWeaponsMenuI():void {
 			lastMenu = itemSpawnWeaponsMenuI;
 			menu();
+			addItemButton(weapons.B_SCARB);
 			addItemButton(weapons.B_SWORD);
 			addItemButton(weapons.CLAYMOR);
 			addItemButton(weapons.CROSSBW);
+			
 			addItemButton(weapons.E_STAFF);
 			addItemButton(weapons.FLAIL);
 			addItemButton(weapons.FLINTLK);
 			addItemButton(weapons.URTAHLB);
+			
 			addItemButton(weapons.H_GAUNT);
 			addItemButton(weapons.JRAPIER);
 			addItemButton(weapons.KATANA);
 			addItemButton(weapons.L__AXE);
-			addItemButton(weapons.L_DAGGR);
 			
 			addButton(4, "Next", itemSpawnWeaponsMenuII);
 			//addButton(9, "Previous", itemSpawnWeaponsMenuI);
@@ -372,18 +374,20 @@ package classes.Scenes
 		private function itemSpawnWeaponsMenuII():void {
 			lastMenu = itemSpawnWeaponsMenuII;
 			menu();
+			addItemButton(weapons.L_DAGGR);
 			addItemButton(weapons.L_HAMMR);
 			addItemButton(weapons.MACE);
 			addItemButton(weapons.PIPE);
-			addItemButton(weapons.PTCHFRK);
+			
+			addItemButton(weapons.PTCHFRK);			
 			addItemButton(weapons.RIDINGC);
 			addItemButton(weapons.RRAPIER);
 			addItemButton(weapons.S_BLADE);
-			addItemButton(weapons.S_GAUNT);
+			
+			addItemButton(weapons.S_GAUNT);			
 			addItemButton(weapons.SCARBLD);
 			addItemButton(weapons.SCIMITR);
 			addItemButton(weapons.SPEAR);
-			addItemButton(weapons.SUCWHIP);
 			
 			addButton(4, "Next", itemSpawnWeaponsMenuIII);
 			addButton(9, "Previous", itemSpawnWeaponsMenuI);
@@ -392,6 +396,7 @@ package classes.Scenes
 		private function itemSpawnWeaponsMenuIII():void {
 			lastMenu = itemSpawnWeaponsMenuIII;
 			menu();
+			addItemButton(weapons.SUCWHIP);
 			addItemButton(weapons.W_STAFF);
 			addItemButton(weapons.WARHAMR);
 			addItemButton(weapons.WHIP);			
@@ -405,20 +410,20 @@ package classes.Scenes
 		private function itemSpawnArmoursMenuI():void {
 			lastMenu = itemSpawnArmoursMenuI;
 			menu();
-			addButton(0, "G. Clothes", giveItem, armors.ADVCLTH);
-			addButton(1, "Long Dress", giveItem, armors.B_DRESS);
-			addButton(2, "Bee Armor", giveItem, armors.BEEARMR);
-			addButton(3, "BimboSk", giveItem, armors.BIMBOSK);
+			addItemButton(armors.ADVCLTH);
+			addItemButton(armors.B_DRESS);
+			addItemButton(armors.BEEARMR);
+			addItemButton(armors.BIMBOSK);
 			
-			addButton(5, "BonStrp", giveItem, armors.BONSTRP);
-			addButton(6, "C.Cloth", giveItem, armors.C_CLOTH);
-			addButton(7, "Chn Bikini", giveItem, armors.CHBIKNI);
-			addButton(8, "Suitclothes", giveItem, armors.CLSSYCL);
+			addItemButton(armors.BONSTRP);
+			addItemButton(armors.C_CLOTH);
+			addItemButton(armors.CHBIKNI);
+			addItemButton(armors.CLSSYCL);
 			
-			addButton(10, "Full Chain", giveItem, armors.FULLCHN);
-			addButton(11, "Full Plate", giveItem, armors.FULLPLT);
-			addButton(12, "GelArmr", giveItem, armors.GELARMR);
-			addButton(13, "GooArmr", giveItem, armors.GOOARMR);
+			addItemButton(armors.DBARMOR);
+			addItemButton(armors.FULLCHN);
+			addItemButton(armors.FULLPLT);
+			addItemButton(armors.GELARMR);
 			
 			addButton(4, "Next", itemSpawnArmoursMenuII);
 			//addButton(9, "Previous", itemSpawnArmoursMenuI);
@@ -427,20 +432,20 @@ package classes.Scenes
 		private function itemSpawnArmoursMenuII():void {
 			lastMenu = itemSpawnArmoursMenuII;
 			menu();
-			addButton(0, "I.Corst", giveItem, armors.I_CORST);
-			addButton(1, "I.Robes", giveItem, armors.I_ROBES);
-			addButton(2, "Indec StAr", giveItem, armors.INDECST);
-			addButton(3, "LeathrA", giveItem, armors.LEATHRA);
+			addItemButton(armors.GOOARMR);
+			addItemButton(armors.I_CORST);
+			addItemButton(armors.I_ROBES);
+			addItemButton(armors.INDECST);
 			
-			addButton(5, "UrtaLta", giveItem, armors.URTALTA);
-			addButton(6, "LMArmor", giveItem, armors.LMARMOR);
-			addButton(7, "T.Lthr Pants", giveItem, armors.LTHRPNT);
-			addButton(8, "Lthr Robes", giveItem, armors.LTHRROB);
+			addItemButton(armors.LEATHRA);
+			addItemButton(armors.URTALTA);
+			addItemButton(armors.LMARMOR);
+			addItemButton(armors.LTHRPNT);
 			
-			addButton(10, "Robes", giveItem, armors.M_ROBES);
-			addButton(11, "T.B.Armor", giveItem, armors.TBARMOR);
-			addButton(12, "NurseCl", giveItem, armors.NURSECL);
-			addButton(13, "Overalls", giveItem, armors.OVERALL);
+			addItemButton(armors.LTHRROB);
+			addItemButton(armors.M_ROBES);
+			addItemButton(armors.TBARMOR);
+			addItemButton(armors.NURSECL);
 			
 			addButton(4, "Next", itemSpawnArmoursMenuIII);
 			addButton(9, "Previous", itemSpawnArmoursMenuI);
@@ -449,19 +454,20 @@ package classes.Scenes
 		private function itemSpawnArmoursMenuIII():void {
 			lastMenu = itemSpawnArmoursMenuIII;
 			menu();
-			addButton(0, "R.BdySt", giveItem, armors.R_BDYST);
-			addButton(1, "Rbbr Fetish", giveItem, armors.RBBRCLT);
-			addButton(2, "S.Swmwr", giveItem, armors.S_SWMWR);
-			addButton(3, "Scale Mail", giveItem, armors.SCALEML);
+			addItemButton(armors.OVERALL);
+			addItemButton(armors.R_BDYST);
+			addItemButton(armors.RBBRCLT);
+			addItemButton(armors.S_SWMWR);
 			
-			addButton(5, "SeductA", giveItem, armors.SEDUCTA);
-			addButton(6, "U.SeductA", giveItem, armors.SEDUCTU);
-			addButton(7, "SS.Robes", giveItem, armors.SS_ROBE);
-			addButton(8, "SS.Armor", giveItem, armors.SSARMOR);
+			addItemButton(armors.SCALEML);
+			addItemButton(armors.SEDUCTA);
+			addItemButton(armors.SEDUCTU);
+			addItemButton(armors.SS_ROBE);
 			
-			addButton(10, "Bodysuit", giveItem, armors.T_BSUIT);
-			addButton(11, "Tube Top", giveItem, armors.TUBETOP);
-			addButton(12, "W.Robes", giveItem, armors.W_ROBES);
+			addItemButton(armors.SSARMOR);
+			addItemButton(armors.T_BSUIT);
+			addItemButton(armors.TUBETOP);
+			addItemButton(armors.W_ROBES);
 			
 			//addButton(4, "Next", itemSpawnArmoursMenuIV);
 			addButton(9, "Previous", itemSpawnArmoursMenuII);
@@ -471,20 +477,20 @@ package classes.Scenes
 		private function itemSpawnAccessoriesMenuI():void {
 			lastMenu = itemSpawnAccessoriesMenuI;
 			menu();
-			addButton(0, "Crimst.Ring", giveItem, jewelries.CRIMRNG);
-			addButton(1, "FertiteRing", giveItem, jewelries.FERTRNG);
-			addButton(2, "Icestn.Ring", giveItem, jewelries.ICE_RNG);
-			addButton(3, "Life Ring", giveItem, jewelries.LIFERNG);
+			addItemButton(jewelries.CRIMRNG);
+			addItemButton(jewelries.FERTRNG);
+			addItemButton(jewelries.ICE_RNG);
+			addItemButton(jewelries.LIFERNG);
 			
-			addButton(5, "Mystic Ring", giveItem, jewelries.MYSTRNG);
-			addButton(6, "Power Ring", giveItem, jewelries.POWRRNG);
-			addButton(7, "Purity Ring", giveItem, jewelries.PURERNG);
-			addButton(8, "Diam Ring", giveItem, jewelries.DIAMRNG);
+			addItemButton(jewelries.MYSTRNG);
+			addItemButton(jewelries.POWRRNG);
+			addItemButton(jewelries.PURERNG);
+			addItemButton(jewelries.DIAMRNG);
 			
-			addButton(10, "Gold Ring", giveItem, jewelries.GOLDRNG);
-			addButton(11, "Lethic.Ring", giveItem, jewelries.LTHCRNG);
-			addButton(12, "Plat Ring", giveItem, jewelries.PLATRNG);
-			addButton(13, "Silver Ring", giveItem, jewelries.SILVRNG);
+			addItemButton(jewelries.GOLDRNG);
+			addItemButton(jewelries.LTHCRNG);
+			addItemButton(jewelries.PLATRNG);
+			addItemButton(jewelries.SILVRNG);
 			
 			//addButton(4, "Next", itemSpawnAccessoriesMenuII);
 			//addButton(9, "Previous", itemSpawnAccessoriesMenuI);

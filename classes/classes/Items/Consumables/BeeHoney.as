@@ -259,7 +259,7 @@ package classes.Items.Consumables
 				}
 				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race() == "bee-morph") {
 					outputText("\n\nYour huge member suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your " + player.armorName + " and watch in fascination as your " + getGame().cockDescript(0) + " starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.\n\n");
-					outputText("It is entirely different from the usual feeling you get when you’re cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming, and it takes a lot of will not to just run off in search of the bee girl that gave you that special honey right now.  This isn’t good.\n\n");
+					outputText("It is entirely different from the usual feeling you get when your cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming, and it takes a lot of will not to just run off in search of the bee girl that gave you that special honey right now.  This isn’t good.\n\n");
 					outputText("<b>You now have a bee cock!</b>");
 					player.cocks[0].cockType = CockTypesEnum.BEE;
 					player.cocks[0].cockLength += 5;
@@ -273,7 +273,7 @@ package classes.Items.Consumables
 					getGame().dynStats("sen", 3);
 				}
 				if (player.cor >= 5) {
-					outputText("\n\nYou’re mind feels surprisingly clear of the twisted thoughts that have plagued it as of late, but you find yourself feeling more and more aroused than usual.");
+					outputText("\n\nYour mind feels surprisingly clear of the twisted thoughts that have plagued it as of late, but you find yourself feeling more and more aroused than usual.");
 					var corLoss:int = Math.min(0.1 * player.cor + 5, player.cor);
 					getGame().dynStats("cor", -corLoss, "lib", corLoss); //Lose corruption and gains that much libido
 				}
@@ -289,7 +289,7 @@ package classes.Items.Consumables
 				}
 				getGame().dynStats("lust", 0.2 * player.lib + 5);
 			}
-			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return(false);
 		}
     }

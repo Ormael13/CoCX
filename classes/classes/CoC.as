@@ -389,7 +389,7 @@
 
 			//Version NUMBER
 			ver = "0.9.2_mod_1.1.2";
-			version = ver + " (<b>The Behemoth Update</b>)";
+			version = ver + " (<b>Bee-Morph Bad End + Katherine Stuff</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

@@ -2,7 +2,7 @@
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
-	import classes.internals.WeightedDrop;
+	import classes.internals.ChainedDrop;
 
 	public class BeeGirl extends Monster {
 

@@ -2564,6 +2564,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.RUBI_COCK_SIZE] <= 0) NPCsDedicked++;
 	if (flags[kFLAGS.BENOIT_STATUS] == 1 || flags[kFLAGS.BENOIT_STATUS] == 2) NPCsDedicked++;
 	if (flags[kFLAGS.ARIAN_COCK_SIZE] <= 0) NPCsDedicked++;
+	if (flags[kFLAGS.KATHERINE_DICK_COUNT] <= 0) NPCsDedicked++;
 	
 	if (NPCsDedicked >= 3) awardAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER);
 }

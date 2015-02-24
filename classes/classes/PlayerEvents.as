@@ -178,7 +178,8 @@ package classes {
 					player.cocks[0].cockThickness = Math.max(player.cocks[0].cockThickness, 4);
 				}
 				outputText("The desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
-				dynStats("lust", 10); //Always gain 10 lust each hour
+				if (player.findPerk(PerkLib.WellAdjusted) >= 0) dynStats("lust", 5); //Reduced to 5 with 'Well Adjusted' perk.
+				else dynStats("lust", 10); //Always gain 10 lust each hour
 				needNext = true;
 			}
 			if (!player.hasVagina() && player.findPerk(PerkLib.Diapause) >= 0) { //Lose diapause
