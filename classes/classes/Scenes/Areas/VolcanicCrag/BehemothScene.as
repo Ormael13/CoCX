@@ -30,7 +30,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			clearOutput();
 			if (flags[kFLAGS.MET_BEHEMOTH] <= 0) {
 				outputText("As you're exploring the infernal landscape, you are drawn to the sight of a creature you've never seen before: a muscular male bipedal purple-skinned horned creature with spikes on his back. You guess he is sentient as he's wearing a loincloth. Underneath his loincloth is a large cock and a duo of balls; you estimate his cock to be 18 inches long and 2½ inches thick but it's hard for sure as his cock is flaccid. You estimate his balls to be three inches across. You approach the creature and he says to your surprise, \"<i>Hello there. Not many even dared to approach me. Either it's me or it's the landscape.</i>\"");
-				outputText("\n\nYou introduce yourself and the creature says, \"<i>" + player.short + ", eh? I'm the mighty Behemoth. So what do you want? Up for battling or interested in sex?</i>\"");
+				outputText("\n\nYou introduce yourself and the creature says, \"<i>" + player.short + ", eh? I'm the mighty Behemoth. It's good to see someone like you; I was so lonely. So what do you want?</i>\" He smiles.");
 			}
 			else {
 				outputText("As you're exploring the infernal landscape, you spot the familiar purple-skinned creature. The behemoth approaches you with a smile and says, \"<i>Hello again, " + player.short + ". So feeling up for fighting? Or want to have sex?</i>\"");
@@ -42,6 +42,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		//Talk
 		public function talkToBehemothMenu():void {
 			clearOutput();
+			outputText(images.showImage("behemoth-talk"), false);
 			outputText("You ask the behemoth if he's willing to have a conversation with you. The behemoth says, \"<i>Of course. What would you like to talk about?</i>\"");
 			menu();
 			addButton(0, "Yourself", talkAboutYourself, null, null, "Talk to the behemoth about yourself.");
@@ -192,6 +193,12 @@ package classes.Scenes.Areas.VolcanicCrag
 			player.gems -= gemsLost;
 			statScreenRefresh();
 			kGAMECLASS.inCombat = false;
+			if (doSFWloss()) {
+				outputText("\n\n\"<i>I win and you know what that means? I'll take some of your gems,</i>\" he says and he takes " + gemsLost + " gems from your pouch, \"<i>I'll take care of you while you're recovering.</i>\" You black out...");
+				HPChange(player.maxHP() / 2, false);
+				fatigue(-50);
+				return;
+			}
 			if (player.HP <= 0) outputText("You collapse from your injuries.");
 			else outputText("You collapse from your overwhelming desires.");
 			outputText("\n\n\"<i>I win and you know what that means? I'll take some of your gems and I get to fuck your ass. Don't you worry, I'll be gentle,</i>\" he says with a grin. He takes " + gemsLost + " gems from your pouch. \"<i>I will give you some of your gems back should you beat me,</i>\" he says.");
@@ -201,7 +208,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		public function giveBirthToBehemoth():void {
 			clearOutput();
 			outputText("The pain in your womb is getting unbearable. You realize it's time for you to give birth to the behemoth! You make your way to the behemoth's tent in the volcanic crag to see the behemoth smiling at you.");
-			outputText("\n\n\"<i>I'll help you. Lay on my bed,</i>\" the behemoth says as he assists you in removing your [armor]. You lay on the bed and spread your [legs]. The labour is getting intense but you know the behemoth is already excited.");
+			outputText("\n\n\"<i>I'll help you. Lay on my bed,</i>\" the behemoth says" + player.clothedOrNaked(" as he assists you in removing your [armor]") + ". You lay on the bed and spread your [legs]. The labour is getting intense but you know the behemoth is already excited.");
 			outputText("\n\n\"<i>Push,</i>\" the behemoth instructs. That's your encouragement as you start pushing, taking deep breath between pushes. Eventually, your ordeal is over as the newborn behemoth finally comes out of your womb. \"<i>You've done great!</i>\" the behemoth says, smilingly.");
 			player.cuntChange(48, true);
 			flags[kFLAGS.BEHEMOTH_CHILDREN]++;
@@ -226,10 +233,10 @@ package classes.Scenes.Areas.VolcanicCrag
 		private function behemothSexMenu(victory:Boolean = false):void {
 			clearOutput();
 			if (victory) {
-				outputText("You tell the behemoth that you'd love to blow off some steam after a fight session. He says, \"<i>Of course. What would you like to do?</i>\"");
+				outputText("You tell the behemoth that you'd love to blow off some steam after a fight session. He says, \"<i>Of course. What would you like to do?</i>\" ");
 			}
 			else {
-				outputText("You tell the behemoth that you're here to have sex with him. He looks at you and says, \"<i>I'm game. What would you like to do?</i>\"");
+				outputText("You tell the behemoth that you're here to have sex with him. He looks at you and says, \"<i>I'm game. What would you like to do?</i>\" ");
 			}
 			menu();
 			if (player.hasCock()) {
@@ -254,7 +261,8 @@ package classes.Scenes.Areas.VolcanicCrag
 		private function analPitchBehemoth():void {
 			var x:int = player.cockThatFits(48);
 			clearOutput();
-			outputText("You tell the behemoth that you're going to take him from behind. \"<i>All right, let's get this started,</i>\" he says. The two of you strip yourselves naked. You toss your " + player.armorName + " into a neat pile.");
+			outputText(images.showImage("behemoth-anal-pitch"), false);
+			outputText("You tell the behemoth that you're going to take him from behind. \"<i>All right, let's get this started,</i>\" he says. " + player.clothedOrNaked("The two of you strip yourselves naked. You toss your " + player.armorName + " into a neat pile. ") + "The behemoth removes his loincloth, revealing his large cock.");
 			outputText("\n\n\"<i>Bend over,</i>\" you instruct the behemoth with a smirk. He gives you a nod as he gets down into a doggy position.");
 			outputText("\n\nYou give his butt-cheeks a gentle caress" + (player.cor >= 30 ? " followed by a sudden spank which causes him to yelp in surprise": " to assure him that you're going to be gentle.") + ".");
 			outputText("\n\nHe lifts his spiked tail to give you a good look at his entire backside. You spit on your hands and apply the saliva all over your " + player.cockDescript(x) + " to get it well-lubricated.");
@@ -277,13 +285,14 @@ package classes.Scenes.Areas.VolcanicCrag
 		private function analCatchBehemoth():void {
 			var isVirgin:Boolean = (player.looseness(false) == 0);
 			clearOutput();
+			outputText(images.showImage("behemoth-anal-catch"), false);
 			if (player.HP <= 0 || player.lust >= player.maxLust()) {
 				outputText("You have no choice but to accept the fact that the behemoth is going to penetrate you anally. He looks at you with a grin and says, \"<i>Go on, strip for me. I want to see your wonderful butt, " + player.mf("dude", "chick") + ".</i>\"\n\n");
 			}
 			else {
 				outputText("You definitely want that " + (silly() ? "dig bick": "big dick") + " in your [ass]. ");
 			}
-			outputText("You strip out of your [armor] until you're naked. You make sure to toss your [armor] into a neat pile. You present your naked body and more importantly, your [butt] to the behemoth. He shifts his loincloth aside to expose his large pecker and says excitedly, \"<i>Now that's some wonderful butt-cheeks you've got there! I'll go gentle on you and make sure you enjoy the experience.</i>\"");
+			outputText("" + player.clothedOrNaked("You strip out of your [armor] until you're naked. You make sure to toss your [armor] into a neat pile. ") + "You present your naked body and more importantly, your [butt] to the behemoth. He shifts his loincloth aside to expose his large pecker and says excitedly, \"<i>Now that's some wonderful butt-cheeks you've got there! I'll go gentle on you and make sure you enjoy the experience.</i>\"");
 			if (player.isBiped()) outputText("\n\nYou get down on all fours");
 			else if (player.isTaur()) outputText("\n\nYou adjust your pose so your [butt] is at the right height");
 			else if (player.isNaga()) outputText("\n\nYou shift your body and tail until your [ass] is accessible");
@@ -319,7 +328,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			}
 			if (player.gender == 0) outputText("Your entire body rocks from the overwhelming pleasure.");
 			outputText(" You finally recover from your orgasmic high and fall down, exhausted. The behemoth finally slides his cock out of your cum-stuffed [ass] and lays next to you. \"<i>It feels great to have someone to fuck,</i>\" the behemoth says.");
-			outputText("\n\nHe lays on top of you and the two of you rest for a while. You wake up some time later and you give the behemoth a kiss on one of his cheeks and let him know that you'll be going. \"<i>See you later,</i>\" the behemoth says with a smile on his face. You redress and leave back to your camp, oddly feeling a bit better.");
+			outputText("\n\nHe lays on top of you and the two of you rest for a while. You wake up some time later and you give the behemoth a kiss on one of his cheeks and let him know that you'll be going. \"<i>See you later,</i>\" the behemoth says with a smile on his face. You " + player.clothedOrNaked("redress and ") + "walk back to your camp, oddly feeling a bit better.");
 			player.orgasm();
 			player.slimeFeed();
 			HPChange(player.maxHP() / 4, false);
@@ -333,9 +342,10 @@ package classes.Scenes.Areas.VolcanicCrag
 		private function vagCatchBehemoth():void {
 			var isVirgin:Boolean = player.hasVirginVagina()
 			clearOutput();
+			outputText(images.showImage("behemoth-vag-catch"), false);
 			//Sorry, no centaur variant.
 			outputText("You definitely want that " + (silly() ? "dig bick": "big dick") + " in your [vagina]. ");
-			outputText("\n\nYou strip out of your [armor] until you're naked. You make sure to toss your [armor] into a neat pile. You present your naked body and more importantly, your [vagina] to the behemoth.  You notice that his erection is tenting under his loincloth. He shifts it aside to expose his large pecker and says excitedly, \"<i>Now that's some wonderful pussy you've got there! I'll go gentle on you and make sure you enjoy the experience.</i>\"");
+			outputText("" + player.clothedOrNaked("You strip out of your [armor] until you're naked. You make sure to toss your [armor] into a neat pile. ") + "You present your naked body and more importantly, your [vagina] to the behemoth.  You notice that his erection is tenting under his loincloth. He shifts it aside to expose his large pecker and says excitedly, \"<i>Now that's some wonderful pussy you've got there! I'll go gentle on you and make sure you enjoy the experience.</i>\"");
 			outputText("\n\nThe behemoth guides you to his bed and instructs you to lie down on the bed, which you follows obediently. You spread your [legs] to expose your womanhood" + (player.hasCock() ? " and manhood": "") + ". The Behemoth gives you a smile and slowly slides his long, prehensile tongue into your muff. \"<i>Gotta loosen you up first. Learned that the hard way with those goblins. Poor gals never stood a chance.</i>\" Ecstasy floods your system as he licks your [pussy]. Behemoth’s rough tongue slowly inches its way in, rubbing in all your pleasure spots. You end up cumming when the tongue forces it way into your womb. Behemoth slowly stands up and removes his femcum covered tongue out of your [pussy]. He licks his lips and says, “Delicious... that should do it. Now for the main course.” Behemoth holds his massive cock in his hand and positions it right outside your vagina. You can’t take it anymore and yell \"<i>Stop teasing me and fuck me with your ginormous cock already!</i>\" That was all the motivation Behemoth needed. In one quick stroke he penetrates your cooter and pushes it in all the way to your womb.");
 			player.cuntChange(45, true, true);
 			if (isVirgin) outputText("\n\n\"<i>I'm so glad you've saved your virginity for me. By the time people reached the endgame levels, none of them are virgin,</i>\" the behemoth says with a smile. ");
@@ -347,7 +357,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (player.hasCock()) outputText("Your [cock] shoots ropes of jism at the Behemoth.");
 			outputText("\n\nSpent, the behemoth lays next to you and says, \"<i>I love you, " + player.mf("dude", "chick") + ".</i>\" You smile at him while rubbing your cum-filled belly and fall into a nice nap.");
 			outputText("\n\n<b>Some time later...</b>");
-			outputText("\n\nYou wake up from your nap refreshed and invigorated and give the Behemoth a kiss before you redress yourself in your [armor], and make your way back to your camp.");
+			outputText("\n\nYou wake up from your nap refreshed and invigorated and give the Behemoth a kiss before you " + player.clothedOrNaked("redress yourself in your [armor], and") + "make your way back to your camp.");
 			player.orgasm();
 			player.slimeFeed();
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
@@ -363,6 +373,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			clearOutput();
 			var hungerRefill:int = 100 - player.hunger;
 			if (hungerRefill < 40) hungerRefill = 40;
+			outputText(images.showImage("behemoth-blowjob"), false);
 			outputText("Your eyes draw near the big bulge in his loincloth and you lick your lips as if you're hungry. ");
 			if (player.findStatusAffect(StatusAffects.LustyTongue) >= 0) {
 				outputText("Your body tingles with arousal as your " + tongueDescript() + " makes contact with your lips. ");
@@ -385,6 +396,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		
 		private function haveACumBathLiterally():void {
 			clearOutput();
+			outputText(images.showImage("behemoth-cum-bath"), false);
 			outputText("The behemoth looks at you and says, \"<i>Really? You want a cum bath? " + (flags[kFLAGS.BEHEMOTH_CUM_BATH] <= 0 ? "You're in luck as I can make a cum bath, literally! Yes, a literal cum bath. Don't let the size of my balls fool you; I can cum much higher than what you think my balls can hold." : "No problem, I'm going to give you another cum bath.") + "</i>\"");
 			if (flags[kFLAGS.BEHEMOTH_CUM_BATH] <= 0) {
 				outputText("\n\nYou are already eager for a literal cum bath! ");
@@ -405,7 +417,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nThe behemoth moves over to kiss you and you let out a deep groan and moan as his tongue probes the inside of your mouth. He retracts back and says, \"<i>I love you.</i>\"");
 			outputText("\n\nYou caress his cheeks and recline back...");
 			outputText("\n\n<b>One hour later...</b>");
-			outputText("\n\nYou get out of the cum-filled basin and " + (player.isGoo() ? "absorb the cum into your gooey body": "shake the excessive cum off") + " before getting yourself re-dressed into your [armor] and rustle the behemoth's hair.  \"<i>See you later. Come back anytime for more fun,</i>\" the behemoth says. You give him a final kiss before you make your way back to camp, already feeling a lot better.");
+			outputText("\n\nYou get out of the cum-filled basin and " + (player.isGoo() ? "absorb the cum into your gooey body": "shake the excessive cum off") + " before " + player.clothedOrNaked("getting yourself re-dressed into your [armor] and") + " rustle the behemoth's hair.  \"<i>See you later. Come back anytime for more fun,</i>\" the behemoth says. You give him a final kiss before you make your way back to camp, already feeling a lot better.");
 			flags[kFLAGS.BEHEMOTH_CUM_BATH]++;
 			HPChange(player.maxHP() / 2, false);
 			fatigue(-50);
@@ -417,6 +429,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		
 		private function watersportsWithBehemoth():void {
 			clearOutput();
+			outputText(images.showImage("behemoth-watersports"), false);
 			outputText("\<i>You want to do some watersports with me? Of course,</i>\" the behemoth chuckles, \"<i>just follow me to my tent.</i>\"");
 			outputText("\n\nYou follow the behemoth all the way to his tent and he gestures for you to enter and you enter along with him.");
 			if (flags[kFLAGS.BEHEMOTH_TENT] <= 0) {
@@ -449,7 +462,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				outputText("\n\nUnfortunately, by the time you finish peeing, there isn't pretty much anything else to do. \"<i>I'm sorry but I'm not really interested in centaurs. I don't really hate centaurs; I just find it a bit awkward. But you're always welcome to come back,</i>\" the behemoth says.");
 			}
 			else {
-				outputText("\n\nYou join him in filling the bucket with warm yellow liquid. You open up your [armor], ");
+				outputText("\n\nYou join him in filling the bucket with warm yellow liquid. You " + player.clothedOrNaked("open up your [armor], "));
 				if (player.hasCock()) { //Cock has priority over vagina.
 					outputText("aim your " + cockDescript(player.biggestCockIndex()) + " into the bucket and let out a pressure as your urine mingles with the behemoth's.");
 				}

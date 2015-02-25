@@ -388,8 +388,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_1.1.2b";
-			version = ver + " (<b>Bee-Morph Bad End + Katherine Stuff</b>)";
+			ver = "0.9.2_mod_1.1.3";
+			version = ver + " (<b>Image pack fix</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

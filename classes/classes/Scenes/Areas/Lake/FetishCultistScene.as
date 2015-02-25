@@ -66,14 +66,14 @@ package classes.Scenes.Areas.Lake
 						outputText("As the girl regains her senses, she sighs and licks her lips, then gets up off the stool. With a grin, she watches your cock soften and hang limp in front of her.  The zoo-keeper gets off the stool and pushes it aside. With an eager moan, she kneels into the puddle of horse cum and pussy-juices, clearly loving the feeling of the hot and sticky seed on her skin.  She opens her mouth and sucks the " + cockHead(0) + " of your " + cockDescript(0) + ", inside, hungrily sucking up any stray sperm, swallowing down all she can drink from your shaft.  The taste obviously arouses her again as she rubs her fingers in the puddle of seed she's so happily sitting in. She sucks your cock-head for what seems like ages, gulping down anything she can milk your " + ballsDescriptLight() + ". Eventually, the girl calms down as she rubs your cum over her body and tits.  She sits there in the puddle of sexual fluids, happily allowing your cock slip out of her mouth with a POP.  It hangs limply over her shoulder while she sighs as she closes her eyes, her mouth coated in her drool and cum.  You gasp and slump in your harness as your exhausted body loses its grip on consciousness, your last memory the taste of your bridle and the feel of your harness binding you as your keeper readies you for the next show...\n\n", false);
 
 						//make sure the PC is properly dressed after such a scene
-						if (player.armorValue == 0) player.modArmorName = "bridle bit and saddle set";
+						if (player.armor == armors.C_CLOTH) player.modArmorName = "bridle bit and saddle set";
 
 						//Check for bad-end start!
-						if (player.inte <= 10) cultistBadEnd();
+						if (player.inte <= 10 && rand(2) == 0) cultistBadEnd();
 						//(ending after all cultist rape scenes)
 						else {
 							outputText("A few hours later your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
-							if (player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
+							if (player.armor == armors.C_CLOTH) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 							else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 							outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
 							player.orgasm();
@@ -118,14 +118,14 @@ package classes.Scenes.Areas.Lake
 					outputText("You can't do anything but continue to lick and probe her folds while she continues to push you deeper inside her.  At the same time, she pushes herself up onto you more and more, so that her weight pushes your " + player.face() + " deeper into her slobbering depths.  In moments, your keeper is creaming herself all over your face while you simultaneously achieve your own release.  She dismounts from your face and walks back outside the cage, whistling that same tune again while you keep your head bent in shame from having gotten a release from doing something like that; again!  \"<i>Don't look so sad, horsey, soon more will be here to avail themselves of the pleasures you have to offer.</i>\" your keeper says to you with that same, sick grin on her face again before she locks the cage and walks away.\n\n", false);
 
 					//make sure the PC is properly dressed after such a scene
-					if (player.armorValue == 0) player.modArmorName = "bridle bit and saddle set";
+					if (player.armor == armors.C_CLOTH) player.modArmorName = "bridle bit and saddle set";
 
 					//Check for bad-end start!
-					if (player.inte <= 10) cultistBadEnd();
+					if (player.inte <= 10 && rand(2) == 0) cultistBadEnd();
 					//(ending after all cultist rape scenes)
 					else {
 						outputText("A few hours later your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
-						if (player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
+						if (player.armor != armors.C_CLOTH) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 						else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 						outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
 						player.orgasm();
@@ -174,14 +174,14 @@ package classes.Scenes.Areas.Lake
 					outputText("The feeling of her fluids running all over your tail is such an exotic and arousing feeling, as per usual, but it only leaves you feeling more frustrated that you can't get proper release.  Thankfully for you, you don't have to wait long for the release to come; as you feel your keeper spray the proof of her release onto your tail, you finally feel your own release.  You can only hang your head in shame from having gotten a release from being used like that, again!  \"<i>Don't look so bad snaky, the customers like to see someone high and mighty before they come in here and beat you into the ground.</i>\" You don't bother looking back up at her as she locks the cage and your restraints finally release you.\n\n", false);
 
 					//put them in the right attire after seeing this
-					if (player.armorValue == 0) player.modArmorName = "headdress, necklaces, and many body-chains";
+					if (player.armor == armors.C_CLOTH) player.modArmorName = "headdress, necklaces, and many body-chains";
 
 					//Check for bad-end start!
-					if (player.inte <= 10) cultistBadEnd();
+					if (player.inte <= 10 && rand(2) == 0) cultistBadEnd();
 					//(ending after all cultist rape scenes)
 					else {
 						outputText("A few hours later your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
-						if (player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
+						if (player.armor != armors.C_CLOTH) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 						else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 						outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
 						player.orgasm();
@@ -201,7 +201,7 @@ package classes.Scenes.Areas.Lake
 					if (player.cockTotal() > 0) outputText("  As you see your " + multiCockDescriptLight() + ", 'incredibly large' is the only qualifier you can think of.", false);
 				}
 				outputText("\n\n", false);
-				if (player.armorValue == 0) player.modArmorName = "bondage patient clothes";
+				if (player.armor == armors.C_CLOTH) player.modArmorName = "bondage patient clothes";
 				outputText("\"<i>Um, ", false);
 				if (player.gender <= 1) outputText("sir", false);
 				else outputText("madam", false);
@@ -281,11 +281,11 @@ package classes.Scenes.Areas.Lake
 					changedCock = true;
 				}
 				//Check for bad-end start!
-				if (player.inte <= 10) cultistBadEnd();
+				if (player.inte <= 10 && rand(2) == 0) cultistBadEnd();
 				//(ending after all cultist rape scenes)
 				else {
 					outputText("\n\nA few hours pass by and your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
-					if (player.armorValue > 0) {
+					if (player.armor != armors.C_CLOTH) {
 						outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 					}
 					else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
@@ -309,7 +309,7 @@ package classes.Scenes.Areas.Lake
 				//(variant 3: special toy, requires both dick and vagina)
 				if (player.vaginas.length > 0 && player.cocks.length > 0) {
 					outputText("You see your " + player.armorName + " becoming a nice, comfortable outfit of a white shirt and black pants that make you look well-suited to work in a manor... if they didn't have an exposed crotch and butt that puts your " + multiCockDescriptLight() + ", your " + vaginaDescript(0) + ", and your " + buttDescript() + " on full display.  Any undergarments you had are now gone.\n\n", false);
-					if (player.armorValue == 0) player.modArmorName = "crotch-revealing clothes";
+					if (player.armor == armors.C_CLOTH) player.modArmorName = "crotch-revealing clothes";
 					outputText("\"<i>Toy, I am feeling aroused,</i>\" she says to you in an authoritative voice. \"<i>I want you to please me.</i>\"\n\n", false);
 					outputText("\"<i>Yes, mistress,</i>\" you reply without hesitation, your thoughts unable to comprehend anything besides this 'game'.  You could swear that you were in the sitting room of a manor.  \"<i>How do you wish to be pleased?</i>\"\n\n", false);
 					outputText("\"<i>I'm glad to see you remember your place.  I wish you to first rub my feet, then move up my legs, and finally, start relieving the tension in my lower lips with your capable hands.</i>\"\n\n", false);
@@ -331,7 +331,7 @@ package classes.Scenes.Areas.Lake
 						outputText("  You see that your " + player.armorName + " have become a nice looking, if simple, frilled white shirt and bow tie along with black pants and matching shoes.  They make you look like you would be at home in a manor attending the needs of a noble, if it were not for the flaps on the front and back of your pants that give easy access to your " + multiCockDescriptLight(), false);
 						if (player.vaginas.length) outputText(", your " + vaginaDescript(0) + ",", false);
 						outputText(" and your " + buttDescript() + ".  Any undergarments you had are now gone.\n\n", false);
-						if (player.armorValue == 0) player.modArmorName = "cute servant's clothes";
+						if (player.armor == armors.C_CLOTH) player.modArmorName = "cute servant's clothes";
 						outputText("'Boy, I am feeling aroused.' she says to you in an authoritative voice. 'I want you to please me.'\n\n", false);
 						outputText("'Yes, mistress.' you reply without hesitation, your thoughts unable to comprehend anything besides this 'game'. You could swear that you were in the sitting room of a manor.  'How do you wish to be pleased?'\n\n", false);
 						outputText("'I'm glad to see you remember your place.  I wish you to first rub my feet, then move up my legs, and finally, start relieving the tension in my lower lips with your capable hands.'\n\n", false);
@@ -352,7 +352,7 @@ package classes.Scenes.Areas.Lake
 						//[if player has a dick] 
 						if (player.cocks.length > 0) outputText(", your " + multiCockDescriptLight() + ",", false);
 						outputText(" and your " + buttDescript() + ".\n\n", false);
-						if (player.armorValue == 0) player.modArmorName = "maid's clothes";
+						if (player.armor == armors.C_CLOTH) player.modArmorName = "maid's clothes";
 						outputText("'Girl, I am feeling aroused.' she says to you in an authoritative voice. 'I want you to please me.'\n\n", false);
 						outputText("'Yes, mistress.' you reply without hesitation, your thoughts unable to comprehend anything besides this 'game'.  You could swear that you were in the sitting room of a manor.  'How do you wish to be pleased?'\n\n", false);
 						outputText("'I'm glad to see you remember your place.  I wish you to first rub my feet, then move up my legs, and finally, start relieving the tension in my lower lips with your capable hands.'\n\n", false);
@@ -368,7 +368,7 @@ package classes.Scenes.Areas.Lake
 				//(variant 4: gender-less servant, requires that you have no dick or vagina)
 				if (player.gender == 0) {
 					outputText("You see that your " + player.armorName + " have become a nice and comfortable outfit of a shirt white and black pants, that make you look well suited to work in a manor.  However, you notice that there is a flap on your pants that gives easy access to your " + buttDescript() + ".\n\n", false);
-					if (player.armorValue == 0) player.modArmorName = "servant's clothes";
+					if (player.armor == armors.C_CLOTH) player.modArmorName = "servant's clothes";
 					outputText("'Servant, I am feeling aroused.' she says to you in an authoritative voice. 'I want you to please me.'\n\n", false);
 					outputText("'Yes, mistress.' you reply without hesitation, your thoughts unable to comprehend anything besides this 'game'.  You could swear that you were in the sitting room of a manor.  'How do you wish to be pleased?'\n\n", false);
 					outputText("'I'm glad to see you remember your place.  I wish you to first rub my feet, then move up my legs, and finally, start relieving the tension in my lower lips with your capable hands.'\n\n", false);
@@ -377,11 +377,11 @@ package classes.Scenes.Areas.Lake
 					outputText("Satisfied, your mistress rises and dresses.  She tells you that she is going for a walk, and that you should continue your duties now.  ", false);
 				}
 				//Check for bad-end start!
-				if (player.inte <= 10) cultistBadEnd();
+				if (player.inte <= 10 && rand(2) == 0) cultistBadEnd();
 				//(ending after all cultist rape scenes)
 				else {
 					outputText("A few hours later your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ", false);
-					if (player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
+					if (player.armor != armors.C_CLOTH) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 					else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 					outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
 					player.orgasm();
@@ -612,15 +612,9 @@ package classes.Scenes.Areas.Lake
 
 		internal function cultistBadEnd2():void
 		{
-			var genderTag:String = "";
+			var genderTag:String = player.mf("man", "woman");
 			outputText("On a hill sits a large cathedral overlooking a river that feeds into a massive lake.  It is a surprisingly grand structure in a land almost devoid of any signs of civilization in any direction.  The design is quite clear; its entrance lined with statues of lewd naked figures and its windows are made of stain glass depicting acts of sexuality.  Even without hearing the sounds of ecstasy that usually emanate from inside, it is quite clear this is a place of debauchery.\n\n", true);
 			outputText("Within, a ", false);
-			if (player.gender == 1) genderTag = "man";
-			if (player.gender == 2 || player.gender == 3) genderTag = "woman";
-			if (player.gender == 0) {
-				if (player.biggestTitSize() > 1) genderTag = "woman";
-				else genderTag = "man";
-			}
 			outputText(genderTag + " sits in the confessional.  It is clear this " + genderTag + "'s mind is devoid of conscious thoughts, but they have a clear purpose.  Feelings of anticipation and need surround this person as they open their mouth.  \"<i>Holy mother,</i>\" they speak to the woman sitting across from them with apprehension,\"<i>I have such strange thoughts and needs, they arouse me in ways that they probably shouldn't.  Is there anywhere where I can find my place?</i>\"\n\n\"<i>It's quite all right.</i>\" she replies.  \"<i>This is a sanctuary to those who have desires that others would call strange or bizarre, we welcome any who share our needs.  All that we ask is that you be willing to share those desires with those that you find.</i>\"  The other brightens and says, \"<i>Of course, I would love nothing more!</i>\"  The " + player.mf("man", "woman") + " who was once a champion and the fetish cultist who corrupted " + player.mf("him", "her") + " step out of the confessional, and soon the sounds of a massive orgy can be heard from the cathedral, as the followers of the fetish welcome their new member.\n\n", false);
 
 			outputText("Your mind has fallen prey to the followers of the fetish, and you are now one yourself.  You have completely forgotten who or what you were, including why you came to this world in the first place.  Perhaps the next champion will not lose their sense of self so easily.", false);

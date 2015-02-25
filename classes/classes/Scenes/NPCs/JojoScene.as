@@ -2384,7 +2384,7 @@ private function pureJojoSexMenu():void {
 	if (player.hasCock() && player.cockThatFits(capacity) >= 0) addButton(0, "Anal Pitch", anallyFuckTheMouseButtSlut, null, null, null, "Fuck the monk mouse-morph's butt.");
 	addButton(1, "Anal Catch", getAnallyFuckedByMouseYouSlut, null, null, null, "Have Jojo penetrate you anally.");
 	if (player.hasVagina()) addButton(2, "Vaginal Catch", getVagFuckedByMouse, null, null, null, "Have Jojo penetrate you vaginally.");
-	//addButton(3, "Blow Him", suckJojosCock, null, null, null, "Suck Jojo's cock and get a taste of mouse cum! (Placeholder)");
+	addButton(3, "Blow Him", suckJojosCock, null, null, null, "Suck Jojo's cock and get a taste of mouse cum!");
 	addButton(14, "Nevermind", jojoCampMenu);
 }
 
@@ -2452,7 +2452,7 @@ private function anallyFuckTheMouseButtSlut():void {
 	}
 	//The End
 	if (flags[kFLAGS.JOJO_SEX_COUNTER] >= 4) outputText("He plants a kiss on your lips.");
-	outputText("\n\nEventually, the two of you redress before returning to camp.");
+	outputText("\n\n\After a good while of rest, " + player.clothedOrNaked("the two of you get redressed and", "Jojo gets redressed and the two of you") + " return to your camp.");
 	dynStats("cor", -1);
 	flags[kFLAGS.JOJO_ANAL_XP]++;
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
@@ -2478,7 +2478,7 @@ private function getAnallyFuckedByMouseYouSlut():void {
 	if (player.hasVagina()) outputText("Your [pussy] spontaneously " + (player.averageVaginalWetness() >= 4 ? "sprays" : "leaks") + " juices all over the ground. ");
 	if (player.gender == 0) outputText("Your body rocks with ecstasy. ");
 	outputText("\n\nHis cock slides out of your [ass] with a pop. Cum start dripping out of your [ass]. \"<i>That was... You were amazing, [name].</i>\" You smile at him while rubbing your inflated belly and tell him he wasn’t too bad himself.");
-	outputText("\n\n\After a good while of rest, the two of you get redressed and return to your camp.");
+	outputText("\n\n\After a good while of rest, " + player.clothedOrNaked("the two of you get redressed and", "Jojo gets redressed and the two of you") + " return to your camp.");
 	dynStats("sens", 1, "cor", -1);
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	player.orgasm();
@@ -2500,7 +2500,7 @@ private function getVagFuckedByMouse():void {
 	outputText("\n\nJojo blows his load right into your [pussy]. His orgasm triggers yours too");
 	if (player.hasCock()) outputText(", with your [cocks] launching ropes of seed");
 	outputText(". Spent, Jojo lays on top of you and whispers into your ear, \"<i>It's good doing this. It's better than I expected.</i>\" You smile and relax for a while.");
-	outputText("\n\After a good while of rest, the two of you get redressed and return to your camp.");
+	outputText("\n\n\After a good while of rest, " + player.clothedOrNaked("the two of you get redressed and", "Jojo gets redressed and the two of you") + " return to your camp.");
 	dynStats("sens", 1, "cor", -1);
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82);
@@ -2512,8 +2512,17 @@ private function getVagFuckedByMouse():void {
 private function suckJojosCock():void {
 	jojoSprite();
 	clearOutput();
-	outputText("(Placeholder) You've got a tasty treat of Jojo's cum. ");
-	player.refillHunger(5);
+	outputText("You tell Jojo that you want to have a taste of his dick today. " + player.clothedOrNaked("You remove your [armor] and ") + "Jojo" + (flags[kFLAGS.JOJO_BLOWJOB_XP] > 0 ? "" : " hesitantly") + " drops his pants, revealing his flaccid, sheathed cock.");
+	outputText("\n\nYou approach him and position yourself before him, contemplating how to begin. You decide to tease Jojo as much as possible. You wrap your tongue around the head of his cock and start tugging at his sheathe. Instead of pulling his sheath back with your hands, you’re going to do it with your tongue. Eventually by your expert maneuvering of your tongue, his sheath is pulled back completely. The second the sheath was pulled back, the heady scent of Jojo’s animal musk almost overwhelmed you. You feel yourself getting warmer" + (player.gender > 0 ? ", " : "") + (player.hasCock() ? "your [cocks] leaking pre" : "") + (player.gender == 3 ? " and " : "") + (player.hasVagina() ? "your [pussy] leaking pre" : "") + ".");
+	outputText("\n\nYou look up at Jojo and when you see his pained expression, you felt the urge to tease him some more. You start licking his shaft from the cock head all the way to the balls. The first thing that hits you is the taste. Jojo’s cock tasted like sweat and old cheese which, surprisingly, tasted arousing. Combined with the heady scent of musk, it took all your self-control not to pounce on him. ");
+	outputText("\n\nJojo’s started moaning around the time you got to his balls. When you look up, you notice some pre coming out. You let go of his wet and started lapping up his precum. It tasted salty. Unnoticed to you, Jojo had been slowly moving his hand behind you. He suddenly grabs hold of your [hair] and forces your head back all the way to his hilt. Surprised, you try to force your head back, but Jojo holds you firmly. You look up at Jojo see him panting in arousal, his eyes unfocused. Damn, you pushed him too far. Oh well, you kind of like it rough anyway.");
+	outputText("\n\nInstead of resisting him, you start moving in time with him, deep-throating his tasty cock. Jojo start moaning louder and started rocking his hips back and forth rapidly. It felt like he was raping your throat. Panting, Jojo shouts “I’m gonna cum!” and pull your head forward as much as possible. Hot cum came gushing out like a hose, instantly distending your stomach. Jojo falls back, his cock spraying cum all over your [face] and running down your [fullchest].");
+	if (flags[kFLAGS.JOJO_BLOWJOB_XP] <= 0) outputText("\n\nJojo collapses on his back, winded. When he comes up, he says, \"<i>I can’t feel my legs... I don’t know what came over me, sorry [name].</i>\" You rub your full belly and smile and tell him he’ll have to make it up to you. He asks “How, I’ll do anything.” You tell him that the next time they eat it’s his treat. You lean in close and tell him that you prefer mouse-spunk. Jojo blushes and you lean back and says with a smile, \"<i>Um... sure. Since I made a promise, I’ll have to fulfill it.</i>\"");
+	else outputText("\n\nJojo collapses on his back, winded. When he comes up, you say that was delicious and to treat you next time as well. Jojo’s too tired to say anything, but smiles in response.");
+	outputText("\n\n\After a good while of rest, " + player.clothedOrNaked("the two of you get redressed and", "Jojo gets redressed and the two of you") + " return to your camp.");
+	if (jojoCumQ() < 2000) player.refillHunger(jojoCumQ() / 20);
+	else player.refillHunger(100);
+	flags[kFLAGS.JOJO_BLOWJOB_XP]++;
 	dynStats("lus", 5, "cor", -1);
 	player.slimeFeed();
 	doNext(camp.returnToCampUseOneHour);

@@ -246,7 +246,7 @@ public function settingsScreen():void
 		
 	outputText("\n\n");
 	
-	if (flags[kFLAGS.IMAGEPACK_OFF] < 1)
+	if (flags[kFLAGS.IMAGEPACK_OFF] == 0)
 	{
 		outputText("Image Pack: <font color=\"#008000\"><b>ON</b></font>\n Image pack is enabled.");
 	}

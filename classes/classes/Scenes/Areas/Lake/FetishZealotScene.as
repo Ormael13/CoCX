@@ -100,7 +100,7 @@ package classes.Scenes.Areas.Lake
 			//Set asside a varaible for this, its used a few times
 			if (broseph == "dude") {
 				//set the player's armor to their new male teacher outfit, see lower down for a full description.
-				if (player.armorValue <= 0) {
+				if (player.armor == armors.C_CLOTH) {
 					player.modArmorName = "formal vest, tie, and crotchless pants";  //can you think of a better way of putting this?
 				}
 				outputText("You smooth down your detached pants, and look at your exposed dick for a few moments, wondering if there was anything you said that may have upset him.  ", false);
@@ -108,7 +108,7 @@ package classes.Scenes.Areas.Lake
 			//no its a girl, or it looks like one
 			else {
 				//Set armour to female teacher outfit with no back side.
-				if (player.armorValue == 0) {
+				if (player.armor == armors.C_CLOTH) {
 					player.modArmorName = "backless female teacher's clothes";  // again, change this if you've got a better name
 				}
 				outputText("You smooth out your half-skirt, trying to busy yourself as you try to remember if there was anything you said to upset him.  ", false);
@@ -224,7 +224,7 @@ package classes.Scenes.Areas.Lake
 			player.orgasm();
 			dynStats("int", -1, "cor", 2);
 			//Trigger bad end if player's intelligence is less than 10 after being drained.
-			if (player.inte < 10) {
+			if (player.inte < 10 && rand(2) == 0) {
 				outputText("You find that your mind is unable to return to reality, and it moves on to another, then another.  Later you feel a female body come and pick you up, but you are too messed up to react to it...", false);
 				doNext(lake.fetishCultistScene.cultistBadEnd2);
 				return;
@@ -239,7 +239,7 @@ package classes.Scenes.Areas.Lake
 			//If there were changes to the player's chest
 			//same as cultist
 			//If armour is replaced
-			if (player.armorValue == 0) {
+			if (player.armor == armors.C_CLOTH) {
 				outputText("\n\nYou notice that you still have the " + player.armorName + " from the fantasy that your mind was trapped in, with no sign of your original clothes.", false);
 			}
 			//If armour is not replaced

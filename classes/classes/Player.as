@@ -1668,7 +1668,7 @@ use namespace kGAMECLASS;
 			return text;
 		}
 		
-		public function clothedOrNaked(clothedText:String, nakedText:String):String
+		public function clothedOrNaked(clothedText:String, nakedText:String = ""):String
 		{
 			return (armorDescript() != "gear" ? clothedText : nakedText);
 		}

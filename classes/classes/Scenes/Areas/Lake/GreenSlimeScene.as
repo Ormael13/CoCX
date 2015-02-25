@@ -692,7 +692,7 @@ private function oozeRapesYouVaginally():void
 
 internal function rapeOozeWithMilk():void {
 	clearOutput();
-	outputText("You look over the ooze, wondering what to do about your need to nurse now that it has lost cohesion. After a while of puzzling things out, you decide to wing it, removing the top of your " + player.armorName + " and pressing the mess of a monster to your " + breastDescript(0) + " and giving it a squeeze to get the milk to it. The slime responds almost immediately, applying pressure from the base of your " + breastDescript(0) + " to the tip of your " + nippleDescript(0) + ", earning it a shot of milk to your immense satisfaction. As it tends to your " + nippleDescript(0) + ", it slowly works its way down your body, almost lovingly ", false);
+	outputText("You look over the ooze, wondering what to do about your need to nurse now that it has lost cohesion. After a while of puzzling things out, you decide to wing it, " + player.clothedOrNaked("removing the top of your " + player.armorName + " and ") + "pressing the mess of a monster to your " + breastDescript(0) + " and giving it a squeeze to get the milk to it. The slime responds almost immediately, applying pressure from the base of your " + breastDescript(0) + " to the tip of your " + nippleDescript(0) + ", earning it a shot of milk to your immense satisfaction. As it tends to your " + nippleDescript(0) + ", it slowly works its way down your body, almost lovingly ", false);
 
 	// [If male- 
 	if(player.gender == 1) 
@@ -719,7 +719,7 @@ internal function rapeOozeWithMilk():void {
 	}
 	//[If Genderless- 
 	else {
-		outputText("caressing the blank spot where your genitalia should be despite your " + player.armorName + " still being in place. ", false);
+		outputText("caressing the blank spot where your genitalia should be" + player.clothedOrNaked(" despite your " + player.armorName + " still being in place") + ". ", false);
 		outputText("\n\n", false);
 		outputText("The barrage of pleasurable feelings causes you to fall over onto your " + buttDescript() + " and just soak in them, your hands ", false);
 	}
@@ -792,11 +792,7 @@ internal function rapeOozeWithMilk():void {
 
 		public function slimeLoss():void
 		{
-			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
-				doSFWloss();
-				cleanupAfterCombat();
-				return;
-			}
+			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			doNext(1);
 			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
