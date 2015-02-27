@@ -59,7 +59,7 @@ package classes {
 				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
-				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger.
+				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 hours with Survivalist perks.
 				if (player.hunger > 50)
 				{
 					player.hunger -= (0.5 * multiplier);
@@ -68,7 +68,7 @@ package classes {
 				{
 					player.hunger -= (0.5 * multiplier);
 				}
-				if (player.hunger > 0 && player.armorName != "goo armor")
+				if (player.hunger > 0)
 				{
 					player.hunger -= (0.5 * multiplier);
 				}
@@ -110,8 +110,9 @@ package classes {
 					if (player.hunger < 20)
 					{
 						outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your skin.");
+						player.hunger = 25;
 					}
-					player.hunger = 25;
+					if (player.hunger < 25) player.hunger = 25; 
 				}
 			}
 			//Corruption check for achievement.

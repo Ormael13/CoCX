@@ -20,7 +20,7 @@ package classes.Scenes.Areas.GlacialRift
 		public function winAgainstGiant():void {
 			kGAMECLASS.tooltipLoc = "FrostGiant"
 			outputText("The giant staggers and falls down on his knees. You wonder what you should do next.\n\n", true);
-			if (player.weaponName == "fists" && player.armorName == "comfortable underclothes" && player.jewelryName == "nothing") awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
+			if (player.weaponName == "fists" && player.armor.name == "nothing" && player.shieldName == "nothing") awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
 			menu();
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);

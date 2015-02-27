@@ -2711,8 +2711,8 @@ package classes.Scenes.NPCs
 				if(flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE] > 0) {
 					outputText("She has " + amilyBalls() + " dangling ", false);
 					if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("underneath her shaft", false);
-					else outputText("from her groin.", false);
-					outputText("\n\n", false)
+					else outputText("from her groin", false);
+					outputText(".\n\n", false)
 				}
 				outputText("Amily has a little pink pussy in between her legs; "+stopSayingNetherlipsFuck+".", false);
 			}
@@ -3290,6 +3290,11 @@ package classes.Scenes.NPCs
 				addButton(7, "Suc. Delite", giveCorruptAmilySuccubusDelight);
 				haveGift = true;
 			}
+			if (player.hasItem(consumables.PSDELIT)) {
+				if (flags[kFLAGS.AMILY_FOLLOWER] == 1) addButton(7, "P. Suc. Delite", giveAmilyPureSuccubusDelight);
+				else addButton(7, "P. Suc. Delite", giveCorruptAmilySuccubusDelight);
+				haveGift = true;
+			}
 			if (player.hasItem(armors.C_CLOTH)) {
 				addButton(8, "Clothes", giveAmilySomePants);
 				haveGift = true;
@@ -3585,33 +3590,43 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.AMILY_NOT_FURRY] == 0)
 				footpaw += "paw";
 			if(flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE] == 0) {
-				player.consumeItem(consumables.SDELITE);
-				outputText("You tell her you need her to be able to cum more, so balls would help with that. Amily smiles and says, \"<i>Of course, " + player.mf("master","mistress") + ". Forgive your stupid mouse slut for questioning you.</i>\"\n\n", false);
-				outputText("She opens her legs so you can watch and downs the bottle in one go.", false);
-				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("Her cock grows hard, but nothing else seems to happen...", false);
-				outputText("\n\n", false);
+				if (flags[kFLAGS.AMILY_FOLLOWER] == 2) {
+					if (player.hasItem(consumables.SDELITE)) player.consumeItem(consumables.SDELITE);
+					else player.consumeItem(consumables.PSDELIT);
+					outputText("You tell her you need her to be able to cum more, so balls would help with that. Amily smiles and says, \"<i>Of course, " + player.mf("master","mistress") + ". Forgive your stupid mouse slut for questioning you.</i>\"\n\n", false);
+					outputText("She opens her legs so you can watch and downs the bottle in one go.", false);
+					if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("Her cock grows hard, but nothing else seems to happen...", false);
+					outputText("\n\n", false);
 
-				outputText("You decide she needs a little push if she's going to have balls. \"<i>Lay down bitch,</i>\" you order her; being called a bitch only makes her smile as she complies.\n\n", false);
+					outputText("You decide she needs a little push if she's going to have balls. \"<i>Lay down bitch,</i>\" you order her; being called a bitch only makes her smile as she complies.\n\n", false);
 
-				//[=Cock=]
-				if(player.hasCock() && (player.gender == 1 || rand(2) == 0)) {
-					outputText("You drop your pants and stand over her, your cock hardening at what you're about to do. \"<i>Pleasure me.</i>\" You order Amily. She lifts a "+footpaw+" and begins stroking your exposed " + cockDescript(0) + "; she takes utmost care not to hurt you with her claws as she grips your shaft expertly between her toes. Her first "+footpaw+" is soon joined by her other one and together she begins nimbly masturbating you, giving you an expert footjob. No doubt she's been practicing; you'll have to reward her for this later.\n\n", false);
+					//[=Cock=]
+					if(player.hasCock() && (player.gender == 1 || rand(2) == 0)) {
+						outputText("You drop your pants and stand over her, your cock hardening at what you're about to do. \"<i>Pleasure me.</i>\" You order Amily. She lifts a "+footpaw+" and begins stroking your exposed " + cockDescript(0) + "; she takes utmost care not to hurt you with her claws as she grips your shaft expertly between her toes. Her first "+footpaw+" is soon joined by her other one and together she begins nimbly masturbating you, giving you an expert footjob. No doubt she's been practicing; you'll have to reward her for this later.\n\n", false);
 
-					outputText("You focus your corruptive powers, and a dollop of black pre forms on your tip; it slides over your shaft and lubes your " + cockDescript(0) + ", allowing Amily to better stroke you. You can feel your orgasm coming fast, and you tell Amily to stop and open wide. She spreads her legs as far as they will go and watches, panting, as you finish yourself off. You shoot jet after jet of black cum all over her crotch. Amily moans with every jet that is spilled onto her corrupt form, relishing in the warmth that spreads throughout her.\n\n", false);
+						outputText("You focus your corruptive powers, and a dollop of black pre forms on your tip; it slides over your shaft and lubes your " + cockDescript(0) + ", allowing Amily to better stroke you. You can feel your orgasm coming fast, and you tell Amily to stop and open wide. She spreads her legs as far as they will go and watches, panting, as you finish yourself off. You shoot jet after jet of black cum all over her crotch. Amily moans with every jet that is spilled onto her corrupt form, relishing in the warmth that spreads throughout her.\n\n", false);
+					}
+					//[=Pussy=]
+					else {
+						outputText("You drop your pants and stand over her, your pussy moistening at what you're about to do. \"<i>Pleasure me,</i>\" you order Amily. Her tail lifts itself towards your pussy and begins rubbing against your lip and clit, drawing a moan of pleasure from you. Soon the spaded tip presses against your " + vaginaDescript(0) + " and pushes into your depths. Amily begins expertly tail-fucking you, spinning her tail around like it was a tongue, licking at every inch of your depths. Soon the first gush of fluids spill onto her tail, lubing it up and making Amily's job easier as she pleasures you with a grin.\n\n", false);
+
+						outputText("You focus your corruptive powers, imagining Amily with huge balls, producing delicious cum that she will spill at your command. The mouse cumslut becoming more and more of a toy; the only purpose in her life, to obey and pleasure you. You order her to withdraw; she complies reluctantly, and watches as you finish yourself off. A veritable tide of black juices spills from your " + vaginaDescript(0) + " to hit her groin. Amily moans with every jet that is spilled on her corrupt form, relishing in the warmth that spreads throughout her.\n\n", false);
+
+					}
+					outputText("You watch, smiling, as a couple of " + ((flags[kFLAGS.AMILY_NOT_FURRY]==0) ? "lumps begin forming" :"fuzzy lumps begin forming"), false);
+					if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("right under her cock. Her skin grows and covers the base of her cock, pulling it in; giving her what looks like a sheath. It continues to expand and is finally complimented by a couple of orbs falling into her " + ((flags[kFLAGS.AMILY_NOT_FURRY]==0) ? "fuzzy " :"") + "sack, giving it the weight it needs to produce more cum. ", false);
+					else outputText("between her legs. Her skin expands with the lumps, forming into a small sack. It continues to expand and is finally complimented by a couple of orbs falling into her " + ((flags[kFLAGS.AMILY_NOT_FURRY]==0) ? "fuzzy " :"") + " nutsack, giving it the weight it needs to produce cum, though how it will ever expel it is a mystery to you. ", false);
+					outputText("\"<i>Good. Now, I want you to practice walking with these. I can't have you hurting yourself as you walk about,</i>\" you tell her. \"<i>Yes, " + player.mf("master","mistress") + "</i>\,\" she replies, panting slightly; you leave her prone on the ground.", false);
+					player.orgasm();
+					flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE]++;
 				}
-				//[=Pussy=]
 				else {
-					outputText("You drop your pants and stand over her, your pussy moistening at what you're about to do. \"<i>Pleasure me,</i>\" you order Amily. Her tail lifts itself towards your pussy and begins rubbing against your lip and clit, drawing a moan of pleasure from you. Soon the spaded tip presses against your " + vaginaDescript(0) + " and pushes into your depths. Amily begins expertly tail-fucking you, spinning her tail around like it was a tongue, licking at every inch of your depths. Soon the first gush of fluids spill onto her tail, lubing it up and making Amily's job easier as she pleasures you with a grin.\n\n", false);
+					player.consumeItem(consumables.PSDELIT);
+					outputText("Assuring her that this is what you want, you pass it over. Amily takes it reluctantly, then downs it, shuddering - first in disgust at what she actually drank, then with pleasure. Moaning ecstatically, she pulls off her pants to give you a full view as lumps grow in her groin just under her penis. It eventually shifts until a duo of testicles form completely.\n\n", false);
 
-					outputText("You focus your corruptive powers, imagining Amily with huge balls, producing delicious cum that she will spill at your command. The mouse cumslut becoming more and more of a toy; the only purpose in her life, to obey and pleasure you. You order her to withdraw; she complies reluctantly, and watches as you finish yourself off. A veritable tide of black juices spills from your " + vaginaDescript(0) + " to hit her groin. Amily moans with every jet that is spilled on her corrupt form, relishing in the warmth that spreads throughout her.\n\n", false);
-
+					outputText("Catching her breath, she stares at her new balls with an unreadable expression, then pulls her clothes back on with a grimace. You decide to give her some time alone to adjust to the change.", false);
+					flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE]++;
 				}
-				outputText("You watch, smiling, as a couple of " + ((flags[kFLAGS.AMILY_NOT_FURRY]==0) ? "lumps begin forming" :"fuzzy lumps begin forming"), false);
-				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("right under her cock. Her skin grows and covers the base of her cock, pulling it in; giving her what looks like a sheath. It continues to expand and is finally complimented by a couple of orbs falling into her " + ((flags[kFLAGS.AMILY_NOT_FURRY]==0) ? "fuzzy " :"") + "sack, giving it the weight it needs to produce more cum. ", false);
-				else outputText("between her legs. Her skin expands with the lumps, forming into a small sack. It continues to expand and is finally complimented by a couple of orbs falling into her " + ((flags[kFLAGS.AMILY_NOT_FURRY]==0) ? "fuzzy " :"") + " nutsack, giving it the weight it needs to produce cum, though how it will ever expel it is a mystery to you. ", false);
-				outputText("\"<i>Good. Now, I want you to practice walking with these. I can't have you hurting yourself as you walk about,</i>\" you tell her. \"<i>Yes, " + player.mf("master","mistress") + "</i>\,\" she replies, panting slightly; you leave her prone on the ground.", false);
-				player.orgasm();
-				flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE]++;
 			}
 			//Too much
 			else if(flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE] >= 6) {
@@ -3640,7 +3655,39 @@ package classes.Scenes.NPCs
 			}
 			else amilyDrinksSuccubusDelight();
 		}
+		public function giveAmilyPureSuccubusDelight():void {
+			clearOutput();
+			amilySprite();
+			//Doesn't matter if purified or not, she takes it the same way.
+			//Amily must have a dick before she can take Succubus' Delight
+			//Maximum size is cantaloupe-sized (size 6)
+			//No balls yet?  QUERY!
+			//if(flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE] == 0) {
+				outputText("You offer up the vial of purified Succubi's Delight - and Amily promptly leaps back with a shrill squeak that borders on a scream in terms of volume.\n\n", false);
 
+				outputText("\"<i>That's liquid corruption!</i>\" She protests. \"<i>Have you gone insane? I'm not drinking that, and you shouldn't either!</i>\"\n\n", false);
+
+				outputText("You hastily assure her that it is purified and so neither of you have to worry about joining the ranks of the demons. She still looks skeptical, but then nods slowly and approaches you.\n\n", false);
+
+				if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE] == 0) {
+					outputText("\"<i>All right... but, are you sure you want to give that to me? You know it will make me grow balls, right?</i>\"\n\n", false);
+					doYesNo(amilyDrinksSuccubusDelight, amilyFollowerEncounter);
+					return;
+				}
+				else if (flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE] > 0) {
+					outputText("\"<i>All right... but, I don't want to grow my balls any bigger. Sorry.</i>\"\n\n", false);
+					doNext(amilyFollowerEncounter);
+					return;
+				}
+				else {
+					outputText("\"<i>All right... but, I don't have a penis. Otherwise, I wouldn't be able to cum. Sorry.</i>\"\n\n", false);
+					doNext(amilyFollowerEncounter);
+				}
+				
+			//}
+			//else amilyDrinksSuccubusDelight();
+		}
+		
 		//[Pink Egg - Requires Amily be a Herm]
 		public function giveAmilyAPinkEgg():void {
 			clearOutput();
@@ -3659,6 +3706,7 @@ package classes.Scenes.NPCs
 			else player.consumeItem(consumables.L_PNKEG);
 			flags[kFLAGS.AMILY_WANG_LENGTH] = 0;
 			flags[kFLAGS.AMILY_WANG_GIRTH] = 0;
+			flags[kFLAGS.AMILY_HAS_BALLS_AND_SIZE] = 0;
 			doNext(amilyFollowerEncounter);
 		}
 		//[White Egg]

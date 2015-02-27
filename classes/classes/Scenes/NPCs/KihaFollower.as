@@ -754,6 +754,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			addButton(4, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
 			if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha, null, null, null, "Request her to stop guarding.");
 			else addButton(8,"Guard Camp",guardMyCampKiha, null, null, null, "Request her to guard your camp.");
+			if (player.hasItem(undergarments.SSPANTY)) addButton(5, "Give Panties", null, null, null, null, "Give Kiha a pair of spider-silk panties?");
 			addButton(14,"Leave", leave);
 			return;
 		}
