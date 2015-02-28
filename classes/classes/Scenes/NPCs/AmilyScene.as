@@ -146,6 +146,9 @@ package classes.Scenes.NPCs
 				kGAMECLASS.followerInteractions.amilyUrtaMorningAfter();
 				return true;
 			}
+			if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && model.time.hours == 6 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_SKULLS] < 100 && rand(3) == 0) {
+				flags[kFLAGS.CAMP_WALL_SKULLS]++;
+			}
 			return false;
 		}
 		//End of Interface Implementation

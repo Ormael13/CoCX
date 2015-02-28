@@ -4766,6 +4766,13 @@
 				changes++;
 				player.hairType = 0;
 			}
+			//Remove anemone hair
+			if (changes < changeLimit && player.hairType == 4 && rand(3) == 0) {
+				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
+				outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your tentacle-hair, only to find out that the tentacles have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
+				player.hairType = 0;
+				changes++;
+			}
 			//-----------------------
 			// EXTRA PARTS REMOVAL
 			//-----------------------

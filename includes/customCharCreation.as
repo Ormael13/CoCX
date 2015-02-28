@@ -128,10 +128,10 @@ public function customPCSetup():void {
 		flags[kFLAGS.VAPULA_FOLLOWER] = 1;
 		
 		// Amily
-		flags[kFLAGS.AMILY_FOLLOWER] = 2;
+		//flags[kFLAGS.AMILY_FOLLOWER] = 2;
 		
 		// Jojo
-		monk = 5;
+		//monk = 5;
 		
 		// Bimbo Sophie
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;

@@ -594,14 +594,17 @@ public function doCamp():void {
 	if(player.findStatusAffect(StatusAffects.DefenseCanopy) >= 0) {
 		outputText("A thorny tree has sprouted near the center of the camp, growing a protective canopy of spiky vines around the portal and your camp.  ", false);
 	}
-	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 20 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) outputText("Thick wooden wall have been erect. It is not complete but it does provide some defense.  ");
+	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 20 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 20 == 0) outputText("A thick wooden wall have been erect to provide a small amount of defense.  ");
+		else outputText("Thick wooden wall have been erect to provide some defense.  ");
+	}
 	else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
-		outputText("Thick wooden wall has been erect; it surrounds one half of your camp perimeter.  ");
-		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the wall that gets closed at night to keep any invaders out.  ");
+		outputText("Thick wooden walls have been erect; they surround one half of your camp perimeter and provide good defense.  ");
+		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the walls; it gets closed at night to keep any invaders out.  ");
 		if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
 			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted near the gateway");
 			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5) outputText("Few imp skulls have been mounted near the gateway");
-			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 10) outputText("Several imp skulls have been mounted near the gateway");
+			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 15) outputText("Several imp skulls have been mounted near the gateway");
 			else outputText("Many imp skulls decorate the gateway and wall, some even impaled on wooden spikes");
 			outputText(" to serve as deterrence.  ");
 			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");

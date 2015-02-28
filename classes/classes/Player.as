@@ -1660,7 +1660,7 @@ use namespace kGAMECLASS;
 			//Show upper undergarment first.
 			if (upperGarment != UndergarmentLib.NOTHING) text += upperGarmentName;
 			//Join if you're wearing both.
-			if (upperGarment != UndergarmentLib.NOTHING && lowerGarment != UndergarmentLib.NOTHING && armor != ArmorLib.NOTHING) text += " and ";
+			if (upperGarment != UndergarmentLib.NOTHING && lowerGarment != UndergarmentLib.NOTHING) text += " and ";
 			//Show lower undergarment last.
 			if (lowerGarment != UndergarmentLib.NOTHING) text += lowerGarmentName;
 			//Naked?

@@ -1017,19 +1017,7 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) outputText("I know the girls would love to see you again. ");
 			outputText("You can be sure that I'll be eagerly looking forward to your next visit my love.</i>\" You give her a last-minute hug, promising that you'll be back as soon as time permits.");
 			player.orgasm();
-			//Chance of getting Minerva PREGNANT!
-			var chance:Number = 10;
-			chance += Math.sqrt(player.cumQ());
-			if (chance > 40) chance = 40;
-			chance += player.virilityQ() * 100;
-			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) chance -= (flags[kFLAGS.MINERVA_CHILDREN] * 2); //Diminishing returns. The more the children, the harder it is to get her pregnant.
-			//Chance is between 10 and 75 percent.
-			if (chance < 10) chance = 10;
-			if (chance > 80) chance = 80;
-			if (rand(100) <= chance) {
-				trace("Minerva got PREGNANT!");
-				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
-			}
+			tryToImpregnateMinerva();
 			dynStats("lus", 20);
 			doNext(camp.returnToCampUseOneHour);			
 		}
@@ -1096,19 +1084,7 @@ package classes.Scenes.Areas.HighMountains
 			//PC returns to camp
 			dynStats("sen", -1);
 			player.orgasm();
-			//Chance of getting Minerva PREGNANT!
-			var chance:Number = 10;
-			chance += Math.sqrt(player.cumQ());
-			if (chance > 40) chance = 40;
-			chance += player.virilityQ() * 100;
-			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) chance -= (flags[kFLAGS.MINERVA_CHILDREN] * 2); //Diminishing returns. The more the children, the harder it is to get her pregnant.
-			//Chance is between 10 and 75 percent.
-			if (chance < 10) chance = 10;
-			if (chance > 80) chance = 80;
-			if (rand(100) <= chance) {
-				trace("Minerva got PREGNANT!");
-				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
-			}
+			tryToImpregnateMinerva();
 			dynStats("lus", 20);
 			if(getGame().inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
@@ -1509,7 +1485,7 @@ package classes.Scenes.Areas.HighMountains
 			if (!repeat) {
 				outputText("Looking over the ecstatic siren you could swear she is even happier than before, her belly having doubled in size from before, her gravid form seeming to radiate the joy she feels, her wings fluttering restlessly as if she wants to just take to the air in happiness. Though her belly is growing larger by the day Minerva seems to take it easily, her fertile curvy body seemingly molded and crafted to carry and birth her young with ease, and with such wide hour-glassy hips like hers, childbirth itself should be relatively easier on her. Seeing your eyes wander up and down her body like that brings a blush to her face, the motherly siren looks down at her swollen body and gently rubs the sign of her pregnancy, her touch looking so gentle, like caresses of wonder and reverence.");
 				outputText("\n\nWhat with how your last visit went you were sure that she would have immediately tacked you in her joy, unfortunately for you her restlessness and sheer delight could no longer be contained. Letting out a high pitched squeal before running to you, arms spread out she tackles you once again, grabbing you up in a bone crushing hug before spinning the both of you around and around and pulling you into a kiss, a deep hot tongue filled kiss. Her succulent black lips pressed against yours, her long prehensile tongue slithering into your mouth and nearly going down your throat, her hands squeezing you against her voluptuous form. The great swell of her breasts pressing against your " + player.chestDesc() + " her tail even coming around to wrap itself around your " + player.legs() + ". The tight, squeezing, joyful embrace lasting what seems like an eternity, the kiss going on and on as Minerva desperately tries to show you how happy she is to be pregnant with your child, or children judging by the size of her stomach.");
-				outputText("\n\nFinally the ache for air wins and the kiss breaks with a wet pop, Minerva's long tongue sliding back inside her mouth before she beams a great sharky grin to you. Leaning in she nuzzles your neck fervently, planting little kisses all over as she presses the swell of her belly against you, letting you feel the product of your fertility and bond with the broodmother. \"<i>Oh darling, oh lover, I just, I can't help it. When you're here and me like this, my tummy so swollen with your children, i just, this is what I have dreamed of. Having a family and your giving me it.</i>\" she says before resting her head on your shoulder, her face buried in your neck and taking in your scent.");
+				outputText("\n\nFinally the ache for air wins and the kiss breaks with a wet pop, Minerva's long tongue sliding back inside her mouth before she beams a great sharky grin to you. Leaning in she nuzzles your neck fervently, planting little kisses all over as she presses the swell of her belly against you, letting you feel the product of your fertility and bond with the broodmother. \"<i>Oh darling, oh lover, I just, I can't help it. When you're here and me like this, my tummy so swollen with your children, i just, this is what I have dreamed of. Having a family and you're giving me it.</i>\" she says before resting her head on your shoulder, her face buried in your neck and taking in your scent.");
 				outputText("\n\nOnce again on your back with the loving siren woman pressed against you, clinging to you like some breasty hug monster, the tight soft embrace so enticing and warm, it would be hard to pull yourself away even if Minerva didn't have you in such a tight grip. Clearly wanting to snuggle with the father of her children for a while, it's unlikely she will; be letting go anytime soon, and so you resign yourself to your fate of being hugged and cuddled by the busty pregnant broodmother. The  huggy herm pulling you into another, though more gentle, kissing session.");
 				outputText("\n\nOnce again nearly an hour passes, your time spent in the embrace filled with gentle stroking, kisses, both gentle and tongue tangling, the cool soft cuddle so relaxing you nearly fall asleep, though with all the kisses your kept awake and active throughout. Pulling her lips back from you she slides a hand to your cheek and smiles to you warmly before whispering to you \"<i>I'm sorry for keeping you like this for so long, I'm just, you don't know just how happy you've made me.</i>\" Looking down at you she locks eyes with you, her golden-amber eyes alight with the pure fire of her emotions. \"<i>I know I have said it before my love, but I must tell you again, I love you, I swear that I will sing for you and you alone, none else, for you I would love nothing more than to carry your young forever, For you I will birth all the babies you want, I'll never deny you.</i>\" her words ring true, so passionate and unwavering, you can tell that she is absolutely serious.");
 				outputText("\n\nGiving you one final kiss on the lips before finally disentangling herself from you and helping you up, her face brightened by her blush, that grin on her face seemingly unable to be removed. \"<i>Mhm thank you for spending this time with me my love. Even now words fail me, there is no way to describe how happy you have made me for blessing me...mhm...no.</i>\" Minerva stops and pulls you closer, leaning in herself to plant the sweetest of kisses on your lips before continuing. \"<i>Blessing us with the precious gift that's growing inside me.</i>\" she strokes your cheek softly, holding you there for a moment. \"<i>I know you have to go, back to your important champion duties I know, but... just make sure you come back soon, I wouldn't want you to miss the birth of your your baby, or babies by the looks of it.</i>\" she says with a very happy tone, clearly overjoyed at the idea of having more than one growing inside her. Giving you one final long tongue filled kiss she lets you go so that you can head back to your camp.");
@@ -1700,6 +1676,22 @@ package classes.Scenes.Areas.HighMountains
 			flags[kFLAGS.MINERVA_CHILDREN] += 2;
 			flags[kFLAGS.TIMES_BIRTHED_SHARPIES]++;
 			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function tryToImpregnateMinerva():void {
+			//Chance of getting Minerva PREGNANT!
+			var chance:Number = 10;
+			chance += Math.sqrt(player.cumQ());
+			if (chance > 50) chance = 50;
+			chance += player.virilityQ() * 100;
+			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) chance -= (flags[kFLAGS.MINERVA_CHILDREN] * 2); //Diminishing returns. The more the children, the harder it is to get her pregnant.
+			//Chance is between 10 and 75 percent.
+			if (chance < 10) chance = 10;
+			if (chance > 80) chance = 80;
+			if (rand(100) <= chance) {
+				trace("Minerva got PREGNANT!");
+				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
+			}
 		}
 	}
 

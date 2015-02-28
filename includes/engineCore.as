@@ -2079,7 +2079,7 @@ public function displayStats(e:MouseEvent = null):void
 		childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
 		
 	if (flags[kFLAGS.JOJO_LITTERS] > 0)
-		childStats += "<b>Litters with Jojo:</b> " + flags[kFLAGS.JOJO_LITTERS] + "\n";
+		childStats += "<b>Litters With Jojo:</b> " + flags[kFLAGS.JOJO_LITTERS] + "\n";
 		
 	if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";

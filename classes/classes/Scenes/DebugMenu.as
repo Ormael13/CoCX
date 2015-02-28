@@ -699,7 +699,9 @@ package classes.Scenes
 		}
 		
 		private function saveFlag(flagId:int = 0):void {
-			flags[flagId] = mainView.nameBox.text;
+			var temp:* = Number(mainView.nameBox.text);
+			if (temp is Number || temp is int) flags[flagId] = temp;
+			else flags[flagId] = mainView.nameBox.text;
 			flagEditor();
 		}
 	}
