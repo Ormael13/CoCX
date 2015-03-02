@@ -2050,10 +2050,10 @@ public function wakeFromBadEnd():void {
 	player.gems = Math.round(player.gems * 0.9);
 	player.XP -= player.level * 10;
 	if (player.XP < 0) player.XP = 0;
-	if (player.str > 20) dynStats("str", Math.ceil(player.str * 0.05));
-	if (player.tou > 20) dynStats("tou", Math.ceil(player.tou * 0.05));
-	if (player.spe > 20) dynStats("spe", Math.ceil(player.spe * 0.05));
-	if (player.inte > 20) dynStats("int", Math.ceil(player.inte * 0.05));
+	if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.05));
+	if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.05));
+	if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.05));
+	if (player.inte > 20) dynStats("int", Math.ceil(-player.inte * 0.05));
 
 	menu();
 	addButton(0, "Next", eventParser, 1);
