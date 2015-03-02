@@ -270,53 +270,22 @@ public function benoitIntro():void {
 		}
 	}
 
-	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && flags[kFLAGS.BENOIT_STATUS] == 0)
-	{
-		suggest = eggySuggest;
-		suggestText = "Suggest";
-	}
-	
-	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
-	{
-		suggest = femoitSexIntro;
-		suggestText = "Sex";
-	}
-
 	flags[kFLAGS.TIMES_IN_BENOITS]++;
-	
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) womb = tryToConvertToBassyWomb;
 
-	var fem:Function;
-
-	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0)
-	{
-		// Only available if the player hasn't since fucked Benoit after unlocking the option.
-		//Fuck the requirement.
-		//if (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0)
-		///{
-			fem = benoitFeminise;
-		//}
-	}
-
-	choices("Buy", benoitsBuyMenu, 
-			"Sell", benoitSellMenu, 
-			"Talk", talkToBenoit, 
-			suggestText, suggest, 
-			"Basil. Womb", womb, 
-			"Feminize", fem, 
-			"", 0, 
-			"", 0, 
-			"", 0, 
-			"Leave", bazaar.enterTheBazaar);
-			
-	//Hermaphrodite Benoite
-	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) {
-		addButton(5, "Herminize", benoitHerminise);
-	}
-	if (flags[kFLAGS.BENOIT_STATUS] == 3) {
-		if (player.hasCock() && player.lust >= 33) addButton(3, "Sex", femoitSexIntro);
-		if (player.hasVagina() && flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0) addButton(4, "Suggest", eggySuggest);
-	}
+	menu();
+	//Core buttons
+	addButton(0, "Buy", benoitsBuyMenu);
+	addButton(1, "Sell", benoitSellMenu);
+	addButton(2, "Talk", talkToBenoit);
+	addButton(14, "Leave", bazaar.enterTheBazaarAndMenu);
+	//Feminize & Herminize
+	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(3, "Feminize", benoitFeminise);
+	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) addButton(3, "Herminize", benoitHerminise);
+	//Basilisk Womb
+	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
+	//Suggest & sex
+	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
+	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33) addButton(6, "Sex", femoitSexIntro);
 }
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
 private function buyOrSellExplanationFirstTime():void {
@@ -1679,7 +1648,7 @@ public function femoitSexIntro():void
 
 			outputText("\n\n\"<i>Zis a good idea.</i>\" the basilisk says.  \"<i>Zat way, I can still lay eggs and you get to lay eggs.</i>\"  She lapses into silence as you grab a glass bottle from a nearby shelf and a wooden spoon from a container full of old utensils, and begin to mix the various ingredients together.  You pour the liquids into the glass bottle.  Carefully you drip in the reptilum whilst continuing to stir and; eventually the liquid in front of you takes on a livid lime color.  You shake the bottle to get it well-mixed.  When the scent changes to that of cooking sherry you stop and step back to admire your handiwork, before pushing the bowl gently across the counter until it touches the basilisk's claws.  She slowly clasps her fingers around it, staring blindly into the concoction.");
 
-			outputText("\n\nYou instruct her to drink the concoction.  She nods and slowly drinks the concoction until the bottle is empty.  \"<i>I can feel it...</i>\" she slowly mutters.  A bulge starts to form under her robes. \"<i>Ohhh... It is coming!</i>\" she announces.  She opens her robes to reveal her new reptilian prick and a set of balls just above her vagina.  \"<i>Thank you.  Wis that, I can help you to lay some eggs,<i>\" she says.");
+			outputText("\n\nYou instruct her to drink the concoction.  She nods and slowly drinks the concoction until the bottle is empty.  \"<i>I can feel it...</i>\" she slowly mutters.  A bulge starts to form under her robes. \"<i>Ohhh... It is coming!</i>\" she announces.  She opens her robes to reveal her new reptilian prick and a set of balls just above her vagina.  \"<i>Thank you.  Wis that, I can help you to lay some eggs,</i>\" she says.");
 			
 			outputText("\n\nYou assure her that she can do it someday when you're ready.");
 			flags[kFLAGS.BENOIT_STATUS] = 3; //Hermaphrodite Benoite.

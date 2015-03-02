@@ -599,7 +599,7 @@ public function doCamp():void {
 		else outputText("Thick wooden wall have been erect to provide some defense.  ");
 	}
 	else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
-		outputText("Thick wooden walls have been erect; they surround one half of your camp perimeter and provide good defense.  ");
+		outputText("Thick wooden walls have been erect; they surround one half of your camp perimeter and provide good defense, leaving the other half open for access to the stream.  ");
 		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the walls; it gets closed at night to keep any invaders out.  ");
 		if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
 			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted near the gateway");
@@ -1826,7 +1826,7 @@ private function callRathazulAndEscapeBadEnd():void {
 	if (player.ballSize > 18 + (player.str/2)) player.ballSize = 17 + (player.str/2)
 	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ", false);
-	outputText("\"<i>Try not to make your balls bigger. If it happens, make sure you have Reducto, </i>\" he says.  He returns to his alchemy equipment, working on who knows what.\n\n", false)
+	outputText("\"<i>Try not to make your balls bigger. If it happens, make sure you have Reducto,</i>\" he says.  He returns to his alchemy equipment, working on who knows what.\n\n", false)
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2029,17 +2029,32 @@ public function wakeFromBadEnd():void {
 	if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine; you've just had a nightmare.");
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2))) {
-		outputText("\n\nYou realize the consequences of having oversized balls. You need to shrink it right away. Reducto will do.");
+		outputText("\n\nYou realize the consequences of having oversized balls and you NEED to shrink it right away. Reducto will do.");
 		player.ballSize = (15 + (player.str / 2));
 	}
 	outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
+	//Skip time forward
 	model.time.days += 1;
-	model.time.hours = 6;
+	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
+	else model.time.hours = 6;
+	//Set so you're in camp.
 	kGAMECLASS.inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
 	getGame().inCombat = false;
+	//Restore stats
 	player.HP = player.maxHP();
+	player.fatigue = 0;
+	statScreenRefresh();
+	//PENALTY!
+	player.gems = Math.round(player.gems * 0.9);
+	player.XP -= player.level * 10;
+	if (player.XP < 0) player.XP = 0;
+	if (player.str > 20) dynStats("str", Math.ceil(player.str * 0.05));
+	if (player.tou > 20) dynStats("tou", Math.ceil(player.tou * 0.05));
+	if (player.spe > 20) dynStats("spe", Math.ceil(player.spe * 0.05));
+	if (player.inte > 20) dynStats("int", Math.ceil(player.inte * 0.05));
+
 	menu();
 	addButton(0, "Next", eventParser, 1);
 }

@@ -265,6 +265,7 @@ public static const PIERCING_TYPE_CHAIN:int                                     
 
 // vaginatypesNOPEDISABLED
 public static const VAGINA_TYPE_HUMAN:int                                           =   0;
+public static const VAGINA_TYPE_EQUINE:int                                          =   1;
 public static const VAGINA_TYPE_BLACK_SAND_TRAP:int                                 =   5;
 
 // vaginalWetness

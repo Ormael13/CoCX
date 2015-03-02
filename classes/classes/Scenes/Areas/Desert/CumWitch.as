@@ -7,7 +7,7 @@ package classes.Scenes.Areas.Desert
 	{
 		public function cumWitchAI():void {
 			//Hurt!
-			if(HPRatio() < .6) {
+			if(HPRatio() < .6 && fatigue <= 90) {
 				sandWitchCuntHeals();
 				return;
 			}
@@ -145,7 +145,7 @@ package classes.Scenes.Areas.Desert
 		public function sandWitchCuntHeals():void {
 			outputText("The Witch smirks at you and holds her free hand under her robes.  When she pulls it out, you realize she's gathered a handful of her cum.  She holds it up and exhales over it, the air making a slight whistle as it blows through her parted lips.  The ebony sorceress then smears the goop over her wounds, which seem to drink in the cum and vanish before your eyes.  She scolds, \"<i>Physical damage?  How artless.</i>\"");
 			addHP(eMaxHP()*0.33);
-			fatigue
+			fatigue += 10;
 			combatRoundOver();
 		}
 		

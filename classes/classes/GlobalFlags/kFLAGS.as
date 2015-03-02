@@ -2194,7 +2194,7 @@ public static const JOJO_ANAL_XP:int                                            
 public static const JOJO_LITTERS:int                                                = 2186;
 public static const JOJO_BLOWJOB_XP:int                                             = 2187;
 public static const JOJO_VAGINAL_CATCH_COUNTER:int                                  = 2188;
-public static const UNKNOWN_FLAG_NUMBER_02189:int                                   = 2189;
+public static const JOJO_LITTERS_AMILY_REACTION_COUNTER:int                         = 2189;
 public static const UNKNOWN_FLAG_NUMBER_02190:int                                   = 2190;
 public static const UNKNOWN_FLAG_NUMBER_02191:int                                   = 2191;
 public static const UNKNOWN_FLAG_NUMBER_02192:int                                   = 2192;
