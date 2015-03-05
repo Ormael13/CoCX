@@ -26,6 +26,11 @@ package classes.Scenes.Dungeons {
 			rawOutputText("\n |   |   " + (flags[kFLAGS.SANDWITCH_THRONE_UNLOCKED] > 0 ? "|": "L") + "   |     ");
 		}
 		
+		public function findLockedDoorLethiceThrone():void {
+			if (kGAMECLASS.d3.unlockedThroneRoom()) rawOutputText("\n      |      ");
+			else rawOutputText("\n      L      ");
+		}
+		
 		public function chooseRoomToDisplay():void {
 			if (kGAMECLASS.dungeonLoc >= 0 && kGAMECLASS.dungeonLoc < 10) { //Factory
 				outputText("Factory, " + (kGAMECLASS.dungeonLoc >= 6 && kGAMECLASS.dungeonLoc < 9 ? "2": "1") + "F");
@@ -467,7 +472,8 @@ package classes.Scenes.Dungeons {
 			//Lethice's Keep
 			if (getGame().d3._currentRoom == "edgeofkeep") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -484,7 +490,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "northentry") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -501,7 +508,8 @@ package classes.Scenes.Dungeons {
 			}			
 			else if (getGame().d3._currentRoom == "southcourtyard") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -518,7 +526,8 @@ package classes.Scenes.Dungeons {
 			}			
 			else if (getGame().d3._currentRoom == "southwestcourtyard") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -535,7 +544,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "southwestwalk") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -552,7 +562,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "westwalk") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -569,7 +580,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "northwestwalk") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[P]     [ ]-");
@@ -586,7 +598,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "northwestcourtyard") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [P]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -603,7 +616,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "northcourtyard") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[P]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -620,7 +634,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "northeastcourtyard") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[P] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -637,7 +652,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "northeastwalk") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [P]-");
@@ -654,7 +670,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "eastwalk") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -671,7 +688,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "southeastwalk") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -688,7 +706,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "southeastcourtyard") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -705,7 +724,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "courtyardsquare") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -722,7 +742,8 @@ package classes.Scenes.Dungeons {
 			}
 			else if (getGame().d3._currentRoom == "greatlift") {
 				rawOutputText("Lethice's Keep");
-				rawOutputText("\n      |      ");
+				rawOutputText("\n     [ ]     ");
+				findLockedDoorLethiceThrone();
 				rawOutputText("\n [ ]-[ ]-[ ] ");
 				rawOutputText("\n  |       |  ");
 				rawOutputText("\n-[ ]     [ ]-");
@@ -734,6 +755,24 @@ package classes.Scenes.Dungeons {
 				rawOutputText("\n-[ ]-[ ]-[ ]-");
 				rawOutputText("\n      |   |  ");
 				rawOutputText("\n     [ ] [P] ");
+				rawOutputText("\n      |      ");
+				rawOutputText("\n    -[ ]     ");
+			}
+			else if (getGame().d3._currentRoom == "throneroom") {
+				rawOutputText("Lethice's Keep");
+				rawOutputText("\n     [P]     ");
+				findLockedDoorLethiceThrone();
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]     [ ]-");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]-[ ]-[ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n [ ]     [ ] ");
+				rawOutputText("\n  |       |  ");
+				rawOutputText("\n-[ ]-[ ]-[ ]-");
+				rawOutputText("\n      |   |  ");
+				rawOutputText("\n     [ ] [ ] ");
 				rawOutputText("\n      |      ");
 				rawOutputText("\n    -[ ]     ");
 			}

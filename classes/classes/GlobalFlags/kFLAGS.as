@@ -259,8 +259,8 @@ public static const IZMA_INCUBATION:int                                         
 public static const IZMA_CHILDREN_SHARKGIRLS:int                                    =  251; // Izma sharkgirls
 public static const IZMA_CHILDREN_TIGERSHARKS:int                                   =  252; // Izma tigersharks
 public static const IZMA_TIME_TILL_NEW_BOOK_AVAILABLE:int                           =  253; // Izma Nu Book Countdown
-public static const UNKNOWN_FLAG_NUMBER_00254:int                                   =  254; // Weapon Rack owned? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00255:int                                   =  255; // Armor Rack owned? (2 = yes) (Should this be 1=yes?)
+public static const UNKNOWN_FLAG_NUMBER_00254:int                                   =  254; // Weapon Rack owned? (1 = yes) (NO LONGER USED)
+public static const UNKNOWN_FLAG_NUMBER_00255:int                                   =  255; // Armor Rack owned? (2 = yes) (NO LONGER USED)
 public static const UNKNOWN_FLAG_NUMBER_00256:int                                   =  256; // PC decided to approach Isabella's camp yet? 1
 public static const UNKNOWN_FLAG_NUMBER_00257:int                                   =  257; // Met Isabella?
 public static const UNKNOWN_FLAG_NUMBER_00258:int                                   =  258; // Is Isabella okay with tall folks?
@@ -2195,7 +2195,7 @@ public static const JOJO_LITTERS:int                                            
 public static const JOJO_BLOWJOB_XP:int                                             = 2187;
 public static const JOJO_VAGINAL_CATCH_COUNTER:int                                  = 2188;
 public static const JOJO_LITTERS_AMILY_REACTION_COUNTER:int                         = 2189;
-public static const UNKNOWN_FLAG_NUMBER_02190:int                                   = 2190;
+public static const LETHICITE_ARMOR_TAKEN:int                                       = 2190;
 public static const UNKNOWN_FLAG_NUMBER_02191:int                                   = 2191;
 public static const UNKNOWN_FLAG_NUMBER_02192:int                                   = 2192;
 public static const UNKNOWN_FLAG_NUMBER_02193:int                                   = 2193;

@@ -67,15 +67,15 @@ package classes.Scenes.Dungeons.D3
 				// [Pay Toll] [Suck Dick] [Fight]
 				if (player.gems >= 500)
 				{
-					addButton(2, "Pay Toll", payDaToll);
+					addButton(0, "Pay Toll", payDaToll);
 				}
 				else
 				{
 					outputText("\n\n<b>You do not have enough gems to pay the required toll!</b>");
 				}
 
-				addButton(3, "Suck Dick", suckIncubusDick);
-				addButton(4, "Fight", startCombatImmediate, new IncubusMechanic());
+				addButton(1, "Suck Dick", suckIncubusDick);
+				addButton(2, "Fight", startCombatImmediate, new IncubusMechanic());
 			}
 			else if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] == MECHANIC_SUCKED)
 			{
@@ -87,8 +87,8 @@ package classes.Scenes.Dungeons.D3
 
 				dynStats("lus", 10);
 				
-				addButton(3, "Suck Dick", suckIncubusDick);
-				addButton(4, "Fight", startCombatImmediate, new IncubusMechanic());
+				addButton(1, "Suck Dick", suckIncubusDick);
+				addButton(2, "Fight", startCombatImmediate, new IncubusMechanic());
 			}
 			else if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] == MECHANIC_PAID)
 			{
@@ -102,19 +102,19 @@ package classes.Scenes.Dungeons.D3
 
 				if (player.gems >= 500)
 				{
-					addButton(2, "Pay Toll", payDaToll);
+					addButton(0, "Pay Toll", payDaToll);
 				}
 				else
 				{
 					outputText("\n\n<b>You do not have enough gems to pay the required toll!</b>");
 				}
 
-				addButton(3, "Suck Dick", suckIncubusDick);
-				addButton(4, "Fight", startCombatImmediate, new IncubusMechanic());
+				addButton(1, "Suck Dick", suckIncubusDick);
+				addButton(2, "Fight", startCombatImmediate, new IncubusMechanic());
 			}
 			else if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] == MECHANIC_FOUGHT)
 			{
-				addButton(2, "Lift", useLiftPostDefeat);
+				addButton(0, "Lift", useLiftPostDefeat);
 			}
 		}
 		
@@ -694,7 +694,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all " + player.mf("he","she") + " could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
 
-			doNext(5035); // G-G-G-GAMEOVER.
+			doBadEnd(); // G-G-G-GAMEOVER.
 		}
 		
 		
@@ -822,9 +822,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nYou'll do anything to keep yourself pleasantly slick for your masters. You don't even protest when the plug is forced back into your mouth and hooked to a nutrient solution.");
 
-			outputText("\n\nGAME OVER!");
-
-			doNext(5035);
+			doBadEnd();
 		}
 		
 	}

@@ -27,6 +27,7 @@ package classes.Scenes.Dungeons.D3
 		public var livingStatue:LivingStatueScenes = new LivingStatueScenes();
 		public var succubusGardener:SuccubusGardenerScenes = new SuccubusGardenerScenes();
 		public var hermCentaur:HermCentaurScenes = new HermCentaurScenes();
+		public var lethice:LethiceScene = new LethiceScene();
 		
 		public function D3() 
 		{
@@ -163,6 +164,8 @@ package classes.Scenes.Dungeons.D3
 			tRoom.RoomName = "northcourtyard";
 			tRoom.EastExit = "northeastcourtyard";
 			tRoom.WestExit = "northwestcourtyard";
+			tRoom.NorthExit = "throneroom";
+			tRoom.NorthExitCondition = unlockedThroneRoom;
 			tRoom.RoomFunction = northcourtyardRoomFunc;
 			rooms[tRoom.RoomName] = tRoom;
 			
@@ -222,6 +225,13 @@ package classes.Scenes.Dungeons.D3
 			tRoom.NorthExit = "southeastcourtyard";
 			tRoom.RoomFunction = greatliftRoomFunc;
 			rooms[tRoom.RoomName] = tRoom;
+			
+			//FINAL ROOM: Throne Room
+			tRoom = new room();
+			tRoom.RoomName = "throneroom";
+			tRoom.SouthExit = "northcourtyard";
+			tRoom.RoomFunction = throneRoomFunc;
+			rooms[tRoom.RoomName] = tRoom;
 		}
 		
 		// Entrance/Exit
@@ -269,6 +279,9 @@ package classes.Scenes.Dungeons.D3
 		
 		private function generateRoomMenu(tRoom:room):void
 		{
+			statScreenRefresh();
+			hideUpDown();
+			spriteSelect(-1);
 			kGAMECLASS.dungeons.setTopButtons();
 			if (tRoom.NorthExit != null && tRoom.NorthExit.length > 0)
 			{
@@ -346,18 +359,21 @@ package classes.Scenes.Dungeons.D3
 		
 		private function entranceRoomFunc():Boolean
 		{
+			outputText("<b><u>Entrance Room</u></b>\n");
 			outputText("The inside of this cave is damp and dark, but it bears signs of frequent use. The map you got from Zetaz matches the curves of this winding passage exactly. There can be no doubt that this is the place, even though his map ends a short distance into the tunnel. Either he knew it would be a linear path or was so familiar with the territory that he didn’t think it was worth writing down. You can go east, deeper into the mountain towards Lethice’s fortress, or leave to the west.");
 			return false;
 		}
 		
 		private function tunnel1RoomFunc():Boolean
 		{
+			outputText("<b><u>Tunnel 1</u></b>\n");
 			outputText("Winding back and forth, the tunnel gradually arcs west and north from here, sloping steeply upward in the latter direction. The upward sloping side must lead to Lethice’s fortress, supposedly at the top of the mountain. You’ll have to be careful down here. You doubt that such an entrance would be completely unguarded. As a matter of fact... you think you can see signs of worked stone to the north. You’re getting close to something.");
 			return false;
 		}
 		
 		private function antechamberRoomFunc():Boolean
 		{
+			outputText("<b><u>Antechamber</u></b>\n");
 			outputText("You are standing in a large, gloomy lobby, lit by the drear yellow pulse of gas lamps. The walls, floor and distant ceiling are uniformly built from a dark, aged stone which serves to make the vault-like space shadowy and oppressive, despite its size. The floor has been polished a dull bronze by years of use and the distant sound of activity permeates the air; it has the atmosphere of a place which is thronged with people during rush hour but is for now as deserted as a school corridor during class hours. Something to be grateful for perhaps, but you should get a move on.");
 
 			outputText("\n\nAhead is a large archway. Through it you can see some sort of dark screen set into a wall. On the right is a much smaller metal door, which looks like it might be a storage room.");
@@ -366,6 +382,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function roomofmirrorsRoomFunc():Boolean
 		{
+			outputText("<b><u>Room of Mirrors</u></b>\n");
 			outputText("The metal door opens soundlessly onto a fairly large, unlit room, shabby and grey with disuse. It is cluttered with a great quantity of mirrors. Round hand mirrors are stacked on shelves, square wall mirrors are leant against walls, a large,"); 
 			if (flags[kFLAGS.D3_MIRRORS_SHATTERED] == 1) outputText(" now shattered,");
 			outputText(" ornate standing mirror dominates the centre of the room, and a number of broken, jagged specimens are stacked near the back. They reflect the dull trappings of this place back at you emptily. You guess as self - centred a race as the demons probably has quite a large use for these.");
@@ -388,6 +405,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function magpiehallsRoomFunc():Boolean
 		{
+			outputText("<b><u>Magpie Hall</u></b>\n");
 			if (flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] == 0)
 			{
 				if (flags[kFLAGS.D3_ENTERED_MAGPIEHALL] == 0)
@@ -504,6 +522,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function magpiehallnRoomFunc():Boolean
 		{
+			outputText("<b><u>Magpie Hall</u></b>\n");
 			if (flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] == 0)
 			{
 				outputText("You find yourself back in the small booth, with the locked door leading out into the Magpie Hall. Just like the one on the opposite side, there is a darkened screen here through which you can see hundreds of basilisks milling down below, sorting through the vast amount of junk and eggs they have collected from the mountainside. They don’t seem to have taken any extra precautions following your narrow escape of them- the gantry remains free of any guards, and the door on the other side looks open.");
@@ -528,36 +547,42 @@ package classes.Scenes.Dungeons.D3
 		
 		private function tunnel2RoomFunc():Boolean
 		{
+			outputText("<b><u>Tunnel 2</u></b>\n");
 			outputText("Light trickles in from the east. After all the trekking through these subterranean holes, you’ve got to be close to the mountain’s summit. You know that down the steeply sloped passage will take you back through the basilisks’ chamber if you want to leave the way you came, but a second trip through that crowded hall might be ill-advised. It’d be best to move forward into the sun.");
 			return false;
 		}
 		
 		private function edgeofkeepRoomFunc():Boolean
 		{
+			outputText("<b><u>Edge of Keep</u></b>\n");
 			outputText("Standing on the edge of the mountain's summit, you can see Mareth for miles in all direction. It's fairly disconcerting to focus on long with the constant shifting and twisting of the wasted areas, but here and there you can pick out islands of stability in the ephemeral terrain. You blink your eyes to clear the nauseating landscape from your view and turn back to the way ahead. Lethice's fortress lies a short distance to the north, its walls tall and stout. The gates themselves hang open. Likely she didn't expect anyone to make it this far.");
 			return false;
 		}
 		
 		private function northentryRoomFunc():Boolean
 		{
+			outputText("<b><u>North Entry</u></b>\n");
 			outputText("You now stand in the archway that is the southern entrance to Lethice's headquarters. The place is built like a castle. You can't see too much from your shaded position, but the bricks that surround you are individual as big as horses. The gates themselves are crafted of wood that looks at least a century old, reinforced with bands of gleaming metal that you doubt will ever rust. A barren cliffside can be seen to the south, the demon queen's lair to the north.");
 			return false;
 		}
 		
 		private function southcourtyardRoomFunc():Boolean
 		{
+			outputText("<b><u>South Courtyard</u></b>\n");
 			outputText("Lethice's courtyard is surprisingly well-groomed for a place that's supposedly home to neverending debauchery and depravity. The paths are laid with interconnecting sandstone bricks that reflect the sun to give the place a gentle, amber glow, and lush, green grass lines the sides along with well-trimmed hedges. You could almost mistake this place for a churchyard if it wasn't for the faint sound of moans on the wind. The courtyard paths lead away east and west, while the gateway out hangs open to the south.");
 			return false;			
 		}
 		
 		private function southwestcourtyardRoomFunc():Boolean
 		{
+			outputText("<b><u>Southwest Courtyard</u></b>\n");
 			outputText("Some of the nearby bushes are blooming, filling the air with their sweet scent, unlike any flowers you’ve encounter before. Their petals are a multitude of colors, and their scents, though laced with corruption, are as sweet and pleasant as anything you've had the pleasure of smelling. The path you're treading upon curves north and east from here along the thick, red walls. Vines seem to crowd the way to the north. There are no signs of any ramps or ladders to get to the battlements, but there is a doorway to the west marked as 'Forge Wing'. A notice declares it closed for repairs.");
 			return false;
 		}
 		
 		private function southwestwalkRoomFunc():Boolean
 		{
+			outputText("<b><u>Southwest Walk</u></b>\n");
 			outputText("The bushes surrounding the path have given way here to a mass of tentacles, some still bedecked in the flowers that surround the air. They twist and writhe but seem content to stay in their place for now. Besides, if you hang back along the edge of the walk, you should be out of their reach. The path heads north and south... if the wall of oily-looking tendrils leaves you alone.");
 			
 			if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 0)
@@ -592,6 +617,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function westwalkRoomFunc():Boolean
 		{
+			outputText("<b><u>West Walk</u></b>\n");
 			outputText("Pollen clings to you, released by the many flowering bushes in the area. They only grow thicker to the south, too. To the east, you can");
 			if (flags[kFLAGS.D3_STATUE_DEFEATED] == 0) outputText(" see a massive statue with an immense hammer");
 			else outputText(" a mound of rubble, the scattered remains of the animated statue that you slew");
@@ -602,6 +628,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function northwestwalkRoomFunc():Boolean
 		{
+			outputText("<b><u>Northwest Walk</u></b>\n");
 			outputText("A narrow path splits from the sandstone thoroughfare towards a pair of double doors to the west. The craftsmanship of the carpenter who made them is on full display; intricate designs of dragons engaged in sexual positions of all kinds are carved around the outer edges of the frame while more mundane, eye-pleasing patterns decorate the center panels. Above, a sign designates this area as the library. Unfortunately the doors are sealed closed. Perhaps the library is not yet written. You smirk at your own joke.");
 			outputText("\n\nThe courtyard itself continues much as it has elsewhere. The bushes to the south appear more unruly than elsewhere, but to the north there appears to be nothing but pleasant walking through this botanical paradise.");
 			return false;
@@ -609,18 +636,29 @@ package classes.Scenes.Dungeons.D3
 		
 		private function northwestcourtyardRoomFunc():Boolean
 		{
+			outputText("<b><u>Northwest Courtyard</u></b>\n");
 			outputText("The courtyard comes to an abrupt end here, hemmed in by a impressively high stone wall to the north, high enough to shame the walls in the other cardinal directions. The path is also bounded in by stonework to the west, forcing it to curve to the east and south around a bush that has been tastelessly shaped to resemble a turgid prick. The demons even went so far as to trim ivory flowers into a contiguous path along one side, very much looking like a stream of arboreal spunk.");
 			return false;
 		}
 		
 		private function northcourtyardRoomFunc():Boolean
 		{
-			outputText("You stand before what can only be the entrance to Lethice’s throne room. It is unlabelled, but the immense door is unlike any you’ve seen in this world or the last. Constructed from some kind of pink-tinged metal and polished to a mirror sheen, this portal has had a lifetime of care poured into it. What’s more, intricate locking mechanisms overlap the edges of it, each one culminating in an intricately worked seal. Fortunately, each of the seals has been left over. Security must not be much of a concern for the demon queen at this point in time. If only the door would open. For some reason, it’s still sealed closed. You can still move east and west through the courtyard, if you like.");
+			outputText("<b><u>North Courtyard</u></b>\n");
+			outputText("You stand before what can only be the entrance to Lethice’s throne room. It is unlabelled, but the immense door is unlike any you’ve seen in this world or the last. Constructed from some kind of pink-tinged metal and polished to a mirror sheen, this portal has had a lifetime of care poured into it. What’s more, intricate locking mechanisms overlap the edges of it, each one culminating in an intricately worked seal. Fortunately, each of the seals has been left over. Security must not be much of a concern for the demon queen at this point in time. ") 
+			if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0)
+			{
+				outputText("The seal appears to be broken. You could move north and attempt to defeat Lethice for once and for all. Or you can move east and west through the courtyard, if you like.");
+			}
+			else
+			{
+				outputText("If only the door would open. For some reason, it’s still sealed closed. You can still move east and west through the courtyard, if you like.");
+			}
 			return false;
 		}
 		
 		private function northeastcourtyardRoomFunc():Boolean
 		{
+			outputText("<b><u>Northeast Courtyard</u></b>\n");
 			outputText("This particular corner of the courtyard feels remarkably cramped, even a little claustrophobic. To the north, a stone wall rises, dwarfing the smaller one to the east, and to make matters worse, the hedges to the southwest are high and square, virtually a wall in their own right. The only avenues of travel available are to the south or west, following the red sandstone bricks as they bend around the corner.");
 			
 			if (flags[kFLAGS.D3_CENTAUR_DEFEATED] == 0)
@@ -634,12 +672,14 @@ package classes.Scenes.Dungeons.D3
 		
 		private function northeastwalkRoomFunc():Boolean
 		{
+			outputText("<b><u>Northeast Walk</u></b>\n");
 			outputText("The air is pleasant and free here. Not even the corrupt nature of this place can stop you from enjoying this moment in the demon queen’s garden. Still, there is an aura of lingering danger here. The flowers smell pleasant but somehow off, and every now and again the breezes carry the sounds of whorish moans. An entryway in the east wall leads towards the barracks and mess, identified by a simple sign to the left of the imposing iron door frame. Fortunately, the door is barred and sealed. It seems you’ve come at a time when Lethice’s fortress is near empy. How fortunate for you.");
 			return false;
 		}
 		
 		private function eastwalkRoomFunc():Boolean
 		{
+			outputText("<b><u>East Walk</u></b>\n");
 			outputText("The smooth, almost flawlessly laid stones split into a T-intersection here, heading north, south, and west. The bushes that hem in the paths are likewise split, though they have been maintained with the same sense of care you’ve seen elsewhere in the garden. One particularly interesting shrub has been trimmed into the shape of a large bust, complete with erect nipples. You shake your head and glance west, where you can spot");
 			if (flags[kFLAGS.D3_STATUE_DEFEATED] == 0) outputText(" a massive statue with an immense hammer.");
 			else outputText(" a mound of rubble, the scattered remains of the animated statue that you slew.");
@@ -648,12 +688,14 @@ package classes.Scenes.Dungeons.D3
 		
 		private function southeastwalkRoomFunc():Boolean
 		{
+			outputText("<b><u>Southeast Walk</u></b>\n");
 			outputText("Swarms of butterflies congregate on the flowering bushes here. At first, the sight seems beautiful, almost pristine. Then, you spot the endemic corruption that Lethice has spread through the lands. They aren’t just swarms of butterflies - they’re swarms of mating butterflies, crawling all over each other in a swarm of sweet-smelling pollen and fluttering wings. You had best move on. The path leads north and south.");
 			return false;
 		}
 		
 		private function southeastcourtyardRoomFunc():Boolean
 		{
+			outputText("<b><u>Southeast Courtyard</u></b>\n");
 			outputText("Walking along the sandstone path, you're treated to a remarkably peaceful view. Up here, above the clouds the ring the mountain, it's almost too easy to let your guard down. A small hole in the southern wall of Lethice's fortress appears to the south. Peeking through, you can see machinery and some kind of lift suspended over the cliffside. That must be how the demons can come and go safely. You can continue to walk among the bushes to the north and west. An iron door to the east bears lettering denoting it as 'recreation'. A small placard explains that it's currently off limits due to renovations. Graffiti below complains about some contractor named Fenoxo delivering on his promised work schedule.");
 			return false;
 		}
@@ -661,6 +703,7 @@ package classes.Scenes.Dungeons.D3
 		// 9999 - Check this
 		private function courtyardsquareRoomFunc():Boolean
 		{
+			outputText("<b><u>Courtyard Square</u></b>\n");
 			//Statue not exploded - mossy - 30’ high
 			outputText("A circle of polished stone wraps around a colossus here in the center of the courtyard, ringed by cushioned benches that would be a delight to sit on were they not stained with bodily fluids of all colors and sexes. You didn’t think pink cum was possible, but the demons’ endless sexual creativity doesn’t seem to be bound by such notions. You can leave east and west from here.");
 
@@ -680,11 +723,38 @@ package classes.Scenes.Dungeons.D3
 
 		private function greatliftRoomFunc():Boolean
 		{
+			outputText("<b><u>Great Lift</u></b>\n");
 			outputText("Intricate stonework supports this precarious platform as it juts from the side of Lethice's fortress, hanging over a sheer cliff that must go down for hundreds of feet. The harpies appear to have moved away from the area immediately below, whether by choice or by demonic action, though you can still spot a few of their nests in other places on the mountainside. A complicated looking machine sits on the side of the platform, attached to a cage that dangles over the edge, supported by a lowly metal cable. It must be some kind of mechanical lift - a way to come and go as one would please.");
 			
 			incubusMechanic.meetAtElevator();
 			
 			return false;
+		}
+		
+		private function throneRoomFunc():Boolean 
+		{
+			outputText("<b><u>Throne Room</u></b>\n");
+			outputText("The throne room is intricately designed. Purple carpet with red highlights line the floor from the door to the throne. The throne appears to be carved in marble and dotted with lethicite. Along the way, there are beautifully carved marble columns and cum fountains. You blush just by looking at the fountains. ");
+			if (flags[kFLAGS.LETHICE_DEFEATED] <= 0)
+			{
+				outputText("\n\nLethice is sitting on the throne, staring at you as if she's awaiting a champion.");
+				menu();
+				doNext(lethice.lethiceIntro);
+				return true;
+			}
+			else
+			{
+				if (flags[kFLAGS.LETHICITE_ARMOR_TAKEN] <= 0) {
+					outputText("\n\nThere is still a suit of lethicite armor Lethice worn when you battled her, still in good condition. You could take it if you like. ");
+					addButton(0, "Take Armor", lethice.takeLethiciteArmor, null, null, null, armors.LTHCARM.description);
+				}
+			}
+			return false;
+		}
+		
+		public function unlockedThroneRoom():Boolean
+		{
+			return (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0);
 		}
 	}
 }

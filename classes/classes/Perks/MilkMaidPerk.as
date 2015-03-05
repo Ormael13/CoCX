@@ -9,7 +9,7 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "Increases milk production by " + (200 + (params.value1 * 100)) + "mL. (Rank: " + params.value1 + "/10)";
+			return "(Rank: " + params.value1 + "/10) Increases milk production by " + (200 + (params.value1 * 100)) + "mL.";
 		}
 		
 		public function MilkMaidPerk() 

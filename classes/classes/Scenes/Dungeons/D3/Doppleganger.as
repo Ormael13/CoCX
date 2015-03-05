@@ -155,15 +155,15 @@ package classes.Scenes.Dungeons.D3
 		{
 			outputText("The mirror demon barely even flinches as your fierce, puissant fire washes over [him].");
 
-			outputText("\n\n“<i>Picked up a few things since you’ve been here, then?</i>” [he] yawns. Flickers of flame cling to [his] fingers, its radiance sputtering and burning away, replaced by a livid black colour. “<i>Serf magic. Easy to pick up, easy to use, difficult to impress with. Let me show you how it’s really done!</i>” [He] thrusts [his] hands out and hurls a pitiless black fireball straight at you, a negative replica of the one you just shot at [him].");
+			outputText("\n\n“<i>Picked up a few things since you’ve been here, then?</i>” [he] yawns. Flickers of flame cling to [his] fingers, its radiance sputtering and burning away, replaced by a livid black colour. “<i>Serf magic. Easy to pick up, easy to use, difficult to impress with. Let me show you how it’s really done!</i>” [He] thrusts [his] hands out and hurls a pitiless black fireball straight at you, a negative replica of the one you just shot at [him]. ");
 			
 			if (spell == "fireball")
 			{
-				outputText(" (" + player.takeDamage(player.level * 10 + 45 + rand(10)) + ")");
+				player.takeDamage(player.level * 10 + 45 + rand(10), true);
 			}
 			else if (spell == "whitefire")
 			{
-				outputText(" (" + player.takeDamage(10 + (player.inte / 3 + rand(player.inte / 2))) + ")");
+				player.takeDamage(10 + (player.inte / 3 + rand(player.inte / 2)), true);
 			}
 			
 			addTalkShit();
@@ -177,6 +177,12 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function doAI():void
 		{
+			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
+				removeStatusAffect(StatusAffects.Stunned);
+				outputText("Your duplicate is too stunned, buying you another round!");
+				combatRoundOver();
+				return;
+			}
 			outputText("Your duplicate chuckles in the face of your attacks.");
 			addTalkShit();
 		}

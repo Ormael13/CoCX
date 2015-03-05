@@ -37,6 +37,18 @@ package classes
 				"Gains strength 25% faster.");
 		public static const Tough:PerkType = mk("Tough", "Tough",
 				"Gains toughness 25% faster.");
+				
+		// Ascension perks
+		public static const AscensionDesires:AscensionDesiresPerk = new AscensionDesiresPerk();
+		public static const AscensionEndurance:AscensionEndurancePerk = new AscensionEndurancePerk();
+		public static const AscensionFertility:AscensionFertilityPerk = new AscensionFertilityPerk();
+		public static const AscensionFortune:AscensionFortunePerk = new AscensionFortunePerk();
+		public static const AscensionMoralShifter:AscensionMoralShifterPerk = new AscensionMoralShifterPerk();
+		public static const AscensionMysticality:AscensionMysticalityPerk = new AscensionMysticalityPerk();
+		public static const AscensionTolerance:AscensionTolerancePerk = new AscensionTolerancePerk();
+		public static const AscensionVirility:AscensionVirilityPerk = new AscensionVirilityPerk();
+		public static const AscensionWisdom:AscensionWisdomPerk = new AscensionWisdomPerk();
+		
 		// Female creation perks
 		public static const BigClit:PerkType = mk("Big Clit", "Big Clit",
 				"Allows your clit to grow larger more easily and faster.");

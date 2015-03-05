@@ -10,7 +10,7 @@ package classes.Scenes.Places.Ingnam
 				
 		override public function defeated(hpVictory:Boolean):void
 		{
-			doNext(game.ingnam.thiefScene.winAgainstThief);
+			game.ingnam.thiefScene.winAgainstThief();
 		}
 		
 		public function Thief() 

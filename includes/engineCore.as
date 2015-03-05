@@ -2663,6 +2663,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(libi > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) libi *= 0.75;
 	if(corr > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) corr *= 0.5;
 	if(corr > 0 && player.findPerk(PerkLib.PureAndLoving) >= 0) corr *= 0.75;
+	if (player.findPerk(PerkLib.AscensionMoralShifter) >= 0) corr *= 1 + (player.perkv1(PerkLib.AscensionMoralShifter) * 0.2);
 	//Change original stats
 	player.str+=stre;
 	player.tou+=toug;
@@ -2856,7 +2857,7 @@ public function doBadEnd():void {
 		addButton(0, "Game Over", eventParser, 9999);
 		if (flags[kFLAGS.HARDCORE_MODE] <= 0 && flags[kFLAGS.GAME_DIFFICULTY] < 1) addButton(1, "Wake Up", camp.wakeFromBadEnd);
 		//if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(3, "Retry", eventParser, 9999);
-		addButton(2, "NewGamePlus", charCreation.newGamePlus);
+		//addButton(2, "NewGamePlus", charCreation.newGamePlus);
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", eventParser, 1);
 		mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo);
 		mainView.showMenuButton(MainView.MENU_NEW_MAIN);

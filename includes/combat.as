@@ -47,7 +47,7 @@ public function cleanupAfterCombat(nextFunc:Function = null):void {
 //No longer used:		itemSwapping = false;
 		//Player won
 		if(monster.HP < 1 || monster.lust > 99) {
-			awardPlayer();
+			awardPlayer(nextFunc);
 		}
 		//Player lost
 		else {
@@ -1996,7 +1996,7 @@ public function dropItem(monster:Monster):void {
 		else inventory.takeItem(itype, camp.returnToCampUseOneHour);
 	}
 }
-public function awardPlayer():void
+public function awardPlayer(nextFunc:Function = null):void
 {
 	if (player.countCockSocks("gilded") > 0) {
 		//trace( "awardPlayer found MidasCock. Gems bumped from: " + monster.gems );
@@ -2013,9 +2013,19 @@ public function awardPlayer():void
 		var bonusGems3:int = (monster.gems * 0.04) * player.teaseLevel;
 		if (monster.lust >= 100) monster.gems += bonusGems3;
 	}
+	if (player.findPerk(PerkLib.AscensionFortune) >= 0) {
+		monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.1);
+		Math.round(monster.gems);
+	}
 	monster.handleAwardText(); //Each monster can now override the default award text
-	if(!inDungeon) doNext(camp.returnToCampUseOneHour);
-	else doNext(1);
+	if (!inDungeon) {
+		if (nextFunc != null) doNext(nextFunc);
+		else doNext(camp.returnToCampUseOneHour);
+	}
+	else {
+		if (nextFunc != null) doNext(nextFunc);
+		else doNext(1);
+	}
 	dropItem(monster);
 	inCombat = false;
 	player.gems += monster.gems;
@@ -4082,6 +4092,7 @@ public function spellMod():Number {
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 	if (player.jewelryEffectId == 9) mod += (player.jewelryEffectMagnitude / 100);
 	if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
+	if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.05);
 	return mod;
 }
 public function spellArouse():void {
@@ -4366,7 +4377,7 @@ public function spellWhitefire():void {
 		return;
 	}
 	outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n", true);
-	temp = int(10+(player.inte/3.5 + rand(player.inte/2.5)) * spellMod());
+	temp = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
 	//High damage to goes.
 	if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
 	if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);

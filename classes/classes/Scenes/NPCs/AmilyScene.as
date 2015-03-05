@@ -204,17 +204,17 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.AMILY_VILLAGE_EXPLORED]++;
 			clearOutput();
 			//50% chance of ghost-girl
-			if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
+			if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0 && player.hasKeyItem("Equipment Rack - Weapons") >= 0 && player.hasKeyItem("Equipment Rack - Armor") >= 0 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
 				shouldraScene.shouldraGreeting();
 				return;
 			}
 			//20% chance of playing with a rack
-			if(rand(5) == 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] == 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] == 0)) {
+			if(rand(5) == 0 && (player.hasKeyItem("Equipment Rack - Weapons") < 0 || player.hasKeyItem("Equipment Rack - Armor") < 0)) {
 				var rack:Number = 0;
 				//Already got weapon
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) rack = 0;
+				if(player.hasKeyItem("Equipment Rack - Weapons") >= 0) rack = 0;
 				//Already got armor
-				else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0) rack = 1;
+				else if(player.hasKeyItem("Equipment Rack - Armor") >= 0) rack = 1;
 				//Got neither - 50% of each
 				else if(rand(2) == 0) rack = 1;
 				outputText("While picking through the ruined houses and abandoned structures of this dilapidated village, you manage to find something useful!  There's an intact but empty ", false);
@@ -226,11 +226,11 @@ package classes.Scenes.NPCs
 				outputText(".  You check it over and spot an easy way to fold it up for transport.  This would be a fine addition to your camp, so you pack it up and haul it back.", false);
 				if(rack == 1) {
 					player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
+					//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 				}
 				else {
 					player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
+					//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 				}
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -255,7 +255,7 @@ package classes.Scenes.NPCs
 				if(player.findStatusAffect(StatusAffects.Infested) < 0) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
 			}
 			//Corrupt blow up! - requires you've met Amily
-			if(flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && player.cor > 25) {
+			if(flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && player.cor > 25 + player.corruptionTolerance()) {
 				meetAmilyAsACorruptAsshat();
 				return;
 			}
@@ -2499,7 +2499,7 @@ package classes.Scenes.NPCs
 			amilySprite();
 			if(flags[kFLAGS.AMILY_CLOTHING] == 0) flags[kFLAGS.AMILY_CLOTHING] = "rags";
 			//Amily freakout
-			if(player.cor >= 50 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
+			if(player.cor >= 50 + player.corruptionTolerance() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				amilyTaintWarning();
 				return;
 			}

@@ -34,7 +34,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainViewHack.startUpButtons();
 	kGAMECLASS.saves.loadPermObject();
 	//Reset newgame buttons
-	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo );
+	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameFromScratch );
 	mainView.hideAllMenuButtons();
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	mainView.showMenuButton( MainView.MENU_DATA );

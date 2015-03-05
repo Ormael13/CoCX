@@ -156,9 +156,16 @@
 			if (findPerk(PerkLib.Tank) >= 0) temp += 50;
 			if (findPerk(PerkLib.Tank2) >= 0) temp += this.tou;
 			//Apply NG+, NG++, NG+++, etc.
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp += 1000;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp += 2000;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) temp += 3000;
+			if (short == "doppleganger" || short == "pod" || short == "sand trap" || short == "sand tarp") {
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp += 200;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp += 400;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) temp += 600;
+			}
+			else {
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp += 1000;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp += 2000;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) temp += 3000;
+			}
 			//Apply difficulty
 			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) temp *= 1.0;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.25;
@@ -197,6 +204,8 @@
 
 		public function totalXP(playerLevel:Number=-1):Number
 		{
+			var multiplier:Number = 1;
+			multiplier += game.player.perkv1(PerkLib.AscensionWisdom) * 0.1;
 			if (playerLevel == -1) playerLevel = game.player.level;
 			//
 			// 1) Nerf xp gains by 20% per level after first two level difference
@@ -207,8 +216,8 @@
 			else difference -= 2;
 			if(difference > 4) difference = 4;
 			difference = (5 - difference) * 20.0 / 100.0;
-			if(playerLevel - this.level > 10) return 1;
-			return Math.round(this.additionalXP + (this.baseXP() + this.bonusXP()) * difference);
+			if (playerLevel - this.level > 10) return 1;
+			return Math.round(this.additionalXP + (this.baseXP() + this.bonusXP()) * difference * multiplier);
 		}
 		protected function baseXP():Number
 		{

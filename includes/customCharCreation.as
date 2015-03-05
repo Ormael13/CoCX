@@ -75,9 +75,9 @@ public function customPCSetup():void {
 		inventory.createStorage();
 		player.createKeyItem("Camp - Chest",0,0,0,0);
 		player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
+		//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 		player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
+		//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 		player.createKeyItem("Equipment Storage - Jewelry Box", 0, 0, 0, 0);
 		
 		player.createStatusAffect(StatusAffects.KnowsWhitefire, 0, 0, 0, 0);
@@ -258,9 +258,9 @@ public function customPCSetup():void {
 		inventory.createStorage();
 		player.createKeyItem("Camp - Chest",0,0,0,0);
 		player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
+		//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 		player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
+		//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 		//(Flexibility), (Incorporeality), History: Religious, Dragonfire, Brood Mother, Magical Fertility, Wet Pussy, Tough, Strong, Fast, Smart, History: Scholar, History: Slacker, Strong Back, Strong Back 2: Stronger Harder
 		player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
 		player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0);

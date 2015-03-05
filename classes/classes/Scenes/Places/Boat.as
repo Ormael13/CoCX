@@ -52,7 +52,7 @@ package classes.Scenes.Places
 				marae.talkToMaraeAboutMinervaPurification();
 				return;
 			}
-			if (rand(10) <= 2 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] != 1 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2 && player.level >= 30) {
+			if (rand(10) <= 2 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] != 1 && flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2 && player.level >= 30) {
 				marae.encounterPureMaraeEndgame();
 				return;
 			}

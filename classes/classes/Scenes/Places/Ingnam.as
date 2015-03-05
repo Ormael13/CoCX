@@ -65,7 +65,8 @@ package classes.Scenes.Places
 			addButton(2, "Temple", menuTemple);
 			addButton(3, "Inn", menuTavern);
 			addButton(4, "Farm", ingnamFarm.menuFarm);
-			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0) addButton(6, "Return2Camp", returnToMareth);
+			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0) addButton(5, "Return2Camp", returnToMareth);
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && inventory.showStash() && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) addButton(6, "Stash", kGAMECLASS.camp.stash);
 			addButton(7, "Inventory", inventory.inventoryMenu);
 			if (player.lust >= 30) {
 				if (player.lust >= player.maxLust()) {
@@ -92,7 +93,7 @@ package classes.Scenes.Places
 		public function getBanishedToMareth():void {
 			var hasWeapon:Boolean = false;
 			clearOutput();
-			outputText("Your time has come.  It's time for you to meet up with the village elders.  You know you are going to get sent to the demon realm and you're most likely not going to return to Ingnam.  You give your family and friends a long farewell.");
+			outputText("Your time has come to meet up with the village elders.  You know you are going to get sent to the demon realm and you're most likely not going to return to Ingnam.  You give your family and friends a long farewell.");
 			if (player.weaponName != "fists") {
 				hasWeapon = true;
 				player.setWeapon(WeaponLib.FISTS);
@@ -408,7 +409,7 @@ package classes.Scenes.Places
 			if (player.tailType > 0) {
 				if (player.hasLongTail()) {
 					outputText("\n\nHe says with a surprised look, \"<i>You have a tail now?  Are you sure this is fake?</i>\"  You tell him that your tail is not fake; it's real.  \"<i>Prove it,</i>\" he says as he tugs your tail.  Ouch! That hurts!  \"<i>Sorry about that,</i>\" he says, \"<i>but that tail definitely looks and feels real!  I think your tail does look nice.</i>\"");
-					outputText("\n\nYou thank him for the compliment and he walks behind the counter.");
+					outputText("\n\nYou wag your tail and thank him for the compliment and he walks behind the counter.");
 				}
 				flags[kFLAGS.INGNAM_TAIL_LAST_TYPE] = player.tailType;
 				flags[kFLAGS.INGNAM_TAIL_FREAKOUT] = 1;

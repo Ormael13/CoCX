@@ -831,12 +831,14 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			var max:Number = 100;
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
 			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
+			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 5;
 			return max;
 		}
 		
 		public function maxFatigue():Number
 		{
 			var max:Number = 100;
+			if (findPerk(PerkLib.AscensionEndurance) >= 0) max += perkv1(PerkLib.AscensionEndurance) * 5;
 			return max;
 		}
 		

@@ -33,7 +33,7 @@ package classes.GlobalFlags
 		public static const ZONE_ARCHAEOLOGIST:int				= 023; //Visit the town ruins 15 times.
 		public static const ZONE_FARMER:int						= 024; //Visit the farm 30 times.
 		public static const ZONE_SEA_LEGS:int					= 025; //Use the boat 15 times.
-		public static const UNKNOWN_ACHIEVEMENT_026:int			= 026;
+		public static const ZONE_ROASTED:int					= 026; //Explore the volcanic crag 50 times.
 		public static const UNKNOWN_ACHIEVEMENT_027:int			= 027;
 		public static const UNKNOWN_ACHIEVEMENT_028:int			= 028;
 		public static const UNKNOWN_ACHIEVEMENT_029:int			= 029;

@@ -45,7 +45,7 @@ package classes.Scenes.NPCs
 				//Take Damage
 				else outputText("The salamander lunges at you, sword swinging in a high, savage arc.  You attempt to duck her attack, but she suddenly spins about mid-swing, bringing the sword around on a completely different path.  It bites deep into your flesh, sending you stumbling back. ", false);
 				if(damage > 0) {
-					if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
+					if(lustVuln > 0 && (player.armor.name == "barely-decent bondage straps" || player.armor.name == "nothing")) {
 						outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed. ", false);
 						lust += 5 * lustVuln;
 					}
@@ -126,7 +126,7 @@ package classes.Scenes.NPCs
 				lust *= game.lustPercent()/100;
 				//Clean up
 				lust = Math.round(lust * 10)/10;
-				outputText(" (+" + lust + " lust)\n", false);
+				outputText(" <b>(<font color=\"#ff00ff\">+" + lust + " lust</font>)</b>\n", false);
 			}
 			combatRoundOver();
 		}

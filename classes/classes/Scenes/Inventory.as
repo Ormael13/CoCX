@@ -39,12 +39,12 @@ package classes.Scenes
 		}
 		
 		public function showStash():Boolean {
-			return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0 || player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0 || flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0;
+			return player.hasKeyItem("Equipment Rack - Weapons") >= 0 || player.hasKeyItem("Equipment Rack - Armor") >= 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0 || player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0 || flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0;
 		}
 		
-		private function itemStorageDirectGet():Array { return itemStorage; }
+		public function itemStorageDirectGet():Array { return itemStorage; }
 		
-		private function gearStorageDirectGet():Array { return gearStorage; }
+		public function gearStorageDirectGet():Array { return gearStorage; }
 		
 		public function currentCallNext():Function { return callNext; }
 		

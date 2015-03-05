@@ -632,6 +632,7 @@ package classes.Scenes.Dungeons
 				player.refillHunger(100);
 				player.orgasm();
 				dynStats("cor", 20);
+				if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 				if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(doBadEndGeneric);
 				else cleanupAfterCombat();
 				return;
@@ -680,6 +681,7 @@ package classes.Scenes.Dungeons
 					player.orgasm();
 					dynStats("cor", 25);
 					player.buttChange(monster.cockArea(0), true);
+					if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 					if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(doBadEndGeneric);
 					else cleanupAfterCombat();
 					return;
@@ -712,6 +714,7 @@ package classes.Scenes.Dungeons
 					player.refillHunger(100);
 					player.buttChange(monster.cockArea(0), true);
 					player.orgasm();
+					if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 					dynStats("cor", 25);
 					if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(doBadEndGeneric);
 					else cleanupAfterCombat();

@@ -1945,7 +1945,8 @@ package classes
 				percent += (jewelryEffectMagnitude / 100);
 			if (jewelryEffectId == 4)
 				percent -= (jewelryEffectMagnitude / 100);
-				
+			if (findPerk(PerkLib.AscensionVirility) >= 0)
+				percent += perkv1(PerkLib.AscensionVirility) * 0.05;				
 			if (percent > 1)
 				percent = 1;
 			if (percent < 0)
@@ -3267,6 +3268,7 @@ package classes
 				counter += jewelryEffectMagnitude
 			if (jewelryEffectId == 4)
 				counter -= jewelryEffectMagnitude
+			counter += perkv1(PerkLib.AscensionFertility) * 5;
 			return counter;
 		}
 

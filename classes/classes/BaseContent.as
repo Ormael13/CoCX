@@ -228,7 +228,11 @@
 		protected function doBadEnd():void {
 			kGAMECLASS.doBadEnd();
 		}
-
+		
+		protected function showCredits():void {
+			kGAMECLASS.creditsScreen();
+		}
+		
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
 			kGAMECLASS.startCombatImmediate(monster, _plotFight);

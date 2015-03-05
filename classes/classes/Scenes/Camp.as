@@ -145,13 +145,13 @@ public function doCamp():void {
 		}
 		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5)
 		{
-			if(flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50)
+			if(flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && (player.cor >= 50 + player.corruptionTolerance()))
 			{
 				hideMenus();
 				marblePurification.marbleWarnsPCAboutCorruption();
 				return;
 			}
-			if(flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && player.cor >= 60)
+			if(flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && (player.cor >= 60 + player.corruptionTolerance()) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0)
 			{
 				hideMenus();
 				marblePurification.marbleLeavesThePCOverCorruption();
@@ -595,11 +595,11 @@ public function doCamp():void {
 		outputText("A thorny tree has sprouted near the center of the camp, growing a protective canopy of spiky vines around the portal and your camp.  ", false);
 	}
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 20 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
-		if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 20 == 0) outputText("A thick wooden wall have been erect to provide a small amount of defense.  ");
-		else outputText("Thick wooden wall have been erect to provide some defense.  ");
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 20 == 0) outputText("A thick wooden wall have been erected to provide a small amount of defense.  ");
+		else outputText("Thick wooden wall have been erected to provide some defense.  ");
 	}
 	else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
-		outputText("Thick wooden walls have been erect; they surround one half of your camp perimeter and provide good defense, leaving the other half open for access to the stream.  ");
+		outputText("Thick wooden walls have been erected; they surround one half of your camp perimeter and provide good defense, leaving the other half open for access to the stream.  ");
 		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the walls; it gets closed at night to keep any invaders out.  ");
 		if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
 			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted near the gateway");
@@ -921,14 +921,14 @@ public function stash():Boolean {
 		if (inventory.hasItemsInStorage()) addButton(1, "Chest Take", inventory.pickItemToTakeFromCampStorage);
 	}
 	//Weapon Rack
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) {
+	if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
 		outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
 		addButton(2, "W.Rack Put", inventory.pickItemToPlaceInWeaponRack);
 		if (inventory.weaponRackDescription()) addButton(3, "W.Rack Take", inventory.pickItemToTakeFromWeaponRack);
 		outputText("\n\n");
 	}
 	//Armor Rack
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0) {
+	if(player.hasKeyItem("Equipment Rack - Armor") >= 0) {
 		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.");
 		addButton(5, "A.Rack Put", inventory.pickItemToPlaceInArmorRack);
 		if (inventory.armorRackDescription()) addButton(6, "A.Rack Take", inventory.pickItemToTakeFromArmorRack);
@@ -1310,6 +1310,8 @@ private function campActions():void {
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100 && getCampPopulation() >= 4) addButton(5, "Build Wall", buildCampWallPrompt, null, null, null, "Build a wall around your camp to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 20 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS]/20) + "/5 complete": "") + "");
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_GATE] <= 0) addButton(5, "Build Gate", buildCampGatePrompt, null, null, null, "Build a gate to complete your camp defense.");
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && player.hasItem(useables.IMPSKLL, 1)) addButton(6, "AddImpSkull", promptHangImpSkull, null, null, null, "Add an imp skull to decorate the wall and to serve as deterrent for imps.");
+	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(7, "Ascension", promptAscend, null, null, null, "Perform an ascension? This will restart your adventures with your levels, items, and gems carried over. The game will also get harder.");
+
 	addButton(14, "Back", eventParser, 1);
 }
 
@@ -2244,6 +2246,50 @@ private function hangImpSkull():void {
 	doNext(camp.campMenu);
 }
 
+private function promptAscend():void {
+	clearOutput();
+	outputText("Are you sure you want to ascend? This will restart the game and put you into ");
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) outputText("<b>New Game+</b>");
+	else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) outputText("<b>New Game++</b>");
+	else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) outputText("<b>New Game+++</b>");
+	else outputText("<b>New Game+" + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + 1) + "</b>");
+	outputText(". Your items, level, and attributes except Corruption will be carried over into new playthrough. You'll revert back to human completely but you'll get to keep ears and tail transformations, if any. You'll also retain your name and gender.");
+	outputText("\n\n(Ascension is currently beta. Suggestions and feedback are welcome.)");
+	outputText("\n\n<b>Proceed?</b>");
+	doYesNo(ascendForReal, campActions);
+}
+private function ascendForReal():void {
+	//Check performance!
+	var performancePoints:int = 0
+	var levelDelta:int = player.level - (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30) / 2;
+	if (levelDelta < 0) levelDelta = 0;
+	performancePoints = levelDelta + companionsCount();
+	//Increment by 1.
+	flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
+	//Keep items
+	var oldItemStorage:Array = inventory.itemStorageDirectGet();
+	var oldGearStorage:Array = inventory.gearStorageDirectGet();
+	//Keep perks
+	var oldPerks:Array = player.perks;
+	//Keep certain flags.
+	var levelNG:Number = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+
+	//RESTART!
+	//kGAMECLASS.charCreation.newGamePlus();
+	
+	//Set to old values.
+	flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = levelNG;
+
+	player.ascensionPerkPoints += performancePoints;
+	clearOutput();
+	outputText("It's time for you to ascend. You walk to the center of the camp, announce that you're going to ascend to a higher plane of existence, and lay down. ");
+	if (companionsCount() == 1) outputText("\n\nYour fellow companion comes to witness.");
+	else if (companionsCount() > 1) outputText("\n\nYour fellow companion comes to witness.");
+	outputText("\n\nYou begin to glow; you can already feel yourself leaving your body and you announce your departure.");
+	if (marbleFollower()) outputText("\n\n\"<i>Sweetie, I'm going to miss you. See you in the next playthrough,</i>\" Marble says, tears leaking from her eyes.");
+	outputText("\n\nThe world around you slowly fades to black and stars dot the endless void. <b>You have ascended.</b>");
+	doNext(kGAMECLASS.charCreation.ascensionMenu);
+}
 
 //Camp population!
 public function getCampPopulation():int {
@@ -2460,6 +2506,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] >= 100) awardAchievement("Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED);
 	if (flags[kFLAGS.BOG_EXPLORED] >= 100) awardAchievement("All murky", kACHIEVEMENTS.ZONE_ALL_MURKY);
 	if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] >= 100) awardAchievement("Frozen", kACHIEVEMENTS.ZONE_FROZEN);
+	if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] >= 100) awardAchievement("Roasted", kACHIEVEMENTS.ZONE_ROASTED);
 	
 	if (player.statusAffectv1(StatusAffects.BoatDiscovery) >= 15) awardAchievement("Sea Legs", kACHIEVEMENTS.ZONE_SEA_LEGS);
 	if (player.statusAffectv1(StatusAffects.MetWhitney) >= 30) awardAchievement("Farmer", kACHIEVEMENTS.ZONE_FARMER);
@@ -2514,12 +2561,16 @@ private function updateAchievements():void {
 		dungeonsCleared++;
 		if (flags[kFLAGS.TIMES_ORGASMED] <= 0 && flags[kFLAGS.MOD_SAVE_VERSION] == kGAMECLASS.modSaveVersion) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
 	}
+	if (kGAMECLASS.dungeons.checkLethiceStrongholdClear()) {
+		dungeonsCleared++;
+	}
 	if (dungeonsCleared >= 3) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
-	if (dungeonsCleared >= 5) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
+	if (dungeonsCleared >= 5) awardAchievement("Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
 	
 	//Fashion
 	if (player.armor == armors.W_ROBES && player.weapon == weapons.W_STAFF) awardAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD);
 	if ((player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) && (player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP)) awardAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX);
+	if (player.armor != ArmorLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING) awardAchievement("Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO);
 	if (player.jewelry.value >= 1000) awardAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING);
 	
 	//Wealth

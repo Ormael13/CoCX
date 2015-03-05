@@ -48,7 +48,7 @@ package classes.Scenes.Places.Ingnam
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nYou could punish the thief if you want to. If so, which parts would you use?");
 				if (player.hasCock()) {
-					if (player.cockThatFits(monster.analCapacity())) addButton(0, "Anal Fuck", rapeThiefAnally, null, null, null, "The thief definitely needs to learn a lesson not to mess with you. Buttfuck the thief.");
+					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "Anal Fuck", rapeThiefAnally, null, null, null, "The thief definitely needs to learn a lesson not to mess with you. Buttfuck the thief.");
 					else outputText(" <b>Your cock is too big to fit!</b>");
 				}
 				if (player.hasVagina()) addButton(1, "Get Licked", getLicked, null, null, null, "Punish the thief by having him lick your [vagina].");

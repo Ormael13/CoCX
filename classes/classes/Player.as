@@ -55,6 +55,7 @@ use namespace kGAMECLASS;
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
 		public var statPoints:Number = 0;
+		public var ascensionPerkPoints:Number = 0;
 		
 		public var tempStr:Number = 0;
 		public var tempTou:Number = 0;
@@ -1570,6 +1571,10 @@ use namespace kGAMECLASS;
 		public function damageHunger(amnt:Number = 0):void {
 			hunger -= amnt;
 			if (hunger < 0) hunger = 0;
+		}
+		
+		public function corruptionTolerance():Number {
+			return perkv1(PerkLib.AscensionTolerance) * 5;
 		}
 		
 		public function buttChangeDisplay():void

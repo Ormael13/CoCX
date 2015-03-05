@@ -169,7 +169,8 @@ package classes.Scenes.Dungeons.Factory
 		
 		private function wonInDungeon3(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
+			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) game.dungeons.factory.doLossIncubus();
+			else game.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
 		}
 
 		public function IncubusMechanic() {

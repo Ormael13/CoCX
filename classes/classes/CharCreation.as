@@ -13,6 +13,21 @@
 
 	public var unlockedHerm:Boolean = false;
 	
+	public const MAX_TOLERANCE_LEVEL:int = 10;
+	public const MAX_MORALSHIFTER_LEVEL:int = 10;
+	public const MAX_DESIRES_LEVEL:int = 10;
+	public const MAX_ENDURANCE_LEVEL:int = 10;
+	public const MAX_MYSTICALITY_LEVEL:int = 10;
+	public const MAX_WISDOM_LEVEL:int = 5;
+	public const MAX_FORTUNE_LEVEL:int = 5;
+	public const MAX_VIRILITY_LEVEL:int = 5;
+	public const MAX_FERTILITY_LEVEL:int = 5;
+
+public function newGameFromScratch(e:MouseEvent = null):void {
+	flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0;
+	newGameGo();
+}
+	
 public function newGameGo(e:MouseEvent = null):void {
 	funcs = [];
 	args = [];
@@ -33,6 +48,11 @@ public function newGameGo(e:MouseEvent = null):void {
 	var easy:Boolean = false;
 	var sprite:Boolean = false;
 	var oldUI:Boolean = false;
+	//Carries over for new game plus.
+	var newGamePlusLevel:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+	var gameMode:Number = flags[kFLAGS.HUNGER_ENABLED];
+	var hardcoreMode:Number = flags[kFLAGS.HARDCORE_MODE];
+	var hardcoreSlot:Number = flags[kFLAGS.HARDCORE_SLOT];
 	//If at initial title
 	if(flags[kFLAGS.SHOW_SPRITES_FLAG])
 		sprite = true;
@@ -44,6 +64,7 @@ public function newGameGo(e:MouseEvent = null):void {
 		oldUI = true;
 	if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM])
 		unlockedHerm = true;
+	
 	mainView.setButtonText( 0, "Newgame" ); // b1Text.text = "Newgame";
 	flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 	
@@ -81,44 +102,51 @@ public function newGameGo(e:MouseEvent = null):void {
 	//Hold onto old data for NG+
 	var oldPlayer:Player = player;
 	//Reset all standard stats
-	player = new Player();
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player = new Player();
 	model.player = player;
-	player.str = 15;
-	player.tou = 15;
-	player.spe = 15;
-	player.inte = 15;
-	player.sens = 15;
-	player.lib = 15;
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+		player.str = 15;
+		player.tou = 15;
+		player.spe = 15;
+		player.inte = 15;
+		player.sens = 15;
+		player.lib = 15;
+	}
 	player.cor = 15; 
-	kGAMECLASS.notes = "No Notes Available.";
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) kGAMECLASS.notes = "No Notes Available.";
 	player.lust = 15;
-	player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
-	player.level = 1;
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+		player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
+		player.level = 1;
+		
+		player.gems = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS];
+	}
 	player.HP = player.maxHP();
-	player.gems = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS];
 	player.hairLength = 5;
 	player.skinType = SKIN_TYPE_PLAIN;
 	player.faceType = FACE_HUMAN;
-	player.tailType = TAIL_TYPE_NONE;
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player.tailType = TAIL_TYPE_NONE;
 	player.tongueType = TONUGE_HUMAN;
-	player.femininity = 50;
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player.femininity = 50;
 	player.beardLength = 0;
 	player.beardStyle = 0;
 	player.tone = 50;
 	player.thickness = 50;
 	player.skinDesc = "skin";
-	player.balls = 0;
-	player.cumMultiplier = 1;
-	player.ballSize = 0;
-	player.hoursSinceCum = 0;
-	player.clitLength = 0;
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+		player.balls = 0;
+		player.cumMultiplier = 1;
+		player.ballSize = 0;
+		player.hoursSinceCum = 0;
+		player.clitLength = 0;
+	}
 	player.ass.analLooseness = 0;
 	player.ass.analWetness = 0;
 	player.ass.fullness = 0;
 	player.fertility = 5;
 	player.fatigue = 0;
 	player.horns = 0;
-	player.tallness = 0;
+	player.tallness = 60;
 	player.tailVenom = 0;
 	player.tailRecharge = 0;
 	player.wingType = WING_TYPE_NONE;
@@ -134,36 +162,38 @@ public function newGameGo(e:MouseEvent = null):void {
 	player.exploredDesert = 0;
 	player.exploredMountain = 0;
 	player.exploredLake = 0;
-	//Inventory clear
-	player.itemSlot1.unlocked = true;
-	player.itemSlot1.emptySlot();
-	player.itemSlot2.unlocked = true;
-	player.itemSlot2.emptySlot();
-	player.itemSlot3.unlocked = true;
-	player.itemSlot3.emptySlot();
-	player.itemSlot4.unlocked = false;
-	player.itemSlot4.emptySlot();
-	player.itemSlot5.unlocked = false;
-	player.itemSlot5.emptySlot();
-	//PIERCINGS
-	player.nipplesPierced = 0;
-	player.nipplesPShort = "";
-	player.nipplesPLong = "";
-	player.lipPierced = 0;
-	player.lipPShort = "";
-	player.lipPLong = "";
-	player.tonguePierced = 0;
-	player.tonguePShort = "";
-	player.tonguePLong = "";
-	player.eyebrowPierced = 0;
-	player.eyebrowPShort = "";
-	player.eyebrowPLong = "";
-	player.earsPierced = 0;
-	player.earsPShort = "";
-	player.earsPLong = "";
-	player.nosePierced = 0;
-	player.nosePShort = "";
-	player.nosePLong = "";
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+		//Inventory clear
+		player.itemSlot1.unlocked = true;
+		player.itemSlot1.emptySlot();
+		player.itemSlot2.unlocked = true;
+		player.itemSlot2.emptySlot();
+		player.itemSlot3.unlocked = true;
+		player.itemSlot3.emptySlot();
+		player.itemSlot4.unlocked = false;
+		player.itemSlot4.emptySlot();
+		player.itemSlot5.unlocked = false;
+		player.itemSlot5.emptySlot();
+		//PIERCINGS
+		player.nipplesPierced = 0;
+		player.nipplesPShort = "";
+		player.nipplesPLong = "";
+		player.lipPierced = 0;
+		player.lipPShort = "";
+		player.lipPLong = "";
+		player.tonguePierced = 0;
+		player.tonguePShort = "";
+		player.tonguePLong = "";
+		player.eyebrowPierced = 0;
+		player.eyebrowPShort = "";
+		player.eyebrowPLong = "";
+		player.earsPierced = 0;
+		player.earsPShort = "";
+		player.earsPLong = "";
+		player.nosePierced = 0;
+		player.nosePShort = "";
+		player.nosePLong = "";
+	}
 	//PLOTZ
 	kGAMECLASS.monk = 0;
 	kGAMECLASS.whitney = 0;
@@ -172,13 +202,78 @@ public function newGameGo(e:MouseEvent = null):void {
 	kGAMECLASS.giacomo = 0;
 	//Lets get this bitch started
 	kGAMECLASS.inCombat = false;
-	//NG+ Clothes reset
-	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] != 0) 
-	{
-		//Clear Raphael's training variable so it does not effect
-		//Weapon strength post-newgame.
-		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 0;
-		
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+		//NG+ Clothes reset
+		if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] != 0) 
+		{
+			//Clear Raphael's training variable so it does not effect
+			//Weapon strength post-newgame.
+			flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 0;
+			
+			if (!(oldPlayer.armor is GooArmor))
+			{
+				player.setArmor(oldPlayer.armor);
+			}
+			else
+			{
+				player.setArmor(armors.C_CLOTH);
+			}
+				
+			player.setWeapon(oldPlayer.weapon);
+		}
+		//Clothes clear
+		else {
+			player.setArmor(armors.C_CLOTH);
+			player.setWeapon(WeaponLib.FISTS);
+		}
+		//Clear old camp slots
+		inventory.clearStorage();
+		inventory.clearGearStorage();
+		//Initialize gearStorage
+		inventory.initializeGearStorage();
+		//Clear cocks
+		while(player.cocks.length > 0)
+		{
+			player.removeCock(0,1);
+			trace("1 cock purged.");
+		}
+		//Clear vaginas
+		while(player.vaginas.length > 0)
+		{
+			player.removeVagina(0,1);
+			trace("1 vagina purged.");
+		}
+		//Clear breasts
+		player.breastRows = [];
+	}
+	else {
+		var hadOldCock:Boolean = player.hasCock();
+		var hadOldVagina:Boolean = player.hasVagina();
+		//Clear cocks
+		while(player.cocks.length > 0)
+		{
+			player.removeCock(0,1);
+			trace("1 cock purged.");
+		}
+		//Clear vaginas
+		while(player.vaginas.length > 0)
+		{
+			player.removeVagina(0,1);
+			trace("1 vagina purged.");
+		}
+		//Keep gender and normalize genitals.
+		if (hadOldCock) player.createCock(5.5, 1, CockTypesEnum.HUMAN);
+		if (hadOldVagina) player.createVagina(true);
+		if (player.balls > 2) player.balls = 2;
+		if (player.ballSize > 2) player.ballSize = 2;
+		if (player.clitLength > 1.5) player.clitLength = 1.5;
+		while (player.breastRows.length > 1)
+		{
+			player.removeBreastRow(1, 1);
+		}
+		if (player.nippleLength > 1) player.nippleLength = 1;
+		while (player.biggestTitSize() > 14) player.shrinkTits(true);
+		//Sorry but you can't come, Valeria!
 		if (!(oldPlayer.armor is GooArmor))
 		{
 			player.setArmor(oldPlayer.armor);
@@ -187,14 +282,37 @@ public function newGameGo(e:MouseEvent = null):void {
 		{
 			player.setArmor(armors.C_CLOTH);
 		}
-			
-		player.setWeapon(oldPlayer.weapon);
 	}
-	//Clothes clear
-	else {
-		player.setArmor(armors.C_CLOTH);
-		player.setWeapon(WeaponLib.FISTS);
+	
+
+	
+	//Clear Statuses
+	while(player.statusAffects.length > 0) {
+		player.removeStatuses();
 	}
+	//Clear perks
+	var ascendPerkTemp:Array = [];
+	for (var i:int = 0; i < player.perks.length; i++) {
+		if (isAscensionPerk(player.perks[i].ptype)) ascendPerkTemp.push(player.perks[i]);
+	}
+	player.removePerks();
+	if (ascendPerkTemp.length > 0) {
+		for (i = 0; i < ascendPerkTemp.length; i++) {
+			player.createPerk(ascendPerkTemp[i].ptype, ascendPerkTemp[i].value1, 0, 0, 0);
+		}
+	}
+	//Clear key items
+	var keyItemTemp:Array = []
+	for (i = 0; i < player.keyItems.length; i++) {
+		if (isSpecialKeyItem(player.keyItems[i].keyName)) keyItemTemp.push(player.keyItems[i]);
+	}
+	player.removeKeyItems();
+	if (keyItemTemp.length > 0) {
+		for (i = 0; i < keyItemTemp.length; i++) {
+			player.createKeyItem(keyItemTemp[i].keyName, 0, 0, 0, 0);
+		}
+	}
+	player.perkPoints = player.level - 1;
 	//Clear plot storage array!
 	flags = new DefaultDict();
 
@@ -203,6 +321,12 @@ public function newGameGo(e:MouseEvent = null):void {
 	if(easy) flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
 	if(silly) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = 1;
 	if(oldUI) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
+	kGAMECLASS.saves.loadPermObject();
+	//Carry over data if new game plus.
+	flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = newGamePlusLevel;
+	flags[kFLAGS.HUNGER_ENABLED] = gameMode;
+	flags[kFLAGS.HARDCORE_MODE] = hardcoreMode;
+	flags[kFLAGS.HARDCORE_SLOT] = hardcoreSlot;
 	//Set that jojo debug doesn't need to run
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02999] = 3;
@@ -210,30 +334,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	model.time.days = 0;
 	model.time.hours = 0;
 	model.time.minutes = 0;
-	//Clear cocks
-	while(player.cocks.length > 0)
-	{
-		player.removeCock(0,1);
-		trace("1 cock purged.");
-	}
-	//Clear vaginas
-	while(player.vaginas.length > 0)
-	{
-		player.removeVagina(0,1);
-		trace("1 vagina purged.");
-	}
-	//Clear breasts
-	player.breastRows = [];
-	
-	//Clear Statuses
-	while(player.statusAffects.length > 0) {
-		player.removeStatuses();
-	}
-	//Clear old camp slots
-	inventory.clearStorage();
-	inventory.clearGearStorage();
-	//Initialize gearStorage
-	inventory.initializeGearStorage();
+
 }
 
 //Choose Hardcore slot.
@@ -1067,7 +1168,8 @@ private function confirmHistory():void {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
 		eventParser(1);
 	}
-	chooseGameModes();
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseGameModes();
+	else startTheGame();
 }
 
 //-----------------
@@ -1197,7 +1299,8 @@ public function useCustomProfile():void {
 		outputText("Your name defines everything about you, and as such, it is time to wake...\n\n");
 		flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 		kGAMECLASS.customPCSetup();
-		doNext(chooseGameModes);
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseGameModes);
+		else doNext(startTheGame);
 	}
 	else {
 		outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...");
@@ -1317,6 +1420,105 @@ private function startNewGamePartThree():void {
 	hideUpDown();
 	outputText("You look around, surveying the hellish landscape as you plot your next move.  The portal is a few yards away, nestled between a formation of rocks.  It does not seem to exude the arousing influence it had on the other side.  The ground and sky are both tinted different shades of red, though the earth beneath your feet feels as normal as any other lifeless patch of dirt.   You settle on the idea of making a camp here and fortifying this side of the portal.  No demons will ravage your beloved hometown on your watch.\n\nIt does not take long to set up your tent and a few simple traps.  You'll need to explore and gather more supplies to fortify it any further.  Perhaps you will even manage to track down the demons who have been abducting the other champions!");
 	doNext(camp.campMenu);
+}
+
+//-----------------
+//-- ASCENSION
+//-----------------
+public function ascensionMenu():void {
+	hideStats();
+	clearOutput();
+	hideMenus();
+	outputText("The world around you suddenly becomes small and irrelevant. Around you is an endless void dotted with stars. You encompass everything and everything encompass you.");
+	outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+	outputText("\n\n(When you're done, select Reincarnate.)");
+	menu();
+	addButton(0, "Perk Selection", ascensionPerkMenu);
+	addButton(4, "Reincarnate", reincarnatePrompt);
+}
+private function ascensionPerkMenu():void {
+	clearOutput();
+	outputText("You can spend your Ascension Perk Points on special perks not available at level-up!");
+	outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+	menu();
+	addButton(0, "Desires", ascensionPerkSelection, PerkLib.AscensionDesires, MAX_DESIRES_LEVEL, null, PerkLib.AscensionDesires.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionDesires) + " / " + MAX_DESIRES_LEVEL);
+	addButton(1, "Endurance", ascensionPerkSelection, PerkLib.AscensionEndurance, MAX_ENDURANCE_LEVEL, null, PerkLib.AscensionEndurance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionEndurance) + " / " + MAX_ENDURANCE_LEVEL);
+	addButton(2, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL);
+	addButton(3, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " / " + MAX_FORTUNE_LEVEL);
+	addButton(4, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL);
+	addButton(5, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL);
+	addButton(6, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL);
+	addButton(7, "Virility", ascensionPerkSelection, PerkLib.AscensionVirility, MAX_VIRILITY_LEVEL, null, PerkLib.AscensionVirility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionVirility) + " / " + MAX_VIRILITY_LEVEL);
+	addButton(8, "Wisdom", ascensionPerkSelection, PerkLib.AscensionWisdom, MAX_WISDOM_LEVEL, null, PerkLib.AscensionWisdom.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionWisdom) + " / " + MAX_WISDOM_LEVEL);
+	addButton(14, "Back", ascensionMenu);
+}
+
+private function ascensionPerkSelection(perk:* = null, maxLevel:int = 10):void {
+	clearOutput();
+	outputText("Perk Effect: " + perk.longDesc);
+	outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxLevel + "");
+	if (player.perkv1(perk) >= maxLevel) outputText(" <b>(Maximum)</b>");
+	var cost:int = player.perkv1(perk) + 1;
+	if (cost > 5) cost = 5;
+	if (player.perkv1(perk) < maxLevel) outputText("\nCost for next level: " + cost);
+	else outputText("\nCost for next level: <b>N/A</b>");
+	outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+	menu();
+	if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxLevel) addButton(0, "Add 1 level", addAscensionPerk, perk, maxLevel);
+	addButton(4, "Back", ascensionPerkMenu);
+}
+private function addAscensionPerk(perk:* = null, maxLevel:int = 10):void {
+	var cost:int = player.perkv1(perk) + 1;
+	if (cost > 5) cost = 5;
+	player.ascensionPerkPoints -= cost;
+	if (player.findPerk(perk) >= 0) player.addPerkValue(perk, 1, 1);
+	else player.createPerk(perk, 1, 0, 0, 0);
+	ascensionPerkSelection(perk, maxLevel);
+}
+
+private function reincarnatePrompt():void {
+	clearOutput();
+	outputText("Would you like to reincarnate and start a new life as a Champion?");
+	doYesNo(reincarnate, ascensionMenu);
+}
+private function reincarnate():void {
+	newGameGo();
+	clearOutput();
+	mainView.nameBox.visible = false;
+	outputText("Everything fades to white and finally... black. You can feel yourself being whisked back to reality as you slowly awaken in your room. You survey your surroundings and recognize almost immediately; you are in your room inside the inn in Ingnam! You get up and look around. ");
+	if (player.hasKeyItem("Camp - Chest") >= 0 || player.hasKeyItem("Equipment Rack - Weapons") >= 0 || player.hasKeyItem("Equipment Rack - Armor") >= 0 || player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
+		if (player.hasKeyItem("Camp - Chest") >= 0) {
+			outputText("\n\nYou take a glance at the chest; you don't remember having it inside your room. You open the chest and look inside. ");
+			if (inventory.hasItemsInStorage()) outputText("Something clicks in your mind; they must be the old stuff you had from your previous incarnation");
+			else outputText("It's empty and you let out a disappointed sigh.");
+		}
+		if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
+			outputText("\n\nThere is a weapon rack. You look at it. ");
+			if (inventory.weaponRackDescription()) outputText(" Something clicks in your mind; they must be the old weapons you had from your previous incarnation!");
+			else outputText("It's empty and you let out a sigh but you know you can bring it to Mareth.");
+		}
+		if (player.hasKeyItem("Equipment Rack - Armor") >= 0) {
+			outputText("\n\nThere is an armor rack. You look at it. ");
+			if (inventory.armorRackDescription()) outputText(" Something clicks in your mind; they must be the old armors you had from your previous incarnation!");
+			else outputText("It's empty and you let out a sigh but you know you can bring it to Mareth.");
+		}
+		if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
+			outputText("\n\nThere is a jewelry box on the dresser. You walk over to the box, open it, and look inside. ");
+			if (inventory.jewelryBoxDescription()) outputText(" It's making sense! The contents must be from your past adventures.")
+			else outputText("It's empty and you let out a sigh but you know you can bring it to Mareth.");	
+		}
+	}
+	outputText("\n\nAfter looking around the room for a while, you look into the mirror and begin to recollect who you are...");
+	player.genderCheck();
+	doNext(genericStyleCustomizeMenu);
+}
+
+private function isAscensionPerk(perk:* = null):Boolean {
+	return (perk == PerkLib.AscensionDesires || perk == PerkLib.AscensionEndurance || perk == PerkLib.AscensionFertility || perk == PerkLib.AscensionFortune || perk == PerkLib.AscensionMoralShifter || perk == PerkLib.AscensionMysticality || perk == PerkLib.AscensionTolerance || perk == PerkLib.AscensionVirility || perk == PerkLib.AscensionWisdom)
+}
+
+private function isSpecialKeyItem(keyName:* = null):Boolean {
+	return (keyName == "Camp - Chest" || keyName == "Equipment Rack - Weapons" || keyName == "Equipment Rack - Armor" || keyName == "Equipment Storage - Jewelry Box" || keyName == "Nieve's Tear"); 
 }
 
 }

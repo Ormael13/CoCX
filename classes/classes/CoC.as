@@ -388,8 +388,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_1.1.6";
-			version = ver + " (<b>Tweaks</b>)";
+			ver = "0.9.2_mod_1.1.7";
+			version = ver + " (<b>Now with ending and ascension!</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

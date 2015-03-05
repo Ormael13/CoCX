@@ -767,6 +767,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.gems = player.gems;
 		saveFile.data.perkPoints = player.perkPoints;
 		saveFile.data.statPoints = player.statPoints;
+		saveFile.data.ascensionPerkPoints = player.ascensionPerkPoints;
 		//Appearance
 		saveFile.data.gender = player.gender;
 		saveFile.data.femininity = player.femininity;
@@ -1444,6 +1445,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.statPoints = 0;
 		else
 			player.statPoints = saveFile.data.statPoints;
+
+		if (saveFile.data.ascensionPerkPoints == undefined)
+			player.ascensionPerkPoints = 0;
+		else
+			player.ascensionPerkPoints = saveFile.data.ascensionPerkPoints;
+		
 		//Appearance
 		player.gender = saveFile.data.gender;
 		if (saveFile.data.femininity == undefined)
