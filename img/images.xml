@@ -1037,6 +1037,10 @@
 				<ImageFile>./img/monster-hellhound</ImageFile>
 				<ImageFile>./img/monster-hellhound_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="monster-hermcentaur">
+				<ImageFile>./img/monster-hermcentaur</ImageFile>
+				<ImageFile>./img/monster-hermcentaur_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="monster-holli">
 				<ImageFile>./img/monster-holli</ImageFile>
 				<ImageFile>./img/monster-holli_1</ImageFile>
@@ -1108,6 +1112,14 @@
 			<ImageSet id="monster-kitsune">
 				<ImageFile>./img/monster-kitsune</ImageFile>
 				<ImageFile>./img/monster-kitsune_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="monster-lethice">
+				<ImageFile>./img/monster-lethice</ImageFile>
+				<ImageFile>./img/monster-lethice_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="monster-lethice-phase2">
+				<ImageFile>./img/monster-lethice-phase2</ImageFile>
+				<ImageFile>./img/monster-lethice-phase2_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="monster-livingstatue">
 				<ImageFile>./img/monster-livingstatue</ImageFile>
@@ -1224,6 +1236,10 @@
 			<ImageSet id="monster-spidermorphmob">
 				<ImageFile>./img/monster-spidermorphmob</ImageFile>
 				<ImageFile>./img/monster-spidermorphmob_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="monster-succubusgardener">
+				<ImageFile>./img/monster-succubusgardener</ImageFile>
+				<ImageFile>./img/monster-succubusgardener_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="monster-tamani">
 				<ImageFile>./img/monster-tamani</ImageFile>
