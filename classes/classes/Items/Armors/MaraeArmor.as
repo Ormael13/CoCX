@@ -15,7 +15,9 @@ package classes.Items.Armors
 		{
 			super("TB.Armr","T.B.Armor","tentacled bark armor","a suit of tentacled bark armor",25,1000,"This suit of armor is finely made from the white bark from corrupted Marae you've defeated. It comes with tentacles though. \n\nType: Heavy armor \nDefense: 25 \nBase value: 1,000");
 		}
-
+		
+		override public function get supportsBulge():Boolean { return true; }
+		
 		override public function useText():void
 		{
 			outputText("You strip yourself naked before you proceed to put on the armor. ");

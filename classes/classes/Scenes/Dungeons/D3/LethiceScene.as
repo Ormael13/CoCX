@@ -53,6 +53,7 @@ package classes.Scenes.Dungeons.D3
 			monster.HP = monster.eMaxHP();
 			monster.lust = 0;
 			monster.fatigue = 0;
+			monster.imageName = "lethice-phase2";
 			if (monster.lustVuln < 0.1) monster.lustVuln = 0.1;
 			monster.long = "She is no doubt the Queen of the Demons. She has pink skin, a rare example among demons. Her eyes are black with yellow iris and slit pupil. Her fangs are clearly visible, protruding along her upper row of teeth. She has long, luxurious purple hair with black roses woven in it, parted by her pair of goat horns and multiple pairs of demonic horns. She has numerous lethicite piercings piercing her ears. Huge draconic wings grow from her back, easily rivaling a full-fledged dragon-morph. Her feet end in high heels. " + (monster.findStatusAffect(StatusAffects.Berzerking) >= 0 ? "She's wearing a suit of lethicite armor that exposes her lethicite-pierced nipples and her glistening vagina." : "She's wearing a set of fetishy churchwear that doesn't seem to cover her B-cup breasts and her glistening vagina.") + " She's currently wielding an ebony staff topped with lethicite.";
 			monster.weaponAttack = 50;

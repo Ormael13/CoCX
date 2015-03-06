@@ -2015,7 +2015,7 @@ public function awardPlayer(nextFunc:Function = null):void
 	}
 	if (player.findPerk(PerkLib.AscensionFortune) >= 0) {
 		monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.1);
-		Math.round(monster.gems);
+		monster.gems = Math.round(monster.gems);
 	}
 	monster.handleAwardText(); //Each monster can now override the default award text
 	if (!inDungeon) {
@@ -2705,7 +2705,8 @@ public function tease(justText:Boolean = false):void {
 		bimbo = true;
 	}
 	if (player.level < 30) damage += player.level;
-	else damage += 30 + ((player.level-30) / 2);
+	else if (player.level < 60) damage += 30 + ((player.level - 30) / 2);
+	else damage += 45 + ((player.level - 60) / 5);
 	damage += player.teaseLevel*2;
 	//==============================
 	//TEASE SELECT CHOICES
@@ -3683,6 +3684,10 @@ public function tease(justText:Boolean = false):void {
 				chance += 2;
 			}
 			break;
+		//lethicite armor, not yet implemented
+		//case 45:
+		//	outputText("You pinch and tweak your exposed [nipples].");
+		//	break;
 	}
 	//===========================
 	//BUILD BONUSES IF APPLICABLE
@@ -4173,13 +4178,13 @@ public function spellArouse():void {
 	return;	
 }
 public function spellHeal():void {
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
+	if(/*player.findPerk(PerkLib.BloodMage) < 0 && */player.fatigue + spellCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
 		return;
 	}
 	menuLoc = 0;
-	fatigue(20,1);
+	fatigue(20,3);
 	outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n", true);
 	//25% backfire!
 	if(rand(4) == 0) {
@@ -4194,7 +4199,8 @@ public function spellHeal():void {
 		dynStats("lib", .25, "lus", 15);
 	}
 	else {
-		temp = int((player.inte/(2 + rand(3)) * spellMod()) * (maxHP()/150));
+		temp = int((player.level + (player.inte/1.5) + rand(player.inte)) * spellMod())
+		//temp = int((player.inte/(2 + rand(3)) * spellMod()) * (maxHP()/150));
 		if(player.armorName == "skimpy nurse's outfit") temp *= 1.2;
 		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
 		HPChange(temp,false);
@@ -5715,6 +5721,7 @@ public function corruptedFoxFire():void {
 	outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
 	checkAchievementDamage(dmg);
 	statScreenRefresh();
+	flags[kFLAGS.SPELLS_CAST]++;
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
 }
@@ -5754,6 +5761,7 @@ public function foxFire():void {
 	outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
 	checkAchievementDamage(dmg);
 	statScreenRefresh();
+	flags[kFLAGS.SPELLS_CAST]++;
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
 }
@@ -5788,13 +5796,19 @@ public function kitsuneTerror():void {
 	//Inflicts fear and reduces enemy SPD.
 	outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill " + monster.a + monster.short + "'s mind with visions of otherworldly terror that defy description.");
 	//(succeed)
-	if(player.inte/10 + rand(20) + 1 > monster.inte/10 + 10) {
+	if (player.inte / 10 + rand(20) + 1 > monster.inte / 10 + 10 + (monster.statusAffectv1(StatusAffects.FearCounter) * 2)) {
 		outputText("  They cower in horror as they succumb to your illusion, believing themselves beset by eldritch horrors beyond their wildest nightmares.\n\n");
-		monster.createStatusAffect(StatusAffects.Fear,1,0,0,0);
+		if (monster.statusAffectv1(StatusAffects.FearCounter) > 0) monster.addStatusValue(StatusAffects.FearCounter, 1, 1)
+		else monster.createStatusAffect(StatusAffects.FearCounter, 1, 0, 0, 0);
+		monster.createStatusAffect(StatusAffects.Fear, 1, 0, 0, 0);
 		monster.spe -= 5;
-		if(monster.spe < 1) monster.spe = 1;
+		if (monster.spe < 1) monster.spe = 1;
 	}
-	else outputText("  The dark fog recedes as quickly as it rolled in as they push back your illusions, resisting your hypnotic influence.\n\n");
+	else {
+		outputText("  The dark fog recedes as quickly as it rolled in as they push back your illusions, resisting your hypnotic influence.");
+		if (monster.statusAffectv1(StatusAffects.FearCounter) >= 4) outputText(" Your foe might be resistant by now.");
+		outputText("\n\n");
+	}
 	enemyAI();
 }
 
@@ -5828,11 +5842,19 @@ public function kitsuneIllusion():void {
 	//Decrease enemy speed and increase their susceptibility to lust attacks if already 110% or more
 	outputText("The world begins to twist and distort around you as reality bends to your will, " + monster.a + monster.short + "'s mind blanketed in the thick fog of your illusions.");
 	//Check for success rate. Maximum 100% with over 90 Intelligence difference between PC and monster.
-	if(player.inte/10 + rand(20) > monster.inte/10 + 9) {
+	if (player.inte / 10 + rand(20) > monster.inte / 10 + 9 + (monster.statusAffectv1(StatusAffects.Illusion) * 2)) {
 	//Reduce speed down to -20. Um, are there many monsters with 110% lust vulnerability?
-		outputText("  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions.\n\n");
-		if(monster.spe >= 0) monster.spe -= 20;
-		if(monster.lustVuln >= 1.1) monster.lustVuln += .1;
+		if (monster.statusAffectv1(StatusAffects.Illusion) < 4) {
+			outputText("  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions.\n\n");
+			if (monster.statusAffectv1(StatusAffects.Illusion) > 0) monster.addStatusValue(StatusAffects.Illusion, 1, 1);
+			else monster.createStatusAffect(StatusAffects.Illusion, 1, 0, 0, 0);
+			if (monster.spe >= 0) monster.spe -= (20 - (monster.statusAffectv1(StatusAffects.Illusion) * 5));
+			if (monster.lustVuln >= 1.1) monster.lustVuln += .1;
+			if (monster.spe < 1) monster.spe = 1;
+		}
+		else {
+			outputText("  It doesn't seem to affect " + monster.a + monster.short + " further. You've probably reached the upper limit.");
+		}
 	}
 	else outputText("  Like the snapping of a rubber band, reality falls back into its rightful place as they resist your illusory conjurations.\n\n");
 	enemyAI();
@@ -5879,11 +5901,12 @@ public function shieldBash():void {
 		enemyAI();
 		return;
 	}
-	var damage:int = player.str + (player.shieldBlock * 2);
+	var damage:int = 10 + (player.str/1.5) + rand(player.str/2) + (player.shieldBlock * 2);
 	var damageReduction:int = rand(monster.tou) / 2;
+	damage -= damageReduction;
+	if (damage < 1) damage = 1;
 	var chance:int = monster.statusAffectv1(StatusAffects.TimesBashed) + 1;
 	if (chance > 10) chance = 10;
-	if (damage < 1) damage = 1;
 	damage = doDamage(damage);
 	outputText("Your [shield] slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!  ");
 	if (monster.findStatusAffect(StatusAffects.Stunned) < 0 && rand(chance) == 0) {

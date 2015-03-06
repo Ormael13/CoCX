@@ -1974,6 +1974,9 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 	if(type == 2) {
 		mod = physicalCost(mod);
 	}
+	if(type == 3) {
+		mod = spellCost(mod);
+	}
 	if(player.fatigue >= player.maxFatigue() && mod > 0) return;
 	if(player.fatigue <= 0 && mod < 0) return;
 	//Fatigue restoration buffs!

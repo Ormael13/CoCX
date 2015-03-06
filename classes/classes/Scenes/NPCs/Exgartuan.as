@@ -712,6 +712,11 @@ public function exgartuanArmorShift():void {
 		player.modArmorName = "crotch-hugging clothes";
 		changed = true;
 	}
+	if(player.armor == armors.DBARMOR || player.armor == armors.TBARMOR) {
+		outputText("The silken loin-cloth of your magical bark armor cinches up, tightening against your groin until it displays the prominent bulge of your demon-possessed dick clearly.", false);
+		player.modArmorName = "crotch-hugging " + player.armor.name;
+		changed = true;
+	}
 	if(player.cor < 33) outputText("  You cringe and blush bright crimson, raging against the demon inside you and wishing he would stop tormenting you!", false);
 	else if(player.cor < 66) outputText("  You cringe a bit at the exhibitionist outfit you're forced to wear, but spend a little time admiring just how well the changes show off your package... Maybe Exgartuan isn't all bad?", false);
 	else outputText("  You pivot your hips forwards, doing your best to show off your sensational package with every step.  Oh, very nice, you'll have to thank Exgartuan later...", false);

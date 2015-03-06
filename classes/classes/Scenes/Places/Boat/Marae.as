@@ -85,9 +85,17 @@ package classes.Scenes.Places.Boat
 		
 		override public function doAI():void {
 			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
-				removeStatusAffect(StatusAffects.Stunned);
-				combatRoundOver();
+				if (findStatusAffect(StatusAffects.Uber) >= 0) {
+					outputText(" You've managed to interrupt her smite attack!");
+					removeStatusAffect(StatusAffects.Uber);
+				}
+				if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
+				else addStatusValue(StatusAffects.Stunned, 1, -1);
 				return;
+			}
+			if (findStatusAffect(StatusAffects.Fear) >= 0) {
+				game.outputText("\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.\n\n");
+				removeStatusAffect(StatusAffects.Fear);
 			}
 			var chooser:int = rand(10);
 			if (findStatusAffect(StatusAffects.Uber) >= 0) {

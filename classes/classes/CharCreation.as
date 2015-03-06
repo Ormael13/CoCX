@@ -135,11 +135,11 @@ public function newGameGo(e:MouseEvent = null):void {
 	player.skinDesc = "skin";
 	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 		player.balls = 0;
-		player.cumMultiplier = 1;
 		player.ballSize = 0;
-		player.hoursSinceCum = 0;
 		player.clitLength = 0;
 	}
+	player.hoursSinceCum = 0;
+	player.cumMultiplier = 1;
 	player.ass.analLooseness = 0;
 	player.ass.analWetness = 0;
 	player.ass.fullness = 0;
@@ -154,6 +154,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	//Default
 	player.skinTone = "light";
 	player.hairColor = "brown";
+	player.hairType = HAIR_NORMAL;
 	player.beardLength = 0;
 	player.beardStyle = 0;
 	//Exploration

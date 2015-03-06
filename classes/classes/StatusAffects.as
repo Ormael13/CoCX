@@ -192,6 +192,7 @@ package classes
 		public static const Drunk:StatusAffectType = mk("Drunk");
 		public static const Earthshield:StatusAffectType = mk("Earthshield");
 		public static const Fear:StatusAffectType = mk("Fear");
+		public static const FearCounter:StatusAffectType = mk("FearCounter");
 		public static const GenericRunDisabled:StatusAffectType = mk("Generic Run Disabled");
 		public static const Gigafire:StatusAffectType = mk("Gigafire");
 		public static const GottaOpenGift:StatusAffectType = mk("Gotta Open Gift");

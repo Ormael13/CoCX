@@ -19,12 +19,12 @@ package classes.Scenes.Dungeons.D3
 		
 		private function lethiceHeals():void {
 			outputText("Lethice raises her lethicite-topped staff and chants repeatedly. The staff glows and the wounds disappear from her body! She glares at you and says, \"<i>Foolish Champion.</i>\"");
-			HP = eMaxHP();
+			addHP(eMaxHP() / 2);
 			fatigue += 10;
 			combatRoundOver();
 		}
 		private function lethiceCums():void {
-			outputText("Lethice glares at you and says, \"<i>I'm not going to let you arouse me till I'm too distracted to fight back!</i>\" Her clit shifts and twists until it becomes a cock that peeks out the slit in her thong. She tweaks her exposed nipples, strokes her cock and fingers her vagina. She lets out a loud moan and screams in ecstasy as pink milk dribbles from her nipples. Cum and feminine juice spills forth, " + (rand(3) > 0 ? "splashing onto the floor" : "staining the carpet") + ". Her cock shrinks back into a clit. She frowns and scolds, \"<i>This is a fatiguing process and I'm not going to let you do it.</i>\"");
+			outputText("Lethice glares at you and says, \"<i>I'm not going to let you arouse me till I'm too distracted to fight back!</i>\" " + (findStatusAffect(StatusAffects.Berzerking) >= 0 ? "Her already-exposed clit shifts and twists until it becomes a cock that hangs freely in the air." : "Her clit shifts and twists until it becomes a cock that peeks out the slit in her thong.") + " She tweaks her exposed nipples, strokes her cock and fingers her vagina. She lets out a loud moan and screams in ecstasy as pink milk dribbles from her nipples. Cum and feminine juice spills forth, " + (rand(3) > 0 ? "splashing onto the floor" : "staining the carpet") + ". Her cock shrinks back into a clit. She frowns and scolds, \"<i>This is a fatiguing process and I'm not going to let you do it.</i>\"");
 			lust = 0;
 			fatigue += 25;
 			if (lustVuln > 0.1) lustVuln -= 0.05;
@@ -32,12 +32,11 @@ package classes.Scenes.Dungeons.D3
 			combatRoundOver();
 		}
 		
-
-		
 		private function lethiceArouse():void {
 			outputText("Lethice raises her lethicite-topped staff and chants repeatedly. She makes a series of arcane gestures, drawing on her own lust to inflict it upon you! ");
-			var lustDmg:Number = (inte / 5 * spellMod() + rand(player.lib - player.inte * 2 + player.cor) / 5);
+			var lustDmg:Number = (5 + (inte / 10) * spellMod() + rand(player.lib - player.inte * 2 + player.cor) / 5);
 			lustDmg *= game.lustPercent() / 100;
+			fatigue += 3;
 			game.dynStats("lus+", lustDmg, "resisted", false);
 			if(player.lust < 30) outputText("You squirm as the magic affects you. ", false);
 			if(player.lust >= 30 && player.lust < 60) {
@@ -67,7 +66,7 @@ package classes.Scenes.Dungeons.D3
 			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] > 0) outputText("Thanks to your readiness, you manage to leap out of the way! Lethice lets out a curse. \"<i>Fuck! Why won't you stand still?</i>\"");
 			else {
 				outputText("It's too late! The orb hits you and explodes, causing a blinding flash across the room! You groan and writhe in pain. ");
-				var dmg:int = ((inte * 4) + (100 - player.cor) + 100 + rand(150));
+				var dmg:int = ((inte * 2) + (100 - player.cor) + 100 + rand(150) * spellMod());
 				dmg = player.reduceDamage(dmg);
 				player.takeDamage(dmg, true);
 			}
@@ -78,15 +77,17 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function doAI():void {
 			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
-				game.outputText("Your foe is too dazed from your last hit to strike back!");
 				if (findStatusAffect(StatusAffects.Uber) >= 0) {
 					outputText(" You've managed to interrupt her spell!");
 					removeStatusAffect(StatusAffects.Uber);
 				}
 				if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
 				else addStatusValue(StatusAffects.Stunned, 1, -1);
-				combatRoundOver();
 				return;
+			}
+			if (findStatusAffect(StatusAffects.Fear) >= 0) {
+				game.outputText("\"<i>You think I'm afraid of anything? Foolish champion!</i>\" Lethice snarls.\n\n");
+				removeStatusAffect(StatusAffects.Fear);
 			}
 			if (findStatusAffect(StatusAffects.Uber) >= 0) {
 				lethiceUberAttackHit();
@@ -108,7 +109,10 @@ package classes.Scenes.Dungeons.D3
 		}
 		
 		private function spellMod():Number {
-			return (inte / 50);
+			var temp:int = 0.5 + (inte / 100);
+			if (temp > 2) temp = 2;
+			if (findStatusAffect(StatusAffects.Berzerking) >= 0) temp += 0.5;
+			return temp;
 		}
 		
 		public function Lethice() 
@@ -116,13 +120,15 @@ package classes.Scenes.Dungeons.D3
 			this.a = "";
 			this.short = "Lethice";
 			this.long = "She is no doubt the Queen of the Demons. She has pink skin, a rare example among demons. Her eyes are black with yellow iris and slit pupil. Her fangs are clearly visible, protruding along her upper row of teeth. She has long, luxurious purple hair with black roses woven in it, parted by her pair of goat horns and multiple pairs of demonic horns. She has numerous lethicite piercings piercing her ears. Huge draconic wings grow from her back, easily rivaling a full-fledged dragon-morph. Her feet end in high heels. " + (findStatusAffect(StatusAffects.Berzerking) >= 0 ? "She's wearing a suit of lethicite armor that exposes her lethicite-pierced nipples and her glistening vagina." : "She's wearing a set of fetishy churchwear that doesn't seem to cover her B-cup breasts and her glistening vagina.") + " She's currently wielding an ebony staff topped with lethicite.";
-			if (findStatusAffect(StatusAffects.Berzerking) >= 0) this.imageName = "lethice-phase2";
-			else this.imageName = "lethice";
+			this.imageName = "lethice";
 			this.tallness = 12 * 8;
-
 			this.createBreastRow(Appearance.breastCupInverse("B"));
 			//this.createCock(8, 1.5, CockTypesEnum.DEMON);
 			this.createVagina(false, 5, 3); 
+			
+			this.skinTone = "pink";
+			this.buttRating = 12;
+			this.hipRating = 10;
 			
 			initStrTouSpeInte(100, 100, 85, 105);
 			initLibSensCor(85, 40, 100);
