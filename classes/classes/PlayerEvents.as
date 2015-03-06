@@ -109,7 +109,7 @@ package classes {
 				{
 					if (player.hunger < 20)
 					{
-						outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your skin.");
+						outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your " + player.skinFurScales() + ".");
 						player.hunger = 25;
 					}
 					if (player.hunger < 25) player.hunger = 25; 
@@ -133,7 +133,7 @@ package classes {
 				player.tailVenom += player.tailRecharge;
 				if (player.tailVenom > 100) player.tailVenom = 100;
 			}
-			if (player.tailType == TAIL_TYPE_CAT && player.lowerBody == LOWER_BODY_TYPE_CAT && player.earType == EARS_CAT) { //Check for gain of cat agility - requires legs, tail, and ears
+			if (player.catScore() >= 4) { //Check for gain of cat agility - requires legs, tail, and ears
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);

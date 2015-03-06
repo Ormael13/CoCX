@@ -2254,14 +2254,14 @@ private function promptAscend():void {
 	else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) outputText("<b>New Game+++</b>");
 	else outputText("<b>New Game+" + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + 1) + "</b>");
 	outputText(". Your items, level, and attributes except Corruption will be carried over into new playthrough. You'll revert back to human completely but you'll get to keep ears and tail transformations, if any. You'll also retain your name and gender.");
-	outputText("\n\n(Ascension is currently beta. Suggestions and feedback are welcome.)");
+	outputText("\n\n(Ascension is currently beta. Suggestions and feedbacks are welcome.)");
 	outputText("\n\n<b>Proceed?</b>");
 	doYesNo(ascendForReal, campActions);
 }
 private function ascendForReal():void {
 	//Check performance!
 	var performancePoints:int = 0
-	var levelDelta:int = player.level - (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30) / 2;
+	var levelDelta:int = (player.level - (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30)) / 2;
 	if (levelDelta < 0) levelDelta = 0;
 	performancePoints = levelDelta + companionsCount();
 	//Increment by 1.

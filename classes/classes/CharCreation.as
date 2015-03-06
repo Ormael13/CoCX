@@ -1261,9 +1261,11 @@ private function startTheGame():void {
 }
 
 public function chooseToPlay():void {
-	if (player.femininity >= 55) player.setUndergarment(undergarments.C_PANTY);
-	else player.setUndergarment(undergarments.C_LOIN);
-	if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+		if (player.femininity >= 55) player.setUndergarment(undergarments.C_PANTY);
+		else player.setUndergarment(undergarments.C_LOIN);
+		if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
+	}
 	clearOutput();
 	outputText("Would you like to play through the 3-day prologue in Ingnam or just skip?");
 	doYesNo(goToIngnam, getBanishedToMarethForReal);

@@ -5059,7 +5059,7 @@ public function breakScarredBlade():void {
 
 public function rebellingScarredBlade(wieldAttempt:Boolean = false):void {
 	if (!wieldAttempt) outputText("<b>The scratched sword you carry jerks wildly like a bucking horse, and, tilting hilt-downward, slides itself right out of its scabbard.  Before you can pick it up and re-sheathe it, it lashes out at your hand, cutting you and landing with the point out.  Even when you try to circle it and grab the handle, the uncanny saber spins its edge around to fend you off.  Sighing with irritation, you abandon it for now.</b>\n\n");
-	else outputText("As soon as you try to wield the sword, it jerks wildly like a bucking horse. You quickly put it into your pouches before it can do harm to you.");
+	else outputText("As soon as you try to wield the sword, it jerks wildly like a bucking horse. You quickly put it back into your pouches before it can do harm to you.");
 	if (!wieldAttempt) {
 		var dmg:int = 20
 		dmg -= player.armorDef;
@@ -5076,14 +5076,16 @@ public function findScarredBlade():void {
 	doYesNo(takeScarredBlade, leaveScarredBlade);
 }
 private function takeScarredBlade():void {
+	clearOutput();
 	outputText("You grab the bloodthirsty saber and pull it from the ground. ");
 	flags[kFLAGS.SCARRED_BLADE_STATUS] = 0;
-	inventory.takeItem(weapons.SCARBLD, camp.returnToCamp);
+	inventory.takeItem(weapons.SCARBLD, camp.returnToCampUseOneHour);
 }
 private function leaveScarredBlade():void {
+	clearOutput();
 	outputText("You choose not to take the saber, leaving it to rust. ");
 	flags[kFLAGS.SCARRED_BLADE_STATUS] = -1;
-	doNext(camp.returnToCamp);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 /*Sheila's Lethicite:

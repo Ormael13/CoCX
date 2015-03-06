@@ -31,13 +31,13 @@ package classes.Items
 		//Extra stuff!
 		public const D_SCALE:SimpleUseable = new SimpleUseable("D.Scale", "Dragonscale", "a freshly-shed dragonscale", 6, 
 			"This sheet of dragon scale is incredibly strong and flexible.  No dragons were harmed in the acquisition of this item. \n\nType: Material", 
-			"You look over the sheet of dragon scale. You've seen various legends about how the scales can be worked into tough armor or used in alchemy.");
+			"You look over the sheet of dragon scale. You've seen various legends about how the scales of a dragon can be worked into tough armor or used in alchemy.");
 		public const IMPSKLL:SimpleUseable = new SimpleUseable("ImpSkll", "ImpSkull", "an imp skull", 25, 
 			"A skull taken from a slain imp. \n\nType: Material",
 			"You look at the imp skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
 		public const LETHITE:SimpleUseable = new SimpleUseable("Lethite", "Lethicite", "a chunk of lethicite", 1000, 
 			"A chunk of lethicite.  It's very rare as lethicite is only produced when a mortal becomes a demon and cums their souls out.  \n\nType: Material \nBase value: 1,000",
-			"You examine the pinkish-purple crystal. It must be lethicite. You know that demons like to consume them but you're sure there might be a use for it.");
+			"You examine the pinkish-purple crystal. It must be lethicite. You know that the demons like to consume them but you're sure there might be a use for it.");
 		//Condom! Yay!
 		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a packet of condom", 6,
 			"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes. \n\nType: Miscellaneous",

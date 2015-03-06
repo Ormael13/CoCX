@@ -1329,7 +1329,8 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.PIPE.id ||
 					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE.id ||
 					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.W_STAFF.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.E_STAFF.id) {
+					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.E_STAFF.id ||
+					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L_STAFF.id) {
 				outputText("\n\nThough she acts like she's not serious and pulls her swings more often than not, the heft of the ");
 				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.PIPE.id) outputText("pipe");
 				else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE.id) outputText("mace");

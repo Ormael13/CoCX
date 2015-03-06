@@ -65,7 +65,7 @@ package classes.Scenes.Areas.HighMountains
 			var eggs:Function =null;
 			if(player.canOvipositSpider()) eggs = driderPCEggLaysBasilisk;
 			if(player.canOvipositBee() && player.gender > 0) eggs = layBeeEggsInABasilisk;
-			if(player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor >= 66 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) evil = defeatBasiliskAndAnal;
+			if(player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor >= 66 - player.corruptionTolerance() || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) evil = defeatBasiliskAndAnal;
 			//Player HP victory: 
 			if(monster.HP < 1) outputText("Unable to stand anymore, the basilisk shakily sinks down on one knee, drops its head and looks at the ground, evidently demonstrating submission.", false);
 			//Player Lust victory: 

@@ -241,7 +241,7 @@ package classes.Scenes.Monsters
 					fitsFuck = gatsGoblinBoners;
 				}
 				//Buttsex toggle
-				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor > 70 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) buttseks = gobboButtSecks;
+				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor > 70 - player.corruptionTolerance() || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) buttseks = gobboButtSecks;
 				//Spidercondom
 				if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
 					spiderCondom = goblinCondomed;

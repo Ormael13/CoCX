@@ -699,7 +699,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 		return true;
 	}
 	//Drop scarred blade if not corrupted enough!
-	if (player.weapon == weapons.SCARBLD && player.cor < 70 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+	if (player.weapon == weapons.SCARBLD && player.cor < (70 - player.corruptionTolerance()) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
 		kGAMECLASS.sheilaScene.rebellingScarredBlade();
 		return true;
 	}

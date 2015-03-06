@@ -386,18 +386,18 @@ package classes.Scenes
 			menu();
 			addItemButton(weapons.L_DAGGR);
 			addItemButton(weapons.L_HAMMR);
+			addItemButton(weapons.L_STAFF);
 			addItemButton(weapons.MACE);
-			addItemButton(weapons.PIPE);
 			
+			addItemButton(weapons.PIPE);
 			addItemButton(weapons.PTCHFRK);			
 			addItemButton(weapons.RIDINGC);
 			addItemButton(weapons.RRAPIER);
-			addItemButton(weapons.S_BLADE);
 			
+			addItemButton(weapons.S_BLADE);
 			addItemButton(weapons.S_GAUNT);			
 			addItemButton(weapons.SCARBLD);
 			addItemButton(weapons.SCIMITR);
-			addItemButton(weapons.SPEAR);
 			
 			addButton(4, "Next", itemSpawnWeaponsMenuIII);
 			addButton(9, "Previous", itemSpawnWeaponsMenuI);
@@ -406,9 +406,11 @@ package classes.Scenes
 		private function itemSpawnWeaponsMenuIII():void {
 			lastMenu = itemSpawnWeaponsMenuIII;
 			menu();
+			addItemButton(weapons.SPEAR);
 			addItemButton(weapons.SUCWHIP);
 			addItemButton(weapons.W_STAFF);
 			addItemButton(weapons.WARHAMR);
+			
 			addItemButton(weapons.WHIP);			
 
 			//addButton(4, "Next", itemSpawnWeaponsMenuIV);
@@ -450,12 +452,12 @@ package classes.Scenes
 			addItemButton(armors.LEATHRA);
 			addItemButton(armors.URTALTA);
 			addItemButton(armors.LMARMOR);
-			addItemButton(armors.LTHRPNT);
+			addItemButton(armors.LTHCARM);
 			
+			addItemButton(armors.LTHRPNT);
 			addItemButton(armors.LTHRROB);
 			addItemButton(armors.M_ROBES);
 			addItemButton(armors.TBARMOR);
-			addItemButton(armors.NURSECL);
 			
 			addButton(4, "Next", itemSpawnArmoursMenuIII);
 			addButton(9, "Previous", itemSpawnArmoursMenuI);
@@ -464,23 +466,33 @@ package classes.Scenes
 		private function itemSpawnArmoursMenuIII():void {
 			lastMenu = itemSpawnArmoursMenuIII;
 			menu();
+			addItemButton(armors.NURSECL);
 			addItemButton(armors.OVERALL);
 			addItemButton(armors.R_BDYST);
 			addItemButton(armors.RBBRCLT);
-			addItemButton(armors.S_SWMWR);
 			
+			addItemButton(armors.S_SWMWR);
 			addItemButton(armors.SCALEML);
 			addItemButton(armors.SEDUCTA);
 			addItemButton(armors.SEDUCTU);
-			addItemButton(armors.SS_ROBE);
 			
+			addItemButton(armors.SS_ROBE);
 			addItemButton(armors.SSARMOR);
 			addItemButton(armors.T_BSUIT);
 			addItemButton(armors.TUBETOP);
+			
+			
+			addButton(4, "Next", itemSpawnArmoursMenuIV);
+			addButton(9, "Previous", itemSpawnArmoursMenuII);
+			addButton(14, "Back", itemSpawnMenu);
+		}
+		private function itemSpawnArmoursMenuIV():void {
+			lastMenu = itemSpawnArmoursMenuIV;
+			menu();
 			addItemButton(armors.W_ROBES);
 			
 			//addButton(4, "Next", itemSpawnArmoursMenuIV);
-			addButton(9, "Previous", itemSpawnArmoursMenuII);
+			addButton(9, "Previous", itemSpawnArmoursMenuIII);
 			addButton(14, "Back", itemSpawnMenu);
 		}
 		
@@ -528,16 +540,21 @@ package classes.Scenes
 			addItemButton(undergarments.C_LOIN);
 			addItemButton(undergarments.C_PANTY);
 			addItemButton(undergarments.FURLOIN);
+			
 			addItemButton(undergarments.GARTERS);
 			addItemButton(undergarments.LTX_BRA);
 			addItemButton(undergarments.LTXSHRT);
 			addItemButton(undergarments.LTXTHNG);
+			
 			addItemButton(undergarments.SS_BRA);
 			addItemButton(undergarments.SS_LOIN);
 			addItemButton(undergarments.SSPANTY);
 			
 			addButton(14, "Back", itemSpawnMenu);
 		}
+		/*private function itemSpawnUndergarmentsMenuII():void {
+			
+		}*/
 		
 		private function giveItem(item:*):void {
 			clearOutput();
