@@ -388,8 +388,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_1.1.9b";
-			version = ver + " (<b>Nerftastic</b>)";
+			ver = "0.9.2_mod_1.1.10";
+			version = ver + " (<b>Bug fixes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

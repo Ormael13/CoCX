@@ -77,12 +77,14 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function doAI():void {
 			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
+				outputText("Your foe is too dazed from your last hit to strike back!", false)
 				if (findStatusAffect(StatusAffects.Uber) >= 0) {
 					outputText(" You've managed to interrupt her spell!");
 					removeStatusAffect(StatusAffects.Uber);
 				}
 				if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
 				else addStatusValue(StatusAffects.Stunned, 1, -1);
+				combatRoundOver();
 				return;
 			}
 			if (findStatusAffect(StatusAffects.Fear) >= 0) {

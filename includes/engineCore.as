@@ -1914,7 +1914,8 @@ public function hideMenus():void {
 //Hide the up/down indicators
 public function hideUpDown():void {
 	mainView.statsView.hideUpDown();
-	
+	mainView.hungerUp.visible = false;
+	mainView.hungerDown.visible = false;
 	//Clear storage values so up/down arrows can be properly displayed
 	oldStats.oldStr = 0;
 	oldStats.oldTou = 0;

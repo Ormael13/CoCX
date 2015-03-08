@@ -49,8 +49,8 @@ package classes.Scenes
 				addButton(2, "Flag Editor", flagEditor);
 				//addButton(5, "Event Trigger", eventTriggerMenu);
 				addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
-				//addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
 				addButton(5, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
+				addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
 				addButton(14, "Exit", eventParser, 1);
 			}
 		}
@@ -604,7 +604,12 @@ package classes.Scenes
 			addButton(2, "TweenSideBarIn", kGAMECLASS.mainViewHack.tweenInStats);
 			addButton(3, "TweenSideBarOut", kGAMECLASS.mainViewHack.tweenOutStats);
 			addButton(4, "TweenButtons", kGAMECLASS.mainViewHack.startUpButtons);
+			addButton(5, "Show Hunger Up", displayHungerUp);
 			addButton(14, "Back", accessDebugMenu);
+		}
+		
+		private function displayHungerUp():void {
+			kGAMECLASS.mainView.hungerUp.visible = true;
 		}
 		
 		private function eventTriggerMenu():void {

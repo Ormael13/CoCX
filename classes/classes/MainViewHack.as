@@ -6,6 +6,7 @@ package classes
 	import classes.GlobalFlags.kGAMECLASS;
 	import coc.view.CoCButton;
 	import flash.display.Shape;
+	import flash.display.GradientType;
 	import flash.events.TimerEvent;
 	import flash.text.TextFormat;
 	
@@ -38,6 +39,7 @@ package classes
 		public var reassigned:Boolean = false;
 		public var minLustBar:* = null;
 		public var initializedThirdRow:Boolean = false;
+		public var initializedGradients:Boolean = false;
 		
 		private var _textFormatButton:TextFormat;
 		private var _textFont:Font;
@@ -170,7 +172,7 @@ package classes
 			}
 			if (mainView.statsView.getChildByName("esteemBar") != null) {
 				mainView.statsView.setChildIndex(mainView.esteemBar, 1);
-			}			
+			}
 			
 			//Hunger
 			if (mainView.getChildByName("hungerBar") != null) {
@@ -191,7 +193,18 @@ package classes
 			if (mainView.statsView.getChildByName("hungerText") != null) {
 				mainView.statsView.setChildIndex(mainView.hungerText, 1);
 			}
-			
+			if (mainView.getChildByName("hungerUp") != null) {
+				mainView.statsView.upDownsContainer.addChild(mainView.hungerUp);
+			}
+			if (mainView.getChildByName("hungerDown") != null) {
+				mainView.statsView.upDownsContainer.addChild(mainView.hungerDown);
+			}
+			if (mainView.statsView.upDownsContainer.getChildByName("hungerUp") != null) {
+				mainView.statsView.upDownsContainer.setChildIndex(mainView.hungerUp, 1);
+			}
+			if (mainView.statsView.upDownsContainer.getChildByName("hungerDown") != null) {
+				mainView.statsView.upDownsContainer.setChildIndex(mainView.hungerDown, 1);
+			}
 		}
 		
 		private function InitFormatting():void
@@ -236,6 +249,8 @@ package classes
 			if (mainView.statsView.getChildByName("obeyBar") != null) mainView.statsView.setChildIndex(mainView.obeyBar, 43);
 			if (mainView.statsView.getChildByName("esteemBar") != null) mainView.statsView.setChildIndex(mainView.esteemBar, 28);
 			
+			//if (mainView.statsView.upDownsContainer.getChildByName("hungerUp") != null) mainView.statsView.upDownsContainer.setChildIndex(mainView.hungerUp, 10);
+			//if (mainView.statsView.upDownsContainer.getChildByName("hungerDown") != null) mainView.statsView.upDownsContainer.setChildIndex(mainView.hungerDown, 10);
 			mainView.statsView.setChildIndex(mainView.xpNum, 44);
 			//if (mainView.statsView.getChildByName("MinLustBar") != null) mainView.statsView.setChildIndex(minLustBar, 44);
 			
@@ -256,8 +271,8 @@ package classes
 				mainView.hungerBar.visible = true;
 				mainView.hungerNum.visible = true;
 				mainView.hungerText.visible = true;
-				mainView.hungerDown.visible = false;
-				mainView.hungerUp.visible = false;
+				//mainView.hungerDown.visible = false;
+				//mainView.hungerUp.visible = false;
 			}
 		}
 		
@@ -378,7 +393,6 @@ package classes
 			mainView.hungerBar.width = (player.hunger * (baseWidth / 100));
 			mainView.hungerBar.height = baseHeight;
 			mainView.hungerBar.alpha = universalAlpha;
-			
 			//Experience bar.
 			mainView.obeyBar.x = 6;
 			mainView.obeyBar.y = 608 - posOffset;
@@ -387,6 +401,7 @@ package classes
 			if (player.level < kGAMECLASS.levelCap) mainView.obeyBar.width = (((player.XP / (player.level * 100)) * 100) * (baseWidth / 100));
 			else mainView.obeyBar.width = (100 * (baseWidth / 100)); //Level is capped at 100.
 			if (player.XP >= player.level * 100) mainView.obeyBar.width = baseWidth; //Set to 100% if XP exceeds the requirement.
+			
 			//Set numbers
 			mainView.strText.y = basePos + (gapDiff * 1) - posTextOffset;
 			mainView.strNum.y = basePos + (gapDiff * 1) - posTextOffset;
@@ -561,6 +576,7 @@ package classes
 					else mainView.timeText.htmlText += "Time: " + (model.time.hours - 12) + ":" + minutesDisplay + "pm";
 				}
 			}
+			
 		}
 		
 		public function setOldSprite():void {

@@ -1547,6 +1547,8 @@ use namespace kGAMECLASS;
 					modThickness(100, weightChange);
 					hunger = 100;
 				}
+				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) kGAMECLASS.mainView.statsView.showStatUp('hunger');
+				game.dynStats("lus", 0, "resisted", false);
 				if (nl) outputText("\n");
 				//Messages
 				if (hunger < 10) outputText("<b>You still need to eat more. </b>");
@@ -1569,8 +1571,11 @@ use namespace kGAMECLASS;
 		 * @param	amnt
 		 */
 		public function damageHunger(amnt:Number = 0):void {
+			var oldHunger:Number = hunger;
 			hunger -= amnt;
 			if (hunger < 0) hunger = 0;
+			if (hunger < oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) kGAMECLASS.mainView.statsView.showStatDown('hunger');
+			game.dynStats("lus", 0, "resisted", false);
 		}
 		
 		public function corruptionTolerance():Number {

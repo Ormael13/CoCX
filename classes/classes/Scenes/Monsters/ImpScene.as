@@ -25,7 +25,10 @@ package classes.Scenes.Monsters
 			else if(player.lust >= 33) outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\nDo you rape him?", true);
 			else {
 				outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.", true);
-				cleanupAfterCombat();
+				if (monster.HP <= 0) {
+					addButton(0, "Kill Him", killImp);
+				}
+				addButton(4, "Leave", cleanupAfterCombat);
 				return;
 			}
 			var maleRape:Function =null;
@@ -61,7 +64,13 @@ package classes.Scenes.Monsters
 			}
 			var eggDump:Boolean = false;
 			if(player.canOvipositBee()) eggDump = true;
-			if(nipFuck==null && femaleRape==null && maleRape==null && feeder==null && bikiniTits==null && !eggDump || flags[kFLAGS.SFW_MODE] > 0) cleanupAfterCombat();
+			if (nipFuck == null && femaleRape == null && maleRape == null && feeder == null && bikiniTits == null && !eggDump || flags[kFLAGS.SFW_MODE] > 0) {
+				if (monster.HP <= 0) {
+					addButton(6, "Kill Him", killImp);
+				}
+				addButton(14, "Leave", cleanupAfterCombat);
+				//cleanupAfterCombat();
+			}
 			else {
 				menu();
 				addButton(0,"Male Fuck",maleRape);
@@ -1548,14 +1557,15 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if(monster.HP < 1) {
 				outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
-				cleanupAfterCombat();
+				if (monster.short != "imp overlord") addButton(0, "Kill Him", killImp);
+				addButton(4, "Leave", cleanupAfterCombat);
 			}
 			else {
 				outputText("The muscular imp groans in pained arousal, his loincloth being pushed to the side by his thick, powerful dick.  Grabbing the useless clothing, he rips it from his body, discarding it.  The imp's eyes lock on his cock as he becomes completely ignorant of your presence.  His now insatiable lust has completely clouded his judgment.  Wrapping both of his hands around his pulsing member he begins to masturbate furiously, attempting to relieve the pressure you've caused.");
 				//Leave // Rape]
 				menu();
-				if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0,"Sex",sexAnImpLord);
-				addButton(14,"Leave",cleanupAfterCombat);
+				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0, "Sex", sexAnImpLord);
+				addButton(4,"Leave",cleanupAfterCombat);
 			}
 		}
 		public function loseToAnImpLord():void {
