@@ -60,6 +60,7 @@ public function encounterKiha():void {
 		kihaFollower.kihaSpiderEventIntro();
 		return;
 	}
+	outputText(images.showImage("kiha-intro"));
 	//First time
 	if(flags[kFLAGS.TIMES_MET_KIHA] == 1) {
 		outputText("An imposing figure drops out of the gnarled swamp trees, spraying loam and moss everywhere as it impacts the ground.  You immediately put up your " + player.weaponName + " and take up a combat stance.  Laughing uproariously, the stranger straightens, tucking her rust-red wings behind her back.  She's so busy with her mirth that you get a chance to get a good look at the six-foot tall monster of a woman.  Though her face has human-like features, a pair of wicked horns protrude from her forehead, giving evidence to more than a little taint.  The twin spikes match the curve of her skull, the pointed tips sticking out a ways behind her.  Her eyes are nearly solid crimson with inky black slits in the middle.  Dark red scales run up her arms and legs to meet on her back.  A powerful reptilian tail hangs down behind her, whipping back and forth with dangerous strength.\n\n", false);
@@ -314,6 +315,7 @@ internal function kihaLossIntro():void {
 private function kihaMilkTitHumiliation():void {
 	//(Does not use the defeat intro - clear screen)
 	clearOutput();
+	outputText(images.showImage("kiha-loss-milking"));
 	spriteSelect(72);
 	if(player.lust >= player.maxLust()) outputText("You slide to the ground, too turned on to fight and openly touching yourself.", false);
 	else outputText("You slide to the ground, too defeated to continue to fight.", false);
@@ -363,6 +365,7 @@ private function kihaGenderlessBeating():void {
 private function kihaRapesMen():void {
 	clearOutput();
 	spriteSelect(72);
+	outputText(images.showImage("kiha-loss-male"));
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
 	if(x < 0) x = 0;
 	outputText("You try to rise, but the dragon girl whips around, her long, thick tail delivering a subduing crack against the side of your head, dropping you back onto your " + buttDescript() + ".  Triumphantly standing over you, the scaled woman eyes you with a panting breathlessness that betrays the coldness in her gaze.  She squints, arcing an imperious eyebrow as she looks you up and down, drawing her hands back to shoulder level and barely brushing against her breasts.  Her tail lashes back and forth between her legs, wrapping around her calves as she lifts a clawed foot and rests it lightly upon your stiffening groin.  Apparently, your fight left her wanting more than just your gems.  Her flexible toes squeeze your " + multiCockDescriptLight() + " through your " + player.armorName + ", and she snorts in derision.  \"<i>This is it, huh?  Pathetic.  I'm going to have to do all the work if I have any hope of you satisfying me.</i>\"\n\n", false);
@@ -402,6 +405,7 @@ private function kihaRapesMen():void {
 private function kihaRapesHerms():void {
 	clearOutput();
 	spriteSelect(72);
+	outputText(images.showImage("kiha-loss-herm"));
 	outputText("The dragoness rolls her eyes and closes the distance between the two of you with a slow, deliberate pace.  She easily bats away your weakened defenses until she is standing inches from you, her tail whipping back and forth as a cold smile curls on her dusky lips.  \"<i>Strip,</i>\" she commands, her voice a quiet whisper.  When you fail to comply, a crimson thunderbolt cracks across your sight and your face explodes with pain.  Blinking, you stagger back a few steps, Kiha's backhand still raised.  Annoyance playing over her face, she holds you in a smoldering glare as she hisses, \"<i>I don't repeat myself,</i>\" from between clenched teeth.  Rather than antagonize the dragon girl further, you comply, shedding your " + player.armorName + " to bare your exposed body to her.  A flash of delight flickers across her mouth but is quickly quelled by her mask of disdain.  \"<i>Weak, puny, and utterly incapable.  Tch, I suppose it can't be helped,</i>\" she mutters, loudly enough for you to hear.  Advancing on you once again, she places a clawed hand on your " + chestDesc() + ", almost tenderly.  Then, in a swift motion, she punches the heel of her palm against your sternum, abruptly knocking you to the ground.  Bending over your prone body, she lowers herself to straddle your " + hipDescript() + ", her muscular, scaled legs squeezing your lower body in a clenching grip.\n\n", false);
 
 	outputText("You open your mouth and she leans in, her sloping mounds pressing hotly against your " + chestDesc() + " stopping just short of kissing you.  She curls her lips into a smile that twists into a sneer.  \"<i>Don't say a fucking word.  I don't need you conscious for this.</i>\"  Then, reaching behind her, Kiha grabs hold of her long, thick tail and pulls it between the two of you.  The tip of her plated appendage wriggles eagerly as she draws it to her charcoal grin, pressing a soft-lipped pucker to the narrow end and gently sucking it into her mouth.  Working it in and out of her face inches at a time, her cheeks go concave from the force of her suction, her chest rising and falling a little faster with each passing moment.  When, finally, she pulls the tail from her maw, the red and black scales shine with the polished gloss of her thick saliva.  The flush appendage turns a half-circle to face you and the dragon forcefully slides it between your lips.  The taste of her warm fluid sends little electric jolts through your muscles, spasming your jaw open, and locking it there for a moment.  You begin drooling and she carefully rolls the dexterous spur around your tongue, gathering your fluids and mixing them with her own.\n\n", false);
@@ -438,6 +442,7 @@ private function kihaRapesHerms():void {
 //Mutual Masturbation - A Tsundere Masturbation Christmas Carol, by Gats Dickings
 private function tsundereMasturbationChristmasCarol():void {
 	clearOutput();
+	outputText(images.showImage("kiha-mutualmasturbation"));
 	spriteSelect(72);
 	outputText("You walk towards the draconic woman, removing your " + player.armorName + " as you observe her firm, ", false);
 	if(player.lust >= player.maxLust()) outputText("wanton", false);
@@ -490,6 +495,7 @@ private function tsundereMasturbationChristmasCarol():void {
 //*Victory Tail-dildo, for girls - Fencrafted for maximum pomf (Zed)
 private function kihaVictoryPomfTail():void {
 	clearOutput();
+	outputText(images.showImage("kiha-taildildo"));
 	spriteSelect(72);
 	outputText("You approach the ", false);
 	if(monster.lust > 99) outputText("lusty ", false);
@@ -544,6 +550,7 @@ private function victoryDickKiha():void {
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
 	var y:Number = player.cockThatFits2(monster.vaginalCapacity());
 	clearOutput();
+	outputText(images.showImage("kiha-vagfuck"));
 	outputText("You walk up and push the dragoness off the tree and onto her side to get a better look at her sopping vagina and tight rump.  Initially she doesn't react, though when she realizes what you're about to do, she cries, \"<i>How very much like my old masters you are.  As soon as you've won a fight, you think of nothing but sex.  ", false);
 	if(monster.lust > 99) outputText("Just because you've aroused my body doesn't mean I'll enjoy this!", false);
 	else outputText("Don't think I'll enjoy this!", false);
@@ -639,6 +646,7 @@ private function victoryDickKiha():void {
 
 private function kihaRapesLittleGirlsISawItOnTheNews():void {
 	clearOutput();
+	outputText(images.showImage("kiha-loss-female"));
 	spriteSelect(72);
 	outputText("\"<i>Well, well... what a cute vagina you have here!</i>\" she exclaims mockingly, pushing her palm against your moist sex.  With a wicked smile, the dragon girl forcibly shoves a pair of fingers inside you, their long, hard tips parting your sensitive flesh mercilessly.  You yelp in both pain and pleasure at her forced entrance, squirming uncomfortably on her hand.  \"<i>Haha!  You're enjoying this?  Don't fret slut, we're just getting started.</i>\"  Pulling back ever so slightly, Kiha slides another finger in, stretching your pussy with the thickness of her digits, furiously working them in and out of your snatch, relishing the gasping blush that spreads across your face.\n\n", false);
 	
@@ -668,6 +676,7 @@ private function kihaRapesLittleGirlsISawItOnTheNews():void {
 //Conversation Only - Emotional Rape! (40- Corruption! PUREBABIES ONLY) (Zed)
 private function rapeKihaWithWORDS():void {
 	clearOutput();
+	outputText(images.showImage("kiha-forced-talk"));
 	spriteSelect(72);
 	if(flags[kFLAGS.KIHA_TALK_STAGE] == 0) {
 		outputText("Kneeling down, you meet the defeated dragoness' gaze and ask her why she's so violent and territorial.  Kiha looks up at you in confusion and asks, \"<i>Wait... you defeated me, and you want to... talk?</i>\"\n\n", false);
@@ -720,6 +729,7 @@ Slowly, the conversation winds back around to the story of her origin.  You casu
 private function analRapuzulaKiha():void {
 	//Requires at least one penis with area <= 20
 	clearOutput();
+	outputText(images.showImage("kiha-buttfuck"));
 	spriteSelect(72);
 	//Kiha PC victory anal scene - by Space.
 	//Requires at least one penis with area <= 20

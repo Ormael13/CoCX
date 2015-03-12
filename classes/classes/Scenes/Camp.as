@@ -2603,6 +2603,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 3) NPCsBadEnds++; //Dungeon 3 encounters
 	if (flags[kFLAGS.D3_CENTAUR_DEFEATED] == 1) NPCsBadEnds++;
 	if (flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] == 1) NPCsBadEnds++;
+	if (flags[kFLAGS.LETHICE_DEFEATED] == 2) NPCsBadEnds++;
 	
 	if (NPCsBadEnds >= 3) awardAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER);
 

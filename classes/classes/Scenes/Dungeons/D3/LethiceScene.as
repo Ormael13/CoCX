@@ -44,7 +44,7 @@ package classes.Scenes.Dungeons.D3
 			startCombat(new Lethice());
 			monster.createStatusAffect(StatusAffects.Berzerking, 50, 0, 0, 0);
 			monster.createPerk(PerkLib.LustyRegeneration, 0, 0, 0, 0);
-			monster.bonusHP += 150;
+			monster.bonusHP += 200;
 			monster.lustVuln -= 0.05;
 			monster.str += 20;
 			monster.tou += 20;

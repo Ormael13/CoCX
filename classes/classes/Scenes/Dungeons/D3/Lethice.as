@@ -35,6 +35,7 @@ package classes.Scenes.Dungeons.D3
 		private function lethiceArouse():void {
 			outputText("Lethice raises her lethicite-topped staff and chants repeatedly. She makes a series of arcane gestures, drawing on her own lust to inflict it upon you! ");
 			var lustDmg:Number = (5 + (inte / 10) * spellMod() + rand(player.lib - player.inte * 2 + player.cor) / 5);
+			if (lustDmg < 10) lustDmg = 10;
 			lustDmg *= game.lustPercent() / 100;
 			fatigue += 3;
 			game.dynStats("lus+", lustDmg, "resisted", false);
@@ -111,8 +112,8 @@ package classes.Scenes.Dungeons.D3
 		}
 		
 		private function spellMod():Number {
-			var temp:int = 0.5 + (inte / 100);
-			if (temp > 2) temp = 2;
+			var temp:int = 1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.5;
+			if (temp > 2.5) temp = 2.5;
 			if (findStatusAffect(StatusAffects.Berzerking) >= 0) temp += 0.5;
 			return temp;
 		}
@@ -141,12 +142,12 @@ package classes.Scenes.Dungeons.D3
 			this.armorName = "fetishy churchwear";
 			this.armorDef = 2;
 			
-			this.bonusHP = 1500;
+			this.bonusHP = 1200;
 			this.additionalXP = 1000;
 			this.gems = 500 + rand(50);
 			this.level = 30;
 			
-			this.lustVuln = 0.25;
+			this.lustVuln = 0.3;
 			
 			this.drop = NO_DROP //new WeightedDrop(weapons.L_STAFF, 1);
 			

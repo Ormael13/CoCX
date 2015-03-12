@@ -263,6 +263,7 @@ private function helpArianWhenYouMeetHim():void {
 //Use variable ArianPark to determine the number of visits.
 public function visitThePark():void {
 	clearOutput();
+	outputText(images.showImage("arian-park"));
 	outputText("As you enter the ragged remnants of the park, you spot the sickly lizan, Arian, sitting at his usual bench, and greet him.  \"<i>Oh, hello there [name].  Good to see you.</i>\"  He waves lazily.");
 	
 	//Visit 1
@@ -357,7 +358,11 @@ public function visitThePark():void {
 public function visitAriansHouse():void {
 	clearOutput();
 	if (flags[kFLAGS.ARIAN_HEALTH] < 29 || flags[kFLAGS.ARIAN_VIRGIN] == 1) arianHealth(1);
-	if(arianFollower()) {
+	if (arianFollower()) {
+		if (arianMF("m", "f") == "f")
+			outputText(images.showImage("arianfemale-tent"));
+		else
+			outputText(images.showImage("arianmale-tent"));
 		outputText("You approach the enchanted tent and slip easily inside the doors to the luxurious interior.  ");
 		var temp:int = rand(10);
 		if(temp == 0) {
@@ -401,6 +406,10 @@ public function visitAriansHouse():void {
 		arianHomeMenu();
 	}
 	else {
+		if (arianMF("m", "f") == "f")
+			outputText(images.showImage("arianfemale-tent"));
+		else
+			outputText(images.showImage("arianmale-tent"));
 		if(flags[kFLAGS.ARIAN_PARK] == 4) {
 			flags[kFLAGS.ARIAN_PARK]++;
 			outputText("Deciding to visit the sickly, Lizan mage, Arian, you promptly start walking.  The house is fairly large, at least two stories tall, but it looks pretty ordinary; there's nothing about it to make it really stand out from the other buildings in the neighborhood.  It's only the small brass plate on the door that says \"<i>Arian, Magus</i>\" that provides any clue that a wizard lives here.  There is a knocker on the front door, solid brass, carved in the shape of a leering grotesque, and you take hold of the handle and loudly bang it against the door to announce your presence.");
@@ -595,6 +604,7 @@ private function dontSleepWithArian():void {
 //[=Eavesdrop=]
 private function eavesDropOnArian():void {
 	clearOutput();
+	outputText(images.showImage("arian-fap"));
 	outputText("You sidle up to the door, pressing your ear against the wood and start to listen intently.");
 	outputText("\n\n\"<i>Curse my illness... curse my dreams... oh, [name]... if only you knew....</i>\"  Arian pants and moans, the distinct fapping sound of a hand slapping reaches your ears.  \"<i>Ah! The things you do to me... the things I wish you would do to me... ah....</i>\"");
 	dynStats("int", 1);
@@ -606,6 +616,7 @@ private function eavesDropOnArian():void {
 //[=Peep=]
 private function peepOnArian():void {
 	clearOutput();
+	outputText(images.showImage("arian-fap"));
 	outputText("Curious, you decide to take a little peek through the lock; you press yourself against it as best you can, looking through into the bedroom beyond.  True to what your ears heard, the sickly albino's health has improved enough for him to focus on more... carnal matters.  Naked from the waist down, he sits on the edge of his bed, groinal slit disgorging a single, average-sized phallus.  Maybe 6 inches long, it's a bright purple-red color, covered in strange lumps");
 	if(player.lizardCocks() > 0) outputText(" just like yours");
 	outputText(", though this isn't stopping him from enthusiastically stroking himself off.");
@@ -635,6 +646,7 @@ private function leaveFappingArian():void {
 //[=Barge in=]
 private function bargeInOnArian():void {
 	clearOutput();
+	outputText(images.showImage("arian-fap"));
 	outputText("With a wry smirk you turn the knob and find that Arian's door is unlocked; without missing a beat, you open the door and step in right in time to see a sticky rope of pre paint Arian's slender belly as he scrambles to cover himself up.");
 	outputText("\n\n\"<i>[name]!  W-Wait, I can explain!  I swear I... I... oh, Marae!</i>\"  He hides himself under the covers of his bed, his white-scaled face red with shame.");
 	outputText("\n\nSlowly you approach the hiding lizard, and sit on his bed.  You let him know you're flattered to be his object of desire, and that there's no need to hide himself.  If he felt this way about you he should just have said so.");
@@ -1448,7 +1460,7 @@ private function giveArianAnal():void {
 	flags[kFLAGS.ARIAN_ANAL_XP] += 10;
 	if(flags[kFLAGS.ARIAN_ANAL_XP] >= 100) flags[kFLAGS.ARIAN_ANAL_XP] = 100;
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
-	if (flags[kFLAGS.ARIAN_VAGINA] > 0)	
+	if (arianMF("m", "f") == "f")
 		outputText(images.showImage("arianfemale-home-giveArianAnal"));	
 	else	
 		outputText(images.showImage("arianmale-home-giveArianAnal"));	
@@ -1740,7 +1752,7 @@ private function getBlownByArian():void {
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
-	if (flags[kFLAGS.ARIAN_VAGINA] > 0)	
+	if (arianMF("m", "f") == "f")
 		outputText(images.showImage("arianfemale-home-getbj"));	
 	else	
 		outputText(images.showImage("arianmale-home-getbj"));
@@ -3651,7 +3663,7 @@ private function TeaseHighAnalXPArian():void {
 public function wakeUpAfterArianSleep():void {
 	clearOutput();
 	if (player.hasCock()) {
-		if (flags[kFLAGS.ARIAN_VAGINA] > 0)	
+		if (arianMF("m", "f") == "f")
 			outputText(images.showImage("arianfemale-camp-dreamingArian"));	
 		else	
 			outputText(images.showImage("arianmale-camp-dreamingArian"));
