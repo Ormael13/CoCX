@@ -2156,7 +2156,7 @@ public function apparantlyJojoDOESlift():void
 		outputText("You ask Jojo if he can teach you how to fight like a monk.\n\n");
 		outputText("Jojo considers you for a moment before saying, “<i>Yes I can teach you the forms, skills and techniques I was taught by my order. Plus...</i>” Jojo gazes off into the distance, his attention drifing for a moment before he continues, “<i>since I am all that is left, it is up to me to bestow this knowledge upon a worthy soul.</i>”\n\n");
 
-		if (player.cor >= 25)
+		if (player.cor >= (25 + player.corruptionTolerance()))
 		{
 			outputText("Jojo frowns, “<i>I am willing to teach you [name], when I can.  However I am no master, therefore I am unworthy of taking a disciple.  But as your friend, I will teach you what I know so that you may protect yourself.  I believe our time would be better spent meditating.  There is very little you can do with these techniques without first finding your center.</i>”\n\n");
 
@@ -2178,7 +2178,7 @@ public function apparantlyJojoDOESlift():void
 	// {Repeatable Generic Training Session Stuffs}
 	else
 	{
-		if (player.fatigue >= 40)
+		if (player.fatigue >= player.maxFatigue() - 60)
 		{
 			outputText("You ask the monk to continue your training; but he shakes his head.\n\n");
 			outputText("“<i>Not yet [name]. Your body must be fit and rested before our training sessions. Rest first, and come back to me later.</i>”\n\n");
@@ -2188,7 +2188,7 @@ public function apparantlyJojoDOESlift():void
 			return;
 		}
 
-		if (player.cor >= 25)
+		if (player.cor >= (25 + player.corruptionTolerance()))
 		{
 			outputText("You ask the monk to continue your training; but he shakes his head.\n\n");
 			outputText("“<i>I fear that your time would be better spend meditating before we continue your training. Would you like to do so now?</i>”\n\n");

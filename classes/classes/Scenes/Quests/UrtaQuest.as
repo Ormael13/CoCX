@@ -192,6 +192,7 @@ private function resetToPC():void {
 
 //Urta Appearance Screen(C)*
 public function startUrtaQuest():void {
+	showStats();
 	clearOutput();
 	trace("Cloning PC's items")
 	// *SERIALIZE* out the players current Player object + items
@@ -254,6 +255,22 @@ public function startUrtaQuest():void {
 	player.hunger = 100;
 	player.gems = 183;
 	player.level = 15;
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 3) {
+			player.level += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
+			player.str += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
+			player.tou += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
+			player.spe += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
+			player.inte += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
+		}
+		else {
+			player.level += 90;
+			player.str += 75;
+			player.tou += 75;
+			player.spe += 75;
+			player.inte += 75;
+		}
+	}
 	player.teaseLevel = 4;
 	player.HP = player.maxHP();
 	player.fatigue = 0;

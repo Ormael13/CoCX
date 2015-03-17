@@ -2083,7 +2083,7 @@ private function buyGymLifeTimeMembership():void {
 private function weightLifting():void {
 	clearOutput();
 	//Too tired?  Fuck off.
-	if(player.fatigue > 75) {
+	if(player.fatigue > player.maxFatigue() - 25) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
 		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
 		doNext(telAdreMenu);
@@ -2134,7 +2134,7 @@ private function weightLifting():void {
 private function goJogging():void {
 	clearOutput();
 	//Too tired?  Fuck off.
-	if(player.fatigue > 70) {
+	if(player.fatigue > player.maxFatigue() - 30) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
 		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
 		doNext(telAdreMenu);

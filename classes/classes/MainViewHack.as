@@ -43,6 +43,8 @@ package classes
 		
 		private var _textFormatButton:TextFormat;
 		private var _textFont:Font;
+		private var _textFormatStats:TextFormat;
+		private var _textFontStats:Font;
 		
 		public var statsHidden:Boolean = false;
 		public var buttonsTweened:Boolean = false;
@@ -215,6 +217,14 @@ package classes
 			_textFormatButton.font = _textFont.fontName;
 			_textFormatButton.size = 18;
 			_textFormatButton.align = TextFormatAlign.CENTER;
+		}
+		
+		private function InitStatsFormatting():void
+		{
+			_textFormatStats = new TextFormat();
+			_textFormatStats.font = "Comic Sans MS";
+			_textFormatStats.size = 12;
+			//_textFormatStats.align = TextFormatAlign.CENTER;
 		}
 		
 		private function reassignIndex():void {
@@ -513,7 +523,7 @@ package classes
 			mainView.timeBG.y = 654;
 			mainView.timeText.x = 4;
 			mainView.timeText.y = 654;
-
+			
 			//Get rid of the space before colon. (For new)
 			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) {
 				mainView.strText.text = "Strength:";

@@ -86,14 +86,25 @@ package classes.Scenes.Quests.UrtaQuest
 
 		private function minotaurCumPress():void
 		{
-			outputText("The minotaur lord tugs on the end of the chain, pulling you toward him, making you spin round and round so many times that you're dazed and dizzy.  You can feel the links coming free of your fur, and the closer you get, the more freedom of movement you have.  Yet, the dizziness makes it hard to do anything other than stumble.  You splat into something wet, sticky, and spongy.  You gasp, breathing a heavy gasp of minotaur musk that makes your head spin in a whole different way.  You pry yourself away from the sweaty, sperm-soaked nuts you landed on and look up, admiring the towering horse-cock with its three-rings of pre-puce along its length.  A droplet of pre-cum as fat as your head smacks into your face, staggering you back and dulling your senses with narcotic lust.");
+			outputText("The minotaur lord tugs on the end of the chain, pulling you toward him, making you spin round and round so many times that you're dazed and dizzy.  You can feel the links coming free of your " + player.skinFurScales() + ", and the closer you get, the more freedom of movement you have.  Yet, the dizziness makes it hard to do anything other than stumble.  You splat into something wet, sticky, and spongy.  You gasp, breathing a heavy gasp of minotaur musk that makes your head spin in a whole different way.  You pry yourself away from the sweaty, sperm-soaked nuts you landed on and look up, admiring the towering horse-cock with its three-rings of pre-puce along its length.  A droplet of pre-cum as fat as your head smacks into your face, staggering you back and dulling your senses with narcotic lust.");
 			kGAMECLASS.dynStats("lus", 22 + player.lib / 8 + player.sens / 8);
 			outputText("You tumble to your knees a few feet away, compulsively licking it up.  Once it's gone, ");
 			if (player.lust >= player.maxLust()) outputText("you rise up, horny and hungry for more.");
 			else {
-				outputText("you realize what you've been doing.  Your embarrassment gives you the strength to re-adopt your fighting pose, but it's hard with how rigid");
-				if (player.lust >= 80) outputText(" and drippy");
-				outputText(" your cock has become.  You want another taste...");
+				outputText("you realize what you've been doing.  Your embarrassment gives you the strength to re-adopt your fighting pose, but it's hard with how ");
+				if (player.hasCock()) {
+					outputText("rigid");
+					if (player.lust >= 80) outputText(" and drippy");
+					outputText(" your cock has become.  ")
+					
+				}
+				else if (player.hasVagina()) {
+					outputText("wet your pussy has become.  ");
+				}
+				else {
+					outputText("aroused you feel in your groin.  ");
+				}
+				outputText("You want another taste...");
 			}
 			removeStatusAffect(StatusAffects.MinotaurEntangled);
 			combatRoundOver();

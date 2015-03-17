@@ -105,7 +105,7 @@ package classes {
 				}
 				else flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] = 0;
 				//Goo armor prevents starvation completely!
-				if (player.armorName == "goo armor")
+				if (player.armor == armors.GOOARMR)
 				{
 					if (player.hunger < 20)
 					{
@@ -133,7 +133,7 @@ package classes {
 				player.tailVenom += player.tailRecharge;
 				if (player.tailVenom > 100) player.tailVenom = 100;
 			}
-			if (player.catScore() >= 4) { //Check for gain of cat agility - requires legs, tail, and ears
+			if (player.tailType == TAIL_TYPE_CAT && player.lowerBody == LOWER_BODY_TYPE_CAT && player.earType == EARS_CAT) { //Check for gain of cat agility - requires legs, tail, and ears
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
