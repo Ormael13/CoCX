@@ -1,6 +1,7 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Kiha extends Monster
 	{
@@ -114,9 +115,9 @@ package classes.Scenes.NPCs
 		override protected function postAttack(damage:int):void
 		{
 			super.postAttack(damage);
-			var flame:int = 15 + rand(6);
-			flame = player.takeDamage(flame);
-			outputText("\nAn afterwash of flames trails behind her blow, immolating you! (" + flame + ")", false);
+			var flame:int = level + rand(6);
+			outputText("\nAn afterwash of flames trails behind her blow, immolating you! ", false);
+			flame = player.takeDamage(flame, true);
 		}
 
 		override protected function performCombatAction():void
@@ -164,7 +165,11 @@ package classes.Scenes.NPCs
 			this.a = "";
 			this.short = "Kiha";
 			this.imageName = "kiha";
-			this.long = "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
+			this.long = "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  ";
+			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
+				this.long += "Damp patch forms in her silk " + (game.flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "panties" : "loincloth") + ", regardless of her state of arousal.  Despite her near nudity, Kiha stands with the confidence and poise of a trained fighter.";
+			else 
+				this.long += "Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
 			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
@@ -188,6 +193,8 @@ package classes.Scenes.NPCs
 			this.weaponAttack = 25;
 			this.armorName = "thick scales";
 			this.armorDef = 30;
+			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
+				this.armorDef += 2;
 			this.bonusHP = 430;
 			this.lust = 10;
 			this.lustVuln = 0.4;

@@ -2053,7 +2053,7 @@ public function displayStats(e:MouseEvent = null):void
 
 	if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0)
 		childStats += "<b>Children With Behemoth:</b> " + flags[kFLAGS.BEHEMOTH_CHILDREN] + "\n";
-		
+
 	if (flags[kFLAGS.BENOIT_EGGS] > 0)
 		childStats += "<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n";
 		
@@ -2091,6 +2091,15 @@ public function displayStats(e:MouseEvent = null):void
 		childStats += "<b>Children With Kelly (Females):</b> " + (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE]) + "\n";
 	if (flags[kFLAGS.KELLY_KIDS] > 0)
 		childStats += "<b>Total Children with Kelly:</b> " + flags[kFLAGS.KELLY_KIDS] + "\n";
+	
+	if (flags[kFLAGS.KIHA_CHILDREN_BOYS] > 0)
+		childStats += "<b>Kiha Offspring (Males):</b> " + flags[kFLAGS.KIHA_CHILDREN_BOYS] + "\n";
+	if (flags[kFLAGS.KIHA_CHILDREN_GIRLS] > 0)
+		childStats += "<b>Kiha Offspring (Females):</b> " + flags[kFLAGS.KIHA_CHILDREN_GIRLS] + "\n";
+	if (flags[kFLAGS.KIHA_CHILDREN_HERMS] > 0)
+		childStats += "<b>Kiha Offspring (Herms):</b> " + flags[kFLAGS.KIHA_CHILDREN_HERMS] + "\n";
+	if (flags[kFLAGS.KIHA_CHILDREN_BOYS] + flags[kFLAGS.KIHA_CHILDREN_GIRLS] + flags[kFLAGS.KIHA_CHILDREN_HERMS] > 0)
+		childStats += "<b>Total Children With Kiha:</b> " + flags[kFLAGS.KIHA_CHILDREN_BOYS] + flags[kFLAGS.KIHA_CHILDREN_GIRLS] + flags[kFLAGS.KIHA_CHILDREN_HERMS] + "\n";
 		
 	if (mountain.salon.lynnetteApproval() != 0)
 		childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";

@@ -716,19 +716,19 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			if (player.hasCock()) outputText("maleness");
 			else outputText("bulgy balls");
 			outputText(" within the imprisoning leather, and it actually hurts to wear it.  <b>You'll have to find some other form of protection!</b>\n\n");
-			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), camp.campMenu);
+			inventory.takeItem(player.setArmor(ArmorLib.NOTHING), camp.campMenu);
 			return true;
 		}
 		//Lost pussy
 		else if (!player.hasVagina()) {
 			outputText("\nYou fidget uncomfortably as the crease in the gusset of your lewd bikini digs into your sensitive, featureless loins.  There's simply no way you can continue to wear this outfit in comfort - it was expressly designed to press in on the female mons, and without a vagina, <b>you simply can't wear this exotic armor.</b>\n\n");
-			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), camp.campMenu);
+			inventory.takeItem(player.setArmor(ArmorLib.NOTHING), camp.campMenu);
 			return true;
 		}
 		//Tits gone or too small
 		else if (player.biggestTitSize() < 4) {
 			outputText("\nThe fine chain that makes up your lewd bikini-top is dangling slack against your flattened chest.  Every movement and step sends it jangling noisily, slapping up against your [nipples], uncomfortably cold after being separated from your " + player.skinFurScales() + " for so long.  <b>There's no two ways about it - you'll need to find something else to wear.</b>\n\n");
-			inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), camp.campMenu);
+			inventory.takeItem(player.setArmor(ArmorLib.NOTHING), camp.campMenu);
 			return true;
 		}
 	}

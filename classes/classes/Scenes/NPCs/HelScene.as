@@ -136,7 +136,7 @@ public function encounterAJerkInThePlains():void {
 	}
 	if (flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Salamanders!</b>")
+		outputText("<b>New codex entry unlocked: Salamanders!</b>")
 	}
 	//FIRST COMBAT – Main Screen
 	startCombat(new Hel());

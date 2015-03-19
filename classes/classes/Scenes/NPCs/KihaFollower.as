@@ -3,13 +3,48 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Swamp.SpiderMorphMob;
 
-	public class KihaFollower extends NPCAwareContent
+	public class KihaFollower extends NPCAwareContent implements TimeAwareInterface
 	{
 
+		public var pregnancy:PregnancyStore;
+		
 		public function KihaFollower()
 		{
+			pregnancy = new PregnancyStore(kFLAGS.KIHA_PREGNANCY_TYPE, kFLAGS.KIHA_INCUBATION, 0, 0);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 330, 270, 200, 128, 96, 48);
+												//Event: 0 (= not pregnant),  1,   2,   3,   4,   5,  6,  7,  8 (< 15)
+			CoC.timeAwareClassAdd(this);
 		}
 
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			var needNext:Boolean = false;
+			pregnancy.pregnancyAdvance();
+			trace("\Kiha time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (pregnancy.isPregnant) {
+				if (kihaPregUpdate()) needNext = true;
+				if (pregnancy.incubation == 0) {
+					kihaGivesBirthToEgg();
+					pregnancy.knockUpForce(); //Clear Pregnancy
+					needNext = true;
+				}
+			}
+			if (flags[kFLAGS.KIHA_EGG_COUNTER] > 1) {
+				flags[kFLAGS.KIHA_EGG_COUNTER]--;
+			}
+			else if (flags[kFLAGS.KIHA_EGG_COUNTER] == 1) {
+				kihaEggHatchingTime();
+				needNext = true;
+			}
+			return needNext;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+		//End of Interface Implementation
+		
 //Requirements:
 //-PC has achieved \"<i>Fuckbuddy</i>\" status with Hel (because threesomes)
 //-PC has maxed out Kiha's three basic \"<i>Talk</i>\" options
@@ -454,7 +489,7 @@ private function lieThere():void {
 	outputText("You decide to let things take their course.  You look up to the swordsman standing over you...", false);
 	outputText("[pg]Wait, you recognize that tail - and that taut ass!  You grin as you watch Helia the salamander's fiery tail swish over you, her scimitar gripped firmly in both hands.", false);
 	outputText("[pg]\"<i>OH HELL NO, you scaly bitch,</i>\"  Hel growls, leering down at Kiha as the dragoness leaps to her feet, axe raised.  \"<i>You do NOT fucking touch my " + player.short + " and get away with it.  You hear me?</i>\"", false);
-	outputText("[pg]\"<i>You BITCH!</i>\"  Kiha screams, flicking mud off her nude body.  \"<i>How dare you?  How DARE YOU throw ME in the MUD!?  I'll fucking teach you!</i>\"", false);
+	outputText("[pg]\"<i>You BITCH!</i>\"  Kiha screams, flicking mud off her " + (flags[kFLAGS.KIHA_UNDERGARMENTS] ? "nearly-" : "") + "nude body.  \"<i>How dare you?  How DARE YOU throw ME in the MUD!?  I'll fucking teach you!</i>\"", false);
 	outputText("[pg]OHSHIT.  You duck down as a great gout of flame shoots over you, utterly consuming Hel in the blast and nearly baking you into the mud.  Laughing, Kiha roars in triumph as Hel vanishes in the smoke cloud left over from the dragon-flame blast.", false);
 	outputText("[pg]You cough violently as the smoke settles.  You wave your hand in front of your face, desperately looking in the baked mud for some sign of a surely-incinerated Hel... yet she still stands!  Though you can see her scale bikini and thong have been incinerated, leaving her as nude as Kiha with her big breasts hanging free, she has survived seemingly unscathed.", false);
 	outputText("[pg]Scowling, the salamander simply crosses her arms over her ample bosom.  \"<i>Seriously. Seriously, you cunt!?</i>\"  Hel snaps, grabbing her fiery tail.  \"<i>Do you even fucking SEE THIS!? That weak shit does nothing to me, you moron.</i>\"", false);
@@ -751,13 +786,14 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			leave = camp.campLoversMenu;
 			//choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
 			menu();
-			addButton(0, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
-			addButton(1, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
+			addButton(0, "Appearance", kihaCampAppearance, null, null, null, "Examine Kiha's appearance.");
+			addButton(1, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
+			addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
 			addButton(3, "Sex", kihaSexMenu, null, null, null, "Initiate sex session with Kiha.");
 			addButton(4, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
 			if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha, null, null, null, "Request her to stop guarding.");
 			else addButton(8,"Guard Camp",guardMyCampKiha, null, null, null, "Request her to guard your camp.");
-			if (player.hasItem(undergarments.SSPANTY)) addButton(5, "Give Panties", null, null, null, null, "Give Kiha a pair of spider-silk panties?");
+			if (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0 && (player.hasItem(undergarments.SSPANTY) || player.hasItem(undergarments.SS_LOIN))) addButton(6, "Give Underwear", giveKihaUndergarmentsPrompt, null, null, null, "Give Kiha something to wear to conceal her nether regions?");
 			addButton(14,"Leave", leave);
 			return;
 		}
@@ -777,13 +813,13 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 	//-[Invite to Camp] (If KihaAffection >= 200)
 	//-[Leave])
 	menu();
-	addButton(0, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
-	addButton(1, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
-	addButton(2, "InviteCamp", campo, null, null, null, "Invite Kiha to your camp.");
+	addButton(0, "Appearance", kihaCampAppearance, null, null, null, "Examine Kiha's appearance.");
+	addButton(1, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
+	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
 	addButton(3, "Sex", kihaSexMenu, null, null, null, "Initiate sex session with Kiha.");
 	addButton(4, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
+	addButton(5, "InviteCamp", campo, null, null, null, "Invite Kiha to your camp.");
 	addButton(14, "Leave", leave);
-	//choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
 }
 
 
@@ -1631,7 +1667,7 @@ internal function kihaBitchesOutCorruptPCs():void {
 		outputText("You make your way through the murky swamp, your mind turning to thoughts of your dragoness ");
 		if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 1) outputText("friend");
 		else outputText("lover");
-		outputText(" as you enter her territory.  Your lusty, twisted mind wanders to Kiha's dark, voluptuous body, her big, soft breasts, her cunt, lewdly displayed to the world and always leaking lubricant like a well-oiled fuck machine... You grin wickedly to yourself, your ");
+		outputText(" as you enter her territory.  Your lusty, twisted mind wanders to Kiha's dark, voluptuous body, her big, soft breasts" + (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0 ? "" : ", her cunt, lewdly displayed to the world and always leaking lubricant like a well-oiled fuck machine..") + ". You grin wickedly to yourself, your ");
 		if(player.hasCock()) outputText("[cock]");
 		else if(player.hasVagina()) outputText("[vag]");
 		else outputText("lust");
@@ -1640,7 +1676,7 @@ internal function kihaBitchesOutCorruptPCs():void {
 		outputText("[pg]\"<i>[name].</i>\"  She says flatly, planting the haft of her axe in the ground, leaning heavily upon it.");
 		outputText("[pg]You say hello, looking nervously around.  Something isn't right here, and your hand drifts toward your [weaponName].");
 		outputText("[pg]\"<i>Listen, [name],</i>\" Kiha says, eyeing you from behind her axe.  \"<i>Maybe we've gotten to be friends lately, but... something's changed about you.  I can SMELL the corruption on you, the lust... I-I can't do it, [name].  I can't be around someone that could turn into someTHING at any moment, someone who's just letting themselves go like... like you are. Please j-just go, [name].</i>\"  You try to protest, to reason with the fiery warrior, but she only lifts up her axe and levels it at you...  \"<i>J-JUST GO!</i>\"");
-		simpleChoices("Fight",kihaScene.meetKihaAndFight,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+		simpleChoices("Fight",kihaScene.meetKihaAndFight,"",0,"",0,"",0,"Leave",leaveKihaAfterCorruptionBitch);
 	}
 	else {
 		outputText("Kiha approaches you, her belongings gathered in her hands.  The sexy dragoness seems visibly upset, and before you can say a word, she interrupts, \"<i>Don't say a word, [name].  You're corrupt.  I can smell the corruption rolling off you from over here.  I won't be here when you turn into a demon, and I don't want to fight you... but if you come after me, I won't hesitate to defend myself!</i>\"");
@@ -1652,7 +1688,11 @@ internal function kihaBitchesOutCorruptPCs():void {
 	
 }
 //[Leave]
-//You slump your shoulders, deciding not to risk confrontation.  As you step back from the dragoness, she lowers her axe, her head hanging sadly.  It seems this pains her as much as you, but... you return to camp. 
+internal function leaveKihaAfterCorruptionBitch():void {
+	clearOutput();
+	outputText("You slump your shoulders, deciding not to risk confrontation.  As you step back from the dragoness, she lowers her axe, her head hanging sadly.  It seems this pains her as much as you, but... you return to camp. ");
+	doNext(camp.returnToCampUseOneHour);
+}
 
 //Kiha & Less-Corrupt PC -- Reunited
 internal function kihaUnbitchesUncorruptedFolks():void {
@@ -1675,10 +1715,12 @@ internal function kihaUnbitchesUncorruptedFolks():void {
 private function kihaCampAppearance():void {
 	clearOutput();
 	spriteSelect(72);
-	outputText("Kiha is a 6 foot tall dragoness, with dark skin and blood-red scales covering much of her body.  She is naked, shameless of her nudity, and carries a tremendous enchanted greataxe, the head of which blazes with heat.  She has a sharp, predatory face with dark red eyes bearing black, reptilian slits.  Long red hair grows from her scalp, reaching down past her shoulders.  She has strong, child-bearing hips and a squishy bubble-butt.  She has two reptilian legs adorned with scales and claws, ending in soft, leathery soles.");
+	outputText("Kiha is a 6 foot tall dragoness, with dark skin and blood-red scales covering much of her body.  She is " + (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0 ? "nearly " : "") + "naked, shameless of her nudity, and carries a tremendous enchanted greataxe, the head of which blazes with heat.  She has a sharp, predatory face with dark red eyes bearing black, reptilian slits.  Long red hair grows from her scalp, reaching down past her shoulders.  She has strong, child-bearing hips and a squishy bubble-butt.  She has two reptilian legs adorned with scales and claws, ending in soft, leathery soles.");
 	outputText("[pg]She has a pair of dusky, soft D-cup tits, with a single 0.5 inch nipple on each breast.");
 	outputText("[pg]Kiha has a loose twat between her legs which constantly drips a warm, wet lubricant that stains her thighs.");
 	outputText("[pg]Between her gropable butt-cheeks, Kiha has a single tight asshole, right where it belongs.");
+	if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText("[pg]" + (flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "A pair of spider-silk panties are" : "A spider-silk loincloth is") + " all Kiha wears for clothing.");
+	
 	doNext(kihaScene.encounterKiha);
 }
 
@@ -1904,5 +1946,88 @@ private function guardMyCampKiha():void {
 	menu();
 	addButton(0,"Next",warmLoverKihaIntro);
 }
+
+private function giveKihaUndergarmentsPrompt():void {
+	clearOutput();
+	outputText("You ask Kiha if she's willing to wear something to cover that nether regions of hers. She could use a bit of modesty after all. ");
+	//if ((flags[kFLAGS.MARBLE_KIDS] > 0 && camp.marbleFollower()) || (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0 && camp.izmaFollower()) || flags[kFLAGS.HELSPAWN_AGE]) outputText("Even better, the children won't be traumatized.");
+	outputText("\n\n\"<i>So you want me to wear something, Doofus? Fine.</i>\"");
+	outputText("\n\n<b>What will you give her?</b>");
+	menu();
+	if (player.hasItem(undergarments.SSPANTY)) addButton(0, undergarments.SSPANTY.shortName, giveKihaUndergarments, 1);
+	if (player.hasItem(undergarments.SS_LOIN)) addButton(1, undergarments.SS_LOIN.shortName, giveKihaUndergarments, 2);
+	addButton(4, "Nevermind", warmLoverKihaIntro);
+}
+
+private function giveKihaUndergarments(type:int):void {
+	clearOutput();
+	outputText("You tell Kiha that you have something for her. She crosses her arms across her breasts and taps one of her feet on the ground. ");
+	//Spider-silk panties
+	if (type == 1) {
+		outputText("\n\nYou produce a pair of spider-silk panties from your pack and present it to Kiha. She snarls and says, \"<i>You expect me to wear THAT, doofus?</i>\"");
+		outputText("\n\nYou tell Kiha how sexy she'll look. Surely she's sexy " + (silly() ? "but let's crank her sexiness up to eleven" : "but let's make her even sexier") + "! She hesitantly takes the panties from you and slips on the white panties. It accentuates her butt-cheeks nicely and a damp patch forms where her vagina is.");
+		player.consumeItem(undergarments.SSPANTY, 1);
+	}
+	//Spider-silk loincloth
+	if (type == 2) {
+		outputText("\n\nYou produce a pair of spider-silk loincloth from your pack and present it to Kiha. She snarls and says, \"<i>You expect me to wear THAT, doofus?</i>\"");
+		outputText("\n\nYou tell Kiha how sexy she'll look. Surely she's sexy " + (silly() ? "but let's crank her sexiness up to eleven" : "but let's make her even sexier") + "! She hesitantly takes the loincloth from you and slips on the white loincloth. It accentuates her butt-cheeks nicely and a damp patch forms where her vagina is.");
+		player.consumeItem(undergarments.SS_LOIN, 1);
+	}
+	outputText("\n\n\"<i>How do I look?</i>\" Kiha asks. You admit that she's quite sexy and you swear you can see the blush in her face. You wrap your arms around Kiha and deliver a passionate kiss to her cheeks while grinding your " + player.clothedOrNaked("garbed", "naked") + " crotch against her silk-covered groin. \"<i>Don't you stop, my idiot!</i>\" Kiha chuckles. You smile and break the hug and kiss.");
+	dynStats("lus", 30);
+	flags[kFLAGS.KIHA_UNDERGARMENTS] = type;
+	doNext(warmLoverKihaIntro);
+}
+
+		private function kihaPregUpdate():Boolean
+		{
+			switch (pregnancy.eventTriggered()) {
+				case 1: //
+						outputText("\Kiha's belly seems to be swelling; it looks like your seed took after all.  The dragoness makes no obvious sign that she's noticed the weight she's putting on, and you don't think it would be wise to draw attention to it, even if it is \"<i>only</i>\" a pregnancy bulge.\n");
+						return true;
+				case 2: 
+						outputText("\Kiha's belly grows ever bigger, making her pregnancy noticeable.  She looks very sexy knocked up like that...  You shake your stray thoughts away.\n");
+						return true;
+				case 3: 
+						outputText("\Kiha's belly has grown quite a bit.  Anyone can tell she's pregnant with a single glance.  ");
+						return true;
+				case 4: 
+						outputText("\nYou hear Kiha groan, then sit down.  You rush to her side, asking if she's all right.  \"<i>Yes, I'm fine, my idiot.</i>\"  She reassures you; then takes your hand and presses it against her belly.  You feel something hard and slightly round inside.  \"<i>Can you feel it?  This egg is already much larger than the others.  Proof that your seed took.</i>\" she says, smiling.  You smile back, then excuse yourself.\n");
+						return true;
+				case 5: 
+						outputText("\nKiha just doesn't seem to stop growing.  You approach her and lay a hand on her belly, feeling the ever growing egg inside.  \"<i>Look, my doofus, I may be pregnant but that doesn't stop me from practicing.</i>\" Kiha smiles.\n");
+						return true;
+				case 6: 
+						outputText("\nKiha looks very tired; you're surprised she's been so active thus far with such a heavy belly.  You approach her, asking her if she needs anything.  \"<i>Yes... Umm, could you...</i>\" she replies, blushing.  \"<i>Could you rub my belly?  It would help me relax,</i>\" Kiha asks.\n\nYou smile and begin rubbing her belly; while doing so you can feel the egg's hard shell stretching Kiha.  Kiha gives a sigh of relief and begins purring. \"<i>Ah, this feels great,</i>\" she says, happily.  You continue rubbing her belly, until she closes her eyes and begins snoring lightly.  Upon realizing Kiha fell asleep you stop and walk away.  Kiha must've been really tired...\n");
+						return true;
+			}
+			return false; //If there's no update then return false so needNext is not set to true
+		}
+		
+		public function kihaGivesBirthToEgg():void {
+			outputText("(Placeholder) Kiha just laid a fertile egg!");
+			flags[kFLAGS.KIHA_EGG_COUNTER] = 168;
+		}
+		
+		public function kihaEggHatchingTime():void {
+			outputText("(Placeholder) Kiha's egg finally hatches at last! ");
+			//Determine gender of baby dragon!
+			var genderChooser:int = rand(100);
+			//Male!
+			if (genderChooser < 45) {
+				flags[kFLAGS.KIHA_CHILDREN_BOYS]++;
+			}
+			//Female!
+			else if (genderChooser < 90) {
+				flags[kFLAGS.KIHA_CHILDREN_GIRLS]++;
+			}
+			//Hermaphrodite!
+			else {
+				flags[kFLAGS.KIHA_CHILDREN_HERMS]++;
+			}
+			
+			flags[kFLAGS.KIHA_EGG_COUNTER] = 0;
+		}
 }
 }

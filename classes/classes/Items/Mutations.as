@@ -4818,11 +4818,11 @@
 			if (player.balls > 2 && rand(3) == 0 && changes < changeLimit) {
 				if (player.ballSize > 5) {
 					player.ballSize -= 1 + rand(3);
-					outputText("Your scrotum slowly shrinks, settling down at a smaller size.  <b>Your " + ballsDescriptLight() + " are smaller now.</b>\n\n", false);
+					outputText("\n\nYour scrotum slowly shrinks, settling down at a smaller size.  <b>Your " + ballsDescriptLight() + " are smaller now.</b>\n\n", false);
 				}
 				else {
 					player.balls = 2;
-					outputText("Your scrotum slowly shrinks until they seem to have reached a normal size. <b>You can feel as if your extra balls fused together, leaving you with a pair of balls.</b>\n\n", false);
+					outputText("\n\nYour scrotum slowly shrinks until they seem to have reached a normal size. <b>You can feel as if your extra balls fused together, leaving you with a pair of balls.</b>\n\n", false);
 				}
 				changes++;
 			}
@@ -4883,7 +4883,7 @@
 			}
 			//Cum Multiplier Decrease:
 			if (player.hasCock() && player.cumMultiplier > 5 && rand(3) == 0 && changes < changeLimit) {
-				outputText("You feel a strange tingling sensation in your ");
+				outputText("\n\nYou feel a strange tingling sensation in your ");
 				if (player.balls > 0) outputText("balls");
 				else outputText("groin");
 				outputText(" as you can feel the density reducing. <b>You have a feeling you're going to produce less cum now.</b>");

@@ -2018,8 +2018,8 @@ package classes
 			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)
 				quantity = 2;
-			if (quantity > 2147483647)
-				quantity = 2147483647;
+			if (quantity > int.MAX_VALUE)
+				quantity = int.MAX_VALUE;
 			return quantity;
 		}
 		

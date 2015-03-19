@@ -792,7 +792,7 @@ private function talkToHel():void {
 			
 			if(isabellaAccent()) outputText("\n\n<i>\"Und I thought you vere a beginner...\"</i> Isabella moans, her milky mammaries quivering in the cool air.");
 			else outputText("\n\n<i>\"And I thought you were a beginner...\"</i> Isabella moans, her milky mammaries quivering in the cool air.");
-			outputText("\n\n<i>\"I got no shame, bitches.\"</i>  Kiha, nude before you got to her, laughs drunkenly before face-planting into her empty gem-pouch.");
+			outputText("\n\n<i>\"I got no shame, bitches.\"</i>  Kiha, " + (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0 ? "nearly " : "") + "nude before you got to her, laughs drunkenly before face-planting into her empty gem-pouch.");
 			gems = 40 + rand(40);
 		}
 		//[Fail 1]

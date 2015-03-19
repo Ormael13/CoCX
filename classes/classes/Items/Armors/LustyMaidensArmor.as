@@ -36,7 +36,7 @@ package classes.Items.Armors
 			outputText("\n\nYou shake your head and smile ruefully - maybe once you finish getting dressed!  There's still a bottom to put on, after all.  Regardless, one of your hands keeps coming to rest on your boob, idly groping and fondling your heavy tit whenever you have a free moment.  This sure is some fun armor!");
 			game.dynStats("lus", 25, "resisted", false);
 			outputText("\n\nNow, the bottom is a leather thong and skirt combination.  The thong itself is leather dyed radiant white, with intricate gold filigree covering the front triangle.  On the back triangle, there's a similar pattern, though you could swear that from a distance the pattern looks a bit like arrows pointing towards where your [asshole] will be with golden sperm surrounding them. No, that has to be your imagination.  All this time in this strange land must really be getting to you!  Both pieces are molded to accentuate the female form, with a crease in the gusset that will rest over your vagina, ensuring ");
-			if (game.player.hasCock() || game.player.balls > 0) {
+			if ((game.player.hasCock() && !game.player.hasSheath()) || game.player.balls > 0) {
 				outputText("that it won't fit you ");
 				if (game.player.hasCock()) outputText("or your " + game.player.multiCockDescriptLight());
 				else outputText("or your [balls]");

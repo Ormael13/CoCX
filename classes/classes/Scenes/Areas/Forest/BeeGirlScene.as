@@ -102,6 +102,10 @@ package classes.Scenes.Areas.Forest
 					default: //Any other attitude options lead to the classic bee encounter
 						outputText(", bending into a smile as she sees you approach.  Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n");
 						//Chance to avoid raaaaeeeeep
+						if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
+							outputText("<b>New codex entry unlocked: Giant Bees!</b>\n\n")
+						}
 						if ((player.lib + player.cor < 140) || rand(2) == 0) {
 							outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?");
 							simpleChoices("Fight", fightTheBeeGirl, "Talk", beeTalk, "Seduce", null, "", null, "Leave", camp.returnToCampUseOneHour);
@@ -123,7 +127,7 @@ package classes.Scenes.Areas.Forest
 				if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
 					outputText("\n\n<b>New codex entry unlocked: Giant Bees!</b>")
-				}	
+				}
 				outputText("\n\nYou just barely hold yourself back and shake your head to clear the smell and buzzing from your mind.  Something about your " + (isBeeMorph ? "new bee body seems to have drawn" : "massive member has attracted") + " her attention, and she is staring at your crotch in anticipation.  You steady yourself and decide what you should do next.");
 				simpleChoices("Fight", fightTheBeeGirl, "Sex", beeSexForCocks, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 			}

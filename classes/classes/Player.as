@@ -255,7 +255,7 @@ use namespace kGAMECLASS;
 			if (skinAdj == "smooth") armorDef += 1;
 			//Bonus defense
 			if (armType == ARM_TYPE_SPIDER) armorDef += 2;
-			if (lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) armorDef += 2
+			if (lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS || lowerBody == LOWER_BODY_TYPE_BEE) armorDef += 2
 			//Agility boosts armor ratings!
 			if(findPerk(PerkLib.Agility) >= 0) {
 				if(armorPerk == "Light") armorDef += Math.round(spe/8);
@@ -1472,8 +1472,8 @@ use namespace kGAMECLASS;
 				total += 200 + (perkv1(PerkLib.MilkMaid) * 100);
 			if (statusAffectv1(StatusAffects.LactationReduction) >= 48)
 				total = total * 1.5;
-			if (total > 2147483647)
-				total = 2147483647;
+			if (total > int.MAX_VALUE)
+				total = int.MAX_VALUE;
 			return total;
 		}
 		

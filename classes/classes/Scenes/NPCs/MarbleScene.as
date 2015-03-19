@@ -2023,7 +2023,8 @@ public function interactWithMarbleAtCamp():void {
 			"Playtime",playtime,
 			"Break Up",breakUpWithMarble,
 			goEventString,marbleGoEvent,
-			"Back",camp.campLoversMenu);
+			"",0);
+	addButton(14, "Back", camp.campLoversMenu);
 }
 
 private function marbleTalkOverhaul():void {

@@ -2854,7 +2854,8 @@ package classes.Scenes.NPCs
 				outputText("Amily might be up for playing nurse again.\n");
 			}
 			choices("TakeCharge", amilyTakesChargeSex, "Amily Leads", letAmilyLead, bText, babies, "Urta", urta, "Swim", swim,
-				"Izma3Some", threesome, "Nurse RP", nurse, "", null, "", null, "Back", amilyFollowerEncounter);
+				"Izma3Some", threesome, "Nurse RP", nurse, "", null, "", null, "", null);
+			addButton(14, "Back", amilyFollowerEncounter);
 		}
 
 		//[=Take Charge=]
@@ -3331,7 +3332,7 @@ package classes.Scenes.NPCs
 				}
 			}
 			if (haveGift)
-				addButton(9, "Back", amilyFollowerEncounter);
+				addButton(14, "Back", amilyFollowerEncounter);
 			else {
 				if (flags[kFLAGS.AMILY_FOLLOWER] == 1)
 					outputText("You realize that you don't have any items she would be interested in, and apologize.");
