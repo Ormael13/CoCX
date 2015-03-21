@@ -12,7 +12,6 @@
 		{
 			pregnancy = new PregnancyStore(kFLAGS.KIHA_PREGNANCY_TYPE, kFLAGS.KIHA_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 330, 270, 200, 128, 96, 48);
-												//Event: 0 (= not pregnant),  1,   2,   3,   4,   5,  6,  7,  8 (< 15)
 			CoC.timeAwareClassAdd(this);
 		}
 
@@ -35,6 +34,25 @@
 			}
 			else if (flags[kFLAGS.KIHA_EGG_COUNTER] == 1) {
 				kihaEggHatchingTime();
+				needNext = true;
+			}
+			if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] > 1) {
+				if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] != 144) flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
+				if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 240) {
+					kihaBreastfeedingTime();
+					needNext = true;
+				}
+				/*else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 144) {
+					kihaTellsChildrenStory();
+					needNext = true;
+				}*/
+				else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 72) {
+					kihaTrainsHerKids();
+					needNext = true;
+				}
+			}
+			else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 1) {
+				kihaChildGraduationTime();
 				needNext = true;
 			}
 			return needNext;
@@ -93,6 +111,31 @@ private function kihaAffection(changes:Number = 0):Boolean {
 	if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) flags[kFLAGS.KIHA_AFFECTION] += changes;
 	if(flags[kFLAGS.KIHA_AFFECTION] > 100) flags[kFLAGS.KIHA_AFFECTION] = 100;
 	return flags[kFLAGS.KIHA_AFFECTION];
+}
+
+private function kihaKnockUpAttempt():void {
+	//Call off the pregnancy!
+	if (!camp.followerKiha() || pregnancy.isPregnant || flags[kFLAGS.KIHA_EGG_COUNTER] > 0) {
+		trace("Cancelled");
+		return;
+	}
+	//Determine chance
+	var chance:int = 10;
+	chance += Math.round(player.cumQ() / 50);
+	if (chance > 50) chance = 50;
+	if (player.inRut) chance += 25;
+	chance += player.virilityQ() * 100;
+	chance -= totalKihaChildren() * 2;
+	if (chance < 10) chance = 10;
+	//Roll
+	if (rand(100) <= chance) {
+		trace("Kiha got PREGNANT!");
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_KIHA);
+	}
+}
+
+public function totalKihaChildren():int {
+	return flags[kFLAGS.KIHA_CHILDREN_BOYS] + flags[kFLAGS.KIHA_CHILDREN_GIRLS] + flags[kFLAGS.KIHA_CHILDREN_HERMS]
 }
 
 //Introduction
@@ -1486,6 +1529,7 @@ private function fuckKihasVagInCamp():void {
 	if(player.cumQ() >= 1000) outputText("  The drippings form a nice big puddle under Kiha.");
 	outputText("[pg]After some languid snuggling, Kiha beams up at you radiantly.  \"<i>That was... okay,</i>\" she declares, a quaver of uncertainty in her voice as her emotional defenses come back up.  You stand and slowly stretch the kinks from your muscles.  Teasingly, you remind her that it seemed a little better than 'okay'.  A tail sweeps your [legs] out from under you, a moment before Kiha pounces you with cat-like agility.  She hisses, \"<i>It was better than okay, alright?  It was great.  You've made me happy, [name]!</i>\"");
 	outputText("[pg]Kiha punches you in the chest before climbing off you.  \"<i>I don't have time for those emotions, doofus... not while Lethice lives.</i>\"  Well, it was a nice moment.");
+	kihaKnockUpAttempt();
 	player.orgasm();
 	dynStats("lib", -1, "sen", -1);
 	doNext(camp.returnToCampUseOneHour);
@@ -1715,12 +1759,20 @@ internal function kihaUnbitchesUncorruptedFolks():void {
 private function kihaCampAppearance():void {
 	clearOutput();
 	spriteSelect(72);
-	outputText("Kiha is a 6 foot tall dragoness, with dark skin and blood-red scales covering much of her body.  She is " + (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0 ? "nearly " : "") + "naked, shameless of her nudity, and carries a tremendous enchanted greataxe, the head of which blazes with heat.  She has a sharp, predatory face with dark red eyes bearing black, reptilian slits.  Long red hair grows from her scalp, reaching down past her shoulders.  She has strong, child-bearing hips and a squishy bubble-butt.  She has two reptilian legs adorned with scales and claws, ending in soft, leathery soles.");
+	outputText("Kiha is a 6 foot tall dragoness, with dark skin and blood-red scales covering much of her body.  She is " + (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0 ? "wearing " + (flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "a pair of spider-silk panties" : "a spider-silk loincloth") : "naked, shameless of her nudity,") + " and carries a tremendous enchanted greataxe, the head of which blazes with heat.  She has a sharp, predatory face with dark red eyes bearing black, reptilian slits.  Long red hair grows from her scalp, reaching down past her shoulders.  She has strong, child-bearing hips and a squishy bubble-butt.  She has two reptilian legs adorned with scales and claws, ending in soft, leathery soles.");
 	outputText("[pg]She has a pair of dusky, soft D-cup tits, with a single 0.5 inch nipple on each breast.");
-	outputText("[pg]Kiha has a loose twat between her legs which constantly drips a warm, wet lubricant that stains her thighs.");
+	outputText("[pg]" + (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0 ? "Underneath her " + (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0 ? "spider-silk panties" : "spider-silk loincloth") + ", " : "") + "Kiha has a loose twat between her legs which constantly drips a warm, wet lubricant that stains her ");
+	if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText(flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "panties" : "loincloth");
+	else outputText("thighs");
+	outputText(".");
 	outputText("[pg]Between her gropable butt-cheeks, Kiha has a single tight asshole, right where it belongs.");
-	if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText("[pg]" + (flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "A pair of spider-silk panties are" : "A spider-silk loincloth is") + " all Kiha wears for clothing.");
-	
+	if (pregnancy.isPregnant) {
+		outputText("[pg]");
+		if (pregnancy.incubation >= 240) outputText("<b>Her belly appears to be a bit swollen.</b>");
+		else if (pregnancy.incubation >= 168 && pregnancy.incubation < 240) outputText("<b>Her belly shows obvious signs of pregnancy.</b>");
+		else if (pregnancy.incubation >= 72 && pregnancy.incubation < 168) outputText("<b>Her gravid belly has gotten bigger.</b>");
+		else if (pregnancy.incubation < 72) outputText("<b>It's impossible to not notice her pregnancy. She is about to lay an egg soon.</b>");
+	}
 	doNext(kihaScene.encounterKiha);
 }
 
@@ -1903,6 +1955,7 @@ internal function pcWinsDomFight():void {
 		outputText("[pg]Trapped in the missionary position and horny beyond belief, Kiha can only wrap her legs and arms around you, babbling and ceaselessly begging you to fuck her, to flood her pussy with your seed.");
 
 		outputText("[pg]\"<i>Please! I-Ihi-need you in me! AHHH! FUCK-FUCK-FUCK!</i>\" She squeals.  Your release imminent and her resistance no longer an issue, you ravage her cunt with reckless abandon; Kiha is completely submissive to your thrusts as she bucks against you, endeavoring to bring you to a hot and sticky climax.  As release boils up in your loins, you bury your face in Kiha's neck, howling your muffled orgasmic arrival against her scales as the warm essence of life rushes into her waiting vagina.  Screaming in orgasmic delight herself, Kiha herself buries her face against your neck and moans her stifled gratification into your being.  The pair of you groan and cry out in sexual bliss as each contraction of your prick fires yet another stream of cum along the contours of her hot pussy, tapering off with the eventual emptying of your balls.  You lay against her for a time, catching your breath while she kisses and nuzzles you appreciatively."); 
+		kihaKnockUpAttempt();
 	}
 	//Random Scene three of three: Standing dominant cunnilingus, with a reversal:
 	else {
@@ -1984,13 +2037,13 @@ private function giveKihaUndergarments(type:int):void {
 		{
 			switch (pregnancy.eventTriggered()) {
 				case 1: //
-						outputText("\Kiha's belly seems to be swelling; it looks like your seed took after all.  The dragoness makes no obvious sign that she's noticed the weight she's putting on, and you don't think it would be wise to draw attention to it, even if it is \"<i>only</i>\" a pregnancy bulge.\n");
+						outputText("\nKiha's belly seems to be swelling; it looks like your seed took after all.  The dragoness makes no obvious sign that she's noticed the weight she's putting on, and you don't think it would be wise to draw attention to it, even if it is \"<i>only</i>\" a pregnancy bulge.\n");
 						return true;
 				case 2: 
-						outputText("\Kiha's belly grows ever bigger, making her pregnancy noticeable.  She looks very sexy knocked up like that...  You shake your stray thoughts away.\n");
+						outputText("\nKiha's belly grows ever bigger, making her pregnancy noticeable.  She looks very sexy knocked up like that...  You shake your stray thoughts away.\n");
 						return true;
 				case 3: 
-						outputText("\Kiha's belly has grown quite a bit.  Anyone can tell she's pregnant with a single glance.  ");
+						outputText("\nKiha's belly has grown quite a bit.  Anyone can tell she's pregnant with a single glance.  ");
 						return true;
 				case 4: 
 						outputText("\nYou hear Kiha groan, then sit down.  You rush to her side, asking if she's all right.  \"<i>Yes, I'm fine, my idiot.</i>\"  She reassures you; then takes your hand and presses it against her belly.  You feel something hard and slightly round inside.  \"<i>Can you feel it?  This egg is already much larger than the others.  Proof that your seed took.</i>\" she says, smiling.  You smile back, then excuse yourself.\n");
@@ -1999,35 +2052,111 @@ private function giveKihaUndergarments(type:int):void {
 						outputText("\nKiha just doesn't seem to stop growing.  You approach her and lay a hand on her belly, feeling the ever growing egg inside.  \"<i>Look, my doofus, I may be pregnant but that doesn't stop me from practicing.</i>\" Kiha smiles.\n");
 						return true;
 				case 6: 
-						outputText("\nKiha looks very tired; you're surprised she's been so active thus far with such a heavy belly.  You approach her, asking her if she needs anything.  \"<i>Yes... Umm, could you...</i>\" she replies, blushing.  \"<i>Could you rub my belly?  It would help me relax,</i>\" Kiha asks.\n\nYou smile and begin rubbing her belly; while doing so you can feel the egg's hard shell stretching Kiha.  Kiha gives a sigh of relief and begins purring. \"<i>Ah, this feels great,</i>\" she says, happily.  You continue rubbing her belly, until she closes her eyes and begins snoring lightly.  Upon realizing Kiha fell asleep you stop and walk away.  Kiha must've been really tired...\n");
+						outputText("\nKiha looks very tired; you're surprised she's been so active thus far with such a heavy belly.  You approach her, asking her if she needs anything.  \"<i>Yes, my Idiot. Could you rub my belly?  It would help me relax,</i>\" Kiha asks.\n\nYou smile and begin rubbing her belly; while doing so you can feel the egg's hard shell stretching Kiha.  Kiha gives a sigh of relief and begins purring. \"<i>Ah, this feels great,</i>\" she says, happily.  You continue rubbing her belly, until she closes her eyes and begins snoring lightly.  Upon realizing Kiha fell asleep you stop and walk away.  Kiha must've been really tired...\n");
 						return true;
 			}
 			return false; //If there's no update then return false so needNext is not set to true
 		}
 		
 		public function kihaGivesBirthToEgg():void {
-			outputText("(Placeholder) Kiha just laid a fertile egg!");
+			outputText("\nYou hear the groaning and screaming sounds. It must be coming from Kiha. You investigate the sounds, only to find out that your draconic lover is in labor!");
+			outputText("\n\n\"<i>Do something, Doofus!</i>\" Kiha yells. You grab Kiha by her clawed hand and assure her that you're here to assist her. ");
+			if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText("You remove her spider-silk " + (flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "panties" : "loincloth") + ", exposing her moist vagina.");
+			outputText("\n\nYou give her vagina a lick in an attempt to coax the egg out. Kiha blushes when you're licking her womb and says, \"<i>Don't you stop, [name]!</i>\" Her legs lock around you as if she wants you to keep licking her.");
+			outputText("\n\nEventually, she orgasms, coating your face in her femspunk. You revel in the taste of her feminine juices. Kiha spreads her legs, her vagina seems to part as the surface of the egg comes into view. Thanks to the wetness of her passage, the egg finally slips out with no problem.");
+			outputText("\n\n\"<i>Look at that! It's beautiful. It's going to eventually hatch and I'll raise them to be strong warriors. Thank you, [name].</i>\" Kiha smiles and delivers a kiss to your lips.");
+			outputText("\n\nYou leave Kiha to rest and look after her egg.");
 			flags[kFLAGS.KIHA_EGG_COUNTER] = 168;
 		}
 		
 		public function kihaEggHatchingTime():void {
-			outputText("(Placeholder) Kiha's egg finally hatches at last! ");
+			outputText("\nYou hear someone yelling towards you. It must be Kiha! You rush towards Kiha and ask why she's yelling. \"<i>The time has come! My egg is going to hatch!</i>\" Kiha announces.");
+			outputText("\n\nYou watch as the egg shakes violently and crack forms in the eggshell. The crack grows bigger and bigger until finally, a head emerges! Isn't that cute?");
+			outputText("\n\n\"<i>Look at that. Our little dragon.</i>\" Kiha smiles. She peels off the egg fragments and picks up the newly-hatched offspring and shows it to you. ");
 			//Determine gender of baby dragon!
 			var genderChooser:int = rand(100);
 			//Male!
-			if (genderChooser < 45) {
+			if (genderChooser < 40) {
+				outputText("From the look of its appearance, it's definitely a boy. He has the same scale color pattern as Kiha! ");
+				flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] = 1;
 				flags[kFLAGS.KIHA_CHILDREN_BOYS]++;
 			}
 			//Female!
-			else if (genderChooser < 90) {
+			else if (genderChooser < 80) {
+				outputText("From the look of its appearance, it's definitely a girl. She has the same scale color pattern as Kiha! ");
+				flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] = 2;
 				flags[kFLAGS.KIHA_CHILDREN_GIRLS]++;
 			}
 			//Hermaphrodite!
 			else {
+				outputText("From the look of its appearance, it's definitely a hermaphrodite. She has the same scale color pattern as Kiha! ");
+				flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] = 3;
 				flags[kFLAGS.KIHA_CHILDREN_HERMS]++;
 			}
-			
+			//Hair colour!
+			if (rand(2) == 0) {
+				if (genderChooser < 40) outputText("His");
+				else outputText("Her");
+				outputText(" hair colour is the same color as yours! ");
+			}
+			else {
+				if (genderChooser < 40) outputText("His");
+				else outputText("Her");
+				outputText(" hair colour is red, just like Kiha's! ");
+			}
+			//Eye colour!
+			if (rand(2) == 0) {
+				outputText("At the same time, ");
+				if (genderChooser < 40) outputText("his");
+				else outputText("her");
+				outputText(" eye colour is the same color as yours! ");
+			}
+			else {
+				outputText("At the same time, ");
+				if (genderChooser < 40) outputText("his");
+				else outputText("her");
+				outputText(" eye colour is like Kiha's! ");
+			}
+			outputText("\n\nYou cradle the newborn dragon-morph and smile before handing " + (genderChooser < 40 ? "him" : "her") + " back to Kiha. She sits down and begins to breastfeed the newborn. \"<i>" + (genderChooser < 40 ? "He" : "She") + " is going to be a warrior, just like me!</i>\" Kiha says.");
+			outputText("\n\nYou smile at Kiha and leave her to spend her time with her newborn " + (genderChooser < 40 ? "son" : "daughter") + ".");
 			flags[kFLAGS.KIHA_EGG_COUNTER] = 0;
+			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 336;
 		}
-}
+		
+		private function kihaBreastfeedingTime():void {
+			outputText("\nKiha is doing well with her " + (totalKihaChildren() == 1 ? "offspring" : "offsprings") + ". She appears to be breastfeeding her " + (totalKihaChildren() == 1 ? "" : "youngest ") + "offspring.");
+		}
+		
+		public function kihaTellsChildrenStory():void {
+			clearOutput();
+			outputText("Kiha walks over to you and says, \"<i>Could you please sit with me please, [name]? I want to tell my " + (totalKihaChildren() == 1 ? "kid" : "kids") + " a story,</i>\" she says. You tell her that it would be a wonderful idea! Kiha escorts you to her nest.");
+			outputText("\n\nYou sit on the crudely made seat while Kiha sits on the another seat. ");
+			if (totalKihaChildren() == 1) outputText("Kiha gestures for her " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] >= 2 ? "daughter" : "son") + " to sit on her lap. ");
+			else outputText("Kiha gestures for her children to sit in front of her, making sure you are visible to them. ");
+			//Story time!
+			outputText("\n\nKiha says, \"<i>I'll tell you about my times.</i>\" You listen. Kiha explains about her past, how she was originally a lizan, how she slain her tribe's enemies by the thousands, how she was turned into a dragon-morph thanks to the demonic abduction and how she grew her hatred for the demons. She takes great care not to say something that would be inappropriate.");
+			outputText("\n\nKiha's " + (totalKihaChildren() == 1 ? (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "son" : "daughter") + " seems" : "children seem") + " to be impressed and ask what happened next.");
+			outputText("\n\nKiha resumes her story. She tells about how she met you for the first time and how she defended herself from the mob of spider-morphs thanks to your aid. ");
+			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\nYou tell about how you've defeated Lethice and put an end to the demonic threats. Kiha and her young " + (totalKihaChildren() == 1 ? "dragon-morph" : "dragon-morphs") + " look at you, amazed about your victory.");
+			else outputText("\n\nKiha tells about how she plans to get into Lethice's stronghold and defeat Lethice for once and for all.");
+			outputText("\n\nThe " + (totalKihaChildren() == 1 ? "kid" : "kids") + " are happy to hear about the story. \"<i>Thank you for being with me and listening to my story, my Doofus,</i>\" Kiha says before giving you a peck on your cheek.");
+			dynStats("lib", -2, "cor", -2, "lus", -50, "resisted", false, "noBimbo", true);
+			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
+			menu();
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function kihaTrainsHerKids():void {
+			outputText("\nKiha is teaching her " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER]< 2 ? "son" : "daughter") + " about her techniques. You watch as the young dragon-morph finally unleashes " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "his" : "her") + " fire breath on the crudely-made dummy! The dragon-morph walks to you and says, \"<i>Hi, " + player.mf("daddy", "mommy-daddy") + "! My mom has been teaching me how to fight like a dragon! Did you see me unleash my fire breath on the dummy?</i>\" You tell " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "him" : "her") + " that you did see the show and you're quite entertained. You give " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "him" : "her") + " a hug, a clear indication of your parenthood.");
+			outputText("\n\nKiha walks over to you. \"<i>I've taught " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "him" : "her") + " how to use a large axe I've picked off the minotaurs. I also taught " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "him" : "her") + " how to breathe fire,</i>\" Kiha says, chucklingly, \"<i>Thank you for getting into this mess, my Doofus!</i>\" The young dragon-morph looks in confusion. Kiha looks at the dragon-morph and says, \"<i>That's how I call my mate. Other times, I call " + player.himHer() + " 'Idiot'.</i>\" You chuckle and let the two resume training.");
+		}
+		
+		private function kihaChildGraduationTime():void {
+			outputText("You walk up to check on your draconic " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "son" : "daughter") + ". By Marae, " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "he" : "she") + "'s all grown up! Looking down, you notice that " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "he" : "she") + "'s wearing a tribal loincloth, a nod to the modesty ");
+			if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText("like Kiha.");
+			else outputText("unlike Kiha who is naked.");
+			outputText("\n\nKiha walks over to you and says, \"<i>" + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "He" : "She") + " is quite the warrior now. " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "He" : "She") + " even slain some Minotaurs! I'm proud of " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "him" : "her") + ". You can knock me up all over again, my Doofus.</i>\" Kiha gives you a passionate kiss before flying off to do her usual duties.");
+			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 0;
+		}
+	}
 }

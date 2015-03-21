@@ -273,28 +273,85 @@ public function fappingItems(menus:Boolean = true):Boolean {
 //Generic stripping check.
 public function doStripCheck():void 
 {
-	if (player.cor < 15) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You sheepishly find some rocks to hide in, where you remove your " + player.armorName + ".\n\n", false);
-		else outputText("You sheepishly enter your cabin and make sure to close the cabin door and shutters of your window to ensure privacy. You then proceed to remove your " + player.armorName + ".\n\n", false);
-	}
-	if (player.cor >= 15 && player.cor < 30) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You make sure you are alone and strip naked.\n\n", false);
-		else outputText("You enter your cabin and close the door, forgetting to close the shutters. You then proceed to remove your " + player.armorName + ".\n\n", false);
-	}
-	if (player.cor >= 30 && player.cor < 60) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You happily remove your " + player.armorName + ", eager to pleasure yourself.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters open. You happily remove your " + player.armorName + ".\n\n", false);
-	}
-	if (player.cor >= 60 && player.cor < 80) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("You strip naked in an exaggerated fashion, hoping someone might be watching.\n\n", false);
-		else outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. You then proceed to remove your clothes.\n\n", false);
-	}	
-	if (player.cor >= 80) {
-		if (!flags[kFLAGS.CAMP_BUILT_CABIN] > 0) {
-			if (player.hasCock() || player.hasVagina()) outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n", false);
-			else outputText("You strip naked, casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
+	//In Ingnam or not in cabin.
+	if (flags[kFLAGS.IN_INGNAM] > 0 || flags[kFLAGS.CAMP_BUILT_CABIN] <= 0) {
+		if (player.cor < 15) {
+			outputText("You sheepishly find some rocks to hide in, where ", false);
+			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("you reach your hand into your goo-covered groin.");
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			else outputText("you remove your " + player.armorName + "");
+			outputText("\n\n");
 		}
-		else outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. You then proceed to remove your clothes.\n\n", false);
+		if (player.cor >= 15 && player.cor < 30) {
+			outputText("You make sure you are alone and ", false);
+			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("you reach your hand into your goo-covered groin.");
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			else outputText("strip naked.");
+			outputText("\n\n");
+		}
+		if (player.cor >= 30 && player.cor < 60) {
+			outputText("You happily ", false);
+			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("reach your hand into your goo-covered groin.");
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			else outputText("remove your " + player.armorName + "");
+			outputText(", eager to pleasure yourself.\n\n");
+		}
+		if (player.cor >= 60 && player.cor < 80) {
+			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin");
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin");
+			else outputText("You strip naked in an exaggerated fashion");
+			outputText(", hoping someone might be watching.\n\n");
+		}	
+		if (player.cor >= 80) {
+			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin");
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin");
+			else {
+				outputText("You strip naked, ");
+				if (player.hasCock() || player.hasVagina()) outputText("fondling your naughty bits as you do so and ");
+			}
+			outputText("casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
+		}
+	}
+	else if (flags[kFLAGS.IN_PRISON] > 0) {
+		
+	}
+	//In cabin
+	else {
+		if (player.cor < 15) {
+			outputText("You sheepishly enter your cabin and make sure to close the cabin door and shutters of your window to ensure privacy. ", false);
+			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin.");
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			else outputText("You then proceed to remove your " + player.armorName + ".");
+			outputText("\n\n");
+		}
+		if (player.cor >= 15 && player.cor < 30) {
+			outputText("You enter your cabin and close the door, forgetting to close the shutters. ", false);
+			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin.");
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			else outputText("You then proceed to remove your " + player.armorName + ".");
+			outputText("\n\n");
+		}
+		if (player.cor >= 30 && player.cor < 60) {
+			outputText("You enter your cabin and leave the shutters open. ", false);
+			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin.");
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			else outputText("You happily remove your " + player.armorName + ".");
+			outputText("\n\n");
+		}
+		if (player.cor >= 60 && player.cor < 80) {
+			outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. ", false);
+			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin.");
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			else outputText("You eagerly remove your " + player.armorName + ".");
+			outputText("\n\n");
+		}	
+		if (player.cor >= 80) {
+			outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. ", false);
+			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin.");
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			else outputText("You eagerly remove your " + player.armorName + " in an exaggerated fashion.");
+			outputText("\n\n");
+		}
 	}
 }
 

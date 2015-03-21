@@ -635,12 +635,12 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nMinerva has large demonic feet, each toe double-jointed and tipped with a large, black talon.  Similar to her feet, her tongue also has a demonic quality, being two foot long and fully prehensile.");
 			outputText("\n\nA white tube top and a pair of short shorts are all the siren wears for clothing.");
 			menu();
-			if (pregnancy.incubation > 0) {
+			if (pregnancy.isPregnant) {
 				outputText("\n\n");
 				if (pregnancy.incubation >= 216) outputText("<b>Her belly appears to be a bit swollen.</b>");
-				else if (pregnancy.incubation >= 144 && pregnancy.incubation < 216) ("<b>Her belly shows obvious signs of pregnancy.</b>");
-				else if (pregnancy.incubation >= 72 && pregnancy.incubation < 144) ("<b>Her gravid belly has gotten bigger.</b>");
-				else if (pregnancy.incubation < 72) ("<b>It's impossible to not notice her pregnancy.. She is about to give birth soon.</b>");
+				else if (pregnancy.incubation >= 144 && pregnancy.incubation < 216) outputText("<b>Her belly shows obvious signs of pregnancy.</b>");
+				else if (pregnancy.incubation >= 72 && pregnancy.incubation < 144) outputText("<b>Her gravid belly has gotten bigger.</b>");
+				else if (pregnancy.incubation < 72) outputText("<b>It's impossible to not notice her pregnancy. She is about to give birth soon.</b>");
 				addButton(0, "Pregnancy", checkPregnancy);
 			}
 			addButton(4, "Back", pureMinervaMenu);	
@@ -1181,7 +1181,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			//Romanced:
 			else outputText("\n\nThe lovestruck siren sighs and sits up, looking up at you with affection clearly written on her face.  \"<i>I hope you'll come back soon, I always feel so much happier when you're around,</i>\" she says as she brings a hand to her chest, holding it over her heart.");
-			if (rand(100) <= player.totalFertility() || (debug)) {
+			if (rand(100) <= player.totalFertility()) {
 				player.knockUpForce(PregnancyStore.PREGNANCY_MINERVA, PregnancyStore.INCUBATION_MINERVA);
 			}
 			player.slimeFeed();
@@ -1688,7 +1688,7 @@ package classes.Scenes.Areas.HighMountains
 			//Chance is between 10 and 75 percent.
 			if (chance < 10) chance = 10;
 			if (chance > 80) chance = 80;
-			if (rand(100) <= chance) {
+			if (rand(100) <= chance && !pregnancy.isPregnant) {
 				trace("Minerva got PREGNANT!");
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
 			}

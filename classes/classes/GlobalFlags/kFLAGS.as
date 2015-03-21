@@ -2203,8 +2203,8 @@ public static const KIHA_EGG_COUNTER:int                                        
 public static const KIHA_CHILDREN_BOYS:int                                          = 2195;
 public static const KIHA_CHILDREN_GIRLS:int                                         = 2196;
 public static const KIHA_CHILDREN_HERMS:int                                         = 2197;
-public static const UNKNOWN_FLAG_NUMBER_02198:int                                   = 2198;
-public static const UNKNOWN_FLAG_NUMBER_02199:int                                   = 2199;
+public static const KIHA_CHILD_MATURITY_COUNTER:int                                         = 2198;
+public static const KIHA_CHILD_LATEST_GENDER:int                                    = 2199;
 public static const UNKNOWN_FLAG_NUMBER_02200:int                                   = 2200;
 public static const UNKNOWN_FLAG_NUMBER_02201:int                                   = 2201;
 public static const UNKNOWN_FLAG_NUMBER_02202:int                                   = 2202;

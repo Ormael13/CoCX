@@ -2098,8 +2098,8 @@ public function displayStats(e:MouseEvent = null):void
 		childStats += "<b>Kiha Offspring (Females):</b> " + flags[kFLAGS.KIHA_CHILDREN_GIRLS] + "\n";
 	if (flags[kFLAGS.KIHA_CHILDREN_HERMS] > 0)
 		childStats += "<b>Kiha Offspring (Herms):</b> " + flags[kFLAGS.KIHA_CHILDREN_HERMS] + "\n";
-	if (flags[kFLAGS.KIHA_CHILDREN_BOYS] + flags[kFLAGS.KIHA_CHILDREN_GIRLS] + flags[kFLAGS.KIHA_CHILDREN_HERMS] > 0)
-		childStats += "<b>Total Children With Kiha:</b> " + flags[kFLAGS.KIHA_CHILDREN_BOYS] + flags[kFLAGS.KIHA_CHILDREN_GIRLS] + flags[kFLAGS.KIHA_CHILDREN_HERMS] + "\n";
+	if (kihaFollower.totalKihaChildren() > 0)
+		childStats += "<b>Total Children With Kiha:</b> " + kihaFollower.totalKihaChildren() + "\n";
 		
 	if (mountain.salon.lynnetteApproval() != 0)
 		childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";

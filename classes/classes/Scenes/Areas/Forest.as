@@ -171,7 +171,7 @@ package classes.Scenes.Areas
 				chooser = 1;
 			}
 			//If Jojo lives in camp, never encounter him
-			if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 || flags[kFLAGS.JOJO_DEAD_OR_GONE] >= 1) {
+			if (camp.campCorruptJojo() || player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 || flags[kFLAGS.JOJO_DEAD_OR_GONE] >= 1) {
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4) chooser = rand(3)
 				else chooser = rand(4)
 				if (chooser >= 1) chooser++;
@@ -229,8 +229,14 @@ package classes.Scenes.Areas
 			if (chooser == 1) {
 				doNext(camp.returnToCampUseOneHour);
 				clearOutput();
-				
-				if (kGAMECLASS.monk <= 0) 
+				//Failsafe mechanism
+				if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
+					outputText("You enjoy a peaceful walk in the woods.  It gives you time to think over the recent, disturbing events.", true);
+					dynStats("tou", .5, "int", 1);
+					doNext(camp.returnToCampUseOneHour);
+					return;
+				}
+				if (kGAMECLASS.monk == 0) 
 				{	
 					if (player.cor < 25)
 					{

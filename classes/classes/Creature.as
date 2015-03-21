@@ -2351,7 +2351,7 @@ package classes
 					count++
 				}
 			}
-			trace("countCockSocks found " + count + " " + type);
+			//trace("countCockSocks found " + count + " " + type);
 			return count;
 		}
 		
