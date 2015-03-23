@@ -1616,6 +1616,10 @@ package classes.Scenes.NPCs
 				else if(player.itemSlot1.itype == useables.T_SSILK) {
 					outputText("\"<i>Some spider silk? I think I remember someone who could take these and make them into armor or even comfortable robes.</i>\"\n\n", false);
 				}
+				//Imp Skull:
+				else if(player.itemSlot1.itype == useables.IMPSKLL) {
+					outputText("\"<i>The skull of an imp? I hunt imps and sometimes, I would cut their head off and take their skulls as trophy. " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "I'll hang some the skulls on the wall around your camp. You did a good job with the wall though." : "") + "</i>\"\n\n", false);
+				}
 				else {
 					outputText("She looks at it and shrugs, not really familiar with it.\n\n", false);
 				}
@@ -5824,6 +5828,10 @@ package classes.Scenes.NPCs
 				//Spider Silk:
 				else if(player.itemSlot1.itype == useables.T_SSILK) {
 					outputText("\"<i>Some spider silk? I think I remember someone who could take these and make them into armor. But why bother? That would hide your perfect body, " + player.mf("master","mistress") + ",</i>\" she says seductively.\n\n", false);
+				}
+				//Imp Skull:
+				else if(player.itemSlot1.itype == useables.IMPSKLL) {
+					outputText("\"<i>The skull of an imp? Why would you kill imps, " + player.mf("master", "mistress") + "?</i>\" Amily asks, frowningly, \"<i>Unless you want to keep the imps away from your camp.</i>\"\n\n", false);
 				}
 				else {
 					outputText("She looks at it and shrugs, not really familiar with it.\n\n", false);

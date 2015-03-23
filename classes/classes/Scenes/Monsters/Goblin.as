@@ -12,6 +12,8 @@
 			if (short == "goblin assassin") multiplier += 0.2;
 			if (short == "goblin shaman") multiplier += 0.4;
 			if (short == "goblin warrior") multiplier += 0.5;
+			if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 3) multiplier += game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			else if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) multiplier += 3;
 			if(short == "Tamani") temp2 = rand(5);
 			if(short == "Tamani's daughters") temp2 = rand(5);
 			var color:String = "";
@@ -57,12 +59,12 @@
 				if (color == "red") {
 					//Temporary heat
 					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-					if (player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat, 0, 0, 0, 0);
+					if (player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat, 0, multiplier, 0, 0);
 				}
 				else if (color == "green") {
 					//Green poison
 					outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
-					if (player.findStatusAffect(StatusAffects.Poison) < 0) player.createStatusAffect(StatusAffects.Poison, 0, 0, 0, 0);
+					if (player.findStatusAffect(StatusAffects.Poison) < 0) player.createStatusAffect(StatusAffects.Poison, 0, multiplier, 0, 0);
 				}
 				else if (color == "white") {
 					//sticky flee prevention
@@ -72,7 +74,7 @@
 				else if (color == "black") {
 					//Increase fatigue
 					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
-					game.fatigue(10 + rand(25));
+					game.fatigue(10 + rand(25) * multiplier);
 				}
 			}
 			if (!plural) combatRoundOver();

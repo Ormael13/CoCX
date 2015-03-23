@@ -75,6 +75,13 @@ package classes.Scenes.Areas.GlacialRift
 		
 		override public function doAI():void
 		{
+			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
+				outputText("Your foe is too dazed from your last hit to strike back!", false)
+				if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
+				else addStatusValue(StatusAffects.Stunned, 1, -1);
+				combatRoundOver();
+				return;
+			}
 			yetiAI();
 		}
 		

@@ -2414,6 +2414,7 @@ private function fixFlags():void {
 private function promptSaveUpdate():void {
 	clearOutput();
 	if (flags[kFLAGS.MOD_SAVE_VERSION] < 2) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 2;
 		outputText("It appears that you are importing your save from vanilla CoC or older version of this mod.", true);
 		outputText("\n\nIs your file last saved in vanilla CoC or pre-version 0.7.1 of the mod?");
 		outputText("\n\nI'm only asking because older versions of the mod conflicted with flags. This is now fixed but I can't guarantee if your save is okay.");
@@ -2421,16 +2422,16 @@ private function promptSaveUpdate():void {
 		menu();
 		addButton(0, "Vanilla", doCamp);
 		addButton(1, "Pre-0.7.1 mod", updateSaveFlags);
-		flags[kFLAGS.MOD_SAVE_VERSION] = 2;
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 2) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 3;
 		outputText("Starting in version 0.8 of this mod, achievements are now awarded. To ensure that you don't have to go through scenes again on new savefile, achievements will be awarded depending on flags.");
 		outputText("\n\nSome achievements, however, will require you to do it again.");
 		updateAchievements();
 		outputText("\n\nAchievements are saved in a special savefile so no matter what savefile you're on, any earned achievements will be added to that special savefile.");
 		outputText("\n\nTry restarting the game and check the achievements without loading! You'll see, it's permanent!");
-		flags[kFLAGS.MOD_SAVE_VERSION] = 3;
+		
 		menu();
 		doNext(camp.campMenu);
 		return;
@@ -2442,12 +2443,12 @@ private function promptSaveUpdate():void {
 		flags[kFLAGS.PHOENIX_ENCOUNTERED] = 0;
 		flags[kFLAGS.PHOENIX_WANKED_COUNTER] = 0;
 		if (kGAMECLASS.giacomo > 0) flags[kFLAGS.GIACOMO_MET] = 1;
-		flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+		flags[kFLAGS.MOD_SAVE_VERSION] = 4;
 		camp.campMenu();
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 4) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+		flags[kFLAGS.MOD_SAVE_VERSION] = 5;
 		if (flags[kFLAGS.KELT_KILLED] > 0 && player.statusAffectv1(StatusAffects.Kelt) <= 0) {
 			clearOutput();
 			outputText("Due to a bug where your bow skill got reset after you've slain Kelt, your bow skill got reset. Fortunately, this is now fixed. As a compensation, your bow skill is now instantly set to 100!");
@@ -2459,7 +2460,7 @@ private function promptSaveUpdate():void {
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 5) {
-		flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
+		flags[kFLAGS.MOD_SAVE_VERSION] = 6;
 		if (player.armorName == "revealing fur loincloths" || player.armorName == "comfortable underclothes" || player.weaponName == "dragon-shell shield") {
 			clearOutput();
 			outputText("Due to a bit of restructing regarding equipment, any reclassified equipment (eggshell shield and fur loincloth) that was equipped are now unequipped.");
@@ -2469,6 +2470,15 @@ private function promptSaveUpdate():void {
 			
 			doNext(camp.campMenu);
 			return;
+		}
+		camp.campMenu();
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 6) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 7;
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 6) {
+			flags[kFLAGS.D1_OMNIBUS_KILLED] = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02078];
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02078] = 0; //Reclaimed
 		}
 		camp.campMenu();
 		return;
@@ -2614,7 +2624,7 @@ private function updateAchievements():void {
 	
 	
 	var NPCsBadEnds:int = 0; //Check how many NPCs got bad-ended.
-	if (flags[kFLAGS.FACTORY_OMNIBUS_KILLED] > 0) NPCsBadEnds++;
+	if (flags[kFLAGS.D1_OMNIBUS_KILLED] > 0) NPCsBadEnds++;
 	if (flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED] > 0) NPCsBadEnds++;
 	if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) NPCsBadEnds++;
 	if (flags[kFLAGS.KELT_KILLED] > 0 || flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) NPCsBadEnds++;

@@ -141,7 +141,10 @@ package classes.Scenes.Dungeons.D3
 			this.weaponVerb = "thwack";
 			this.armorName = "fetishy churchwear";
 			this.armorDef = 2;
-			
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
+				armorName = "lethicite armor";
+				armorDef = 32;
+			}
 			this.bonusHP = 1200;
 			this.additionalXP = 1000;
 			this.gems = 500 + rand(50);

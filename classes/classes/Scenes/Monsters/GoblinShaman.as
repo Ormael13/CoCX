@@ -30,8 +30,8 @@ package classes.Scenes.Monsters
 			//Charge Weapon
 			if (spellChooser == 0 && fatigue <= (100 - spellCostCharge)) {
 				outputText("The goblin utters word of power, summoning an electrical charge around her staff. <b>It looks like she'll deal more physical damage now!</b>");
-				createStatusAffect(StatusAffects.ChargeWeapon, 25, 0, 0, 0);
-				this.weaponAttack += 25;
+				createStatusAffect(StatusAffects.ChargeWeapon, 25 * spellMultiplier(), 0, 0, 0);
+				this.weaponAttack += 25 * spellMultiplier();
 				fatigue += spellCostCharge;
 			}
 			//Blind
@@ -49,10 +49,10 @@ package classes.Scenes.Monsters
 			//Whitefire
 			else if (spellChooser == 2 && fatigue <= (100 - spellCostWhitefire)) {
 				outputText("The goblin narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  ");
-				var damage:int = inte + rand(50);
+				var damage:int = inte + rand(50) * spellMultiplier();
 				if (player.isGoo()) {
 					damage *= 1.5;
-					outputText("It's super effective!  ");
+					outputText("It's super effective! ");
 				}
 				player.takeDamage(damage, true);
 				fatigue += spellCostWhitefire;
@@ -60,7 +60,7 @@ package classes.Scenes.Monsters
 			//Arouse
 			else if (spellChooser == 3 && fatigue <= (100 - spellCostArouse)) {
 				outputText("She makes a series of arcane gestures, drawing on her lust to inflict it upon you! ");
-				var lustDamage:int = (inte / 5) + rand(10);
+				var lustDamage:int = (inte / 5) + rand(10) * spellMultiplier();
 				lustDamage = lustDamage * (game.lustPercent() / 100);
 				game.dynStats("lus", lustDamage, "resisted", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
@@ -69,7 +69,7 @@ package classes.Scenes.Monsters
 			//Heal
 			else if (spellChooser == 4 && fatigue <= (100 - spellCostHeal)) {
 				outputText("She focuses on her body and her desire to end pain, trying to draw on her arousal without enhancing it.");
-				var temp:int = int((inte/(2 + rand(3))) * (eMaxHP()/75));
+				var temp:int = int((inte/(2 + rand(3))) * (eMaxHP()/75) * spellMultiplier());
 				outputText("She flushes with success as her wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
 				addHP(temp);
 				fatigue += spellCostHeal;
@@ -78,12 +78,19 @@ package classes.Scenes.Monsters
 			else if (spellChooser == 5 && fatigue <= (100 - spellCostMight)) {
 				outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 				outputText("The rush of success and power flows through her body.  She feels like she can do anything!", false);
-				createStatusAffect(StatusAffects.Might, 20, 20, 0, 0);
-				str += 20;
-				tou += 20;
+				createStatusAffect(StatusAffects.Might, 20 * spellMultiplier(), 20 * spellMultiplier(), 0, 0);
+				str += 20 * spellMultiplier();
+				tou += 20 * spellMultiplier();
 				fatigue += spellCostMight;
 			}
 			combatRoundOver();
+		}
+		
+		private function spellMultiplier():Number {
+			var mult:Number = 1;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 3) mult += 0.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) mult += 1.5; //Caps at 2.5x.
+			return spellMultiplier();
 		}
 		
 		override protected function performCombatAction():void {

@@ -55,6 +55,29 @@ package classes.Scenes.Dungeons
 			}
 			else roomPremiumStorage();
 		}
+		private function checkStairs():Boolean {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] + flags[kFLAGS.FACTORY_INCUBUS_BRIBED] <= 0)) {
+				outputText("The glass door is locked! You have a feeling you should confront the incubus first.", true);
+				if (silly()) outputText("\n\nAnd no, you can't break it down! Locked doors are indestructible!");
+				doNext(roomMainChamber);
+				return false;
+			}
+			else {
+				roomForemanOffice();
+				return true;
+			}
+		}
+		private function checkExit():Boolean {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] <= 0) {
+				outputText("The metal door is locked! Looks like you won't be able to get out until you defeat whoever runs the factory.", true);
+				doNext(roomLobby);
+				return false;
+			}
+			else {
+				exitDungeon();
+				return true;
+			}
+		}
 		
 		private function takeIronKey():void {
 			outputText("You take the <b>Iron Key</b> to keep with your other important items.", true);
@@ -589,16 +612,17 @@ package classes.Scenes.Dungeons
 		private function doTradeIncubus():void {
 		spriteSelect(30);
 			outputText("You hand over the Hentai Comic tentatively to the male sex demon.  As soon as he has it in his grubby mits he sits down and starts thumbing through the pages, toying with his half-hard member the entire time.  He must really like porn.", true);
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 			player.removeKeyItem("Hentai Comic");
 			flags[kFLAGS.FACTORY_INCUBUS_BRIBED] = 1;
-			doNext(roomFurnaceRoom);			
+			doNext(roomFurnaceRoom);
 		}
 		
 		private function doFightIncubus():void {
 			flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] = 1;
 			spriteSelect(30);
 			outputText("\"<i>You're going down!</i>\" you yell at him as you ready your " + player.weaponName + "! \n\nAn unseen force closes the door, preventing you from running away. \n\nIt's a fight! ", true)
-			startCombat(new IncubusMechanic(), true);		
+			startCombat(new IncubusMechanic(), true);
 		}
 		
 		private function doSubmitIncubus():void {
@@ -606,7 +630,7 @@ package classes.Scenes.Dungeons
 			outputText("\"<i>It is good to see the insect accept its fate as the spider closes in,</i>\" intones the strange demonic mechanic as he takes you by the arm and leads you deeper into the facility.  ", false);
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
 				outputText("\n\nYou enter the main milking chamber, and the incubus gives a start when he realizes what has happened.  With a grunt of rage he throws you through the doorways back into his chamber.  The demon stalks after you, taking up a fighting stance.", false);
-				doNext(doFightIncubus);
+				startCombat(new IncubusMechanic(), true);
 				return;
 			}
 			outputText("You are brought into a room full of moaning humans, lined up in machines along the walls. You can see they're apparently sorted by age, as the victims' hair turns more and more grey and silver as you look down the line toward the far wall. All of them are hermaphrodites, the older individuals seeming to have larger breasts and genitals than the younger ones.  Most have a number of syringes embedded into their bodies, pumping them full of tainted chemical aphrodisiacs and demonic mutagens.  Clear cups and tubes are attached to leaky nipples, pulling steady streams of milk from the insensible captives as they pant and moan like drug-addicted sluts.  Similar tubes cradle their enhanced man-hoods, rhythmically squeezing cum from their constantly orgasming bodies.  Hoses suck away the jizz and milk, pumping it to places unknown.  Despite yourself, you are beginning to be majorly turned on, realizing that you'll probably become another milk-dripping pleasure-addict in a few minutes.\n\n", false);
@@ -1126,7 +1150,7 @@ package classes.Scenes.Dungeons
 		private function killOmnibus():void {
 			spriteSelect(16);
 			outputText("You step forwards and grab her by the head.  With an abrupt twist you snap her neck, ending at least one small part of the demonic threat.", true);
-			flags[kFLAGS.FACTORY_OMNIBUS_KILLED] = 1;
+			flags[kFLAGS.D1_OMNIBUS_KILLED] = 1;
 			cleanupAfterCombat();
 			//doNext(roomForemanOffice);
 		}
@@ -1462,7 +1486,7 @@ package classes.Scenes.Dungeons
 			outputText("<b><u>The Factory Foyer</u></b>\n", true);
 			outputText("The door swings shut behind you with an ominous 'creeeeeaaaaaaak' followed by a loud 'SLAM'.  Glancing around, you find yourself in some kind of stylish foyer, complete with works of art and a receptionist's desk.  Looking closer at the paintings on the wall quickly reveals their tainted and demonic nature: One appears at first to be a painting of a beautiful smiling woman, except you notice dripping tentacles coiling around the hem of her dress.  Behind the receptionist's desk, the second painting is even less discreet, openly depicting a number of imps gang-raping a vaguely familiar-looking woman.  Luckily, whatever demon is employed as the receptionist is away at the moment.  Behind the desk on the northern wall stands a secure-looking iron door.  On the western wall, is a door. A sign on the door indicates that it leads to the factory restroom.  On the eastern wall is a simple wooden door, though the color of the wood itself is far darker and redder than any of the hard woods from your homeland.  Behind you to the south is the rusty iron entry door.", false);
 			dungeons.setDungeonButtons(checkDoor1, null, roomBathroom, roomBreakRoom);
-			addButton(11, "South (Exit)", exitDungeon);
+			addButton(11, "South (Exit)", checkExit);
 		}
 		
 		public function roomBreakRoom():void {
@@ -1603,7 +1627,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nOne of the leather-clad ladies steps over and offers, 'Would you like a dose?  You look like you need to relieve some tension...", false);
 				addButton(0, "Tension", doTensionRelease);
 			}
-			addButton(5, "Upstairs", roomForemanOffice);
+			addButton(5, "Upstairs", checkStairs);
 		}
 		
 		public function roomForemanOffice():void {

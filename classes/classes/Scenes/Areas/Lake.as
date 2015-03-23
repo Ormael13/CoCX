@@ -86,6 +86,10 @@ package classes.Scenes.Areas
 			if (temp > 0 && player.longestCockLength() >= player.tallness - 10 && player.totalCockThickness() >= 8)
 				choice[choice.length] = 8;
 
+			//Encounter goblins and imps in NG+
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0)
+				choice[choice.length] = 12;
+				
 			//ONE TIME EVENTS
 			//Amily Village discovery
 			if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] == 0)
@@ -96,7 +100,7 @@ package classes.Scenes.Areas
 			//Pre-emptive chance of finding the boat
 			if (player.findStatusAffect(StatusAffects.BoatDiscovery) < 0)
 				choice[choice.length] = 11;
-
+				
 			//CHOOSE YOUR POISON!
 			select = choice[rand(choice.length)];
 
@@ -249,8 +253,11 @@ package classes.Scenes.Areas
 			else if (select == 6) {
 				kGAMECLASS.rathazul.encounterRathazul();
 			}
+			else if (select == 12) {
+				kGAMECLASS.exploration.genericGobImpEncounters();
+			}
 			else {
-				outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the link to report a bug and tell Fen about it.");
+				outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the link to report a bug and tell Fen (or Kitteh6660 since he makes the mod) about it.");
 			}
 		}
 		

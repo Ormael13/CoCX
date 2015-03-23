@@ -55,6 +55,14 @@ package classes.Scenes.Dungeons
 			}
 			else roomZetazChamber();
 		}
+		private function checkExit():void {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED] <= 0) {
+				outputText("The door appears to be locked as if by magic! You'll have to defeat Zetaz before you can leave.", true);
+				doNext(roomGatheringHall);
+				return;
+			}
+			else roomTunnel();
+		}
 		
 		private function takeBondageStraps():void {
 			clearOutput();

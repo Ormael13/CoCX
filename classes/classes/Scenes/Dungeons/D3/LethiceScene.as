@@ -13,11 +13,12 @@ package classes.Scenes.Dungeons.D3
 		
 		public function lethiceIntro():void {
 			clearOutput();
+			outputText(images.showImage("lethice-intro"));
 			outputText("You walk through the throne room and marvel at the massive size of it. Lethice is staring at you, eating a small bit of lethicite out of a chalice. \"<i>Well done, [name]. You may have fought my minions but it's not over!</i>\" she yells and she stands up.");
 			outputText("\n\nLethice slowly walks down the steps and says, \"<i>You may have shut down that factory in the mountains. You may have defeated Zetaz and found the map that leads here. You may have fought your way up to here. But... this is where your journey ends! What is your intent?</i>\"");
 			menu();
 			addButton(0, "End Threat", chooseEndThreat, null, null, null, "You're here to defeat Lethice and free Mareth from the corruption!");
-			if (player.cor >= 50) addButton(1, "Dominance", chooseDominance, null, null, null, "You're here to defeat Lethice and attempt to dominate Mareth!");
+			if (player.cor >= 50) addButton(1, "Dominance", chooseDominance, null, null, null, "You're here to defeat Lethice, take her place and attempt to dominate Mareth!");
 		}
 		
 		private function chooseEndThreat():void {
@@ -39,6 +40,7 @@ package classes.Scenes.Dungeons.D3
 		}
 		public function finalBattlePart2():void {
 			clearOutput();
+			outputText(images.showImage("monster-lethice-phase2"));
 			outputText("Lethice hisses at you. \"<i>Today is the day you'll die!</i>\" She raises her staff and makes a series of strange arcane gestures you've never even seen! One of the panels on the floor slides open and the hidden compartment raises to reveal a suit of strange, purple armor seeming to be made of glowing lethicite. What catches your eyes the most is the intricately-decorated hole at the groin area, presumably to expose the wearer's nether regions. You can only imagine how many mortals were turned into demons to harvest enough lethicite to create such an imposing armor. ");
 			outputText("\n\nIn no time, she quickly strips out her fetish churchwear and slips into the armor. She definitely looks more imposing yet her slavering cunt remains visible. \"<i>Like this beauty? I've turned hundreds of mortals into a demon to harvest enough lethicite. It takes a lot of work to forge this armor considering the strange properties of lethicite. You may think lethicite is one of demon's favorite treats but it has some uses!</i>\" Lethice says, glaring at you.");
 			startCombat(new Lethice());
@@ -58,7 +60,7 @@ package classes.Scenes.Dungeons.D3
 			monster.long = "She is no doubt the Queen of the Demons. She has pink skin, a rare example among demons. Her eyes are black with yellow iris and slit pupil. Her fangs are clearly visible, protruding along her upper row of teeth. She has long, luxurious purple hair with black roses woven in it, parted by her pair of goat horns and multiple pairs of demonic horns. She has numerous lethicite piercings piercing her ears. Huge draconic wings grow from her back, easily rivaling a full-fledged dragon-morph. Her feet end in high heels. " + (monster.findStatusAffect(StatusAffects.Berzerking) >= 0 ? "She's wearing a suit of lethicite armor that exposes her lethicite-pierced nipples and her glistening vagina." : "She's wearing a set of fetishy churchwear that doesn't seem to cover her B-cup breasts and her glistening vagina.") + " She's currently wielding an ebony staff topped with lethicite.";
 			monster.weaponAttack = 50;
 			monster.armorName = "lethicite armor";
-			monster.armorDef = 30;
+			monster.armorDef = 32;
 			doNext(5000);
 		}
 		
@@ -90,11 +92,22 @@ package classes.Scenes.Dungeons.D3
 			//doNext(theFinalEndingPart3);
 		}
 		
-		private function executeLethice():void {
+		private function executionPrompt():void {
+			if (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut") {
+				clearOutput();
+				outputText("How would you execute Lethice?");
+				menu();
+				addButton(0, "Snap Her Neck", executeLethice, 0, null, null, "Snap her neck.");
+				addButton(1, "Behead Her", executeLethice, 1, null, null, "Off with her head!\n\n(Warning: Contains gore!)");
+			}
+			else executeLethice();
+		}
+		
+		private function executeLethice(method:int = 0):void {
 			flags[kFLAGS.LETHICE_DEFEATED] = 2;
 			clearOutput();
 			outputText("You finally make your mind up. She must be punished for her wicked deeds. ");
-			if (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut") {
+			if (method == 1) {
 				outputText("\n\nYou raise your [weapon] and cleanly slice through Lethice's neck. Demonic blood spills forth, staining the carpet. ");
 				if (silly()) outputText("<b>FATALITY!</b> ");
 			}

@@ -388,8 +388,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_snapshot_20150321";
-			version = ver + " (<b>Kiha Preggers</b>)";
+			ver = "0.9.2_mod_snapshot_20150323";
+			version = ver + " (<b>New Game+ Playthrough Changes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

@@ -122,12 +122,14 @@ package classes.Scenes.Dungeons.Factory
 				else {
 					outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
 				}
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 				game.simpleChoices("Anally", factory.doRideIncubusAnally, "Orally", factory.doOralIncubus, "", 0, "", 0, "Leave", factory.doLeaveIncubus);
 			}
 			else {
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?", true);
 					game.dynStats("lus", 1);
+					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 					game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "Nothing", factory.doLeaveIncubus, "", 0);
 				} 
 				else {
@@ -135,6 +137,7 @@ package classes.Scenes.Dungeons.Factory
 					var temp2:Function = null;
 					if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") temp2 = game.createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,this);
 					game.dynStats("lus", 1);
+					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 					game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "B.Titfuck", temp2, "Nothing", factory.doLeaveIncubus)
 				}
 			}

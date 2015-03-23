@@ -76,6 +76,30 @@ package classes.Scenes.Dungeons
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
+		private function checkPharmacyDoorUnlocked():Boolean {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.CUM_WITCH_DEFEATED] <= 0) {
+				outputText("The purplish-pink magical barrier blocks your way. It looks like you might have to find and defeat the Cum Witch.", true);
+				doNext(roomWestHall2);
+				return false;
+			}
+			else {
+				roomPharmacy();
+				return true;
+			}
+		}
+		
+		private function checkExit():Boolean {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] <= 0) {
+				outputText("The magical barrier blocks your way! Looks like you can't get out until you find the leader of the Sand Witches!", true);
+				doNext(roomCaveCommons);
+				return false;
+			}
+			else {
+				roomEntrance();
+				return true;
+			}
+		}
+		
 		/*Sand Witch Mob
 		Very high hit points, not much stronger than a regular sand witch
 		{Standard Descript} You are surrounded by a veritable tribe of sand witches. Having cast off their protective, concealing robes in the safety of their den they stand before you almost completely naked, little more than double-bikinis and loincloths protecting their modesty.  They glower at you hatefully, outraged that you would invade their home, and ready themselves to drag you down with sheer numbers.
@@ -4041,18 +4065,22 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 24;
 			outputText("<b><u>Cavernous Commons</u></b>\n", true);
 			outputText("Dancing lights swirl around the roof of the cavern, twirling around each other in patterns too intricate to follow.  Whatever they are, they're clearly magical, and they lend this place an otherworldly ambience unmatched by anything you've seen.  This huge room reminds you of your village commons in a way - it's clearly a communal area.  There's a water-pump in the northwest corner and a blazing purple bonfire in the center of the chamber, heating the cool underground air.  The ground is dirt, rather than sand, and hard-packed as any road.  Various chairs and benches are set up for witches to relax in.  ");
-			dungeons.setDungeonButtons(null, roomEntrance, roomWestHall1, roomEastHall1)
+			dungeons.setDungeonButtons(null, checkExit, roomWestHall1, roomEastHall1)
 			if(flags[kFLAGS.SANDWITCH_MOB_DEFEATED] == 0) {
 				outputText("Worst of all, a huge assortment of spellcasters is assembling into a mob, obviously hostile.");
+				outputText("\n\n<b>A magical barrier appears at the exit, preventing your escape!</b>");
 				startCombat(new SandWitchMob(),true);
 				doNext(1);
 				return;
 			}
 			else outputText("The women you defeated before have returned to their tasks, casting wary glances your way from time to time but no longer threatening.");
 			outputText("  Cave tunnels lead in to the east and west into more underground chambers.  A path leads south towards the exit.");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] <= 0) {
+				outputText("\n\nA magical barrier blocks the path south. Seems like you can't leave until you find the leader.");
+			}
 			if(flags[kFLAGS.SANDWITCH_THRONE_UNLOCKED] == 0) {
 				outputText("\n\nA huge stone doorway blocks the path north.  You cannot see a way to open it.");
-				addButton(11, "South", roomEntrance);
+				addButton(11, "South", checkExit);
 			}
 			else {
 				outputText("\n\nAn open doorway opens up to the north.  You can faintly see some kind of altar beyond it.");
@@ -4085,7 +4113,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = 28;
 			outputText("<b><u>Western Warrens Main Hall (Western Portion)</u></b>\n", true);
 			outputText("The smooth tunnel comes to an end here, blocked by the omnipresent sandstone.  The sapphire light plays beautifully across the rough-hewn stone as you watch, but you don't take the time to give it much thought.  To the east, the arching hallway leads back towards a large common area of a cave.  Along the north and south walls are door-sized openings, blocked with rugs of fine make and thick fabric.  They don't leave enough of a gap for any light or sound to bleed into the hall.  You'll have to take a peek if you want to see what's going on.");
-			dungeons.setDungeonButtons(roomNursery, roomPharmacy, null, roomWestHall1);
+			dungeons.setDungeonButtons(roomNursery, checkPharmacyDoorUnlocked, null, roomWestHall1);
 			if(flags[kFLAGS.ESSRAYLE_ESCAPED_DUNGEON] == 0 && flags[kFLAGS.MET_ESSY] > 0) {
 				flags[kFLAGS.ESSY_MET_IN_DUNGEON] = 1;
 				if(flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] > 0) {
@@ -4125,13 +4153,13 @@ package classes.Scenes.Dungeons
 		}
 		public function roomSleepingChamber():void {
 			kGAMECLASS.dungeonLoc = 32;
-			outputText("<b><u>Eastern Warrens West Portion North Side (Sleeping Chamber)</u></b>\n", true);
+			outputText("<b><u>Eastern Warrens, Western Portion, North Side (Sleeping Chamber)</u></b>\n", true);
 			outputText("Inside this expansive but cosy chamber are a few dozen beds, arranged in neat patterns marred only by a few cots that dare to be positioned adjacent to one another.  Clearly this is the tribe's primary sleeping area.  The floor is obscured by heavy, hand-woven rugs that ruffle oh so softly against your [feet].  Instead of the usual ghostly lights you've grown to expect, the interior of this dwelling is lit by glass-paneled constructs resembling lanterns.  There is no fuel or wick of course, only flicking phantasmal illumination trapped as if it were a flame.  Shutters allow the lanterns to be dimmed, but as you are alone in here for now, there's no reason to make it harder to see.  There is a door to the east and a curtained off opening to the south.");
 			dungeons.setDungeonButtons(null, roomEastHall1, null, roomBathroom);
 		}
 		public function roomBathroom():void {
 			kGAMECLASS.dungeonLoc = 33;
-			outputText("<b><u>Eastern Warrens East Portion North Side (Bath Room)</u></b>\n", true);
+			outputText("<b><u>Eastern Warrens, Eastern Portion, North Side (Bath Room)</u></b>\n", true);
 			outputText("As soon as you step in, you can smell a sweet, dairy-like scent in the air, but as your eyes adjust to the dimmer lighting, you realize you've stumbled into the sand witches' bathroom!  Fluffy towels hang from the wall, ready for use.  There's one giant tub in the center of the room, recessed deep into the floor.  It has a number of seats carved into the side with a small, open hole in the bottom.  Hanging from the ceiling, a long chain dangles down, topped with a plug.");
 			dungeons.setDungeonButtons(null, null, roomSleepingChamber, null);
 			flags[kFLAGS.MET_MILK_SLAVE] = 1;

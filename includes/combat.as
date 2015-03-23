@@ -2296,7 +2296,7 @@ public function combatStatusesUpdate():void {
 			player.removeStatusAffect(StatusAffects.TemporaryHeat);
 		}
 		else {
-			dynStats("lus", (player.lib/12 + 5 + rand(5)));
+			dynStats("lus", (player.lib/12 + 5 + rand(5)) * player.statusAffectv2(StatusAffects.TemporaryHeat));
 			if(player.hasVagina()) {
 				outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ", false);
 			}
@@ -2318,7 +2318,7 @@ public function combatStatusesUpdate():void {
 		}
 		else {
 			outputText("The poison continues to work on your body, wracking you with pain!\n\n", false);
-			takeDamage(8+rand(maxHP()/20));
+			takeDamage(8+rand(maxHP()/20) * player.statusAffectv2(StatusAffects.Poison));
 		}
 	}
 	//Bondage straps + bondage fetish
@@ -2388,6 +2388,7 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 		monster.spe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 		monster.inte += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 		monster.level += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		monster.lustVuln *= 1 - (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.2);
 		monster.HP = monster.eMaxHP();
 		monster.XP = monster.totalXP();
 	}
@@ -2397,11 +2398,13 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 		monster.spe += 75;
 		monster.inte += 75;
 		monster.level += 90;
+		monster.lustVuln *= 0.4;
 		if (monster.level < 100) monster.level = 100;
 		monster.HP = monster.eMaxHP();
 		monster.XP = monster.totalXP();
 	}
 	if (player.weaponName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
+	if (player.weaponName == "blunderbuss") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 12;
 	doNext(1);
 }
 public function startCombatImmediate(monster:Monster, _plotFight:Boolean):void

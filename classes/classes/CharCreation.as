@@ -681,7 +681,7 @@ private function genericStyleCustomizeMenu():void {
 	}
 	addButton(3, "Set Height", setHeight);
 	if (player.hasCock()) addButton(5, "Cock Size", menuCockLength);
-	if (player.gender > 1) addButton(6, "Breast Size", menuBreastSize);
+	addButton(6, "Breast Size", menuBreastSize);
 	addButton(9, "Done", menuPerk);
 }
 

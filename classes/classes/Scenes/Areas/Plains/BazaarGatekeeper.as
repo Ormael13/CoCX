@@ -2,7 +2,7 @@ package classes.Scenes.Areas.Plains
 {
 	import classes.*;
 	import classes.internals.*;
-
+	import classes.GlobalFlags.kFLAGS;
 	/**
 	 * ...
 	 * @author Kitteh6660
@@ -17,22 +17,30 @@ package classes.Scenes.Areas.Plains
 		
 		public function scimitarAttack():void {
 			
-			outputText("The gatekeeper raises his scimitars! You attempt to dodge your way out ", false);
-			if (combatEvade())
+			outputText("The gatekeeper raises his scimitars ", false);
+			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) > 0) {
+				outputText("and slashes his scimitars blindly, missing you by a great deal!");
+				combatRoundOver();
+				return;
+			}
+			else {
+				outputText("and slashes towards you. You attempt to dodge your way out ");
+			}
+			if (combatEvade() || combatMisdirect())
 			{
-				outputText("and you successfully dodged his scimitars thanks to your superior evasion! ", false);
+				outputText("and you successfully dodge his scimitars thanks to your superior evasion! ", false);
 			}
 			else if (combatFlexibility())
 			{
 				outputText("and you use your incredible flexibility to barely fold your body and avoid his attacks!", false);
 			}
-			else if (combatMiss()) 
+			else if (combatMiss())
 			{
-				outputText("and you successfully dodged his scimitars! ", false);
+				outputText("and you successfully dodge his scimitars! ", false);
 			}
 			else
 			{
-				outputText("but you fail and get hit instead! ", false);
+				outputText("but you get hit instead! ", false);
 				var damage:int = int(str + weaponAttack + 100);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
@@ -41,28 +49,53 @@ package classes.Scenes.Areas.Plains
 		}
 		
 		public function scimitarCrossAttack():void {
-			
-			outputText("The gatekeeper raises his scimitars! Judging from the way he is holding, he is going to cross-slash you! You attempt to dodge ", false);
-			if (combatEvade())
-			{
-				outputText("and you successfully dodged his scimitars thanks to your superior evasion! ", false);
+			if (findStatusAffect(StatusAffects.Uber) <= 0) {
+				outputText("The gatekeeper raises his scimitars! Judging from the way he is holding, <b>he is going to cross-slash you!</b>");
+				combatRoundOver();
+				return;
 			}
-			else if (combatFlexibility())
-			{
-				outputText("and you use your incredible flexibility to barely fold your body and avoid his attacks!", false);
+			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] > 0) {
+				outputText("The gatekeeper slashes his scimitar towards you! Thanks to your preparedness, you manage to avoid his scimitars in the nick of time.");
 			}
-			else if (combatMiss()) 
-			{
-				outputText("and you successfully dodged his scimitars! ", false);
+			else if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) > 0) {
+				outputText("The blind gatekeeper slashes his scimitars wide, missing you by a great deal!");
 			}
-			else
-			{
-				outputText("but you fail and you get hit instead! You are in a lot of pain. ", false);
+			else {
+				outputText("The gatekeeper slashes you brutally! You are in a lot of pain. ", false);
 				var damage:int = int(str + weaponAttack + 250);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
+			removeStatusAffect(StatusAffects.Uber);
 			combatRoundOver();
+		}
+		
+		override public function doAI():void
+		{
+			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
+				outputText("Your foe is too dazed from your last hit to strike back!", false)
+				if (findStatusAffect(StatusAffects.Uber) >= 0) {
+					outputText(" You've managed to interrupt his special attack!");
+					removeStatusAffect(StatusAffects.Uber);
+				}
+				if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
+				else addStatusValue(StatusAffects.Stunned, 1, -1);
+				combatRoundOver();
+				return;
+			}
+			if (findStatusAffect(StatusAffects.Fear) >= 0) {
+				game.outputText("The gatekeeper appears to be immune to your fear.\n\n");
+				removeStatusAffect(StatusAffects.Fear);
+			}
+			if (findStatusAffect(StatusAffects.Uber) >= 0) {
+				scimitarCrossAttack();
+				removeStatusAffect(StatusAffects.Uber);
+			}
+			//Choose attacks
+			var chooser:int = rand(6);
+			if (chooser < 3) eAttack();
+			else if (chooser >= 3 && chooser < 5) scimitarAttack();
+			else scimitarCrossAttack();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

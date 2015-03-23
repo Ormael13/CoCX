@@ -349,10 +349,11 @@ private function isabellasAccentCoaching():void {
 
 //Reverse Isabella's accent back to her normal accent.
 private function isabellaAccentUncoaching():void {
+	clearOutput();
 	outputText("You tell Isabella that she can go back to her old accent however she likes. Her eyes widen and says, \"<i>Zank you, " + player.short + "!</i>\"\n\n", true)
 	outputText("<b>Isabella's accent is now reverted. You'll have to coach her all over again if you ever change your mind.</b>", false)
 	flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] = 0;
-	doNext(camp.returnToCamp);
+	doNext(callForFollowerIsabella);
 }	
 
 //Morning Wakeup Call 

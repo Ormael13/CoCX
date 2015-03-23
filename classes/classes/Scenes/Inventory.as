@@ -104,7 +104,8 @@ package classes.Scenes
 			}
 			if (!foundItem) {
 				outputText("\nYou have no usable items.");
-				doNext(1);
+				if (getGame().inCombat) doNext(5000); //Player returns to the combat menu on cancel
+				else doNext(camp.campMenu);
 				if (!getGame().inCombat) {
 					addButton(10, "Unequip", manageEquipment);
 				}

@@ -2444,13 +2444,17 @@ public function awardAchievement(title:String, achievement:*, display:Boolean = 
 
 public function lustPercent():Number {
 	var lust:Number = 100;
+	var minLustCap:Number = 25;
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 3) minLustCap -= flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 5;
+	else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) minLustCap -= 15;
 	//2.5% lust resistance per level - max 75.
-	if (player.level < 31) {
+	if (player.level < 100) {
 		if (player.level <= 11) lust -= (player.level - 1) * 3;
 		else if (player.level > 11 && player.level <= 21) lust -= (30 + (player.level - 11) * 2);
 		else if (player.level > 21 && player.level <= 31) lust -= (50 + (player.level - 21) * 1);
+		else if (player.level > 31) lust -= (60 + (player.level - 31) * 0.2);
 	}
-	else lust = 40;
+	else lust = 25;
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//ADDITIVE REDUCTIONS
@@ -2467,7 +2471,7 @@ public function lustPercent():Number {
 	if(player.findPerk(PerkLib.Resistance) >= 0) lust -= 10;
 	if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 	
-	if(lust < 25) lust = 25;
+	if(lust < minLustCap) lust = minLustCap;
 	if(player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) {
 		if(lust >= 80) lust = 100;
 		else lust += 20;
@@ -2670,6 +2674,10 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if (player.findPerk(PerkLib.ChiReflowSpeed)>=0 && spee < 0) spee *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
 	if (player.findPerk(PerkLib.ChiReflowLust)>=0 && libi > 0) libi *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 	if (player.findPerk(PerkLib.ChiReflowLust)>=0 && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+	
+	//Apply lust changes in NG+.
+	if (lust2 > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) lust2 *= 1 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.2);
+	else if (lust2 > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) lust2 *= 1.6;
 	
 	//lust resistance
 	if(lust2 > 0 && resisted) lust2 *= lustPercent()/100;
