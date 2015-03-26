@@ -409,18 +409,20 @@ package classes.Scenes.Areas.VolcanicCrag
 				outputText("\n\nWhat catches your eye the most is the empty metal basin at the center that looks like it could hold two people. \"<i>Do you like my tent?</i>\" The behemoth asks. You tell him that yes, you like his tent. He smiles at you and gives you a thank. ");
 				flags[kFLAGS.BEHEMOTH_TENT] = 1;
 			}
-			outputText("\n\nYou remove your [armor], put it into a neat pile on his bed and " + (player.isGoo() || player.isNaga() ? "slither": "walk") + " over to the basin. \"<i>This is where I will cum into. Get into basin and I'll take care from there,</i>\" the behemoth instructs.");
+			outputText("\n\n" + (player.armor == armors.GOOARMR ? "Valeria pours from your armor before you remove your armor" : "You remove your [armor]") + " , put it into a neat pile on his bed and " + (player.isGoo() || player.isNaga() ? "slither": "walk") + " over to the basin. \"<i>This is where I will cum into. Get into basin and I'll take care from there,</i>\" the behemoth instructs.");
 			outputText("\n\nYou get into the basin as told and watch the behemoth moves his loincloth aside to reveal his huge prick. He smiles at you and says, \"<i>I'm going to start now. You can help by caressing my balls to make me reach orgasm faster.</i>\" He begins stroking his cock and you reach over to caress his 3-inch balls. In no time at all, his cock springs to full erection, already leaking precum. Fantasies and thoughts fill the behemoth's mind and he masturbates in earnest.");
 			outputText("\n\nEventually, he can hold back no more. \"<i>Can't hold back! Gotta cum,</i>\" he announces as he finally unleashes huge torrents of cum into the basin. It seems to never end and the basin is being filled with cum up to your neck. You sit back and relax as the behemoth finishes cumming, cock still dripping with semen. He removes his loincloth and places it next to your [armor].");
-			outputText("\n\n\"<i>I'm going to join,</i>\" he says. He steps into the cum-filled basin and reclines back. With the two of you now having a literal cum bath, you relax for some time. ");
+			outputText("\n\n\"<i>I'm going to join,</i>\" he says. He steps into the cum-filled basin and reclines back. With the " + (player.armor == armors.GOOARMR ? "three" : "two") + " of you now having a literal cum bath, you relax for some time. ");
 			if (flags[kFLAGS.BEHEMOTH_CUM_BATH] <= 0) outputText("You never knew having a literal cum bath felt so good!");
-			outputText("\n\nThe behemoth moves over to kiss you and you let out a deep groan and moan as his tongue probes the inside of your mouth. He retracts back and says, \"<i>I love you.</i>\"");
+			outputText("\n\nThe behemoth moves over to kiss you and you let out a deep groan and moan as his tongue probes the inside of your mouth. He retracts back and says, \"<i>I love you.</i>\" ");
+			if (player.armor == armors.GOOARMR) outputText("Valeria says, \"<i>Thanks for the fluids!</i>\"");
 			outputText("\n\nYou caress his cheeks and recline back...");
 			outputText("\n\n<b>One hour later...</b>");
 			outputText("\n\nYou get out of the cum-filled basin and " + (player.isGoo() ? "absorb the cum into your gooey body": "shake the excessive cum off") + " before " + player.clothedOrNaked("getting yourself re-dressed into your [armor] and") + " rustle the behemoth's hair.  \"<i>See you later. Come back anytime for more fun,</i>\" the behemoth says. You give him a final kiss before you make your way back to camp, already feeling a lot better.");
 			flags[kFLAGS.BEHEMOTH_CUM_BATH]++;
 			HPChange(player.maxHP() / 2, false);
 			fatigue(-50);
+			if (player.armor == armors.GOOARMR) kGAMECLASS.valeria.feedValeria(100);
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
 			player.slimeFeed();
 			if (kGAMECLASS.inCombat) cleanupAfterCombat();

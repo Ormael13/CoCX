@@ -13,6 +13,7 @@ package classes.Items
 
 		public const B_SWORD:Weapon = new BeautifulSword();
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 1000, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon. \n\nType: Weapon (Sword) \nAttack: 12 \nBase value: 1,000");
+		public const BLUNDER:Weapon = new Weapon("Blunder", "Blunderbuss", "blunderbuss", "a blunderbuss", "shot", 16, 600, "This is a blunderbuss. It's effective at short range but poor at long range. \n\nType: Weapon (Ranged) \nAttack: 16 \nBase value: 500");
 		public const CLAYMOR:Weapon = new LargeClaymore();
 		public const CROSSBW:Weapon = new Weapon("Crossbw","Crossbow","crossbow","a crossbow","shot",11,200,"This weapon fires bolts at your enemies. \n\nType: Weapon (Ranged) \nAttack: 10 \nBase value: 200", "Ranged");
 		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",4,40,"A small blade.  Preferred weapon for the rogues. \n\nType: Weapon (Sword) \nAttack: 4 \nBase value: 40");

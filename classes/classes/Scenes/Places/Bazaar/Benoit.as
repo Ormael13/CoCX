@@ -333,7 +333,7 @@ private function benoitSellMenu():void {
 	outputText("\n\n<b><u>Benoit" + benoitMF("", "e") + "'s Estimates</u></b>");
 	menu();
 	var totalItems:int = 0;
-	for (var slot:int = 0; slot < 5; slot++) {
+	for (var slot:int = 0; slot < 10; slot++) {
 		if (player.itemSlots[slot].quantity > 0 && int(player.itemSlots[slot].itype.value / sellMod) >= 1) {
 			outputText("\n" + int(player.itemSlots[slot].itype.value / sellMod) + " gems for " + player.itemSlots[slot].itype.longName + ".");
 			addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), createCallBackFunction2(benoitSellTransact, slot, sellMod));

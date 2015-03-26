@@ -1462,8 +1462,8 @@ public function attack():void {
 	}*/
 	//BASIC DAMAGE STUFF
 	//Double Attack Hybrid Reductions
-	if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && player.str > 61 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
-		damage = 60.5;
+	if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && player.str > 61 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 15) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
+		damage = 60.5 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 15);
 	}
 	else damage = player.str;
 	if (isWieldingRangedWeapon()) damage += (player.spe / 5);
@@ -1854,7 +1854,7 @@ public function combatBlock(doFatigue:Boolean = false):Boolean {
 	else return false;
 }
 public function isWieldingRangedWeapon():Boolean {
-	if (player.weaponName == "flintlock pistol" || player.weaponName == "crossbow") return true;
+	if (player.weaponName == "flintlock pistol" || player.weaponName == "crossbow" || player.weaponName == "blunderbuss rifle") return true;
 	else return false;
 }
 

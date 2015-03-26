@@ -277,38 +277,56 @@ public function doStripCheck():void
 	if (flags[kFLAGS.IN_INGNAM] > 0 || flags[kFLAGS.CAMP_BUILT_CABIN] <= 0) {
 		if (player.cor < 15) {
 			outputText("You sheepishly find some rocks to hide in, where ", false);
-			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("you reach your hand into your goo-covered groin.");
-			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			if (player.armor == armors.GOOARMR) {
+				if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("you remove your goo-soaked [lowerGarment] then ");
+				outputText("you reach your hand into your goo-covered groin.");
+			}
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated opening in your lethicite armor to access your groin.");
 			else outputText("you remove your " + player.armorName + "");
 			outputText("\n\n");
 		}
 		if (player.cor >= 15 && player.cor < 30) {
 			outputText("You make sure you are alone and ", false);
-			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("you reach your hand into your goo-covered groin.");
-			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			if (player.armor == armors.GOOARMR) {
+				if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("you remove your goo-soaked [lowerGarment] then ");
+				outputText("you reach your hand into your goo-covered groin.");
+			}
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated opening in your lethicite armor to access your groin.");
 			else outputText("strip naked.");
 			outputText("\n\n");
 		}
 		if (player.cor >= 30 && player.cor < 60) {
 			outputText("You happily ", false);
-			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("reach your hand into your goo-covered groin.");
-			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			if (player.armor == armors.GOOARMR) {
+				if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and ");
+				outputText("reach your hand into your goo-covered groin");
+			}
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin.");
 			else outputText("remove your " + player.armorName + "");
 			outputText(", eager to pleasure yourself.\n\n");
 		}
 		if (player.cor >= 60 && player.cor < 80) {
-			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin");
-			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin");
-			else outputText("You strip naked in an exaggerated fashion");
+			outputText("You ");
+			if (player.armor == armors.GOOARMR) {
+				if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+				outputText("reach your hand into your goo-covered groin");
+			}
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin");
+			else outputText("strip naked in an exaggerated fashion");
 			outputText(", hoping someone might be watching.\n\n");
 		}	
 		if (player.cor >= 80) {
-			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin");
-			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin");
-			else {
-				outputText("You strip naked, ");
-				if (player.hasCock() || player.hasVagina()) outputText("fondling your naughty bits as you do so and ");
+			outputText("You ");
+			if (player.armor == armors.GOOARMR) {
+				if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+				outputText("reach your hand into your goo-covered groin, ");
 			}
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin, ");
+			else {
+				outputText("strip naked, ");
+				
+			}
+			if (player.hasCock() || player.hasVagina()) outputText("fondling your naughty bits as you do so and ");
 			outputText("casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
 		}
 	}
@@ -319,36 +337,56 @@ public function doStripCheck():void
 	else {
 		if (player.cor < 15) {
 			outputText("You sheepishly enter your cabin and make sure to close the cabin door and shutters of your window to ensure privacy. ", false);
-			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin.");
-			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			if (player.armor == armors.GOOARMR) {
+				outputText("You ");
+				if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+				outputText("reach your hand into your goo-covered groin");
+			}
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
 			else outputText("You then proceed to remove your " + player.armorName + ".");
 			outputText("\n\n");
 		}
 		if (player.cor >= 15 && player.cor < 30) {
 			outputText("You enter your cabin and close the door, forgetting to close the shutters. ", false);
-			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin.");
-			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			if (player.armor == armors.GOOARMR) {
+				outputText("You ");
+				if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+				outputText("reach your hand into your goo-covered groin");
+			}
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
 			else outputText("You then proceed to remove your " + player.armorName + ".");
 			outputText("\n\n");
 		}
 		if (player.cor >= 30 && player.cor < 60) {
 			outputText("You enter your cabin and leave the shutters open. ", false);
-			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin.");
-			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			if (player.armor == armors.GOOARMR) {
+				outputText("You ");
+				if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+				outputText("reach your hand into your goo-covered groin");
+			}
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
 			else outputText("You happily remove your " + player.armorName + ".");
 			outputText("\n\n");
 		}
 		if (player.cor >= 60 && player.cor < 80) {
 			outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. ", false);
-			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin.");
-			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			if (player.armor == armors.GOOARMR) {
+				outputText("You ");
+				if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+				outputText("reach your hand into your goo-covered groin");
+			}
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
 			else outputText("You eagerly remove your " + player.armorName + ".");
 			outputText("\n\n");
 		}	
 		if (player.cor >= 80) {
 			outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. ", false);
-			if (player.armor == armors.GOOARMR && player.lowerGarment.name == "nothing") outputText("You reach your hand into your goo-covered groin.");
-			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated hole in your lethicite armor to access your groin.");
+			if (player.armor == armors.GOOARMR) {
+				outputText("You ");
+				if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+				outputText("reach your hand into your goo-covered groin");
+			}
+			else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
 			else outputText("You eagerly remove your " + player.armorName + " in an exaggerated fashion.");
 			outputText("\n\n");
 		}
@@ -1904,7 +1942,9 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 				if(player.cumQ() >= 25 && player.cumQ() < 250) outputText("The orgasm drags on and on, spurt after spurt of jism coating you.  ", false);
 				if(player.cumQ() >=250 && player.cumQ() < 500) outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down.  ", false);
 				if(player.cumQ() >=500) outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of each jet of cum erupting from your cock.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ", false);
-			}			
+			}
+			if (player.armor == armors.GOOARMR) outputText("Your seed is absorbed into the goo covering your body. \"<i>Thanks for the fluids!</i>\" Valeria says.  ");
+			if (player.armor == armors.LTHCARM) outputText("Your lethicite armor is stained with your seed.");
 		}
 		//MULTICOCK
 		if(player.cocks.length > 1) {
@@ -1944,10 +1984,12 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 				else player.refillHunger(100);
 			}
 			//These seem like they should always be displayed regardless of other factors.		
-			if(player.cumQ() < 5) outputText("A few thick spurts of cum burst from your cocks, splattering you liberally.  ", false);
-			if(player.cumQ() >= 5 && player.cumQ() < 7) outputText("The orgasm drags on and on, spurt after spurt of jism coating you from each cock.  ", false);
-			if(player.cumQ() >=7 && player.cumQ() < 10) outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down as the orgasms from each of your members begin to overlap.  Your nearly black out in pleasure.  ", false);
-			if(player.cumQ() >=10) outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ", false);
+			if(player.cumQ() < 25) outputText("A few thick spurts of cum burst from your cocks, splattering you liberally.  ", false);
+			if(player.cumQ() >= 25 && player.cumQ() < 250) outputText("The orgasm drags on and on, spurt after spurt of jism coating you from each cock.  ", false);
+			if(player.cumQ() >= 250 && player.cumQ() < 500) outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down as the orgasms from each of your members begin to overlap.  Your nearly black out in pleasure.  ", false);
+			if(player.cumQ() >= 500) outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ", false);
+			if (player.armor == armors.GOOARMR) outputText("Your seed is absorbed into the goo covering your body. \"<i>Thanks for the fluids!</i>\" Valeria says.  ");
+			if (player.armor == armors.LTHCARM) outputText("Your lethicite armor is stained with your seed.");
 		}
 	}
 	//Vaginal CUMMING
@@ -1963,7 +2005,7 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 			if(player.clitLength > 1.5  && player.clitLength < 4.5) outputText("Every muscle-twitch seems to stretch your big oversensitive clitty larger, causing you to squeal with delight at every bump and touch against it.  ", false);
 			if(player.clitLength >= 4.5) outputText("A hand finds your cock-like clit, squeezing and caressing it as the cunt-wrenching orgasm wracks your body, the over-sized joy-buzzer nearly making you black out from the sensations it generates.  ", false);
 			//Wet orgasms
-			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your " + vaginaDescript(0) + ".  ", false);
+			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your " + vaginaDescript(0) + ".  ", false);
 		}
 		//MultiCunt UNFINISHED
 		else {
@@ -1977,6 +2019,11 @@ public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 		//WHYYYYY
 		titCum(player.cumQ());
 	}
+	//Feed Valeria!
+	var fluidQ:Number = 5;
+	fluidQ += 5 * player.averageVaginalWetness() * 3;
+	fluidQ += Math.sqrt(player.cumQ());
+	if (player.armor == armors.GOOARMR) valeria.feedValeria(fluidQ);
 	//DONE!
 	player.orgasm();
 	dynStats("sen", (-0.5));
@@ -1996,9 +2043,15 @@ public function titCum(cumQuantity:Number = 3):void
 		if(player.averageNippleLength() <=1) outputText("erect nipples, ", false);
 		if(player.averageNippleLength() > 1 && player.averageNippleLength() < 4) outputText("fat, puckered nipples, ", false);
 		if(player.averageNippleLength() >= 4) outputText("huge, swollen teats, ", false);
-		if(player.averageLactation() <= 2.6) outputText("spattering milk everywhere. ", false);
-		if(player.averageLactation() > 2.6 && player.averageLactation() < 3) outputText("covering everything nearby. ", false);
-		if(player.averageLactation() >= 3) outputText("drenching the entire area.", false);
+		if (player.armor == armors.GOOARMR) {
+			outputText("stuffing your goo armor with " + (player.averageLactation() >= 3 ? "a lot of " : "") + "milk. \"<i>Thanks for the milk,</i>\" Valeria says.", false);
+			flags[kFLAGS.VALERIA_FLUIDS] += 10 * player.averageLactation();
+		}
+		else {
+			if(player.averageLactation() <= 2.6) outputText("spattering milk everywhere. ", false);
+			if(player.averageLactation() > 2.6 && player.averageLactation() < 3) outputText("covering everything nearby. ", false);
+			if(player.averageLactation() >= 3) outputText("drenching the entire area.", false);
+		}
 	}
 	//Cumming with Nipplecunts!
 	if(player.hasFuckableNipples())
@@ -2013,7 +2066,14 @@ public function titCum(cumQuantity:Number = 3):void
 		if(player.averageVaginalWetness() >= 4)	outputText("gush ", false);
 		//Lactating?
 		if(player.averageLactation() > 0) outputText("milk and ", false);
-		outputText("pussy juice everywhere.", false);
+		outputText("pussy juice ", false);
+		if (player.armor == armors.GOOARMR) {
+			outputText("into the goo covering your body. \"<i>Thanks for the fluids,</i>\" Valeria says.", false);
+			valeria.feedValeria((player.averageVaginalWetness() * 5) + (10 * player.averageLactation()));
+		}
+		else {
+			outputText("everywhere.");
+		}
 	}
 }
 

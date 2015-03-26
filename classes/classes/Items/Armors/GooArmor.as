@@ -42,6 +42,16 @@ package classes.Items.Armors
 			return super.playerEquip();
 		}
 		
+		override public function get def():Number { 
+			if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 || game.flags[kFLAGS.HARDCORE_MODE] > 0 || game.flags[kFLAGS.HUNGER_ENABLED] >= 1) {
+				if (game.flags[kFLAGS.VALERIA_FLUIDS] < 50) {
+					return 15 + int(game.flags[kFLAGS.VALERIA_FLUIDS] / 5);
+				}
+				else return 25;
+			}
+			else return 22;
+		}
+		
 		override public function playerRemove():Armor { //This item is being removed by the player. Remove any perks, etc.
 			game.flags[kFLAGS.VALARIA_AT_CAMP] = 1;
 			return null; //Can't put Valaria in your inventory

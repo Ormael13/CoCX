@@ -22,8 +22,14 @@ package classes {
 			
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 			if (player.ballSize > 400) player.ballSize = 400;
-			if (player.findPerk(PerkLib.StrongBack) >= 0 && !player.itemSlot4.unlocked) player.itemSlot4.unlocked = true;
-			if (player.findPerk(PerkLib.StrongBack2) >= 0 && !player.itemSlot5.unlocked) player.itemSlot5.unlocked = true;
+			var maxSlots:int = inventory.getMaxSlots();
+			player.itemSlot4.unlocked = maxSlots >= 4;
+			player.itemSlot5.unlocked = maxSlots >= 5;
+			player.itemSlot6.unlocked = maxSlots >= 6;
+			player.itemSlot7.unlocked = maxSlots >= 7;
+			player.itemSlot8.unlocked = maxSlots >= 8;
+			player.itemSlot9.unlocked = maxSlots >= 9;
+			player.itemSlot10.unlocked = maxSlots >= 10;
 			if (flags[kFLAGS.SOCK_COUNTER] > 0) {
 				flags[kFLAGS.SOCK_COUNTER]--;
 				if (flags[kFLAGS.SOCK_COUNTER] < 0) flags[kFLAGS.SOCK_COUNTER] = 0;
@@ -127,6 +133,17 @@ package classes {
 			}
 			if (player.cor <= 0) {
 				if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE] == 1) flags[kFLAGS.ACHIEVEMENT_PROGRESS_CLEAN_SLATE]++
+			}
+			//Decrement Valeria's fluid in New Game+.
+			if ((flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 || flags[kFLAGS.HARDCORE_MODE] > 0 || flags[kFLAGS.HUNGER_ENABLED] >= 1) && (player.armor == armors.GOOARMR || flags[kFLAGS.VALARIA_AT_CAMP] > 0)) {
+				if (flags[kFLAGS.VALERIA_FLUIDS] > 0) {
+					flags[kFLAGS.VALERIA_FLUIDS]--;
+				}
+				else {
+					dynStats("lus", 2 + (player.lib / 10), "resisted", false);
+					needNext = true;
+				}
+				if (flags[kFLAGS.VALERIA_FLUIDS] > 100) flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
 			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) { //Spider and Bee Sting Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
@@ -238,8 +255,7 @@ package classes {
 						flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED]++;
 						needNext = true;
 					}
-					getGame().dynStats("lus", .1);
-					player.lust += 20;
+					getGame().dynStats("lus", 20);
 					if (player.lust > player.maxLust()) player.lust = player.maxLust();
 				}
 				if (player.statusAffectv1(StatusAffects.Luststick) <= 0) {
@@ -924,9 +940,10 @@ package classes {
 				return true;
 			}
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE && player.lust >= player.maxLust()) {
-				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY)) {
+				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
 					outputText("\nYou can't help it anymore. Thankfully, you have the honey in your pouch so you pull out a vial of honey. You're definitely going to masturbate with honey covering your bee-cock.");
 					doNext(10);
+					return true;
 				}
 				outputText("\nYou can’t help it anymore, you need to find the bee girl right now.  You rush off to the forest to find the release that you absolutely must have.  Going on instinct you soon find the bee girl's clearing and her in it.\n\n");
 				getGame().forest.beeGirlScene.beeSexForCocks(false);

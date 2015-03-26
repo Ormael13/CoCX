@@ -423,6 +423,7 @@ package classes.Scenes.Dungeons
 				doNext(roomGuardHall);
 			else inventory.takeItem(item, roomGuardHall);
 			flags[kFLAGS.MET_VALERIA] = 1;
+			flags[kFLAGS.VALERIA_FLUIDS] = 80;
 			HPChange(player.maxHP(),false);
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 		}

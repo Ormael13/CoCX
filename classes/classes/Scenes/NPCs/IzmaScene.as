@@ -42,6 +42,9 @@
 			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) {
 				flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
 			}
+			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.IZMA_FEEDING_VALERIA] == 1 && flags[kFLAGS.VALARIA_AT_CAMP] > 0) {
+				flags[kFLAGS.VALERIA_FLUIDS] = 100;
+			}
 			if (model.time.hours > 23 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] = 0;
 			return false;
 		}
@@ -1833,6 +1836,7 @@ private function izmaSexMenu():void {
 	addButton(6,"Sixtynine",sixty);
 	addButton(7,"Kids",childToggle);
 	if(flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower()) addButton(8,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu);
+	if (flags[kFLAGS.IZMA_NO_COCK] == 0 && (flags[kFLAGS.VALARIA_AT_CAMP] > 0 || player.armor == armors.GOOARMR) && (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 || flags[kFLAGS.HARDCORE_MODE] > 0 || flags[kFLAGS.HUNGER_ENABLED] >= 1)) addButton(9, "Valeria", izmaValeriaSubmenu);
 	addButton(14,"Back",izmaFollowerMenu);
 	
 }
@@ -3549,5 +3553,32 @@ private function izmaLatexyToggle():void {
 	menu();
 	addButton(4,"Back",izmaLatexySubmenu);
 }
+
+//Click Latexy Submenu In Izma's Menu
+private function izmaValeriaSubmenu():void {
+	clearOutput();
+	outputText("\"<i>Oh, you can ask me if I should feed that blue goo-girl or not, [name],</i>\" Izma says while her tail flicks back and forth.");
+	menu();
+	if(flags[kFLAGS.IZMA_FEEDING_VALERIA] == 0) addButton(0,"KeepHerFed",izmaValeriaToggle);
+	else addButton(0,"No Feeding",izmaValeriaToggle);
+	addButton(4,"Back",izmaSexMenu);
+}
+//[No Feeding]
+private function izmaValeriaToggle():void {
+	clearOutput();
+	if(flags[kFLAGS.IZMA_FEEDING_VALERIA] == 1) {
+		outputText("You tell Izma you don't want her feeding Valeria any more.");
+		outputText("\n\n\"<i>Awww, that's too bad.  She's pretty fun,</i>\" Izma cheers.  \"<i>Well, you're the Alpha.  I suppose I can keep my hands to myself.</i>\"");
+		flags[kFLAGS.IZMA_FEEDING_VALERIA] = 0;
+	}
+	else {
+		outputText("You tell Izma that she should feed Valeria.  The shark-girl hugs you with a predatory grin splitting her face.  \"<i>I can't wait.</i>\"");
+		if (player.armor == armors.GOOARMR) outputText("\n\nThe goo pours out of your armor and says, \"<i>Thank you for deciding to let Izma feed me.</i>\"");
+		flags[kFLAGS.IZMA_FEEDING_VALERIA] = 1;
+	}
+	menu();
+	addButton(4,"Back",izmaValeriaSubmenu);
+}
+
 }
 }

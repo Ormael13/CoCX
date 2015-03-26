@@ -2365,6 +2365,10 @@ public function displayStats(e:MouseEvent = null):void
 		interpersonStats += "\n";
 	}
 	
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && (player.armor == armors.GOOARMR || flags[kFLAGS.VALARIA_AT_CAMP] == 1)) {
+		interpersonStats += "<b>Valeria's Fluid:</b> " + flags[kFLAGS.VALERIA_FLUIDS] + "%\n"
+	}
+	
 	if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
 		if (urta.urtaLove()) {
 			if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> <font color=\"#800000\">Gone</font>\n";

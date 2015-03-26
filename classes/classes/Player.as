@@ -30,7 +30,12 @@ use namespace kGAMECLASS;
 			itemSlot3 = new ItemSlotClass();
 			itemSlot4 = new ItemSlotClass();
 			itemSlot5 = new ItemSlotClass();
-			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5];
+			itemSlot6 = new ItemSlotClass();
+			itemSlot7 = new ItemSlotClass();
+			itemSlot8 = new ItemSlotClass();
+			itemSlot9 = new ItemSlotClass();
+			itemSlot10 = new ItemSlotClass();
+			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10];
 		}
 		
 		protected final function outputText(text:String, clear:Boolean = false):void
@@ -79,6 +84,11 @@ use namespace kGAMECLASS;
 		public var itemSlot3:ItemSlotClass;
 		public var itemSlot4:ItemSlotClass;
 		public var itemSlot5:ItemSlotClass;
+		public var itemSlot6:ItemSlotClass;
+		public var itemSlot7:ItemSlotClass;
+		public var itemSlot8:ItemSlotClass;
+		public var itemSlot9:ItemSlotClass;
+		public var itemSlot10:ItemSlotClass;
 		public var itemSlots:Array;
 		
 		private var _weapon:Weapon = WeaponLib.FISTS;

@@ -358,7 +358,7 @@ private function milkBathTime():void {
 	if(sophieFollowerScene.sophieFollower()) count++;
 	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) count++;
 	if(latexGirl.latexGooFollower()) count++;
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) count++;
+	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) count++;
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) count++;
 	if(helScene.followerHel()) count++;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) count++;
@@ -402,7 +402,10 @@ private function communalBath():void {
 	if(latexGirl.latexGooFollower()) outputText("\n\nYou wave over your ebony-skinned latex goo, telling her to drink up.  \"<i>M-[master]?</i>\" she says, pausing at the poolside.  You repeat your command, patting the surface of the milky waves.  It looks like her primal hunger takes over a moment later as she slips into the vast sea of lactation, soaking it up.");
 	
 	//{If PC has Valeria:
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armorName == "goo armor") outputText("\n\nThe gooey mass of Valeria materializes a few feet away, assuming her human shape as she surveys the milkbath awaiting her.  \"<i>Damn, [name].  This girl's got some faucets on her.  Ought to get some of the girls from the lake on up here to finish the job when we're done.</i>\"  Chuckling, Val slips into the pool, turning a brighter shade of blue as cream rushes through her porous body.");
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) {
+		outputText("\n\nThe gooey mass of Valeria materializes a few feet away, assuming her human shape as she surveys the milkbath awaiting her.  \"<i>Damn, [name].  This girl's got some faucets on her.  Ought to get some of the girls from the lake on up here to finish the job when we're done.</i>\"  Chuckling, Val slips into the pool, turning a brighter shade of blue as cream rushes through her porous body.");
+		valeria.feedValeria(100);
+	}
 	
 	//If PC has Pure!Amily:
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("\n\nThe mouse-girl, Amily, is quick to respond to your call.  Happy for the luxury of a simple bath, even a milky one, she quickly tosses her clothes aside and dives in beside you, laughing and splashing playfully even as her brown hair is soaked.");

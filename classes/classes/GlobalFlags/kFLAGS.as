@@ -2205,8 +2205,8 @@ public static const KIHA_CHILDREN_GIRLS:int                                     
 public static const KIHA_CHILDREN_HERMS:int                                         = 2197;
 public static const KIHA_CHILD_MATURITY_COUNTER:int                                 = 2198;
 public static const KIHA_CHILD_LATEST_GENDER:int                                    = 2199;
-public static const UNKNOWN_FLAG_NUMBER_02200:int                                   = 2200;
-public static const UNKNOWN_FLAG_NUMBER_02201:int                                   = 2201;
+public static const VALERIA_FLUIDS:int                                              = 2200; //Enabled in New Game+. 100 is full.
+public static const IZMA_FEEDING_VALERIA:int                                        = 2201;
 public static const UNKNOWN_FLAG_NUMBER_02202:int                                   = 2202;
 public static const UNKNOWN_FLAG_NUMBER_02203:int                                   = 2203;
 public static const UNKNOWN_FLAG_NUMBER_02204:int                                   = 2204;

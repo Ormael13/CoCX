@@ -1577,8 +1577,13 @@ public function rest():void {
 			fatRecovery /= 2;
 			fatigue(-fatRecovery * timeQ * multiplier);
 		}
+		//Bee cock
 		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
 			outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
+		}
+		//Starved goo armor
+		if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
+			outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 		}
 		//REGULAR HP/FATIGUE RECOVERY
 		else {
@@ -1613,8 +1618,13 @@ public function doWait():void {
 			fatRecovery /= 2;
 			fatigue(-fatRecovery * timeQ);
 		}
+		//Bee cock
 		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
 			outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
+		}
+		//Starved goo armor
+		if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
+			outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 		}
 		//REGULAR HP/FATIGUE RECOVERY
 		else {
@@ -1691,7 +1701,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/******************************************************************/
 		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
 		{
-			outputText("You head inside your cabin to turn yourself in for the night. ")
+			outputText("You enter your cabin to turn yourself in for the night. ")
 		}
 		//Marble Sleepies
 		if(marbleScene.marbleAtCamp() && player.findStatusAffect(StatusAffects.CampMarble) >= 0 && flags[kFLAGS.SLEEP_WITH] == "Marble" && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
@@ -1802,8 +1812,13 @@ public function sleepRecovery(display:Boolean = false):void {
 		fatigue(-int(player.fatigue/2)); 
 		if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-int(player.fatigue/4));
 	}
+	//Bee cock
 	if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
 		outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
+	}
+	//Starved goo armor
+	if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
+		outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 	}
 	//REGULAR HP/FATIGUE RECOVERY
 	else {
@@ -2480,6 +2495,7 @@ private function promptSaveUpdate():void {
 			flags[kFLAGS.D1_OMNIBUS_KILLED] = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02078];
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02078] = 0; //Reclaimed
 		}
+		if (player.armor == armors.GOOARMR) flags[kFLAGS.VALERIA_FLUIDS] = 100;
 		camp.campMenu();
 		return;
 	}
@@ -2522,6 +2538,7 @@ private function updateAchievements():void {
 	awardAchievement("Newcomer", kACHIEVEMENTS.STORY_NEWCOMER);
 	if (flags[kFLAGS.MARAE_QUEST_COMPLETE] > 0) awardAchievement("Marae's Savior", kACHIEVEMENTS.STORY_MARAE_SAVIOR);
 	if (player.hasKeyItem("Zetaz's Map") >= 0) awardAchievement("Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE);
+	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS);
 	
 	//Zones
 	if (player.exploredForest > 0 && player.exploredLake > 0 && player.exploredDesert > 0 && player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0 && player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0 && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) awardAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER);
@@ -2671,10 +2688,10 @@ private function updateAchievements():void {
 	var NPCsDedicked:int = 0; //Check how many NPCs are dedicked.
 	if (flags[kFLAGS.IZMA_NO_COCK] > 0) NPCsDedicked++;
 	if (flags[kFLAGS.CERAPH_HIDING_DICK] > 0) NPCsDedicked++;
-	if (flags[kFLAGS.RUBI_COCK_SIZE] <= 0) NPCsDedicked++;
+	if (flags[kFLAGS.RUBI_ADMITTED_GENDER] > 0 && flags[kFLAGS.RUBI_COCK_SIZE] <= 0) NPCsDedicked++;
 	if (flags[kFLAGS.BENOIT_STATUS] == 1 || flags[kFLAGS.BENOIT_STATUS] == 2) NPCsDedicked++;
-	if (flags[kFLAGS.ARIAN_COCK_SIZE] <= 0) NPCsDedicked++;
-	if (flags[kFLAGS.KATHERINE_DICK_COUNT] <= 0) NPCsDedicked++;
+	if (flags[kFLAGS.ARIAN_HEALTH] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] <= 0) NPCsDedicked++;
+	if (flags[kFLAGS.KATHERINE_UNLOCKED] > 0 && flags[kFLAGS.KATHERINE_DICK_COUNT] <= 0) NPCsDedicked++;
 	
 	if (NPCsDedicked >= 3) awardAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER);
 }

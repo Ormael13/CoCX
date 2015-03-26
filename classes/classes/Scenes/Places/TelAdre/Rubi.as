@@ -626,7 +626,7 @@ public function rubisFuckingHouseYouPervert():void {
 		if(flags[kFLAGS.RUBI_GOT_BIMBO_SKIRT] == 0) {
 			outputText("\n\nMeanwhile, nothing really catches your eye... that is until you spot a pink, pleated skirt, with a pink and white halter top.  You squeal with delight as you pick it out.  It's just your size!");
 			outputText("\n\n\"<i>Ooh, that looks so sexy, babe.  Let me get that for you.  My treat, for such a sexy beast,</i>\" Rubi exclaims, and passes the money to the tailor.  As you leave the shop, you thank your lover profusely, and then head back to camp.");
-			outputText("\n\nIt's only once you get back tbat you realize you meant to fuck Rubi while you were in town!  You giggle and curse your airheadedness.  Oh well, you can always go into town again, there's always more shopping to be done!");
+			outputText("\n\nIt's only once you get back that you realize you meant to fuck Rubi while you were in town!  You giggle and curse your airheadedness.  Oh well, you can always go into town again, there's always more shopping to be done!");
 			//(Add Bimbo Skirt to inventory)
 			inventory.takeItem(armors.BIMBOSK, camp.returnToCampUseOneHour);
 			return;
@@ -3601,6 +3601,7 @@ public function giveRubiClothes(itype:ItemType = null):void {
 	else if(itype == armors.S_SWMWR) flags[kFLAGS.RUBI_SWIMWEAR] = 1;
 	else if(itype == armors.I_CORST) flags[kFLAGS.RUBI_INQUISITORS_CORSET] = 1;
 	else if(itype == armors.BONSTRP) flags[kFLAGS.RUBI_BONDAGE_STRAPS] = 1;
+	else if(itype == armors.BIMBOSK) flags[kFLAGS.RUBI_GOT_BIMBO_SKIRT] = 1;
 	rubiAffection(20);
 	doNext(rubisFuckingHouseYouPervert);
 }

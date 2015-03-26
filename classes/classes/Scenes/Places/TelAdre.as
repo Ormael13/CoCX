@@ -1036,7 +1036,7 @@ private function oswaldPawnMenu():void { //Moved here from Inventory.as
 	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
 	menu();
 	var totalItems:int = 0;
-	for (var slot:int = 0; slot < 5; slot++) {
+	for (var slot:int = 0; slot < 10; slot++) {
 		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 			outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
 			addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
@@ -1827,6 +1827,7 @@ public function carpentryShopBuySetYes():void {
 	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have your own tools for building stuff! \n\n", false);
 	outputText("<b>Gained Key Item: Carpenter's Toolbox!</b>", false)
 	player.createKeyItem("Carpenter's Toolbox", 0, 0, 0, 0);
+	statScreenRefresh();
 	doNext(carpentryShopInside);
 }
 

@@ -364,18 +364,18 @@ package classes.Scenes
 			menu();
 			addItemButton(weapons.B_SCARB);
 			addItemButton(weapons.B_SWORD);
+			addItemButton(weapons.BLUNDER);
 			addItemButton(weapons.CLAYMOR);
-			addItemButton(weapons.CROSSBW);
 			
+			addItemButton(weapons.CROSSBW);
 			addItemButton(weapons.E_STAFF);
 			addItemButton(weapons.FLAIL);
 			addItemButton(weapons.FLINTLK);
-			addItemButton(weapons.URTAHLB);
 			
+			addItemButton(weapons.URTAHLB);
 			addItemButton(weapons.H_GAUNT);
 			addItemButton(weapons.JRAPIER);
 			addItemButton(weapons.KATANA);
-			addItemButton(weapons.L__AXE);
 			
 			addButton(4, "Next", itemSpawnWeaponsMenuII);
 			//addButton(9, "Previous", itemSpawnWeaponsMenuI);
@@ -384,20 +384,21 @@ package classes.Scenes
 		private function itemSpawnWeaponsMenuII():void {
 			lastMenu = itemSpawnWeaponsMenuII;
 			menu();
+			addItemButton(weapons.L__AXE);
 			addItemButton(weapons.L_DAGGR);
 			addItemButton(weapons.L_HAMMR);
 			addItemButton(weapons.L_STAFF);
-			addItemButton(weapons.MACE);
 			
+			addItemButton(weapons.MACE);
 			addItemButton(weapons.PIPE);
 			addItemButton(weapons.PTCHFRK);			
 			addItemButton(weapons.RIDINGC);
-			addItemButton(weapons.RRAPIER);
 			
+			addItemButton(weapons.RRAPIER);
 			addItemButton(weapons.S_BLADE);
 			addItemButton(weapons.S_GAUNT);			
 			addItemButton(weapons.SCARBLD);
-			addItemButton(weapons.SCIMITR);
+			
 			
 			addButton(4, "Next", itemSpawnWeaponsMenuIII);
 			addButton(9, "Previous", itemSpawnWeaponsMenuI);
@@ -406,11 +407,12 @@ package classes.Scenes
 		private function itemSpawnWeaponsMenuIII():void {
 			lastMenu = itemSpawnWeaponsMenuIII;
 			menu();
+			addItemButton(weapons.SCIMITR);
 			addItemButton(weapons.SPEAR);
 			addItemButton(weapons.SUCWHIP);
 			addItemButton(weapons.W_STAFF);
-			addItemButton(weapons.WARHAMR);
 			
+			addItemButton(weapons.WARHAMR);
 			addItemButton(weapons.WHIP);			
 
 			//addButton(4, "Next", itemSpawnWeaponsMenuIV);
@@ -599,17 +601,16 @@ package classes.Scenes
 		private function styleHackMenu():void {
 			menu()
 			outputText("TEST STUFFZ", true);
-			addButton(0, "HackSideBar", kGAMECLASS.mainViewHack.refreshStats);
-			addButton(1, "ASPLODE", styleHackMenu);
-			addButton(2, "TweenSideBarIn", kGAMECLASS.mainViewHack.tweenInStats);
-			addButton(3, "TweenSideBarOut", kGAMECLASS.mainViewHack.tweenOutStats);
-			addButton(4, "TweenButtons", kGAMECLASS.mainViewHack.startUpButtons);
-			addButton(5, "Show Hunger Up", displayHungerUp);
+			addButton(0, "ASPLODE", styleHackMenu);
+			if (player.hasKeyItem("Backpack") < 0) addButton(1, "Unlock slots", gimmeALLTheSlotz, null, null, null, "Unlocks inventory slots 6 through 10 for testing purposes.")
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
-		private function displayHungerUp():void {
-			kGAMECLASS.mainView.hungerUp.visible = true;
+		private function gimmeALLTheSlotz():void {
+			clearOutput();
+			outputText("Here you go. <b>Backpack GET!</b>");
+			player.createKeyItem("Backpack", 5, 0, 0, 0);
+			doNext(styleHackMenu);
 		}
 		
 		private function eventTriggerMenu():void {

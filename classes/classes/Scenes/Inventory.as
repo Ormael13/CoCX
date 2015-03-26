@@ -24,7 +24,7 @@ package classes.Scenes
 	use namespace kGAMECLASS;
 
 	public class Inventory extends BaseContent {
-		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth"];
+		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
 		
 		private var itemStorage:Array;
 		private var gearStorage:Array;
@@ -73,7 +73,7 @@ package classes.Scenes
 			if (player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n");
 			for (x = 0; x < player.keyItems.length; x++) outputText(player.keyItems[x].keyName + "\n");
 			menu();
-			for (x = 0; x < 5; x++) {
+			for (x = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
 					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
 					foundItem = true;
@@ -250,16 +250,16 @@ package classes.Scenes
 		private function takeItemFull(itype:ItemType, showUseNow:Boolean, source:ItemSlotClass):void {
 			outputText("There is no room for " + itype.longName + " in your inventory.  You may replace the contents of a pouch with " + itype.longName + " or abandon it.");
 			menu();
-			for (var x:int = 0; x < 5; x++) {
+			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked)
 					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
 			}
 			if (source != null) {
 				currentItemSlot = source;
-				addButton(7, "Put Back", createCallBackFunction2(returnItemToInventory, itype, false));
+				addButton(12, "Put Back", createCallBackFunction2(returnItemToInventory, itype, false));
 			}
-			if (showUseNow && itype is Useable) addButton(8, "Use Now", createCallBackFunction2(useItemNow, itype as Useable, source));
-			addButton(9, "Abandon", callOnAbandon); //Does not doNext - immediately executes the callOnAbandon function
+			if (showUseNow && itype is Useable) addButton(13, "Use Now", createCallBackFunction2(useItemNow, itype as Useable, source));
+			addButton(14, "Abandon", callOnAbandon); //Does not doNext - immediately executes the callOnAbandon function
 		}
 		
 		public function returnItemToInventory(item:Useable, showNext:Boolean = true):void { //Used only by items that have a sub menu if the player cancels
@@ -527,7 +527,7 @@ package classes.Scenes
 			outputText("What item slot do you wish to empty into your " + text + "?");
 			menu();
 			var foundItem:Boolean = false;
-			for (var x:int = 0; x < 5; x++) {
+			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0 && typeAcceptableFunction(player.itemSlots[x].itype)) {
 					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), placeInStorageFunction, x);
 					foundItem = true;
@@ -604,6 +604,17 @@ package classes.Scenes
 				inventory.takeItem(consumables.HUMMUS2, camp.returnToCampUseOneHour);
 				flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
 			}
+		}
+		
+		public function getMaxSlots():int {
+			var slots:int = 3;
+			if (player.findPerk(PerkLib.StrongBack) >= 0) slots++;
+			if (player.findPerk(PerkLib.StrongBack2) >= 0) slots++;
+			slots += player.keyItemv1("Backpack");
+			//Constrain slots to between 3 and 10.
+			if (slots < 3) slots = 3;
+			if (slots > 10) slots = 10;
+			return slots;
 		}
 		//Create a storage slot
 		public function createStorage():Boolean {
