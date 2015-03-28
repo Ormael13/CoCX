@@ -2010,6 +2010,9 @@ use namespace kGAMECLASS;
 			}
 			if (min < 30 && armorName == "lusty maiden's armor") min = 30;
 			if (min < 20 && armorName == "tentacled bark armor") min = 20;
+			//Constrain values
+			if (min < 0) min = 0;
+			if (min > 95) min = 95;
 			if (min > minCap) min = minCap;
 			return min;
 		}

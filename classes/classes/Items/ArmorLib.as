@@ -26,6 +26,7 @@ package classes.Items
 				PerkLib.SluttySeduction,5,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const CLSSYCL:Armor = new Armor("ClssyCl", "Suitclothes", "classy suitclothes", "a set of classy suit-clothes", 1, 400, "A set of classy suitclothes. \n\nType: Clothing \nDefense: 1 \nBase value: 400", "Light");
 		public const DBARMOR:Armor = new PureMaraeArmor();
+		public const DSCLARM:Armor = new Armor("DSclArm","D.Scale Armor","dragonscale armor","a suit of dragonscale armor",18,600,"This armor is cleverly fashioned fron dragon scales. It offers high protection while at the same time, quite flexible.  \n\nType: Medium armor \nDefense: 18 \nBase value: 600","Medium");
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,150,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings. \n\nType: Medium armor \nDefense: 8 \nBase value: 150","Medium");
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,250,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this. \n\nType: Heavy armor \nDefense: 21 \nBase value: 250");
 		//public const FURLOIN:Armor = new FurLoincloth(); //Moved to undergarments.

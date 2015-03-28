@@ -117,6 +117,7 @@ package classes.Scenes
 				return;
 			}
 			outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
+			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
 			if (getGame().inCombat)
 				addButton(14, "Back", eventParser, 5000); //Player returns to the combat menu on cancel
 			else addButton(14, "Back", camp.campMenu);
@@ -616,6 +617,14 @@ package classes.Scenes
 			if (slots > 10) slots = 10;
 			return slots;
 		}
+		public function getOccupiedSlots():int {
+			var occupiedSlots:int = 0;
+		    for (var i:int = 0; i < player.itemSlots.length; i++) {
+				if (!player.itemSlot(i).isEmpty() && player.itemSlot(i).unlocked) occupiedSlots++;
+			}
+			return occupiedSlots;
+		}
+		
 		//Create a storage slot
 		public function createStorage():Boolean {
 			if(itemStorage.length >= 16) return false;

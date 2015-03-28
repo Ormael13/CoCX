@@ -732,6 +732,14 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			return true;
 		}
 	}
+	//Unequip undergarment if you have bizarre lower body.
+	if (player.lowerGarment != UndergarmentLib.NOTHING) {
+		if (player.isTaur() || player.isDrider() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable")) {
+			outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your " + player.lowerGarmentName + ". Looking down at your lower body, you let out a sigh and pick up your " + player.lowerGarmentName + ". ");
+			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING), camp.campMenu);
+			return true;
+		}
+	}
 	// update cock type as dog/fox depending on whether the player resembles one more then the other.
 	// Previously used to be computed directly in cockNoun, but refactoring prevents access to the Player class when in cockNoun now.
 	if (player.totalCocks() != 0)

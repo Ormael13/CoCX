@@ -541,22 +541,32 @@ package classes.Scenes
 			addItemButton(undergarments.C_BRA);
 			addItemButton(undergarments.C_LOIN);
 			addItemButton(undergarments.C_PANTY);
-			addItemButton(undergarments.FURLOIN);
+			addItemButton(undergarments.DS_BRA);
 			
+			addItemButton(undergarments.DS_LOIN);
+			addItemButton(undergarments.DSPANTY);
+			addItemButton(undergarments.FURLOIN);
 			addItemButton(undergarments.GARTERS);
+			
 			addItemButton(undergarments.LTX_BRA);
 			addItemButton(undergarments.LTXSHRT);
 			addItemButton(undergarments.LTXTHNG);
-			
 			addItemButton(undergarments.SS_BRA);
+			
+			addButton(4, "Next", itemSpawnUndergarmentsMenuII);
+			//addButton(9, "Previous", itemSpawnUndergarmentsMenu);
+			addButton(14, "Back", itemSpawnMenu);
+		}
+		private function itemSpawnUndergarmentsMenuII():void {
+			lastMenu = itemSpawnUndergarmentsMenuII;
+			menu();
 			addItemButton(undergarments.SS_LOIN);
 			addItemButton(undergarments.SSPANTY);
 			
+			//addButton(4, "Next", itemSpawnUndergarmentsMenuII);
+			addButton(9, "Previous", itemSpawnUndergarmentsMenu);
 			addButton(14, "Back", itemSpawnMenu);
 		}
-		/*private function itemSpawnUndergarmentsMenuII():void {
-			
-		}*/
 		
 		private function giveItem(item:*):void {
 			clearOutput();

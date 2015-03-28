@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.internals.ChainedDrop;
 
 	public class Ember extends Monster
 	{
@@ -191,7 +192,7 @@ package classes.Scenes.NPCs
 			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 			this.horns = 4;
 			this.tailType = TAIL_TYPE_DRACONIC;
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			checkMonster();
 		}
 		

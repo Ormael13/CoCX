@@ -388,7 +388,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_snapshot_20150326";
+			ver = "0.9.2_mod_snapshot_20150328";
 			version = ver + " (<b>Mod Snapshot</b>)";
 
 			//Indicates if building for mobile?

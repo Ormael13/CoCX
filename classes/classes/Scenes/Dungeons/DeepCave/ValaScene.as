@@ -800,7 +800,7 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you pant to yourself, or you'd be a drooling vegetable in no time.\n\n", false);
 			cheatTime(1);
 			player.orgasm();
-			doNext(kGAMECLASS.telAdre.barTelAdre);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//[Female]
@@ -819,7 +819,7 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go about all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you gasp to yourself, or you'd be a drooling vegetable in no time.", false);
 			cheatTime(1);
 			player.orgasm();
-			doNext(kGAMECLASS.telAdre.barTelAdre);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//[Cum Bath]
 		public function valaCumBath():void {

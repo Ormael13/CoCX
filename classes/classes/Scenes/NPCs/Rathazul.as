@@ -43,7 +43,7 @@
 
 public function encounterRathazul():void {
 	spriteSelect(49);
-
+	clearOutput();
 	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.findStatusAffect(StatusAffects.MetRathazul) >= 0)
 	{
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
@@ -53,14 +53,15 @@ public function encounterRathazul():void {
 	//Rat is definitely not sexy!
 	if(player.lust > 30) dynStats("lus", -10);
 	//Introduction
+	outputText(images.showImage("rathazul-lake"));
 	if(player.findStatusAffect(StatusAffects.MetRathazul) >= 0) {
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
-			outputText("You walk over to Rathazul's corner of the camp.  He seems as busy as usual, with his nose buried deep in some tome or alchemical creation, but he turns to face you as soon as you walk within a few paces of him.\n\n", true);
+			outputText("You walk over to Rathazul's corner of the camp.  He seems as busy as usual, with his nose buried deep in some tome or alchemical creation, but he turns to face you as soon as you walk within a few paces of him.\n\n");
 		else
-			outputText("You spy the familiar sight of the alchemist Rathazul's camp along the lake.  The elderly rat seems to be oblivious to your presence as he scurries between his equipment, but you know him well enough to bet that he is entirely aware of your presence.\n\n", true);
+			outputText("You spy the familiar sight of the alchemist Rathazul's camp along the lake.  The elderly rat seems to be oblivious to your presence as he scurries between his equipment, but you know him well enough to bet that he is entirely aware of your presence.\n\n");
 	}
 	else {
-		outputText("You encounter a hunched figure working as you come around a large bush.  Clothed in tattered robes that obscure most his figure, you can nontheless see a rat-like muzzle protruding from the shadowy hood that conceals most of his form.  A simple glance behind him confirms your suspicions - this is some kind of rat-person.  He seems oblivious to your presence as he stirs a cauldron of viscous fluid with one hand; a neat stack of beakers and phials sit in the dirt to his left.  You see a smile break across his aged visage, and he says, \"<i>Come closer child.  I will not bite.</i>\"\n\nApprehensive of the dangers of this unknown land, you cautiously approach.\n\n\"<i>I am Rathazul the Alchemist.  Once I was famed for my miracle cures.  Now I idle by this lake, helpless to do anything but measure the increasing amounts of corruption that taint its waters,</i>\" he says as he pulls back his hood, revealing the entirety of his very bald and wrinkled head.\n\n", true);
+		outputText("You encounter a hunched figure working as you come around a large bush.  Clothed in tattered robes that obscure most his figure, you can nontheless see a rat-like muzzle protruding from the shadowy hood that conceals most of his form.  A simple glance behind him confirms your suspicions - this is some kind of rat-person.  He seems oblivious to your presence as he stirs a cauldron of viscous fluid with one hand; a neat stack of beakers and phials sit in the dirt to his left.  You see a smile break across his aged visage, and he says, \"<i>Come closer child.  I will not bite.</i>\"\n\nApprehensive of the dangers of this unknown land, you cautiously approach.\n\n\"<i>I am Rathazul the Alchemist.  Once I was famed for my miracle cures.  Now I idle by this lake, helpless to do anything but measure the increasing amounts of corruption that taint its waters,</i>\" he says as he pulls back his hood, revealing the entirety of his very bald and wrinkled head.\n\n");
 		player.createStatusAffect(StatusAffects.MetRathazul,0,0,0,0);
 	}
 	//Camp offer!
@@ -93,6 +94,7 @@ private function rathazulMoveDecline():void {
 
 public function campRathazul():void {
 	spriteSelect(49);
+	clearOutput();
 	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.findStatusAffect(StatusAffects.MetRathazul) >= 0)
 	{
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
@@ -130,7 +132,8 @@ public function campRathazul():void {
 	if(player.lust > 80) dynStats("lus", -5);
 	if(player.lust > 90) dynStats("lus", -5);
 	//Introduction
-	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, " + player.short + "?</i>\"\n\n", true);
+	outputText(images.showImage("rathazul-camp"));
+	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, " + player.short + "?</i>\"\n\n");
 	//player.createStatusAffect(StatusAffects.metRathazul,0,0,0,0);
 	offered = rathazulWorkOffer();
 	if(!offered) {
@@ -165,7 +168,7 @@ private function rathazulWorkOffer():Boolean {
 		outputText("He eyes the onyx egg in your inventory and offers a little advice.  \"<i>Be careful with black eggs.  They can turn your skin to living latex or rubber.  The smaller ones are usually safer, but everyone reacts differently.  I'd get rid of them, if you want my opinion.</i>\"\n\n");
 	}
 	//Item crafting offer
-	if(player.hasItem(useables.GREENGL, 2)) {
+	if(player.hasItem(useables.GREENGL)) {
 		if(player.findStatusAffect(StatusAffects.RathazulArmor) < 0) outputText("He pipes up with a bit of hope in his voice, \"<i>I can smell the essence of the tainted lake-slimes you've defeated, and if you'd let me, I could turn it into something a bit more useful to you.  You see, the slimes are filled with the tainted essence of the world-mother herself, and once the taint is burned away, the remaining substance remains very flexible but becomes nearly impossible to cut through.  With the gel of five defeated slimes I could craft you a durable suit of armor.</i>\"\n\n", false);
 		else outputText("He pipes up with a bit of excitement in his voice, \"<i>With just five pieces of slime-gel I could make another suit of armor...</i>\"\n\n", false);
 		spoken = true;
@@ -189,6 +192,20 @@ private function rathazulWorkOffer():Boolean {
 			outputText("(You need five pieces of chitin for Rathazul to make you the chitinous armor.)\n\n", false);
 		}
 	}
+	//SPOIDAH
+	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
+		showArmorMenu = true;
+		spoken = true;
+		totalOffers++;
+		outputText("\"<i>Oooh, is that some webbing from a giant spider or spider-morph?  Most excellent!  With a little bit of alchemical treatment, it is possible I could loosen the fibers enough to weave them into something truly magnificent - armor, or even a marvelous robe,</i>\" offers Rathazul.\n\n", false);
+	}
+	//Dragonscale
+	if (player.hasItem(useables.D_SCALE)) {
+		showArmorMenu = true;
+		totalOffers++;
+		outputText("\"<i>Oooh, is that dragon scale? If you happen to have five of these, I can work them into armor,</i>\" Rathazul says.");
+	}
+	//Marae bark armor
 	if (player.hasKeyItem("Tentacled Bark Plates") >= 0 || player.hasKeyItem("Divine Bark Plates") >= 0) showArmorMenu = true;
 	var pCounter:int = 0;
 	//Item purification offer
@@ -248,13 +265,8 @@ private function rathazulWorkOffer():Boolean {
 		spoken = true;
 		reductos = buyReducto;
 	}
-	//SPOIDAH
-	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
-		showArmorMenu = true;
-		spoken = true;
-		totalOffers++;
-		outputText("\"<i>Oooh, is that some webbing from a giant spider or spider-morph?  Most excellent!  With a little bit of alchemical treatment, it is possible I could loosen the fibers enough to weave them into something truly magnificent - armor, or even a marvelous robe,</i>\" offers Rathazul.\n\n", false);
-	}
+
+	
 	//Vines
 	if(player.hasKeyItem("Marae's Lethicite") >= 0 && flags[kFLAGS.MARAE_LETHICITE] > 0 && player.findStatusAffect(StatusAffects.DefenseCanopy) < 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
 		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n");
@@ -310,7 +322,7 @@ private function rathazulWorkOffer():Boolean {
 		if (player.hasItem(consumables.EQUINUM, 2) && player.hasItem(consumables.MINOBLO, 1) && player.gems >= 100) addButton(7, "Taurinum", makeTaurPotion);
 		if (reductos != null) addButton(8, "Reducto", reductos);
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
-			addButton(14,"Leave",eventParser,74);
+			addButton(14,"Leave", camp.campFollowers);
 		else
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		return true;
@@ -524,11 +536,14 @@ public function rathazulArmorMenu():void {
 	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		addButton(2, "SpiderSilk", craftSilkArmor);
 	}
+	if(player.hasItem(useables.D_SCALE)) {
+		addButton(3, "Dragonscale", craftDragonscaleArmor);
+	}
 	if (player.hasKeyItem("Tentacled Bark Plates") >= 0) {
-		addButton(3, "T.Bark Armor", craftMaraeArmor, false);
+		addButton(5, "T.Bark Armor", craftMaraeArmor, false);
 	}
 	if (player.hasKeyItem("Divine Bark Plates") >= 0) {
-		addButton(4, "D.Bark Armor", craftMaraeArmor, true);
+		addButton(6, "D.Bark Armor", craftMaraeArmor, true);
 	}
 }
 
@@ -600,6 +615,7 @@ public function chooseArmorOrRobes(robeType:int):void {
 private function collectRathazulArmor():void {
 	spriteSelect(49);
 	clearOutput();
+	
 	outputText("Rathazul beams and ejaculates, \"<i>Good news everyone!  Your ", false);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 1) outputText("armor", false);
 	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 2) outputText("robe", false);
@@ -608,28 +624,32 @@ private function collectRathazulArmor():void {
 	
 	var itype:ItemType;
 	//Loincloth
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 5) {
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 5) {
+		outputText(images.showImage("rathazul-craft-silkloincloth"));
 		outputText("On a table is a white loincloth.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
 		
 		outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This loincloth is very durable and should be comfortable as well.</i>\"\n\n", false);
 		itype = undergarments.SS_LOIN;
 	}
 	//Panties
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 4) {
+	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 4) {
+		outputText(images.showImage("rathazul-craft-silkpanties"));
 		outputText("On a table is a pair of white panties.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
 		
 		outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  These panties are very durable and should be comfortable as well.</i>\"\n\n", false);
 		itype = undergarments.SSPANTY;
 	}
 	//Bra
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 3) {
+	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 3) {
+		outputText(images.showImage("rathazul-craft-silkbra"));
 		outputText("On a table is a pair of white bra.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
 		
 		outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  These bras are very durable and should be comfortable as well.</i>\"\n\n", false);
 		itype = undergarments.SS_BRA;
 	}
 	//Robe
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 2) {
+	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 2) {
+		outputText(images.showImage("rathazul-craft-silkrobes"));
 		outputText("Hanging from a small rack is a long, flowing robe.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  The sleeves match the cowl, circled with intricate threads laid out in arcane patterns.\n\n", false);
 		
 		outputText("Rathazul gingerly takes down the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This robe is tougher than many armors, and the spider-silk's properties may even help you in your spell-casting as well.</i>\"\n\n", false);
@@ -637,6 +657,7 @@ private function collectRathazulArmor():void {
 	}
 	//(Armor)
 	else {
+		outputText(images.showImage("rathazul-craft-silkarmor"));
 		outputText("A glittering white suit of armor sits atop a crude armor rack, reflecting the light that plays across its surface beautifully.  You definitely didn't expect anything like this!  It looks nearly identical to a set of light platemail, though instead of having a cold metal surface, the armor feels slightly spongy, with just a little bit of give in it.\n\n", false);
 		
 		outputText("While you marvel at the strange equipment, Rathazul explains, \"<i>When you said you wanted armor, I realized I could skip a few of the alchemical processes used to soften material.  The savings let me acquire a cheap metal set of armor to use as a base, and I molded half the armor around each piece, then removed it and created the outer, defensive layers with the rest of the webbing.  Unfortunately, I didn't have enough silk for a solid codpiece, but I did manage to make a you thin loincloth from the leftover scraps  - for modesty.</i>\"\n\n", false);
@@ -651,8 +672,10 @@ private function collectRathazulArmor():void {
 
 private function craftOozeArmor():void {
 	spriteSelect(49);
+	clearOutput();
+	outputText(images.showImage("rathazul-craft-gelarmor"));
+	outputText("Rathazul takes the green gel from you and drops it into an empty cauldron.  With speed well beyond what you'd expect from such an elderly creature, he nimbly unstops a number of vials and pours them into the cauldron.  He lets the mixture come to a boil, readying a simple humanoid-shaped mold from what you had thought was piles of junk material.  In no time at all, he has cast the boiling liquid into the mold, and after a few more minutes he cracks it open, revealing a suit of glistening armor.\n\n");
 	player.destroyItems(useables.GREENGL, 5);
-	outputText("Rathazul takes the green gel from you and drops it into an empty cauldron.  With speed well beyond what you'd expect from such an elderly creature, he nimbly unstops a number of vials and pours them into the cauldron.  He lets the mixture come to a boil, readying a simple humanoid-shaped mold from what you had thought was piles of junk material.  In no time at all, he has cast the boiling liquid into the mold, and after a few more minutes he cracks it open, revealing a suit of glistening armor.\n\n", true);
 	player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	inventory.takeItem(armors.GELARMR, returnToRathazulMenu);
 	if(player.findStatusAffect(StatusAffects.RathazulArmor) < 0) player.createStatusAffect(StatusAffects.RathazulArmor,0,0,0,0);
@@ -660,7 +683,9 @@ private function craftOozeArmor():void {
 
 private function craftCarapace():void {
 	spriteSelect(49);
-	outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ", true);
+	clearOutput();
+	outputText(images.showImage("rathazul-craft-chitinarmor"));
+	outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ");
 	outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee high boots.  You notice there are no pants.  As you turn to ask him where the pants are, you see him scratching his head and hastily rustling in drawers.  He mutters under his breath, \"<i>I'm sorry, I'm sorry, I got so focused on working on the pauldrons that I forgot to make any leg coverings!  Here, this should look good with it, and it won't restrict your movements.</i>\"  He hands you a silken loincloth", false);
 	if (player.mf("m", "f") == "f") outputText(" with stockings and garters", false);
 	outputText(".  He still manages to look somewhat pleased with himself in spite of the blunder, even bragging a little bit, \"<i>Let me show you the different lengths of string I used.</i>\"\n\n", false);
@@ -671,9 +696,22 @@ private function craftCarapace():void {
 	inventory.takeItem(armors.BEEARMR, returnToRathazulMenu);
 }
 
+private function craftDragonscaleArmor():void {
+	spriteSelect(49);
+	clearOutput();
+	outputText(images.showImage("rathazul-craft-dragonscalearmor"));
+	outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ");
+	outputText("It has nicely decorated pauldrons to give an imposing looks. You touch the armor and feel the scaly texture. \"<i>It's quite flexible and should offer very good protection,</i>\" Rathazul says.", false);
+	player.destroyItems(useables.D_SCALE, 5);
+	player.addStatusValue(StatusAffects.MetRathazul,2,1);
+	inventory.takeItem(armors.DSCLARM, returnToRathazulMenu);
+}
+
 private function craftMaraeArmor(divine:Boolean = false):void {
+	clearOutput();
 	if (!divine) {
-		outputText("You show him the pieces of thick bark with tentacles attached. \n\n \"<i>My, my. That's definitely the strangest thing I've ever seen. But as you've requested, I'll make armor for you,</i>\" the old rat says. He takes the pile of bark, taking care to avoid touching the still-alive tentacles. He works on his bench for an hour while you wait. \n\n", true)
+		outputText(images.showImage("rathazul-craft-barkarmor-corrupt"));
+		outputText("You show him the pieces of thick bark with tentacles attached. \n\n \"<i>My, my. That's definitely the strangest thing I've ever seen. But as you've requested, I'll make armor for you,</i>\" the old rat says. He takes the pile of bark, taking care to avoid touching the still-alive tentacles. He works on his bench for an hour while you wait. \n\n")
 		outputText("Once he has finished, Ratzhul is beaming with both pride and shame, \"<i>I think you'll be pleased. Go ahead and take a look. I'm not working on this type of armor again. I nearly got surprised by tentacles.</i>\"\n\nHe hands you the armor. \n\n", false)
 		outputText("The plates are white like snow. Green tentacles grow from the shoulderpads. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots. You realize the armor is missing pants. \n\n", false);
 		outputText("\"<i>Something wrong? Nothing to protect your modesty? Surprise!</i>\"  He hands you a silken loincloth", false);
@@ -685,7 +723,8 @@ private function craftMaraeArmor(divine:Boolean = false):void {
 		inventory.takeItem(armors.TBARMOR, returnToRathazulMenu);
 	}
 	else {
-		outputText("You show him the pieces of glowing white thick bark attached. \n\n \"<i>My, my. I'll make armor for you,</i>\" the old rat says. He takes the pile of bark and works on his bench for an hour while you wait. \n\n", true)
+		outputText(images.showImage("rathazul-craft-barkarmor-pure"));
+		outputText("You show him the pieces of glowing white thick bark attached. \n\n \"<i>My, my. I heard a voice from Marae instructing me to make the armor for you,</i>\" the old rat says. He takes the pile of bark and works on his bench for an hour while you wait. \n\n")
 		outputText("Once he has finished, Ratzhul is beaming with both pride and shame, \"<i>I think you'll be pleased. Go ahead and take a look. I'm not working on this type of armor again. It took me many attempts to bend the bark plates to get them right.</i>\"\n\nHe hands you the armor. \n\n", false)
 		outputText("The plates are white like snow. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots. You notice there are no pants.  As you turn to ask him where the pants are, you see him scratching his head and hastily rustling in drawers.  He mutters under his breath, \"<i>I'm sorry, I'm sorry, I got so focused on working on the pauldrons that I forgot to make any leg coverings!  Here, this should look good with it, and it won't restrict your movements.</i>\"  He hands you a silken loincloth", false);
 		if (player.mf("m", "f") == "f") outputText(" with stockings and garters", false);
@@ -718,6 +757,7 @@ private function buyDyes():void {
 private function buyDye(dye:ItemType):void {
 	spriteSelect(49);
 	clearOutput();
+	outputText(images.showImage("rathazul-buy-dye"));
 	inventory.takeItem(dye, returnToRathazulMenu);
 	statScreenRefresh();
 	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
@@ -749,6 +789,7 @@ private function buyReducto():void {
 	clearOutput();
 	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
 	if (player.gems >= cost) {
+		outputText(images.showImage("rathazul-buy-reducto"));
 		outputText("Rathazul hands you the Reducto with a nod before returning to his work.\n\n");
 		player.gems -= cost;
 		inventory.takeItem(consumables.REDUCTO, returnToRathazulMenu);

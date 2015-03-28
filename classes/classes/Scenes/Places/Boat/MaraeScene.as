@@ -41,7 +41,7 @@ public function encounterMarae():void {
 		if(flags[kFLAGS.MET_MARAE] <= 0) {
 			flags[kFLAGS.MET_MARAE] = 1;
 			outputText("You approach the tree and note that its bark is unusually smooth.  Every leaf of the tree is particularly vibrant, bright green with life and color.   You reach out to touch the bark and circle around it, noting a complete lack of knots or discoloration.  As you finish the circle, you are surprised to see the silhouette of a woman growing from the bark.  The transformation stops, exposing the front half a woman from the waist up.   You give a start when she opens her eyes – revealing totally white irises, the only part of her NOT textured with bark.\n\n", false);
-			if(player.cor > 66 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!", false);
+			if(player.cor > 66 + player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!", false);
 			//Explain the dungeon scenario
 			else {
 				flags[kFLAGS.MARAE_QUEST_START] = 1;
@@ -67,10 +67,10 @@ public function encounterMarae():void {
 		}
 		//Second meeting
 		else {
-			outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.   Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n", false);
-			if(player.cor > 66 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+			outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.  Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n", false);
+			if(player.cor > 66 + player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
 				outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.", false);
-				if (player.level >= 30) outputText("\n\nOf course, you could probably try to overthrow her."); 
+				if (player.level >= 30) outputText("  f course, you could probably try to overthrow her."); 
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else
@@ -149,14 +149,21 @@ private function promptFightMarae1():void {
 private function promptFightMarae2():void {
 	outputText("Are you sure you want to fight Marae? She is the life-goddess of Mareth. This is going to be extremely difficult battle.", true)
 	doYesNo(initiateFightMarae, level2MaraeEncounter);
-}	
+}
+private function promptFightMarae3():void {
+	outputText("Are you sure you want to fight Marae? She is the life-goddess of Mareth. This is going to be extremely difficult battle.", true);
+	doYesNo(initiateFightMarae, camp.returnToCampUseOneHour);
+}
 
 //FIGHT!
 public function initiateFightMarae():void {
 	clearOutput();
+	if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 2) {
+		outputText("Your mind finally made up, she must pay for forcibly giving you her 'gift'.\n\n");
+	}
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 		outputText("You ready your " + player.weaponName + " and assume a combat stance! \"<i>Pity. You're dealing with a goddess,</i>\" she coos.");
-		outputText("\n\nTentacles come up to keep your boat in place so you can't flee.")
+		outputText("\n\nTentacles come up to keep your boat in place so you can't flee.");
 	}
 	else {
 		outputText("Marae looks at you with a smile. \"<i>Get ready! I won't hold back!</i>\"");
@@ -187,7 +194,7 @@ public function winAgainstMarae():void {
 	clearOutput();
 	outputText(images.showImage("marae-defeated"));
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-		outputText("\"<i>NO! How can a mortal just defeated me?! That's IMPOSSIBLE!</i>\" Marae yells. You tell her that just because she's a goddess doesn't mean a mortal can't defeat her.", true);
+		outputText("\"<i>NO! How can a mortal defeat me?! That's IMPOSSIBLE!</i>\" Marae yells. You tell her that just because she's a goddess doesn't mean a mortal can't defeat her.", true);
 		if (silly())
 		{
 			outputText("\n\n<b>Did you just punch out Cthulhu? Or in this case, Marae?</b>\n\n", false);
@@ -202,7 +209,7 @@ public function winAgainstMarae():void {
 		}
 		if (!player.hasKeyItem("Marae's Lethicite") >= 0) 
 		{
-			outputText("\n\nYou see something large and shining. You manage to pick up a large crystal and examine it closer. Clearly, this has to be Marae's lethicite!", false)
+			outputText("\n\nSomething shiny catches your eye. Clearly, this has to be Marae's lethicite!", false)
 			outputText("\n<b>(Key Item Gained: Marae's Lethicite!)</b>", false)
 			
 			player.createKeyItem("Marae's Lethicite", 0, 0, 0, 0);
@@ -299,6 +306,7 @@ private function maraeStealLethicite():void {
 	//(FAIL)
 	else {
 		player.slimeFeed();
+		player.orgasm();
 		outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You try to slip by the gauntlet of grabbing tentacles, but fail, getting tripped and ensnared in them like a fly in a spider's web.  You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree.\n\n", false);
 		outputText("\"<i>Awwww, what a nasty deceitful little " + player.mf("boy", "girl"), false);
 		outputText("you are.  You turn me into a steaming hot sex-pot, then have the nerve to come here and try to walk off with my lethicite, all WITHOUT fucking me?  Tsk tsk tsk,</i>\" she scolds, \"<i>I appreciate your ambition, but I can't just let a mortal walk all over me like that.  I'll be taking that,</i>\" she says as she grabs the crystal, and lugs it to the tree underneath you.  She strokes the wood surface lovingly, and a knot dilates until it forms a hole large enough to contain the lethicite.  Marae shoves it inside, and strokes the wood like a pet creature, humming while the bark flows closed, totally concealing the crystal.\n\n", false);
@@ -640,6 +648,7 @@ private function MaraePt2RoundIIIPrizes():void {
 			outputText("<b>(New Perk Gained: Marae's Gift - Fertility)</b>", false);
 		}
 	}
+	player.orgasm();
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -648,6 +657,17 @@ private function MaraeIIFlyAway():void {
 	clearOutput();
 	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!", false);
 	doNext(camp.returnToCampUseOneHour);
+}
+
+//Only procs when you have both perks. Rare.
+public function level3MaraeEncounter():void {
+	clearOutput();
+	outputText("Once again, you approach the island where the corrupted goddess resides and set foot on the island. \"<i>Coming back for more?</i>\" Marae coos.");
+	outputText("\n\n(Do you fight Marae or stay with her and abandon your quests? Or you could leave if you want.)");
+	menu();
+	addButton(0, "Fight Her", promptFightMarae3, null, null, null, "Fight Marae the corrupted goddess!");
+	addButton(1, "Stay With Her", maraeBadEnd, null, null, null, "Stay with Marae and end your adventures?");
+	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
 
 private function grabHerBoob():void {

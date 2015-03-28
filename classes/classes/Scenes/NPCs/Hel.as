@@ -179,7 +179,7 @@ package classes.Scenes.NPCs
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
 			createStatusAffect(StatusAffects.BonusVCapacity,85,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E+"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
+			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
 			this.createStatusAffect(StatusAffects.BonusACapacity,85,0,0,0);
 			this.tallness = 90;

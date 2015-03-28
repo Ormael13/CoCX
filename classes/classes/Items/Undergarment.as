@@ -27,6 +27,26 @@ package classes.Items
 			outputText("You equip " + longName + ".  ");
 		}
 		
+		override public function canUse():Boolean {
+			if (type == UndergarmentLib.TYPE_LOWERWEAR) {
+				if (game.player.isBiped() || game.player.isGoo()) {
+					return true; //It doesn't matter what leg type you have as long as you're biped.
+				}
+				else if (game.player.isTaur() || game.player.isDrider()) {
+					outputText("Your form makes it impossible to put on any form of lower undergarments. You put it back into your inventory.");
+					return false;
+				}
+				else if (game.player.isNaga()) {
+					if (perk != "NagaWearable") {
+						outputText("It's impossible to put on this undergarment as it's designed for someone with two legs. You put it back into your inventory.");
+						return false;
+					}
+					else return true;
+				}
+			}
+			return true;
+		}
+		
 		public function playerEquip():Undergarment { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
 			return this;
 		}

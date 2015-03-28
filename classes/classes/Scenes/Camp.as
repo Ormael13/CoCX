@@ -599,8 +599,8 @@ public function doCamp():void {
 		outputText("A thorny tree has sprouted near the center of the camp, growing a protective canopy of spiky vines around the portal and your camp.  ", false);
 	}
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 20 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
-		if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 20 == 0) outputText("A thick wooden wall have been erected to provide a small amount of defense.  ");
-		else outputText("Thick wooden wall have been erected to provide some defense.  ");
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 20 == 0) outputText("A thick wooden wall has been erected to provide a small amount of defense.  ");
+		else outputText("Thick wooden walls have been erected to provide some defense.  ");
 	}
 	else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
 		outputText("Thick wooden walls have been erected; they surround one half of your camp perimeter and provide good defense, leaving the other half open for access to the stream.  ");
@@ -615,7 +615,7 @@ public function doCamp():void {
 			else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
 		}
 	}
-	else outputText("You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.", false);
+	else outputText("You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.  ", false);
 	outputText("The portal shimmers in the background as it always does, looking menacing and reminding you of why you came.\n\n", false);
 
 	//Ember's anti-minotaur crusade!
@@ -1311,7 +1311,7 @@ public function campFollowers():void {
 	addButton(4, "Shouldra", shouldra);
 	//ABOVE: addButton(4,"Sophie",followerSophieMainScreen);
 	addButton(6, "Valeria", valeria2);
-	if (player.armor == armors.GOOARMR) addButton(6, "Valeria (E)", valeria2);
+	//if (player.armor == armors.GOOARMR) addButton(6, "Valeria (E)", valeria2);
 	addButton(14,"Back",eventParser,1);
 }
 //-----------------
@@ -2529,6 +2529,7 @@ private function updateSaveFlags():void {
 			player.addKeyValue("Carpenter's Toolbox", 1, 150);
 		}
 	}
+	flags[kFLAGS.SHIFT_KEY_DOWN] = 0; //Unstick shift key.
 	outputText("Don't worry. Just save the game and you're good to go. I, Kitteh6660, will work out the bugs from time to time, while also bringing in cool new stuff!", false)
 	doNext(doCamp);
 }

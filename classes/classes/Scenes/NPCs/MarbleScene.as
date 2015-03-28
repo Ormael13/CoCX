@@ -3780,6 +3780,7 @@ private function marbleNip():String {
 private function marbleAppearance():void {
 	clearOutput();
 	spriteSelect(41);
+	outputText(images.showImage("monster-marble"));
 	//Gives Marble's appearance screen, some of these values change depending 
 	//on her level of corruption.
 	outputText("Marble is a ");

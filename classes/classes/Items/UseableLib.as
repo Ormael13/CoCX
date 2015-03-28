@@ -30,7 +30,7 @@ package classes.Items
 		
 		//Extra stuff!
 		public const D_SCALE:SimpleUseable = new SimpleUseable("D.Scale", "Dragonscale", "a freshly-shed dragonscale", 6, 
-			"This sheet of dragon scale is incredibly strong and flexible.  No dragons were harmed in the acquisition of this item. \n\nType: Material", 
+			"This sheet of dragon scale is incredibly strong and flexible.  No dragons were seriously harmed in the acquisition of this item. \n\nType: Material", 
 			"You look over the sheet of dragon scale. You've seen various legends about how the scales of a dragon can be worked into tough armor or used in alchemy.");
 		public const IMPSKLL:SimpleUseable = new SimpleUseable("ImpSkll", "ImpSkull", "an imp skull", 25, 
 			"A skull taken from a slain imp. \n\nType: Material",

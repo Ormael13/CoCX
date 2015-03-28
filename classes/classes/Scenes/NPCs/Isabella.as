@@ -123,8 +123,9 @@ package classes.Scenes.NPCs
 					outputText("You resolutely ignore the blow thanks to your immense toughness.\n");
 				}
 				else {
-					damage = player.takeDamage(damage);
-					outputText("You try your best to stop the onrushing fist, but it hits you square in the throat, nearly collapsing your windpipe entirely.  Gasping and sputtering, you try to breathe, and while it's difficult, you manage enough to prevent suffocation. <b>It will be impossible to focus to cast a spell in this state!</b> (" + damage + ")\n", false);
+					outputText("You try your best to stop the onrushing fist, but it hits you square in the throat, nearly collapsing your windpipe entirely.  Gasping and sputtering, you try to breathe, and while it's difficult, you manage enough to prevent suffocation. <b>It will be impossible to focus to cast a spell in this state!</b> ", false);
+					damage = player.takeDamage(damage, true);
+					outputText("\n");
 					player.createStatusAffect(StatusAffects.ThroatPunch,2,0,0,0);
 				}
 			}

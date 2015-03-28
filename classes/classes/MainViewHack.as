@@ -301,12 +301,12 @@ package classes
 		//Hide min lust bar. (For old menus)
 		public function hideMinLustBar():void {
 			if (mainView.statsView.getChildByName("esteemBar") != null) {
-				mainView.obeyBar.visible = false;
+				mainView.esteemBar.visible = false;
 			}
 		}
 		public function showMinLustBar():void {
 			if (mainView.statsView.getChildByName("esteemBar") != null) {
-				mainView.obeyBar.visible = true;
+				mainView.esteemBar.visible = true;
 			}
 		}
 		

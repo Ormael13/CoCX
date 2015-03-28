@@ -46,6 +46,11 @@ package classes.Scenes.Areas.Forest
 			spriteSelect(6);
 			//Intro text...
 			outputText("As you approach the edge of the forest, a sweet scent wafts into your nose. Tantalizing, teasing, alluring. As you sniff the air, you find yourself following it, as if an invisible hand is pulling you toward its origin.  Little do you know, that is essentially what's happening. The further and further you go, the more heavy the scent grows, as well as a sound. A sound of a buzz, but not in a maddening tone, as if someone is humming. It's a lovely tune, one that would stick in the back of the mind, but not in a bad way.\n\n");
+			//Bee appears!
+			if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
+				outputText("<b>New codex entry unlocked: Giant Bees!</b>\n\n")
+			}
 			//Chance to avoid the bee or not if smart enough...
 			if (player.hasKeyItem("Traveler's Guide") >= 0 && player.inte / 2 > rand(40)) {
 				outputText("You suddenly remember a passage from the Traveler's Guide about monstrous bees that lay eggs in unmentionable places.  Of course, a brave champion would face any danger.\n\n<b>Do you proceed?</b>");
@@ -59,7 +64,6 @@ package classes.Scenes.Areas.Forest
 		private function beeEncounterSelect(clearScreen:Boolean = true):void {
 			if (clearScreen) clearOutput();
 			spriteSelect(6);
-			//Bee appears!
 			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, antennae, and luscious black lips that glimmer wetly");
 			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) { //Exgartuan messes with things!
 				beeEncounterWithExgartuan();
@@ -102,10 +106,6 @@ package classes.Scenes.Areas.Forest
 					default: //Any other attitude options lead to the classic bee encounter
 						outputText(", bending into a smile as she sees you approach.  Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n");
 						//Chance to avoid raaaaeeeeep
-						if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
-							outputText("<b>New codex entry unlocked: Giant Bees!</b>\n\n")
-						}
 						if ((player.lib + player.cor < 140) || rand(2) == 0) {
 							outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?");
 							simpleChoices("Fight", fightTheBeeGirl, "Talk", beeTalk, "Seduce", null, "", null, "Leave", camp.returnToCampUseOneHour);
@@ -219,6 +219,7 @@ package classes.Scenes.Areas.Forest
 				if (player.ass.analLooseness == CoC.ANAL_LOOSENESS_VIRGIN)
 					outputText("<b>Well, at least you’re losing your anal virginity willingly.  That’s something to be said in this world.</b>");
 				else outputText("<b>Your " + assholeDescript() + " has become looser thanks to the knotted appendage penetrating you.</b>");
+				player.buttChange(25, true);
 				outputText("  The pain of being stretched out soon gives way to sharing in the pleasure that your insectoid lover feels with each new bump passing into your body.\n\n");
 			}
 			else {

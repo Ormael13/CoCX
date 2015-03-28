@@ -68,6 +68,7 @@ override public function helPregnant():Boolean {
 internal function heliasAppearanceScreen():void {
 	clearOutput();
 	spriteSelect(68);
+	outputText(images.showImage("monster-hel"));
 	outputText("Hel the salamander stands seven feet tall, with pale skin and thick, bright-red scales covering her arms and legs, though she has a normal human torso and face.  A fiery tail swishes gaily behind her, blazing with a ");
 	if(flags[kFLAGS.HEL_BONUS_POINTS] < 150) outputText("bright orange glow");
 	else outputText("bright white glow");

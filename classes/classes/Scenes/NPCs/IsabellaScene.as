@@ -681,6 +681,7 @@ public function IsabellaWinsAndSpanks():void {
 	
 		outputText("You go back to sleep, your backside bruised and your belly full of Isabella's milk.\n\n", false);
 		//(+4 sensitivity, -100 lust if masochist, -40 fatigue)
+		player.refillHunger(30);
 		fatigue(-40);
 		dynStats("sen", 4);
 		if(player.findPerk(PerkLib.Masochist) >= 0) player.orgasm();
@@ -741,6 +742,7 @@ public function IsabellaWinsAndSpanks():void {
 	
 		outputText("You go back to sleep, your backside bruised and your belly full of Isabella's milk.", false);
 		//(+4 sensitivity, -100 lust if masochist, -40 fatigue)
+		player.refillHunger(30);
 		fatigue(-40);
 		dynStats("sen", 4);
 		if(player.findPerk(PerkLib.Masochist) >= 0) player.orgasm();

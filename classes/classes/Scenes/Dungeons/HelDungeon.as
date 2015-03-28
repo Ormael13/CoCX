@@ -265,7 +265,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYou collapse, unable to resist the goo-armor's onslaught.  Laughing, she slithers out from underneath her armor, completely encasing you before you can do anything more than scream.  Laughing maniacally, the goo looms over you, hands on her hips.  \"<i>Tsk, tsk, tsk.  Not so eager to steal my armor now, are you?  Well... what am I to do with you, hmm?</i>\"  You struggle, but wrapped snugly in her goo, you can do little more than wiggle your hips and chest, accidentally moving yourself seductively.");
 			outputText("\n\nAs you realize your mistake, a little smile spreads on her face.  \"<i>Ah, I know... I haven't had my precious fluids in so very long...</i>\"");
 			//(PC has Vagina)
-			if(player.hasVagina()) {
+			if(player.hasVagina() && !player.hasCock()) {
 				outputText("\n\nShe begins to use her goo to peel back your [armor], soon revealing your defenseless [vagina], and makes a show of licking her lips as tendrils of goo seep into your cunt, filling you utterly.  You writhe and struggle against your gooey bonds, but your efforts are futile.  The goo-girl inside the armor only shakes her head at you, and withdraws herself from your [vagina].");
 				outputText("\n\nYou have only a moment to figure out what's coming before her goo -- now perfectly shaped like the inside of your cunt -- slams back into you like a stiff cock. You can't help yourself as a moan escapes your lips, barely audible through the goop covering your mouth."); 
 				outputText("\n\n\"<i>Oh, you like that do you?</i>\" the armor-goo asks, smiling evilly.  \"<i>Well, maybe this can be mutually... beneficial.</i>\"  Still grinning, she begins to hammer her cock-like appendage into your pussy, fucking you fast and hard with her goo-dildo.");
@@ -383,8 +383,7 @@ package classes.Scenes.Dungeons
 			//In Tower of the Phoenix
 			if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) {
 				outputText("You tell her that... no thanks, not now -- you don't need armor right now.");
-				outputText("\n\nShe huffs indignantly and scrambles to her feet.  \"<i>Well fine, maybe you can take me later, " + player.mf("sir", "madam") + "?</i>\"  After a moment, she hesitantly adds, \"<i>But if you change your mind later... Well, we'll see if you live through this place without me! But if you need me later, I'll be at your camp.</i>\"  Before you can stop her, she ducks out the front door and off to... Wherever goo-armor-girl-things would go, you guess.  Still, to your surprise, you feel rather invigorated after the battle, and rolling your shoulders, you turn your attention back to the dungeon ahead.");
-				flags[kFLAGS.VALARIA_AT_CAMP] = 1;
+				outputText("\n\nShe huffs indignantly and scrambles to her feet.  \"<i>Well fine, maybe you can take me later, " + player.mf("sir", "madam") + "?</i>\"  After a moment, she hesitantly adds, \"<i>But if you change your mind later... Well, we'll see if you live through this place without me! But if you need me later, I'll be at Glacial Rift.</i>\"  Before you can stop her, she ducks out the front door and off to... Wherever goo-armor-girl-things would go, you guess.  Still, to your surprise, you feel rather invigorated after the battle, and rolling your shoulders, you turn your attention back to the dungeon ahead.");
 			}
 			//The Glacial Rift
 			else {
@@ -399,33 +398,27 @@ package classes.Scenes.Dungeons
 		public function takeGooArmorAndWearIt():void {
 			spriteSelect(79);
 			clearOutput();
-			outputText("You mull the proposition over for a few moments and then agree. Why the hell not.");
-			outputText("\n\nWith an ecstatic smile, the goo-armor jumps to her feet and throws her arms around your shoulders.  \"<i>Oh, this is going to be so much fun!  Thank you thank you thank you!  I promise I'll keep you nice and snug and safe, don't you worry.  Oooh, a real adventure again!  WHEEE!</i>\"");
-			outputText("\n\nBefore she can get too excited, you remind the goo that she's supposed to be your armor right about now.  Clasping her hands over her mouth in embarrassment, she utters a muted apology and urges you to just \"<i>put me on!</i>\"  Awkwardly, you strip out of your [armor] and open up the platemail armor and clamber in.  It's wet and squishy, making you shudder and squirm as you squash your new friend flat against the metal armor.");
-			outputText("\n\nEventually, the two of you get situated. The goo-girl slips around your body inside the heavy armor, maneuvering so that your face is unobstructed and your joints, not protected by the armor, are soundly clad in squishy goo.  She even forms a gooey beaver on your new helm, allowing you to open and close her like a visor in battle.  Eventually, her goo settles around your ");
-			if(player.hasVagina()) outputText("[vagina]");
-			if(player.hasVagina() && player.hasCock()) outputText(" and ");
-			if(player.hasCock()) outputText(multiCockDescriptLight());
-			if(player.gender == 0) outputText("groin");
-			outputText(", encasing your loins in case you need a little mid-battle release, she says.");
-
-			outputText("\n\nAfter a few minutes, you and your armor-friend are settled and ready to go.  As you ready yourself for the dungeon ahead, the goo giggles into your ear.  \"<i>Oh shit, silly me.  I forgot, my name's Valeria.  Ser Valeria, if you're feeling fancy.</i>\"  You introduce yourself, awkwardly shaking your own hand by way of pleasantries.");
-
-			outputText("\n\n\"<i>Well, alright then, [name]!</i>\" Valeria says excitedly, \"<i>Let's go!</i>\"");
-
+			armors.GOOARMR.useText();
+			player.armor.removeText();
 			//(\"<i>You gained ValeriaArmor!</i>\")
 			cleanupAfterCombat();
 			//(\"<i>You put a (previous armorName) in your X pouch)
-			outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the dungeon ahead.\n\n");
-			//(PC regains HP)
-			var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
-			if (item == null)
-				doNext(roomGuardHall);
-			else inventory.takeItem(item, roomGuardHall);
+			outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the " + (getGame().dungeons.checkPhoenixTowerClear() ? "adventures": "dungeon") + " ahead.\n\n");
+			//Set flags
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.VALERIA_FLUIDS] = 80;
 			HPChange(player.maxHP(),false);
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
+			//(PC regains HP)
+			var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
+			if (item == null) {
+				if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) doNext(roomGuardHall);
+				else doNext(camp.returnToCampUseOneHour);
+			}
+			else {
+				if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) inventory.takeItem(item, roomGuardHall);
+				else inventory.takeItem(item, camp.returnToCampUseOneHour);
+			}
 		}
 
 
@@ -624,17 +617,8 @@ package classes.Scenes.Dungeons
 			addButton(4, "Back", eventParser, 1);
 		}
 		
-		public function promptTalkPrisoner():void {
-			menu();
-			outputText("Are you sure you want to proceed? You'll not be able to return. Probably.", true)
-			doYesNo(confirmTalk, roomDungeon);
-		}
-		public function confirmTalk():void {
-			helDungeonPrisonerTalk(true);
-		}
-		
 		//[Prisoner] (First Time)
-		public function helDungeonPrisonerTalk(confirm:Boolean = false):void {
+		public function helDungeonPrisonerTalk():void {
 			clearOutput();
 			if(flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] == 0) {
 				outputText("You approach the Salamander strapped to the table.  He looks at you with his one good eye, warily gauging you as you approach.");
@@ -650,10 +634,6 @@ package classes.Scenes.Dungeons
 			//[Prisoner] (Repeat)
 			//[IF PC HAS HARPY KEY A & B]
 			else if (player.hasKeyItem("Harpy Key A") >= 0 && player.hasKeyItem("Harpy Key B") >= 0) {
-				if (confirm == false) {
-					promptTalkPrisoner();
-					return;
-				}
 				outputText("You smile as you approach Hakon the Salamander.  He starts to yell at you again, but you snap at him to hush.  You explain that Hel and Kiri are waiting outside and that the broodmother has been defeated.  Both sets of keys jingling in your hands.  He watches you approach silently, his eyes wary but hopeful.  You quickly undo his bonds, freeing him for the first time in years.  He struggles to sit, but nearly collapses. You catch him before he hurts himself and, throwing his arm over your shoulder, help the old salamander toward the stairs...");
 				//(Go to DUNGEON END scene)
 				doNext(towerOutro);
@@ -1291,7 +1271,7 @@ package classes.Scenes.Dungeons
 						addButton(0, "Hakon", helDungeonPrisonerTalk)
 					}
 					outputText(".");
-					if (player.hasKeyItem("Harpy Key A") >= 0 && player.hasKeyItem("Harpy Key B") >= 0) outputText("\n\n<b>You have the keys to release the prisoner, but you may want to make sure you have everything from this place that you want before you make your escape.  You doubt you'll be able to return in the future.</b>");
+					if (player.hasKeyItem("Harpy Key A") >= 0 && player.hasKeyItem("Harpy Key B") >= 0) outputText("\n\n<b>You have the keys to release the prisoner.  You may be able to return in the future by choosing \"Phoenix Tower\" from the dungeons submenu.</b>");
 				}
 				else {
 					outputText("You're standing in a small dungeon room, nearly gagging on the smells of burnt meat and smoke.  A number of nasty torture devices hang on the walls, and an empty table sits in the middle of the room.");

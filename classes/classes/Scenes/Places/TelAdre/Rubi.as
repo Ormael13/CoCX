@@ -70,7 +70,7 @@ public function Rubi(){
 
 private function rubiSprite():void {
 	if(flags[kFLAGS.RUBI_HORNTYPE] > 0) spriteSelect(102);
-	spriteSelect(101);
+	else spriteSelect(101);
 }
 
 private function initializeRubi():void {
@@ -3601,7 +3601,7 @@ public function giveRubiClothes(itype:ItemType = null):void {
 	else if(itype == armors.S_SWMWR) flags[kFLAGS.RUBI_SWIMWEAR] = 1;
 	else if(itype == armors.I_CORST) flags[kFLAGS.RUBI_INQUISITORS_CORSET] = 1;
 	else if(itype == armors.BONSTRP) flags[kFLAGS.RUBI_BONDAGE_STRAPS] = 1;
-	else if(itype == armors.BIMBOSK) flags[kFLAGS.RUBI_GOT_BIMBO_SKIRT] = 1;
+	else if(itype == armors.BIMBOSK) flags[kFLAGS.RUBI_BIMBO_MINIDRESS] = 1;
 	rubiAffection(20);
 	doNext(rubisFuckingHouseYouPervert);
 }

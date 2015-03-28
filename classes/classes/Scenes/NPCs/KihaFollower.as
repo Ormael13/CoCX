@@ -1759,6 +1759,7 @@ internal function kihaUnbitchesUncorruptedFolks():void {
 private function kihaCampAppearance():void {
 	clearOutput();
 	spriteSelect(72);
+	outputText(images.showImage("monster-kiha"));
 	outputText("Kiha is a 6 foot tall dragoness, with dark skin and blood-red scales covering much of her body.  She is " + (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0 ? "wearing " + (flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "a pair of spider-silk panties" : "a spider-silk loincloth") : "naked, shameless of her nudity,") + " and carries a tremendous enchanted greataxe, the head of which blazes with heat.  She has a sharp, predatory face with dark red eyes bearing black, reptilian slits.  Long red hair grows from her scalp, reaching down past her shoulders.  She has strong, child-bearing hips and a squishy bubble-butt.  She has two reptilian legs adorned with scales and claws, ending in soft, leathery soles.");
 	outputText("[pg]She has a pair of dusky, soft D-cup tits, with a single 0.5 inch nipple on each breast.");
 	outputText("[pg]" + (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0 ? "Underneath her " + (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0 ? "spider-silk panties" : "spider-silk loincloth") + ", " : "") + "Kiha has a loose twat between her legs which constantly drips a warm, wet lubricant that stains her ");

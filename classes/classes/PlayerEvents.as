@@ -2,6 +2,7 @@ package classes {
 	
 	import classes.*;
 	import classes.GlobalFlags.*;
+	import classes.Items.*;
 	
 	public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
@@ -139,7 +140,7 @@ package classes {
 				if (flags[kFLAGS.VALERIA_FLUIDS] > 0) {
 					flags[kFLAGS.VALERIA_FLUIDS]--;
 				}
-				else {
+				else if (player.armor == armors.GOOARMR) {
 					dynStats("lus", 2 + (player.lib / 10), "resisted", false);
 					needNext = true;
 				}
@@ -939,6 +940,7 @@ package classes {
 				getGame().lake.gooGirlScene.slimeBadEnd();
 				return true;
 			}
+			//Bee cocks
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE && player.lust >= player.maxLust()) {
 				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
 					outputText("\nYou can't help it anymore. Thankfully, you have the honey in your pouch so you pull out a vial of honey. You're definitely going to masturbate with honey covering your bee-cock.");

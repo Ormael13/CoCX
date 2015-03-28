@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.internals.ChainedDrop;
 
 	public class Kiha extends Monster
 	{
@@ -201,7 +202,7 @@ package classes.Scenes.NPCs
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 16;
 			this.gems = rand(15) + 95;
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			this.wingType = WING_TYPE_IMP;
 			this.wingDesc = "huge";
 			this.tailType = TAIL_TYPE_LIZARD;
