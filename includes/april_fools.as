@@ -84,7 +84,7 @@ public function DLCPrompt(dlcName:String, dlcPitch:String, dlcPrice:String, next
 	if (nextFunc != null) addButton(1, "No", nextFunc);
 	else addButton(1, "No", camp.campMenu);
 }
-private function buyDLCPrompt(dlcName:String, dlcPrice:String, nextFunc:Function):void {
+private function buyDLCPrompt(dlcName:String, dlcPrice:String, nextFunc:Function = null):void {
 	clearOutput();
 	outputText("<b>Item:</b> " + dlcName + "\n");
 	outputText("<b>Price:</b> " + dlcPrice + "\n");
@@ -97,7 +97,7 @@ private function buyDLCPrompt(dlcName:String, dlcPrice:String, nextFunc:Function
 	addButton(4, "COMING SOON!", doNothing);
 	addButton(14, "Cancel", nextFunc);
 }
-private function proceedToCheckout(method:String, nextFunc:Function):void {
+private function proceedToCheckout(method:String, nextFunc:Function = null):void {
 	clearOutput();
 	outputText("You will be taken to an external website to complete your checkout. Proceed?");
 	doYesNo(reallyCheckout, nextFunc);
