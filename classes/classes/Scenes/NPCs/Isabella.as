@@ -39,8 +39,9 @@ package classes.Scenes.NPCs
 					outputText("You brace yourself and catch her shield in both hands, dragging through the dirt as you slow her charge to a stop.  She gapes down, completely awestruck by the show of power.", false);
 				}
 				else {
-					damage = player.takeDamage(damage);
-					outputText("She's coming too fast to dodge, and you're forced to try to stop her.  It doesn't work.  Isabella's shield hits you hard enough to ring your ears and knock you onto your back with bruising force. (" + damage + ")\n", false);
+					outputText("She's coming too fast to dodge, and you're forced to try to stop her.  It doesn't work.  Isabella's shield hits you hard enough to ring your ears and knock you onto your back with bruising force. ", false);
+					damage = player.takeDamage(damage, true);
+					outputText("\n");
 				}
 			}
 			combatRoundOver();
@@ -82,8 +83,9 @@ package classes.Scenes.NPCs
 					damage = 0;
 				}
 				else {
-					damage = player.takeDamage(damage);
-					outputText("You try to avoid it, but her steely attack connects, rocking you back.  You stagger about while trying to get your bearings, but it's all you can do to stay on your feet.  <b>Isabella has stunned you!</b> (" + damage + ")\n", false);
+					outputText("You try to avoid it, but her steely attack connects, rocking you back.  You stagger about while trying to get your bearings, but it's all you can do to stay on your feet.  <b>Isabella has stunned you!</b> ", false);
+					damage = player.takeDamage(damage, true);
+					outputText("\n");
 					player.createStatusAffect(StatusAffects.IsabellaStunned,0,0,0,0);
 				}
 			}

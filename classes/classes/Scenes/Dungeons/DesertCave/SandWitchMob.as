@@ -41,8 +41,8 @@ package classes.Scenes.Dungeons.DesertCave
 			}
 			//Hit
 			else {
-				damage = player.takeDamage(damage);
-				outputText("\nShe hits you square in the face, bloodying your face and sending you stumbling back in agony. (" + damage + ")");
+				outputText("\nShe hits you square in the face, bloodying your face and sending you stumbling back in agony. ");
+				damage = player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}

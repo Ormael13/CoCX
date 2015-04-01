@@ -122,7 +122,6 @@ package classes
 		public static const PhoukaWhiskeyAffect:StatusAffectType = mk("PhoukaWhiskeyAffect");
 		public static const PostAkbalSubmission:StatusAffectType = mk("Post Akbal Submission");
 		public static const PostAnemoneBeatdown:StatusAffectType = mk("Post Anemone Beatdown");
-		public static const PrisonRestraints:StatusAffectType = mk("Prison Restraints");
 		public static const PureCampJojo:StatusAffectType = mk("PureCampJojo");
 		public static const RathazulArmor:StatusAffectType = mk("RathazulArmor");
 		public static const RepeatSuccubi:StatusAffectType = mk("repeatSuccubi");
@@ -144,7 +143,8 @@ package classes
 		public static const TensionReleased:StatusAffectType = mk("TensionReleased");
 		public static const TF2:StatusAffectType = mk("TF2");
 		public static const TookBlessedSword:StatusAffectType = mk("Took Blessed Sword");
-		//DEPRECATED, DO NOT USE. Currently cannot be removed without breaking existing saves.
+		
+		//Old status plots. DEPRECATED, DO NOT USE. Currently cannot be removed without breaking existing saves.
 		public static const DungeonShutDown:StatusAffectType = mk("DungeonShutDown");
 		public static const FactoryOmnibusDefeated:StatusAffectType = mk("FactoryOmnibusDefeated");
 		public static const FactoryOverload:StatusAffectType = mk("FactoryOverload");
@@ -155,6 +155,15 @@ package classes
 		public static const MaraesQuestStart:StatusAffectType = mk("Marae's Quest Start");
 		public static const MetCorruptMarae:StatusAffectType = mk("Met Corrupt Marae");
 		public static const MetMarae:StatusAffectType = mk("Met Marae");
+		
+		//Prisoner status effects.
+		public static const PrisonCaptorEllyStatus:StatusAffectType = mk("prisonCaptorEllyStatus");
+		public static const PrisonCaptorEllyQuest:StatusAffectType = mk("prisonCaptorEllyQuest");
+		public static const PrisonCaptorEllyPet:StatusAffectType = mk("prisonCaptorEllyPet");
+		public static const PrisonCaptorEllyBillie:StatusAffectType = mk("prisonCaptorEllyBillie");
+		public static const PrisonCaptorEllyScruffy:StatusAffectType = mk("prisonCaptorEllyScruffy");
+		public static const PrisonRestraints:StatusAffectType = mk("Prison Restraints");
+		public static const PrisonCaptorEllyScatch:StatusAffectType = mk("prisonCaptorEllyScatch");
 		/**
 		 * v1 = bonus index
 		 * v2 = bonus value

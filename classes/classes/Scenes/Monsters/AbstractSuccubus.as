@@ -4,7 +4,8 @@
 package classes.Scenes.Monsters
 {
 	import classes.*;
-
+	import classes.Items.*
+	
 	public class AbstractSuccubus extends Monster
 	{
 		protected function whipAttack():void
@@ -18,57 +19,99 @@ package classes.Scenes.Monsters
 				}
 				outputText("Grinning deviously, the succubus cracks her whip with expert skill, landing a painful blow on your ", false);
 				var temp:int = rand(6);
+				var damage:int;
 				//Whip yo ass!
 				if (temp == 0) {
-					outputText("ass (4)", false);
-					player.takeDamage(4);
+					outputText("ass", false);
+					damage = 4;
 					game.dynStats("lus", 6 + int(player.sens / 20));
 				}
 				//Whip yo tits!
 				if (temp == 1) {
-					if (player.breastRows.length > 0 && player.biggestTitSize() > 0) outputText(player.allBreastsDescript() + " (9)", false);
-					else outputText("chest (9)", false);
-					player.takeDamage(9);
+					if (player.breastRows.length > 0 && player.biggestTitSize() > 0) outputText(player.allBreastsDescript() + "", false);
+					else outputText("chest", false);
+					damage = 9 - player.armor.def;
+					if (damage <= 0) {
+						outputText(" but you feel no pain thanks to your protection");
+						damage = 0;
+					}
 					game.dynStats("lus", 4 + int(player.sens / 15));
 				}
 				//Whip yo groin
 				if (temp == 2) {
-					if (player.gender == 0) {
-						outputText("groin (5)", false);
-						player.takeDamage(5);
+					var groinProtection:int = 0;
+					//Take armor in account.
+					if (player.armor != ArmorLib.NOTHING) {
+						if (player.armor.perk == "Light") groinProtection = 1;
+						else if (player.armor.perk == "Medium") groinProtection = 2;
+						else groinProtection = 3;
+						//Certain armor affects protection.
+						if (player.armor == armors.BEEARMR || player.armor == armors.SSARMOR || player.armor == armors.DBARMOR || player.armor == armors.TBARMOR) groinProtection = 2; //The only thing protecting your groin is a loincloth.
+						if (player.armor == armors.GOOARMR) groinProtection = 2; //Goo armor is soft and gooey so not complete protection.
+						if (player.armor == armors.LTHCARM) groinProtection = 0; //Lethicite armor exposes your groin.
 					}
-					if (player.gender == 1) {
-						outputText("groin, dealing painful damage to your " + player.multiCockDescriptLight() + ", doubling you over in agony (" + int((player.tou * 2 + 50) / 4) + ")", false);
-						game.dynStats("lus", -15);
-						player.takeDamage(int((player.maxHP()) / 4));
+					//Wearing armored undergarments? BONUS POINTS!
+					if (player.lowerGarment != UndergarmentLib.NOTHING) {
+						if (player.lowerGarment == undergarments.SS_LOIN || player.lowerGarment == undergarments.SSPANTY) groinProtection += 1;
+						else if (player.lowerGarment == undergarments.DS_LOIN || player.lowerGarment == undergarments.DSTHONG) groinProtection += 2;
 					}
-					if (player.gender == 2) {
-						outputText("groin, making your " + vaginaDescript(0) + " sting with pain (-10)", false);
-						player.takeDamage(10);
-						game.dynStats("lus", -8);
+					//Apply damage
+					if (groinProtection >= 3) {
+						outputText("groin but luckily you're wearing groin protection");
+						damage = 0;
 					}
-					if (player.gender == 3) {
-						outputText("groin, dealing painful damage to your " + player.multiCockDescriptLight() + " and " + player.vaginaDescript(0) + ", doubling you over in agony (" + int((player.tou * 2 + 50) / 3) + ")", false);
-						game.dynStats("lus", -20);
-						player.takeDamage(int((player.maxHP()) / 3));
+					else {
+						if (player.gender == 0) {
+							outputText("groin", false);
+							damage = 5;
+							damage = int(damage / (groinProtection + 1)); 
+						}
+						if (player.gender == 1) {
+							outputText("groin, dealing painful damage to your " + player.multiCockDescriptLight() + ", doubling you over in agony", false);
+							damage = int((player.maxHP()) / 4);
+							if (groinProtection > 0) {
+								outputText("! Of course, it would have been worse if you didn't wear groin protection");
+								damage = int(damage / (groinProtection + 1));
+							}
+							damage = player.reduceDamage(damage);
+							if (damage < 20) damage = 10;
+							game.dynStats("lus", -15);
+						}
+						if (player.gender == 2) {
+							outputText("groin, making your " + vaginaDescript(0) + " sting with pain", false);
+							damage = 10;
+							game.dynStats("lus", -8);
+						}
+						if (player.gender == 3) {
+							outputText("groin, dealing painful damage to your " + player.multiCockDescriptLight() + " and " + player.vaginaDescript(0) + ", doubling you over in agony", false);
+							damage = int((player.maxHP()) / 3)
+							if (groinProtection > 0) {
+								outputText("! Of course, it would have been worse if you didn't wear groin protection");
+								damage = int(damage / (groinProtection + 1));
+							}
+							damage = player.reduceDamage(damage);
+							if (damage < 30) damage = 30;
+							game.dynStats("lus", -20);
+						}
 					}
 				}
 				//Whip yo legs
 				if (temp == 3) {
-					outputText("legs (7)", false);
-					player.takeDamage(7);
+					outputText("legs", false);
+					damage = 7;
 				}
 				//Whip yo arms
 				if (temp == 4) {
-					outputText("arms (8)", false);
-					player.takeDamage(8);
+					outputText("arms", false);
+					damage = 8;
 				}
 				//Whip yo neck
 				if (temp == 5) {
 					outputText("neck (24)", false);
-					player.takeDamage(24);
+					damage = 24;
 				}
-				outputText("!", false);
+				outputText("! ", false);
+				player.takeDamage(damage, true);
 			}
 			else {
 				outputText("The succubus flicks her wrist, allowing a whip-like cord to slither out from the palm of her clawed hand.  She cracks the whip experimentally, cackling with glee.", false);

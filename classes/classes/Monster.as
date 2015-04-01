@@ -60,6 +60,9 @@
 		protected final function combatMisdirect():Boolean {
 			return game.combatMisdirect();
 		}
+		protected final function combatParry():Boolean {
+			return game.combatParry();
+		}
 		protected final function combatBlock(doFatigue:Boolean = false):Boolean {
 			return game.combatBlock(doFatigue);
 		}
@@ -728,22 +731,30 @@
 				return true;
 			}
 			//Determine if evaded
-			if (!(this is Kiha) && player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			if (combatEvade()) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
 				if (!plural) outputText("s");
 				outputText(" attack.\n", false);
 				return true;
 			}
 			//("Misdirection"
-			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			if (combatMisdirect()) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
 				return true;
 			}
 			//Determine if cat'ed
-			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			if (combatFlexibility()) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
 				if (plural) outputText("' attacks.\n", false);
 				else outputText("'s attack.\n", false);
+				return true;
+			}
+			//Parry with weapon
+			if (combatParry()) {
+				outputText("You manage to block " + a + short + "");
+				if (plural) outputText("' attacks ", false);
+				else outputText("'s attack ", false);
+				outputText("with your " + player.weaponName + ".\n");
 				return true;
 			}
 			return false;
@@ -1141,9 +1152,8 @@
 						outputText("<b>The sand is in your eyes!  You're blinded this turn!</b>\n\n");
 					}
 					else {
-						outputText("<b>The grainy mess cuts at any exposed flesh and gets into every crack and crevice of your armor.");
-						var temp:Number = player.takeDamage(1 + rand(2));
-						outputText(" (" + temp + ")");
+						outputText("<b>The grainy mess cuts at any exposed flesh and gets into every crack and crevice of your armor. ");
+						var temp:Number = player.takeDamage(1 + rand(2), true);
 						outputText("</b>\n\n");
 					}
 				}
@@ -1174,8 +1184,8 @@
 				else {
 					var store:Number = eMaxHP() * (3 + rand(4))/100;
 					store = game.doDamage(store);
-					if(plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. (" + store + ")\n\n", false);
-					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. (" + store + ")\n\n", false);
+					if(plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
+					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
 				}
 			}
 			if(findStatusAffect(StatusAffects.Timer) >= 0) {

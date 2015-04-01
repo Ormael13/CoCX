@@ -75,25 +75,23 @@ package classes.Scenes.Dungeons.D3
 		private function concussiveBlow():void
 		{
 			//Maybe replace this with passive stun? TERRIBLE IDEA
-			outputText("The giant raises his hammer for an obvious downward strike. His marble muscles flex as he swings it downward. You're able to hop out of the way of the clearly telegraphed attack, but nothing could prepare you for the shockwave it emits as it craters the ground.");
-
-			//Light magic-type damage!
-			var damage:Number = (100 * ((inte/player.inte) / 4));
-			damage = player.takeDamage(damage);
+			outputText("The giant raises his hammer for an obvious downward strike. His marble muscles flex as he swings it downward. You're able to hop out of the way of the clearly telegraphed attack, but nothing could prepare you for the shockwave it emits as it craters the ground. ");
 			
 			//Stun success
 			if (rand(2) == 0 && player.findStatusAffect(StatusAffects.Stunned) < 0)
 			{
-				outputText(" <b>The vibrations leave you rattled and stunned. It'll take you a moment to recover!</b>");
+				outputText("<b>The vibrations leave you rattled and stunned. It'll take you a moment to recover!</b> ");
 				player.createStatusAffect(StatusAffects.Stunned, 2, 0, 0, 0);
 			}
 			else
 			//Fail
 			{
-				outputText(" You shake off the vibrations immediately. It'll take more than that to stop you!");
+				outputText("You shake off the vibrations immediately. It'll take more than that to stop you! ");
 			}
 			
-			outputText(" (" + damage + ")");
+			//Light magic-type damage!
+			var damage:Number = (100 * ((inte/player.inte) / 4));
+			damage = player.takeDamage(damage, true);
 		}
 		
 		private function dirtKick():void
@@ -124,13 +122,12 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				//Get hit
-				outputText(" It chits you square in the chest. The momentum sends you flying through the air. You land with a crunch against a wall. <b>You'll have to run back to the giant to engage it in melee once more.</b>");
+				outputText(" It chits you square in the chest. The momentum sends you flying through the air. You land with a crunch against a wall. <b>You'll have to run back to the giant to engage it in melee once more.</b> ");
 				
 				player.createStatusAffect(StatusAffects.KnockedBack, 0, 0, 0, 0);
 				this.createStatusAffect(StatusAffects.KnockedBack, 0, 0, 0, 0); // Applying to mob as a "used ability" marker
-				damage = player.takeDamage(damage);
+				damage = player.takeDamage(damage, true);
 				
-				outputText(" (" + damage + ")");
 			}
 		}
 		
@@ -144,9 +141,8 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				//Hit
-				outputText(" The concussive strike impacts you with bonecrushing force.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				outputText(" The concussive strike impacts you with bonecrushing force. ");
+				damage = player.takeDamage(damage, true);
 			}
 		}
 		
@@ -159,7 +155,7 @@ package classes.Scenes.Dungeons.D3
 			//Oh noes!
 			else
 			{
-				outputText(" Your equipment flies off into the bushes! You'll have to fight another way. (" + player.takeDamage(str + weaponAttack) + ")");
+				outputText(" Your equipment flies off into the bushes! You'll have to fight another way. ");
 				player.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 				this.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
@@ -180,9 +176,8 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				//Hit
-				outputText(" You're squarely struck by the spinning hammer.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				outputText(" You're squarely struck by the spinning hammer. ");
+				damage = player.takeDamage(damage, true);
 			}
 		}
 		

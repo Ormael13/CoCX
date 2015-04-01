@@ -33,10 +33,15 @@ public class Shield extends Useable //Equipable
 
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
-			if (game.player.weaponPerk == "large") {
-				outputText("Your current weapon requires two hands so you have to unequip your " + game.player.weaponName + ".  ");
+		}
+		
+		override public function canUse():Boolean {
+			if (game.player.weaponPerk == "Large") {
+				outputText("Your current weapon requires two hands.  Unequip your current weapon or switch to one-handed before equipping this shield.  ");
 				game.flags[kFLAGS.UNEQUIP_SHIELD_BECAUSE_TWO_HANDED_WEAPON] = 1;
+				return false;
 			}
+			return true;
 		}
 		
 		public function playerEquip():Shield { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output

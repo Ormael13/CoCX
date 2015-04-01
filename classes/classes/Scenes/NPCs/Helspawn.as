@@ -44,7 +44,7 @@ private function calledShot():void {
 	//standard dodge/miss text
 	if(damage <= 0 || (rand(2) == 0 && (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()))) outputText("\nYou avoid the hit!");
 	else {
-		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while!");
+		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while! ");
 		var affect:int = 20 + rand(5);
 		if(player.findStatusAffect(StatusAffects.CalledShot) >= 0) {
 			while(affect > 0 && player.spe >= 2) {
@@ -67,8 +67,7 @@ private function calledShot():void {
 				// speUp.visible = false;
 			}
 		}
-		damage = player.takeDamage(damage);
-		outputText(" (" + damage + ")");
+		damage = player.takeDamage(damage, true);
 	}
 }
 
@@ -89,13 +88,12 @@ private function calledShot():void {
 			//standard dodge/miss text
 			if(damage <= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("\nYou evade the strike.");
 			else {
-				outputText("\nHer shield catches you right in the face, sending you tumbling to the ground and leaving you open to attack!");
-				damage = player.takeDamage(damage);
+				outputText("\nHer shield catches you right in the face, sending you tumbling to the ground and leaving you open to attack! ");
+				damage = player.takeDamage(damage, true);
 				if(rand(2) == 0 && player.findStatusAffect(StatusAffects.Stunned) < 0) {
 					player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 					outputText(" <b>The hit stuns you.</b>");
 				}
-				outputText(" (" + damage + ")");
 			}
 		}
 
@@ -107,9 +105,8 @@ private function calledShot():void {
 			//standard dodge/miss text
 			if(damage <= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("\nYou evade the strike.");
 			else {
-				outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + "'s tail catches you as you try to dodge.  Your [armor] sizzles, and you leap back with a yelp as she gives you a light burning.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + "'s tail catches you as you try to dodge.  Your [armor] sizzles, and you leap back with a yelp as she gives you a light burning. ");
+				damage = player.takeDamage(damage, true);
 			}
 		}
 

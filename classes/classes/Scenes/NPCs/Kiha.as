@@ -27,11 +27,13 @@ package classes.Scenes.NPCs
 				//Determine damage - str modified by enemy toughness!
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				damage += 5;
-				damage = player.takeDamage(damage);
+				
 				outputText("A torrent of heat bursts from between her fingertips as she thrusts her clenched fist forward, the ball of intense flame writhing and burning with a fury unknown to mankind. With one fell swoop, the combined power of her love, anger, and sorrow pushes you backward, launching you out of the swamp and into Marble's pillowy chest. \"<i>Ara ara,</i>\" she begins, but you've already pushed yourself away from the milky hell-prison as you run back towards ");
 				if(!game.kihaFollower.followerKiha()) outputText("the swamp");
 				else outputText("the fight");
-				outputText(". (" + damage + ")\n", false);
+				outputText(". ", false);
+				damage = player.takeDamage(damage, true);
+				outputText("\n");
 				if(player.HP >= 1) outputText("You follow the shrill cry of \"<i>B-BAKA!</i>\" in the distance until you reach the exact location you were in a few seconds earlier, prepared to fight again.", false);
 			}
 			combatRoundOver();
@@ -60,8 +62,9 @@ package classes.Scenes.NPCs
 			//HIT!
 			else {
 				var damage:int = int((str) - (player.armorDef));
-				damage = player.takeDamage(damage);
-				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. (" + damage + ")\n", false);
+				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ", false);
+				damage = player.takeDamage(damage, true);
+				outputText("\n");
 			}
 			combatRoundOver();
 		}
@@ -86,8 +89,9 @@ package classes.Scenes.NPCs
 			}
 			else {
 				var damage:Number = Math.round(90 + rand(10));
-				damage = player.takeDamage(damage);
-				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. (" + damage + ")\n", false);
+				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. ", false);
+				damage = player.takeDamage(damage, true);
+				outputText("\n");
 			}
 			combatRoundOver();
 		}

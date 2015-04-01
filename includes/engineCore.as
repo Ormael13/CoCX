@@ -65,7 +65,11 @@ public function outputList():String {
 	return stuff;        
 }
 
-
+/**
+ * Alters player's HP.
+ * @param	changeNum The amount to damage or heal.
+ * @param	display Show the damage or heal taken.
+ */
 public function HPChange(changeNum:Number, display:Boolean):void
 {
 	if(changeNum == 0) return;
@@ -120,13 +124,21 @@ public function speech(output:String, speaker:String):void {
 	outputText(speech, false);
 }
 */
-	
+
+/**
+ * Clear the text on screen.
+ */
 public function clearOutput():void {
 	forceUpdate();
 	currentText = "";
 	mainView.clearOutputText();
 }
 
+/**
+ * Basically the same as outputText() but without the parser tags. Great for displaying square brackets on text.
+ * @param	output The text to show. It can be formatted such as bold, italics, and underline tags.
+ * @param	purgeText Clear the old text.
+ */
 public function rawOutputText(output:String, purgeText:Boolean = false):void
 {
 	
@@ -151,6 +163,12 @@ public function rawOutputText(output:String, purgeText:Boolean = false):void
 
 }
 
+/**
+ * Output the text on main text interface.
+ * @param	output The text to show. It can be formatted such as bold, italics, and underline tags.
+ * @param	purgeText Clear the old text.
+ * @param	parseAsMarkdown I don't know about this one.
+ */
 public function outputText(output:String, 
 						purgeText:Boolean = false, 
 						parseAsMarkdown:Boolean = false):void
@@ -526,7 +544,9 @@ public function buildPerkList():Array {
 	function _add(p:PerkClass):void{
 		perkList.push({label: p.perkName,perk:p});
 	}
-	//STRENGTH PERKS
+	//------------
+	// STRENGTH
+	//------------
 	if(player.str >= 25) {
 		_add(new PerkClass(PerkLib.StrongBack));
 	}
@@ -547,12 +567,21 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.BrutalBlows));
 		if(player.str >= 50)
 			_add(new PerkClass(PerkLib.IronFists));
+		if(player.str >= 50 && player.spe >= 50)
+			_add(new PerkClass(PerkLib.Parry));
 	}
 	//Tier 2 Strength Perks
 	if(player.level >= 12) {
 		if(player.str >= 75)
 			_add(new PerkClass(PerkLib.Berzerker));
+		if (player.str >= 80)
+			_add(new PerkClass(PerkLib.HoldWithBothHands));
+		if (player.str >= 80 && player.tou >= 60)
+			_add(new PerkClass(PerkLib.ShieldSlam));
 	}
+	//------------
+	// TOUGHNESS
+	//------------
 	//slot 2 - toughness perk 1
 	if(player.findPerk(PerkLib.Tank) < 0 && player.tou >= 25) {
 		_add(new PerkClass(PerkLib.Tank));
@@ -562,7 +591,7 @@ public function buildPerkList():Array {
 		_add(new PerkClass(PerkLib.Regeneration));
 	}
 	//Tier 1 Toughness Perks
-		if(player.level >= 6) {
+	if(player.level >= 6) {
 		if(player.findPerk(PerkLib.Tank) >= 0 && player.tou >= 60) {
 			_add(new PerkClass(PerkLib.Tank2));
 		}
@@ -571,6 +600,9 @@ public function buildPerkList():Array {
 		}
 		if(player.tou >= 75) {
 			_add(new PerkClass(PerkLib.ImmovableObject));
+		}
+		if(player.tou >= 50) {
+			_add(new PerkClass(PerkLib.ShieldMastery));
 		}
 	}
 	//Tier 2 Toughness Perks
@@ -582,6 +614,9 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.IronMan));
 		}
 	}
+	//------------
+	// SPEED
+	//------------
 	//slot 3 - speed perk
 	if(player.spe >= 25) {
 			_add(new PerkClass(PerkLib.Evade));
@@ -613,7 +648,13 @@ public function buildPerkList():Array {
 		if(player.spe >= 75) {
 			_add(new PerkClass(PerkLib.LungingAttacks));
 		}
+		if(player.spe >= 80 && player.str >= 60) {
+			_add(new PerkClass(PerkLib.Blademaster));
+		}
 	}
+	//------------
+	// INTELLIGENCE
+	//------------
 	//Slot 4 - precision - -10 enemy toughness for damage calc
 	if(player.inte >= 25) {
 			_add(new PerkClass(PerkLib.Precision));
@@ -642,12 +683,11 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.Archmage));
 		}
 	}
-	//LIBIDO PERKZ
+	//------------
+	// LIBIDO
+	//------------
 	//slot 5 - libido perks
-	//Slot 5 - Fertility- decreases cum production and fertility.
-	if (player.lib < 25) {
-			_add(new PerkClass(PerkLib.FertilityMinus, 15, 0.7, 0, 0));
-	}
+
 	//Slot 5 - Fertile+ increases cum production and fertility (+15%)
 	if(player.lib >= 25) {
 			_add(new PerkClass(PerkLib.FertilityPlus,15,1.75,0,0));
@@ -662,6 +702,10 @@ public function buildPerkList():Array {
 	//Tier 1 Libido Perks
 	if(player.level >= 6) {
 		//Slot 5 - minimum libido
+		//Slot 5 - Fertility- decreases cum production and fertility.
+		if (player.lib < 25) {
+				_add(new PerkClass(PerkLib.FertilityMinus, 15, 0.7, 0, 0));
+		}
 		if(player.lib >= 60) {
 			_add(new PerkClass(PerkLib.WellAdjusted));
 		}
@@ -670,13 +714,19 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.Masochist));
 		}
 	}
-	//Corruption Perks - slot 7
+	//------------
+	// SENSITIVITY
+	//------------
+	//Nope.avi
+	//------------
+	// CORRUPTION
+	//------------
 	//Slot 7 - Corrupted Libido - lust raises 10% slower.
 	if(player.cor >= 25) {
 			_add(new PerkClass(PerkLib.CorruptedLibido,20,0,0,0));
 	}
 	//Slot 7 - Seduction (Must have seduced Jojo
-	if(player.findPerk(PerkLib.Seduction) < 0 && player.cor >= 50 && monk >= 5) {
+	if(player.cor >= 50) {
 			_add(new PerkClass(PerkLib.Seduction));
 	}
 	//Slot 7 - Nymphomania
@@ -1494,6 +1544,16 @@ public function createCallBackFunction2(func:Function,...args):Function
 	}
 }
 
+/**
+ * Adds a button.
+ * @param	pos Determines the position. Starts at 0. (First row is 0-4, second row is 5-9, third row is 10-14.)
+ * @param	text Determines the text that will appear on button.
+ * @param	func1 Determines what function to trigger.
+ * @param	arg1 Pass argument #1 to func1 parameter.
+ * @param	arg2 Pass argument #1 to func1 parameter.
+ * @param	arg3 Pass argument #1 to func1 parameter.
+ * @param	toolTipText The text that will appear on tooltip when the mouse goes over the button.
+ */
 public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = ""):void {
 	if (func1==null) return;
 	var callback:Function;
@@ -1524,6 +1584,10 @@ public function hasButton(arg:*):Boolean {
 		return false;
 }
 
+/**
+ * Removes a button.
+ * @param	arg The position to remove a button. (First row is 0-4, second row is 5-9, third row is 10-14.)
+ */
 public function removeButton(arg:*):void {
 	function _removeButtonAction( index :int ):void	// Uh... should this function be empty?
 	{
@@ -1548,6 +1612,9 @@ public function addLockedButton(pos:int, toolTipText:String = ""):void {
 	addButton(pos, "LOCKED", doNothing, null, null, null, toolTipText);
 }
 
+/**
+ * Hides all bottom buttons.
+ */
 public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
 	mainView.hideBottomButton(0);
 	mainView.hideBottomButton(1);
@@ -1633,6 +1700,11 @@ public function menu(text1:String = "", func1:Function = null, arg1:Number = -90
 }
 */
 
+/**
+ * Adds buttons that can be chosen. 
+ * 
+ * I highly recommend you <b>DO NOT</b> use this for new content. Use addButton() instead.
+ */
 public function choices(text1:String, butt1:*, 
 						text2:String, butt2:*, 
 						text3:String, butt3:*, 
@@ -1828,6 +1900,11 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 }
 
 // simpleChoices and doYesNo are convenience functions. They shouldn't re-implement code from choices()
+/**
+ * Adds five button that can be chosen. 
+ * 
+ * I highly recommend you <b>DO NOT</b> use this for new content. Use addButton() instead.
+ */
 public function simpleChoices(text1:String, butt1:*, 
 						text2:String, butt2:*, 
 						text3:String, butt3:*, 
@@ -1848,6 +1925,11 @@ public function simpleChoices(text1:String, butt1:*,
 			"",0);
 }
 
+/**
+ * Clears all button and adds a 'Yes' and a 'No' button.
+ * @param	eventYes The event parser or function to call if 'Yes' button is pressed.
+ * @param	eventNo The event parser or function to call if 'No' button is pressed.
+ */
 public function doYesNo(eventYes:*, eventNo:*):void {
 	//Make buttons 1-2 visible and hide the rest.
 
@@ -1865,8 +1947,10 @@ public function doYesNo(eventYes:*, eventNo:*):void {
 
 }
 
-
-
+/**
+ * Clears all button and adds a 'Next' button.
+ * @param	eventNo The event parser or function to call if the button is pressed.
+ */
 public function doNext(eventNo:*):void {
 	//Prevent new events in combat from automatically overwriting a game over. 
 	if(mainView.getButtonText( 0 ).indexOf("Game Over") != -1) {
@@ -1890,28 +1974,39 @@ public function invertGo():void{
 	mainView.invert();
 }
 
-//Used to update the display of statistics
+/**
+ * Used to update the display of statistics
+ */
 public function statScreenRefresh():void {
 	mainView.statsView.show(); // show() method refreshes.
 	styleHack.refreshStats();
 }
-
+/**
+ * Show the stats pane. (Name, stats and attributes)
+ */
 public function showStats():void {
 	mainView.statsView.show();
 	styleHack.refreshStats();
 	mainViewHack.tweenInStats();
 }
-
+/**
+ * Hide the stats pane. (Name, stats and attributes)
+ */
 public function hideStats():void {
 	if (!mainViewHack.buttonsTweened) mainView.statsView.hide();
 	mainViewHack.tweenOutStats();
 }
 
+/**
+ * Hide the top buttons.
+ */
 public function hideMenus():void {
 	mainView.hideAllMenuButtons();
 }
 
-//Hide the up/down indicators
+/**
+ * Hides the up/down arrow on stats pane.
+ */
 public function hideUpDown():void {
 	mainView.statsView.hideUpDown();
 	mainView.hungerUp.visible = false;
@@ -2278,9 +2373,11 @@ public function displayStats(e:MouseEvent = null):void
 	}
 	
 	// Mino Cum Addiction
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.findPerk(PerkLib.MinotaurCumResistance) >= 0) {
 		if (player.findPerk(PerkLib.MinotaurCumAddict) < 0)
-		addictStats += "<b>Minotaur Cum:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10)/10 + "%\n";
+			addictStats += "<b>Minotaur Cum:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10)/10 + "%\n";
+		else if (player.findPerk(PerkLib.MinotaurCumResistance) >= 0)
+			addictStats += "<b>Minotaur Cum:</b> Immune\n";
 		else
 			addictStats += "<b>Minotaur Cum:</b> 100+%\n";
 	}
@@ -2433,6 +2530,14 @@ public function openURL(url:String):void
     navigateToURL(new URLRequest(url), "_blank");
 }
 
+/**
+ * Awards the achievement. Will display a blue text if achievement hasn't been earned.
+ * @param	title The name of the achievement.
+ * @param	achievement The achievement to be awarded.
+ * @param	display Determines if achievement earned should be displayed.
+ * @param	nl Inserts a new line before the achievement text.
+ * @param	nl2 Inserts a new line after the achievement text.
+ */
 public function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void {
 	if (achievements[achievement] != null) {
 		if (achievements[achievement] <= 0) {
@@ -2844,6 +2949,9 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 	}
 }
 
+/**
+ * Returns true if you're on SFW mode.
+ */
 public function doSFWloss():Boolean {
 	clearOutput();
 	if (flags[kFLAGS.SFW_MODE] > 0) {
@@ -2856,6 +2964,9 @@ public function doSFWloss():Boolean {
 	else return false;
 }
 
+/**
+ * Triggers a Bad End.
+ */
 public function doBadEnd():void {
 	var textChoices:Number = rand(4);
 	if (!this.testingBlockExiting) {

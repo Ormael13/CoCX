@@ -48,10 +48,9 @@ package classes.Scenes.Dungeons.DesertCave
 			}
 			//Interrupted:
 			else {
-				outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same.");
+				outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
 			}
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			damage = player.takeDamage(damage, true);
 			removeStatusAffect(StatusAffects.Gigafire);
 			combatRoundOver();
 		}
@@ -64,8 +63,8 @@ package classes.Scenes.Dungeons.DesertCave
 			var sizeMod:Number = 100;
 			var thickMod:Number = player.thickness / 100 + 0.5;
 			sizeMod += player.tallness * thickMod;
-			if(sizeMod < 140) outputText("  You immediately wish you weren't so small, as you're sure she couldn't have flung a heavier champion nearly as easily.");
-			else if(sizeMod >= 200) outputText("  You're glad for your size, as she couldn't seem to accelerate you into the stone as fast as she'd like.  Sometimes eating plenty pays off.");
+			if(sizeMod < 140) outputText("  You immediately wish you weren't so small, as you're sure she couldn't have flung a heavier champion nearly as easily. ");
+			else if(sizeMod >= 200) outputText("  You're glad for your size, as she couldn't seem to accelerate you into the stone as fast as she'd like.  Sometimes eating plenty pays off. ");
 			//0 thickness, 4' tall: 124
 			//100 thickness, 4' tall: 172
 			//0 thickness, 6' tall: 136
@@ -75,18 +74,16 @@ package classes.Scenes.Dungeons.DesertCave
 			var multiplier:Number = sizeMod / 170;
 			var damage:Number = 20;
 			damage = multiplier * damage;
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			damage = player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 		
 		//*Lightning Bolt
 		//Unavoidable magic damage.
 		public function eatALightningBolt():void {
-			outputText("Holding her staff back, she lifts her free hand with her fingers outstretched in a fan.  Sparks dance between her slender digits, coiling around them like snakes.  In a flash, they rush to her palm and erupt in a lightning bolt, striking you instantly and unavoidably!");
+			outputText("Holding her staff back, she lifts her free hand with her fingers outstretched in a fan.  Sparks dance between her slender digits, coiling around them like snakes.  In a flash, they rush to her palm and erupt in a lightning bolt, striking you instantly and unavoidably! ");
 			var damage:int = 30 + rand(10);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			damage = player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 		//*Whisper:

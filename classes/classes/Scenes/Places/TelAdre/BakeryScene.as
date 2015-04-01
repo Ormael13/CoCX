@@ -81,10 +81,8 @@ private function checkBakeryMenu():void {
 		outputText("Giant Chocolate Cupcake - 500 gems.\n", false);
 		gcupcake = buySlutCake;
 	}
-	outputText("\nAlso try our special ingredients in your own baking!\n");
-	outputText("Fox Berry - 5 gems.\n");
-	outputText("Ringtail Fig - 5 gems.\n");
-	outputText("Mouse Co - 10 gems.\n");
+	outputText("\n");
+	displayIngredients();
 	
 	outputText("\nWhat will you order?", false);
 	
@@ -102,13 +100,17 @@ private function checkBakeryMenu():void {
 	addButton(14,"Leave",bakeryuuuuuu);
 }
 
-public function ingredientsMenu():void {
-	clearOutput();
+private function displayIngredients():void {
 	outputText("Also try our special ingredients in your own baking!\n");
 	outputText("Fox Berry - 5 gems.\n");
 	outputText("Ringtail Fig - 5 gems.\n");
 	outputText("Mouse Cocoa - 10 gems.\n");
 	outputText("Ferret Fruit - 20 gems.\n");
+}
+
+public function ingredientsMenu():void {
+	clearOutput();
+	displayIngredients()
 	menu();
 	addButton(0,"Fox Berry",buyFoxBerry);
 	addButton(1,"Ringtail Fig",buyFig);

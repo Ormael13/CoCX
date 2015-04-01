@@ -1,4 +1,8 @@
 ﻿//for all april fools gags
+public function isAprilFools():Boolean {
+	if (date.date == 1 && date.month == 3) return true;
+	else return false;
+}
 
 // Encounter Chance 1 out of 40 and only if you're a centaur
 public function poniesYN():Boolean {
@@ -69,6 +73,44 @@ public function derpyParty():void {
 	player.lowerBody = LOWER_BODY_TYPE_PONY;
 	doNext(camp.returnToCampUseEightHours);
 }
+
+//DLC April Fools
+public function DLCPrompt(dlcName:String, dlcPitch:String, dlcPrice:String, nextFunc:Function = null):void {
+	clearOutput();
+	outputText(dlcPitch);
+	outputText("\n\nYou can purchase " + dlcName + " for " + dlcPrice + ". Would you like to purchase it now?");
+	menu();
+	addButton(0, "Yes", buyDLCPrompt, dlcName, dlcPrice, nextFunc);
+	if (nextFunc != null) addButton(1, "No", nextFunc);
+	else addButton(1, "No", camp.campMenu);
+}
+private function buyDLCPrompt(dlcName:String, dlcPrice:String, nextFunc:Function):void {
+	clearOutput();
+	outputText("<b>Item:</b> " + dlcName + "\n");
+	outputText("<b>Price:</b> " + dlcPrice + "\n");
+	outputText("Please select a purchase method.");
+	menu();
+	addButton(0, "Credit/Debit", proceedToCheckout, "Credit/Debit Card", nextFunc);
+	addButton(1, "PayPal", proceedToCheckout, "Paypal", nextFunc);
+	addButton(2, "Interac", proceedToCheckout, "Interac", nextFunc);
+	addButton(3, "COMING SOON!", doNothing);
+	addButton(4, "COMING SOON!", doNothing);
+	addButton(14, "Cancel", nextFunc);
+}
+private function proceedToCheckout(method:String, nextFunc:Function):void {
+	clearOutput();
+	outputText("You will be taken to an external website to complete your checkout. Proceed?");
+	doYesNo(reallyCheckout, nextFunc);
+}
+//You just got TROLLED!
+private function reallyCheckout():void {
+	clearOutput();
+	outputText(images.showImage("monster-troll"));
+	outputText("APRIL FOOLS! The game will ALWAYS be entirely free to play. :)");
+	flags[kFLAGS.DLC_APRIL_FOOLS] = 1;
+	doNext(camp.campMenu);
+}
+
 /*Notes:
 ---------------------------------------------------------------------------------------------------------------------------------------------
 1. talk a little to the ponies, aka get to know them a little and their personalities

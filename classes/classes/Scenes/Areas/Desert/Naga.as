@@ -67,12 +67,11 @@
 				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.", false);
 			}
 			else {
-				outputText("Before you can even think, you feel a sharp pain at your side as the naga's tail slams into you and shoves you into the sands. You pick yourself up, wincing at the pain in your side.", false);
+				outputText("Before you can even think, you feel a sharp pain at your side as the naga's tail slams into you and shoves you into the sands. You pick yourself up, wincing at the pain in your side. ", false);
 				var damage:Number = 10;
 				if(player.armorDef < 10) damage += 10 - player.armorDef;
 				damage += rand(3);
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")", false);
+				damage = player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}

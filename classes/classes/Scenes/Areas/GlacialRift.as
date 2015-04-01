@@ -32,7 +32,10 @@ package classes.Scenes.Areas
 		public function exploreGlacialRift():void {
 			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++
 			doNext(1);
-			
+			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
+				getGame().DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();

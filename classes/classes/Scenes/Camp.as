@@ -1025,6 +1025,10 @@ public function campLoversMenu():void {
 	var hel:Function = null;
 	var nieve:Function = null;
 	clearOutput();
+	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
+		getGame().DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", camp.campMenu);
+		return;
+	}
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
 		kGAMECLASS.nieveCampDescs();
 		outputText("\n\n");
@@ -1203,6 +1207,10 @@ public function campSlavesMenu():void {
 	var sophieEvent:Function = null;
 	var jojoEvent:Function = null;
 	var goo:Function = null;
+	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
+		getGame().DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", camp.campMenu);
+		return;
+	}
 	if(vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 		vapula.vapulaSlaveFlavorText();
 		outputText("\n\n");
@@ -1337,10 +1345,12 @@ private function campActions():void {
 }
 
 private function swimInStream():void {
-	izmaJoinsStream = false;
-	marbleJoinsStream = false;
-	heliaJoinsStream = false;
-	amilyJoinsStream = false;
+	var izmaJoinsStream:Boolean = false;
+	var marbleJoinsStream:Boolean = false;
+	var heliaJoinsStream:Boolean = false;
+	var amilyJoinsStream:Boolean = false;
+	var emberJoinsStream:Boolean = false;
+	var rathazulJoinsStream:Boolean = false; //Rare, 10% chance.
 	
 	var prankChooser:Number = rand(3);
 	outputText("You ponder over the nearby stream that's flowing. Deciding you'd like a dip, ", true);
@@ -1377,6 +1387,18 @@ private function swimInStream():void {
 		if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", especially when her penis is exposed", false)
 		outputText(". She walks into the waters and swims.  ", false)
 		amilyJoinsStream = true;
+	}
+	//Ember 
+	if (rand(4) == 0 && camp.followerEmber())
+	{
+		outputText("\n\nYou catch a glimpse of Ember taking a daily bath.", false)
+		emberJoinsStream = true;
+	}
+	//Rathazul (RARE)
+	if (rand(10) == 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
+	{
+		outputText("\n\nYou spot Rathazul walking into the shallow section of stream, most likely taking a bath to get rid of the smell.", false)
+		rathazulJoinsStream = true;
 	}
 	//Pranks!
 	if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)) )
@@ -2568,9 +2590,9 @@ private function updateAchievements():void {
 	if (player.level >= 15) awardAchievement("Journeyman", kACHIEVEMENTS.LEVEL_JOURNEYMAN);
 	if (player.level >= 20) awardAchievement("Expert", kACHIEVEMENTS.LEVEL_EXPERT);
 	if (player.level >= 30) awardAchievement("Master", kACHIEVEMENTS.LEVEL_MASTER);
-	if (player.level >= 40) awardAchievement("Grandmaster", kACHIEVEMENTS.LEVEL_GRANDMASTER);
-	//if (player.level >= 50) awardAchievement("Illuistrous", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS);
-	//if (player.level >= 60) awardAchievement("Overlord", kACHIEVEMENTS.LEVEL_OVERLORD);
+	if (player.level >= 45) awardAchievement("Grandmaster", kACHIEVEMENTS.LEVEL_GRANDMASTER);
+	if (player.level >= 60) awardAchievement("Illuistrous", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS);
+	//if (player.level >= 75) awardAchievement("Overlord", kACHIEVEMENTS.LEVEL_OVERLORD);
 	if (player.level >= 100) awardAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD);
 	
 	//Population

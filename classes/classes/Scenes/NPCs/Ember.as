@@ -39,9 +39,8 @@ package classes.Scenes.NPCs
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage <= 0) outputText("Ember's claws scrape noisily but harmlessly off your [armor].");
 				else {
-					damage = player.takeDamage(damage);
-					outputText("Ember's claws rip into you, leaving stinging wounds.");
-					outputText(" (" + damage + ")");
+					outputText("Ember's claws rip into you, leaving stinging wounds. ");
+					damage = player.takeDamage(damage, true);
 				}
 			}
 			combatRoundOver();
@@ -59,10 +58,9 @@ package classes.Scenes.NPCs
 				outputText("Ember inhales deeply, then "+ emberMF("his","her") + " jaws open up, releasing streams of fire, ice and lightning; magical rather than physical, the gaudy displays lose cohesion and amalgamate into a column of raw energy as they fly at you.");
 				if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("  It's a narrow thing, but you manage to throw yourself aside at the last moment.  Fortunately, the energy whirling around and tearing up the soil blinds Ember to your escape until you have recovered and are ready to keep fighting.");
 				else {
-					outputText("  The pain as the deadly combination washes over you is indescribable.  It's a miracle that you endure it, and even Ember looks amazed to see you still standing.");
+					outputText("  The pain as the deadly combination washes over you is indescribable.  It's a miracle that you endure it, and even Ember looks amazed to see you still standing. ");
 					var damage:Number = 100 + rand(100);
-					damage = player.takeDamage(damage);
-					outputText(" (" + damage + ")");
+					damage = player.takeDamage(damage, true);
 				}
 			}
 			combatRoundOver();
@@ -85,9 +83,8 @@ package classes.Scenes.NPCs
 			}
 			else {
 				var damage:int = int((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
-				outputText("  The tail slams into you with bone-cracking force, knocking you heavily to the ground even as the spines jab you wickedly.  You gasp for breath in pain and shock, but manage to struggle to your feet again.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				outputText("  The tail slams into you with bone-cracking force, knocking you heavily to the ground even as the spines jab you wickedly.  You gasp for breath in pain and shock, but manage to struggle to your feet again. ");
+				damage = player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -96,17 +93,20 @@ package classes.Scenes.NPCs
 		private function dragonFarce():void {
 			//Effect: Stuns the PC for one turn and deals some damage, not much though. (Note: PC's version of this does something different and Ember has no cooldown to use this again. Obviously do not spam or peeps will rage.)
 			//Description:
-			outputText("Ember bares "+ emberMF("his","her") + " teeth and releases a deafening roar; a concussive blast of force heads straight for you!");
-			outputText("  Try as you might, you can't seem to protect yourself; and the blast hits you like a stone, throwing you to the ground.");
-			if(player.findPerk(PerkLib.Resolute) < 0) {
-				outputText("  Your head swims - it'll take a moment before you can regain your balance.");
-				//Miss: You quickly manage to jump out of the way and watch in awe as the blast gouges into the ground you were standing on mere moments ago.
-				player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+			outputText("Ember bares "+ emberMF("his","her") + " teeth and releases a deafening roar; a concussive blast of force heads straight for you!  ");
+			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+				outputText("You quickly manage to jump out of the way and watch in awe as the blast gouges into the ground you were standing on mere moments ago.");
 			}
-			createStatusAffect(StatusAffects.StunCooldown,4,0,0,0);
-			var damage:Number = 10 + rand(10);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			else {
+				outputText("Try as you might, you can't seem to protect yourself; and the blast hits you like a stone, throwing you to the ground. ");
+				if(player.findPerk(PerkLib.Resolute) < 0) {
+					outputText("Your head swims - it'll take a moment before you can regain your balance. ");
+					player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+				}
+				createStatusAffect(StatusAffects.StunCooldown,4,0,0,0);
+				var damage:Number = 10 + rand(10);
+				damage = player.takeDamage(damage, true);
+			}
 			combatRoundOver();
 		}
 		

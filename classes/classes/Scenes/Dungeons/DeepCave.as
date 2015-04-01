@@ -496,7 +496,7 @@ package classes.Scenes.Dungeons
 			outputText(", you need to find her and bring her down.  What do you do?", false);
 			outputText("\n\n(Sexually Interrogate, Kill Him, or Offer Safety for Information?)\n", false);
 			//[Sexual Interrogation] [Brutal Interrogation] [Release for Info]
-			simpleChoices("Sexual",sexualInterrogation,"End Him",endZetaz,"Safety",releaseZForInfo,"",0,"",0);
+			simpleChoices("Sexual",sexualInterrogation,"End Him",endZetaz,"Safety",releaseZForInfo,"Rape",0,"",0);
 		}
 
 		//[Release Zetaz 4 Info Win]

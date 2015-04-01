@@ -275,7 +275,7 @@ private function rathazulWorkOffer():Boolean {
 		lethiciteDefense = growLethiciteDefense;
 	}
 	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
-		if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)) {
+		if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || player.findPerk(PerkLib.BroBrains) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)) {
 			rathazulDebimboOffer();
 			return true;
 		}
@@ -481,9 +481,14 @@ private function rathazulDebimboOffer():void {
 		}
 		else {
 			//Notification if the PC is the one bimbo'ed*
-			outputText("\n\nRathazul glances your way as you approach his lab, a thoughtful expression on his age-lined face.  \"<i>Tell me [name], do you truly enjoy living your life under the debilitating effects of that cursed potion?  Even now the spark of intelligence has all but left from your eyes.  Do you even understand what I'm saying?</i>\"");
-			outputText("\n\nYou twirl a lock of hair around your finger and giggle.  This silly old rat thinks you're like, dumb and stuff!  He just doesn't know how great it is to have a rocking body and a sex-drive that's always ready to suck and fuck.  It's so much fun!  You look back at the rat, realizing you haven't answered him yet, feeling a bit embarrassed as he sighs in disappointment.");
-			outputText("\n\n\"<i>Child, please... bring me five Scholar's Teas and 250 gems for reagents, then I can fix you!  I can help you!  Just... get the tea!</i>\" the alchemist pleads, counting off to five on his clawed fingers for extra emphasis while shaking his gem pouch profusely.  You bite your lower lip— he seems really really mad about this or something.  Maybe you should like, get the tea?");
+			if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+				outputText("\n\nRathazul glances your way as you approach his lab, a thoughtful expression on his age-lined face.  \"<i>Tell me [name], do you truly enjoy living your life under the debilitating effects of that cursed potion?  Even now the spark of intelligence has all but left from your eyes.  Do you even understand what I'm saying?</i>\"");
+				outputText("\n\nYou twirl a lock of hair around your finger and giggle.  This silly old rat thinks you're like, dumb and stuff!  He just doesn't know how great it is to have a rocking body and a sex-drive that's always ready to suck and fuck.  It's so much fun!  You look back at the rat, realizing you haven't answered him yet, feeling a bit embarrassed as he sighs in disappointment.");
+				outputText("\n\n\"<i>Child, please... bring me five Scholar's Teas and 250 gems for reagents, then I can fix you!  I can help you!  Just... get the tea!</i>\" the alchemist pleads, counting off to five on his clawed fingers for extra emphasis while shaking his gem pouch profusely.  You bite your lower lip— he seems really really mad about this or something.  Maybe you should like, get the tea?");
+			}
+			else if (player.findPerk(PerkLib.BroBrains) >= 0) {
+				outputText("\n\nRathazul glances your way as you approach his lab, a thoughtful expression on his age-lined face.  \"<i>I see you happen to have drank a can of Bro Brew in the past. If you ever need me to restore your intelligence capabilities, bring me five scholar teas and 250 gems. Thanks Marae you're not a bimbo; that would have been worse.</i>\"");
+			}
 		}
 		flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED]++;
 	}
@@ -580,8 +585,8 @@ private function commissionSilkArmorForReal():void {
 	statScreenRefresh();
 	player.destroyItems(useables.T_SSILK, 5);
 	menu();
-	addButton(0, "Armor", chooseArmorOrRobes, 1);
-	addButton(1, "Robes", chooseArmorOrRobes, 2);
+	addButton(0, "Armor", chooseArmorOrRobes, 1, null, null, armors.SSARMOR.description);
+	addButton(1, "Robes", chooseArmorOrRobes, 2, null, null, armors.SS_ROBE.description);
 	addButton(2, "Bra", chooseArmorOrRobes, 3);
 	addButton(3, "Panties", chooseArmorOrRobes, 4);
 	addButton(4, "Loincloth", chooseArmorOrRobes, 5);
@@ -699,12 +704,45 @@ private function craftCarapace():void {
 private function craftDragonscaleArmor():void {
 	spriteSelect(49);
 	clearOutput();
-	outputText(images.showImage("rathazul-craft-dragonscalearmor"));
-	outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ");
-	outputText("It has nicely decorated pauldrons to give an imposing looks. You touch the armor and feel the scaly texture. \"<i>It's quite flexible and should offer very good protection,</i>\" Rathazul says.", false);
+	outputText("The rat looks at the sheets of dragon scales you're carrying and says, \"<i>I could work these into armor. Or if you want, undergarments. I have the necessary supplies.</i>\"");
+	menu();
+	addButton(0, "Armor", craftDragonscaleArmorForReal, 0, null, null, armors.DSCLARM.description);
+	addButton(2, "Bra", craftDragonscaleArmorForReal, 2, null, null, undergarments.DS_BRA.description);
+	addButton(3, "Thong", craftDragonscaleArmorForReal, 3, null, null, undergarments.DSTHONG.description);
+	addButton(4, "Loincloth", craftDragonscaleArmorForReal, 4, null, null, undergarments.DS_LOIN.description);
+}
+private function craftDragonscaleArmorForReal(type:int = 0):void {
+	spriteSelect(49);
+	clearOutput();
 	player.destroyItems(useables.D_SCALE, 5);
 	player.addStatusValue(StatusAffects.MetRathazul,2,1);
-	inventory.takeItem(armors.DSCLARM, returnToRathazulMenu);
+	if (type == 0) { //Armor
+		outputText(images.showImage("rathazul-craft-dragonscalearmor"));
+		outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ");
+		outputText("It has nicely decorated pauldrons to give an imposing looks. You touch the armor and feel the scaly texture. \"<i>It's quite flexible and should offer very good protection,</i>\" Rathazul says.", false);
+		inventory.takeItem(armors.DSCLARM, returnToRathazulMenu);
+	}
+	else if (type == 1) { //Robes, not used.
+
+	}
+	else if (type == 2) { //Bra
+		outputText(images.showImage("rathazul-craft-dragonscalebra"));
+		outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the bra.  ");
+		outputText("It's nicely textured with dragon scales. \"<i>I've used leather straps to maintain the flexibility. It should be comfortable and protective,</i>\" Rathazul says.", false);
+		inventory.takeItem(undergarments.DS_BRA, returnToRathazulMenu);
+	}
+	else if (type == 3) { //Thong
+		outputText(images.showImage("rathazul-craft-dragonscalethong"));
+		outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the thong.  ");
+		outputText("It's nicely textured with dragon scales. \"<i>I've used leather straps to maintain the flexibility. It should be comfortable and protective,</i>\" Rathazul says.", false);
+		inventory.takeItem(undergarments.DSTHONG, returnToRathazulMenu);
+	}
+	else if (type == 4) { //Loincloth
+		outputText(images.showImage("rathazul-craft-dragonscaleloincloth"));
+		outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the loincloth.  ");
+		outputText("It's nicely textured with dragon scales. \"<i>I've used leather straps to maintain the flexibility. It should be comfortable and protective,</i>\" Rathazul says.", false);
+		inventory.takeItem(undergarments.DS_LOIN, returnToRathazulMenu);
+	}
 }
 
 private function craftMaraeArmor(divine:Boolean = false):void {

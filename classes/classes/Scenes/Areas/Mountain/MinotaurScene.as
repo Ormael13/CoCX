@@ -773,6 +773,15 @@ public function minoCumUpdate():Boolean {
 			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
 			output = true;
 		}
+		if (flags[kFLAGS.MINOTAUR_CUM_RESISTANCE_TRACKER] >= 150 && player.findPerk(PerkLib.MinotaurCumAddict) < 0) {
+			if(player.findPerk(PerkLib.MinotaurCumResistance) >= 0) {}
+			else {
+				flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
+				player.createPerk(PerkLib.MinotaurCumResistance, 0, 0, 0, 0);
+				outputText("\n<b>You have finally learned enough about how to avoid getting addicted to Minotaur Cum again; you are now immune to the addictive properties of Minotaur Cum.</b> (You can never get addicted to Minotaur Cum.)\n", false);
+				output = true;
+			}
+		}
 	}
 	//If over 50, addicted, become addicted, withdrawl, etc
 	else {
@@ -797,7 +806,7 @@ public function minoCumUpdate():Boolean {
 			outputText("\n<b>A steady fire of lust slowly grows within you as you shiver and grab at your head.  You're in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n", false);
 		}
 		//UBER ADDICTION MESSAGE
-		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 100) {
+		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 100 && player.findPerk(PerkLib.MinotaurCumResistance) < 0) {
 			if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {}
 			else {
 				player.createPerk(PerkLib.MinotaurCumAddict,0,0,0,0);
@@ -816,7 +825,10 @@ public function minoCumUpdate():Boolean {
 
 	//Decrement addiction value as needed
 	if(flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48 && player.findPerk(PerkLib.MinotaurCumAddict) < 0) {
-		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 0.15) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] -= 0.15;
+		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 0.15) {
+			flags[kFLAGS.MINOTAUR_CUM_RESISTANCE_TRACKER] += 0.15;
+			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] -= 0.15;
+		}
 	}
 	//Increment time since last imbibing cum...
 	//used for withdrawal and reducing overall addiction.

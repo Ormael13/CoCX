@@ -1373,13 +1373,14 @@ public function attack():void {
 	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
-	if(monster is Basilisk) {
+	if(monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0) {
 		//basilisk counter attack (block attack, significant speed loss): 
 		if(player.inte/5 + rand(20) < 25 && monster.findStatusAffect(StatusAffects.Blind) < 0) {
 			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.", false);
 			Basilisk.basiliskSpeed(player,20);
 			player.removeStatusAffect(StatusAffects.FirstAttack);
 			combatRoundOver();
+			flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
 			return;
 		}
 		//Counter attack fails: (random chance if PC int > 50 spd > 60; PC takes small physical damage but no block or spd penalty)
@@ -1467,6 +1468,7 @@ public function attack():void {
 	}
 	else damage = player.str;
 	if (isWieldingRangedWeapon()) damage += (player.spe / 5);
+	if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield != ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage += (player.str * 0.2);
 	//Weapon addition!
 	damage += player.weaponAttack;
 	//Bonus sand trap damage!
@@ -1825,28 +1827,34 @@ public function playerStinger():void {
 	if(monster.HP > 0 && monster.lust < 100) enemyAI();
 	else doNext(endLustVictory);
 }
+
 public function combatMiss():Boolean {
 	return player.spe - monster.spe > 0 && int(Math.random() * (((player.spe - monster.spe) / 4) + 80)) > 80;
-
 }
 public function combatEvade():Boolean {
 	return monster.short != "Kiha" && player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10;
-
 }
 public function combatFlexibility():Boolean {
 	return player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6;
-
 }
 public function combatMisdirect():Boolean {
 	return player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit";
 }
+public function combatParry():Boolean {
+	return player.findPerk(PerkLib.Parry) >= 0 && player.spe >= 50 && player.str >= 50 && rand(100) < ((player.spe - 50) / 5) && player.weapon != WeaponLib.FISTS;
+	trace("Parried!");
+}
+public function combatCritical():Boolean {
+	return rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50) / 5 > rand(100)) || (player.findPerk(PerkLib.Blademaster) >= 0 && rand(100) < 10 && (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut"));
+}
+
 public function combatBlock(doFatigue:Boolean = false):Boolean {
 	//Set chance
 	var blockChance:int = 20 + player.shieldBlock + Math.floor((player.str - monster.str) / 5);
+	if (player.findPerk(PerkLib.ShieldMastery) >= 0 && player.tou >= 50) blockChance += (player.tou - 50) / 5;
 	if (blockChance < 10) blockChance = 10;
 	//Fatigue limit
-	var fatigueLimit:int = player.maxFatigue() - 10;
-	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueLimit += 5;
+	var fatigueLimit:int = player.maxFatigue() - physicalCost(10);;
 	if (blockChance >= (rand(100) + 1) && player.fatigue <= fatigueLimit && player.shieldName != "nothing") {
 		if (doFatigue) fatigue(10, 2);
 		return true;
@@ -2139,6 +2147,7 @@ public function combatStatusesUpdate():void {
 		Basilisk.basiliskSpeed(player,15);
 		//Continuing effect text: 
 		outputText("<b>You still feel the spell of those grey eyes, making your movements slow and difficult, the remembered words tempting you to look into its eyes again. You need to finish this fight as fast as your heavy limbs will allow.</b>\n\n", false);
+		flags[kFLAGS.BASILISK_RESISTANCE_TRACKER]++;
 	}
 	if(player.findStatusAffect(StatusAffects.IzmaBleed) >= 0) {
 		if(player.statusAffectv1(StatusAffects.IzmaBleed) <= 0) {
@@ -5893,7 +5902,7 @@ public function tailWhipAttack():void {
 
 public function shieldBash():void {
 	clearOutput();
-	if (player.fatigue > player.maxFatigue() - 10) {
+	if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to perform a shield bash.");
 		doNext(5000);
 		return;
@@ -5906,7 +5915,8 @@ public function shieldBash():void {
 		enemyAI();
 		return;
 	}
-	var damage:int = 10 + (player.str/1.5) + rand(player.str/2) + (player.shieldBlock * 2);
+	var damage:int = 10 + (player.str / 1.5) + rand(player.str / 2) + (player.shieldBlock * 2);
+	if (player.findPerk(PerkLib.ShieldSlam) >= 0) damage *= 1.2;
 	var damageReduction:int = rand(monster.tou) / 2;
 	damage -= damageReduction;
 	if (damage < 1) damage = 1;
@@ -5917,8 +5927,8 @@ public function shieldBash():void {
 	if (monster.findStatusAffect(StatusAffects.Stunned) < 0 && rand(chance) == 0) {
 		outputText("<b>Your impact also manages to stun " + monster.a + monster.short + "!</b> ");
 		monster.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
-		if (monster.findStatusAffect(StatusAffects.TimesBashed) < 0) monster.createStatusAffect(StatusAffects.TimesBashed, 1, 0, 0, 0);
-		else monster.addStatusValue(StatusAffects.TimesBashed, 1, 1);
+		if (monster.findStatusAffect(StatusAffects.TimesBashed) < 0) monster.createStatusAffect(StatusAffects.TimesBashed, player.findPerk(PerkLib.ShieldSlam) >= 0 ? 0.5 : 1, 0, 0, 0);
+		else monster.addStatusValue(StatusAffects.TimesBashed, 1, player.findPerk(PerkLib.ShieldSlam) >= 0 ? 0.5 : 1);
 	}
 	checkAchievementDamage(damage);
 	fatigue(20,2);

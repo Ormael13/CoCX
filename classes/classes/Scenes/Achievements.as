@@ -74,7 +74,8 @@ package classes.Scenes
 			addAchievement("Journeyman", kACHIEVEMENTS.LEVEL_JOURNEYMAN, "Get to level 15.");
 			addAchievement("Expert", kACHIEVEMENTS.LEVEL_EXPERT, "Get to level 20.");
 			addAchievement("Master", kACHIEVEMENTS.LEVEL_MASTER, "Get to level 30.");
-			addAchievement("Grandmaster", kACHIEVEMENTS.LEVEL_GRANDMASTER, "Get to level 40.", "", true);
+			addAchievement("Grandmaster", kACHIEVEMENTS.LEVEL_GRANDMASTER, "Get to level 45.");
+			addAchievement("Illuistrous", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS, "Get to level 60.");
 			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to level 100.", "Get to level 100. (Your powers would have surpassed Marae's by now.)", true);
 			
 			titleAchievementSection("Population"); //6 achievements

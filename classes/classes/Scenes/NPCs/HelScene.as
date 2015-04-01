@@ -351,6 +351,13 @@ private function helFuckMenu():void {
 	var tailWank:Function = null;
 	var dp:Function = null;
 	var getBlown:Function = null;
+	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
+		outputText("\n\n<b>Helia DLC is required!</b>");
+		menu();
+		addButton(0, "Get DLC", getGame().DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
+		addButton(4, "Leave", declineHelSexings);
+		return;
+	}
 	if(player.hasCock()) {
 		if(player.cockThatFits(85) >= 0) {
 			fuckVag = beatUpHelAndStealHerWalletFromHerVagina;

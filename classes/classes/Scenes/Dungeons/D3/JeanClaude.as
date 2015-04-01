@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.D3
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.Items.*
 	
 	/**
 	 * ...
@@ -34,7 +35,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function handleTease(lustDelta:Number, successful:Boolean):void
 		{
-			if (player.findStatusAffect(StatusAffects.RemovedArmor) < 0)
+			if (player.findStatusAffect(StatusAffects.RemovedArmor) < 0 && player.armor != ArmorLib.NOTHING)
 			{
 				outputText("\n\nJean-Claude stops circling you, looking mildly surprised as you attempt to entice him with your body.");
 

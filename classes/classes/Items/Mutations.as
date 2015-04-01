@@ -90,6 +90,7 @@
 			var temp3:Number = 0;
 			var rando:Number = rand(100);
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) rando += 10;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) rando -= 10;
 			outputText("The draft is slick and sticky, ", true);
 			if (player.cor <= 33) outputText("just swallowing it makes you feel unclean.", false);
 			if (player.cor > 33 && player.cor <= 66) outputText("reminding you of something you just can't place.", false);
@@ -346,8 +347,9 @@
 			clearOutput();
 			//Minotaur cum addiction
 			if (!purified) player.minoCumAddiction(7);
+			else player.minoCumAddiction(-2);
 			outputText("As soon as you crack the seal on the bottled white fluid, a ", false);
-			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0) outputText("potent musk washes over you.", false);
+			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0 && player.findPerk(PerkLib.MinotaurCumResistance) < 0) outputText("potent musk washes over you.", false);
 			else outputText("heavenly scent fills your nostrils.", false);
 			if (!purified) {
 				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.", false);
@@ -381,7 +383,7 @@
 				else outputText("  Slick fluids soak your thighs as your body reacts to this new stimulus.", false);
 			}
 			//(Minotaur fantasy)
-			if (!kGAMECLASS.inCombat && rand(10) == 1 && !purified) {
+			if (!kGAMECLASS.inCombat && rand(10) == 1 && (!purified && player.findPerk(PerkLib.MinotaurCumResistance) < 0)) {
 				outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.", false);
 				dynStats("lib", 1, "lus", rand(5) + player.cor / 20 + flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] / 5);
 			}
@@ -394,6 +396,16 @@
 			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] <= 0 && !purified) {
 				flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] = 3 + rand(2);
 				outputText("\n\n<b>Your body feels so amazing and sensitive.  Experimentally you pinch yourself and discover that even pain is turning you on!</b>", false);
+			}
+			//Clear mind a bit
+			if (purified && (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 40)) {
+				outputText("\n\nYour mind feels a bit clearer just from drinking the purified minotaur cum. Maybe if you drink more of these, you'll be able to rid yourself of your addiction?");
+				if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] <= 50) {
+					outputText("  Suddenly, you black out and images flash in your mind about getting abducted by minotaurs and the abandonment of your quest that eventually leads to Lethice's success in taking over Mareth. No, it cannot be! You wake up and recover from the blackout, horrified to find out what would really happen if you spend the rest of your life with the Minotaurs! You shake your head and realize that you're no longer dependent on the cum.  ");
+					outputText("\n<b>(Lost Perk: Minotaur Cum Addict!)</b>");
+					player.removePerk(PerkLib.MinotaurCumAddict);
+				}
+				
 			}
 			player.refillHunger(25);
 		}
@@ -409,6 +421,7 @@
 			if (rand(3) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			if (changeLimit == 1) changeLimit = 2;
 			//Temporary storage
 			var temp:Number = 0;
@@ -834,6 +847,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Used for random chances
 			//Set up output
 			outputText("You down the potion, grimacing at the strong taste.", true);
@@ -853,7 +867,7 @@
 					player.createStatusAffect(StatusAffects.HorseWarning, 0, 0, 0, 0);
 				}
 				//Bad End
-				if (rand(4) == 0 && player.findStatusAffect(StatusAffects.HorseWarning) >= 0) {
+				if (rand(4) == 0 && player.findStatusAffect(StatusAffects.HorseWarning) >= 0 && player.findPerk(PerkLib.TransformationResistance) < 0) {
 					//Must have been warned first...
 					if (player.statusAffectv1(StatusAffects.HorseWarning) > 0) {
 						//If player has dicks check for horsedicks
@@ -1323,6 +1337,7 @@
 			var changeLimit:Number = 1;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			player.slimeFeed();
 			outputText("You down the potion, grimacing at the strong taste.", true);
 			if (changes < changeLimit && rand(2) == 0 && player.spe < 80) {
@@ -1364,6 +1379,7 @@
 			var temp3:Number = 0;
 			var rando:Number = Math.random() * 100;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) rando += 10;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) rando -= 10;
 			if (rando >= 90 && !tainted) rando -= 10;
 			if (player.cor < 35) outputText("You wonder why in the gods' names you would drink such a thing, but you have to admit, it is the best thing you have ever tasted.", true);
 			if (player.cor >= 35 && player.cor < 70) {
@@ -1579,6 +1595,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Initial outputs & crit level
 			clearOutput();
 			if (type == 0) {
@@ -1614,7 +1631,7 @@
 				outputText("You eat the pepper, even the two orb-like growths that have grown out from the base.  It's delicious!", false);
 			}
 			//OVERDOSE Bad End!
-			if (type <= 0 && crit > 1 && player.skinType == SKIN_TYPE_FUR && player.faceType == FACE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && rand(2) == 0 && player.findStatusAffect(StatusAffects.DogWarning) >= 0) {
+			if (type <= 0 && crit > 1 && player.skinType == SKIN_TYPE_FUR && player.faceType == FACE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && rand(2) == 0 && player.findStatusAffect(StatusAffects.DogWarning) >= 0 && player.findPerk(PerkLib.TransformationResistance) < 0) {
 				temp = rand(2);
 				if (temp == 0) {
 					outputText("\n\nAs you swallow the pepper, you note that the spicy hotness on your tongue seems to be spreading. Your entire body seems to tingle and burn, making you feel far warmer than normal, feverish even. Unable to stand it any longer you tear away your clothes, hoping to cool down a little. Sadly, this does nothing to aid you with your problem. On the bright side, the sudden feeling of vertigo you've developed is more than enough to take your mind off your temperature issues. You fall forward onto your hands and knees, well not really hands and knees to be honest. More like paws and knees. That can't be good, you think for a moment, before the sensation of your bones shifting into a quadrupedal configuration robs you of your concentration. After that, it is only a short time before your form is remade completely into that of a large dog, or perhaps a wolf. The distinction would mean little to you now, even if you were capable of comprehending it. ", false);
@@ -2312,6 +2329,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Generic drinking text
 			outputText("You uncork the bottle and drink down the strange substance, struggling to down the thick liquid.", true);
 			//low corruption thoughts
@@ -2387,6 +2405,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Generic drinking text
 			outputText("You uncork the bottle and drink down the strange substance, struggling to down the thick liquid.", true);
 			//low corruption thoughts
@@ -3383,6 +3402,7 @@
 			if (rand(3) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			if (enhanced) changeLimit += 2;
 			//Temporary storage
 			var temp:Number = 0;
@@ -3906,6 +3926,7 @@
 			if (rand(4) == 0) changeLimit++;
 			if (rand(5) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.", true);
 			dynStats("lus", 15);
 			//Stronger
@@ -4239,6 +4260,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			if (type == 0) outputText("You have no idea why, but you decide to eat the pointed tooth. To your surprise, it's actually quite brittle, turning into a fishy-tasting dust. You figure it must just be a tablet made to look like a shark's tooth.", true);
 			else if (type == 1) outputText("You have no idea why, but you decide to eat the pointed, glowing tooth. To your surprise, it's actually quite brittle, crumbling into a fishy-tasting dust. Maybe it's just a tablet made to look like a shark's tooth.", true);
 			//STATS
@@ -4423,6 +4445,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//b) Description while used
 			outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.", false);
 			//(if outside combat)
@@ -4643,6 +4666,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			clearOutput();
 			outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.", false);
 			player.refillHunger(20);
@@ -4932,6 +4956,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Text go!
 			clearOutput();
 			outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.", false);
@@ -5239,6 +5264,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(4) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//clear screen
 			clearOutput();
 			outputText("You uncork the vial of fluid and drink it down.  The taste is sour, like a dry wine with an aftertaste not entirely dissimilar to alcohol.  Instead of the warmth you'd expect, it leaves your throat feeling cold and a little numb.", false);
@@ -5640,6 +5666,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//If this is a pregnancy change, only 1 change per proc.
 			if (pregnantChange) changeLimit = 1;
 			else clearOutput();
@@ -5981,6 +6008,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Generic eating text:
 			clearOutput();
 			outputText("You pop the nut into your mouth, chewing the delicious treat and swallowing it quickly.  No wonder harpies love these things so much!", false);
@@ -6325,6 +6353,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Used as a holding variable for biggest dicks and the like
 			var biggestCock:Number;
 			//****************
@@ -6332,7 +6361,7 @@
 			//****************
 			//-Int less than 10
 			if (player.inte < 10) {
-				if (player.inte < 8 && player.kangaScore() >= 5) {
+				if (player.inte < 8 && player.kangaScore() >= 5 && player.findPerk(PerkLib.TransformationResistance) < 0) {
 					outputText("\n\nWhile you gnaw on the fibrous fruit, your already vacant mind continues to empty, leaving nothing behind but the motion of your jaw as you slowly chew and swallow your favorite food.  Swallow.  Chew.  Swallow.  You don't even notice your posture worsening or your arms shortening.  Without a single thought, you start to hunch over but keep munching on the food in your paws as if were the most normal thing in the world.  Teeth sink into one of your fingers, leaving you to yelp in pain.  With the last of your senses, you look at your throbbing paw to notice you've run out of kanga fruit!", false);
 					outputText("\n\nStill hungry and licking your lips in anticipation, you sniff in deep lungfuls of air.  There's more of that wonderful fruit nearby!  You bound off in search of it on your incredibly muscular legs, their shape becoming more and more feral with every hop.  Now guided completely by instinct, you find a few stalks that grow from the ground.  Your belly rumbles, reminding you of your hunger, as you begin to dig into the kanga fruits...", false);
 					outputText("\n\nLosing more of what little remains of yourself, your body is now entirely that of a feral kangaroo and your mind has devolved to match it.  After you finish the handful of fruits you found, you move on in search for more of the tasty treats.  Though you pass by your camp later on, there's no memory, no recognition, just a slight feeling of comfort and familiarity.  There's no food here so you hop away.", false);
@@ -6555,6 +6584,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Consuming Text
 			if (type == 0) outputText("You wad up the sweet, pink gossamer and eat it, finding it to be delicious and chewy, almost like gum.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat.", false);
 			else if (type == 1) outputText("You wad up the sweet, black gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat.", false);
@@ -6871,7 +6901,8 @@
 				}
 				outputText("Finally, you feel the transformation skittering to a halt, leaving you to openly roam your new chiseled and sex-ready body.  So what if you can barely form coherent sentences anymore?  A body like this does all the talking you need, you figure!", false);
 				if (player.inte > 35) {
-					player.inte = 35;
+					var boost:Number = (player.inte-35) / 5;
+					player.inte = 35 + boost;
 					dynStats("int", -0.1);
 
 				}
@@ -6991,7 +7022,10 @@
 				outputText("<b>(Perk Lost - Feeder!)</b>\n", false);
 				player.removePerk(PerkLib.Feeder);
 			}
-			if (player.inte > 21) player.inte = 21;
+			if (player.inte > 21) {
+				boost = (player.inte-20) / 5;
+				player.inte = 21 + boost;
+			}
 			dynStats("str", 33, "tou", 33, "int", -1, "lib", 4, "lus", 40);
 			player.refillHunger(30);
 		}
@@ -7013,6 +7047,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Effect script 1:  (higher intelligence)
 			if (player.inte < 100 && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.", false);
@@ -7113,6 +7148,7 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 
 			//possible use effects:
 			//- toughess up, sensitivity down
@@ -7279,10 +7315,12 @@
 			if (enhanced) changeLimit += 2;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Used for dick and boob TFs
 			var counter:int = 0;
 
-			if (player.faceType == FACE_FOX && player.tailType == TAIL_TYPE_FOX && player.earType == EARS_FOX && player.lowerBody == LOWER_BODY_TYPE_FOX && player.skinType == SKIN_TYPE_FUR && rand(3) == 0) {
+			if (player.faceType == FACE_FOX && player.tailType == TAIL_TYPE_FOX && player.earType == EARS_FOX && player.lowerBody == LOWER_BODY_TYPE_FOX && player.skinType == SKIN_TYPE_FUR && rand(3) == 0 && player.findPerk(PerkLib.TransformationResistance) < 0) {
 				if (flags[kFLAGS.FOX_BAD_END_WARNING] == 0) {
 					outputText("\n\nYou get a massive headache and a craving to raid a henhouse.  Thankfully, both pass in seconds, but <b>maybe you should cut back on the vulpine items...</b>");
 					flags[kFLAGS.FOX_BAD_END_WARNING] = 1;
@@ -7724,6 +7762,7 @@
 			if (rand(3) == 0) changeLimit++;
 			if (mystic) changeLimit += 2;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			if (mystic) outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie purple flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale lavender flames swirl around you, the air is filled with a sickly sweet scent that drips with the bitter aroma of licorice, filling you with a dire warmth.");
 			else outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie blue flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale azure flames swirl around you, the air is filled with a sweet scent that drips with the aroma of wintergreen, sending chills down your spine.");
 
@@ -8224,6 +8263,7 @@
 			if (rand(3) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			outputText("You pour some of the oil onto your hands and ");
 			if (player.cor < 30) outputText("hesitantly ");
 			else if (player.cor > 70) outputText("eagerly ");
@@ -8536,7 +8576,8 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
-
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//stat gains:
 			//gain speed to ceiling of 80
 			if (player.spe < 80 && rand(3) == 0 && changes < changeLimit) {
@@ -8707,7 +8748,8 @@
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
-
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//use:
 			outputText("You pop several of the beans in your mouth and suck; they immediately reward you by giving up an oily, chocolatey flavor with a hint of bitterness.  For several minutes you ");
 			if (!player.isTaur()) outputText("sit and ");
@@ -9078,7 +9120,7 @@
 					flags[kFLAGS.FERRET_BAD_END_WARNING] = 1;
 				}
 				//BEEN WARNED! BAD END! DUN DUN DUN
-				else if(rand(3) == 0)
+				else if(rand(3) == 0 && player.findPerk(PerkLib.TransformationResistance) < 0)
 				{
 					//-If you fail to heed the warning, it’s game over:
 					outputText("\n\nAs you down the fruit, you begin to feel all warm and fuzzy inside.  You flop over on your back, eagerly removing your clothes.  You laugh giddily, wanting nothing more than to roll about happily in the grass.  Finally finished, you attempt to get up, but something feels...  different.  Try as you may, you find yourself completely unable to stand upright for a long period of time.  You only manage to move about comfortably on all fours.  Your body now resembles that of a regular ferret.  That can’t be good!  As you attempt to comprehend your situation, you find yourself less and less able to focus on the problem.  Your attention eventually drifts to a rabbit in the distance.  You lick your lips. Nevermind that, you have warrens to raid!");
@@ -9099,7 +9141,7 @@
 			if(rand(2) == 0) changeLimit++;
 			if(rand(2) == 0) changeLimit++;
 			if(rand(3) == 0) changeLimit++;
-
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Ferret Fruit Effects
 			//- + Thin:
 			if(player.thickness > 15 && changes < changeLimit && rand(3) == 0)

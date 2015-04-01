@@ -736,7 +736,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 	if (player.lowerGarment != UndergarmentLib.NOTHING) {
 		if (player.isTaur() || player.isDrider() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable")) {
 			outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your " + player.lowerGarmentName + ". Looking down at your lower body, you let out a sigh and pick up your " + player.lowerGarmentName + ". ");
-			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING), camp.campMenu);
+			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), camp.campMenu);
 			return true;
 		}
 	}

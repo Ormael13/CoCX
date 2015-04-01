@@ -1633,6 +1633,7 @@ use namespace kGAMECLASS;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 60) raw /= 2;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 80) raw /= 2;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 90) raw /= 2;
+			if (findPerk(PerkLib.MinotaurCumResistance) >= 0) raw *= 0;
 			//If in withdrawl, readdiction is potent!
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) raw += 10;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) raw += 5;
@@ -1642,6 +1643,7 @@ use namespace kGAMECLASS;
 			if(raw < -50) raw = -50;
 			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] += raw;
 			//Recheck to make sure shit didn't break
+			if (findPerk(PerkLib.MinotaurCumResistance) >= 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0; //Never get addicted!
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 
@@ -2039,7 +2041,11 @@ use namespace kGAMECLASS;
 				//Min-cap
 				if (maxSpe < 50) maxSpe = 50;
 			}
-			
+			//Perks ahoy
+			if (findPerk(PerkLib.BasiliskResistance) >= 0)
+			{
+				maxSpe -= 5;
+			}
 			//Uma's Needlework affects max stats. Takes effect BEFORE racial modifiers and AFTER modifiers from body size.
 			//Caps strength from Uma's needlework. 
 			if (findPerk(PerkLib.ChiReflowSpeed) >= 0)
@@ -2057,7 +2063,6 @@ use namespace kGAMECLASS;
 					maxSpe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
 				}
 			}
-			
 			//Alter max stats depending on race
 			if (minoScore() >= 4) {
 				maxStr += 20;
@@ -2143,10 +2148,10 @@ use namespace kGAMECLASS;
 		}
 		
 		public function minotaurAddicted():Boolean {
-			return findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1;
+			return findPerk(PerkLib.MinotaurCumResistance) < 0 && (findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1);
 		}
 		public function minotaurNeed():Boolean {
-			return flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1;
+			return findPerk(PerkLib.MinotaurCumResistance) < 0 && flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1;
 		}
 
 		public function clearStatuses(visibility:Boolean):void

@@ -55,7 +55,7 @@ package classes.Scenes.Dungeons.Factory
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			doNext(factory.winAgainstOmnibus);
+			factory.winAgainstOmnibus();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -64,7 +64,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(game.endLustLoss);
 			} else {
-				doNext(factory.doLossOmnibus);
+				factory.doLossOmnibus();
 			}
 		}
 

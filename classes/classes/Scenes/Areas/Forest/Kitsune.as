@@ -56,10 +56,9 @@ package classes.Scenes.Areas.Forest
 		private function foxFireAttack():void
 		{
 			outputText("The kitsune makes a small circle in the air with her fingers, conjuring up a pale blue flame into her palm with the sound of flint striking against steel.  Pursing her lips, she blows it toward you with a kiss.");
-			outputText("\n\nThe flames burn furiously, but leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure.");
+			outputText("\n\nThe flames burn furiously, but leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure. ");
 			var damage:int = 5 + rand(20);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			damage = player.takeDamage(damage, true);
 			game.dynStats("lus", 15 + player.sens / 10);
 			combatRoundOver();
 		}

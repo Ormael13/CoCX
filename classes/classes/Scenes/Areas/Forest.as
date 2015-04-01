@@ -236,7 +236,7 @@ package classes.Scenes.Areas
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (kGAMECLASS.monk == 0) 
+				if (kGAMECLASS.monk <= 0 && player.findStatusAffect(StatusAffects.PureCampJojo) < 0) 
 				{	
 					if (player.cor < 25)
 					{
@@ -358,7 +358,6 @@ package classes.Scenes.Areas
 				beeGirlScene.beeEncounter();
 			}
 			if (chooser >= 4) {
-				trace(chooser);
 				cabinProgress.gatherWoods();
 				return;
 			}

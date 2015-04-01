@@ -27,11 +27,11 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("You ");
 			if (player.canFly()) outputText("beat your wings and ");
-			outputText("try to escape, but " + short + " wraps one of her writhing roots around your [leg], slamming you to the ground and tying you up with several more!  \"<i>And just where do you think you're going, my little meat?</i>\" she hisses.  Her bark splits open, exposing her body, and a green shaft snakes out of her crotch, sprouting thorns and blooming into a rose at the tip.  She holds the drooling blossom over your [face] as she forces your mouth open with her roots!");
+			outputText("try to escape, but " + short + " wraps one of her writhing roots around your [leg], slamming you to the ground and tying you up with several more!  \"<i>And just where do you think you're going, my little meat?</i>\" she hisses.  Her bark splits open, exposing her body, and a green shaft snakes out of her crotch, sprouting thorns and blooming into a rose at the tip.  She holds the drooling blossom over your [face] as she forces your mouth open with her roots! ");
 			//hp loss, begin lust constrict next round
 			var damage:int = 15;
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")\n\n");
+			damage = player.takeDamage(damage, true);
+			outputText("\n\n");
 			player.createStatusAffect(StatusAffects.HolliConstrict, 0, 0, 0, 0);
 			combatRoundOver();
 		}
@@ -115,13 +115,12 @@ package classes.Scenes.NPCs
 				outputText("  The darts find flesh, and you feel yourself slowing down drastically; all you want to do as the plant woman's poison takes you is fuck and sleep.  \"<i>Just give up,</i>\" Holli coos.  \"<i>Think how good it would be to fall into my arms and ");
 				if (player.hasCock()) outputText("come inside me");
 				else outputText("have me inside you");
-				outputText(", forever...</i>\"");
+				outputText(", forever...</i>\" ");
 				//lust damage, fatigue damage, light HP damage
 				game.fatigue(10);
 				game.dynStats("lus", 25);
 				var damage:Number = 20 + rand(10);
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				damage = player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -140,11 +139,11 @@ package classes.Scenes.NPCs
 			}
 			//Hit
 			else {
-				outputText("  She latches onto you with a painful smack and several more root tentacles join the first; as she pulls you close, her bark opens and a long, phallic stalk extends from her crotch, wrapped in thorns and flowering with a rose!  It caresses your face, then dangles the blossom above your mouth, dripping her sap.  Several of the roots pry your jaws apart, forcing you to drink the tainted fluids from her pseudo-cock!  \"<i>What do you think of my little sap rose?</i>\"");
+				outputText("  She latches onto you with a painful smack and several more root tentacles join the first; as she pulls you close, her bark opens and a long, phallic stalk extends from her crotch, wrapped in thorns and flowering with a rose!  It caresses your face, then dangles the blossom above your mouth, dripping her sap.  Several of the roots pry your jaws apart, forcing you to drink the tainted fluids from her pseudo-cock!  \"<i>What do you think of my little sap rose?</i>\" ");
 				//plus med HP damage on turn one, plus med-heavy lust damage every turn while constricted
 				//sap rose shitposting
 				var damage:int = 10 + rand(5);
-				damage = player.takeDamage(damage);
+				damage = player.takeDamage(damage, true);
 				game.dynStats("lus", 15);
 				player.createStatusAffect(StatusAffects.HolliConstrict, 0, 0, 0, 0);
 			}

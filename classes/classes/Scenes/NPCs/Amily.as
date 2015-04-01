@@ -80,8 +80,8 @@
 			}
 			//Got hit!
 			else {
-				damage = player.takeDamage(damage);
-				outputText("Amily dashes at you and swipes her knife, cutting you (" + damage + ").", false);
+				outputText("Amily dashes at you and swipes her knife, cutting you. ", false);
+				damage = player.takeDamage(damage, true);
 			}
 			if(damage > 0) {
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
@@ -134,10 +134,10 @@
 				}
 				//NOT BLOCKED!
 				else {
-					damage = player.takeDamage(damage);
 					if(dodged > 0) outputText("Amily dashes at you and quickly slashes you twice; you manage to avoid the first blow, but the second one hits home, cutting you", false);
 					else outputText("Amily dashes at you and slashes at you twice in the time it would take most to throw a single blow", false);
-					outputText(" (" + damage + ")!", false);
+					outputText("! ", false);
+					damage = player.takeDamage(damage, true);
 				}
 			}
 			//Dodge all!

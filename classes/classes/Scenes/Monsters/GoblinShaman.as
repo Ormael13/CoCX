@@ -88,9 +88,9 @@ package classes.Scenes.Monsters
 		
 		private function spellMultiplier():Number {
 			var mult:Number = 1;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 3) mult += 0.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 3) mult += 0.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) mult += 1.5; //Caps at 2.5x.
-			return spellMultiplier();
+			return mult;
 		}
 		
 		override protected function performCombatAction():void {

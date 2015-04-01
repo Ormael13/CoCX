@@ -25,7 +25,7 @@ package classes.Scenes.Quests.UrtaQuest
 			if (damage<=0) {
 				super.outputAttack(damage);
 			} else {
-				outputText("You misjudge his pattern and wind up getting slashed by a series of swipes from his sharpened nails.  He distances himself from you in order to avoid retaliation and glares at you with his piercing yellow eyes, a hint of a smile on his face. (" + damage + ")");
+				outputText("You misjudge his pattern and wind up getting slashed by a series of swipes from his sharpened nails.  He distances himself from you in order to avoid retaliation and glares at you with his piercing yellow eyes, a hint of a smile on his face. <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 		}
 
@@ -82,10 +82,9 @@ package classes.Scenes.Quests.UrtaQuest
 				combatRoundOver();
 			}
 //Hit:
-			outputText("The snake-man moves too quickly for you to evade and he sinks long fangs into your flesh, leaving a wound that burns with horrific pain.");
+			outputText("The snake-man moves too quickly for you to evade and he sinks long fangs into your flesh, leaving a wound that burns with horrific pain. ");
 			var damage:Number = 40 + rand(20);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			damage = player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 

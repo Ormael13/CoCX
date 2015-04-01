@@ -224,6 +224,12 @@
 				//compulsion
 				special3 = sophieCompulsionAttack;
 			}
+			select = rand(4);
+			if (select == 0) {
+				eAttack();
+				combatRoundOver();
+				return;
+			}
 			if (player.hasCock() && findStatusAffect(StatusAffects.BimboBrawl) < 0) rando = 1 + rand(3);
 			else rando = 1 + rand(2);
 			if (rando == 1) game.eventParser(special1);

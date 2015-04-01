@@ -33,8 +33,8 @@ package classes.Scenes.Dungeons.HelDungeon
 			//If fail:
 			if(rand(10) > 0 && player.str/5 + rand(20) < 23) {
 				var damage:Number = 80 + rand(40);
-				damage = player.takeDamage(damage);
-				outputText("You struggle in the harpies' grasp, but can't quite get free.  The brood continues to hammer away at your defenseless self. (" + damage + ")");
+				outputText("You struggle in the harpies' grasp, but can't quite get free.  The brood continues to hammer away at your defenseless self. ");
+				damage = player.takeDamage(damage, true);
 			}
 			//Success: 
 			else {

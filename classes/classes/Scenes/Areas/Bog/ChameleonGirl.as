@@ -31,8 +31,9 @@ package classes.Scenes.Areas.Bog
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou));
 				if (damage > 0) {
-					damage = player.takeDamage(damage);
-					outputText("The chameleon swings her arm at you, catching you with her claws.  You wince as they scratch your skin, leaving thin cuts in their wake. (" + damage + ")");
+					
+					outputText("The chameleon swings her arm at you, catching you with her claws.  You wince as they scratch your skin, leaving thin cuts in their wake. ");
+					damage = player.takeDamage(damage, true);
 				}
 				else outputText("The chameleon swings her arm at you, catching you with her claws.  You defend against the razor sharp attack.");
 			}
@@ -49,16 +50,17 @@ package classes.Scenes.Areas.Bog
 			//Evade:
 			else if (game.combatMiss() || game.combatEvade() || game.combatFlexibility() || game.combatMisdirect()) {
 				var damage2:Number = 1 + rand(10);
-				damage2 = game.doDamage(damage2);
-				outputText("The chameleon girl leaps in your direction, rolls, and kicks at you.  You sidestep her flying charge and give her a push from below to ensure she lands face-first in the bog. (" + damage2 + ")");
-
+				outputText("The chameleon girl leaps in your direction, rolls, and kicks at you.  You sidestep her flying charge and give her a push from below to ensure she lands face-first in the bog. ");
+				damage2 = game.doDamage(damage2, true);
+				outputText("<b>(<font color=\"#800000\">" + damage2 + "</font>)</b>");
 			}
 			//Get hit
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou) - player.armorDef) + 25;
 				if (damage > 0) {
-					damage = player.takeDamage(damage);
-					outputText("The chameleon leaps in your direction, rolls, and kicks you square in the shoulder as she ascends, sending you reeling.  You grunt in pain as a set of sharp claws rake across your chest. (" + damage + ")");
+					
+					outputText("The chameleon leaps in your direction, rolls, and kicks you square in the shoulder as she ascends, sending you reeling.  You grunt in pain as a set of sharp claws rake across your chest. ");
+					damage = player.takeDamage(damage, true);
 				}
 				else outputText("The chameleon rolls in your direction and kicks up at your chest, but you knock her aside without taking any damage..");
 			}

@@ -110,6 +110,9 @@ package classes
 						"<b>You aren't strong enough to benefit from this anymore.</b>" +
 						"]",
 				"You choose the 'Berserker' perk, which unlocks the 'Berserk' magical ability.  Berserking increases attack and lust resistance but reduces physical defenses.");
+		public static const Blademaster:PerkType = mk("Blademaster", "Blademaster",
+				"Gain +10% to critical strike chance when wielding a sword and not using a shield.",
+				"You choose the 'Blademaster' perk.  Your chance of critical hit is increased by 10% as long as you're wielding a sword and not using a shield.");
 		public static const BrutalBlows:PerkType = mk("Brutal Blows", "Brutal Blows",
 				"[if(player.str>=75)" +
 						"Reduces enemy armor with each hit." +
@@ -144,6 +147,9 @@ package classes
 		public static const FertilityPlus:PerkType = mk("Fertility+", "Fertility+",
 				"Increases fertility rating by 15 and cum volume by up to 50%.",
 				"You choose the 'Fertility+' perk, making it easier to get pregnant.  It also increases your cum volume by up to 50% (if appropriate)!");
+		public static const HoldWithBothHands:PerkType = mk("Hold With Both Hands", "Hold With Both Hands",
+				"Gain +20% strength modifier with melee weapons when not using a shield.",
+				"You choose the 'Hold With Both Hands' perk.  As long as you're wielding a melee weapon and you're not using a shield, you gain 20% strength modifier to damage.");
 		public static const HotBlooded:PerkType = mk("Hot Blooded", "Hot Blooded",
 				"Raises minimum lust by up to 20.",
 				"You choose the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20! (If you already have some minimum lust, it will be increased by 10)");
@@ -186,6 +192,13 @@ package classes
 		public static const Nymphomania:PerkType = mk("Nymphomania", "Nymphomania",
 				"Raises minimum lust by up to 30.",
 				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by as much as 30 (If you already have minimum lust, the increase is 10-15).");
+		public static const Parry:PerkType = mk("Parry", "Parry",
+				"[if(player.spe>=50)" +
+						"Increases deflect chance by up to 10% while wielding a weapon. (Speed-based)." +
+						"|" +
+						"<b>You are not durable enough to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Parry' perk, giving you a chance to deflect blow with your weapon. (Speed-based).");
 		public static const Precision:PerkType = mk("Precision", "Precision",
 				"Reduces enemy armor by 10. (Req's 25+ Intelligence)",
 				"You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance from armor by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.");
@@ -210,6 +223,16 @@ package classes
 		public static const Seduction:PerkType = mk("Seduction", "Seduction",
 				"Upgrades your tease attack, making it more effective.",
 				"You choose the 'Seduction' perk, upgrading the 'tease' attack with a more powerful damage and a higher chance of success.");
+		public static const ShieldMastery:PerkType = mk("Shield Mastery", "Shield Mastery",
+				"[if(player.tou>=50)" +
+						"Increases block chance by up to 10% while using a shield (Toughness-based)." +
+						"|" +
+						"<b>You are not durable enough to gain benefit from this perk.</b>" +
+						"]",
+				"You choose the 'Shield Mastery' perk, increasing block chance by up to 10% as long as you're wielding a shield (Toughness-based).");
+		public static const ShieldSlam:PerkType = mk("Shield Slam", "Shield Slam",
+				"Reduces shield bash diminishing returns by 50% and increases bash damage by 20%.",
+				"You choose the 'Shield Slam' perk.  Stun diminishing returns is reduced by 50% and shield bash damage is increased by 20%.");
 		public static const SpeedyRecovery:PerkType = mk("Speedy Recovery", "Speedy Recovery",
 				"Regain fatigue 50% faster.",
 				"You choose the 'Speedy Recovery' perk, boosting your fatigue recovery rate!");
@@ -341,6 +364,8 @@ package classes
 		public static const MilkMaid:MilkMaidPerk = new MilkMaidPerk();
 		public static const MinotaurCumAddict:PerkType = mk("Minotaur Cum Addict", "Minotaur Cum Addict",
 				"Causes you to crave minotaur cum frequently.  You cannot shake this addiction.");
+		public static const MinotaurCumResistance:PerkType = mk("Minotaur Cum Resistance", "Minotaur Cum Resistance",
+				"You can never become a Minotaur Cum Addict. Caps addiction rating at 70%.");
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",
 				"Causes you to regularly lay eggs when not otherwise pregnant.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",
@@ -351,8 +376,12 @@ package classes
 				"Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.");
 		public static const ThickSkin:PerkType = mk("Thick Skin", "Thick Skin",
 				"Toughens your dermis to provide 2 points of armor.");
-
+		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
+				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
+				
 		// Quest, Event & NPC perks
+		public static const BasiliskResistance:PerkType = mk("Basilisk Resistance", "Basilisk Resistance",
+				"Grants immunity to Basilisk's paralyzing gaze. Disables Basilisk Bad End.");
 		public static const BulgeArmor:PerkType = mk("Bulge Armor", "Bulge Armor",
 				"Grants a 5 point damage bonus to dick-based tease attacks.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",

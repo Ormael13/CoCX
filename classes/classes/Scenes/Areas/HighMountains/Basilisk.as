@@ -2,7 +2,8 @@ package classes.Scenes.Areas.HighMountains
 {
 	import classes.*;
 	import classes.internals.ChainedDrop;
-
+	import classes.GlobalFlags.*
+	
 	/**
 	 * ...
 	 * @author ...
@@ -29,12 +30,19 @@ package classes.Scenes.Areas.HighMountains
 		private function compulsion():void {
 			outputText("The basilisk opens its mouth and, staring at you, utters words in its strange, dry, sibilant tongue.  The sounds bore into your mind, working and buzzing at the edges of your resolve, suggesting, compelling, then demanding you look into the basilisk's eyes.  ", false);
 			//Success:
-			if(player.inte/5 + rand(20) < 24) {
-				outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. You look away quickly, but you can picture them in your mind's eye, staring in at your thoughts, making you feel sluggish and unable to coordinate. Something about the helplessness of it feels so good... you can't banish the feeling that really, you want to look in the basilisk's eyes forever, for it to have total control over you.", false);
-				game.dynStats("lus", 3);
-				//apply status here
-				basiliskSpeed(player,20);
-				player.createStatusAffect(StatusAffects.BasiliskCompulsion,0,0,0,0);
+			if (player.inte / 5 + rand(20) < 24) {
+				//Immune to Basilisk?
+				if (player.findPerk(PerkLib.BasiliskResistance) >= 0) {
+					outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. However, no matter how much you look into the eyes, you do not see anything wrong. All you can see is the basilisk. The basilisk curses as he finds out that you're immune!", false);
+				}
+				else {
+					outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. You look away quickly, but you can picture them in your mind's eye, staring in at your thoughts, making you feel sluggish and unable to coordinate. Something about the helplessness of it feels so good... you can't banish the feeling that really, you want to look in the basilisk's eyes forever, for it to have total control over you.", false);
+					game.dynStats("lus", 3);
+					//apply status here
+					basiliskSpeed(player,20);
+					player.createStatusAffect(StatusAffects.BasiliskCompulsion,0,0,0,0);
+					flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
+				}
 			}
 			//Failure:
 			else {
@@ -84,7 +92,7 @@ package classes.Scenes.Areas.HighMountains
 			this.a = "the ";
 			this.short = "basilisk";
 			this.imageName = "basilisk";
-			this.long = "You are fighting a basilisk!  From what you can tell while not looking directly at it, the basilisk is a male reptilian biped standing a bit over 6' tall.  It has a thin but ropy build, its tightly muscled yellow underbelly the only part of its frame not covered in those deceptive, camouflaging grey-green scales.  A long, whip-like tail flits restlessly through the dirt behind its skinny legs, and sharp sickle-shaped index claws decorate each hand and foot.  You don't dare to look at its face, but you have the impression of a cruel jaw, a blunt lizard snout and a crown of dull spines.";
+			this.long = "You are fighting a basilisk!  From what you can tell while not looking directly at it, the basilisk is a male reptilian biped standing a bit over 6' tall.  He has a thin but ropy build, his tightly muscled yellow underbelly the only part of his frame not covered in those deceptive, camouflaging grey-green scales.  A long, whip-like tail flits restlessly through the dirt behind his skinny legs, and sharp sickle-shaped index claws decorate each hand and foot.  You don't dare to look at his face, but you have the impression of a cruel jaw, a blunt lizard snout and a crown of dull spines.";
 			// this.plural = false;
 			this.createCock(6,2);
 			this.balls = 2;

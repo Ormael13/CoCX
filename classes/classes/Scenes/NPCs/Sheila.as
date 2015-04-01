@@ -19,10 +19,9 @@ package classes.Scenes.NPCs
 			spe -= 30;
 			//Midget misfire (if PC < 3'6"):
 			if(player.tallness < 42 && rand(2) == 0) {
-				outputText("Sheila bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you.");
+				outputText("Sheila bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you. ");
 				damage = 3 + rand(10);
-				damage = kGAMECLASS.doDamage(damage);
-				outputText(" (" + damage + ")");
+				damage = kGAMECLASS.doDamage(damage, true);
 			}
 			//Miss:
 			else if(combatMiss() || combatFlexibility() || combatEvade() || combatMisdirect() || findStatusAffect(StatusAffects.Blind) >= 0) {
@@ -38,17 +37,16 @@ package classes.Scenes.NPCs
 			}
 			//Hit:
 			else {
-				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils just as quickly, launching herself at your face with a fist raised in front of her.  She lands a staggering crack on your jaw which knocks your head back and blurs your vision!");
+				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils just as quickly, launching herself at your face with a fist raised in front of her.  She lands a staggering crack on your jaw which knocks your head back and blurs your vision!  ");
 				//deals minor concussion which adds 5-10 pts fatigue, may stun pc and prevent attack, misses while blinded or misfires on pcs under 3'6")
 				kGAMECLASS.fatigue(5+rand(5));
 				if(rand(2) == 0 && player.findPerk(PerkLib.Resolute) < 0) {
 					player.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
-					outputText("  <b>You are stunned!</b>");
+					outputText("<b>You are stunned!</b>  ");
 				}
 				damage = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				damage = player.takeDamage(damage, true);
 			}
 			spe += 30;
 			combatRoundOver();
@@ -68,16 +66,15 @@ package classes.Scenes.NPCs
 			}
 			//Hit:
 			else {
-				outputText("Sheila squats down, then bounds explosively toward you feet-first!  She snaps one leg out softly just as she reaches your chest, then twists her body to the side, bringing her other leg over and landing a kick to the rear of your skull!  Your vision blurs and you wobble on your feet as she pushes off your chest.");
+				outputText("Sheila squats down, then bounds explosively toward you feet-first!  She snaps one leg out softly just as she reaches your chest, then twists her body to the side, bringing her other leg over and landing a kick to the rear of your skull!  Your vision blurs and you wobble on your feet as she pushes off your chest.  ");
 				//Stun triggered:
 				if(player.findPerk(PerkLib.Resolute) < 0) {
 					player.createStatusAffect(StatusAffects.Stunned,2,0,0,0);
-					outputText("  <b>You are stunned!</b>");
+					outputText("<b>You are stunned!</b>  ");
 				}
 				damage = int((str + 50 + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				damage = player.takeDamage(damage, true);
 				kGAMECLASS.fatigue(10+rand(6));
 			}
 			spe += 60;

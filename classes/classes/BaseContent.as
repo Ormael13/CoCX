@@ -101,6 +101,11 @@
 			return kGAMECLASS.isThanksgiving();
 		}
 
+		protected function isAprilFools():Boolean
+		{
+			return kGAMECLASS.isAprilFools();
+		}
+		
 		protected function get date():Date
 		{
 			return kGAMECLASS.date;

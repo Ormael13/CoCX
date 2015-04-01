@@ -195,9 +195,9 @@ package classes.Scenes.Areas.HighMountains
 				// speDown.visible = false;
 				player.removeStatusAffect(StatusAffects.BasiliskSlow);
 			}
-			dynStats("spe", -3, "lus", 399);
+			dynStats("spe", player.findPerk(PerkLib.BasiliskResistance) < 0 ? 3 : 1, "lus", 399);
 			//Bad end
-			if(player.spe < 5) {
+			if(player.spe < 5 && player.findPerk(PerkLib.BasiliskResistance) < 0) {
 				basiliskBadEnd();
 				return;
 			}

@@ -83,11 +83,10 @@
 			}
 			//Hit: 
 			else {
-				outputText("\nBefore you can do anything to stop her, she lifts her head and takes a swift lick of your crotch, taking a small moan from you and giving her enough time to stab into the back of your knees. She rolls out of the way just as you pluck the two needles out and throw them back to the ground. They didn’t seem to have anything in them, but the pain is enough to make you stagger.");
+				outputText("\nBefore you can do anything to stop her, she lifts her head and takes a swift lick of your crotch, taking a small moan from you and giving her enough time to stab into the back of your knees. She rolls out of the way just as you pluck the two needles out and throw them back to the ground. They didn’t seem to have anything in them, but the pain is enough to make you stagger. ");
 				//(Medium HP loss, small lust gain)
 				var damage:int = int((str + weaponAttack + 40) - rand(player.tou) - player.armorDef);
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				damage = player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -97,8 +96,7 @@
 			outputText("\nYou shield yourself from the explosion, though the goblin has already lit a second needle which she throws behind you, launching your body forwards as it explodes behind your back. ");
 			//(High HP loss, no lust gain)
 			var damage:int = 25 + rand(75);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			damage = player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 		override public function defeated(hpVictory:Boolean):void

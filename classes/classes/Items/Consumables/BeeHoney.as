@@ -59,6 +59,7 @@ package classes.Items.Consumables
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Drink text
 			if (special) {
 				outputText("You uncork the bottle and pour the incredibly strong smelling concentrated honey down your throat.  Its taste is also mighty intense.  All at once you feel the effects of the substance start to course through your body.");

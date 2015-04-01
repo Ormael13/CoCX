@@ -1488,7 +1488,8 @@ public function jojoRape():void {
 			if (flags[kFLAGS.JOJO_ANAL_XP] < 3) flags[kFLAGS.JOJO_ANAL_XP]++;
 		}
 	}
-	doNext(camp.returnToCampUseOneHour);
+	if (kGAMECLASS.inCombat) cleanupAfterCombat();
+	else doNext(camp.returnToCampUseOneHour);
 }
 
 //Bee on C. Jojo: Finished (Fenoxo) (Zedit)
@@ -2573,7 +2574,7 @@ private function suckJojosCock():void {
 }
 
 public function loseToJojo():void {
-	if(monk == 2 || monk == 3) {
+	if (monk <= 3) {
 		outputText("Jojo glares down at you, and begins praying, slowly laying prayer papers all over your battered form.  You feel rage that quickly dissipates, replaced with a calm sense of peace.  You quickly lose consciousness, but are happy he defeated you.\n\nWhen you wake, you discover a note:\n\"<i>The fighting allowed me to exorcise most of your inner demons.  A part of me wanted to seek revenge for what you had done to me, but I know it was the taint on your soul that was responsible.  If we meet again I would be happy to meditate with you.\n\n          -Jojo.</i>\"", true);
 		player.orgasm();
 		dynStats("lib", -10., "cor", -15);
@@ -2608,7 +2609,7 @@ public function loseToJojo():void {
 				player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE + 82, 101); //Jojo's kids take longer for some reason
 			}
 			if (player.gender == 0) {
-				outputText("Too aroused to think, you just bend over, displaying your bum and wiggling enticingly.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
+				outputText("Too aroused to think, you just bend over, displaying your bum and wiggling enticingly.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.", false);
 				player.buttChange(monster.cockArea(0), true, true, true);
 				outputText("You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
 			}
@@ -2616,15 +2617,13 @@ public function loseToJojo():void {
 			hideUpDown();
 			player.orgasm();
 			dynStats("cor", 1);
-			statScreenRefresh();
 		}
 		//HP Defeat
 		else {
-			outputText("You black out from the pain of your injuries.\n\n", false);
-			statScreenRefresh();
+			outputText("You black out from the pain of your injuries.", false);
 		}
-		cleanupAfterCombat();
 	}
+	cleanupAfterCombat();
 }
 
 }

@@ -189,13 +189,13 @@ package classes.Scenes
 			addItemButton(consumables.SHARK_T);
 			addItemButton(consumables.SNAKOIL);
 			addItemButton(consumables.SPHONEY);
-			addItemButton(consumables.TRAPOIL);
+			addItemButton(consumables.TAURICO);
 			
+			addItemButton(consumables.TRAPOIL);
 			addItemButton(consumables.TSCROLL);
 			addItemButton(consumables.TSTOOTH);
 			addItemButton(consumables.VIXVIGR);
-			addItemButton(consumables.W_FRUIT);
-
+			
 			addButton(4, "Next", itemSpawnTransformativesMenuV);
 			addButton(9, "Previous", itemSpawnTransformativesMenuIII);
 			addButton(14, "Back", itemSpawnMenu);
@@ -203,6 +203,7 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuV():void {
 			lastMenu = itemSpawnTransformativesMenuV;
 			menu();
+			addItemButton(consumables.W_FRUIT);
 			addItemButton(consumables.WETCLTH);
 			
 			addButton(9, "Previous", itemSpawnTransformativesMenuIV);
@@ -544,7 +545,7 @@ package classes.Scenes
 			addItemButton(undergarments.DS_BRA);
 			
 			addItemButton(undergarments.DS_LOIN);
-			addItemButton(undergarments.DSPANTY);
+			addItemButton(undergarments.DSTHONG);
 			addItemButton(undergarments.FURLOIN);
 			addItemButton(undergarments.GARTERS);
 			

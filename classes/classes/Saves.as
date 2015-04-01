@@ -2286,6 +2286,9 @@ public function unFuckSave():void
 			gearStorageGet().push(new ItemSlotClass());
 		}
 	}
+	if (player.hasKeyItem("Laybans") >= 0) {
+		flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
+	}
 }
 
 //This is just the save/load code - from it you can get 

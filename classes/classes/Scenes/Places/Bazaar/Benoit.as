@@ -393,7 +393,7 @@ private function benoitSellTransact(slot:int, sellMod:int):void {
 private function benoitSellAllTransact(totalItems:int, sellMod:int):void {
 	clearOutput();
 	var itemValue:int = 0;
-	for (var slot:int = 0; slot < 5; slot++) {
+	for (var slot:int = 0; slot < 10; slot++) {
 		if (player.itemSlots[slot].quantity > 0 && int(player.itemSlots[slot].itype.value / sellMod) >= 1) {
 			itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / sellMod);
 			player.itemSlots[slot].quantity = 0;

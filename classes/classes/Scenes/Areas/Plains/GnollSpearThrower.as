@@ -77,8 +77,8 @@ package classes.Scenes.Areas.Plains
 				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 			}
 			else {
-				if(damage < 10) outputText("The gnoll runs forward, fury in her dark eyes as twin fists glance off your chest.  The glancing blow sends her off balance and the flashing ivory jaws barely miss your throat.  You push back, stumbling away from the furious hyena. (" + damage + ")", false);
-				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the " + player.skinDesc + " of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow. (" + damage + ")", false);
+				if(damage < 10) outputText("The gnoll runs forward, fury in her dark eyes as twin fists glance off your chest.  The glancing blow sends her off balance and the flashing ivory jaws barely miss your throat.  You push back, stumbling away from the furious hyena.", false);
+				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the " + player.skinDesc + " of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow.", false);
 			}
 			if(damage > 0) {
 				if(short == "fetish zealot") {
@@ -285,8 +285,8 @@ package classes.Scenes.Areas.Plains
 				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 			}
 			else {
-				if (damage < 10) outputText("The gnoll runs forward, fury in her dark eyes as twin fists glance off your chest.  The glancing blow sends her off balance and the flashing ivory jaws barely miss your throat.  You push back, stumbling away from the furious hyena. (" + damage + ")", false);
-				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the " + player.skinDesc + " of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow. ", false);
+				if (damage < 10) outputText("The gnoll runs forward, fury in her dark eyes as twin fists glance off your chest.  The glancing blow sends her off balance and the flashing ivory jaws barely miss your throat.  You push back, stumbling away from the furious hyena.", false);
+				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the " + player.skinDesc + " of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow.", false);
 			}
 			if (damage > 0) {
 				if (short == "fetish zealot") {
@@ -301,6 +301,7 @@ package classes.Scenes.Areas.Plains
 					lust += 5 * lustVuln;
 				}
 			}
+			outputText(" ");
 			if (damage > 0) damage = player.takeDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n", false);

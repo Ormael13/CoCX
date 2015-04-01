@@ -1082,7 +1082,7 @@ private function oswaldPawnSellAll():void {
 	spriteSelect(47);
 	var itemValue:int = 0;
 	clearOutput();
-	for (var slot:int = 0; slot < 5; slot++) {
+	for (var slot:int = 0; slot < 10; slot++) {
 		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 			itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / 2);
 			player.itemSlots[slot].quantity = 0;
