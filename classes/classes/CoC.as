@@ -388,8 +388,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_snapshot_20150401";
-			version = ver + " (<b>" + (isAprilFools() ? "DLCs Ahoy" : "Perks Ahoy") + "</b>)";
+			ver = "0.9.2_mod_snapshot_20150404";
+			version = ver + " (<b>Rape-hael</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
