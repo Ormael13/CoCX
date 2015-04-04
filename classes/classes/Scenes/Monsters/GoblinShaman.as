@@ -153,7 +153,8 @@ package classes.Scenes.Monsters
 					add(consumables.GOB_ALE,5).
 					add(weapons.W_STAFF,1).
 					add(undergarments.FURLOIN,1).
-					add(jewelries.MYSTRNG,1).
+					add(jewelries.MYSTRNG, 1).
+					add(jewelries.LIFERNG,1).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,

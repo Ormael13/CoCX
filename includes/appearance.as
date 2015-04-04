@@ -214,6 +214,10 @@
 		else outputText("covered with " + player.skinFurScales(), false);
 		outputText(" and shaped like that of a kangaroo, somewhat rabbit-like except for the extreme length of your odd visage.", false);
 	}
+	if (player.faceType == FACE_PIG)
+	{
+		outputText("Your face is like that of a pig, with " + player.skinTone + " skin, complete with a snout that is always wiggling.");
+	}
 	//M/F stuff!
 	outputText("  It has " + player.faceDesc() + ".", false);
 	//Eyes
@@ -241,6 +245,8 @@
 			outputText("  A pair of large pointy ears stick out from your skull.", false);
 		else if(player.earType == EARS_CAT) 
 			outputText("  A pair of cute, fuzzy cat ears have sprouted from the top of your head.", false);
+		else if(player.earType == EARS_PIG) 
+			outputText("  A pair of pointy, floppy pig ears have sprouted from the top of your head.", false);
 		else if(player.earType == EARS_LIZARD) 
 			outputText("  A pair of rounded protrusions with small holes on the sides of your head serve as your ears.", false);
 		else if(player.earType == EARS_BUNNY) 
@@ -273,6 +279,8 @@
 			outputText("  The " + hairDescript() + " on your head is parted by a pair of cute pointed ears, bigger than your old human ones.", false);
 		else if(player.earType == EARS_CAT) 
 			outputText("  The " + hairDescript() + " on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.", false);
+		else if(player.earType == EARS_PIG) 
+			outputText("  The " + hairDescript() + " on your head is parted by a pair of pointy, floppy pig’s ears. They often flick about when you’re not thinking about it.", false);
 		else if(player.earType == EARS_LIZARD) 
 			outputText("  The " + hairDescript() + " atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.", false);
 		else if(player.earType == EARS_BUNNY) 
@@ -623,6 +631,10 @@
 	{
 		outputText("  A long seemingly-tapering tail pokes from your butt, ending in spikes just like a behemoth's.");
 	}
+	else if(player.tailType == TAIL_TYPE_PIG) 
+	{
+		outputText("  A short, curly pig tail sprouts from just above your [ass].");
+	}
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
 		outputText("  Two normal human legs grow down from your waist, ending in normal human feet.", false);
@@ -662,6 +674,8 @@
 		outputText("  Two human-like legs grow down from your " + hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_RACCOON) 
 		outputText("  Your legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
+	else if(player.lowerBody == LOWER_BODY_TYPE_PIG) 
+		outputText("  Two digitigrade legs form below your [hips], ending in cloven hooves.");
 	if(player.findPerk(PerkLib.Incorporeality) >= 0)
 		outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature.", false);
 	

@@ -59,6 +59,11 @@
 						}
 					}
 					else { //If the PC does not currently meet his criteria
+						if (flags[kFLAGS.RAPHAEL_MET] == 0 && rand(10) == 0 && model.time.days >= 15) {
+							outputText("<b>\nSomething unusual happens that morning...</b>\n");
+							doNext(meetRaphael);
+							return true;
+						}
 						//Dress countdown - if pc isn't wearing it yet, kick out to
 						//Finale!
 						if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1) {
@@ -140,17 +145,20 @@ private function meetRaphael():void {
 //~~~ Next Page ~~~
 private function meetRaphaelPtII():void {
 	clearOutput();
-	outputText("Suddenly, Raphael's features grow soft and surprised as he looks down upon you. You get the feeling he's eyeing you up and catching a peek at your cleavage, but you can't be sure.\n\n", false);
+	outputText("Suddenly, Raphael's features grow soft and surprised as he looks down upon you. You get the feeling he's eyeing you up and catching a peek at your " + (player.mf("m", "f") == "f" ? "cleavage" : "groin") + ", but you can't be sure.\n\n", false);
 
 	outputText("\"<i>Marae must have cursed me for my audacity, for I am growing blind even at my young age.</i>\" The fox puts his hand to his forehead and pretends to faint. He rights himself just before he hits the ground, however and lands in a kneel before your feet.\n\n", false);
 	
 	outputText("You can't help but smile a little at the amount of theatrical flourish.\n\n", false);
 
-	outputText("\"<i>Here I thought I had searched the entire camp, found every treasure, pilfered every gem...</i>\" He states while sauntering towards you in a disarming, wide stride. \"<i>... but it seems I've overlooked the greatest jewel of all!</i>\" Raphael kneels before you, taking you by the hand and planting a kiss upon it. \"<i>Can you ever forgive me for my blindness, my fair lady?</i>\" He takes your hand in both his paws, while looking deeply into your eyes. His own are a deep emerald green, contrasting sharply with his bright red coat. They are set below a sturdy brow that gives him playful maturity and a rough regal elegance.\n\n", false);
-		
+	outputText("\"<i>Here I thought I had searched the entire camp, found every treasure, pilfered every gem...</i>\" He states while sauntering towards you in a disarming, wide stride. ");
+	if (RaphaelLikes()) outputText("\"<i>... but it seems I've overlooked the greatest jewel of all!</i>\" Raphael kneels before you, taking you by the hand and planting a kiss upon it. \"<i>Can you ever forgive me for my blindness, my fair lady?</i>\" He takes your hand in both his paws, while looking deeply into your eyes. His own are a deep emerald green, contrasting sharply with his bright red coat. They are set below a sturdy brow that gives him playful maturity and a rough regal elegance.\n\n", false);
+	else outputText("\"<i>My apologies. I didn't notice you! I thought you were a lady but you're not. Can you forgive me for not noticing you, my fair friend?</i>\" He takes your hand in both his paws, while looking deeply into your eyes. His own are a deep emerald green, contrasting sharply with his bright red coat. They are set below a sturdy brow that gives him playful maturity and a rough regal elegance.");
+	
 	outputText("What do you do?", false);
 	//[Talk] [Slap] [Swoon]
-	simpleChoices("Talk",RaphaelFirstMeetingTALK,"Slap",RaphaelFirstMeetingSLAP,"Swoon",RaphaelFirstMeetingSWOON,"Rape",0,"",0);
+	if (RaphaelLikes()) simpleChoices("Talk", RaphaelFirstMeetingTALK, "Slap", RaphaelFirstMeetingSLAP, "Swoon", RaphaelFirstMeetingSWOON, "Rape", 0, "", 0);
+	else simpleChoices("Let Him Go", letRaphaelGoFirstMeeting, "Slap", RaphaelFirstMeetingSLAP, "Rape", (player.lust >= 33 && player.hasCock()) ? rapeRaphael : 0, "", 0, "", 0);
 }
 
 //{When Player chooses Slap/refuse after the first encounter}
@@ -162,10 +170,12 @@ private function RaphaelFirstMeetingSLAP():void {
 
 	outputText("\"<i>I can assure you señorita, that I had no intention of tainting your honor.</i>\" He pats your hand.\n\n", false);
 
-	outputText("This time you wrestle your hand from Raphael's hold and throw him the heavier back of your hand, sending him to fall on his back. You're actually getting angry at him. How dare he sneak into your camp, try to rob you and then seduce you! By the time it occurs to you to actually apprehend him, Raphael has already beaten a hasty retreat by hopping back up on the wall.\n\n", false);
+	outputText("This time you wrestle your hand from Raphael's hold and throw him the heavier back of your hand, sending him to fall on his back. You're actually getting angry at him. How dare he sneak into your camp" + (RaphaelLikes() ? ", try to rob you and then seduce you" : " and try to rob you") + "! By the time it occurs to you to actually apprehend him, Raphael has already beaten a hasty retreat by hopping back up on the wall.\n\n", false);
 
-	outputText("\"<i>It is clear I was twice the blind fool!</i>\" He proclaims on top the ruined palisade. \"<i>You might look like one, but verily, you are not a lady.  I would advise you to gain manners, but sadly, a hag cannot be taught female grace with any greater aptitude than a pig can be taught to dine with silverware. You will remain at best, a very curvy mangirl.</i>\"\n\n", false); 
-
+	outputText("\"<i>It is clear I was twice the blind fool!</i>\" He proclaims on top the ruined palisade. ");
+	if (RaphaelLikes()) outputText("\"<i>You might look like one, but verily, you are not a lady.  I would advise you to gain manners, but sadly, a hag cannot be taught female grace with any greater aptitude than a pig can be taught to dine with silverware. You will remain at best, a very curvy mangirl.</i>\"\n\n", false); 
+	//else outputText("\"<i></i>\"");
+	
 	outputText("Raphael curtsies and tips his hat before making his escape. \"<i>You have my condolences.</i>\"\n\n", false);
 
 	outputText("You resolve to wash your hand. You're sure you've not seen the last of the russet rogue, but it will be time in coming before that happens with the severity of your rejection.", false);
@@ -226,7 +236,49 @@ private function RaphaelFirstMeetingTALK():void {
 	doNext(1);
 }
 
+private function letRaphaelGoFirstMeeting():void {
+	clearOutput();
+	outputText("You tell him to just let go.\n\n");
+	
+	outputText("\"<i>Thank you, friend. We might not meet again,</i>\" He says. With that, he saunters off into the distance.");
+	player.gems -= 5;
+	if(player.gems < 0) player.gems = 0;
+	statScreenRefresh();
+	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+	flags[kFLAGS.REJECTED_RAPHAEL] = 0;
+	doNext(1);
+}
 
+//Take that, homophobia!
+private function rapeRaphael():void {
+	clearOutput();
+	outputText("That fox must be punished for his deeds. After all, he did try to rob you! You quickly grab him by the wrists and kick his rapier away.");
+	if (player.str + rand(30) < 50) { //Fail, Raphael escapes.
+		outputText("\n\nRaphael quickly wiggles out of your grip, picks up his rapier and runs away, denying you a chance to rape! Fortunately, he appears to have dropped some gems. You take the gems and pocket them.");
+		player.gems += 10 + rand(20);
+		statScreenRefresh();
+		flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+		flags[kFLAGS.REJECTED_RAPHAEL] = 1; 
+		doNext(1);
+		return;
+	}
+	outputText("\n\nYou pin him under your weight" + player.clothedOrNakedLower(", remove your [armor]", "") + " and quickly yank his pants off, exposing his tight butt-cheeks. \"<i>No! Don't put that in there!</i>\" Raphael cries. It's his loss and he must pay the ultimate price: his virginity.");
+	outputText("\n\nRaphael gasps as your [cock] meets the star of his pucker. Despite Raphael yelling at you, you're determined to teach him a lesson. You slide your [cock] right into his butthole, revelling in his virgin tightness. <b>Raphael has lost his anal virginity!</b>");
+	outputText("\n\n\"<i>No! Your cock! Get it out of my butt! It's not normal! Sex is supposed to be about one man and one woman!</i>\" Raphael yells. You whisper into his ears and tell him that here in Mareth, anal sex is perfectly normal and it's a common occurrence. He's just too vanilla for his tastes! Time to spice things up.");
+	outputText("\n\nYou push your [cock] as deep as you can. Deeming the depth sufficient, you begin to piston in and out, picking up the speed until you're practically ravaging his ass. The russet rogue yelps in mixed pain and pleasure, his vulpine cock sliding out of its sheath and inflates to full erection. You continue to fuck him like there's no tomorrow.");
+	if (player.tentacleCocks() > 0) outputText("You push your tentacle cock in all the way through. You can feel it snaking its way through his intestines and stomach before finally comes out of his mouth! The fox looks down, unable to speak. You laugh at the poor fox-thief and pull your cock so you're just fucking his anus.");
+	outputText("\n\nEventually, you can hold back no more and empty your seed into his bowels. Raphael cums as well, shooting ropes of fox-jizz. With your orgasmic high complete, you pull your cock out of his ass, cum still dripping from his abused butthole. You give him a naughty grin and take his rapier while he's still dazed. To the victor go the spoils after all! ");
+	
+	player.orgasm();
+	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
+	inventory.takeItem(weapons.RRAPIER, rapeRaphaelII);
+}
+private function rapeRaphaelII():void {
+	clearOutput();
+	outputText("You clean your [cock]" + player.clothedOrNakedLower(", redress in your [armor]", "") + " and drag Raphael's dazed body to the edge of the camp. Hopefully he'll wake up and never enter your camp again. Serves that fox thief right for trying to rob you!");
+	doNext(1);
+}
 //{Second encounter.} 
 //Again at bedtime
 private function RaphaelDress():void {

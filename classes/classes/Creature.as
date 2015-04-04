@@ -2280,6 +2280,20 @@ package classes
 			return dragonCockC;
 		}
 		
+		//How many pigCocks
+		public function pigCocks():int
+		{
+			var pigCockC:Number = 0;
+			var counter:Number = cocks.length;
+			while (counter > 0)
+			{
+				counter--;
+				if (cocks[counter].cockType == CockTypesEnum.PIG)
+					pigCockC++;
+			}
+			return pigCockC;
+		}
+		
 		//How many normalCocks
 		public function normalCocks():int
 		{
@@ -3377,7 +3391,17 @@ package classes
 				else
 					return "legs";
 			}
-
+			if (lowerBody == 21) {
+				select = Math.floor(Math.random() * (4));
+				if (select == 0)
+					return "pig-like legs";
+				else if (select == 1)
+					return "legs";
+				else if (select == 2)
+					return "legs";
+				else
+					return "swine legs";
+			}
 			return "legs";
 		}
 

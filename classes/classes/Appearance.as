@@ -472,6 +472,7 @@
 			//Cocknum 99 to default to boring descriptions!
 			if (i_cockIndex != 99) {
 				if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.HORSE) return horseDescript(i_cockIndex);
+				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.PIG) return pigDescript(i_cockIndex);
 				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.BEE) return cockNoun(CockTypesEnum.BEE);
 				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.DOG) return dogDescript(i_cockIndex);
 				else if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.FOX) return foxDescript(i_cockIndex);
@@ -691,6 +692,20 @@
 					"tapered dick",
 					"unusual endowment",
 					"scaly shaft"];
+				description += randomChoice(options);
+			}
+			else if (cockType == CockTypesEnum.PIG) {
+				options = ["pig cock",
+					"pig dick",
+					"pig penis",
+					"pig-like cock",
+					"pig-like dick",
+					"swine cock",
+					"swine penis",
+					"corkscrew-tipped cock",
+					"hoggish cock",
+					"pink pig-cock",
+					"pink pecker"];
 				description += randomChoice(options);
 			}
 			else if (cockType == CockTypesEnum.DISPLACER) {
@@ -2136,7 +2151,6 @@
 			return descript;
 		}
 
-
 		private static function snakeDescript(cockNum:Number):String
 		{
 			var descript:String = "";
@@ -2145,6 +2159,14 @@
 			return descript;
 		}
 
+		private static function pigDescript(cockNum:Number):String
+		{
+			var descript:String = "";
+			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			descript += cockNoun(CockTypesEnum.PIG);
+			return descript;
+		}
+		
 		public static const BREAST_CUP_NAMES:Array = [
 			"flat",//0
 			//				1			2			3			4			5				6			7		8			9

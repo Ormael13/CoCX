@@ -875,6 +875,10 @@ public function cockHead(cockNum:Number = 0):String {
 		if(rand(2) == 0) return "tip";
 		else return "point";
 	}
+	if(player.cocks[cockNum].cockType == CockTypesEnum.PIG) {
+		if(rand(2) == 0) return "corkscrew tip";
+		else return "tip";
+	}
 	if(player.cocks[cockNum].cockType == CockTypesEnum.DISPLACER) {
 		temp = rand(5);
 		if(temp == 0) return "star tip";

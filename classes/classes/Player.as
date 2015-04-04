@@ -246,8 +246,10 @@ use namespace kGAMECLASS;
 		}
 		override public function get armorDef():Number {
 			var armorDef:Number = _armor.def;
-			if (upperGarmentName == "spider-silk bra") armorDef += 1;
-			if (lowerGarmentName == "spider-silk panties" || lowerGarmentName == "spider-silk loincloth") armorDef += 1;
+			if (upperGarment == game.undergarments.SS_BRA) armorDef += 1;
+			if (upperGarment == game.undergarments.DS_BRA) armorDef += 2;
+			if (lowerGarment == game.undergarments.SS_LOIN || lowerGarment == game.undergarments.SSPANTY) armorDef += 1;
+			if (lowerGarment == game.undergarments.DS_LOIN || lowerGarment == game.undergarments.DSTHONG) armorDef += 2;
 			//Blacksmith history!
 			if(armorDef > 0 && findPerk(PerkLib.HistorySmith) >= 0) {
 				armorDef = Math.round(armorDef * 1.1);
@@ -849,6 +851,12 @@ use namespace kGAMECLASS;
 					race = "mouse-" + mf("boy", "girl");
 				else
 					race = "mouse-morph";
+			}
+			if (pigScore() >= 4) 
+			{
+				race = "pig-morph";
+				if (faceType == 0)
+					race = "pig-" + mf("boy", "girl");
 			}
 			if (sirenScore() >= 4)
 				race = "siren";
@@ -1466,6 +1474,22 @@ use namespace kGAMECLASS;
 			return sirenCounter++;
 		}
 		
+		public function pigScore():Number
+		{
+			var pigCounter:Number = 0;
+			if (earType == EARS_PIG)
+				pigCounter++;
+			if (tailType == TAIL_TYPE_PIG)
+				pigCounter++;
+			if (faceType == FACE_PIG)
+				pigCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_PIG)
+				pigCounter += 2;
+			if (pigCocks() > 0)
+				pigCounter++;
+			return pigCounter;
+		}
+		
 		public function lactationQ():Number
 		{
 			if (biggestLactation() < 1)
@@ -1693,6 +1717,11 @@ use namespace kGAMECLASS;
 		public function clothedOrNaked(clothedText:String, nakedText:String = ""):String
 		{
 			return (armorDescript() != "gear" ? clothedText : nakedText);
+		}
+		
+		public function clothedOrNakedLower(clothedText:String, nakedText:String = ""):String
+		{
+			return (armorName != "gear" ? clothedText : nakedText);
 		}
 		
 		public function shrinkTits(ignore_hyper_happy:Boolean=false):void

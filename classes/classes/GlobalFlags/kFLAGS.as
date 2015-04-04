@@ -2207,7 +2207,7 @@ public static const KIHA_CHILD_MATURITY_COUNTER:int                             
 public static const KIHA_CHILD_LATEST_GENDER:int                                    = 2199;
 public static const VALERIA_FLUIDS:int                                              = 2200; //Enabled in New Game+. 100 is full.
 public static const IZMA_FEEDING_VALERIA:int                                        = 2201;
-public static const UNKNOWN_FLAG_NUMBER_02202:int                                   = 2202;
+public static const PIG_BAD_END_WARNING:int                                         = 2202; //Warned if you've eaten too many pigtail truffles.
 public static const UNKNOWN_FLAG_NUMBER_02203:int                                   = 2203;
 public static const UNKNOWN_FLAG_NUMBER_02204:int                                   = 2204;
 public static const UNKNOWN_FLAG_NUMBER_02205:int                                   = 2205;

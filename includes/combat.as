@@ -1976,6 +1976,7 @@ public function dropItem(monster:Monster):void {
 
 	if(!plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BROBREW;
 	if(!plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BIMBOLQ;
+	if(!plotFight && rand(1000) == 0 && player.level >= 7) itype = consumables.RAINDYE;
 	//Chance of eggs if Easter!
 	if(!plotFight && rand(6) == 0 && isEaster()) {
 		temp = rand(13);

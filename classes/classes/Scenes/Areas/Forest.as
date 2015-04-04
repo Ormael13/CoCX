@@ -178,7 +178,7 @@ package classes.Scenes.Areas
 			}
 			//Prevent encountering cutting tree prompt if wood supply is full.
 			if (chooser >= 4) {
-				if (rand(4) > 0 && (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)) {
+				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100) {
 					trace("Don't do wood gather prompt");
 					chooser = rand(4);
 				}
@@ -299,7 +299,7 @@ package classes.Scenes.Areas
 			if (chooser == 2) {
 				trace("TRACE TENTACRUELS");
 				clearOutput();
-				temp = rand(4);
+				temp = rand(5);
 				//Oh noes, tentacles!
 				if (temp == 0) {
 					//Tentacle avoidance chance due to dangerous plants
@@ -332,7 +332,7 @@ package classes.Scenes.Areas
 					return;
 				}
 				//CORRUPTED GLADE
-				if (temp == 2 || temp >= 4) {
+				if (temp == 2) {
 					if (rand(4) == 0) {
 						trappedSatyr();
 						return;
@@ -345,6 +345,11 @@ package classes.Scenes.Areas
 					player.takeDamage(10);
 					doNext(camp.returnToCampUseOneHour);
 					trace("FIX MEEEEE");
+					return;
+				}
+				if (temp == 4) {
+					outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
+					inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
 					return;
 				}
 			}

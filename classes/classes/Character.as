@@ -50,7 +50,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 		}
 
 		//BEARDS! Not used anywhere right now but WHO WANTS A BEARD?
-		//Kitteh6660: I want a beard! I'll code in obtainable beard.
+		//Kitteh6660: I want a beard! I'll code in obtainable beard. (DONE!)
 
 		//Used for hip ratings
 		public var thickness:Number = 0;
@@ -414,6 +414,14 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 					stringo = "reptilian ";
 				if (Math.floor(Math.random() * 4) == 0)
 					return stringo + "muzzle";
+				if (Math.floor(Math.random() * 4) == 0)
+					return stringo + "snout";
+				return stringo + "face";
+			}
+			if (faceType == 19)
+			{
+				if (Math.floor(Math.random() * 4) == 0)
+					stringo = "pig-like ";
 				if (Math.floor(Math.random() * 4) == 0)
 					return stringo + "snout";
 				return stringo + "face";

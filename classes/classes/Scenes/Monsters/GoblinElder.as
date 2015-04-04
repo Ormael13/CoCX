@@ -4,10 +4,10 @@ package classes.Scenes.Monsters
 	import classes.internals.*;
 	import classes.GlobalFlags.*;
 	
-	public class GoblinQueen extends Goblin
+	public class GoblinElder extends Goblin
 	{
 		
-		public function GoblinQueen() 
+		public function GoblinElder() 
 		{
 			this.a = "the ";
 			this.short = "goblin queen";

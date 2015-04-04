@@ -162,17 +162,17 @@ package classes.Scenes
 			addItemButton(consumables.MINOBLO);
 			addItemButton(consumables.MYSTJWL);
 			addItemButton(consumables.P_LBOVA);
-			addItemButton(consumables.PRFRUIT);
+			addItemButton(consumables.PIGTRUF);
 			
+			addItemButton(consumables.PRFRUIT);
 			addItemButton(consumables.PROBOVA);
 			addItemButton(consumables.P_DRAFT);
 			addItemButton(consumables.P_S_MLK);
-			addItemButton(consumables.PSDELIT);
 			
+			addItemButton(consumables.PSDELIT);
 			addItemButton(consumables.PURHONY);
 			addItemButton(consumables.SDELITE);
 			addItemButton(consumables.S_DREAM);
-			addItemButton(consumables.SUCMILK);
 			
 			addButton(4, "Next", itemSpawnTransformativesMenuIV);
 			addButton(9, "Previous", itemSpawnTransformativesMenuII);
@@ -181,20 +181,20 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuIV():void {
 			lastMenu = itemSpawnTransformativesMenuIV;
 			menu();
+			addItemButton(consumables.SUCMILK);
 			addItemButton(consumables.REPTLUM);
 			addItemButton(consumables.RINGFIG);
 			addItemButton(consumables.RIZZART);
-			addItemButton(consumables.S_GOSSR);
 			
+			addItemButton(consumables.S_GOSSR);
 			addItemButton(consumables.SHARK_T);
 			addItemButton(consumables.SNAKOIL);
 			addItemButton(consumables.SPHONEY);
-			addItemButton(consumables.TAURICO);
 			
+			addItemButton(consumables.TAURICO);
 			addItemButton(consumables.TRAPOIL);
 			addItemButton(consumables.TSCROLL);
 			addItemButton(consumables.TSTOOTH);
-			addItemButton(consumables.VIXVIGR);
 			
 			addButton(4, "Next", itemSpawnTransformativesMenuV);
 			addButton(9, "Previous", itemSpawnTransformativesMenuIII);
@@ -203,6 +203,7 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuV():void {
 			lastMenu = itemSpawnTransformativesMenuV;
 			menu();
+			addItemButton(consumables.VIXVIGR);
 			addItemButton(consumables.W_FRUIT);
 			addItemButton(consumables.WETCLTH);
 			
@@ -328,9 +329,19 @@ package classes.Scenes
 			
 			addItemButton(consumables.PINKDYE);
 			addItemButton(consumables.PURPDYE);
+			addItemButton(consumables.RAINDYE);
 			addItemButton(consumables.RED_DYE);
+			
+			addButton(4, "Next", itemSpawnDyesMenuII);
+			addButton(14, "Back", itemSpawnMenu);
+		}
+		
+		private function itemSpawnDyesMenuII():void {
+			lastMenu = itemSpawnDyesMenuII;
+			menu();
 			addItemButton(consumables.WHITEDY);
 			
+			addButton(9, "Previous", itemSpawnDyesMenuI);
 			addButton(14, "Back", itemSpawnMenu);
 		}
 		
