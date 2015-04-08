@@ -533,6 +533,46 @@
 				<ImageFile>./img/goblin-win-male-goblincondomed</ImageFile>
 				<ImageFile>./img/goblin-win-male-goblincondomed_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="goblinelder-win-drider-egged">
+				<ImageFile>./img/goblinelder-win-drider-egged</ImageFile>
+				<ImageFile>./img/goblinelder-win-drider-egged_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="goblinelder-win-female-naga-rapedfem">
+				<ImageFile>./img/goblinelder-win-female-naga-rapedfem</ImageFile>
+				<ImageFile>./img/goblinelder-win-female-naga-rapedfem_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="goblinelder-win-female-rapedfem">
+				<ImageFile>./img/goblinelder-win-female-rapedfem</ImageFile>
+				<ImageFile>./img/goblinelder-win-female-rapedfem_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="goblinelder-win-female-taur-rapedfem">
+				<ImageFile>./img/goblinelder-win-female-taur-rapedfem</ImageFile>
+				<ImageFile>./img/goblinelder-win-female-taur-rapedfem_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="goblinelder-win-male-buttsex">
+				<ImageFile>./img/goblinelder-win-male-buttsex</ImageFile>
+				<ImageFile>./img/goblinelder-win-male-buttsex_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="goblinelder-win-male-corruptedbj">
+				<ImageFile>./img/goblinelder-win-male-corruptedbj</ImageFile>
+				<ImageFile>./img/goblinelder-win-male-corruptedbj_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="goblinelder-win-male-corruptedfuck">
+				<ImageFile>./img/goblinelder-win-male-corruptedfuck</ImageFile>
+				<ImageFile>./img/goblinelder-win-male-corruptedfuck_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="goblinelder-win-male-getridden">
+				<ImageFile>./img/goblinelder-win-male-getridden</ImageFile>
+				<ImageFile>./img/goblinelder-win-male-getridden_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="goblinelder-win-male-goblinboners">
+				<ImageFile>./img/goblinelder-win-male-goblinboners</ImageFile>
+				<ImageFile>./img/goblinelder-win-male-goblinboners_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="goblinelder-win-male-goblincondomed">
+				<ImageFile>./img/goblinelder-win-male-goblincondomed</ImageFile>
+				<ImageFile>./img/goblinelder-win-male-goblincondomed_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="hel-chat-at-bar">
 				<ImageFile>./img/hel-chat-at-bar</ImageFile>
 				<ImageFile>./img/hel-chat-at-bar_1</ImageFile>
@@ -909,6 +949,10 @@
 				<ImageFile>./img/kiha-vagfuck</ImageFile>
 				<ImageFile>./img/kiha-vagfuck_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="lethice-intro">
+				<ImageFile>./img/lethice-intro</ImageFile>
+				<ImageFile>./img/lethice-intro_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="loppe-comes-after-moar-orgasm-denial">
 				<ImageFile>./img/loppe-comes-after-moar-orgasm-denial</ImageFile>
 				<ImageFile>./img/loppe-comes-after-moar-orgasm-denial_1</ImageFile>
@@ -1249,6 +1293,10 @@
 				<ImageFile>./img/monster-goblinassassin</ImageFile>
 				<ImageFile>./img/monster-goblinassassin_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="monster-goblinelder">
+				<ImageFile>./img/monster-goblinelder</ImageFile>
+				<ImageFile>./img/monster-goblinelder_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="monster-goblinqueen">
 				<ImageFile>./img/monster-goblinqueen</ImageFile>
 				<ImageFile>./img/monster-goblinqueen_1</ImageFile>
@@ -1513,6 +1561,10 @@
 				<ImageFile>./img/monster-thief</ImageFile>
 				<ImageFile>./img/monster-thief_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="monster-troll">
+				<ImageFile>./img/monster-troll</ImageFile>
+				<ImageFile>./img/monster-troll_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="monster-vala">
 				<ImageFile>./img/monster-vala</ImageFile>
 				<ImageFile>./img/monster-vala_1</ImageFile>
@@ -1544,6 +1596,74 @@
 			<ImageSet id="prison-cell">
 				<ImageFile>./img/prison-cell</ImageFile>
 				<ImageFile>./img/prison-cell_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-buy-dye">
+				<ImageFile>./img/rathazul-buy-dye</ImageFile>
+				<ImageFile>./img/rathazul-buy-dye_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-buy-reducto">
+				<ImageFile>./img/rathazul-buy-reducto</ImageFile>
+				<ImageFile>./img/rathazul-buy-reducto_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-camp">
+				<ImageFile>./img/rathazul-camp</ImageFile>
+				<ImageFile>./img/rathazul-camp_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-barkarmor-corrupt">
+				<ImageFile>./img/rathazul-craft-barkarmor-corrupt</ImageFile>
+				<ImageFile>./img/rathazul-craft-barkarmor-corrupt_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-barkarmor-pure">
+				<ImageFile>./img/rathazul-craft-barkarmor-pure</ImageFile>
+				<ImageFile>./img/rathazul-craft-barkarmor-pure_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-chitinarmor">
+				<ImageFile>./img/rathazul-craft-chitinarmor</ImageFile>
+				<ImageFile>./img/rathazul-craft-chitinarmor_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-dragonscalearmor">
+				<ImageFile>./img/rathazul-craft-dragonscalearmor</ImageFile>
+				<ImageFile>./img/rathazul-craft-dragonscalearmor_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-dragonscalebra">
+				<ImageFile>./img/rathazul-craft-dragonscalebra</ImageFile>
+				<ImageFile>./img/rathazul-craft-dragonscalebra_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-dragonscaleloincloth">
+				<ImageFile>./img/rathazul-craft-dragonscaleloincloth</ImageFile>
+				<ImageFile>./img/rathazul-craft-dragonscaleloincloth_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-dragonscalethong">
+				<ImageFile>./img/rathazul-craft-dragonscalethong</ImageFile>
+				<ImageFile>./img/rathazul-craft-dragonscalethong_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-gelarmor">
+				<ImageFile>./img/rathazul-craft-gelarmor</ImageFile>
+				<ImageFile>./img/rathazul-craft-gelarmor_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-silkarmor">
+				<ImageFile>./img/rathazul-craft-silkarmor</ImageFile>
+				<ImageFile>./img/rathazul-craft-silkarmor_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-silkbra">
+				<ImageFile>./img/rathazul-craft-silkbra</ImageFile>
+				<ImageFile>./img/rathazul-craft-silkbra_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-silkloincloth">
+				<ImageFile>./img/rathazul-craft-silkloincloth</ImageFile>
+				<ImageFile>./img/rathazul-craft-silkloincloth_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-silkpanties">
+				<ImageFile>./img/rathazul-craft-silkpanties</ImageFile>
+				<ImageFile>./img/rathazul-craft-silkpanties_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-silkrobes">
+				<ImageFile>./img/rathazul-craft-silkrobes</ImageFile>
+				<ImageFile>./img/rathazul-craft-silkrobes_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-lake">
+				<ImageFile>./img/rathazul-lake</ImageFile>
+				<ImageFile>./img/rathazul-lake_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="rubi-at-cafe">
 				<ImageFile>./img/rubi-at-cafe</ImageFile>
@@ -1920,6 +2040,26 @@
 			<ImageSet id="urta-syclla-3some">
 				<ImageFile>./img/urta-syclla-3some</ImageFile>
 				<ImageFile>./img/urta-syclla-3some_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="valeria-sex-domination">
+				<ImageFile>./img/valeria-sex-domination</ImageFile>
+				<ImageFile>./img/valeria-sex-domination_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="valeria-sex-getfucked">
+				<ImageFile>./img/valeria-sex-getfucked</ImageFile>
+				<ImageFile>./img/valeria-sex-getfucked_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="valeria-sex-gooflation">
+				<ImageFile>./img/valeria-sex-gooflation</ImageFile>
+				<ImageFile>./img/valeria-sex-gooflation_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="valeria-sex-penetration">
+				<ImageFile>./img/valeria-sex-penetration</ImageFile>
+				<ImageFile>./img/valeria-sex-penetration_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="valeria-talk">
+				<ImageFile>./img/valeria-talk</ImageFile>
+				<ImageFile>./img/valeria-talk_1</ImageFile>
 			</ImageSet>
 		</ImageList>
 		<ExtensionList>
