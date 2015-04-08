@@ -2349,7 +2349,9 @@
 					[TAIL_TYPE_DRACONIC, "draconic"],
 					[TAIL_TYPE_RACCOON, "raccoon"],
 					[TAIL_TYPE_MOUSE, "mouse"],
-					[TAIL_TYPE_BEHEMOTH, "behemoth"]
+					[TAIL_TYPE_BEHEMOTH, "behemoth"],
+					[TAIL_TYPE_PIG, "pig"],
+					[TAIL_TYPE_SCORPION, "scorpion"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(

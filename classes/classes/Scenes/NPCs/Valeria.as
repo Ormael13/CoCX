@@ -31,6 +31,11 @@
 		}
 		//End of Interface Implementation
 	
+		public function valeriaFluidsEnabled():Boolean {
+			if ((flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 || flags[kFLAGS.HARDCORE_MODE] > 0 || flags[kFLAGS.HUNGER_ENABLED] >= 1) && (player.armor == armors.GOOARMR || flags[kFLAGS.VALARIA_AT_CAMP] > 0)) return true;
+			else return false;
+		}
+		
 //const VELARIA_FUTA:int = 499;
 
 //Camp Menu -- [Followers] -- [Valeria]

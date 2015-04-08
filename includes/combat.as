@@ -343,7 +343,7 @@ public function doCombat(eventNum:Number):void
 			if (player.lowerBody == LOWER_BODY_TYPE_NAGA) temp6 = desert.nagaScene.nagaPlayerConstrict;
 			//Kick attackuuuu
 			else if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
-				temp6 = 5150;
+				temp6 = kick;
 				button3Text = "Kick";
 			}
 			//Akbal shit
@@ -1134,10 +1134,10 @@ public function doCombat(eventNum:Number):void
 		simpleChoices("Akbal's",5123,"Hellfire",5143,"Dragonfire",5164,"",0,"Back",1);
 		return;
 	}
-	if(eventNum == 5150) {
+	/*if(eventNum == 5150) {
 		kick();
 		return;
-	}
+	}*/
 	if(eventNum == 5156) {
 		PCWebAttack();
 		return;
@@ -2342,7 +2342,7 @@ public function combatStatusesUpdate():void {
 }
 
 public function regeneration(combat:Boolean = true):void {
-	var healingPercent:int = 0;
+	var healingPercent:Number = 0;
 	if(combat) {
 		//Regeneration
 		healingPercent = 0;
@@ -2351,8 +2351,8 @@ public function regeneration(combat:Boolean = true):void {
 			if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 1;
 			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 1;
 		}
-		if(player.armorName == "skimpy nurse's outfit") healingPercent += 2;
-		if(player.armorName == "goo armor") healingPercent += 2;
+		if(player.armorName == "skimpy nurse's outfit") healingPercent += 1;
+		if(player.armorName == "goo armor") healingPercent += (valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
 		if(player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
 		if(healingPercent > 5) healingPercent = 5;
 		HPChange(Math.round(maxHP() * healingPercent / 100), false);
@@ -2366,7 +2366,7 @@ public function regeneration(combat:Boolean = true):void {
 			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 2;
 		}
 		if(player.armorName == "skimpy nurse's outfit") healingPercent += 2;
-		if(player.armorName == "goo armor") healingPercent += 3;
+		if(player.armorName == "goo armor") healingPercent += (valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
 		if(player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 2;
 		if(healingPercent > 10) healingPercent = 10;
 		HPChange(Math.round(maxHP() * healingPercent / 100), false);
@@ -5596,6 +5596,7 @@ public function magicalSpecials():void {
 	if(player.findStatusAffect(StatusAffects.ImmolationSpell) >= 0) addButton(8,"Immolation",immolationSpell);
 	addButton(14,"Back",eventParser,5000);
 }
+//Messy, needs a lot of cleaning!
 public function physicalSpecials():void {
 	if(urtaQuest.isUrta()) {
 		urtaQuest.urtaSpecials();
@@ -5650,7 +5651,7 @@ public function physicalSpecials():void {
 	}
 	//Kick attackuuuu
 	else if(player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
-		butt4 = 5150;
+		butt4 = kick;
 		b4T = "Kick";
 	}
 	//Gore if mino horns

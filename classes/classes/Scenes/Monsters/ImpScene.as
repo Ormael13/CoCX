@@ -1558,6 +1558,10 @@ package classes.Scenes.Monsters
 			if(monster.HP < 1) {
 				outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
 				if (monster.short != "imp overlord") addButton(0, "Kill Him", killImp);
+				else {
+					cleanupAfterCombat();
+					return;
+				}
 				addButton(4, "Leave", cleanupAfterCombat);
 			}
 			else {
@@ -2093,6 +2097,7 @@ package classes.Scenes.Monsters
 		
 		private function killImp():void {
 			clearOutput();
+			flags[kFLAGS.IMPS_KILLED]++;
 			outputText("You make a quick work of the imp before dragging the corpse away. ");
 			menu();
 			addButton(0, "Take Skull", takeSkull);

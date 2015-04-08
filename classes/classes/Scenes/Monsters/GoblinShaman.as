@@ -22,6 +22,9 @@ package classes.Scenes.Monsters
 			if (spellChooser == 0 && findStatusAffect(StatusAffects.ChargeWeapon) >= 0) {
 				spellChooser = rand(5) + 1;
 			}
+			if (spellChooser == 4 && HPRatio() >= 0.7) {
+				spellChooser++;
+			}
 			if (spellChooser == 5 && findStatusAffect(StatusAffects.Might) >= 0) {
 				spellChooser = rand(5);
 				if (spellChooser == 0 && findStatusAffect(StatusAffects.ChargeWeapon) >= 0) spellChooser++;
@@ -54,13 +57,16 @@ package classes.Scenes.Monsters
 					damage *= 1.5;
 					outputText("It's super effective! ");
 				}
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.15;
+				else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.3;
+				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 3) damage *= 1.5;
 				player.takeDamage(damage, true);
 				fatigue += spellCostWhitefire;
 			}
 			//Arouse
 			else if (spellChooser == 3 && fatigue <= (100 - spellCostArouse)) {
 				outputText("She makes a series of arcane gestures, drawing on her lust to inflict it upon you! ");
-				var lustDamage:int = (inte / 5) + rand(10) * spellMultiplier();
+				var lustDamage:int = (inte / 10) + (player.lib / 10) + rand(10) * spellMultiplier();
 				lustDamage = lustDamage * (game.lustPercent() / 100);
 				game.dynStats("lus", lustDamage, "resisted", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");

@@ -613,6 +613,7 @@ public function creditsScreen():void {
 	outputText("<b>Game Mod Contributors</b>\n");
 	outputText("<ul>");
 	outputText("<li> Parth37955 (Pure Jojo anal pitch scene, Behemoth's vaginal catch scene)</li>");
+	outputText("<li> Liadri</li> (Manticore and Dragonne suggestions)");
 	outputText("</ul>");
 	outputText("<b>Game Mod Bug Reporting</b>\n");
 	outputText("<ul>");

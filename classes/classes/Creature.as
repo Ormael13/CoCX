@@ -149,6 +149,7 @@ package classes
 		public var hairColor:String = "no";
 		public var hairLength:Number = 0;
 		
+		public var furColor:String = "no"; //Will be separate eventually.
 		/*Beardstyle
 		0- normal
 		1- goatee

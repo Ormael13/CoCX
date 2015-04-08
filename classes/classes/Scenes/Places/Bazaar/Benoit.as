@@ -316,8 +316,9 @@ public function benoitsBuyMenu():void {
 			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
 			"", 0, "", 0);
-	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] <= 0) addButton(3, "Flintlock", buyFlintlock);
-	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(4, "Alarm Clock", buyAlarmClock, null, null, null, "This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
+	if (player.keyItemv1("Backpack") < 5) addButton(5, "Backpack", buyBackpack, null, null, null, "This backpack will allow you to carry more items.");
+	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] <= 0) addButton(6, "Flintlock", buyFlintlock);
+	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(7, "Alarm Clock", buyAlarmClock, null, null, null, "This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	addButton(14, "Back", benoitIntro);
 }
 
@@ -515,6 +516,44 @@ private function buyAlarmClockConfirmation():void {
 	flags[kFLAGS.BENOIT_CLOCK_ALARM] = 6;
 	doNext(benoitsBuyMenu);
 }
+
+private function buyBackpack():void {
+	clearOutput();
+	outputText("You ask " + benoitMF("Benoit", "Benoite") + " if " + benoitMF("he", "she") + " has a backpack to spare.");
+	outputText("\n\n\"<i>Yes. Zese come in three sizes. What will you pick?</i>\" " + benoitMF("he", "she") + " asks.");
+	outputText("\n\n<b><u>Backpack Size and Pricings</u></b>");
+	outputText("\nSmall: 200 gems, +3 inventory slots");
+	outputText("\nMedium: 600 gems, +4 inventory slots");
+	outputText("\nLarge: 1200 gems, +5 inventory slots");
+	menu();
+	if (player.keyItemv1("Backpack") < 3) addButton(0, "Small", buyBackpackConfirmation, 3, "Small", 200, "Grants additional three slots. \n\nCost: 200 gems");
+	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 600, "Grants additional four slots. \n\nCost: 600 gems");
+	if (player.keyItemv1("Backpack") < 5) addButton(2, "Large", buyBackpackConfirmation, 5, "Large", 1200, "Grants additional five slots. \n\nCost: 1200 gems");
+	addButton(4, "Nevermind", benoitsBuyMenu);
+}
+private function buyBackpackConfirmation(size:int = 3, sizeDesc:String = "Small", price:int = 200):void {
+	clearOutput();
+	if (player.gems < price) {
+		outputText("You count out your gems and realize it's beyond your price range.");
+		doNext(benoitsBuyMenu);
+		return;
+	}
+	outputText("\"<i>Here you go.  I have no need for zis,</i>\" " + benoitMF("Benoit", "Benoite") + " says.");
+	if (player.hasKeyItem("Backpack") >= 0) {
+		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemv1("Backpack")) + " extra inventory slots");
+		player.addKeyValue("Backpack", 1, size - player.keyItemv1("Backpack"));
+		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
+	}
+	else {
+		outputText("\n\n<b>(Key Item Gained: " + sizeDesc + " Backpack! You now have " + num2Text(size) + " extra inventory slots");
+		player.createKeyItem("Backpack", size, 0, 0, 0);
+		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
+	}
+	player.gems -= price;
+	statScreenRefresh();
+	doNext(benoitsBuyMenu);
+}
+
 
 //Talk
 private function talkToBenoit():void {

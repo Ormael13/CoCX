@@ -12,8 +12,9 @@
 			if (short == "goblin assassin") multiplier += 0.2;
 			if (short == "goblin shaman") multiplier += 0.4;
 			if (short == "goblin warrior") multiplier += 0.5;
-			if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 3) multiplier += game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			else if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) multiplier += 3;
+			if (short == "goblin elder") multiplier += 1;
+			if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 3) multiplier += game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.5;
+			else if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) multiplier += 1.5;
 			if(short == "Tamani") temp2 = rand(5);
 			if(short == "Tamani's daughters") temp2 = rand(5);
 			var color:String = "";
@@ -97,10 +98,16 @@
 				if (det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility.  She lifts her loincloth and caresses her snatch and gives you a come hither look.", false);
 				if (det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
 			}
+			else if (short == "goblin elder") {
+				if (det == 0) outputText(capitalA + short + " runs her hands along her bone-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
+				if (det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility.  She lifts her loincloth and caresses her snatch and gives you a come hither look.", false);
+				if (det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
+			}
 			var lustDmg:int = rand(player.lib / 10) + 8;
 			if (short == "goblin assassin") lustDmg += (2 + rand(3));
 			if (short == "goblin warrior") lustDmg += (5 + rand(5));
 			if (short == "goblin shaman") lustDmg += (5 + rand(5));
+			if (short == "goblin elder") lustDmg += (7 + rand(7));
 			game.dynStats("lus", lustDmg);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n", false);
 			combatRoundOver();

@@ -179,6 +179,10 @@
 			this.HP = this.eMaxHP();
 			this.lustVuln += 0.3;
 			this.fatigue += 5;
+			if (fatigue >= 100) { //Exhausted!
+				outputText(" <b>It appears that the vines have run out of pink slime.</b>");
+				fatigue = 100;
+			}
 		}
 		
 		private function tentagrapple():void

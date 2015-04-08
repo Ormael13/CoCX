@@ -8,7 +8,7 @@ package classes.Scenes.Monsters
 	public class GoblinWarrior extends Goblin
 	{
 		public function slash():void {
-			outputText("The goblin charges at you with her sword!  As soon as she approaches you, she spins! ");
+			outputText("The goblin charges at you with her sword!  As soon as she approaches you, she swings her sword! ");
 			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 				outputText("You avoid her slash!");
 			}
@@ -23,20 +23,20 @@ package classes.Scenes.Monsters
 		}
 		
 		public function shieldBash():void {
-			outputText("The goblin charges at you with her shield!  ");
+			outputText("The goblin charges at you with her shield! ");
 			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 				outputText("You avoid her shield bash!");
 			}
 			else {
-				outputText("You fail to dodge and she hits you with her shield! ");
+				outputText("Her shield hits you! ");
 				//Get hit
+				if (rand(100) < 40 && player.findPerk(PerkLib.Resolute) < 0) {
+					outputText("The impact from the shield has left you with a concussion. <b>You are stunned.</b> ");
+					player.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
+				}
 				var damage:int = str + rand(10);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
-				if (rand(100) < 40 && player.findPerk(PerkLib.Resolute) < 0) {
-					outputText("\n\nThe impact from the shield has left you with a concussion.  <b>You are stunned.</b>");
-					player.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
-				}
 			}
 			combatRoundOver();
 		}

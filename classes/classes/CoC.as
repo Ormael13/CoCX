@@ -173,6 +173,7 @@
 		public var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
 		public var goblinWarriorScene:GoblinWarriorScene = new GoblinWarriorScene();
 		public var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
+		public var goblinElderScene:GoblinElderScene = new GoblinElderScene();
 		// Scenes/NPC/
 		public var amilyScene:AmilyScene = new AmilyScene();
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
@@ -388,8 +389,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_snapshot_20150404";
-			version = ver + " (<b>Rape-hael</b>)";
+			ver = "0.9.2_mod_snapshot_20150408";
+			version = ver + " (<b>Backpack and Goblin Elder</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

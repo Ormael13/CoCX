@@ -441,7 +441,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			//14 - dagron tail
 			if (isNaga())
 				return true;
-			if (tailType == 2 || tailType == 3 || tailType == 4 || tailType == 7 || tailType == 8 || tailType == 9 || tailType == 12 || tailType == 13 || tailType == 14)
+			if (tailType == 2 || tailType == 3 || tailType == 4 || tailType == 7 || tailType == 8 || tailType == 9 || tailType == 12 || tailType == 13 || tailType == 14 || tailType == 15 || tailType == 16 || tailType == 17 || tailType == 18 || tailType == 20)
 				return true;
 			return false;
 		}

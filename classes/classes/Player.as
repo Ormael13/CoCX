@@ -858,6 +858,18 @@ use namespace kGAMECLASS;
 				if (faceType == 0)
 					race = "pig-" + mf("boy", "girl");
 			}
+			if (dragonneScore() >= 6)
+			{
+				race = "dragonne-morph";
+				if (faceType == 0)
+					race = "dragonne-" + mf("man", "girl");
+			}
+			if (manticoreScore() >= 6)
+			{
+				race = "manticore-morph"
+				if (faceType == 0)
+					race = "manticore-" + mf("man", "girl");
+			}
 			if (sirenScore() >= 4)
 				race = "siren";
 			if (lowerBody == 3)
@@ -1269,7 +1281,7 @@ use namespace kGAMECLASS;
 
 		}
 
-		//Determine Horse Rating
+		//Determine Dragon Rating
 		public function dragonScore():Number
 		{
 			var dragonCounter:Number = 0;
@@ -1488,6 +1500,53 @@ use namespace kGAMECLASS;
 			if (pigCocks() > 0)
 				pigCounter++;
 			return pigCounter;
+		}
+		
+		//Dragonne
+		public function dragonneScore():Number
+		{
+			var dragonneCounter:Number = 0;
+			if (faceType == FACE_CAT)
+				dragonneCounter++;
+			if (earType == EARS_CAT)
+				dragonneCounter++;
+			if (tailType == TAIL_TYPE_CAT)
+				dragonneCounter++;
+			if (tongueType == TONUGE_DRACONIC)
+				dragonneCounter++;
+			if (wingType == WING_TYPE_DRACONIC_LARGE || wingType == WING_TYPE_DRACONIC_SMALL)
+				dragonneCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_CAT)
+				dragonneCounter++;
+			if (skinType == 2 && dragonneCounter > 0)
+				dragonneCounter++;
+			return dragonneCounter;
+		}
+		
+		//Manticore
+		public function manticoreScore():Number
+		{
+			var catCounter:Number = 0;
+			if (faceType == FACE_CAT)
+				catCounter++;
+			if (earType == EARS_CAT)
+				catCounter++;
+			if (tailType == TAIL_TYPE_SCORPION)
+				catCounter += 2;
+			if (lowerBody == LOWER_BODY_TYPE_CAT)
+				catCounter++;
+			if (catCounter >= 4) {
+				if (hornType == HORNS_DEMON || hornType == HORNS_DRACONIC_X2 || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+					catCounter++;
+				if (wingType == WING_TYPE_BAT_LIKE_TINY || wingType == WING_TYPE_DRACONIC_SMALL)
+					catCounter++;
+				if (wingType == WING_TYPE_BAT_LIKE_LARGE || wingType == WING_TYPE_DRACONIC_LARGE)
+					catCounter += 2;
+			}
+			//Fur only counts if some canine features are present
+			if (skinType == 1 && catCounter >= 6)
+				catCounter++;
+			return catCounter;
 		}
 		
 		public function lactationQ():Number

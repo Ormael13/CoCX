@@ -129,12 +129,13 @@ public function salonPurchaseMenu():void {
 	addButton(0,"Cut Short",cutShort2);
 	addButton(1,"Cut Med.",cutMedium2);
 	addButton(2,"Cut Long",cutLong2);
-	addButton(3,"Lengthen",lengthening);
-	addButton(4,"Buy Products",dyeMenu);
-	addButton(5,"Buy MinoCum",minoCum);
-	addButton(6,"Beard Options",beardMenu);
-	addButton(7,"Mud Facial",mudFacial2);
-	addButton(8,"Sand Facial",sandFacial2);
+	addButton(3,"Lengthen", lengthening);
+	if (player.hairLength > 0) addButton(4,"Remove Hair", removeHair);
+	addButton(5,"Buy Products",dyeMenu);
+	addButton(6,"Buy MinoCum",minoCum);
+	addButton(7,"Beard Options",beardMenu);
+	addButton(8,"Mud Facial",mudFacial2);
+	addButton(9,"Sand Facial",sandFacial2);
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
@@ -404,6 +405,15 @@ private function hairGrow():void {
 	outputText(num2Text(temp) + " more inches of " + player.hairColor + " hair.", false);
 	doNext(camp.returnToCampUseOneHour);
 }
+
+private function removeHair():void {
+	outputText("You tell Lynnette that you'd like to have your hair removed.\n\n", true);
+	outputText("Lynnette instructs you to take a seat and instructs her daughters to pare down your hair down to short length. They effortlessly cut your hair to short length. Next, Lynnette applies a special cream all over your " + player.hairDescript() +".  Your hair starts to stiffen and falls out.  She gives your head a good cleaning afterwards.\n\n");
+	outputText("<b>You no longer have a hair!</b>");
+	player.hairLength = 0;
+	doNext(camp.returnToCampUseOneHour);
+}
+
 		private function buyDye(itype:ItemType):void{
 			clearOutput();
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);

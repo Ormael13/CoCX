@@ -65,7 +65,7 @@ package classes.Scenes
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			menu();
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(0, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift);
-			//if (flags[kFLAGS.VOLCANIC_CRAG_EXPLORED] > 0) addButton(1, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag);
+			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(1, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag);
 			if (debug) addButton(8, "Debug", exploreDebug.doExploreDebug);
 			addButton(9, "Previous", goBackToPageI);
 			addButton(14, "Back", eventParser, 1);
@@ -88,12 +88,15 @@ package classes.Scenes
 					if (impGob <= 3) impGob += 2;
 					else if (impGob < 7) impGob = 7;
 				}
+				if (debug) impGob -= 5;
 			}
 			//Imptacular Encounter
 			if (rand(10) < impGob) {
 				var impChooser:int = rand(100);
+				//Level modifier
 				if (player.level < 20) impChooser += player.level;
 				else impChooser += 20;
+				//Limit chooser ranges
 				if (impChooser > 100) impChooser = 100;
 				if (player.level < 8 && impChooser >= 40) impChooser = 39;
 				else if (player.level < 12 && impChooser >= 60) impChooser = 59;
@@ -130,21 +133,32 @@ package classes.Scenes
 			//Encounter Gobbalin!
 			else {
 				var goblinChooser:int = rand(100);
-				if (player.level < 10 && goblinChooser >= 40) goblinChooser = 39;
-				else if (player.level < 12 && goblinChooser >= 60) goblinChooser = 59;
+				//Level modifier
+				if (player.level < 20) goblinChooser += player.level;
+				else goblinChooser += 20;
+				//Limit chooser range
+				if (goblinChooser > 100) goblinChooser = 100;
+				if (player.level < 10 && goblinChooser >= 20) goblinChooser = 29;
+				else if (player.level < 12 && goblinChooser >= 60) goblinChooser = 49;
+				else if (player.level < 16 && goblinChooser >= 80) goblinChooser = 79;
 				//Goblin assassin!
-				if (goblinChooser >= 40 && goblinChooser < 60) {
+				if (goblinChooser >= 30 && goblinChooser < 50) {
 					kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
 					return;
 				}
-				//Goblin warrior!
-				else if (goblinChooser >= 60 && goblinChooser < 80) {
+				//Goblin warrior! (Equal chance with Goblin Shaman)
+				else if (goblinChooser >= 50 && goblinChooser < 65) {
 					kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
 					return;
 				}
 				//Goblin shaman!
-				else if (goblinChooser >= 80) {
+				else if (goblinChooser >= 65 && goblinChooser < 80) {
 					kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
+					return;
+				}
+				//Goblin elder!
+				else if (goblinChooser >= 80) {
+					kGAMECLASS.goblinElderScene.goblinElderEncounter();
 					return;
 				}
 				if (player.gender > 0) {

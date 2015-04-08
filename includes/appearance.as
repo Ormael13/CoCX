@@ -629,11 +629,15 @@
 	}
 	else if(player.tailType == TAIL_TYPE_BEHEMOTH) 
 	{
-		outputText("  A long seemingly-tapering tail pokes from your butt, ending in spikes just like a behemoth's.");
+		outputText("  A long seemingly-tapering tail pokes from your butt, ending in spikes just like behemoth's.");
 	}
 	else if(player.tailType == TAIL_TYPE_PIG) 
 	{
 		outputText("  A short, curly pig tail sprouts from just above your [ass].");
+	}
+	else if(player.tailType == TAIL_TYPE_SCORPION) 
+	{
+		outputText("  A chitinous scorpion-tail tail sprouts from just above your [ass], ready to dispense venom.");
 	}
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 

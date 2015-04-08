@@ -158,7 +158,7 @@ private function meetRaphaelPtII():void {
 	outputText("What do you do?", false);
 	//[Talk] [Slap] [Swoon]
 	if (RaphaelLikes()) simpleChoices("Talk", RaphaelFirstMeetingTALK, "Slap", RaphaelFirstMeetingSLAP, "Swoon", RaphaelFirstMeetingSWOON, "Rape", 0, "", 0);
-	else simpleChoices("Let Him Go", letRaphaelGoFirstMeeting, "Slap", RaphaelFirstMeetingSLAP, "Rape", (player.lust >= 33 && player.hasCock()) ? rapeRaphael : 0, "", 0, "", 0);
+	else simpleChoices("Let Him Go", letRaphaelGoFirstMeeting, "Slap", RaphaelFirstMeetingSLAP, "Rape", (player.lust >= 33 && player.hasCock() && player.cor >= (60 - player.corruptionTolerance())) ? rapeRaphael : 0, "", 0, "", 0);
 }
 
 //{When Player chooses Slap/refuse after the first encounter}
@@ -240,7 +240,7 @@ private function letRaphaelGoFirstMeeting():void {
 	clearOutput();
 	outputText("You tell him to just let go.\n\n");
 	
-	outputText("\"<i>Thank you, friend. We might not meet again,</i>\" He says. With that, he saunters off into the distance.");
+	outputText("\"<i>Thank you, friend. We may meet again,</i>\" He says. With that, he saunters off into the distance.");
 	player.gems -= 5;
 	if(player.gems < 0) player.gems = 0;
 	statScreenRefresh();
