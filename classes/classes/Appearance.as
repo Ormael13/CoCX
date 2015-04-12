@@ -489,7 +489,8 @@
 		//This allows a single cockDescription function to produce output for both cockDescript and the old NPCCockDescript.
 		public static function cockDescription(cockType:CockTypesEnum, length:Number, girth:Number, lust:int = 50, cumQ:Number = 10, isPierced:Boolean = false, hasSock:Boolean = false, isGooey:Boolean = false): String {
 			if (rand(2) == 0) {
-				return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey) + " " + cockNoun(cockType);
+				if(cockType == CockTypesEnum.HUMAN) return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey) + " " + cockNoun(cockType);
+				else return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey) + ", " + cockNoun(cockType);
 			}
 			return cockNoun(cockType);
 		}
