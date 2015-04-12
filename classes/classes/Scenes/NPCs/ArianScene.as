@@ -2770,7 +2770,8 @@ private function giveIncubusDraftToArian():void {
 		outputText("\n\nArian moans as another change happens below; she spreads her legs and watches in wonder as the lips of her wet fuckhole join together, becoming smooth scales as well.  A few more subtle changes occur as Arian's body shift towards the masculine and finally settles down.  Arian breaths a sigh of relief.");
 		
 		outputText("\n\n\"<i>I guess I'm male now?</i>\" Arian's voice sounds more masculine as well.");
-		
+		flags[kFLAGS.ARIAN_BREASTS] = 0;
+		flags[kFLAGS.ARIAN_VAGINA] = 0;
 		outputText("\n\nYou note that seems to be the case.  So, is [Arian ey] going to miss being even half-girl?  Arian rubs [Arian eir] chin.  \"<i>Well, it was weird, but it was kinda nice too.</i>\"  [Arian Ey] looks at you, smiling nervously.  \"<i>I'd spend some time in the mornings looking in the mirror.  I guess I didn't look so bad as a girl?</i>\"");
 		outputText("\n\nYou note that she was quite pretty, but you think [Arian ey]'s just as handsome now.  Besides, being all-guy means no more dealing with eggs, right?");
 		outputText("\n\nArian blushes, averting [Arian eir] eyes in embarrassment.  \"<i>It wasn't that bad... the whole deal with the eggs I mean.</i>\"");
@@ -2785,8 +2786,7 @@ private function giveIncubusDraftToArian():void {
 		outputText("\n\nYou reply that is what you think.  So, does [Arian ey] feel up to doing anything else, or should you leave him to get some rest?");
 		
 		outputText("\n\nArian's cock begins hardening.  \"<i>Well, I wouldn't mind doing anything else... if you want to.</i>\"");
-		flags[kFLAGS.ARIAN_BREASTS] = 0;
-		flags[kFLAGS.ARIAN_VAGINA] = 0;
+		
 	}
 	else { //Nothing happens.
 		outputText("\n\nArian moans and you can see [Arian ey]'s getting turned on, if the hardening tip of [Arian eir] exposed shaft is any indication, but you don't detect any change besides that.");
