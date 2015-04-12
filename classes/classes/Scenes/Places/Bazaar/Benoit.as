@@ -680,7 +680,7 @@ private function talkToBenoit():void {
 		{
 			outputText("\n\nYou ask Benoite if she isn’t worried that demon customers won’t notice what she is.");
 
-			outputText("\n\n“<i>Zat is why I am wearing zis cunning disguise,</i>” she says, patting her large beret.  She lowers her voice to a growl. “<i>And I talk like zis when I am serving zem.  Grr.  To be honest I do not sink I ‘ave to be worrying much,</i>” she goes on in her normal tone, tightening her apron. “<i>Most of ze demons oo come ere are not very bright, zey are not very interested in anysing except when zey are next banging zair bits together.  Also I sink most mammals are aving trouble telling ze difference between male and female reptiles wizzout looking closely.  Am I right?</i>” She grins her long, meandering smile at you and you take her point.");
+			outputText("\n\n“<i>Zat is why I am wearing zis cunning disguise,</i>” she says, patting her large beret.  She lowers her voice to a growl. “<i>And I talk like zis when I am serving zem.  Grr.  To be honest I do not sink I ‘ave to be worrying much,</i>” she goes on in her normal tone, tightening her apron. “<i>Most of ze demons 'oo come 'ere are not very bright, zey are not very interested in anysing except when zey are next banging zair bits together.  Also I sink most mammals are 'aving trouble telling ze difference between male and female reptiles wizzout looking closely.  Am I right?</i>” She grins her long, meandering smile at you and you take her point.");
 		}
 		else if (choice == 16)
 		{
