@@ -36,7 +36,7 @@ package classes.Items
 			"A skull taken from a slain imp. \n\nType: Material",
 			"You look at the imp skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
 		public const LETHITE:SimpleUseable = new SimpleUseable("Lethite", "Lethicite", "a chunk of lethicite", 1000, 
-			"A chunk of lethicite.  It's very rare as lethicite is only produced when a mortal becomes a demon and cums their souls out.  \n\nType: Material \nBase value: 1,000",
+			"A chunk of lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat. \n\nType: Material \nBase value: 1,000",
 			"You examine the pinkish-purple crystal. It must be lethicite. You know that the demons like to consume them but you're sure there might be a use for it.");
 		//Condom! Yay!
 		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a packet of condom", 6,

@@ -2351,8 +2351,8 @@ public function regeneration(combat:Boolean = true):void {
 			if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 1;
 			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 1;
 		}
-		if(player.armorName == "skimpy nurse's outfit") healingPercent += 1;
-		if(player.armorName == "goo armor") healingPercent += (valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
+		if(player.armor.name == "skimpy nurse's outfit") healingPercent += 1;
+		if(player.armor == armors.GOOARMR) healingPercent += (valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
 		if(player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
 		if(healingPercent > 5) healingPercent = 5;
 		HPChange(Math.round(maxHP() * healingPercent / 100), false);
@@ -2379,6 +2379,7 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	mainView.hideMenuButton( MainView.MENU_LEVEL );
 	mainView.hideMenuButton( MainView.MENU_PERKS );
 	mainView.hideMenuButton( MainView.MENU_STATS );
+	showStats();
 	//Flag the game as being "in combat"
 	inCombat = true;
 	monster = monster_;

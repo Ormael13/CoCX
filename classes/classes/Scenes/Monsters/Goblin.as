@@ -104,10 +104,10 @@
 				if (det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
 			}
 			var lustDmg:int = rand(player.lib / 10) + 8;
-			if (short == "goblin assassin") lustDmg += (2 + rand(3));
-			if (short == "goblin warrior") lustDmg += (5 + rand(5));
-			if (short == "goblin shaman") lustDmg += (5 + rand(5));
-			if (short == "goblin elder") lustDmg += (7 + rand(7));
+			if (short == "goblin assassin") lustDmg *= 1.4;
+			if (short == "goblin warrior") lustDmg *= 1.6;
+			if (short == "goblin shaman") lustDmg *= 1.6;
+			if (short == "goblin elder") lustDmg *= 2;
 			game.dynStats("lus", lustDmg);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n", false);
 			combatRoundOver();

@@ -74,6 +74,14 @@ package classes.Scenes.Areas.VolcanicCrag
 				outputText("\n\nThe behemoth remarks and says, \"<i>That's great! I had a similar story. I had a rival who bullied and mocked me from my childhood. Years later, I've finally got my revenge on him and literally ripped him apart with my bare hands.</i>\" Your jaws drop when he mentions being able to rip someone apart with his strength. He says, \"<i>Yes, seriously. I actully did it. After that, I've had his meat." + (silly() ? " Besides, I wouldn't want to traumatize the player reading whatever we're saying or make the player squick.</i>\"": "") + " "); //Fourth wall breaker
 				if (silly()) outputText("Did he just break the fourth wall?");
 			}
+			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) {
+				outputText("\n\nNext, You tell the behemoth about how you've managed to get past the obstacles in Lethice's stronghold and eventually overthrow Lethice, the Queen of the Demons. ");
+				outputText("\n\nThe behemoth smiles and says, \"<i>You have fulfilled your role as a Champion! I'm happy for you!</i>\" ");
+				if (player.armor == armors.LTHCARM) {
+					outputText("The behemoth looks at your strange lethicite armor. \"<i>Wow, Lethice actually managed to harvest enough lethicite to make an armor? Clever use of lethicite. I notice it doesn't cover your groin,</i>\" the Behemoth says. ");
+					if (player.lowerGarment.name == "nothing") outputText("He blushes when he looks at your " + (player.hasCock() ? "[cock] hanging freely from the opening" : "groin") + ".");
+				}
+			}
 			if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) {
 				outputText("\n\nNext, you tell the behemoth on how you've slain Marae, the corrupted goddess of Mareth. The behemoth drops his jaws at what you've done. \"<i>You actually KILLED a goddess? Wow, that's quite an amazing feat for a mortal to defeat a deity. You're even stronger than I am! I normally fear the wrath of the gods but you're brave,</i>\" he chuckles.");
 			}
@@ -464,7 +472,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				outputText("\n\nUnfortunately, by the time you finish peeing, there isn't pretty much anything else to do. \"<i>I'm sorry but I'm not really interested in centaurs. I don't really hate centaurs; I just find it a bit awkward. But you're always welcome to come back,</i>\" the behemoth says.");
 			}
 			else {
-				outputText("\n\nYou join him in filling the bucket with warm yellow liquid. You " + player.clothedOrNaked("open up your [armor], "));
+				outputText("\n\nYou join him in filling the bucket with warm yellow liquid. You " + player.clothedOrNakedLower((player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") ? "take advantage of the opening in your lethicite armor, " : "open up your [armor], "));
 				if (player.hasCock()) { //Cock has priority over vagina.
 					outputText("aim your " + cockDescript(player.biggestCockIndex()) + " into the bucket and let out a pressure as your urine mingles with the behemoth's.");
 				}

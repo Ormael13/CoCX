@@ -389,8 +389,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_snapshot_20150408";
-			version = ver + " (<b>Backpack and Goblin Elder</b>)";
+			ver = "0.9.2_mod_snapshot_20150412";
+			version = ver + " (<b>Sleepy-time with Ember</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

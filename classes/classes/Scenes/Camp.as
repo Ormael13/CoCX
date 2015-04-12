@@ -145,13 +145,13 @@ public function doCamp():void {
 		}
 		if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5)
 		{
-			if(flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && (player.cor >= 50 + player.corruptionTolerance()))
+			if(flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50 + player.corruptionTolerance())
 			{
 				hideMenus();
 				marblePurification.marbleWarnsPCAboutCorruption();
 				return;
 			}
-			if(flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && (player.cor >= 60 + player.corruptionTolerance()) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0)
+			if(flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && player.cor >= 60 + player.corruptionTolerance())
 			{
 				hideMenus();
 				marblePurification.marbleLeavesThePCOverCorruption();
@@ -184,6 +184,11 @@ public function doCamp():void {
 	if(arianFollower() && flags[kFLAGS.ARIAN_EGG_COUNTER] >= 24 && flags[kFLAGS.ARIAN_VAGINA] > 0) {
 		hideMenus();
 		arianScene.arianLaysEggs();
+		return;
+	}
+	if (flags[kFLAGS.EMBER_MORNING] > 0 && model.time.hours >= 6) {
+		hideMenus();
+		emberScene.postEmberSleep();
 		return;
 	}
 	if(flags[kFLAGS.JACK_FROST_PROGRESS] > 0) {
@@ -812,7 +817,8 @@ public function doCamp():void {
 	//Set up rest stuff
 	//Night
 	if(model.time.hours < 6 || model.time.hours > 20) {
-		outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n\n", false);
+		if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n\n", false);
+		else outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n\n", false);
 		if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
 			outputText("Your camp is silent as your companions are sleeping right now.\n", false);
 		}
@@ -1736,6 +1742,11 @@ public function doSleep(clrScreen:Boolean = true):void {
 			arianScene.sleepWithArian();
 			return;
 		}
+		else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
+			//outputText("You curl up next to Ember, planning to sleep for " + num2Text(timeQ) + " hour.  " + emberScene.emberMF("He", "She") + " drapes one of " + emberScene.emberMF("his", "her") + " wing over you, keeping you warm.");
+			emberScene.sleepWithEmber();
+			return;
+		}
 		else if(flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 			//Night Time Snuggle Alerts!*
 			//(1) 
@@ -1797,6 +1808,7 @@ public function sleepWrapper():void {
 	if(model.time.hours == 3) timeQ = 3;
 	if(model.time.hours == 4) timeQ = 2;
 	if(model.time.hours == 5) timeQ = 1;
+	if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Ember" || flags[kFLAGS.SLEEP_WITH] == 0)) timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 	clearOutput();
 	if(timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n", true);
 	else outputText("You lie down to resume sleeping for the remaining hour.\n", true);

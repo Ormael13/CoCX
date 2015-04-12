@@ -354,6 +354,7 @@ package classes.Scenes
 			addItemButton(useables.D_SCALE);
 			
 			addItemButton(useables.IMPSKLL);
+			addItemButton(useables.LETHITE);
 			
 			addButton(14, "Back", itemSpawnMenu);
 		}

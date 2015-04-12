@@ -527,6 +527,32 @@ use namespace kGAMECLASS;
 			else this._lowerGarment = value;
 		}
 		
+		public function getDamageResistancePercent(apply:Boolean = true):Number {
+			var mult:Number = 1;
+			//Black cat beer = 25% reduction!
+			if (statusAffectv1(StatusAffects.BlackCatBeer) > 0)
+				mult *= 0.75;
+
+			//Take damage you masochist!
+			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
+				mult *= 0.7;
+				game.dynStats("lus", 2);
+			}
+			if (findPerk(PerkLib.ImmovableObject) >= 0 && tou >= 75) {
+				mult *= 0.8;
+			}
+			// Uma's Massage bonuses
+			var statIndex:int = findStatusAffect(StatusAffects.UmasMassage);
+			if (statIndex >= 0) {
+				if (statusAffect(statIndex).value1 == UmasShop.MASSAGE_RELAXATION) {
+					mult *= statusAffect(statIndex).value2;
+				}
+			}
+			//Caps damage reduction at 60%.
+			if (mult < 0.4) mult = 0.4;
+			return mult;
+		}
+		
 		public function reduceDamage(damage:Number):Number {
 			if (tou < 100) damage = int(damage - rand(tou) - armorDef);
 			else damage = int(damage - rand(100) - armorDef);
@@ -536,7 +562,8 @@ use namespace kGAMECLASS;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.15;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.3;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 3) damage *= 1.5;
-			var crit:Boolean = false; //Opponents can critical too!
+			//Opponents can critical too!
+			var crit:Boolean = false
 			if(rand(100) <= 4 || (kGAMECLASS.monster.findPerk(PerkLib.Tactician) >= 0 && kGAMECLASS.monster.inte >= 50 && (kGAMECLASS.monster.inte - 50)/5 > rand(100))) {
 				crit = true;
 				damage *= 1.75;
@@ -546,29 +573,9 @@ use namespace kGAMECLASS;
 				damage -= 30;
 				if (damage < 1) damage = 1;
 			}
-			//Black cat beer = 25% reduction!
-			if (statusAffectv1(StatusAffects.BlackCatBeer) > 0)
-				damage = Math.round(damage * .75);
-
-			//Take damage you masochist!
-			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
-				damage = Math.round(damage * .7);
-				game.dynStats("lus", 2);
-				//Dont let it round too far down!
-				if (damage < 1) damage = 1;
-			}
-			if (findPerk(PerkLib.ImmovableObject) >= 0 && tou >= 75) {
-				damage = Math.round(damage * .8);
-				if (damage < 1) damage = 1;
-			}
-
-			// Uma's Massage bonuses
-			var statIndex:int = findStatusAffect(StatusAffects.UmasMassage);
-			if (statIndex >= 0) {
-				if (statusAffect(statIndex).value1 == UmasShop.MASSAGE_RELAXATION) {
-					damage = Math.round(damage * statusAffect(statIndex).value2);
-				}
-			}
+			//Apply damage resistance percentage.
+			damage *= getDamageResistancePercent();
+			if (damage < 1) damage = 1;
 
 			// Uma's Accupuncture Bonuses
 			var modArmorDef:Number = 0;
@@ -576,7 +583,7 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.ChiReflowAttack) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI) - armorDef);
 			damage -= modArmorDef;
 			if (damage < 0) damage = 0;
-			if (damage < 0 && crit) damage = 1; //Minimum critical damage is 1.
+			if (damage < 1 && crit) damage = 1; //Minimum critical damage is 1.
 			return damage;
 		}
 
@@ -1672,7 +1679,9 @@ use namespace kGAMECLASS;
 		}
 		
 		public function corruptionTolerance():Number {
-			return perkv1(PerkLib.AscensionTolerance) * 5;
+			var temp:int = perkv1(PerkLib.AscensionTolerance) * 5;
+			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
+			return temp;
 		}
 		
 		public function buttChangeDisplay():void

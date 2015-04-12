@@ -67,7 +67,7 @@ public function outputList():String {
 
 /**
  * Alters player's HP.
- * @param	changeNum The amount to damage or heal.
+ * @param	changeNum The amount to damage (negative) or heal (positive).
  * @param	display Show the damage or heal taken.
  */
 public function HPChange(changeNum:Number, display:Boolean):void

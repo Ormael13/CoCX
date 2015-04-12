@@ -455,7 +455,8 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			model.time.days++;
 		}
 		else if (model.time.hours == 21) {
-			outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n");
+			if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n");
+			else outputText("\nThe sky darkens as a starry night falls.  The blood-red moon slowly rises up over the horizon.\n");
 			needNext = true;
 		}
 		else if (model.time.hours == 6) {

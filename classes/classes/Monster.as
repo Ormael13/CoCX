@@ -626,7 +626,12 @@
 			while (attacks>0){
 				if (attackSucceeded()){
 				    var damage:int = eOneAttack();
-					outputAttack(damage);
+					var didBlock:Boolean = combatBlock(true);
+					if (didBlock) {
+						outputText("You block " + a + short + "'s " + weaponVerb + " with your " + player.shieldName + "! ");
+						damage = 0;
+					}
+					else outputAttack(damage);
 					postAttack(damage);
 					game.statScreenRefresh();
 					outputText("\n", false);
@@ -657,12 +662,6 @@
 
 		public function outputAttack(damage:int):void
 		{
-			var didBlock:Boolean = combatBlock(true);
-			if (didBlock) {
-				outputText("You block " + a + short + "'s " + weaponVerb + " with your " + player.shieldName + "! ");
-				damage = 0;
-				return;
-			}
 			if (damage <= 0) {
 				//Due to toughness or amor...
 				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + (player.armor != ArmorLib.NOTHING ? player.armor.name : player.armorName) + ".", false);

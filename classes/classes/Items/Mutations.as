@@ -9426,7 +9426,7 @@
 			//-----------------------
 			// BAD END ALERT!
 			//-----------------------
-			if (rand(5) == 0 && player.pigScore() >= 5 && player.findPerk(PerkLib.TransformationResistance) < 0) {
+			/*if (rand(5) == 0 && player.pigScore() >= 5 && player.findPerk(PerkLib.TransformationResistance) < 0) {
 				if (flags[kFLAGS.PIG_BAD_END_WARNING] == 0) {
 					outputText("\n\nYou find yourself idly daydreaming of flailing about in the mud, letting go of all of your troubles. Eventually, you shake off the thought. Why would you do something like that? Maybe you should cut back on all the truffles?");
 					dynStats("inte", -3);
@@ -9439,7 +9439,7 @@
 					doBadEnd();
 					return;
 				}
-			}
+			}*/
 			//-----------------------
 			// SIZE MODIFICATIONS
 			//-----------------------
