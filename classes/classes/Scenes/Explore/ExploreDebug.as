@@ -175,7 +175,7 @@ package classes.Scenes.Explore
 				});
 			}
 			if (monsterIdx>1) addButton(6, "Go Back", exploreDebugMonsters, monsterIdx-1);
-			addButton(9, "Enough", eventParser, 1);
+			addButton(9, "Enough", playerMenu);
 		}
 
 		public function ExploreDebug()

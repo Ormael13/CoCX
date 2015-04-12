@@ -113,7 +113,7 @@ package classes.Scenes.Areas.Plains
 					if (player.cockThatFits(monster.vaginalCapacity()) != -1) dickDownClit = dickDownGnollClit;
 					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
 					//[DickDownClit] [DickInAss] [SuckHerClit] [Leave]
-					simpleChoices("DickDownClit", dickDownClit, "DickInAss", dickInGnollAss, "SuckHerClit", suckGnollClit, "", 0, "Leave", cleanupAfterCombat);
+					simpleChoices("DickDownClit", dickDownClit, "DickInAss", dickInGnollAss, "SuckHerClit", suckGnollClit, "", null, "Leave", cleanupAfterCombat);
 				}
 				//(if cockTotal>0 AND vaginas=1)
 				else if (player.gender == 3) {
@@ -126,13 +126,13 @@ package classes.Scenes.Areas.Plains
 				else if (player.gender == 2) {
 					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
 					//[SuckHerClit] [TakeHerClit] [Leave]
-					simpleChoices("SuckHerClit", suckGnollClit, "TakeHerClit", takeGnollClit, "", 0, "", 0, "Leave", cleanupAfterCombat);
+					simpleChoices("SuckHerClit", suckGnollClit, "TakeHerClit", takeGnollClit, "", null, "", null, "Leave", cleanupAfterCombat);
 				}
 				//(if cockTotal=0 AND vaginas=0)
 				else {
 					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
 					//[SuckHerClit] [Leave]
-					simpleChoices("SuckHerClit", suckGnollClit, "", 0, "", 0, "", 0, "Leave", cleanupAfterCombat);
+					simpleChoices("SuckHerClit", suckGnollClit, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
 				}
 			}
 			else cleanupAfterCombat();

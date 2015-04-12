@@ -26,9 +26,10 @@ package classes.Scenes.Areas
 		{
 			player.exploredDesert++;
 			if (player.level >= 4 && player.exploredDesert % 15 == 0 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0) {
-				kGAMECLASS.inDungeon = true;
-				kGAMECLASS.dungeonLoc = 23;
-				eventParser(1);
+				kGAMECLASS.enterBoobsDungeon();
+//				kGAMECLASS.inDungeon = true;
+//				kGAMECLASS.dungeonLoc = 23;
+//				eventParser(1);
 				return;
 			}
 			if (rand(40) == 0) {

@@ -210,7 +210,8 @@ package classes.Scenes.NPCs
 			var milk:Function =null;
 			if (flags[kFLAGS.EMBER_OVIPOSITION] > 0 && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) egg = emberIsAnEggFactory;
 			if (flags[kFLAGS.EMBER_MILK] > 0) milk = getMilkFromEmber;
-			choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg, "Sex", emberSexMenu, "Spar", decideToSparEmbra, "", 0, "", 0, "Back", 74);
+			choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg,
+				"Sex", emberSexMenu, "Spar", decideToSparEmbra, "", null, "", null, "Back", camp.campFollowers);
 		}
 
 //Approach for sex - initial output when selecting [Sex] menu (Z)
@@ -319,7 +320,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nTrue enough, after a short trek through familiar tunnels you find yourself once again standing before the alleged 'dragon egg'.");
 			}
 			flags[kFLAGS.TIMES_FOUND_EMBERS_EGG]++;
-			simpleChoices("Take It", takeEmbersEggHomeInADoggieBag, "Destroy It", destroyBabyEmberYouMonster, "", 0, "", 0, "Leave", leaveEmbersAssOutToDry);
+			simpleChoices("Take It", takeEmbersEggHomeInADoggieBag, "Destroy It", destroyBabyEmberYouMonster, "", null, "", null, "Leave", leaveEmbersAssOutToDry);
 		}
 
 //[=Leave=] (Z)
@@ -340,7 +341,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nWith nothing else in the cave, you prepare to leave, but find yourself stopped by a sudden thought.  The egg yolk, though raw, looks strangely appetizing...");
 			flags[kFLAGS.EGG_BROKEN] = 1;
 			//[Eat][Leave]
-			simpleChoices("Eat It", eatEmbersYolkLikeAnEvenBiggerDick, "", 0, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
+			simpleChoices("Eat It", eatEmbersYolkLikeAnEvenBiggerDick, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 		}
 
 //[=Eat=]
@@ -626,7 +627,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.EMBER_GENDER] = 3;
 			}
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Succubi Milk/Purified Succubi Milk (Z)
@@ -655,7 +656,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.EMBER_GENDER] = 3;
 			}
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Ovi Elixir (Z)
@@ -667,7 +668,7 @@ package classes.Scenes.NPCs
 			outputText("Uncorking the crystalline bottle, you pour the strange green liquid inside onto the egg, briefly wondering what on earth it could want with this stuff, before catching your fallacy.  It's an egg, right?  It can't want things...  The fluid spills all over the shell, coating it, and then seeps inside, leaving the egg's previously pale surface marked with small green splotches.");
 			flags[kFLAGS.EMBER_OVIPOSITION] = 1;
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Lactaid (Z)
@@ -679,7 +680,7 @@ package classes.Scenes.NPCs
 			outputText("Feeling a little bemused, you pour the creamy fluid onto the egg.  It is absorbed through the shell, and a spiderwork of creamy yellow vein-like markings suddenly forms on the shell's surface.");
 			flags[kFLAGS.EMBER_MILK] = 1;
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Hair Extension Serum (Z)
@@ -699,7 +700,7 @@ package classes.Scenes.NPCs
 			}
 			outputText(" on the egg.");
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Your Blood (Z)
@@ -722,7 +723,7 @@ package classes.Scenes.NPCs
 			//(Token HP Loss, can't drop below 1 HP.)
 			player.takeDamage(10);
 			flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //Masturbate Onto the Egg (Z)
@@ -1060,7 +1061,7 @@ package classes.Scenes.NPCs
 			//Talk about Dragons
 			//Talk about Exploring
 			//Talk about Yourself
-			simpleChoices("Dragons", talkToEmberAboutDragonzzz, "Exploring", discussExplorationWithEmber, "Yourself", talkToEmberAboutYourself, "", 0, "Back", emberCampMenu);
+			simpleChoices("Dragons", talkToEmberAboutDragonzzz, "Exploring", discussExplorationWithEmber, "Yourself", talkToEmberAboutYourself, "", null, "Back", emberCampMenu);
 		}
 
 //Talk about Dragons (Z)
@@ -1453,13 +1454,13 @@ package classes.Scenes.NPCs
 			//(If Ember hasn't recovered from the last time " + emberMF("he","she") + " shared her blood)
 			if (flags[kFLAGS.DRANK_EMBER_BLOOD_TODAY] == 1 && !debug) {
 				outputText("\n\n\"<i>Sorry, but I'm still recovering from last time, so no blood for you,</i>\" Ember states matter-of-factly.");
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			//(Low Affection)
 			if (emberAffection() <= 25) {
 				outputText("\n\n\"<i>What!?  Why should I hurt myself for you?!</i>\"  Ember indignantly blows a small ring of flames at you and walks away.");
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			//(Medium Affection)
@@ -1472,7 +1473,7 @@ package classes.Scenes.NPCs
 
 				outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking...");
 				//[Continue][Stop]
-				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", 0, "", 0, "", 0);
+				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", null, "", null, "", null);
 			}
 			//(High Affection)
 			else {
@@ -1482,7 +1483,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber kisses you back; " + emberMF("his", "her") + " bleeding tongue stroking yours lovingly.");
 				outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking?");
 				//[Continue][Stop]
-				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", 0, "", 0, "", 0);
+				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", null, "", null, "", null);
 			}
 			//Flag as drinking her blood today!
 			flags[kFLAGS.DRANK_EMBER_BLOOD_TODAY] = 1;
@@ -1807,7 +1808,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber bites her lips and says once more, a bit louder this time, \"<i>Would you like to watch?</i>\"");
 				outputText("\n\nYou blink at the offer, then give her your most winning smile.  You could agree, or just smooth-talk your way out of it.");
 				//[Watch][Fob Off]
-				simpleChoices("Watch", watchMediumAffectionEmberEggLay, "Don't Watch", dontWatchEmberLayEgg, "", 0, "", 0, "", 0);
+				simpleChoices("Watch", watchMediumAffectionEmberEggLay, "Don't Watch", dontWatchEmberLayEgg, "", null, "", null, "", null);
 			}
 			//(High Affection)
 			else {
@@ -2442,7 +2443,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.EMBER_ROUNDFACE] == 0 || flags[kFLAGS.EMBER_INTERNAL_DICK] == 1) outputText("dragon ");
 			outputText("dick are proudly lancing towards your face, pre-cum gently bubbling from the tip and flowing down its length as you massage and lubricate it for ease of swallowing.  You cast a coy look at the dragon, who is shivering from your ministrations, but stoically refuses to show how much you are affecting " + emberMF("him", "her") + ".  Not willing to play any more if " + emberMF("he", "she") + " isn't willing to cooperate, you open your mouth and start to swallow " + emberMF("his", "her") + " cock.");
 
-			outputText("\n\nYou take the first three or four inches inside with ease, pausing to run your tongue across the glans and the urethra, savoring the taste of draconic pre-cum; rich and thick and tangy, cool and surprisingly refreshing.  You enjoy the taste for a few long seconds, the press on, swallowing inch after inch.");
+			outputText("\n\nYou take the first three or four inches inside with ease, pausing to run your tongue across the glans and the urethra, savoring the taste of draconic pre-cum; rich and thick and tangy, cool and surprisingly refreshing.  You enjoy the taste for a few long seconds, then press on, swallowing inch after inch.");
 
 			outputText("\n\n\"<i>Rrr... S-stop teasing me and just do this,</i>\" Ember goads you.");
 
@@ -2550,7 +2551,7 @@ package classes.Scenes.NPCs
 
 			outputText("\n\nSatisfied at that, Ember extends " + emberMF("his", "her") + " tongue, slowly wrapping it around your " + cockDescript(x) + ", an act that makes you shiver as the inhumanly long, prehensile appendage twines around your member like a slick-skinned snake.  " + emberMF("He", "She") + " coils it around your shaft expertly, gripping you into a makeshift cock-sleeve.");
 
-			outputText("\n\nLooking down at Ember, you see the dragon wreathed in happiness; " + emberMF("he", "she") + "'s so focused on " + emberMF("his", "her") + " task that " + emberMF("he", "she") + " doesn't even notice you staring.  Using " + emberMF("his", "her") + " coiled tongue " + emberMF("he", "she") + " begins jerking you off; the sensation is familiar and yet so alien... it only takes a few strokes before your " + cockDescript(x) + " is glistening with Ember's saliva, and in a particularly pleasurable tug, you moan.  A bead of pre escapes your " + cockHead(x) + " and slowly slides down your shaft, until it makes contact with Ember's tongue.");
+			outputText("\n\nLooking down at Ember, you see the dragon wreathed in happiness; " + emberMF("he", "she") + "'s so focused on " + emberMF("his", "her") + " task that " + emberMF("he", "she") + " doesn't even notice you staring.  Using " + emberMF("his", "her") + " coiled tongue " + emberMF("he", "she") + " begins jerking you off; the sensation is familiar and yet so alien... it only takes a few strokes before your " + cockDescript(x) + " is glistening with Ember's saliva, and in a particularly pleasurable tug, you moan.  A bead of pre escapes your " + player.cockHead(x) + " and slowly slides down your shaft, until it makes contact with Ember's tongue.");
 
 			outputText("\n\nThe moment " + emberMF("he", "she") + " tastes you, " + emberMF("his", "her") + " eyes seem to glow.  In a whip-like motion, Ember pulls " + emberMF("his", "her") + " tongue back into " + emberMF("his", "her") + " awaiting mouth, engulfing your " + cockDescript(x) + ".  You gasp as the cool, slick flesh surrounds you, heedless of the sharp teeth whose hard surfaces you can occasionally feel grazing you.  You trust your dragon too much to believe " + emberMF("he", "she") + " would hurt you.");
 
@@ -3305,7 +3306,7 @@ package classes.Scenes.NPCs
 			dynStats("lus", 10 + player.lib / 10);
 			outputText("\n\nWhat do you say?");
 			//[Accept] [Deny]
-			simpleChoices("Accept", timeToPuffTheMagicDragon, "Deny", fuckOffEmberIWantANap, "", 0, "", 0, "", 0);
+			simpleChoices("Accept", timeToPuffTheMagicDragon, "Deny", fuckOffEmberIWantANap, "", null, "", null, "", null);
 		}
 
 //[=Deny=]
@@ -3330,7 +3331,7 @@ package classes.Scenes.NPCs
 			emberAffection(-10);
 			//Set some cooldown so this doesn't proc all the goddamn time!
 			player.createStatusAffect(StatusAffects.EmberFuckCooldown, 12, 0, 0, 0);
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 //[=Accept=]
@@ -3348,7 +3349,7 @@ package classes.Scenes.NPCs
 			if (player.pregnancyIncubation == 0 && !pregnancy.isPregnant && flags[kFLAGS.EMBER_GENDER] == 3 && player.gender == 3) {
 				outputText("\n\n(Who should bear the kids?)");
 				//[Ember] [You]
-				simpleChoices("Ember", breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding, "You", getKnockedUpByEmbrahBroBaby, "", 0, "", 0, "", 0);
+				simpleChoices("Ember", breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding, "You", getKnockedUpByEmbrahBroBaby, "", null, "", null, "", null);
 			}
 			//[Play appropriate breeding scene.]
 			//Female Breeding Scene:
@@ -3476,7 +3477,7 @@ package classes.Scenes.NPCs
 
 			outputText("\n\n\"<i>You're so sexy...  You have no idea,</i>\" Ember purrs dreamily.  With a soft smile, you tell her that she's quite sexy herself - maybe not the smartest thing to say, but all that comes to mind with your brain befuddled by your surging hormones, bewitched by the delicious smells that are rolling off of her now that she's so close, so ripe, so ready...");
 
-			outputText("\n\nEmber jumps off you momentarily to inhale your musk, stroking you until a bead of pre forms on your " + cockHead(x) + ".  Ember's eyes grow wide, as if she had spotted a pearl; and she wastes no time in extending her tongue to lick the bead away.  \"<i>Hmm, delicious...  You're ready, and so am I!</i>\"");
+			outputText("\n\nEmber jumps off you momentarily to inhale your musk, stroking you until a bead of pre forms on your " + player.cockHead(x) + ".  Ember's eyes grow wide, as if she had spotted a pearl; and she wastes no time in extending her tongue to lick the bead away.  \"<i>Hmm, delicious...  You're ready, and so am I!</i>\"");
 
 			outputText("\n\nAiming your cock upwards; Ember straddles you and lowers herself on your pulsing " + cockDescript(x) + ", hissing in pleasure as your hot flesh finally makes contact with her drooling fuckhole");
 			if (emberHasCock()) outputText(", her own cock springing up and throbbing with the electric contact.");
@@ -3617,7 +3618,7 @@ package classes.Scenes.NPCs
 			outputText(" once more.  \"<i>D-don't get ahead of yourself!</i>\" " + emberMF("he", "she") + " yells indignantly, then gets up and rushes away.  You watch and give a smile; " + emberMF("he", "she") + " is champing at the bit to make children with you, but can't bring " + emberMF("himself", "herself") + " to confess how " + emberMF("he", "she") + " really feels.  Still, you're quite certain your efforts took.");
 			//(if PC now pregnant:
 			if (!emberPregged) outputText("  You touch your belly with a smirk.  Very certain they took indeed...");
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		private function emberPregUpdate():Boolean
@@ -4037,7 +4038,7 @@ package classes.Scenes.NPCs
 				outputText("\n\n\"<i>I... um... well, the postures you've shown me are kind of meant more for a female dragon in the receiving position, but since I'm a boy you'll kind of have to... er... use what I do have,</i>\" he looks away in shame, though whether it's due to what he's trying to say or at the fact he lacks the parts that the poses are for is hard to say.  He swivels one arm to use his hand to spread apart his ass-cheeks, letting you get a clear look at his anus; the invitation is obvious.");
 				outputText("\n\nYou lean over beside the embarrassed dragon and put a hand over his shoulder, then promise him to make him feel good and that you'll be gentle.");
 				outputText("\n\nEmber looks embarrassed as he can get without blushing, then smiles happily and stares up at you with a doting smile.  His tongue slicks out to lick your cheek in an affectionate gesture.");
-				outputText("\n\nYou get yourself in position and align your shaft with the dragon's puckered hole.  You hump a few times experimentally; each time your " + cockHead(x) + " bumps against his tight ass and threatens to push past his sphincter, the dragon gasps.  You would be worried if his gaze wasn't so lusty and expectant.");
+				outputText("\n\nYou get yourself in position and align your shaft with the dragon's puckered hole.  You hump a few times experimentally; each time your " + player.cockHead(x) + " bumps against his tight ass and threatens to push past his sphincter, the dragon gasps.  You would be worried if his gaze wasn't so lusty and expectant.");
 				outputText("\n\n\"<i>P-please, stop teasing; go on.  Oh, I want you inside me so badly...</i>\" he tells you in a stage-whisper, his voice husky with want.");
 				outputText("\n\nYou look into his eyes and smile, slowly pressing into his tight boy-pussy and spreading his cheeks with your girth.  Ember moans, arches his back and growls with delight, ass already clenching eagerly around your invading " + cockDescript(x) + ".  A few more humps and you feel yourself go as far inside his ass as possible.");
 				outputText("\n\n\"<i>Oh... oh, Marae, I feel so full, so stuffed with my mate's cock... it feels great,</i>\" he moans, though you're well aware of the tinge of pain in his voice, the grimace of discomfort on his face.");

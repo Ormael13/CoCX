@@ -83,7 +83,7 @@ package classes.Scenes.Areas
 			if (rand(10) == 0 && player.findStatusAffect(StatusAffects.HairdresserMeeting) < 0) chooser = 4;
 			if ((rand(8) == 0 && player.findStatusAffect(StatusAffects.MetMarae) >= 0)
 					&& player.findStatusAffect(StatusAffects.FoundFactory) < 0) {
-				eventParser(11057);
+				kGAMECLASS.enterFactory();
 				return;
 			}
 			//Boosts mino and hellhound rates!
@@ -240,7 +240,7 @@ package classes.Scenes.Areas
 						doNext(camp.returnToCampUseOneHour);
 						return;
 					}
-					eventParser(5052);
+					kGAMECLASS.wormEncounter();
 				}
 				else {
 					//If worms are off or the PC is infested, no worms.

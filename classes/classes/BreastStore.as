@@ -1,10 +1,11 @@
 package classes
 {
+	import classes.internals.Utils;
 	import classes.Appearance;
 	import classes.CoC;
 	import classes.SaveAwareInterface;
 	
-	public class BreastStore extends Object implements SaveAwareInterface
+	public class BreastStore extends Utils implements SaveAwareInterface
 	{
 		private static const MAX_FLAG_VALUE:int				= 2999;
 		private static const BREAST_STORE_VERSION_1:String	= "1";
@@ -61,6 +62,35 @@ package classes
 				+ "^" + preventLactationIncrease + "^" + preventLactationDecrease;
 		}
 		//End of Interface Implementation
+
+		public static function breastDescript(size:int, lactation:Number = 0):String {
+			if (size < 1) return "flat breasts";
+			var descript:String = (rand(2) == 0 ? Appearance.breastSize(size) : ""); //Add a description of the breast size 50% of the time
+			switch (rand(10)) {
+				case 1:
+					if (lactation > 2) return descript + "milk-udders";
+					break;
+				case 2:
+					if (lactation > 1.5) descript += "milky ";
+					if (size > 4) return descript + "tits";
+					break;
+				case 4:
+				case 5:
+				case 6:
+					return descript + "tits";
+				case 7:
+					if (lactation >= 2.5) return descript + "udders";
+					if (lactation >= 1) descript += "milk ";
+					return descript + "jugs";
+				case 8:
+					if (size > 6) return descript + "love-pillows";
+					return descript + "boobs";
+				case 9:
+					if (size > 6) return descript + "tits";
+				default:
+			}
+			return descript + "breasts";
+		}
 
 		public function get cupSize():int { return _cupSize; }
 
@@ -156,6 +186,10 @@ package classes
 		public function description(useAdj:Boolean = false, isMale:Boolean = false):String {
 			if (_cupSize == CoC.BREAST_CUP_FLAT) return "flat" + (isMale ? " manly," : "") + " chest";
 			return (useAdj ? adj() + " " : "") + cup() + " breasts";
+		}
+
+		public function breastDesc():String {
+			return breastDescript(cupSize, 0.5 * lactationLevel);
 		}
 
 		public function hasBreasts():Boolean { return _cupSize != CoC.BREAST_CUP_FLAT; }

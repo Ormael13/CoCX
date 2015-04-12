@@ -440,7 +440,7 @@
 					if(player.balls > 0) 
 						outputText("balls plenty of room to breathe", false);
 					else if(player.hasCock()) 
-						outputText(multiCockDescript() + " plenty of room to swing", false);
+						outputText(player.multiCockDescript() + " plenty of room to swing", false);
 					else if(player.hasVagina()) 
 						outputText(vaginaDescript() + " a nice, wide berth", false);
 					else outputText("vacant groin plenty of room", false);
@@ -848,7 +848,7 @@
 	{
 		if(player.lowerBody==LOWER_BODY_TYPE_CENTAUR) 
 			outputText("\nEver since becoming a centaur, your equipment has shifted to lie between your rear legs, like a horse.", false);
-		outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+		outputText("\nYour " + player.cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 		if(Math.round(10*player.cocks[temp].cockThickness)/10 < 2) 
 		{
 			if(Math.round(10*player.cocks[temp].cockThickness)/10 == 1) 
@@ -865,11 +865,11 @@
 		if(((player.cocks[temp].cockType == CockTypesEnum.DOG) || (player.cocks[temp].cockType == CockTypesEnum.FOX)) || (player.cocks[temp].cockType == CockTypesEnum.FOX)) 
 		{
 			if(player.cocks[temp].knotMultiplier >= 1.8) 
-				outputText("  The obscenely swollen lump of flesh near the base of your " + cockDescript(temp) + " looks almost too big for your cock.", false);
+				outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost too big for your cock.", false);
 			else if(player.cocks[temp].knotMultiplier >= 1.4) 
-				outputText("  A large bulge of flesh nestles just above the bottom of your " + cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
+				outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
 			else if(player.cocks[temp].knotMultiplier > 1) 
-				outputText("  A small knot of thicker flesh is near the base of your " + cockDescript(temp) + ", ready to expand to help you lodge it inside a female.", false);
+				outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge it inside a female.", false);
 			//List thickness
 			outputText("  The knot is " + Math.round(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10)/10 + " inches wide when at full size.", false);
 		}
@@ -913,7 +913,7 @@
 		}
 		//Worm flavor
 		if(player.findStatusAffect(StatusAffects.Infested) >= 0)
-			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + cockDescript(0) + ", tasting the air like a snake's tongue.", false);		
+			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + player.cockDescript(0) + ", tasting the air like a snake's tongue.", false);		
 		if(player.cocks[temp].sock) 
 			sockDescript(temp);
 		//DONE WITH COCKS, moving on!
@@ -925,8 +925,8 @@
 		temp = 0;
 		rando = rand(4);
 		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) 
-			outputText("\nWhere a horse's penis would usually be located, you have instead grown " + multiCockDescript() + "!\n", false);
-		else outputText("\nWhere a penis would normally be located, you have instead grown " + multiCockDescript() + "!\n", false);
+			outputText("\nWhere a horse's penis would usually be located, you have instead grown " + player.multiCockDescript() + "!\n", false);
+		else outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n", false);
 		while(temp < player.cocks.length) 
 		
 		{
@@ -934,9 +934,9 @@
 			//middle cock description
 			if(rando == 0) 
 			{
-				if(temp == 0)outputText("-Your first ", false);
-				else outputText("-Your next ", false);
-				outputText(cockDescript(temp), false);
+				if(temp == 0)outputText("--Your first ", false);
+				else outputText("--Your next ", false);
+				outputText(player.cockDescript(temp), false);
 				outputText(" is ", false);
 				outputText(int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2) 
@@ -950,8 +950,8 @@
 			}
 			if(rando == 1) 
 			{
-				outputText("-One of your ", false);
-				outputText(cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+				outputText("--One of your ", false);
+				outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2) 
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.", false);
 				else 
@@ -964,9 +964,9 @@
 			if(rando == 2) 
 			{
 				if(temp > 0) 
-					outputText("-Another of your ", false);
-				else outputText("-One of your ", false);
-				outputText(cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+					outputText("--Another of your ", false);
+				else outputText("--One of your ", false);
+				outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2) 
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.", false);
 				else 
@@ -979,9 +979,9 @@
 			if(rando == 3) 
 			{
 				if(temp > 0) 
-					outputText("-Your next ", false);
-				else outputText("-Your first ", false);
-				outputText(cockDescript(temp) + " is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+					outputText("--Your next ", false);
+				else outputText("--Your first ", false);
+				outputText(player.cockDescript(temp) + " is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 				if(Math.floor(player.cocks[temp].cockThickness) >= 2) 
 					outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches in diameter.", false);
 				else 
@@ -994,7 +994,7 @@
 			//horse cock flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.HORSE) 
 			{
-				outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your " + cockDescript(temp) + " flares proudly, just like a horse's.", false);
+				outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your " + player.cockDescript(temp) + " flares proudly, just like a horse's.", false);
 			}
 			//dog cock flavor
 			if((player.cocks[temp].cockType == CockTypesEnum.DOG) || (player.cocks[temp].cockType == CockTypesEnum.FOX)) 
@@ -1006,11 +1006,11 @@
 					outputText("fox's cock.");
 
 				if(player.cocks[temp].knotMultiplier >= 1.8) 
-					outputText("  The obscenely swollen lump of flesh near the base of your " + cockDescript(temp) + " looks almost comically mismatched for your " + cockDescript(temp) + ".", false);
+					outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost comically mismatched for your " + player.cockDescript(temp) + ".", false);
 				else if(player.cocks[temp].knotMultiplier >= 1.4) 
-					outputText("  A large bulge of flesh nestles just above the bottom of your " + cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
+					outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
 				else if(player.cocks[temp].knotMultiplier > 1) 
-					outputText("  A small knot of thicker flesh is near the base of your " + cockDescript(temp) + ", ready to expand to help you lodge your " + cockDescript(temp) + " inside a female.", false);
+					outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge your " + player.cockDescript(temp) + " inside a female.", false);
 				//List knot thickness
 				outputText("  The knot is " + Math.floor(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10)/10 + " inches thick when at full size.", false);
 			}
@@ -1061,7 +1061,7 @@
 		}
 		//Worm flavor
 		if(player.findStatusAffect(StatusAffects.Infested) >= 0)
-			outputText("Every now and again slimy worms coated in spunk slip partway out of your " + multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n", false);
+			outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n", false);
 		//DONE WITH COCKS, moving on!
 	}
 	//Of Balls and Sacks!
@@ -1088,13 +1088,13 @@
 		else 
 		{
 			if(player.skinType == SKIN_TYPE_PLAIN) 
-				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your " + multiCockDescriptLight() + ".", false);
+				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 			if(player.skinType == SKIN_TYPE_FUR) 
-				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your " + multiCockDescriptLight() + ".", false);
+				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your " + player.multiCockDescriptLight() + ".", false);
 			if(player.skinType == SKIN_TYPE_SCALES) 
 				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
 			if(player.skinType == SKIN_TYPE_GOO) 
-				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily beneath your " + multiCockDescriptLight() + ".", false);
+				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 		}
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ", false);
 		if(Math.round(player.ballSize) == 1) 
@@ -1224,7 +1224,7 @@
 	{
 		if(player.cocks[0].pierced > 0) 
 		{
-			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your " + cockDescript(0) + ".", false);
+			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your " + player.cockDescript(0) + ".", false);
 		}
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] == 1) 

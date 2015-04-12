@@ -273,7 +273,7 @@ private function acceptYoga():void {
 		if(player.gender > 0)
 			getFucked = cottonFucksYouInShowerRepeat;
 		//if(player.spe >= 50 && !player.isTaur()) option3 = 2819;
-		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
+		simpleChoices("Fuck Her", fuckHer, "Get Fucked", getFucked, "Tantric Sex", option3, "", null, "Leave", leaveCotton);
 	}
 	//First time
 	else if(flags[kFLAGS.TIMES_HAD_YOGA] == 0) {
@@ -292,7 +292,7 @@ private function acceptYoga():void {
 
 		outputText("\"<i>Oh, that's too bad. But you've done pretty good for a beginner,</i>\" she helps you up off the mat and pats you gently on the back. \"<i>Want to hit the showers then?</i>\" Despite having done little more than stretching, you find you are sweating quite a bit... but something makes you wonder if her idea of hitting the shower is the same as yours.", false);
 		//[Shower] or [Leave]
-		simpleChoices("Shower",cottonShowerFunTimes,"",0,"",0,"",0,"Leave",leaveAfterYoga);
+		simpleChoices("Shower", cottonShowerFunTimes, "", null, "", null, "", null, "Leave", leaveAfterYoga);
 	}
 	//(Repeat Encounter (Didn't have sex))
 	//Done yoga > 0 && met type = 1
@@ -307,7 +307,7 @@ private function acceptYoga():void {
 			getFucked = cottonFucksYouInShowerRepeat;
 		if(player.spe >= 50 && !player.isTaur())
 			option3 = cottonTantricSex;
-		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
+		simpleChoices("Fuck Her", fuckHer, "Get Fucked", getFucked, "Tantric Sex", option3, "", null, "Leave", leaveCotton);
 	}
 	//(Repeat Encounter (Had Sex))
 	else {
@@ -329,7 +329,7 @@ private function acceptYoga():void {
 			getFucked = cottonFucksYouInShowerRepeat;
 		if(player.spe >= 50 && !player.isTaur())
 			option3 = cottonTantricSex;
-		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
+		simpleChoices("Fuck Her", fuckHer, "Get Fucked", getFucked, "Tantric Sex", option3, "", null, "Leave", leaveCotton);
 	}
 	//(Increases muscle tone up to 50, speed and feminine features.)
 	player.modTone(52,1);
@@ -423,7 +423,7 @@ private function cottonShowerFunTimes():void {
 		option1 = cottonFirstTimeFuckHer;
 	if(player.gender > 0)
 		option2 = cottonFucksYou;
-	simpleChoices("Fuck Her",option1,"Get Fucked",option2,"ServiceHer",serviceFirstTimeCotton,"",0,"Refuse",refuseFirstTimeCotton);
+	simpleChoices("Fuck Her", option1, "Get Fucked", option2, "ServiceHer", serviceFirstTimeCotton, "", null, "Refuse", refuseFirstTimeCotton);
 }
 
 //(Fuck Her)
@@ -663,7 +663,7 @@ private function fuckCottonInShowerRepeat():void {
 
 		if(player.cockArea(x) >= 100) {
 			//(If PC has one cock)
-			if(player.cockTotal() == 1) outputText("  You feel your " + cockDescript(x) + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  Your " + cockHead(x) + " rubs against her belly, sending ripples of pleasure up your spine.", false);
+			if(player.cockTotal() == 1) outputText("  You feel your " + cockDescript(x) + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  Your " + player.cockHead(x) + " rubs against her belly, sending ripples of pleasure up your spine.", false);
 			//(If PC has multiple cocks)
 			else if(player.cockTotal() > 1) outputText("  You feel your " + multiCockDescriptLight() + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  The group of cocks rubs together as you make out, sending ripples of pleasure up your spine.", false);
 		}
@@ -740,7 +740,7 @@ private function fuckCottonInShowerRepeat():void {
 
 		if(player.cockArea(x) >= 100) {
 			//(If PC has one cock)
-			if(player.cockTotal() == 1) outputText("  You feel your " + cockDescript(x) + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  Your " + cockHead(x) + " rubs against her belly, sending ripples of pleasure up your spine.", false);
+			if(player.cockTotal() == 1) outputText("  You feel your " + cockDescript(x) + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  Your " + player.cockHead(x) + " rubs against her belly, sending ripples of pleasure up your spine.", false);
 			//(If PC has multiple cocks)
 			else if(player.cockTotal() > 1) outputText("  You feel your " + multiCockDescriptLight() + " stirring beneath you, slowly coming to attention, though Cotton's remains curiously limp.  The group of cocks rubs together as you make out, sending ripples of pleasure up your spine.", false);
 			//(If PC has a pussy, add the following)
@@ -1046,7 +1046,7 @@ public function cottonTantricSex():void {
 
 	//(If PC has breasts)
 	if(player.biggestTitSize() >= 2) {
-		outputText("Cotton returns the favor, her short-snouted mouth latching on to one " + nippleDescript(0) + " and sucking it relentlessly. The sensations you get from this are, if anything, greater than normal. Your nipples feel like they're on fire, with every molecule aching to be touch, licked, sucked and teased.", false);
+		outputText("Cotton returns the favor, her short-snouted mouth latching on to one " + nippleDescript(0) + " and sucking it relentlessly. The sensations you get from this are, if anything, greater than normal. Your nipples feel like they're on fire, with every molecule aching to be touched, licked, sucked and teased.", false);
 		//(If PC is lactating, add)
 		if(player.biggestLactation() >= 1) {
 			outputText("  You feel a familiar sensation welling up in your breasts as milk begins pouring into Cotton's mouth. She grins as best she can without letting go of your tit, eagerly drinking down your milk. In yet another moment of trepidation, you realize you can taste your own milk slipping over Cotton's tongue. You smack your lips. It tastes sweet and creamy, and oh-so warm. Cotton moves to your next nipple, letting the first dribble milk onto the both of you. Again Cotton sucks on your " + nippleDescript(0) + " for a moment before it begins dispensing its precious cargo into her mouth. You taste every gulp, each one sweeter than the next, before Cotton pulls back and smacks her lips together. \"<i>You taste so sweet, pet. I simply must have you around for breakfast...</i>\"", false);
@@ -1135,7 +1135,7 @@ public function nomSomeTitMilkCereal():void {
 		player.addStatusValue(StatusAffects.Feeder,1,1);
 		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //COTTON PREGNANCY

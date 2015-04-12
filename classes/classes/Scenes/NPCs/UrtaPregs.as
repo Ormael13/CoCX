@@ -392,7 +392,7 @@ private function goAfterUrtaBirf():void {
 	clearOutput();
 	outputText("You apologise, but there are pressing matters you need to attend to today... but you'll make it up to her somehow, you promise.  Urta looks disappointed, but sighs sadly and nods her head.  \"<i>Of course.  You're still a busy adventurer and all that.  Well, don't worry; I'll make sure this little one gets home and settled in safely.</i>\"");
 	model.time.hours++;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //=Yes=]

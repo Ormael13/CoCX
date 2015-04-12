@@ -150,7 +150,7 @@ public function loadScreenAIR():void
 					loadGameObject(gameObjects[i]);
 					outputText("Slot " + String(i+1) + " Loaded!");
 					statScreenRefresh();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			})(i);
 		}
@@ -170,7 +170,7 @@ public function loadScreenAIR():void
 	"Slot 7", slots[6],
 	"Slot 8", slots[7], 
 	"Slot 9", slots[8], 
-	"Back", 30);
+	"Back", returnToSaveMenu);
 }
 
 public function getGameObjectFromFile(aFile:File):Object
@@ -213,7 +213,7 @@ public function loadScreen():void
 					trace("Loading save with name", saveFileNames[i], "at index", i);
 					if (loadGame(saveFileNames[i])) 
 					{
-						doNext(1);
+						doNext(playerMenu);
 						showStats();
 						statScreenRefresh();
 						outputText("Slot " + i + " Loaded!", true);
@@ -234,7 +234,7 @@ public function loadScreen():void
 	"Slot 7", slots[6],
 	"Slot 8", slots[7], 
 	"Slot 9", slots[8], 
-	"Back", 30);
+	"Back", returnToSaveMenu);
 }
 
 public function saveScreen():void
@@ -285,7 +285,7 @@ public function saveScreen():void
 	"Slot 7", saveFuncs[6], 
 	"Slot 8", saveFuncs[7], 
 	"Slot 9", saveFuncs[8], 
-	"Back", 30);
+	"Back", returnToSaveMenu);
 }
 
 public function saveLoad(e:MouseEvent = null):void
@@ -313,55 +313,74 @@ public function saveLoad(e:MouseEvent = null):void
 	}
 	if (temp == 777)
 	{
-		simpleChoices("", 0, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", 5025);
+		menu();
+		addButton(1, "Load", loadScreen);
+		addButton(2, "Load File", loadFromFile);
+		addButton(3, "Delete", deleteScreen);
+		addButton(4, "Back", kGAMECLASS.gameOver, true);
 		return;
 	}
 	if (player.str == 0)
 	{
-		simpleChoices("", 0, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", kGAMECLASS.mainMenu);
+		simpleChoices("", null, "Load", loadScreen, "Load File", loadFromFile, "Delete", deleteScreen, "Back", kGAMECLASS.mainMenu);
 		return;
 	}
 	if (inDungeon)
 	{
-		simpleChoices("", 0, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", 1);
+		simpleChoices("", null, "Load", loadScreen, "Load File", loadFromFile, "Delete", deleteScreen, "Back", kGAMECLASS.playerMenu);
 		return;
 	}
 	if (gameStateGet() == 3)
-		choices("Save",            saveScreen, 
-				"Load",            loadScreen, 
-				"Load File",      -21, 
-				"Delete",          deleteScreen, 
-				"Back",            0, 
-				"Save to File",   -20, 
-				"Load File",      -21, 
-				"",                0, 
-				"",                0, 
-				"",                0);
+		choices("Save",            saveScreen,
+				"Load",            loadScreen,
+				"Load File",       loadFromFile,
+				"Delete",          deleteScreen,
+				"Back",            null,
+				"Save to File",    saveToFile,
+				"Load File",       loadFromFile,
+				"",                null,
+				"",                null,
+				"",                null);
 	else
 	{
 		if (player.autoSave)
-			choices("Save",           saveScreen, 
-					"Load",           loadScreen, 
-					"AutoSav: ON",    65, 
-					"Delete",         deleteScreen, 
-					"",               0, 
-					"Save to File",  -20, 
-					"Load File",     -21, 
-					"",               0, 
-					"",               0, 
-					"Back",           1);
+			choices("Save",           saveScreen,
+					"Load",           loadScreen,
+					"AutoSav: ON",    autosaveToggle,
+					"Delete",         deleteScreen,
+					"",               null,
+					"Save to File",   saveToFile,
+					"Load File",      loadFromFile,
+					"",               null,
+					"",               null,
+					"Back",           kGAMECLASS.playerMenu);
 		else
-			choices("Save",           saveScreen, 
-					"Load",           loadScreen, 
-					"AutoSav: OFF",   65, 
-					"Delete",         deleteScreen, 
-					"",               0, 
-					"Save to File",  -20, 
-					"Load File",     -21, 
-					"",               0, 
-					"",               0, 
-					"Back",           1);
+			choices("Save",           saveScreen,
+					"Load",           loadScreen,
+					"AutoSav: OFF",   autosaveToggle,
+					"Delete",         deleteScreen,
+					"",               null,
+					"Save to File",   saveToFile,
+					"Load File",      loadFromFile,
+					"",               null,
+					"",               null,
+					"Back",           kGAMECLASS.playerMenu);
 	}
+}
+
+private function saveToFile():void {
+	saveGameObject(null, true);
+}
+
+private function loadFromFile():void {
+	openSave();
+	showStats();
+	statScreenRefresh();
+}
+
+private function autosaveToggle():void {
+	player.autoSave = !player.autoSave;
+	saveLoad();
 }
 
 public function deleteScreen():void
@@ -404,13 +423,13 @@ public function deleteScreen():void
 			"Slot 7", delFuncs[6], 
 			"Slot 8", delFuncs[7], 
 			"Slot 9", delFuncs[8], 
-			"Back", 30);
+			"Back", returnToSaveMenu);
 }
 
 public function confirmDelete():void
 {
 	outputText("You are about to delete the following save: <b>" + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + "</b>\n\nAre you sure you want to delete it?", true);
-	simpleChoices("No", deleteScreen, "Yes", purgeTheMutant, "", 0, "", 0, "", 0);
+	simpleChoices("No", deleteScreen, "Yes", purgeTheMutant, "", null, "", null, "", null);
 }
 
 public function purgeTheMutant():void
@@ -500,7 +519,7 @@ public function loadGame(slot:String):void
 			player.slotName = slot;
 		}
 		
-		doNext(1);
+		doNext(playerMenu);
 	}
 }
 
@@ -913,13 +932,13 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 					stream.writeBytes(bytes);
 					stream.close();
 					outputText("Saved to file: " + airFile.url, true);
-					doNext(1);
+					doNext(playerMenu);
 				}
 				catch (error:Error)
 				{
 					backupAborted = true;
 					outputText("Failed to write to file: " + airFile.url + " (" + error.message + ")", true);
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			CONFIG::STANDALONE
@@ -975,12 +994,12 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	
 	if (!backupAborted)
 	{
-		doNext(1);
+		doNext(playerMenu);
 	}
 	else
 	{
 		menu();
-		addButton(0, "Next", eventParser, 1);
+		addButton(0, "Next", playerMenu);
 		addButton(9, "Restore", restore, slot);
 	}
 	
@@ -1002,7 +1021,7 @@ public function restore(slotName:String):void
 	
 	outputText("Restored backup of " + slotName, true);
 	menu();
-	doNext(1);
+	doNext(playerMenu);
 }
 
 public function openSave():void
@@ -1066,7 +1085,12 @@ public function onFileLoaded(evt:Event):void
 public function ioErrorHandler(e:IOErrorEvent):void
 {
 	outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC_" + ver + ".swf file.\r\rLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.", true);
-	doNext(30);
+	doNext(returnToSaveMenu);
+}
+
+private function returnToSaveMenu():void {
+	var f:MouseEvent;
+	saveLoad(f);
 }
 
 public function onDataLoaded(evt:Event):void
@@ -1094,14 +1118,14 @@ public function onDataLoaded(evt:Event):void
 	catch (rangeError:RangeError)
 	{
 		outputText("<b>!</b> File is either corrupted or not a valid save", true);
-		doNext(30);
+		doNext(returnToSaveMenu);
 	}
 	catch (error:Error)
 	{
 		outputText("<b>!</b> Unhandled Exception", true);
 		outputText("[pg]Failed to load save. The file may be corrupt!");
 
-		doNext(30);
+		doNext(returnToSaveMenu);
 	}
 	statScreenRefresh();
 	//eventParser(1);
@@ -1111,7 +1135,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
 	var game:CoC = getGame();
 	game.dungeonLoc = 0;
-	game.inDungeon = false;
+//Not needed, dungeonLoc = 0 does this:	game.inDungeon = false;
 	game.inRoomedDungeon = false;
 	game.inRoomedDungeonResume = null;
 
@@ -1585,7 +1609,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		
 		// Fixup missing History: Whore perk IF AND ONLY IF the flag used to track the prior selection of a history perk has been set
-		if (hasHistoryPerk == false && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] != 0)
+		if (hasHistoryPerk == false && flags[kFLAGS.HISTORY_PERK_SELECTED] != 0)
 		{
 			player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
 		}
@@ -1803,7 +1827,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
-		doNext(1);
+		doNext(playerMenu);
 	}
 }
 

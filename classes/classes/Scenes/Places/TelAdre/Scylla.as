@@ -123,16 +123,16 @@ private function helpScylla():void {
 	if(player.balls > 0) outputText(" and you feel your balls tightening", false);
 	outputText(". When she feels the twitching running down your body, Scylla tilts her head and swallows, hard, pulling your dick deeper into her throat. Seemingly determined to swallow your length, she hardens her expression and swallows again, her mouth closing around you like a vacuum. You can see her neck bulge as your dick is drawn deeper into her hungry maw and you briefly wonder how she's breathing.\n\n", false);
 
-	outputText("You have no time to contemplate further as you feel your orgasm burst, cum rushing through your length and down her sweet, virginal throat. Scylla gives a muffled gasp as the first spurt of your cum reaches her belly, and her eyes roll back into her head as a mind-blowing orgasm tears through her. Only barely aware of what's happening, you notice that her swallowing has intensified and now her head is accelerating along your shaft until, at last, her lower lip presses against your " + balls("throbbing balls","taut abdomen") + ". She swallows load after thick load like one who's found an oasis in the desert. She wraps her arms around your ass and pushes you back onto the bed, her head twisting this way and that, milking you of your precious seed.\n\n", false);
+	outputText("You have no time to contemplate further as you feel your orgasm burst, cum rushing through your length and down her sweet, virginal throat. Scylla gives a muffled gasp as the first spurt of your cum reaches her belly, and her eyes roll back into her head as a mind-blowing orgasm tears through her. Only barely aware of what's happening, you notice that her swallowing has intensified and now her head is accelerating along your shaft until, at last, her lower lip presses against your " + (player.balls > 0 ? "throbbing balls" : "taut abdomen") + ". She swallows load after thick load like one who's found an oasis in the desert. She wraps her arms around your ass and pushes you back onto the bed, her head twisting this way and that, milking you of your precious seed.\n\n", false);
 
-	outputText("Your spurts slow down and you pant at how much you came when Scylla's eyes lock with yours. You can tell in that instant that she's still thirsty. The tiny, nub-like horns on her skull pulse and with a startling crack of bones, grow backwards, curving around her ears. The sudden surge of demonic taint " + balls("is immediately apparent as your balls expand as if filling with helium. You are obliged to slide off the bed a bit as they droop down and rest against the ground, as large as barrels. Scylla's lips inflate with a whorish sucking noise and now block your sight of every part of her face but the desperate, hungry blue eyes. Her tongue must've grown in her mouth, because you can feel it wrapping around your dick like a coiling serpent, pulling tighter and tighter before loosening in a milking motion. Your overstuffed balls immediately respond. A bulge of cum as large as a baseball works its way past her suckling lips and down her long, distended neck. The sensation of the cum spraying out of your " + cockHead(0) + " causes your toes to curl and makes you clench your fist so hard that blood leaks between your fingers.","seems to flow into you with a hellish warmth. The subtle changes of her hungering magic worms its way into your prostate and the swelling sensation obliges you to slide to the edge of the bed, a shuddering need for release wrapping iron bands around your lungs. Scylla's lips inflate with a whorish sucking noise and now block your sight of every part of her face but the desperate, hungry blue eyes. Her tongue must've grown in her mouth, because you can feel it wrapping around your dick like a coiling serpent, pulling tighter and tighter before loosening in a milking motion. Your entranced body immediately responds. A bulge of cum as large as a baseball works its way past her suckling lips and down her long, distended neck. The sensation of the cum spraying out of your " + cockHead(0) + " causes your toes to curl and makes you clench your fist so hard that blood leaks between your fingers.") + "\n\n", false);
+	outputText("Your spurts slow down and you pant at how much you came when Scylla's eyes lock with yours. You can tell in that instant that she's still thirsty. The tiny, nub-like horns on her skull pulse and with a startling crack of bones, grow backwards, curving around her ears. The sudden surge of demonic taint " + (player.balls > 0 ? "is immediately apparent as your balls expand as if filling with helium. You are obliged to slide off the bed a bit as they droop down and rest against the ground, as large as barrels. Scylla's lips inflate with a whorish sucking noise and now block your sight of every part of her face but the desperate, hungry blue eyes. Her tongue must've grown in her mouth, because you can feel it wrapping around your dick like a coiling serpent, pulling tighter and tighter before loosening in a milking motion. Your overstuffed balls immediately respond. A bulge of cum as large as a baseball works its way past her suckling lips and down her long, distended neck. The sensation of the cum spraying out of your " + player.cockHead() + " causes your toes to curl and makes you clench your fist so hard that blood leaks between your fingers." : "seems to flow into you with a hellish warmth. The subtle changes of her hungering magic worms its way into your prostate and the swelling sensation obliges you to slide to the edge of the bed, a shuddering need for release wrapping iron bands around your lungs. Scylla's lips inflate with a whorish sucking noise and now block your sight of every part of her face but the desperate, hungry blue eyes. Her tongue must've grown in her mouth, because you can feel it wrapping around your dick like a coiling serpent, pulling tighter and tighter before loosening in a milking motion. Your entranced body immediately responds. A bulge of cum as large as a baseball works its way past her suckling lips and down her long, distended neck. The sensation of the cum spraying out of your " + player.cockHead() + " causes your toes to curl and makes you clench your fist so hard that blood leaks between your fingers.") + "\n\n", false);
 
-	outputText("Scylla's milking pulls glob after glob of cum from your " + balls("monstrous nuts","gushing loins") + " until you realize that those have been mere \"drops\" of pre-cum. Your eyes go wide as Scylla meets your gaze with a desperate lust. Her hands, still wrapped around your ass, part the cheeks and her long, thin middle finger slides so easily inside you that it might've been greased. You can feel a slight pressure as it strokes you gently before pressing on your prostate. Like a release button had been pressed, your ");
+	outputText("Scylla's milking pulls glob after glob of cum from your " + (player.balls > 0 ? "monstrous nuts" : "gushing loins") + " until you realize that those have been mere \"drops\" of pre-cum. Your eyes go wide as Scylla meets your gaze with a desperate lust. Her hands, still wrapped around your ass, part the cheeks and her long, thin middle finger slides so easily inside you that it might've been greased. You can feel a slight pressure as it strokes you gently before pressing on your prostate. Like a release button had been pressed, your ");
 	if(player.balls > 0) outputText("balls quiver ");
 	else outputText("body quivers ");
-	outputText("and your mind shatters. You grab onto the two horns growing out of her head like they're safety bars and crush her lips and face against your abdomen as you buck into her head. Your shaft swells with the pressure of your load and Scylla's already taxed throat balloons outward. You can see the cum pumping into her with every heartbeat as her belly stretches, fills, and expands to accommodate the milk of your loins. As the cum flows into her, Scylla's breasts begin to respond to the nutrition and they expand nearly as much as her stomach, easily tearing through her shift of a robe.  She swells until her tits " + balls("equal ","are nearly") + " the size of " + balls("your balls","barrels") + ". They, along with the bloated cum-dump of her belly, pin her to the ground. Cum starts spurting in goopy strands out of her nose as it overflows her stomach and is locked in by her pussy-tight mouth.\n\n", false);
+	outputText("and your mind shatters. You grab onto the two horns growing out of her head like they're safety bars and crush her lips and face against your abdomen as you buck into her head. Your shaft swells with the pressure of your load and Scylla's already taxed throat balloons outward. You can see the cum pumping into her with every heartbeat as her belly stretches, fills, and expands to accommodate the milk of your loins. As the cum flows into her, Scylla's breasts begin to respond to the nutrition and they expand nearly as much as her stomach, easily tearing through her shift of a robe.  She swells until her tits " + (player.balls > 0 ? "equal" : "are nearly") + " the size of " + (player.balls > 0 ? "your balls" : "barrels") + ". They, along with the bloated cum-dump of her belly, pin her to the ground. Cum starts spurting in goopy strands out of her nose as it overflows her stomach and is locked in by her pussy-tight mouth.\n\n", false);
 
-	outputText("Eventually, even your impossibly " + balls("swollen testicles","potent reserves") + " empty and you immediately pass out, Scylla's dick-sucking lips still suckling at the base of your shaft, your dick still hard and crammed down her throat. When you awaken, your " + balls("balls have shrunk back to almost normal- they've kept a bit of the increased size Scylla's thirst gave them. Scylla's body appears to have metabolized your cum already, as her belly and breasts have receded enough to allow her to stand. She still looks 9 months pregnant and her lips have been permanently transformed into a cock-sucking ring, but her horns have gone down to nubs and that familiar look of shy innocence has returned to the languid pools of her eyes. \"<i>I can't thank you enough,</i>\" she gushes. \"<i>I'm finally full! And I'm still a virgin,</i>\" she adds, giving you a wet kiss on the forehead.  \"<i>Now I can go back to my mission of relieving those who suffer,</i>\" she happily announces, wiping drool from her mouth with a pinkie. You have a pretty good idea how she'll do the relieving in the","body seems to have returned more or less to normal- though you get the feeling Scylla's thirst may have left some lingering effects to help you sate her in the future. Scylla's body appears to have metabolized your cum already, as her belly and breasts have receded enough to allow her to stand. She still looks 9 months pregnant and her lips have been permanently transformed into a cock-sucking ring, but her horns have gone down to nubs and that familiar look of shy innocence has returned to the languid pools of her eyes. \"<i>I can't thank you enough,</i>\" she gushes. \"<i>I'm finally full! And I'm still a virgin,</i>\" she adds, giving you a wet kiss on the forehead.  \"<i>Now I can go back to my mission of relieving those who suffer,</i>\" she happily announces, wiping drool from her mouth with a pinkie. You have a pretty good idea how she'll do the relieving in the") + " future...", false);
+	outputText("Eventually, even your impossibly " + (player.balls > 0 ? "swollen testicles" : "potent reserves") + " empty and you immediately pass out, Scylla's dick-sucking lips still suckling at the base of your shaft, your dick still hard and crammed down her throat. When you awaken, your " + (player.balls > 0 ? "balls have shrunk back to almost normal- they've kept a bit of the increased size Scylla's thirst gave them. Scylla's body appears to have metabolized your cum already, as her belly and breasts have receded enough to allow her to stand. She still looks 9 months pregnant and her lips have been permanently transformed into a cock-sucking ring, but her horns have gone down to nubs and that familiar look of shy innocence has returned to the languid pools of her eyes. \"<i>I can't thank you enough,</i>\" she gushes. \"<i>I'm finally full! And I'm still a virgin,</i>\" she adds, giving you a wet kiss on the forehead.  \"<i>Now I can go back to my mission of relieving those who suffer,</i>\" she happily announces, wiping drool from her mouth with a pinkie. You have a pretty good idea how she'll do the relieving in the" : "body seems to have returned more or less to normal- though you get the feeling Scylla's thirst may have left some lingering effects to help you sate her in the future. Scylla's body appears to have metabolized your cum already, as her belly and breasts have receded enough to allow her to stand. She still looks 9 months pregnant and her lips have been permanently transformed into a cock-sucking ring, but her horns have gone down to nubs and that familiar look of shy innocence has returned to the languid pools of her eyes. \"<i>I can't thank you enough,</i>\" she gushes. \"<i>I'm finally full! And I'm still a virgin,</i>\" she adds, giving you a wet kiss on the forehead.  \"<i>Now I can go back to my mission of relieving those who suffer,</i>\" she happily announces, wiping drool from her mouth with a pinkie. You have a pretty good idea how she'll do the relieving in the") + " future...", false);
 	player.orgasm();
 	dynStats("lib", 4, "sen", 3, "cor", 2);
 	player.cumMultiplier += 2;
@@ -174,7 +174,7 @@ private function scyllaRoundIIPartII():void {
 	scyllaSprite();
 	outputText("", true);
 	outputText(images.showImage("scylla-help-round-two-part-two"), false);
-	outputText("You stroke her hair, letting your fingertips linger over the curling bone around her ears. Though firm as iron, the horns are warm and soft, almost like fingers. Absently caressing her cheeks, you gently press her head down, toward your groin and she gratefully sighs as she smells the musk of your body. Pulling away the cloth around your legs, she rubs her forehead affectionately against your stiffening cock. Scylla tries unsuccessfully to slurp back the torrent of drool that leaks past her locked lips when she almost reverently " + balls("cups your balls with both palms","strokes your crest with her fingertips") + ". Her expression is somewhere between hunger and lust, like one stranded at sea who finally meets another living soul.\n\n", false);
+	outputText("You stroke her hair, letting your fingertips linger over the curling bone around her ears. Though firm as iron, the horns are warm and soft, almost like fingers. Absently caressing her cheeks, you gently press her head down, toward your groin and she gratefully sighs as she smells the musk of your body. Pulling away the cloth around your legs, she rubs her forehead affectionately against your stiffening cock. Scylla tries unsuccessfully to slurp back the torrent of drool that leaks past her locked lips when she almost reverently " + (player.balls > 0 ? "cups your balls with both palms" : "strokes your crest with her fingertips") + ". Her expression is somewhere between hunger and lust, like one stranded at sea who finally meets another living soul.\n\n", false);
 
 	outputText("With trembling hands, Scylla lifts your shaft to her thirsty lips and runs the point of her tongue in quick swirls around its head. Then, in a fluid motion, she dives forward, your dick sliding through the hot, lubricated ring and into her mouth. She closes her eyes with an orgasmic moan and shivers as your penis hits the back of her throat and she begins to feed your long inches down her pussy-tight neck. Wrapping a hand lightly over her windpipe, you can feel your dick stuffing her clenching esophagus. You tilt her chin up and groan as the inferno heat of the nun's body washes over your cock. You squeeze her throat and you can feel your fingers clenching your dick through the cock-sheath of her pale skin. Scylla's heartbeat races at the pressure, every frenzied pulse contracting her muscles even as your blood pumps faster to fully inflate your organ.\n\n", false);
 
@@ -182,7 +182,7 @@ private function scyllaRoundIIPartII():void {
 
 	if(player.hasKnot(0)) outputText("Unable to hold on, your knot balloons inside of her mouth, the pulsing flesh pinning her tongue and locking her head onto your dick.  ", false);
 	else if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("You hiss in anticipation as the head of your horse-cock flares inside of her stomach, its girth almost double your dick's.  ", false);
-	outputText(balls("Your balls churn and you","You") + " can feel your orgasm building as your muscles clench and your fingers spasm. Scylla grinds her tits against the cock in her throat as tightly as if she were choking herself and her body trembles in wet anticipation. But...\n\n", false);
+	outputText((player.balls > 0 ? "Your balls churn and you" : "You") + " can feel your orgasm building as your muscles clench and your fingers spasm. Scylla grinds her tits against the cock in her throat as tightly as if she were choking herself and her body trembles in wet anticipation. But...\n\n", false);
 
 	outputText("... something's wrong. Still on the verge of cumming, you find yourself unable to. With shaking hands, you pull Scylla's bloated lips apart and remember the gag her horns made around her mouth. You realize that while it was easy entry to the back of her throat earlier, now that your dick is swollen to bursting, the horns are acting as a cock-ring, keeping you from cumming.  ", false);
 	if(player.hasKnot(0)) outputText("Frustrated, you try to pull back, but your bloated knot is far too large for her tight mouth, keeping the two of you hooked together.  ", false);
@@ -234,7 +234,7 @@ public function scyllaRoundThreeCUM():void {
 
 		outputText("After seeing that display, you've got a few questions for her. What would you like to discuss?", false);
 
-		simpleChoices("Belly",scyllaIIIBellyChat,"Breathing",scyllaIIIHOWZUBREETH,"",0,"",0,"",0);
+		simpleChoices("Belly", scyllaIIIBellyChat, "Breathing", scyllaIIIHOWZUBREETH, "", null, "", null, "", null);
 	}
 	//Special for cum pumps
 	else {
@@ -245,7 +245,7 @@ public function scyllaRoundThreeCUM():void {
         outputText("Scylla is inside, daintily smoothing the wrinkles from her too-tight velvet black habit.  Her belly is swollen almost to bursting and she absently strokes it with one hand while her other wipes a slimy glob of cum from the side of her mouth with an alabaster pinkie.  She slides the finger into her mouth and sucks it hard enough to bring a blush to her cheeks, sighing in savory delight.  In her other hand, she's clutching a massive, freshly emptied candy-colored condom that glistens as though licked clean.  As you're about to knock on the door and greet her, you hear a loud growling sound and your instincts drop you to a wary crouch, looking for the creature that must've snuck through Tel'Adre's gates.  A gurgle and rumble follow and you realize that it's Scylla's tummy that's making those monstrous noises.  Before your eyes, her stomach quivers and pulses, flesh roiling and twitching violently under the apparently elastic robe.  Then, with a deep draining slurp, her belly contracts, sinking inward until it is flat and smooth.  It seems the nun just digested a few gallons of cum in a matter of seconds.\r\r", false);
 		outputText("She pats her empty tummy and sighs, half in relief before a second rumble comes from her gut.  \"<i>Darn,</i>\" she chirps in her soft, quiet voice, \"<i>still thirsty.</i>\" She squeaks in what you assume was supposed to be a frustrated grumble.  Sitting down on the bed, she notices you in the doorway at last.  Her face lights up at seeing her friend, but she immediately averts her eyes.  \"<i>I'm sorry about my cursing just now,</i>\" she apologizes bashfully.  \"<i>I'm just having a little trouble.  Please, sit down and talk with me.</i>\" She pats the bed next to her plump thighs.\r\r", false);
         outputText("After seeing that display, you've got a few questions for her.  What would you like to discuss?", false);
-        simpleChoices("Belly",scyllaIIIBellyChat,"Breathing",scyllaIIIHOWZUBREETH,"",0,"",0,"",0);
+        simpleChoices("Belly", scyllaIIIBellyChat, "Breathing", scyllaIIIHOWZUBREETH, "", null, "", null, "", null);
 	}
 }
 
@@ -398,7 +398,7 @@ private function scyllaRoundIVPtIII():void {
 	outputText("Scylla sits heavily on her stool, panting, with sweat dripping down her neck and into her heaving cleavage. Her thirst must be overpowering after defying the demon. She stares down at the stunned body of the imp and wets her lips. The tiny nubs poking out of her hair sharpen before your eyes, growing outwards and curling slowly in the air. What will you do?", false);
 
 	//[Watch] [Kiss]
-	simpleChoices("Watch",scyllaRoundIVPtIVWATCH,"Kiss Her",scyllaPtIVKissPtI,"",0,"",0,"",0);
+	simpleChoices("Watch", scyllaRoundIVPtIVWATCH, "Kiss Her", scyllaPtIVKissPtI, "", null, "", null, "", null);
 }
 
 private function scyllaRoundIVPtIVWATCH():void {
@@ -558,7 +558,7 @@ private function scyllaPtVFirstTimeII():void {
 
 	outputText("You feel a little shitty about spying on the three as they shared their weaknesses and you think it might be best to walk away from this one. Or, you could admit to your spying and share your own struggles with addiction. Another, darker part of you thinks that these girls seem awfully vulnerable right about now. What will you do?  Will you share, take advantage, or leave them in peace?", false);
 	//[Share] [Take Advantage] [Leave]
-	simpleChoices("Share",scyllaPtVShare,"Advantage",scyllaPtVTakeAdvantage,"",0,"",0,"Leave",scyllaPtVLeave);
+	simpleChoices("Share", scyllaPtVShare, "Advantage", scyllaPtVTakeAdvantage, "", null, "", null, "Leave", scyllaPtVLeave);
 }
 //[Nun]	(Repeat)
 private function scyllaPtVRepeat():void {
@@ -566,7 +566,7 @@ private function scyllaPtVRepeat():void {
 	outputText("", true);
 	outputText("Scylla's at the bar, filling up another large tray of drinks. Judging by how many she's got, you assume she's giving the addiction counseling meeting another shot. The nun is murmuring to herself, possibly rehearsing a sermon or maybe just working up the strength to be the pillar the other girls need. She heads upstairs and you ponder what to do as you watch her go. Will you join them?\n\n", false);
 	//[Share][Take Advantage][Leave]
-	simpleChoices("Share",scyllaPtVShare,"Advantage",scyllaPtVTakeAdvantage,"",0,"",0,"Leave",scyllaPtVLeave);
+	simpleChoices("Share", scyllaPtVShare, "Advantage", scyllaPtVTakeAdvantage, "", null, "", null, "Leave", scyllaPtVLeave);
 }
 //[Leave]	(First time and Repeat)
 private function scyllaPtVLeave():void {
@@ -737,7 +737,7 @@ private function scyllaPtVShare():void {
 	var tentacles:Function = null;
 	if(player.tentacleCocks() >= 2) tentacles = shareTentaclesWithScylla;
 	//CHOOSE HERE
-	simpleChoices("Cum",cum,"Milk",milk,"Sex",sex,"Tentacles",tentacles,"None",scyllaPtVNoDiscussion);
+	simpleChoices("Cum", cum, "Milk", milk, "Sex", sex, "Tentacles", tentacles, "None", scyllaPtVNoDiscussion);
 }
 private function scyllaPtVNoDiscussion():void {
 	scyllaSprite();
@@ -1099,7 +1099,7 @@ public function Scylla6():void {
 	outputText("The nun guides you down an alley, talking about how she saw a bunny the other day when a couple of felines rush past, jostling you as they do so. You pat your pockets and notice they're emptier than usual, so you let go of Scylla's hand and turn around to chase the thieves. As you do so, you hear a soft shuffling behind you and the nun gasps.\n\n", false);
 	var duck:Number = 0;
 	//[Next][Duck! (high int/speed only)]
-	simpleChoices("Next",Scylla6SLOW,"Duck!",Scylla6DUCK,"",0,"",0,"",0);
+	simpleChoices("Next", Scylla6SLOW, "Duck!", Scylla6DUCK, "", null, "", null, "", null);
 }
 //(super high Intelligence or speed)
 private function Scylla6DUCK():void {
@@ -1132,7 +1132,7 @@ private function Scylla6SLOW():void {
 		//[Yell]      [Wait]    [Kick Ass (Super high str only)]
 		var kickass:Function = null;
 		if(player.str >= 85) kickass = lactateAndKickAss;
-		simpleChoices("Yell",Scylla6YellForHelp,"Wait",Scylla6MilkyWait,"Kick Ass",kickass,"",0,"",0);
+		simpleChoices("Yell", Scylla6YellForHelp, "Wait", Scylla6MilkyWait, "Kick Ass", kickass, "", null, "", null);
 	}
 	//else! //[Player is not Lactating]
 	else {
@@ -1149,7 +1149,7 @@ private function Scylla6SLOW():void {
 			rapeWorld = Scylla6NoMilkRAPETHEWORLD;
 		}
 		//[Get Help] [Submit (VAGINA+DICk ONLY)] [Rape]
-		simpleChoices("Get Help", Scylla6NoMilkGetHelp, "Submit", submit, "Rape", rapeWorld, "", 0, "", 0);
+		simpleChoices("Get Help", Scylla6NoMilkGetHelp, "Submit", submit, "Rape", rapeWorld, "", null, "", null);
 
 	}
 }
@@ -1173,7 +1173,7 @@ private function Scylla6YellForHelp():void {
 
 	outputText("\"<i>Sorry about this. These damned milk-freaks have been coming out of the woodwork lately. A real menace, if you ask me. Don't worry, they'll never bother you again.</i>\" She pauses, as an unpleasant thought strikes her and she makes a face. \"<i>Unless... you were just up to some moronic exhibition-bondage crap?</i>\" She manages to blush despite the stern tone, bobbed ears lowering. The cats look pitifully at you, tired, hungry, and horny despite their predicament. Will you turn them in, or lie to cover for them?\n\n", false);
 	// [Truth] [Lie]
-	simpleChoices("Truth",Scylla6AfterYellTruth,"Lie",Scylla6AfterYellLie,"",0,"",0,"",0);
+	simpleChoices("Truth", Scylla6AfterYellTruth, "Lie", Scylla6AfterYellLie, "", null, "", null, "", null);
 }
 //[Truth]
 private function Scylla6AfterYellTruth():void {
@@ -1256,7 +1256,7 @@ private function Scylla6NoMilkGetHelp():void {
 
 	outputText("\"<i>Sorry about this. These damned milk-freaks have been coming out of the woodwork lately. A real menace, if you ask me. Don't worry, they'll never bother you again.</i>\" She pauses, as an unpleasant thought strikes her and she makes a face. \"<i>Unless... you were just up to some moronic exhibition-bondage crap?</i>\" She manages to blush despite the stern tone, bobbed ears lowering. The cats look pitifully at you, tired, hungry, and horny despite their predicament. Will you turn them in, or lie to cover for them?\n\n", false);
 	// [Truth] [Lie]
-	simpleChoices("Truth",Scylla6NoMilkTruth,"Lie",Scylla6NoMilkLie,"",0,"",0,"",0);
+	simpleChoices("Truth", Scylla6NoMilkTruth, "Lie", Scylla6NoMilkLie, "", null, "", null, "", null);
 }
 //[Truth]
 private function Scylla6NoMilkTruth():void {

@@ -39,7 +39,7 @@ public function encounterASandTarp():void {
 			if(player.inte > 65) outputText("Something about this scene puts you on edge.  How come you've never encountered quicksand in this desert before, with no water and its steady, stubborn, but not violent winds?  There's something odd about the man, too - although he probably isn't a demon, you can't quite make his features out clearly through the heat haze.  ");
 			outputText("You think you could just about reach him with your hand if you were careful.  If you're going to save him, it has to be now; even in the short time you've been here he has sunk down to his collarbone.  He stares at you with plaintive despair.");
 		}
-		simpleChoices("Save",saveTheSandTarps,"Don't Save",dontSaveTheTarps,"",0,"",0,"",0);
+		simpleChoices("Save", saveTheSandTarps, "Don't Save", dontSaveTheTarps, "", null, "", null, "", null);
 	}
 	else {
 		//Standard encounter: 
@@ -48,14 +48,14 @@ public function encounterASandTarp():void {
 			outputText("\n\nMoving as quickly and lightly as you can, you manage to hop clear of the sandtrap's pitfall and claw your way up a relatively stable dune.  You turn to take the androgynous creature in, half buried in its deep hollow.");
 			outputText("\n\n\"<i>You've got quick feet, little ant!</i>\" it giggles.  It lowers its brow and leers up at you with smouldering black eyes, its hands slowly and sensuously trailing patterns in the sand.  \"<i>I bet you're good at lots of other things, too.  Why doesn't the brave little ant come down here and show me?</i>\"  If you're going to fight this creature, you will have to step into its treacherous hollow to get in range, which is surely its intention - if you try launching things at it from where you are, it will probably just hide itself.  On the other hand, it would be easy to just ignore its taunts and walk away.");
 			//Fight]/[Leave]
-			simpleChoices("Fight",startSandTarpFight,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+			simpleChoices("Fight", startSandTarpFight, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 		}
 		//Speed check fail: 
 		else {
 			outputText("\n\nYou don't move quickly enough, however, and you may as well be running on the spot; the edge of the pit recedes as the fluid sand carries you downwards.  You struggle upright as best you can and ready yourself to fight the sandtrap, which is leering at you hungrily from the bottom of its vast pit.");
 			outputText("\n\n\"<i>Only a matter of time now, little ant,</i>\" it says huskily, in its fluttering, buzzing voice.  You will have to defeat it in order to escape, and before it pulls you to the bottom!");
 			startCombat(new SandTrap());
-			doNext(1);
+			doNext(playerMenu);
 		}
 	}
 }
@@ -83,7 +83,7 @@ private function saveTheSandTarps():void {
 	}
 	startCombat(new SandTrap());
 	monster.changeStatusValue(StatusAffects.Level,1,2);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Don't Save]: 
@@ -111,14 +111,14 @@ private function dontSaveTheTarps():void {
 	outputText(" midriff exposed and glamour gone, the creature looks quite different; six eyes as black as its hair look at you hungrily from its beautiful androgynous face, whilst four slender arms trail patterns in the sand around its willowy, flat-chested midsection.  It wriggles its body tauntingly at you, making the sand beneath it move ponderously.  You glimpse insect chitin beneath its flat humanoid belly; the buried half of this creature must be monstrous.");
 	outputText("\n\n\"<i>You aren't as slow as you look, little ant,</i>\" it calls up to you, grinning slyly.  It speaks in a buzzing, fluttering voice which is nothing like the one it attempted to entice you into its trap with.  \"<i>Why don't you come down here and dance for me some more?  I'm sure a quick, strong traveller like you could run rings around a simple little sandtrap like me.</i>\"  If you're going to fight this creature, you will have to step into its treacherous hollow to get in range, which is surely its intention - if you try launching things at it from where you are, it will probably just hide itself.  On the other hand, it would be easy to just ignore its taunts and walk away.");
 	//[Fight]/[Leave]
-	simpleChoices("Fight",startSandTarpFight,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+	simpleChoices("Fight", startSandTarpFight, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 }
 
 
 private function startSandTarpFight():void {
 	startCombat(new SandTrap());
+	playerMenu();
 	spriteSelect(97);
-	eventParser(1);
 }
 
 
@@ -172,7 +172,8 @@ internal function pcBeatsATrap():void {
 	if(player.lust >= 33) {
 		outputText("\n\nBefore you go, you take in the helpless body of your would-be ambusher.  What do you do?");
 		
-		choices("Naga3Some",nagaThreeSome,"UseYourCock",putYourDickInIt,"RideVaginal",rideDatSantTrap,"Handjob",useSandTarpsHand,"",0,"",0,"",0,"",0,"B.Titfuck",bikiniTits,"Leave",cleanupAfterCombat);
+		choices("Naga3Some", nagaThreeSome, "UseYourCock", putYourDickInIt, "RideVaginal", rideDatSantTrap, "Handjob", useSandTarpsHand, "", null,
+			"", null, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
 	}
 	else cleanupAfterCombat();
 }
@@ -672,9 +673,7 @@ private function sandTrapBadEndFinale():void {
 	outputText(".  But, of course, as a fresh dominant urge takes you and drags you reluctantly from your needy genitals, there is much still left to be done.");
 	
 	outputText("\n\nYou spend the rest of your life fulfilling the duties of a Flytrap, leading unsuspecting wanderers of the desert into the grasp of the Sandtraps.  When times are lean you gladly submit to the Sandtraps yourself - gleefully allow them to pump your moist, obedient ass full of eggs.  They don't have to do that too often though, because you quickly become an absolute master at fooling travellers with your looks; able to sense what even the most cautious want to see and becoming it at the twitch of a wing, the ultimate desert mirage.  Before too long the air of Mareth's desert and plains become full of little Flytraps, their reaches treacherously pregnant with shifting Sandtraps, deadly even to the demons; you are joined by many others who willingly submit to the warm oil and the thoughts in the sky.  You have fulfilled your desztiny.");
-	
-	//GAME OVER.
-	eventParser(5035);
+	getGame().gameOver();
 }
 	}
 }

@@ -196,7 +196,7 @@ private function maraeBadEnd():void {
 	outputText("<b>Some time passes...</b>\n\n", false);
 	outputText("You're still on the island with Marae impaled on two of the wriggling monstrosities you call your cocks.    You haven't pulled free in days, but why would you?  Your bodies are made for each other, a pile of wriggling fuckmeat with holes that drink your cum like the desert drinks water, and a once-hero who lives to sate his mass of seething tentacles.   The two of you are two halves of the same puzzle, locked together in an endless orgy.  You fondly remember watching the shining liquid that was once your soul drip from the wet folds of her flower-petals, crystallizing into a tiny rock much smaller than Marae's own.", false);
 	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) outputText("\n\nOn the shore, Marble looks out on the lake, wondering what happened to the one whom she loved.", false);
-	eventParser(5035);
+	getGame().gameOver();
 }
 
 private function maraeStealLethicite():void {
@@ -301,7 +301,7 @@ public function level2MaraeEncounter():void {
 	if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0 || player.findPerk(PerkLib.MaraesGiftStud) >= 0) outputText("second ", false);
 	outputText("dose of Marae's tender affections.</i>\"\n\n", false);
 	//Incase something breaks
-	doNext(1);
+	doNext(playerMenu);
 	//Cant fly?  Stuck for sex!
 	if(!player.canFly()) {
 		outputText("You don't see any escape!", false);
@@ -310,7 +310,7 @@ public function level2MaraeEncounter():void {
 	//Can fly?  Choice to run
 	else {
 		outputText("You don't think she's counted on your wings.  If you tried to fly you could probably get out of the reach of her tentacles in short order.", false);
-		simpleChoices("Stay",MaraeIIStageII,"",0,"",0,"",0,"Fly Away",MaraeIIFlyAway);
+		simpleChoices("Stay", MaraeIIStageII, "", null, "", null, "", null, "Fly Away", MaraeIIFlyAway);
 	}
 }
 
@@ -435,7 +435,7 @@ private function MaraeIIStageII():void {
 		outputText("Cum boils out of your ", false);
 		if(player.balls > 0) outputText("rapidly contracting balls", false);
 		else outputText("tentacle-squeezed prostate", false);
-		outputText(" and erupts into Marae's womb.  Your hips rock forward, grazing her cervix with your " + cockHead(0) + " to better fill her uterus.  ", false);
+		outputText(" and erupts into Marae's womb.  Your hips rock forward, grazing her cervix with your " + player.cockHead() + " to better fill her uterus.  ", false);
 		if(player.cockTotal() > 1) outputText("The " + cockDescript(1) + " in her ass spasms and explodes with its brother, glazing her slippery colon with a coating of syrupy spunk.  ", false);
 		if(player.cockTotal() > 2) {
 			outputText("Neglected but orgasming, ", false);

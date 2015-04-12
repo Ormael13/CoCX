@@ -1,5 +1,13 @@
 ﻿import classes.internals.Utils;
 
+private static const DUNGEON_CAVE_ENTRANCE:int			= 10;
+private static const DUNGEON_CAVE_TUNNEL:int			= 11;
+private static const DUNGEON_CAVE_GATHERING_HALL:int	= 12;
+private static const DUNGEON_CAVE_FUNGUS_CAVERN:int		= 13;
+private static const DUNGEON_CAVE_TORTURE_ROOM:int		= 14;
+private static const DUNGEON_CAVE_SECRET_TUNNEL:int		= 15;
+private static const DUNGEON_CAVE_ZETAZ_CHAMBER:int		= 16;
+
 //Index:
 //-Imp Gang
 //-Plant - "Encapsulation Start"
@@ -11,6 +19,25 @@
 // VALA_CUMBATH_TIMES:int = 433;
 // TIMES_VALA_CONSENSUAL_BIG:int = 767;
 // TIMES_VAPULA_AND_GIANT_VALA:int = 768;
+
+public function enterZetazsLair():void {
+//	inDungeon = true;
+	dungeonEnterRoom(DUNGEON_CAVE_ENTRANCE);
+//	dungeonLoc = 10;
+//	eventParser(1);
+}
+
+public function leaveZetazsLair():void {
+//	inDungeon = false;
+	dungeonLoc = 0;
+	clearOutput();
+	outputText("You leave the cave behind and take off through the deepwoods back towards camp.");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function impHordeStartCombat():void {
+	startCombat(new ImpHorde(), true);
+}
 
 public function impGangAI():void {
 	if(monster.findStatusAffect(StatusAffects.ImpUber) >= 0) impGangUber();
@@ -162,7 +189,7 @@ public function impGangUber():void {
 		if(player.biggestLactation() > 1) outputText(" as they begin to drip milk", false);
 		outputText(".  The lower portions of your coverings ", false);
 		if(player.cockTotal() > 0) {
-			outputText("are pulled tight by your " + multiCockDescript() + ", ", false);
+			outputText("are pulled tight by your " + player.multiCockDescript() + ", ", false);
 			if(player.totalCocks() > 1) outputText("each ", false);
 			outputText("beading a drop of pre-cum at the tip", false);
 			if(player.hasVagina()) outputText(", and in addition, the clothes around your groin ", false);
@@ -225,7 +252,7 @@ public function loseToImpMob():void {
 	}
 	//(DICK!)
 	if(player.totalCocks() > 0) {
-		outputText("Some of the other imps, feeling left out, fish out your " + multiCockDescript() + ".  They pull their own members alongside yours and begin humping against you, frotting as their demonic lubricants coat the bundle of cock with slippery slime.   Tiny hands bundle the dicks together and you find yourself enjoying the stimulation in spite of the brutal fucking you're forced to take.  Pre bubbles up, mixing with the demonic seed that leaks from your captors members until your crotch is sticky with frothing pre.\n\n", false);
+		outputText("Some of the other imps, feeling left out, fish out your " + player.multiCockDescript() + ".  They pull their own members alongside yours and begin humping against you, frotting as their demonic lubricants coat the bundle of cock with slippery slime.   Tiny hands bundle the dicks together and you find yourself enjoying the stimulation in spite of the brutal fucking you're forced to take.  Pre bubbles up, mixing with the demonic seed that leaks from your captors members until your crotch is sticky with frothing pre.\n\n", false);
 	}
 	//(ORGAZMO)
 	outputText("As one, the crowd of demons orgasm.  Hot spunk gushes into your ass, filling you with uncomfortable pressure.  ", false);
@@ -242,7 +269,7 @@ public function loseToImpMob():void {
 	outputText("  Finally, your own orgasm arrives, ", false);
 	if(player.cockTotal() == 0) outputText("and you clench tightly around the uncomfortable intrusion.", false);
 	else {
-		outputText("and " + sMultiCockDesc() + " unloads, splattering the many demons with a bit of your own seed.  You'd smile if your mouth wasn't so full of cock.  At least you got to make a mess of them!", false);
+		outputText("and " + player.sMultiCockDesc() + " unloads, splattering the many demons with a bit of your own seed.  You'd smile if your mouth wasn't so full of cock.  At least you got to make a mess of them!", false);
 	}
 	if(player.hasVagina()) {
 		outputText("  Your cunt clenches around the invading cock as orgasm takes you, massaging the demonic tool with its instinctual desire to breed.  Somehow you get him off again, and take another squirt of seed into your waiting cunt.", false);
@@ -252,7 +279,7 @@ public function loseToImpMob():void {
 	outputText("Powerless and in the throes of post-coital bliss, you don't object as you're lifted on the table", false);
 	if(!player.hasVagina()) outputText(" and forced to start drinking bottle after bottle of succubi milk", false);
 	outputText(".  You pass out just as round two is getting started, but the demons don't seem to mind....", false);
-	doNext(11080);
+	doNext(loseToImpMobII);
 }
 //[IMP GANGBANG VOL 2]
 public function loseToImpMobII():void {
@@ -283,8 +310,7 @@ public function loseToImpMobII():void {
 	outputText("You gladly live out the rest of your life, fucking and birthing imps over and over as their live-in broodmother.", false);
 	player.orgasm();
 	player.HP += 100;
-	//GAME OVER NERD
-	eventParser(5035);
+	gameOver();
 }
 
 //WIN
@@ -296,9 +322,9 @@ public function impGangVICTORY():void {
 	else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.", false);
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?", false);
-		if(player.gender == 1) simpleChoices("Rape",11078,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
-		if(player.gender == 2) simpleChoices("Rape",11079,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
-		if(player.gender == 3) simpleChoices("Male Rape",11078,"Female Rape",11079,"",0,"",0,"Leave",cleanupAfterCombat);
+		if (player.gender == 1) simpleChoices("Rape", impGangGetsRapedByMale, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
+		if (player.gender == 2) simpleChoices("Rape", impGangGetsRapedByFemale, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
+		if (player.gender == 3) simpleChoices("Male Rape", impGangGetsRapedByMale, "Female Rape", impGangGetsRapedByFemale, "", null, "", null, "Leave", cleanupAfterCombat);
 	}
 	else cleanupAfterCombat();
 }
@@ -306,7 +332,7 @@ public function impGangVICTORY():void {
 //RAEP -M
 public function impGangGetsRapedByMale():void {
 	outputText("", true);
-	outputText("You walk around and pick out three of the demons with the cutest, girliest faces.  You set them on a table and pull aside your " + player.armorName + ", revealing your " + multiCockDescriptLight() + ".  You say, \"<i>Lick,</i>\" in a tone that brooks no argument.  The feminine imps nod and open wide, letting their long tongues free.   Narrow and slightly forked at the tips, the slippery tongues wrap around your " + cockDescript(0) + ", slurping wetly as they pass over each other in their attempts to please you.\n\n", false);
+	outputText("You walk around and pick out three of the demons with the cutest, girliest faces.  You set them on a table and pull aside your " + player.armorName + ", revealing your " + player.multiCockDescriptLight() + ".  You say, \"<i>Lick,</i>\" in a tone that brooks no argument.  The feminine imps nod and open wide, letting their long tongues free.   Narrow and slightly forked at the tips, the slippery tongues wrap around your " + cockDescript(0) + ", slurping wetly as they pass over each other in their attempts to please you.\n\n", false);
 	
 	outputText("Grabbing the center one by his horns, you pull him forwards until your shaft is pressed against the back of his throat.  He gags audibly, but you pull him back before it can overwhelm him, only to slam it in deep again.  ", false);
 	outputText("The girly imp to your left, seeing how occupied your " + cockDescript(0) + " is, shifts his attention down to your ", false);
@@ -326,6 +352,7 @@ public function impGangGetsRapedByMale():void {
 	outputText("\n\n", false);
 	
 	outputText("Satisfied, you redress and prepare to continue with your exploration of the cave.", false);
+	dynStats("cor", 1);
 	player.orgasm();
 	cleanupAfterCombat();
 }
@@ -348,12 +375,23 @@ public function impGangGetsRapedByFemale():void {
 	outputText("The two of you lie together, trembling happily as you're filled to the brim with tainted fluids.\n\n", false);
 	
 	outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.", false);
-	if(player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.", false);
+	if (player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.", false);
+	dynStats("cor", 1);
 	player.orgasm();
 	player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
 	cleanupAfterCombat();
 }
 
+public function enterZetazsRoomFromTheSouth():void {
+	if (flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] == 0) {
+		clearOutput();
+		outputText("The door won't budge.");
+		doNext(playerMenu);
+		return;
+	}
+	else dungeonEnterRoom(DUNGEON_CAVE_ZETAZ_CHAMBER);
+//	else dungeonLoc = 16;
+}
 
 //Encapsulation Start
 //[Get it]
@@ -409,7 +447,7 @@ public function encapsulationPodAI():void {
 		if(player.balls > 0) outputText("One of them wraps itself around the top of your " + sackDescript() + " while its tip slithers over your " + ballsDescriptLight() + ".  Another ", false);
 		else outputText("One ", false);
 		if(player.cockTotal() > 0) {
-			outputText("prods your " + cockDescript(0) + " for a second before it begins slithering around it, snake-like.  Once it has you encircled from " + cockHead(0) + " to ", false);
+			outputText("prods your " + cockDescript(0) + " for a second before it begins slithering around it, snake-like.  Once it has you encircled from " + player.cockHead() + " to ", false);
 			if(!player.hasSheath()) outputText("base", false);
 			else outputText("sheath", false);
 			outputText(", it begins to squeeze and relax to a pleasant tempo.  ", false);
@@ -425,8 +463,8 @@ public function encapsulationPodAI():void {
 		}
 		if(player.cockTotal() > 1) {
 			outputText("Your other ", false);
-			if(player.cockTotal() == 2) outputText(cockDescript(1) + " gets the same treatment, and soon both of your " + multiCockDescriptLight() + " are quite happy to be here.  ", false);
-			else outputText(multiCockDescriptLight() + " get the same treatment and soon feel quite happy to be here.  ", false);
+			if(player.cockTotal() == 2) outputText(cockDescript(1) + " gets the same treatment, and soon both of your " + player.multiCockDescriptLight() + " are quite happy to be here.  ", false);
+			else outputText(player.multiCockDescriptLight() + " get the same treatment and soon feel quite happy to be here.  ", false);
 		}
 		if(player.hasVagina()) {
 			outputText("The violation of your " + vaginaDescript(0) + " is swift and painless.  The fungus' slippery lubricants make it quite easy for it to slip inside, and you find your " + vaginaDescript(0) + " engorging with pleasure in spite of your need to escape.  The tentacle folds up so that it can rub its stalk over your " + clitDescript() + ", ", false);
@@ -466,7 +504,7 @@ public function encapsulationPodAI():void {
 		
 		outputText("The thick slime passes over your lips and nose as you sink into the rising tide of bliss, and you find yourself wondering how you'll breathe.  Instinctively, you hold your breath.  Even riddled with sexual bliss and thought-obliterating drugs, you won't let yourself open your mouth when 'underwater'.  The lack of oxygen makes your heart hammer in your chest", false);
 		if(player.totalCocks() > 0) {
-			outputText(", and " + sMultiCockDesc() + " bloats with blood, getting larger than ever", false);
+			outputText(", and " + player.sMultiCockDesc() + " bloats with blood, getting larger than ever", false);
 		}
 		outputText(".  Before you can pass out, the constant penetration forces a moan from your lips.\n\n", false);
 		
@@ -485,7 +523,7 @@ public function encapsulationPodAI():void {
 			outputText("while the fucking continues.", false);
 		}
 		if(player.cockTotal() > 0) {
-			outputText("  The tentacles around " + sMultiCockDesc() + " squeeze and rotate, screwing you silly through your orgasm while cum dribbles in a steady stream from your loins.  Normally it would be squirting out in thick ropes, but the muscle-relaxing drugs in your system make the spurts a steady, weak flow.", false);
+			outputText("  The tentacles around " + player.sMultiCockDesc() + " squeeze and rotate, screwing you silly through your orgasm while cum dribbles in a steady stream from your loins.  Normally it would be squirting out in thick ropes, but the muscle-relaxing drugs in your system make the spurts a steady, weak flow.", false);
 			if(player.cumQ() > 800) outputText("  Of course with all the semen you produce, the flesh-pod's ooze clouds over quite quickly, blocking your vision with a purple-white haze.", false);
 		}
 		if(player.biggestLactation() > 1) {
@@ -495,7 +533,7 @@ public function encapsulationPodAI():void {
 			else outputText("thickening your fluid-filled prison with nutrients.", false);
 		}
 		//[NEXT – CHOOSE APPRORIATE]
-		doNext(11083);
+		doNext(loseToThisShitPartII);
 		return;
 	}
 	//Set flags for rounds
@@ -511,9 +549,9 @@ public function loseToThisShitPartII():void {
 	outputText("", true);
 	//[OPTIONAL CUM ESCAPE]
 	if(player.cumQ() > 3500) {
-		outputText("Your orgasm drags on for so long that you begin to feel pressure from the cum-slime surrounding you.  It doesn't seem to matter to " + sMultiCockDesc() + ", which is too busy sending bliss to your brain and squirting cum for the tentacles to care.  It actually kind of hurts.  The oscillating purple ambiance flashes brighter in protest for a second, and then everything releases all at once.  The pressure is gone and you're sliding down on a wave of fungal-slime cum, feeling the tentacles being pulled from you by the sudden shift of position.  Moist cave air tickles at your " + player.skinDesc + " as you come to rest on another spongy petal and begin to cough out the sludge.\n\n", false);
+		outputText("Your orgasm drags on for so long that you begin to feel pressure from the cum-slime surrounding you.  It doesn't seem to matter to " + player.sMultiCockDesc() + ", which is too busy sending bliss to your brain and squirting cum for the tentacles to care.  It actually kind of hurts.  The oscillating purple ambiance flashes brighter in protest for a second, and then everything releases all at once.  The pressure is gone and you're sliding down on a wave of fungal-slime cum, feeling the tentacles being pulled from you by the sudden shift of position.  Moist cave air tickles at your " + player.skinDesc + " as you come to rest on another spongy petal and begin to cough out the sludge.\n\n", false);
 		
-		outputText("Over the next minute your head clears and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of your spooge.  " + SMultiCockDesc() + " is still dripping more spunk.  Clearly your ruined orgasm didn't pump it ALL out.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your orgasm was enough to sate them all?  Or maybe they've learned their lesson.", false);
+		outputText("Over the next minute your head clears and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of your spooge.  " + player.SMultiCockDesc() + " is still dripping more spunk.  Clearly your ruined orgasm didn't pump it ALL out.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your orgasm was enough to sate them all?  Or maybe they've learned their lesson.", false);
 		//(switch from loss to victory, sword loot)
 		monster.lust = 100;
 		player.orgasm();
@@ -547,12 +585,12 @@ public function loseToThisShitPartII():void {
 	//[BAD-END GO]
 	//(MALE)  
 	if(player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
-		outputText("The orgasm squirts and drips from " + sMultiCockDesc() + " for what seems like forever.  It feels so right, so perfect, that you actually whine in disappointment when it finally does end.  You can't even be bothered to reach down and stroke yourself.  The softening in your loins is nothing compared to your flaccid, listless muscles.  You couldn't make your arms reach down to touch yourself even if you could work up the motivation to try.  Thankfully the slippery tentacles curl back around your ", false);
+		outputText("The orgasm squirts and drips from " + player.sMultiCockDesc() + " for what seems like forever.  It feels so right, so perfect, that you actually whine in disappointment when it finally does end.  You can't even be bothered to reach down and stroke yourself.  The softening in your loins is nothing compared to your flaccid, listless muscles.  You couldn't make your arms reach down to touch yourself even if you could work up the motivation to try.  Thankfully the slippery tentacles curl back around your ", false);
 		if(!player.hasSheath()) outputText("base", false);
 		else outputText("sheath", false);
-		outputText(" and squeeze, forcing " + sMultiCockDesc() + " to inflate to readiness.  Deep inside your " + assholeDescript() + ", the tentacle starts to rub against your prostate.  It caresses the male organ on each side and pauses to squeeze the center of it, pushing a few drops of sticky cum from your trembling " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ".\n\n", false);
+		outputText(" and squeeze, forcing " + player.sMultiCockDesc() + " to inflate to readiness.  Deep inside your " + assholeDescript() + ", the tentacle starts to rub against your prostate.  It caresses the male organ on each side and pauses to squeeze the center of it, pushing a few drops of sticky cum from your trembling " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ".\n\n", false);
 		
-		outputText("The vine-like stalks currently hugging " + sMultiCockDesc() + " constrict the base and begin to swirl around it in a circular motion.  Warm fungi-flesh and viscous, drugged ooze work together to send hot spikes of pleasure up your spinal-cord.  Despite your recent orgasm, you aren't being given any chance to recover or refill your ", false);
+		outputText("The vine-like stalks currently hugging " + player.sMultiCockDesc() + " constrict the base and begin to swirl around it in a circular motion.  Warm fungi-flesh and viscous, drugged ooze work together to send hot spikes of pleasure up your spinal-cord.  Despite your recent orgasm, you aren't being given any chance to recover or refill your ", false);
 		if(player.balls > 0) outputText("balls", false);
 		else outputText("prostate", false);
 		outputText(".  Things like logic and rest don't matter in this warm, soupy environment, at least not to your poor, unthinking mind and erect, sensitive dick", false);
@@ -560,8 +598,7 @@ public function loseToThisShitPartII():void {
 		outputText(".  With such stimulation coming so closely on the heels of your last orgasm, [eachCock] is suffering painful levels of pleasure.  Your whole body shakes from the sensory overload; though with your muscles so completely shut down, it's more of a shiver.\n\n", false);
 		
 		outputText("Another wave of sperm begins the slow escape from your helpless, pinned form, drawn out by the fungus' constant sexual ministrations.  The fluid inside your pod gurgles noisily as the fluids are exchanged, but the sensory input doesn't register to your overloaded, drugged-out shell of a mind.  You've lost yourself to mindless pleasure, and repeated, endless orgasms.  The rest of your life is spent floating in an artificial womb, orgasming over and over to feed your fungus prison, and enjoying the pleasure that long ago eroded your ability to reason.", false);
-		eventParser(5035);
-		//GAME OVER 
+		gameOver();
 	}
 	//(FEM)
 	else {
@@ -570,8 +607,7 @@ public function loseToThisShitPartII():void {
 		outputText("The steady rhythm of your penetration sends rockets of bliss-powered pleasure up your spinal cord and straight into your brain, where it explodes in orgasm.  Your body barely twitches, too relaxed to work up any muscle response, involuntary or otherwise.  A moment to rest never presents itself.  The cruel fungus never relents.  It never slows, unless it's only the briefest pause to intensify the next thrust.  Were you in the open air, away from the strange fluid you're now breathing, you'd be twisting and screaming with pleasure.  Instead you float and cum in silence.\n\n", false);
 	
 		outputText("Fluids gurgle and shift inside the pod as they are exchanged.  If you were capable of noticing the sound or change, you might wonder if it's harvesting your sexual fluids, but even those thoughts are beyond you now. You've lost yourself to mindless pleasure, and repeated, endless orgasms.  The rest of your life is spent floating in an artificial womb, orgasming over and over to feed your fungus prison, and enjoying the pleasure that long ago eroded your ability to reason.", false);
-		eventParser(5035);
-		//GAME OVER 
+		gameOver();
 	}
 }
 
@@ -657,7 +693,7 @@ public function useValaPtII():void {
 		outputText("You clutch your " + allBreastsDescript() + " and squeeze the " + nippleDescript(0) + " until they hurt, the agony giving you strength to drive the dildo back into the fairy. She cums before you do, her pulsing walls locking down and driving the dildo out, inch by painful inch, deeper into your body until the base is so far against your gut that it is pushed into your furthest recesses with a toe-curling, wet slap. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength redoubles and you thrust back, your " + cockDescript(0) + " penetrating her spongy, well-used cervix, her womb sucking you inside it. You release the knotted tension, spraying your spunk deep inside her. You slap your " + buttDescript() + " against hers with each pulsing load, your pussy clenching at the dildo stuffing it even as your empty your seed into the chained slave.  You try to go limp, but the double penetrated girl keeps you from pulling out, both holes clenching you against her until every last drop of your sperm has filled her greedy womb. Fairy cum drips down your length, while the flared tip deep inside her large intestine keeps your pussy twitching against her posterior. You jill your " + clitDescript() + " for a few minutes afterward, just enjoying the afterglow as your strength returns and the fairy's body unclenches, releasing you from your breeder's embrace, the minotaur dildo still halfway up her ass. You remind yourself to clean your " + player.armorName + " after this is over, sliding into them with wet, squishing noises. Giving your drooling fairy girl's rump a slap on the way out, you head back into the dungeon- you've got demons to stomp.", false);
 	}
 	flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Free]
@@ -705,7 +741,7 @@ public function healVala():void {
 
 		//(Vala unlocked in The Wet Bitch)[End Encounter]
 		flags[kFLAGS.FREED_VALA] = 1;
-		doNext(1);
+		doNext(playerMenu);
 	}
 	
 }
@@ -717,7 +753,7 @@ public function healValaPartTwoTheHealingHealsOfRevenge():void {
 	outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it is the lives you save that really make you feel like a hero. You sigh contentedly and press on. You've got demons to dethrone.", false);
 	//[End Encounter]
 	flags[kFLAGS.FREED_VALA] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Sex]
@@ -800,7 +836,7 @@ public function valaGetsSexedPtDuece():void {
 	}
 	//[End Encounter]
 	flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Reject]
@@ -821,7 +857,7 @@ public function rejectFuckingVala():void {
 	}
 	//Initiate fight
 	startCombat(new Vala(),true);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 
@@ -971,8 +1007,7 @@ public function badEndValaNumber1():void {
 
 	outputText("You giggle, mindlessly, and let your Mistress sate her unquenchable lust with your yielding body, savoring the submission. She rides you raw, fucking your drug and sex-addled body hard enough to knock the memories of the day out of your head, just as she did yesterday and the day before that. With each passing day, you lose more of yourself to your Mistress and, in time, all that is left is the warped fairy's broken Pet.", false);  
 	
-	//GAME OVER.
-	eventParser(5035);
+	gameOver();
 }
 
 //BAD END 2-
@@ -1005,8 +1040,7 @@ public function badEndValaNumber2Pt2():void {
 	
 	outputText("\"<i>You're looking more like her by the second,</i>\" Zetaz compliments, stroking your now-flawless face. \"<i>Don't worry about that pesky mind of yours- I don't like using drugs to wipe that imperfection away like some of my kin. No, we'll just use you until you break. Perhaps I'll let Vala have you from time to time, too. Won't that be fun? The two of you will grow to be inseparable, I'm sure.</i>\" Zetaz steps back and signals the imps clinging to the fairy to come down. \"<i>Why don't we get started?</i>\"", false);
 	
-	//GAME OVER.
-	eventParser(5035);
+	gameOver();
 }
 
 //Fight Win-
@@ -1018,7 +1052,7 @@ public function fightValaVictory():void {
 	//[Fuck] [Leave]
 	if(player.gender > 0) {
 		outputText(" What will you do?", false);
-		simpleChoices("Fuck",valaFightVictoryFuck,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
+		simpleChoices("Fuck", valaFightVictoryFuck, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
 	}
 	else cleanupAfterCombat();
 	
@@ -1142,7 +1176,7 @@ public function leftValaAlone():void {
 		addButton(2, "Wake", wakeValaUpBeforeYouGoGo);
 	}
 	if (player.lust >= 33 && shouldraFollower.followerShouldra()) addButton(3, "ShouldraVala", shouldraFollower.shouldraMeetsCorruptVala);
-	addButton(4, "Leave", camp.campMenu);
+	addButton(4, "Leave", playerMenu);
 }
 
 //[Heal]
@@ -1152,7 +1186,7 @@ public function tryToHealVala():void {
 	//(Without Pure Honey)
 	if(!(player.hasItem(consumables.PURHONY,1) || player.hasItem(consumables.P_PEARL,1))) {
 		outputText("You try your best with what you've got, but nothing seems to restore the broken fairy's mind to her sex-addled  body. You're going to have to go out and gather more materials. Surely there's something that can break the damage the imps have done to Vala.", false);
-		doNext(1);
+		doNext(playerMenu);
 	}
 	//(With Pure Honey)
 	else if(player.hasItem(consumables.PURHONY,1)) {
@@ -1176,7 +1210,7 @@ public function tryToHealVala():void {
 		outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.", false);
 		//(Vala unlocked in The Wet Bitch)[End Encounter]
 		flags[kFLAGS.FREED_VALA] = 1;
-		doNext(1);
+		doNext(playerMenu);
 	}
 }
 
@@ -1189,7 +1223,7 @@ public function tryToHealValaWHoney2():void {
 	//(Vala unlocked in The Wet Bitch)
 	flags[kFLAGS.FREED_VALA] = 1;
 	//[End Encounter]
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Use]
@@ -1251,7 +1285,7 @@ public function useValaOHYEAHKOOLAIDPTII():void {
 	//DAH END
 	player.orgasm();
 	dynStats("cor", 1);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Wake]
@@ -1284,7 +1318,7 @@ public function wakeValaUpBeforeYouGoGo():void {
 
 		outputText("Finally reaching the bowl, you twist the nozzle all the way and are nearly knocked to the ground by the pressure. The fire hose of sperm blasts into the large wooden bowl and splashes upward, painting the girl's face with alabaster cream. Before long, the bowl is full to overflowing and you cut off the flow of cum from the device. Kneeling down next to her, you stroke the back of her head and apply just the slightest bit of pressure toward the seething meal. \"<i>Dinner time, Vala,</i>\" you offer to the fairy, and her resistance crumbles, burying her face in the spunk, bubbles rising from the frothy bowl as she begins to suck it down with mindless obedience.\n\n", false);
 
-		outputText("Your " + multiCockDescriptLight() + " is getting hard from the display, and you figure it'd be easier to satisfy the girl if you filled her from multiple holes. Reaching up again, you pull down a different hose, this time selecting a dildo that looks like an amalgam of several dick types. It's flared, like a horse's, knotted at the base, like a dog's, bulbous in the middle, like a lizard's, and barbed all along, like a cat's. You have no idea what kind of cum is filling this one, but you kind of want to see what'll pop out of the broken fairy. Hauling it down, you slide the hose behind you, threading it around your " + buttDescript() + ", along your " + vaginaDescript(0) + ", and under your " + multiCockDescriptLight() + ". You bring your shaft to her gaping cunt and rub along her oozing labia, the puffy flesh inflamed with her desire. Slowly, you begin to slide your " + cockDescript(0) + " in first, letting her walls adjust to your girth, before pressing the dildo-nozzle into her twitching hole. The pressure of the strangely warm metal drives the fairy crazy, and her steady guzzle from the bowl becomes frantic gulps, her belly beginning to show a paunch from her meal. You let the girl's crystal cum soak the chimera-cock before feeding it into her slavering pussy, inches at a time. The girl's brood mother hips are so wide that you manage to penetrate her recesses with both cocks, though her abdomen stretches violently as the two cocks work their way deeper into her.", false);
+		outputText("Your " + player.multiCockDescriptLight() + " is getting hard from the display, and you figure it'd be easier to satisfy the girl if you filled her from multiple holes. Reaching up again, you pull down a different hose, this time selecting a dildo that looks like an amalgam of several dick types. It's flared, like a horse's, knotted at the base, like a dog's, bulbous in the middle, like a lizard's, and barbed all along, like a cat's. You have no idea what kind of cum is filling this one, but you kind of want to see what'll pop out of the broken fairy. Hauling it down, you slide the hose behind you, threading it around your " + buttDescript() + ", along your " + vaginaDescript(0) + ", and under your " + player.multiCockDescriptLight() + ". You bring your shaft to her gaping cunt and rub along her oozing labia, the puffy flesh inflamed with her desire. Slowly, you begin to slide your " + cockDescript(0) + " in first, letting her walls adjust to your girth, before pressing the dildo-nozzle into her twitching hole. The pressure of the strangely warm metal drives the fairy crazy, and her steady guzzle from the bowl becomes frantic gulps, her belly beginning to show a paunch from her meal. You let the girl's crystal cum soak the chimera-cock before feeding it into her slavering pussy, inches at a time. The girl's brood mother hips are so wide that you manage to penetrate her recesses with both cocks, though her abdomen stretches violently as the two cocks work their way deeper into her.", false);
 	}
 	dynStats("lus", 999);
 	//[Next]
@@ -1329,13 +1363,13 @@ public function wakeMeUpBeforeValaGoGosPtII():void {
 		if(player.cockTotal() > 1) outputText("The " + cockDescript(1) + " inside the fairy girl's ass erupts first, pumping your seed into her bowels, her hips distorting with the bursting flow of your cum, her sphincters clenching powerless to stop your alabaster flood.  ", false);
 		outputText("Inside Vala's drooling pussy, your " + cockDescript(0) + " twitches as your load rushes over the steel dildo and spurts from your cockhead in hot ropes of gooey love. You manage to think through the suffocating pleasure addling your brain and flick the nozzle of the chimera dildo, the tube kicking to life. The monstrous hose vibrates your entire lower body and you tremble helplessly as you're stimulated nearly to breaking. The fairy girl, already happily shattered, merely lets out a stream of mad laughter, cum bubbling over her lips as her cunt is turned into a cornucopia of monster jizz. A cunny-copia, you giggle to yourself, her insane glee infecting your exhausted body. The double-penetrated fae bloats and swells under the pressure of the cum-pump, supplemented your own obscene spunk stuffing.\n\n", false);
 
-		outputText("When your orgasm subsides, you finally manage to switch off the imp pump in your " + vaginaDescript(0) + " and pull it out, tenderly. Your abdomen has been filled enough to leave a paunch of infernal cream below your belly. You press down on it, demonic ichor spilling out of your swollen vagina and splashing between your " + hipDescript() + ". You sigh and hope the seed doesn't take hold. Speaking of taking hold, you switch off the gushing monster pump and carefully pull your " + multiCockDescriptLight() + " out of the fairy, making sure the metal dildo remains fixed in place to hold the cum inside. You slide out from between her legs and rise unsteadily to look at your handiwork. The fairy has been filled, top to bottom, all three gallons you sprayed in her bowl gone down her thirsty gullet. The jizz you packed into her womb bloats her even further, the girl's belly nearly four times larger than it was when you found her. She wriggles on the ground, lost to the cummy heaven her mindless body has been plunged into. You're not sure what kind of fucked up child that little exchange would give her, but if anybody had the vagina to pass a monster, it'd be Vala. You probably won't get to find out, though. Who knows what kind of incubation period the chimera-kid will have?", false);
+		outputText("When your orgasm subsides, you finally manage to switch off the imp pump in your " + vaginaDescript(0) + " and pull it out, tenderly. Your abdomen has been filled enough to leave a paunch of infernal cream below your belly. You press down on it, demonic ichor spilling out of your swollen vagina and splashing between your " + hipDescript() + ". You sigh and hope the seed doesn't take hold. Speaking of taking hold, you switch off the gushing monster pump and carefully pull your " + player.multiCockDescriptLight() + " out of the fairy, making sure the metal dildo remains fixed in place to hold the cum inside. You slide out from between her legs and rise unsteadily to look at your handiwork. The fairy has been filled, top to bottom, all three gallons you sprayed in her bowl gone down her thirsty gullet. The jizz you packed into her womb bloats her even further, the girl's belly nearly four times larger than it was when you found her. She wriggles on the ground, lost to the cummy heaven her mindless body has been plunged into. You're not sure what kind of fucked up child that little exchange would give her, but if anybody had the vagina to pass a monster, it'd be Vala. You probably won't get to find out, though. Who knows what kind of incubation period the chimera-kid will have?", false);
 	}
 	//[End Encounter]
 	player.orgasm();
 	dynStats("cor", 1);
 	flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Answers the simpler question 'Is Vala at the bar right now' rather than 'can Vala have sex with you right now'
@@ -1420,7 +1454,7 @@ public function cleansedFirstRemeet():void {
 
 	outputText("\"<i>I've been looking forward to this,</i>\" she whispers, flying up to steal a kiss from you, her soft, fey lips leaving a taste of pure, spring rain on the tip of your tongue. Piece by piece, she strips the clothes from your shoulders and hips, leaving warm kisses on your exposed skin with every piece she removes. When your body is laid bare before her, the pixie raises her hands to her own dress. She hesitates to expose the permanent scars the imps left on her, but sighing, she laughs and a sweet wind sweeps through the storeroom. \"<i>Silly to be bashful around you, of all people,</i>\" she chuckles, sliding out of her verdant silk, pulling pins from her bun to let long, violet tresses spill down her shoulders with a shake of her head. She bats her eyes at you over one shoulder and flashes a wry little smile. \"<i>If we can replace every hash mark on my back with one of your visits, I'll switch to backless dresses,</i>\" she teases. Flying over you, she lands her delicate legs and plump, breeder's rear in your lap, wrapping her arms around your shoulders and hugging you tightly. \"<i>So, what's on your mind, hero?</i>\"", false);
 	//[You][Leave]
-	simpleChoices("You",cleansedValaFuckHerBrainsOut,"",0,"",0,"",0,"Leave",telAdre.barTelAdre);
+	simpleChoices("You", cleansedValaFuckHerBrainsOut, "", null, "", null, "", null, "Leave", telAdre.barTelAdre);
 }
 
 //[You] 
@@ -1567,7 +1601,7 @@ public function faerieOrgyFuck():void {
 	//[Herm]
 	if(player.gender == 3) {
 		outputText("Vala folds her arms across her breast. \"<i>But which one should we use?</i>\" she ponders. \"<i>I wouldn't advise trying both- your mind wouldn't be able to take it. You'd end up worse than just mind-broken, you'd be a drooling shell. And I'd never do that to my hero,</i>\" she smiles and gives you a wink. \"<i>So, what would you prefer?</i>\"\n\n", false);
-		simpleChoices("Male",faerieOrgyFuckMaleContinue,"Female",faerieOrgyFuckFemaleContinue,"",0,"",0,"",0);
+		simpleChoices("Male", faerieOrgyFuckMaleContinue, "Female", faerieOrgyFuckFemaleContinue, "", null, "", null, "", null);
 	}
 	else if(player.gender == 2) doNext(faerieOrgyFuckFemaleContinue);
 	else if(player.gender == 1) doNext(faerieOrgyFuckMaleContinue);
@@ -1622,7 +1656,7 @@ public function faerieOrgyFuckFemaleContinue():void {
 public function takeBondageStraps():void {
 	clearOutput();
 	flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
-	inventory.takeItem(armors.BONSTRP, camp.campMenu);
+	inventory.takeItem(armors.BONSTRP, playerMenu);
 }
 
 //ZETAZ START
@@ -1746,8 +1780,8 @@ public function gigaArouse():void {
 	if(player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ", false);
 	if(player.lust >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ", false);
 	if(player.cocks.length > 0) {
-		if(player.lust >= 60 && player.cocks.length > 0) outputText("You feel " + sMultiCockDesc() + " dribble pre-cum, bouncing with each beat of your heart and aching to be touched.  ", false);
-		if(player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText(SMultiCockDesc() + " hardens and twitches, distracting you further.  ", false);
+		if(player.lust >= 60 && player.cocks.length > 0) outputText("You feel " + player.sMultiCockDesc() + " dribble pre-cum, bouncing with each beat of your heart and aching to be touched.  ", false);
+		if(player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText(player.SMultiCockDesc() + " hardens and twitches, distracting you further.  ", false);
 	}
 	if(player.vaginas.length > 0) {
 		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " dampens perceptibly, feeling very empty.  ", false);
@@ -1757,7 +1791,7 @@ public function gigaArouse():void {
 		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + monster.a + monster.short + "'s dick when it's rammed inside you?  ", false);
 	}
 	if(player.lust >= 100) doNext(endLustLoss)
-	else doNext(1);
+	else doNext(playerMenu);
 }
 
 
@@ -1776,7 +1810,7 @@ public function defeatZetaz():void {
 	outputText(", you need to find her and bring her down.  What do you do?", false);
 	outputText("\n\n(Sexually Interrogate, Kill Him, or Offer Safety for Information?)\n", false);
 	//[Sexual Interrogation] [Brutal Interrogation] [Release for Info]
-	simpleChoices("Sexual",sexualInterrogation,"End Him",endZetaz,"Safety",releaseZForInfo,"",0,"",0);
+	simpleChoices("Sexual", sexualInterrogation, "End Him", endZetaz, "Safety", releaseZForInfo, "", null, "", null);
 }
 
 //[Release Zetaz 4 Info Win]
@@ -2026,7 +2060,7 @@ public function zetazBadEndEpilogue():void {
 	}
 	player.orgasm();
 	player.HP += 150;
-	eventParser(5035);
+	gameOver();
 }
 
 //[HERMS]
@@ -2065,9 +2099,9 @@ public function hermZetazOver():void {
 	else outputText("arousal", false);
 	outputText(".  The imp lord nods in agreement and upends the first bottle over the funnel, channeling fragrant white fluid into your mouth.  It tastes fantastic!  Your throat instinctively gulps down the creamy delight before you can make a conscious decision.  The effect is immediate and strong.  Warmth builds on your chest as weight is added to your " + allBreastsDescript() + " while a gush of fluid squirts from your " + vaginaDescript(0) + ".\n\n", false);
 	
-	outputText("Zetaz is just getting started.  Before you have time to react to your predicament, the next bottle is empty and thicker cream is flooding your mouth.  You don't swallow for a moment, so the imp pours another bottle in, backing up more of the fluid.  Faced with a choice between corruption and drowning, you try to gulp down enough liquid to breathe.  " + SMultiCockDesc() + " puffs and swells, spurting thick ropes of cum as it adds a half-dozen inches to its length.  Your eyes cross from the sudden change, but you get a fresh breath before the imps begin to pour several bottles in at once.\n\n", false);
+	outputText("Zetaz is just getting started.  Before you have time to react to your predicament, the next bottle is empty and thicker cream is flooding your mouth.  You don't swallow for a moment, so the imp pours another bottle in, backing up more of the fluid.  Faced with a choice between corruption and drowning, you try to gulp down enough liquid to breathe.  " + player.SMultiCockDesc() + " puffs and swells, spurting thick ropes of cum as it adds a half-dozen inches to its length.  Your eyes cross from the sudden change, but you get a fresh breath before the imps begin to pour several bottles in at once.\n\n", false);
 	
-	outputText("You swallow in loud, greedy gulps as your body is slowly warped by the fluids you're consuming.  Though your " + allBreastsDescript() + " and " + multiCockDescriptLight() + " sometimes shrink, they grow far more often, and after a few minutes of force-feeding, you're pleading for more each time they stop to let you breath.  You're a mess of sexual fluids, your tits are squirting milk, and your pussy squirts from every touch.  Demon horns are swelling from your brow, curling back over your ears", false);
+	outputText("You swallow in loud, greedy gulps as your body is slowly warped by the fluids you're consuming.  Though your " + allBreastsDescript() + " and " + player.multiCockDescriptLight() + " sometimes shrink, they grow far more often, and after a few minutes of force-feeding, you're pleading for more each time they stop to let you breath.  You're a mess of sexual fluids, your tits are squirting milk, and your pussy squirts from every touch.  Demon horns are swelling from your brow, curling back over your ears", false);
 	if(player.horns > 0) outputText(" and adding to your existing pair", false);
 	else outputText(" and giving you an exotic, tainted appearance", false);
 	outputText(".  ", false);
@@ -2087,9 +2121,9 @@ public function hermZetazOverPtII():void {
 	if(player.cockTotal() > 1) outputText("number of ", false);
 	outputText("mechanical milking device", false);
 	if(player.cockTotal() > 1) outputText("s", false);
-	outputText(".  " + SMultiCockDesc() + " is sucked rhythmically, producing a loud, wet, slurping noise that echoes around the small room.  You're suspended from a set of shackles on the wall, next to Vala.  The sexy faerie is chained up in a similar manner, but she's locked in coitus with a well-endowed imp, and making no secret of her enjoyment.  The sexual sight stirs your well-stimulated loins and you groan, filling the milker with what feels like gallons of male cream over the next minute and a half.\n\n", false);
+	outputText(".  " + player.SMultiCockDesc() + " is sucked rhythmically, producing a loud, wet, slurping noise that echoes around the small room.  You're suspended from a set of shackles on the wall, next to Vala.  The sexy faerie is chained up in a similar manner, but she's locked in coitus with a well-endowed imp, and making no secret of her enjoyment.  The sexual sight stirs your well-stimulated loins and you groan, filling the milker with what feels like gallons of male cream over the next minute and a half.\n\n", false);
 	
-	outputText("Slumping forwards, you hang there, but the corruption and lust in your blood refuses to be sated.  " + SMultiCockDesc() + " is already hard again, and after sucking your cum down some tubes, the milker begins its oh-so-pleasurable work again.  Still, you estimate it will be a few minutes before it gets you off again, so you look around the room.  A platform is set up in front of you, about knee-height and poorly built.  Judging by its height, it's probably there so that the imps can use it to fuck you without having to fly.  There's also a pair of platforms built into the walls next to each of your shoulders, though their function is less clear.\n\n", false);
+	outputText("Slumping forwards, you hang there, but the corruption and lust in your blood refuses to be sated.  " + player.SMultiCockDesc() + " is already hard again, and after sucking your cum down some tubes, the milker begins its oh-so-pleasurable work again.  Still, you estimate it will be a few minutes before it gets you off again, so you look around the room.  A platform is set up in front of you, about knee-height and poorly built.  Judging by its height, it's probably there so that the imps can use it to fuck you without having to fly.  There's also a pair of platforms built into the walls next to each of your shoulders, though their function is less clear.\n\n", false);
 	
 	outputText("The door to the room bangs open, and Zetaz steps in, followed by two scrawnier-than-usual imps.  He smiles when he sees you awake and flushed, and steps up onto the platform, rubbing his palms together in excitement.\n\n", false);
 	
@@ -2101,11 +2135,11 @@ public function hermZetazOverPtII():void {
 	if(player.balls > 0) outputText("gently shifts your " + ballsDescript() + " out of the way and ", false);
 	outputText("lines up with your drooling fuck-hole, and with a long smooth stroke, he's inside you.  You cum immediately and hard, barely noticing the chanting that has started up on the adjacent platforms.  Each squirt of cum is accompanied by a thrust from Zetaz, sliding over your lube-leaking walls with ease.  The orgasm lasts nearly twice as long as your last one.  It never seems to end, but when it slowly trails off, you find yourself wondering how soon you can cum again.\n\n", false);
 	
-	outputText("You envision yourself on all fours, being taken in both openings by a pair of imps while you suck off a shadowy figure that your mind recognizes as your lord and master.  " + SMultiCockDesc() + " spurts and squirts with each penetration as your twin violators get off and stuff you full of their yummy imp cum, glazing your insides with corrupted white goo.  Maybe you'll get pregnant this time?  It's been a few weeks since your last litter.  You suck harder on your master's penis and caress his balls until he shows his affection by giving you a salty treat.  He pulls out and blasts a few ropes over your face and hair, so you do your best to look slutty to encourage him.  When he finishes, you lick your lips and beam at your master, Zetaz.\n\n", false);
+	outputText("You envision yourself on all fours, being taken in both openings by a pair of imps while you suck off a shadowy figure that your mind recognizes as your lord and master.  " + player.SMultiCockDesc() + " spurts and squirts with each penetration as your twin violators get off and stuff you full of their yummy imp cum, glazing your insides with corrupted white goo.  Maybe you'll get pregnant this time?  It's been a few weeks since your last litter.  You suck harder on your master's penis and caress his balls until he shows his affection by giving you a salty treat.  He pulls out and blasts a few ropes over your face and hair, so you do your best to look slutty to encourage him.  When he finishes, you lick your lips and beam at your master, Zetaz.\n\n", false);
 	
 	outputText("Wait- what!?  You shake your head and clear away the fantasy, though your sexual organs' constant delightful throbbings aren't doing much to help.  Zetaz is still fucking your pussy, taking it with long slow strokes that would've made your demonic legs give out ages ago if you weren't hanging on a wall.  The chanting is so loud, so insidious.  You can feel it snaking through your brain, twisting your thoughts and ideas.  You close your eyes, desperate to fight it, but it only enhances the sensation of dick-milking and being fucked by your- no, by that demon!\n\n", false);
 	
-	outputText("Glancing down at him, you remark that the little bastard is quite handsome for an imp.  With his perfect jawline and marvelous cock, you find yourself hard-pressed to justify resisting him so long ago.    How did you resist his charms?  His cock feels soooo fucking good inside you.  With an explosive burst, " + sMultiCockDesc() + " erupts again, squirting thick arousal and submission into the milker while your " + vaginaDescript(0) + " wrings Zetaz's nodule-ringed cock incessantly.  His turgid member bulges obscenely, and he starts to cum inside you, squirting master's thick seed into your breeding hole.  Breeding hole?  Why would you call your slutty fuck-hole a breeding hole?  Something seems off about that last thought, but you can't place it.\n\n", false);
+	outputText("Glancing down at him, you remark that the little bastard is quite handsome for an imp.  With his perfect jawline and marvelous cock, you find yourself hard-pressed to justify resisting him so long ago.    How did you resist his charms?  His cock feels soooo fucking good inside you.  With an explosive burst, " + player.sMultiCockDesc() + " erupts again, squirting thick arousal and submission into the milker while your " + vaginaDescript(0) + " wrings Zetaz's nodule-ringed cock incessantly.  His turgid member bulges obscenely, and he starts to cum inside you, squirting master's thick seed into your breeding hole.  Breeding hole?  Why would you call your slutty fuck-hole a breeding hole?  Something seems off about that last thought, but you can't place it.\n\n", false);
 	
 	outputText("Your master finishes squirting inside you and withdraws, pawing at your milk-leaking teats for a moment as you continue to shudder and cum like a good bitch.  Wow, you really are a good bitch aren't you?  Pride wells in your breast as the imp's chanting reaches a crescendo and a relaxed smile forms on your " + player.face() + ".  Yes, you're a good, breeding bitch.   Master is smiling up at you and you know you've made him feel very happy.  Hopefully he'll come back soon and fuck you some more.  Your pussy feels so empty without him.", false);
 	player.orgasm();
@@ -2123,7 +2157,7 @@ public function malesZetazOver():void {
 	if(player.cor < 33) outputText("shame", false);
 	else if(player.cor < 66) outputText("confuse", false);
 	else outputText("arouse", false);
-	outputText(" you as you're thrown atop one of the tables and rolled onto your side.   You grunt as leather straps are produced and laid over your form to restrain you.  In the span of a minute you're completely immobilized from the neck down, and your " + player.legs() + " are kept spread to allow easy access to " + sMultiCockDesc() + " and " + assholeDescript() + ".\n\n", false);
+	outputText(" you as you're thrown atop one of the tables and rolled onto your side.   You grunt as leather straps are produced and laid over your form to restrain you.  In the span of a minute you're completely immobilized from the neck down, and your " + player.legs() + " are kept spread to allow easy access to " + player.sMultiCockDesc() + " and " + assholeDescript() + ".\n\n", false);
 	
 	outputText("Zetaz leaps atop the table in a single bound, the barely concealed bulge in his loincloth dangling freely underneath.  You begin to struggle, fearful of the cruel imp's intentions and ", false);
 	if(player.ass.analLooseness < 4) outputText("worried he'll try to force the mammoth between his thighs into your backdoor", false);
@@ -2134,11 +2168,11 @@ public function malesZetazOver():void {
 	
 	outputText("The imp lord gestures at his underlings with an irritated scowl while you catch your breath, and the horde scrambles to satisfy him before they can draw his ire.  A funnel with a clear tube suspended from the bottle is passed from the mass of bodies up to Zetaz, along with a few bottles filled with roiling pink and red fluids.   The funnel's exit-tube is threaded into your ring gag and there's nothing you can do but grunt in wide-eyed panic while it's secured in place.  The first bottle of what you assume to be lust-draft is upended into the funnel, and there's nothing you can do but drink or drown.\n\n", false);
 	
-	outputText("It has a bubblegum-like taste that makes your tongue tingle as it passes into your belly, but the more pressing sensation of " + sMultiCockDesc() + " getting rock-hard lets you know exactly what you just drank.  Even though you just finished chugging down that foul drink, the imps uncork another pair of potions and dump them into the funnel.  The sweet fluids flood your mouth, and once again you swallow and chug rather than drown.   After you finish the last swallow, you pant, completely out of breath and getting hotter by the moment.  Your " + player.skinDesc + " tingles and sweats, growing more and more sensitive with every passing second while " + sMultiCockDesc() + " begins to drip and drool.\n", false);
+	outputText("It has a bubblegum-like taste that makes your tongue tingle as it passes into your belly, but the more pressing sensation of " + player.sMultiCockDesc() + " getting rock-hard lets you know exactly what you just drank.  Even though you just finished chugging down that foul drink, the imps uncork another pair of potions and dump them into the funnel.  The sweet fluids flood your mouth, and once again you swallow and chug rather than drown.   After you finish the last swallow, you pant, completely out of breath and getting hotter by the moment.  Your " + player.skinDesc + " tingles and sweats, growing more and more sensitive with every passing second while " + player.sMultiCockDesc() + " begins to drip and drool.\n", false);
 	
-	outputText("Zetaz hands the funnel to an underling with a knowing laugh and repositions himself over your " + player.legs() + ".  Warm pressure pushes at your " + assholeDescript() + ", forcing your clenching flesh to yield around the intruder.  Normally such an instant penetration would be irritating, or perhaps painful, but the sudden pressure on your prostate only serves to release a copious squirt of pre-cum.  An unwelcome moan slips past your lips and sends a titter of laughter through the mob.  As if losing wasn't bad enough – they all know you're getting off on having your " + assDescript() + " penetrated.  The worst part is that the humiliation is just making the situation hotter and " + sMultiCockDesc() + " harder.\n\n", false);
+	outputText("Zetaz hands the funnel to an underling with a knowing laugh and repositions himself over your " + player.legs() + ".  Warm pressure pushes at your " + assholeDescript() + ", forcing your clenching flesh to yield around the intruder.  Normally such an instant penetration would be irritating, or perhaps painful, but the sudden pressure on your prostate only serves to release a copious squirt of pre-cum.  An unwelcome moan slips past your lips and sends a titter of laughter through the mob.  As if losing wasn't bad enough – they all know you're getting off on having your " + assDescript() + " penetrated.  The worst part is that the humiliation is just making the situation hotter and " + player.sMultiCockDesc() + " harder.\n\n", false);
 	
-	outputText("You nearly choke as an unexpected wave of potions washes through the funnel into your mouth, but you start swallowing and gulp down what feels like a half-dozen lust potions before you can breathe again.  " + SMultiCockDesc() + " starts squirting and spurting, dumping heavy loads of cum onto the table and your belly from the effects of the potions alone.  Zetaz gathers a massive dollop in his hand and smears it over himself, using it as lubricant to penetrate your poor, beleaguered asshole with savage, rough strokes that smash against your prostate at the apex of each thrust.  You moan loudly and lewdly through the tube in your mouth, wriggling against your restraints and spurting helplessly as you're penetrated over and over.\n\n", false); 
+	outputText("You nearly choke as an unexpected wave of potions washes through the funnel into your mouth, but you start swallowing and gulp down what feels like a half-dozen lust potions before you can breathe again.  " + player.SMultiCockDesc() + " starts squirting and spurting, dumping heavy loads of cum onto the table and your belly from the effects of the potions alone.  Zetaz gathers a massive dollop in his hand and smears it over himself, using it as lubricant to penetrate your poor, beleaguered asshole with savage, rough strokes that smash against your prostate at the apex of each thrust.  You moan loudly and lewdly through the tube in your mouth, wriggling against your restraints and spurting helplessly as you're penetrated over and over.\n\n", false); 
 	
 	outputText("As soon as your orgasm concludes, another wave of aphrodisiacs enters your mouth, and you have to drink all over again.  Something warm flashes in your backside, making you feel stuffed and hot, but then Zetaz pulls his cock free and another, slightly different prick is buried in your asshole.  The imps take turns battering your backdoor, force-feeding you potions, and sometimes even jerking you off to see how much you squirt, until your mind shuts down from the constant assault of drugs, sex, and pleasure.\n\n", false);
 	
@@ -2150,7 +2184,7 @@ public function malesZetazOverPtII():void {
 	outputText("", true);
 	outputText("You wake to a desert-dry, sandpapery feeling in the back of your throat as yet another moan escapes your mouth.   The ring gag is still there, and easily thwarts your tongues attempts to lick at your parched lips, but the jolts of pleasure exploding up your spine make it hard to get upset about it.  Hips rocking, you keep squirting and squirting from your orgasm, feeling each hot blast burst from your manhood until the wave of lust passes and you open your eyes.  You're in a dim cave, the one they used to hold Vala, and chained up to the wall in a similar manner.\n\n", false);
 	
-	outputText("While you observe the room, you realize that the waves of pleasure sliding up your spinal cord haven't stopped, and that your entire body is being shaken rhythmically.  You look down with a look of incredible, still-drugged confusion and behold the last thing you expected to see.  Somehow " + sMultiCockDesc() + " has been shrunk to less than half of its previous size", false);
+	outputText("While you observe the room, you realize that the waves of pleasure sliding up your spinal cord haven't stopped, and that your entire body is being shaken rhythmically.  You look down with a look of incredible, still-drugged confusion and behold the last thing you expected to see.  Somehow " + player.sMultiCockDesc() + " has been shrunk to less than half of its previous size", false);
 	if(player.balls > 0) outputText(", and your balls have completely vanished", false);
 	outputText("!  Just below your pint-sized shaft, a massive imp-cock is plowing in and out of your new, wet snatch with juicy-sounding slaps.  Y-you're a hermaphrodite!?  And what's happening to your dick?\n\n", false);
 	
@@ -2164,7 +2198,7 @@ public function malesZetazOverPtII():void {
 	
 	outputText("The little demon picks an small, glass injector stamped in black ink with the words 'GroPlus'.  Your eyes go wide at sight of the lettering.  As your maleness dwindles, the imp carelessly flicks it to the side and lines the needle's tip up with your tiny bud – they're going to shrink your dick to nothing and pump your clit full of growth chemicals!  He plunges it in, lighting your world up with pain, but the bindings around your body prevent you from escaping or injuring yourself in struggle.  Heat erupts inside your clitty, and it visibly swells up until it nearly reaches the size of your shrinking wang.  Your rapist, or 'sexual partner' with how horny you are, thrusts hard inside you and swells, stroking your walls with the nubby protrusions of a demon's cock.  It feels so good that another orgasm builds on the spot.\n\n", false);
 	
-	outputText("With hot, tainted jism filling your womb, your body starts to spasm and squirt, actually making your increasingly tiny dick shake around from the force of ejaculation.  It splatters off the imp's horns and forehead, but he doesn't seem to mind much as he slumps down, dragging his still-rigid member from your cock-hungry fem-sex.  You moan wantonly, still spurting as the imp 'medic' applies another layer of Reducto to " + sMultiCockDesc() + ", rapidly shortening ", false);
+	outputText("With hot, tainted jism filling your womb, your body starts to spasm and squirt, actually making your increasingly tiny dick shake around from the force of ejaculation.  It splatters off the imp's horns and forehead, but he doesn't seem to mind much as he slumps down, dragging his still-rigid member from your cock-hungry fem-sex.  You moan wantonly, still spurting as the imp 'medic' applies another layer of Reducto to " + player.sMultiCockDesc() + ", rapidly shortening ", false);
 	if(player.cockTotal() == 1) outputText("it until it's", false);
 	else outputText("them until they're", false);
 	outputText(" barely three inches long, even while hard.  He pulls out another plunger and rams the needle into your still-aching clit, making it swell until it's almost five inches long and trembling like your manhood used to.\n\n", false);
@@ -2207,7 +2241,7 @@ private function incubusDeal():void {
 	
 	//[Next – to room]
 	flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 private function incubusNoDeal():void {
@@ -2215,7 +2249,7 @@ private function incubusNoDeal():void {
 	clearOutput();
 	flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = -1;
 	outputText("Sean nods, grabs a pack, and takes off running before you have a chance to kill him.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 public function incubusShop():void {
@@ -2238,7 +2272,7 @@ public function incubusShop():void {
 			addButton(4, consumables.BIMBOLQ.shortName, telAdre.niamh.seanBimboBrewing);
 		}
 	}
-	addButton(9, "Leave", camp.campMenu);
+	addButton(9, "Leave", playerMenu);
 }
 
 private function incubusBuy(itype:ItemType):void {
@@ -2609,18 +2643,18 @@ public function kinathisValaStuff():void {
 	//[cock area >30:
 	else outputText("\n\nPlanting a kiss right on the head, she draws her tongue around the thick head, slowly teasing you.  \"<i>Ooohhh, so big and strong.  So much of my hero to play with,</i>\" she says with a giggle before returning to her teasing task.  Her soft lips tease you like fluttering butterflies, leaving a gentle tingling.  Opening her mouth as wide as she can, the passionate fairy dives headlong into her delicious task, eagerly licking and sucking every inch she can get at to pleasure you.  Her hands gently take hold of your hips as she slowly bobs her head up and down, wanting nothing more than to taste her hero.");
 	
-	outputText("\n\nHer diminutive tongue sucks around your " + cockHead(x) + ", teasing and dancing circles around you.  Her silky hair feels good around your fingers, making the perfect hand-hold as you keep her in place as she sucks and plays with you.  Pulling back with a slurp and a gasp, Vala licks her lips before kissing her way down your shaft.  ");
+	outputText("\n\nHer diminutive tongue sucks around your " + player.cockHead(x) + ", teasing and dancing circles around you.  Her silky hair feels good around your fingers, making the perfect hand-hold as you keep her in place as she sucks and plays with you.  Pulling back with a slurp and a gasp, Vala licks her lips before kissing her way down your shaft.  ");
 	if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("Her tongue licks around the throbbing glands, the heady animal musk filling her nose and mind with sweet lust.  ");
 	else if(player.cocks[x].cockType == CockTypesEnum.DOG) outputText("Her tongue licks around the hot building knot that gently throbs at your base.  ");
 	//[anemone cock:
 	else if(player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText("Her tongue plays with the squirming tentacles that line the drone of your throbbing phallus.  She shivers and groans as the tentacles sting her full of pleasurable aphrodisiac.  ");
-	outputText("Playing her way down your cock, the fey-girl gently licks up and down, sucking along your cumvein before coming back to the " + cockHead(x) + " of your meaty prick.");
+	outputText("Playing her way down your cock, the fey-girl gently licks up and down, sucking along your cumvein before coming back to the " + player.cockHead(x) + " of your meaty prick.");
 
 	outputText("\n\nHer sweet lips plant a firm kiss right on the tip before pulling back and licking those tender cock-suckers clean of your unique flavor.  The hunger for her lover, the aching desire for her hero to fuck her is too strong to hold back a moment longer.  For once, the busty fairy lays before you instead of jumping you to ride you as she likes to do.  Her soft luscious thighs spread for you, showing off her small soaking mound and dripping snatch.  Her eyes glitter with amorous mischief as she looks you up and down.  \"<i>Come on hero, you need to come and claim your spoils.  Little Vala wants it so bad, make her scream your name,</i>\" Vala says as she slides a finger along her slippery slit before spreading her quivering nethers open for you.");
 	
 	outputText("\n\nWith such an initiation and the small stacked woman looking up at you with lust and adoration, how can you say no?  Her body is so open to you, craving your touch and the sexual nirvana she knows you can bring her.  Grabbing her legs, you pull her closer to you and lean down over her, gently pinning her to the bed as you slide between her soft, silky thighs.  Your hands find her bountiful breasts, and your fingers sink into the soft, pliant flesh.  The pale, milky teats are already dripping their sweet fairy cream for you, just begging for your lips to wrap around a nipple and suckle your fill from them.  Licking your lips at the thought of her sweet offerings, you look down to take in the lovely fey-girls appearance, her milky skin, her tender feminine face, her glittering lilac-colored hair.  Vala’s bright eyes look up at you with adoration, a blush on her fair cheeks.  A smile breaks across her lips as she reaches up and slides her arms around your neck.  She leans up and kisses your lips once more.  More than ready for you, Vala REALLY wants you.");
 
-	outputText("\n\nNot wanting to wait a moment longer, you surge forward, pushing your " + cockDescript(x) + " between her  thighs, the " + cockHead(x) + " gently probing the small tight sex that lay between them, her fey-honey oozing from the womanly flower like sweet nectar from the most exotic of plants.  The touch of your meaty masculinity against her puffy, sensitive nethers draws a gentle gasp from the excited woman.  Taking hold of her hips, you push forward and sink your aching, throbbing spear into her tender, needy body.  ");
+	outputText("\n\nNot wanting to wait a moment longer, you surge forward, pushing your " + cockDescript(x) + " between her  thighs, the " + player.cockHead(x) + " gently probing the small tight sex that lay between them, her fey-honey oozing from the womanly flower like sweet nectar from the most exotic of plants.  The touch of your meaty masculinity against her puffy, sensitive nethers draws a gentle gasp from the excited woman.  Taking hold of her hips, you push forward and sink your aching, throbbing spear into her tender, needy body.  ");
 	//[cockarea <17:
 	if(player.cockArea(x) < 17) outputText("Despite her size, you slide in easily, her wet, slippery pussy taking you in and squeezing you in a velvety embrace.  \"<i>Yessss, it's in, it's in!  Mmmm, come to me hero, come to Vala,</i>\" she croons to you, beckoning  you to take her.");
 	else if(player.cockArea(x) < 30) outputText("\"<i>Ahhh...  yesss, it's in!  Ohh...  come to me hero, come to Vala and fill her with your love!</i>\" she croons to you, beckoning  you to take her.");

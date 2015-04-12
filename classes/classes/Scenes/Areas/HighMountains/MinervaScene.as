@@ -350,19 +350,19 @@ private function dontFlyWithWithMeYouCrazyBitch():void {
 	//Randomly present flying option scene in future interactions. 
 	//[Talk] [Sex] [Eat] [Fight] [Leave]
 	menu();
-	addButton(0,"Appearance",minervaAppearance);
-	addButton(1,"Talk",minervaTalkSelect);
-	if(player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
-	addButton(3,"Eat",eatSomethingYouCunt);
-	addButton(4,"Drink",getADrinkYouBitch);
-	addButton(5,"Spar",fightMinerva);
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
+	addButton(0, "Appearance", minervaAppearance);
+	addButton(1, "Talk", minervaTalkSelect);
+	if(player.lust >= 33) addButton(2, "Sex", minervaSexMenu);
+	addButton(3, "Eat", eatSomethingYouCunt);
+	addButton(4, "Drink", getADrinkYouBitch);
+	addButton(5, "Spar", fightMinerva);
+	addButton(9, "Leave", camp.returnToCampUseOneHour);
 }
 
 private function fightMinerva():void {
 	startCombat(new Minerva(),true);
 	spriteSelect(95);
-	eventParser(1);
+	playerMenu();
 }
 
 //1-2 Repeatable Cute, Romantic Encounter. Only if PC accepted Minerva's feelings. Add to normal encounters.
@@ -458,7 +458,7 @@ private function talkingToMinervaAboutBackstory():void {
 		
 		outputText("\n\nMinerva seems to go quiet for a bit after that, just looking down at the ground.  The unpleasant feelings and memories of having been subjected to such a vile act is obvious in her eyes, and something about her behavior seems to suggest that she had been impregnated by the tiger shark.");
 		
-		outputText("\n\n\"<i>With her enjoying the orgasm, I struggled and managed to get away.  In the fight, it dropped one of those 'teeth' the other sharks had forced on me, but this one had a strange sheen.  I grabbed the thing and... just swam and swam until I reached the shore, then ran into the forest and just... I just...  I felt like giving up.  The world had tried to kill or rape me since I got here... it was probably the lowest point in my life.  I knew I needed to get stronger. Stronger like the tigershark and sharkgirls.  I knew that those sharks were stronger then me and eating their fishy tasting things, so I took that glowing tooth and swallowed it.  That's how i got these stripes of mine,</i>\" the siren explains as she curls up in her spot, holding her knees to her chest.  For a moment you think she's isn't going to continue her story, but she starts back up, voice slightly muffled by her knees.");
+		outputText("\n\n\"<i>With her enjoying the orgasm, I struggled and managed to get away.  In the fight, it dropped one of those 'teeth' the other sharks had forced on me, but this one had a strange sheen.  I grabbed the thing and... just swam and swam until I reached the shore, then ran into the forest and just... I just...  I felt like giving up.  The world had tried to kill or rape me since I got here... it was probably the lowest point in my life.  I knew I needed to get stronger.  Stronger like the tigershark and sharkgirls.  I knew that those sharks were stronger than me and eating their fishy tasting things, so I took that glowing tooth and swallowed it.  That's how i got these stripes of mine,</i>\" the siren explains as she curls up in her spot, holding her knees to her chest.  For a moment you think she's isn't going to continue her story, but she starts back up, voice slightly muffled by her knees.");
 		
 		outputText("\n\n\"<i>It turns out that I had, in fact, gotten pregnant from that tiger shark.  And even though, as I said, I wanted to give up... I'd always wanted a family of my own, and it seemed like this would not just be some monster, but an actual child, so I gave this place another chance and decided to keep going.</i>\"");
 		
@@ -732,7 +732,7 @@ private function fuckMinervasAsshole():void {
 	else outputText("shaft");
 	outputText(" to erectness, and you begin to teasingly drag [oneCock] through the crack of her curvy, spankable ass, hesitating to actually penetrate her until you're ready.  Your vexation brings a brighter blush to her cheeks, her tail squirming gently against you as she takes the hint.  Her hips start pushing back and forth, using her soft rounded rump to massage [eachCock], wanting to get you just as needy as she is.");
 	
-	outputText("\n\nDeciding that you've finally teased her quite enough, you drag your " + cockDescript(x) + " down through the crack of her ass one last time, then align your " + cockHead(x) + " with her tight, puckered asshole.  You ask her if she's ready for this, if she's ready to have her ass filled by your throbbing cock.  She nods her head, looking back at you with her bright, blushing face, her eyes locking onto yours as she spreads her knees a little further apart.  \"<i>I... yes, I'm ready, don't be too rough, all right?</i>\"");
+	outputText("\n\nDeciding that you've finally teased her quite enough, you drag your " + cockDescript(x) + " down through the crack of her ass one last time, then align your " + player.cockHead(x) + " with her tight, puckered asshole.  You ask her if she's ready for this, if she's ready to have her ass filled by your throbbing cock.  She nods her head, looking back at you with her bright, blushing face, her eyes locking onto yours as she spreads her knees a little further apart.  \"<i>I... yes, I'm ready, don't be too rough, all right?</i>\"");
 	
 	outputText("\n\nDrawing your [hips] back and sinking your fingers into her squeezable butt, you begin to push forward into her back passage.  It's surprisingly cool, perhaps because of the shark essence in her blood.  Her throbbing anal walls are slick enough to let you slip in easily, but grip tightly around your " + cockDescript(x) + ".  The inner muscles tighten around you and let you feel dozens of tiny, smooth bumps lining the passage inside.  Minerva's walls ripple and massage you as you finally bury yourself to the hilt inside her, groaning in pleasure at her tight anal embrace.");
 
@@ -806,7 +806,7 @@ private function minervaCowgirlSex():void {
 	
 	outputText("\n\nMinerva seems to enjoy seeing you helpless like this, as her dick seems to just get harder and harder while her tentacles caress your member, though they no longer sting; instead, they just tease you with their slick and gentle touch.  \"<i>You like that, don't you?  You're so hard I can feel your need growing more and more.  You want my tight pussy so badly,</i>\" she says with a lecherous grin before rising her body up and pressing against your " + cockDescript(x) + " with her surprisingly cool cunt.  Already her lips are soaked, her slick juices running down your dick as she teases you even further.");
 	
-	outputText("\n\nFinally, she ends your torment and brings your " + cockHead(x) + " to her refreshingly wet entrance before pushing down, letting you penetrate her with agonizing slowness, her longer tentacles still stroking and caressing your length as she pulls you into the vicelike grip of her snatch.  Inside, you can feel smaller tendrils starting to caress and squeeze you, clearly another trait she was gifted with from the shark girls.");
+	outputText("\n\nFinally, she ends your torment and brings your " + player.cockHead(x) + " to her refreshingly wet entrance before pushing down, letting you penetrate her with agonizing slowness, her longer tentacles still stroking and caressing your length as she pulls you into the vicelike grip of her snatch.  Inside, you can feel smaller tendrils starting to caress and squeeze you, clearly another trait she was gifted with from the shark girls.");
 	
 	outputText("\n\nYou moan in delight, shivering from the sensations and the lingering effects of her toxin, and unconsciously start to thrust your hips up, trying to push yourself deeper inside her wriggling depths.  Minerva, however, will have none of that and promptly pushes you back down, using the advantage of her position and strength");
 	if(player.tallness < 96) outputText(", as well as her superior size,");
@@ -1084,7 +1084,7 @@ private function letMinervaSuckYouOff():void {
 	//if cock area 60+:
 	else outputText("\n\nMinerva's eyes widen and her mouth opens in shock as your dick grows and grows... and grows, quickly dwarfing her own sizable package.  \"<i>G-geez, what a huge dick, it's enormous...</i>\" she says with wonder in her voice.  Gulping, she licks her lips.  \"<i>W-well... I'll do my best to take all of it...</i>\"  A little nervousness is mixed into her voice, but with how tall she is, you're sure she could take it all.");
 	
-	outputText("\n\nTaking a relaxing breath, Minerva dives right into it, her long tongue slithering out to lick your hard, sensitive flesh, wrapping around the tip and giving the most sensitive part of your dick a good squeeze.  The heat-quenching chill of her wet tongue feels remarkable on your hard prick, the tight squeeze pulling a gasp from your mouth.  Your hands move over her head and into her dark red hair, and you're suddenly relieved that she can't envenom you this way.  Wanting to show you what she's made of, your siren leans in, dragging her cool wet tongue up your " + cockDescript(x) + " from base to tip before planting a kiss right on the " + cockHead(x) + " of your throbbing, needy dick.");
+	outputText("\n\nTaking a relaxing breath, Minerva dives right into it, her long tongue slithering out to lick your hard, sensitive flesh, wrapping around the tip and giving the most sensitive part of your dick a good squeeze.  The heat-quenching chill of her wet tongue feels remarkable on your hard prick, the tight squeeze pulling a gasp from your mouth.  Your hands move over her head and into her dark red hair, and you're suddenly relieved that she can't envenom you this way.  Wanting to show you what she's made of, your siren leans in, dragging her cool wet tongue up your " + cockDescript(x) + " from base to tip before planting a kiss right on the " + player.cockHead(x) + " of your throbbing, needy dick.");
 	
 	//If balls:
 	if(player.balls > 0) outputText("  Her hand on your hip moves down between your legs, sliding inwards to gently caress and massage your cum-filled [balls] to increase your pleasure even more, her hands trying their best to get your nuts worked up and prepare a good load for her at the end.");
@@ -1152,7 +1152,7 @@ private function fuckMinervaWithHerHandsBehindHerBack():void {
 	
 	outputText("\n\nYour hands hit again and again, each hard spank rippling the luscious blue and grey rump, and drawing groans and gasps from Minerva every time you plant a new handprint on her round, toned butt.  Your kinky siren is loving the teasing spanking, as her tight pink snatch grows wetter and wetter, and her thick, tentacled cock grows harder and harder, sure signs of her greater arousal.  \"<i>H-hey!  Ahh... how... how long are you going to... ooohh... tease me like this?</i>\" she asks between spanks and moans of delight from the rough teasing.");
 	
-	outputText("\n\nWith her so wet now, it's the perfect time to strike!  Deftly pulling your [armor] from your body, you toss the useless pieces away and expose [eachCock] to the air.  Taking hold of [oneCock], you drag its length across Minerva's thighs and rump just to tease her a little more before giving the horny herm the hard dicking she craves.  Reaching down, you lift and spread her curvy rear before aligning yourself, your " + cockHead(x) + " pressing and kissing her netherlips for a moment, drawing a lusty whimper from the siren before tensing your hips and plowing your iron-hard breeding meat into her with body-jerking power.");
+	outputText("\n\nWith her so wet now, it's the perfect time to strike!  Deftly pulling your [armor] from your body, you toss the useless pieces away and expose [eachCock] to the air.  Taking hold of [oneCock], you drag its length across Minerva's thighs and rump just to tease her a little more before giving the horny herm the hard dicking she craves.  Reaching down, you lift and spread her curvy rear before aligning yourself, your " + player.cockHead(x) + " pressing and kissing her netherlips for a moment, drawing a lusty whimper from the siren before tensing your hips and plowing your iron-hard breeding meat into her with body-jerking power.");
 	
 	outputText("\n\nDespite your brutal thrust, you slide in with ease, Minerva's tight walls so slickened with her arousal.  You squeeze into the deliciously tight herm like butter, easily ramming every inch of your " + cockDescript(x) + " into her with only a few hard, deep thrusts.  With your hips pressed against Minerva's accepting body, you grind against her, making sure she can feel every inch moving inside her clinging cunt.");
 	//If balls: 

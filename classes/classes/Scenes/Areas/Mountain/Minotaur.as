@@ -35,7 +35,7 @@
 				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.", false);
 				game.cleanupAfterCombat();
 			} else
-				game.eventParser(game.mountain.minotaurScene.getRapedByMinotaur);
+				game.mountain.minotaurScene.getRapedByMinotaur();
 		}
 
 		override public function get long():String

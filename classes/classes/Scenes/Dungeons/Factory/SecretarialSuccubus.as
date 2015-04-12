@@ -13,11 +13,11 @@ package classes.Scenes.Dungeons.Factory
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?", true);
 					game.dynStats("lus", 1);
-					game.simpleChoices("Yes", 11023, "Dildo Rape", dildo, "", 0, "", 0, "No", game.cleanupAfterCombat);
+					game.simpleChoices("Yes", game.succubusVictoryRape, "Dildo Rape", dildo, "", null, "", null, "No", game.cleanupAfterCombat);
 				} else if (player.lust >= 33){
 					outputText("You smile in satisfaction as the " + short + " gives up on fighting you and starts masturbating, begging for you to fuck her.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?", true);
 					game.dynStats("lus", 1);
-					game.simpleChoices("Yes", 11023, "Dildo Rape", dildo, "", 0, "", 0, "No", game.cleanupAfterCombat);
+					game.simpleChoices("Yes", game.succubusVictoryRape, "Dildo Rape", dildo, "", null, "", null, "No", game.cleanupAfterCombat);
 				} else {
 					game.finishCombat();
 				}
@@ -32,7 +32,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(game.endLustLoss);
 			} else {
-				game.eventParser(11024);
+				game.succubusLossRape();
 			}
 		}
 

@@ -1,10 +1,11 @@
 ﻿//Dungeon events from 11000+
+/* Now called directly or replaced by dungeonEnterRoom in dungeonCore.as
 public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11000) dungeonLoc = 0;
 	if(eventNo == 11001) {
 		if(player.hasKeyItem("Iron Key") < 0) {
 			outputText("The door is locked with a key that is not in your possession.", true);
-			doNext(1);
+			doNext(camp.campMenu);
 			return;
 		}
 		else dungeonLoc = 1;
@@ -18,7 +19,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11008) {
 		if(player.hasKeyItem("Supervisor's Key") < 0) {
 			outputText("The door is locked with a key that is not in your possession.", true);
-			doNext(1);
+			doNext(camp.campMenu);
 			return;
 		}
 		else dungeonLoc = 8;
@@ -40,7 +41,7 @@ public function doDungeon(eventNo:Number):void {
 		outputText("You take a sip of the rich creamy coffee and suddenly feel refreshed. As you replace the coffeepot, the busty coffee-maker comes to life, grabbing her thick dusky nipples and squeezing out a trickle of scaldingly hot liquid. You can see her eyes roll up into her head from what you assume to be pleasure as she automatically refills the missing coffee, mouth open with ecstasy.  Her movements gradually slow as she quivers almost imperceptibly. A contented smile graces her features as immobility overtakes her, freezing her back in place.  You wonder if 'Mrs. Coffee' was created, or is a victim of this place's dark master.", true);
 		dynStats("lus", 1);
 		HPChange(35, false);
-		doNext(1);
+		doNext(camp.campMenu);
 		return;
 	}
 	//Dungeon Factory Activate!
@@ -109,7 +110,7 @@ public function doDungeon(eventNo:Number):void {
 			if(player.cockArea(0) >= 100) outputText("As you struggle not to lose consciousness, you realize your over-aroused body had pumped most of your blood to your over-sized " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ", which now droops to the floor, pulsing hotly.  ", false);
 		}
 		//DO MULTIZ
-		if(player.cocks.length > 1) outputText("The feeling of light-headedness nearly robs you of consciousness as your " + multiCockDescript() + " fill with blood, pulsating with arousal as they reach full size.  ", false);
+		if(player.cocks.length > 1) outputText("The feeling of light-headedness nearly robs you of consciousness as your " + player.multiCockDescript() + " fill with blood, pulsating with arousal as they reach full size.  ", false);
 		//Vagooooz
 		if(player.vaginas.length > 0) {
 			//'uge clit
@@ -177,7 +178,7 @@ public function doDungeon(eventNo:Number):void {
 		else outputText("Later on, in a moment of clarity, you look around and realize you aren't alone.  ", false);		
 		outputText("In rows alongside you are a large number of other captives, every single one endowed with freakishly sized breasts, and nearly all gifted with throbbing demonic dicks.  Some small analytical part of you notes that the farther down the line they are, the older and larger they have become.   You look down and see your own massive tits, shiny tainted nipples still pumping out streams of milk.  The huge throbbing demon-cock between your legs begins to get hard as the machines crank back up, filling you full of happy horniness.", false);
 		if(player.statusAffectv3(StatusAffects.Marble) == 1 || player.findStatusAffect(StatusAffects.CampMarble) >= 0) outputText("  With Marble here too, you'll be around for a long time.", false);
-		eventParser(5035);
+		gameOver();
 		return;
 	}
 	//VICTORY RAEP - SUCCUBUS
@@ -213,7 +214,7 @@ public function doDungeon(eventNo:Number):void {
 	//Take iron key
 	if(eventNo == 11028) {
 		outputText("You take the <b>Iron Key</b> to keep with your other important items.", true);
-		doNext(1);
+		doNext(camp.campMenu);
 		player.createKeyItem("Iron Key",0,0,0,0);
 		return;
 	}
@@ -223,7 +224,7 @@ public function doDungeon(eventNo:Number):void {
 		outputText("\n\nYou'll need a little help to use it though.", false);
 		player.createKeyItem("Cock Milker",0,0,0,0);
 		player.createStatusAffect(StatusAffects.BuiltMilker,0,0,0,0);
-		doNext(1);
+		doNext(camp.campMenu);
 		return;
 	}
 	//Build Breast Milker
@@ -232,7 +233,7 @@ public function doDungeon(eventNo:Number):void {
 		outputText("\n\nYou'll need a little help to use it though.", false);
 		player.createKeyItem("Breast Milker",0,0,0,0);
 		player.createStatusAffect(StatusAffects.BuiltMilker,0,0,0,0);
-		doNext(1);
+		doNext(camp.campMenu);
 		return;
 	}
 	//Start combat incubi
@@ -276,7 +277,7 @@ public function doDungeon(eventNo:Number):void {
 		outputText("You hand over the Hentai Comic tentatively to the male sex demon.  As soon as he has it in his grubby mitts he sits down and starts thumbing through the pages, toying with his half-hard member the entire time.  He must really like porn.", true);
 		player.removeKeyItem("Hentai Comic");
 		player.createStatusAffect(StatusAffects.IncubusBribed,0,0,0,0);
-		doNext(1);
+		doNext(camp.campMenu);
 		return;
 	}
 	//Incubus Cock-Trip Attack
@@ -425,7 +426,7 @@ public function doDungeon(eventNo:Number):void {
 				player.growTits(1, (2+rand(3)), true, 1);
 				outputText("  ", false);
 				outputText("Your " + nippleDescript(0) + "s ", false);
-				if(player.cocks.length > 0) outputText("and " + multiCockDescript(), false);
+				if(player.cocks.length > 0) outputText("and " + player.multiCockDescript(), false);
 				outputText(" become rock hard, leaking fluids constantly.  ", false);
 				//MALE
 				if(player.cocks.length > 0 && player.vaginas.length == 0) outputText("Glancing over into the sea of sex, you find yourself drawn to the nearest pussy, as if it was the only thing in the world to matter.  You lose track of the time as you fuck hard dozens of gaping cunts, each of them overflowing with cum from all the participants in this infernal orgy.  ", false);
@@ -435,7 +436,7 @@ public function doDungeon(eventNo:Number):void {
 					player.cuntChange(150, true);
 				}
 				//HERM
-				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ", false);
+				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + player.multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ", false);
 				outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your " + player.armorName + ".  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...", false);
 				player.orgasm();
 				dynStats("int", -2, "lib", 4, "cor", 4);
@@ -447,7 +448,7 @@ public function doDungeon(eventNo:Number):void {
 			else {
 				outputText("Desperate for more of the demon-drugs, you slide into the now-familiar harness and let the needles sink into your skin.   Panting in lust, you beg for them to increase the dosage again.   Desire burns through your veins as the cocktail surges through them", false);
 				if(player.cocks.length > 0) {
-					outputText(", filling your " + multiCockDescriptLight(), false);
+					outputText(", filling your " + player.multiCockDescriptLight(), false);
 					outputText(" with sensation", false);
 					if(player.cockTotal() == 1) outputText("s", false);
 					outputText(" as ", false);
@@ -466,12 +467,12 @@ public function doDungeon(eventNo:Number):void {
 				if(player.biggestLactation() >= 3) outputText("moo", false);
 				else outputText("moo", false);
 				outputText(" with happiness.  She grins, promising another dose to you if you are a good cow for her.", false);
-				doNext(5035);
+				gameOver();
 				return;
 			}
 			
 		}
-		doNext(1);
+		doNext(camp.campMenu);
 		return;
 	}
 	//Accept Omnibus' Offer
@@ -484,7 +485,8 @@ public function doDungeon(eventNo:Number):void {
 	//Fight Omnibus
 	if(eventNo == 11042) {
 		outputText("You strike a combat pose and prepare your " + player.weaponName + ".  She smiles and saunters around the desk, letting something bulbous and fleshy drop free from between her nether-lips.  You watch in shock as it hardens into a dick, growing right from where her clit should be.\n\nShe taunts, \"<i>Like what you see cow?  I'll be sure to visit you in the pens.</i>'\"", true);
-		eventParser(11045);
+		player.createStatusAffect(StatusAffects.FactoryOmnibusDefeated, 0, 0, 0, 0);
+		startCombat(new OmnibusOverseer(),true);
 		spriteSelect(16);
 		return;
 	}
@@ -628,7 +630,7 @@ public function doDungeon(eventNo:Number):void {
 		if(player.cocks.length > 1) {
 			//Already has demoncocks
 			if(player.demonCocks() == player.cockTotal()) {
-				outputText("Your " + multiCockDescriptLight() + " leap forwards, taking to the dark magic with ease.  Inch after inch of new length erupts from your groin as your " + multiCockDescriptLight() + " get longer and thicker.  They pulsate, as if promising dark pleasure as they settle into their new enhanced size.", false);
+				outputText("Your " + player.multiCockDescriptLight() + " leap forwards, taking to the dark magic with ease.  Inch after inch of new length erupts from your groin as your " + player.multiCockDescriptLight() + " get longer and thicker.  They pulsate, as if promising dark pleasure as they settle into their new enhanced size.", false);
 				temp = player.cocks.length;
 				while(temp > 0) {
 					temp--;
@@ -638,10 +640,10 @@ public function doDungeon(eventNo:Number):void {
 			}
 			//Not yet full of demoncocks...
 			else {
-				outputText("You smile, watching your " + multiCockDescriptLight() + " grow longer.  Inches of newfound dick-flesh erupt from your crotch in response to omnibus' dark magics.  Before you can play with your transformed pleasure tools, a wave of burning desire passes through you.  You watch", false);
+				outputText("You smile, watching your " + player.multiCockDescriptLight() + " grow longer.  Inches of newfound dick-flesh erupt from your crotch in response to omnibus' dark magics.  Before you can play with your transformed pleasure tools, a wave of burning desire passes through you.  You watch", false);
 				if(player.cor < 80) outputText(" in horror", false);
 				else outputText(" curiously", false);			
-				outputText(" as the skin of your " + multiCockDescriptLight() + " turns shiny and purplish-black.  Corrupt nodules begin to spring up over the entire length of each dick.  ", false);
+				outputText(" as the skin of your " + player.multiCockDescriptLight() + " turns shiny and purplish-black.  Corrupt nodules begin to spring up over the entire length of each dick.  ", false);
 				temp = player.cocks.length;
 				while(temp > 0) {
 					temp--;
@@ -649,8 +651,8 @@ public function doDungeon(eventNo:Number):void {
 					player.cocks[temp].thickenCock(2);
 					player.cocks[temp].cockType = CockTypesEnum.DEMON;
 				}
-				if(player.cor < 50) outputText("<b>Your dicks are transforming into " + multiCockDescriptLight() + "!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  Unable to do anything but groan with forced pleasure and horror, you can only watch.  One last batch of nodules forms in a ring around the crowns of your " + multiCockDescriptLight() + ", seemingly completing its transformation, until you notice, almost throwing up, that your testicles are also getting covered in black veins under your powerless eyes!  ", false);
-				else outputText("<b>Your dicks are transforming into " + multiCockDescriptLight() + "!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  You pant and moan in happiness as they lengthen one last time.  As you stroke all of their amazing length with both hands, the excitement of possessing such a magnificent pleasure tool makes you cum. You lick your fingers eagerly, tasting your new cum, while a last ring of nodules forms around the crowns of your beautiful " + multiCockDescriptLight() + ".   Your new " + multiCockDescriptLight() + " pulsate darkly with each beat of your heart, but the thick, throbbing veins that are finishing to cover your testicles do not contain blood, but a black liquid which apparently has perverted them. You ponder what its purpose might be, but then you decide, as you stroke a huge, dark, bumpy shaft, that if they feel as good as they look, it doesn't really matter.  ", false);
+				if(player.cor < 50) outputText("<b>Your dicks are transforming into " + player.multiCockDescriptLight() + "!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  Unable to do anything but groan with forced pleasure and horror, you can only watch.  One last batch of nodules forms in a ring around the crowns of your " + player.multiCockDescriptLight() + ", seemingly completing its transformation, until you notice, almost throwing up, that your testicles are also getting covered in black veins under your powerless eyes!  ", false);
+				else outputText("<b>Your dicks are transforming into " + player.multiCockDescriptLight() + "!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  You pant and moan in happiness as they lengthen one last time.  As you stroke all of their amazing length with both hands, the excitement of possessing such a magnificent pleasure tool makes you cum. You lick your fingers eagerly, tasting your new cum, while a last ring of nodules forms around the crowns of your beautiful " + player.multiCockDescriptLight() + ".   Your new " + player.multiCockDescriptLight() + " pulsate darkly with each beat of your heart, but the thick, throbbing veins that are finishing to cover your testicles do not contain blood, but a black liquid which apparently has perverted them. You ponder what its purpose might be, but then you decide, as you stroke a huge, dark, bumpy shaft, that if they feel as good as they look, it doesn't really matter.  ", false);
 			}
 		}
 		eventParser(11055);
@@ -742,7 +744,7 @@ public function doDungeon(eventNo:Number):void {
 		outputText("You feel a strange shivering sensation pass through you.  ", true);
 		//Remove multiple.
 		if(player.cocks.length > 1) {
-			outputText("Your " + multiCockDescriptLight() + " shiver and retract back towards your body.  When the process finishes you are left with only your " + cockDescript(0) + ".  ", false);
+			outputText("Your " + player.multiCockDescriptLight() + " shiver and retract back towards your body.  When the process finishes you are left with only your " + cockDescript(0) + ".  ", false);
 			player.removeCock(1,player.cocks.length-1);
 			genderCheck();
 			temp++;
@@ -848,23 +850,24 @@ public function doDungeon(eventNo:Number):void {
 	//Shut down factory!
 	if(eventNo == 11058) {
 		outputText("You resolve to shut down the factory, then destroy the controls.  You spend a few moments making sure you aren't about to do something disastrous.  A few deep breaths calm your nerves, letting you focus on pressing the correct buttons.  The constant thrumming of the machinery slowly dies down, closely followed by a chorus of disappointed moans.  You step over to the window and watch as the captives come out of their drug induced sex-comas.  A great deal of them gather up and leave, though you are unsure what their destination is.  A few seem to be gathering back around the equipment, and puzzling out how to operate it.  Maybe they liked being here...", true); 
-		doNext(1);
+		doNext(camp.campMenu);
 		player.createStatusAffect(StatusAffects.DungeonShutDown,0,0,0,0);
 		return;
 	}
 	//Shut down overload
 	if(eventNo == 11059) {
 		outputText("You resolve to shut down the factory by overloading the storage tanks, rendering much of the equipment inoperable and difficult to repair.  With a quick twist of a knob, you override the pressure vents for the storage tanks.  Within minutes, you hear the sounds of popping rivets and straining pumps.  You look out over the factory floor and watch as many of the pipes fracture, dripping seed over the moaning captives.  Smoke rises from pumps as they short out and overheat.  The entire building shudders as a massive blast echoes from somewhere to the west.  A high pitched whine fills the building as the last motors shriek and die.  The captives slowly start to come to as the flood of drugs and artificial pleasure come to a stop.  Many break down and cry, others begin unhooking themselves and exploring their surroundings.  You watch with interest as many of them rally together and make for an exit.   The remaining survivors begin scavenging parts from the machinery and puzzling out how to use it.  Perhaps they liked it here.", true);
-		doNext(1);
+		doNext(camp.campMenu);
 		player.createStatusAffect(StatusAffects.DungeonShutDown,0,0,0,0);
 		player.createStatusAffect(StatusAffects.FactoryOverload,0,0,0,0);
 		return;
 	}
+/* Now called directly
 	//Take Supervisor's Key
 	if(eventNo == 11060) {
 		outputText("You search the desk and find a silver key labelled 'Supervisor'.\n\n(Supervisor's Key acquired!)", true);
 		player.createKeyItem("Supervisor's Key",0,0,0,0);
-		doNext(1);
+		doNext(camp.campMenu);
 		return;
 	}
 	//Take item from storage
@@ -934,7 +937,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11077) {
 		if(flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] == 0) {
 			outputText("The door won't budge.", true);
-			doNext(1);
+			doNext(camp.campMenu);
 			return;
 		}
 		else dungeonLoc = 16;
@@ -1213,5 +1216,6 @@ public function doDungeon(eventNo:Number):void {
 	}
 	eventParser(1);
 }
+*/
 
 //BLAH!

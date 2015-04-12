@@ -212,16 +212,16 @@ internal function haveAKid():void {
 	outputText("\n\nYou shudder as her fingers work your " + cockDescript(0) + ", but don't let up on your end for a second.  You brush and knead Hel's nipple between your teeth, letting your hands drift down to her wide hips and gropable ass, slowly stripping her of her scale bottom and pulling it off her legs.  With your lover bare and naked, you slip down between her legs, letting her hook them over your shoulder to give you a good view of her dripping cunt.  Your tongue laps across her labia, drawing a long, lewd moan from Hel.  She runs her fingers through your [hair], urging you onward; at her lusty moans, you dig in, sucking on her prominent clit and drilling your tongue between her inner folds.  You gasp into her when Hel's lengthy tail wraps around your shoulders, the pale flame soothingly warm on your " + player.skinFurScales() + " as her leathery appendage works its way down to the " + cockDescript(0) + " dangling between your [legs].  You groan with sudden need as the tip of her tail brushes your most sensitive flesh, tickling ");
 	if(player.balls > 0) outputText("your [balls]");
 	else outputText("the base of your prick");
-	outputText(" before coiling around the shaft with serpentine dexterity.  Her tail contracts and squeezes, undulating across your " + cockDescript(0) + " until it finally massages a thick blob of pre from your " + cockHead(0) + ", dribbling out to stain the wasteland ground.");
+	outputText(" before coiling around the shaft with serpentine dexterity.  Her tail contracts and squeezes, undulating across your " + cockDescript(0) + " until it finally massages a thick blob of pre from your " + player.cockHead() + ", dribbling out to stain the wasteland ground.");
 	
-	outputText("\n\nSuddenly, Helia grabs your shoulders and shoves you down.  You flop onto your back, tail-encased prick standing straight up like a flagpole as Hel straddles your [hips], vigorously fingering herself as her tail lines your cock up with her drooling womanhood.  Your breath catches as your " + cockHead(0) + " brushes her boiling juices, slickening your entry as she slides down your pole.  You grab Hel's flared hips, guiding her in as she envelopes your " + cockDescript(0) + " in the roiling inferno inside her.  Her tail unravels from around your throbbing shaft as she descends, tantalizingly slowly; she takes the better part of a minute before her groin is cozily joined to yours, her hungry maw kissing the very base of your lusty prick.");
+	outputText("\n\nSuddenly, Helia grabs your shoulders and shoves you down.  You flop onto your back, tail-encased prick standing straight up like a flagpole as Hel straddles your [hips], vigorously fingering herself as her tail lines your cock up with her drooling womanhood.  Your breath catches as your " + player.cockHead() + " brushes her boiling juices, slickening your entry as she slides down your pole.  You grab Hel's flared hips, guiding her in as she envelopes your " + cockDescript(0) + " in the roiling inferno inside her.  Her tail unravels from around your throbbing shaft as she descends, tantalizingly slowly; she takes the better part of a minute before her groin is cozily joined to yours, her hungry maw kissing the very base of your lusty prick.");
 	
 	outputText("\n\nCompletely impaled on you, Hel's chest heaves with lust and need.  She cups one of the massive orbs, squeezing her pert nipples between a pair of crimson fingers as her other hand ");
 	if(player.biggestTitSize() <= 2) outputText("supports her, pressing down on your [chest]");
 	else outputText("gropes one of your tits, kneading your tender breasts under you squirm underneath her, unable to hold in your pleasured little gasps");
 	outputText(".  Slowly, your salamander lover starts to grind her hips on your " + cockDescript(0) + ", her muscles contracting and squeezing the rigid shaft inside her with every shift of her hips.  You both moan aloud, half-lost in a miasm of pleasure.  \"<i>God, I wish I could stay like this forever,</i>\"  Hel whispers, just on the edge of hearing.  \"<i>There's no one I'd rather be with, [name].  No one I'd rather have give me the child my body craves.</i>\"");
 	
-	outputText("\n\nSomething in Hel's voice gives you pause, but before you can think too much into it, she plants her hands firmly on your [chest] and starts to rise, dragging inch after inch of your prick out of her until only the " + cockHead(0) + " is still inside her, smearing her lips with thick, creamy pre.  Then, grinning at you, Hel slams back down, taking you in one brutal thrust that leaves you both moaning; a moment later and she's riding your cock, bouncing on the rigid pole so fast that your combined juices go flying everywhere, drenching the barren earth around you.  Helia fucks you with reckless abandon, her voice edging higher and higher as she cries and moans.  Caressing your [chest], fondling herself, teasing your [asshole] with the tip of her tail, Hel seems to lose all restraint as she takes your cock again and again, devolving to her basest sexual instincts, rutting like an animal until you're sure you'll wake up bruised in the morning.");
+	outputText("\n\nSomething in Hel's voice gives you pause, but before you can think too much into it, she plants her hands firmly on your [chest] and starts to rise, dragging inch after inch of your prick out of her until only the " + player.cockHead() + " is still inside her, smearing her lips with thick, creamy pre.  Then, grinning at you, Hel slams back down, taking you in one brutal thrust that leaves you both moaning; a moment later and she's riding your cock, bouncing on the rigid pole so fast that your combined juices go flying everywhere, drenching the barren earth around you.  Helia fucks you with reckless abandon, her voice edging higher and higher as she cries and moans.  Caressing your [chest], fondling herself, teasing your [asshole] with the tip of her tail, Hel seems to lose all restraint as she takes your cock again and again, devolving to her basest sexual instincts, rutting like an animal until you're sure you'll wake up bruised in the morning.");
 	
 	outputText("\n\nYou lay back and enjoy the rough fucking for several minutes, eventually taking her hands and holding them fast as she moves, locking your fingers with hers and pulling her down into a long, tongue-filled kiss.  The two of you stay like that for a long while, your breath hot on each others' skin as you wrap your arms around your lover's waist; to your surprise, Hel leans away from you, just long enough to pull off the tie on her ponytail, letting her rich red hair cascade down around you, veiling your faces as she kisses you again.  You run your fingers through her thick locks, breathing in the fiery smell of her, tasting her sweet lips on yours, feeling her innermost depths conforming around your breeding pole.  Holding Hel tight, you roll the pair of you over, landing with your cheek nestled in the cleft of her bosom.  She gasps as you run your tongue across the soft, succulent flesh of her tits, gently thrusting your " + cockDescript(0) + " into her.  Settling onto her back, Hel spreads her legs wide for you, letting you slip right in as her heels hook behind your [butt], her hands digging into your back to guide your movements.  Inside of five thrusts and she's moaning like a bitch in heat, writhing beneath you.  She claws at your back, making you wince - and spurt a mess of pre into her eager hole.");
 	
@@ -315,7 +315,7 @@ private function maiWouldBeTheBestInseminator():void {
 	kGAMECLASS.helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER); //Yes, it's Mai's baby, but that's already tracked separately
 	flags[kFLAGS.HEL_NTR_TRACKER] = 1;
 	flags[kFLAGS.HELSPAWN_DADDY] = 2;
-	doNext(1);
+	doNext(playerMenu);
 }
 //Spiderboy
 private function spiderboyWouldBeBestDad():void {
@@ -325,7 +325,7 @@ private function spiderboyWouldBeBestDad():void {
 	kGAMECLASS.helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER); //Yes, it's the spider's baby, but that's already tracked separately
 	flags[kFLAGS.HEL_NTR_TRACKER] = 1;
 	flags[kFLAGS.HELSPAWN_DADDY] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //I Will (PC ain't got a wang)
@@ -336,7 +336,7 @@ private function growingDicks4Hel():void {
 	outputText("\n\n\"<i>Thank you!  Thank you so much, [name].  I really, really wanted for it to be our child. I'll wait, but hurry.  I don't know how much longer I can stand this... this need!</i>\"");
 	outputText("\n\nOnce you've finished with Hel, she leaves you with a longing look as you head back to camp.  Eventually, you manage to go back to sleep...");
 	//[Resume night]
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[No Kids]
@@ -350,7 +350,7 @@ private function noKidsHel():void {
 	
 	outputText("\n\nShe leans up and gives you a peck on the cheek before wandering back to camp, leaving you standing alone in the dark with your choices.  Eventually, you manage to go back to sleep...");
 	//[Resume night]
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Hel Dun Got Knocked Up (Play first time PC goes to Hel's menu after telling her to get knocked up by someone else)
@@ -487,7 +487,7 @@ public function bulgyCampNotice():void {
 	clearOutput();
 	spriteSelect(68);
 	outputText("As you're walking through camp, your eyes wander over toward Helia, sunning herself on a stone near the edge of camp.  You can just see that her belly's starting to bulge out from under her, and Hel's hands lie protectively over her full womb, absently rubbing the bulge of her stomach.");
-	doNext(1);
+	doNext(playerMenu);
 }
 //Hel enters "swollen" state, play at random from camp menu:
 //if(flags[kFLAGS.HELIA_PREGNANCY_INCUBATION] == 200 && flags[kFLAGS.HEL_PREGNANCY_NOTICES] == 1)
@@ -515,7 +515,7 @@ private function youWantABoy():void {
 	else outputText("Would be nice to have a man around here, you know?  I miss hanging around the boys back home, watching 'em strut like peacocks for every passing girl.");
 	outputText(" And any son of mine is going to be a real lady killer, mark my words.  We're going to have to fight off whole hordes of goblin sluts, all looking for a piece of our handsome little boy before you know it.</i>\"");
 	outputText("\n\nYou share a quiet laugh with your lover before leaving her with a kiss and a final pat on the belly - and feeling the little kick of your spawn reacting to you.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Girl
@@ -531,7 +531,7 @@ private function youWantAGirl():void {
 	outputText("  Any daughter of ours is going to be a real beauty, mark my words. She'll make a succubus look like a toad before she's out of swaddling.</i>\"");
 	
 	outputText("\n\nYou share a quiet laugh with your lover before leaving her with a kiss and a final pat on the belly - and feeling the little kick of your spawn reacting to you.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Hel enters "gravid" state, play at random from camp menu:
@@ -558,7 +558,7 @@ public function heliaGravidity():void {
 	outputText("\n\n\"<i>Oh, I never told you? Her name was Tanis, and she was the most beautiful woman in the world.</i>\"");
 	
 	outputText("\n\nYou give her a moment, but Hel seems to be done talking for now, instead staring off into the distance.  You leave her with a kiss, and get back to your duties.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Hel Talk 7 (New, play first time PC [Talk]s to Hel once she's at least "swollen")
@@ -592,7 +592,7 @@ private function encouragePregalia():void {
 	else outputText("Hel's your friend");
 	outputText(", and if her child follows in her footsteps, so much the better.  Your lover manages a half-hearted laugh, blushing at your words.  Her tail tip brushes your cheek as its owner cuddles up against you, smiling.  \"<i>Thanks, lover mine.  I just hope I - we - can do right by the kid.  That's all.</i>\"");
 	outputText("\n\n\"<i>I know,</i>\" you answer, kissing her.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Hel's Lifestyle
@@ -605,7 +605,7 @@ private function helsLifestyle():void {
 	outputText(".  I'll try and rein it in, but maybe... it'd be better if you were the one who raised my child, [name].  God knows I'm the least qualified person to do it.</i>\"");
 	
 	outputText("\n\nYou start to answer, but Hel puts a finger to your lips, telling you she needs a little while to think.  You nod, and head back to your work.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //IT'S TIME! (Play the morning of the 15th Day of Helia's pregnancy)
@@ -1055,7 +1055,7 @@ private function helspawnDoNothing():void {
 	outputText("You turn around and head back to your bed.  As soon as you're under your blanket, your ears are assaulted with the quiet moans and grunts of pleasure coming from " + flags[kFLAGS.HELSPAWN_NAME] + "'s bed as she and her first little boyfriend get it on.  You can practically hear the tail-pegging from here.  How cute!");
 	//{HelspawnSlutty +10}
 	flags[kFLAGS.HELSPAWN_PERSONALITY] += 10;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Stop Them
@@ -1376,7 +1376,6 @@ private function sparHelspawn():void {
 	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) outputText("\n\n\"<i>Ready to get your shit kicked in, old " + player.mf("man","lady") + "?</i>\" she grins, drawing her weapon.");
 	else outputText("\n\n\"<i>Just go easy on me, okay?  I'm still new at this...</i>\" she says, stepping back as she draws her weapon.");
 	startCombat(new Helspawn());
-	doNext(1);
 }
 
 

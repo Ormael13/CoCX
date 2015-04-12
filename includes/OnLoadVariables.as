@@ -25,8 +25,8 @@ public var date:Date = new Date();
 //if ( ApplicationDomain.currentDomain.hasDefinition("Creature")) trace("Class exists");
 
 //dungeoneering variables
-public var inDungeon:Boolean = false;
-public var dungeonLoc:Number = 0;
+//Setting dungeonLoc = 0 handles this:	public var inDungeon:Boolean = false;
+public var dungeonLoc:int = 0;
 
 // To save shitting up a lot of code...
 public var inRoomedDungeon:Boolean = false;
@@ -39,6 +39,7 @@ public var campQ:Boolean = false;
 
 //Possibly redundant, not used anywhere else.
 //Input vars
+/* Yup, not used at all
 public var button0Choice:Number = 0;
 public var button1Choice:Number = 0;
 public var button2Choice:Number = 0;
@@ -49,3 +50,4 @@ public var button6Choice:Number = 0;
 public var button7Choice:Number = 0;
 public var button8Choice:Number = 0;
 public var button9Choice:Number = 0;
+*/

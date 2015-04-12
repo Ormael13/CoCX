@@ -29,7 +29,7 @@ public function bunnbunbunMeet():void {
 		
 		outputText("Even though nearly a minute has passed, the bunny-lass is STILL frozen and staring.  She hasn't done anything since realizing that you're looking at her.  Well, it looks like the ball's in your court.  What do you do?", false);
 		//[Talk] [Rape Her]
-		simpleChoices("Talk",talkToBunnyBunBun,"Rape Her",rapeBunBun,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+		simpleChoices("Talk", talkToBunnyBunBun, "Rape Her", rapeBunBun, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 	}
 	//Met her
 	else {
@@ -75,7 +75,8 @@ public function bunnbunbunMeet():void {
 		outputText("  Her dick in your ass?)", false);
 		//var Ass:Number = 0;
 		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		choices("Your Vagina",DickInV,"Her Vagina",Vagina,"69",sixtyNine,"LayYourEggs",eggs,"Your Ass",bunbunFucksPCInAss,"",0,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);		
+		choices("Your Vagina", DickInV, "Her Vagina", Vagina, "69", sixtyNine, "LayYourEggs", eggs, "Your Ass", bunbunFucksPCInAss,
+			"", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 	}
 }
 //[Talk]
@@ -350,7 +351,7 @@ private function bunbunGetsFucked():void {
 	else outputText(", barely able to restrain yourself as the time for penetration approaches.", false);
 	outputText("\n\n", false);
 	
-	outputText("The nubile bunny's eyes cross as you push forwards, sliding your " + cockHead(x) + " over her love-slicked lips until it has a generous coating and pressing harder.  ", false);
+	outputText("The nubile bunny's eyes cross as you push forwards, sliding your " + player.cockHead(x) + " over her love-slicked lips until it has a generous coating and pressing harder.  ", false);
 	if(y != -1) outputText("She squeaks at the pressure on her tender asshole, but doesn't object as your pre-cum smears over it.  ", false);
 	outputText("At once, her greedy breeding hole relaxes ", false);
 	if(y != -1) outputText("along with her anus ", false);
@@ -952,7 +953,9 @@ private function getEggflated():void {
 	
 	outputText("\n\n");
 	//Futa:
-	if(player.hasCock()) outputText("Your exhausted " + multiCockDescriptLight() + " somehow find the strength for a gushing orgasm of their own, strands of spoo spilling across your own body, white hot spunk bringing a fresh sheen to your sweat-slick [chest].  ");
+	if (player.hasCock()) {
+		outputText("Your exhausted " + multiCockDescriptLight() + " somehow find" + (player.cocks.length > 1 ? "" : "s") + " the strength for a gushing orgasm of " + (player.cocks.length > 1 ? "their" : "its") + " own, strands of spoo spilling across your own body, white hot spunk bringing a fresh sheen to your sweat-slick [chest].  ");
+	}
 	outputText("Eventually, enough of the eggs melt to let you stand under your own power.  You grab your [armor] but hold off on putting it on until you have a chance to shrink down to a more normal size.  Before you leave, you make sure to remove the rope from her wrists, for when she gathers her orgasm-blasted wits.");
 	//[If full bunny morph, End Encounter. Weight up, sensitivity down, fertility up.]
 	if (player.bunnyScore() < 4) {

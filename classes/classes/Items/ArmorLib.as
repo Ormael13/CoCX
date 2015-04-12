@@ -9,8 +9,6 @@ package classes.Items
 
 	public final class ArmorLib
 	{
-		public static const DEFAULT_VALUE:Number = 6;
-
 		public static const COMFORTABLE_UNDERCLOTHES:Armor = new ComfortableUnderclothes();
 
 		public const ADVCLTH:Armor = new Armor("AdvClth","G. Clothes","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,200,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light", true);

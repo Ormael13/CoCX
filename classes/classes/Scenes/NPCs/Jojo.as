@@ -5,22 +5,56 @@
 	public class Jojo extends Monster
 	{
 
-
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.lust > 33 && player.gender > 0) {
-				outputText("You smile in satisfaction as " + a + short + (hpVictory?" collapses, unable to continue fighting":" collapses and begins masturbating feverishly")+".  Sadly you realize your own needs have not been met.  Of course, you could always rape the poor thing...\n\nDo you rape him?", true);
-				game.doYesNo(5022, game.cleanupAfterCombat);
-			} else {
-				game.finishCombat();
-			}
+			game.jojoScene.defeatedJojo(hpVictory);
 		}
-
+		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.eventParser(5024);
+			game.jojoScene.loseToJojo();
 		}
-
+		
+		override protected function performCombatAction():void {
+			if (game.monk > 1 && rand(2) == 0)
+				selfCorruption(); //Shouldn't do any self corruption at monk one. Otherwise a 50/50 chance
+			else eAttack();
+		}
+		
+		private function selfCorruption():void {
+			switch (game.monk) {
+				case 2:
+					outputText("Jojo looks lost in thought for a moment, and fails to attack.  ");
+					lust += 4;
+					break;
+				case 3:
+					outputText("Jojo blushes as he fights you, distracted by a stray thought.  You think you see a bulge in the loose cloth of his pants.  ");
+					lust += 8;
+					break;
+				case 4:
+					outputText("Jojo stumbles, shakes his head, and pulls one of his hands away from the stiff tent in his pants.  ");
+					lust += 10;
+					break;
+				default:
+					outputText("Jojo frantically jerks his " + cockDescriptShort(0) + ", stroking the " + cockDescriptShort(0) + " as it leaks pre-cum at the sight of you.  ");
+					lust += 15;
+			}
+			
+			if (lust >= 100) {
+				doNext(game.endLustVictory);
+				return;
+			}
+			else if (lust >= 85)
+				outputText("The mouse is panting and softly whining, each movement seeming to make his bulge more pronounced.  You don't think he can hold out much longer.  ");
+			else if (lust >= 70)
+				outputText("The mouse is having trouble moving due to the rigid protrusion from his groin.  ");
+			else if (lust >= 60)
+				outputText("The mouse's eyes constantly dart over your most sexual parts, betraying his lust.  ");
+			else if (lust > 50)
+				outputText("The mouse's skin remains flushed with the beginnings of arousal.  ");
+			doNext(game.playerMenu);
+		}
+		
 		public function Jojo()
 		{
 			trace("Jojo Constructor!");
@@ -55,7 +89,7 @@
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 4;
 			this.gems = rand(5) + 2;
-			this.special1 = 5021;
+			this.special1 = selfCorruption;
 			//Create jojo sex attributes
 			//Variations based on jojo's corruption.
 			if(game.monk == 3) {

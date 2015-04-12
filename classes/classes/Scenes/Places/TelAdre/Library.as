@@ -37,7 +37,50 @@ private function firstTowerVisit():void {
 	
 	outputText("\n\nThe front entryway appears to be fairly heavily guarded, and the two elites at the entryway turn you aside, directing you towards a different entrance - a public library.  Following the directions, you quickly come upon a different face of the tower.  You might have expected some epic pair of double doors, ten times your height, barely opening with a dramatic creak as you push them out of your way.  Instead you see a polite little entryway with hinges so well maintained they shine.  No frowning gargoyle door knockers, simply a small knob and a keyhole, as though it was someone's apartment.");
 	
-	outputText("\n\nA single room takes up the entirety of the space on the first floor.  Staircases up and down can be seen on opposing ends, but the majority of the room is furnished with simple seats and tables.  Scrolls and books litter the surfaces, likely pulled from a series of shelves set under the curving staircase.  There does not seem to be a connection between this library and the actual core of the tower.  A single man carefully turns through the pages of one book, though he does not seem to be reading it.  Stacks of books sit next to him.  As you close the door, he glances up at you.");
+	outputText("\n\nA single room takes up the entirety of the space on the first floor.  Staircases up and down can be seen on opposing ends, but the majority of the room is furnished with simple seats and tables.  Scrolls and books litter the surfaces, likely pulled from a series of shelves set under the curving staircase.  There does not seem to be a connection between this library and the actual core of the tower.");
+	
+	if (model.time.hours <= 17) { //Don't want to meet Quinn if he's not supposed to be there
+		outputText("  A single man carefully turns through the pages of one book");
+		commonQuinnTroduction();
+	}
+	else {
+		outputText("\n\nThere doesn't appear to be anyone here, so there's nothing stopping you from reading some of the books and scrolls left out on the tables.  Looking up and down the staircases reveals two locked doors, so it's unlikely you could do anything else here.");
+		flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] = -2; //This will be incremented to -1 by the visitZeMagesTower function after we return
+	}
+}
+
+private function towerFollowUpVisits():void {
+	clearOutput();
+	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == -1) { //Return visits before you meet Quinn. Either you meet him or you continue to go to the library at night like some bibliophile vampire
+		if(model.time.hours <= 17) {
+			outputText("You return to the mage's tower.  Entering the main room, you're surprised to see a man carefully turning the pages of one of the tomes");
+			commonQuinnTroduction();
+		}
+		else {
+			outputText("As before, there's no one here.  At least there's no lack of reading material.  Looking up and down the staircases reveals two locked doors, so it's unlikely you could do anything but study here.");
+			flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] = -2; //This will be incremented to -1 by the visitZeMagesTower function after we return
+		}
+		return;
+	}
+	
+	//(follow-up visits, 6:00 – 17:00)
+	if(model.time.hours <= 17) {
+		outputText("You return to the mage's tower.  Entering the main room, Quinn is carefully inspecting the pages of a book.  The room looks slightly more organized from when you last saw it, but it looks as though Quinn will be working on it for some time.");
+		outputText("\n\nHe notices you've arrived and quirks an eyebrow.  \"<i>Yes?</i>\" he asks wearily, \"<i>Is there something I can assist you with?</i>\"");
+		//If the player has encountered Asa Mali they may ask for Mali.  Otherwise they can either leave, ask to study, or ask Quinn if he is okay.
+		//[Mali] [You OK?][Study]
+	}
+	//(follow-up visits, 18:00-20:00)
+	else {
+		outputText("You return to the mage's tower.  Entering the main room, Quinn is nowhere to be seen.  The room looks slightly cleaner from when you saw it last, but at the rate he's going it seems like it will be some time before it's finished.");
+		
+		outputText("\n\nYou could probably read some of the books here if you wanted to, without Quinn around to tell you no.  Looking up and down the staircases reveals two locked doors, so it's unlikely you could do anything else here.");
+		//The player can Study now, but due to the rest of the building being locked there are no other options. This is intended to serve as an alternative to Dominika's magic training, for players such as centaurs and naga, or players that hate blowjobs.
+	}
+}
+
+private function commonQuinnTroduction():void {
+	outputText(", though he does not seem to be reading it.  Stacks of books sit next to him.  As you close the door, he glances up at you.");
 	
 	outputText("\n\n\"<i>I'm sorry,</i>\" he says with a voice so weary you're surprised he doesn't fall over face-first upon exerting himself by speaking, \"<i>The library is not presently open to visitors, due to defacement and...</i>\"  He pauses, looking at a book next to him covered in an off-white crust.  \"<i>Vandalism.</i>\"  His eyes look twice as tired as his voice sounds, darkened to the point they almost seem bruised.  Pale – no, pallid - and lean to the point where you think you can see his cheekbones.  You're not convinced that this man has all of his health.  \"<i>I'm afraid there is no present estimate as to when we will re-open, as unfortunately no other members of the Covenant are presently able to devote the time to inspect and record the extent of the damages.</i>\"");
 	
@@ -51,24 +94,6 @@ private function firstTowerVisit():void {
 	//Met Asa Mali? flag 175
 }
 
-
-private function towerFollowUpVisits():void {
-	clearOutput();
-	//(follow-up visits, 6:00 – 17:00)
-	if(model.time.hours <= 17) {
-		outputText("You return to the mage's tower.  Entering the main room, Quinn is carefully inspecting the pages of a book.  The room looks slightly more organized from when you last saw it, but it looks as though Quinn will be working on it for some time.");
-		outputText("\n\nHe notices you've arrived and quirks an eyebrow.  \"<i>Yes?</i>\" he asks wearily, \"<i>Is there something I can assist you with?</i>\"");
-		//If the player has encountered Asa Mali they may ask for Mali.  Otherwise they can either leave, ask to study, or ask Quinn if he is okay.
-		//[Mali] [You OK?][Study]
-	}
-	//(follow-up visits, 18:00-20:00)
-	else {
-		outputText("You return to the mage's tower.  Entering the main room, Quinn is nowhere to be seen.  The room looks slightly cleaner from when you saw it last, but at the rate he's going it seems like it will be some time before it's finished.");
-		
-		outputText("\n\nYou could probably read some of the books here if you wanted to, with Quinn not around to tell you no.  Looking up and down the staircases reveals two locked doors, so it's unlikely you could do anything else here.");
-		//The player can Study now, but due to the rest of the building being locked there are no other options. This is intended to serve as an alternative to Dominika's magic training, for players such as centaurs and naga, or players that hate blowjobs.
-	}
-}
 //[Study]
 private function studyInTA():void {
 	clearOutput();
@@ -82,7 +107,13 @@ private function studyInTA():void {
 	}
 	//[Study, 18:00-20:00]
 	else {
-		outputText("Without Quinn to hassle you and request your absence from the presences, you have some time to read through some of the literature collected by the Covenant.");
+		if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == -1) {
+			outputText("Looking around you decide to spend some time reading");
+		}
+		else {
+			outputText("Without Quinn to hassle you and request your absence from the presences, you have some time to read");
+		}
+		outputText(" through some of the literature collected by the Covenant.");
 		if(rand(3) == 0) {
 			//magic)
 			outputText("\n\nSelecting a book at chance from the mess across the tables, you are delighted to find that it is a tome about magic.  Though the language used is archaic at first you slowly find yourself getting the grasp of it and understanding more of the theory put down in the text.  You find yourself thinking about how to apply the things you're reading about to your own abilities, and figuring out how to better utilize magic yourself.  In short, you experience the condition known as \"learning\", and feel smarter for it.");

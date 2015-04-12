@@ -48,7 +48,7 @@ public function greetHeckel():void {
 	else {
 		outputText("Heckel is checking her pulse between laps when you approach her.  She grins as she catches sight of you, her teeth flashing in the light.  \"<i>Back again, fresh meat?  I thought I might have scared you off last time.</i>\"  She puts her hands on her hips and very blatantly looks your body up and down.  After a moment she nods to herself, as if making up her mind.  \"<i>I guess you can keep up after all.  What do you say to a workout, partner?</i>\"\n\n", false);
 	}
-	simpleChoices("Training",heckelTraining,"",0,"",0,"",0,"Leave",telAdre.gymDesc);
+	simpleChoices("Training", heckelTraining, "", null, "", null, "", null, "Leave", telAdre.gymDesc);
 }
 
 //First time Sex

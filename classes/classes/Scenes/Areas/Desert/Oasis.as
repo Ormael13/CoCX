@@ -18,13 +18,13 @@
 	outputText("The group is composed of roughly twenty tan skinned demons, mostly humanoid in shape with many and varied corruptions across the group. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. There even seems to be a bull head in there somewhere. You also make out plenty of breasts ranging from tiny ones to a pair that require a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick. The small tribe carry no weapons and what little clothing they wear is well shredded, except for one hefty male wearing a cloak of what appears to be snakeskin across his broad shoulders. You assume from his clothing and the size of his equipment that this male is the leader. He, along with the others, is in good spirits and they all look fairly non-threatening, although you've learned not to trust anything that looks non-threatening in this place. Especially if it can carry its cock over its shoulder.\n\n", false);
 	//OH noes! Cheese it!
 	outputText("The demons don't notice you until they are quite close, the glare of the surrounding sand making you very difficult to see in the shade of your scrappy bush. They ignore you, intent on the refreshing waters of the oasis, but you can't stay hidden forever. A small keen eyed demon eventually spots you and lets out a  cry of alarm, pointing you out to the others. More eyes than twenty heads should really possess are now pointed straight at you.\n\n<b>What do you do?</b>", false);
-	simpleChoices("Talk",oasisTalk,"Fight",chooseToFight,"",0,"",0,"Leave",oasisRunAway);
+	simpleChoices("Talk", oasisTalk, "Fight", chooseToFight, "", null, "", null, "Leave", oasisRunAway);
 }
 
 		private function chooseToFight():void{
 			startCombat(new DemonPack());
-			eventParser(1);
 			spriteSelect(46);
+			playerMenu();
 		}
 
 private function oasisRunAway():void {
@@ -37,7 +37,7 @@ private function oasisRunAway():void {
 	else {
 		outputText("You scramble away from the demons, but are too late. A swift demon with canine features tackles you to the ground.  Luckily he loses his grip as you tumble onto the sand and you slither free, stand up and wheel to face the host of leering demons which begin to advance with malicious intent.", true);
 		startCombat(new DemonPack());
-		doNext(1);
+		doNext(playerMenu);
 	}
 }
 
@@ -48,7 +48,7 @@ private function oasisTalk():void {
 	//Offer...
 	outputText("At this your repertoire of desert conversation topics is exhausted and it occurs to you that it may be easier to break the ice somewhere it is possible for ice to form. At the edge of slipping over into awkward silence the leader speaks. 'It is quite the strike of fortune that you would come to us just as we were to rest and feast. Perhaps you wish to partake with us?' A flash of panic runs over your mind, and you turn over the phrase a few times in your head. After a few seconds you conclude that 'partake with us' really cannot mean 'be a delicious entree' and entertain the thought of staying to feast.  As if sensing your hesitation the leader speaks again. \"<i>We have not feasted in a long time, and we do hunger for it so.  This one promises to be a feast of grand proportions, and it should be a shame for you to miss such an opportunity.</i>\"\n\n", false);
 	outputText("<b>Do you stay or try to leave?</b>", false);
-	simpleChoices("Stay",oasisTalkAccept,"",0,"",0,"",0,"Leave",oasisTalkDecline);
+	simpleChoices("Stay", oasisTalkAccept, "", null, "", null, "", null, "Leave", oasisTalkDecline);
 }
 
 private function oasisTalkDecline():void {
@@ -57,7 +57,7 @@ private function oasisTalkDecline():void {
 	//MORTAL KOMBAAAAAT
 	outputText("The demons begin to circle menacingly, and you can do nothing but prepare to defend yourself.", false);
 	startCombat(new DemonPack());
-	doNext(1);
+	doNext(playerMenu);
 }
 private function oasisTalkAccept():void {
 	spriteSelect(46);
@@ -186,7 +186,7 @@ internal function oasisSexing():void {
 	player.orgasm();
 	dynStats("tou", .5, "sen", .5, "cor", 4);
 	if (getGame().inCombat) cleanupAfterCombat();
-	else doNext(1);
+	else doNext(playerMenu);
 }
 
 //Desert Tribe Bad End
@@ -223,7 +223,7 @@ private function oasisBadEndEpilogue():void {
 	if(player.gender <= 1) outputText(" and a few doses of fermented succubi milk", false);
 	outputText("...\n\n", false);
 	outputText("A year has gone by since the day you became a slave. You find yourself sitting at the feet of your master wearing nothing but a black collar around your neck. Your belly extends out in front of you, filled to the brim with your master's baby. You smile, happy to be here to please your master and carry his young as memories of your past and your mission fade deep into the depths of your mind. Your only mission in life now is to service your master and the other members of the tribe in whatever they ask, without question or hesitation. As the tribe prepares for the next 'Feast', a commotion at the other side of the encampment catches your attention. The guards bring forth a human captive they found wandering in the oasis, and you smile dimly as you watch master invite the stranger to join them all in the Feast...", false);
-	eventParser(5035);
+	getGame().gameOver();
 }
 	}
 }

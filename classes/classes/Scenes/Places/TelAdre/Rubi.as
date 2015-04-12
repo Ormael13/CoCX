@@ -107,9 +107,17 @@ public function rubiAffection(delt:Number = 0):Number {
 	return flags[kFLAGS.RUBI_AFFECTION];
 }
 
-public function rubiCock():String {
-	return kGAMECLASS.NPCCockDescript(flags[kFLAGS.RUBI_COCK_TYPE], flags[kFLAGS.RUBI_COCK_SIZE], 50);
+public function rubiCock(lust:int = 50):String {
+	var cumQ:int = 300;
+	if (flags[kFLAGS.RUBI_BLU_BALLS] < 4) {
+		cumQ = 10;
+	}
+	else if (flags[kFLAGS.RUBI_BLU_BALLS] <= 6) {
+		cumQ = 150;
+	}
+	return Appearance.cockDescription(flags[kFLAGS.RUBI_COCK_TYPE], flags[kFLAGS.RUBI_COCK_SIZE], flags[kFLAGS.RUBI_COCK_SIZE] / 6, lust, cumQ);
 }
+
 public function rubiGetCockType():CockTypesEnum {
 	return CockTypesEnum.ParseConstantByIndex(flags[kFLAGS.RUBI_COCK_TYPE]);
 }
@@ -121,9 +129,9 @@ public function rubiBreasts():String {
 		ret = "chest";
 	else
 	{
-		ret += breastCup(flags[kFLAGS.RUBI_BREAST_SIZE]);
+		ret += Appearance.breastCup(flags[kFLAGS.RUBI_BREAST_SIZE]);
 		ret += " ";
-		ret += kGAMECLASS.npcBreastDescript(flags[kFLAGS.RUBI_BREAST_SIZE]);
+		ret += BreastStore.breastDescript(flags[kFLAGS.RUBI_BREAST_SIZE]);
 	}
 
 	return ret;
@@ -174,7 +182,7 @@ private function specialRelationship20scene():void {
 	outputText("\n\nYou're a little surprised, but it does make sense.  She... he is pretty flat-chested, and you'd often wondered if you'd seen a bulge of some sort in her skirt from time to time...");
 	flags[kFLAGS.RUBI_ADMITTED_GENDER] = 1;
 	//(Accept) or (Reject)
-	simpleChoices("Accept",acceptRubi,"Reject",rejectRubi,"",0,"",0,"",0);
+	simpleChoices("Accept", acceptRubi, "Reject", rejectRubi, "", null, "", null, "", null);
 }
 //[If Accept]
 private function acceptRubi():void {
@@ -364,7 +372,7 @@ public function approachRubiScenes():void {
 		//(Risque Waitress Uniform)
 		else if(select == 14) {
 			outputText("[rubi Ey]'s dressed differently today, having foregone the normal waitress uniform for an extremely modified version.  The skirt wrapped around [rubi eir] waist could be confused for a belt, and the apron (the only other thing covering [rubi eir] torso) doesn't extend much further.  Any time Rubi takes a step or bends in any direction, anyone within sight is sure to get a good look at [rubi eir] ");
-			if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText(NPCCockDescript(flags[kFLAGS.RUBI_COCK_TYPE],flags[kFLAGS.RUBI_COCK_SIZE], 33) + ", clad in a cute little frilly pink cocksock");
+			if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText(rubiCock(33) + ", clad in a cute little frilly pink cocksock");
 			if(flags[kFLAGS.RUBI_NO_CUNT] == 0 && flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText(" and ");
 			if(flags[kFLAGS.RUBI_NO_CUNT] == 0) {
 				outputText("feminine mound trapped beneath a pair of pink panties");
@@ -1189,7 +1197,7 @@ private function findBimboCheatster():void {
 	outputText("\n\nThere she is, Rubi, splayed out on the couch, naked with two fingers buried deep inside her pussy.  You shift around a bit, and see nearby her a tanned man in the process of taking off his shirt.  So, you got to them before they did anything.  Rubi moans, running a hand through her platinum blonde hair and staring at the tanned man.");
 	outputText("\n\nYou could interrupt them before they go any further, or wait until it's over.");
 	//[Interrupt] [Wait]
-	simpleChoices("Interrupt",interruptTheNTRsYouCrazyFool,"Watch n Wait",waitAndGetNTRedLikeTheBoyBitchYouAre,"",0,"",0,"",0);
+	simpleChoices("Interrupt", interruptTheNTRsYouCrazyFool, "Watch n Wait", waitAndGetNTRedLikeTheBoyBitchYouAre, "", null, "", null, "", null);
 }
 //(Interrupt)
 private function interruptTheNTRsYouCrazyFool():void {
@@ -1260,7 +1268,7 @@ private function NTRbimboBitchResolution():void {
 	outputText("\n\nRubi hugs the cushion close, apparently done with her speech.  So how do you react?");
 	outputText("\n\nYou could tell her no, forbidding her to see anyone else.  Or you could say yes, letting her sleep with anyone.  You could always break up with her.  Or there might be a fourth option...");
 	//[No] [Yes] [Break Up] [Pimp]
-	simpleChoices("No",noBimboNTR,"Yes",yesBimboNTR,"Break Up",breakUpWithRubi,"Pimp",pimpOutRubi,"",0);
+	simpleChoices("No", noBimboNTR, "Yes", yesBimboNTR, "Break Up", breakUpWithRubi, "Pimp", pimpOutRubi, "", null);
 }
 
 //(No)
@@ -2020,7 +2028,7 @@ private function cookingDate():void {
 }
 
 //Dates
-private function dateIntro(date:*):void {
+private function dateIntro(date:Function):void {
 	clearOutput();
 	rubiSprite();
 	//(First Time)
@@ -2644,6 +2652,7 @@ private function popButtjobs():void {
 
 	outputText("\n\n\"<i>No, babe, I'm lucky to have found you,</i>\" [rubi ey] says, snuggling [rubi eir] naked body up against yours as the two of you drift off into a lazy, sex-induced nap.");
 	player.orgasm();
+	flags[kFLAGS.RUBI_BLU_BALLS] = 0; //Since he just came so he should be cured of blue balls
 	doNext(camp.returnToCampUseOneHour);
 }
 

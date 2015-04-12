@@ -213,17 +213,12 @@ private function plantsForMe2(BE:int = 0):void {
 		//Boost size, set lactation quantity.
 		player.growTits(7,player.bRows(),false,2);
 		player.boostLactation(player.bRows());
-		if(player.biggestTitSize() >= 1) {
-			if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
-				player.addStatusValue(StatusAffects.Feeder,1,1);
-				player.changeStatusValue(StatusAffects.Feeder,2,0);
-			}
-			player.boostLactation(0.01);
-		}
-		
-		
         outputText("\n\nYou sit there for the next hour or two, milking your bloated bosom and giving the flora a generous watering in the process.  When all is taken care of, you stumble back upright with a brief struggle and don your gear once more.  The smell of fresh-cut flowers seems to linger on your [armor] as you depart.");
 	}
+	if (player.hasBreasts() && player.isLactating()) {
+        player.milked();
+        player.boostLactation(0.01);
+    }
 	player.orgasm();
 	dynStats("lib", 1);
 	//Slimefeed!
@@ -265,7 +260,7 @@ public function approachTrappedEssy():void {
 	menu();
 	//Option: [Feed her] [leave]
 	if(player.gender > 0) addButton(0,"Feed Her",feedTrappedEssy);
-	addButton(4,"Leave",eventParser,1);
+	addButton(4, "Leave", playerMenu);
 }
 
 //[Feed Her]
@@ -307,7 +302,7 @@ private function hasCockFeedEssy(newPage:Boolean = true):void {
 	
 	outputText("\n\nExhausted anew, Essy reclines in her pot, already dozing with an expression of happy contentment.  Though she's still imprisoned, you've at least set her at ease.  While you might like to move her somewhere more private, the sheer weight of her pot is more than enough to frustrate any attempt you might make.  Best to just leave her and check in later.");
 	player.orgasm();
-	doNext(1);
+	doNext(playerMenu);
 }
 
 private function hasPussyFeedEssy(newPage:Boolean = true):void {
@@ -328,7 +323,7 @@ private function hasPussyFeedEssy(newPage:Boolean = true):void {
 	outputText("\n\nIt takes you a while, but you extricate yourself and clean off the best you can, leaving her with a friendly kiss on the cheek before you head on your way once more.  With visitors like you, she hardly seems like she'll mind being trapped in the enchanted flower pot.");
 	player.orgasm();
 	if(player.fertility < 50) player.fertility++;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //(After defeating the Cum Witch)
@@ -361,7 +356,7 @@ private function declineEssyPrizes():void {
 	statScreenRefresh();
 	
 	outputText("\n\n\"<i>Well, maybe in the future you'll change your mind and find another way to do it on your own.  But I guess for now I'll just see you around!  Thanks for the save, hun!</i>\"  The planty beauty blows you a kiss before she heads off, bulging breasts jiggling and bouncing steadily all the way.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Yes]
@@ -428,7 +423,7 @@ private function essyRewardEpilogueOUTTIES():void {
 	outputText("\n\nThe passionate kiss goes on for a while before she releases it, sticky strands of saliva still clinging to both of your mouths.  Separating, she leans back and puffs herself out once more, smiling to you.  \"<i>Do enjoy yourself a bit, Hero.  Here's hoping we meet again.</i>\"  She places the back of her hand conspiratorially against the side of her mouth and lowers her voice.  \"<i>After you get a chance to enjoy your improved chest a bit, I'd love to get my shot at playing with those lovely melons!</i>\"");
 	outputText("\n\nWith a shameless giggle, she kisses the peak of one of your breasts while groping the one next to it.  \"<i>Mmm, yes, I'd ravish them hard and drain you dry right now, but out of respect I'll let you have the first crack at it.</i>\"  With a dainty wave, she shuffles towards the exit and is gone once more.\n\n");
 	//[End Encounter]
-	doNext(1);
+	doNext(playerMenu);
 }
 
 public function askMotherToReleaseEssy():void {
@@ -443,7 +438,7 @@ public function askMotherToReleaseEssy():void {
 		outputText("\n\nThat'll do.");
 	}
 	flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 }
 }

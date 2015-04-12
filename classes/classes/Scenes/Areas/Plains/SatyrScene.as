@@ -86,7 +86,7 @@ private function consensualSatyrFuck(loc:int = 0):void {
 	}
 	//What should you do?
 	//[Trick him] [Keep Drinking] [Skip Foreplay] [Leave]
-	simpleChoices("Trick Him",trick,"Keep Drinking",keepDrinking,"Skip Foreplay",foreplay,"",0,"Leave",leavePartySatyr);
+	simpleChoices("Trick Him", trick, "Keep Drinking", keepDrinking, "Skip Foreplay", foreplay, "", null, "Leave", leavePartySatyr);
 }
 
 //[=Keep Drinking=]
@@ -124,7 +124,6 @@ private function leavePartySatyr():void {
 
 	var satyr:Satyr = new Satyr();
 	startCombat(satyr);
-	doNext(1);
 	//proc first attack;
 	satyr.satyrCharge();
 	//(Initiate combat with frenzied satyr, on the first round PC suffers the effects of a satyr charge (some HP lost and stunned))
@@ -242,7 +241,7 @@ internal function defeatASatyr():void {
 	}
 	var bikiniTits:Function = null;
 	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-	simpleChoices("FuckHisButt",butt,"Ride Face",faces,"B.Titfuck",bikiniTits,"",0,"Leave",cleanupAfterCombat);
+	simpleChoices("FuckHisButt", butt, "Ride Face", faces, "B.Titfuck", bikiniTits, "", null, "Leave", cleanupAfterCombat);
 }
 //Female (Z)
 private function femaleTakesAdvantageOfSatyr():void {

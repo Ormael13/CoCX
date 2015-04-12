@@ -480,7 +480,7 @@
 			else
 			{
 				var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
-				var bonusValue:*;
+				var bonusValue:Number;
 				
 				// Remove the old massage bonus if present
 				if (statIndex >= 0)
@@ -514,7 +514,7 @@
 					bonusValue = MASSAGE_POWER_BONUS;
 				}
 				
-				if (bonusValue != undefined)
+				if (bonusValue != 0)
 				{
 					player.createStatusAffect(StatusAffects.UmasMassage, selectedMassage, bonusValue, MAX_MASSAGE_BONUS_DURATION, 0);
 					flags[kFLAGS.UMA_TIMES_MASSAGED]++;
@@ -1900,7 +1900,7 @@
 			else outputText("Mmmm...  Don't tell anyone, but I think I'm starting to like helping you like this.");
 			outputText("</i>\"");
 			
-			outputText("\n\nGrunting softly at her ministrations, you let your [hips] shiver as she passes over your " + cockHead(x) + " once more.  Her tightly sealed lips glide over your spit-slicked length at an even, nerve-tickling pace");
+			outputText("\n\nGrunting softly at her ministrations, you let your [hips] shiver as she passes over your " + player.cockHead(x) + " once more.  Her tightly sealed lips glide over your spit-slicked length at an even, nerve-tickling pace");
 			if(player.cocks[x].cockLength < 9) outputText(" until she hits your [sheath]");
 			else outputText(" until she has her mouth as full as she can handle");
 			outputText(".  She holds you like that, letting you feel her hot breath wash over the [skinFurScales] of your crotch.  Her tongue wags back and forth underneath you, slipping and sliding against you. Inside her mouth, your " + cockDescript(x) + " twitches and jumps in her maw.  Beads of pre-cum are beading and dripping out onto her busy organ.");

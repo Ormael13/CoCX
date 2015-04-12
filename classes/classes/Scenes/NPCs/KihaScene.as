@@ -68,7 +68,7 @@ public function encounterKiha():void {
 		
 		outputText("What do you do?", false);
 		//[Fight] [Ask Why][Buy Passage][Leave]
-		simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
+		simpleChoices("Fight", meetKihaAndFight, "Ask Why", askWhy, "Buy Passage", offerToBuyPassageFromKiha, "", null, "Leave", leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - PC WAS VICTORIOUS LAST FIGHT 
 	else if(flags[kFLAGS.PC_WIN_LAST_KIHA_FIGHT] == 1) {
@@ -88,7 +88,7 @@ public function encounterKiha():void {
 			temp = null;
 		}
 		//[Pay] [This was my idea] [Leave] [Fight] - Leave uses standard leave text
-		simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
+		simpleChoices("Fight", meetKihaAndFight, "Pay", temp, "My Idea", tellKihaTributeWasYourIdea, "", null, "Leave", leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - Tribute Wore off 
 	else if(flags[kFLAGS.KIHA_TOLL] > 1 && 
@@ -101,7 +101,7 @@ public function encounterKiha():void {
 			temp = null;
 		}
 		//[Pay Again] [This was my idea] [Leave]  [Fight] - As first time Tribute Offer encounter
-		simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
+		simpleChoices("Fight", meetKihaAndFight, "Pay", temp, "My Idea", tellKihaTributeWasYourIdea, "", null, "Leave", leaveWhenMeetingAgressiveKiha);
 	}
 	//Generic Repeat Encounter 
 	else {
@@ -112,7 +112,7 @@ public function encounterKiha():void {
 		if(flags[kFLAGS.KIHA_TOLL] == 0) {
 			outputText("If you hurry, you might get a word in edge-wise.  What do you do?", false);
 			//[Fight] [Ask Why][Buy Passage][Leave]
-			simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
+			simpleChoices("Fight", meetKihaAndFight, "Ask Why", askWhy, "Buy Passage", offerToBuyPassageFromKiha, "", null, "Leave", leaveWhenMeetingAgressiveKiha);
 		}
 		else {
 			outputText("It's a fight!", false);
@@ -128,7 +128,7 @@ private function offerToBuyPassageFromKiha():void {
 	//(Unlocks toll option next encounter)
 	flags[kFLAGS.KIHA_TOLL] = 1;
 	//[Fight] [Leave] - Same results as main fight/leave.
-	simpleChoices("Fight",meetKihaAndFight,"",0,"",0,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
+	simpleChoices("Fight", meetKihaAndFight, "", null, "", null, "", null, "Leave", leaveWhenMeetingAgressiveKiha);
 }
 //[Leave] 
 private function leaveWhenMeetingAgressiveKiha():void {
@@ -256,7 +256,8 @@ internal function kihaVictoryIntroduction():void {
 		outputText("\n\nNow that she's a captive audience, you could always talk to her.", false);
 		wordRape = rapeKihaWithWORDS;
 	}
-	choices("Masturbate ",forceMasturbate,"Use Tail",useHerTail,"FuckHerPussy",fuckHer,"FuckHerAss",buttFuck,"Talk",wordRape,"",0,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
+	choices("Masturbate", forceMasturbate, "Use Tail", useHerTail, "FuckHerPussy", fuckHer, "FuckHerAss", buttFuck, "Talk", wordRape,
+		"", null, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
 }
 //*Generic PC Loss Intro 
 internal function kihaLossIntro():void {

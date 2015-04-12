@@ -252,7 +252,7 @@ private function roxanneDrinkingContest():void {
 		var cunnilingus:Function = null;
 		if(player.hasCock()) fellatio = roxanneGivesABlowjob;
 		if(player.hasVagina()) cunnilingus = roxanneCunnilingus;
-		simpleChoices("Cunnilingus",cunnilingus,"Fellatio",fellatio,"Rimming",roxanneRimjob,"",0,"",0);
+		simpleChoices("Cunnilingus", cunnilingus, "Fellatio", fellatio, "Rimming", roxanneRimjob, "", null, "", null);
 	}
 }
 
@@ -270,7 +270,7 @@ private function roxanneGivesABlowjob():void {
 	if(player.hasKnot(x)) outputText("knot", false);
 	else if(player.hasSheath()) outputText("sheath", false);
 	else outputText("base", false);
-	outputText(", squeezing you softly while she steadies herself on your " + cockDescript(x) + ".  She titters, letting a few inches of tongue slip through her lips to envelop your sensitive " + cockHead(x) + ", circling the engorged cock-flesh with drunken slobbers.  ", false);
+	outputText(", squeezing you softly while she steadies herself on your " + cockDescript(x) + ".  She titters, letting a few inches of tongue slip through her lips to envelop your sensitive " + player.cockHead(x) + ", circling the engorged cock-flesh with drunken slobbers.  ", false);
 	if(player.balls > 0) outputText("A set of warm, long-nailed fingers squeeze your " + ballsDescriptLight() + ", dragging sharp nail-tips along the underside of your sack to tease the poor, cum-packed orbs.  ", false);
 	outputText("The lizan glances back up at you, inebriated; her half-vacant eyes make love to you while her pink tongue worships your beer- and spit-covered member.\n\n", false);
 	
@@ -285,7 +285,7 @@ private function roxanneGivesABlowjob():void {
 	
 	outputText("A few demons start to approach, but the lizan crew interposes themselves between their captain and the interlopers, shooing them off before they can start something.  You barely notice, so focused are you on the feel of saliva running down your " + cockDescript(x) + " and the soft, pliant mouth flesh trying to wring the jism from your shaft.   The warmth of orgasm starts to build in your loins, and you begin to pump at the tongue instinctively, hips rising up off the chair in spite of the sharp fingernail's warning.\n\n", false);
 	
-	outputText("SMACK!  Roxanne's tail slaps into your " + buttDescript() + ", stinging the exposed " + player.skinDesc + ".  Her eyebrows narrow in irritation while she wraps her arms around your waistline, steadying her off-balance body while she spanks and pumps you in a drunken frenzy.  You hump her face, pressing your " + cockHead(x) + " against her lips to smear them with a glaze of leaky pre-cum.  Grabbing her horns, you cry out and pleasure and try to pull her down, but she spanks you, HARD.  You yelp in pain, dropping her horns and submitting completely to her tongue and the pleasure it brings.\n\n", false);
+	outputText("SMACK!  Roxanne's tail slaps into your " + buttDescript() + ", stinging the exposed " + player.skinDesc + ".  Her eyebrows narrow in irritation while she wraps her arms around your waistline, steadying her off-balance body while she spanks and pumps you in a drunken frenzy.  You hump her face, pressing your " + player.cockHead(x) + " against her lips to smear them with a glaze of leaky pre-cum.  Grabbing her horns, you cry out and pleasure and try to pull her down, but she spanks you, HARD.  You yelp in pain, dropping her horns and submitting completely to her tongue and the pleasure it brings.\n\n", false);
 	
 	outputText("The wiggling, flexible tongue-tip presses down on your urethra, bottling the cum up inside you.  Tiny rivulets of white goo squirt and leak around the pink blockage, rolling over the many rings of tongue while your urethra bloats wide.  The lizan looks up, her dull, glazed eyes locking on to yours as she uncovers your cum-slit, then shivering as a ", false);
 	if(player.cumQ() >= 1500) outputText("huge torrent utterly drenches her face, horns, neck, and tight top", false);

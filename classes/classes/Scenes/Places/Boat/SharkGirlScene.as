@@ -39,7 +39,7 @@ Sex Life: The shark girls treat sex like a game or a sport, constantly battling 
 ----------------------------------
 */
 //[Explore Lake]
-public function sharkGirlEncounter(exploreLoc:Number = 0):* {
+public function sharkGirlEncounter(exploreLoc:Number = 0):void {
 	//Set 'PC met Sharkgirls' for Izma stuff
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] = 1;
 	if(player.findStatusAffect(StatusAffects.SharkGirl) < 0) player.createStatusAffect(StatusAffects.SharkGirl,0,0,0,0);
@@ -83,14 +83,15 @@ internal function sharkWinChoices():void {
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("  Do you have your way with her or leave?", false);
 		var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? getGame().sharkGirlGetsDildoed : null);
-		if (player.gender == 1) simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy w/69",0,"Dildo Rape",dildo,"",0,"Leave",cleanupAfterCombat);
+		if (player.gender == 1)
+			simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 		else if (player.gender == 2) {
-			simpleChoices("Yes",sharkgirlSixtyNine,"",0,"Dildo Rape",dildo,"",0,"Leave",cleanupAfterCombat);
+			simpleChoices("Yes", sharkgirlSixtyNine, "", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 		}
 		else if (player.gender == 3) {
 			if (player.isNaga())
-				simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy Oral",sharkgirlSixtyNine,"Dildo Rape",dildo,"",0,"Leave",cleanupAfterCombat);
-			else simpleChoices("Use Dick",sharkgirlDickFuck,"Pussy w/69",sharkgirlSixtyNine,"Dildo Rape",dildo,"",0,"Leave",cleanupAfterCombat);
+				simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy Oral", sharkgirlSixtyNine, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
+			else simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", sharkgirlSixtyNine, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 		}
 	}
 	else cleanupAfterCombat();
@@ -193,7 +194,7 @@ private function sharkBadEnd2():void {
 	outputText("\"<i>My, he's... certainly a virile creature, isn't he?</i>\" a tiger shark asks, taking a seat on a nearby rock. Another shark girl chuckles in response, \"<i>Oh I know. Our numbers have practically doubled because of him.</i>\" She gestures to several heavily pregnant shark girls lazing on the sands, caressing their bumps happily.\n\n", false);
 	outputText("\"<i>Wow. When I heard rumors of your pack getting a new male, I had to check it out for myself. But I didn't think he'd be anything like this...</i>\" the tiger shark says, rubbing her own genitalia. You blow your load inside the shark girl before pausing a moment to catch your breath, your quad of cantaloupe-sized balls churning with more cum. You look up, ready to start on another girl, and catch sight of a human moving across the shoreline. A grin spreads across your face at the sight and you direct the girls' attention to the lone human.\n\n", false);
 	outputText("\"<i>Fresh meat!</i>\"", false);
-	eventParser(5035);
+	getGame().gameOver();
 }
 
 /*-------------------------
@@ -309,7 +310,7 @@ internal function sharkLossRape():void {
 		cleanupAfterCombat();
 		return;
 	}
-	doNext(1);
+	doNext(playerMenu);
 }
 }
 }

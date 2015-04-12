@@ -75,7 +75,7 @@ public function meetMinotaurSons():void {
 	
 			outputText("You can't help but laugh with a mixture of maternal pride and rational worry.  What do your offspring have planned for you?  Judging by the three stiffening loincloths, they won't hold back much longer.  What will you do?", false);
 			//[Fight] [Submit] [Negotiate] [Run]
-			simpleChoices("Fight",fightOTaurs,"Submit",submitToMinotaurMob,"Negotiate",negotiate,"",0,"Leave",runFromMinotaurs);
+			simpleChoices("Fight", fightOTaurs, "Submit", submitToMinotaurMob, "Negotiate", negotiate, "", null, "Leave", runFromMinotaurs);
 		}
 		//(Addicted) 
 		else {
@@ -100,7 +100,7 @@ public function meetMinotaurSons():void {
 			else if(player.cor < 66) outputText("You're not sure how to feel about this morally, but you can't keep from licking your lips, fantasizing about the fix these wonderful kids of yours are so willing to give you.", false);
 			else outputText("Who cares if they're your offspring?  They're all grown up and they smell so... appetizing.", false);
 			//[Fight] [Submit] [Run]
-			simpleChoices("Fight",fightOTaurs,"Submit",submitToMinotaurMob,"Negotiate",negotiate,"",0,"Leave",runFromMinotaurs);
+			simpleChoices("Fight", fightOTaurs, "Submit", submitToMinotaurMob, "Negotiate", negotiate, "", null, "Leave", runFromMinotaurs);
 		}
 	}
 	//Repeat meetings
@@ -155,7 +155,7 @@ public function meetMinotaurSons():void {
 				outputText("Your mind is fogging from the scent in the air, but thankfully, you aren't in withdrawal right now.  You can try to resist and maybe even turn the tables on your brood, or you can run.", false);
 			}
 			//[Fight] [Submit] [Run]
-			simpleChoices("Fight",fightOTaurs,"Submit",submitToMinotaurMob,"",0,"",0,"Run",runFromMinotaurs);
+			simpleChoices("Fight", fightOTaurs, "Submit", submitToMinotaurMob, "", null, "", null, "Run", runFromMinotaurs);
 		}
 		//Tribe sized
 		else {
@@ -208,7 +208,7 @@ public function meetMinotaurSons():void {
 				outputText("This is glorious – so many horny, willing boys, all here for you to squeeze dry.  Even if you wanted to leave, you'd have to fight them to make an opening.  It'd be better to just beat them into submission and take your time savoring their wondrous spunk.", false);
 			}
 			//[Fight] [Submit]
-			simpleChoices("Fight",fightOTaurs,"Submit",submitToMinotaurMob,"",0,"",0,"",0);
+			simpleChoices("Fight", fightOTaurs, "Submit", submitToMinotaurMob, "", null, "", null, "", null);
 		}
 	}
 }
@@ -227,7 +227,7 @@ private function negotiate():void {
 	
 	outputText("Looks like they're only interested in one thing.", false);
 	//[Fight] [Submit] [Run]
-	simpleChoices("Fight",fightOTaurs,"Submit",submitToMinotaurMob,"",0,"",0,"Run",runFromMinotaurs);
+	simpleChoices("Fight", fightOTaurs, "Submit", submitToMinotaurMob, "", null, "", null, "Run", runFromMinotaurs);
 }
 
 //[Run] 
@@ -254,8 +254,9 @@ private function runFromMinotaurs():void {
 private function fightOTaurs():void {
 	startCombat(new MinotaurMob());
 	spriteSelect(94);
-	eventParser(5000);
+	playerMenu();
 }
+
 //[Submit]
 private function submitToMinotaurMob():void {
 	player.lust = 100;
@@ -616,10 +617,10 @@ internal function victoryMinotaurGang():void {
 	if(player.hasFuckableNipples()) nipFuck = victoryBJNippleFuckMinotaurGang;
 	var titFuck:Function = null;
 	if(player.biggestTitSize() >= 6) titFuck = victoryMinotaurGangTitFuck;
-	choices("Gangbang",victoryAllThePenetrationsMinotaurGangBang,
-			"Tit-Fuck",titFuck,"Nipple-Fuck",nipFuck,
-			"Get Licked",createCallBackFunction(forceMinitaurToGiveOral,0),
-			"Get Sucked",getSuck,"Discipline",disciplineEldestMinotaurSon,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
+	choices("Gangbang", victoryAllThePenetrationsMinotaurGangBang,
+			"Tit-Fuck", titFuck, "Nipple-Fuck", nipFuck,
+			"Get Licked", createCallBackFunction(forceMinitaurToGiveOral, 0),
+			"Get Sucked", getSuck, "Discipline", disciplineEldestMinotaurSon, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
 }
 //*[Victory Tit-Fuck] (for only the fattest of fat bitch titties) 
 private function victoryMinotaurGangTitFuck():void {
@@ -901,7 +902,7 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 		outputText("around the base of your " + multiCockDescriptLight() + ".  It circles up ", false);
 		if(player.cockTotal() > 1) outputText("a", false);
 		else outputText("the", false);
-		outputText(" shaft before stopping at the frenulum.  The wet heat of his tongue seems to seep into your dick-flesh until you feels as if you could melt, but the minitaur is just getting started.  He opens wide and takes your " + cockHead(0) + " into his mouth; it rubs sensually over the remainder of flat tongue still inside, and he sucks expertly at it until you're drooling pre-cum on his tongue.  He shivers at that, but it doesn't make him ", false);
+		outputText(" shaft before stopping at the frenulum.  The wet heat of his tongue seems to seep into your dick-flesh until you feels as if you could melt, but the minitaur is just getting started.  He opens wide and takes your " + player.cockHead() + " into his mouth; it rubs sensually over the remainder of flat tongue still inside, and he sucks expertly at it until you're drooling pre-cum on his tongue.  He shivers at that, but it doesn't make him ", false);
 		if(!player.isTaur()) outputText("break eye-contact or ", false);
 		outputText("slow down in the slightest.\n\n", false);
 	
@@ -1088,8 +1089,7 @@ private function minotaurGangBadEnd2():void {
 	outputText("He's pulled back and replaced, and you wonder which of your boys is getting sloppy seconds.  Who cares, as long as you get to feel him cum in you until you go dizzy!", false);
 	player.orgasm();
 	dynStats("lib", 100, "sen", 100);
-	//[GAME OVER]
-	eventParser(5035);
+	getGame().gameOver();
 }
 	
 

@@ -384,7 +384,7 @@ private function sheila1ndEncLookCloserPtIITalkLeave():void {
 private function sheila1ndEncLookCloserPtIITalkFight():void {
 	clearOutput();
 	startCombat(new Sheila());
-	eventParser(5000);
+	playerMenu();
 }
 
 //XP-1: PC's apology (sheila xp = -1 and demon sheila = 0):
@@ -452,7 +452,6 @@ private function apologySheilaSlapSult():void {
 	//set sheila xp = -3, go to fight
 	flags[kFLAGS.SHEILA_XP] = -3;
 	startCombat(new Sheila());
-	doNext(1);
 }
 
 //[XP-1 - Nothing]
@@ -520,7 +519,6 @@ private function sheilaPologyFight():void {
 	//go to fight, set sheila xp = -3
 	flags[kFLAGS.SHEILA_XP] = -3;
 	startCombat(new Sheila());
-	doNext(1);
 }
 
 //[XP-2 - Cast Arouse]
@@ -630,7 +628,6 @@ private function sheilaReallyMadStandGround():void {
 	}
 	//go to fight; if silly mode, heal 20 hp and 10 fatigue on PC and set sheila HP = 120%
 	startCombat(new Sheila());
-	doNext(1);
 	if(silly()) {
 		monster.HP *= 1.2;
 		fatigue(-10);
@@ -1235,7 +1232,7 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 	if(model.time.hours > 6) model.time.days++;
 	model.time.hours = 6;
 	statScreenRefresh();
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[XP3 - Guard Duty]
@@ -1989,7 +1986,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	if(!player.isTaur()) outputText("Gripping her fuzzy thighs next, you lift her bottom and line");
 	//(hoers)
 	else outputText("She lifts her bottom and lines");
-	outputText(" her slippery passage up with your cock.  \"<i>Here it comes!</i>\" you cry.  With that announcement, you thrust into her, parting her lips with your swollen " + cockHead(x) + ".  She moans in relief as you finally enter her, but said relief is short-lived as you begin pumping at her slick vagina.  Gasping weakly, she lies back on the ground; ");
+	outputText(" her slippery passage up with your cock.  \"<i>Here it comes!</i>\" you cry.  With that announcement, you thrust into her, parting her lips with your swollen " + player.cockHead(x) + ".  She moans in relief as you finally enter her, but said relief is short-lived as you begin pumping at her slick vagina.  Gasping weakly, she lies back on the ground; ");
 	if(sheilaCorruption() <= 30) outputText("her perky breasts rock back and forth");
 	else outputText("her jiggling breasts flatten into perfect domes and undulate on her chest");
 	outputText(" as you draw in and out of her warm, moist pussy.");
@@ -2461,23 +2458,23 @@ private function rapeSheilasCooter():void {
 	if(monster.HP < 1) outputText("sliding it between her labia and producing a damp spot, then ");
 	outputText("dragging the wet fabric around her vulva.");
 	
-	outputText("\n\nSatisfying yourself as to her readiness, you unfasten your [armor] to extract your [cockFit 48]; the " + cockHead(x) + " drips with pre-cum as you pull it loose, and you lay it on her crotch, letting the goo soak the white fabric until you can see her light-brown skin through it.  She squirms under it, bringing up another droplet with her motion, and you place the tip at the entrance to her pussy, pressing eagerly against the fabric.  \"<i>Please...</i>\" she whimpers, \"<i>I'm begging you; don't.</i>\"");
+	outputText("\n\nSatisfying yourself as to her readiness, you unfasten your [armor] to extract your [cockFit 48]; the " + player.cockHead(x) + " drips with pre-cum as you pull it loose, and you lay it on her crotch, letting the goo soak the white fabric until you can see her light-brown skin through it.  She squirms under it, bringing up another droplet with her motion, and you place the tip at the entrance to her pussy, pressing eagerly against the fabric.  \"<i>Please...</i>\" she whimpers, \"<i>I'm begging you; don't.</i>\"");
 	
 	//fuck-fork
 	//[(corruption < 50)
 	if(player.cor < 50) {
-		outputText("\n\nYou frown at the girl.  She still wants to escape, even though her body is eager for this?  You can feel her wet pussy twitching at your " + cockHead(x) + ".  Dragging the oozing tip along her soaked panties provokes a shiver and another bloom of fluid from the girl, but she bites her lip and refuses to meet your eye.");
+		outputText("\n\nYou frown at the girl.  She still wants to escape, even though her body is eager for this?  You can feel her wet pussy twitching at your " + player.cockHead(x) + ".  Dragging the oozing tip along her soaked panties provokes a shiver and another bloom of fluid from the girl, but she bites her lip and refuses to meet your eye.");
 		outputText("\n\n\"<i>Are you serious?</i>\" you ask, thrusting gently to part her labia and push the sodden cloth into her.  You can already see every outline of her pussy though it.");
 		
 		outputText("\n\n\"<i>Y-yes...</i>\" she moans, \"<i>please don't touch my skin.  Through the fabric is fine, if you must, but please... don't put it inside!</i>\"  What a strange thing to ask... you narrow your eyes at her, but she actually meets your gaze now that you've heard her out.  Honest desperation is all over her flushed face; she's really serious about this!");
 		
-		outputText("\n\nMan, whatever.  Experimentally, you push in again, testing how far her panties will let you go, and her labia accept you smoothly, rubbing the fabric against your " + cockHead(x) + ".  With lips spread open, even her small clitoris can be felt through the cloth, and you take the opportunity to rub at it");
+		outputText("\n\nMan, whatever.  Experimentally, you push in again, testing how far her panties will let you go, and her labia accept you smoothly, rubbing the fabric against your " + player.cockHead(x) + ".  With lips spread open, even her small clitoris can be felt through the cloth, and you take the opportunity to rub at it");
 		if(player.isTaur()) outputText(" with your belly");
 		outputText(", to be answered with a shy gasp from the girl and the soft, welcoming feeling of her vagina coating your tip with a new layer of moisture.  Covered in warm, slick fluids, the panties feel pretty good against your dick... you could actually get off like this.  \"<i>Move your hips,</i>\" you command hesitantly, \"<i>make this fun for me.</i>\"  Her uncertain eyes light up when she understands that you're accepting her conditions, and she parts her thighs wide to gyrate against you, using the end of your prick to caress her small genitalia through the nearly-transparent panties.");
 		
 		outputText("\n\n\"<i>Is this... okay?</i>\" Sheila asks, grinding the cloth-covered hole of her vagina against your slit and smearing the drop of pre-cum that issues from it.  You want to say no, to pretend like it's not enough, but the way her tight, clothed vulva is rubbing at the nerve-laden end of your prick is robbing you of your words.  Heat is transmitting to you through the soaked fabric as her body temperature rises; the lewd girl actually begins to grab at her tits and caress herself now that you've granted her a reprieve from whatever it is she was worried about.  Her skin reddens as her body heats up, and she begins to let out soft moans as she pushes harder against your shaft, nearly - but not completely - taking the head inside her pussy.  \"<i>Ah...!  N-no... gonna come!</i>\"  As her labia squeeze your cock hungrily, you feel the same way.");
 		
-		outputText("\n\nHer knees clasp around you until she remembers her injunction against skin contact and forces them apart again; her hands, which she had reached out to you briefly, are pulled back as her arms fold tightly against her chest, pressing her breasts together.  \"<i>S-sorry!</i>\" she cries, and you feel her drooling through the panties as she spasms.  At your limit as well, you slide your " + cockHead(x) + " down to the entrance to her vagina and push it partway in, rubbing the tip against the fabric to work the nerves and cross the last step to your own orgasm.");
+		outputText("\n\nHer knees clasp around you until she remembers her injunction against skin contact and forces them apart again; her hands, which she had reached out to you briefly, are pulled back as her arms fold tightly against her chest, pressing her breasts together.  \"<i>S-sorry!</i>\" she cries, and you feel her drooling through the panties as she spasms.  At your limit as well, you slide your " + player.cockHead(x) + " down to the entrance to her vagina and push it partway in, rubbing the tip against the fabric to work the nerves and cross the last step to your own orgasm.");
 		
 		outputText("\n\n\"<i>Take it out!</i>\" the girl wails, still shaking with climax.  \"<i>D-don't come in me!</i>\"");
 		
@@ -3409,7 +3406,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOut():void {
 	}
 	//pass 4 hours and reduce corruption or something, give 3 hrs rest if naga, increase archery skill and increase fatigue by a lot (50-60+) if angel of death
 	dynStats("cor", -2);
-	if(model.time.hours + 4 < 21) doNext(15);
+	if(model.time.hours + 4 < 21) doNext(camp.returnToCampUseFourHours);
 	else {
 		//(if time after adding 4 hours >= 21:00 or = 0:00, additionally output)
 		outputText("\n\n<b>\"<i>Oh, god dammit.</i>\"</b>");
@@ -3647,7 +3644,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	camp.sleepRecovery(false);
 	model.time.hours = 7;
 	model.time.days++;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //demonization Sheila transformation (output when demon sheila = 0 and sheila corruption is about to hit 100 with the PC):

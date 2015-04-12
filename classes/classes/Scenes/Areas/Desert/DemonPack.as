@@ -10,7 +10,9 @@
 		override protected function performCombatAction():void
 		{
 			//Demon pack has different AI
-			game.eventParser((rand(2) == 0) ? special1 : special2);
+			if (rand(2) == 0)
+				special1();
+			else special2();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -56,7 +58,7 @@
 				if(player.cocks.length > 0) {
 					if(player.cockTotal() > 1) outputText("Each of y", false);
 					else outputText("Y", false);
-					outputText("our " + game.multiCockDescriptLight() + " throbs ", false);
+					outputText("our " + player.multiCockDescriptLight() + " throbs ", false);
 					if(player.hasVagina()) outputText(" and your ", false);
 				}
 				if(player.vaginas.length > 0) {
@@ -121,8 +123,8 @@
 							consumables.INCUBID,
 							consumables.OVIELIX,
 							consumables.B__BOOK);
-			this.special1 = 5043;
-			this.special2 = 5044;
+			this.special1 = game.packAttack;
+			this.special2 = game.lustAttack;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;

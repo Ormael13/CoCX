@@ -99,7 +99,7 @@ private function tamaniFemaleEncounter():void {
 	outputText("A goblin leaps out from behind a rock outcropping.  She keeps her arms folded across her " + tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n", false);
 	outputText("She says, \"<i>There's only so much cock around, and I got dibs on ALL of it, O.K. skank?</i>\"\n\n", false);
 	//[Umm OK?] [No]
-	simpleChoices("Umm OK?",tamaniFemaleYes,"No",tamaniFemaleNo,"PreferGirls",preferTamaniFemdom,"",0,"",0);
+	simpleChoices("Umm OK?", tamaniFemaleYes, "No", tamaniFemaleNo, "PreferGirls", preferTamaniFemdom, "", null, "", null);
 }
 
 //(Umm OK?)
@@ -135,7 +135,7 @@ private function tamaniMaleFirstEncounter():void {
 	outputText("A goblin leaps out from behind a rock outcropping.  For something so small, she has a lot of curves.  She advances towards you, rolling her hips in a suggestive way, immediately diverting your blood-flow to your crotch.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts jiggles pleasantly with every step, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n", false);
 	outputText("The goblin makes you an offer that's difficult to turn down, \"<i>Hey there stud, want to fuck me pregnant?  I promise my box will milk your dick dry.  Just let Tamani take care of all your boners OK?</i>\"", false);
 	//[Fuck Her] [Refuse]
-	simpleChoices("Fuck Her",tamaniFirstTimeConsentual,"Refuse",tamaniFirstTimeRefusal,"",0,"",0,"",0);
+	simpleChoices("Fuck Her", tamaniFirstTimeConsentual, "Refuse", tamaniFirstTimeRefusal, "", null, "", null, "", null);
 }
 //[Fuck Her – Consentual First Time]
 private function tamaniFirstTimeConsentual():void {
@@ -154,7 +154,7 @@ private function tamaniFirstTimeConsentual():void {
 	outputText("  You NEED to fuck her pussy full – NOW.\n\n", false);
 	//(FITS)
 	if(player.cockArea(0) <= 90) {
-		outputText("Tamani breaks the kiss and gives you a coy smile as she shimmies down your body, dropping her moist cunt onto your " + cockDescript(0) + "'s " + cockHead(0) + ".  She swings her hips in a little circle, teasing you with her moist entrance as your drug-enhanced pre-cum bubbles and drools around her lips, mixing with her own copious fluids as it flows down your length", false);
+		outputText("Tamani breaks the kiss and gives you a coy smile as she shimmies down your body, dropping her moist cunt onto your " + cockDescript(0) + "'s " + player.cockHead() + ".  She swings her hips in a little circle, teasing you with her moist entrance as your drug-enhanced pre-cum bubbles and drools around her lips, mixing with her own copious fluids as it flows down your length", false);
 		if(player.balls > 0) outputText(" and drips from your " + ballsDescriptLight(), false);
 		outputText(".  She stops and teases, \"<i>Ready to stuff me full of your cream?  I just KNOW I'll get pregnant from such a purrfect mate.</i>\"\n\n", false);
 		outputText("Tamani doesn't wait for an answer – she pauses until you're about to reply, then drops her weight down, fully impaling herself and turning the beginnings of your reply into a babbled moan.  She plants her feet on your thighs and her arms around your back and begins bouncing up and down rapidly, squeezing and contracting, milking your " + cockDescript(0) + " in her tight wet walls the entire time. Your inner abdominal muscles begin clenching and squeezing, sending a wave of heat through your groin as your baby-batter begins its journey towards the goblin's womb.\n\n", false);
@@ -201,7 +201,7 @@ private function tamaniFirstTimeRefusal():void {
 	outputText("Tamani's eyes widen in surprise, \"<i>Don't let the size fool you, big " + player.boyGirl() + ". I can take more than you think,</i>\" she says while her hands begins playing with her box, \"<i>Are you sure you don't want to just let off a little steam?</i>\"\n\n", false);
 	//[Fuck Her (Goes to fuck her - consensual first time)]
 	//[No means no]
-	simpleChoices("Fuck Her",tamaniFirstTimeConsentual,"No",tamaniSecondRefusal,"",0,"",0,"",0);
+	simpleChoices("Fuck Her", tamaniFirstTimeConsentual, "No", tamaniSecondRefusal, "", null, "", null, "", null);
 	dynStats("lus", 5);
 }
 //[No Means No]
@@ -356,7 +356,7 @@ internal function tamaniSexLetHer():void {
 		outputText("She gets down on all fours, crawling up your legs until her gloss-covered lips reach your " + multiCockDescriptLight() + ".   Warm wetness slides along your length as the gobbo-slut gets you slick and wet with her saliva.   It has quite the effect on you, turning your " + cockDescript(0) + " into a hard trembling pleasure-center.  You sigh, enjoying the attention but more than ready to release your pent-up sexual need into the willing girl.\n\n", false);
 		//(fits)
 		if(player.cockArea(0) <= 90) {
-			outputText("Tamani turns about, dragging her wet gash across you and giving you a nice view of her plump butt-cheeks.  The soft skin of her palms squeezes around you as she lifts you up, positioning your " + cockDescript(0) + " against her womanhood.   She grinds against your " + cockHead() + ", her folds slowly parting to take you.  Slowly, inch after inch of dickflesh sinks into her amazingly elastic yet tight pussy.  ", false);
+			outputText("Tamani turns about, dragging her wet gash across you and giving you a nice view of her plump butt-cheeks.  The soft skin of her palms squeezes around you as she lifts you up, positioning your " + cockDescript(0) + " against her womanhood.   She grinds against your " + player.cockHead() + ", her folds slowly parting to take you.  Slowly, inch after inch of dickflesh sinks into her amazingly elastic yet tight pussy.  ", false);
 			if(player.cocks[0].cockLength >= 12) outputText("Her body visibly stretches around you, and you silently thank whatever gods or demons adapted goblins to be able to fulfill this role.  ", false);
 			outputText("Moaning like a whore, she easily slips the rest of the way down, bottoming out her sopping-wet fuck-tunnel.\n\n", false);
 			outputText("You gasp in pain and surprise as Tamani pinches and tugs ", false);
@@ -400,7 +400,7 @@ internal function tamaniSexLetHer():void {
 			outputText("Tamani turns about, dragging her wet gash across you and giving you a nice view of her plump butt-cheeks.  She looks over her shoulder and sucks on one of her lacquered fingernails, looking equal parts mischievous and sexy.   You rock your hips under her until she gives your ", false);
 			if(player.balls > 0) outputText(ballsDescriptLight(), false);
 			else outputText(cockDescript(0), false);
-			outputText(" a rough slap.  Whimpering, you still your rebellious hips and allow her to play you like the world's most sensitive fiddle.  Tamani pulls your " + cockHead() + " up and rocks herself against it, openly moaning as you dribble pre into her sopping gash.\n\n", false);
+			outputText(" a rough slap.  Whimpering, you still your rebellious hips and allow her to play you like the world's most sensitive fiddle.  Tamani pulls your " + player.cockHead() + " up and rocks herself against it, openly moaning as you dribble pre into her sopping gash.\n\n", false);
 			outputText("\"<i>Oooh, you're too big for little ol' me,</i>\" moans the goblin, easing back a bit, \"<i>but I have something that might make you cum just as hard.   I'll just make sure to catch all your cum with my cunny!</i>\"    She pulls out a hot-pink dildo and gives it a lick.  You watch in horror as a drop of thick fluid leaks from the tip.  No doubt Tamani intends for you to take take the entire thing in one way or another.\n\n", false);
 			outputText("You pout, protesting meekly as she ", false);
 			if(player.balls > 0) outputText("lifts up your " + ballsDescriptLight(), false);
@@ -483,7 +483,7 @@ internal function tamaniSexLost():void {
 	if(player.cor > 50) outputText("blushing hotly and doing your best to look like a submissive toy.\n\n", false);
 	else outputText("blushing in shame and embarrassment, but meaning every word.\n\n", false);
 	
-	outputText("She takes the empty bottle and presses it against your " + cockHead() + ", caressing your length with loving affection with her free hand as she replies, \"<i>Not exactly what I told you to say, but it DID sound heartfelt.  Let's let out all that backed up cum now, hrmmm?</i>\"   Her free hand touches the ring and you feel the pressure relax a bit - still tight enough to keep you beyond-hard, but loose enough for you to cum.  She strokes and squeezes as your blocked orgasms slowly flow into the bottle, smiling as it thickens and begins spurting as pleasure overtakes you.  You hold yourself on all fours, red-assed and submissive as your goblin mistress milks you of the last of your cum.", false);
+	outputText("She takes the empty bottle and presses it against your " + player.cockHead() + ", caressing your length with loving affection with her free hand as she replies, \"<i>Not exactly what I told you to say, but it DID sound heartfelt.  Let's let out all that backed up cum now, hrmmm?</i>\"   Her free hand touches the ring and you feel the pressure relax a bit - still tight enough to keep you beyond-hard, but loose enough for you to cum.  She strokes and squeezes as your blocked orgasms slowly flow into the bottle, smiling as it thickens and begins spurting as pleasure overtakes you.  You hold yourself on all fours, red-assed and submissive as your goblin mistress milks you of the last of your cum.", false);
 	if(player.cumQ() >= 250) outputText("  The bottle quickly overflows, but Tamani happily sets it aside and slides her own cunt under you, letting you pump the rest of your seed into her fertile womb.", false);
 	if(player.cumQ() >= 500) outputText("  She coos happily when you still manage to pump enough jism into her to bloat her belly, but even with your impressive fertility, the orgasm has to end.", false);
 	outputText("\n\n", false);
@@ -577,7 +577,7 @@ private function tamaniPregnantEncounter():void {
 	outputText("Tamani strolls out from behind a boulder, and wow is she ever pregnant.  It doesn't diminish the look of lust in her eyes when she meets your gaze, but her hands do keep rubbing the outside of her belly, only pausing to squeeze drops of milk from her nipples.  Her leather straps seem to fit her even better than before, accentuating her expanding curves and looking fantastic on her pregnant form.\n\n", false);
 	outputText("She parts her legs and rubs her lower lips while she begs you, \"<i>Please fuck me!   I'm so horny from the pregnancy and I can't wait to give you daughters so you can knock me up all over again!</i>\"", false);
 	//[Fuck Her] [Refuse]
-	simpleChoices("Fuck Her",tamaniPregnantFuck,"Refuse",tamaniPregnantRefusal,"",0,"",0,"",0);
+	simpleChoices("Fuck Her", tamaniPregnantFuck, "Refuse", tamaniPregnantRefusal, "", null, "", null, "", null);
 }
 
 //[Refuse]
@@ -623,7 +623,7 @@ private function tamaniPregnantFuck():void {
 		outputText("\"<i>Sorry " + player.mf("stud","lover") + ", you're just too big and <b>hard</b> for me.   Don't worry, I'll help you unload everything straight into my sweet cunt,</i>\" she apologizes, ", false);
 		if(player.balls > 0) outputText("massaging your balls with her feet", false);
 		else outputText("jacking the base of your " + cockDescript(0) + " with her feet", false);
-		outputText(" while her hands caress and tease you.   Tamani pulls herself downwards, pressing the " + cockHead() + " partway up her drooling box.  She grinds hard against your cock-head, nearly driving you mad with pleasure.  She grabs her " + tamaniChest() + " and squeezes, splattering you with a thick coating of milk before returning to jacking you off with her feet and hands.\n\n", false);
+		outputText(" while her hands caress and tease you.   Tamani pulls herself downwards, pressing the " + player.cockHead() + " partway up her drooling box.  She grinds hard against your cock-head, nearly driving you mad with pleasure.  She grabs her " + tamaniChest() + " and squeezes, splattering you with a thick coating of milk before returning to jacking you off with her feet and hands.\n\n", false);
 
 		outputText("You cum with near-painful intensity.  Tamani is actually pushed back a bit by your first blast, getting splattered from her chest down as jizz tries to escape her suddenly fluid-filled cunt.  She lunges forwards, grinding her pregnancy-bloated body against your pole, using her arms and legs like tight cock-rings.  Her gash and hard little clit spread her fragrant wetness as she orgasms with you, feeling each wave of your spunk pass underneath her.   With no receptacle, you end up drenched in a puddle of the stuff.  While it does eventually end, your sore body is a clear indication that some drug in her lipstick probably helped you push out such a ludicrous volume.\n\n", false);
 
@@ -723,7 +723,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 	if(primary >= 0) {
 		outputText("Tamani is completely right.  You grab her ass, feeling your fingers sink in to her supple flesh as you pull her back towards your ", false);
 		if(cocks > 0) outputText("main ", false);
-		outputText(cockDescript(0) + ".  Her warmth spreads over your " + cockHead(primary) + " slowly, making you twitch and drip inside her, lubricating her already dripping channel with even more slick fluids.  With a mighty heave you push inside her, feeling yourself penetrating deep inside her, directly into her fertile womb.  Tamani rubs your " + player.legs() + " with her hands, giving you a massage as you bottom out against her, feeling her juices stain your ", false);
+		outputText(cockDescript(0) + ".  Her warmth spreads over your " + player.cockHead(primary) + " slowly, making you twitch and drip inside her, lubricating her already dripping channel with even more slick fluids.  With a mighty heave you push inside her, feeling yourself penetrating deep inside her, directly into her fertile womb.  Tamani rubs your " + player.legs() + " with her hands, giving you a massage as you bottom out against her, feeling her juices stain your ", false);
 		if(player.hasSheath()) outputText("sheath", false);
 		else outputText("crotch", false);
 		outputText("\n\n", false);
@@ -735,7 +735,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 			outputText("She moans and pulls your " + cockDescript(secondary) + " into her mouth, running her tongue around the tip and sliding her palm along the underside.", false);
 		}
 		else outputText("She moans and pants, babbling about how good you are to her the whole time.", false);
-		outputText("  You don't stop until your " + cockHead(primary) + " is the only thing inside her.\n\n", false);
+		outputText("  You don't stop until your " + player.cockHead(primary) + " is the only thing inside her.\n\n", false);
 		
 		outputText("  The second thrust is even better than the first.  It's slippery, hot, and passionate, and the idea of slowing down or stopping for any reason is inconceivable.  Tamani pants with each thrust, pawing at her bouncing breasts, grabbing one by the nipple with a free hand and moaning loudly", false);
 		if(cocks > 0) outputText(" around your " + cockDescript(secondary), false);
@@ -791,7 +791,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 	else {
 		outputText("Tamani is completely right.  You grab her ass, feeling your fingers sink in to her supple flesh as you pull her back towards your ", false);
 		if(cocks > 1) outputText("main ", false);
-		outputText(cockDescript(0) + ".  Her warmth spreads over the " + cockHead(0) + " of your " + cockDescript(0) + ", but will go no further.  You tug harder on her bouncing backside, but you're simply too large to fit inside your wife's beautiful pussy.  She turns around and places a small hand ", false);
+		outputText(cockDescript(0) + ".  Her warmth spreads over the " + player.cockHead() + " of your " + cockDescript(0) + ", but will go no further.  You tug harder on her bouncing backside, but you're simply too large to fit inside your wife's beautiful pussy.  She turns around and places a small hand ", false);
 		if(player.biggestTitSize() < 1) outputText("on your chest ", false);
 		else outputText("between your " + breastDescript(0) + " ", false);
 		outputText(" and commands, \"<i>Stop, you're just too big of a man for Tamani to do it the old fashioned way.</i>\"\n\n", false);

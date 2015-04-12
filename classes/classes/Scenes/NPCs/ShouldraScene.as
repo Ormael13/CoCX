@@ -126,7 +126,7 @@ internal function shouldraGreeting():void {
 			if(flags[kFLAGS.TIMES_BEATEN_SHOULDRA] == 3) outputText("You can't say you saw that coming.  It seems she has offered to forego the fight in lieu of sexings.  ", false);
 			outputText("Would you like to accept her offer, or do you want to fight her regardless?", false);
 			//Now back to the good part!
-			simpleChoices("Accept",yankeeEchoPapa,"Fight",novemberAlphaHotel,"",0,"",0,"",0);
+			simpleChoices("Accept", yankeeEchoPapa, "Fight", novemberAlphaHotel, "", null, "", null, "", null);
 		}
 		else {
 			//FIGHT!
@@ -178,7 +178,7 @@ internal function defeatDannyPhantom():void {
 		}
 		else {
 			outputText("What do you do?", false);
-			simpleChoices("Let Her In",littlePigLittlePigLetMeIn,"Deny",noSlimingSlimer,"",0,"",0,"",0);
+			simpleChoices("Let Her In", littlePigLittlePigLetMeIn, "Deny", noSlimingSlimer, "", null, "", null, "", null);
 		}
 	}
 	flags[kFLAGS.TIMES_BEATEN_SHOULDRA]++;
@@ -229,7 +229,7 @@ private function littlePigLittlePigLetMeIn():void {
 	else if(player.gender == 3) gender = hermaphroditeGhostsCumEctoplasm;
 	
 	flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA]++;
-	simpleChoices("Sex Here",gender,"Lake",lake,"",0,"",0,"",0);
+	simpleChoices("Sex Here", gender, "Lake", lake, "", null, "", null, "", null);
 }
 //Lake Victory Scenes
 private function nowOnVickiLake():void {
@@ -249,7 +249,7 @@ private function nowOnVickiLake():void {
 	if(flags[kFLAGS.TIMES_MET_OOZE] > 0) ooze = ghostGooGurlzDuckfaces;
 	if(ooze != null && shark != null) {
 		outputText("You recall the experiences of both the slime and the shark girl. Which encounter would you wish to seek out?", false);
-		simpleChoices("Shark",shark,"Ooze",ooze,"",0,"",0,"",0);
+		simpleChoices("Shark", shark, "Ooze", ooze, "", null, "", null, "", null);
 	}
 	else if(ooze != null) doNext(ooze);
 	else doNext(shark);
@@ -271,7 +271,7 @@ private function sharkbustersVictory():void {
 	if(player.hasCock() && player.hasVagina()) {
 		outputText("Which gender would you like to focus on?", false);
 		//male / female)
-		simpleChoices("Male",ghostIzmaPenis,"Female",sharkyEctoginas,"",0,"",0,"",0);
+		simpleChoices("Male", ghostIzmaPenis, "Female", sharkyEctoginas, "", null, "", null, "", null);
 	}
 	else if(player.hasVagina()) doNext(sharkyEctoginas);
 	else if(player.hasCock()) doNext(ghostIzmaPenis);
@@ -289,7 +289,7 @@ private function sharkyEctoginas():void {
 	else outputText("You can only shake your head resignedly as", false);
 	outputText(" the muscles of her right arm wriggle wildly before surging against the skin, stretching and swelling. Her hand swiftly grows as large as her head; her upper arm similarly enlarges until her elbow nearly touches her waist. The weight becomes too much of a strain on her still-regularly proportioned body, and the appendage flops onto the ground. Undaunted, the limb continues its growth.\n\n", false);
 	
-	outputText("Now as alarmed as she is, you start to pull back and get up, but are stopped dead in your tracks by a surprised 'oooh' coming from the now very-flushed girl before you. Your hesitation costs you your chance of escape as she brings her newly enlarged arm to bear, grabbing you roughly by the back of the head and shoving you back between her legs. As if in concert, the shark-girl's labia surge forward, engulfing the strained garment attempting to restrain it, then slapping against your face with a juicy smack. Her clit follows soon after, growing to its full size before the rest of her body can catch up  If she felt like it, she could most likely pull the engorged prick right into her cleavage. Knowing that appeasing the spectral shark girl will be your only means of escape, you feverishly assault her love canal with your tongue, slipping across and smooshing against the feelers lining it. Meanwhile, you manage to tilt your head enough to see her left arm swelling up to match the right, and judging from the increasingly urgent rumblings of her abdominal muscles, you can tell her torso won't be far behind.  Unexpectedly, your head is forced up a couple inches, and you reach across to confirm your suspicion; her tail, and the toned ass surrounding it, is going along for the ride.  On impulse, you roughly massage the muscular cheek, eliciting a throaty groan from your lover and a quickening of the growth.  Her hips, butt, and tail continue to swell up until her overburdened, incredibly tight thong's straps burst under the pressure and fall free, eliciting a relieved gasp from the girl.  You pause only enough to slowly draw out the remnants of the swimwear from her lubricated fuck-tunnel, causing the ghost-girl's steady stream of erotic sounds to climb slightly higher in pitch from the additional stimulation. You're heaved up from your spot betwixt her loins suddenly, picked up around the waist as she finally collapses under the pleasure, forced slightly to one side by the fin as she falls to the soft grass. You need no explanation as you glance back and watch her now-squirming legs swell with the power of the spell, thickening thighs closing in on each other with enough force to crush any poor soul foolish enough to stay between them. \"<i>What are you...stupid!?</i>\" the possessed shark girl pants. By the way her voice shifts from melodious to coarse, you can guess who it was who saved you from your fate. \"<i>Don't just stand there when...a girl's legs are grow-...o-oh...oooooh...</i>\"\n\n", false);
+	outputText("Now as alarmed as she is, you start to pull back and get up, but are stopped dead in your tracks by a surprised 'oooh' coming from the now very-flushed girl before you.  Your hesitation costs you your chance of escape as she brings her newly enlarged arm to bear, grabbing you roughly by the back of the head and shoving you back between her legs.  As if in concert, the shark-girl's labia surge forward, engulfing the strained garment attempting to restrain it, then slapping against your face with a juicy smack.  Her clit follows soon after, growing to its full size before the rest of her body can catch up.  If she felt like it, she could most likely pull the engorged prick right into her cleavage.  Knowing that appeasing the spectral shark girl will be your only means of escape, you feverishly assault her love canal with your tongue, slipping across and smooshing against the feelers lining it. Meanwhile, you manage to tilt your head enough to see her left arm swelling up to match the right, and judging from the increasingly urgent rumblings of her abdominal muscles, you can tell her torso won't be far behind.  Unexpectedly, your head is forced up a couple inches, and you reach across to confirm your suspicion; her tail, and the toned ass surrounding it, is going along for the ride.  On impulse, you roughly massage the muscular cheek, eliciting a throaty groan from your lover and a quickening of the growth.  Her hips, butt, and tail continue to swell up until her overburdened, incredibly tight thong's straps burst under the pressure and fall free, eliciting a relieved gasp from the girl.  You pause only enough to slowly draw out the remnants of the swimwear from her lubricated fuck-tunnel, causing the ghost-girl's steady stream of erotic sounds to climb slightly higher in pitch from the additional stimulation. You're heaved up from your spot betwixt her loins suddenly, picked up around the waist as she finally collapses under the pleasure, forced slightly to one side by the fin as she falls to the soft grass. You need no explanation as you glance back and watch her now-squirming legs swell with the power of the spell, thickening thighs closing in on each other with enough force to crush any poor soul foolish enough to stay between them. \"<i>What are you...stupid!?</i>\" the possessed shark girl pants. By the way her voice shifts from melodious to coarse, you can guess who it was who saved you from your fate. \"<i>Don't just stand there when...a girl's legs are grow-...o-oh...oooooh...</i>\"\n\n", false);
 	
 	outputText("You redirect your attentions to her breasts, glancing back around just in time to see one heaving orb burgeon with new mass, quickly followed by the other, the motion seeming like some ridiculous dance. While you could sever the straps beginning to sink into the swelling mammaries, you hold back, nearly drooling with arousal as the breasts bulge around the restrictive fabric. Her boobs climb the alphabet in a breakneck pace, reaching I-cups before the bikini top finally gives in to the pressure, causing a ripple to run from her nipples all the way to her feet as the surging breasts break free of their prison. Your eyes widen as you bask in the glory of the unveiled and still-swelling tits. They give one last surge, then stop, and you glance around to see the changes mostly complete. With one last shuddering sigh, the ghost girl raises her head to consider your suddenly insignificant frame. Where once stood (or, you suppose, laid) a short, rowdy shark girl now lays a moaning, sweating, and incredibly horny shark giantess! You make a swift mental note to forgive all of the faeries you had ever thought to take advantage of as the shark-ghost scoops you up once more, drunk with the arousal of the unexpected results of her wayward spell. You manage to take one desperate breath before she quite literally plunges you back between her love-lips, buried up to your waist in wiggly, jiggly chaos.\n\n", false);
 	
@@ -386,7 +386,7 @@ private function slimeGinaFlation():void {
 	//[if vagina]  
 	outputText("You stand for a moment, chin resting upon your hand as you consider the best way to pleasure both of you. Nodding as a thought comes to you, you kneel down next to the ghost girl turned slime girl and sink your fingers into her pliable form. The mass responds with a shudder of pleasure, and you're a bit surprised at the reaction. You ask her if that actually felt good, and her semi-tangible mouth pulls up into a smirk. \"<i>Very,</i>\" she says in the most alluring voice she can manage given the strange voice she has to work with. Encouraged, you go back to your work with vigor, digging deeply into the squishy ooze. You massage the stuff as it quivers under your capable hands. Aroused groans begin issuing from the sensitive girl. You slowly centralize the stimulation into one grabbable region. Like a ceramic sculptor you begin kneading the green goo, forming the stuff into a rounded-off cone.\n\n", false);
 	
-	outputText("You continue shaping your creation until finally releasing it and rising to scrutinize your creation. You seem to have successfully molded a eight inch long slime protrusion.  Giving it a little flick that sends a shiver through the ghost girl's gooey host, you confirm its solidity with a grin. The ghost girl offers a low moan as you climb up onto the green slime and aim yourself above your phallic creation. Although you think to tease the girl a little bit by hovering over her makeshift phallus, she's clearly not in the mood for foreplay. The quivering mass thrusts itself upwards at you, and you're neatly impaled by all eight inches straight off. Her slime, however, will not stop there, and the goo returns to its semi-solid state... in your " + vaginaDescript(0) + ". You bite your lower lip as you feel the ooze pressing tightly against your tunnel. The malleable mush squeezes past your cervix and quickly fills your womb tight. Her redistribution of volume compromises your balance, and you slip. Your " + buttDescript() + " slaps against the slime, right above the ghost girl's face; ", false);
+	outputText("You continue shaping your creation until finally releasing it and rising to scrutinize your creation. You seem to have successfully molded an eight inch long slime protrusion.  Giving it a little flick that sends a shiver through the ghost girl's gooey host, you confirm its solidity with a grin. The ghost girl offers a low moan as you climb up onto the green slime and aim yourself above your phallic creation. Although you think to tease the girl a little bit by hovering over her makeshift phallus, she's clearly not in the mood for foreplay. The quivering mass thrusts itself upwards at you, and you're neatly impaled by all eight inches straight off. Her slime, however, will not stop there, and the goo returns to its semi-solid state... in your " + vaginaDescript(0) + ". You bite your lower lip as you feel the ooze pressing tightly against your tunnel. The malleable mush squeezes past your cervix and quickly fills your womb tight. Her redistribution of volume compromises your balance, and you slip. Your " + buttDescript() + " slaps against the slime, right above the ghost girl's face; ", false);
 	if(player.isNaga()) outputText("your tail is thrust to one side to make way for the penetration", false);
 	else if(player.isGoo()) outputText("your gooey mass smooshes into the green slime, a near-mirror of jiggling substances", false);
 	else outputText("your legs are forced to do the splits as you sink down", false);
@@ -599,7 +599,7 @@ private function penisLossThatIsntALoss():void {
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?", false);
 		
-		simpleChoices("LetHerCum",letShouldraIn,"KeepHerOut",kickShouldraOut,"",0,"",0,"",0);
+		simpleChoices("LetHerCum", letShouldraIn, "KeepHerOut", kickShouldraOut, "", null, "", null, "", null);
 		return;
 	}
 	outputText("\n\n", false);
@@ -797,7 +797,7 @@ private function hermaphroditeGhostsCumEctoplasm():void {
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?", false);
 		
-		simpleChoices("LetHerCum",letShouldraIn,"KeepHerOut",kickShouldraOut,"",0,"",0,"",0);
+		simpleChoices("LetHerCum", letShouldraIn, "KeepHerOut", kickShouldraOut, "", null, "", null, "", null);
 		return;
 	}
 	outputText("\n\n", false);
@@ -1197,7 +1197,7 @@ public function paladinModeFollowup():void {
 	outputText("Her eyes light up, the brown orbs becoming two unholy amber flames as she laughs at your completely stunned expression. With a devilish wink and a proclamation of, \"<i>I'm going ghost!</i>\" she fades into intangibility and is swept away by a gust of wind. As you track her wispy path, you set your jaw determinedly. Looks like \"<i>undead</i>\" will be back on your \"<i>vindictive eradication</i>\" list... though, you have to admit, she gave pretty good consensual sex in the missionary position for the sole purpose of procreation. For an abomination.", false);
 	if(model.time.hours < 6 || model.time.hours >= 23) outputText("\n\nYou rage fap and consider going back to bed.", false);
 	player.orgasm();
-	doNext(1);
+	doNext(playerMenu);
 }
 
 

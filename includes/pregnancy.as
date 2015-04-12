@@ -859,33 +859,33 @@ public function updatePregnancy():Boolean {
 		if (player.pregnancyType == PregnancyStore.PREGNANCY_SATYR) {
 			//Stage 1: 
 			if(player.pregnancyIncubation == 150) {
-				outputText("\nYou find that you're feeling quite sluggish these days; you just don't have as much energy as you used to.  You're also putting on weight.\n");
+				outputText("\n<b>You find that you're feeling quite sluggish these days; you just don't have as much energy as you used to.  You're also putting on weight.</b>\n");
 				displayedUpdate = true;
 			}
 			//Stage 2: 
 			if(player.pregnancyIncubation == 125) {
-				outputText("\nYour belly is getting bigger and bigger.  Maybe your recent urges are to blame for this development?\n");
+				outputText("\n<b>Your belly is getting bigger and bigger.  Maybe your recent urges are to blame for this development?</b>\n");
 				displayedUpdate = true;
 			}
 			//Stage 3: 
 			if(player.pregnancyIncubation == 100) {
-				outputText("\nYou can feel the strangest fluttering sensations in your distended belly; <b>it must be a pregnancy.</b>  You should eat more and drink plenty of wine so your baby can grow properly.  Wait, wine...?\n");
+				outputText("\n<b>You can feel the strangest fluttering sensations in your distended belly; it must be a pregnancy.  You should eat more and drink plenty of wine so your baby can grow properly.  Wait, wine...?</b>\n");
 				displayedUpdate = true;
 			}
 			//Stage 4: 
 			if(player.pregnancyIncubation == 75) {
-				outputText("\nSometimes you feel a bump in your pregnant belly.  You wonder if it's your baby complaining about your moving about.\n");
+				outputText("\n<b>Sometimes you feel a bump in your pregnant belly.  You wonder if it's your baby complaining about your moving about.</b>\n");
 				displayedUpdate = true;
 			}
 			//Stage 5: 
 			if(player.pregnancyIncubation == 50) {
-				outputText("\nWith your bloating gut, you are loathe to exert yourself in any meaningful manner; you feel horny and hungry all the time...\n");
+				outputText("\n<b>With your bloating gut, you are loathe to exert yourself in any meaningful manner; you feel horny and hungry all the time...</b>\n");
 				displayedUpdate = true;
 				//temp min lust up +5
 			}
 			//Stage 6: 
 			if(player.pregnancyIncubation == 30) {
-				outputText("\nThe baby you're carrying constantly kicks your belly in demand for food and wine, and you feel sluggish and horny.  You can't wait to birth this little one so you can finally rest for a while.\n");
+				outputText("\n<b>The baby you're carrying constantly kicks your belly in demand for food and wine, and you feel sluggish and horny.  You can't wait to birth this little one so you can finally rest for a while.</b>\n");
 				displayedUpdate = true;
 				//temp min lust up addl +5
 			}
@@ -1102,7 +1102,7 @@ public function updatePregnancy():Boolean {
 				//[balls:
 				else if(player.balls > 0) outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
 				//[cock:
-				else if(player.hasCock()) outputText("  Splashing against the underside of your " + multiCockDescriptLight() + ", the slime leaves a warm, oozy sensation that makes you just want to rub [eachCock] over and over and over again.");
+				else if(player.hasCock()) outputText("  Splashing against the underside of your " + player.multiCockDescriptLight() + ", the slime leaves a warm, oozy sensation that makes you just want to rub [eachCock] over and over and over again.");
 				//genderless: 
 				else outputText("  Your asshole begins twitching, aching for something to push through it over and over again.");
 				outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
@@ -1114,33 +1114,33 @@ public function updatePregnancy():Boolean {
 		if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR) {
 			//Stage 1: 
 			if(player.buttPregnancyIncubation == 150) {
-				outputText("\nYou find that you're feeling quite sluggish these days; you just don't have as much energy as you used to.  You're also putting on weight.\n");
+				outputText("\n<b>You find that you're feeling quite sluggish these days; you just don't have as much energy as you used to.  You're also putting on weight.</b>\n");
 				displayedUpdate = true;
 			}
 			//Stage 2: 
 			if(player.buttPregnancyIncubation == 125) {
-				outputText("\nYour belly is getting bigger and bigger.  Maybe your recent urges are to blame for this development?\n");
+				outputText("\n<b>Your belly is getting bigger and bigger.  Maybe your recent urges are to blame for this development?</b>\n");
 				displayedUpdate = true;
 			}
 			//Stage 3: 
 			if(player.buttPregnancyIncubation == 100) {
-				outputText("\nYou can feel the strangest fluttering sensations in your distended belly; <b>it must be a pregnancy.</b>  You should eat more and drink plenty of wine so your baby can grow properly.  Wait, wine...?\n");
+				outputText("\n<b>You can feel the strangest fluttering sensations in your distended belly; it must be a pregnancy.  You should eat more and drink plenty of wine so your baby can grow properly.  Wait, wine...?</b>\n");
 				displayedUpdate = true;
 			}
 			//Stage 4: 
 			if(player.buttPregnancyIncubation == 75) {
-				outputText("\nSometimes you feel a bump in your pregnant belly.  You wonder if it's your baby complaining about your moving about.\n");
+				outputText("\n<b>Sometimes you feel a bump in your pregnant belly.  You wonder if it's your baby complaining about your moving about.</b>\n");
 				displayedUpdate = true;
 			}
 			//Stage 5: 
 			if(player.buttPregnancyIncubation == 50) {
-				outputText("\nWith your bloating gut, you are loathe to exert yourself in any meaningful manner; you feel horny and hungry all the time...\n");
+				outputText("\n<b>With your bloating gut, you are loathe to exert yourself in any meaningful manner; you feel horny and hungry all the time...</b>\n");
 				displayedUpdate = true;
 				//temp min lust up +5
 			}
 			//Stage 6: 
 			if(player.buttPregnancyIncubation == 30) {
-				outputText("\nThe baby you're carrying constantly kicks your belly in demand for food and wine, and you feel sluggish and horny.  You can't wait to birth this little one so you can finally rest for a while.\n");
+				outputText("\n<b>The baby you're carrying constantly kicks your belly in demand for food and wine, and you feel sluggish and horny.  You can't wait to birth this little one so you can finally rest for a while.</b>\n");
 				displayedUpdate = true;
 				//temp min lust up addl +5
 			}
@@ -1183,7 +1183,7 @@ public function updatePregnancy():Boolean {
 					//FAILSAFE FOR NEW COCKS
 					if(player.normalCocks() == 0 && player.dogCocks() == 0 && player.horseCocks() == 0) outputText(", each inhalation making it bigger, harder, and firmer.  You suck in huge lungfuls of air until your " + cockDescript(0) + " is twitching and dripping.  ", false);
 				}
-				if(player.cockTotal() > 1) outputText("groin.  Your " + multiCockDescriptLight() + " fill and grow with every lungful of the stuff you breathe in.  You suck in great lungfuls of the tainted air, desperate for more, your cocks twitching and dripping with need.  ", false);
+				if(player.cockTotal() > 1) outputText("groin.  Your " + player.multiCockDescriptLight() + " fill and grow with every lungful of the stuff you breathe in.  You suck in great lungfuls of the tainted air, desperate for more, your cocks twitching and dripping with need.  ", false);
 				outputText("You smile knowing you couldn't stop from masturbating if you wanted to.\n", false);
 				dynStats("int", -.5, "lus", 500);
 				displayedUpdate = true;
@@ -1439,7 +1439,7 @@ public function updatePregnancy():Boolean {
 			return true;
 		}
 		else if(player.anemoneCocks() > 0 && player.cor < 25 && flags[kFLAGS.ANEMONE_KID] == 0) {
-			outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The ensuing pain in your labia and " + clitDescript() + " makes you lock up and nearly takes away your consciousness, and with " + multiCockDescript() + " in the way, you can't get any leverage on the pull at all!  The anemone detaches weakly, but writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back toward your " + vaginaDescript(0)+ ".  Searching about weakly with the feelers, it touches along your thigh and searches out the entrance of your pussy.  When the tentacled crown brushes past your lips a venomous heat stirs your crotch and fills you with energy; shocked into sense, you look at the absurd creature.  You raise your arm to slap at it, but something stays your hand.  As if sensing your hesitation, it stands upright and holds itself at attention for inspection.  It would be easy to knock it away... and yet, the unprepossessing little thing looks so proud that you can't quite bring yourself to do so.");
+			outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The ensuing pain in your labia and " + clitDescript() + " makes you lock up and nearly takes away your consciousness, and with " + player.multiCockDescript() + " in the way, you can't get any leverage on the pull at all!  The anemone detaches weakly, but writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back toward your " + vaginaDescript(0)+ ".  Searching about weakly with the feelers, it touches along your thigh and searches out the entrance of your pussy.  When the tentacled crown brushes past your lips a venomous heat stirs your crotch and fills you with energy; shocked into sense, you look at the absurd creature.  You raise your arm to slap at it, but something stays your hand.  As if sensing your hesitation, it stands upright and holds itself at attention for inspection.  It would be easy to knock it away... and yet, the unprepossessing little thing looks so proud that you can't quite bring yourself to do so.");
 			outputText("\n\nYou scoop the diminutive anemone up and look around for somewhere wet to put it.  The stream is too far, the lake doubly so; you'd never make it to either, as sick as you feel from yanking viciously on your clitoris.  Driven to last resorts, you lurch over to the water barrel in your camp and, wrenching the lid off, drop the blue stalk unceremoniously inside.  Exhausted by the shock and pain of the ordeal, you slump down beside the barrel and slip into a doze...");
 			player.cuntChange(20,true,true,false);
 			outputText("\n");
@@ -1454,15 +1454,15 @@ public function updatePregnancy():Boolean {
 			
 			outputText("\n\nBeset by a panic, you watch as the strange thing sets butt-end down on your pubic mound and adheres", false);
 			//[(if cocks)
-			if(player.cockTotal() > 0) outputText(" below your " + multiCockDescriptLight(), false);
+			if(player.cockTotal() > 0) outputText(" below your " + player.multiCockDescriptLight(), false);
 			outputText(". A sharp pinch lances through the nerves in your groin and sends your hands to it reflexively.  This smaller pain, coupled with the adrenaline and dopamine that have finally chased the fog from your head, is enough to pull your thoughts into focus for another attempt to remove your strange, parasitic offspring.  You shift your grip and pull a few more times, but the thing doesn't budge.  The handling of it only serves to make the stalk thicken and become stiff; gradually you notice that you're feeling the sensation of your own pulling not from the skin at the point of attachment but from the stalk itself, and this realization is accompanied by the ring of tentacles opening and pulling back to reveal the crown of a penis!  <b>You have a new anemone-penis!</b>", false);
 			//[(dick slot 1 exists)
-			if(player.cockTotal() > 0) outputText("  The tentacles writhe around, rubbing against your " + multiCockDescriptLight(), false);
+			if(player.cockTotal() > 0) outputText("  The tentacles writhe around, rubbing against your " + player.multiCockDescriptLight(), false);
 			//(doesn't exist)
 			else outputText("  The tentacles curl inwards, rubbing on the head of your new blue pecker", false);
 			player.createCock((4+rand(3)),1.2);
 			player.cocks[player.cockTotal()-1].cockType = CockTypesEnum.ANEMONE;
-			outputText(" and you quickly become fully erect from the aphrodisiac they inject.  Over and over the tentacles caress " + sMultiCockDesc() + " sensually, leaving behind a tingling trail of vibrant pleasure", false);
+			outputText(" and you quickly become fully erect from the aphrodisiac they inject.  Over and over the tentacles caress " + player.sMultiCockDesc() + " sensually, leaving behind a tingling trail of vibrant pleasure", false);
 			//[(if no dick1 and no balls)
 			if(player.totalCocks() == 1 && player.balls == 0) outputText("; you feel a pressure build below the shaft, near your asshole", false);
 			outputText(".  As the venom and the rubbing work you to the edge of climax, your muscles clench and a ", false);
@@ -1474,7 +1474,7 @@ public function updatePregnancy():Boolean {
 			if(player.biggestTitSize() >= 1) outputText(allBreastsDescript() + " and ", false);
 			outputText("stomach", false);
 			//[(dick1 exists)
-			if(player.cockTotal() > 1) outputText(", followed in short order by white squirts from " + sMultiCockDesc() + " remaining", false);
+			if(player.cockTotal() > 1) outputText(", followed in short order by white squirts from " + player.sMultiCockDesc() + " remaining", false);
 			outputText(".  Your " + vaginaDescript(0) + " quivers and pulses as well, adding ", false);
 			if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) outputText("a trickle", false);
 			else if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) outputText("a squirt", false);
@@ -1492,7 +1492,7 @@ public function updatePregnancy():Boolean {
 						
 			//OLD TXToutputText("The anemone writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back into your " + vaginaDescript(0)+ ".  As the tentacled crown brushes past your lips a venomous heat fills your crotch - you feel the thing shift and flatten itself against your insides, then a pinch on your vaginal walls where the little anemone was pressing on them.  This can't be good.\n\n", false);
 
-			outputText("\n\nPush as you might, you can't get it to peek back out even the slightest bit.  What's worse, the heat isn't subsiding, as the tentacles are now lodged inside your pussy!  Prodding and pulling at your " + vaginaDescript(0) + " is only worsening the effect; " + sMultiCockDesc() + " and your clitoris harden as you attempt to retrieve your invader.  Your probes get weaker and weaker as your vagina spasms to each stroke of your insides; each time you touch the creature, the sensation is being transmitted right back to your nerves.  Eventually you push yourself to accidental orgasm; your " + vaginaDescript(0) + " quivers around your fingers and your " + multiCockDescriptLight() + " does the best ejaculation it can manange with hardly any warmup time and no direct stimulation.  Even after the orgasm ends, the tentacles continue to torment your groin.  <b>You are VERY horny with this thing inside you... though you can't reach it, maybe there's a way to crowd it out?</b>\n\n", false);
+			outputText("\n\nPush as you might, you can't get it to peek back out even the slightest bit.  What's worse, the heat isn't subsiding, as the tentacles are now lodged inside your pussy!  Prodding and pulling at your " + vaginaDescript(0) + " is only worsening the effect; " + player.sMultiCockDesc() + " and your clitoris harden as you attempt to retrieve your invader.  Your probes get weaker and weaker as your vagina spasms to each stroke of your insides; each time you touch the creature, the sensation is being transmitted right back to your nerves.  Eventually you push yourself to accidental orgasm; your " + vaginaDescript(0) + " quivers around your fingers and your " + player.multiCockDescriptLight() + " does the best ejaculation it can manange with hardly any warmup time and no direct stimulation.  Even after the orgasm ends, the tentacles continue to torment your groin.  <b>You are VERY horny with this thing inside you... though you can't reach it, maybe there's a way to crowd it out?</b>\n\n", false);
 			//(reduce lust to min, increased minimum lust by 30 until halfway through PC's next pregnancy)]
 			player.orgasm();
 			dynStats("lib", 2, "sen", 5);
@@ -1575,7 +1575,7 @@ public function updatePregnancy():Boolean {
 		if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] < 100) {
 			outputText("\nYou feel a clenching sensation in your belly and something shifts inside.  Your contractions start a few moments later and you realize that it's time for your child to be born.  You cry out mildly in pain and lie down, letting your body start to push the baby out.  Marble doesn't seem to be around right now, so you can do nothing but push.\n\n", false);
 
-			outputText("You push and heave with all your might, little else going through your mind. You somehow register when the head comes out, and soon the shoulders along with the rest of the body follow.  You lean back and pant for a while before feeling a pair of hands grab a hold of you. They slowly and clumsily feel up your body before finding your " + biggestBreastSizeDescript() + " and a mouth quickly closes down on a " + nippleDescript(0) + ".  You sigh softly, and drift off to sleep.", false);
+			outputText("You push and heave with all your might, little else going through your mind. You somehow register when the head comes out, and soon the shoulders along with the rest of the body follow.  You lean back and pant for a while before feeling a pair of hands grab a hold of you. They slowly and clumsily feel up your body before finding your " + player.chestDesc() + " and a mouth quickly closes down on a " + nippleDescript(0) + ".  You sigh softly, and drift off to sleep.", false);
 			player.cuntChange(20,true,true,false);
 			
 			outputText("\n\nEventually you feel a hand on your face, and open your eyes to see Marble looking down at you.  \"<i>Sweetie, are you all right?  Why aren't you pregnant anymore?  Where is our child?</i>\" You stand up and look around.  There is no sign of the baby you were carrying; the child seems to have left after finishing its drink. You never even got to see its face...\n\n", false);

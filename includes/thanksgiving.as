@@ -42,7 +42,7 @@ public function datTurkeyRumpMeeting():void {
 	outputText("\n\n\"<i>G-gobble?</i>\"  she asks quietly, her big blue eyes pleading at you.");
 	
 	//[Shoo her Off] [Let her Approach]
-	simpleChoices("Let Approach",letZeTurkeyApproach,"Shoo Away",shooTurkeyAway,"",0,"",0,"",0);
+	simpleChoices("Let Approach", letZeTurkeyApproach, "Shoo Away", shooTurkeyAway, "", null, "", null, "", null);
 }
 
 //Shoo her Off -McGirt
@@ -55,7 +55,7 @@ public function shooTurkeyAway():void {
 	outputText("\n\nRolling your eyes, you yell at the strange girl until she finally gets the idea and; with a few more sorrowful gobbles, she wobbles off again, looking for someone else to bother.");
 	
 	outputText("\n\nShaking your head, you sit back down and eat.");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Let her Approach
@@ -72,7 +72,7 @@ public function letZeTurkeyApproach():void {
 	outputText("\n\n\"<i>Gobble?</i>\"  she asks again, her hand drifting onto your leg.  You feel [eachCock] involuntarily stiffening as her slender, alabaster fingers slide along your thigh.  \"<i>Gobble,</i>\" she repeats, brushing your stiffening prick through your [armor].  Oh, is that what she wants?  Well then....");
 	
 	//(Baste Her) (That's Enough)
-	simpleChoices("Baste Her",basteThatTurkeyBooty,"No Thanks",noThanksTurkeyGal,"",0,"",0,"",0);
+	simpleChoices("Baste Her", basteThatTurkeyBooty, "No Thanks", noThanksTurkeyGal, "", null, "", null, "", null);
 }
 
 public function noThanksTurkeyGal():void {
@@ -199,7 +199,7 @@ public function femaleLetZeTurkeyGalApproach():void {
 	
 	outputText("\n\nIt looks like you've found yourself a dinner guest...");
 	//[Appetiser] [Main Course] [Dessert]
-	simpleChoices("Appetizer",turkeyAppetizer,"Main Course",femaleAndTurkeyMainCourse,"Dessert",haveTurkeyGirlDesertInYourCunt,"",0,"",0);
+	simpleChoices("Appetizer", turkeyAppetizer, "Main Course", femaleAndTurkeyMainCourse, "Dessert", haveTurkeyGirlDesertInYourCunt, "", null, "", null);
 }
 
 //Appetiser:
@@ -339,7 +339,7 @@ public function helloAgain():void {
 	
 	outputText("\n\n\"<i>Gobble?</i>\" Gobbles asks cheerily, big blue eyes staring intently at your crotch.");
 	
-	outputText("\n\n\"<i>Gobble,</i>\" you answer, pushing her head down toward your [cock].  She giggles giddily as you free your prick, already hard enough to bop her on the nose as she buries her face in your groin.  The turkey takes a deep breath, wallowing in the potent musk of your " + multiCockDescriptLight() + ", venturing to lick along the side of your shaft.  You let out a soft moan, stroking her auburn locks as the turkey happily suckles on your prick, taking the head ");
+	outputText("\n\n\"<i>Gobble,</i>\" you answer, pushing her head down toward your [cock].  She giggles giddily as you free your prick, already hard enough to bop her on the nose as she buries her face in your groin.  The turkey takes a deep breath, wallowing in the potent musk of your " + player.multiCockDescriptLight() + ", venturing to lick along the side of your shaft.  You let out a soft moan, stroking her auburn locks as the turkey happily suckles on your prick, taking the head ");
 	if(player.cockArea(0) <= 60) outputText("and down to the base");
 	else outputText("and swallowing your shaft until her throat is bulging with your massive manhood");
 	outputText(".  She bobs up and down your length, hefting up her huge rack when she's at the peak to rub your sensitive underside, trying to titfuck you but just too damn big to get them into the action.  You suppose you'll have to take care of that...");
@@ -393,22 +393,22 @@ public function seasonHerDatTurkeyBitch():void {
 	clearOutput();
 	outputText("You plant your hands on the busty bird's broad, breeder's hips, spreading her cheeks to get a good look at her slit.  Still agape after taking your cock earlier, she's liberally leaking fem-slime onto your face, eagerly awaiting your lusty touch.  You venture your tongue out to taste her, and instantly draw back even as she flutters excitedly - does she...  of course she tastes like turkey.  What else? But it's a damn fine turkey, oh so sweet and juicy; you don't hesitate to dig in, tongue probing deep into the giddy fowel's slit.  She wiggles her tremendous tush happily as you spread her nethers wide, her vibrant brown plumage standing straight up, as erect as your own [cock] as Gobbles' tits bounce and jiggle around it.  Tongueing your tasty turkey, you slip a few fingers up between her luscious thighs, brushing the tender flesh just enough to make her arch her back, dragging her tits right along the length of your shaft to bury the crown in the jiggly bottom of her rack.  You trace your fingers higher, brushing the silky lips of her sodden box and circling up to the prominent little bud of her clit.");
 	
-	outputText("\n\n\"<i>GOBBLE!</i>\" she cries as your digits brush her sensitive point, arching her back and squirting gravy onto your crotch, lactating from pleasure alone.  You shudder as the warm, creamy gravy slathers onto your " + multiCockDescriptLight() + " pinned between her tits, her pleasured motions getting her boobs bouncing like a regular titfucking.  At your touch, her quivering quim lets loose a torrent of excited fem-slime, smearing your face in turkey-tasting juices faster than your hard-working tongue can lap it up.  She's a fine tasting turkey if ever you saw one, her sweet juices practically compelling you to eat her out, pushing your tongue as deep into her juicy slit as you can to harvest her delicious bounty.");
+	outputText("\n\n\"<i>GOBBLE!</i>\" she cries as your digits brush her sensitive point, arching her back and squirting gravy onto your crotch, lactating from pleasure alone.  You shudder as the warm, creamy gravy slathers onto your " + player.multiCockDescriptLight() + " pinned between her tits, her pleasured motions getting her boobs bouncing like a regular titfucking.  At your touch, her quivering quim lets loose a torrent of excited fem-slime, smearing your face in turkey-tasting juices faster than your hard-working tongue can lap it up.  She's a fine tasting turkey if ever you saw one, her sweet juices practically compelling you to eat her out, pushing your tongue as deep into her juicy slit as you can to harvest her delicious bounty.");
 	
 	outputText("\n\nBut what's a turkey without a little seasoning, hmm? Sweet as she is, and as eager to gobble your cock as can be, things could still turn up a notch.  Still servicing her box, you reach an arm out to your discarded pack, searching through it until you feel the familiar shape of ");
 	if(player.hasKeyItem("Deluxe Dildo") >= 0) outputText("Tamani's dildo");
 	else if(player.hasItem(consumables.L_DRAFT)) outputText("a bottle of Lust draft");
 	else if(player.hasItem(consumables.F_DRAFT)) outputText("a bottle of Fuck draft");
 	else outputText("A FUCKIN ERROR");
-	outputText(".  You pull it out and squeeze a copious load of the bubblegum pink aphrodisiac out into your hand.  The second it touches your skin, you feel a palpable warmth spreading out through your nerves, skin burning with sensitivity as the roiling, viscous substance pools in your cupped hand.  You can't help but shudder as the pink veno's effect reaches out through your body, setting your whole person to tingling - and especially your " + multiCockDescriptLight() + ", which rises to an almost painful hardness.");
+	outputText(".  You pull it out and squeeze a copious load of the bubblegum pink aphrodisiac out into your hand.  The second it touches your skin, you feel a palpable warmth spreading out through your nerves, skin burning with sensitivity as the roiling, viscous substance pools in your cupped hand.  You can't help but shudder as the pink veno's effect reaches out through your body, setting your whole person to tingling - and especially your " + player.multiCockDescriptLight() + ", which rises to an almost painful hardness.");
 	
 	outputText("\n\n\"<i>Gobble!</i>\" Gobbles giddily cries, sucking up the head of your turgid [cock] when its crown peeks out from between her teats, clearly pleased with your oral attentions.  She's got no idea what's coming! You slip one hand out of her cunny, and push another in, fingers sliding easily into her sodden hole.  \"<i>G-gobble!?</i>\" she whines as your lust-coated digits probe her, swirling around her quivering walls, making sure to spread the pink venom it out nice and even, coating every inch of her channel.");
 	
-	outputText("\n\nInstantly, you can see her pale flesh reddening, burning with desire.  Her fem-slime practically pours out of her over-excited pussy as her breath quickens, chest heaving her tits up and around your " + multiCockDescriptLight() + ".  Perfect! You pull your hand back out of her love-tunnel, slapping both her butt cheeks to wipe off the last of the lusty cream on her bare derriere, which flushes as red as her hair.  \"<i>Gobble!</i>\" she screams as you swat her ass, slamming her big hips down on your face, trying to get you to eat her needy box again even as she's panting and twitching, playing with her tits and your cock with shameless abandon.");
+	outputText("\n\nInstantly, you can see her pale flesh reddening, burning with desire.  Her fem-slime practically pours out of her over-excited pussy as her breath quickens, chest heaving her tits up and around your " + player.multiCockDescriptLight() + ".  Perfect! You pull your hand back out of her love-tunnel, slapping both her butt cheeks to wipe off the last of the lusty cream on her bare derriere, which flushes as red as her hair.  \"<i>Gobble!</i>\" she screams as you swat her ass, slamming her big hips down on your face, trying to get you to eat her needy box again even as she's panting and twitching, playing with her tits and your cock with shameless abandon.");
 	
 	outputText("\n\n\"<i>Gobbles, gobble,</i>\" you command, poking a finger into her drooling slit.");
 	
-	outputText("\n\n\"<i>Gobble!</i>\" she answers, rolling off of you and hiking her legs up, knees sinking into her bust to show off her slit for you, so eager and inviting.  You rise to your [feet], grabbing the lusty fowl behind her hooked knees and pulling her in to line up with your " + multiCockDescriptLight() + ".  \"<i>G-gobble!</i>\" she begs, fluttering her plumage against your [legs], staring up at you imploringly as her skin further reddens, so hot with desperate lust you can practically feel the sexual hunger radiating off of her.  Time to finish this turkey off in style!");
+	outputText("\n\n\"<i>Gobble!</i>\" she answers, rolling off of you and hiking her legs up, knees sinking into her bust to show off her slit for you, so eager and inviting.  You rise to your [feet], grabbing the lusty fowl behind her hooked knees and pulling her in to line up with your " + player.multiCockDescriptLight() + ".  \"<i>G-gobble!</i>\" she begs, fluttering her plumage against your [legs], staring up at you imploringly as her skin further reddens, so hot with desperate lust you can practically feel the sexual hunger radiating off of her.  Time to finish this turkey off in style!");
 	dynStats("lus=", 100, "resisted", false);
 	menu();
 	addButton(0,"Next",turkeyDesertBitches);
@@ -417,7 +417,7 @@ public function seasonHerDatTurkeyBitch():void {
 //Dessert
 public function turkeyDesertBitches():void {
 	clearOutput();
-	outputText("\"<i>G-gobble!?</i>\" Gobbles whines at your moment of hesitation, wiggling her upraised botty at you enticingly, hot flesh jiggling just close enough to brush your " + multiCockDescriptLight() + " with her lust-coated cheeks.");
+	outputText("\"<i>G-gobble!?</i>\" Gobbles whines at your moment of hesitation, wiggling her upraised botty at you enticingly, hot flesh jiggling just close enough to brush your " + player.multiCockDescriptLight() + " with her lust-coated cheeks.");
 	
 	outputText("\n\n\"<i>Fuck!</i>\" you groan as the venom drips off your [cock], a small droplet vanishing into your dilated urethra.  Your heart skips a beat as the lusty cream works its magic, pounding through your sex.  Well, that backfired! You clutch at your [chest]");
 	if(player.biggestTitSize() > 1) outputText(", cupping a tit");
@@ -430,7 +430,7 @@ public function turkeyDesertBitches():void {
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(", drenching your [hips] and [legs] in creamy girl-spunk, tinged pink by the poison you fist-fucked up her cunt.");
 	
-	outputText("\n\nThe squawking turkey seems to be depthless, easily swallowing up every inch of your " + multiCockDescriptLight() + " until ");
+	outputText("\n\nThe squawking turkey seems to be depthless, easily swallowing up every inch of your " + player.multiCockDescriptLight() + " until ");
 	if(player.cockArea(0) >= 50) 
 	{
 		outputText("her stomach is bulging obscenely with the sheer volume of cockflesh rammed up her cunt");
@@ -461,7 +461,7 @@ public function turkeyDesertBitches():void {
 	if(player.cockTotal() > 1) outputText("and ass ");
 	outputText("squirm around your cock");
 	if(player.cockTotal() > 1) outputText("s");
-	outputText(", wringing the cum from you with powerful spastic contraction.  Her arms pull you down into the valley of her gravy-laden bosom, squeezing your face between her massive mounds as she cums, drawing the spunk right out of you.  With a potent, feral roar, you cum, " + multiCockDescriptLight() + " blasting its salty load deep into Gobbles' womb");
+	outputText(", wringing the cum from you with powerful spastic contraction.  Her arms pull you down into the valley of her gravy-laden bosom, squeezing your face between her massive mounds as she cums, drawing the spunk right out of you.  With a potent, feral roar, you cum, " + player.multiCockDescriptLight() + " blasting its salty load deep into Gobbles' womb");
 	if(player.cockTotal() > 1) outputText(" and bowels");
 	outputText("; her back arches, teats wobbling around your head as she takes your cum, squawking and gobbling gaily as more and more of your virile spunk pours into her, mixing with her own fem-cum and the remnants of the lusty draft your fucked into her.");
 	

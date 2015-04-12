@@ -17,10 +17,51 @@ package classes.Scenes.Dungeons.Factory
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(game.endLustLoss);
 			} else {
-				game.eventParser(11046);
+				game.omnibusLossRape();
 			}
 		}
-
+		
+		private function lustAura():void {
+			outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.");
+			if (findStatusAffect(StatusAffects.LustAura) >= 0) {
+				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.");
+				game.dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)));
+			}
+			else {
+				createStatusAffect(StatusAffects.LustAura, 0, 0, 0, 0);
+			}
+			game.combatRoundOver();
+		}
+		
+		private function milkAttack():void {
+			if (rand(2) == 0)
+				outputText("The demoness grips her sizable breasts and squeezes, spraying milk at you.\n");
+			else outputText("Your foe curls up to pinch her nipples, tugging hard and squirting milk towards you.\n");
+			if ((player.spe > 50 && rand(4) == 0) || (player.findPerk(PerkLib.Evade) >= 0 && rand(3) == 0) || (player.findPerk(PerkLib.Misdirection) >= 0 && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
+				outputText("You sidestep the gushing fluids.");
+			}
+			//You didn't dodge
+			else {
+				if (rand(2) == 0) {
+					outputText("The milk splatters across your face and chest, soaking you with demonic cream.  Some managed to get into your mouth, and you swallow without thinking.  It makes you tingle with warmth.  ");
+				}
+				else {
+					outputText("The milk splashes into your " + player.armorName + ", soaking you effectively.  ");
+					if (player.cocks.length > 0) {
+						outputText("Your " + cockDescript(0) + " gets hard as the milk lubricates and stimulates it.  ");
+						game.dynStats("lus", 5);
+					}
+					if (player.vaginas.length > 0) {
+						outputText("You rub your thighs together as the milk slides between your pussy lips, stimulating you far more than it should.  ");
+						game.dynStats("lus", 5);
+					}
+				}
+				game.dynStats("lus", 7 + player.sens / 20);
+				if (player.biggestLactation() > 1) outputText("Milk dribbles from your " + allBreastsDescript() + " in sympathy.");
+			}
+			game.combatRoundOver();
+		}
+		
 		public function OmnibusOverseer()
 		{
 			this.a = "the ";
@@ -60,8 +101,8 @@ package classes.Scenes.Dungeons.Factory
 			this.level = 8;
 			this.gems = rand(25)+10;
 			this.drop = new WeightedDrop(null, 1);
-			this.special1 = 11043;
-			this.special2 = 11044;
+			this.special1 = lustAura;
+			this.special2 = milkAttack;
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.tailType = TAIL_TYPE_DEMONIC;

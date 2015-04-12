@@ -582,7 +582,7 @@ package classes.Scenes.Explore {
 				outputText("The Succubus stops, turns and points to you in derision.  \"<i>And YOU!  You no-cock, no-cunt having pissant!  Take your ass back to the lab before they find out you escaped!!!!!</i>\"\n\n");
 				outputText("The Succubus resumes her stormy exit.  You look at the bottle of Cerulean Potion and wonder if it REALLY had some psychotropics in it.  What the hell just happened?!");
 				flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] = 1;
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			if (player.gender == 1)
@@ -653,7 +653,7 @@ package classes.Scenes.Explore {
 				outputText("She gives a giggle and disappears before your eyes.  At that moment the fatigue from the massive fucking you received catches up with you and you pass out in a slump.");
 				dynStats("str", .5,"lus", 4);
 			}
-			inventory.takeItem(consumables.CERUL_P, camp.campMenu);
+			inventory.takeItem(consumables.CERUL_P, playerMenu);
 		}
 				
 		private function nightSuccubiRepeat():void {
@@ -709,7 +709,7 @@ package classes.Scenes.Explore {
 		
 					outputText("\"<i><b>Problem?</b></i>\"", false);
 				}
-				doNext(camp.campMenu);
+				doNext(playerMenu);
 				return;
 			}
 			player.orgasm();
@@ -769,7 +769,7 @@ package classes.Scenes.Explore {
 					outputText("  As the reality soaks in, you feel a sharp pain in your stomach and your cock. You NEED to feed. Cum, milk, it doesn't matter. Likewise, your dick is hard and you need to cum. Despite your need, you cannot bring yourself to masturbate. You want ANOTHER'S attention.\n\n", false);
 		
 					outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.", false);
-					getGame().eventParser(5035);
+					getGame().gameOver();
 					return;
 				}
 				else {
@@ -793,7 +793,7 @@ package classes.Scenes.Explore {
 			outputText("\n", false);
 			player.orgasm();
 			dynStats("str", rand(2),"tou", rand(2), "spe", rand(2), "int", rand(2), "cor", 1);
-			inventory.takeItem(consumables.CERUL_P, camp.campMenu);
+			inventory.takeItem(consumables.CERUL_P, playerMenu);
 		}
 	}
 }

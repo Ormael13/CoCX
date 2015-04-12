@@ -325,10 +325,10 @@ public function benoitsBuyMenu():void {
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));
-	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
-			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
-			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
-			"",0,"Back",benoitIntro);
+	simpleChoices(flags[kFLAGS.BENOIT_1], createCallBackFunction(benoitTransactBuy, 1),
+			flags[kFLAGS.BENOIT_2], createCallBackFunction(benoitTransactBuy, 2),
+			flags[kFLAGS.BENOIT_3], createCallBackFunction(benoitTransactBuy, 3),
+			"", null, "Back", benoitIntro);
 }
 
 private function benoitSellMenu():void {
@@ -723,7 +723,7 @@ private function eggySuggest():void {
 		
 			outputText("\n\nOnce again, you carefully inch your blind charge to a clear cranny and push him against a wooden wall, standing back to slowly peel off your [armor].  You grin as you ostentatiously drop each piece onto the packed earth, allowing him to guess what it is by the sound it makes.  His breathing comes heavier as your undergarments make a feathery sound as they fall.  As you take his hands and lay them upon your naked skin, you think about how you want to go about this.");
 		}
-		simpleChoices("Let Him",repeatSexWithBenoitLetHim,"Take Charge",repeatBenoitFuckTakeCharge,"",0,"",0,"",0);
+		simpleChoices("Let Him", repeatSexWithBenoitLetHim, "Take Charge", repeatBenoitFuckTakeCharge, "", null, "", null, "", null);
 		return;
 	}
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
@@ -828,7 +828,7 @@ private function eggySuggest():void {
 	player.orgasm();
 	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
-		simpleChoices("Take It",takeBenoitsContraceptives,"",0,"",0,"",0,"Leave",dontTakeEggtraceptives);
+		simpleChoices("Take It", takeBenoitsContraceptives, "", null, "", null, "", null, "Leave", dontTakeEggtraceptives);
 	}
 	else {
 		outputText("  I cannot give you babies unless you 'ave eggs.  I guess I should think a bit more before I go digging for things...</i>\"");

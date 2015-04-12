@@ -35,6 +35,7 @@ public function silly():Boolean {
 
 }
 
+/* Replaced by Utils.formatStringArray, which does almost the same thing in one function
 public function clearList():void {
 	list = [];
 }
@@ -59,7 +60,7 @@ public function outputList():String {
 	list = [];
 	return stuff;        
 }
-
+*/
 
 public function HPChange(changeNum:Number, display:Boolean):void
 {
@@ -207,13 +208,13 @@ public function displayPerks(e:MouseEvent = null):void {
 		outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point", false);
 		if(player.perkPoints > 1) outputText("s", false);
 		outputText(" to spend.</b>", false);
-		addButton(1,"Perk Up",eventParser,116);
+		addButton(1, "Perk Up", perkBuyMenu);
 	}
 	if(player.findPerk(PerkLib.DoubleAttack) >= 0) {
 		outputText("\n<b>You can adjust your double attack settings.</b>");
 		addButton(2,"Dbl Options",doubleAttackOptions);
 	}
-	addButton(0,"Next",eventParser,1);
+	addButton(0, "Next", playerMenu);
 }
 
 public function doubleAttackOptions():void {
@@ -241,7 +242,7 @@ public function doubleAttackOptions():void {
 		addButton(1,"Dynamic",doubleAttackDynamic);
 	}
 	var e:MouseEvent;
-	addButton(4,"Back",displayPerks,e);
+	addButton(4, "Back", displayPerks);
 }
 
 public function doubleAttackForce():void {
@@ -258,73 +259,119 @@ public function doubleAttackOff():void {
 }
 
 public function levelUpGo(e:MouseEvent = null):void {
+	clearOutput();
 	hideMenus();
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	//Level up
-	if(player.XP >= (player.level) * 100) {
+	if (player.XP >= (player.level) * 100) {
 		player.level++;
 		player.perkPoints++;
-		outputText("<b>You are now level " + player.level + "!</b>\n\nYou may now apply +5 to one attribute.  Which will you choose?", true);
-		player.XP -= (player.level-1) * 100;
-		simpleChoices("Strength", 44, "Toughness", 45, "Speed", 47, "Intelligence", 46, "", 0);                
+		outputText("<b>You are now level " + player.level + "!</b>\n\nYou may now apply +5 to one attribute.  Which will you choose?");
+		player.XP -= (player.level - 1) * 100;
+		menu();
+		addButton(0, "Strength", levelUpStatStrength);
+		addButton(1, "Toughness", levelUpStatToughness);
+		addButton(2, "Speed", levelUpStatSpeed);
+		addButton(3, "Intelligence", levelUpStatIntelligence);
 	}
 	//Spend perk points
-	else if(player.perkPoints > 0) {
+	else if (player.perkPoints > 0) {
 		perkBuyMenu();
 	}
 	else {
-		outputText("<b>ERROR.  LEVEL UP PUSHED WHEN PC CANNOT LEVEL OR GAIN PERKS.  PLEASE REPORT THE STEPS TO REPRODUCE THIS BUG TO FENOXO@GMAIL.COM OR THE FENOXO.COM BUG REPORT FORUM.</b>", true);
-		doNext(1);
+		outputText("<b>ERROR.  LEVEL UP PUSHED WHEN PC CANNOT LEVEL OR GAIN PERKS.  PLEASE REPORT THE STEPS TO REPRODUCE THIS BUG TO FENOXO@GMAIL.COM OR THE FENOXO.COM BUG REPORT FORUM.</b>");
+		doNext(playerMenu);
 	}
-	/*OLD LEVEL UP CODE
-	player.level++;
-	levelText2.visible = false;
-	levelBG.visible = false;
-	dataText.visible = false;
-	dataBG.visible = false;
-	perksText.visible = false;
-	perksBG.visible = false;
-	appearanceText.visible = false;
-	appearanceBG.visible = false;
-	statsBG.visible = false;
-	statsText.visible = false;
-	outputText("<b>You are now level " + player.level + "!</b>\n\nYou may now apply +5 to one attribute.  Which will you choose?", true);
-	player.XP -= (player.level-1) * 100;
-	simpleChoices("Strength", 44, "Toughness", 45, "Speed", 47, "Intelligence", 46, "", 0);
-	*/
 }
 
-public function perkBuyMenu():void {
-	outputText("", true);
-	
+private function levelUpStatStrength():void {
+	dynStats("str", 5); //Gain +5 Str due to level
+	clearOutput();
+	outputText("Your muscles feel significantly stronger from your time adventuring.");
+	doNext(perkBuyMenu);
+}
+
+private function levelUpStatToughness():void {
+	dynStats("tou", 5); //Gain +5 Toughness due to level
+	trace("HP: " + player.HP + " MAX HP: " + maxHP());
+	statScreenRefresh();
+	outputText("You feel tougher from all the fights you have endured.");
+	doNext(perkBuyMenu);
+}
+
+private function levelUpStatSpeed():void {
+	dynStats("spe", 5); //Gain +5 speed due to level
+	clearOutput();
+	outputText("Your time in combat has driven you to move faster.");
+	doNext(perkBuyMenu);
+}
+
+private function levelUpStatIntelligence():void {
+	dynStats("int", 5); //Gain +5 Intelligence due to level
+	clearOutput();
+	outputText("Your time spent fighting the creatures of this realm has sharpened your wit.");
+	doNext(perkBuyMenu);
+}
+
+private function perkBuyMenu():void {
+	clearOutput();
 	var perkList:Array = buildPerkList();
 	
-	if(perkList.length == 0) {
-		outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point", false);
-		if(player.perkPoints > 1) outputText("s", false);
-		outputText(".", false);
-		doNext(1);
+	if (perkList.length == 0) {
+		outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
+		if(player.perkPoints > 1) outputText("s");
+		outputText(".");
+		doNext(playerMenu);
 		return;
 	}
-	if (testingBlockExiting){
-		tempPerk = perkList[rand(perkList.length)].perk;
-		doNext(114);
-	} else {
-		outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
+	if (testingBlockExiting) {
+		menu();
+		addButton(0, "Next", perkSelect, perkList[rand(perkList.length)].perk);
+	}
+	else {
+		outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n");
 		mainView.aCb.x = 210;
-		mainView.aCb.y = 108;
+		mainView.aCb.y = 112;
 		
-		//mainView.aCb.visible = true;
-		if (mainView.aCb.parent == null)
-		{
+		if (mainView.aCb.parent == null) {
 			mainView.addChild(mainView.aCb);
 			mainView.aCb.visible = true;
 		}
 		
 		mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
-		simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
+		menu();
+		addButton(1, "Skip", perkSkip);
 	}
 }
+
+private function perkSelect(selected:PerkClass):void {
+	stage.focus = null;
+	if (mainView.aCb.parent != null) {
+		mainView.removeChild(mainView.aCb);
+		applyPerk(selected);
+	}
+}
+
+private function perkSkip():void {
+	stage.focus = null;
+	if (mainView.aCb.parent != null) {
+		mainView.removeChild(mainView.aCb);
+		playerMenu();
+	}
+}
+
+private function changeHandler(event:Event):void {
+ 	//Store perk name for later addition
+	clearOutput();
+ 	var selected:PerkClass = ComboBox(event.target).selectedItem.perk;
+	mainView.aCb.move(210, 85);
+	outputText("You have selected the following perk:\n\n");
+	outputText("<b>" + selected.perkName + ":</b> " + selected.perkLongDesc + "\n\nIf you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.");
+	menu();
+	addButton(0, "Okay", perkSelect, selected);
+	addButton(1, "Skip", perkSkip);
+}
+
 public function buildPerkList():Array {
 	var perkList:Array = [];
 	function _add(p:PerkClass):void{
@@ -506,17 +553,18 @@ public function buildPerkList():Array {
 }
 
 public function applyPerk(perk:PerkClass):void {
+	clearOutput();
 	player.perkPoints--;
 	//Apply perk here.
-	outputText("<b>" + perk.perkName + "</b> gained!", true);
-	player.createPerk(perk.ptype,perk.value1,perk.value2,perk.value3,perk.value4);
+	outputText("<b>" + perk.perkName + "</b> gained!");
+	player.createPerk(perk.ptype, perk.value1, perk.value2, perk.value3, perk.value4);
 	if (perk.ptype == PerkLib.StrongBack2) player.itemSlot5.unlocked = true;
 	if (perk.ptype == PerkLib.StrongBack) player.itemSlot4.unlocked = true;
 	if (perk.ptype == PerkLib.Tank2) {
 		HPChange(player.tou, false);
 		statScreenRefresh();
 	}
-	doNext(1);
+	doNext(playerMenu);
 }
 
 public function buttonText(buttonName:String):String {
@@ -854,9 +902,9 @@ public function createCallBackFunction(func:Function, arg:*):Function
 	}
 	if( arg == -9000 || arg == null )
 	{
-		if (func == eventParser){
+/*		if (func == eventParser){
 			CoC_Settings.error("createCallBackFunction(eventParser,"+arg+")");
-		}
+		} */
 		return function ():*
 		{ 
 			if (CoC_Settings.haltOnErrors) 
@@ -888,15 +936,15 @@ public function createCallBackFunction2(func:Function,...args):Function
 
 
 public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void {
-	if (func1==null) return;
-	var callback :Function,
-	toolTipText :String;
-
+	if (func1 == null) return;
+	var callback: Function;
+	var toolTipText: String;
+/* Let the mainView decide if index is valid
 	if(pos > 9) {
 		trace("INVALID BUTTON");
 		return;
 	}
-
+*/
 	callback = createCallBackFunction(func1, arg1);
 	
 
@@ -1008,18 +1056,29 @@ public function menu(text1:String = "", func1:Function = null, arg1:Number = -90
 }
 */
 
-public function choices(text1:String, butt1:*, 
-						text2:String, butt2:*, 
-						text3:String, butt3:*, 
-						text4:String, butt4:*, 
-						text5:String, butt5:*, 
-						text6:String, butt6:*, 
-						text7:String, butt7:*, 
-						text8:String, butt8:*, 
-						text9:String, butt9:*, 
-						text0:String, butt0:*):void 
-{
-
+public function choices(text1:String, butt1:Function,
+						text2:String, butt2:Function,
+						text3:String, butt3:Function,
+						text4:String, butt4:Function,
+						text5:String, butt5:Function,
+						text6:String, butt6:Function,
+						text7:String, butt7:Function,
+						text8:String, butt8:Function,
+						text9:String, butt9:Function,
+						text0:String, butt0:Function):void { //New typesafe version
+							
+	menu();	
+	addButton(0, text1, butt1);
+	addButton(1, text2, butt2);
+	addButton(2, text3, butt3);
+	addButton(3, text4, butt4);
+	addButton(4, text5, butt5);
+	addButton(5, text6, butt6);
+	addButton(6, text7, butt7);
+	addButton(7, text8, butt8);
+	addButton(8, text9, butt9);
+	addButton(9, text0, butt0);
+/*
 	var callback :Function;
 	var toolTipText :String;
 
@@ -1077,6 +1136,7 @@ public function choices(text1:String, butt1:*,
 	// args = new Array();
 	//mainView.setOutputText( currentText );
 	flushOutputTextToGUI();
+*/
 }
 
 /****
@@ -1202,15 +1262,14 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 }
 
 // simpleChoices and doYesNo are convenience functions. They shouldn't re-implement code from choices()
-public function simpleChoices(text1:String, butt1:*, 
-						text2:String, butt2:*, 
-						text3:String, butt3:*, 
-						text4:String, butt4:*, 
-						text5:String, butt5:*):void 
-{
+public function simpleChoices(text1:String, butt1:Function, 
+						text2:String, butt2:Function, 
+						text3:String, butt3:Function, 
+						text4:String, butt4:Function, 
+						text5:String, butt5:Function):void { //New typesafe version
 
 	//trace("SimpleChoices");
-	choices(text1,butt1,
+/*	choices(text1,butt1,
 			text2,butt2,
 			text3,butt3,
 			text4,butt4,
@@ -1219,10 +1278,20 @@ public function simpleChoices(text1:String, butt1:*,
 			"",0,
 			"",0,
 			"",0,
-			"",0);
+			"",0);*/
+	menu();
+	addButton(0, text1, butt1);
+	addButton(1, text2, butt2);
+	addButton(2, text3, butt3);
+	addButton(3, text4, butt4);
+	addButton(4, text5, butt5);
 }
 
-public function doYesNo(eventYes:*, eventNo:*):void {
+public function doYesNo(eventYes:Function, eventNo:Function):void { //New typesafe version
+	menu();
+	addButton(0, "Yes", eventYes);
+	addButton(1, "No", eventNo);
+/*
 	//Make buttons 1-2 visible and hide the rest.
 
 	//trace("doYesNo");
@@ -1238,20 +1307,23 @@ public function doYesNo(eventYes:*, eventNo:*):void {
 			"",0);
 
 }
+*/
+}
 
-
-
-public function doNext(eventNo:*):void {
+public function doNext(event:Function):void { //Now typesafe
 	//Prevent new events in combat from automatically overwriting a game over. 
-	if(mainView.getButtonText( 0 ).indexOf("Game Over") != -1) {
+	if (mainView.getButtonText(0).indexOf("Game Over") != -1) {
 		trace("Do next setup cancelled by game over");
 		return;
 	}
 	
 	//trace("DoNext have item:", eventNo);
-	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
+	//choices("Next", event, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
+	menu();
+	addButton(0, "Next", event);
 }
 
+/* Was never called
 public function doNextClear(eventNo:*):void 
 {
 	outputText("", true, true);
@@ -1259,6 +1331,7 @@ public function doNextClear(eventNo:*):void
 	//trace("DoNext have item:", eventNo);
 	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 }
+*/
 
 public function invertGo():void{ 
 	mainView.invert();
@@ -1713,7 +1786,7 @@ public function displayStats(e:MouseEvent = null):void
 		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects, false);
 	// End Ongoing Stat Effects
 	
-	doNext(1);
+	doNext(playerMenu);
 }
 
 public function lustPercent():Number {
@@ -1798,7 +1871,7 @@ public function testDynStatsEvent():void {
 	dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25,"lust/",2);
 	outputText("Mod: 0 1 +2 -3 *2 =25 /2\n");
 	outputText("New: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 /**

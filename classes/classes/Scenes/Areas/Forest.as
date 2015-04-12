@@ -63,7 +63,7 @@ package classes.Scenes.Areas
 			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 5 == 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
 				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.", true);
 				outputText("\n\n<b>You've discovered the location of Zetaz's lair!</b>", false);
-				simpleChoices("Enter", 11076, "", 0, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
+				simpleChoices("Enter", kGAMECLASS.enterZetazsLair, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ]++;
 				return;
 			}
@@ -105,7 +105,7 @@ package classes.Scenes.Areas
 					return;
 				}
 				else {
-					eventParser(tentacleBeastScene.encounter);
+					tentacleBeastScene.encounter();
 					return;
 				}
 			}
@@ -279,11 +279,11 @@ package classes.Scenes.Areas
 					outputText("\n\nJojo sighs sadly, \"<i>Enough of my woes.  You are very corrupted.  If you cannot be sufficiently purified you WILL become one of them in time.  Will you let me help you?", false);
 					if (player.gender > 0) {
 						trace("Gender != 0");
-						simpleChoices("Accept", getGame().jojoScene.meditateInForest, "Rape Him", getGame().jojoScene.jojoRape, "BWUH?", 0, "Decline", camp.returnToCampUseOneHour, "", 0);
+						simpleChoices("Accept", getGame().jojoScene.meditateInForest, "Rape Him", getGame().jojoScene.jojoRape, "BWUH?", null, "Decline", camp.returnToCampUseOneHour, "", null);
 					}
 					else {
 						trace("Gender == 0");
-						simpleChoices("Accept", getGame().jojoScene.meditateInForest, "Rape Him", 0, "BWUH?", 0, "Decline", camp.returnToCampUseOneHour, "", 0);
+						simpleChoices("Accept", getGame().jojoScene.meditateInForest, "Rape Him", null, "BWUH?", null, "Decline", camp.returnToCampUseOneHour, "", null);
 					}
 					return;
 				}
@@ -292,14 +292,14 @@ package classes.Scenes.Areas
 						kGAMECLASS.jojoScene.jojoSprite();
 						outputText("As you approach the serene monk, you see his nose twitch, disturbing his meditation.\n\n", true);
 						outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body.</i>\", Jojo says flatly. \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may leave lasting impressions upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
-						if (player.gender > 0) simpleChoices("Purge", getGame().jojoScene.wormRemoval, "Meditate", getGame().jojoScene.meditateInForest, "Rape", getGame().jojoScene.jojoRape, "", 0, "Leave", camp.returnToCampUseOneHour);
-						else simpleChoices("Purge", getGame().jojoScene.wormRemoval, "Meditate", getGame().jojoScene.meditateInForest, "Rape", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
+						if (player.gender > 0) simpleChoices("Purge", getGame().jojoScene.wormRemoval, "Meditate", getGame().jojoScene.meditateInForest, "Rape", getGame().jojoScene.jojoRape, "", null, "Leave", camp.returnToCampUseOneHour);
+						else simpleChoices("Purge", getGame().jojoScene.wormRemoval, "Meditate", getGame().jojoScene.meditateInForest, "Rape", null, "", null, "Leave", camp.returnToCampUseOneHour);
 						return;
 					}
 					kGAMECLASS.jojoScene.jojoSprite();
 					outputText("Jojo the monk appears before you, robes and soft white fur fluttering in the breeze.  He asks, \"<i>Are you ready for a meditation session?</i>\"", false);
-					if (player.gender > 0) simpleChoices("Yes", getGame().jojoScene.meditateInForest, "No", camp.returnToCampUseOneHour, "BWUH", 0, "Rape Him", getGame().jojoScene.jojoRape, "", 0);
-					else simpleChoices("Yes", getGame().jojoScene.meditateInForest, "No", camp.returnToCampUseOneHour, "BWUH", 0, "Rape Him", 0, "", 0);
+					if (player.gender > 0) simpleChoices("Yes", getGame().jojoScene.meditateInForest, "No", camp.returnToCampUseOneHour, "BWUH", null, "Rape Him", getGame().jojoScene.jojoRape, "", null);
+					else simpleChoices("Yes", getGame().jojoScene.meditateInForest, "No", camp.returnToCampUseOneHour, "BWUH", null, "Rape Him", null, "", null);
 				}
 				if (kGAMECLASS.monk >= 2) {
 					kGAMECLASS.jojoScene.jojoSprite();
@@ -326,7 +326,7 @@ package classes.Scenes.Areas
 						return;
 					}
 					else {
-						eventParser(tentacleBeastScene.encounter);
+						tentacleBeastScene.encounter();
 						return;
 					}
 				}
@@ -409,7 +409,7 @@ package classes.Scenes.Areas
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) {
-					outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  Your " + ballsDescriptLight() + " pulse with the need to release their sperm through your " + multiCockDescriptLight() + " and ", false);
+					outputText("  Your " + player.skinTone + " " + sackDescript() + " rests beneath your raised " + buttDescript() + ".  Your " + ballsDescriptLight() + " pulse with the need to release their sperm through your " + multiCockDescriptLight() + " and ", false);
 					if (lake) outputText("into the waters of the nearby lake.", false);
 					else outputText("onto the fertile soil of the forest.", false);
 				}
@@ -497,7 +497,7 @@ package classes.Scenes.Areas
 			else {
 				outputText("You can see his goat tail flitting happily above his tight, squeezable asscheeks, the loincloth discarded beside him failing to obscure his black cherry, ripe for the picking.  Do you take advantage of his distraction and ravage his ass while he's helpless?\n\n", false);
 				//[Yes] [No]
-				simpleChoices("Ravage",rapeSatyr,"",0,"",0,"",0,"Leave",ignoreSatyr);
+				simpleChoices("Ravage", rapeSatyr, "", null, "", null, "", null, "Leave", ignoreSatyr);
 			}
 		}
 
@@ -529,7 +529,7 @@ package classes.Scenes.Areas
 			if(player.isNaga()) outputText("slither", false);
 			else outputText("sneak", false);
 
-			outputText(" towards the distracted satyr; stopping a few feet away, you stroke your " + cockDescript(x) + ", urging it to full erection and coaxing a few beads of pre, which you smear along your " + cockHead(x) + ".  With no warning, you lunge forward, grabbing and pulling his hips towards your " + cockDescript(x) + " and shoving as much of yourself inside his tight ass as you can.\n\n", false);
+			outputText(" towards the distracted satyr; stopping a few feet away, you stroke your " + cockDescript(x) + ", urging it to full erection and coaxing a few beads of pre, which you smear along your " + player.cockHead(x) + ".  With no warning, you lunge forward, grabbing and pulling his hips towards your " + cockDescript(x) + " and shoving as much of yourself inside his tight ass as you can.\n\n", false);
 
 			outputText("The satyr lets out a startled yelp, struggling against you, but between his awkward position and the mutant flower ravenously sucking on his sizable cock, he's helpless.\n\n", false);
 
@@ -564,7 +564,7 @@ package classes.Scenes.Areas
 			outputText("As you watch the lewd display, you feel your arousal building and your " + cockDescript(x) + " growing back into full mast. Figuring you already have a willing slut readily available, you consider using him to relieve yourself once more... What do you do?", false);
 			player.orgasm();
 			//[Again][Leave]
-			simpleChoices("Again",secondSatyrFuck,"",0,"",0,"",0,"Leave",dontRepeatFuckSatyr);
+			simpleChoices("Again", secondSatyrFuck, "", null, "", null, "", null, "Leave", dontRepeatFuckSatyr);
 		}
 
 		//[=Leave=]

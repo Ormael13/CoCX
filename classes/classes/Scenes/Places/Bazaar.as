@@ -48,8 +48,8 @@ private function approachBazaarGuard():void {
 	if(player.cor < 33) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.", false);
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.", false);
 	outputText("</i>\"", false);
-	if(player.cor < 33) simpleChoices("",0,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
-	else simpleChoices("Enter",enterTheBazaar,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+	if (player.cor < 33) simpleChoices("", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+	else simpleChoices("Enter", enterTheBazaar, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 }
 
 public function enterTheBazaar():void {
@@ -220,8 +220,9 @@ private function buyCockMilker():void {
 	player.gems -= 200;
 	statScreenRefresh();
 	player.createKeyItem("Cock Milker",0,0,0,0);
-	simpleChoices("JoeyMassage",joeyMassage,"Androgyny",0,"Joey'sOffer",0,"",0,"Leave",enterTheBazaar);
+	simpleChoices("JoeyMassage", joeyMassage, "Androgyny", null, "Joey'sOffer", null, "", null, "Leave", enterTheBazaar);
 }
+
 private function joeyAndrogyny():void {
 	outputText("", true);
 	if(player.gems < 500) {
@@ -290,7 +291,7 @@ private function joeysMassageWifNoExtraJizz():void {
 	//(fork to male or genderless, no new PG)
 	//(MALE)
 	if(player.hasCock()) {
-		outputText("slides his warm, ruby lips over your " + cockDescript(0) + ", licking and slurping the " + cockHead(0) + " like a treasured candy.  That hot, breathy embrace hugs tight to your urethral bulge, slobbering up the cock-tip.  The flexible, thin rabbit tongue swirls over your cum-slit to lap at the bubbling pre-cum, even as his quaking balls continue to bury your face in bunny-semen.", false);
+		outputText("slides his warm, ruby lips over your " + cockDescript(0) + ", licking and slurping the " + player.cockHead() + " like a treasured candy.  That hot, breathy embrace hugs tight to your urethral bulge, slobbering up the cock-tip.  The flexible, thin rabbit tongue swirls over your cum-slit to lap at the bubbling pre-cum, even as his quaking balls continue to bury your face in bunny-semen.", false);
 		if(player.totalCocks() > 1) {
 			outputText("  He takes your " + cockDescript(1) + " with his free hand and pulls it over, giving it an affectionate, loving smooch.", false);
 			if(player.totalCocks() > 2) {
@@ -358,7 +359,7 @@ private function joeysMassageWithEXTRASpooge():void {
 	outputText("Joey's fingertips brush along your shaft, squeezing it with tender touches that make it stiffen and thicken.  He starts slowly jacking you off while his other hand traces one of your nipples.  \"<i>We've got to get you nice and hard now so that you can let out all that nice, creamy lotion,</i>\" explains the fem-boy.  You nod in understanding, blushing hard while he fondles " + sMultiCockDesc() + " with soft caresses.  He plays your manhood", false);
 	if(player.cockTotal() > 1) outputText("s like fiddles", false);
 	else outputText(" like a fiddle", false);
-	outputText(", expertly running his fingertip around the sensitive " + cockHead(0) + " before tracing down along your rapidly filling urethra.  It feels good – better than it should, and the warmth inside you begins to leak into the bunny-boy's waiting hand in moments.\n\n", false);
+	outputText(", expertly running his fingertip around the sensitive " + player.cockHead() + " before tracing down along your rapidly filling urethra.  It feels good – better than it should, and the warmth inside you begins to leak into the bunny-boy's waiting hand in moments.\n\n", false);
 	
 	outputText("You're rolled back on to your front, crushing " + sMultiCockDesc() + " between you and the sheets.  Joey leaps back atop you, straddling your back and facing your " + assDescript() + ", his hands locking onto the steam-moistened cheeks.   He slides forward slightly, placing his hardness between them, and it's then that you notice his discarded thong on the floor.  A moment later the first drops of Joey's own hot seed are dripping over your exposed derriere.  He slides himself through your buns, hotdogging the rapidly-slickening surface of your ass while his hands massage the tense flesh a little more enthusiastically than they ought to.\n\n", false);
 	
@@ -409,13 +410,13 @@ private function joeyBigBalls():void {
 		if(player.cor > 70) outputText("; you won't get to watch him fountaining all that pearly spunk like a perverted statue", false);
 		outputText(".  What do you decide?", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut",suckOffJoeysGardenHose,"MasturbateOut",joeyWanksItOut,"",0,"",0,"",0);
+		simpleChoices("SuckCumOut", suckOffJoeysGardenHose, "MasturbateOut", joeyWanksItOut, "", null, "", null, "", null);
 	}
 	//(Sucked Joey once) 
 	else {
 		outputText("As soon as you enter The Slippery Squeeze, you know somehow that something is amiss.  Joey staggers out from a back-room, his balls once again swollen huge and round.  He looks at you and admits, \"<i>Someone's <b>got</b> to be sabotaging me... gods, this hurts!  Could you help me, or should I go in the back and jerk it out myself?</i>\"\n\n", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut",suckOffJoeysGardenHose,"MasturbateOut",joeyWanksItOut,"",0,"",0,"",0);
+		simpleChoices("SuckCumOut", suckOffJoeysGardenHose, "MasturbateOut", joeyWanksItOut, "", null, "", null, "", null);
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00348]++;	
 }
@@ -763,7 +764,7 @@ private function yesPutDatSockOnMe(target:int):void {
 
 		outputText("With one hand she lifts your limp cock up, giving it a pleasant little stroke.");
 	
-		outputText("\n\nHer other hand approaches, her thumb, fore- and middle-fingers holding the sock open as she slips it over your " + cockHead(target) + ".  She pulls it snugly into place and then gives your penis a little kiss.  The second her lips make contact with your flesh, a chill runs across your body, followed by a flood of warmth.");
+		outputText("\n\nHer other hand approaches, her thumb, fore- and middle-fingers holding the sock open as she slips it over your " + player.cockHead(target) + ".  She pulls it snugly into place and then gives your penis a little kiss.  The second her lips make contact with your flesh, a chill runs across your body, followed by a flood of warmth.");
 	
 		outputText("\n\nGreta smiles knowingly and returns to her chair behind the counter.");
 		//(Cock-sock get! +2 Corruption, +5 Arousal)
@@ -806,7 +807,7 @@ private function removeTargettedSock(index:int):void {
 	clearOutput();
 	//Select-A-Cock!
 	outputText("You walk up to the counter top.  Greta the succubus looks up at you over her latest creation, and you explain you'd like to remove a cocksock.");
-	outputText("\n\n\"<i>Ah, all right then,</i>\" she says smoothly, setting aside her knitting needles.  \"<i>Making room for a new sock, or just looking to get rid of this one?  No matter, it's a simple counterspell.</i>\"  Greta stands up from her chair, though she's only on her feet for a moment before she kneels down in front of you, placing one hand under your " + cockDescript(index) + ".  With her free hand, she runs a little circle around your " + cockHead(index) + ", muttering something under her breath.");
+	outputText("\n\n\"<i>Ah, all right then,</i>\" she says smoothly, setting aside her knitting needles.  \"<i>Making room for a new sock, or just looking to get rid of this one?  No matter, it's a simple counterspell.</i>\"  Greta stands up from her chair, though she's only on her feet for a moment before she kneels down in front of you, placing one hand under your " + cockDescript(index) + ".  With her free hand, she runs a little circle around your " + player.cockHead(index) + ", muttering something under her breath.");
 	
 	outputText("\n\nSuddenly your cock feels white-hot, burning with passionate arousal.  It jumps to attention immediately");
 	if(player.cockArea(index) >= 100) outputText(", almost knocking Greta over in the process");

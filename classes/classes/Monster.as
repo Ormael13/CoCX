@@ -43,7 +43,7 @@
 		protected final function statScreenRefresh():void {
 			game.statScreenRefresh();
 		}
-		protected final function doNext(eventNo:*):void {
+		protected final function doNext(eventNo:Function):void { //Now typesafe
 			game.doNext(eventNo);
 		}
 		protected final function combatMiss():Boolean {
@@ -105,9 +105,9 @@
 		public var temperment:Number = TEMPERMENT_AVOID_GRAPPLES;
 
 		//Used for special attacks.
-		public var special1:* = 0;
-		public var special2:* = 0;
-		public var special3:* = 0;
+		public var special1:Function = null;
+		public var special2:Function = null;
+		public var special3:Function = null;
 
 		//he
 		public var pronoun1:String = "";
@@ -598,7 +598,8 @@
 				attacks--;
 			}
 			removeStatusAffect(StatusAffects.Attacks);
-			if (!game.combatRoundOver()) game.doNext(1);
+//			if (!game.combatRoundOver()) game.doNext(1);
+			game.combatRoundOver(); //The doNext here was not required
 		}
 
 		/**
@@ -799,15 +800,13 @@
 		protected function performCombatAction():void
 		{
 			var actions:Array = [eAttack,special1,special2,special3].filter(
-					function(special:*,idx:int,array:Array):Boolean{
-						return special != 0 && special != null;
+					function(special:Function, idx:int, array:Array):Boolean {
+						return special != null;
 					}
 			);
 			var rando:int = int(Math.random() * (actions.length));
-			var action:* = actions[rando];
-			if (action is Number) game.eventParser(action);
-			else if (action is Function) action();
-			else trace("monster tried to do "+typeof(action));
+			var action:Function = actions[rando];
+			action();
 		}
 
 		/**
@@ -1012,18 +1011,18 @@
 			result +=".\n\n";
 
 			// COMBAT AND OTHER STATS
-			result+=Hehas+"str="+str+", tou="+tou+", spe="+spe+", inte="+inte+", lib="+lib+", sens="+sens+", cor="+cor+".\n";
-			result += Pronoun1+" can "+weaponVerb+" you with  "+weaponPerk+" "+weaponName+" (attack "+weaponAttack+", value "+weaponValue+").\n";
-			result += Pronoun1 +" is guarded with "+armorPerk+" "+armorName+" (defense "+armorDef+", value "+armorValue+").\n";
-			result += Hehas+HP+"/"+eMaxHP()+" HP, "+lust+"/100 lust, "+fatigue+"/100 fatigue. "+Pronoun3+" bonus HP="+bonusHP+", and lust vulnerability="+lustVuln+".\n";
-			result += Heis+"level "+level+" and "+have+" "+gems+" gems. You will be awarded "+XP+" XP.\n";
-			if (special1 || special2 || special3){
-				result+=Hehas+[special1,special2,special3]
-								.filter(function(x:*,index:int,array:Array):Boolean{return x>0 || x is Function})
-								.length
-						+" special attacks.\n"
-			} else {
-				result+=Hehas+"no special attacks.\n";
+			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe+", inte=" + inte+", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
+			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
+			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (defense " + armorDef + ", value " + armorValue+").\n";
+			result += Hehas + HP + "/" + eMaxHP() + " HP, " + lust + "/100 lust, " + fatigue+"/100 fatigue. " + Pronoun3 + " bonus HP=" + bonusHP + ", and lust vulnerability=" + lustVuln + ".\n";
+			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
+			
+			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
+			if (numSpec > 0) {
+				result += Hehas + numSpec + " special attack" + (numSpec > 1 ? "s" : "") + ".\n";
+			}
+			else {
+				result += Hehas + "no special attacks.\n";
 			}
 
 			return result;
@@ -1068,10 +1067,10 @@
 			if(findStatusAffect(StatusAffects.Blind) >= 0) {
 				addStatusValue(StatusAffects.Blind,1,-1);
 				if(statusAffectv1(StatusAffects.Blind) <= 0) {
-					outputText("<b>" + capitalA + short + " is no longer blind!</b>\n\n", false);
+					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer blind!</b>\n\n", false);
 					removeStatusAffect(StatusAffects.Blind);
 				}
-				else outputText("<b>" + capitalA + short + " is currently blind!</b>\n\n", false);
+				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently blind!</b>\n\n", false);
 			}
 			if(findStatusAffect(StatusAffects.Earthshield) >= 0) {
 				outputText("<b>" + capitalA + short + " is protected by a shield of rocks!</b>\n\n");

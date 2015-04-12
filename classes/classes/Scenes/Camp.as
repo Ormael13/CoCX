@@ -26,24 +26,26 @@
 		{
 			return kGAMECLASS.inventory.hasItemInStorage(itype);
 		}
+/*
 		protected function hasItemsInStorage():Boolean
 		{
 			return kGAMECLASS.inventory.hasItemsInStorage();
 		}
-/*
 		protected function hasItemsInRacks(armor:Boolean = false):Boolean
 		{
 			return kGAMECLASS.inventory.hasItemsInRacks(armor);
 		}
 */
 
-		public function Camp()
-		{
+		public function Camp(campInitialize:Function) {
+			campInitialize(doCamp); //Pass the doCamp function up to CoC. This way doCamp is private but the CoC class itself can call it.
 		}
 		
+/* Replaced with calls to playerMenu
 		public function campMenu():void {
 			kGAMECLASS.eventParser(1);
 		}
+*/
 		
 		public function returnToCamp(timeUsed:int):void {
 			clearOutput();
@@ -66,7 +68,7 @@
 		
 //  SLEEP_WITH:int = 701;
 
-public function doCamp():void {
+private function doCamp():void { //Only called by playerMenu
 	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	if(player.findStatusAffect(StatusAffects.PostAkbalSubmission) >= 0) {
@@ -80,18 +82,22 @@ public function doCamp():void {
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
 	getGame().inCombat = false;
-	if(kGAMECLASS.inDungeon) {
+/* Can't happen - playerMenu will call dungeon appropriate menu instead of doCamp while inDungeon is true
+	if (kGAMECLASS.inDungeon) {
 		mainView.showMenuButton( MainView.MENU_DATA );
 		mainView.showMenuButton( MainView.MENU_APPEARANCE );
-		kGAMECLASS.dungeonRoom(kGAMECLASS.dungeonLoc);
+		kGAMECLASS.playerMenu();
 		return;
 	}
+*/
 	//Clear out Izma's saved loot status
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
 	//History perk backup
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] == 0) {
+	if (flags[kFLAGS.HISTORY_PERK_SELECTED] == 0) {
+		flags[kFLAGS.HISTORY_PERK_SELECTED] = 2;
 		hideMenus();
-		fixHistory();
+		getGame().charCreation.chooseHistory();
+//		fixHistory();
 		return;
 	}
 	if(!marbleScene.marbleFollower())
@@ -278,14 +284,13 @@ public function doCamp():void {
 			return;
 		}
 		else {
-			if(model.time.hours < 6 || model.time.hours > 20) {
-				eventParser(41);
-				return;
+			if (model.time.hours < 6 || model.time.hours > 20) {
+				doSleep();
 			}
 			else {
-				eventParser(11);
-				return;
+				rest();
 			}
+			return;
 		}
 	}
 	if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0) {
@@ -434,15 +439,12 @@ public function doCamp():void {
 	flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 0;
 	campQ = false;
 	//Build explore menus
-	var farm:* = 0;
-	var placesNum:* = 0;
-	var followers:* = 0;
-	var lovers:* = 0;
-	var slaves:* = 0;
+	var placesEvent:Function = (placesKnown() ? places : null);
+	var followers:Function = null;
+	var lovers:Function = null;
+	var slaves:Function = null;
 	var storage:Function = null;
-	if (inventory.showStash()) storage = stash;
-	if(places(false)) placesNum = 71; 
-	if(kGAMECLASS.whitney > 0) farm = 7;
+	if (inventory.showStash()) storage = inventory.stash;
 	//Clear stuff
 	if(player.findStatusAffect(StatusAffects.SlimeCravingOutput) >= 0) player.removeStatusAffect(StatusAffects.SlimeCravingOutput);
 	//Reset luststick display status (see event parser)
@@ -472,12 +474,9 @@ public function doCamp():void {
 		mainView.statsView.hideLevelUp();
 	}
 	//Build main menu
-	var masturbate:* = 0;
-	var rest:* = 0;
-	var explore:* = 2;
-	if(player.fatigue > 50) rest = 11;	
-	if(player.lust > 30) masturbate = 42;
-	outputText("", true);
+	var exploreEvent:Function = getGame().exploration.doExplore;
+	var masturbate:Function = (player.lust > 30 ? getGame().masturbation.masturbateMenu : null);
+	clearOutput();
 	
 	outputText(images.showImage("camping"), false);
 	//Isabella upgrades camp level!
@@ -687,9 +686,9 @@ public function doCamp():void {
 		}
 		else {
 			outputText("<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>\n\n", false);
-			explore = 0;
-			rest = 0;
-			placesNum = 0;
+			exploreEvent = null;
+			placesEvent = null;
+			//This once disabled the ability to rest, sleep or wait, but ir hasn't done that for many many builds
 		}
 	}
 	var baitText:String = "Masturbate";
@@ -697,83 +696,48 @@ public function doCamp():void {
 	//Initialize companions/followers
 	if(model.time.hours > 4 && model.time.hours < 23) {
 		if(followersCount() > 0) 
-			followers = 74;
+			followers = campFollowers;
 		if(slavesCount() > 0) 
 			slaves = campSlavesMenu;
 		if(loversCount() > 0) 
 			lovers = campLoversMenu;
 	}
-	var restEvent:Number = 40;
+	var restEvent:Function = doWait;
 	var restName:String = "Wait";
 	//Set up rest stuff
 	//Night
 	if(model.time.hours < 6 || model.time.hours > 20) {
 		outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n", false);
 		restName = "Sleep";
-		restEvent = 41;
-		explore = 0;
-		placesNum = 0;
+		restEvent = doSleep;
+		exploreEvent = null;
+		placesEvent = null;
 	}
 	//Day Time!
 	else {
 		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n", false);
 		if(player.fatigue > 40 || player.HP/player.maxHP() <= .9) {
 			restName = "Rest";
-			restEvent = 11;
+			restEvent = rest;
 		}
 	}
 	//Menu
 
-	choices("Explore", explore, "Places", placesNum, "Inventory", inventory.inventoryMenu, "Stash", storage, "Followers", followers,
+	choices("Explore", exploreEvent, "Places", placesEvent, "Inventory", inventory.inventoryMenu, "Stash", storage, "Followers", followers,
 		"Lovers", lovers, "Slaves",slaves, "", null, baitText, masturbate, restName, restEvent);
 	//Lovers
 	//Followers
 	//Slaves
-
 }
 
-
-public function stash():Boolean {
-	/*Hacked in cheat to enable shit
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;*/
-	//REMOVE THE ABOVE BEFORE RELASE ()
-	clearOutput();
-	spriteSelect(-1);
-	menu();
-	if (flags[kFLAGS.ANEMONE_KID] > 0) {
-		anemoneScene.anemoneBarrelDescription();
-		if (model.time.hours >= 6) addButton(4, "Anemone", anemoneScene.approachAnemoneBarrel);
-	}
-	if (player.hasKeyItem("Camp - Chest") >= 0) {
-		outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n");
-		addButton(0, "Chest Store", inventory.pickItemToPlaceInCampStorage);
-		if (inventory.hasItemsInStorage()) addButton(1, "Chest Take", inventory.pickItemToTakeFromCampStorage);
-	}
-	//Weapon Rack
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) {
-		outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
-		addButton(2, "W.Rack Put", inventory.pickItemToPlaceInWeaponRack);
-		if (inventory.weaponRackDescription()) addButton(3, "W.Rack Take", inventory.pickItemToTakeFromWeaponRack);
-		outputText("\n\n");
-	}
-	//Armor Rack
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0) {
-		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.");
-		addButton(5, "A.Rack Put", inventory.pickItemToPlaceInArmorRack);
-		if (inventory.armorRackDescription()) addButton(6, "A.Rack Take", inventory.pickItemToTakeFromArmorRack);
-		outputText("\n\n");
-	}
-	addButton(9, "Back", camp.campMenu);
-	return true;
-}
-	
 public function hasCompanions():Boolean {
 	return companionsCount() > 0;
 }
+
 public function companionsCount():Number {
 	return followersCount() + slavesCount() + loversCount();
 }
+
 public function followersCount():Number {
 	var counter:Number = 0;
 	if(emberScene.followerEmber()) counter++;
@@ -785,6 +749,7 @@ public function followersCount():Number {
 	if(helspawnFollower()) counter++;
 	return counter;
 }
+
 public function slavesCount():Number {
 	var counter:Number = 0;
 	if(latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) counter++;
@@ -797,6 +762,7 @@ public function slavesCount():Number {
 	if(milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
 	return counter;
 }
+
 public function loversCount():Number {
 	var counter:Number = 0;
 	if(arianScene.arianFollower()) counter++;
@@ -811,6 +777,7 @@ public function loversCount():Number {
 	if(flags[kFLAGS.ANT_WAIFU] > 0) counter++;
 	return counter;
 }
+
 public function campLoversMenu():void {
 	var isabellaButt:Function = null;
 	var marbleEvent:Function = null;
@@ -883,7 +850,7 @@ public function campLoversMenu():void {
 			//Base choice - book
 			izzyCreeps[izzyCreeps.length] = 5;
 			//Select!
-			var choice:* = rand(izzyCreeps.length);
+			var choice:int = rand(izzyCreeps.length);
 				
 			if(izzyCreeps[choice] == 0) outputText("is sitting down with Rathazul, chatting amiably about the weather.", false);
 			else if(izzyCreeps[choice] == 1) outputText("is sitting down with Jojo, smiling knowingly as the mouse struggles to keep his eyes on her face.", false);
@@ -967,7 +934,7 @@ public function campLoversMenu():void {
 	if (marbleEvent != null) addButton(6, "Marble", marbleEvent);
 	if (nieve != null) addButton(7, "Nieve", nieve);
 	if (flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla", getGame().desert.antsScene.introductionToPhyllaFollower);
-	addButton(9, "Back", campMenu);
+	addButton(9, "Back", playerMenu);
 }
 
 public function campSlavesMenu():void {
@@ -1016,7 +983,7 @@ public function campSlavesMenu():void {
 	if (vapula2 != null) addButton(4,"Vapula",vapula2);
 	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(7,flags[kFLAGS.MILK_NAME],milkWaifu.milkyMenu);
 	if (goo != null) addButton(8,flags[kFLAGS.GOO_NAME],goo);
-	addButton(9,"Back",eventParser,1);
+	addButton(9, "Back", playerMenu);
 }
 
 public function campFollowers():void {
@@ -1082,11 +1049,10 @@ public function campFollowers():void {
 	addButton(4, "Shouldra", shouldra);
 	//ABOVE: addButton(4,"Sophie",followerSophieMainScreen);
 	addButton(6, "Valeria", valeria2);
-	addButton(9, "Back", campMenu);
+	addButton(9, "Back", playerMenu);
 }
 
-
-public function rest():void {
+private function rest():void {
 	campQ = true;
 	if(timeQ == 0) {
 		outputText("You lie down to rest for four hours.\n", true);
@@ -1114,7 +1080,8 @@ public function rest():void {
 	}
 	goNext(timeQ,true);
 }
-public function doWait():void {
+
+private function doWait():void {
 	campQ = true;
 	outputText("", true);
 	if(timeQ == 0) {
@@ -1300,139 +1267,81 @@ public function sleepRecovery(display:Boolean = false):void {
 	}
 }
 
-public function allNaturalSelfStimulationBeltContinuation():void {
-	clearOutput();
-	outputText("In shock, you scream as you realize the nodule has instantly grown into a massive, organic dildo. It bottoms out easily and rests against your cervix as you recover from the initial shock of its penetration. As the pangs subside, the infernal appendage begins working itself. It begins undulating in long, slow strokes. It takes great care to adjust itself to fit every curve of your womb. Overwhelmed, your body begins reacting against your conscious thought and slowly thrusts your pelvis in tune to the thing.\n\n", true);
-	outputText("As suddenly as it penetrated you, it shifts into a different phase of operation. It buries itself as deep as it can and begins short, rapid strokes. The toy hammers your insides faster than any man could ever hope to do. You orgasm immediately and produce successive climaxes. Your body loses what motor control it had and bucks and undulates wildly as the device pistons your cunt without end. You scream at the top of your lungs. Each yell calls to creation the depth of your pleasure and lust.\n\n", false);
-	outputText("The fiendish belt shifts again. It buries itself as deep as it can go and you feel pressure against the depths of your womanhood. You feel a hot fluid spray inside you. Reflexively, you shout, \"<b>IT'S CUMMING! IT'S CUMMING INSIDE ME!</b>\" Indeed, each push of the prodding member floods your box with juice. It cums... and cums... and cums... and cums...\n\n", false);
-	outputText("An eternity passes, and your pussy is sore. It is stretched and filled completely with whatever this thing shoots for cum. It retracts itself from your hole and you feel one last pang of pressure as your body now has a chance to force out all of the spunk that it cannot handle. Ooze sprays out from the sides of the belt and leaves you in a smelly, sticky mess. You feel the belt's tension ease up as it loosens. The machine has run its course. You immediately pass out.", false);
-	player.slimeFeed();
-	player.orgasm();
-	dynStats("lib", 1, "sen", (-0.5));
-	doNext(camp.returnToCampUseOneHour);
+private function dungeonFound():Boolean { //Returns true as soon as any known dungeon is found
+	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) return true;
+	if (player.findStatusAffect(StatusAffects.FoundFactory) >= 0) return true;
+	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) return true;
+	if (flags[kFLAGS.D3_DISCOVERED] > 0) return true;
+	return false;
 }
 
-public function allNaturalSelfStimulationBeltBadEnd():void {
-	spriteSelect(23);
-	clearOutput();
-	outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n", true);
-	outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n", false);
-	outputText("\"<i>Well, well,</i>\" Giacomo says.  \"<i>The Libertines are right.  The creature's fluids are addictive. This poor woman is a total slave to the beast!</i>\"\n\n", false);
-	outputText("Giacomo contemplates the situation as you writhe in backbreaking pleasure before him.  His sharp features brighten as an idea strikes him.\n\n", false);
-	outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n", false);
-	outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live woman who can't stop cumming!</i>\"\n\n", false);
-	outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!", false);
-	eventParser(5035);
-}
-
-public function onaholeMulticockContinuation():void {
-	clearOutput();
-	outputText("You pull the sloppy toy from your dribbling dick and smile, shoving its slippery surface down on another of your " + multiCockDescriptLight() + ".  You rapidly work it around your cocks, orgasming until ", true);
-	if (player.balls > 0)
-		outputText("you pass out with aching, empty balls.", false);
-	else
-		outputText("you pass out with " + multiCockDescriptLight() + " sore from exertion.", false);
-	player.orgasm();
-	dynStats("sen", -1);
-	doNext(camp.returnToCampUseOneHour);
-}
-
-public function onaholeFutaContinuation():void {
-	if (player.gender == 3)
-	{
-		clearOutput();
-		outputText("\n\nThe blessing - or curse, depending on how you feel - of your gender catches up with you. As with all members of your gender, you are incapable of having just ONE orgasm. You feel the muscles deep in your crotch bear down hard. Your eyes widen as you realize you are about to blow a monumental load. The pressure works its way through you and towards your cock as, with one final push, you force a torrent of semen out of your body. Your grip was not sufficient on the onahole and you launch it ", true);
-		outputText(String(int(((Math.random() * player.str / 12) + player.str / 6) * 10) / 10), false);
-		outputText(" feet away from you. Delirious with pleasure, you continue your 'impression' of a semen volcano, covering yourself and the area with your seed. ", false);
-		outputText(" As your orgasms fade, you find yourself a well-fucked mess, and pass out.", false);
-		player.orgasm();
-		dynStats("sen", -1);
+private function farmFound():Boolean { //Returns true as soon as any known dungeon is found
+	if (player.findStatusAffect(StatusAffects.MetWhitney) >= 0 && player.statusAffectv1(StatusAffects.MetWhitney) > 1) {
+		if (flags[kFLAGS.FARM_DISABLED] == 0) return true;
+		if (player.cor >= 70 && player.level >= 12 && getGame().farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) return true;
 	}
-	doNext(1);
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED]) return true;
+	return false;
 }
-		
+
+private function placesKnown():Boolean { //Returns true as soon as any known place is found
+	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) return true;
+	if (player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) return true;
+	if (flags[kFLAGS.FOUND_CATHEDRAL] == 1) return true;
+	if (dungeonFound()) return true;
+	if (farmFound()) return true;
+	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) return true;
+	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) return true;
+	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) return true;
+	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) return true;
+	return false;
+}
+
 //Places menu
-public function places(display:Boolean):Boolean {
-	var farmBarn:* = 0;
-	var farmHouse:* = 0;
-	var farm:* = 0;
-	var _boat:Function = null;
-	var barber:* = 0;
-	var telAdre2:* = 0;
-	var ruins:Function = null;
-	var bazaar:Function = null;
-	var owca:* = 0;
-	var dungeonsArg:* = 0;
-	var cathedral:* = 0;
-
-	if(flags[kFLAGS.PLACES_PAGE] != 0 && display)
-	{
+private function places():void { //Displays a menu for all known places
+	if (flags[kFLAGS.PLACES_PAGE] != 0) {
 		placesPage2();
-		return true;
+		return;
 	}
-	if(flags[kFLAGS.FOUND_CATHEDRAL] == 1) 
-	{
-		if (flags[kFLAGS.GAR_NAME] == 0) cathedral = kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork;
-		else cathedral = kGAMECLASS.gargoyle.returnToCathedral;
+	menu();
+	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(0, "Bazaar", getGame().bazaar.enterTheBazaar);
+	if (player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) addButton(1, "Boat", getGame().boat.boatExplore);
+	if (flags[kFLAGS.FOUND_CATHEDRAL] == 1) {
+		if (flags[kFLAGS.GAR_NAME] == 0)
+			addButton(2, "Cathedral", getGame().gargoyle.gargoylesTheShowNowOnWBNetwork);
+		else addButton(2, "Cathedral", getGame().gargoyle.returnToCathedral);
 	}
-	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || player.findStatusAffect(StatusAffects.FoundFactory) >= 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 || flags[kFLAGS.D3_DISCOVERED] > 0)
-		dungeonsArg = dungeons;
-	if(flags[kFLAGS.OWCA_UNLOCKED] == 1) 
-		owca = kGAMECLASS.owca.gangbangVillageStuff;
-	
-	//turn on ruins
-	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = amilyScene.exploreVillageRuin;
-	//turn on teladre
-	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) telAdre2 = kGAMECLASS.telAdre.telAdreMenu;
-	if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) barber = kGAMECLASS.mountain.salon.salonGreeting;
-	//turn on boat
-	if(player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) _boat = kGAMECLASS.boat.boatExplore;
-	
-	//Turn on main farm encounter!
-	if(player.findStatusAffect(StatusAffects.MetWhitney) >= 0) {
-		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && (flags[kFLAGS.FARM_DISABLED] == 0 || (player.cor >= 70 && player.level >= 12 && kGAMECLASS.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0))) farm = kGAMECLASS.farm.farmExploreEncounter;
-	}
-	if (flags[kFLAGS.FARM_CORRUPTION_STARTED])
-	{
-		farm = kGAMECLASS.farm.farmExploreEncounter;
-	}
-	
-	
-	//Turn on bazaar encounter
-	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = getGame().bazaar.enterTheBazaar;
-	//Return if there is anything enabled in places
-	if(!display) {
-		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm != null || dungeonsArg || _boat || ruins || flags[kFLAGS.BAZAAR_ENTERED] || cathedral;
-	}
-	//Make choices
-	choices("Bazaar",bazaar,"Boat",_boat,"Cathedral",cathedral,"Dungeons",dungeonsArg,"Next",placesPage2,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre2,"Back",1);
-	return true;
+	if (dungeonFound()) addButton(3, "Dungeons", dungeons);
+	addButton(4, "Next", placesPage2);
+	if (farmFound()) addButton(5, "Farm", getGame().farm.farmExploreEncounter);
+	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(6, "Owca", getGame().owca.gangbangVillageStuff);
+	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) addButton(7, "Salon", getGame().mountain.salon.salonGreeting);
+	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) addButton(8, "Tel'Adre", getGame().telAdre.telAdreMenu);
+	addButton(9, "Back", playerMenu);
 }
 
-private function placesPage2():void
-{
+private function placesPage2():void {
 	menu();
 	flags[kFLAGS.PLACES_PAGE] = 1;
 	//turn on ruins
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "TownRuins", amilyScene.exploreVillageRuin);
-	addButton(4,"Previous",placesToPage1);
-	addButton(9,"Back",eventParser,1);
+	addButton(4, "Previous", placesToPage1);
+	addButton(9, "Back", playerMenu);
 }
-private function placesToPage1():void
-{
+
+private function placesToPage1():void {
 	flags[kFLAGS.PLACES_PAGE] = 0;
-	places(true);
+	places();
 }
 
 private function dungeons():void {
 	menu();
-	//Turn on d2
-	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0,"Deep Cave",eventParser,11076);
-	//Turn on dungeon
-	if(player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(1,"Factory",eventParser,11057);
+	//Turn on dungeons
+	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0, "Deep Cave", kGAMECLASS.enterZetazsLair);
+	if (player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(1, "Factory", kGAMECLASS.enterFactory);
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(2, "Desert Cave", kGAMECLASS.enterBoobsDungeon);
 	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", kGAMECLASS.d3.enterD3);
-	addButton(9,"Back",eventParser,71);
+	addButton(9, "Back", places);
 }
 
 private function exgartuanCampUpdate():void {
@@ -1457,13 +1366,16 @@ private function exgartuanCampUpdate():void {
 			player.removeStatusAffect(StatusAffects.Exgartuan);
 		}		
 	}
-	doNext(1);
+	doNext(playerMenu);
 }
 
+/*
 private function fixHistory():void {
 	outputText("<b>New history perks are available during creation.  Since this character was created before they were available, you may choose one now!</b>", true);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 2;
+	menu();
 	doNext(10036);
 }
+*/
 }
 }

@@ -41,7 +41,7 @@ public function valeriaFollower():void {
 	var sex:Function = null;
 	if(player.lust > 33) sex = followersValeriaSex;
 	//(Display Options: [Appearance] [Spar] [Sex] [Talk])
-	choices("Appearance",valeriaAppearance,"Spar",valeriaSpar,"Sex",sex,"Talk",talkWithValeria,"Take",takeValeria,"",0,"",0,"",0,"",0,"Back",74);
+	choices("Appearance", valeriaAppearance, "Spar", valeriaSpar, "Sex", sex, "Talk", talkWithValeria, "Take", takeValeria, "", null, "", null, "", null, "", null, "Back", camp.campFollowers);
 }
 
 //[Valeria] -- [Appearance]
@@ -67,7 +67,7 @@ private function valeriaSpar():void {
 	startCombat(new GooArmor());
 	monster.createStatusAffect(StatusAffects.Spar,0,0,0,0);
 	monster.gems = 0;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Valeria] -- [Spar] -- PC Victorious
@@ -129,7 +129,8 @@ private function followersValeriaSex(display:Boolean = true):void {
 	if(flags[kFLAGS.VELARIA_FUTA] == 1) {
 		dickText = "Lose Dick";
 	}
-	choices("PenetrateHer",penetrate,"Get Fucked",getFucked,"Gooflation",gooFlation,"GetDominated",dominated,dickText,dickToggle,"",0,"",0,"",0,"",0,"Back",valeriaFollower);
+	choices("PenetrateHer", penetrate, "Get Fucked", getFucked, "Gooflation", gooFlation, "GetDominated", dominated, dickText, dickToggle,
+		"", null, "", null, "", null, "", null, "Back", valeriaFollower);
 }
 
 //Valeria -- [Sex] -- [Dick/No Dick]
@@ -392,8 +393,8 @@ private function talkWithValeria():void {
 	outputText("\n\nValeria chuckles wryly. \"<i>Well, it's not like I'm completely unchanged,</i>\" she whispers huskily, leaning close and looking hungrily at your crotch.  \"<i>After all, I have certain... appetites... now, you know.  I'm not proud of my new needs, but I'm afraid I just can't ignore them...</i>\"");
 	//How do you respond to that?
 	//(Display Options: [Flirt](PC has Gender) [Accept] [Gross])
-	if(player.gender > 0) simpleChoices("Flirt",flirtWithValeria,"Accept",acceptValeriasNeeds,"Gross",declineValeriasNeeds,"",0,"",0);
-	else simpleChoices("",0,"Accept",acceptValeriasNeeds,"Gross",declineValeriasNeeds,"",0,"",0);
+	if (player.gender > 0) simpleChoices("Flirt", flirtWithValeria, "Accept", acceptValeriasNeeds, "Gross", declineValeriasNeeds, "", null, "", null);
+	else simpleChoices("", null, "Accept", acceptValeriasNeeds, "Gross", declineValeriasNeeds, "", null, "", null);
 }
 
 //[Flirt]
@@ -437,13 +438,21 @@ private function takeValeria():void {
 	player.armor.removeText();
 	var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
 	if (item == null)
-		doNext(camp.campMenu);
-	else inventory.takeItem(item, camp.campMenu);
+		doNext(playerMenu);
+	else inventory.takeItem(item, playerMenu);
 }
 
 public function valeriaAndGooThreeStuff():void {
 	clearOutput();
 	outputText("You cautiously approach with Valeria's voice egging you on, \"<i>We gonna fuck her? We're gonna fuck her, ain't we, [name]?</i>\" She affectionately fondles your ");
+	var list:Array = ["[hips]"];
+	if(player.balls > 0) list.push("[balls]");
+	if(player.totalCocks() > 0) list.push("[multiCockDescriptLight]");
+	if(player.hasVagina()) list.push("[vagina]");
+	list.push("[asshole]");
+	list.push("[nipples]");
+	outputText(formatStringArray(list) + " with liquid-soft caresses, almost ephemeral and yet still so perfectly all-consuming, filling every tiny imperfection in your [skin] with blue, gooey goodness and teasing whatever entrances she can get at. ");
+/*
 	clearList();
 	addToList("[hips]");
 	if(player.balls > 0) addToList("[balls]");
@@ -452,6 +461,7 @@ public function valeriaAndGooThreeStuff():void {
 	addToList("[asshole]");
 	addToList("[nipples]");
 	outputText(outputList() + " with liquid-soft caresses, almost ephemeral and yet still so perfectly all-consuming, filling every tiny imperfection in your [skin] with blue, gooey goodness and teasing whatever entrances she can get at. ");
+*/
 	if(player.hasCock()) {
 		outputText("You sigh as [eachCock] stands at full erection. Bluish coating");
 		if(player.cockTotal() > 1) outputText("s");

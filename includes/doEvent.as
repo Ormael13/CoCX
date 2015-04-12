@@ -1,9 +1,9 @@
-﻿
+﻿//This file is no longer used or included
 //Event No's 2000 4999 use this function
 
+/*
 public function doEvent(eventNo:Number):void
 {
-/*
 	var temp2:Number = 0;
 	//New game gooooooo!
 	if (eventNo == 2000)
@@ -2673,7 +2673,6 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.houses();
 	}
-*/
 	else
 	{
 		//Problem here. Lots of the old code relies on the fall through to proceed forward. Prime offender is the
@@ -2683,4 +2682,5 @@ public function doEvent(eventNo:Number):void
 	}
 
 }
+*/
 

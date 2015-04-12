@@ -6,15 +6,8 @@
 // import fl.controls.ComboBox; 
 // import fl.data.DataProvider; 
 // import flash.net.navigateToURL; 
- 
-public function changeHandler(event:Event):void {
- 	//Store perk name for later addition
- 	tempPerk = ComboBox(event.target).selectedItem.perk;
-	mainView.aCb.move(210, 80);
-	outputText("You have selected the following perk:\n\n", true);
-	outputText("<b>" + tempPerk.perkName + ":</b> " + tempPerk.perkLongDesc + "\n\nIf you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.", false);
-	simpleChoices("Okay",114,"Skip",115,"",0,"",0,"",0);
-}
+
+//Change handler is only used for selecting perks. Moved to engineCore with the other perk selection code
 
 
  /*HOLY SHIT THIS HOW TO DO URL LINKS!
@@ -32,13 +25,13 @@ public function displayControls():void
 	
 	choices("Reset Ctrls", resetControls,
 			"Clear Ctrls", clearControls,
-			"Null", 0,
-			"Null", 0,
-			"Null", 0,
-			"Null", 0,
-			"Null", 0,
-			"Null", 0,
-			"Null", 0,
+			"Null", null,
+			"Null", null,
+			"Null", null,
+			"Null", null,
+			"Null", null,
+			"Null", null,
+			"Null", null,
 			"Back", hideControls);
 }
 

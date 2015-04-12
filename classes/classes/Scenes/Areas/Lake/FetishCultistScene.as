@@ -27,7 +27,7 @@ package classes.Scenes.Areas.Lake
 			outputText("You see a largely human-looking young woman in the distance in a strange, whorish outfit, seemingly lost in prayers that sound like nonsense to you.  Finally noticing your presence, she confronts you with a lewd smile on her face.\n\nShe has clearly lost her grasp on sanity, and filled the void with pure perversion.", true);
 			startCombat(new FetishCultist());
 			spriteSelect(19);
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		public function cultistRapesYou():void
@@ -54,7 +54,7 @@ package classes.Scenes.Areas.Lake
 
 						outputText("With a cry that sounds more like a neigh than anything else, your " + cockDescript(0) + " explodes, squirting horse-cum as you feel the girl's feet slip and slide all over the entire length of your shaft.  The zoo-keeper rubs her feet over the end of it, teasing it with her toes, allowing them to become coated in your musky animal-seed.  It drips down her legs, drooling over her sopping wet pussy.  She moans excitedly as her fingers dart from your balls down to her pussy. She fingers herself as her feet keep fucking your cock, making more of your cum leak and drip down to her cunt.  White-glazed fingers forcibly shovel the beast-cum inside her hungry pussy, and you can actually hear the wet squelches as she forces it inside. It doesn't take long before she screams in orgasm, her pussy squirting juices all over the floor. Some of it even sprays up and splashes your cock, setting off a second orgasm that forces glop after glop of your centaur seed to spurts onto the floor into a huge puddle.\n\n", false);
 
-						outputText("As the girl regains her senses, she sighs and licks her lips, then gets up off the stool. With a grin, she watches your cock soften and hang limp in front of her.  The zoo-keeper gets off the stool and pushes it aside. With an eager moan, she kneels into the puddle of horse cum and pussy-juices, clearly loving the feeling of the hot and sticky seed on her skin.  She opens her mouth and sucks the " + cockHead(0) + " of your " + cockDescript(0) + ", inside, hungrily sucking up any stray sperm, swallowing down all she can drink from your shaft.  The taste obviously arouses her again as she rubs her fingers in the puddle of seed she's so happily sitting in. She sucks your cock-head for what seems like ages, gulping down anything she can milk your " + ballsDescriptLight() + ". Eventually, the girl calms down as she rubs your cum over her body and tits.  She sits there in the puddle of sexual fluids, happily allowing your cock slip out of her mouth with a POP.  It hangs limply over her shoulder while she sighs as she closes her eyes, her mouth coated in her drool and cum.  You gasp and slump in your harness as your exhausted body loses its grip on consciousness, your last memory the taste of your bridle and the feel of your harness binding you as your keeper readies you for the next show...\n\n", false);
+						outputText("As the girl regains her senses, she sighs and licks her lips, then gets up off the stool. With a grin, she watches your cock soften and hang limp in front of her.  The zoo-keeper gets off the stool and pushes it aside. With an eager moan, she kneels into the puddle of horse cum and pussy-juices, clearly loving the feeling of the hot and sticky seed on her skin.  She opens her mouth and sucks the " + player.cockHead() + " of your " + cockDescript(0) + ", inside, hungrily sucking up any stray sperm, swallowing down all she can drink from your shaft.  The taste obviously arouses her again as she rubs her fingers in the puddle of seed she's so happily sitting in. She sucks your cock-head for what seems like ages, gulping down anything she can milk your " + ballsDescriptLight() + ". Eventually, the girl calms down as she rubs your cum over her body and tits.  She sits there in the puddle of sexual fluids, happily allowing your cock slip out of her mouth with a POP.  It hangs limply over her shoulder while she sighs as she closes her eyes, her mouth coated in her drool and cum.  You gasp and slump in your harness as your exhausted body loses its grip on consciousness, your last memory the taste of your bridle and the feel of your harness binding you as your keeper readies you for the next show...\n\n", false);
 
 						//make sure the PC is properly dressed after such a scene
 						if (player.armorValue == 0) player.modArmorName = "bridle bit and saddle set";
@@ -466,7 +466,7 @@ package classes.Scenes.Areas.Lake
 				var fuckVag:Function =null;
 				if (player.hasVagina()) vibe = swimsuitVibrators;
 				if (player.hasCock()) fuckVag = plugSwimsuitVag;
-				simpleChoices("FuckHerVag", fuckVag, "Vibrator", vibe, "", 0, "", 0, "Leave", cleanupAfterCombat);
+				simpleChoices("FuckHerVag", fuckVag, "Vibrator", vibe, "", null, "", null, "Leave", cleanupAfterCombat);
 				return;
 			}
 			else {
@@ -614,7 +614,7 @@ package classes.Scenes.Areas.Lake
 			}
 			outputText(genderTag + " sits in the confessional.  It is clear this " + genderTag + "'s mind is devoid of conscious thoughts, but they have a clear purpose.  Feelings of anticipation and need surround this person as they open their mouth.  \"<i>Holy mother,</i>\" they speak to the woman sitting across from them with apprehension,\"<i>I have such strange thoughts and needs, they arouse me in ways that they probably shouldn't.  Is there anywhere where I can find my place?</i>\"\n\n\"<i>It's quite all right.</i>\" she replies.  \"<i>This is a sanctuary to those who have desires that others would call strange or bizarre, we welcome any who share our needs.  All that we ask is that you be willing to share those desires with those that you find.</i>\"  The other brightens and says, \"<i>Of course, I would love nothing more!</i>\"  The " + player.mf("man", "woman") + " who was once a champion and the fetish cultist who corrupted " + player.mf("him", "her") + " step out of the confessional, and soon the sounds of a massive orgy can be heard from the cathedral, as the followers of the fetish welcome their new member.\n\n", false);
 			outputText("Your mind has fallen prey to the followers of the fetish, and you are now one yourself.  You have completely forgotten who or what you were, including why you came to this world in the first place.  Perhaps the next champion will not lose their sense of self so easily.", false);
-			eventParser(5035);
+			getGame().gameOver();
 		}
 
 		public function fetishCultistHasAMilkFetish():void

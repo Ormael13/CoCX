@@ -41,7 +41,7 @@ package classes.Scenes
 				return;
 			}
 			menu();
-			addButton(0, "Explore", eventParser, 12);
+			addButton(0, "Explore", tryDiscover);
 			if (player.exploredDesert > 0) addButton(1, "Desert", kGAMECLASS.desert.exploreDesert);
 			if (player.exploredForest > 0) addButton(2, "Forest", kGAMECLASS.forest.exploreForest);
 			if (player.exploredLake > 0) addButton(3, "Lake", kGAMECLASS.lake.exploreLake);
@@ -50,7 +50,7 @@ package classes.Scenes
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp);
 			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(7, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods);
 			if (player.exploredMountain > 0) addButton(8, "Mountain", kGAMECLASS.mountain.exploreMountain);
-			addButton(9, "Back", eventParser, 1);
+			addButton(9, "Back", playerMenu);
 		}
 
 		private function explorePageII():void
@@ -61,7 +61,7 @@ package classes.Scenes
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(1, "Bog", kGAMECLASS.bog.exploreBog);
 			addButton(4, "Previous", goBackToPageI);
 			if (debug) addButton(8, "Debug", exploreDebug.doExploreDebug);
-			addButton(9, "Back", eventParser, 1);
+			addButton(9, "Back", playerMenu);
 		}
 
 		private function goBackToPageI():void
@@ -203,7 +203,7 @@ package classes.Scenes
 
 		public function debugOptions():void
 		{
-			inventory.takeItem(consumables.W_FRUIT, camp.campMenu);
+			inventory.takeItem(consumables.W_FRUIT, playerMenu);
 		}
 
 		//Massive bodyparts scene
