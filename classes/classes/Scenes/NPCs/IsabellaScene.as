@@ -609,7 +609,7 @@ public function volunteerToSlurpCowCunt():void {
 			return;
 		}
 	}
-	isabellaFollowerScene.isabellaAffection(5);
+	isabellaFollowerScene.isabellaAffection(2);
 	if(!isabellaFollower() || !player.hasVagina() || player.biggestTitSize() < 1) {
 		doNext(camp.returnToCampUseOneHour);
 	}
