@@ -641,15 +641,12 @@ private function talkToBenoit():void {
 			outputText("\n\n\"<i>Minotaur,</i>\" says Benoit immediately.  You sigh - he's too good at this game, and you're running out of creatures.  Thinking briefly, you make a clop-clopping whilst slapping the counter, throwing in a bit of heavy breathing for good measure.");
 			
 			outputText("\n\n\"<i>What ze 'ell is zat supposed to be?</i>\" says Benoit, looking alarmed.  You tell him it's a ");
-			if(!silly()) outputText("Centaur");
-			else {
-				outputText("Unitaur.");
-				outputText("\n\n\"<i>A what?</i>\"");
+			outputText("Unitaur.");
+			outputText("\n\n\"<i>A what?</i>\"");
 			
-				outputText("\n\nYou explain that a Unitaur is like a white centaur, only it has a horse's face.  It has massively strong human arms though, and it can cast magic better than anyone, and it can go faster than a cheetah, and... you can't help yourself and begin to giggle at the expression of terror that has emerged on Benoit's face.");
+			outputText("\n\nYou explain that a Unitaur is like a white centaur, only it has a horse's face.  It has massively strong human arms though, and it can cast magic better than anyone, and it can go faster than a cheetah, and... you can't help yourself and begin to giggle at the expression of terror that has emerged on Benoit's face.");
 			
-				outputText("\n\n\"<i>Oh, I see.  You are pulling my tail.  Very amusing.</i>\"  You laugh even harder at the expression of wounded dignity which replaces the terror.");
-			}
+			outputText("\n\n\"<i>Oh, I see.  You are pulling my tail.  Very amusing.</i>\"  You laugh even harder at the expression of wounded dignity which replaces the terror.");
 		}
 		else if(choice == 13) {
 			outputText("You ask Benoit if he really, <b>really</b> can tell who you are just by smell.");
