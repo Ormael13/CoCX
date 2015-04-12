@@ -186,7 +186,8 @@ private function intoTheDemonPit(sacrifice:Boolean = true):void {
 	clearOutput();
 	//N is the number of hours left before night
 	if(model.time.hours < 21) {
-		outputText("<b>" + Num2Text(21-model.time.hours) + " hours pass...</b>\n");
+		var passed:int = 21 - model.time.hours;
+		outputText("<b>" + Num2Text(passed) + " " + (passed > 1 ? "hours pass" : "hour passes") + "...</b>\n");
 		model.time.hours = 21;
 		statScreenRefresh();
 	}
