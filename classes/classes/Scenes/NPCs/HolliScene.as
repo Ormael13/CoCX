@@ -571,7 +571,7 @@ public function JojoTransformAndRollOut():void {
 public function amilyHatesTreeFucking():void {
 	clearOutput();
 	outputText("Your mousey cohabitant tramps up to you, irritation plain on her expression.");
-	outputText("\n\n\"<i>[name], I saw what you did with that that... tree.  I thought that was just one of those perverted plants you find in the forest, but there's an actual demon in it?!  I can't believe your poor judgement!  You do know what happens to people who give themselves to demons, right?  It hasn't slipped your mind that they rape and suck souls out of everyone they come across?  I don't even feel safe anymore with you bringing trash like that into camp!</i>\"");
+	outputText("\n\n\"<i>[name], I saw what you did with that that... tree.  I thought that was just one of those perverted plants you find in the forest, but there's an actual demon in it?!  I can't believe your poor judgment!  You do know what happens to people who give themselves to demons, right?  It hasn't slipped your mind that they rape and suck souls out of everyone they come across?  I don't even feel safe anymore with you bringing trash like that into camp!</i>\"");
 	outputText("\n\nNo matter how you try to interrupt, Amily's not even giving you a chance to answer...");
 	
 	//[Stay Quiet][Slap Her]
@@ -1224,7 +1224,7 @@ internal function enjoyYourBadEndBIYAAAATCH():void {
 		
 		outputText("\n\nHolli smiles wanly at your body's betrayal, thrusting the tentacle in time with your wanton gasps.  Within minutes, her face pinches and your cunt is flooded with thick, liquid pressure.  The tentacle withdraws, triggering one last flush as it brushes by your labia, trailing hot, sticky sap.  Your expression must reveal something of your disappointment at its exit, because the demon takes your face in her hands and brings it closer to hers.");
 		
-		outputText("\n\n\"<i>Oh, my little toy... did you think us finished already?</i>\"  From the corner of your eye, you see another tendril drop into place as she speaks, followed by five more.  Against your better judgement, your eyes and mouth widen into an anticipatory smile, and then a moan as the next of Holli's rough-skinned arboreal cocks forces into your dripping cunt.");
+		outputText("\n\n\"<i>Oh, my little toy... did you think us finished already?</i>\"  From the corner of your eye, you see another tendril drop into place as she speaks, followed by five more.  Against your better judgment, your eyes and mouth widen into an anticipatory smile, and then a moan as the next of Holli's rough-skinned arboreal cocks forces into your dripping cunt.");
 		
 		outputText("\n\nThis tentacle climaxes before you do as well, ejaculating a fresh load of the hot goo into your packed pussy and making you feel full.  Holli gives a short sigh and slumps against you as it pours forth, pressing her soft breasts to your");
 		if(player.biggestTitSize() >= 1) outputText("s");

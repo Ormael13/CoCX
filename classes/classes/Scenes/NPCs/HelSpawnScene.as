@@ -1110,7 +1110,7 @@ public function helspawnAllGrownUp():void {
 	
 	if(flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("daughter ");
 	else outputText("ward ");
-	outputText("like a woman.  The time to raise her, to shape her development, is over.  You can only hope you've done a good enough job to keep her safe in this hellish world; to give her sound judgement and the abilities she'll need to protect herself in the years and adventures to come.");
+	outputText("like a woman.  The time to raise her, to shape her development, is over.  You can only hope you've done a good enough job to keep her safe in this hellish world; to give her sound judgment and the abilities she'll need to protect herself in the years and adventures to come.");
 	
 	outputText("\n\n<b>" + flags[kFLAGS.HELSPAWN_NAME] + " has been added to the Followers menu!</b>");
 	flags[kFLAGS.HELSPAWN_AGE] = 3;

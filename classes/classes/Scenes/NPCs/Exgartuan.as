@@ -529,7 +529,7 @@ public function exgartuanCombatUpdate():Boolean {
 					outputText("Pleasure begins to radiate through your being, suddenly.  You snap back to your senses in time to see your hands stroking the bulge in your " + player.armorName + ", answering to the whims of an unholy force.", false);
 					break;
 				case 7:
-					outputText("Maybe it would be best to just lay down your arms and strip off your " + player.armorName + ". Just give yourself up to the " + monster.a + monster.short + " and let fate decide. Surely, " + monster.pronoun1 + " would return the gesture by embracing your " + cockDescript(0) + " and... Augh!  The demon is again toying with your judgement.", false);
+					outputText("Maybe it would be best to just lay down your arms and strip off your " + player.armorName + ". Just give yourself up to the " + monster.a + monster.short + " and let fate decide. Surely, " + monster.pronoun1 + " would return the gesture by embracing your " + cockDescript(0) + " and... Augh!  The demon is again toying with your judgment.", false);
 					break;
 				case 8:
 					outputText("Tight loving assholes and gaping vaginas, slick long red tongues and breasts like fine china.  Succubi and the hot sexings they bring, these are a few of your favorite things!  ...Wait, what?  Was that musing your own?  And why are you absently stroking your " + cockDescript(0) + "?", false);
