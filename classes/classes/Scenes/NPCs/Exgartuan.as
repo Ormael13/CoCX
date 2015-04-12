@@ -718,7 +718,7 @@ public function exgartuanArmorShift():void {
 	else outputText("  You pivot your hips forwards, doing your best to show off your sensational package with every step.  Oh, very nice, you'll have to thank Exgartuan later...", false);
 	if(changed) {
 		//(Add perk \"Bulge Armor\" - bonus to male crotch reveal tease!) - check armor equip function – all names are hashed out in old armor names already
-		player.createPerk(PerkLib.BulgeArmor,0,0,0,0);
+		if(player.findPerk(PerkLib.BulgeArmor) < 0) player.createPerk(PerkLib.BulgeArmor,0,0,0,0);
 	}
 }
 
