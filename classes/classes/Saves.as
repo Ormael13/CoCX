@@ -156,7 +156,7 @@ public function loadScreenAIR():void
 		}
 		else
 		{
-			slots[i] = 0;		// You have to set the parameter to 0 to disable the button
+			slots[i] = null;		// You have to set the parameter to 0 to disable the button
 		}
 		i++;
 	}
@@ -222,7 +222,7 @@ public function loadScreen():void
 			})(i);
 		}
 		else
-			slots[i] = 0;		// You have to set the parameter to 0 to disable the button
+			slots[i] = null;		// You have to set the parameter to 0 to disable the button
 	}
 	
 	choices("Slot 1", slots[0], 
@@ -410,7 +410,7 @@ public function deleteScreen():void
 			})(i);
 		}
 		else
-			delFuncs[i] = 0;	//disable buttons for empty slots
+			delFuncs[i] = null;	//disable buttons for empty slots
 	}
 	
 	outputText("\n<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>", false);
