@@ -1,34 +1,61 @@
+/* 
+ CoC Main File - This is what loads when the game begins. If you want to start understanding the structure of CoC,
+ this is the place to start.
+ First, we import all the classes from many different files across the codebase. It would be wise not to alter the
+ order of these imports until more is known about what needs to load and when.
+*/
+
 ﻿package classes
 {
 	// BREAKING ALL THE RULES.
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.Dungeons.DungeonEngine;
-	import classes.Scenes.Dungeons.D3.D3;
+	import classes.GlobalFlags.kFLAGS; // This file contains most of the persistent gamestate flags.
+	import classes.GlobalFlags.kGAMECLASS; // This file creates the gameclass that the game will run within.
+	import classes.GlobalFlags.kACHIEVEMENTS; // This file creates the flags for the achievements system.
+	import classes.Scenes.Dungeons.DungeonEngine; // This file creates all the dungeons, their rooms, and their completion states except for D3. This also includes cabin code. See file for more details.
+	import classes.Scenes.Dungeons.D3.D3; // Likely due to D3's complexity, that dungeon is split out separately.
 
-	import classes.CoC_Settings;
+	import classes.CoC_Settings; // This file creates basic variables for CoC itself (debug flags, buffers, button manipulation)
 
-	import classes.AssClass;
-	import classes.BreastRowClass;
-	import classes.Items.*;
-	import classes.PerkLib;
+/* 
+One very important thing to know about descriptions in this game is that many words are based on hidden integer values. 
+These integers are compared to tables or queried directly to get the words used for particular parts of descriptions. For instance,
+AssClass below has variables for wetness, looseness, fullness, and virginity. You'll often find little tables like this
+scattered through the code:
+butt looseness
+		0 - virgin
+		1 - normal
+		2 - loose
+		3 - very loose
+		4 - gaping
+		5 - monstrous
+Tracking down a full list of description variables, how their integer values translate to descriptions, and how to call them
+would be a very useful task for anyone who wants to extend content using variables.
+Further complicating this is that the code will also sometimes have a randomized list of words for certain things just to keep 
+the text from being too boring.
+*/
 
-	import classes.Player;
-	import classes.Cock;
-	import classes.Creature;
-	import classes.ItemSlotClass;
-	import classes.PerkClass;
-	import classes.StatusAffectClass;
-	import classes.VaginaClass;
-	import classes.ImageManager;
-	import classes.internals.Utils;
+	import classes.AssClass; // Creates the class that holds ass-related variables as described above. 
+	import classes.BreastRowClass; // Creates the class that holds breast-related variables.
+	import classes.Items.*; // This pulls in all the files in the Items folder. Basically any inventory item in the game
+	import classes.PerkLib; // This instantiates the IDs, names, and descriptions of perks. Does NOT have any code related to the actual perk! Use the ID field to search the code base for that. 
+
+	import classes.Player; // Creates a player with all that entails. See file for more info. Also see Creature.as.
+	import classes.Cock; // Creates the class that holds cock-related variables. Also has several functions for growing and shrinking cocks.
+	import classes.Creature; // Creates basic information for all characters in CoC. Contains many descriptors.
+	import classes.ItemSlotClass; // Creates item slots
+	import classes.PerkClass; // The function in this file pulls perk information from PerkLib for later querying
+	import classes.StatusAffectClass; // Similar to PerkClass, but for status effects in combat.
+	import classes.VaginaClass; // Creates vaginas
+	import classes.ImageManager; // Image voodoo for sprites
+	import classes.internals.Utils; // This file contains much voodoo for randomizing item arrays and other useful functions.
 
 
 	// This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
 
-	import classes.Parser.Parser;
+	import classes.Parser.Parser; // Much text voodoo for how to make all the description/pronoun/etc replacement work.
+
+// All the files below with Scenes loads the main content for the game.
 
 	import classes.Scenes.*;
 	import classes.Scenes.Areas.*;
@@ -47,13 +74,15 @@
 	import classes.Scenes.Places.*;
 	import classes.Scenes.Places.TelAdre.*;
 	import classes.Scenes.Quests.*;
-	import coc.view.MainView;
+	import coc.view.MainView; // Creates the framework for the game screen.
 
-	import coc.model.GameModel;
-	import coc.model.TimeModel;
+	import coc.model.GameModel; // Uncertain.
+	import coc.model.TimeModel; // Various time-related functions for setting the game clock and querying its state.
 
 	// Class based content? In my CoC?! It's more likely than you think!
 	import classes.content.*;
+	
+	// All the imports below are for Flash.
 	import fl.controls.ComboBox;
 	import fl.data.DataProvider;
 	import flash.display.Loader;
@@ -75,10 +104,14 @@
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
 	****/
+	
+	// This class instantiates the game. If you create a new place/location/scene you'll likely have to add it into here.
+	// Add in descriptions for the include statements. Many of the description text code is inside of these.
+	// Suggest moving or removing old comments referencing things that aren't needed anymore.
 		
 	[SWF( width="1000", height="800", pageTitle="Corruption of Champions" )]
 
-	public class CoC extends MovieClip
+	public class CoC extends MovieClip 
 	{
 
 		// Include the functions. ALL THE FUNCTIONS
