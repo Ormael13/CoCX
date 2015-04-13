@@ -4895,7 +4895,7 @@ private function interveneWithKittyKats4():void
 	outputText("\n\nShe starts to fumble with your [armor], her hunger clearly overriding her better judgement.  That’s your opening.  You punch upward with your bound hands, catching her in the gut and knocking the wind out of her.");
 	outputText("\n\nShe’s not much of a fighter, and in one move, the situation is reversed.  She’s flat on her back, gasping for air, and you’re sitting on top of her, ");
 	if (player.isBiped()) outputText("holding her tightly between your knees"); 
-	if (player.isNaga()) outputText("your snake-like coils wraped around her");
+	else if (player.isNaga()) outputText("your snake-like coils wraped around her");
 	else outputText("holding her tightly");
 	outputText(".  If she gets her wits about her she might still be able to escape, so you put your hands over her mouth and tell her to untie you in your most commanding tone.");
 	outputText("\n\nShe freezes in place, staring into your eyes.  Then her fingers reach up and, after some fumbling, free your hands.  You remind her that considering she just robbed you calling out isn’t a good idea.  Then take your hands away and ask what her name is.");
