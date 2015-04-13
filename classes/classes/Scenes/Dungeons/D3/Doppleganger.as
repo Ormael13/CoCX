@@ -242,7 +242,14 @@ package classes.Scenes.Dungeons.D3
 				(this.vaginas[0] as VaginaClass).vaginalWetness = player.vaginas[0].vaginalWetness;
 				(this.vaginas[0] as VaginaClass).virgin = player.vaginas[0].virgin;
 			}
-			
+			//Genderless get forced to have a cunny
+			if (player.vaginas.length == 0 && player.cocks.length == 0)
+			{
+				this.createVagina();
+				(this.vaginas[0] as VaginaClass).vaginalLooseness = 2;
+				(this.vaginas[0] as VaginaClass).vaginalWetness = 6;
+				(this.vaginas[0] as VaginaClass).virgin = false;
+			}
 			this.breastRows = [];
 			
 			for (i = 0; i < player.breastRows.length; i++)

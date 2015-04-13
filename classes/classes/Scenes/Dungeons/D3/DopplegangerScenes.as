@@ -63,6 +63,11 @@
 			else outputText("  You smile widely at your clone as you begin to shake off your [armor].");
 			outputText("  [He] moans lowly in miserable disbelief, but [he]’s not capable of resisting you as, butt naked, you sit yourself down and methodically repeat the action, sliding your hands over and into [his] replicated clothing, finding [his] warm flesh, clutching and testing it curiously. Obviously you’ve laid your fingers upon this many times before, but touching it now second hand causes an emotion you cannot name to rise in your breast. Is this getting you hot? Yes. In the strangest, most perverse way imaginable, it is.");
 			
+			if(player.vaginas.length == 0 && player.cocks.length == 0) 
+			{
+				outputText("\n\nStrangely, the more you think about fucking this strange creature, the hotter your groin becomes. In moments, you find your fingers pushing against a dampening slit with feather-light caresses. <b>Somehow this place's magic has given you a vagina to match your duplicate!</b> You pull away with a shuddering breath and marvel at the glittering wetness oozing down your fingertips. This is going to be fun.");
+				player.createVagina();
+			}
 			if (player.cocks.length >= 1 && !player.hasVagina())
 			{
 				outputText("\n\nYou turn the mirror demon’s wild stare and ragged breath away from you, laying a comforting but firm hand upon his shoulder as, grinning, you lower your eyes to his [butt]. Nice.");
@@ -204,7 +209,12 @@
 			outputText("\n\n“<i>Beautiful,</i>” you and [he] breathe. “<i>I will do great things with this body, [name], things you couldn’t have imagined, poor soulful innocent that you were. I will take my revenge with it, but first...</i>” [He] stares at [his] reflection smoulderingly as [he] raises [his] hands to [his] armor. [He] forces you to take off your clothes with [him], and you feel it just as clearly as if you were controlling the actions; the way your underclothes whisper off you, the way your naked flesh goose bumps in the coolness of the room");
 			if (player.hasCock()) outputText(", the way your turgid [cock] feels when you grasp it at the base.");
 			else if (player.hasVagina()) outputText(", the way your [vagina] feels when you slide your fingers along its lips.");
-
+			else 
+			{
+				outputText(", the way your");
+				player.createVagina();
+				outputText(" [vagina] feels when you slide your fingers against your... Wait, where did that come from? You push your fingers in more forcefully, determined to see through this illusion, but all you manage to do is arouse yourself beyond all reasonable measure. Somehow, <b>you've grown a tight, wet pussy to match your duplicate's!</b>");
+			}
 			if (player.hasCock() && !player.hasVagina())
 			{
 				outputText("\n\nYou masturbate with him, forced to stand there and repeat his every pleasurable stroke, growing less gloating and more urgent with each jerk of the wrist as ten years of chastity step into the room and set their weight upon his groin. You feel that weight, terrible for an incubus to endure, and you cannot possibly last long against it. Your face contorts into one of unspeakable joy and release as you tap that urge, your cock contracting and then unleashing a font of cum, your body caught in orgasm for what seems like an eternity.");
@@ -220,9 +230,6 @@
 				outputText("\n\nYou masturbate with her, forced to stand there and repeat her every pleasurable schlick, growing less gloating and more urgent with each flick of the finger as ten years of chastity step into the room and set their weight upon her groin. You feel that weight, terrible for a succubus to endure, and you cannot possibly last long against it. Your face contorts into one of unspeakable joy and release as you tap that urge, your [vagina] quivering, contracting and then wetting itself, your body caught in orgasm for what seems like an eternity. ");
 			}
 			
-			// Fuck Genderless
-			// 9999
-
 			outputText("\n\n“<i>Ahh...</i>” your mouth says finally, as you step back from the mirror, your eyes half-lidded with contentment. “<i>I really needed that.</i>” [Name] turns away from the surface you now embody to put [his] [armor] back on and you follow suit, gazing dumbly at the reflection of the room behind you. You want to shout and scream at [him] now, begging [him] to give you your body back, for [him] not to do what you know comes next, but you can’t- you can’t stop turning back around, you can’t stop yourself touching the surface of your mirror one last time and, smirking, stride out of the room. You mimic your body exiting out of sight of the mirror’s edge, and then... then you mimic a grey, empty room. Staring back at you hollowly, inert and empty. Listening to a metal door shutting behind you with a terrible finality.");
 
 		outputText("\n\nWith your body and brain full of memory of how to defeat demons, coupled with [his] own knowledge and thirst for revenge, your impostor surprises Lethice and manages to destroy her, taking her place and ruling the mountains and beyond with a mania born of horizons and insanity she never knew. You know all this because [Name] is true to [his] promise not to inflict the same suffering [he] endured upon you, and you don’t have to stand in the mirror room for very long (although being a deserted storage chamber, you quickly learn, makes a mockery of concepts like “very long”). [He] has your glass prison brought to [his] lavish inner chambers and installs you there- nailed to the ceiling above [his] bed, specifically. From your vantage point you mimic [his] orgies, each more deranged than the last. You experience sensation even the doppelganger [him]self never knows, because you are forced to embody everything in the room. Not just every slave girl, boy and favored demon there, every bulging prick and tight, eager hole, not just your old body bucking, slithering and glorying in it all, but every dildo, butt-plug, whip, bead, chain, every satin sheet upon which soft flesh is urgently pressed. You encompass everyone’s thoughts, the slavering succulence of total submission, the coursing power and glory of [Name]’s maddened domineering, every mind-wiping orgasm and sensation bordering between screaming pain and ecstatic pleasure is yours to endure. ");
