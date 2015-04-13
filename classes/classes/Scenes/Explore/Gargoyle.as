@@ -289,7 +289,7 @@ private function gargoyleSexMenu():void {
 	outputText("You approach " + flags[kFLAGS.GAR_NAME] + " and tell her you have some... pressure that needs relieving.");
 	//(if Confidence =< 69:
 	if(gargoyleConfidence() <= 69) outputText("  The gargoyle bows low before you, her face expressionless.  \"<i>By your command, Master.  How would you have me?</i>\"");
-	else outputText("  Her ruby-red eyes lock with yours and a sultry grin plays across her gray marble features.  She slides an arm around your waist and presses her sizable, surprisingly soft breasts against your chest.  \"“<i>How would Master have me?</i>\"");
+	else outputText("  Her ruby-red eyes lock with yours and a sultry grin plays across her gray marble features.  She slides an arm around your waist and presses her sizable, surprisingly soft breasts against your chest.  \"<i>How would Master have me?</i>\"");
 	menu();
 	//(If Male, display options: [Vaginal] [Anal] [Titfuck] [Strap-on] [Leave])
 	if(player.gender == 1) {

@@ -274,7 +274,7 @@ package classes.Scenes.Dungeons.D3
 			
 			str += player.mf("His", "Her") + " face is " + player.faceDesc() + ".";
 			
-			str += ". "  + player.mf("His", "Her") + " " + player.hairDescript() + " is parted by";
+			str += " "  + player.mf("His", "Her") + " " + player.hairDescript() + " is parted by";
 			
 			switch(player.earType)
 			{

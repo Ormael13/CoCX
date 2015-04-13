@@ -32,7 +32,7 @@ package classes.Scenes.Quests.UrtaQuest
 			}
 			//Hit:
 			else {
-				outputText("All you manage to do is cover your face; the rest of you, however, gets completely soaked in the demon's corrupted milk.  Looking down at yourself, you realise that you are panting, and the places where the milk splashed your fur begin to heat up.  Oh no! <b>You'd better finish off this succubus before you succumb to your lusts!</b>");
+				outputText("All you manage to do is cover your face; the rest of you, however, gets completely soaked in the demon's corrupted milk.  Looking down at yourself, you realize that you are panting, and the places where the milk splashed your fur begin to heat up.  Oh no! <b>You'd better finish off this succubus before you succumb to your lusts!</b>");
 				kGAMECLASS.dynStats("lus", 15);
 				createStatusAffect(StatusAffects.MilkyUrta, 3, 0, 0, 0);
 			}

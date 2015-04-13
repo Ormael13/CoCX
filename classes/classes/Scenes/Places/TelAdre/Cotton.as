@@ -1282,7 +1282,7 @@ private function cottonPopsOutAKid():void {
 	//Cotton Repeat Births*
 	//(Replaces the Approach scenes)
 	else {
-		outputText("As you head towards Cotton, you realise something about her is different; the swollen bulge of her late pregnancy is gone!  You ask her if everything is all right.");
+		outputText("As you head towards Cotton, you realize something about her is different; the swollen bulge of her late pregnancy is gone!  You ask her if everything is all right.");
 		outputText("\n\n\"<i>Oh, everything is wonderful, little pet.  You actually just missed it, I felt some familiar sensations, so I went home.  My water broke just as I was opening the door.  I had it right there in the nursery.  You're the proud new daddy of a baby ");
 		if(rand(3) == 0) kid = 1;
 		else if(rand(2) == 0) kid = 2;

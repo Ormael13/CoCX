@@ -2607,22 +2607,22 @@
 					}
 					//SINGLEZ
 					if (player.cocks.length == 1) {
-						outputText("\n\nYour " + multiCockDescript() + " fills to its normal size... and begins growing... ", false);
+						outputText("\n\nYour " + multiCockDescriptLight() + " fills to its normal size... and begins growing... ", false);
 						temp3 = player.cocks[0].thickenCock(1);
 						temp2 = player.increaseCock(0, rand(3) + 2);
 						player.lengthChange(temp2, 1);
 						//Display the degree of thickness change.
 						if (temp3 >= 1) {
-							if (player.cocks.length == 1) outputText("  Your " + multiCockDescript() + " spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
-							else outputText("  Your " + multiCockDescript() + " spread rapidly, swelling as they grow an inch or more in girth, making them feel fat and floppy.", false);
+							if (player.cocks.length == 1) outputText("  Your " + multiCockDescriptLight() + " spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
+							else outputText("  Your " + multiCockDescriptLight() + " spread rapidly, swelling as they grow an inch or more in girth, making them feel fat and floppy.", false);
 						}
 						if (temp3 <= .5) {
-							if (player.cocks.length > 1) outputText("  Your " + multiCockDescript() + " feel swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. They are definitely thicker.", false);
-							else outputText("  Your " + multiCockDescript() + " feels swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. It is definitely thicker.", false);
+							if (player.cocks.length > 1) outputText("  Your " + multiCockDescriptLight() + " feel swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. They are definitely thicker.", false);
+							else outputText("  Your " + multiCockDescriptLight() + " feels swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. It is definitely thicker.", false);
 						}
 						if (temp3 > .5 && temp2 < 1) {
-							if (player.cocks.length == 1) outputText("  Your " + multiCockDescript() + " seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
-							if (player.cocks.length > 1) outputText("  Your " + multiCockDescript() + " seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
+							if (player.cocks.length == 1) outputText("  Your " + multiCockDescriptLight() + " seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
+							if (player.cocks.length > 1) outputText("  Your " + multiCockDescriptLight() + " seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
 						}
 						dynStats("lib", 1, "sen", 1, "lus", 20);
 					}
@@ -2676,37 +2676,37 @@
 						player.lengthChange(temp2, player.cocks.length);
 						//Display the degree of thickness change.
 						if (temp3 >= 1) {
-							if (player.cocks.length == 1) outputText("\n\nYour " + multiCockDescript() + " spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
-							else outputText("\n\nYour " + multiCockDescript() + " spread rapidly, swelling as they grow an inch or more in girth, making them feel fat and floppy.", false);
+							if (player.cocks.length == 1) outputText("\n\nYour " + multiCockDescriptLight() + " spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
+							else outputText("\n\nYour " + multiCockDescriptLight() + " spread rapidly, swelling as they grow an inch or more in girth, making them feel fat and floppy.", false);
 						}
 						if (temp3 <= .5) {
-							if (player.cocks.length > 1) outputText("\n\nYour " + multiCockDescript() + " feel swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. They are definitely thicker.", false);
-							else outputText("\n\nYour " + multiCockDescript() + " feels swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. It is definitely thicker.", false);
+							if (player.cocks.length > 1) outputText("\n\nYour " + multiCockDescriptLight() + " feel swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. They are definitely thicker.", false);
+							else outputText("\n\nYour " + multiCockDescriptLight() + " feels swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. It is definitely thicker.", false);
 						}
 						if (temp3 > .5 && temp2 < 1) {
-							if (player.cocks.length == 1) outputText("\n\nYour " + multiCockDescript() + " seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
-							if (player.cocks.length > 1) outputText("\n\nYour " + multiCockDescript() + " seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
+							if (player.cocks.length == 1) outputText("\n\nYour " + multiCockDescriptLight() + " seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
+							if (player.cocks.length > 1) outputText("\n\nYour " + multiCockDescriptLight() + " seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
 						}
 						dynStats("lib", 1, "sen", 1, "lus", 20);
 					}
 					//SINGLEZ
 					if (player.cocks.length == 1) {
-						outputText("\n\nYour " + multiCockDescript() + " fills to its normal size... and begins growing...", false);
+						outputText("\n\nYour " + multiCockDescriptLight() + " fills to its normal size... and begins growing...", false);
 						temp3 = player.cocks[0].thickenCock(1.5);
 						temp2 = player.increaseCock(0, rand(3) + 5);
 						player.lengthChange(temp2, 1);
 						//Display the degree of thickness change.
 						if (temp3 >= 1) {
-							if (player.cocks.length == 1) outputText("  Your " + multiCockDescript() + " spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
-							else outputText("  Your " + multiCockDescript() + " spread rapidly, swelling as they grow an inch or more in girth, making them feel fat and floppy.", false);
+							if (player.cocks.length == 1) outputText("  Your " + multiCockDescriptLight() + " spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.", false);
+							else outputText("  Your " + multiCockDescriptLight() + " spread rapidly, swelling as they grow an inch or more in girth, making them feel fat and floppy.", false);
 						}
 						if (temp3 <= .5) {
-							if (player.cocks.length > 1) outputText("  Your " + multiCockDescript() + " feel swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. They are definitely thicker.", false);
-							else outputText("  Your " + multiCockDescript() + " feels swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. It is definitely thicker.", false);
+							if (player.cocks.length > 1) outputText("  Your " + multiCockDescriptLight() + " feel swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. They are definitely thicker.", false);
+							else outputText("  Your " + multiCockDescriptLight() + " feels swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. It is definitely thicker.", false);
 						}
 						if (temp3 > .5 && temp2 < 1) {
-							if (player.cocks.length == 1) outputText("  Your " + multiCockDescript() + " seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
-							if (player.cocks.length > 1) outputText("  Your " + multiCockDescript() + " seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
+							if (player.cocks.length == 1) outputText("  Your " + multiCockDescriptLight() + " seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.", false);
+							if (player.cocks.length > 1) outputText("  Your " + multiCockDescriptLight() + " seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.", false);
 						}
 						dynStats("lib", 1, "sen", 1, "lus", 20);
 					}

@@ -416,7 +416,7 @@ package classes.Scenes.Areas.HighMountains
 						else outputText(" erection throbs");
 						outputText(", pressed up against Izumi’s stomach muscles.  Her muscles ripple and undulate as she struggles to keep you in her grip, abs flexing, bumping, encircling your insistent erection");
 						if (player.totalCocks() > 1) outputText("s");
-						outputText(", stimulating you even further.  You realise in a flash of panic that if you don’t get out of this soon, you may actually... ");
+						outputText(", stimulating you even further.  You realize in a flash of panic that if you don’t get out of this soon, you may actually... ");
 					}
 					else
 					{

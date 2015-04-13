@@ -1897,7 +1897,7 @@ private function goAlongWIthShouldrasEatingSpree():void {
 		if(player.hasVagina()) outputText("trembling nether-lips");
 		if(player.gender == 0) outputText("groin");
 	}
-	outputText(", before you realise that nobody seems to notice your predicament.  Shouldra reads your thoughts and responds, \"<i>Thought you might appreciate some privacy");
+	outputText(", before you realize that nobody seems to notice your predicament.  Shouldra reads your thoughts and responds, \"<i>Thought you might appreciate some privacy");
 	if(flags[kFLAGS.PC_FETISH] > 0) outputText(", even with that kink of yours");
 	outputText(", Champ.  Here's something extra anyway, just in case.</i>\" One ghostly incantation later, and ");
 	if(player.femininity <= 50) outputText("a buttoned shirt and pair of belted jeans");
@@ -1970,7 +1970,7 @@ private function resistBeingAFatass():void {
 	outputText("\n\nThe bedraggled girl mouths something inaudible.  \"<i>What was that?  You gonna speak up, or am I gonna have to shut you up with this?</i>\"  Shouldra asks, brandishing a bloated tit menacingly.");
 	outputText("\n\n\"<i>YES!</i>\"  yells the helpless feedee, \"<i>Y-yes, I love it.  I love being a fat slut for you, I want to eat and eat and make you happy.</i>\"  The ghost girl stares into her eyes for a moment, before grinning and planting a wet kiss on her lips.");
 	outputText("\n\n\"<i>Good answer babe.  Now get dressed and hurry home before I change my mind.</i>\"  The girl hastily grabs her clothes and dresses herself.  It's quite a challenge, but after some frantic struggling she's reasonably covered up; her jeans are unbuttoned and visibly straining at the seams, while her once-baggy sweater now hugs tightly against her marshmallowy tummy.  The girl then hurries away, glancing back with an odd expression - relief? - before slipping out onto the streets of Tel'Adre.");
-	outputText("\n\nYou suddenly realise that throughout the debauched encounter, none of the other patrons so much as glanced your way.  Must be magic, you think to yourself.  \"<i>Yup, wonderful, wonderful magic,</i>\" says Shouldra; seems she's returned to your head.  \"<i>Well, I've had my fun, Champ.  Let's blow this popsicle stand!</i>\"  You head out of the bakery and return to camp, leaving behind a very confused Maddie.");
+	outputText("\n\nYou suddenly realize that throughout the debauched encounter, none of the other patrons so much as glanced your way.  Must be magic, you think to yourself.  \"<i>Yup, wonderful, wonderful magic,</i>\" says Shouldra; seems she's returned to your head.  \"<i>Well, I've had my fun, Champ.  Let's blow this popsicle stand!</i>\"  You head out of the bakery and return to camp, leaving behind a very confused Maddie.");
 	dynStats("lus", 30);
 	doNext(camp.returnToCampUseOneHour);
 }

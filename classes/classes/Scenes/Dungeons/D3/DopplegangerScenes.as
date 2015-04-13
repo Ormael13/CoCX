@@ -79,7 +79,7 @@
 
 				outputText("\n\nYou go slowly, enjoying the warmth and syncopated clenching of the mirror demon’s tunnel at leisure. Although he is initially frozen with sheer disbelief the need to relax in order to take your insistent [cock] softens him up, moving him in time with your thrusting. He moans from a combination of misery and intensity of the sensation you’re pushing upon him.");
 				if (player.findPerk(PerkLib.Buttslut) >= 0 || player.findPerk(PerkLib.MaraesGiftButtslut) >= 0) outputText("  You glory in your own decision to transform into an eager butt slut; the doppelganger’s back passage is tight, warm butter, accepting and clenching around your bulging prick like the perfect little boypussy you know it to be.");
-				outputText("  Now you’re locked into your defeated clone you feel no real wish to cause him pain. Indeed, as you lose yourself to the rhythm to the slow, tight, gradual sex a desire to force him to feel pleasure grows. Where is the fun in seeing your mirror image suffer, after all?");
+				outputText("  Now that you’re locked into your defeated clone you feel no real wish to cause him pain. Indeed, as you lose yourself to the rhythm to the slow, tight, gradual sex a desire to force him to feel pleasure grows. Where is the fun in seeing your mirror image suffer, after all?");
 				
 				outputText("\n\nYou hook an arm around his shoulder and let your fingers graze one of his nipples teasingly. He gasps, his sphincter tightening up around your [cock] delightfully.");
 
@@ -109,7 +109,7 @@
 				if (player.skinType == SKIN_TYPE_FUR) outputText("  You clamber on top of her, the rough mingling of your fur sparking deep urges within you, your animal half dreaming of frenzied, bestial mating in the wild. Your dick presses into her digitigrade thigh and she groans raggedly in response.");
 				else outputText(" You clamber on top of her, enjoying the give and take of her "+ (player.isGoo() ? "gooey" : "smooth") + " flesh as you lock your [hips] around their mirror counterparts, making her groan raggedly in response.");
 
-				outputText("\n\n“<i>I cannot believe you are doing this. There- there are demons who wouldn’t do this. What kind of sick bitch even are you?</i>“");
+				outputText("\n\n“<i>I cannot believe you are doing this. There- there are demons who wouldn’t do this. What kind of sick bitch are you?</i>\"");
 
 				outputText("\n\n“<i>Oh, shut up,</i>” you reply breezily. “<i>You’re the one who wouldn’t shut up about how much you wanted this body. I’m giving you exactly what you wished for.</i>” You roll her [hips], her cock");
 				if (player.cocks.length > 1) outputText("s");
@@ -148,7 +148,7 @@
 				else if (player.skinType == SKIN_TYPE_FUR) outputText("  You clamber on top of her, the rough mingling of your fur sparking deep urges within you, your animal half dreaming of frenzied, bestial mating in the wild. Your [vagina] presses into her digitigrade thigh and she groans raggedly in response.");
 				else outputText("  You clamber on top of her, enjoying the give and take of her "+ (player.isGoo() ? "gooey" : "smooth") + " flesh as you lock your [hips] around their mirror counterparts, making her groan raggedly in response.");
 
-				outputText("\n\n“<i>I cannot believe you are doing this. There- there are demons who wouldn’t do this. What kind of sick bitch even are you?</i>”");
+				outputText("\n\n“<i>I cannot believe you are doing this. There- there are demons who wouldn’t do this. What kind of sick bitch are you?</i>”");
 
 				outputText("\n\n“<i>Oh, shut up,</i>” you reply breezily. “<i>You’re the one who wouldn’t shut up about how much you wanted this body. I’m giving you exactly what you wished for.</i>” With your [hips] wrapped around hers she cannot stop you bending her open, exposing the mirror image of your [vagina],");
 				if (player.averageVaginalWetness() < 3) outputText(" gleaming invitingly");
