@@ -29,7 +29,7 @@ package classes.Scenes.Dungeons.D3
 			this.a = "the ";
 			this.short = "living statue";
 			this.imageName = "livingstatue";
-			this.long = "This animate marble statue shows numerous signs of wear and tear, but remains as strong and stable as the day it was carved. It's pearly, white skin is pockmarked in places from age, yet the alabaster muscles seem to move with almost liquid grace. You get the impression that the statue was hewn in the days before the demons, then brought to life shortly after. It bears a complete lack of genitalia - an immaculately carved leaf is all that occupies its loins. It wields a hammer carved from the same material as the rest of it.";
+			this.long = "This animate marble statue shows numerous signs of wear and tear, but remains as strong and stable as the day it was carved. Its pearly, white skin is pockmarked in places from age, yet the alabaster muscles seem to move with almost liquid grace. You get the impression that the statue was hewn in the days before the demons, then brought to life shortly after. It bears a complete lack of genitalia - an immaculately carved leaf is all that occupies its loins. It wields a hammer carved from the same material as the rest of it.";
 			
 			initStrTouSpeInte(100, 80, 25, 50);
 			initLibSensCor(10, 10, 100);
@@ -168,7 +168,7 @@ package classes.Scenes.Dungeons.D3
 		private function cycloneStrike():void
 		{
 			//Difficult to avoid, moderate damage.
-			outputText("Twisting back, the giant abruptly launches into a circular spin. It's hammer stays low enough to the ground that its circular path is tearing a swath of destruction through the once pristine garden, and it's coming in your direction!");
+			outputText("Twisting back, the giant abruptly launches into a circular spin. Its hammer stays low enough to the ground that its circular path is tearing a swath of destruction through the once pristine garden, and it's coming in your direction!");
 
 			var damage:Number = (175 + int((str + weaponAttack) - rand(player.tou) - player.armorDef)) / (rand(3) + 2);
 			//Avoid

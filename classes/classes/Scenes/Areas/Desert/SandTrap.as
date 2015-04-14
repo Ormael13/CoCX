@@ -69,7 +69,7 @@
 			}
 			//Quicksand attack success: (Speed and Strength loss, ability to fly free lost)
 			else {
-				outputText("  You can't get free in time and in a panic you realise you are now practically wading in sand.  Attempting to climb free now is going to be very difficult.");
+				outputText("  You can't get free in time and in a panic you realize you are now practically wading in sand.  Attempting to climb free now is going to be very difficult.");
 				if(player.canFly()) outputText("  You try to wrench yourself free by flapping your wings, but it is hopeless.  You are well and truly snared.");
 				trapLevel(-1);
 				if(findStatusAffect(StatusAffects.Climbed) < 0) createStatusAffect(StatusAffects.Climbed,0,0,0,0);

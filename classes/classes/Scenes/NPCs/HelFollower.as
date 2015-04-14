@@ -2299,7 +2299,7 @@ private function helAndSluttyHarpyMale():void
 	// > 4 cocks
 	else
 	{
-		outputText("\n\nYou realise that there's a lot of holes on offer between the two sluts; luckily you have just the right thing to solve the problem, cocks! You unleash [eachCock] upon the three holes that are still open. One [cock biggest2] snakes under the one currently pounding into Helia and slips inside her");
+		outputText("\n\nYou realize that there's a lot of holes on offer between the two sluts; luckily you have just the right thing to solve the problem, cocks! You unleash [eachCock] upon the three holes that are still open. One [cock biggest2] snakes under the one currently pounding into Helia and slips inside her");
 		if (flags[kFLAGS.HELIA_ANAL_TRAINING] == 0) outputText(" tight");
 		else if (flags[kFLAGS.HELIA_ANAL_TRAINING] == 1) outputText(" well-trained");
 		else if (flags[kFLAGS.HELIA_ANAL_TRAINING] >= 2) outputText(" gaped");

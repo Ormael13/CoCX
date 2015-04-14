@@ -630,7 +630,7 @@ package classes.Scenes {
 					}
 				}			
 			}
-			else { //Three or more cocks
+			else if(player.cockTotal() >= 3) { //Three or more cocks
 				//Grab it
 				//Play with sheath if has one
 				if (player.hasSheath()) {
@@ -982,7 +982,7 @@ package classes.Scenes {
 					outputText("Droplets of milk dribble from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
 				else if (player.biggestLactation() < 3)
 					outputText("Thin squirts of milk spray from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
-				else outputText("A constant stream of milk drizzles from each teat, soaking your " + player.legs() + " and crotch.  ");
+				else if(player.biggestLactation() >= 3) outputText("A constant stream of milk drizzles from each teat, soaking your " + player.legs() + " and crotch.  ");
 			}
 		}
 		
