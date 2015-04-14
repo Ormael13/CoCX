@@ -32,7 +32,6 @@ package classes.Scenes.Areas.HighMountains
 			var eggs:Function =null;
 			if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) eggs = spoidahsLegEggsInHarpeis;
 			var anal:Function =null;
-			var oral:* = WinOnHarpyAndOralRape;
 			var pussy:Function =null;
 			var scissor:Function =null;
 			var clitFuck:Function =null;
@@ -49,7 +48,8 @@ package classes.Scenes.Areas.HighMountains
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  What do you do to her?", false);
 
-				choices("Anal", anal, "Oral", oral, "Pussy", pussy, "Scissor", scissor, "Lay Eggs", eggs, "Clit Fuck", clitFuck, "", 0, "", 0, "", 0, "Nothing", cleanupAfterCombat);
+				choices("Anal", anal, "Oral", WinOnHarpyAndOralRape, "Pussy", pussy, "Scissor", scissor, "Lay Eggs", eggs,
+					"Clit Fuck", clitFuck, "", null, "", null, "", null, "Nothing", cleanupAfterCombat);
 			}
 			//Not horny?  Iz over
 			else cleanupAfterCombat();

@@ -329,7 +329,7 @@ package classes.Scenes.NPCs
 						//Accept her / Turn her down gently / Turn her down bluntly
 						var fur:Function = null;
 						if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) fur = amilyNoFur;
-						simpleChoices("Accept Her",desperateAmilyPleaAcceptHer,"RejectFurry",fur,"RejectGently",desperateAmilyPleaTurnDown,"BluntReject",desperateAmilyPleaTurnDownBlunt,"",0);
+						simpleChoices("Accept Her", desperateAmilyPleaAcceptHer, "RejectFurry", fur, "RejectGently", desperateAmilyPleaTurnDown, "BluntReject", desperateAmilyPleaTurnDownBlunt, "", null);
 						return;
 					}
 					//[First Meeting]
@@ -367,7 +367,7 @@ package classes.Scenes.NPCs
 
 						outputText("What do you do?", false);
 						//Accept Eagerly / Accept Hesitantly / Refuse
-						simpleChoices("AcceptEagerly",acceptAmilysOfferEagerly,"Hesitantly",acceptAmilyOfferHesitantly,"NoFurries",amilyNoFur,"Refuse",refuseAmilysOffer,"",0);
+						simpleChoices("AcceptEagerly", acceptAmilysOfferEagerly, "Hesitantly", acceptAmilyOfferHesitantly, "NoFurries", amilyNoFur, "Refuse", refuseAmilysOffer, "", null);
 						//Set flag for 'last gender met as'
 						flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
 						return;
@@ -1159,8 +1159,8 @@ package classes.Scenes.NPCs
 						else outputText("\"<i>You're coming along nicely, lover mine.</i>\" She smiles, proud as can be at your display of skill. \"<i>So, what brings you running to me?</i>\" she teases.\n\n", false);
 			}
 			//Sex / Talk / Talk then sex
-			if(player.lust >= 33) simpleChoices("Sex",sexWithAmily,"Talk",talkToAmily,"Both",talkThenSexWithAmily,"",0,"",0);
-			else simpleChoices("",0,"Talk",talkToAmily,"",0,"",0,"",0);
+			if (player.lust >= 33) simpleChoices("Sex", sexWithAmily, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
+			else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
 		}
 
 		//[Scare her]
@@ -1219,8 +1219,8 @@ package classes.Scenes.NPCs
 			}
 			//Sex / Talk / Talk then sex
 			//(Same as [Normal Remeeting))
-			if(player.lust >= 33) simpleChoices("Sex",sexWithAmily,"Talk",talkToAmily,"Both",talkThenSexWithAmily,"",0,"",0);
-			else simpleChoices("",0,"Talk",talkToAmily,"",0,"",0,"",0);
+			if (player.lust >= 33) simpleChoices("Sex", sexWithAmily, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
+			else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
 			//Affection -1;
 			flags[kFLAGS.AMILY_AFFECTION] -= 1;
 		}
@@ -1259,7 +1259,7 @@ package classes.Scenes.NPCs
 			outputText("Amily scuffs the ground with one of her finger-like toe claws, looking down at it as if it was the most interesting thing in the world – or as if she doesn't dare to look you in the eyes. \"<i>I... You know what I've been asking of you; from you, and you keep turning me down... but you kept talking to me, asking me about myself. You wanted to get to know me, but... why don't you want to know ALL of me? I... I want to give myself to you. You're the nicest, kindest man I've met – even before the demons destroyed my village. I want to be with you... but you don't seem to want to be with me.</i>\" She looks up to you at last, her eyes wet with tears. \"<i>Is there something wrong with me? Can't you like me in that way?</i>\" she pleads.\n\n", false);
 
 			//Accept her / Turn her down gently / Turn her down bluntly
-			simpleChoices("Accept Her",desperateAmilyPleaAcceptHer,"TurnDownGently",desperateAmilyPleaTurnDown,"TurnDownBlunt",desperateAmilyPleaTurnDownBlunt,"",0,"",0);
+			simpleChoices("Accept Her", desperateAmilyPleaAcceptHer, "TurnDownGently", desperateAmilyPleaTurnDown, "TurnDownBlunt", desperateAmilyPleaTurnDownBlunt, "", null, "", null);
 		}
 
 		//[Accept her]
@@ -1324,7 +1324,7 @@ package classes.Scenes.NPCs
 			//Increase baby count here rather than in 3 places.
 			flags[kFLAGS.AMILY_BIRTH_TOTAL]++;
 			//Leave / Watch / Help
-			simpleChoices("Leave",pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit,"Watch",heyIGotTicketsToMicePoppingOut,"Help",helpThatFukkinUngratefulBitchGiveBirth,"",0,"",0);
+			simpleChoices("Leave", pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit, "Watch", heyIGotTicketsToMicePoppingOut, "Help", helpThatFukkinUngratefulBitchGiveBirth, "", null, "", null);
 		}
 
 		//[Leave]
@@ -1969,7 +1969,7 @@ package classes.Scenes.NPCs
 			//[Take Charge]
 			//[Wait for Her]
 			//[Kiss Her]
-			simpleChoices("Take Charge",FirstTimeAmilyTakeCharge,"Wait 4 Her",beSomeKindofNervousDoucheAndWaitForAmily,"Kiss Her",kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay,"",0,"",0);
+			simpleChoices("Take Charge", FirstTimeAmilyTakeCharge, "Wait 4 Her", beSomeKindofNervousDoucheAndWaitForAmily, "Kiss Her", kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay, "", null, "", null);
 		}
 
 		//[=Take Charge=]
@@ -2097,7 +2097,7 @@ package classes.Scenes.NPCs
 				outputText("Amily's efforts at leading you through the ruined village are brisk and efficient. You don't really think she's looking forward to doing this all that much. No, that might be overstating things. It's more like she's under the impression that, details aside, this encounter between the two of you will be pure business.\n\n", false);
 
 				outputText("It's hard for you to say if you were led by a different route this time, but soon you are in what Amily has to offer for a private bedchamber, and she begins to reach for her clothes, obviously expecting you to do the same thing.\n\n", false);
-				simpleChoices("Business",amilySexBusiness,"Playtime 1st",amilySexPlaytimeFirst,"",0,"",0,"",0);
+				simpleChoices("Business", amilySexBusiness, "Playtime 1st", amilySexPlaytimeFirst, "", null, "", null, "", null);
 			}
 			//Moderate Affection Sex:
 			else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
@@ -2109,7 +2109,7 @@ package classes.Scenes.NPCs
 
 				outputText("Once you are inside, Amily gently tries to push you onto the bedding where you will be mating. Once you are seated, she smiles at you with a teasing expression and begins to slowly strip herself off, clearly trying to make the act seem as erotic as possible.", false);
 				if (pregEvent >= 6) outputText("  However, her confidence visibly slips when she has to fully bare the bulging belly that marks her pregnant state, but she musters the confidence and starts to show it off for you as well.", false);
-				simpleChoices("Step In",amilyStepTheFuckIn,"Watch Show",amilyEnjoyShow,"",0,"",0,"",0);
+				simpleChoices("Step In", amilyStepTheFuckIn, "Watch Show", amilyEnjoyShow, "", null, "", null, "", null);
 			}
 			else {
 				if (pregnancy.event >= 6) fuckAmilyPreg();
@@ -2173,7 +2173,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			amilySprite();
 			outputText("Watching Amily masturbate and tease herself in front of you is definitely erotic... but you want something more to this session than that. Licking your lips with a combination of arousal and nervousness, you tentatively reach out one hand and brush a feather-light touch against her fingers.  Her eyes, which she had previously been keeping closed, suddenly spring open, and you ready yourself to withdraw and apologize if she protests. But, for whatever reason, she does not protest and, emboldened, you continue to touch and caress her. You keep your touches gentle, light and restricted to non-intimate regions, but she seems to be enjoying this; she draws a little closer, and reaches out to brush your cheek, absentmindedly using the very hand she had been stroking her netherlips with before, and so the scent of her intimate regions drifts to your nostrils from where her fingers lay. Her eyes have rolled almost completely shut, the gaze she is giving you is a very languid one, but something about the set of her lips, only just starting to open, entices you to kiss them.\n\n", false);
-			simpleChoices("Refuse Kiss",AmilyGetKissed,"Kiss Her",AmilyTakeTheKiss,"",0,"",0,"",0);
+			simpleChoices("Refuse Kiss", AmilyGetKissed, "Kiss Her", AmilyTakeTheKiss, "", null, "", null, "", null);
 		}
 		//[Refuse the Kiss]
 		private function AmilyGetKissed():void {
@@ -2253,7 +2253,7 @@ package classes.Scenes.NPCs
 			outputText("By the time Amily is completely naked, she is clearly excited about what is coming up; you even think she's wet already. She stares at you with a mischievous, turned-on smile, waiting to see what you will do now that it is your turn to strip.\n\n", false);
 
 			outputText("Do you do a striptease of your own or just strip naked and get to business?", false);
-			simpleChoices("Striptease",StripForAmilyYouSlut,"Business",getDownWithSexTiem,"",0,"",0,"",0);
+			simpleChoices("Striptease", StripForAmilyYouSlut, "Business", getDownWithSexTiem, "", null, "", null, "", null);
 		}
 
 		//[Fair Is Fair]
@@ -2278,7 +2278,7 @@ package classes.Scenes.NPCs
 			dynStats("lus", 5);
 			amilySprite();
 			outputText("Once you are both naked, you embrace and begin with a deep kiss. Slowly you both sink down and start exploring each other's bodies. You feel Amily's hands caressing you while you lightly kiss her breasts, one of your hands slowly drifting down to her cute ass and lightly squeezing it. Looking into her eyes, you see a sparkle in them before she surprises you and somehow manages to turn you onto your back. Now she's sitting on your belly, with your already hard cock being fondled by her rather flexible tail. Grinning at you, she seems to plan on teasing you as long as possible before allowing you to enter her.\n\n", false);
-			simpleChoices("Play Along",playAlongWithAmilyWhataDumbBitch,"Please Her",workToPleaseTheCunt,"",0,"",0,"",0);
+			simpleChoices("Play Along", playAlongWithAmilyWhataDumbBitch, "Please Her", workToPleaseTheCunt, "", null, "", null, "", null);
 		}
 		//[Play Along]
 		private function playAlongWithAmilyWhataDumbBitch():void {
@@ -2307,7 +2307,7 @@ package classes.Scenes.NPCs
 			amilyPreggoChance();
 			flags[kFLAGS.AMILY_AFFECTION] += 3 + rand(4);
 			flags[kFLAGS.AMILY_FUCK_COUNTER]++;
-			simpleChoices("Say Goodbye",sayGoodByeToAmilyPostSecks,"Stay A While",stayAfterAmilyMiddleGradeSecks,"",0,"",0,"",0);
+			simpleChoices("Say Goodbye", sayGoodByeToAmilyPostSecks, "Stay A While", stayAfterAmilyMiddleGradeSecks, "", null, "", null, "", null);
 		}
 
 		//[Say Goodbye]
@@ -2663,7 +2663,8 @@ package classes.Scenes.NPCs
 					oral2 = corruptAmilyLickPussiesLikeAPro;
 					scissor = corruptAmilyScissorsLikeAPro;
 				}
-				choices("Anal",anal,"Get BJ",oral,"Get Licked",oral2,"GetPen'ed",penetrated,"Scissor",scissor,"Vagina",fuckCunt,"",0,"",0,"",0,"Nevermind",amilyFollowerEncounter);
+				choices("Anal", anal, "Get BJ", oral, "Get Licked", oral2, "GetPen'ed", penetrated, "Scissor", scissor,
+					"Vagina", fuckCunt, "", null, "", null, "", null, "Nevermind", amilyFollowerEncounter);
 			}
 			else {
 				//[Genderless PC Tries Sex]
@@ -2673,7 +2674,7 @@ package classes.Scenes.NPCs
 
 				outputText("As she collapses onto the ground, crying her heart out, you silently redress yourself and slink away. All this blubbering has turned you off, and it's obvious that nothing can be done until you've grown a cock, a pussy, or both.", false);
 				dynStats("lus", -20);
-				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) doNext(1);
+				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) doNext(playerMenu);
 				else doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 			}
 		}
@@ -2712,7 +2713,7 @@ package classes.Scenes.NPCs
 				//(Start [horsecock]
 				outputText("Amily is a 5' 2\" tall "+what+", with a lean and wiry build. Her pink eyes normally twinkle merrily, but they can turn hard and cold if the circumstances warrant, just as the normally friendly grin "+onHerMuzzle+"can turn cruel and harsh when she is angry. "+furDesc+" a long, hairless mouse's tail that sways and twitches constantly from her behind. She is currently wearing " + flags[kFLAGS.AMILY_CLOTHING] + ". She has " + amilyHips() + " and a " + amilyButt() + ".\n\n", false);
 				//(End [horsecock]
-				outputText("She has a pair of " + amilyTits() + " on her chest. They have " + flags[kFLAGS.AMILY_NIPPLE_LENGTH] + "-inch nipples at their tips and must be at least " + breastCup(flags[kFLAGS.AMILY_CUP_SIZE]) + "s.\n\n", false);
+				outputText("She has a pair of " + amilyTits() + " on her chest. They have " + flags[kFLAGS.AMILY_NIPPLE_LENGTH] + "-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.AMILY_CUP_SIZE]) + "s.\n\n", false);
 
 				//(If Amily has a penis:
 				if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
@@ -2895,7 +2896,8 @@ package classes.Scenes.NPCs
 
 			outputText("You stride up to her and take her in your arms, kissing her deeply. She melts enthusiastically into your embrace, kissing you back just as hard, her tail winding around your " + player.leg() + ". You lead her back to the nest she has made for herself and firmly but gently place her on her back there. She smiles up at you. \"<i>Ooh, taking charge, are we?</i>\" She trills with pleasure, tail waving to and fro with sincere excitement.\n\nWhat will you do?", false);
 			var scene:Number = rand(4);
-			choices("Fuck",fuck,"DrinkMilk",drinkMilk,"Eat Out",takeChargeAmilyEatOut,"GetSucked",getSucked,"Scissor",scissor,"Mount Her",mountHer,"Buttfuck",buttFuckButtFUCKBUTTFUCK,"Catch Anal",catchs,"",0,"",0);
+			choices("Fuck", fuck, "DrinkMilk", drinkMilk, "Eat Out", takeChargeAmilyEatOut, "GetSucked", getSucked, "Scissor", scissor,
+				"Mount Her", mountHer, "Buttfuck", buttFuckButtFUCKBUTTFUCK, "Catch Anal", catchs, "", null, "", null);
 		}
 
 
@@ -3378,7 +3380,7 @@ package classes.Scenes.NPCs
 						else outputText("Her logic is undeniable, even though you had looked forward to enjoying even more of her body than before. You nod and explain that you understand perfectly; you want what's best for her above anything else.\n\n", false);
 
 						outputText("You put the vial back in its pouch, as Amily excuses herself and walks off.", false);
-						doNext(1);
+						doNext(playerMenu);
 						return;
 					}
 					//[Purified Incubus Draft - If Amily is Hermaphrodite]
@@ -4747,7 +4749,7 @@ package classes.Scenes.NPCs
 			outputText("You interject, telling her to slow down and breathe, you're not going anywhere. Amily pants, then finally squeaks out, \"<i>I'm in love with you!</i>\" before her face turns bright red. Stunned, you ask her to repeat that. \"<i>I said... I'm in love with you. I... ah, forget it, who was I kidding?</i>\" She trails off, sadly, and you watch as she begins to turn around and shuffle off.", false);
 			//Set flag that she's confessed her lesbo-live!
 			flags[kFLAGS.AMILY_CONFESSED_LESBIAN] = 1;
-			simpleChoices("Stop Her",amilyLesboStopHer,"Let Her Go",amilyLesboLetHerGo,"",0,"",0,"",0);
+			simpleChoices("Stop Her", amilyLesboStopHer, "Let Her Go", amilyLesboLetHerGo, "", null, "", null, "", null);
 		}
 		//[=Stop Her=]
 		private function amilyLesboStopHer():void {
@@ -4792,7 +4794,7 @@ package classes.Scenes.NPCs
 			outputText("She looks down at the ground, unable to meet your eyes, then pulls her tattered pants down to reveal something you never would have expected. A penis - a four inch long, surprisingly human-like penis, already swelling to erection. Blushing, she starts to speak, still not looking at you. \"<i>I... I thought that, if it's my idea and all, I should be the one to grow this thing... Please, I love you, I want to have children with you, can't we -</i>\"\n\n", false);
 			flags[kFLAGS.AMILY_WANG_LENGTH] = 4;
 			flags[kFLAGS.AMILY_WANG_GIRTH] = 1;
-			simpleChoices("Accept",amilyOnGirlSurpriseBonerAcceptance,"Reject",amilyOnGirlSurpriseBonerREJECT,"",0,"",0,"",0);
+			simpleChoices("Accept", amilyOnGirlSurpriseBonerAcceptance, "Reject", amilyOnGirlSurpriseBonerREJECT, "", null, "", null, "", null);
 		}
 		//[=Accept=]
 		private function amilyOnGirlSurpriseBonerAcceptance():void {
@@ -4958,7 +4960,7 @@ package classes.Scenes.NPCs
 			outputText(", but... I love you. The children, they're going to leave here now, and set up a new village somewhere else. But I... I want to stay here with you. Forever. Please, say yes.</i>\"\n\n", false);
 			outputText("Do you accept her offer?", false);
 			flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]++;
-			simpleChoices("Accept",acceptAmilyAsYourFemaleWaifu,"StayFriends",declineButBeFriends,"ShootDown",notInterestedInDumbshitMouseBitches,"",0,"",0);
+			simpleChoices("Accept", acceptAmilyAsYourFemaleWaifu, "StayFriends", declineButBeFriends, "ShootDown", notInterestedInDumbshitMouseBitches, "", null, "", null);
 		}
 
 		//[=Accept=]
@@ -4978,7 +4980,7 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.AMILY_NIPPLE_LENGTH] = .3;
 			flags[kFLAGS.AMILY_HIP_RATING] = 6;
 			flags[kFLAGS.AMILY_ASS_SIZE] = 6;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//[=Stay Friends=]
@@ -4989,7 +4991,7 @@ package classes.Scenes.NPCs
 
 			outputText("Amily doesn't look entirely happy, but you assure her that you will keep coming back to see her. And when you tease at the possibility of a few more litters in your respective futures, stroking her penis through her tattered pants, she blushes but agrees to go.\n\n", false);
 			//(Amily returns to the Ruined Village; this scene will repeat the next time the player gives birth to a litter of Amily's children)
-			doNext(1);
+			doNext(playerMenu);
 		}
 		//Shoot the bitch down!
 		//[=Not Interested=]
@@ -5001,7 +5003,7 @@ package classes.Scenes.NPCs
 			outputText("Amily reels, heartstruck, her expression making it clear that her heart has shattered, tears rolling down her face. \"<i>I...I didn't know that was the way you felt about me. F-Fine, if that's how it is...</i>\" She bursts into sobs and runs away; you know she'll never come back.\n\n", false);
 			//Disable village encounters, go!
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Gender Modified:
@@ -5174,8 +5176,8 @@ package classes.Scenes.NPCs
 						flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
 						//(Use the Remeeting scene options.)
 						if (player.lust >= 33) sex = sexWithAmily;
-						if (sex != null) simpleChoices("Sex",sex,"Talk",talkToAmily,"Both",talkThenSexWithAmily,"",0,"",0);
-						else simpleChoices("",0,"Talk",talkToAmily,"",0,"",0,"",0);
+						if (sex != null) simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
+						else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
 						return;
 					}
 					//High Affection:
@@ -5187,8 +5189,8 @@ package classes.Scenes.NPCs
 						flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
 						//(Use the Remeeting scene options.)
 						if (player.lust >= 33) sex = sexWithAmily;
-						if (sex != null) simpleChoices("Sex",sex,"Talk",talkToAmily,"Both",talkThenSexWithAmily,"",0,"",0);
-						else simpleChoices("",0,"Talk",talkToAmily,"",0,"",0,"",0);
+						if (sex != null) simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
+						else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
 						return;
 					}
 				}
@@ -5315,7 +5317,7 @@ package classes.Scenes.NPCs
 			//doYesNo(beAmilysDadAsAHerm,fuckNoYouWontBeAmilysHermDaddy);
 			var noFurry:Function = null;
 			if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) noFurry = amilyNoFur;
-			simpleChoices("Yes",beAmilysDadAsAHerm,"No",fuckNoYouWontBeAmilysHermDaddy,"NoFurry",noFurry,"",0,"",0);
+			simpleChoices("Yes", beAmilysDadAsAHerm, "No", fuckNoYouWontBeAmilysHermDaddy, "NoFurry", noFurry, "", null, "", null);
 		}
 
 		//[=Yes=]
@@ -5355,11 +5357,11 @@ package classes.Scenes.NPCs
 
 			outputText("You point out that it would be for the best for her plans; this way, the two of you will be able to bear litters simultaneously, so she can have children even faster and in greater numbers than before. Giving her a winning smile, you clasp hold of her hands gently and ask if she'll please consider doing it; for you?\n\n", false);
 
-			outputText("Amily looks crestfallen, then finally nods her head, slowly. \"<i>I... I'm not really sure about this, but... if it's for you, " + player.short + ", then... I'll do it.</i>\" She takes the vial, staring at it apprehensively, then pops the cork and swallows it down quickly in a single gulp. She shudders - first in disgust at what she actually drank, then with pleasure. Moaning ecstatically, she pulls off her pants to give you a full view as her clitoris swells, longer and thicker; finally, skin peels back at the tip to reveal what is unmistakably the glans of a penis, complete with a cum-gouting slit as she experiences her first male orgasm.\n\n", false);
+			outputText("Amily looks crestfallen, then finally nods her head, slowly. \"<i>I... I'm not really sure about this, but... if it's for you, " + player.short + ", then... I'll do it.</i>\" She takes the vial, staring at it apprehensively, then pops the cork and swallows it down quickly in a single gulp. She shudders - first in disgust at what she actually drank, then with pleasure. Moaning ecstatically, she " + (pregnancy.event >= 6 ? "lifts her shirt" : "pulls off her pants") + " to give you a full view as her clitoris swells, longer and thicker; finally, skin peels back at the tip to reveal what is unmistakably the glans of a penis, complete with a cum-gouting slit as she experiences her first male orgasm.\n\n");
 
 			outputText("Amily is now a hermaphrodite. Her human-like penis is four inches long and one inch thick.\n\n", false);
 
-			outputText("Catching her breath, she stares at her new appendage with an unreadable expression, then she stares at you. \"<i>Well, now I've got a penis... so that means you're coming with me to let me try it out!</i>\"\n\n", false);
+			outputText("Catching her breath, she " + (pregnancy.event >= 6 ? "tries to get a look at her new member over her bulging belly. When that fails she runs her hand over it, touching it carefully while maintaining an unreadable expression. Then she stares at you and says, " : "stares at her new appendage with an unreadable expression, then she stares at you.") + " \"<i>Well, now I've got a penis... so that means you're coming with me to let me try it out!</i>\"\n\n", false);
 
 			outputText("You agree, and allow her to begin leading you to the \"<i>bedroom</i>\".", false);
 			flags[kFLAGS.AMILY_WANG_LENGTH] = 4;
@@ -6080,13 +6082,13 @@ package classes.Scenes.NPCs
 			else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 1) {
 				if(player.gender == 1) doNext(rapeCorruptAmily2Male);
 				else if(player.gender == 2) doNext(rapeCorruptAmily2Female);
-				else if(player.gender == 3) simpleChoices("MaleFocus",rapeCorruptAmily2Male,"FemaleFocus",rapeCorruptAmily2Female,"",0,"",0,"",0);
+				else if (player.gender == 3) simpleChoices("MaleFocus", rapeCorruptAmily2Male, "FemaleFocus", rapeCorruptAmily2Female, "", null, "", null, "", null);
 			}
 			//3nd rape scene
 			else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 2) {
 				if(player.gender == 1) doNext(rapeCorruptAmily3Male);
 				else if(player.gender == 2) doNext(rapeCorruptAmily3Female);
-				else if(player.gender == 3) simpleChoices("MaleFocus",rapeCorruptAmily3Male,"FemaleFocus",rapeCorruptAmily3Female,"",0,"",0,"",0);
+				else if (player.gender == 3) simpleChoices("MaleFocus", rapeCorruptAmily3Male, "FemaleFocus", rapeCorruptAmily3Female, "", null, "", null, "", null);
 			}
 			//4nd rape scene
 			else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 3) {
@@ -6131,7 +6133,7 @@ package classes.Scenes.NPCs
 			//[(if herm)
 			if(player.gender == 3) {
 				outputText("Which part of you should Amily lick?", false);
-				simpleChoices("Cock",rapeCorruptAmily1Male,"Pussy",rapeCorruptAmily1Female,"",0,"",0,"",0);
+				simpleChoices("Cock", rapeCorruptAmily1Male, "Pussy", rapeCorruptAmily1Female, "", null, "", null, "", null);
 			}
 			//Cocks!
 			else if(player.gender == 1) doNext(rapeCorruptAmily1Male);
@@ -6445,7 +6447,7 @@ package classes.Scenes.NPCs
 			if(player.gender == 3) {
 				outputText("Which part should you use to finish off the mousette?", false);
 				//[Cock] [Pussy]
-				simpleChoices("Cock",rapeCorruptAmily4Male,"Pussy",rapeCorruptAmily4Female,"",0,"",0,"",0);
+				simpleChoices("Cock", rapeCorruptAmily4Male, "Pussy", rapeCorruptAmily4Female, "", null, "", null, "", null);
 			}
 			else if(player.gender == 2) doNext(rapeCorruptAmily4Female);
 			else doNext(rapeCorruptAmily4Male);
@@ -7026,7 +7028,7 @@ package classes.Scenes.NPCs
 
 			outputText("Well, this could be interesting.  If you get both the girls drunk, it might be easy (or inevitable) for something sexual to happen.  Or, you could take Amily home right now and make sure nothing untoward happens to either of your lovers.", false);
 			//(Display Options: [Drink!] [Leave])
-			simpleChoices("Drink",liqueurUpTheWaifus,"",0,"",0,"",0,"Leave",amilyXUrtaRunAWAY);
+			simpleChoices("Drink", liqueurUpTheWaifus, "", null, "", null, "", null, "Leave", amilyXUrtaRunAWAY);
 		}
 
 		//Amily/Urta -- LEAVE
@@ -7069,10 +7071,10 @@ package classes.Scenes.NPCs
 			else outputText("over the mouse's skin ", false);
 			outputText("and Amily wrapping her lithe little tail around Urta's massive endowment.  You strip off your " + player.armorName + " and, looming over the girls, decide on how you want to go about this.", false);
 			//(Display Appropriate Options: [Use Cock] [Use Vag])
-			if(player.gender == 1) simpleChoices("Use Cock",threesomeAmilUrtaCAWKS,"",0,"",0,"",0,"",0);
-			if(player.gender == 2) simpleChoices("",0,"Use Vagina",urtaXAmilyCuntPussyVagSQUICK,"",0,"",0,"",0);
-			if(player.gender == 3) simpleChoices("Use Cock",threesomeAmilUrtaCAWKS,"Use Vagina",urtaXAmilyCuntPussyVagSQUICK,"",0,"",0,"",0);
-			if(player.gender == 0) simpleChoices("Nevermind",camp.returnToCampUseOneHour,"",0,"",0,"",0,"",0);
+			if (player.gender == 1) simpleChoices("Use Cock", threesomeAmilUrtaCAWKS, "", null, "", null, "", null, "", null);
+			if (player.gender == 2) simpleChoices("", null, "Use Vagina", urtaXAmilyCuntPussyVagSQUICK, "", null, "", null, "", null);
+			if (player.gender == 3) simpleChoices("Use Cock", threesomeAmilUrtaCAWKS, "Use Vagina", urtaXAmilyCuntPussyVagSQUICK, "", null, "", null, "", null);
+			if (player.gender == 0) simpleChoices("Nevermind", camp.returnToCampUseOneHour, "", null, "", null, "", null, "", null);
 		}
 
 		//Amily/Urta -- Use Cock
@@ -7355,7 +7357,7 @@ package classes.Scenes.NPCs
 				else outputText("[pg]Sadly, you're too big to fuck any of them.");
 			}
 			else outputText("[pg]If only you had a cock, you could fuck them all.");
-			addButton(4, "Leave", camp.campMenu);
+			addButton(4, "Leave", playerMenu);
 			//[Get doubleteamed {Vag req}] [Fuck Cunts] [Fuck 'Em All][Skedaddle]
 		}
 		//Fuck Cunts/All (extra pg or two) (Z)
@@ -7645,7 +7647,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nOnce you tire of slinging the icy liquid to and fro, you take the time to remove your [armor] and lay on the bank.  Amily stops what she's doing to watch, playfully asking, \"<i>Tired of losing already?</i>\" while her eyes drink you in.");
 			outputText("\n\nYou smirk and declare that her skimpy two piece has put her body on such display that you figured the only way to compete is to go naked yourself.  Stretching your arms up, you let droplets cascade down your [chest] and unrepentantly gaze upon the mouse-woman's shrink-wrapped form.  The water has soaked into her clingy garb, and with the added moisture, you can actually see parts of her in perfect detail.  Sure, her pussy made a clearly visible camel toe before, but now... it's like you're getting a black-framed peep show.  Her pert breasts bounce when she rocks back in surprise at your statement.");
 			outputText("\n\n\"<i>You perv!</i>\" Amily shouts in mock surprise, fixing her eyes on your own nipples and exposed groin.  \"<i>If you're going to be dirty about it,</i>\" she begins, her voice dropping to a decidedly uncharacteristic purr, \"<i>then you had better be ready for what you get.</i>\"  Her hands come to rest on your shoulders, and as she looks you in the eyes, she says \"<i>You got me all wet, too.</i>\"");
-			outputText("\n\nThe petite mouse-girl launches herself into your arms, tight against your chest.  She easily reaches down to her bottoms and pushes them aside, just in time for her soaked muff to meet your " + cockDescript(x) + ".  Your " + cockHead(x) + " glides through her silken gateway with ease, aided by Amily's liquid ardor.  Water and juices drip from both your frames as your short-statured lover rides you, and your hands find their way to her " + amilyButt() + ", grabbing hold to pull her down, deeper.  After being in the frigid stream, the clinging folds of Amily's tight cunt feel like a hot salve for your erection, shooting electric jolts of hot pleasure through your body as she comes to rest on your ");
+			outputText("\n\nThe petite mouse-girl launches herself into your arms, tight against your chest.  She easily reaches down to her bottoms and pushes them aside, just in time for her soaked muff to meet your " + cockDescript(x) + ".  Your " + player.cockHead(x) + " glides through her silken gateway with ease, aided by Amily's liquid ardor.  Water and juices drip from both your frames as your short-statured lover rides you, and your hands find their way to her " + amilyButt() + ", grabbing hold to pull her down, deeper.  After being in the frigid stream, the clinging folds of Amily's tight cunt feel like a hot salve for your erection, shooting electric jolts of hot pleasure through your body as she comes to rest on your ");
 			if(player.balls > 0) outputText("[balls]");
 			else outputText("base");
 			outputText(".");
@@ -7659,7 +7661,7 @@ package classes.Scenes.NPCs
 			if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) outputText("  Her whiskers tickle your cheeks as s");
 			else outputText("  S");
 			outputText("he comes up for a kiss.  Slender lips meet your own, her narrow, skillful tongue slipping into your mouth.");
-			outputText("\n\nBurning with desire, you walk out of the water with your lover speared on your shaft, and as soon as you're on solid ground, you begin to fuck her.  Your hands pull her up, almost off your " + cockHead(x) + " before you let gravity pull her back down, slightly inclining your [hips] to speed the pleasurable friction along. Amily squeaks when she hits rock bottom, breaking the kiss before she plants it again with renewed vigor.");
+			outputText("\n\nBurning with desire, you walk out of the water with your lover speared on your shaft, and as soon as you're on solid ground, you begin to fuck her.  Your hands pull her up, almost off your " + player.cockHead(x) + " before you let gravity pull her back down, slightly inclining your [hips] to speed the pleasurable friction along. Amily squeaks when she hits rock bottom, breaking the kiss before she plants it again with renewed vigor.");
 			outputText("\n\nThe two of you fuck like horny animals at their favorite watering hole, and every chance you get, you make sure to let a stray hand touch her " + amilyNipples() + ", " + amilyTits() + ", or " + amilyButt() + ".  The soaked girl is soon twitching and squirming atop you, wordlessly riding out an epic climax.  Her sweet cavity caresses your " + cockDescript(x) + " throughout, wringing your tumescent dick with insistent female pleasure, as if that could somehow milk your cum from you.");
 			outputText("\n\n\"<i>Gods,</i>\" Amily gasps, \"<i>You're incredible!</i>\"  She looks at you through heavy eyelids and kisses you again, though her muscles spasm wildly when you resume your quick, wet fuck.  You pound her hard and fast, rutting her hot hole hard enough to make her whole body bounce in your arms.  Amily is little more than a pile of quivering female flesh, snug around your " + cockDescript(x) + " and just waiting to be impregnated.  Shoving her down, you throw back your head and cum at last, pumping thick seed into her.");
 			if(player.cockTotal() > 1) {

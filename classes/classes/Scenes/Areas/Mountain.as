@@ -217,7 +217,7 @@ package classes.Scenes.Areas
 						doNext(camp.returnToCampUseOneHour);
 						return;
 					}
-					eventParser(5052);
+					kGAMECLASS.wormEncounter();
 				}
 				else {
 					//If worms are off or the PC is infested, no worms.

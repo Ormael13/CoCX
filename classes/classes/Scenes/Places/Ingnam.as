@@ -66,7 +66,7 @@ package classes.Scenes.Places
 			addButton(3, "Inn", menuTavern);
 			addButton(4, "Farm", ingnamFarm.menuFarm);
 			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0) addButton(5, "Return2Camp", returnToMareth);
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && inventory.showStash() && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) addButton(6, "Stash", kGAMECLASS.camp.stash);
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && inventory.showStash() && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) addButton(6, "Stash", inventory.stash);
 			addButton(7, "Inventory", inventory.inventoryMenu);
 			if (player.lust >= 30) {
 				if (player.lust >= player.maxLust()) {
@@ -74,18 +74,18 @@ package classes.Scenes.Places
 					removeButton(0);
 					removeButton(4);
 				}
-				addButton(8, "Masturbate", eventParser, 42);
-				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", eventParser, 42);
+				addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateGo);
+				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateGo);
 			}
 			//Show wait/rest/sleep depending on conditions.
-			addButton(9, "Wait", eventParser, 40);
-			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", eventParser, 11);
+			addButton(9, "Wait", kGAMECLASS.camp.doWait);
+			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", getGame().camp.rest);
 			if (model.time.hours >= 21 || model.time.hours < 6) {
 				removeButton(0);
 				removeButton(1);
 				removeButton(2);
 				removeButton(4);
-				addButton(9, "Sleep", eventParser, 41);
+				addButton(9, "Sleep", getGame().camp.doSleep);
 			}
 		}
 		
@@ -117,7 +117,7 @@ package classes.Scenes.Places
 			if (hasWeapon) outputText("\n\n<b>Unfortunately, you were instructed to leave your weapon behind.</b>");
 			flags[kFLAGS.IN_INGNAM] = 0;
 			flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] = 1;
-			doNext(kGAMECLASS.charCreation.getBanishedToMarethForReal);
+			doNext(kGAMECLASS.charCreation.arrival);
 		}
 		
 		public function returnToMareth():void {
@@ -346,7 +346,7 @@ package classes.Scenes.Places
 		public function startMeditate():void {
 			if (player.findPerk(PerkLib.HistoryReligious) >= 0) dynStats("lib", -0.5, "cor", -0.5); //Bonus points for religious perks.
 			flags[kFLAGS.FORCE_MEDITATE] = 1; //Sets flag to 1 to force meditate. The flag itself is set to 0 after meditate is done.
-			eventParser(42); //Fires the event.
+			kGAMECLASS.masturbation.masturbateGo(); //Fires the event.
 		}
 		
 		//Tavern

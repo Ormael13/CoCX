@@ -200,7 +200,7 @@ package classes.Scenes
 			addAchievement("Up to Eleven", kACHIEVEMENTS.GENERAL_UP_TO_11, "Take your height up to 11 feet.");
 			
 			menu();
-			addButton(13, "" + achievementsEarned + "/" + achievementsTotal + " unlocked", eventParser, 9999);
+			addButton(13, "" + achievementsEarned + "/" + achievementsTotal + " unlocked", kGAMECLASS.doNothing);
 			addButton(14, "Back", kGAMECLASS.mainMenu);
 		}
 		

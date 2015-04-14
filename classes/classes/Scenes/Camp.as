@@ -30,19 +30,19 @@
 		{
 			return kGAMECLASS.inventory.hasItemInStorage(itype);
 		}
+/*
 		protected function hasItemsInStorage():Boolean
 		{
 			return kGAMECLASS.inventory.hasItemsInStorage();
 		}
-/*
 		protected function hasItemsInRacks(armor:Boolean = false):Boolean
 		{
 			return kGAMECLASS.inventory.hasItemsInRacks(type);
 		}
 */
 
-		public function Camp()
-		{
+		public function Camp(campInitialize:Function) {
+			campInitialize(doCamp); //Pass the doCamp function up to CoC. This way doCamp is private but the CoC class itself can call it.
 		}
 		
 		public var cabinProgress:CabinProgress = new CabinProgress();
@@ -52,9 +52,11 @@
 		public var dungeonS:DesertCave = new DesertCave();
 		public var dungeonH:HelDungeon = new HelDungeon();
 		
+/* Replaced with calls to playerMenu
 		public function campMenu():void {
-			kGAMECLASS.eventParser(1);
+			kGAMECLASS.playerMenu();
 		}
+*/
 		
 		public function returnToCamp(timeUsed:int):void {
 			clearOutput();
@@ -83,8 +85,7 @@
 	protected var heliaJoinsStream:Boolean;
 	protected var amilyJoinsStream:Boolean;
 
-	
-public function doCamp():void {
+private function doCamp():void { //Only called by playerMenu
 	//Force autosave on HARDCORE MODE! And level-up.
 	if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
 	{
@@ -106,18 +107,22 @@ public function doCamp():void {
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
 	getGame().inCombat = false;
-	if(kGAMECLASS.inDungeon) {
+/* Can't happen - playerMenu will call dungeon appropriate menu instead of doCamp while inDungeon is true
+	if (kGAMECLASS.inDungeon) {
 		mainView.showMenuButton( MainView.MENU_DATA );
 		mainView.showMenuButton( MainView.MENU_APPEARANCE );
-		kGAMECLASS.dungeons.checkRoom();
+		kGAMECLASS.playerMenu();
 		return;
 	}
+*/
 	//Clear out Izma's saved loot status
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
 	//History perk backup
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] == 0) {
+	if (flags[kFLAGS.HISTORY_PERK_SELECTED] == 0) {
+		flags[kFLAGS.HISTORY_PERK_SELECTED] = 2;
 		hideMenus();
-		fixHistory();
+		getGame().charCreation.chooseHistory();
+//		fixHistory();
 		return;
 	}
 	fixFlags();
@@ -310,14 +315,13 @@ public function doCamp():void {
 			return;
 		}
 		else {
-			if(model.time.hours < 6 || model.time.hours > 20) {
-				eventParser(41);
-				return;
+			if (model.time.hours < 6 || model.time.hours > 20) {
+				doSleep();
 			}
 			else {
-				eventParser(11);
-				return;
+				rest();
 			}
+			return;
 		}
 	}
 	if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0) {
@@ -472,15 +476,12 @@ public function doCamp():void {
 	flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 0;
 	campQ = false;
 	//Build explore menus
-	var farm:* = 0;
-	var placesNum:* = 0;
-	var followers:* = 0;
-	var lovers:* = 0;
-	var slaves:* = 0;
+	var placesEvent:Function = (placesKnown() ? places : null);
+	var followers:Function = null;
+	var lovers:Function = null;
+	var slaves:Function = null;
 	var storage:Function = null;
-	if (inventory.showStash()) storage = stash;
-	if (placesCount() > 0) placesNum = 71; 
-	if(kGAMECLASS.whitney > 0) farm = 7;
+	if (inventory.showStash()) storage = inventory.stash;
 	//Clear stuff
 	if(player.findStatusAffect(StatusAffects.SlimeCravingOutput) >= 0) player.removeStatusAffect(StatusAffects.SlimeCravingOutput);
 	//Reset luststick display status (see event parser)
@@ -518,13 +519,8 @@ public function doCamp():void {
 		mainView.statsView.hideLevelUp();
 	}
 	//Build main menu
-	
-	
-	var masturbate:* = 0;
-	var rest:* = 0;
-	var explore:* = 2;
-	if(player.fatigue > 50) rest = 11;	
-	if(player.lust > 30) masturbate = 42;
+	var exploreEvent:Function = getGame().exploration.doExplore;
+	var masturbate:Function = (player.lust > 30 ? getGame().masturbation.masturbateMenu : null);
 	clearOutput();
 	updateAchievements();
 	
@@ -812,8 +808,24 @@ public function doCamp():void {
 		}
 		else {
 			outputText("<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>\n\n", false);
+			exploreEvent = null;
+			placesEvent = null;
+			//This once disabled the ability to rest, sleep or wait, but ir hasn't done that for many many builds
 		}
 	}
+	var baitText:String = "Masturbate";
+	if(((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)) baitText = "Meditate";
+	//Initialize companions/followers
+	if(model.time.hours > 4 && model.time.hours < 23) {
+		if(followersCount() > 0) 
+			followers = campFollowers;
+		if(slavesCount() > 0) 
+			slaves = campSlavesMenu;
+		if(loversCount() > 0) 
+			lovers = campLoversMenu;
+	}
+	var restEvent:Function = doWait;
+	var restName:String = "Wait";
 	//Set up rest stuff
 	//Night
 	if(model.time.hours < 6 || model.time.hours > 20) {
@@ -822,12 +834,20 @@ public function doCamp():void {
 		if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
 			outputText("Your camp is silent as your companions are sleeping right now.\n", false);
 		}
+		restName = "Sleep";
+		restEvent = doSleep;
+		exploreEvent = null;
+		placesEvent = null;
 	}
 	//Day Time!
 	else {
 		if (model.time.hours == 19) outputText("The sun is close to the horizon, getting ready to set. ", false);
 		if (model.time.hours == 20) outputText("The sun has already set below the horizon. The sky glows orange. ", false);
 		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n", false);
+		if(player.fatigue > 40 || player.HP/player.maxHP() <= .9) {
+			restName = "Rest";
+			restEvent = rest;
+		}
 	}
 	
 	//Unlock cabin.
@@ -835,38 +855,39 @@ public function doCamp():void {
 	{
 		flags[kFLAGS.CAMP_CABIN_PROGRESS] = 1;
 		outputText("You realize that you have spent a month sleeping in tent every night. You think of something so you can sleep nicely and comfortably.", true)
-		doNext(1);
+		doNext(playerMenu);
 		return;
 	}
-	
 	//Unlock something in character creation.
 	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] == 0)
 	{
-		if (player.gender == 3)
+		if (player.gender == GENDER_HERM)
 		{
 			(flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1)
 			outputText("\n\n<b>Congratulations! You have unlocked hermaphrodite option on character creation, accessible from New Game Plus!</b>");
 			kGAMECLASS.saves.savePermObject(false);
 		}
 	}
+	
 	//Menu
 	//choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves", slaves, "Camp Actions", canCampStuff, baitText, masturbate, restName, restEvent);
 	menu();
-	addButton(0, "Explore", eventParser, explore);
+	addButton(0, "Explore", exploreEvent);
 	if (placesCount() > 0) addButton(1, "Places", places);
 	addButton(2, "Inventory", inventory.inventoryMenu);
-	if (inventory.showStash()) addButton(3, "Stash", stash);
+	if (inventory.showStash()) addButton(3, "Stash", inventory.stash);
 	if (followersCount() > 0) addButton(4, "Followers", campFollowers);
 	if (loversCount() > 0) addButton(5, "Lovers", campLoversMenu);
 	if (slavesCount() > 0) addButton(6, "Slaves", campSlavesMenu);
 	addButton(7, "Camp Actions", campActions);
+	var canFap:Boolean = player.findStatusAffect(StatusAffects.Dysfunction) < 0 && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 	if (player.lust >= 30) {
-		addButton(8, "Masturbate", eventParser, 42);
-		if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", eventParser, 42);
+		if (canFap) addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateGo);
+		if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateGo);
 	}
-	addButton(9, "Wait", eventParser, 40);
-	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", eventParser, 11);
-	if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", eventParser, 41);
+	addButton(9, "Wait", doWait);
+	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", rest);
+	if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", doSleep);
 
 	//Remove buttons according to conditions.
 	if (model.time.hours >= 21 || model.time.hours < 6) {
@@ -879,7 +900,6 @@ public function doCamp():void {
 			removeButton(7);
 		}
 	}
-	var canFap:Boolean = player.findStatusAffect(StatusAffects.Dysfunction) < 0 && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 	if (player.lust >= player.maxLust() && canFap) {
 		removeButton(0);
 		removeButton(1);
@@ -907,77 +927,15 @@ public function doCamp():void {
 		badEndMinLust();
 	}
 }
-
-//-----------------
-//-- STORAGE
-//-----------------
-public function stash():Boolean {
-	/*Hacked in cheat to enable shit
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;*/
-	//REMOVE THE ABOVE BEFORE RELASE ()
-	hideMenus();
-	clearOutput();
-	spriteSelect(-1);
-	menu();
-	
-	if (flags[kFLAGS.ANEMONE_KID] > 0) {
-		anemoneScene.anemoneBarrelDescription();
-		if (model.time.hours >= 6) addButton(4, "Anemone", anemoneScene.approachAnemoneBarrel);
-	}
-	if (player.hasKeyItem("Camp - Chest") >= 0) {
-		outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n");
-		addButton(0, "Chest Store", inventory.pickItemToPlaceInCampStorage);
-		if (inventory.hasItemsInStorage()) addButton(1, "Chest Take", inventory.pickItemToTakeFromCampStorage);
-	}
-	//Weapon Rack
-	if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
-		outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
-		addButton(2, "W.Rack Put", inventory.pickItemToPlaceInWeaponRack);
-		if (inventory.weaponRackDescription()) addButton(3, "W.Rack Take", inventory.pickItemToTakeFromWeaponRack);
-		outputText("\n\n");
-	}
-	//Armor Rack
-	if(player.hasKeyItem("Equipment Rack - Armor") >= 0) {
-		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.");
-		addButton(5, "A.Rack Put", inventory.pickItemToPlaceInArmorRack);
-		if (inventory.armorRackDescription()) addButton(6, "A.Rack Take", inventory.pickItemToTakeFromArmorRack);
-		outputText("\n\n");
-	}
-	//Jewelry box
-	if(player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
-		outputText("Your jewelry box is located ");
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED])
-		{
-			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER]) outputText("on your dresser inside your cabin.");
-			else
-			{
-				if (flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND]) outputText("on your nightstand inside your cabin.");
-				else  outputText("under your bed inside your cabin.");
-			}
-		}
-		else outputText("next to your bedroll.");	
-		addButton(7, "J.Box Put", inventory.pickItemToPlaceInJewelryBox);
-		if (inventory.jewelryBoxDescription()) addButton(8, "J.Box Take", inventory.pickItemToTakeFromJewelryBox);
-		outputText("\n\n", false);
-	}
-	//Dresser
-	if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0) {
-		outputText("You have a dresser inside your cabin to store nine different types of undergarments.");
-		addButton(10, "Dresser Put", inventory.pickItemToPlaceInDresser);
-		if (inventory.dresserDescription()) addButton(11, "Dresser Take", inventory.pickItemToTakeFromDresser);
-		outputText("\n\n");
-	}
-	addButton(14, "Back", camp.campMenu);
-	return true;
-}
 	
 public function hasCompanions():Boolean {
 	return companionsCount() > 0;
 }
+
 public function companionsCount():Number {
 	return followersCount() + slavesCount() + loversCount();
 }
+
 public function followersCount():Number {
 	var counter:Number = 0;
 	if(emberScene.followerEmber()) counter++;
@@ -989,6 +947,7 @@ public function followersCount():Number {
 	if(helspawnFollower()) counter++;
 	return counter;
 }
+
 public function slavesCount():Number {
 	var counter:Number = 0;
 	if(latexGooFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 0) counter++;
@@ -1001,6 +960,7 @@ public function slavesCount():Number {
 	if(milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
 	return counter;
 }
+
 public function loversCount():Number {
 	var counter:Number = 0;
 	if(arianScene.arianFollower()) counter++;
@@ -1032,7 +992,7 @@ public function campLoversMenu():void {
 	var nieve:Function = null;
 	clearOutput();
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
-		getGame().DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", camp.campMenu);
+		getGame().DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
 		return;
 	}
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
@@ -1115,7 +1075,7 @@ public function campLoversMenu():void {
 			//Base choice - book
 			izzyCreeps[izzyCreeps.length] = 5;
 			//Select!
-			var choice:* = rand(izzyCreeps.length);
+			var choice:int = rand(izzyCreeps.length);
 				
 			if(izzyCreeps[choice] == 0) outputText("is sitting down with Rathazul, chatting amiably about the weather.", false);
 			else if(izzyCreeps[choice] == 1) outputText("is sitting down with Jojo, smiling knowingly as the mouse struggles to keep his eyes on her face.", false);
@@ -1199,7 +1159,7 @@ public function campLoversMenu():void {
 	if (marbleEvent != null) addButton(6, "Marble", marbleEvent);
 	if (nieve != null) addButton(7, "Nieve", nieve);
 	if (flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla", getGame().desert.antsScene.introductionToPhyllaFollower);
-	addButton(14, "Back", campMenu);
+	addButton(14, "Back", playerMenu);
 }
 
 public function campSlavesMenu():void {
@@ -1214,7 +1174,7 @@ public function campSlavesMenu():void {
 	var jojoEvent:Function = null;
 	var goo:Function = null;
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
-		getGame().DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", camp.campMenu);
+		getGame().DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", doCamp);
 		return;
 	}
 	if(vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
@@ -1255,7 +1215,7 @@ public function campSlavesMenu():void {
 	if (vapula2 != null) addButton(4,"Vapula",vapula2);
 	if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(7,flags[kFLAGS.MILK_NAME],milkWaifu.milkyMenu);
 	if (goo != null) addButton(8,flags[kFLAGS.GOO_NAME],goo);
-	addButton(14,"Back",eventParser,1);
+	addButton(14, "Back", playerMenu);
 }
 
 public function campFollowers():void {
@@ -1325,8 +1285,7 @@ public function campFollowers():void {
 	addButton(4, "Shouldra", shouldra);
 	//ABOVE: addButton(4,"Sophie",followerSophieMainScreen);
 	addButton(6, "Valeria", valeria2);
-	//if (player.armor == armors.GOOARMR) addButton(6, "Valeria (E)", valeria2);
-	addButton(14,"Back",eventParser,1);
+	addButton(14,"Back",playerMenu);
 }
 //-----------------
 //-- CAMP ACTIONS 
@@ -1347,7 +1306,7 @@ private function campActions():void {
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && player.hasItem(useables.IMPSKLL, 1)) addButton(6, "AddImpSkull", promptHangImpSkull, null, null, null, "Add an imp skull to decorate the wall and to serve as deterrent for imps.");
 	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(7, "Ascension", promptAscend, null, null, null, "Perform an ascension? This will restart your adventures with your levels, items, and gems carried over. The game will also get harder.");
 
-	addButton(14, "Back", eventParser, 1);
+	addButton(14, "Back", playerMenu);
 }
 
 private function swimInStream():void {
@@ -1492,7 +1451,7 @@ private function examinePortal():void {
 		return;
 	}
 	else outputText("You walk over to the portal, reminded by how and why you came. You let out a sigh, knowing you can't return to Ingnam.", true)
-	doNext(1);
+	doNext(playerMenu);
 }
 
 private function watchSunset():void {
@@ -1626,6 +1585,7 @@ public function rest():void {
 	}
 	goNext(timeQ,true);
 }
+
 //-----------------
 //-- WAIT
 //-----------------
@@ -1862,7 +1822,6 @@ public function sleepRecovery(display:Boolean = false):void {
 	}
 }
 
-
 //Bad End if your balls are too big. Only happens in Realistic Mode.
 public function badEndGIANTBALLZ():void {
 	outputText("You suddenly fall over due to your extremely large " + player.ballsDescriptLight() + ".  You struggle to get back up but the size made it impossible.  Panic spreads throughout your mind and your heart races.\n\n", true)
@@ -1876,7 +1835,7 @@ public function badEndGIANTBALLZ():void {
 		outputText("\n\nYou could call for Rathazul to help you.", false)
 		addButton(2, "Rathazul", callRathazulAndEscapeBadEnd);		
 	}
-	else doBadEnd();
+	else getGame().gameOver();
 }
 private function applyReductoAndEscapeBadEnd():void {
 	outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
@@ -1916,7 +1875,7 @@ public function badEndHunger():void {
 		}
 	}
 	player.HP = 0;
-	doBadEnd();
+	getGame().gameOver();
 	removeButton(1);
 }
 //Bad End if you have 100 min lust.
@@ -1924,7 +1883,7 @@ public function badEndMinLust():void {
 	outputText("The thought of release overwhelms you. You frantically remove your " + player.armorName + " and begin masturbating furiously.  The first orgasm hits you but the desire persists.  You continue to masturbate but unfortunately, no matter how hard or how many times you orgasm, your desires will not go away.  Frustrated, you keep masturbating furiously but you are unable to stop.  Your minimum lust is too high.  No matter how hard you try, you cannot even satisfy your desires.\n\n", true);
 	outputText("You spend the rest of your life masturbating, unable to stop.", false)
 	player.orgasm();
-	doBadEnd();	
+	getGame().gameOver();	
 	removeButton(1); //Can't wake up, must load.
 }
 
@@ -1950,33 +1909,38 @@ public function allNaturalSelfStimulationBeltBadEnd():void {
 	outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n", false);
 	outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live " + player.mf("man", "woman") + " who can't stop cumming!</i>\"\n\n", false);
 	outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!", false);
-	doBadEnd();
+	getGame().gameOver();
 }
 
-public function onaholeMulticockContinuation():void {
-	clearOutput();
-	outputText("You pull the sloppy toy from your dribbling dick and smile, shoving its slippery surface down on another of your " + multiCockDescriptLight() + ".  You rapidly work it around your cocks, orgasming until ", true);
-	if (player.balls > 0)
-		outputText("you pass out with aching, empty balls.", false);
-	else
-		outputText("you pass out with " + multiCockDescriptLight() + " sore from exertion.", false);
-	player.orgasm();
-	dynStats("sen", -1);
-	doNext(camp.returnToCampUseOneHour);
+private function dungeonFound():Boolean { //Returns true as soon as any known dungeon is found
+	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) return true;
+	if (flags[kFLAGS.FACTORY_FOUND] > 0) return true;
+	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) return true;
+	if (flags[kFLAGS.D3_DISCOVERED] > 0) return true;
+	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) return true;
+	return false;
 }
 
-public function onaholeFutaContinuation():void {
-	if (player.gender == 3)
-	{
-		clearOutput();
-		outputText("\n\nThe blessing - or curse, depending on how you feel - of your gender catches up with you. As with all members of your gender, you are incapable of having just ONE orgasm. You feel the muscles deep in your crotch bear down hard. Your eyes widen as you realize you are about to blow a monumental load. The pressure works its way through you and towards your cock as, with one final push, you force a torrent of semen out of your body. Your grip was not sufficient on the onahole and you launch it ", true);
-		outputText(String(int(((Math.random() * player.str / 12) + player.str / 6) * 10) / 10), false);
-		outputText(" feet away from you. Delirious with pleasure, you continue your 'impression' of a semen volcano, covering yourself and the area with your seed. ", false);
-		outputText(" As your orgasms fade, you find yourself a well-fucked mess, and pass out.", false);
-		player.orgasm();
-		dynStats("sen", -1);
+private function farmFound():Boolean { //Returns true as soon as any known dungeon is found
+	if (player.findStatusAffect(StatusAffects.MetWhitney) >= 0 && player.statusAffectv1(StatusAffects.MetWhitney) > 1) {
+		if (flags[kFLAGS.FARM_DISABLED] == 0) return true;
+		if (player.cor >= 70 && player.level >= 12 && getGame().farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) return true;
 	}
-	doNext(1);
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED]) return true;
+	return false;
+}
+
+private function placesKnown():Boolean { //Returns true as soon as any known place is found
+	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) return true;
+	if (player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) return true;
+	if (flags[kFLAGS.FOUND_CATHEDRAL] == 1) return true;
+	if (dungeonFound()) return true;
+	if (farmFound()) return true;
+	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) return true;
+	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) return true;
+	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) return true;
+	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) return true;
+	return false;
 }
 
 //-----------------
@@ -2016,12 +1980,8 @@ public function places():Boolean {
 		if (flags[kFLAGS.GAR_NAME] == 0) addButton(2, "Cathedral", kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork);
 		else addButton(2, "Cathedral", kGAMECLASS.gargoyle.returnToCathedral);
 	}
-	if (flags[kFLAGS.FACTORY_FOUND] > 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 || flags[kFLAGS.D3_DISCOVERED] > 0 || kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(3, "Dungeons", dungeons);
-	if (player.findStatusAffect(StatusAffects.MetWhitney) >= 0) 
-	{
-		if(player.statusAffectv1(StatusAffects.MetWhitney) > 1 && (flags[kFLAGS.FARM_DISABLED] == 0 || (player.cor >= 70 && player.level >= 12 && kGAMECLASS.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) || player.level >= 20 )) addButton(5, "Farm", kGAMECLASS.farm.farmExploreEncounter);
-	}
-	if (flags[kFLAGS.FARM_CORRUPTION_STARTED]) addButton(5, "Farm", kGAMECLASS.farm.farmExploreEncounter);
+	if (dungeonFound()) addButton(3, "Dungeons", dungeons);
+	if (farmFound()) addButton(5, "Farm", kGAMECLASS.farm.farmExploreEncounter);
 	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(6, "Owca", kGAMECLASS.owca.gangbangVillageStuff);
 	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) addButton(7, "Salon", kGAMECLASS.mountain.salon.salonGreeting);
 	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) addButton(8, "Tel'Adre", kGAMECLASS.telAdre.telAdreMenu);
@@ -2031,20 +1991,19 @@ public function places():Boolean {
 	if (debug) addButton(12, "Ingnam", kGAMECLASS.ingnam.returnToIngnam, null, null, null, "Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 	//addButton(12, "Prison", eventParser, 9999);
 	//addButton(13, "Next", placesPage2);
-	addButton(14, "Back", eventParser, 1);
+	addButton(14, "Back", playerMenu);
 	return true;
 }
 
-private function placesPage2():void
-{
+private function placesPage2():void {
 	menu();
 	flags[kFLAGS.PLACES_PAGE] = 1;
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "TownRuins", amilyScene.exploreVillageRuin);
-	addButton(4,"Previous",placesToPage1);
-	addButton(9,"Back",eventParser,1);
+	addButton(4, "Previous", placesToPage1);
+	addButton(9, "Back", playerMenu);
 }
-private function placesToPage1():void
-{
+
+private function placesToPage1():void {
 	flags[kFLAGS.PLACES_PAGE] = 0;
 	places();
 }
@@ -2060,7 +2019,7 @@ private function dungeons():void {
 	//Side dungeons
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon);
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon);
-	addButton(14,"Back",eventParser,71);
+	addButton(14, "Back", places);
 }
 
 private function exgartuanCampUpdate():void {
@@ -2086,7 +2045,7 @@ private function exgartuanCampUpdate():void {
 			player.removeStatusAffect(StatusAffects.Exgartuan);
 		}		
 	}
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Wake up from a bad end.
@@ -2128,7 +2087,7 @@ public function wakeFromBadEnd():void {
 	if (player.inte > 20) dynStats("int", Math.ceil(-player.inte * 0.05));
 
 	menu();
-	addButton(0, "Next", eventParser, 1);
+	addButton(0, "Next", playerMenu);
 }
 
 //Camp wall
@@ -2136,7 +2095,7 @@ private function buildCampWallPrompt():void {
 	clearOutput();
 	if (player.fatigue >= player.maxFatigue() - 50) {
 		outputText("You are too exhausted to work on your camp wall!");
-		doNext(camp.campMenu);
+		doNext(doCamp);
 		return;
 	}
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] == 0) {
@@ -2150,11 +2109,11 @@ private function buildCampWallPrompt():void {
 	kGAMECLASS.camp.cabinProgress.checkMaterials();
 	outputText("\n\nIt will cost 200 nails and 100 wood to work on a segment of the wall.\n\n");
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 200) {
-		doYesNo(buildCampWall, camp.campMenu);
+		doYesNo(buildCampWall, doCamp);
 	}
 	else {
 		outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
-		doNext(camp.campMenu);
+		doNext(doCamp);
 	}
 }
 
@@ -2231,18 +2190,18 @@ private function buildCampGatePrompt():void {
 	clearOutput();
 	if (player.fatigue >= player.maxFatigue() - 50) {
 		outputText("You are too exhausted to work on your camp wall!");
-		doNext(camp.campMenu);
+		doNext(doCamp);
 		return;
 	}
 	outputText("You can build a gate to further secure your camp by having it closed at night.\n\n");
 	kGAMECLASS.camp.cabinProgress.checkMaterials();
 	outputText("\n\nIt will cost 200 nails and 100 wood to build a gate.\n\n");
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 200) {
-		doYesNo(buildCampGate, camp.campMenu);
+		doYesNo(buildCampGate, doCamp);
 	}
 	else {
 		outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
-		doNext(camp.campMenu);
+		doNext(doCamp);
 	}
 
 }
@@ -2299,12 +2258,12 @@ private function promptHangImpSkull():void {
 	clearOutput();
 	if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 100) {
 		outputText("There is no room; you have already hung a total of 100 imp skulls! No imp shall dare approaching you at night!");
-		doNext(camp.campMenu);
+		doNext(doCamp);
 		return;
 	}
 	outputText("Would you like to hang the skull of an imp onto wall? ");
 	if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) outputText("There " + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "is" : "are") + " currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " imp skull" + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "" : "s") + " hung on the wall, serving to deter any imps who might try to rape you.");
-	doYesNo(hangImpSkull, camp.campMenu);
+	doYesNo(hangImpSkull, doCamp);
 }
 
 private function hangImpSkull():void {
@@ -2313,7 +2272,7 @@ private function hangImpSkull():void {
 	player.consumeItem(useables.IMPSKLL, 1);
 	flags[kFLAGS.CAMP_WALL_SKULLS]++;
 	outputText("There " + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "is" : "are") + " currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " imp skull" + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "" : "s") + " hung on the wall, serving to deter any imps who might try to rape you.");
-	doNext(camp.campMenu);
+	doNext(doCamp);
 }
 
 private function promptAscend():void {
@@ -2482,7 +2441,7 @@ private function promptSaveUpdate():void {
 		outputText("\n\nTry restarting the game and check the achievements without loading! You'll see, it's permanent!");
 		
 		menu();
-		doNext(camp.campMenu);
+		doNext(doCamp);
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 3) {
@@ -2493,7 +2452,7 @@ private function promptSaveUpdate():void {
 		flags[kFLAGS.PHOENIX_WANKED_COUNTER] = 0;
 		if (kGAMECLASS.giacomo > 0) flags[kFLAGS.GIACOMO_MET] = 1;
 		flags[kFLAGS.MOD_SAVE_VERSION] = 4;
-		camp.campMenu();
+		doCamp();
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 4) {
@@ -2502,10 +2461,10 @@ private function promptSaveUpdate():void {
 			clearOutput();
 			outputText("Due to a bug where your bow skill got reset after you've slain Kelt, your bow skill got reset. Fortunately, this is now fixed. As a compensation, your bow skill is now instantly set to 100!");
 			if (player.statusAffectv1(StatusAffects.Kelt) <= 0) player.createStatusAffect(StatusAffects.Kelt, 100, 0, 0, 0);
-			doNext(camp.campMenu);
+			doNext(doCamp);
 			return;
 		}
-		camp.campMenu();
+		doCamp();
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 5) {
@@ -2517,10 +2476,10 @@ private function promptSaveUpdate():void {
 			if (player.armorName == "revealing fur loincloths") inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), promptSaveUpdate);
 			if (player.weaponName == "dragon-shell shield") inventory.takeItem(player.setWeapon(WeaponLib.FISTS), promptSaveUpdate);
 			
-			doNext(camp.campMenu);
+			doNext(doCamp);
 			return;
 		}
-		camp.campMenu();
+		doCamp();
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 6) {
@@ -2530,7 +2489,7 @@ private function promptSaveUpdate():void {
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02078] = 0; //Reclaimed
 		}
 		if (player.armor == armors.GOOARMR) flags[kFLAGS.VALERIA_FLUIDS] = 100;
-		camp.campMenu();
+		doCamp();
 		return;
 	}
 }
@@ -2563,7 +2522,7 @@ private function updateSaveFlags():void {
 			player.addKeyValue("Carpenter's Toolbox", 1, 150);
 		}
 	}
-	flags[kFLAGS.SHIFT_KEY_DOWN] = 0; //Unstick shift key.
+	//flags[kFLAGS.SHIFT_KEY_DOWN] = 0; //Moved to unFuckSave().
 	outputText("Don't worry. Just save the game and you're good to go. I, Kitteh6660, will work out the bugs from time to time, while also bringing in cool new stuff!", false)
 	doNext(doCamp);
 }
@@ -2731,10 +2690,13 @@ private function updateAchievements():void {
 	if (NPCsDedicked >= 3) awardAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER);
 }
 
+/*
 private function fixHistory():void {
 	outputText("<b>New history perks are available during creation.  Since this character was created before they were available, you may choose one now!</b>", true);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 2;
-	doNext(kGAMECLASS.charCreation.menuHistory);
+	menu();
+	doNext(10036);
 }
+*/
 }
 }

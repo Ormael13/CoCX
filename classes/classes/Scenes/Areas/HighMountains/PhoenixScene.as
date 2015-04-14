@@ -241,7 +241,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nToo pained to redress yourself, the spunk dripping from you marks out your path back down the mountain, almost as if the gods are making sure you have a way of finding the route back for another round.");
 			dynStats("str", -2);
 			dynStats("tou", -2);
-			doNext(15);
+			doNext(camp.returnToCampUseFourHours);
 		}
 		
 		//Get butt-raped. Lose your anal virginity!
@@ -280,7 +280,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\n\"<i>The harpy queen will be avenged,</i>\" she says with a glare on your face. She raises her scimitar. You look up at the sharp blade. You clearly know where it's going.");
 			outputText("\n\n\"<i>Hasta la vista, baby!</i>\" These are the last words you hear as the speeding scimitar finally makes contact with your neck.");
 			rawOutputText("\n\n[DATA EXPUNGED]");
-			doBadEnd();
+			getGame().gameOver();
 		}
 	}
 

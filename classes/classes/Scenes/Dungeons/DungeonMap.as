@@ -789,7 +789,7 @@ package classes.Scenes.Dungeons {
 			outputText("\n<font face=\"Courier New\">L</font> - Locked Door");
 			outputText("\n<font face=\"Courier New\">S</font> - Stairs");
 			menu();
-			addButton(0, "Close Map", eventParser, 1);
+			addButton(0, "Close Map", playerMenu);
 		}
 		
 	}

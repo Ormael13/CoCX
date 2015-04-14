@@ -17,12 +17,18 @@ package classes.Scenes.Dungeons
 	
 	public class DeepCave extends DungeonAbstractContent
 	{
+		private static const DUNGEON_CAVE_ENTRANCE:int			= 10;
+		private static const DUNGEON_CAVE_TUNNEL:int			= 11;
+		private static const DUNGEON_CAVE_GATHERING_HALL:int	= 12;
+		private static const DUNGEON_CAVE_FUNGUS_CAVERN:int		= 13;
+		private static const DUNGEON_CAVE_TORTURE_ROOM:int		= 14;
+		private static const DUNGEON_CAVE_SECRET_TUNNEL:int		= 15;
+		private static const DUNGEON_CAVE_ZETAZ_CHAMBER:int		= 16;
+		
 		public var vala:ValaScene = new ValaScene();
 		public var shouldraFollower:ShouldraFollower = new ShouldraFollower();
 		
-		public function DeepCave() 
-		{
-		}
+		public function DeepCave() {}
 		
 		public function enterDungeon():void {
 			kGAMECLASS.inDungeon = true;
@@ -31,7 +37,7 @@ package classes.Scenes.Dungeons
 				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.", true);
 				outputText("\n\n<b>You've discovered the location of Zetaz's lair! You can visit anytime from the dungeons menu in Places tab.</b>", false);
 				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] = 1
-				simpleChoices("Enter", roomEntrance, "", 0, "", 0, "", 0, "Leave", exitDungeon);
+				simpleChoices("Enter", roomEntrance, "", null, "", null, "", null, "Leave", exitDungeon);
 			}
 			else 
 			{
@@ -78,7 +84,7 @@ package classes.Scenes.Dungeons
 			outputText("Caught, you stand up and ready your " + player.weaponName + ", taking up a defensive stance to ready yourself for whatever new attacks this demon has.  Strangely, he just starts laughing again, and he has to stop to wipe tears from the corners of his eyes before he talks, \"<i>Oh that's rich!  I'm not here to fight you, Champion.  I doubt I'd stand much of a chance anyways.  I heard there were some renegades around this area, so I thought I'd show up to offer my services.  You see, I'm a procurer of strange and rare alchemical solutions.  Of course you beat down everyone before I got here, but I thought I'd stick around and see if some scouts were still around before I high-tailed it out of here.</i>\"\n\n", false);
 			outputText("You stare, blinking your eyes in confusion.  A demon of lust, and he's not interested in fighting or raping you?  He laughs again as he reads your expression and calmly states, \"<i>No, I'm far from your average incubus.  To tell the truth I enjoy a spirited debate or the thrill of discovery over sating my sexual appetite, though of course I do indulge that from time to time.</i>\"\n\n", false);
 			outputText("The strange incubus flashes you a smile that makes you feel a tad uncomfortable before he finally introduces himself, \"<i>The name's Sean, and as you seem to be kicking the living shit out of Lethice's followers and enemies alike, I'd like to be on your side.  So I propose a mutually beneficial agreement – I'll sell you items you can't get anywhere else, and you let me live in this cave.  What do you say?</i>\"\n\n", false);
-			simpleChoices("Deal",seanDeal,"No Deal",seanNoDeal,"Not Now",0,"",0,"",0);
+			simpleChoices("Deal", seanDeal, "No Deal", seanNoDeal, "Not Now", null, "", null, "", null);
 		}
 		
 		private function seanDeal():void {
@@ -145,14 +151,13 @@ package classes.Scenes.Dungeons
 			spriteSelect(52);
 			clearOutput();
 			player.gems -= itype.value * 3;
-			menuLoc = 16;
 			statScreenRefresh();
 			inventory.takeItem(itype, incubusShop);
 		}
 		
 		private function fightImpHorde():void {
 			startCombat(new ImpHorde(),true);
-			eventParser(1);
+			playerMenu();
 		}
 		
 		//Encapsulation pod
@@ -304,7 +309,7 @@ package classes.Scenes.Dungeons
 			//[Fuck] [Leave]
 			if(player.gender > 0) {
 				outputText(" What will you do?", false);
-				simpleChoices("Fuck",vala.valaFightVictoryFuck,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
+				simpleChoices("Fuck",vala.valaFightVictoryFuck,"", null,"", null,"", null,"Leave",cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}
@@ -318,9 +323,9 @@ package classes.Scenes.Dungeons
 			else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.", false);
 			if(player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?", false);
-				if(player.gender == 1) simpleChoices("Rape",impGangGetsRapedByMale,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
-				if(player.gender == 2) simpleChoices("Rape",impGangGetsRapedByFemale,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
-				if(player.gender == 3) simpleChoices("Male Rape",impGangGetsRapedByMale,"Female Rape",impGangGetsRapedByFemale,"",0,"",0,"Leave",cleanupAfterCombat);
+				if(player.gender == 1) simpleChoices("Rape",impGangGetsRapedByMale,"", null,"", null,"", null,"Leave",cleanupAfterCombat);
+				if(player.gender == 2) simpleChoices("Rape",impGangGetsRapedByFemale,"", null,"", null,"", null,"Leave",cleanupAfterCombat);
+				if(player.gender == 3) simpleChoices("Male Rape",impGangGetsRapedByMale,"Female Rape",impGangGetsRapedByFemale,"", null,"", null,"Leave",cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}
@@ -479,7 +484,7 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			player.HP += 100;
 			//GAME OVER NERD
-			doBadEnd();
+			getGame().gameOver();
 		}		
 		public function defeatZetaz():void {
 			flags[kFLAGS.DEFEATED_ZETAZ]++;
@@ -496,7 +501,7 @@ package classes.Scenes.Dungeons
 			outputText(", you need to find her and bring her down.  What do you do?", false);
 			outputText("\n\n(Sexually Interrogate, Kill Him, or Offer Safety for Information?)\n", false);
 			//[Sexual Interrogation] [Brutal Interrogation] [Release for Info]
-			simpleChoices("Sexual",sexualInterrogation,"End Him",endZetaz,"Safety",releaseZForInfo,"Rape",0,"",0);
+			simpleChoices("Sexual", sexualInterrogation, "End Him", endZetaz, "Safety", releaseZForInfo, "Rape", null, "", null);
 		}
 
 		//[Release Zetaz 4 Info Win]
@@ -563,7 +568,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("What do you do?", false);
 			//['Release' him] [Tighten Strap] [End Him]
-			simpleChoices("'Release'",sexualTortureReleaseZetaz,"Tighten",sexualTortureTightenZetaz,"End Him",endZetaz,"",0,"",0);
+			simpleChoices("'Release'", sexualTortureReleaseZetaz, "Tighten", sexualTortureTightenZetaz, "End Him", endZetaz, "", null, "", null);
 		}
 
 		//[Release Him]
@@ -881,7 +886,7 @@ package classes.Scenes.Dungeons
 			outputText("Dimly, in some corner of your mind, you seem to recall having this conversation before, perhaps several times. And didn't your Mistress use to be the one who had difficulty thinking straight? Back before you were simply Pet, didn't people call you something else? A name floats just out of reach, but you shake it away as your Mistress produces a dizzying array of bottles. She feeds you a thick, green beer that fills your tummy with pleasant warmth and makes your head swim. You can feel your body changing, as your " + vaginaDescript(0) + " grows deeper and wider and you giggle, flicking your fingers in and out of your pussy, playing with the hot passage. Your Mistress takes a gulp of her own and coos as the thick white fluid rolls down her throat. She raises her voice in a spritely gasp of pleasant surprise and you can see her tiny joy buzzer of a clit growing longer and thicker before your eyes. It swells to six inches, then eight, before finally settling at 10\". Gradually, it gains definition and its tip broadens into a head, a small slit opening at the top, a bead of pearly cum rolling out and down the bright pink shaft. She strokes the newly grown dick with slim fingers and trembles in excitement, eyeing your body hungrily.", false);
 			outputText("You giggle, mindlessly, and let your Mistress sate her unquenchable lust with your yielding body, savoring the submission. She rides you raw, fucking your drug and sex-addled body hard enough to knock the memories of the day out of your head, just as she did yesterday and the day before that. With each passing day, you lose more of yourself to your Mistress and, in time, all that is left is the warped fairy's broken Pet.", false);  
 			//GAME OVER.
-			doBadEnd();
+			getGame().gameOver();
 		}
 		public function badEndValaNumber2():void {
 			spriteSelect(85);
@@ -908,7 +913,7 @@ package classes.Scenes.Dungeons
 			outputText("The space between your shoulder blades feels like it's been torn open and your muscles reknit themselves as gossamer wings burst from your skin, thin as a dragonfly's and nearly as long as you are tall, settling against their rubber counterparts. Every inch of your skin seems to blister as a feeling of molten glass pouring over you causes you to tremble with agonized shudders, your pores sealing and skin gaining a glossy sheen.\n\n", false);
 			outputText("\"<i>You're looking more like her by the second,</i>\" Zetaz compliments, stroking your now-flawless face. \"<i>Don't worry about that pesky mind of yours- I don't like using drugs to wipe that imperfection away like some of my kin. No, we'll just use you until you break. Perhaps I'll let Vala have you from time to time, too. Won't that be fun? The two of you will grow to be inseparable, I'm sure.</i>\" Zetaz steps back and signals the imps clinging to the fairy to come down. \"<i>Why don't we get started?</i>\"", false);
 			//GAME OVER.
-			doBadEnd();
+			getGame().gameOver();
 		}		
 		
 		public function loseToThisShitPartII():void {
@@ -965,7 +970,7 @@ package classes.Scenes.Dungeons
 				outputText(".  With such stimulation coming so closely on the heels of your last orgasm, [eachCock] is suffering painful levels of pleasure.  Your whole body shakes from the sensory overload; though with your muscles so completely shut down, it's more of a shiver.\n\n", false);
 				
 				outputText("Another wave of sperm begins the slow escape from your helpless, pinned form, drawn out by the fungus' constant sexual ministrations.  The fluid inside your pod gurgles noisily as the fluids are exchanged, but the sensory input doesn't register to your overloaded, drugged-out shell of a mind.  You've lost yourself to mindless pleasure, and repeated, endless orgasms.  The rest of your life is spent floating in an artificial womb, orgasming over and over to feed your fungus prison, and enjoying the pleasure that long ago eroded your ability to reason.", false);
-				doBadEnd();
+				getGame().gameOver();
 				//GAME OVER 
 			}
 			//(FEM)
@@ -973,7 +978,7 @@ package classes.Scenes.Dungeons
 				outputText("You orgasm around the tentacles in your " + vaginaDescript(0) + " and " + assholeDescript() + " for what feels like hours, though some dim, half forgotten whisper of your mind tells you it can't possibly have gone on for that long.  It feels so right and so perfect that resistance is almost a foreign concept to you at this point.  How could you have tried to fight off this heaven?  You're completely limp, totally helpless, and happier than you ever remember.  The pulsing lights of your womb-like prison continue their steady beat in time with the tentacles buried in your snatch, soothing you while your body is played like a violin heading towards its latest crescendo.\n\n", false);
 				outputText("The steady rhythm of your penetration sends rockets of bliss-powered pleasure up your spinal cord and straight into your brain, where it explodes in orgasm.  Your body barely twitches, too relaxed to work up any muscle response, involuntary or otherwise.  A moment to rest never presents itself.  The cruel fungus never relents.  It never slows, unless it's only the briefest pause to intensify the next thrust.  Were you in the open air, away from the strange fluid you're now breathing, you'd be twisting and screaming with pleasure.  Instead you float and cum in silence.\n\n", false);
 				outputText("Fluids gurgle and shift inside the pod as they are exchanged.  If you were capable of noticing the sound or change, you might wonder if it's harvesting your sexual fluids, but even those thoughts are beyond you now. You've lost yourself to mindless pleasure, and repeated, endless orgasms.  The rest of your life is spent floating in an artificial womb, orgasming over and over to feed your fungus prison, and enjoying the pleasure that long ago eroded your ability to reason.", false);
-				doBadEnd();
+				getGame().gameOver();
 				//GAME OVER 
 			}
 		}
@@ -1004,7 +1009,7 @@ package classes.Scenes.Dungeons
 			}
 			player.orgasm();
 			player.HP += 150;
-			doBadEnd();
+			getGame().gameOver();
 		}
 		//ROOMS
 		public function roomEntrance():void {

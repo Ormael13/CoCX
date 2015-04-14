@@ -3,8 +3,9 @@ package classes.Scenes.Camp
 	import classes.*;
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Monsters.Imp;
 	
-	public class ImpGang extends Monster
+	public class ImpGang extends Imp
 	{
 		override public function get capitalA():String {
 			return "gang of imps";
@@ -62,7 +63,7 @@ package classes.Scenes.Camp
 			this.gems = rand(15) + 25;
 			this.drop = NO_DROP;
 			this.wingType = WING_TYPE_IMP;
-			this.special1 = 5019;
+			this.special1 = lustMagicAttack;
 			checkMonster();
 		}
 		

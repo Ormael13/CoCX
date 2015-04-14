@@ -923,7 +923,6 @@ public function runIntoAGoblin(camped:Boolean = false):void {
 	outputText("\n\n\"<i>Hey there lady-stud!  You look like you could use a hot cunt to fertilize a few times!</i>\" a reedy, high-pitched goblin voice calls.  Shit, one of those guttersluts.  They're almost as bad as demons.  Worst of all, you know they'll play to your basest, most well-concealed fetishes.  Just the idea of having one of them split on your cock, slowly ballooning with seed and loving it...  well, if you're being honest with yourself, it makes you stiffen a little.  You turn around to face the curvy little preg-hungry whore, and as soon as you see her, you realize she's not going to go away until she's had a ride on your dick or been subdued.");
 	outputText("\n\n<b>It's a fight!</b>");
 	startCombat(new GoblinBroodmother());// TODO extract to Monsters.GoblinBroodMother class
-	doNext(1);
 }
 
 
@@ -1101,7 +1100,7 @@ private function urtaGameOver():void {
 //Second Wind: Regain 50% HP and lose 50 lust.  Once per fight.
 
 public function urtaSpecials():void {
-	menuLoc = 3;
+//Gone	menuLoc = 3;
 	if (getGame().inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 5) {
 		clearOutput();
 		outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
@@ -1109,13 +1108,13 @@ public function urtaSpecials():void {
 		return;
 	}
 	menu();
-	addButton(0,"Combo",urtaComboAttack);
-	addButton(1,"Vault",urtaVaultAttack);
-	addButton(2,"Sidewinder",urtaSidewinder);
-	addButton(3,"Dirt Kick",urtaDirtKick);
-	addButton(4,"Metabolize",urtaMetabolize);
-	addButton(5,"SecondWind",urtaSecondWind);
-	addButton(14,"Back",eventParser,5000);
+	addButton(0, "Combo", urtaComboAttack);
+	addButton(1, "Vault", urtaVaultAttack);
+	addButton(2, "Sidewinder", urtaSidewinder);
+	addButton(3, "Dirt Kick", urtaDirtKick);
+	addButton(4, "Metabolize", urtaMetabolize);
+	addButton(5, "SecondWind", urtaSecondWind);
+	addButton(14, "Back", getGame().combatMenu, false);
 }
 
 private function urtaMetabolize():void {
@@ -1130,8 +1129,10 @@ private function urtaSecondWind():void {
 	clearOutput();
 	if(monster.findStatusAffect(StatusAffects.UrtaSecondWinded) >= 0) {
 		outputText("You've already pushed yourself as hard as you can!");
-		menuLoc = 3;
-		doNext(5000);
+//Gone		menuLoc = 3;
+//		doNext(getGame().combatMenu);
+		menu();
+		addButton(0, "Next", kGAMECLASS.combatMenu, false);
 		return;
 	}
 	monster.createStatusAffect(StatusAffects.UrtaSecondWinded,0,0,0,0);
@@ -1148,8 +1149,10 @@ private function urtaComboAttack():void {
 		clearOutput();
 		if(player.fatigue + 25 > 100) {
 			outputText("You are too fatigued to use that attack!");
-			menuLoc = 3;
-			doNext(5000);
+//Gone			menuLoc = 3;
+//			doNext(getGame().combatMenu);
+			menu();
+			addButton(0, "Next", kGAMECLASS.combatMenu, false);
 			return;
 		}
 		fatigue(25);
@@ -1268,8 +1271,10 @@ private function urtaDirtKick():void {
 	clearOutput();
 	if(player.fatigue + 5 > 100) {
 		outputText("You are too fatigued to use that ability!");
-		menuLoc = 3;
-		doNext(5000);
+//Gone		menuLoc = 3;
+//		doNext(getGame().combatMenu);
+		menu();
+		addButton(0, "Next", kGAMECLASS.combatMenu, false);
 		return;
 	}
 	fatigue(5);
@@ -1299,8 +1304,10 @@ private function urtaSidewinder():void {
 	clearOutput();
 	if(player.fatigue + 10 > 100) {
 		outputText("You are too fatigued to use that attack!");
-		menuLoc = 3;
-		doNext(5000);
+//Gone		menuLoc = 3;
+//		doNext(getGame().combatMenu);
+		menu();
+		addButton(0, "Next", kGAMECLASS.combatMenu, false);
 		return;
 	}
 	fatigue(10);
@@ -1412,8 +1419,10 @@ private function urtaVaultAttack():void {
 	clearOutput();
 	if(player.fatigue + 20 > 100) {
 		outputText("You are too fatigued to use that attack!");
-		menuLoc = 3;
-		doNext(5000);
+//Gone		menuLoc = 3;
+//		doNext(getGame().combatMenu);
+		menu();
+		addButton(0, "Next", kGAMECLASS.combatMenu, false);
 		return;
 	}
 	fatigue(20);
@@ -1768,7 +1777,7 @@ private function gnollAlphaBitchIntro():void {
 	monster.short = "alpha gnoll";
 	monster.HP = monster.eMaxHP(); // TODO extract to AlphaGnoll class
 	monster.long = "The gnoll standing before you is obviously an alpha among her kind; she has to be over seven feet tall and rippling with muscle, not that this stops her from having a curvy form, squeezable ass and full E-cup boobs.  The remnants of what must have once been a gorgeous and expensive silken dress are draped across her figure, torn off at the knees and hanging by only a single shoulder, arms bare and exposed.  A heavy necklace of gold is wrapped around her neck, while bracelets of more of the same adorn her arms, and piercings of gold stud her ears.  She carries a mighty-looking spear in her hands, which she brandishes at you menacingly, and a basket of throwing javelins is strapped to her back.";
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Fight*
@@ -2755,7 +2764,7 @@ private function knockUpUrtaWithGodChild():void {
 	else outputText(" [oneCock]");
 	outputText(".  The nub of her clit is a diamond-hard button that drags across your sensitive " + player.skin() + ", aggressively smashed into your genitals.  Still, somehow, she seems to be holding back, probing you with some last vestige of sanity for your consent.");
 
-	outputText("\n\nSighing, you figure you may as well lie back and enjoy it, and you push your tongue back against hers, letting her set the fevered, frenzied pace but along for the ride regardless.  She picks up on the change in your attitude and shifts, a soft-fingered grip snaring [oneCock] and lifting it up, pressing it into the slick wetness between her thighs.  You gasp, muffled by her overwhelmingly intense french-kiss, the fox-girl's puffy black lips smothering your own in warm, wet affection.  Likewise, the onyx opening of her vagina yields against your " + cockDescript(x) + ", clinging tightly around your girth as they swallow the first few inches of you.  Already, you can feel her inner walls massaging your tender erection towards orgasm.  They squeeze and tug on your " + cockHead(x) + " powerfully while small squirts of fox-lube drizzle down to your [sheath].  The fox drives herself the rest of the way down onto you.  Her hips hit yours with a loud smack, splattering her moisture down your [legs].");
+	outputText("\n\nSighing, you figure you may as well lie back and enjoy it, and you push your tongue back against hers, letting her set the fevered, frenzied pace but along for the ride regardless.  She picks up on the change in your attitude and shifts, a soft-fingered grip snaring [oneCock] and lifting it up, pressing it into the slick wetness between her thighs.  You gasp, muffled by her overwhelmingly intense french-kiss, the fox-girl's puffy black lips smothering your own in warm, wet affection.  Likewise, the onyx opening of her vagina yields against your " + cockDescript(x) + ", clinging tightly around your girth as they swallow the first few inches of you.  Already, you can feel her inner walls massaging your tender erection towards orgasm.  They squeeze and tug on your " + player.cockHead(x) + " powerfully while small squirts of fox-lube drizzle down to your [sheath].  The fox drives herself the rest of the way down onto you.  Her hips hit yours with a loud smack, splattering her moisture down your [legs].");
 
 	outputText("\n\nFinally, Urta breaks the kiss, panting for air as she begins to buck and rock atop you.  Your " + cockDescript(x) + " shivers against the squeezing pressures the frenzied fox is forcing upon you, and already you can feel yourself trickling and leaking into her sodden vice.  Both of your bodies have become absolutely drenched in sticky, musky horse-pre");
 	if(player.cockTotal() > 1) outputText(", the mess made worse by your multiple-cocked virility.  There's so much that the clear juices roll off you to either side, puddling in your blankets below");

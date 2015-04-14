@@ -9,15 +9,34 @@ package classes.Scenes.Places
 	
 	import coc.view.MainView;
 	
-	public class Prison extends BaseContent
+	public class Prison extends BaseContent implements TimeAwareInterface
 	{
 		public var ellyScene:EllyScene = new EllyScene();
 		//public var scruffyScene:ScruffyScene = new ScruffyScene();
 		//public var billieScene:BillieScene = new BillieScene();
 		
-		public function Prison() 
-		{
+		private var heardPrisonerScreamCooldown:int = 0;
+		
+		public function Prison() {
+			CoC.timeAwareClassAdd(this);
 		}
+		
+		//Implementation of TimeAwareInterface
+		public function timeChange():Boolean
+		{
+			if (heardPrisonerScreamCooldown <= 0 && rand(10) == 0) {
+				heardPrisonerScreamCooldown = 10;
+				hopelessPrisoner();
+			}
+			if (heardPrisonerScreamCooldown > 0) heardPrisonerScreamCooldown--;
+			var needNext:Boolean = false;
+			return needNext;
+		}
+		
+		public function timeChangeLarge():Boolean{
+			return false;
+		}
+		//End of Interface Implementation
 		
 		//Stats changes and modules
 		/**
@@ -301,10 +320,10 @@ package classes.Scenes.Places
 				}*/
 				if(model.time.hours < 6 || model.time.hours > 20)
 				{
-					eventParser(41);
+					camp.doSleep();
 					return;
 				}
-				eventParser(11);
+				camp.rest();
 				return;
 			}
 			//if(prisonRoomEvents())
@@ -324,30 +343,28 @@ package classes.Scenes.Places
 					removeButton(0);
 					removeButton(4);
 				}
-				addButton(8, "Masturbate", eventParser, 10);
-				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", eventParser, 10);
+				addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
+				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", getGame().masturbation.masturbateGo);
 			}
-			//Show wait/rest/sleep depending on conditions.
-			addButton(9, "Wait", eventParser, 40);
-			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", eventParser, 11);
-			if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", eventParser, 41);
+			
 			hideUpDown();
 			menu();
 			addButton(0, "Train", trainMenu);
 			addButton(1, "Study", studyMenu);
-			addButton(2, "Restraints", eventParser, 9999, null, null, "Not implemented yet.");
+			addButton(2, "Restraints", null, null, null, null, "Not implemented yet.");
 			if (flags[kFLAGS.PRISON_DIRT_LEVEL] > 0) addButton(3, "Clean", cleanCell, null, null, null, "Clean the cell.");
 			addButton(4, "Escape", placeholderEscape);
 			addButton(7, "Inventory", inventory.inventoryMenu);
-			addButton(8, "Masturbate", eventParser, 10);
-			addButton(9, "Wait", eventParser, 40);
-			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", eventParser, 11);
+			addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
+			//Show wait/rest/sleep depending on conditions.
+			addButton(9, "Wait", camp.doWait);
+			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", getGame().camp.rest);
 			if (model.time.hours >= 21 || model.time.hours < 6) {
 				removeButton(0);
 				removeButton(1);
 				removeButton(2);
 				removeButton(4);
-				addButton(9, "Sleep", eventParser, 41);
+				addButton(9, "Sleep", getGame().camp.doSleep);
 			}
 			//prisonRoomText(/Volumes/Disk Image/CoC_Prison/startUp.as);
 			//prisonRestraintText();
@@ -375,13 +392,13 @@ package classes.Scenes.Places
 			clearOutput();
 			if(!prisonCanTrainWorkout())
 			{
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			if(player.fatigue > 75)
 			{
 				outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			fatigue(25);
@@ -436,13 +453,13 @@ package classes.Scenes.Places
 			clearOutput();
 			if(!prisonCanTrainCardio())
 			{
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			if(player.fatigue > 70)
 			{
 				outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			fatigue(30);

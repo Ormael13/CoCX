@@ -243,7 +243,6 @@ package classes.Scenes.Monsters
 					add(weapons.SCIMITR, 1).
 					add(armors.BEEARMR, 1);
 			this.wingType = WING_TYPE_IMP;
-			this.special1 = 5019;
 			checkMonster();
 		}
 		

@@ -53,10 +53,10 @@ public function mainMenu(e:MouseEvent = undefined):void
 	//doThatTestingThang();
 
 	startupScreenBody();
-	
-	var resume:Number = 0;
-	if(player.str > 0)  //we're in a game, allow resume.
-		resume = 1;
+
+	var resume:Function = null;
+	if (player.str > 0)  //we're in a game, allow resume.
+		resume = playerMenu;
 
 	var achievements:Achievements = new Achievements();
 
@@ -66,7 +66,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
 	menu();
-	if (player.str > 0) addButton(0, "Resume", eventParser, 1);
+	addButton(0, "Resume", resume);
 	addButton(1, "Settings", settingsScreenMain);
 	addButton(2, "Instructions", howToPlay);
 	addButton(3, "Achievements", achievements.achievementsScreen);
@@ -75,6 +75,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	addButton(6, "Image Credits", imageCreditsScreen);
 	addButton(7, "Debug Info", debugPane);
 	addButton(8, "Mod Thread", openURL, "http://forum.fenoxo.com/thread-10915.html");
+
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;
@@ -435,7 +436,7 @@ public function fontSettingsMenu():void {
 	simpleChoices("Smaller Font", decFontSize,
 		"Larger Font", incFontSize,
 		"Reset Size", resetFontSize,
-		"", 0,
+		"", null,
 		"Back", settingsScreenMain);
 }
 
@@ -613,7 +614,7 @@ public function creditsScreen():void {
 	outputText("<b>Game Mod Contributors</b>\n");
 	outputText("<ul>");
 	outputText("<li> Parth37955 (Pure Jojo anal pitch scene, Behemoth's vaginal catch scene)</li>");
-	outputText("<li> Liadri</li> (Manticore and Dragonne suggestions)");
+	outputText("<li> Liadri (Manticore and Dragonne suggestions)</li>");
 	outputText("</ul>");
 	outputText("<b>Game Mod Bug Reporting</b>\n");
 	outputText("<ul>");

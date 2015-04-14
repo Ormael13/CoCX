@@ -31,7 +31,7 @@ package classes.Scenes.Areas
 		
 		public function exploreGlacialRift():void {
 			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++
-			doNext(1);
+			doNext(playerMenu);
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
 				getGame().DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
 				return;
@@ -100,12 +100,10 @@ package classes.Scenes.Areas
 				itemChooser = rand(8);
 				if (itemChooser == 0) {
 					outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag.", true)
-					menuLoc = 2;
 					inventory.takeItem(consumables.ICICLE_, camp.returnToCampUseOneHour);
 				}
 				else if (itemChooser == 1) {
 					outputText("As you make your way across the icy wastes, you notice a small corked ivory horn half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horn of mead in your bag and continue on your way.", true)
-					menuLoc = 2;
 					inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);					
 				}
 				else {

@@ -177,7 +177,7 @@ public function dreamSelect():Boolean {
 		//cow
 		else if(daydream == 3) {
 			if((player.gender == 1 && player.biggestTitSize() >= 5) || (player.gender == 3 && rand(2) == 0)) {
-				outputText("having full and lactating breasts, searching for the right person to give your milk to.  You come across a pretty human girl and invite her to your breast.  She eagerly jumps into your arms and starts to suckle from your ample bosom.  You then guide your erect " + cockDescript(0) + " into her waiting lower lips.  The two of you stand there in eternal bliss as she suckles on your chest and you thrust into her womanhood, until you wake from the dream.  ", false);
+				outputText("having full and lactating breasts, searching for the right person to give your milk to.  You come across a pretty human girl and invite her to your breast.  She eagerly jumps into your arms and starts to suckle from your ample bosom.  You then guide your erect " + player.cockDescript(0) + " into her waiting lower lips.  The two of you stand there in eternal bliss as she suckles on your chest and you thrust into her womanhood, until you wake from the dream.  ", false);
 			}
 			else if(player.gender >= 2) {
 				outputText("wandering through the forest, cradling your full and lactating breasts, searching for the right person to give your milk to.  You come across a cute human boy and invite him to your breast.  He eagerly jumps into your arms and starts to suckle from your ample bosom.  You then guide his erect cock into your " + vaginaDescript(0) + " and engulf him.  The two of you stand there in eternal bliss as he suckles on your chest and thrusts into your womanhood, until you wake from the dream.  ", false);
@@ -221,7 +221,7 @@ public function dreamSelect():Boolean {
 
 			outputText("You cum.  You scream in glorious and divine pleasure, granted by your immaculate god.  The acolytes watching masturbate themselves, in awe of the raptured orgasm Akbal has granted you.  Your tongue lolls out as he pounds into you, the haze of delight briefly devouring your thoughts in all-consuming green fire.\n\n", false);
 
-			outputText("\"<i>Glory unto Akbal</i>\", Buttslut whispers.\n\n", false);
+			outputText("\"<i>Glory unto Akbal,</i>\" Buttslut whispers.\n\n", false);
 
 			outputText("You awake with a start, grumbling slightly before turning over and trying to get back to sleep.  Your asshole twitches.", false);
 		}
@@ -354,7 +354,7 @@ public function dreamSelect():Boolean {
 				}
 			}
 		}
-		doNext(1);
+		doNext(playerMenu);
 		return true;
 	}
 	return false;
@@ -432,7 +432,7 @@ public function dayTenDreams():void {
 	}
 	if(player.cor < 50) dynStats("lus", 10);
 	else dynStats("lus", 25);
-	doNext(camp.campMenu);
+	doNext(playerMenu);
 }
 
 public function fuckedUpCockDreamChange():void {
@@ -496,5 +496,5 @@ public function displacerDreamIII():void {
 			player.cocks[x].cockType = CockTypesEnum.DISPLACER;
 		}
 	}
-	doNext(1);
+	doNext(playerMenu);
 }

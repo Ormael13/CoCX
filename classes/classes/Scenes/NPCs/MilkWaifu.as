@@ -32,7 +32,7 @@ public function arriveWithLacticWaifuAtCamp():void {
 	
 	//[Name Field.  If left empty, defaults to "Bath Slut"]
 	menu();
-	addButton(0,"Next",nameZeMilkBath);
+	addButton(0, "Next", nameZeMilkBath);
 	mainView.nameBox.text = "";
 }
 
@@ -99,7 +99,7 @@ private function nameZeMilkBath():void
 		
 		//[Next time Rath's at camp and PC accesses Milky's meny, play the Arrival w/ Rath scene, sans first sentence]
 	}
-	kGAMECLASS.inDungeon = false;
+	//Set before this function is called:	kGAMECLASS.inDungeon = false;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -123,7 +123,7 @@ public function ratducto():void {
 	//{Plot Item gained: "Super Reducto"}
 	player.createKeyItem("Super Reducto",0,0,0,0);
 	outputText("\n\n(<b>Key Item Acquired: Super Reducto</b>)");
-	doNext(1);
+	doNext(playerMenu);
 }
 
 
@@ -682,7 +682,7 @@ private function fuckDatMilkSlat():void {
 	
 	outputText("\n\nOne of your hands drifts down from " + flags[kFLAGS.MILK_NAME] + "'s teats, fingers tracing along her supple skin and ample curves to the hem of her panties.  You pull them down with one smooth motion, baring the full mounds of her dusky ass cheeks.  She pushes back immediately, humping up and down your rod as you work to free yourself from your [armor].  Finally, your " + cockDescript(x) + " pops free from its binds, only to be instantly buried in " + flags[kFLAGS.MILK_NAME] + "'s rear cleavage; she gives a happy, girlish giggle when your throbbing rod pushes through her valley, practically bouncing on your cock.  You wrap your arms around her waist, one hand working her still-needy teats as the other dives between her legs, easily slipping a few fingers into her sodden gash.  " + flags[kFLAGS.MILK_NAME] + " moans lustily as your digits enter her, biting her lower lip when your fingertips caress her inner walls and spasming muscles, soon soaked in her feminine fluids.  Your thumb swirls around the bud of her clit, drawing ragged gasps of pleasure from her lips until you silence her with a kiss, driving your tongue into her mouth as your fingers assault her cunt, fingering her until she's nice, wet, and ready.");
 	
-	outputText("\n\nYou shift forward ever so slightly, dragging your " + cockDescript(x) + " from " + flags[kFLAGS.MILK_NAME] + "'s butt-cleavage and into the welcoming embrace of her womanhood.  You both moan with lust as your " + cockHead(x) + " presses into her, parting the folds of her cunny to feel the hot touch of her walls kissing your tip.  You slide into her with measured ease, " + cockDescript(x) + " spreading her walls wide as your hips move to meet, your groin pushing against her bubble butt, flesh yielding as you try and slide as much cockflesh into her eager channel as you can.");
+	outputText("\n\nYou shift forward ever so slightly, dragging your " + cockDescript(x) + " from " + flags[kFLAGS.MILK_NAME] + "'s butt-cleavage and into the welcoming embrace of her womanhood.  You both moan with lust as your " + player.cockHead(x) + " presses into her, parting the folds of her cunny to feel the hot touch of her walls kissing your tip.  You slide into her with measured ease, " + cockDescript(x) + " spreading her walls wide as your hips move to meet, your groin pushing against her bubble butt, flesh yielding as you try and slide as much cockflesh into her eager channel as you can.");
 	outputText("\n\nBy the time you've hilted " + flags[kFLAGS.MILK_NAME] + " she's a mess, cunt drooling obscenely and tongue hanging from her mouth.  Her chest heaves in your hands as you fingers wrap back around her cherry-red nipples, her milk coming in erratic spurts as she undulates on your cock, hips and ass starting to bounce atop you.  You move to match her, hammering your [hips] home to meet her, thrusting your " + cockDescript(x) + " into her clinging depths.  " + flags[kFLAGS.MILK_NAME] + " cups her hands to her breasts, pooling up handfuls of milk and splashing them onto your prick and her gash, nearly dousing the heat of your lust with the rush of cool cream; but another jack-hammer thrust shows her milk to be a magnificent lubricant, letting you slip and slide into her with ease.  Soon you're both moaning your lust, pleasured gasps and sighs echoing through the camp as you fuck " + flags[kFLAGS.MILK_NAME] + "'s dripping cunt.");
 
 	outputText("\n\nYou can feel your orgasm mounting, surging on as your " + cockDescript(x) + " hammers relentlessly into " + flags[kFLAGS.MILK_NAME] + ".  With an animalistic roar, you push her down onto all fours and grab her ass for leverage.  She squeals when you push her down, but she recovers in an instant, wiggling her ass tantalizingly as your fingers sink into her pliant flesh.  With a vision full of that big, soft ass swaying as your dick pounds " + flags[kFLAGS.MILK_NAME] + "'s, you can't help but cum.  You grint your teeth and give " + flags[kFLAGS.MILK_NAME] + " a hard spank right on the ass, making her shriek with pleasure and pain, her cunt squeezing your " + cockDescript(x) + " at just the right moment: you shoot a load of white-hot seed straight into her womb, dick buried to the hilt inside her.  Around your spasming cock, " + flags[kFLAGS.MILK_NAME] + "'s quim quivers and contracts, milking you for every drop; her teats let loose a wild stream of milk which pools around you, nearly hiding the excess spooge that pours from her battered cunny to stain the earth.");

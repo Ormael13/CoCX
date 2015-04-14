@@ -51,24 +51,30 @@ package classes.Scenes.Areas.Forest
 
 		override protected function performCombatAction():void
 		{
-			var select:Number=1;
+			var select:int = 1;
 			//mid-round madness!
 			midRoundMadness();
 			tamaniShowsUp();
 
-			if(special1 > 0 || special1 is Function) select++;
-			if(special2 > 0 || special2 is Function) select++;
-			if(special3 > 0 || special3 is Function) select++;
-			var rando:int = rand(select);
-			//Tamani's Daughters get multiattacks!
-			if(rando == 0) {
-				createStatusAffect(StatusAffects.Attacks, int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20), 0, 0, 0);
-				if (statusAffectv1(StatusAffects.Attacks) > 20) addStatusValue(StatusAffects.Attacks, 1, -(statusAffectv1(StatusAffects.Attacks) - 20));
-				eAttack();
+			if (special1 != null) select++;
+			if (special2 != null) select++;
+			if (special3 != null) select++;
+			switch (rand(select)) {
+				case 0:
+					createStatusAffect(StatusAffects.Attacks, int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20), 0, 0, 0); //Tamani's Daughters get multiattacks!
+					if (statusAffectv1(StatusAffects.Attacks) > 20) addStatusValue(StatusAffects.Attacks, 1, -(statusAffectv1(StatusAffects.Attacks) - 20));
+					eAttack();
+					break;
+				case 1:
+					special1();
+					break;
+				case 2:
+					special2();
+					break;
+				default:
+					special3();
+					break;
 			}
-			if(rando == 1) game.eventParser(special1);
-			if(rando == 2) game.eventParser(special2);
-			if(rando == 3) game.eventParser(special3);
 			combatRoundOver();
 		}
 

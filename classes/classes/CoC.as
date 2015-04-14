@@ -82,12 +82,12 @@
 	{
 
 		// Include the functions. ALL THE FUNCTIONS
-		include "../../includes/customCharCreation.as";
+//No longer needed. Added into CharCreation.as:		include "../../includes/customCharCreation.as";
 		
 		include "../../includes/descriptors.as";
 		include "../../includes/appearance.as";
 
-		include "../../includes/InitialiseUI.as";
+//No longer needed:		include "../../includes/InitialiseUI.as";
 		include "../../includes/input.as";
 		include "../../includes/OnLoadVariables.as";
 		include "../../includes/startUp.as";
@@ -129,6 +129,9 @@
 		
 		public static function timeAwareClassAdd(newEntry:TimeAwareInterface):void { _timeAwareClassList.push(newEntry); }
 		
+		private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
+		private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }
+		
 		// /
 		private var _perkLib:PerkLib = new PerkLib();// to init the static
 		private var _statusAffects:StatusAffects = new StatusAffects();// to init the static
@@ -145,10 +148,11 @@
 		public var shields:ShieldLib = new ShieldLib();
 		public var miscItems:MiscItemLib = new MiscItemLib();
 		// Scenes/
-		public var camp:Camp = new Camp();
+		public var camp:Camp = new Camp(campInitialize);
 		public var exploration:Exploration = new Exploration();
-		public var inventory:Inventory = new Inventory(saves);
 		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
+		public var inventory:Inventory = new Inventory(saves);
+		public var masturbation:Masturbation = new Masturbation();
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
@@ -234,11 +238,11 @@
 		include "../../includes/dreams.as";
 		//include "../../includes/dungeon2Supplimental.as";
 		//include "../../includes/dungeonCore.as";
-		//include "../../includes/dungeonEvents.as";
+//No longer needed. This file has been chopped up and spread throughout the codebase:		include "../../includes/dungeonEvents.as";
 		//include "../../includes/dungeonHelSupplimental.as";
 		//include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
-		include "../../includes/masturbation.as";
+//Moved to Scenes/Masturbation.as		include "../../includes/masturbation.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/runa.as";
 		include "../../includes/symGear.as";
@@ -259,7 +263,7 @@
 			certain functions, even though they were in the same scope as the
 			function calling them.
 		****/
-		public var semiglobalReferencer :* = {};
+//Looks like this dangerous little var is no longer used anywhere, huzzah.		public var semiglobalReferencer :* = {};
 
 		public var mainView :MainView;
 
@@ -277,13 +281,13 @@
 		public var images:ImageManager;
 		public var player:Player;
 		public var player2:Player;
-		public var tempPerk:PerkClass;
+//No longer used:		public var tempPerk:PerkClass;
 		public var monster:Monster;
 //No longer used:		public var itemSwapping:Boolean;
 		public var flags:DefaultDict;
 		public var achievements:DefaultDict;
 		private var gameState:int;
-		public var menuLoc:Number;
+//Gone, last use replaced by newRound arg for combatMenu:		public var menuLoc:Number;
 //No longer used:		public var itemSubMenu:Boolean;
 //No longer used:		public var supressGoNext:Boolean = false;
 		public var time :TimeModel;
@@ -389,7 +393,7 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.2_mod_snapshot_20150412";
+			ver = "0.9.3_mod_snapshot_20150412";
 			version = ver + " (<b>Sleepy-time with Ember</b>)";
 
 			//Indicates if building for mobile?
@@ -417,7 +421,7 @@
 			playerEvent = new PlayerEvents();
 
 			//Used in perk selection, mainly eventParser, input and engineCore
-			tempPerk = null;
+			//tempPerk = null;
 
 			//Create monster, used all over the place
 			monster = new Monster();
@@ -453,6 +457,7 @@
 //GameState 8 eliminated			//8 = worked at farm
 			gameState = 0;
 
+//Gone, last use replaced by newRound arg for combatMenu
 			//Another state variable used for menu display used everywhere
 			//menuLoc
 			//0 - normal
@@ -478,7 +483,7 @@
 //MenuLoc 26 eliminated			//26 - Benoit Shop
 //MenuLoc 27 eliminated			//27 - Chicken Harpy Shop
 //MenuLoc 28 eliminated			//28 - Items menu
-			menuLoc = 0;
+//			menuLoc = 0;
 
 			//State variable used to indicate whether inside an item submenu
 			//The item sub menu

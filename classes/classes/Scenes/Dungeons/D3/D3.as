@@ -322,7 +322,7 @@ package classes.Scenes.Dungeons.D3
 			
 			addButton(13, "Inventory", inventory.inventoryMenu);
 			addButton(14, "Map", kGAMECLASS.dungeons.map.displayMap);
-			if (player.lust >= 30) addButton(8, "Masturbate", eventParser, 10);
+			if (player.lust >= 30) addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
 		}
 		
 		public function move(roomName:String, timeToPass:Number = 0):void
@@ -506,7 +506,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("You pluck out " + item.longName + " ");			
 			
 			flags[kFLAGS.D3_EGGS_AVAILABLE] += eggMask;
-			inventory.takeItem(item, camp.campMenu); //camp.campMenu is equivalent to doNext(1)
+			inventory.takeItem(item, playerMenu); //playerMenu is equivalent to doNext(1)
 		}
 		
 		private function fallbackFromMagpieHallS():void

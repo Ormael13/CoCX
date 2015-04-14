@@ -50,7 +50,7 @@ public function approachIfris():void {
 	}
 	outputText("(You could go ahead and work out while she watches, ask her to join you, or leave.)", false);
 	//Work out || Ask Her To Join || Leave?
-	simpleChoices("Work Out",workOutForIfris,"Join Me?",askIfrisToJoinYou,"",0,"",0,"Leave",telAdre.gymDesc);
+	simpleChoices("Work Out", workOutForIfris, "Join Me?", askIfrisToJoinYou, "", null, "", null, "Leave", telAdre.gymDesc);
 }
 //3a-PC responds they want to work out-
 private function workOutForIfris():void {
@@ -67,7 +67,7 @@ private function workOutForIfris():void {
 
 	outputText("\"<i>I hope you don't mind if I keep you company. I'd love to... see you in action.</i>\"\n\n", false);
 	//WORK OUT or SHOW OFF?
-	simpleChoices("Work Out",liftWhileIfrisWatches,"Show Off",showOffForIfris,"",0,"",0,"",0);
+	simpleChoices("Work Out", liftWhileIfrisWatches, "Show Off", showOffForIfris, "", null, "", null, "", null);
 }
 //3b-PC asks if she'd like to join them-
 private function askIfrisToJoinYou():void {
@@ -84,7 +84,7 @@ private function askIfrisToJoinYou():void {
 
 	outputText("You shrug at her response, but there's something about the way she eyes you now...", false);
 	//WORK OUT or SHOW OFF?
-	simpleChoices("Work Out",liftWhileIfrisWatches,"Show Off",showOffForIfris,"",0,"",0,"",0);
+	simpleChoices("Work Out", liftWhileIfrisWatches, "Show Off", showOffForIfris, "", null, "", null, "", null);
 }
 
 //4a-PC does a modest work out-
@@ -199,7 +199,7 @@ private function showOffForIfris():void {
 
 			outputText("The moment you lift the weight for the first time, she bends down, rubbing her smooth cheek against your half-turgid member", false);
 			if(player.balls > 0) outputText(", her hand cupping your " + ballsDescriptLight(), false);
-			outputText(". Smiling, she watches you carefully, her tongue sliding out of her lips, laving up the underside of the shaft, urging it on its final steps to full hardness. She groans in desire as she takes your " + cockHead(0) + " into her mouth once again, pulling a moan from you with her first, hard suckle upon your sensitive tip; it seems she doesn't want to tease anymore.\n\n", false);
+			outputText(". Smiling, she watches you carefully, her tongue sliding out of her lips, laving up the underside of the shaft, urging it on its final steps to full hardness. She groans in desire as she takes your " + player.cockHead() + " into her mouth once again, pulling a moan from you with her first, hard suckle upon your sensitive tip; it seems she doesn't want to tease anymore.\n\n", false);
 
 			outputText("The sexy little dark-haired devil takes your dick to the ", false);
 			if(player.hasSheath()) outputText("sheath", false);
@@ -208,7 +208,7 @@ private function showOffForIfris():void {
 
 			outputText("With your strength spent, your lips dry from your constant moans, and your " + cockDescript(0) + " throbbing so wonderfully, Ifris smiles around your shaft as she feels your orgasm closing in. She doesn't stop this time, still bobbing along your shaft, tongue mercilessly undulating against the underside, as your peak rushes to meet you. She swallows those spurts of cum expertly, pulling back between each one to catch a burst in her mouth and taste it, and then shoving you back down her throat to swallow the next, alternating in an erotic rhythm until you're spent.\n\n", false);
 
-			outputText("With that slow, almost painfully-hard suckle, she pops from the " + cockHead(0) + " of your " + cockDescript(0) + " out and sucks in a deep breath, giggling and leaning down to kiss you.  She murmurs, \"<i>You do better each time, darling. I'll see you again I hope.</i>\"  With that, she's leaving you again, all but skipping out the door, that wetness trickling down her long, red legs...", false);
+			outputText("With that slow, almost painfully-hard suckle, she pops from the " + player.cockHead() + " of your " + cockDescript(0) + " out and sucks in a deep breath, giggling and leaning down to kiss you.  She murmurs, \"<i>You do better each time, darling. I'll see you again I hope.</i>\"  With that, she's leaving you again, all but skipping out the door, that wetness trickling down her long, red legs...", false);
 		}
 		flags[kFLAGS.TIMES_FUCKED_IFRIS_BLOWJOB]++;
 	}

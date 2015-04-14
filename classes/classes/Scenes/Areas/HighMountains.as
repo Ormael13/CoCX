@@ -27,7 +27,7 @@ package classes.Scenes.Areas
 		public function exploreHighMountain():void
 		{
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
-			doNext(1);
+			doNext(playerMenu);
 			
 			if (kGAMECLASS.d3.discoverD3() == true)
 			{

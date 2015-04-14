@@ -72,7 +72,7 @@ private function tellAmilyToFuckOffRuinedJojo():void {
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
 	dynStats("cor", 10);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Fix Him]
@@ -91,7 +91,7 @@ private function agreeToHelpAmilyFixJojo():void {
 	dynStats("cor", -5);
 	// Amily won't sex.  Jojo sex still available)
 	flags[kFLAGS.AMILY_WAIT_FOR_PC_FIX_JOJO] = 1;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Go to amily with pure honey in inventory]
@@ -127,7 +127,7 @@ internal function findJojosNote():void {
 	clearOutput();
 	outputText("There is a note left on your bedroll. You pick it up and unseal it – it's from Jojo!\n\n", false);
 	outputText("\"<i>After the things that have transpired between us, I felt I ought to give this chapter of our lives some closure.   What you did to me was inexcusable.  It was a violation of everything that I am and was.  But, even though I wasn't able to help you tame your inner corruption, I'm glad that Amily was able to do so in my place.  And although I shall never again be able to return to my life as a chaste monk due to the changes you made to my body and libido, I take solace in the fact that Amily was able to repopulate our people.  Perhaps I'll even get married; its impossible to hide how 'large' I've gotten and the girls all seem to want to see what I've got under my robes.  In any event, good-bye 'Champion'.</i>\"", false);
-	doNext(1);
+	doNext(playerMenu);
 }
 	
 	
@@ -157,7 +157,7 @@ public function amilyDiscoversJojoWithTentaclesAndShitOhBoy():void {
 		flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
 		//+5 corruption)
 		dynStats("cor", 5);
-		doNext(1);
+		doNext(playerMenu);
 	}
 	//Else: 
 	else {
@@ -180,7 +180,7 @@ private function AmilyLeavesBirdJojoTentacles():void {
 	flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
 	//+5 corruption)
 	dynStats("cor", 5);
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //(Uncorrupt)
@@ -365,7 +365,7 @@ internal function marbleVsAmilyFreakout():void {
 	
 	//Player choices how they want to respond.  
 	//Stay silent (A1), pimp (B1), or explain (C1).
-	simpleChoices("StaySilent",marbleIsPissyAndYourTooDumbToTalk,"Pimp",beAPimpMarbleLovesIt,"Explain",LucyYouGotSomeSplainingToDo,"",0,"",0);
+	simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Pimp", beAPimpMarbleLovesIt, "Explain", LucyYouGotSomeSplainingToDo, "", null, "", null);
 }
 
 //Stay silent like a douche
@@ -410,13 +410,13 @@ private function beAPimpMarbleLovesIt():void {
 	if(player.findPerk(PerkLib.MarblesMilk) >= 0) {
 		outputText("Marble blinks before saying \"<i>" + player.short + ", try again, I know you're better than that.</i>\"  You blink in response and wonder yourself what possessed you to say that.\n\n", false);
 		//Player chooses stay silent (A1) or explain (C1)
-		simpleChoices("StaySilent",marbleIsPissyAndYourTooDumbToTalk,"Explain",LucyYouGotSomeSplainingToDo,"",0,"",0,"",0);
+		simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Explain", LucyYouGotSomeSplainingToDo, "", null, "", null, "", null);
 	}
 	//Pimp -> PC is not addicted (B3)
 	else {
 		outputText("The two of them simply stare at you for several minutes in disbelief at your statement, it doesn't seem like either expected you to say that.  Finally Amily sputters, \"<i>I... what, how?   This isn't like how you acted when we were back in my village.</i>\"  You give her a winning smile and say, \"<i>Hey baby, I meant every word of it, and just look at me!  I can handle two girls like you, easy.</i>\"  Marble gives you the strangest of looks before saying, \"<i>Apparently you have a death wish,</i>\" before her hammer comes to the ready.  Amily does the same with her blowpipe.\n\nThe mouse begs, \"<i>" + player.short + ", please tell me you were making a bad joke.</i>\"\n\n", false);
 		//Player chooses serious (B4), just joking (B5)
-		simpleChoices("Serious",srslyPimpinGuyz,"Joking",jokeAboutPimpularness,"",0,"",0,"",0);
+		simpleChoices("Serious", srslyPimpinGuyz, "Joking", jokeAboutPimpularness, "", null, "", null, "", null);
 	}
 }
 //Pimp -> PC is not addicted -> serious (B4)
@@ -453,7 +453,7 @@ private function jokeAboutPimpularness():void {
 	clearOutput();
 	outputText("You assure them that you thought a joke might help them calm down.  The two of them seem to disagree with you on that sentiment, but wait for you to say something else.", false);
 	//Player chooses stay silent (A1) or explain (C1)
-	simpleChoices("StaySilent",marbleIsPissyAndYourTooDumbToTalk,"Explain",LucyYouGotSomeSplainingToDo,"",0,"",0,"",0);
+	simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Explain", LucyYouGotSomeSplainingToDo, "", null, "", null, "", null);
 }
 
 private function LucyYouGotSomeSplainingToDo():void {
@@ -522,7 +522,7 @@ internal function amilyUrtaReaction():void {
 	outputText("Amily bounds out of camp before you can react, sniffling as she disappears into the distance. She's lost to sight almost immediately thanks to the properties of this accursed landscape.", false);
 	flags[kFLAGS.AMILY_VISITING_URTA] = 1;
 	flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] = 0;
-	doNext(1);
+	doNext(playerMenu);
 	//disable Amily button and replace her camp screen status, enable [Ask about Amily] button at Wet Bitch
 }
 
@@ -554,7 +554,7 @@ public function askAboutAmily():void {
 		
 		outputText("Do you leave them to get acquainted (and possibly be up for threesomes in the future), or do you barge in and stop these cheating sluts?", false);
 		//[Leave Them (finishes as normal] [Interrupt]
-		simpleChoices("Leave Them",askAboutAmilyPt2,"Interrupt",cheatingSloots,"",0,"",0,"",0);
+		simpleChoices("Leave Them", askAboutAmilyPt2, "Interrupt", cheatingSloots, "", null, "", null, "", null);
 	}
 }
 		
@@ -577,7 +577,7 @@ private function cheatingSloots():void {
 	
 	outputText("Well, the mouse may have a point.  You could let them get to know each other and perhaps turn this into a threesome down the road, or you could put a firm end to it right now.  There's a pretty good chance putting your boot down on this might piss off one of them.", false);
 	//[Let Them Be] [End It]
-	simpleChoices("Let It Be",letTheSlootsFuck,"End It",endThisMadness,"",0,"",0,"",0);
+	simpleChoices("Let It Be", letTheSlootsFuck, "End It", endThisMadness, "", null, "", null, "", null);
 }
 private function letTheSlootsFuck():void {
 	clearOutput();
@@ -624,7 +624,7 @@ public function amilyUrtaMorningAfter():void {
 	outputText("You wait for her to relax, and then, with studied nonchalance, add that it looked like the two of them had settled things amicably enough.  At that, Amily looks panic-stricken, fear and embarrassment warring for her face.  \"<i>... you saw?</i>\" she manages to blurt.  \"<i>Uh... uh... sorry,</i>\" Amily is mumbling, panic still evident.  \"<i>I mean...</i>\"  The mouse trails off, looking at you for reassurance.  What do you do?", false);
 	
 	//[Smile and nod][Be totally a dick]
-	simpleChoices("Be Nice",smileAndNodToAmilyXUrta,"Be A Dick",beADickToAmily,"",0,"",0,"",0);
+	simpleChoices("Be Nice", smileAndNodToAmilyXUrta, "Be A Dick", beADickToAmily, "", null, "", null, "", null);
 }
 
 //[Be totally a dick]
@@ -647,7 +647,7 @@ private function beADickToAmily():void {
 	flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 	
 	//no more Puru Amily, corruption path only
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Smile and nod]
@@ -662,7 +662,7 @@ private function smileAndNodToAmilyXUrta():void {
 	//"Urta" is now unlocked in Amily's options between 0600 and 1400
 	outputText("\n\n(<b>Urta is now unlocked from Amily's sex menu.</b>)", false);
 	flags[kFLAGS.AMILY_VISITING_URTA] = 4;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //Amily Option - Urta
@@ -690,7 +690,7 @@ public function amilyUrtaSex():void {
 	var vag:Function = null;
 	if(player.hasVagina()) vag = amilyScene.urtaXAmilyCuntPussyVagSQUICK;
 	if(player.hasCock()) dick = amilyScene.threesomeAmilUrtaCAWKS;
-	simpleChoices("Use Dick",dick,"Use Vag",vag,"",0,"",0,"Watch",amilyUrtaSexWatch);
+	simpleChoices("Use Dick", dick, "Use Vag", vag, "", null, "", null, "Watch", amilyUrtaSexWatch);
 }
 private function amilyUrtaSexWatch():void {
 	clearOutput();

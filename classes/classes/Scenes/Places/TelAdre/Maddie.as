@@ -38,7 +38,8 @@ private function followMinotaurIntoBackroom():void {
 		if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText("You lick your lips when you realize you're meeting the source of the 'special' éclairs.", false);
 		else outputText("You blush when you realize what he must be using for cream filling.", false);
 		//[Give Them] [Leave]
-		if(player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT)) simpleChoices("Give Them",handOverIngredientsItBeBakingTimeYo,"",0,"",0,"",0,"Leave",nopeAintGotNoneODemSpeculIngredimathings);
+		if (player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT))
+			simpleChoices("Give Them", handOverIngredientsItBeBakingTimeYo, "", null, "", null, "", null, "Leave", nopeAintGotNoneODemSpeculIngredimathings);
 		else simpleChoices("", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00241] = 1;
 	}
@@ -80,7 +81,7 @@ public function handOverIngredientsItBeBakingTimeYo():void {
 	outputText("\n\n", false);
 	if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0) doNext(waitForSlutCake);
 	//[Wait] [Sneak Out]
-	else simpleChoices("Wait",waitForSlutCake,"Sneak Out",sneakAwayFromMaddie,"",0,"",0,"",0);
+	else simpleChoices("Wait", waitForSlutCake, "Sneak Out", sneakAwayFromMaddie, "", null, "", null, "", null);
 }
 	
 //[Sneak Out]
@@ -114,7 +115,7 @@ private function waitForSlutCake():void {
 	
 	outputText("Running seems like a very good idea.  Who knows what she has planned for you?", false);
 	//[RUN] [TRY TO TALK]
-	simpleChoices("Run Away",runAwayFromMaddiiiieee,"TryToTalk",talkToMaddie,"",0,"",0,"",0);
+	simpleChoices("Run Away", runAwayFromMaddiiiieee, "TryToTalk", talkToMaddie, "", null, "", null, "", null);
 }
 //[RUN DAFUQ AWAY]
 private function runAwayFromMaddiiiieee():void {

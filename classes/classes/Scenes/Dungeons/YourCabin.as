@@ -79,11 +79,11 @@ package classes.Scenes.Dungeons
 			//Build menu
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] > 0) addButton(0, "Study", menuStudy);
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0 && flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) addButton(1, "Set Alarm", menuAlarm);
-			addButton(3, "Stash", kGAMECLASS.camp.stash);
+			addButton(3, "Stash", inventory.stash);
 			addButton(4, "Furniture", menuFurniture);
-			addButton(9, "Wait", eventParser, 40); //You can wait/rest/sleep in cabin.
-			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", eventParser, 11);
-			if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", eventParser, 41);
+			addButton(9, "Wait", camp.doWait); //You can wait/rest/sleep in cabin.
+			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", getGame().camp.rest);
+			if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", getGame().camp.doSleep);
 			addButton(11, "South (Exit)", exitCabin);
 			addButton(14, "Codex", camp.codex.accessCodexMenu);
 			removeButton(7);
@@ -96,7 +96,7 @@ package classes.Scenes.Dungeons
 		private function exitCabin():void {
 			kGAMECLASS.inDungeon = false;
 			kGAMECLASS.dungeonLoc = -1;
-			eventParser(1);
+			playerMenu();
 		}
 		
 		private function menuAlarm():void {
@@ -213,13 +213,13 @@ package classes.Scenes.Dungeons
 				else
 				{
 					kGAMECLASS.camp.cabinProgress.errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				kGAMECLASS.camp.cabinProgress.errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}		
 		}
 		
@@ -232,7 +232,7 @@ package classes.Scenes.Dungeons
 			outputText("<b>You have finished your bed! (HP and Fatigue recovery increased by 50%!)</b> \n\n", false);
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] = 1;
 			fatigue(30);
-			doNext(14);
+			doNext(camp.returnToCampUseTwoHours);
 		}
 		//Nightstand
 		private function constructFurnitureNightstandPrompt():void {
@@ -248,13 +248,13 @@ package classes.Scenes.Dungeons
 				else
 				{
 					kGAMECLASS.camp.cabinProgress.errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				kGAMECLASS.camp.cabinProgress.errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}		
 		}
 		
@@ -267,7 +267,7 @@ package classes.Scenes.Dungeons
 			outputText("<b>You have finished your nightstand!</b> \n\n", false);
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] = 1;
 			fatigue(20);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Dresser
 		private function constructFurnitureDresserPrompt():void {
@@ -283,13 +283,13 @@ package classes.Scenes.Dungeons
 				else
 				{
 					kGAMECLASS.camp.cabinProgress.errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				kGAMECLASS.camp.cabinProgress.errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}		
 		}
 		
@@ -303,8 +303,7 @@ package classes.Scenes.Dungeons
 			outputText("<b>You have finished your dresser!</b> \n\n", false);
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] = 1;
 			fatigue(60);
-			cheatTime(2);
-			doNext(1);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Table
 		private function constructFurnitureTablePrompt():void {
@@ -320,13 +319,13 @@ package classes.Scenes.Dungeons
 				else
 				{
 					kGAMECLASS.camp.cabinProgress.errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				kGAMECLASS.camp.cabinProgress.errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}		
 		}
 		
@@ -339,8 +338,7 @@ package classes.Scenes.Dungeons
 			outputText("<b>You have finished your table!</b> \n\n", false);
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] = 1;
 			fatigue(50);
-			cheatTime(1);
-			doNext(1);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Chair
 		private function constructFurnitureChairPrompt():void {
@@ -356,13 +354,13 @@ package classes.Scenes.Dungeons
 				else
 				{
 					kGAMECLASS.camp.cabinProgress.errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				kGAMECLASS.camp.cabinProgress.errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}		
 		}
 		
@@ -383,8 +381,7 @@ package classes.Scenes.Dungeons
 				flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] = 1;
 			}
 			fatigue(20);
-			cheatTime(1);
-			doNext(1);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Bookshelf
 		private function constructFurnitureBookshelfPrompt():void {
@@ -400,13 +397,13 @@ package classes.Scenes.Dungeons
 				else
 				{
 					kGAMECLASS.camp.cabinProgress.errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				kGAMECLASS.camp.cabinProgress.errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}		
 		}
 		
@@ -422,8 +419,7 @@ package classes.Scenes.Dungeons
 			}
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] = 1;
 			fatigue(50);
-			cheatTime(1);
-			doNext(1);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Desk
 		private function constructFurnitureDeskPrompt():void {
@@ -439,13 +435,13 @@ package classes.Scenes.Dungeons
 				else
 				{
 					kGAMECLASS.camp.cabinProgress.errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				kGAMECLASS.camp.cabinProgress.errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}		
 		}
 		
@@ -459,8 +455,7 @@ package classes.Scenes.Dungeons
 			outputText("<b>You have finished your desk!</b> \n\n", false);
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] = 1;
 			fatigue(60);
-			cheatTime(2);
-			doNext(1);
+			doNext(camp.returnToCampUseTwoHours);
 		}
 		//Chair for Desk
 		private function constructFurnitureChairForDeskPrompt():void {
@@ -476,13 +471,13 @@ package classes.Scenes.Dungeons
 				else
 				{
 					kGAMECLASS.camp.cabinProgress.errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				kGAMECLASS.camp.cabinProgress.errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}		
 		}
 		
@@ -495,8 +490,7 @@ package classes.Scenes.Dungeons
 			outputText("<b>You have finished your chair!</b> \n\n", false);
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] = 1;
 			fatigue(20);
-			cheatTime(1);
-			doNext(1);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 	}

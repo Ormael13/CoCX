@@ -60,7 +60,7 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nA sudden scrape sounds behind you!  You spin around in time to see the familiar shape of a chameleon girl peeling off the trees.  She approaches you with a menacing glare in her eyes, growling \"<i>This is my bog!  Get out now or... or face the consequences!</i>\"  You raise your " + player.weaponName + " and prepare to defend yourself.");
 			}
 			flags[kFLAGS.TIMES_MET_CHAMELEON]++;
-			doNext(1);
+			doNext(playerMenu);
 		}//LOSS SCENES (Intro) (Z edited)
 		public function loseToChameleonGirl():void
 		{
@@ -302,7 +302,7 @@ package classes.Scenes.Areas.Bog
 			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) milk = giveTheChameleonASuccubiMilk;
 			if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) drafts = doseDatChameleonWithLustAndSensitivityDrafts;
 
-			simpleChoices("SuccMilk", milk, "LustnSensD.", drafts, "", 0, "", 0, "Back", defeatChameleonGirl);
+			simpleChoices("SuccMilk", milk, "LustnSensD.", drafts, "", null, "", null, "Back", defeatChameleonGirl);
 		}
 
 		//-P. Succubi Milk or Succubi Milk (Z edited)

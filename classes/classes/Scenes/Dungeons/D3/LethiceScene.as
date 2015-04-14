@@ -61,7 +61,7 @@ package classes.Scenes.Dungeons.D3
 			monster.weaponAttack = 50;
 			monster.armorName = "lethicite armor";
 			monster.armorDef = 32;
-			doNext(5000);
+			doNext(playerMenu);
 		}
 		
 		
@@ -71,7 +71,7 @@ package classes.Scenes.Dungeons.D3
 			else outputText("You collapse from your overwhelming desires.");
 			outputText("\n\nLethice walks over to your defeated form. \"<i>Pity. Yet another 'champion' who tried to dethrone me. You will forever serve me as my slave.</i>\"");
 			outputText("\n\n(Placeholder) You are abducted, abused, and forced to serve Lethice as slave forever.");
-			doBadEnd();
+			getGame().gameOver();
 		}
 		
 		public function theFinalEnding():void {

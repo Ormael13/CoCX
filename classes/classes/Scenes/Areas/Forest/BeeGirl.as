@@ -55,6 +55,66 @@
 				game.forest.beeGirlScene.beeRapesYou();
 			}
 		}
+		
+		private function beeStingAttack():void {
+			//Blind dodge change
+			if (findStatusAffect(StatusAffects.Blind) >= 0) {
+				outputText(capitalA + short + " completely misses you with a blind sting!!");
+				combatRoundOver();
+				return;
+			}
+			//Determine if dodged!
+			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s stinger!");
+				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s stinger with superior quickness!");
+				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow attempts to sting you.");
+				combatRoundOver();
+				return;
+			}
+			//determine if avoided with armor.
+			if (player.armorDef >= 10 && rand(4) > 0) {
+				outputText("Despite her best efforts, " + a + short + "'s sting attack can't penetrate your armor.");
+				combatRoundOver();
+				return;
+			}
+			//Sting successful!  Paralize or lust?
+			//Lust 50% of the time
+			if (rand(2) == 0) {
+				outputText("Searing pain lances through you as " + a + short + " manages to sting you!  You stagger back a step and nearly trip, flushing hotly.  ");
+				outputText("Oh no!  You've been injected with some kind of aphrodisiac.  You've got to keep focused, you can't think about... fucking... ");
+				if (player.gender == 1) outputText("or dripping honey-slicked cunts beckoning you. ");
+				if (player.gender == 2) outputText("planting your aching sex over her face while you lick her sweet honeypot. ");
+				if (player.gender == 3) outputText("or cocks, tits, and puffy nipples. ");
+				game.dynStats("lus", 25);
+				if (player.lust > 60) {
+					outputText(" You shake your head and struggle to stay focused,");
+					if (player.gender == 1 || player.gender == 3) outputText(" but it's difficult with the sensitive bulge in your groin.");
+					if (player.gender == 2) outputText(" but can't ignore the soaking wetness in your groin.");
+					if (player.sens > 50) outputText("  The sensitive nubs of your nipples rub tightly under your " + player.armorName + ".");
+				}
+				else outputText(" You shake your head and clear the thoughts from your head, focusing on the task at hand.");
+				if (player.findStatusAffect(StatusAffects.lustvenom) < 0) player.createStatusAffect(StatusAffects.lustvenom, 0, 0, 0, 0);
+			}
+			//Paralise the other 50%!
+			else {
+				outputText("Searing pain lances through you as " + a + short + " manages to sting you!  You stagger back a step and nearly trip, finding it hard to move yourself.");
+				var paralyzeIndex:int = player.findStatusAffect(StatusAffects.ParalyzeVenom);
+				if (paralyzeIndex >= 0) {
+					player.statusAffect(paralyzeIndex).value1 += 2.9; //v1 - strenght penalty, v2 speed penalty
+					player.statusAffect(paralyzeIndex).value2 += 2.9;
+					game.dynStats("str", -3, "spe", -3);
+					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
+				}
+				else {
+					player.createStatusAffect(StatusAffects.ParalyzeVenom, 2, 2, 0, 0);
+					game.dynStats("str", -2, "spe", -2);
+					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
+				}
+			}
+			if (player.lust >= 100)
+				doNext(game.endLustLoss);
+			else doNext(game.playerMenu);
+		}
 
 		public function BeeGirl()
 		{
@@ -93,7 +153,7 @@
 			this.wingType = WING_TYPE_BEE_LIKE_SMALL;
 			this.tailType = TAIL_TYPE_BEE_ABDOMEN;
 			this.tailVenom = 100;
-			this.special1 = 5036;
+			this.special1 = beeStingAttack;
 			checkMonster();
 		}
 

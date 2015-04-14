@@ -25,7 +25,6 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.spe > 50) dynStats("spe", -1);
 				dynStats("spe", -1);
 				cleanupAfterCombat();
-				doNext(16);
 			}
 		}
 		

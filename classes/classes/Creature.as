@@ -1349,297 +1349,17 @@ package classes
 		}
 
 		
-		public function cockDescript(cockIndex:Number = 0):String
+		public function cockDescript(cockIndex:int = 0):String
 		{
-			return Appearance.cockDescript(this,cockIndex);
+			return Appearance.cockDescript(this, cockIndex);
 		}
 		
-		
-		//New cock adjectives.  The old one sucked dicks
-		public function cockAdjective(cockIndex:Number = -1):String
-		{
-			var descript:String = "";
-			var rando:Number = 0;
-			var multi:Boolean = false;
-			//If used for multiple cocks, set multi flag
-			if (cockIndex < 0)
-			{
-				//Since we have multi dicks lets talk about the biggest!
-				cockIndex = biggestCockIndex();
-				multi = true;
-			}
-			//Pierced - 1/5 chance
-			if (!multi && rand(5) == 0 && cocks[cockIndex].isPierced == true)
-			{
-				descript += "pierced";
-			}
-			//Goo - 1/4 chance
-			else if (_skinType == 3 && rand(4) == 0)
-			{
-				rando = rand(3);
-				if (rando == 0)
-					descript += "goopey";
-				else if (rando == 1)
-					descript += "gooey";
-				else
-					descript += "slimy";
-			}
-			//Length 1/3 chance
-			else if (rand(3) == 0)
-			{
-				if (cocks[cockIndex].cockLength < 3)
-				{
-					rando = rand(4);
-					if (rando == 0)
-						descript = "little";
-					else if (rando == 1)
-						descript = "toy-sized";
-					else if (rando == 2)
-						descript = "mini";
-					else if (rando == 3)
-						descript = "budding";
-					else
-						descript = "tiny";
-				}
-				else if (cocks[cockIndex].cockLength < 5)
-				{
-					rando = rand(2);
-					if (rando == 0)
-						descript = "short";
-					else
-						descript = "small";
-				}
-				else if (cocks[cockIndex].cockLength < 7)
-				{
-					rando = rand(2);
-					if (rando == 0)
-						descript = "fair-sized";
-					else
-						descript = "nice";
-				}
-				else if (cocks[cockIndex].cockLength < 9)
-				{
-					rando = rand(3);
-					if (rando == 0)
-					{
-						if (cocks[cockIndex].cockType == CockTypesEnum.HORSE)
-							descript = "pony-sized";
-						else
-							descript = "long";
-					}
-					else if (rando == 1)
-					{
-						if (cocks[cockIndex].cockType == CockTypesEnum.HORSE)
-							descript = "colt-like";
-						else
-							descript = "lengthy";
-					}
-					else
-						descript = "sizable";
-				}
-				else if (cocks[cockIndex].cockLength < 13)
-				{
-					rando = rand(3);
-					if (rando == 0)
-						descript = "huge";
-					else if (rando == 1)
-					{
-						if (cocks[cockIndex].cockType == CockTypesEnum.DOG)
-							descript = "mastiff-like";
-						else
-							descript = "cucumber-length";
-					}
-					else
-						descript = "foot-long";
-				}
-				else if (cocks[cockIndex].cockLength < 18)
-				{
-					rando = rand(3);
-					if (rando == 0)
-						descript = "massive";
-					else if (rando == 1)
-						descript = "knee-length";
-					else
-						descript = "forearm-length";
-				}
-				else if (cocks[cockIndex].cockLength < 30)
-				{
-					rando = rand(3);
-					if (rando == 0)
-						descript = "enormous";
-					else if (rando == 1)
-						descript = "giant";
-					else
-						descript = "arm-like";
-				}
-				else
-				{
-					rando = rand(4);
-					if (cocks[cockIndex].cockType == CockTypesEnum.TENTACLE && rand(4) == 0)
-						descript = "coiled ";
-					else
-					{
-						if (rando == 0)
-							descript = "towering";
-						else if (rando == 1)
-							descript = "freakish";
-						else if (rando == 2)
-							descript = "monstrous";
-						else
-							descript = "massive";
-					}
-				}
-			}
-			//Hornyness 1/2
-			else if (lust > 75 && rand(2) == 0)
-			{
-				//Uber horny like a baws!
-				if (lust > 90)
-				{
-					//Weak as shit cum
-					if (cumQ() < 50)
-					{
-						if (rand(2) == 0)
-							descript += "throbbing";
-						else
-							descript += "pulsating";
-					}
-					//lots of cum? drippy.
-					else if (cumQ() < 200)
-					{
-						rando = rand(3);
-						if (rando == 0)
-							descript += "dribbling";
-						else if (rando == 1)
-							descript += "drooling";
-						else
-							descript += "leaking";
-					}
-					//Tons of cum
-					else
-					{
-						rando = rand(5);
-						if (rando == 0)
-							descript += "very drippy";
-						else if (rando == 1)
-							descript += "pre-gushing";
-						else if (rando == 2)
-							descript += "cum-bubbling";
-						else if (rando == 3)
-							descript += "pre-slicked";
-						else
-							descript += "pre-drooling";
-					}
-				}
-				//A little less lusty, but still lusty.
-				else if (lust > 75)
-				{
-					if (cumQ() < 50)
-					{
-						rando = rand(5);
-						if (rando == 0)
-							descript += "turgid";
-						else if (rando == 1)
-							descript += "blood-engorged";
-						else if (rando == 2)
-							descript += "rock-hard";
-						else if (rando == 3)
-							descript += "stiff";
-						else
-							descript += "eager";
-					}
-					//A little drippy
-					else if (cumQ() < 200)
-					{
-						rando = rand(10);
-						if (rando == 0)
-							descript += "turgid";
-						else if (rando == 1)
-							descript += "blood-engorged";
-						else if (rando == 2)
-							descript += "rock-hard";
-						else if (rando == 3)
-							descript += "stiff";
-						
-						else if (rando == 4)
-							descript += "eager";
-						else if (rando < 7)
-							descript += "fluid-beading";
-						else
-							descript += "slowly-oozing";
-					}
-					//uber drippy
-					else
-					{
-						rando = rand(4);
-						if (rando == 0)
-							descript += "dribbling";
-						else if (rando == 1)
-							descript += "drooling";
-						else if (rando == 2)
-							descript += "fluid-leaking";
-						else
-							descript += "leaking";
-					}
-				}
-			}
-			//Girth - fallback
-			else
-			{
-				if (cocks[cockIndex].cockThickness <= .75)
-				{
-					rando = rand(3);
-					if (rando == 0)
-						descript += "thin";
-					else if (rando == 1)
-						descript += "slender";
-					else
-						descript += "narrow";
-				}
-				else if (cocks[cockIndex].cockThickness <= 1.2)
-				{
-					descript += "ample";
-				}
-				else if (cocks[cockIndex].cockThickness <= 1.4)
-				{
-					rando = rand(2);
-					if (rando == 0)
-						descript += "ample";
-					else
-						descript += "big";
-				}
-				else if (cocks[cockIndex].cockThickness <= 2)
-				{
-					rando = rand(3);
-					if (rando == 0)
-						descript += "broad";
-					else if (rando == 1)
-						descript += "girthy";
-					else
-						descript += "meaty";
-				}
-				else if (cocks[cockIndex].cockThickness <= 3.5)
-				{
-					rando = rand(3);
-					if (rando == 0)
-						descript += "fat";
-					else if (rando == 1)
-						descript += "wide";
-					else
-						descript += "distended";
-				}
-				else if (cocks[cockIndex].cockThickness > 3.5)
-				{
-					rando = rand(3);
-					if (rando == 0)
-						descript += "inhumanly distended";
-					else if (rando == 1)
-						descript += "bloated";
-					else
-						descript += "monstrously thick";
-				}
-			}
-			return descript;
+		public function cockAdjective(index:Number = -1):String {
+			if (index < 0) index = biggestCockIndex();
+			var isPierced:Boolean = (cocks.length == 1) && (cocks[index].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
+			var hasSock:Boolean = (cocks.length == 1) && (cocks[index].sock != "");
+			var isGooey:Boolean = (skinType == CoC.SKIN_TYPE_GOO);
+			return Appearance.cockAdjective(cocks[index].cockType, cocks[index].cockLength, cocks[index].cockThickness, lust, cumQ(), isPierced, hasSock, isGooey);
 		}
 		
 		public function wetness():Number
@@ -2052,66 +1772,78 @@ package classes
 				
 			cumCap *= cumMultiplier
 			cumCap == Math.round(cumCap);
-			if (cumCap > 2147483647) 
-				cumCap = 2147483647;
+			if (cumCap > int.MAX_VALUE) 
+				cumCap = int.MAX_VALUE;
 			return cumCap;
 		}
 		
-		
-		//How many tentaclecocks?
-		public function tentacleCocks():Number
-		{
-			var tentacleCockC:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.TENTACLE)
-					tentacleCockC++;
+		public function countCocksOfType(type:CockTypesEnum):int {
+			if (cocks.length == 0) return 0;
+			var counter:int = 0;
+			for (var x:int = 0; x < cocks.length; x++) {
+				if (cocks[x].cockType == type) counter++;
 			}
-			return tentacleCockC;
+			return counter;
 		}
 		
-		//How many demoncocks?
-		public function demonCocks():Number
-		{
-			var demonCockC:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.DEMON)
-					demonCockC++;
-			}
-			return demonCockC;
+		public function anemoneCocks():int { //How many anemonecocks?
+			return countCocksOfType(CockTypesEnum.ANEMONE);
 		}
 		
-		//How many cat-cocks?
-		public function catCocks():Number
-		{
-			var catCockC:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.CAT)
-					catCockC++;
-			}
-			return catCockC;
+		public function catCocks():int { //How many catcocks?
+			return countCocksOfType(CockTypesEnum.CAT);
 		}
 		
-		//How many lizard/snake-cocks?
-		public function lizardCocks():Number
-		{
-			var lizCockC:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.LIZARD)
-					lizCockC++;
+		public function demonCocks():int { //How many demoncocks?
+			return countCocksOfType(CockTypesEnum.DEMON);
+		}
+		
+		public function displacerCocks():int { //How many displacerCocks?
+			return countCocksOfType(CockTypesEnum.DISPLACER);
+		}
+		
+		// Note: DogCocks/FoxCocks are functionally identical. They actually change back and forth depending on some
+		// of the PC's attributes, and this is recaluculated every hour spent at camp.
+		// As such, delineating between the two is kind of silly.
+		public function dogCocks():int { //How many dogCocks
+			if (cocks.length == 0) return 0;
+			var counter:int = 0;
+			for (var x:int = 0; x < cocks.length; x++) {
+				if (cocks[x].cockType == CockTypesEnum.DOG || cocks[x].cockType == CockTypesEnum.FOX) counter++;
 			}
-			return lizCockC;
+			return counter;
+		}
+		
+		public function dragonCocks():int { //How many dragonCocks?
+			return countCocksOfType(CockTypesEnum.DRAGON);
+		}
+		
+		public function foxCocks():int { //How many foxCocks
+			return dogCocks();
+		}
+		
+		public function horseCocks():int { //How many horsecocks?
+			return countCocksOfType(CockTypesEnum.HORSE);
+		}
+		
+		public function kangaCocks():int { //How many kangawangs?
+			return countCocksOfType(CockTypesEnum.KANGAROO);
+		}
+		
+		public function lizardCocks():int { //How many lizard/snake-cocks?
+			return countCocksOfType(CockTypesEnum.LIZARD);
+		}
+		
+		public function pigCocks():int { //How many lizard/snake-cocks?
+			return countCocksOfType(CockTypesEnum.PIG);
+		}
+		
+		public function normalCocks():int { //How many normalCocks?
+			return countCocksOfType(CockTypesEnum.HUMAN);
+		}
+		
+		public function tentacleCocks():int { //How many tentaclecocks?
+			return countCocksOfType(CockTypesEnum.TENTACLE);
 		}
 		
 		public function findFirstCockType(ctype:CockTypesEnum):Number
@@ -2143,61 +1875,6 @@ package classes
 			//trace("Creature.findFirstCockType ERROR - searched for cocktype: " + type + " and could not find it.");
 			return 0;
 		}*/
-		
-		public function displacerCocks():Number
-		{
-			var displacerWang:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.DISPLACER)
-					displacerWang++;
-			}
-			return displacerWang;
-		}
-		
-		//How many kangawangs
-		public function kangaCocks():Number
-		{
-			var kangaWang:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.KANGAROO)
-					kangaWang++;
-			}
-			return kangaWang;
-		}
-		
-		//How many horsecocks?
-		public function horseCocks():Number
-		{
-			var horseCockC:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.HORSE)
-					horseCockC++;
-			}
-			return horseCockC;
-		}
-		
-		//How many anemonecocks?
-		public function anemoneCocks():Number
-		{
-			var anemoneCockC:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.ANEMONE)
-					anemoneCockC++;
-			}
-			return anemoneCockC;
-		}
 		
 		//Change first normal cock to horsecock!
 		//Return number of affected cock, otherwise -1
@@ -2239,74 +1916,6 @@ package classes
 				}
 			}
 			return -1;
-		}
-		
-		// Note: DogCocks/FoxCocks are functionally identical. They actually change back and forth depending on some
-		// of the PC's attributes, and this is recaluculated every hour spent at camp.
-		// As such, delineating between the two is kind of silly.
-		//How many dogCocks
-		public function dogCocks():int
-		{
-			var dogCockC:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.DOG || cocks[counter].cockType == CockTypesEnum.FOX)
-					dogCockC++;
-			}
-			return dogCockC;
-		}
-		
-		//How many foxCocks
-		public function foxCocks():int
-		{
-			
-			return dogCocks();
-		}
-
-		
-
-		//How many dragonCocks
-		public function dragonCocks():int
-		{
-			var dragonCockC:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.DRAGON)
-					dragonCockC++;
-			}
-			return dragonCockC;
-		}
-		
-		//How many pigCocks
-		public function pigCocks():int
-		{
-			var pigCockC:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.PIG)
-					pigCockC++;
-			}
-			return pigCockC;
-		}
-		
-		//How many normalCocks
-		public function normalCocks():int
-		{
-			var normalCockC:Number = 0;
-			var counter:Number = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.HUMAN)
-					normalCockC++;
-			}
-			return normalCockC;
 		}
 		
 		//TODO Seriously wtf. 1500+ calls to cockTotal, 340+ call to totalCocks. I'm scared to touch either.
@@ -3295,35 +2904,35 @@ package classes
 		public function isBiped():Boolean
 		{
 			//Naga/Centaur
-			if (lowerBody == 3 || lowerBody == 4)
+			if (lowerBody == LOWER_BODY_TYPE_NAGA || lowerBody == LOWER_BODY_TYPE_CENTAUR)
 				return false;
-			if (lowerBody == 8 || lowerBody == 11)
+			if (lowerBody == LOWER_BODY_TYPE_GOO || lowerBody == LOWER_BODY_TYPE_PONY)
 				return false;
 			return true;
 		}
 
 		public function isNaga():Boolean
 		{
-			if (lowerBody == 3)
+			if (lowerBody == LOWER_BODY_TYPE_NAGA)
 				return true;
 			return false;
 		}
 
 		public function isTaur():Boolean
 		{
-			if (lowerBody == 4 || lowerBody == 11)
+			if (lowerBody == LOWER_BODY_TYPE_CENTAUR || lowerBody == LOWER_BODY_TYPE_PONY)
 				return true;
 			return false;
 		}
 
 		public function isDrider():Boolean
 		{
-			return (lowerBody == 16);
+			return (lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY);
 		}
 
 		public function isGoo():Boolean
 		{
-			if (lowerBody == 8)
+			if (lowerBody == LOWER_BODY_TYPE_GOO)
 				return true;
 			return false;
 		}
@@ -3739,7 +3348,7 @@ package classes
 
 		public function breastCup(rowNum:Number):String
 		{
-			return kGAMECLASS.breastCup(breastRows[rowNum].breastRating);
+			return Appearance.breastCup(breastRows[rowNum].breastRating);
 //Should change this to make use of Appearance			return BreastStore.cupSize(breastRows[rowNum].breastRating);
 			/*
 			if (breastRows[rowNum].breastRating < 1)
@@ -4159,14 +3768,77 @@ package classes
 			return Appearance.allBreastsDescript(this);
 		}
 
-		public function SMultiCockDesc():String
-		{
-			return Appearance.cockMultiDesc(this, true, false);
+		//Simplified these cock descriptors and brought them into the creature class
+		public function sMultiCockDesc():String {
+			return (cocks.length > 1 ? "one of your " : "your ") + cockMultiLDescriptionShort();
 		}
-
+		
+		public function SMultiCockDesc():String {
+			return (cocks.length > 1 ? "One of your " : "Your ") + cockMultiLDescriptionShort();
+		}
+		
+		public function oMultiCockDesc():String {
+			return (cocks.length > 1 ? "each of your " : "your ") + cockMultiLDescriptionShort();
+		}
+		
+		public function OMultiCockDesc():String {
+			return (cocks.length > 1 ? "Each of your " : "Your ") + cockMultiLDescriptionShort();
+		}
+		
+		private function cockMultiLDescriptionShort():String {
+			if (cocks.length < 1) {
+				CoC_Settings.error("<b>ERROR: NO WANGS DETECTED for cockMultiLightDesc()</b>");
+				return "<b>ERROR: NO WANGS DETECTED for cockMultiLightDesc()</b>";
+			}
+			if (cocks.length == 1) { //For a songle cock return the default description
+				return Appearance.cockDescript(this, 0);
+			}
+			switch (cocks[0].cockType) { //With multiple cocks only use the descriptions for specific cock types if all cocks are of a single type
+				case CockTypesEnum.ANEMONE:
+				case CockTypesEnum.CAT:
+				case CockTypesEnum.DEMON:
+				case CockTypesEnum.DISPLACER:
+				case CockTypesEnum.DRAGON:
+				case CockTypesEnum.HORSE:
+				case CockTypesEnum.KANGAROO:
+				case CockTypesEnum.LIZARD:
+				case CockTypesEnum.PIG:
+				case CockTypesEnum.TENTACLE:
+					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
+					break;
+				case CockTypesEnum.DOG:
+				case CockTypesEnum.FOX:
+					if (dogCocks() == cocks.length) return Appearance.cockNoun(CockTypesEnum.DOG) + "s";
+				default:
+			}
+			return Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
+		}
+		
+		public function hasSheath():Boolean {
+			if (cocks.length == 0) return false;
+			for (var x:int = 0; x < cocks.length; x++) {
+				switch (cocks[x].cockType) {
+					case CockTypesEnum.CAT:
+					case CockTypesEnum.DISPLACER:
+					case CockTypesEnum.DOG:
+					case CockTypesEnum.FOX:
+					case CockTypesEnum.HORSE:
+					case CockTypesEnum.KANGAROO:
+						return true; //If there's even one cock of any of these types then return true
+					default:
+				}
+			}
+			return false;
+		}
+		
+		public function sheathDescription():String {
+			if (hasSheath()) return "sheath";
+			return "base";
+		}
+		
 		public function vaginaDescript(idx:int = 0):String
 		{
-			return Appearance.vaginaDescript(this, 0)
+			return Appearance.vaginaDescript(this, 0);
 		}
 
 		public function nippleDescript(rowIdx:int):String
@@ -4176,11 +3848,103 @@ package classes
 
 		public function chestDesc():String
 		{
-			return Appearance.chestDesc(this);
+			if (biggestTitSize() < 1) return "chest";
+			return Appearance.biggestBreastSizeDescript(this);
+//			return Appearance.chestDesc(this);
+		}
+
+		public function allChestDesc():String {
+			if (biggestTitSize() < 1) return "chest";
+			return allBreastsDescript();
 		}
 
 		public function clitDescript():String {
 			return Appearance.clitDescription(this);
+		}
+
+		public function cockHead(cockNum:int = 0):String {
+			if (cockNum < 0 || cockNum > cocks.length - 1) {
+				CoC_Settings.error("");
+				return "ERROR";
+			}
+			switch (cocks[cockNum].cockType) {
+				case CockTypesEnum.CAT:
+					if (rand(2) == 0) return "point";
+					return "narrow tip";
+				case CockTypesEnum.DEMON:
+					if (rand(2) == 0) return "tainted crown";
+					return "nub-ringed tip";
+				case CockTypesEnum.DISPLACER:
+					switch (rand(5)) {
+						case  0: return "star tip";
+						case  1: return "blooming cock-head";
+						case  2: return "open crown";
+						case  3: return "alien tip";
+						default: return "bizarre head";
+					}
+				case CockTypesEnum.DOG:
+				case CockTypesEnum.FOX:
+					if (rand(2) == 0) return "pointed tip";
+					return "narrow tip";
+				case CockTypesEnum.HORSE:
+					if (rand(2) == 0) return "flare";
+					return "flat tip";
+				case CockTypesEnum.KANGAROO:
+					if (rand(2) == 0) return "tip";
+					return "point";
+				case CockTypesEnum.LIZARD:
+					if (rand(2) == 0) return "crown";
+					return "head";
+				case CockTypesEnum.TENTACLE:
+					if (rand(2) == 0) return "mushroom-like tip";
+					return "wide plant-like crown";
+				default:
+			}
+			if (rand(2) == 0) return "crown";
+			if (rand(2) == 0) return "head";
+			return "cock-head";
+		}
+
+		//Short cock description. Describes length or girth. Supports multiple cocks.
+		public function cockDescriptShort(i_cockIndex:int = 0):String
+		{
+			// catch calls where we're outside of combat, and eCockDescript could be called.
+			if (cocks.length == 0)
+				return "<B>ERROR. INVALID CREATURE SPECIFIED to cockDescriptShort</B>";
+
+			var description:String = "";
+			var descripted:Boolean = false;
+			//Discuss length one in 3 times
+			if (rand(3) == 0) {
+				if (cocks[i_cockIndex].cockLength >= 30)
+					description = "towering ";
+				else if (cocks[i_cockIndex].cockLength >= 18)
+					description = "enormous ";
+				else if (cocks[i_cockIndex].cockLength >= 13)
+					description = "massive ";
+				else if (cocks[i_cockIndex].cockLength >= 10)
+					description = "huge ";
+				else if (cocks[i_cockIndex].cockLength >= 7)
+					description = "long ";
+				else if (cocks[i_cockIndex].cockLength >= 5)
+					description = "average ";
+				else
+					description = "short ";
+				descripted = true;
+			}
+			else if (rand(2) == 0) { //Discuss girth one in 2 times if not already talked about length.
+				//narrow, thin, ample, broad, distended, voluminous
+				if (cocks[i_cockIndex].cockThickness <= .75) description = "narrow ";
+				if (cocks[i_cockIndex].cockThickness > 1 && cocks[i_cockIndex].cockThickness <= 1.4) description = "ample ";
+				if (cocks[i_cockIndex].cockThickness > 1.4 && cocks[i_cockIndex].cockThickness <= 2) description = "broad ";
+				if (cocks[i_cockIndex].cockThickness > 2 && cocks[i_cockIndex].cockThickness <= 3.5) description = "fat ";
+				if (cocks[i_cockIndex].cockThickness > 3.5) description = "distended ";
+				descripted = true;
+			}
+//Seems to work better without this comma:			if (descripted && cocks[i_cockIndex].cockType != CockTypesEnum.HUMAN) description += ", ";
+			description += Appearance.cockNoun(cocks[i_cockIndex].cockType);
+
+			return description;
 		}
 
 		public function assholeOrPussy():String
@@ -4208,8 +3972,7 @@ package classes
 			return Appearance.sackDescript(this);
 		}
 
-		public function breastDescript(rowNum:int):String
-		{
+		public function breastDescript(rowNum:int):String {
 			//ERROR PREVENTION
 			if (breastRows.length - 1 < rowNum) {
 				CoC_Settings.error("");
@@ -4219,44 +3982,7 @@ package classes
 				CoC_Settings.error("");
 				return "<b>ERROR, breastDescript() called when no breasts are present.</b>";
 			}
-			var temp14:int = Math.random() * 3;
-			var descript:String = "";
-			if (breastRows[rowNum].breastRating == 0) return "flat breasts";
-			//50% of the time size-descript them
-			if (rand(2) == 0) descript += breastSize(breastRows[rowNum].breastRating);
-			//Nouns!
-			temp14 = rand(10);
-			if (temp14 == 0) descript += "breasts";
-			if (temp14 == 1) {
-				if (breastRows[rowNum].lactationMultiplier > 2) descript += "milk-udders";
-				else descript += "breasts";
-			}
-			if (temp14 == 2) {
-				if (breastRows[rowNum].lactationMultiplier > 1.5) descript += "milky ";
-				if (breastRows[rowNum].breastRating > 4) descript += "tits";
-				else descript += "breasts";
-			}
-			if (temp14 == 3) {
-				//if(breastRows[rowNum].breastRating > 6) descript += "rack";
-				descript += "breasts";
-			}
-			if (temp14 == 4) descript += "tits";
-			if (temp14 == 5) descript += "tits";
-			if (temp14 == 6) descript += "tits";
-			if (temp14 == 7) {
-				if (breastRows[rowNum].lactationMultiplier >= 1 && breastRows[rowNum].lactationMultiplier < 2.5) descript += "milk jugs";
-				if (breastRows[rowNum].lactationMultiplier >= 2.5) descript += "udders";
-				if (breastRows[rowNum].lactationMultiplier < 1) descript += "jugs";
-			}
-			if (temp14 == 8) {
-				if (breastRows[rowNum].breastRating > 6) descript += "love-pillows";
-				else descript += "boobs";
-			}
-			if (temp14 == 9) {
-				if (breastRows[rowNum].breastRating > 6) descript += "tits";
-				else descript += "breasts";
-			}
-			return descript;
+			return BreastStore.breastDescript(breastRows[rowNum].breastRating, breastRows[rowNum].lactationMultiplier);
 		}
 
 		private function breastSize(val:Number):String

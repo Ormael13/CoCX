@@ -75,7 +75,7 @@ package classes.Scenes.Areas.HighMountains
 			if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Certain that the creature won't dare try and turn its eyes on you again, you take your time to look the tall reptile over directly for the first time.  Perhaps you could use it to satisfy your baser urges. If so, what part of it do you choose?", false);
 				//[Tongue][Ass]
-				simpleChoices("Tongue",tongueBasiliskSmex,"Ass",evil,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
+				simpleChoices("Tongue", tongueBasiliskSmex, "Ass", evil, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}
@@ -332,9 +332,9 @@ package classes.Scenes.Areas.HighMountains
 					}
 					//[Not first time: 
 					else {
-						outputText("\n\nBenoit places the eggs into a blanket swaddled basket with the same painstaking care he did with the others, before turning back to you.");
-						outputText("\n\nThe blind basilisk reaches out, finds your hand, and then squeezes it.  \"<i>[name], you must be more careful in ze future,</i>\" he says.  \"<i>Please understand I am not saying zis because I am jealous or angry or anything so zilly.  You 'ave done a great sing to change your body to 'elp my people, but if you keep getting attacked by my bruzzers and zey find out... if zey work out what you are... I do not like to sink about it.</i>\"  You tell him you'll be more on guard in the future and he seems to accept this.  He gestures to the corner where he has put together a serviceable stove from scrap.");
-						outputText("\n\n“Ungry?”");
+						outputText("\n\nBenoit places the eggs into a blanket-swaddled basket with the same painstaking care he did with the others, before turning back to you.");
+						outputText("\n\nThe blind basilisk reaches out, finds your hand, and then squeezes it.  \"<i>[name], you must be more careful in ze future,</i>\" he says.  \"<i>Please understand I am not saying zis because I am jealous or angry or anysing so zilly.  You 'ave done a great sing to change your body to 'elp my people, but if you keep getting attacked by my bruzzers and zey find out... if zey work out what you are... I do not like to sink about it.</i>\"  You tell him you'll be more on guard in the future and he seems to accept this.  He gestures to the corner where he has put together a serviceable stove from scrap.");
+						outputText("\n\n“<i>'Ungry?</i>”");
 						outputText("\n\nYou linger long enough to share breakfast with him, and then return to camp.");
 					}
 				}
@@ -383,7 +383,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("A pale blue finger traces the line of your frozen chin before a leering, female face swallows up your line of vision.  \"<i>Well, well, well. Look at what we have here,</i>\" purrs the succubus into your cold, marble ear.  Other shapes prowl into view, stalking reptile shapes, as the demon runs her hands sensually over your form, testing every smooth surface, protuberance and cranny that she can reach.  You cannot feel a thing, except an overwhelming sense of dread.  \"<i>Played with the lizards a bit too much did we, friend?  I hope you learnt your lesson.  It's a real shame, when you think about it.</i>\"  The succubus actually sounds almost upset as she looks you over.  \"<i>You would have made a fine slave.  The things we would have done to you... ah well.  Que sera sera. Remove this!</i>\" she straightens up smartly and claps her hands.  \"<i>Take this statue to Lethice's castle.  I am sure it will look excellent in her front hall, and I know she will appreciate the present.</i>\"  The basilisks snake up to you and then heave you into their arms.  As they haul you into the night, the succubus's voice reaches you.  \"<i>Did you know that marble is a metamorphic rock, statue? It takes tens of thousands of years to wear down. Meta-MORPH-ic, get it? Hahahahahaha!</i>\"\n\n", false);
 		
 			outputText("You have no voice, and you must scream.", false);
-			doBadEnd();
+			getGame().gameOver();
 		}
 		//Defeated, Taken Advantage of: nobody
 		private function basiliskAdvantageNobody():void {

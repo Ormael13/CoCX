@@ -51,7 +51,7 @@ package classes.Scenes
 				addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
 				addButton(5, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
 				addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
-				addButton(14, "Exit", eventParser, 1);
+				addButton(14, "Exit", playerMenu);
 			}
 		}
 		

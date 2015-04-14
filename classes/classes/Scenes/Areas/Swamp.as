@@ -80,7 +80,7 @@ package classes.Scenes.Areas
 					break;
 				default:
 					outputText("New explore code fucked up.  YOU BONED (TELL FEN)");
-					doNext(1);
+					doNext(playerMenu);
 					break;
 			}
 		}

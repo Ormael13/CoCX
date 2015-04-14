@@ -54,7 +54,7 @@ private function approachLilium():void {
 	}
 	if(player.gems < 200) outputText("<b>You remember that you haven't got the 200 gems for her services right now.  Maybe next time.</b>", false);
 	else pay = payForLilium;
-	simpleChoices("Pay",pay,"",0,"",0,"",0,"Leave",leaveLilium);
+	simpleChoices("Pay", pay, "", null, "", null, "", null, "Leave", leaveLilium);
 }
 
 
@@ -97,7 +97,7 @@ private function payForLilium():void {
 	if(player.hasCock() && player.tongueType >= TONUGE_DEMONIC) buttFuck = buttFuckTongueJeorb;
 	if(player.hasCock()) nippleFuck = liliumNippleFuck;
 	if(player.hasVagina()) rideHer = liliumDickRidah;
-	simpleChoices("Buttfuck",buttFuck,"Ride Her",rideHer,"Nipple-Fuck",nippleFuck,"",0,"",0);
+	simpleChoices("Buttfuck", buttFuck, "Ride Her", rideHer, "Nipple-Fuck", nippleFuck, "", null, "", null);
 }
 
 //- Leave:

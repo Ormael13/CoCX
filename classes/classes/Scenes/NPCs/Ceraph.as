@@ -147,7 +147,7 @@
 			var damage:Number = 0;
 			outputText("The demoness weaves her whip in the air until you can practically hear it slithering like a snake, cutting the air as it weaves back and forth, still magically alight with flames.  In a blink she lashes out twice in quick succession!\n", false);
 			//First hit!
-			doNext(1);
+			doNext(game.playerMenu);
 			//Blind dodge change
 			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(10) != 9) {
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);

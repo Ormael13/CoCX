@@ -104,7 +104,7 @@ package classes.Scenes.Monsters
 					add(consumables.SUCMILK,12).
 					add(jewelries.POWRRNG,1);
 			this.wingType = WING_TYPE_IMP;
-			this.special1 = 5019;
+			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;
 			checkMonster();
 		}

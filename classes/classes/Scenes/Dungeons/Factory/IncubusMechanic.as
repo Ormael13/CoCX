@@ -8,98 +8,7 @@ package classes.Scenes.Dungeons.Factory
 	import flash.display.InteractiveObject;
 	import classes.GlobalFlags.kFLAGS;
 
-	public class IncubusMechanic extends Monster 
-	{
-		public var factory:Factory = new Factory()
-		private var temp:Number = 0;
-		
-		public function cocktripAttack():void {
-			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0) {
-				outputText(capitalA + short + " suddenly grows his dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
-				combatRoundOver();
-				return;
-			}
-			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + player.buttDescript() + " and pull your  " + player.legs() + " out from under you.");
-			if((player.spe-30) > rand(60)) {
-				outputText("  You spin as you fall, twisting your " + player.legs() + " free and springing back to your " + player.feet() + " unharmed.", false);
-			}
-			//Fall down go boom
-			else {
-				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your " + player.legs() + ", smearing them with oozing demonic fluids. ");
-				if(player.lust >= 80 || player.cor >= 80) {
-					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated " + player.legs() + " free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire. ");
-					game.dynStats("lus", 13, "cor", 1);
-				}
-				else {
-					if(player.lust >= 50 || player.cor >= 50) {
-						outputText("  Blushing at the scent and feel of cum on your " + player.legs() + ", you twist and pull free.  You find yourself wondering what this demon's dick would taste like. ");
-						game.dynStats("lus", 8 + player.cor / 20);
-						
-					}
-					else {
-						outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed " + player.legs() + ". ");
-						game.dynStats("lus", 5 + player.cor / 20);
-					}
-				}
-				var damage:Number = 5;
-				player.takeDamage(damage, true);
-			}
-			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.", false);
-			combatRoundOver();
-		}
-		
-		public function cumCannon():void {
-			trace("Cum cannon");
-			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0) {
-				outputText(capitalA + short + " pumps his thrust lewdly before cumming with intense force in your direction!  Thankfully his aim was off due to the blindness currently affect him.", false);
-				combatRoundOver();
-				return;
-			}
-			outputText("Your demonic foe places his hands behind his head and lewdly pumps and thrusts his hips at you.  Your eyes open wide as a globule of cum erupts from the demon-prick and flies right at you.  ", false);
-			if (player.shieldName == "dragon-shell shield" && rand(2) == 0)
-			{
-				outputText("Your shield managed to absorb the attack!")
-				combatRoundOver();
-				return;
-			}
-			outputText("You do your best to dodge, but some still lands on your ", false);
-			temp = rand(3);
-			//Face
-			if(temp == 0) {
-				outputText("face.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your mouth and nose!  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
-				game.dynStats("lus", 3);
-				if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
-				else player.addStatusValue(StatusAffects.DemonSeed,1,7);
-				player.slimeFeed();
-			}
-			//Chest
-			if(temp == 1) {
-				if(player.hasFuckableNipples()) {
-					outputText(allBreastsDescript() + ".  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your open nipples.  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
-					game.dynStats("lus", 3);
-					if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
-					else player.addStatusValue(StatusAffects.DemonSeed,1,8);
-					player.slimeFeed();
-				}
-				else outputText(allBreastsDescript() + ".  Thankfully it doesn't seem to have much effect.", false);
-			}
-			//Crotch
-			if(temp == 2) {
-				if(player.vaginas.length > 0) {
-					outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + player.vaginaDescript() + ".  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
-					game.dynStats("lus", 3);
-					if(player.findStatusAffect(StatusAffects.DemonSeed) < 0) player.createStatusAffect(StatusAffects.DemonSeed,5,0,0,0);
-					else player.addStatusValue(StatusAffects.DemonSeed,1,8);
-					player.slimeFeed();
-				}
-				else outputText("crotch.  Thankfully, it doesn't seem to have much effect.", false);
-			}
-			combatRoundOver();
-			lust -= 10;
-			if(lust < 0) lust = 0;
-		}
+	public class IncubusMechanic extends Monster {
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
@@ -113,32 +22,31 @@ package classes.Scenes.Dungeons.Factory
 			}
 		}
 		
-		private function defeatedInDungeon1(hpVictory:Boolean):void
-		{
-			if(player.gender == 0) {
-				if (hpVictory){
-					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
-				} 
-				else {
-					outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
-				}
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-				game.simpleChoices("Anally", factory.doRideIncubusAnally, "Orally", factory.doOralIncubus, "", 0, "", 0, "Leave", factory.doLeaveIncubus);
+		private function defeatedInDungeon1(hpVictory:Boolean):void {
+			clearOutput();
+			if (hpVictory)
+				outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.");
+			else outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.");
+			if (player.gender == 0) {
+				outputText("  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?");
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
+				game.simpleChoices("Anally", game.dungeons.factory.doRideIncubusAnally, "Orally", game.dungeons.factory.doOralIncubus, "", null, "", null, "Leave", game.cleanupAfterCombat);
 			}
 			else {
+				game.dynStats("lus", 1);
 				if (hpVictory) {
-					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?", true);
-					game.dynStats("lus", 1);
-					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-					game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "Nothing", factory.doLeaveIncubus, "", 0);
-				} 
+					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?");
+					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
+					game.simpleChoices("Rape", game.dungeons.factory.doRapeIncubus, "Service Him", game.dungeons.factory.doOralIncubus, "Anal", game.dungeons.factory.doRideIncubusAnally, "", null, "Nothing", game.cleanupAfterCombat);
+				}
 				else {
-					outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?", true);
-					var temp2:Function = null;
-					if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") temp2 = game.createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,this);
-					game.dynStats("lus", 1);
-					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-					game.simpleChoices("Rape", factory.doRapeIncubus, "Service Him", factory.doOralIncubus, "Anal", factory.doRideIncubusAnally, "B.Titfuck", temp2, "Nothing", factory.doLeaveIncubus)
+					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?");
+					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
+					var titfuck:Function = null;
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") {
+						titfuck = game.createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
+					}
+					game.simpleChoices("Rape", game.dungeons.factory.doRapeIncubus, "Service Him", game.dungeons.factory.doOralIncubus, "Anal", game.dungeons.factory.doRideIncubusAnally, "B.Titfuck", titfuck, "Nothing", game.cleanupAfterCombat);
 				}
 			}
 		}
@@ -175,7 +83,87 @@ package classes.Scenes.Dungeons.Factory
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) game.dungeons.factory.doLossIncubus();
 			else game.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
 		}
-
+		
+		private function cockTripAttack():void {
+			if (findStatusAffect(StatusAffects.Blind) >= 0) { //Blind dodge change
+				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
+				game.combatRoundOver();
+				return;
+			}
+			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + game.buttDescript() + " and pull your " + player.legs() + " out from under you.");
+			if ((player.spe-30) > rand(60)) {
+				outputText("  You spin as you fall, twisting your " + player.legs() + " free and springing back to your " + player.feet() + " unharmed.");
+			}
+			else { //Fall down go boom
+				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your " + player.legs() + ", smearing them with oozing demonic fluids.");
+				if (player.lust >= 80 || player.cor >= 80) {
+					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated " + player.legs() + " free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
+					game.dynStats("lus", 13, "cor", 1);
+				}
+				else if (player.lust >= 50 || player.cor >= 50) {
+					outputText("  Blushing at the scent and feel of cum on your " + player.legs() + ", you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
+					game.dynStats("lus", 8 + player.cor / 20);
+				}
+				else {
+					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed " + player.legs() + ".");
+					game.dynStats("lus", 5 + player.cor / 20);
+				}
+				game.takeDamage(5);
+			}
+			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
+			game.combatRoundOver();
+		}
+		
+		private function spoogeAttack():void {
+			if (findStatusAffect(StatusAffects.Blind) >= 0) { //Blind dodge change
+				outputText(capitalA + short + " pumps and thrusts his hips lewdly before cumming with intense force in your direction!  Thankfully his aim was off due to the blindness currently affect him.");
+				game.combatRoundOver();
+				return;
+			}
+			outputText("Your demonic foe places his hands behind his head and lewdly pumps and thrusts his hips at you.  Your eyes open wide as a globule of cum erupts from the demon-prick and flies right at you.  ");
+			if (player.shield == game.shields.DRGNSHL && rand(2) == 0)
+			{
+				outputText("Your shield managed to absorb the attack!")
+				combatRoundOver();
+				return;
+			}
+			outputText("You do your best to dodge, but some still lands on your ");
+			switch (rand(3)) {
+				case 0: //Face
+					outputText("face.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your mouth and nose!  You can feel it moving around inside you, doing its best to prepare you for its master.");
+					game.dynStats("lus", 3);
+					if (player.findStatusAffect(StatusAffects.DemonSeed) < 0)
+						player.createStatusAffect(StatusAffects.DemonSeed, 5, 0, 0, 0);
+					else player.addStatusValue(StatusAffects.DemonSeed, 1, 7);
+					player.slimeFeed();
+					break;
+				case 1: //Chest
+					if (player.hasFuckableNipples()) {
+						outputText(allBreastsDescript() + ".  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your open nipples.  You can feel it moving around inside you, doing its best to prepare you for its master.");
+						game.dynStats("lus", 3);
+						if (player.findStatusAffect(StatusAffects.DemonSeed) < 0)
+							player.createStatusAffect(StatusAffects.DemonSeed, 5, 0, 0, 0);
+						else player.addStatusValue(StatusAffects.DemonSeed, 1, 8);
+						player.slimeFeed();
+					}
+					else outputText(allBreastsDescript() + ".  Thankfully it doesn't seem to have much effect.");
+					break;
+				default: //Crotch
+					if (player.vaginas.length > 0) {
+						outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.");
+						game.dynStats("lus", 3);
+						if (player.findStatusAffect(StatusAffects.DemonSeed) < 0)
+							player.createStatusAffect(StatusAffects.DemonSeed, 5, 0, 0, 0);
+						else player.addStatusValue(StatusAffects.DemonSeed, 1, 8);
+						player.slimeFeed();
+					}
+					else outputText("crotch.  Thankfully, it doesn't seem to have much effect.");
+			}
+			game.combatRoundOver();
+			lust -= 10;
+			if (lust < 0) lust = 10;
+		}
+		
 		public function IncubusMechanic() {
 			this.a = "the ";
 			this.short = "incubus mechanic";
@@ -212,9 +200,20 @@ package classes.Scenes.Dungeons.Factory
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 8;
 			this.drop = new WeightedDrop(consumables.GROPLUS, 1);
-			this.gems = rand(25)+10;
-			this.special1 = cocktripAttack;
-			this.special2 = cumCannon;
+			this.gems = rand(25) + 10;
+			if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] > 0) {
+				this.gems += rand(25) + 50;
+				this.level += 15;
+				this.bonusHP += 225;
+				this.str += 25;
+				this.tou += 20;
+				this.spe += 15;
+				this.inte += 20;
+				this.weaponAttack += 5;
+				this.HP = eMaxHP();
+			}
+			this.special1 = cockTripAttack;
+			this.special2 = spoogeAttack;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";

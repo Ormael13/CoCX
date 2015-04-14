@@ -133,7 +133,7 @@ private function keltFirstTime():void {
 
 private function defySubmission():void {
 	outputText("In defiance to your submissiveness to Kelt, you suddenly shake your head and return to your camp.", true)
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 private function defySubmissionAndFight():void {
 	outputText("In defiance to your submissiveness to Kelt, you suddenly shake your head and you finally decide. That's it. That centaur must be punished! It's time you turn the tables against him.", true)
@@ -168,13 +168,13 @@ private function youBadEndKeltForGood():void {
 	player.createStatusAffect(StatusAffects.KeltOff, 0, 0, 0, 0);
 	dynStats("cor", 10);
 	flags[kFLAGS.KELT_KILLED] = 1;
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 private function leaveKelt4Good():void {
 	outputText("Determining he's not worth your time, you walk away. Somehow, you've got the feeling that you won't be seeing him again.", true);
 	player.createStatusAffect(StatusAffects.KeltOff, 0, 0, 0, 0);
-	doNext(13);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //Naked Requirement
@@ -184,12 +184,12 @@ private function keltRequiresNakedness():void {
 	outputText("He slaps a hand on his bare chest proudly, and you realize that he means for you to strip down naked.  When you protest, his eyes narrow with irritation, and his sneer becomes more cruel.\r\r", false);
 	outputText("\"<i>Didn't know you were a coward, too.  That's fine... go fuck off, then.  You can't handle it, then go back to your camp and braid your hair, or something.  If you wait long enough, I'm sure a nice minotaur will come along to make you his bitch.  'Bout all you're good for, right?</i>\"\r\r", false);
 	outputText("Do you obey his demand?", false);
-	if(player.cor > 70 && player.inte > 40 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+	if(player.cor > 70 - player.corruptionTolerance() && player.inte > 40 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-		simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "Fight Back", keltResistance, "", 0, "Never", keltRefuseNakedness);
+		simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "Fight Back", keltResistance, "", null, "Never", keltRefuseNakedness);
 		return;
 	}
-	else simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "", 0, "", 0, "Never", keltRefuseNakedness);
+	else simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "", null, "", null, "Never", keltRefuseNakedness);
 	//(Corruption higher than 60 automatically chooses eagerly)
 	if(player.cor + player.lib + player.lust >= 180) {
 		outputText(" Of course you do.  You love putting on a show.", false);
@@ -339,9 +339,9 @@ private function keltRequiresBlowjobs():void {
 		doNext(keltBlowjobRequirementEagerly);
 		return;
 	}
-	simpleChoices("Shamefully", keltBlowjobRequirementShamefully, "Eagerly", keltBlowjobRequirementEagerly, "Never!", keltBlowjobRequirementNever, "", 0, "FIGHT!", kelly.fightToBeatKelt);
+	simpleChoices("Shamefully", keltBlowjobRequirementShamefully, "Eagerly", keltBlowjobRequirementEagerly, "Never!", keltBlowjobRequirementNever, "", null, "FIGHT!", kelly.fightToBeatKelt);
 	//Never!			Shamefully			Eagerly
-	if(player.inte > 40 && player.cor > 70 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+	if(player.inte > 40 && player.cor > 70 - player.corruptionTolerance() && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
 		addButton(3, "Fight Back", keltResistance);
 	}
@@ -477,8 +477,8 @@ private function keltMainEncounterAfterNakedReq():void {
 				outputText("\r\rYou're not certain you want to practice naked again... particularly with the way Kelt is looking at you, his arrogant smirk plastered on his face.  Do you agree to his terms?", false);
 				//(Yes[+5 Submissive]			No[Never event])
 				//Link this to reluctant && never
-				simpleChoices("Yes",keltReluctantlyGetNaked,"No",keltRefuseNakedness,"",0,"",0,"FIGHT!", kelly.fightToBeatKelt);
-				if(player.inte > 40 && player.cor > 70 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+				simpleChoices("Yes", keltReluctantlyGetNaked, "No", keltRefuseNakedness, "", null, "", null, "FIGHT!", kelly.fightToBeatKelt);
+				if (player.inte > 40 && player.cor > 70 - player.corruptionTolerance() && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 					outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
 					addButton(2, "Fight Back",keltResistance);
 				}
@@ -763,7 +763,7 @@ private function keltMainEncounterPostBlowjob():void {
 		else {
 			outputText("Despite the need, despite the desire, you are still in control of yourself enough to make a choice.  Do you submit to the centaur's will, and your own hunger?  Or will you somehow find the strength to walk away?", false);
 			//Submit				Resist!
-			simpleChoices("Submit",keltSubmitGivingBJ,"Resist",keltResistGivingBJ,"",0,"",0,"FIGHT!", kelly.fightToBeatKelt);
+			simpleChoices("Submit", keltSubmitGivingBJ, "Resist", keltResistGivingBJ, "", null, "", null, "FIGHT!", kelly.fightToBeatKelt);
 			return;
 		}
 	}
@@ -904,7 +904,7 @@ private function keltBadEndEpilogue():void {
 	outputText("The centaur noticed her looking, and grinned.  \"<i>You like what you see?  Maybe I could teach you a few things.  If you're not as stupid as that slut, of course.</i>\"\r\r", false);
 	outputText("He waved confidently at the mare, still nursing her young with a rapturous look on her face.  Cum slowly oozed out of her pussy, pooling on the ground beneath her, and the heroine felt a little envious for a moment.  Most horses had harems, the virile male satisfying many women at once.  How many times a day was this mare fucked?\r\r", false);
 	outputText("The centaur grinned, knowingly.  His musk was heavy on the air, a thick, animalistic scent of masculinity.  \"<i>Well, I could do with a little distraction anyway.  Stupid whore may be a good fuck, but a man needs to... spread out a little.  Come back tomorrow, and maybe I can knock some fucking sense into that empty head of yours.  My name's Kelt.</i>\"\r\r", false);
-	doBadEnd();
+	getGame().gameOver();
 }
 //Requires 40+ int & 70+ corruption to resist his 'aura'.
 private function keltResistance():void {

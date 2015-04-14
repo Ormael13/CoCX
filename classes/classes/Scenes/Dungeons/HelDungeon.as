@@ -19,10 +19,14 @@ package classes.Scenes.Dungeons
 	
 	public class HelDungeon extends DungeonAbstractContent
 	{
-		public function HelDungeon() 
-		{
-			
-		}
+		private static const DUNGEON_HEL_GUARD_HALL:int		= 17;
+		private static const DUNGEON_HEL_WINE_CELLAR:int	= 18;
+		private static const DUNGEON_HEL_STAIR_WELL:int		= 19;
+		private static const DUNGEON_HEL_DUNGEON:int		= 20;
+		private static const DUNGEON_HEL_MEZZANINE:int		= 21;
+		private static const DUNGEON_HEL_THRONE_ROOM:int	= 22;
+		
+		public function HelDungeon() {}
 		
 		//EVENTS
 		//-HelAffection -- A score measuring Hel's general fondness for the Player Character, measured on a scale of 0 - 100, with \"<i>0</i>\" being immediately after achieving \"<i>Fuckbuddy</i>\" status. Increases by 5 each time you fuck (not Corrupt!Rape) Hel, and 10 each time you engage in one of her threesomes. When HelAffection equals 70 points, the number freezes and Expansion 2 content triggers.
@@ -106,7 +110,7 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.HEL_FUCKBUDDY] = 0;
 			flags[kFLAGS.HEL_AFFECTION] = 0;
 			kGAMECLASS.helFollower.helAffection(-70);
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Intro Scene -- Yes
@@ -132,7 +136,7 @@ package classes.Scenes.Dungeons
 			//PROC NEXT FUNCTION AT 6AM.  OVERRIDES OTHER SHIIIIITE
 			flags[kFLAGS.HEL_FOLLOWER_LEVEL] = -1;
 			
-			doNext(1);
+			doNext(playerMenu);
 			//(Decrease Player Lust to minimum, increase HP to maximum, etc. etc. You're sleeping, but also fucking. Figure it out.)
 			if (flags[kFLAGS.TIMES_ORGASMED] > 0) player.orgasm(); //Never calls if you never orgasmed before.
 		}
@@ -150,7 +154,7 @@ package classes.Scenes.Dungeons
 			//(Display: 
 			outputText("\n\n(<b>Helia can now be found under the Lovers tab! (For Now!)</b>)");
 			flags[kFLAGS.HEL_FOLLOWER_LEVEL] = 1;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 
@@ -158,7 +162,7 @@ package classes.Scenes.Dungeons
 		public function notYet():void {
 			clearOutput();
 			outputText("You tell Hel you were only checking on her, and that you've still got some things to do.  She sighs and quietly asks you to hurry.");
-			doNext(1);
+			doNext(playerMenu);
 		}
 		//Introduction -- Dungeon
 		public function goToHeliaDungeon():void {
@@ -178,7 +182,7 @@ package classes.Scenes.Dungeons
 			//(NEXT)
 			kGAMECLASS.dungeonLoc = 17;
 			kGAMECLASS.inDungeon = true;
-			doNext(1);
+			doNext(playerMenu);
 		}
 		
 		public function retryDungeonFromBadEndPrompt():void {
@@ -202,7 +206,7 @@ package classes.Scenes.Dungeons
 		}
 		public function declineRetry():void {
 			clearOutput();
-			doBadEnd();
+			getGame().gameOver();
 			removeButton(1);
 		}
 		
@@ -213,14 +217,14 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYou remember where the tower is. You make your way back to the tower.");
 			kGAMECLASS.dungeonLoc = 17;
 			kGAMECLASS.inDungeon = true;
-			doNext(1);
+			doNext(playerMenu);
 		}
 		public function exitHelTower():void {
 			clearOutput()
 			outputText("You slip out the door, leaving the tower behind. You make your way back to your camp.");
 			kGAMECLASS.dungeonLoc = -1;
 			kGAMECLASS.inDungeon = false;
-			doNext(13);			
+			doNext(camp.returnToCampUseOneHour);			
 		}
 		
 		public function takeGodMead():void {
@@ -244,7 +248,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("You approach the armor rack.  A suit of heavy plated armor sits upon it, overlaying a flexible chain vest.  Contrasting against the rotting room, the armor seems to be in pristine condition, even shining.  Perhaps someone uses this heavy equipment - but surely not a harpy? You suppose you could take it.");
 			//(Display Options: [Take Armor] [Back])
-			simpleChoices("Take Armor",takeGooArmor4Realz,"",0,"",0,"",0,"Back",1);
+			simpleChoices("Take Armor",takeGooArmor4Realz,"", null,"", null,"", null,"Back",playerMenu);
 			//(Back takes you back to Room 1 menu)
 		}
 
@@ -256,7 +260,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nQuietly, the armored goo-girl growls, \"<i>You dare to disturb my rest, mortal? Prepare yourself for my vengeance!</i>\"");
 			outputText("\n\nWhat the fuck!? Oh well, looks like she wants a fight!");
 			startCombat(new GooArmor());
-			doNext(1);
+			doNext(playerMenu);
 		}
 		
 		//Goo Armor -- PC Defeated (PC has Gender)
@@ -328,7 +332,7 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			dynStats("lib", 1, "sen", 3);
 			cleanupAfterCombat();
-			doNext(1);
+			doNext(playerMenu);
 			flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] = 1;
 		}
 
@@ -351,7 +355,7 @@ package classes.Scenes.Dungeons
 
 			outputText("\n\nWell, that's certainly an interesting offer. Do you take the goo-girl armor with you?");
 			//(Display Options: [Take Her] [Refuse Her])
-			simpleChoices("Take Her", takeGooArmorAndWearIt, "Refuse Her", refuseGooArmorOffer, "Refuse Polite", refuseGooArmorOfferPolitely, "", 0, "", 0);
+			simpleChoices("Take Her", takeGooArmorAndWearIt, "Refuse Her", refuseGooArmorOffer, "Refuse Polite", refuseGooArmorOfferPolitely, "", null, "", null);
 			flags[kFLAGS.WON_GOO_ARMOR_FIGHT] = 1;
 		}
 		//[Refuse Her]
@@ -364,7 +368,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nShe huffs indignantly and scrambles to her feet.  \"<i>Well fine, and fuck you anyway.  I hope you get raped by harpies, " + player.mf("sir","madam") + ".</i>\"  After a moment, she hesitantly adds, \"<i>But if you change your mind later... Well, we'll see if you live through this place without me!</i>\"  Before you can stop her, she ducks out the front door and off to... Wherever goo-armor-girl-things would go, you guess.  Still, to your surprise, you feel rather invigorated after the battle, and rolling your shoulders, you turn your attention back to the dungeon ahead.");
 				HPChange(1000,false);
 				cleanupAfterCombat();
-				doNext(1);
+				doNext(playerMenu);
 			}
 			//In Glacial Rift
 			else {
@@ -372,7 +376,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nShe huffs indignantly and scrambles to her feet.  \"<i>Well fine, and fuck you anyway.  I hope you get raped by jotuns, " + player.mf("sir","madam") + ".</i>\"  After a moment, she hesitantly adds, \"<i>But if you change your mind later... Well, I guess I’ll be around here!</i>\"  Before you can stop her, she huffs off to... wherever goo-armor-girl-things would go, you guess.  You make your way back to your camp.");
 				HPChange(player.maxHP(),false);
 				cleanupAfterCombat();
-				doNext(13);
+				doNext(camp.returnToCampUseOneHour);
 			}
 			
 		}		
@@ -392,7 +396,7 @@ package classes.Scenes.Dungeons
 			}
 			HPChange(player.maxHP(),false);
 			cleanupAfterCombat();
-			doNext(1);
+			doNext(playerMenu);
 		}
 		//[Take Her]
 		public function takeGooArmorAndWearIt():void {
@@ -463,7 +467,7 @@ package classes.Scenes.Dungeons
 			outputText("You ask Kiri if she wouldn't mind sharing a bit of information with you.");
 			outputText("\n\n\"<i>Of course,</i>\" she says pleasantly, \"<i>that's what I'm here for!  What do you want to know?</i>\"");
 			//(Display Options: [Hel] [Harpies] [Salamander] [Kiri])
-			simpleChoices("Hel",askKirkAboutHel,"Harpies",askKiriAboutHarpies,"Salamander",askKiriAboutSalamander,"Kiri",askKiriAboutKiri,"Nevermind",1);
+			simpleChoices("Hel", askKirkAboutHel, "Harpies", askKiriAboutHarpies, "Salamander", askKiriAboutSalamander, "Kiri", askKiriAboutKiri, "Nevermind", playerMenu);
 		}
 
 		//Kiri -- [Talk] -- [Hel]
@@ -526,7 +530,7 @@ package classes.Scenes.Dungeons
 			if(player.gender == 0) outputText("Unfortunately, there's not much she can do for you...");
 			if (player.hasCock()) addButton(0, "Anal", kiriSexAnal);
 			if(player.hasVagina()) addButton(1, "Get Licked", kiriSexGetLicked);
-			addButton(4, "Back", eventParser, 1);
+			addButton(4, "Back", playerMenu);
 		}
 
 		//Kiri -- [Sex] -- [Anal]
@@ -553,7 +557,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYou pull out with a POP, letting a stream of cum leak out her butt.  You clean your cock off and stick it back in your [armor].");
 			player.orgasm();
 			cheatTime(1/3, true);
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Kiri -- [Sex] -- [Get Licked]
@@ -569,7 +573,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nUtterly satisfied, you stagger back from Kiri, letting her whip her head around to flick off your fem-cum.  You clean yourself off and suit up again.");
 			player.orgasm();
 			cheatTime(1/3, true);
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//[Valeria]
@@ -586,7 +590,7 @@ package classes.Scenes.Dungeons
 			if(flags[kFLAGS.HEL_BRIGID_DEFEATED] == 0) outputText("\n\n\"<i>Brigid the Jailer is a big girl, probably the meanest harpy here. The others give her plenty of space, from what I've seen.  She uses a hot poker as her weapon, too.  Watch out unless you wanna get burned!</i>\"");
 			//[If phoenixes haven't been defeated]
 			if(flags[kFLAGS.HEL_PHOENIXES_DEFEATED] == 0) outputText("\n\n\"<i>There's some freaky-ass half-breed harpy things upstairs that I've seen around a bit.  Phoenixes, I guess they're called.  They breathe fire, so watch your ass.  I can absorb some of the heat, but... Don't get roasted, okay?</i>\"");
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 
@@ -614,7 +618,7 @@ package classes.Scenes.Dungeons
 			}
 			else outputText("The rack is empty.");
 			//(PC can take a Succubus Whip, Bondage Straps, and a Lust Dagger)
-			addButton(4, "Back", eventParser, 1);
+			addButton(4, "Back", playerMenu);
 		}
 		
 		//[Prisoner] (First Time)
@@ -643,7 +647,7 @@ package classes.Scenes.Dungeons
 			else {
 				outputText("You approach Hakon the Salamander.  He strains against his bonds, yelling at you to get Hel and get out before it's too late.  You roll your eyes and carry on.");
 			}
-			doNext(1);
+			doNext(playerMenu);
 		}
 		
 		//Phoenix Platoon -- PC is Defeated
@@ -686,7 +690,7 @@ package classes.Scenes.Dungeons
 				//If Genderless: [Ride Anal]
 				addButton(3, "Ride Anal", gitButtRoadPhoenix);
 			}
-			addButton(4, "Back", eventParser, 1);
+			addButton(4, "Back", playerMenu);
 		}
 
 		//Phoenixes -- [Missionary]
@@ -743,7 +747,7 @@ package classes.Scenes.Dungeons
 			outputText(" and gather your gear.");
 			//(Return to Mezzanine main menu)
 			player.orgasm();
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Phoenixes -- [Get Wanked]
@@ -763,7 +767,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYour [cock " + y + "] explodes, pumping a thick load into the shocked phoenix's mouth.  She gags on your cum, finally swallowing it as the last of your sperm drips into her mouth.  With a grin, you tell her what a good job she did as you withdraw your [cock " + y + "]  from her grip.  With little rivulets of cum dripping down her face, the half-breed collapses onto her back, rapidly fingering herself.");
 			//(Return to Mezzanine main menu)
 			player.orgasm();
-			doNext(1);
+			doNext(playerMenu);
 		}
 			
 		//Phoenixes -- [Git Butt-rode]
@@ -793,7 +797,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nWhen you come to your senses a few minutes later, the phoenix-girl is asleep, still holding you tight.  You pull her deflated lizard dick out of your ass and shudder as a torrent of her sizzling hot spunk dribbles out onto her thighs and hips.  You wriggle out of her tight embrace and give her a little kiss on the cheek before collecting your [armor] and heading out.");
 			//(Return to Mezzanine main menu)
 			player.orgasm();
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Phoenix -- [Ride Vaginal]
@@ -830,7 +834,7 @@ package classes.Scenes.Dungeons
 			player.createStatusAffect(StatusAffects.Eggs,rand(6),0,(5+rand(3)),0);
 			//(Return to Mezzanine main menu)
 			player.orgasm();
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//HARPY QUEEN -- PC DEFEATED
@@ -857,7 +861,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nThe Harpy Queen stretches her wings wide as she steps away from Hel, now already being mounted by one of the Queen's daughters, and saunters over to you, salamander seed still freely leaking from her gaping egg-hole. She cups your cheek, sliding her long fingers across your sensitive, thoroughly drugged skin. Your entire body tingles as she smiles upon you, barely aware of the half-dozen sluts slurping at your spent seed as one of her daughters forces herself onto your enhanced member.");
 			outputText("\n\n\"<i>You've been a good stud since you came to me, [name],</i>\" the Queen laughs airily, patting your swollen nuts.  \"<i>The size of my brood has quadrupled since you and Hel 'volunteered' to help us.  Mmm, a free Mareth will surely have you to thank for the army that will liberate it from the demons.  You might even be something of a hero, if you want. The Champion of Free Mareth, if you will.  That wouldn't be so bad, would it?  After all, that's why you came here...</i>\"");
 			outputText("\n\nBefore you can respond, another orgasm washes over you, and a huge load of seed explodes into the thirty-first slut to claim your seed today.  And over her shoulders, you can see dozens more harpies, half of them your own spawn, waiting their turn.");
-			doBadEnd();
+			getGame().gameOver();
 			if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Retry", retryDungeonFromBadEndPrompt);
 		}
 
@@ -887,7 +891,7 @@ package classes.Scenes.Dungeons
 			if (flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] > 0) addButton(0, "Hakon", heliaHakonTalk);
 			addButton(1, "Kiri", heliaKiriTalk);
 			if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) addButton(2, "Queen", heliaQueenTalk);
-			addButton(4, "Back", eventParser, 1);
+			addButton(4, "Back", playerMenu);
 			}
 		//Throne Room -- [Helia] -- [Hakon]
 		public function heliaHakonTalk():void {
@@ -898,7 +902,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\n\"<i>I don't believe it,</i>\" Hel says, rubbing at the corners of her eyes.  \"<i>I thought all these years... I was sure he was dead.  How... No.  It doesn't matter,</i>\" she says, turning to the broodmother beneath her.");
 			if(flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) outputText("  \"<i>You're going to pay for what you did to my father, you bitch.  I promise you that.</i>\"");
 			flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] = 1;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Throne Room -- [Helia] -- [Kiri]
@@ -912,7 +916,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nWith a knowing look, you ask if they're more than just friends.");
 			outputText("\n\n\"<i>" + player.mf("Dude","Babe") + ", come on, you know me.  Give me SOME credit, will ya?  I'm not letting an ass like that go to waste.</i>\"");
 			outputText("\n\nYou roll your eyes and laugh with her.");
-			doNext(1);
+			doNext(playerMenu);
 		}
 		//Throne Room -- [Helia] -- [Queen]
 		public function heliaQueenTalk():void {
@@ -922,7 +926,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\n\"<i>Well, we can start by me shoving my tail so far up her twat that she'll never have kids again.  That's a goddamn start.</i>\"");
 			//[If PC has already told her about Hakon: 
 			if(flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] == 1) outputText("  \"<i>Maybe snap her neck afterwards.</i>\"");
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Throne Room -- [Harpy Queen]
@@ -933,7 +937,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\n\"<i>Fool!</i>\" she spits.  \"<i>Kill me and be done with it! I'll not be used by the likes of you, demon-lover!</i>\"");
 			outputText("\n\nWhat.");
 			//(Display Options: [Fuck Her] [Interrogate] [Kill Her] [Let Her Go])
-			simpleChoices("", 0, "Interrogate", harpyQueenInterrogate, "Kill Her", killHarpyQueen, "Let Her Go", letHarpyQueenGo, "Back", 1);
+			simpleChoices("", null, "Interrogate", harpyQueenInterrogate, "Kill Her", killHarpyQueen, "Let Her Go", letHarpyQueenGo, "Back", playerMenu);
 			if (player.lust > 33 && player.hasCock()) addButton(0, "Fuck Her", fuckHarpyQueen);
 		}
 
@@ -956,7 +960,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\n\"<i>Bullshit,</i>\" Hel snaps, wringing the dead queen's neck under her arm.  The other harpies around you shriek in outrage, pain, and fear.  \"<i>Do you have ANY IDEA what this bitch did?  To my father--to me?  There was no fucking way I was going to just let her walk off.  No, [name]. No way.</i>\"");
 				awardAchievement("Accomplice", kACHIEVEMENTS.DUNGEON_ACCOMPLICE, true, true);
 				//(Display Options: [Forgive] [Berate])
-				simpleChoices("Forgive", harpyQueenLetHerGoForgive, "Berate", harpyQueenLetHerGoBerate, "", 0, "", 0, "", 0);
+				simpleChoices("Forgive", harpyQueenLetHerGoForgive, "Berate", harpyQueenLetHerGoBerate, "", null, "", null, "", null);
 				flags[kFLAGS.HARPY_QUEEN_EXECUTED] = 1;
 			}
 			//[Else; did not tell about Hakon]
@@ -965,7 +969,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nShe turns to you, and says, \"<i>For better or worse, [name], we will meet again.</i>\"");
 				outputText("\n\nWith that, the harpies take flight.");
 				//(Return PC to Room Menu)
-				doNext(1);
+				doNext(playerMenu);
 				flags[kFLAGS.HARPY_QUEEN_EXECUTED] = -1;
 			}
 			dynStats("cor", -5);
@@ -986,7 +990,7 @@ package classes.Scenes.Dungeons
 			outputText("out of the dungeon.  I'll make sure the phoenixes and harpies don't give you two trouble on the way out.</i>\"");
 			outputText("\n\nWith that, Hel trots out the door and down the stairs, leaving you alone in the room. You notice that the queen's staff has fallen beside her body.");
 			//(Return to Room Menu)
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Throne Room -- [Harpy Queen] -- [Let Her Go] -- [Berate]
@@ -999,7 +1003,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYou notice the queen's staff has fallen beside her body.");
 			//(Remove all options but [Go Downstairs]; add [Take Staff]); (Remove Kiri from Stairwell)
 			flags[kFLAGS.FOUGHT_WITH_HEL_IN_DUNGEON] = 1;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Throne Room -- [Harpy Queen] -- [Kill Her]
@@ -1017,7 +1021,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nWith that, Hel trots out the door and down the stairs, leaving you alone in the room. You notice that the queen's staff has fallen beside her body.");
 			flags[kFLAGS.HARPY_QUEEN_EXECUTED] = 1;
 			//(Remove all options but [Go Downstairs]; add [Take Staff]) (Remove Kiri from Stairwell)
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Throne Room -- [Take Staff]
@@ -1051,7 +1055,7 @@ package classes.Scenes.Dungeons
 				addButton(1, "Anal", harpyQueenSexAnal);
 				addButton(2, "Vaginal", vaginalHarpyQueenSex);
 			}
-			addButton(4, "Back", eventParser, 1);
+			addButton(4, "Back", playerMenu);
 		}
 		//Harpy Queen Sex -- [Dick in Anal]
 		public function harpyQueenSexAnal():void {
@@ -1071,7 +1075,7 @@ package classes.Scenes.Dungeons
 			//(Return to normal room menu)
 			player.orgasm();
 			cheatTime(1/3, true);
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Harpy Queen Sex -- [Vaginal]
@@ -1105,7 +1109,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nAfter a fuck like that, the broodmother will be laying a clutch of your eggs in no time.");
 			player.orgasm();
 			cheatTime(1/3, true);
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Throne Room -- [Harpy Queen] -- [Interrogate]
@@ -1127,7 +1131,7 @@ package classes.Scenes.Dungeons
 			if(flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] == 1) outputText("\n\n\"<i>That's because he was MARRIED, YOU BITCH!</i>\" Hel screams, her tail practically blazing behind her. The queen recoils, but falls silent.");
 			else outputText("\n\n\Hel scowls, but says nothing. It doesn't seem like you'll get anything further from the queen.");
 			//(Return PC to room menu)
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//Tower of the Phoenix: Outro
@@ -1173,7 +1177,7 @@ package classes.Scenes.Dungeons
 			//(If PC has Valeria: add \"<i>Valeria</i>\" to Followers menu)
 			flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
 			kGAMECLASS.inDungeon = false;
-			doNext(14);
+			doNext(camp.returnToCampUseTwoHours);
 		}
 		//ROOMS
 		public function roomGuardHall():void {
@@ -1227,7 +1231,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nIt's a fight!");
 				menu();
 				startCombat(new HarpyMob());
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			else {
@@ -1256,7 +1260,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\n\"<i>'Bout time you made it down here, you " + player.mf("bastard","bitch") + ".  Mama Brigid's been waiting a loooong time for someone to try and break out one of her toys.</i>\"  She pats the hefty keyring on the underside of her shield and leers at you.");
 				outputText("\n\nYou ready your [weapon] and prepare to take the keys from her!");
 				startCombat(new Brigid());
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			else {
@@ -1290,7 +1294,7 @@ package classes.Scenes.Dungeons
 				outputText("You ascend the heavy stone steps, circling the tower's walls as you ascend.  You are stopped perhaps half-way to the second main floor on a small terrace level with a wide open view overlooking the vale beneath the high mountains.  As you step onto the mezzanine, you watch with a scowl as a number of tall, muscular hermaphrodites step out from the shadows.  Each is clad in heavy chainmail and wields a scimitar and a blood-red shield, but is otherwise nude, revealing their reptilian pricks and slick pussies.  The soldiers standing before you look like harpies, but they have scaled, humanoid legs, long, fiery tails and their wings are the darkest crimson.  These are phoenixes - the dread half-breed warriors you and Hel are here to stop!");
 				menu();
 				startCombat(new PhoenixPlatoon());
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			else {
@@ -1333,7 +1337,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nShe stands, grabbing her great whitewood staff.  A ball of magical whitefire forms in her hand, ready to sear you alive.");
 				outputText("\n\n<b>An unseen force slams the door shut, preventing you from escape. It's a fight!</b>");
 				startCombat(new HarpyQueen());
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			else {

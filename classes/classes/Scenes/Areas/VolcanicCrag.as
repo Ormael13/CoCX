@@ -24,7 +24,7 @@ package classes.Scenes.Areas
 		
 		public function exploreVolcanicCrag():void {
 			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++
-			doNext(1);
+			doNext(playerMenu);
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
 				getGame().DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
 				return;

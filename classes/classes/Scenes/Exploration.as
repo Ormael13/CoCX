@@ -41,7 +41,7 @@ package classes.Scenes
 				return;
 			}*/
 			menu();
-			addButton(0, "Explore", eventParser, 12);
+			addButton(0, "Explore", tryDiscover);
 			if (player.exploredDesert > 0) addButton(1, "Desert", kGAMECLASS.desert.exploreDesert);
 			if (player.exploredForest > 0) addButton(2, "Forest", kGAMECLASS.forest.exploreForest);
 			if (player.exploredLake > 0) addButton(3, "Lake", kGAMECLASS.lake.exploreLake);
@@ -50,14 +50,14 @@ package classes.Scenes
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp);
 			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(7, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods);
 			if (player.exploredMountain > 0) addButton(8, "Mountain", kGAMECLASS.mountain.exploreMountain);
-			
+
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(10, "Bog", kGAMECLASS.bog.exploreBog);
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(11, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain);
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(12, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift);
 			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(13, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag);
 			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
 			//addButton(4, "Next", explorePageII);
-			addButton(14, "Back", eventParser, 1);
+			addButton(14, "Back", playerMenu);
 		}
 
 		private function explorePageII():void
@@ -68,7 +68,7 @@ package classes.Scenes
 			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(1, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag);
 			if (debug) addButton(8, "Debug", exploreDebug.doExploreDebug);
 			addButton(9, "Previous", goBackToPageI);
-			addButton(14, "Back", eventParser, 1);
+			addButton(14, "Back", playerMenu);
 		}
 
 		private function goBackToPageI():void
@@ -202,7 +202,7 @@ package classes.Scenes
 					outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You've discovered the Forest!</b>", true);
 					player.exploredForest == 1;
 					player.exploredForest++;
-					doNext(13);
+					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				if (player.exploredLake <= 0) {
@@ -316,7 +316,7 @@ package classes.Scenes
 
 		public function debugOptions():void
 		{
-			inventory.takeItem(consumables.W_FRUIT, camp.campMenu);
+			inventory.takeItem(consumables.W_FRUIT, playerMenu);
 		}
 
 		//Massive bodyparts scene

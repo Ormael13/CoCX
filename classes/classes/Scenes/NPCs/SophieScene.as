@@ -257,7 +257,7 @@ public function meetSophie():void {
 	outputText("you wrench your gaze away from her breasts and introduce yourself.  It's hard to stay focused on introduction while she's wrapping her wing-like arms around her tits and squeezing them together, amplifying her cleavage.  The matronly harpy is looking at you expectantly, and it occurs to you that she's still waiting on an answer to her question.  Why did you come here?\n\n", false);
 	
 	//[Looking for Demons] [Sex] [Got Lost] [Foraging]
-	simpleChoices("Foraging",tellSophieYoureForagingForStuff,"Got Lost",sophieMeetingGotLost,"Look4Demons",sophieLookingForDemons,"Sex",sophieMeetingChoseSex,"",0);
+	simpleChoices("Foraging", tellSophieYoureForagingForStuff, "Got Lost", sophieMeetingGotLost, "Look4Demons", sophieLookingForDemons, "Sex", sophieMeetingChoseSex, "", null);
 }
 
 //[Repeat Meeting]
@@ -267,7 +267,6 @@ public function meetSophieRepeat():void {
 	//(Pissed)
 	if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) {
 		outputText("During your exploration of the mountains you wind up passing close to the harpy nests again.  Uh oh.  There's a constant, irritating buzz in the background that makes it hard to focus on what you're doing.  You crest a ledge and find yourself back on the edge of Sophie's nest.  Shit.  She glowers at you and raises one of her talons.  It's a fight!\n\n", false);
-		doNext(1);
 		startCombat(new Sophie());
 		return;
 	}
@@ -284,7 +283,7 @@ public function meetSophieRepeat():void {
 			if(player.lust < 60 || rand(3) <= 1) {
 				outputText("Her need amplifies the compulsion, making it difficult to resist.  It looks like if you turned her down now she'd probably try to force herself on you anyway.  Do you give in to her demand?", false);
 				//[Yes-Consentual sex] [No - fight]
-				simpleChoices("Yes",consensualSexSelector,"No",fightSophie,"",0,"",0,"",0);
+				simpleChoices("Yes", consensualSexSelector, "No", fightSophie, "", null, "", null, "", null);
 			}
 			//(high lust?)
 			else {
@@ -311,7 +310,7 @@ public function meetSophieRepeat():void {
 		outputText("(Her words sink into you, and a desire to go with her threatens to overcome your self-control.  You take a deep breath and clear your head.  Do you go with her, turn her down, or try to take control and be the dominant one?  You'll probably have to fight her in order to dominate her...)", false);
 		dynStats("lus", 20);
 		//[Yes – consentacle sex] [No – sad harpy]
-		simpleChoices("Yes",consensualSexSelector,"No",shootDownSophieSex,"Dominate",fightSophie,"",0,"",0);
+		simpleChoices("Yes", consensualSexSelector, "No", shootDownSophieSex, "Dominate", fightSophie, "", null, "", null);
 		return;
 	}
 	//(NO DICK)
@@ -321,14 +320,14 @@ public function meetSophieRepeat():void {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and warns, \"<i>Cutey, a " + player.mf("neuter","girl") + " like you doesn't belong up here.  The younger harpies don't really get the idea of conversation and see you as competition.</i>\"\n\n", false);
 			
 			outputText("Do you see the wisdom of her words and climb back down the mountain, fight Sophie, or keep climbing?", false);
-			simpleChoices("Fight Sophie",FirstTimeSophieForceSex,"Keep Climbing",PCIgnoresSophieAndHarpyIsFought,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+			simpleChoices("Fight Sophie", FirstTimeSophieForceSex, "Keep Climbing", PCIgnoresSophieAndHarpyIsFought, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 			return;
 		}
 		//(LACTATE)
 		else {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and licks her lips hungrily.  She asks, \"<i>Would you mind coming up to my nest and sharing some of your milk?  I've worked up quite a craving for cute girl-milk.</i>\"\n\n", false);
 			outputText("Do you agree to breastfeed the hungry harpy?", false);
-			simpleChoices("Yes",cramANippleInIt,"No",shootDownSophieSex,"Fight Her",FirstTimeSophieForceSex,"",0,"",0);
+			simpleChoices("Yes", cramANippleInIt, "No", shootDownSophieSex, "Fight Her", FirstTimeSophieForceSex, "", null, "", null);
 			//No(cramANippleInIt,shootDownSophieSex);
 			//[Yes][No]
 			return;
@@ -348,7 +347,7 @@ private function fightSophie():void {
 	sophieBimbo.sophieSprite();
 	startCombat(new Sophie());
 	flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(24);
-	eventParser(1);
+	playerMenu();
 }
 
 //[Yes]
@@ -364,7 +363,6 @@ private function PCIgnoresSophieAndHarpyIsFought():void {
 	outputText("A harpy wings out of the sky and attacks!", true);
 	startCombat(new Harpy());
 	spriteSelect(26);
-	doNext(1);
 }
 
 
@@ -416,7 +414,7 @@ private function sophieMeetingChoseSex():void {
 		if(player.hasVagina()) {
 			outputText("  What do you do?", false);
 			//[Stay&Sex] [Leave]
-			simpleChoices("Force Sex",FirstTimeSophieForceSex,"Leave",camp.returnToCampUseOneHour,"",0,"",0,"",0);
+			simpleChoices("Force Sex", FirstTimeSophieForceSex, "Leave", camp.returnToCampUseOneHour, "", null, "", null, "", null);
 			return;
 		}
 		doNext(camp.returnToCampUseOneHour);
@@ -441,7 +439,6 @@ private function FirstTimeSophieForceSex():void {
 	outputText("Sophie's large eyes widen in surprise at your statement, and her wings unfold as she counters, \"<i>Then you'll have to hope you can handle me.</i>\"  Her foot comes up warningly.\n\n", false);
 	outputText("It's going to be a fight!", false);
 	startCombat(new Sophie());
-	doNext(1);
 }
 
 //[Got Lost]
@@ -607,7 +604,7 @@ private function consensualHotSophieDickings():void {
 	{
 		CoC_Settings.error("");
 		outputText("ERROR: No cock found that fits, yet 'fits' scene was called.", true);
-		doNext(1);
+		doNext(playerMenu);
 		getGame().inCombat = false;
 		return;
 	}
@@ -615,7 +612,7 @@ private function consensualHotSophieDickings():void {
 	{
 		CoC_Settings.error("");
 		outputText("ERROR: Cock above max cocks selected for Sophie sex.  Please report bug on fen's bug report forum.", true);
-		doNext(1);
+		doNext(playerMenu);
 		getGame().inCombat = false;
 		return;
 	}
@@ -801,7 +798,7 @@ private function consensualSophieSexNoFit():void {
 	
 	outputText("Sophie's wings curl forward past her shoulders and gently push you away.   As you flop into the soft lining of the nest, your " + cockDescript(x) + " rises to point up at the sky.  The harpy's wing-like arms encircle you with feathery softness, tickling at your base.  She starts sliding her body up and down along the length of your shaft with the large orbs of her breasts crushed against your member.  Sophie asks in a voice that sounds more like command than question, \"<i>Are you going to give me a taste, " + player.short + "?  I'd like to know what kind of cum will be seeding my womb.</i>\"\n\n", false);
 	
-	outputText("She leans down and gives you a kiss on the lips before whispering, \"<i>Be a good " + player.mf("boy","girl") + " and squeeze out a little pre-cum for momma.</i>\"  She squeezes tightly around your base and drags her feathery arms up to the " + cockHead(x) + ", milking out a ", false);
+	outputText("She leans down and gives you a kiss on the lips before whispering, \"<i>Be a good " + player.mf("boy","girl") + " and squeeze out a little pre-cum for momma.</i>\"  She squeezes tightly around your base and drags her feathery arms up to the " + player.cockHead(x) + ", milking out a ", false);
 	if(player.cumQ() < 50) outputText("small dollop", false);
 	else if(player.cumQ() < 250) outputText("dollop", false);
 	else if(player.cumQ() < 1000) outputText("large squirt", false);
@@ -811,9 +808,9 @@ private function consensualSophieSexNoFit():void {
 	else outputText("your thighs, careful not to snag you with her talons", false);
 	outputText(".  The muscled flesh of her thighs contracts in a vice-like grip, acting like a cock-ring and forcing even more blood into your already over-aroused " + cockDescript(x) + ".\n\n", false);
 	
-	outputText("Your body twists and squirms underneath her, aching for more stimulation, more aroused than it should be.  Your grunts and moans grow to a feverish intensity until Sophie leans back to place a finger on your lips.  She commands, \"<i>Shush now; I know the pollen in my lip-gloss makes it hard not to cum right away, but you need to wait until I'm ready for your seed.</i>\"  You whine plaintively but it's no use.  It feels like orgasm is so close that you could reach out and touch it, but it just won't come.  Sophie giggles cruelly and circles your bloated " + cockHead(x) + " with her fingertip, assuring you: \"<i>You can cum soon, I promise.  Just wait; once your tip is in my pussy you'll cum out all your seed.  Your harpy queen commands it!</i>\"  Her words seem... heavy, somehow; like they have some force or weight behind them.\n\n", false);
+	outputText("Your body twists and squirms underneath her, aching for more stimulation, more aroused than it should be.  Your grunts and moans grow to a feverish intensity until Sophie leans back to place a finger on your lips.  She commands, \"<i>Shush now; I know the pollen in my lip-gloss makes it hard not to cum right away, but you need to wait until I'm ready for your seed.</i>\"  You whine plaintively but it's no use.  It feels like orgasm is so close that you could reach out and touch it, but it just won't come.  Sophie giggles cruelly and circles your bloated " + player.cockHead(x) + " with her fingertip, assuring you: \"<i>You can cum soon, I promise.  Just wait; once your tip is in my pussy you'll cum out all your seed.  Your harpy queen commands it!</i>\"  Her words seem... heavy, somehow; like they have some force or weight behind them.\n\n", false);
 	
-	outputText("Sophie stands up and begins to flap her wings, kicking up dust and debris and forcing you to shield your eyes as she lifts off the ground.  Her hands lock onto your " + cockDescript(x) + " and guide her over top of it.  Beads of wetness drip from her vagina and roll over your tender, sensitive skin as she lowers herself down, planting your " + cockHead(x) + " inside her egg-widened pussy lips.  Her primary wings flap in a frenzy, struggling to hold her aloft without the aid of her arms, but you barely notice.  Your " + cockDescript(x) + " is cumming and cumming HARD for the matronly harpy, filling her waiting womb with spunk.", false);
+	outputText("Sophie stands up and begins to flap her wings, kicking up dust and debris and forcing you to shield your eyes as she lifts off the ground.  Her hands lock onto your " + cockDescript(x) + " and guide her over top of it.  Beads of wetness drip from her vagina and roll over your tender, sensitive skin as she lowers herself down, planting your " + player.cockHead(x) + " inside her egg-widened pussy lips.  Her primary wings flap in a frenzy, struggling to hold her aloft without the aid of her arms, but you barely notice.  Your " + cockDescript(x) + " is cumming and cumming HARD for the matronly harpy, filling her waiting womb with spunk.", false);
 	if(player.cumQ() >= 1000) {
 		outputText("  In no time her belly distends and she slides off, stuffed with more gooey whiteness than she can handle.", false);
 		if(player.cumQ() >= 2000) outputText("  You continue to spurt, soaking yourself and the nest with waves of spooge until it is as filled as she is.", false);
@@ -1015,7 +1012,7 @@ private function maleVictorySophieRapeHUGE():void {
 	if(player.cocks[x].cockLength < 36) outputText(" each time it pushes into them.", false);
 	else outputText(" as it pushes past them to her lips.", false);
 	if(player.cocks[x].cockLength >= 40) {
-		outputText("  She sucks the " + cockHead(x) + " inside her mouth and whirls her tongue around it ", false);
+		outputText("  She sucks the " + player.cockHead(x) + " inside her mouth and whirls her tongue around it ", false);
 		if(player.cocks[x].cockLength < 50) outputText("before you pull back.", false);
 		else outputText("before she lets it back out before another push onward.", false);
 	}
@@ -1036,7 +1033,7 @@ private function maleVictorySophieRapeHUGE():void {
 	}
 	outputText("  Sophie ", false);
 	if(player.cocks[x].cockLength < 50) outputText("covered the underside of your " + cockDescript(x) + " in kisses during your orgasm, but the tingling oral drugs only made it feel better.", false);
-	else outputText("has been running her drug-laced lip-gloss all over your " + cockHead(x) + " this entire time!  The tingling made your orgasm even better, but you know you've absorbed a lot of the stuff by now.", false);
+	else outputText("has been running her drug-laced lip-gloss all over your " + player.cockHead(x) + " this entire time!  The tingling made your orgasm even better, but you know you've absorbed a lot of the stuff by now.", false);
 	outputText("\n\n", false);
 	
 	outputText("Sophie leans back and scoops a handful of your white goo into her lubricant-soaked snatch and promptly falls asleep.  It figures she would do that.  " + SMultiCockDesc() + " stays hard, and you're sure it's only going to get worse for quite some time.  You glance down at the mother-harpy, considering a second fuck, but decide that it'd be better with a partner who was still awake.", false);

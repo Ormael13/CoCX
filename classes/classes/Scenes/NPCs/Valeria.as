@@ -84,7 +84,7 @@ private function valeriaSpar():void {
 	startCombat(new GooArmor());
 	monster.createStatusAffect(StatusAffects.Spar,0,0,0,0);
 	monster.gems = 0;
-	doNext(1);
+	doNext(playerMenu);
 }
 
 //[Valeria] -- [Spar] -- PC Victorious
@@ -479,13 +479,21 @@ private function takeValeria():void {
 	player.armor.removeText();
 	var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
 	if (item == null)
-		doNext(camp.campMenu);
-	else inventory.takeItem(item, camp.campMenu);
+		doNext(playerMenu);
+	else inventory.takeItem(item, playerMenu);
 }
 
 public function valeriaAndGooThreeStuff():void {
 	clearOutput();
 	outputText("You cautiously approach with Valeria's voice egging you on, \"<i>We gonna fuck her? We're gonna fuck her, ain't we, [name]?</i>\" She affectionately fondles your ");
+	var list:Array = ["[hips]"];
+	if(player.balls > 0) list.push("[balls]");
+	if(player.totalCocks() > 0) list.push("[multiCockDescriptLight]");
+	if(player.hasVagina()) list.push("[vagina]");
+	list.push("[asshole]");
+	list.push("[nipples]");
+	outputText(formatStringArray(list) + " with liquid-soft caresses, almost ephemeral and yet still so perfectly all-consuming, filling every tiny imperfection in your [skin] with blue, gooey goodness and teasing whatever entrances she can get at. ");
+/*
 	clearList();
 	addToList("[hips]");
 	if(player.balls > 0) addToList("[balls]");
@@ -494,6 +502,7 @@ public function valeriaAndGooThreeStuff():void {
 	addToList("[asshole]");
 	addToList("[nipples]");
 	outputText(outputList() + " with liquid-soft caresses, almost ephemeral and yet still so perfectly all-consuming, filling every tiny imperfection in your [skin] with blue, gooey goodness and teasing whatever entrances she can get at. ");
+*/
 	if(player.hasCock()) {
 		outputText("You sigh as [eachCock] stands at full erection. Bluish coating");
 		if(player.cockTotal() > 1) outputText("s");

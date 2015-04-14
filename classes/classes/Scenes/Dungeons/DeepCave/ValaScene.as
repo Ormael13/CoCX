@@ -70,7 +70,7 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("You clutch your " + allBreastsDescript() + " and squeeze the " + nippleDescript(0) + " until they hurt, the agony giving you strength to drive the dildo back into the fairy. She cums before you do, her pulsing walls locking down and driving the dildo out, inch by painful inch, deeper into your body until the base is so far against your gut that it is pushed into your furthest recesses with a toe-curling, wet slap. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength redoubles and you thrust back, your " + cockDescript(0) + " penetrating her spongy, well-used cervix, her womb sucking you inside it. You release the knotted tension, spraying your spunk deep inside her. You slap your " + buttDescript() + " against hers with each pulsing load, your pussy clenching at the dildo stuffing it even as your empty your seed into the chained slave.  You try to go limp, but the double penetrated girl keeps you from pulling out, both holes clenching you against her until every last drop of your sperm has filled her greedy womb. Fairy cum drips down your length, while the flared tip deep inside her large intestine keeps your pussy twitching against her posterior. You jill your " + clitDescript() + " for a few minutes afterward, just enjoying the afterglow as your strength returns and the fairy's body unclenches, releasing you from your breeder's embrace, the minotaur dildo still halfway up her ass. You remind yourself to clean your " + player.armorName + " after this is over, sliding into them with wet, squishing noises. Giving your drooling fairy girl's rump a slap on the way out, you head back into the dungeon- you've got demons to stomp.", false);
 			}
 			flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 		
 		//[Free]
@@ -80,7 +80,7 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("You search the room for a way to free the fairy from her shackles and find an ugly, iron key that looks like a promising candidate. Opening the rusted metal with a teeth-clenching screech, the girl slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You try to explain that she's free, but it's clear that thoughts are travelling through a pretty thick haze of abuse, so you take a moment to let her gather herself. When she's managed to assemble what wits are left to her, she slowly curls her mouth into a hopeful smile. \"<i>How can Bitch please Master?</i>\" she asks in an innocent voice tainted by husky desire.\n\n", false);
 			outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again. If you had the right materials, you might be able to mix something to heal the damage her captors have done to the fairy's mind.\n\n", false);
 			//Choicez go here.  I can haz fucks?
-			simpleChoices("", 0, "", 0, "Reject", rejectFuckingVala, "", 0, "", 0);
+			simpleChoices("", null, "", null, "Reject", rejectFuckingVala, "", null, "", null);
 			if (player.hasItem(consumables.PURHONY, 1) || player.hasItem(consumables.P_PEARL, 1)) addButton(0, "Fix Her", healVala);
 			if (player.gender > 0) addButton(1, "Sex", ValaGetsSexed);
 		}
@@ -113,7 +113,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 				//(Vala unlocked in The Wet Bitch)[End Encounter]
 				flags[kFLAGS.FREED_VALA] = 1;
-				doNext(1);
+				doNext(playerMenu);
 			}
 			
 		}
@@ -125,7 +125,7 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it is the lives you save that really make you feel like a hero. You sigh contentedly and press on. You've got demons to dethrone.", false);
 			//[End Encounter]
 			flags[kFLAGS.FREED_VALA] = 1;
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		//[Sex]
@@ -208,7 +208,7 @@ package classes.Scenes.Dungeons.DeepCave
 			}
 			//[End Encounter]
 			flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 		
 		public function leftValaAlone():void {
@@ -238,7 +238,7 @@ package classes.Scenes.Dungeons.DeepCave
 			if(player.gender > 0) Wake = wakeValaUpBeforeYouGoGo;
 			var shouldra:Function = null;
 			if(player.lust >= 33 && kGAMECLASS.shouldraFollower.followerShouldra()) shouldra = kGAMECLASS.shouldraFollower.shouldraMeetsCorruptVala;
-			simpleChoices("Fix Her",tryToHealVala,"Use",Use,"Wake",Wake,"ShouldraVala",shouldra,"Leave",1);
+			simpleChoices("Fix Her", tryToHealVala, "Use", Use, "Wake", Wake, "ShouldraVala", shouldra, "Leave", playerMenu);
 		}
 		
 		public function tryToHealVala():void {
@@ -247,7 +247,7 @@ package classes.Scenes.Dungeons.DeepCave
 			//(Without Pure Honey)
 			if(!(player.hasItem(consumables.PURHONY,1) || player.hasItem(consumables.P_PEARL,1))) {
 				outputText("You try your best with what you've got, but nothing seems to restore the broken fairy's mind to her sex-addled  body. You're going to have to go out and gather more materials. Surely there's something that can break the damage the imps have done to Vala.", false);
-				doNext(1);
+				doNext(playerMenu);
 			}
 			//(With Pure Honey)
 			else if(player.hasItem(consumables.PURHONY,1)) {
@@ -271,7 +271,7 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.", false);
 				//(Vala unlocked in The Wet Bitch)[End Encounter]
 				flags[kFLAGS.FREED_VALA] = 1;
-				doNext(1);
+				doNext(playerMenu);
 			}
 		}
 		public function tryToHealValaWHoney2():void {
@@ -283,7 +283,7 @@ package classes.Scenes.Dungeons.DeepCave
 			//(Vala unlocked in The Wet Bitch)
 			flags[kFLAGS.FREED_VALA] = 1;
 			//[End Encounter]
-			doNext(1);
+			doNext(playerMenu);
 		}
 		
 		public function useValaOHYEAHSNAPINTOASLIMJIM():void {
@@ -344,7 +344,7 @@ package classes.Scenes.Dungeons.DeepCave
 			//DAH END
 			player.orgasm();
 			dynStats("cor", 1);
-			doNext(1);
+			doNext(playerMenu);
 		}
 		//[Wake]
 		public function wakeValaUpBeforeYouGoGo():void {
@@ -427,7 +427,7 @@ package classes.Scenes.Dungeons.DeepCave
 			player.orgasm();
 			dynStats("cor", 1);
 			flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-			doNext(1);
+			doNext(playerMenu);
 		}
 		
 		//[Reject]
@@ -448,7 +448,7 @@ package classes.Scenes.Dungeons.DeepCave
 			}
 			//Initiate fight
 			startCombat(new Vala(),true);
-			doNext(1);
+			doNext(playerMenu);
 		}
 		
 		//[Fuck]
@@ -597,17 +597,12 @@ package classes.Scenes.Dungeons.DeepCave
 				if(flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] == 0) {
 					outputText("\n\nA thought occurs to her and she leans in, conspiratorially. \"<i>Actually, some of my sisters are visiting from the forest today. Should we spend some time with them, or do I get you all for myself?</i>\"", false);
 					//[Fairies][You][Leave]
-					simpleChoices("Faeries",faerieOrgyFuck,"You",cleansedValaRepeatBrainFucking,"Cum Bath",cumBath,"",0,"Leave",kGAMECLASS.telAdre.barTelAdre);
-				}
-				else simpleChoices("You",2625,"",0,"Cum Bath",cumBath,"",0,"Leave",kGAMECLASS.telAdre.barTelAdre);
-				if(flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] == 0)
-					addButton(1,"Faeries",faerieOrgyFuck);		
+					addButton(0,"Faeries",faerieOrgyFuck);	
+				}	
 			}
-			if(flags[kFLAGS.SHOULDRA_MET_VALA] > 0 && kGAMECLASS.shouldraFollower.followerShouldra())
-				addButton(3,"Big You",valaBigYou);
-			addButton(0,"You",cleansedValaRepeatBrainFucking);
-			if(cumBath != null) 
-				addButton(2,"Cum Bath",eventParser,cumBath);
+			addButton(1,"You",cleansedValaRepeatBrainFucking);
+			if (cumBath != null) addButton(2, "Cum Bath", cumBath);
+			if (flags[kFLAGS.SHOULDRA_MET_VALA] > 0 && kGAMECLASS.shouldraFollower.followerShouldra()) addButton(3, "Big You", valaBigYou);
 			addButton(4,"Leave",kGAMECLASS.telAdre.barTelAdre);
 		}
 
@@ -624,7 +619,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 			outputText("\"<i>I've been looking forward to this,</i>\" she whispers, flying up to steal a kiss from you, her soft, fey lips leaving a taste of pure, spring rain on the tip of your tongue. Piece by piece, she strips the clothes from your shoulders and hips, leaving warm kisses on your exposed skin with every piece she removes. When your body is laid bare before her, the pixie raises her hands to her own dress. She hesitates to expose the permanent scars the imps left on her, but sighing, she laughs and a sweet wind sweeps through the storeroom. \"<i>Silly to be bashful around you, of all people,</i>\" she chuckles, sliding out of her verdant silk, pulling pins from her bun to let long, violet tresses spill down her shoulders with a shake of her head. She bats her eyes at you over one shoulder and flashes a wry little smile. \"<i>If we can replace every hash mark on my back with one of your visits, I'll switch to backless dresses,</i>\" she teases. Flying over you, she lands her delicate legs and plump, breeder's rear in your lap, wrapping her arms around your shoulders and hugging you tightly. \"<i>So, what's on your mind, hero?</i>\"", false);
 			//[You][Leave]
-			simpleChoices("You",cleansedValaFuckHerBrainsOut,"",0,"",0,"",0,"Leave",kGAMECLASS.telAdre.barTelAdre);
+			simpleChoices("You",cleansedValaFuckHerBrainsOut,"", null,"", null,"", null,"Leave",kGAMECLASS.telAdre.barTelAdre);
 		}
 
 		//[You] 
@@ -770,7 +765,7 @@ package classes.Scenes.Dungeons.DeepCave
 			//[Herm]
 			if(player.gender == 3) {
 				outputText("Vala folds her arms across her breast. \"<i>But which one should we use?</i>\" she ponders. \"<i>I wouldn't advise trying both- your mind wouldn't be able to take it. You'd end up worse than just mind-broken, you'd be a drooling shell. And I'd never do that to my hero,</i>\" she smiles and gives you a wink. \"<i>So, what would you prefer?</i>\"\n\n", false);
-				simpleChoices("Male",faerieOrgyFuckMaleContinue,"Female",faerieOrgyFuckFemaleContinue,"",0,"",0,"",0);
+				simpleChoices("Male",faerieOrgyFuckMaleContinue,"Female",faerieOrgyFuckFemaleContinue,"", null,"", null,"", null);
 			}
 			else if(player.gender == 2) doNext(faerieOrgyFuckFemaleContinue);
 			else if(player.gender == 1) doNext(faerieOrgyFuckMaleContinue);
@@ -884,7 +879,7 @@ package classes.Scenes.Dungeons.DeepCave
 			flags[kFLAGS.VALA_CUMBATH_TIMES]++;
 			player.orgasm();
 			dynStats("lib", -1.5);
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//Big Vala Intro
@@ -971,7 +966,7 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
 			player.slimeFeed();
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//Big Vala: Lick Me (Requires Penor)
@@ -1024,7 +1019,7 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress and your [armor] back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
 			
 			player.orgasm();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//Intro to Vala + Vapula Threesomes
@@ -1089,7 +1084,7 @@ package classes.Scenes.Dungeons.DeepCave
 			player.orgasm();
 			dynStats("cor", 1);
 			player.slimeFeed();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Giant Vala + Vapula Threesome - Vala Lovey Dovey
 		public function valaLoveyVapula3Some():void {
@@ -1122,7 +1117,7 @@ package classes.Scenes.Dungeons.DeepCave
 			player.orgasm();
 			dynStats("cor", 1);
 			player.slimeFeed();
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function kinathisValaStuff():void {
@@ -1164,18 +1159,18 @@ package classes.Scenes.Dungeons.DeepCave
 			//[cock area >30:
 			else outputText("\n\nPlanting a kiss right on the head, she draws her tongue around the thick head, slowly teasing you.  \"<i>Ooohhh, so big and strong.  So much of my hero to play with,</i>\" she says with a giggle before returning to her teasing task.  Her soft lips tease you like fluttering butterflies, leaving a gentle tingling.  Opening her mouth as wide as she can, the passionate fairly dives headlong into her delicious task, eagerly licking and sucking every inch she can get at to pleasure you.  Her hands gently take hold of your hips as she slowly bobs her head up and down, wanting nothing more than to taste her hero.");
 			
-			outputText("\n\nHer diminutive tongue sucks around your " + cockHead(x) + ", teasing and dancing circles around you.  Her silky hair feels good around your fingers, making the perfect hand-hold as you keep her in place as she sucks and plays with you.  Pulling back with a slurp and a gasp, Vala licks her lips before kissing her way down your shaft.  ");
+			outputText("\n\nHer diminutive tongue sucks around your " + player.cockHead(x) + ", teasing and dancing circles around you.  Her silky hair feels good around your fingers, making the perfect hand-hold as you keep her in place as she sucks and plays with you.  Pulling back with a slurp and a gasp, Vala licks her lips before kissing her way down your shaft.  ");
 			if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("Her tongue licks around the throbbing glands, the heady animal musk filling her nose and mind with sweet lust.  ");
 			else if(player.cocks[x].cockType == CockTypesEnum.DOG) outputText("Her tongue licks around the hot building knot that gently throbs at your base.  ");
 			//[anemone cock:
 			else if(player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText("Her tongue plays with the squirming tentacles that line the drone of your throbbing phallus.  She shivers and groans as the tentacles sting her full of pleasurable aphrodisiac.  ");
-			outputText("Playing her way down your cock, the fey-girl gently licks up and down, sucking along your cumvein before coming back to the " + cockHead(x) + " of your meaty prick.");
+			outputText("Playing her way down your cock, the fey-girl gently licks up and down, sucking along your cumvein before coming back to the " + player.cockHead(x) + " of your meaty prick.");
 
 			outputText("\n\nHer sweet lips plant a firm kiss right on the tip before pulling back and licking those tender cock-suckers clean of your unique flavor.  The hunger for her lover, the aching desire for her hero to fuck her is too strong to hold back a moment longer.  For once, the busty fairy lays before you instead of jumping you to ride you as she likes to do.  Her soft luscious thighs spread for you, showing off her small soaking mound and dripping snatch.  Her eyes glitter with amorous mischief as she looks you up and down.  \"<i>Come on hero, you need to come and claim your spoils.  Little Vala wants it so bad, make her scream your name,</i>\" Vala says as she slides a finger along her slippery slit before spreading her quivering nethers open for you.");
 			
 			outputText("\n\nWith such an initiation and the small stacked woman looking up at you with lust and adoration, how can you say no?  Her body is so open to you, craving your touch and the sexual nirvana she knows you can bring her.  Grabbing her legs, you pull her closer to you and lean down over her, gently pinning her to the bed as you slide between her soft, silky thighs.  Your hands find her bountiful breasts, and your fingers sink into the soft, pliant flesh.  The pale, milky teats are already dripping their sweet fairy cream for you, just begging for your lips to wrap around a nipple and suckle your fill from them.  Licking your lips at the thought of her sweet offerings, you look down to take in the lovely fey-girls appearance, her milky skin, her tender feminine face, her glittering lilac-colored hair.  Vala’s bright eyes look up at you with adoration, a blush on her fair cheeks.  A smile breaks across her lips as she reaches up and slides her arms around your neck.  She leans up and kisses your lips once more.  More than ready for you, Vala REALLY wants you.");
 
-			outputText("\n\nNot wanting to wait a moment longer, you surge forward, pushing your " + cockDescript(x) + " between her  thighs, the " + cockHead(x) + " gently probing the small tight sex that lay between them, her fey-honey oozing from the womanly flower like sweet nectar from the most exotic of plants.  The touch of your meaty masculinity against her puffy, sensitive nethers draws a gentle gasp from the excited woman.  Taking hold of her hips, you push forward and sink your aching, throbbing spear into her tender, needy body.  ");
+			outputText("\n\nNot wanting to wait a moment longer, you surge forward, pushing your " + cockDescript(x) + " between her  thighs, the " + player.cockHead(x) + " gently probing the small tight sex that lay between them, her fey-honey oozing from the womanly flower like sweet nectar from the most exotic of plants.  The touch of your meaty masculinity against her puffy, sensitive nethers draws a gentle gasp from the excited woman.  Taking hold of her hips, you push forward and sink your aching, throbbing spear into her tender, needy body.  ");
 			//[cockarea <17:
 			if(player.cockArea(x) < 17) outputText("Despite her size, you slide in easily, her wet, slippery pussy taking you in and squeezing you in a velvety embrace.  \"<i>Yessss, it's in, it's in!  Mmmm, come to me hero, come to Vala,</i>\" she croons to you, beckoning  you to take her.");
 			else if(player.cockArea(x) < 30) outputText("\"<i>Ahhh...  yesss, it's in!  Ohh...  come to me hero, come to Vala and fill her with your love!</i>\" she croons to you, beckoning  you to take her.");
@@ -1225,7 +1220,7 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("\n\nWith her being as affectionate she is, you can't help but smile and stroke her.  This really was nice; you could see yourself enjoying many more times like this, but unfortunately you do have to get back to your duty.  Pulling Vala into a kiss, you squeeze her and hold her tightly against you for a moment before lifting her off you, telling the girl that you have to go.  She sighs, knowing that you have to get back to being her hero.  \"<i>I know, go and be the big strong hero I know you are, just make sure you come and visit me at the bar whenever you want,</i>\" she says before kissing you one last time and showing you to the door.  Breathing in the morning air, you head back to camp to check up on the place.");
 			
 			//[return to camp][set clock to 7am]
-			doNext(13);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

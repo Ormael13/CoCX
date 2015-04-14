@@ -175,33 +175,23 @@ public function loadScreenAIR():void
 					loadGameObject(gameObjects[i]);
 					outputText("Slot " + String(i+1) + " Loaded!");
 					statScreenRefresh();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			})(i);
 		}
 		else
 		{
-			slots[i] = 0;		// You have to set the parameter to 0 to disable the button
+			slots[i] = null;		// You have to set the parameter to 0 to disable the button
 		}
 		i++;
 	}
 	menu();
 	var s:int = 0
 	while (s < 14) {
-		if (slots[s] != 0) addButton(s, "Slot " + (s+1), eventParser, slots[s]);
+		if (slots[s] != null) addButton(s, "Slot " + (s+1), slots[s]);
 		s++;
 	}
-	addButton(14, "Back", eventParser, 30);
-	/*choices("Slot 1", slots[0], 
-	"Slot 2", slots[1], 
-	"Slot 3", slots[2], 
-	"Slot 4", slots[3], 
-	"Slot 5", slots[4], 
-	"Slot 6", slots[5], 
-	"Slot 7", slots[6],
-	"Slot 8", slots[7], 
-	"Slot 9", slots[8], 
-	"Back", 30);*/
+	addButton(14, "Back", returnToSaveMenu);
 }
 
 public function getGameObjectFromFile(aFile:File):Object
@@ -244,7 +234,7 @@ public function loadScreen():void
 					trace("Loading save with name", saveFileNames[i], "at index", i);
 					if (loadGame(saveFileNames[i])) 
 					{
-						doNext(1);
+						doNext(playerMenu);
 						showStats();
 						statScreenRefresh();
 						outputText("Slot " + i + " Loaded!", true);
@@ -253,25 +243,15 @@ public function loadScreen():void
 			})(i);
 		}
 		else
-			slots[i] = 0;		// You have to set the parameter to 0 to disable the button
+			slots[i] = null;		// You have to set the parameter to 0 to disable the button
 	}
 	menu();
 	var s:int = 0
 	while (s < 14) {
-		if (slots[s] != 0) addButton(s, "Slot " + (s+1), eventParser, slots[s]);
+		if (slots[s] != 0) addButton(s, "Slot " + (s+1), slots[s]);
 		s++;
 	}
-	addButton(14, "Back", eventParser, 30);
-	/*choices("Slot 1", slots[0], 
-	"Slot 2", slots[1], 
-	"Slot 3", slots[2], 
-	"Slot 4", slots[3], 
-	"Slot 5", slots[4], 
-	"Slot 6", slots[5], 
-	"Slot 7", slots[6],
-	"Slot 8", slots[7], 
-	"Slot 9", slots[8], 
-	"Back", 30);*/
+	addButton(14, "Back", returnToSaveMenu);
 }
 
 public function saveScreen():void
@@ -287,7 +267,7 @@ public function saveScreen():void
 	{
 		saveGame(flags[kFLAGS.HARDCORE_SLOT])
 		outputText("You may not create copies of Hardcore save files! Your current progress has been saved.", true);
-		doNext(1);
+		doNext(playerMenu);
 		return;
 	}
 	
@@ -323,10 +303,10 @@ public function saveScreen():void
 	menu();
 	var s:int = 0
 	while (s < 14) {
-		addButton(s, "Slot " + (s+1), eventParser, saveFuncs[s]);
+		addButton(s, "Slot " + (s+1), saveFuncs[s]);
 		s++;
 	}
-	addButton(14, "Back", eventParser, 30);
+	addButton(14, "Back", returnToSaveMenu);
 }
 
 public function saveLoad(e:MouseEvent = null):void
@@ -356,19 +336,18 @@ public function saveLoad(e:MouseEvent = null):void
 		temp = 777;
 		mainView.setButtonText( 0, "save/load" );
 	}
-	
 	menu();
 	//addButton(0, "Save", saveScreen);
 	addButton(1, "Load", loadScreen);
 	addButton(2, "Delete", deleteScreen);
-	//addButton(5, "Save to File", eventParser, -20);
-	addButton(6, "Load File", eventParser, -21);
-	//addButton(8, "AutoSave: " + autoSaveSuffix, eventParser, -65);
-	addButton(14, "Back", eventParser, 5025);
+	//addButton(5, "Save to File", saveToFile);
+	addButton(6, "Load File", loadFromFile);
+	//addButton(8, "AutoSave: " + autoSaveSuffix, autosaveToggle);
+	addButton(14, "Back", kGAMECLASS.gameOver, true);
 	
 	
 	if (temp == 777) {
-		addButton(14, "Back", eventParser, 5025);
+		addButton(14, "Back", kGAMECLASS.gameOver, true);
 		return;
 	}
 	if (player.str == 0) {
@@ -376,25 +355,40 @@ public function saveLoad(e:MouseEvent = null):void
 		return;
 	}
 	if (inDungeon) {
-		addButton(14, "Back", eventParser, 1);
+		addButton(14, "Back", playerMenu);
 		return;
 	}
 	if (gameStateGet() == 3) {
 		addButton(0, "Save", saveScreen);
-		addButton(5, "Save to File", eventParser, -20);
-		addButton(3, "AutoSave: " + autoSaveSuffix, eventParser, 65);
+		addButton(5, "Save to File", saveToFile);
+		addButton(3, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 		addButton(14, "Back", kGAMECLASS.mainMenu);
 	}
 	else
 	{
 		addButton(0, "Save", saveScreen);
-		addButton(5, "Save to File", eventParser, -20);
-		addButton(3, "AutoSave: " + autoSaveSuffix, eventParser, 65);
-		addButton(14, "Back", eventParser, 1);
+		addButton(5, "Save to File", saveToFile);
+		addButton(3, "AutoSave: " + autoSaveSuffix, autosaveToggle);
+		addButton(14, "Back", playerMenu);
 	}
 	if (flags[kFLAGS.HARDCORE_MODE] >= 1) {
 		removeButton(5); //Disable "Save to File" in Hardcore Mode.
 	}
+}
+
+private function saveToFile():void {
+	saveGameObject(null, true);
+}
+
+private function loadFromFile():void {
+	openSave();
+	showStats();
+	statScreenRefresh();
+}
+
+private function autosaveToggle():void {
+	player.autoSave = !player.autoSave;
+	saveLoad();
 }
 
 public function deleteScreen():void
@@ -424,23 +418,34 @@ public function deleteScreen():void
 			})(i);
 		}
 		else
-			delFuncs[i] = 0;	//disable buttons for empty slots
+			delFuncs[i] = null;	//disable buttons for empty slots
 	}
 	
 	outputText("\n<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>", false);
 	menu();
 	var s:int = 0
 	while (s < 14) {
-		if (delFuncs[s] != 0) addButton(s, "Slot " + (s+1), eventParser, delFuncs[s]);
+		if (delFuncs[s] != null) addButton(s, "Slot " + (s+1), delFuncs[s]);
 		s++;
 	}
-	addButton(14, "Back", eventParser, 30);
+	addButton(14, "Back", returnToSaveMenu);
+	/*
+	choices("Slot 1", delFuncs[0], 
+			"Slot 2", delFuncs[1], 
+			"Slot 3", delFuncs[2], 
+			"Slot 4", delFuncs[3], 
+			"Slot 5", delFuncs[4], 
+			"Slot 6", delFuncs[5], 
+			"Slot 7", delFuncs[6], 
+			"Slot 8", delFuncs[7], 
+			"Slot 9", delFuncs[8], 
+			"Back", returnToSaveMenu);*/
 }
 
 public function confirmDelete():void
 {
 	outputText("You are about to delete the following save: <b>" + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + "</b>\n\nAre you sure you want to delete it?", true);
-	simpleChoices("No", deleteScreen, "Yes", purgeTheMutant, "", 0, "", 0, "", 0);
+	simpleChoices("No", deleteScreen, "Yes", purgeTheMutant, "", null, "", null, "", null);
 }
 
 public function purgeTheMutant():void
@@ -530,7 +535,7 @@ public function loadGame(slot:String):void
 		}
 		loadPermObject();
 		statScreenRefresh();
-		doNext(1);
+		doNext(playerMenu);
 	}
 }
 
@@ -1081,13 +1086,13 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 					stream.writeBytes(bytes);
 					stream.close();
 					outputText("Saved to file: " + airFile.url, true);
-					doNext(1);
+					doNext(playerMenu);
 				}
 				catch (error:Error)
 				{
 					backupAborted = true;
 					outputText("Failed to write to file: " + airFile.url + " (" + error.message + ")", true);
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			CONFIG::STANDALONE
@@ -1143,12 +1148,12 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	
 	if (!backupAborted)
 	{
-		doNext(1);
+		doNext(playerMenu);
 	}
 	else
 	{
 		menu();
-		addButton(0, "Next", eventParser, 1);
+		addButton(0, "Next", playerMenu);
 		addButton(9, "Restore", restore, slot);
 	}
 	
@@ -1170,7 +1175,7 @@ public function restore(slotName:String):void
 	
 	outputText("Restored backup of " + slotName, true);
 	menu();
-	doNext(1);
+	doNext(playerMenu);
 }
 
 public function openSave():void
@@ -1234,7 +1239,12 @@ public function onFileLoaded(evt:Event):void
 public function ioErrorHandler(e:IOErrorEvent):void
 {
 	outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC_" + ver + ".swf file.\r\rLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.", true);
-	doNext(30);
+	doNext(returnToSaveMenu);
+}
+
+private function returnToSaveMenu():void {
+	var f:MouseEvent;
+	saveLoad(f);
 }
 
 public function onDataLoaded(evt:Event):void
@@ -1262,25 +1272,24 @@ public function onDataLoaded(evt:Event):void
 	catch (rangeError:RangeError)
 	{
 		outputText("<b>!</b> File is either corrupted or not a valid save", true);
-		doNext(30);
+		doNext(returnToSaveMenu);
 	}
 	catch (error:Error)
 	{
 		outputText("<b>!</b> Unhandled Exception", true);
 		outputText("[pg]Failed to load save. The file may be corrupt!");
 
-		doNext(30);
+		doNext(returnToSaveMenu);
 	}
 	statScreenRefresh();
-	//eventParser(1);
+	//playerMenu();
 }
 
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
 	var game:CoC = getGame();
 	game.dungeonLoc = 0;
-	game.tooltipLoc = "";
-	game.inDungeon = false;
+	//Not needed, dungeonLoc = 0 does this:	game.inDungeon = false;
 	game.inRoomedDungeon = false;
 	game.inRoomedDungeonResume = null;
 
@@ -1815,7 +1824,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		
 		// Fixup missing History: Whore perk IF AND ONLY IF the flag used to track the prior selection of a history perk has been set
-		if (hasHistoryPerk == false && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] != 0)
+		if (hasHistoryPerk == false && flags[kFLAGS.HISTORY_PERK_SELECTED] != 0)
 		{
 			player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
 		}
@@ -2057,7 +2066,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
-		doNext(1);
+		doNext(playerMenu);
 	}
 }
 
@@ -2289,6 +2298,7 @@ public function unFuckSave():void
 	if (player.hasKeyItem("Laybans") >= 0) {
 		flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 	}
+	flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
 }
 
 //This is just the save/load code - from it you can get 

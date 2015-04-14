@@ -1,9 +1,9 @@
-﻿
+﻿//This file is no longer used or included
 //Event No's 2000 4999 use this function
 
+/*
 public function doEvent(eventNo:Number):void
 {
-/*
 	var temp2:Number = 0;
 	//New game gooooooo!
 	if (eventNo == 2000)
@@ -1105,7 +1105,7 @@ public function doEvent(eventNo:Number):void
 		outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n", false);
 		outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live woman who can't stop cumming!</i>\"\n\n", false);
 		outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!", false);
-		doBadEnd();
+		getGame().gameOver();
 	}
 	//Buy Onahole - MOVED TO GIACOMO
 	//Deluxe Onahole Sales Pitch
@@ -1251,7 +1251,7 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2080)
 	{
 		startCombat(new TentacleBeast());
-		eventParser(1);
+		playerMenu();
 	}
 	//Remove worms - MOVED TO GIACOMO
 	//Offer to remove worms #2 - MOVED TO GIACOMO
@@ -2053,7 +2053,7 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2997)
 	{
 		startCombat(new MaleSpiderMorph());
-		eventParser(1);
+		playerMenu();
 		spriteSelect(74);
 	}
 	else if (eventNo == 3002)
@@ -2369,7 +2369,6 @@ public function doEvent(eventNo:Number):void
 	{
 		telAdre.houses();
 	}
-*/
 	else
 	{
 		//Problem here. Lots of the old code relies on the fall through to proceed forward. Prime offender is the
@@ -2379,4 +2378,5 @@ public function doEvent(eventNo:Number):void
 	}
 
 }
+*/
 

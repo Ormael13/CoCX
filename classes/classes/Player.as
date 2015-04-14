@@ -607,7 +607,7 @@ use namespace kGAMECLASS;
 				//Prevent negatives
 				if (HP<=0){
 					HP = 0;
-					if (game.inCombat) game.doNext(5010);
+					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
 				}
 			}
 			return returnDamage;
@@ -2426,10 +2426,28 @@ use namespace kGAMECLASS;
 			if (findStatusAffect(StatusAffects.VineHealUsed) >= 0) removeStatusAffect(StatusAffects.VineHealUsed);
 		}
 
-		public function consumeItem(itype:ItemType, amount:int=1):Boolean
-		{
+		public function consumeItem(itype:ItemType, amount:int = 1):Boolean {
+			if (!hasItem(itype, amount)) {
+				CoC_Settings.error("ERROR: consumeItem attempting to find " + amount + " item" + (amount > 1 ? "s" : "") + " to remove when the player has " + itemCount(itype) + ".");
+				return false;
+			}
+			//From here we can be sure the player has enough of the item in inventory
+			var slot:ItemSlotClass;
+			while (amount > 0) {
+				slot = getLowestSlot(itype); //Always draw from the least filled slots first
+				if (slot.quantity > amount) {
+					slot.quantity -= amount;
+					amount = 0;
+				}
+				else { //If the slot holds the amount needed then amount will be zero after this
+					amount -= slot.quantity;
+					slot.emptySlot();
+				}
+			}
+			return true;
+/*			
 			var consumed:Boolean = false;
-			var slot:*;
+			var slot:ItemSlotClass;
 			while (amount > 0)
 			{
 				if(!hasItem(itype,1))
@@ -2439,7 +2457,7 @@ use namespace kGAMECLASS;
 				}
 				trace("FINDING A NEW SLOT! (ITEMS LEFT: " + amount + ")");
 				slot = getLowestSlot(itype);
-				while (slot != undefined && amount > 0 && slot.quantity > 0)
+				while (slot != null && amount > 0 && slot.quantity > 0)
 				{
 					amount--;
 					slot.quantity--;
@@ -2452,23 +2470,26 @@ use namespace kGAMECLASS;
 			}
 			if(amount == 0) consumed = true;
 			return consumed;
+*/
 		}
 
 		public function getLowestSlot(itype:ItemType):ItemSlotClass
 		{
 			var minslot:ItemSlotClass = null;
-			for each (var slot:ItemSlotClass in itemSlots){
-				if (slot.itype == itype){
-					if (minslot == null || slot.quantity<minslot.quantity){
+			for each (var slot:ItemSlotClass in itemSlots) {
+				if (slot.itype == itype) {
+					if (minslot == null || slot.quantity < minslot.quantity) {
 						minslot = slot;
 					}
 				}
 			}
 			return minslot;
 		}
-		public function hasItem(itype:ItemType, minQuantity:Number=1):Boolean {
-			return itemCount(itype)>=minQuantity;
+		
+		public function hasItem(itype:ItemType, minQuantity:int = 1):Boolean {
+			return itemCount(itype) >= minQuantity;
 		}
+		
 		public function itemCount(itype:ItemType):int {
 			var count:int = 0;
 			for each (var itemSlot:ItemSlotClass in itemSlots){
@@ -2536,14 +2557,14 @@ use namespace kGAMECLASS;
 				if(cocks.length > 1) {
 					if(ncocks == cocks.length) outputText("A very pleasurable feeling spreads from your groin as your " + multiCockDescriptLight() + " grow permanently longer - at least an inch - and leak plenty of pre-cum from the pleasure of the change.", false);
 					if(ncocks == 1) outputText("A very pleasurable feeling spreads from your groin as one of your " + multiCockDescriptLight() + " grows permanently longer, by at least an inch, and leaks plenty of pre-cum from the pleasure of the change.", false);
-					if(ncocks > 1 && ncocks < cocks.length) outputText("A very pleasurable feeling spreads from your groin as " + kGAMECLASS.num2Text(ncocks) + " of your " + multiCockDescriptLight() + " grow permanently longer, by at least an inch, and leak plenty of pre-cum from the pleasure of the change.", false);
+					if(ncocks > 1 && ncocks < cocks.length) outputText("A very pleasurable feeling spreads from your groin as " + num2Text(ncocks) + " of your " + multiCockDescriptLight() + " grow permanently longer, by at least an inch, and leak plenty of pre-cum from the pleasure of the change.", false);
 				}
 			}
 			if(temp2 >=3){
 				if(cocks.length == 1) outputText("Your " + cockDescript(0) + " feels incredibly tight as a few more inches of length seem to pour out from your crotch.", false);
 				if(cocks.length > 1) {
 					if(ncocks == 1) outputText("Your " + multiCockDescriptLight() + " feel incredibly tight as one of their number begins to grow inch after inch of length.", false);
-					if(ncocks > 1 && ncocks < cocks.length) outputText("Your " + multiCockDescriptLight() + " feel incredibly number as " + kGAMECLASS.num2Text(ncocks) + " of them begin to grow inch after inch of added length.", false);
+					if(ncocks > 1 && ncocks < cocks.length) outputText("Your " + multiCockDescriptLight() + " feel incredibly number as " + num2Text(ncocks) + " of them begin to grow inch after inch of added length.", false);
 					if(ncocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " feel incredibly tight as inch after inch of length pour out from your groin.", false);
 				}
 			}
@@ -2560,11 +2581,11 @@ use namespace kGAMECLASS;
 				if(cocks[0].cockLength >= 16 && cocks[0].cockLength-temp2 < 16) {
 					if(cocks.length == 1) outputText("  <b>Your " + cockDescript(0) + " would look more at home on a large horse than you.</b>", false);
 					if(cocks.length > 1) outputText("  <b>Your " + multiCockDescriptLight() + " would look more at home on a large horse than on your body.</b>", false);
-					if(gender == 3){
-						if(cocks.length == 1) outputText("  You could easily stuff your " + cockDescript(0) + " between your breasts and give yourself the titty-fuck of a lifetime.", false);
-						if(cocks.length > 1) outputText("  They reach so far up your chest it would be easy to stuff a few cocks between your breasts and give yourself the titty-fuck of a lifetime.", false);
+					if (biggestTitSize() >= BREAST_CUP_C) {
+						if (cocks.length == 1) outputText("  You could easily stuff your " + cockDescript(0) + " between your breasts and give yourself the titty-fuck of a lifetime.", false);
+						if (cocks.length > 1) outputText("  They reach so far up your chest it would be easy to stuff a few cocks between your breasts and give yourself the titty-fuck of a lifetime.", false);
 					}
-					if(gender == 1){
+					else {
 						if(cocks.length == 1) outputText("  Your " + cockDescript(0) + " is so long it easily reaches your chest.  The possibility of autofellatio is now a foregone conclusion.", false);
 						if(cocks.length > 1) outputText("  Your " + multiCockDescriptLight() + " are so long they easily reach your chest.  Autofellatio would be about as hard as looking down.", false);
 					}
@@ -2590,16 +2611,16 @@ use namespace kGAMECLASS;
 				if(cocks.length == 1) outputText("Your " + multiCockDescriptLight() + " has shrunk to a slightly shorter length.", false);
 				if(cocks.length > 1) {
 					if(ncocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " have shrunk to a slightly shorter length.", false);
-					if(ncocks > 1 && ncocks < cocks.length) outputText("You feel " + kGAMECLASS.num2Text(ncocks) + " of your " + multiCockDescriptLight() + " have shrunk to a slightly shorter length.", false);
-					if(ncocks == 1) outputText("You feel " + kGAMECLASS.num2Text(ncocks) + " of your " + multiCockDescriptLight() + " has shrunk to a slightly shorter length.", false);
+					if(ncocks > 1 && ncocks < cocks.length) outputText("You feel " + num2Text(ncocks) + " of your " + multiCockDescriptLight() + " have shrunk to a slightly shorter length.", false);
+					if(ncocks == 1) outputText("You feel " + num2Text(ncocks) + " of your " + multiCockDescriptLight() + " has shrunk to a slightly shorter length.", false);
 				}
 			}
 			if(temp2 < -1 && temp2 > -3) {
 				if(cocks.length == 1) outputText("Your " + multiCockDescriptLight() + " shrinks smaller, flesh vanishing into your groin.", false);
 				if(cocks.length > 1) {
 					if(ncocks == cocks.length) outputText("Your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
-					if(ncocks == 1) outputText("You feel " + kGAMECLASS.num2Text(ncocks) + " of your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
-					if(ncocks > 1 && ncocks < cocks.length) outputText("You feel " + kGAMECLASS.num2Text(ncocks) + " of your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
+					if(ncocks == 1) outputText("You feel " + num2Text(ncocks) + " of your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
+					if(ncocks > 1 && ncocks < cocks.length) outputText("You feel " + num2Text(ncocks) + " of your " + multiCockDescriptLight() + " shrink smaller, the flesh vanishing into your groin.", false);
 				}
 			}
 			if(temp2 <= -3) {
@@ -2607,7 +2628,7 @@ use namespace kGAMECLASS;
 				if(cocks.length > 1) {
 					if(ncocks == cocks.length) outputText("A large portion of your " + multiCockDescriptLight() + " receeds towards your groin, receding rapidly in length.", false);
 					if(ncocks == 1) outputText("A single member of your " + multiCockDescriptLight() + " vanishes into your groin, receding rapidly in length.", false);
-					if(ncocks > 1 && cocks.length > ncocks) outputText("Your " + multiCockDescriptLight() + " tingles as " + kGAMECLASS.num2Text(ncocks) + " of your members vanish into your groin, receding rapidly in length.", false);
+					if(ncocks > 1 && cocks.length > ncocks) outputText("Your " + multiCockDescriptLight() + " tingles as " + num2Text(ncocks) + " of your members vanish into your groin, receding rapidly in length.", false);
 				}
 			}
 		}
@@ -2659,10 +2680,10 @@ use namespace kGAMECLASS;
 					if (findStatusAffect(StatusAffects.Infested) >= 0) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
 				}
 				if (cocks.length == 1) {
-					outputText("<b>You feel " + kGAMECLASS.num2Text(removed) + " cocks disappear into your groin, leaving you with just your " + cockDescript(0) + ".", false);
+					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with just your " + cockDescript(0) + ".", false);
 				}
 				if (cocks.length > 1) {
-					outputText("<b>You feel " + kGAMECLASS.num2Text(removed) + " cocks disappear into your groin, leaving you with " + multiCockDescriptLight() + ".", false);
+					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with " + multiCockDescriptLight() + ".", false);
 				}
 			}
 			//remove infestation if cockless

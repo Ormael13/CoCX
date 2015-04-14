@@ -417,8 +417,8 @@ package classes.Scenes.NPCs {
 	 	outputText(" you’re still wearing your [armor].");
 		//PC chooses fight or submit.
 		menu();
-		addButton(0,"Fight",eventParser,fightCowCuntAfterBeingTotesMcGoatsDrugged);
-		addButton(1,"Submit",eventParser,voluntarilyChooseCowCuntBadEndYouBad);	
+		addButton(0, "Fight", fightCowCuntAfterBeingTotesMcGoatsDrugged);
+		addButton(1, "Submit", voluntarilyChooseCowCuntBadEndYouBad);
 	}
 	
 	//Chose fight
@@ -831,8 +831,8 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nFinally Clara turns to look at you.  Brimming with satisfaction, she opens up her dress and commands you to drink of her breast.  Satisfying your need goes much the same way it has every day.  <i>Milk, sweet delicious milk, need, need, need.  Must serve mistress.</i>  You can’t really control yourself, you <i>NEED!  Service, am I doing things right?  I will please you</i> damn slavedriver.  <i>Most wonderful lady!  Please forgive my insolent thoughts.  Need, need, NEED!</i>");
 	 	outputText("\n\nOnce you’ve finished drinking, mistress directs you to lie down on her bed.  She wants to use you for her pleasure.  As always, you’re happy to comply.  Just as things have been for so long, she mounts your custom prepared equipment: a kitty cock, 9 by 1.6 inches.  You are just happy that you can serve as her sex toy so well.  It fills you with such joy to watch the body of the most beautiful woman in the world bounce on top of yours, in that fine dress with her chest still exposed and tumbling around above you.");
 	 	outputText("\n\nThis is your life now.  Reduced to the milk addicted slave of a Lacta Bovine, you have abandoned your mission just to serve and be used for the rest of your life.");
-		doBadEnd();
 		//game over
+		getGame().gameOver();
 	}
 
 	//Win scenes against Clara
@@ -1279,7 +1279,7 @@ package classes.Scenes.NPCs {
 	public function cageDatCowCunt():void
 	{
 		clearOutput();
-	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll no longer be a threat to anyone anymore.  Marble looks uncertain at you and asks if you're sure she needs to be locked up now that she's been purified.  You say you're certain, and your mate nods to you and says that she trusts your judgement on this matter.");
+	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll no longer be a threat to anyone anymore.  Marble looks uncertain at you and asks if you're sure she needs to be locked up now that she's been purified.  You say you're certain, and your mate nods to you and says that she trusts your judgment on this matter.");
 	 	outputText("\n\nIt takes you and Marble about an hour to fashion a cage out of logs from the forest thanks to her excellent carpentry skills.  You then untie Clara from her bonds and put her into her new home.  She'll be in there for some time, but at least you know she won't be able to hurt anyone that way.  The purified cow-girl offers no resistance this whole time, and is eerily silent once inside her cell.  You do occasionally catch her angrily staring at you.");
 	 	flags[kFLAGS.CLARA_IMPRISONED] = 1;
 		//Clara is marked as having been purified and caged in camp.
@@ -1316,7 +1316,7 @@ package classes.Scenes.NPCs {
 	public function stickUnpurifiedClaraInACage():void
 	{
 		clearOutput();
-	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll be no threat to anyone anymore.  Marble nods to you and says that she trusts your judgement on this matter.");
+	 	outputText("You say that you're going to be keeping Clara a prisoner in the camp.  She deserves to be imprisoned so she'll be no threat to anyone anymore.  Marble nods to you and says that she trusts your judgment on this matter.");
 	 	outputText("\n\n\"<i>So that's it then.  You're just going to lock me up in a cage?  You can't do that!  I'm fucking Clara, daughter of Hana!  You can't just throw me in a damn cage!</i>\"  Despite her protests, she can't offer any real resistance, bound as she is.");
 	 	outputText("\n\nIt takes you and Marble about an hour to fashion a cage out of logs from the forest thanks to her excellent carpentry skills.  You then untie Clara from her bonds and put her into her new home.  She'll be in there for some time, but at least you know she won't be able to hurt anyone that way.  The bars certainly don't do much to cut out the noise of her taunts and demands, unfortunately.");
 		//Clara is marked as having not been purified and caged in camp
@@ -1330,7 +1330,7 @@ package classes.Scenes.NPCs {
 	public function letCorruptCowCuntGo():void
 	{
 		clearOutput();
-	 	outputText("You say that you're going to let Clara go, but she has to promise to never return, bother you or anyone in your camp ever again.  Marble gives you a look of shock and asks if you're absolutely certain you want to do that.  When you give her the affirmative, she sighs and says that she'll trust your judgement on this matter.");
+	 	outputText("You say that you're going to let Clara go, but she has to promise to never return, bother you or anyone in your camp ever again.  Marble gives you a look of shock and asks if you're absolutely certain you want to do that.  When you give her the affirmative, she sighs and says that she'll trust your judgment on this matter.");
 	 	outputText("\n\n\"<i>Really?  After all that, you're just going to let me go?  Fine.  I promise to never return or bother any of you ever again.</i>\"");
 	 	outputText("\n\nYou release her from her bonds, give her her things, and escort her from the camp.  She gives you a wicked smile, then steps out of the camp and warps away.  You hope that wasn't a mistake.");
 		//Clara is marked as having not been purified and released
@@ -1532,7 +1532,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nShe runs off, not looking back.  You get the impression that she really doesn't like what she just said, and she's desperately trying to avoid letting what's happening to you bother her.  Should you really care though?");
 	 	flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] = 1;
 		//end event
-		doNext(1);
+		doNext(playerMenu);
 	}
 	//Leaving from corruption
 	//PC's corruption is now too high.

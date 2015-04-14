@@ -186,7 +186,8 @@ private function intoTheDemonPit(sacrifice:Boolean = true):void {
 	clearOutput();
 	//N is the number of hours left before night
 	if(model.time.hours < 21) {
-		outputText("<b>" + Num2Text(21-model.time.hours) + " hours pass...</b>\n");
+		var passed:int = 21 - model.time.hours;
+		outputText("<b>" + Num2Text(passed) + " " + (passed > 1 ? "hours pass" : "hour passes") + "...</b>\n");
 		model.time.hours = 21;
 		statScreenRefresh();
 	}
@@ -221,8 +222,8 @@ private function intoTheDemonPit(sacrifice:Boolean = true):void {
 	}
 	flags[kFLAGS.TIMES_IN_DEMON_PIT]++;
 	flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] = 0;
-	if(sacrifice) simpleChoices("Fight",createCallBackFunction(fightZeDemons,true),"Submit",loseOrSubmitToVapula,"",0,"",0,"",0);
-	else simpleChoices("Fight",createCallBackFunction(fightZeDemons,false),"Submit",loseOrSubmitToVapula,"",0,"",0,"",0);
+	if(sacrifice) simpleChoices("Fight",createCallBackFunction(fightZeDemons,true),"Submit",loseOrSubmitToVapula, "", null, "", null, "", null);
+	else simpleChoices("Fight",createCallBackFunction(fightZeDemons,false),"Submit",loseOrSubmitToVapula, "", null, "", null, "", null);
 }
 //Submit/Fight
 private function fightZeDemons(sacrifice:Boolean = true):void {
@@ -231,23 +232,22 @@ private function fightZeDemons(sacrifice:Boolean = true):void {
 	//When acting as sacrifice, Item button is disabled; Fight, Run, and Phys Special buttons are disabled unless PC has str >= 80; Run is furthermore prevented entirely if PC is non-winged; outputs text: \"<i>You'd like to run, but you can't scale the walls of the pit with so many demonic hands pulling you down!</i>\"
 	//PC's weapon is temporarily set to fists and armor to comfortable clothes during a Horde Fight if he triggered it in response to a sacrifice request, but not if triggered through volunteering to guard the pit later once the village is unlocked
 	startCombat(new LustyDemons());
-	if(sacrifice) {
+	if (sacrifice) {
 		//Remove weapon
-		player.createStatusAffect(StatusAffects.Disarmed,0,0,0,0);
+		player.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 		flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 		player.setWeapon(WeaponLib.FISTS);
-//		player.weapon.unequip(player,false,true);
-		monster.createStatusAffect(StatusAffects.BowDisabled,0,0,0,0);
-		if(player.str < 80 && player.spe < 80) {
-			monster.createStatusAffect(StatusAffects.AttackDisabled,0,0,0,0);
-			monster.createStatusAffect(StatusAffects.RunDisabled,0,0,0,0);
-			monster.createStatusAffect(StatusAffects.PhysicalDisabled,0,0,0,0);
+		monster.createStatusAffect(StatusAffects.BowDisabled, 0, 0, 0, 0);
+		if (player.str < 80 && player.spe < 80) {
+			monster.createStatusAffect(StatusAffects.AttackDisabled, 0, 0, 0, 0);
+			monster.createStatusAffect(StatusAffects.RunDisabled, 0, 0, 0, 0);
+			monster.createStatusAffect(StatusAffects.PhysicalDisabled, 0, 0, 0, 0);
 		}
 		else {
-			if(!player.canFly()) monster.createStatusAffect(StatusAffects.RunDisabled,0,0,0,0);
+			if (!player.canFly()) monster.createStatusAffect(StatusAffects.RunDisabled, 0, 0, 0, 0);
 		}
 	}
-	eventParser(1);
+	playerMenu(); //Avoid showing the next button. Must call it here, after setting up all the statuses, so the first round combat menu is correct
 }
 
 
@@ -672,7 +672,7 @@ private function rebeccMenu():void {
 		sex = createCallBackFunction(rapeRebecc,false);
 		outputText("\n\nYou could try and force yourself on her, but you might not be welcome in town after...");
 	}
-	simpleChoices("Appearance",rebeccAppearance,"Bath",rebeccBathScene,"",0,"Surprise Sex",sex,"Back",gangbangVillageStuff);
+	simpleChoices("Appearance", rebeccAppearance, "Bath", rebeccBathScene, "", null, "Surprise Sex", sex, "Back", gangbangVillageStuff);
 }
 //Rebecc Appearance (Z)
 private function rebeccAppearance():void {
@@ -790,7 +790,7 @@ private function fightZeVillagers():void {
 	//You are fighting the villagers (level 14):
 	startCombat(new Farmers());
 	monster.createStatusAffect(StatusAffects.GenericRunDisabled,0,0,0,0);
-	eventParser(1);
+	playerMenu();
 	//~500 HP, 6 different attacks at 20 hp, can't run, 100% lust resistance (can't arouse), ~200 xp
 }
 
@@ -802,12 +802,13 @@ public function beatUpOwca():void {
 	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled up as she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
 	//Rape Rebbecc/Torch Village (needs Akbal's fire or Whitefire)/Leave
 	var torch:Function = null;
-	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0)
+	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.Dragonfire) >= 0)
 		torch = torchOwcaMotherFuckers;
 	var rape:Function = null;
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) rape = createCallBackFunction(rapeRebecc,true);
-	simpleChoices("Rape Rebecc",rape,"Torch Village",torch,"",0,"",0,"Leave",leaveOwcaAfterWhupping);
+	simpleChoices("Rape Rebecc", rape, "Torch Village", torch, "", null, "", null, "Leave", leaveOwcaAfterWhupping);
 }
+
 //"Leave" redirects the PC to camp; next encounter is Rebecc's Last Plea.
 private function leaveOwcaAfterWhupping():void {
 	//tag for calling last plea
@@ -818,12 +819,13 @@ private function leaveOwcaAfterWhupping():void {
 private function torchOwcaMotherFuckers():void {
 	clearOutput();
 	outputText("These ignorant folks deserve to be punished for trying to take you by force.  You muster your strength and release a wave of magical flame.  The raw heat and energy is enough to set entire thatched roofs ablaze.  You ignite house after house, the poor constructions unable to withstand your fiery might, until there are enough burning that the wind can carry the flames to all other buildings nearby.  A few minutes later, the entire village is ablaze; hovels are crumbling under their own weight and the crude roads are being littered with fallen debris.  You watch Owca burn silently, arms crossed.  Finally, when the last building has been thoroughly reduced to a pile of rubble and ashes, you quickly search for any valuables among the villagers' belongings.  Fortunately their gems haven't been melted; you pack a substantial amount of them away before leaving.  You cast a thoughtful glance at the remains of what used to be a peaceful village; ironically enough, the only structure you preserved was the pole in the pit, an ultimate mockery of their futile struggles against forces that ridiculously outmatch them.");
+	player.gems += 900 + rand(150);
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	dynStats("cor", 15);
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) {
 		outputText("You notice Rebecc is still weeping among the scattered bodies of the beaten villagers.  Do you abuse her?");
 		simpleChoices("Abuse Her",createCallBackFunction(rapeRebecc,true),
-				"",0,"",0,"",0,"Leave",torchUpVillagersAndLeave);
+				"", null, "", null, "", null, "Leave", torchUpVillagersAndLeave);
 	}
 	else doNext(torchUpVillagersAndLeave);
 }
@@ -833,7 +835,6 @@ private function torchUpVillagersAndLeave():void {
 	clearOutput();
 	outputText("You don't think you're going to see these villagers again, and you don't really want to.");
 	//Corruption +15 (plus extra for rape), ~ 1000 gems, fatigue set to 100
-	player.gems += 900 + rand(150);
 	fatigue(100);
 	statScreenRefresh();
 	cleanupAfterCombat();
@@ -863,7 +864,7 @@ private function morningAfterRape():void {
 	//Option: Rape. Leads to Rebecc Rape scene and ends the quest. 
 	//Option: Leave. Redirects PC to camp, next encounter leads to Rebecc's Last Plea
 	simpleChoices("Forgive",forgiveOwca,
-			"Rape",createCallBackFunction(rapeRebecc,false),"",0,"",0,"Leave",fuckThisShit);
+			"Rape", createCallBackFunction(rapeRebecc, false), "", null, "", null, "Leave", fuckThisShit);
 }
 //Option: Forgive (Z)
 private function forgiveOwca():void {
@@ -900,7 +901,7 @@ private function rebeccsLastPlea():void {
 	//(You could face the villagers and demons in her stead.) 
 	//(You could leave.) //End of quest.
 	simpleChoices("Rape Her",createCallBackFunction(rapeRebecc,true),
-			"Face Them All",faceDownHordes,"",0,"",0,"Leave",leaveRebeccToBeRaped);
+			"Face Them All", faceDownHordes, "", null, "", null, "Leave", leaveRebeccToBeRaped);
 }
 //Option: Leave (Z)
 private function leaveRebeccToBeRaped():void {
@@ -943,7 +944,7 @@ private function slaveToVapulaBadEnd():void {
 	outputText("\n\nThese spontaneous, dirty words make the imp fucking you from behind instantly cum; with a powerful last push, he blasts you with his seed, filling and soaking your backside with thick white goo.  You reach for Vapula, helplessly hugging her tits and suckling her nipples as you sob in pleasure-induced humiliation.");
 	outputText("\n\n\"<i>Very well, slut.  Your former life as a villager is over.  It's time to move on to your new life; and trust me, it's going to be much more exciting.  Actually, I don't think you'll be willing to ever leave this place...</i>\"");
 	outputText("\n\nYou furiously nod in approval.");
-	doBadEnd();
+	getGame().gameOver();
 }
 
 //Subdue Vapula Scene - begins Vapula Follower Content(Z)
@@ -958,10 +959,10 @@ private function subdueVapula():void {
 	outputText("\n\nBy now, you've completely broken the back of the rapacious demon horde.  Their leader is starting to get used to her repeated defeats; it's time for you to make a decision... what do you do?");
 	//choices: [Disband the horde]/[Enslave Vapula(requires cock or non-centaur vagina, D2 completion, libido >= 60, and corr >= 70)]
 	var fuck:Function = null;
-	if(player.gender > 0 && (player.lust >= 33 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) fuck = rapeZeVapula;
+	if(player.gender > 0 && (player.lust >= 33 - player.corruptionTolerance())) fuck = rapeZeVapula;
 	var enslave:Function = null;
-	if(player.gender > 0 && (player.cor >= 66 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) enslave = enslaveVapulaWithYourWang;
-	simpleChoices("Disband",disbandHorde,"EnslaveVapula",enslave,"JustFuckEm",fuck,"",0,"Skip Out",cleanupAfterCombat);
+	if(player.gender > 0 && (player.cor >= 66 - player.corruptionTolerance())) enslave = enslaveVapulaWithYourWang;
+	simpleChoices("Disband", disbandHorde, "EnslaveVapula", enslave, "JustFuckEm", fuck, "", null, "Skip Out", cleanupAfterCombat);
 }
 //Option: Disband (Z)
 private function disbandHorde():void {

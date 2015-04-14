@@ -109,7 +109,7 @@ public function encounterTamanisDaughters():void {
 		if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] >= 10) outputText(", your wife", false);
 		outputText(".  You realize now that the other goblins must be your daughters.  Another crowd of small women emerges from the bushes, closing in a ring around you, preventing any chance of escape.  The largest of the younger goblin-women steps forwards, her " + tdCup() + " breasts jiggling, barely contained by the bondage ropes she has tied around herself.  She stops once she's next to her mother and Tamani explains, \"<i>I just can't keep their aching cunts at home anymore!  They're fertile adults now and they're wanting to get some experience with real dicks.  I figured you wouldn't mind helping them out a little.</i>\"\n\nWhat do you do? (Fight them off, Fuck them willingly, Let them fuck you)", false);
 		//[Fuck Them] [Let Them] [Fight]
-		simpleChoices("Fight",fightTamanisDaughters, "Fuck Them",fuckYoDaughtersHomie,"Let Them",legTamanisDaughtersRAEPYou,"",0,"",0);
+		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Let Them", legTamanisDaughtersRAEPYou, "", null, "", null);
 		return;
 	}
 	tamaniPresent = false;
@@ -122,11 +122,11 @@ public function encounterTamanisDaughters():void {
 	if(flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS] == 0) {
 		outputText("She calls out, \"<i>We're tired of getting leftovers, so we're coming to the source.  Are you going to give us what we want?</i>\"\n\n", false);
 		//[Fuck them] [Fight] [Play Dumb]
-		simpleChoices("Fight",fightTamanisDaughters, "Fuck Them",fuckYoDaughtersHomie,"Play Dumb",playDumbToTamanisDaughters,"Let Them",legTamanisDaughtersRAEPYou,"",0);
+		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Play Dumb", playDumbToTamanisDaughters, "Let Them", legTamanisDaughtersRAEPYou, "", null);
 	}
 	else {
 		outputText("She calls out, \"<i>We came back for more cream!  Come on, let's fuck again!</i>\"\n\nIt doesn't look like 'no' is a word they understand.  What do you do?</i>", false);
-		simpleChoices("Fight",fightTamanisDaughters,"Fuck Them",fuckYoDaughtersHomie,"Let Them",legTamanisDaughtersRAEPYou,"",0,"",0);
+		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Let Them", legTamanisDaughtersRAEPYou, "", null, "", null);
 	}
 }
 
@@ -149,7 +149,7 @@ private function playDumbToTamanisDaughters():void {
 	outputText("litters one way or another!</i>\"\n\n", false);
 	
 	//[Fuck them] [Fight] [Let them have their way with you]
-	simpleChoices("Fuck Them",fuckYoDaughtersHomie,"Fight",fightTamanisDaughters,"",0,"Let Them",legTamanisDaughtersRAEPYou,"",0);
+	simpleChoices("Fuck Them", fuckYoDaughtersHomie, "Fight", fightTamanisDaughters, "", null, "Let Them", legTamanisDaughtersRAEPYou, "", null);
 }
 
 //[Fight Them]
@@ -291,14 +291,14 @@ private function fuckYoDaughtersHomie():void {
 	else {
 		outputText("You pick a random girl from the crowd, and the others crowd around, jealous of your chosen cock-sleeve.   Her cries of excitement rapidly turn to pain when you try to push in though.  She's just too small, even for a goblin.  You set her down, disappointed, but then she lies down in the grass and spreads her legs wide.  She says, \"<i>Since you're too big for us, how about we take turns lining up on the ground while some of us suck out your sticky goop?</i>\"\n\n", false);
 		
-		outputText("The idea sounds great to you.  Two of the horny sluts are already climbing forwards while their sisters lay out, pulling their vulva apart and toying with their tiny green clits.  They must be twins, because aside from their wildly different hair, their features are identical.  The paired cock-sluts both kiss your swollen " + cockHead(0) + ", then drag their lips and tongues over your length.  At first they're working in sync, but as their efforts intensify they slowly get out of rhythm, until they're each slobbering over a different part of your " + cockDescript(0) + ".\n\n", false);
+		outputText("The idea sounds great to you.  Two of the horny sluts are already climbing forwards while their sisters lay out, pulling their vulva apart and toying with their tiny green clits.  They must be twins, because aside from their wildly different hair, their features are identical.  The paired cock-sluts both kiss your swollen " + player.cockHead() + ", then drag their lips and tongues over your length.  At first they're working in sync, but as their efforts intensify they slowly get out of rhythm, until they're each slobbering over a different part of your " + cockDescript(0) + ".\n\n", false);
 		
 		if (tamaniPresent) {
 			outputText("Tamani steps up and reaches into a pouch.  As she withdraws her hand, you get your first glimpse of her cargo.  It appears to be a massive double-ended dildo, pink and floppy.  One end is shaped like a canine, with a huge knot, while the other ends in the flared tip of a horse-cock.  Tamani grunts as she spears herself with the pointed canine side, even forcing the massive dildo's knot inside.  She releases the dildo and the horse-half bobbles imposingly in front of her, dripping pink fluids.  She grins up at you saying, \"<i>If my daughters are going to claim all your cream, I'm going to make sure you don't hold back.  You saw the knot on this thing, didn't you?  Well, it's filled with aphrodisiacs, so when I cum and clamp down on it, you'll be forced to squirt every ounce of seed into my girls.</i>\"\n\n", false);
 		
 			outputText("She disappears behind you and you cringe, knowing this will probably be at least slightly uncomfortable.  ", false);
 			if(player.tallness > 48) outputText("You can hear her climbing up on something behind you, in order to get to the right height.  ", false);
-			outputText("Your expression of disdain is ruined when one of the sluts stretches wide and slurps your " + cockHead(0) + " into her mouth.  Her tongue feels like heaven as it slides over your tip, and her sister works the shaft, jerking the spit-lubed monster off with fast strokes.   Your enjoyment is interrupted by a sudden intrusion at your backdoor.  The rubbery flared horse-toy presses against your " + assholeDescript() + ", dribbling a little bit of its strange lubricants into your backdoor as Tamani pushes it forward.   Tiny hands grab your " + assDescript() + " as it's pushed forward, and you have no choice but to relax and allow it inside.\n\n", false);
+			outputText("Your expression of disdain is ruined when one of the sluts stretches wide and slurps your " + player.cockHead() + " into her mouth.  Her tongue feels like heaven as it slides over your tip, and her sister works the shaft, jerking the spit-lubed monster off with fast strokes.   Your enjoyment is interrupted by a sudden intrusion at your backdoor.  The rubbery flared horse-toy presses against your " + assholeDescript() + ", dribbling a little bit of its strange lubricants into your backdoor as Tamani pushes it forward.   Tiny hands grab your " + assDescript() + " as it's pushed forward, and you have no choice but to relax and allow it inside.\n\n", false);
 			
 			outputText("Half the head slips inside you, then the other, and in no time Tamani is slowly forcing it inside you.  It hurts just a little, enough to make your hips swivel forwards in a futile attempt at escape.  The goblin on your cock nearly chokes from the sudden change, though her sister gives you a wicked grin and strokes harder.  A flash of warmth squirts inside you in time with a moan from Tamani, and suddenly your body is exploding with pleasure.\n\n", false);
 			
@@ -519,7 +519,7 @@ private function legTamanisDaughtersRAEPYou():void {
 			}
 			outputText("\n\n", false);
 			
-			outputText("She pivots around, placing her drooling, wet gash against your " + cockHead(0) + " and begins vigorously jerking you off.   Her ass bounces hypnotically on your ", false);
+			outputText("She pivots around, placing her drooling, wet gash against your " + player.cockHead() + " and begins vigorously jerking you off.   Her ass bounces hypnotically on your ", false);
 			if(player.biggestTitSize() < 1) outputText("chest", false);
 			else outputText(allBreastsDescript(), false);
 			outputText(", sending a fresh surge of arousal through your " + multiCockDescriptLight() + ".   Another one of the girls leans down between your " + player.legs() + " licking your ", false);
@@ -567,7 +567,7 @@ private function legTamanisDaughtersRAEPYou():void {
 			else outputText("Each of y", false);
 			outputText("our " + multiCockDescriptLight() + " is now rock solid and beading pre-cum at the tip.  ", false);
 			//(single)
-			if(cocks == 1) outputText("The purple-lipped cock-slut grabs your " + cockDescript(0) + " and makes a show of smearing the slippery fluid over your shaft, lubricating it as she jacks you off.  Her warm lips form a tight seal on your " + cockHead(0) + " as the young goblin begins lapping at your pre-cum as she sucks it from your urethra.   It feels heavenly, and your " + hipDescript() + " pump weakly into the air in an instinctive bid to enhance the sensation.", false);
+			if(cocks == 1) outputText("The purple-lipped cock-slut grabs your " + cockDescript(0) + " and makes a show of smearing the slippery fluid over your shaft, lubricating it as she jacks you off.  Her warm lips form a tight seal on your " + player.cockHead() + " as the young goblin begins lapping at your pre-cum as she sucks it from your urethra.   It feels heavenly, and your " + hipDescript() + " pump weakly into the air in an instinctive bid to enhance the sensation.", false);
 			//(multiple)
 			else {
 				outputText("The purple-lipped cock-slut grabs hold of one of your " + multiCockDescriptLight() + " and makes a show of smearing the slippering fluid over the shaft, lubricating it as she begins to jack you off.  Her sisters, taking the cue, step over the other sated sluts and grab hold of your " + cockDescript(1) + ", fondling it lovingly.  ", false);
@@ -617,7 +617,7 @@ private function legTamanisDaughtersRAEPYou():void {
 			else outputText("there's a TON of you here so you'll need to move quick if you each want a turn", false);
 			outputText(",</i>\" commands the goblin mother.\n\n", false);
 			
-			outputText("Her words are downright prophetic.  Churning, bubbling warmth floods your crotch with need as you look on, moaning.  Your back arches and your eyes cross in an involuntary reaction to your drug-induced orgasm.  Grunting, you twitch as the goblins line up, the eldest daughter grabbing home of your flexing " + cockDescript(0) + " as it begins to erupt.  Strangely, it isn't the pulsing, squirting orgasms you're used to.  Instead, a steady stream of cum washes out over the girl's abdomen as she lines up, eventually grinding her wet pussy against your straining urethra.  She giggles with lewd pleasure, grinding against your swollen " + cockHead(0) + " as her womb is pumped full of semen.  Her belly quickly rounds out, and she's forced to step away, leaving you to soak your belly while the next of your daughters gets in position.\n\n", false);
+			outputText("Her words are downright prophetic.  Churning, bubbling warmth floods your crotch with need as you look on, moaning.  Your back arches and your eyes cross in an involuntary reaction to your drug-induced orgasm.  Grunting, you twitch as the goblins line up, the eldest daughter grabbing home of your flexing " + cockDescript(0) + " as it begins to erupt.  Strangely, it isn't the pulsing, squirting orgasms you're used to.  Instead, a steady stream of cum washes out over the girl's abdomen as she lines up, eventually grinding her wet pussy against your straining urethra.  She giggles with lewd pleasure, grinding against your swollen " + player.cockHead() + " as her womb is pumped full of semen.  Her belly quickly rounds out, and she's forced to step away, leaving you to soak your belly while the next of your daughters gets in position.\n\n", false);
 			
 			//(MULTI)
 			if(cocks > 2) {
@@ -652,7 +652,7 @@ private function legTamanisDaughtersRAEPYou():void {
 				outputText(".  The perverse scene seems to feed you even more pleasure, and you feel your orgasm increase in intensity, thickening the flow of cum.\n\n", false);
 			}
 			
-			outputText("The next slut grabs your " + cockHead(0) + " with both hands as she straddles you, pinching it tightly enough to make you wince.  The flow of white goo is pinched off, backing up painfully as she gets in position.  Just when you're about to cry, she's in position, and releases her too-tight grip.   Your body rewards the slut for her pain with a blast of seed so powerful it nearly blows her off your midsection, splattering out around her lips.  She holds on through an orgasm as you fill her depths with even more of your creamy load.  Surprisingly, she manages to take even more than her older sister, staying on until she looks a few months pregnant.  She staggers off, sloshing wetly while seed drips between her thighs.\n\n", false);
+			outputText("The next slut grabs your " + player.cockHead() + " with both hands as she straddles you, pinching it tightly enough to make you wince.  The flow of white goo is pinched off, backing up painfully as she gets in position.  Just when you're about to cry, she's in position, and releases her too-tight grip.   Your body rewards the slut for her pain with a blast of seed so powerful it nearly blows her off your midsection, splattering out around her lips.  She holds on through an orgasm as you fill her depths with even more of your creamy load.  Surprisingly, she manages to take even more than her older sister, staying on until she looks a few months pregnant.  She staggers off, sloshing wetly while seed drips between her thighs.\n\n", false);
 
 			outputText("While you continue to fertilize the slutty goblin girls, Tamani is nice enough to remove your gag.  Sadly, you're too drunk with pleasure and Tamani's chemicals to do anything but pant and drool, but it was a nice gesture.  ", false);
 			//(SMALL CROWD: 
@@ -859,8 +859,9 @@ private function tamaniDaughtersBadEndChoice():void {
 	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("Exgartuan barks, \"<i>Hell yes I do!</i>\" but the goblin only smirks down for a moment before looking back at you.\n\n", false);
 	
 	outputText("(Options: Yes, No, I'd rather fill your cunts individually & personally)", false);
-	simpleChoices("Yes",tamaniDaughtersYesBadEndMePlease,"No",tamaniDaughtersDeclineBadEnd,"Individual",tamanisDaughtersFillIndividuallyBADEND,"",0,"",0);
+	simpleChoices("Yes", tamaniDaughtersYesBadEndMePlease, "No", tamaniDaughtersDeclineBadEnd, "Individual", tamanisDaughtersFillIndividuallyBADEND, "", null, "", null);
 }
+
 //[Yes]
 private function tamaniDaughtersYesBadEndMePlease():void {
 	spriteSelect(57);
@@ -871,7 +872,7 @@ private function tamaniDaughtersYesBadEndMePlease():void {
 	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("Exgartuan moans, \"<i>Ohhhhhh yeeeeaaaaahhhh...</i>\" before slipping into silence.\n\n", false);
 	
 	outputText("You spend the rest of your life trapped in orgasm, constantly feeding the growth of what becomes the biggest goblin tribe in all the land of Mareth.  Even when every single one of them is pregnant, they let you enjoy your reward.  Over time your capacity for memory, morals, or anything other feeling besides pleasure dwindles.  Trapped in a heaven of your own choosing, you gave up everything that you were for never-ending bliss.", false);
-	doBadEnd();
+	getGame().gameOver();
 }
 
 //[NO]
@@ -908,8 +909,7 @@ private function tamanisDaughtersFillIndividuallyBADEND():void {
 	outputText("A cheer reverberates off the ceiling as your daughters crowd around you, pressing their buxom chests and rounded backsides against you.  You're led to a secluded corner and fed food and strange drinks, while being kept incredibly horny for hours as you await Tamani's return.  True to her word, your daughter is on top of you in a flash once the clan's matriarch enters the room, and you're helpless to do anything but submit to her velvet pussy.  You cum loudly and messily, creaming her walls and flooding the area around you with spunk while Tamani is forced to watch with a jealous look on her face.\n\n", false);
 	
 	outputText("The rest of your life continues on in a similar fashion – you're kept happily fed, full, and pleasured by your hundreds of pregnant wives as your harem grows.  There's no shortage of sex, and no shortage of desire thanks to your wives' alchemical talents.  Within the span of a month you've utterly forgotten about your quest – it's hard to focus on anything but cuddling with your wives and daughters while you await your next fuck.", false);
-	//GAME OVER.
-	doBadEnd();
+	getGame().gameOver();
 }
 
 //[Lose to Daughters With Tamani There]

@@ -61,7 +61,7 @@ package classes.Scenes.NPCs
 			//[Demonic dildo added]
 			player.createKeyItem("Demonic Strap-On", 0, 0, 0, 0);
 			outputText("\n\n(<b>Gained Item: Demonic Strap-On</b>)");
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 		public function vapulaGivesPCAPresent():void
@@ -193,9 +193,21 @@ package classes.Scenes.NPCs
 					outputText("\n\n\"<i>Fine! Don't come near me if you're corrupted. I'll stay away from her,</i>\" Amily warns.");
 					flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] = 1;
 				}
-				
+				doNext(playerMenu);
+				return;
 			}
-			doNext(1);
+			//[(if PC corr > 70)
+			if (player.cor > 70) outputText("\n\n\"<i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
+			outputText("\n\n");
+			if (jojo) outputText("Jojo");
+			if (amily && jojo) outputText(" and ");
+			if (amily) outputText("Amily");
+			if (amily && jojo) outputText(" have ");
+			else outputText(" has ");
+			outputText("moved out.");
+			outputText("\n\nMaybe it's past time you brought them around to your way of thinking?");
+			//Amily and Jojo removed from followers. Amily is encounterable again in the Village Place through the corrupted route and Jojo can still meditate with you.]
+			doNext(playerMenu);
 		}
 
 //tion camp
@@ -248,10 +260,8 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.VAPULA_EARNED_A_SPANK] > 0 && !player.isTaur() && !player.isDrider()) spank = spankVapulaLikeABoss;
 			else threesome = vapulaThreesomeMenu;
 			
-			choices("Appearance", fapulaFapfapfapAppearance,
-					"Talk", talkToVapulaForSomeReason,
-					"Feed", mFeed, "Feed(Dildo)", fFeed, "Threesome", threesome, "Spank", spank,
-					"", 0, "", 0, "", 0, "Leave", camp.campSlavesMenu);
+			choices("Appearance", fapulaFapfapfapAppearance, "Talk", talkToVapulaForSomeReason, "Feed", mFeed, "Feed(Dildo)", fFeed, "Threesome", threesome,
+				"Spank", spank, "", null, "", null, "", null, "Leave", camp.campSlavesMenu);
 					
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Work", sendToFarm);
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(6, "Go Camp", backToCamp);
@@ -384,7 +394,7 @@ package classes.Scenes.NPCs
 				}
 				threesomeB = toggleCeruleanVapulaAssist;
 			}
-			simpleChoices(haremT, haremB, threesomeT, threesomeB, "", 0, "", 0, "Back", callSlaveVapula);
+			simpleChoices(haremT, haremB, threesomeT, threesomeB, "", null, "", null, "Back", callSlaveVapula);
 		}
 
 		private function toggleCeruleanVapulaAssist():void
@@ -471,7 +481,7 @@ package classes.Scenes.NPCs
 				if (sophieBimbo.bimboSophie()) sophie = vapulaSophieThreesomeSelect;
 				if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0) izma = vapulaAndIzmaThreeSome;
 			}
-			choices("Amily", amily, "Ceraph", ceraph, "Sophie", sophie, "Jojo", jojo, "Izma", izma, "", 0, "", 0, "", 0, "", 0, "Back", callSlaveVapula);
+			choices("Amily", amily, "Ceraph", ceraph, "Sophie", sophie, "Jojo", jojo, "Izma", izma, "", null, "", null, "", null, "", null, "Back", callSlaveVapula);
 		}
 
 //Vapula-Ceraph threesome
@@ -485,7 +495,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nHow will you take them?");
 			//Plz both - requires dick
 			//Option: Butt-fuck train. Requires Ceraph to be herm.
-			simpleChoices("Please Both", vapulaCeraphThreesomePleaseBoth, "AnalTrain", vapulaAndCeraphButtfuckTrainYeehaw, "", 0, "", 0, "", 0);
+			simpleChoices("Please Both", vapulaCeraphThreesomePleaseBoth, "AnalTrain", vapulaAndCeraphButtfuckTrainYeehaw, "", null, "", null, "", null);
 		}
 
 //Option: Please both.
@@ -739,7 +749,7 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 			player.orgasm();
 			dynStats("str", rand(2), "tou", rand(2), "spe", rand(2), "int", rand(2), "cor", 2.5);
-			inventory.takeItem(consumables.CERUL_P, camp.campMenu);
+			inventory.takeItem(consumables.CERUL_P, playerMenu);
 		}
 
 //Vapula/Jojo threesome
@@ -763,7 +773,7 @@ package classes.Scenes.NPCs
 				tease = NTRSomeJojos;
 				train = jojoButtFuckTrain;
 			}
-			simpleChoices("Tease Jojo", tease, "ButtfuckTrain", train, "", 0, "", 0, "", 0);
+			simpleChoices("Tease Jojo", tease, "ButtfuckTrain", train, "", null, "", null, "", null);
 		}
 
 //Netorare
@@ -977,7 +987,7 @@ package classes.Scenes.NPCs
 			//Feed/Tease
 			var tease:Function = null;
 			if (flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) tease = teaseVapula;
-			simpleChoices("Feed", chicksFeedVapula, "Tease", tease, "", 0, "", 0, "", 0);
+			simpleChoices("Feed", chicksFeedVapula, "Tease", tease, "", null, "", null, "", null);
 		}
 
 //Tease
@@ -1120,7 +1130,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 				flags[kFLAGS.VAPULA_EARNED_A_SPANK] = 1;
 			}
-			doNext(1);
+			doNext(playerMenu);
 		}
 
 

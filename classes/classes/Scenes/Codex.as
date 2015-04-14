@@ -155,7 +155,7 @@ package classes.Scenes
 			addButton(0, "Races", enterRaces);
 			addButton(1, "Cults", menuFactions);
 			addButton(2, "Others", menuItems);
-			addButton(14, "Back", eventParser, 1);
+			addButton(14, "Back", playerMenu);
 		}
 		
 		private function enterRaces():void {

@@ -113,7 +113,7 @@ package classes.Scenes.Dungeons.DeepCave
 				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ", false);
 			}
 			if(player.lust >= player.maxLust()) doNext(game.endLustLoss)
-			else doNext(1);
+			else combatRoundOver();
 		}
 
 		

@@ -23,7 +23,7 @@
 			var dodged:Number = 0;
 			var damage:Number;
 			//return to combat menu when finished
-			doNext(1);
+			doNext(game.playerMenu);
 			//Blind dodge change
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
@@ -101,7 +101,7 @@
 			var dodged:Number = 0;
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(1);
+			doNext(game.playerMenu);
 			//Blind dodge change
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
 				dodged++;

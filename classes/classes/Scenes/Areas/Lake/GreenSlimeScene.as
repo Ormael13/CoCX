@@ -25,16 +25,16 @@ private function serviceLowCorruption():void
 	{
 		outputText("You try to wrap one of your hands around the erection, but end up having to use both to get a firm grip.", false);
 	}
-	outputText("  In spite of its appearance the thing is very soft and spongy, although a strong pulse periodically makes it surge in your hand, pushing itself into the cracks between your fingers.  Looking back at the thing's face you slowly begin to pump up and down the massive erection, which grows moist and then a little slick as some of the creature's thin green fluid seeps out onto your hands.  You feel slightly flush and start moving faster, the slime reacting positively to your ministrations.  The rest of its body seems to pulse as well, the definition in its body returning as you continue.  It even begins moving its hips in time with you, its facial features slowly becoming less and less pronounced as its erection gains more definition, clearly forming into a " + eCockDescript(0) + ".\n\n", false);
+	outputText("  In spite of its appearance the thing is very soft and spongy, although a strong pulse periodically makes it surge in your hand, pushing itself into the cracks between your fingers.  Looking back at the thing's face you slowly begin to pump up and down the massive erection, which grows moist and then a little slick as some of the creature's thin green fluid seeps out onto your hands.  You feel slightly flush and start moving faster, the slime reacting positively to your ministrations.  The rest of its body seems to pulse as well, the definition in its body returning as you continue.  It even begins moving its hips in time with you, its facial features slowly becoming less and less pronounced as its erection gains more definition, clearly forming into a " + monster.cockDescriptShort(0) + ".\n\n", false);
 	//Big peoples!
 	if(player.tallness >= 82)
 	{
-		outputText("The throbbing of the slime's " + eCockDescript(0) + " continues to grow stronger until the creature surprises you by reforming its arms and reaching up to grab you, holding your hand at the tip of its cock.  A fraction of a moment later the thing visibly arches its back off the ground and erupts into your palm, a thick jet of its green fluid splashing fiercely against your hand and spilling down the length of its penis, soaking both of your hands and even splashing onto your nearby lap.  You watch the creature's face with a mixture of shock and a sudden surge of excitement, its erection and face both turning smooth and featureless, before its cock slowly recedes back into its body.  The slime slowly begins to retreat as you return to your senses, looking down at your hands covered in the creature's green fluids.  When you look up again the creature is gone.\n", false);
+		outputText("The throbbing of the slime's " + monster.cockDescriptShort(0) + " continues to grow stronger until the creature surprises you by reforming its arms and reaching up to grab you, holding your hand at the tip of its cock.  A fraction of a moment later the thing visibly arches its back off the ground and erupts into your palm, a thick jet of its green fluid splashing fiercely against your hand and spilling down the length of its penis, soaking both of your hands and even splashing onto your nearby lap.  You watch the creature's face with a mixture of shock and a sudden surge of excitement, its erection and face both turning smooth and featureless, before its cock slowly recedes back into its body.  The slime slowly begins to retreat as you return to your senses, looking down at your hands covered in the creature's green fluids.  When you look up again the creature is gone.\n", false);
 	}
 	//Not so big peoples!
 	else
 	{
-		outputText("The throbbing of the slime's " + eCockDescript(0) + " continues to grow stronger until the creature surprises you by reforming its arms and reaching up to grab you as you grasp him, holding your hands at the tip of its cock.  A fraction of a moment later the thing visibly arches its back off the ground and erupts into your palm, a thick jet of its green fluid splashing fiercely against your hands and spilling down the length of its penis, soaking both of your hands and even splashing onto your nearby lap.  You watch the creature's face with a mixture of shock and a sudden surge of excitement, its erection and face both turning smooth and featureless, before its cock slowly recedes back into its body.  The slime slowly begins to retreat as you return to your senses, looking down at your hands covered in the creature's green fluids.  When you look up again the creature is gone.\n", false);
+		outputText("The throbbing of the slime's " + monster.cockDescriptShort(0) + " continues to grow stronger until the creature surprises you by reforming its arms and reaching up to grab you as you grasp him, holding your hands at the tip of its cock.  A fraction of a moment later the thing visibly arches its back off the ground and erupts into your palm, a thick jet of its green fluid splashing fiercely against your hands and spilling down the length of its penis, soaking both of your hands and even splashing onto your nearby lap.  You watch the creature's face with a mixture of shock and a sudden surge of excitement, its erection and face both turning smooth and featureless, before its cock slowly recedes back into its body.  The slime slowly begins to retreat as you return to your senses, looking down at your hands covered in the creature's green fluids.  When you look up again the creature is gone.\n", false);
 	}
 	player.slimeFeed();
 	dynStats("sen", 2);
@@ -52,7 +52,7 @@ private function serviceLowCorruptionHighLust():void
 	//If player has a cunny
 	if(player.vaginas.length > 0)
 	{
-		outputText("As you rub the creature's shaft you toy with the idea of inserting the thing into your " + vaginaDescript(0) + ", biting your lip slightly and sliding forward a bit to rub yourself against the slime's " + eCockDescript(0) + ".  You moan a bit and lose yourself for a moment, caught between desire ", false);
+		outputText("As you rub the creature's shaft you toy with the idea of inserting the thing into your " + vaginaDescript(0) + ", biting your lip slightly and sliding forward a bit to rub yourself against the slime's " + monster.cockDescriptShort(0) + ".  You moan a bit and lose yourself for a moment, caught between desire ", false);
 		//Non virgin's are sluts!
 		if(!player.vaginas[0].virgin) outputText("for that familiar full feeling ", false);
 		outputText("and paranoid about allowing this creature inside of you.", false);
@@ -169,7 +169,7 @@ private function serviceLowCorruptionHighLust():void
 			//New paragraph for orgazms.
 			outputText("\n\n",false);
 			//Female cum!
-			outputText("Finally, you feel a tsunami of pleasure begin to wash over you as you orgasm, and as your entire body shakes you unconsciously try to squeeze the creature between your legs.  It pulls back slightly and with a final mighty pulse, a green fluid explodes from the tip of its " + eCockDescript(0) + ", splashing over your entire body.  Everywhere it touches seems to catch fire with pleasure and your already reeling mind almost collapses, and you let yourself fall back against the slime's body as wave after wave of pleasure flows through you.  ", false);
+			outputText("Finally, you feel a tsunami of pleasure begin to wash over you as you orgasm, and as your entire body shakes you unconsciously try to squeeze the creature between your legs.  It pulls back slightly and with a final mighty pulse, a green fluid explodes from the tip of its " + monster.cockDescriptShort(0) + ", splashing over your entire body.  Everywhere it touches seems to catch fire with pleasure and your already reeling mind almost collapses, and you let yourself fall back against the slime's body as wave after wave of pleasure flows through you.  ", false);
 			//Herm bonus cum!
 			if (player.cockTotal() > 0)
 			{
@@ -794,7 +794,7 @@ internal function rapeOozeWithMilk():void {
 		{
 			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
-			doNext(1);
+			doNext(playerMenu);
 			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
 				temp = rand(3);
 				if (temp == 0) oozeRapesYouVaginally();

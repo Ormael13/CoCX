@@ -10,7 +10,7 @@ public function poniesYN():Boolean {
 		clearOutput();
 		outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n", false);
 		//(option: Approach? Leave them Be?)
-		simpleChoices("Approach",approachPonies,"",0,"",0,"",0,"Leave",leavePonies);
+		simpleChoices("Approach",approachPonies,"",null,"",null,"",null,"Leave",leavePonies);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00118]++;
 		return true;
 	}
@@ -47,7 +47,7 @@ public function approachPonies():void {
 	//Option one: Leave Politely
 	//Option Two: Too creepy...
 	//Option three: Yay, party?
-	simpleChoices("Too creepy",derpCreepy,"Yay Party!",derpyParty,"",0,"",0,"Leave",derpPolitely);
+	simpleChoices("Too creepy",derpCreepy,"Yay Party!",derpyParty,"",null,"",null,"Leave",derpPolitely);
 }
 
 public function derpPolitely():void {
@@ -82,7 +82,7 @@ public function DLCPrompt(dlcName:String, dlcPitch:String, dlcPrice:String, next
 	menu();
 	addButton(0, "Yes", buyDLCPrompt, dlcName, dlcPrice, nextFunc);
 	if (nextFunc != null) addButton(1, "No", nextFunc);
-	else addButton(1, "No", camp.campMenu);
+	else addButton(1, "No", playerMenu);
 }
 private function buyDLCPrompt(dlcName:String, dlcPrice:String, nextFunc:Function = null):void {
 	clearOutput();
@@ -108,7 +108,7 @@ private function reallyCheckout():void {
 	outputText(images.showImage("monster-troll"));
 	outputText("APRIL FOOLS! The game will ALWAYS be entirely free to play. :)");
 	flags[kFLAGS.DLC_APRIL_FOOLS] = 1;
-	doNext(camp.campMenu);
+	doNext(playerMenu);
 }
 
 /*Notes:

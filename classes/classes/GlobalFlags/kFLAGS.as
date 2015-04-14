@@ -423,7 +423,7 @@ public static const BOOBGARTUAN_SURPRISE_COUNT:int                              
 public static const GOTTEN_INQUISITOR_ARMOR:int                                     =  415; // 
 public static const DOMINIKAS_SWORD_GIVEN:int                                       =  416; // 
 public static const HEL_FOXY_FOURSOME_WARNED:int                                    =  417; // 
-public static const UNKNOWN_FLAG_NUMBER_00418:int                                   =  418; // HISTORY PERK SET - tail, fur, or scales.	0=Nothing
+public static const HISTORY_PERK_SELECTED:int                                       =  418; // HISTORY PERK SET - tail, fur, or scales.	0=Nothing
 public static const AMILY_TIMES_BUTTFUCKED_PC:int                                   =  419; // 
 public static const TIMES_FUCKED_AMILYBUTT:int                                      =  420; // 
 public static const KIHA_AFFECTION_LEVEL:int                                        =  421; // 
@@ -764,7 +764,7 @@ public static const SOPHIE_FOLLOWER_PROGRESS:int                                
 public static const KID_A_XP:int                                                    =  756; // 
 public static const KID_SITTER:int                                                  =  757; // 0 = no sitter, 1 = possible, 2 = doing dat shit
 public static const HAD_KID_A_DREAM:int                                             =  758; // 
-public static const CUSTOM_PC_ENABLED:int                                           =  759; // 
+public static const CUSTOM_PC_ENABLED:int                                           =  759; //No longer in use
 public static const SHEILA_CORRUPTION:int                                           =  760; // 
 public static const SHEILA_XP:int                                                   =  761; // 
 public static const SHEILA_PREGNANCY_INCUBATION:int                                 =  762; //Previously SHEILA_PREG
@@ -1264,9 +1264,9 @@ public static const BEE_GIRL_COMBAT_WINS_WITH_RAPE:int                          
 public static const BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE:int                           = 1256;
 public static const BEE_GIRL_COMBAT_LOSSES:int                                      = 1257;
 public static const KATHERINE_MILK_OPTIONS:int                                      = 1258;
-public static const BASILISK_RESISTANCE_TRACKER:int                                 = 1259;
-public static const MINOTAUR_CUM_RESISTANCE_TRACKER:int                             = 1260;
-public static const DLC_APRIL_FOOLS:int                                             = 1261; //1 if trolled with DLC
+public static const SCYLLA_FURRY_FOURSOME_COUNT:int                                 = 1259;
+public static const UNKNOWN_FLAG_NUMBER_01260:int                                   = 1260;
+public static const UNKNOWN_FLAG_NUMBER_01261:int                                   = 1261;
 public static const UNKNOWN_FLAG_NUMBER_01262:int                                   = 1262;
 public static const UNKNOWN_FLAG_NUMBER_01263:int                                   = 1263;
 public static const UNKNOWN_FLAG_NUMBER_01264:int                                   = 1264;
@@ -2213,9 +2213,9 @@ public static const GOBLINS_KILLED:int                                          
 public static const MINOTAURS_KILLED:int                                            = 2205;
 public static const TIMES_SLEPT_WITH_EMBER:int                                      = 2206;
 public static const EMBER_MORNING:int                                               = 2207;
-public static const UNKNOWN_FLAG_NUMBER_02208:int                                   = 2208;
-public static const UNKNOWN_FLAG_NUMBER_02209:int                                   = 2209;
-public static const UNKNOWN_FLAG_NUMBER_02210:int                                   = 2210;
+public static const BASILISK_RESISTANCE_TRACKER:int                                 = 2208;
+public static const MINOTAUR_CUM_RESISTANCE_TRACKER:int                             = 2209;
+public static const DLC_APRIL_FOOLS:int                                             = 2210;
 public static const UNKNOWN_FLAG_NUMBER_02211:int                                   = 2211;
 public static const UNKNOWN_FLAG_NUMBER_02212:int                                   = 2212;
 public static const UNKNOWN_FLAG_NUMBER_02213:int                                   = 2213;

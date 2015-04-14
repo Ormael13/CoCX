@@ -25,13 +25,12 @@ package classes.Scenes.Areas.Swamp
 				outputText("A moment later, he flips down onto his feet and advances, touching his half-hard, foreskin-shrouded cock.  Judging from the glint in his eyes, he plans to force himself upon you!", false);
 				//- auto fight
 				startCombat(new MaleSpiderMorph());
-				doNext(1);
 			}
 			//NICE GUY MODE: 
 			else {
 				outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"", false);
 				//[Fight] [Talk] [Leave]
-				simpleChoices("Fight", fightSpiderBoy, "Talk", talkToSpiderBoy, "", 0, "", 0, "Leave", camp.returnToCampUseOneHour);
+				simpleChoices("Fight", fightSpiderBoy, "Talk", talkToSpiderBoy, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
@@ -41,8 +40,8 @@ package classes.Scenes.Areas.Swamp
 		
 		private function fightSpiderBoy():void {
 			startCombat(new MaleSpiderMorph());
-			eventParser(1);
 			spriteSelect(74);
+			playerMenu();
 		}
 
 //Talk
@@ -128,9 +127,9 @@ package classes.Scenes.Areas.Swamp
 			outputText("You grab his balls and caress them in one hand while you take off your equipment with the other.  The hapless victim starts to relax from the attentions, and pre-cum begins to leak from inside his foreskin ", false);
 			if (monster.lust <= 99) outputText("after he starts touching himself.", false);
 			else outputText("while he fondles and caresses the sensitive flesh.", false);
-			outputText("  Meanwhile, you grab " + oMultiCockDesc() + " and line it up with the spider-boy's twitching rectum, rubbing the " + cockHead(x) + " over the tight little hole while you wait for it to slowly loosen.  A fresh dollop of pre-cream bubbles out of his cum-frothing foreskin in response, letting you know that in spite of his protests, your reluctant lover's body loves the anal stimulation.\n\n", false);
+			outputText("  Meanwhile, you grab " + oMultiCockDesc() + " and line it up with the spider-boy's twitching rectum, rubbing the " + player.cockHead(x) + " over the tight little hole while you wait for it to slowly loosen.  A fresh dollop of pre-cream bubbles out of his cum-frothing foreskin in response, letting you know that in spite of his protests, your reluctant lover's body loves the anal stimulation.\n\n", false);
 
-			outputText("After a little more gentle pressure and a few more gentle caresses of his testicles, the defeated male finally relaxes enough for you to put the first inch inside him.  His tunnel is so hot that it feels like your " + cockDescript(x) + " is going to melt inside his sweltering embrace, and much worse, his sphincter clamps down hard enough to trap your " + cockHead(x) + " inside his toasty tail-hole.  Holding tightly to his ass and balls, you yank your clenching, anal slut down hard, forcing him to stretch while the rest of your " + cockDescript(x) + " burrows deep inside him", false);
+			outputText("After a little more gentle pressure and a few more gentle caresses of his testicles, the defeated male finally relaxes enough for you to put the first inch inside him.  His tunnel is so hot that it feels like your " + cockDescript(x) + " is going to melt inside his sweltering embrace, and much worse, his sphincter clamps down hard enough to trap your " + player.cockHead(x) + " inside his toasty tail-hole.  Holding tightly to his ass and balls, you yank your clenching, anal slut down hard, forcing him to stretch while the rest of your " + cockDescript(x) + " burrows deep inside him", false);
 			if (player.cockTotal() > 1) {
 				outputText(", your other penis", false);
 				if (player.cockTotal() == 2) outputText(" resting atop the small of his back", false);
@@ -184,7 +183,7 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("Trapped below your sizable weight, the turgid spider-shaft slowly leaks pre-cum from its tiny cum-slit.  The added moisture proves to be just the lubrication you needed, and you begin to sway your body back and forth, letting your incredible endowment rub over the spider's balls, flat chest, and fat little pecker.  Each time you let it get a little closer to his face, but as his pre-cum lubricates more and more of your mighty member, you stop measuring your strokes so modestly.\n\n", false);
 
-			outputText("You hump forward and smash your " + cockHead(0) + " against the spider-boy's face, popping a bubble of pre-cum on his lips before you pull back far enough to reveal the soaked foreskin that hides his cock-tip.  He's probably filled the entirety of that little flesh-balloon with his leavings, and as you slide back up you feel more of his pre-cum bursting out, confirming your suspicions.  A pair of hard, chitinous arms encircle your " + cockDescript(0) + " in a tight hug, squeezing into a slippery pleasure-vice for your penis.\n\n", false);
+			outputText("You hump forward and smash your " + player.cockHead() + " against the spider-boy's face, popping a bubble of pre-cum on his lips before you pull back far enough to reveal the soaked foreskin that hides his cock-tip.  He's probably filled the entirety of that little flesh-balloon with his leavings, and as you slide back up you feel more of his pre-cum bursting out, confirming your suspicions.  A pair of hard, chitinous arms encircle your " + cockDescript(0) + " in a tight hug, squeezing into a slippery pleasure-vice for your penis.\n\n", false);
 
 			outputText("The enthusiastic spider-bitch looks up at you with a twinkle in his purple eyes, and the next time you push forward, he bites your cock-tip.  You scream in surprise and pain, throwing your head back and howling from the abuse of your most tender part.  Before you can finish your scream, the pain vanishes, replaced by a heat and... need - a warm command that rolls through your body to your brain and balls, ordering them to cum over and over until every drop of spooge has been spilled.  With newfound desire coursing through you, you glare down at the bitch.  He rapidly retracts his fangs and gives you a long, apologetic lick that somehow feels almost as good as fucking a tight pussy.\n\n", false);
 

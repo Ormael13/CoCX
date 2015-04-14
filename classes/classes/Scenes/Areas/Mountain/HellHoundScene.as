@@ -32,7 +32,6 @@ package classes.Scenes.Areas.Mountain
 				flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
 			}
-			doNext(1);
 			startCombat(new HellHound());
 			spriteSelect(27);
 		}
@@ -40,11 +39,7 @@ package classes.Scenes.Areas.Mountain
 
 		public function hellhoundRapesPlayer():void
 		{
-			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
-				clearOutput();
-				cleanupAfterCombat();
-				return;
-			}
+			if (doSFWloss()) return; //No rape in SFW mode.
 			//Lust or HP loss texts here
 			if (player.lust >= player.maxLust()) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n", true);
 			else outputText("Too weak to continue fighting, you fall to your knees.\n\n", true);
@@ -186,7 +181,7 @@ package classes.Scenes.Areas.Mountain
 			outputText("You barely spare a thought at the interior in your hurry to get to the master.  As you burst into the room, the master's eyes light up at the sight of you.  \"<i>Ah!  It is my favorite fan.  Have you brought me a piece of that pink crystal I asked you for?</i>\"\n\n", false);
 
 			//Player chooses to either give Merae's full Lethicite, or a regular piece of Lethicite.  Limited by what they have, of course.  They cannot choose to leave at this point.  Merae's Lethicite -> G, Regular Lethicite -> H.
-			if (player.keyItemv2("Marae's Lethicite") == 0) simpleChoices("Give All", giveALLTHELETHICITES, "Give Part", giveLethicitePiece, "", 0, "", 0, "", 0);
+			if (player.keyItemv2("Marae's Lethicite") == 0) simpleChoices("Give All", giveALLTHELETHICITES, "Give Part", giveLethicitePiece, "", null, "", null, "", null);
 			else doNext(giveLethicitePiece);
 		}
 
@@ -300,7 +295,8 @@ package classes.Scenes.Areas.Mountain
 
 			outputText("A powerful demon steps out in front of you, and picks up the crystal.  You can feel a strong connection with him, and you know this is your master.  \"<i>Well now, I think you need a new name now in commemoration of being the first three headed hellhound, and for being the one who will give me the world.</i>\"  He unceremoniously puts the crystal in his mouth and swallows it.  \"<i>Your new name is Cerberus, and you're my greatest pet.</i>\"  He steps closer and looks into your center head's eyes for a moment.  \"<i>That's much better then being a champion ever was, isn't it?</i>\"  You can't help but eagerly nod in agreement.", false);
 
-			doBadEnd();
+			getGame().gameOver();
+
 		}
 
 		public function hellHoundPropahRape():void
@@ -326,7 +322,7 @@ package classes.Scenes.Areas.Mountain
 				player.buttChange(monster.cockArea(1), true, false, true);
 				// --- CORRUPTION < 40 (and not masocistic - I lost track if there is such a perk) ---
 				if (player.cor < 40 && player.findPerk(PerkLib.Masochist) < 0) {
-					outputText("As you bottom out on his sheath, you lean forward to engulf more of his hot cocks inside you. The hellhound enjoys the treatment you are giving him. As a result, the flames along his eyes and snout flicker back to life. Just as your hardening clit presses against the top of his ballsack, the hellhound's natural flames lick across your sex. The magical fire fills you with arousal, but also applies intense pain to your most sensitive spot. You practically jump off the corrupt creature, pulling the dicks from your holes in great speed. Nearly blacking out from the sensations, you cover your burnt button, not daring to touch it. You curse the creature, loudly swearing at the hellhound. In your fury, you barely notice that he looks disappointed and maybe even somewhat sorry.\n\n", false);
+					outputText("As you bottom out on his sheath, you lean forward to engulf more of his hot cocks inside you. The hellhound enjoys the treatment you are giving him. As a result, the flames along his eyes and snout flicker back to life. Just as your hardening clit presses against the top of his ballsack, the hellhound's natural flames lick across your sex. The magical fire fills you with arousal, but also applies intense pain to your most sensitive spot. You practically jump off the corrupt creature, pulling the dicks from your holes in great speed. Nearly blacking out from the sensations, you cover your burnt button, not daring to touch it. You curse the creature, loudly swearing at the hellhound. In your fury, you barely notice that he looks disappointed and maybe even somewhat sorry.", false);
 					player.takeDamage(20);
 					dynStats("lus", -99);
 					//--> deals 20dmg (lowering hp to a minimum of 1), introduces inability to masturbate

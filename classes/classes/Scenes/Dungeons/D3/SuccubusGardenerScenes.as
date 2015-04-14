@@ -167,7 +167,7 @@
 
 					outputText("\n\nSometime later, you come to in between orgasms, surrounded in green, but there is so much sensory data coming from your crotch that your eyes might as well be blind by comparison. You marvel at this new life and wonder if you'll ever tire of admiring the texture of these walls. The next orgasm blasts those thoughts away, answering the question for you. Raw, unfiltered pleasure. That's what matters to you now.");
 
-					doBadEnd();
+					getGame().gameOver();
 				}
 			}
 		}
@@ -177,7 +177,7 @@
 			clearOutput();
 			outputText("\n\nYou're held captive, overwhelmed by your own senses, and brought to nirvana ceaselessly. The demons never even try to free your fate, held captive as you are by one of the eldest tentacle beasts. You spend the rest of your life feeding it, incapable of focusing on anything but your own feelings of ecstasy.");
 			
-			doBadEnd();
+			getGame().gameOver();
 		}
 
 		private function endHer():void
@@ -253,7 +253,7 @@
 			else outputText(" You cast a worried look towards the writhing vines. They seem so eager, yet they hold back for now, perhaps waiting for their mistress to finish. No... you can't go down like this!");
 			
 			outputText("\n\nGently removing your [armor] a piece at a time, the succubus coos, <i>\"Are you looking forward to it yet, [name]? Being wholly, totally embraced, every hole filled with pulsing, eager lengths?\"</i> She strokes your cheek in a gesture that you would mistake for affection from anyone but a demon.");
-			if (player.hasVagina()) outputText(" Against your better judgement, you're starting to get wet from the promises of her words. You know you're being given to a neverending hell of sexual stimulation, but you can't stop your body's libido from responding to the idea.");
+			if (player.hasVagina()) outputText(" Against your better judgment, you're starting to get wet from the promises of her words. You know you're being given to a neverending hell of sexual stimulation, but you can't stop your body's libido from responding to the idea.");
 			outputText(" <i>\"Yeah, you want it, doncha?\"</i> Slim fingers deftly press at your");
 			if (!player.hasVagina())
 			{
@@ -344,7 +344,7 @@
 			
 			outputText("\n\nAnother, larger tentacle takes its place, sealing most of the first's load inside. There's no waiting, only fucking and climbing to one orgasm after another. The space between climaxes narrows with each one until your world becomes a constant, irresistible tide of bliss.");
 			
-			doBadEnd();
+			getGame().gameOver();
 		}
 		
 		private function maleLoss(hpVictory:Boolean):void
@@ -527,7 +527,7 @@
 		{
 			clearOutput();
 			outputText("The champion, more canine than [man], became little more than one mutt among many that the demons had tamed, used for everything from breeding to hunting escaped slaves, and " + player.mf("he","she") + " loved it, delighted in it even. Eventually, " + player.mf("his","her") + " owner bred her numerous times, creating a bloodline of strong, loyal servants that eventually helped keep all of Mareth under the demon's heels.");
-			doBadEnd();
+			getGame().gameOver();
 		}
 		
 		private function maleLossFeeder():void
@@ -655,7 +655,7 @@
 
 			outputText("\n\nYou never want to leave. In fact, you never want again.");
 
-			doBadEnd();
+			getGame().gameOver();
 		}		
 	}
 }

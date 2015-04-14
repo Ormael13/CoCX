@@ -28,9 +28,10 @@ public var date:Date = new Date();
 public var modSaveVersion:Number = 7;
 public var levelCap:Number = 100;
 
-//dungeoneering variables
-public var inDungeon:Boolean = false;
-public var dungeonLoc:Number = 0;
+//dungeoneering variables (If it ain't broke, don't fix it)
+//Setting dungeonLoc = 0 handles this:	
+public var inDungeon:Boolean = false; //Re-enabled for sake.
+public var dungeonLoc:int = 0;
 
 // To save shitting up a lot of code...
 public var inRoomedDungeon:Boolean = false;
@@ -46,7 +47,8 @@ public var tooltipLoc:String = "";
 
 //Possibly redundant, not used anywhere else.
 //Input vars
-/*public var button0Choice:Number = 0;
+/* Yup, not used at all
+public var button0Choice:Number = 0;
 public var button1Choice:Number = 0;
 public var button2Choice:Number = 0;
 public var button3Choice:Number = 0;

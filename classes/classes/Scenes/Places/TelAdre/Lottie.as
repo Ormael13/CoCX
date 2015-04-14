@@ -158,7 +158,7 @@ public function encounterLottie(charge:Boolean = false):void {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] == 0 && (player.isNaga() || player.isTaur() || player.tone < 50)) {
 			outputText("\"<i>Hey, " + player.short + "! I...I'm really glad I talked about myself with you, you're a really great friend, y'know. I really think I can achieve something this time, if I work hard!</i>\" You smile and tell her how glad you are that she's doing this. Lottie responds with a delighted expression, and continues to talk. \"<i>Anyway, I've been trying to look for a personal trainer, but it's kinda difficult, heh. I mean... I'm sure there's lots of trainers here and all, but I – I'd prefer someone I know personally, right?</i>\" She looks up at you expectantly, but then looks back towards the floor. </i>\"But I guess we can't always have what we want.</i>\"\n\n", false);
 			//(Note: No options but 'leave' are available until you meet requirements.)
-			simpleChoices("",0,"",0,"",0,"",0,"Leave",telAdre.gymDesc);
+			simpleChoices("", null, "", null, "", null, "", null, "Leave", telAdre.gymDesc);
 			return;
 		}
 		//[Normal Encounter, If became met requirements]
@@ -183,7 +183,7 @@ public function encounterLottie(charge:Boolean = false):void {
 		else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] == 4 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298] == 0) {
 			outputText("\"<i>Hey, " + player.short + ", it's nice to see you again. Um, I... I have this thing I gotta ask you, if you don't mind.</i>\" You look up at Lottie, your curiosity piqued. \"<i>Well, uh! I was at the bar last night, and this lady told me, uh... y'see, there's this, um, this technique. There's a technique. A technique for sex.</i>\" You smile at her obvious embarrassment while her face turns a brighter pink than usual. You're not denying that a girl like Lottie might've had some experience in the sex department, but she's clearly uncomfortable with the issue. Still, she presses on. \"<i>I just heard that, well, this sex technique, it helps you lose weight, y'know? And I was thinkin', what with all the exercise we're doing... what about sex?</i>\" Lottie leans forward, crushing her breasts against the table while she tries to stare an answer out of you. Her awkward forwardness is cute, if anything. Do you take her up on the offer, or is it easier just to be exercise buddies?", false);
 			//[Sex][Buddies]
-			simpleChoices("Sex",fourthMeetingChooseSexWithLottie,"Buddies",stayLottieBuds4Evah,"",0,"",0,"",0);
+			simpleChoices("Sex", fourthMeetingChooseSexWithLottie, "Buddies", stayLottieBuds4Evah, "", null, "", null, "", null);
 			return;
 		}
 		//[Encouragement moved from 31 to 30, first time]
@@ -292,7 +292,7 @@ private function fourthMeetingChooseSexWithLottie():void {
 	outputText("You tell Lottie you've decided you're going to take her for a vigorous work out. She can only pant with anticipation.\n\n", false);
 	//[Oral][Anal] – [After scenes, options for 'sex' and 'give item' are opened up.]
 	//Use same as other first time sex I presume
-	simpleChoices("Oral",getSuckedOffByAHamSandwich,"Anal",analLottieMilkshake,"",0,"",0,"",0);
+	simpleChoices("Oral", getSuckedOffByAHamSandwich, "Anal", analLottieMilkshake, "", null, "", null, "", null);
 }
 
 //[Buddies]
@@ -329,7 +329,7 @@ private function acceptBeingLottiesHamSandwich():void {
 	outputText("<b>...</b>\n", false);
 	outputText("An hour later, both you and Lottie are running along the track. She's clearly focused on matching your speed, but after a few minutes she tires herself out and begins to lightly jog. You pull back and wait for her to catch up to you and then power walk with her for the next lap or so, making light conversation when possible. After another lap, you both decide to take a break, Lottie bouncing happily at her progress today. You sit down on the bench and reach over to one of the cups of water you poured out for yourself and Lottie, when you spy another cup filled with a pink, bubbly liquid. The color itself isn't all that enticing, but your curiosity is piqued nonetheless. Is it an energy drink? You pick the cup with your free hand and smell its contents. It has a sweet, intoxicating scent similar to strawberries, or bubblegum. Immediately you begin to feel dizzy. You know this isn't any ordinary protein shake. You look back at your water. You're really thirsty... do you play it safe with the water, or take the enticingly peculiar shake?", false);
 	//[Water][Shake]
-	simpleChoices("Water",drinkWaterWithYourHamhock,"Shake",drinkLustWithYourHamhock,"",0,"",0,"",0);
+	simpleChoices("Water", drinkWaterWithYourHamhock, "Shake", drinkLustWithYourHamhock, "", null, "", null, "", null);
 }
 
 //Followups to this: outputText("\"<i>Hey, " + player.short + "! I was just... I...</i>\"Lottie seems to be at a loss of words, gaping at your new, chiselled physique. You smile and tell her how glad you are that she's doing this, thought it's a shame she hasn't found a personal trainer yet. Lottie responds with a hazy expression and an open mouth. \"<i>Y-yeah... it's a shame...</i>\" She begins, until snapping out of her daze and looking up excitedly at you. \"<i>I- Y'know, I don't know what you've been doing to yourself lately, but... you look a... you're really amazing right now, " + player.mf("big guy","babe") + "!</i>\" She squeals as you flex at her, giggling at your blatant attempts at showing off. You never really took her as one to appreciate muscles, but you figure her obsession towards the perfect body might extend to other people as well. You take one stern look at the chubby porcine in front of you and grin, asking if she wants you to be her personal trainer. She seems shocked at your proposal. </i>\"Are... are you serious?</i>\"\n\n", false);
@@ -367,7 +367,7 @@ private function gotInShapeAcceptTrainingOffer():void {
 	outputText("...\n\n", false);
 	outputText("A half-hour later, both you and Lottie are running along the track. She's clearly focused on matching your speed, but after a few minutes she tires herself out and begins to jog. You pull back and wait for her to catch up to you and then power walk with her for the next lap or so, making light conversation when possible. After another lap, you both decide to take a break, Lottie bouncing happily at her progress today. You sit down on the bench and reach over to one of the cups of water you poured out for yourself and Lottie when you spot another cup filled with a pink, bubbly liquid. The color itself isn't all that enticing, but your curiosity is piqued nonetheless. Is it an energy drink? You pick the cup up with your free hand and smell its contents. It has a sweet, intoxicating scent similar to strawberries, or bubblegum. You immediately begin to feel dizzy. You know this isn't any ordinary protein shake. You look back at your water. You're really thirsty... do you play it safe with the water, or take the enticingly peculiar shake?", false);
 	//[Water][Shake]
-	simpleChoices("Water",drinkWaterWithYourHamhock,"Shake",drinkLustWithYourHamhock,"",0,"",0,"",0);
+	simpleChoices("Water", drinkWaterWithYourHamhock, "Shake", drinkLustWithYourHamhock, "", null, "", null, "", null);
 	//[Both options are the same as the initial encounter ones]
 }
 
@@ -402,7 +402,7 @@ private function drinkLustWithYourHamhock():void {
 	dynStats("lus", 99);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
 	//[Oral][Anal]
-	simpleChoices("Oral",getSuckedOffByAHamSandwich,"Anal",analLottieMilkshake,"",0,"",0,"",0);
+	simpleChoices("Oral", getSuckedOffByAHamSandwich, "Anal", analLottieMilkshake, "", null, "", null, "", null);
 }
 
 //[If Anal]
@@ -628,62 +628,62 @@ private function talkToPigSlut():void {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00306] = 2;
 		outputText("Her ears perk up at your eagerness to talk, but you can tell she's otherwise gloomy. You ask her what's wrong. \"<i>That obvious, huh?</i>\" Lottie looks down onto the table.  \"<i>Y'see, " + player.mf("big guy","babe") + ", ever since I... you know, I've actually - I've gained weight!</i>\"  She stands up, her chubby cheeks puffed out in frustration. \"<i>I mean, i-it's not like I didn't enjoy it or anything, but... it seems to be having the opposite effect of what I want!</i>\" She's clearly annoyed, but you place your hand on her shoulder. Do you encourage her, or is it her own fault?", false);
 		//[Encourage][Abuse]
-		simpleChoices("Encourage",firstOralReactionChooseEncourage,"Abuse",firstOralReactionChooseAbuse,"",0,"",0,"",0);
+		simpleChoices("Encourage", firstOralReactionChooseEncourage, "Abuse", firstOralReactionChooseAbuse, "", null, "", null, "", null);
 	}
 	//[If 1st Time Anal]
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00307] == 1) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00307] = 2;
 		outputText("Her ears perk up at your eagerness to talk, she seems to be pretty excited about something. You ask her what's on her mind. \"<i>That obvious, huh?</i>\" Lottie looks up at you and grins.  \"<i>Y'see, " + player.mf("big guy","babe") + ", ever since we... you know, I've actually – I've lost weight!</i>\" She stands up, pumping her fist in the air and wiggling her plump ass. \"<i>I mean, I know it's not a big difference, but it's still a result! This is amazing!</i>\" She's clearly pleased with herself. You place a hand on her shoulder, and she beams at you. Do you encourage her, or break the bad news?", false);
 		//[Encourage][Abuse]
-		simpleChoices("Encourage",firstAnalReactionChooseEncourage,"Abuse",firstAnalReactionChooseAbuse,"",0,"",0,"",0);
+		simpleChoices("Encourage", firstAnalReactionChooseEncourage, "Abuse", firstAnalReactionChooseAbuse, "", null, "", null, "", null);
 	}
 	//FATNESS
 	//[If Gained Weight since Last Encounter, Encouragement 0 - 30]
 	else if(lottieMorale() <= 30 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] - 5 > lottieTone()) {
 		outputText("You tell her you want to talk, though the girl only winces in response, shying away from your stern gaze. The nervous pig-slut knows from experience how most of your 'talks' usually end – with a sobbing, miserable little piggy.  In the sweetest voice you can muster, you ask her how your favorite girl is doing. Lottie hesitates before facing you again – you know she hates it when you use that voice, and she definitely seems to be hiding something now. You tell her to spill what's on her mind.  \"<i>W-well, you see...</i>\" Lottie squeaks, fumbling her fingers as she gathers the courage to speak up.  \"<i>Y'see, " + player.mf("sir","ma'am") + ", since we last m-met, I've actually – I've actually...</i>\" She mumbles the rest of the sentence, but you demand her to repeat it. \"<i>... I've gained w-weight.</i>\" The girl immediately flinches, expecting a backlash from you at any moment. Before long, she slowly raises her head to find you staring. You grab her by the chin, the girl moaning at your touch. Do you congratulate her, or break the bad news?", false);
 		//[Encourage][Abuse]
-		simpleChoices("Encourage",lottieLowMoraleWeightGainEncourage,"Abuse",lottieLowMorealeWeightGainAbuse,"",0,"",0,"",0);
+		simpleChoices("Encourage", lottieLowMoraleWeightGainEncourage, "Abuse", lottieLowMorealeWeightGainAbuse, "", null, "", null, "", null);
 	}
 	//[If Gained Weight since Last Encounter, Encouragement 30 - 70]
 	else if(lottieMorale() <= 70 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] - 5 > lottieTone()) {
 		outputText("Her ears perk up at your eagerness to talk, but you can tell she's otherwise gloomy. You ask her what's wrong. \"<i>That obvious, huh?</i>\" Lottie looks down onto the table.  \"<i>Y'see, " + player.mf("big guy","babe") + ", ever since we last met, I've actually - I've gained weight!</i>\" She stands up, her chubby cheeks puffed out in frustration. \"<i>I mean, i-it's not like I'm angry at you or anything, but... I'm just a little frustrated, that's all.</i>\" She's clearly more than a little frustrated, but you place your hand on her shoulder. Do you encourage her, or is it her own fault?", false);
 		//[Encourage][Abuse]
-		simpleChoices("Encourage",lottieMediumMoraleWeightGainEncourage,"Abuse",lottieMediumMorealeWeightGainAbuse,"",0,"",0,"",0);
+		simpleChoices("Encourage", lottieMediumMoraleWeightGainEncourage, "Abuse", lottieMediumMorealeWeightGainAbuse, "", null, "", null, "", null);
 	}
 	//[If Gained Weight since Last Encounter, Encouragement 70 – 100, convinced 'Bigger is Better']
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] - 5 > lottieTone() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00297] == 1) {
 		outputText("Her ears perk up at your eagerness to talk, though she seems rather distracted by something. You ask her what's wrong. \"<i>Oh babe, it's really nothing...</i>\" Lottie looks up and smiles, but your questioning gaze earns another answer. \"<i>Dang, y'see " + player.mf("big guy","babe") + ", ever since we last met, I've gone ahead and gained a bit more weight...</i>\" She remains in her chair, resting her face between her arms, though her chubby cheeks remain puffed out in frustration. \"<i>I mean, I love my body and I love you, but... it gets to me sometimes, y'know?</i>\" She's clearly more than a little frustrated, but you place your hand on her shoulder, rubbing it gently. Do you encourage her, or is it her own fault?", false);
 		//[Encourage][Abuse]
-		simpleChoices("Encourage",lottieHighMoraleWeightGainFATTYLOVESIT,"Abuse",lottieHighMoraleWeightGainFATTYLOVESABUSE,"",0,"",0,"",0);
+		simpleChoices("Encourage", lottieHighMoraleWeightGainFATTYLOVESIT, "Abuse", lottieHighMoraleWeightGainFATTYLOVESABUSE, "", null, "", null, "", null);
 	}
 	//[If Gained Weight since Last Encounter, Encouragement 70 - 100]
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] - 5 > lottieTone()) {
 		outputText("Her ears perk up at your eagerness to talk, though she seems rather distracted by something. You ask her what's wrong. \"<i>Oh babe, it's really nothing...</i>\" Lottie looks up and smiles, but your questioning gaze earns another answer. \"<i>Dang, well, y'see " + player.mf("big guy","babe") + ", ever since we last met, I've gone ahead and gained weight!</i>\" She stands up, her chubby cheeks puffed out in frustration. \"<i>I mean, i-it's not like I'm angry at you or anything, but... I'm just a little frustrated, that's all.</i>\" She's clearly more than a little frustrated, but you place your hand on her shoulder. Do you encourage her, or is it her own fault?", false);
 		//[Encourage][Abuse]
-		simpleChoices("Encourage",lottieHighMoraleWeightGainEncourage,"Abuse",lottieHighMoraleWeightGainAbuse,"",0,"",0,"",0);
+		simpleChoices("Encourage", lottieHighMoraleWeightGainEncourage, "Abuse", lottieHighMoraleWeightGainAbuse, "", null, "", null, "", null);
 	}
 	//DEFATNESS
 	//[If Lost Weight since Last Encounter, Encouragement 0 - 30]
 	else if(lottieMorale() <= 30 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] < lottieTone() - 5) {
 		outputText("You tell her you want to talk, though the girl only winces in response, shying away from your stern gaze. The nervous pig-slut knows from experience how most of your 'talks' usually end – with a sobbing, miserable little piggy.  In the sweetest voice you can muster you ask her how your favorite girl is doing. Lottie hesitates before facing you again – you know she hates it when you use that voice, but she also seems to be vaguely excited about something. You tell her to spill what's on her mind. \"<i>W-well, you see...</i>\" Lottie looks up at you and manages the tiniest smile. \"<i>Y'see, " + player.mf("sir","ma'am") + ", since we last m-met, I've actually – I've lost weight!</i>\" Her minute expression turns into a full blown grin, though immediately fades as soon as she realises what she's done. \"<i>No, I'm – I'm sorry, I didn't... I got ahead of myself again, I was being stupid, I was-</i>\"  You cut her off by placing a finger to her lips. She moans at your touch, though squeals at your intention. Do you congratulate her, or break the bad news?", false);
 		//[Encourage][Abuse]
-		simpleChoices("Encourage",lottieLowMoraleWeightLossEncourage,"Abuse",lottieLowMoraleWeightLossAbuse,"",0,"",0,"",0);
+		simpleChoices("Encourage", lottieLowMoraleWeightLossEncourage, "Abuse", lottieLowMoraleWeightLossAbuse, "", null, "", null, "", null);
 	}
 	//[If Lost Weight since Last Encounter, Encouragement 30 - 70]
 	else if(lottieMorale() <= 70 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] < lottieTone() - 5) {
 		outputText("Her ears perk up at your eagerness to talk; she seems to be pretty excited about something. You ask her what's on her mind.  \"<i>That obvious, huh?</i>\" Lottie looks up at you and grins. \"<i>Y'see babe, since the last time we met, I've actually – I've lost weight!</i>\" She stands up, pumping her fist in the air and wiggling her plump ass. \"<i>I mean, I know it's not a big difference, but it's still a result! This is amazing!</i>\" She's clearly pleased with herself. You place a hand on her shoulder, and she beams at you. Do you encourage her, or break the bad news?\n\n", false);
 		//[Encourage][Abuse]
-		simpleChoices("Encourage",lottieMediumMoraleWeightLossEncourage,"Abuse",lottieMediumMoraleWeightLossAbuse,"",0,"",0,"",0);
+		simpleChoices("Encourage", lottieMediumMoraleWeightLossEncourage, "Abuse", lottieMediumMoraleWeightLossAbuse, "", null, "", null, "", null);
 	}
 	//[If Lost Weight since Last Encounter, Encouragement 70 – 100, convinced 'Bigger is Better']
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] < lottieTone() - 5 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00297] == 1) {
 		outputText("Her ears perk up at your eagerness to talk; she seems to be pretty concerned about something. You ask her what's on her mind. \"<i>Haha, that obvious, babe?</i>\" Lottie looks up at you and smiles politely. \"<i>Y'see babe, since the last time we met, I've actually – I've lost weight.</i>\" She sits, curling a strand of hair through her finger. \"<i>I mean, I like my body how it is, and... and I don't want to change it, y'know? Especially if it means losing you.</i>\" She's clearly concerned about your reaction. You place a hand on her shoulder, and she sighs. Do you mind, or do you decide to break the bad news?", false);
-		simpleChoices("Encourage",lottieHighMoraleWeightLossFATTYLOVESIT,"Abuse",lottieHighMoraleWeightLossFATTYLOVESABUSE,"",0,"",0,"",0);
+		simpleChoices("Encourage", lottieHighMoraleWeightLossFATTYLOVESIT, "Abuse", lottieHighMoraleWeightLossFATTYLOVESABUSE, "", null, "", null, "", null);
 	}
 	//[If Lost Weight since Last Encounter, Encouragement 70 - 100]
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00308] < lottieTone() - 5) {
 		outputText("Her ears perk up at your eagerness to talk; she seems to be pretty excited about something. You ask her what's on her mind.  \"<i>That obvious, huh?</i>\" Lottie looks up at you and grins. \"<i>Y'see babe, since the last time we met, I've actually – I've lost weight!</i>\" She stands up, pumping her fist in the air and wiggling her plump ass. \"<i>I mean, I know it's not a big difference, but it's still a result! This is amazing!</i>\" She's clearly pleased with herself. You place a hand on her shoulder, and she beams at you. Do you encourage her, or break the bad news?\n\n", false);
-		simpleChoices("Encourage",lottieHighMoraleWeightLossEncourage,"Abuse",lottieHighMoraleWeightLossAbuse,"",0,"",0,"",0);
+		simpleChoices("Encourage", lottieHighMoraleWeightLossEncourage, "Abuse", lottieHighMoraleWeightLossAbuse, "", null, "", null, "", null);
 	}
 	//[If Encouragement = 0, Figure = 0, first time]
 	else if(lottieMorale() == 0 && lottieTone() == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00309] == 0) {
@@ -721,7 +721,7 @@ private function talkToPigSlut():void {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00318] = 1;
 		outputText("You tell Lottie that you want to talk, though the girl seems too distracted by something else. She looks up at you, and judging by her excited jittering and giant smile, the girl appears to be on the verge of exploding in happiness. You grin and ask cautiously if she has anything on her mind. \"<i>Oh, babe!</i>\" she cries out, jumping out of her seat to hug-tackle you onto the ground, planting kisses all over your face. A few of the cafe-goers seem to look your way, chuckling at Lottie's embarrassing outburst. \"<i>Back when I first met you, I made myself an invisible goal to achieve while you were here.</i>\" She smiles, straddling you on the floor while you nod helplessly. \"<i>I just weighed myself this morning and... and I...</i>\" The pig-girl looks up at you, before smooching you directly on the lips. You ask if something good happened, to which she laughs heartily. \"<i>Oh babe, something amazing happened! I've blown past my goal! It's wonderful, I just... I never would've been able to do this without you.</i>\" You reassure her that with enough time she would, but you're glad she feels that way. \"<i>In fact,</i>\" Lottie smiles slyly, removing herself from you while you pick yourself up off the floor. \"<i>I want to thank you properly.</i>\" Reaching down, Lottie cups " + oMultiCockDesc() + " and squeezes gently, stirring the beast within. \"<i>Meet me in the yoga room,</i>\" she purrs before walking out of the cafe.", false);
 		//[Yoga Room][Leave]
-		simpleChoices("Yoga Room",lottieSuccessOneShot,"Leave",leaveLottieInsteadOfYogaSex,"",0,"",0,"",0);
+		simpleChoices("Yoga Room", lottieSuccessOneShot, "Leave", leaveLottieInsteadOfYogaSex, "", null, "", null, "", null);
 	}
 	//If Neither, Encouragement 0 - 30]
 	else if(lottieMorale() <= 30) {
@@ -1250,7 +1250,7 @@ private function lottieExercise():void {
 	outputText(". \"<i>Where do you wanna go today, " + player.mf("guy","ma'am") + "?</i>\" She responds, as you both walk through the cafe's entranceway leading to the rest of the gym. A wall of various weights stands proud amongst the different citizens that make use of it. You spot several jogging tracks, and outside, a large, grassy field mostly occupied by centaurs looking for a nightly run - though other, bipedal gym members try to jog along with them without much success. A large, hidden door hides the entrance to the indoor pool and sauna area, along with the door to the candlelit yoga room. Where do you wish to work out?", false);
 	//[Weights][Jogging][Yoga][Pool]
 	//Pool only available when morale is high
-	simpleChoices("Weights",lottieWeights,"Jogging",goJoggingWithLottie,"Yoga",lottieYoga,"Pool",lottiePool,"",0);
+	simpleChoices("Weights", lottieWeights, "Jogging", goJoggingWithLottie, "Yoga", lottieYoga, "Pool", lottiePool, "", null);
 }
 
 //[Weights]
@@ -1264,13 +1264,13 @@ private function lottieWeights():void {
 	if(lottieTone() <= 70) {
 		outputText("Lottie looks at you nervously as you tell her you've decided on doing a little lifting today. Obviously not having that in mind, she takes your advice regardless and trots over to the weights, met with the gaze of several other, far more muscular members. Nervously walking along the wall of equipment, she picks up one of the smallest weights and begins lifting as hard as she can, audibly grunting as she manages a few reps. Not wanting to be outdone, you follow her and walk over to the weight gear – many of the other lifters are already snickering as you stand near the smaller weights. Lottie looks over to you nervously, not wanting to embarrass herself. You'd prefer not to be embarrassed either. Should you pick one of the larger weights and show off your skills, or ignore the lifters and train with Lottie?", false);
 		//[Boast][Train]
-		simpleChoices("Boast",boastAtLottie,"Train",trainWithLottie,"NTR Lift",NTR,"",0,"",0);
+		simpleChoices("Boast", boastAtLottie, "Train", trainWithLottie, "NTR Lift", NTR, "", null, "", null);
 	}
 	//[If Figure 70 - 100]
 	else {
 		outputText("Lottie pumps her fist in the air at your suggestion to do a bit of lifting today. Although she isn't quite at your level, she's skilled enough to not embarrass herself around the other, more skilled gym members hanging around the equipment wall. Walking around the weights, Lottie takes note of the sizes before choosing one suitable to her level, and lifting it at a slow pace, making sure to pace her breaths. Not wanting to be outdone, you follow her and walk over to the weight gear – many of the other lifters are already snickering as you stand near the smaller weights. Lottie looks over to you nervously, not wanting to embarrass herself. You'd prefer not to be embarrassed either. Should you pick one of the larger weights and show off your skills, or ignore the lifters and train with Lottie?", false);
 		//[Boast][Train]
-		simpleChoices("Boast",boastAtFitLottie,"Train",trainWithFitLottie,"",0,"",0,"",0);
+		simpleChoices("Boast", boastAtFitLottie, "Train", trainWithFitLottie, "", null, "", null, "", null);
 	}
 }
 
@@ -1339,13 +1339,13 @@ private function goJoggingWithLottie():void {
 	if(lottieTone() <= 70) {
 		outputText("You tell Lottie you've decided on jogging, and she nods – running has never been her strong suit, but it's still something she can achieve with enough effort. You head out to the track, taking note of the few people running along. A cheetah-morph sprints around the trail with considerable ease, whilst a short, pug-like man simply jogs along quite contently. Once on the track you decide to start off with a brisk walk, Lottie following close behind, her cute body jiggling slightly with each movement. You note that she's having no trouble keeping up, so you figure you should pick up the pace. You know it'd be best for her if you kept it to a light jog, but your own fitness would suffer as a result. Would a more forceful work out benefit the both of you, or is it better to take it easy?\n\n", false);
 		//[Sprint][Jog]
-		simpleChoices("Sprint",sprintAndLeaveLottieBehind,"Jog",jogWithLottie,"",0,"",0,"",0);
+		simpleChoices("Sprint", sprintAndLeaveLottieBehind, "Jog", jogWithLottie, "", null, "", null, "", null);
 	}
 	//[If Figure 70 - 100]
 	else {
 		outputText("You tell Lottie you've decided on jogging, and she happily agrees – she's perfectly content with running nowadays, not tiring out as much as she used to. You head out to the tracks, taking note of the few people running along. A cheetah-morph sprints around the trail with considerable ease, whilst a short, pug-like man simply jogs along quite contently. Once on the track you decide to start off with a brisk walk, Lottie following close behind. You note that she's having no trouble keeping up, so you figure you should pick up the pace. You know she'd be fine with a quick run, but your own fitness might suffer as a result. Is it easier to concentrate on your physique with a hard sprint, or would it be better to help Lottie with hers?", false);
 		//[Sprint][Run]
-		simpleChoices("Sprint",sprintAndLeaveFitLottieBehind,"Jog",jogWithFitLottie,"",0,"",0,"",0);
+		simpleChoices("Sprint", sprintAndLeaveFitLottieBehind, "Jog", jogWithFitLottie, "", null, "", null, "", null);
 	}
 }
 //[Sprint]
@@ -1400,7 +1400,7 @@ private function lottieYoga():void {
 	//[If Figure 0 – 100]
 	outputText("You know that Lottie has an affinity for yoga, so you decide to enter the dimly lit room at the end of the pool. She gladly follows, bouncing along with you as you take two of the mats out. A class has already started, and you can see many people gathering around a tanned, four-armed woman performing warm-up exercises. Knowing you both have a little time before they break out into the more complicated stretches; you scan around the room for optimal places to sit down without blocking your view of the tetra-armed instructor. By the time you've searched the room, a few more people had already blocked off most of the available spots. You look over to see Lottie already spread out and lying on her stomach – she looks over to you and giggles before patting the vacant area next to her. Throwing a quick smile, you also notice a small unused area right next to the teacher – you'd be able to take it if you went by yourself. Should you go at it alone, or stretch with Lottie?", false);
 	//[Alone] [Together]
-	simpleChoices("Alone",lottieYogaAlone,"Together",togetherLottieYoga,"",0,"",0,"",0);
+	simpleChoices("Alone", lottieYogaAlone, "Together", togetherLottieYoga, "", null, "", null, "", null);
 }
 
 //[Alone]
@@ -1438,7 +1438,7 @@ private function lottiePool():void {
 	clearOutput();
 	outputText("You often find Lottie near the pool, so it's only natural to assume she might have a knack for it. You mention swimming to the pig-girl, her ears perking up at the idea of going in the water. \"<i>S-sure! I'll go get ready!</i>\"  Wondering what she might've meant, you wait by the side of the pool, your legs dipping into the cool, blue water. Soon after, Lottie runs out into the area, wearing the daring, black bikini she wore the first time you had met. Her jiggling breasts squish past the fabric, while her chubby butt and thighs hug tightly against the bottom piece. Feeling a familiar stretching in your groin, you look down to find your " + multiCockDescriptLight() + " at full attention, hardly subtle against your " + player.armorName + ". A thought passes your mind to cover up, but before you can begin to reflect on the idea the bouncing girl sits her plump ass next to you. You wonder if it's easier to jump straight into the pool or to wait it out – hell, she might even be flattered by your reaction.", false);
 	//[Jump][Wait]
-	simpleChoices("Jump",jumpInPoolBeforeLottieSeesYourWingWang,"Wait",waitAndShowLottieYourPoolBoner,"",0,"",0,"",0);
+	simpleChoices("Jump", jumpInPoolBeforeLottieSeesYourWingWang, "Wait", waitAndShowLottieYourPoolBoner, "", null, "", null, "", null);
 }
 
 //[Jump]
@@ -1624,7 +1624,8 @@ public function lottieFuck():void {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00316] > 0) three = lottieRepeatThreesome;
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00317] > 0) neatrares = lottieRepeatSUPERNEATORARES;
 
-		choices("Anal",analLottieMilkshake,"Oral",getSuckedOffByAHamSandwich,"Tentacle",tentacle,"",0,"",0,"Doggystyle",dog,"Walkies",walk,"Threesome",three,"Netorare",neatrares,"30Minute",thirtyMinute);
+		choices("Anal", analLottieMilkshake, "Oral", getSuckedOffByAHamSandwich, "Tentacle", tentacle, "", null, "", null,
+			"Doggystyle", dog, "Walkies", walk, "Threesome", three, "Netorare", neatrares, "30Minute", thirtyMinute);
 	}
 	//[If Encouragement 30 – 60]
 	else if(lottieMorale() <= 60) {
@@ -1636,7 +1637,7 @@ public function lottieFuck():void {
 
 		outputText("Not wanting to be left unsatisfied, you tell her you've decided you're going to take her for a vigorous work out. She can only pant with anticipation.", false);
 		//[Anal][Oral]
-		simpleChoices("Anal",analLottieMilkshake,"Oral",getSuckedOffByAHamSandwich,"Tentacle",tentacle,"",0,"30Minute",thirtyMinute);
+		simpleChoices("Anal", analLottieMilkshake, "Oral", getSuckedOffByAHamSandwich, "Tentacle", tentacle, "", null, "30Minute", thirtyMinute);
 	}
 	//[If Encouragement 60 – 100]
 	else {

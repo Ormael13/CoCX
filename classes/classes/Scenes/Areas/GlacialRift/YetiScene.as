@@ -53,7 +53,6 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Collecting your things, you notice you lost some gems during the struggle, but you ignore them since you are eager to leave the cavern. Taking the exit the yeti had used to wander back out into the rift, you begin your long walk to camp.. but as you trek through the frigid fields of the glacial rift, you notice your ass stays hot despite the cold. Perhaps it’s a special quality of the yeti’s cum?")
 			player.orgasm();
 			cleanupAfterCombat();
-			doNext(16);
 		}
 		//Not used as it's not written and may or may not be added.
 		/*private function getFuckedByYetiFacial():void {

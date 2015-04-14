@@ -17,7 +17,7 @@ package classes.Scenes.Areas.Lake
 		{
 			var damage:Number = 0;
 			//return to combat menu when finished
-			doNext(1);
+			doNext(game.playerMenu);
 			if (findPerk(PerkLib.Acid) >= 0) outputText("Her body quivering from your flames, the goo-girl ", false);
 			else outputText("The slime holds its hands up and they morph into a replica of your " + player.weaponName + ".  Happily, she swings at you", false);
 			//Determine if dodged!
@@ -150,7 +150,7 @@ package classes.Scenes.Areas.Lake
 			this.a = "the ";
 			this.short = "goo-girl";
 			this.imageName = "googirl";
-			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + game.biggestBreastSizeDescript() + ".") : "");
+			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + player.chestDesc() + ".") : "");
 			// this.long = false;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
 			this.createStatusAffect(StatusAffects.BonusVCapacity, 9001, 0, 0, 0);
@@ -183,9 +183,11 @@ package classes.Scenes.Areas.Lake
 			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)
 					.add(consumables.WETCLTH,1/2)
 					.elseDrop(useables.GREENGL);
+/* These are actually green slime functions and were never called in GooGirl due to override of performCombatAction
 			this.special1 = 5040;
 			this.special2 = 5039;
 			this.special3 = 5039;
+*/
 			checkMonster();
 		}
 

@@ -58,7 +58,7 @@ public function encounterMarae():void {
 				outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n", false);
 				if(player.lib + player.cor > 80) {
 					outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?", false);
-					simpleChoices("Boob",grabHerBoob,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+					simpleChoices("Boob",grabHerBoob,"", null,"", null,"", null,"Leave",camp.returnToCampUseOneHour);
 				}
 				else doNext(camp.returnToCampUseOneHour);
 				return;
@@ -96,7 +96,7 @@ public function encounterMarae():void {
 					outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n", false);
 					if(player.lib + player.cor > 80) {
 						outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?", false);
-						simpleChoices("Boob",grabHerBoob,"",0,"",0,"",0,"Leave",camp.returnToCampUseOneHour);
+						simpleChoices("Boob",grabHerBoob,"", null,"", null,"", null,"Leave",camp.returnToCampUseOneHour);
 					}
 					else doNext(camp.returnToCampUseOneHour);
 				}
@@ -127,7 +127,7 @@ public function encounterMarae():void {
 				outputText("Spellbound, you watch as she forces more and more fingers into her hungry flower-hole, \"<i>Ever since then, I've just been drinking in more and corruption, and waiting for someone to come here and help fill my hole.  I've played with my flower for what has felt like days on end.  Every time I come harder and harder.  The more I let go the better it is.  Do you know what I did this morning?  I let my branches grow tentacles to fuck my mouth and pussy at the same time.  I came over and over and over, and then I had my roots pull in all the cum they could find to fill my womb with.</i>\"\n\n", false);
 				outputText("You gasp at the change she has gone through, getting more than a little turned on yourself.  Thinking that a once chaste goddess has been reduced to a horny slut makes you wonder how you stand any chance of victory.  Marae keeps up her show, \"<i>It's so good.  Come join me in it.  I gave in to the pleasure already.  If you look behind me, you can see what's left of my soul.  I could feel it dripping out through my cunny a little bit each time I came.  After a while it flowed together and started to crystalize.  I think the demons call it lethicite, but I just wish I still had a soul so I could do it all over again.  Come fuck me, I want to watch you go mad while you cum out your soul.</i>\"\n\n", false);
 				outputText("It sounds like a very pleasant offer, but it would mean the total abandonment of your reasons for coming here.   You could probably get away if you were to run, she doesn't seem to be nearly as powerful.  Or you could risk trying to steal the lethicite before making your getaway, but it wouldn't be hard for her to catch you that close.", false);
-				simpleChoices("Run",runFromPervertedGoddess,"Lethicite",maraeStealLethicite,"Accept",maraeBadEnd,"FIGHT!",promptFightMarae1,"",0);
+				simpleChoices("Run",runFromPervertedGoddess,"Lethicite",maraeStealLethicite,"Accept",maraeBadEnd,"FIGHT!",promptFightMarae1,"", null);
 			}
 			//Repeat corrupt meeting
 			else {
@@ -289,7 +289,7 @@ private function maraeBadEnd():void {
 	outputText("<b>Some time passes...</b>\n\n", false);
 	outputText("You're still on the island with Marae impaled on two of the wriggling monstrosities you call your cocks.    You haven't pulled free in days, but why would you?  Your bodies are made for each other, a pile of wriggling fuckmeat with holes that drink your cum like the desert drinks water, and a once-hero who lives to sate his mass of seething tentacles.   The two of you are two halves of the same puzzle, locked together in an endless orgy.  You fondly remember watching the shining liquid that was once your soul drip from the wet folds of her flower-petals, crystallizing into a tiny rock much smaller than Marae's own.", false);
 	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) outputText("\n\nOn the shore, Marble looks out on the lake, wondering what happened to the one whom she loved.", false);
-	doBadEnd();
+	getGame().gameOver();
 }
 
 private function maraeStealLethicite():void {
@@ -331,7 +331,7 @@ private function maraeStealLethicite():void {
 			outputText("Marae steps into your field of view, and pulls the tentacle free.  Your " + cockDescript(0) + " twitches pitifully, blasting a few massive loads onto your belly as your orgasm withers and dies from lack of stimulation.\n\n", false);
 			outputText("\"<i>Sorry about the pain, I had to tweak your body to make you a true breeder.  You can go now stud.  I expect the monsters ought to worry about you now, or they'll all have dripping twats and swollen bellies,</i>\" apologizes Marae.  She turns away from you, returning to the embrace of her tree's tentacles, sinking into debauchery.  You stagger into your boat and row away, oblivious to the stream to pre-cum dripping from your "+multiCockDescript()+".", false);
 			player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
-			doNext(14);
+			doNext(camp.returnToCampUseTwoHours);
 		}
 		//FEM)
 		else {
@@ -394,7 +394,7 @@ public function level2MaraeEncounter():void {
 	if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0 || player.findPerk(PerkLib.MaraesGiftStud) >= 0) outputText("second ", false);
 	outputText("dose of Marae's tender affections.</i>\"\n\n", false);
 	//Incase something breaks
-	doNext(1);
+	doNext(playerMenu);
 	//Cant fly?  Stuck for sex! Or fight!
 	if(!player.canFly()) {
 		outputText("You don't see any escape! If you like, you can attempt to fight her, but really?", false);
@@ -404,7 +404,7 @@ public function level2MaraeEncounter():void {
 	//Can fly?  Choice to run
 	else {
 		outputText("You don't think she's counted on your wings.  If you tried to fly you could probably get out of the reach of her tentacles in short order.", false);
-		simpleChoices("Stay",MaraeIIStageII,"",0,"",0,"FIGHT!",promptFightMarae2,"Fly Away",MaraeIIFlyAway);
+		simpleChoices("Stay",MaraeIIStageII,"", null,"", null,"FIGHT!",promptFightMarae2,"Fly Away",MaraeIIFlyAway);
 	}
 }
 
@@ -529,7 +529,7 @@ private function MaraeIIStageII():void {
 		outputText("Cum boils out of your ", false);
 		if(player.balls > 0) outputText("rapidly contracting balls", false);
 		else outputText("tentacle-squeezed prostate", false);
-		outputText(" and erupts into Marae's womb.  Your hips rock forward, grazing her cervix with your " + cockHead(0) + " to better fill her uterus.  ", false);
+		outputText(" and erupts into Marae's womb.  Your hips rock forward, grazing her cervix with your " + player.cockHead(0) + " to better fill her uterus.  ", false);
 		if(player.cockTotal() > 1) outputText("The " + cockDescript(1) + " in her ass spasms and explodes with its brother, glazing her slippery colon with a coating of syrupy spunk.  ", false);
 		if(player.cockTotal() > 2) {
 			outputText("Neglected but orgasming, ", false);

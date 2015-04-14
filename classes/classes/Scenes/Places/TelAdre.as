@@ -289,21 +289,21 @@ private function piercingStudio():void {
 	outputText("The interior of the piercing studio is earthy, leaving the stone floors and walls uncovered, though the windows are covered with woven blankets, sewn from multicolored threads.  There are a number of cushy chairs facing a wall of mirrors, along with a shelf covered in needles, piercings, and strong alcohols.  A brunette prowls about the place, tidying it up during a lull in business.  You dully notice that unlike everyone else in this town, she's mostly human.  Perhaps she came through a portal as well?  She approaches you, and you see a cat tail waving behind her, and a pair of fuzzy feline ears, both covered in piercings, perched atop her head.  Clearly she's been here long enough to pick up some of the local flavor.\n\n", false);
 	outputText("She introduces herself, \"<i>Hello there " + player.mf("sir","cutie") + ", my name is Yara.  Would you like to get a piercing?</i>\"", false);
 	if (!flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
-		simpleChoices("Pierce",pierceMenu,"Remove",piercingRemove,"About Her",about,"",0,"Leave",telAdreMenu);
+		simpleChoices("Pierce", pierceMenu, "Remove", piercingRemove, "About Her", about, "", null, "Leave", telAdreMenu);
 	else
 	{
 
 		outputText("\n\n(Low Standard mode!)\nAlternatively, she might be open to a quick fuck if you ask.");
-		choices("Pierce",pierceMenu,
-		        "Remove",piercingRemove,
-		        "",0,
-		        "AsFemale",createCallBackFunction(letsDoYaraSex,true),
-		        "AsMale",createCallBackFunction(letsDoYaraSex,false),
-		        "About Her",about,
-		        "",0,
-		        "",0,
-		        "",0,
-		        "Leave",telAdreMenu);
+		choices("Pierce", pierceMenu,
+		        "Remove", piercingRemove,
+		        "", null,
+		        "AsFemale", createCallBackFunction(letsDoYaraSex,true),
+		        "AsMale", createCallBackFunction(letsDoYaraSex,false),
+		        "About Her", about,
+		        "", null,
+		        "", null,
+		        "", null,
+		        "Leave", telAdreMenu);
 	}
 }
 private function aboutYara():void {
@@ -372,7 +372,7 @@ private function dickPierce():void {
 		doNext(pierceMenu);
 		return;
 	}
-	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"Ladder",chooseLadder,"Back",pierceMenu,"Nevermind",piercingStudio);
+	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "Ladder", chooseLadder, "Back", pierceMenu, "Nevermind", piercingStudio);
 	piercingLoc = 1;
 }
 
@@ -385,49 +385,49 @@ private function clitPierce():void {
 		return;
 	}
 	piercingLoc = 0;
-	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
+	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function earPierce():void {
 	spriteSelect(63);
 	piercingLoc = 2;
 	outputText("\"<i>Okay, just let me get my supplies and we can get started.  What kind of jewelry do you want in them?</i>\" asks Yara.", true);
-	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"Hoop",chooseHoop,"Back",pierceMenu,"Nevermind",piercingStudio);
+	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "Hoop", chooseHoop, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function eyebrowPierce():void {
 	spriteSelect(63);
 	piercingLoc = 3;
 	outputText("\"<i>Ah, that's a good look!  What do you want there?</i>\" asks Yara.", true);
-	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
+	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function lipPierce():void {
 	spriteSelect(63);
 	piercingLoc = 4;
 	outputText("\"<i>Oh my, that'll be HAWT!  What kind of jewelry do you want there?</i>\" asks Yara.", true);
-	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
+	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function nipplePierce():void {
 	spriteSelect(63);
 	piercingLoc = 5;
 	outputText("\"<i>Yeah, sure I can do those!  What kind of jewelry do you want there?  I'm partial to nipple-chains myself,</i>\" admits Yara, blushing bright red.", true);
-	simpleChoices("Studs",chooseStud,"Rings",chooseRing,"Chain",chooseChain,"Back",pierceMenu,"Nevermind",piercingStudio);
+	simpleChoices("Studs", chooseStud, "Rings", chooseRing, "Chain", chooseChain, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function nosePierce():void {
 	spriteSelect(63);
 	piercingLoc = 6;
 	outputText("Yara wrinkles her nose in distaste, \"<i>Really?  Well ok, what do you want there?</i>\"", true);
-	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
+	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 
 private function tonguePierce():void {
 	spriteSelect(63);
 	piercingLoc = 7;
 	outputText("Yara happily purrs, \"<i>Oh my, I bet that'll be fun!  I'm afraid I can only put a stud there though, ok?</i>\"", true);
-	simpleChoices("Ok",chooseStud,"",0,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
+	simpleChoices("Ok", chooseStud, "", null, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 private function vulvaPierce():void {
 	spriteSelect(63);
@@ -438,7 +438,7 @@ private function vulvaPierce():void {
 		doNext(pierceMenu);
 		return;
 	}
-	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
+	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
 }
 private function chooseStud():void {
 	piercingType = 1;
@@ -545,7 +545,7 @@ private function chooseAdvancedMaterials():void {
 	outputText("\n4. Crimstone - Crimstone is said to be formed from volcanic fires, and to keep the fires of one's desires burning brightly.", false);
 	outputText("\n5. Icestone - Found from the Glacial Rift, this rare gem is said to counter the effects of Crimstone and quell ever-burning desires. This will annihilate some of crimstone magic. Due to its rarity, this costs 2000 gems instead.", false);
 	outputText("\n\n<b>DISCLAIMER</b>: Yara's Piercing Studio is not responsible if the piercee's body absorbs any residual magic of these stones, and is not required to resolve any issues if the effects persist beyond removal.</b>", false);
-	choices("Lethite", chooseLethite, "Fertite", chooseFertite, "Furrite", chooseFurrite, "Crimstone", chooseCrimstone, "", 0, "", 0, "", 0, "", 0, "", 0, "Back", chooseMaterials);
+	choices("Lethite", chooseLethite, "Fertite", chooseFertite, "Furrite", chooseFurrite, "Crimstone", chooseCrimstone, "", null, "", null, "", null, "", null, "", null, "Back", chooseMaterials);
 	if (player.gems >= 2000) addButton(4, "Icestone", chooseIcestone);
 }
 
@@ -1094,10 +1094,9 @@ private function oswaldPawnSellAll():void {
 	doNext(oswaldPawn);
 }
 
-private function anotherButton(button:int,nam:String,func:*,arg:* = -9000):int {
-	if(button > 8) return 9;
-	if(arg == -9000) addButton(button,nam,func);
-	else addButton(button,nam,func,arg);
+private function anotherButton(button:int, nam:String, func:Function, arg:* = -9000):int {
+	if (button > 8) return 9;
+	addButton(button, nam, func, arg);
 	button++;
 	return button;
 }
@@ -1251,6 +1250,14 @@ public function barTelAdre():void {
 	}
 	//URTA
 	if (kGAMECLASS.urta.urtaAtBar()) {
+		//Scylla & The Furries Foursome
+		if (scylla.action == Scylla.SCYLLA_ACTION_FURRY_FOURSOME)
+		{
+			trace("SCYLLA ACTION: " + scylla.action);
+			outputText("\n\nScylla’s spot in the bar is noticeably empty. She’s usually around at this time of day, isn’t she? Urta grabs your attention with a whistle and points to a back room with an accompanying wink. Oh... that makes sense. Surely the nun won’t mind a little help with her feeding...");
+			button = anotherButton(button,"Back Room",scylla.openTheDoorToFoursomeWivScyllaAndFurries);
+		}
+		//Urta X Scylla threesome
 		if (scylla.action == Scylla.SCYLLA_ACTION_FUCKING_URTA) {
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0)
 				outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>");
@@ -1529,8 +1536,9 @@ private function buyClothes(itype:ItemType):void {
 		return;
 	}
 	//Go to debit/update function or back to shop window
-	if(player.hasCock() && player.lust >= 33) simpleChoices("Yes",curry(debitClothes,itype),"No",tailorShoppe,"",0,"",0,"Flirt",curry(flirtWithVictoria,itype));
-	else doYesNo(curry(debitClothes,itype),tailorShoppe);
+	if (player.hasCock() && player.lust >= 33)
+		simpleChoices("Yes", curry(debitClothes, itype), "No", tailorShoppe, "", null, "", null, "Flirt", curry(flirtWithVictoria, itype));
+	else doYesNo(curry(debitClothes,itype), tailorShoppe);
 }
 
 private function debitClothes(itype:ItemType):void {
@@ -1549,9 +1557,7 @@ public function armorShop():void {
 	outputText("The interior of the armory is blisteringly hot, filled with intense heat from the massive forge dominating the far side of the shop.  The bellows are blowing hard as a tall german-shepherd woman works the forge.  Incredibly, she's wearing nothing aside from a ragged leather apron.  It bulges from the front, barely containing her obscene proportions as it protects them from the heat of her forge.  She pulls a piece of metal from the forge and strikes it a few times with a hammer bigger than your head, then tosses it in a bucket filled with water, steam boiling out of it from the hot metal.  At last, the sweating forgemistress notices you and turns around, her breasts jiggling wildly.\n\n", true);
 	//outputText("\"<i>Vat can Yvonne make for you?  Ze platemail?  Or someting a bit lighter?</i>\" she asks you.", false);
 	outputText("\"<i>What can I make for you?  Platemail?  Or something that breathes a little easier?</i>\" Yvonne asks, fanning herself.");
-
-	var egg:Function =null;
-
+	
 	choices(armors.CHBIKNI.shortName,createCallBackFunction(armorBuy, armors.CHBIKNI),
 			armors.FULLCHN.shortName,createCallBackFunction(armorBuy, armors.FULLCHN),
 			armors.FULLPLT.shortName,createCallBackFunction(armorBuy, armors.FULLPLT),
@@ -1562,6 +1568,8 @@ public function armorShop():void {
 			shields.KITE_SH.shortName, createCallBackFunction(armorBuy, shields.KITE_SH),
 			shields.GREATSH.shortName, createCallBackFunction(armorBuy, shields.GREATSH),
 			shields.TOWERSH.shortName, createCallBackFunction(armorBuy, shields.TOWERSH));
+			
+	var egg:Function =null;
 	if(player.hasKeyItem("Dragon Eggshell") >= 0) {
 		outputText("\n\nThough the pieces on display have their arguable attractions, none of them really interest you.  Yvonne taps her foot impatiently.  \"<i>Well, I could make you something to order... if you have any decent materials, cutie.  200 gems.</i>\"");
 		if(player.gems < 200) {
@@ -1593,7 +1601,6 @@ private function debitArmor(itype:ItemType):void {
 	clearOutput();
 	player.gems -= itype.value;
 	statScreenRefresh();
-	menuLoc = 9;
 	inventory.takeItem(itype, armorShop);
 }
 
@@ -1636,7 +1643,7 @@ private function weaponBuy(itype:ItemType):void {
 	}
 	else outputText("\n\nDo you buy it?\n\n", false);
 	//Go to debit/update function or back to shop window
-	doYesNo(curry(debitWeapon,itype),weaponShop);
+	doYesNo(curry(debitWeapon,itype), weaponShop);
 }
 private function debitWeapon(itype:ItemType):void {
 	spriteSelect(80);
@@ -1671,7 +1678,6 @@ private function forgeScarredBladeEnd():void {
 	outputText("\"<i>Damnedest thing.  I couldn't straighten the blade for the life of me - with every hammer blow it would leap, vibrating, from the anvil, and warp somewhere else, adding a new twist for each one I took out.  After a few failures, I settled for a backsword design and channeled the bending toward the flat edge.  That's not the uncanny bit though.  You can see how sharp it is; the edge fairly shaped itself with just a touch of the grinder.  I haven't honed it - didn't need to.  But when I tried to etch a design just above the hilt, it would slide under the stencil, leaving a gouge on the blade.</i>\"\n\n")
 	outputText("Closer examination reveals the veracity of his claim: all the numerous scratches and flaws on the blade have their origins right above the tang, from the smith's abortive attempts at decoration.  Yet though several ugly gashes stop just short of the edge, none of them actually break the perfect arc, as if cutting were all the blade cared about.\n\n")
 	outputText("\"<i>Damnedest thing,</i>\" he repeats, breaking your train of thought.  \"<i>Every time the blade slipped, it would twist toward my hands.  It's as if it's alive and eager to find flesh.  Truth be told... I was debating whether to turn it over to the Covenant and tell you the crystal couldn't be used.  But you're here, so take it and go.\"  Giving you barely enough time to sheathe the blade again, he places a strong hand against your back and all-but-pushes you out to the street.\n\n")
-	menuLoc = 15;
 	inventory.takeItem(weapons.SCARBLD, weaponShop);
 }
 
@@ -1702,11 +1708,11 @@ public function jewelShopPageI():void {
 			jewelries.PLATRNG.shortName, createCallBackFunction(jewelBuy, jewelries.PLATRNG),
 			jewelries.DIAMRNG.shortName, createCallBackFunction(jewelBuy, jewelries.DIAMRNG),
 			jewelries.LTHCRNG.shortName, createCallBackFunction(jewelBuy, jewelries.LTHCRNG),
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0,
-			"", 0);
+			"", null,
+			"", null,
+			"", null,
+			"", null,
+			"", null);
 	addButton(14, "Back", jewelShopInside);
 }	
 public function jewelShopPageII():void {
@@ -1717,9 +1723,9 @@ public function jewelShopPageII():void {
 			jewelries.POWRRNG.shortName, createCallBackFunction(jewelBuy, jewelries.POWRRNG),
 			jewelries.PURERNG.shortName, createCallBackFunction(jewelBuy, jewelries.PURERNG),
 			jewelries.MYSTRNG.shortName, createCallBackFunction(jewelBuy, jewelries.MYSTRNG),
-			"", 0,
-			"", 0,
-			"", 0);
+			"", null,
+			"", null,
+			"", null);
 	addButton(14, "Back", jewelShopInside);
 }	
 
@@ -1960,7 +1966,7 @@ private function urtaIsABadass():void {
 	flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] = 1;
 	clearOutput();
 	outputText("There's a commotion in the streets of Tel'Adre.  A dense crowd of onlookers has formed around the center of the street, massed together so tightly that you're unable to see much, aside from the backs the other onlookers' heads.  The sound of blows impacting on flesh can be heard over the crowd's murmuring, alerting you of the fight at the gathering's core.", false);
-	simpleChoices("Investigate",watchUrtaBeABadass,"Who cares?",telAdreMenu,"",0,"",0,"",0);
+	simpleChoices("Investigate", watchUrtaBeABadass, "Who cares?", telAdreMenu, "", null, "", null, "", null);
 }
 
 //[Invetigate]
@@ -2215,7 +2221,7 @@ private function goJogging():void {
 		addButton(1,"Showers",brooke.repeatChooseShower);
 		addButton(4,"Leave",camp.returnToCampUseOneHour);
 	}
-	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
+	else doYesNo(sexMachine.exploreShowers, camp.returnToCampUseOneHour);
 }
 
 private function yaraSex(girl:Boolean = true):void {
@@ -2227,10 +2233,9 @@ private function yaraSex(girl:Boolean = true):void {
 
 	outputText("She seems intent on getting some loving - would you like to turn her down, or will you let nature run its course?", false);
 	//[not at all] [yeah baby]
-	if(girl)
-		simpleChoices("Turn down",piercingStudio,"Oh yeah!",createCallBackFunction(letsDoYaraSex,true),"",0,"",0,"",0);
-	else
-		simpleChoices("Turn down",piercingStudio,"Oh yeah!",createCallBackFunction(letsDoYaraSex,false),"",0,"",0,"",0);
+	if (girl)
+		simpleChoices("Turn down", piercingStudio, "Oh yeah!", createCallBackFunction(letsDoYaraSex, true), "", null, "", null, "", null);
+	else simpleChoices("Turn down", piercingStudio, "Oh yeah!", createCallBackFunction(letsDoYaraSex, false), "", null, "", null, "", null);
 }
 
 private function letsDoYaraSex(girl:Boolean = true):void {
@@ -2354,7 +2359,7 @@ private function yvonneFlirt():void {
 	else outputText("You want to go again, huh?  I do love working up a sweat...");
 	outputText("</i>\"");
 	//[Fuck] [Nevermind]
-	simpleChoices("Fuck Her",fuckYvonneInZeBlacksmith,"Nevermind",backOutOfYvonneFuck,"",0,"",0,"",0);
+	simpleChoices("Fuck Her", fuckYvonneInZeBlacksmith, "Nevermind", backOutOfYvonneFuck, "", null, "", null, "", null);
 }
 //[Nevermind]
 private function backOutOfYvonneFuck():void {
@@ -2434,7 +2439,7 @@ private function flirtWithVictoria(itype:ItemType):void {
 
 	outputText("\n\nShe begins to slowly move her disproportionately massive chest up and down your cock, ");
 	if(player.cocks[x].cockLength > 5)
-		outputText("making sure to give the " + cockHead(x) + " a quick suck every time it breaches her mounds.");
+		outputText("making sure to give the " + player.cockHead(x) + " a quick suck every time it breaches her mounds.");
 	else
 		outputText("pressing her mouth down into her ample cleavage so as to give your hidden tip a quick lick every time it draws near.");
 

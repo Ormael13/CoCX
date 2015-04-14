@@ -80,7 +80,7 @@ package classes.Scenes.Camp
 			else
 			{	
 				outputText("You are too exhausted to work on your cabin!", true);
-				doNext(1);
+				doNext(playerMenu);
 			}
 		}	
 		
@@ -237,7 +237,7 @@ package classes.Scenes.Camp
 		}
 		private function noThanks2():void {
 			outputText("Deciding not to work on your cabin right now, you return to the center of your camp.", true);
-			doNext(1);
+			doNext(playerMenu);
 		}
 		
 		//STAGE 6 - Work on cabin part 2. Planning your cabin.
@@ -253,7 +253,7 @@ package classes.Scenes.Camp
 			if (!player.hasKeyItem("Carpenter's Toolbox"))
 			{
 				outputText("You realize you don't have the toolbox to work on your cabin. You let out a sigh.", true);
-				doNext(1);
+				doNext(playerMenu);
 				return;
 			}
 			//Got toolbox? Proceed!
@@ -268,13 +268,13 @@ package classes.Scenes.Camp
 				else
 				{
 					errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}
 		}
 		
@@ -312,13 +312,13 @@ package classes.Scenes.Camp
 				else
 				{
 					errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}
 		}
 
@@ -347,13 +347,13 @@ package classes.Scenes.Camp
 				else
 				{
 					errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}
 		}
 
@@ -382,13 +382,13 @@ package classes.Scenes.Camp
 				else
 				{
 					errorNotEnough();
-					doNext(1);
+					doNext(playerMenu);
 				}
 			}
 			else
 			{
 				errorNotHave();
-				doNext(1);
+				doNext(playerMenu);
 			}
 		}
 

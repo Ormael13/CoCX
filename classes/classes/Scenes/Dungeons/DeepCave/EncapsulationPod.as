@@ -38,7 +38,7 @@
 				if(player.balls > 0) outputText("One of them wraps itself around the top of your " + player.sackDescript() + " while its tip slithers over your " + player.ballsDescriptLight() + ".  Another ", false);
 				else outputText("One ", false);
 				if(player.cockTotal() > 0) {
-					outputText("prods your " + player.cockDescript(0) + " for a second before it begins slithering around it, snake-like.  Once it has you encircled from " + game.cockHead(0) + " to ", false);
+					outputText("prods your " + player.cockDescript(0) + " for a second before it begins slithering around it, snake-like.  Once it has you encircled from " + player.cockHead(0) + " to ", false);
 					if(!player.hasSheath()) outputText("base", false);
 					else outputText("sheath", false);
 					outputText(", it begins to squeeze and relax to a pleasant tempo.  ", false);
@@ -117,7 +117,7 @@
 					outputText("while the fucking continues.", false);
 				}
 				if(player.cockTotal() > 0) {
-					outputText("  The tentacles around " + game.sMultiCockDesc() + " squeeze and rotate, screwing you silly through your orgasm while cum dribbles in a steady stream from your loins.  Normally it would be squirting out in thick ropes, but the muscle-relaxing drugs in your system make the spurts a steady, weak flow.", false);
+					outputText("  The tentacles around " + player.sMultiCockDesc() + " squeeze and rotate, screwing you silly through your orgasm while cum dribbles in a steady stream from your loins.  Normally it would be squirting out in thick ropes, but the muscle-relaxing drugs in your system make the spurts a steady, weak flow.", false);
 					if(player.cumQ() > 800) outputText("  Of course with all the semen you produce, the flesh-pod's ooze clouds over quite quickly, blocking your vision with a purple-white haze.", false);
 				}
 				if(player.biggestLactation() > 1) {
