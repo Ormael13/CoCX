@@ -242,7 +242,7 @@ private function sendToFarm():void
 	if (tentacleJojo()) outputText("-come-tentacle-beast");
 	outputText( " that he is to head towards the lake, find a farm, present himself to the lady who works there and do as she says.");
 
-	outputText("\n\nA mixture of expressions vie for control of Jojo’s face as he swallows this information; you grin as you realise that being at the farm will simply amplify the fact he is both delighted and horrified at being away from you.");
+	outputText("\n\nA mixture of expressions vie for control of Jojo’s face as he swallows this information; you grin as you realize that being at the farm will simply amplify the fact he is both delighted and horrified at being away from you.");
 
 	outputText("\n\n“<i>I need you to be doing more than jacking off to the thought of servicing me, frankly. Don’t worry though, slut, I will always be close by, and if you’re really lucky and work hard, I might come and fuck you so rotten you can’t walk every now and then. Go on now!</i>”");
 

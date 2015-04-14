@@ -426,8 +426,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.3_mod_snapshot_20150412";
-			version = ver + " (<b>Sleepy-time with Ember</b>)";
+			ver = "0.9.4_mod_snapshot_20150414";
+			version = ver + " (<b>Sleepy-time with Ember + CoC 0.9.4 Update</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

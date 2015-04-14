@@ -128,7 +128,7 @@ private function leavePartySatyr():void {
 	spriteSelect(98);
 	outputText("You thank the satyr for his generosity, but you don't think you can handle this kind of booze, so you get up and start on your way back to your camp.");
 	
-	outputText("\n\nThere is a sudden loud, indignant bleat from behind you, and you hear something suddenly charging clumsily forward.  Though you only realise this when something slams into your back, knocking you to the ground.  When you roll around, you find the satyr standing over you, face contorted in fury.  \"<i>Nobody leaves me until I'm done with them!</i>\" he roars, and attacks you again!\n\n");
+	outputText("\n\nThere is a sudden loud, indignant bleat from behind you, and you hear something suddenly charging clumsily forward.  Though you only realize this when something slams into your back, knocking you to the ground.  When you roll around, you find the satyr standing over you, face contorted in fury.  \"<i>Nobody leaves me until I'm done with them!</i>\" he roars, and attacks you again!\n\n");
 
 	var satyr:Satyr = new Satyr();
 	startCombat(satyr);
@@ -333,7 +333,7 @@ private function malesTakeAdvantageOfSatyrs():void {
 	//(High Cum Amount)
 	else outputText("  You shoot jet after jet of cum, far faster than the satyr's ass can milk you for it, and still he doesn't seem to stop trying.  His rippling muscles draw your cum inside his bowels in big bubbles.  When his ass finally goes lax, you're propelled halfway out of him by the force of your own backflowing seed; the satyr's ass looks like a wreck, and his belly is overflowing with so much spunk you're surprised it didn't come out of his mouth.");
 	
-	outputText("\n\nSated for the moment, your gaze drifts towards the satyr.  He makes no sound; indeed, when you take a better look at him, you realise he's fallen asleep, still idly shaking his ass back and forth and jerking his cum-dribbling cock.  You don't even spare him a contemptuous look as you pull your bottoms up and head back.");
+	outputText("\n\nSated for the moment, your gaze drifts towards the satyr.  He makes no sound; indeed, when you take a better look at him, you realize he's fallen asleep, still idly shaking his ass back and forth and jerking his cum-dribbling cock.  You don't even spare him a contemptuous look as you pull your bottoms up and head back.");
 	//reduce lust
 	player.orgasm();
 	cleanupAfterCombat();

@@ -736,7 +736,7 @@ private function chatWithLoppeAboutLoppesVillage():void {
 
 	outputText("\n\n\"<i>The usual was a shirt with an open front that was wrapped so one side overlapped the other, tied together with a waistband, another wrapping around the loins that wasn't much more than a glorified loincloth, and long trousers with wide-opening, almost robe-like legs.  Of course, if you were going out in the fields, often you'd just wear the shirt and the underpants.</i>\"  The laquine grins at you.");
 
-	outputText("\n\nYou nod in understanding, moving the conversation back to her dancing.  \"<i>Well, there's no story to it, sugar; dancing is dancing.  It's just something we loved to do in the village.  Oh, there are stories behind individual dances, roles they're intended to be used to act out, but mostly it's just our favorite way of unwinding and cutting loose.  I always admired the beautiful dancers when I was growing up.  When I realised just how good on my feet I was, I started practicing and, well, here I am.</i>\"");
+	outputText("\n\nYou nod in understanding, moving the conversation back to her dancing.  \"<i>Well, there's no story to it, sugar; dancing is dancing.  It's just something we loved to do in the village.  Oh, there are stories behind individual dances, roles they're intended to be used to act out, but mostly it's just our favorite way of unwinding and cutting loose.  I always admired the beautiful dancers when I was growing up.  When I realized just how good on my feet I was, I started practicing and, well, here I am.</i>\"");
 
 	outputText("\n\nTo demonstrate, she finishes her last mouthful and hops nimbly from her chair to her feet.  \"<i>I'll see you soon, sweet.</i>\"");
 	doNext(camp.returnToCampUseOneHour);
@@ -1536,7 +1536,7 @@ private function getAssFuckedByLoppeAsACentaur():void {
 
 	outputText("\n\n\"<i>You might be even more eager than me - just give me a moment to set myself up,</i>\"  Loppe insists, giving your [ass] an appreciative slap.  From behind you, you can hear her bustling around, muttering, \"<i>Where did I put my lube?</i>\"  A triumphant exclamation follows, and you hear the wet, sloppy sound of fluid being enthusiastically applied to a sizable cock as the laquine eagerly strokes herself off.  You can already imagine that thick shaft of hers piercing your interior, satiating your hungry bottom with the heavy load contained in those balls.");
 
-	outputText("\n\nSo caught up are you in your fantasy that you don't realise Loppe has finished lubing herself up and is behind you until you feel hands caressing your flanks.  \"<i>Alright, sugar, let's just see what we're getting into...</i>\"  One hand continues to rub your ass, while the other begins pressing something against your black rosebud...");
+	outputText("\n\nSo caught up are you in your fantasy that you don't realize Loppe has finished lubing herself up and is behind you until you feel hands caressing your flanks.  \"<i>Alright, sugar, let's just see what we're getting into...</i>\"  One hand continues to rub your ass, while the other begins pressing something against your black rosebud...");
 
 	//(if Anal Looseness == 0)
 	if(player.ass.analLooseness == 0) {
