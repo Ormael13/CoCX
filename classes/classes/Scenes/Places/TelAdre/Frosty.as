@@ -591,7 +591,7 @@ She rubs a finger along the length of your [cunt.descipt.], damping the crotch o
 [If play is genderless]
 	heart beats in anticipation.
 [else]
-	You shallow down these lustful feelings of wanting and brace yourself when Frosty grabs onto your [hipDescrip] and slowly pushes her horse-cock in, spreading you [assholeDescript]. You’re to fully take this fucking but she stops pushing the foreign object only at 2-inches in, you relax your body. Thinking she stopped to let you catch your breath or something. So wrong, once you body relaxes, she shoves the rest of the 34-inches in you with one powerful thrust. You let out a shriek of surprise that echoes through the city, losing all the strength in your
+	You shallow down these lustful feelings of wanting and brace yourself when Frosty grabs onto your [hipDescrip] and slowly pushes her horse-cock in, spreading you [assholeDescript]. You’re to fully take this fucking but she stops pushing the foreign object only at 2-inches in, you relax your body. Thinking she stopped to let you catch your breath or something. So wrong, once your body relaxes, she shoves the rest of the 34-inches in you with one powerful thrust. You let out a shriek of surprise that echoes through the city, losing all the strength in your
 
 [if player has normal legs]
 legs, the left one doing an odd twitch 
