@@ -116,7 +116,8 @@ public function rubiCock(lust:int = 50):String {
 	else if (flags[kFLAGS.RUBI_BLU_BALLS] <= 6) {
 		cumQ = 150;
 	}
-	return Appearance.cockDescription(flags[kFLAGS.RUBI_COCK_TYPE], flags[kFLAGS.RUBI_COCK_SIZE], flags[kFLAGS.RUBI_COCK_SIZE] / 6, lust, cumQ);
+	if (flags[kFLAGS.RUBI_COCK_TYPE] != 0) return Appearance.cockDescription(flags[kFLAGS.RUBI_COCK_TYPE], flags[kFLAGS.RUBI_COCK_SIZE], flags[kFLAGS.RUBI_COCK_SIZE] / 6, lust, cumQ);
+	else return Appearance.cockDescription(CockTypesEnum.HUMAN, flags[kFLAGS.RUBI_COCK_SIZE], flags[kFLAGS.RUBI_COCK_SIZE] / 6, lust, cumQ);
 }
 
 public function rubiGetCockType():CockTypesEnum {

@@ -24,7 +24,7 @@ package classes.Scenes.Places
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
-			if (heardPrisonerScreamCooldown <= 0 && rand(10) == 0) {
+			if (heardPrisonerScreamCooldown <= 0 && rand(10) == 0 && flags[kFLAGS.IN_PRISON] > 0) {
 				heardPrisonerScreamCooldown = 10;
 				hopelessPrisoner();
 			}
