@@ -627,9 +627,9 @@ you sexes release a huge mix of male and female cum, making huge mess by your fe
 [If gender-less]
 you feel building up in your groin and then releasing a glow of ecstasy cross your whole body.
 [else]
-Frosty makes a satisfied sigh and thrusted her hip to make sure you satisfied. She releases your hair, your head thudding against the countertop. She snaps her fingers again and the toy shrivels out of your (assholeDescript) and dangels back to between her ankels, leaving your ass-hole gaping wide open. 
+Frosty makes a satisfied sigh and thrusted her hip to make sure you satisfied. She releases your hair, your head thudding against the countertop. She snaps her fingers again and the toy shrivels out of your (assholeDescript) and dangels back to between her ankles, leaving your ass-hole gaping wide open. 
 
-“Now that I think about it, I should have used some form of lube... oh well, it got the job done. Woudn’t you agree [play.name]?’”  You agree with a wave of the hand, still exhausted and riding on the wave pleasure. She laughs at your half-hearted yes and walks over to the other end of you and whisper in your ear “I would get up and go soon or that guy with the huge knot behind you is gonna think you butt-hole is part of the display. You  quickly turn onto your backside, feeling yourself knocking an eager cock off it’s course. 
+“Now that I think about it, I should have used some form of lube... oh well, it got the job done. Woudn’t you agree [play.name]?’”  You agree with a wave of the hand, still exhausted and riding on the wave pleasure. She laughs at your half-hearted yes and walks over to the other end of you and whisper in your ear “I would get up and go soon or that guy with the huge knot behind you is gonna think your butt-hole is part of the display. You  quickly turn onto your backside, feeling yourself knocking an eager cock off it’s course. 
 
 A dog-morph stands there with the biggest knotted cock you've ever seen. You quickly gather all your things and make you way past him. He looks to Frosty to relieve him of his stresses. You hear Frosty say “All you have to do is sign these.”
 
