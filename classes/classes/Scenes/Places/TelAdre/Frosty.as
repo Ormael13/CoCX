@@ -708,7 +708,7 @@ She gives a light tap of the paddle on her hand, making a soft slap. Oh you can 
 
 She raises the paddle slowly, you start to [grow hard/ get wet/ feel aroused] with every inch she raises it,  higher and higher it goes. Above her head and as far as her arm can strech, holding it high in place. Watching as you squirm and withering, awaiting this pain you so rightfully deserve.
 
-*WHACK* The paddle hits in pleasurable pain ”OOOOOOOOOOOH!“ you moan out as you throw in your head back. Soon there are three quick slaps to you rear, every slap feels like its own orgasmic wave of  pleasure; like a tsunami, it spreads throughout your body. From the top of your head to the tips of your toes/tail, you shake with pleasure and sweat in pain. You sexy bits being devastated with arousal in the wake of these waves. Three more smacks, the quick whacks give you burst of lust that you could just overdose on. You start panting with your tongue out as your eyes begin to form tears in reaction to the pain.  How those eyes try to betray your true feelings. 
+*WHACK* The paddle hits in pleasurable pain ”OOOOOOOOOOOH!“ you moan out as you throw in your head back. Soon there are three quick slaps to your rear, every slap feels like its own orgasmic wave of  pleasure; like a tsunami, it spreads throughout your body. From the top of your head to the tips of your toes/tail, you shake with pleasure and sweat in pain. You sexy bits being devastated with arousal in the wake of these waves. Three more smacks, the quick whacks give you burst of lust that you could just overdose on. You start panting with your tongue out as your eyes begin to form tears in reaction to the pain.  How those eyes try to betray your true feelings. 
 
 *WHACK* *WHACK *WHACK* *WHACK* 
 
