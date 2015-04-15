@@ -1013,7 +1013,7 @@ public function fuckNieve():void {
 		else outputText("I bet even men get jealous of this bad girl");
 		outputText(".</i>\"");
 	}
-	outputText("\n\nEventually you just can't handle anymore and your body tenses.  You legs lock up, " + cockClit(x) + " trembling, back arching slightly. Nieve notices this and latches on to the tip just in time as an orgasm rocks your body.");
+	outputText("\n\nEventually you just can't handle anymore and your body tenses.  Your legs lock up, " + cockClit(x) + " trembling, back arching slightly. Nieve notices this and latches on to the tip just in time as an orgasm rocks your body.");
 	if(x >= 0) outputText("  Your " + cockClit(x) + " quivers and spurts cum directly into Nieve's eager mouth, who gulps it down as if she were drinking direct from the tap.");
 	outputText("\n\nAs you come down from your little orgasmic high, you glance down at the ice woman, ");
 	if(x < 0 || player.cumQ() <= 250) outputText("who has a bit of cum dribbling down her chin");
