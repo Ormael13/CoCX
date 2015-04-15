@@ -1187,7 +1187,7 @@ private function shrinkDatBootyForYoGhost():void {
 	}
 	else if(player.buttRating >= 10) {
 		player.buttRating -= 3;
-		outputText("\n\nYour ass jiggles as it recedes into you body.  A few moments later and your [butt] settles into its new, compact form.  The ghost girl recedes deep back into your body with a depressing sigh.");
+		outputText("\n\nYour ass jiggles as it recedes into your body.  A few moments later and your [butt] settles into its new, compact form.  The ghost girl recedes deep back into your body with a depressing sigh.");
 	}
 	else {
 		player.buttRating -= 1 + rand(3);
