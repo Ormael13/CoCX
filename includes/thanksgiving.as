@@ -423,7 +423,7 @@ public function turkeyDesertBitches():void {
 	if(player.biggestTitSize() > 1) outputText(", cupping a tit");
 	outputText(" as the venom takes control, flushing your skin and forcing out all thoughts but one: fuck that turkey! There's nothing for it, now: you grab Gobbles' hips and plunge in");
 	if(player.cockTotal() == 2) outputText(" with both cocks, one ramming into her abused cunny and the other right up her vulnerable little bumhole");
-	else if(player.cockTotal() > 2) outputText(" with every cock you've got, half in the pink and half in the stink, spreading her as wide as you arm in both barrels");
+	else if(player.cockTotal() > 2) outputText(" with every cock you've got, half in the pink and half in the stink, spreading her as wide as you are in both barrels");
 	outputText(", shocking her so much that she can't hold back, screaming and cumming on the spot! You groan, thrusting forward as her spasming muscles contract around your cock");
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(", milking you as hard as she can while her orgasm overtakes her.  Gravy geysers out of her swollen tits as fem-cum splashes out around your deep-buried cock");
