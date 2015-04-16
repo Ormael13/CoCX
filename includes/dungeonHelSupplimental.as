@@ -1277,6 +1277,7 @@ public function towerOutro():void {
 		outputText("\n\n\"<i>Well, shit.</i>\"");
 		outputText("\n\nYou laugh, shake your head, and start your way down the mountain.");
 	}
+	kGAMECLASS.dungeonLoc = 0;
 	//(PC returns to Camp)
 	//(If PC has Valeria: add \"<i>Valeria</i>\" to Followers menu)
 //	inDungeon = false;
