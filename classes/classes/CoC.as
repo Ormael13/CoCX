@@ -260,6 +260,8 @@ the text from being too boring.
 		
 		public var debugMenu:DebugMenu = new DebugMenu();
 		
+		public var crafting:Crafting = new Crafting();
+		
 		// Force updates in Pepper Flash ahuehue
 		private var _updateHack:Sprite = new Sprite();
 		
@@ -426,8 +428,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4_mod_snapshot_20150414";
-			version = ver + " (<b>Sleepy-time with Ember + CoC 0.9.4 Update</b>)";
+			ver = "0.9.4_mod_snapshot_20150415";
+			version = ver + " (<b>Crushing Bugs</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

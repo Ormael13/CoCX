@@ -141,8 +141,11 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	var kitsune:Function =null;
 	if(player.hasItem(consumables.FOXJEWL))
 		kitsune = lumiEnhanceFoxJewel;
+	var pigtruffle :Function = null;
+	if(player.hasItem(consumables.PIGTRUF))
+		pigtruffle = lumiEnhancePigtailTruffle;
 	if(justCheck) {
-		return fox != null || kanga != null || seed != null || laBova != null || succuDelight != null || oviElix != null || lustDraft != null || kitsune != null;
+		return fox != null || kanga != null || seed != null || laBova != null || succuDelight != null || oviElix != null || lustDraft != null || kitsune != null || pigtruffle != null;
 	}
 	clearOutput();
 	outputText("\"<i>Do you have 100 gems for de enhancement?</i>\" asks Lumi.\n\n", false); 
@@ -164,7 +167,8 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 				consumables.LABOVA_.shortName, laBova,
 				consumables.OVIELIX.shortName, oviElix,
 				consumables.SDELITE.shortName, succuDelight,
-				"", null, "Back", lumiLabChoices);
+				consumables.PIGTRUF.shortName, pigtruffle,
+				"Back", lumiLabChoices);
 		return true;
 	}
 }
@@ -191,6 +195,9 @@ private function lumiEnhanceFox():void {
 }
 private function lumiEnhanceFoxJewel():void {
 	lumiEnhanceGo(consumables.FOXJEWL);
+}
+private function lumiEnhancePigtailTruffle():void {
+	lumiEnhanceGo(consumables.PIGTRUF);
 }
 
 private function lumiEnhanceGo(itype:ItemType):void
@@ -221,6 +228,9 @@ private function lumiEnhanceGo(itype:ItemType):void
 	}
 	else if(itype == consumables.FOXJEWL) {
 		nextItem = consumables.MYSTJWL;
+	}
+	else if(itype == consumables.PIGTRUF) {
+		nextItem = consumables.BOARTRU;
 	}
 	player.gems -= 100;
 	statScreenRefresh();

@@ -63,7 +63,7 @@ package classes.Scenes {
 				addButton(button++, "LayInTits", layEggsInYerTits);
 			}
 			if (fappingItems(false))
-				addButton(8 ,"Items", fappingItems);
+				addButton(13 ,"Items", fappingItems);
 			else if (button == 1) { //If you can only masturbate or meditate the normal way then do that automatically
 				if ((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
 					if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
@@ -75,7 +75,7 @@ package classes.Scenes {
 				args = new Array();
 				return;
 			}
-			addButton(9, "Back", playerMenu);
+			addButton(14, "Back", playerMenu);
 		}
 		
 		private function fappingItems(menus:Boolean = true):Boolean {
@@ -122,9 +122,9 @@ package classes.Scenes {
 			if (player.hasKeyItem("Dildo") >= 0) {
 				if (menus) addButton(button, "Anal Dildo", dildoButts);
 				button++;
-				if (player.hasVagina()) addButton(button, "Dildo", stickADildoInYourVagooSlut);
+				if (menus && player.hasVagina()) addButton(button, "Dildo", stickADildoInYourVagooSlut);
 			}
-			if (menus) addButton(9, "Back", masturbateMenu);
+			if (menus) addButton(14, "Back", masturbateMenu);
 			return button > 0;
 		}
 		
@@ -2315,9 +2315,9 @@ package classes.Scenes {
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		private function meditate():void {
+		public function meditate(description:String = "rock"):void {
 			clearOutput();
-			outputText("You find a flat, comfortable rock to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up two hours of the day.");
+			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up two hours of the day.");
 			
 			dynStats("lus", -50, "cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10) HPChange(50, true);

@@ -6189,6 +6189,12 @@
 				if (player.breastRows[0].breastRating < 1) outputText("  <b>You have breasts now!</b>", false);
 				player.breastRows[0].breastRating = 2;
 			}
+			//Change cock if you have a penis.
+			if (changes < changeLimit && player.hasCock() && rand(type == 1 ? 4 : 10) == 0 ) { //2.5x chance if magic seed.
+				changes++;
+				outputText("\n\nYou feel a strange tingling sensation in your cock as erection forms. You " + player.clothedOrNakedLower("open up your " + player.armorName + " and", "") + " look down to see your cock shifting! By the time the transformation's complete, you notice it's tapered, red, and ends in a tip. When you're not aroused, your cock rests nicely in a newly-formed sheath. <b>You now have an avian penis!</b>");
+				player.cocks[0].cockType = CockTypesEnum.AVIAN;
+			}
 			//****************
 			//General Appearance:
 			//****************
@@ -6798,7 +6804,7 @@
 				outputText("\n\n", false);
 				//(Bird pretext)
 				if (player.armType == ARM_TYPE_HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ", false);
-				outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, turning the " + player.skinFurScales() + " into a shiny black carapace.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.", false);
+				outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.", false);
 				player.armType = ARM_TYPE_SPIDER;
 				changes++;
 			}
@@ -8546,10 +8552,10 @@
 				//Wings Fall Out: You feel a sharp pinching sensation in your shoulders and you cringe slightly.  Your former dragonfly wings make soft, papery sounds as they fall into the dirt behind you.
 				changes++;
 				player.wingType = WING_TYPE_GIANT_DRAGONFLY;
+				player.wingDesc = "giant dragonfly";
 			}
 			if (changes == 0) {
 				outputText("\n\nWell... that didn't amount to much.");
-				player.wingDesc = "giant dragonfly";
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
@@ -9413,14 +9419,15 @@
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 		
-		public function pigTruffle(player:Player):void {
+		public function pigTruffle(boar:Boolean, player:Player):void {
 			var changes:int = 0;
 			var changeLimit:int = 1;
 			var temp:int = 0;
 			var x:int = 0;
-			if(rand(2) == 0) changeLimit++;
-			if(rand(2) == 0) changeLimit++;
-			if(rand(3) == 0) changeLimit++;
+			if (rand(2) == 0) changeLimit++;
+			if (rand(2) == 0) changeLimit++;
+			if (rand(3) == 0) changeLimit++;
+			if (boar) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			outputText("You take a bite into the pigtail truffle. It oddly tastes like bacon. You eventually finish eating. ");
@@ -9492,13 +9499,13 @@
 				changes++;
 			}
 			//Gain pig ears!
-			if (rand(3) == 0 && changes < changeLimit && player.earType != EARS_PIG) {
+			if (rand(boar ? 3 : 4) == 0 && changes < changeLimit && player.earType != EARS_PIG) {
 				outputText("\n\nYou feel a pressure on your ears as they begin to reshape. Once the changes finish, you flick them about experimentally, <b>and you’re left with pointed, floppy pig ears.</b>");
 				player.earType = EARS_PIG;
 				changes++;
 			}
 			//Gain pig tail if you already have pig ears!
-			if (rand(3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType != TAIL_TYPE_PIG) {
+			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType != TAIL_TYPE_PIG) {
 				if (player.tailType > 0) //If you have non-pig tail.
 					outputText("\n\nYou feel a pinching sensation in your [tail] as it begins to warp in change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b>");
 				else //If you don't have a tail. 
@@ -9507,13 +9514,13 @@
 				changes++;
 			}
 			//Gain pig tail even when centaur, needs pig ears.
-			if (rand(3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType != TAIL_TYPE_PIG && (player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_PONY)) {
+			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType != TAIL_TYPE_PIG && (player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_PONY)) {
 				outputText("\n\nThere is a tingling in your [tail] as it begins to warp and change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b> This new, mismatched tail looks a bit odd on your horse lower body.");
 				player.tailType = TAIL_TYPE_PIG;
 				changes++;
 			}
 			//Turn your lower body into pig legs if you have pig ears and tail.
-			if (rand(4) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody != LOWER_BODY_TYPE_PIG) {
+			if (rand(boar ? 3 : 4) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody != LOWER_BODY_TYPE_PIG) {
 				if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) //Centaur
 					outputText("\n\nYou scream in agony as a horrible pain racks your entire horse lower half. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a horse. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>");
 				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) //Naga
@@ -9524,18 +9531,30 @@
 				changes++;
 			}
 			//Gain pig face when you have the first three pig TFs.
-			if (rand(3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody == LOWER_BODY_TYPE_PIG && player.faceType != FACE_PIG) {
+			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody == LOWER_BODY_TYPE_PIG && player.faceType != FACE_PIG) {
 				outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new pig face!</b>");
 				player.faceType = FACE_PIG;
 				changes++;
 			}
+			//Gain boar face
+			if (rand(3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody == LOWER_BODY_TYPE_PIG && player.faceType == FACE_PIG) {
+				outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. Your bottom teeth ache as well. What’s happening to you? As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new tusky boar face!</b>");
+				player.faceType = FACE_BOAR;
+				changes++;
+			}
 			//Change skin colour
-			if (rand(4) == 0 && changes < changeLimit) {
+			if (rand(boar ? 3 : 4) == 0 && changes < changeLimit) {
 				var skinChoose:int = rand(3);
 				var skinToBeChosen:String = "pink";
-				if (skinChoose == 0) player.skinTone = "pink";
-				else if (skinChoose == 1) player.skinTone = "tan";
-				else player.skinTone = "sable";
+				if (boar) {
+					if (skinChoose == 0) skinToBeChosen = "dark brown";
+					else skinToBeChosen = "brown";
+				}
+				else {
+					if (skinChoose == 0) skinToBeChosen = "pink";
+					else if (skinChoose == 1) skinToBeChosen = "tan";
+					else skinToBeChosen = "sable";
+				}
 				outputText("\n\nYour skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + skinToBeChosen + ".");
 				player.skinTone = skinToBeChosen;
 				changes++;
@@ -9580,14 +9599,14 @@
 			}
 		}
 		
-		public function prisonBread():void {
-			outputText("You eat the stale, flavorless brick of bread. It satisfies your hunger, but not much else.");
-			player.refillHunger(40);
+		public function prisonBread(player:Player):void {
+			outputText("You eat the stale, flavorless brick of bread. It satisfies your hunger, but not much else. ");
+			player.refillHunger(40, false);
 		}
 		
-		public function prisonCumStew():void {
-			outputText("You look at the bowl full of cum with bits of soggy bread floating in it. The thought of consuming such a thing disgusts and horrifies you, but you know you must eat if it you are going to keep your strength and willpower reserves up. It fills you with shame, but you slowly consume the sticky soup.");
-			player.refillHunger(20);
+		public function prisonCumStew(player:Player):void {
+			outputText("You look at the bowl full of cum with bits of soggy bread floating in it. The thought of consuming such a thing disgusts and horrifies you, but you know you must eat if it you are going to keep your strength and willpower reserves up. It fills you with shame, but you slowly consume the sticky soup. ");
+			player.refillHunger(20, false);
 		}
 	}
 }

@@ -864,6 +864,8 @@ use namespace kGAMECLASS;
 				race = "pig-morph";
 				if (faceType == 0)
 					race = "pig-" + mf("boy", "girl");
+				if (faceType == 20)
+					race = "boar-morph";
 			}
 			if (dragonneScore() >= 6)
 			{
@@ -1500,7 +1502,7 @@ use namespace kGAMECLASS;
 				pigCounter++;
 			if (tailType == TAIL_TYPE_PIG)
 				pigCounter++;
-			if (faceType == FACE_PIG)
+			if (faceType == FACE_PIG || FACE_BOAR)
 				pigCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_PIG)
 				pigCounter += 2;

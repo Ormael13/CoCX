@@ -40,6 +40,7 @@ package classes.Scenes
 				explorePageII();
 				return;
 			}*/
+			hideMenus();
 			menu();
 			addButton(0, "Explore", tryDiscover);
 			if (player.exploredDesert > 0) addButton(1, "Desert", kGAMECLASS.desert.exploreDesert);

@@ -74,8 +74,8 @@ package classes.Scenes.Places
 					removeButton(0);
 					removeButton(4);
 				}
-				addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateGo);
-				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateGo);
+				addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
+				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
 			}
 			//Show wait/rest/sleep depending on conditions.
 			addButton(9, "Wait", kGAMECLASS.camp.doWait);
@@ -93,7 +93,7 @@ package classes.Scenes.Places
 		public function getBanishedToMareth():void {
 			var hasWeapon:Boolean = false;
 			clearOutput();
-			outputText("Your time has come to meet up with the village elders. You know you are going to get sent to the demon realm and you're most likely not going to return to Ingnam. You give your family and friends a long farewell.");
+			outputText("Your time has come to meet up with the village elders. You know you are going to get sent to the demon realm and you're most likely not going to be able to return to Ingnam. You give your family and friends a long farewell.");
 			if (player.weaponName != "fists") {
 				hasWeapon = true;
 				player.setWeapon(WeaponLib.FISTS);
@@ -346,7 +346,7 @@ package classes.Scenes.Places
 		public function startMeditate():void {
 			if (player.findPerk(PerkLib.HistoryReligious) >= 0) dynStats("lib", -0.5, "cor", -0.5); //Bonus points for religious perks.
 			flags[kFLAGS.FORCE_MEDITATE] = 1; //Sets flag to 1 to force meditate. The flag itself is set to 0 after meditate is done.
-			kGAMECLASS.masturbation.masturbateGo(); //Fires the event.
+			kGAMECLASS.masturbation.masturbateMenu(); //Fires the event.
 		}
 		
 		//Tavern

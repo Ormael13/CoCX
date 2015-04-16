@@ -20,7 +20,7 @@ package classes.Scenes.Dungeons.D3
 		public function gogoFuckTheseBasilisksNorth():void
 		{
 			clearOutput();
-			outputText("You put your Laybans back on, carefully unlock the door and then, as quietly as you can, creep back out onto the wire gantry. The throng of greyish green below seems oblivious. It’s only when you get halfway across that you realize that you’ve been had. As soon as you are as far away from one exit as the other, two big groups of the lizards near the stairs immediately jump up and climb upwards determinedly. You speed as fast as you can to the door ahead, but the team of basilisks are ready and plough into you, grabbing your body as they reach for your shades. You desperately push and elbow them away from you but you cannot stop one from deftly hooking your Laybans off with his sickle claw.");
+			outputText("You " + (player.hasKeyItem("Laybans") >= 0 ? "put your Laybans back on" : "steel yourself") + ", carefully unlock the door and then, as quietly as you can, creep back out onto the wire gantry. The throng of greyish green below seems oblivious. It’s only when you get halfway across that you realize that you’ve been had. As soon as you are as far away from one exit as the other, two big groups of the lizards near the stairs immediately jump up and climb upwards determinedly. You speed as fast as you can to the door ahead, but the team of basilisks are ready and plough into you, grabbing your body as they reach for your shades. You desperately push and elbow them away from you but you cannot stop one from " + (player.hasKeyItem("Laybans") >= 0 ? "deftly hooking your Laybans off with his sickle claw" : "grabbing you with his clawed hand") + ".");
 			if (player.findPerk(PerkLib.BasiliskResistance) >= 0) {
 				outputText("\n\nDespite your naked eyes gazing into a dozen basilisk eyes, they have no effect on you! You " + (player.canFly() ? "fly" : "run") + " as fast as you can, being careless of glancing over the basilisk eyes thanks to your immunity. In no time, you manage to open the door and lock it as soon as you enter! You laugh as you hear the basilisks cursing about.");
 				menu();
@@ -353,6 +353,7 @@ package classes.Scenes.Dungeons.D3
 			if (player.averageVaginalLooseness() < 2)
 			{
 				outputText("\n\n“<i>Ungh! Tight little bitch,</i>” he gasps. He thrusts into you with wicked force and you gasp, grasping at his scaled shoulders, upon the threshold of pain and exquisite pleasure as he spreads your [vagina] wide with his huge girth. “<i>Been saving yourself for this? Good girl.</i>”");
+				player.cuntChange(24, true, true, false);
 			}
 			else
 			{

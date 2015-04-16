@@ -1556,6 +1556,7 @@ public function awardPlayer(nextFunc:Function = null):void
 	monster.handleAwardText(); //Each monster can now override the default award text
 	if (!inDungeon && !inRoomedDungeon)
 		doNext(camp.returnToCampUseOneHour);
+	else if (nextFunc != null) doNext(nextFunc);
 	else doNext(playerMenu);
 	dropItem(monster);
 	inCombat = false;

@@ -3824,6 +3824,7 @@ package classes
 					case CockTypesEnum.FOX:
 					case CockTypesEnum.HORSE:
 					case CockTypesEnum.KANGAROO:
+					case CockTypesEnum.AVIAN:
 						return true; //If there's even one cock of any of these types then return true
 					default:
 				}

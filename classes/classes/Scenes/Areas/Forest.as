@@ -172,16 +172,7 @@ package classes.Scenes.Areas
 			}
 			//If Jojo lives in camp, never encounter him
 			if (camp.campCorruptJojo() || player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 || flags[kFLAGS.JOJO_DEAD_OR_GONE] >= 1) {
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4) chooser = rand(3)
-				else chooser = rand(4)
 				if (chooser >= 1) chooser++;
-			}
-			//Prevent encountering cutting tree prompt if wood supply is full.
-			if (chooser >= 4) {
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100) {
-					trace("Don't do wood gather prompt");
-					chooser = rand(4);
-				}
 			}
 			//Chance to discover deepwoods
 			if ((player.exploredForest >= 20) && player.findStatusAffect(StatusAffects.ExploredDeepwoods) < 0) {
@@ -299,7 +290,7 @@ package classes.Scenes.Areas
 			if (chooser == 2) {
 				trace("TRACE TENTACRUELS");
 				clearOutput();
-				temp = rand(5);
+				temp = rand(4);
 				//Oh noes, tentacles!
 				if (temp == 0) {
 					//Tentacle avoidance chance due to dangerous plants
@@ -347,11 +338,6 @@ package classes.Scenes.Areas
 					trace("FIX MEEEEE");
 					return;
 				}
-				if (temp == 4) {
-					outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
-					inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
-					return;
-				}
 			}
 			//Bee-girl encounter
 			if (chooser == 3) {
@@ -363,6 +349,11 @@ package classes.Scenes.Areas
 				beeGirlScene.beeEncounter();
 			}
 			if (chooser >= 4) {
+				if (rand(4) == 0 || (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)) {
+					outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
+					inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
+					return;
+				}
 				cabinProgress.gatherWoods();
 				return;
 			}

@@ -218,6 +218,10 @@
 	{
 		outputText("Your face is like that of a pig, with " + player.skinTone + " skin, complete with a snout that is always wiggling.");
 	}
+	if (player.faceType == FACE_BOAR)
+	{
+		outputText("Your face is like that of a boar, with " + player.skinTone + " skin underneath your (x color) fur, complete with tusks and a snout that is always wiggling.");
+	}
 	//M/F stuff!
 	outputText("  It has " + player.faceDesc() + ".", false);
 	//Eyes
@@ -956,8 +960,17 @@
 		{
 			outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
 		}
+		//Bee flavor
 		if (player.cocks[temp].cockType == CockTypesEnum.BEE) {
 			outputText("  It's a long, smooth black shaft that's rigid to the touch.  Its base is ringed with a layer of four inch long soft bee hair.  The tip has a much finer layer of short yellow hairs.  The tip is very sensitive, and it hurts constantly if you don’t have bee honey on it.");
+		}
+		//Pig flavor
+		if (player.cocks[temp].cockType == CockTypesEnum.PIG) {
+			outputText("  It's bright pinkish red, ending in a prominent corkscrew shape at the tip.");
+		}
+		//Avian flavor
+		if (player.cocks[temp].cockType == CockTypesEnum.AVIAN) {
+			outputText("  It's a red, tapered cock that ends in a tip.  It rests nicely in a sheath.");
 		}
 		//Worm flavor
 		if(player.findStatusAffect(StatusAffects.Infested) >= 0)
@@ -1096,6 +1109,18 @@
 			if(player.cocks[temp].cockType == CockTypesEnum.DRAGON) 
 			{
 				outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
+			}
+			//Bee flavor
+			if (player.cocks[temp].cockType == CockTypesEnum.BEE) {
+				outputText("  It's a long, smooth black shaft that's rigid to the touch.  Its base is ringed with a layer of four inch long soft bee hair.  The tip has a much finer layer of short yellow hairs.  The tip is very sensitive, and it hurts constantly if you don’t have bee honey on it.");
+			}
+			//Pig flavor
+			if (player.cocks[temp].cockType == CockTypesEnum.PIG) {
+				outputText("  It's bright pinkish red, ending in a prominent corkscrew shape at the tip.");
+			}
+			//Avian flavor
+			if (player.cocks[temp].cockType == CockTypesEnum.AVIAN) {
+				outputText("  It's a red, tapered cock that ends in a tip.  It rests nicely in a sheath.");
 			}
 			if(player.cocks[temp].sock != "" && player.cocks[temp].sock != null)	// I dunno what was happening, but it looks like .sock is null, as it doesn't exist. I guess this is probably more left over from some of the restucturing.
 			{																		// Anyways, check against null values, and stuff works again.

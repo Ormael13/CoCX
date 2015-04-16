@@ -51,6 +51,7 @@ public static const FACE_MOUSE:int                                              
 public static const FACE_FERRET_MASK:int                                            =   17;
 public static const FACE_FERRET:int                                            		=   18;
 public static const FACE_PIG:int                                            		=   19;
+public static const FACE_BOAR:int                                            		=   20;
 
 // tongueType
 public static const TONUGE_HUMAN:int                                                =   0;

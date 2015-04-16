@@ -611,10 +611,11 @@ public function creditsScreen():void {
 	outputText("<ul>");
 	outputText("<li> Kitteh6660 (Mod Creator)</li>");
 	outputText("</ul>");
-	outputText("<b>Game Mod Contributors</b>\n");
+	outputText("<b>Game Mod Contributors and Contents</b>\n");
 	outputText("<ul>");
 	outputText("<li> Parth37955 (Pure Jojo anal pitch scene, Behemoth's vaginal catch scene)</li>");
 	outputText("<li> Liadri (Manticore and Dragonne suggestions)</li>");
+	outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TF)</li>");
 	outputText("</ul>");
 	outputText("<b>Game Mod Bug Reporting</b>\n");
 	outputText("<ul>");
@@ -626,6 +627,7 @@ public function creditsScreen():void {
 	outputText("<li> Elitist</li>");
 	outputText("<li> Bsword</li>");
 	outputText("<li> stationpass</li>");
+	outputText("<li> JDoraime</li>");
 	outputText("<ul>");
 	outputText("</ul>");
 	outputText("<b>Typo Reporting</b>\n");

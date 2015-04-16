@@ -94,6 +94,13 @@ private function doCamp():void { //Only called by playerMenu
 		getGame().saves.saveGame(player.slotName);
 	}
 	kGAMECLASS.tooltipLoc = "";
+	if (flags[kFLAGS.IN_INGNAM] > 0) {
+		kGAMECLASS.ingnam.menuIngnam();
+		return;
+	}
+	if (flags[kFLAGS.IN_PRISON] > 0) {
+		kGAMECLASS.prison.prisonRoom();
+	}
 	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	if(player.findStatusAffect(StatusAffects.PostAkbalSubmission) >= 0) {
@@ -882,8 +889,8 @@ private function doCamp():void { //Only called by playerMenu
 	addButton(7, "Camp Actions", campActions);
 	var canFap:Boolean = player.findStatusAffect(StatusAffects.Dysfunction) < 0 && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 	if (player.lust >= 30) {
-		if (canFap) addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateGo);
-		if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateGo);
+		if (canFap) addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
+		if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
 	}
 	addButton(9, "Wait", doWait);
 	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", rest);
@@ -1305,7 +1312,7 @@ private function campActions():void {
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_GATE] <= 0) addButton(5, "Build Gate", buildCampGatePrompt, null, null, null, "Build a gate to complete your camp defense.");
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && player.hasItem(useables.IMPSKLL, 1)) addButton(6, "AddImpSkull", promptHangImpSkull, null, null, null, "Add an imp skull to decorate the wall and to serve as deterrent for imps.");
 	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(7, "Ascension", promptAscend, null, null, null, "Perform an ascension? This will restart your adventures with your levels, items, and gems carried over. The game will also get harder.");
-
+	//addButton(9, "Craft", kGAMECLASS.crafting.accessCraftingMenu, null, null, null, "Craft some items.");
 	addButton(14, "Back", playerMenu);
 }
 

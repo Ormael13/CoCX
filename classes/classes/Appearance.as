@@ -737,6 +737,18 @@
 					"star-capped tool",
 					"knotted erection");
 			}
+			else if (cockType == CockTypesEnum.AVIAN) {
+				return randomChoice("bird cock",
+					"bird dick",
+					"bird pecker",
+					"avian cock",
+					"avian dick",
+					"avian penis",
+					"avian prick",
+					"avian pecker",
+					"tapered cock",
+					"tapered prick");
+			}
 			return randomChoice("cock",
 				"prick",
 				"pecker",
@@ -2178,7 +2190,6 @@
 			descript += cockNoun(CockTypesEnum.LIZARD);
 			return descript;
 		}
-*/
 
 		private static function pigDescript(cockNum:Number):String
 		{
@@ -2187,6 +2198,9 @@
 			descript += cockNoun(CockTypesEnum.PIG);
 			return descript;
 		}
+*/
+
+
 		
 		public static const BREAST_CUP_NAMES:Array = [
 			"flat",//0
