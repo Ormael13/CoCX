@@ -197,7 +197,7 @@
 			flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 			cleanupAfterCombat();
 			menu();
-			addButton(0, "Next", d3.resumeFromFight);
+			cleanupAfterCombat(d3.resumeFromFight);
 		}
 		
 		public function inSovietCoCSelfFucksYou():void

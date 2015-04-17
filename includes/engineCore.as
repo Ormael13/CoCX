@@ -467,6 +467,7 @@ public function levelUpGo(e:MouseEvent = null):void {
 		player.level++;
 		player.perkPoints++;
 		player.statPoints += 5;
+		if (player.level % 2 == 0) player.ascensionPerkPoints++;
 		outputText("<b>You are now level " + num2Text(player.level) + "!</b>\n\nYou have gained five attribute points and one perk point!", true);
 		player.XP -= (player.level-1) * 100;
 		doNext(attributeMenu);
@@ -2227,8 +2228,8 @@ public function displayStats(e:MouseEvent = null):void
 		childStats += "<b>Ember Offspring (Females):</b> " + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n";
 	if (flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
 		childStats += "<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n";
-	if (flags[kFLAGS.EMBER_CHILDREN_MALES] + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
-		childStats += "<b>Total Children with Ember:</b> " + (flags[kFLAGS.EMBER_CHILDREN_MALES] + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + flags[kFLAGS.EMBER_CHILDREN_HERMS]) + "\n";
+	if (emberScene.emberChildren() > 0)
+		childStats += "<b>Total Children with Ember:</b> " + (emberScene.emberChildren()) + "\n";
 	
 	if (flags[kFLAGS.EMBER_EGGS] > 0)
 		childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";

@@ -38,8 +38,8 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			
 			outputText("You breathe deep, steel yourself")
-			if (player.hasKeyItem("Laybans") >= 0) outputText(", put your shades on")
-			(" and stride out onto the gantry. The plan is simple. You’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
+			if (player.hasKeyItem("Laybans") >= 0) outputText(", put your shades on");
+			outputText(" and stride out onto the gantry. The plan is simple. You’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
 			if (player.demonScore() > 4) outputText("  You can’t be mistaken for anything but a demon, after all.");
 			outputText("  If or when the lizards realize who you are, you’ll make a break for it, and hopefully by then you’ll be in reach of the exit. It’s straight-forward, it’s elegant, it will work, whatever your hammering pulse has to say on the matter.");
 

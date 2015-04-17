@@ -68,6 +68,12 @@ public function sophieCapacity():Number {
 	return 179;
 }
 
+public function sophieChildren():int {
+	var temp:int = flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
+	if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) temp++;
+	if (flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) temp++;
+	return temp;
+}
 
 //*Summary:  Sophie is defeated, give draft.
 internal function bimbotizeMeCaptainSophie():void {

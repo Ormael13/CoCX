@@ -145,10 +145,19 @@
 			player.ass.fullness = 0;
 			player.fertility = 5;
 			player.fatigue = 0;
-			player.horns = 0;
-			player.tallness = 60;
-			player.tailVenom = 0;
-			player.tailRecharge = 0;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+				player.horns = 0;
+				player.tallness = 60;
+				player.tailVenom = 0;
+				player.tailRecharge = 0;
+
+			}
+			else {
+				if (!(player.tailType == TAIL_TYPE_FOX || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION)) {
+					player.tailVenom = 0;
+					player.tailRecharge = 0;
+				}
+			}
 			player.wingType = WING_TYPE_NONE;
 			player.wingDesc = "non-existant";
 			//Default
@@ -203,6 +212,7 @@
 			kGAMECLASS.giacomo = 0;
 			//Lets get this bitch started
 			kGAMECLASS.inCombat = false;
+			kGAMECLASS.inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//NG+ Clothes reset
 				if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] != 0) 
@@ -323,7 +333,7 @@
 
 			kGAMECLASS.saves.loadPermObject();
 			//Carry over data if new game plus.
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
+			if (newGamePlusLevel > 0) {
 				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = newGamePlusLevel;
 				flags[kFLAGS.HUNGER_ENABLED] = gameMode;
 				flags[kFLAGS.HARDCORE_MODE] = hardcoreMode;
@@ -1226,10 +1236,12 @@
 		private function completeCharacterCreation():void {
 			if (customPlayerProfile != null) {
 				customPlayerProfile();
-				doNext(chooseGameModes);
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseGameModes);
+				else doNext(startTheGame);
 				return;
 			}
-			chooseGameModes();
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseGameModes();
+			else startTheGame();
 		}
 			
 		public function arrival():void {
@@ -2984,6 +2996,7 @@
 			doYesNo(reincarnate, ascensionMenu);
 		}
 		private function reincarnate():void {
+			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
 			newGameGo();
 			clearOutput();
 			mainView.nameBox.visible = false;
@@ -3020,7 +3033,7 @@
 		}
 
 		private function isSpecialKeyItem(keyName:* = null):Boolean {
-			return (keyName == "Camp - Chest" || keyName == "Equipment Rack - Weapons" || keyName == "Equipment Rack - Armor" || keyName == "Equipment Storage - Jewelry Box" || keyName == "Nieve's Tear"); 
+			return (keyName == "Camp - Chest" || keyName == "Equipment Rack - Weapons" || keyName == "Equipment Rack - Armor" || keyName == "Equipment Storage - Jewelry Box" || keyName == "Backpack" || keyName == "Nieve's Tear"); 
 		}
 
 /* Replaced by private functions

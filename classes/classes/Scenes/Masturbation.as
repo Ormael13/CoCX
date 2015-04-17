@@ -39,7 +39,11 @@ package classes.Scenes {
 			//FAP BUTTON GOAADFADHAKDADK
 			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
 				if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
-					addButton(button++,"Masturbate", masturbateGo);
+					addButton(button++, "Masturbate", masturbateGo);
+				else if (player.findPerk(PerkLib.Enlightened) >= 0 && player.findPerk(PerkLib.HistoryReligious) < 0) {
+					addButton(button++, "Masturbate", masturbateGo);
+					addButton(button++, "Meditate", meditate);
+				}
 				else addButton(button++,"Meditate", meditate);
 			}
 			else addButton(button++,"Masturbate", masturbateGo);
@@ -1765,7 +1769,8 @@ package classes.Scenes {
 						else if (player.cumQ() < 500)
 							outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down.  ");
 						else outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of each jet of cum erupting from your cock.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ");
-					}			
+					}
+					if (player.armor == armors.GOOARMR) outputText("Your seed gets absorbed into your gooey covering.  ");
 				}
 				//MULTICOCK
 				if (player.cocks.length > 1) {
@@ -1815,14 +1820,15 @@ package classes.Scenes {
 						else player.refillHunger(100);
 					}
 					//These seem like they should always be displayed regardless of other factors.		
-					if (player.cumQ() < 5)
+					if (player.cumQ() < 25)
 						outputText("A few thick spurts of cum burst from your cocks, splattering you liberally.  ");
-					else if (player.cumQ() < 7)
+					else if (player.cumQ() < 250)
 						outputText("The orgasm drags on and on, spurt after spurt of jism coating you from each cock.  ");
-					else if (player.cumQ() < 10)
+					else if (player.cumQ() < 500)
 						outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down as the orgasms from each of your members begin to overlap.  Your nearly black out in pleasure.  ");
 					else outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ");
 				}
+				
 			}
 			//Vaginal CUMMING
 			if (player.vaginas.length > 0) {
@@ -1851,6 +1857,17 @@ package classes.Scenes {
 				//WHYYYYY
 				titCum(player.cumQ());
 			}
+			if (player.armor == armors.GOOARMR) {
+				var valeriaFluids:int = 0;
+				if (player.vaginas[0].vaginalWetness >= 3) valeriaFluids += player.vaginas[0].vaginalWetness * 3;
+				if (player.cumQ() < 100) valeriaFluids += (player.cumQ() / 5);
+				else if (player.cumQ() >= 100 && player.cumQ() < 500) valeriaFluids += 20 + (player.cumQ() / 20);
+				else if (player.cumQ() >= 500 && player.cumQ() < 3500) valeriaFluids += 40 + (player.cumQ() / 50);
+				else if (player.cumQ() >= 3500) valeriaFluids += 100;
+				valeriaFluids += Math.sqrt(player.lactationQ());
+				kGAMECLASS.valeria.feedValeria(valeriaFluids);
+				if (valeriaFluids > 0) outputText("\"<i>Thanks for the fluids!</i>\" Valeria says.  ");
+			}
 			//DONE!
 			player.orgasm();
 			dynStats("sen", (-0.5));
@@ -1869,9 +1886,15 @@ package classes.Scenes {
 				if (player.averageNippleLength() <=1) outputText("erect nipples, ");
 				if (player.averageNippleLength() > 1 && player.averageNippleLength() < 4) outputText("fat, puckered nipples, ");
 				if (player.averageNippleLength() >= 4) outputText("huge, swollen teats, ");
-				if (player.averageLactation() <= 2.6) outputText("spattering milk everywhere. ");
-				if (player.averageLactation() > 2.6 && player.averageLactation() < 3) outputText("covering everything nearby. ");
-				if (player.averageLactation() >= 3) outputText("drenching the entire area.");
+				if (player.armor == armors.GOOARMR) {
+					if (player.averageLactation() < 2.6) outputText("spattering milk into the goo.  ");
+					if (player.averageLactation() >= 2.6) outputText("stuffing the goo with your milk.  ");
+				}
+				else {
+					if (player.averageLactation() <= 2.6) outputText("spattering milk everywhere.  ");
+					if (player.averageLactation() > 2.6 && player.averageLactation() < 3) outputText("covering everything nearby.  ");
+					if (player.averageLactation() >= 3) outputText("drenching the entire area.  ");
+				}
 			}
 			//Cumming with Nipplecunts!
 			if (player.hasFuckableNipples()) {
@@ -1885,7 +1908,9 @@ package classes.Scenes {
 				if (player.averageVaginalWetness() >= 4) outputText("gush ");
 				//Lactating?
 				if (player.averageLactation() > 0) outputText("milk and ");
-				outputText("pussy juice everywhere.");
+				outputText("pussy juice ");
+				if (player.armor == armors.GOOARMR) outputText("into the blue goo covering your body.  ");
+				else outputText("everywhere.  ");
 			}
 		}
 		

@@ -1604,6 +1604,10 @@ package classes.Scenes.NPCs
 				if(player.itemSlot1.itype == consumables.W_FRUIT) {
 					outputText("\"<i>That's a whisker fruit,</i>\" Amily says, \"<i>It might give you cat ears and even tail! It would make you cute-looking!</i>\"\n\n", false);
 				}
+				//Pigtail or Boar Truffle:
+				if(player.itemSlot1.itype == consumables.PIGTRUF || player.itemSlot1.itype == consumables.BOARTRU) {
+					outputText("\"<i>That's a pigtail truffle,</i>\" Amily says, \"<i>It might give you pig ears and even tail! It would make you plump and cute-looking!</i>\"\n\n", false);
+				}
 				//Green Glob:
 				else if(player.itemSlot1.itype == useables.GREENGL) {
 					outputText("\"<i>A blob of slime from a green gel?  Hmm...</i>\" she looks thoughtful.  \"<i>I think I remember my dad once telling me you could make a really strong armor out of a special distillation of green oozes.  I can't say for sure, and I wouldn't have the equipment even if I did remember.</i>\"\n\n", false);
@@ -1615,6 +1619,16 @@ package classes.Scenes.NPCs
 				//Spider Silk:
 				else if(player.itemSlot1.itype == useables.T_SSILK) {
 					outputText("\"<i>Some spider silk? I think I remember someone who could take these and make them into armor or even comfortable robes.</i>\"\n\n", false);
+				}
+				//Dragon Scale:
+				else if(player.itemSlot1.itype == useables.D_SCALE) {
+					outputText("\"<i>Dragonscale? I never knew dragons existed");
+					if (camp.followerKiha() || camp.followerEmber()) outputText(" until");
+					if (camp.followerKiha()) outputText(" Kiha");
+					if (camp.followerKiha() && camp.followerEmber()) outputText(" and");
+					if (camp.followerEmber()) outputText(" Ember");
+					if (camp.followerKiha() || camp.followerEmber()) outputText(" came to your camp");
+					outputText(". They could be made into flexible yet protective armor.</i>\"\n\n", false);
 				}
 				//Imp Skull:
 				else if(player.itemSlot1.itype == useables.IMPSKLL) {
@@ -5819,9 +5833,13 @@ package classes.Scenes.NPCs
 				if(player.itemSlot1.itype == consumables.W_FRUIT) {
 					outputText("\"<i>That's a whisker fruit,</i>\" Amily says, \"<i>It might give you cat ears and even tail! It would make you cute-looking, " + player.mf("master","mistress") + ",</i>\" she giggles.\n\n", false);
 				}
+				//Pigtail or Boar Truffle:
+				if(player.itemSlot1.itype == consumables.PIGTRUF || player.itemSlot1.itype == consumables.BOARTRU) {
+					outputText("\"<i>That's a pigtail truffle,</i>\" Amily says, \"<i>It might give you pig ears and even tail! It would make you plump and cute-looking, " + player.mf("master","mistress") + ",</i>\" she giggles.\n\n", false);
+				}
 				//Green Glob:
 				else if(player.itemSlot1.itype == useables.GREENGL) {
-					outputText("\"<i>A blob of slime from a green gel? Hmm...</i>\" She looks thoughtful. \"<i>I think I remember my dad once telling  me you could make a really strong armor out of a special distillation of green oozes. Slut doesn't remember for sure, but she thinks you look better naked " + player.mf("master","mistress") + "</i>,\" she says seductively.</i>\"\n\n", false);
+					outputText("\"<i>A blob of slime from a green gel? Hmm...</i>\" She looks thoughtful. \"<i>I think I remember my dad once telling me you could make a really strong armor out of a special distillation of green oozes. Slut doesn't remember for sure, but she thinks you look better naked " + player.mf("master","mistress") + "</i>,\" she says seductively.</i>\"\n\n", false);
 				}
 				//Bee Chitin:
 				else if(player.itemSlot1.itype == useables.B_CHITN) {
@@ -5829,7 +5847,11 @@ package classes.Scenes.NPCs
 				}
 				//Spider Silk:
 				else if(player.itemSlot1.itype == useables.T_SSILK) {
-					outputText("\"<i>Some spider silk? I think I remember someone who could take these and make them into armor. But why bother? That would hide your perfect body, " + player.mf("master","mistress") + ",</i>\" she says seductively.\n\n", false);
+					outputText("\"<i>Some spider silk? I think I remember someone who could take these and make them into armor. But why bother? That would hide your perfect body, " + player.mf("master","mistress") + ". Unless you want to tease me,</i>\" she says seductively.\n\n", false);
+				}
+				//Dragon Scale:
+				else if(player.itemSlot1.itype == useables.D_SCALE) {
+					outputText("\"<i>Dragonscale? I never knew dragons existed. They could be made into armor. But why bother? That would hide your perfect body, " + player.mf("master","mistress") + ". Unless you want to tease me,</i>\" she says seductively.\n\n", false);
 				}
 				//Imp Skull:
 				else if(player.itemSlot1.itype == useables.IMPSKLL) {

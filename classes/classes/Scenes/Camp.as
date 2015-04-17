@@ -795,9 +795,9 @@ private function doCamp():void { //Only called by playerMenu
 	//Hunger check!
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
 	{
-		outputText("<b>Your stomach is growling " + (player.hunger < 1 ? "painfully": "loudly") + ". You have to eat something. </b>", false);
+		outputText("<b>You have to eat something; your stomach is growling " + (player.hunger < 1 ? "painfully": "loudly") + ". </b>", false);
 		if (player.hunger < 10) {
-			outputText("<b>You are getting thinner and you're losing muscles.</b>");
+			outputText("<b>You are getting thinner and you're losing muscles. </b>");
 		}
 		if (player.hunger <= 0) {
 			outputText("<b>You are getting weaker due to starvation. </b>");
@@ -2289,38 +2289,39 @@ private function promptAscend():void {
 	else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) outputText("<b>New Game++</b>");
 	else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) outputText("<b>New Game+++</b>");
 	else outputText("<b>New Game+" + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + 1) + "</b>");
-	outputText(". Your items, level, and attributes except Corruption will be carried over into new playthrough. You'll revert back to human completely but you'll get to keep ears and tail transformations, if any. You'll also retain your name and gender.");
+	outputText(". Your items, level, and attributes except Corruption will be carried over into new playthrough. You'll revert back to human completely but you'll get to keep ears, horns, and tail transformations, if any. You'll also retain your name and gender.");
 	outputText("\n\n(Ascension is currently beta. Suggestions and feedbacks are welcome.)");
 	outputText("\n\n<b>Proceed?</b>");
 	doYesNo(ascendForReal, campActions);
 }
 private function ascendForReal():void {
 	//Check performance!
-	var performancePoints:int = 0
-	var levelDelta:int = (player.level - (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30)) / 2;
-	if (levelDelta < 0) levelDelta = 0;
-	performancePoints = levelDelta + companionsCount();
-	//Increment by 1.
-	flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
-	//Keep items
-	var oldItemStorage:Array = inventory.itemStorageDirectGet();
-	var oldGearStorage:Array = inventory.gearStorageDirectGet();
-	//Keep perks
-	var oldPerks:Array = player.perks;
-	//Keep certain flags.
-	var levelNG:Number = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-
-	//RESTART!
-	//kGAMECLASS.charCreation.newGamePlus();
-	
-	//Set to old values.
-	flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = levelNG;
-
+	var performancePoints:int = 0;
+	//Companions
+	performancePoints += companionsCount();
+	//Dungeons
+	if (kGAMECLASS.dungeons.checkFactoryClear()) performancePoints++;
+	if (kGAMECLASS.dungeons.checkDeepCaveClear()) performancePoints++;
+	if (kGAMECLASS.dungeons.checkLethiceStrongholdClear()) performancePoints++;
+	if (kGAMECLASS.dungeons.checkSandCaveClear()) performancePoints++;
+	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) performancePoints += 2;
+	//Quests
+	if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePoints += 2;
+	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) performancePoints += 2;
+	if (flags[kFLAGS.URTA_QUEST_STATUS] > 0) performancePoints += 2;
+	if (player.findPerk(PerkLib.Enlightened) >= 0) performancePoints += 1;
+	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePoints += 1;
+	//Children
+	var childPerformance:int = 0;
+	childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren() + (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4));
+	performancePoints += Math.sqrt(childPerformance);
+	//Sum up ascension perk points!
 	player.ascensionPerkPoints += performancePoints;
+	//Scene GO!
 	clearOutput();
 	outputText("It's time for you to ascend. You walk to the center of the camp, announce that you're going to ascend to a higher plane of existence, and lay down. ");
 	if (companionsCount() == 1) outputText("\n\nYour fellow companion comes to witness.");
-	else if (companionsCount() > 1) outputText("\n\nYour fellow companion comes to witness.");
+	else if (companionsCount() > 1) outputText("\n\nYour fellow companions come to witness.");
 	outputText("\n\nYou begin to glow; you can already feel yourself leaving your body and you announce your departure.");
 	if (marbleFollower()) outputText("\n\n\"<i>Sweetie, I'm going to miss you. See you in the next playthrough,</i>\" Marble says, tears leaking from her eyes.");
 	outputText("\n\nThe world around you slowly fades to black and stars dot the endless void. <b>You have ascended.</b>");
