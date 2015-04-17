@@ -428,7 +428,7 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4C_mod_snapshot_20150415";
+			ver = "0.9.4C_mod_snapshot_20150416";
 			version = ver + " (<b>Crushing Bugs</b>)";
 
 			//Indicates if building for mobile?
