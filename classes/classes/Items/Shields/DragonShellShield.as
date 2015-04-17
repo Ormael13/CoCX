@@ -14,6 +14,8 @@ package classes.Items.Shields
 			super("DrgnShl", "DrgnShl", "dragon-shell shield", "a dragon-shell shield", 14, 1500, "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.  Absorbs any fluid attacks you can catch, rendering them useless. \n\nType: Shield \Block: 14 \nBase value: 1,500 \nProtects against 'liquid attacks'.");
 		}
 		
+		override public function get description():String { return (game.flags[kFLAGS.EMBER_HATCHED] > 0 ? "A durable shield that has been forged from the dragon eggshell Ember gave you for maxing out " + game.emberScene.emberMF("his", "her") + " affection." : "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.") + "  Absorbs any fluid attacks you can catch, rendering them useless. \n\nType: Shield \Block: 14 \nBase value: 1,500 \nProtects against 'liquid attacks'."; }
+		
 		override public function useText():void { //Produces any text seen when equipping the armor normally
 			if (game.flags[kFLAGS.TIMES_EQUIPPED_EMBER_SHIELD] == 0) {
 				clearOutput();
@@ -22,6 +24,9 @@ package classes.Items.Shields
 				else outputText("huge shards of the shattered");
 				outputText(" rock are sent flying in all directions.");
 				outputText("\n\nAfter a few more practice bashes and shifts to acquaint yourself with its weight, you think you're ready to try facing an enemy with your new protection.  One last thing... taking off the shield and turning it straps-down, you spit onto the surface.  Satisfyingly, the liquid disappears into the shell as soon as it touches.");
+			}
+			else {
+				outputText("You equip " + this.longName + ".  ");
 			}
 			game.flags[kFLAGS.TIMES_EQUIPPED_EMBER_SHIELD]++;
 		}

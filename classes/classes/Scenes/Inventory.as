@@ -141,14 +141,14 @@ package classes.Scenes
 				if (hasItemsInStorage()) addButton(1, "Chest Take", pickItemToTakeFromCampStorage);
 			}
 			//Weapon Rack
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) {
+			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
 				outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
 				addButton(2, "W.Rack Put", pickItemToPlaceInWeaponRack);
 				if (weaponRackDescription()) addButton(3, "W.Rack Take", pickItemToTakeFromWeaponRack);
 				outputText("\n\n");
 			}
 			//Armor Rack
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0) {
+			if(player.hasKeyItem("Equipment Rack - Armor") >= 0) {
 				outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.");
 				addButton(5, "A.Rack Put", pickItemToPlaceInArmorRack);
 				if (armorRackDescription()) addButton(6, "A.Rack Take", pickItemToTakeFromArmorRack);
