@@ -88,7 +88,7 @@
 				}
 				else { //She's in camp and not pregnant
 					if (flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 0) { //Tick over into heat if appropriate
-						if (player.hasCock()) {
+						if (player.hasCock() && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 							if (sophieBimbo.bimboSophie()) sophieBimbo.sophieGoesIntoSeason();
 							else sophieFollowerScene.sophieFollowerGoesIntoSeas();
 							flags[kFLAGS.SOPHIE_HEAT_COUNTER] = 720;

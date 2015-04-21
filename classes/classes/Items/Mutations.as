@@ -1346,7 +1346,7 @@
 				dynStats("spe", 1);
 			}
 			//Centaur
-			if (changes < changeLimit && rand(2) == 0) {
+			if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LOWER_BODY_TYPE_HOOFED && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 				changes++;
 				outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.", false);
 				if (player.gender > 0) {
@@ -9531,12 +9531,12 @@
 				changes++;
 			}
 			//Gain pig face when you have the first three pig TFs.
-			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody == LOWER_BODY_TYPE_PIG && player.faceType != FACE_PIG) {
+			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody == LOWER_BODY_TYPE_PIG && (player.faceType != FACE_PIG && player.faceType != FACE_BOAR)) {
 				outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new pig face!</b>");
 				player.faceType = FACE_PIG;
 				changes++;
 			}
-			//Gain boar face
+			//Gain boar face if you have pig face.
 			if (rand(3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody == LOWER_BODY_TYPE_PIG && player.faceType == FACE_PIG) {
 				outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. Your bottom teeth ache as well. What’s happening to you? As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new tusky boar face!</b>");
 				player.faceType = FACE_BOAR;
@@ -9599,14 +9599,19 @@
 			}
 		}
 		
+		public function drakeHeart(player:Player):void {
+			outputText("You bring the flower up to your nose and smell it. It has exquisite smell. You suddenly have the strange desire to eat it. You pop the flower into your mouth and chew. It tastes like vanilla somehow. Before you know it, you're undergoing changes.");
+			kGAMECLASS.emberScene.emberTFs();
+		}
+		
 		public function prisonBread(player:Player):void {
-			outputText("You eat the stale, flavorless brick of bread. It satisfies your hunger, but not much else. ");
-			player.refillHunger(40, false);
+			prison.prisonItemBread(false);
+			player.refillHunger(40);
 		}
 		
 		public function prisonCumStew(player:Player):void {
-			outputText("You look at the bowl full of cum with bits of soggy bread floating in it. The thought of consuming such a thing disgusts and horrifies you, but you know you must eat if it you are going to keep your strength and willpower reserves up. It fills you with shame, but you slowly consume the sticky soup. ");
-			player.refillHunger(20, false);
+			prison.prisonItemBread(true);
+			player.refillHunger(20);
 		}
 	}
 }

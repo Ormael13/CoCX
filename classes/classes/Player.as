@@ -55,7 +55,13 @@ use namespace kGAMECLASS;
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
 		
-		public var hunger:Number = 0;
+		//Prison stats
+		public var hunger:Number = 0; //Also used in survival and realistic mode
+		public var obey:Number = 0;
+		public var esteem:Number = 0;
+		public var will:Number = 0;
+		
+		public var obeySoftCap:Boolean = true;
 		
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
@@ -90,6 +96,8 @@ use namespace kGAMECLASS;
 		public var itemSlot9:ItemSlotClass;
 		public var itemSlot10:ItemSlotClass;
 		public var itemSlots:Array;
+		
+		public var prisonItemSlots:Array = [];
 		
 		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;

@@ -183,10 +183,12 @@ private function acceptBimboSophie():void {
 //Follower In Camp Text:
 public function sophieCampLines():void {
 	var choice:Number = rand(4);
+	if (silly()) choice = rand(5);
 	if(choice == 0)  outputText("Sophie is sitting by herself, applying yet another layer of glittering lip gloss to her puffy bimbo lips.", false);
 	else if(choice == 1) outputText("Sophie is sitting by herself, idly diddling her twat and noisily moaning.  She keeps looking your way, hoping you'll approach.", false);
 	else if(choice == 2) outputText("The beach-blond harpy is preening herself with a vapid, brainless look plastered on her face.  Her puffy, bee-stung lips are slightly parted and lacquered with a heavy layer of golden gloss.", false);
-	else outputText("Your personal bimbo, Sophie, is playing with her breasts, touching and caressing the heavy orbs in between sighs of pleasure.  She keeps glancing your way, hoping you'll join her.  She's insatiable!", false);
+	else if (choice == 3) outputText("Your personal bimbo, Sophie, is playing with her breasts, touching and caressing the heavy orbs in between sighs of pleasure.  She keeps glancing your way, hoping you'll join her.  She's insatiable!", false);
+	else outputText("Sophie is sitting by herself, posing a duckface and taking a selfie on her FenPhone. Wait, where did she get that?");
 	outputText("\n\n", false);
 }
 //Approach Texts

@@ -100,6 +100,7 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	if (flags[kFLAGS.IN_PRISON] > 0) {
 		kGAMECLASS.prison.prisonRoom();
+		return;
 	}
 	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
@@ -1652,7 +1653,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		if(model.time.hours == 3) timeQ = 3;
 		if(model.time.hours == 4) timeQ = 2;
 		if(model.time.hours == 5) timeQ = 1;
-		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) {
+		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && flags[kFLAGS.IN_PRISON] == 0) {
 			timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 		}
 		//Autosave stuff		
@@ -1663,7 +1664,12 @@ public function doSleep(clrScreen:Boolean = true):void {
 			getGame().saves.saveGame(player.slotName);
 		}
 		//Clear screen
-		if(clrScreen) clearOutput();
+		if (clrScreen) clearOutput();
+		if (flags[kFLAGS.IN_PRISON] > 0) {
+			outputText("You curl up on a slab, planning to sleep for " + num2Text(timeQ) + " hours.");
+			goNext(timeQ, true);
+			return;
+		}
 		/******************************************************************/
 		/*       ONE TIME SPECIAL EVENTS                                  */
 		/******************************************************************/
@@ -1995,8 +2001,9 @@ public function places():Boolean {
 	
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(10, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin);
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(11, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva);
+	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", kGAMECLASS.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 	if (debug) addButton(12, "Ingnam", kGAMECLASS.ingnam.returnToIngnam, null, null, null, "Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
-	//addButton(12, "Prison", eventParser, 9999);
+	
 	//addButton(13, "Next", placesPage2);
 	addButton(14, "Back", playerMenu);
 	return true;

@@ -179,11 +179,11 @@ package classes.Scenes.Monsters
 			this.hairLength = 4;
 			initStrTouSpeInte(95, 75, 70, 100);
 			initLibSensCor(55, 35, 45);
-			this.weaponName = "sword";
+			this.weaponName = "primal sword";
 			this.weaponVerb = "slash";
 			this.weaponAttack = 25;
 			this.armorName = "bone armor";
-			this.armorDef = 18;
+			this.armorDef = 24;
 			this.fatigue = 0;
 			this.bonusHP = 425;
 			this.lust = 35;

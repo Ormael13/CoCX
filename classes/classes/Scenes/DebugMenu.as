@@ -118,17 +118,17 @@ package classes.Scenes
 			addItemButton(consumables.B_GOSSR);
 			addItemButton(consumables.BEEHONY);
 			addItemButton(consumables.BLACKPP);
+			addItemButton(consumables.BOARTRU);
+			
 			addItemButton(consumables.BULBYPP);
-
 			addItemButton(consumables.CANINEP);
 			addItemButton(consumables.DBLPEPP);
+			addItemButton(consumables.DRAKHRT);
+			
 			addItemButton(consumables.DRYTENT);
 			addItemButton(consumables.ECTOPLS);
-
 			addItemButton(consumables.EQUINUM);
 			addItemButton(consumables.FOXBERY);
-			addItemButton(consumables.FRRTFRT);
-			addItemButton(consumables.FOXJEWL);
 			
 			addButton(4, "Next", itemSpawnTransformativesMenuII);
 			//addButton(9, "Previous", itemSpawnTransformativesMenuI);
@@ -137,20 +137,20 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuII():void {
 			lastMenu = itemSpawnTransformativesMenuII;
 			menu();
+			addItemButton(consumables.FRRTFRT);
+			addItemButton(consumables.FOXJEWL);
 			addItemButton(consumables.GLDSEED);
 			addItemButton(consumables.GOB_ALE);
+			
 			addItemButton(consumables.HUMMUS_);
 			addItemButton(consumables.IMPFOOD);
-			
 			addItemButton(consumables.INCUBID);
 			addItemButton(consumables.KANGAFT);
+			
 			addItemButton(consumables.KNOTTYP);
 			addItemButton(consumables.LABOVA_);
-			
 			addItemButton(consumables.LARGEPP);
 			addItemButton(consumables.MAGSEED);
-			addItemButton(consumables.MGHTYVG);
-			addItemButton(consumables.MOUSECO);
 			
 			addButton(4, "Next", itemSpawnTransformativesMenuIII);
 			addButton(9, "Previous", itemSpawnTransformativesMenuI);		
@@ -159,20 +159,20 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuIII():void {
 			lastMenu = itemSpawnTransformativesMenuIII;
 			menu();
+			addItemButton(consumables.MGHTYVG);
+			addItemButton(consumables.MOUSECO);
 			addItemButton(consumables.MINOBLO);
 			addItemButton(consumables.MYSTJWL);
+			
 			addItemButton(consumables.P_LBOVA);
 			addItemButton(consumables.PIGTRUF);
-			
 			addItemButton(consumables.PRFRUIT);
 			addItemButton(consumables.PROBOVA);
+			
 			addItemButton(consumables.P_DRAFT);
 			addItemButton(consumables.P_S_MLK);
-			
 			addItemButton(consumables.PSDELIT);
 			addItemButton(consumables.PURHONY);
-			addItemButton(consumables.SDELITE);
-			addItemButton(consumables.S_DREAM);
 			
 			addButton(4, "Next", itemSpawnTransformativesMenuIV);
 			addButton(9, "Previous", itemSpawnTransformativesMenuII);
@@ -181,20 +181,20 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuIV():void {
 			lastMenu = itemSpawnTransformativesMenuIV;
 			menu();
+			addItemButton(consumables.SDELITE);
+			addItemButton(consumables.S_DREAM);
 			addItemButton(consumables.SUCMILK);
 			addItemButton(consumables.REPTLUM);
+			
 			addItemButton(consumables.RINGFIG);
 			addItemButton(consumables.RIZZART);
-			
 			addItemButton(consumables.S_GOSSR);
 			addItemButton(consumables.SHARK_T);
+			
 			addItemButton(consumables.SNAKOIL);
 			addItemButton(consumables.SPHONEY);
-			
 			addItemButton(consumables.TAURICO);
 			addItemButton(consumables.TRAPOIL);
-			addItemButton(consumables.TSCROLL);
-			addItemButton(consumables.TSTOOTH);
 			
 			addButton(4, "Next", itemSpawnTransformativesMenuV);
 			addButton(9, "Previous", itemSpawnTransformativesMenuIII);
@@ -203,8 +203,11 @@ package classes.Scenes
 		private function itemSpawnTransformativesMenuV():void {
 			lastMenu = itemSpawnTransformativesMenuV;
 			menu();
+			addItemButton(consumables.TSCROLL);
+			addItemButton(consumables.TSTOOTH);
 			addItemButton(consumables.VIXVIGR);
 			addItemButton(consumables.W_FRUIT);
+			
 			addItemButton(consumables.WETCLTH);
 			
 			addButton(9, "Previous", itemSpawnTransformativesMenuIV);
@@ -628,6 +631,7 @@ package classes.Scenes
 			addButton(1, "Scorpion Tail", changeScorpionTail);
 			addButton(2, "Be Manticore", getManticoreKit, null, null, null, "Gain everything needed to become a Manticore-morph.");
 			addButton(3, "Be Dragonne", getDragonneKit, null, null, null, "Gain everything needed to become a Dragonne-morph.");
+			addButton(4, "Debug Prison", debugPrison);
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -676,6 +680,37 @@ package classes.Scenes
 			player.horns = 4;
 			player.wingType = WING_TYPE_DRACONIC_LARGE;
 			doNext(styleHackMenu);
+		}
+		
+		private function debugPrison():void {
+			clearOutput();
+			doNext(styleHackMenu);
+			//Stored equipment
+			outputText("<b><u>Stored equipment:</u></b>");
+			outputText("\n<b>Stored armour:</b> ");
+			if (flags[kFLAGS.PRISON_STORAGE_ARMOR] != 0) {
+				outputText("" + ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_ARMOR]));
+			}
+			else outputText("None");
+			outputText("\n<b>Stored weapon:</b> ");
+			if (flags[kFLAGS.PRISON_STORAGE_WEAPON] != 0) {
+				outputText("" + ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_WEAPON]));
+			}
+			else outputText("None");
+			outputText("\n<b>Stored shield:</b> ");
+			if (flags[kFLAGS.PRISON_STORAGE_SHIELD] != 0) {
+				outputText("" + ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_SHIELD]));
+			}
+			else outputText("None");
+			//Stored items
+			outputText("\n\n<b><u>Stored items:</u></b>");
+			for (var i:int = 0; i < 10; i++) {
+				if (player.prisonItemSlots[i*2] != null && player.prisonItemSlots[i*2] != undefined) {
+					outputText("\n" + player.prisonItemSlots[i*2]);
+					outputText(" x" + player.prisonItemSlots[(i*2)+1]);
+				}
+			}
+			flushOutputTextToGUI();
 		}
 		
 		private function eventTriggerMenu():void {

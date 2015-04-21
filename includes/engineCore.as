@@ -415,7 +415,7 @@ private function resetAttributes():void {
 }
 
 private function attributeMenu():void {
-	outputText("You have " + (player.statPoints) + " left to spend.\n\n", true)
+	outputText("You have <b>" + (player.statPoints) + "</b> left to spend.\n\n", true)
 	
 	outputText("Strength: ", false)
 	if (player.str < player.getMaxStats("str")) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n", false)
@@ -2200,6 +2200,8 @@ public function displayStats(e:MouseEvent = null):void
 	if (combatStats != "")
 		outputText("<b><u>Combat Stats</u></b>\n" + combatStats, false);
 	// End Combat Stats
+	
+	if (flags[kFLAGS.IN_PRISON] > 0) prison.displayPrisonStats();
 	
 	// Begin Children Stats
 	var childStats:String = "";

@@ -88,7 +88,7 @@ package classes {
 				if (player.hunger <= 0)
 				{
 					if (flags[kFLAGS.IN_PRISON] > 0) {
-						kGAMECLASS.prison.changeWillpower(-1);
+						kGAMECLASS.prison.changeWill(-1, flags[kFLAGS.IN_PRISON] > 0);
 						fatigue(2);
 					}
 					else {
@@ -101,6 +101,9 @@ package classes {
 						dynStats("tou", -0.5);
 					}
 					player.hunger = 0; //Prevents negative
+				}
+				else {
+					kGAMECLASS.prison.changeWill((player.esteem / 50) + 1);
 				}
 				if (player.hunger < 10) {
 					player.modThickness(1, 1);

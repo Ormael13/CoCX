@@ -394,6 +394,17 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				return true;
 			}
 			if (checkedMarbleMilk++ == 0 && model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
+				//In prison
+				if (flags[kFLAGS.IN_PRISON] > 0) {
+					outputText("\nYou get up and complain about not getting your daily dose of Marble's milk. ");
+					if (flags[kFLAGS.PRISON_BITCHED_ABOUT_MARBLE_MILK] == 0) {
+						outputText("Yet oddly, you are still fine. Perhaps addiction to Lacta Bovine milk is a conspiracy? You curse the codex entry for deceiving you about the properties of her milk!");
+					}
+					outputText("\n");
+					flags[kFLAGS.PRISON_BITCHED_ABOUT_MARBLE_MILK]++;
+					doNext(playerMenu);
+					return true;
+				}
 				//Marble is at camp
 				if (player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 					postAddictionCampMornings(false);

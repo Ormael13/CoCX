@@ -69,9 +69,10 @@ package classes.Scenes.Monsters
 			}
 			menu();
 			addButton(0, "Fight", startCombatImmediate, new GoblinElder());
+			//addButton(1, "Talk", null);
 			if (player.hasCock() && player.lust >= 33 && player.cor < 60 + player.corruptionTolerance()) {
 				monster = new GoblinElder();
-				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1, "Fuck Her", gatsGoblinBoners);
+				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(2, "Fuck Her", gatsGoblinBoners);
 				else outputText("\n\n<b>There is no way you can fit your cock into her cunt!</b>");
 			}
 			addButton(4, "Leave", camp.returnToCampUseOneHour);

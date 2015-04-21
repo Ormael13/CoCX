@@ -63,8 +63,10 @@ package classes.Scenes.Monsters
 			}
 			if (canFeed) addButton(3, "Breastfeed", areImpsLactoseIntolerant);
 			if (canBikiniTits) addButton(4, "B.Titfuck" (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, 1);
+			addButton(6, "Kill Him", killImp);
 			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
-			addButton(9, "Leave", cleanupAfterCombat);
+			addButton(14, "Leave", cleanupAfterCombat);
 			
 			/* The old way
 			var maleRape:Function =null;

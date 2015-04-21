@@ -162,8 +162,8 @@ package classes
 		public static const PrisonCaptorEllyPet:StatusAffectType = mk("prisonCaptorEllyPet");
 		public static const PrisonCaptorEllyBillie:StatusAffectType = mk("prisonCaptorEllyBillie");
 		public static const PrisonCaptorEllyScruffy:StatusAffectType = mk("prisonCaptorEllyScruffy");
-		public static const PrisonRestraints:StatusAffectType = mk("Prison Restraints");
-		public static const PrisonCaptorEllyScatch:StatusAffectType = mk("prisonCaptorEllyScatch");
+		public static const PrisonRestraints:StatusAffectType = mk("prisonRestraint");
+		public static const PrisonCaptorEllyScratch:StatusAffectType = mk("prisonCaptorEllyScatch");
 		/**
 		 * v1 = bonus index
 		 * v2 = bonus value

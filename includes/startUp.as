@@ -616,6 +616,7 @@ public function creditsScreen():void {
 	outputText("<li> Parth37955 (Pure Jojo anal pitch scene, Behemoth's vaginal catch scene)</li>");
 	outputText("<li> Liadri (Manticore and Dragonne suggestions)</li>");
 	outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TF)</li>");
+	outputText("<li> FeiFongWong (Prisoner Mod)</li>");
 	outputText("</ul>");
 	outputText("<b>Game Mod Bug Reporting</b>\n");
 	outputText("<ul>");

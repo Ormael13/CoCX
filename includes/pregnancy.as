@@ -1139,23 +1139,23 @@ public function updatePregnancy():Boolean {
 		}
 		//Behemoth Pregnancy
 		else if (player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH) {
-			if (player.pregnancyIncubation == 216) {
-				outputText("<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.</b>");
+			if (player.pregnancyIncubation == 1152) {
+				outputText("<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.  However, you have a feel that it's going to be a very long pregnancy.</b>");
 				displayedUpdate = true;
 			}
-			if (player.pregnancyIncubation == 144) {
+			if (player.pregnancyIncubation == 864) {
 				outputText("<b>Your distended belly shows obvious signs of pregnancy.</b>");
 				displayedUpdate = true;
 			}
-			if (player.pregnancyIncubation == 72) {
+			if (player.pregnancyIncubation == 576) {
 				outputText("<b>Your belly is getting larger.</b>");
 				displayedUpdate = true;
 			}
-			if (player.pregnancyIncubation == 24) {
+			if (player.pregnancyIncubation == 288) {
 				outputText("<b>Your belly is as big as it can get.  You have a feeling that you'll give birth to a behemoth soon.</b>");
 				displayedUpdate = true;
 			}
-			if(player.pregnancyIncubation == 144 || player.pregnancyIncubation == 72 || player.pregnancyIncubation == 85 || player.pregnancyIncubation == 150) {
+			if(player.pregnancyIncubation == 1024 || player.pregnancyIncubation == 768 || player.pregnancyIncubation == 512 || player.pregnancyIncubation == 256) {
 				//Increase lactation!
 				if(player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
 					outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You wonder just what kind of creature they're getting ready to feed.\n", false);

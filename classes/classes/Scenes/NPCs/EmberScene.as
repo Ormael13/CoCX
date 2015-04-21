@@ -1577,10 +1577,12 @@ package classes.Scenes.NPCs
 		}
 
 //TF messages (Z)
-		private function emberTFs():void
+		public function emberTFs():void
 		{
 			var changes:int = 0;
 			var changeLimit:int = 2;
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Gain Dragon Dick
 			if (changes < changeLimit && player.dragonCocks() < player.totalCocks() && rand(3) == 0) {
 				temp = 0;
@@ -1803,6 +1805,7 @@ package classes.Scenes.NPCs
 				}
 				outputText("</b>.");
 			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 //Get Egg (Ovilixer Ember) (Z)

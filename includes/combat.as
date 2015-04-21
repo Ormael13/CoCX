@@ -5203,7 +5203,10 @@ public function physicalSpecials():void {
 			addButton(7, "Tail Whip", tailWhipAttack);
 		default:
 	}
-	addButton(9, "Back", combatMenu, false);
+	if (player.shield != ShieldLib.NOTHING) {
+		addButton(8, "Shield Bash", shieldBash, null, null, null, "Bash your opponent with a shield. Has a chance to stun. \n\nThe more you stun your opponent, the harder it is to stun them again.");
+	}
+	addButton(14, "Back", combatMenu, false);
 }
 
 public function berzerk():void {

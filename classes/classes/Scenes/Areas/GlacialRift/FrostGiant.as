@@ -182,19 +182,8 @@ package classes.Scenes.Areas.GlacialRift
 			combatRoundOver();
 		}
 		
-		public function giantAI():void
+		override protected function performCombatAction():void
 		{
-			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
-				outputText("Your foe is too dazed from your last hit to strike back!", false)
-				if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
-				else addStatusValue(StatusAffects.Stunned, 1, -1);
-				combatRoundOver();
-				return;
-			}
-			if (findStatusAffect(StatusAffects.Fear) >= 0) {
-				game.outputText("The Frost Giant appears to be immune to your fear.\n\n");
-				removeStatusAffect(StatusAffects.Fear);
-			}
 			if (player.findStatusAffect(StatusAffects.GiantGrabbed) >= 0) { 
 				giantGrabFail(false);
 				return;
@@ -204,11 +193,6 @@ package classes.Scenes.Areas.GlacialRift
 			if (chooser < 6) giantAttackPunch(); //60% chance
 			if (chooser >= 6 && chooser < 9) giantGrab(); //30% chance
 			if (chooser >= 9) giantBoulderThrow(); //10% chance
-		}
-		
-		override public function doAI():void
-		{
-			giantAI();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

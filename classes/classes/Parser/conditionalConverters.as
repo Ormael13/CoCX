@@ -56,5 +56,10 @@
 				"canfly"			: function(thisPtr:*):* {return  kGAMECLASS.player.canFly();},
 				"islactating"		: function(thisPtr:*):* {return  (kGAMECLASS.player.lactationQ() > 0);},
 				"true"				: function(thisPtr:*):* {return  true;},
-				"false"				: function(thisPtr:*):* {return  false;}
+				"false"				: function(thisPtr:*):* {return  false;},
+				
+				//Prison
+				"esteem"			: function(thisPtr:*):* {return  kGAMECLASS.player.esteem; },
+				"obey"				: function(thisPtr:*):* {return  kGAMECLASS.player.obey; },
+				"will"				: function(thisPtr:*):* {return  kGAMECLASS.player.will; }
 			}

@@ -62,7 +62,7 @@ package classes.Scenes.Areas.GlacialRift
 			combatRoundOver();
 		}
 		
-		public function yetiAI():void
+		override protected function performCombatAction():void
 		{
 			var chooser:Number = 0;
 			chooser = rand(10);
@@ -71,18 +71,6 @@ package classes.Scenes.Areas.GlacialRift
 			if (chooser >= 4 && chooser < 7) yetiTackleTumble(); //30% chance
 			if (chooser >= 7 && chooser < 9) yetiTease(); //20% chance
 			if (chooser >= 9) yetiSnowball(); //10% chance
-		}
-		
-		override public function doAI():void
-		{
-			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
-				outputText("Your foe is too dazed from your last hit to strike back!", false)
-				if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
-				else addStatusValue(StatusAffects.Stunned, 1, -1);
-				combatRoundOver();
-				return;
-			}
-			yetiAI();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

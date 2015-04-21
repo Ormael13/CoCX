@@ -193,7 +193,7 @@ package classes.Scenes {
 				}
 			}
 			else if (flags[kFLAGS.IN_PRISON] > 0) {
-				
+				outputText("You walk to a secluded corner" + player.clothedOrNakedLower(", remove your [lowergarment]") + " and sit down. ");
 			}
 			//In cabin
 			else {

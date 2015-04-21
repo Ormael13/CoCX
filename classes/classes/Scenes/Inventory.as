@@ -28,6 +28,7 @@ package classes.Scenes
 		
 		private var itemStorage:Array;
 		private var gearStorage:Array;
+		private var prisonStorage:Array;
 		private var callNext:Function;		//These are used so that we know what has to happen once the player finishes with an item
 		private var callOnAbandon:Function;	//They simplify dealing with items that have a sub menu. Set in inventoryMenu and in takeItem
 		private var currentItemSlot:ItemSlotClass;	//The slot previously occupied by the current item - only needed for stashes and items with a sub menu.
@@ -35,6 +36,7 @@ package classes.Scenes
 		public function Inventory(saveSystem:Saves) {
 			itemStorage = [];
 			gearStorage = [];
+			prisonStorage = [];
 			saveSystem.linkToInventory(itemStorageDirectGet, gearStorageDirectGet);
 		}
 		
@@ -45,6 +47,8 @@ package classes.Scenes
 		public function itemStorageDirectGet():Array { return itemStorage; }
 		
 		public function gearStorageDirectGet():Array { return gearStorage; }
+		
+		public function prisonStorageDirectGet():Array { return prisonStorage; }
 		
 //		public function currentCallNext():Function { return callNext; }
 		
@@ -80,7 +84,7 @@ package classes.Scenes
 				}
 			}
 			
-			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false) {
+			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
 				if (getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
 					if (flags[kFLAGS.NIEVE_STAGE] == 1)
 						outputText("\nThere's some odd snow here that you could do something with...\n");

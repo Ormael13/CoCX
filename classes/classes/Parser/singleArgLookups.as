@@ -87,6 +87,13 @@
 				"guy"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("guy", "girl"); },
 				"wings"						: function(thisPtr:*):* { return kGAMECLASS.wingsDescript(); },
 				"tail"						: function(thisPtr:*):* { return kGAMECLASS.tailDescript(); },
-				"onetail"					: function(thisPtr:*):* { return kGAMECLASS.oneTailDescript(); }
+				"onetail"					: function(thisPtr:*):* { return kGAMECLASS.oneTailDescript(); },
 
+				//Prisoner
+				"captortitle"				: function(thisPtr:*):* { return kGAMECLASS.prison.prisonCaptor.captorTitle; },
+				"captorname"				: function(thisPtr:*):* { return kGAMECLASS.prison.prisonCaptor.captorName; },
+				"captorhe"					: function(thisPtr:*):* { return kGAMECLASS.prison.prisonCaptor.captorPronoun1; },
+				"captorhim"					: function(thisPtr:*):* { return kGAMECLASS.prison.prisonCaptor.captorPronoun2; },
+				"captorhis"					: function(thisPtr:*):* { return kGAMECLASS.prison.prisonCaptor.captorPronoun3; }
+				
 		}

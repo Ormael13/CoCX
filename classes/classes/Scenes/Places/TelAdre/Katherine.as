@@ -4657,6 +4657,7 @@ private function suckleFromKath():void {
 		else {
 			outputText("coaxing them to relax and release their thick, creamy treasure.  You keep drinking and drinking, trying to enjoy every drop Katherine can produce.");
 		}
+		if (breasts.lactationLevel >= BreastStore.LACTATION_LIGHT) player.refillHunger(breasts.lactationLevel * 15);
 		outputText("\n\nFor her part Kath just purrs and enjoys your ministrations, oblivious to the world around her.\n\n");
 	}
 	else if (player.cor < 75) {
@@ -4672,6 +4673,7 @@ private function suckleFromKath():void {
 		else {
 			outputText(" and suck vigorously, keen to draw out every bit of her creamy goodness.  Katherine's heavy teats give you all you desire and you use your tongue to show your appreciation.");
 		}
+		if (breasts.lactationLevel >= BreastStore.LACTATION_LIGHT) player.refillHunger(breasts.lactationLevel * 15);
 		outputText("\n\nFor her part Kath just lets out little 'Oh's and 'Ah's when you're less gentle.  She's definitely enjoying herself and seems oblivious to the world around her.\n\n");
 	}
 	else {
@@ -4696,6 +4698,7 @@ private function suckleFromKath():void {
 			outputText("You cup her breasts and give them a squeeze to get things moving.  A few drops of kitty cream appear on the tips of her nipples which you lick off with your tongue.  Katherine sighs contentedly, so you give her nipples a good hard pinch to remind her who she's dealing with.  She lets out a cute little mewl and you latch onto her " + (rand(2) == 0 ? "left" : "right") + " nipple, ready to begin your feast in earnest.\n\n");
 			outputText("You kneed her " + breasts.adj() + " mammaries to force the creamy goodness into your mouth and Kath's succulent nipples do not disappoint.");
 		}
+		if (breasts.lactationLevel >= BreastStore.LACTATION_LIGHT) player.refillHunger(breasts.lactationLevel * 15);
 		outputText("\n\nKath squirms and mewls plaintively, but you won't slow down.  She needs to learn her place and besides, you know that feelings of pain and pleasure are intertwined.  After a while Kath relaxes and the tone of her mewls shifts down an octave.  You submissive kitten is finally enjoying herself, so you nibble on her teat to show your approval.\n\n");
 	}
 	var wasntLactating:Boolean = breasts.lactationLevel == BreastStore.LACTATION_NONE;
