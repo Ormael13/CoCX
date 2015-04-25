@@ -1625,6 +1625,12 @@ package classes.Scenes.Areas.HighMountains
 		
 		//BIRTHING SCENE! FINALLY!
 		public function minervaGivesBirth():void {
+			if (prison.inPrison) {
+				pregnancy.knockUpForce();
+				flags[kFLAGS.MINERVA_CHILDREN] += 2;
+				prison.prisonLetter.letterFromMinerva();
+				return;
+			}
 			clearOutput();
 			spriteSelect(95);
 			pregnancy.knockUpForce(); //Clear pregnancy.

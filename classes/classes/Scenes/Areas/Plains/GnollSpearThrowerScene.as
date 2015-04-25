@@ -65,13 +65,13 @@ package classes.Scenes.Areas.Plains
 		public function hyenaSpearLossAnal():void
 		{
 			spriteSelect(54);
+			if (doSFWloss()) return;
 			//Oh shit get anal raped.
 			if (player.hasItem(consumables.S_DREAM)) {
 				kGAMECLASS.plains.gnollScene.yoDawgIHeardULiekGNollBallzzzdahdakjldh();
 				return;
 			}
 			clearOutput();
-			if (doSFWloss()) return;
 			outputText("The gnoll laughs, a sharp, barking sound of mocking, as you sink to ground, ", false);
 			//<Physical Defeat> 
 			if (player.HP < 1) outputText("bruised and battered, unable to do more than lay prone before her.", false);

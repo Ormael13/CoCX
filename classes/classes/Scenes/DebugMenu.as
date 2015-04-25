@@ -632,6 +632,7 @@ package classes.Scenes
 			addButton(2, "Be Manticore", getManticoreKit, null, null, null, "Gain everything needed to become a Manticore-morph.");
 			addButton(3, "Be Dragonne", getDragonneKit, null, null, null, "Gain everything needed to become a Dragonne-morph.");
 			addButton(4, "Debug Prison", debugPrison);
+			addButton(5, "Force show obey", forceShowObey);
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -711,6 +712,15 @@ package classes.Scenes
 				}
 			}
 			flushOutputTextToGUI();
+		}
+		
+		private function forceShowObey():void {
+			mainView.obeyNum.visible = true;
+			mainView.obeyNum.x = -200;
+			mainView.obeyNum.y = 1;
+			mainView.obeyNum.height = 40;
+			mainView.obeyNum.text = "TEST";
+			trace(mainView.obeyNum.x + " " + mainView.obeyNum.y);
 		}
 		
 		private function eventTriggerMenu():void {

@@ -78,11 +78,21 @@ public function cleanupAfterCombat(nextFunc:Function = null):void {
 				return;
 			}
 			temp = rand(10) + 1 + Math.round(monster.level / 2);
-			if (inDungeon) temp += 20 + monster.level*2;
+			if (inDungeon) temp += 20 + monster.level * 2;
+			//Increases gems lost in NG+.
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) temp *= 1 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.5); 
+			else temp *= 3;
+			//Round gems.
+			temp = Math.round(temp);
+			//Keep gems from going below zero.
 			if (temp > player.gems) temp = player.gems;
 			var timePasses:int = monster.handleCombatLossText(inDungeon, temp); //Allows monsters to customize the loss text and the amount of time lost
 			player.gems -= temp;
 			inCombat = false;
+			if (flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (monster.short == "goblin" || monster.short == "goblin assassin" || monster.short == "imp" || monster.short == "hellhound" || monster.short == "minotaur" || monster.short == "satyr" || monster.short == "gnoll" || monster.short == "gnoll spear-thrower")) {
+				doNext(prison.prisonIntro);
+				return;
+			}
 			//BUNUS XPZ
 			if(flags[kFLAGS.COMBAT_BONUS_XP_VALUE] > 0) {
 				player.XP += flags[kFLAGS.COMBAT_BONUS_XP_VALUE];
@@ -976,7 +986,7 @@ public function attack():void {
 	}
 	else damage = player.str;
 	if (isWieldingRangedWeapon()) damage += (player.spe / 5);
-	if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield != ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage += (player.str * 0.2);
+	if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage += (player.str * 0.2);
 	//Weapon addition!
 	damage += player.weaponAttack;
 	//Bonus sand trap damage!
@@ -1916,7 +1926,7 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 		if(monster.armorDef <= 10) monster.armorDef = 0;
 		else monster.armorDef -= 10;
 	}
-	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] <= 3) {
+	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) {
 		monster.str += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 		monster.tou += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 		monster.spe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -1927,18 +1937,22 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 		monster.XP = monster.totalXP();
 	}
 	else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) {
-		monster.str += 75;
-		monster.tou += 75;
-		monster.spe += 75;
-		monster.inte += 75;
-		monster.level += 90;
+		monster.str += 100;
+		monster.tou += 100;
+		monster.spe += 100;
+		monster.inte += 100;
+		monster.level += 120;
 		monster.lustVuln *= 0.4;
-		if (monster.level < 100) monster.level = 100;
 		monster.HP = monster.eMaxHP();
 		monster.XP = monster.totalXP();
 	}
 	if (player.weaponName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
 	if (player.weaponName == "blunderbuss") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 12;
+	if (prison.prisonCombatAutoLose) {
+		dynStats("lus", player.maxLust(), "resisted", false);
+		combatRoundOver();
+		return;
+	}
 	doNext(playerMenu);
 }
 public function startCombatImmediate(monster:Monster, _plotFight:Boolean):void

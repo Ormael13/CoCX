@@ -208,15 +208,15 @@ public function outputText(output:String,
 public function flushOutputTextToGUI():void
 {
 	var fmt:TextFormat;
-	if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0)
+	if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0 || flags[kFLAGS.USE_DARK_BACKGROUND] != 0)
 	{
 		fmt = mainView.mainText.getTextFormat();
-		fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
+		if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0) fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
+		if (flags[kFLAGS.USE_DARK_BACKGROUND] != 0) fmt.color = 0xFFFFFF;
 	}
-	
 	mainView.setOutputText( currentText );
 	
-	if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0)
+	if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0 || flags[kFLAGS.USE_DARK_BACKGROUND] != 0)
 	{
 		mainView.mainText.setTextFormat(fmt);
 	}
@@ -463,13 +463,13 @@ public function levelUpGo(e:MouseEvent = null):void {
 	hideMenus();
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	//Level up
-	if(player.XP >= (player.level) * 100 && player.level < levelCap) {
+	if (player.XP >= player.requiredXP() && player.level < levelCap) {
+		player.XP -= player.requiredXP();
 		player.level++;
 		player.perkPoints++;
 		player.statPoints += 5;
 		if (player.level % 2 == 0) player.ascensionPerkPoints++;
 		outputText("<b>You are now level " + num2Text(player.level) + "!</b>\n\nYou have gained five attribute points and one perk point!", true);
-		player.XP -= (player.level-1) * 100;
 		doNext(attributeMenu);
 	}
 	else if(player.statPoints > 0) {
@@ -2201,7 +2201,7 @@ public function displayStats(e:MouseEvent = null):void
 		outputText("<b><u>Combat Stats</u></b>\n" + combatStats, false);
 	// End Combat Stats
 	
-	if (flags[kFLAGS.IN_PRISON] > 0) prison.displayPrisonStats();
+	if (prison.inPrison) prison.displayPrisonStats();
 	
 	// Begin Children Stats
 	var childStats:String = "";
@@ -2852,7 +2852,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	
 	//Apply lust changes in NG+.
 	if (lust2 > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) lust2 *= 1 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.2);
-	else if (lust2 > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) lust2 *= 1.6;
+	else if (lust2 > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) lust2 *= 1.8;
 	
 	//lust resistance
 	if(lust2 > 0 && resisted) lust2 *= lustPercent()/100;

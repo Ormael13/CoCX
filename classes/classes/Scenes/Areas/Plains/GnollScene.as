@@ -25,13 +25,13 @@ package classes.Scenes.Areas.Plains
 //Gnoll Rape
 		public function getRapedByGnoll():void
 		{
+			if (doSFWloss()) return;
 			//Oh shit get anal raped.
 			if (player.hasItem(consumables.S_DREAM)) {
 				yoDawgIHeardULiekGNollBallzzzdahdakjldh();
 				return;
 			}
 			clearOutput();
-			if (doSFWloss()) return;
 			outputText("The sound of the gnoll's mocking laughter grates in your ears as you collapse down on your knees before her.  She circles you with the last scrap of her wariness and then surges forward to knock you over, exposing your ", false);
 			if (player.hasCock()) {
 				outputText(multiCockDescriptLight(), false);

@@ -22,7 +22,7 @@ package classes.Scenes.Places.Prison
 		public var guardCombatID:Monster;
 		public var guardEscapeSeduceBonus:int;
 		public var guardEscapeBribeBonus:int;
-		public var guardEscapeSneakBonus:int
+		public var guardEscapeSneakBonus:int;
 		
 		public function PrisonGuard() {}
 		
@@ -30,7 +30,7 @@ package classes.Scenes.Places.Prison
 			return 10;
 		}
 		
-		public function prisonGuardAttack() : Boolean
+		public function prisonGuardAttack():Boolean
 		{
 			if(prison.prisonCanEscapeFight(false))
 			{
@@ -94,7 +94,7 @@ package classes.Scenes.Places.Prison
 			return true;
 		}
 		
-		public function prisonGuardAttackFight() : void
+		public function prisonGuardAttackFight():void
 		{
 			if(player.will > prison.prisonWillCost(15))
 			{
@@ -110,7 +110,7 @@ package classes.Scenes.Places.Prison
 			}
 		}
 		
-		public function prisonGuardAttackSubmit() : void
+		public function prisonGuardAttackSubmit():void
 		{
 			outputText("\n\n",false);
 			if(player.obey < 45)
@@ -132,7 +132,7 @@ package classes.Scenes.Places.Prison
 			prison.prisonEscapeFightAutoLose();
 		}
 		
-		public function prisonCaptorLoadGuard(randomGuard:Boolean, guardID:String = "default") : void
+		public function prisonCaptorLoadGuard(randomGuard:Boolean, guardID:String = "default"):void
 		{
 			if(randomGuard)
 			{

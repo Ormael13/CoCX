@@ -88,7 +88,7 @@
 				}
 				else { //She's in camp and not pregnant
 					if (flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 0) { //Tick over into heat if appropriate
-						if (player.hasCock() && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+						if (player.hasCock() && (!prison.inPrison && flags[kFLAGS.IN_INGNAM] == 0)) {
 							if (sophieBimbo.bimboSophie()) sophieBimbo.sophieGoesIntoSeason();
 							else sophieFollowerScene.sophieFollowerGoesIntoSeas();
 							flags[kFLAGS.SOPHIE_HEAT_COUNTER] = 720;
@@ -97,12 +97,12 @@
 					}
 					else {
 						flags[kFLAGS.SOPHIE_HEAT_COUNTER]--;
-						if (flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 552) { //Expire heat if it counts down to 552
+						if (flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 552 && !prison.inPrison) { //Expire heat if it counts down to 552
 							if (sophieBimbo.bimboSophie()) sophieBimbo.sophieSeasonExpiration();
 							else sophieFollowerScene.sophieFertilityExpired();
 							needNext = true;
 						}
-						if (model.time.hours == 10 && (player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && sophieBimbo.bimboSophie() && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
+						if (model.time.hours == 10 && (player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && sophieBimbo.bimboSophie() && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0 && !prison.inPrison) {
 							sophieBimbo.bimboSophieLustStickSurprise();
 							needNext = true;
 						}
@@ -118,7 +118,7 @@
 					sophieFollowerScene.sophieFollowerIntro();
 					return true;
 				}
-				if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.hasCock()) {
+				if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.hasCock() && !prison.inPrison) {
 					if (sophieBimbo.bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && rand(2) == 0 && player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0) {
 						outputText("\n<b><u>Something odd happens that morning...</u></b>");
 						if (pregnancy.event >= 2) sophieBimbo.fuckYoPregnantHarpyWaifu(true);

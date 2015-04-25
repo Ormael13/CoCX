@@ -38,20 +38,20 @@
 			}
 			if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] > 1) {
 				if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] != 144) flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
-				if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 240) {
+				if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 240 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 					kihaBreastfeedingTime();
 					needNext = true;
 				}
-				/*else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 144) {
+				else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 144 && prison.inPrison) {
 					kihaTellsChildrenStory();
 					needNext = true;
-				}*/
-				else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 72) {
+				}
+				else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 72 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 					kihaTrainsHerKids();
 					needNext = true;
 				}
 			}
-			else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 1) {
+			else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 				kihaChildGraduationTime();
 				needNext = true;
 			}
@@ -2058,6 +2058,11 @@ private function giveKihaUndergarments(type:int):void {
 		}
 		
 		public function kihaGivesBirthToEgg():void {
+			flags[kFLAGS.KIHA_EGG_COUNTER] = 168;
+			if (prison.inPrison) {
+				prison.prisonLetter.letterFromKiha1();
+				return;
+			}
 			outputText("\nYou hear the groaning and screaming sounds. It must be coming from Kiha. You investigate the sounds, only to find out that your draconic lover is in labor!");
 			outputText("\n\n\"<i>Do something, Doofus!</i>\" Kiha yells. You grab Kiha by her clawed hand and assure her that you're here to assist her. ");
 			if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText("You remove her spider-silk " + (flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "panties" : "loincloth") + ", exposing her moist vagina.");
@@ -2065,10 +2070,16 @@ private function giveKihaUndergarments(type:int):void {
 			outputText("\n\nEventually, she orgasms, coating your face in her femspunk. You revel in the taste of her feminine juices. Kiha spreads her legs, her vagina seems to part as the surface of the egg comes into view. Thanks to the wetness of her passage, the egg finally slips out with no problem.");
 			outputText("\n\n\"<i>Look at that! It's beautiful. It's going to eventually hatch and I'll raise them to be strong warriors. Thank you, [name].</i>\" Kiha smiles and delivers a kiss to your lips.");
 			outputText("\n\nYou leave Kiha to rest and look after her egg.");
-			flags[kFLAGS.KIHA_EGG_COUNTER] = 168;
 		}
 		
 		public function kihaEggHatchingTime():void {
+			flags[kFLAGS.KIHA_EGG_COUNTER] = 0;
+			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 336;
+			if (prison.inPrison) {
+				clearOutput();
+				prison.prisonLetter.letterFromKiha2();
+				return;
+			}
 			outputText("\nYou hear someone yelling towards you. It must be Kiha! You rush towards Kiha and ask why she's yelling. \"<i>The time has come! My egg is going to hatch!</i>\" Kiha announces.");
 			outputText("\n\nYou watch as the egg shakes violently and crack forms in the eggshell. The crack grows bigger and bigger until finally, a head emerges! Isn't that cute?");
 			outputText("\n\n\"<i>Look at that. Our little dragon.</i>\" Kiha smiles. She peels off the egg fragments and picks up the newly-hatched offspring and shows it to you. ");
@@ -2118,8 +2129,6 @@ private function giveKihaUndergarments(type:int):void {
 			}
 			outputText("\n\nYou cradle the newborn dragon-morph and smile before handing " + (genderChooser < 40 ? "him" : "her") + " back to Kiha. She sits down and begins to breastfeed the newborn. \"<i>" + (genderChooser < 40 ? "He" : "She") + " is going to be a warrior, just like me!</i>\" Kiha says.");
 			outputText("\n\nYou smile at Kiha and leave her to spend her time with her newborn " + (genderChooser < 40 ? "son" : "daughter") + ".");
-			flags[kFLAGS.KIHA_EGG_COUNTER] = 0;
-			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 336;
 		}
 		
 		private function kihaBreastfeedingTime():void {
@@ -2127,6 +2136,11 @@ private function giveKihaUndergarments(type:int):void {
 		}
 		
 		public function kihaTellsChildrenStory():void {
+			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
+			if (prison.inPrison) {
+				prison.prisonLetter.letterFromKiha3();
+				return;
+			}
 			clearOutput();
 			outputText("Kiha walks over to you and says, \"<i>Could you please sit with me please, [name]? I want to tell my " + (totalKihaChildren() == 1 ? "kid" : "kids") + " a story,</i>\" she says. You tell her that it would be a wonderful idea! Kiha escorts you to her nest.");
 			outputText("\n\nYou sit on the crudely made seat while Kiha sits on the another seat. ");
@@ -2140,7 +2154,7 @@ private function giveKihaUndergarments(type:int):void {
 			else outputText("\n\nKiha tells about how she plans to get into Lethice's stronghold and defeat Lethice for once and for all.");
 			outputText("\n\nThe " + (totalKihaChildren() == 1 ? "kid" : "kids") + " are happy to hear about the story. \"<i>Thank you for being with me and listening to my story, my Doofus,</i>\" Kiha says before giving you a peck on your cheek.");
 			dynStats("lib", -2, "cor", -2, "lus", -50, "resisted", false, "noBimbo", true);
-			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
+			
 			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2151,6 +2165,11 @@ private function giveKihaUndergarments(type:int):void {
 		}
 		
 		private function kihaChildGraduationTime():void {
+			flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 0;
+			if (prison.inPrison) {
+				prison.prisonLetter.letterFromKiha4();
+				return;
+			}
 			outputText("You walk up to check on your draconic " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "son" : "daughter") + ". By Marae, " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "he" : "she") + "'s all grown up! Looking down, you notice that " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] < 2 ? "he" : "she") + "'s wearing a tribal loincloth, a nod to the modesty ");
 			if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText("like Kiha.");
 			else outputText("unlike Kiha who is naked.");

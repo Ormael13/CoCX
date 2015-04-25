@@ -162,12 +162,14 @@
 			if (short == "doppleganger" || short == "pod" || short == "sand trap" || short == "sand tarp") {
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp += 200;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp += 400;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) temp += 600;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp += 600;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) temp += 800;
 			}
 			else {
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp += 1000;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp += 2000;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) temp += 3000;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp += 3000;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) temp += 4000;
 			}
 			//Apply difficulty
 			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) temp *= 1.0;
@@ -1274,6 +1276,10 @@
 		public function handleCombatLossText(inDungeon:Boolean, gemsLost:int):int
 		{ //New Function, override this function in child classes if you want a monster to output special text after the player loses in combat
 			//This function doesn’t take the gems away from the player, it just provides the output text
+			if (game.prison.inPrison) {
+				game.prison.doPrisonEscapeFightLoss();
+				return 8;
+			}
 			if (!inDungeon) {
 				outputText("\n\nYou'll probably come to your senses in eight hours or so");
 				if (player.gems > 1)

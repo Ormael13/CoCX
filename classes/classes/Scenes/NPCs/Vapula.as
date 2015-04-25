@@ -30,7 +30,7 @@ package classes.Scenes.NPCs
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (flags[kFLAGS.IN_PRISON] > 0 || flags[kFLAGS.IN_INGNAM] > 0) return false;
+			if (prison.inPrison || flags[kFLAGS.IN_INGNAM] > 0) return false;
 			if (flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 				femaleVapulaRecruitmentPartII();
 				return true;

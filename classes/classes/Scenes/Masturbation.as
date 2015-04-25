@@ -192,7 +192,7 @@ package classes.Scenes {
 					outputText("casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
 				}
 			}
-			else if (flags[kFLAGS.IN_PRISON] > 0) {
+			else if (prison.inPrison) {
 				outputText("You walk to a secluded corner" + player.clothedOrNakedLower(", remove your [lowergarment]") + " and sit down. ");
 			}
 			//In cabin

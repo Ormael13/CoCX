@@ -2229,17 +2229,17 @@ use namespace kGAMECLASS;
 			if (isNaga()) maxSpe += 10;
 			if (isTaur()) maxSpe += 20;
 			//Apply New Game+
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] <= 3) {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) {
 				maxStr += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				maxTou += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				maxSpe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				maxInt += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) {
-				maxStr += 75;
-				maxTou += 75;
-				maxSpe += 75;
-				maxInt += 75;
+				maxStr += 100;
+				maxTou += 100;
+				maxSpe += 100;
+				maxInt += 100;
 			}
 			//Might
 			if (findStatusAffect(StatusAffects.Might) >= 0) {
@@ -2252,6 +2252,12 @@ use namespace kGAMECLASS;
 			else if (stats == "spe" || stats == "speed") return maxSpe;
 			else if (stats == "inte" || stats == "int" || stats == "intelligence") return maxInt;
 			else return 100;
+		}
+		
+		public function requiredXP():int {
+			var temp:int = level * 100;
+			if (temp > 9999) temp = 9999;
+			return temp;
 		}
 		
 		public function minotaurAddicted():Boolean {

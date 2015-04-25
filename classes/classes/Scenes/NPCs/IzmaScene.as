@@ -1836,7 +1836,7 @@ private function izmaSexMenu():void {
 	addButton(6,"Sixtynine",sixty);
 	addButton(7,"Kids",childToggle);
 	if(flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower()) addButton(8,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu);
-	if (flags[kFLAGS.IZMA_NO_COCK] == 0 && (flags[kFLAGS.VALARIA_AT_CAMP] > 0 || player.armor == armors.GOOARMR) && (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 || flags[kFLAGS.HARDCORE_MODE] > 0 || flags[kFLAGS.HUNGER_ENABLED] >= 1)) addButton(9, "Valeria", izmaValeriaSubmenu);
+	if (flags[kFLAGS.IZMA_NO_COCK] == 0 && (flags[kFLAGS.VALARIA_AT_CAMP] > 0 || player.armor == armors.GOOARMR) && valeria.valeriaFluidsEnabled()) addButton(9, "Valeria", izmaValeriaSubmenu);
 	addButton(14,"Back",izmaFollowerMenu);
 	
 }
@@ -2526,6 +2526,10 @@ private function firstTimeDeclineIzmasKdiddlezlijfhdjkfhslkfbsjkhfbs():void {
 //about veracity. She can take care of everything with her 
 //OCDNS powers. -Z)
 private function IzmaPoopsBabies():void {
+	if (prison.inPrison) {
+		prison.prisonLetter.letterFromIzma();
+		return;
+	}
 	spriteSelect(32);
 	clearOutput();
 	outputText("You hear the sounds of splashing and cursing coming from the part of the stream where Izma, by neccessity, keeps her private mini-camp, and immediately you set off running. When you come tearing to a halt there, you find Izma, wading in the stream well up to her waist, and cursing as she holds her gravid belly, her tail angrily flailing through the water behind her. She still manages to smile when she sees it's you who's come to see her. No words are neccessary; you plunge into the water and head to her side.\n\n", false);

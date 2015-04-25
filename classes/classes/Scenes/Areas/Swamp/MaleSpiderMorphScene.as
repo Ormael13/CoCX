@@ -85,10 +85,7 @@ package classes.Scenes.Areas.Swamp
 //Loss selector
 		public function loseToMaleSpiderMorph():void
 		{			
-			if (doSFWloss()) { //No rape in SFW mode.
-				cleanupAfterCombat();
-				return;
-			}
+			if (doSFWloss()) return; //No rape in SFW mode.
 			var choices:Array = [];
 			if (player.hasCock()) choices[choices.length] = 0;
 			if (player.hasVagina()) choices[choices.length] = 1;

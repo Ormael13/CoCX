@@ -127,9 +127,10 @@ package coc.view {
             setStatText( "xpNum", model.player.XP + " / " + model.player.level * 100 + " (" + Math.floor(model.player.XP / (model.player.level * 100)) + "%)");
 
             setStatText( "timeText",
-                "<b><u>Day#: {DAYS}</u></b>\n<b>Time: {HOURS}:00</b>"
+                "<b><u>Day#: {DAYS}</u></b>\n<b>Time: {HOURS}:{MINUTES}</b>"
                     .replace( "{DAYS}", model.time.days )
-                    .replace( "{HOURS}", model.time.hours ) );
+                    .replace( "{HOURS}", model.time.hours ) 
+					.replace( "{MINUTES}", model.time.minutes ));
 
             setStatBar( "strBar", model.player.str/100 );
             setStatBar( "touBar", model.player.tou/100 );

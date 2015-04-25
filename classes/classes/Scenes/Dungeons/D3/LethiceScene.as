@@ -180,10 +180,10 @@ package classes.Scenes.Dungeons.D3
 		private function continueFromEnding():void {
 			clearOutput();
 			outputText("You may have defeated Lethice but your adventures are still not over! There are still plenty of things you can do. Even something you could not do before Lethice was defeated. Why not explore for secrets or even challenge Marae?");
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) outputText("\n\n<b>You may start New Game+! (Level 30+ recommended)</b>");
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) outputText("\n\n<b>You may start New Game++! (Level 60+ recommended)</b>");
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) outputText("\n\n<b>You may start New Game+++! (Level 90+ recommended)</b>");
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) outputText("\n\n<b>You may start New Game+" + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + 1) + "! (Level 100 recommended)</b>");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) outputText("\n\n<b>You may start New Game+! (Level 25+ recommended)</b>");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) outputText("\n\n<b>You may start New Game++! (Level 55+ recommended)</b>");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) outputText("\n\n<b>You may start New Game+++! (Level 85+ recommended)</b>");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) outputText("\n\n<b>You may start New Game+" + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + 1) + "! (Level 100+ recommended)</b>");
 			outputText("\n\nTo start a new game plus, choose 'Camp Actions' then 'Ascension'.");
 			kGAMECLASS.inRoomedDungeon = false;
 			player.HP = player.maxHP();

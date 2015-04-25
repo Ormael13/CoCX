@@ -10,21 +10,10 @@ package classes.Scenes.Places
 	
 	public class Prison extends BaseContent implements TimeAwareInterface
 	{
-		//Store items until freedom
-		//public var prisonItemSlotArmor:ItemType = null;
-		//public var prisonItemSlotWeapon:ItemType = null;
-		//public var prisonItemSlots:Array = [];
-		
-		//Variables
-		public var prisonCombat:Boolean = false;
-		public var prisonCombatAutoLose:Boolean = false;
-		public var prisonCombatWinEvent:Function = null;
-		public var prisonCombatLoseEvent:Function = null;
-		
-		public var prisonItemEventCheck:Boolean = false;
-		//Captor for descriptions.
-		public var prisonCaptor:PrisonCaptor = new PrisonCaptor();
+		//Link to class files.
+		public var prisonLetter:PrisonLetters = new PrisonLetters();
 		//NPCs
+		public var prisonCaptor:PrisonCaptor = new PrisonCaptor();
 		public var prisonGuard:PrisonGuard = new PrisonGuard();
 		public var ellyScene:EllyScene = new EllyScene();
 		public var scruffyScene:ScruffyScene = new ScruffyScene();
@@ -34,6 +23,14 @@ package classes.Scenes.Places
 		public var trainingPet:TrainingPet = new TrainingPet();
 		public var trainingFeed:TrainingFeeding = new TrainingFeeding();
 		
+		//Variables
+		public var prisonCombat:Boolean = false;
+		public var prisonCombatAutoLose:Boolean = false;
+		public var prisonCombatWinEvent:Function = null;
+		public var prisonCombatLoseEvent:Function = null;
+		
+		public var prisonItemEventCheck:Boolean = false;
+
 		//Random events cooldowns
 		private var heardPrisonerScreamCooldown:int = 6;
 		private var randomCooldownRoomCheck:int = 6;
@@ -47,9 +44,7 @@ package classes.Scenes.Places
 		//NPCs
 		private var randomCooldownScruffy:int = 10;
 		private var randomCooldownBillie:int = 10;
-		private var randomCooldownGuard:int = 5;
-		
-		
+		private var randomCooldownGuard:int = 12;
 		
 		public function get inPrison():Boolean { return flags[kFLAGS.IN_PRISON] > 0; }
 		
@@ -78,6 +73,8 @@ package classes.Scenes.Places
 				
 				if (randomCooldownFeed > 0) randomCooldownFeed--;
 				if (randomCooldownPet > 0) randomCooldownPet--;
+				
+				if (player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) > 0) player.addStatusValue(StatusAffects.PrisonCaptorEllyStatus, 3, -1);
 				//Fire events
 				if (heardPrisonerScreamCooldown <= 0 && rand(10) == 0) {
 					heardPrisonerScreamCooldown = 9 + rand(4);
@@ -99,6 +96,7 @@ package classes.Scenes.Places
 				}
 				prisonCaptorWaitEvents();
 			}
+			prisonCombatAutoLose = false;
 			//Tick
 			return needNext;
 		}
@@ -158,6 +156,9 @@ package classes.Scenes.Places
 					outputText("\n<b>Your self-esteem is now very high. Your ability to recover your willpower is greatly increaed, your powerful sense of self-worth makes ignoring the criticisms and demands of others second nature, and your intelligence greatly aids you in the process of unlearning any submissive tendencies you may have.</b>\n",false);
 				}
 			}
+			if (player.esteem > oldEsteem) showStatUp("esteem");
+			if (player.esteem < oldEsteem) showStatDown("esteem");
+			dynStats("lus", 0, "resisted", false);
 			statScreenRefresh();
 		}
 		/**
@@ -165,9 +166,13 @@ package classes.Scenes.Places
 		 * @param	amount How much to add or deduct.
 		 */
 		public function changeWill(amount:int = 0, display:Boolean = false):void {
+			var oldWill:Number = player.will;
 			player.will += amount;
 			if (player.will > 100) player.will = 100;
 			if (player.will < 0) player.will = 0;
+			if (player.will > oldWill) showStatUp("will");
+			if (player.will < oldWill) showStatDown("will");
+			dynStats("lus", 0, "resisted", false);
 			statScreenRefresh();
 		}
 		/**
@@ -209,6 +214,9 @@ package classes.Scenes.Places
 					outputText("\n<b>The ability to resist the demands of those who would dominate you is now a foreign concept. You are a creature of submission and obedience that exists only to serve at the whim of your betters. On rare occasion you may exert the willpower to resist an order, but you only do so because you fear being forgotten by your masters. You crave the overwhelming rush of joy that comes when they punish you, reinforcing the shameful (delightful?) knowledge that you are nothing more than property, and that pleasure comes from being used.</b>\n",false);
 				}
 			}
+			if (player.obey > oldObey) showStatUp("obey");
+			if (player.obey < oldObey) showStatDown("obey");
+			dynStats("lus", 0, "resisted", false);
 			statScreenRefresh();
 		}
 		
@@ -971,7 +979,6 @@ package classes.Scenes.Places
 		public function goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems():void {
 			clearOutput();
 			outputText("You peer around the corner of a tent. You are unsurprised to see a collection of beast men around a cookfire, but you find yourself far more interested in the cage wagon beyond them. You become so wrapped up in trying to identify the lumpy shapes in the shadowy interior that the sound of twigs snapping behind you doesn't immediately trigger alarm bells in your mind, and before you can properly respond you are knocked unconscious by a brutal blow to the back of your head.");
-			player.createStatusAffect(StatusAffects.PrisonRestraints, 0, 0, 0, 0);
 			doNext(prisonIntro);
 		}
 		
@@ -980,6 +987,7 @@ package classes.Scenes.Places
 			//Set flags
 			flags[kFLAGS.IN_PRISON] = 1;
 			if (involuntary) flags[kFLAGS.PRISON_CAPTURE_COUNTER]++;
+			player.createStatusAffect(StatusAffects.PrisonRestraints, 1, 0, 0, 0);
 			//Scene GOOOOOOOOOOO!
 			clearOutput();
 			if (involuntary) {
@@ -1156,20 +1164,43 @@ package classes.Scenes.Places
 				camp.rest();
 				return;
 			}
+			//Expire punishment.
+			if(player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) <= 0)
+			{
+				if(flags[kFLAGS.PRISON_PUNISHMENT] == 1)
+				{
+					punishments.prisonCaptorPunishmentStockadesFreedom();
+					return;
+				}
+				if(flags[kFLAGS.PRISON_PUNISHMENT] == 2)
+				{
+					punishments.prisonCaptorPunishmentConfinementFreedom();
+					return;
+				}
+				if(flags[kFLAGS.PRISON_PUNISHMENT] == 3)
+				{
+					punishments.prisonCaptorPunishmentBJTrainerTimesup();
+					return;
+				}
+			}
 			//Random events
 			if (flags[kFLAGS.PRISON_EVENT_HAPPENED] == 0 && !noEvent) {
 				flags[kFLAGS.PRISON_EVENT_HAPPENED] = 1;
 				//trace("Firing prison event");
-				if (randomCooldownRoomCheck <= 0 && rand(10) == 0 && player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) > 50) {
+				if (randomCooldownRoomCheck <= 0 && rand(15) == 0 && player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) > 50) {
 					randomCooldownRoomCheck = 4 + rand(10);
 					trace("Cleanliness check");
 					prisonCaptorRandomEventCleaningCheck();
 					return;
 				}				
-				if (randomCooldownScruffy <= 0 && rand(10) == 0 && !scruffyScene.prisonCaptorScruffyOptedOut()) {
+				if (randomCooldownScruffy <= 0 && rand(20) == 0 && !scruffyScene.prisonCaptorScruffyOptedOut()) {
 					randomCooldownScruffy = 6 + rand(6);
-					trace("Jizz Janitor check");
 					scruffyScene.prisonCaptorRandomEventJizzJanitor();
+					return;
+				}
+				if (randomCooldownGuard <= 0 && rand(20) == 0) {
+					randomCooldownGuard = 12 + rand(60);
+					prisonCaptorRandomEventAbuse();
 					return;
 				}
 				if (randomCooldownFeed <= 0 && rand(12 - (player.hunger / 10)) == 0) {
@@ -1203,8 +1234,8 @@ package classes.Scenes.Places
 			mainView.showMenuButton( MainView.MENU_APPEARANCE );
 			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu );
 			//Level up
-			if((player.XP >= (player.level) * 100 && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
-				if (player.XP < player.level * 100 || player.level >= kGAMECLASS.levelCap)
+			if((player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
+				if (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)
 				{
 					if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
 					else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
@@ -1217,7 +1248,7 @@ package classes.Scenes.Places
 					}
 				}
 				mainView.showMenuButton( MainView.MENU_LEVEL );
-				mainView.statsView.showLevelUp();
+				mainView.statsView.hideLevelUp();
 			}
 			else {
 				mainView.hideMenuButton( MainView.MENU_LEVEL );
@@ -1230,8 +1261,8 @@ package classes.Scenes.Places
 					removeButton(0);
 					removeButton(4);
 				}
-				addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
-				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", getGame().masturbation.masturbateGo);
+				addButton(8, "Masturbate", getGame().masturbation.masturbateMenu);
+				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", getGame().masturbation.masturbateMenu);
 			}
 			//Set menus
 			menu();
@@ -1667,7 +1698,6 @@ package classes.Scenes.Places
 			outputText("\n\nYou'll probably come to your senses in eight hours or so, and when you do you'll have an increased understanding of the futility of challenging the power of your captors.",false);
 			changeEsteem(-4,inPrison);
 			changeObey(1,inPrison);
-			doNext(camp.returnToCampUseEightHours);
 		}
 		
 		public function doPrisonEscapeFightWin():void
@@ -2032,7 +2062,6 @@ package classes.Scenes.Places
 			}
 			flags[kFLAGS.PRISON_STORAGE_SHIELD] = 0;
 		}
-
 		
 		//Conclusion
 		public function captorChanceChoose():void {
@@ -2343,6 +2372,8 @@ package classes.Scenes.Places
 		
 		public function prisonCaptorRandomEventAbuse():Boolean
 		{
+			hideMenus();
+			clearOutput();
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0 && player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) <= 1)
 			{
 				return prisonCaptorRandomEventSounds();
@@ -2441,6 +2472,7 @@ package classes.Scenes.Places
 		
 		public function prisonCaptorRandomEventCleaningCheck():void
 		{
+			hideMenus();
 			clearOutput();
 			var cleanlinessLevel:int = 0;
 			outputText(prisonCaptor.captorTitle + " " + prisonCaptor.captorName + " enters the room and begins to inspect its level of cleanliness. ",false);

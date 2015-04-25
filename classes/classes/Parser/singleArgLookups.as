@@ -67,6 +67,7 @@
 				"race"						: function(thisPtr:*):* { return kGAMECLASS.player.race(); },
 				"sack"						: function(thisPtr:*):* { return kGAMECLASS.sackDescript(); },
 				"sheath"					: function(thisPtr:*):* { return kGAMECLASS.player.sheathDescription(); },
+				"shield"					: function(thisPtr:*):* { return kGAMECLASS.player.shieldName; },
 				"skin"						: function(thisPtr:*):* { return kGAMECLASS.player.skin(); },
 				"skinfurscales"				: function(thisPtr:*):* { return kGAMECLASS.player.skinFurScales(); },
 				"teasetext"					: function(thisPtr:*):* { return kGAMECLASS.teaseText(); },

@@ -611,6 +611,10 @@ private function helsLifestyle():void {
 
 //IT'S TIME! (Play the morning of the 15th Day of Helia's pregnancy)
 public function heliaBirthtime():void {
+	if (prison.inPrison) {
+		prison.prisonLetter.letterFromHelia1();
+		return;
+	}
 	clearOutput();
 	spriteSelect(68);
 	outputText("The morning dawns like any other, though as you're getting dressed, you can't help but notice Hel waddling back from the edge of camp, both hands firmly gripping her positively massive belly.  You walk over just in time to hear her groan, \"<i>Oh fuck me sideways and call me a harpy, this shit sucks.</i>\"  You put an arm around her to steady the sickened salamander, but she barely notices you as she flops down beside her still, nearly grabbing a glass before stopping herself.  \"<i>Fucking shit fuck I am so done with this.  I - oh god,</i>\" she doubles over, squeezing her belly.  \"<i>Ow ow oh god ow.</i>\"");
@@ -719,7 +723,7 @@ private function applyHelspawnName():void {
 }
 
 //NOTE: HelSpawn's personality meter & Growing Up
-private function helSpawnsSetup():void {
+public function helSpawnsSetup():void {
 	//HelspawnChaste and HelspawnSlutty are the new Variabls for Helspawn, indicating the ways you can morph her personality, whichever is higher at the end of the Teenage years indicates whether she gets to be a proud, chaste warrior girl fit for Paladinhood or a slutty, filthy whore of a berzerker like mom. 
 	//Depending on who her daddy was, she gets a bonus to one or the other stat:
 	//>If Mai is the daddy: +10 HelspawnSlutty
@@ -1028,6 +1032,10 @@ private function dasBarbarimander():void {
 //Event: Helspawn's a Little Slut Like Mommy
 //{Play at night, while sleeping.}
 public function helspawnIsASlut():void {
+	if (prison.inPrison) { //No choices for you in prison!
+		prison.prisonLetter.noControlOverHelspawn();
+		return;
+	}
 	spriteSelect(68);
 	flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] = 1;
 	outputText("\nSomething's moving in your camp.");
@@ -1188,7 +1196,8 @@ private function talkToHelspawn():void {
 		menu();
 		addButton(0,"Stop Fucking",dontFuckAlex);
 		addButton(1,"Her Boyfriend",helSpawnBoyfriend);
-		addButton(2,"Incest",incestWithHelspawn);		
+		addButton(2,"Incest",incestWithHelspawn);
+		//if (silly() && flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) addButton(3, "Both", whyNotBoth, null, null, null, "Why don't we have both?")
 	}
 	//Talk 2
 	//{Kiha must be at camp}

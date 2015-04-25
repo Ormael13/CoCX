@@ -578,6 +578,7 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 		
 		saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] = flags[kFLAGS.USE_OLD_INTERFACE];
+		saveFile.data.flags[kFLAGS.USE_DARK_BACKGROUND] = flags[kFLAGS.USE_DARK_BACKGROUND];
 		saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] = flags[kFLAGS.IMAGEPACK_OFF];
 		saveFile.data.flags[kFLAGS.USE_OLD_SPRITES] = flags[kFLAGS.USE_OLD_SPRITES];
 		saveFile.data.flags[kFLAGS.SFW_MODE] = flags[kFLAGS.SFW_MODE];
@@ -620,6 +621,7 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
 			
 			if (saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] != undefined) flags[kFLAGS.USE_OLD_INTERFACE] = saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE];
+			if (saveFile.data.flags[kFLAGS.USE_DARK_BACKGROUND] != undefined) flags[kFLAGS.USE_DARK_BACKGROUND] = saveFile.data.flags[kFLAGS.USE_DARK_BACKGROUND];
 			if (saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] != undefined) flags[kFLAGS.IMAGEPACK_OFF] = saveFile.data.flags[kFLAGS.IMAGEPACK_OFF];
 			if (saveFile.data.flags[kFLAGS.USE_OLD_SPRITES] != undefined) flags[kFLAGS.USE_OLD_SPRITES] = saveFile.data.flags[kFLAGS.USE_OLD_SPRITES];
 			if (saveFile.data.flags[kFLAGS.SFW_MODE] != undefined) flags[kFLAGS.SFW_MODE] = saveFile.data.flags[kFLAGS.SFW_MODE];

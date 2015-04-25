@@ -1,4 +1,4 @@
-//Re-implementation in progress
+//Scruffy the Imp Janitor
 package classes.Scenes.Places.Prison 
 {
 	import classes.*;
@@ -184,7 +184,7 @@ package classes.Scenes.Places.Prison
 			var accept:Function = prisonCaptorRandomEventJizzJanitorAccept;
 			var reject:Function = prisonCaptorRandomEventJizzJanitorReject;
 			var perform:Function = prisonCaptorRandomEventJizzJanitorPerform;
-			outputText("\nYou look up as the door squeaks open and see a skinny imp enter the room with a mop and a bucket.  He's wearing a janitor's scrub top with a nametag that reads \"Scruffy\" but you doubt it originally belonged to him since it is about five sizes too large and he is very noticeably not wearing the matching scrub pants that should go with it. He flatly ignores you as he begins the unenviable task of cleaning your cell, but after a few minutes of lackadaisical cleaning he turns and seems to notice your presence for the first time. ",false);
+			outputText("You look up as the door squeaks open and see a skinny imp enter the room with a mop and a bucket.  He's wearing a janitor's scrub top with a nametag that reads \"Scruffy\" but you doubt it originally belonged to him since it is about five sizes too large and he is very noticeably not wearing the matching scrub pants that should go with it. He flatly ignores you as he begins the unenviable task of cleaning your cell, but after a few minutes of lackadaisical cleaning he turns and seems to notice your presence for the first time. ",false);
 			outputText("\n\n\"<i>Well, aren't you a tasty little thing?  The " + prison.prisonCaptor.captorTitle + " sure knows how to pick em'.</i>\" he growls, looking you up and down appraisingly. You notice his not insubstantial cock begin to stir and start to get a sinking feeling.\n\n",false);
 			outputText("\"<i>Anyway, don't ever let me hear you complainin' about " + prison.prisonCaptor.captorPronoun2 + ", 'cause ",false);
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0)

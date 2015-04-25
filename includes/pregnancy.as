@@ -1656,6 +1656,7 @@ public function updatePregnancy():Boolean {
 	}
 	//Give birth if it's time (to a cowgirl!)
 	if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE) {
+		if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
 		player.knockUpForce(); //Clear Pregnancy
 		player.boostLactation(.01);
 		if(player.vaginas.length == 0) {
@@ -1778,6 +1779,11 @@ public function updatePregnancy():Boolean {
 	{
 		if(flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
 	}
+	//Amily failsafe - converts PC with pure babies to mouse babies if PC is in prison.
+	if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) 
+	{
+		if(prison.inPrison) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+	}
 	//Give birth if it's time (to an AMILY BITCH mouse!)
 	if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) {
 		player.boostLactation(.01);
@@ -1808,7 +1814,7 @@ public function updatePregnancy():Boolean {
 		}		
 
 		//Main Text here
-		if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && monk < 0) {
+		if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && monk < 0 && flags[kFLAGS.IN_PRISON] == 0) {
 			kGAMECLASS.jojoScene.giveBirthToPureJojoBabies();
 		}
 		else {
@@ -1925,6 +1931,7 @@ public function updatePregnancy():Boolean {
 	}
 	//Give birth to sirens.
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA && player.pregnancyIncubation == 1) {
+		if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
 		if(player.vaginas.length == 0) {
 			outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
 			player.createVagina();
@@ -1940,6 +1947,7 @@ public function updatePregnancy():Boolean {
 	}
 	//Give birth to behemoth.
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH && player.pregnancyIncubation == 1) {
+		if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
 		if(player.vaginas.length == 0) {
 			outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
 			player.createVagina();

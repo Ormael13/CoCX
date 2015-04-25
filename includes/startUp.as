@@ -33,6 +33,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	hideStats();
 	mainViewHack.startUpButtons();
 	kGAMECLASS.saves.loadPermObject();
+	mainViewHack.setDarkTheme();
 	//Reset newgame buttons
 	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameFromScratch );
 	mainView.hideAllMenuButtons();
@@ -75,7 +76,6 @@ public function mainMenu(e:MouseEvent = undefined):void
 	addButton(6, "Image Credits", imageCreditsScreen);
 	addButton(7, "Debug Info", debugPane);
 	addButton(8, "Mod Thread", openURL, "http://forum.fenoxo.com/thread-10915.html");
-
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;
@@ -353,8 +353,9 @@ public function settingsScreenInterfaceSettings():void {
 	//addButton(3, "Old Sprites", toggleOldSprites, null, null, null, "Toggle between old and new sprites.  \n\nNOTE: This doesn't work well right now."); //If I can re-add old sprites, that is.
 	addButton(4, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
 	addButton(5, "Background", cycleBackground, null, null, null, "Cycle through background styles and colors.");
+	addButton(6, "Dark Mode", toggleDarkBackground, null, null, null, "Toggle between black background, white text and normal background, black text.");
 	//addButton(6, "Quality", cycleQuality, null, null, null, "Set the graphical quality. \n\nCurrent quality: " + stage.quality);
-	addButton(6, "Measurements", toggleMeasurements, null, null, null, "Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
+	addButton(7, "Measurements", toggleMeasurements, null, null, null, "Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 	addButton(14, "Back", settingsScreenMain);
 }
 
@@ -378,6 +379,16 @@ public function cycleBackground():void {
 		mainView.textBGWhite.visible = false;
 		mainView.textBGTan.visible = false;
 	}		
+}
+
+public function toggleDarkBackground():void {
+	if (flags[kFLAGS.USE_DARK_BACKGROUND] == 0) {
+		flags[kFLAGS.USE_DARK_BACKGROUND] = 1;
+	}
+	else {
+		flags[kFLAGS.USE_DARK_BACKGROUND] = 0;
+	}
+	statScreenRefresh();
 }
 
 public function cycleQuality():void {

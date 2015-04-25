@@ -94,11 +94,13 @@ private function doCamp():void { //Only called by playerMenu
 		getGame().saves.saveGame(player.slotName);
 	}
 	kGAMECLASS.tooltipLoc = "";
+	//make sure gameState is cleared if coming from combat or giacomo
+	getGame().inCombat = false;
 	if (flags[kFLAGS.IN_INGNAM] > 0) {
 		kGAMECLASS.ingnam.menuIngnam();
 		return;
 	}
-	if (flags[kFLAGS.IN_PRISON] > 0) {
+	if (prison.inPrison) {
 		kGAMECLASS.prison.prisonRoom();
 		return;
 	}
@@ -113,8 +115,6 @@ private function doCamp():void { //Only called by playerMenu
 		HPChange(Math.round(player.maxHP()/2),false);
 		player.removeStatusAffect(StatusAffects.PostAnemoneBeatdown);
 	}
-	//make sure gameState is cleared if coming from combat or giacomo
-	getGame().inCombat = false;
 /* Can't happen - playerMenu will call dungeon appropriate menu instead of doCamp while inDungeon is true
 	if (kGAMECLASS.inDungeon) {
 		mainView.showMenuButton( MainView.MENU_DATA );
@@ -284,12 +284,12 @@ private function doCamp():void { //Only called by playerMenu
 		helSpawnScene.helspawnDiscoversBooze();
 		return;
 	}
-	if(flags[kFLAGS.HELSPAWN_AGE] == 2 && flags[kFLAGS.HELSPAWN_WEAPON] == 0 && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 3 && model.time.hours >= 10 && model.time.hours <= 18) {
+	if(flags[kFLAGS.HELSPAWN_AGE] == 2 && flags[kFLAGS.HELSPAWN_WEAPON] == 0 && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] >= 3 && model.time.hours >= 10 && model.time.hours <= 18) {
 		hideMenus();
 		helSpawnScene.helSpawnChoosesAFightingStyle();
 		return;
 	}
-	if(flags[kFLAGS.HELSPAWN_AGE] == 2 && (model.time.hours == 6 || model.time.hours == 7) && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7 && flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] == 1) {
+	if(flags[kFLAGS.HELSPAWN_AGE] == 2 && (model.time.hours == 6 || model.time.hours == 7) && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] >= 7 && flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] == 1) {
 		helSpawnScene.helspawnAllGrownUp();
 		return;
 	}
@@ -332,7 +332,7 @@ private function doCamp():void { //Only called by playerMenu
 			return;
 		}
 	}
-	if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0) {
+	if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 		if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 0 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] >= 8) {
 			holliScene.getASprout();
 			hideMenus();
@@ -1665,7 +1665,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		}
 		//Clear screen
 		if (clrScreen) clearOutput();
-		if (flags[kFLAGS.IN_PRISON] > 0) {
+		if (prison.inPrison) {
 			outputText("You curl up on a slab, planning to sleep for " + num2Text(timeQ) + " hours.");
 			goNext(timeQ, true);
 			return;

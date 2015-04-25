@@ -256,7 +256,7 @@ public function startUrtaQuest():void {
 	player.gems = 183;
 	player.level = 15;
 	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 3) {
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) {
 			player.level += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
 			player.str += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
 			player.tou += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
@@ -264,11 +264,11 @@ public function startUrtaQuest():void {
 			player.inte += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
 		}
 		else {
-			player.level += 90;
-			player.str += 75;
-			player.tou += 75;
-			player.spe += 75;
-			player.inte += 75;
+			player.level += 120;
+			player.str += 100;
+			player.tou += 100;
+			player.spe += 100;
+			player.inte += 100;
 		}
 	}
 	player.teaseLevel = 4;

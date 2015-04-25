@@ -61,23 +61,19 @@ package classes {
 				dynStats("cor", -0.1);
 			}
 			//Hunger! No effect if hunger is disabled, even if your hunger is at 0/100.
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0) {
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || prison.inPrison) {
 				var multiplier:Number = 1.0
 				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 hours with Survivalist perks.
-				if (player.hunger > 50)
-				{
-					player.hunger -= (0.5 * multiplier);
+				if (prison.inPrison) {
+					player.hunger -= (2 * multiplier); //Hunger depletes faster in prison.
 				}
-				if (player.hunger > 25)
-				{
-					player.hunger -= (0.5 * multiplier);
-				}
-				if (player.hunger > 0)
-				{
-					player.hunger -= (0.5 * multiplier);
+				else {
+					if (player.hunger > 50) player.hunger -= (0.5 * multiplier);
+					if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
+					if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
 				}
 				//Caps hunger at 100. Occurs after hunger tick so you'll be able to see hunger showing 100/100.
 				if (player.hunger > 100)
@@ -87,8 +83,8 @@ package classes {
 				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = 100; //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
 				if (player.hunger <= 0)
 				{
-					if (flags[kFLAGS.IN_PRISON] > 0) {
-						kGAMECLASS.prison.changeWill(-1, flags[kFLAGS.IN_PRISON] > 0);
+					if (prison.inPrison) {
+						kGAMECLASS.prison.changeWill(-1, prison.inPrison);
 						fatigue(2);
 					}
 					else {

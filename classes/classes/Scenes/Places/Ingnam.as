@@ -43,8 +43,8 @@ package classes.Scenes.Places
 			mainView.showMenuButton( MainView.MENU_APPEARANCE );
 			showStats();
 			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu );
-			if(player.XP >= (player.level) * 100 || player.perkPoints > 0 || player.statPoints > 0) {
-				if (player.XP < player.level * 100)
+			if(player.XP >= player.requiredXP() || player.perkPoints > 0 || player.statPoints > 0) {
+				if (player.XP < player.requiredXP())
 				{
 					if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
 					else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );

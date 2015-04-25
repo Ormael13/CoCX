@@ -98,6 +98,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPunishmentStockadesFreedom():void
 		{
+			clearOutput();
 			var begEvent:Function = null;
 			var acceptEvent:Function = null;
 			var rejectEvent:Function = null;
@@ -126,6 +127,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPunishmentStockadesFreedomReject():void
 		{
+			clearOutput();
 			if(player.will < prison.prisonWillCost(15))
 			{
 				outputText("While you'd like to preserve a bit of your dignity, you simply don't have the willpower to resist right now. \n\n",false);
@@ -150,6 +152,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPunishmentStockadesFreedomBeg():void
 		{
+			clearOutput();
 			outputText("(Placeholder) You break down and beg your " + prison.prisonCaptor.captorTitle + " to release you, and promise to do as " + prison.prisonCaptor.captorPronoun1 + " commands in the future. You are then given a chance to demonstrate your commitment as " + prison.prisonCaptor.captorPronoun1 + " walks around behind you and allows you to stuggle to fuck yourself on " + prison.prisonCaptor.captorPronoun3 + " cock. After much struggle your [vagOrAss] is fill with jizz, but you are left horny and needing release.",false);
 			player.slimeFeed()();
 			dynStats("lus", 50);
@@ -160,6 +163,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPunishmentStockadesFreedomAccept():void
 		{
+			clearOutput();
 			outputText("(Placeholder) You reluctantly accept your " + prison.prisonCaptor.captorTitle + "'s terms, and apologize for misbehaving. ",false);
 			prison.changeEsteem(-3,prison.inPrison);
 			prison.changeObey(1,prison.inPrison);

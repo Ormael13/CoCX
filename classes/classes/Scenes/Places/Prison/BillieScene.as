@@ -1,4 +1,4 @@
-//Re-implementation in progress
+//Billie the Bunny Dickgirl
 package classes.Scenes.Places.Prison 
 {
 	import classes.*;

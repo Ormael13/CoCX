@@ -11,6 +11,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingOrgasmTrainingAccept(branchChoice:String = "choose"):void
 		{
+			clearOutput();
 			var resistanceCounter:int = 0;
 			var totalResistance:int = 0;
 			var saidNo:int = 0;
@@ -868,6 +869,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingEvent():Boolean
 		{
+			clearOutput();
 			if(prison.prisonCaptor.captorName != "Elly")
 			{
 				outputText("The door opens and a guard tosses a pathetic piece of bread at your feet.\n\n",false);
@@ -1634,6 +1636,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingBJTrainingAccept(branchChoice:String = "choose"):void
 		{
+			clearOutput();
 			var fastLearner:Boolean = false;
 			var lustChange:int = 0;
 			var doneChoice:Boolean = false;
@@ -2119,6 +2122,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingBJTrainingPerform(branchChoice:String = "choose"):void
 		{
+			clearOutput();
 			var lustChange:int = 0;
 			var titChoice:Boolean = false;
 			var cuntChoice:Boolean = false;
@@ -3671,6 +3675,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingAnalTraining():void
 		{
+			clearOutput();
 			var refuse:Function = prisonCaptorFeedingTrainingRefuse;
 			var accept:Function = prisonCaptorFeedingAnalTrainingAccept;
 			var reject:Function = prisonCaptorFeedingTrainingReject;
@@ -3739,6 +3744,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestTraining():void
 		{
+			clearOutput();
 			var refuse:Function = prisonCaptorFeedingTrainingRefuse;
 			var accept:Function = prisonCaptorFeedingQuestTrainingAccept;
 			var reject:Function = prisonCaptorFeedingTrainingReject;
@@ -3829,6 +3835,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingFullyTrained():void
 		{
+			clearOutput();
 			var lustChange:int = 0;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0)
 			{
