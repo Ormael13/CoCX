@@ -1281,6 +1281,11 @@
 				return 8;
 			}
 			if (!inDungeon) {
+				if (game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
+					if (short == "goblin" || short == "goblin assassin" || short == "imp" || short == "imp lord" || short == "imp warlord" || short == "satyr" || short == "gnoll" || short == "gnoll spear-thrower" || short == "minotaur" || short == "minotaur lord" || short == "female spider-morph" || short == "male spider-morph" || short == "corrupted drider" || short == "yeti" || (short == "kitsune" && hairColor == "red")) {
+						game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
+					}
+				}
 				outputText("\n\nYou'll probably come to your senses in eight hours or so");
 				if (player.gems > 1)
 					outputText(", missing " + gemsLost + " gems.");

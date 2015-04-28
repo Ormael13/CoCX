@@ -61,7 +61,7 @@ package classes.Scenes.Places
 				//Increment dirtiness level
 				if (player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) < 100) player.addStatusValue(StatusAffects.PrisonCaptorEllyStatus, 2, 1);
 				//Tick cooldowns
-				flags[kFLAGS.PRISON_EVENT_HAPPENED] = 0;
+				if (flags[kFLAGS.PRISON_EVENT_TIMEOUT] > 0) flags[kFLAGS.PRISON_EVENT_TIMEOUT]--;
 				if (heardPrisonerScreamCooldown > 0) heardPrisonerScreamCooldown--;
 				if (randomCooldownRoomCheck > 0) randomCooldownRoomCheck--;
 				if (randomCooldownPunishment > 0) randomCooldownPunishment--;
@@ -82,7 +82,7 @@ package classes.Scenes.Places
 					needNext = true;
 					return needNext;
 				}
-				if ((flags[kFLAGS.PRISON_DIRT_ENABLED] > 0 && rand(6) == 0 && randomCooldownRoomCheck <= 0) || (player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) >= 50 && flags[kFLAGS.PRISON_DIRT_ENABLED] == 0)) {
+				if ((flags[kFLAGS.PRISON_DIRT_ENABLED] > 0 && model.time.hours == 16 && randomCooldownRoomCheck <= 0) || (player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) >= 50 && flags[kFLAGS.PRISON_DIRT_ENABLED] == 0)) {
 					randomCooldownRoomCheck = 6 + rand(18);
 					prisonCaptorRandomEventCleaningCheck();
 					needNext = true;
@@ -1121,7 +1121,7 @@ package classes.Scenes.Places
 		//------------
 		// PRISON ACTIONS
 		//------------
-		public function prisonRoom(noEvent:Boolean = false):void {
+		public function prisonRoom(allowsEvents:Boolean = true):void {
 			hideUpDown();
 			showStats();
 			clearOutput();
@@ -1184,43 +1184,55 @@ package classes.Scenes.Places
 				}
 			}
 			//Random events
-			if (flags[kFLAGS.PRISON_EVENT_HAPPENED] == 0 && !noEvent) {
-				flags[kFLAGS.PRISON_EVENT_HAPPENED] = 1;
-				//trace("Firing prison event");
-				if (randomCooldownRoomCheck <= 0 && rand(15) == 0 && player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) > 50) {
-					randomCooldownRoomCheck = 4 + rand(10);
-					trace("Cleanliness check");
-					prisonCaptorRandomEventCleaningCheck();
-					return;
-				}				
-				if (randomCooldownScruffy <= 0 && rand(20) == 0 && !scruffyScene.prisonCaptorScruffyOptedOut()) {
-					randomCooldownScruffy = 6 + rand(6);
-					scruffyScene.prisonCaptorRandomEventJizzJanitor();
-					return;
-				}
-				if (randomCooldownGuard <= 0 && rand(20) == 0) {
-					randomCooldownGuard = 12 + rand(60);
-					prisonCaptorRandomEventAbuse();
-					return;
-				}
-				if (randomCooldownFeed <= 0 && rand(12 - (player.hunger / 10)) == 0) {
-					randomCooldownFeed = 4 + rand(4);
-					trainingFeed.prisonCaptorFeedingEvent();
-					return;
-				}
+			if (flags[kFLAGS.PRISON_EVENT_TIMEOUT] == 0 && model.time.hours >= 8 && allowsEvents) {
+				flags[kFLAGS.PRISON_EVENT_TIMEOUT] = 2;
+				trace("Firing prison event");
 				var petPlayRarity:int = 10;
 				petPlayRarity -= (trainingPet.prisonCaptorPetScore() - 25) / 5;
-				if (petPlayRarity < 5) petPlayRarity = 5;
-				/*if (randomCooldownPet <= 0 && rand(8) == 0 && !trainingPet.prisonCaptorPetOptedOut()) {
-					randomCooldownPet = 4 + rand(4);
-					trainingPet.prisonCaptorPetEvent();
-					return;
-				}*/
-				if (randomCooldownPet <= 0 && rand(petPlayRarity) == 0 && trainingPet.prisonCaptorPetScore() >= 30 && !trainingPet.prisonCaptorPetOptedOut()) {
-					randomCooldownPet = 6 + rand(4);
-					if (trainingPet.prisonCaptorPetTier() == 2) trainingPet.prisonCaptorPetTrainingOffer();
-					else if (trainingPet.prisonCaptorPetTier() == 3) trainingPet.prisonCaptorPetTrainingDemand();
-					return;
+				if (petPlayRarity < 2) petPlayRarity = 2;
+				var chooser:int = rand(10);
+				trace(chooser);
+				switch(chooser)
+				{
+					case 1:
+						if (randomCooldownScruffy <= 0 &&!scruffyScene.prisonCaptorScruffyOptedOut()) {
+							randomCooldownScruffy = 6 + rand(6);
+							scruffyScene.prisonCaptorRandomEventJizzJanitor();
+							return;
+						}
+					case 2:
+						if (randomCooldownGuard <= 0) {
+							randomCooldownGuard = 12 + rand(60);
+							prisonGuard.prisonCaptorRandomEventAbuse();
+							return;
+						}
+					case 3:
+					case 4:
+						if (randomCooldownFeed <= 0) {
+							randomCooldownFeed = 4 + rand(4);
+							trainingFeed.prisonCaptorFeedingEvent();
+							return;
+						}
+					case 5:
+						if (randomCooldownPet <= 0 && rand(petPlayRarity) == 0 && !trainingPet.prisonCaptorPetOptedOut()) {
+							randomCooldownPet = 4 + rand(4);
+							trainingPet.prisonCaptorPetEvent();
+							return;
+						}
+					case 6:
+					case 7:
+						if (randomCooldownPet <= 0 && rand(petPlayRarity) == 0 && trainingPet.prisonCaptorPetScore() >= 30 && !trainingPet.prisonCaptorPetOptedOut()) {
+							randomCooldownPet = 6 + rand(4);
+							if (trainingPet.prisonCaptorPetTier() == 2) trainingPet.prisonCaptorPetTrainingOffer();
+							else if (trainingPet.prisonCaptorPetTier() == 3) trainingPet.prisonCaptorPetTrainingDemand();
+							return;
+						}
+					case 8:
+						//prisonCaptorRoomEvents();
+						//return;
+					case 9:
+					default:
+						break;
 				}
 			}
 			//if(prisonRoomEvents())
@@ -1254,6 +1266,14 @@ package classes.Scenes.Places
 				mainView.hideMenuButton( MainView.MENU_LEVEL );
 				mainView.statsView.hideLevelUp();
 			}
+			//Set menus
+			menu();
+			addButton(0, "Train", prisonTrainMenu, null, null, null, "Train to improve your body.");
+			addButton(1, "Study", prisonStudyMenu, null, null, null, "Study to improve your mind.");
+			addButton(2, "Restraints", prisonRestraintsMenu, null, null, null, "Try to break free from restraints if you have any.");
+			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0) addButton(3, "Clean", prisonCaptorCleanRoom, null, null, null, "Clean the cell.");
+			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] > 0) addButton(4, "Escape", prisonEscapeMenu, null, null, null, "Make an escape attempt.");
+			addButton(7, "Inventory", inventory.inventoryMenu);
 			//Check lust
 			if (player.lust >= 30) {
 				if (player.lust >= player.maxLust()) {
@@ -1264,15 +1284,6 @@ package classes.Scenes.Places
 				addButton(8, "Masturbate", getGame().masturbation.masturbateMenu);
 				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", getGame().masturbation.masturbateMenu);
 			}
-			//Set menus
-			menu();
-			addButton(0, "Train", prisonTrainMenu, null, null, null, "Train to improve your body.");
-			addButton(1, "Study", prisonStudyMenu, null, null, null, "Study to improve your mind.");
-			addButton(2, "Restraints", prisonRestraintsMenu, null, null, null, "Try to break free from restraints if you have any.");
-			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0) addButton(3, "Clean", prisonCaptorCleanRoom, null, null, null, "Clean the cell.");
-			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] > 0) addButton(4, "Escape", prisonEscapeMenu, null, null, null, "Make an escape attempt.");
-			addButton(7, "Inventory", inventory.inventoryMenu);
-			addButton(8, "Masturbate", getGame().masturbation.masturbateMenu);
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {
 				menu();
@@ -1308,7 +1319,7 @@ package classes.Scenes.Places
 				removeButton(0);
 				removeButton(1);
 				removeButton(2);
-				removeButton(4);
+				removeButton(3);
 				addButton(9, "Sleep", getGame().camp.doSleep);
 			}
 		}
@@ -1384,7 +1395,7 @@ package classes.Scenes.Places
 			//Increase muscles.
 			if (player.tone < 60) outputText(player.modTone(85, 5 + rand(5)), false);
 			else outputText(player.modTone(85, 1 + rand(4)), false);
-			doNext(camp.returnToCampUseTwoHours);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function doPrisonTrainCardio():void 
@@ -1442,7 +1453,7 @@ package classes.Scenes.Places
 			//Decrease thickness.
 			if (player.thickness > 40) outputText(player.modThickness(1, 5 + rand(2)), false);
 			else outputText(player.modThickness(1, 2 + rand(2)), false);
-			doNext(camp.returnToCampUseTwoHours);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Special training
@@ -1517,7 +1528,7 @@ package classes.Scenes.Places
 				dynStats("lib", -0.5);
 			}
 			changeEsteem(5, inPrison);
-			doNext(camp.returnToCampUseTwoHours);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function doPrisonStudyDetermination():void
@@ -1532,21 +1543,21 @@ package classes.Scenes.Places
 				dynStats("inte", 0.5);
 			}
 			changeObey(-5,inPrison);
-			doNext(camp.returnToCampUseTwoHours);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function doPrisonStudySelfpity():void
 		{
 			outputText("You turn your thoughts inward in an attempt to calm your nerves and bring balance to your emotions, but end up wallowing in self pity over your hopeless situation instead.\n",false);
 			changeEsteem(-5,inPrison);
-			doNext(camp.returnToCampUseTwoHours);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function doPrisonStudyDiscipline():void
 		{
 			outputText("You turn your thoughts inward in an attempt to improve your determination, but end up daydreaming about how pleasant it is to be told what to do rather than having to think for yourself.\n",false);
 			changeObey(5,inPrison);
-			doNext(camp.returnToCampUseTwoHours);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Special study
@@ -1613,11 +1624,14 @@ package classes.Scenes.Places
 			var bribe:Function = doPrisonEscapeBribe;
 			var sneak:Function = doPrisonEscapeSneak;
 			var run:Function = doPrisonEscapeRun;
-			var quest:Function = null;
+			var quest:Function = doPrisonEscapeQuestRun;
 			clearOutput();
 			outputText("You look around you and think about how you might be able to free yourself from captivity.\n\n", false);
 			if (player.gems < 500) {
 				bribe = null;
+			}
+			if (!trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
+				quest = null;
 			}
 			/*prisonEscapeChoices(choiceEvents,choiceTexts);
 			var i:int = 1;
@@ -2370,25 +2384,12 @@ package classes.Scenes.Places
 			return true;
 		}
 		
-		public function prisonCaptorRandomEventAbuse():Boolean
-		{
-			hideMenus();
-			clearOutput();
-			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0 && player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) <= 1)
-			{
-				return prisonCaptorRandomEventSounds();
-			}
-			prisonLoadGuard(true);
-			outputText("\nYou are startled by the sound of the door opening, and quickly find yourself wishing you hadn't heard it at all. " + prisonGuard.guardCaptitalA + " " + prisonGuard.guardType + " guard enters the room and quickly secures the door behind " + prisonGuard.guardPronoun2 + ", then turns towards you with the clear intent of fucking you and showing you your place.\n\n",false);
-			return prisonGuard.prisonGuardAttack();
-		}
-		
 		public function prisonCaptorRoomEvents():Boolean
 		{
 			if (flags[kFLAGS.IN_PRISON] == 0) return false; //Make sure events don't proc!
 			var eventOccurred:Boolean = false;
 			//Wild Billie appears!
-			if (/*!prisonCaptor.roomEventOverride[flags[kFLAGS.PRISON_PUNISHMENT]] && */flags[kFLAGS.PRISON_PUNISHMENT] == 0 && player.lust >= player.maxLust() && rand(3) == 0)
+			if ((flags[kFLAGS.PRISON_PUNISHMENT] == 0 || flags[kFLAGS.PRISON_PUNISHMENT] == 3) && player.lust >= player.maxLust() && rand(3) == 0)
 			{
 				prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
 				if(rand(2) == 1 && !prisonCanMasturbate(false) && flags[kFLAGS.PRISON_DILDO_RACK] == 0)
@@ -2479,7 +2480,8 @@ package classes.Scenes.Places
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] == 0)
 			{
 				outputText("\"<i>A worthless piece of meat such as yourself has no reason to care if they live in filth -- you should simply be grateful to have a roof over your head and a " + prisonCaptor.captorTitle + " to give you a purpose in life. However, you should certainly be concerned with offending your " + prisonCaptor.captorTitle + " with that filth.</i>\" As the words fill the room, " + prisonCaptor.captorPronoun3 + " displeasure is almost palpable.",false);
-				outputText("\n\n\"<i>Mark my words, slave: you <b>will</b> keep this room clean.</i>\" Nothing more needs to be said for you to understand that there will be consequences if you don't.",false);
+				outputText("\n\n\"<i>Mark my words, slave: you <b>will</b> keep this room clean.</i>\" Nothing more needs to be said for you to understand that there will be consequences if you don't.", false);
+				outputText("\n\n<b>From now on, Elly will check your cell every day at 4pm.</b>");
 				flags[kFLAGS.PRISON_DIRT_ENABLED] = 1;
 				prisonCaptorTrainingStatusUpdate();
 				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,2,51);
@@ -2540,7 +2542,7 @@ package classes.Scenes.Places
 				return;
 			}
 			
-			outputText("(Placeholder) [captorTitle] [captorName] reaches a decision. \"<i>Perhaps having your freedoms a bit more restricted for a while will help you show some respect.</i>\", " + prisonCaptor.captorPronoun1 + " says as " + prisonCaptor.captorPronoun1 + " adjusts your restraints.",false);
+			outputText("(Placeholder) [captorTitle] [captorName] reaches a decision. \"<i>Perhaps having your freedoms a bit more restricted for a while will help you show some respect,</i>\" " + prisonCaptor.captorPronoun1 + " says as " + prisonCaptor.captorPronoun1 + " adjusts your restraints.",false);
 			doNext(playerMenu);
 		}
 	  
@@ -3158,7 +3160,7 @@ package classes.Scenes.Places
 							outputText("<b>Accepted anal sex: </b>",false);
 							break;
 						case 5:
-							outputText("<b>Performed quests willingly: </b>t",false);
+							outputText("<b>Performed quests willingly: </b>",false);
 							break;
 						case 6:
 						default:
@@ -3173,6 +3175,7 @@ package classes.Scenes.Places
 					{
 						outputText("s\n",false);
 					}
+					if (trainingFeed.prisonCaptorFeedingQuestOptedOut()) outputText("<b>Quests Disabled</b>\n");
 					billieScene.prisonCaptorBillieStatusText();
 				}
 				if(trainingPet.prisonCaptorPetTier() > 0 && !trainingPet.prisonCaptorPetOptedOut())

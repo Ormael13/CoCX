@@ -95,12 +95,36 @@ package classes.Scenes.Places.Prison
 		// KIHA
 		//------------
 		//Kiha gives birth to egg.
-		public function letterFromKiha1():void {
+		public function letterFromKiha1(eggCounter:int):void {
 			initialMessage("Kiha");
-			outputText("\"<i>How are you doing, Doofus? I laid an egg today and I wanted you to see me but you couldn't. I could have saved you but I don't know where you're imprisoned.  -Kiha</i>\"");
+			//Increment children with Kiha.
+			var maleCount:int = 0;
+			var femaleCount:int = 0;
+			var hermCount:int = 0;
+			var genderChooser:int;
+			var childList:Array = [];
+			for (var i:int = 0; i < eggCounter; i++) {
+				genderChooser = rand(100);
+				if (genderChooser < 20) maleCount++;
+				else if (genderChooser < 40) femaleCount++;
+				else hermCount++;
+			}
+			if (maleCount > 0) {
+				childList.push(num2Text(maleCount) + " " + (maleCount > 1 ? "boys" : "boy"));
+				flags[kFLAGS.KIHA_CHILDREN_BOYS] += maleCount;
+			}
+			if (femaleCount > 0) {
+				childList.push(num2Text(femaleCount) + " " + (femaleCount > 1 ? "girls" : "girl"));
+				flags[kFLAGS.KIHA_CHILDREN_GIRLS] += femaleCount;
+			}
+			if (hermCount > 0) {
+				childList.push(num2Text(hermCount) + " " + (hermCount > 1 ? "hermaphrodites" : "hermaphrodite"));
+				flags[kFLAGS.KIHA_CHILDREN_HERMS] += hermCount;
+			}
+			outputText("\"<i>How are you doing, Doofus? I laid a clutch of " + num2Text(eggCounter) + " fertilized eggs today and I wanted you to see me but you couldn't. The eggs hatched quickly and there are " + formatStringArray(childList) + ". I'm going to train them when they grow a bit more. I could have saved you but I don't know where you're imprisoned.  -Kiha</i>\"");
 		}
-		//Kiha's egg hatches.
-		public function letterFromKiha2():void {
+		//Kiha's egg hatches. (Not used anymore due to overhaul)
+		/*public function letterFromKiha2():void {
 			initialMessage("Kiha");
 			outputText("\"<i>How are you doing, Doofus? The egg hatched and I wanted you to see but you couldn't. ");
 			var genderChooser:int = rand(100);
@@ -123,16 +147,16 @@ package classes.Scenes.Places.Prison
 				flags[kFLAGS.KIHA_CHILDREN_HERMS]++;
 			}
 			outputText(" and " + (genderChooser < 40 ? "he" : "she") + " will definitely make a great warrior. I hope you'll come someday.  -Kiha</i>\"");
-		}
+		}*/
 		//Kiha tells story.
 		public function letterFromKiha3():void {
 			initialMessage("Kiha");
-			outputText("\"<i>How are you doing, Doofus? I told my " + (kGAMECLASS.kihaFollower.totalKihaChildren() == 1 ? (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] == 1 ? "son" : "daughter") : "kids") + " about the story and they were excited. " + (kGAMECLASS.kihaFollower.totalKihaChildren() == 1 ? (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] == 1 ? "He" : "She") : "They") + " miss you and they want to see you. Please come back. You're my one and only Idiot.  -Kiha</i>\"");
+			outputText("\"<i>How are you doing, Doofus? I told my kids about the story and they were excited. They miss you and they want to see you. Please come back. You're my one and only Idiot.  -Kiha</i>\"");
 		}
 		//Kiha's child grows up.
 		public function letterFromKiha4():void {
 			initialMessage("Kiha");
-			outputText("\"<i>How are you doing, Doofus? My " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] == 1 ? "son" : "daughter") + " is quite the warrior now. I've taught " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] == 1 ? "him" : "her") + " my fighting techniques and " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] == 1 ? "he" : "she") + " put on quite the flame show! It's too bad you didn't get to see " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] == 1 ? "him" : "her") + ". " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] == 1 ? "He" : "She") + " misses you and " + (flags[kFLAGS.KIHA_CHILD_LATEST_GENDER] == 1 ? "he" : "she") + " wants to see you. Please come back. You're my one and only Idiot.  -Kiha</i>\"");
+			outputText("\"<i>How are you doing, Doofus? My children is quite the warrior now. I've taught them my fighting techniques and they put on quite the flame show! It's too bad you didn't get to see them. They miss you and they wants to see you. Please come back. You're my one and only Idiot.  -Kiha</i>\"");
 		}
 		
 		//------------

@@ -39,10 +39,7 @@ package classes.Scenes.Monsters
 			//First Time Intro
 			if(flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ELDER] == 0)
 			{
-				outputText("As you take a stroll,  you catch the glimpse of an imposing goblin. Unlike most of the goblins you've seen so far, she's clad in primitive bone armor and wielding a metal sword and shield. Her hair is crimson and black. She walks over to you in a peaceful manner.");
-				outputText("\n\n\"<i>I've travelled a lot and I have slain a lot of imps, hellhounds, and minotaurs. The demons must pay for the damage caused to my race and I worked hard to keep my mind off constant sexual desires. I gave birth to hundreds of goblins but I keep my boobs normal with Reducto. I still have unfinished business,</i>\" she says.");
-				outputText("\n\nWhat are her current goals then?");
-				outputText("\n\n\"<i>I'm seeking out someone who's not corrupt so I can give birth to less-tainted goblin. My tribe is isolated from the corrupted Goblin societies and I tried to brew a purifying potion but to no avail" + (flags[kFLAGS.LETHICE_DEFEATED] > 0 ? ". I did hear the news that you have defeated Lethice. You're my saviour and I'll be forever grateful at you for causing a major blow against the demons" : "") + ",</i>\" the goblin says.");
+				outputText("As you take a stroll, you catch the glimpse of an imposing goblin. Unlike most of the goblins you've seen so far, she's clad in primitive bone armor, wielding a metal sword lined with lethicite crystal, and holding a metal greatshield. Her hair is crimson and black. She walks over to you in a peaceful manner.");
 				if (player.hasCock()) {
 					if (player.cor < 60 + player.corruptionTolerance()) outputText("\n\n\"<i>Would you like to fuck me? I'll promise to teach my newborn goblins the values of pre-corruption lifestyle.</i>\"");
 					else outputText("\n\n\"<i>Please don't fuck me! You're too corrupt!</i>\"");
@@ -53,13 +50,13 @@ package classes.Scenes.Monsters
 			}
 			//Repeat Intro - Cell Chambers
 			else {
-				outputText("As you walk, the familiar sight of a powerful goblin catches your eye. You have encountered the goblin elder again!");
+				outputText("As you walk, the familiar sight of a powerful goblin catches your eye. You have encountered " + (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] > 0 ? "Priscilla" : "the goblin elder") + " again!");
 				if (player.hasCock()) {
 					if (player.cor < 60 + player.corruptionTolerance()) outputText("\n\n\"<i>Hello again" + (player.hasCock() ? ", stud. Ready to knock me up with your cum? Or are you here to duel?" : ",") + "</i>\" she says.");
 					else outputText("\n\n\"<i>Please don't fuck me! You're too corrupt!</i>\"");
 				}
 				else {
-					outputText("\n\n\"<i>You don't have anything to knock me up but I'm always up for the challenge.</i>\"");
+					outputText("\n\n\"<i>You don't have anything to knock me up but I'm always up for the challenge,</i>\" she says.");
 				}
 			}
 			flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ELDER]++;
@@ -69,7 +66,7 @@ package classes.Scenes.Monsters
 			}
 			menu();
 			addButton(0, "Fight", startCombatImmediate, new GoblinElder());
-			//addButton(1, "Talk", null);
+			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] < 2) addButton(1, "Talk", talkToGoblinElder);
 			if (player.hasCock() && player.lust >= 33 && player.cor < 60 + player.corruptionTolerance()) {
 				monster = new GoblinElder();
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(2, "Fuck Her", gatsGoblinBoners);
@@ -780,6 +777,24 @@ package classes.Scenes.Monsters
 			player.dumpEggs();
 			player.orgasm();
 			cleanupAfterCombat();
+		}
+		
+		private function talkToGoblinElder():void {
+			clearOutput();
+			outputText("You ask the goblin if she wouldn't mind talking. ");
+			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] == 0) {
+				outputText("What is she anyway? How is she unusual from the other goblins? Of all the goblins you've seen, she isn't as sexually inclined.");
+				outputText("\n\n\"<i>Of course. My name is Priscilla and I've travelled a lot and I have slain a lot of imps, hellhounds, and minotaurs. The demons must pay for the damage caused to my race and I worked hard to keep my mind off constant sexual desires. I gave birth to hundreds of goblins but I keep my boobs normal with Reducto. I still have unfinished business,</i>\" she says.");
+				outputText("\n\nWhat are her current goals then?");
+				outputText("\n\n\"<i>I'm seeking out someone who's not corrupt so I can give birth to less-tainted goblin. My tribe is isolated from the corrupted Goblin societies and I tried to brew a purifying potion but to no avail" + (flags[kFLAGS.LETHICE_DEFEATED] > 0 ? ". I did hear the news that you have defeated Lethice. You're my saviour and I'll be forever grateful at you for causing a major blow against the demons" : "") + ",</i>\" the goblin says.");
+			}
+			else if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] == 1) {
+				outputText("Where did she originally came from? How did she escape corruption?");
+				outputText("\n\n\"<i>I came from the old goblin city. Before the demons came, we were the technological leaders. When the demons came, they offer us a treaty guaranteeing the peace and safety. But they lied and they corrupted the water supply. I knew there was something wrong with the water supply so I escaped and hid in the Deepwoods, where no demons would find me.</i>\"");
+			}
+			outputText("\n\nYou thank the goblin for telling you and wave her off.");
+			flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER]++;
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

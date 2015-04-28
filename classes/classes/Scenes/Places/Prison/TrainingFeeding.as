@@ -1362,8 +1362,6 @@ package classes.Scenes.Places.Prison
 						outputText("while you understand that there will be consequences there is only so much indignity that you can stomach politely.",false);
 					}
 					
-					
-					
 				}
 				else if(player.obey < 45)
 				{
@@ -1436,12 +1434,6 @@ package classes.Scenes.Places.Prison
 					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.",false);
 				}
 				
-				
-				
-				
-				
-				
-				
 				if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) == 3)
 				{
 					outputText(" You pull her cock from your mouth and shrink away, assume a combative tone, and ");
@@ -1473,8 +1465,6 @@ package classes.Scenes.Places.Prison
 						outputText("angrily",false);
 					}
 					
-					
-					
 				}
 				else if(player.esteem < 15)
 				{
@@ -1496,9 +1486,6 @@ package classes.Scenes.Places.Prison
 				{
 					outputText("flatly",false);
 				}
-				
-				
-				
 				
 				outputText(" refuse to do as she has asked. You await her response ");
 				if(player.obey <= 45)
@@ -1524,8 +1511,6 @@ package classes.Scenes.Places.Prison
 						outputText("in stoic foreboding.",false);
 					}
 					
-					
-					
 				}
 				else if(player.esteem < 15)
 				{
@@ -1547,9 +1532,6 @@ package classes.Scenes.Places.Prison
 				{
 					outputText("with a mixture of fear and excitement.",false);
 				}
-				
-				
-				
 				
 				outputText("\n\n",false);
 				outputText("Mistress Elly simply stares at you with a mixture of disappointment and patience, like a caring parent deciding how to discipline a petulant child. There is no anger or frustration in her voice or her body language as she crouches down and takes a firm grip on your shoulder. \"<i>I know this is a hard process. I know you are still learning to cope with the shame of what you are. But that doesn't excuse rudeness.</i>\" With just a light flick of her wrist she flings you onto your back so forcefully that the wind is knocked out of you, and in a blink of an eye she is crouched on top of you with her right knee crushing your [fullChest]. She leans in so close that you can feel the warmth of her breath on your [face] and see her violet eyes fill with fire. \"<i>But I am not vengeful, nor am I unkind. I want to help you learn, and even your rudeness won't keep me from teaching you a useful lesson today.</i>\" \n\n");
@@ -3745,6 +3727,10 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingQuestTraining():void
 		{
 			clearOutput();
+			if (prisonCaptorFeedingQuestOptedOut()) {
+				prisonCaptorFeedingAnalTraining();
+				return;
+			}
 			var refuse:Function = prisonCaptorFeedingTrainingRefuse;
 			var accept:Function = prisonCaptorFeedingQuestTrainingAccept;
 			var reject:Function = prisonCaptorFeedingTrainingReject;
@@ -3821,14 +3807,27 @@ package classes.Scenes.Places.Prison
 			addButton(1, "Accept", accept);
 			addButton(5, "Reject", reject);
 			addButton(6, "Perform", perform);
+			addButton(10, "NEVER!", noFuckQuestForGood);
+		}
+		
+		public function noFuckQuestForGood():void 
+		{
+			outputText("(Placeholder) You angrily reject the quest and state that you'll NEVER do such humiliating quest, no matter how much of a slut and no matter how obedient you may be. You WANT her, not those other corrupt creatures.\n\n");
+			outputText("(Placeholder) Mistress Elly looks down at you. \"<i>Fine. I respect your preferences. I will not assign those quests again. But I still must punish you for your disobedience.</i>\"");
+			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest, 1, -1);
+			prison.prisonPunishment(80);
+			prison.changeObey(-5);
+			prison.changeEsteem(5);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingSelect():void
 		{
+			if (prisonCaptorFeedingQuestOptedOut()) return;
 			outputText("(Placeholder) She assigns you a random humiliating thing to go out into the world and do, and tells you how long you will have to do it.\n\n");
 			outputText("(Placeholder) For testing and demonstration purposes, your quest is to go out and get fucked by at least five monsters in the next four days. And no, it doesn't count if you beat them up first.\n\n");
 			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,1,1);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,2,72);
+			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,2,96);
 			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,3,0);
 			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,4,0);
 		}
@@ -3836,6 +3835,10 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingFullyTrained():void
 		{
 			clearOutput();
+			if (prisonCaptorFeedingQuestOptedOut()) {
+				prisonCaptorFeedingAnalTraining();
+				return;
+			}
 			var lustChange:int = 0;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0)
 			{
@@ -3862,9 +3865,13 @@ package classes.Scenes.Places.Prison
 			doNext(prisonCaptorFeedingQuestTrainingAccept);
 		}
 		
-		public function prisonCaptorFeedingQuestTrainingAccept() : void
+		public function prisonCaptorFeedingQuestTrainingAccept():void
 		{
 			clearOutput();
+			if (prisonCaptorFeedingQuestOptedOut()) { //If quest is disabled, route to anal training.
+				prisonCaptorFeedingAnalTrainingAccept();
+				return;
+			}
 			outputText("(Placehoder) You agree to attempt the quest, and she unlocks the door (and does not return any other restraints you might have had) but makes sure you understand that this does NOT mean you are free. She instructs you to find your way back as soon as you complete your task, and warns you that as soon as you run out of time you WILL find yourself back in your cell. Finally, she decides to give you a going away present, but warns you that you might want to eat it before you leave.",false);
 			outputText("\n\nOut of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n",false);
 			if(prison.prisonIsRestrained())
@@ -3885,7 +3892,7 @@ package classes.Scenes.Places.Prison
 			inventory.takeItem(consumables.C_BREAD, camp.returnToCampUseOneHour);
 		}
 		
-		public function prisonCaptorFeedingQuestTrainingIsComplete() : Boolean
+		public function prisonCaptorFeedingQuestTrainingIsComplete():Boolean
 		{
 			if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyQuest) < 0)
 			{
@@ -3907,7 +3914,16 @@ package classes.Scenes.Places.Prison
 			}
 		}
 		
-		public function prisonCaptorFeedingQuestTrainingExists() : Boolean
+		public function prisonCaptorFeedingQuestOptedOut():Boolean
+		{
+			if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyQuest) >= 0 && player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest) < 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		
+		public function prisonCaptorFeedingQuestTrainingExists():Boolean
 		{
 			if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyQuest) >= 0 && player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest) > 0)
 			{
@@ -3916,7 +3932,7 @@ package classes.Scenes.Places.Prison
 			return false;
 		}
 		
-		public function prisonCaptorFeedingQuestTrainingIsTimeUp() : Boolean
+		public function prisonCaptorFeedingQuestTrainingIsTimeUp():Boolean
 		{
 			if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyQuest) >= 0 && player.statusAffectv2(StatusAffects.PrisonCaptorEllyQuest) <= 0)
 			{
@@ -3925,7 +3941,7 @@ package classes.Scenes.Places.Prison
 			return false;
 		}
 		
-		public function prisonCaptorFeedingQuestTrainingStatusText() : void
+		public function prisonCaptorFeedingQuestTrainingStatusText():void
 		{
 			outputText("<b>Mistress Elly\'s Quest: </b>");
 			switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest))
@@ -3940,7 +3956,7 @@ package classes.Scenes.Places.Prison
 			outputText("<b>Quest Time Remaining: </b>" + player.statusAffectv2(StatusAffects.PrisonCaptorEllyQuest) + " hours\n");
 		}
 		
-		public function prisonCaptorFeedingQuestTrainingDecrementTime() : void
+		public function prisonCaptorFeedingQuestTrainingDecrementTime():void
 		{
 			var newVal:* = undefined;
 			if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyQuest) < 0)
@@ -3955,7 +3971,7 @@ package classes.Scenes.Places.Prison
 			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,2,newVal);
 		}
 		
-		public function prisonCaptorFeedingQuestTrainingProgress(questID:Number, val1:Number = 0, val2:Number = 0) : void
+		public function prisonCaptorFeedingQuestTrainingProgress(questID:Number, val1:Number = 0, val2:Number = 0):void
 		{
 			var newval1:* = undefined;
 			var newval2:* = undefined;
@@ -3969,7 +3985,7 @@ package classes.Scenes.Places.Prison
 			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,4,newval2);
 		}
 		
-		public function prisonCaptorFeedingQuestTrainingResolve() : void
+		public function prisonCaptorFeedingQuestTrainingResolve():void
 		{
 			outputText("(Placeholder) You\'ve returned to your cell and now it is time to evaluate how you did on your quest. \n\n");
 			prison.prisonCaptor.updateNextFeedingEvent(model.time.hours, model.time.days);

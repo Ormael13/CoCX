@@ -541,29 +541,29 @@ package classes.Scenes
 		public function manageEquipment():void {
 			outputText("Which would you like to unequip?", true)
 			menu();
-			if (player.weaponName != "fists")
+			if (player.weapon != WeaponLib.FISTS)
 			{
-				addButton(0, "Weapon", unequipWeapon);
+				addButton(0, "Weapon", unequipWeapon, null, null, null, player.weapon.description);
 			}
-			if (player.shieldName != "nothing")
+			if (player.shield != ShieldLib.NOTHING)
 			{
-				addButton(1, "Shield", unequipShield);
+				addButton(1, "Shield", unequipShield, null, null, null, player.shield.description);
 			}
-			if (player.jewelryName != "nothing")
+			if (player.jewelry != JewelryLib.NOTHING)
 			{
-				addButton(2, "Accessory", unequipJewel);
+				addButton(2, "Accessory", unequipJewel, null, null, null, player.jewelry.description);
 			}
 			if (player.armor != ArmorLib.NOTHING)
 			{
-				addButton(5, "Armour", unequipArmor);
+				addButton(5, "Armour", unequipArmor, null, null, null, player.armor.description);
 			}
 			if (player.upperGarment != UndergarmentLib.NOTHING)
 			{
-				addButton(6, "Upperwear", unequipUpperwear);
+				addButton(6, "Upperwear", unequipUpperwear, null, null, null, player.upperGarment.description);
 			}
 			if (player.lowerGarment != UndergarmentLib.NOTHING)
 			{
-				addButton(7, "Lowerwear", unequipLowerwear);
+				addButton(7, "Lowerwear", unequipLowerwear, null, null, null, player.lowerGarment.description);
 			}			
 			addButton(14, "Back", inventoryMenu);
 			

@@ -277,6 +277,8 @@ package classes.Scenes.Places.Prison
 				outputText("\"<i>Isn't she the sweetest little thing? As you can see, she's willing and eager to treat you right. Behave yourself, and I'll allow her to.</i>\" Billie attentions have begun to make your [captorTitle] drip precum, and she makes an alluring show of drawing out strings of it with her tongue until they fall and drip luridly across her perky tits. \"<i>But if you fail to live up to her example of good behavior, I'll have to make her punish you. It will make her sad, but she'll know it's for your own good.</i>\" At that Billie turns to face you, her hand still squeezing at the tip of the cock and her lips still sliding along its side, and fixes you with a sincere, plaintive look.\n\n");
 				outputText("\"<i>Now, slave, are you going to make little Billie happy? Or are you going to make her sad?</i>\"\n\n");
 				outputText("\n\n");
+				addButton(0, "Happy", prisonCaptorBilliePunishmentFuck, "happy");
+				addButton(1, "Sad", prisonCaptorBilliePunishmentFuck, "sad");
 				return;
 			}
 			if(branchChoice == "happy")
@@ -291,8 +293,6 @@ package classes.Scenes.Places.Prison
 				player.buttChange(24, true, true, false);
 			}
 			menu();
-			addButton(0, "Happy", prisonCaptorBilliePunishmentFuck, "happy");
-			addButton(1, "Sad", prisonCaptorBilliePunishmentFuck, "sad");
 			prison.changeObey(1, prison.inPrison);
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);

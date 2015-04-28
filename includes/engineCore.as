@@ -2252,7 +2252,8 @@ public function displayStats(e:MouseEvent = null):void
 		childStats += "<b>Children With Kelly (Females):</b> " + (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE]) + "\n";
 	if (flags[kFLAGS.KELLY_KIDS] > 0)
 		childStats += "<b>Total Children with Kelly:</b> " + flags[kFLAGS.KELLY_KIDS] + "\n";
-	
+	if (kihaFollower.pregnancy.isPregnant)
+		childStats += "<b>Kiha's Pregnancy:</b> " + kihaFollower.pregnancy.incubation + "\n";
 	if (flags[kFLAGS.KIHA_CHILDREN_BOYS] > 0)
 		childStats += "<b>Kiha Offspring (Males):</b> " + flags[kFLAGS.KIHA_CHILDREN_BOYS] + "\n";
 	if (flags[kFLAGS.KIHA_CHILDREN_GIRLS] > 0)

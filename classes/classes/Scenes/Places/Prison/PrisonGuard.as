@@ -30,6 +30,19 @@ package classes.Scenes.Places.Prison
 			return 10;
 		}
 		
+		public function prisonCaptorRandomEventAbuse():Boolean
+		{
+			hideMenus();
+			clearOutput();
+			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0 && player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) <= 1)
+			{
+				return prison.prisonCaptorRandomEventSounds();
+			}
+			prisonCaptorLoadGuard(true);
+			outputText("You are startled by the sound of the door opening, and quickly find yourself wishing you hadn't heard it at all. " + guardCaptitalA + " " + guardType + " guard enters the room and quickly secures the door behind " + guardPronoun2 + ", then turns towards you with the clear intent of fucking you and showing you your place.\n\n",false);
+			return prisonGuardAttack();
+		}
+		
 		public function prisonGuardAttack():Boolean
 		{
 			if(prison.prisonCanEscapeFight(false))
@@ -59,6 +72,10 @@ package classes.Scenes.Places.Prison
 					outputText("Do you make an escape attempt? " + prison.prisonWillCostDescript(15),false);
 					outputText("\n",false);
 					doYesNo(prisonGuardAttackFight, prisonGuardAttackSubmit);
+					if (player.will >= prison.prisonWillCost(10)) {
+						outputText("\nYou could tell the " + guardType + " to fuck off and leave you alone. " + prison.prisonWillCostDescript(10));
+						addButton(2, "Fuck Off", giveGuardTheFinger);
+					}
 					return true;
 				}
 			}
@@ -82,13 +99,18 @@ package classes.Scenes.Places.Prison
 				outputText(" your restraints prevent you from putting up any significant fight",false);
 				if(player.lust > 80)
 				{
-					outputText(" -- not that you\'d last long in a fight with your current state of arousal anyway.  Seeing this fact written on your face, the " + guardType + " chuckles and temporarily removes your bindings.\n",false);
+					outputText(" -- not that you'd last long in a fight with your current state of arousal anyway.  Seeing this fact written on your face, the " + guardType + " chuckles and temporarily removes your bindings.\n",false);
 				}
 				else
 				{
 					outputText(". As you struggle ineffectually, the " + guardType + " beats you senseless then temporarily removes your bindings.\n",false);
 				}
-				prison.prisonEscapeFightAutoLose();
+				doNext(prison.prisonEscapeFightAutoLose);
+				if (player.will >= prison.prisonWillCost(10)) {
+					outputText("\nYou could tell the " + guardType + " to fuck off and leave you alone. " + prison.prisonWillCostDescript(10));
+					addButton(2, "Fuck Off", giveGuardTheFinger);
+				}
+				return true;
 			}
 			doNext(playerMenu);
 			return true;
@@ -130,6 +152,16 @@ package classes.Scenes.Places.Prison
 			
 			prison.changeObey(1, prison.inPrison);
 			prison.prisonEscapeFightAutoLose();
+		}
+		
+		public function giveGuardTheFinger():void {
+			clearOutput();
+			prison.changeWill(-prison.prisonWillCost(10));
+			outputText("You flip the bird to the " + guardType + " to put a warning signal that you do not want " + guardPronoun2 + " to mess with you. You WANT Elly, not some random guards messing with your body.");
+			outputText("\n\nThe " + guardType + " gets angry and storms off, leaving your cell and locking the cell door.");
+			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] > 0) flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 0;
+			player.changeStatusValue(StatusAffects.PrisonRestraints, 1, 1);
+			doNext(playerMenu);
 		}
 		
 		public function prisonCaptorLoadGuard(randomGuard:Boolean, guardID:String = "default"):void

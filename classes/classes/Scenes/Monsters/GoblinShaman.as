@@ -75,7 +75,7 @@ package classes.Scenes.Monsters
 			//Heal
 			else if (spellChooser == 4 && fatigue <= (100 - spellCostHeal)) {
 				outputText("She focuses on her body and her desire to end pain, trying to draw on her arousal without enhancing it.");
-				var temp:int = int((inte/(2 + rand(3))) * (eMaxHP()/75) * spellMultiplier());
+				var temp:int = int(10 + (inte/2) + rand(inte/3)) * spellMultiplier();
 				outputText("She flushes with success as her wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
 				addHP(temp);
 				fatigue += spellCostHeal;

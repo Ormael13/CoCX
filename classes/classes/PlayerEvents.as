@@ -39,7 +39,7 @@ package classes {
 			if (flags[kFLAGS.HUNGER_ENABLED] <= 0 || (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger >= 10)) { //If you're starving, your cum won't build up over time.
 				player.hoursSinceCum++;
 				//Super cumbuilding activate!
-				if(player.findPerk(PerkLib.MaraesGiftProfractory) >= 0) player.hoursSinceCum += 2;
+				if (player.findPerk(PerkLib.MaraesGiftProfractory) >= 0) player.hoursSinceCum += 2;
 				if (player.findPerk(PerkLib.FerasBoonAlpha) >= 0) player.hoursSinceCum += 2;
 			}
 			//Normal
@@ -91,8 +91,6 @@ package classes {
 						//Lose HP and makes fatigue go up. Lose body weight and muscles.
 						player.takeDamage(player.maxHP() / 25);
 						fatigue(2);
-						if (rand(3) == 0) player.buttRating--;
-						if (rand(3) == 0) player.hipRating--;
 						dynStats("str", -0.5);
 						dynStats("tou", -0.5);
 					}
@@ -101,7 +99,7 @@ package classes {
 				else {
 					kGAMECLASS.prison.changeWill((player.esteem / 50) + 1);
 				}
-				if (player.hunger < 10) {
+				if (player.hunger < 10 && model.time.hours % 3 == 0 && !prison.inPrison) {
 					player.modThickness(1, 1);
 					player.modTone(1, 1);
 				}
@@ -167,11 +165,11 @@ package classes {
 					flags[kFLAGS.FOX_BAD_END_WARNING] = 0;
 				}
 			}
-			if (flags[kFLAGS.PIG_BAD_END_WARNING] == 1) {
+			/*if (flags[kFLAGS.PIG_BAD_END_WARNING] == 1) {
 				if (player.faceType != FACE_PIG || player.tailType != TAIL_TYPE_PIG || player.earType != EARS_PIG || player.lowerBody != LOWER_BODY_TYPE_PIG) {
 					flags[kFLAGS.PIG_BAD_END_WARNING] = 0;
 				}
-			}
+			}*/
 			if (flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] >= 100 && player.findPerk(PerkLib.BasiliskResistance) < 0) {
 				outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - Your maximum speed is permanently decreased but you are now immune to the basilisk's gaze!</b>)\n");
 				player.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);

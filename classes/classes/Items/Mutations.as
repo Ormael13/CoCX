@@ -6396,8 +6396,8 @@
 			//General Effects:
 			//****************
 			//-Int less than 10
-			if (player.inte < 10) {
-				if (player.inte < 8 && player.kangaScore() >= 5 && player.findPerk(PerkLib.TransformationResistance) < 0) {
+			if (player.inte < 10 && player.findPerk(PerkLib.TransformationResistance) < 0) {
+				if (player.inte < 8 && player.kangaScore() >= 5) {
 					outputText("\n\nWhile you gnaw on the fibrous fruit, your already vacant mind continues to empty, leaving nothing behind but the motion of your jaw as you slowly chew and swallow your favorite food.  Swallow.  Chew.  Swallow.  You don't even notice your posture worsening or your arms shortening.  Without a single thought, you start to hunch over but keep munching on the food in your paws as if were the most normal thing in the world.  Teeth sink into one of your fingers, leaving you to yelp in pain.  With the last of your senses, you look at your throbbing paw to notice you've run out of kanga fruit!", false);
 					outputText("\n\nStill hungry and licking your lips in anticipation, you sniff in deep lungfuls of air.  There's more of that wonderful fruit nearby!  You bound off in search of it on your incredibly muscular legs, their shape becoming more and more feral with every hop.  Now guided completely by instinct, you find a few stalks that grow from the ground.  Your belly rumbles, reminding you of your hunger, as you begin to dig into the kanga fruits...", false);
 					outputText("\n\nLosing more of what little remains of yourself, your body is now entirely that of a feral kangaroo and your mind has devolved to match it.  After you finish the handful of fruits you found, you move on in search for more of the tasty treats.  Though you pass by your camp later on, there's no memory, no recognition, just a slight feeling of comfort and familiarity.  There's no food here so you hop away.", false);
@@ -9146,7 +9146,7 @@
 			outputText("Feeling parched, you gobble down the fruit without much hesitation. Despite the skin being fuzzy like a peach, the inside is relatively hard, and its taste reminds you of that of an apple.  It even has a core like an apple. Finished, you toss the core aside.");
 
 			//BAD END:
-			if(player.ferretScore() >= 6)
+			if(player.ferretScore() >= 6 && player.findPerk(PerkLib.TransformationResistance) < 0)
 			{
 				//Get warned!
 				if(flags[kFLAGS.FERRET_BAD_END_WARNING] == 0) {
@@ -9156,7 +9156,7 @@
 					flags[kFLAGS.FERRET_BAD_END_WARNING] = 1;
 				}
 				//BEEN WARNED! BAD END! DUN DUN DUN
-				else if(rand(3) == 0 && player.findPerk(PerkLib.TransformationResistance) < 0)
+				else if(rand(3) == 0)
 				{
 					//-If you fail to heed the warning, it’s game over:
 					outputText("\n\nAs you down the fruit, you begin to feel all warm and fuzzy inside.  You flop over on your back, eagerly removing your clothes.  You laugh giddily, wanting nothing more than to roll about happily in the grass.  Finally finished, you attempt to get up, but something feels...  different.  Try as you may, you find yourself completely unable to stand upright for a long period of time.  You only manage to move about comfortably on all fours.  Your body now resembles that of a regular ferret.  That can’t be good!  As you attempt to comprehend your situation, you find yourself less and less able to focus on the problem.  Your attention eventually drifts to a rabbit in the distance.  You lick your lips. Nevermind that, you have warrens to raid!");

@@ -101,7 +101,7 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	if (prison.inPrison) {
-		kGAMECLASS.prison.prisonRoom();
+		kGAMECLASS.prison.prisonRoom(true);
 		return;
 	}
 	//trace("Current fertility: " + player.totalFertility());
@@ -2701,8 +2701,10 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.BENOIT_STATUS] == 1 || flags[kFLAGS.BENOIT_STATUS] == 2) NPCsDedicked++;
 	if (flags[kFLAGS.ARIAN_HEALTH] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] <= 0) NPCsDedicked++;
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] > 0 && flags[kFLAGS.KATHERINE_DICK_COUNT] <= 0) NPCsDedicked++;
+	if (flags[kFLAGS.MET_KITSUNES] > 0 && flags[kFLAGS.redheadIsFuta] == 0) NPCsDedicked++;
 	
 	if (NPCsDedicked >= 3) awardAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER);
+	//if (NPCsDedicked >= 7) awardAchievement("You Bastard", kACHIEVEMENTS.GENERAL_YOU_BASTARD); //Take that, dedickers!
 }
 
 /*

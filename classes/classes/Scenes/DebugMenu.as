@@ -47,9 +47,10 @@ package classes.Scenes
 				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
 				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
 				addButton(2, "Flag Editor", flagEditor);
+				addButton(3, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
 				//addButton(5, "Event Trigger", eventTriggerMenu);
-				addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
-				addButton(5, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
+				//addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
+				if (player.isPregnant()) addButton(4, "Abort Preg", abortPregnancy);
 				addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
 				addButton(14, "Exit", playerMenu);
 			}
@@ -828,6 +829,13 @@ package classes.Scenes
 				flags[kFLAGS.EGG_BROKEN] = 0;
 			}
 			doNext(resetNPCMenu);
+		}
+		
+		private function abortPregnancy():void {
+			clearOutput();
+			outputText("You feel as if something's dissolving inside your womb. Liquid flows out of your [vagina] and your womb feels empty now. <b>You are no longer pregnant!</b>");
+			player.knockUpForce();
+			doNext(accessDebugMenu);
 		}
 		
 		//[Flag Editor]

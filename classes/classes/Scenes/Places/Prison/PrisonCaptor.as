@@ -84,10 +84,10 @@ package classes.Scenes.Places.Prison
 		
 		public function selectPunishmentEvent(lightChance:int = 0):void {
 			var lightOrHeavy:int = rand(100);
-			var chooser:int = rand(4);
+			var chooser:int = rand(6);
 			if (lightOrHeavy < lightChance) { //Light
-				if (chooser < 2) prison.prisonCaptorPunishmentRestrain();
-				else if (chooser == 1) prison.billieScene.prisonCaptorBilliePunishmentFuck();
+				if (chooser < 4) prison.prisonCaptorPunishmentRestrain();
+				//else if (chooser == 4) prison.billieScene.prisonCaptorBilliePunishmentFuck();
 				else prison.punishments.prisonCaptorPunishmentBJTrainer();
 			}
 			else { //Heavy

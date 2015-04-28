@@ -4565,6 +4565,7 @@ package classes.Scenes.NPCs
 		public function sleepWithEmber():void {
 			//Set timeQ
 			if (model.time.hours >= 21) kGAMECLASS.timeQ = 24 - model.time.hours;
+			else kGAMECLASS.timeQ = 0;
 			kGAMECLASS.timeQ += 6;
 			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) kGAMECLASS.timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 			//GO!

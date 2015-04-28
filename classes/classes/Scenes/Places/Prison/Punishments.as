@@ -154,7 +154,7 @@ package classes.Scenes.Places.Prison
 		{
 			clearOutput();
 			outputText("(Placeholder) You break down and beg your " + prison.prisonCaptor.captorTitle + " to release you, and promise to do as " + prison.prisonCaptor.captorPronoun1 + " commands in the future. You are then given a chance to demonstrate your commitment as " + prison.prisonCaptor.captorPronoun1 + " walks around behind you and allows you to stuggle to fuck yourself on " + prison.prisonCaptor.captorPronoun3 + " cock. After much struggle your [vagOrAss] is fill with jizz, but you are left horny and needing release.",false);
-			player.slimeFeed()();
+			player.slimeFeed();
 			dynStats("lus", 50);
 			prison.changeEsteem(-5,prison.inPrison);
 			prison.changeObey(2,prison.inPrison);
@@ -237,6 +237,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPunishmentConfinementStandup():void
 		{
+			clearOutput();
 			var newVal:Number = 0;
 			outputText("(Placeholder) You try to save some dignity by standing up off the dildos beneath you. ",false);
 			newVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) - rand(3) - 2;
@@ -270,6 +271,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPunishmentConfinementRestlegs():void
 		{
+			clearOutput();
 			var newVal:Number = 0;
 			newVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) + rand(4) + 1;
 			if(newVal < 0)
@@ -485,7 +487,7 @@ package classes.Scenes.Places.Prison
 				flags[kFLAGS.PRISON_PUNISHMENT] = 0;
 			}
 			else {
-				outputText("You struggle against the wooden confines but despite your best efforts, you just can't break the stockade.");
+				outputText("You struggle against the stone confines but despite your best efforts, you just can't break the box.");
 			}
 			doNext(playerMenu);
 		}

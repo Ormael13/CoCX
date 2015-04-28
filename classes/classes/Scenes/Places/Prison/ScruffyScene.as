@@ -256,6 +256,7 @@ package classes.Scenes.Places.Prison
 			addButton(1, "Accept", accept);
 			addButton(5, "Reject", reject);
 			addButton(6, "Perform", perform);
+			if (prisonCaptorScruffyScratch() >= 2) addButton(7, "FIGHT!", fightScruffy);
 			return true;
 		}
 		
@@ -307,6 +308,7 @@ package classes.Scenes.Places.Prison
 				prison.changeEsteem(5,prison.inPrison);
 				prison.changeObey(-1,prison.inPrison);
 				prison.changeWill(-prison.prisonWillCost(5));
+				prisonCaptorScruffyScratchChange(1);
 				doNext(playerMenu);
 			}
 		}
@@ -382,6 +384,7 @@ package classes.Scenes.Places.Prison
 				prison.changeEsteem(10,prison.inPrison);
 				prison.changeObey(-2,prison.inPrison);
 				prison.changeWill(-prison.prisonWillCost(15));
+				prisonCaptorScruffyScratchChange(1);
 				doNext(playerMenu);
 			}
 		}
@@ -419,6 +422,32 @@ package classes.Scenes.Places.Prison
 				outputText("\n\n",false);
 				inventory.takeItem(consumables.PINKEGG, camp.returnToCampUseOneHour);
 			}
+		}
+		
+		public function fightScruffy():void {
+			clearOutput();
+			outputText("How dare he keeps coming. If you refuse even in the slightest manner, he would flip out and punish him. Time to teach him a lesson.");
+			startCombat(new Scruffy());
+		}
+		
+		public function prisonCaptorRandomEventJizzJanitorBeatenUp():void {
+			clearOutput();
+			if (monster.HP <= 0) outputText("Scruffy collapses from his injuries.");
+			else outputText("Scruffy collapses from his overwhelming arousal.");
+			outputText("\n\nYou drag him out the door. Hopefully he won't bother you for a while.");
+			cleanupAfterCombat();
+		}
+		
+		public function prisonCaptorRandomEventJizzJanitorLoss():void {
+			clearOutput();
+			if (player.HP <= 0) outputText("<b>Scruffy has knocked you off your feet.</b>");
+			else outputText("<b>You are too aroused to continue fighting. You give in.</b>");
+			outputText("\n\n\"<i>You ungrateful little bitch. Normally I'd teach you a lesson in humility and obedience more directly, but somehow you've managed to kill my mood.</i>\" He punctuates the sentence by delivering a swift kick to your ribs, and then dramatically draws the largest dildo gag you've ever seen from behind his back. \"<i>Well, I suppose this will have to suffice for your reeducation today. Perhaps the next time you see me you'll remember how much better off you would have been with my prick in your mouth instead.</i>\"",false);
+			outputText("\n\nAnd with that he forces the monstrous rubber phallus into your mouth, locks the straps behind your head, grabs his mop and bucket and leaves the room in an exaggerated huff. You manage to take some solace in the fact that you stood up for yourself and avoided servicing the little jizz janitor, but you are unsure if the price was worth it.\n",false);
+			player.changeStatusValue(StatusAffects.PrisonRestraints, 2, 2);
+			player.changeStatusValue(StatusAffects.PrisonRestraints, 3, 2);
+			player.changeStatusValue(StatusAffects.PrisonRestraints, 4, 3);
+			cleanupAfterCombat();
 		}
 	}
 }

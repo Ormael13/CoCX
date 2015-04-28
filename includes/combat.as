@@ -89,7 +89,7 @@ public function cleanupAfterCombat(nextFunc:Function = null):void {
 			var timePasses:int = monster.handleCombatLossText(inDungeon, temp); //Allows monsters to customize the loss text and the amount of time lost
 			player.gems -= temp;
 			inCombat = false;
-			if (flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (monster.short == "goblin" || monster.short == "goblin assassin" || monster.short == "imp" || monster.short == "hellhound" || monster.short == "minotaur" || monster.short == "satyr" || monster.short == "gnoll" || monster.short == "gnoll spear-thrower")) {
+			if (flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (monster.short == "goblin" || monster.short == "goblin assassin" || monster.short == "imp" || monster.short == "imp lord" || monster.short == "imp warlord" || monster.short == "hellhound" || monster.short == "minotaur" || monster.short == "satyr" || monster.short == "gnoll" || monster.short == "gnoll spear-thrower")) {
 				doNext(prison.prisonIntro);
 				return;
 			}
@@ -4866,6 +4866,10 @@ public function runAway(callHook:Boolean = true):void {
 	if(inDungeon || inRoomedDungeon) {
 		outputText("You're trapped in your foe's home turf - there is nowhere to run!\n\n", true);
 		enemyAI();
+		return;
+	}
+	if (prison.inPrison && !prison.prisonCanEscapeRun()) {
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	//Attempt texts!
