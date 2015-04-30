@@ -277,10 +277,13 @@ use namespace kGAMECLASS;
 			if (armType == ARM_TYPE_SPIDER) armorDef += 2;
 			if (lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS || lowerBody == LOWER_BODY_TYPE_BEE) armorDef += 2
 			//Agility boosts armor ratings!
+			var speedBonus:int = 0;
 			if(findPerk(PerkLib.Agility) >= 0) {
-				if(armorPerk == "Light") armorDef += Math.round(spe/8);
-				else if(armorPerk == "Medium") armorDef += Math.round(spe/13);
+				if(armorPerk == "Light") speedBonus += Math.round(spe/8);
+				else if(armorPerk == "Medium") speedBonus += Math.round(spe/13);
+				if (speedBonus > 15) speedBonus = 15;
 			}
+			armorDef += speedBonus
 			//Berzerking removes armor
 			if(findStatusAffect(StatusAffects.Berzerking) >= 0) {
 				armorDef = 0;
@@ -2185,9 +2188,8 @@ use namespace kGAMECLASS;
 				maxInt += 10;
 			}
 			if (dogScore() >= 4 || foxScore() >= 4) {
-				maxTou -= 10;
 				maxSpe += 10;
-				maxInt += 10;
+				maxInt -= 10;
 			}
 			if (catScore() >= 4) {
 				maxSpe += 5;
@@ -2225,6 +2227,24 @@ use namespace kGAMECLASS;
 						maxInt += 5;
 					}
 				}
+			}
+			if (beeScore() >= 4) {
+				maxSpe += 5;
+				maxTou += 5;
+			}
+			if (spiderScore() >= 4) {
+				maxInt += 15;
+				maxTou += 5;
+				maxStr -= 10;
+			}
+			if (sharkScore() >= 4) {
+				maxStr += 10;
+				maxSpe += 5;
+				maxInt -= 5;
+			}
+			if (harpyScore() >= 4) {
+				maxSpe += 15;
+				maxTou -= 10;
 			}
 			if (isNaga()) maxSpe += 10;
 			if (isTaur()) maxSpe += 20;

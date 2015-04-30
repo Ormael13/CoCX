@@ -728,11 +728,12 @@ package classes
 			mainView.fatigueBar.y = basePos2 + (gapDiff * 3) - posOffset;
 			mainView.fatigueBar.alpha = universalAlpha;
 			//Minimum lust bar
-			if (mainView.statsView.getChildByName("minLustBar") != null) {
+			if (minLustBar != null) {
 				minLustBar.x = mainView.lustBar.x + (baseWidth / 2);
 				minLustBar.y = mainView.lustBar.y;
 				minLustBar.height = baseHeight;
-				minLustBar.width = ((player.minLust() / player.maxLust() * 100) * (baseWidth / 100));
+				if (player.minLust() > 0) minLustBar.width = ((player.minLust() / player.maxLust() * 100) * (baseWidth / 100));
+				else minLustBar.width = 0;
 				minLustBar.alpha = universalAlpha;
 			}
 			//Hunger bar

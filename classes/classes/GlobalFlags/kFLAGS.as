@@ -2217,7 +2217,7 @@ public static const BASILISK_RESISTANCE_TRACKER:int                             
 public static const MINOTAUR_CUM_RESISTANCE_TRACKER:int                             = 2209;
 public static const DLC_APRIL_FOOLS:int                                             = 2210;
 public static const GOBLIN_ELDER_TALK_COUNTER:int                                   = 2211;
-public static const ISABELLA_ASKED_ABOUT_CHILDREN:int                               = 2212;
+public static const ISABELLA_POTENCY_STATE:int                                      = 2212;
 public static const ISABELLA_COWIFIED:int                                           = 2213;
 public static const ISABELLA_CHILDREN_HUMAN_BOYS:int                                = 2214;
 public static const ISABELLA_CHILDREN_HUMAN_GIRLS:int                               = 2215;

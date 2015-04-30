@@ -506,8 +506,8 @@ private function doCamp():void { //Only called by playerMenu
 	//clear up/down arrows
 	hideUpDown();
 	//Level junk
-	if((player.XP >= (player.level) * 100 && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
-		if (player.XP < player.level * 100 || player.level >= kGAMECLASS.levelCap)
+	if((player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
+		if (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)
 		{
 			if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
 			else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
@@ -1666,7 +1666,9 @@ public function doSleep(clrScreen:Boolean = true):void {
 		//Clear screen
 		if (clrScreen) clearOutput();
 		if (prison.inPrison) {
-			outputText("You curl up on a slab, planning to sleep for " + num2Text(timeQ) + " hours.");
+			outputText("You curl up on a slab, planning to sleep for " + num2Text(timeQ) + " hour");
+			if (timeQ > 1) outputText("s");
+			outputText(". ");
 			goNext(timeQ, true);
 			return;
 		}
@@ -2297,7 +2299,6 @@ private function promptAscend():void {
 	else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) outputText("<b>New Game+++</b>");
 	else outputText("<b>New Game+" + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + 1) + "</b>");
 	outputText(". Your items, level, and attributes except Corruption will be carried over into new playthrough. You'll revert back to human completely but you'll get to keep ears, horns, and tail transformations, if any. You'll also retain your name and gender.");
-	outputText("\n\n(Ascension is currently beta. Suggestions and feedbacks are welcome.)");
 	outputText("\n\n<b>Proceed?</b>");
 	doYesNo(ascendForReal, campActions);
 }

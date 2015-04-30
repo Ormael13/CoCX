@@ -38,11 +38,11 @@ package classes.Scenes.Places
 		private var randomCooldownRestraintCheck:int = 12;
 		
 		//Training
-		private var randomCooldownFeed:int = 10;
+		private var randomCooldownFeed:int = 4;
 		private var randomCooldownPet:int = 10;
 		
 		//NPCs
-		private var randomCooldownScruffy:int = 10;
+		public var randomCooldownScruffy:int = 10;
 		private var randomCooldownBillie:int = 10;
 		private var randomCooldownGuard:int = 12;
 		
@@ -1184,13 +1184,13 @@ package classes.Scenes.Places
 				}
 			}
 			//Random events
-			if (flags[kFLAGS.PRISON_EVENT_TIMEOUT] == 0 && model.time.hours >= 8 && allowsEvents) {
+			if (flags[kFLAGS.PRISON_EVENT_TIMEOUT] == 0 && model.time.hours >= 8) {
 				flags[kFLAGS.PRISON_EVENT_TIMEOUT] = 2;
 				trace("Firing prison event");
 				var petPlayRarity:int = 10;
 				petPlayRarity -= (trainingPet.prisonCaptorPetScore() - 25) / 5;
 				if (petPlayRarity < 2) petPlayRarity = 2;
-				var chooser:int = rand(10);
+				var chooser:int = rand(8);
 				trace(chooser);
 				switch(chooser)
 				{
@@ -1208,18 +1208,18 @@ package classes.Scenes.Places
 						}
 					case 3:
 					case 4:
-						if (randomCooldownFeed <= 0) {
+						if (randomCooldownFeed <= 0 && player.hunger < 80) {
 							randomCooldownFeed = 4 + rand(4);
 							trainingFeed.prisonCaptorFeedingEvent();
 							return;
 						}
 					case 5:
+					case 6:
 						if (randomCooldownPet <= 0 && rand(petPlayRarity) == 0 && !trainingPet.prisonCaptorPetOptedOut()) {
 							randomCooldownPet = 4 + rand(4);
 							trainingPet.prisonCaptorPetEvent();
 							return;
 						}
-					case 6:
 					case 7:
 						if (randomCooldownPet <= 0 && rand(petPlayRarity) == 0 && trainingPet.prisonCaptorPetScore() >= 30 && !trainingPet.prisonCaptorPetOptedOut()) {
 							randomCooldownPet = 6 + rand(4);
@@ -1227,10 +1227,6 @@ package classes.Scenes.Places
 							else if (trainingPet.prisonCaptorPetTier() == 3) trainingPet.prisonCaptorPetTrainingDemand();
 							return;
 						}
-					case 8:
-						//prisonCaptorRoomEvents();
-						//return;
-					case 9:
 					default:
 						break;
 				}
@@ -1273,6 +1269,7 @@ package classes.Scenes.Places
 			addButton(2, "Restraints", prisonRestraintsMenu, null, null, null, "Try to break free from restraints if you have any.");
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0) addButton(3, "Clean", prisonCaptorCleanRoom, null, null, null, "Clean the cell.");
 			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] > 0) addButton(4, "Escape", prisonEscapeMenu, null, null, null, "Make an escape attempt.");
+			//addButton(5, "Trigger Billie", billieScene.prisonCaptorBilliePunishmentFuck);
 			addButton(7, "Inventory", inventory.inventoryMenu);
 			//Check lust
 			if (player.lust >= 30) {
@@ -2319,7 +2316,7 @@ package classes.Scenes.Places
 			eventOccurred = false;
 			if(flags[kFLAGS.PRISON_PUNISHMENT] == 1)
 			{
-				if (prisonCaptor.timeForWaitRandomEvent(model.time.hours + 4, model.time.days, 70))
+				if (rand(8) == 0)
 				{
 					prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
 					punishments.prisonCaptorPunishmentStockadesVisitor();
@@ -2328,7 +2325,7 @@ package classes.Scenes.Places
 			}
 			if(flags[kFLAGS.PRISON_PUNISHMENT] == 2)
 			{
-				if((prisonCaptor.timeForWaitRandomEvent(model.time.hours + 6,model.time.days,90)) && rand(100) + player.fatigue * 0.5 + player.lust * 0.5 - player.tou * 0.2 > 50)
+				if(rand(100) + player.fatigue * 0.5 + player.lust * 0.5 - (player.str + player.tou) * 0.2 > 50)
 				{
 					prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
 					outputText("\n\nYour [legs] give in to lust and fatigue and you impale yourself a bit further on the dildos below you. ",false);
@@ -2336,7 +2333,7 @@ package classes.Scenes.Places
 					return true;
 				}
 			}
-			if(!prison.trainingPet.prisonCaptorPetOptedOut() && prison.trainingPet.prisonCaptorPetTier() >= 2 && !prisonCaptor.roomEventOverride[flags[kFLAGS.PRISON_PUNISHMENT]] && (prisonCaptor.timeForWaitRandomEvent(model.time.hours, model.time.days,30 + trainingPet.prisonCaptorPetScore())))
+			if(!prison.trainingPet.prisonCaptorPetOptedOut() && prison.trainingPet.prisonCaptorPetTier() >= 2 && !prisonCaptor.roomEventOverride[flags[kFLAGS.PRISON_PUNISHMENT]] && rand(100) < 30 + trainingPet.prisonCaptorPetScore())
 			{
 				eventOccurred = trainingPet.prisonCaptorPetDreamStart();
 				if(eventOccurred)
@@ -2414,7 +2411,6 @@ package classes.Scenes.Places
 					}
 					
 					flags[kFLAGS.PRISON_DILDO_RACK] = 1;
-					doNext(playerMenu);
 					return true;
 				}
 				if(billieScene.prisonCaptorBillieMet() > 0 && rand(5) < billieScene.prisonCaptorBillieEvent())
@@ -2548,12 +2544,11 @@ package classes.Scenes.Places
 	  
 		public function prisonCaptorRestraintCheckEvent():Boolean
 		{
-			trace("Firing restraints check");
 			if(player.statusAffectv2(StatusAffects.PrisonRestraints) == 0 && player.statusAffectv3(StatusAffects.PrisonRestraints) == 0 && player.statusAffectv4(StatusAffects.PrisonRestraints) == 0)
 			{
 				if(player.obey >= 95 && player.statusAffectv1(StatusAffects.PrisonRestraints) > 0)
 				{
-					outputText("Your " + prisonCaptor.captorTitle + " enters the room and looks pensive for a moment, then " + prisonCaptor.captorPronoun1 + " declares decisively, \"<i>I don't think we need to bother keeping the door locked anymore. Even if you do somehow work up the nerve to walk out the door, you'll soon find your way back to where you know you belong.</i>\"",false);
+					outputText("\nYour " + prisonCaptor.captorTitle + " enters the room and looks pensive for a moment, then " + prisonCaptor.captorPronoun1 + " declares decisively, \"<i>I don't think we need to bother keeping the door locked anymore. Even if you do somehow work up the nerve to walk out the door, you'll soon find your way back to where you know you belong.</i>\"\n",false);
 					player.changeStatusValue(StatusAffects.PrisonRestraints,1,0);
 					doNext(playerMenu);
 					return true;
@@ -2562,7 +2557,7 @@ package classes.Scenes.Places
 			}
 			if(true || !(prisonCaptor.captorName == "Elly"))
 			{
-				outputText(prison.prisonCaptor.captorTitle + " " + prisonCaptor.captorName + " enters the room and looks pensive for a moment, then " + prisonCaptor.captorPronoun1 + " declares decisively, \"<i>I think you might be learning your lesson. As a reward, I'll loosen your bindings a bit.</i>\"",false);
+				outputText("\n" + prison.prisonCaptor.captorTitle + " " + prisonCaptor.captorName + " enters the room and looks pensive for a moment, then " + prisonCaptor.captorPronoun1 + " declares decisively, \"<i>I think you might be learning your lesson. As a reward, I'll loosen your bindings a bit.</i>\"\n",false);
 				prisonRestraintReduction(1);
 				doNext(playerMenu);
 				return true;
@@ -2582,12 +2577,14 @@ package classes.Scenes.Places
 		
 		public function prisonCaptorBegSubmit():void
 		{
+			clearOutput();
 			outputText("Unable to control yourself, you grovel on the floor begging your " + prisonCaptor.captorTitle + " to fuck you.\n\n",false);
 			prisonCaptorSubmitFuck();
 		}
 		
 		public function prisonCaptorBegResist():void
 		{
+			clearOutput();
 			if(player.will < prisonWillCost(15))
 			{
 				outputText("While you'd like to preserve a bit of your dignity, you simply don't have the willpower to resist right now. \n\n",false);

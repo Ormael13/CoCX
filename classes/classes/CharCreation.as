@@ -20,7 +20,7 @@
 		public const MAX_ENDURANCE_LEVEL:int = 10;
 		public const MAX_MYSTICALITY_LEVEL:int = 10;
 		public const MAX_WISDOM_LEVEL:int = 5;
-		public const MAX_FORTUNE_LEVEL:int = 5;
+		public const MAX_FORTUNE_LEVEL:int = -1; //No maximum level.
 		public const MAX_VIRILITY_LEVEL:int = 5;
 		public const MAX_FERTILITY_LEVEL:int = 5;
 		
@@ -113,7 +113,11 @@
 				player.sens = 15;
 				player.lib = 15;
 			}
-			player.cor = 15; 
+			player.cor = 15;
+			player.hunger = 80;
+			player.obey = 10;
+			player.esteem = 50;
+			player.will = 80;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) kGAMECLASS.notes = "No Notes Available.";
 			player.lust = 15;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
@@ -297,18 +301,25 @@
 			}
 			
 			//Clear Statuses
-			while(player.statusAffects.length > 0) {
-				player.removeStatuses();
+			var statusTemp:Array = [];
+			for (var i:int = 0; i < player.statusAffects.length; i++) {
+				if (isSpell(player.statusAffects[i].stype)) statusTemp.push(player.statusAffects[i]);
+			}
+			player.removeStatuses();
+			if (statusTemp.length > 0) {
+				for (i = 0; i < statusTemp.length; i++) {
+					player.createStatusAffect(statusTemp[i].stype, statusTemp[i].value1, statusTemp[i].value2, statusTemp[i].value3, statusTemp[i].value4);
+				}
 			}
 			//Clear perks
 			var ascendPerkTemp:Array = [];
-			for (var i:int = 0; i < player.perks.length; i++) {
+			for (i = 0; i < player.perks.length; i++) {
 				if (isAscensionPerk(player.perks[i].ptype)) ascendPerkTemp.push(player.perks[i]);
 			}
 			player.removePerks();
 			if (ascendPerkTemp.length > 0) {
 				for (i = 0; i < ascendPerkTemp.length; i++) {
-					player.createPerk(ascendPerkTemp[i].ptype, ascendPerkTemp[i].value1, 0, 0, 0);
+					player.createPerk(ascendPerkTemp[i].ptype, ascendPerkTemp[i].value1, ascendPerkTemp[i].value2, ascendPerkTemp[i].value3, ascendPerkTemp[i].value4);
 				}
 			}
 			//Clear key items
@@ -319,7 +330,7 @@
 			player.removeKeyItems();
 			if (keyItemTemp.length > 0) {
 				for (i = 0; i < keyItemTemp.length; i++) {
-					player.createKeyItem(keyItemTemp[i].keyName, 0, 0, 0, 0);
+					player.createKeyItem(keyItemTemp[i].keyName, keyItemTemp[i].value1, keyItemTemp[i].value2, keyItemTemp[i].value3, keyItemTemp[i].value4);
 				}
 			}
 			player.perkPoints = player.level - 1;
@@ -2571,7 +2582,7 @@
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 			player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
-		
+			player.createKeyItem("Equipment Storage - Jewelry Box",0,0,0,0);
 			player.createStatusAffect(StatusAffects.KnowsWhitefire, 0, 0, 0, 0);
 			
 			player.createPerk(PerkLib.HistoryFighter, 		0, 0, 0, 0);
@@ -2620,10 +2631,10 @@
 			flags[kFLAGS.VAPULA_FOLLOWER] = 1;
 			
 			// Amily
-			flags[kFLAGS.AMILY_FOLLOWER] = 2;
+			//flags[kFLAGS.AMILY_FOLLOWER] = 2;
 			
 			// Jojo
-			kGAMECLASS.monk = 5;
+			//kGAMECLASS.monk = 5;
 			
 			// Bimbo Sophie
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;
@@ -2960,7 +2971,7 @@
 			addButton(0, "Desires", ascensionPerkSelection, PerkLib.AscensionDesires, MAX_DESIRES_LEVEL, null, PerkLib.AscensionDesires.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionDesires) + " / " + MAX_DESIRES_LEVEL);
 			addButton(1, "Endurance", ascensionPerkSelection, PerkLib.AscensionEndurance, MAX_ENDURANCE_LEVEL, null, PerkLib.AscensionEndurance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionEndurance) + " / " + MAX_ENDURANCE_LEVEL);
 			addButton(2, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL);
-			addButton(3, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " / " + MAX_FORTUNE_LEVEL);
+			addButton(3, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " (No maximum level)");
 			addButton(4, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL);
 			addButton(5, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL);
 			addButton(6, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL);
@@ -2972,15 +2983,15 @@
 		private function ascensionPerkSelection(perk:* = null, maxLevel:int = 10):void {
 			clearOutput();
 			outputText("Perk Effect: " + perk.longDesc);
-			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxLevel + "");
-			if (player.perkv1(perk) >= maxLevel) outputText(" <b>(Maximum)</b>");
+			outputText("\nCurrent level: " + player.perkv1(perk) + (maxLevel > 0 ? " / " + maxLevel : " (No maximum level)") + "");
+			if (player.perkv1(perk) >= maxLevel && maxLevel > 0) outputText(" <b>(Maximum)</b>");
 			var cost:int = player.perkv1(perk) + 1;
 			if (cost > 5) cost = 5;
-			if (player.perkv1(perk) < maxLevel) outputText("\nCost for next level: " + cost);
+			if (player.perkv1(perk) < maxLevel || maxLevel < 0) outputText("\nCost for next level: " + cost);
 			else outputText("\nCost for next level: <b>N/A</b>");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
-			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxLevel) addButton(0, "Add 1 level", addAscensionPerk, perk, maxLevel);
+			if (player.ascensionPerkPoints >= cost && (player.perkv1(perk) < maxLevel || maxLevel < 0)) addButton(0, "Add 1 level", addAscensionPerk, perk, maxLevel);
 			addButton(4, "Back", ascensionPerkMenu);
 		}
 		private function addAscensionPerk(perk:* = null, maxLevel:int = 10):void {
@@ -3038,6 +3049,10 @@
 			return (keyName == "Camp - Chest" || keyName == "Equipment Rack - Weapons" || keyName == "Equipment Rack - Armor" || keyName == "Equipment Storage - Jewelry Box" || keyName == "Backpack" || keyName == "Nieve's Tear"); 
 		}
 
+		private function isSpell(statusEffect:* = null):Boolean {
+			return (statusEffect == StatusAffects.KnowsCharge || statusEffect == StatusAffects.KnowsBlind || statusEffect == StatusAffects.KnowsWhitefire || statusEffect == StatusAffects.KnowsArouse || statusEffect == StatusAffects.KnowsHeal || statusEffect == StatusAffects.KnowsMight); 
+		}
+		
 /* Replaced by private functions
 public function doCreation(eventNo:Number):void {
 	var e:MouseEvent;

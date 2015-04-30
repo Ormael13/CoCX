@@ -205,7 +205,7 @@ package classes.Scenes.Places.Prison
 			chance += player.str * 0.8;
 			if (rand(100) < chance) {
 				outputText("With all your strength, you finally manage to break the stockade! Loud snapping sound echoes throughout your cell.");
-				outputText("" + prison.prisonCaptor.captorTitle + prison.prisonCaptor.captorName + " hears the sound and rushes over to your cell to find out that you've broken the stockade. \"<i>No! You BROKE the stockade! Very well, I'll lift your punishment.</i>\" She looks angry.");
+				outputText("\n\n" + prison.prisonCaptor.captorTitle + prison.prisonCaptor.captorName + " hears the sound and rushes over to your cell to find out that you've broken the stockade. \"<i>No! You BROKE the stockade! Very well, I'll lift your punishment.</i>\" She looks angry.");
 				flags[kFLAGS.PRISON_PUNISHMENT] = 0;
 			}
 			else {
@@ -483,7 +483,7 @@ package classes.Scenes.Places.Prison
 			if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) successChance += 10;
 			if (rand(100) < successChance) {
 				outputText("You struggle as hard as you can. With all of your strength, you manage to snap the belts attaching you to vertical metal bars. You kick the panel as hard as you can and with a loud THUD, the panel breaks off!");
-				outputText("" + prison.prisonCaptor.captorTitle + prison.prisonCaptor.captorName + " hears the sound and rushes over to your cell to find out that you've broken the confinement box. \"<i>No! You BROKE the confinement box! You know this thing costs 1,000 gems to order and you've ruined it. I'll have to send it to get it repaired. Very well, I'll lift your punishment.</i>\" She looks angry.");
+				outputText("\n\n" + prison.prisonCaptor.captorTitle + prison.prisonCaptor.captorName + " hears the sound and rushes over to your cell to find out that you've broken the confinement box. \"<i>No! You BROKE the confinement box! You know this thing costs 1,000 gems to order and you've ruined it. I'll have to send it to get it repaired. Very well, I'll lift your punishment.</i>\" She looks angry.");
 				flags[kFLAGS.PRISON_PUNISHMENT] = 0;
 			}
 			else {

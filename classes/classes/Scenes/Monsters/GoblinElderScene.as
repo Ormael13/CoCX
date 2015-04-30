@@ -65,7 +65,7 @@ package classes.Scenes.Monsters
 				outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
 			}
 			menu();
-			addButton(0, "Fight", startCombatImmediate, new GoblinElder());
+			addButton(0, "Fight", startFight);
 			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] < 2) addButton(1, "Talk", talkToGoblinElder);
 			if (player.hasCock() && player.lust >= 33 && player.cor < 60 + player.corruptionTolerance()) {
 				monster = new GoblinElder();
@@ -74,6 +74,10 @@ package classes.Scenes.Monsters
 			}
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 			//startCombat(new GoblinElder());
+		}
+		
+		private function startFight():void {
+			startCombatImmediate(new GoblinElder());
 		}
 		
 		//[LOSS SEXAHNZ]

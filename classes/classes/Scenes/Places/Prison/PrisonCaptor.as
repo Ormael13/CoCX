@@ -59,7 +59,7 @@ package classes.Scenes.Places.Prison
 			{
 				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScratch,0,0,0,0);
 			}
-			return player["statusAffectv" + String(valueNum)](StatusAffects.PrisonCaptorEllyScratch,valueNum);
+			return player["statusAffectv" + String(valueNum)](StatusAffects.PrisonCaptorEllyScratch);
 		}
 		
 		public function prisonCaptorScratchSet(valueNum:Number, newVal:Number) : void
@@ -78,8 +78,8 @@ package classes.Scenes.Places.Prison
 			{
 				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScratch,0,0,0,0);
 			}
-			newVal = player["statusAffectv" + String(valueNum)](StatusAffects.PrisonCaptorEllyScratch,valueNum) + changeVal;
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScratch,valueNum,newVal);
+			newVal = player["statusAffectv" + String(valueNum)](StatusAffects.PrisonCaptorEllyScratch) + changeVal;
+			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScratch, valueNum, newVal);
 		}
 		
 		public function selectPunishmentEvent(lightChance:int = 0):void {

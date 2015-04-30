@@ -426,7 +426,7 @@ package classes.Scenes.Places.Prison
 		
 		public function fightScruffy():void {
 			clearOutput();
-			outputText("How dare he keeps coming. If you refuse even in the slightest manner, he would flip out and punish him. Time to teach him a lesson.");
+			outputText("How dare he keeps coming. If you refuse even in the slightest manner, he would flip out and punish you. Time to teach him a lesson.");
 			startCombat(new Scruffy());
 		}
 		
@@ -435,6 +435,7 @@ package classes.Scenes.Places.Prison
 			if (monster.HP <= 0) outputText("Scruffy collapses from his injuries.");
 			else outputText("Scruffy collapses from his overwhelming arousal.");
 			outputText("\n\nYou drag him out the door. Hopefully he won't bother you for a while.");
+			prison.randomCooldownScruffy += 12 + rand(36);
 			cleanupAfterCombat();
 		}
 		

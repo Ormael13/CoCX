@@ -250,7 +250,6 @@ package classes.Scenes.Places.Prison
 				{
 					outputText("\"<i>Well, slave, it seems like you're well on your way to conquering that fear. So, are you ready to show me now? You only need to fall to your knees and ask for permission, and I'll allow it.</i>\"\n\n");
 				}
-				outputText("\n\n");
 				menu();
 				if(saidNo == 1)
 				{
@@ -426,9 +425,6 @@ package classes.Scenes.Places.Prison
 						
 						outputText(" The desire you felt while kneeling at my feet worshiping my dick has utterly consumed you, and it is now time for you to kneel once again and beg for the privilege of releasing it.</i>\"\n\n");
 				}
-				outputText("\n\n");
-				outputText("\n\n");
-				outputText("\n\n");
 				menu();
 				if(sceneVariation < 4)
 				{
@@ -3815,10 +3811,10 @@ package classes.Scenes.Places.Prison
 			outputText("(Placeholder) You angrily reject the quest and state that you'll NEVER do such humiliating quest, no matter how much of a slut and no matter how obedient you may be. You WANT her, not those other corrupt creatures.\n\n");
 			outputText("(Placeholder) Mistress Elly looks down at you. \"<i>Fine. I respect your preferences. I will not assign those quests again. But I still must punish you for your disobedience.</i>\"");
 			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest, 1, -1);
-			prison.prisonPunishment(80);
 			prison.changeObey(-5);
 			prison.changeEsteem(5);
-			doNext(camp.returnToCampUseOneHour);
+			prison.prisonPunishment(80);
+			//doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingSelect():void
@@ -3872,7 +3868,7 @@ package classes.Scenes.Places.Prison
 				prisonCaptorFeedingAnalTrainingAccept();
 				return;
 			}
-			outputText("(Placehoder) You agree to attempt the quest, and she unlocks the door (and does not return any other restraints you might have had) but makes sure you understand that this does NOT mean you are free. She instructs you to find your way back as soon as you complete your task, and warns you that as soon as you run out of time you WILL find yourself back in your cell. Finally, she decides to give you a going away present, but warns you that you might want to eat it before you leave.",false);
+			outputText("(Placeholder) You agree to attempt the quest, and she unlocks the door (and does not return any other restraints you might have had) but makes sure you understand that this does NOT mean you are free. She instructs you to find your way back as soon as you complete your task, and warns you that as soon as you run out of time you WILL find yourself back in your cell. Finally, she decides to give you a going away present, but warns you that you might want to eat it before you leave.",false);
 			outputText("\n\nOut of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n",false);
 			if(prison.prisonIsRestrained())
 			{
@@ -3881,6 +3877,7 @@ package classes.Scenes.Places.Prison
 			player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
 			player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
 			player.changeStatusValue(StatusAffects.PrisonRestraints,4,0);
+			flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 1;
 			prison.changeEsteem(-5, prison.inPrison);
 			prison.changeObey(2.5, prison.inPrison);
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;

@@ -22,7 +22,9 @@ package classes.Scenes.Areas.VolcanicCrag
 			addButton(0, "Fight", startFight, null, null, null, "Challenge the Behemoth.");
 			addButton(1, "Talk", talkToBehemothMenu, null, null, null, "Talk to Behemoth and discuss.");
 			if (player.lust >= 33) addButton(2, "Sex", behemothSexMenu, false, null, null, "Initiate sexy time with the Behemoth.");
+			else addLockedButton(2, "You are not aroused enough to initiate sex with the Behemoth.");
 			if (flags[kFLAGS.BEHEMOTH_TALKED_ABOUT_CUM] > 0) addButton(3, "Get Cum", getCum, null, null, null, "Get some of Behemoth's cum!");
+			else addLockedButton(3, "You need to have talked to the Behemoth about his cum.");
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -248,13 +250,13 @@ package classes.Scenes.Areas.VolcanicCrag
 			}
 			menu();
 			if (player.hasCock()) {
-				if (player.cockThatFits(48) >= 0) addButton(0, "Anal Fuck", analPitchBehemoth, null, null, null, "Anally penetrate the behemoth.");
+				if (player.cockThatFits(72) >= 0) addButton(0, "Anal Fuck", analPitchBehemoth, null, null, null, "Anally penetrate the behemoth.");
 				else outputText("\n\n<b>Unfortunately, your cock is too big to fit in his butthole.</b>");
 			}
+			else addLockedButton(0, "You need a cock for this.");
 			addButton(1, "GetAnalFucked", analCatchBehemoth, null, null, null, "Have him penetrate you anally.");
-			if (player.hasVagina()) {
-				addButton(2, "GetVagFucked", vagCatchBehemoth, null, null, null, "Have him penetrate you vaginally.");
-			}
+			if (player.hasVagina()) addButton(2, "GetVagFucked", vagCatchBehemoth, null, null, null, "Have him penetrate you vaginally.");
+			else addLockedButton(2, "You need a vagina for this.");
 			addButton(3, "Suck His Cock", suckThatBigCock, null, null, null, "Suck his wonderful cock and get stuffed with cum!");
 			if (timesSexed() >= 3) addButton(4, "Cum Bath", haveACumBathLiterally, null, null, null, "Have a (literal) cum bath!");
 			else addLockedButton(4, "Have sex with the behemoth enough times to unlock this!");
@@ -450,7 +452,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			//outputText("\n\n\"<i>So, what would you like? Bucket or golden shower?</i>\"");
 			//menu();
 			//addButton(0, "Bucket", watersportsBucket, null, null, null, "Just urinate into the bucket together and do a bit of foreplay.");
-			//addButton(1, "Get Showered", eventParser, 9999, null, null, "Get showered in behemoth's urine!");
+			//addButton(1, "Get Showered", watersportsShower, null, null, null, "Get showered in behemoth's urine!");
 			flags[kFLAGS.BEHEMOTH_WATERSPORTS]++;
 			outputText("\n\n");
 			watersportsBucket();

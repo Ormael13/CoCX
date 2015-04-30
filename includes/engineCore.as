@@ -2316,7 +2316,7 @@ public function displayStats(e:MouseEvent = null):void
 	// Begin Body Stats
 	var bodyStats:String = "";
 
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0)
 	{
 		bodyStats += "<b>Hunger:</b> " + Math.floor(player.hunger) + " / 100 (";
 		if (player.hunger <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";

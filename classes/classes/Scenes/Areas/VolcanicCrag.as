@@ -40,7 +40,7 @@ package classes.Scenes.Areas
 				behemothScene.behemothIntro();
 			}
 			else {
-				if (rand(4) == 0) {
+				if (rand(3) == 0) {
 					outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ");
 					inventory.takeItem(consumables.DRAKHRT, camp.returnToCampUseOneHour);
 					return;

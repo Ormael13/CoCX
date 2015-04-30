@@ -289,7 +289,7 @@ public function saveScreen():void
 			saveFuncs[i] = function() : void 		// Anonymous functions FTW
 			{
 				trace("Saving game with name", saveFileNames[i], "at index", i);
-				saveGame(saveFileNames[i]);
+				saveGame(saveFileNames[i], true);
 			}
 		})(i);
 		
@@ -461,8 +461,21 @@ public function purgeTheMutant():void
 	doNext(deleteScreen);
 }
 
-public function saveGame(slot:String):void
+public function confirmOverwrite(slot:String):void {
+	mainView.nameBox.visible = false;
+	clearOutput();
+	outputText("You are about to overwrite the following save slot: " + slot + ".");
+	outputText("\n\n<b>ARE YOU SURE?</b>");
+	doYesNo(createCallBackFunction(saveGame, slot), saveScreen);
+}
+
+public function saveGame(slot:String, bringPrompt:Boolean = false):void
 {
+	var saveFile:* = SharedObject.getLocal(slot, "/");
+	if (player.slotName != slot && saveFile.data.exists && bringPrompt) {
+		confirmOverwrite(slot);
+		return;
+	}
 	player.slotName = slot;
 	saveGameObject(slot, false);
 }
