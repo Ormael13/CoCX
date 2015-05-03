@@ -189,7 +189,7 @@ package classes.Scenes.Dungeons
 			if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
 			if (player.lust >= 30) addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
 			addButton(13, "Inventory", inventory.inventoryMenu);
-			addButton(14, "Map", map.displayMap);
+			addButton(14, "Map", map.displayMap, null, null, null, "View the map of this dungeon.");
 			setTopButtons();
 		}
 		

@@ -33,7 +33,7 @@ public function endLustLoss():void
 {
 	if (player.findStatusAffect(StatusAffects.Infested) >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
 		flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-		infestOrgasm();
+		mountain.wormsScene.infestOrgasm();
 		monster.won_(false,true);
 	} else {
 		monster.won_(false,false);
@@ -993,7 +993,9 @@ public function attack():void {
 	if(monster.findStatusAffect(StatusAffects.Level) >= 0) damage = Math.round(damage * 1.75);
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	if(rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
+	var critChance:int = 5;
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critChance += (player.inte - 50) / 5;
+	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 1.75;
 	}
@@ -1564,8 +1566,10 @@ public function awardPlayer(nextFunc:Function = null):void
 		monster.gems = Math.round(monster.gems);
 	}
 	monster.handleAwardText(); //Each monster can now override the default award text
-	if (!inDungeon && !inRoomedDungeon)
+	if (prison.inPrison) nextFunc = prison.doPrisonEscapeFightWin;
+	if (!inDungeon && !inRoomedDungeon && !prison.inPrison) {
 		doNext(camp.returnToCampUseOneHour);
+	}
 	else if (nextFunc != null) doNext(nextFunc);
 	else doNext(playerMenu);
 	dropItem(monster);
@@ -3632,7 +3636,7 @@ public function magicMenu():void {
 	if (player.findPerk(PerkLib.CleansingPalm) >= 0 && player.cor < 10) {
 		addButton(3, "C.Palm", spellCleansingPalm);
 	}
-	addButton(9, "Back", combatMenu, false);
+	addButton(14, "Back", combatMenu, false);
 }
 
 public function spellMod():Number {
@@ -5200,7 +5204,7 @@ public function physicalSpecials():void {
 	}
 	//Infest if infested
 	if (player.findStatusAffect(StatusAffects.Infested) >= 0 && player.statusAffectv1(StatusAffects.Infested) == 5 && player.hasCock()) {
-		addButton(5, "Infest", playerInfest);
+		addButton(5, "Infest", mountain.wormsScene.playerInfest);
 	}
 	//Kiss supercedes bite.
 	if (player.findStatusAffect(StatusAffects.LustStickApplied) >= 0) {

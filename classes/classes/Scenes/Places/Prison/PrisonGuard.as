@@ -2,6 +2,7 @@ package classes.Scenes.Places.Prison
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
+	import classes.internals.WeightedDrop;
 	import classes.Scenes.Areas.Plains.Gnoll;
 	import classes.Scenes.Areas.Plains.GnollSpearThrower;
 	import classes.Scenes.Areas.Plains.Satyr;
@@ -179,7 +180,7 @@ package classes.Scenes.Places.Prison
 					guardPronoun3 = "his";
 					guardA = "an";
 					guardCaptitalA = "An";
-					guardCombatID = new Imp;
+					guardCombatID = new Imp();
 					guardEscapeSeduceBonus = 15;
 					guardEscapeBribeBonus = 15;
 					guardEscapeSneakBonus = 5;
@@ -191,7 +192,7 @@ package classes.Scenes.Places.Prison
 					guardPronoun3 = "her";
 					guardA = "a";
 					guardCaptitalA = "A";
-					guardCombatID = new Goblin;
+					guardCombatID = new Goblin();
 					guardEscapeSeduceBonus = 15;
 					guardEscapeBribeBonus = 15;
 					guardEscapeSneakBonus = 5;
@@ -203,7 +204,7 @@ package classes.Scenes.Places.Prison
 					guardPronoun3 = "her";
 					guardA = "a";
 					guardCaptitalA = "A";
-					guardCombatID = new Gnoll;
+					guardCombatID = new Gnoll();
 					guardEscapeSeduceBonus = 15;
 					guardEscapeBribeBonus = 20;
 					guardEscapeSneakBonus = 5;
@@ -215,7 +216,7 @@ package classes.Scenes.Places.Prison
 					guardPronoun3 = "her";
 					guardA = "a";
 					guardCaptitalA = "A";
-					guardCombatID = new GnollSpearThrower;
+					guardCombatID = new GnollSpearThrower();
 					guardEscapeSeduceBonus = 15;
 					guardEscapeBribeBonus = 20;
 					guardEscapeSneakBonus = 5;
@@ -227,7 +228,7 @@ package classes.Scenes.Places.Prison
 					guardPronoun3 = "his";
 					guardA = "a";
 					guardCaptitalA = "A";
-					guardCombatID = new Minotaur;
+					guardCombatID = new Minotaur();
 					guardEscapeSeduceBonus = 20;
 					guardEscapeBribeBonus = 10;
 					guardEscapeSneakBonus = 15;
@@ -238,7 +239,7 @@ package classes.Scenes.Places.Prison
 					guardPronoun3 = "his";
 					guardA = "a";
 					guardCaptitalA = "A";
-					guardCombatID = new Satyr;
+					guardCombatID = new Satyr();
 					guardEscapeSeduceBonus = 20;
 					guardEscapeBribeBonus = 10;
 					guardEscapeSneakBonus = 15;
@@ -250,11 +251,12 @@ package classes.Scenes.Places.Prison
 					guardPronoun3 = "his";
 					guardA = "a";
 					guardCaptitalA = "A";
-					guardCombatID = new Minotaur;
+					guardCombatID = new Minotaur();
 					guardEscapeSeduceBonus = 20;
 					guardEscapeBribeBonus = 10;
 					guardEscapeSneakBonus = 15;
 			}
+			guardCombatID.drop = new WeightedDrop();
 		}
 	}
 

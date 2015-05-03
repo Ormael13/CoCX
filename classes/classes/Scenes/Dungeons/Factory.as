@@ -885,7 +885,15 @@ package classes.Scenes.Dungeons
 				outputText("\"<i>Please, if you'll let me go I could use my magics to give you nearly anything you want!  Just please don't tell the other demons what happened here, I'd never live it down,</i>\" she begs.\n\n", false);
 			}
 			outputText("What do you do?  You could use her boon increase the size of your endowments or maybe regain some of your lost humanity!  Or you could play it safe and turn down her offer.  Although then you'd have to decide to let her go or kill her.", false);
-			choices("Grow Breasts", chooseBreasts, "Grow Dick", chooseDick, "Normal Face", normalFace, "Normal Chest", normalChest, "Normal Groin", normalGroin, "Normal Legs", normalLegs, "", null, "", null, "No (Let go)", letGoOmnibus, "No (Kill Her)", killOmnibus);
+			menu();
+			addButton(0, "Grow Breasts", chooseBreasts, null, null, null, "Grow a new pair of breasts if flat-chested or grow existing breasts. \n\nAnd receive something else.");
+			addButton(1, "Grow Dick", chooseDick, null, null, null, "Grow a new penis. Somehow, you have a feeling that the new cock you'll receive won't be a normal cock. \n\nAnd receive something else.");
+			addButton(2, "Normal Face", normalFace, null, null, null, "Normalize your face. This will also change your ears back to human ears! \n\nAnd receive something else.");
+			addButton(3, "Normal Chest", normalChest, null, null, null, "Normalize your chest. This will shrink your oversized breasts to a modest size, if you have it. \n\nAnd receive something else.");
+			addButton(4, "Normal Groin", normalGroin, null, null, null, "Normalize your groin, removing any extra cocks and reset remaining cock to normal, if you have any. \n\nAnd receive something else.");
+			addButton(5, "Normal Legs", normalLegs, null, null, null, "Turn your legs back to normal. This will also remove your tail, if you have any! \n\nAnd receive something else.");
+			addButton(8, "No (Let go)", letGoOmnibus, null, null, null, "Refuse the offer and let the demon go.");
+			addButton(9, "No (Kill Her)", killOmnibus, null, null, null, "Refuse the offer and kill the demon instead.");
 		}
 		
 		private function chooseBreasts():void {
@@ -1494,7 +1502,7 @@ package classes.Scenes.Dungeons
 			outputText("<b><u>The Factory Foyer</u></b>\n", true);
 			outputText("The door swings shut behind you with an ominous 'creeeeeaaaaaaak' followed by a loud 'SLAM'.  Glancing around, you find yourself in some kind of stylish foyer, complete with works of art and a receptionist's desk.  Looking closer at the paintings on the wall quickly reveals their tainted and demonic nature: One appears at first to be a painting of a beautiful smiling woman, except you notice dripping tentacles coiling around the hem of her dress.  Behind the receptionist's desk, the second painting is even less discreet, openly depicting a number of imps gang-raping a vaguely familiar-looking woman.  Luckily, whatever demon is employed as the receptionist is away at the moment.  Behind the desk on the northern wall stands a secure-looking iron door.  On the western wall, is a door. A sign on the door indicates that it leads to the factory restroom.  On the eastern wall is a simple wooden door, though the color of the wood itself is far darker and redder than any of the hard woods from your homeland.  Behind you to the south is the rusty iron entry door.", false);
 			dungeons.setDungeonButtons(checkDoor1, null, roomBathroom, roomBreakRoom);
-			addButton(11, "South (Exit)", checkExit);
+			addButton(11, "Leave", checkExit);
 		}
 		
 		public function roomBreakRoom():void {

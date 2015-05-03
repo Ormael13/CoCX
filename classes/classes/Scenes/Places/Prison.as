@@ -40,6 +40,7 @@ package classes.Scenes.Places
 		//Training
 		private var randomCooldownFeed:int = 4;
 		private var randomCooldownPet:int = 10;
+		private var randomCooldownPetDream:int = 4;
 		
 		//NPCs
 		public var randomCooldownScruffy:int = 10;
@@ -73,6 +74,7 @@ package classes.Scenes.Places
 				
 				if (randomCooldownFeed > 0) randomCooldownFeed--;
 				if (randomCooldownPet > 0) randomCooldownPet--;
+				if (randomCooldownPetDream > 0) randomCooldownPetDream--;
 				
 				if (player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) > 0) player.addStatusValue(StatusAffects.PrisonCaptorEllyStatus, 3, -1);
 				//Fire events
@@ -940,11 +942,11 @@ package classes.Scenes.Places
 			{
 				return false;
 			}
-			else if (inPrison && (item is Useable) && !prisonCanEat())
+			else if (inPrison && (item is Useable))
 			{
-				return false;
+				return true;
 			}
-			else if (inPrison && (!item is Consumable) && !prisonCanEquip())
+			else if (inPrison && (item is Armor || item is Weapon || item is Shield) && !prisonCanEquip())
 			{
 				return false;
 			}
@@ -1303,7 +1305,7 @@ package classes.Scenes.Places
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 4) {
 				menu();
 				addButton(0, "Behave", trainingPet.prisonCaptorPetTrainingCrateBehave);
-				if (player.will >= 10) addButton(1, "Misbehave", trainingPet.prisonCaptorPetTrainingCrateMisbehave);
+				if (player.will >= prisonWillCost(10)) addButton(1, "Misbehave", trainingPet.prisonCaptorPetTrainingCrateMisbehave, null, null, null, prisonWillCostDescript(10));
 				addButton(2, "Call Out", trainingPet.prisonCaptorPetTrainingCrateCallOut);
 				addButton(3, "Leash", trainingPet.prisonCaptorPetTrainingCrateLeash);
 				
@@ -1677,6 +1679,7 @@ package classes.Scenes.Places
 				addButton(2, "Bribe", bribe);
 				addButton(3, "Sneak", sneak);
 				addButton(4, "Run", run);
+				addButton(5, "Quest", quest);
 				addButton(14, "Nevermind", playerMenu);
 			/*}
 			else
@@ -2003,11 +2006,6 @@ package classes.Scenes.Places
 			flags[kFLAGS.PRISON_TRAIN_SELF_CONTROL_UNLOCKED] = 0;
 			flags[kFLAGS.PRISON_TRAIN_PUPPY_TRICKS_UNLOCKED] = 0;
 			prisonItemsRetrieve();
-			if(debug)
-			{
-				prisonEscapeFinalePart2();
-				return;
-			}
 			if (flags[kFLAGS.PRISON_STORAGE_ARMOR] != 0) {
 				prisonArmorRetrieve();
 				return;
@@ -2333,7 +2331,7 @@ package classes.Scenes.Places
 					return true;
 				}
 			}
-			if(!prison.trainingPet.prisonCaptorPetOptedOut() && prison.trainingPet.prisonCaptorPetTier() >= 2 && !prisonCaptor.roomEventOverride[flags[kFLAGS.PRISON_PUNISHMENT]] && rand(100) < 30 + trainingPet.prisonCaptorPetScore())
+			if(randomCooldownPetDream <= 0 && rand(100) < 30 + trainingPet.prisonCaptorPetScore() && prison.trainingPet.prisonCaptorPetTier() >= 2 && !prisonCaptor.roomEventOverride[flags[kFLAGS.PRISON_PUNISHMENT]] && !prison.trainingPet.prisonCaptorPetOptedOut())
 			{
 				eventOccurred = trainingPet.prisonCaptorPetDreamStart();
 				if(eventOccurred)
@@ -2428,10 +2426,11 @@ package classes.Scenes.Places
 				return true;
 			}
 			//Pet dreams
-			var petDreamRarity:int = 6;
+			var petDreamRarity:int = 8;
 			petDreamRarity -= trainingPet.prisonCaptorPetScore() / 5;
 			if (petDreamRarity < 2) petDreamRarity = 2;
-			if (rand(petDreamRarity) == 0 && !trainingPet.prisonCaptorPetOptedOut()) {
+			if (randomCooldownPetDream <= 0 && rand(petDreamRarity) == 0 && !trainingPet.prisonCaptorPetOptedOut()) {
+				randomCooldownPetDream = 8 + rand(8);
 				if (trainingPet.prisonCaptorPetScore() == 0) trainingPet.prisonCaptorPetDreamIntro();
 				else if (trainingPet.prisonCaptorPetScore() < 5) trainingPet.prisonCaptorPetDreamLazy();
 				else if (trainingPet.prisonCaptorPetScore() < 10) trainingPet.prisonCaptorPetDreamModest();
@@ -3172,17 +3171,15 @@ package classes.Scenes.Places
 					{
 						outputText("s\n",false);
 					}
-					if (trainingFeed.prisonCaptorFeedingQuestOptedOut()) outputText("<b>Quests Disabled</b>\n");
+					
 					billieScene.prisonCaptorBillieStatusText();
 				}
-				if(trainingPet.prisonCaptorPetTier() > 0 && !trainingPet.prisonCaptorPetOptedOut())
-				{
+				if (trainingPet.prisonCaptorPetTier() > 0 && !trainingPet.prisonCaptorPetOptedOut()) 
 					trainingPet.prisonCaptorPetStatusText();
-				}
-				if(trainingFeed.prisonCaptorFeedingQuestTrainingExists())
-				{
+				if (trainingFeed.prisonCaptorFeedingQuestTrainingExists()) 
 					trainingFeed.prisonCaptorFeedingQuestTrainingStatusText();
-				}
+				if (trainingFeed.prisonCaptorFeedingQuestOptedOut()) 
+					outputText("<b>Quests Disabled</b>\n");
 				outputText("",false);
 			}
 		}

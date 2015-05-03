@@ -952,7 +952,7 @@
 			if (player.gender == GENDER_HERM)
 			{
 				addButton(7, "Big Cock", confirmEndowmentBigCock);
-				addButton(8, "Lots of Jizz", confirmEndowmentBigCock);
+				addButton(8, "Lots of Jizz", confirmEndowmentMessyOrgasms);
 				addButton(9, "Big Breasts", confirmEndowmentBigBreasts);
 				addButton(10, "Big Clit", confirmEndowmentBigClit);
 				addButton(11, "Fertile", confirmEndowmentFertile);

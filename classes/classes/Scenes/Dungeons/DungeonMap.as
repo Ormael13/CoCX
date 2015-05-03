@@ -185,8 +185,8 @@ package classes.Scenes.Dungeons {
 					rawOutputText(", 1F");
 					rawOutputText("\n    [S]    ");
 					rawOutputText("\n     |     ");
-					rawOutputText("\n   -[P]    ");
-					rawOutputText("\n           ");
+					rawOutputText("\n    [P]    ");
+					rawOutputText("\n     |     ");
 					rawOutputText("\n           ");
 					rawOutputText("\n           ");
 					rawOutputText("\n           ");
@@ -205,8 +205,8 @@ package classes.Scenes.Dungeons {
 					rawOutputText(", 1F");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
-					rawOutputText("\n   -[S]    ");
-					rawOutputText("\n           ");
+					rawOutputText("\n    [S]    ");
+					rawOutputText("\n     |     ");
 					rawOutputText("\n           ");
 					rawOutputText("\n           ");
 					rawOutputText("\n           ");

@@ -917,7 +917,7 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	
 	//Massive Balls Bad End (Realistic Mode only)
-	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2))) {
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
 		badEndGIANTBALLZ();
 	}
 	//Hunger Bad End
@@ -2081,7 +2081,7 @@ public function wakeFromBadEnd():void {
 	}
 	outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
 	//Skip time forward
-	model.time.days += 1;
+	model.time.days++;
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
 	else model.time.hours = 6;
 	//Set so you're in camp.
@@ -2094,16 +2094,19 @@ public function wakeFromBadEnd():void {
 	player.fatigue = 0;
 	statScreenRefresh();
 	//PENALTY!
-	player.gems = Math.round(player.gems * 0.9);
-	player.XP -= player.level * 10;
+	var penaltyMultiplier:int = 1;
+	penaltyMultiplier += flags[kFLAGS.GAME_DIFFICULTY] * 0.5;
+	//Deduct XP and gems.
+	player.gems -= int((player.gems / 10) * penaltyMultiplier);
+	player.XP -= int((player.level * 10) * penaltyMultiplier);
+	if (player.gems < 0) player.gems = 0;
 	if (player.XP < 0) player.XP = 0;
-	if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.05));
-	if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.05));
-	if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.05));
-	if (player.inte > 20) dynStats("int", Math.ceil(-player.inte * 0.05));
-
-	menu();
-	addButton(0, "Next", playerMenu);
+	//Deduct attributes.
+	if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.05) * penaltyMultiplier);
+	if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.05) * penaltyMultiplier);
+	if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.05) * penaltyMultiplier);
+	if (player.inte > 20) dynStats("int", Math.ceil(-player.inte * 0.05) * penaltyMultiplier);
+	doNext(playerMenu);
 }
 
 //Camp wall

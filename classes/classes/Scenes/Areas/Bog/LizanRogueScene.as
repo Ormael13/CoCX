@@ -22,8 +22,8 @@ package classes.Scenes.Areas.Bog
 					outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
 				}
 				menu();
-				addButton(0, "Fight", fightLizan);
-				addButton(1, "Leave", leaveLizan);
+				addButton(0, "Fight", fightLizan, false, null, null, "Fight the lizan!");
+				addButton(1, "Leave", leaveLizan, false);
 				return;
 			}
 			else {
@@ -43,9 +43,9 @@ package classes.Scenes.Areas.Bog
 					outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
 				}
 				menu();
-				addButton(0, "Spar", fightLizan, true);
-				if (player.lust >= 33) addButton(1, "Sex", haveSexWithLizan);
-				addButton(2, "Decline", leaveLizan, true);
+				addButton(0, "Spar", fightLizan, true, null, null, "Do a spar session with the lizan!");
+				if (player.lust >= 33) addButton(1, "Sex", haveSexWithLizan, null, null, null, "Have some fun with the oh-so-sexy lizan.");
+				addButton(2, "Decline", leaveLizan, true, null, null, "Excuse yourself and leave.");
 				return;
 			}
 
@@ -80,7 +80,7 @@ package classes.Scenes.Areas.Bog
 				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
 				if (player.lust >= 33) {
 					outputText("You wonder what you should do to the lizan.");
-					addButton(0, "Use Dick", rapeLizanInTheAss);
+					addButton(0, "Use Dick", rapeLizanInTheAss, null, null, null, "Anally penetrate him with your [cocks].");
 					addButton(4, "Leave", cleanupAfterCombat);
 					return;
 				}
@@ -95,7 +95,7 @@ package classes.Scenes.Areas.Bog
 				dynStats("str", 1, "tou", 1);
 				if (player.lust >= 33) {
 					outputText("<b>You could have sex with him if you like to.</b> ");
-					addButton(0, "Sex", haveSexWithLizan);
+					addButton(0, "Sex", haveSexWithLizan, null, null, null, "Have some fun with the oh-so-sexy lizan.");
 					addButton(4, "Leave", leaveLizanAfterCombat);
 					return;
 				}
@@ -121,15 +121,17 @@ package classes.Scenes.Areas.Bog
 			}			
 		}
 		
-		public function haveSexWithLizan():void {
-			clearOutput();
-			outputText("You tell the male lizan you're game as you " + player.clothedOrNaked("begin to pull off your [armor]", "show your naked form") + ". His bulge becomes more pronounced as your body comes into view. He quite obviously likes what he sees. Which one of your body parts do you plan to use on the horny male lizan?");
+		public function haveSexWithLizan(continuation:Boolean = false):void {
+			if (!continuation) {
+				clearOutput();
+				outputText("You tell the male lizan you're game as you " + player.clothedOrNaked("begin to pull off your [armor]", "show your naked form") + ". His bulge becomes more pronounced as your body comes into view. He quite obviously likes what he sees. Which one of your body parts do you plan to use on the horny male lizan?");
+			}
 			menu();
-			if (player.hasCock()) addButton(0, "Use Dick", consensualButtfuck);
-			if (player.hasVagina()) addButton(1, "Use Vagina", consensualGetFucked);
-			addButton(2, "Use Ass", consensualGetButtFucked);
-			if (player.hasVagina()) addButton(3, "Dbl.Penetration", consensualDoublePenetration);
-			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0 && flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER] >= 3) addButton(4, "Watersports", consensualWatersports);
+			if (player.hasCock()) addButton(0, "Use Dick", consensualButtfuck, null, null, null, "Anally penetrate him with your [cocks].");
+			if (player.hasVagina()) addButton(1, "Use Vagina", consensualGetFucked, null, null, null, "Have him fuck your [pussy].");
+			addButton(2, "Use Ass", consensualGetButtFucked, null, null, null, "Have him fuck your [ass].");
+			if (player.hasVagina()) addButton(3, "Dbl.Penetration", consensualDoublePenetration, null, null, null, "Have him stuff both your holes with his dual cocks.");
+			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0 && flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER] >= 3 && !continuation) addButton(4, "Watersports", consensualWatersports, null, null, null, "Participate into urine activity with him. \n\nNOTE: Contains watersports!");
 		}
 		
 		public function consensualButtfuck():void {
@@ -357,11 +359,19 @@ package classes.Scenes.Areas.Bog
 			}
 			outputText(" and onto his belly. ");
 			awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, false);
-			outputText("\n\nThe lizan rubs his belly, enjoying the warm urine you're giving him. By now, your bladder is empty and you make sure to get the last of your urine out. He scoops up the murky water and washes off the urine and gets up. \"<i>All right, now it's my turn. I need release too,</i>\" he says.");
+			outputText("\n\nThe lizan rubs his belly, enjoying the warm urine you're giving him. By now, your bladder is empty and you make sure to get the last of your urine out. He scoops up the murky water, washes off the urine and gets up. \"<i>All right, now it's my turn. I need release too,</i>\" he says.");
 			outputText("\n\nYou comply and lean back against the tree. He aims his twin cocks towards you and begins peeing all over you. It feels good with his warm urine on your body. He aims left and right, his urine streams go wide and splash into the murky waters. He aims back at you again, letting you revel in his warm urine.");
-			outputText("\n\nHis urine flows eventually stop and you scoop up some murky water to wash off the urine. You cuddle with the lizan for a moment before you have to part ways" + player.clothedOrNaked(" and redress yourself in your [armor]", "") + ".");
-			outputText("\n\n\"<i>I hope you come back later,</i>\" the lizan says with a smile. You give him a kiss before you return to your camp.");
+			outputText("\n\nHis urine flows eventually stop and you scoop up some murky water to wash off the urine.");
 			dynStats("lus", 10);
+			menu();
+			addButton(0, "Continue", haveSexWithLizan, true, null, null, "Continue having sex.");
+			addButton(1, "Done", finishWatersports);
+
+		}
+		
+		private function finishWatersports():void {
+			outputText(" You cuddle with the lizan for a moment before you have to part ways" + player.clothedOrNaked(" and redress yourself in your [armor]", "") + ".");
+			outputText("\n\n\"<i>I hope you come back later,</i>\" the lizan says with a smile. You give him a kiss before you return to your camp.");
 			doNext(camp.returnToCampUseOneHour);
 			if (getGame().inCombat) cleanupAfterCombat();
 		}

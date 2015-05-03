@@ -491,6 +491,10 @@ package classes
 			var fmt2:TextFormat = new TextFormat(); //mainView.b0Text.getTextFormat();
 			fmt2.font = "Georgia";
 			fmt2.size = 24;
+			if (isAprilFools()) {
+				fmt.font = "Comic Sans MS";
+				fmt2.font = "Comic Sans MS";
+			}
 			if (flags[kFLAGS.USE_DARK_BACKGROUND] > 0) {
 				mainfmt.color = 0xFFFFFF;
 				mainView.background.alpha = 0;

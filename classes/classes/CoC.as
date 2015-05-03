@@ -280,11 +280,11 @@ the text from being too boring.
 //Moved to Scenes/Masturbation.as		include "../../includes/masturbation.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/runa.as";
-		include "../../includes/symGear.as";
+//No longer needed. This file has been split:		include "../../includes/symGear.as";
 		include "../../includes/tamaniDildo.as";
 		include "../../includes/thanksgiving.as";
 		include "../../includes/valentines.as";
-		include "../../includes/worms.as";
+//Moved to Scenes/Areas/Mountain		include "../../includes/worms.as";
 		include "../../includes/xmas_bitch.as";
 		include "../../includes/xmas_gats_not_an_angel.as";
 		include "../../includes/xmas_jack_frost.as";
@@ -428,8 +428,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4C_mod_1.2";
-			version = ver + " (<b>The Prisoner Update</b>)";
+			ver = "0.9.4C_mod_1.2.1";
+			version = ver + " (<b>Bug Fixes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

@@ -500,7 +500,7 @@ internal function IzmaWins():void {
 	clearOutput();
 	//(if Worms)
 	if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
-		kGAMECLASS.infestOrgasm();
+		kGAMECLASS.mountain.wormsScene.infestOrgasm();
 		outputText("\n\nIzma looks on in horror as you push out the load of wormy cargo onto the sand at her feet, only snapping out of her daze as several of the parasites begin climbing her ankle with an eye toward her cock.  She shrieks and jumps back, then drags her foot in the sand, dislodging or pulverizing the squirming vermin.  \"<i>" + player.short + ", that's nasty!  Get away!  Get away and don't talk to me again!  Ugh!</i>\"  She takes off, grabbing her chest of books and kicking sand up in her flight down the beach.", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
 		player.orgasm();

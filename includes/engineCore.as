@@ -1095,6 +1095,7 @@ public function getButtonToolTipText(buttonText:String):String
 	//-- CAMP 
 	//---------
 	//MENUS
+	if (tooltipLoc == "") {
 	if(buttonText.indexOf("Explore") != -1) {                
 		toolTipText = "Explore to find new regions and visit any discovered regions.";
 	}
@@ -1251,6 +1252,7 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Marble (Sex)") != -1) {
 		toolTipText = "Get with marble for a quick cuddle and some sex.";
 	}
+	}
 	//-----------------
 	//-- FOLLOWER INTERACTIONS
 	//-----------------
@@ -1283,102 +1285,11 @@ public function getButtonToolTipText(buttonText:String):String
 	//-----------------
 	//-- ENVIRONMENT INTERACTIONS
 	//-----------------
-	if (kGAMECLASS.tooltipLoc == "LizanRogue") {
-		if (buttonText == "Fight") {
-			toolTipText = "Fight the lizan!";
-		}
-		if (buttonText == "Spar") {
-			toolTipText = "Do a spar session with the lizan!";
-		}
-		if (buttonText == "Sex") {
-			toolTipText = "Have some fun with the oh-so-sexy lizan.";
-		}
-		if (buttonText == "Decline") {
-			toolTipText = "Excuse yourself and leave.";
-		}
-		//Sex
-		if (buttonText == "Use Dick") {
-			toolTipText = "Anally penetrate him with your [cocks].";
-		}
-		if (buttonText == "Use Vagina") {
-			toolTipText = "Have him fuck you vaginally.";
-		}
-		if (buttonText == "Use Ass") {
-			toolTipText = "Have him fuck your wonderful ass.";
-		}
-		if (buttonText == "Dbl.Penetration") {
-			toolTipText = "Have him stuff both your holes with his dual cocks.";
-		}
-		if (buttonText == "Watersports") {
-			toolTipText = "Participate into urine activity with him. \n\nNOTE: Contains watersports!";
-		}
-	}
+	//Lizan Rogue - Moved to LizanRogueScene.as
 	//-----------------
 	//-- DUNGEON INTERACTIONS
 	//-----------------
-	if (buttonText == "Map") {
-		toolTipText = "View the map of this dungeon.";
-	}
-	//Factory environment - MOVED
-	if (kGAMECLASS.tooltipLoc == "IncubusMechanic") {
-		if (buttonText == "Orally" || buttonText == "Service Him") {
-			if (player.hasCock()) toolTipText = "Service the incubus orally.";
-		}
-		if (buttonText == "Rape") {
-			if (player.hasCock()) toolTipText = "Fuck his butt.";
-			else toolTipText = "Ride him vaginally.";			
-		}
-		if (buttonText == "Anally" || buttonText == "Anal") {
-			toolTipText = "Ride him anally.";
-		}
-	}
-	if (kGAMECLASS.tooltipLoc == "OmnibusOverseer") {
-		if (buttonText == "Grow Breasts") {
-			if (player.hasCock()) toolTipText = "Grow a new pair of breasts if flat-chested or grow existing breasts. \n\nAnd receive something else.";
-		}
-		if (buttonText == "Grow Dick") {
-			if (player.hasCock()) toolTipText = "Grow a new penis. Somehow, you have a feeling that the new cock you'll receive won't be a normal cock. \n\nAnd receive something else.";
-		}
-		if (buttonText == "Normal Face") {
-			if (player.hasCock()) toolTipText = "Normalize your face. This will also change your ears back to human ears! \n\nAnd receive something else.";
-		}
-		if (buttonText == "Normal Chest") {
-			if (player.hasCock()) toolTipText = "Normalize your chest. This will shrink your oversized breasts to a modest size, if you have it. \n\nAnd receive something else.";
-		}
-		if (buttonText == "Normal Groin") {
-			if (player.hasCock()) toolTipText = "Normalize your groin, removing any extra cocks and reset remaining cock to normal, if you have any. \n\nAnd receive something else.";
-		}
-		if (buttonText == "Normal Legs") {
-			if (player.hasCock()) toolTipText = "Turn your legs back to normal. This will also remove your tail, if you have any! \n\nAnd receive something else.";
-		}
-		if (buttonText == "No (Let go)") {
-			if (player.hasCock()) toolTipText = "Refuse the offer and let the demon go.";
-		}
-		if (buttonText == "No (Kill Her)") {
-			if (player.hasCock()) toolTipText = "Refuse the offer and kill the demon instead.";
-		}
-	}
-	//Deep cave
-	if (kGAMECLASS.tooltipLoc == "Zetaz") {
-		if (buttonText == "Sexual") {
-			if (player.hasCock()) toolTipText = "Chain the imp up and sexually interrogate him.";
-		}
-		if (buttonText == "End Him") {
-			if (player.hasCock()) toolTipText = "Kill the imp. After all, he deserves to be bad-ended.";
-		}
-		if (buttonText == "Safety") {
-			if (player.hasCock()) toolTipText = "Release the imp after you get the information you need.";
-		}
-		
-		if (buttonText == "'Release'") {
-			if (player.hasCock()) toolTipText = "Let the imp cum and release him from the bonds.";
-		}
-		if (buttonText == "Tighten") {
-			if (player.hasCock()) toolTipText = "Tighten the straps.";
-		}
-	}
-	//Desert Cave
-	//Tower of the Phoenix
+	//Moved to dungeon interactions.
 	//-----------------
 	//-- LEVEL UP SCREEN 
 	//-----------------
@@ -1411,32 +1322,23 @@ public function getButtonToolTipText(buttonText:String):String
 	//-- TITLE SCREEN 
 	//-----------------
 	//Main menu
-	if(buttonText.indexOf("New Game") != -1) {                        
+	if(buttonText.indexOf("New Game") != -1) {
 		toolTipText = "Start your new adventure.";
 	}
-	if(buttonText.indexOf("Credits") != -1) {                        
+	if(buttonText.indexOf("Credits") != -1) {
 		toolTipText = "See a list of all the cool people who have contributed to content for this game!";
 	}
-	if(buttonText.indexOf("Instructions") != -1) {                        
+	if(buttonText.indexOf("Instructions") != -1) {
 		toolTipText = "How to play.  Starting tips.  And hotkeys for easy left-handed play...";
 	}
-	if(buttonText.indexOf("Achievements") != -1) {                        
+	if(buttonText.indexOf("Achievements") != -1) {
 		toolTipText = "View all achievements you have unlocked so far.";
 	}
-	if(buttonText.indexOf("Settings") != -1) {                        
+	if(buttonText.indexOf("Settings") != -1) {
 		toolTipText = "Configure game settings and enable cheats.";
 	}
-	if(buttonText.indexOf("ASPLODE") != -1) {                        
+	if(buttonText.indexOf("ASPLODE") != -1) {
 		toolTipText = "MAKE SHIT ASPLODE";
-	}
-	if(buttonText.indexOf("NewGamePlus") != -1) {                        
-		toolTipText = "Start a new game with your equipment, experience, and gems carried over.";
-	}
-	if(buttonText.indexOf("Game Over") != -1) {                        
-		toolTipText = "Your game has ended. Please load a saved file or start a new game.";
-	}
-	if(buttonText.indexOf("Wake Up") != -1) {                        
-		toolTipText = "It's all just a dream.  Wake up.";
 	}
 	return toolTipText;
 }
@@ -2201,7 +2103,7 @@ public function displayStats(e:MouseEvent = null):void
 		outputText("<b><u>Combat Stats</u></b>\n" + combatStats, false);
 	// End Combat Stats
 	
-	if (prison.inPrison) prison.displayPrisonStats();
+	if (prison.inPrison || flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) prison.displayPrisonStats();
 	
 	// Begin Children Stats
 	var childStats:String = "";

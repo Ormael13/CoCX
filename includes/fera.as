@@ -41,8 +41,9 @@ public function pumpkinFuckEncounter():void {
 
 //Unfinished scene.
 public function pumpkinSmash():void {
-	outputText("You have no idea but to be safe, you pick up the pumpkin and throw the pumpkin at the tree, shattering the pumpkins into several pieces.\n\n", true);
-	outputText("As you walk away, you are interrupted by someone.", false);
+	clearOutput();
+	outputText("You have no idea but to be safe, you pick up the pumpkin and throw the pumpkin at the tree, shattering the pumpkins into several pieces.");
+	outputText("\n\nAs you walk away, you are interrupted by someone.");
 	doNext(pumpkinFuckPartII);
 }
 

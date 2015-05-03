@@ -1733,10 +1733,10 @@ public function doEvent(eventNo:Number):void
 		doNext(13);
 	}
 	//Bad end for going full demon
-	/*else if (eventNo == 2191)
+	else if (eventNo == 2191)
 	{
 		demonBadEnd();
-	}*/
+	}
 	
 	else if (eventNo == 2203)
 	{
@@ -1759,10 +1759,10 @@ public function doEvent(eventNo:Number):void
 	{
 		succubusGetsDildoed();
 	}
-	/*else if (eventNo == 2371)
+	else if (eventNo == 2371)
 	{
 		amilyScene.exploreVillageRuin();
-	}*/
+	}
 	else if (eventNo == 2382)
 	{
 		amilyScene.sexWithAmily();
@@ -1821,8 +1821,7 @@ public function doEvent(eventNo:Number):void
 	{
 		amilyScene.giveAmilySomePants();
 	}
-*/
-/* Moved to Rathazul.as
+ Moved to Rathazul.as
 	else if (eventNo == 2486)
 	{
 		player.gems += 50;
@@ -1832,8 +1831,6 @@ public function doEvent(eventNo:Number):void
 		else
 			rathazul.encounterRathazul();
 	}
-*/
-/*
 	else if (eventNo == 2487)
 	{
 		catAutoLick();

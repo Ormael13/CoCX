@@ -24,30 +24,32 @@ package classes.Scenes.Dungeons.Factory
 		
 		private function defeatedInDungeon1(hpVictory:Boolean):void {
 			clearOutput();
+			game.menu();
 			if (hpVictory)
 				outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.");
 			else outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.");
 			if (player.gender == 0) {
 				outputText("  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?");
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-				game.simpleChoices("Anally", game.dungeons.factory.doRideIncubusAnally, "Orally", game.dungeons.factory.doOralIncubus, "", null, "", null, "Leave", game.cleanupAfterCombat);
+				game.addButton(0, "Anally", game.dungeons.factory.doRideIncubusAnally, null, null, null, "Ride him anally.");
+				game.addButton(1, "Orally", game.dungeons.factory.doOralIncubus, null, null, null, "Service the incubus orally.");
+				game.addButton(4, "Leave", game.cleanupAfterCombat);
 			}
 			else {
 				game.dynStats("lus", 1);
 				if (hpVictory) {
 					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?");
 					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-					game.simpleChoices("Rape", game.dungeons.factory.doRapeIncubus, "Service Him", game.dungeons.factory.doOralIncubus, "Anal", game.dungeons.factory.doRideIncubusAnally, "", null, "Nothing", game.cleanupAfterCombat);
 				}
 				else {
 					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?");
 					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-					var titfuck:Function = null;
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") {
-						titfuck = game.createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
-					}
-					game.simpleChoices("Rape", game.dungeons.factory.doRapeIncubus, "Service Him", game.dungeons.factory.doOralIncubus, "Anal", game.dungeons.factory.doRideIncubusAnally, "B.Titfuck", titfuck, "Nothing", game.cleanupAfterCombat);
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) game.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
 				}
+				game.addButton(0, "Rape", game.dungeons.factory.doRapeIncubus, null, null, null, player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
+				game.addButton(1, "Service Him", game.dungeons.factory.doOralIncubus, null, null, null, "Service the incubus orally.");
+				game.addButton(2, "Anal", game.dungeons.factory.doRideIncubusAnally, null, null, null, "Ride him anally.");
+				game.addButton(4, "Nothing", game.cleanupAfterCombat);
 			}
 		}
 		

@@ -2139,16 +2139,22 @@ use namespace kGAMECLASS;
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
 				//Balls
-				var tempSpeedCap:Number = 100;
-				if (ballSize > 4) maxSpe -= Math.round((ballSize - 4) / 2);
+				var tempSpeedPenalty:Number = 0;
+				if (ballSize > 4) tempSpeedPenalty += Math.round((ballSize - 4) / 2);
 				//Breasts
 				if (hasBreasts())
 				{	
-					if (biggestTitSize() > 15) maxSpe -= (biggestTitSize() / 4);
+					if (biggestTitSize() > 15) tempSpeedPenalty += (biggestTitSize() / 4);
 				}
 				//Cocks
-				if (biggestCockArea() > 24) maxSpe -= ((biggestCockArea() - 24) / 6)
+				if (biggestCockArea() > 24) tempSpeedPenalty += ((biggestCockArea() - 24) / 6)
 				//Min-cap
+				var penaltyMultiplier:Number = 1;
+				penaltyMultiplier -= str * 0.1;
+				penaltyMultiplier -= (tallness - 72) / 168;
+				if (penaltyMultiplier < 0.4) penaltyMultiplier = 0.4;
+				tempSpeedPenalty *= penaltyMultiplier;
+				maxSpe -= tempSpeedPenalty;
 				if (maxSpe < 50) maxSpe = 50;
 			}
 			//Perks ahoy

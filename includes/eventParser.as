@@ -116,9 +116,9 @@ public function gameOver(clear:Boolean = false):void { //Leaves text on screen u
 		flags[kFLAGS.TIMES_BAD_ENDED]++;
 		awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
 		menu();
-		addButton(0, "Game Over", gameOverMenuOverride);
-		if (flags[kFLAGS.HARDCORE_MODE] <= 0 && flags[kFLAGS.GAME_DIFFICULTY] < 1) addButton(1, "Continue", camp.wakeFromBadEnd);
-		//addButton(3, "NewGamePlus", charCreation.newGamePlus);
+		addButton(0, "Game Over", gameOverMenuOverride, null, null, null, "Your game has ended. Please load a saved file or start a new game.");
+		if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Continue", camp.wakeFromBadEnd, null, null, null, "It's all just a dream. Wake up.");
+		//addButton(3, "NewGamePlus", charCreation.newGamePlus, null, null, null, "Start a new game with your equipment, experience, and gems carried over.");
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", playerMenu);
 		gameOverMenuOverride();
 		
@@ -599,9 +599,13 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			}
 			//wormgasms
 			else if (flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && player.findStatusAffect(StatusAffects.Infested) < 0) {
-				if (player.hasCock() && (player.findStatusAffect(StatusAffects.JojoNightWatch) < 0 || player.findStatusAffect(StatusAffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0) {
-					nightTimeInfestation();
+				if (player.hasCock() && (player.findStatusAffect(StatusAffects.JojoNightWatch) < 0 || player.findStatusAffect(StatusAffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
+					kGAMECLASS.mountain.wormsScene.nightTimeInfestation();
 					return true;
+				}
+				else if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "") {
+					outputText("\n<b>You hear the sound of a horde of worms banging against the door. Good thing you locked it before you went to sleep!</b>\n");
+					needNext
 				}
 				else if (flags[kFLAGS.HEL_GUARDING] > 0 && helFollower.followerHel()) {
 					outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");

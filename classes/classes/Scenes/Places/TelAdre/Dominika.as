@@ -10,6 +10,7 @@ public function Dominika(){
 //const DOMINIKA_TIMES_MULTICOCK_SLOBBERED:int = 386;
 //const DOMINIKA_TIMES_HYPNO_BJ:int = 387;
 //const DOMINIKA_LAST_HYPNO_SUCK_COUNT:int = 388;
+//const DOMINIKAS_SWORD_GIVEN:int = 416;
 
 public function fellatrixBarAppearance():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] == 0) outputText("\n\nYou spot a face you haven't seen before – or rather, eyes you haven't seen before. A woman sits at a table in the back, most of her features hidden beneath a white cloth wrapped around her head to form a turban and veil. The rest of her dress seems equally modest but loose, efficient for desert travel. She idly runs her finger and its accompanying black-painted fingernail over the top of an empty cup, staring off into the distance and thinking about some unknown detail. What skin you can see is pale but perhaps most notably for Tel'Adre, human. Blue eyes glance over and meet your own, and you are reminded of your village back home. Her reaction to your look is unreadable thanks to her veil, but she watches you for a few moments longer before turning away again.", false);
@@ -28,7 +29,7 @@ public function fellatrixBarApproach():void {
 	//Get the emporerors new groove (sword)
 	//Req's d2 finished
 	if(fellatrixSucked() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && player.hasKeyItem("Zetaz's Map") >= 0 && flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] == 0) {
-		kGAMECLASS.dominikaSpellblade();
+		dominikaSpellblade();
 		return;
 	}
 	//[First encounter, player is minotaur (If you lose minotaur characteristics and come back, Dominika will not recognize you and do a regular first encounter)]
@@ -871,6 +872,54 @@ private function dominikaBlowjobs2():void {
 	model.time.hours = 7;
 	statScreenRefresh();
 	doNext(camp.returnToCampUseOneHour);
+}
+
+//Item details:
+//Spellblade [Spellblade or S. Blade]: Sword with Wizard's Staff fatigue bonus, but higher attack (7-10? idk). ALTERNATIVELY you could put some crazy additional magic effect on there but idc
+//Mouseover description: Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic.  Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.
+
+//[Approach Dominika post-D2 in bar, requires having used her at least once before?]
+public function dominikaSpellblade():void {
+	clearOutput();
+	//[Approach Dominika post-D2 in bar, on Dominika's \"<i>I'm a racist bitch</i>\" list]
+	if((player.minoScore() >= 3 && player.faceType == FACE_COW_MINOTAUR && player.gender == 1) || !player.isBiped()) {
+		outputText("You greet Dominika and make small talk, but as usual she seems distracted and the conversation is strained at best.  Drumming her fingers on the table and glancing outside her attention is constantly drawn away from you, and eventually she outright cuts the conversation off.  \"<i>I need to go, I'm afraid,</i>\" she says quickly, and half-heartedly adds, \"<i>It was nice talking to you.</i>\"\n\n", false);
+
+		outputText("She exits, leaving you at the table alone.  You shrug a little and finish your drink, before noticing that she left something behind.  It looks like a wrapped sword and, while you don't know why she'd have such a thing, you figure you might as well give it back to her.  Hell, maybe she'll actually be worth a goddamn conversation afterwards.\n\n", false);
+
+		outputText("You take the blade and head back out into the streets.  Off in the distance you can see her walking, and it takes a while to catch up with her.  Tapping her on the shoulder, you're preparing an explanation for yourself when she interrupts you with a surprisingly harsh \"<i>What?</i>\"\n\n", false);
+
+		outputText("Holding up the sword, you mention that she left it behind and offer it back to her.  She glances at it before telling you to keep it and turning away.  Surprised, you offer again to be sure.\n\n", false);
+
+		outputText("\"<i>I said fucking KEEP IT!</i>\" she snaps suddenly, turning again.  \"<i>Isn't it fucking CLEAR that I don't want to talk to you right now?</i>\" She draws breath sharply from the sudden outburst, then closes her eyes, rubbing the bridge of her nose.  After a few seconds she more calmly states, \"<i>While I apologize for snapping at you I am under a great deal of stress right now and would firmly prefer not to be bothered.  Thank you and good day.</i>\"\n\n", false);
+
+		outputText("She turns back around. You're not entirely certain, but you think you hear her speak again as she leaves.  \"<i>And I don't want any help from you.</i>\"\n\n", false);
+
+		outputText("Well, whatever.  You unwrap the sword to look at it.  It's inscribed with strange symbols and patterns which you don't entirely recognize, but which seem to be familiar.  Something in the design suggests they are magical in nature.\n\n", false);
+
+		outputText("You wrap it again.  A free sword is a free sword.  Or a free coin, as the case may be.", false);
+		//(Player receives Spellblade)
+	}
+	else {
+		outputText("\"<i>Ah, lovely.</i>\"  The way Dominika's eyes curve makes it clear she's smiling as you approach.  \"<i>I was hoping you'd be here today.</i>\"\n\n", false);
+	
+		outputText("She gestures to the bartender as you sit.  She's happy to see you and she's buying you alcohol? Today is a good day.  \"<i>Been well, I trust?</i>\" she opens casually.  \"<i>Protecting your camp and your bottom?</i>\"  You're fairly confident she's smirking at that line.  \"<i>I wanted to thank you for your company of late,</i>\" the occultist says, once your drink arrives and the small talk concludes.  \"<i>It's been refreshing to talk with someone who's been interested in some degree of intellectualism.  And of course, it helps that you're able to... supply me with my unfortunate needs.</i>\"  A light chuckle comes from behind her veil.\n\n", false);
+	
+		outputText("\"<i>It's somewhat of a Marethian custom to give gifts once you get to know someone enough, or are interested in courting them,</i>\" Dominika continues.  \"<i>I'm sure by now you've encountered someone who feels so fondly of you.</i>\"  A thought interrupts her, and she gives another little laugh.  \"<i>Some time ago a rather broadly built man became enamored of me and presented me with - of all things - a revealing swimsuit.  As you may imagine from our talks I was not particularly smitten with the notion of diving into the water with but a single line vanishing into my buttocks and calmly rebuffed him.  Last I heard, he was still so wounded from this slight that he swore off all those who don't 'understand the need to swim'.</i>\"  She chuckles a few times, tracing a finger over the rim of her empty glass.  \"<i>Such is the social importance of the gift in this land.</i>\"\n\n", false);
+	
+		outputText("Reaching below the table, she pulls out something wrapped in cloth and twine.  Based on the shape you presume it to be a blade of some kind, but you're in no hurry to make assumptions - mostly because your drink isn't empty yet.  \"<i>While I have not grown up in such a culture and will hardly be so offended as to forever curse the name of all foreigners, I have endeavoured to make something that you will find useful.</i>\"\n\n", false);
+	
+		outputText("Holding the package in the palms of both hands, she extends it to you.  You take the offered gift and open it on the table.  Much as you anticipated it is indeed a sword, though one with strangely familiar lines and patterns engraved along its pommel and blade.  \"<i>My people found that it was best to perform magic with something that could - if necessary - also serve as a weapon on its own.  A crystal orb or stick tends to simply leave an opponent lightly bruised if employed as a weapon, rather than drawing blood.</i>\"  She reaches across the table and traces the lines on the blade with her finger.  \"<i>These inscriptions are based on the movement of the stars, and will draw power from them to enhance your magic - though admittedly given the difficulty of seeing the skies in this land, it's not as powerful as it would have been in my homeland.</i>\"  The connection to the night sky triggers the memory of where you've seen similar runes: Dominika's tattoos draw on the same iconography.\n\n", false);
+	
+		outputText("You grip the sword by its handle and lift it experimentally.  It's balanced well and seems functional.  \"<i>I'll admit that the blade may not be as sharp as one tempered by a blacksmith's hammer,</i>\" Dominika continues, \"<i>but it should serve your needs in sorcery no less than any other weapon.</i>\"  The magical power you can feel while wielding the weapon supports her claim.\n\n", false);
+	
+		outputText("Thanking her, you make a bit more small talk and idly bring up the possibility of returning to her apartment.  She chuckles a little and rests her chin on her hands. \"<i>Oh, I'm afraid I'm not hungry, and either way I need to do a little preparation for our next lesson.  Perhaps a bit later?</i>\"\n\n", false);
+	
+		outputText("Well, getting beer and a sword in one night is good enough you suppose, though you sure would've liked a triple combo of head in there too.  A good evening nonetheless.  You bid farewell to Dominika, thanking her once more for the drink and the blade before heading on your way.  She watches you go with an unreadable expression on her face.\n\n", false);
+	}
+	//(Player receives Spellblade)
+	inventory.takeItem(weapons.S_BLADE, camp.returnToCampUseOneHour);
+	flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] = 1;
 }
 }
 }

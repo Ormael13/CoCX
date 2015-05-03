@@ -16,7 +16,7 @@ package classes.Items
 			super(id, shortName, longName, value, description);
 		}
 		
-		public function canUse():Boolean { return true; } //If an item cannot be used it should provide some description of why not
+		public function canUse():Boolean { return game.prison.prisonCanUseItem(this); } //If an item cannot be used it should provide some description of why not
 		
 //		public function hasSubMenu():Boolean { return false; } //Only GroPlus and Reducto use this. //Replaced with a return
 		

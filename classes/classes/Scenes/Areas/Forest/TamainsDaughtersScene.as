@@ -1068,7 +1068,7 @@ internal function loseToDaughters():void {
 	if(player.lust >= player.maxLust()) {
 		//worms r gross mmmmkay?
 		if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
-			kGAMECLASS.infestOrgasm();
+			kGAMECLASS.mountain.wormsScene.infestOrgasm();
 			outputText("\n\nThe goblins sigh and say, \"<i>Dad, that's just gross.  Don't get me wrong, we're still gonna have you knock us up, but I hate the feeling of those worms inside me.</i>\"", false);
 			player.orgasm();
 		}

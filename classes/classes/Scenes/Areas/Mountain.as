@@ -18,7 +18,9 @@ package classes.Scenes.Areas
 		public var hellHoundScene:HellHoundScene = new HellHoundScene();
 		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
 		public var minotaurScene:MinotaurScene = new MinotaurScene();
+		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
+		
 		public function Mountain()
 		{
 		}
@@ -217,7 +219,7 @@ package classes.Scenes.Areas
 						doNext(camp.returnToCampUseOneHour);
 						return;
 					}
-					kGAMECLASS.wormEncounter();
+					wormsScene.wormEncounter();
 				}
 				else {
 					//If worms are off or the PC is infested, no worms.
@@ -233,7 +235,7 @@ package classes.Scenes.Areas
 						doNext(camp.returnToCampUseOneHour);
 					}
 					else {
-						kGAMECLASS.wormToggle();
+						wormsScene.wormToggle();
 					}
 				}
 			}

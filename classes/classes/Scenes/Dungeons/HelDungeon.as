@@ -1198,7 +1198,7 @@ package classes.Scenes.Dungeons
 			//(Display Options: [North Door] [Trapdoor] [Armor])
 			if (flags[kFLAGS.CLEARED_HEL_TOWER] > 0) {
 				outputText("\n\nYou have already cleared this tower. You can leave if you like to.");
-				addButton(10, "Leave", exitHelTower);
+				addButton(11, "Leave", exitHelTower);
 			}
 			addButton(7, "Trapdoor", roomCellar);
 

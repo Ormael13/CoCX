@@ -140,6 +140,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	addButton(6,roxanneT,roxanne2);
 	addButton(7,"S. Squeeze",theSlipperySqueeze);
 	addButton(8,"Tent",tent);
+	addButton(9, "Back Alley", investigateBackAlley, null, null, null, "That back alley looks suspicious. Do you dare investigate?");
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }	
 
@@ -1319,5 +1320,13 @@ private function finalGayFinallee(road:int = 0):void {
 		//Time set to morning
 	}
 }
+
+	//Prisoner mod!
+	private function investigateBackAlley():void {
+		clearOutput();
+		outputText("Your curiousity draws you half way down a dark alleyway between two tents. In the gloom ahead you see what appears to be a cage wagon, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
+		doYesNo(getGame().prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, enterTheBazaarAndMenu);
+	}
+
 }
 }
