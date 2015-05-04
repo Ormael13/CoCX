@@ -19,7 +19,11 @@ package classes.Scenes {
 				flags[kFLAGS.FORCE_MEDITATE] = 0;
 				meditate();
 				return;
-			}	
+			}
+			if (prison.inPrison && !prison.prisonCanMasturbate()) {
+				doNext(playerMenu);
+				return;
+			}
 			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !fappingItems(false)) {
 				clearOutput();
 				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch you shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");

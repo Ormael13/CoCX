@@ -160,16 +160,10 @@
 			if (findPerk(PerkLib.Tank2) >= 0) temp += this.tou;
 			//Apply NG+, NG++, NG+++, etc.
 			if (short == "doppleganger" || short == "pod" || short == "sand trap" || short == "sand tarp") {
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp += 200;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp += 400;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp += 600;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) temp += 800;
+				temp += 200 * player.newGamePlusMod();
 			}
 			else {
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp += 1000;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp += 2000;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp += 3000;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) temp += 4000;
+				temp += 1000 * player.newGamePlusMod();
 			}
 			//Apply difficulty
 			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) temp *= 1.0;

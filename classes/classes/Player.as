@@ -1691,9 +1691,17 @@ use namespace kGAMECLASS;
 			game.dynStats("lus", 0, "resisted", false);
 		}
 		
-		public function corruptionTolerance():Number {
+		public function corruptionTolerance():int {
 			var temp:int = perkv1(PerkLib.AscensionTolerance) * 5;
 			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
+			return temp;
+		}
+		
+		public function newGamePlusMod():int {
+			var temp:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			//Constrains value between 0 and 4.
+			if (temp < 0) temp = 0;
+			if (temp > 4) temp = 4;
 			return temp;
 		}
 		
@@ -2255,18 +2263,10 @@ use namespace kGAMECLASS;
 			if (isNaga()) maxSpe += 10;
 			if (isTaur()) maxSpe += 20;
 			//Apply New Game+
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) {
-				maxStr += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				maxTou += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				maxSpe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				maxInt += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) {
-				maxStr += 100;
-				maxTou += 100;
-				maxSpe += 100;
-				maxInt += 100;
-			}
+			maxStr += 25 * newGamePlusMod();
+			maxTou += 25 * newGamePlusMod();
+			maxSpe += 25 * newGamePlusMod();
+			maxInt += 25 * newGamePlusMod();
 			//Might
 			if (findStatusAffect(StatusAffects.Might) >= 0) {
 				maxStr += statusAffectv1(StatusAffects.Might);

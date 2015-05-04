@@ -2754,8 +2754,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if (player.findPerk(PerkLib.ChiReflowLust)>=0 && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 	
 	//Apply lust changes in NG+.
-	if (lust2 > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) lust2 *= 1 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.2);
-	else if (lust2 > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) lust2 *= 1.8;
+	if (resisted) lust2 *= 1 + (player.newGamePlusMod() * 0.2);
 	
 	//lust resistance
 	if(lust2 > 0 && resisted) lust2 *= lustPercent()/100;

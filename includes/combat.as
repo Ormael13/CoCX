@@ -80,8 +80,7 @@ public function cleanupAfterCombat(nextFunc:Function = null):void {
 			temp = rand(10) + 1 + Math.round(monster.level / 2);
 			if (inDungeon) temp += 20 + monster.level * 2;
 			//Increases gems lost in NG+.
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) temp *= 1 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.5); 
-			else temp *= 3;
+			temp *= 1 + (player.newGamePlusMod() * 0.5);
 			//Round gems.
 			temp = Math.round(temp);
 			//Keep gems from going below zero.
@@ -981,8 +980,8 @@ public function attack():void {
 	}*/
 	//BASIC DAMAGE STUFF
 	//Double Attack Hybrid Reductions
-	if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && player.str > 61 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 15) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
-		damage = 60.5 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 15);
+	if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && player.str > 61 + (player.newGamePlusMod() * 15) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
+		damage = 60.5 + (player.newGamePlusMod() * 15);
 	}
 	else damage = player.str;
 	if (isWieldingRangedWeapon()) damage += (player.spe / 5);
@@ -1930,31 +1929,20 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 		if(monster.armorDef <= 10) monster.armorDef = 0;
 		else monster.armorDef -= 10;
 	}
-	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) {
-		monster.str += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-		monster.tou += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-		monster.spe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-		monster.inte += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-		monster.level += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-		monster.lustVuln *= 1 - (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.2);
-		monster.HP = monster.eMaxHP();
-		monster.XP = monster.totalXP();
-	}
-	else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) {
-		monster.str += 100;
-		monster.tou += 100;
-		monster.spe += 100;
-		monster.inte += 100;
-		monster.level += 120;
-		monster.lustVuln *= 0.4;
-		monster.HP = monster.eMaxHP();
-		monster.XP = monster.totalXP();
-	}
+	monster.str += 25 * player.newGamePlusMod();
+	monster.tou += 25 * player.newGamePlusMod();
+	monster.spe += 25 * player.newGamePlusMod();
+	monster.inte += 25 * player.newGamePlusMod();
+	monster.level += 30 * player.newGamePlusMod();
+	if (player.newGamePlusMod() < 4) monster.lustVuln *= 1 - player.newGamePlusMod();
+	else monster.lustVuln *= 0.4;
+	monster.HP = monster.eMaxHP();
+	monster.XP = monster.totalXP();
 	if (player.weaponName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
 	if (player.weaponName == "blunderbuss") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 12;
-	if (prison.prisonCombatAutoLose) {
+	if (prison.inPrison && prison.prisonCombatAutoLose) {
 		dynStats("lus", player.maxLust(), "resisted", false);
-		combatRoundOver();
+		doNext(endLustLoss);
 		return;
 	}
 	doNext(playerMenu);

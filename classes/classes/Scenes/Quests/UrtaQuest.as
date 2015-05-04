@@ -255,23 +255,13 @@ public function startUrtaQuest():void {
 	player.hunger = 100;
 	player.gems = 183;
 	player.level = 15;
-	if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) {
-			player.level += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
-			player.str += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
-			player.tou += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
-			player.spe += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
-			player.inte += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 25);
-		}
-		else {
-			player.level += 120;
-			player.str += 100;
-			player.tou += 100;
-			player.spe += 100;
-			player.inte += 100;
-		}
-	}
 	player.teaseLevel = 4;
+	//Apply new game plus modifier.
+	player.level += (player.newGamePlusMod() * 30);
+	player.str += (player.newGamePlusMod() * 25);
+	player.tou += (player.newGamePlusMod() * 25);
+	player.spe += (player.newGamePlusMod() * 25);
+	player.inte += (player.newGamePlusMod() * 25);
 	player.HP = player.maxHP();
 	player.fatigue = 0;
 

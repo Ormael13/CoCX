@@ -37,6 +37,7 @@ package classes.Scenes.Dungeons.D3
 			var lustDmg:Number = (5 + (inte / 10) * spellMod() + rand(player.lib - player.inte * 2 + player.cor) / 5);
 			if (lustDmg < 10) lustDmg = 10;
 			lustDmg *= game.lustPercent() / 100;
+			lustDmg *= 1 + (player.newGamePlusMod() * 0.2);
 			fatigue += 3;
 			game.dynStats("lus+", lustDmg, "resisted", false);
 			if(player.lust < 30) outputText("You squirm as the magic affects you. ", false);
@@ -112,8 +113,7 @@ package classes.Scenes.Dungeons.D3
 		}
 		
 		private function spellMod():Number {
-			var temp:int = 1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.5;
-			if (temp > 2.5) temp = 2.5;
+			var temp:int = 1 + (player.newGamePlusMod() * 0.5);
 			if (findStatusAffect(StatusAffects.Berzerking) >= 0) temp += 0.5;
 			return temp;
 		}

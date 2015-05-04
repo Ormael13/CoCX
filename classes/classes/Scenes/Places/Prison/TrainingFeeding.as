@@ -3808,6 +3808,7 @@ package classes.Scenes.Places.Prison
 		
 		public function noFuckQuestForGood():void 
 		{
+			clearOutput();
 			outputText("(Placeholder) You angrily reject the quest and state that you'll NEVER do such humiliating quest, no matter how much of a slut and no matter how obedient you may be. You WANT her, not those other corrupt creatures.\n\n");
 			outputText("(Placeholder) Mistress Elly looks down at you. \"<i>Fine. I respect your preferences. I will not assign those quests again. But I still must punish you for your disobedience.</i>\"");
 			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest, 1, -1);

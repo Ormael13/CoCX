@@ -43,7 +43,7 @@ package classes.Items.Armors
 		}
 		
 		override public function get def():Number { 
-			if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 || game.flags[kFLAGS.HARDCORE_MODE] > 0 || game.flags[kFLAGS.HUNGER_ENABLED] >= 1) {
+			if (game.valeria.valeriaFluidsEnabled()) {
 				if (game.flags[kFLAGS.VALERIA_FLUIDS] < 50) {
 					return 15 + int(game.flags[kFLAGS.VALERIA_FLUIDS] / 5);
 				}

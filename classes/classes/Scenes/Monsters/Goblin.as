@@ -13,8 +13,7 @@
 			if (short == "goblin shaman") multiplier += 0.4;
 			if (short == "goblin warrior") multiplier += 0.5;
 			if (short == "goblin elder") multiplier += 1;
-			if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) multiplier += game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 0.5;
-			else if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) multiplier += 2;
+			multiplier += player.newGamePlusMod() * 0.5;
 			if(short == "Tamani") temp2 = rand(5);
 			if(short == "Tamani's daughters") temp2 = rand(5);
 			var color:String = "";

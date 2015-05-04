@@ -519,7 +519,7 @@ package classes.Scenes.Places
 			}
 			//prisonRestraintChoices(choiceEvents, choiceTexts);
 			menu();
-			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] < 1) addButton(0, "Door", doPrisonRestraintsDoor);
+			if (player.statusAffectv1(StatusAffects.PrisonRestraints) > 0) addButton(0, "Door", doPrisonRestraintsDoor);
 			if (player.statusAffectv2(StatusAffects.PrisonRestraints) > 0) addButton(1, "Body", doPrisonRestraintsBody);
 			if (player.statusAffectv3(StatusAffects.PrisonRestraints) > 0) addButton(2, "Arms", doPrisonRestraintsArms);
 			if (player.statusAffectv4(StatusAffects.PrisonRestraints) > 0) addButton(3, "Mouth", doPrisonRestraintsMouth);
@@ -537,18 +537,7 @@ package classes.Scenes.Places
 			}
 			nextNeeded = true;
 			outputText("You examine the door.\n\n",true);
-			if(debug)
-			{
-				if(player.statusAffectv1(StatusAffects.PrisonRestraints) == 1)
-				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,1,0);
-				}
-				else
-				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,1,1);
-				}
-			}
-			else if(player.will > prisonWillCost(10))
+			if(player.will > prisonWillCost(10))
 			{
 				changeWill(-prisonWillCost(10));
 				nextNeeded = prisonRestraintBreakDoor();
@@ -1129,6 +1118,10 @@ package classes.Scenes.Places
 		// PRISON ACTIONS
 		//------------
 		public function prisonRoom(allowsEvents:Boolean = true):void {
+			//Workaround to force update prison door. The old prison code surely was messy.
+			if (player.statusAffectv1(StatusAffects.PrisonRestraints) > 0) flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 0;
+			else flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 1;
+			//Start!
 			hideUpDown();
 			showStats();
 			clearOutput();
@@ -1137,7 +1130,7 @@ package classes.Scenes.Places
 			prisonRestraintText();
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0) {
 				outputText("\n\nThe room is ",false);
-				var cleanlinessLevel:int = Math.round(player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) / 25);
+				var cleanlinessLevel:int = Math.floor(player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) / 25);
 				switch(cleanlinessLevel)
 				{
 					case 0:
@@ -2389,10 +2382,10 @@ package classes.Scenes.Places
 		{
 			if (flags[kFLAGS.IN_PRISON] == 0) return false; //Make sure events don't proc!
 			var eventOccurred:Boolean = false;
-			//Wild Billie appears!
 			if ((flags[kFLAGS.PRISON_PUNISHMENT] == 0 || flags[kFLAGS.PRISON_PUNISHMENT] == 3) && player.lust >= player.maxLust() && rand(3) == 0)
 			{
-				prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
+				//prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
+				//Wild Dildo Rack appears!
 				if(rand(2) == 1 && !prisonCanMasturbate(false) && flags[kFLAGS.PRISON_DILDO_RACK] == 0)
 				{
 					trace("Dildo rack");
@@ -2417,6 +2410,7 @@ package classes.Scenes.Places
 					flags[kFLAGS.PRISON_DILDO_RACK] = 1;
 					return true;
 				}
+				//Wild Billie appears!
 				if(billieScene.prisonCaptorBillieMet() > 0 && rand(5) < billieScene.prisonCaptorBillieEvent())
 				{
 					trace("Billie");
@@ -2490,7 +2484,7 @@ package classes.Scenes.Places
 				return;
 			}
 			outputText("From the look on " + prisonCaptor.captorPronoun3 + " face you know immediately that ",false);
-			cleanlinessLevel = Math.round(player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) / 25);
+			cleanlinessLevel = Math.floor(player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) / 25);
 			switch(cleanlinessLevel)
 			{
 				case 0:
@@ -2554,7 +2548,8 @@ package classes.Scenes.Places
 				if(player.obey >= 95 && player.statusAffectv1(StatusAffects.PrisonRestraints) > 0)
 				{
 					outputText("\nYour " + prisonCaptor.captorTitle + " enters the room and looks pensive for a moment, then " + prisonCaptor.captorPronoun1 + " declares decisively, \"<i>I don't think we need to bother keeping the door locked anymore. Even if you do somehow work up the nerve to walk out the door, you'll soon find your way back to where you know you belong.</i>\"\n",false);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,1,0);
+					player.changeStatusValue(StatusAffects.PrisonRestraints, 1, 0);
+					flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 1;
 					doNext(playerMenu);
 					return true;
 				}
@@ -3040,7 +3035,7 @@ package classes.Scenes.Places
 			{
 				outputText("\n<b><u>Mental State</u></b>\n",false);
 				outputText("<b>Willpower:</b> " + Math.round(player.will) + " / 100\n",false);
-				//outputText("<b>Hunger:</b> " + Math.round(player.hunger) + "\n",false); //Shows in Body Stats
+				//outputText("<b>Hunger:</b> " + Math.round(player.hunger) + " / 100\n",false); //Shows in Body Stats
 				outputText("<b>Self-Esteem:</b> " + Math.round(player.esteem) + " / 100 (",false);
 				if(player.esteem < 15)
 				{

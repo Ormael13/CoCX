@@ -76,8 +76,7 @@
 		
 		override public function eMaxHP():Number
 		{
-			if (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) return 40 + (game.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
-			else return 120;
+			return 40 + player.newGamePlusMod() * 20;
 		}
 
 		public function WormMass()

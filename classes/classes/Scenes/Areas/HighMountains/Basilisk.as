@@ -30,7 +30,7 @@ package classes.Scenes.Areas.HighMountains
 		private function compulsion():void {
 			outputText("The basilisk opens its mouth and, staring at you, utters words in its strange, dry, sibilant tongue.  The sounds bore into your mind, working and buzzing at the edges of your resolve, suggesting, compelling, then demanding you look into the basilisk's eyes.  ", false);
 			//Success:
-			if (player.inte / 5 + rand(20) < 24) {
+			if (player.inte / 5 + rand(20) < 24 + player.newGamePlusMod() * 5) {
 				//Immune to Basilisk?
 				if (player.findPerk(PerkLib.BasiliskResistance) >= 0) {
 					outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. However, no matter how much you look into the eyes, you do not see anything wrong. All you can see is the basilisk. The basilisk curses as he finds out that you're immune!", false);

@@ -131,8 +131,7 @@ package classes.Scenes.Monsters
 		
 		private function spellMultiplier():Number {
 			var mult:Number = 1;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 4) mult += 0.5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) mult += 2; //Caps at 3x.
+			mult += 0.5 * player.newGamePlusMod();
 			return mult;
 		}
 		

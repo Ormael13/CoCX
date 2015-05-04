@@ -286,7 +286,7 @@ public function valeriaGetFucked():void {
 
 	player.orgasm();
 	dynStats("sen", -1);
-	HPChange(25 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 15),false);
+	HPChange(25 + (player.newGamePlusMod() * 15),false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -317,7 +317,7 @@ public function gooFlation(clearText:Boolean = true):void {
 		outputText("and looms over you.  \"<i>That was fun, partner,</i>\" she says, leaning down to give you a wet peck on the cheek. \"<i>Let's do that again soon, alright?</i>\"");
 		player.orgasm();
 		dynStats("sen", 1);
-		HPChange(25 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 15),false);
+		HPChange(25 + (player.newGamePlusMod() * 15),false);
 		doNext(camp.returnToCampUseOneHour);
 	}
 }
@@ -343,7 +343,7 @@ public function penetrateValeria():void {
 	outputText("\n\nYou run your hand along her curves as she digests her meal, but eventually you know you need to get on with your duties.  You roll Valeria off of you and start to redress.");
 	player.orgasm();
 	dynStats("sen", 1);
-	HPChange(25 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 15), false);
+	HPChange(25 + (player.newGamePlusMod() * 15), false);
 	feedValeria(Math.sqrt(player.cumQ()) + 5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -405,7 +405,7 @@ public function valeriaSexDominated(offCamp:Boolean = false):void {
 		outputText("\n\n\"<i>Oh, that's good... good, " + player.mf("boy","girl") + ", good.  Yes, let it all out, just like that... just like that,</i>\" she moans, soaking your juices up until your orgasm finally passes.  Sated, she withdraws around your foot, leaving you a quivering mess on the ground.");
 		outputText("\n\n\"<i>Mmm, not bad, partner</i>\" Valeria says, patting her full belly.  You can see a bit of your cum swirling around inside her.  \"<i>We'll do this again sometime,</i>\" she adds, walking off to another part of camp with a wink.");
 	}
-	HPChange(25 + (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 15), false);
+	HPChange(25 + (player.newGamePlusMod() * 15), false);
 	feedValeria(Math.sqrt(player.cumQ()) + 5 + (player.averageVaginalWetness() * 5));
 	player.orgasm();
 	dynStats("sen", 1);

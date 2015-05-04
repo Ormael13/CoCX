@@ -5417,6 +5417,7 @@ package classes.Scenes.NPCs
 		public function amilyPopsOutKidsInCamp():void {
 			amilySprite();
 			flags[kFLAGS.AMILY_BIRTH_TOTAL]++;
+			if (prison.inPrison) return;
 			//Uncorrupt
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				outputText("\nThe peace of your camp is suddenly disrupted by a loud squeal of distress. \"<i>" + player.short + "! It's time!</i>\" Amily cries out, then shrieks again - there is no question at all in your mind that she's gone into labor.  You race over to find her squatting naked over her nest, squealing softly with exertion as her swollen abdomen visibly ripples, fluid dripping from her swollen, naked, pink vagina. She is definitely in labor.\n\n", false);

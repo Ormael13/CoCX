@@ -644,7 +644,7 @@ package classes
 			if (!minLustBarCreated) {
 				minLustBarCreated = true;
 				minLustBar.graphics.beginFill(0x660000, 1);
-				minLustBar.graphics.drawRect(mainView.statsView.x, mainView.statsView.y, baseWidth, baseHeight);
+				minLustBar.graphics.drawRect(0, 0, baseWidth, baseHeight);
 				minLustBar.graphics.endFill();
 				minLustBar.height = baseHeight;
 				minLustBar.width = baseWidth;
@@ -652,6 +652,7 @@ package classes
 				minLustBar.y = mainView.lustBar.y;
 				minLustBar.alpha = 0.8;
 				minLustBar.name = "minLustBar";
+				mainView.statsView.addChild(minLustBar);
 			}
 			//Reassign parents.
 			if (!reassigned){
@@ -659,7 +660,6 @@ package classes
 				reassignIndex();
 				reassigned = true;
 			}
-			
 			//Old interface
 			if (flags[kFLAGS.USE_OLD_INTERFACE] > 0) {
 				posOffset = 10;
@@ -733,7 +733,7 @@ package classes
 			mainView.fatigueBar.alpha = universalAlpha;
 			//Minimum lust bar
 			if (minLustBar != null) {
-				minLustBar.x = mainView.lustBar.x + (baseWidth / 2);
+				minLustBar.x = 6;
 				minLustBar.y = mainView.lustBar.y;
 				minLustBar.height = baseHeight;
 				if (player.minLust() > 0) minLustBar.width = ((player.minLust() / player.maxLust() * 100) * (baseWidth / 100));

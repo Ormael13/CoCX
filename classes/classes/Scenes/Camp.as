@@ -890,11 +890,7 @@ private function doCamp():void { //Only called by playerMenu
 	addButton(7, "Camp Actions", campActions);
 	var canFap:Boolean = player.findStatusAffect(StatusAffects.Dysfunction) < 0 && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 	if (player.lust >= 30) {
-		if (canFap) addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
-		else {
-			if (player.isTaur() && (player.hasKeyItem("Fake Mare") >= 0 || player.hasKeyItem("Centaur Pole") >= 0)) addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
-			else addLockedButton(8, player.isTaur() ? "You are unable to masturbate due to your centaur lower body." : "You are under the effect of a dysfunction, preventing you from masturbating.");
-		}
+		addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
 		if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
 	}
 	addButton(9, "Wait", doWait);
@@ -1673,6 +1669,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			outputText("You curl up on a slab, planning to sleep for " + num2Text(timeQ) + " hour");
 			if (timeQ > 1) outputText("s");
 			outputText(". ");
+			sleepRecovery(true);
 			goNext(timeQ, true);
 			return;
 		}
