@@ -49,7 +49,7 @@ package classes.Scenes.Places.Prison
 			if(prison.prisonCanEscapeFight(false))
 			{
 				outputText("It occurs to you that if you were to resist you just might get the better of your guard and make good an escape. ",false);
-				if(rand(100) < player.obey - player.esteem * 0.25)
+				if(rand(100) < player.obey - (player.level + player.esteem * 0.25))
 				{
 					if(player.obey < 45)
 					{

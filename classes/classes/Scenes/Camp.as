@@ -891,6 +891,10 @@ private function doCamp():void { //Only called by playerMenu
 	var canFap:Boolean = player.findStatusAffect(StatusAffects.Dysfunction) < 0 && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 	if (player.lust >= 30) {
 		if (canFap) addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
+		else {
+			if (player.isTaur() && (player.hasKeyItem("Fake Mare") >= 0 || player.hasKeyItem("Centaur Pole") >= 0)) addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
+			else addLockedButton(8, player.isTaur() ? "You are unable to masturbate due to your centaur lower body." : "You are under the effect of a dysfunction, preventing you from masturbating.");
+		}
 		if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
 	}
 	addButton(9, "Wait", doWait);
@@ -1967,12 +1971,13 @@ public function placesCount():int {
 	if (player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) places++;
 	if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) places++;
 	if (flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) places++;
-	if (player.findStatusAffect(StatusAffects.MetWhitney) > 0 || flags[kFLAGS.FARM_CORRUPTION_STARTED]) places++; 
-	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) places++;
+	if (farmFound()) places++; 
+	if (flags[kFLAGS.OWCA_UNLOCKED] > 0) places++;
 	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) places++;
 	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) places++;
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) places++;
 	if (flags[kFLAGS.MET_MINERVA] >= 4) places++;
+	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) places++;
 	return places;
 }
 
@@ -2004,7 +2009,7 @@ public function places():Boolean {
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(10, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin);
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(11, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva);
 	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", kGAMECLASS.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
-	if (debug) addButton(12, "Ingnam", kGAMECLASS.ingnam.returnToIngnam, null, null, null, "Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
+	if (debug) addButton(13, "Ingnam", kGAMECLASS.ingnam.returnToIngnam, null, null, null, "Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 	
 	//addButton(13, "Next", placesPage2);
 	addButton(14, "Back", playerMenu);
@@ -2105,8 +2110,9 @@ public function wakeFromBadEnd():void {
 	if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.05) * penaltyMultiplier);
 	if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.05) * penaltyMultiplier);
 	if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.05) * penaltyMultiplier);
-	if (player.inte > 20) dynStats("int", Math.ceil(-player.inte * 0.05) * penaltyMultiplier);
-	doNext(playerMenu);
+	if (player.inte > 20) dynStats("int", Math.ceil( -player.inte * 0.05) * penaltyMultiplier);
+	menu();
+	addButton(0, "Next", playerMenu);
 }
 
 //Camp wall
@@ -2357,7 +2363,8 @@ public function getCampPopulation():int {
 	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 || flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) pop += flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS];
 	if (marbleFollower() && flags[kFLAGS.MARBLE_KIDS] > 0) pop += flags[kFLAGS.MARBLE_KIDS];
 	if (flags[kFLAGS.ANT_WAIFU] > 0 && (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)) pop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
-	if (flags[kFLAGS.EMBER_CHILDREN_FEMALES] > 0 || flags[kFLAGS.EMBER_CHILDREN_MALES] > 0 || flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0) pop+= flags[kFLAGS.EMBER_CHILDREN_FEMALES] + flags[kFLAGS.EMBER_CHILDREN_MALES] + flags[kFLAGS.EMBER_CHILDREN_HERMS]
+	if (kGAMECLASS.emberScene.emberChildren() > 0) pop += kGAMECLASS.emberScene.emberChildren();
+	if (kGAMECLASS.kihaFollower.totalKihaChildren() > 0) pop += kGAMECLASS.kihaFollower.totalKihaChildren();
 	//Return number!
 	return pop;
 }

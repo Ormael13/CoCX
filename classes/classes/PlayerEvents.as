@@ -271,6 +271,7 @@ package classes {
 				}
 				if (player.statusAffectv1(StatusAffects.Luststick) <= 0) {
 					player.removeStatusAffect(StatusAffects.Luststick);
+					dynStats("lib=", flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL]);
 					outputText("\n<b>The lust-increasing effects of harpy lipstick have worn off!\n</b>");
 					needNext = true;
 				}
@@ -528,7 +529,7 @@ package classes {
 					outputText("</b>\n");
 					needNext = true;
 				}
-				if (player.cocks[0].cockLength < 10) { //(Dick rebiggening)
+				if (player.cocks[0].cockLength < 8) { //(Dick rebiggening)
 					outputText("\n<b>As time passes, your cock engorges, flooding with blood and growing until it's at 8 inches long.  ");
 					if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("Goddamn, that thing is almost as tough as you!  ");
 					outputText("You really have no control over your dick.</b>\n");

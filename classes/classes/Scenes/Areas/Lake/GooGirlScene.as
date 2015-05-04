@@ -129,11 +129,7 @@ package classes.Scenes.Areas.Lake
 //===============
 		public function getBeatByGooGirl():void
 		{
-			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
-				doSFWloss();
-				cleanupAfterCombat();
-				return;
-			}
+			if (doSFWloss()) return; //No rape in SFW mode.
 			flags[kFLAGS.GOOGIRL_CONSECUTIVE_LOSSES]++;
 			if (flags[kFLAGS.GOOGIRL_CONSECUTIVE_LOSSES] >= 5 && player.gooScore() >= 4) gooGirlBadEnd();
 			else if (player.gender == 0) genderlessLoseToGooGal();

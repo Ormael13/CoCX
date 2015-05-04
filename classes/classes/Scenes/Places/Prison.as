@@ -98,6 +98,10 @@ package classes.Scenes.Places
 				}
 				prisonCaptorWaitEvents();
 			}
+			if (trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
+				//Decrement quest timer
+				if (player.statusAffectv2(StatusAffects.PrisonCaptorEllyQuest) > 0) player.addStatusValue(StatusAffects.PrisonCaptorEllyQuest, 2, -1);
+			}
 			prisonCombatAutoLose = false;
 			//Tick
 			return needNext;
@@ -1038,7 +1042,8 @@ package classes.Scenes.Places
 			}
 			if((trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && !trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp())
 			{
-				outputText("(Placeholder) Mistress Elly enters the room and chastises you for not being out working on her quest.\n\n");
+				outputText("\n\n(Placeholder) Mistress Elly enters the room and chastises you for not being out working on her quest.\n\n");
+				inventory.takeItem(consumables.C_BREAD, camp.returnToCampUseOneHour);
 				return true;
 			}
 			if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) > 0)
@@ -1720,7 +1725,7 @@ package classes.Scenes.Places
 			changeEsteem(1,inPrison);
 			changeObey(-3,inPrison);
 			prisonEscapeSuccessText();
-			doNext(prisonEscapeFinalePart1);
+			doYesNo(prisonEscapeFinalePart1, playerMenu);
 		}
 		
 		public function doPrisonEscapeSeduce():void
@@ -1999,6 +2004,7 @@ package classes.Scenes.Places
 		
 		public function prisonEscapeFinalePart1():void
 		{
+			clearOutput();
 			player.removeStatusAffect(StatusAffects.PrisonRestraints);
 			flags[kFLAGS.PRISON_STUDY_BREATHING_UNLOCKED] = 0;
 			flags[kFLAGS.PRISON_STUDY_MANNERS_UNLOCKED] = 0;

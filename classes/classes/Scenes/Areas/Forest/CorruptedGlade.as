@@ -19,6 +19,7 @@ package classes.Scenes.Areas.Forest {
 					dynStats("lus", 2);
 				}
 				doNext(camp.returnToCampUseOneHour);
+				//addButton(1, "Destroy It", destroyTheCorruptedGlades);
 			}
 			else if (player.cor <= 66) { //intrigued reaction
 				outputText("  You explore the glade with equal parts caution and curiosity.  ");

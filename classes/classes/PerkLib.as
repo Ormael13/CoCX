@@ -394,13 +394,10 @@ package classes
 		public static const FerasBoonBreedingBitch:PerkType = mk("Fera's Boon - Breeding Bitch", "Fera's Boon - Breeding Bitch",
 				"Increases fertility and reduces the time it takes to birth young.");
 		public static const FerasBoonMilkingTwat:PerkType = mk("Fera's Boon - Milking Twat", "Fera's Boon - Milking Twat",
-				"Keeps your pussy from ever getting too loose and increases pregnancy speed.",
 				"Keeps your pussy from ever getting too loose and increases pregnancy speed.");
 		public static const FerasBoonSeeder:PerkType = mk("Fera's Boon - Seeder", "Fera's Boon - Seeder",
-				"Increases cum output by 1,000 mLs.",
 				"Increases cum output by 1,000 mLs.");
 		public static const FerasBoonWideOpen:PerkType = mk("Fera's Boon - Wide Open", "Fera's Boon - Wide Open",
-				"Keeps your pussy permanently gaped and increases pregnancy speed.",
 				"Keeps your pussy permanently gaped and increases pregnancy speed.");
 		public static const FireLord:PerkType = mk("Fire Lord", "Fire Lord",
 				"Akbal's blessings grant the ability to breathe burning green flames.");
@@ -409,10 +406,8 @@ package classes
 		public static const LuststickAdapted:PerkType = mk("Luststick Adapted", "Luststick Adapted",
 				"Grants immunity to the lust-increasing effects of lust-stick and allows its use.");
 		public static const MagicalFertility:PerkType = mk("Magical Fertility", "Magical Fertility",
-				"10% higher chance of pregnancy and increased pregnancy speed.",
 				"10% higher chance of pregnancy and increased pregnancy speed.");
 		public static const MagicalVirility:PerkType = mk("Magical Virility", "Magical Virility",
-				"200 mLs more cum per orgasm and enhanced virility.",
 				"200 mLs more cum per orgasm and enhanced virility.");
 		public static const MaraesGiftButtslut:PerkType = mk("Marae's Gift - Buttslut", "Marae's Gift - Buttslut",
 				"Makes your anus provide lubrication when aroused.");

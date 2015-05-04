@@ -290,7 +290,7 @@ package classes.Scenes.Places.Prison
 					outputText("assume a friendly posture and communicate your refusal by shaking your head. ",false);
 				}
 				outputText("\n\nBefore you can even begin to react, you see his face turn to a mask of rage as he hammers you over the head with the bucket he was so recently using to clean up your filth. You momentarily black out, and when you come to you realize that he has bound your hands behind your back and used them to hang you by a chain to an eyelet in the ceiling. Your body is suspended in a fashion such that your back is arched suggestively, your head is hanging at knee height, and your feet are only touching the ground with the tips of your toes. [if (isBiped = true) \"What's more, he has used his mop as a makeshift spreader bar to hold your ankles as far apart as they will go leaving your [vagOrAss] completely exposed between the parted cheeks of your [ass]\"][if (isBiped = false) \"With your [legs] hanging as they are your [vagOrAss] is completely exposed between the cheeks of your [ass]\"].",false);
-				outputText("\n\n(Placeholder) Scruffy then fucks your [vagOrAss], makes you lick up the cum pool to 'feed' you, leaves you hogtied with a stern warning to improve your behavior.\n\n",false);
+				outputText("\n\n(Placeholder) Scruffy then fucks your [vagOrAss], makes you lick up the cum pool to 'feed' you, leaves you hogtied with a stern warning to improve your behavior.",false);
 				if(player.hasVagina())
 				{
 					player.cuntChange(20, true, true, false);
@@ -427,6 +427,7 @@ package classes.Scenes.Places.Prison
 		public function fightScruffy():void {
 			clearOutput();
 			outputText("How dare he keeps coming. If you refuse even in the slightest manner, he would flip out and punish you. Time to teach him a lesson.");
+			prison.prisonCombatWinEvent = null;
 			startCombat(new Scruffy());
 		}
 		

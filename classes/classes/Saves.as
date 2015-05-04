@@ -1314,6 +1314,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	var game:CoC = getGame();
 	game.dungeonLoc = 0;
 	//Not needed, dungeonLoc = 0 does this:	game.inDungeon = false;
+	game.inDungeon = false; //Needed AGAIN because fuck includes folder. If it ain't broke, don't fix it!
 	game.inRoomedDungeon = false;
 	game.inRoomedDungeonResume = null;
 

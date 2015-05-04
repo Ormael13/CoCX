@@ -174,6 +174,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			clearOutput();
 			outputText("You tell him that you're here to fight. \"<i>All right! Get ready,</i>\" he says with a grin and claws raised.");
 			startCombat(new Behemoth());
+			monster.createStatusAffect(StatusAffects.Spar,0,0,0,0);
 		}
 		
 		public function winAgainstBehemoth():void {

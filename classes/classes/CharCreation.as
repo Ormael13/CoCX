@@ -14,7 +14,7 @@
 	
 		public var unlockedHerm:Boolean = false;
 		
-		public const MAX_TOLERANCE_LEVEL:int = 10;
+		public const MAX_TOLERANCE_LEVEL:int = 20;
 		public const MAX_MORALSHIFTER_LEVEL:int = 10;
 		public const MAX_DESIRES_LEVEL:int = 10;
 		public const MAX_ENDURANCE_LEVEL:int = 10;
@@ -314,7 +314,7 @@
 			//Clear perks
 			var ascendPerkTemp:Array = [];
 			for (i = 0; i < player.perks.length; i++) {
-				if (isAscensionPerk(player.perks[i].ptype)) ascendPerkTemp.push(player.perks[i]);
+				if (isAscensionPerk(player.perks[i])) ascendPerkTemp.push(player.perks[i]);
 			}
 			player.removePerks();
 			if (ascendPerkTemp.length > 0) {
@@ -333,7 +333,7 @@
 					player.createKeyItem(keyItemTemp[i].keyName, keyItemTemp[i].value1, keyItemTemp[i].value2, keyItemTemp[i].value3, keyItemTemp[i].value4);
 				}
 			}
-			player.perkPoints = player.level - 1;
+			//player.perkPoints = player.level - 1;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
 				var newGamePlusLevel:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				var gameMode:Number = flags[kFLAGS.HUNGER_ENABLED];
@@ -1200,7 +1200,7 @@
 					outputText("You spent a lot of time at the village temple, and learned how to meditate.  The 'masturbation' option is replaced with 'meditate' when corruption is at or below 66.  Is this your history?");
 					break;
 				case PerkLib.HistoryScholar:
-					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. Savin, to let you read some of his books.  You are much better at focusing, and spellcasting uses 20% less fatigue.  Is this your history?");
+					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. " + silly() ? "Savin" : "Sellet" + ", to let you read some of his books.  You are much better at focusing, and spellcasting uses 20% less fatigue.  Is this your history?");
 					break;
 				case PerkLib.HistorySlacker:
 					outputText("You spent a lot of time slacking, avoiding work, and otherwise making a nuisance of yourself.  Your efforts at slacking have made you quite adept at resting, and your fatigue comes back 20% faster.  Is this your history?");
@@ -2961,6 +2961,7 @@
 			outputText("\n\n(When you're done, select Reincarnate.)");
 			menu();
 			addButton(0, "Perk Selection", ascensionPerkMenu);
+			addButton(1, "Respec", respecLevelPerks, null, null, null, "Respec all level-up perks for 5 Ascension Perk Points?");
 			addButton(4, "Reincarnate", reincarnatePrompt);
 		}
 		private function ascensionPerkMenu():void {
@@ -2979,7 +2980,7 @@
 			addButton(8, "Wisdom", ascensionPerkSelection, PerkLib.AscensionWisdom, MAX_WISDOM_LEVEL, null, PerkLib.AscensionWisdom.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionWisdom) + " / " + MAX_WISDOM_LEVEL);
 			addButton(14, "Back", ascensionMenu);
 		}
-
+		
 		private function ascensionPerkSelection(perk:* = null, maxLevel:int = 10):void {
 			clearOutput();
 			outputText("Perk Effect: " + perk.longDesc);
@@ -3002,7 +3003,30 @@
 			else player.createPerk(perk, 1, 0, 0, 0);
 			ascensionPerkSelection(perk, maxLevel);
 		}
-
+		
+		private function respecLevelPerks():void {
+			clearOutput();
+			if (player.ascensionPerkPoints < 5) {
+				outputText("You need at least 5 Ascension Perk Points to respec level-up perks. You have " + player.ascensionPerkPoints + ".");
+				doNext(ascensionMenu);
+				return;
+			}
+			player.ascensionPerkPoints -= 5;
+			player.perkPoints = player.level - 1;
+			var ascendPerkTemp:Array = [];
+			for (var i:int = 0; i < player.perks.length; i++) {
+				if (isAscensionPerk(player.perks[i])) ascendPerkTemp.push(player.perks[i]);
+			}
+			player.removePerks();
+			if (ascendPerkTemp.length > 0) {
+				for (i = 0; i < ascendPerkTemp.length; i++) {
+					player.createPerk(ascendPerkTemp[i].ptype, ascendPerkTemp[i].value1, ascendPerkTemp[i].value2, ascendPerkTemp[i].value3, ascendPerkTemp[i].value4);
+				}
+			}
+			outputText("Your level-up perks are now reset and you are refunded the perk points.");
+			doNext(ascensionMenu);
+		}
+		
 		private function reincarnatePrompt():void {
 			clearOutput();
 			outputText("Would you like to reincarnate and start a new life as a Champion?");
@@ -3041,8 +3065,8 @@
 			doNext(genericStyleCustomizeMenu);
 		}
 
-		private function isAscensionPerk(perk:* = null):Boolean {
-			return (perk == PerkLib.AscensionDesires || perk == PerkLib.AscensionEndurance || perk == PerkLib.AscensionFertility || perk == PerkLib.AscensionFortune || perk == PerkLib.AscensionMoralShifter || perk == PerkLib.AscensionMysticality || perk == PerkLib.AscensionTolerance || perk == PerkLib.AscensionVirility || perk == PerkLib.AscensionWisdom)
+		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean {
+			return (perk.ptype == PerkLib.AscensionDesires || perk.ptype == PerkLib.AscensionEndurance || perk.ptype == PerkLib.AscensionFertility || perk.ptype == PerkLib.AscensionFortune || perk.ptype == PerkLib.AscensionMoralShifter || perk.ptype == PerkLib.AscensionMysticality || perk.ptype == PerkLib.AscensionTolerance || perk.ptype == PerkLib.AscensionVirility || perk.ptype == PerkLib.AscensionWisdom || (perk.perkLongDesc != perk.perkDesc && !respec))
 		}
 
 		private function isSpecialKeyItem(keyName:* = null):Boolean {

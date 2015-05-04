@@ -14,8 +14,9 @@ package classes.Items.Weapons
 		}
 		
 		override public function get attack():Number { 
-			if (game.player.cor < 70) return 10;
-			else return 10 + Math.floor((game.player.cor - 70) / 3); 
+			var temp:int = 10 + int((game.player.cor - 70) / 3)
+			if (temp < 10) temp = 10;
+			return temp; 
 		}
 		
 		override public function canUse():Boolean {

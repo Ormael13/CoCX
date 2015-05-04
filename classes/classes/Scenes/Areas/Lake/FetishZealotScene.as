@@ -79,11 +79,7 @@ package classes.Scenes.Areas.Lake
 //Raping the player
 		public function zealotLossRape():void
 		{
-			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
-				doSFWloss();
-				cleanupAfterCombat();
-				return;
-			}
+			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			var broseph:String = player.mf("dude", "chick");
 			//Pre Rape Scene - lose by hp

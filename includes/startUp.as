@@ -429,7 +429,7 @@ public function difficultySelectionMenu():void {
 	outputText("\n<b>Hard:</b> +25% HP, +15% damage.");
 	outputText("\n<b>Nightmare:</b> +50% HP, +30% damage.");
 	outputText("\n<b>Extreme:</b> +100% HP, +50% damage.");
-	//outputText("\n<b>Up to Eleven:</b> +150% HP, +70% damage. This is the most cruel difficulty of all.");
+	//outputText("\n<b>Up to Eleven:</b> +150% HP, +75% damage. This is the most cruel difficulty of all.");
 	menu();
 	addButton(0, "Easy", chooseDifficulty, -1);
 	addButton(1, "Normal", chooseDifficulty, 0);

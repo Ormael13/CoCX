@@ -11,11 +11,11 @@ package classes.Scenes {
 		
 		public function masturbateMenu():void {
 			menu();
-			if (flags[kFLAGS.SFW_MODE] >= 1) {
+			if (flags[kFLAGS.SFW_MODE] > 0) {
 				meditate();
 				return;
 			}
-			if (flags[kFLAGS.FORCE_MEDITATE] >= 1) {
+			if (flags[kFLAGS.FORCE_MEDITATE] > 0) {
 				flags[kFLAGS.FORCE_MEDITATE] = 0;
 				meditate();
 				return;

@@ -1282,7 +1282,13 @@
 			}
 			if (!inDungeon) {
 				if (game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
-					if (short == "goblin" || short == "goblin assassin" || short == "imp" || short == "imp lord" || short == "imp warlord" || short == "satyr" || short == "gnoll" || short == "gnoll spear-thrower" || short == "minotaur" || short == "minotaur lord" || short == "female spider-morph" || short == "male spider-morph" || short == "corrupted drider" || short == "yeti" || (short == "kitsune" && hairColor == "red")) {
+					if (short == "goblin" || short == "goblin assassin" || short == "goblin warrior" || short == "goblin shaman" || short == "imp" || short == "imp lord" || short == "imp warlord" || short == "imp overlord" || //Generic encounter
+						short == "tentacle beast" || (short == "kitsune" && hairColor == "red") || short == "Akbal" || short == "Tamani" || //Forest, deepwoods
+						short == "goo-girl" || short == "green slime" || short == "fetish cultist" || short == "fetish zealot" || //Lake
+						short == "sandtrap" || short == "sand tarp" || short == "naga" || short == "demons" || short == "Cum Witch" || //Desert
+						short == "hellhound" || short == "infested hellhound" || short == "minotaur" || short == "minotaur lord" || short == "minotaur gang" || short == "minotaur tribe" || short == "basilisk" || short == "phoenix" || //Mountain, high mountains
+						short == "satyr" || short == "gnoll" || short == "gnoll spear-thrower" || short == "female spider-morph" || short == "male spider-morph" || short == "corrupted drider" || //Plains, swamp, bog
+						short == "yeti" || short == "behemoth") { //Glacial rift, volcanic crag
 						game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
 					}
 				}

@@ -29,13 +29,9 @@
 					needNext = true;
 				}
 			}
-			if (flags[kFLAGS.KIHA_EGG_COUNTER] > 1) {
+			if (flags[kFLAGS.KIHA_EGG_COUNTER] > 0) {
 				flags[kFLAGS.KIHA_EGG_COUNTER]--;
 			}
-			//else if (flags[kFLAGS.KIHA_EGG_COUNTER] == 1) {
-			//	kihaEggHatchingTime();
-			//	needNext = true;
-			//}
 			if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] > 1) {
 				if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] != 144) flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
 				if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 240 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
@@ -120,7 +116,8 @@ private function canKihaGetPregnant():Boolean {
 
 private function kihaKnockUpAttempt():void {
 	//Call off the pregnancy!
-	if (!camp.followerKiha() || pregnancy.isPregnant || flags[kFLAGS.KIHA_EGG_COUNTER] > 0 || !canKihaGetPregnant()) {
+	if (!camp.followerKiha() || pregnancy.isPregnant || !canKihaGetPregnant()) {
+		outputText("\n\n<b>DEBUG: Knockup attempt cancelled.</b>");
 		trace("Cancelled");
 		return;
 	}
@@ -130,10 +127,11 @@ private function kihaKnockUpAttempt():void {
 	if (chance > 50) chance = 50;
 	if (player.inRut) chance += 25;
 	chance += player.virilityQ() * 100;
-	chance -= totalKihaChildren();
+	chance -= totalKihaChildren() / 5;
 	if (chance < 10) chance = 10;
 	//Roll
 	if (rand(100) <= chance) {
+		if (debug) outputText("\n\n<b>DEBUG: Kiha is impregnated.</b>");
 		trace("Kiha got PREGNANT!");
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_KIHA);
 	}

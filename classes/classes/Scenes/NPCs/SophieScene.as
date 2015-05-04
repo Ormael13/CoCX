@@ -904,7 +904,7 @@ public function luststickApplication(hours:Number = 4):void {
 	}
 	//Apply a little of doctor L (thats Dr Lipstick you tard!)
 	else {
-		flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL] = player.lib 
+		flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL] = player.lib;
 		player.createStatusAffect(StatusAffects.Luststick, hours, 0, 0, 0);
 	}
 }

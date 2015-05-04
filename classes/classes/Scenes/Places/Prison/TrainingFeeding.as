@@ -37,7 +37,7 @@ package classes.Scenes.Places.Prison
 					outputText("and if coming on command will keep her happy, it would probably be smart to do so.");
 				}
 				
-				outputText(" So resolved, your hand [if (esteem < 40) \"meekly\"][if (esteem >= 40) \"slowly\"] ");
+				outputText(" So resolved, your hand [if (esteem < 40) meekly][if (esteem >= 40) slowly] ");
 				if(player.hasCock())
 				{
 					outputText("wraps itself around your rock hard cock and gives a tentative squeeze up and over your [cockHead biggest]");
@@ -97,9 +97,9 @@ package classes.Scenes.Places.Prison
 				}
 				
 				outputText(", and you are intensely aware of her cock dribbling salty lubricant over the base of your tongue. Completely at a loss as to how to recover yourself, you turn your misty eyes upward searching for direction.\n\n");
-				outputText("\"<i>You've completely missed the point of this lesson, [if (esteem < 40) \"dear\"][if (esteem >= 40) \"slave\"].</i>\" Although her voice still unwaveringly authoritative, there is compassion in her eyes as she captures your gaze, and it filters into her words as she continues to speak. \"<i>I have no desire to watch you bludgeon yourself for me. Your body is dying to reward you for letting it revel in its true nature, and it's plain to see that this scares you.</i>\" She pulls her cock from your mouth, upsetting your precarious balance, but she quickly kneels down and catches you. Her firm grasp on your shoulders first steadies you, then begins to massage away your tension. \"<i>But it's time for you to confront that fear. It's time to move past it. I see how ready you are. I feel it.</i>\" She leans forward, almost embracing you as her hands work their way down your spine, melting the stress from your muscles in their wake, and you can feel her warm breath on your cheek as her now soft whispers drift into your ears.\n\n");
-				outputText("\"<i>You know I'm right.</i>\" [if (esteem < 40) \"Is she?\"][if (esteem >= 40) \"She can't be...\"]\n\n");
-				outputText("\"<i>You know you're ready.</i>\" [if (esteem < 40) \"Maybe you are...\"][if (esteem >= 40) \"She's wrong. You're not... are you?\"]\n\n");
+				outputText("\"<i>You've completely missed the point of this lesson, [if (esteem < 40) dear][if (esteem >= 40) slave].</i>\" Although her voice still unwaveringly authoritative, there is compassion in her eyes as she captures your gaze, and it filters into her words as she continues to speak. \"<i>I have no desire to watch you bludgeon yourself for me. Your body is dying to reward you for letting it revel in its true nature, and it's plain to see that this scares you.</i>\" She pulls her cock from your mouth, upsetting your precarious balance, but she quickly kneels down and catches you. Her firm grasp on your shoulders first steadies you, then begins to massage away your tension. \"<i>But it's time for you to confront that fear. It's time to move past it. I see how ready you are. I feel it.</i>\" She leans forward, almost embracing you as her hands work their way down your spine, melting the stress from your muscles in their wake, and you can feel her warm breath on your cheek as her now soft whispers drift into your ears.\n\n");
+				outputText("\"<i>You know I'm right.</i>\" [if (esteem < 40) Is she?][if (esteem >= 40) She can't be...]\n\n");
+				outputText("\"<i>You know you're ready.</i>\" [if (esteem < 40) Maybe you are...][if (esteem >= 40) She's wrong. You're not... are you?]\n\n");
 				outputText("\"<i>The question is, are you ready to show me?</i>\"\n\n");
 				outputText("\n\n");
 				prison.prisonCaptor.prisonCaptorScratchSet(1,0);
@@ -155,7 +155,7 @@ package classes.Scenes.Places.Prison
 					outputText("\n\n");
 					outputText("\"<i>Oh, you poor dear. I know you'll find the courage to show me how you feel very soon, but for today, don't worry -- I'll help you.</i>\"");
 				}
-				outputText(" Her words are delivered with tender sincerity, and she puts enough space between you that you are once again staring at her kindly, encouraging expression as she speaks. Her hands continue to work their magic, though, sewing unexpected relaxation throughout your previously tense body. Before long they find their way back up to your neck, then cup your cheeks affectionately, thumbs working her cum into your skin as though it was a fine lotion. You are simultaneously scandalized and titillated, which does not go unnoticed, her solicitous smile filling with gleeful exuberance. \"<i>See? You're getting there, [if (esteem < 40) \"dear\"][if (esteem >= 40) \"slave\"], but I think this will be easier for you with a bit less distraction.</i>\"\n\n");
+				outputText(" Her words are delivered with tender sincerity, and she puts enough space between you that you are once again staring at her kindly, encouraging expression as she speaks. Her hands continue to work their magic, though, sewing unexpected relaxation throughout your previously tense body. Before long they find their way back up to your neck, then cup your cheeks affectionately, thumbs working her cum into your skin as though it was a fine lotion. You are simultaneously scandalized and titillated, which does not go unnoticed, her solicitous smile filling with gleeful exuberance. \"<i>See? You're getting there, [if (esteem < 40) dear][if (esteem >= 40) slave], but I think this will be easier for you with a bit less distraction.</i>\"\n\n");
 				outputText("Her hands fall from your cheeks and then reappear holding a broad, thick strip of black velvet before your eyes. An instant later the cloth is fastened about your head, and your already loopy senses are plunged into soft, disorienting darkness. Her fingers give you one last alluring caress as they depart, and she melts away into a disembodied voice.\n\n");
 				outputText("\"<i>Now, slave, take a moment to breathe deeply and listen to your body.</i>\" Almost without thought you do as she says, inhaling and exhaling, drifting loosely through the blackness, willing the slow rhythm of your lungs to calm the sound of your racing heart pounding in your ears. \"<i>Very good. Now stand up and begin again.</i>\" Simple as the directive is, it seems an incongruous and onerous order to give just as you are growing relaxed and comfortable in your lust. Still, you can think of no reasonable objection to raise, so you clumsily feel your way to your knees, then carefully find your feet. Your calves tingle as the blood rushes in, making you wobble about, your arms waving haphazardly in the cool air around you in an attempt to maintain your balance. Even more disoriented than before, you abruptly feel incredibly exposed as a light breeze through the window raises goosebumps across your torso, and you realize that you've completely lost track of Mistress Elly.\n\n");
 				outputText("You feel the sensation of a warm breath ");
@@ -221,7 +221,7 @@ package classes.Scenes.Places.Prison
 				outputText("\"<i>Slower, slave.</i>\"\n\n");
 				outputText("\"<i>Haahhhnn... Haahhhnn...</i>\" Her hands cross each other, pulling you backwards into her embrace. Her arms wrap around you, your shoulders collapse into her bosom, and your back presses against the firm but silken skin of her stomach. At some point while you are lost in your exquisite haze she must have removed her corset and sleeves, because every inch of your body seems to be enveloped in her tender yet commanding warmth.\n\n");
 				outputText("\"<i>Deeper, slave.</i>\"\n\n");
-				outputText("\"<i>Haauuhh! Huu... haauuhh!</i>\" [if (biggestTitSize > 1) \"She kneads at your [fullChest] with domineering purpose\" else \"She traces her fingers enticingly across your chest\"] then gives your [nipples] a savage pinch, twisting and pulling[if (milkQuantity > 10) \" until they begin to leak\"]. The resulting onslaught of pleasure and pain makes you squirm against her, crushing your ass cheeks around the pillar of manhood that rests between you.\n\n");
+				outputText("\"<i>Haauuhh! Huu... haauuhh!</i>\" [if (biggestTitSize > 1) She kneads at your [fullChest] with domineering purpose\" else \"She traces her fingers enticingly across your chest] then gives your [nipples] a savage pinch, twisting and pulling[if (milkQuantity > 10)  until they begin to leak]. The resulting onslaught of pleasure and pain makes you squirm against her, crushing your ass cheeks around the pillar of manhood that rests between you.\n\n");
 				outputText("\"<i>Good [boy]. Keep going.</i>\"  One of her hands stays at your nipples to orchestrate the gyration of your body against her own, but the other lithely descends to caress and guide your fingers ");
 				if(player.hasCock())
 				{
@@ -305,17 +305,17 @@ package classes.Scenes.Places.Prison
 				switch(sceneVariation)
 				{
 					case 0:
-						outputText(" Your resolution is promptly rewarded with a sharp tug at your [nipple],[if (milkQuantity > 50) \" making you squirt prodigiously and\"] chasing the last semblance of modesty from your breathy moans.\n\n");
+						outputText(" Your resolution is promptly rewarded with a sharp tug at your [nipple],[if (milkQuantity > 50)  making you squirt prodigiously and] chasing the last semblance of modesty from your breathy moans.\n\n");
 						outputText("\"<i>Aaaaahhh...  Aaaahhaahaa!</i>\" you hear yourself scream in the artificial darkness, and feel your hips writhe with delight, grinding wantonly against her hardness. Her embrace constricts around you, and she exhales a satisfied growl in your ear.\n\n");
-						outputText("\"<i>Very well, slave. Up on your toes, then.</i>\" Despite your body being near to revolt, somehow you comply. Calves trembling, you fight through crippling waves of pleasure to rise up, drawing you far enough away from her pelvis that her cock begins to slide down your ass crack. It leaves a tantalizing trail of warm, sticky lubricant in its wake, and triggers a[if (corruption < 20) \" disturbing\"][if (corruption >= 20) \" surprising\"] anticipatory shiver as it slips past your [asshole] and drops between your legs. \"<i>And back down again.</i>\" You give a whimpering sigh of relief and drop back against her, now resting astride her monstrous shaft.\n\n");
+						outputText("\"<i>Very well, slave. Up on your toes, then.</i>\" Despite your body being near to revolt, somehow you comply. Calves trembling, you fight through crippling waves of pleasure to rise up, drawing you far enough away from her pelvis that her cock begins to slide down your ass crack. It leaves a tantalizing trail of warm, sticky lubricant in its wake, and triggers a[if (corruption < 20)  disturbing][if (corruption >= 20)  surprising] anticipatory shiver as it slips past your [asshole] and drops between your legs. \"<i>And back down again.</i>\" You give a whimpering sigh of relief and drop back against her, now resting astride her monstrous shaft.\n\n");
 						outputText("You are not allowed even the slightest moment of respite, though, as she promptly returns to conducting your chorus of moans and quivering dance of self gratification. Every twist and shake of your body wedges her rod more firmly between your thighs, and soon ");
 						if(player.hasVagina())
 						{
-							outputText("you feel the lips of your pussy spread around the barrel of her fleshy pole, and the need within you instantly amplifies tenfold. Your hips begin to buck and gyrate uncontrollably, smearing your juices along her length in a primal attempt to entice the bestial thing to skewer you. Mistress Elly's only reply is to continue [if (milkQuantity > 50) \"milking\" else \"manhandling\"] your [chest] with renewed authority, chuckling mischievously and nibbling at your earlobe as your lust intensifies.");
+							outputText("you feel the lips of your pussy spread around the barrel of her fleshy pole, and the need within you instantly amplifies tenfold. Your hips begin to buck and gyrate uncontrollably, smearing your juices along her length in a primal attempt to entice the bestial thing to skewer you. Mistress Elly's only reply is to continue [if (milkQuantity > 50) milking\" else \"manhandling] your [chest] with renewed authority, chuckling mischievously and nibbling at your earlobe as your lust intensifies.");
 						}
 						else
 						{
-							outputText("the fleshy, lubricated pole is flush with your taint. \"<i>Squeeze, slave,</i>\" she whispers seductively in your ear, and without thought you obey, making every gyration of your hips an even more pleasurable expression of submission to your Mistress. \"<i>Good [boy],</i>\" she coos, reinforcing your behavior by [if (milkQuantity > 50) \"milking\" else \"manhandling\"] your [chest] with renewed intensity.");
+							outputText("the fleshy, lubricated pole is flush with your taint. \"<i>Squeeze, slave,</i>\" she whispers seductively in your ear, and without thought you obey, making every gyration of your hips an even more pleasurable expression of submission to your Mistress. \"<i>Good [boy],</i>\" she coos, reinforcing your behavior by [if (milkQuantity > 50) milking\" else \"manhandling] your [chest] with renewed intensity.");
 						}
 						outputText(" Meanwhile, her other hand guides yours ");
 						if(player.hasCock())
@@ -345,7 +345,7 @@ package classes.Scenes.Places.Prison
 						}
 						break;
 					default:
-						outputText(" Your resolution is once again rewarded with a renewed assault on your brutalized [nipples],[if (milkQuantity > 50) \" summoning more of your milky excretions to dribble down your [fullChest] and\"] amplifying your already loud and desperate moans.\n\n");
+						outputText(" Your resolution is once again rewarded with a renewed assault on your brutalized [nipples],[if (milkQuantity > 50)  summoning more of your milky excretions to dribble down your [fullChest] and] amplifying your already loud and desperate moans.\n\n");
 						outputText("\"<i>Oooohhhh...  ooAHH! Ooooohhh...</i>\" you scream with abandon, as she continues to hold you tight against her impossibly smooth body, masterfully directing your self flagellation and debauched undulation astride her forearm sized pillar of manhood. ");
 						if(player.hasVagina())
 						{
@@ -463,7 +463,7 @@ package classes.Scenes.Places.Prison
 				prison.changeEsteem(-1,prison.inPrison);
 				if(resistanceCounter == totalResistance)
 				{
-					outputText("\"<i>Mistress... may I... ooh...  [if (esteem < 40) \"<b>please</b>\" else \"please\"] have permission... haahh... to come?</i>\" you beg between breathy moans.\n\n");
+					outputText("\"<i>Mistress... may I... ooh...  [if (esteem < 40) <b>please</b>\" else \"please] have permission... haahh... to come?</i>\" you beg between breathy moans.\n\n");
 					if(resistanceCounter == 1)
 					{
 						outputText("\"<i>Very soon. But first, I think there is something you need to confess to yourself before I allow it.</i>\" Your jaw drops wide in an expression of anguish and yearning. \"<i>Now, slave, ");
@@ -500,21 +500,21 @@ package classes.Scenes.Places.Prison
 						case 2:
 							if(branchChoice == "5")
 							{
-								outputText("\"<i>Mistress, crawling to you... crawling like a bitch in heat...[if (esteem < 40) \" it makes me feel good --\" else \"it makes me feel, uhm...\"] free, natural... uncomplicated.</i>\" [if (esteem < 40) \"Almost like your body was built for it.\" else \"Again, there is more truth in your words than you'd like.\"]\n\n");
+								outputText("\"<i>Mistress, crawling to you... crawling like a bitch in heat...[if (esteem < 40)  it makes me feel good --\" else \"it makes me feel, uhm...] free, natural... uncomplicated.</i>\" [if (esteem < 40) Almost like your body was built for it.\" else \"Again, there is more truth in your words than you'd like.]\n\n");
 							}
 							else
 							{
-								outputText("\"<i>Mistress, crawling to you... crawling like a bitch in heat...[if (esteem < 40) \" it makes me feel good --\" else \"it makes me feel, uhm...\"] free, natural... uncomplicated.</i>\" [if (esteem < 40) \"Almost like your body was built for it.\" else \"Again, there is more truth in your words than you'd like.\"]\n\n");
+								outputText("\"<i>Mistress, crawling to you... crawling like a bitch in heat...[if (esteem < 40)  it makes me feel good --\" else \"it makes me feel, uhm...] free, natural... uncomplicated.</i>\" [if (esteem < 40) Almost like your body was built for it.\" else \"Again, there is more truth in your words than you'd like.]\n\n");
 							}
 							break;
 						case 3:
 							if(branchChoice == "5")
 							{
-								outputText("\"<i>Mistress, when I feel... aaah... feel you come,[if (esteem < 40) \" when you feed me,\"] when you fill my stomach... haaahhh... it's wonderful[if (esteem < 40) \"... it makes me, uhm, happy\"].</i>\" [if (esteem >= 40) \"Is it really? You pray it's just your pent up orgasm talking.\"]\n\n");
+								outputText("\"<i>Mistress, when I feel... aaah... feel you come,[if (esteem < 40)  when you feed me,] when you fill my stomach... haaahhh... it's wonderful[if (esteem < 40) ... it makes me, uhm, happy].</i>\" [if (esteem >= 40) Is it really? You pray it's just your pent up orgasm talking.]\n\n");
 							}
 							else
 							{
-								outputText("\"<i>Mistress, when I feel... aaah... feel you come,[if (esteem < 40) \" when you feed me,\"] when you fill my stomach... haaahhh... it's wonderful[if (esteem < 40) \"... it makes me, uhm, happy\"].</i>\" [if (esteem >= 40) \"Is it really? You pray it's just your pent up orgasm talking.\"]\n\n");
+								outputText("\"<i>Mistress, when I feel... aaah... feel you come,[if (esteem < 40)  when you feed me,] when you fill my stomach... haaahhh... it's wonderful[if (esteem < 40) ... it makes me, uhm, happy].</i>\" [if (esteem >= 40) Is it really? You pray it's just your pent up orgasm talking.]\n\n");
 							}
 							break;
 						case 4:
@@ -757,7 +757,7 @@ package classes.Scenes.Places.Prison
 			outputText(" and over your belly, then gushes down between your legs ");
 			if(player.hasCock())
 			{
-				outputText("washing over [eachCock][if (hasBalls = true) \" and coating your [sack]\"] ");
+				outputText("washing over [eachCock][if (hasBalls = true)  and coating your [sack]] ");
 			}
 			else if(player.hasVagina())
 			{
@@ -782,7 +782,7 @@ package classes.Scenes.Places.Prison
 			prison.changeObey(2,prison.inPrison);
 			player.orgasm();
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
-			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 45 + rand(6))
+			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 45 + rand(6) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
 				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,4);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
@@ -805,7 +805,7 @@ package classes.Scenes.Places.Prison
 			prison.changeObey(2.5,prison.inPrison);
 			player.orgasm();
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
-			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 45 + rand(3))
+			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 45 + rand(3) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
 				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,4);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
@@ -829,7 +829,7 @@ package classes.Scenes.Places.Prison
 			prison.changeObey(2.5,prison.inPrison);
 			player.orgasm();
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
-			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 70 + rand(6))
+			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 70 + rand(6) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
 				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,5);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
@@ -854,7 +854,7 @@ package classes.Scenes.Places.Prison
 			prison.changeObey(3,prison.inPrison);
 			player.orgasm();
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
-			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 70 + rand(3))
+			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 70 + rand(3) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
 				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,5);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
@@ -969,7 +969,7 @@ package classes.Scenes.Places.Prison
 					player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,4,0);
 				}
 				prison.changeWill(-prison.prisonWillCost(5));
-				outputText("Though you are unwilling to obey [if (obey <= 25) \"your captor\"][if (obey > 25) \"your Mistress\"] in this moment, ",false);
+				outputText("Though you are unwilling to obey [if (obey <= 25) your captor][if (obey > 25) your Mistress] in this moment, ",false);
 				if(player.obey < 10)
 				{
 					if(player.esteem < 15)
@@ -1190,7 +1190,7 @@ package classes.Scenes.Places.Prison
 				outcomeSelect = rand(5);
 				if(outcomeSelect == 0)
 				{
-					outputText("To your great relief, you see her look of stern disappointment soften into one of concern and caring. She takes a gentle step towards you then reaches down and lifts you to your feet, cupping your [face] softly in her hands. \"<i>Oh, you poor, pitiful little creature. I can only imagine how hard it must be coming to terms with what you are, and I can see how desperately you want to.</i>\" As she speaks, still cradling your cheek in her left hand, her right descends with delicate purpose. Her fingers trace the nape of your neck, briefly lingering on your collarbone, before slowly snaking their way over your [chest]. A wave of goosebumps follows her touch, and she gives a savage twist to one of your suddenly erect [nipples][if (milkQuantity > 10) \", eliciting a tentative spurt of milk in response\"]. \"<i>Yes, quite desperately.</i>\"\n\n",false);
+					outputText("To your great relief, you see her look of stern disappointment soften into one of concern and caring. She takes a gentle step towards you then reaches down and lifts you to your feet, cupping your [face] softly in her hands. \"<i>Oh, you poor, pitiful little creature. I can only imagine how hard it must be coming to terms with what you are, and I can see how desperately you want to.</i>\" As she speaks, still cradling your cheek in her left hand, her right descends with delicate purpose. Her fingers trace the nape of your neck, briefly lingering on your collarbone, before slowly snaking their way over your [chest]. A wave of goosebumps follows her touch, and she gives a savage twist to one of your suddenly erect [nipples][if (milkQuantity > 10) , eliciting a tentative spurt of milk in response]. \"<i>Yes, quite desperately.</i>\"\n\n",false);
 					outputText("A wicked, satisfied smile crosses her lips at your surprised gasp, but just as quickly her expression returns to its previous nurturing state as she pulls you into a sympathetic embrace. Her right hand fondles and pinches at your [nipple] with calculated cruelty, but her left hand now rhythmically strokes up and down your spine, inducing ever stronger waves of gooseflesh which shiver their way through your body. Reflexive or not, the pleasant sensations momentarily overwhelm you causing your [asshole] to pucker uncontrollably and leaving your mind blank as her soothing voice continues to speak.\n\n",false);
 					outputText("\"<i>As ever, my dear, I'm here to help you get what you want. You want to be a good little " + player.boyGirl() + " and do as your Mistress asks, but you have too many unhelpful thoughts bouncing around your head. At moments like that, you need to learn to listen to your body instead.</i>\" Her left hand drifts around to your crotch and begins to gingerly pet your ",false);
 					if(player.hasCock())
@@ -1208,7 +1208,7 @@ package classes.Scenes.Places.Prison
 					
 					outputText(", and a new wavefront of pleasure crashes into the wake of shivers still being generated by her savage treatment of your [chest].\n\n");
 					outputText("Your previously blank mind is now drowning, struggling for the oxygen it needs to combat the onslaught of her alluring words. \"<i>Your body doesn't lie, slave. It knows its place, even if you are still struggling to understand. So I'm going to leave you with the gift of hunger. I know it can be unpleasant, but it's a useful tool. Revel in it. Let it teach you to listen to what your body needs. And next time I visit to feed you, I think you will find it a lot easier to fulfill your desire to please me.</i>\"\n\n");
-					outputText("All at once she releases her grasp on you and steps back. Your [legs] make a halfhearted attempt to find their strength, but collapse in the riptide of sensations left behind by her abrupt absence. As you slowly regain control of your senses, your ears are ringing and you find your body crumpled into a quivering mass at Mistress Elly's feet[if (milkQuantity > 250) \", your [face] resting in a sticky pool of your own milk\"]. She favors you with one last triumphant smile, then turns her back and walks out the door.\n\n");
+					outputText("All at once she releases her grasp on you and steps back. Your [legs] make a halfhearted attempt to find their strength, but collapse in the riptide of sensations left behind by her abrupt absence. As you slowly regain control of your senses, your ears are ringing and you find your body crumpled into a quivering mass at Mistress Elly's feet[if (milkQuantity > 250) , your [face] resting in a sticky pool of your own milk]. She favors you with one last triumphant smile, then turns her back and walks out the door.\n\n");
 					if(prison.prisonIsRestrained())
 					{
 						outputText("As the door closes behind her, your restraints reappear.\n\n",false);
@@ -1542,10 +1542,10 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingTitleTrainingAccept():void
 		{
 			clearOutput();
-			outputText("With a heavy sigh, you decide that it would be best to play along with this charade. [if (esteem < 40) \"Disturbingly, accepting your predicament isn't as as hard as you expected. \"][if (esteem > 60) \"Swallowing your pride is particularly challenging, but preferable to the alternatives. \"]You look up and see her waiting expectantly, a sly smirk creeping across her exotic features, and turn your eyes back down -- you aren't sure you could handle watching her reaction as you give in to her demands. After a pregnant moment of hesitation, the words slip past your lips in a monotone whisper\n\n");
-			outputText("\"<i>Hello... Mistress... how may I... serve you today?</i>\" [if (esteem < 15) \"Despite your hesitation, the words feel, well, good as they tumble out. Without meaning to, you sheepishly lift your gaze, overcome by a need to know if she approved.\"][if (esteem > 70) \"The words feel like bile on your tongue as they lurch from your mouth.\"]\n\n");
+			outputText("With a heavy sigh, you decide that it would be best to play along with this charade. [if (esteem < 40) Disturbingly, accepting your predicament isn't as as hard as you expected. ][if (esteem > 60) Swallowing your pride is particularly challenging, but preferable to the alternatives. ]You look up and see her waiting expectantly, a sly smirk creeping across her exotic features, and turn your eyes back down -- you aren't sure you could handle watching her reaction as you give in to her demands. After a pregnant moment of hesitation, the words slip past your lips in a monotone whisper\n\n");
+			outputText("\"<i>Hello... Mistress... how may I... serve you today?</i>\" [if (esteem < 15) Despite your hesitation, the words feel, well, good as they tumble out. Without meaning to, you sheepishly lift your gaze, overcome by a need to know if she approved.][if (esteem > 70) The words feel like bile on your tongue as they lurch from your mouth.]\n\n");
 			outputText("\"<i>I'm sorry, slave, I couldn't quite hear you. I expect you to respond to my orders loudly, clearly, and without hesitation. It also wouldn't hurt for you speak in a more reverential tone, but don't worry: that will come naturally with time. <b>Now, try again.</b></i>\" She punctuates the order with a single forceful tap of her spiked boot heel against the floor. The sharp, harsh clack rings in your ears, bringing an unbidden rush of adrenaline to your heart, and you find yourself responding before you have time to think.\n\n");
-			outputText("\"<i>Hello Mistress, how may I... serve you today?</i>\" This time you speak the words more clearly, but still without any feeling. [if (esteem < 15) \"Somehow demeaning yourself this way wasn't nearly as hard as you expected it to be.\"][if (esteem > 70) \"You still nearly choked on the word 'serve'.\"]\n\n");
+			outputText("\"<i>Hello Mistress, how may I... serve you today?</i>\" This time you speak the words more clearly, but still without any feeling. [if (esteem < 15) Somehow demeaning yourself this way wasn't nearly as hard as you expected it to be.][if (esteem > 70) You still nearly choked on the word 'serve'.]\n\n");
 			outputText("\"<i>It's a start, but I'm afraid it's not enough for a full meal. Practice, and try harder next time. For now I'm afraid you'll have to make do with soup.</i>\" Out of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink and a flick of her spade-tipped tail before leaving you alone in the cell.\n\n");
 			if(prison.prisonIsRestrained())
 			{
@@ -1566,12 +1566,12 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingTitleTrainingPerform():void
 		{
 			clearOutput();
-			outputText("You decide you might as well give [if (esteem < 40) \"your Mistress\"][if (esteem >= 40) \"her\"] a show[if (esteem < 40) \" -- it might even be a fun little diversion to play along with her games a bit\"][if (esteem > 60) \" -- after all, you see no harm in saying a few little words\"].[if (hunger > 50) \" And the more you think about it, a good solid meal DOES sound very appealing.\"] You look up and see her waiting expectantly with a sly smirk creeping across her exotic features. Steeling your resolve, you fix her with your best impression of the doe eyed, pliable look you think she hopes to see. A subtle widening of her almond shaped eyes betrays her approval amidst her otherwise static expression, encouraging you to sit up straight with your back lightly arched and say the words in the same lilting voice that she used in demonstration.\n\n");
-			outputText("\"<i>Hello Mistress, how may I serve you today?</i>\" To top off the performance, you await her response with a pleasant smile drawn across your face. [if (esteem < 15) \"There is less artifice in the smile than you'd like to admit -- playing up this role was every bit as entertaining as you expected.\"][if (esteem > 70) \"Underneath though, you are feeling oddly conflicted -- was your act maybe a bit too good?\"]\n\n");
-			outputText("She claps her hands with giddy excitement and closes the distance between you with a triumphant dance. \"<i>Oh, what a good little " + player.boyGirl() + " you are. SO good!</i>\" She reaches down and gives you an exaggerated congratulatory pat on the head, resting her right hand in your [hair]. She is standing so close to you that her cock sways hypnotically just inches from your [face], semi-erect but fully imposing. You do your best to maintain your composure and suppliant posture, but the sight still makes you blush with [if (corruption < 30) \"embarrassment\"][if (corruption >= 30) \"arousal\"] as she continues to speak.\n\n");
+			outputText("You decide you might as well give [if (esteem < 40) your Mistress][if (esteem >= 40) her] a show[if (esteem < 40)  -- it might even be a fun little diversion to play along with her games a bit][if (esteem > 60)  -- after all, you see no harm in saying a few little words].[if (hunger > 50)  And the more you think about it, a good solid meal DOES sound very appealing.] You look up and see her waiting expectantly with a sly smirk creeping across her exotic features. Steeling your resolve, you fix her with your best impression of the doe eyed, pliable look you think she hopes to see. A subtle widening of her almond shaped eyes betrays her approval amidst her otherwise static expression, encouraging you to sit up straight with your back lightly arched and say the words in the same lilting voice that she used in demonstration.\n\n");
+			outputText("\"<i>Hello Mistress, how may I serve you today?</i>\" To top off the performance, you await her response with a pleasant smile drawn across your face. [if (esteem < 15) There is less artifice in the smile than you'd like to admit -- playing up this role was every bit as entertaining as you expected.][if (esteem > 70) Underneath though, you are feeling oddly conflicted -- was your act maybe a bit too good?]\n\n");
+			outputText("She claps her hands with giddy excitement and closes the distance between you with a triumphant dance. \"<i>Oh, what a good little " + player.boyGirl() + " you are. SO good!</i>\" She reaches down and gives you an exaggerated congratulatory pat on the head, resting her right hand in your [hair]. She is standing so close to you that her cock sways hypnotically just inches from your [face], semi-erect but fully imposing. You do your best to maintain your composure and suppliant posture, but the sight still makes you blush with [if (corruption < 30) embarrassment][if (corruption >= 30) arousal] as she continues to speak.\n\n");
 			outputText("\"<i>It's a special thing when a slave proves me right so early in their training. Oh, I know, you probably think you are just pretending. But are you pretending for my sake, or your own?</i>\" Your mind tries to process the question, but to your great frustration the indecent motion of her fleshy rod and its musky, intoxicating scent have you too distracted to think clearly.\n\n");
-			outputText("\"<i>Either way, it doesn't matter: it's a delicious taste of your true nature.</i>\" Her slender tongue darts over her shapely ruby lips[if (corruption >= 30) \" and her tail flicks through the air\"]. \"<i><b>Now, say it again.</b></i>\" She punctuates the order with a single forceful tap of her spiked boot heel against the floor. The sharp, harsh clack rings in your ears, bringing an unbidden rush of adrenaline to your heart, and you find yourself responding before you have time to think.\n\n");
-			outputText("\"<i>Hello Mistress, how may I serve you today?</i>\" You say it with the same fervor as before, but this time the performance comes much more naturally. [if (esteem > 70) \"Disturbingly so, if you are honest with yourself.\"]");
+			outputText("\"<i>Either way, it doesn't matter: it's a delicious taste of your true nature.</i>\" Her slender tongue darts over her shapely ruby lips[if (corruption >= 30)  and her tail flicks through the air]. \"<i><b>Now, say it again.</b></i>\" She punctuates the order with a single forceful tap of her spiked boot heel against the floor. The sharp, harsh clack rings in your ears, bringing an unbidden rush of adrenaline to your heart, and you find yourself responding before you have time to think.\n\n");
+			outputText("\"<i>Hello Mistress, how may I serve you today?</i>\" You say it with the same fervor as before, but this time the performance comes much more naturally. [if (esteem > 70) Disturbingly so, if you are honest with yourself.]");
 			if(player.esteem < 15)
 			{
 				outputText(" You do your best to ignore the sudden ");
@@ -1594,7 +1594,7 @@ package classes.Scenes.Places.Prison
 				
 				outputText(", but the glimmer in her violet eyes tells you that your arousal did not go unnoticed. Your cheeks burn with shame.");
 			}
-			outputText("\n\nShe gives her shaft a relaxed squeeze and several slow anticipatory strokes with her left hand while once again patting your head with her right. \"<i>Oh, good " + player.boyGirl() + " indeed. You're going to have so much fun learning to please your Mistress.</i>\" She turns away, the tip of her shaft glancing across your upper lip. As it slides past it leaves behind a sticky residue[if (corruption < 30) \", filling you with disgust for allowing it to happen\"][if (corruption >= 30) \", which, to your dismay, your tongue darts out to collect of its own accord\"].[if (esteem > 55) \" The indignity becomes too much to handle, and your facade of self confidence begins to shake at its foundation.\"]\n\n");
+			outputText("\n\nShe gives her shaft a relaxed squeeze and several slow anticipatory strokes with her left hand while once again patting your head with her right. \"<i>Oh, good " + player.boyGirl() + " indeed. You're going to have so much fun learning to please your Mistress.</i>\" She turns away, the tip of her shaft glancing across your upper lip. As it slides past it leaves behind a sticky residue[if (corruption < 30) , filling you with disgust for allowing it to happen][if (corruption >= 30) , which, to your dismay, your tongue darts out to collect of its own accord].[if (esteem > 55)  The indignity becomes too much to handle, and your facade of self confidence begins to shake at its foundation.]\n\n");
 			outputText("She walks towards the door and almost as an afterthought tosses a pitiful loaf of bread over her shoulder. \"<i>Enjoy your well-earned meal, slave.</i>\" The satisfaction in her voice is palpable.\n\n");
 			if(prison.prisonIsRestrained())
 			{
@@ -1622,14 +1622,14 @@ package classes.Scenes.Places.Prison
 			fastLearner = false;
 			if(branchChoice == "choose")
 			{
-				outputText("[if (esteem < 50) \"Being\"][if (esteem >= 50) \"Allowing yourself to be\"] taught to call her Mistress may have broken your spirit a bit, but not enough to make following this order even remotely easy. Still, ");
+				outputText("[if (esteem < 50) Being][if (esteem >= 50) Allowing yourself to be] taught to call her Mistress may have broken your spirit a bit, but not enough to make following this order even remotely easy. Still, ");
 				if(player.hunger < 40)
 				{
-					outputText("a powerful combination of hunger and [if (esteem < 50) \"desire to avoid her anger\"][if (esteem >= 50) \"cautious self preservation\"] have coalesced into an uncomfortable resolution to do as you have been instructed.[if (esteem >= 70) \" You'll do what's required to earn your meal, and then consider what to do next afterward.\"]");
+					outputText("a powerful combination of hunger and [if (esteem < 50) desire to avoid her anger][if (esteem >= 50) cautious self preservation] have coalesced into an uncomfortable resolution to do as you have been instructed.[if (esteem >= 70)  You'll do what's required to earn your meal, and then consider what to do next afterward.]");
 				}
 				else
 				{
-					outputText("having weighed your options, [if (esteem < 50) \"the consequences of upsetting her seem\"][if (esteem >= 50) \"the potential risk of disobedience seems\"] worth avoiding -- even considering what has been asked of you[if (esteem >= 70) \"-- especially if you can keep things from getting out of hand\"].");
+					outputText("having weighed your options, [if (esteem < 50) the consequences of upsetting her seem][if (esteem >= 50) the potential risk of disobedience seems] worth avoiding -- even considering what has been asked of you[if (esteem >= 70) -- especially if you can keep things from getting out of hand].");
 				}
 				outputText(" Despite having rationalized the decision, humiliation burns through your body like wild fire as you lean forward onto your hands and knees and lift your [ass] into the air. Watching intently from across the room, Mistress Elly beckons with two fingers as she sees you begin to move. \n\n",false);
 				outputText("You reach forward with your left hand and lock your eyes on the ground directly below you.\n");
@@ -1650,24 +1650,24 @@ package classes.Scenes.Places.Prison
 					outputText("stand back up");
 				}
 				
-				outputText(". But you remember the demon across the room who is unlikely to tolerate that, as well as your resolution to appease her [if (esteem > 70) \"-- <b>this</b> time\"].\n\n");
-				outputText("You move your right hand. Your stiffening muscles cause you to wobble as you move[if (hasCock = true) \" and your [cock longest] slaps against your thigh\"].\n\n");
+				outputText(". But you remember the demon across the room who is unlikely to tolerate that, as well as your resolution to appease her [if (esteem > 70) -- <b>this</b> time].\n\n");
+				outputText("You move your right hand. Your stiffening muscles cause you to wobble as you move[if (hasCock = true)  and your [cock longest] slaps against your thigh].\n\n");
 				outputText("Left hand. You move smoothly until your knee scrapes across a crack. Your eyes swim and the edge of your vision blurs, more from frustration than pain.\n\n");
-				outputText("Right. Your palms begin to sweat, and you nearly slip as you shift your weight[if (biggestTitSize >= 3) \", your [fullChest] swinging wildly between your arms\"].\n\n");
-				outputText("Left. Desperately hoping you're almost there, you [if (esteem < 40) \"steal a glance\"][if (esteem >= 40) \"take a peek\"] up, and for a moment those leather clad legs seem farther away than when you began.\n\n");
+				outputText("Right. Your palms begin to sweat, and you nearly slip as you shift your weight[if (biggestTitSize >= 3) , your [fullChest] swinging wildly between your arms].\n\n");
+				outputText("Left. Desperately hoping you're almost there, you [if (esteem < 40) steal a glance][if (esteem >= 40) take a peek] up, and for a moment those leather clad legs seem farther away than when you began.\n\n");
 				outputText("Right. Your breath becomes shallow and staggered; your pulse thumps in your ears.\n\n");
-				outputText("Left...<b>Left</b>! You lift your left hand, but quickly set it back down in the same spot, unable to move it forward. [if (esteem < 60) \"Your throat knots in terror at your paralysis\"][if (esteem >= 60) \"You try again, but this time it will not even lift\"]; your arms have become quivering leaden masses.\n\n");
+				outputText("Left...<b>Left</b>! You lift your left hand, but quickly set it back down in the same spot, unable to move it forward. [if (esteem < 60) Your throat knots in terror at your paralysis][if (esteem >= 60) You try again, but this time it will not even lift]; your arms have become quivering leaden masses.\n\n");
 				if(player.esteem < 30)
 				{
-					outputText("All at once your resolve cracks. Tears form in your eyes, your torso convulses with a powerful sob, and all intelligent thought is blown away in a maelstrom of emotion. Disgrace, impotence,[if (corruption > 30) \" arousal,\"] anger, degradation, and hopelessness all mix together and wash away any pretension of self determination you may have been harboring. You soak in it for a moment, but then the sound of an impatient booted toe tapping on the floor penetrates your misery and you realize you have no choice but to find a way to continue. You shake your head to clear away the flotsam, shakily pick yourself off the ground, take a deep breath, and begin again with steady, resigned purpose.");
+					outputText("All at once your resolve cracks. Tears form in your eyes, your torso convulses with a powerful sob, and all intelligent thought is blown away in a maelstrom of emotion. Disgrace, impotence,[if (corruption > 30)  arousal,] anger, degradation, and hopelessness all mix together and wash away any pretension of self determination you may have been harboring. You soak in it for a moment, but then the sound of an impatient booted toe tapping on the floor penetrates your misery and you realize you have no choice but to find a way to continue. You shake your head to clear away the flotsam, shakily pick yourself off the ground, take a deep breath, and begin again with steady, resigned purpose.");
 				}
 				else if(player.esteem < 70)
 				{
-					outputText("While you knew this would be a challenge, you didn't expect to find yourself on the verge of an emotional collapse a third of the way across the room. You draw your chin down to your chest, close your eyes, and focus on breathing deeply. You push back the rage,[if (corruption > 30) \" the arousal,\"] the embarrassment, the overwhelming sense of helplessness. You remind yourself that while this is her game, it was your choice to play it, and you made it for good reasons. You open your eyes, look back up, ignore her raised eyebrow and sly, self satisfied smile, and fix your gaze once again on the floor just in front of you. Slowly, but with measured control, you move forward.");
+					outputText("While you knew this would be a challenge, you didn't expect to find yourself on the verge of an emotional collapse a third of the way across the room. You draw your chin down to your chest, close your eyes, and focus on breathing deeply. You push back the rage,[if (corruption > 30)  the arousal,] the embarrassment, the overwhelming sense of helplessness. You remind yourself that while this is her game, it was your choice to play it, and you made it for good reasons. You open your eyes, look back up, ignore her raised eyebrow and sly, self satisfied smile, and fix your gaze once again on the floor just in front of you. Slowly, but with measured control, you move forward.");
 				}
 				else
 				{
-					outputText("You curse your body's rebellion, and hope that your moment of weakness was not as visibly obvious to your captor as you fear it might have been. You fix your gaze on the toes of her spike-heeled boots and set your jaw, willing away the rage[if (corruption > 30) \" and the arousal\"] and the shame and panic that had threatened to overthrow you. You allow yourself a few seconds to sit with a clear mind, then proceed forward with steady, resolved purpose.");
+					outputText("You curse your body's rebellion, and hope that your moment of weakness was not as visibly obvious to your captor as you fear it might have been. You fix your gaze on the toes of her spike-heeled boots and set your jaw, willing away the rage[if (corruption > 30)  and the arousal] and the shame and panic that had threatened to overthrow you. You allow yourself a few seconds to sit with a clear mind, then proceed forward with steady, resolved purpose.");
 				}
 				
 				outputText(" While you remain stiff and frigid, you manage to cross the remaining distance without letting your uncertainty overcome you again.\n\n");
@@ -1679,15 +1679,15 @@ package classes.Scenes.Places.Prison
 				{
 					outputText("You arrive at her feet, exhale a sigh of resignation, and sit back on your ass with your legs folded on either side of you.\n\n");
 				}
-				outputText("You cannot help but feel [if (esteem < 40) \"small and powerless\"][if (esteem >= 40) \"humbled\"] as she looms over you, shoulders drawn back confidently, hands resting jauntily on her hips, tail swinging playfully between her legs. Although it has only begun to fill with blood, you find yourself having to crane your head to peer around her phallus and find her face. She looks down at you for a few beats, her expression a mixture of expectation, indulgence, and evaluation, then rolls her eyes in amused exasperation at your inaction.\n\n");
+				outputText("You cannot help but feel [if (esteem < 40) small and powerless][if (esteem >= 40) humbled] as she looms over you, shoulders drawn back confidently, hands resting jauntily on her hips, tail swinging playfully between her legs. Although it has only begun to fill with blood, you find yourself having to crane your head to peer around her phallus and find her face. She looks down at you for a few beats, her expression a mixture of expectation, indulgence, and evaluation, then rolls her eyes in amused exasperation at your inaction.\n\n");
 				outputText("\"<i>You've done well so far, dear, and the hardest part is over.</i>\" You are taken aback -- there is no note of condescension, no mocking undertones, no hint of ulterior motives. Her voice is simply kind, and her face genuinely caring. \"<i>Of course, before long you'll enjoy that part too; it gives you a chance to relish how shameful a creature you are.</i>\" ");
 				if(player.esteem < 40)
 				{
-					outputText("You know her words should upset you, but as you realize you <i>are</i> in a rather shameful position, you actually end up[if (obey < 20) \" a little\"] thankful that she pointed it out so gently. Your mind and muscles relax considerably as you are kept docile by her soothing tone and countenance.");
+					outputText("You know her words should upset you, but as you realize you <i>are</i> in a rather shameful position, you actually end up[if (obey < 20)  a little] thankful that she pointed it out so gently. Your mind and muscles relax considerably as you are kept docile by her soothing tone and countenance.");
 				}
 				else if(player.esteem < 60)
 				{
-					outputText("You should be angry, but her soothing tone and countenance soften the blow of her words. Not wanting confrontation[if (obey > 20) \" and not even that upset\"], you end up listening as politely as she speaks, both your muscles and mind softening under her gentle voice.");
+					outputText("You should be angry, but her soothing tone and countenance soften the blow of her words. Not wanting confrontation[if (obey > 20)  and not even that upset], you end up listening as politely as she speaks, both your muscles and mind softening under her gentle voice.");
 				}
 				else
 				{
@@ -1725,8 +1725,8 @@ package classes.Scenes.Places.Prison
 				}
 				
 				outputText(".Though you finally manage to suppress your tongue's efforts, it's too late.\n\n");
-				outputText("\"<i>Ah, suddenly shy again? Listen to your body, slave. It knows what you are, and it wants so badly to show you.</i>\" Her body is now visibly filling with ardor, her ample bosom rising and falling with each deep breath, but her tone remains kind and supportive. \"<i>But I know you can overcome your nerves -- you have so much potential just waiting to be released. Now, pleasure the head. In and out, slowly.</i>\" [if (esteem < 30) \"With little hesitation, you\"][if (esteem >= 30) \"You hesitate briefly, but\"] pull back over the ridge and down the slope beyond until your lips are nearly closed around the tip.[if (esteem < 15) \" The emptiness in your mouth feels odd, almost unpleasant, after having rested around the fullness of your Mistress' dick for so long, and you\"][if (esteem >= 15) \" You consider waiting a moment to rest your jaw, but you guess Mistress Elly wouldn't approve. You push the thought aside, and\"] lean forward to once again fill your mouth.\n\n");
-				outputText("With each subsequent stroke the knob becomes more slick with your saliva and her salty lubricant. As it does, the sensations of her skin slipping through your lips and over your tongue grow ever more enticing, and the taste of her flesh becomes maddeningly irresistible.[if (esteem < 60) \" It takes all your willpower to remain composed and not lose yourself pumping away at her delectable shaft of meat.\"][if (esteem < 30) \" Even still, you briefly indulge a lesser urge, moving your hand up to gather some of the growing slickness from the head and spreading  it down the barrel of her cock. You marvel at the feel of her unique skin between your fingers as you give her several deep squeezes.\"] But eventually, you manage to tune out your undesirable enjoyment of the act, delivering short, staccato strokes devoid of the passion growing in the back of your mind.\n\n");
+				outputText("\"<i>Ah, suddenly shy again? Listen to your body, slave. It knows what you are, and it wants so badly to show you.</i>\" Her body is now visibly filling with ardor, her ample bosom rising and falling with each deep breath, but her tone remains kind and supportive. \"<i>But I know you can overcome your nerves -- you have so much potential just waiting to be released. Now, pleasure the head. In and out, slowly.</i>\" [if (esteem < 30) With little hesitation, you][if (esteem >= 30) You hesitate briefly, but] pull back over the ridge and down the slope beyond until your lips are nearly closed around the tip.[if (esteem < 15)  The emptiness in your mouth feels odd, almost unpleasant, after having rested around the fullness of your Mistress' dick for so long, and you][if (esteem >= 15)  You consider waiting a moment to rest your jaw, but you guess Mistress Elly wouldn't approve. You push the thought aside, and] lean forward to once again fill your mouth.\n\n");
+				outputText("With each subsequent stroke the knob becomes more slick with your saliva and her salty lubricant. As it does, the sensations of her skin slipping through your lips and over your tongue grow ever more enticing, and the taste of her flesh becomes maddeningly irresistible.[if (esteem < 60)  It takes all your willpower to remain composed and not lose yourself pumping away at her delectable shaft of meat.][if (esteem < 30)  Even still, you briefly indulge a lesser urge, moving your hand up to gather some of the growing slickness from the head and spreading  it down the barrel of her cock. You marvel at the feel of her unique skin between your fingers as you give her several deep squeezes.] But eventually, you manage to tune out your undesirable enjoyment of the act, delivering short, staccato strokes devoid of the passion growing in the back of your mind.\n\n");
 				outputText("\"<i>You're fighting it again, slave,</i>\" she sighs as a look of disappointment clouds her previously blissful expression. \"<i>I was hoping your very obvious innate enjoyment of sucking dick would drive you to perform well, but clearly you need further encouragement to embrace it. That's okay; I'll just have to take a more hands on approach for the remainder of your lesson.</i>\" She rests her hand on your head, fixes her violet eyes on yours, and continues in a pedantic voice. \"<i>Now, keep your mouth around me, but place your hands behind your back.</i>\" You do so in a mechanical manner, but can't help but notice that this has forced you to arch your back and present your [chest] suggestively. \"<i>You are not to move your arms from that position until I say so. Is that understood?</i>\" ");
 				if(player.esteem < 35)
 				{
@@ -1742,8 +1742,8 @@ package classes.Scenes.Places.Prison
 				}
 				
 				outputText("\n\n");
-				outputText("\"<i>No, slave. Say, 'Yes Mistress, I understand.' </i>\"[if (esteem < 65) \" She tilts your head back so that you are once again looking into her eyes.\"] One glance at her face is enough to tell you that she will accept nothing less that total submission on this matter.\n\n");
-				outputText("\"<i>Yesth... Misth... treth... I undahh... thtand.</i>\" The sloppy sound of your voice sounding out the syllables brings color to your cheeks all over again[if (esteem < 20) \", but now the unclean warmth is less distressing -- almost soothing\"][if (esteem > 60) \", and you hope that this will placate her desire to degrade you for the time being\"].\n\n");
+				outputText("\"<i>No, slave. Say, 'Yes Mistress, I understand.' </i>\"[if (esteem < 65)  She tilts your head back so that you are once again looking into her eyes.] One glance at her face is enough to tell you that she will accept nothing less that total submission on this matter.\n\n");
+				outputText("\"<i>Yesth... Misth... treth... I undahh... thtand.</i>\" The sloppy sound of your voice sounding out the syllables brings color to your cheeks all over again[if (esteem < 20) , but now the unclean warmth is less distressing -- almost soothing][if (esteem > 60) , and you hope that this will placate her desire to degrade you for the time being].\n\n");
 				outputText("\"<i>Much better. Always remember your manners, slave, especially when your mouth is full. Now, feel free to relax and enjoy this, but do pay attention: I expect you to learn your lesson well.</i>\" She reaches down");
 				if(player.hornType > 0 && player.horns > 1)
 				{
@@ -1807,10 +1807,10 @@ package classes.Scenes.Places.Prison
 				}
 				outputText("Finally, with barely more than a third of her length inside your mouth, you feel her tip press against the entrance to your throat. She stops pulling, but continues to hold your head in place.\n\n");
 				outputText("\"<i>There's a good [boy]. See? It's not unpleasant at all when you submit and let it happen.</i>\" Her almond shaped eyes narrow, one eyebrow arches, and the corner of her mouth curls upward. \"<i>Quite the opposite, it seems to me. Now, slave, practice breathing.</i>\" \n\n");
-				outputText("You override your reflexive reaction to breathe through your mouth by pressing your lips and tongue tight against her inviting flesh, and inhale deeply through your nostrils. Your senses are flooded with her intoxicating scents, flavors, and textures, and you hold the breath longer than you intend to while involuntarily savoring the illicit rush. You release it, then repeat the act with unexpected zeal, eyes rolling back, lids closing, and mouth salivating.[if (esteem < 30) \" To your extreme shame, you realize that your lips have begun to pucker and squeeze around her girth, and that your tongue is making luxurious undulations against the shaft that pins it down, as if to wring it of its sweet and savory essence.\"]\n\n");
+				outputText("You override your reflexive reaction to breathe through your mouth by pressing your lips and tongue tight against her inviting flesh, and inhale deeply through your nostrils. Your senses are flooded with her intoxicating scents, flavors, and textures, and you hold the breath longer than you intend to while involuntarily savoring the illicit rush. You release it, then repeat the act with unexpected zeal, eyes rolling back, lids closing, and mouth salivating.[if (esteem < 30)  To your extreme shame, you realize that your lips have begun to pucker and squeeze around her girth, and that your tongue is making luxurious undulations against the shaft that pins it down, as if to wring it of its sweet and savory essence.]\n\n");
 				outputText("On the third intake of air, something even more odd happens: what feels like a thick, velvet rope wraps around your torso and rubs you with an upward motion, as if encouraging the action of your diaphragm. As you exhale, it massages back down. The sensation is not at all unpleasant, but distracting curiosity pulls you from your reverie. When the velvety massage again follows your fourth breath, you rotate your head sideways in her grip in order to glance downwards. From the corner of your vision, you see that the rope is actually Mistress Elly's agile tail, reaching forward through her legs to stimulate you.\n\n");
 				outputText("\"<i>Focus, dear. It is important for you to learn this lesson well.</i>\" You breathe again, and again her tail softly follows the motion with its calming and supportive hug, instantly transforming from a distraction into one more delightfully effective piece of her unrelenting sensory assault. This happens several more times, and soon you are unsure if the tail's relaxing motion is reinforcing your breathing or controlling it as you fall into an aroused trance. \"<i>Good [boy].</i>\" Taking advantage of your weak and malleable state, she begins to move your head again, all the while continuing to coach your breathing with the comforting movements of her smooth tail. At first she moves you only the smallest bit, and inch out (exhale), and then an inch back in (inhale), then two inches out (exhale), and two inches in (inhale). \n\n");
-				outputText("But as you grow accustomed to her rhythm, her inward strokes begin to push further and her outward ones retreat less, while your breaths grow deeper and the dizzying wait between them grows longer. You make an effort to push back your receptive daze, but only manage to reclaim enough of your consciousness to stare down the bridge of your nose at the hypnotic thrusting of her olive skinned rod. In a fleeting lucid moment you note that the shallowest point of her stroke is now the depth where she was previously teaching you to breathe. At the bottom of one stroke you can still see half of her cock[if (esteem < 15) \" and your eyes widen at the thought of taking more\"][if (esteem > 50) \" and you wonder how much more will fit\"], then at the bottom of the next [if (esteem < 15) \"you are overcome with relief when \"][if (esteem > 50) \"you are amazed at your capacity when \"]you barely see more than a third.\n\n");
+				outputText("But as you grow accustomed to her rhythm, her inward strokes begin to push further and her outward ones retreat less, while your breaths grow deeper and the dizzying wait between them grows longer. You make an effort to push back your receptive daze, but only manage to reclaim enough of your consciousness to stare down the bridge of your nose at the hypnotic thrusting of her olive skinned rod. In a fleeting lucid moment you note that the shallowest point of her stroke is now the depth where she was previously teaching you to breathe. At the bottom of one stroke you can still see half of her cock[if (esteem < 15)  and your eyes widen at the thought of taking more][if (esteem > 50)  and you wonder how much more will fit], then at the bottom of the next [if (esteem < 15) you are overcome with relief when ][if (esteem > 50) you are amazed at your capacity when ]you barely see more than a third.\n\n");
 				outputText("As she finally bottoms out and your nose presses into her smooth, sweet smelling public mound, a conflagration ignites beneath your thoroughly conquered senses. You find yourself verging on orgasm and your eyes roll skyward, your visage rather obscene thanks to the tight, hairless testicles on your chin and the dramatic bulge in your neck.\n\n");
 				outputText("A tickle at your groin suggests the source of the lusty spark; somewhere in the build up she must have begun teasing and rubbing at your ");
 				if(player.hasVagina())
@@ -1826,7 +1826,7 @@ package classes.Scenes.Places.Prison
 					outputText("sensitive nether region");
 				}
 				
-				outputText(" with the spaded tip of her clever tail. [if (esteem < 40) \"You briefly wonder if you might have resisted\"][if (esteem >= 40) \"You wish you had noticed in time to resist\"], but the damage is done.\n\n");
+				outputText(" with the spaded tip of her clever tail. [if (esteem < 40) You briefly wonder if you might have resisted][if (esteem >= 40) You wish you had noticed in time to resist], but the damage is done.\n\n");
 				outputText("She confidently holds her entire length buried within you, and even though stars flash in your eyes and your lungs burn, you hear yourself wasting precious oxygen on a moan -- not of pain, or anguish, or rage, but of pleasure -- begging for more. You make ");
 				if(player.esteem < 30)
 				{
@@ -1855,9 +1855,9 @@ package classes.Scenes.Places.Prison
 					outputText("furiously");
 				}
 				
-				outputText(" admit to yourself that [if (esteem < 10) \"she has won this encounter\"][if (esteem >= 10) \"the situation has escaped your control\"]. The disheartening thought is barely finished, though, when your body grabs you in a riptide of need -- just as your mind was scrambling free of the previous wave's wake.\n\n");
+				outputText(" admit to yourself that [if (esteem < 10) she has won this encounter][if (esteem >= 10) the situation has escaped your control]. The disheartening thought is barely finished, though, when your body grabs you in a riptide of need -- just as your mind was scrambling free of the previous wave's wake.\n\n");
 				outputText("Mistress Elly echoes your moan with an utterance of her own, the grunt of a master chef tasting a successful new recipe for the first time. With all the tenderness and patience with which she began the process, she slowly draws her dick up and out of your throat, letting you once again savor the sensations of her skin gliding past yours. As the blockage slips past your windpipe her tail once again guides your breathing with its velvet hug, but thanks to the continuing ministrations of the tail's tip you barely notice the rush of air returning to your lungs. Instead you find yourself enthralled by her cock's movement, licking slavishly at the knob as it grinds past, and sucking with such greed that that there is a wet, audible pop as she pulls it through the seal formed by your lips.\n\n");
-				outputText("She holds your [face] several inches from her cock head, strands of saliva and precum dripping between her tip and your lips. Several times you feel yourself try to lean forward, but her firm grip stops you. Unhappy with being so denied, your tongue makes a desperate attempt to close the gap on its own, spurred on by her tail's merciless teasing of your sex. Momentarily shocked back to your senses by your wanton behavior, you [if (esteem < 30) \"hope that you can\"][if (esteem >= 30) \"make a silent vow to\"] remain more dignified the next time you find yourself in this position.\n\n");
+				outputText("She holds your [face] several inches from her cock head, strands of saliva and precum dripping between her tip and your lips. Several times you feel yourself try to lean forward, but her firm grip stops you. Unhappy with being so denied, your tongue makes a desperate attempt to close the gap on its own, spurred on by her tail's merciless teasing of your sex. Momentarily shocked back to your senses by your wanton behavior, you [if (esteem < 30) hope that you can][if (esteem >= 30) make a silent vow to] remain more dignified the next time you find yourself in this position.\n\n");
 				outputText("As if sensing your internal conflict, she asks, \"<i>Are you enjoying yourself, dear?</i>\" The words drip with sultry bravado. Already slipping back into your lust-induced stupor, you reply \"<i>Yes, Mistress</i>\" with ");
 				if(player.esteem < 40)
 				{
@@ -1883,12 +1883,12 @@ package classes.Scenes.Places.Prison
 				outputText("\"<i>Do you think we're done, or would you like me to teach you more?</i>\"\n\n");
 				if(player.esteem > 60)
 				{
-					outputText("You remember your initial resolve when choosing this course of action -- and this may be your last chance to act on it -- [if (will < 15) \"but you're not sure you could resist her if you tried, in your current state\"][if (will >= 15) \"but her allure is almost overwhelming\"]. You've already gone so far; it would be so easy to just give in and go a little further...[if (obey >= 20) \"or even submit entirely -- just this once.\"]\n\n");
+					outputText("You remember your initial resolve when choosing this course of action -- and this may be your last chance to act on it -- [if (will < 15) but you're not sure you could resist her if you tried, in your current state][if (will >= 15) but her allure is almost overwhelming]. You've already gone so far; it would be so easy to just give in and go a little further...[if (obey >= 20) or even submit entirely -- just this once.]\n\n");
 					doneChoice = true;
 				}
 				else
 				{
-					outputText("You tremble, silent for a moment as your pride fights desire for your answer. Overwhelmed as you are, though, you fear you already know which is winning...[if (obey >= 20) \"the only question left is whether or not you embrace it.\"]\n\n");
+					outputText("You tremble, silent for a moment as your pride fights desire for your answer. Overwhelmed as you are, though, you fear you already know which is winning...[if (obey >= 20) the only question left is whether or not you embrace it.]\n\n");
 				}
 				if(player.obey >= 20)
 				{
@@ -1997,10 +1997,10 @@ package classes.Scenes.Places.Prison
 				else
 				{
 					outputText("Caught in the moment, a shudder of anticipation passes over you, and you look up at your Mistress with a desperate expression. Some far away part of you wanted this to be as quick and pastel as possible, but you know exactly what <i>she</i> wants, and find your pounding heart inclined to agree.\n\n");
-					outputText("Noticing your head softly bobbing your assent already, you try to form the words to match. Need has overwhelmed your ability to speak, though, and you end up merely mouthing them in desperation, your throat and jaw seeming far away. \"<i>You need to actually say it, dear,</i>\" she chides playfully. Straining to respond, you summon the noise, but no articulation, crafting little more than a pleading moan. The edges of your vision blur as you glance up at her[if (esteem < 15) \" in a mix of apology and appeal\"].\n\n");
+					outputText("Noticing your head softly bobbing your assent already, you try to form the words to match. Need has overwhelmed your ability to speak, though, and you end up merely mouthing them in desperation, your throat and jaw seeming far away. \"<i>You need to actually say it, dear,</i>\" she chides playfully. Straining to respond, you summon the noise, but no articulation, crafting little more than a pleading moan. The edges of your vision blur as you glance up at her[if (esteem < 15)  in a mix of apology and appeal].\n\n");
 					outputText("\"<i>Did I not just teach you this, slave? <b>Breathe</b>.</i>\" Though her tone is slightly admonishing, her expression is transparently amused, mitigating your concern somewhat as her tail further constricts your torso and jolts downward, wringing you of a hollow sigh, before ascending considerably more gently, coaxing you into a long, deep inhale. \"<i>Now, dear, what was it you wanted to say?</i>\"\n\n");
-					outputText("As her tail slides down again, you use the momentum to make your request: \"<i>M-more please...</i>\" It feels surprisingly calming to let her tail draw the words from you, but the sensation is disrupted as it tugs back up -- somewhat painfully. \"<i>Manners...</i>\" she reminds sternly, but with a kind smile, her countenance significantly softer than her gesture. [if (esteem < 15) \"You give her a penitent gaze as her\"][if (esteem >= 15) \"Her\"] tail drops again.\n\n");
-					outputText("\"<i>More please, Mistress,</i>\" you cry eagerly, feeling a rush of euphoria [if (esteem < 10) \"until her proud, delighted expression flickers for a moment into something...predatory\"][if (esteem >= 10) \"as a satisfied -- even proud -- smile spreads across her lips\"].\n\n");
+					outputText("As her tail slides down again, you use the momentum to make your request: \"<i>M-more please...</i>\" It feels surprisingly calming to let her tail draw the words from you, but the sensation is disrupted as it tugs back up -- somewhat painfully. \"<i>Manners...</i>\" she reminds sternly, but with a kind smile, her countenance significantly softer than her gesture. [if (esteem < 15) You give her a penitent gaze as her][if (esteem >= 15) Her] tail drops again.\n\n");
+					outputText("\"<i>More please, Mistress,</i>\" you cry eagerly, feeling a rush of euphoria [if (esteem < 10) until her proud, delighted expression flickers for a moment into something...predatory][if (esteem >= 10) as a satisfied -- even proud -- smile spreads across her lips].\n\n");
 					if(player.esteem < 10)
 					{
 						outputText("\"<i>Say it again, dear,</i>\" she demands abruptly. You blink, blushing a little more that she's making you repeat yourself, but you do find it easier this time, managing to intone the phrase almost flawlessly.\n\n");
@@ -2045,7 +2045,7 @@ package classes.Scenes.Places.Prison
 			
 			
 			
-			outputText("\"<i>I knew there was an eager student hiding inside you. Now, [if (esteem < 30) \"dear\"][if (esteem >= 30) \"slave\"], pay attention and you will learn how to properly receive my seed.</i>\" Before she finishes the sentence, she has pulled your head back onto her cock and her balls are once again pressed against your slimy chin. She holds you there until you are close to blacking out once more, and then begins moving your head in long, sumptuous strokes. With each one she pulls her knob all the way back to the opening of your mouth, giving you a second to worship it with your tongue, then with gentle force feeds you her entire length all over again. [if (esteem < 60) \"As a testament to how well she has prepared you,\"][if (esteem >= 60) \"As proof of the hidden talents she claims to see in you,\"] this treatment is far from the uncomforable experience you would have expected it to be. Aside from mild stretching and a feeling of being overfull, your gullet receives her pounding as if you were made for it.\n\n");
+			outputText("\"<i>I knew there was an eager student hiding inside you. Now, [if (esteem < 30) dear][if (esteem >= 30) slave], pay attention and you will learn how to properly receive my seed.</i>\" Before she finishes the sentence, she has pulled your head back onto her cock and her balls are once again pressed against your slimy chin. She holds you there until you are close to blacking out once more, and then begins moving your head in long, sumptuous strokes. With each one she pulls her knob all the way back to the opening of your mouth, giving you a second to worship it with your tongue, then with gentle force feeds you her entire length all over again. [if (esteem < 60) As a testament to how well she has prepared you,][if (esteem >= 60) As proof of the hidden talents she claims to see in you,] this treatment is far from the uncomforable experience you would have expected it to be. Aside from mild stretching and a feeling of being overfull, your gullet receives her pounding as if you were made for it.\n\n");
 			outputText("As you fall back into your previous fugue state, her teasing at your ");
 			if(player.hasVagina())
 			{
@@ -2062,7 +2062,7 @@ package classes.Scenes.Places.Prison
 			
 			outputText(" becomes unbearable. You begin to creep your hands back around to the front of your body, intent on giving yourself the release she is denying you. The second your shoulders go slack, though, she delivers a sharp slap to your right cheek, then resumes her fucking with increased vigor. \"<i>You haven't... earned... the right... to do that yet... slave.</i>\" Her voice is like a whip as she delivers the reproach in time with her strokes. You pull your arms back, incapable of any other response, and struggle to endure the torture as her tail redoubles its efforts. \n\n");
 			outputText("Soon you feel her grow stiff in your throat, and she erupts with one final, powerful stroke. Her testicles begin to twitch against your chin, and wave after wave of bulges travel though your lips, squeeze past your billowing tongue, and pump their way down your throat to pour straight into your stomach. Before long you are full to bursting and you feel her seed creeping its way back up your esophagus and into the back of your mouth. At this point she smoothly withdraws so that just the tip of her cock remains inside your mouth. Even though the waves begin to abate, she still manages to fill your mouth such that your cheeks balloon with her cum and a steady stream leaks through the ring of your lips locked around her head. \"<i>Do not swallow until I tell you to, slave.</i>\" Then, with your tongue drowning in a sea of her briney load, she fully withdraws and delivers her last few white ropes across your [face] and into your [hair].\n\n");
-			outputText("\"<i>An admirable effort, [if (esteem < 30) \"dear\"][if (esteem >= 30) \"slave\"].</i>\" she says, as she unceremoniously drops you to the floor. The sudden impact winds you and a good portion of her bounty sprays from your mouth, but you hold tight to what remains. ");
+			outputText("\"<i>An admirable effort, [if (esteem < 30) dear][if (esteem >= 30) slave].</i>\" she says, as she unceremoniously drops you to the floor. The sudden impact winds you and a good portion of her bounty sprays from your mouth, but you hold tight to what remains. ");
 			if(player.esteem < 35)
 			{
 				outputText("After what you just experienced, you aren't going to upset her by failing to meet her expectations now.");
@@ -2089,7 +2089,7 @@ package classes.Scenes.Places.Prison
 			lustChange = 100;
 			dynStats("lus", lustChange);
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
-			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && ((fastLearner && player.obey >= 25) || (player.obey > 25 + rand(6))))
+			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && ((fastLearner && player.obey >= 25) || (player.obey > 25 + rand(6) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))))
 			{
 				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,3);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
@@ -2107,16 +2107,16 @@ package classes.Scenes.Places.Prison
 			var itemSelector:int = 0;
 			if(branchChoice == "choose")
 			{
-				outputText("You reach a[if (esteem >= 40) \" bold but\"] difficult[if (esteem < 40) \" and desperate\"] decision. ");
+				outputText("You reach a[if (esteem >= 40)  bold but] difficult[if (esteem < 40)  and desperate] decision. ");
 				if(player.hunger < 40)
 				{
-					outputText("If you want to have any hope of withstanding Mistress Elly's relentless siege of your free will, you need to take the edge off your [if (esteem) < 60) \"demoralizing\"][if (esteem >= 60) \"distracting\"] and seemingly ever present hunger. But to do that, you are going to have to open the gate for the time being and");
+					outputText("If you want to have any hope of withstanding Mistress Elly's relentless siege of your free will, you need to take the edge off your [if (esteem < 60) demoralizing][if (esteem >= 60) distracting] and seemingly ever present hunger. But to do that, you are going to have to open the gate for the time being and");
 				}
 				else
 				{
-					outputText("You know that to earn her satisfaction and an untainted meal, you're going to have to commit to doing this well and right. So, as much as her demands weigh on you, this time you are going to [if (esteem) < 60) \"make an extra effort\"][if (esteem >= 60) \"bear the indignity\"] and");
+					outputText("You know that to earn her satisfaction and an untainted meal, you're going to have to commit to doing this well and right. So, as much as her demands weigh on you, this time you are going to [if (esteem < 60) make an extra effort][if (esteem >= 60) bear the indignity] and");
 				}
-				outputText(" do as she has instructed[if (corruption > 25) \" -- perhaps even a bit more\"]. ");
+				outputText(" do as she has instructed[if (corruption > 25)  -- perhaps even a bit more]. ");
 				if(player.esteem < 30)
 				{
 					outputText("You're not certain you can really convince her without suffering some indignity, but even if something goes wrong, you'll hopefully be fed and she'll hopefully be happy with you.");
@@ -2133,10 +2133,10 @@ package classes.Scenes.Places.Prison
 				outputText("\n\n");
 				if(player.cor < 30)
 				{
-					outputText("Even having [if (esteem < 30) \"made the difficult rationalization\"][if (esteem >= 30) \"reached your difficult resolution\"], though, lighting the spark to act is still a challenge. You spend a long moment with your eyes closed, searching within for courage and inspiration, ");
+					outputText("Even having [if (esteem < 30) made the difficult rationalization][if (esteem >= 30) reached your difficult resolution], though, lighting the spark to act is still a challenge. You spend a long moment with your eyes closed, searching within for courage and inspiration, ");
 					if(player.esteem < 30)
 					{
-						outputText("but despite your decision, the thought of actually crawling over to her with such enthusiasm is paralyzing, and you can find nothing inside of yourself [if (hunger > 60) \"-- not even your hollow stomach --\"] to reconcile that. As you open your eyes, though, you see her staring straight at you. Her countenance is not the impatient, demanding terror that you expected for your hesitation, but a kind, inviting grin. She gently taps her knee in beckoning, but maintains a relaxed stance, seemingly more curious as to if you'll approach than insistent on it.\n\n");
+						outputText("but despite your decision, the thought of actually crawling over to her with such enthusiasm is paralyzing, and you can find nothing inside of yourself [if (hunger > 60) -- not even your hollow stomach --] to reconcile that. As you open your eyes, though, you see her staring straight at you. Her countenance is not the impatient, demanding terror that you expected for your hesitation, but a kind, inviting grin. She gently taps her knee in beckoning, but maintains a relaxed stance, seemingly more curious as to if you'll approach than insistent on it.\n\n");
 						outputText("In the back of your mind, you know she's a demon with all the perversion and cruelty and evil attached, but none of that shows in the woman waiting for you across the room; you think you can bring yourself to go to <i>her</i> -- at least. ");
 					}
 					else if(player.esteem < 60)
@@ -2166,8 +2166,8 @@ package classes.Scenes.Places.Prison
 					}
 					
 				}
-				outputText("Thus encouraged, you reach forward[if (corruption > 25) \" with all the flirtatious grace you can muster\"] and start to crawl towards [if (obey >= 20) \"your Mistress\"][if (obey < 20) \"her\"].\n\n");
-				outputText("The stone floor is cold and harsh beneath you as you move, but you ignore the discomfort and attempt to lose yourself in your act. You set your face into a mask of suppliant desire, chase away your lingering [if (corruption < 20) \"self-consciousness\"][if (corruption >= 20) \"uncertainty\"], arch your back suggestively, and quickly find sultry tempo in your movement. With each pull of an arm you swing your [ass] heavily in the opposite direction");
+				outputText("Thus encouraged, you reach forward[if (corruption > 25)  with all the flirtatious grace you can muster] and start to crawl towards [if (obey >= 20) your Mistress][if (obey < 20) her].\n\n");
+				outputText("The stone floor is cold and harsh beneath you as you move, but you ignore the discomfort and attempt to lose yourself in your act. You set your face into a mask of suppliant desire, chase away your lingering [if (corruption < 20) self-consciousness][if (corruption >= 20) uncertainty], arch your back suggestively, and quickly find sultry tempo in your movement. With each pull of an arm you swing your [ass] heavily in the opposite direction");
 				if((player.hasCock()) || player.biggestTitSize() > 2)
 				{
 					outputText(", and the resulting shifting of your weight causes ");
@@ -2183,14 +2183,14 @@ package classes.Scenes.Places.Prison
 					{
 						outputText(" your [fullChest] to bounce and jiggle beneath you");
 					}
-					outputText(". While humiliating, displaying your endowments this way gives you a[if (corruption < 20) \"n unsettling but\"] much needed burst of confidence.");
+					outputText(". While humiliating, displaying your endowments this way gives you a[if (corruption < 20) n unsettling but] much needed burst of confidence.");
 				}
 				else
 				{
 					outputText(", trying your hardest to exude the compliant sensuality that she wants to see.");
 				}
 				outputText(" You bow your head deferentially as you crawl, but fix her with doe eyes so you can furtively watch her face as you go. Her approval is plainly growing by the time you are halfway to her feet, so you redouble your efforts as you continue. She beams you a knowing smile, then leans forward cheerfully and claps her hands against her thighs.\n\n");
-				outputText("\"<i>Oh, what a good [boy] you are!</i>\" she calls out, as though she was congratulating a well behaved puppy. \"<i>That's it, just little further and you can enjoy your treat.</i>\" You blush [if (esteem < 60) \"wildly \"][if (esteem >= 60) \"angrily \"] at the appalling implication, but only after a[if (esteem < 60) \"n unexpected\"] shiver of pride rushes down your spine in response to her demeaning praise. ");
+				outputText("\"<i>Oh, what a good [boy] you are!</i>\" she calls out, as though she was congratulating a well behaved puppy. \"<i>That's it, just little further and you can enjoy your treat.</i>\" You blush [if (esteem < 60) wildly ][if (esteem >= 60) angrily ] at the appalling implication, but only after a[if (esteem < 60) n unexpected] shiver of pride rushes down your spine in response to her demeaning praise. ");
 				if(player.tailType > 0 && player.esteem < 60)
 				{
 					outputText("Worse still, you find that your tail has begun to wag energetically of its own accord. ");
@@ -2226,8 +2226,8 @@ package classes.Scenes.Places.Prison
 						outputText("You cross the remaining distance not on your hands, but down on your elbows, further accentuating the submissive curvature of your back and the needy sway of your ass.");
 					}
 					outputText(" You're panting heavily when you finally reach your Mistress, and your cheeks are painted darker as you notice your tongue lolling out.\n\n");
-					outputText("[if (corruption < 20) \"Unsure of what to do\"][if (corruption >= 20) \"Thinking you know how to make a special show of it\"], you drop low, lean towards Mistress Elly's imposing boots, and begin licking at them. As your tongue meets the leather in [if (corruption < 20) \"short, tentative strokes\"][if (corruption >= 20) \"playful, dramatic flicks\"] you swim in a mix of shame and comfort. You probably look absurd, but at least worshipping your Mistress's boots is [if (corruption < 20) \"a sort of reprieve\"][if (corruption >= 20) \"an easy indulgence\"].\n\n");
-					outputText("\"<i>Well done! Aren't you just the cutest little slut ever?</i>\" She reaches down and tussles your [hair], and once again a rush of confusing feelings comes to the fore. [if (corruption < 20) Her demeaning address is jarring, but you can't help being soothed by the affectionate gesture that comes with it.\"][if (corruption >= 20) \"Being reminded of how pathetic you're acting makes your stomach turn, but at least she's pleased with you.\"] \"<i>Yes you are! Now, demonstrate what a good [boy] you are again by sitting back on your haunches and showing me what other tricks you can do.</i>\" \n\n");
+					outputText("[if (corruption < 20) Unsure of what to do][if (corruption >= 20) Thinking you know how to make a special show of it], you drop low, lean towards Mistress Elly's imposing boots, and begin licking at them. As your tongue meets the leather in [if (corruption < 20) short, tentative strokes][if (corruption >= 20) playful, dramatic flicks] you swim in a mix of shame and comfort. You probably look absurd, but at least worshipping your Mistress's boots is [if (corruption < 20) a sort of reprieve][if (corruption >= 20) an easy indulgence].\n\n");
+					outputText("\"<i>Well done! Aren't you just the cutest little slut ever?</i>\" She reaches down and tussles your [hair], and once again a rush of confusing feelings comes to the fore. [if (corruption < 20) Her demeaning address is jarring, but you can't help being soothed by the affectionate gesture that comes with it.][if (corruption >= 20) Being reminded of how pathetic you're acting makes your stomach turn, but at least she's pleased with you.] \"<i>Yes you are! Now, demonstrate what a good [boy] you are again by sitting back on your haunches and showing me what other tricks you can do.</i>\" \n\n");
 					outputText("You find yourself in very real danger of succumbing to the storm raging inside you, but after a moment of staring blankly at the now damp leather below of you, you realize that your only choice is to keep running from your insecurity until the performance is done. So resolved, you gather the seductive momentum you built crawling across the room, return the look of submission to your face, and raise yourself up to your knees.\n\n");
 				}
 				else if(player.esteem < 60)
@@ -2257,7 +2257,7 @@ package classes.Scenes.Places.Prison
 						}
 						outputText("and add an extra happy twist at the end of each seductive wiggle of your hindquarters as you complete your approach. A brief moment of wide eyed amusement resolves into a look of titillated glee on Mistress Elly's face, one that you struggle not to mirror as her tongue teases at her crimson lips.\n\n");
 					}
-					outputText("Upon arriving at your feet, you keep your new act going. [if (corruption < 25) \"You give a sunny whimper and rub your cheek affectionately at her thigh, earning a delighted coo and a pat on the head from your captor. Then, with a vacuous grin\"][if (corruption >= 25) \"With perhaps a bit too much genuine devotion, you give a passionate lick up her leather clad calf and soft, fleshy inner thigh. Then, with a frisky smile\"] you joyfully rise to your haunches, fold your hands politely in your lap, and arch your back with a playful snap of your shoulders[if (biggestTitSize > 2) \" that makes your [chest] heave and bounce merrily\"].\n\n");
+					outputText("Upon arriving at your feet, you keep your new act going. [if (corruption < 25) You give a sunny whimper and rub your cheek affectionately at her thigh, earning a delighted coo and a pat on the head from your captor. Then, with a vacuous grin][if (corruption >= 25) With perhaps a bit too much genuine devotion, you give a passionate lick up her leather clad calf and soft, fleshy inner thigh. Then, with a frisky smile] you joyfully rise to your haunches, fold your hands politely in your lap, and arch your back with a playful snap of your shoulders[if (biggestTitSize > 2)  that makes your [chest] heave and bounce merrily].\n\n");
 					outputText("\"<i>And you've even taught yourself to sit!</i>\" You continue to play along, smiling broadly as she patronizes you, but it does occur to you that the obedient gesture came easier than you expected. \"<i>Now, be a good [boy] and show me what other tricks you can do.</i>\"\n\n");
 				}
 				
@@ -2265,12 +2265,12 @@ package classes.Scenes.Places.Prison
 				if(!prison.trainingPet.prisonCaptorPetOptedOut() && player.esteem < 15 && player.cor < 10)
 				{
 					outputText("You suddenly realize what she still expects of you -- what she's really been expecting this whole time -- and your calm collapses into resigned dread as her fully erect cock bobs to and fro before your eyes. Its head is as big as of a small apple, its shaft the length of your forearm, and its girth nearly equivalent to your wrist. As you let your begging stance drop and inch closer, you again you fail to notice your convincing expression waver, this time plainly grimacing as your jaw indecisively lowers and rises.\n\n");
-					outputText("Your [if (obey < 20) \"captor\"][if (obey >= 20) \"Mistress\"] lightly clears her throat at your hesitation, but rather than continuing forward, you look to her attentively as your ears perk up, still inadvertently showing a rather mopey expression. Again she raises a curious eyebrow, but her delighted smile remains. You find yourself unable to read her gaze, but she must be happy as she gives you a heartening wink and ruffles your hair again.\n\n");
-					outputText("\"<i>Come on, [boy]; you can do it -- I'm not <b>that</b> big.</i>\" Feeling an unfamiliar rush of confidence [if (obey >= 20) \", and gratitude for the encouragement that brought it on\"], you look back down at your goal, open your mouth wide, and close your eyes. Keeping your paws planted in front of you and your posture reverent, you press your lips to her tip and lean forward.\n\n");
+					outputText("Your [if (obey < 20) captor][if (obey >= 20) Mistress] lightly clears her throat at your hesitation, but rather than continuing forward, you look to her attentively as your ears perk up, still inadvertently showing a rather mopey expression. Again she raises a curious eyebrow, but her delighted smile remains. You find yourself unable to read her gaze, but she must be happy as she gives you a heartening wink and ruffles your hair again.\n\n");
+					outputText("\"<i>Come on, [boy]; you can do it -- I'm not <b>that</b> big.</i>\" Feeling an unfamiliar rush of confidence [if (obey >= 20) , and gratitude for the encouragement that brought it on], you look back down at your goal, open your mouth wide, and close your eyes. Keeping your paws planted in front of you and your posture reverent, you press your lips to her tip and lean forward.\n\n");
 				}
 				else
 				{
-					outputText("Having maintained your conviction thus far, you see no reason to delay the inevitable. Her fully erect cock bobs to and fro before your eyes, concrete evidence that your display has had the desired effect. Its head is as big as of a small apple, its shaft the length of your forearm, and its girth nearly equivalent to your wrist, but you decide to throw caution to the wind and attempt to [if (esteem < 40) \"overcome how intimidated you are\"][if (esteem >= 40) \"prove that you aren't intimidated\"] by her size. You close your eyes, keep your arms at your side and your posture reverent, press your lips to her tip, and lean forward. \n\n");
+					outputText("Having maintained your conviction thus far, you see no reason to delay the inevitable. Her fully erect cock bobs to and fro before your eyes, concrete evidence that your display has had the desired effect. Its head is as big as of a small apple, its shaft the length of your forearm, and its girth nearly equivalent to your wrist, but you decide to throw caution to the wind and attempt to [if (esteem < 40) overcome how intimidated you are][if (esteem >= 40) prove that you aren't intimidated] by her size. You close your eyes, keep your arms at your side and your posture reverent, press your lips to her tip, and lean forward. \n\n");
 				}
 				outputText("Even unlubricated, her silky soft skin slides smoothly past your ");
 				if(player.femininity < 35)
@@ -2327,10 +2327,10 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText("Her eyes briefly flutter and roll at this, breaking from your ravenous stare for the first time since it began, and when they return you attempt to press your advantage. You maintain your [if (esteem < 40) \"needy\"][if (esteem >= 40) \"lusty\"] eye contact, and begin making long, dutiful strokes along the first half of her succulent cock.\n\n");
+					outputText("Her eyes briefly flutter and roll at this, breaking from your ravenous stare for the first time since it began, and when they return you attempt to press your advantage. You maintain your [if (esteem < 40) needy][if (esteem >= 40) lusty] eye contact, and begin making long, dutiful strokes along the first half of her succulent cock.\n\n");
 				}
 				outputText("She allows you to pump away in breathy silence about half a dozen times, your body finding a rhythm in the act despite how distractingly agreeable you find the flavors and textures of her peculiar skin to be. As you settle in, though, she rests her hand firmly but gently on the back of your head, careful not to disrupt your line of sight, and begins to vocalize the fervor building in her expression.\n\n");
-				outputText("\"<i>Yes, slave, very-oh-good. See... this, this is what I knew... ah, flick at the tip, yes... what I knew was hiding within you.</i>\" You cannot help but flare your eyes, elated that she is so [if (esteem < 40) \"pleased with\"][if (esteem >= 40) \"convinced by\"] your exploits. \"<i>Can't you... can't you just feel... oh, a bit deeper, dear... can't you just feel what a natural cocksucker you-ahhhh-are? </i>\" With each stroke more of her salty juice mixes in with your saliva, and you find yourself increasing your pace as the last bit of friction between your lips disappears into sublime, slippery, sensation. \"<i>Doesn't...mmm... it just... ohhh... feel wonderful... aaah... to-oh!-<b>accept it</b>?</i>\"\n\n");
+				outputText("\"<i>Yes, slave, very-oh-good. See... this, this is what I knew... ah, flick at the tip, yes... what I knew was hiding within you.</i>\" You cannot help but flare your eyes, elated that she is so [if (esteem < 40) pleased with][if (esteem >= 40) convinced by] your exploits. \"<i>Can't you... can't you just feel... oh, a bit deeper, dear... can't you just feel what a natural cocksucker you-ahhhh-are? </i>\" With each stroke more of her salty juice mixes in with your saliva, and you find yourself increasing your pace as the last bit of friction between your lips disappears into sublime, slippery, sensation. \"<i>Doesn't...mmm... it just... ohhh... feel wonderful... aaah... to-oh!-<b>accept it</b>?</i>\"\n\n");
 				outputText("Abruptly, she grasps you by your [hair], pulls you off her cock, and yanks your head back so that you couldn't break her gaze even if you wanted to. \"<i>Well, slave, doesn't it?</i>\"\n\n");
 				outputText("\"<i>Yes, Mistress!</i>\" you reply hastily, eager to ");
 				if(player.esteem < 40)
@@ -2365,15 +2365,15 @@ package classes.Scenes.Places.Prison
 				outputText("She pulls your head back by your hair and stares directly into your eyes, watching your reaction intently as you feel a thick, velvet rope wrap around your waist. It cinches itself in place, then ");
 				if(player.hasCock())
 				{
-					outputText("coils itself tightly around your [if (corruption < 20) \"limp\"][if (corruption >= 20) \"semi-erect\"] [cock biggest].");
+					outputText("coils itself tightly around your [if (corruption < 20) limp][if (corruption >= 20) semi-erect] [cock biggest].");
 					if(player.hasVagina())
 					{
-						outputText(" Afterwards, it straps itself between your legs, spreading your[if (corruption >= 20) \" damp\"] lips and squeezing tightly against your [clit].");
+						outputText(" Afterwards, it straps itself between your legs, spreading your[if (corruption >= 20)  damp] lips and squeezing tightly against your [clit].");
 					}
 				}
 				else if(player.hasVagina())
 				{
-					outputText("straps itself between your legs, spreading your[if (corruption >= 20) \" damp\"] lips and squeezing tightly against your [clit].");
+					outputText("straps itself between your legs, spreading your[if (corruption >= 20)  damp] lips and squeezing tightly against your [clit].");
 				}
 				else
 				{
@@ -2420,8 +2420,8 @@ package classes.Scenes.Places.Prison
 					}
 					
 				}
-				outputText(" For several minutes of this she simply watches you go, smirking and chuckling at your provocative efforts. Then, as your jaw is tiring and your [if (esteem < 40) \"spirit\"][if (esteem >= 40) \"energy\"] waning, she rolls her eyes and sighs. \"<i>It was a good show at first, but you're boring me now, slave. If you want to earn your meal, you're going to have to do something special to impress me.</i>\"\n\n");
-				outputText("You stop moving halfway through a stroke, overcome with [if (esteem < 50) \"panic\"][if (esteem >= 50) \"frustration\"]. ");
+				outputText(" For several minutes of this she simply watches you go, smirking and chuckling at your provocative efforts. Then, as your jaw is tiring and your [if (esteem < 40) spirit][if (esteem >= 40) energy] waning, she rolls her eyes and sighs. \"<i>It was a good show at first, but you're boring me now, slave. If you want to earn your meal, you're going to have to do something special to impress me.</i>\"\n\n");
+				outputText("You stop moving halfway through a stroke, overcome with [if (esteem < 50) panic][if (esteem >= 50) frustration]. ");
 				if(!prison.trainingPet.prisonCaptorPetOptedOut() && player.esteem < 15 && player.cor < 10)
 				{
 					outputText("There is no way you can simply give up after coming this far, and so with her knob still leaking in your mouth you consider how you might impress her. She did say she was happy with your attending her boots before...maybe your tongue could be of further use?");
@@ -2449,16 +2449,16 @@ package classes.Scenes.Places.Prison
 			{
 				if(player.cor < 20)
 				{
-					outputText("You know that Mistress Elly expects you to find some way to debase yourself even further, but for a moment you are[if (esteem < 40) \" completely\"] at a loss as to how to do so. You can see her growing impatient, and you attempt to buy yourself some time by making another show of playing with strands of saliva and pre-cum, only to earn another roll of her eyes. Your [if (esteem < 50) \"panic\"][if (esteem >= 50) \"frustration\"] deepens, but then a thread of fluid falls to your [chest] and you find the inspiration you were searching for.\n\n");
+					outputText("You know that Mistress Elly expects you to find some way to debase yourself even further, but for a moment you are[if (esteem < 40)  completely] at a loss as to how to do so. You can see her growing impatient, and you attempt to buy yourself some time by making another show of playing with strands of saliva and pre-cum, only to earn another roll of her eyes. Your [if (esteem < 50) panic][if (esteem >= 50) frustration] deepens, but then a thread of fluid falls to your [chest] and you find the inspiration you were searching for.\n\n");
 				}
 				else
 				{
-					outputText("You can read Mistress Elly's growing impatience as plain as day on her face, and you know you are going to have to act quickly if you want to [if (esteem < 40) \"please her\"][if (esteem >= 40) \"keep control of the encounter\"]. Thankfully, it only takes a moment for your creativity to express itself.\n\n");
+					outputText("You can read Mistress Elly's growing impatience as plain as day on her face, and you know you are going to have to act quickly if you want to [if (esteem < 40) please her][if (esteem >= 40) keep control of the encounter]. Thankfully, it only takes a moment for your creativity to express itself.\n\n");
 				}
-				outputText("You gather your determination while treating her to another[if (esteem < 30) \" desperate,\"] lust filled look, then rise up to a low squat, bringing her cock level with your chest. Your movement causes her tail to constrict about your crotch, but you do your best to ignore the pleasurable feelings this generates and focus on your intended theatrics. ");
+				outputText("You gather your determination while treating her to another[if (esteem < 30)  desperate,] lust filled look, then rise up to a low squat, bringing her cock level with your chest. Your movement causes her tail to constrict about your crotch, but you do your best to ignore the pleasurable feelings this generates and focus on your intended theatrics. ");
 				if(player.biggestTitSize() < 2)
 				{
-					outputText("Although your [if (biggestTitSize >= 1) \"barely-there bust\"][if (biggestTitSize < 1) \"manly chest\"] won't be able to offer her any real stimulation, you can think of no better way to display the lascivious subservience that her domineering presence demands than to make a naughty show of worshiping her cock as if you had a bosom to wrap around it.\n\n");
+					outputText("Although your [if (biggestTitSize >= 1) barely-there bust][if (biggestTitSize < 1) manly chest] won't be able to offer her any real stimulation, you can think of no better way to display the lascivious subservience that her domineering presence demands than to make a naughty show of worshiping her cock as if you had a bosom to wrap around it.\n\n");
 					outputText("Still, as you take hold of her monstrous shaft and press it against the flesh in the center of your barren chest, you cannot bring yourself to continue watching her reaction -- what you are about to do is already disgraceful enough without her input. Instead you close your eyes and make your [face] present an exaggerated expression of ecstasy, then begin to writhe your body against her slick, imposing warmth.\n\n");
 					outputText("A soft, contended moan above you and a subtle shifting of her weight towards you serve as comforting indications that you are on the right track, but you soon begin to question the wisdom of moving your body in this fashion. With each undulation and twist ");
 					if(player.hasCock())
@@ -2490,14 +2490,14 @@ package classes.Scenes.Places.Prison
 				}
 				else if(player.biggestTitSize() < 5)
 				{
-					outputText("Although your [chest] aren't large enough to fully engulf her intimidating girth, you can think of no better way to display the [if (esteem < 40) \"the lascivious subservience that her domineering presence demands\"][if (esteem >= 40) \"the lascivious behavior that she expects to see\"] than to make a naughty show of [if (esteem < 20) \"worshiping\"][if (esteem >= 20) \"massaging\"] her cock with your bosom.\n\n");
+					outputText("Although your [chest] aren't large enough to fully engulf her intimidating girth, you can think of no better way to display the [if (esteem < 40) the lascivious subservience that her domineering presence demands][if (esteem >= 40) the lascivious behavior that she expects to see] than to make a naughty show of [if (esteem < 20) worshiping][if (esteem >= 20) massaging] her cock with your bosom.\n\n");
 					if(player.esteem < 40)
 					{
-						outputText("Still, as you take hold of her monstrous shaft and press it between your [if (biggestTitSize >= 3) \"shapely\"][if (biggestTitSize < 3) \"modest\"] tits, you cannot bring yourself to continue watching her reaction -- what you are about to do is already disgraceful enough without her input. Instead you close your eyes and make your [face] present an exaggerated expression of ecstasy, then begin to writhe your body against her slick, imposing warmth, using your palms to crush your flesh against her.\n\n");
+						outputText("Still, as you take hold of her monstrous shaft and press it between your [if (biggestTitSize >= 3) shapely][if (biggestTitSize < 3) modest] tits, you cannot bring yourself to continue watching her reaction -- what you are about to do is already disgraceful enough without her input. Instead you close your eyes and make your [face] present an exaggerated expression of ecstasy, then begin to writhe your body against her slick, imposing warmth, using your palms to crush your flesh against her.\n\n");
 					}
 					else
 					{
-						outputText("As you take hold of her monstrous shaft and press it between your [if (biggestTitSize >= 3) \"shapely\"][if (biggestTitSize < 3) \"modest\"] tits, you decide to forgo watching her reaction in favor of making a shift in your dramatic approach. You close your eyes, use your palms to crush your flesh against her, make your [face] present an exaggerated expression of ecstasy, and begin to writhe your body against her slick, imposing warmth.\n\n");
+						outputText("As you take hold of her monstrous shaft and press it between your [if (biggestTitSize >= 3) shapely][if (biggestTitSize < 3) modest] tits, you decide to forgo watching her reaction in favor of making a shift in your dramatic approach. You close your eyes, use your palms to crush your flesh against her, make your [face] present an exaggerated expression of ecstasy, and begin to writhe your body against her slick, imposing warmth.\n\n");
 					}
 					outputText("A soft, contended moan above you and a subtle shifting of her weight towards you serve as comforting indications that you are on the right track, but you soon begin to question the wisdom of moving your body in this fashion. With each undulation and twist ");
 					if(player.hasCock())
@@ -2517,12 +2517,12 @@ package classes.Scenes.Places.Prison
 						outputText("the enticing velvet embrace of her tail rubs vigorously between your legs");
 					}
 					
-					outputText(", making your ecstasy much less of an exaggeration as you go. You attempt to distract yourself, shifting your [chest] around her silky, lubricated length to provide as much stimulation as you can as you rub against it, and massaging her tip with a welcoming mouth every time it slides near, but it only makes matters worse. Before long you are releasing long, plaintive moans of your own each time her knob pulls wetly through your lips, and tugging salaciously at your engorged [nipples][if (milkQuantity > 10) \" so that their milky excretions can join your exaltation of her manhood\"].\n\n");
+					outputText(", making your ecstasy much less of an exaggeration as you go. You attempt to distract yourself, shifting your [chest] around her silky, lubricated length to provide as much stimulation as you can as you rub against it, and massaging her tip with a welcoming mouth every time it slides near, but it only makes matters worse. Before long you are releasing long, plaintive moans of your own each time her knob pulls wetly through your lips, and tugging salaciously at your engorged [nipples][if (milkQuantity > 10)  so that their milky excretions can join your exaltation of her manhood].\n\n");
 					outputText("\"<i>See, now you are being a bit more honest, slave,</i>\" she chuckles down at you as you thrash about before her. \"<i>Wouldn't you agree?</i>\" Her tail constricts sharply about your crotch and the only response you can manage is an open mouthed gasp. \"<i>I thought so.</i>\"\n\n");
 				}
 				else
 				{
-					outputText("As intimidating as her girth may be, your [chest] could easily engulf her, and you can think of no better way to display the [if (esteem < 40) \"the lascivious subservience that her domineering presence demands\"][if (esteem >= 40) \"the lascivious behavior that she expects to see\"] than to make a naughty show of [if (esteem < 20) \"worshiping\"][if (esteem >= 20) \"massaging\"] her cock within your bosom.\n\n");
+					outputText("As intimidating as her girth may be, your [chest] could easily engulf her, and you can think of no better way to display the [if (esteem < 40) the lascivious subservience that her domineering presence demands][if (esteem >= 40) the lascivious behavior that she expects to see] than to make a naughty show of [if (esteem < 20) worshiping][if (esteem >= 20) massaging] her cock within your bosom.\n\n");
 					if(player.esteem < 40)
 					{
 						outputText("Still, as you take hold of her monstrous shaft and wrap your voluptuous tits around it, you cannot bring yourself to continue watching her reaction -- what you are about to do is already disgraceful enough without her input. Instead you close your eyes and make your [face] present an exaggerated expression of ecstasy, then begin to writhe your body against her slick, imposing warmth, using your palms to crush your flesh about her.\n\n");
@@ -2549,7 +2549,7 @@ package classes.Scenes.Places.Prison
 						outputText("the enticing velvet embrace of her tail rubs vigorously between your legs");
 					}
 					
-					outputText(", making your ecstasy much less of an exaggeration as you go. You attempt to distract yourself, squeezing your [chest] around her silky, lubricated length to provide as much stimulation as you can as you billow over it, and lowering your chin to your sternum so that her tip enters your welcoming mouth as it pokes through the top of your pillowy embrace, but it only makes matters worse. Before long you are releasing long, plaintive moans of your own each time her knob pulls wetly through your lips, and tugging salaciously at your engorged [nipples][if (milkQuantity > 10) \" so that their milky excretions can join your exaltation of her manhood\"].\n\n");
+					outputText(", making your ecstasy much less of an exaggeration as you go. You attempt to distract yourself, squeezing your [chest] around her silky, lubricated length to provide as much stimulation as you can as you billow over it, and lowering your chin to your sternum so that her tip enters your welcoming mouth as it pokes through the top of your pillowy embrace, but it only makes matters worse. Before long you are releasing long, plaintive moans of your own each time her knob pulls wetly through your lips, and tugging salaciously at your engorged [nipples][if (milkQuantity > 10)  so that their milky excretions can join your exaltation of her manhood].\n\n");
 					outputText("\"<i>See, now you are being a bit more honest, slave,</i>\" she chuckles down at you as you thrash about before her. \"<i>Wouldn't you agree?</i>\" Her tail constricts sharply about your crotch and the only response you can manage is an open mouthed gasp. \"<i>I thought so.</i>\"\n\n");
 				}
 				
@@ -2568,7 +2568,7 @@ package classes.Scenes.Places.Prison
 			{
 				if(!prison.trainingPet.prisonCaptorPetOptedOut() && player.esteem < 15 && player.cor < 10)
 				{
-					outputText("As you consider how to go about impressing Mistress Elly you find it hard not to be distracted by the shifting of her velvety rope. You can read her growing impatience as plain as day on her face, and you know you need to act quickly if you want to please her, but every twitch of her tail sends an increasingly potent shiver up your spine. Unable to endure it, you begin to convulse, pulling gradually away until her cock suddenly leaves your mouth with a soggy pop and you arch your back with an indecent whine, drool seeping down your chin and neck as tears fill your eyes. Your [if (obey < 20) \"captor\"][if (obey >= 20) \"Mistress\"] lets her cord go slack with an amused, triumphant sigh, and you collapse forward between her legs with a thud.\n\n");
+					outputText("As you consider how to go about impressing Mistress Elly you find it hard not to be distracted by the shifting of her velvety rope. You can read her growing impatience as plain as day on her face, and you know you need to act quickly if you want to please her, but every twitch of her tail sends an increasingly potent shiver up your spine. Unable to endure it, you begin to convulse, pulling gradually away until her cock suddenly leaves your mouth with a soggy pop and you arch your back with an indecent whine, drool seeping down your chin and neck as tears fill your eyes. Your [if (obey < 20) captor][if (obey >= 20) Mistress] lets her cord go slack with an amused, triumphant sigh, and you collapse forward between her legs with a thud.\n\n");
 					outputText("\"<i>My, my. Maybe you should have let me teach you more basics before attempting to impress me, hm?</i>\" she offers with a chuckle. \"<i>Or at least developed enough... endurance... that my little 'diagnostic' wouldn't reduce you to a slobbering mess?</i>\" At that, the tears begin running in rivulets down your face; not only do her words sting, but she sounds more satisfied <i>now</i> than at any point while you were nursing her cock.\n\n");
 					outputText("As a result you merely lie on the floor, wallowing in failure for several beats, until her tail constricts again and you feel a sharp tap on your [ass].\n\n");
 					outputText("\"<i>Rise and shine, sleepyhead,</i>\" she sings, clearly enjoying her moment enough not to hurry rousing you, her spade-tipped whip lightly alternating between your cheeks. \"<i>You still have a job to finish, remember?</i>\"\n\n");
@@ -2579,14 +2579,14 @@ package classes.Scenes.Places.Prison
 				{
 					if(player.hasCock())
 					{
-						outputText("As you consider how to go about impressing Mistress Elly you find it hard not to be distracted by the velvety coils shifting around your [cock biggest]. You can read her growing impatience as plain as day on her face, and you know you are going to have to act quickly if you want to [if (esteem < 40) \"please her\"][if (esteem >= 40) \"keep control of the encounter\"], but [if (corruption < 20) \"it's all you can do to stave off the carnal assault of your imagination\"][if (corruption >= 20) \"at the moment your imagination has run away with your senses\"]. Every twitch of her tail fills your mind with thoughts of [if (esteem < 60) \"a warm, moist pussy slowly enveloping you\"][if (esteem >= 60) \"pushing yourself into a warm, moist pussy\"], deepening your abiding [if (esteem < 50) \"panic\"][if (esteem >= 50) \"frustration\"]. Then, noting a dampness between her shapely legs, inspiration hits you.\n\n");
+						outputText("As you consider how to go about impressing Mistress Elly you find it hard not to be distracted by the velvety coils shifting around your [cock biggest]. You can read her growing impatience as plain as day on her face, and you know you are going to have to act quickly if you want to [if (esteem < 40) please her][if (esteem >= 40) keep control of the encounter], but [if (corruption < 20) it's all you can do to stave off the carnal assault of your imagination][if (corruption >= 20) at the moment your imagination has run away with your senses]. Every twitch of her tail fills your mind with thoughts of [if (esteem < 60) a warm, moist pussy slowly enveloping you][if (esteem >= 60) pushing yourself into a warm, moist pussy], deepening your abiding [if (esteem < 50) panic][if (esteem >= 50) frustration]. Then, noting a dampness between her shapely legs, inspiration hits you.\n\n");
 					}
 					else
 					{
-						outputText("As you consider how to go about impressing Mistress Elly, the firm, velvety grasp of her tail between your legs gives you a sudden burst of inspiration. [if (corruption < 20) \"Not only will you surprise her, but perhaps you may even be able to shift the focus of this encounter to a slightly more comfortable venue.\"][if (corruption >= 20) \"Perhaps if you explore her more sensitive side you can throw her off balance and really take control of this encounter.\"]\n\n");
+						outputText("As you consider how to go about impressing Mistress Elly, the firm, velvety grasp of her tail between your legs gives you a sudden burst of inspiration. [if (corruption < 20) Not only will you surprise her, but perhaps you may even be able to shift the focus of this encounter to a slightly more comfortable venue.][if (corruption >= 20) Perhaps if you explore her more sensitive side you can throw her off balance and really take control of this encounter.]\n\n");
 					}
-					outputText("You pull her cock from your mouth with a soggy pop, take hold of her tip with your left hand, and treat her to another[if (esteem < 30) \" desperate,\"] lust filled look. Then, while lowering yourself down to sit with your ass between your bent knees, you lick your way down the underside of her cock toward her balls. Your movement causes her tail to constrict about your crotch, but you do your best to ignore the pleasurable feelings this generates and focus on carrying out your delicate strategy. You give her sack a perfunctory suckle, then grab hold of it with your right hand and begin to caress it gently, all the while massaging your left hand along her slimy length. Only after seeing your ministrations bring pleasure back to her face do you surreptitiously lift her phallic parts and expose your true destination.\n\n");
-					outputText("You crane your neck and lean forward quickly, [if (esteem < 50) \"overcome with a sudden desire to explore her folds\"][if (esteem >= 50) \"so as to not allow her time to react\"]. Unsurprisingly, her female sex is every bit as beautifully sculpted as the rest of her body; smooth, supple lips spread coyly about her slit, glistening with dewy residue and a lively rosy pink in color, and where they elegantly come together a delightfully petite button of glossy flesh peaks through, begging for attention. [if (esteem < 50) \"Eager to\"][if (esteem >= 50) \"Happy to\"] oblige, you reach out, and as you make contact her heady aroma fills your nostrils and explodes on your tongue. As with the rest of her flesh, there is an uncanny mixture of earthy overtones and sweet, cinnamon infused highlights, but here there are also complimentary light, floral notes that leave you dazed and loopy.\n\n");
+					outputText("You pull her cock from your mouth with a soggy pop, take hold of her tip with your left hand, and treat her to another[if (esteem < 30)  desperate,] lust filled look. Then, while lowering yourself down to sit with your ass between your bent knees, you lick your way down the underside of her cock toward her balls. Your movement causes her tail to constrict about your crotch, but you do your best to ignore the pleasurable feelings this generates and focus on carrying out your delicate strategy. You give her sack a perfunctory suckle, then grab hold of it with your right hand and begin to caress it gently, all the while massaging your left hand along her slimy length. Only after seeing your ministrations bring pleasure back to her face do you surreptitiously lift her phallic parts and expose your true destination.\n\n");
+					outputText("You crane your neck and lean forward quickly, [if (esteem < 50) overcome with a sudden desire to explore her folds][if (esteem >= 50) so as to not allow her time to react]. Unsurprisingly, her female sex is every bit as beautifully sculpted as the rest of her body; smooth, supple lips spread coyly about her slit, glistening with dewy residue and a lively rosy pink in color, and where they elegantly come together a delightfully petite button of glossy flesh peaks through, begging for attention. [if (esteem < 50) Eager to][if (esteem >= 50) Happy to] oblige, you reach out, and as you make contact her heady aroma fills your nostrils and explodes on your tongue. As with the rest of her flesh, there is an uncanny mixture of earthy overtones and sweet, cinnamon infused highlights, but here there are also complimentary light, floral notes that leave you dazed and loopy.\n\n");
 				}
 				outputText("Above you there is a sharp intake of breath and light laugh, but you tune that out and lose yourself in the sensory wonderland of your performance. You commence your offensive by lightly teasing your tongue around the delicate folds of skin that shield her clitoris, then follow with a series of slow, heavy flicks directly over her sensitive button. In response to each her tail ");
 				if(player.hasCock())
@@ -2595,11 +2595,11 @@ package classes.Scenes.Places.Prison
 					{
 						outputText("mirrors your tongue's movement against your own [clit], and ");
 					}
-					outputText("shifts and squeezes around your [if (corruption < 20) \"semi-erect\"][if (corruption >= 20) \"already hard\"] [cock biggest].");
+					outputText("shifts and squeezes around your [if (corruption < 20) semi-erect][if (corruption >= 20) already hard] [cock biggest].");
 				}
 				else if(player.hasVagina())
 				{
-					outputText("mirrors your tongue's movement against your own [clit], and squeezes itself suggestively between your[if (corruption >= 20) \" damp\"][if (corruption >= 20) \"already wet\"] lips.");
+					outputText("mirrors your tongue's movement against your own [clit], and squeezes itself suggestively between your[if (corruption >= 20)  damp][if (corruption >= 20) already wet] lips.");
 				}
 				else
 				{
@@ -2613,13 +2613,13 @@ package classes.Scenes.Places.Prison
 					outputText("You continue to make long, thorough strokes in and around her folds, occasionally giving her button a shy, tentative suckle. You think you hear some murmuring, but it's too choppy to make out, and your mind is too busy basking in your owner's delicious cunt anyhow. So you continue, submissively slurping and lapping and kissing until your euphoric bubble is suddenly popped by the sound of a loud, sharp moan.\n\n");
 					outputText("You've barely had time to blink when a sharp tug of your [hair] drags you out from between Elly's legs and curls your neck to look up at her -- which you do, your eyes wavering without focus, your cheeks glistening like rubies and your tongue lolling dumbly in a faint, innocent, absent-minded grin.\n\n");
 					outputText("The amethyst fury of <i>her</i> countenance seems somewhat unwarranted, then, but it quickly softens into muted exasperation as you take notice and your own expression wilts into a terrified apology. By the time she speaks, though, you've calmed down; her lips have pursed into a saintly, sympathetic smile, her eyes have settled into an authoritative but comforting stare, and her olive skin has an endearing tint that you don't recall having seen before.\n\n");
-					outputText("\"<i>You haven't earned that privilege, [boy]. But for your... spirited effort... I'll let it slide this time.</i>\" Her voice is soft, as if an amplified whisper, and preternaturally calm, as if restraining something. It sounds like she's restraining your punishment, though, so you merely lower your eyes [if (obey < 20) \"agreeably\"][if (obey >= 20) \"submissively\"] as she relaxes her grip. As she tilts your head back towards its primary duty, your lower lip quivers a bit, but you feel a little better as your heedlessly probing tongue collects a smear of juice left on your cheek and your mouth fills again with fruit and flowers.\n\n");
+					outputText("\"<i>You haven't earned that privilege, [boy]. But for your... spirited effort... I'll let it slide this time.</i>\" Her voice is soft, as if an amplified whisper, and preternaturally calm, as if restraining something. It sounds like she's restraining your punishment, though, so you merely lower your eyes [if (obey < 20) agreeably][if (obey >= 20) submissively] as she relaxes her grip. As she tilts your head back towards its primary duty, your lower lip quivers a bit, but you feel a little better as your heedlessly probing tongue collects a smear of juice left on your cheek and your mouth fills again with fruit and flowers.\n\n");
 					outputText("\"<i>Now then...</i>\" she says with a relaxed sigh, her tone seemingly back to normal. \"<i>show me you know how to receive my <b>seed</b>, too.</i>\" She gives your hair another affectionate tussle, but her hand does not leave your locks, her fingers actually winding through them as if to keep an intimate hold.");
 				}
 				else
 				{
-					outputText(" You try to tune this out as well, [if (esteem < 50) \"but to little effect\"][if (esteem >= 50) \"but find only moderate success\"]. Still you persist, tracing your way through the folds of her lips all the way around her entrance, then alternating between licking lightly at her clit and teasing your tongue in and out of her hole, doing your best to endure your own growing urges as her tail echoes your every move.\n\n");
-					outputText("Soon the sound of heavy breathing fills your ears, and you hasten your attack, momentarily awash in jubilant zeal. Only when her tail's corresponding blitz doubles you over do you stop and realize that the breathing was your own. \"<i>Well, that was a fun diversion. I should punish you for assuming you've earned the privilege of tasting my cunt, but it was such a spirited effort that I'll overlook it this once.</i>\" She gives a disdainful snort, unable to contain her contemptuous mirth. \"<i>A witless and clumsy effort, mind you, but still spirited.</i>\" [if (esteem < 40) \"You make a bashful attempt to ignore her dismissive mockery, but true or not her words still sting.\"][if (esteem >= 40) \"While you recongnize her taunt for what it is, the words still wound your pride.\"]\n\n");
+					outputText(" You try to tune this out as well, [if (esteem < 50) but to little effect][if (esteem >= 50) but find only moderate success]. Still you persist, tracing your way through the folds of her lips all the way around her entrance, then alternating between licking lightly at her clit and teasing your tongue in and out of her hole, doing your best to endure your own growing urges as her tail echoes your every move.\n\n");
+					outputText("Soon the sound of heavy breathing fills your ears, and you hasten your attack, momentarily awash in jubilant zeal. Only when her tail's corresponding blitz doubles you over do you stop and realize that the breathing was your own. \"<i>Well, that was a fun diversion. I should punish you for assuming you've earned the privilege of tasting my cunt, but it was such a spirited effort that I'll overlook it this once.</i>\" She gives a disdainful snort, unable to contain her contemptuous mirth. \"<i>A witless and clumsy effort, mind you, but still spirited.</i>\" [if (esteem < 40) You make a bashful attempt to ignore her dismissive mockery, but true or not her words still sting.][if (esteem >= 40) While you recongnize her taunt for what it is, the words still wound your pride.]\n\n");
 					outputText("\"<i>Now, slave, get back to doing what your slutty little mouth was made for: swallow me whole and show me you know what to do with my seed.</i>\"");
 				}
 			}
@@ -2627,16 +2627,16 @@ package classes.Scenes.Places.Prison
 			{
 				if(player.cor < 20)
 				{
-					outputText("You know that Mistress Elly expects you to find some way to debase yourself even further, but for a moment you are[if (esteem < 40) \" completely\"] at a loss as to how to do so. You can see her growing impatient, and you attempt to buy yourself some time by making another show of playing with strands of saliva and pre-cum, only to earn another roll of her eyes. Your [if (esteem < 50) \"panic\"][if (esteem >= 50) \"frustration\"] deepens, but then as you stare down her monumental length you realize what you need to do.\n\n");
+					outputText("You know that Mistress Elly expects you to find some way to debase yourself even further, but for a moment you are[if (esteem < 40)  completely] at a loss as to how to do so. You can see her growing impatient, and you attempt to buy yourself some time by making another show of playing with strands of saliva and pre-cum, only to earn another roll of her eyes. Your [if (esteem < 50) panic][if (esteem >= 50) frustration] deepens, but then as you stare down her monumental length you realize what you need to do.\n\n");
 				}
 				else
 				{
-					outputText("You can read Mistress Elly's growing impatience as plain as day on her face, and you know you are going to have to act quickly if you want to [if (esteem < 40) \"please her\"][if (esteem >= 40) \"keep control of the encounter\"]. Staring down the length of her cock, you can only really think of one thing to do.\n\n");
+					outputText("You can read Mistress Elly's growing impatience as plain as day on her face, and you know you are going to have to act quickly if you want to [if (esteem < 40) please her][if (esteem >= 40) keep control of the encounter]. Staring down the length of her cock, you can only really think of one thing to do.\n\n");
 				}
-				outputText("You gather your determination while treating her to another[if (esteem < 30) \" desperate,\"] lust filled look, then rise up as high as you can on your knees and grasp her cock tentatively with both hands. Your movement causes her tail to constrict about your crotch, but you do your best to ignore the pleasurable feelings this generates and focus on the substantial challenge before you. ");
+				outputText("You gather your determination while treating her to another[if (esteem < 30)  desperate,] lust filled look, then rise up as high as you can on your knees and grasp her cock tentatively with both hands. Your movement causes her tail to constrict about your crotch, but you do your best to ignore the pleasurable feelings this generates and focus on the substantial challenge before you. ");
 				if(player.esteem < 40)
 				{
-					outputText("As you take in the sight of her throbbing girth you can't help but flinch, suddenly consumed by self-doubt. However, faced with the prospect of failing to please your [if (obey < 20) \"captor\"][if (obey >= 20) \"Mistress\"] after already succumbing to so much indignity, you accept that this drastic measure is you only real option,");
+					outputText("As you take in the sight of her throbbing girth you can't help but flinch, suddenly consumed by self-doubt. However, faced with the prospect of failing to please your [if (obey < 20) captor][if (obey >= 20) Mistress] after already succumbing to so much indignity, you accept that this drastic measure is you only real option,");
 				}
 				else if(player.esteem < 60)
 				{
@@ -2685,8 +2685,8 @@ package classes.Scenes.Places.Prison
 					outputText("squeeze your crotch tenderly in its velvet embrace, tickling at your [asshole] until it puckers in response.");
 				}
 				
-				outputText(" Each subsequent attempt goes a bit further, and earns a slightly more intense reply from her tail. Despite [if (esteem < 30) \"a halfhearted\"][if (esteem >= 30) \"a concerted\"] effort to remain calm and collected, she has you whipped near to a frenzy by the time your nose touches her pelvis. [if (esteem < 50) \"Yielding to\"][if (esteem >= 50) \"Unleashing\"] your rapidly growing lust, you strain your tongue out of your mouth and give her testicles a playful flick, then withdraw once more and[if (esteem < 40) \" sheepishly\"] look upward to see her reaction.\n\n");
-				outputText("Her sardonic smirk does not bode well. \"<i>Congratulations, [if (esteem < 20) \"dear\"][if (esteem >= 20) \"slave\"]. In your adorable effort to impress me, you've managed to achieve something that is expected of you every time my dick touches your cute little lips.</i>\" Your heart begins to sink, but before your manic desire can dissipate she fans your fire with another squeeze of her tail, and her countenance becomes friendly and consoling.\n\n");
+				outputText(" Each subsequent attempt goes a bit further, and earns a slightly more intense reply from her tail. Despite [if (esteem < 30) a halfhearted][if (esteem >= 30) a concerted] effort to remain calm and collected, she has you whipped near to a frenzy by the time your nose touches her pelvis. [if (esteem < 50) Yielding to][if (esteem >= 50) Unleashing] your rapidly growing lust, you strain your tongue out of your mouth and give her testicles a playful flick, then withdraw once more and[if (esteem < 40)  sheepishly] look upward to see her reaction.\n\n");
+				outputText("Her sardonic smirk does not bode well. \"<i>Congratulations, [if (esteem < 20) dear][if (esteem >= 20) slave]. In your adorable effort to impress me, you've managed to achieve something that is expected of you every time my dick touches your cute little lips.</i>\" Your heart begins to sink, but before your manic desire can dissipate she fans your fire with another squeeze of her tail, and her countenance becomes friendly and consoling.\n\n");
 				outputText("\"<i>No need to cry, dear -- I can feel how desperately you want to prove your dedication to me. Well, now is your chance: get my cock back down your throat and show me you know how to receive my seed.</i>\"");
 			}
 			
@@ -2719,7 +2719,7 @@ package classes.Scenes.Places.Prison
 			outputText("\"<i>See, dear? Isn't it so much easier now that you've dropped the pretense?</i>\" The words pummel at your crumbling defenses, and you are vaguely aware of your hips bucking against their gentle restraint in time with the rhythm of your head. You feel a fleeting regret at not having the capacity to counter her insinuation, but what remains of your conscious mind is now dedicated to ");
 			if(player.esteem < 40)
 			{
-				outputText("pleasing your [if (obey < 20) \"captor\"][if (obey >= 20) \"Mistress\"].");
+				outputText("pleasing your [if (obey < 20) captor][if (obey >= 20) Mistress].");
 			}
 			else if(player.esteem < 60)
 			{
@@ -2731,7 +2731,7 @@ package classes.Scenes.Places.Prison
 			}
 			
 			outputText("\n\n");
-			outputText("Any doubt you have in your ability to do so quickly melts away in the heat spreading from your loins, along with any difficulty you imagined there would be in stuffing her pillar of flesh inside of you. Where the taste and touch of her cock had previously been unexpectedly pleasant, the thing now pressed against your tongue is a feast for your inflamed senses, and you [if (esteem < 40) \"find yourself sucking\"][if (esteem >= 40) \"permit yourself to suck\"] with greedy abandon. You notice her begin to pulse within you, but it takes several moments for you to realize that your stomach is filling with her lust. In response, you hold still until your gut starts to expand, ");
+			outputText("Any doubt you have in your ability to do so quickly melts away in the heat spreading from your loins, along with any difficulty you imagined there would be in stuffing her pillar of flesh inside of you. Where the taste and touch of her cock had previously been unexpectedly pleasant, the thing now pressed against your tongue is a feast for your inflamed senses, and you [if (esteem < 40) find yourself sucking][if (esteem >= 40) permit yourself to suck] with greedy abandon. You notice her begin to pulse within you, but it takes several moments for you to realize that your stomach is filling with her lust. In response, you hold still until your gut starts to expand, ");
 			if(!prison.trainingPet.prisonCaptorPetOptedOut() && player.esteem < 15 && player.cor < 10)
 			{
 				outputText("your eyes watering as a frightening but overpowering flood of arousal washes over you. Smoldering in a daze of lust and embarrassment, you begin to slide off her rod in a slow, captivated motion.\n\n");
@@ -2782,7 +2782,7 @@ package classes.Scenes.Places.Prison
 			}
 			
 			outputText(" you quickly grab hold of her cock and make a hedonistic show of guiding her remaining spurts over your face and [chest].\n\n");
-			outputText("\"<i>Did you swallow without my permission, slave?</i>\" she asks when she is finally done, breasts heaving as she catches her breath. You shake your head no, suddenly grateful that you were too distracted to do anything other than hold her load. \"<i>I can't hear you, [if (esteem < 20) \"dear\"][if (esteem >= 20) \"slave\"].</i>\" Even engulfed in lust and success as you are, color still floods your cheeks as what she wants to see dawns on you. Regardless, a forceful squeeze from her tail coaxes you into action.\n\n");
+			outputText("\"<i>Did you swallow without my permission, slave?</i>\" she asks when she is finally done, breasts heaving as she catches her breath. You shake your head no, suddenly grateful that you were too distracted to do anything other than hold her load. \"<i>I can't hear you, [if (esteem < 20) dear][if (esteem >= 20) slave].</i>\" Even engulfed in lust and success as you are, color still floods your cheeks as what she wants to see dawns on you. Regardless, a forceful squeeze from her tail coaxes you into action.\n\n");
 			outputText("\"<i>Nooo... Millth... streth...</i>\" you say, head tilted back so as to avoid spilling as you gargle out the syllables. Despite your best efforts, a waterfall of cum still flows down your chin, the sight of which makes her smile from ear to ear.\n\n");
 			outputText("\"<i>Good [boy]! Oh, you've made me so proud today. You may swallow once I've left -- masturbate too, should you feel the need.</i>\" Her tail gives you one final tantalizing hug, then she releases you with another conspiratorial wink. ");
 			var shortName:Useable = consumables.P_BREAD;
@@ -2815,7 +2815,7 @@ package classes.Scenes.Places.Prison
 			}
 			if(player.obey >= 20)
 			{
-				outputText("[if (esteem < 40) \"Unable to control yourself\"][if (esteem >= 40) \"Lamenting the scattered remnants of your plans\"], you do exactly as she suggested the moment she is gone, rubbing [if (esteem < 30) \"desperately\"][if (esteem >= 30) \"distractedly\"] at your ");
+				outputText("[if (esteem < 40) Unable to control yourself][if (esteem >= 40) Lamenting the scattered remnants of your plans], you do exactly as she suggested the moment she is gone, rubbing [if (esteem < 30) desperately][if (esteem >= 30) distractedly] at your ");
 				if(player.hasCock())
 				{
 					outputText("engorged [cock biggest]");
@@ -2829,7 +2829,7 @@ package classes.Scenes.Places.Prison
 					outputText("aroused pelvis");
 				}
 				
-				outputText(" while [if (esteem < 30) \"dutifully\"][if (esteem >= 30) \"absentmindedly\"] ingesting her seed.\n\n");
+				outputText(" while [if (esteem < 30) dutifully][if (esteem >= 30) absentmindedly] ingesting her seed.\n\n");
 			}
 			if(prison.prisonIsRestrained())
 			{
@@ -2842,7 +2842,7 @@ package classes.Scenes.Places.Prison
 			prison.changeEsteem(-5,prison.inPrison);
 			prison.changeObey(2,prison.inPrison);
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
-			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 25 + rand(3))
+			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 25 + rand(3) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
 				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,3);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
@@ -2879,8 +2879,8 @@ package classes.Scenes.Places.Prison
 				{
 					outputText("\n\nWith a snap of her fingers, your restraints vanish into thin air.",false);
 				}
-				outputText("\n\nShe gives you a condescending pat on the head, and you seethe with shame and impotent rage, meekly enduring the gesture. As she then trails her graceful fingers down the side of your face, the shame intensifies but the rage melts into desire, and [if (sensitivity < 50) \"it is all you can do to resist the urge to\"][if (sensitivity >= 50) \"you are overcome by an urge to\"] lean into her electrifying caress. Her capacity to play your emotions like a fine instrument is deeply alarming, and for a moment it occurs to you that you may even be less equipped to fight this demon emotionally than you are phyiscally. You are denied the time to dwell on it, though, as she ends her caress. Squatting down on her haunches, she takes your chin in a soft but firm grasp, enthralling your gaze with her piercing violet eyes.\n\n",false);
-				outputText("\"<i>The first step is to learn to show your Mistress the proper respect.</i>\" Just as in your first encounter she drifts closer to you as she speaks, overwhelming your senses with her powerful scent. \"<i>All you need to do is politely say one little sentence for me.</i>\" She lightly tilts your chin in her grasp, your eyes drifting down to watch her moist, shapely lips mouth the words you are to learn with a lilting, pliable voice. \"<i>Hello Mistress, how may I serve you today?</i>\" Her thumb grazes across your lower lip and [if (libido >= 60) \"your mouth involuntarily drifts open, as if inviting the intruder in\"][if (libido < 60) \"you blush at the rush of excitement the touch sends through your body\"]. A knowing smile crosses her face[if (libido >= 60) \" and her tail curls behind her back\"], but she doesn't press the advantage. Instead she backs off, perhaps to see how you react when not so directly under her overpowering influence.\n\n",false);
+				outputText("\n\nShe gives you a condescending pat on the head, and you seethe with shame and impotent rage, meekly enduring the gesture. As she then trails her graceful fingers down the side of your face, the shame intensifies but the rage melts into desire, and [if (sensitivity < 50) it is all you can do to resist the urge to][if (sensitivity >= 50) you are overcome by an urge to] lean into her electrifying caress. Her capacity to play your emotions like a fine instrument is deeply alarming, and for a moment it occurs to you that you may even be less equipped to fight this demon emotionally than you are phyiscally. You are denied the time to dwell on it, though, as she ends her caress. Squatting down on her haunches, she takes your chin in a soft but firm grasp, enthralling your gaze with her piercing violet eyes.\n\n",false);
+				outputText("\"<i>The first step is to learn to show your Mistress the proper respect.</i>\" Just as in your first encounter she drifts closer to you as she speaks, overwhelming your senses with her powerful scent. \"<i>All you need to do is politely say one little sentence for me.</i>\" She lightly tilts your chin in her grasp, your eyes drifting down to watch her moist, shapely lips mouth the words you are to learn with a lilting, pliable voice. \"<i>Hello Mistress, how may I serve you today?</i>\" Her thumb grazes across your lower lip and [if (libido >= 60) your mouth involuntarily drifts open, as if inviting the intruder in][if (libido < 60) you blush at the rush of excitement the touch sends through your body]. A knowing smile crosses her face[if (libido >= 60)  and her tail curls behind her back], but she doesn't press the advantage. Instead she backs off, perhaps to see how you react when not so directly under her overpowering influence.\n\n",false);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			else if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == -1)
@@ -2905,12 +2905,12 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText("The door to your cell opens and you look up to see [captorTitle] [captorName] enter the room swinging her hips with cheerful, seductive purpose. She approaches you and treats you to a mocking pouty face. \"<i>Looking a bit hungry there, slave. Are you ready for your lesson then?</i>\" [if (hunger > 50) \"As if on cue, your stomach rumbles. \"]She reaches out and runs her fingers softly over your chin and jaw.\"<i>All you need to do is politely say that one little sentence for me.</i>\"\n\n",false);
+				outputText("The door to your cell opens and you look up to see [captorTitle] [captorName] enter the room swinging her hips with cheerful, seductive purpose. She approaches you and treats you to a mocking pouty face. \"<i>Looking a bit hungry there, slave. Are you ready for your lesson then?</i>\" [if (hunger > 50) As if on cue, your stomach rumbles. ]She reaches out and runs her fingers softly over your chin and jaw.\"<i>All you need to do is politely say that one little sentence for me.</i>\"\n\n",false);
 				if(prison.prisonIsRestrained())
 				{
 					outputText("With a snap of her fingers, your restraints vanish into thin air. ",false);
 				}
-				outputText("She lightly tilts your chin and your eyes drift down to see her moist, shapely lips as she mouths the words you are to learn. \"<i>Hello Mistress, how may I serve you today?</i>\" Her thumb grazes across your lower lip and [if (libido >= 40) \"your mouth involuntarily drifts open, as if inviting the intruder in\"][if (libido < 40) \"you blush at the rush of excitement the touch sends through your body\"]. A knowing smile crosses her face, but she doesn't press the advantage. Instead she backs off, perhaps to see how you react when not so directly under her overpowering influence.\n\n",false);
+				outputText("She lightly tilts your chin and your eyes drift down to see her moist, shapely lips as she mouths the words you are to learn. \"<i>Hello Mistress, how may I serve you today?</i>\" Her thumb grazes across your lower lip and [if (libido >= 40) your mouth involuntarily drifts open, as if inviting the intruder in][if (libido < 40) you blush at the rush of excitement the touch sends through your body]. A knowing smile crosses her face, but she doesn't press the advantage. Instead she backs off, perhaps to see how you react when not so directly under her overpowering influence.\n\n",false);
 			}
 			
 			outputText("You consider how you should respond to Mistress Elly's order.\n\n",false);
@@ -2983,7 +2983,7 @@ package classes.Scenes.Places.Prison
 					outputText("grimace");
 				}
 				
-				outputText(" at the realization that she didn't even ask[if (esteem < 15) \", though saying it did feel, well, good..\"][if (esteem > 50) \", infuriated at having acted without thinking\"].[if (esteem > 60) \"You scramble to regain some control of the situation but you aren't afforded enough time to think, let alone act.\"]\n\n");
+				outputText(" at the realization that she didn't even ask[if (esteem < 15) , though saying it did feel, well, good..][if (esteem > 50) , infuriated at having acted without thinking].[if (esteem > 60) You scramble to regain some control of the situation but you aren't afforded enough time to think, let alone act.]\n\n");
 				outputText("\"<i>Good " + player.boyGirl() + ".</i>\" You see a brief shudder of ecstasy race through her body, her mouth drifting agape, her eyes rolling into their sockets, and her spade-tipped tail twitching behind her. \"<i>Now that you've mastered your first lesson, slave, you can begin to learn the answer to that question.</i>\"\n\n");
 				outputText("Though her composure returns, she continues to grin from ear to ear, making no attempt to conceal how pleased she is with herself. \"<i>A good slave knows to ask [his] Mistress what she wants without thinking. A better slave begins answering the question as [he] asks it. But to do so, a slave needs to understand what [his] owner wants from [him]. Some Masters might want to see their slaves pose seductively, or hear them speak words of reverence and praise, or simply have them wait motionless for direction. That's all fine, but I like my slaves to be a bit more... expressive of their love for me.</i>\"");
 				if(prison.prisonIsRestrained())
@@ -3009,7 +3009,7 @@ package classes.Scenes.Places.Prison
 					outputText("plump, sexy lips");
 				}
 				
-				outputText(" around my juicy, delicious cock.</i>\" Her fingernail rakes across your lips as she says it and you pull your head away in [if (esteem < 30) \"abashed \"][if (esteem < 50) \"shame\"][if (esteem >= 50) \"anger\"][if (esteem >= 70) \" and indignation\"]. [if (corruption < 30) \"The nature of the request is hardly a surprise but it still embarrasses you to face it head on.\"][if (corruption >= 30) \"While the suggestion is actually tame compared to things you've seen and done in your time in Mareth, it still twists a knife in your gut in this context.\"] She chuckles at your reaction, squatting down to [if (esteem < 50) \"gently\"][if (esteem >= 50) \"forcefully\"] turn your head back to her eyes.\n\n");
+				outputText(" around my juicy, delicious cock.</i>\" Her fingernail rakes across your lips as she says it and you pull your head away in [if (esteem < 30) abashed ][if (esteem < 50) shame][if (esteem >= 50) anger][if (esteem >= 70)  and indignation]. [if (corruption < 30) The nature of the request is hardly a surprise but it still embarrasses you to face it head on.][if (corruption >= 30) While the suggestion is actually tame compared to things you've seen and done in your time in Mareth, it still twists a knife in your gut in this context.] She chuckles at your reaction, squatting down to [if (esteem < 50) gently][if (esteem >= 50) forcefully] turn your head back to her eyes.\n\n");
 				outputText("\"<i>Oh dear, so modest. ");
 				if(player.cor < 30)
 				{
@@ -3032,19 +3032,19 @@ package classes.Scenes.Places.Prison
 				}
 				
 				outputText("I'll take it nice and slow, and I'll tell you exactly what to do. You won't have to think, just let your body act.</i>\"\n\n");
-				outputText("Her almond shaped eyes narrow as she looks you over in ravenous appraisal, her lithe finger following close behind the path of her eyes. Your [nipples] [if (sensitivity > 40) \"stand at attention\"][if (sensitivity <= 40) \"tingle\"]");
+				outputText("Her almond shaped eyes narrow as she looks you over in ravenous appraisal, her lithe finger following close behind the path of her eyes. Your [nipples] [if (sensitivity > 40) stand at attention][if (sensitivity <= 40) tingle]");
 				outputText(" as it passes down the middle of your [fullChest] and ");
 				if(player.hasCock())
 				{
-					outputText("[eachCock] [if (libido > 40) \"hardens\"][if (sensitivity <= 40) \"stirs\"]");
+					outputText("[eachCock] [if (libido > 40) hardens][if (sensitivity <= 40) stirs]");
 				}
 				else if(player.hasVagina())
 				{
-					outputText("your [clit] [if (libido > 40) \"hardens\"][if (sensitivity <= 40) \"stirs\"]");
+					outputText("your [clit] [if (libido > 40) hardens][if (sensitivity <= 40) stirs]");
 				}
 				else
 				{
-					outputText("your [asshole] [if (libido > 40) \"clenches\"][if (sensitivity <= 40) \"stirs\"]");
+					outputText("your [asshole] [if (libido > 40) clenches][if (sensitivity <= 40) stirs]");
 				}
 				
 				outputText(" as the finger teases its way around your pubic mound. She leans in close and whispers huskily in your ear, \"<i>Trust me, it knows what to do. Listen to it, and learn the truth about yourself.</i>\"\n\n");
@@ -3062,8 +3062,8 @@ package classes.Scenes.Places.Prison
 				{
 					outputText("She looks at you expectantly,");
 				}
-				outputText(" but when you stare back at her blankly she becomes annoyed. \"<i>Hello, <b>slave</b>,\"</i> she snaps, and punctuates the word with a single forceful tap of her spiked boot heel against the floor. The sharp, harsh clack rings in your ears, bringing the familiar rush of adrenaline to your heart. The conditioned response pours from your mouth[if (esteem < 15) \", giving you strong reminder of how good it can feel to follow her lead\"][if (esteem > 50) \", frustrating you as you realize that you still cannot control this behavior\"].\n\n");
-				outputText("\"<i>Hello Mistress, how may I serve you today?</i>\" You even find yourself saying it in the lilting, sycophantic tone that Mistress Elly suggested while teaching you this lesson. [if (esteem < 40) \"You hope that your spirited performance will help her forgive whatever you have done to upset her.\"][if (esteem > 60) \"Your bruised ego is comforted by the thought that your show of spirit might sweeten her sour mood, and perhaps prevent retribution.\"] After a tense moment in which you feel her foul temper radiate across the distance between you, she softens.\n\n");
+				outputText(" but when you stare back at her blankly she becomes annoyed. \"<i>Hello, <b>slave</b>,\"</i> she snaps, and punctuates the word with a single forceful tap of her spiked boot heel against the floor. The sharp, harsh clack rings in your ears, bringing the familiar rush of adrenaline to your heart. The conditioned response pours from your mouth[if (esteem < 15) , giving you strong reminder of how good it can feel to follow her lead][if (esteem > 50) , frustrating you as you realize that you still cannot control this behavior].\n\n");
+				outputText("\"<i>Hello Mistress, how may I serve you today?</i>\" You even find yourself saying it in the lilting, sycophantic tone that Mistress Elly suggested while teaching you this lesson. [if (esteem < 40) You hope that your spirited performance will help her forgive whatever you have done to upset her.][if (esteem > 60) Your bruised ego is comforted by the thought that your show of spirit might sweeten her sour mood, and perhaps prevent retribution.] After a tense moment in which you feel her foul temper radiate across the distance between you, she softens.\n\n");
 				outputText("\"<i>Well, at least you still remember your manners. But you know very well that you should be answering that question from the moment you speak it.</i>\" Her tone is that of a teacher correcting a habitually slow student as she lectures you from where she stands, and you ");
 				if(player.esteem < 40)
 				{
@@ -3122,8 +3122,8 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText("The door to your cell opens and you realize it must be feeding time as [captorTitle] [captorName] enters the room with a confident air about her. \"<i>Hello, <b>slave</b>,\"</i> she sings, punctuating the word with a single forceful tap of her spiked boot heel against the floor. The sharp, harsh clack rings in your ears, bringing a familiar rush of adrenaline to your heart. The conditioned response pours from your mouth[if (esteem < 15) \", filling you with a queer sense of comfort\"][if (esteem > 50) \", annoying you as you realize that you cannot control this behavior\"].\n\n");
-				outputText("\"<i>Hello Mistress, how may I serve you today?</i>\" you find yourself saying in the lilting, sycophantic tone that she suggested while teaching you this lesson. [if (esteem > 60) \"While it stings your ego to repeat the words again, the thought that you may have at least earned yourself some good favor provides some comfort.\"]\n\n");
+				outputText("The door to your cell opens and you realize it must be feeding time as [captorTitle] [captorName] enters the room with a confident air about her. \"<i>Hello, <b>slave</b>,\"</i> she sings, punctuating the word with a single forceful tap of her spiked boot heel against the floor. The sharp, harsh clack rings in your ears, bringing a familiar rush of adrenaline to your heart. The conditioned response pours from your mouth[if (esteem < 15) , filling you with a queer sense of comfort][if (esteem > 50) , annoying you as you realize that you cannot control this behavior].\n\n");
+				outputText("\"<i>Hello Mistress, how may I serve you today?</i>\" you find yourself saying in the lilting, sycophantic tone that she suggested while teaching you this lesson. [if (esteem > 60) While it stings your ego to repeat the words again, the thought that you may have at least earned yourself some good favor provides some comfort.]\n\n");
 				if(prison.prisonIsRestrained())
 				{
 					outputText("With a snap of her fingers, your restraints vanish into thin air.",false);
@@ -3255,8 +3255,8 @@ package classes.Scenes.Places.Prison
 				}
 				
 				outputText("\n\n");
-				outputText("Once you've begun the humbling but unavoidable journey, it's almost shocking how much more naturally the act of slinking across the cold stone floor comes to you now that you are not being coerced into doing so. You find yourself unexpectedly adept at managing the seductive swing of your hips that is the cornerstone of the act, and effortlessly add a playful arch and bounce to each stride. And when your flirtatious antics begin to draw giggles of delight from your Mistress, you grudgingly allow yourself to enjoy a moment of [if (esteem < 40) \"satisfaction\"][if (esteem >= 40) \"pride\"] at a job well done.\n\n");
-				outputText("This lighthearted ease quickly dissapates upon arriving in her shadow, though. Thinking of what comes next, you find yourself once again harried by the specters of hesitation[if (corruption < 20) \", pious outrage,\"] and self loathing. ");
+				outputText("Once you've begun the humbling but unavoidable journey, it's almost shocking how much more naturally the act of slinking across the cold stone floor comes to you now that you are not being coerced into doing so. You find yourself unexpectedly adept at managing the seductive swing of your hips that is the cornerstone of the act, and effortlessly add a playful arch and bounce to each stride. And when your flirtatious antics begin to draw giggles of delight from your Mistress, you grudgingly allow yourself to enjoy a moment of [if (esteem < 40) satisfaction][if (esteem >= 40) pride] at a job well done.\n\n");
+				outputText("This lighthearted ease quickly dissapates upon arriving in her shadow, though. Thinking of what comes next, you find yourself once again harried by the specters of hesitation[if (corruption < 20) , pious outrage,] and self loathing. ");
 				if(player.esteem < 40)
 				{
 					outputText("You know that these feelings are justified, but it is plainly obvious that you don't have the ability to indulge them anymore. In order to buy yourself a moment to chase them away and replace them with the subservient spirit you need for the task ahead, you lower your head to the ground and polish the toe of her boot with your tongue. Only when it glistens below you do you rise docilely and set yourself to work.\n\n");
@@ -3267,12 +3267,12 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText("As much as you would like to indulge these feelings, you know that it would be counterproductive to do so. Instead, you assume an air of self-possessed immodesty and joyfully rise to your haunches, back arched and [chest] thrust forward [if (corruption < 20) \"assertively\"][if (corruption >= 20) \"seductively\"], and attack the task at hand with flirtatious enthusiasm.\n\n");
+					outputText("As much as you would like to indulge these feelings, you know that it would be counterproductive to do so. Instead, you assume an air of self-possessed immodesty and joyfully rise to your haunches, back arched and [chest] thrust forward [if (corruption < 20) assertively][if (corruption >= 20) seductively], and attack the task at hand with flirtatious enthusiasm.\n\n");
 				}
 				
-				outputText("Once your lips close around her tip, things suddenly become simple again. Your senses are instantly awash in her musky aromas, her uniquely pleasant, savory yet sweet taste, and the silky, alluring feel of her skin. The rush of confused but arousing emotions that they conjure within you ease you into a state of relaxed focus [if (esteem < 40) \"and unanticipated comfort\"][if (esteem >= 40) \"despite your troubled mind\"]. While you do apply a small amount of conscious effort towards satisfying your Mistress, mostly you [if (esteem < 40) \"surrender yourself to\"][if (esteem >= 40) \"rely on\"] muscle memory and allow your body to act on your behalf -- and despite the stirring in your loins, you remain [if (esteem < 60) \"thankful that your body is now capable of carrying you through your act\"][if (esteem >= 60) \"glad that your body is working in your favor now\"].\n\n");
-				outputText("Experienced as your body now is at servicing her this way, it isn't long before her dick is deep in your throat pouring her seed directly into your stomach. Mindful of her preferences, you wait until her torrent to begins to subside, then pull back slowly, savoring the sensations as you [if (esteem < 40) \"succumb\"][if (esteem >= 40) \"resign yourself\"] to the lustful nature of the act. You pause to massage her tip lavishly with your lips until your tongue is swimming in jizz, then finally pull her from your mouth so that the last few spurts can coat your [face] and [chest] with a pale, viscous reminder of your servile compliance.\n\n");
-				outputText("\"<i>My, my, my, what a good little [boy] you've become -- and in such a short time too. You may swallow your reward.</i>\" Spasms of pleasure continue to shiver across her body as she compliments you, unquestionably beyond pleased with your display, and you are inundated by an unbidden rush of [if (esteem < 50) \"fulfillment\"][if (esteem >=50) \"confidence\"] as you ingest her load.");
+				outputText("Once your lips close around her tip, things suddenly become simple again. Your senses are instantly awash in her musky aromas, her uniquely pleasant, savory yet sweet taste, and the silky, alluring feel of her skin. The rush of confused but arousing emotions that they conjure within you ease you into a state of relaxed focus [if (esteem < 40) and unanticipated comfort][if (esteem >= 40) despite your troubled mind]. While you do apply a small amount of conscious effort towards satisfying your Mistress, mostly you [if (esteem < 40) surrender yourself to][if (esteem >= 40) rely on] muscle memory and allow your body to act on your behalf -- and despite the stirring in your loins, you remain [if (esteem < 60) thankful that your body is now capable of carrying you through your act][if (esteem >= 60) glad that your body is working in your favor now].\n\n");
+				outputText("Experienced as your body now is at servicing her this way, it isn't long before her dick is deep in your throat pouring her seed directly into your stomach. Mindful of her preferences, you wait until her torrent to begins to subside, then pull back slowly, savoring the sensations as you [if (esteem < 40) succumb][if (esteem >= 40) resign yourself] to the lustful nature of the act. You pause to massage her tip lavishly with your lips until your tongue is swimming in jizz, then finally pull her from your mouth so that the last few spurts can coat your [face] and [chest] with a pale, viscous reminder of your servile compliance.\n\n");
+				outputText("\"<i>My, my, my, what a good little [boy] you've become -- and in such a short time too. You may swallow your reward.</i>\" Spasms of pleasure continue to shiver across her body as she compliments you, unquestionably beyond pleased with your display, and you are inundated by an unbidden rush of [if (esteem < 50) fulfillment][if (esteem >=50) confidence] as you ingest her load.");
 				if(player.hasKeyItem("Mistress Elly's Slave Collar") < 0)
 				{
 					player.createKeyItem("Mistress Elly's Slave Collar",0,0,0,0);
@@ -3313,7 +3313,7 @@ package classes.Scenes.Places.Prison
 				}
 				
 				outputText(" But before you can regain some semblance of balance and turn your troubled expression into a more concrete objection, you are sent reeling once again as Mistress Elly gives your cheek a playful smack -- with her cock. The impact, though harmless, is surprisingly sharp, and between the scandalously sloppy sound reverberating in your ear and the accelerated sensation of your syrupy mask melting over your jawline and down our neck, you're left utterly stunned and mortified.\n\n");
-				outputText("\"<i>No moping, slave. Your heartfelt show of respect and subservience is appreciated, but you know that you don't earn your meals by doing what is expected of you. You earn them by learning new things. But cheer up,</i>\" she comforts, pressing her knob to your cheek and slowly, sensually beginning to trace it through her muck, \"<i>I think you'll enjoy this lesson almost as much as you love sucking cock.</i>\" As her bulbous member sweeps downward across your dripping chin, then back up the other sloppy cheek and over the bridge of your nose, you awaken from your cock-slapped daze -- not with the outrage you [if (esteem < 40) \"might deserve \"][if (esteem >= 40) \"had been channeling previously\"] -- but in the bewildering jumble of pacifying arousal and [if (esteem < 40) \"soothing\"][if (esteem >= 40) \"reluctant\"] resignation that you felt servicing her just moments ago.\n\n");
+				outputText("\"<i>No moping, slave. Your heartfelt show of respect and subservience is appreciated, but you know that you don't earn your meals by doing what is expected of you. You earn them by learning new things. But cheer up,</i>\" she comforts, pressing her knob to your cheek and slowly, sensually beginning to trace it through her muck, \"<i>I think you'll enjoy this lesson almost as much as you love sucking cock.</i>\" As her bulbous member sweeps downward across your dripping chin, then back up the other sloppy cheek and over the bridge of your nose, you awaken from your cock-slapped daze -- not with the outrage you [if (esteem < 40) might deserve ][if (esteem >= 40) had been channeling previously] -- but in the bewildering jumble of pacifying arousal and [if (esteem < 40) soothing][if (esteem >= 40) reluctant] resignation that you felt servicing her just moments ago.\n\n");
 				if(player.cor < 30)
 				{
 					if(player.esteem < 30)
@@ -3344,7 +3344,7 @@ package classes.Scenes.Places.Prison
 				}
 				
 				
-				outputText(" Pressing her advantage, she drags her tip across your moist lips, which [if (esteem < 30) \"longingly part in its wake\"][if (esteem >= 30) \"frustrate you by gently parting in its wake\"]. \"<i>Now, dear, I'm going to allow you to taste me again,</i>\" her tip teases through your lips, \"<i>and you are going to show me your gratitude by rubbing that cute little ");
+				outputText(" Pressing her advantage, she drags her tip across your moist lips, which [if (esteem < 30) longingly part in its wake][if (esteem >= 30) frustrate you by gently parting in its wake]. \"<i>Now, dear, I'm going to allow you to taste me again,</i>\" her tip teases through your lips, \"<i>and you are going to show me your gratitude by rubbing that cute little ");
 				if(player.hasCock())
 				{
 					outputText("cock");
@@ -3361,14 +3361,14 @@ package classes.Scenes.Places.Prison
 				outputText(" for me, nice and slow.</i>\" ");
 				if(player.cor < 30)
 				{
-					outputText("You make a halfhearted attempt to pull away from her impish prodding, but she presses her offense faster than you can retreat. Impaled once again, you [if (esteem < 60) \"coyly\"][if (esteem >= 60) \"wearily\"] acquiesce and allow your now well-schooled mouth to suckle at her once more.\n\n");
+					outputText("You make a halfhearted attempt to pull away from her impish prodding, but she presses her offense faster than you can retreat. Impaled once again, you [if (esteem < 60) coyly][if (esteem >= 60) wearily] acquiesce and allow your now well-schooled mouth to suckle at her once more.\n\n");
 				}
 				else
 				{
 					outputText("Unable to resist her goading any longer you attempt to grasp her in your mouth, only to bite air as she retreats beyond your reach. She taunts you in this manner twice more before finally allowing you to catch her, and your well schooled response overcomes your waning reluctance as you start to suckle once more.\n\n");
 				}
 				outputText("\"<i>Yessss, that's a good, good [boy]. Now, that we've settled that matter, it is time for you to learn that your pleasure comes at my whim. You may continue to suck my cock, but you will masturbate as you do, and you will come when -- and only when -- I tell you to. Is that understood, slave?</i>\"\n\n");
-				outputText("The heat coursing through your body practically begs you to do as you have been told, but even as you[if (corruption > 30) \" greedily\"] lick the salty leavings from her shaft you still feel reluctant to allow her such intimate control over your body.\n\n");
+				outputText("The heat coursing through your body practically begs you to do as you have been told, but even as you[if (corruption > 30)  greedily] lick the salty leavings from her shaft you still feel reluctant to allow her such intimate control over your body.\n\n");
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			else if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == -1)
@@ -3397,7 +3397,7 @@ package classes.Scenes.Places.Prison
 				}
 				
 				outputText(" \"<i>Well, let's get a nice meal in in you and see if we can't cheer you up a bit. For today you can just focus on the basics, okay? </i>\" She favors you with a smile so warm it could melt ice, and beckons you with cordial gesture and a beguiling glimmer in her eyes. \"<i>Now, sweetie, why don't you come on over here and have your appetizer?</i>\"\n\n");
-				outputText("You breathe a heavy sigh of relief at her invitation, a dam breaking within you. Despite the sense of disquiet still lingering in the back of your mind, a flood of gratitude washes over you for the respite from her emotionally and physically demanding lessons. While you have no delusion that she won't be expecting you to perform for her, you also know that she is as good as her word and will allow you to relax and deliver only the service that you are already comfortable with, humiliating as it may be. With your spirits buoyed by her kindness [if (esteem < 60) \"and your heart eager to avoid disappointing her any further\"][if (esteem >= 60) \"and your heart set on meeting her expectations\"], you force yourself to begin crawling towards her, hoping the sensual ritual of the act will finish the job of preparing you for what follows.\n\n");
+				outputText("You breathe a heavy sigh of relief at her invitation, a dam breaking within you. Despite the sense of disquiet still lingering in the back of your mind, a flood of gratitude washes over you for the respite from her emotionally and physically demanding lessons. While you have no delusion that she won't be expecting you to perform for her, you also know that she is as good as her word and will allow you to relax and deliver only the service that you are already comfortable with, humiliating as it may be. With your spirits buoyed by her kindness [if (esteem < 60) and your heart eager to avoid disappointing her any further][if (esteem >= 60) and your heart set on meeting her expectations], you force yourself to begin crawling towards her, hoping the sensual ritual of the act will finish the job of preparing you for what follows.\n\n");
 				outputText("Sure enough, you quickly push past the shame of engaging in this dance of subservience and slink towards her with a well practiced swing in your hips, finding precisely the aroused acquiescence you need as your body delivers its flirtatious show in spite of your earlier equivocation. And upon arriving at her feet, you rely on this building lighthearted momentum to ");
 				if(player.esteem < 40)
 				{
@@ -3409,13 +3409,13 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText("combat your resistance against the undesirable indignity of what you must do next. You win the war within yourself, and rise to your haunches with as much immodest joy as you can muster, back arched and [chest] thrust forward [if (corruption < 20) \"assertively\"][if (corruption >= 20) \"seductively\"], and fill your mouth with overwrought enthusiasm.");
+					outputText("combat your resistance against the undesirable indignity of what you must do next. You win the war within yourself, and rise to your haunches with as much immodest joy as you can muster, back arched and [chest] thrust forward [if (corruption < 20) assertively][if (corruption >= 20) seductively], and fill your mouth with overwrought enthusiasm.");
 				}
 				
 				outputText("\n\n");
-				outputText("Once your lips close around her tip, the need to maintain a facade quickly fades away. Your senses are instantly awash in her musky aromas, her uniquely pleasant, savory yet sweet taste, and the silky, alluring feel of her skin. The rush of soothing and arousing emotions that they conjure within you uplift you into a state of relaxed focus[if (esteem < 40) \" and familiar comfort\"][if (esteem >= 40) \", quieting your troubled mind\"]. You do apply a small amount of conscious effort towards satisfying your Mistress, but mostly you [if (esteem < 40) \"surrender yourself to\"][if (esteem >= 40) \"rely on\"] muscle memory and allow your body to act on your behalf -- and despite the distracting stirring in your loins, you remain [if (esteem < 60) \"thankful that your body is still capable of carrying you through your act\"][if (esteem >= 60) \"glad that your body is working in your favor again\"].\n\n");
-				outputText("Experienced as your body is at servicing her this way, it isn't long before her dick is deep in your throat pouring her seed directly into your stomach. Mindful of her preferences, you wait until her torrent to begins to subside, then pull back slowly, savoring the sensations as you [if (esteem < 40)\"succumb to\"][if (esteem >= 40) \"accept\"] the lustful nature of the act. You pause to massage her tip lavishly with your lips until your tongue is inundated with her intoxicating jizz, quenching a thirst you were only vaguely aware of. Finally, with a somewhat disturbing level of anticipation building within you, you pull her from your mouth so that the last few spurts can coat your [face] and [chest] with a warm, viscous reminder of your servile compliance, each sticky splash simultaneously eroding your will to resist and filling you with a queer sense of purpose.\n\n");
-				outputText("\"<i>Yes, there's my good little [boy] -- go ahead and swallow it all if you like. I knew sucking my cock would help you feel better.</i>\" Spasms of pleasure continue to shiver across her body as she speaks, eliciting an unbidden rush of [if (esteem < 50) \"fulfillment\"][if (esteem >=50) \"satisfaction\"] within you, and as you ingest her load you grudgingly admit to yourself that she wasn't wrong. \"<i>Don't worry dear, I'll always be here to help pick you up any time you are feeling down.</i>\" She gives you a comforting pat on your head, then softly trails her fingers down your cum-soaked cheek, feeding them through your welcoming lips when they arrive at your mouth. \"<i>Well, now that you've had a nice snack and are feeling more yourself, I imagine you must be ready to earn your main course.</i>\"\n\n");
+				outputText("Once your lips close around her tip, the need to maintain a facade quickly fades away. Your senses are instantly awash in her musky aromas, her uniquely pleasant, savory yet sweet taste, and the silky, alluring feel of her skin. The rush of soothing and arousing emotions that they conjure within you uplift you into a state of relaxed focus[if (esteem < 40)  and familiar comfort][if (esteem >= 40) , quieting your troubled mind]. You do apply a small amount of conscious effort towards satisfying your Mistress, but mostly you [if (esteem < 40) surrender yourself to][if (esteem >= 40) rely on] muscle memory and allow your body to act on your behalf -- and despite the distracting stirring in your loins, you remain [if (esteem < 60) thankful that your body is still capable of carrying you through your act][if (esteem >= 60) glad that your body is working in your favor again].\n\n");
+				outputText("Experienced as your body is at servicing her this way, it isn't long before her dick is deep in your throat pouring her seed directly into your stomach. Mindful of her preferences, you wait until her torrent to begins to subside, then pull back slowly, savoring the sensations as you [if (esteem < 40)\"succumb to][if (esteem >= 40) accept] the lustful nature of the act. You pause to massage her tip lavishly with your lips until your tongue is inundated with her intoxicating jizz, quenching a thirst you were only vaguely aware of. Finally, with a somewhat disturbing level of anticipation building within you, you pull her from your mouth so that the last few spurts can coat your [face] and [chest] with a warm, viscous reminder of your servile compliance, each sticky splash simultaneously eroding your will to resist and filling you with a queer sense of purpose.\n\n");
+				outputText("\"<i>Yes, there's my good little [boy] -- go ahead and swallow it all if you like. I knew sucking my cock would help you feel better.</i>\" Spasms of pleasure continue to shiver across her body as she speaks, eliciting an unbidden rush of [if (esteem < 50) fulfillment][if (esteem >=50) satisfaction] within you, and as you ingest her load you grudgingly admit to yourself that she wasn't wrong. \"<i>Don't worry dear, I'll always be here to help pick you up any time you are feeling down.</i>\" She gives you a comforting pat on your head, then softly trails her fingers down your cum-soaked cheek, feeding them through your welcoming lips when they arrive at your mouth. \"<i>Well, now that you've had a nice snack and are feeling more yourself, I imagine you must be ready to earn your main course.</i>\"\n\n");
 				if(player.esteem < 40)
 				{
 					outputText("A whisper of your earlier anxiety begins to creep back from the recesses of your subconscious, even as you kneel before her in a content and malleable state. It briefly occurs to you that servicing her as you just have was enough to earn her approval not all that long ago, but the resentful thought ultimately finds little purchase in your aroused, cum-soaked mind.");
@@ -3460,7 +3460,7 @@ package classes.Scenes.Places.Prison
 					outputText("As usual, she draws ever tightening circles around your mouth, while you struggle vainly against an intense urge to chase after the delightful sensation. \"<i>Oh, the look on your face right now is the best part.</i>\" she titters, \"<i>Give in, slave. Accept your desire.</i>\"");
 				}
 				
-				outputText(" With full knowledge of how you will respond, she drags her tip across your moist lips, which [if (esteem < 30) \"longingly part in its wake\"][if (esteem >= 30) \"gently part in its wake\"]. \"<i>Yes indeed, you are going to get exactly what you want. I'm going to allow you to taste me again,</i>\" her tip teases through your lips, \"<i>and you are going to show me your gratitude by rubbing that cute little ");
+				outputText(" With full knowledge of how you will respond, she drags her tip across your moist lips, which [if (esteem < 30) longingly part in its wake][if (esteem >= 30) gently part in its wake]. \"<i>Yes indeed, you are going to get exactly what you want. I'm going to allow you to taste me again,</i>\" her tip teases through your lips, \"<i>and you are going to show me your gratitude by rubbing that cute little ");
 				if(player.hasCock())
 				{
 					outputText("cock");
@@ -3477,14 +3477,14 @@ package classes.Scenes.Places.Prison
 				outputText(" for me, nice and slow.</i>\" ");
 				if(player.cor < 30)
 				{
-					outputText("You make a superficial attempt to pull away from her impish prodding, but she easily overwhelms your false retreat. Impaled once again, you [if (esteem < 60) \"coyly\"][if (esteem >= 60) \"quietly\"] acquiesce and allow your well-schooled mouth to suckle at her once more.\n\n");
+					outputText("You make a superficial attempt to pull away from her impish prodding, but she easily overwhelms your false retreat. Impaled once again, you [if (esteem < 60) coyly][if (esteem >= 60) quietly] acquiesce and allow your well-schooled mouth to suckle at her once more.\n\n");
 				}
 				else
 				{
 					outputText("Unable to resist her goading any longer you attempt to grasp her in your mouth, only to bite air as she retreats beyond your reach. Sinking deeper into your lasciviousness, you willingly play along as she taunts you this way several more times, then when she finally allows you to catch her your well schooled response overcomes your fading reluctance as you readily suckle once more.\n\n");
 				}
 				outputText("\"<i>Oh god, you are such good, good [boy]. Now, show me that you know your pleasure comes at my whim. Continue to suck my cock, and masturbate as you do, but remember: you will come when -- and only when -- I tell you to. Is that understood, slave?</i>\"\n\n");
-				outputText("The heat coursing through your body practically begs you to do as you have been told, but even as you[if (corruption > 30) \" greedily\"] lick the salty leavings from her shaft you still feel an odd reluctance to allow her such intimate control over your body.\n\n");
+				outputText("The heat coursing through your body practically begs you to do as you have been told, but even as you[if (corruption > 30)  greedily] lick the salty leavings from her shaft you still feel an odd reluctance to allow her such intimate control over your body.\n\n");
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 1;
 			}
 			else
@@ -3513,7 +3513,7 @@ package classes.Scenes.Places.Prison
 				}
 				
 				outputText(" and begin the humbling journey to her feet.\n\n");
-				outputText("Thankfully, starting is now the hardest part, and once you are underway you quickly find the fun in seductively slinking across the cold stone floor; the moment you stopped allowing yourself to be coerced into the act, you found that it came to you much more naturally. With each subsequent crawl you grow more skillful at managing the seductive swing of your hips that is the cornerstone of the performance, effortlessly adding playful arches and bounces to each stride and filling your face with desirous expressions to match. The rapid improvement in your flirtatious antics does not go unnoticed, and as you draw giggles of delight from your Mistress you permit yourself to indulge in a moment of [if (esteem < 40) \"satisfaction\"][if (esteem >= 40) \"pride\"] at a job well done.\n\n");
+				outputText("Thankfully, starting is now the hardest part, and once you are underway you quickly find the fun in seductively slinking across the cold stone floor; the moment you stopped allowing yourself to be coerced into the act, you found that it came to you much more naturally. With each subsequent crawl you grow more skillful at managing the seductive swing of your hips that is the cornerstone of the performance, effortlessly adding playful arches and bounces to each stride and filling your face with desirous expressions to match. The rapid improvement in your flirtatious antics does not go unnoticed, and as you draw giggles of delight from your Mistress you permit yourself to indulge in a moment of [if (esteem < 40) satisfaction][if (esteem >= 40) pride] at a job well done.\n\n");
 				outputText("Arriving at her feet, you rely on the momentum of this lighthearted ease to ");
 				if(player.esteem < 40)
 				{
@@ -3525,12 +3525,12 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText("combat your resistance against the hateful indignity of what you must do next. Winning the war within yourself, you assume an air of self-possessed immodesty and joyfully rise to your haunches, back arched and [chest] thrust forward [if (corruption < 20) \"assertively\"][if (corruption >= 20) \"seductively\"], and fill your mouth with flirtatious enthusiasm.");
+					outputText("combat your resistance against the hateful indignity of what you must do next. Winning the war within yourself, you assume an air of self-possessed immodesty and joyfully rise to your haunches, back arched and [chest] thrust forward [if (corruption < 20) assertively][if (corruption >= 20) seductively], and fill your mouth with flirtatious enthusiasm.");
 				}
 				
-				outputText(" And once your lips close around her tip, the need to maintain a facade quickly fades away. Your senses are instantly awash in her musky aromas, her uniquely pleasant, savory yet sweet taste, and the silky, alluring feel of her skin. The rush of confused but arousing emotions that they conjure within you uplift you into a state of relaxed focus[if (esteem < 40) \" and familiar comfort\"][if (esteem >= 40) \", quieting your troubled mind\"]. You do apply a small amount of conscious effort towards satisfying your Mistress, but mostly you [if (esteem < 40) \"surrender yourself to\"][if (esteem >= 40) \"rely on\"] muscle memory and allow your body to act on your behalf -- and despite the grudgingly expected stirring in your loins, you remain [if (esteem < 60) \"thankful that your body is capable of carrying you through your act\"][if (esteem >= 60) \"glad that your body is working in your favor now\"].\n\n");
-				outputText("Experienced as your body now is at servicing her this way, it isn't long before her dick is deep in your throat pouring her seed directly into your stomach. Mindful of her preferences, you wait until her torrent to begins to subside, then pull back slowly, savoring the sensations as you [if (esteem < 40)\"succumb\"][if (esteem >= 40) \"resign yourself\"] to the lustful nature of the act. You pause to massage her tip lavishly with your lips until your tongue is swimming in jizz, then finally pull her from your mouth so that the last few spurts can coat your [face] and [chest] with a pale, viscous reminder of your servile compliance.\n\n");
-				outputText("\"<i>Ahhhh, yes, what a good little [boy] you are -- you become more impressive every day, slave. Go ahead and swallow your reward now.</i>\" Spasms of pleasure continue to shiver across her body as she compliments you, unquestionably beyond pleased with your display, and you are inundated by the usual unbidden rush of [if (esteem < 50) \"fulfillment\"][if (esteem >=50) \"confidence\"] as you ingest her load. \"<i>It's plain to see that you're taking my lessons to heart and are becoming comfortable with what an insatiable and dutiful cocksucker you are. But now that you've enjoyed your appetizer,</i>\" she scrapes a bit of her fluid from your face with her index finger and smears it across your already cum-soaked lips, \"<i>it's time for you to earn your meal for today.</i>\"\n\n");
+				outputText(" And once your lips close around her tip, the need to maintain a facade quickly fades away. Your senses are instantly awash in her musky aromas, her uniquely pleasant, savory yet sweet taste, and the silky, alluring feel of her skin. The rush of confused but arousing emotions that they conjure within you uplift you into a state of relaxed focus[if (esteem < 40)  and familiar comfort][if (esteem >= 40) , quieting your troubled mind]. You do apply a small amount of conscious effort towards satisfying your Mistress, but mostly you [if (esteem < 40) surrender yourself to][if (esteem >= 40) rely on] muscle memory and allow your body to act on your behalf -- and despite the grudgingly expected stirring in your loins, you remain [if (esteem < 60) thankful that your body is capable of carrying you through your act][if (esteem >= 60) glad that your body is working in your favor now].\n\n");
+				outputText("Experienced as your body now is at servicing her this way, it isn't long before her dick is deep in your throat pouring her seed directly into your stomach. Mindful of her preferences, you wait until her torrent to begins to subside, then pull back slowly, savoring the sensations as you [if (esteem < 40)\"succumb][if (esteem >= 40) resign yourself] to the lustful nature of the act. You pause to massage her tip lavishly with your lips until your tongue is swimming in jizz, then finally pull her from your mouth so that the last few spurts can coat your [face] and [chest] with a pale, viscous reminder of your servile compliance.\n\n");
+				outputText("\"<i>Ahhhh, yes, what a good little [boy] you are -- you become more impressive every day, slave. Go ahead and swallow your reward now.</i>\" Spasms of pleasure continue to shiver across her body as she compliments you, unquestionably beyond pleased with your display, and you are inundated by the usual unbidden rush of [if (esteem < 50) fulfillment][if (esteem >=50) confidence] as you ingest her load. \"<i>It's plain to see that you're taking my lessons to heart and are becoming comfortable with what an insatiable and dutiful cocksucker you are. But now that you've enjoyed your appetizer,</i>\" she scrapes a bit of her fluid from your face with her index finger and smears it across your already cum-soaked lips, \"<i>it's time for you to earn your meal for today.</i>\"\n\n");
 				if(player.esteem < 40)
 				{
 					outputText("You knew that this moment was coming and wanted to be prepared for it, but now that it is here you simply kneel before her in a dazed and malleable state. You try desperately to conjure up some measure of indignation at the fact that servicing her as you just have is not enough to earn her approval, but the anger you want to summon finds no purchase in your aroused, cum-soaked mind.");
@@ -3544,7 +3544,7 @@ package classes.Scenes.Places.Prison
 					outputText("You refuse to be phased by the fact that she is about to demand more of you, and allow yourself a moment to bathe your lusty success. You know it was wise to capitulate as you did, and you will enjoy your victory regardless of what might follow.");
 				}
 				
-				outputText("\"<i>Don't make me cock-slap you again, slave -- you know you earn meals by learning new things, not by doing what is expected of you. Cheer up,</i>\" she comforts, pressing her knob to your cheek and slowly, sensually beginning to trace it through her muck, \"<i>We both know you'll enjoy this lesson almost as much as you love sucking cock.</i>\" Her bulbous member sweeps downward across your dripping chin, then back up the other sloppy cheek and over the bridge of your nose, waking you from your taciturn temper -- not to the outrage you [if (esteem < 40) \"might deserve \"][if (esteem >= 40) \"no doubt should feel\"] -- but back to the bewildering jumble of pacifying arousal and [if (esteem < 40) \"soothing\"][if (esteem >= 40) \"reluctant\"] resignation that you felt as you gorged on her cinnamon-savory flesh and seed.\n\n");
+				outputText("\"<i>Don't make me cock-slap you again, slave -- you know you earn meals by learning new things, not by doing what is expected of you. Cheer up,</i>\" she comforts, pressing her knob to your cheek and slowly, sensually beginning to trace it through her muck, \"<i>We both know you'll enjoy this lesson almost as much as you love sucking cock.</i>\" Her bulbous member sweeps downward across your dripping chin, then back up the other sloppy cheek and over the bridge of your nose, waking you from your taciturn temper -- not to the outrage you [if (esteem < 40) might deserve ][if (esteem >= 40) no doubt should feel] -- but back to the bewildering jumble of pacifying arousal and [if (esteem < 40) soothing][if (esteem >= 40) reluctant] resignation that you felt as you gorged on her cinnamon-savory flesh and seed.\n\n");
 				outputText("Although her tactic is now familiar, it still manages to rouse you just as effectively as the first time.");
 				if(player.cor < 30)
 				{
@@ -3576,7 +3576,7 @@ package classes.Scenes.Places.Prison
 				}
 				
 				
-				outputText(" Pressing her advantage, she drags her tip across your moist lips, which [if (esteem < 30) \"longingly part in its wake\"][if (esteem >= 30) \"confound you by gently parting in its wake\"]. \"<i>Now, dear, I'm going to allow you to taste me again,</i>\" her tip teases through your lips, \"<i>and you are going to show me your gratitude by rubbing that cute little ");
+				outputText(" Pressing her advantage, she drags her tip across your moist lips, which [if (esteem < 30) longingly part in its wake][if (esteem >= 30) confound you by gently parting in its wake]. \"<i>Now, dear, I'm going to allow you to taste me again,</i>\" her tip teases through your lips, \"<i>and you are going to show me your gratitude by rubbing that cute little ");
 				if(player.hasCock())
 				{
 					outputText("cock");
@@ -3593,14 +3593,14 @@ package classes.Scenes.Places.Prison
 				outputText(" for me, nice and slow.</i>\" ");
 				if(player.cor < 30)
 				{
-					outputText("You make a perfunctory attempt to pull away from her impish prodding, but she easily overwhelms your retreat. Impaled once again, you [if (esteem < 60) \"coyly\"][if (esteem >= 60) \"wearily\"] acquiesce and allow your now well-schooled mouth to suckle at her once more.\n\n");
+					outputText("You make a perfunctory attempt to pull away from her impish prodding, but she easily overwhelms your retreat. Impaled once again, you [if (esteem < 60) coyly][if (esteem >= 60) wearily] acquiesce and allow your now well-schooled mouth to suckle at her once more.\n\n");
 				}
 				else
 				{
 					outputText("Unable to resist her goading any longer you attempt to grasp her in your mouth, only to bite air as she retreats beyond your reach. Sinking deeper into your lasciviousness, you willingly play along as she taunts you this way several more times, then when she finally allows you to catch her your well schooled response overcomes your dwindling reluctance as you start to suckle once more.\n\n");
 				}
 				outputText("\"<i>Yessss, that's a good, good [boy]. Now, it is time for you to learn that your pleasure comes at my whim. You may continue to suck my cock, but you will masturbate as you do, and you will come when -- and only when -- I tell you to. Is that understood, slave?</i>\"\n\n");
-				outputText("The heat coursing through your body practically begs you to do as you have been told, but even as you[if (corruption > 30) \" greedily\"] lick the salty leavings from her shaft you still feel reluctant to allow her such intimate control over your body.\n\n");
+				outputText("The heat coursing through your body practically begs you to do as you have been told, but even as you[if (corruption > 30)  greedily] lick the salty leavings from her shaft you still feel reluctant to allow her such intimate control over your body.\n\n");
 			}
 			
 			player.slimeFeed();
@@ -3851,7 +3851,7 @@ package classes.Scenes.Places.Prison
 				outputText("With a snap of her fingers, your restraints vanish into thin air.\n\n",false);
 			}
 			outputText("(Placeholder) You are now a willing slave. When Elly enters your room to feed you, you instinctually do all the depraved things she has trained you to do in exchange for food, and afterward you automatically accept whatever quest she gives you with no choice in the matter.\n\n",false);
-			outputText("(Placeholder) You plow yourself unthinkingly onto her cock, spasming with pleasure the moment you feel your ass inflate with her seed. You then greedily lick every bit of cum from her dick, suck her until she cums again in your mouth, lick the pools of cum off the floor that dripped from your ass, then beg her to fuck you more. She doesn't, but she praises your good behavior. Ironically, you now never get regular bread since you are so broken that you desire the humiliation of eating the bowl of cum soaked bread.\n\n",false);
+			outputText("(Placeholder) You plow yourself unthinkingly onto her cock, spasming with pleasure the moment you feel your ass inflate with her seed. You then greedily lick every bit of cum from her dick, suck her until she cums again in your mouth, lick the pools of cum off the floor that dripped from your ass, then beg her to fuck you more. She doesn't, but she praises your good behavior. Ironically, you now never get regular bread since you are so broken that you desire the humiliation of eating the bowl of cum soaked bread.",false);
 			player.buttChange(32,true,true,false);
 			outputText("\n\n");
 			prisonCaptorFeedingQuestTrainingSelect();
@@ -3898,13 +3898,13 @@ package classes.Scenes.Places.Prison
 			switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest))
 			{
 				case 1:
-					outputText("\nCHECKING FUCK QUEST " + player.statusAffectv3(StatusAffects.PrisonCaptorEllyQuest) + "\n");
+					trace("CHECKING FUCK QUEST " + player.statusAffectv3(StatusAffects.PrisonCaptorEllyQuest) + "");
 					if(player.statusAffectv3(StatusAffects.PrisonCaptorEllyQuest) >= 5)
 					{
-						outputText("\nQUEST COMPLETE\n");
+						trace("\nQUEST COMPLETE\n");
 						return true;
 					}
-					outputText("\nQUEST INCOMPLETE\n");
+					trace("\nQUEST INCOMPLETE\n");
 					return false;
 				default:
 					return false;
@@ -3985,7 +3985,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingQuestTrainingResolve():void
 		{
 			outputText("(Placeholder) You\'ve returned to your cell and now it is time to evaluate how you did on your quest. \n\n");
-			prison.prisonCaptor.updateNextFeedingEvent(model.time.hours, model.time.days);
+			//prison.prisonCaptor.updateNextFeedingEvent(model.time.hours, model.time.days);
 			if(prisonCaptorFeedingQuestTrainingIsComplete())
 			{
 				switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest))

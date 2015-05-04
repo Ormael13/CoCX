@@ -1566,7 +1566,7 @@ public function awardPlayer(nextFunc:Function = null):void
 		monster.gems = Math.round(monster.gems);
 	}
 	monster.handleAwardText(); //Each monster can now override the default award text
-	if (prison.inPrison) nextFunc = prison.doPrisonEscapeFightWin;
+	if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent;
 	if (!inDungeon && !inRoomedDungeon && !prison.inPrison) {
 		doNext(camp.returnToCampUseOneHour);
 	}

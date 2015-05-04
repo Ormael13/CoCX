@@ -15,7 +15,11 @@ package classes.Items.Weapons
 			super("B.Sword", "B.Sword", "beautiful sword", "a beautiful shining sword", "slash", 7, 400, "This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.  \n\nType: Weapon (Sword) \nAttack: Depends on corruption \nBase value: 400 \nRequires corruption of less than 35.", "holySword");
 		}
 		
-		override public function get attack():Number { return 7 + int(10 - game.player.cor / 3); }
+		override public function get attack():Number { 
+			var temp:int = 7 + (10 - game.player.cor / 3);
+			if (temp < 5) temp = 5;
+			return temp; 
+		}
 		
 		override public function canUse():Boolean {
 			if (game.player.cor < 35) return true;

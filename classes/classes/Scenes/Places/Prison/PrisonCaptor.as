@@ -86,7 +86,7 @@ package classes.Scenes.Places.Prison
 			var lightOrHeavy:int = rand(100);
 			var chooser:int = rand(6);
 			if (lightOrHeavy < lightChance) { //Light
-				if (chooser < 4) prison.prisonCaptorPunishmentRestrain();
+				if (chooser > 0) prison.prisonCaptorPunishmentRestrain();
 				//else if (chooser == 4) prison.billieScene.prisonCaptorBilliePunishmentFuck();
 				else prison.punishments.prisonCaptorPunishmentBJTrainer();
 			}
