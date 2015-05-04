@@ -633,7 +633,6 @@ package classes.Scenes
 			addButton(2, "Be Manticore", getManticoreKit, null, null, null, "Gain everything needed to become a Manticore-morph.");
 			addButton(3, "Be Dragonne", getDragonneKit, null, null, null, "Gain everything needed to become a Dragonne-morph.");
 			addButton(4, "Debug Prison", debugPrison);
-			addButton(5, "1000 AP", gainAscensionPoints);
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -713,10 +712,6 @@ package classes.Scenes
 				}
 			}
 			flushOutputTextToGUI();
-		}
-		
-		private function gainAscensionPoints():void {
-			player.ascensionPerkPoints += 1000;
 		}
 		
 		private function eventTriggerMenu():void {

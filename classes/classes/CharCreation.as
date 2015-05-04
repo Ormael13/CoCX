@@ -1200,7 +1200,7 @@
 					outputText("You spent a lot of time at the village temple, and learned how to meditate.  The 'masturbation' option is replaced with 'meditate' when corruption is at or below 66.  Is this your history?");
 					break;
 				case PerkLib.HistoryScholar:
-					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. " + silly() ? "Savin" : "Sellet" + ", to let you read some of his books.  You are much better at focusing, and spellcasting uses 20% less fatigue.  Is this your history?");
+					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. " + (silly() ? "Savin" : "Sellet") + ", to let you read some of his books.  You are much better at focusing, and spellcasting uses 20% less fatigue.  Is this your history?");
 					break;
 				case PerkLib.HistorySlacker:
 					outputText("You spent a lot of time slacking, avoiding work, and otherwise making a nuisance of yourself.  Your efforts at slacking have made you quite adept at resting, and your fatigue comes back 20% faster.  Is this your history?");
@@ -2960,9 +2960,9 @@
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			outputText("\n\n(When you're done, select Reincarnate.)");
 			menu();
-			addButton(0, "Perk Selection", ascensionPerkMenu);
+			addButton(0, "Perk Selection", ascensionPerkMenu, null, null, null, "Spend Ascension Perk Points on special perks!");
 			addButton(1, "Respec", respecLevelPerks, null, null, null, "Respec all level-up perks for 5 Ascension Perk Points?");
-			addButton(4, "Reincarnate", reincarnatePrompt);
+			addButton(4, "Reincarnate", reincarnatePrompt, null, null, null, "Reincarnate and start an entirely new adventure?");
 		}
 		private function ascensionPerkMenu():void {
 			clearOutput();
@@ -3015,7 +3015,7 @@
 			player.perkPoints = player.level - 1;
 			var ascendPerkTemp:Array = [];
 			for (var i:int = 0; i < player.perks.length; i++) {
-				if (isAscensionPerk(player.perks[i])) ascendPerkTemp.push(player.perks[i]);
+				if (isAscensionPerk(player.perks[i], true)) ascendPerkTemp.push(player.perks[i]);
 			}
 			player.removePerks();
 			if (ascendPerkTemp.length > 0) {
