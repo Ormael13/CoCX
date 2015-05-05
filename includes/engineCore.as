@@ -118,6 +118,10 @@ public function clearOutput():void {
 	forceUpdate();
 	currentText = "";
 	mainView.clearOutputText();
+	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+	mainView.hideMenuButton( MainView.MENU_LEVEL );
+	mainView.hideMenuButton( MainView.MENU_PERKS );
+	mainView.hideMenuButton( MainView.MENU_STATS );
 }
 
 public function rawOutputText(output:String, purgeText:Boolean = false):void
