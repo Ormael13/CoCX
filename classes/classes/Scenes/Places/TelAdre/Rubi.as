@@ -69,7 +69,7 @@ public function Rubi(){
 
 private function rubiSprite():void {
 	if(flags[kFLAGS.RUBI_HORNTYPE] > 0) spriteSelect(102);
-	spriteSelect(101);
+	else spriteSelect(101);
 }
 
 private function initializeRubi():void {
