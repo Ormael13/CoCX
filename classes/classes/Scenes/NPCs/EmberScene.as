@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by aimozg on 04.01.14.
  */
 package classes.Scenes.NPCs
@@ -1469,7 +1469,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou reach out and take it in yours");
 				if (player.cor < 50) outputText(", expressing your gratitude; gently, you kiss " + emberMF("his", "her") + " fingers, then the cut, letting its cool, iron-tinted tang roll across your lips and tongue.  You carefully lick, trying to avoid causing pain as you drink that which " + emberMF("he", "she") + " has so generously offered you.");
 				else outputText(", quickly drawing it to your mouth and forming a seal around the cut with your lips, anxious to let not a drop escape.");
-				outputText("\n\nEmber winces as you start to lick " + emberMF("his", "her") + " wound, but quickly recovers composure.  You dart your eyes up to look at " + emberMF("his", "her") + " face momentarily; " + emberMF("he", "she") + "'s a bit flustered and it's clear that your licking is bringing " + ember.mf("him", "her") + " at least some relief from the pain of " + emberMF("his", "her") + " injury.");
+				outputText("\n\nEmber winces as you start to lick " + emberMF("his", "her") + " wound, but quickly recovers composure.  You dart your eyes up to look at " + emberMF("his", "her") + " face momentarily; " + emberMF("he", "she") + "'s a bit flustered and it's clear that your licking is bringing " + emberMF("him", "her") + " at least some relief from the pain of " + emberMF("his", "her") + " injury.");
 
 				outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking...");
 				//[Continue][Stop]
