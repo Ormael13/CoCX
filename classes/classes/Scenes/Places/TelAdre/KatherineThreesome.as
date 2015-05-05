@@ -548,7 +548,7 @@ package classes.Scenes.Places.TelAdre
 
 		public function kathLicksOutUrta():void { //Kath is drunk, Urta is sober
 			clearOutput();
-			
+			output("<b>UNFINISHED</b> Everyone make sure to give IndirectOne a hard time until he gets this done.");
 			
 			player.orgasm();
 			katherine.orgasm();
