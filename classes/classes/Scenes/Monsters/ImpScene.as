@@ -56,7 +56,7 @@ package classes.Scenes.Monsters
 				if (player.hasFuckableNipples()) addButton(2, "NippleFuck", noogaisNippleRape);
 			}
 			if (canFeed) addButton(3, "Breastfeed", areImpsLactoseIntolerant);
-			if (canBikiniTits) addButton(4, "B.Titfuck" (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			if (canBikiniTits) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
 			addButton(9, "Leave", cleanupAfterCombat);
 			
