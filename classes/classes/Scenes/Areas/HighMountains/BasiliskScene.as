@@ -677,7 +677,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("\n\nThere's nothing to distract you from the pleasure; ");
 				//[(U)
 				if(player.gender == 0) outputText("no needy cock or cunt demanding a caress - except the basilisk's, and you care not a bit about that one.");
-				else if(player.isTaur()) outputText("even if you wanted to reach your genitals, you arms resolutely refuse to bend that way, so you focus on the slippery, silky feelings travelling along your ovipositor.");
+				else if(player.isTaur()) outputText("even if you wanted to reach your genitals, your arms resolutely refuse to bend that way, so you focus on the slippery, silky feelings travelling along your ovipositor.");
 			}
 			if(player.hasCock()) {
 				outputText("\n\nYour seeping member");

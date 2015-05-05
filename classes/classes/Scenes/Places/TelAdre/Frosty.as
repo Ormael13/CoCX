@@ -591,7 +591,7 @@ She rubs a finger along the length of your [cunt.descipt.], damping the crotch o
 [If play is genderless]
 	heart beats in anticipation.
 [else]
-	You shallow down these lustful feelings of wanting and brace yourself when Frosty grabs onto your [hipDescrip] and slowly pushes her horse-cock in, spreading you [assholeDescript]. You’re to fully take this fucking but she stops pushing the foreign object only at 2-inches in, you relax your body. Thinking she stopped to let you catch your breath or something. So wrong, once you body relaxes, she shoves the rest of the 34-inches in you with one powerful thrust. You let out a shriek of surprise that echoes through the city, losing all the strength in your
+	You shallow down these lustful feelings of wanting and brace yourself when Frosty grabs onto your [hipDescrip] and slowly pushes her horse-cock in, spreading you [assholeDescript]. You’re to fully take this fucking but she stops pushing the foreign object only at 2-inches in, you relax your body. Thinking she stopped to let you catch your breath or something. So wrong, once your body relaxes, she shoves the rest of the 34-inches in you with one powerful thrust. You let out a shriek of surprise that echoes through the city, losing all the strength in your
 
 [if player has normal legs]
 legs, the left one doing an odd twitch 
@@ -627,9 +627,9 @@ you sexes release a huge mix of male and female cum, making huge mess by your fe
 [If gender-less]
 you feel building up in your groin and then releasing a glow of ecstasy cross your whole body.
 [else]
-Frosty makes a satisfied sigh and thrusted her hip to make sure you satisfied. She releases your hair, your head thudding against the countertop. She snaps her fingers again and the toy shrivels out of your (assholeDescript) and dangels back to between her ankels, leaving your ass-hole gaping wide open. 
+Frosty makes a satisfied sigh and thrusted her hip to make sure you satisfied. She releases your hair, your head thudding against the countertop. She snaps her fingers again and the toy shrivels out of your (assholeDescript) and dangels back to between her ankles, leaving your ass-hole gaping wide open. 
 
-“Now that I think about it, I should have used some form of lube... oh well, it got the job done. Woudn’t you agree [play.name]?’”  You agree with a wave of the hand, still exhausted and riding on the wave pleasure. She laughs at your half-hearted yes and walks over to the other end of you and whisper in your ear “I would get up and go soon or that guy with the huge knot behind you is gonna think you butt-hole is part of the display. You  quickly turn onto your backside, feeling yourself knocking an eager cock off it’s course. 
+“Now that I think about it, I should have used some form of lube... oh well, it got the job done. Woudn’t you agree [play.name]?’”  You agree with a wave of the hand, still exhausted and riding on the wave pleasure. She laughs at your half-hearted yes and walks over to the other end of you and whisper in your ear “I would get up and go soon or that guy with the huge knot behind you is gonna think your butt-hole is part of the display. You  quickly turn onto your backside, feeling yourself knocking an eager cock off it’s course. 
 
 A dog-morph stands there with the biggest knotted cock you've ever seen. You quickly gather all your things and make you way past him. He looks to Frosty to relieve him of his stresses. You hear Frosty say “All you have to do is sign these.”
 
@@ -708,7 +708,7 @@ She gives a light tap of the paddle on her hand, making a soft slap. Oh you can 
 
 She raises the paddle slowly, you start to [grow hard/ get wet/ feel aroused] with every inch she raises it,  higher and higher it goes. Above her head and as far as her arm can strech, holding it high in place. Watching as you squirm and withering, awaiting this pain you so rightfully deserve.
 
-*WHACK* The paddle hits in pleasurable pain ”OOOOOOOOOOOH!“ you moan out as you throw in your head back. Soon there are three quick slaps to you rear, every slap feels like its own orgasmic wave of  pleasure; like a tsunami, it spreads throughout your body. From the top of your head to the tips of your toes/tail, you shake with pleasure and sweat in pain. You sexy bits being devastated with arousal in the wake of these waves. Three more smacks, the quick whacks give you burst of lust that you could just overdose on. You start panting with your tongue out as your eyes begin to form tears in reaction to the pain.  How those eyes try to betray your true feelings. 
+*WHACK* The paddle hits in pleasurable pain ”OOOOOOOOOOOH!“ you moan out as you throw in your head back. Soon there are three quick slaps to your rear, every slap feels like its own orgasmic wave of  pleasure; like a tsunami, it spreads throughout your body. From the top of your head to the tips of your toes/tail, you shake with pleasure and sweat in pain. You sexy bits being devastated with arousal in the wake of these waves. Three more smacks, the quick whacks give you burst of lust that you could just overdose on. You start panting with your tongue out as your eyes begin to form tears in reaction to the pain.  How those eyes try to betray your true feelings. 
 
 *WHACK* *WHACK *WHACK* *WHACK* 
 
