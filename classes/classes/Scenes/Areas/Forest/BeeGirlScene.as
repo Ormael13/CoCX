@@ -768,7 +768,7 @@ package classes.Scenes.Areas.Forest
 				//If you get unlucky you just get the choice of getting egg-laid.
 				else {
 					if (attitude == BEE_GIRL_TALKED_AND_LEFT)
-						outputText("<i>“You’re back!  Surely you’re here to get eggzzz and honey, right?”<i>\n\n");
+						outputText("<i>“You’re back!  Surely you’re here to get eggzzz and honey, right?”</i>\n\n");
 					else outputText("She cocks her head and asks, \"<i>You again?  Zzzzurely you've come for more of my honey and eggzzz, no?</i>\"  Lightly caressing her swollen abdomen, you see the dripping knotted appendage begin to drop out next to her stinger.\n\n");
 					if (player.cor < 33) outputText("You are sure no good can come of this, but your body is urging you to agree.");
 					if (player.cor >= 33 && player.cor <= 66) outputText("Her offer intrigues you, and the arousing sweetness of her scent makes it difficult to resist.");
