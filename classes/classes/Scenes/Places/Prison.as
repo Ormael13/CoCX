@@ -1288,19 +1288,19 @@ package classes.Scenes.Places
 			}
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {
-				outputText("\n\n<b>You are confined to the stockades as part of your lesson.</b>");
+				outputText("\n\n<b>You are confined to the stockades as part of your lesson. A hollow plug has been forced into your ass, curving upward in a hook-like shape and attached to the ceiling. You are bound in such a way that should your [legs] go slack even the slightest bit, the entire weight of your torso would be suspended by your asshole. </b>");
 				menu();
 				addButton(5, "Call Out", punishments.prisonCaptorPunishmentStockadesCallout, null, null, null, "Call for someone to get to you.");
-				addButton(7, "Break Stockade", punishments.prisonCaptorPunishmentStockadeBreak, null, null, null, "Attempt to break the stockade?\n\n" + prisonWillCostDescript(10));
+				addButton(7, "Break Stockade", punishments.prisonCaptorPunishmentStockadeBreak, null, null, null, "Attempt to break the stockade.\n\n" + prisonWillCostDescript(10));
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 2) {
 				clearOutput();
-				outputText("You are confined in a dark stone box. You can't move more than an inch in either direction but you can stand up or sit down. A collection of monstruous dildos hang from the horizontal bar, doing their best to demoralize you. A small slit in the panel allows you to see the cell. ");
+				outputText("You are confined in a dark stone box. You can't move more than an inch in either direction, but you can stand up or sit down. A collection of monstrous dildos extend from the horizontal bar directly underneath you, doing their best to demoralize you. A small slit in the panel allows you to see the cell. ");
 				punishments.prisonCaptorPunishmentConfinementDescribeStatus();
 				menu();
 				addButton(5, "Stand Up", punishments.prisonCaptorPunishmentConfinementStandup, null, null, null, "Try to stand up while inside the box.");
 				addButton(6, "Rest Legs", punishments.prisonCaptorPunishmentConfinementRestlegs, null, null, null, "Try to rest your legs while inside the box.");
-				addButton(7, "Break Box", punishments.prisonCaptorPunishmentConfinementBreak, null, null, null, "Attempt to break the box?\n\n" + prisonWillCostDescript(10));
+				addButton(7, "Break Box", punishments.prisonCaptorPunishmentConfinementBreak, null, null, null, "Attempt to break the box.\n\n" + prisonWillCostDescript(10));
 				if (player.lust >= 30) addButton(8, "Masturbate", punishments.prisonCaptorPunishmentConfinementMasturbate);
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 3) {
