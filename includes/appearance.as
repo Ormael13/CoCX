@@ -641,7 +641,7 @@
 	}
 	else if(player.tailType == TAIL_TYPE_SCORPION) 
 	{
-		outputText("  A chitinous scorpion-tail tail sprouts from just above your [ass], ready to dispense venom.");
+		outputText("  A chitinous scorpion tail sprouts from just above your [ass], ready to dispense venom.");
 	}
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 

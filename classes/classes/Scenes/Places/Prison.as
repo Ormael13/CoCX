@@ -557,7 +557,7 @@ package classes.Scenes.Places
 		{
 			var nextNeeded:* = false;
 			nextNeeded = true;
-			outputText("You inpect the restraints on your body.\n\n",true);
+			outputText("You inspect the restraints on your body.\n\n",true);
 			if(debug)
 			{
 				if(player.statusAffectv2(StatusAffects.PrisonRestraints) >= 2)
@@ -626,7 +626,7 @@ package classes.Scenes.Places
 				doNext(playerMenu);
 				return;
 			}
-			outputText("You inpect the gag in your mouth.\n\n",true);
+			outputText("You inspect the gag in your mouth.\n\n",true);
 			if(debug)
 			{
 				if(player.statusAffectv4(StatusAffects.PrisonRestraints) >= 4)
@@ -1126,7 +1126,11 @@ package classes.Scenes.Places
 			showStats();
 			clearOutput();
 			outputText(images.showImage("prison-cell"), false);
-			outputText("You are in a dimly lit but spacious cell. However, the size of the room is little comfort to you as it is filled with all manner of restraints and torture devices. Eylets, metal rings, bars and hooks are scattered around the ceiling, floor and walls providing a near endless variety of ways to restrain a person. A wooden stockade is installed in the center of the room, a whipping post and a rack stand in one corner, and in another there is a large and ominous floor to ceiling stone box. Mercifully, fresh air and sunlight can enter the room through narrow slit windows opposite the door.");
+			outputText("You are in a dimly lit but spacious cell. However, the size of the room is little comfort to you as it is filled with all manner of restraints and torture devices. Eylets, metal rings, bars and hooks are scattered around the ceiling, floor and walls providing a near endless variety of ways to restrain a person. A wooden stockade is installed in the center of the room, a whipping post and a rack stand in one corner, and in another there is a large and ominous floor to ceiling stone box. "); 
+			if (flags[kFLAGS.PRISON_PUNISHMENT] == 4) {
+				outputText("\n\n<b>You are confined to the training crate as part of your lesson.</b>");
+			}
+			outputText("Mercifully, fresh air and sunlight can enter the room through narrow slit windows opposite the door.");
 			prisonRestraintText();
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0) {
 				outputText("\n\nThe room is ",false);
@@ -1183,6 +1187,7 @@ package classes.Scenes.Places
 					return;
 				}
 			}
+				
 			//Random events
 			if (flags[kFLAGS.PRISON_EVENT_TIMEOUT] == 0 && model.time.hours >= 8) {
 				flags[kFLAGS.PRISON_EVENT_TIMEOUT] = 2;
@@ -1283,30 +1288,35 @@ package classes.Scenes.Places
 			}
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {
+				outputText("\n\n<b>You are confined to the stockades as part of your lesson.</b>");
 				menu();
 				addButton(5, "Call Out", punishments.prisonCaptorPunishmentStockadesCallout, null, null, null, "Call for someone to get to you.");
-				addButton(6, "Break Stockade", punishments.prisonCaptorPunishmentStockadeBreak, null, null, null, "Attempt to break the stockade?\n\n" + prisonWillCostDescript(10));
+				addButton(7, "Break Stockade", punishments.prisonCaptorPunishmentStockadeBreak, null, null, null, "Attempt to break the stockade?\n\n" + prisonWillCostDescript(10));
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 2) {
+				clearOutput();
+				outputText("You are confined in a dark stone box. You can't move more than an inch in either direction but you can stand up or sit down. A collection of monstruous dildos hang from the horizontal bar, doing their best to demoralize you. A small slit in the panel allows you to see the cell. ");
+				punishments.prisonCaptorPunishmentConfinementDescribeStatus();
 				menu();
 				addButton(5, "Stand Up", punishments.prisonCaptorPunishmentConfinementStandup, null, null, null, "Try to stand up while inside the box.");
 				addButton(6, "Rest Legs", punishments.prisonCaptorPunishmentConfinementRestlegs, null, null, null, "Try to rest your legs while inside the box.");
 				addButton(7, "Break Box", punishments.prisonCaptorPunishmentConfinementBreak, null, null, null, "Attempt to break the box?\n\n" + prisonWillCostDescript(10));
-				addButton(8, "Masturbate", getGame().masturbation.masturbateMenu);
+				if (player.lust >= 30) addButton(8, "Masturbate", punishments.prisonCaptorPunishmentConfinementMasturbate);
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 3) {
-				outputText("\n\n",false);
+				outputText("\n\n");
 				punishments.prisonCaptorPunishmentBJTrainerDescribeStatus(true);
-				outputText("\n\n",false);
+				outputText("\n\n");
 				addButton(5, "Suck Dildo", punishments.prisonCaptorPunishmentBJTrainerSuck, null, null, null, "Suck on the dildo and try to fill the basin to get the key.");
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 4) {
+				outputText("\n\n<b>You are confined to the stockades as part of your lesson.</b>");
 				menu();
 				addButton(0, "Behave", trainingPet.prisonCaptorPetTrainingCrateBehave);
 				if (player.will >= prisonWillCost(10)) addButton(1, "Misbehave", trainingPet.prisonCaptorPetTrainingCrateMisbehave, null, null, null, prisonWillCostDescript(10));
 				addButton(2, "Call Out", trainingPet.prisonCaptorPetTrainingCrateCallOut);
 				addButton(3, "Leash", trainingPet.prisonCaptorPetTrainingCrateLeash);
-				
+				//addButton(7, "Break Cage", trainingPet.prisonCaptorPetTrainingCrateBreak, null, null, null, "Attempt to break the cage?\n\n" + prisonWillCostDescript(10));
 				if (player.lust >= 70) addButton(8, "Masturbate", trainingPet.prisonCaptorPetTrainingCrateMasturbate);
 			}
 			//Show wait/rest/sleep depending on conditions.
@@ -1718,7 +1728,8 @@ package classes.Scenes.Places
 			changeEsteem(1,inPrison);
 			changeObey(-3,inPrison);
 			prisonEscapeSuccessText();
-			doYesNo(prisonEscapeFinalePart1, playerMenu);
+			prisonEscapeFinalePart1();
+			//doYesNo(prisonEscapeFinalePart1, playerMenu);
 		}
 		
 		public function doPrisonEscapeSeduce():void
@@ -1999,11 +2010,11 @@ package classes.Scenes.Places
 		{
 			clearOutput();
 			player.removeStatusAffect(StatusAffects.PrisonRestraints);
-			flags[kFLAGS.PRISON_STUDY_BREATHING_UNLOCKED] = 0;
+			/*flags[kFLAGS.PRISON_STUDY_BREATHING_UNLOCKED] = 0;
 			flags[kFLAGS.PRISON_STUDY_MANNERS_UNLOCKED] = 0;
 			flags[kFLAGS.PRISON_TRAIN_ANAL_CAPACITY_UNLOCKED] = 0;
 			flags[kFLAGS.PRISON_TRAIN_SELF_CONTROL_UNLOCKED] = 0;
-			flags[kFLAGS.PRISON_TRAIN_PUPPY_TRICKS_UNLOCKED] = 0;
+			flags[kFLAGS.PRISON_TRAIN_PUPPY_TRICKS_UNLOCKED] = 0;*/
 			prisonItemsRetrieve();
 			if (flags[kFLAGS.PRISON_STORAGE_ARMOR] != 0) {
 				prisonArmorRetrieve();
@@ -2814,7 +2825,7 @@ package classes.Scenes.Places
 			this[prisonCaptor.resistFuckFunc]();
 		}
 		
-		public function prisonItemSpecialEvent(item:Useable, previousEvent:Function):Boolean
+		/*public function prisonItemSpecialEvent(item:Useable, previousEvent:Function):Boolean
 		{
 			if(item == consumables.C_BREAD && trainingPet.prisonCaptorPetTier() > 0 && !trainingPet.prisonCaptorPetOptedOut())
 			{
@@ -2822,20 +2833,19 @@ package classes.Scenes.Places
 				return true;
 			}
 			return false;
-		}
+		}*/
 		
-		public function prisonItemBread(cumBread:Boolean):void
+		public function prisonItemBread(cumBread:Boolean, lickPrompt:Boolean = true):void
 		{
-			var specialEventSignal:int = 0;
 			clearOutput();
-			specialEventSignal = trainingPet.prisonCaptorPetScratch();
-			if(specialEventSignal == -1)
-			{
-				trainingPet.prisonCaptorPetLickCumBowl("afterlick");
-				return;
-			}
+
 			if(cumBread)
 			{
+				if(lickPrompt && trainingPet.prisonCaptorPetTier() > 0 && !trainingPet.prisonCaptorPetOptedOut())
+				{
+					trainingPet.prisonCaptorPetLickCumBowl("choose");
+					return;
+				}
 				outputText("You look at the bowl full of cum with bits of soggy bread floating in it. ",false);
 				if(player.obey < 25)
 				{
@@ -2900,11 +2910,14 @@ package classes.Scenes.Places
 					outputText("sense of satisfaction at having committed the submissive and demeaning act.",false);
 					changeObey(1,inPrison);
 				}
+				player.refillHunger(20);
 			}
 			else
 			{
-				outputText("You eat the stale, flavorless brick of bread. It satisfies your hunger, but not much else.",false);
+				outputText("You eat the stale, flavorless brick of bread. It satisfies your hunger, but not much else.", false);
+				player.refillHunger(40);
 			}
+			doNext(inventory.inventoryMenu);
 		}
 		
 		public function prisonItemBreadHeatEffect(bonusResist:Number = 0):void

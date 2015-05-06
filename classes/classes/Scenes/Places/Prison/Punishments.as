@@ -197,7 +197,7 @@ package classes.Scenes.Places.Prison
 		{
 			clearOutput();
 			if (player.will < prison.prisonWillCost(10)) {
-				outputText("You do not have enough willpower to attempt that.");
+				outputText("Try as you might, you just don't have enough willpower to attempt that.");
 				doNext(playerMenu);
 				return;
 			}
@@ -478,7 +478,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPunishmentConfinementBreak():void {
 			clearOutput();
 			if (player.will < prison.prisonWillCost(10)) {
-				outputText("You do not have enough willpower to attempt that.");
+				outputText("Try as you might, you just don't have enough willpower to attempt that.");
 				doNext(playerMenu);
 				return;
 			}
