@@ -2847,6 +2847,7 @@ package classes.Scenes.Places.Prison
 				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,3);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
+			flags[kFLAGS.PRISON_STUDY_BREATHING_UNLOCKED] = 1;
 			inventory.takeItem(shortName, camp.returnToCampUseOneHour);
 		}
 		

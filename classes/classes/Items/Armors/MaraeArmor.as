@@ -20,7 +20,7 @@ package classes.Items.Armors
 		
 		override public function useText():void
 		{
-			outputText("You strip yourself naked before you proceed to put on the armor. ");
+			outputText("You " + game.player.clothedOrNaked("strip yourself naked before you ") + "proceed to put on the armor. ");
 			if (getGame().player.cor < 33) outputText("You shudder at the idea of wearing armor that is infested with tentacles but you proceed anyway. ");
 			if (getGame().player.cor >= 33 && getGame().player.cor < 66) outputText("You are not sure about the idea of armor that is infested with tentacles. ");
 			if (getGame().player.cor >= 66) outputText("You are eager with the idea of wearing tentacle-infested armor. ");
@@ -61,7 +61,7 @@ package classes.Items.Armors
 			if (getGame().player.lust < 20)
 			{
 				outputText("\n\nYou can feel the tentacles inside your breastplate slither their way and tease your [butt]. You gasp in surprise.");
-				game.dynStats("lust", (20 - getGame().player.lust), "resisted", false);
+				game.dynStats("lust", 30);
 			}
 		}
 	}

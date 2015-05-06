@@ -9606,12 +9606,10 @@
 		
 		public function prisonBread(player:Player):void {
 			prison.prisonItemBread(false);
-			player.refillHunger(40);
 		}
 		
 		public function prisonCumStew(player:Player):void {
 			prison.prisonItemBread(true);
-			player.refillHunger(20);
 		}
 	}
 }

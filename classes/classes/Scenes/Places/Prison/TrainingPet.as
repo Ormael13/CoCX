@@ -275,13 +275,15 @@ package classes.Scenes.Places.Prison
 				//prison.trainingPet.prisonCaptorPetScratchSet(previousEvent);
 				menu();
 				addButton(0, "Lick", prisonCaptorPetLickCumBowl, "lick");
-				addButton(1, "Eat", previousEvent);
+				addButton(1, "Eat", prison.prisonItemBread, true, false);
 				return;
 			}
 			if(branchChoice == "afterlick")
 			{
-				outputText("(Placeholder) Afterward, you find yourself overcome with an odd sensation of tranquility. \n\n");
+				outputText("(Placeholder) Afterward, you find yourself overcome with an odd sensation of tranquility. ");
 				prisonCaptorPetScratchSet(0);
+				doNext(inventory.inventoryMenu);
+				player.refillHunger(20);
 				return;
 			}
 			outputText("(Placeholder) You place the bowl on the floor, get down on all fours, and lick the bowl clean using only your tongue. \n\n");
@@ -299,11 +301,11 @@ package classes.Scenes.Places.Prison
 			{
 				prisonCaptorPetScoreChange(0.5);
 			}
-			
 			prisonCaptorPetTierUpdate();
 			//itemEvent = prisonCaptorPetScratch();
-			prisonCaptorPetScratchSet(-1);
-			//doNext(itemEvent);
+			prisonCaptorPetScratchSet( -1);
+			prisonCaptorPetLickCumBowl("afterlick");
+			doNext(playerMenu);
 		}
 		
 		public function prisonCaptorPetDreamStart(branchChoice:String = "choose"):Boolean
