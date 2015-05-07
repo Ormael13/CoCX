@@ -594,7 +594,7 @@ inputManager.AddBindableControl(
 		{
 			if (keyCode == 71)
 			{
-				if (player.str > 0 && mainView.getButtonText(0).indexOf("Game Over") == -1)
+				if (player.str > 0 && mainView.getButtonText(0).indexOf("Game Over") == -1 && (debug && flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild))
 				{
 					kGAMECLASS.debugMenu.accessDebugMenu();
 				}

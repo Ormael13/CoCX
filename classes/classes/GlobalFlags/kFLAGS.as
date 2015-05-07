@@ -280,7 +280,7 @@ public static const FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION:int                 
 public static const UNKNOWN_FLAG_NUMBER_00272:int                                   =  272; // Times Explored Swamp
 public static const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
 public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
-public static const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes
+public static const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
 public static const UNKNOWN_FLAG_NUMBER_00276:int                                   =  276; // Times Encountered Basilisk
 public static const UNKNOWN_FLAG_NUMBER_00277:int                                   =  277; // Times Encountered Drider
 public static const UNKNOWN_FLAG_NUMBER_00278:int                                   =  278; // LOTTIE DISABLED (1+ = YUS)
@@ -2225,7 +2225,7 @@ public static const ISABELLA_CHILDREN_HUMAN_HERMS:int                           
 public static const ISABELLA_CHILDREN_COWGIRL_BOYS:int                              = 2217;
 public static const ISABELLA_CHILDREN_COWGIRL_GIRLS:int                             = 2218;
 public static const ISABELLA_CHILDREN_COWGIRL_HERMS:int                             = 2219;
-public static const UNKNOWN_FLAG_NUMBER_02220:int                                   = 2220;
+public static const ISABELLA_VALERIA_SPARRED:int                                    = 2220;
 public static const UNKNOWN_FLAG_NUMBER_02221:int                                   = 2221;
 public static const UNKNOWN_FLAG_NUMBER_02222:int                                   = 2222;
 public static const UNKNOWN_FLAG_NUMBER_02223:int                                   = 2223;

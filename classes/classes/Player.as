@@ -1787,17 +1787,14 @@ use namespace kGAMECLASS;
 
 		public function armorDescript(nakedText:String = "gear"):String
 		{
+			var textArray:Array = [];
 			var text:String = "";
-			if (armor != ArmorLib.NOTHING) text += armorName;
+			//if (armor != ArmorLib.NOTHING) text += armorName;
 			//Join text.
-			if (upperGarment != UndergarmentLib.NOTHING && lowerGarment != UndergarmentLib.NOTHING && armor != ArmorLib.NOTHING) text += ", "
-			else if (((upperGarment != UndergarmentLib.NOTHING && lowerGarment == UndergarmentLib.NOTHING) || (upperGarment == UndergarmentLib.NOTHING && lowerGarment != UndergarmentLib.NOTHING)) && armor != ArmorLib.NOTHING) text += " and ";
-			//Show upper undergarment first.
-			if (upperGarment != UndergarmentLib.NOTHING) text += upperGarmentName;
-			//Join if you're wearing both.
-			if (upperGarment != UndergarmentLib.NOTHING && lowerGarment != UndergarmentLib.NOTHING) text += " and ";
-			//Show lower undergarment last.
-			if (lowerGarment != UndergarmentLib.NOTHING) text += lowerGarmentName;
+			if (armor != ArmorLib.NOTHING) textArray.push(armor.name);
+			if (upperGarment != UndergarmentLib.NOTHING) textArray.push(upperGarmentName);
+			if (lowerGarment != UndergarmentLib.NOTHING) textArray.push(lowerGarmentName);
+			if (textArray.length > 0) text = formatStringArray(textArray);
 			//Naked?
 			if (upperGarment == UndergarmentLib.NOTHING && lowerGarment == UndergarmentLib.NOTHING && armor == ArmorLib.NOTHING) text = nakedText;
 			return text;

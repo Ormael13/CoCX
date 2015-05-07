@@ -235,7 +235,7 @@ package classes.Scenes.NPCs {
 	{
 		clearOutput();
 		flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] = 0;
-	 	outputText("As you get up, you hear the voices of two happy women chatting pleasantly to each other; you recognize one as Marble, but the other is a stranger to you. Whoever they are, they’re clearly getting along very well, and both sound quite excited.  <i>\"Morning sweetie!</i>\"  Marble excitedly exclaims at the sight of you coming out of your tent.  <i>\"Let me introduce you to my sister, Clara.</i>\"");
+	 	outputText("As you get up, you hear the voices of two happy women chatting pleasantly to each other; you recognize one as Marble, but the other is a stranger to you. Whoever they are, they’re clearly getting along very well, and both sound quite excited.  <i>\"Morning sweetie!</i>\"  Marble excitedly exclaims at the sight of you coming out of your " + camp.homeDesc() + ".  <i>\"Let me introduce you to my sister, Clara.</i>\"");
 	 	outputText("\n\nThe other woman, whom you presume is Clara, certainly does look like she is related to Marble.  She is obviously another Lacta Bovine, with many of the same features as ");
 		//[Marble has cow face or not]
 		if(flags[kFLAGS.MARBLE_BOVA_LEVEL] <= 1) outputText("your mate has");

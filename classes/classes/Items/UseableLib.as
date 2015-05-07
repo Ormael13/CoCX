@@ -5,6 +5,7 @@ package classes.Items
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Other.DebugWand;
 	import classes.Items.Other.SimpleUseable;
 	import classes.Player;
 	import classes.internals.Utils;
@@ -42,5 +43,8 @@ package classes.Items
 		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a packet of condom", 6,
 			"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes. \n\nType: Miscellaneous",
 			"You look at the unopened packet of condom.  If applicable, you can use the condom to prevent pregnancy most of the time.");
+		
+		//Debug Wand
+		public const DBGWAND:DebugWand = new DebugWand();
 	}
 }

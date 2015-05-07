@@ -213,7 +213,7 @@ public function processJackFrostEvent():void {
 			
 			outputText("\n\nYou laugh and hug her back, telling Amily to take it easy.  With all the friction the two of you are making, hugging together and nuzzling, you might just end up melting all the snow.  The mouse looks into your eyes. \"<i>Oooh, you little tempter, you,</i>\" she trills, tail looping around your wrist.  \"<i>Maybe I wouldn't mind that...?</i>\" she suggests mischievously.");
 			outputText("\n\nYou grin at her then envelop her lips into a kiss... sounds like a plan, you're feeling a bit cold and this would be a nice way to warm you right up...");
-			outputText("\n\nIt's not really possible to smirk and kiss at the same time, but your murine lover does her level best to try.  Breaking the kiss with a smile, she tugs you gently towards your tent.  \"<i>Come on then, lover-" + player.mf("boy","girl") + ", let's go and get warmed up...</i>\" She coos.  Her hands start to remove your clothes, \"<i>So, what do you have in mind, exactly...?</i>\"");
+			outputText("\n\nIt's not really possible to smirk and kiss at the same time, but your murine lover does her level best to try.  Breaking the kiss with a smile, she tugs you gently towards your " + camp.homeDesc() + ".  \"<i>Come on then, lover-" + player.mf("boy","girl") + ", let's go and get warmed up...</i>\" She coos.  Her hands start to remove your clothes, \"<i>So, what do you have in mind, exactly...?</i>\"");
 			//[Penetrate Her] [Make out]
 			menu();
 			if(player.hasCock()) addButton(0,"Penetrate",penetradePureMouseWaifu);

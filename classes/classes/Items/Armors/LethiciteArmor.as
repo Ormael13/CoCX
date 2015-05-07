@@ -20,7 +20,7 @@ package classes.Items.Armors
 			if (game.player.cor >= 33 && getGame().player.cor < 66) outputText("You are not sure about the crotch-exposing armor. ");
 			if (game.player.cor >= 66) outputText("You are eager to show off once you get yourself suited up. ");
 			//Put on breastplate
-			outputText("\n\nFirst, you clamber into the breastplate. It has imposing, spiked pauldrons to protect your shoulder. The breastplate shifts to accommodate your [chest] and when you look down, your [nipples] are exposed. ");
+			outputText("\n\nFirst, you clamber into the breastplate. It has imposing, spiked pauldrons to protect your shoulders. The breastplate shifts to accommodate your [chest] and when you look down, your [nipples] are exposed. ");
 			if (game.player.biggestLactation() >= 4) outputText("A bit of milk gradually flows over your breastplate. "); 
 			//Put on leggings
 			if (game.player.isBiped()) {

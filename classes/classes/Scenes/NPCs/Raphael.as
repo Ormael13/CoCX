@@ -285,7 +285,7 @@ private function RaphaelDress():void {
 	clearOutput();
 	outputText("A small pebble hits the ground near you, waking you up. When a second one hits, you're sure someone is trying to draw your attention.\n\n", false);
 
-	outputText("Rubbing your eyes, you pull yourself out of bed, wondering what's going on. Sticking your head through the front wall of your tent, you take a curious peek outside, but find no one around.\n\n", false);
+	outputText("Rubbing your eyes, you pull yourself out of bed, wondering what's going on. Sticking your head through the front wall of your " + camp.homeDesc() + ", you take a curious peek outside, but find no one around.\n\n", false);
 
 	outputText("The first thing you do is open your storage chest, to see if the Russet Rogue has robbed you again. This doesn't appear to be the case, and instantly, your eye is drawn to an addition instead of a subtraction from its contents. You seem to have gained a new outfit! Upon a carefully folded fabric of rose red color, a note is left below a gorgeous ruby pendant upon a golden setting and carried by a filigree chain. Curiously, you open the note and read it.\n\n", false);
 
@@ -340,7 +340,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 	
 	outputText("You awake to the soft patter of footsteps moving away from you. For a second you think nothing of it, but soon awake to the realization you might have been robbed again. When you sit up and notice a weight off your chest, you realize someone has made off with the priceless ruby pendant Raphael gifted you earlier. They swiped it straight off your neck!\n\n", false);
 
-	outputText("You rush out of your tent, but when you look around and spot something red lying on the small ruined wall on the outskirts of your camp, you realize that the situation isn't as urgent as you had feared. You begin to understand what the wily fox meant to imply with uncertain ownership of the pendant.\n\n", false);
+	outputText("You rush out of your " + camp.homeDesc() + ", but when you look around and spot something red lying on the small ruined wall on the outskirts of your camp, you realize that the situation isn't as urgent as you had feared. You begin to understand what the wily fox meant to imply with uncertain ownership of the pendant.\n\n", false);
 
 	outputText("Curious, you amble towards the Russet Rogue. Raphael, this time armed with a picnic basket and a bottle of fine wine, makes a nonchalant impression as he lies leisurely on top of the wall. His tail flicks about playfully, while he swirls a small amount of wine within a crystal glass. At first he looks at the fluid casually and takes a sip, before rolling his head sideways to look down upon you.\n\n", false);
 

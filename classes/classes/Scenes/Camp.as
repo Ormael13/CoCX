@@ -395,6 +395,11 @@ private function doCamp():void { //Only called by playerMenu
 		hideMenus();
 		return;
 	}
+	//Isabella and Valeria sparring.
+	if (isabellaFollower() && flags[kFLAGS.VALARIA_AT_CAMP] > 0 && flags[kFLAGS.ISABELLA_VALERIA_SPARRED] == 0) {
+		valeria.isabellaAndValeriaSpar();
+		return;
+	}
 	//Marble meets follower izzy when moving in
 	if(flags[kFLAGS.ISABELLA_MURBLE_BLEH] == 1 && isabellaFollower() && player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
 		isabellaFollowerScene.angryMurble();
@@ -720,26 +725,26 @@ private function doCamp():void { //Only called by playerMenu
 	{
 		if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1)
 		{
-			outputText("There is a note on your ", false);
+			outputText("There is a note on your ");
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
 			{
-				outputText("bed inside your cabin.", false);
+				outputText("bed inside your cabin.");
 			}
 			else
 			{
-				outputText("bedroll", false);
+				outputText("bedroll");
 			}
-			outputText(". It reads \"<i>Come see me at the lake. I've finished your spider silk ", false)
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 1)
-			{
-				outputText("armor", false);
+			outputText(". It reads \"<i>Come see me at the lake. I've finished your spider-silk ");
+			switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+				case 1: outputText("armor");
+				case 2: outputText("robes");
+				case 3: outputText("bra");
+				case 4: outputText("panties");
+				case 5: outputText("loincloth");
+				default: outputText("robes");
 			}
-			else
-			{
-				outputText("robes", false);
-			}
-			outputText(". -Rathazul</i>\".", false);
-			outputText("\n\n", false);			
+			outputText(". -Rathazul</i>\".");
+			outputText("\n\n");			
 		}
 	}
 	//MOUSEBITCH
@@ -2295,6 +2300,28 @@ private function hangImpSkull():void {
 	flags[kFLAGS.CAMP_WALL_SKULLS]++;
 	outputText("There " + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "is" : "are") + " currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " imp skull" + (flags[kFLAGS.CAMP_WALL_SKULLS] == 1 ? "" : "s") + " hung on the wall, serving to deter any imps who might try to rape you.");
 	doNext(doCamp);
+}
+
+public function homeDesc():String {
+	var textToChoose:String;
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) {
+		textToChoose = "cabin";
+	}
+	else {
+		textToChoose = "tent";
+	}
+	return textToChoose;
+}
+
+public function bedDesc():String {
+	var textToChoose:String;
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) {
+		textToChoose = "bed";
+	}
+	else {
+		textToChoose = "bedroll";
+	}
+	return textToChoose;
 }
 
 private function promptAscend():void {

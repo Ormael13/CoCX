@@ -849,6 +849,10 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			return Appearance.buttDescription(this);
 		}
 
+		public function hornDescript():String
+		{
+			return Appearance.DEFAULT_HORNS_NAMES[hornType] + " horns";
+		}
 
 	}
 

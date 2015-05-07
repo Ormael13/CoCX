@@ -728,40 +728,44 @@ public function birthOutDatGooSlut():void {
 	player.buttKnockUpForce(); //Clear the false pregnancy
 }
 
-/*MISC. Valeria Interactions
+//MISC. Valeria Interactions
 
+//[If PC has Valeria unequipped and Isabella is in camp]
+//(Play when PC returns to camp from anywhere/anything)
+public function isabellaAndValeriaSpar():void {
+	clearOutput();
+	outputText("As you make your way back home, you hear an annoyed \"<i>Mooooo!</i>\" from Isabella's section of the camp. Cocking an eyebrow, you wander over to the busy cow-girl. Isabella's arms are currently crossed over her prodigious chest, her shield planted in the ground in front of her. Standing a few feet in front of her is Valeria, snuggly fit into her steel plates, her greatsword held firmly in hand.");
 
-[If PC has Valeria unequipped and Isabella is in camp]
-(Play when PC returns to camp from anywhere/anything)
+	outputText("\n\n\"<i>I'm just saying, Izzy,</i>\" Valeria groans, nodding to her gooey sword. \"<i>You're fighting style is just... lacking, is all.</i>\"");
 
-As you make your way back home, you hear an annoyed \"<i>Mooooo!</i>\" from Isabella's section of the camp. Cocking an eyebrow, you wander over to the busy cow-girl. Isabella's arms are currently crossed over her prodigious chest, her shield planted in the ground in front of her. Standing a few feet in front of her is Valeria, snuggly fit into her steel plates, her greatsword held firmly in hand. 
+	outputText("\n\n\"<i>Mein style of combat ist NICHT LACKING!</i>\" Isabella huffs, crossing her arms so tight that a little dollop of milk bubbles out through her corset. ");
 
-\"<i>I'm just saying, Izzy,</i>\" Valeria groans, nodding to her gooey sword. \"<i>You're fighting style is just... lacking, is all.</i>\"
+	outputText("\n\n\"<i>Yes it is! What's the fucking point of packing a big-ass tower shield and then PUNCHING people? Seriously, what's up with that; if you just can't afford a sword, or a hammer, or whatever, I could spot you some gems. I mean...</i>\"");
 
-\"<i>Mein style of combat ist NICHT LACKING!</i>\" Isabella huffs, crossing her arms so tight that a little dollop of milk bubbles out through her corset. 
+	outputText("\n\n\"<i>SILENCE!</i>\" Isabella snaps, scowling. \"<i>It ist not a matter of gems! I prefer to use mein fists, und that ist that.</i>\"");
 
-\"<i>Yes it is! What's the fucking point of packing a big-ass tower shield and then PUNCHING people? Seriously, what's up with that; if you just can't afford a sword, or a hammer, or whatever, I could spot you some gems. I mean...</i>\"
+	outputText("\n\n\"<i>Come oooonnnn, at least try using a sword. Please? You might like it...</i>\"");
 
-\"<i>SILENCE!</i>\" Isabella snaps, scowling. \"<i>It ist not a matter of gems! I prefer to use mein fists, und that ist that.</i>\"
+	outputText("\n\n\"<i>Nein, Isabella vill not degrade her hand vith your goo weapons.</i>\"");
 
-\"<i>Come oooonnnn, at least try using a sword. Please? You might like it...</i>\"
+	outputText("\n\nValeria's shoulders slump. \"<i>Fine, fine. Whatever. Get your arm torn off by a demon. See if I care. I'll just go... spar by myself, I guess.</i>\"");
 
-\"<i>Nein, Isabella vill not degrade her hand vith your goo weapons.</i>\"
+	outputText("\n\n\"<i>Vait, I,</i>\" Isabella starts, grabbing Valeria's shoulder as she turns away. \"<i>I suppose I could... try ein svord.</i>\"");
 
-Valeria's shoulders slump. \"<i>Fine, fine. Whatever. Get your arm torn off by a demon. See if I care. I'll just go... spar by myself, I guess.</i>\"
+	outputText("\n\nValeria beams, and hands the cow-girl the gooey greatsword, urging her to give it a few swings to get accustomed to it.");
 
-\"<i>Vait, I,</i>\" Isabella starts, grabbing Valeria's shoulder as she turns away. \"<i>I suppose I could... try ein svord.</i>\"
+	outputText("\n\nExperimentally, Isabella swings the greatsword in long, slow arcs. She seems to be getting the hang of it, swinging faster and harder, adding on simple spins and parries... Until she makes a wide, spinning arc with the sword, and lands it right on Valeria's neck.");
 
-Valeria beams, and hands the cow-girl the gooey greatsword, urging her to give it a few swings to get accustomed to it.
+	outputText("\n\nYou watch in horror as the armor-goo's head tumbles to the ground, chopped right off by Isabella's powerful swing. \"<i>Mein Gott!</i>\" Isabella gasps, dropping the sword and clutching at her breast.");
 
-Experimentally, Isabella swings the greatsword in long, slow arcs. She seems to be getting the hang of it, swinging faster and harder, adding on simple spins and parries... Until she makes a wide, spinning arc with the sword, and lands it right on Valeria's neck.
+	outputText("\n\n\"<i>Ow.</i>\" Valeria answers, her head reappearing on her neck a moment later. The cow-girl leaps back in fright as the dismembered head decomposes and is absorbed back into Valeria's feet. The goo-girl rolls her lower jaw and makes an exaggerated show of cracking her neck. \"<i>Hey, nice swing, Izzy. Might wanna, uh, look where you're swinging, though.</i>\"");
 
-You watch in horror as the armor-goo's head tumbles to the ground, chopped right off by Isabella's powerful swing. \"<i>Mein Gott!</i>\" Isabella gasps, dropping the sword and clutching at her breast.
+	outputText("\n\n\"<i>I, ah, ja. Ich vill?</i>\"");
 
-\"<i>Ow.</i>\" Valeria answers, her head reappearing on her neck a moment later. The cow-girl leaps back in fright as the dismembered head decomposes and is absorbed back into Valeria's feet. The goo-girl rolls her lower jaw and makes an exaggerated show of cracking her neck. \"<i>Hey, nice swing, Izzy. Might wanna, uh, look where you're swinging, though.</i>\"
+	outputText("\n\nValeria chuckles as she re-absorbs her greatsword and, scratching her neck, wanders off into camp, leaving poor Isabella rather startled.");
+	flags[kFLAGS.ISABELLA_VALERIA_SPARRED] = 1;
+	doNext(playerMenu);
+}
 
-\"<i>I, ah, ja. Ich vill?</i>\"
-
-Valeria chuckles as she re-absorbs her greatsword and, scratching her neck, wanders off into camp, leaving poor Isabella rather startled.*/
 }
 }

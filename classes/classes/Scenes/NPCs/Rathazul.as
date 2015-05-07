@@ -588,9 +588,9 @@ private function commissionSilkArmorForReal():void {
 	menu();
 	addButton(0, "Armor", chooseArmorOrRobes, 1, null, null, armors.SSARMOR.description);
 	addButton(1, "Robes", chooseArmorOrRobes, 2, null, null, armors.SS_ROBE.description);
-	addButton(2, "Bra", chooseArmorOrRobes, 3);
-	addButton(3, "Panties", chooseArmorOrRobes, 4);
-	addButton(4, "Loincloth", chooseArmorOrRobes, 5);
+	addButton(2, "Bra", chooseArmorOrRobes, 3, null, null, undergarments.SS_BRA.description);
+	addButton(3, "Panties", chooseArmorOrRobes, 4, null, null, undergarments.SSPANTY.description);
+	addButton(4, "Loincloth", chooseArmorOrRobes, 5, null, null, undergarments.SS_LOIN.description);
 
 }
 
@@ -629,45 +629,45 @@ private function collectRathazulArmor():void {
 	outputText(" is finished!</i>\"\n\n", false);
 	
 	var itype:ItemType;
-	//Loincloth
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 5) {
-		outputText(images.showImage("rathazul-craft-silkloincloth"));
-		outputText("On a table is a white loincloth.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
-		
-		outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This loincloth is very durable and should be comfortable as well.</i>\"\n\n", false);
-		itype = undergarments.SS_LOIN;
-	}
-	//Panties
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 4) {
-		outputText(images.showImage("rathazul-craft-silkpanties"));
-		outputText("On a table is a pair of white panties.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
-		
-		outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  These panties are very durable and should be comfortable as well.</i>\"\n\n", false);
-		itype = undergarments.SSPANTY;
-	}
-	//Bra
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 3) {
-		outputText(images.showImage("rathazul-craft-silkbra"));
-		outputText("On a table is a pair of white bra.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
-		
-		outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  These bras are very durable and should be comfortable as well.</i>\"\n\n", false);
-		itype = undergarments.SS_BRA;
-	}
-	//Robe
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 2) {
-		outputText(images.showImage("rathazul-craft-silkrobes"));
-		outputText("Hanging from a small rack is a long, flowing robe.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  The sleeves match the cowl, circled with intricate threads laid out in arcane patterns.\n\n", false);
-		
-		outputText("Rathazul gingerly takes down the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This robe is tougher than many armors, and the spider-silk's properties may even help you in your spell-casting as well.</i>\"\n\n", false);
-		itype = armors.SS_ROBE;
-	}
-	//(Armor)
-	else {
-		outputText(images.showImage("rathazul-craft-silkarmor"));
-		outputText("A glittering white suit of armor sits atop a crude armor rack, reflecting the light that plays across its surface beautifully.  You definitely didn't expect anything like this!  It looks nearly identical to a set of light platemail, though instead of having a cold metal surface, the armor feels slightly spongy, with just a little bit of give in it.\n\n", false);
-		
-		outputText("While you marvel at the strange equipment, Rathazul explains, \"<i>When you said you wanted armor, I realized I could skip a few of the alchemical processes used to soften material.  The savings let me acquire a cheap metal set of armor to use as a base, and I molded half the armor around each piece, then removed it and created the outer, defensive layers with the rest of the webbing.  Unfortunately, I didn't have enough silk for a solid codpiece, but I did manage to make a you thin loincloth from the leftover scraps  - for modesty.</i>\"\n\n", false);
-		itype = armors.SSARMOR;
+	switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+		case 1: //Armor
+			outputText(images.showImage("rathazul-craft-silkarmor"));
+			outputText("A glittering white suit of armor sits atop a crude armor rack, reflecting the light that plays across its surface beautifully.  You definitely didn't expect anything like this!  It looks nearly identical to a set of light platemail, though instead of having a cold metal surface, the armor feels slightly spongy, with just a little bit of give in it.\n\n", false);
+			
+			outputText("While you marvel at the strange equipment, Rathazul explains, \"<i>When you said you wanted armor, I realized I could skip a few of the alchemical processes used to soften material.  The savings let me acquire a cheap metal set of armor to use as a base, and I molded half the armor around each piece, then removed it and created the outer, defensive layers with the rest of the webbing.  Unfortunately, I didn't have enough silk for a solid codpiece, but I did manage to make a you thin loincloth from the leftover scraps  - for modesty.</i>\"\n\n", false);
+			itype = armors.SSARMOR;
+			break;
+		case 2: //Robes
+			outputText(images.showImage("rathazul-craft-silkrobes"));
+			outputText("Hanging from a small rack is a long, flowing robe.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  The sleeves match the cowl, circled with intricate threads laid out in arcane patterns.\n\n", false);
+			
+			outputText("Rathazul gingerly takes down the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This robe is tougher than many armors, and the spider-silk's properties may even help you in your spell-casting as well.</i>\"\n\n", false);
+			itype = armors.SS_ROBE;
+			break;
+		case 3: //Bra
+			outputText(images.showImage("rathazul-craft-silkbra"));
+			outputText("On a table is a pair of white bra.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
+			
+			outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  These bras are very durable and should be comfortable as well.</i>\"\n\n", false);
+			itype = undergarments.SS_BRA;
+			break;
+		case 4: //Panties
+			outputText(images.showImage("rathazul-craft-silkpanties"));
+			outputText("On a table is a pair of white panties.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
+			
+			outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  These panties are very durable and should be comfortable as well.</i>\"\n\n", false);
+			itype = undergarments.SSPANTY;
+			break;
+		case 5: //Loincloth
+			outputText(images.showImage("rathazul-craft-silkloincloth"));
+			outputText("On a table is a white loincloth.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n", false);
+			
+			outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This loincloth is very durable and should be comfortable as well.</i>\"\n\n", false);
+			itype = undergarments.SS_LOIN;
+			break;
+		default:
+			outputText("Something bugged! Please report this bug to Kitteh6660.");
+			itype = armors.SS_ROBE;
 	}
 	//Reset counters
 	player.addStatusValue(StatusAffects.MetRathazul,2,1);

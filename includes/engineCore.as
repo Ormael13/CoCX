@@ -925,7 +925,7 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Spells") != -1) {
 		toolTipText = "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.";
 	}	
-	if(buttonText.indexOf("Items") != -1) {
+	if(buttonText == "Items") {
 		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
 	}
 	if(buttonText.indexOf("P. Specials") != -1) {
@@ -1099,10 +1099,10 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Explore") != -1) {                
 		toolTipText = "Explore to find new regions and visit any discovered regions.";
 	}
-	if(buttonText.indexOf("Places") != -1) {                
+	if(buttonText.indexOf("Places") != -1) {
 		toolTipText = "Visit any places you have discovered so far.";
 	}
-	if(buttonText.indexOf("Inventory") != -1) {                
+	if(buttonText == "Inventory") {
 		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
 	}
 	if(buttonText.indexOf("Stash") != -1) {                
@@ -1211,27 +1211,32 @@ public function getButtonToolTipText(buttonText:String):String
 	if(buttonText.indexOf("Factory") != -1) {
 		toolTipText = "Visit the demonic factory in the mountains.";
 		if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) toolTipText += "\n\nYou've managed to shut down the factory.";
-		if (dungeons.checkFactoryClear()) toolTipText += " \n\nCLEARED";
+		if (dungeons.checkFactoryClear()) toolTipText += "\n\nCLEARED!";
 	}
 	if(buttonText.indexOf("Deep Cave") != -1) {
 		toolTipText = "Visit the cave you've found in the Deepwoods.";
 		if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) toolTipText += "\n\nZetaz lived in the cave until you've defeated him.";
-		if (dungeons.checkDeepCaveClear()) toolTipText += "\n\nCLEARED";
+		if (dungeons.checkDeepCaveClear()) toolTipText += "\n\nCLEARED!";
 	}
 	if(buttonText.indexOf("Stronghold") != -1) {
 		toolTipText = "Visit the stronghold in the high mountains that belongs to Lethice, the demon queen.";
 		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) toolTipText += "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!";
-		if (dungeons.checkLethiceStrongholdClear()) toolTipText += "\n\nCLEARED";
+		if (dungeons.checkLethiceStrongholdClear()) toolTipText += "\n\nCLEARED!";
 	}
 	if(buttonText.indexOf("Desert Cave") != -1) {
 		toolTipText = "Visit the cave you've found in the desert.";
-		if (dungeons.checkSandCaveClear()) toolTipText += "\n\nFrom what you've known, this is the source of the Sand Witches. \n\nCLEARED";
+		if (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) toolTipText += "\n\nFrom what you've known, this is the source of the Sand Witches.";
+		if (dungeons.checkSandCaveClear()) toolTipText += "\n\nCLEARED!";
 	}
 	if(buttonText.indexOf("Phoenix Tower") != -1) {
 		toolTipText = "Re-visit the tower you went there as part of Helia's quest.";
-		if (dungeons.checkPhoenixTowerClear()) toolTipText += "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED";
+		if (dungeons.checkPhoenixTowerClear()) toolTipText += "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!";
 	}
 	//FOLLOWERS
+	//Ember
+	if(buttonText.indexOf("Ember") != -1) {
+		toolTipText = "Check up on Ember the dragon-" + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "morph" : flags[kFLAGS.EMBER_GENDER] == 1 ? "boy" : "girl" ) + ".";
+	}
 	//Rathazul
 	if(buttonText.indexOf("Rathazul") != -1) {
 		toolTipText = "Visit with Rathazul to see what alchemical supplies and services he has available at the moment.";

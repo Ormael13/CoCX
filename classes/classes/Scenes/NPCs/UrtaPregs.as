@@ -552,7 +552,7 @@ public function urtaPregooUpdates():Boolean {
 	}
 	//4: 
 	else if(player.pregnancyIncubation == 288) {
-		outputText("\nYou sit down near your tent to get some rest.  You're getting pretty heavy... and lugging this little guy around is starting to affect your performance while adventuring.  You decide to sit back and enjoy the cool breeze on this sunny day, when you spot the visage of a familiar vixen in the distance.");
+		outputText("\nYou sit down near your " + camp.homeDesc() + " to get some rest.  You're getting pretty heavy... and lugging this little guy around is starting to affect your performance while adventuring.  You decide to sit back and enjoy the cool breeze on this sunny day, when you spot the visage of a familiar vixen in the distance.");
 		
 		outputText("\n\nUrta smiles at you and gives you a friendly wave as she walks up.  \"<i>Hi, lover; how's the baby?</i>\"  She asks, already looking at your swollen stomach.  You take a deep breath and begin telling Urta about the burdens you're facing. The vixen gives you a sympathetic expression as you complain, timidly advancing closer to you as you speak, then gently reaching out with one hand, stopping before she fully touches your belly, looking at you with an obvious nonverbal request for permission.  You simply smile and nod your head.");
 		
@@ -595,7 +595,7 @@ public function urtaPregooUpdates():Boolean {
 		return true;
 	}
 	else if(player.pregnancyIncubation == 72) {
-		outputText("\nYou lay down on your tent to take a short nap, but when you're nearly dozing off, you spot a shadow on the outside of your tent.  Recognizing its vulpine form, you greet Urta as she approaches.");
+		outputText("\nYou lay down on your " + camp.homeDesc() + " to take a short nap, but when you're nearly dozing off, you spot a shadow on the outside of your " + camp.homeDesc() + ".  Recognizing its vulpine form, you greet Urta as she approaches.");
 		outputText("\n\n\"<i>Are you feeling okay, [name]?</i>\"  Urta suddenly blurts out with no preamble.  You nod your head, explaining that you're just tired, and you hope this baby will be out of you soon, you can't stand carrying it around anymore.  \"<i>Well, I don't think you'll have long to worry... I mean, have you taken a look at yourself recently, lover?  I don't mean to be rude, but you're huge!  You're going to pop any day now!</i>\"  She replies, staring anxiously at your midriff.");
 		outputText("\n\nYeah... you're pretty big, you admit.  \"<i>You really should come to Tel'adre, you know, [name].  I don't know any doctors who'll make housecalls all the way out here, not in the state the world is in.</i>\"  Urta tells you, blatant worry in her eyes.");
 		outputText("\n\nYou nod, considering her words.  But ultimately you don't think you need to go there right away. If you start feeling like you're going to go into labor, then you'll go to Tel'Adre.  Urta really doesn't look convinced, but sighs and nods.  \"<i>All right, [name], I know I can't make you change your mind.  Just... please try to be careful, all right?  You're at your most delicate state, you know?</i>\"  She doesn't give you time to answer, instead enveloping you in a gently possessive hug.  You hug her back and promise to be careful.");
@@ -638,7 +638,7 @@ private function getAnUrtaMassageWhenPreggo():void {
 	clearOutput();
 	outputText("You tell her that a backrub sounds fine, but you'd rather not lie down.  It could hurt the baby.  \"<i>Right, sorry, what was I thinking?  Well, I think I can be flexible...</i>\"  Urta grins, cracking her fingers. \"<i>Now, let's just find somewhere comfortable to put you first...</i>\"");
 	
-	outputText("\n\nYou suggest that perhaps the bedroll in your tent might suffice... or she could just give you a backrub while you're sitting.  \"<i>Well, let's give you that backrub, then; otherwise we might end up forgetting about the massage,</i>\" Urta laughs, trying to joke at her libido.  \"<i>Right, now, let's see, how does this work...</i>\"  She trails off.  Despite her offer, it's pretty obvious she's not exactly a professional masseuse.  At times she's too rough, and you have to warn her she's hurting your back, while other times she tickles you and you end up laughing.  In the end it's not as relaxing as you would have liked, though she did nail some knots and you do feel at least a bit more relaxed now.");
+	outputText("\n\nYou suggest that perhaps the bedroll in your " + camp.homeDesc() + " might suffice... or she could just give you a backrub while you're sitting.  \"<i>Well, let's give you that backrub, then; otherwise we might end up forgetting about the massage,</i>\" Urta laughs, trying to joke at her libido.  \"<i>Right, now, let's see, how does this work...</i>\"  She trails off.  Despite her offer, it's pretty obvious she's not exactly a professional masseuse.  At times she's too rough, and you have to warn her she's hurting your back, while other times she tickles you and you end up laughing.  In the end it's not as relaxing as you would have liked, though she did nail some knots and you do feel at least a bit more relaxed now.");
 	
 	outputText("\n\n\"<i>Sorry, [name], I don't really have a lot of experience with this,</i>\" Urta apologises, looking depressed at her apparent failure to help you.");
 	
@@ -668,8 +668,8 @@ private function acceptUrtaLevelSixPreggoHelps():void {
 	clearOutput();
 	outputText("You're feeling really tired right now, and besides, spending a whole day with Urta would be nice, so you gladly accept her offer.");
 	
-	outputText("\n\nUrta smiles and throws her arms around you in a loving embrace.  \"<i>All right, [name], now let's get you back to your tent to lie down; you're getting too big to be up and about at all hours of the day now...</i>\"");
-	outputText("\n\nThere's no need for her to be so worried, you're feeling fine... but you go along with what she's planning anyway.  The day is quite a blissful one for you; you get to spend it doing nothing but lounging around and enjoying yourself while Urta waits on you hand and foot, cooks meals, does the laundry, and otherwise handles everything that needs to be done.  When night comes, she insistently parks her furry butt right in your bedroll alongside you and won't be budged, so you have little choice but to cuddle with her for the night.  The next morning, you wake to a cooked breakfast, with Urta hand-feeding you more than half of it before she kisses you, says her goodbyes, and heads off again.");
+	outputText("\n\nUrta smiles and throws her arms around you in a loving embrace.  \"<i>All right, [name], now let's get you back to your " + camp.homeDesc() + " to lie down; you're getting too big to be up and about at all hours of the day now...</i>\"");
+	outputText("\n\nThere's no need for her to be so worried, you're feeling fine... but you go along with what she's planning anyway.  The day is quite a blissful one for you; you get to spend it doing nothing but lounging around and enjoying yourself while Urta waits on you hand and foot, cooks meals, does the laundry, and otherwise handles everything that needs to be done.  When night comes, she insistently parks her furry butt right in your " + camp.bedDesc() + " alongside you and won't be budged, so you have little choice but to cuddle with her for the night.  The next morning, you wake to a cooked breakfast, with Urta hand-feeding you more than half of it before she kisses you, says her goodbyes, and heads off again.");
 	camp.sleepRecovery(false);
 	model.time.days++;
 	model.time.hours = 6;
@@ -686,7 +686,7 @@ public function PCGivesBirf():void {
 		player.createVagina();
 		player.genderCheck();
 	}
-	outputText("You double over in pain as you feel a rush of fluids escape your [pussy].  Looks like your water broke.  You recall promising Urta that you'd go to the hospital before actually going into labor, but right now there's nothing you can do.  It hurts and you know you won't make it there in time, so you rush to your tent and lay down on your bedroll, silently praying that Urta will swing by to assist you.");
+	outputText("You double over in pain as you feel a rush of fluids escape your [pussy].  Looks like your water broke.  You recall promising Urta that you'd go to the hospital before actually going into labor, but right now there's nothing you can do.  It hurts and you know you won't make it there in time, so you rush to your " + camp.homeDesc() + " and lay down on your " + camp.bedDesc() + ", silently praying that Urta will swing by to assist you.");
 	//1st Time:
 	if(flags[kFLAGS.URTA_TIMES_PC_BIRTHED] == 0) {
 		outputText("\n\n\"<i>[name]?  Oh, I just knew this would happen!</i>\"  Urta cries as she suddenly emerges from the undergrowth, racing over to your side.  Well, it looks like her little stalking habit is going to pay off for the two of you... well, for the three of you, rather: you, her and the baby.");
