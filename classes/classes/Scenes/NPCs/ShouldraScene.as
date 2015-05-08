@@ -66,7 +66,7 @@
 				return true;
 			}
 			//Ghostgirl pissed off dreams
-			if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0) {
+			if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0 && !prison.inPrison) {
 				getGame().shouldraFollower.nightTimeShouldraRapesThePC();
 				return true;
 			}

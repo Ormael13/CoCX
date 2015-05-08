@@ -36,7 +36,7 @@ package classes.Scenes
 		public function accessDebugMenu():void {
 			//buildArray();
 			kGAMECLASS.tooltipLoc = "";
-			if ((debug && flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild) && !getGame().inCombat) {
+			if (!getGame().inCombat) {
 				hideMenus();
 				mainView.nameBox.visible = false;
 				mainView.nameBox.text = "";
@@ -46,13 +46,18 @@ package classes.Scenes
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
 				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
-				addButton(2, "Flag Editor", flagEditor);
+				addButton(2, "Flag Editor", flagEditor, null, null, null, "Edit any flag. \n\nCaution: This might screw up your save!");
 				addButton(3, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
 				//addButton(5, "Event Trigger", eventTriggerMenu);
 				//addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
 				if (player.isPregnant()) addButton(4, "Abort Preg", abortPregnancy);
 				addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
 				addButton(14, "Exit", playerMenu);
+			}
+			if (getGame().inCombat) {
+				clearOutput();
+				outputText("You raise the wand but nothing happens. Seems like it only works when you're not in the middle of a battle.");
+				doNext(playerMenu);
 			}
 		}
 		
@@ -368,10 +373,11 @@ package classes.Scenes
 			menu();
 			addItemButton(consumables.BIMBOLQ);
 			addItemButton(consumables.BROBREW);
-			addItemButton(useables.GLDSTAT);
 			addItemButton(consumables.HUMMUS2);
-			
 			addItemButton(consumables.P_PEARL);
+			
+			addItemButton(useables.DBGWAND);
+			addItemButton(useables.GLDSTAT);
 			
 			addButton(14, "Back", itemSpawnMenu);
 		}
@@ -633,6 +639,7 @@ package classes.Scenes
 			addButton(2, "Be Manticore", getManticoreKit, null, null, null, "Gain everything needed to become a Manticore-morph.");
 			addButton(3, "Be Dragonne", getDragonneKit, null, null, null, "Gain everything needed to become a Dragonne-morph.");
 			addButton(4, "Debug Prison", debugPrison);
+			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		

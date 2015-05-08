@@ -47,7 +47,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText(images.showImage("behemoth-talk"), false);
 			outputText("You ask the behemoth if he's willing to have a conversation with you. The behemoth says, \"<i>Of course. What would you like to talk about?</i>\"");
 			menu();
-			addButton(0, "Yourself", talkAboutYourself, null, null, "Talk to the behemoth about yourself.");
+			addButton(0, "Yourself", talkAboutYourself, null, null, null, "Talk to the behemoth about yourself.");
 			addButton(1, "Behemoth", talkAboutBehemoth, null, null, null, "Talk to the behemoth about himself.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] >= 1) addButton(2, "His Past", talkAboutSadStory, null, null, null, "Talk to the behemoth about his past.");
 			else addLockedButton(2, "Talk to the behemoth at least once to unlock this.");
@@ -93,7 +93,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		private function talkAboutBehemoth():void {
 			clearOutput();
 			outputText("You ask the behemoth about himself. What is he, exactly?");
-			outputText("\n\n\"</i>I don't have an actual name but everybody calls me Behemoth. We were a proud race known for incredible strength, feats, and contests. Here, let me show you something,</i>\" the behemoth says and shows you the codex entry on behemoths.");
+			outputText("\n\n\"<i>I don't have an actual name but everybody calls me Behemoth. We were a proud race known for incredible strength, feats, and contests. Here, let me show you something,</i>\" the behemoth says and shows you the codex entry on behemoths.");
 			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Behemoths!</b>");

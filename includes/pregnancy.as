@@ -827,7 +827,7 @@ public function updatePregnancy():Boolean {
 					pregText += "\n\nEmber sighs in relief.  \"<i>Good, is there anything I can do for you?</i>\"";
 					pregText += "\n\nYou tap your lips thoughtfully, mulling it over.  ";
 					//(Low Corruption)
-					if(player.cor <= 33) pregText += "There really isn't anything you feel like you need right now... maybe some water?  Or maybe you could have Ember help you to your tent for a quick rest?";
+					if(player.cor <= 33) pregText += "There really isn't anything you feel like you need right now... maybe some water?  Or maybe you could have Ember help you to your " + camp.homeDesc() + " for a quick rest?";
 					//(Medium Corruption)
 					else if(player.cor <= 66) pregText += "You wonder if you should take advantage of Ember - you've certainly been feeling a little on edge lately, and besides " + emberScene.emberMF("he","she") + " did say 'anything'.  You ponder this for a while longer.";
 					//High Corruptio

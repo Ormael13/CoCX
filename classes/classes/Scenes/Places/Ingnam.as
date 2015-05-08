@@ -33,8 +33,8 @@ package classes.Scenes.Places
 				return;
 			}
 			clearOutput();
-			outputText("Ingnam is a rich and prosperous village despite its small size. There are already a good deal of shops. The temple is established in a district located just across from the shops. The tavern serves as a hub for people near and far to drink and dance. One of the paths leads to the large farm.");
-			outputText("\n\nIn the distance is a mountain known by the locals as Mount Ilgast. Surrounding Ingnam is a vast expanse of wilderness. ");
+			outputText("Ingnam is a rich and prosperous village despite its small size. There is already a well-established array of shops with a constant hum of tradesmen and merchants. The temple sits within view of the patrons sitting at tables at the tavern which serves as a hub for people near and far to drink and dance. On the road leading out of the plaza that sits before the temple is a trail that meanders its way to a large farm in the distance.");
+			outputText("\n\nLooming ominously in the distance is a mountain known by the locals as Mount Ilgast. Surrounding Ingnam is a vast expanse of wilderness.");
 			if (model.time.hours >= 21 || model.time.hours < 6) outputText("\n\nIt's dark outside. Stars dot the night sky and a moon casts the moonlight, providing little light. Shops are closed at this time.");
 			mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 			mainView.showMenuButton( MainView.MENU_DATA );
@@ -165,9 +165,11 @@ package classes.Scenes.Places
 		
 		public function shopBlacksmith():void {
 			clearOutput();
-			outputText("You enter the armor shop, noting the sign depicting armors. Few armors are proudly displayed on racks. You can hear the sound of hammering although it stops shortly after you enter. The local blacksmith, Ben, comes from the rear door and steps up to the counter and says, \"<i>Welcome to the my shop. In a need of protection? Or something sharp?</i>\"");
+			outputText("You enter the armor shop, noting the sign depicting armors. Some armor is proudly displayed on racks. You can hear the sound of hammering although it stops shortly after you enter. The local blacksmith, Ben, comes from the rear door and steps up to the counter and wipes away sweat from his face flushed red by the forge, \"<i>Welcome to my shop. In a need of protection? Or something sharp?</i>\"");
 			if (flags[kFLAGS.INGNAM_WEAPONSMITH_TALKED] <= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
-				outputText("\n\n\"<i>I suggest you don't buy weapons. None of the people I've seen who get sent to the portal brought a weapon and you would waste some gems. Still, if you want to train with weapons, you can go ahead and buy them,</i>\" the blacksmith says.");
+				outputText("\n\n\Before you can get a word in Ben lets out an exasperated sigh \"<i>Ah, just forget about…</i>\"");
+				outputText("\n\nYou crook an eyebrow questioningly at the blacksmith. Ben then realizes his blunder.");
+				outputText("\n\n\"<i>Ah, well it’s just… You’re the new Champion, right? None of the people I’ve seen who get sent to the portal brought a weapon and you would waste some gems. Still, if you want to train with weapons, you can go ahead and buy them. A little preparation never hurt anyone.</i>\" the blacksmith says.");
 				flags[kFLAGS.INGNAM_WEAPONSMITH_TALKED] = 1;
 			}
 			outputText("\n\n<b><u>Blacksmith's pricings</u></b>");
@@ -337,23 +339,19 @@ package classes.Scenes.Places
 		public function menuTemple():void {
 			hideMenus();
 			clearOutput();
-			outputText("The interior of temple is intricately decorated. There are several mats on the floor to provide soft areas for people to pray on.");
+			outputText("The village’s temple appears humble looking from its stony exterior but the interior of temple is truly a marvel to behold - intricately decorated wooden arches adorned with complex patterns of arcane runes of the Old World, walls adorned with majestic tapestries depicting the Gods and their most valiant of feats and, to the end of the temple stands an incredibly designed shrine to the All-Giving, the mother of all Gods.");
+			outputText("\n\nIncense languorously wafts from the alcoves where offerings of fruit are left out for the Gods. Monks passively move amongst the parishioners, offering solace to those in need, food or drink to those who are weary, or in meditation.");
+			outputText("\n\nThere are several soft mats on the floor to provide soft areas for people to pray on.");
 			menu();
-			addButton(0, "Meditate", startMeditate);
+			addButton(0, "Meditate", kGAMECLASS.masturbation.meditate);
 			addButton(14, "Leave", menuIngnam);
-		}
-		
-		public function startMeditate():void {
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0) dynStats("lib", -0.5, "cor", -0.5); //Bonus points for religious perks.
-			flags[kFLAGS.FORCE_MEDITATE] = 1; //Sets flag to 1 to force meditate. The flag itself is set to 0 after meditate is done.
-			kGAMECLASS.masturbation.masturbateMenu(); //Fires the event.
 		}
 		
 		//Tavern
 		public function menuTavern():void {
 			hideMenus();
 			clearOutput();
-			outputText("The inn is a nice place to be in. You see several people drinking and chatting about random topics. The innkeeper stands behind the wooden counter, serving beverages and cleaning.");
+			outputText("The inn is a cozy little nook that exudes a warm and welcoming air. You see several guardsmen roaring with laughter over a few steins and a hand of cards, and some townsfolk chatting about random topics. The innkeeper stands behind the polished wooden counter, serving beverages to his patrons and cleaning up spilled drinks.");
 			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0 && flags[kFLAGS.INGNAM_GREETED_AFTER_LONGTIME] <= 0) {
 				welcomeBack();
 			}
@@ -365,14 +363,14 @@ package classes.Scenes.Places
 			addButton(0, "Order Drink", orderDrink, null, null, null, "Buy some refreshing beverages.");
 			addButton(1, "Order Food", orderFood, null, null, null, "Buy some food" + (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 50 ? " and curb that hunger of yours!": ".") + "");
 			if (flags[kFLAGS.INGNAM_RUMORS] < 3) addButton(2, "Stories", hearRumors, null, null, null, "Hear the story the innkeeper has to offer.");
-			//if (player.findPerk(PerkLib.HistoryWhore) >= 0) addButton(5, "Prostitute", eventParser, 9999, null, null, "Seek someone who's willing to have sex with you for profit.");
+			//if (player.findPerk(PerkLib.HistoryWhore) >= 0) addButton(5, "Prostitute", whoreForGems, null, null, null, "Seek someone who's willing to have sex with you for profit.");
 			addButton(14, "Leave", menuIngnam);
 		}
 		
 		public function welcomeBack():void {
 			clearOutput();
 			outputText("The innkeeper looks at you and says, \"<i>Welcome back! I've missed you! How did your adventures go?</i>\"");
-			outputText("\n\nYou tell the innkeeper about your adventures and how you've met various denizens in Mareth. ");
+			outputText("\n\nYou tell the innkeeper about your adventures and how you've met various denizens in Mareth.\n\n");
 			if (flags[kFLAGS.TIMES_TRANSFORMED] <= 0) outputText("The innkeeper looks at you in awe and says, \"<i>Wow, you haven't changed at all! How did you manage to stay in that strange realm for years and still be normal?</i>\""); 
 			else if (player.race() == "human") {
 				outputText("The innkeeper looks at you and says, \"<i>I can see that you have changed a bit.</i>\" ");
@@ -380,8 +378,11 @@ package classes.Scenes.Places
 			else {
 				outputText("The innkeeper looks at you and says, \"<i>I can see that you have changed quite a lot! Back then, before you left, you were a human. Now look at yourself!</i>\"");
 			}
+			if (player.horns > 0 && player.hornType > 0) {
+				outputText("\n\n\"<i>Are these " + (player.hornType == HORNS_ANTLERS ? "antlers" : "horns") + "? I can imagine they must be real,</i>\" The innkeeper says before touching your [horns]. You can already feel his fingers rubbing against your [horns]. \"<i>Yes, they're real and I think you look better,</i>\" he says. You thank him for complimenting on your horns.");
+			}
 			if (player.wingType > 0 && player.wingType != WING_TYPE_SHARK_FIN) {
-				outputText("He looks at your wings that sprout from your back and says, \"<i>Wings? I've never seen a person with wings before!</i>\" ");
+				outputText("\n\nNext, he looks at your wings that sprout from your back and says, \"<i>Wings? I've never seen a person with wings before!</i>\" ");
 				if (player.canFly()) outputText("You tell him that you can fly. To demonstrate, you guide the innkeeper outside and you grit your teeth with effort as you flap your wings and you finally launch off from the ground and fly around the town! The people of Ingnam, including your family and friends, look at you in shock and some even say, \"<i>" + player.heShe(true) + " can fly!</i>\"");
 			}
 			outputText("\n\nPLACEHOLDER.");

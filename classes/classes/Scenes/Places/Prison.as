@@ -2018,15 +2018,15 @@ package classes.Scenes.Places
 			prisonItemsRetrieve();
 			if (flags[kFLAGS.PRISON_STORAGE_ARMOR] != 0) {
 				prisonArmorRetrieve();
-				return;
+				//return;
 			}
 			if (flags[kFLAGS.PRISON_STORAGE_WEAPON] != 0) {
 				prisonWeaponRetrieve();
-				return;
+				//return;
 			}
 			if (flags[kFLAGS.PRISON_STORAGE_SHIELD] != 0) {
 				prisonShieldRetrieve();
-				return;
+				//return;
 			}
 			prisonEscapeFinalePart2();
 			return;
@@ -2061,7 +2061,9 @@ package classes.Scenes.Places
 		{
 			if (flags[kFLAGS.PRISON_STORAGE_ARMOR] != 0) {
 				outputText("\n");
-				inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_ARMOR]), prisonEscapeFinalePart1);
+				var tempArmor:* = ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_ARMOR]);
+				if (tempArmor != null) player.setArmor(tempArmor);
+				//inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_ARMOR]), prisonEscapeFinalePart1);
 			}
 			flags[kFLAGS.PRISON_STORAGE_ARMOR] = 0;
 		}
@@ -2069,7 +2071,9 @@ package classes.Scenes.Places
 		{
 			if (flags[kFLAGS.PRISON_STORAGE_WEAPON] != 0) {
 				outputText("\n");
-				inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_WEAPON]), prisonEscapeFinalePart1);
+				var tempWeapon:* = ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_WEAPON]);
+				if (tempWeapon != null) player.setWeapon(tempWeapon);
+				//inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_WEAPON]), prisonEscapeFinalePart1);
 			}
 			flags[kFLAGS.PRISON_STORAGE_WEAPON] = 0;
 		}
@@ -2077,7 +2081,9 @@ package classes.Scenes.Places
 		{
 			if (flags[kFLAGS.PRISON_STORAGE_SHIELD] != 0) {
 				outputText("\n");
-				inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_SHIELD]), prisonEscapeFinalePart1);
+				var tempShield:* = ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_SHIELD]);
+				if (tempShield != null) player.setShield(tempShield);
+				//inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_SHIELD]), prisonEscapeFinalePart1);
 			}
 			flags[kFLAGS.PRISON_STORAGE_SHIELD] = 0;
 		}
@@ -2085,7 +2091,7 @@ package classes.Scenes.Places
 		//Conclusion
 		public function captorChanceChoose():void {
 			outputText("\n\nAs you make your way back to camp, you can't help but think about how easy it is to find yourself knocked unconscious and left helpless in the wilderness of Mareth. While slave hunters have never plucked you off the ground in such a state before, now that you've bumbled into being captured by them you consider that they might come hunting for you now that you've escaped. You give it a moment's thought. Are you now in danger of being recaptured should you be defeated in combat?",false);
-			simpleChoices("Likely",chooseLikelyChance,"Maybe",chooseMaybeChance,"Never",chooseNeverChance,"",null,"",null);
+			simpleChoices("Likely", chooseLikelyChance, "Maybe", chooseMaybeChance, "Never", chooseNeverChance, "", null, "", null);
 		}
 		
 		public function chooseLikelyChance():void
