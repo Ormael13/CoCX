@@ -25,6 +25,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPunishmentStockadesCallout():void
 		{
+			clearOutput();
 			outputText("You call out, hoping someone might come help you.\n\n",false);
 			if(rand(2) == 1)
 			{
