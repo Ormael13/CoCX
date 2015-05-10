@@ -9,22 +9,34 @@ package classes.Scenes.Places.Prison
 		
 		//private var prisonCaptor:PrisonCaptor = kGAMECLASS.prison.prisonCaptor;
 		
+		//-----------------------------------------------------------------------
+		//		*******	Stockades Punishment *******
+		//-----------------------------------------------------------------------
+		
 		public function prisonCaptorPunishmentStockades():void
 		{
+			//Punishment Intro 
 			outputText("(Placeholder) " + prison.prisonCaptor.captorTitle + " " + prison.prisonCaptor.captorName + " drags you to the stockades in the middle of the room, forces you to bend over them, and clamps your head and hands securely within them. She then inserts a cleverly shaped dildo in your ass. Aside from the penetrating tip, it is thin, broad, and rigid in order to allow other things to enter your " + assholeDescript() + " while it is in place, with a handle on the outside of your " + assDescript() + " that curves upward in a hook-like shape. She then attaches a chain between the handle and the ceiling, and tightens it such that should your [legs] go slack even the slightest bit, the entire weight of your torso would be suspended by your asshole. \n\n",false);
 			outputText("(Placeholder)\"<i>Since you seem reluctant to accept what you are, I think it's time for a bit of a crash course. When you have shown you truly understand that your only value is as a source of pleasure and entertainment for others, I will give you a chance to apologize for your impertinance. Until then, you will remain hanging by your ass locked in my stockades, and you will <b>learn</b> from it. And then, if I feel like it, you will hang there some more for no other reason than because it gives <b>me</b> pleasure to see squirm. And you will learn from that, too.</i>\"",false);
+			
+			// dont really know what this does 
 			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,12 + rand(4));
 			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,0);
+			
+			// Add Restriants
 			player.changeStatusValue(StatusAffects.PrisonRestraints,1,0);
 			player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
 			player.changeStatusValue(StatusAffects.PrisonRestraints,3,1);
 			player.changeStatusValue(StatusAffects.PrisonRestraints,4,4);
+			
+			//Add a flag indicating the player is in the stockades
 			flags[kFLAGS.PRISON_PUNISHMENT] = 1;
 			doNext(playerMenu);
 		}
 		
 		public function prisonCaptorPunishmentStockadesCallout():void
 		{
+			clearOutput();
 			outputText("You call out, hoping someone might come help you.\n\n",false);
 			if(rand(2) == 1)
 			{
@@ -102,9 +114,11 @@ package classes.Scenes.Places.Prison
 			var begEvent:Function = null;
 			var acceptEvent:Function = null;
 			var rejectEvent:Function = null;
+			
+			//Check to see if the player is ready to be released
 			if(player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) < 2 + rand(5))
 			{
-				outputText("(Placeholder) Your " + prison.prisonCaptor.captorTitle + " enters and briefly considers giving you a chance to beg for your release, but decides against it. \"<i>Before I can consider letting you apologize for your behavior, you need to try harder to atone for your actions and learn your place. If you truly want to be relased from these stocks, suck a few more cocks and be ready to be truly penitent when I return.</i>\"",false);
+				outputText("(Placeholder) Your " + prison.prisonCaptor.captorTitle + " enters and briefly considers giving you a chance to beg for your release, but decides against it. \"<i>Before I can consider letting you apologize for your behavior, you need to try harder to atone for your actions and learn your place. If you truly want to be released from these stocks, suck a few more cocks and be ready to be truly penitent when I return.</i>\"",false);
 				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,8 + rand(4));
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -113,6 +127,8 @@ package classes.Scenes.Places.Prison
 			begEvent = prisonCaptorPunishmentStockadesFreedomBeg;
 			acceptEvent = prisonCaptorPunishmentStockadesFreedomAccept;
 			rejectEvent = prisonCaptorPunishmentStockadesFreedomReject;
+			
+			//Checks Player "Self Esteem" and "Obedience" to see whether the player will beg for freedom or simply accept it 
 			if(player.esteem > 40 || player.obey < 10)
 			{
 				begEvent = null;
@@ -127,7 +143,10 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPunishmentStockadesFreedomReject():void
 		{
+			
 			clearOutput();
+			
+			//Checks to see if the player actually has enough willpower to resist
 			if(player.will < prison.prisonWillCost(15))
 			{
 				outputText("While you'd like to preserve a bit of your dignity, you simply don't have the willpower to resist right now. \n\n",false);
@@ -182,10 +201,17 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPunishmentStockadesFreedomRelease():void
 		{
+			//Punishment Outro
 			outputText("\n\n(Placeholder) Afterward, " + prison.prisonCaptor.captorPronoun1 + " releases you. Apology or not, you are left bound and gagged, but for the time being you are just happy to be free of the neverending humiliation of the stockades.",false);
+			
+			//Add a flag indicating the player is no longer in the stockades
 			flags[kFLAGS.PRISON_PUNISHMENT] = 0;
+			
+			//Reset random event timers
 			prison.prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
 			prison.prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
+			
+			//Remove Restraints 
 			player.changeStatusValue(StatusAffects.PrisonRestraints,1,2);
 			player.changeStatusValue(StatusAffects.PrisonRestraints,2,1);
 			player.changeStatusValue(StatusAffects.PrisonRestraints,3,1);
@@ -196,23 +222,34 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPunishmentStockadeBreak():void 
 		{
 			clearOutput();
-			if (player.will < prison.prisonWillCost(10)) {
-				outputText("Try as you might, you just don't have enough willpower to attempt that.");
+			//Checks if the player has enough willpower to attempt to break
+			if (player.will < prison.prisonWillCost(10)) 
+			{
+				outputText("Try as you might, you just don't have enough willpower to attempt to break out of the Stockades.");
 				doNext(playerMenu);
 				return;
 			}
+			
 			var chance:int = 10;
 			chance += player.str * 0.8;
-			if (rand(100) < chance) {
+			if (rand(100) < chance) // If Strength Level multiplied by 0.8 is greater than a random number between 1 and 100, then the player breaks the stockade.
+			{
 				outputText("With all your strength, you finally manage to break the stockade! Loud snapping sound echoes throughout your cell.");
 				outputText("\n\n" + prison.prisonCaptor.captorTitle + prison.prisonCaptor.captorName + " hears the sound and rushes over to your cell to find out that you've broken the stockade. \"<i>No! You BROKE the stockade! Very well, I'll lift your punishment.</i>\" She looks angry.");
+				
+				//Add a flag indicating the player is no longer in the stockades
 				flags[kFLAGS.PRISON_PUNISHMENT] = 0;
 			}
 			else {
+				//Break Attempt Fails
 				outputText("You struggle against the wooden confines but despite your best efforts, you just can't break the stockade.");
 			}
 			doNext(playerMenu);
 		}
+		
+		//-----------------------------------------------------------------------
+		//		*******	Confinement Punishment *******
+		//-----------------------------------------------------------------------
 		
 		public function prisonCaptorPunishmentConfinement():void
 		{
@@ -495,6 +532,11 @@ package classes.Scenes.Places.Prison
 			}
 			doNext(playerMenu);
 		}
+		
+		
+		//-----------------------------------------------------------------------
+		//		*******	BJ Trainer Punishment *******
+		//-----------------------------------------------------------------------
 		
 		public function prisonCaptorPunishmentBJTrainer():void
 		{
