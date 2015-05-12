@@ -2620,7 +2620,7 @@ private function marbleCampSexNew():void {
 				outputText("  She then says, \"<i>I think I've found a way to make you cum, sweetie,</i>\" with a sly expression.  She moves down from your upper body and starts rubbing and caressing your lower body too. It is extremely arousing, but it doesn't seem to be enough to push you over the edge.  Marble stands up, kisses you and rubs a single finger against the smooth skin of your groin.  You are so close to going over the edge.  Then one of her fingers pushes up against your " + assholeDescript() + ", causing you to go rigid from the new stimulation.", false);
 			}
 			//Sweet release
-			outputText("\n\nThe sensations overwhelm you and your body is racked with a powerful orgasm, much stronger then what you might've pulled off on your own.", false);
+			outputText("\n\nThe sensations overwhelm you and your body is racked with a powerful orgasm, much stronger than what you might've pulled off on your own.", false);
 			//If Player has at least one dick
 			if(player.cocks.length > 0) {
 				//Select one based on overall cum production
