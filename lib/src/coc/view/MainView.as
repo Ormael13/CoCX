@@ -58,7 +58,7 @@ package coc.view {
 		private static const BUTTON_REAL_HEIGHT:Number = 40;
 
 		public var aCb:ComboBox;
-		// public var nameBox:TextField;
+		public var nameBox:TextField;
 
 		//// Actual buttons.
 		public var bottomButtons:Array;
