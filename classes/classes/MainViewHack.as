@@ -477,14 +477,17 @@ package classes
 			mainView.senNum.text = String(Math.floor(player.sens));
 			mainView.corNum.text = String(Math.floor(player.cor));
 			//Old interface is removed for now.
-			/*if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.HPNum.text = Math.floor(player.HP) + "/" + Math.floor(player.maxHP());
-			else mainView.HPNum.text = "" + Math.floor(player.HP);
+			//if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) 
+			mainView.HPNum.text = Math.floor(player.HP) + "/" + Math.floor(player.maxHP());
+			//else mainView.HPNum.text = "" + Math.floor(player.HP);
 			
-			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.lustNum.text = Math.floor(player.lust) + "/" + player.maxLust();
-			else mainView.lustNum.text = "" + Math.floor(player.lust);
+			//if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) 
+			mainView.lustNum.text = Math.floor(player.lust) + "/" + player.maxLust();
+			//else mainView.lustNum.text = "" + Math.floor(player.lust);
 			
-			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) mainView.fatigueNum.text = Math.floor(player.fatigue) + "/" + player.maxFatigue();
-			else Math.floor(player.fatigue);*/
+			//if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) 
+			mainView.fatigueNum.text = Math.floor(player.fatigue) + "/" + player.maxFatigue();
+			//else Math.floor(player.fatigue);
 			
 			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 || prison.inPrison) && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75 && flags[kFLAGS.USE_OLD_INTERFACE] <= 0) {
 				showHungerBar();
