@@ -521,8 +521,7 @@ package classes
 				hidePrisonBar();
 			}
 			//Display experience numbers.
-			mainView.xpNum.x = 1;
-			mainView.xpNum.width = 170;
+			mainView.levelNum.text = String(player.level);
 			if (player.level < kGAMECLASS.levelCap) mainView.xpNum.text = Math.floor(player.XP) + "/" + Math.floor(player.requiredXP());
 			else mainView.xpNum.text = "MAX";
 			mainView.gemsNum.text = addComma(Math.floor(player.gems)) + "";
