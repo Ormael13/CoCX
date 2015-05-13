@@ -567,7 +567,7 @@ package classes.Scenes.Areas.Lake
 				hideUpDown();
 				monster.lust = 98;
 				monster.HP = 2;
-				player.lust = 100;
+				player.lust = player.maxLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 				cleanupAfterCombat();
 				player.orgasm();

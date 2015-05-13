@@ -372,7 +372,7 @@ public function fuckDemCorruptFlowerLips():void {
 	outputText("\n\nThere isn't enough guidance in that question to rouse a response from your supine form, so Fera continues on, smiling all the while.  \"<i>Oh, I'm going to do it, [name].  You're going to do this for me.</i>\"  She idly slips a finger along the underside of [oneCock] and licks her lips.");
 	
 	//[next]
-	dynStats("lus=", 100);
+	dynStats("lus=", player.maxLust());
 	menu();
 	addButton(0,"Next",dickBoostingFuntimes);
 }
@@ -465,7 +465,7 @@ public function stickAStamenInIt():void {
 	outputText("?</i>\"");
 	outputText("\n\nWith the question asked, she awaits your slow-moving mind's answer.  No is not an option you're even capable of considering at this point.  Which do you want?");
 	//[Gape] [Tight] [Dick]
-	dynStats("lus=", 100, "cor", 2);
+	dynStats("lus=", player.maxLust(), "cor", 2);
 	menu();
 	addButton(0,"Gape",gapeMePleaseFera);
 	addButton(1,"Tight",tightLikeAToigar);

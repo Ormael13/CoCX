@@ -1,5 +1,4 @@
-﻿import classes.perkClass;
-import classes.PerkClass;
+﻿import classes.PerkClass;
 import flash.text.TextFormat;
 import classes.MainViewHack;
 // // import flash.events.MouseEvent;
@@ -222,9 +221,14 @@ public function flushOutputTextToGUI():void
 	}
 }
 
+public function displayHeader(string:String):void {
+	outputText("<font size=\"36\" face=\"Georgia\"><u>" + string + "</u></font>\n");
+}
+
 public function displayPerks(e:MouseEvent = null):void {
 	var temp:int = 0;
 	clearOutput();
+	displayHeader("Perks");
 	while(temp < player.perks.length) {
 		outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n", false);
 		temp++;
@@ -863,6 +867,34 @@ public function getButtonText(index:int):String {
 	}
 }
 
+public function getButtonToolTipHeader(buttonText:String):String
+{
+	var toolTipHeader:String;
+	
+	if (buttonText.indexOf(" x") != -1)
+	{
+		buttonText = buttonText.split(" x")[0];
+	}
+	
+	//Get items
+	var itype:ItemType = ItemType.lookupItem(buttonText);
+	var temp:String = "";
+	if (itype != null) temp = itype.longName;
+	itype = ItemType.lookupItemByShort(buttonText);
+	if (itype != null) temp = itype.longName;
+	if (temp != "") {
+		temp = capitalizeFirstLetter(temp);
+		toolTipHeader = temp;
+	}
+	
+	//Set tooltip header to button.
+	if (toolTipHeader == null) {
+		toolTipHeader = buttonText;
+	}
+	
+	return toolTipHeader;
+}
+
 // Returns a string or undefined.
 public function getButtonToolTipText(buttonText:String):String
 {
@@ -1496,7 +1528,7 @@ public function createCallBackFunction2(func:Function,...args):Function
  * @param	arg3 Pass argument #1 to func1 parameter.
  * @param	toolTipText The text that will appear on tooltip when the mouse goes over the button.
  */
-public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = ""):void {
+public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):void {
 	if (func1==null) return;
 	var callback:Function;
 
@@ -1516,9 +1548,14 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	callback = createCallBackFunction(func1, arg1, arg2, arg3);
 
 	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
-	mainView.showBottomButton( pos, text, callback, toolTipText );
+	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
+	mainView.showBottomButton(pos, text, callback, toolTipText, toolTipHeader);
 	//mainView.setOutputText( currentText );
 	flushOutputTextToGUI();
+}
+
+public function setButtonTooltip(index:int, toolTipHeader:String = "", toolTipText:String = ""):void {
+	mainView.showBottomButton(index, mainView.bottomButtons[index].labelText, mainView.bottomButtons[index].callback, toolTipText, toolTipHeader);
 }
 
 public function hasButton(arg:*):Boolean {
@@ -1533,12 +1570,6 @@ public function hasButton(arg:*):Boolean {
  * @param	arg The position to remove a button. (First row is 0-4, second row is 5-9, third row is 10-14.)
  */
 public function removeButton(arg:*):void {
-	function _removeButtonAction( index :int ):void	// Uh... should this function be empty?
-	{
-		// funcs[ index ] = null;
-		// args[ index ] = -9000;
-	}
-
 	var buttonToRemove:int = 0;
 	if(arg is String) {
 		buttonToRemove = mainView.indexOfButtonWithLabel( arg as String );
@@ -1547,8 +1578,6 @@ public function removeButton(arg:*):void {
 		if(arg < 0 || arg > 14) return;
 		buttonToRemove = Math.round(arg);
 	}
-	
-	// _removeButtonAction( buttonToRemove );
 	mainView.hideBottomButton( buttonToRemove );
 }
 
@@ -1980,8 +2009,6 @@ public function hideMenus():void {
  */
 public function hideUpDown():void {
 	mainView.statsView.hideUpDown();
-	mainView.hungerUp.visible = false;
-	mainView.hungerDown.visible = false;
 	//Clear storage values so up/down arrows can be properly displayed
 	oldStats.oldStr = 0;
 	oldStats.oldTou = 0;
@@ -1989,8 +2016,11 @@ public function hideUpDown():void {
 	oldStats.oldInte = 0;
 	oldStats.oldLib = 0;
 	oldStats.oldSens = 0;
+	oldStats.oldCor = 0;  
+	oldStats.oldHP = 0;
 	oldStats.oldLust = 0;
-	oldStats.oldCor = 0;        
+	oldStats.oldFatigue = 0;
+	oldStats.oldHunger = 0;
 }
 
 public function physicalCost(mod:Number):Number {
@@ -2083,7 +2113,7 @@ public function displayStats(e:MouseEvent = null):void
 {
 	spriteSelect(-1);
 	clearOutput();
-	
+	displayHeader("Stats");
 	// Begin Combat Stats
 	var combatStats:String = "";
 	
@@ -2736,8 +2766,11 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 		oldStats.oldInte = player.inte;
 		oldStats.oldLib = player.lib;
 		oldStats.oldSens = player.sens;
-		oldStats.oldLust = player.lust;
 		oldStats.oldCor = player.cor;
+		oldStats.oldHP = player.HP;
+		oldStats.oldLust = player.lust;
+		oldStats.oldFatigue = player.fatigue;
+		oldStats.oldHunger = player.hunger;
 	}
 	//MOD CHANGES FOR PERKS
 	//Bimbos learn slower
@@ -2875,9 +2908,36 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(player.lust < 0) player.lust = 0;
 
 	//Refresh the stat pane with updated values
-	mainView.statsView.showUpDown();
+	//mainView.statsView.showUpDown();
+	showUpDown();
 	statScreenRefresh();
 }
+	
+public function showUpDown():void { //Moved from StatsView.
+	function _oldStatNameFor(statName:String):String {
+		return 'old' + statName.charAt(0).toUpperCase() + statName.substr(1);
+	}
+
+	var statName:String,
+		oldStatName:String,
+		allStats:Array;
+
+	mainView.statsView.upDownsContainer.visible = true;
+
+	allStats = ["str", "tou", "spe", "inte", "lib", "sens", "cor", "HP", "lust", "fatigue", "hunger"];
+
+	for each(statName in allStats) {
+		oldStatName = _oldStatNameFor(statName);
+
+		if(player[statName] > oldStats[oldStatName]) {
+			mainView.statsView.showStatUp(statName);
+		}
+		if(player[statName] < oldStats[oldStatName]) {
+			mainView.statsView.showStatDown(statName);
+		}
+	}
+}
+
 public function range(min:Number, max:Number, round:Boolean = false):Number 
 {
 	var num:Number = (min + Math.random() * (max - min));
@@ -2942,17 +3002,17 @@ public function doNothing():void {
 }
 
 public function spriteSelect(choice:Number = 0):void {
+	var type:int = flags[kFLAGS.USE_OLD_SPRITES]; //0 for new, 1 for old.
 	if (flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
 	{
-		//if (flags[kFLAGS.USE_OLD_SPRITES] >= 1) choice += 1000;
-		mainView.selectSprite( choice );
+		mainView.selectSprite(choice, type);
 	}
 	else
 	{
 		if (choice >= 0)
 		{
 			trace ("hiding sprite because flags");
-			mainView.selectSprite( -1 );
+			mainView.selectSprite(-1);
 		}
 	}
 }

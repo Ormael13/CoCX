@@ -1246,27 +1246,11 @@ package classes.Scenes.Places
 			mainView.showMenuButton( MainView.MENU_PERKS );
 			mainView.showMenuButton( MainView.MENU_APPEARANCE );
 			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu );
+			mainView.newGameButton.toolTipText = "Return to main menu.";
+			mainView.newGameButton.toolTipHeader = "Main Menu";
 			//Level up
-			if((player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
-				if (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)
-				{
-					if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
-					else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
-				}
-				else {
-					mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
-					if (flags[kFLAGS.AUTO_LEVEL] > 0) {
-						kGAMECLASS.levelUpGo();
-						return;
-					}
-				}
-				mainView.showMenuButton( MainView.MENU_LEVEL );
-				mainView.statsView.hideLevelUp();
-			}
-			else {
-				mainView.hideMenuButton( MainView.MENU_LEVEL );
-				mainView.statsView.hideLevelUp();
-			}
+			camp.setLevelButton();
+			mainView.statsView.hideLevelUp();
 			//Set menus
 			menu();
 			addButton(0, "Train", prisonTrainMenu, null, null, null, "Train to improve your body.");

@@ -1,5 +1,6 @@
 import classes.GlobalFlags.kGAMECLASS;
 import flash.ui.Keyboard;
+import coc.view.MainView;
 
 use namespace kGAMECLASS;
 

@@ -74,8 +74,8 @@ the text from being too boring.
 	import classes.Scenes.Places.*;
 	import classes.Scenes.Places.TelAdre.*;
 	import classes.Scenes.Quests.*;
-	import coc.view.MainView; // Creates the framework for the game screen.
-
+	//import coc.view.MainView; // Creates the framework for the game screen.
+	import coc.view.MainView;
 	import coc.model.GameModel; // Uncertain.
 	import coc.model.TimeModel; // Various time-related functions for setting the game clock and querying its state.
 
@@ -393,7 +393,7 @@ the text from being too boring.
 			this.parser = new Parser(this, CoC_Settings);
 
 			this.model = new GameModel();
-			this.mainView = new MainView( this.model );
+			this.mainView = new MainView(/*this.model*/);
 			this.mainView.name = "mainView";
 			this.stage.addChild( this.mainView );
 
@@ -428,8 +428,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4C_mod_1.2.5";
-			version = ver + " (<b>Bug Fixes</b>)";
+			ver = "0.9.4C_mod_1.2.6";
+			version = ver + " (<b>Old Sprites + Forest Refactor</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -474,10 +474,10 @@ the text from being too boring.
 			//The extreme flag state array. This needs to go. Holds information about everything, whether it be certain attacks for NPCs 
 			//or state information to do with the game. 
 			flags = new DefaultDict();
-			model.flags = flags;
+			//model.flags = flags;
 			
 			achievements = new DefaultDict();
-			model.achievements = achievements;
+			//model.achievements = achievements;
 
 			///Used everywhere to establish what the current game state is
 			// Key system variables
@@ -598,8 +598,10 @@ the text from being too boring.
 			oldStats.oldCor  = 0;
 			oldStats.oldHP   = 0;
 			oldStats.oldLust = 0;
-
-			model.maxHP = maxHP;
+			oldStats.oldFatigue = 0;
+			oldStats.oldHunger = 0;
+			
+			//model.maxHP = maxHP;
 
 			// ******************************************************************************************
 

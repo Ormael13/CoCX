@@ -82,7 +82,8 @@ INITIATING MONKEY
 
 public function debugPane():void
 {
-	outputText("<b>Debug information!</b>\n", true);
+	clearOutput();
+	displayHeader("Debug information!");
 
 	outputText("\nPossible flash sandboxing contexts:");
 	outputText("<ul>");

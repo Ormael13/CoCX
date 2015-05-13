@@ -1018,6 +1018,8 @@ use namespace kGAMECLASS;
 			var counter:int = 0;
 			if (findStatusAffect(StatusAffects.BlackNipples) >= 0)
 				counter++;
+			if (findStatusAffect(StatusAffects.Uniball) >= 0)
+				counter++;
 			if (hasVagina() && vaginaType() == 5)
 				counter++;
 			if (eyeType == 2)
@@ -1315,11 +1317,11 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (dragonCocks() > 0)
 				dragonCounter++;
-			if (wingType == 10)
+			if (wingType == 10 || wingType == 11)
 				dragonCounter++;
-			if (wingType == 11)
-				dragonCounter += 2;
 			if (lowerBody == 18)
+				dragonCounter++;
+			if (horns > 0 && (hornType == 3 || hornType == 4))
 				dragonCounter++;
 			if (skinType == 2 && dragonCounter > 0)
 				dragonCounter++;
@@ -1661,7 +1663,7 @@ use namespace kGAMECLASS;
 					hunger = 100;
 				}
 				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) kGAMECLASS.mainView.statsView.showStatUp('hunger');
-				game.dynStats("lus", 0, "resisted", false);
+				//game.dynStats("lus", 0, "resisted", false);
 				if (nl) outputText("\n");
 				//Messages
 				if (hunger < 10) outputText("<b>You still need to eat more. </b>");
@@ -1674,7 +1676,8 @@ use namespace kGAMECLASS;
 				kGAMECLASS.awardAchievement("Tastes Like Chicken\n", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN);
 				if (oldHunger < 1 && hunger >= 100) kGAMECLASS.awardAchievement("Champion Needs Food Badly\n", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD);
 				if (oldHunger >= 90) kGAMECLASS.awardAchievement("Glutton\n", kACHIEVEMENTS.REALISTIC_GLUTTON);
-				//kGAMECLASS.mainView.statsView.showStatUp("hunger");
+				if (hunger > oldHunger) kGAMECLASS.mainView.statsView.showStatUp("hunger");
+				game.dynStats("lus", 0, "resisted", false);
 				kGAMECLASS.statScreenRefresh();
 			}
 		}

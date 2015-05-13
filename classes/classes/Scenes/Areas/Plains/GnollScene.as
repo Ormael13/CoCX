@@ -253,7 +253,7 @@ package classes.Scenes.Areas.Plains
 			outputText("Her legs twitch around your ears as you continue to swallow, even though there is no more to go.  The muscles in your throat gently massage the length of the monstrous clitoris, which plumps even further as more blood rushes into it.  You can feel its tumescent bulk all down your throat and halfway into your chest.\n\n", false);
 			outputText("The massive clit-dick then begins to flutter and twitch as the gnoll starts to cum.  Her feet stamp the ground to either side of you and she abruptly screams into the sky.  Her warbling cry then seems to collapse inward, and her entire body slumps to the ground, unconscious.\n\n", false);
 			outputText("You leave her there on the sun-caked ground and head back to camp.", false);
-			dynStats("lus=", 100);
+			dynStats("lus=", player.maxLust());
 			cleanupAfterCombat();
 		}
 

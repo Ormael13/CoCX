@@ -507,30 +507,12 @@ private function doCamp():void { //Only called by playerMenu
 	showStats();
 	//Change settings of new game buttons to go to main menu
 	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu );
-
+	mainView.newGameButton.toolTipText = "Return to main menu.";
+	mainView.newGameButton.toolTipHeader = "Main Menu";
 	//clear up/down arrows
 	hideUpDown();
 	//Level junk
-	if((player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
-		if (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)
-		{
-			if (player.statPoints > 0) mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
-			else mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
-		}
-		else {
-			mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
-			if (flags[kFLAGS.AUTO_LEVEL] > 0) {
-				kGAMECLASS.levelUpGo();
-				return;
-			}
-		}
-		mainView.showMenuButton( MainView.MENU_LEVEL );
-		mainView.statsView.showLevelUp();
-	}
-	else {
-		mainView.hideMenuButton( MainView.MENU_LEVEL );
-		mainView.statsView.hideLevelUp();
-	}
+	setLevelButton();
 	//Build main menu
 	var exploreEvent:Function = getGame().exploration.doExplore;
 	var masturbate:Function = (player.lust > 30 ? getGame().masturbation.masturbateMenu : null);
@@ -2367,6 +2349,36 @@ private function ascendForReal():void {
 	if (marbleFollower()) outputText("\n\n\"<i>Sweetie, I'm going to miss you. See you in the next playthrough,</i>\" Marble says, tears leaking from her eyes.");
 	outputText("\n\nThe world around you slowly fades to black and stars dot the endless void. <b>You have ascended.</b>");
 	doNext(kGAMECLASS.charCreation.ascensionMenu);
+}
+
+public function setLevelButton():void {
+	if((player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
+		if (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)
+		{
+			if (player.statPoints > 0) {
+				mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
+				mainView.levelButton.toolTipText = "Distribute your stats points. \n\nYou currently have " + String(player.statPoints) + ".";
+			}
+			else {
+				mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
+				mainView.levelButton.toolTipText = "Spend your perk points on a new perk. \n\nYou currently have " + String(player.perkPoints) + ".";
+			}
+		}
+		else {
+			mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
+			mainView.levelButton.toolTipText = "Level up to increase your maximum HP by 15 and gain 5 attribute points and 1 perk points.";
+			if (flags[kFLAGS.AUTO_LEVEL] > 0) {
+				kGAMECLASS.levelUpGo();
+				return;
+			}
+		}
+		mainView.showMenuButton( MainView.MENU_LEVEL );
+		mainView.statsView.showLevelUp();
+	}
+	else {
+		mainView.hideMenuButton( MainView.MENU_LEVEL );
+		mainView.statsView.hideLevelUp();
+	}
 }
 
 //Camp population!

@@ -11,6 +11,7 @@ import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import coc.view.MainView;
 import classes.Saves;
 import classes.CharCreation;
+import classes.internals.Utils;
 
 import flash.net.SharedObject;
 
@@ -2006,7 +2007,7 @@ public function display():void {
 			else outputText("You see " + monster.pronoun1 + " is unsteady and close to death.  ", false);
 		}
 		showMonsterLust();
-		outputText("\n\n<b><u>" + (monster.short.substr(0,1).toUpperCase() + monster.short.substr(1)) + "'s Stats</u></b>\n")
+		outputText("\n\n<b><u>" + capitalizeFirstLetter(monster.short) + "'s Stats</u></b>\n")
 		outputText("Level: " + monster.level + "\n", false);
 		outputText("HP: " + hpDisplay + "\n", false);
 		outputText("Lust: " + lustDisplay + "\n", false);
@@ -3797,10 +3798,10 @@ public function spellMight():void {
 		player.changeStatusValue(StatusAffects.Might,1,tempStr);
 		player.changeStatusValue(StatusAffects.Might,2,tempTou);
 		if(player.str < 100) {
-			mainView.statsView.showStatUp( 'str' );
+			mainView.statsView.showStatUp('str');
 			// strUp.visible = true;
 			// strDown.visible = false;
-			mainView.statsView.showStatUp( 'tou' );
+			mainView.statsView.showStatUp('tou');
 			// touUp.visible = true;
 			// touDown.visible = false;
 		}

@@ -926,7 +926,7 @@ package classes.Scenes.Places.Prison
 		{
 			var behaviorCounter:int = 0;
 			behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) + 1;
-			if(player.fatigue > 80)
+			if(player.fatigue > player.maxFatigue() - 20)
 			{
 				outputText("(Placeholder) (Training Crate Behave) You pass an hour trying to behave but are too cramped and fatigued to get comfortable, and end up wallowing and whining instead.\n\n");
 				player.damageHunger(5);

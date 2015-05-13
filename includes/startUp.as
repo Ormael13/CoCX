@@ -26,7 +26,6 @@ public function mainMenu(e:MouseEvent = undefined):void
 	{
 		mainView.removeChild(mainView.aCb);
 	}
-	mainViewHack.addThirdRow();
 	mainViewHack.registerShiftKeys();
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
@@ -39,6 +38,17 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainView.hideAllMenuButtons();
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	mainView.showMenuButton( MainView.MENU_DATA );
+	
+	mainView.newGameButton.toolTipText = "Start a new game.";
+	mainView.dataButton.toolTipHeader = "New Game";
+	mainView.dataButton.toolTipText = "Save or load your files.";
+	mainView.dataButton.toolTipHeader = "Data";
+	mainView.statsButton.toolTipText = "View your stats.";
+	mainView.statsButton.toolTipHeader = "Stats";
+	mainView.perksButton.toolTipText = "View your perks.";
+	mainView.perksButton.toolTipHeader = "Perks";
+	mainView.appearanceButton.toolTipText = "View your appearance.";
+	mainView.appearanceButton.toolTipHeader = "Appearance";
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
 	clearOutput();
@@ -143,7 +153,7 @@ public function settingsScreen():void
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	mainView.showMenuButton( MainView.MENU_DATA );
 	clearOutput()
-	outputText("<font size=\"36\" face=\"Georgia\">Settings</font>\n", false)
+	displayHeader("Settings");
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
 
 	outputText("<b><u>Gameplay Settings</u></b>\n");
@@ -350,7 +360,7 @@ public function settingsScreenInterfaceSettings():void {
 	addButton(0, "Side Bar Style", toggleInterface, null, null, null, "Switch between old and new stats bars.");
 	addButton(1, "Toggle Images", toggleImages, null, null, null, "Enable or disable image pack.");
 	addButton(2, "Toggle Sprites", toggleSpritesFlag, null, null, null, "Toggles the pixelated sprites that appears in lower-left corner of the screen and also toggles the pictures if image-pack is found.");
-	//addButton(3, "Old Sprites", toggleOldSprites, null, null, null, "Toggle between old and new sprites.  \n\nNOTE: This doesn't work well right now."); //If I can re-add old sprites, that is.
+	addButton(3, "Old Sprites", toggleOldSprites, null, null, null, "Toggle between old and new sprites."); //Implemented at last!
 	addButton(4, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
 	addButton(5, "Background", cycleBackground, null, null, null, "Cycle through background styles and colors.");
 	addButton(6, "Dark Mode", toggleDarkBackground, null, null, null, "Toggle between black background, white text and normal background, black text.");
@@ -614,7 +624,9 @@ public function enableRealisticForReal():void {
 }
 
 public function creditsScreen():void {
-	outputText("<b>Coding and Main Events:</b>\n", true);
+	clearOutput();
+	displayHeader("Credits");
+	outputText("<b>Coding and Main Events:</b>\n");
 	outputText("<ul>");
 	outputText("<li> Fenoxo</li>\n");
 	outputText("</ul>");

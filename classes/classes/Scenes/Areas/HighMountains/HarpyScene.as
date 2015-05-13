@@ -517,7 +517,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			monster.lust = 98;
 			monster.HP = 2;
-			player.lust = 100;
+			player.lust = player.maxLust();
 			flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 			cleanupAfterCombat();
 			player.orgasm();
@@ -554,7 +554,7 @@ package classes.Scenes.Areas.HighMountains
 			if (monster.lust > 99) outputText(" again");
 			outputText(", her fingers firmly stuffed down between her plush thighs and frantically toying with her pussy. Seeing her get off to your treatment almost makes you climax right then and there, but you manage to hold yourself back, reasoning that she hasn't quite paid enough just yet for deciding to attack you.");
 			doNext(harpyScissorSurprisePtII);
-			dynStats("lus=", 100);
+			dynStats("lus=", player.maxLust());
 		}
 
 //{New page}
@@ -682,7 +682,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText(" your endurance gives out, and you slip into unconsciousness.  This time it seems you met your sexual match.");
 				monster.lust = 98;
 				monster.HP = 2;
-				player.lust = 100;
+				player.lust = player.maxLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 				cleanupAfterCombat();
 				player.orgasm();

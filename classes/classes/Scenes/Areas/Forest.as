@@ -28,18 +28,27 @@ package classes.Scenes.Areas
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
 		public var cabinProgress:CabinProgress = new CabinProgress();
-		public function Forest()
-		{
-		}
+		
+		public function Forest() { }
+		
 		public function exploreDeepwoods():void
 		{
+			clearOutput();
+			//Increment deepwoods exploration counter.
 			player.addStatusValue(StatusAffects.ExploredDeepwoods, 1, 1);
 			
-			var chooser:Number = rand(6);
+			var choice:Array = [];
+			var select:int;
 			
-			var temp2:Number = 0;
+			//Build choice list!
+			choice[choice.length] = 0; //Faerie
+			if (player.level >= 2) choice[choice.length] = 1; //Tentacle Beast
+			choice[choice.length] = 2; //Corrupted Glade
+			choice[choice.length] = 3; //Akbal
+			choice[choice.length] = 4; //Kitsunes
+			if (flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) choice[choice.length] = 5; //Tamani
+			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100) choice[choice.length] = 6; //Gather woods
 			
-			if (chooser == 1 && player.level < 2) chooser++;
 			//Every tenth exploration finds a pumpkin if eligible!
 			if (player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 10 == 0 && isHalloween()) {
 				//If Fera isn't free yet...
@@ -60,13 +69,6 @@ package classes.Scenes.Areas
 					}
 				}
 			}
-			//Prevent encountering cutting tree prompt if wood supply is full 75% of the time.
-			if (chooser >= 5) {
-				if (rand(4) > 0 && (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)) {
-					trace("Don't do wood gather prompt");
-					chooser = rand(5);
-				}
-			}
 			//Hel jumps you for sex.
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
@@ -77,16 +79,6 @@ package classes.Scenes.Areas
 				kGAMECLASS.dungeons.enterDeepCave();
 				return;
 			}
-			//Tamani 20% encounter rate
-			if (flags[kFLAGS.TAMANI_TIME_OUT] == 0 && rand(5) == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
-				if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
-					tamaniDaughtersScene.encounterTamanisDaughters();
-				}
-				else
-					tamaniScene.encounterTamani();
-				return;
-			}
-			
 			if (flags[kFLAGS.ERLKING_DISABLED] == 0 && flags[kFLAGS.ERLKING_ENCOUNTER_COUNTER] == 4)
 			{
 				flags[kFLAGS.ERLKING_ENCOUNTER_COUNTER] = 0;
@@ -98,81 +90,84 @@ package classes.Scenes.Areas
 				flags[kFLAGS.ERLKING_ENCOUNTER_COUNTER]++;
 			}
 			
-			//Faerie
-			if (chooser == 0) {
-				faerie.encounterFaerie();
-				return;
-			}
-			//Tentacle monster
-			if (chooser == 1) {
-				//Reset hilarious shit
-				if (player.gender > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 0;
-				//Tentacle avoidance chance due to dangerous plants
-				if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
-					trace("TENTACLE'S AVOIDED DUE TO BOOK!");
-					outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", true);
-					simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-					return;
-				}
-				else {
-					tentacleBeastScene.encounter();
-					return;
-				}
-			}
-			//Corrupted Glade
-			if (chooser == 2) {
-				if (rand(4) == 0) {
-					trappedSatyr();
-					return;
-				}
-				corruptedGlade.intro();
-			}
-			if (chooser == 3) {
-				akbalScene.supahAkabalEdition();
-			}
-			if (chooser == 4) {
-				if (rand(3) == 0) kitsuneScene.kitsuneShrine();
-				else kitsuneScene.enterTheTrickster();
-			}
-			if (chooser >= 5) {
-				cabinProgress.gatherWoods();
-				return;
+			select = choice[rand(choice.length)];
+			//==============================
+			//EVENTS GO HERE!
+			//==============================
+			switch(select) {
+				case 0: //Faerie
+					faerie.encounterFaerie();
+					break;
+				case 1: //Tentacle beasts
+					if (player.gender > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 0;
+					//Tentacle avoidance chance due to dangerous plants
+					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
+						trace("TENTACLE'S AVOIDED DUE TO BOOK!");
+						outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", true);
+						simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+						return;
+					}
+					else {
+						tentacleBeastScene.encounter();
+						return;
+					}
+					break;
+				case 2: //Corrupted Glade
+					if (rand(4) == 0) {
+						trappedSatyr();
+						return;
+					}
+					corruptedGlade.intro();
+					break;
+				case 3: //Akbal
+					akbalScene.supahAkabalEdition();
+					break;
+				case 4: //Kitsunes
+					if (rand(3) == 0) kitsuneScene.kitsuneShrine();
+					else kitsuneScene.enterTheTrickster();
+					break;
+				case 5: //Tamani
+					if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
+						tamaniDaughtersScene.encounterTamanisDaughters();
+					}
+					else
+						tamaniScene.encounterTamani();
+					break;
+				case 6: //Gather wood
+					cabinProgress.gatherWoods();
+					break;
+				default: //Failsafe mechanism
+					outputText("You enjoy a peaceful walk in the deepwoods.  It gives you time to think over the recent, disturbing events.", true);
+					dynStats("tou", .5, "int", 1);
+					doNext(camp.returnToCampUseOneHour);
+					break;
 			}
 		}
 
 		//Explore forest
 		public function exploreForest():void
 		{
+			//Increment forest exploration counter.
 			player.exploredForest++;
 
-			trace("FOREST EVENT CALLED");
-			var chooser:Number = rand(5);
-			var temp2:Number = 0;
+			var choice:Array = [];
+			var select:int;
 			
-			//Cut bee encounter rate 50%
-			if (chooser == 3 && rand(2)) chooser = rand(3);
-			
-			//Quick changes:
-			//If monk is fully corrupted, encounter him less (unless haz ferriiite).
-
-			if (chooser == 1 && kGAMECLASS.monk >= 2) {
-				temp = rand(4);
-				if (temp == 0) chooser = 0;
-				if (temp == 1) chooser = 2;
-				if (temp == 2) chooser = 3;
-			}
+			//Build choice list!
+			choice[choice.length] = 0; //General Goblin and Imp Encounters
+			if ((player.findStatusAffect(StatusAffects.PureCampJojo) < 0 && !camp.campCorruptJojo()) && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && (kGAMECLASS.monk < 2 || rand(2) == 0)) choice[choice.length] = 1; //Jojo
+			if ((player.findStatusAffect(StatusAffects.PureCampJojo) < 0 && !camp.campCorruptJojo()) && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(5) == 0 && (player.cor > 25 || kGAMECLASS.monk > 0)) choice[choice.length] = 1; //Extra chance of Jojo encounter.
+			if (player.level >= 2) choice[choice.length] = 2; //Tentacle Beast
+			choice[choice.length] = 3; //Corrupted Glade
+			choice[choice.length] = 4; //Trip on a root
+			if (rand(2) == 0) choice[choice.length] = 5; //Bee-girl encounter
+			if (rand(2) == 0) choice[choice.length] = 6; //Pigtail Truffle
+			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100) choice[choice.length] = 7; //Gather woods
+			choice[choice.length] = 8; //Peaceful walk in woods
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
-			}
-			//Raise Jojo chances for furrite
-			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(5) == 0 && (player.cor > 25 || kGAMECLASS.monk > 0)) {
-				chooser = 1;
-			}
-			//If Jojo lives in camp, never encounter him
-			if (camp.campCorruptJojo() || player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 || flags[kFLAGS.JOJO_DEAD_OR_GONE] >= 1) {
-				if (chooser >= 1) chooser++;
 			}
 			//Chance to discover deepwoods
 			if ((player.exploredForest >= 20) && player.findStatusAffect(StatusAffects.ExploredDeepwoods) < 0) {
@@ -204,108 +199,102 @@ package classes.Scenes.Areas
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			if (chooser == 0) {
-				//Tamani 25% of all goblin encounters encounter rate
-				if (rand(4) <= 0 && flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
-					if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
-						tamaniDaughtersScene.encounterTamanisDaughters();
-					}
-					else
-						tamaniScene.encounterTamani();
-					return;
-				}
-				//Determines likelyhood of imp/goblins
-				kGAMECLASS.exploration.genericGobImpEncounters();
-			}
-			if (chooser == 1) {
-				doNext(camp.returnToCampUseOneHour);
-				clearOutput();
-				//Failsafe mechanism
-				if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
-					outputText("You enjoy a peaceful walk in the woods.  It gives you time to think over the recent, disturbing events.", true);
-					dynStats("tou", .5, "int", 1);
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				if (kGAMECLASS.monk <= 0 && player.findStatusAffect(StatusAffects.PureCampJojo) < 0) 
-				{	
-					if (player.cor < 25)
-					{
-						if (player.level >= 4)
-						{
-							kGAMECLASS.monk = 1;
-							kGAMECLASS.jojoScene.lowCorruptionJojoEncounter();
-							return
+			select = choice[rand(choice.length)];
+			//==============================
+			//EVENTS GO HERE!
+			//==============================
+			switch(select) {
+				case 0: //Tamani 25% of all goblin encounters encounter rate
+					if (rand(4) <= 0 && flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
+						if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
+							tamaniDaughtersScene.encounterTamanisDaughters();
 						}
 						else
+							tamaniScene.encounterTamani();
+						return;
+					}
+					//Determines likelyhood of imp/goblins
+					kGAMECLASS.exploration.genericGobImpEncounters();
+					break;
+				case 1: //Jojo
+					clearOutput();
+					if (kGAMECLASS.monk == 0 && player.findStatusAffect(StatusAffects.PureCampJojo) < 0) 
+					{	
+						if (player.cor < 25)
 						{
-							outputText("You enjoy a peaceful walk in the woods.  It gives you time to think over the recent, disturbing events.", true);
-							dynStats("tou", .5, "int", 1);
-							doNext(camp.returnToCampUseOneHour);
+							if (player.level >= 4)
+							{
+								kGAMECLASS.monk = 1;
+								kGAMECLASS.jojoScene.lowCorruptionJojoEncounter();
+								return;
+							}
+							else
+							{
+								outputText("You enjoy a peaceful walk in the woods.  It gives you time to think over the recent, disturbing events.", true);
+								dynStats("tou", .5, "int", 1);
+								doNext(camp.returnToCampUseOneHour);
+								return;
+							}
+						}
+						else 
+						{
+							kGAMECLASS.jojoScene.highCorruptionJojoEncounter();
+						}
+						return;
+					}
+					else if (kGAMECLASS.monk == 1 || kGAMECLASS.monk < 0) { //Negative monk value indicates rape is disabled.
+						kGAMECLASS.jojoScene.repeatJojoEncounter();
+					}
+					else if (kGAMECLASS.monk >= 2) { //Angry/Horny Jojo
+						kGAMECLASS.jojoScene.corruptJojoEncounter();
+					}
+					break;
+				case 2: //Tentacle Beast
+					clearOutput();
+					temp = rand(4);
+					//Oh noes, tentacles!
+					if (temp == 0) {
+						//Tentacle avoidance chance due to dangerous plants
+						if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
+							trace("TENTACLE'S AVOIDED DUE TO BOOK!");
+							outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", false);
+							simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+							return;
+						}
+						else {
+							tentacleBeastScene.encounter();
 							return;
 						}
 					}
-				
-					kGAMECLASS.monk = 1;
-					kGAMECLASS.jojoScene.jojoSprite();
-					outputText("While marvelling at the strange trees and vegetation of the forest, the bushes ruffle ominously.  A bush seems to explode into a flurry of swirling leaves and movement.  Before you can react you feel your " + player.feet() + " being swept out from under you, and land hard on your back.\n\n", false);
-					outputText("The angry visage of a lithe white mouse gazes down on your prone form with a look of confusion.", false);
-					outputText("\n\n\"<i>I'm sorry, I sensed a great deal of corruption, and thought a demon or monster had come to my woods,</i>\" says the mouse, \"<i>Oh, where are my manners!</i>\"\n\nHe helps you to your feet and introduces himself as Jojo.  Now that you have a good look at him, it is obvious this mouse is some kind of monk, dressed in robes, holy symbols, and draped with prayer beads.\n\nHe smiles knowingly, \"<i>Yes I am a monk, and yes this is a strange place for one such as I... this world was not always this way.  Long ago this world was home to many villages, including my own.  But then the demons came.  I'm not sure if they were summoned, created, or simply a perversion of magic or breeding, but they came swarming out of the mountains to destroy everything in their path.</i>\"", false);
-					outputText("\n\nJojo sighs sadly, \"<i>Enough of my woes.  You are very corrupted.  If you cannot be sufficiently purified you WILL become one of them in time.  Will you let me help you?", false);
-					if (player.gender > 0) {
-						trace("Gender != 0");
-						simpleChoices("Accept", getGame().jojoScene.meditateInForest, "Rape Him", getGame().jojoScene.jojoRape, "BWUH?", null, "Decline", camp.returnToCampUseOneHour, "", null);
-					}
-					else {
-						trace("Gender == 0");
-						simpleChoices("Accept", getGame().jojoScene.meditateInForest, "Rape Him", null, "BWUH?", null, "Decline", camp.returnToCampUseOneHour, "", null);
-					}
-					return;
-				}
-				if (kGAMECLASS.monk == 1) {
-					if (player.findStatusAffect(StatusAffects.Infested) >= 0) {
-						kGAMECLASS.jojoScene.jojoSprite();
-						outputText("As you approach the serene monk, you see his nose twitch, disturbing his meditation.\n\n", true);
-						outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body.</i>\", Jojo says flatly. \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may leave lasting impressions upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
-						if (player.gender > 0) simpleChoices("Purge", getGame().jojoScene.wormRemoval, "Meditate", getGame().jojoScene.meditateInForest, "Rape", getGame().jojoScene.jojoRape, "", null, "Leave", camp.returnToCampUseOneHour);
-						else simpleChoices("Purge", getGame().jojoScene.wormRemoval, "Meditate", getGame().jojoScene.meditateInForest, "Rape", null, "", null, "Leave", camp.returnToCampUseOneHour);
+					break;
+				case 3: //Corrupted Glade
+					if (rand(4) == 0) {
+						trappedSatyr();
 						return;
 					}
-					kGAMECLASS.jojoScene.jojoSprite();
-					outputText("Jojo the monk appears before you, robes and soft white fur fluttering in the breeze.  He asks, \"<i>Are you ready for a meditation session?</i>\"", false);
-					if (player.gender > 0) simpleChoices("Yes", getGame().jojoScene.meditateInForest, "No", camp.returnToCampUseOneHour, "BWUH", null, "Rape Him", getGame().jojoScene.jojoRape, "", null);
-					else simpleChoices("Yes", getGame().jojoScene.meditateInForest, "No", camp.returnToCampUseOneHour, "BWUH", null, "Rape Him", null, "", null);
-				}
-				if (kGAMECLASS.monk >= 2) {
-					kGAMECLASS.jojoScene.jojoSprite();
-					outputText("You are enjoying a peaceful walk through the woods when Jojo drops out of the trees ahead, ", true);
-					if (kGAMECLASS.monk == 2) outputText("his mousey visage twisted into a ferocious snarl.  \"YOU!\" he screams, launching himself towards you, claws extended.", false);
-					if (kGAMECLASS.monk == 3) outputText("unsteady on his feet, but looking for a fight!", false);
-					if (kGAMECLASS.monk == 4) outputText("visibly tenting his robes, but intent on fighting you.", false);
-					if (kGAMECLASS.monk == 5) outputText("panting and nude, his fur rustling in the breeze, a twitching behemoth of a cock pulsing between his legs.", false);
-					startCombat(new Jojo());
-				}
-			}
-			//Tentacles 25% of the time...
-			if (chooser == 2) {
-				trace("TRACE TENTACRUELS");
-				clearOutput();
-				temp = rand(4);
-				//Oh noes, tentacles!
-				if (temp == 0) {
-					//Tentacle avoidance chance due to dangerous plants
-					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
-						trace("TENTACLE'S AVOIDED DUE TO BOOK!");
-						outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", false);
-						simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+					corruptedGlade.intro();
+					break;
+				case 4: //Trip on a root
+					outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.", false);
+					player.takeDamage(10);
+					doNext(camp.returnToCampUseOneHour);
+					break;
+				case 5: //Bee-girl
+					if (rand(10) == 0) { //Chitin freebie!
+						outputText("You find a large piece of insectile carapace obscured in the ferns to your left.  It's mostly black with a thin border of bright yellow along the outer edge.  There's still a fair portion of yellow fuzz clinging to the chitinous shard.  It feels strong and flexible - maybe someone can make something of it.  ", true);
+						inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
 						return;
 					}
-					else {
-						tentacleBeastScene.encounter();
-						return;
-					}
-				}
-				if (temp == 1) {
+					beeGirlScene.beeEncounter();
+					break;
+				case 6: //Pigtail truffle FOUND!
+					outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
+					inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
+					break;
+				case 7: //Gather woods
+					cabinProgress.gatherWoods();
+					break;
+				default: //Failsafe
 					if (player.cor < 80) {
 						outputText("You enjoy a peaceful walk in the woods, it gives you time to think.", false);
 						dynStats("tou", .5, "int", 1);
@@ -321,41 +310,6 @@ package classes.Scenes.Areas
 					}
 					doNext(camp.returnToCampUseOneHour);
 					return;
-				}
-				//CORRUPTED GLADE
-				if (temp == 2) {
-					if (rand(4) == 0) {
-						trappedSatyr();
-						return;
-					}
-					corruptedGlade.intro();
-				}
-				//Trip on a root!
-				if (temp == 3) {
-					outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.", false);
-					player.takeDamage(10);
-					doNext(camp.returnToCampUseOneHour);
-					trace("FIX MEEEEE");
-					return;
-				}
-			}
-			//Bee-girl encounter
-			if (chooser == 3) {
-				if (rand(10) == 0) {
-					outputText("You find a large piece of insectile carapace obscured in the ferns to your left.  It's mostly black with a thin border of bright yellow along the outer edge.  There's still a fair portion of yellow fuzz clinging to the chitinous shard.  It feels strong and flexible - maybe someone can make something of it.  ", true);
-					inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
-					return;
-				}
-				beeGirlScene.beeEncounter();
-			}
-			if (chooser >= 4) {
-				if (rand(4) == 0 || (flags[kFLAGS.CAMP_CABIN_PROGRESS] < 4 || flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)) {
-					outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
-					inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
-					return;
-				}
-				cabinProgress.gatherWoods();
-				return;
 			}
 		}
 		//[FOREST]

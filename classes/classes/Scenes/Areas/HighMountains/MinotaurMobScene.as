@@ -259,7 +259,7 @@ private function fightOTaurs():void {
 
 //[Submit]
 private function submitToMinotaurMob():void {
-	player.lust = 100;
+	player.lust = player.maxLust();
 	dynStats("lus", 1);
 	minotaurDeFeet();
 	spriteSelect(94);

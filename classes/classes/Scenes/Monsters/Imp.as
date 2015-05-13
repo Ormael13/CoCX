@@ -22,7 +22,7 @@
 				game.forest.kitsuneScene.loseKitsuneImpFight();
 			} else if (pcCameWorms) {
 				outputText("\n\nThe imp grins at your already corrupted state...", false);
-				player.lust = 100;
+				player.lust = player.maxLust();
 				doNext(game.impScene.impRapesYou);
 			} else {
 				game.impScene.impRapesYou();

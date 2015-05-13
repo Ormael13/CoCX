@@ -1,3 +1,4 @@
+//We won't be needing this anymore!
 package coc.view {
     import flash.display.MovieClip;
     import flash.display.Sprite;
@@ -5,40 +6,42 @@ package coc.view {
 
     import flash.text.TextField;
 
-    import coc.model.GameModel;
+    //import coc.model.GameModel;
 
     // Remove dynamic once you've added all the DOs as instance properties.
     public dynamic class StatsView extends Sprite {
         // add things from main view here?
         // yes because we'll need to update all the TFs and progress bars.
-        public var upDownsContainer :Sprite;
-        public var levelUp :Sprite;
+        public var upDownsContainer:Sprite;
+        public var levelUp:Sprite;
 
-        protected var model :GameModel;
+        //protected var model:GameModel;
 
-        public function StatsView( mainView :MovieClip, model :* ) {
+        public function StatsView(mainView:MovieClip/*, model:GameModel*/) {
             super();
 
-            if( ! mainView ) {
+            if(! mainView) {
                 return;
             }
 
-            this.model = model;
+            //this.model = model;
 
-            var statsThingsNames :Array = [
-                    "strBar",     "strText",     "strNum",      // "strUp",      "strDown",
-                    "touBar",     "touText",     "touNum",      // "touUp",      "touDown",
-                    "speBar",     "speText",     "speNum",      // "speUp",      "speDown",
-                    "inteBar",    "inteText",    "inteNum",     // "inteUp",     "inteDown",
-                    "libBar",     "libText",     "libNum",      // "libUp",      "libDown",
-                    "sensBar",    "senText",     "senNum",      // "sensUp",     "sensDown",
-                    "corBar",     "corText",     "corNum",      // "corUp",      "corDown",
-                    "lustBar",    "lustText",    "lustNum",     // "lustUp",     "lustDown",
+            var statsThingsNames:Array = [
+                    "strText",     "strNum",     "strBar",      // "strUp",      "strDown",
+                    "touText",     "touNum",     "touBar",      // "touUp",      "touDown",
+                    "speText",     "speNum",     "speBar",      // "speUp",      "speDown",
+                    "inteText",    "inteNum",    "inteBar",     // "inteUp",     "inteDown",
+                    "libText",     "libNum",     "libBar",      // "libUp",      "libDown",
+                    "senText",     "senNum",     "sensBar",     // "sensUp",     "sensDown",
+                    "corText",     "corNum",     "corBar",      // "corUp",      "corDown",
+					"HPText",      "HPNum",      "HPBar",       // "hpUp",       "hpDown",
+                    "lustText",    "lustNum",    "lustBar",     // "lustUp",     "lustDown",
 					"minLustBar",
-                    "fatigueBar", "fatigueText", "fatigueNum",  // "fatigueUp",  "fatigueDown",
-                    "HPBar",      "HPText",      "HPNum",       // "hpUp",       "hpDown",
-                                  "levelText",   "levelNum",    // "levelUp",
-                    "XPBar",	  "xpText",     "xpNum",       // "xpUp",       "xpDown",
+                    "fatigueText", "fatigueNum", "fatigueBar",  // "fatigueUp",  "fatigueDown",
+                    "hungerText",  "hungerNum",  "hungerBar",   // "fatigueUp",  "fatigueDown",
+                    "levelText",   "levelNum",                  // "levelUp",
+                    "xpText",      "xpNum",      "xpBar",	    // "xpUp",       "xpDown",
+					"nameText",
                     "coreStatsText",
                     "advancementText",
                     "combatStatsText",
@@ -46,9 +49,9 @@ package coc.view {
                     "timeText",
                     "timeBG",
                     "sideBarBG"
-                ];
+               ];
 
-            var statsUpDownsNames :Array = [
+            var statsUpDownsNames:Array = [
                     "strUp",      "strDown",
                     "touUp",      "touDown",
                     "speUp",      "speDown",
@@ -56,33 +59,32 @@ package coc.view {
                     "libUp",      "libDown",
                     "sensUp",     "sensDown",
                     "corUp",      "corDown",
+					"hpUp",       "hpDown",
+					"lustUp",     "lustDown",
                     "fatigueUp",  "fatigueDown",
-                    "hpUp",       "hpDown",
-                    "lustUp",     "lustDown",
+                    "hungerUp",   "hungerDown",
+                    
                     // "levelUp",
                     "xpUp",       "xpDown"
-                ];
-
-            for each( var statsDOName :* in statsThingsNames ) {
+               ];
+            for each(var statsDOName:* in statsThingsNames) {
                 // adding at 0 because BG is at the end.
-                this.addChildAt( mainView.getChildByName( statsDOName ), 0 );
+                this.addChildAt(mainView.getChildByName(statsDOName), 0);
             }
-
             this.upDownsContainer = new Sprite();
-            this.addChild( this.upDownsContainer );
-
-            for each( var statsUpDownDOName :* in statsUpDownsNames ) {
-                this.upDownsContainer.addChild( mainView.getChildByName( statsUpDownDOName ) );
+            this.addChild(this.upDownsContainer);
+            for each(var statsUpDownDOName:* in statsUpDownsNames) {
+                if (statsUpDownDOName != null) this.upDownsContainer.addChild(mainView.getChildByName(statsUpDownDOName));
             }
+            this.levelUp = mainView.getChildByName('levelUp') as Sprite;
+            this.addChild(this.levelUp);
+        }
 
-            this.levelUp = mainView.getChildByName( 'levelUp' ) as Sprite;
-            this.addChild( this.levelUp );
-        };
-
-        protected function setStatText( name :String, value :* ) {
-            if ( /Num$/.test( name ) )
+		//Will be handled in one of class files.
+        /*protected function setStatText(name:String, value:*) {
+            if (/Num$/.test(name))
 			{
-				var fVal:* = Math.floor( value );
+				var fVal:* = Math.floor(value);
 				var dispText:String;
 				
 				if (fVal >= 1000000)
@@ -91,143 +93,143 @@ package coc.view {
 				}
 				else
 				{
-					dispText = String( fVal );
+					dispText = String(fVal);
 				}
 				
-                (this.getChildByName( name ) as TextField).htmlText = dispText
+                (this.getChildByName(name) as TextField).htmlText = dispText
 			}
             else
-                (this.getChildByName( name ) as TextField).htmlText = value;
-        };
+                (this.getChildByName(name) as TextField).htmlText = value;
+        }*/
 
-        protected function setStatBar( name :String, progress :Number ) {
-            this.getChildByName( name ).width = Math.round( progress * 115 );
-        };
+        /*protected function setStatBar(name:String, progress:Number) {
+            this.getChildByName(name).width = Math.round(progress * 115);
+        }*/
 
-        // <- statsScreenRefresh
-        public function refresh() :void {
+        // <- statsScreenRefresh (Will be done in class file.)
+        /*public function refresh():void {
             // this.show();
             // this.visible = true;
 
-            setStatText( "coreStatsText",
+            setStatText("coreStatsText",
                 "<b><u>Name: {NAME}</u>\nCore Stats</b>"
-                    .replace( "{NAME}", model.player.short ) );
+                    .replace("{NAME}", model.player.short));
 
-            setStatText( "strNum", model.player.str );
-            setStatText( "touNum", model.player.tou );
-            setStatText( "speNum", model.player.spe );
-            setStatText( "inteNum", model.player.inte );
-            setStatText( "libNum", model.player.lib );
-            setStatText( "senNum", model.player.sens );
-            setStatText( "corNum", model.player.cor );
-            setStatText( "fatigueNum", model.player.fatigue );
-            setStatText( "HPNum", model.player.HP + "/" + model.maxHP());
-            setStatText( "lustNum", model.player.lust );
-            setStatText( "levelNum", model.player.level );
-            setStatText( "xpNum", model.player.XP + " / " + model.player.level * 100 + " (" + Math.floor(model.player.XP / (model.player.level * 100)) + "%)");
+            setStatText("strNum", model.player.str);
+            setStatText("touNum", model.player.tou);
+            setStatText("speNum", model.player.spe);
+            setStatText("inteNum", model.player.inte);
+            setStatText("libNum", model.player.lib);
+            setStatText("senNum", model.player.sens);
+            setStatText("corNum", model.player.cor);
+            setStatText("fatigueNum", model.player.fatigue + "/" + model.player.maxFatigue());
+            setStatText("HPNum", model.player.HP + "/" + model.player.maxHP());
+            setStatText("lustNum", model.player.lust + "/" + model.player.maxLust());
+            setStatText("levelNum", model.player.level);
+            setStatText("xpNum", model.player.XP + " / " + model.player.level * 100 + " (" + Math.floor(model.player.XP / (model.player.level * 100)) + "%)");
 
-            setStatText( "timeText",
+            setStatText("timeText",
                 "<b><u>Day#: {DAYS}</u></b>\n<b>Time: {HOURS}:{MINUTES}</b>"
-                    .replace( "{DAYS}", model.time.days )
-                    .replace( "{HOURS}", model.time.hours ) 
-					.replace( "{MINUTES}", model.time.minutes ));
+                    .replace("{DAYS}", model.time.days)
+                    .replace("{HOURS}", model.time.hours) 
+					.replace("{MINUTES}", model.time.minutes));
 
-            setStatBar( "strBar", model.player.str/100 );
-            setStatBar( "touBar", model.player.tou/100 );
-            setStatBar( "speBar", model.player.spe/100 );
-            setStatBar( "inteBar", model.player.inte/100 );
-            setStatBar( "libBar", model.player.lib/100 );
-            setStatBar( "sensBar", model.player.sens/100 );
-            setStatBar( "corBar", model.player.cor/100 );
-            setStatBar( "fatigueBar", model.player.fatigue/100 );
-            setStatBar( "HPBar", model.player.HP/model.maxHP() );
-            setStatBar( "lustBar", model.player.lust / 100 );
-			setStatBar( "minLustBar", model.player.minLust / 100);
-			setStatBar( "XPBar", (model.player.XP / (model.player.level * 100)) );
-            setStatText( "gemsNum", model.player.gems );
-        };
+            setStatBar("strBar", model.player.str/100);
+            setStatBar("touBar", model.player.tou/100);
+            setStatBar("speBar", model.player.spe/100);
+            setStatBar("inteBar", model.player.inte/100);
+            setStatBar("libBar", model.player.lib/100);
+            setStatBar("sensBar", model.player.sens/100);
+            setStatBar("corBar", model.player.cor/100);
+            setStatBar("fatigueBar", model.player.fatigue / model.player.maxFatigue());
+            setStatBar("HPBar", model.player.HP / model.player.maxHP());
+            setStatBar("lustBar", model.player.lust / model.player.maxLust());
+			setStatBar("minLustBar", model.player.minLust / model.player.maxLust());
+			setStatBar("XPBar", (model.player.XP / (model.player.level * 100)));
+            setStatText("gemsNum", model.player.gems);
+        }*/
 
         // <- showStats
         public function show() {
             // make all the stats DOs visible.
-            this.refresh();
+            //this.refresh();
             this.visible = true;
-        };
+        }
 
         // <- hideStats
         public function hide() {
             // body...
             this.visible = false;
-        };
+        }
 
         // <- hideUpDown
         public function hideUpDown() {
             var ci,
                 cc = this.upDownsContainer.numChildren;
 
-            this.upDownsContainer.visible = false;
+            this.upDownsContainer.visible = true; //Possible fix.
 
             // children also need to be hidden because they're selectively shown on change.
-            for( ci = 0; ci < cc; ++ci ) {
-                this.upDownsContainer.getChildAt( ci ).visible = false;
+            for(ci = 0; ci < cc; ++ci) {
+                this.upDownsContainer.getChildAt(ci).visible = false;
             }
 
             this.hideLevelUp();
-        };
+        }
 
-        public function showUpDown() {
-            function _oldStatNameFor( statName :String ) {
-                return 'old' + statName.charAt( 0 ).toUpperCase() + statName.substr( 1 );
+        /*public function showUpDown() { //Not used as it would crash.
+            function _oldStatNameFor(statName:String) {
+                return 'old' + statName.charAt(0).toUpperCase() + statName.substr(1);
             }
 
-            var statName :String,
-                oldStatName :String,
-                allStats :Array;
+            var statName:String,
+                oldStatName:String,
+                allStats:Array;
 
             this.upDownsContainer.visible = true;
 
-            allStats = [ "str", "tou", "spe", "inte", "lib", "sens", "cor", "lust", "hp" ];
+            allStats = ["str", "tou", "spe", "inte", "lib", "sens", "cor", "HP", "lust", "fatigue", "hunger"];
 
-            for each( statName in allStats ) {
-                oldStatName = _oldStatNameFor( statName );
+            for each(statName in allStats) {
+                oldStatName = _oldStatNameFor(statName);
 
-                if( this.model.player[ statName ] > this.model.oldStats[ oldStatName ] ) {
-                    this.showStatUp( statName );
+                if(this.model.player[statName] > this.model.oldStats[oldStatName]) {
+                    this.showStatUp(statName);
                 }
-                if( this.model.player[ statName ] < this.model.oldStats[ oldStatName ] ) {
-                    this.showStatDown( statName );
+                if(this.model.player[statName] < this.model.oldStats[oldStatName]) {
+                    this.showStatDown(statName);
                 }
             }
-        };
+        }*/
 
-        public function showLevelUp() :void {
+        public function showLevelUp():void {
             this.levelUp.visible = true;
-        };
+        }
 
-        public function hideLevelUp() :void {
+        public function hideLevelUp():void {
             this.levelUp.visible = false;
-        };
+        }
 
-        public function showStatUp( statName :String ) :void {
-            var statUp :DisplayObject,
-                statDown :DisplayObject;
+        public function showStatUp(statName:String):void {
+            var statUp:DisplayObject,
+                statDown:DisplayObject;
 
-            statUp = this.upDownsContainer.getChildByName( statName + 'Up' );
-            statDown = this.upDownsContainer.getChildByName( statName + 'Down' );
+            statUp = this.upDownsContainer.getChildByName(statName.toLowerCase() + 'Up');
+            statDown = this.upDownsContainer.getChildByName(statName.toLowerCase() + 'Down');
 
             statUp.visible = true;
             statDown.visible = false;
-        };
+        }
 
-        public function showStatDown( statName :String ) :void {
-            var statUp :DisplayObject,
-                statDown :DisplayObject;
+        public function showStatDown(statName:String):void {
+            var statUp:DisplayObject,
+                statDown:DisplayObject;
 
-            statUp = this.upDownsContainer.getChildByName( statName + 'Up' );
-            statDown = this.upDownsContainer.getChildByName( statName + 'Down' );
+            statUp = this.upDownsContainer.getChildByName(statName.toLowerCase() + 'Up');
+            statDown = this.upDownsContainer.getChildByName(statName.toLowerCase() + 'Down');
 
             statUp.visible = false;
             statDown.visible = true;
-        };
+        }
     }
 }

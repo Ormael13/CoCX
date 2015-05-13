@@ -310,9 +310,9 @@
 			kGAMECLASS.doYesNo(eventYes, eventNo);
 		}
 
-		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = ""):void
+		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):void
 		{
-			kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText);
+			kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
 		}
 		
 		protected function removeButton(arg:*):void
@@ -844,7 +844,7 @@
 			return kGAMECLASS.mainView;
 		}
 		
-		protected function set mainView(val:MainView):void
+		protected function set mainView(val:*):void
 		{
 			kGAMECLASS.mainView = val;
 		}

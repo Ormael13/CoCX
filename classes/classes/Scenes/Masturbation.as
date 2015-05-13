@@ -276,7 +276,7 @@ package classes.Scenes {
 				doNext(playerMenu);
 				return;
 			}
-			if (inDungeon) {
+			if (inDungeon && kGAMECLASS.dungeonLoc != -10) {
 				outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.");
 				doNext(playerMenu);
 				return;		

@@ -2566,7 +2566,7 @@ private function rubiHotdogging():void {
 	outputText(".");
 
 	outputText("\n\nYou think to yourself.  You could keep teasing [rubi em] like this, without letting [rubi em] cum, as [rubi ey] obviously delights in the feelings.  Or you could be generous and let [rubi em] pop [rubi eir] load right now... Which will it be?");
-	dynStats("lus=", 100, "resisted", false);
+	dynStats("lus=", player.maxLust(), "resisted", false);
 	menu();
 	//[Tease] [Pop]
 	addButton(0,"Tease Rubi",teaseButtjobs);
@@ -2949,7 +2949,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 			outputText(Math.round(flags[kFLAGS.RUBI_COCK_SIZE]*10)/10 + "-inch penis.");
 		}
 		//(Trappy ballsack)
-		else if(flags[kFLAGS.RUBI_BALLS_TYPE] > 0) {
+		else if(flags[kFLAGS.RUBI_BALLS_TYPE] == 0) {
 			outputText("\n\nThe oils seem to seep into Rubi's skin, giving it a glossy, almost insectile shine for a moment.  However, your eyes seem drawn, not to [rubi eir] lustrous skin, but rather to [rubi eir] crotch, [rubi eir] testicles in particular.  The sack itself seems to contort oddly, and you realize it's shrinking!  Rubi makes a panicked noise as the sack constricts and pulls upwards, but thankfully it does not disappear.  Rather, it seems to have tightened up.  You rest your fingers on [rubi eir] new sack experimentally, pleased to note that [rubi ey] still has two testicles, though it looks like [rubi ey] only has one: trapped in a cute little package that seems to pull upwards, rather than dangle down.");
 			flags[kFLAGS.RUBI_BALLS_TYPE] = 1;
 		}

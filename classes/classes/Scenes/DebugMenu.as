@@ -639,7 +639,8 @@ package classes.Scenes
 			addButton(2, "Be Manticore", getManticoreKit, null, null, null, "Gain everything needed to become a Manticore-morph.");
 			addButton(3, "Be Dragonne", getDragonneKit, null, null, null, "Gain everything needed to become a Dragonne-morph.");
 			addButton(4, "Debug Prison", debugPrison);
-			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!");
+			//addButton(5, "Tooltips Ahoy", null, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!");
+			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -876,6 +877,113 @@ package classes.Scenes
 			if (temp is Number || temp is int) flags[flagId] = temp;
 			else flags[flagId] = mainView.nameBox.text;
 			flagEditor();
+		}
+		
+		//------------
+		// LIGHTS OUT
+		//------------
+		public var lightsOutVictoryFunction:Function;
+		public var lightsOutFailureFunction:Function;
+
+		public var lightsArray:Array;
+
+		public function startLightsOut(victoryFunction:Function = null, failureFunction:Function = null):void
+		{
+			clearOutput();
+			outputText("Test puzzle!");
+			outputText("\n\nThis is the same type used in Stellar Tether bomb puzzle in TiTS.");
+			
+			if (victoryFunction == null) victoryFunction = accessDebugMenu;
+			lightsOutVictoryFunction = victoryFunction;
+			if (failureFunction == null) failureFunction = accessDebugMenu;
+			lightsOutFailureFunction = failureFunction;
+			
+			menu();
+			lightsArray = new Array();
+			
+			for (var i:int = 0; i < 15; i++)
+			{
+				lightsArray[i] = false;
+				
+				addButton(i, " ", toggleLight, i);
+			}
+			
+			var onBts:Array = [1, 5, 6, 9, 10, 11, 12, 13];
+			
+			for (i = 0; i < onBts.length; i++)
+			{
+				lightsArray[onBts[i]] = true;
+				
+				addButton(onBts[i], "XXXXXXXX", toggleLight, onBts[i]);
+			}
+		}
+
+		public function testVictoryFunc():void
+		{
+			clearOutput();
+			outputText("A winner is you! A horsecock for your butt as tribute!");
+			menu();
+			addButton(0, "Next", accessDebugMenu);
+		}
+
+		public function testFailureFunc():void
+		{
+			clearOutput();
+			outputText("You failed. Try again?");
+			menu();
+			addButton(0, "Yes", startLightsOut, testVictoryFunc, testFailureFunc);
+			addButton(1, "No", accessDebugMenu);
+		}
+		
+		public function toggleSlot(slot:int):void
+		{
+			lightsArray[slot] = !lightsArray[slot]
+			
+			if (lightsArray[slot]) 
+			{
+				//userInterface.setButtonPurple(slot);
+				mainView.setButtonText(slot, "XXXXXXXX");
+			}
+			else
+			{
+				//userInterface.setButtonBlue(slot);
+				mainView.setButtonText(slot, "");
+			}
+		}
+
+		public function toggleLight(slot:int):void
+		{
+			toggleSlot(slot);
+			toggleNearby(slot);
+			
+			var allOff:Boolean = true;
+			var allOn:Boolean = true;
+			
+			for (var i:int = 0; i < 15; i++)
+			{
+				if (lightsArray[i] == 1) allOff = false;
+				if (lightsArray[i] == 0) allOn = false;
+
+			}
+			if (allOn)
+			{
+				lightsOutFailureFunction();
+			}
+			if (allOff)
+			{
+				lightsOutVictoryFunction();
+			}
+		}
+
+		public function toggleNearby(slot:int):void
+		{
+			var pX:int = slot % 5;
+			var pY:int = slot / 5;
+			
+			if (pX > 0) toggleSlot(slot - 1);
+			if (pX < 4) toggleSlot(slot + 1);
+			if (pY > 0) toggleSlot(slot - 5);
+			if (pY < 2) toggleSlot(slot + 5);
 		}
 	}
 

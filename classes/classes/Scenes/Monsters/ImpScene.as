@@ -23,6 +23,7 @@ package classes.Scenes.Monsters
 			var canFeed:Boolean = (player.findStatusAffect(StatusAffects.Feeder) >= 0);
 			var canBikiniTits:Boolean = (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor);
 			outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.");
+			menu();
 			if (canFeed) {
 				if (player.lust >= 33)
 					outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing, but it might be more fun to force it to guzzle your breast-milk.\n\nWhat do you do?");
@@ -35,11 +36,11 @@ package classes.Scenes.Monsters
 				outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.", true);
 				if (monster.HP <= 0) {
 					addButton(0, "Kill Him", killImp);
+					addButton(4, "Leave", cleanupAfterCombat);
 				}
-				addButton(4, "Leave", cleanupAfterCombat);
+				else cleanupAfterCombat();
 				return;
 			}
-			menu();
 			if (player.lust > 33) {
 				var maleRape:Function = null;
 				if (player.hasCock()) {

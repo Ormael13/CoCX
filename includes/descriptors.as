@@ -121,3 +121,7 @@ public function Num2Text(number:int):String {
 public function addComma(number:int):String {
 	return Utils.addComma(number);
 }
+
+public function capitalizeFirstLetter(string:String):String {
+	return Utils.capitalizeFirstLetter(string);
+}

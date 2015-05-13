@@ -69,6 +69,10 @@ package classes.internals
 			return str;
 		}
 		
+		public static function capitalizeFirstLetter(string:String):String {
+			return (string.substr(0, 1).toUpperCase() + string.substr(1));
+		}
+		
 		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.
 		// Accepts any type.
 		// Can also accept a *single* array of items, in which case it picks from the array instead.

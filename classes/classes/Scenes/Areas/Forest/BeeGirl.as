@@ -111,7 +111,7 @@
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
 				}
 			}
-			if (player.lust >= 100)
+			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
 			else doNext(game.playerMenu);
 		}
