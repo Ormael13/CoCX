@@ -1134,7 +1134,6 @@ package classes.Scenes.Dungeons
 		
 		public function roomZetazChamber():void {
 			kGAMECLASS.dungeonLoc = 16;
-			kGAMECLASS.tooltipLoc = "Zetaz";
 			outputText("<b><u>Zetaz's Chambers</u></b>\n", true);
 			outputText("You've stepped into the most lavish room in the entire cave system, and marvel at the difference between this magnificent abode and your own crudely constructed campsite.  The stone walls are covered in stolen tapestries that each look to have been liberated from a unique source.  Judging by the variety of depictions and art styles in this one room, you've barely met a fraction of the races that once inhabited the lands of Mareth.  A pair of bright, smokeless lanterns hang from each wall, lit from within by obviously magical spheres of luminescence.  Various pieces of stolen furniture decorate the room, surrounding a four-post bed decorated with masterfully done carvings of various carnal acts.", false);
 			if(flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] == 0) {

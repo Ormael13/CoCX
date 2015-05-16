@@ -108,7 +108,7 @@ private function meetJasun():void {
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181]++;
 		}
 		//If you're a dude.
-		if(player.gender <= 1) {
+		if(player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it.  He glances your way and smirks.\n\n", false);
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning to walk away.\n\n", false);
 			outputText("You doubt he'd have the nerve to murder someone here, but you feel like you've wasted your time.", false);
@@ -136,7 +136,7 @@ private function meetJasun():void {
 	//Repeat
 	else {
 		//If you're a dude.
-		if(player.gender <= 1) {
+		if(player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it.  He glances your way and smirks.\n\n", false);
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning to walk away.\n\n", false);
 			outputText("You doubt he'd have the nerve to murder someone here, but it's clear that so long as you lack a vagina Jasun will have no interest in you.  What a waste.", false);

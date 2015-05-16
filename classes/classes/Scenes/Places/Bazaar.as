@@ -74,9 +74,8 @@ public function initiateFightGuard():void {
 
 public function winAgainstGuard():void {
 	clearOutput();
-	cleanupAfterCombat();
-	outputText("\n\nWith the gatekeeper defeated, you walk right past the unconscious guard and enter...", false);
-	doNext(enterTheBazaarAndMenu);
+	outputText("With the gatekeeper defeated, you walk right past the unconscious guard and enter...", false);
+	cleanupAfterCombat(enterTheBazaarAndMenu);
 }	
 
 //[Enter]

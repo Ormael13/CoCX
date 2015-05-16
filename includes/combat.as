@@ -222,16 +222,17 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	menu();
 	var attacks:Function = normalAttack;
 	//Standard menu before modifications.
-  	addButton(0, "Attack", attacks);
-	addButton(1, "Tease", teaseAttack);
-	if (canUseMagic()) addButton(2, "Spells", magicMenu);
-	addButton(3, "Items", inventory.inventoryMenu);
-	addButton(4, "Run", runAway);
-	addButton(5, "P. Specials", physicalSpecials);
-	addButton(6, "M. Specials", magicalSpecials);
-	addButton(7, (monster.findStatusAffect(StatusAffects.Level) >= 0 ? "Climb" : "Wait"), wait);
-	addButton(8, "Fantasize", fantasize);
-	if (CoC_Settings.debugBuild && !debug) addButton(9, "Inspect", debugInspect);
+  	addButton(0, "Attack", attacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
+	addButton(1, "Tease", teaseAttack, null, null, null, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
+	if (canUseMagic()) addButton(2, "Spells", magicMenu, null, null, null, "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.");
+	addButton(3, "Items", inventory.inventoryMenu, null, null, null, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
+	addButton(4, "Run", runAway, null, null, null, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
+	addButton(5, "P. Specials", physicalSpecials, null, null, null, "Physical special attack menu.", "Physical Specials");
+	addButton(6, "M. Specials", magicalSpecials, null, null, null, "Mental and supernatural special attack menu.", "Magical Specials");
+	addButton(7, "Wait", wait, null, null, null, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
+	if (monster.findStatusAffect(StatusAffects.Level) >= 0) addButton(7, "Climb", wait, null, null, null, "Climb the sand to move away from the sand trap.");
+	addButton(8, "Fantasize", fantasize, null, null, null, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
+	if (CoC_Settings.debugBuild && !debug) addButton(9, "Inspect", debugInspect, null, null, null, "Use your debug powers to inspect your enemy.");
 	//Modify menus.
 	if (monster.findStatusAffect(StatusAffects.AttackDisabled) >= 0) {
 		outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
@@ -241,14 +242,11 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0)
 	{
 		outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
-		if (player.weaponName == "flintlock pistol") {
-			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] > 0) addButton(0, "Shoot&Approach", approachAfterKnockback);
-			else addButton(0, "Reload&Approach", approachAfterKnockback);
+		if (isWieldingRangedWeapon()) {
+			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponName == "flintlock pistol") addButton(0, "Reload&Approach", approachAfterKnockback, null, null, null, "Reload your flintlock pistol while approaching.", "Reload and Approach");
+			else addButton(0, "Shoot&Approach", approachAfterKnockback, null, null, null, "Fire a round at your opponent and approach.", "Reload and Approach");
 		}
-		if (player.weaponName == "crossbow") {
-			addButton(0, "Shoot&Approach", approachAfterKnockback);
-		}
-		else addButton(0, "Approach", approachAfterKnockback);
+		else addButton(0, "Approach", approachAfterKnockback, null, null, null, "Close some distance between you and your opponent.");
 		if (player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow") >= 0) addButton(5, "Bow", fireBow);
 	}
 	//Disabled physical attacks
@@ -654,7 +652,7 @@ private function fireBow():void {
 	}
 	//Hit!  Damage calc! 20 +
 	var damage:Number = 0;
-	damage = int((20 + player.str / 3 + player.statusAffectv1(StatusAffects.Kelt) / 1.2) + player.spe / 3 - rand(monster.tou) - monster.armorDef);
+	damage = int(((20 + player.str / 3 + player.statusAffectv1(StatusAffects.Kelt) / 1.2) + player.spe / 3) * (monster.damagePercent() / 100));
 	if (damage < 0) damage = 0;
 	if (damage == 0) {
 		if (monster.inte > 0)
@@ -787,7 +785,7 @@ public function bite():void {
 		return;
 	}
 	//Determine damage - str modified by enemy toughness!
-	damage = int((player.str + 45) - rand(monster.tou) - monster.armorDef);
+	damage = int((player.str + 45) * (monster.damagePercent() / 100));
 	
 	//Deal damage and update based on perks
 	if(damage > 0) {
@@ -843,7 +841,7 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
-	if(flags[kFLAGS.PC_FETISH] >= 3 && !urtaQuest.isUrta() && player.weaponName != "flintlock pistol" && !isWieldingRangedWeapon()) {
+	if(flags[kFLAGS.PC_FETISH] >= 3 && !urtaQuest.isUrta() && !isWieldingRangedWeapon()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -972,14 +970,10 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
+	//------------
+	// DAMAGE
+	//------------
 	//Determine damage
-	/*Determine damage - str modified by enemy toughness!
-	if(player.hasPerk("Double Attack") >= 0 && player.str <= 60) {
-		if(player.weaponName == "deadly spear") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "jeweled rapier") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "katana") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef - 5));
-		else damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef));
-	}*/
 	//BASIC DAMAGE STUFF
 	//Double Attack Hybrid Reductions
 	if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && player.str > 61 + (player.newGamePlusMod() * 15) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
@@ -1000,24 +994,8 @@ public function attack():void {
 		crit = true;
 		damage *= 1.75;
 	}
-	//Start figuring enemy damage resistance
-	var reduction:Number = rand(monster.tou);
-	//Add in enemy armor if needed
-	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
-		reduction += monster.armorDef;
-		//Remove half armor for lunging strikes
-		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
-			reduction -= monster.armorDef/2;
-	}
-	//Take 5 off enemy armor for katana
-	if(player.weaponName == "katana") {
-		//Knock off 5
-		if(monster.armorDef >= 5) reduction -= 5;
-		//Less than 5 armor?  TAKE IT ALL!
-		else reduction -= monster.armorDef;
-	}
 	//Apply AND DONE!
-	damage -= reduction;
+	damage *= (monster.damagePercent(false, true) / 100);
 	//Damage post processing!
 	//Thunderous Strikes
 	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
@@ -1239,18 +1217,17 @@ public function goreAttack():void {
 	//Hit & calculation
 	if(temp >= rand(100)) {
 		var horns:Number = player.horns;
-		if(player.horns > 40) player.horns = 40;
+		if (player.horns > 40) player.horns = 40;
+		damage = int(player.str + horns * 2 * (monster.damagePercent() / 100)); //As normal attack + horn length bonus
 		//normal
 		if(rand(4) > 0) {
 			outputText("You lower your head and charge, skewering " + monster.a + monster.short + " on one of your bullhorns!  ");
-			//As normal attack + horn length bonus
-			damage = int(player.str + horns * 2 - rand(monster.tou) - monster.armorDef);
 		}
 		//CRIT
 		else {
 			//doubles horn bonus damage
-			damage = int(player.str + horns * 4 - rand(monster.tou) - monster.armorDef);
-			outputText("You lower your head and charge, slamming into " + monster.a + monster.short + " and burying both your horns into " + monster.pronoun2 + "!  ");
+			damage *= 2;
+			outputText("You lower your head and charge, slamming into " + monster.a + monster.short + " and burying both your horns into " + monster.pronoun2 + "! <b>Critical hit!</b>  ");
 		}
 		//Bonus damage for rut!
 		if(player.inRut && monster.cockTotal() > 0) {
@@ -1260,7 +1237,7 @@ public function goreAttack():void {
 		//Bonus per level damage
 		damage += player.level * 2;
 		//Reduced by armor
-		damage -= monster.armorDef;
+		damage *= monster.damagePercent() / 100;
 		if(damage < 0) damage = 5;
 		//CAP 'DAT SHIT
 		if(damage > player.level * 10 + 100) damage = player.level * 10 + 100;
@@ -1404,7 +1381,7 @@ public function isWieldingRangedWeapon():Boolean {
 }
 
 //DEAL DAMAGE
-public function doDamage(damage:Number, apply:Boolean = true):Number {
+public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 	if(player.findPerk(PerkLib.Sadist) >= 0) {
 		damage *= 1.2;
 		dynStats("lus", 3);
@@ -1461,7 +1438,8 @@ public function finishCombat():void
 	}
 	awardPlayer();
 }
-public function dropItem(monster:Monster):void {
+public function dropItem(monster:Monster, nextFunc:Function = null):void {
+	if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
 	if(monster.findStatusAffect(StatusAffects.NoLoot) >= 0) {
 		return;
 	}
@@ -1542,7 +1520,7 @@ public function dropItem(monster:Monster):void {
 	if (itype != null) {
 		if (inDungeon)
 			inventory.takeItem(itype, playerMenu);
-		else inventory.takeItem(itype, camp.returnToCampUseOneHour);
+		else inventory.takeItem(itype, nextFunc);
 	}
 }
 public function awardPlayer(nextFunc:Function = null):void
@@ -1569,15 +1547,15 @@ public function awardPlayer(nextFunc:Function = null):void
 	monster.handleAwardText(); //Each monster can now override the default award text
 	if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent;
 	if (!inDungeon && !inRoomedDungeon && !prison.inPrison) {
-		doNext(camp.returnToCampUseOneHour);
+		doNext(nextFunc);
 	}
 	else if (nextFunc != null) doNext(nextFunc);
 	else doNext(playerMenu);
-	dropItem(monster);
+	dropItem(monster, nextFunc);
 	inCombat = false;
 	player.gems += monster.gems;
 	player.XP += monster.XP;
-	mainView.statsView.showStatUp( 'xp' );
+	mainView.statsView.showStatUp('xp');
 	dynStats("lust", 0, "resisted", false); //Forces up arrow.
 }
 
@@ -3600,31 +3578,31 @@ public function magicMenu():void {
 	else {
 		if (player.findStatusAffect(StatusAffects.KnowsCharge) >= 0) {
 			if (player.findStatusAffect(StatusAffects.ChargeWeapon) < 0)
-				addButton(0, "Charge W.", spellChargeWeapon);
+				addButton(0, "Charge W.", spellChargeWeapon, null, null, null, "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nFatigue Cost: " + spellCost(15) + "", "Charge Weapon");
 			else outputText("<b>Charge weapon is already active and cannot be cast again.</b>\n\n");
 		}
 		if (player.findStatusAffect(StatusAffects.KnowsBlind) >= 0) {
 			if (monster.findStatusAffect(StatusAffects.Blind) < 0)
-				addButton(1, "Blind", spellBlind);
+				addButton(1, "Blind", spellBlind, null, null, null, "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  \n\nFatigue Cost: " + spellCost(20) + "");
 			else outputText("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
 		}
-		if (player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) addButton(2, "Whitefire", spellWhitefire);
+		if (player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) addButton(2, "Whitefire", spellWhitefire, null, null, null, "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  \n\nFatigue Cost: " + spellCost(30) + "");
 	}
 	//BLACK MAGICSKS
 	if (player.lust < 50)
 		outputText("You aren't turned on enough to use any black magics.\n\n");
 	else {
-		if (player.findStatusAffect(StatusAffects.KnowsArouse) >= 0) addButton(5, "Arouse", spellArouse);
-		if (player.findStatusAffect(StatusAffects.KnowsHeal) >= 0) addButton(6, "Heal", spellHeal);
+		if (player.findStatusAffect(StatusAffects.KnowsArouse) >= 0) addButton(5, "Arouse", spellArouse, null, null, null, "The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  \n\nFatigue Cost: " + spellCost(15) + "");
+		if (player.findStatusAffect(StatusAffects.KnowsHeal) >= 0) addButton(6, "Heal", spellHeal, null, null, null, "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nFatigue Cost: " + spellCost(20) + "");
 		if (player.findStatusAffect(StatusAffects.KnowsMight) >= 0) {
 			if (player.findStatusAffect(StatusAffects.Might) < 0)
-				addButton(7, "Might", spellMight);
+				addButton(7, "Might", spellMight, null, null, null, "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nFatigue Cost: " + spellCost(25) + "");
 			else outputText("<b>You are already under the effects of Might and cannot cast it again.</b>\n\n");
 		}
 	}
 	// JOJO ABILITIES -- kind makes sense to stuff it in here along side the white magic shit (also because it can't fit into M. Specials :|
 	if (player.findPerk(PerkLib.CleansingPalm) >= 0 && player.cor < 10) {
-		addButton(3, "C.Palm", spellCleansingPalm);
+		addButton(3, "C.Palm", spellCleansingPalm, null, null, null, "Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  \n\nFatigue Cost: " + spellCost(30) + "", "Cleansing Palm");
 	}
 	addButton(14, "Back", combatMenu, false);
 }
@@ -4206,16 +4184,12 @@ public function kick():void {
 	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) damage += 30;
 	else if(player.lowerBody == LOWER_BODY_TYPE_BUNNY) damage += 20;
 	else if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) damage += 35;
-	//Start figuring enemy damage resistance
-	var reduction:Number = rand(monster.tou);
-	//Add in enemy armor if needed
-	reduction += monster.armorDef;
-	//Apply AND DONE!
-	damage -= reduction;
 	//Damage post processing!
 	if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 	if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 	if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+	//Reduce damage
+	damage *= monster.damagePercent() / 100;
 	//(None yet!)
 	if(damage > 0) damage = doDamage(damage);
 	
@@ -5107,6 +5081,9 @@ public function anemoneSting():void {
 	if(!combatRoundOver()) enemyAI();
 }
 
+//------------
+// M. SPECIALS
+//------------
 public function magicalSpecials():void {
 	if (inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 6) {
 		clearOutput();
@@ -5114,48 +5091,49 @@ public function magicalSpecials():void {
 		enemyAI();
 		return;
 	}
-//Pass false to combatMenu instead:	menuLoc = 3;
 	menu();
-	
+	var button:int = 0;
 	//Berserk
 	if(player.findPerk(PerkLib.Berzerker) >= 0) {
-		addButton(0,"Berserk",berzerk);
+		addButton(button++, "Berserk", berzerk, null, null, null, "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
 	}
 	if(player.findPerk(PerkLib.Dragonfire) >= 0) {
-		addButton(1,"DragonFire",dragonBreath);
+		addButton(button++, "DragonFire", dragonBreath, null, null, null, "Unleash fire from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(20), "Dragon Fire");
 	}
 	if(player.findPerk(PerkLib.FireLord) >= 0) {
-		addButton(2,"Fire Breath",fireballuuuuu);
+		addButton(button++,"Fire Breath",fireballuuuuu, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: 20", "Fire Breath");
 	}
 	if(player.findPerk(PerkLib.Hellfire) >= 0) {
-		addButton(3,"Hellfire",hellFire);
+		addButton(button++,"Hellfire",hellFire, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(20));
 	}
 	//Possess ability.
 	if(player.findPerk(PerkLib.Incorporeality) >= 0) {
-		addButton(4,"Possess",possess);
+		addButton(button++, "Possess", possess, null, null, null, "Attempt to temporarily possess a foe and force them to raise their own lusts.");
 	}
 	if(player.findPerk(PerkLib.Whispered) >= 0) {
-		addButton(5,"Whisper",superWhisperAttack);
+		addButton(button++, "Whisper", superWhisperAttack, null, null, null, "Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
 	}
 	if(player.findPerk(PerkLib.CorruptedNinetails) >= 0) {
-		addButton(6,"C.FoxFire",corruptedFoxFire);
-		addButton(7,"Terror",kitsuneTerror);
+		addButton(button++, "C.FoxFire", corruptedFoxFire, null, null, null, "Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(35), "Corrupted FoxFire");
+		addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes. \n\nFatigue Cost: " + spellCost(20));
 	}
 	if(player.findPerk(PerkLib.EnlightenedNinetails) >= 0) {
-		addButton(6,"FoxFire",foxFire);
-		addButton(7,"Illusion",kitsuneIllusion);
+		addButton(button++, "FoxFire", foxFire, null, null, null, "Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(35));
+		addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent, lowering their speed. The more you cast this in a battle, the lesser effective it becomes. \n\nFatigue Cost: " + spellCost(25));
 	}
-	if(player.findStatusAffect(StatusAffects.ShieldingSpell) >= 0) addButton(8,"Shielding",shieldingSpell);
-	if(player.findStatusAffect(StatusAffects.ImmolationSpell) >= 0) addButton(8,"Immolation",immolationSpell);
+	if (player.findStatusAffect(StatusAffects.ShieldingSpell) >= 0) addButton(8, "Shielding", shieldingSpell);
+	if (player.findStatusAffect(StatusAffects.ImmolationSpell) >= 0) addButton(8, "Immolation", immolationSpell);
 	addButton(14, "Back", combatMenu, false);
 }
 
+//------------
+// P. SPECIALS
+//------------
 public function physicalSpecials():void {
 	if(urtaQuest.isUrta()) {
 		urtaQuest.urtaSpecials();
 		return;
 	}
-//Pass false to combatMenu instead:	menuLoc = 3;
 	if (inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 5) {
 		clearOutput();
 		outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
@@ -5163,60 +5141,61 @@ public function physicalSpecials():void {
 		return;
 	}
 	menu();
+	var button:int = 0;
 	if (player.hairType == 4) {
-		addButton(0, "AnemoneSting", anemoneSting);
+		addButton(button++, "AnemoneSting", anemoneSting, null, null, null, "Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 	}
 	//Bitez
 	if (player.faceType == FACE_SHARK_TEETH) {
-		addButton(1, "Bite", bite);
+		addButton(button++, "Bite", bite, null, null, null, "Attempt to bite your opponent with your shark-teeth.");
 	}
 	else if (player.faceType == FACE_SNAKE_FANGS) {
-		addButton(1, "Bite", nagaBiteAttack);
+		addButton(button++, "Bite", nagaBiteAttack, null, null, null, "Attempt to bite your opponent and inject venom.");
 	}
 	else if (player.faceType == FACE_SPIDER_FANGS) {
-		addButton(1, "Bite", spiderBiteAttack);
+		addButton(button++, "Bite", spiderBiteAttack, null, null, null, "Attempt to bite your opponent and inject venom.");
 	}
 	//Bow attack
 	if (player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow") >= 0) {
-		addButton(2, "Bow", fireBow);
+		addButton(button++, "Bow", fireBow, null, null, null, "Use a bow to fire an arrow at your opponent.");
 	}
 	//Constrict
 	if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
-		addButton(3, "Constrict", desert.nagaScene.nagaPlayerConstrict);
+		addButton(button++, "Constrict", desert.nagaScene.nagaPlayerConstrict, null, null, null, "Attempt to bind an enemy in your long snake-tail.");
 	}
 	//Kick attackuuuu
 	else if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
-		addButton(3, "Kick", kick);
+		addButton(button++, "Kick", kick, null, null, null, "Attempt to kick an enemy using your powerful lower body.");
 	}
 	//Gore if mino horns
 	if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) {
-		addButton(4, "Gore", goreAttack);
+		addButton(button++, "Gore", goreAttack, null, null, null, "Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
 	}
 	//Infest if infested
 	if (player.findStatusAffect(StatusAffects.Infested) >= 0 && player.statusAffectv1(StatusAffects.Infested) == 5 && player.hasCock()) {
-		addButton(5, "Infest", mountain.wormsScene.playerInfest);
+		addButton(button++, "Infest", mountain.wormsScene.playerInfest, null, null, null, "The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
 	}
 	//Kiss supercedes bite.
 	if (player.findStatusAffect(StatusAffects.LustStickApplied) >= 0) {
-		addButton(6, "Kiss", kissAttack);
+		addButton(button++, "Kiss", kissAttack, null, null, null, "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.");
 	}
 	switch (player.tailType) {
 		case TAIL_TYPE_BEE_ABDOMEN:
-			addButton(7, "Sting", playerStinger);
+			addButton(button++, "Sting", playerStinger, null, null, null, "Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/100");
 			break;
 		case TAIL_TYPE_SPIDER_ADBOMEN:
-			addButton(7, "Web", PCWebAttack);
+			addButton(button++, "Web", PCWebAttack, null, null, null, "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/100");
 			break;
 		case TAIL_TYPE_SHARK:
 		case TAIL_TYPE_LIZARD:
 		case TAIL_TYPE_KANGAROO:
 		case TAIL_TYPE_DRACONIC:
 		case TAIL_TYPE_RACCOON:
-			addButton(7, "Tail Whip", tailWhipAttack);
+			addButton(button++, "Tail Whip", tailWhipAttack, null, null, null, "Whip your foe with your tail to enrage them and lower their defense!");
 		default:
 	}
 	if (player.shield != ShieldLib.NOTHING) {
-		addButton(8, "Shield Bash", shieldBash, null, null, null, "Bash your opponent with a shield. Has a chance to stun. \n\nThe more you stun your opponent, the harder it is to stun them again.");
+		addButton(button++, "Shield Bash", shieldBash, null, null, null, "Bash your opponent with a shield. Has a chance to stun. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 	}
 	addButton(14, "Back", combatMenu, false);
 }
@@ -5237,7 +5216,7 @@ public function berzerk():void {
 //Corrupted Fox Fire
 public function corruptedFoxFire():void {
 	clearOutput();
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(35) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(35) > player.maxFatigue()) {
 		outputText("You are too tired to use this ability.", true);
 		doNext(magicalSpecials);
 		return;
@@ -5253,8 +5232,11 @@ public function corruptedFoxFire():void {
 	outputText("Holding out your palm, you conjure corrupted purple flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling lavender sparks everywhere.");
 
 	var dmg:int = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
-	if(monster.cor >= 66) dmg = Math.round(dmg * .66);
-	else if(monster.cor >= 50) dmg = Math.round(dmg * .8);
+	if (monster.cor >= 66) dmg = Math.round(dmg * .66);
+	else if (monster.cor >= 50) dmg = Math.round(dmg * .8);
+	else if (monster.cor >= 25) dmg = Math.round(dmg * 1.0);
+	else if (monster.cor >= 10) dmg = Math.round(dmg * 1.2);
+	else dmg = Math.round(dmg * 1.3);
 	//High damage to goes.
 	if(monster.short == "goo-girl") temp = Math.round(temp * 1.5);
 	//Using fire attacks on the goo]
@@ -5265,13 +5247,15 @@ public function corruptedFoxFire():void {
 	dmg = doDamage(dmg);
 	outputText("  (" + dmg + ")\n\n", false);
 	statScreenRefresh();
+	flags[kFLAGS.SPELLS_CAST]++;
+	spellPerkUnlock();
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
 }
 //Fox Fire
 public function foxFire():void {
 	clearOutput();
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(35) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(35) > player.maxFatigue()) {
 		outputText("You are too tired to use this ability.", true);
 		doNext(magicalSpecials);
 		return;
@@ -5291,8 +5275,11 @@ public function foxFire():void {
 	//Deals direct damage and lust regardless of enemy defenses.  Especially effective against corrupted targets.
 	outputText("Holding out your palm, you conjure an ethereal blue flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling azure sparks everywhere.");
 	var dmg:int = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
-	if(monster.cor < 33) dmg = Math.round(dmg * .66);
-	else if(monster.cor < 50) dmg = Math.round(dmg * .8);
+	if (monster.cor < 33) dmg = Math.round(dmg * .66);
+	else if (monster.cor < 50) dmg = Math.round(dmg * .8);
+	else if (monster.cor < 75) dmg = Math.round(dmg * 1.0);
+	else if (monster.cor < 90) dmg = Math.round(dmg * 1.2);
+	else dmg = Math.round(dmg * 1.3); //30% more damage against very high corruption.
 	//High damage to goes.
 	if(monster.short == "goo-girl") temp = Math.round(temp * 1.5);
 	//Using fire attacks on the goo]
@@ -5303,6 +5290,8 @@ public function foxFire():void {
 	dmg = doDamage(dmg);
 	outputText("  (" + dmg + ")\n\n", false);
 	statScreenRefresh();
+	flags[kFLAGS.SPELLS_CAST]++;
+	spellPerkUnlock();
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
 }
@@ -5311,7 +5300,7 @@ public function foxFire():void {
 public function kitsuneTerror():void {
 	clearOutput();
 	//Fatigue Cost: 25
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to use this ability.", true);
 		doNext(magicalSpecials);
 		return;
@@ -5357,7 +5346,7 @@ public function kitsuneTerror():void {
 public function kitsuneIllusion():void {
 	clearOutput();
 	//Fatigue Cost: 25
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(25) > 100) {
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(25) > player.maxFatigue()) {
 		outputText("You are too tired to use this ability.", true);
 		doNext(magicalSpecials);
 		return;
@@ -5441,10 +5430,8 @@ public function shieldBash():void {
 	}
 	var damage:int = 10 + (player.str / 1.5) + rand(player.str / 2) + (player.shieldBlock * 2);
 	if (player.findPerk(PerkLib.ShieldSlam) >= 0) damage *= 1.2;
-	var damageReduction:int = rand(monster.tou) / 2;
-	damage -= damageReduction;
-	if (damage < 1) damage = 1;
-	var chance:int = monster.statusAffectv1(StatusAffects.TimesBashed) + 1;
+	damage *= (monster.damagePercent() / 100);
+	var chance:int = Math.floor(monster.statusAffectv1(StatusAffects.TimesBashed) + 1);
 	if (chance > 10) chance = 10;
 	damage = doDamage(damage);
 	outputText("Your [shield] slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!  ");

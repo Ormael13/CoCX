@@ -1578,7 +1578,6 @@ package classes.Scenes.Dungeons
 		
 		public function roomFurnaceRoom():void {
 			kGAMECLASS.dungeonLoc = 3;
-			kGAMECLASS.tooltipLoc = "IncubusMechanic";
 			outputText("<b><u>Furnace Room</u></b>\n", true)
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
 				outputText("The air inside this room is hot enough to coat your " + player.skinTone + " " + player.skinDesc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some kind of pink crystalline fuel being burned by purple-white fire.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ", false);
@@ -1648,7 +1647,6 @@ package classes.Scenes.Dungeons
 		
 		public function roomForemanOffice():void {
 			kGAMECLASS.dungeonLoc = 6;
-			kGAMECLASS.tooltipLoc = "OmnibusOverseer"
 			//Foreman's Office
 			outputText("<b><u>Foreman's Office</u></b>\n", true);
 			outputText("This office provides an excellent view of the 'factory floor' through a glass wall along the north side.  Towards the south side of the room is a simple desk with an even simpler chair behind it.  The desk's surface is clear of any paperwork, and only has a small inkwell and quill on top of it.  There are a few statues of women and men posted at the corners of the room.  All are nude and appear to be trapped in mid-orgasm.  You wonder if they're statues or perhaps some kind of perverted petrified art.  The north has a glass door leading back to the factory.  There are two other doors, both made of very solid looking metal.  One is on the east wall and another is on the south, behind the desk.  The one behind the desk is marked 'Premium Storage' (though it appears to be locked).", false);

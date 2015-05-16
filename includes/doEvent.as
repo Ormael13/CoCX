@@ -1501,7 +1501,6 @@ public function doEvent(eventNo:Number):void
 	//Jojo in camp
 	else if (eventNo == 2150)
 	{
-		kGAMECLASS.tooltipLoc = "Jojo"
 		clearOutput();
 		jojoScene.jojoSprite();
 		//Amily meets Jojo:

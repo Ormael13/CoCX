@@ -7,12 +7,9 @@ package classes.Scenes.Places.Prison
 	{	
 		public function Punishments() { }
 		
-		//private var prisonCaptor:PrisonCaptor = kGAMECLASS.prison.prisonCaptor;
-		
 		//-----------------------------------------------------------------------
 		//		*******	Stockades Punishment *******
 		//-----------------------------------------------------------------------
-		
 		public function prisonCaptorPunishmentStockades():void
 		{
 			//Punishment Intro 
@@ -250,7 +247,6 @@ package classes.Scenes.Places.Prison
 		//-----------------------------------------------------------------------
 		//		*******	Confinement Punishment *******
 		//-----------------------------------------------------------------------
-		
 		public function prisonCaptorPunishmentConfinement():void
 		{
 			outputText("(Placeholder)A dark resolve comes over your [captorTitle], and [captorhe] drags you to the stone box in the corner of the room and presses a hidden switch somewhere near its base. The front panel slides open and " + prison.prisonCaptor.captorPronoun1 + " quickly forces you inside the narrow chamber.\n\n",false);
@@ -521,7 +517,7 @@ package classes.Scenes.Places.Prison
 			}
 			var successChance:int = 5;
 			successChance += (player.str / 4);
-			if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) successChance += 10;
+			if (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) successChance += 10;
 			if (rand(100) < successChance) {
 				outputText("You struggle as hard as you can. With all of your strength, you manage to snap the belts attaching you to vertical metal bars. You kick the panel as hard as you can and with a loud THUD, the panel breaks off!");
 				outputText("\n\n" + prison.prisonCaptor.captorTitle + prison.prisonCaptor.captorName + " hears the sound and rushes over to your cell to find out that you've broken the confinement box. \"<i>No! You BROKE the confinement box! You know this thing costs 1,000 gems to order and you've ruined it. I'll have to send it to get it repaired. Very well, I'll lift your punishment.</i>\" She looks angry.");
@@ -537,7 +533,6 @@ package classes.Scenes.Places.Prison
 		//-----------------------------------------------------------------------
 		//		*******	BJ Trainer Punishment *******
 		//-----------------------------------------------------------------------
-		
 		public function prisonCaptorPunishmentBJTrainer():void
 		{
 			if(flags[kFLAGS.PRISON_PUNISHMENT] == 3)

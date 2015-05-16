@@ -147,6 +147,7 @@ package classes.Scenes.Areas
 		//Explore forest
 		public function exploreForest():void
 		{
+			clearOutput();
 			//Increment forest exploration counter.
 			player.exploredForest++;
 
@@ -200,6 +201,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			select = choice[rand(choice.length)];
+			trace(select);
 			//==============================
 			//EVENTS GO HERE!
 			//==============================
@@ -251,20 +253,17 @@ package classes.Scenes.Areas
 					break;
 				case 2: //Tentacle Beast
 					clearOutput();
-					temp = rand(4);
 					//Oh noes, tentacles!
-					if (temp == 0) {
-						//Tentacle avoidance chance due to dangerous plants
-						if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
-							trace("TENTACLE'S AVOIDED DUE TO BOOK!");
-							outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", false);
-							simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-							return;
-						}
-						else {
-							tentacleBeastScene.encounter();
-							return;
-						}
+					//Tentacle avoidance chance due to dangerous plants
+					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
+						trace("TENTACLE'S AVOIDED DUE TO BOOK!");
+						outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", false);
+						simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+						return;
+					}
+					else {
+						tentacleBeastScene.encounter();
+						return;
 					}
 					break;
 				case 3: //Corrupted Glade

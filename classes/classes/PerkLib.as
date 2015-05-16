@@ -157,11 +157,11 @@ package classes
 				"You choose the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20! (If you already have some minimum lust, it will be increased by 10)");
 		public static const ImmovableObject:PerkType = mk("Immovable Object", "Immovable Object",
 				"[if(player.tou>=75)" +
-						"Grants 20% physical damage reduction.</b>" +
+						"Grants 10% physical damage reduction.</b>" +
 						"|" +
 						"<b>You aren't tough enough to benefit from this anymore.</b>" +
 						"]",
-				"You choose the 'Immovable Object' perk, granting 20% physical damage reduction.</b>");
+				"You choose the 'Immovable Object' perk, granting 10% physical damage reduction.</b>");
 		public static const IronFists:PerkType = mk("Iron Fists", "Iron Fists",
 				"Hardens your fists to increase attack rating by 5.",
 				"You choose the 'Iron Fists' perk, hardening your fists. This increases attack power by 5.");
@@ -186,7 +186,7 @@ package classes
 				"Increases base spell strength by 50%.",
 				"You choose the 'Mage' perk.  You are able to focus your magical abilities even more keenly, boosting your base spell effects by 50%.");
 		public static const Masochist:PerkType = mk("Masochist", "Masochist",
-				"Take 30% less physical damage but gain lust when damage.",
+				"Take 30% less physical damage but gain lust when you take damage.",
 				"You choose the 'Masochist' perk, reducing the damage you take but raising your lust each time!  This perk only functions while your libido is at or above 60!");
 		public static const Medicine:PerkType = mk("Medicine", "Medicine",
 				"Grants 15% chance per round of cleansing poisons/drugs from your body.",

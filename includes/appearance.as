@@ -614,7 +614,7 @@
 	}
 	else if(player.tailType == TAIL_TYPE_FOX) 
 	{
-		if(player.tailVenom == 1) 
+		if(player.tailVenom <= 1) 
 			outputText("  A swishing " + player.hairColor + " fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
 		else outputText("  " + Num2Text(player.tailVenom) + " swishing " + player.hairColor + " fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
 	}

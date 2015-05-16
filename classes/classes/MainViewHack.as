@@ -46,20 +46,22 @@ package classes
 		public var initializedThirdRow:Boolean = false;
 		public var initializedGradients:Boolean = false;
 		
+		public const textColorArray:Array = [null, null, null, 0xFFFFFF, 0xFFFFFF, null, null, null, null, null];
+		public const mainColorArray:Array = [null, null, null, null, 0xFFFFFF, null, null, null, null, null];
+		public const barAlphaArray:Array = [0.4, 0.4, 0.4, 1, 1, 1, 1, 1, 1, 1];
+		
 		public var statsHidden:Boolean = false;
 		public var buttonsTweened:Boolean = false;
 		
-		//Format
-		private var _textFormatButton:TextFormat;
-		private var _textFont:Font;
-		
+		//Format		
 		private var oldFormat:TextFormat;
 		private var oldFormatLarge:TextFormat;
 		private var timeTextFormat:TextFormat;
 		
-		private var colorableTexts:Array = [];
-		private var colorableTextsLarge:Array = [];
-		private var colorableTextsHeaders:Array = [];
+		private var arraySet:Boolean = false;
+		public var texts:Array = [];
+		public var bars:Array = [];
+
 		private var universalAlpha:Number = 0.4;
 		
 		public function MainViewHack() 
@@ -287,97 +289,81 @@ package classes
 			mainView.minLustBar.visible = true;
 		}
 		
-		public function setDarkTheme():void {
-			var i:int = 0;
-			if (flags[kFLAGS.USE_DARK_BACKGROUND] > 0) {
-				mainView.background.alpha = 0;
-				mainView.sideBarBG.alpha = 0;
-				mainView.timeBG.alpha = 0;
-				universalAlpha = 1;
-				//Small text (attribute texts)
-				for (i = 0; i < colorableTexts.length; i++) {
-					colorableTexts[i].textColor = (0xFFFFFF);
-				}
-				//Large text (attribute numbers)
-				for (i = 0; i < colorableTextsLarge.length; i++) {
-					colorableTextsLarge[i].textColor = (0xFFFFFF);
-				}
-				for (i = 0; i < colorableTextsHeaders.length; i++) {
-					colorableTextsHeaders[i].textColor = (0xFFFFFF);
-				}
+		public function setTheme():void {
+			var i:int = 0; //Will be used for array.
+			if (!arraySet) {
+				arraySet = true;
+				texts.push(
+					//Core stats
+					mainView.strText, mainView.strNum, 
+					mainView.touText, mainView.touNum, 
+					mainView.speText, mainView.speNum, 
+					mainView.inteText, mainView.inteNum, 
+					mainView.libText, mainView.libNum, 
+					mainView.senText, mainView.senNum, 
+					mainView.corText, mainView.corNum, 
+					//Combat stats
+					mainView.HPText, mainView.HPNum, 
+					mainView.lustText, mainView.lustNum, 
+					mainView.fatigueText, mainView.fatigueNum,
+					mainView.hungerText, mainView.hungerNum,
+					//Prison stats
+					mainView.willText, mainView.willNum, 
+					mainView.esteemText, mainView.esteemNum, 
+					mainView.obeyText, mainView.obeyNum,
+					//Advancement
+					mainView.levelText, mainView.levelNum, 
+					mainView.xpText, mainView.xpNum, 
+					mainView.gemsText, mainView.gemsNum,
+					//Misc
+					mainView.nameText,
+					mainView.coreStatsText,
+					mainView.combatStatsText,
+					mainView.advancementText,
+					mainView.timeText
+				);
+				bars.push(
+					//Core stats
+					mainView.strBar,
+					mainView.touBar,
+					mainView.speBar,
+					mainView.inteBar,
+					mainView.libBar,
+					mainView.sensBar,
+					mainView.corBar,
+					//Combat stats
+					mainView.HPBar,
+					mainView.lustBar,
+					mainView.fatigueBar,
+					mainView.hungerBar,
+					//Prison stats
+					mainView.willBar,
+					mainView.esteemBar,
+					mainView.obeyBar,
+					//Advancement
+					mainView.xpBar
+				);
 			}
-			else {
-				mainView.background.alpha = 1;
-				mainView.sideBarBG.alpha = 1;
-				mainView.timeBG.alpha = 1;
-				universalAlpha = (flags[kFLAGS.USE_OLD_INTERFACE] > 0 ? 1 : 0.4);
-				for (i = 0; i < colorableTexts.length; i++) {
-					colorableTexts[i].textColor = (0x000000);
-				}
-				for (i = 0; i < colorableTextsLarge.length; i++) {
-					colorableTextsLarge[i].textColor = (0x000000);
-				}
-				for (i = 0; i < colorableTextsHeaders.length; i++) {
-					colorableTextsHeaders[i].textColor = (0x000000);
-				}
+			//Set background
+			mainView.background.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+			mainView.sideBarBG.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+			//Set text colour
+			//mainView.mainText.textColor = mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
+			for (i = 0; i < texts.length; i++) {
+				texts[i].textColor = textColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
 			}
+			//Set bar opacity
+			universalAlpha = barAlphaArray[flags[kFLAGS.BACKGROUND_STYLE]];
+			for (i = 0; i < bars.length; i++) {
+				bars[i].alpha = universalAlpha;
+			}
+			
 		}
 		
 		//------------
 		// REFRESH
 		//------------
 		public function refreshStats():void {
-			colorableTexts = [
-				//Core stats
-				mainView.strText,
-				mainView.touText, 
-				mainView.speText, 
-				mainView.inteText, 
-				mainView.libText, 
-				mainView.senText, 
-				mainView.corText, 
-				//Combat stats 
-				mainView.HPText, 
-				mainView.lustText, 
-				mainView.fatigueText, 
-				mainView.hungerText, 
-				//Prison stats
-				mainView.willText, 
-				mainView.esteemText, 
-				mainView.obeyText, 
-				//Advancement
-				mainView.levelText, 
-				mainView.xpText, 
-				mainView.gemsText
-			];
-			colorableTextsLarge = [
-				//Core stats
-				mainView.strNum, 
-				mainView.touNum, 
-				mainView.speNum, 
-				mainView.inteNum, 
-				mainView.libNum, 
-				mainView.senNum, 
-				mainView.corNum, 
-				//Combat stats 
-				mainView.HPNum, 
-				mainView.lustNum, 
-				mainView.fatigueNum, 
-				mainView.hungerNum, 
-				//Prison stats
-				mainView.willNum, 
-				mainView.esteemNum, 
-				mainView.obeyNum, 
-				//Advancement
-				mainView.levelNum, 
-				mainView.xpNum, 
-				mainView.gemsNum
-			];
-			colorableTextsHeaders = [
-				mainView.coreStatsText,
-				mainView.combatStatsText,
-				mainView.advancementText
-			];
 			var posOffset:Number = 14;
 			var posTextOffset:Number = 18;
 			var arrowXOffset:Number = 3;
@@ -396,7 +382,7 @@ package classes
 				reassigned = true;
 			}
 			//Old interface
-			if (flags[kFLAGS.USE_OLD_INTERFACE] > 0) {
+			/*if (flags[kFLAGS.USE_OLD_INTERFACE] > 0) {
 				posOffset = 10;
 				posTextOffset = 28;
 				basePos2 = 400;
@@ -409,7 +395,7 @@ package classes
 				hideExperienceBar();
 				hideMinLustBar();
 				//return;
-			}
+			}*/
 			else {
 				showHungerBar();
 				showExperienceBar();
@@ -423,8 +409,6 @@ package classes
 					showExperienceBar();
 				}
 			}
-			//Dark background
-			setDarkTheme();
 			//Set bars
 			mainView.strBar.width = (player.str * (baseWidth / player.getMaxStats("str")));
 			mainView.touBar.width = (player.tou * (baseWidth / player.getMaxStats("tou")));
@@ -540,7 +524,7 @@ package classes
 			mainView.obeyDown.y = mainView.obeyNum.y;
 			
 			//Get rid of the space before colon. (For new)
-			if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) {
+			//if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) {
 				mainView.strText.text = "Strength:";
 				mainView.touText.text = "Toughness:";
 				mainView.speText.text = "Speed:";
@@ -554,7 +538,7 @@ package classes
 				mainView.lustText.width = 50;
 				mainView.fatigueText.text = "Fatigue:";
 				mainView.fatigueText.width = 80;
-			} else {
+			/*} else {
 				mainView.strText.text = "Strength    :";
 				mainView.touText.text = "Toughness   :";
 				mainView.speText.text = "Speed       :";
@@ -568,7 +552,7 @@ package classes
 				mainView.lustText.width = 130;
 				mainView.fatigueText.text = "Fatigue     :";
 				mainView.fatigueText.width = 130;
-			}
+			}*/
 
 			//Headers
 			mainView.nameText.htmlText = "<b>Name: " + player.short + "</b>";
@@ -576,6 +560,7 @@ package classes
 			else mainView.advancementText.htmlText = "<b>Advancement</b>";
 			
 			//Time display
+			mainView.timeBG.alpha = 0;
 			var minutesDisplay:String = "";
 			if (model.time.minutes < 10) minutesDisplay = "0" + model.time.minutes;
 			else minutesDisplay = "" + model.time.minutes;
@@ -594,7 +579,9 @@ package classes
 				}
 			}
 			if (timeTextFormat != null) mainView.timeText.setTextFormat(timeTextFormat);
-			mainView.timeText.textColor = flags[kFLAGS.USE_DARK_BACKGROUND] > 0 ? 0xFFFFFF : 0x000000
+			
+			//Set theme!
+			setTheme();
 		}
 		
 		public function setOldSprite():void {

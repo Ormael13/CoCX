@@ -35,13 +35,13 @@ package classes.Scenes
 		
 		public function accessDebugMenu():void {
 			//buildArray();
-			kGAMECLASS.tooltipLoc = "";
 			if (!getGame().inCombat) {
 				hideMenus();
 				mainView.nameBox.visible = false;
 				mainView.nameBox.text = "";
 				mainView.nameBox.maxChars = 16;
 				mainView.nameBox.restrict = null;
+				mainView.nameBox.width = 140;
 				outputText("Welcome to the super secret debug menu!", true);
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
@@ -63,7 +63,6 @@ package classes.Scenes
 		
 		//Spawn items menu
 		private function itemSpawnMenu():void {
-			kGAMECLASS.tooltipLoc = "ItemDebug"
 			outputText("What item would you like to spawn?", true);
 			menu();
 			addButton(0, "Transformatives", itemSpawnTransformativesMenuI)
@@ -639,7 +638,7 @@ package classes.Scenes
 			addButton(2, "Be Manticore", getManticoreKit, null, null, null, "Gain everything needed to become a Manticore-morph.");
 			addButton(3, "Be Dragonne", getDragonneKit, null, null, null, "Gain everything needed to become a Dragonne-morph.");
 			addButton(4, "Debug Prison", debugPrison);
-			//addButton(5, "Tooltips Ahoy", null, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!");
+			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
 			addButton(14, "Back", accessDebugMenu);
 		}

@@ -82,7 +82,7 @@ package classes.Scenes.Areas
 				choices[choices.length] = kGAMECLASS.isabellaScene.isabellaGreeting;
 				choices[choices.length] = kGAMECLASS.isabellaScene.isabellaGreeting;
 			}
-			if (!kGAMECLASS.helScene.followerHel()) {
+			if (!kGAMECLASS.helScene.followerHel() && (flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 || rand(2) == 0)) {
 				choices[choices.length] = kGAMECLASS.helScene.encounterAJerkInThePlains;
 				choices[choices.length] = kGAMECLASS.helScene.encounterAJerkInThePlains;
 			}

@@ -50,7 +50,7 @@ package classes.Scenes.Areas.HighMountains
 			
 			outputText("\n\nNot sure exactly how to broach the subject you decide to tell her outright, putting a hand on her shoulder you tell the siren that you want to help her.  Offering yourself to try and find a way to cure her and purify her body.  The red-headed shark-like harpy breaks out into a bright toothy smile, showing off her jagged shark teeth before suddenly grabbing you and hugging you.  ");
 			
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] > 0) outputText("\n\nThe close contact and her over-stimulated libido causes her penis to erect itself and begin to press against your body, the harpy/harpies Minerva has kept her looking on with jealousy that she is paying attention to you and not them.");
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] > 0) outputText("\n\nThe close contact and her over-stimulated libido causes her penis to erect itself and begin to press against your body, the harpy/harpies Minerva has kept her looking on with jealousy that she is paying attention to you and not them.");
 			outputText("\n\nShe eagerly embraces you, nearly squeezing the life out of you with sheer enthusiasm.  \"<i>You will? You really will? I can hardly believe that someone will actually help me.</i>\" she says, before wiping the start of a tear from her eye and grinning at you.");
 			
 			outputText("\n\n\"<i>Since you can leave this place and explore the world, you must have lots of experience with the world.  Do you have any clues as to what we could use to cure me?</i>\" she asks you with excitement.  It's a very good question, how are you going to help her?");
@@ -171,7 +171,7 @@ package classes.Scenes.Areas.HighMountains
 			clearOutput();
 			outputText("You return to Minerva's lair with great excitement, clutching the precious seed close against your heart. You call out to your siren lover, eager to share this exciting news with her.")
 			
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] == 0) outputText("\n\nHearing your excited calls draws Minerva over from her place of rest near the pure spring, her curiosity clear on her face as she wonders what's making you so excited. \"<i>What is it, lover? What's gotten into you?</i>\" she questions you before her eyes widen and she brings a hand to her lips, biting it softly. \"<i>Did you... could it be that you found a way to purify me and purge my body of this disgusting creature?</i>\"");
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] == 0) outputText("\n\nHearing your excited calls draws Minerva over from her place of rest near the pure spring, her curiosity clear on her face as she wonders what's making you so excited. \"<i>What is it, lover? What's gotten into you?</i>\" she questions you before her eyes widen and she brings a hand to her lips, biting it softly. \"<i>Did you... could it be that you found a way to purify me and purge my body of this disgusting creature?</i>\"");
 			else outputText("\n\nHearing your excited calls draws Minerva's attention from the harpy that is trying to get her attention from the harpies that fight for her touch, the bird woman/women trying all kinds of lewd things to get her to mate with her/them. Hearing your excited cries win over the arousing actions and she moves away from them, running over to you to see just what's going on. \"<i>What is it, lover? What's gotten into you?</i>\" she questions you, before her eyes widen and she brings a hand to her lips, biting it softly. \"<i>Did you... could it be that you found a way to purify me and purge my body of this disgusting creature, along with this strange lust I feel?</i>\"");
 
 			outputText("\n\nYou nod your head in an excited fashion and triumphantly show her the seed, explaining that Marae said to plant it near the spring so that she could 'make contact' with it in some fashion, after which she will be able to help Minerva to be cured. You ask if she knows a good spot to plant it.");
@@ -184,9 +184,9 @@ package classes.Scenes.Areas.HighMountains
 			player.removeKeyItem("Marae's Seed");
 			outputText("\n\nMinerva looks at it in bewilderment. \"<i>Is that it?</i>\" she asks. You're not quite sure what happened, either, but you don't get a chance to say so, as the shoot suddenly seems to explode! What happens next is impossible to really describe as years, if not decades or even centuries of growth take place in seconds, the little shoot swelling and growing, stretching out roots and reaching out with branches towards the sky. By the time it stops, you and the siren are staring gobsmacked at a magnificent oak tree, which dominates the spring and benevolently enshrouds it with branches and roots. The tree's trunk seems to ripple, like water, and then a pair of wooden arms reach gently out of it. Before your eyes, Marae herself steps through and out of the oak as if it were doorway, smiling benevolently at the pair of you.");
 
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] > 0) {
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] > 0) {
 				outputText("\n\nWhen she sees the state of the spring, she furrows her brow. \"<i>This water has been contaminated... but, fortunately, it has not yet been defiled; an aphrodisiac, nothing more, and easily remedied.</i>\" The roots of the tree seem to quiver and ripple, and then the color starts to fade from the tainted water, until it is pure and pristine once more. Marae smiles contentedly.");
-				flags[kFLAGS.MINERVA_SPRING_DRUGGED] = -1;
+				flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] = -1;
 			}
 
 			outputText("\n\n\"<i>My children... You have done so well. Through this act, my connection to this place of power is established, and I am restored to something more of my old strength. I beg you, Minerva, step forward, that I might truly express my gratitude.</i>\" the deity says, her voice chiming with delight and joy at what has been done.");
@@ -196,7 +196,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nMarae smiles beatifically at the siren and gently reaches out to lay a hand on either side of Minerva's forehead. Closing her eyes and bowing her head, she begins to sing softly to herself, a strange rhythm that makes you think of both, the wind whistling through the trees and rain gently falling upon the grass, of the sun in summer and autumn leaves falling to the grass. Light slowly begins to form, washing across Minerva's face like a personal dawn and sweeping down and across her body, until every inch of the siren is luminescent.");
 
 			outputText("\n\nYou watch, feeling some trepidation, as Minerva's body begins to change - you thought Marae was supposed to purify her, not transform her! Her hips widen and swell to what you can only describe as brood-motherly hips, growing as if in anticipation of birthing many children, her buttocks swelling and perking to form luscious yet firmly squeezable round ass - the butt of a woman born to bear many children.");
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] != 0) outputText("  Her posture shifts slightly, thanks to her newly widened hips, and you think, but aren't sure, that the part of her bulge denoting her hefty pair of testicles grows slightly smaller.");
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] != 0) outputText("  Her posture shifts slightly, thanks to her newly widened hips, and you think, but aren't sure, that the part of her bulge denoting her hefty pair of testicles grows slightly smaller.");
 			else outputText("  Her posture shifts slightly, thanks to her newly widened hips, and you think, but aren't sure, that the part of her bulge denoting her hefty pair of testicles swells till they are the size of cantaloupes.");
 			outputText("  Her breasts swell out magnificently, as if to complement her flared hips and be ready the suckle all the young they would invite her to bare, stopping at around a full and swollen G-cup. Finally, a second pair of luminescent wings slowly takes form on her back, stretching out to maybe half the span of her original pair.");
 
@@ -241,10 +241,10 @@ package classes.Scenes.Areas.HighMountains
 		
 		public function purificationByJojoPart2():void {
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			outputText("The climb up the mountains feels longer and harder than before - maybe because Jojo, despite his admirable dedication, clearly isn't an experienced mountain hiker. Finally, however, you reach the tower and you head inside, calling out for Minerva to come and meet a friend of yours.");
 
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] > 0) {
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] > 0) {
 				outputText("\n\nHearing your excited calls draws Minerva's attention from the harpy that is trying to get her attention/ from the harpies that fight for her touch, the bird woman/women trying all kinds of lewd things to get her to mate with her/them. Hearing your excited cries wins over the arousing actions and she moves away from them, having to be a little forceful to keep the naked harpies off her before running over to you to see just what's going on. \"<i>What is it, lover? Who's your friend her?</i>\" she asks as she looks down at the much smaller mouse-morph before kneeling down to greet him. \"<i>Well hello there little mouse, I have never seen someone like you before. Though I can't really leave to go meet new people, the champion here is kind enough to visit and keep me company.</i>\" she says before looking back up at you with a look of curiosity.");
 
 				outputText("\n\n\"<i>Why would you bring him here? I don't think you would just bring a friend of yours here without reason so why....</i>\" Her words stop as her eyes widen, deducing the reason for this monk-like mouse to be with you. \"<i>Did you... could it be that you found a way to purify me and purge my body of this disgusting creature and rid me of this infuriating lust?</i>\"");
@@ -255,16 +255,16 @@ package classes.Scenes.Areas.HighMountains
 			}
 			
 			outputText("Jojo nods his head");
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] > 0) outputText(", trying to avoid looking too hard at either the harpy sluts or Minerva's still partially erect and dribbling cock");
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] > 0) outputText(", trying to avoid looking too hard at either the harpy sluts or Minerva's still partially erect and dribbling cock");
 			outputText(". \"<i> I believe that I am capable of helping you... At the very least, I will certainly do all in my power to help you. May I please see the nexus - the purifying spring you have been using? </i>\" he asks.");
 
 			outputText("\n\nNodding her head quickly, she grabs Jojo up into her arms and rushed him over to the oasis, before setting him back down on the soft moss that surrounds the purifying waters. \"<i>I understand that you might not be able to do anything for me, but anything you can do to help will be greatly appreciated. I want to be free of this monster and be cleansed of the corruption I feel</i>\"");
 
 			outputText("\n\nJojo nods his head, and then stares at the pool, stepping over to the edge of the water.");
 
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] != 0) {
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] != 0) {
 				outputText("\"<i>\n\nIt looks like something has been added to this pool. Something to pollute it; interfere with its power.</i>\" Jojo muses. \"<i>Fortunately, it doesn't seem to be anything too potent; allow me to just...</i>\" He begins to chant, taking up his staff and making ritualistic sweeping motions through the air. This builds to a climax when he dips the end of his staff into the water, still swishing it around even as he chants. As you watch, ripples flow out from his staff, cleansing the unnatural coloration from the water and restoring it to its former purity. He stops and nods his head with satisfaction.");
-				flags[kFLAGS.MINERVA_SPRING_DRUGGED] = -1;
+				flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] = -1;
 			}
 
 			outputText("\n\n\"<i>Alright now... Miss? If you would please approach me, and kneel in the water?</i>\" he asks Minerva. The shark-harpy in question nods and approaches the water slowly, before gently stepping into the water, turning back around so she is facing you and the mousey monk. The pool may be large but it's not too deep, the pure, clean waters only coming up to her mid thigh due to her very tall stature. \"<i>Just like this? By the way, my name is Minerva and I'm very pleased to meet you.</i>\"");
@@ -276,7 +276,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nThis is not to say that she has not been unaffected. As soon as the flames had exploded onto her body, Minerva had locked up, almost panicking at the sight of them but slowly relaxing as they faded from her body as if they had never even been there. There had been no pain, no burning sensation. Just to make sure, she started checking herself for damage but found that instead of being horrifically burned she was fine, though her body was very different than it was before.");
 
 			outputText("\n\nThe new Minerva's colors have changed, which is the first thing you notice. What was once blue is now a rich, warm golden color, while gray has brightened to marble-white. Her beautiful fiery-red hair is now tipped with gold, and her feathers have become a brilliant snow-white, also tipped with gold. You watch as she opens her eyes - to little surprise now, her vividly electric blue irises are a golden shade of amber, though you are surprised that the sclera are still pure black. It says something about how startling this color change is when it grabs your attention first. Her hips have widened as if in anticipation of birthing many future children, becoming the hips a harpy broodmother would be proud of, her ass swelling into a luscious round peach of taut flesh, while her breasts have grown into whopping G-cup mammaries, as if ready to suckle the many children those hips would invite her to bring into the world. ");
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] != 0) outputText("  You think, but you can't be certain, that her balls may have shrunk, if only a little.");
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] != 0) outputText("  You think, but you can't be certain, that her balls may have shrunk, if only a little.");
 			else outputText("  Looking at her you can clearly see her balls have swollen up to the size of cantaloupes)  Finally, and most startlingly, she has sprouted a second pair of wings, maybe half the size of the original ones, further down her back.");
 			outputText("  But the changes don't matter to you. You rush to Minerva and desperately ask if the siren's alright. Minerva's eyes are already darting over her new body, the now golden siren now trying to comprehend what just happened to her. She is pulled from her baffled inspection by your rushing into the water and your question of her health. \"<i>I... I think I'm alright... there was no pain when... whatever just happened, happened, but... look at me... what am I? What happened to me?</i>\" she says slowly, before closing her eyes and gently inspecting her new form with her hands, her twin pairs of wings shifting and stretching out to their length before curling back. \"<i>It's gone... I can't feel that squirming demon's presence in my body anymore. Its foul corruption has been purged from my blood.</i>\"");
 
@@ -309,19 +309,19 @@ package classes.Scenes.Areas.HighMountains
 			clearOutput();
 			outputText("Carefully making sure you haven't broken the precious vial of potion, you hurry into Minerva's lair, where you call out to your siren lover, eager to share this exciting news with her.");
 			
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] > 0) outputText("\n\nHearing your excited calls draws Minerva's attention from the harpy that is trying to get her attention from the harpies that fight for her touch, the bird woman/women trying all kinds of lewd things to get her to mate with her/them. Hearing your excited cries wins over the arousing actions and she moves away from them, running over to you to see just what's going on. \"<i>What is it, lover? What's gotten into you?</i>\" She questions you before her eyes widen and she brings a hand to her lips, biting it softly. \"<i>Did you... could it be that you found a way to purify me and purge my body of this disgusting creature, along with this strange lust I feel?</i>\""); 
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] > 0) outputText("\n\nHearing your excited calls draws Minerva's attention from the harpy that is trying to get her attention from the harpies that fight for her touch, the bird woman/women trying all kinds of lewd things to get her to mate with her/them. Hearing your excited cries wins over the arousing actions and she moves away from them, running over to you to see just what's going on. \"<i>What is it, lover? What's gotten into you?</i>\" She questions you before her eyes widen and she brings a hand to her lips, biting it softly. \"<i>Did you... could it be that you found a way to purify me and purge my body of this disgusting creature, along with this strange lust I feel?</i>\""); 
 			else outputText("\n\nHearing your excited calls draws Minerva over from her place of rest near the pure spring, her curiosity clear on her face as she wonders what's making you so excited. \"<i>What is it, lover? What's gotten into you?</i>\" She questions you before her eyes widen and she brings a hand to her lips, biting it softly. \"<i>Did you... could it be that you found a way to purify me and purge my body of this disgusting creature?</i>\"");
 
 			outputText("\n\nYou tell her of Rathazul's potion, and offer it to her. You comment that it seems to be her best chance of being cured, but warn her that it's untested, experimental and unpredictable.");
 
 			outputText("\n\nMinerva gives you a soft, sad smile. ");
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] > 0) outputText("\"<i>I don't think I have very long before this... thing... inside me finishes what it's supposed to do. It's worth a shot,</i>\""); 
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] > 0) outputText("\"<i>I don't think I have very long before this... thing... inside me finishes what it's supposed to do. It's worth a shot,</i>\""); 
 			else outputText("\"<i>It can't possibly be any worse than what I'm already going through, trapped here forever,</i>\""); 
 			outputText(" she tells you. She takes your hand that's holding the vial gently in hers, then slowly peels your fingers open and takes the vial from you. She holds it aloft, staring into its contents, then pops it open and drinks it. Maybe halfway through the contents, she stops, choking and gagging. It falls from her nerveless fingers and she topples to her knees, groaning in a pain - filled manner.");
 
-			if (flags[kFLAGS.MINERVA_SPRING_DRUGGED] > 0) {
-				outputText("  The remaining contents flow right into the spring. With each passing second, the water gradually become clearer, as if the effects of potion counter the effect of contaminant."); 
-				flags[kFLAGS.MINERVA_SPRING_DRUGGED] = -1;
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] > 0) {
+				outputText("  The vial falls to the ground shatters, spilling the contents in the progress. The liquid flow right into the spring. With each passing second, the water gradually become clearer, as if the effects of potion counter the effect of contaminant."); 
+				flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] = -1;
 			}
 			player.removeKeyItem("Rathazul's Purity Potion");
 			outputText("\n\nYou rush to her side, and she grabs your hand desperately. \"<i>It hurts... it hurts!</i>\" She wails, arching her back in pain. You watch in horror as her stomach visibly swells and seems to ripple - her parasite seems to be fighting inside her, battering her belly as if desperate to force its way out. Helpless, you cling to her, trying to offer her your strength. She arches her back in pain and lets out an agonized cry as the horrific sound of snapping bones fills the air.");
@@ -681,7 +681,7 @@ package classes.Scenes.Areas.HighMountains
 		//Some placeholder
 		private function talkingToMinervaAboutBackstory():void {
 			clearOutput();
-			spriteSelect(95);
+			
 			outputText(images.showImage("minerva-talk-backstory-pure"), false);
 			//PART 1 - DONE
 			if(flags[kFLAGS.MINERVA_BACKSTORY] == 0) {
@@ -833,7 +833,7 @@ package classes.Scenes.Areas.HighMountains
 		//Sleep with Minerva!
 		private function sleepWithMinerva():void {
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			outputText(images.showImage("minerva-sleepwith-pure"), false);
 			outputText("You walk over to the siren and give her a hug. You tell her that you want to sleep with her. \"<i>Of course! I'd love to spend the night with you,</i>\" she says. \n\n", true);
 			if (flags[kFLAGS.MINERVA_TOWER_TREE] > 0) outputText("Minerva guides you to the most comfortable spot under the huge oak tree.  Being under the tree gives you a great sense of shelter.  She takes off her tube top, exposing her breasts completely.\n\n", false);
@@ -847,7 +847,7 @@ package classes.Scenes.Areas.HighMountains
 		}
 		private function sleepWithMinervaII():void {
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			outputText(images.showImage("minerva-sleepwith2-pure"), false);
 			outputText("<b>Ten hours pass...</b>\n\n", false);
 			outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n", false)
@@ -912,7 +912,7 @@ package classes.Scenes.Areas.HighMountains
 		//Same as tainted.
 		private function fuckMinervasAsshole():void {
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			var x:int = player.cockThatFits(kGAMECLASS.highMountains.minervaScene.minervaACapacity());
 			if(x < 0) x = player.smallestCockIndex();
 			flags[kFLAGS.TIMES_MINERVA_SEXED]++;
@@ -1025,7 +1025,7 @@ package classes.Scenes.Areas.HighMountains
 			var x:int = player.cockThatFits(kGAMECLASS.highMountains.minervaScene.minervaVCapacity());
 			if(x < 0) x = player.smallestCockIndex();
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			flags[kFLAGS.TIMES_MINERVA_SEXED]++;
 			outputText(images.showImage("minerva-sex-restrain-pure"), false);
 			outputText("Looking the lean, toned herm up and down, your eyes trail over her every curve as you think over your options, figuring out what kind of sexual adventure you'd like to go on with the redheaded siren.  Your eyes undressing what little clothes she has on as you visually molest the sharky herm.  Your intense gaze is drawing a blush from the herm, her eyes looking away shyly.  \"<i>Hey... you know how it makes me feel when you look at me like that... but I am glad you like how I look,</i>\" the bashful herm admits before grinning, thrusting her hip out, posing for you and showing off her body.");
@@ -1105,7 +1105,7 @@ package classes.Scenes.Areas.HighMountains
 			var x:int = player.cockThatFits(kGAMECLASS.highMountains.minervaScene.minervaACapacity());
 			if(x < 0) x = player.smallestCockIndex();
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			flags[kFLAGS.TIMES_MINERVA_SEXED]++;
 			outputText(images.showImage("minerva-sex-lapsex-pure"), false);
 			outputText("Thinking about just what kind of heated, heart-pounding, lusty fun you want to have with your siren lover, your eyes look the shark-like harpy up and down, taking in her features.  Her legs, her curvy hips... your eyes travel past the thick growing bulge in her shorts, up past her scarred, toned belly and to the siren's large, luscious breasts before finally reaching her face.  Grinning to the golden and white herm, you decide what you want from her.");
@@ -1196,7 +1196,7 @@ package classes.Scenes.Areas.HighMountains
 			var x:int = player.cockThatFits(kGAMECLASS.highMountains.minervaScene.minervaACapacity());
 			if(x < 0) x = player.smallestCockIndex();
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			flags[kFLAGS.TIMES_MINERVA_SEXED]++;
 			outputText(images.showImage("minerva-sex-analcatch-pure"), false);
 			outputText("Thinking about just what kind of heated, heart-pounding, lusty fun you want to have with your siren lover, your eyes look the shark-like harpy up and down, taking in her features.  Her legs, her curvy hips... your eyes travel past the thick growing bulge in her shorts, up past her scarred, toned belly and to the siren's large, luscious breasts before finally reaching her face.  Grinning to the golden and white herm, you decide what you want from her.");
@@ -1287,7 +1287,7 @@ package classes.Scenes.Areas.HighMountains
 		
 		private function goDownOnAHermAndLoveItYouDirtySlutYou():void {
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			flags[kFLAGS.TIMES_MINERVA_SEXED]++;
 			outputText(images.showImage("minerva-sex-eatout-pure"), false);
 			outputText("Thinking about just what kind of heated, heart-pounding, lusty fun you want to have with your siren lover, your eyes look the shark-like harpy up and down, taking in her features, starting with her long legs, and her wide, flared hips.  Your eyes travel past the thick bulge in her shorts, going up her scarred toned belly and up to the siren's perky G-cup breasts before finally reaching her face.  Grinning to the golden-white herm, you tell her you want to give her some pleasure for a change, your words bringing some surprise to her face.  \"<i>R-really?  You want to focus on me and my pleasure?</i>\" she asks, pleasantly surprised that you want her to be the focus of pleasure this time, a smile full of shark-like teeth soon spreading across her face, \"<i>Well, if you're sure, how could I reject such an offer?</i>\"");
@@ -1324,7 +1324,7 @@ package classes.Scenes.Areas.HighMountains
 		// Balls
 		private function lickMinervasBalls():void {
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			outputText("Not even close to being done, you tease her some more.  The tip of your tongue dances along her outer lips before moving down to her smooth, hairless sack to give her male parts some extra attention.  Kissing her swollen, taut scrotum, you slowly lick and tease it as your hands work her rock hard shaft.  Her fat, sperm-filled balls react to your touch, swelling and pulling up as if getting ready to blow.  You can swear you can hear the poor, hefty testicles audibly churning with their thick creamy seed, eager to stuff some poor woman's pussy and impregnate them.  Closing your eyes, you latch on, sucking the tight sack and teasing the sensitive orbs inside.  \"<i>H-hey, careful down there!  Those things are fragile!</i>\"  she squawks in delight as you take your time giving the juicy pair some much-needed attention.");
 			noBallsMinervaAndContinuation(false);
 		}
@@ -1333,7 +1333,7 @@ package classes.Scenes.Areas.HighMountains
 		private function noBallsMinervaAndContinuation(clear:Boolean = true):void {
 			if(clear) clearOutput();
 			else outputText("\n\n");
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			outputText(images.showImage("minerva-sex-eatout2-pure"), false);
 			outputText("Your careful ministrations soon have the poor siren shuddering and squirming, looking about ready to pop from your skilled hands and mouth.");
 			if(!clear) outputText("  Retreating from her throbbing balls, you");
@@ -1366,7 +1366,7 @@ package classes.Scenes.Areas.HighMountains
 			var x:int = player.cockThatFits(kGAMECLASS.highMountains.minervaScene.minervaVCapacity());
 			if(x < 0) x = player.smallestCockIndex();
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			outputText(images.showImage("minerva-sex-blowjob-pure"), false);
 			flags[kFLAGS.TIMES_MINERVA_SEXED]++;
 			outputText("Thinking about just what kind of heated, heart-pounding, lusty fun you want to have with your siren lover, your eyes look the shark-like harpy up and down, taking in her features.  Starting with her long legs, and moving up to her wide, flared hips, your eyes travel past the thick bulge in her shorts, going up her scarred belly to the siren's perky G-cup breasts before finally reaching her face.");
@@ -1632,7 +1632,7 @@ package classes.Scenes.Areas.HighMountains
 				return;
 			}
 			clearOutput();
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			pregnancy.knockUpForce(); //Clear pregnancy.
 			if (model.time.hours < 6) outputText("You're suddenly disturbed by a sound. When you wake up, you see nothing suspicious except for a note on your bed.  You open the note and read it.  You realize it's from Minerva and she's telling you to come to her!  She's going to give birth!  You look up at the sky to see it's still night but you grab and light a lantern.  You set foot on the path to the high mountains and climb up until you enter the tower where she resides.");
 			else outputText("You're wandering your camp until you see a piece of paper with something written on it. You walk over to the note to pick it up and read it.  You realize it's from Minerva and she's telling you to come to her!  She's going to give birth!  You set foot on the path to the high mountains and climb up until you enter the tower where she resides.");
@@ -1660,7 +1660,7 @@ package classes.Scenes.Areas.HighMountains
 		
 		//Player gives birth!
 		public function playerGivesBirth():void {
-			spriteSelect(95);
+			kGAMECLASS.highMountains.minervaScene.minervaSprite();
 			outputText("A pain develops in your abdomen. You realize it's time to give birth to the sirens! You set foot on the high mountains path and hurry to the tower.");
 			outputText("\n\n\"<i>It's coming!</i>\" you announce. Minerva rushes to you to get you to the birthing spot");
 			if (flags[kFLAGS.MINERVA_TOWER_TREE] > 0) outputText(" under the giant oak tree");

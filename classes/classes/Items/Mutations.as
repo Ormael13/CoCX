@@ -4700,6 +4700,18 @@
 				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
 				changes++;
 			}
+			//(Non-human -> Normal Human Legs)
+			if (player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN && changes < changeLimit && rand(4) == 0) {
+				outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>", false);
+				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				changes++;
+			}
+			//Remove Incorporeality Perk
+			if (player.findPerk(PerkLib.Incorporeality) >= 0 && changes < changeLimit && rand(10) == 0) {
+				outputText("\n\nYou feel a strange sensation in your [legs] as they start to feel more solid. They become more opaque until finally, you can no longer see through your [legs]. \n<b>(Perk Lost: Incorporeality!)</b>", false);
+				player.removePerk(PerkLib.Incorporeality);
+				changes++;
+			}
 			//-Skin color change – tan, olive, dark, light
 			if ((player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "dark" && player.skinTone != "light") && changes < changeLimit && rand(5) == 0) {
 				changes++;
@@ -4765,8 +4777,8 @@
 				player.eyeType = EYES_HUMAN;
 				changes++;
 			}
-			//-Gain human ears
-			if ((player.earType != EARS_HUMAN) && changes < changeLimit && rand(4) == 0) {
+			//-Gain human ears (If you have human face)
+			if ((player.earType != EARS_HUMAN && player.faceType == FACE_HUMAN) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!", false);
 				player.earType = EARS_HUMAN;
 				changes++;
@@ -4783,7 +4795,7 @@
 				changes++;
 				player.removeStatusAffect(StatusAffects.BlackNipples);
 			}
-			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
+			//Remove feathery hair (copy for equinum, canine peppers, Labova)
 			if (changes < changeLimit && player.hairType == HAIR_FEATHER && rand(4) == 0) {
 				//(long):
 				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
@@ -4799,9 +4811,17 @@
 				player.hairType = 0;
 				changes++;
 			}
-			//Rmemov goo hair
+			//Remove goo hair
 			if(changes < changeLimit && player.hairType == HAIR_GOO && rand(3) == 0) {
 				outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of hair sprouts from the skin of your scalp.  <b>Your hair is normal again!</b>");
+				//Turn hair growth on.
+				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+				player.hairType = 0;
+				changes++;
+			}
+			//Restart hair growth
+			if(flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou feel an itching sensation in your scalp as you realize the change. <b>Your hair is growing normally again!</b>");
 				//Turn hair growth on.
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 				player.hairType = 0;
@@ -4817,21 +4837,21 @@
 				changes++;
 			}
 			//Removes horns
-			if (changes < changeLimit && player.horns > 0 && rand(3) == 0) {
+			if (changes < changeLimit && player.horns > 0 && rand(5) == 0) {
 				player.horns = 0;
 				player.hornType = HORNS_NONE;
 				outputText("\n\nYour horns crumble, falling apart in large chunks until they flake away to nothing.", false);
 				changes++;
 			}
 			//Removes wings
-			if (player.wingType > WING_TYPE_NONE && rand(3) == 0 && changes < changeLimit) {
+			if (player.wingType > WING_TYPE_NONE && rand(5) == 0 && changes < changeLimit) {
 				if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine.  After a moment the pain passes, though your fin is gone!", false);
 				else outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!", false);
 				player.wingType = WING_TYPE_NONE;
 				changes++;
 			}
 			//Removes tail
-			if(player.tailType > TAIL_TYPE_NONE && rand(3) == 0 && changes < changeLimit) {
+			if(player.tailType > TAIL_TYPE_NONE && rand(5) == 0 && changes < changeLimit) {
 				outputText("\n\nYou feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  <b>You no longer have a tail!</b>", false);
 				player.tailType = TAIL_TYPE_NONE;
 				player.tailVenom = 0;
@@ -4940,7 +4960,7 @@
 				outputText("\n\nYou feel a strange tingling sensation in your ");
 				if (player.balls > 0) outputText("balls");
 				else outputText("groin");
-				outputText(" as you can feel the density reducing. <b>You have a feeling you're going to produce less cum now.</b>");
+				outputText(" as you can feel the density reducing. You have a feeling you're going to produce less cum now.");
 				player.cumMultiplier -= (1 + (rand(20) / 10));
 				if (player.cumMultiplier < 1) player.cumMultiplier = 1;
 				changes++;

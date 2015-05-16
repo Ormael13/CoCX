@@ -19,7 +19,6 @@ package classes.Scenes.Places
 		
 		//Main Ingnam menu.
 		public function menuIngnam():void {
-			kGAMECLASS.tooltipLoc = "Ingnam";
 			//Force autosave
 			if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
 			{
@@ -45,7 +44,7 @@ package classes.Scenes.Places
 			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu );
 			mainView.newGameButton.toolTipText = "Return to main menu.";
 			mainView.newGameButton.toolTipHeader = "Main Menu";
-			camp.setLevelButton();
+			if (camp.setLevelButton()) return;
 			hideUpDown();
 			menu();
 			addButton(0, "Explore", exploreIngnam);

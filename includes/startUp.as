@@ -30,14 +30,16 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
+	mainView.background.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+	mainView.sideBarBG.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
 	mainViewHack.startUpButtons();
 	kGAMECLASS.saves.loadPermObject();
-	mainViewHack.setDarkTheme();
+	mainViewHack.setTheme();
 	//Reset newgame buttons
-	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameFromScratch );
+	mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameFromScratch);
 	mainView.hideAllMenuButtons();
-	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
-	mainView.showMenuButton( MainView.MENU_DATA );
+	mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+	mainView.showMenuButton(MainView.MENU_DATA);
 	
 	mainView.newGameButton.toolTipText = "Start a new game.";
 	mainView.dataButton.toolTipHeader = "New Game";
@@ -77,15 +79,15 @@ public function mainMenu(e:MouseEvent = undefined):void
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
 	menu();
-	addButton(0, "Resume", resume);
-	addButton(1, "Settings", settingsScreenMain);
-	addButton(2, "Instructions", howToPlay);
-	addButton(3, "Achievements", achievements.achievementsScreen);
+	addButton(0, "Resume", resume, null, null, null, "Get back to gameplay?");
+	addButton(1, "Settings", settingsScreenMain, null, null, null, "Configure game settings and enable cheats.");
+	addButton(2, "Instructions", howToPlay, null, null, null, "How to play.  Starting tips.  And hotkeys for easy left-handed play...");
+	addButton(3, "Achievements", achievements.achievementsScreen, null, null, null, "View all achievements you have unlocked so far.");
 		
-	addButton(5, "Credits", creditsScreen);
-	addButton(6, "Image Credits", imageCreditsScreen);
-	addButton(7, "Debug Info", debugPane);
-	addButton(8, "Mod Thread", openURL, "http://forum.fenoxo.com/thread-10915.html");
+	addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
+	addButton(6, "Image Credits", imageCreditsScreen, null, null, null, "Check out who contributed to the image pack.");
+	addButton(7, "Debug Info", debugPane, null, null, null, "View debug information.");
+	addButton(8, "Mod Thread", openURL, "http://forum.fenoxo.com/thread-10915.html", null, null, "Check the official mod thread on Fenoxo's forum.");
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;
@@ -148,15 +150,40 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 
 }
 
-public function settingsScreen():void 
+public function settingsScreenMain():void
 {
-	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
-	mainView.showMenuButton( MainView.MENU_DATA );
-	clearOutput()
+	saves.savePermObject(false);
+	mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+	mainView.showMenuButton(MainView.MENU_DATA);
+	clearOutput();
 	displayHeader("Settings");
+	outputText("Here, you can adjust the gameplay and interface settings. Setting flags are saved in a special file so you don't have to re-adjust it each time you load a save file.");
+	menu();
+	addButton(0, "Gameplay", settingsScreenGameSettings);
+	addButton(1, "Interface", settingsScreenInterfaceSettings);
+	addButton(3, "Font Size", fontSettingsMenu);
+	addButton(4, "Controls", displayControls);
+
+	addButton(14, "Back", mainMenu);
+
+	if (flags[kFLAGS.HARDCORE_MODE] > 0)
+	{
+		debug = false;
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
+		flags[kFLAGS.HYPER_HAPPY] = 0;
+		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
+	}
+}
+
+//------------
+// GAMEPLAY
+//------------
+public function settingsScreenGameSettings():void {
+	clearOutput();
+	displayHeader("Gameplay Settings");
+	
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
 
-	outputText("<b><u>Gameplay Settings</u></b>\n");
 	if(debug)
 		outputText("Debug Mode: <font color=\"#008000\"><b>ON</b></font>\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
 	else
@@ -243,82 +270,6 @@ public function settingsScreen():void
 	else 
 		outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
 
-		
-	outputText("\n\n");
-	outputText("<b><u>Interface Settings</u></b>\n");
-	outputText("<b>The following flags are saved in a special savefile so you don't have to set it again each time you start up CoC.</b>");
-	outputText("\n\n");
-	if (flags[kFLAGS.USE_OLD_INTERFACE] >= 1)
-	{
-		outputText("Stats Pane Style: <b>Old</b>\n Old stats panel will be used.");
-	}
-	else 
-		outputText("Stats Pane Style: <b>New</b>\n New stats panel will be used.");
-		
-	outputText("\n\n");
-	
-	if (flags[kFLAGS.IMAGEPACK_OFF] == 0)
-	{
-		outputText("Image Pack: <font color=\"#008000\"><b>ON</b></font>\n Image pack is enabled.");
-	}
-	else
-		outputText("Image Pack: <font color=\"#800000\"><b>OFF</b></font>\n Image pack is disabled.");
-		
-	outputText("\n\n");
-	
-	if(flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
-		outputText("Sprites: <font color=\"#008000\"><b>ON</b></font>\n You like to look at pretty pictures.");
-	else
-		outputText("Sprites: <font color=\"#800000\"><b>OFF</b></font>\n There are only words. Nothing else.");
-
-	outputText("\n\n");
-	
-	if(flags[kFLAGS.USE_OLD_SPRITES] == 0)
-		outputText("Sprite Type: <b>New</b>\n 16-bit sprites will be used.");
-	else
-		outputText("Sprite Type: <b>Old</b>\n 8-bit sprites will be used.");
-
-	outputText("\n\n");
-	
-	if(flags[kFLAGS.USE_12_HOURS] > 0)
-		outputText("Time Format: <b>12 hours</b>\n Time will display in 12 hours format (AM/PM)");
-	else
-		outputText("Time Format: <b>24 hours</b>\n Time will display in 24 hours format.");
-		
-	outputText("\n\n");
-	
-	if(flags[kFLAGS.USE_METRICS] > 0)
-		outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
-	else
-		outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
-		
-	outputText("\n\n");
-}
-
-public function settingsScreenMain():void
-{
-	kGAMECLASS.saves.savePermObject(false);
-	settingsScreen();
-	menu();
-	addButton(0, "Gameplay", settingsScreenGameSettings);
-	addButton(1, "Interface", settingsScreenInterfaceSettings);
-	addButton(3, "Font Size", fontSettingsMenu);
-	addButton(4, "Controls", displayControls);
-	
-	//addButton(4, "Next", settingsScreenMainI);
-	addButton(14, "Back", mainMenu);
-
-	if (flags[kFLAGS.HARDCORE_MODE] > 0) 
-	{
-		debug = false;
-		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-		flags[kFLAGS.HYPER_HAPPY] = 0;
-		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
-	}
-}
-
-public function settingsScreenGameSettings():void {
-	settingsScreen();
 	menu();
 	addButton(0, "Toggle Debug", toggleDebug, null, null, null, "Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
 	if (player.str > 0) addButton(1, "Difficulty", difficultySelectionMenu, null, null, null, "Adjust the game difficulty to make it easier or harder.");
@@ -354,19 +305,233 @@ public function settingsScreenGameSettings():void {
 	addButton(14, "Back", settingsScreenMain);
 }
 
-public function settingsScreenInterfaceSettings():void {
-	settingsScreen();
+public function toggleDebug():void
+{
+	//toggle debug
+	if(debug)
+		debug = false;
+	else
+		debug = true;
+		
+	mainView.showMenuButton(MainView.MENU_DATA);
+	settingsScreenGameSettings();
+	return;
+}
+
+public function difficultySelectionMenu():void {
+	clearOutput();
+	outputText("You can choose a difficulty to set how hard battles will be.\n");
+	outputText("\n<b>Easy:</b> -50% damage, can ignore bad-ends.");
+	outputText("\n<b>Normal:</b> No stats changes.");
+	outputText("\n<b>Hard:</b> +25% HP, +15% damage.");
+	outputText("\n<b>Nightmare:</b> +50% HP, +30% damage.");
+	outputText("\n<b>Extreme:</b> +100% HP, +50% damage.");
+	//outputText("\n<b>Up to Eleven:</b> +150% HP, +75% damage. This is the most cruel difficulty of all.");
 	menu();
-	addButton(0, "Side Bar Style", toggleInterface, null, null, null, "Switch between old and new stats bars.");
-	addButton(1, "Toggle Images", toggleImages, null, null, null, "Enable or disable image pack.");
-	addButton(2, "Toggle Sprites", toggleSpritesFlag, null, null, null, "Toggles the pixelated sprites that appears in lower-left corner of the screen and also toggles the pictures if image-pack is found.");
-	addButton(3, "Old Sprites", toggleOldSprites, null, null, null, "Toggle between old and new sprites."); //Implemented at last!
-	addButton(4, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
-	addButton(5, "Background", cycleBackground, null, null, null, "Cycle through background styles and colors.");
-	addButton(6, "Dark Mode", toggleDarkBackground, null, null, null, "Toggle between black background, white text and normal background, black text.");
-	//addButton(6, "Quality", cycleQuality, null, null, null, "Set the graphical quality. \n\nCurrent quality: " + stage.quality);
+	addButton(0, "Easy", chooseDifficulty, -1);
+	addButton(1, "Normal", chooseDifficulty, 0);
+	addButton(2, "Hard", chooseDifficulty, 1);
+	addButton(3, "Nightmare", chooseDifficulty, 2);
+	addButton(4, "EXTREME", chooseDifficulty, 3);
+	//addButton(5, "Up to Eleven", chooseDifficulty, 4);
+	addButton(14, "Back", settingsScreenGameSettings);
+}
+
+public function chooseDifficulty(difficulty:int = 0):void {
+	if (difficulty <= -1) {
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
+		flags[kFLAGS.GAME_DIFFICULTY] = 0;
+	}
+	else {
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
+		flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
+	}
+	settingsScreenGameSettings();
+}
+
+//Not used anymore as there's difficulty settings.
+/*public function toggleEasyModeFlag():void
+{
+	//toggle easy mode
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0)
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
+	else
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
+	mainView.showMenuButton(MainView.MENU_DATA);
+	settingsScreenGameSettings();
+	return;
+}*/
+
+public function toggleSillyFlag():void
+{
+	//toggle silly mode
+	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
+		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = false;
+	else
+		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = true;
+	settingsScreenGameSettings();
+	return;
+
+}
+
+public function toggleStandards():void
+{
+	//toggle low standards
+	if(flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
+		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = false;
+	else
+		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = true;
+	settingsScreenGameSettings();
+	return;
+}
+
+public function toggleHyperHappy():void
+{
+	//toggle hyper happy
+	if(flags[kFLAGS.HYPER_HAPPY])
+		flags[kFLAGS.HYPER_HAPPY] = false;
+	else
+		flags[kFLAGS.HYPER_HAPPY] = true;
+	settingsScreenGameSettings();
+	return;
+}
+
+public function toggleSFW():void {
+	if (flags[kFLAGS.SFW_MODE] < 1) flags[kFLAGS.SFW_MODE] = 1;
+	else flags[kFLAGS.SFW_MODE] = 0;
+	settingsScreenGameSettings();
+}
+
+public function toggleWatersports():void {
+	if (flags[kFLAGS.WATERSPORTS_ENABLED] < 1) flags[kFLAGS.WATERSPORTS_ENABLED] = 1;
+	else flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
+	settingsScreenGameSettings();
+}
+
+public function toggleAutoLevel():void {
+	if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
+	else flags[kFLAGS.AUTO_LEVEL] = 0;
+	settingsScreenGameSettings();	
+}
+
+//Survival Mode
+public function enableSurvivalPrompt():void {
+	outputText("Are you sure you want to enable Survival Mode?\n\n", true)
+	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
+	doYesNo(enableSurvivalForReal, settingsScreenGameSettings);
+}
+
+public function enableSurvivalForReal():void {
+	outputText("Survival mode is now enabled.", true)
+	player.hunger = 80;
+	flags[kFLAGS.HUNGER_ENABLED] = 0.5;
+	doNext(settingsScreenGameSettings);
+}
+
+//Realistic Mode
+public function enableRealisticPrompt():void {
+	outputText("Are you sure you want to enable Realistic Mode?\n\n", true)
+	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
+	doYesNo(enableRealisticForReal, settingsScreenGameSettings);
+}
+
+public function enableRealisticForReal():void {
+	outputText("Realistic mode is now enabled.", true)
+	flags[kFLAGS.HUNGER_ENABLED] = 1;
+	doNext(settingsScreenGameSettings);
+}
+
+//------------
+// INTERFACE
+//------------
+public function settingsScreenInterfaceSettings():void {
+	clearOutput();
+	displayHeader("Interface Settings");
+	
+	/*if (flags[kFLAGS.USE_OLD_INTERFACE] >= 1)
+	{
+		outputText("Stats Pane Style: <b>Old</b>\n Old stats panel will be used.");
+	}
+	else 
+		outputText("Stats Pane Style: <b>New</b>\n New stats panel will be used.");
+		
+	outputText("\n\n");*/
+	
+	if (flags[kFLAGS.IMAGEPACK_OFF] == 0)
+	{
+		outputText("Image Pack: <font color=\"#008000\"><b>ON</b></font>\n Image pack is enabled.");
+	}
+	else
+		outputText("Image Pack: <font color=\"#800000\"><b>OFF</b></font>\n Image pack is disabled.");
+		
+	outputText("\n\n");
+	
+	if(flags[kFLAGS.SHOW_SPRITES_FLAG] == 0) {
+		outputText("Sprites: <font color=\"#008000\"><b>ON</b></font>\n You like to look at pretty pictures.");
+		outputText("\n\n");
+		if(flags[kFLAGS.SPRITE_STYLE] == 0)
+			outputText("Sprite Type: <b>New</b>\n 16-bit sprites will be used.");
+		else
+			outputText("Sprite Type: <b>Old</b>\n 8-bit sprites will be used.");
+	}
+	else {
+		outputText("Sprites: <font color=\"#800000\"><b>OFF</b></font>\n There are only words. Nothing else.");
+		outputText("\n\n\n");
+	}
+	
+	outputText("\n\n");
+	
+	if(flags[kFLAGS.USE_12_HOURS] > 0)
+		outputText("Time Format: <b>12 hours</b>\n Time will display in 12 hours format (AM/PM)");
+	else
+		outputText("Time Format: <b>24 hours</b>\n Time will display in 24 hours format.");
+		
+	outputText("\n\n");
+	
+	if(flags[kFLAGS.USE_METRICS] > 0)
+		outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
+	else
+		outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
+		
+	menu();
+	//addButton(0, "Side Bar Style", toggleInterface, null, null, null, "Toggle between old and new style.");
+	addButton(1, "Main BG", menuMainBackground, null, null, null, "Choose a background for main game interface.");
+	addButton(2, "Text BG", menuTextBackground, null, null, null, "Choose a background for text.");
+	addButton(3, "Sprites", menuSpriteSelect, null, null, null, "Turn sprites on/off and change sprite style preference.");
+
+	addButton(5, "Toggle Images", toggleImages, null, null, null, "Enable or disable image pack.");
+	addButton(6, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
 	addButton(7, "Measurements", toggleMeasurements, null, null, null, "Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 	addButton(14, "Back", settingsScreenMain);
+}
+
+public function menuMainBackground():void {
+	menu();
+	addButton(0, "Map (Default)", setMainBackground, 0);
+	addButton(1, "Parchment", setMainBackground, 1);
+	addButton(2, "Marble", setMainBackground, 2);
+	addButton(3, "Obsidian", setMainBackground, 3);
+	addButton(4, "Black", setMainBackground, 4);
+	
+	addButton(14, "Back", settingsScreenInterfaceSettings);
+}
+
+public function menuTextBackground():void {
+	menu();
+	addButton(0, "Normal", setTextBackground, 0);
+	addButton(1, "White", setTextBackground, 1);
+	addButton(2, "Tan", setTextBackground, 2);
+	
+	addButton(14, "Back", settingsScreenInterfaceSettings);
+}
+
+public function menuSpriteSelect():void {
+	menu();
+	addButton(0, "Off", toggleSpritesFlag, true, 0, null, "Turn off the sprites completely");
+	addButton(1, "Old", toggleSpritesFlag, false, 1, null, "Use the 8-bit sprites from older versions of CoC.");
+	addButton(2, "New", toggleSpritesFlag, false, 0, null, "Use the 16-bit sprites in current versions of CoC.");
+	
+	addButton(14, "Back", settingsScreenInterfaceSettings);
 }
 
 public function toggleInterface():void {
@@ -375,6 +540,30 @@ public function toggleInterface():void {
 	settingsScreenInterfaceSettings();
 }
 
+public function setMainBackground(type:int):void {
+	flags[kFLAGS.BACKGROUND_STYLE] = type;
+	mainView.background.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+	mainView.sideBarBG.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+	settingsScreenInterfaceSettings();
+}
+
+public function setTextBackground(type:int):void {
+	mainView.textBGWhite.visible = false;
+	mainView.textBGTan.visible = false;
+	if (type == 1) mainView.textBGWhite.visible = true;
+	if (type == 2) mainView.textBGTan.visible = true;
+	settingsScreenInterfaceSettings();
+}
+
+public function toggleSpritesFlag(enabled:Boolean, style:int):void
+{
+	flags[kFLAGS.SHOW_SPRITES_FLAG] = enabled;
+	flags[kFLAGS.SPRITE_STYLE] = style;
+	settingsScreenInterfaceSettings();
+	return;
+}
+
+//Needed for keys
 public function cycleBackground():void {
 	if (!mainView.textBGWhite.visible)
 	{
@@ -398,7 +587,7 @@ public function toggleDarkBackground():void {
 	else {
 		flags[kFLAGS.USE_DARK_BACKGROUND] = 0;
 	}
-	statScreenRefresh();
+	mainViewHack.refreshStats();
 }
 
 public function cycleQuality():void {
@@ -414,12 +603,6 @@ public function toggleImages():void {
 	settingsScreenInterfaceSettings();
 }
 
-public function toggleOldSprites():void {
-	if (flags[kFLAGS.USE_OLD_SPRITES] < 1) flags[kFLAGS.USE_OLD_SPRITES] = 1;
-	else flags[kFLAGS.USE_OLD_SPRITES] = 0;
-	settingsScreenInterfaceSettings();
-}
-
 public function toggleTimeFormat():void {
 	if (flags[kFLAGS.USE_12_HOURS] < 1) flags[kFLAGS.USE_12_HOURS] = 1;
 	else flags[kFLAGS.USE_12_HOURS] = 0;
@@ -432,26 +615,9 @@ public function toggleMeasurements():void {
 	settingsScreenInterfaceSettings();
 }
 
-public function difficultySelectionMenu():void {
-	outputText("You can choose a difficulty to set how hard battles will be.\n", true);
-	outputText("\n<b>Easy:</b> -50% damage, can ignore bad-ends.");
-	outputText("\n<b>Normal:</b> No stats changes.");
-	outputText("\n<b>Hard:</b> +25% HP, +15% damage.");
-	outputText("\n<b>Nightmare:</b> +50% HP, +30% damage.");
-	outputText("\n<b>Extreme:</b> +100% HP, +50% damage.");
-	//outputText("\n<b>Up to Eleven:</b> +150% HP, +75% damage. This is the most cruel difficulty of all.");
-	menu();
-	addButton(0, "Easy", chooseDifficulty, -1);
-	addButton(1, "Normal", chooseDifficulty, 0);
-	addButton(2, "Hard", chooseDifficulty, 1);
-	addButton(3, "Nightmare", chooseDifficulty, 2);
-	addButton(4, "EXTREME", chooseDifficulty, 3);
-	//addButton(5, "Up to Eleven", chooseDifficulty, 4);
-	addButton(14, "Back", settingsScreenGameSettings);
-}
-
-
-//FONT SETTINGS
+//------------
+// FONT SETTINGS
+//------------
 public function fontSettingsMenu():void {
 	menu();
 	simpleChoices("Smaller Font", decFontSize,
@@ -499,130 +665,9 @@ public function resetFontSize():void {
 	flags[kFLAGS.CUSTOM_FONT_SIZE] = 0;
 }
 
-//GAMEPLAY SETTINGS
-public function toggleStandards():void
-{
-	//toggle debug
-	if(flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
-		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = false;
-	else
-		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = true;
-	settingsScreenGameSettings();
-	return;
-}
-
-public function toggleHyperHappy():void
-{
-	//toggle debug
-	if(flags[kFLAGS.HYPER_HAPPY])
-		flags[kFLAGS.HYPER_HAPPY] = false;
-	else
-		flags[kFLAGS.HYPER_HAPPY] = true;
-	settingsScreenGameSettings();
-	return;
-}
-
-public function toggleDebug():void
-{
-	//toggle debug
-	if(debug)
-		debug = false;
-	else
-		debug = true;
-		
-	mainView.showMenuButton( MainView.MENU_DATA );
-	settingsScreenGameSettings();
-	return;
-}
-
-public function toggleEasyModeFlag():void
-{
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0)
-		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
-	else
-		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-	mainView.showMenuButton( MainView.MENU_DATA );
-	settingsScreenGameSettings();
-	return;
-}
-
-public function toggleSpritesFlag():void
-{
-	if(flags[kFLAGS.SHOW_SPRITES_FLAG])
-		flags[kFLAGS.SHOW_SPRITES_FLAG] = false;
-	else
-		flags[kFLAGS.SHOW_SPRITES_FLAG] = true;
-	settingsScreenInterfaceSettings();
-	return;
-}
-
-public function toggleSillyFlag():void
-{
-
-	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
-		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = false;
-	else
-		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = true;
-	settingsScreenGameSettings();
-	return;
-
-}
-
-private function chooseDifficulty(difficulty:int = 0):void {
-	if (difficulty <= -1) {
-		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
-		flags[kFLAGS.GAME_DIFFICULTY] = 0;
-	}
-	else {
-		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-		flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
-	}
-	settingsScreenGameSettings();
-}
-
-public function toggleSFW():void {
-	if (flags[kFLAGS.SFW_MODE] < 1) flags[kFLAGS.SFW_MODE] = 1;
-	else flags[kFLAGS.SFW_MODE] = 0;
-	settingsScreenGameSettings();
-}
-
-public function toggleWatersports():void {
-	if (flags[kFLAGS.WATERSPORTS_ENABLED] < 1) flags[kFLAGS.WATERSPORTS_ENABLED] = 1;
-	else flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
-	settingsScreenGameSettings();
-}
-
-public function toggleAutoLevel():void {
-	if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
-	else flags[kFLAGS.AUTO_LEVEL] = 0;
-	settingsScreenGameSettings();	
-}
-
-public function enableSurvivalPrompt():void {
-	outputText("Are you sure you want to enable Survival Mode?\n\n", true)
-	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
-	doYesNo(enableSurvivalForReal, settingsScreenGameSettings);
-}
-
-public function enableSurvivalForReal():void {
-	outputText("Survival mode is now enabled.", true)
-	player.hunger = 80;
-	flags[kFLAGS.HUNGER_ENABLED] = 0.5;
-	doNext(settingsScreenGameSettings);
-}
-
-public function enableRealisticPrompt():void {
-	outputText("Are you sure you want to enable Realistic Mode?\n\n", true)
-	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
-	doYesNo(enableRealisticForReal, settingsScreenGameSettings);
-}
-
-public function enableRealisticForReal():void {
-	outputText("Realistic mode is now enabled.", true)
-	flags[kFLAGS.HUNGER_ENABLED] = 1;
-	doNext(settingsScreenGameSettings);
-}
-
+//------------
+// CREDITS
+//------------
 public function creditsScreen():void {
 	clearOutput();
 	displayHeader("Credits");
@@ -645,6 +690,7 @@ public function creditsScreen():void {
 	outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TF)</li>");
 	outputText("<li> FeiFongWong (Prisoner Mod)</li>");
 	outputText("<li> Foxxling (Lizan Rogue)</li>");
+	outputText("<li> Kitteh6660 (Behemoth, Cabin, Ingnam, Pure Jojo sex scenes. Feel free to help me with quality control.)</li>");
 	outputText("</ul>");
 	outputText("<b>Game Mod Bug Reporting:</b>\n");
 	outputText("<ul>");
@@ -789,9 +835,13 @@ public function creditsScreen():void {
 	doNext(mainMenu);
 }
 
+//------------
+// IMAGE CREDITS
+//------------
 public function imageCreditsScreen():void
 {
-
+	clearOutput();
+	displayHeader("Image Credits");
 	if (images.getLoadedImageCount() > 0)
 	{
 		outputText(<![CDATA[
@@ -805,18 +855,21 @@ public function imageCreditsScreen():void
 * Ceraph Monster Image
 * Sand-Witch (and sandwich)
 
-		]]>, true, true);
+		]]>, false, true);
 	}
 	else
 	{
-		outputText("<b>No Image-Pack Found!</b>\n", true);
+		outputText("<b>No Image-Pack Found!</b>\n", false);
 	}
 	doNext(mainMenu);
 }
 
+//------------
+// INSTRUCTIONS
+//------------
 public function howToPlay():void {
 	clearOutput();
-	outputText("<font size=\"36\" face=\"Georgia\">Instructions</font>\n", false)
+	displayHeader("Settings");
 	outputText("<b><u>How To Play:</u></b>\nClick the buttons corresponding to the actions you want to take.  Your 'goal' is to obviously put an end to the demonic corruption around you, but do whatever the hell you want.  There is a story but sometimes it's fun to ignore it.\n\n", false);
 	outputText("<b>Exploration:</b>\nThe lake is a safe zone when you start the game.  It's a good place to explore, and Whitney's farm can offer some nice stat boosts to help get you on your feet. Once you feel comfortable, the forest is probably the next safest area, but beware of tentacle monsters.  The desert is the next toughest area, and the mountains offer further challenges.  There are more areas beyond that, but that's a good way to get started.  You'll uncover plenty of new 'places' exploring, which can be accessed from the <b>Places</b> menu.  You'll also find some interesting characters when you try to discover new explorable locations by choosing <b>Explore</b> twice.\n\n", false);
 	outputText("<b>Combat:</b>\nCombat is won by raising an opponent's lust to 100 or taking their HP to 0.  You lose if your enemy does the same to you.  Loss isn't game over, but some losses will make it harder in the future by lowering your stats.  Beware.  Don't be afraid to spam the <b>Run</b> option when you're in over your head.\n\n", false);

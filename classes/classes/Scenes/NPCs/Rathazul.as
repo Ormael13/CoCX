@@ -304,21 +304,20 @@ private function rathazulWorkOffer():Boolean {
 		doNext(camp.returnToCampUseOneHour);
 		return true;
 	}
-	kGAMECLASS.tooltipLoc = "Rathazul"
 	if(totalOffers > 0) {
 		outputText("Will you take him up on an offer or leave?", false);
 		//In camp has no time passage if left.
 		menu();
-		if (showArmorMenu) addButton(0, "Armor", rathazulArmorMenu);
-		if (debimbo > 0) addButton(1, "Debimbo", makeADeBimboDraft);
-		addButton(2,"Buy Dye",dyes);
-		if (lethiciteDefense != null) addButton(3, "Lethicite", lethiciteDefense);
-		addButton(4, "Purify", purify);
+		if (showArmorMenu) addButton(0, "Armor", rathazulArmorMenu, null, null, null, "Ask Rathazul to make an armour for you.");
+		if (debimbo > 0) addButton(1, "Debimbo", makeADeBimboDraft, null, null, null, "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		addButton(2,"Buy Dye",dyes, null, null, null, "Ask him to make a dye for you. \n\nCost: 50 Gems.");
+		if (lethiciteDefense != null) addButton(3, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
+		addButton(4, "Purify", purify, null, null, null, "Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
 		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
-			addButton(5, "Pure Potion", rathazulMakesPurifyPotion);
+			addButton(5, "Pure Potion", rathazulMakesPurifyPotion, null, null, null, "Ask him to brew a purification potion for Minerva.");
 		}
 		if (player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2)) {
-			addButton(6, "Pro Lactaid", rathazulMakesMilkPotion);
+			addButton(6, "Pro Lactaid", rathazulMakesMilkPotion, null, null, null, "Ask him to brew a special milk potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
 		}
 		if (player.hasItem(consumables.EQUINUM, 2) && player.hasItem(consumables.MINOBLO, 1) && player.gems >= 100) addButton(7, "Taurinum", makeTaurPotion);
 		if (reductos != null) addButton(8, "Reducto", reductos);

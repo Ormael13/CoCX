@@ -6,7 +6,8 @@ package classes
 	import classes.PerkType;
 	import classes.StatusAffectType;
 	import classes.internals.Utils;
-
+	import classes.Scenes.Places.TelAdre.UmasShop;
+	
 	public class Creature extends Utils
 	{
 
@@ -3557,6 +3558,52 @@ package classes
 		private function breastSize(val:Number):String
 		{
 			return Appearance.breastSize(val);
+		}
+		
+		public function damagePercent(display:Boolean = false, applyModifiers:Boolean = false):Number {
+			var mult:Number = 100;
+			var armorMod:Number = armorDef;
+			//--BASE--
+			//Toughness modifier.
+			if (!display) {
+				mult -= rand(tou) * 0.2;
+				if (mult < 80) mult = 80;
+			}
+			//Modify armor rating based on weapons.
+			if (applyModifiers) {
+				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR) armorMod = 0;
+				if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
+				if (game.player.findPerk(PerkLib.LungingAttacks) >= 0) armorMod /= 2;
+				if (armorMod < 0) armorMod = 0;
+			}
+			mult -= armorMod;
+			
+			//--PERKS--
+			//Take damage you masochist!
+			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
+				mult *= 0.8;
+				if (short == game.player.short) game.dynStats("lus", 2);
+			}
+			if (findPerk(PerkLib.ImmovableObject) >= 0 && tou >= 75) {
+				mult *= 0.9;
+			}
+			
+			//--STATUS AFFECTS--
+			//Black cat beer = 25% reduction!
+			if (statusAffectv1(StatusAffects.BlackCatBeer) > 0)
+				mult *= 0.75;
+			// Uma's Massage bonuses
+			var statIndex:int = findStatusAffect(StatusAffects.UmasMassage);
+			if (statIndex >= 0) {
+				if (statusAffect(statIndex).value1 == UmasShop.MASSAGE_RELAXATION) {
+					mult *= statusAffect(statIndex).value2;
+				}
+			}
+			//Round things off.
+			mult = Math.round(mult);
+			//Caps damage reduction at 80%.
+			if (mult < 20) mult = 20;
+			return mult;
 		}
 	}
 }

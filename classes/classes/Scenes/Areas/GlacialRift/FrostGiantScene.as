@@ -18,7 +18,6 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		
 		public function winAgainstGiant():void {
-			kGAMECLASS.tooltipLoc = "FrostGiant"
 			outputText("The giant staggers and falls down on his knees. You wonder what you should do next.\n\n", true);
 			if (player.weaponName == "fists" && player.armor.name == "nothing" && player.shieldName == "nothing") awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
 			menu();

@@ -195,10 +195,6 @@ private function intoTheDemonPit(sacrifice:Boolean = true):void {
 	outputText("\n\nYou look around, puzzled.  Nothing seems to break the ever-present, nightly silence.  Then, as if to tease you, the cackling is heard again, this time behind you.  You turn around and eventually spot its origin: a crowd of silhouettes, all rushing in your direction, tittering and giggling like a bunch of naughty kids about to play a dirty trick.  As they get closer and closer to the pit, their colorful bodies and alien features are given a shining outline by the bloody moon; it seems that they are all full demons, sporting horns, claws, tails and wings.  Most of them are naked, shamelessly displaying gigantic erections or cavernous pussies as well as watermelon-sized, milk-dribbling tits.  Some of them are wearing leather straps that barely cover their taboo parts, as if to mock all notions of human prudishness.  You even spot an imp wearing a weird greenish vine like a belt; you stare at him for a few seconds, knowing something is out of place, then realize the belt is actually the imp's very flexible tentacle dick.");
 	outputText("\n\nSoon, they are all gathered in the pit, surrounding you completely and eyeing you with gleeful lust; whatever plans these demons have in mind, they must be dirty.");
 	outputText("\n\nA tall purple demoness walks up to you as you stand there");
-	if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
-	}
 	if(sacrifice) outputText(", tangled in your restraints");
 	outputText(".  She leans down and coos, ");
 	//[if first time]
@@ -219,6 +215,10 @@ private function intoTheDemonPit(sacrifice:Boolean = true):void {
 		//[else]
 		else outputText("\n\nThe chains binding you aren't very tight or of the finest craftsmanship, but they're sufficient to hold you more or less in place; though you can probably twist to avoid a few attacks, you won't be able to make any of your own if you decide to resist... at least, not physically.");
 		outputText("  You're once again feeling regret over letting the villagers hold your equipment, but there's nothing for it now.");
+	}
+	if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
+		outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
 	}
 	flags[kFLAGS.TIMES_IN_DEMON_PIT]++;
 	flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] = 0;

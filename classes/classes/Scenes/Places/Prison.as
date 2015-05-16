@@ -1126,11 +1126,29 @@ package classes.Scenes.Places
 			showStats();
 			clearOutput();
 			outputText(images.showImage("prison-cell"), false);
-			outputText("You are in a dimly lit but spacious cell. However, the size of the room is little comfort to you as it is filled with all manner of restraints and torture devices. Eylets, metal rings, bars and hooks are scattered around the ceiling, floor and walls providing a near endless variety of ways to restrain a person. A wooden stockade is installed in the center of the room, a whipping post and a rack stand in one corner, and in another there is a large and ominous floor to ceiling stone box. "); 
-			if (flags[kFLAGS.PRISON_PUNISHMENT] == 4) {
-				outputText("\n\n<b>You are confined to the training crate as part of your lesson.</b>");
+			switch(flags[kFLAGS.PRISON_PUNISHMENT]) {
+				case 0: //Default cell
+					outputText("You are in a dimly lit but spacious cell. However, the size of the room is little comfort to you as it is filled with all manner of restraints and torture devices. Eylets, metal rings, bars and hooks are scattered around the ceiling, floor and walls providing a near endless variety of ways to restrain a person. A wooden stockade is installed in the center of the room, a whipping post and a rack stand in one corner, and in another there is a large and ominous floor to ceiling stone box. \n\n");
+					break;
+				case 1: //Stockades
+					outputText("You are in a dimly lit but spacious cell. However, the size of the room is little comfort to you as it is filled with all manner of restraints and torture devices. Eyelets, metal rings, bars and hooks are scattered around the ceiling, floor and walls providing a near endless variety of ways to restrain a person. A whipping post and a rack stand in one corner, and in another there is a large and ominous floor to ceiling stone box. \n\n");
+					outputText("You are confined to the stockades as part of your lesson. A hollow plug has been forced into your ass, curving upward in a hook-like shape and attached to the ceiling. You are bound in such a way that should your [legs] go slack even the slightest bit, the entire weight of your torso would be suspended by your asshole. \n\n");
+					break;
+				case 2: //Confinement
+					outputText("You are confined in a dark stone box. You can't move more than an inch in either direction, but you can stand up or sit down. A collection of monstrous dildos extend from the horizontal bar directly underneath you, doing their best to demoralize you. A small slit in the panel allows you to see the cell. \n\n");
+					break;
+				case 3: //BJ Trainer
+					outputText("You are in a dimly lit but spacious cell. However, the size of the room is little comfort to you as it is filled with all manner of restraints and torture devices. Eylets, metal rings, bars and hooks are scattered around the ceiling, floor and walls providing a near endless variety of ways to restrain a person. A wooden stockade is installed in the center of the room, a whipping post and a rack stand in one corner, and in another there is a large and ominous floor to ceiling stone box. \n\n");
+					punishments.prisonCaptorPunishmentBJTrainerDescribeStatus(true);
+					break;
+				case 4: //Training Crate
+					outputText("(Placeholder) You are confined to the training crate as part of your lesson.");
+					break;
+				default:
+					outputText("You are in a dimly lit but spacious cell. However, the size of the room is little comfort to you as it is filled with all manner of restraints and torture devices. Eylets, metal rings, bars and hooks are scattered around the ceiling, floor and walls providing a near endless variety of ways to restrain a person. A wooden stockade is installed in the center of the room, a whipping post and a rack stand in one corner, and in another there is a large and ominous floor to ceiling stone box. \n\n");
 			}
-			outputText("Mercifully, fresh air and sunlight can enter the room through narrow slit windows opposite the door.");
+			if (model.time.hours >= 6 && model.time.hours <= 20) outputText("Mercifully, fresh air and sunlight can enter the room through narrow slit windows opposite the door.");
+			else outputText("You can see the blood-red moon contrasting against black sky through the narrow slit windows.");
 			prisonRestraintText();
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0) {
 				outputText("\n\nThe room is ",false);
@@ -1249,7 +1267,7 @@ package classes.Scenes.Places
 			mainView.newGameButton.toolTipText = "Return to main menu.";
 			mainView.newGameButton.toolTipHeader = "Main Menu";
 			//Level up
-			camp.setLevelButton();
+			if (camp.setLevelButton()) return;
 			mainView.statsView.hideLevelUp();
 			//Set menus
 			menu();
@@ -1272,14 +1290,11 @@ package classes.Scenes.Places
 			}
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {
-				outputText("\n\n<b>You are confined to the stockades as part of your lesson. A hollow plug has been forced into your ass, curving upward in a hook-like shape and attached to the ceiling. You are bound in such a way that should your [legs] go slack even the slightest bit, the entire weight of your torso would be suspended by your asshole. </b>");
 				menu();
 				addButton(5, "Call Out", punishments.prisonCaptorPunishmentStockadesCallout, null, null, null, "Call for someone to get to you.");
 				addButton(7, "Break Stockade", punishments.prisonCaptorPunishmentStockadeBreak, null, null, null, "Attempt to break the stockade.\n\n" + prisonWillCostDescript(10));
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 2) {
-				clearOutput();
-				outputText("You are confined in a dark stone box. You can't move more than an inch in either direction, but you can stand up or sit down. A collection of monstrous dildos extend from the horizontal bar directly underneath you, doing their best to demoralize you. A small slit in the panel allows you to see the cell. ");
 				punishments.prisonCaptorPunishmentConfinementDescribeStatus();
 				menu();
 				addButton(5, "Stand Up", punishments.prisonCaptorPunishmentConfinementStandup, null, null, null, "Try to stand up while inside the box.");
@@ -1289,12 +1304,9 @@ package classes.Scenes.Places
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 3) {
 				outputText("\n\n");
-				punishments.prisonCaptorPunishmentBJTrainerDescribeStatus(true);
-				outputText("\n\n");
 				addButton(5, "Suck Dildo", punishments.prisonCaptorPunishmentBJTrainerSuck, null, null, null, "Suck on the dildo and try to fill the basin to get the key.");
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 4) {
-				outputText("\n\n<b>You are confined to the stockades as part of your lesson.</b>");
 				menu();
 				addButton(0, "Behave", trainingPet.prisonCaptorPetTrainingCrateBehave);
 				if (player.will >= prisonWillCost(10)) addButton(1, "Misbehave", trainingPet.prisonCaptorPetTrainingCrateMisbehave, null, null, null, prisonWillCostDescript(10));

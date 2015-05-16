@@ -42,20 +42,20 @@ package classes.Scenes
 			}*/
 			hideMenus();
 			menu();
-			addButton(0, "Explore", tryDiscover);
-			if (player.exploredDesert > 0) addButton(1, "Desert", kGAMECLASS.desert.exploreDesert);
-			if (player.exploredForest > 0) addButton(2, "Forest", kGAMECLASS.forest.exploreForest);
-			if (player.exploredLake > 0) addButton(3, "Lake", kGAMECLASS.lake.exploreLake);
+			addButton(0, "Explore", tryDiscover, null, null, null, "Explore to find new regions and visit any discovered regions.");
+			if (player.exploredDesert > 0) addButton(1, "Desert", kGAMECLASS.desert.exploreDesert, null, null, null, "Visit the dry desert. \n\nRecommended level: 2" + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
+			if (player.exploredForest > 0) addButton(2, "Forest", kGAMECLASS.forest.exploreForest, null, null, null, "Visit the lush forest. \n\nRecommended level: 1" + (player.level < 6 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + player.exploredForest : ""));
+			if (player.exploredLake > 0) addButton(3, "Lake", kGAMECLASS.lake.exploreLake, null, null, null, "Visit the lake and explore the beach. \n\nRecommended level: 1" + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
 			
-			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(5, "Plains", kGAMECLASS.plains.explorePlains);
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp);
-			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(7, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods);
-			if (player.exploredMountain > 0) addButton(8, "Mountain", kGAMECLASS.mountain.exploreMountain);
+			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(5, "Plains", kGAMECLASS.plains.explorePlains, null, null, null, "Visit the plains. \n\nRecommended level: 10" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp, null, null, null, "Visit the wet swamplands. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
+			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(7, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods, null, null, null, "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.statusAffectv1(StatusAffects.ExploredDeepwoods) : ""));
+			if (player.exploredMountain > 0) addButton(8, "Mountain", kGAMECLASS.mountain.exploreMountain, null, null, null, "Visit the mountain. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
 
-			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(10, "Bog", kGAMECLASS.bog.exploreBog);
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(11, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain);
-			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(12, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift);
-			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(13, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag);
+			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(10, "Bog", kGAMECLASS.bog.exploreBog, null, null, null, "Visit the dark bog. \n\nRecommended level: 14" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(11, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain, null, null, null, "Visit the high mountains where basilisks and harpies are found. \n\nRecommended level: 10" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(12, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift, null, null, null, "Visit the chilly glacial rift. \n\nRecommended level: 16" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
+			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(13, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag, null, null, null, "Visit the infernal volcanic crag. \n\nRecommended level: 20" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
 			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
 			//addButton(4, "Next", explorePageII);
 			addButton(14, "Back", playerMenu);
@@ -240,8 +240,8 @@ package classes.Scenes
 					return;
 				}
 				//EXPLOOOOOOORE
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && rand(3) <= 0) {
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] = 1;
+				if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && rand(3) <= 0) {
+					flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
 					player.explored++;
 					clearOutput();
 					outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n", false);
@@ -251,7 +251,7 @@ package classes.Scenes
 					return;
 				}
 				//Discover Glacial Rift!
-				if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0 && rand(4) <= 0 && (player.level >= 10 || model.time.days >= 90) ) {
+				if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && rand(4) <= 0 && (player.level >= 10 || model.time.days >= 90) ) {
 					flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
 					player.explored++;
 					clearOutput();
@@ -261,7 +261,7 @@ package classes.Scenes
 					return;
 				}
 				//Discover Volcanic Crag!
-				if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0 && rand(4) <= 0 && (player.level >= 15 || model.time.days >= 90) ) {
+				if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && rand(4) <= 0 && (player.level >= 15 || model.time.days >= 90) ) {
 					flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
 					player.explored++;
 					clearOutput();

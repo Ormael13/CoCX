@@ -2023,8 +2023,18 @@ public function interactWithMarbleAtCamp():void {
 	}
 	//appearnace/info - always there
 	//Sex
-	if(player.lust >= 33) sexEvent = marbleSexExpanded;
-	choices("Appearance",marbleAppearance,
+	if (player.lust >= 33) sexEvent = marbleSexExpanded;
+	menu();
+	addButton(0, "Appearance", marbleAppearance);
+	addButton(1, "Talk", marbleTalkOverhaul);
+	addButton(2, "Present", gatherEvent);
+	addButton(3, "Give Item", canGiveItem() ? giveItem : null);
+	addButton(4, "Get Milk", milkEvent);
+	addButton(5, "Release", sexEvent, null, null, null, "Get with marble for a quick cuddle and some sex.");
+	addButton(6, "Playtime", playtime);
+	addButton(7, "Break Up", breakUpWithMarble);
+	addButton(8, goEventString, marbleGoEvent);
+	/*choices("Appearance",marbleAppearance,
 			"Talk",marbleTalkOverhaul,
 			"Present",gatherEvent,
 			"Give Item", (canGiveItem() ? giveItem : null),
@@ -2033,7 +2043,7 @@ public function interactWithMarbleAtCamp():void {
 			"Playtime",playtime,
 			"Break Up",breakUpWithMarble,
 			goEventString,marbleGoEvent,
-			"", null);
+			"", null);*/
 	addButton(14, "Back", camp.campLoversMenu);
 }
 

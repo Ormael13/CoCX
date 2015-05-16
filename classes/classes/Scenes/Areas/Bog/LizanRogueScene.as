@@ -12,7 +12,6 @@ package classes.Scenes.Areas.Bog
 		}
 		
 		public function lizanIntro():void {
-			kGAMECLASS.tooltipLoc = "LizanRogue";
 			clearOutput();
 			var lizan:LizanRogue = new LizanRogue();
 			if (player.cor > 30) {

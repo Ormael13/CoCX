@@ -248,7 +248,6 @@ public function sophieDaughterDebimboUpdate():void {
 
 //BimboBody Sophie Follower, Main Screen
 public function followerSophieMainScreen():void {
-	kGAMECLASS.tooltipLoc = "Sophie";
 	clearOutput();
 	sophieBimbo.sophieSprite();
 	//Sophie is in season
@@ -267,7 +266,7 @@ public function followerSophieMainScreen():void {
 		//[Special]
 		menu();
 		addButton(0,"Appearance",sophieAppearance);
-		if(player.hasCock()) {
+		if(player.hasCock() && flags[kFLAGS.SFW_MODE] <= 0) {
 			if(player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0) {
 				addButton(1,"Vaginal",fuckFollowerSophie);
 				addButton(2,"Special",sophieSpecial);

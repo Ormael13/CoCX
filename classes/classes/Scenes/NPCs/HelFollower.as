@@ -478,7 +478,6 @@ public function angryHelAndIzzyCampHelHereFirst():void {
 
 //Introduction -- Followers -> Helia
 public function heliaFollowerMenu(display:Boolean = true):void {
-	kGAMECLASS.tooltipLoc = "Helia";
 	if(display) 
 	{
 		clearOutput();

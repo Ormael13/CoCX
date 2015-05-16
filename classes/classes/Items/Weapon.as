@@ -31,9 +31,19 @@ package classes.Items
 		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
+			if (perk == "Large" && game.player.shield != ShieldLib.NOTHING) {
+				outputText("Because the weapon requires the use of two hands, you have unequipped your shield. ");
+			}
+		}
+		
+		override public function canUse():Boolean {
+			return true;
 		}
 		
 		public function playerEquip():Weapon { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+			if (perk == "Large" && game.player.shield != ShieldLib.NOTHING) {
+				game.inventory.unequipShield();
+			}
 			return this;
 		}
 		

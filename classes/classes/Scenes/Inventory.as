@@ -541,7 +541,8 @@ package classes.Scenes
 		}
 		
 		public function manageEquipment():void {
-			outputText("Which would you like to unequip?", true)
+			clearOutput();
+			outputText("Which would you like to unequip?\n\n");
 			menu();
 			if (player.weapon != WeaponLib.FISTS)
 			{
@@ -572,11 +573,9 @@ package classes.Scenes
 		}
 		//Unequip!
 		private function unequipWeapon():void {
-			clearOutput();
 			takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
 		}
 		public function unequipArmor():void {
-			clearOutput();
 			if (player.armorName != "goo armor") takeItem(player.setArmor(ArmorLib.NOTHING), inventoryMenu); 
 			else { //Valeria belongs in the camp, not in your inventory!
 				player.armor.removeText();
@@ -585,19 +584,15 @@ package classes.Scenes
 			}
 		}
 		public function unequipUpperwear():void {
-			clearOutput();
 			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR), inventoryMenu);
 		}
 		public function unequipLowerwear():void {
-			clearOutput();
 			takeItem(player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR), inventoryMenu);
 		}
 		public function unequipJewel():void {
-			clearOutput();
 			takeItem(player.setJewelry(JewelryLib.NOTHING), inventoryMenu);
 		}
 		public function unequipShield():void {
-			clearOutput();
 			takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
 		}
 

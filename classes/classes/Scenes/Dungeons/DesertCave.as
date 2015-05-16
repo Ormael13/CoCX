@@ -888,8 +888,8 @@ package classes.Scenes.Dungeons
 				outputText("\n\nSo if you avoid a facial she'll steal some of your semen production, but if you take it, she'll make you MORE virile.  While you're mulling it over, she's still grinding on you, distracting you with flashes of salacious delight.  The clock is ticking, and if you don't pick soon, she might pick for you.");
 				//[Facial] [No Facial]
 				dynStats("lus=", player.maxLust(), "resisted", false);
-				addButton(0,"Facial",tooBigCumWitchLossFacial);
-				addButton(1,"No Facial",tooBigCumWitchLossNoFacial);
+				addButton(0,"Facial",tooBigCumWitchLossFacial, null, null, null, "Allow the Cum Witch to cum all over your face and increase your potency.");
+				addButton(1,"No Facial",tooBigCumWitchLossNoFacial, null, null, null, "Don't allow the Cum Witch to perform facial. This will reduce your cum production multiplier by 25%.");
 			}
 			else {
 				//*Dick Fits Male Loss Scene
@@ -1095,13 +1095,13 @@ package classes.Scenes.Dungeons
 				//*Male "Too Big" Victory Sex
 				if(player.biggestCockArea() > monster.vaginalCapacity()) addButton(0,"Too Big Fuck",maleTooBigVictorySex);
 				//*Male Victory Sex
-				if(player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1,"Fuck Her",menFuckUpSomeCumWitch);
+				if(player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1,"Fuck Her",menFuckUpSomeCumWitch, null, null, null, "That pussy looks inviting. Fuck the Cum Witch's cunt with your penis.");
 			}
 			//Tentacle Victory Gangbang
 			//3+ Tentas
-			if(player.tentacleCocks() >= 3) addButton(2,"Tentacles",tentacleVictoryGangbangCumWitch);
+			if(player.tentacleCocks() >= 3) addButton(2,"Tentacles",tentacleVictoryGangbangCumWitch, null, null, null, "Fuck the Cum Witch with your tentacle cocks.");
 			//Female Victory Sex
-			if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex);
+			if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex, null, null, null, "Ride the Cum Witch's cock until she cums!");
 			
 			if(getGame().inCombat) {
 				if(monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
@@ -1767,7 +1767,7 @@ package classes.Scenes.Dungeons
 				//(Display Options: [Fuck Her] [Door] [Leave])
 				menu();
 				addButton(0,"North Door",openZeDoorToParadize);
-				addButton(1,"Fuck Her",fuckDatSphinx);
+				addButton(1,"Fuck Her",fuckDatSphinx, null, null, null, "Use Sanura to get off.");
 				addButton(4,"Leave",exitDungeon);
 				
 			}
@@ -1781,8 +1781,8 @@ package classes.Scenes.Dungeons
 			//(Display Options: [Submit] [Fuck it, Attack])
 			//(Submit goes to appropriate loss scene)
 			menu();
-			addButton(0,"Submit",sphinxSubmissionOptions);
-			addButton(1,"Uh, ATTACK!",fuckItAttack);
+			addButton(0,"Submit",sphinxSubmissionOptions, null, null, null, "Submit to the sphinx. A deal is definitely a deal, after all.");
+			addButton(1,"Uh, ATTACK!",fuckItAttack, null, null, null, "Screw this! You may have lost the riddle but you'll NOT let Sanura have her way with you.");
 			
 		}
 
@@ -2101,27 +2101,27 @@ package classes.Scenes.Dungeons
 			startCombat(new SandMother(),true);
 			getGame().inCombat = false;
 			menu();
-			if(flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) addButton(0,"StopAttacking",leaveAloneSendLackeysToggle);
-			else addButton(0,"StartAttacking",leaveAloneSendLackeysToggle);
-			addButton(1,"SandMothers",askHowSandMothersAreChosen);
-			addButton(2,"Cum Witches",discussCumWitches);
-			addButton(3,"CovenStatus",currentStateOfInterwebs);
-			addButton(4,"History",sandWitchHistory);
+			if(flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) addButton(0,"StopAttacking",leaveAloneSendLackeysToggle, null, null, null, "You've had enough with the Sand Witches. They should leave you alone.", "Talk: Stop Attacking");
+			else addButton(0,"StartAttacking",leaveAloneSendLackeysToggle, null, null, null, "Tell the Sand Mother that you want to encounter the Sand Witches again.", "Talk: Start Attacking");
+			addButton(1,"SandMothers",askHowSandMothersAreChosen, null, null, null, "Ask the Sand Mother about how she's chosen.", "Talk: Sand Mothers");
+			addButton(2,"Cum Witches",discussCumWitches, null, null, null, "Ask the Sand Mother about the Cum Witches.", "Talk: Cum Witches");
+			addButton(3,"CovenStatus",currentStateOfInterwebs, null, null, null, "Ask the Sand Mother about the status of the coven.", "Talk: Coven Status");
+			addButton(4,"History",sandWitchHistory, null, null, null, "Ask the Sand Mother about the history of the Sand Witches.", "Talk: History");
 			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 5) {
-				addButton(5,"Get LaBova",getLaBova);
-				addButton(6,"Get Lactaid",getLactaidFromWitches);
+				addButton(5,"Get LaBova",getLaBova, null, null, null, consumables.LABOVA_.description);
+				addButton(6,"Get Lactaid",getLactaidFromWitches, null, null, null, consumables.LACTAID.description);
 			}
 			if((flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) || (flags[kFLAGS.MET_MILK_SLAVE] > 0 && flags[kFLAGS.MILK_NAME] is Number))
-				addButton(7,"Free Slaves",slavesDiscussion);
-			if(player.lust >= 33) addButton(8,"Sex",sexWithFriendlySandMother);
+				addButton(7,"Free Slaves",slavesDiscussion, null, null, null, "Request the Sand Mother to release a slave.");
+			if(player.lust >= 33) addButton(8,"Sex",sexWithFriendlySandMother, null, null, null, "Have some sexy time with the Sand Mother.");
 			
 			addButton(14,"Leave",playerMenu);
 		}
 
 		public function slavesDiscussion():void {
 			menu();
-			if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(0,"Essrayle",kGAMECLASS.forest.essrayle.askMotherToReleaseEssy);
-			if(flags[kFLAGS.MET_MILK_SLAVE] > 0 && flags[kFLAGS.MILK_NAME] is Number) addButton(1,"Milk-Slave",freeSlaves);
+			if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(0,"Essrayle",kGAMECLASS.forest.essrayle.askMotherToReleaseEssy, null, null, null, "Request the Sand Mother to release Essrayle.");
+			if(flags[kFLAGS.MET_MILK_SLAVE] > 0 && flags[kFLAGS.MILK_NAME] is Number) addButton(1,"Milk-Slave",freeSlaves, null, null, null, "Request the Sand Mother to release the milk slave you've found in the bathroom.");
 		}
 		//Getting a Milk Slut, Purity Style
 		//{Having beat the Sammiches, and made Momma Witch your friend, add a button labeled [Free Slaves] to Momma's menu. Needs to have met Milk Slut.}
@@ -2152,7 +2152,7 @@ package classes.Scenes.Dungeons
 			menu();
 			addButton(0,"Yes",yesDemandMilkRelease);
 			addButton(1,"No",noDemandMilkRelease);
-			addButton(2,"Gimme Her",gimmeDatDeliciousMilkWaifuINeedMoreWaifusCauseTheTwoCowslutsWerentEnoughForMyInsatiableLacticLustandDesire);
+			addButton(2,"Gimme Her",gimmeDatDeliciousMilkWaifuINeedMoreWaifusCauseTheTwoCowslutsWerentEnoughForMyInsatiableLacticLustandDesire, null, null, null, "Ask the Sand Mother if she's willing hand over the milk slave to you.");
 		}
 
 		//Yes (No Change)
@@ -2184,8 +2184,8 @@ package classes.Scenes.Dungeons
 			}
 			menu();
 			//[2 Expensive][Buy Her]
-			addButton(0,"2 Expensive",TwoExpensive4Me);
-			if(player.gems >= 2000) addButton(1,"Buy Her",BuyHer);
+			addButton(0,"2 Expensive",TwoExpensive4Me, null, null, null, "She's too expensive! Turn down the offer.", "Too Expensive");
+			if(player.gems >= 2000) addButton(1,"Buy Her",BuyHer, null, null, null, "Buy the Milk Slave for 2000 gems?");
 		}
 
 		private function TwoExpensive4Me():void {
@@ -2226,10 +2226,10 @@ package classes.Scenes.Dungeons
 		public function sexWithFriendlySandMother():void {
 			menu();
 			//friendly cunt fuck:
-			if(player.hasVagina() && player.lust >= 33) addButton(0,"GetMilkFill",lesboMilkFilling);
+			if (player.hasVagina() && player.lust >= 33) addButton(0, "GetMilkFill", lesboMilkFilling, null, null, null, "Get into female sex with the Sand Mother and get your vagina stuffed with milk!", "Get Milk Fill");
 			//dick fucking, must fit!
 			if(player.hasCock() && player.lust >= 33) {
-				if(player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1,"Fuck Her",friendlySandMotherFuck);
+				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1, "Fuck Her", friendlySandMotherFuck, null, null, null, "Fuck the Sand Mother's cunt with your penis.");
 			}
 			addButton(4,"Back",sandWitchMotherFriendlyMenu);
 		}
@@ -2242,20 +2242,20 @@ package classes.Scenes.Dungeons
 			}
 			menu();
 			//toggle withc attacking
-			if(flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) addButton(0,"StopAttacking",unfriendlyWitchToggle);
-			else addButton(0,"StartAttacking",unfriendlyWitchToggle);
+			if(flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) addButton(0,"StopAttacking",unfriendlyWitchToggle, null, null, null, "You've had enough with the Sand Witches. They should leave you alone.", "Talk: Stop Attacking");
+			else addButton(0,"StartAttacking",unfriendlyWitchToggle, null, null, null, "Tell the Sand Mother that you want to encounter the Sand Witches again.", "Talk: Start Attacking");
 			if(player.lust >= 33) {
-				if(player.hasVagina()) addButton(1,"Scissor",scissorAndDrink);
-				if(player.tentacleCocks() >= 5) addButton(2,"TentacleBang",tentacleGangBang);
+				if(player.hasVagina()) addButton(1,"Scissor",scissorAndDrink, null, null, null, "Get into some female-on-female action and drink some milk.");
+				if(player.tentacleCocks() >= 5) addButton(2,"TentacleBang",tentacleGangBang, null, null, null, "Fuck the Sand Mother with your tentacle cocks.", "Tentacle Bang");
 				if(player.hasCock()) {
-					if(player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(3,"Fuck Her",fuckTheSandMothersCunt);
+					if(player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(3,"Fuck Her",fuckTheSandMothersCunt, "Fuck the Sand Mother's cunt with your cock.");
 				}
 			}
 			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 5) {
-				addButton(5,"Get LaBova",takeLaBovaOrLactaid, false);
-				addButton(6,"Get Lactaid",takeLaBovaOrLactaid);
+				addButton(5,"Get LaBova",takeLaBovaOrLactaid, false, null, null, consumables.LABOVA_.description);
+				addButton(6,"Get Lactaid",takeLaBovaOrLactaid, true, null, null, consumables.LACTAID.description);
 			}
-			if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(7,"Essrayle",kGAMECLASS.forest.essrayle.askMotherToReleaseEssy);
+			if(flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) addButton(7,"Essrayle",kGAMECLASS.forest.essrayle.askMotherToReleaseEssy, null, null, null, "Request the Sand Mother to release Essrayle.");
 			addButton(14,"Leave",playerMenu);
 		}
 
@@ -2294,8 +2294,8 @@ package classes.Scenes.Dungeons
 				
 				//[Explain] [Fight]
 				menu();
-				addButton(0,"Explain",explainYourSelfToZeSandBitch);
-				addButton(1,"Fight",fightTheSandWitch);
+				addButton(0,"Explain",explainYourSelfToZeSandBitch, null, null, null, "Try to explain the Sand Mother that you're not a demon.");
+				addButton(1,"Fight",fightTheSandWitch, null, null, null, "Fuck this. Fight the Sand Mother!");
 			}
 		}
 
@@ -2350,10 +2350,10 @@ package classes.Scenes.Dungeons
 			cleanupAfterCombat();
 			//[Fuck Her Cunt] [ScissorAnDrink] [Talk Her Down]
 			menu();
-			addButton(0,"TalkHerDown",talkDownTheMother);
-			if(player.hasVagina()) addButton(1,"Scissor",scissorAndDrink);
-			if(player.hasCock() && player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(2,"Fuck Her",fuckTheSandMothersCunt);
-			if(player.tentacleCocks() >= 5) addButton(3,"TentacleFuck",tentacleGangBang);
+			addButton(0,"TalkHerDown",talkDownTheMother, null, null, null, "Talk the Sand Mother down. Convince her that you're not a demon.", "Talk Her Down");
+			if(player.hasVagina()) addButton(1,"Scissor",scissorAndDrink, null, null, null, "Get into female sex and drink your fill.");
+			if(player.hasCock() && player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(2,"Fuck Her",fuckTheSandMothersCunt, null, null, null, "Fuck the Sand Mother's cunt with your cock.");
+			if(player.tentacleCocks() >= 5) addButton(3,"TentacleFuck",tentacleGangBang, null, null, null, "Fuck the Sand Mother with your tentacle cocks.", "Tentacle Fuck");
 		}
 		public function loseToTheSandMother():void {
 			clearOutput();
@@ -2635,6 +2635,9 @@ package classes.Scenes.Dungeons
 			else outputText("folds");
 			outputText(" thickens slightly, and the heaving balls below jiggle with liquid weight, swelling larger against you.  They grow heavier and heavier, until they slosh with audible, barely contained need, each as large as one of your butt-cheeks and three times as soft.");
 			
+			if (!player.hasVagina()) player.buttChange(12, true, true);
+			else player.cuntChange(12, true, true);
+			
 			outputText("\n\nThe swollen cockhead inside you widens, forming a perfect, penetrative seal inside you.  Then, the thick shaft belches out its hot load, forcefully injecting warmth into your very core.  A second pair of hands grace your temples, and a familiar but unremembered voice takes up the chant.  The buzzing returns, and information begins to enter your mind to the tempo of the free-flowing semen.  You gurgle out a happy noise, your tongue lamely hanging from the corner of your mouth as you cum again to the unnatural fullness.  Jism floods your ");
 			if(!player.hasVagina()) outputText("bowels");
 			else outputText("womb");
@@ -2661,6 +2664,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("\n\nThe sand witches turned the deserts into a jungle paradise, and though they lacked the taint of corruption, they never stopped their policies of aggressively bringing in blood.  Many were brainwashed into service, like the champion, but peace was brought to Mareth.  The unanswered question... is a world ruled by lusty milk witches any better than the corrupt one that preceded it?");
 			getGame().gameOver();
+			removeButton(1);
 		}
 			
 		//*Lose Female Loss
@@ -2728,7 +2732,7 @@ package classes.Scenes.Dungeons
 			outputText(".");
 			
 			outputText("\n\nThe chocolate skinned woman tosses aside her robe dramatically and lowers her incredibly toned body between your thighs.  Despite the presence of an overly endowed human cock that's already rising beyond your expectations, her overall figure is quite feminine and normal - just one pair of breasts.  She pokes your thoroughly soaked vagina and says, \"<i>This'll have to change.  Just one simply won't do, but right now, the body is the lesser priority.</i>\"  She angles her cock between the folds of your pussy and immediately spears your, shoving her length inside you as if testing your depths.  Once comfortable she raises her hands to either side of your head while her cock thrusts with a steady rhythm into your cunt.  \"<i>Up here...</i>\"  She taps your head with her fingers while she angles your face to stare her in the eyes, \"<i>...is what we have to fix first.</i>\"");
-			
+			player.cuntChange(12, true, true);
 			outputText("\n\nThe dark hermaphrodite begins chanting in time with her steady thrusts.  You try to struggle but it's useless in your weakened and aroused state.  All you can do is look into her eyes and listen to her, the words filling your head.  The incantations force themselves into your mind, just as her engorged manhood is forcing itself into your body.  Your brain seems to hum as it fills up with her words, and your pussy quivers while it fills up with her cock.  So much filling, but not enough space.");
 			
 			outputText("\n\nYou feel crowded within your own skin.  The sensation of being stuffed to the point of bursting fills you.  There's not enough room for both of you inside this body.  \"<i>Feeling full?</i>\" she coyly asks.  \"<i>No more room left?</i>\"  You can't help but to nod.  \"<i>Not enough room for both of us is there?  But what's going to happen when I cum?</i>\"  The thought sends shivers down your spine.  You feel uncomfortably full, and the notion of being filled even a little bit more makes your belly ache with the thought of bursting.");
@@ -2771,6 +2775,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("\n\nThe sand witches turned the deserts into a jungle paradise, and though they lacked the taint of corruption, they never stopped their policies of aggressively bringing in new blood.  Many were brainwashed into service, like the champion, but peace was brought to Mareth.  The unanswered question remains: is a world ruled by lusty milk witches any better than the 'corrupt' one that preceded it?");
 			getGame().gameOver();
+			removeButton(1);
 		}
 
 
@@ -3071,16 +3076,16 @@ package classes.Scenes.Dungeons
 				outputText("\n\nYou already convinced her to add more cum witches to her harem so that they might experience a little freedom.");
 				if(flags[kFLAGS.CUM_WITCHES_FIGHTABLE] == 0) {
 					outputText("  If you asked her to send them out hunting for recruits, you could potentially fight and fuck them in the deserts sands in the future.");
-					addButton(0,"Send Out",sendOutCumWitch);
+					addButton(0,"Send Out",sendOutCumWitch, null, null, null, "Request the Sand Mother to send the Cum Witch out in search for new recruits.", "Send Them Out");
 				}
 				else {
 					outputText("Many of them are prowling the desert sands even now, hunting for recruits.  You could wind up having to fight them if you go out.  It's possible she might keep them away from you, if you request it.");
-					addButton(0,"KeepThemIn",keepCumWitchesIn);
+					addButton(0,"KeepThemIn",keepCumWitchesIn, null, null, null, "Request the Sand Mother to keep the Cum Witch out of your way.", "Keep Them In");
 				}
 			}
 			else {
 				outputText("\n\nYou could ask her to bolster their numbers, allowing them some free time for a change, if you wanted to better their situation.");
-				addButton(0,"Bolster Them",moreCumWitchesPlease);
+				addButton(0,"Bolster Them",moreCumWitchesPlease, null, null, null, "Ask if the coven could bolster a few more Cum Witches.");
 			}
 			//[Send Them Out] [Back]
 			//[Keep Them In] [Back]
@@ -3313,9 +3318,9 @@ package classes.Scenes.Dungeons
 			else outputText("\n\nThe cum witch says, \"<i>Oh, you lack a gender.  Why don't you pick up some sexual equipment and come back for some real fun.</i>\"");
 			//[Virility] [Fertility] [Nevermind]
 			menu();
-			if(player.hasCock()) addButton(0,"Virility",cumWitchBlessed, true);
-			if(player.hasVagina()) addButton(1,"Fertility",cumWitchBlessed,false);
-			addButton(4,"Nevermind",changeMindAboutBlessings);
+			if(player.hasCock()) addButton(0,"Virility",cumWitchBlessed, true, null, null, "Receive the blessing of virility. This will increase your cum production and virility rating.");
+			if(player.hasVagina()) addButton(1,"Fertility",cumWitchBlessed,false, null, null, "Receive the blessing of fertility. This will increase your pregnancy speed and fertility rating.");
+			addButton(4,"Nevermind",changeMindAboutBlessings, null, null, null, "Nevermind that! Drop the subject. You'll be able to come back if you want.");
 		}
 		//*Nevermind ✓Kirbu
 		public function changeMindAboutBlessings():void {
@@ -3766,8 +3771,8 @@ package classes.Scenes.Dungeons
 			fatigue(-10);
 			menu();
 			addButton(0,"Next",finishMilkBath);
-			if(player.gender > 0) addButton(1,"DrinkNFap",drinkNFap);
-			addButton(2,"Milk Girl", grabTheMilkGirl);
+			if(player.gender > 0) addButton(1,"DrinkNFap",drinkNFap, null, null, null, "Drink some milk and masturbate.", "Drink & Masturbate");
+			addButton(2,"Milk Girl", grabTheMilkGirl, null, null, null, "Pull the milk girl into.");
 		}
 
 		//[Next] (Relax)
@@ -3816,9 +3821,9 @@ package classes.Scenes.Dungeons
 			//[Fuck Her](PC must have gender; if cooch, also C+ cups) [Don't]
 			menu();
 			dynStats("lus", 33, "resisted", false);
-			if(player.hasCock()) addButton(0,"Dick Fuck",fuckMilkbabeWithPenor);
-			if(player.hasVagina() && player.biggestTitSize() >= 3) addButton(1,"Lady Fuck",ladyFucks);
-			addButton(2,"Don't Fuck",dontFuckMilkBathBabe);
+			if(player.hasCock()) addButton(0,"Dick Fuck",fuckMilkbabeWithPenor, null, null, null, "Fuck the milk slave with your penis.");
+			if(player.hasVagina() && player.biggestTitSize() >= 3) addButton(1,"Lady Fuck",ladyFucks, null, null, null, "Have some vaginal and boob play.");
+			addButton(2,"Don't Fuck",dontFuckMilkBathBabe, null, null, null, "Skip the fucking.");
 		}
 
 		//[Don't]
@@ -4051,9 +4056,8 @@ package classes.Scenes.Dungeons
 					flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] = 1;
 				}
 				//(Display Options: [Riddle Game] [Fight] [Leave])
-				removeButton(6); //Locks north.
-				addButton(0, "Riddle Game", riddleGameGo);
-				addButton(1, "Uh, FIGHT!", fuckItAttack);
+				addButton(0, "Riddle Game", riddleGameGo, null, null, null, "Start the riddle game.");
+				addButton(1, "Uh, FIGHT!", fuckItAttack, null, null, null, "Screw the riddles, fight her instead!");
 			}
 			else {
 				if(flags[kFLAGS.TIMES_SUBMITTED_TO_SANURA] + flags[kFLAGS.TIMES_WINFUCKED_SANURA] > 0) {
@@ -4061,19 +4065,21 @@ package classes.Scenes.Dungeons
 					if(flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) outputText("  Or would you rather skip the formalities?  We both know who's got the sharper wit, I should think.");
 					outputText("</i>\"");
 					//(Display Options: [Riddle Game] [Fight] [Leave])
-					addButton(0, "Riddle Game", riddleGameGo);
+					addButton(0, "Riddle Game", riddleGameGo, null, null, null, "Start the riddle game.");
 					if (flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) {
-						addButton(1, "Fuck", fuckDatSphinx);
+						addButton(1, "Fuck", fuckDatSphinx, null, null, null, "Use Sanura to get off.");
 					}
 				}
 				else {
 					outputText("The sphinx, Sanura, is padding around the stone doorframe.  Occasionally she beats her leonine wings or gives a mighty yawn, obviously bored by a present lack of stimulation.  Seeing you standing about, however, Sanura gives you a sultry come-hither look and a seductive wink.  You're not sure if she wants to tempt your mind or your body.");
-					addButton(0, "Riddle Game", riddleGameGo);
+					addButton(0, "Riddle Game", riddleGameGo, null, null, null, "Start the riddle game.");
+					
 					if(flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) {
-						addButton(1, "Fuck", fuckDatSphinx);
+						addButton(1, "Fuck", fuckDatSphinx, null, null, null, "Use Sanura to get off.");
 					}
 				}
 			}
+			if(flags[kFLAGS.BEATEN_SANURA_COUNT] + flags[kFLAGS.SANURA_DISABLED] == 0) removeButton(6); //Locks north.
 			addButton(11, "Leave", exitDungeon);
 		}
 		public function roomCaveCommons():void {
@@ -4095,12 +4101,12 @@ package classes.Scenes.Dungeons
 			}
 			if(flags[kFLAGS.SANDWITCH_THRONE_UNLOCKED] == 0) {
 				outputText("\n\nA huge stone doorway blocks the path north.  You cannot see a way to open it.");
-				addButton(11, "South", checkExit);
 			}
 			else {
 				outputText("\n\nAn open doorway opens up to the north.  You can faintly see some kind of altar beyond it.");
 				addButton(6, "North", roomSacrificalAltar);
 			}
+			flushOutputTextToGUI();
 		}
 		public function roomWestHall1():void {
 			kGAMECLASS.dungeonLoc = 25;
@@ -4121,7 +4127,7 @@ package classes.Scenes.Dungeons
 			if(silly()) outputText("  Clearly, if you wanted to, you could put some extra meat in a sand witch.");
 			dungeons.setDungeonButtons(roomWestHall1, null, null, null);
 			if (player.hasCock() && player.lust >= 33) {
-				addButton(0, "Fuck Witches", knockUpSomeDoubleStuffedSandWitches);
+				addButton(0, "Fuck Witches", knockUpSomeDoubleStuffedSandWitches, null, null, null, "Use the sand witches to get off.");
 			}
 		}
 		public function roomWestHall2():void {
@@ -4139,7 +4145,7 @@ package classes.Scenes.Dungeons
 					return;
 				}
 				outputText("\n\nQuite an unusual sight awaits you in this chamber.  Sitting in an oversized pot is what looks to be the overly busty, plant girl you encountered earlier, Essrayle.  She's changed quite a bit since you last saw her, however.  While her inhumanly smooth, elfin face seems to be unchanged, the rest of her verdant body seems to have been warped into a hyper-sexual parody of a fertility idol, with features that echo the nomadic sand witch tribe.");
-				addButton(0, "Essrayle", kGAMECLASS.forest.essrayle.approachTrappedEssy);
+				addButton(0, "Essrayle", kGAMECLASS.forest.essrayle.approachTrappedEssy, null, null, null, "Approach Essrayle the plant-girl.");
 			}
 		}
 		public function roomNursery():void {
@@ -4155,10 +4161,10 @@ package classes.Scenes.Dungeons
 			dungeons.setDungeonButtons(roomWestHall2, null, null, null);
 			if(flags[kFLAGS.SANDWITCH_THRONE_UNLOCKED] == 0) {
 				outputText("\n\nThere is also a lever on the floor.  Looking closely at it, it appears that it connects with machinery that leads to the east...");
-				addButton(0, "Pull Lever", pullLever);
+				addButton(0, "Pull Lever", pullLever, null, null, null, "Pull the lever. You suspect that it might open the door");
 			}
-			addButton(1, "Brown Pill", takeBarrenPills);
-			addButton(2, "Pink Pill", takeFertilePills);
+			addButton(1, "Brown Pill", takeBarrenPills, null, null, null, "Swallow the brown pill. You suspect that it might make you barren.");
+			addButton(2, "Pink Pill", takeFertilePills, null, null, null, "Swallow the pink pill. You suspect that it might make you fertile again.");
 		}
 		public function roomEastHall1():void {
 			kGAMECLASS.dungeonLoc = 31;
@@ -4180,7 +4186,7 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.MET_MILK_SLAVE] = 1;
 			if(flags[kFLAGS.MILK_NAME] is Number) {
 				outputText("  There are no faucets or water sources that you can see, but your unasked questions are answered when a heavy, liquid sloshing sound emanates from the corner.  The source of the noise reveals itself to be a tit-encumbered, black-skinned human girl.  She drags her milk-swollen mammaries up to the edge of the tub and asks in a breathy, excited voice, \"<i>Bath time?</i>\"  Whoever she was, the witches seem to have broken her utterly - she's interested in nothing but being milked or lounging in her corner.  The way out lies west.");
-				addButton(0, "Bath Time", milkBathsAhoy);
+				addButton(0, "Bath Time", milkBathsAhoy, null, null, null, "Have a milk bath.");
 			}
 		}
 		public function roomEastHall2():void {
@@ -4197,13 +4203,11 @@ package classes.Scenes.Dungeons
 		}
 		public function roomCumWitchOffice():void {
 			kGAMECLASS.dungeonLoc = 36;
-			kGAMECLASS.tooltipLoc = "CumWitch"
 			outputText("<b><u>Eastern Warrens, West Portion, South Side (Cum Witch's Office)</u></b>\n", true);
 			dungeons.setDungeonButtons(null, null, null, roomCumWitchBedroom);
 			if(flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) {
 				//{SAND WITCHES NOW FRIENDLY}
 				outputText("The cum witch is here, pounding away at one of her sister's cunts, like usual.  She seems to CONSTANTLY excrete her jism into her partner's many cunt-folds, but as her passion and speed rises, the flow thickens, eventually filling the poor milk-witch's wombs entirely.  They go at it like animals for a few seconds more, then separate after a climactic orgasm that leaves a puddle of spooge inches deep on part of the uneven floor.  The cum-witch moves her insensate sister to rest on a nearby bench before putting on her hat and robes.  She winks at you and offers, \"<i>Well, I hope you enjoyed the show, interloper.  Did you come here for some of my gift, or something else?</i>\"");
-				addButton(12, "East", roomCumWitchBedroom);
 				//{VOLUNTEER FOR SERVICE: BAD-END, BLESSING: +CUM PRODUCTION}
 				addButton(0, "Volunteer", volunteerConfirmation, null, null, null, "Volunteer to become a Cum Witch. \n\nThis will end your adventures.");
 				if (flags[kFLAGS.BEEN_BLESSED_BY_CUM_WITCH] == 0) {
@@ -4249,11 +4253,10 @@ package classes.Scenes.Dungeons
 		}
 		public function roomSandMotherThrone():void {
 			kGAMECLASS.dungeonLoc = 38;
-			kGAMECLASS.tooltipLoc = "SandMother"
 			outputText("<b><u>Sand Mother's Throne</u></b>\n", true);
 			outputText("This chamber is lit by swirling vortexes of magical colors, each hue dancing around another in coordinated motions.  The walls are made of hewn sandstone inlaid with ivory engravings that appear to depict what must be flowing milk.  Ahead there is a huge, white throne, also made from ivory.  It is a magnificent piece of craftsmanship.  Clearly, you have found the leader's throne room.  There is a robed figure atop it.");
 			dungeons.setDungeonButtons(null, roomSacrificalAltar, null, null);
-			addButton(0, "Approach", sandMotherStuffGOA);
+			addButton(0, "Approach", sandMotherStuffGOA, null, null, null, "Approach the Sand Mother.");
 		}
 	}
 

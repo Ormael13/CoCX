@@ -67,23 +67,18 @@ private function salonFavoritesPaymentMenu():void {
 	addButton(14,"Back",favoriteSalonMenu);
 }
 
-
 private function salonPaymentMenu():void {
-	var blow:Function = null;
-	if(player.hasCock()) blow = goblinHairDresserFacefuck;
-	var minoCum:Function = null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = buyMinoCum;
 	menu();
 	if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
-	addButton(0,"Goblin Blow",blow);
-	addButton(1,"Canine",gloryholeDoggie);
-	addButton(2,"Imp",gloryholeImp);
-	addButton(3,"Minotaur",gloryholeMinotaur);
-	addButton(4,"Incubus",gloryholeIncubus);
-	addButton(8,"Buy MinoCum",minoCum);
-	addButton(14,"Leave",camp.returnToCampUseOneHour);
-	//choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
+	if (player.hasCock()) addButton(0, "Goblin Blow", goblinHairDresserFacefuck, null, null, null, "Let Lynnette suck you off.");
+	addButton(1, "Canine", gloryholeDoggie, null, null, null, "Suck that knotted cock.");
+	addButton(2, "Imp", gloryholeImp, null, null, null, "Suck that demonic cock. Judging from the constant bobbing, someone must have been trying hard to hover at the right height.");
+	addButton(3, "Minotaur", gloryholeMinotaur, null, null, null, "Suck that huge minotaur cock!");
+	addButton(4, "Incubus", gloryholeIncubus, null, null, null, "Suck that incubus cock. It gives off that pleasant spicy scent.");
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(8, "Buy MinoCum", buyMinoCum, null, null, null, "Buy a bottle of minotaur cum for 60 gems?");
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
+
 		private function buyMinoCum():void{
 			if (player.gems < 60)
 			{
@@ -101,41 +96,34 @@ private function salonPaymentMenu():void {
 				inventory.takeItem(consumables.MINOCUM, camp.returnToCampUseOneHour);
 			}
 		}
+		
 public function salonPurchaseMenu():void {
 	flags[kFLAGS.SALON_PAID] = 1;
 	spriteSelect(38);
-	var cutShort2:Function = null;
-	var cutMedium2:Function = null;
-	var cutLong2:Function = null;
-	var lengthening:Function = null;
-	var minoCum:Function = null;
-	var mudFacial2:Function = null;
-	var sandFacial2:Function = null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = buyMinoCum;
-	if(player.hairLength > 2) cutShort2 = cutShort;
-	if(player.hairLength > 13) cutMedium2 = cutMedium;
-	if(player.hairLength >= 26) cutLong2 = cutLong;
-	if(player.hairLength < player.tallness) lengthening = hairGrow;
-	if(player.femininity < 100 && player.gender == 2) mudFacial2 = mudFacial;
-	else if(player.femininity < 85 && (player.gender == 0 || player.gender == 3)) mudFacial2 = mudFacial;
-	else if(player.femininity < 70 && player.gender == 1) mudFacial2 = mudFacial;
-	else if(player.femininity < 100 && player.findPerk(PerkLib.Androgyny) >= 0) mudFacial2 = mudFacial;
-	if(player.femininity > 0 && player.gender == 1) sandFacial2 = sandFacial;
-	else if(player.femininity > 30 && player.gender == 2) sandFacial2 = sandFacial;
-	else if(player.femininity > 20 && (player.gender == 0 || player.gender == 3))  sandFacial2 = sandFacial;
-	else if(player.femininity > 0 && player.findPerk(PerkLib.Androgyny) >= 0) sandFacial2 = sandFacial;
+	var mudFacialEnabled:Boolean = false;
+	var sandFacialEnabled:Boolean = false;
+	//Enable mud facial
+	if(player.femininity < 100 && player.gender == 2) mudFacialEnabled = true;
+	else if(player.femininity < 85 && (player.gender == 0 || player.gender == 3)) mudFacialEnabled = true;
+	else if(player.femininity < 70 && player.gender == 1) mudFacialEnabled = true;
+	else if(player.femininity < 100 && player.findPerk(PerkLib.Androgyny) >= 0) mudFacialEnabled = true;
+	//Enable sand facial
+	if(player.femininity > 0 && player.gender == 1) sandFacialEnabled = true;
+	else if(player.femininity > 30 && player.gender == 2) sandFacialEnabled = true;
+	else if(player.femininity > 20 && (player.gender == 0 || player.gender == 3))  sandFacialEnabled = true;
+	else if(player.femininity > 0 && player.findPerk(PerkLib.Androgyny) >= 0) sandFacialEnabled = true;
 	
 	menu();
-	addButton(0,"Cut Short",cutShort2);
-	addButton(1,"Cut Med.",cutMedium2);
-	addButton(2,"Cut Long",cutLong2);
-	addButton(3,"Lengthen", lengthening);
-	if (player.hairLength > 0) addButton(4,"Remove Hair", removeHair);
-	addButton(5,"Buy Products",dyeMenu);
-	addButton(6,"Buy MinoCum",minoCum);
-	addButton(7,"Beard Options",beardMenu);
-	addButton(8,"Mud Facial",mudFacial2);
-	addButton(9,"Sand Facial",sandFacial2);
+	if (player.hairLength > 2) addButton(0, "Cut Short", cutShort);
+	if (player.hairLength > 13) addButton(1, "Cut Medium", cutMedium);
+	if (player.hairLength >= 26) addButton(2, "Cut Long", cutLong);
+	if (player.hairLength < player.tallness) addButton(3, "Lengthen", hairGrow);
+	if (player.hairLength > 0) addButton(4, "Remove Hair", removeHair);
+	addButton(5, "Buy Products", dyeMenu);
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(6, "Buy MinoCum", buyMinoCum, null, null, null, "Buy a bottle of minotaur cum for 60 gems?");
+	addButton(7, "Beard Options", beardMenu);
+	if (mudFacialEnabled) addButton(8, "Mud Facial", mudFacial, null, null, null, "This facial is supposed to enhance the softness of your face and enhance its femininity greatly.");
+	if (sandFacialEnabled) addButton(9, "Sand Facial", sandFacial, null, null, null, "The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.");
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 

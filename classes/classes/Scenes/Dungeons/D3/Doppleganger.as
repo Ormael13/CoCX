@@ -134,6 +134,7 @@ package classes.Scenes.Dungeons.D3
 					break;
 					
 				default:
+					outputText("\n\n“<i>How did you even survive?</i>” the doppelganger looks in confusion. “<i>Regardless, I'm still taking your body.</i>”");
 					break;
 			}
 			
@@ -218,6 +219,7 @@ package classes.Scenes.Dungeons.D3
 			skinDesc = player.skinDesc;
 			initStrTouSpeInte(player.str, player.tou, player.spe, player.inte);
 			initLibSensCor(player.lib, player.sens, player.cor);
+			if (cor < 50) cor = 50;
 			faceType = player.faceType;
 			skinType = player.skinType;
 			

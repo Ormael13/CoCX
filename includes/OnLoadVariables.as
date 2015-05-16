@@ -42,9 +42,6 @@ public var plotFight:Boolean = false;
 public var timeQ:Number = 0;
 public var campQ:Boolean = false;
 
-//Variable to determine if tooltip should be shown.
-public var tooltipLoc:String = "";
-
 //Possibly redundant, not used anywhere else.
 //Input vars
 /* Yup, not used at all

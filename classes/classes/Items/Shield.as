@@ -37,8 +37,7 @@ public class Shield extends Useable //Equipable
 		
 		override public function canUse():Boolean {
 			if (game.player.weaponPerk == "Large") {
-				outputText("Your current weapon requires two hands.  Unequip your current weapon or switch to one-handed before equipping this shield.  ");
-				game.flags[kFLAGS.UNEQUIP_SHIELD_BECAUSE_TWO_HANDED_WEAPON] = 1;
+				outputText("Your current weapon requires two hands. Unequip your current weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}
 			return true;

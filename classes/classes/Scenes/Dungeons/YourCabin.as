@@ -17,7 +17,6 @@ package classes.Scenes.Dungeons
 		public function enterCabin():void {
 			kGAMECLASS.inDungeon = true;
 			kGAMECLASS.dungeonLoc = -10;
-			kGAMECLASS.tooltipLoc = "Cabin";
 			menu();
 			outputText("<b><u>Your Cabin</u></b>\n", true)
 			outputText("You are in your cabin.  Behind you is a door leading back to your camp.  Next to the door is a window to let the sunlight in. \n\n");
