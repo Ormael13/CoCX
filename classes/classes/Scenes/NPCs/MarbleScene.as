@@ -532,6 +532,7 @@ private function apologizetoWalkingTitsIMEANMARBLE():void {
 	outputText("\n\n\"<i>Care to have some of my bountiful breasts, you sweet thing?</i>\" she says, smiling eagerly and presenting you with one of her half-inch long reddish nipples.  You notice that each nipple has a sore-looking swollen ring around it, probably the source of Marble's discomfort.");
 	outputText("\n\nYou knew she was going to get around to this, so you figure you might as well get it over with.  It's not like they're not really nice breasts, after all...  You lower your [face] to her nipple, and gently wrap your lips around it.  Marble sighs contentedly as you do so, and starts to groan slightly in pleasure as the first of the milk leaks from her teats.  You certainly can't argue with the taste, sweet and creamy, and start to down the delicious fluid with relish.  Marble doesn't seem to mind at all; in fact, the sounds of her pleasure only increase.");
 	outputText("\n\nAfter several minutes, Marble puts her hand on your forehead, and gently asks you to take care of her other breast.  You don't disappoint her, and deeply draw milk from the other nipple with just as much vigor as before.");
+	player.refillHunger(20);
 	outputText("\n\nAfter another few minutes, you finally have drawn your fill, and pull back from Marble, as she looks down at you with a kindly and pleased face.  \"<i>Thank you so much for that, sweetie.  I can't possibly refuse your apology after that.  You're welcome to come and visit me here on the farm any time.</i>\"  The cow-girl gives you a peck on the check and redresses her bountiful bosoms - a small part of you is sad to see them go.  She helps you to stand up and walks you back to the main barn, then returns to her chores.");
 	//increase addiction score by 10
 	//set affection to 5
@@ -869,6 +870,7 @@ public function encounterMarbleExploring2():void {
 	//[player height <5]
 	if(player.tallness < 60) outputText("As you step into her room, she eagerly rushes over and hugs you to her breast. \"<i>You're as cute as ever, sweetie!</i>\"  ", false);
 	outputText("She is happy to see you and treats you to a small meal while you have a pleasant chat.  ");
+	player.refillHunger(20);
 	if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] < 7) {
 		extendedMurbelFarmTalkz();
 		doNext(camp.returnToCampUseOneHour);
@@ -1466,6 +1468,7 @@ public function postAddictionFarmExplorings():void {
 	//[player height <5]
 	if(player.tallness < 60) outputText("As you step into her room, she eagerly rushes over and hugs you to her breast. \"<i>You're as cute as ever, sweetie!</i>\"  ", false);
 	outputText("She is happy to see you and treats you to a small meal while you have a pleasant chat.  ");
+	player.refillHunger(20);
 	if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] < 7) {
 		extendedMurbelFarmTalkz();
 		doNext(camp.returnToCampUseOneHour);

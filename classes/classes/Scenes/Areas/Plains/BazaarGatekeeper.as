@@ -11,7 +11,7 @@ package classes.Scenes.Areas.Plains
 	{
 		
 		public function scimitarSpecial():void {
-			if (rand(4) == 0) scimitarCrossAttack();
+			if (rand(3) == 0) scimitarCrossAttack();
 			else scimitarAttack();
 		}
 		
@@ -89,13 +89,12 @@ package classes.Scenes.Areas.Plains
 			}
 			if (findStatusAffect(StatusAffects.Uber) >= 0) {
 				scimitarCrossAttack();
-				removeStatusAffect(StatusAffects.Uber);
+				return;
 			}
 			//Choose attacks
 			var chooser:int = rand(6);
-			if (chooser < 3) eAttack();
-			else if (chooser >= 3 && chooser < 5) scimitarAttack();
-			else scimitarCrossAttack();
+			if (chooser < 4) eAttack();
+			else scimitarSpecial();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

@@ -2877,7 +2877,7 @@
 			player.hunger = 80;
 			menu()
 			for (var i:int = 0; i < 14; i++) {
-				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, i);
+				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
 			}
 			addButton(14, "Back", chooseGameModes);
 		}
@@ -2890,7 +2890,7 @@
 			player.hunger = 80;
 			menu()
 			for (var i:int = 0; i < 14; i++) {
-				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, i);
+				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
 			}
 			addButton(14, "Back", chooseGameModes);
 		}	

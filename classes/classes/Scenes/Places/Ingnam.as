@@ -80,6 +80,7 @@ package classes.Scenes.Places
 		public function getBanishedToMareth():void {
 			var hasWeapon:Boolean = false;
 			clearOutput();
+			hideMenus();
 			outputText("Your time has come to meet up with the village elders. You know you are going to get sent to the demon realm and you're most likely not going to be able to return to Ingnam. You give your family and friends a long farewell.");
 			if (player.weaponName != "fists") {
 				hasWeapon = true;

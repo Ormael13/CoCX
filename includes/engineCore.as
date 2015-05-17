@@ -766,7 +766,7 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.Seduction));
 	}
 	//Slot 7 - Nymphomania
-	else if(player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 75) {
+	if(player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 75) {
 			_add(new PerkClass(PerkLib.Nymphomania));
 	}
 	//Slot 7 - UNFINISHED :3

@@ -1436,7 +1436,7 @@ public function finishCombat():void
 	} else {
 		outputText("You smile as " + monster.a + monster.short + " collapses and begins masturbating feverishly.", true);
 	}
-	awardPlayer();
+	cleanupAfterCombat();
 }
 public function dropItem(monster:Monster, nextFunc:Function = null):void {
 	if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
