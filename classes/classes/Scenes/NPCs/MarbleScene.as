@@ -870,7 +870,7 @@ public function encounterMarbleExploring2():void {
 	//[player height <5]
 	if(player.tallness < 60) outputText("As you step into her room, she eagerly rushes over and hugs you to her breast. \"<i>You're as cute as ever, sweetie!</i>\"  ", false);
 	outputText("She is happy to see you and treats you to a small meal while you have a pleasant chat.  ");
-	player.refillHunger(20);
+	player.refillHunger(20, false);
 	if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] < 7) {
 		extendedMurbelFarmTalkz();
 		doNext(camp.returnToCampUseOneHour);
@@ -1468,7 +1468,7 @@ public function postAddictionFarmExplorings():void {
 	//[player height <5]
 	if(player.tallness < 60) outputText("As you step into her room, she eagerly rushes over and hugs you to her breast. \"<i>You're as cute as ever, sweetie!</i>\"  ", false);
 	outputText("She is happy to see you and treats you to a small meal while you have a pleasant chat.  ");
-	player.refillHunger(20);
+	player.refillHunger(20, false);
 	if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] < 7) {
 		extendedMurbelFarmTalkz();
 		doNext(camp.returnToCampUseOneHour);

@@ -281,15 +281,15 @@ public function settingsScreenGameSettings():void {
 	addButton(5, "SFW Toggle", toggleSFW, null, null, null, "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 	addButton(6, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
 	addButton(7, "Auto level", toggleAutoLevel, null, null, null, "Toggles automatic leveling when you accumulate sufficient experience.");
-	if (player.str > 0) addButton(10, "Enable Surv", enableSurvivalPrompt, null, null, null, "Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");	
-	if (player.str > 0) addButton(11, "Enable Real", enableRealisticPrompt, null, null, null, "Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");	
+	if (player.str > 0) addButton(8, "Enable Surv", enableSurvivalPrompt, null, null, null, "Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");	
+	if (player.str > 0) addButton(9, "Enable Real", enableRealisticPrompt, null, null, null, "Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");	
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5)
 	{
-		removeButton(10);
+		removeButton(8);
 	}
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 	{
-		removeButton(11);
+		removeButton(9);
 	}
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) 
 	{
@@ -457,6 +457,15 @@ public function settingsScreenInterfaceSettings():void {
 		
 	outputText("\n\n");*/
 	
+	if (flags[kFLAGS.USE_OLD_FONT] >= 1)
+	{
+		outputText("Font: <b>Lucida Sans Typewriter</b>\n");
+	}
+	else 
+		outputText("Font: <b>Georgia</b>\n");
+		
+	outputText("\n\n");
+	
 	if (flags[kFLAGS.IMAGEPACK_OFF] == 0)
 	{
 		outputText("Image Pack: <font color=\"#008000\"><b>ON</b></font>\n Image pack is enabled.");
@@ -494,7 +503,7 @@ public function settingsScreenInterfaceSettings():void {
 		outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
 		
 	menu();
-	//addButton(0, "Side Bar Style", toggleInterface, null, null, null, "Toggle between old and new style.");
+	addButton(0, "Side Bar Font", toggleFont, null, null, null, "Toggle between old and new font for side bar.");
 	addButton(1, "Main BG", menuMainBackground, null, null, null, "Choose a background for main game interface.");
 	addButton(2, "Text BG", menuTextBackground, null, null, null, "Choose a background for text.");
 	addButton(3, "Sprites", menuSpriteSelect, null, null, null, "Turn sprites on/off and change sprite style preference.");
@@ -540,6 +549,12 @@ public function toggleInterface():void {
 	settingsScreenInterfaceSettings();
 }
 
+public function toggleFont():void {
+	if (flags[kFLAGS.USE_OLD_FONT] < 1) flags[kFLAGS.USE_OLD_FONT] = 1;
+	else flags[kFLAGS.USE_OLD_FONT] = 0;
+	settingsScreenInterfaceSettings();
+}
+
 public function setMainBackground(type:int):void {
 	flags[kFLAGS.BACKGROUND_STYLE] = type;
 	mainView.background.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
@@ -578,16 +593,6 @@ public function cycleBackground():void {
 		mainView.textBGWhite.visible = false;
 		mainView.textBGTan.visible = false;
 	}		
-}
-
-public function toggleDarkBackground():void {
-	if (flags[kFLAGS.USE_DARK_BACKGROUND] == 0) {
-		flags[kFLAGS.USE_DARK_BACKGROUND] = 1;
-	}
-	else {
-		flags[kFLAGS.USE_DARK_BACKGROUND] = 0;
-	}
-	mainViewHack.refreshStats();
 }
 
 public function cycleQuality():void {

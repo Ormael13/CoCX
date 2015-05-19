@@ -969,6 +969,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		else if(temp == 1) outputText("You notice Izma isn't around right now.  She's probably gone off to the nearby stream to get some water.  Never mind, she comes around from behind a rock, still dripping wet.", false);
 		//Text 3 
 		else outputText("Izma is lying on her back near her bedroll.  You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream.", false);
+		outputText("\n\n");
 		addButton(4, "Izma", izmaScene.izmaFollowerMenu);
 	}
 	//Kiha!
@@ -2523,8 +2524,8 @@ private function promptSaveUpdate():void {
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 6) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 7;
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 6) {
-			flags[kFLAGS.D1_OMNIBUS_KILLED] = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02078];
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02078] = 0; //Reclaimed
+			flags[kFLAGS.D1_OMNIBUS_KILLED] = flags[kFLAGS.CORRUPTED_GLADES_DESTROYED];
+			flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] = 0; //Reclaimed
 		}
 		if (player.armor == armors.GOOARMR) flags[kFLAGS.VALERIA_FLUIDS] = 100;
 		doCamp();

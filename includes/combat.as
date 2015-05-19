@@ -3921,6 +3921,7 @@ public function spellWhitefire():void {
 		outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
 		if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
+	if(monster.short == "Holli" && monster.findStatusAffect(StatusAffects.HolliBurning) < 0) (monster as Holli).lightHolliOnFireMagically();
 	outputText("\n\n", false);
 	checkAchievementDamage(temp);
 	flags[kFLAGS.SPELLS_CAST]++;
@@ -4042,7 +4043,7 @@ public function hellFire():void {
 		enemyAI();
 		return;
 	}
-	var damage:Number = (player.level * 8 + rand(10) + player.cor/5);
+	var damage:Number = (player.level * 8 + rand(10) + player.inte/2 + player.cor/5);
 	if(player.findStatusAffect(StatusAffects.GooArmorSilence) < 0) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.", false);
 	
 	if(player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
@@ -4054,14 +4055,14 @@ public function hellFire():void {
 		player.removeStatusAffect(StatusAffects.GooArmorSilence);
 		damage += 25;
 	}
-	if(monster.short == "Isabella") {
+	if(monster.short == "Isabella" && monster.findStatusAffect(StatusAffects.Stunned) < 0) {
 		outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
 		if (isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
 		else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n", false);
 		enemyAI();
 		return;
 	}
-	else if(monster.short == "Vala") {
+	else if(monster.short == "Vala" && monster.findStatusAffect(StatusAffects.Stunned) < 0) {
 		outputText("  Vala beats her wings with surprising strength, blowing the fireball back at you!  ", false);		
 		if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 			outputText("You dive out of the way and evade it!", false);
@@ -4483,7 +4484,7 @@ public function dragonBreath():void {
 		outputText("  Despite the heavy impact caused by your roar, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
 	}
 	//Special enemy avoidances
-	else if(monster.short == "Vala" && !monster.findStatusAffect(StatusAffects.Stunned) >= 0) {
+	else if(monster.short == "Vala" && monster.findStatusAffect(StatusAffects.Stunned) < 0) {
 		outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ", false);		
 		if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 			outputText("You dive out of the way and evade it!", false);
@@ -4560,11 +4561,12 @@ public function fireballuuuuu():void {
 	//[Failure]
 	//(high damage to self, +20 fatigue)
 	if(rand(5) == 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
-		if(player.findStatusAffect(StatusAffects.WebSilence) >= 0) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n\n", false);
-		else if(player.findStatusAffect(StatusAffects.GooArmorSilence) >= 0) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now.");
-		else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.\n\n", false);
+		if(player.findStatusAffect(StatusAffects.WebSilence) >= 0) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat. ", false);
+		else if(player.findStatusAffect(StatusAffects.GooArmorSilence) >= 0) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now. ");
+		else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat. ", false);
 		changeFatigue(10);
-		takeDamage(10+rand(20));
+		takeDamage(10 + rand(20), true);
+		outputText("\n\n");
 		enemyAI();
 		return;
 	}
@@ -4584,14 +4586,14 @@ public function fireballuuuuu():void {
 	}
 	else outputText("A growl rumbles deep with your chest as you charge the terrestrial fire.  When you can hold it no longer, you release an ear splitting roar and hurl a giant green conflagration at your enemy. ", false);
 
-	if(monster.short == "Isabella") {
+	if(monster.short == "Isabella" && monster.findStatusAffect(StatusAffects.Stunned) < 0) {
 		outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
 		if (isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
 		else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n", false);
 		enemyAI();
 		return;
 	}
-	else if(monster.short == "Vala") {
+	else if(monster.short == "Vala" && monster.findStatusAffect(StatusAffects.Stunned) < 0) {
 		outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ", false);		
 		if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 			outputText("You dive out of the way and evade it!", false);
@@ -5195,7 +5197,7 @@ public function physicalSpecials():void {
 		default:
 	}
 	if (player.shield != ShieldLib.NOTHING) {
-		addButton(button++, "Shield Bash", shieldBash, null, null, null, "Bash your opponent with a shield. Has a chance to stun. \n\nThe more you stun your opponent, the harder it is to stun them again.");
+		addButton(button++, "Shield Bash", shieldBash, null, null, null, "Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 	}
 	addButton(14, "Back", combatMenu, false);
 }
@@ -5434,7 +5436,7 @@ public function shieldBash():void {
 	var chance:int = Math.floor(monster.statusAffectv1(StatusAffects.TimesBashed) + 1);
 	if (chance > 10) chance = 10;
 	damage = doDamage(damage);
-	outputText("Your [shield] slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!  ");
+	outputText("Your [shield] slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 	if (monster.findStatusAffect(StatusAffects.Stunned) < 0 && rand(chance) == 0) {
 		outputText("<b>Your impact also manages to stun " + monster.a + monster.short + "!</b> ");
 		monster.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
@@ -5454,7 +5456,7 @@ public function immolationSpell():void {
 	outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of burning flames gathers around " + monster.a + monster.short + ", slowly burning " + monster.pronoun2 + ".");
 	var temp:int = int(75+(player.inte/3 + rand(player.inte/2)) * spellMod());
 	temp = doDamage(temp);
-	outputText(" (" + temp + ")\n\n");
+	outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
 	player.removeStatusAffect(StatusAffects.ImmolationSpell);
 	arianScene.clearTalisman();
 	enemyAI();

@@ -34,7 +34,7 @@ package classes.Scenes.Places
 			clearOutput();
 			outputText("Ingnam is a rich and prosperous village despite its small size. There is already a well-established array of shops with a constant hum of tradesmen and merchants. The temple sits within view of the patrons sitting at tables at the tavern which serves as a hub for people near and far to drink and dance. On the road leading out of the plaza that sits before the temple is a trail that meanders its way to a large farm in the distance.");
 			outputText("\n\nLooming ominously in the distance is a mountain known by the locals as Mount Ilgast. Surrounding Ingnam is a vast expanse of wilderness.");
-			if (model.time.hours >= 21 || model.time.hours < 6) outputText("\n\nIt's dark outside. Stars dot the night sky and a moon casts the moonlight, providing little light. Shops are closed at this time.");
+			if (model.time.hours >= 21 || model.time.hours < 6) outputText("\n\nIt's dark outside. Stars dot the night sky and a moon casts the moonlight over the landscape, providing little light. Shops are closed at this time.");
 			mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 			mainView.showMenuButton( MainView.MENU_DATA );
 			mainView.showMenuButton( MainView.MENU_STATS );
@@ -191,29 +191,32 @@ package classes.Scenes.Places
 		
 		public function shopTailor():void {
 			clearOutput();
-			outputText("You enter the tailor shop. The interior is well-maintained and decorated. Clothes are displayed on racks without obvious flaws. A woman behind the counter smiles at you with greet. ");
-			outputText("\n\nShe says, \"<i>Welcome to my shop. Need to get outfitted?</i>\"");
+			outputText("You enter the tailor’s. The interior is laden with mannequins wearing half-finished works. Clothes are displayed on racks without obvious flaws. A fastidious, well-groomed young man with an immaculate blue three-piece suit topped with a measuring tape draping around his collar stands behind the counter and smiles at you with deference.");
+			outputText("\n\n\"<i>Welcome to my shop. Do you need to get outfitted?</i>\" he says pulling keenly at the measuring tape draping his shoulders.");
 			outputText("\n\n<b><u>Tailor shop pricings</u></b>");
 			menu();
 			addShopItem(armors.C_CLOTH, 10, 3);
 			addShopItem(armors.ADVCLTH, 75, 3);
+			addShopItem(armors.CLSSYCL, 100, 3);
 			addShopItem(armors.TUBETOP, 40, 3);
 			addShopItem(armors.OVERALL, 30, 3);
 			addShopItem(armors.M_ROBES, 75, 3);
+			addShopItem(armors.LTHRPNT, 200, 3);
 			addShopItem(armors.RBBRCLT, 500, 3);
+			addShopItem(armors.T_BSUIT, 650, 3);
 			addButton(14, "Leave", menuShops);
 		}
 		
 		public function shopAlchemist():void {
 			clearOutput();
 			if (flags[kFLAGS.INGNAM_ALCHEMIST_TALKED] <= 0) {
-				outputText("The smell of potions being brewed hits your nose as you approach the door. The sign indicates that this is where the potions are made. You enter what appears to be the place where the alchemist works on potions.");
-				outputText("\n\nYou open the door and enter. Various alchemy equipment are set up in various locations.");
-				outputText("\n\nA male alchemist is working on something until he hears your presence. He stops and walks up to the counter. \"<i>Welcome to my shop,</i>\" he says.");
+				outputText("As you approach the stone building the overpowering smell of herbs and plants being brewed hits your nose. The crimson banner over the heavy wooden door indicates that this is where the potions are made. You enter what appears to be the place where the alchemist works on his famed remedies.");
+				outputText("\n\nYou open the door and enter. Despite the establishment being dimly lit by candlelight you can make out the vast multicolored rows of countless potions, elixirs and tonics. Fragrant drying herbs are hanging from the rafters and various strange-looking equipment is set up in a variety of locations in the store.");
+				outputText("\n\nAn ancient-looking man in a much-singed pair of robes is working on something volatile in the corner until he hears your presence. He stops and shuffles up to the timber counter, drumming it under his stained fingers. \"<i>What can I do for you, young master?</i>\" he says from under his frayed hood.");
 				flags[kFLAGS.INGNAM_ALCHEMIST_TALKED] = 1;
 			}
 			else {
-				outputText("Once again, you return to the alchemist.");
+				outputText("Once again, you return to the alchemist, letting the overpowering smell of herbs and plants being brewed hits your nose.");
 				outputText("\n\nThe alchemist senses your presences and he steps up to the counter and says, \"<i>How may I help you?</i>\"");
 			}
 			outputText("\n\n<b><u>Alchemy shop pricings</u></b>");
@@ -222,32 +225,37 @@ package classes.Scenes.Places
 				addShopItem(consumables.REDUCTO, 80, 4);
 				addShopItem(consumables.GROPLUS, 80, 4);
 				addShopItem(consumables.L_DRAFT, 25, 4);
+				addShopItem(consumables.LACTAID, 40, 4);
 			}
 			else {
 				addShopItem(consumables.REDUCTO, 100, 4);
 				addShopItem(consumables.GROPLUS, 100, 4);
 				addShopItem(consumables.L_DRAFT, 30, 4);
+				addShopItem(consumables.LACTAID, 50, 4);
 			}
 			addButton(14, "Leave", menuShops);
 		}
 		
 		public function shopTradingPost():void {
 			clearOutput();
-			outputText("The trading post contains a variety of goods, all arranged neatly on shelves. You suspect you could buy some imported goods here.");
+			outputText("The trading post is one of the larger buildings in the village with its porch covered in barrels filled with pickled goods, preserved delicacies and dried goods from the humble local farm to exotic faraway lands. The interior is packed with crowded shelves that boast a variety of goods, all arranged neatly on shelves.");
+			outputText("\n\nYou suspect you could buy some imported goods here.");
 			outputText("\n\n<b><u>Trading post pricings</u></b>");
 			menu();
 			addShopItem(consumables.VITAL_T, 30, 5);
 			addShopItem(consumables.SMART_T, 30, 5);
+			addShopItem(consumables.FISHFIL, 5, 5);
 			addButton(14, "Leave", menuShops);
 		}
 		
 		public function shopBlackMarket():void {
 			clearOutput();
 			if (flags[kFLAGS.INGNAM_BLACKMARKET_TALKED] <= 0) {
-				outputText("You walk into an alley you swear you have never explored before. You swallow your pride as you walk into the alley.");
-				outputText("\n\nYou have an uneasy feeling until you hear a voice. You look around to see that a hooded figure walks from the shadows to approach you.");
-				outputText("\n\n\"<i>Greetings. I know you. You're going to be the Champion, right?</i>\" The hooded figure says. His face is concealed by the shade of his hood. You tell him that yes, you're going to be the Champion of Ingnam.");
-				outputText("\n\nHe pulls his hood down and says, \"<i>I've managed to sneak into the portal at the mountains. There are extraordinary stuff that can transform you. I've managed to smuggle these goods. It takes me years of plannings as the portal is only open for a period of time before it closes for the rest of the year.</i>\" He opens up his coat and shows you the array of goods and says, \"<i>They aren't cheap but I can guarantee, they are the real stuff! See anything you would like?</i>\"");
+				outputText("You walk into an alley you swear you have never explored before. You stifle your fear as you walk into the dingy looking alley.");
+				outputText("\n\nUnease creeps over you until you hear a raspy voice whisper from the darkness of the alley. You look around to see a hooded figure skulk from the shadows to approach you.");
+				outputText("\n\n\"<i>Greetings. I know you. You’re going to be the new Champion, right?</i>\" The hooded figure croaks. His face is mostly concealed by the shade of his hood. Slightly unnerved by the prowling figure you tell him that yes, you’re going to be the Champion of Ingnam.");
+				outputText("\n\nHe pulls his hood down, quickly looking for the all-clear and rasps, \"<i>I’ve managed to sneak into the portal at the mountains. There is extraordinary stuff that can transform you! It takes me years of planning as the portal is only open for a short window of time before it closes for the rest of the year.</i>\"");
+				outputText("\n\nWith a skin-crawling chuckle he opens up his coat and shows you the array of goods and says, \"<i>I’ve managed to smuggle these in. They aren’t cheap but I guarantee you, they’re the real deal! See anything you like?</i>\"");
 				flags[kFLAGS.INGNAM_BLACKMARKET_TALKED] = 1;
 			}
 			else {

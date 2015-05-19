@@ -87,7 +87,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\"<i>I'm going to decide what I should do to you,</i>\" you say. You ponder over what you should do with Lethice.");
 			outputText("\n\n(<b>Note:</b> This ending is placeholder and <font color=\"#800000\"><b>not official</b></font>. Please don't confuse it. -Kitteh6660)");
 			menu();
-			addButton(0, "Execute Her", executeLethice, null, null, null, "Finish Lethice off for once and for all. " + (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut" ? "Off with her head!\n\n(Warning: Contains gore!)" : ""));
+			addButton(0, "Execute Her", executeLethice, null, null, null, "Finish Lethice off for once and for all.");
 			if (player.lust >= 33) addButton(1, "Fuck Her", fuckLethice, null, null, null, "Fuck Lethice. (Placeholder)");
 			//doNext(theFinalEndingPart3);
 		}

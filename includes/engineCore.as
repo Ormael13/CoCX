@@ -1722,11 +1722,11 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow") >= 0)
 		combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + " / 100\n";
 		
-	combatStats += "<b>Damage Resistance:</b> " + (100 - Math.round(player.damagePercent(true))) + "-" + (100 - (Math.round(player.damagePercent(true)) - (player.tou < 100 ? player.tou * 0.2 : 20))) + "% (Higher is better.)\n";
+	combatStats += "<b>Damage Resistance:</b> " + (100 - Math.round(player.damagePercent(true))) + "-" + (100 - Math.round(player.damagePercent(true) - (player.tou < 100 ? player.tou * 0.2 : 20))) + "% (Higher is better.)\n";
 
 	combatStats += "<b>Lust Resistance:</b> " + (100 - Math.round(lustPercent())) + "% (Higher is better.)\n";
 	
-	combatStats += "<b>Spell Effect Multiplier:</b> " + (100 * spellMod()) + "%\n";
+	combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * spellMod()) + "%\n";
 	
 	combatStats += "<b>Spell Cost:</b> " + spellCost(100) + "%\n";
 	
@@ -1956,6 +1956,9 @@ public function displayStats(e:MouseEvent = null):void
 	
 	if (flags[kFLAGS.SPELLS_CAST] > 0)
 		miscStats += "<b>Spells Cast:</b> " + flags[kFLAGS.SPELLS_CAST] + "\n";
+		
+	if (flags[kFLAGS.TIMES_BAD_ENDED] > 0)
+		miscStats += "<b>Times Bad-Ended:</b> " + flags[kFLAGS.TIMES_BAD_ENDED] + "\n";
 		
 	if (flags[kFLAGS.TIMES_ORGASMED] > 0)
 		miscStats += "<b>Times Orgasmed:</b> " + flags[kFLAGS.TIMES_ORGASMED] + "\n";

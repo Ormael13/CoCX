@@ -43,7 +43,7 @@ package classes.Scenes.Areas
 			//Build choice list!
 			choice[choice.length] = 0; //Faerie
 			if (player.level >= 2) choice[choice.length] = 1; //Tentacle Beast
-			choice[choice.length] = 2; //Corrupted Glade
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100 && rand(100) >= Math.round(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] * 0.75)) choice[choice.length] = 2; //Corrupted Glade
 			choice[choice.length] = 3; //Akbal
 			choice[choice.length] = 4; //Kitsunes
 			if (flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) choice[choice.length] = 5; //Tamani
@@ -159,7 +159,7 @@ package classes.Scenes.Areas
 			if ((player.findStatusAffect(StatusAffects.PureCampJojo) < 0 && !camp.campCorruptJojo()) && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && (kGAMECLASS.monk < 2 || rand(2) == 0)) choice[choice.length] = 1; //Jojo
 			if ((player.findStatusAffect(StatusAffects.PureCampJojo) < 0 && !camp.campCorruptJojo()) && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(5) == 0 && (player.cor > 25 || kGAMECLASS.monk > 0)) choice[choice.length] = 1; //Extra chance of Jojo encounter.
 			if (player.level >= 2) choice[choice.length] = 2; //Tentacle Beast
-			choice[choice.length] = 3; //Corrupted Glade
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100 && rand(100) >= Math.round(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] * 0.75)) choice[choice.length] = 3; //Corrupted Glade
 			choice[choice.length] = 4; //Trip on a root
 			if (rand(2) == 0) choice[choice.length] = 5; //Bee-girl encounter
 			if (rand(2) == 0) choice[choice.length] = 6; //Pigtail Truffle

@@ -3,6 +3,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.WeaponLib;
+	import classes.Items.ArmorLib;
 	import classes.Scenes.NPCs.NPCAwareContent;
 
 	public class FollowerInteractions extends NPCAwareContent {
@@ -426,7 +427,7 @@ private function srslyPimpinGuyz():void {
 	player.takeDamage(player.HP - 1);
 	outputText("You wake up several hours later to find that neither of the two girls are still around, your camp is in shambles, and most of your equipment is gone.  After looking around camp, you realize that all of your expendable items, gems, and even your weapons and armor have been taken.  ")
 	if (player.armorName != "goo armor") outputText("All that is left is a suit of comfortable clothes that you put on.  ");
-	else outputText("\"<i>Are you all right,</i>\" the armor-goo asks.  You insist her that you have a terrible headache.  ");
+	else outputText("\"<i>Are you all right?</i>\" the armor-goo asks.  You insist her that you have a terrible headache.  ");
 	outputText("You also find a note in a rough script that says: <i>This is what you get for being an asshole.</i>  Those damn bitches.", false);
 	player.gems *= 0;
 	player.itemSlot1.quantity = 0;
@@ -434,7 +435,7 @@ private function srslyPimpinGuyz():void {
 	player.itemSlot3.quantity = 0;
 	player.itemSlot4.quantity = 0;
 	player.itemSlot5.quantity = 0;
-	player.setArmor(getGame().armors.C_CLOTH); //Old armor disappears unless it's Valeria
+	player.setArmor(ArmorLib.NOTHING); //Old armor disappears unless it's Valeria
 	player.setWeapon(WeaponLib.FISTS);
 //	player.armor = armors.C_CLOTH;
 //	player.weapon.unequip(player,false,true);

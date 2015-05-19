@@ -48,18 +48,22 @@ package classes
 		
 		public const textColorArray:Array = [null, null, null, 0xFFFFFF, 0xFFFFFF, null, null, null, null, null];
 		public const mainColorArray:Array = [null, null, null, null, 0xFFFFFF, null, null, null, null, null];
-		public const barAlphaArray:Array = [0.4, 0.4, 0.4, 1, 1, 1, 1, 1, 1, 1];
+		public const barAlphaArray:Array = [0.4, 0.4, 0.5, 1, 1, 1, 1, 1, 1, 1];
 		
 		public var statsHidden:Boolean = false;
 		public var buttonsTweened:Boolean = false;
 		
 		//Format		
 		private var oldFormat:TextFormat;
-		private var oldFormatLarge:TextFormat;
-		private var timeTextFormat:TextFormat;
+		private var newFormat:TextFormat;
+		private var sidebarTextSize:int;
+		private var sidebarNumberSize:int;
+		//private var oldFormatLarge:TextFormat;
+		//private var timeTextFormat:TextFormat;
 		
 		private var arraySet:Boolean = false;
-		public var texts:Array = [];
+		public var colorableTexts:Array = [];
+		public var fontableTexts:Array = []; //Will be used for font adjustment..
 		public var bars:Array = [];
 
 		private var universalAlpha:Number = 0.4;
@@ -293,7 +297,15 @@ package classes
 			var i:int = 0; //Will be used for array.
 			if (!arraySet) {
 				arraySet = true;
-				texts.push(
+				oldFormat = mainView.timeText.getTextFormat();
+				oldFormat.size = null;
+				oldFormat.align = null;
+				newFormat = mainView.strNum.getTextFormat();
+				newFormat.size = null;
+				newFormat.align = null;
+				//sidebarTextSize = mainView.strText.getTextFormat().size;
+				//sidebarNumSize = mainView.strNum.getTextFormat().size;
+				colorableTexts.push(
 					//Core stats
 					mainView.strText, mainView.strNum, 
 					mainView.touText, mainView.touNum, 
@@ -322,6 +334,29 @@ package classes
 					mainView.advancementText,
 					mainView.timeText
 				);
+				fontableTexts.push(
+					//Core stats
+					mainView.strText, mainView.strNum, 
+					mainView.touText, mainView.touNum, 
+					mainView.speText, mainView.speNum, 
+					mainView.inteText, mainView.inteNum, 
+					mainView.libText, mainView.libNum, 
+					mainView.senText, mainView.senNum, 
+					mainView.corText, mainView.corNum, 
+					//Combat stats
+					mainView.HPText, mainView.HPNum, 
+					mainView.lustText, mainView.lustNum, 
+					mainView.fatigueText, mainView.fatigueNum,
+					mainView.hungerText, mainView.hungerNum,
+					//Prison stats
+					mainView.willText, mainView.willNum, 
+					mainView.esteemText, mainView.esteemNum, 
+					mainView.obeyText, mainView.obeyNum,
+					//Advancement
+					mainView.levelText, mainView.levelNum, 
+					mainView.xpText, mainView.xpNum, 
+					mainView.gemsText, mainView.gemsNum
+				);
 				bars.push(
 					//Core stats
 					mainView.strBar,
@@ -347,10 +382,21 @@ package classes
 			//Set background
 			mainView.background.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
 			mainView.sideBarBG.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+			//Set font
+			if (flags[kFLAGS.USE_OLD_FONT] > 0) {
+				for (i = 0; i < fontableTexts.length; i++) {
+					fontableTexts[i].setTextFormat(oldFormat);
+				}
+			}
+			else {
+				for (i = 0; i < fontableTexts.length; i++) {
+					fontableTexts[i].setTextFormat(newFormat);
+				}
+			}
 			//Set text colour
 			//mainView.mainText.textColor = mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
-			for (i = 0; i < texts.length; i++) {
-				texts[i].textColor = textColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
+			for (i = 0; i < colorableTexts.length; i++) {
+				colorableTexts[i].textColor = textColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
 			}
 			//Set bar opacity
 			universalAlpha = barAlphaArray[flags[kFLAGS.BACKGROUND_STYLE]];
@@ -578,7 +624,7 @@ package classes
 					else mainView.timeText.htmlText += "Time: " + (model.time.hours - 12) + ":" + minutesDisplay + "pm";
 				}
 			}
-			if (timeTextFormat != null) mainView.timeText.setTextFormat(timeTextFormat);
+			//if (timeTextFormat != null) mainView.timeText.setTextFormat(timeTextFormat);
 			
 			//Set theme!
 			setTheme();

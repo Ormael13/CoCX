@@ -525,7 +525,7 @@ package classes.Scenes.Explore {
 			spriteSelect(23);
 			clearOutput();
 			if (player.hasKeyItem("Dual Belt") >= 0) {
-				outputText("<b>You already own a dual belt!</b>");
+				outputText("<b>You already own a Dual Belt!</b>");
 				doNext(eroticaMenu);
 				return;
 			}
@@ -537,7 +537,9 @@ package classes.Scenes.Explore {
 			spriteSelect(23);
 			clearOutput();
 			if (player.gems < 50) {
-				outputText("You do not have enough gems to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need " + String(50 - player.gems) + " more gems to purchase this item.");
+				doNext(eroticaMenu);
+				return;
 			}
 			else {
 				outputText("You are a bit dubious at the pleasure it could offer you, but it would be better than being raped by the creatures constantly... maybe to even work out some excess lusts... hesitantly, you reach into your bag and grab 50 gems, handing it to him.  He greedily snatches it from your palm and hands you with the belt with a smile.  \"<i>I promise you won't be disappointed.</i>\"  He counts the gems and waves goodbye.\n\n(<b>Dual Belt acquired!</b>)");

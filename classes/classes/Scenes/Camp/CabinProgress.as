@@ -17,6 +17,9 @@ package classes.Scenes.Camp
 	 */
 	public class CabinProgress extends BaseContent {
 		
+		public var maxNailSupply:int = 200;
+		public var maxWoodSupply:int = 100;
+		
 		public function CabinProgress() {
 			
 		}
@@ -168,13 +171,8 @@ package classes.Scenes.Camp
 			}
 			outputText("You shrug and pick up the wood block when you hear crashing sound as the tree falls over and splits into many wooden blocks! Surprisingly, they clump together into one bunch. You pick the bunch of wood, noting how easy it is to carry. You return to your camp. \n\n");
 			outputText("<b>+10 wood!</b>")
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 10;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 10;
-			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)
-			{
-				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 100;
-				outputText(" Your wood capacity is full.\n\n")
-			}
+			incrementWoodSupply(10);
 			awardAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD);
 			fatigue(50);
 			doNext(camp.returnToCampUseOneHour);
@@ -186,13 +184,8 @@ package classes.Scenes.Camp
 			else outputText("You ready your axe. ")
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n");
 			outputText("<b>+10 wood!</b>")
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 10;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 10;
-			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)
-			{
-				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 100;
-				outputText(" Your wood capacity is full.")
-			}
+			incrementWoodSupply(10);
 			fatigue(50);
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -211,11 +204,6 @@ package classes.Scenes.Camp
 			}
 		}	
 		
-		public function checkMaterials():void {
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100\n");
-			outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200 \n");
-		}
-		
 		//Get help from Kiha.
 		private function getHelpFromKiha():void {
 			outputText("You recall Kiha wields an oversized axe. You call out for her. After a minute, she walks over to you and says \"<i>Yes, my idiot?</i>\" You tell her that you would like her to cut down some trees so you can haul the wood. She nods and yells \"<i>Stand back!</i>\" as you stand back while you watch her easily cut down not one but two trees! With the trees cut down, you and Kiha haul the wood back to your camp. ")
@@ -223,14 +211,8 @@ package classes.Scenes.Camp
 			if (player.str >= 33 && player.str < 66) outputText("It's quite the chore. Though you can carry several pieces of wood at a time, Kiha is still superior to you when it comes to carrying wood. \n\n");
 			if (player.str > 66) outputText("You easily tackle the task of carrying wood. You even manage to carry five pieces of wood at a time!\n\n");
 			outputText("It takes some time but you eventually bring the last of wood back to your camp. \n\n");
-			outputText("<b>+20 wood!</b>")
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 20;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 20;
-			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100)
-			{
-				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 100;
-				outputText(" Your wood capacity is full.")
-			}
+			incrementWoodSupply(20);
 			fatigue(50);
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -242,6 +224,21 @@ package classes.Scenes.Camp
 		private function noThanks2():void {
 			outputText("Deciding not to work on your cabin right now, you return to the center of your camp.");
 			doNext(playerMenu);
+		}
+		
+		public function incrementWoodSupply(amount:int):void {
+			outputText("<b>(+ " + amount + "wood!");
+			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += amount;
+			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= maxWoodSupply) {
+				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = maxWoodSupply;
+				outputText(" Your wood capacity is full.")
+			}
+			outputText(")</b>");
+		}
+		
+		public function checkMaterials():void {
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + maxWoodSupply + "\n");
+			outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/" + maxNailSupply + " \n");
 		}
 		
 		//STAGE 6 - Work on cabin part 2. Planning your cabin.

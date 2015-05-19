@@ -125,12 +125,12 @@ package classes.Scenes.NPCs
 			}
 			if (model.time.hours == 6) {
 				//Pure amily flips her shit and moves out!
-				if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.cor >= 66 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0) {
+				if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.cor >= 66 + player.corruptionTolerance() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0) {
 					amilyScene.farewellNote();
 					needNext = true;
 				}
 				//Amily moves back in once uncorrupt.
-				if (flags[kFLAGS.AMILY_TREE_FLIPOUT] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0 && player.cor <= 25 && flags[kFLAGS.AMILY_FOLLOWER] == 0) {
+				if (flags[kFLAGS.AMILY_TREE_FLIPOUT] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0 && player.cor <= 25 + player.corruptionTolerance() && flags[kFLAGS.AMILY_FOLLOWER] == 0) {
 					amilyScene.amilyReturns();
 					needNext = true;
 				}
@@ -2530,7 +2530,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Clear warning if PC is good!
-			if(player.cor < 50 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+			if(player.cor < 50 + player.corruptionTolerance() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
 			//Preggo birthing!
 			if (pregnancy.isPregnant && pregnancy.incubation == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
 				clearOutput();
@@ -2910,7 +2910,7 @@ package classes.Scenes.NPCs
 
 			outputText("You stride up to her and take her in your arms, kissing her deeply. She melts enthusiastically into your embrace, kissing you back just as hard, her tail winding around your " + player.leg() + ". You lead her back to the nest she has made for herself and firmly but gently place her on her back there. She smiles up at you. \"<i>Ooh, taking charge, are we?</i>\" She trills with pleasure, tail waving to and fro with sincere excitement.\n\nWhat will you do?", false);
 			var scene:Number = rand(4);
-			choices("Fuck", fuck, "DrinkMilk", drinkMilk, "Eat Out", takeChargeAmilyEatOut, "GetSucked", getSucked, "Scissor", scissor,
+			choices("Fuck", fuck, "Drink Milk", drinkMilk, "Eat Out", takeChargeAmilyEatOut, "GetSucked", getSucked, "Scissor", scissor,
 				"Mount Her", mountHer, "Buttfuck", buttFuckButtFUCKBUTTFUCK, "Catch Anal", catchs, "", null, "", null);
 		}
 
@@ -2955,13 +2955,15 @@ package classes.Scenes.NPCs
 
 			outputText("The taste is unique, distinctly unlike anything you have ever drank before, and yet somehow so very much like Amily. It is thick and creamy and piquant, putting you somewhat in mind of well-aged cheddar, warm from her body-heat and very nourishing.\n\n", false);
 
-			//(Low Amily Milk:
-			if(flags[kFLAGS.AMILY_LACTATION_RATE] < 1) outputText("You drink eagerly, suckling and nursing with all the erotic skill you can muster, and soon her breast is empty. Without further ado, you turn to the next one, and repeat the experience there. Amily moans softly, disappointed, when you drink it dry as well, and you give each nipple in turn a teasing last loving lick before withdrawing. Your mousy lover smiles at you. \"<i>I hope you enjoyed your drink.</i>\" You assure her that you did, and then you help her get dressed, having had enough fun for now.\n\n", false);
-
-			//(Moderate Amily Milk:
-			else if(flags[kFLAGS.AMILY_LACTATION_RATE] < 2) outputText("You drink eagerly, suckling and nursing with all the erotic skill you can muster, and the milk flows thick and freely. You drink and drink, and then, when her breast is empty, you feel compelled to empty the other one. By the time you're finished, you're quite relieved; you feel uncomfortably full, and your stomach gurgles softly as it strains to start digesting your liquid meal. \"<i>Well, they do say milk is good for you, but try not to overdo it, okay?</i>\" Amily teases you. You stick your tongue out at her - which prompts her to pull you into a kiss, her tongue wriggling against yours as she does her best to wring the taste of her own milk from your mouth. Eventually, you push her off... not trying too hard... and she gets dressed, walking away with a jaunty wave of her tail.\n\n", false);
-
-			//(High Amily Milk:
+			//Low Amily Milk:
+			if (flags[kFLAGS.AMILY_LACTATION_RATE] < 2) {
+				outputText("You drink eagerly, suckling and nursing with all the erotic skill you can muster, and soon her breast is empty. Without further ado, you turn to the next one, and repeat the experience there. Amily moans softly, disappointed, when you drink it dry as well, and you give each nipple in turn a teasing last loving lick before withdrawing. Your mousy lover smiles at you. \"<i>I hope you enjoyed your drink.</i>\" You assure her that you did, and then you help her get dressed, having had enough fun for now.\n\n", false);
+			}
+			//Moderate Amily Milk:
+			else if (flags[kFLAGS.AMILY_LACTATION_RATE] < 4) {
+				outputText("You drink eagerly, suckling and nursing with all the erotic skill you can muster, and the milk flows thick and freely. You drink and drink, and then, when her breast is empty, you feel compelled to empty the other one. By the time you're finished, you're quite relieved; you feel uncomfortably full, and your stomach gurgles softly as it strains to start digesting your liquid meal. \"<i>Well, they do say milk is good for you, but try not to overdo it, okay?</i>\" Amily teases you. You stick your tongue out at her - which prompts her to pull you into a kiss, her tongue wriggling against yours as she does her best to wring the taste of her own milk from your mouth. Eventually, you push her off... not trying too hard... and she gets dressed, walking away with a jaunty wave of her tail.\n\n", false);
+			}
+			//High Amily Milk:
 			else {
 				outputText("You drink eagerly, suckling and nursing with all the erotic skill you can muster, and are rewarded with all the milk that Amily has to offer, which is almost more than you can keep up with. You gulp, swallow, and suck desperately as cascades of her fluid pour into your mouth and down your throat, droplets of it seeping between your straining lips to run down your chin. Things get blurry, your world receding to just Amily's breasts, the milk they contain, and your need to drink or choke. At some point you become distantly aware of pains from your overfull stomach, but drinking is all you can think of. Finally, you empty both of her breasts and find yourself collapsing bonelessly onto your back, gasping for breath, your chin, lips and chest stained with milk. It takes you several moments to realize Amily is asking about you in concern.\n\n", false);
 
@@ -2969,6 +2971,10 @@ package classes.Scenes.NPCs
 
 				outputText("\"<i>All that came out of me?</i>\" She asks, curious. She gently rubs your belly, and you moan as the milk sloshes uncomfortably inside your sensitive stomach. Amily sits down, your head in her lap, and lets you rest there until you recover your strength and digest a good portion of the milk. Still feeling uncomfortably full, you get up and go for a walk to help work off your titanic liquid meal.\n\n", false);
 			}
+			var refillAmount:int = (10 + (flags[kFLAGS.AMILY_CUP_SIZE] * 2)) * flags[kFLAGS.AMILY_LACTATION_RATE];
+			if (refillAmount > 100) refillAmount = 100;
+			player.refillHunger(refillAmount, false);
+			fatigue(-refillAmount / 2);
 			doNext(camp.returnToCampUseOneHour);
 			dynStats("spe", .3, "lus", 10, "cor", -.5);
 		}
@@ -3280,6 +3286,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			menu();
 			var haveGift:Boolean = false;
+			var button:int = 0;
 			if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				outputText("You tell Amily that you have something you want to give her.\n\n");
 				
@@ -3289,57 +3296,63 @@ package classes.Scenes.NPCs
 				outputText("You look at the horny cum-bucket and wonder what you should make her take this time.\n\n");
 			}
 			if (player.hasItem(consumables.INCUBID) && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
-				addButton(0, "Incubus D.", giveAmilyPureIncubusDraft);
+				addButton(button++, "Incubus D.", giveAmilyPureIncubusDraft);
 				haveGift = true;
 			}
 			else if (player.hasItem(consumables.P_DRAFT)) {
-				addButton(0, "P. Incubus D.", giveAmilyPureIncubusDraft);
+				addButton(button++, "P. Incubus D.", giveAmilyPureIncubusDraft);
 				haveGift = true;
 			}
 			if (player.hasItem(consumables.P_S_MLK) || (player.hasItem(consumables.SUCMILK) && flags[kFLAGS.AMILY_FOLLOWER] == 2)) {
-				addButton(1, "Succ Milk", giveAmilyPurifiedSuccubusMilk);
+				addButton(button++, "Succ Milk", giveAmilyPurifiedSuccubusMilk);
 				haveGift = true;
 			}
 			if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && (player.hasItem(consumables.PINKEGG) || player.hasItem(consumables.L_PNKEG))) {
-				addButton(2, "Pink Egg", giveAmilyAPinkEgg);
+				addButton(button++, "Pink Egg", giveAmilyAPinkEgg);
 				haveGift = true;
 			}
 			if (player.hasItem(consumables.WHITEEG) || player.hasItem(consumables.L_WHTEG)) {
-				addButton(3, "White Egg", giveAmilyAWhiteEgg);
+				addButton(button++, "White Egg", giveAmilyAWhiteEgg);
 				haveGift = true;
 			}
 			if (player.hasItem(consumables.BROWNEG) || player.hasItem(consumables.L_BRNEG)) {
-				addButton(4, "Brown Egg", giveAmilyABrownEgg);
+				addButton(button++, "Brown Egg", giveAmilyABrownEgg);
 				haveGift = true;
 			}
 			if (player.hasItem(consumables.PURPLEG) || player.hasItem(consumables.L_PRPEG)) {
-				addButton(5, "Purple Egg", giveAmilyAPurpleEgg);
+				addButton(button++, "Purple Egg", giveAmilyAPurpleEgg);
 				haveGift = true;
 			}
-			//Reducto not yet implemented
-			//Lactaid not yet implemented
+			if (player.hasItem(consumables.REDUCTO)) { //IMPLEMENTED! W00T!
+				addButton(button++, "Reducto", giveAmilySomeReducto);
+				haveGift = true;
+			}
+			if (player.hasItem(consumables.LACTAID) && flags[kFLAGS.AMILY_LACTATION_RATE] < 5) { //IMPLEMENTED! W00T!
+				addButton(button++, "Lactaid", makeTheMouseAMilkCowMoo);
+				haveGift = true;
+			}
 			if (player.hasItem(consumables.SDELITE) && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
-				addButton(7, "Suc. Delite", giveCorruptAmilySuccubusDelight);
+				addButton(button++, "Suc. Delite", giveCorruptAmilySuccubusDelight);
 				haveGift = true;
 			}
 			if (player.hasItem(consumables.PSDELIT)) {
 				if (flags[kFLAGS.AMILY_FOLLOWER] == 1) addButton(7, "P. Suc. Delite", giveAmilyPureSuccubusDelight);
-				else addButton(7, "P. Suc. Delite", giveCorruptAmilySuccubusDelight);
+				else addButton(button++, "P. Suc. Delite", giveCorruptAmilySuccubusDelight);
 				haveGift = true;
 			}
 			if (player.hasItem(armors.C_CLOTH)) {
-				addButton(8, "Clothes", giveAmilySomePants);
+				addButton(button++, "Clothes", giveAmilySomePants);
 				haveGift = true;
 			}
 			else if (player.hasItem(armors.S_SWMWR) && flags[kFLAGS.AMILY_OWNS_BIKINI] == 0 && player.hasCock() && player.cockThatFits(61) >= 0 && !amilyCorrupt()) {
 				outputText("You could give her a bikini, then invite her for a swim in the stream to show it off.\n\n");
-				addButton(8, "Bikini", amilySwimFuckIntro);
+				addButton(button++, "Bikini", amilySwimFuckIntro);
 				haveGift = true;
 			}
 			else if (flags[kFLAGS.GIVEN_AMILY_NURSE_OUTFIT] == 0 && !amilyCorrupt()) {
 				if (player.hasItem(armors.NURSECL) && player.hasCock() && player.cockThatFits(61) >= 0) {
 					outputText("You could give Amily the nurse's outfit you got, though it barely covers anything at all, and would likely be inviting some roleplay from the kinky mouse-girl.\n\n");
-					addButton(8, "NurseClothes", amilyNurseCheckup);
+					addButton(button++, "NurseClothes", amilyNurseCheckup);
 					haveGift = true;
 				}
 				else if (player.hasItem(armors.NURSECL))
@@ -3375,7 +3388,7 @@ package classes.Scenes.NPCs
 				//Herm amily is different
 				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
 					//[Purified Incubus Draft - If Amily is Herm and has a 13" penis]
-					if(
+					if (
 						(flags[kFLAGS.AMILY_WANG_LENGTH] >= maxSizePure && !flags[kFLAGS.HYPER_HAPPY]) ||
 						(flags[kFLAGS.AMILY_WANG_LENGTH] >= maxSizeHypr && flags[kFLAGS.HYPER_HAPPY])
 						) {
@@ -3867,7 +3880,7 @@ package classes.Scenes.NPCs
 			amilySprite();
 			var maxSizePure:Number = 16;
 			var maxSizeCorr:Number = 20;
-			var maxSizeHypr:Number = 35;
+			var maxSizeHypr:Number = 20; //Realistically, the maximum supported hip size in the game is 20.
 
 			outputText("You hold out a purple egg, telling her that it will make her hips grow.\n\n", false);
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
@@ -3884,13 +3897,13 @@ package classes.Scenes.NPCs
 						flags[kFLAGS.AMILY_HIP_RATING] += 2+rand(3);
 					}
 
-					if(flags[kFLAGS.AMILY_HIP_RATING] > maxSizePure && !flags[kFLAGS.HYPER_HAPPY])
+					if(flags[kFLAGS.AMILY_HIP_RATING] > maxSizeHypr && flags[kFLAGS.HYPER_HAPPY])
 					{
-						flags[kFLAGS.AMILY_ASS_SIZE] = maxSizePure;
+						flags[kFLAGS.AMILY_HIP_RATING] = maxSizeHypr;
 					}
-					else if(flags[kFLAGS.AMILY_HIP_RATING] > maxSizeCorr)
+					else if(flags[kFLAGS.AMILY_HIP_RATING] > maxSizePure)
 					{
-						flags[kFLAGS.AMILY_ASS_SIZE] = maxSizeCorr;
+						flags[kFLAGS.AMILY_HIP_RATING] = maxSizePure;
 					}
 				}
 				//(If Amily has "full, womanly hips":
@@ -3912,7 +3925,14 @@ package classes.Scenes.NPCs
 						player.consumeItem(consumables.L_PRPEG);
 						flags[kFLAGS.AMILY_HIP_RATING] += 2+rand(3);
 					}
-					if(flags[kFLAGS.AMILY_HIP_RATING] > 16) flags[kFLAGS.AMILY_ASS_SIZE] = 16;
+					
+					if (flags[kFLAGS.AMILY_HIP_RATING] > maxSizeHypr && flags[kFLAGS.HYPER_HAPPY]) {
+						flags[kFLAGS.AMILY_HIP_RATING] = maxSizeHypr;
+					}
+					else if(flags[kFLAGS.AMILY_HIP_RATING] > maxSizeCorr)
+					{
+						flags[kFLAGS.AMILY_HIP_RATING] = maxSizeCorr;
+					}
 				}
 				//(If Amily has "full, womanly hips":
 				else {
@@ -3922,14 +3942,54 @@ package classes.Scenes.NPCs
 			}
 			doNext(amilyFollowerEncounter);
 		}
-		/*
-		[Reducto]
-		She wrinkles her nose at the awful smell of the paste you are showing her, even as you explain it's able to shrink down oversized bodyparts, and you can use this to reduce any parts that she thinks are oversized.
-
-		[Breasts, Nipples, Penis, Butt)
-
-		Grimacing at the smell - it must be awful, for her sensitive nose - she starts smearing it over the (chosen body part), and you step forward to help her. As the last of it wicks away, the part begins to shrink before your eyes. "Hmm. Not bad, I guess. So, was there something else you wanted?" She asks.
-		*/
+		
+		//[Reducto]
+		private function giveAmilySomeReducto():void {
+			clearOutput();
+			outputText("She wrinkles her nose at the awful smell of the paste you are showing her, even as you explain it's able to shrink down oversized bodyparts, and you can use this to reduce any parts that she thinks are oversized.");
+			menu();
+			if (flags[kFLAGS.AMILY_CUP_SIZE] > 1) addButton(0, "Breasts", amilyReducto, 0);
+			if (flags[kFLAGS.AMILY_NIPPLE_LENGTH] > 0.5) addButton(1, "Nipples", amilyReducto, 1);
+			if (flags[kFLAGS.AMILY_HIP_RATING] > 6) addButton(2, "Hips", amilyReducto, 2);
+			if (flags[kFLAGS.AMILY_WANG_LENGTH] > 4) addButton(3, "Penis", amilyReducto, 3);
+			if (flags[kFLAGS.AMILY_ASS_SIZE] > 6) addButton(4, "Butt", amilyReducto, 4);
+			addButton(14, "Nevermind", amilyFollowerEncounter);
+		}
+		private function amilyReducto(part:int):void {
+			player.consumeItem(consumables.REDUCTO);
+			var chosenPart:String = "";
+			if (part == 0) { //Breasts
+				chosenPart = "breasts";
+				if (flags[kFLAGS.AMILY_CUP_SIZE] > 6) flags[kFLAGS.AMILY_CUP_SIZE]--; //Large breasts shrink more!
+				flags[kFLAGS.AMILY_CUP_SIZE]--;
+				if (flags[kFLAGS.AMILY_CUP_SIZE] < 1) flags[kFLAGS.AMILY_CUP_SIZE] = 1;
+			}
+			else if (part == 1) { //Nipples
+				chosenPart = "nipples";
+				if (flags[kFLAGS.AMILY_NIPPLE_LENGTH] > 3) flags[kFLAGS.AMILY_NIPPLE_LENGTH] -= 0.5; //Large nipples shrink more!
+				flags[kFLAGS.AMILY_NIPPLE_LENGTH] -= 0.5;
+				if (flags[kFLAGS.AMILY_NIPPLE_LENGTH] < 0.5) flags[kFLAGS.AMILY_NIPPLE_LENGTH] = 0.5;
+			}
+			else if (part == 2) { //Hips
+				chosenPart = "hips";
+				if (flags[kFLAGS.AMILY_HIP_RATING] > 12) flags[kFLAGS.AMILY_HIP_RATING]--; //Large hips shrink more!
+				flags[kFLAGS.AMILY_HIP_RATING]--;
+				if (flags[kFLAGS.AMILY_HIP_RATING] < 6) flags[kFLAGS.AMILY_HIP_RATING] = 6;
+			}
+			else if (part == 3) { //Penis
+				if (flags[kFLAGS.AMILY_WANG_LENGTH] > 10) flags[kFLAGS.AMILY_WANG_LENGTH]--; //Large cock shrinks more!
+				flags[kFLAGS.AMILY_WANG_LENGTH]--;
+				if (flags[kFLAGS.AMILY_WANG_LENGTH] < 4) flags[kFLAGS.AMILY_HIP_RATING] = 4;
+				flags[kFLAGS.AMILY_WANG_GIRTH] = 1 + ((flags[kFLAGS.AMILY_WANG_LENGTH] - 4) / 9); //Re-adjust girth for length.
+			}
+			else if (part == 4) { //Butt
+				if (flags[kFLAGS.AMILY_ASS_SIZE] > 10) flags[kFLAGS.AMILY_ASS_SIZE]--; //Large butt shrinks more!
+				flags[kFLAGS.AMILY_ASS_SIZE]--;
+				if (flags[kFLAGS.AMILY_ASS_SIZE] < 6) flags[kFLAGS.AMILY_ASS_SIZE] = 6;
+			}
+			outputText("Grimacing at the smell - it must be awful, for her sensitive nose - she starts smearing it over the " + chosenPart + ", and you step forward to help her. As the last of it wicks away, the part begins to shrink before your eyes. \"<i>Hmm. Not bad, I guess. So, was there something else you wanted?</i>\" She asks.");
+			doNext(amilyFollowerEncounter);
+		}
 
 		//[Clothes]
 		public function giveAmilySomePants():void {
@@ -3951,28 +4011,50 @@ package classes.Scenes.NPCs
 			player.consumeItem(armors.C_CLOTH);
 			doNext(amilyFollowerEncounter);
 		}
-		/*
+		
 		//[Lactaid]
-		// TODO: Implement?
 		private function makeTheMouseAMilkCowMoo():void {
 			clearOutput();
-			outputText("\"<i>Lactaid? You really want to try drinking mouse milk?</i>\" Amily asks, a little uncertainly, a little playfully.  You nod and assure that you do.  \"<i>Alright, if you insist.</i>\" She proclaims, taking the pink bottle from you and drinking the creaminess to be found within.\n\n", false);
-
-			//(If Amily does not lactate and has smaller than C-cup breasts: It's quite obvious when the lactaid kicks in; her (breastsize + breastdescript) suddenly puff out, swelling into proud C-cup breasts, milk flowing freely from her nipples, leaving her shirt both severely strained and soaked in milk.  She squeaks in dismay, and races away, clearly going to try and clean herself up.)
-
-			(If Amily does not lactate and has C-cup or bigger breasts: "So...  when is this supposed to start- yeek!" She suddenly squeaks in shock as she realizes her shirt is growing damp.  She hastily pulls her top open, grabbing at her dripping breasts.  "I, I just gotta go take care of this." She explains, blushing and then scampering away.
-
-			(If Amily lactates: Quickly she pulls her breasts out of her top; she doesn't want to make a mess on herself.  Beads of milk begin to form at the tip of her (nipplesdescript), soon giving way to a steady trickle of fluid.  "More milk for thirsty Champions, hmm?" She teases you.  "I'm going to go and take care of this...  unless you want to help me now?" She trills.
-
-			[Yes: Player engages in Suckling sex scene, No: Player stops talking with Amily and returns to camp.]
-
-			[Dye]
-			You ask if she's ever thought about changing the color of her hair ([horsecock]- fur, you amend yourself/NOTHING AT ALL) - and if she does, you have a possible new color for her to try.
-
-			She looks contemplative.  "I always did kind of want to try a new look.  Sure, let's give it a shot!" She smiles.
-
-			The two of you head to the stream, where Amily strips down and dives into the water, to ensure she's scrubbed as clean as possible.  When she swims back, you join her in the water's edge, where you open the bottle of dye and begin the long process of massaging it into her ([horsecock] fur.  You worry for a moment that there's not enough to cover her, but, at the end, you manage to make it work/hair).  Helping her wash the excess out with the cool water, you both leave the water, where Amily slowly twirls around to let you admire her new (dyecolor) ([horsecock]fur/'do).  Quite pleased with it herself, she grabs her (clothesdescript) and wanders off back to camp, with you following her.
-		*/
+			player.consumeItem(consumables.LACTAID);
+			//--PURITY--
+			if (flags[kFLAGS.AMILY_FOLLOWER] == 1) { //Pure
+				outputText("\"<i>Lactaid? You really want to try drinking mouse milk?</i>\" Amily asks, a little uncertainly, a little playfully.  You nod and assure that you do.  \"<i>Alright, if you insist.</i>\" She proclaims, taking the pink bottle from you and drinking the creaminess to be found within.", false);
+			}
+			else if (flags[kFLAGS.AMILY_FOLLOWER] == 2) { //Corrupt
+				outputText("\"<i>Lactaid? You really want to try drinking mouse milk?</i>\" Amily teases, seductively, a little playfully.  You nod and assure that you do.  \"<i>Alright, my " + player.mf("master", "mistress") + "!</i>\" She proclaims, taking the pink bottle from you and drinking the creaminess to be found within.", false);
+			}
+			//--LACTATION--
+			if (flags[kFLAGS.AMILY_LACTATION_RATE] == 0) { //Not lactating
+				//Less than C-cup
+				if (flags[kFLAGS.AMILY_CUP_SIZE] < BREAST_CUP_C) {
+					outputText("\n\nIt's quite obvious when the lactaid kicks in; her " + Appearance.breastCup(flags[kFLAGS.AMILY_CUP_SIZE]) + " breasts suddenly puff out, swelling into proud C-cup breasts, milk flowing freely from her nipples, leaving her shirt both severely strained and soaked in milk.  She squeaks in dismay, and races away, clearly going to try and clean herself up.");
+					flags[kFLAGS.AMILY_CUP_SIZE] = BREAST_CUP_C;
+				}
+				//C-cup or greater
+				else if (flags[kFLAGS.AMILY_CUP_SIZE] >= BREAST_CUP_C) {
+					outputText("\n\n\"<i>So...  when is this supposed to start - yeek</i>!\" She suddenly squeaks in shock as she realizes her shirt is growing damp.  She hastily pulls her top open, grabbing at her dripping breasts.  \"<i>I, I just gotta go take care of this.</i>\" She explains, blushing and then scampering away.");
+				}
+			}
+			else { //Already lactating
+				if (flags[kFLAGS.AMILY_FOLLOWER] == 1) { //Pure
+					outputText("\n\nQuickly she pulls her breasts out of her top; she doesn't want to make a mess on herself.  Beads of milk begin to form at the tip of her " + amilyNipples() + ", soon giving way to a steady trickle of fluid.  \"<i>More milk for thirsty Champions, hmm?</i>\" She teases you.  \"<i>I'm going to go and take care of this...  unless you want to help me now?</i>\" She trills.");
+				}
+				if (flags[kFLAGS.AMILY_FOLLOWER] == 2) { //Corrupt
+					outputText("\n\nQuickly she pulls her breasts out of her top; she doesn't want to make a mess on herself.  Beads of milk begin to form at the tip of her " + amilyNipples() + ", soon giving way to a steady trickle of fluid.  \"<i>More milk for my" + player.mf("Master", "Mistress") + ", hmm?</i>\" She teases you.  \"<i>I'm going to go and take care of this...  unless you want to help me now?</i>\" She trills, seductively.");
+				}
+			}
+			flags[kFLAGS.AMILY_LACTATION_RATE]++;
+			doYesNo(takeChargeAmilyMouseMilk, amilyFollowerEncounter);
+		}
+		
+		//[Dye] (NOT USED)
+		private function dyeAmilyHairOrFur():void{
+			clearOutput();
+			outputText("You ask if she's ever thought about changing the color of her hair ([horsecock]- fur, you amend yourself/NOTHING AT ALL) - and if she does, you have a possible new color for her to try.");
+			outputText("\n\nShe looks contemplative.  \"<i>I always did kind of want to try a new look.  Sure, let's give it a shot!</i>\" She smiles.");
+			outputText("\n\nThe two of you head to the stream, where Amily strips down and dives into the water, to ensure she's scrubbed as clean as possible.  When she swims back, you join her in the water's edge, where you open the bottle of dye and begin the long process of massaging it into her ([horsecock] fur.  You worry for a moment that there's not enough to cover her, but, at the end, you manage to make it work/hair).  Helping her wash the excess out with the cool water, you both leave the water, where Amily slowly twirls around to let you admire her new (dyecolor) ([horsecock]fur/'do).  Quite pleased with it herself, she grabs her (clothesdescript) and wanders off back to camp, with you following her.");
+			doNext(amilyFollowerEncounter);
+		}
 
 		private function amilyHips():String {
 			var desc:String = "";

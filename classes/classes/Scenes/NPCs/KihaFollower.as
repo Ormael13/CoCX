@@ -29,9 +29,6 @@
 					needNext = true;
 				}
 			}
-			if (flags[kFLAGS.KIHA_EGG_COUNTER] > 0) {
-				flags[kFLAGS.KIHA_EGG_COUNTER]--;
-			}
 			if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] > 1) {
 				if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] != 144) flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
 				if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 240 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
