@@ -1914,8 +1914,11 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	monster.spe += 25 * player.newGamePlusMod();
 	monster.inte += 25 * player.newGamePlusMod();
 	monster.level += 30 * player.newGamePlusMod();
-	if (player.newGamePlusMod() < 4) monster.lustVuln *= 1 - player.newGamePlusMod();
-	else monster.lustVuln *= 0.4;
+	//Adjust lust vulnerability in New Game+.
+	if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.8;
+	else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.65;
+	else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.5;
+	else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.4;
 	monster.HP = monster.eMaxHP();
 	monster.XP = monster.totalXP();
 	if (player.weaponName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
@@ -4090,7 +4093,7 @@ public function hellFire():void {
 				monster.lust += monster.lustVuln * damage/6;
 			}
 			else {
-				outputText("  The corrupted fire doesn't seem to have affect on " + monster.a + monster.short + "!\n", false);
+				outputText("  The corrupted fire doesn't seem to have effect on " + monster.a + monster.short + "!\n", false);
 			}
 		}
 	}

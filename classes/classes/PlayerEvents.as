@@ -89,17 +89,23 @@ package classes {
 					}
 					else {
 						//Lose HP and makes fatigue go up. Lose body weight and muscles.
-						player.takeDamage(player.maxHP() / 25);
-						fatigue(2);
-						dynStats("str", -0.5);
-						dynStats("tou", -0.5);
+						if (player.thickness < 25) {
+							player.takeDamage(player.maxHP() / 25);
+							fatigue(2);
+							dynStats("str", -0.5);
+							dynStats("tou", -0.5);
+						}
+						else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
+							player.modThickness(1, 1);
+							player.modTone(1, 1);
+						}
 					}
 					player.hunger = 0; //Prevents negative
 				}
 				else {
 					kGAMECLASS.prison.changeWill((player.esteem / 50) + 1);
 				}
-				if (player.hunger < 10 && model.time.hours % 3 == 0 && !prison.inPrison) {
+				if (player.hunger < 10 && model.time.hours % 4 == 0 && !prison.inPrison) {
 					player.modThickness(1, 1);
 					player.modTone(1, 1);
 				}

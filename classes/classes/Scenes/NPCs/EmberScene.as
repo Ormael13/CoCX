@@ -526,15 +526,15 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("You approach the egg you found in that illusion-concealed cave. Though the light continues to pulse with its heartbeat overtones, it still just sits there, doing nothing.");
 			//(If the egg Corruption level is 0-25, aka \"<i>Pure</i>\")
-			if (flags[kFLAGS.EMBER_COR] <= 25) {
+			/*if (flags[kFLAGS.EMBER_COR] <= 25) {
 				outputText("  As you observe the egg, it glows with soft, metered pulses and you're overcome with a sense of calm and peace.  Watching them, you feel serene, as if untouched by this world's taint.");
-			}
+			}*/
 			//(else If the egg Corruption level is 26-74, aka \"<i>Tainted</i>\")
-			else if (flags[kFLAGS.EMBER_COR] <= 75) {
+			//else if (flags[kFLAGS.EMBER_COR] <= 75) {
 				outputText("  As you observe the egg, it glows with bright, gaudy pulses and you're overcome with a sense of arrogance and strength.  You feel somehow as if you could do anything, as if you were superior to everything, and no one could dare say otherwise.");
-			}
+			//}
 			//(If the egg Corruption level is 75-100, aka \"<i>Corrupt</i>\")
-			else {
+			/*else {
 				outputText("  As you observe the egg you realize what you had taken for its pulses are actually just its normal color; the egg is actually 'glowing' with a black light!  As you stare, mesmerized, you begin to consider the pleasing contrast that would result if you covered it in your ");
 				if (player.gender == 0) outputText("cum, if you had any... ");
 				else {
@@ -544,7 +544,7 @@ package classes.Scenes.NPCs
 				}
 				outputText(" You stop yourself and shake your head.  Where did that thought come from?");
 				dynStats("lus", 10 + player.cor / 10);
-			}
+			}*/
 			//(If player has lust >= 33)
 			if (player.lust >= 33 && (flags[kFLAGS.EMBER_EGG_FLUID_COUNT] < 5 || flags[kFLAGS.EMBER_JACKED_ON] == 0)) {
 				outputText("\n\nYou stare at the egg's rhythmic pulsations.  As you do, though, you realize the pattern of the pulses is starting to change.  It's becoming erratic, as if the egg were excited.  For some reason, you suddenly feel aroused, and the egg looks strangely inviting...");
@@ -639,13 +639,11 @@ package classes.Scenes.NPCs
 			clearOutput();
 			if (purified) {
 				player.consumeItem(consumables.P_DRAFT);
-				flags[kFLAGS.EMBER_COR] -= 10;
-				if (flags[kFLAGS.EMBER_COR] < 0) flags[kFLAGS.EMBER_COR] = 0;
+				emberCorruption(-10);
 			}
 			else {
 				player.consumeItem(consumables.INCUBID);
-				flags[kFLAGS.EMBER_COR] += 10;
-				if (flags[kFLAGS.EMBER_COR] > 100) flags[kFLAGS.EMBER_COR] = 100;
+				emberCorruption(10);
 			}
 			outputText("Uncorking the vial, you drizzle the slimy off-white fluid onto the pointed cone of the egg.  It oozes slowly across the surface, then seeps through the shell, leaving not a drop of moisture.");
 			if (flags[kFLAGS.EMBER_GENDER] == 3 || flags[kFLAGS.EMBER_GENDER] == 0) {
@@ -666,13 +664,11 @@ package classes.Scenes.NPCs
 			clearOutput();
 			if (purified) {
 				player.consumeItem(consumables.P_S_MLK);
-				flags[kFLAGS.EMBER_COR] -= 10;
-				if (flags[kFLAGS.EMBER_COR] < 0) flags[kFLAGS.EMBER_COR] = 0;
+				emberCorruption(-10);
 			}
 			else {
 				player.consumeItem(consumables.SUCMILK);
-				flags[kFLAGS.EMBER_COR] += 10;
-				if (flags[kFLAGS.EMBER_COR] > 100) flags[kFLAGS.EMBER_COR] = 100;
+				emberCorruption(10);
 			}
 			outputText("Popping the cap off of the milk bottle, you pour the contents onto the egg - the porous shell soaks up the milk as fast as you dump it, spilling not a drop.");
 			//(If Unsexed or Herm:

@@ -2,7 +2,7 @@
 <application xmlns="http://ns.adobe.com/air/application/3.1">
   <id>com.fenoxo.coc</id>
   <versionNumber>0.9.4</versionNumber>
-  <versionLabel>CoC_0.9.4</versionLabel>
+  <versionLabel>CoC_0.9.4_mod_1.2.10</versionLabel>
   <supportedProfiles>mobileDevice desktop extendedMobileDevice extendedDesktop tv extendedTV</supportedProfiles>
   <filename>Corruption of Champions</filename>
   <name>Corruption of Champions</name>
