@@ -52,9 +52,13 @@ package classes {
 				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.01, "resisted", false); //Double lust rise if lusty.
 			}
 			//Jewelry effect
-			if (player.jewelryEffectId == 8)
+			if (player.jewelryEffectId == JewelryLib.CORRUPTION)
 			{
 				dynStats("cor", (player.jewelryEffectMagnitude/10));
+			}
+			if (player.jewelryEffectId == JewelryLib.PURITY)
+			{
+				dynStats("cor", -0.1);
 			}
 			if (player.armor == armors.DBARMOR)
 			{

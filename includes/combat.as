@@ -289,7 +289,8 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		addButton(0, "Recover", wait);
 	}
 	else if (monster.findStatusAffect(StatusAffects.Constricted) >= 0) {
-		addButton(0, "Squeeze", desert.nagaScene.naggaSqueeze);
+		menu();
+		addButton(0, "Squeeze", desert.nagaScene.naggaSqueeze, null, null, null, "Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
 		addButton(1, "Tease", desert.nagaScene.naggaTease);
 		addButton(4, "Release", desert.nagaScene.nagaLeggoMyEggo);
 	}
@@ -336,7 +337,7 @@ public function packAttack():void {
 		outputText("With your incredible flexibility, you squeeze out of the way of " + monster.a + monster.short + "' attacks.");
 	}
 	else {
-		temp = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef); //Determine damage - str modified by enemy toughness!
+		temp = int((monster.str + monster.weaponAttack) * (player.damagePercent() / 100)); //Determine damage - str modified by enemy toughness!
 		if (temp <= 0) {
 			temp = 0;
 			if (!monster.plural)
@@ -344,14 +345,14 @@ public function packAttack():void {
 			else outputText("You deflect " + monster.a + monster.short + " " + monster.weaponVerb + ".");
 		}
 		else {
-			temp = takeDamage(temp);
 			if (temp <= 5)
-				outputText("You are struck a glancing blow by " + monster.a + monster.short + "! (" + temp + ")");
+				outputText("You are struck a glancing blow by " + monster.a + monster.short + "! ");
 			else if (temp <= 10)
-				outputText(monster.capitalA + monster.short + " wound you! (" + temp + ")");
+				outputText(monster.capitalA + monster.short + " wound you! ");
 			else if (temp <= 20)
-				outputText(monster.capitalA + monster.short + " stagger you with the force of " + monster.pronoun3 + " " + monster.weaponVerb + "s! (" + temp + ")");
-			else outputText(monster.capitalA + monster.short + " <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "s! (" + temp + ")");
+				outputText(monster.capitalA + monster.short + " stagger you with the force of " + monster.pronoun3 + " " + monster.weaponVerb + "s! ");
+			else outputText(monster.capitalA + monster.short + " <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "s! ");
+			takeDamage(temp, true);
 		}
 		statScreenRefresh();
 		outputText("\n");
@@ -573,7 +574,7 @@ private function struggle():void {
 
 private function fireBow():void {
 	clearOutput();
-	if (player.fatigue + physicalCost(25) > 100) {
+	if (player.fatigue + physicalCost(25) > player.maxFatigue()) {
 		outputText("You're too fatigued to fire the bow!");
 		doNext(combatMenu);
 		return;
@@ -790,7 +791,7 @@ public function bite():void {
 	//Deal damage and update based on perks
 	if(damage > 0) {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 		damage = doDamage(damage);
 	}
@@ -1003,7 +1004,7 @@ public function attack():void {
 		
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
 	if (player.findPerk(PerkLib.ChiReflowAttack) >= 0) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-	if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+	if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 	if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 	//One final round
 	damage = Math.round(damage);
@@ -1180,7 +1181,7 @@ public function goreAttack():void {
 		enemyAI();
 		return;
 	}
-	if(player.fatigue + physicalCost(15) > 100) {
+	if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
 		outputText("You're too fatigued to use a charge attack!");
 		doNext(combatMenu);
 		return;
@@ -1243,14 +1244,14 @@ public function goreAttack():void {
 		if(damage > player.level * 10 + 100) damage = player.level * 10 + 100;
 		if(damage > 0) {
 			if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-			if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			damage = doDamage(damage);
 		}
 		//Different horn damage messages
-		if(damage < 20) outputText("You pull yourself free, dealing " + damage + " damage.");
-		if(damage >= 20 && damage < 40) outputText("You struggle to pull your horns free, dealing " + damage + " damage.");
-		if(damage >= 40) outputText("With great difficulty you rip your horns free, dealing " + damage + " damage.");
+		if(damage < 20) outputText("You pull yourself free, dealing <b><font color=\"#080000\">" + damage + "</font></b> damage.");
+		if(damage >= 20 && damage < 40) outputText("You struggle to pull your horns free, dealing <b><font color=\"#080000\">" + damage + "</font></b> damage.");
+		if(damage >= 40) outputText("With great difficulty you rip your horns free, dealing <b><font color=\"#080000\">" + damage + "</font></b> damage.");
 	}
 	//Miss
 	else {
@@ -1408,6 +1409,11 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 	
 	if(damage < 0) damage = 1;
 	if (apply) monster.HP -= damage;
+	if (display) {
+		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + temp + "</font>)</b>"); //Damage
+		else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + temp + "</font>)</b>"); //Miss/block
+		else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + temp + "</font>)</b>"); //Heal
+	}
 	//Isabella gets mad
 	if(monster.short == "Isabella") {
 		flags[kFLAGS.ISABELLA_AFFECTION]--;
@@ -1415,7 +1421,7 @@ public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = 
 		if(flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
 	}
 	//Interrupt gigaflare if necessary.
-	if(monster.findStatusAffect(StatusAffects.Gigafire) >= 0) monster.addStatusValue(StatusAffects.Gigafire,1,damage);
+	if (monster.findStatusAffect(StatusAffects.Gigafire) >= 0) monster.addStatusValue(StatusAffects.Gigafire, 1, damage);
 	//Keep shit in bounds.
 	if(monster.HP < 0) monster.HP = 0;
 	return damage;
@@ -1525,6 +1531,7 @@ public function dropItem(monster:Monster, nextFunc:Function = null):void {
 }
 public function awardPlayer(nextFunc:Function = null):void
 {
+	if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour; //Default to returning to camp.
 	if (player.countCockSocks("gilded") > 0) {
 		//trace( "awardPlayer found MidasCock. Gems bumped from: " + monster.gems );
 		
@@ -1545,8 +1552,8 @@ public function awardPlayer(nextFunc:Function = null):void
 		monster.gems = Math.round(monster.gems);
 	}
 	monster.handleAwardText(); //Each monster can now override the default award text
-	if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent;
-	if (!inDungeon && !inRoomedDungeon && !prison.inPrison) {
+	if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent; //In prison
+	else if (!inDungeon && !inRoomedDungeon && !prison.inPrison) { //Not in dungeons
 		doNext(nextFunc);
 	}
 	else if (nextFunc != null) doNext(nextFunc);
@@ -2676,6 +2683,15 @@ public function tease(justText:Boolean = false):void {
 		choices[choices.length] = 44;
 		choices[choices.length] = 44;
 	}
+	//45 - Lethicite armor
+	if (player.armor == armors.LTHCARM && player.upperGarment == UndergarmentLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING) {
+		choices[choices.length] = 45;
+		choices[choices.length] = 45;
+		choices[choices.length] = 45;
+		choices[choices.length] = 45;
+		choices[choices.length] = 45;
+		choices[choices.length] = 45;
+	}
 	//=======================================================
 	//    CHOOSE YOUR TEASE AND DISPLAY IT!
 	//=======================================================
@@ -3210,10 +3226,46 @@ public function tease(justText:Boolean = false):void {
 				chance += 2;
 			}
 			break;
-		//lethicite armor, not yet implemented
-		//case 45:
-		//	outputText("You pinch and tweak your exposed [nipples].");
-		//	break;
+		//lethicite armor teases
+		case 45:
+			var partChooser:Array = []; //Array for choosing.
+			//Choose part. Must not be a centaur for cock and vagina teases!
+			partChooser[partChooser.length] = 0;
+			if (player.gender == 1 && !player.isTaur()) partChooser[partChooser.length] = 1;
+			if (player.gender == 2 && !player.isTaur()) partChooser[partChooser.length] = 2;
+			if (player.gender == 3 && player.hasVagina() && !player.isTaur()) partChooser[partChooser.length] = 3;
+			//Let's do this!
+			switch(partChooser[rand(partChooser.length)]) {
+				case 0:
+					outputText("You place your hand on your lethicite-covered belly, move your hand up across your belly and towards your [chest]. Taking advantage of the small openings in your breastplate, you pinch and tweak your exposed [nipples].");
+					breasts = true;
+					chance += 3;
+					damage += 1;
+					break;
+				case 1:
+					outputText("You move your hand towards your [cocks], unobstructed by the lethicite. You give your [cock] a good stroke and sway your hips back and forth, emphasizing your manhood.");
+					penis = true;
+					chance += 1;
+					damage += 2;
+					break;
+				case 2:
+					outputText("You move your hand towards your [pussy], unobstructed by the lethicite. You give your [clit] a good tease, finger your [pussy], and sway your hips back and forth, emphasizing your womanhood.");
+					vagina = true;
+					chance += 1;
+					damage += 2;
+					break;
+				case 3:
+					outputText("You move your hand towards your [cocks] and [pussy], unobstructed by the lethicite. You give your [cock] a good stroke, tease your [clit], and sway your hips back and forth, emphasizing your hermaphroditic gender.");
+					penis = true;
+					vagina = true;
+					chance += 1;
+					damage += 3;
+					break;
+				default:
+					outputText("Whoops, something derped! Please let Kitteh6660 know! Anyways, you put on a tease show.");
+			}
+			
+			break;
 	}
 	//===========================
 	//BUILD BONUSES IF APPLICABLE
@@ -3620,7 +3672,7 @@ public function spellMod():Number {
 		mod += player.perkv1(PerkLib.WizardsFocus);
 	}
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-	if (player.jewelryEffectId == 9) mod += (player.jewelryEffectMagnitude / 100);
+	if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 	if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 	if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.05);
 	return mod;
@@ -4190,7 +4242,7 @@ public function kick():void {
 	else if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) damage += 35;
 	//Damage post processing!
 	if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-	if (player.jewelryEffectId == 6) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+	if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 	if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 	//Reduce damage
 	damage *= monster.damagePercent() / 100;
@@ -4265,13 +4317,13 @@ public function PCWebAttack():void {
 	}
 	//LAND A HIT!
 	else {
-		if(!monster.plural) outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ".", false);
-		else outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ".", false);
+		if(!monster.plural) outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ", false);
+		else outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ", false);
 		monster.spe -= 45;
 		if(monster.spe < 0) monster.spe = 0;
 	}
-	outputText("\n\n", false);
 	awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
+	outputText("\n\n", false);
 	if(monster.HP < 1 || monster.lust > 99) combatRoundOver();
 	else enemyAI();
 }
@@ -4300,7 +4352,7 @@ public function nagaBiteAttack():void {
 		return;
 	}
 	//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
-    if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5) {
+    if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5 || monster.findStatusAffect(StatusAffects.Constricted) >= 0) {
 		//(if monster = demons)
 		if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You catch the demon off guard and sink your needle-like fangs deep into his flesh. You quickly release your venom and retreat before he, or the rest of the group manage to react.", false);
 		//(Otherwise) 
@@ -5250,7 +5302,7 @@ public function corruptedFoxFire():void {
 		if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	dmg = doDamage(dmg);
-	outputText("  (" + dmg + ")\n\n", false);
+	outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
@@ -5293,7 +5345,7 @@ public function foxFire():void {
 		if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 	}
 	dmg = doDamage(dmg);
-	outputText("  (" + dmg + ")\n\n", false);
+	outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();

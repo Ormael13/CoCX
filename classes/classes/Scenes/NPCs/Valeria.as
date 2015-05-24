@@ -473,7 +473,8 @@ private function declineValeriasNeeds():void {
 
 private function takeValeria():void {
 	spriteSelect(79);
-	outputText("valeria-take");
+	clearOutput();
+	outputText(images.showImage("valeria-take"));
 	armors.GOOARMR.useText();
 	player.armor.removeText();
 	var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor

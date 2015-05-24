@@ -141,8 +141,15 @@ package classes.Scenes
 				kGAMECLASS.anemoneScene.anemoneBarrelDescription();
 				if (model.time.hours >= 6) addButton(4, "Anemone", kGAMECLASS.anemoneScene.approachAnemoneBarrel);
 			}
-			if (player.hasKeyItem("Camp - Chest") >= 0) {
-				outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n");
+			if (player.hasKeyItem("Camp - Chest") >= 0 || player.hasKeyItem("Camp - Murky Chest") >= 0 || player.hasKeyItem("Camp - Ornate Chest") >= 0) {
+				var chestArray:Array = [];
+				if (player.hasKeyItem("Camp - Chest") >= 0) chestArray.push("a large wood and iron chest");
+				if (player.hasKeyItem("Camp - Murky Chest") >= 0) chestArray.push("a medium damp chest");
+				if (player.hasKeyItem("Camp - Ornate Chest") >= 0) chestArray.push("a medium gilded chest");
+				outputText("You have " + formatStringArray(chestArray) + " to help store excess items located ");
+				if (camp.homeDesc() == "cabin") outputText("inside your cabin");
+				else outputText("near the portal entrance");
+				outputText(".\n\n");
 				addButton(0, "Chest Store", pickItemToPlaceInCampStorage);
 				if (hasItemsInStorage()) addButton(1, "Chest Take", pickItemToTakeFromCampStorage);
 			}

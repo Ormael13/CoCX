@@ -762,8 +762,8 @@ public function nagaPlayerConstrict():void {
 	//Failure
 	else {
 		//Failure (-10 HPs) -
-		outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " +monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back.", false);
-		player.takeDamage(5);
+		outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " +monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ", false);
+		player.takeDamage(5, true);
 		if(player.HP <= 0) {
 			doNext(kGAMECLASS.endHpLoss);
 			return;
@@ -775,9 +775,16 @@ public function nagaPlayerConstrict():void {
 
 public function naggaSqueeze():void {
 	clearOutput();
+	if (player.fatigue + kGAMECLASS.physicalCost(20) > player.maxFatigue()) {
+		outputText("You are too tired to squeeze " + monster.a + " " + monster.short + ".");
+		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		return;
+	}
 	//Squeeze -
-	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified.", false);
-    monster.HP -= monster.eMaxHP() * (.10 + rand(15)/100);
+	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified. ", false);
+	var damage:int = monster.eMaxHP() * (.10 + rand(15) / 100);
+	kGAMECLASS.doDamage(damage, true, true);
+	fatigue(20, 2);
 	//Enemy faints -
 	if(monster.HP < 1) {
 		outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ", false);

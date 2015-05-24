@@ -271,6 +271,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 1) addButton(7, "Stop Harvest", stopHarvest);
 					
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+			dynStats("lus", 10);
 		}
 		
 		private function sendToFarm():void
@@ -360,7 +361,6 @@ package classes.Scenes.NPCs
 				}
 			}
 
-			dynStats("lus", 10);
 			callSlaveVapula(false);
 		}
 

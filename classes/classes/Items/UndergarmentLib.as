@@ -21,7 +21,7 @@ package classes.Items
 		
 		//Upper
 		public const C_BRA:Undergarment = new Undergarment("C. Bra ", "C. Bra", "comfortable bra", "a pair of comfortable bra", TYPE_UPPERWEAR, DEFAULT_VALUE, "A generic pair of bra. \n\nType: Undergarment (Upper)");
-		public const DS_BRA:Undergarment = new Undergarment("DS. Bra ", "D.Scale Bra", "dragon-scale bra", "a pair of dragonscale bra", TYPE_UPPERWEAR, 600, "This bra appears to be made of dragon scale. It's held together with leather straps for flexibility. \n\nType: Undergarment (Upper)");
+		public const DS_BRA:Undergarment = new Undergarment("DS. Bra ", "D.Scale Bra", "dragonscale bra", "a pair of dragonscale bra", TYPE_UPPERWEAR, 600, "This bra appears to be made of dragon scale. It's held together with leather straps for flexibility. Great for those on the primal side! \n\nType: Undergarment (Upper) \nDefense: 2 \nBase value: 600");
 		public const LTX_BRA:Undergarment = new Undergarment("Ltx.Bra", "Latex Bra", "latex bra", "a pair of latex bra", TYPE_UPPERWEAR, 250, "This bra is black and shiny, obviously made of latex. It's designed to fit snugly against your breasts. \n\nType: Undergarment (Upper) \nBase value: 250 \nSpecial: Increases tease effectiveness by 1.");
 		public const SS_BRA:Undergarment = new Undergarment("SS. Bra", "S.Silk Bra", "spider-silk bra", "a pair of spider-silk bra", TYPE_UPPERWEAR, 1000, "This bra looks incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk. \nType: Undergarment (Upper) \nDefense: 1 \nBase value: 1,000");
 		

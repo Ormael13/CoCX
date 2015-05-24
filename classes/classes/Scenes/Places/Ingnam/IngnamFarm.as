@@ -28,7 +28,7 @@ package classes.Scenes.Places.Ingnam
 		
 		public function workAtFarm():void { //Job at the farm.
 			clearOutput();
-			if (player.fatigue > 70) {
+			if (player.fatigue + 20 > player.maxFatigue()) {
 				outputText("You are too exhausted to work at the farm!");
 				doNext(menuFarm);
 				return;

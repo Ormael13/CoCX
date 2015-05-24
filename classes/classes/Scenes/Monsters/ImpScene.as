@@ -1548,7 +1548,12 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] != 1) {
 				outputText("A large corrupted imp crosses your path. He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
+				if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+				}
 				startCombat(new ImpLord());
+				return;
 			}
 			else {
 				outputText("As you're minding your own business, you spot a large imp.  He is playing with himself, loincloth discarded next to him.  You could make out his cunt, as the result of your breastfeeding session.  However, you notice some difference.  He has a cock instead of clit, perhaps he has partially recovered.  Clearly, he's a maleherm now.  You blush as the imp finally reaches orgasm, his cum and femspunk splattering everywhere.");

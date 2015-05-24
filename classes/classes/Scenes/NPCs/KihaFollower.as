@@ -114,7 +114,7 @@ private function canKihaGetPregnant():Boolean {
 private function kihaKnockUpAttempt():void {
 	//Call off the pregnancy!
 	if (!camp.followerKiha() || pregnancy.isPregnant || !canKihaGetPregnant()) {
-		outputText("\n\n<b>DEBUG: Knockup attempt cancelled.</b>");
+		if (debug) outputText("\n\n<b>DEBUG: Knockup attempt cancelled.</b>");
 		trace("Cancelled");
 		return;
 	}
@@ -373,10 +373,13 @@ internal function kihaFriendlyGreeting(output:Boolean = true):void {
 	
 		outputText("[pg]\"<i>Oh, uh, hey, " + player.short + ",</i>\" she says leaning on her greataxe.  \"<i>It's... good to see you again, I guess.  Did you, uh, want something?</i>\"", false);
 	}
-	var talk:Function = null;
-	if(flags[kFLAGS.KIHA_TALK_STAGE] < 6) talk = talkToFriendlyKiha;
 	//(Display Options: [Talk] [Spar] [Hug] [Leave]
-	simpleChoices("Talk", talk, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "", null, "Leave", camp.returnToCampUseOneHour);
+	menu();
+	if (flags[kFLAGS.KIHA_TALK_STAGE] < 6) addButton(0, "Talk", talkToFriendlyKiha, null, null, null, "Talk to Kiha. She might not like it but you might make some progress.");
+	addButton(1, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
+	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
+	addButton(4, "Leave", camp.returnToCampUseOneHour);
+	//simpleChoices("Talk", talk, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "", null, "Leave", camp.returnToCampUseOneHour);
 }
 //Spar with Friendly Kiha - Intro (Z)
 private function sparWithKiha():void {
@@ -656,7 +659,12 @@ private function kihaAdmitsSheLikesYourWang():void {
 		outputText("Kiha lightly drops out of the trees in front of you, kicking up a small splash of fetid water as she comes to rest a few feet away.  She rests her axe over her shoulder nonchalantly and smiles as she says, \"<i>Did you come back to get your ass kicked?  You wouldn't be the first to throw fights so you could check me out while you're lying on the ground.</i>\"  Her tail swings around to playfully catch you on the " + buttDescript() + ", a hint of crimson spreading on her dark skin, matching the ruby hue of her shimmering scales.  Kiha strikes a battle-ready pose that looks a bit more lewd than normal as she asks, \"<i>So, you here to fight, or waste more time talking?</i>\"");
 		outputText("[pg]Do you hug her, and potentially take things to the next level, or would you rather do something else?");
 	}
-	simpleChoices("Talk", null, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "LovinHug", lovinHugKiha, "Leave", camp.returnToCampUseOneHour);
+	menu();
+	addButton(1, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
+	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
+	addButton(3, "LovinHug", lovinHugKiha, null, null, null, "Give the dragoness a hug and take things to a whole new level!");
+	addButton(4, "Leave", camp.returnToCampUseOneHour);
+	//simpleChoices("Talk", null, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "LovinHug", lovinHugKiha, "Leave", camp.returnToCampUseOneHour);
 }
 //Loving Hug
 private function lovinHugKiha():void {

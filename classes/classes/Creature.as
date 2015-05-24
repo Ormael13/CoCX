@@ -5,6 +5,7 @@ package classes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkType;
 	import classes.StatusAffectType;
+	import classes.Items.JewelryLib;
 	import classes.internals.Utils;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 	
@@ -1663,10 +1664,8 @@ package classes
 			if (findPerk(PerkLib.MessyOrgasms) >= 0)
 				percent += 0.03;
 			//Fertite ring bonus!
-			if (jewelryEffectId == 3)
+			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
 				percent += (jewelryEffectMagnitude / 100);
-			if (jewelryEffectId == 4)
-				percent -= (jewelryEffectMagnitude / 100);
 			if (findPerk(PerkLib.AscensionVirility) >= 0)
 				percent += perkv1(PerkLib.AscensionVirility) * 0.05;				
 			if (percent > 1)
@@ -1732,10 +1731,8 @@ package classes
 				quantity += 200;
 			quantity += statusAffectv1(StatusAffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
-			if (jewelryEffectId == 3)
-				quantity *= (1 + (jewelryEffectMagnitude / 100))
-			if (jewelryEffectId == 4)
-				quantity *= (1 - (jewelryEffectMagnitude / 100))			
+			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
+				quantity *= (1 + (jewelryEffectMagnitude / 100));
 			//trace("Final Cum Volume: " + int(quantity) + "mLs.");
 			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)
@@ -1768,8 +1765,7 @@ package classes
 			cumCap += statusAffectv1(StatusAffects.Rut);
 			cumCap *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			//Alter capacity by accessories.
-			if (jewelryEffectId == 3) cumCap *= (1 + (jewelryEffectMagnitude / 100));
-			if (jewelryEffectId == 4) cumCap *= (1 - (jewelryEffectMagnitude / 100));
+			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY) cumCap *= (1 + (jewelryEffectMagnitude / 100));
 				
 			cumCap *= cumMultiplier
 			cumCap == Math.round(cumCap);
@@ -2457,10 +2453,8 @@ package classes
 				counter += 10;
 			counter += perkv2(PerkLib.ElvenBounty);
 			counter += perkv1(PerkLib.PiercedFertite);
-			if (jewelryEffectId == 3)
-				counter += jewelryEffectMagnitude
-			if (jewelryEffectId == 4)
-				counter -= jewelryEffectMagnitude
+			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
+				counter += jewelryEffectMagnitude;
 			counter += perkv1(PerkLib.AscensionFertility) * 5;
 			return counter;
 		}
@@ -3560,14 +3554,26 @@ package classes
 			return Appearance.breastSize(val);
 		}
 		
-		public function damagePercent(display:Boolean = false, applyModifiers:Boolean = false):Number {
+		public function damageToughnessModifier(displayMode:Boolean = false):Number {
+			var temp:Number = 0;
+			if (tou < 25) temp = (tou * 0.4);
+			else if (tou < 50) temp = 10 + (tou * 0.3);
+			else if (tou < 75) temp = 17.5 + (tou * 0.2);
+			else if (tou < 100) temp = 22.5 + (tou * 0.1);
+			else temp = 25;
+			//displayMode is for stats screen.
+			if (displayMode) return temp;
+			else return rand(temp);
+		}
+		
+		public function damagePercent(displayMode:Boolean = false, applyModifiers:Boolean = false):Number {
 			var mult:Number = 100;
 			var armorMod:Number = armorDef;
 			//--BASE--
 			//Toughness modifier.
-			if (!display) {
-				mult -= rand(tou) * 0.2;
-				if (mult < 80) mult = 80;
+			if (!displayMode) {
+				mult -= damageToughnessModifier();
+				if (mult < 75) mult = 75;
 			}
 			//Modify armor rating based on weapons.
 			if (applyModifiers) {

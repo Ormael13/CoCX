@@ -1247,7 +1247,7 @@ package classes.Scenes.NPCs
 			menu();
 			kGAMECLASS.hideUpDown();
 			var foundItem:Boolean = false;
-			for (var x:int = 0; x < 5; x++) {
+			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
 					addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
 					foundItem = true;
@@ -1397,7 +1397,8 @@ package classes.Scenes.NPCs
 			//[Katana] or [Spellsword]
 			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.KATANA.id ||
 					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.S_BLADE.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SCIMITR.id ) {
+					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SCIMITR.id ||
+					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.B_SCARB.id ) {
 				outputText("\n\nThe light sword and the light anemone seem to be a good match, and she actually manages to make several deft moves with it after your instruction.  One is a bit too deft, as she fails to rein in her swing and delivers a long, drawing cut that connects with your [leg].");
 				//(HP - 20, KidXP + 2)
 				kidAXP(4);

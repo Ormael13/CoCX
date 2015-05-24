@@ -18,13 +18,20 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.inDungeon = true;
 			kGAMECLASS.dungeonLoc = -10;
 			menu();
-			outputText("<b><u>Your Cabin</u></b>\n\n")
+			clearOutput();
+			outputText("<b><u>Your Cabin</u></b>\n")
 			outputText("You are in your cabin.  Behind you is a door leading back to your camp.  Next to the door is a window to let the sunlight in. \n\n");
 			
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0)
 			{
 				outputText("Your bed is located at one of the corners. It's constructed with wood frame and a mattress is laid on the frame. It's covered in sheet. A pillow leans against the headboard.  ");
-				if (player.hasKeyItem("Camp - Chest")) outputText("Your storage chest is located in front of your bed.")
+				if (inventory.itemStorageDirectGet().length > 0) {
+					var chests:int = 0;
+					if (player.hasKeyItem("Camp - Chest") >= 0) chests++;
+					if (player.hasKeyItem("Camp - Murky Chest") >= 0) chests++;
+					if (player.hasKeyItem("Camp - Ornate Chest") >= 0) chests++;
+					outputText("Your storage " + (chests == 1 ? "chest is" : "chests are") + " located in front of your bed.")
+				}
 				outputText("\n\n");
 			}
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0)

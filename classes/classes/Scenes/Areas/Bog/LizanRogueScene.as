@@ -126,10 +126,10 @@ package classes.Scenes.Areas.Bog
 				outputText("You tell the male lizan you're game as you " + player.clothedOrNaked("begin to pull off your [armor]", "show your naked form") + ". His bulge becomes more pronounced as your body comes into view. He quite obviously likes what he sees. Which one of your body parts do you plan to use on the horny male lizan?");
 			}
 			menu();
-			if (player.hasCock()) addButton(0, "Use Dick", consensualButtfuck, null, null, null, "Anally penetrate him with your [cocks].");
-			if (player.hasVagina()) addButton(1, "Use Vagina", consensualGetFucked, null, null, null, "Have him fuck your [pussy].");
-			addButton(2, "Use Ass", consensualGetButtFucked, null, null, null, "Have him fuck your [ass].");
-			if (player.hasVagina()) addButton(3, "Dbl.Penetration", consensualDoublePenetration, null, null, null, "Have him stuff both your holes with his dual cocks.");
+			if (player.hasCock()) addButton(0, "Use Dick", consensualButtfuck, null, null, null, "Anally penetrate him with your penis.");
+			if (player.hasVagina()) addButton(1, "Use Vagina", consensualGetFucked, null, null, null, "Have him take you vaginally.");
+			addButton(2, "Use Ass", consensualGetButtFucked, null, null, null, "Have him take you anally.");
+			if (player.hasVagina()) addButton(3, "Dbl.Penetration", consensualDoublePenetration, null, null, null, "Have him stuff both your holes with his dual cocks.", "Double Penetration");
 			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0 && flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER] >= 3 && !continuation) addButton(4, "Watersports", consensualWatersports, null, null, null, "Participate into urine activity with him. \n\nNOTE: Contains watersports!");
 		}
 		
@@ -226,6 +226,7 @@ package classes.Scenes.Areas.Bog
 			}
 			outputText("\n\nFor a second you lie there [fullChest] against his " + monster.skinTone + " abs. Around the two of you lies the hot glorious mess of your combined sexual fluids. Both of you are panting, both of you are satisfied. Then you push yourself off of him and collect your [armor]. He takes it upon himself to clean your [fullChest] and [vagina] with his long tongue and as soon as he is done, " + player.clothedOrNaked("you pull on your [armor]", "you recollect whatever you had") + ". Before you leave you reward him with a deep kiss, snaking your [tongue] into his mouth before heading back to camp.");
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
+			player.createStatusAffect(StatusAffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
@@ -336,6 +337,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\n\"<i>By Marae that was… wow,</i>\" he says. You agree moments before his lips press into you and his tongue slithers into your throat to wrestle with yours. Then the two of you separate, your [legs] feeling wobbly as you stumble away. He hands you your [armor] and gives you a grateful smile before turning away, grabbing his loincloth, and walking away without putting the cloth or his pack on.");
 			outputText("\n\nWhen you begin to head back to camp you can hear the lizan gleefully whistling behind you as he returns to his home");
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
+			player.createStatusAffect(StatusAffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
@@ -436,6 +438,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nHis voice comes out in a hoarse groan as he begins to tremble. You’re riding him as hard as you can now, making him babble like a mad man. His arms hold you tightly as he buries his face in your [fullChest]. You keep up the pressure and soon a strangled cry rises from your servant as heat blooms inside of you. The feeling pushes you over the edge and you erupt, flooding his ejaculating cocks with your vaginal fluids. " + (player.hasCock() ? "Meanwhile, your cock is spurting hot seed into your combined chests." : ""));
 			outputText("\n\nYou leave the passed out lizan where he lies, covered in your combined sexual fluids. You raid his pack and leave.");
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
+			player.createStatusAffect(StatusAffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			player.orgasm();
 			cleanupAfterCombat();
 		}

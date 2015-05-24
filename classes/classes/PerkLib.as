@@ -367,7 +367,7 @@ package classes
 		public static const MinotaurCumAddict:PerkType = mk("Minotaur Cum Addict", "Minotaur Cum Addict",
 				"Causes you to crave minotaur cum frequently.  You cannot shake this addiction.");
 		public static const MinotaurCumResistance:PerkType = mk("Minotaur Cum Resistance", "Minotaur Cum Resistance",
-				"You can never become a Minotaur Cum Addict. Caps addiction rating at 70%.");
+				"You can never become a Minotaur Cum Addict. Grants immunity to Minotaur Cum addiction.");
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",
 				"Causes you to regularly lay eggs when not otherwise pregnant.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",

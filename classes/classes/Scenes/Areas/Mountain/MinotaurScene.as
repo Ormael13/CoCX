@@ -774,14 +774,12 @@ public function minoCumUpdate():Boolean {
 			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
 			output = true;
 		}
-		if (flags[kFLAGS.MINOTAUR_CUM_RESISTANCE_TRACKER] >= 150 && player.findPerk(PerkLib.MinotaurCumAddict) < 0) {
-			if(player.findPerk(PerkLib.MinotaurCumResistance) >= 0) {}
-			else {
-				flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
-				player.createPerk(PerkLib.MinotaurCumResistance, 0, 0, 0, 0);
-				outputText("\n<b>You have finally learned enough about how to avoid getting addicted to Minotaur Cum again; you are now immune to the addictive properties of Minotaur Cum.</b> (You can never get addicted to Minotaur Cum.)\n", false);
-				output = true;
-			}
+		if (flags[kFLAGS.MINOTAUR_CUM_RESISTANCE_TRACKER] >= 150 && player.findPerk(PerkLib.MinotaurCumAddict) < 0 && player.findPerk(PerkLib.MinotaurCumResistance) < 0) {
+			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
+			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
+			player.createPerk(PerkLib.MinotaurCumResistance, 0, 0, 0, 0);
+			outputText("\n<b>You have finally learned enough about how to avoid getting addicted to Minotaur Cum again; you are now immune to the addictive properties of Minotaur Cum.</b> (You can never get addicted to Minotaur Cum.)\n", false);
+			output = true;
 		}
 	}
 	//If over 50, addicted, become addicted, withdrawl, etc

@@ -1227,7 +1227,7 @@
 				}
 				player.ass.analLooseness = 1;
 			}
-			if (choice == PerkLib.HistoryWhore) {
+			if (choice == PerkLib.HistoryFighter || choice == PerkLib.HistoryWhore) {
 				player.gems += 50;
 			}
 			if (choice == PerkLib.HistoryFortune) {
@@ -3065,7 +3065,7 @@
 		}
 
 		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean {
-			return (perk.ptype == PerkLib.AscensionDesires || perk.ptype == PerkLib.AscensionEndurance || perk.ptype == PerkLib.AscensionFertility || perk.ptype == PerkLib.AscensionFortune || perk.ptype == PerkLib.AscensionMoralShifter || perk.ptype == PerkLib.AscensionMysticality || perk.ptype == PerkLib.AscensionTolerance || perk.ptype == PerkLib.AscensionVirility || perk.ptype == PerkLib.AscensionWisdom || (perk.perkLongDesc != perk.perkDesc && !respec))
+			return (perk.ptype == PerkLib.AscensionDesires || perk.ptype == PerkLib.AscensionEndurance || perk.ptype == PerkLib.AscensionFertility || perk.ptype == PerkLib.AscensionFortune || perk.ptype == PerkLib.AscensionMoralShifter || perk.ptype == PerkLib.AscensionMysticality || perk.ptype == PerkLib.AscensionTolerance || perk.ptype == PerkLib.AscensionVirility || perk.ptype == PerkLib.AscensionWisdom || perk.ptype == PerkLib.EnlightenedNinetails || perk.ptype == PerkLib.CorruptedNinetails || (perk.perkLongDesc != perk.perkDesc && !respec))
 		}
 
 		private function isSpecialKeyItem(keyName:* = null):Boolean {

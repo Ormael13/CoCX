@@ -720,6 +720,12 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 		//Egg loot!
 		if(player.findStatusAffect(StatusAffects.LootEgg) >= 0) {
 			trace("EGG LOOT HAS");
+			if (player.findStatusAffect(StatusAffects.Eggs) < 0) { //Handling of errors.
+				outputText("Oops, looks like something went wrong with the coding regarding gathering eggs after pregnancy. Hopefully this should never happen again. If you encounter this again, please let Kitteh6660 know so he can fix it.");
+				player.removeStatusAffect(StatusAffects.LootEgg);
+				doNext(playerMenu);
+				return true;
+			}
 			//default
 			var itype:ItemType =
 					[

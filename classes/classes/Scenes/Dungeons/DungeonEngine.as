@@ -188,7 +188,7 @@ package classes.Scenes.Dungeons
 			if (westFunction != null) addButton(10, "West", navigateToRoom, westFunction);
 			if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
 			if (player.lust >= 30) addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
-			addButton(13, "Inventory", inventory.inventoryMenu);
+			addButton(13, "Inventory", inventory.inventoryMenu, null, null, null, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 			addButton(14, "Map", map.displayMap, null, null, null, "View the map of this dungeon.");
 			setTopButtons();
 		}

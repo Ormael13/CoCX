@@ -428,8 +428,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4C_mod_1.2.10";
-			version = ver + " (<b>Bug fixes</b>)";
+			ver = "0.9.4C_mod_1.2.11";
+			version = ver + " (<b>Slayin' Bugs</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

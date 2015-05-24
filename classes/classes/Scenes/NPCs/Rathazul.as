@@ -190,7 +190,7 @@ private function rathazulWorkOffer():Boolean {
 			totalOffers++;
 		}
 		else {
-			outputText("(You need five pieces of chitin for Rathazul to make you the chitinous armor.)\n\n", false);
+			outputText("You realize you're still a bit short of chitin.\n\n", false);
 		}
 	}
 	//SPOIDAH
@@ -541,7 +541,7 @@ public function rathazulArmorMenu():void {
 	if(player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		addButton(2, "SpiderSilk", craftSilkArmor);
 	}
-	if(player.hasItem(useables.D_SCALE)) {
+	if(player.hasItem(useables.D_SCALE, 2)) {
 		addButton(3, "Dragonscale", craftDragonscaleArmor);
 	}
 	if (player.hasKeyItem("Tentacled Bark Plates") >= 0) {
@@ -550,6 +550,7 @@ public function rathazulArmorMenu():void {
 	if (player.hasKeyItem("Divine Bark Plates") >= 0) {
 		addButton(6, "D.Bark Armor", craftMaraeArmor, true);
 	}
+	addButton(14, "Back", returnToRathazulMenu);
 }
 
 private function craftSilkArmor():void {
@@ -563,6 +564,11 @@ private function craftSilkArmor():void {
 		if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
 			outputText("You show him your spider-like abdomen in response, offering to produce more webbing for him.  Rathazul chuckles dryly, a sound that reminds you of hot wind rushing through a dead valley.  \"<i>Dear child, this would never do.  Silk this tough can only be produced by a true-born spider.  No matter how you change yourself, you'll always be a human at heart.</i>\"\n\n", false);
 			outputText("The old rat shakes his head and adds, \"<i>Well, now that I think about it, the venom of a red widow might be able to transform you until you are a spider to the core, but I have absolutely no idea what that would do to you.  If you ever try such a dangerous, reckless idea, let me know.  I want to have my notebooks handy, for SCIENCE!</i>\"\n\n", false);
+		}
+		if (player.hasItem(useables.T_SSILK, 2)) {
+			outputText("\"<i>But this should be enough for undergarments if you want,</i>\" Rathazul adds.");
+			doYesNo(commissionSilkArmorForReal,declineSilkArmorCommish);
+			return;
 		}
 		doNext(returnToRathazulMenu);
 		return;
@@ -582,8 +588,10 @@ private function commissionSilkArmorForReal():void {
 	clearOutput();
 	outputText("You sort 500 gems into a pouch and toss them to Rathazul, along with the rest of the webbing.  The wizened alchemist snaps the items out of the air with lightning-fast movements and goes to work immediately.  He bustles about with enormous energy, invigorated by the challenging task before him.  It seems Rathazul has completely forgotten about you, but as you turn to leave, he calls out, \"<i>What did you want me to make?  A mage's robe or some nigh-impenetrable armor?  Or undergarments if you want.</i>\"\n\n", false);
 	menu();
-	addButton(0, "Armor", chooseArmorOrRobes, 1, null, null, armors.SSARMOR.description);
-	addButton(1, "Robes", chooseArmorOrRobes, 2, null, null, armors.SS_ROBE.description);
+	if (player.hasItem(useables.T_SSILK, 5)) {
+		addButton(0, "Armor", chooseArmorOrRobes, 1, null, null, armors.SSARMOR.description);
+		addButton(1, "Robes", chooseArmorOrRobes, 2, null, null, armors.SS_ROBE.description);
+	}
 	addButton(2, "Bra", chooseArmorOrRobes, 3, null, null, undergarments.SS_BRA.description);
 	addButton(3, "Panties", chooseArmorOrRobes, 4, null, null, undergarments.SSPANTY.description);
 	addButton(4, "Loincloth", chooseArmorOrRobes, 5, null, null, undergarments.SS_LOIN.description);
@@ -599,7 +607,12 @@ private function declineSilkArmorCommish():void {
 
 public function chooseArmorOrRobes(robeType:int):void {
 	spriteSelect(49);
-	player.destroyItems(useables.T_SSILK, 5);
+	if (robeType == 0 || robeType == 1) { //Armor or robes
+		player.destroyItems(useables.T_SSILK, 5);
+	}
+	else { //Undergarments
+		player.destroyItems(useables.T_SSILK, 2);
+	}
 	player.gems -= 500;
 	statScreenRefresh();
 	outputText("Rathazul grunts in response and goes back to work.  ", true);
@@ -706,7 +719,11 @@ private function craftDragonscaleArmor():void {
 	clearOutput();
 	outputText("The rat looks at the sheets of dragon scales you're carrying and says, \"<i>I could work these into armor. Or if you want, undergarments. I have the necessary supplies.</i>\"");
 	menu();
-	addButton(0, "Armor", craftDragonscaleArmorForReal, 0, null, null, armors.DSCLARM.description);
+	if (player.hasItem(useables.D_SCALE, 5)) {
+		addButton(0, "Armor", craftDragonscaleArmorForReal, 0, null, null, armors.DSCLARM.description);
+		//addButton(1, "Robe", craftDragonscaleArmorForReal, 0, null, null, armors.DSCLARM.description);
+	}
+	else outputText("\n\nYou realize you're still a bit short on dragonscales for the armor but you can have undergarments made instead.");
 	addButton(2, "Bra", craftDragonscaleArmorForReal, 2, null, null, undergarments.DS_BRA.description);
 	addButton(3, "Thong", craftDragonscaleArmorForReal, 3, null, null, undergarments.DSTHONG.description);
 	addButton(4, "Loincloth", craftDragonscaleArmorForReal, 4, null, null, undergarments.DS_LOIN.description);
@@ -714,6 +731,12 @@ private function craftDragonscaleArmor():void {
 }
 private function craftDragonscaleArmorForReal(type:int = 0):void {
 	spriteSelect(49);
+	if (type == 0 || type == 1) { //Armor or robes
+		player.destroyItems(useables.D_SCALE, 5);
+	}
+	else { //Undergarments
+		player.destroyItems(useables.D_SCALE, 2);
+	}
 	clearOutput();
 	var itype:ItemType;
 	switch(type) {
@@ -749,7 +772,6 @@ private function craftDragonscaleArmorForReal(type:int = 0):void {
 			itype = armors.DSCLARM;
 			break;
 	}
-	player.destroyItems(useables.D_SCALE, 5);
 	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
 	inventory.takeItem(itype, returnToRathazulMenu);
 }

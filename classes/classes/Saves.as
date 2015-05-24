@@ -128,6 +128,15 @@ public function loadSaveDisplay(saveFile:Object, slotName:String):String
 CONFIG::AIR
 {
 
+	private function selectLoadButton(gameObject:Object, slot:String):void {
+		//trace("Loading save with name ", fileList[fileCount].url, " at index ", i);
+		clearOutput();
+		loadGameObject(gameObject, slot);
+		outputText("Slot " + slot + " Loaded!");
+		statScreenRefresh();
+		doNext(playerMenu);
+	}
+	
 public function loadScreenAIR():void
 {
 	var airSaveDir:File = File.documentsDirectory.resolvePath(savedGameDir);
@@ -188,7 +197,8 @@ public function loadScreenAIR():void
 	menu();
 	var s:int = 0
 	while (s < 14) {
-		if (slots[s] != null) addButton(s, "Slot " + (s+1), slots[s]);
+		//if (slots[s] != null) addButton(s, "Slot " + (s + 1), slots[s]);
+		if (slots[s] != null) addButton(s, "Slot " + (s + 1), selectLoadButton, gameObjects[s], "CoC_" + String(s+1));
 		s++;
 	}
 	addButton(14, "Back", returnToSaveMenu);

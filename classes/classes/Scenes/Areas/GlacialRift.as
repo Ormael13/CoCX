@@ -41,6 +41,20 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
+			//Find chest if lucky!
+			if (rand(15) == 0 && player.hasKeyItem("Camp - Ornate Chest") < 0) {
+				var gemsFound:int = 400 + rand(400);
+				outputText("While you're minding your own business, you spot an ornately-decorated chest somewhat buried in the snow. You walk on the snowy grounds you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It looks nice and would make a good storage.");
+				player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0);
+				for (var i:int = 0; i < 4; i++) {
+					inventory.createStorage();
+				}
+				player.gems += gemsFound;
+				statScreenRefresh();
+				outputText("\n\n<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");
+				doNext(camp.returnToCampUseOneHour);
+				return;
+			}
 			
 			var chooser:Number = rand(5);
 			//Wild Valkyrie appears!

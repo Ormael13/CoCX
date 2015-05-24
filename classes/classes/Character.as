@@ -1,6 +1,7 @@
 ﻿package classes 
 {
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Items.JewelryLib;
 
 /**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
@@ -821,7 +822,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			if (findPerk(PerkLib.Tank2) >= 0) max += Math.round(tou);
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
 			max += level * 15;
-			if (jewelryEffectId == 5) max += jewelryEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude;
 			max *= 1 + (countCockSocks("green") * 0.02);
 			max = Math.round(max);
 			if (max > 9999) max = 9999;

@@ -2087,16 +2087,12 @@ use namespace kGAMECLASS;
 				if(eggs() >= 40) min += 10;
 			}
 			//Jewelry effects
-			if (jewelryEffectId == 1)
+			if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST)
 			{
 				min += jewelryEffectMagnitude;
-			}
-			if (jewelryEffectId == 2)
-			{
-				min -= jewelryEffectMagnitude;
-				if (min > (minCap - jewelryEffectMagnitude))
+				if (min > (minCap - jewelryEffectMagnitude) && jewelryEffectMagnitude < 0)
 				{
-					minCap = (minCap - jewelryEffectMagnitude);
+					minCap += jewelryEffectMagnitude;
 				}
 			}
 			if (min < 30 && armorName == "lusty maiden's armor") min = 30;

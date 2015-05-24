@@ -18,7 +18,8 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		
 		public function winAgainstGiant():void {
-			outputText("The giant staggers and falls down on his knees. You wonder what you should do next.\n\n", true);
+			clearOutput();
+			outputText("The giant staggers and falls down on his knees. You wonder what you should do next.");
 			if (player.weaponName == "fists" && player.armor.name == "nothing" && player.shieldName == "nothing") awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
 			menu();
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
@@ -52,7 +53,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("As more pre dribbles into his septum, the giant begins to sputter and cough. Knowing it's now or never, you give a few final, determined thrusts before blowing your entire load up his nose. \n\n");
 			outputText("When you feel that first spurt, you hurry the rest along. The giant is now obviously irritated with the cum filling up his nasal cavities. \"<i>EEEAAAHHHH! WHAT! WHAT IS IN MY NOSE? AAAAHHH!</i>\" he screams, just coming back to consciousness. \n\n");
 			outputText("Your spurts continue, producing more spunk as the second pass. You keep shooting ropes of jizz until finally he opens his bloodshot eyes and looks directly at you; knowing this is your cue to take your leave, you remove your " + player.multiCockDescriptLight() + " from the giant's nose and shoot your final rope into his eye. Jumping down before he can swat you off his face, the giant, now quite infuriated, looses another roar as he gets up and tries to hack out the copious gobs of cum in areas where it should not normally go.\n\n");
-			outputText("As he continues to bellow and scream, you stuff your " + player.multiCockDescriptLight() + " back into your " + player.armorName + ", grab your loot and immediately DIP. The giant was mean enough before he was nasally violated, and you hear his cries well after he's beyond the horizon. \n\n");
+			outputText("As he continues to bellow and scream, you stuff your " + player.multiCockDescriptLight() + " back into your " + player.armorName + ", grab your loot and immediately DIP. The giant was mean enough before he was nasally violated, and you hear his cries well after he's beyond the horizon.");
 			player.orgasm();
 			cleanupAfterCombat();
 		}

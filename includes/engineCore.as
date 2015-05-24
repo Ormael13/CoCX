@@ -1722,7 +1722,7 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow") >= 0)
 		combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + " / 100\n";
 		
-	combatStats += "<b>Damage Resistance:</b> " + (100 - Math.round(player.damagePercent(true))) + "-" + (100 - Math.round(player.damagePercent(true) - (player.tou < 100 ? player.tou * 0.2 : 20))) + "% (Higher is better.)\n";
+	combatStats += "<b>Damage Resistance:</b> " + (100 - Math.round(player.damagePercent(true))) + "-" + (100 - Math.round(player.damagePercent(true) - player.damageToughnessModifier(true))) + "% (Higher is better.)\n";
 
 	combatStats += "<b>Lust Resistance:</b> " + (100 - Math.round(lustPercent())) + "% (Higher is better.)\n";
 	
@@ -1988,7 +1988,7 @@ public function displayStats(e:MouseEvent = null):void
 		if (player.findPerk(PerkLib.MinotaurCumAddict) < 0)
 			addictStats += "<b>Minotaur Cum:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10)/10 + "%\n";
 		else if (player.findPerk(PerkLib.MinotaurCumResistance) >= 0)
-			addictStats += "<b>Minotaur Cum:</b> Immune\n";
+			addictStats += "<b>Minotaur Cum:</b> 0% (Immune)\n";
 		else
 			addictStats += "<b>Minotaur Cum:</b> 100+%\n";
 	}
@@ -2213,7 +2213,7 @@ public function lustPercent():Number {
 	if(player.findStatusAffect(StatusAffects.Berzerking) >= 0) lust *= .6;
 	if (player.findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
 	
-	if (player.jewelryEffectId == 7)
+	if (player.jewelryEffectId == JewelryLib.PURITY)
 	{
 		lust *= 1 - (player.jewelryEffectMagnitude / 100);
 	}	
@@ -2478,7 +2478,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	{
 		minLib = (minLust() * 2 / 3);
 	}
-	if (player.jewelryEffectId == 7)
+	if (player.jewelryEffectId == JewelryLib.PURITY)
 	{
 		minLib -= player.jewelryEffectMagnitude;
 	}
