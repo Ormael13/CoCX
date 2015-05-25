@@ -844,7 +844,7 @@ private function buyDyeNevermind():void {
 private function makeTaurPotion():void {
 	spriteSelect(49);
 	clearOutput();
-	player.destroyItems(consumables.TAURICO, 2);
+	player.destroyItems(consumables.EQUINUM, 2);
 	player.destroyItems(consumables.MINOBLO, 1);
 	player.gems -= 100;
 	statScreenRefresh();
