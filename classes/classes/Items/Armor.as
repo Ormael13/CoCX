@@ -31,6 +31,34 @@ package classes.Items
 		public function get supportsBulge():Boolean { return _supportsBulge && game.player.modArmorName == ""; }
 			//For most clothes if the modArmorName is set then it's Exgartuan's doing. The comfortable clothes are the exception, they override this function.
 		
+		override public function canUse():Boolean {
+			if ((this == game.armors.LMARMOR || this == game.armors.R_BDYST || this == game.armors.BONSTRP || this == game.armors.RBBRCLT || this == game.armors.S_SWMWR) &&
+				(game.player.upperGarment != UndergarmentLib.NOTHING || game.player.lowerGarment != UndergarmentLib.NOTHING))
+				{
+					var output:String = "";
+					var wornUpper:Boolean = false;
+
+					output += "It would be awkward to put on " + longName + " when you're currently wearing ";
+					if (game.player.upperGarment != UndergarmentLib.NOTHING) {
+						output += game.player.upperGarment.longName;
+						wornUpper = true;
+					}
+
+					if (game.player.lowerGarment != UndergarmentLib.NOTHING) {
+						if (wornUpper) {
+							output += " and ";
+						}
+						output += game.player.lowerGarment.longName;
+					}
+
+					output += ". You should consider removing them. You put it back into your inventory.";
+
+					outputText(output);
+					return false;
+				}
+				return super.canUse();
+		}
+
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
 		}
