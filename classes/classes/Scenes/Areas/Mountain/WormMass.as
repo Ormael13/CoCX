@@ -40,7 +40,7 @@
 			}
 			//SUCCESS
 			if(player.lust < 50) {
-				outputText("The worm colony stands before you and begins secreting a significant amount of slime. Inexplicably, you find that your " + cockDescript(0) + " is already erect and is throbbing. The erection is quite meddlesome and you find yourself distracted by the unwanted arousal.\n", false);
+				outputText("The worm colony stands before you and begins secreting a significant amount of slime. Inexplicably, you find that your " + player.cockDescript(0) + " is already erect and is throbbing. The erection is quite meddlesome and you find yourself distracted by the unwanted arousal.\n", false);
 				game.dynStats("lus", 10+player.lib/20+player.cor/20);
 			}
 			else {

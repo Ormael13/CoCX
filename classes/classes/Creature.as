@@ -3557,9 +3557,9 @@ package classes
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
 			var temp:Number = 0;
 			if (tou < 25) temp = (tou * 0.4);
-			else if (tou < 50) temp = 10 + (tou * 0.3);
-			else if (tou < 75) temp = 17.5 + (tou * 0.2);
-			else if (tou < 100) temp = 22.5 + (tou * 0.1);
+			else if (tou < 50) temp = 10 + ((tou-25) * 0.3);
+			else if (tou < 75) temp = 17.5 + ((tou-50) * 0.2);
+			else if (tou < 100) temp = 22.5 + ((tou-75) * 0.1);
 			else temp = 25;
 			//displayMode is for stats screen.
 			if (displayMode) return temp;

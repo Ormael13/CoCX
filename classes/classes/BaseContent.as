@@ -3,6 +3,7 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
 	import classes.Scenes.Camp;
+	import classes.Scenes.Places.Ingnam;
 	import classes.Scenes.Places.Prison;
 	import classes.Scenes.Dungeons.D3.D3;
 	import classes.Scenes.Inventory;
@@ -44,6 +45,10 @@
 
 		protected function get camp():Camp {
 			return kGAMECLASS.camp;
+		}
+		
+		protected function get ingnam():Ingnam {
+			return kGAMECLASS.ingnam;
 		}
 		
 		protected function get prison():Prison {

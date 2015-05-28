@@ -707,6 +707,7 @@ public function creditsScreen():void {
 	outputText("<li> stationpass</li>");
 	outputText("<li> JDoraime</li>");
 	outputText("<li> Ramses</li>");
+	outputText("<li> OPenaz</li>");
 	outputText("<li> EternalDragon (github)</li>");
 	outputText("<li> PowerOfVoid (github)</li>");
 	outputText("<li> kalleangka (github)</li>");

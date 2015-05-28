@@ -1626,7 +1626,7 @@ use namespace kGAMECLASS;
 				hunger += amnt;
 				if (hunger > 100)
 				{
-					while (hunger > 110) {
+					while (hunger > 110 && !game.prison.inPrison) {
 						weightChange++;
 						hunger -= 10;
 					}

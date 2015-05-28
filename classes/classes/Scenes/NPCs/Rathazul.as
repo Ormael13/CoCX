@@ -607,7 +607,7 @@ private function declineSilkArmorCommish():void {
 
 public function chooseArmorOrRobes(robeType:int):void {
 	spriteSelect(49);
-	if (robeType == 0 || robeType == 1) { //Armor or robes
+	if (robeType == 1 || robeType == 2) { //Armor or robes
 		player.destroyItems(useables.T_SSILK, 5);
 	}
 	else { //Undergarments

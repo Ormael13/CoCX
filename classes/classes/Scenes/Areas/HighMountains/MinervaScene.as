@@ -4,7 +4,16 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 
-	public class MinervaScene extends BaseContent {
+	public class MinervaScene extends BaseContent implements TimeAwareInterface {
+
+		public var pregnancy:PregnancyStore;
+		
+		public function MinervaScene() {
+			pregnancy = new PregnancyStore(kFLAGS.MINERVA_PREGNANCY_TYPE, kFLAGS.MINERVA_PREGNANCY_INCUBATION, 0, 0);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 216, 144, 72);
+			CoC.timeAwareClassAdd(this);
+		}
+		
 //const MINERVA_LOVE:int = 813;
 //const MINERVA_BACKSTORY:int = 814;
 //const MINERVA_BACKSTORY_LEARNED:int = 815;
@@ -17,21 +26,21 @@
 
 //-Tainted Minerva vaginal capacity: 90
 //-Tainted Minerva anal capacity: 100
-public function minervaVCapacity():Number {
-	return 90;
-}
-public function minervaACapacity():Number {
-	return 100;
-}
-public function minervaSprite():void {
-	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) spriteSelect(120);
-	if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) spriteSelect(121);
-	else spriteSelect(95);
-}
+	public function minervaVCapacity():Number {
+		return 90;
+	}
+	public function minervaACapacity():Number {
+		return 100;
+	}
+	public function minervaSprite():void {
+		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) spriteSelect(120);
+		else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) spriteSelect(121);
+		else spriteSelect(95);
+	}
 
-public function minervaRomanced():Boolean {
-	return (flags[kFLAGS.MINERVA_LOVE] == 1);
-}
+	public function minervaRomanced():Boolean {
+		return (flags[kFLAGS.MINERVA_LOVE] == 1);
+	}
 
 	public var minervaPurification:MinervaPurification = new MinervaPurification;
 	public var minervaCorruption:MinervaCorruption = new MinervaCorruption;
@@ -52,6 +61,39 @@ public function minervaRomanced():Boolean {
 //Minerva appearance (normal) 
 //http://i46.tinypic.com/20z1f1x.jpg
 
+		public function timeChange():Boolean
+		{
+			var needNext:Boolean = false;
+			pregnancy.pregnancyAdvance();
+			trace("\nMinerva time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (pregnancy.incubation == 0 && pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
+				minervaPurification.minervaGivesBirth();
+				needNext = true;
+			}
+			return needNext;
+		}
+	
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
+
+		public function tryToImpregnateMinerva():void {
+			//Chance of getting Minerva PREGNANT!
+			if (flags[kFLAGS.MINERVA_CHILDREN] >= 100) return; //Maxed out!
+			var chance:Number = 30;
+			chance += Math.sqrt(player.cumQ());
+			if (chance > 75) chance = 75;
+			chance += player.virilityQ() * 100;
+			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) chance -= (flags[kFLAGS.MINERVA_CHILDREN] * 2); //Diminishing returns. The more the children, the harder it is to get her pregnant.
+			//Chance is between 10 and 75 percent.
+			if (chance < 10) chance = 10;
+			if (chance > 80) chance = 80;
+			if (rand(100) < chance && !pregnancy.isPregnant) {
+				trace("Minerva got PREGNANT!");
+				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
+			}
+		}
+		
 private function minervaAppearance():void {
 	clearOutput();
 	minervaSprite();
@@ -99,8 +141,8 @@ private function firstMinervaEncounter():void {
 	//Choice
 	//[Ignore Path] [Take Path]
 	menu();
-	addButton(1,"Take Path",takeMinervasPath);
-	addButton(2,"Ignore Path",ignoreMinervasPath);
+	addButton(0,"Take Path",takeMinervasPath);
+	addButton(1,"Ignore Path",ignoreMinervasPath);
 }
 //[Ignore Path]
 private function ignoreMinervasPath():void {
@@ -367,11 +409,11 @@ public function fightMinerva():void {
 
 private function genericMenu(display:Boolean = false):void {
 	menu();
+	if (display) outputText("\"<i>So what will it be then?</i>\"");
 	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) {
 		minervaPurification.pureMinervaMenu();
 		return;
 	}
-	if (display) outputText("\"<i>So what will it be then?</i>\"")
 	addButton(0,"Appearance",minervaAppearance);
 	addButton(1,"Talk",minervaTalkSelect);
 	if(player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
@@ -1352,9 +1394,8 @@ private function getButtFuckedYouSlut():void {
 	outputText("\n\nLetting out a groan, your lover can't seem to take it any longer and pulls you down into her lap.");
 	
 	outputText("  The thick siren prick plunges into your backdoor and fills your sweltering hole with her oddly cool cock, both of you groaning in delightful pleasure.");
-	
+	player.buttChange(32, true);
 	outputText("  Minerva basks in the feeling of being balls deep in you, and you revel in the feeling of being so filled and stretched while little tentacles squirm inside you and gently sting you with aphrodisiac venom.  The build-up of all the arousal enhancing toxins running through your body and the pleasure of the butt-packing cock squeezed into your ass becomes too much to bear.  Your vision explodes with stars and your ass clenches as you reach an orgasm.  Your body shudders and quivers with spine-tingling ecstasy, your nerves alight with furious sensation while your back arches and presses your [chest] against your siren lover.");
-	player.buttChange(32, true, true, true);
 	
 	outputText("\n\nLetting out a gasp at the sudden tightness, Minerva grits her sharky teeth and grips your rear harder, clearly trying to hold back her own orgasm.  You could swear you could feel her sizable balls swell in preparation only to be denied.  \"<i>Nnnh!  That was close... almost blew my load right there!  You feel so good around me... so warm around my cock.  How do those tentacles feel, hm?  The stinging must feel good,</i>\" she says teasingly as she grinds against you, using her grip on you to shift you back and forth slowly and twist her cock inside you.");
 	

@@ -13,6 +13,8 @@ package classes.Scenes.Places
 		public var ingnamFarm:IngnamFarm = new IngnamFarm();
 		public var thiefScene:ThiefScene = new ThiefScene();
 		
+		public function get inIngnam():Boolean { return flags[kFLAGS.IN_INGNAM] > 0; }
+		
 		public function Ingnam() 
 		{	
 		}

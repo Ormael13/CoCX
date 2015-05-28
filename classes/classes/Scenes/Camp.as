@@ -95,11 +95,11 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
 	getGame().inCombat = false;
-	if (flags[kFLAGS.IN_INGNAM] > 0) {
+	if (ingnam.inIngnam) { //Ingnam
 		kGAMECLASS.ingnam.menuIngnam();
 		return;
 	}
-	if (prison.inPrison) {
+	if (prison.inPrison) { //Prison
 		kGAMECLASS.prison.prisonRoom(true);
 		return;
 	}
@@ -487,13 +487,6 @@ private function doCamp():void { //Only called by playerMenu
 	//Reset.
 	flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 0;
 	campQ = false;
-	//Build explore menus
-	var placesEvent:Function = (placesKnown() ? places : null);
-	var followers:Function = null;
-	var lovers:Function = null;
-	var slaves:Function = null;
-	var storage:Function = null;
-	if (inventory.showStash()) storage = inventory.stash;
 	//Clear stuff
 	if(player.findStatusAffect(StatusAffects.SlimeCravingOutput) >= 0) player.removeStatusAffect(StatusAffects.SlimeCravingOutput);
 	//Reset luststick display status (see event parser)
@@ -514,7 +507,7 @@ private function doCamp():void { //Only called by playerMenu
 	if (setLevelButton()) return;
 	//Build main menu
 	var exploreEvent:Function = getGame().exploration.doExplore;
-	var masturbate:Function = (player.lust > 30 ? getGame().masturbation.masturbateMenu : null);
+	var placesEvent:Function = (placesKnown() ? places : null);
 	clearOutput();
 	updateAchievements();
 	
@@ -622,10 +615,6 @@ private function doCamp():void { //Only called by playerMenu
 	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) {
 		outputText("On the outer edges, half-hidden behind a rock, is a large, very healthy tree.  It grew fairly fast, but seems to be fully developed now.  Holli, Marae's corrupt spawn, lives within.\n\n");
 	}
-	if(flags[kFLAGS.CLARA_IMPRISONED] > 0)
-	{
-		//claraCampAddition();
-	}
 	
 	//Display NPCs
 	campFollowers(true);
@@ -675,19 +664,6 @@ private function doCamp():void { //Only called by playerMenu
 			//This once disabled the ability to rest, sleep or wait, but ir hasn't done that for many many builds
 		}
 	}
-	var baitText:String = "Masturbate";
-	if(((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)) baitText = "Meditate";
-	//Initialize companions/followers
-	/*if(model.time.hours > 4 && model.time.hours < 23) {
-		if(followersCount() > 0) 
-			followers = campFollowers;
-		if(slavesCount() > 0) 
-			slaves = campSlavesMenu;
-		if(loversCount() > 0) 
-			lovers = campLoversMenu;
-	}*/
-	var restEvent:Function = doWait;
-	var restName:String = "Wait";
 	//Set up rest stuff
 	//Night
 	if(model.time.hours < 6 || model.time.hours > 20) {
@@ -696,8 +672,6 @@ private function doCamp():void { //Only called by playerMenu
 		if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
 			outputText("Your camp is silent as your companions are sleeping right now.\n", false);
 		}
-		restName = "Sleep";
-		restEvent = doSleep;
 		exploreEvent = null;
 		placesEvent = null;
 	}
@@ -706,10 +680,6 @@ private function doCamp():void { //Only called by playerMenu
 		if (model.time.hours == 19) outputText("The sun is close to the horizon, getting ready to set. ", false);
 		if (model.time.hours == 20) outputText("The sun has already set below the horizon. The sky glows orange. ", false);
 		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n", false);
-		if(player.fatigue > 40 || player.HP/player.maxHP() <= .9) {
-			restName = "Rest";
-			restEvent = rest;
-		}
 	}
 	
 	//Unlock cabin.
@@ -732,10 +702,10 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	
 	//Menu
-	//choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves", slaves, "Camp Actions", canCampStuff, baitText, masturbate, restName, restEvent);
+	
 	menu();
 	addButton(0, "Explore", exploreEvent, null, null, null, "Explore to find new regions and visit any discovered regions.");
-	if (placesCount() > 0) addButton(1, "Places", places, null, null, null, "Visit any places you have discovered so far.");
+	addButton(1, "Places", placesEvent, null, null, null, "Visit any places you have discovered so far.");
 	addButton(2, "Inventory", inventory.inventoryMenu, null, null, null, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 	if (inventory.showStash()) addButton(3, "Stash", inventory.stash, null, null, null, "The stash allows you to store your items safely until you need them later.");
 	if (followersCount() > 0) addButton(4, "Followers", campFollowers, null, null, null, "Check up on any followers or companions who are joining you in or around your camp.  You'll probably just end up sleeping with them.");
@@ -748,23 +718,23 @@ private function doCamp():void { //Only called by playerMenu
 		if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
 	}
 	addButton(9, "Wait", doWait, null, null, null, "Wait for four hours.");
-	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", rest, null, null, null, "Rest for four hours.");
+	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", rest, null, null, null, "Rest for four hours.\n\nShift click to rest until fully healed or night comes.");
 	if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", doSleep, null, null, null, "Turn yourself in for the night.");
 
 	//Remove buttons according to conditions.
 	if (model.time.hours >= 21 || model.time.hours < 6) {
-		removeButton(0);
-		removeButton(1);
+		removeButton(0); //Explore
+		removeButton(1); //Places
 		if (model.time.hours >= 23 || model.time.hours < 5) {
-			removeButton(4);
-			removeButton(5);
-			removeButton(6);
-			removeButton(7);
+			removeButton(4); //Followers
+			removeButton(5); //Lovers
+			removeButton(6); //Slaves
+			removeButton(7); //Camp Actions
 		}
 	}
 	if (player.lust >= player.maxLust() && canFap) {
-		removeButton(0);
-		removeButton(1);
+		removeButton(0); //Explore
+		removeButton(1); //Places
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] < kGAMECLASS.modSaveVersion) {
 		promptSaveUpdate();
@@ -1492,27 +1462,15 @@ private function watchStars():void {
 public function rest():void {
 	campQ = true;
 	clearOutput();
-	//Multiplier
-	var multiplier:Number = 1.0;
-	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0)
-	{
-		multiplier += 0.5; //Cabin has that comfortable bed. Even more comfortable than sleeping on your bedroll! Adds 0.5 to multiplier.
-	}
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
-	{
-		if (player.hunger < 25)
-		{
-			multiplier *= 0.5
-		}
-	}
 	//Fatigue recovery
+	var multiplier:Number = 1.0;
 	var fatRecovery:Number = 4;
-	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery *= 1.5;
-	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
+	var hpRecovery:Number = 10;
 	if (timeQ == 0) {
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0)
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison)
 		{
 			outputText("You head into your cabin to rest. You lie down on your bed to rest for four hours.", false);
+			multiplier += 0.5;
 		}
 		else 
 		{
@@ -1520,23 +1478,17 @@ public function rest():void {
 		}
 		timeQ = 4;
 		//Hungry
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0)
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
 		{
-			if (player.hunger < 25)
-			{
-				outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n", false);
-			}
+			outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n", false);
+			multiplier *= 0.5;
 		}
 		//Marble withdrawal
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
-
-			HPChange(timeQ * 5 * multiplier, true);
-
-			dynStats("tou", -.1, "int", -.1);
-			//fatigue
+			hpRecovery /= 2;
 			fatRecovery /= 2;
-			fatigue(-fatRecovery * timeQ * multiplier);
+			dynStats("tou", -.1, "int", -.1);
 		}
 		//Bee cock
 		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
@@ -1547,11 +1499,8 @@ public function rest():void {
 			outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 		}
 		//REGULAR HP/FATIGUE RECOVERY
-		else {
-			HPChange(timeQ * 10 * multiplier, true);
-			//fatigue
-			fatigue(-fatRecovery * timeQ * multiplier); 
-		}
+		HPChange(timeQ * hpRecovery * multiplier, true);
+		fatigue(timeQ * -fatRecovery * multiplier); 
 	}
 	else {
 		if(timeQ != 1) outputText("You continue to rest for " + num2Text(timeQ) + " more hours.\n", true);
@@ -1760,6 +1709,8 @@ public function sleepWrapper():void {
 
 public function sleepRecovery(display:Boolean = false):void {
 	var multiplier:Number = 1.0;
+	var fatRecovery:Number = 100;
+	var hpRecovery:Number = 20;
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
 	{
 		multiplier += 0.5;
@@ -1775,18 +1726,13 @@ public function sleepRecovery(display:Boolean = false):void {
 	//Marble withdrawl
 	if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 		if(display) outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
-		HPChange(timeQ * 10 * multiplier, true);
+		multiplier *= 0.5;
 		dynStats("tou", -.1, "int", -.1);
-		//fatigue
-		fatigue(-int(player.fatigue/2));
-		if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-int(player.fatigue/4));
 	}
 	//Mino withdrawal
 	else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 		if(display) outputText("\nYou spend much of the night tossing and turning, aching for a taste of minotaur cum.\n", false);
-		HPChange(timeQ * 15 * multiplier, true);
-		fatigue(-int(player.fatigue/2)); 
-		if(player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatigue(-int(player.fatigue/4));
+		multiplier *= 0.75;
 	}
 	//Bee cock
 	if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
@@ -1797,11 +1743,9 @@ public function sleepRecovery(display:Boolean = false):void {
 		outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 	}
 	//REGULAR HP/FATIGUE RECOVERY
-	else {
-		HPChange(timeQ * 20 * multiplier, display);
-		//fatigue
-		fatigue(-player.fatigue); 
-	}
+	HPChange(timeQ * hpRecovery * multiplier, display);
+	//fatigue
+	fatigue(-(timeQ * fatRecovery * multiplier));
 }
 
 //Bad End if your balls are too big. Only happens in Realistic Mode.
@@ -1823,7 +1767,7 @@ private function applyReductoAndEscapeBadEnd():void {
 	outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
 	player.ballSize -= (4 + rand(6));
 	if (player.ballSize < 1) player.ballSize = 1;
-	if (player.ballSize > 18 + (player.str/2)) player.ballSize = 17 + (player.str/2)
+	if (player.ballSize > 18 + (player.str / 2) + (player.tallness / 4)) player.ballSize = 17 + (player.str / 2) + (player.tallness / 4);
 	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ", false);
 	dynStats("lib", -2, "lus", -10);
@@ -1836,7 +1780,7 @@ private function callRathazulAndEscapeBadEnd():void {
 	outputText("He rubs the paste all over your massive balls. It's incredibly effective. \n\n", false)
 	player.ballSize -= (4 + rand(6));
 	if (player.ballSize < 1) player.ballSize = 1;
-	if (player.ballSize > 18 + (player.str/2)) player.ballSize = 17 + (player.str/2)
+	if (player.ballSize > 18 + (player.str/2) + (player.tallness / 4)) player.ballSize = 16 + (player.str/2) + (player.tallness / 4)
 	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ", false);
 	outputText("\"<i>Try not to make your balls bigger. If it happens, make sure you have Reducto,</i>\" he says.  He returns to his alchemy equipment, working on who knows what.\n\n", false)
@@ -1912,8 +1856,13 @@ private function farmFound():Boolean { //Returns true as soon as any known dunge
 	return false;
 }
 
+//-----------------
+//-- PLACES MENU
+//-----------------
 private function placesKnown():Boolean { //Returns true as soon as any known place is found
-	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) return true;
+	if (placesCount() > 0) return true;
+	//No need for redundant code!
+	/*if (flags[kFLAGS.BAZAAR_ENTERED] > 0) return true;
 	if (player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) return true;
 	if (flags[kFLAGS.FOUND_CATHEDRAL] == 1) return true;
 	if (dungeonFound()) return true;
@@ -1922,12 +1871,11 @@ private function placesKnown():Boolean { //Returns true as soon as any known pla
 	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) return true;
 	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) return true;
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) return true;
+	if (flags[kFLAGS.MET_MINERVA] >= 4) return true;
+	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) return true;*/
 	return false;
 }
 
-//-----------------
-//-- PLACES MENU
-//-----------------
 public function placesCount():int {
 	var places:int = 0;
 	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) places++;
@@ -2043,9 +1991,9 @@ public function wakeFromBadEnd():void {
 	}
 	if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine; you've just had a nightmare.");
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
-	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2))) {
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
 		outputText("\n\nYou realize the consequences of having oversized balls and you NEED to shrink it right away. Reducto will do.");
-		player.ballSize = (15 + (player.str / 2));
+		player.ballSize = (14 + (player.str / 2) + (player.tallness / 4));
 	}
 	outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
 	//Skip time forward

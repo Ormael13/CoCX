@@ -170,7 +170,6 @@ package classes.Scenes.Camp
 				outputText("Who needs axes when you've got pure strength? Bracing yourself, you crack your knuckles and punch the tree with all your strength. It takes effort and while you're punching the tree, crack appears. It grows bigger as you keep punching. When the crack gets big enough, the log just broke off and the tree strangely floats. ");
 			}
 			outputText("You shrug and pick up the wood block when you hear crashing sound as the tree falls over and splits into many wooden blocks! Surprisingly, they clump together into one bunch. You pick the bunch of wood, noting how easy it is to carry. You return to your camp. \n\n");
-			outputText("<b>+10 wood!</b>")
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 10;
 			incrementWoodSupply(10);
 			awardAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD);
@@ -183,7 +182,6 @@ package classes.Scenes.Camp
 			if (player.weaponName == "large axe") outputText("You ready your oversized axe. ")
 			else outputText("You ready your axe. ")
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n");
-			outputText("<b>+10 wood!</b>")
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 10;
 			incrementWoodSupply(10);
 			fatigue(50);
@@ -227,7 +225,7 @@ package classes.Scenes.Camp
 		}
 		
 		public function incrementWoodSupply(amount:int):void {
-			outputText("<b>(+ " + amount + "wood!");
+			outputText("<b>(+" + amount + " wood!");
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += amount;
 			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= maxWoodSupply) {
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = maxWoodSupply;

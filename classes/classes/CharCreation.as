@@ -3033,6 +3033,7 @@
 		}
 		private function reincarnate():void {
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
+			customPlayerProfile = null;
 			newGameGo();
 			clearOutput();
 			mainView.nameBox.visible = false;
@@ -3065,11 +3066,12 @@
 		}
 
 		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean {
-			return (perk.ptype == PerkLib.AscensionDesires || perk.ptype == PerkLib.AscensionEndurance || perk.ptype == PerkLib.AscensionFertility || perk.ptype == PerkLib.AscensionFortune || perk.ptype == PerkLib.AscensionMoralShifter || perk.ptype == PerkLib.AscensionMysticality || perk.ptype == PerkLib.AscensionTolerance || perk.ptype == PerkLib.AscensionVirility || perk.ptype == PerkLib.AscensionWisdom || perk.ptype == PerkLib.EnlightenedNinetails || perk.ptype == PerkLib.CorruptedNinetails || (perk.perkLongDesc != perk.perkDesc && !respec))
+			return (perk.ptype == PerkLib.AscensionDesires || perk.ptype == PerkLib.AscensionEndurance || perk.ptype == PerkLib.AscensionFertility || perk.ptype == PerkLib.AscensionFortune || perk.ptype == PerkLib.AscensionMoralShifter || perk.ptype == PerkLib.AscensionMysticality || perk.ptype == PerkLib.AscensionTolerance || perk.ptype == PerkLib.AscensionVirility || perk.ptype == PerkLib.AscensionWisdom || //Ascension perks
+					perk.ptype == PerkLib.EnlightenedNinetails || perk.ptype == PerkLib.CorruptedNinetails || perk.ptype == PerkLib.SluttySeduction || perk.ptype == PerkLib.WizardsEndurance || perk.ptype == PerkLib.BloodMage || (perk.perkLongDesc != perk.perkDesc && !respec))
 		}
 
 		private function isSpecialKeyItem(keyName:* = null):Boolean {
-			return (keyName == "Camp - Chest" || keyName == "Equipment Rack - Weapons" || keyName == "Equipment Rack - Armor" || keyName == "Equipment Storage - Jewelry Box" || keyName == "Backpack" || keyName == "Nieve's Tear"); 
+			return (keyName == "Camp - Chest" || keyName == "Camp - Murky Chest" || keyName == "Camp - Ornate Chest" || keyName == "Equipment Rack - Weapons" || keyName == "Equipment Rack - Armor" || keyName == "Equipment Storage - Jewelry Box" || keyName == "Backpack" || keyName == "Nieve's Tear"); 
 		}
 
 		private function isSpell(statusEffect:* = null):Boolean {

@@ -44,6 +44,7 @@ public function endLustLoss():void
 //combat is over. Clear shit out and go to main
 public function cleanupAfterCombat(nextFunc:Function = null):void {
 	if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
+	if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent;
 	if (inCombat) {
 		//clear status
 		clearStatuses(false);
@@ -89,7 +90,7 @@ public function cleanupAfterCombat(nextFunc:Function = null):void {
 			var timePasses:int = monster.handleCombatLossText(inDungeon, temp); //Allows monsters to customize the loss text and the amount of time lost
 			player.gems -= temp;
 			inCombat = false;
-			if (prison.inPrison == false && flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (monster.short == "goblin" || monster.short == "goblin assassin" || monster.short == "imp" || monster.short == "imp lord" || monster.short == "imp warlord" || monster.short == "hellhound" || monster.short == "minotaur" || monster.short == "satyr" || monster.short == "gnoll" || monster.short == "gnoll spear-thrower")) {
+			if (prison.inPrison == false && flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() || !prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && (monster.short == "goblin" || monster.short == "goblin assassin" || monster.short == "imp" || monster.short == "imp lord" || monster.short == "imp warlord" || monster.short == "hellhound" || monster.short == "minotaur" || monster.short == "satyr" || monster.short == "gnoll" || monster.short == "gnoll spear-thrower" || monster.short == "basilisk")) {
 				outputText("  You feel yourself being dragged and carried just before you black out.");
 				doNext(prison.prisonIntro);
 				return;
@@ -891,7 +892,7 @@ public function attack():void {
 	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
-	if(monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0) {
+	if(monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
 		//basilisk counter attack (block attack, significant speed loss): 
 		if(player.inte/5 + rand(20) < 25 && monster.findStatusAffect(StatusAffects.Blind) < 0) {
 			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.", false);
@@ -1552,12 +1553,14 @@ public function awardPlayer(nextFunc:Function = null):void
 		monster.gems = Math.round(monster.gems);
 	}
 	monster.handleAwardText(); //Each monster can now override the default award text
-	if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent; //In prison
-	else if (!inDungeon && !inRoomedDungeon && !prison.inPrison) { //Not in dungeons
-		doNext(nextFunc);
+	if (!inDungeon && !inRoomedDungeon && !prison.inPrison) { //Not in dungeons
+		if (nextFunc != null) doNext(nextFunc);
+		else doNext(playerMenu);
 	}
-	else if (nextFunc != null) doNext(nextFunc);
-	else doNext(playerMenu);
+	else {
+		if (nextFunc != null) doNext(nextFunc);
+		else doNext(playerMenu);
+	}
 	dropItem(monster, nextFunc);
 	inCombat = false;
 	player.gems += monster.gems;
@@ -4042,7 +4045,7 @@ public function spellCleansingPalm():void
 		if ((monster as Monster).plural == true) outputText(" them");
 		else outputText((monster as Monster).mfn(" him", " her", " it"));
 		outputText(" back a few feet.\n\n");
-		if (silly()&& corruptionMulti >= 1.75) outputText("It's super effective!  ");
+		if (silly() && corruptionMulti >= 1.75) outputText("It's super effective!  ");
 		outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.\n\n");
 	}
 	else
@@ -4922,8 +4925,12 @@ public function runAway(callHook:Boolean = true):void {
 	else if(player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ", false);	
 	//Nonflying PCs
 	else {
+		//In prison!
+		if (prison.inPrison) {
+			outputText("You make a quick dash for the door and attempt to escape! ");
+		}
 		//Stuck!
-		if(player.findStatusAffect(StatusAffects.NoFlee) >= 0) {
+		else if(player.findStatusAffect(StatusAffects.NoFlee) >= 0) {
 			if(monster.short == "goblin") outputText("You try to flee but get stuck in the sticky white goop surrounding you.\n\n", true);
 			else outputText("You put all your skills at running to work and make a supreme effort to escape, but are unable to get away!\n\n", true);
 			enemyAI();
@@ -5000,13 +5007,22 @@ public function runAway(callHook:Boolean = true):void {
 		return;
 	}
 	//SUCCESSFUL FLEE
-	if(player.spe > rand(monster.spe + escapeMod)) {
+	if (player.spe > rand(monster.spe + escapeMod)) {
+		//Escape prison
+		if (prison.inPrison) {
+			outputText("You quickly bolt out of the main entrance and after hiding for a good while, there's no sign of " + monster.a + " " + monster.short + ". You sneak back inside to retrieve whatever you had before you were captured. ");
+			inCombat = false;
+			clearStatuses(false);
+			prison.prisonEscapeSuccessText();
+			doNext(prison.prisonEscapeFinalePart1);
+			return;
+		}
 		//Fliers flee!
-		if(player.canFly()) outputText(monster.capitalA + monster.short + " can't catch you.", false);
+		else if(player.canFly()) outputText(monster.capitalA + monster.short + " can't catch you.", false);
 		//sekrit benefit: if you have coon ears, coon tail, and Runner perk, change normal Runner escape to flight-type escape
 		else if(player.tailType == TAIL_TYPE_RACCOON && player.earType == EARS_RACCOON && player.findPerk(PerkLib.Runner) >= 0) {
 			outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best " + monster.pronoun1 + " can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave " + monster.pronoun2 + " behind with your clumsy, jerky, short-range flight.");
-		}		
+		}
 		//Non-fliers flee
 		else outputText(monster.capitalA + monster.short + " rapidly disappears into the shifting landscape behind you.", false);
 		if(monster.short == "Izma") {

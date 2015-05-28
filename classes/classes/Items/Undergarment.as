@@ -28,7 +28,7 @@ package classes.Items
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.armor == game.armors.LMARMOR || game.player.armor == game.armors.R_BDYST || game.player.armor == game.armors.BONSTRP || game.player.armor == game.armors.RBBRCLT || game.player.armor == game.armors.S_SWMWR) {
+			if (!game.player.armor.supportsUndergarment) {
 				outputText("It would be awkward to put on undergarments when you're currently wearing your type of clothing. You should consider switching to different clothes. You put it back into your inventory.");
 				return false;
 			}

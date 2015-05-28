@@ -107,7 +107,7 @@ private function gooTits():String {
 }
 
 private function gooCock():String {
-	return Appearance.cockDescription(flags[kFLAGS.GOO_DICK_TYPE], flags[kFLAGS.GOO_DICK_LENGTH], flags[kFLAGS.GOO_DICK_LENGTH] / 6, 50, 100);
+	return Appearance.cockDescription(CockTypesEnum.ParseConstantByIndex(flags[kFLAGS.GOO_DICK_TYPE]), flags[kFLAGS.GOO_DICK_LENGTH], flags[kFLAGS.GOO_DICK_LENGTH] / 6, 50, 100);
 }
 
 public override function latexGooFollower():Boolean {
@@ -672,11 +672,12 @@ private function changeGooDick():void {
 		if(player.hasItem(consumables.W_FRUIT) && flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.CAT) addButton(5,"Whisker Fruit",latexyEatsADickItem,consumables.W_FRUIT);
 		if(player.hasItem(consumables.INCUBID) && flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.DEMON) addButton(0,"Incubi Draft",latexyEatsADickItem,consumables.INCUBID);
 		if(player.hasItem(consumables.MINOBLO) && flags[kFLAGS.GOO_DICK_TYPE] != CockTypesEnum.HORSE) addButton(1,"Mino Blood",latexyEatsADickItem,consumables.MINOBLO);
-		if(player.hasItem(consumables.GROPLUS)) addButton(6,"Gro Plus",latexyEatsADickItem,consumables.GROPLUS);
+		if(player.hasItem(consumables.GROPLUS) && flags[kFLAGS.GOO_DICK_LENGTH] < 24 + (flags[kFLAGS.HYPER_HAPPY] ? 0 : 36)) addButton(6,"Gro Plus",latexyEatsADickItem,consumables.GROPLUS);
 		if(player.hasItem(consumables.REDUCTO) && flags[kFLAGS.GOO_DICK_LENGTH] >= 5) addButton(7,"Reducto",latexyEatsADickItem,consumables.REDUCTO);
 	}	
 	else {
 		if(player.hasItem(consumables.INCUBID)) addButton(0,"Incubi Draft",latexyEatsADickItem,consumables.INCUBID);
+		if(player.hasItem(consumables.P_DRAFT)) addButton(0,"Pure Draft",latexyEatsADickItem,consumables.P_DRAFT);
 		if(player.hasItem(consumables.MINOBLO)) addButton(1,"Mino Blood",latexyEatsADickItem,consumables.MINOBLO);
 	}
 	addButton(14,"Back",approachLatexy);
@@ -692,6 +693,7 @@ private function latexyEatsADickItem(item:ItemType):void {
 		else outputText("bulbous crown");
 		outputText(".  The newborn cock-tip thickens, spreading her wider as it gradually droops out of the female flesh surrounding it.  ");
 		flags[kFLAGS.GOO_DICK_LENGTH] = 8;
+		flags[kFLAGS.GOO_DICK_TYPE] = CockTypesEnum.HUMAN;
 		if(item == consumables.MINOBLO) {
 			outputText("On and on it comes.  She's truly going to be hung like a stallion at this rate!   ");
 			flags[kFLAGS.GOO_DICK_LENGTH] = 13;

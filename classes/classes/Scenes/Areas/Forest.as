@@ -41,7 +41,7 @@ package classes.Scenes.Areas
 			var select:int;
 			
 			//Build choice list!
-			choice[choice.length] = 0; //Faerie
+			if (flags[kFLAGS.FAERIE_ENCOUNTER_DISABLED] <= 0) choice[choice.length] = 0; //Faerie
 			if (player.level >= 2) choice[choice.length] = 1; //Tentacle Beast
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100 && rand(100) >= Math.round(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] * 0.75)) choice[choice.length] = 2; //Corrupted Glade
 			choice[choice.length] = 3; //Akbal
@@ -279,16 +279,17 @@ package classes.Scenes.Areas
 					doNext(camp.returnToCampUseOneHour);
 					break;
 				case 5: //Bee-girl
-					if (rand(10) == 0) { //Chitin freebie!
-						outputText("You find a large piece of insectile carapace obscured in the ferns to your left.  It's mostly black with a thin border of bright yellow along the outer edge.  There's still a fair portion of yellow fuzz clinging to the chitinous shard.  It feels strong and flexible - maybe someone can make something of it.  ", true);
-						inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
-						return;
-					}
 					beeGirlScene.beeEncounter();
 					break;
-				case 6: //Pigtail truffle FOUND!
-					outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
-					inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
+				case 6: 
+					if (rand(4) > 0) { //Pigtail truffle FOUND!
+						outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
+						inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
+					}
+					else { //Chitin freebie!
+						outputText("You find a large piece of insectile carapace obscured in the ferns to your left.  It's mostly black with a thin border of bright yellow along the outer edge.  There's still a fair portion of yellow fuzz clinging to the chitinous shard.  It feels strong and flexible - maybe someone can make something of it.  ", true);
+						inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
+					}
 					break;
 				case 7: //Gather woods
 					cabinProgress.gatherWoods();

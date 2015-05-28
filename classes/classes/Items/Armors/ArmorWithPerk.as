@@ -14,8 +14,8 @@ package classes.Items.Armors
 		private var playerPerkV3:Number;
 		private var playerPerkV4:Number;
 		
-		public function ArmorWithPerk(id:String, shortName:String,name:String, longName:String, def:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String = "", supportsBulge:Boolean = false) {
-			super(id, shortName, name,longName, def, value, description, perk, supportsBulge);
+		public function ArmorWithPerk(id:String, shortName:String,name:String, longName:String, def:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String = "", supportsBulge:Boolean = false, supportsUndergarment:Boolean = true) {
+			super(id, shortName, name,longName, def, value, description, perk, supportsBulge, supportsUndergarment);
 			this.playerPerk = playerPerk;
 			this.playerPerkV1 = playerPerkV1;
 			this.playerPerkV2 = playerPerkV2;

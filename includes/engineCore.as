@@ -62,7 +62,7 @@ public function outputList():String {
 	list = [];
 	return stuff;        
 }
-
+*/
 /**
  * Alters player's HP.
  * @param	changeNum The amount to damage (negative) or heal (positive).
@@ -165,7 +165,7 @@ public function rawOutputText(output:String, purgeText:Boolean = false):void
  * Output the text on main text interface.
  * @param	output The text to show. It can be formatted such as bold, italics, and underline tags.
  * @param	purgeText Clear the old text.
- * @param	parseAsMarkdown I don't know about this one.
+ * @param	parseAsMarkdown Parses the text using Markdown.
  */
 public function outputText(output:String, 
 						purgeText:Boolean = false, 
@@ -626,6 +626,9 @@ public function buildPerkList():Array {
 	if(player.findPerk(PerkLib.Tank) >= 0 && player.tou >= 50) {
 		_add(new PerkClass(PerkLib.Regeneration));
 	}
+	if(player.tou >= 50 && player.str >= 50) {
+		_add(new PerkClass(PerkLib.ImprovedEndurance));
+	}
 	//Tier 1 Toughness Perks
 	if(player.level >= 6) {
 		if(player.findPerk(PerkLib.Tank) >= 0 && player.tou >= 60) {
@@ -727,6 +730,9 @@ public function buildPerkList():Array {
 	//Slot 5 - Fertile+ increases cum production and fertility (+15%)
 	if(player.lib >= 25) {
 			_add(new PerkClass(PerkLib.FertilityPlus,15,1.75,0,0));
+	}
+	if(player.lib >= 25 && player.inte >= 50) {
+		_add(new PerkClass(PerkLib.ImprovedSelfControl));
 	}
 	//Slot 5 - minimum libido
 	if(player.minLust() >= 20) {
@@ -1129,6 +1135,7 @@ public function createCallBackFunction2(func:Function,...args):Function
  * @param	arg2 Pass argument #1 to func1 parameter.
  * @param	arg3 Pass argument #1 to func1 parameter.
  * @param	toolTipText The text that will appear on tooltip when the mouse goes over the button.
+ * @param	toolTipHeader The text that will appear on the tooltip header. If not specified, it defaults to button text.
  */
 public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):void {
 	if (func1==null) return;
@@ -1208,72 +1215,6 @@ public function menu():void { //The newer, simpler menu - blanks all buttons so 
 	mainView.hideBottomButton(14);
 	flushOutputTextToGUI();
 }
-
-/*
-// AFICT, menu() isn't called with arguments ANYWHERE in the codebase.
-// WHRYYYYYYY
-public function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, 
-					text2:String = null, func2:Function = null, arg2:Number = -9000, 
-					text3:String = null, func3:Function = null, arg3:Number = -9000, 
-					text4:String = null, func4:Function = null, arg4:Number = -9000, 
-					text5:String = null, func5:Function = null, arg5:Number = -9000, 
-					text6:String = null, func6:Function = null, arg6:Number = -9000, 
-					text7:String = null, func7:Function = null, arg7:Number = -9000, 
-					text8:String = null, func8:Function = null, arg8:Number = -9000, 
-					text9:String = null, func9:Function = null, arg9:Number = -9000, 
-					text0:String = null, func0:Function = null, arg0:Number = -9000):void 
-{
-	
-	function _conditionallyShowButton( index :int, label :String, func :Function, arg :Number ) :void
-	{
-		var callback :Function, toolTipText :String;
-
-		
-
-		
-		if( func != null )
-		{
-			callback = createCallBackFunction(func1, arg1);
-
-			toolTipText = getButtonToolTipText( label );
-			// This is a kind of messy hack because I want to log the button events, so I can do better debugging.
-			// therefore, we wrap the callback function in a shim function that does event-logging, and
-			// *then* calls the relevant callback.
-
-			
-			mainView.showBottomButton( index, label, callback, toolTipText );
-			
-		}
-		else
-		{
-			mainView.hideBottomButton( index );
-		}
-	}
-
-	//Clear funcs & args
-	// funcs = new Array();
-	// args = new Array();
-	
-	_conditionallyShowButton( 0, text1, func1, arg1 );
-	_conditionallyShowButton( 1, text2, func2, arg2 );
-	_conditionallyShowButton( 2, text3, func3, arg3 );
-	_conditionallyShowButton( 3, text4, func4, arg4 );
-	_conditionallyShowButton( 4, text5, func5, arg5 );
-	_conditionallyShowButton( 5, text6, func6, arg6 );
-	_conditionallyShowButton( 6, text7, func7, arg7 );
-	_conditionallyShowButton( 7, text8, func8, arg8 );
-	_conditionallyShowButton( 8, text9, func9, arg9 );
-	_conditionallyShowButton( 9, text0, func0, arg0 );
-	_conditionallyShowButton(10, text0, func0, arg0 );
-	_conditionallyShowButton(11, text0, func0, arg0 );
-	_conditionallyShowButton(12, text0, func0, arg0 );
-	_conditionallyShowButton(13, text0, func0, arg0 );
-	_conditionallyShowButton(14, text0, func0, arg0 );
-
-	//mainView.setOutputText( currentText );
-	flushOutputTextToGUI();
-}
-*/
 
 /**
  * Adds buttons that can be chosen. 
@@ -1655,8 +1596,10 @@ public function spellCost(mod:Number):Number {
 
 //Modify fatigue
 //types:
-//        0 - normal
-//        1 - magic
+//  0 - normal
+//	1 - magic
+//	2 - physical
+//	3 - non-bloodmage magic
 public function fatigue(mod:Number,type:Number  = 0):void {
 	//Spell reductions
 	if(type == 1) {
@@ -1682,8 +1625,9 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 	if (mod < 0) {
 		var multi:Number = 1;
 		
-		if (player.findPerk(PerkLib.HistorySlacker) >= 0) multi += 0.2;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < 30) multi += 0.1;
+		if (player.findPerk(PerkLib.HistorySlacker) >= 0) multi *= 0.2;
+		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < 30) multi *= 0.1;
+		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi *= 0.5;
 		
 		mod *= multi;
 	}
@@ -1981,6 +1925,11 @@ public function displayStats(e:MouseEvent = null):void
 			addictStats += "0%\n";
 		else
 			addictStats += "100%\n";
+	}
+	
+	// Corrupted Minerva's Cum Addiction
+	if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10 && flags[kFLAGS.MINERVA_CORRUPTED_CUM_ADDICTION] > 0) {
+		addictStats += "<b>Minerva's Cum:</b> " + (flags[kFLAGS.MINERVA_CORRUPTED_CUM_ADDICTION] * 20) + "%";
 	}
 	
 	// Mino Cum Addiction

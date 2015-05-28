@@ -162,6 +162,12 @@ package classes
 						"<b>You aren't tough enough to benefit from this anymore.</b>" +
 						"]",
 				"You choose the 'Immovable Object' perk, granting 10% physical damage reduction.</b>");
+		public static const ImprovedEndurance:PerkType = mk("Improved Endurance", "Improved Endurance",
+				"Increases maximum fatigue by 20.",
+				"You choose the 'Improved Endurance' perk. Thanks to your physical conditioning, your maximum fatigue has been increased by 20!</b>");
+		public static const ImprovedSelfControl:PerkType = mk("Improved Self-Control", "Improved Self-Control",
+				"Increases maximum lust by 20.",
+				"You choose the 'Improved Self-Control' perk. Thanks to your mental conditioning, your maximum lust has been increased by 20!</b>");
 		public static const IronFists:PerkType = mk("Iron Fists", "Iron Fists",
 				"Hardens your fists to increase attack rating by 5.",
 				"You choose the 'Iron Fists' perk, hardening your fists. This increases attack power by 5.");

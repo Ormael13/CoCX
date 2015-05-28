@@ -2898,7 +2898,7 @@ public function apparantlyJojoDOESlift():void
 			outputText("“<i>I fear that your time would be better spend meditating before we continue your training. Would you like to do so now?</i>”\n\n");
 			
 			menu();
-			doYesNo(meditateInForest, jojoCamp);
+			doYesNo(jojoFollowerMeditate, jojoCamp);
 			return;
 		}
 	}
@@ -2995,7 +2995,11 @@ public function apparantlyJojoDOESlift():void
 
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
-	
+	//Boost attributes!
+	if (player.str < 50) dynStats("str", 0.5);
+	if (player.str < 80) dynStats("str", 0.5);
+	if (player.inte < 50) dynStats("inte", 0.5);
+	if (player.inte < 80) dynStats("inte", 0.5);
 	menu();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3180,7 +3184,7 @@ private function getAnallyFuckedByMouseYouSlut():void {
 	var isVirgin:Boolean = (player.looseness(false) == 0);
 	jojoSprite();
 	clearOutput();
-	outputText("You finally make up your mind; you want his mouse-cock in your [ass]. " + player.clothedOrNaked("You remove your [armor] and ") + "Jojo " + (flags[kFLAGS.JOJO_SEX_COUNTER] < 4 ? "hesitantly" : "") + "strips out of his robe, revealing his naked form.");
+	outputText("You finally make up your mind; you want his mouse-cock in your [ass]. " + player.clothedOrNaked("You remove your [armor] and ") + "Jojo " + (flags[kFLAGS.JOJO_SEX_COUNTER] < 4 ? "hesitantly " : "") + "strips out of his robe, revealing his naked form.");
 	outputText("\n\n\"<i>Get down on all fours and I can begin,</i>\" Jojo instructs. You nod and get down on all fours, presenting your [butt] to Jojo. His cock grows to full erection. \"<i>I'm going to need to get this lubricated first,</i>\" Jojo says. He spits on his hands and applies the saliva evenly across his cock.");
 	outputText("\n\nJojo gently massages your [butt] to assure you that he's going to go gentle. \"<i>Here I come,</i>\" Jojo announces as he slowly slides his cock right into your [ass].");
 	player.buttChange(monster.cocks[0].cockThickness, true);
@@ -3206,7 +3210,7 @@ private function getVagFuckedByMouse():void {
 	var isVirgin:Boolean = (player.looseness(true) == 0);
 	jojoSprite();
 	clearOutput();
-	outputText("You finally make up your mind; you want his mouse-cock in your [vagina]. " + player.clothedOrNaked("You remove your [armor] and ") + "and Jojo " + (flags[kFLAGS.JOJO_SEX_COUNTER] < 4 ? "hesitantly" : "") + " strips out of his robe, revealing his naked form.");
+	outputText("You finally make up your mind; you want his mouse-cock in your [vagina]. " + player.clothedOrNaked("You remove your [armor] and ") + "and Jojo " + (flags[kFLAGS.JOJO_SEX_COUNTER] < 4 ? "hesitantly " : "") + " strips out of his robe, revealing his naked form.");
 	if (flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER] == 0) {
 		outputText("\n\nYou see that Jojo’s uncomfortable, so you lean back on your legs and pull open the lips of your [vagina], showing him your wet, hot insides. Jojo’s jaw drops and his cock gets fully erect. You tease Jojo by telling him to hurry up or you’ll go find some imps. Jojo’s snaps his jaws shut and says, \"<i>No. I promised to help you deal with your lust, so you can avoid corrupted creature. It’s just... well this is my first time.</i>\" You’re surprised, considering that virginity was impossible in a land like Mareth. You tell him you’d be honored if he gave you his virginity. Jojo looks at you for a second and nods. \"<i>You’re the only one who I can trust it with... I’m ready now.</i>\"");
 		outputText("\n\nJojo hesitates at the entrance of your [vagina] and suddenly with a single stroke jams his dick deep into you. ");

@@ -3837,6 +3837,18 @@ package classes.Scenes.Places.Prison
 				prisonCaptorFeedingAnalTraining();
 				return;
 			}
+			if((prisonCaptorFeedingQuestTrainingExists()) && ((prisonCaptorFeedingQuestTrainingIsComplete()) || (prisonCaptorFeedingQuestTrainingIsTimeUp())))
+			{
+				prisonCaptorFeedingQuestTrainingResolve();
+				return;
+			}
+			if((prisonCaptorFeedingQuestTrainingExists()) && !prisonCaptorFeedingQuestTrainingIsTimeUp())
+			{
+				outputText("(Placeholder) Mistress Elly enters the room and chastises you for not being out working on her quest.\n\n");
+				prison.prisonPunishment(50);
+				doNext(playerMenu);
+				return;
+			}
 			var lustChange:int = 0;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0)
 			{

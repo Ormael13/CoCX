@@ -2226,8 +2226,8 @@ public static const ISABELLA_CHILDREN_COWGIRL_BOYS:int                          
 public static const ISABELLA_CHILDREN_COWGIRL_GIRLS:int                             = 2218;
 public static const ISABELLA_CHILDREN_COWGIRL_HERMS:int                             = 2219;
 public static const ISABELLA_VALERIA_SPARRED:int                                    = 2220;
-public static const UNKNOWN_FLAG_NUMBER_02221:int                                   = 2221;
-public static const UNKNOWN_FLAG_NUMBER_02222:int                                   = 2222;
+public static const FAERIE_ENCOUNTER_DISABLED:int                                   = 2221;
+public static const MINERVA_CORRUPTED_CUM_ADDICTION:int                             = 2222;
 public static const UNKNOWN_FLAG_NUMBER_02223:int                                   = 2223;
 public static const UNKNOWN_FLAG_NUMBER_02224:int                                   = 2224;
 public static const UNKNOWN_FLAG_NUMBER_02225:int                                   = 2225;

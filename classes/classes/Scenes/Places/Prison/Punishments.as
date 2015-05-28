@@ -226,7 +226,7 @@ package classes.Scenes.Places.Prison
 				doNext(playerMenu);
 				return;
 			}
-			
+			prison.changeWill(-prison.prisonWillCost(10));
 			var chance:int = 10;
 			chance += player.str * 0.8;
 			if (rand(100) < chance) // If Strength Level multiplied by 0.8 is greater than a random number between 1 and 100, then the player breaks the stockade.
@@ -515,6 +515,7 @@ package classes.Scenes.Places.Prison
 				doNext(playerMenu);
 				return;
 			}
+			prison.changeWill(-prison.prisonWillCost(10));
 			var successChance:int = 5;
 			successChance += (player.str / 4);
 			if (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) successChance += 10;

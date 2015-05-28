@@ -1223,12 +1223,14 @@ package classes.Scenes.Places
 							scruffyScene.prisonCaptorRandomEventJizzJanitor();
 							return;
 						}
+						break;
 					case 2:
 						if (randomCooldownGuard <= 0) {
 							randomCooldownGuard = 12 + rand(60);
 							prisonGuard.prisonCaptorRandomEventAbuse();
 							return;
 						}
+						break;
 					case 3:
 					case 4:
 						if (randomCooldownFeed <= 0 && player.hunger < 80) {
@@ -1243,6 +1245,7 @@ package classes.Scenes.Places
 							trainingPet.prisonCaptorPetEvent();
 							return;
 						}
+						break;
 					case 7:
 						if (randomCooldownPet <= 0 && rand(petPlayRarity) == 0 && trainingPet.prisonCaptorPetScore() >= 30 && !trainingPet.prisonCaptorPetOptedOut()) {
 							randomCooldownPet = 6 + rand(4);
@@ -1250,6 +1253,7 @@ package classes.Scenes.Places
 							else if (trainingPet.prisonCaptorPetTier() == 3) trainingPet.prisonCaptorPetTrainingDemand();
 							return;
 						}
+						break;
 					default:
 						break;
 				}
@@ -1720,7 +1724,7 @@ package classes.Scenes.Places
 		
 		public function doPrisonEscapeFightWin():void
 		{
-			outputText("\n\nYou step over the unconscious body of your former guard and head towards the door.\n",false);
+			outputText("\n\nYou step over the unconscious body of your former guard and head towards the door.\n", false);
 			changeEsteem(1,inPrison);
 			changeObey(-3,inPrison);
 			prisonEscapeSuccessText();
@@ -2004,26 +2008,22 @@ package classes.Scenes.Places
 		
 		public function prisonEscapeFinalePart1():void
 		{
-			clearOutput();
+			var textArray:Array = [];
 			player.removeStatusAffect(StatusAffects.PrisonRestraints);
-			/*flags[kFLAGS.PRISON_STUDY_BREATHING_UNLOCKED] = 0;
-			flags[kFLAGS.PRISON_STUDY_MANNERS_UNLOCKED] = 0;
-			flags[kFLAGS.PRISON_TRAIN_ANAL_CAPACITY_UNLOCKED] = 0;
-			flags[kFLAGS.PRISON_TRAIN_SELF_CONTROL_UNLOCKED] = 0;
-			flags[kFLAGS.PRISON_TRAIN_PUPPY_TRICKS_UNLOCKED] = 0;*/
 			prisonItemsRetrieve();
 			if (flags[kFLAGS.PRISON_STORAGE_ARMOR] != 0) {
-				prisonArmorRetrieve();
+				textArray.push(prisonArmorRetrieve());
 				//return;
 			}
 			if (flags[kFLAGS.PRISON_STORAGE_WEAPON] != 0) {
-				prisonWeaponRetrieve();
+				textArray.push(prisonWeaponRetrieve());
 				//return;
 			}
 			if (flags[kFLAGS.PRISON_STORAGE_SHIELD] != 0) {
-				prisonShieldRetrieve();
+				textArray.push(prisonShieldRetrieve());
 				//return;
 			}
+			if (textArray.length > 0) outputText("You equip your " + formatStringArray(textArray) + ".\n\n");
 			prisonEscapeFinalePart2();
 			return;
 		}
@@ -2031,7 +2031,7 @@ package classes.Scenes.Places
 		public function prisonEscapeFinalePart2():void
 		{
 			flags[kFLAGS.IN_PRISON] = 0;
-			outputText("Having retrieved your old items, you quietly make your way out of your captor's stronghold and head back towards your camp.",true);
+			outputText("Having retrieved your old items, you quietly make your way out of your captor's stronghold and head back towards your camp.");
 			if(!flags[kFLAGS.PRISON_CAPTURE_CHANCE] || flags[kFLAGS.PRISON_CAPTURE_CHANCE] <= 0)
 			{
 				doNext(captorChanceChoose);
@@ -2053,40 +2053,47 @@ package classes.Scenes.Places
 			}
 			player.prisonItemSlots = []; //CLEAR!
 		}
-		public function prisonArmorRetrieve():void
+		public function prisonArmorRetrieve():String
 		{
+			var temp:String = "";
 			if (flags[kFLAGS.PRISON_STORAGE_ARMOR] != 0) {
-				outputText("\n");
 				var tempArmor:* = ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_ARMOR]);
 				if (tempArmor != null) player.setArmor(tempArmor);
+				temp = player.armorName;
 				//inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_ARMOR]), prisonEscapeFinalePart1);
 			}
 			flags[kFLAGS.PRISON_STORAGE_ARMOR] = 0;
+			return temp;
 		}
-		public function prisonWeaponRetrieve():void
+		public function prisonWeaponRetrieve():String
 		{
+			var temp:String = "";
 			if (flags[kFLAGS.PRISON_STORAGE_WEAPON] != 0) {
-				outputText("\n");
 				var tempWeapon:* = ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_WEAPON]);
 				if (tempWeapon != null) player.setWeapon(tempWeapon);
+				temp = player.weaponName;
 				//inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_WEAPON]), prisonEscapeFinalePart1);
 			}
 			flags[kFLAGS.PRISON_STORAGE_WEAPON] = 0;
+			return temp;
 		}
-		public function prisonShieldRetrieve():void
+		public function prisonShieldRetrieve():String
 		{
+			var temp:String = "";
 			if (flags[kFLAGS.PRISON_STORAGE_SHIELD] != 0) {
-				outputText("\n");
 				var tempShield:* = ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_SHIELD]);
 				if (tempShield != null) player.setShield(tempShield);
+				temp = player.shieldName;
 				//inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_SHIELD]), prisonEscapeFinalePart1);
 			}
 			flags[kFLAGS.PRISON_STORAGE_SHIELD] = 0;
+			return temp;
 		}
 		
 		//Conclusion
 		public function captorChanceChoose():void {
-			outputText("\n\nAs you make your way back to camp, you can't help but think about how easy it is to find yourself knocked unconscious and left helpless in the wilderness of Mareth. While slave hunters have never plucked you off the ground in such a state before, now that you've bumbled into being captured by them you consider that they might come hunting for you now that you've escaped. You give it a moment's thought. Are you now in danger of being recaptured should you be defeated in combat?",false);
+			clearOutput();
+			outputText("As you make your way back to camp, you can't help but think about how easy it is to find yourself knocked unconscious and left helpless in the wilderness of Mareth. While slave hunters have never plucked you off the ground in such a state before, now that you've bumbled into being captured by them you consider that they might come hunting for you now that you've escaped. You give it a moment's thought. Are you now in danger of being recaptured should you be defeated in combat?",false);
 			simpleChoices("Likely", chooseLikelyChance, "Maybe", chooseMaybeChance, "Never", chooseNeverChance, "", null, "", null);
 		}
 		

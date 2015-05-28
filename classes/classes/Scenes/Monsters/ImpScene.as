@@ -1644,7 +1644,7 @@ package classes.Scenes.Monsters
 				if(player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(0,"FuckHisAss",impLordBumPlug);
 				if(player.hasCock()) addButton(1,"Get Blown",getBlownByAnImpLord);
 				if(player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
-				if(player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
+				if(player.findPerk(PerkLib.Feeder) >= 0 && player.cor >= (66 - player.corruptionTolerance()) && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
 			}
 		}
 		
