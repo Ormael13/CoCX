@@ -7,10 +7,10 @@ package classes.Items.Weapons
 	import classes.PerkLib;
 	import classes.Player;
 
-	public class LethiciteStaff extends Weapon {
+	public class LethiciteStaff extends WeaponWithPerk {
 		
 		public function LethiciteStaff() {
-			super("L.Staff", "Lthc. Staff", "lethicite staff", "a lethicite staff", "smack", 14, 1337, "This staff is made of a dark material and seems to tingle to the touch.  The top consists of a glowing lethicite orb.  It once belonged to Lethice who was defeated in your hands. \n\nType: Weapon (Magical) \nAttack: 14 \nBase value: 1337 \nSpecial: Wizard's Focus (+80% spell effect multiplier)", "Wizard's Focus");
+			super("L.Staff", "Lthc. Staff", "lethicite staff", "a lethicite staff", "smack", 14, 1337, "This staff is made of a dark material and seems to tingle to the touch.  The top consists of a glowing lethicite orb.  It once belonged to Lethice who was defeated in your hands.", "Wizard's Focus", PerkLib.WizardsFocus, 0.8, 0, 0, 0);
 		}
 		
 		override public function playerEquip():Weapon {

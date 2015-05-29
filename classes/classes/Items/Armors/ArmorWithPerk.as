@@ -5,6 +5,7 @@ package classes.Items.Armors
 {
 	import classes.Items.Armor;
 	import classes.PerkType;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public class ArmorWithPerk extends Armor {
@@ -34,6 +35,30 @@ package classes.Items.Armors
 			return super.playerRemove();
 		}
 
+		override public function get description():String {
+			var desc:String = _description;
+			//Type
+			desc += "\n\nType: "
+			if (name.indexOf("armor") >= 0 || name.indexOf("armour") >= 0 || name.indexOf("chain") >= 0 || name.indexOf("mail") >= 0 || name.indexOf("plates") >= 0) {
+				desc += "Armor ";
+				if (perk == "Light" || perk == "Medium") {
+					desc += "(Light)";
+				}
+				else if (perk == "Medium") desc += "(Medium)";
+				else desc += "(Heavy)";
+			}
+			else desc += "Clothing ";
+			//Defense
+			if (def > 0) desc += "\nDefense: " + String(def);
+			//Value
+			if (value != 0) desc += "\nBase value: " + String(value);
+			//Perk
+			desc += "\nSpecial: " + playerPerk.name;
+			if (playerPerk == PerkLib.WizardsEndurance) desc += " (-" + playerPerkV1 + "% Spell Cost)";
+			else if (playerPerkV1 > 0) desc += " (Magnitude: " + playerPerkV1 + ")";
+			return desc;
+		}
+		
 /*
 		override public function equipEffect(player:Player, output:Boolean):void
 		{

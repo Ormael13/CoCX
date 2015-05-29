@@ -13,7 +13,7 @@ package classes.Items.Armors
 	{
 		public function MaraeArmor() 
 		{
-			super("TB.Armr","T.B.Armor","tentacled bark armor","a suit of tentacled bark armor",25,1000,"This suit of armor is finely made from the white bark from corrupted Marae you've defeated. It comes with tentacles though. \n\nType: Heavy armor \nDefense: 25 \nBase value: 1,000");
+			super("TB.Armr","T.B.Armor","tentacled bark armor","a suit of tentacled bark armor",25,1000,"This suit of armor is finely made from the white bark from corrupted Marae you've defeated. It comes with tentacles though.");
 		}
 		
 		override public function get supportsBulge():Boolean { return true; }

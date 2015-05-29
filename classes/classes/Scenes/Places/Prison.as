@@ -101,6 +101,11 @@ package classes.Scenes.Places
 			if (trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
 				//Decrement quest timer
 				if (player.statusAffectv2(StatusAffects.PrisonCaptorEllyQuest) > 0) player.addStatusValue(StatusAffects.PrisonCaptorEllyQuest, 2, -1);
+				if (trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() && rand(100) < (flags[kFLAGS.PRISON_CAPTURE_CHANCE] + player.obey / 4) && !inDungeon && !inPrison && !ingnam.inIngnam) {
+					goBackToPrisonBecauseQuestTimeIsUp();
+					needNext = true;
+					return needNext;
+				}
 			}
 			prisonCombatAutoLose = false;
 			//Tick
@@ -975,6 +980,13 @@ package classes.Scenes.Places
 			clearOutput();
 			outputText("You peer around the corner of a tent. You are unsurprised to see a collection of beast men around a cookfire, but you find yourself far more interested in the cage wagon beyond them. You become so wrapped up in trying to identify the lumpy shapes in the shadowy interior that the sound of twigs snapping behind you doesn't immediately trigger alarm bells in your mind, and before you can properly respond you are knocked unconscious by a brutal blow to the back of your head.");
 			doNext(prisonIntro);
+		}
+		
+		public function goBackToPrisonBecauseQuestTimeIsUp():void {
+			outputText("\nSomething inside your mind tells you that you should return to the prison. Mistress Elly would probably get angry if you wander the realms and abandon her. ");
+			if (camp.companionsCount() > 0) outputText("You leave a note in the camp to let anyone know that you're making your departure. ");
+			menu();
+			addButton(0, "Next", prisonIntro, false);
 		}
 		
 		public function prisonIntro(involuntary:Boolean = true):Boolean

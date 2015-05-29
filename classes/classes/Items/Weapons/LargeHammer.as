@@ -11,7 +11,7 @@ package classes.Items.Weapons
 	public class LargeHammer extends Weapon {
 		
 		public function LargeHammer() {
-			super("L.Hammr", "L.Hammr", "large hammer", "Marble's large hammer", "smash", 16, 90, "This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances. \n\nType: Weapon (Heavy) \nAttack: 16 \nBase value: 90 \nRequires height of 5'0\".", "Large");
+			super("L.Hammr", "L.Hammr", "large hammer", "Marble's large hammer", "smash", 16, 90, "This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.", "Large");
 		}
 		
 		override public function canUse():Boolean {

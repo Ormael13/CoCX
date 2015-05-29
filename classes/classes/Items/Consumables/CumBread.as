@@ -7,7 +7,7 @@ package classes.Items.Consumables
 	{
 		
 		public function CumBread() {
-			super("C.Bread","C.Bread", "a bowl of cum with bread pieces floating in it", ConsumableLib.DEFAULT_VALUE, "A bowl of cum with pieces of bread floating in it.  Eating this would take the edge off your hunger but damage your dignity. \n\nType: Food & Beverages");
+			super("C.Bread","C.Bread", "a bowl of cum with bread pieces floating in it", ConsumableLib.DEFAULT_VALUE, "A bowl of cum with pieces of bread floating in it.  Eating this would take the edge off your hunger but damage your dignity.");
 		}
 		
 		override public function canUse():Boolean {

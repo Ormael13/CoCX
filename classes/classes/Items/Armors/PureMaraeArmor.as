@@ -13,7 +13,7 @@ package classes.Items.Armors
 	{
 		public function PureMaraeArmor() 
 		{
-			super("DB.Armr","D.B.Armor","divine bark armor","a suit of divine bark armor",30,1100,"This suit of armor is finely made from the white bark you've received from Marae as a reward. \n\nType: Heavy armor \nDefense: Varies (higher with purity) \nBase value: 1,100");
+			super("DB.Armr","D.B.Armor","divine bark armor","a suit of divine bark armor",30,1100,"This suit of armor is finely made from the white bark you've received from Marae as a reward.");
 		}
 		
 		override public function get supportsBulge():Boolean { return true; }

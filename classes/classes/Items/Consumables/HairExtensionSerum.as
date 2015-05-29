@@ -11,7 +11,7 @@ package classes.Items.Consumables
 	public final class HairExtensionSerum extends Consumable {
 		
 		public function HairExtensionSerum() {
-			super("ExtSerm", "ExtSerm", "a bottle of hair extension serum", 6, "This is a bottle of foamy pink liquid, purported by the label to increase the speed at which the user's hair grows. \n\nType: Consumable");
+			super("ExtSerm", "ExtSerm", "a bottle of hair extension serum", 6, "This is a bottle of foamy pink liquid, purported by the label to increase the speed at which the user's hair grows.");
 		}
 		
 		override public function canUse():Boolean {

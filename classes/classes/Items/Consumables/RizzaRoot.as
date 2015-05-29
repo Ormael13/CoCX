@@ -50,7 +50,7 @@ package classes.Items.Consumables
                 
         public function RizzaRoot()
         {
-            super("RizzaRt", "Rizza Root", "a tube of rizza root strands", rizzaRootEffect, 10, "A small ceramic tube full of fine red root strands.  They smell something like citrus fruit. \n\nType: Transformative item");
+            super("RizzaRt", "Rizza Root", "a tube of rizza root strands", rizzaRootEffect, 10, "A small ceramic tube full of fine red root strands.  They smell something like citrus fruit.");
         }
 
     }

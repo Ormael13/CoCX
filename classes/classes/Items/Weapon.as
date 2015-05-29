@@ -29,6 +29,25 @@ package classes.Items
 		
 		public function get name():String { return _name; }
 		
+		override public function get description():String {
+			var desc:String = _description;
+			//Type
+			desc += "\n\nType: Weapon ";
+			if (perk == "Large") desc += "(Large)";
+			else if (name.indexOf("staff") >= 0) desc += "(Staff)";
+			else if (verb.indexOf("whip") >= 0) desc += "(Whip)";
+			else if (verb.indexOf("punch") >= 0) desc += "(Gauntlet)";
+			else if (verb == "shot") desc += "(Ranged)";
+			else if (verb == "slash" || verb == "keen cut") desc += "(Sword)";
+			else if (verb == "stab") desc += "(Dagger)";
+			else if (verb == "smash") desc += "(Blunt)";
+			//Attack
+			desc += "\nAttack: " + String(attack);
+			//Value
+			desc += "\nBase value: " + String(value);
+			return desc;
+		}
+		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
 			if (perk == "Large" && game.player.shield != ShieldLib.NOTHING) {

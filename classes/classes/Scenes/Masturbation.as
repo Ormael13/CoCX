@@ -271,7 +271,7 @@ package classes.Scenes {
 				doNext(playerMenu);
 				return;
 			}
-			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && inDungeon) {
+			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !inDungeon) {
 				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch you shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
 				doNext(playerMenu);
 				return;
@@ -282,24 +282,29 @@ package classes.Scenes {
 				return;		
 			}
 			if (player.isTaur()) {
-				if (centaurMasturbation())
+				if (centaurMasturbation()) {
+					flags[kFLAGS.TIMES_MASTURBATED]++;
 					doNext(camp.returnToCampUseOneHour);
+				}
 				else doNext(playerMenu);
 				return;
 			}
 			if (player.gender == 0) {
 				genderlessMasturbate();
+				flags[kFLAGS.TIMES_MASTURBATED]++;
 				dynStats("lus", -50);
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) {
+				flags[kFLAGS.TIMES_MASTURBATED]++;
 				if (player.isNaga() && rand(2) == 0 && player.statusAffectv1(StatusAffects.Exgartuan) == 1)
 					getGame().exgartuan.exgartuanNagaStoleMyMasturbation();
 				else getGame().exgartuan.exgartuanMasturbation();
 				return;
 			}
 			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
+				flags[kFLAGS.TIMES_MASTURBATED]++;
 				gildedCockTurbate();
 				return;
 			}
@@ -1878,6 +1883,7 @@ package classes.Scenes {
 			}
 			//DONE!
 			player.orgasm();
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			dynStats("sen", (-0.5));
 		}
 		
@@ -1996,6 +2002,7 @@ package classes.Scenes {
 					else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.");
 				}
 				player.orgasm();
+				flags[kFLAGS.TIMES_MASTURBATED]++;
 				doNext(camp.returnToCampUseOneHour);
 				outputText("\n");
 				player.cuntChange(player.vaginalCapacity() * 0.9, true);
@@ -2023,7 +2030,6 @@ package classes.Scenes {
 			else if (player.cor > 66)
 				onaholeRepeatUse(true);
 			else onaholeRepeatUse(false);
-			
 			dynStats("sen", -.75);
 			onaholeContinuation();
 		}
@@ -2056,6 +2062,7 @@ package classes.Scenes {
 		}
 		
 		private function onaholeContinuation():void {
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			if (player.cocks.length > 1) {
 				if (player.gender == 3 && rand(2) == 0) {
 					doNext(onaholeMulticockContinuation);
@@ -2123,6 +2130,7 @@ package classes.Scenes {
 			}
 		
 			dynStats("lib", -1.5, "sen", .75, "cor", .5);
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2151,6 +2159,7 @@ package classes.Scenes {
 					dynStats("sen", -1);
 					doNext(camp.returnToCampUseOneHour);
 				}
+				flags[kFLAGS.TIMES_MASTURBATED]++;
 				player.cuntChange(1, true, true, false);
 			}
 		}
@@ -2189,6 +2198,7 @@ package classes.Scenes {
 					}
 				}
 			}
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			player.cuntChange(1, true);
 			player.slimeFeed();
 		}
@@ -2245,6 +2255,7 @@ package classes.Scenes {
 			}
 			//Stats & next event
 			//DONE!
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			player.orgasm();
 			dynStats("sen", -0.5);
 			doNext(camp.returnToCampUseOneHour);
@@ -2342,6 +2353,7 @@ package classes.Scenes {
 			}
 			//Stats & next event
 			//DONE!
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			player.orgasm();
 			dynStats("sen", (-0.5));
 			doNext(camp.returnToCampUseOneHour);
@@ -2374,7 +2386,9 @@ package classes.Scenes {
 			outputText("When you wake, the black latex is no longer covering your body and the belt is silent around your waist. Cum drips from the tip of your cock and the top part of your " + player.legs() + " are coated with your feminine juices. ");
 			if (player.biggestLactation() >= 2) outputText("Thin streams of creamy milk flow from your " + player.allBreastsDescript() + ", your torso and midsection dripping wet from the stuff. ");
 			outputText("Completely sated, you take off the belt, finding it slides off easily, and put it away in your campsite, eagerly awaiting the time you can next use it and have the suit work you over once more.");
-			dynStats("sen", -1, "lus", -300);
+			dynStats("sen", -1);
+			flags[kFLAGS.TIMES_MASTURBATED]++;
+			player.orgasm();
 			if (player.lib < 30) dynStats("lib", .5);
 			if (player.lib < 50) dynStats("lib", .5);
 			if (player.lib < 60) dynStats("lib", .5);

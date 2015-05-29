@@ -9,7 +9,7 @@ package classes.Items.Armors
 	{
 		public function BeeArmor() 
 		{
-			super("BeeArmr","Bee Armor","sexy black chitin armor-plating","a set of chitinous armor",18,200,"A suit of armor cleverly fashioned from giant bee chitin. It comes with a silken loincloth to protect your modesty. \n\nType: Heavy armor \nDefense: 18 \nBase value: 200");
+			super("BeeArmr","Bee Armor","sexy black chitin armor-plating","a set of chitinous armor",18,200,"A suit of armor cleverly fashioned from giant bee chitin. It comes with a silken loincloth to protect your modesty.");
 		}
 		
 		override public function useText():void

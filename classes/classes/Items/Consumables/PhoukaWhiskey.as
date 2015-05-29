@@ -13,7 +13,7 @@ package classes.Items.Consumables
 	public class PhoukaWhiskey extends Consumable {
 		
 		public function PhoukaWhiskey() {
-			super("P_Whsky", "Ph. Whiskey", "a small bottle of whiskey", 20, "A small, corked glass bottle with a dark amber liquid inside.  The whiskey smells strongly of peat. \n\nType: Food & Beverages");
+			super("P_Whsky", "Ph. Whiskey", "a small bottle of whiskey", 20, "A small, corked glass bottle with a dark amber liquid inside.  The whiskey smells strongly of peat.");
 		}
 		
         override public function canUse():Boolean {

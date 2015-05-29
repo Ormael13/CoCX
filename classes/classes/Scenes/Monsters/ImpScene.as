@@ -63,7 +63,7 @@ package classes.Scenes.Monsters
 				if (player.hasFuckableNipples()) addButton(2, "NippleFuck", noogaisNippleRape);
 			}
 			if (canFeed) addButton(3, "Breastfeed", areImpsLactoseIntolerant);
-			if (canBikiniTits) addButton(4, "B.Titfuck" (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			if (canBikiniTits) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, 1);
 			addButton(6, "Kill Him", killImp);
 			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
@@ -1639,13 +1639,14 @@ package classes.Scenes.Monsters
 			
 			menu();
 			//Continues in, Male Anal, Female Vaginal, or Breastfeed
-			addButton(14,"Leave",cleanupAfterCombat);
 			if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				if(player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(0,"FuckHisAss",impLordBumPlug);
 				if(player.hasCock()) addButton(1,"Get Blown",getBlownByAnImpLord);
 				if(player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
 				if(player.findPerk(PerkLib.Feeder) >= 0 && player.cor >= (66 - player.corruptionTolerance()) && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
+			addButton(14,"Leave",cleanupAfterCombat);
 		}
 		
 		//MALE ANAL

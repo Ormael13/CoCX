@@ -35,6 +35,26 @@ package classes.Items
 		
 		public function get supportsUndergarment():Boolean { return _supportsUndergarment; }
 		
+		override public function get description():String {
+			var desc:String = _description;
+			//Type
+			desc += "\n\nType: ";
+			if (name.indexOf("armor") >= 0 || name.indexOf("armour") >= 0 || name.indexOf("chain") >= 0 || name.indexOf("mail") >= 0 || name.indexOf("plates") >= 0) {
+				desc += "Armor ";
+				if (perk == "Light" || perk == "Medium") {
+					desc += "(Light)";
+				}
+				else if (perk == "Medium") desc += "(Medium)";
+				else desc += "(Heavy)";
+			}
+			else desc += "Clothing ";
+			//Defense
+			desc += "\nDefense: " + String(def);
+			//Value
+			desc += "\nBase value: " + String(value);
+			return desc;
+		}
+		
 		override public function canUse():Boolean {
 			if (this.supportsUndergarment == false && (game.player.upperGarment != UndergarmentLib.NOTHING || game.player.lowerGarment != UndergarmentLib.NOTHING)) {
 				var output:String = "";

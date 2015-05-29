@@ -266,7 +266,6 @@ use namespace kGAMECLASS;
 			//Skin armor perk
 			if(findPerk(PerkLib.ThickSkin) >= 0) {
 				armorDef += 2;
-				//if(skinType > SKIN_TYPE_PLAIN) armorDef += 1;
 			}
 			//Stacks on top of Thick Skin perk.
 			if(skinType == SKIN_TYPE_FUR) armorDef += 1;

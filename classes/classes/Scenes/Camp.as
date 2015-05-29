@@ -198,7 +198,7 @@ private function doCamp():void { //Only called by playerMenu
 		arianScene.arianLaysEggs();
 		return;
 	}
-	if (flags[kFLAGS.EMBER_MORNING] > 0 && model.time.hours >= 6) {
+	if (flags[kFLAGS.EMBER_MORNING] > 0 && ((flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0 && model.time.hours >= flags[kFLAGS.BENOIT_CLOCK_ALARM]) || (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && model.time.hours >= 6))) {
 		hideMenus();
 		emberScene.postEmberSleep();
 		return;
@@ -717,8 +717,8 @@ private function doCamp():void { //Only called by playerMenu
 		addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
 		if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
 	}
-	addButton(9, "Wait", doWait, null, null, null, "Wait for four hours.");
-	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", rest, null, null, null, "Rest for four hours.\n\nShift click to rest until fully healed or night comes.");
+	addButton(9, "Wait", doWait, null, null, null, "Wait for four hours.\n\nShift-click to wait until the night comes.");
+	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", rest, null, null, null, "Rest for four hours.\n\nShift-click to rest until fully healed or night comes.");
 	if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", doSleep, null, null, null, "Turn yourself in for the night.");
 
 	//Remove buttons according to conditions.
@@ -1467,16 +1467,25 @@ public function rest():void {
 	var fatRecovery:Number = 4;
 	var hpRecovery:Number = 10;
 	if (timeQ == 0) {
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison)
+		timeQ = 4;
+		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) { //Rest until fully healed.
+			var healthToRestore:int = player.maxHP() - player.HP;
+			var fatigueToRestore:int = player.maxFatigue() - player.fatigue;
+			timeQ = Math.ceil(healthToRestore / hpRecovery);
+			if (Math.ceil(fatigueToRestore / fatRecovery) > timeQ) timeQ = Math.ceil(fatigueToRestore / fatRecovery);
+			if (timeQ > 21 - model.time.hours) timeQ = 21 - model.time.hours;
+		}
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
 		{
-			outputText("You head into your cabin to rest. You lie down on your bed to rest for four hours.", false);
+			if (timeQ != 1) outputText("You head into your cabin to rest. You lie down on your bed to rest for " + num2Text(timeQ) + " hours.\n", false);
+			else outputText("You head into your cabin to rest. You lie down on your bed to rest for an hour.\n", false);
 			multiplier += 0.5;
 		}
 		else 
 		{
-			outputText("You lie down to rest for four hours.\n", false);
+			if (timeQ != 1) outputText("You lie down to rest for " + num2Text(timeQ) + " hours.\n", false);
+			else outputText("You lie down to rest for an hour.\n", false);
 		}
-		timeQ = 4;
 		//Hungry
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
 		{
@@ -1498,6 +1507,7 @@ public function rest():void {
 		if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0 && valeria.valeriaFluidsEnabled()) {
 			outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 		}
+
 		//REGULAR HP/FATIGUE RECOVERY
 		HPChange(timeQ * hpRecovery * multiplier, true);
 		fatigue(timeQ * -fatRecovery * multiplier); 
@@ -1519,9 +1529,10 @@ public function doWait():void {
 	var fatRecovery:Number = 2;
 	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery *= 1.5;
 	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
-	if(timeQ == 0) {
-		outputText("You wait four hours...\n", false);
+	if (timeQ == 0) {
 		timeQ = 4;
+		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) timeQ = 21 - model.time.hours;
+		outputText("You wait " + num2Text(timeQ) + " hours...\n", false);
 		//Marble withdrawl
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
@@ -1709,7 +1720,7 @@ public function sleepWrapper():void {
 
 public function sleepRecovery(display:Boolean = false):void {
 	var multiplier:Number = 1.0;
-	var fatRecovery:Number = 100;
+	var fatRecovery:Number = 20;
 	var hpRecovery:Number = 20;
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
 	{
@@ -2302,7 +2313,7 @@ public function setLevelButton():Boolean {
 		}
 		mainView.showMenuButton( MainView.MENU_LEVEL );
 		mainView.statsView.showLevelUp();
-		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && player.perkPoints <= 0 && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) {
+		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || kGAMECLASS.buildPerkList().length <= 0) && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) {
 			mainView.statsView.hideLevelUp();
 		}
 	}

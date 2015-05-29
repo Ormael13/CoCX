@@ -10,7 +10,7 @@ package classes.Items.Consumables
 	public final class WingStick extends Consumable {
 		
 		public function WingStick() {
-			super("W.Stick", "Wingstick", "a wingstick", 16, "A tri-bladed throwing weapon.  Though good for only a single use, it's guaranteed to do high damage if it hits.  \n\nType: Weapon (Thrown) \nDamage: 40-100 \nBase value: 16");
+			super("W.Stick", "Wingstick", "a wingstick", 16, "A tri-bladed throwing weapon.  Though good for only a single use, it's guaranteed to do high damage if it hits.  Inflicts 40 to 100 base damage, affected by strength.");
 		}
 		
 		override public function canUse():Boolean {
@@ -28,7 +28,7 @@ package classes.Items.Consumables
 				outputText(" incredible speed allows " + game.monster.pronoun2 + " to avoid the spinning blades!  The deadly device shatters when it impacts something in the distance.");
 			}
 			else { //Not dodged
-				var damage:Number = 40 + Utils.rand(61);
+				var damage:Number = 40 + Utils.rand(61) + (game.player.str * 2);
 				outputText(game.monster.capitalA + game.monster.short + " is hit with the wingstick!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 				game.monster.HP -= damage;
 				if (game.monster.HP < 0) game.monster.HP = 0;

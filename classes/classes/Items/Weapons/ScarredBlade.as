@@ -10,7 +10,7 @@ package classes.Items.Weapons
 		
 		public function ScarredBlade() 
 		{
-			super("ScarBld", "ScarBlade", "scarred blade", "a scarred blade", "slash", 10, 1000, "This saber, made from lethicite-imbued metal, eagerly seeks flesh; it resonates with disdain and delivers deep, jagged wounds as it tries to bury itself in the bodies of others. \n\nType: Weapon (Sword) \nAttack: Depends on corruption \nBase value: 1,000 \nRequires corruption of at least 70.");
+			super("ScarBld", "ScarBlade", "scarred blade", "a scarred blade", "slash", 10, 1000, "This saber, made from lethicite-imbued metal, eagerly seeks flesh; it resonates with disdain and delivers deep, jagged wounds as it tries to bury itself in the bodies of others. It only cooperates with the corrupt.");
 		}
 		
 		override public function get attack():Number { 

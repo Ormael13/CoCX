@@ -12,7 +12,7 @@ package classes.Items.Armors
 	public final class GooArmor extends Armor {
 		
 		public function GooArmor() {
-			super("GooArmr","GooArmr","goo armor","Valeria, the goo-girl armor",22,1,"This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this! \n\nType: Heavy armor \nDefense: 22 \nBase value: 1 \nSpecial: Regeneration + Increased Fantasize");
+			super("GooArmr","GooArmr","goo armor","Valeria, the goo-girl armor",22,1,"This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this!");
 		}
 		
 		override public function useText():void { //Produces any text seen when equipping the armor normally

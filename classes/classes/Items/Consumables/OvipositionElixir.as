@@ -10,7 +10,7 @@ package classes.Items.Consumables
 	public class OvipositionElixir extends Consumable {
 		
 		public function OvipositionElixir() {
-			super("OviElix", "Ovi Elixir", "a hexagonal crystal bottle tagged with an image of an egg", 30, "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying. \n\nType: Consumable \nBase value: 30");
+			super("OviElix", "Ovi Elixir", "a hexagonal crystal bottle tagged with an image of an egg", 30, "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying.");
 		}
 		
 		override public function canUse():Boolean {
