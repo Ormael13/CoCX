@@ -2358,7 +2358,7 @@ public function demonBadEnd():void {
 	outputText("Advancing slowly, the succubus gives you a hungry look.  She extends a hand, allowing her fingers to lengthen into razor-sharp claws.  With a single expert slash, she cuts away everything holding together your " + player.armorName + ".  They fall into a discarded pile, already forgotten as your ", false);
 	//[genderless]
 	if(player.gender == 0) {
-		outputText("entire body blushes read before the sexy seductress.  She looks at you, frowning as she murmers, \"<i>Now this just won't do.  You look more like a " + player.boyGirl() + " to me, so why don't I make the plumbing match the exterior?</i>\"\n\n", false);  
+		outputText("entire body blushes read before the sexy seductress.  She looks at you, frowning as she murmers, \"<i>Now this just won't do.  You look more like a " + player.mf("boy", "girl") + " to me, so why don't I make the plumbing match the exterior?</i>\"\n\n", false);  
 		outputText("Her palm caresses your crotch, stoking the warmth inside you until it blazes white-hot with new sensation.  Your skin ripples and parts, ", false);
 		if(player.biggestTitSize() <= 1) {
 			outputText("pushed apart the thick flesh of a powerful demonic member, complete with two swollen balls.", false);

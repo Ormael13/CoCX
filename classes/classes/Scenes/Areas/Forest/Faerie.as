@@ -16,7 +16,7 @@ public function encounterFaerie():void {
 		if(rand(player.spe/2) + player.statusAffectv1(StatusAffects.FaerieFucked) > 15) {
 			if(player.statusAffectv1(StatusAffects.FaerieFucked) < 5) {
 				outputText("\n\nYou make a desperate lunge for the faerie girl and grab her before she can fly away.   She wriggles and squirms in your grasp, shouting, \"<i>Let me go you meanie!</i>\"\n\n", false);
-				outputText("It would be cute if she wasn't dressed up like such a slut.  You bet you could get her to help pleasure you, but she might not like it.  Or you could be a nice " + player.guyGirl() + " and let her go...\n\nDo you force her to pleasure you?", false);
+				outputText("It would be cute if she wasn't dressed up like such a slut.  You bet you could get her to help pleasure you, but she might not like it.  Or you could be a nice " + player.mf("guy", "girl") + " and let her go...\n\nDo you force her to pleasure you?", false);
 			}
 			else if(player.statusAffectv1(StatusAffects.FaerieFucked) < 10) {
 				outputText("\n\nYou snatch her out of the air fairly easily.  She seems like she's slowed down a little.   She squirms and wriggles, begging you, \"<i>Please don't cover me in cum again... I get so drunk and feel even sluttier afterwards.  I don't want to be a slut!</i>\"\n\nShe pouts, but blushes.  Do you make her get you off again?", false);

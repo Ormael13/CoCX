@@ -1931,12 +1931,12 @@ import classes.PerkType;
 				}
 			}
 		}
-		
-		public function guyGirl(caps:Boolean = false):String
+		//Not used anymore
+		/*public function guyGirl(caps:Boolean = false):String
 		{
 			if (caps) return mf("Guy", "Girl");
 			else return mf("guy", "girl");
-		}
+		}*/
 		
 		public function mfn(male:String, female:String, neuter:String):String
 		{
@@ -1969,39 +1969,39 @@ import classes.PerkType;
 				}
 			}
 		}
-		
-		public function boyGirl(caps:Boolean = false):String
+		//Not used anymore
+		/*public function boyGirl(caps:Boolean = false):String
 		{
 			if (caps) return mf("Boy", "Girl");
 			else return mf("boy", "girl");
-		}
+		}*/
 		
-		public function heShe(caps:Boolean = false):String
+		/*public function heShe(caps:Boolean = false):String
 		{
 			if (caps) return mf("He", "She");
 			else return mf("he", "she");
-		}
+		}*/
 		
-		public function himHer(caps:Boolean = false):String
+		/*public function himHer(caps:Boolean = false):String
 		{
 			if (caps) return mf("Him", "Her");
 			else return mf("him", "her");
-		}
+		}*/
 		
-		public function maleFemale(caps:Boolean = false):String
+		/*public function maleFemale(caps:Boolean = false):String
 		{
 			if (caps) return mf("Male", "Female");
 			else return mf("male", "female");
-		}
+		}*/
 		
-		public function hisHer(caps:Boolean = false):String
+		/*public function hisHer(caps:Boolean = false):String
 		{
 			if (caps) return mf("His", "Her");
 			else return mf("his", "her");
-		}
+		}*/
 		
-		//sir/madam
-		public function sirMadam(caps:Boolean = false):String
+		//sir/madam (Not even used in the codebase. WHYYYYY?)
+		/*public function sirMadam(caps:Boolean = false):String
 		{
 			//Dicks?
 			if (totalCocks() > 0)
@@ -2066,7 +2066,7 @@ import classes.PerkType;
 					}
 				}
 			}
-		}
+		}*/
 		
 		//Create a cock. Default type is HUMAN
 		public function createCock(clength:Number = 5.5, cthickness:Number = 1,ctype:CockTypesEnum=null):Boolean
