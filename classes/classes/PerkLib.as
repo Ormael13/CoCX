@@ -30,7 +30,7 @@ package classes
 		public static const Lusty:PerkType = mk("Lusty", "Lusty",
 				"Gains lust 25% faster.");
 		public static const Pervert:PerkType = mk("Pervert", "Pervert",
-				"Gains corruption 25% faster.");
+				"Gains corruption 25% faster. Reduces corruption requirement for high-corruption variant of scenes.");
 		public static const Sensitive:PerkType = mk("Sensitive", "Sensitive",
 				"Gains sensitivity 25% faster.");
 		public static const Smart:PerkType = mk("Smart", "Smart",
@@ -192,7 +192,7 @@ package classes
 				"Increases base spell strength by 50%.",
 				"You choose the 'Mage' perk.  You are able to focus your magical abilities even more keenly, boosting your base spell effects by 50%.");
 		public static const Masochist:PerkType = mk("Masochist", "Masochist",
-				"Take 30% less physical damage but gain lust when you take damage.",
+				"Take 20% less physical damage but gain lust when you take damage.",
 				"You choose the 'Masochist' perk, reducing the damage you take but raising your lust each time!  This perk only functions while your libido is at or above 60!");
 		public static const Medicine:PerkType = mk("Medicine", "Medicine",
 				"Grants 15% chance per round of cleansing poisons/drugs from your body.",

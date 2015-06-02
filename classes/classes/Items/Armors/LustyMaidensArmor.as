@@ -24,6 +24,9 @@ package classes.Items.Armors
 		}
 		
 		override public function canUse():Boolean {
+			if (!super.canUse()) {
+				return false;
+			}
 			if (game.player.biggestTitSize() < CoC.BREAST_CUP_A) { //{No titties}
 				outputText("You slide the bikini top over your chest and buckle it into place, but the material hangs almost comically across your flat chest.  The cold chain dangles away from you, swaying around ridiculously before smacking, cold and hard into your [nipples].  This simply won't do - it doesn't fit you, and you switch back to your old armor.\n\n");
 				return false;

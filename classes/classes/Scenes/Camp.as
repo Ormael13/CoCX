@@ -1570,6 +1570,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 	}
 	campQ = true;
 	if(timeQ == 0) {
+		model.time.minutes = 0;
 		if(model.time.hours == 21) timeQ = 9;
 		if(model.time.hours == 22) timeQ = 8;
 		if(model.time.hours >= 23) timeQ = 7;

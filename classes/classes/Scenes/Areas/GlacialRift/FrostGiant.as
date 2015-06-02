@@ -6,6 +6,11 @@ package classes.Scenes.Areas.GlacialRift
 	
 	public class FrostGiant extends Monster
 	{
+		private function giantStrengthLoss(magnitude:int = 0):void {
+			game.dynStats("str", -magnitude);
+			player.addStatusValue(StatusAffects.GiantStrLoss, 2, magnitude);
+		}
+		
 		public function giantAttackPunch():void {
 			var damage:int = 0;
 			outputText("The giant strides toward you, closing the distance faster than you can run. He rears back and strikes at you!  ");
@@ -13,15 +18,15 @@ package classes.Scenes.Areas.GlacialRift
 				outputText("You deftly dodge the jumbo Jotun's paltry punch, spinning swiftly to charge your " + player.weaponName + " at his hand, leaving what looks like a crack. The giant roars in outrage, shaking snow from trees and making your " + player.armorName + " vibrate. He appears angrier than before.");
 			}
 			else {
-				if (rand(player.spe) < spe) {
-					outputText("You take the full force of his grand slam, sending you flying a good 40 feet, plunging through a snowdrift. As you right yourself, his laugh shakes the ground, \"<i>Puny! Haaaa!</i>\"");
+				if (rand(player.spe + 40) < spe) {
+					outputText("You take the full force of his grand slam, sending you flying a good 40 feet, plunging through a snowdrift. As you right yourself, his laugh shakes the ground, \"<i>Puny! Haaaa!</i>\" ");
 					damage = ((str + 50) + rand(100))
 					damage = player.reduceDamage(damage);
 					if (damage < 40) damage = 40;
 					player.takeDamage(damage, true);
 				}
 				else {
-					outputText("You nearly avoid the giant's fist, stumbling as you regain your footing. The giant's growl is a deep bass as he bellows, \"<i>Bah! Luck!</i>\"");
+					outputText("You nearly avoid the giant's fist, stumbling as you regain your footing. The giant's growl is a deep bass as he bellows, \"<i>Bah! Luck!</i>\" ");
 					damage = rand(str);
 					damage = player.reduceDamage(damage);
 					player.takeDamage(damage, true);
@@ -55,70 +60,77 @@ package classes.Scenes.Areas.GlacialRift
 			else giantGrabSuccess();
 		}
 		public function giantGrabFail(struggle:Boolean = true):void {
-			clearOutput();
 			var damage:int = 0
 			if (struggle) {
+				clearOutput();
 				if (player.str >= 80) {
 					outputText("You push and pull and squeeze and worm with all your might, but all that does is make the giant's grip harder. ");
 				}
-				if (player.str >= 60 && player.str < 80) {
+				else if (player.str >= 60 && player.str < 80) {
 					outputText("Your strength fails to help you escape this frosty situation, though the heat from the struggle is nice enough in this wasteland to nearly doze in it. The giant makes sure that doesn't happen, though. ");
-					game.dynStats("str", -1);
-					player.addStatusValue(StatusAffects.GiantStrLoss, 1, 1);
+					giantStrengthLoss(1);
 				}
-				if (player.str >= 40 && player.str < 60) {
+				else if (player.str >= 40 && player.str < 60) {
 					outputText("Try as you might, the giant's grip is too much for your weak body; the best you can do is a few squirms and a shake. His grip remains as tough as ever. ");
-					game.dynStats("str", -2);
-					player.addStatusValue(StatusAffects.GiantStrLoss, 2, 1);
+					giantStrengthLoss(2);
 				}
-				if (player.str >= 20 && player.str < 40) {
+				else if (player.str >= 20 && player.str < 40) {
 					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
-					player.addStatusValue(StatusAffects.GiantStrLoss, 2, 1);
 					damage = 10 + rand(str * 0.5);
 					player.takeDamage(damage, true);
 				}
-				if (player.str < 20) {
+				else if (player.str < 20) {
 					outputText("The giant squeezes you mercilessly, the pressure on your body reaching critical levels. The giant doesn't seem to want to murder you, fortunately, so he lessens his grip slightly. No dice escaping it though. ");
-					player.addStatusValue(StatusAffects.GiantStrLoss, 2, 1);
 					damage = 20 + rand(str * 0.75);
 					player.takeDamage(damage, true);
 				}
+				if (flags[kFLAGS.PC_FETISH] >= 2) {
+					outputText("The thought of being constricted turns you on a bit. ")
+					game.dynStats("lust", 5);
+				}
+				outputText("\n\n");
 			}
-			if (flags[kFLAGS.PC_FETISH] >= 2) {
-				outputText("The thought of being constricted turns you on a bit.")
-				game.dynStats("lust", 5);
+			else {
+				if (flags[kFLAGS.PC_FETISH] >= 2) {
+					outputText("The thought of being constricted turns you on a bit. ")
+					game.dynStats("lust", 5);
+				}
+				outputText("\n\n");
 			}
-			//Taunt
-			if (rand(2) == 0) {
-				outputText("\n\n\"<i>Ha, ha, ha! Puny little " + player.race() + "! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ")
-				player.removeStatusAffect(StatusAffects.GiantGrabbed);
-				damage = 10 + rand(str * 0.5);
-				player.takeDamage(damage, true);
-				combatRoundOver();
-				return;
+			switch(rand(6)) {
+				case 0:
+				case 1:
+				case 2: //Taunt
+					outputText("\"<i>Ha, ha, ha! Puny little " + player.race() + "! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ")
+					player.removeStatusAffect(StatusAffects.GiantGrabbed);
+					damage = 10 + rand(str * 0.5);
+					damage = player.reduceDamage(damage);
+					player.takeDamage(damage, true);
+					combatRoundOver();
+					break;
+				case 3:
+				case 4: //Ground Pound
+					outputText("The giant brings you to his face to yell at you. His scream is probably the loudest thing you've ever heard, and while your ears are still ringing he raises you up, and up, and up and then punches the ground with all his might. ");
+					outputText("The force of the punch leaves you reeling for a time; you come to your senses before he tries to do anything else. ");
+					player.removeStatusAffect(StatusAffects.GiantGrabbed);
+					damage = 100 + rand(str * 1.5);
+					damage = player.reduceDamage(damage);
+					player.takeDamage(damage, true);
+					combatRoundOver();
+					break;
+				case 5: //Throw
+					outputText("\"<i>Oh, little " + player.race() + " wants to be let go? Ha! Then GO!</i>\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
+					player.removeStatusAffect(StatusAffects.GiantGrabbed);
+					player.createStatusAffect(StatusAffects.Stunned, 1 + rand(2), 0, 0, 0);
+					damage = 20 + rand(str);
+					damage = player.reduceDamage(damage);
+					if (damage < 20) damage = 20;
+					player.takeDamage(damage, true);
+					combatRoundOver();
+					break;
+				default:
+					combatRoundOver();
 			}
-			//Ground Pound
-			if (rand(3) == 0) {
-				outputText("\n\nThe giant brings you to his face to yell at you. His scream is probably the loudest thing you've ever heard, and while your ears are still ringing he raises you up, and up, and up and then punches the ground with all his might.");
-				outputText("The force of the punch leaves you reeling for a time; you come to your senses before he tries to do anything else. ");
-				player.removeStatusAffect(StatusAffects.GiantGrabbed);
-				damage = 20 + rand(str);
-				player.takeDamage(damage, true);
-				combatRoundOver();
-				return;
-			}
-			//Throw
-			if (rand(6) == 0) {
-				outputText("\n\n\"Oh, little " + player.race() + " wants to be let go? Ha! Then GO!\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
-				player.removeStatusAffect(StatusAffects.GiantGrabbed);
-				player.createStatusAffect(StatusAffects.Stunned, 1 + rand(2), 0, 0, 0);
-				damage = 150 + rand(str * 2);
-				if (damage < 80) damage = 80;
-				player.takeDamage(damage, true);
-				combatRoundOver();
-				return;
-			}			
-			combatRoundOver();
 		}
 		public function giantGrabSuccess():void {
 			clearOutput();
@@ -135,8 +147,8 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		
 		public function giantBoulderThrow():void {
-			outputText("The giant walks over to a boulder much larger than you and hefts it up. You had better wait and be ready to dodge, or this could be very bad.");
-			outputText("\n\n<b>With a grunt and a shove, the giant throws the boulder directly at you!</b>")
+			outputText("The giant walks over to a boulder much larger than you and hefts it up. You had better wait and be ready to dodge, or this could be very bad. ");
+			outputText("<b>With a grunt and a shove, the giant throws the boulder directly at you!</b>")
 			if (player.findStatusAffect(StatusAffects.GiantBoulder) < 0) player.createStatusAffect(StatusAffects.GiantBoulder, 0, 0, 0, 0);
 			combatRoundOver();
 		}
@@ -162,7 +174,7 @@ package classes.Scenes.Areas.GlacialRift
 			clearOutput();
 			if (mode == 0) outputText("You charge at the giant, running as fast as you can, hoping to get to him before he can throw the huge rock. However, you getting closer just makes it easier for him to hit you, and he does, the full force of the boulder hitting your upper body square-on, whipping you directly down into the snow while the boulder mercifully lands some yards away. ");
 			else if (mode == 1) outputText(", but you do look up just in time to nearly avoid the large boulder he chucked your way. Scrambling to react, you jump to the side, only to realize you chose the wrong side. The boulder hits you in the back, propelling you.  Battered, beaten, bruised, you struggle to stand, when the giant picks you up, laughs in his deep, mighty bellow, and punts you over a mountain. You land several feet deep in a snowbank, and see something flying toward you before passing out. ");
-			else outputText("You begin to cast, focusing intently on summoning your magic. Too focused, though, as the giant propels the boulder in an arc to you. You notice the boulder just in time to not be crushed by it, though it still hits you and you fly several dozen yards before hitting a nice, jagged rock face.");
+			else outputText("You begin to cast, focusing intently on summoning your magic. Too focused, though, as the giant propels the boulder in an arc to you. You notice the boulder just in time to not be crushed by it, though it still hits you and you fly several dozen yards before hitting a nice, jagged rock face. ");
 			if (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) player.removeStatusAffect(StatusAffects.GiantBoulder);
 			var damage:int = (str * 2) + 100 + rand(250);
 			damage = player.reduceDamage(damage);
@@ -173,7 +185,7 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		public function giantBoulderMiss(mode:int = 0):void {
 			clearOutput();
-			if (mode == 0) outputText("His aim was perfect, if you had stood still. Watching him throw it at you gave you all the time you needed to avoid the large rock, though the debris from the impact might leave some bruises.");
+			if (mode == 0) outputText("His aim was perfect, if you had stood still. Watching him throw it at you gave you all the time you needed to avoid the large rock, though the debris from the impact might leave some bruises. ");
 			if (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) player.removeStatusAffect(StatusAffects.GiantBoulder);
 			var damage:int = 10 + rand(str / 2);
 			damage = player.reduceDamage(damage);
@@ -184,10 +196,6 @@ package classes.Scenes.Areas.GlacialRift
 		
 		override protected function performCombatAction():void
 		{
-			if (player.findStatusAffect(StatusAffects.GiantGrabbed) >= 0) { 
-				giantGrabFail(false);
-				return;
-			}
 			var chooser:Number = 0;
 			chooser = rand(10);
 			if (chooser < 6) giantAttackPunch(); //60% chance
@@ -234,7 +242,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.weaponAttack = 27;
 			this.armorName = "ice";
 			this.armorDef = 17;
-			this.bonusHP = 750;
+			this.bonusHP = 600;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -243,9 +251,8 @@ package classes.Scenes.Areas.GlacialRift
 			this.drop = new WeightedDrop()
 					.add(consumables.ICICLE_, 1)
 					.add(null, 3);
-			//this.special1 = spearAttack;
-			//this.special2 = shieldBash;
-			//this.special3 = aerialRave;
+			this.createPerk(PerkLib.Tank, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Tank2, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

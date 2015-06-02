@@ -981,6 +981,10 @@ public function defeatIsabella():void {
 	outputText("</i>\"  ", false);
 	if(monster.HP < 1) outputText("She acts so haughty, but she can't hide how her nipples are tenting her sheer top.", false);
 	else outputText("She acts like all she needs is a milking, but you can smell the dampness she's trickling from 'down under'.", false);
+	if (player.lust < 33) {
+		cleanupAfterCombat();
+		return;
+	}
 	/*
 	2962	victoryLactation69()
 	2963	PCVictoryOnIzmaButtsex()

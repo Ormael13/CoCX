@@ -453,6 +453,10 @@ private function wait():void {
 		dynStats("lus", (8 + player.sens / 10));
 		combatRoundOver();
 	}
+	else if (player.findStatusAffect(StatusAffects.GiantGrabbed) >= 0) {
+		clearOutput();
+		(monster as FrostGiant).giantGrabFail(false);
+	}
 	else if (player.findStatusAffect(StatusAffects.IsabellaStunned) >= 0) {
 		clearOutput();
 		outputText("You wobble about for some time but manage to recover. Isabella capitalizes on your wasted time to act again.\n\n");
@@ -517,9 +521,8 @@ private function struggle():void {
 		}
 		//Failed struggle
 		else {
-			outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.");
-			temp = takeDamage(.15 * maxHP());
-			outputText(" (" + temp + ")", false);
+			outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours. ");
+			temp = takeDamage(.15 * maxHP(), true);
 		}
 		combatRoundOver();
 	}
@@ -547,6 +550,9 @@ private function struggle():void {
 			takeDamage(7 + rand(5));
 		}
 		combatRoundOver();
+	}
+	else if (player.findStatusAffect(StatusAffects.GiantGrabbed) >= 0) {
+		(monster as FrostGiant).giantGrabStruggle();
 	}
 	else {
 		clearOutput();
@@ -1083,23 +1089,24 @@ public function attack():void {
 		//Lust raising weapon bonuses
 		if(monster.lustVuln > 0) {
 			if(player.weaponPerk == "Aphrodisiac Weapon") {
-				monster.lust += monster.lustVuln * (5 + player.cor/10);
 				outputText("\n" + monster.capitalA + monster.short + " shivers as your weapon's 'poison' goes to work.", false);
+				monster.teased(monster.lustVuln * (5 + player.cor / 10));
 			}
-			if(player.weaponName == "coiled whip" && rand(2) == 0) {
-				monster.lust += monster.lustVuln * (5 + player.cor/12);			
+			if(player.weaponName == "coiled whip" && rand(2) == 0) {		
 				if(!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and gets turned on from the whipping.", false);
 				else outputText("\n" + monster.capitalA + monster.short + " shiver and get turned on from the whipping.", false);
+				monster.teased(monster.lustVuln * (5 + player.cor / 12));
 			}
 			if(player.weaponName == "succubi whip") {
-				monster.lust += monster.lustVuln * (20 + player.cor/15);
 				if(player.cor < 90) dynStats("cor", .3);
 				if(!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and moans involuntarily from the whip's touches.", false);
 				else outputText("\n" + monster.capitalA + monster.short + " shiver and moan involuntarily from the whip's touches.", false);
+				monster.teased(monster.lustVuln * (20 + player.cor / 15));
 				if(rand(2) == 0) {
-					outputText("  You get a sexual thrill from it.", false);
+					outputText(" You get a sexual thrill from it. ", false);
 					dynStats("lus", 1);
 				}
+				
 			}
 		}
 		//Weapon Procs!
@@ -1315,12 +1322,12 @@ public function playerStinger():void {
 	else outputText("You watch as " + monster.pronoun1 + " staggers back a step and nearly trips, flushing hotly.");
 	//Tabulate damage!
 	var damage:Number = 35 + rand(player.lib/10);
-	//Level adds more damage up to a point (level 20)
-	if(player.level < 10) damage += player.level * 3;
-	else if(player.level < 20) damage += 30 + (player.level-10) * 2;
-	else damage += 50;
-	monster.lust += monster.lustVuln * damage;
-	outputText("<b>(<font color=\"#ff00ff\">" + monster.lustVuln * damage + "</font>)</b>")
+	//Level adds more damage up to a point (level 30)
+	if (player.level < 10) damage += player.level * 3;
+	else if (player.level < 20) damage += 30 + (player.level - 10) * 2;
+	else if (player.level < 30) damage += 50 + (player.level - 20) * 1;
+	else damage += 60;
+	monster.teased(monster.lustVuln * damage);
 	if(monster.findStatusAffect(StatusAffects.lustvenom) < 0) monster.createStatusAffect(StatusAffects.lustvenom, 0, 0, 0, 0);
 	/* IT used to paralyze 50% of the time, this is no longer the case!
 	Paralise the other 50%!
@@ -3629,7 +3636,7 @@ public function magicMenu():void {
 	outputText("What spell will you use?\n\n");
 	//WHITE SHITZ
 	var whiteLustCap:int = player.maxLust() * 0.75;
-	if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10) whiteLustCap += (player.maxLust() * 0.1);
+	if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whiteLustCap += (player.maxLust() * 0.1);
 	
 	if (player.lust >= whiteLustCap)
 		outputText("You are far too aroused to focus on white magic.\n\n");
@@ -3659,7 +3666,7 @@ public function magicMenu():void {
 		}
 	}
 	// JOJO ABILITIES -- kind makes sense to stuff it in here along side the white magic shit (also because it can't fit into M. Specials :|
-	if (player.findPerk(PerkLib.CleansingPalm) >= 0 && player.cor < 10) {
+	if (player.findPerk(PerkLib.CleansingPalm) >= 0 && player.cor < (10 + player.corruptionTolerance())) {
 		addButton(3, "C.Palm", spellCleansingPalm, null, null, null, "Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  \n\nFatigue Cost: " + spellCost(30) + "", "Cleansing Palm");
 	}
 	addButton(14, "Back", combatMenu, false);
@@ -3717,7 +3724,6 @@ public function spellArouse():void {
 		return;
 	}
 	var lustDmg:Number = monster.lustVuln * (player.inte/5*spellMod() + rand(monster.lib - monster.inte*2 + monster.cor)/5);
-	monster.lust += lustDmg;
 	if(monster.lust < 30) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ", false);
 	if(monster.lust >= 30 && monster.lust < 60) {
 		if(monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ", false);
@@ -3749,7 +3755,7 @@ public function spellArouse():void {
 			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ", false);
 		}
 	}
-	outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDmg*10)/10) + "</font>)</b>");
+	monster.teased(lustDmg);
 	outputText("\n\n", false);
 	doNext(playerMenu);
 	flags[kFLAGS.SPELLS_CAST]++;
@@ -4144,8 +4150,9 @@ public function hellFire():void {
 		}
 		else {
 			if(monster.lustVuln > 0) {
-				outputText("  Your foe cries out in surprise and then gives a sensual moan as the flames of your passion surround them and fill their body with unnatural lust.\n", false);
-				monster.lust += monster.lustVuln * damage/6;
+				outputText("  Your foe cries out in surprise and then gives a sensual moan as the flames of your passion surround them and fill their body with unnatural lust.", false);
+				monster.teased(monster.lustVuln * damage / 6);
+				outputText("\n");
 			}
 			else {
 				outputText("  The corrupted fire doesn't seem to have effect on " + monster.a + monster.short + "!\n", false);
@@ -4416,8 +4423,9 @@ public function spiderBiteAttack():void {
 		else {
 			if(monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.", false);
 			else outputText("  " + monster.mf("He","She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.","touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."), false);
-			monster.lust += 25 * monster.lustVuln;
-			if(rand(5) == 0) monster.lust += 25 * monster.lustVuln;
+			var lustDmg:int = 25 * monster.lustVuln;
+			if (rand(5) == 0) lustDmg *= 2;
+			monster.teased(lustDmg);
 		}
 	}
 	else {
@@ -4762,25 +4770,25 @@ public function kissAttack():void {
 	switch(attack) {
 		//Success 1:
 		case 1:
-			if(monster.plural) outputText("  Success!  A spit-soaked kiss lands right on one of their mouths.  The victim quickly melts into your embrace, allowing you to give them a nice, heavy dose of sloppy oral aphrodisiacs.\n\n", false);
-			else outputText("  Success!  A spit-soaked kiss lands right on " + monster.a + monster.short + "'s mouth.  " + monster.mf("He","She") + " quickly melts into your embrace, allowing you to give them a nice, heavy dose of sloppy oral aphrodisiacs.\n\n", false);
+			if(monster.plural) outputText("  Success!  A spit-soaked kiss lands right on one of their mouths.  The victim quickly melts into your embrace, allowing you to give them a nice, heavy dose of sloppy oral aphrodisiacs.", false);
+			else outputText("  Success!  A spit-soaked kiss lands right on " + monster.a + monster.short + "'s mouth.  " + monster.mf("He","She") + " quickly melts into your embrace, allowing you to give them a nice, heavy dose of sloppy oral aphrodisiacs.", false);
 			damage = 15;
 			break;
 		//Success 2:
 		case 2:
-			if(monster.plural) outputText("  Gold-gilt lips press into one of their mouths, the victim's lips melding with yours.  You take your time with your suddenly cooperative captive and make sure to cover every bit of their mouth with your lipstick before you let them go.\n\n", false);
-			else outputText("  Gold-gilt lips press into " + monster.a + monster.short + ", " + monster.pronoun3 + " mouth melding with yours.  You take your time with your suddenly cooperative captive and make sure to cover every inch of " + monster.pronoun3 + " with your lipstick before you let " + monster.pronoun2 + " go.\n\n", false);
+			if(monster.plural) outputText("  Gold-gilt lips press into one of their mouths, the victim's lips melding with yours.  You take your time with your suddenly cooperative captive and make sure to cover every bit of their mouth with your lipstick before you let them go.", false);
+			else outputText("  Gold-gilt lips press into " + monster.a + monster.short + ", " + monster.pronoun3 + " mouth melding with yours.  You take your time with your suddenly cooperative captive and make sure to cover every inch of " + monster.pronoun3 + " with your lipstick before you let " + monster.pronoun2 + " go.", false);
 			damage = 20;
 			break;
 		//CRITICAL SUCCESS (3)
 		case 3:
-			if(monster.plural) outputText("  You slip past " + monster.a + monster.short + "'s guard and press your lips against one of them.  " + monster.mf("He","She") + " melts against you, " + monster.mf("his","her") + " tongue sliding into your mouth as " + monster.mf("he","she") + " quickly succumbs to the fiery, cock-swelling kiss.  It goes on for quite some time.  Once you're sure you've given a full dose to " + monster.mf("his","her") + " mouth, you break back and observe your handwork.  One of " + monster.a + monster.short + " is still standing there, licking " + monster.mf("his","her") + " his lips while " + monster.mf("his","her") + " dick is standing out, iron hard.  You feel a little daring and give the swollen meat another moist peck, glossing the tip in gold.  There's no way " + monster.mf("he","she") + " will go soft now.  Though you didn't drug the rest, they're probably a little 'heated up' from the show.\n\n", false);
-			else outputText("  You slip past " + monster.a + monster.short + "'s guard and press your lips against " + monster.pronoun3 + ".  " + monster.mf("He","She") + " melts against you, " + monster.pronoun3 + " tongue sliding into your mouth as " + monster.pronoun1 + " quickly succumbs to the fiery, cock-swelling kiss.  It goes on for quite some time.  Once you're sure you've given a full dose to " + monster.pronoun3 + " mouth, you break back and observe your handwork.  " + monster.capitalA + monster.short + " is still standing there, licking " + monster.pronoun3 + " lips while " + monster.pronoun3 + " dick is standing out, iron hard.  You feel a little daring and give the swollen meat another moist peck, glossing the tip in gold.  There's no way " + monster.pronoun1 + " will go soft now.\n\n", false);
+			if(monster.plural) outputText("  You slip past " + monster.a + monster.short + "'s guard and press your lips against one of them.  " + monster.mf("He","She") + " melts against you, " + monster.mf("his","her") + " tongue sliding into your mouth as " + monster.mf("he","she") + " quickly succumbs to the fiery, cock-swelling kiss.  It goes on for quite some time.  Once you're sure you've given a full dose to " + monster.mf("his","her") + " mouth, you break back and observe your handwork.  One of " + monster.a + monster.short + " is still standing there, licking " + monster.mf("his","her") + " his lips while " + monster.mf("his","her") + " dick is standing out, iron hard.  You feel a little daring and give the swollen meat another moist peck, glossing the tip in gold.  There's no way " + monster.mf("he","she") + " will go soft now.  Though you didn't drug the rest, they're probably a little 'heated up' from the show.", false);
+			else outputText("  You slip past " + monster.a + monster.short + "'s guard and press your lips against " + monster.pronoun3 + ".  " + monster.mf("He","She") + " melts against you, " + monster.pronoun3 + " tongue sliding into your mouth as " + monster.pronoun1 + " quickly succumbs to the fiery, cock-swelling kiss.  It goes on for quite some time.  Once you're sure you've given a full dose to " + monster.pronoun3 + " mouth, you break back and observe your handwork.  " + monster.capitalA + monster.short + " is still standing there, licking " + monster.pronoun3 + " lips while " + monster.pronoun3 + " dick is standing out, iron hard.  You feel a little daring and give the swollen meat another moist peck, glossing the tip in gold.  There's no way " + monster.pronoun1 + " will go soft now.", false);
 			damage = 30;
 			break;
 		//Success 4:
 		default:
-			outputText("  With great effort, you slip through an opening and compress their lips against your own, lust seeping through the oral embrace along with a heavy dose of drugs.\n\n", false);
+			outputText("  With great effort, you slip through an opening and compress their lips against your own, lust seeping through the oral embrace along with a heavy dose of drugs.", false);
 			damage = 12;
 			break;
 	}
@@ -4789,7 +4797,8 @@ public function kissAttack():void {
 	//Else add bonus to round damage
 	else monster.addStatusValue(StatusAffects.LustStick,2,Math.round(damage/10));
 	//Deal damage
-	monster.lust += Math.round(monster.lustVuln * damage);
+	monster.teased(monster.lustVuln * damage);
+	outputText("\n\n");
 	//Sets up for end of combat, and if not, goes to AI.
 	if(!combatRoundOver()) enemyAI();
 }
@@ -4810,9 +4819,10 @@ public function possess():void {
 	}
 	//Success!
 	else if(player.inte >= (monster.inte - 10) + rand(21)) {
-		outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent's frame. Before they can regain the initiative, you take control of one of their arms, vigorously masturbating for several seconds before you're finally thrown out. Recorporealizing, you notice your enemy's blush, and know your efforts were somewhat successful.\n\n", false);
+		outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent's frame. Before they can regain the initiative, you take control of one of their arms, vigorously masturbating for several seconds before you're finally thrown out. Recorporealizing, you notice your enemy's blush, and know your efforts were somewhat successful.", false);
 		var damage:Number = Math.round(player.inte/5) + rand(player.level) + player.level;
-		monster.lust += monster.lustVuln * damage;
+		monster.teased(monster.lustVuln * damage);
+		outputText("\n\n");
 	}
 	//Fail
 	else {
@@ -5143,10 +5153,9 @@ public function anemoneSting():void {
 		damage += player.level * 1.5;
 		monster.spe -= damage/2;
 		damage = monster.lustVuln * damage;
-		monster.lust += damage;
 		//Clean up down to 1 decimal point
 		damage = Math.round(damage*10)/10;		
-		outputText(" <b>(<font color=\"#ff00ff\">" + damage + "</font>)</b>", false);
+		monster.teased(damage);
 	}
 	//New lines and moving on!
 	outputText("\n\n", false);

@@ -1626,7 +1626,7 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 		var multi:Number = 1;
 		
 		if (player.findPerk(PerkLib.HistorySlacker) >= 0) multi *= 1.2;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < 30) multi *= 1.1;
+		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi *= 1.1;
 		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi *= 1.5;
 		
 		mod *= multi;

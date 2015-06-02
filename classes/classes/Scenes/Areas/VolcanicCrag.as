@@ -25,6 +25,16 @@ package classes.Scenes.Areas
 		public function exploreVolcanicCrag():void {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++
 			doNext(playerMenu);
+
+			var choice:Array = [];
+			var select:int;
+			
+			//Build choice list!
+			choice[choice.length] = 0; //Behemoth
+			if (rand(3) == 0) choice[choice.length] = 1; //Find Drake's Heart
+			if (rand(3) == 0) choice[choice.length] = 1; //Find nothing! The rand will be removed from this once the Volcanic Crag is populated with more encounters.
+			
+			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
 				getGame().DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
 				return;
@@ -34,20 +44,16 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			
-			var chooser:Number = rand(5);
-			if (chooser > 0) {
-				behemothScene.behemothIntro();
-			}
-			else {
-				if (rand(3) == 0) {
+			select = choice[rand(choice.length)];
+			switch(select) {
+				case 0:
+					behemothScene.behemothIntro();
+					break;
+				case 1:
 					outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ");
 					inventory.takeItem(consumables.DRAKHRT, camp.returnToCampUseOneHour);
-					return;
-				}
-				outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting.", true);
-				doNext(camp.returnToCampUseOneHour);
-				return;
+				default:
+					outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting.", true);
 			}
 		}
 		

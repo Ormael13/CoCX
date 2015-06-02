@@ -122,9 +122,6 @@ package classes.Scenes.Areas.GlacialRift
 			this.gems = 35 + rand(25);
 			this.drop = NO_DROP;
 			this.createStatusAffect(StatusAffects.GenericRunDisabled, 0, 0, 0, 0);
-			//this.special1 = spearAttack;
-			//this.special2 = shieldBash;
-			//this.special3 = aerialRave;
 			checkMonster();
 		}
 		

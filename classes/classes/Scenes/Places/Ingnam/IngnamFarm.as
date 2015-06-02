@@ -15,9 +15,12 @@ package classes.Scenes.Places.Ingnam
 		public function menuFarm():void {
 			hideMenus();
 			clearOutput();
-			outputText("The size of the farm is quite the contrast to Ingnam. Dairy cows are penned up near the barn. Acres of crops grow on the field for the purpose of being harvested for food.");
+			outputText("As you make your way up the dirt road to the farm, you immediately see the vast bountiful acres of crops ripe for harvest and dairy cows idly grazing in the fields by a large weather-worn barn. A wooden windmill creaks quietly nearby a quaint two-storey homestead.");
 			if (flags[kFLAGS.INGNAM_FARMER_MET] <= 0) {
-				outputText("\n\nThe farmer walks up to greet you. She is a female human with blonde hair. She is modestly garbed in overalls and you're unsure about her breast size but you'd guess they are at C-cups. She says, \"<i>I heard about the rumors that you're going to be the Champion of Ingnam.</i>\" Tears leak from her eyes. \"<i>I'm going to feel sad. I won't be seeing you again. But... you can still work here to get some gems. I'll pay you five gems for each hour you work. This should help you.</i>\"");
+				outputText("\n\nYou hear a rustling from the swaying cornfield and instinctively tense up for a fight. To your relief it is the farm's owner who emerges. The farmer is woman of average build and she is modestly garbed in overalls. Wiping away her sweaty blond locks from her flushed face walks up to greet you with a warm smile.");
+				outputText("\n\n\"<i>I heard rumors that you're going to be the Champion of Ingnam, is that true [name]?.</i>\" the young farmer asks nervously. You affirm somberly, yes, you are the next Champion. Tears start to well up in her eyes as her voice begins to crack with emotion \"<i>I've known you since we were kids, I can't believe I won't be seeing you again [name]... This has to be some mistake.</i>\"");
+				outputText("\n\nYou embrace her and tell the shaking farmer that it is for the good of the village. Her tears start to roll down her reddened cheeks, you stroke her hair soothing, whispering that everything will be fine.");
+				outputText("\n\nAfter talking about your upcoming task, the farming girl calms down and offers you some gems, \"<i>You can still work here to get some gems. I'll pay you five gems for each hour you work. This should help you out while on your journey...</i>\"");
 				flags[kFLAGS.INGNAM_FARMER_MET] = 1;
 			}
 			outputText("\n\nYou could help out the farmer with some work for gems.");

@@ -145,21 +145,25 @@ package classes.Scenes
 				//Goblin assassin!
 				if (goblinChooser >= 30 && goblinChooser < 50) {
 					kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
+					spriteSelect(24);
 					return;
 				}
 				//Goblin warrior! (Equal chance with Goblin Shaman)
 				else if (goblinChooser >= 50 && goblinChooser < 65) {
 					kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
+					spriteSelect(24); //Will eventually have new sprite.
 					return;
 				}
 				//Goblin shaman!
 				else if (goblinChooser >= 65 && goblinChooser < 80) {
 					kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
+					spriteSelect(24); //Will eventually have new sprite.
 					return;
 				}
 				//Goblin elder!
 				else if (goblinChooser >= 80) {
 					kGAMECLASS.goblinElderScene.goblinElderEncounter();
+					spriteSelect(24); //Will eventually have new sprite.
 					return;
 				}
 				if (player.gender > 0) {

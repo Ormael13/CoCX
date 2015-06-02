@@ -2444,7 +2444,8 @@ private function getFuckedByRubi():void {
 	if(this.rubiGetCockType() == CockTypesEnum.HUMAN) outputText("pink, mushroom-like tip");
 	else if(this.rubiGetCockType() == CockTypesEnum.DEMON) outputText("purple, nodule-laden tip");
 	else if(this.rubiGetCockType() == CockTypesEnum.HORSE) outputText("blunted, musky tip");
-	else if(this.rubiGetCockType() == CockTypesEnum.TENTACLE) outputText("tentacle-ringed crown");
+	else if(this.rubiGetCockType() == CockTypesEnum.CAT) outputText("spiked tip");
+	else if(this.rubiGetCockType() == CockTypesEnum.ANEMONE) outputText("tentacle-ringed crown");
 	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + this.rubiGetCockType() + "</b>  ")
 	outputText(" emerges from the foreskin surrounding it as [rubi eir] cock strains, aching for something, anything to fill.");
 
@@ -2777,6 +2778,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 			else outputText("pink");
 			outputText(" protrusion... a brand new cock!  Rubi shudders, [rubi eir] delicate little fingers wrapped around the new, five-inch cock.");
 			flags[kFLAGS.RUBI_COCK_SIZE] = 5;
+			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.HUMAN.Index
 		}
 		//(If Vagina removed)
 		if(flags[kFLAGS.RUBI_NO_CUNT] == 0 && rand(3) == 0) {
@@ -2895,7 +2897,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		//(If Rubi gets Horsecock)
 		if(this.rubiGetCockType() != CockTypesEnum.HORSE) {
 			outputText("\n\nFor a few moments nothing happens.  Then Rubi suddenly doubles over, clutching [rubi eir] stomach in pain.  With one hand clamped firmly around [rubi eir] midsection, [rubi eir] other hand reaches down to grasp at [rubi eir] [rubi cock].  The flesh on [rubi eir] cock ripples, veins suddenly bulging.  A low moan wrestles its way out of Rubi's throat as [rubi eir] cock morphs, the pink head flattening all of a sudden and flaring outwards.");
-			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.HORSE;
+			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.HORSE.Index;
 			outputText("\n\nRubi's dick thickens in [rubi eir] hand, gaining at least an inch of width as it continues to change.  A thick, fleshy ring bulges out near the base of the cock... the beginnings of a sheathe, no doubt.  As you watch on in awe, the flesh at the base of Rubi's cock begins to darken, slowly become a dusky grey-black, which also overtakes [rubi eir] ");
 			if(flags[kFLAGS.RUBI_BLU_BALLS] >= 4 && flags[kFLAGS.RUBI_BLU_BALLS] < 9) outputText("swollen ");
 			else if(flags[kFLAGS.RUBI_BLU_BALLS] >= 9) outputText("engorged ");
@@ -2988,7 +2990,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		//(Gaining Cat Penis)
 		else if(this.rubiGetCockType() != CockTypesEnum.CAT && flags[kFLAGS.RUBI_COCK_SIZE] > 0) {
 			outputText("\n\nFor a few moments nothing happens.  Then Rubi suddenly doubles over, clutching [rubi eir] stomach in pain.  With one hand clamped firmly around [rubi eir] midsection, [rubi eir] other hand reaches down to grasp at [rubi eir] [rubi cock].  The flesh on [rubi eir] cock ripples, veins suddenly bulging.  A low moan wrestles its way out of Rubi's throat as [rubi eir] cock morphs, its tip lengthening out while a number of barb-like protrusions sprout from the head.  Before your eyes the barbs quiver and then go flush against [rubi eir] cock.  They don't seem sharp, more like they're ready to stimulate a potential mate.");
-			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.CAT;
+			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.CAT.Index;
 		}
 		//(Gaining Fur)
 		else if(flags[kFLAGS.RUBI_SKIN] != 2) {
@@ -3018,7 +3020,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		outputText(" underneath.  The demon-marked " + rubiMF("boy","girl") + " rubs [rubi eir] stomach appreciatively.  \"<i>Those were some great peaches, babe.</i>\"");
 
 		//(Any changes? Yes)
-		if (flags[kFLAGS.RUBI_EAR_TYPE] != 2 || flags[kFLAGS.RUBI_SKIN] != 3 || (flags[kFLAGS.RUBI_COCK_SIZE] > 0 && this.rubiGetCockType() != CockTypesEnum.TENTACLE))
+		if (flags[kFLAGS.RUBI_EAR_TYPE] != 2 || flags[kFLAGS.RUBI_SKIN] != 3 || (flags[kFLAGS.RUBI_COCK_SIZE] > 0 && this.rubiGetCockType() != CockTypesEnum.ANEMONE))
 		{
 			outputText("\n\nRubi's eyes suddenly dart open and [rubi ey] clutches [rubi eir] stomach.  \"<i>Oh gods...  My belly feels so warm all of a sudden.</i>\"");
 			//(Feathery ears)
@@ -3052,7 +3054,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 
 				outputText("\n\n\"<i>Oh... Oh my.</i>\"  It's all [rubi ey] can say as [rubi ey] wraps a hand around this newly modified appendage.  The tentacles likewise attempt to wrap themselves around Rubi's hand, clearly having a mind of their own.  You're fairly certain this will take a little while to adapt to.");
 			}
-			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.ANEMONE;
+			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.ANEMONE.Index;
 		}
 		//(No)
 		else {

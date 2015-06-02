@@ -254,7 +254,7 @@ internal function defeatASatyr():void {
 	else outputText("Beaten and dazed, the satyr collapses to its caprine knees, shaking his head in a futile attempt to recover himself from the brutal trouncing you've just given him.  The combination of the blows and his previous drunken state mean he's quite incapable of getting back, however.");
 	var butt:Function = null;
 	var faces:Function = null;
-	if (flags[kFLAGS.SFW_MODE] > 0) {
+	if (player.lust < 33 || flags[kFLAGS.SFW_MODE] > 0) {
 		cleanupAfterCombat();
 		return;
 	}

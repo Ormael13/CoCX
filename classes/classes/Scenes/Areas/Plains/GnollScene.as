@@ -102,7 +102,6 @@ package classes.Scenes.Areas.Plains
 		public function defeatHyena():void
 		{
 			clearOutput();
-			var dickDownClit:Function =null;
 			//Gnoll Defeat (HP)	
 			if (monster.HP < 1) outputText("The hyena girl collapses backwards onto the dusty ground, unable to continue the fight.", false);
 			//Gnoll Defeat (Lust)
@@ -110,32 +109,17 @@ package classes.Scenes.Areas.Plains
 
 			//Do You Rape The Gnoll?
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-				//(if cockTotal>0 AND vaginas=0)
-				if (player.gender == 1) {
-					if (player.cockThatFits(monster.vaginalCapacity()) != -1) dickDownClit = dickDownGnollClit;
-					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
-					//[DickDownClit] [DickInAss] [SuckHerClit] [Leave]
-					simpleChoices("DickDownClit", dickDownClit, "DickInAss", dickInGnollAss, "SuckHerClit", suckGnollClit, "", null, "Leave", cleanupAfterCombat);
+				outputText("  The gnoll is at your mercy.  What will you do with her?");
+				menu();
+				if (player.hasCock()) {
+					addButton(0, "DickDownClit", dickDownGnollClit, null, null, null, "Fuck the gnoll's clit with your penis.", "Dick Down Clit");
+					addButton(1, "DickInAss", dickInGnollAss, null, null, null, "Fuck the gnoll's ass with your penis.", "Dick In Ass");
 				}
-				//(if cockTotal>0 AND vaginas=1)
-				else if (player.gender == 3) {
-					if (player.cockThatFits(monster.vaginalCapacity()) != -1) dickDownClit = dickDownGnollClit;
-					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
-					//[DickDownClit] [DickInAss] [SuckHerClit] [TakeHerClit] [Leave]
-					simpleChoices("DickDownClit", dickDownClit, "DickInAss", dickInGnollAss, "SuckHerClit", suckGnollClit, "TakeHerClit", takeGnollClit, "Leave", cleanupAfterCombat);
+				if (player.hasVagina()) {
+					addButton(2, "TakeHerClit", takeGnollClit, null, null, null, "Put your vagina to use and ride the gnoll's clit.", "Take Her Clit");
 				}
-				//(if cockTotal=0 AND vaginas=1)
-				else if (player.gender == 2) {
-					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
-					//[SuckHerClit] [TakeHerClit] [Leave]
-					simpleChoices("SuckHerClit", suckGnollClit, "TakeHerClit", takeGnollClit, "", null, "", null, "Leave", cleanupAfterCombat);
-				}
-				//(if cockTotal=0 AND vaginas=0)
-				else {
-					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
-					//[SuckHerClit] [Leave]
-					simpleChoices("SuckHerClit", suckGnollClit, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
-				}
+				addButton(3, "SuckHerClit", suckGnollClit, null, null, null, "Suck the gnoll's clit.", "Suck Her Clit");
+				addButton(4, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}

@@ -11,8 +11,6 @@
 	//import flash.events.MouseEvent;
 
 	public class CharCreation extends BaseContent {
-	
-		public var unlockedHerm:Boolean = false;
 		
 		public const MAX_TOLERANCE_LEVEL:int = 20;
 		public const MAX_MORALSHIFTER_LEVEL:int = 10;
@@ -397,7 +395,7 @@
 				outputText("\n\n\n\nAre you a man or a woman?");
 				addButton(0, "Man", isAMan);
 				addButton(1, "Woman", isAWoman);
-				if (unlockedHerm) {
+				if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] > 0) {
 					outputText("\n\nOr a hermaphrodite as you've unlocked hermaphrodite option!");
 					addButton(2, "Herm", isAHerm);
 				}
@@ -419,7 +417,7 @@
 				menu();
 				addButton(0, "Man", isAMan);
 				addButton(1, "Woman", isAWoman);
-				if (unlockedHerm) {
+				if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] > 0) {
 					outputText("\n\nOr a hermaphrodite as you've unlocked hermaphrodite option!");
 					addButton(2, "Herm", isAHerm);
 				}
@@ -433,7 +431,7 @@
 			menu();
 			addButton(0, "Man", isAMan);
 			addButton(1, "Woman", isAWoman);
-			if (unlockedHerm) {
+			if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] > 0) {
 				addButton(2, "Herm", isAHerm);
 			}
 		}
@@ -479,6 +477,7 @@
 				case "TestChar":	return customTestChar;
 				case "Tyriana":		return customTyriana;
 				case "Vahdunbrii":	return customVahdunbrii;
+				//case "Kitteh6660":	return customKitteh6660;
 				default:
 			}
 			return null;
@@ -2838,8 +2837,10 @@
 			outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 		}
 		
-
-
+		private function customKitteh6660():void { //Not yet implemented.
+			
+		}
+		
 		//-----------------
 		//-- GAME MODES
 		//-----------------
@@ -2917,11 +2918,6 @@
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.")
 				getGame().saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
-			}
-			//Ensures it's permanently unlocked.
-			if (unlockedHerm == true)
-			{
-				flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1;
 			}
 			kGAMECLASS.saves.loadPermObject();
 			flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;

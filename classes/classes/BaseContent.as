@@ -38,6 +38,10 @@
 		{
 			kGAMECLASS.cheatTime(time, needNext);
 		}
+		/*protected function incrementDay(time:Number):void
+		{
+			kGAMECLASS.incrementDay(time);
+		}*/
 		protected function get timeQ():Number
 		{
 			return kGAMECLASS.timeQ;

@@ -265,7 +265,7 @@ private function campIzzySexMenu():void {
 	var fuckHer:Function = null;
 	if(player.cockThatFits(164) >= 0 && player.lust >= 33) fuckHer = fuckIsabella;
 	choices(bjTogText, bjToggle, "Drink Milk", isabellaScene.nomOnMommaIzzysTits, "Hotdog", hotdog, "Service Her", isabellaScene.volunteerToSlurpCowCunt, "TentacleSex", tentacle,
-		"Get Sucked", getSucked, "Fuck Her", fuckHer, "", null, "", null, "Back", callForFollowerIsabella);
+		"Get Sucked", getSucked, "Fuck Her", fuckHer, "", null, "", null, "", null);
 	addButton(14, "Back", callForFollowerIsabella);
 }
 

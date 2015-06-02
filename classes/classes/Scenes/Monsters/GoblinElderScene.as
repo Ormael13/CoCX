@@ -73,11 +73,11 @@ package classes.Scenes.Monsters
 				else outputText("\n\n<b>There is no way you can fit your cock into her cunt!</b>");
 			}
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
-			//startCombat(new GoblinElder());
 		}
 		
 		private function startFight():void {
-			startCombatImmediate(new GoblinElder());
+			startCombat(new GoblinElder());
+			playerMenu();
 		}
 		
 		//[LOSS SEXAHNZ]

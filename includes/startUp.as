@@ -712,6 +712,7 @@ public function creditsScreen():void {
 	outputText("<li> PowerOfVoid (github)</li>");
 	outputText("<li> kalleangka (github)</li>");
 	outputText("<li> sworve (github)</li>");
+	outputText("<li> Netys (github)</li>");
 	outputText("<ul>");
 	outputText("</ul>");
 	outputText("<b>Typo Reporting</b>\n");

@@ -2912,6 +2912,7 @@ package classes.Scenes.NPCs
 			var scene:Number = rand(4);
 			choices("Fuck", fuck, "Drink Milk", drinkMilk, "Eat Out", takeChargeAmilyEatOut, "GetSucked", getSucked, "Scissor", scissor,
 				"Mount Her", mountHer, "Buttfuck", buttFuckButtFUCKBUTTFUCK, "Catch Anal", catchs, "", null, "", null);
+			addButton(14, "Nevermind", fuckTheMouseBitch);
 		}
 
 

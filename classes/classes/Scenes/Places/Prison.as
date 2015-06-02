@@ -101,11 +101,6 @@ package classes.Scenes.Places
 			if (trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
 				//Decrement quest timer
 				if (player.statusAffectv2(StatusAffects.PrisonCaptorEllyQuest) > 0) player.addStatusValue(StatusAffects.PrisonCaptorEllyQuest, 2, -1);
-				if (trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() && rand(100) < (flags[kFLAGS.PRISON_CAPTURE_CHANCE] + player.obey / 4) && !inDungeon && !inPrison && !ingnam.inIngnam) {
-					goBackToPrisonBecauseQuestTimeIsUp();
-					needNext = true;
-					return needNext;
-				}
 			}
 			prisonCombatAutoLose = false;
 			//Tick

@@ -152,7 +152,7 @@ package classes.Scenes.Dungeons.Factory
 					break;
 				default: //Crotch
 					if (player.vaginas.length > 0) {
-						outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.");
+						outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + player.vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.");
 						game.dynStats("lus", 3);
 						if (player.findStatusAffect(StatusAffects.DemonSeed) < 0)
 							player.createStatusAffect(StatusAffects.DemonSeed, 5, 0, 0, 0);

@@ -1737,7 +1737,7 @@
 							player.cocks[0].cockType = CockTypesEnum.DOG;
 							player.cocks[1].cockType = CockTypesEnum.DOG;
 							player.cocks[0].knotMultiplier = 1.4;
-							player.cocks[0].knotMultiplier = 1.4;
+							player.cocks[1].knotMultiplier = 1.4;
 							dynStats("lib", 2, "lus", 50);
 						}
 					}
@@ -2338,7 +2338,7 @@
 			//high corruption
 			if (player.cor >= 66) outputText("  You lick your lips, marvelling at how thick and sticky it is.", false);
 			//Corruption increase
-			if (player.cor < 50 || rand(2)) {
+			if ((player.cor < 50 || rand(2)) && tainted) {
 				outputText("\n\nThe drink makes you feel... dirty.", false);
 				temp = 1;
 				//Corrupts the uncorrupted faster
@@ -2360,6 +2360,16 @@
 				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.", false);
 				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + sackDescript() + ".  Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.", false);
 				dynStats("lib", 1, "lus", 3);
+				changes++;
+			}
+			//Grow new balls!
+			if (player.balls < 2 && changes < changeLimit && rand(4) == 0) {
+				if (player.balls == 0) {
+					player.balls = 2;
+					outputText("\n\nIncredible pain scythes through your crotch, doubling you over.  You stagger around, struggling to pull open your " + player.armorName + ".  In shock, you barely register the sight before your eyes: <b>You have balls!</b>", false);
+					player.ballSize = 1;
+				}
+				changes++;
 			}
 			//Boost cum multiplier
 			if (changes < changeLimit && rand(2) == 0 && player.cocks.length > 0) {
@@ -7078,7 +7088,7 @@
 				player.removePerk(PerkLib.Feeder);
 			}
 			if (player.inte > 21) {
-				boost = (player.inte-20) / 5;
+				boost = (player.inte-20) / 4;
 				player.inte = 21 + boost;
 			}
 			dynStats("str", 33, "tou", 33, "int", -1, "lib", 4, "lus", 40);

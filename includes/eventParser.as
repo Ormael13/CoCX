@@ -850,6 +850,10 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 		}
 		
 	}	
+	if (prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists() && prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() && rand(100) < (flags[kFLAGS.PRISON_CAPTURE_CHANCE] + player.obey / 4) && !inDungeon && !inRoomedDungeon && !prison.inPrison && !ingnam.inIngnam) {
+		prison.goBackToPrisonBecauseQuestTimeIsUp();
+		return true;
+	}
 	statScreenRefresh();
 	if (needNext) {
 		doNext(playerMenu);

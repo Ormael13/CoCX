@@ -31,6 +31,11 @@ package classes.Items
 
 		public function get name():String { return _name; }
 		
+		override public function get description():String {
+			var desc:String = _description;
+			return desc;
+		}
+		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
 		}

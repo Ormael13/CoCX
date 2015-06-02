@@ -839,9 +839,10 @@
 	if(player.breastRows.length == 1) 
 	{
 		outputText("You have " + num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + ", each supporting ", false);
-		if(player.breastRows[0].nipplesPerBreast == 1) 
-			outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " " + int(player.nippleLength*10)/10 + "-inch " + nippleDescript(temp) + ".", false);
-		else outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " " + int(player.nippleLength*10)/10 + "-inch " + nippleDescript(temp) + "s.", false);
+		outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples.
+		if (flags[kFLAGS.USE_METRICS] > 0 ) outputText(int(player.nippleLength * 2.54 * 10) / 10 + "-cm "); //Centimeter display
+		else outputText(int(player.nippleLength * 10) / 10 + "-inch "); //Inches display
+		outputText(nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? "." : "s."), false); //Nipple description and plural
 		if(player.breastRows[0].milkFullness > 75) 
 			outputText("  Your " + breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.", false);
 		if(player.breastRows[0].breastRating >= 1) 
@@ -866,9 +867,10 @@
 			if(temp == 4) 
 				outputText("\n--Your fifth and final mammory grouping swells with ", false);
 			outputText(num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + " with ", false);
-			if(player.breastRows[temp].nipplesPerBreast == 1) 
-				outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " " + int(player.nippleLength*10)/10 + "-inch " + nippleDescript(temp) + " each.", false);
-			else outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " " + int(player.nippleLength*10)/10 + "-inch " + nippleDescript(temp) + "s each.", false);
+			outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples per breast
+			if (flags[kFLAGS.USE_METRICS] > 0 ) outputText(int(player.nippleLength * 2.54 * 10) / 10 + "-cm "); //Centimeter
+			else outputText(int(player.nippleLength * 10) / 10 + "-inch "); //Inches
+			outputText(nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? " each." : "s each."), false); //Description and Plural
 			if(player.breastRows[temp].breastRating >= 1) 
 				outputText("  They could easily fill a " + player.breastCup(temp) + " bra.", false);
 			if(player.breastRows[temp].milkFullness > 75) 
@@ -893,7 +895,7 @@
 	{
 		if(player.lowerBody==LOWER_BODY_TYPE_CENTAUR) 
 			outputText("\nEver since becoming a centaur, your equipment has shifted to lie between your rear legs, like a horse.", false);
-		if (flags[kFLAGS.USE_METRICS] > 0) outputText("\nYour " + player.cockDescript(temp) + " is " + int(10 * player.cocks[temp].cockLength * 2.54) / 10 + " inches long and ", false);
+		if (flags[kFLAGS.USE_METRICS] > 0) outputText("\nYour " + player.cockDescript(temp) + " is " + int(10 * player.cocks[temp].cockLength * 2.54) / 10 + " cm long and ", false);
 		else outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 		if(Math.round(10*player.cocks[temp].cockThickness)/10 < 10) 
 		{

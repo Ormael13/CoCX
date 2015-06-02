@@ -548,16 +548,25 @@ private function heliaOptions():void {
 	menu();
 	addButton(0,"Discuss",talkToHel, null, null, null, "Talk to her about random topics.");
 	if(model.time.hours >= 21) addButton(1,"Cuddle",hugASmokeyTail, null, null, null, "Cuddle with Helia and sleep with her.");
-	else addButton(2,"Hug",hugASmokeyTail, null, null, null, "Give that salamander bitch a hug. Bitches love hugs.");
+	else {
+		if (flags[kFLAGS.SLEEP_WITH] == "Helia") addButton(1, "NoSleepWith", dontSleepWithHelia, null, null, null, "Stop sleeping with Helia, for now.", "No Sleep With");
+		addButton(2,"Hug",hugASmokeyTail, null, null, null, "Give that salamander bitch a hug. Bitches love hugs.");
+	}
 	if (flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] > 0 && flags[kFLAGS.HELIA_ANAL_TRAINING] < 2 && player.biggestCockArea() > heliaAnalCapacity() && player.hasItem(consumables.GOB_ALE, 1)) addButton(3, "Anal Train", heliaGapeSceneChoices);
 	//addButton(4, "Futafication", talkAboutFuta, null, null, null, "See if she's in the mood to grow a new penis.");
 	addButton(5, "Bathe", takeABath, null, null, null, "Swim in stream with Helia.");
 	if(flags[kFLAGS.HELSPAWN_AGE] == 1) addButton(7,flags[kFLAGS.HELSPAWN_NAME],helSpawnScene.playWithYourKid, null, null, null, "Spend some time with your salamander child.");
-	if(flags[kFLAGS.HEL_GUARDING] == 0) addButton(8,"GuardCamp",helGuardToggle, null, null, null, "Request her to guard the camp every night.");
-	else addButton(8,"NoGuarding",helGuardToggle, null, null, null, "Request her to stop.");
+	if(flags[kFLAGS.HEL_GUARDING] == 0) addButton(8,"GuardCamp",helGuardToggle, null, null, null, "Request her to guard the camp every night.", "Guard Camp");
+	else addButton(8,"NoGuarding",helGuardToggle, null, null, null, "Request her to stop guarding the camp.", "No Guarding");
 	addButton(14,"Back",heliaFollowerMenu);
 }
 
+private function dontSleepWithHelia():void {
+	clearOutput();
+	outputText("You decide not to sleep with Helia at night, for now.");
+	flags[kFLAGS.SLEEP_WITH] = "";
+	heliaOptions();
+}
 
 /*Replaced by a function in heliaPreggers.as: heliasAppearanceScreen
 //Hel: Appearance	
