@@ -17,6 +17,10 @@ package classes.Perks
 			super("Ascension: Moral Shifter", "Ascension: Moral Shifter", "", "All corruption gains and losses are increased by 20% per level.");
 		}
 		
+		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		{
+			return true;
+		}		
 	}
 
 

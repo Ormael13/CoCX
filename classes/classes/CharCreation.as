@@ -3500,8 +3500,7 @@
 		}
 
 		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean {
-			return (perk.ptype == PerkLib.AscensionDesires || perk.ptype == PerkLib.AscensionEndurance || perk.ptype == PerkLib.AscensionFertility || perk.ptype == PerkLib.AscensionFortune || perk.ptype == PerkLib.AscensionMoralShifter || perk.ptype == PerkLib.AscensionMysticality || perk.ptype == PerkLib.AscensionTolerance || perk.ptype == PerkLib.AscensionVirility || perk.ptype == PerkLib.AscensionWisdom || //Ascension perks
-					perk.ptype == PerkLib.EnlightenedNinetails || perk.ptype == PerkLib.CorruptedNinetails || perk.ptype == PerkLib.SluttySeduction || perk.ptype == PerkLib.WizardsEndurance || perk.ptype == PerkLib.BloodMage || (perk.perkLongDesc != perk.perkDesc && !respec))
+			return perk.ptype.keepOnAscension(respec);
 		}
 
 		private function isSpecialKeyItem(keyName:* = null):Boolean {
