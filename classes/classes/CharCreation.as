@@ -3,8 +3,11 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Items.Armors.GooArmor;
-	import classes.Items.WeaponLib;
+	import classes.Items.*;
 	import classes.Saves;
+	import fl.controls.ComboBox;
+	import fl.data.DataProvider;
+	import flash.events.Event;
 	
 	import coc.view.MainView;
 
@@ -64,8 +67,12 @@
 			mainView.setButtonText(0, "Newgame"); // b1Text.text = "Newgame";
 			//flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 			
+			var showSpecialNames:Boolean = achievements[kACHIEVEMENTS.STORY_FINALBOSS] > 0;			
+			
 			clearOutput();
-			outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\nWhat is your name?");
+			outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\n");
+			if (showSpecialNames) outputText("\n\n\n\n");			
+			outputText("What is your name?");
 		
 			/*CODE FROM CMACLOAD HERE
 			Multiple line case. A text field GeneralTextField, positioning a movieclip AskQuestions below it
@@ -90,6 +97,27 @@
 			mainView.nameBox.text = "";
 			mainView.nameBox.maxChars = 16;
 			mainView.nameBox.restrict = null;
+			
+			var preList:Array = [];
+			//function _add(element:Array):void{preList.push({label: element[0], data:element});}
+			if (CoC_Settings.debugBuild) preList.push( { label: "TestChar", data: [ "TestChar", customTestChar, true, "For debug." ]} );			
+			for (var t:int = 0; t < customs.length; t++) preList.push( { label: customs[t][0], data:customs[t] } );			
+			
+			if (boxNames == null) {
+				boxNames = new ComboBox(); 
+				boxNames.dropdownWidth = 200; 
+				boxNames.width = 200; 
+				boxNames.scaleY = 1.1;
+				boxNames.prompt = "Pre-defined characters";
+				boxNames.x = mainView.nameBox.x + mainView.nameBox.width + 10;
+				boxNames.y = mainView.nameBox.y;
+				mainView.addChild(boxNames);
+			}
+			boxNames.addEventListener(Event.CHANGE, selectName); 
+			boxNames.dataProvider = new DataProvider(preList);
+			if (showSpecialNames)
+				boxNames.visible = true;
+			
 			//Reset autosave
 			player.slotName = "VOID";
 			player.autoSave = false;
@@ -382,6 +410,7 @@
 				return;
 			}
 			clearOutput();
+			boxNames.visible = false;
 			mainView.nameBox.visible = false;
 			player.short = mainView.nameBox.text;
 			customPlayerProfile = customName(mainView.nameBox.text);
@@ -436,50 +465,76 @@
 			}
 		}
 		
+		private var boxNames : ComboBox;
+		// 2d array name | function | skip creation | description
+		private const customs:Array = [
+			// 
+			[ "Without pre-defined history:", null, false, "" ],
+			[ "Aria", customAria, false, "It's really no surprise that you were sent through the portal to deal with the demons - you look enough like one as-is.  Your numerous fetish-inducing piercings, magical fox-tails, and bimbo-licious personality were all the motivation the elders needed to keep you from corrupting the village youth." ],
+			[ "Betram", customBetram, false, "You're quite the foxy herm, and as different as you were compared to the rest of Ingnam, it's no suprise you were sent through first." ],
+			[ "Charaun", customCharaun, false, "As a gifted fox with a juicy, thick knot, a wet cunt, and magical powers, you have no problems with being chosen as champion." ],
+			[ "Cody", customCody, false, "Your orange and black tiger stripes make you cut a more imposing visage than normal, and with your great strength, armor, and claymore, you're a natural pick for champion." ],
+			[ "Galatea", customGalatea, false, "You've got large breasts prone to lactation.  You aren't sure WHY you got chosen as a champion, but with your considerable strength, you're sure you'll do a good job protecting Ingnam." ],
+			[ "Gundam", customGundam, false, "You're fabulously rich, thanks to a rather well-placed bet on who would be the champion.  Hopefully you can buy yourself out of any trouble you might get in." ],
+			[ "Hikari", customHikari, false, "As a herm with a super-thick cat-cock, D-cup breasts, and out-of-this-world armor, you're a natural pick for champion." ],
+			[ "Katti", customKatti, false, "You have big breasts with big, fuckable nipples on them, and no matter what, your vagina always seems to be there to keep you company." ],
+			[ "Lucina", customLucina, false, "You're a blond, fair-skinned lass with a well-made bow and the skills to use it.  You have D-cup breasts and a very moist cunt that's seen a little action.  You're fit and trim, but not too thin, nor too well-muscled.  All in all, you're a good fit for championing your village's cause." ],
+			[ "Navorn", customNavorn, false, "There's been something special about you since day one, whether it's your numerous sexual endowments or your supernatural abilities.  You're a natural pick for champion." ],
+			[ "Rope", customRope, false, "Despite outward appearances, you're actually something of a neuter, with shark-like teeth, an androgynous face, and a complete lack of genitalia." ],
+			[ "Sora", customSora, false, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic..." ],
+			
+			[ "With pre-defined history:", null, false, "" ],
+			[ "Annetta", customAnnetta, true, "You're a rather well-endowed hermaphrodite that sports a thick, dog-knotted cock, an unused pussy, and a nice, stretchy butt-hole.  You've also got horns and demonic high-heels on your feet.  It makes you wonder why you would ever get chosen to be champion!" ],
+			[ "Ceveo", customCeveo, true, "As a wandering mage you had found your way into no small amount of trouble in the search for knowledge." ],
+			[ "Charlie", customCharlie, true, "You're strong, smart, fast, and tough.  It also helps that you've got four dongs well beyond what others have lurking in their trousers.  With your wings, bow, weapon, and tough armor, you're a natural for protecting the town." ],
+			[ "Chimera", customChimera, true, "Your body is wrecked by your own experiments with otherwordly transformation items, and now you have no more money to buy any more from smugglers... But you would make your body as strong as your will. Or die trying." ],
+			[ "Etis", customEtis, true, "Kitsune-dragon hybrid with 3 tentacle cocks, tentacle hair, tentacle (well, draconic) tongue and very strong magic affinity." ],
+			[ "Isaac", customIsaac, true, "Born of a disgraced priestess, Isaac was raised alone until she was taken by illness.  He worked a number of odd jobs until he was eventually chosen as champion." ],
+			//[ "Kitteh6660", customKitteh6660, true, "" ],
+			[ "Leah", customLeah, true, "No Notes Available." ],
+			[ "Lukaz", customLukaz, true, "No Notes Available." ],
+			[ "Mara", customMara, true, "You're a bunny-girl with bimbo-tier curves, jiggly and soft, a curvy, wet girl with a bit of a flirty past." ],
+			[ "Mihari", customMihari, true, "The portal is not something you fear, not with your imposing armor and inscribed spellblade.  You're much faster and stronger than every champion that came before you, but will it be enough?" ],
+			[ "Mirvanna", customMirvanna, true, "You're an equine dragon-herm with a rather well-proportioned body.  Ingnam is certainly going to miss having you whoring yourself out around town.  You don't think they'll miss cleaning up all the messy sex, though." ],
+			[ "Nami", customNami, true, "Your exotic appearance caused you some trouble growing up, but you buried your nose in books until it came time to go through the portal." ],
+			[ "Nixi", customNixi, true, "As a German-Shepherd morph, the rest of the village never really knew what to do with you... until they sent you through the portal to face whatever's on the other side..." ],
+			[ "Prismere", customPrismere, true, "You're more of a scout than a fighter, but you still feel confident you can handle your responsibilities as champion.  After all, what's to worry about when you can outrun everything you encounter?  You have olive skin, deep red hair, and a demonic tail and wings to blend in with the locals." ],
+			[ "Rann Rayla", customRannRayla, true, "You're a young, fiery redhead who\'s utterly feminine.  You've got C-cup breasts and long red hair.  Being a champion can\'t be that bad, right?" ],
+			[ "Sera", customSera, true, "You're something of a shemale - three rows of C-cup breasts matched with three, plump, juicy cocks.  Some decent sized balls, bat wings, and cat-like ears round out the package." ],
+			[ "Siveen", customSiveen, true, "You are a literal angel from beyond, and you take the place of a vilage's champion for your own reasons..." ],
+			[ "Tyriana", customTyriana, true, "Your many, posh tits, incredible fertility, and well-used cunt made you more popular than the village bicycle.  With your cat-like ears, paws, and tail, you certainly had a feline appeal.  It's time to see how you fare in the next chapter of your life." ],
+			[ "Vahdunbrii", customVahdunbrii, true, "You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal." ],
+		]
+		
+		private function selectName(event:Event):void {
+			if (ComboBox(event.target).selectedItem.data[0].length > 16) // not a name
+				return;
+			
+			clearOutput();
+			
+			outputText("<b>" + ComboBox(event.target).selectedItem.data[0] + ":</b> " + ComboBox(event.target).selectedItem.data[3]);
+			if(ComboBox(event.target).selectedItem.data[2])
+				outputText("\n\nThis character have pre-defined history.");
+			else
+				outputText("\n\nThis character have no pre-defined history.");
+				
+			flushOutputTextToGUI();	
+			mainView.nameBox.text = ComboBox(event.target).selectedItem.data[0];
+		}
+		
 		//Determines if has character creation bonuses
 		private function customName(arg:String):Function {
-			switch(arg) {
-				case "Aria":	return customAria;
-				case "Betram":	return customBetram;
-				case "Charaun":	return customCharaun;
-				case "Cody":	return customCody;
-				case "Galatea":	return customGalatea;
-				case "Gundam":	return customGundam;
-				case "Hikari":	return customHikari;
-				case "Katti":	return customKatti;
-				case "Lucina":	return customLucina;
-				case "Navorn":	return customNavorn;
-				case "Rope":	return customRope;
-				case "Sora":	return customSora;
-				default:
-			}
+			for (var i:int = 0; i < customs.length; i++)
+				if (customs[i][0] == arg && !customs[i][3])
+					return customs[i][1];
 			return specialName(arg); //Must check against the special name list as well
 		}
 		
 		//Does PC skip creation?
 		private function specialName(arg:String):Function {
-			switch(arg) {
-				case "Annetta":		return customAnnetta;
-				case "Ceveo":		return customCeveo;
-				case "Charlie":		return customCharlie;
-				case "Isaac":		return customIsaac;
-				case "Leah":		return customLeah;
-				case "Lukaz":		return customLukaz;
-				case "Mara":		return customMara;
-				case "Mihari":		return customMihari;
-				case "Mirvanna":	return customMirvanna;
-				case "Nami":		return customNami;
-				case "Nixi":		return customNixi;
-				case "Prismere":	return customPrismere;
-				case "Rann Rayla":	return customRannRayla;
-				case "Sera":		return customSera;
-				case "Siveen":		return customSiveen;
-				case "TestChar":	return customTestChar;
-				case "Tyriana":		return customTyriana;
-				case "Vahdunbrii":	return customVahdunbrii;
-				//case "Kitteh6660":	return customKitteh6660;
-				default:
-			}
+			for (var i:int = 0; i < customs.length; i++)
+				if (customs[i][0] == arg && customs[i][3])
+					return customs[i][1];
 			return null;
 		}
 		
@@ -2841,6 +2896,388 @@
 			
 		}
 		
+		private function customEtis():void {
+			// Herm kitsune-dragon with 3 tentacle cocks. And tentacle hair. And tentacle (well, draconic, but sort of) tongue.
+			// Was really struggling between dragonne and kitsune for alter ego character, 'cause feline body is more appealing, but kitsune's magic affinity turns the scales.
+			
+			// ascension cleanup
+			while (player.hasVagina())			
+				player.removeVagina();
+			while (player.hasCock())			
+				player.removeCock(0, 1);				
+			while (player.bRows() > 1)			
+				player.removeBreastRow(0, 1);			
+
+			player.createVagina();
+			player.vaginas[0].vaginalLooseness = 0;
+			player.vaginas[0].vaginalWetness = 2; // wet
+			player.vaginas[0].virgin = 0;			
+			player.createStatusAffect(StatusAffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait			
+			player.clitLength = 1;
+			player.fertility = 5;
+			
+			if (player.bRows() == 0) player.createBreastRow();			
+			player.breastRows[0].breastRating = 2; // b-cup, 'cause huge boobs wouldn't fit your small frame... in fact, you almost considered to have flats
+			player.breastRows[0].fuckable = true; // some people have hammerspace to store gear when they don't need it, and you are jealous. from other side, you have cockspace to store cocks when you need them!
+			
+			player.ballSize = 0;
+			player.balls = 0;
+			player.cumMultiplier = 100; // don't ask how it works, copyright for this potion was sold for Joey
+
+			player.ass.analWetness = 2; // moist
+			player.ass.analLooseness = 1; // not virgin
+			player.createStatusAffect(StatusAffects.BonusACapacity, 100, 0, 0, 0);			
+
+			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // as most kitsune you love tentackles
+			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // and while they aren't really fitting your body...
+			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // do anyone really need a reason to have TENTACLES?
+			player.createCock(6, 1.2, CockTypesEnum.DRAGON); // to fit dragon score requirement for dragon stats... either this or dragon legs or scales :( sometimes even genius have to accept compromise
+			player.genderCheck();
+			
+			player.tallness = 48; // 120 cm
+			player.hipRating = HIP_RATING_BOYISH;
+			player.buttRating = BUTT_RATING_TIGHT;
+			player.thickness = 20; // thin
+			player.tone = 20; // soft
+			player.skinType = SKIN_TYPE_PLAIN;
+			player.skinDesc = "skin";
+			player.skinAdj = "smooth"; // flawless skin, black egg effect
+			player.skinTone = "light";
+			player.hairColor = "silver blonde"; // not just flavor - it actually counts towards kitsune score
+			player.hairType = HAIR_ANEMONE; flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1; // tentacle hair... never can have enough tentacles!
+			player.hairLength = 42; // obscenely long, you still can use ext serum to get more, but they would drag the floor, and this wouldn't be pleasant
+			player.femininity = 50; // androgynous
+			player.beardLength = 0;
+			player.beardStyle = 0;
+			
+			player.earType = EARS_FOX;
+			player.tailType = TAIL_TYPE_FOX; // soft fur feels so lovely... too bad having too much fox fur would make you dumber, and while you would enjoy feline body, channeling magic using nine tails is great benefit which is hard to give up
+			player.tailVenom = 9;			
+			player.tongueType = TONUGE_DRACONIC; // tongue as long as your whole body height! almost tentackle! and so much fun to use!
+			player.hornType = HORNS_DRACONIC_X2; // draconic horns adds to your exotic look, counts towards dragon score and keeps your tentacle hair out of your face! and your partners can use them as handles on occasions, letting your delicate ears uncrumpled!
+			player.horns = 12;
+			player.wingType = WING_TYPE_DRACONIC_LARGE; // wings! to fly!
+			player.wingDesc = "large, draconic";
+			
+			player.str += -10; // strength? not a kitsune way, besides, you are small and really neglected physical training
+			player.tou += 0; // still, your dragon blood makes you surprisingly tough for your size and condition
+			player.spe += 5; // can take some advantage from small frame
+			player.inte += 55; // your mind is your power!
+			player.lib += 85; // yes, you have problems
+			player.cor += 31; // have high initial corruption, but also have religious history to meditate
+			
+			// bow and concealing leather armor with robes, also can handle rapier well, but doesn't have one
+			if (player.armor == ArmorLib.NOTHING || player.armor == armors.C_CLOTH) player.setArmor(armors.LTHRROB); // you like concealing clothes, your body is your masterpiece, but your extra benefits are more fun when not expected... ok, you are a bit shy of your tentacles
+			if (player.weapon == WeaponLib.FISTS) player.setWeapon(weapons.SUCWHIP); // have succubus whip, to get corruption quickly when desired
+			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry(jewelries.PURERNG);
+			if (debug) {
+				if (player.findStatusAffect(StatusAffects.Kelt) < 0) player.createStatusAffect(StatusAffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.			
+				if (player.hasKeyItem("Bow") < 0 && player.hasKeyItem("Kelt's Bow") < 0) player.createKeyItem("Bow", 0, 0, 0, 0);			
+				flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4; // Raphael is too picky, and also pretty much unfinished - you can't continue training after chase scene.			
+				if (player.teaseLevel < 3) player.teaseLevel = 3; }			
+			
+			// almost compulsive hoarder, start with backpack, chests and racks... never enough storage space
+			if (player.findPerk(PerkLib.StrongBack) < 0) { player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0); player.itemSlot4.unlocked = true; }
+			if (player.findPerk(PerkLib.StrongBack2) < 0) { player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0); player.itemSlot5.unlocked = true; }
+			var i:int = 0;			
+			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 5, 0, 0, 0);			
+			if (player.hasKeyItem("Camp - Chest") < 0) { player.createKeyItem("Camp - Chest", 0, 0, 0, 0); for (i = 0; i < 6; i++) inventory.createStorage(); }			
+			if (player.hasKeyItem("Camp - Murky Chest") < 0) { player.createKeyItem("Camp - Murky Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }			
+			if (player.hasKeyItem("Camp - Ornate Chest") < 0) { player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }			
+			if (player.hasKeyItem("Equipment Rack - Weapons") < 0) { player.createKeyItem("Equipment Rack - Weapons", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1; }			
+			if (player.hasKeyItem("Equipment Rack - Armor") < 0) { player.createKeyItem("Equipment Rack - Armor", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1; }			
+			
+			// have lots of different traits
+			if (player.findPerk(PerkLib.HistoryReligious) < 0) player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0); // abandoned religion after obtaining nine tails and being disappointed in achieved enlightment
+			if (player.findPerk(PerkLib.HistoryAlchemist) < 0) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0); // and resorted to your hobby - alchemy
+			if (player.findPerk(PerkLib.TransformationResistance) < 0) player.createPerk(PerkLib.TransformationResistance, 0, 0, 0, 0);  // tf resistance and alchemist are actually mutually nullifying each other - this is flavor mostly
+			if (player.findPerk(PerkLib.HistoryHealer) < 0) player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);  // with religious and alchemical knowlege you are skilled healer
+			if (player.findPerk(PerkLib.Medicine) < 0) player.createPerk(PerkLib.Medicine, 0, 0, 0, 0); // able to treat wounds and poisoning alike
+			if (player.findPerk(PerkLib.AscensionMoralShifter) < 0) player.createPerk(PerkLib.AscensionMoralShifter, 5, 0, 0, 0); // your kitsune's trickster nature makes you susceptable to corruption
+			if (player.findPerk(PerkLib.AscensionTolerance) < 0) player.createPerk(PerkLib.AscensionTolerance, 10, 0, 0, 0); // but in the same time your enlightment keeps you from really turning to demon, so corruption level does not really affect you much
+			if (player.findPerk(PerkLib.Fast) < 0) player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0); // gaining speed is pain in ass... this one is not for history flavor
+			if (player.findPerk(PerkLib.Smart) < 0) player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0); // int is easy to get, just for history flavor
+			if (player.findPerk(PerkLib.Lusty) < 0) player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0); // have a lust problem
+			if (player.findPerk(PerkLib.HotBlooded) < 0) player.createPerk(PerkLib.HotBlooded, 20, 0, 0, 0); // even with your willpower and religious training you sometimes struggling to restrain your impulse
+			if (player.findPerk(PerkLib.Pervert) < 0) player.createPerk(PerkLib.Pervert, 0.25, 0, 0, 0); // you always ready for something VERY lewd
+			if (player.findPerk(PerkLib.Masochist) < 0) player.createPerk(PerkLib.Masochist, 0, 0, 0, 0); // with your knowlege of healing and innatural body it is easy for you to enjoy things which would be really painful for others
+			if (player.findPerk(PerkLib.Sadist) < 0) player.createPerk(PerkLib.Sadist, 0, 0, 0, 0); // and you are always ready to return favor
+			if (player.findPerk(PerkLib.SensualLover) < 0) player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0); // still you tend to care about mutual enjoyment - there are difference between extreme entertainment and torture, and you are mischievous, not evil
+			if (player.findPerk(PerkLib.SpellcastingAffinity) < 0) player.createPerk(PerkLib.SpellcastingAffinity, 80, 0, 0, 0); // very strong magic affinity, can even be effective as mage without robe
+			if (player.findPerk(PerkLib.Channeling) < 0) player.createPerk(PerkLib.Channeling, 0, 0, 0, 0); // despite strong magic affinity wasn't actually much interested in combat magic before, so only can use fox fire as offensive spell
+			if (player.findPerk(PerkLib.Spellpower) < 0) player.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
+			// have some racial traits
+			if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);			
+			if (player.findPerk(PerkLib.Dragonfire) < 0) player.createPerk(PerkLib.Dragonfire, 0, 0, 0, 0);				
+			// some experiments with your body gave unusual results
+			if (player.findPerk(PerkLib.LustyRegeneration) < 0) player.createPerk(PerkLib.LustyRegeneration, 0, 0, 0, 0); // some of your experiments had nice returns
+			if (player.findPerk(PerkLib.Incorporeality) < 0) player.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);	// some was... strange
+			if (player.findPerk(PerkLib.ChiReflowMagic) < 0) player.createPerk(PerkLib.ChiReflowMagic, 0, 0, 0, 0);	// and some brought much more problems than benefits, but you wasn't able to reverse all of them. well, this is occupational hazard for alchemist
+			// you have no idea how you got this... heritage, maybe?
+			if (debug && player.findPerk(PerkLib.FerasBoonAlpha) < 0) player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);			
+			if (debug && player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0) player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);		
+			// Metamorph, Magic Metabolism and Puppeteer suggested perks would be also nice addition to character, but they are not implemented yet
+			
+			// you still aren't sure about gender preferences, but have some stashed eggs just in case... [why almost all inventory functions are private?]
+			if (player.itemSlot1.isEmpty())  player.itemSlot1.setItemAndQty(consumables.L_PNKEG, 1); // if you want to get rid of tentacles, but still maintain dragon one you'll have to find Ceraph
+			if (player.itemSlot2.isEmpty())  player.itemSlot2.setItemAndQty(consumables.L_BLUEG, 1);
+			if (debug && player.itemSlot3.isEmpty())  player.itemSlot3.setItemAndQty(consumables.REDUCTO, 5); 			
+			if (debug && player.itemSlot4.isEmpty())  player.itemSlot4.setItemAndQty(consumables.GROPLUS, 5); 
+			
+			player.earsPierced = 1;
+			player.earsPShort = "crimstone earrings";
+			player.earsPLong = "Crimstone earrings";
+			player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0); // with Omnibus' Gift it would give 50 min lust... perfect!
+			
+			player.createStatusAffect(StatusAffects.KnowsHeal, 0, 0, 0, 0); // to compliment history
+			
+			if (debug) { player.createStatusAffect(StatusAffects.TelAdre, 1, 1, 0, 0); flags[kFLAGS.BAZAAR_ENTERED] = 1; } // small straightforward cheating			
+			
+			player.hoursSinceCum = 0;
+			player.fatigue = 0;
+			player.HP = kGAMECLASS.maxHP();
+			
+			player.gems += 20;
+			
+			outputText("You are young (by kitsune measure), but very talented.\n\nFormer priestess, you abandoned religion after obtaining nine tails due to disappointment in achieved enlightment and resorted to your hobby - alchemy.\n\nYou tried to improve your body with controlled transformations, and mostly successfull. Now you are half-dragon, and while most changes are hidden inside your body, you still possess magnificent wings, imposing horns, incredibly long tongue and odd cock. Sharing common for kitsune tentacle obsession, you was unable to resist temptation, and now you have 3 tentacle cocks and venomous tentacle hair. Otherwise you body is mostly what you would expect from kitsune - cute, graceful and having capacity, straightforward impossible for your thin and small 4 foot frame.\n\nWith both religious and alchemical training you are skilled healer, able to treat wounds and poisonings alike. Your kitsune's trickster nature and pervert inclinations are making you susceptable to corruption, but at the same time your enlightment keeps you from really turning into demon, so corruption level does not really affect you much. Even with your willpower and religious training you sometimes struggle to restrain your impulse, and you always are ready for something very lewd. With your knowlege of healing and innatural body it is easy for you to enjoy things which would be really painful for others, and you are always ready to return favor. Still, you tend to care about mutual enjoyment - there are difference between extreme entertainment and torture, and you are mischievous, not evil. Natural gift, strong even by kitsune's measures and complimented by nine tails, granted you with very strong magic affinity, so you can cast spells not exhausting yourself even without enchanted robe, but despite strong magic affinity you wasn't actually much interested in combat magic before, so only can use fox fire as offensive spell.\n\nYour experiments left some strange effects within your body. Some are nice (you have unusually fast regeneration), some are strange (you can shift to incorporeality for a few seconds and even try to possess someone while in this state), and some brought more problems than benefits (insignificant improvement in magic power came with crippling penalty for your physical abilities).\n\nAlso, you are almost compulsive hoarder, so you developed ability to carry and store huge amount of things.\n\nNow you want to give your new body thorough test run, and portal to demon infested world looks appealing. No one said that common sense is one of your strong sides...\n\nTroublesome villagers near portal had strange demands about things which you can carry to other side, but you managed to conceal magic whip, so you wouldn't be unarmed, bud damned (literally) thing takes it's toll on user.\n\nYou still aren't really sure about your gender - having both sets doubles the fun, you still are a bit shy of your tentacles (that's main reason for your concealing clothes - your body is your doubtless masterpiece in all other parts), and being female in demon infested worlds tends to be a problem, so you decided to bring few transformative eggs, just in case.");
+		}
+		
+		private function customChimera():void {		
+			// This one is sort of challenge character. It is supposed to be mage, at least at start.
+			// always one vagina with random stats
+			player.createVagina();
+			player.vaginas[0].vaginalLooseness = rand(4); // from tight to gaping
+			player.vaginas[0].vaginalWetness = rand(4)+1; // from normal to slavering
+			player.vaginas[0].virgin = 0;
+			
+			player.clitLength = rand(3) == 0 ? (rand(10)+1)*0.25 : 0.25; // from 0.25 to 2.5
+			player.fertility = (rand(5)+1)*5; // from 5 to 25 with 5 step
+			
+			// 1-4 breast rows, from flats to dd sized
+			var row:Number = 0;
+			do{
+			player.createBreastRow();
+			var size:Number = 0;
+			if(row==0)
+				player.breastRows[row].breastRating = rand(6);
+			else
+				player.breastRows[row].breastRating = player.breastRows[row-1].breastRating - rand(2); // lower rows are same size or one size smaller than upper
+			row++;
+			}while(row < 4 && rand(2) == 0 && player.breastRows[0].breastRating > 1); // if last row was flat do not add more
+						
+			var tent:Boolean = rand(20) == 0; // 20% chance to have tentacle cluster
+			var cocks:Number = rand(5)+(tent ? 4 : 2); // 2-6 mixed cocks
+			var i:int; 
+			for (i = 0; i < cocks; i++) 
+			{
+				player.createCock();
+				player.cocks[i].cockLength = Math.round((rand(220)/10+3)*10)/10; // 3-25 inches
+				player.cocks[i].cockThickness = Math.round((rand(player.cocks[i].cockLength)/10+1)*10)/10;
+				var type:Number = rand(85);			
+				if (tent)
+					player.cocks[i].cockType = CockTypesEnum.TENTACLE;
+				else if(type < 25) // high chance
+					player.cocks[i].cockType = CockTypesEnum.HUMAN;
+				else if(type < 30)
+					player.cocks[i].cockType = CockTypesEnum.HORSE;
+				else if(type < 40)
+				{
+					player.cocks[i].cockType = CockTypesEnum.DOG; // above average chance, since it is fox one as well
+					player.cocks[i].knotMultiplier = 1.4;
+				}
+				else if(type < 45)
+					player.cocks[i].cockType = CockTypesEnum.DEMON;
+				else if(type < 50)
+					player.cocks[i].cockType = CockTypesEnum.CAT;
+				else if(type < 60)
+					player.cocks[i].cockType = CockTypesEnum.TENTACLE; // above average chance, for no reason
+				else if(type < 65)
+					player.cocks[i].cockType = CockTypesEnum.LIZARD;
+				else if(type < 70)
+					player.cocks[i].cockType = CockTypesEnum.ANEMONE;
+				else if(type < 75)
+					player.cocks[i].cockType = CockTypesEnum.KANGAROO;
+				else if(type < 80)
+				{
+					player.cocks[i].cockType = CockTypesEnum.DRAGON;
+					player.cocks[i].knotMultiplier = 1.3;
+				}
+				else
+					player.cocks[i].cockType = CockTypesEnum.PIG;				
+			}
+			
+			
+			// 40% to have no balls, 40% to one pair, 20% to 2 pairs
+			var balls:Number = rand(5);
+			if(balls <= 1){player.balls = 0;}
+			else if(balls <= 3){player.balls = 2;}
+			else if(balls == 4){player.balls = 4;}
+			if(player.balls>0)player.ballSize = rand(4)+1;
+			player.cumMultiplier = 5+player.ballSize*player.balls*2.5+rand(25);
+			
+			player.ass.analLooseness = rand(3);
+			player.ass.analWetness = rand(3)+1;
+			
+			player.gender = GENDER_HERM;
+			
+			// lean build
+			player.tallness = 55+rand(35); // 145-230 cm
+			player.hipRating = HIP_RATING_BOYISH;
+			player.buttRating = BUTT_RATING_TIGHT;
+			player.thickness = rand(10)+10; // lithe
+			player.tone = rand(10)+10; // not in a good shape...
+			player.skinTone = "light";
+			player.hairColor = "black";
+			player.hairLength = rand(50)+5;
+			player.femininity = rand(30)+35;
+			player.beardLength = 0;
+			player.beardStyle = 0;
+			
+			// wrecked body and obsessed mind...
+			player.str -= 15;
+			player.tou -= 15;
+			player.spe -= 15;
+			player.inte += 60;
+			//player.sens = 15;
+			//player.lib = 15;
+			player.cor += 2;
+
+			var skin:Number = rand(100);			
+			if(skin < 50){
+				player.skinType = SKIN_TYPE_PLAIN; // skin, 50%
+				player.skinDesc = "skin";}
+			else if(skin < 80){
+				player.skinType = SKIN_TYPE_FUR; // fur, 30%
+				player.skinDesc = "fur";}
+			else if(skin < 95){
+				player.skinType = SKIN_TYPE_SCALES; // scales, 15%
+				player.skinDesc = "scales";}
+			else{
+				player.skinType = SKIN_TYPE_GOO; // goo, 5%
+				player.skinDesc = "skin";
+				player.skinAdj = "slimy";}
+					
+			if(rand(3) != 0) // 2/3 to have human face
+				player.faceType = FACE_HUMAN;
+			else // totally random one
+				player.faceType = rand(20)+1; // since it is not a enum, it is impossible to make it auto-ajust...
+				
+			if(player.faceType == FACE_SPIDER_FANGS && rand(2) == 0)
+					player.eyeType = EYES_FOUR_SPIDER_EYES; // 50% to have spider eyes with spider fangs
+			else if(rand(20) == 0) // 5% for inhuman eyes otherwise
+				if(rand(2) == 0)
+					player.eyeType = EYES_FOUR_SPIDER_EYES;
+				else
+					player.eyeType = EYES_BLACK_EYES_SAND_TRAP;
+
+			if(player.faceType == FACE_HUMAN && rand(2)!=0) // if human face, 50% to have human ears
+				player.earType = EARS_HUMAN;
+			else // totally random one
+				player.earType = rand(14)+1; // since it is not a enum, it is impossible to make it auto-ajust...
+
+
+			if(rand(2) != 0) // 50% to have human lower body
+				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+			else // totally random one
+				player.faceType = rand(21)+1; // since it is not a enum, it is impossible to make it auto-ajust...
+			
+			player.tailType = rand(21); // always have totally random tail
+			if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN)
+			{ // insect abdomens comes with poison
+				player.tailVenom = 5;
+				player.tailRecharge = 5;
+				if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && rand(2)==0)
+					player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0); // spider abdomen have chance 50/50 to have ovipositor
+			}
+			
+			var tongue:Number = rand(100); // 70% normal tongue, 30% to non-human with even chances of every one
+			if(tongue<70)
+				player.tongueType = TONUGE_HUMAN;
+			else if(tongue<80)
+				player.tongueType = TONUGE_DEMONIC;
+			else if(tongue<90)
+				player.tongueType = TONUGE_DRACONIC;
+			else
+				player.tongueType = TONUGE_SNAKE;
+			
+			
+			var horns:Number = rand(100); // 70% no horns, 30% to random
+			if(horns<70)
+				player.hornType = HORNS_NONE;
+			else if(horns<80){
+				player.hornType = HORNS_DEMON;
+				player.horns = (rand(4)+1)*2; // 1-4 pairs
+				}
+			else if(horns<90){
+				player.hornType = HORNS_COW_MINOTAUR;
+				player.horns = 2;}
+			else{
+				player.hornType = HORNS_DRACONIC_X2;
+				player.horns = 2;}
+			
+			var wings:Number = rand(4); // always have wings to fly... small boon to make up for lack of fighting power
+			if(wings == 0){
+				player.wingType = WING_TYPE_BAT_LIKE_LARGE;
+				player.wingDesc = "large, bat-like";}
+			else if(wings == 1){
+				player.wingType = WING_TYPE_FEATHERED_LARGE;
+				player.wingDesc = "large, feathered";}
+			else if(wings == 2){
+				player.wingType = WING_TYPE_DRACONIC_LARGE;
+				player.wingDesc = "large, draconic";}
+			else{
+				player.wingType = WING_TYPE_GIANT_DRAGONFLY;
+				player.wingDesc = "giant dragonfly";}
+				
+			
+			var arms:Number = rand(100); // if have harpy wings 33% chance to have harpy hands, otherwise 5% to have spider hands
+			if(player.wingType == WING_TYPE_FEATHERED_LARGE && rand(4) == 0)
+				player.armType = ARM_TYPE_HARPY;
+			else if(rand(20) == 0)
+				player.armType = ARM_TYPE_SPIDER;
+			else
+				player.armType = ARM_TYPE_HUMAN;
+			
+			
+			var hair:Number = rand(100); // 90% to have normal hair, even chances to have feathers, anemone or goo otherwise
+			if(hair<90)
+				player.hairType = HAIR_NORMAL;
+			else {
+				hair = rand(3);
+				if(hair == 0)
+					player.hairType = HAIR_FEATHER;
+				else if(hair == 1)
+					player.hairType = HAIR_GOO;
+				else if(hair == 2)
+					player.hairType = HAIR_ANEMONE;					
+			}
+			
+			// wizard staff and modest robes
+			player.setWeapon(weapons.W_STAFF);
+			player.setArmor(armors.M_ROBES);
+			
+			// have some perks from past
+			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
+			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
+			player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
+			player.createPerk(PerkLib.SpellcastingAffinity, 50, 0, 0, 0);
+			
+			// and knows white magic
+			player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
+			player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
+			player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
+
+			player.hoursSinceCum = 0;
+			player.fatigue = 0;
+			player.HP = kGAMECLASS.maxHP();
+
+			player.gems += 15+ rand(55);
+			
+			outputText("Your body is wrecked by your own experiments with otherwordly transformation items, and now you have no more money to buy any more from smugglers... But you would make your body as strong as your will. Or die trying.");
+		}
+		
 		//-----------------
 		//-- GAME MODES
 		//-----------------
@@ -3033,6 +3470,7 @@
 			newGameGo();
 			clearOutput();
 			mainView.nameBox.visible = false;
+			boxNames.visible = false;
 			outputText("Everything fades to white and finally... black. You can feel yourself being whisked back to reality as you slowly awaken in your room. You survey your surroundings and recognize almost immediately; you are in your room inside the inn in Ingnam! You get up and look around. ");
 			if (player.hasKeyItem("Camp - Chest") >= 0 || player.hasKeyItem("Equipment Rack - Weapons") >= 0 || player.hasKeyItem("Equipment Rack - Armor") >= 0 || player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
 				if (player.hasKeyItem("Camp - Chest") >= 0) {
