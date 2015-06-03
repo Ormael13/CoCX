@@ -17,6 +17,10 @@ package classes.Perks
 			super("Ascension: Fertility", "Ascension: Fertility", "", "Increases fertility rating by 5 per level.");
 		}
 		
+		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		{
+			return true;
+		}		
 	}
 
 }

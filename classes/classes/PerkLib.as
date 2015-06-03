@@ -320,7 +320,7 @@ package classes
 
 		// Armor perks
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
-				"Spellcasting now consumes health instead of fatigue!");
+				"Spellcasting now consumes health instead of fatigue!",null,true);
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
 		public static const WizardsEndurance:WizardsEndurancePerk = new WizardsEndurancePerk();
 
@@ -350,13 +350,13 @@ package classes
 		public static const BunnyEggs:PerkType = mk("Bunny Eggs", "Bunny Eggs",
 				"Laying eggs has become a normal part of your bunny-body's routine.");
 		public static const CorruptedNinetails:PerkType = mk("Corrupted Nine-tails", "Corrupted Nine-tails",
-				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.");
+				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.",null,true);
 		public static const Diapause:PerkType = mk("Diapause", "Diapause",
 				"Pregnancy does not advance normally, but develops quickly after taking in fluids.");
 		public static const Dragonfire:PerkType = mk("Dragonfire", "Dragonfire",
 				"Allows access to a dragon breath attack.");
 		public static const EnlightenedNinetails:PerkType = mk("Enlightened Nine-tails", "Enlightened Nine-tails",
-				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.");
+				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.",null,true);
 		public static const Feeder:PerkType = mk("Feeder", "Feeder",
 				"Lactation does not decrease and gives a compulsion to breastfeed others.");
 		public static const Flexibility:PerkType = mk("Flexibility", "Flexibility",
@@ -450,9 +450,9 @@ package classes
 		// Monster perks
 		public static const Acid:PerkType = mk("Acid", "Acid", "");
 
-		private static function mk(id:String, name:String, desc:String, longDesc:String = null):PerkType
+		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
 		{
-			return new PerkType(id, name, desc, longDesc);
+			return new PerkType(id, name, desc, longDesc, keepOnAscension);
 		}
 	}
 }

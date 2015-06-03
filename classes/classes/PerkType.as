@@ -22,6 +22,7 @@ package classes
 		private var _name:String;
 		private var _desc:String;
 		private var _longDesc:String;
+		private var _keepOnAscension:Boolean;
 
 		/**
 		 * Unique perk id, should be kept in future game versions
@@ -54,13 +55,22 @@ package classes
 		{
 			return _longDesc;
 		}
+		
+		public function keepOnAscension(respec:Boolean = false):Boolean
+		{
+			if (_keepOnAscension)
+				return true;						
+			
+			return _longDesc != _desc && !respec; // dirty condition
+		}
 
-		public function PerkType(id:String,name:String,desc:String,longDesc:String = null)
+		public function PerkType(id:String,name:String,desc:String,longDesc:String = null,keepOnAscension:Boolean = false)
 		{
 			this._id = id;
 			this._name = name;
 			this._desc = desc;
 			this._longDesc = longDesc || _desc;
+			this._keepOnAscension = keepOnAscension;
 			if (PERK_LIBRARY[id] != null) {
 				CoC_Settings.error("Duplicate perk id "+id+", old perk is "+(PERK_LIBRARY[id] as PerkType)._name);
 			}
