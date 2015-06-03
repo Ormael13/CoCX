@@ -663,6 +663,7 @@ package classes.Scenes.Areas.Forest
 				}
 				model.time.hours = 6;
 				model.time.days++;
+				if (player.findStatusAffect(StatusAffects.Meditated) >= 0) player.removeStatusAffect(StatusAffects.Meditated);
 				if (!getGame().inCombat)
 					doNext(camp.returnToCampUseOneHour);
 				else cleanupAfterCombat();
