@@ -30,7 +30,7 @@ package classes.Scenes {
 			}
 			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !fappingItems(false)) {
 				clearOutput();
-				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch you shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
+				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
 				addButton(0, "Next", playerMenu);
 				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
 					outputText("\n\nFortunately, you could smear honey all over your " + player.cockDescript() + " and relieve yourself if you want to.");
@@ -272,7 +272,7 @@ package classes.Scenes {
 				return;
 			}
 			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !inDungeon) {
-				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch you shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
+				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
 				doNext(playerMenu);
 				return;
 			}

@@ -2058,14 +2058,12 @@ package classes
 				}
 			}
 		}
-		
-		public function guyGirl(caps:Boolean = false):String
+		//Not used anymore
+		/*public function guyGirl(caps:Boolean = false):String
 		{
-			if (caps)
-				return mf("Guy", "Girl");
-			else 
-				return mf("guy", "girl");
-		}
+			if (caps) return mf("Guy", "Girl");
+			else return mf("guy", "girl");
+		}*/
 		
 		public function mfn(male:String, female:String, neuter:String):String
 		{
@@ -2101,66 +2099,37 @@ package classes
 					else return female;
 				else
 				{
-					if (biggestTitSize() >= 3) return female;
-					else return male;
+					if (biggestTitSize() >= 3)
+						return female;
+					else
+						return male;
 				}
 			}
 		}
-		
-		//Used for measuring femininity. If less than 50, returns false for male. Otherwise, returns true for female.
-		/*public function femWeight():Number {
-			//1/2 facial
-			var weighting:Number = femininity;
-			//Tits count up to their rating for femininity
-			if (biggestTitSize() >= 1) {
-				trace("boobs confirmed");
-				if (biggestTitSize() * 3 > 50) weighting += 50;
-				else weighting += biggestTitSize() * 3;
-			}
-			//Flat chest + 20 masculine
-			else if (biggestTitSize() == 0) {
-				trace("no boobs confirmed");
-				weighting -= 20;
-			}
-			//Hips give small boost
-			if (hipRating() >= 6) weighting += hipRating() * 1.5;
-			else weighting -= (6 - hipRating()) * 3;
-			if (hairLength > 8) weighting += (hairLength - 7) * 1.5;
-			else weighting -= (8 - hairLength) * 1.5;
-			if (tone > 70) weighting -= 10;
-			if (tone < 30) weighting += 10;
-			if (lipRating() > 1) weighting += lipRating() * 3;
-			if (hasBeard()) weighting -= 100;
-			trace("Femininity Rating = " + weighting);
-			//Neuters first!
-			if (weighting <= 49) return false;
-			else return true;
-		} */
-		
-		
-		public function boyGirl(caps:Boolean = false):String
+		//Not used anymore
+		/*public function boyGirl(caps:Boolean = false):String
 		{
 			if (caps) return mf("Boy", "Girl");
 			else return mf("boy", "girl");
-		}
+		}*/
 		
-		public function heShe(caps:Boolean = false):String
+		/*public function heShe(caps:Boolean = false):String
 		{
 			if (caps) return mf("He", "She");
 			else return mf("he", "she");
-		}
+		}*/
 		
-		public function himHer(caps:Boolean = false):String
+		/*public function himHer(caps:Boolean = false):String
 		{
 			if (caps) return mf("Him", "Her");
 			else return mf("him", "her");
-		}
+		}*/
 		
-		public function maleFemale(caps:Boolean = false):String
+		/*public function maleFemale(caps:Boolean = false):String
 		{
 			if (caps) return mf("Male", "Female");
 			else return mf("male", "female");
-		}
+		}*/
 		
 		public function maleFemaleHerm(caps:Boolean = false):String
 		{
@@ -2183,18 +2152,79 @@ package classes
 			else return "<b>Gender error!</b>";
 		}
 		
-		public function hisHer(caps:Boolean = false):String
+		/*public function hisHer(caps:Boolean = false):String
 		{
 			if (caps) return mf("His", "Her");
 			else return mf("his", "her");
-		}
+		}*/
 		
-		//sir/madam
-		public function sirMadam(caps:Boolean = false):String
+		//sir/madam (Not even used in the codebase. WHYYYYY?)
+		/*public function sirMadam(caps:Boolean = false):String
 		{
-			if (caps) return mf("Sir", "Madam");
-			else return mf("sir", "madam");
-		}
+			//Dicks?
+			if (totalCocks() > 0)
+			{
+				//herm
+				if (hasVagina())
+				{
+					//Boy unless has tits!
+					if (biggestTitSize() >= 2)
+					{
+						if (caps)
+							return "Madam";
+						else
+							return "madam";
+					}
+					else
+					{
+						if (caps)
+							return "Sir";
+						else
+							return "sir";
+					}
+				}
+				//Dude
+				else
+				{
+					if (caps)
+						return "Sir";
+					else
+						return "sir";
+				}
+			}
+			//No dicks
+			else
+			{
+				//Girl
+				if (hasVagina())
+				{
+					if (caps)
+						return "Madam";
+					else
+						return "madam";
+				}
+				//Eunuch!
+				else
+				{
+					//Called girl if has tits!
+					if (biggestTitSize() >= 2)
+					{
+						if (caps)
+							return "Madam";
+						else
+							return "madam";
+					}
+					//Called dude with no tits
+					else
+					{
+						if (caps)
+							return "Sir";
+						else
+							return "sir";
+					}
+				}
+			}
+		}*/
 		
 		//Create a cock. Default type is HUMAN
 		public function createCock(clength:Number = 5.5, cthickness:Number = 1,ctype:CockTypesEnum=null):Boolean

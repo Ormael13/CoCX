@@ -130,6 +130,11 @@ public function clearOutput():void {
 	forceUpdate();
 	currentText = "";
 	mainView.clearOutputText();
+	if(gameState != 3) mainView.hideMenuButton( MainView.MENU_DATA );
+	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+	mainView.hideMenuButton( MainView.MENU_LEVEL );
+	mainView.hideMenuButton( MainView.MENU_PERKS );
+	mainView.hideMenuButton( MainView.MENU_STATS );
 }
 
 /**

@@ -381,7 +381,7 @@ package classes.Scenes.Places
 			}
 			if (player.wingType > 0 && player.wingType != WING_TYPE_SHARK_FIN) {
 				outputText("\n\nNext, he looks at your wings that sprout from your back and says, \"<i>Wings? I've never seen a person with wings before!</i>\" ");
-				if (player.canFly()) outputText("You tell him that you can fly. To demonstrate, you guide the innkeeper outside and you grit your teeth with effort as you flap your wings and you finally launch off from the ground and fly around the town! The people of Ingnam, including your family and friends, look at you in shock and some even say, \"<i>" + player.heShe(true) + " can fly!</i>\"");
+				if (player.canFly()) outputText("You tell him that you can fly. To demonstrate, you guide the innkeeper outside and you grit your teeth with effort as you flap your wings and you finally launch off from the ground and fly around the town! The people of Ingnam, including your family and friends, look at you in shock and some even say, \"<i>" + player.mf("He", "She") + " can fly!</i>\"");
 			}
 			outputText("\n\nPLACEHOLDER.");
 			flags[kFLAGS.INGNAM_GREETED_AFTER_LONGTIME] = 1;

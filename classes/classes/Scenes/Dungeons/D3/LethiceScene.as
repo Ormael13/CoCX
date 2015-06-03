@@ -159,7 +159,7 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("\n\n<b>Meanwhile in Tel'Adre...</b>\n");
 			outputText("News spread throughout Tel'Adre about the fall of Lethice. The citizens are cheering and dancing to celebrate the fall of Lethice and the liberation of Mareth. ");
-			if (kGAMECLASS.urta.urtaLove()) outputText("\n\n\"<i>I'm happy for my Lover! " + player.heShe(true) + " did it!</i>\" Urta says before taking another swig of booze.");
+			if (kGAMECLASS.urta.urtaLove()) outputText("\n\n\"<i>I'm happy for my Lover! " + player.mf("He", "She") + " did it!</i>\" Urta says before taking another swig of booze.");
 			//outputText("\n\n<b>Back at camp...</b>\n");
 			//outputText("");
 			

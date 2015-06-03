@@ -109,6 +109,9 @@ private function gooTits():String {
 private function gooCock():String {
 	return Appearance.cockDescription(CockTypesEnum.ParseConstantByIndex(flags[kFLAGS.GOO_DICK_TYPE]), flags[kFLAGS.GOO_DICK_LENGTH], flags[kFLAGS.GOO_DICK_LENGTH] / 6, 50, 100);
 }
+public function gooGetCockType():CockTypesEnum {
+	return CockTypesEnum.ParseConstantByIndex(flags[kFLAGS.GOO_DICK_TYPE]);
+}
 
 public override function latexGooFollower():Boolean {
 	return flags[kFLAGS.GOO_SLAVE_RECRUITED] > 0;

@@ -986,7 +986,7 @@ public function dildoFuckRubi():void {
 	//(PC doesn't have either, but breasts above A-cup?)
 	else outputText("your [chest], rubbing your nipples vigorously, in desperate need of release.");
 	//(Bonus, fuckable nipples?)
-	if(player.hasFuckableNipples()) outputText("  You fingers easily slip inside each nipple, pumping in and out like little cocks.");
+	if(player.hasFuckableNipples()) outputText("  Your fingers easily slip inside each nipple, pumping in and out like little cocks.");
 	//(No cock, no pussy, no breasts?)
 	if(player.gender == 0 && player.biggestTitSize() == 0) outputText("  Your hands roam all along your body, from your bare crotch to your nipples, even through your hair, all in search of something to give you the release you so desperately crave.");
 

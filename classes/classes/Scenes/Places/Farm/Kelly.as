@@ -553,7 +553,7 @@ private function finalKeltBreaking():void {
 	if(player.balls > 0) outputText("Her free hands moves down on your groin and caresses your [balls] with expert care and precision; obviously her previous experience in groping has had an effect on her current skills.  ");
 	outputText("Her hunger for your meaty junk seems to be insatiable, for after moments of dick kissing and licking, she decides to take the entirety of your length.  Her eyes are voracious as her fat lips swallow inch after inch of dick-flesh.");
 	
-	outputText("\n\nYou savor this moment; you [cock biggest] is literally radiating with pleasure, and you find yourself staggering multiple times, your body almost unable to bear the sheer pleasure provided by the needy centaur-slut.  Her fingers cling to your ");
+	outputText("\n\nYou savor this moment; your [cock biggest] is literally radiating with pleasure, and you find yourself staggering multiple times, your body almost unable to bear the sheer pleasure provided by the needy centaur-slut.  Her fingers cling to your ");
 	if(player.isTaur()) outputText("hindleg haunches");
 	else outputText("[butt]");
 	outputText(", always pulling your groin closer to her avid mouth as she relentlessly throatfucks herself on you.  Your [cock biggest] is being squeezed and massaged in the most divine way as it knocks against her warm esophagus, and you're tempted to cum in her right now, right here. But you need to finish the 'lesson'; with great regret, you softly ");
