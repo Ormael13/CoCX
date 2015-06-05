@@ -72,7 +72,7 @@ package classes.Scenes.Quests.UrtaQuest
 			outputText("The minotaur lord lashes out with his chain, swinging in a wide arc!\n");
 			createStatusAffect(StatusAffects.Timer, 2 + rand(4), 0, 0, 0);
 			//{dodge/whatever}
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You leap over the clumsy swing, allowing the chain to fly harmlessly underneath you!");
 			}
 			else {

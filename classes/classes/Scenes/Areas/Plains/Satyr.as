@@ -13,7 +13,7 @@ package classes.Scenes.Areas.Plains
 				outputText(capitalA + short + " completely misses you with a blind punch!\n", false);
 			}
 			//Evade: 
-			else if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			else if(player.getEvasionRoll()) {
 				outputText("He snarls as you duck his blow and it swishes harmlessly through the air.");
 			}
 			else {
@@ -40,35 +40,38 @@ package classes.Scenes.Areas.Plains
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
 			}
-			else if(combatMiss()) {
-				outputText("He charges at you with a loud bleat, but you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-				HP -= 5;
-			}
-			else if(combatEvade()) {
-				outputText("He charges at you with a loud bleat, but using your evasive skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-				HP -= 5;
-			}
-			else if(combatFlexibility()) {
-				outputText("He charges at you with a loud bleat, but using your flexibility, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-				HP -= 5;
-			}
-			else if(combatMisdirect()) {
-				outputText("He charges at you with a loud bleat, but using your misdirecting skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-				HP -= 5;
-			}
 			else {
-				var damage:Number = int((str + weaponAttack) - rand(player.tou));
-				if(damage > 0) {
-					outputText("He charges at you with a loud bleat, catching you off-guard and sending you flying into the ground.");
-					if(player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) {
-						outputText("  The pain of the impact is so big you feel completely dazed, almost seeing stars.");
-						player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
-					}
-					outputText(" ");
-					damage = player.takeDamage(damage, true);
-					//stun PC + hp damage if hit, hp damage dependent on str if miss
+				var evade:String = player.getEvasionReason();
+				if(evade == EVASION_EVADE) {
+					outputText("He charges at you with a loud bleat, but using your evasive skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
+					HP -= 5;
 				}
-				else outputText("He charges at you, but you successfully deflect it at the last second.");
+				else if(evade == EVASION_FLEXIBILITY) {
+					outputText("He charges at you with a loud bleat, but using your flexibility, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
+					HP -= 5;
+				}
+				else if(evade == EVASION_MISDIRECTION) {
+					outputText("He charges at you with a loud bleat, but using your misdirecting skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
+					HP -= 5;
+				}
+				else if (evade == EVASION_SPEED || evade != null) {
+					outputText("He charges at you with a loud bleat, but you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
+					HP -= 5;
+				}
+				else {
+					var damage:Number = int((str + weaponAttack) - rand(player.tou));
+					if(damage > 0) {
+						outputText("He charges at you with a loud bleat, catching you off-guard and sending you flying into the ground.");
+						if(player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) {
+							outputText("  The pain of the impact is so big you feel completely dazed, almost seeing stars.");
+							player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+						}
+						outputText(" ");
+						damage = player.takeDamage(damage, true);
+						//stun PC + hp damage if hit, hp damage dependent on str if miss
+					}
+					else outputText("He charges at you, but you successfully deflect it at the last second.");
+				}
 			}
 			combatRoundOver();
 		}
@@ -87,7 +90,7 @@ package classes.Scenes.Areas.Plains
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
 			}
-			else if(combatMiss() || combatFlexibility() || combatMisdirect() || combatEvade()) {
+			else if(player.getEvasionRoll()) {
 				outputText("As he charges you, you grab him by the horns and spin around, sending him away.");
 			}
 			else {

@@ -37,19 +37,20 @@ package classes.Scenes.Areas.Desert
 			var hits:int = 5 + rand(8);
 			var bonus:int = 0;
 			var damage:int = 0;
-			while(hits > 0) {
-				if(combatMiss() || combatMisdirect()) {
+			while (hits > 0) {
+				var evade:String = player.getEvasionReason();
+				//Evade
+				if(evade == EVASION_EVADE) outputText("\nYou roll away from some of the hermaphrodite spunk, easily evading it.");
+				//Misdirect
+				else if(evade == EVASION_MISDIRECTION) outputText("\nYou feint one direction and then move another, misdirecting like a pro and avoiding some of the sexual artillery.");
+				//Flexibility
+				else if(evade == EVASION_FLEXIBILITY) outputText("\nYou twist aside, making the most of your cat-like reflexes to avoid some of the stuff.");
+				else if(evade == EVASION_SPEED || evade != null) { // failsafe
 					//Miss1
 					if(rand(3) == 0) outputText("\nA glob of her goo goes wide, over your shoulder!");
 					else if(rand(2) == 0) outputText("\nOne wave of alabaster falls short, to splatter at your [feet].");
 					else outputText("\nSome of the Cum Witch's cum nearly hits you, but you manage to step aside.");
 				}
-				//Evade
-				else if(combatEvade()) outputText("\nYou roll away from some of the hermaphrodite spunk, easily evading it.");
-				//Misdirect
-				else if(combatMisdirect()) outputText("\nYou feint one direction and then move another, misdirecting like a pro and avoiding some of the sexual artillery.");
-				//Flexibility
-				else if(combatFlexibility()) outputText("\nYou twist aside, making the most of your cat-like reflexes to avoid some of the stuff.");
 				else {
 					var temp:Number = rand(5);
 					//Hit1

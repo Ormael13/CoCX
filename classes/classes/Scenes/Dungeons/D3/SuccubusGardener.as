@@ -192,7 +192,7 @@
 			//Used once every ten rounds
 			outputText("A web of interwoven vines lashes out from behind the succubus, somehow leaving her untouched by the wave of advancing greenery. They're trying to grab you!");
 			
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
+			if (player.getEvasionRoll())
 			{
 				//Dodge
 				outputText(" You slip aside at the last moment, barely avoiding being wrapped in the squirming mass. It snaps back, perhaps at the limits of its reach, leaving you once more eye to eye with the alluring gardener.");
@@ -274,7 +274,7 @@
 			
 			for (var i:int = 0; i < 10; i++)
 			{
-				if (!(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()))
+				if (!(player.getEvasionRoll()))
 				{
 					damage += 2 + rand(1 + player.lib / 20) + rand(1 + player.sens / 20);
 				}
@@ -297,7 +297,7 @@
 		{
 			outputText("The succubus lifts her hands up in the air, saying, <i>“Why not taste a sampling of the pleasures I offer?”</i> Above her, a canopy of corrupt, snarled greenery forms, oozing unmistakable sexual fluids - both male and female. Splatters of jism and pussy juice fall like curtains of corruptive rain, their scent lacing the air with their heady musk.");
 	
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
+			if (player.getEvasionRoll())
 			{
 			//Dodge
 				outputText(" Somehow, you manage to twist out from under the organic raincloud without getting stained by a single drop, though your breath has quickened, and not just from the physical effort.");

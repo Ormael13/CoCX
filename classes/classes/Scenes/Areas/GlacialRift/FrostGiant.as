@@ -14,7 +14,7 @@ package classes.Scenes.Areas.GlacialRift
 		public function giantAttackPunch():void {
 			var damage:int = 0;
 			outputText("The giant strides toward you, closing the distance faster than you can run. He rears back and strikes at you!  ");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You deftly dodge the jumbo Jotun's paltry punch, spinning swiftly to charge your " + player.weaponName + " at his hand, leaving what looks like a crack. The giant roars in outrage, shaking snow from trees and making your " + player.armorName + " vibrate. He appears angrier than before.");
 			}
 			else {
@@ -37,7 +37,7 @@ package classes.Scenes.Areas.GlacialRift
 		
 		public function giantGrab():void {
 			outputText("The giant yells something you don't understand and charges at you, hands outstretched!  ");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You ");
 				if (rand(player.spe) < spe) outputText("barely"); 
 				else outputText("ably"); 

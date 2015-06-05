@@ -9,7 +9,7 @@ package classes.Scenes.Places.Farm
 		private function keltTramplesJoo():void {
 			outputText("Before you know what's what, Kelt is galloping toward you, kicking up a cloud of dust in his wake.  He's trying to trample you!  ");
 			//Miss:
-			if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if(player.getEvasionRoll()) {
 				outputText("You roll out of the way at the last moment, avoiding his dangerous hooves.");
 				combatRoundOver();
 				return;
@@ -37,7 +37,7 @@ package classes.Scenes.Places.Farm
 			outputText("Kelt knocks and fires an arrow almost faster than you can track.  He's lost none of his talent with a bow, even after everything you've put him through.  ");
 
 			//Miss:
-			if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if(player.getEvasionRoll()) {
 				outputText("You manage to avoid the missile by the skin of your teeth!");
 				combatRoundOver();
 				return;

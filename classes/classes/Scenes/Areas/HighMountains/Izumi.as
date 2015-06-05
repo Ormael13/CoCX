@@ -151,7 +151,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Quick as a flash, Izumi lashes out with her free hand, aiming for your head.");
 
 			var damage:int = int((str + 175) - rand(player.tou) - player.armorDef);
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
+			if (player.getEvasionRoll())
 			{
 				outputText("  You deftly dodge under the lightning-quick punch.");
 			}
@@ -197,7 +197,7 @@ package classes.Scenes.Areas.HighMountains
 		// On escape, Izumi takes some damage
 		public function chokeSlam():void
 		{
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
+			if (player.getEvasionRoll())
 			{
 				outputText("Izumi surges towards you, closing the distance between you within the blink of an eye. You narrowly avoid her crushing grip, twisting away from her grasp at the last moment.  The enormous Oni lets loose a deep, satisfied laugh.");
 			}
@@ -312,7 +312,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			outputText("Izumi raises one mighty foot and slams it to the ground with a victorious yell.  The ground itself actually shakes below your feet, threatening to knock you off balance.\n\n");
 			
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) // TODO: ensure this is correct
+			if (player.getEvasionRoll()) // TODO: ensure this is correct
 			{
 				outputText("Leaping to the side, you manage to steady yourself against the wall, keeping your footing.");
 			}

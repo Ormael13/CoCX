@@ -275,6 +275,9 @@ package classes
 		public static const ThunderousStrikes:PerkType = mk("Thunderous Strikes", "Thunderous Strikes",
 				"+20% 'Attack' damage while strength is at or above 80.",
 				"You choose the 'Thunderous Strikes' perk, increasing normal damage by 20% while your strength is over 80.");
+		public static const Unhindered:PerkType = mk("Unhindered", "Unhindered",
+				"Increases chances of evading enemy attacks when you are naked.",
+				"You choose the 'Unhindered' perk, grantinc chance to evade when you are naked.");
 		public static const WeaponMastery:PerkType = mk("Weapon Mastery", "Weapon Mastery",
 				"[if(player.str>60)" +
 						"Doubles damage bonus of weapons classified as 'Large'." +

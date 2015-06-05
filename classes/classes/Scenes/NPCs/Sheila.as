@@ -24,7 +24,7 @@ package classes.Scenes.NPCs
 				damage = kGAMECLASS.doDamage(damage, true);
 			}
 			//Miss:
-			else if(combatMiss() || combatFlexibility() || combatEvade() || combatMisdirect() || findStatusAffect(StatusAffects.Blind) >= 0) {
+			else if(player.getEvasionRoll() || findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils with fist raised, but you lean away from the uppercut, catching a faceful of her breasts instead!  Sheila squeals and pushes away from you");
 				//[(libido>40)
 				if(player.lib > 40) {
@@ -57,7 +57,7 @@ package classes.Scenes.NPCs
 			var damage:Number = 0;
 			spe -= 60;
 			//Miss:
-			if(combatMiss() || combatFlexibility() || combatEvade() || combatMisdirect() || (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) == 0)) {
+			if(player.getEvasionRoll() || (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) == 0)) {
 				outputText("Sheila squats down, then bounds explosively toward you!  She swings her leg out in front to kick, but you roll to the side and she slips past your shoulder.  You hear an \"<i>Oof!</i>\" as she lands on her butt behind you.  When you turn to look, she's already back to her feet, rubbing her smarting posterior and looking a bit embarrassed.");
 				//(small Sheila HP loss)
 				damage = 3 + rand(10);
@@ -155,7 +155,7 @@ package classes.Scenes.NPCs
 			outputText("Sheila waits patiently, staring at you and stroking her dark, spaded tail with its opposite.  A line of the always-oozing oil falls from the slit, pooling in the smooth brown coil; she unwinds it rapidly, flinging the liquid at your face playfully.  ");
 			//results, no new PG
 			//Hit:
-			if(!combatMiss() && !combatEvade() && !combatMisdirect() && !combatFlexibility()) {
+			if(!player.getEvasionRoll()) {
 				outputText("It lands on target, and you're forced to close your eyes lest it get in them!");
 				player.createStatusAffect(StatusAffects.Blind,1,0,0,0);
 				player.createStatusAffect(StatusAffects.SheilaOil,0,0,0,0);
