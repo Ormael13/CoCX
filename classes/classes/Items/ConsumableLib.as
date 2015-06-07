@@ -79,6 +79,8 @@ package classes.Items
 		public const S_WATER:SimpleConsumable = mk("S.Water", "SpringWtr", "a waterskin filled with spring water", m.springWater, "A waterskin full of purified water from Minerva's spring.  It's clean and clear, with a faint sweet scent to it.  You're sure it would be a very refreshing drink.");
 		public const URTACUM:SimpleConsumable = mk("UrtaCum", "UrtaCum", "a sealed bottle of Urta's cum", m.urtaCum, "This bottle of Urta's cum looks thick and viscous.  It's quite delicious.", 15);
 		public const W_PDDNG:SimpleConsumable = mk("W.Pddng","W.Pudding", "a slice of winter pudding", m.winterPudding,"A slice of delicious Winter Pudding.  It smells delicious. \n\nNote: Eating this might cause antlers to grow from your head.", 35);
+		public const H_BISCU:SimpleConsumable = mk("H.Biscuits", "H.Biscuits", "a pack of hard biscuits", m.hardBiscuits, "This biscuits are tasteless, but can stay edible for an exceedingly long time.", 5);
+		public const TRAILMX:SimpleConsumable = mk("Trail Mix", "Trail Mix", "a pack of trail mix", m.trailMix, "This mix of nuts, dried fruits and beries is lightweight, easy to store and very nutritious.", 20);
 
 		//GROWERS/SHRINKERS
 		public const REDUCTO:Consumable = new Reducto();

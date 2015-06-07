@@ -73,6 +73,8 @@ private function checkBakeryMenu():void {
 	outputText("Berry Cupcakes - 3 gems.\n", false);
 	outputText("Doughnuts - 5 gems.\n", false);
 	outputText("Pound Cake - 4 gems.\n", false);
+	outputText("Hard Biscuits - 5 gems (packed).\n", false);
+	outputText("Trail Mix - 20 gems (packed).\n", false);
 	if(flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] > 0) {
 		outputText("\'Special\' Eclair - 10 gems.\n", false);
 		minoCum = createCallBackFunction2(nomnomnom, "eclair", 10);
@@ -97,6 +99,9 @@ private function checkBakeryMenu():void {
 	addButton(5,"SpecialEclair",minoCum);
 	addButton(6,"GiantCupcake",gcupcake);
 	addButton(8,"Ingredients",ingredientsMenu);
+	if(flags[kFLAGS.HUNGER_ENABLED] > 0)
+		addButton(10,"HardBiscuits", buyHardBiscuits, null, null, null, "This biscuits are tasteless, but can stay edible for an exceedingly long time.");
+	addButton(11,"TrailMix", buyTrailMix, null, null, null, "This mix of nuts, dried fruits and beries is lightweight, easy to store and very nutritious.");
 	addButton(14,"Leave",bakeryuuuuuu);
 }
 
@@ -278,6 +283,35 @@ private function buyFig():void {
 	inventory.takeItem(consumables.RINGFIG, ingredientsMenu);
 }
 
+private function buyHardBiscuits():void {
+	clearOutput();
+	if(player.gems < 5)
+	{
+		outputText("You can't afford one of those!");
+		menu();
+		addButton(0,"Next",ingredientsMenu);
+		return;
+	}
+	outputText("You pay five gems for a pack of hard biscuits.  ");
+	player.gems -= 5;
+	statScreenRefresh();
+	inventory.takeItem(consumables.H_BISCU, checkBakeryMenu);
+}
+
+private function buyTrailMix():void {
+	clearOutput();
+	if(player.gems < 20)
+	{
+		outputText("You can't afford one of those!");
+		menu();
+		addButton(0,"Next",ingredientsMenu);
+		return;
+	}
+	outputText("You pay twenty gems for a pack of trail mix.  ");
+	player.gems -= 20;
+	statScreenRefresh();
+	inventory.takeItem(consumables.TRAILMX, checkBakeryMenu);
+}
 
 private function talkBakeryMenu():void {
 	//choices("Brownies",createCallBackFunction2(nomnomnom, "brownies", 3),"Cookies",2831,"Cupcakes",2833,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5),"Pound Cake",createCallBackFunction2(nomnomnom, "pound cake", 4),"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,rubiT,rubiB,"Leave",telAdreMenu);

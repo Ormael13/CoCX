@@ -9640,5 +9640,17 @@
 		public function prisonCumStew(player:Player):void {
 			prison.prisonItemBread(true);
 		}
+		
+		public function hardBiscuits(player:Player):void {
+			outputText("You eat the flavorless biscuits. It satisfies your hunger, but not much else.");
+			player.refillHunger(20);
+		}
+		
+		public function trailMix(player:Player):void {
+			outputText("You eat the trail mix. You got energy boost from it!");
+			player.refillHunger(50);
+			fatigue(-20);
+			HPChange(Math.round(player.maxHP() * 0.15), true);
+		}
 	}
 }
