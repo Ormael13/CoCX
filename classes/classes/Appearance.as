@@ -1447,7 +1447,7 @@
 		}
 */
 
-		public static function vaginaDescript(i_creature:Creature, i_vaginaIndex:Number = 0):String
+		public static function vaginaDescript(i_creature:Creature, i_vaginaIndex:Number = 0, forceDesc:Boolean=false):String
 		{
 			if (i_vaginaIndex > (i_creature.vaginas.length - 1)) {
 				CoC_Settings.error("<B>Error: Invalid vagina number (" + i_vaginaIndex + ") passed to vaginaDescript()</b>");
@@ -1472,7 +1472,7 @@
 			if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 4 || i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 5) weighting = 10;
 
 			//tightness descript - 40% display rate
-			if (rand(100) + weighting > 60) {
+			if (forceDesc || rand(100) + weighting > 60) {
 				if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 0) {
 					if (i_creature.vaginas[i_vaginaIndex].virgin) description += "virgin";
 					else description += "tight";
@@ -1488,7 +1488,7 @@
 
 			}
 			//wetness descript - 30% display rate
-			if (rand(100) + weighting > 70) {
+			if (forceDesc || rand(100) + weighting > 70) {
 				if (description != "") description += ", ";
 				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 0)
 					description += "dry";
@@ -1503,7 +1503,7 @@
 				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 5)
 					description += "slavering";
 			}
-			if (i_creature.vaginas[i_vaginaIndex].labiaPierced > 0 && rand(3) == 0) {
+			if (i_creature.vaginas[i_vaginaIndex].labiaPierced > 0 && (forceDesc || rand(3) == 0)) {
 				if (description != "") description += ", ";
 				description += "pierced";
 			}
@@ -1515,7 +1515,7 @@
 				else
 					description += "slimy";
 			}
-			if (i_creature.vaginaType() == 5 && Math.floor(Math.random() * 2) == 0) {
+			if (i_creature.vaginaType() == 5 && (forceDesc || Math.floor(Math.random() * 2) == 0)) {
 				if (description != "") description += ", ";
 				options = ["black",
 					"onyx",
@@ -2034,7 +2034,7 @@
 			return description;
 		}
 
-		public static function assholeDescript(i_creature:Creature):String
+		public static function assholeDescript(i_creature:Creature, forceDesc:Boolean=false):String
 		{
 			var description:String = "";
 			
@@ -2052,7 +2052,7 @@
 			ANAL_WETNESS_DESCRIPTORS[ANAL_WETNESS_DROOLING] = "drooling ";
 			ANAL_WETNESS_DESCRIPTORS[ANAL_WETNESS_SLIME_DROOLING] = "slime-drooling ";
 			
-			if (rand(3) <= 1)
+			if (forceDesc || rand(3) <= 1)
 			{
 				description += ANAL_WETNESS_DESCRIPTORS[i_creature.ass.analWetness];
 			}
@@ -2066,7 +2066,7 @@
 			ANAL_TIGHTNESS_DESCRIPTORS[ANAL_LOOSENESS_GAPING] = "gaping ";
 			
 			//25% tightness description
-			if (rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) 
+			if (forceDesc || rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) 
 			{
 				description += ANAL_TIGHTNESS_DESCRIPTORS[i_creature.ass.analLooseness];
 			}

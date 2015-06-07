@@ -5,7 +5,7 @@ package classes
 {
 	import flash.utils.Dictionary;
 
-	public class PerkType
+	public class PerkType extends BaseContent
 	{
 		private static var PERK_LIBRARY:Dictionary = new Dictionary();
 

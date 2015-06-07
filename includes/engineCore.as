@@ -1,6 +1,5 @@
-﻿import classes.PerkClass;
+﻿import classes.*;
 import flash.text.TextFormat;
-import classes.MainViewHack;
 // // import flash.events.MouseEvent;
 // 
 // //const DOUBLE_ATTACK_STYLE:int = 867;
@@ -235,17 +234,22 @@ public function displayPerks(e:MouseEvent = null):void {
 		temp++;
 	}
 	menu();
+	var button:int = 0;
+	addButton(button++, "Next", playerMenu);
 	if(player.perkPoints > 0) {
 		outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point", false);
 		if(player.perkPoints > 1) outputText("s", false);
 		outputText(" to spend.</b>", false);
-		addButton(1, "Perk Up", perkBuyMenu);
+		addButton(button++, "Perk Up", perkBuyMenu);
 	}
 	if(player.findPerk(PerkLib.DoubleAttack) >= 0) {
 		outputText("\n<b>You can adjust your double attack settings.</b>");
-		addButton(2,"Dbl Options",doubleAttackOptions);
+		addButton(button++,"Dbl Options",doubleAttackOptions);
 	}
-	addButton(0, "Next", playerMenu);
+	if(player.findPerk(PerkLib.Metamorph) >= 0 || kGAMECLASS.debug) {
+		outputText("\n<b>You can change your body.</b>");
+		addButton(button++,"Metamorph",PerkLib.Metamorph.metamorphOptions);
+	}
 }
 
 public function doubleAttackOptions():void {
