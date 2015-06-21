@@ -27,19 +27,33 @@ package classes.Items
 		public const PSDELIT:SimpleConsumable = mk("PSDelit","PSDelit", "an untainted bottle of \"Succubi's Delight\"", curry(m.succubisDelight, false),  "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.", 20);
 		
 		//DYES
-		public const AUBURND:SimpleConsumable = mk("AuburnD","AuburnD", "a vial of auburn hair dye", curry(m.hairDye, "auburn"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const BLACK_D:SimpleConsumable = mk("Black D","Black D", "a vial of black hair dye", curry(m.hairDye, "black"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const BLOND_D:SimpleConsumable = mk("Blond D","Blond D", "a vial of blonde hair dye", curry(m.hairDye, "blonde"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const BLUEDYE:SimpleConsumable = mk("BlueDye","BlueDye", "a vial of blue hair dye", curry(m.hairDye, "dark blue"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const BROWN_D:SimpleConsumable = mk("Brown D","Brown D", "a vial of brown hair dye", curry(m.hairDye, "brown"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const GRAYDYE:SimpleConsumable = mk("GrayDye","GrayDye", "a vial of gray hair dye", curry(m.hairDye, "gray"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const GREEN_D:SimpleConsumable = mk("Green D","Green D", "a vial of green hair dye", curry(m.hairDye, "green"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const ORANGDY:SimpleConsumable = mk("OrangDy","OrangDy", "a vial of brilliant orange hair dye", curry(m.hairDye, "bright orange"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const PINKDYE:SimpleConsumable = mk("PinkDye","PinkDye", "a vial of bright pink hair dye", curry(m.hairDye, "neon pink"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const PURPDYE:SimpleConsumable = mk("PurpDye","PurpDye", "a vial of purple hair dye", curry(m.hairDye, "purple"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const RAINDYE:SimpleConsumable = mk("RainDye","RainDye", "a vial of rainbow hair dye", curry(m.hairDye, "rainbow"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.", 1000);
+		public const AUBURND:SimpleConsumable = mk("AuburnD","Auburn Dye", "a vial of auburn hair dye", curry(m.hairDye, "auburn"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const BLACK_D:SimpleConsumable = mk("Black D","Black Dye", "a vial of black hair dye", curry(m.hairDye, "black"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const BLOND_D:SimpleConsumable = mk("Blond D","Blond Dye", "a vial of blonde hair dye", curry(m.hairDye, "blonde"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const BLUEDYE:SimpleConsumable = mk("BlueDye","Blue Dye", "a vial of blue hair dye", curry(m.hairDye, "dark blue"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const BROWN_D:SimpleConsumable = mk("Brown D","Brown Dye", "a vial of brown hair dye", curry(m.hairDye, "brown"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const GRAYDYE:SimpleConsumable = mk("GrayDye","Gray Dye", "a vial of gray hair dye", curry(m.hairDye, "gray"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const GREEN_D:SimpleConsumable = mk("Green D","Green Dye", "a vial of green hair dye", curry(m.hairDye, "green"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const ORANGDY:SimpleConsumable = mk("OrangDy","Orange Dye", "a vial of brilliant orange hair dye", curry(m.hairDye, "bright orange"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const PINKDYE:SimpleConsumable = mk("PinkDye","Pink Dye", "a vial of bright pink hair dye", curry(m.hairDye, "neon pink"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const PURPDYE:SimpleConsumable = mk("PurpDye","Purple Dye", "a vial of purple hair dye", curry(m.hairDye, "purple"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const RAINDYE:SimpleConsumable = mk("RainDye","Rainbow Dye", "a vial of rainbow hair dye", curry(m.hairDye, "rainbow"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.", 1000);
 		public const RED_DYE:SimpleConsumable = mk("Red Dye","Red Dye", "a vial of red hair dye", curry(m.hairDye, "red"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const WHITEDY:SimpleConsumable = mk("WhiteDy","WhiteDy", "a vial of white hair dye", curry(m.hairDye, "white"), "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const WHITEDY:SimpleConsumable = mk("WhiteDy","White Dye", "a vial of white hair dye", curry(m.hairDye, "white"), "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		
+		//SKIN OILS & BODY LOTIONS
+		public const DARK_OL:SkinOil = new SkinOil("DarkOil", "Dark");
+		public const EBONYOL:SkinOil = new SkinOil("EbonyOl", "Ebony");
+		public const FAIR_OL:SkinOil = new SkinOil("FairOil", "Fair");
+		public const LIGHTOL:SkinOil = new SkinOil("LightOl", "Light");
+		public const MAHOGOL:SkinOil = new SkinOil("MahogOl", "Mahogany");
+		public const OLIVEOL:SkinOil = new SkinOil("OliveOl", "Olive");
+		public const RUSS_OL:SkinOil = new SkinOil("RussOil", "Russet");
+		
+		public const CLEARLN:BodyLotion = new BodyLotion("ClearLn", "Clear", "smooth thick creamy liquid");
+		public const ROUGHLN:BodyLotion = new BodyLotion("RoughLn", "Rough", "thick abrasive cream");
+		public const SEXY_LN:BodyLotion = new BodyLotion("SexyLtn", "Sexy", "pretty cream like substance");
+		public const SMTH_LN:BodyLotion = new BodyLotion("SmthLtn", "Smooth", "smooth thick creamy liquid");
 		
 		//EGGS
 		//Small

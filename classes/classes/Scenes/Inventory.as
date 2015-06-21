@@ -167,6 +167,13 @@ package classes.Scenes
 				if (armorRackDescription()) addButton(6, "A.Rack Take", pickItemToTakeFromArmorRack);
 				outputText("\n\n");
 			}
+			//Shield Rack
+			if(player.hasKeyItem("Equipment Rack - Shields") >= 0) {
+				outputText("There's a shield rack set up here, set up to hold up to nine various shields.");
+				addButton(7, "S.Rack Put", pickItemToPlaceInShieldRack);
+				if (shieldRackDescription()) addButton(8, "S.Rack Take", pickItemToTakeFromShieldRack);
+				outputText("\n\n");
+			}
 			//Jewelry box
 			if(player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
 				outputText("Your jewelry box is located ");
@@ -180,15 +187,15 @@ package classes.Scenes
 					}
 				}
 				else outputText("next to your bedroll.");	
-				addButton(7, "J.Box Put", inventory.pickItemToPlaceInJewelryBox);
-				if (inventory.jewelryBoxDescription()) addButton(8, "J.Box Take", inventory.pickItemToTakeFromJewelryBox);
+				addButton(10, "J.Box Put", inventory.pickItemToPlaceInJewelryBox);
+				if (inventory.jewelryBoxDescription()) addButton(11, "J.Box Take", inventory.pickItemToTakeFromJewelryBox);
 				outputText("\n\n", false);
 			}
 			//Dresser
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0) {
 				outputText("You have a dresser inside your cabin to store nine different types of undergarments.");
-				addButton(10, "Dresser Put", inventory.pickItemToPlaceInDresser);
-				if (inventory.dresserDescription()) addButton(11, "Dresser Take", inventory.pickItemToTakeFromDresser);
+				addButton(12, "Dresser Put", inventory.pickItemToPlaceInDresser);
+				if (inventory.dresserDescription()) addButton(13, "Dresser Take", inventory.pickItemToTakeFromDresser);
 				outputText("\n\n");
 			}
 			addButton(14, "Back", playerMenu);
@@ -506,6 +513,17 @@ package classes.Scenes
 			return false;
 		}
 		
+		public function shieldRackDescription():Boolean {
+			if (itemAnyInStorage(gearStorage, 36, 45)) {
+				var itemList:Array = [];
+				for (var x:int = 36; x < 45; x++)
+					if (gearStorage[x].quantity > 0) itemList[itemList.length] = gearStorage[x].itype.longName;
+				outputText("  It currently holds " + formatStringArray(itemList) + ".");
+				return true;
+			}
+			return false;
+		}
+		
 		public function jewelryBoxDescription():Boolean {
 			if (itemAnyInStorage(gearStorage, 18, 27)) {
 				var itemList:Array = [];
@@ -603,6 +621,12 @@ package classes.Scenes
 			takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
 		}
 
+		//Pick item to take from storage
+		private function pickItemToTakeFromShieldRack():void {
+			callNext = pickItemToTakeFromShieldRack;
+			pickItemToTakeFromStorage(gearStorage, 36, 45, "rack");
+		}
+		
 		private function pickItemToTakeFromArmorRack():void {
 			callNext = pickItemToTakeFromArmorRack;
 			pickItemToTakeFromStorage(gearStorage, 9, 18, "rack");
@@ -646,26 +670,33 @@ package classes.Scenes
 			inventory.takeItem(itype, callNext, callNext, storage[slotNum]);
 		}
 		
+		//Pick items to place in storage
 		private function pickItemToPlaceInCampStorage():void { pickItemToPlaceInStorage(placeInCampStorage, allAcceptable, "storage containers", false); }
 		
 		private function pickItemToPlaceInArmorRack():void { pickItemToPlaceInStorage(placeInArmorRack, armorAcceptable, "armor rack", true); }
 		
 		private function pickItemToPlaceInWeaponRack():void { pickItemToPlaceInStorage(placeInWeaponRack, weaponAcceptable, "weapon rack", true); }
+
+		private function pickItemToPlaceInShieldRack():void { pickItemToPlaceInStorage(placeInShieldRack, shieldAcceptable, "shield rack", true); }
 		
 		public function pickItemToPlaceInJewelryBox():void { pickItemToPlaceInStorage(placeInJewelryBox, jewelryAcceptable, "jewelry box", true); }
 		
 		public function pickItemToPlaceInDresser():void { pickItemToPlaceInStorage(placeInDresser, undergarmentAcceptable, "dresser", true); }
 		
+		//Acceptable type of items
 		private function allAcceptable(itype:ItemType):Boolean { return true; }
 		
 		private function armorAcceptable(itype:ItemType):Boolean { return itype is Armor; }
 		
 		private function weaponAcceptable(itype:ItemType):Boolean { return itype is Weapon; }
+
+		private function shieldAcceptable(itype:ItemType):Boolean { return itype is Shield; }
 		
 		private function jewelryAcceptable(itype:ItemType):Boolean { return itype is Jewelry; }
 		
 		private function undergarmentAcceptable(itype:ItemType):Boolean { return itype is Undergarment; }
 		
+		//Place in storage functions
 		private function pickItemToPlaceInStorage(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean):void {
 			clearOutput(); //Selects an item to place in a gear slot. Rewritten so that it no longer needs to use numbered events
 			hideUpDown();
@@ -678,7 +709,7 @@ package classes.Scenes
 					foundItem = true;
 				}
 			}
-			if (showEmptyWarning && !foundItem) outputText("\n<b>You have no appropriate items to put in this rack.</b>");
+			if (showEmptyWarning && !foundItem) outputText("\n<b>You have no appropriate items to put in this " + text + ".</b>");
 			addButton(14, "Back", stash);
 		}
 		
@@ -695,6 +726,11 @@ package classes.Scenes
 		private function placeInWeaponRack(slotNum:int):void {
 			placeIn(gearStorage, 0, 9, slotNum);
 			doNext(pickItemToPlaceInWeaponRack);
+		}
+		
+		private function placeInShieldRack(slotNum:int):void {
+			placeIn(gearStorage, 36, 45, slotNum);
+			doNext(pickItemToPlaceInShieldRack);
 		}
 		
 		private function placeInJewelryBox(slotNum:int):void {

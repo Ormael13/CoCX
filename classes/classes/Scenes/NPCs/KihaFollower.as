@@ -844,6 +844,10 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
 			addButton(3, "Sex", kihaSexMenu, null, null, null, "Initiate sex session with Kiha.");
 			addButton(4, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
+				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", kihaDestroyGladesToggle, null, null, null, "Request Kiha to destroy any corrupted glades she can find.");
+				else addButton(7, "Stop Destroying", kihaDestroyGladesToggle, null, null, null, "Request Kiha to stop destroying the corrupted glades.");
+			}
 			if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha, null, null, null, "Request her to stop guarding.");
 			else addButton(8,"Guard Camp",guardMyCampKiha, null, null, null, "Request her to guard your camp.");
 			if (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0 && (player.hasItem(undergarments.SSPANTY) || player.hasItem(undergarments.SS_LOIN))) addButton(6, "Give Underwear", giveKihaUndergarmentsPrompt, null, null, null, "Give Kiha something to wear to conceal her nether regions?");
@@ -1998,6 +2002,21 @@ internal function pcWinsDomFight():void {
 	outputText("[pg]Kiha nods, as best she can with her head pinned, and then she grins.  \"<i>Dominance isn't something you do once and get forever, [name].  If you want to stay on top with me, you'd better back it up with your actions.  It takes more than a few losses to make me ANYONE's bitch.</i>\"  Well, that's probably as good as you'll get out of her for now.  You suggest heading back to camp; no doubt there's some demons needing feet up their asses.  Kiha replies, \"<i>Sounds like a good idea, [master].</i>\"  There's an undercurrent of humor in her words, but she's the one who couldn't handle you in a fight.");
 	player.orgasm();
 	cleanupAfterCombat();
+}
+
+private function kihaDestroyGladesToggle():void {
+	clearOutput();
+	if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] == 0) {
+		outputText("You ask Kiha if she's willing put her fire breath to use and cleanse the forest of the foul glades. After all, the forest could be cleansed.");
+		outputText("\n\n\"<i>I will, my doofus,</i>\" Kiha says. She grins and exhales a fire for emphasis.");
+		flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] = 1;
+	}
+	else {
+		outputText("You tell Kiha that she doesn't have to destroy the foul glades in the forest.");
+		outputText("\n\n\"<i>If you insist, my doofus. They'll come back though,</i>\" Kiha says.");
+		flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] = 0;
+	}
+	doNext(warmLoverKihaIntro);
 }
 
 private function guardMyCampKiha():void {

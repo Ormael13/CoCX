@@ -736,13 +736,22 @@ private function doCamp():void { //Only called by playerMenu
 		removeButton(0); //Explore
 		removeButton(1); //Places
 	}
+	//Update saves
+	if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0 && player.hasKeyItem("Golden Antlers") >= 0) {
+		clearOutput();
+		outputText("Out of nowhere, a cane appears on your " + bedDesc() + ". It looks like it once belonged to the Erlking. Perhaps the cane has been introduced into the game and you've committed a revenge on the Erlking? Regardless, you take it anyway. ");
+		flags[kFLAGS.ERLKING_CANE_OBTAINED] = 1;
+		inventory.takeItem(weapons.HNTCANE, doCamp);
+		return;
+	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] < kGAMECLASS.modSaveVersion) {
 		promptSaveUpdate();
+		return;
 	}
-	
 	//Massive Balls Bad End (Realistic Mode only)
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
 		badEndGIANTBALLZ();
+		return;
 	}
 	//Hunger Bad End
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0)
@@ -751,12 +760,14 @@ private function doCamp():void { //Only called by playerMenu
 		if (player.HP <= 0 && (player.str + player.tou) < 30)
 		{
 			badEndHunger();
+			return;
 		}
 	}
 	//Min Lust Bad End (Must not have any removable/temporary min lust.)
 	if (player.minLust() >= player.maxLust() && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.findStatusAffect(StatusAffects.BimboChampagne) >= 0 && !player.findStatusAffect(StatusAffects.Luststick) >= 0 && player.jewelryEffectId != 1)
 	{
 		badEndMinLust();
+		return;
 	}
 }
 	
@@ -2067,11 +2078,19 @@ private function buildCampWallPrompt():void {
 
 private function buildCampWall():void {
 	var helpers:int = 0;
-	var temp:int = 0;
-	if (marbleFollower()) helpers++;
-	if (followerHel()) helpers++;
-	if (followerKiha()) helpers++;
-	temp = helpers;
+	var helperArray:Array = [];
+	if (marbleFollower()) {
+		helperArray[helperArray.length] = "Marble"
+		helpers++;
+	}
+	if (followerHel()) {
+		helperArray[helperArray.length] = "Helia"
+		helpers++;
+	}
+	if (followerKiha()) {
+		helperArray[helperArray.length] = "Kiha"
+		helpers++;
+	}
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
 	player.addKeyValue("Carpenter's Toolbox", 1, -200);
 	clearOutput();
@@ -2085,25 +2104,7 @@ private function buildCampWall():void {
 	}
 	outputText("\n\nYou dig four holes, six inches deep and one foot wide each, before putting up wood posts, twelve feet high and one foot thick each. You take the wood from supplies, saw the wood and cut them into planks before nailing them to the wooden posts.");
 	if (helpers > 0) {
-		outputText("\n\n");
-		if (marbleFollower()) {
-			outputText("Marble");
-			if (temp >= 2) outputText(", ");
-			else if (temp == 1) outputText(", and ");
-			temp--;
-		}
-		if (followerHel()) {
-			outputText("Helia");
-			if (temp >= 2) outputText(", ");
-			else if (temp == 1) outputText(", and ");
-			temp--;
-		}
-		if (followerKiha()) {
-			outputText("Kiha");
-			if (temp >= 2) outputText(", ");
-			else if (temp == 1) outputText(", and ");
-			temp--;
-		}
+		outputText("\n\n" + formatStringArray(helperArray));
 		outputText(" " + (helpers == 1 ? "assists" : "assist") + " you with building the wall, helping to speed up the process and make construction less fatiguing.");
 	}
 	//Gain fatigue.

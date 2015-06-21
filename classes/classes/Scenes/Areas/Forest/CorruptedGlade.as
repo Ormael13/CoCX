@@ -9,13 +9,19 @@ package classes.Scenes.Areas.Forest {
 		}
 		
 		public function timeChange():Boolean {
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 1 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) { //Extinct if you destroyed 100 Corrupted Glades.
+				if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] > 0 && rand(6) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
+				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] > 0 && rand(4) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
+				if (model.time.days % 3 == 0 && model.time.hours > 23) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]--; //Decrement by 1 every 3 days.
+			}
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 100) { //Extinct state
+				if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] > 0) flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] = 0;
+				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] > 0) flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] = 0;
+			}
 			return false;
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 1 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) { //Extinct if you destroyed 100 Corrupted Glades.
-				flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]--;
-			}
 			return false;
 		}
 		
@@ -303,23 +309,24 @@ package classes.Scenes.Areas.Forest {
 		}
 		
 		private function destroyTheCorruptedGlades(choice:int):void {
+			var destroyAmount:int = 0;
 			clearOutput();
 			outputText("That's it. Those fucking glades must die!\n\n");
 			//Fire abilities
 			switch(choice) {
 				case 0: //Fire breath
 					outputText("You charge the fire within you and as soon as you build it up enough, you unleash it on the glade, lighting them on fire. By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
-					flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
+					destroyAmount++;
 					fatigue(20, 1);
 					break;
 				case 1: //Nine tails foxfire
 					outputText("Holding out your palm, you conjure a flame that dances across your fingertips.  You launch it at the glade with a ferocious throw, and it bursts on impact, setting the glade on fire. By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
-					flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
+					destroyAmount++;
 					fatigue(20, 1);
 					break;
 				case 2: //Whitefire
 					outputText("You narrow your eyes, focusing your mind with deadly intent. You snap your fingers and the glade is enveloped in a flash of white flames! By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
-					flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
+					destroyAmount++;
 					fatigue(20, 1);
 					break;
 				case 3: //Axe
@@ -356,7 +363,8 @@ package classes.Scenes.Areas.Forest {
 			else outputText("Once again, the forest is cleansed of a tainted glade.");
 			
 			dynStats("cor", -1);
-			flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
+			destroyAmount++;
+			flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] += destroyAmount;
 			//Milestone events
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 25) outputText("\n\nYou have a feeling you'll see the glades somewhat less often.");
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 50) outputText("\n\nYou have a feeling you'll see the glades less often.");

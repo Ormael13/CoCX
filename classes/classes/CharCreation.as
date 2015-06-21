@@ -673,9 +673,12 @@
 			outputText("What is your complexion?");
 			menu();
 			addButton(0, "Light", setComplexion, "light");
-			addButton(1, "Olive", setComplexion, "olive");
-			addButton(2, "Dark", setComplexion, "dark");
-			addButton(3, "Ebony", setComplexion, "ebony");
+			addButton(1, "Fair", setComplexion, "fair");
+			addButton(2, "Olive", setComplexion, "olive");
+			addButton(3, "Dark", setComplexion, "dark");
+			addButton(4, "Ebony", setComplexion, "ebony");
+			addButton(5, "Mahogany", setComplexion, "mahogany");
+			addButton(6, "Russet", setComplexion, "russet");
 		}
 
 		private function setComplexion(choice:String):void { //And choose hair
@@ -739,9 +742,12 @@
 			outputText("What is your complexion?", true);
 			menu();
 			addButton(0, "Light", confirmComplexion, "light");
-			addButton(1, "Olive", confirmComplexion, "olive");
-			addButton(2, "Dark", confirmComplexion, "dark");
-			addButton(3, "Ebony", confirmComplexion, "ebony");
+			addButton(1, "Fair", confirmComplexion, "fair");
+			addButton(2, "Olive", confirmComplexion, "olive");
+			addButton(3, "Dark", confirmComplexion, "dark");
+			addButton(4, "Ebony", confirmComplexion, "ebony");
+			addButton(5, "Mahogany", confirmComplexion, "mahogany");
+			addButton(6, "Russet", confirmComplexion, "russet");
 			addButton(14, "Back", genericStyleCustomizeMenu);
 		}	
 		private function confirmComplexion(complexion:String):void {

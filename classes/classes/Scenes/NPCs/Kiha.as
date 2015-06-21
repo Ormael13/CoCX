@@ -88,7 +88,7 @@ package classes.Scenes.NPCs
 				outputText("Using your cat-like flexibility, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
 			}
 			else {
-				var damage:Number = Math.round(90 + rand(10));
+				var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
 				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. ", false);
 				damage = player.takeDamage(damage, true);
 				outputText("\n");

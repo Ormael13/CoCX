@@ -30,7 +30,18 @@ public class Shield extends Useable //Equipable
 		public function get perk():String { return _perk; }
 		
 		public function get name():String { return _name; }
-
+		
+		override public function get description():String {
+			var desc:String = _description;
+			//Type
+			desc += "\n\nType: Shield";
+			//Block Rating
+			desc += "\nBlock: " + String(block);
+			//Value
+			desc += "\nBase value: " + String(value);
+			return desc;
+		}
+		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
 		}

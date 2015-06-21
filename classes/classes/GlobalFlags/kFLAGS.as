@@ -2228,10 +2228,10 @@ public static const ISABELLA_CHILDREN_COWGIRL_HERMS:int                         
 public static const ISABELLA_VALERIA_SPARRED:int                                    = 2220;
 public static const FAERIE_ENCOUNTER_DISABLED:int                                   = 2221;
 public static const MINERVA_CORRUPTED_CUM_ADDICTION:int                             = 2222;
-public static const UNKNOWN_FLAG_NUMBER_02223:int                                   = 2223;
-public static const UNKNOWN_FLAG_NUMBER_02224:int                                   = 2224;
-public static const UNKNOWN_FLAG_NUMBER_02225:int                                   = 2225;
-public static const UNKNOWN_FLAG_NUMBER_02226:int                                   = 2226;
+public static const ERLKING_CANE_OBTAINED:int                                       = 2223;
+public static const ERLKING_CANE_ATTACK_COUNTER:int                                 = 2224; //After 10, has a chance to break.
+public static const KIHA_DESTROYING_CORRUPTED_GLADES:int                            = 2225; //1 if Kiha is currently destroying corrupted glades.
+public static const AMILY_DESTROYING_CORRUPTED_GLADES:int                           = 2226; //1 if Amily is currently destroying corrupted glades.
 public static const UNKNOWN_FLAG_NUMBER_02227:int                                   = 2227;
 public static const UNKNOWN_FLAG_NUMBER_02228:int                                   = 2228;
 public static const UNKNOWN_FLAG_NUMBER_02229:int                                   = 2229;

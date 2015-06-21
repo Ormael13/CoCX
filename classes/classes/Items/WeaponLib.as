@@ -21,7 +21,8 @@ package classes.Items
 		public const FLAIL  :Weapon = new Weapon("Flail  ","Flail","flail","a flail","smash",10,200,"This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.");
 		public const FLINTLK:Weapon = new Weapon("Flintlk","Flintlock","flintlock pistol","a flintlock pistol","shot",14,250,"A flintlock pistol. Pew pew pew. Can fire four times before a reload is required and Speed has a factor in damage.", "Ranged");
 		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",11,10,"Urta's halberd. How did you manage to get this?","Large");
-		public const H_GAUNT:Weapon = new Weapon("H.Gaunt","H.Gaunt","hooked gauntlets","a set of hooked gauntlets","clawing punch",8,300,"These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
+		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 8, 300, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.");
+		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
 		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",10,500,"A curved bladed weapon that cuts through flesh with the greatest of ease.");
 		public const KIHAAXE:Weapon = new Weapon("KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",20,1000,"This large, double-bladed axe matches Kiha's axe. It's constantly flaming.", "Large");

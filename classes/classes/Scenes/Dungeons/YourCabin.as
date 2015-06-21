@@ -245,8 +245,7 @@ package classes.Scenes.Dungeons
 		private function constructFurnitureNightstandPrompt():void {
 			clearOutput();
 			outputText("Would you like to construct a nightstand? (Cost: 20 nails and 10 wood.)\n\n");
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100\n");
-			outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200 \n");
+			camp.cabinProgress.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox"))
 			{
 				if (player.keyItemv1("Carpenter's Toolbox") >= 20 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10)

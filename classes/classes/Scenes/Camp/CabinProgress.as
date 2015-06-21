@@ -18,7 +18,7 @@ package classes.Scenes.Camp
 	public class CabinProgress extends BaseContent {
 		
 		public var maxNailSupply:int = 200;
-		public var maxWoodSupply:int = 100;
+		public var maxWoodSupply:int = 999;
 		
 		public function CabinProgress() {
 			
@@ -235,7 +235,7 @@ package classes.Scenes.Camp
 		}
 		
 		public function checkMaterials():void {
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + maxWoodSupply + "\n");
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "\n");
 			outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/" + maxNailSupply + " \n");
 		}
 		
