@@ -2383,7 +2383,7 @@ private function giveKatDefurFormula():void {
 		outputText("Kath’s mouth falls open and puts a hand to her chest.  “<i>You want me to change what I am?</i>”  You nod.\n\n");
 		outputText("She asks, “<i>But " + playerText() + ", I know you like me the way I am, otherwise why do you keep coming back?</i>”  You tell her you do enjoy every minute you spend with her, but this could make things even better.\n\n");
 		outputText("Tears well up in the corners of Kath’s eyes.  “<i>I love you and I never asked you to change into a cat, even though I’ve heard humans can do that sort of thing.</i>”  You ask her how many humans she’s run into in Tel’Adre?  Every day you see goblins, imps, bees, canines, cats, centaurs, equines... the list goes on.  But how often do you see anything that reminds you of your village and the world you came from?\n\n");
-		outputText("Kath wipes away her tears.  “<i>I never thought of it like that.  Well... I guess I can do it for you.  If I start reminding you of home then that will make me feel special.</i>”");
+		outputText("Kath wipes away her tears.  “<i>I never thought of it like that.  Well... I guess I can do it for you.  If I start reminding you of home then that will make me feel special.</i>”  ");
 		if (player.cor < 25)
 			outputText("Now you have to wipe away some tears.  You’re so happy that Katherine is willing to do this for you.  You know you’re going to have to find ways to make it up to her.");
 		else if (player.cor < 75)
@@ -2465,7 +2465,7 @@ private function giveKatAKnottyPepper():void {
 				flags[kFLAGS.KATHERINE_DICK_FORM] = 0;
 			}
 			outputText("\n\nIt takes almost a minute before Kath’s knot" + cockMultiple(" reacts", "s react") + " to the pepper.  When the change comes it happens quickly - her knot" + cockMultiple(" just inflates", "s just inflate") + " without any fanfare, gaining a few inches.\n\n");
-			outputText("Kath watches it happen almost without any reaction.  You would guess she’s eaten so many her body has developed a resistance to the effects.  Apart from the knot" + cockMultiple(", which is slowly shrinking, the only indication that she just ate a magic imbued pepper is her rock solid erection.", "s, which are slowly shrinking, the only indications that she just ate a magic imbued pepper are her rock solid twin erections."));
+			outputText("Kath watches it happen almost without any reaction.  You would guess she’s eaten so many her body has developed a resistance to the effects.  Apart from the knot" + cockMultiple(", which is throbbing slowly, the only indication that she just ate a magic imbued pepper is her rock solid erection.", "s, which are throbbing slowly, the only indications that she just ate a magic imbued pepper are her rock solid twin erections."));
 			knotSize += 2;
 			if (knotSize > 6) knotSize = 6;
 			addSubmissive(KBIT_SUB_GROW_KNOT); //Have regrown her knot to full size at least once
@@ -3125,9 +3125,12 @@ private function giveKatDyeWhite():void {
 }
 
 //Sex
-private function katherineSex():void {
+public function katherineSex():void {
 	clearOutput();
-	if (isAt(KLOC_BAR)) {
+	if (getGame().urta.drainedByKath) {
+			outputText("There are certainly a few things you can think to do with your horny kitten, especially after that display, so you lead her toward the rear exit.  Katherine paws at your belt, but you keep her under control until you're both out of sight of the other patrons.  You give Kath a quick kiss and realize you have only a moment to decide what you want to do with her before she takes matters into her own hands.");
+	}
+	else if (isAt(KLOC_BAR)) {
 		outputText("You ask Kath if she’s in the mood to have a little fun.\n\n");
 		outputText("“<i>What ever could you mean by that " + playerText() + "?</i>” she asks playfully.\n\n");
 		outputText("You point out that there’s an alleyway behind the bar.  If she needed a refresher course on catching miscreants you could give her a hand." + (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10 ? "  You glance over at Urta’s table and add that maybe you could go and talk to captain Urta about improper procedures." : "") + "\n\n");
@@ -3170,12 +3173,13 @@ private function katSexMenu():void {
 		var seeVala:Function = null;
 		var backOpt:Function = katherineMenu;
 		if (isAt(KLOC_BAR)) { //Check to see if her partners are comfortable fucking her sober
-			if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10 && getGame().urta.urtaAtBar()) seeUrta = katherineSeeUrta;
+			if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10 && getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex()) seeUrta = katherineSeeUrta;
 			if (flags[kFLAGS.KATHERINE_VALA_AFFECTION] > 10 && getGame().isValaAtBar()) seeVala = katherineSeeVala;
 		}
 		else if (isAt(KLOC_BAR_DRUNK)) {
-			if (getGame().urta.urtaAtBar()) seeUrta = katherineDrunkSeeUrta; //Different conversation if Kath is sloshed
-			if (getGame().isValaAtBar()) seeVala = katherineSeeVala;
+			suckle = null; //If she's drunk she wants sex, not suckling
+			if (getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex() && !getGame().urta.drainedByKath) seeUrta = katherineDrunkSeeUrta; //Different conversation if Kath is sloshed
+			if (getGame().isValaAtBar() && !getGame().urta.drainedByKath) seeVala = katherineSeeVala;
 			backOpt = null; //Kath won't take no for an answer if she's sauced
 		}
 		else if (isAt(KLOC_BAR_URTA_REFUSED)) {
@@ -5145,7 +5149,7 @@ public function handjobbiesFurrDemCatFurries():void
 	if (player.cor < 25) outputText("slowly caress her tender breasts");
 	else if (player.cor < 75) outputText("tease her lovely breasts");
 	else outputText("roughly manhandle her knockers");
-	if (breasts.milkIsFull()) outputText(".  Your fingers are soon coated in her cream and you offer them to Kath, who eagerly licks them clean");
+	if (flags[kFLAGS.KATHERINE_UNLOCKED] > 0 && breasts.milkIsFull()) outputText(".  Your fingers are soon coated in her cream and you offer them to Kath, who eagerly licks them clean");
 	outputText(".  Her tail, trapped between your body and hers, flicks back and forth");
 	if (player.hasCock()) outputText(", causing your " + player.multiCockDescriptLight() + " to rise to the occasion.");
 	else if (player.hasVagina()) outputText(", teasing your hot little slit.");

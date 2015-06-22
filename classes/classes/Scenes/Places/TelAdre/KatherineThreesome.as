@@ -115,6 +115,7 @@
 			player.orgasm();
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(false);
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3) {
@@ -180,6 +181,7 @@
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(false);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
@@ -285,6 +287,7 @@
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(false);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
@@ -348,6 +351,7 @@
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(false);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
@@ -436,6 +440,7 @@
 			outputText("Kath laughs and continues to gently fuck Urta.  You pull off Urta’s cock and wait for her massive load to finish gushing from your " + (player.hasVagina() ? "pussy" : "ass") + " before putting on your clothes.  Before you leave you give Urta a kiss and squeeze her belly a little.  Her only reply is to moan.  You tell Kath to take good care of Urta and then leave.  You know that if you stay much longer their display will get you excited enough that you’d stay around all afternoon and unfortunately you’ve got things you need to do.\n\n");
 			player.orgasm();
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 8 + rand(2);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -482,6 +487,7 @@
 			outputText("You pull out of Kath and give her a pat on the back.  You tell Urta that there are two ways to shrink " + katherine.cockMultiple("that knot", "those knots") + " and it’s up to them to decide which to use.  Kath looks tired, but her tail wags back and forth.  Urta just groans and says, “<i>I can’t, I’m so full.</i>”\n\n");
 
 			outputText("You lock the door on the way out, " + (flags[kFLAGS.KATHERINE_URTA_AFFECTION] >= 31 ? "knowing that with those two the sex option will eventually win out." : "hoping your sated girlfriends will bond over this."));
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -541,6 +547,7 @@
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			dynStats("lus", 20 + player.lib / 20);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
@@ -548,13 +555,22 @@
 
 		public function kathLicksOutUrta():void { //Kath is drunk, Urta is sober
 			clearOutput();
-			outputText("<b>UNFINISHED</b> Everyone make sure to give IndirectOne a hard time until he gets this done.");
-			
-			player.orgasm();
-			katherine.orgasm();
+			outputText("Kath begins to twitch and pant as Urta plays with her ears, which leads her to start stroking Urta's tail.  Pretty soon a deep 'thunk' from beneath the table lets you know how much Urta appreciates the attention.  There's no need to get involved, so you smile at Urta and lean back.  You can have fun with either of them later and right now you're content to watch and see what develops as the " + (katherine.hasCock() ? "herms" : "girls") + " get more and more aroused.\n\n");
+			outputText("The show gets underway when Urta lets go long enough to shift in her seat.  Apparently her cock was getting stiff enough to make her position uncomfortable.  Kath blinks out of her slightly dazed state and gives you an evil grin.  Before Urta can notice or react Kath ducks under the table and Urta's eyes go wide.  Her hands snap to her chair, holding her steady as you hear sounds of wet fabric sliding from below.\n\n");
+			outputText("\"<i>Oh - oh yeah - that's a good kitty, you want to take care of my cock?</i>\" moans Urta, throwing her head back.\n\n");
+			outputText("From under the table you hear Kath's reply, \"<i>Mmmmm, nope!</i>\" and then a snicker.  A thin black tail whips back and forth in front of you, brushing against your waist.  Urta wraps her fingers more tightly around the edge of her chair and bites her lip.  Whatever Kath's doing it's certainly making Urta feel good.\n\n");
+			outputText("You lean down to see for yourself.  Kath is ignoring Urta's cock completely.  She's pulled Urta's panties down and her face is buried in Urta's snatch.  Urta's horsecock is still covered and is straining against the underside of the table.  You sit back up and meet Urta's eyes, now filled with lust, and ask her innocently where all her cum will go when she climaxes.\n\n");
+			outputText("Urta shakes her head and tries to clear the lusty haze long enough to do something about it.  She fumbles with a condom, but drops the packet on the ground as Katherine does something naughty.  In an embarrassed whisper Urta tells her, \"<i>Just... just put a condom on me.  Please Kath.  I'll spray everywhere.</i>\"\n\n");
+			outputText("The only reply from beneath the table is a long, low, \"<i>Mmmmmmmm</i>\".  Urta's jaw snaps shut and her eyes cross.  She gives up all thoughts of stopping Kath and instead her hands move to her lap, quite obviously pulling the sexy kitten's head against her groin.\n\n");
+			outputText("Urta lasts longer than you expected, but she can't resist Kath's silver tongue forever.  She gasps and you hear a wet splattering noise from the table.  It goes on and on as Urta's balls release her pent up load.  Most of the bar is looking her way but Urta doesn't notice.  She convulses again and again as Kath's tongue tries to reach even deeper.  At last it ends and, to the sound of her sperm dripping onto the floor, Urta mumbles, \"<i>lovely.</i>\"\n\n");
+			outputText("Kath snakes back up from under the table, her whole head wet with spunk.  She works quickly to clean herself up using her tongue and some napkins, then looks at Urta.  \"<i>Awww, I think I broke her,</i>\" she giggles drunkenly.  Say, " + katherine.playerText() + ", you wanna have some fun while one-shot here recovers?\n\n");
+			outputText("\"<i>No fair,</i>\" Urta mutters weakly.\n\n");
+			dynStats("lus", 20 + player.lib / 20);
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			doNext(camp.returnToCampUseOneHour);
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.drainedByKath = true;
+			doNext(katherine.katherineSex);
 		}
 
 		public function knothole():void { //Kath is drunk, Urta is sober //Not available if Kath has no cock
@@ -592,6 +608,7 @@
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
@@ -721,6 +738,7 @@
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
@@ -778,6 +796,7 @@
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 10 + rand(2);
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseTwoHours);
@@ -832,7 +851,7 @@
 				}
 			}
 			else { //Just one cock
-				if (rand(1) == 0) { //Urta takes it
+				if (rand(2) == 0) { //Urta takes it
 					outputText("Urta had just swallowed you again, the ride down her throat setting you off.  You grip the back of her head and your " + (player.balls > 0 ? "balls start" : "prostate starts") + " pumping.  Her eyes go wide but she accepts her fate, trying to swallow your load as fast as you can produce it.\n\n");
 					outputText("Kath realizes what’s happened" + (player.balls > 0 ? " and rubs your balls" : ", quicky inserts her finger into your ass and starts milking your prostate") + ", trying to coax an even bigger load out of " + (player.balls > 0 ? "them" : "it") + ".  ");
 					if (player.cumQ() < 500)
@@ -871,6 +890,7 @@
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -968,6 +988,7 @@
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
+			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
