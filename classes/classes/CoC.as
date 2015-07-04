@@ -265,7 +265,7 @@ the text from being too boring.
 		// Force updates in Pepper Flash ahuehue
 		private var _updateHack:Sprite = new Sprite();
 		
-		public var mainViewHack:MainViewHack = new MainViewHack();
+		public var mainViewManager:MainViewManager = new MainViewManager();
 		// Other scenes
 
 		include "../../includes/april_fools.as";
@@ -428,8 +428,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4C_mod_1.2.16";
-			version = ver + " (<b>Skin Oils & Body Lotions</b>)";
+			ver = "0.9.4C_mod_1.2.17";
+			version = ver + " (<b>Yet more fancy changes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

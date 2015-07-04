@@ -1,4 +1,4 @@
-//The ultimate code to hack the main view. Because the SWC file isn't editable at the time, I've written this code to hack the main view.
+//The code that is responsible for managing MainView.
 package classes 
 {
 	import classes.*
@@ -20,9 +20,6 @@ package classes
     import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	
-    import flash.text.TextField;
-	import flash.text.TextFieldType;
-	import flash.text.AntiAliasType;
 	import flash.text.Font;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
@@ -36,11 +33,10 @@ package classes
 	//import fl.transition.Tween;
 	//import fl.transition.easing.*
 	
-	public class MainViewHack extends BaseContent
+	public class MainViewManager extends BaseContent
 	{
 		//Interface flags
 		public var registeredShiftKey:Boolean = false;
-		public var reassigned:Boolean = false;
 		//public var minLustBar:MovieClip = new MovieClip();
 		//public var minLustBarCreated:Boolean = false;
 		public var initializedThirdRow:Boolean = false;
@@ -52,149 +48,43 @@ package classes
 		
 		public var statsHidden:Boolean = false;
 		public var buttonsTweened:Boolean = false;
+		public var barsDecorated:Boolean = false;
 		
 		//Format		
 		private var oldFormat:TextFormat;
 		private var newFormat:TextFormat;
-		private var sidebarTextSize:int;
-		private var sidebarNumberSize:int;
 		//private var oldFormatLarge:TextFormat;
 		//private var timeTextFormat:TextFormat;
 		
 		private var arraySet:Boolean = false;
 		public var colorableTexts:Array = [];
-		public var fontableTexts:Array = []; //Will be used for font adjustment..
+		public var fontableTexts:Array = []; //Will be used for font adjustment.
 		public var bars:Array = [];
 
 		private var universalAlpha:Number = 0.4;
 		
-		public function MainViewHack() 
+		public function MainViewManager() 
 		{
 			
 		}
 		
-		//Reassign parents
-		private function reassignParents():void {
-			//Willpower
-			if (mainView.getChildByName("willBar") != null) {
-				mainView.statsView.addChild(mainView.willBar);
-			}
-			if (mainView.statsView.getChildByName("willBar") != null) {
-				mainView.statsView.setChildIndex(mainView.willBar, 1);
-			}
-			if (mainView.getChildByName("willNum") != null) {
-				mainView.statsView.addChild(mainView.willNum);
-			}
-			if (mainView.statsView.getChildByName("willNum") != null) {
-				mainView.statsView.setChildIndex(mainView.willNum, 1);
-				mainView.willNum.selectable = true;
-			}
-			if (mainView.getChildByName("willText") != null) {
-				mainView.statsView.addChild(mainView.willText);
-			}
-			if (mainView.statsView.getChildByName("willText") != null) {
-				mainView.statsView.setChildIndex(mainView.willText, 1);
-				mainView.willText.selectable = true;
-			}
-			if (mainView.getChildByName("willUp") != null) {
-				mainView.statsView.upDownsContainer.addChild(mainView.willUp);
-			}
-			if (mainView.getChildByName("willDown") != null) {
-				mainView.statsView.upDownsContainer.addChild(mainView.willDown);
-			}
-			if (mainView.statsView.upDownsContainer.getChildByName("willUp") != null) {
-				mainView.statsView.upDownsContainer.setChildIndex(mainView.willUp, 1);
-			}
-			if (mainView.statsView.upDownsContainer.getChildByName("willDown") != null) {
-				mainView.statsView.upDownsContainer.setChildIndex(mainView.willDown, 1);
-			}
-			
-			//Esteem
-			if (mainView.getChildByName("esteemBar") != null) {
-				mainView.statsView.addChild(mainView.esteemBar);
-			}
-			if (mainView.statsView.getChildByName("esteemBar") != null) {
-				mainView.statsView.setChildIndex(mainView.esteemBar, 1);
-			}
-			if (mainView.getChildByName("esteemNum") != null) {
-				mainView.statsView.addChild(mainView.esteemNum);
-			}
-			if (mainView.statsView.getChildByName("esteemNum") != null) {
-				mainView.statsView.setChildIndex(mainView.esteemNum, 1);
-				mainView.esteemNum.selectable = true;
-			}
-			if (mainView.getChildByName("esteemText") != null) {
-				mainView.statsView.addChild(mainView.esteemText);
-			}
-			if (mainView.statsView.getChildByName("esteemText") != null) {
-				mainView.statsView.setChildIndex(mainView.esteemText, 1);
-				mainView.esteemText.selectable = true;
-			}
-			if (mainView.getChildByName("esteemUp") != null) {
-				mainView.statsView.upDownsContainer.addChild(mainView.esteemUp);
-			}
-			if (mainView.getChildByName("esteemDown") != null) {
-				mainView.statsView.upDownsContainer.addChild(mainView.esteemDown);
-			}
-			if (mainView.statsView.upDownsContainer.getChildByName("esteemUp") != null) {
-				mainView.statsView.upDownsContainer.setChildIndex(mainView.esteemUp, 1);
-			}
-			if (mainView.statsView.upDownsContainer.getChildByName("esteemDown") != null) {
-				mainView.statsView.upDownsContainer.setChildIndex(mainView.esteemDown, 1);
-			}
-			
-			//Obedience
-			if (mainView.getChildByName("obeyBar") != null) {
-				mainView.statsView.addChild(mainView.obeyBar);
-			}
-			if (mainView.statsView.getChildByName("obeyBar") != null) {
-				mainView.statsView.setChildIndex(mainView.obeyBar, 1);
-			}
-			if (mainView.getChildByName("obeyNum") != null) {
-				mainView.statsView.addChild(mainView.obeyNum);
-			}
-			if (mainView.statsView.getChildByName("obeyNum") != null) {
-				mainView.statsView.setChildIndex(mainView.obeyNum, 1);
-				mainView.obeyNum.selectable = true;
-			}
-			if (mainView.getChildByName("obeyText") != null) {
-				mainView.statsView.addChild(mainView.obeyText);
-			}
-			if (mainView.statsView.getChildByName("obeyText") != null) {
-				mainView.statsView.setChildIndex(mainView.obeyText, 1);
-				mainView.obeyText.selectable = true;
-			}
-			if (mainView.getChildByName("obeyUp") != null) {
-				mainView.statsView.upDownsContainer.addChild(mainView.obeyUp);
-			}
-			if (mainView.getChildByName("obeyDown") != null) {
-				mainView.statsView.upDownsContainer.addChild(mainView.obeyDown);
-			}
-			if (mainView.statsView.upDownsContainer.getChildByName("obeyUp") != null) {
-				mainView.statsView.upDownsContainer.setChildIndex(mainView.obeyUp, 1);
-			}
-			if (mainView.statsView.upDownsContainer.getChildByName("obeyDown") != null) {
-				mainView.statsView.upDownsContainer.setChildIndex(mainView.obeyDown, 1);
+		//------------
+		// INITIALIZE
+		//------------
+		//For now
+		private function initializeMarkers():void {
+			if (barsDecorated) return;
+			barsDecorated = true;
+			var barsToDecorate:Array = ["strBar", "touBar", "speBar", "inteBar", "libBar", "sensBar", "corBar", "HPBar", "lustBar", "fatigueBar", "hungerBar", "esteemBar", "willBar", "obeyBar", "xpBar"];
+			for (var i:int = 0; i < barsToDecorate.length; i++) {
+				var marker:Sprite = new StatsBarTrim() as Sprite;
+				marker.name = barsToDecorate[i] + "Trim";
+				marker.x = mainView[barsToDecorate[i]].x - 2;
+				marker.y = mainView[barsToDecorate[i]].y + 18;
+				mainView.statsView.addChildAt(marker, mainView.statsView.numChildren);
 			}
 		}
 		
-		private function reassignIndex():void {
-			//Prison stats
-			//if (mainView.statsView.getChildByName("hungerBar") != null) mainView.statsView.setChildIndex(mainView.hungerBar, 40);
-			//if (mainView.statsView.getChildByName("hungerText") != null) mainView.statsView.setChildIndex(mainView.hungerText, 40);
-			//if (mainView.statsView.getChildByName("hungerNum") != null) mainView.statsView.setChildIndex(mainView.hungerNum, 40);
-			if (mainView.statsView.getChildByName("willBar") != null) mainView.statsView.setChildIndex(mainView.willBar, 40);
-			if (mainView.statsView.getChildByName("willText") != null) mainView.statsView.setChildIndex(mainView.willText, 40);
-			if (mainView.statsView.getChildByName("willNum") != null) mainView.statsView.setChildIndex(mainView.willNum, 40);
-			if (mainView.statsView.getChildByName("esteemBar") != null) mainView.statsView.setChildIndex(mainView.esteemBar, 40);
-			if (mainView.statsView.getChildByName("esteemText") != null) mainView.statsView.setChildIndex(mainView.esteemText, 40);
-			if (mainView.statsView.getChildByName("esteemNum") != null) mainView.statsView.setChildIndex(mainView.esteemNum, 40);
-			if (mainView.statsView.getChildByName("obeyBar") != null) mainView.statsView.setChildIndex(mainView.obeyBar, 40);
-			if (mainView.statsView.getChildByName("obeyText") != null) mainView.statsView.setChildIndex(mainView.obeyText, 40);
-			if (mainView.statsView.getChildByName("obeyNum") != null) mainView.statsView.setChildIndex(mainView.obeyNum, 50);
-			//mainView.statsView.setChildIndex(mainView.xpNum, 44);
-			//if (mainView.statsView.getChildByName("minLustBar") != null) mainView.statsView.setChildIndex(minLustBar, 44);
-		}
 		//------------
 		// SHOW/HIDE
 		//------------
@@ -206,6 +96,7 @@ package classes
 				mainView.hungerText.visible = false;
 				mainView.hungerDown.visible = false;
 				mainView.hungerUp.visible = false;
+				mainView.statsView.getChildByName("hungerBarTrim").visible = false;
 			}
 		}
 		public function showHungerBar():void {
@@ -215,6 +106,7 @@ package classes
 				mainView.hungerText.visible = true;
 				//mainView.hungerDown.visible = false;
 				//mainView.hungerUp.visible = false;
+				mainView.statsView.getChildByName("hungerBarTrim").visible = true;
 			}
 		}
 		
@@ -225,27 +117,27 @@ package classes
 			mainView.xpText.visible = true;
 			mainView.gemsNum.visible = true;
 			mainView.gemsText.visible = true;
-			if (mainView.statsView.getChildByName("willBar") != null) {
-				mainView.willBar.visible = false;
-				mainView.willNum.visible = false;
-				mainView.willText.visible = false;
-				mainView.willDown.visible = false;
-				mainView.willUp.visible = false;
-			}
-			if (mainView.statsView.getChildByName("esteemBar") != null) {
-				mainView.esteemBar.visible = false;
-				mainView.esteemNum.visible = false;
-				mainView.esteemText.visible = false;
-				mainView.esteemDown.visible = false;
-				mainView.esteemUp.visible = false;
-			}
-			if (mainView.statsView.getChildByName("obeyBar") != null) {
-				mainView.obeyBar.visible = false;
-				mainView.obeyNum.visible = false;
-				mainView.obeyText.visible = false;
-				mainView.obeyDown.visible = false;
-				mainView.obeyUp.visible = false;
-			}
+			//Hide willpower
+			mainView.willBar.visible = false;
+			mainView.willNum.visible = false;
+			mainView.willText.visible = false;
+			mainView.willDown.visible = false;
+			mainView.willUp.visible = false;
+			mainView.statsView.getChildByName("willBarTrim").visible = false;
+			//Hide self-esteem
+			mainView.esteemBar.visible = false;
+			mainView.esteemNum.visible = false;
+			mainView.esteemText.visible = false;
+			mainView.esteemDown.visible = false;
+			mainView.esteemUp.visible = false;
+			mainView.statsView.getChildByName("esteemBarTrim").visible = false;
+			//Hide obedience
+			mainView.obeyBar.visible = false;
+			mainView.obeyNum.visible = false;
+			mainView.obeyText.visible = false;
+			mainView.obeyDown.visible = false;
+			mainView.obeyUp.visible = false;
+			mainView.statsView.getChildByName("obeyBarTrim").visible = false;
 		}
 		public function showPrisonBar():void {
 			mainView.levelNum.visible = false;
@@ -254,27 +146,27 @@ package classes
 			mainView.xpText.visible = false;
 			mainView.gemsNum.visible = false;
 			mainView.gemsText.visible = false;
-			if (mainView.statsView.getChildByName("willBar") != null) {
-				if (flags[kFLAGS.USE_OLD_INTERFACE] == 0) mainView.willBar.visible = true;
-				mainView.willNum.visible = true;
-				mainView.willText.visible = true;
-				//mainView.willDown.visible = false;
-				//mainView.willUp.visible = false;
-			}
-			if (mainView.statsView.getChildByName("esteemBar") != null) {
-				if (flags[kFLAGS.USE_OLD_INTERFACE] == 0) mainView.esteemBar.visible = true;
-				mainView.esteemNum.visible = true;
-				mainView.esteemText.visible = true;
-				//mainView.esteemDown.visible = false;
-				//mainView.esteemUp.visible = false;
-			}
-			if (mainView.statsView.getChildByName("obeyBar") != null) {
-				if (flags[kFLAGS.USE_OLD_INTERFACE] == 0) mainView.obeyBar.visible = true;
-				mainView.obeyNum.visible = true;
-				mainView.obeyText.visible = true;
-				//mainView.obeyDown.visible = false;
-				//mainView.obeyUp.visible = false;
-			}
+			//Show willpower
+			if (flags[kFLAGS.USE_OLD_INTERFACE] == 0) mainView.willBar.visible = true;
+			mainView.willNum.visible = true;
+			mainView.willText.visible = true;
+			//mainView.willDown.visible = false;
+			//mainView.willUp.visible = false;
+			mainView.statsView.getChildByName("willBarTrim").visible = true;
+			//Show self-esteem
+			if (flags[kFLAGS.USE_OLD_INTERFACE] == 0) mainView.esteemBar.visible = true;
+			mainView.esteemNum.visible = true;
+			mainView.esteemText.visible = true;
+			//mainView.esteemDown.visible = false;
+			//mainView.esteemUp.visible = false;
+			mainView.statsView.getChildByName("esteemBarTrim").visible = true;
+			//Show obedience
+			if (flags[kFLAGS.USE_OLD_INTERFACE] == 0) mainView.obeyBar.visible = true;
+			mainView.obeyNum.visible = true;
+			mainView.obeyText.visible = true;
+			//mainView.obeyDown.visible = false;
+			//mainView.obeyUp.visible = false;
+			mainView.statsView.getChildByName("obeyBarTrim").visible = true;
 		}
 		
 		//Hide XP bar. (For old menus)
@@ -303,8 +195,6 @@ package classes
 				newFormat = mainView.strNum.getTextFormat();
 				newFormat.size = null;
 				newFormat.align = null;
-				//sidebarTextSize = mainView.strText.getTextFormat().size;
-				//sidebarNumSize = mainView.strNum.getTextFormat().size;
 				colorableTexts.push(
 					//Core stats
 					mainView.strText, mainView.strNum, 
@@ -410,50 +300,23 @@ package classes
 		// REFRESH
 		//------------
 		public function refreshStats():void {
-			var posOffset:Number = 14;
-			var posTextOffset:Number = 18;
-			var arrowXOffset:Number = 3;
-			var basePos:Number = 120;
-			var basePos2:Number = 360;
-			var basePos3:Number = 530;
 			var baseHeight:Number = 26;
 			var baseWidth:Number = 170;
 			//var universalAlpha:Number = 0.4;
 			var gapDiff:Number = 30;
-			//Initialize min lust bar.
-			//Reassign parents.
-			if (!reassigned) {
-				reassignParents();
-				reassignIndex();
-				reassigned = true;
+			if (!barsDecorated) {
+				initializeMarkers();
 			}
-			//Old interface
-			/*if (flags[kFLAGS.USE_OLD_INTERFACE] > 0) {
-				posOffset = 10;
-				posTextOffset = 28;
-				basePos2 = 400;
-				baseWidth = 115;
-				baseHeight = 22;
-				universalAlpha = 1;
-				gapDiff = 40;
-				hideHungerBar();
-				hidePrisonBar();
+			showHungerBar();
+			showExperienceBar();
+			showMinLustBar();	
+			if (prison.inPrison) {
+				showPrisonBar();
 				hideExperienceBar();
-				hideMinLustBar();
-				//return;
-			}*/
+			}
 			else {
-				showHungerBar();
+				hidePrisonBar();
 				showExperienceBar();
-				showMinLustBar();	
-				if (prison.inPrison) {
-					showPrisonBar();
-					hideExperienceBar();
-				}
-				else {
-					hidePrisonBar();
-					showExperienceBar();
-				}
 			}
 			//Set bars
 			mainView.strBar.width = (player.str * (baseWidth / player.getMaxStats("str")));
@@ -474,28 +337,13 @@ package classes
 			//Experience bar.
 			if (!prison.inPrison) {
 				if (player.level < kGAMECLASS.levelCap) mainView.xpBar.width = (((player.XP / player.requiredXP()) * 100) * (baseWidth / 100));
-				else mainView.xpBar.width = (100 * (baseWidth / 100)); //Level is capped at 100.
+				else mainView.xpBar.width = (100 * (baseWidth / 100)); //Display XP bar at 100% if level is capped.
 				if (player.XP >= player.requiredXP()) mainView.xpBar.width = baseWidth; //Set to 100% if XP exceeds the requirement.
 			}
 			//Prison bars
 			else {
-				//Willpower
-				mainView.willBar.x = mainView.levelText.x;
-				mainView.willBar.y = mainView.levelText.y;
-				mainView.willBar.alpha = universalAlpha;
-				mainView.willBar.height = baseHeight;
-				mainView.willBar.width = (player.will * (baseWidth / 100));
-				//Esteem
-				mainView.esteemBar.x = mainView.xpText.x;
-				mainView.esteemBar.y = mainView.xpText.y;
-				mainView.esteemBar.alpha = universalAlpha;
-				mainView.esteemBar.height = baseHeight;
 				mainView.esteemBar.width = (player.esteem * (baseWidth / 100));
-				//Obedience
-				mainView.obeyBar.x = mainView.gemsText.x;
-				mainView.obeyBar.y = mainView.gemsText.y;
-				mainView.obeyBar.alpha = universalAlpha;
-				mainView.obeyBar.height = baseHeight;
+				mainView.willBar.width = (player.will * (baseWidth / 100));
 				mainView.obeyBar.width = (player.obey * (baseWidth / 100));
 			}
 			
@@ -528,24 +376,9 @@ package classes
 			}
 			if (prison.inPrison) {
 				showPrisonBar();
-				mainView.willNum.x = mainView.strNum.x;
-				mainView.willNum.y = mainView.levelNum.y;
-				mainView.willNum.width = mainView.strNum.width;
 				mainView.willNum.text = Math.floor(player.will) + ""; //"/" + 100;
-				mainView.willText.x = mainView.levelText.x;
-				mainView.willText.y = mainView.levelText.y;
-				mainView.esteemNum.x = mainView.strNum.x;
-				mainView.esteemNum.y = mainView.xpNum.y;
-				mainView.esteemNum.width = mainView.strNum.width;
 				mainView.esteemNum.text = Math.floor(player.esteem) + ""; //"/" + 100;
-				mainView.esteemText.x = mainView.xpText.x;
-				mainView.esteemText.y = mainView.xpText.y;
-				mainView.obeyNum.x = mainView.strNum.width;
-				mainView.obeyNum.y = mainView.gemsNum.y;
-				mainView.obeyNum.width = mainView.strNum.x;
 				mainView.obeyNum.text = Math.floor(player.obey) + ""; //"/" + player.obeySoftCap ? 50 : 100;
-				mainView.obeyText.x = mainView.gemsText.x;
-				mainView.obeyText.y = mainView.gemsText.y;
 			}
 			else {
 				hidePrisonBar();
@@ -555,19 +388,6 @@ package classes
 			if (player.level < kGAMECLASS.levelCap) mainView.xpNum.text = Math.floor(player.XP) + "/" + Math.floor(player.requiredXP());
 			else mainView.xpNum.text = "MAX";
 			mainView.gemsNum.text = addComma(Math.floor(player.gems)) + "";
-			//Prison stats
-			mainView.willUp.x = mainView.willNum.x + mainView.willNum.width + arrowXOffset;
-			mainView.willUp.y = mainView.willNum.y;
-			mainView.willDown.x = mainView.willNum.x + mainView.willNum.width + arrowXOffset;
-			mainView.willDown.y = mainView.willNum.y;
-			mainView.esteemUp.x = mainView.esteemNum.x + mainView.esteemNum.width + arrowXOffset;
-			mainView.esteemUp.y = mainView.esteemNum.y;
-			mainView.esteemDown.x = mainView.esteemNum.x + mainView.esteemNum.width + arrowXOffset;
-			mainView.esteemDown.y = mainView.esteemNum.y;
-			mainView.obeyUp.x = mainView.obeyNum.x + mainView.obeyNum.width + arrowXOffset;
-			mainView.obeyUp.y = mainView.obeyNum.y;
-			mainView.obeyDown.x = mainView.obeyNum.x + mainView.obeyNum.width + arrowXOffset;
-			mainView.obeyDown.y = mainView.obeyNum.y;
 			
 			//Get rid of the space before colon. (For new)
 			//if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) {
@@ -579,11 +399,8 @@ package classes
 				mainView.senText.text = "Sensitivity:";
 				mainView.corText.text = "Corruption:";
 				mainView.HPText.text = "HP:";
-				mainView.HPText.width = 50;
 				mainView.lustText.text = "Lust:";
-				mainView.lustText.width = 50;
 				mainView.fatigueText.text = "Fatigue:";
-				mainView.fatigueText.width = 80;
 			/*} else {
 				mainView.strText.text = "Strength    :";
 				mainView.touText.text = "Toughness   :";
@@ -628,10 +445,6 @@ package classes
 			
 			//Set theme!
 			setTheme();
-		}
-		
-		public function setOldSprite():void {
-
 		}
 		
 		//Show/hide stats bars.

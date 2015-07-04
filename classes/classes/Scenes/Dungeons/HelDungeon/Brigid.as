@@ -7,7 +7,7 @@ package classes.Scenes.Dungeons.HelDungeon
 
 		//Attack One: Hot Poker, Right Up Your Ass!
 		private function brigidPoke():void {
-			outputText("Brigid stalks forward with confidence, her shield absorbing your defensive blows until she's right on top of you. She bats your [weapon] aside and thrashes you with her hot poker, scalding your " + player.skin() + " and sending you reeling.");
+			outputText("Brigid stalks forward with confidence, her shield absorbing your defensive blows until she's right on top of you. She bats your [weapon] aside and thrashes you with her hot poker, scalding your " + player.skin() + " and sending you reeling. ");
 			//(Effect: Heavy Damage)
 			var damage:Number = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if(damage < 30) damage = 30;
@@ -17,7 +17,7 @@ package classes.Scenes.Dungeons.HelDungeon
 
 		//Attack Two: SHIELD BOP! OOM BOP!
 		private function brigidBop():void {
-			outputText("The harpy feints at you with her poker; you dodge the blow, but you leave yourself vulnerable as she spins around and slams her heavy shield into you, knocking you off balance.");
+			outputText("The harpy feints at you with her poker; you dodge the blow, but you leave yourself vulnerable as she spins around and slams her heavy shield into you, knocking you off balance. ");
 			//(Effect: Stagger/Stun)
 			var damage:Number = 5;
 			damage = player.takeDamage(damage, true);

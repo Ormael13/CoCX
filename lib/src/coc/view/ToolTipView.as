@@ -56,7 +56,7 @@ package coc.view {
 				this.y = by - 347;
 			}*/
 			//else {
-				bx = (bx >= 708 ? 700: bx);
+				bx = (bx >= 688 ? 680: bx);
 				this.x = bx - 13;
 				this.y = by - 232;
 				if (this.y < 0) this.y = by + 40;

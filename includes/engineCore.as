@@ -1,6 +1,5 @@
 ﻿import classes.PerkClass;
 import flash.text.TextFormat;
-import classes.MainViewHack;
 // // import flash.events.MouseEvent;
 // 
 // //const DOUBLE_ATTACK_STYLE:int = 867;
@@ -219,7 +218,7 @@ public function flushOutputTextToGUI():void
 	{
 		mainView.mainText.setTextFormat(fmt);
 	}
-	if (mainViewHack.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]] != null) mainView.mainText.textColor = mainViewHack.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
+	if (mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]] != null) mainView.mainText.textColor = mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
 }
 
 public function displayHeader(string:String):void {
@@ -1527,22 +1526,22 @@ public function invertGo():void{
  */
 public function statScreenRefresh():void {
 	mainView.statsView.show(); // show() method refreshes.
-	mainViewHack.refreshStats();
+	mainViewManager.refreshStats();
 }
 /**
  * Show the stats pane. (Name, stats and attributes)
  */
 public function showStats():void {
 	mainView.statsView.show();
-	mainViewHack.refreshStats();
-	mainViewHack.tweenInStats();
+	mainViewManager.refreshStats();
+	mainViewManager.tweenInStats();
 }
 /**
  * Hide the stats pane. (Name, stats and attributes)
  */
 public function hideStats():void {
-	if (!mainViewHack.buttonsTweened) mainView.statsView.hide();
-	mainViewHack.tweenOutStats();
+	if (!mainViewManager.buttonsTweened) mainView.statsView.hide();
+	mainViewManager.tweenOutStats();
 }
 
 /**

@@ -4,7 +4,7 @@ package classes.Scenes
 	import classes.Items.*
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.MainViewHack;
+	import classes.MainViewManager;
 	import flash.utils.describeType;
 	import flash.utils.*
 	

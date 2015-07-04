@@ -133,6 +133,11 @@ package classes.Scenes.Camp
 			cleanupAfterCombat();
 			outputText("While exploring the forest, you survey the trees. The trees are at the right thickness. You could cut down the trees. \n\n");
 			menu();
+			if (player.fatigue > player.maxFatigue() - 30) {
+				outputText("<b>You are too tired to consider cutting down the trees. Perhaps some rest will suffice?</b>");
+				doNext(camp.returnToCampUseOneHour);
+				return;
+			}
 			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") 
 			{
 				outputText("You are carrying a large axe with you.") 
@@ -170,10 +175,10 @@ package classes.Scenes.Camp
 				outputText("Who needs axes when you've got pure strength? Bracing yourself, you crack your knuckles and punch the tree with all your strength. It takes effort and while you're punching the tree, crack appears. It grows bigger as you keep punching. When the crack gets big enough, the log just broke off and the tree strangely floats. ");
 			}
 			outputText("You shrug and pick up the wood block when you hear crashing sound as the tree falls over and splits into many wooden blocks! Surprisingly, they clump together into one bunch. You pick the bunch of wood, noting how easy it is to carry. You return to your camp. \n\n");
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 10;
-			incrementWoodSupply(10);
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
+			incrementWoodSupply(10 + Math.floor(player.str / 8));
 			awardAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD);
-			fatigue(50);
+			fatigue(50, 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Cut down the tree yourself with large axe.
@@ -182,9 +187,9 @@ package classes.Scenes.Camp
 			if (player.weaponName == "large axe") outputText("You ready your oversized axe. ")
 			else outputText("You ready your axe. ")
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n");
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 10;
-			incrementWoodSupply(10);
-			fatigue(50);
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
+			incrementWoodSupply(10 + Math.floor(player.str / 8));
+			fatigue(50, 2);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 
@@ -207,11 +212,11 @@ package classes.Scenes.Camp
 			outputText("You recall Kiha wields an oversized axe. You call out for her. After a minute, she walks over to you and says \"<i>Yes, my idiot?</i>\" You tell her that you would like her to cut down some trees so you can haul the wood. She nods and yells \"<i>Stand back!</i>\" as you stand back while you watch her easily cut down not one but two trees! With the trees cut down, you and Kiha haul the wood back to your camp. ")
 			if (player.str < 33) outputText("It's a daunting task as you can only carry few of the wood at a time. Even Kiha is far superior to your carrying capacity as she can carry a lot of wood. \n\n");
 			if (player.str >= 33 && player.str < 66) outputText("It's quite the chore. Though you can carry several pieces of wood at a time, Kiha is still superior to you when it comes to carrying wood. \n\n");
-			if (player.str > 66) outputText("You easily tackle the task of carrying wood. You even manage to carry five pieces of wood at a time!\n\n");
+			if (player.str >= 66) outputText("You easily tackle the task of carrying wood. You even manage to carry five pieces of wood at a time!\n\n");
 			outputText("It takes some time but you eventually bring the last of wood back to your camp. \n\n");
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += 20;
-			incrementWoodSupply(20);
-			fatigue(50);
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + Math.floor(player.str / 5));
+			incrementWoodSupply(20 + Math.floor(player.str / 5));
+			fatigue(50, 2);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		

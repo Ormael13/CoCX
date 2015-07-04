@@ -2066,8 +2066,8 @@ private function buildCampWallPrompt():void {
 		outputText("Segments complete: " + Math.floor(flags[kFLAGS.CAMP_WALL_PROGRESS] / 20) + "/5\n");
 	}
 	kGAMECLASS.camp.cabinProgress.checkMaterials();
-	outputText("\n\nIt will cost 200 nails and 100 wood to work on a segment of the wall.\n\n");
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 200) {
+	outputText("\n\nIt will cost 100 nails and 100 wood to work on a segment of the wall.\n\n");
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 100) {
 		doYesNo(buildCampWall, doCamp);
 	}
 	else {
@@ -2092,7 +2092,7 @@ private function buildCampWall():void {
 		helpers++;
 	}
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
-	player.addKeyValue("Carpenter's Toolbox", 1, -200);
+	player.addKeyValue("Carpenter's Toolbox", 1, -100);
 	clearOutput();
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] == 1) {
 		outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a wall. You spend minutes looking at the instructions and memorize the procedures.");
@@ -2144,8 +2144,8 @@ private function buildCampGatePrompt():void {
 	}
 	outputText("You can build a gate to further secure your camp by having it closed at night.\n\n");
 	kGAMECLASS.camp.cabinProgress.checkMaterials();
-	outputText("\n\nIt will cost 200 nails and 100 wood to build a gate.\n\n");
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 200) {
+	outputText("\n\nIt will cost 100 nails and 100 wood to build a gate.\n\n");
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 100) {
 		doYesNo(buildCampGate, doCamp);
 	}
 	else {
@@ -2163,7 +2163,7 @@ private function buildCampGate():void {
 	if (followerKiha()) helpers++;
 	temp = helpers;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
-	player.addKeyValue("Carpenter's Toolbox", 1, -200);
+	player.addKeyValue("Carpenter's Toolbox", 1, -100);
 	clearOutput();
 	outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a gate that can be opened and closed. You spend minutes looking at the instructions and memorize the procedures.");
 	flags[kFLAGS.CAMP_WALL_GATE] = 1;

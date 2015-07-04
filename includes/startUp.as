@@ -26,15 +26,15 @@ public function mainMenu(e:MouseEvent = undefined):void
 	{
 		mainView.removeChild(mainView.aCb);
 	}
-	mainViewHack.registerShiftKeys();
+	mainViewManager.registerShiftKeys();
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
 	mainView.background.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
 	mainView.sideBarBG.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
-	mainViewHack.startUpButtons();
+	mainViewManager.startUpButtons();
 	kGAMECLASS.saves.loadPermObject();
-	mainViewHack.setTheme();
+	mainViewManager.setTheme();
 	//Reset newgame buttons
 	mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameFromScratch);
 	mainView.hideAllMenuButtons();
@@ -125,7 +125,7 @@ Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/
 For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. 
 Check out Trials in Tainted Space as well!
 	
-Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.
+Also go play <u>Nimin</u> by Xadera on furaffinity.
 
 	]]>, false, true);
 
