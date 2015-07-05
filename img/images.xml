@@ -349,6 +349,14 @@
 				<ImageFile>./img/brooke-gym-male-specialscene</ImageFile>
 				<ImageFile>./img/brooke-gym-male-specialscene_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="camp-watch-stars">
+				<ImageFile>./img/camp-watch-stars</ImageFile>
+				<ImageFile>./img/camp-watch-stars_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="camp-watch-sunset">
+				<ImageFile>./img/camp-watch-sunset</ImageFile>
+				<ImageFile>./img/camp-watch-sunset_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="camping">
 				<ImageFile>./img/camping</ImageFile>
 				<ImageFile>./img/camping_1</ImageFile>
@@ -640,6 +648,10 @@
 			<ImageSet id="helia-follower-threesome-valeria-female">
 				<ImageFile>./img/helia-follower-threesome-valeria-female</ImageFile>
 				<ImageFile>./img/helia-follower-threesome-valeria-female_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="helia-follower-threesome-valeria-male">
+				<ImageFile>./img/helia-follower-threesome-valeria-male</ImageFile>
+				<ImageFile>./img/helia-follower-threesome-valeria-male_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="helia-fox-foursome-female">
 				<ImageFile>./img/helia-fox-foursome-female</ImageFile>
@@ -1453,6 +1465,10 @@
 				<ImageFile>./img/monster-minerva</ImageFile>
 				<ImageFile>./img/monster-minerva_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="monster-minervacorrupt">
+				<ImageFile>./img/monster-minervacorrupt</ImageFile>
+				<ImageFile>./img/monster-minervacorrupt_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="monster-minervapure">
 				<ImageFile>./img/monster-minervapure</ImageFile>
 				<ImageFile>./img/monster-minervapure_1</ImageFile>
@@ -1512,6 +1528,10 @@
 			<ImageSet id="monster-satyr">
 				<ImageFile>./img/monster-satyr</ImageFile>
 				<ImageFile>./img/monster-satyr_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="monster-scruffy">
+				<ImageFile>./img/monster-scruffy</ImageFile>
+				<ImageFile>./img/monster-scruffy_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="monster-secretarialsuccubus">
 				<ImageFile>./img/monster-secretarialsuccubus</ImageFile>
@@ -1601,6 +1621,14 @@
 				<ImageFile>./img/rathazul-buy-dye</ImageFile>
 				<ImageFile>./img/rathazul-buy-dye_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="rathazul-buy-lotion">
+				<ImageFile>./img/rathazul-buy-lotion</ImageFile>
+				<ImageFile>./img/rathazul-buy-lotion_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-buy-oil">
+				<ImageFile>./img/rathazul-buy-oil</ImageFile>
+				<ImageFile>./img/rathazul-buy-oil_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="rathazul-buy-reducto">
 				<ImageFile>./img/rathazul-buy-reducto</ImageFile>
 				<ImageFile>./img/rathazul-buy-reducto_1</ImageFile>
@@ -1632,6 +1660,10 @@
 			<ImageSet id="rathazul-craft-dragonscaleloincloth">
 				<ImageFile>./img/rathazul-craft-dragonscaleloincloth</ImageFile>
 				<ImageFile>./img/rathazul-craft-dragonscaleloincloth_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-craft-dragonscalerobes">
+				<ImageFile>./img/rathazul-craft-dragonscalerobes</ImageFile>
+				<ImageFile>./img/rathazul-craft-dragonscalerobes_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="rathazul-craft-dragonscalethong">
 				<ImageFile>./img/rathazul-craft-dragonscalethong</ImageFile>
@@ -2056,6 +2088,10 @@
 			<ImageSet id="valeria-sex-penetration">
 				<ImageFile>./img/valeria-sex-penetration</ImageFile>
 				<ImageFile>./img/valeria-sex-penetration_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="valeria-take">
+				<ImageFile>./img/valeria-take</ImageFile>
+				<ImageFile>./img/valeria-take_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="valeria-talk">
 				<ImageFile>./img/valeria-talk</ImageFile>
