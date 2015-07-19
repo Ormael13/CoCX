@@ -76,7 +76,7 @@
 		
 		override public function eMaxHP():Number
 		{
-			return 40 + player.newGamePlusMod() * 20;
+			return 40 + (player.newGamePlusMod() * 20);
 		}
 
 		public function WormMass()

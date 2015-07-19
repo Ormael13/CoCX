@@ -430,6 +430,18 @@ private function doCamp():void { //Only called by playerMenu
 		hideMenus();
 		return;
 	}
+	//Bimbo Jojo warning (Will be in 1.3)
+	/*if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && inventory.hasItemInStorage(consumables.BIMBOLQ) && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] >= 72 && flags[kFLAGS.JOJO_BIMBO_STATE] == 0) {
+		joyScene.jojoPromptsAboutThief();
+		hideMenus();
+		return;
+	}
+	//Jojo gets bimbo'ed!
+	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] >= 24 && flags[kFLAGS.JOJO_BIMBO_STATE] == 2) {
+		joyScene.jojoGetsBimbofied();
+		hideMenus();
+		return;
+	}*/
 	//Rathazul freaks out about jojo
 	if(flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && campCorruptJojo()) {
 		finter.rathazulFreaksOverJojo();
@@ -1126,11 +1138,17 @@ public function campFollowers(descOnly:Boolean = false):void {
 	}
 	//Pure Jojo
 	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
-		outputText("There is a small bedroll for Jojo near your own", false);
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
-		if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n", false);
-		else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n", false);
-		addButton(2, "Jojo", jojoScene.jojoCamp, null, null, null, "Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
+			outputText("Joy's tent is set up in a quiet corner of the camp, close to a boulder. Inside the tent, you can see a chest holding her belongings, as well as a few clothes and books spread about her bedroll. Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.\n\n");
+			addButton(2, "Joy", joyScene.approachCampJoy, null, null, null, "Go find Joy around the edges of your camp and meditate with her or have sex with her.");
+		}
+		else {
+			outputText("There is a small bedroll for Jojo near your own");
+			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
+			if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n");
+			else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n");
+			addButton(2, "Jojo", jojoScene.jojoCamp, null, null, null, "Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
+		}
 	}
 	//RATHAZUL
 	//if rathazul has joined the camp
@@ -2496,6 +2514,14 @@ private function promptSaveUpdate():void {
 			flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] = 0; //Reclaimed
 		}
 		if (player.armor == armors.GOOARMR) flags[kFLAGS.VALERIA_FLUIDS] = 100;
+		doCamp();
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 7) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 8;
+		//Move and reclaim flag.
+		flags[kFLAGS.LETHICITE_ARMOR_TAKEN] = flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER];
+		flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER] = 0;
 		doCamp();
 		return;
 	}

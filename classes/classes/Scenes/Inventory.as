@@ -337,7 +337,7 @@ package classes.Scenes
 			}
 			//Rebuild a new one!
 			var newSlot:ItemSlotClass;
-			while (gearStorage.length < 18) {
+			while (gearStorage.length < 45) {
 				newSlot = new ItemSlotClass();
 				gearStorage.push(newSlot);
 			}
@@ -558,6 +558,17 @@ package classes.Scenes
 				if (storage[x] != undefined) if (storage[x].quantity > 0 && storage[x].itype == itype) return true;
 			}
 			return false;
+		}
+		
+		public function removeItemFromStorage(storage:Array, itype:ItemType):void {
+			for (var x:int = 0; x < storage.length; x++) {
+				if (storage[x] != undefined) {
+					if (storage[x].quantity > 0 && storage[x].itype == itype) {
+						storage[x].quantity--;
+						return;
+					}
+				}
+			}
 		}
 		
 		private function pickItemToTakeFromCampStorage():void {

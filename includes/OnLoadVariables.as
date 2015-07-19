@@ -25,7 +25,7 @@ public var date:Date = new Date();
 //if ( ApplicationDomain.currentDomain.hasDefinition("Creature")) trace("Class exists");
 
 //Mod save version.
-public var modSaveVersion:Number = 7;
+public var modSaveVersion:Number = 8;
 public var levelCap:Number = 120;
 
 //dungeoneering variables (If it ain't broke, don't fix it)

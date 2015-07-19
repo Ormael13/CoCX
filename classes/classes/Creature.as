@@ -3618,7 +3618,7 @@ package classes
 			//Take damage you masochist!
 			if (findPerk(PerkLib.Masochist) >= 0 && lib >= 60) {
 				mult *= 0.8;
-				if (short == game.player.short) game.dynStats("lus", 2);
+				if (short == game.player.short && !displayMode) game.dynStats("lus", 2);
 			}
 			if (findPerk(PerkLib.ImmovableObject) >= 0 && tou >= 75) {
 				mult *= 0.9;

@@ -15,11 +15,6 @@ package classes.Scenes {
 				meditate();
 				return;
 			}
-			if (flags[kFLAGS.FORCE_MEDITATE] > 0) {
-				flags[kFLAGS.FORCE_MEDITATE] = 0;
-				meditate();
-				return;
-			}
 			if (prison.inPrison && !prison.prisonCanMasturbate()) {
 				doNext(playerMenu);
 				return;

@@ -227,6 +227,7 @@ the text from being too boring.
 		public var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
 		public var izmaScene:IzmaScene = new IzmaScene();
 		public var jojoScene:JojoScene = new JojoScene();
+		public var joyScene:JoyScene = new JoyScene();
 		public var kihaFollower:KihaFollower = new KihaFollower();
 		public var kihaScene:KihaScene = new KihaScene();
 		public var latexGirl:LatexGirl = new LatexGirl();
@@ -428,8 +429,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4C_mod_1.2.17";
-			version = ver + " (<b>Yet more fancy changes</b>)";
+			ver = "0.9.4C_mod_1.2.18";
+			version = ver + " (<b>Last Fixes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

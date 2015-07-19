@@ -1733,7 +1733,7 @@ public function displayStats(e:MouseEvent = null):void
 		childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
 		
 	if (flags[kFLAGS.JOJO_LITTERS] > 0)
-		childStats += "<b>Litters With Jojo:</b> " + flags[kFLAGS.JOJO_LITTERS] + "\n";
+		childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + flags[kFLAGS.JOJO_LITTERS] + "\n";
 		
 	if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
@@ -1990,6 +1990,12 @@ public function displayStats(e:MouseEvent = null):void
 			interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false;
 		else
 			interpersonStats += "100%\n";
+	}
+	
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
+		interpersonStats += "<b>Joy's Intelligence:</b> " + flags[kFLAGS.JOY_INTELLIGENCE];
+		if (flags[kFLAGS.JOY_INTELLIGENCE] >= 50) interpersonStats += " (MAX)"
+		interpersonStats += "\n";
 	}
 	
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {

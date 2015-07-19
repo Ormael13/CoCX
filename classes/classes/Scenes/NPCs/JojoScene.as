@@ -32,6 +32,12 @@
 				jojoLaysEggs();
 				return true;
 			}
+			if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && inventory.hasItemInStorage(consumables.BIMBOLQ) && flags[kFLAGS.JOJO_BIMBO_STATE] == 0 && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] < 72) {
+				flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO]++;
+			}
+			if (flags[kFLAGS.JOJO_BIMBO_STATE] == 2 && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] < 24) {
+				flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO]++;
+			}
 			return false;
 		}
 	
@@ -669,7 +675,7 @@ private function jojoMilkPay(tentacle:Boolean = false):void {
 	}
 	else outputText("You g", false);
 }
-private function jojoCumQ():Number {
+public function jojoCumQ():Number {
 	var cumQ:Number = 0;
 	cumQ = 400;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] < 4) cumQ += flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] * 200;
@@ -1037,7 +1043,7 @@ public function jojoFollowerMeditate():void {
 		if (player.tou < 45) dynStats("tou", 1); //Tou boost to 45
 		if (player.spe < 75) dynStats("spe", 1); //Speed boost to 75
 		if (player.inte < 80) dynStats("int", 1); //Int boost to 80
-		if (player.lib > 15) dynStats("lib", -1); //Libido lower to 15
+		if (player.lib > 0) dynStats("lib", -1); //Libido lower to 15
 		player.createStatusAffect(StatusAffects.Meditated, 1, 0, 0, 0);
 		player.addStatusValue(StatusAffects.JojoMeditationCount, 1, 1);
 	}
@@ -3204,6 +3210,7 @@ private function getAnallyFuckedByMouseYouSlut():void {
 	outputText("\n\nHis cock slides out of your [ass] with a pop. Cum start dripping out of your [ass]. \"<i>That was... You were amazing, [name].</i>\" You smile at him while rubbing your inflated belly and tell him he wasn’t too bad himself. " + (flags[kFLAGS.JOJO_SEX_COUNTER] >= 4 ? "You give Jojo a lingering kiss." : ""));
 	outputText("\n\n\After a good while of rest, " + player.clothedOrNaked("the two of you get redressed and", "Jojo gets redressed and the two of you") + " return to your camp.");
 	dynStats("sens", 1, "cor", -1);
+	flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER]++;
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	player.orgasm();
 	player.slimeFeed();
@@ -3238,8 +3245,8 @@ private function getVagFuckedByMouse():void {
 	}
 	outputText("\n\n\After recovering, " + player.clothedOrNaked("the two of you get redressed and", "Jojo gets redressed and the two of you") + " return to your camp.");
 	dynStats("sens", 1, "cor", -1);
-	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER]++;
+	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82, (jojoCumQ() < 2000 ? 100 - (jojoCumQ() / 50) : 60));
 	player.orgasm();
 	player.slimeFeed();
@@ -3279,6 +3286,7 @@ private function suckJojosCock():void {
 	if (jojoCumQ() < 2500) player.refillHunger(jojoCumQ() / 25);
 	else player.refillHunger(100);
 	flags[kFLAGS.JOJO_BLOWJOB_XP]++;
+	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	dynStats("lus", 20, "cor", -1);
 	player.slimeFeed();
 	doNext(camp.returnToCampUseOneHour);
