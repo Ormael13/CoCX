@@ -71,7 +71,7 @@ package classes.Scenes.Areas
 					outputText("While exploring the desert, you find the wreckage of a building. Judging from the debris, it's the remains of the library that was destroyed by the fire.\n\n", false);
 					outputText("You circle the wreckage for a good while and you can't seem to find anything to salvage.  Until something shiny catches your eye.  There are exposed nails that look like they can be scavenged.\n\n", false)
 					outputText("You take your hammer out of your toolbox and you spend time extracting straight nails.  Some of the nails you've pulled out are bent but some are incredibly in good condition.  You could use these nails for construction.\n\n");
-					var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 20) + rand(player.tou / 20);
+					var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 10) + rand(player.tou / 10) + rand(player.spe / 20) + 5;
 					flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
 					player.addKeyValue("Carpenter's Toolbox", 1, extractedNail);
 					outputText("After spending nearly an hour scavenging, you've managed to extract " + extractedNail + " nails.\n\n");

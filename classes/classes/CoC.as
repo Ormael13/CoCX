@@ -227,6 +227,7 @@ the text from being too boring.
 		public var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
 		public var izmaScene:IzmaScene = new IzmaScene();
 		public var jojoScene:JojoScene = new JojoScene();
+		public var joyScene:JoyScene = new JoyScene();
 		public var kihaFollower:KihaFollower = new KihaFollower();
 		public var kihaScene:KihaScene = new KihaScene();
 		public var latexGirl:LatexGirl = new LatexGirl();
@@ -265,7 +266,7 @@ the text from being too boring.
 		// Force updates in Pepper Flash ahuehue
 		private var _updateHack:Sprite = new Sprite();
 		
-		public var mainViewHack:MainViewHack = new MainViewHack();
+		public var mainViewManager:MainViewManager = new MainViewManager();
 		// Other scenes
 
 		include "../../includes/april_fools.as";
@@ -428,8 +429,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4C_mod_1.2.15";
-			version = ver + " (<b>Ugh, More Fixes</b>)";
+			ver = "0.9.4C_mod_1.2.18";
+			version = ver + " (<b>Last Fixes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

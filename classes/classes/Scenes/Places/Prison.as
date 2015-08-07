@@ -1871,8 +1871,9 @@ package classes.Scenes.Places
 			if(sexyScore > 100)
 			{
 				outputText("Overcome with arousal by your display the " + prisonGuard.guardType + " communicates " + prisonGuard.guardPronoun3 + " agreement with a nod and approaches confidently.",false);
-				dynStats("lus", 100);
-				prisonEscapeSeduceAutoLose();
+				dynStats("lus", 25);
+				prisonEscapeSuccessText();
+				doNext(prisonEscapeFinalePart1);
 			}
 			else if(sexyScore > 50)
 			{
@@ -1931,7 +1932,7 @@ package classes.Scenes.Places
 			{
 				player.gems = player.gems - 100;
 				outputText("The " + prisonGuard.guardType + " definitely seems interested in your gems, but more so in teaching you a lesson for thinking you could subvert the " + prisonCaptor.captorTitle + "'s power with mere bribery. You suspect that the " + prisonGuard.guardType + " will probably take some (100) of your gems anyway, but instead of freeing you " + prisonGuard.guardPronoun1 + "'s going to fuck you in trade. You brace yourself for punishment as " + prisonGuard.guardPronoun1 + " approaches menacingly.",false);
-				prisonEscapeFightAutoLose();
+				prisonEscapeFightStart();
 			}
 			else
 			{
@@ -1971,9 +1972,8 @@ package classes.Scenes.Places
 			}
 			else if(stealthScore > 50)
 			{
-				player.gems = player.gems - 100;
 				outputText("When " + prisonGuard.guardPronoun1 + " doesn't see you, he takes a step further into the room continuing to search for " + prisonGuard.guardPronoun3 + " seemingly missing charge. Seeing that the door is still open behind " + prisonGuard.guardPronoun2 + " you decide this is your moment to slip past, and crawl from the shadowed corner where you were hiding. The " + prisonGuard.guardType + " hears you immediately and you brace yourself for punishment as " + prisonGuard.guardPronoun1 + " approaches menacingly.",false);
-				prisonEscapeFightAutoLose();
+				prisonEscapeFightStart();
 			}
 			else
 			{

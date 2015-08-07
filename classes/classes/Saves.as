@@ -2036,7 +2036,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		else
 		{
-			for (i = 0; i < saveFile.data.gearStorage.length && gearStorageGet().length < 40; i++)
+			for (i = 0; i < saveFile.data.gearStorage.length && gearStorageGet().length < 45; i++)
 			{
 				gearStorageGet().push(new ItemSlotClass());
 					//trace("Initialize a slot for one of the item storage locations to load.");
@@ -2380,8 +2380,8 @@ public function unFuckSave():void
 		if (flags[kFLAGS.BEHEMOTH_CHILDREN] >= 2 && flags[kFLAGS.BEHEMOTH_CHILD_2_BIRTH_DAY] <= 0) flags[kFLAGS.BEHEMOTH_CHILD_2_BIRTH_DAY] = model.time.days;
 		if (flags[kFLAGS.BEHEMOTH_CHILDREN] >= 3 && flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] <= 0) flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = model.time.days;
 	}
-	if (gearStorageGet().length < 36) {
-		while (gearStorageGet().length < 36) {
+	if (gearStorageGet().length < 45) {
+		while (gearStorageGet().length < 45) {
 			gearStorageGet().push(new ItemSlotClass());
 		}
 	}

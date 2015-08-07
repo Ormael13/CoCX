@@ -43,11 +43,11 @@ package classes.Scenes.Areas
 			//Build choice list!
 			if (flags[kFLAGS.FAERIE_ENCOUNTER_DISABLED] <= 0) choice[choice.length] = 0; //Faerie
 			if (player.level >= 2) choice[choice.length] = 1; //Tentacle Beast
-			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100 && rand(100) >= Math.round(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] * 0.75)) choice[choice.length] = 2; //Corrupted Glade
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100 && rand(100) >= Math.round(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] * 0.5)) choice[choice.length] = 2; //Corrupted Glade
 			choice[choice.length] = 3; //Akbal
 			choice[choice.length] = 4; //Kitsunes
 			if (flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) choice[choice.length] = 5; //Tamani
-			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100) choice[choice.length] = 6; //Gather woods
+			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100 && rand(2) == 0) choice[choice.length] = 6; //Gather woods
 			
 			//Every tenth exploration finds a pumpkin if eligible!
 			if (player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 10 == 0 && isHalloween()) {
@@ -163,7 +163,7 @@ package classes.Scenes.Areas
 			choice[choice.length] = 4; //Trip on a root
 			if (rand(2) == 0) choice[choice.length] = 5; //Bee-girl encounter
 			if (rand(2) == 0) choice[choice.length] = 6; //Pigtail Truffle
-			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100) choice[choice.length] = 7; //Gather woods
+			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100 && rand(2) == 0) choice[choice.length] = 7; //Gather woods
 			choice[choice.length] = 8; //Peaceful walk in woods
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {

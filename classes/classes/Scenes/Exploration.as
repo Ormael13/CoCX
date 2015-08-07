@@ -163,7 +163,7 @@ package classes.Scenes
 				//Goblin elder!
 				else if (goblinChooser >= 80) {
 					kGAMECLASS.goblinElderScene.goblinElderEncounter();
-					spriteSelect(24); //Will eventually have new sprite.
+					spriteSelect(122);
 					return;
 				}
 				if (player.gender > 0) {

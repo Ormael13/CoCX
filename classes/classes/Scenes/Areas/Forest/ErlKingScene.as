@@ -767,8 +767,11 @@ package classes.Scenes.Areas.Forest
 			player.createKeyItem("Golden Antlers", 0, 0, 0, 0);
 			player.orgasm();
 			dynStats("lust=", 0);
-
-			menu();
+			if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0) {
+				inventory.takeItem(weapons.HNTCANE, camp.returnToCampUseOneHour);
+				flags[kFLAGS.ERLKING_CANE_OBTAINED] = 1;
+				return;
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 

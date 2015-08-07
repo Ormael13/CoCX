@@ -363,7 +363,7 @@ package classes.Scenes
 			headerSub("Appearances")
 			outputText("Followers of the Fetish appear as normal humans. Some have slight demonic traits typical of residents of this world.");
 			headerSub("Sexual characteristics")
-			outputText("Their genitals and anuses appear fully human, however they can warp them to fit their partners perfectly, no mater how big their partner’s assets are. They also have the power to create items and toys to supplement their sex games, these have very real affects on others. Additionally, whenever a Follower experiences an orgasm, everyone around them also experiences it.");
+			outputText("Their genitals and anuses appear fully human, however they can warp them to fit their partners perfectly, no matter how big their partner’s assets are. They also have the power to create items and toys to supplement their sex games, these have very real effects on others. Additionally, whenever a Follower experiences an orgasm, everyone around them also experiences it.");
 			headerSub("Social structure")
 			outputText("The duties of the Followers are divided based on gender and power. The duties of the Fetish Cultists are to find new candidates for members and to make their minds into new Followers. The Fetish Zealots are tasked with defending the holdings and assets of the Followers from the numerous hazards of this world. Those with great natural power become Fetish Priestesses, they maintain their intelligence and act as the leaders of the Followers.");
 			headerSub("Special abilities")

@@ -10,7 +10,6 @@ import classes.Scenes.Dungeons.D3.SuccubusGardener;
 
 import coc.view.MainView;
 import classes.Saves;
-import classes.CharCreation;
 import classes.internals.Utils;
 
 import flash.net.SharedObject;
@@ -945,7 +944,7 @@ public function attack():void {
 	
 	var damage:Number = 0;
 	//Determine if dodged!
-	if((player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+	if ((player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
 		//Akbal dodges special education
 		if(monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n", false);
 		else if(monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + player.weaponName + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + player.weaponName + " as if betrayed.\n", false);
@@ -953,7 +952,11 @@ public function attack():void {
 			//Player Miss:
 			outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n\n");
 		}
-		else {		
+		else {
+			if (player.weapon == weapons.HNTCANE && rand(2) == 0) {
+				if (rand(2) == 0) outputText("You slice through the air with your cane, completely missing your enemy.");
+				else outputText("You lunge at your enemy with the cane.  It glows with a golden light but fails to actually hit anything.");
+			}
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
@@ -1058,12 +1061,23 @@ public function attack():void {
 		
 		// Stunning the doppleganger should now "buy" you another round.
 	}
-	
+	if (player.weapon == weapons.HNTCANE) {
+		switch(rand(2)) {
+			case 0:
+				outputText("You swing your cane through the air. The light wood lands with a loud CRACK that is probably more noisy than painful. ");
+				damage *= 0.5;
+				break;
+			case 1:
+				outputText("You brandish your cane like a sword, slicing it through the air. It thumps against your adversary, but doesn’t really seem to harm them much. ");
+				damage *= 0.5;
+				break;
+			default:
+		}
+	}
 	if(damage > 0) {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		damage = doDamage(damage);
 	}
-	
 	if(damage <= 0) {
 		damage = 0;
 		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
@@ -1077,6 +1091,15 @@ public function attack():void {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
+	}
+	//Damage cane.
+	if (player.weapon == weapons.HNTCANE) {
+		flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER]++;
+		//Break cane
+		if (flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER] >= 10 && rand(20) == 0) {
+			outputText("\n<b>The cane you're wielding finally snaps! It looks like you won't be able to use it anymore.</b>");
+			player.setWeapon(WeaponLib.FISTS);
+		}
 	}
 	if(damage > 0) {
 		//Lust raised by anemone contact!

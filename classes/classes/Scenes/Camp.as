@@ -430,6 +430,18 @@ private function doCamp():void { //Only called by playerMenu
 		hideMenus();
 		return;
 	}
+	//Bimbo Jojo warning (Will be in 1.3)
+	/*if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && inventory.hasItemInStorage(consumables.BIMBOLQ) && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] >= 72 && flags[kFLAGS.JOJO_BIMBO_STATE] == 0) {
+		joyScene.jojoPromptsAboutThief();
+		hideMenus();
+		return;
+	}
+	//Jojo gets bimbo'ed!
+	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] >= 24 && flags[kFLAGS.JOJO_BIMBO_STATE] == 2) {
+		joyScene.jojoGetsBimbofied();
+		hideMenus();
+		return;
+	}*/
 	//Rathazul freaks out about jojo
 	if(flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && campCorruptJojo()) {
 		finter.rathazulFreaksOverJojo();
@@ -736,13 +748,22 @@ private function doCamp():void { //Only called by playerMenu
 		removeButton(0); //Explore
 		removeButton(1); //Places
 	}
+	//Update saves
+	if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0 && player.hasKeyItem("Golden Antlers") >= 0) {
+		clearOutput();
+		outputText("Out of nowhere, a cane appears on your " + bedDesc() + ". It looks like it once belonged to the Erlking. Perhaps the cane has been introduced into the game and you've committed a revenge on the Erlking? Regardless, you take it anyway. ");
+		flags[kFLAGS.ERLKING_CANE_OBTAINED] = 1;
+		inventory.takeItem(weapons.HNTCANE, doCamp);
+		return;
+	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] < kGAMECLASS.modSaveVersion) {
 		promptSaveUpdate();
+		return;
 	}
-	
 	//Massive Balls Bad End (Realistic Mode only)
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
 		badEndGIANTBALLZ();
+		return;
 	}
 	//Hunger Bad End
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0)
@@ -751,12 +772,14 @@ private function doCamp():void { //Only called by playerMenu
 		if (player.HP <= 0 && (player.str + player.tou) < 30)
 		{
 			badEndHunger();
+			return;
 		}
 	}
 	//Min Lust Bad End (Must not have any removable/temporary min lust.)
 	if (player.minLust() >= player.maxLust() && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.findStatusAffect(StatusAffects.BimboChampagne) >= 0 && !player.findStatusAffect(StatusAffects.Luststick) >= 0 && player.jewelryEffectId != 1)
 	{
 		badEndMinLust();
+		return;
 	}
 }
 	
@@ -1115,11 +1138,17 @@ public function campFollowers(descOnly:Boolean = false):void {
 	}
 	//Pure Jojo
 	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
-		outputText("There is a small bedroll for Jojo near your own", false);
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
-		if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n", false);
-		else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n", false);
-		addButton(2, "Jojo", jojoScene.jojoCamp, null, null, null, "Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
+			outputText("Joy's tent is set up in a quiet corner of the camp, close to a boulder. Inside the tent, you can see a chest holding her belongings, as well as a few clothes and books spread about her bedroll. Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.\n\n");
+			addButton(2, "Joy", joyScene.approachCampJoy, null, null, null, "Go find Joy around the edges of your camp and meditate with her or have sex with her.");
+		}
+		else {
+			outputText("There is a small bedroll for Jojo near your own");
+			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
+			if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and the mouse is sleeping on it right now.\n\n");
+			else outputText(", though the mouse is probably hanging around the camp's perimeter.\n\n");
+			addButton(2, "Jojo", jojoScene.jojoCamp, null, null, null, "Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.");
+		}
 	}
 	//RATHAZUL
 	//if rathazul has joined the camp
@@ -2055,8 +2084,8 @@ private function buildCampWallPrompt():void {
 		outputText("Segments complete: " + Math.floor(flags[kFLAGS.CAMP_WALL_PROGRESS] / 20) + "/5\n");
 	}
 	kGAMECLASS.camp.cabinProgress.checkMaterials();
-	outputText("\n\nIt will cost 200 nails and 100 wood to work on a segment of the wall.\n\n");
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 200) {
+	outputText("\n\nIt will cost 100 nails and 100 wood to work on a segment of the wall.\n\n");
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 100) {
 		doYesNo(buildCampWall, doCamp);
 	}
 	else {
@@ -2067,13 +2096,21 @@ private function buildCampWallPrompt():void {
 
 private function buildCampWall():void {
 	var helpers:int = 0;
-	var temp:int = 0;
-	if (marbleFollower()) helpers++;
-	if (followerHel()) helpers++;
-	if (followerKiha()) helpers++;
-	temp = helpers;
+	var helperArray:Array = [];
+	if (marbleFollower()) {
+		helperArray[helperArray.length] = "Marble"
+		helpers++;
+	}
+	if (followerHel()) {
+		helperArray[helperArray.length] = "Helia"
+		helpers++;
+	}
+	if (followerKiha()) {
+		helperArray[helperArray.length] = "Kiha"
+		helpers++;
+	}
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
-	player.addKeyValue("Carpenter's Toolbox", 1, -200);
+	player.addKeyValue("Carpenter's Toolbox", 1, -100);
 	clearOutput();
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] == 1) {
 		outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a wall. You spend minutes looking at the instructions and memorize the procedures.");
@@ -2085,25 +2122,7 @@ private function buildCampWall():void {
 	}
 	outputText("\n\nYou dig four holes, six inches deep and one foot wide each, before putting up wood posts, twelve feet high and one foot thick each. You take the wood from supplies, saw the wood and cut them into planks before nailing them to the wooden posts.");
 	if (helpers > 0) {
-		outputText("\n\n");
-		if (marbleFollower()) {
-			outputText("Marble");
-			if (temp >= 2) outputText(", ");
-			else if (temp == 1) outputText(", and ");
-			temp--;
-		}
-		if (followerHel()) {
-			outputText("Helia");
-			if (temp >= 2) outputText(", ");
-			else if (temp == 1) outputText(", and ");
-			temp--;
-		}
-		if (followerKiha()) {
-			outputText("Kiha");
-			if (temp >= 2) outputText(", ");
-			else if (temp == 1) outputText(", and ");
-			temp--;
-		}
+		outputText("\n\n" + formatStringArray(helperArray));
 		outputText(" " + (helpers == 1 ? "assists" : "assist") + " you with building the wall, helping to speed up the process and make construction less fatiguing.");
 	}
 	//Gain fatigue.
@@ -2143,8 +2162,8 @@ private function buildCampGatePrompt():void {
 	}
 	outputText("You can build a gate to further secure your camp by having it closed at night.\n\n");
 	kGAMECLASS.camp.cabinProgress.checkMaterials();
-	outputText("\n\nIt will cost 200 nails and 100 wood to build a gate.\n\n");
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 200) {
+	outputText("\n\nIt will cost 100 nails and 100 wood to build a gate.\n\n");
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 100) {
 		doYesNo(buildCampGate, doCamp);
 	}
 	else {
@@ -2162,7 +2181,7 @@ private function buildCampGate():void {
 	if (followerKiha()) helpers++;
 	temp = helpers;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
-	player.addKeyValue("Carpenter's Toolbox", 1, -200);
+	player.addKeyValue("Carpenter's Toolbox", 1, -100);
 	clearOutput();
 	outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a gate that can be opened and closed. You spend minutes looking at the instructions and memorize the procedures.");
 	flags[kFLAGS.CAMP_WALL_GATE] = 1;
@@ -2495,6 +2514,14 @@ private function promptSaveUpdate():void {
 			flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] = 0; //Reclaimed
 		}
 		if (player.armor == armors.GOOARMR) flags[kFLAGS.VALERIA_FLUIDS] = 100;
+		doCamp();
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 7) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 8;
+		//Move and reclaim flag.
+		flags[kFLAGS.LETHICITE_ARMOR_TAKEN] = flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER];
+		flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER] = 0;
 		doCamp();
 		return;
 	}

@@ -218,7 +218,7 @@ public function flushOutputTextToGUI():void
 	{
 		mainView.mainText.setTextFormat(fmt);
 	}
-	if (mainViewHack.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]] != null) mainView.mainText.textColor = mainViewHack.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
+	if (mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]] != null) mainView.mainText.textColor = mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
 }
 
 public function displayHeader(string:String):void {
@@ -1531,22 +1531,22 @@ public function invertGo():void{
  */
 public function statScreenRefresh():void {
 	mainView.statsView.show(); // show() method refreshes.
-	mainViewHack.refreshStats();
+	mainViewManager.refreshStats();
 }
 /**
  * Show the stats pane. (Name, stats and attributes)
  */
 public function showStats():void {
 	mainView.statsView.show();
-	mainViewHack.refreshStats();
-	mainViewHack.tweenInStats();
+	mainViewManager.refreshStats();
+	mainViewManager.tweenInStats();
 }
 /**
  * Hide the stats pane. (Name, stats and attributes)
  */
 public function hideStats():void {
-	if (!mainViewHack.buttonsTweened) mainView.statsView.hide();
-	mainViewHack.tweenOutStats();
+	if (!mainViewManager.buttonsTweened) mainView.statsView.hide();
+	mainViewManager.tweenOutStats();
 }
 
 /**
@@ -1738,7 +1738,7 @@ public function displayStats(e:MouseEvent = null):void
 		childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
 		
 	if (flags[kFLAGS.JOJO_LITTERS] > 0)
-		childStats += "<b>Litters With Jojo:</b> " + flags[kFLAGS.JOJO_LITTERS] + "\n";
+		childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + flags[kFLAGS.JOJO_LITTERS] + "\n";
 		
 	if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
@@ -1898,9 +1898,19 @@ public function displayStats(e:MouseEvent = null):void
 	// Begin Misc Stats
 	var miscStats:String = "";
 
+	if (camp.getCampPopulation() > 0)
+		miscStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
+	
+	if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0) {
+		if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100)
+			miscStats += "<b>Corrupted Glades Status:</b> " + (100 - flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]) + "% remaining\n";
+		else 
+			miscStats += "<b>Corrupted Glades Status:</b> Extinct\n";
+	}
+		
 	if (flags[kFLAGS.EGGS_BOUGHT] > 0)
 		miscStats += "<b>Eggs Traded For:</b> " + flags[kFLAGS.EGGS_BOUGHT] + "\n";
-		
+	
 	if (flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)
 		miscStats += "<b>Times Had Fun with Feline Flexibility:</b> " + flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] + "\n";
 	
@@ -1909,15 +1919,12 @@ public function displayStats(e:MouseEvent = null):void
 	
 	if (flags[kFLAGS.SPELLS_CAST] > 0)
 		miscStats += "<b>Spells Cast:</b> " + flags[kFLAGS.SPELLS_CAST] + "\n";
-		
+	
 	if (flags[kFLAGS.TIMES_BAD_ENDED] > 0)
 		miscStats += "<b>Times Bad-Ended:</b> " + flags[kFLAGS.TIMES_BAD_ENDED] + "\n";
-		
+	
 	if (flags[kFLAGS.TIMES_ORGASMED] > 0)
 		miscStats += "<b>Times Orgasmed:</b> " + flags[kFLAGS.TIMES_ORGASMED] + "\n";
-		
-	if (camp.getCampPopulation() > 0)
-		miscStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
 	
 	if (miscStats != "")
 		outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);
@@ -1988,6 +1995,12 @@ public function displayStats(e:MouseEvent = null):void
 			interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false;
 		else
 			interpersonStats += "100%\n";
+	}
+	
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
+		interpersonStats += "<b>Joy's Intelligence:</b> " + flags[kFLAGS.JOY_INTELLIGENCE];
+		if (flags[kFLAGS.JOY_INTELLIGENCE] >= 50) interpersonStats += " (MAX)"
+		interpersonStats += "\n";
 	}
 	
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {
@@ -2171,14 +2184,10 @@ public function lustPercent():Number {
 	if(player.findStatusAffect(StatusAffects.Berzerking) >= 0) lust *= .6;
 	if (player.findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
 	
-	if (player.jewelryEffectId == JewelryLib.PURITY)
-	{
-		lust *= 1 - (player.jewelryEffectMagnitude / 100);
-	}	
-	if (player.armor == armors.DBARMOR)
-	{
-		lust *= 0.9
-	}
+	//Items
+	if (player.jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (player.jewelryEffectMagnitude / 100);
+	if (player.armor == armors.DBARMOR) lust *= 0.9;
+	if (player.weapon == weapons.HNTCANE) lust *= 0.75;
 	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
 	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
@@ -2364,6 +2373,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(libi > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) libi *= 0.75;
 	if(corr > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) corr *= 0.5;
 	if(corr > 0 && player.findPerk(PerkLib.PureAndLoving) >= 0) corr *= 0.75;
+	if (corr > 0 && player.weapon == weapons.HNTCANE) corr *= 0.5;
 	if (player.findPerk(PerkLib.AscensionMoralShifter) >= 0) corr *= 1 + (player.perkv1(PerkLib.AscensionMoralShifter) * 0.2);
 	//Change original stats
 	player.str+=stre;

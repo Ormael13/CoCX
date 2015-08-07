@@ -274,7 +274,7 @@ use namespace kGAMECLASS;
 			if (skinAdj == "smooth") armorDef += 1;
 			//Bonus defense
 			if (armType == ARM_TYPE_SPIDER) armorDef += 2;
-			if (lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS || lowerBody == LOWER_BODY_TYPE_BEE) armorDef += 2
+			if (lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS || lowerBody == LOWER_BODY_TYPE_BEE) armorDef += 2;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if(findPerk(PerkLib.Agility) >= 0) {

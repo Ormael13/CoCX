@@ -170,7 +170,15 @@ package classes.Scenes.NPCs
 			if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) spriteSelect(3);
 			else spriteSelect(65);
 		}
-
+		
+		private function rackCount():int {
+			var temp:int = 0;
+			if (player.hasKeyItem("Equipment Rack - Armor") >= 0) temp++;
+			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) temp++;
+			if (player.hasKeyItem("Equipment Rack - Shields") >= 0) temp++;
+			return temp;
+		}
+		
 		//Encounters
 		//[Ruined Village]
 		//[Exploring the Lake]
@@ -204,33 +212,59 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.AMILY_VILLAGE_EXPLORED]++;
 			clearOutput();
 			//50% chance of ghost-girl
-			if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0 && player.hasKeyItem("Equipment Rack - Weapons") >= 0 && player.hasKeyItem("Equipment Rack - Armor") >= 0 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
+			if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0 && rackCount() >= 2 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
 				shouldraScene.shouldraGreeting();
 				return;
 			}
 			//20% chance of playing with a rack
-			if(rand(5) == 0 && (player.hasKeyItem("Equipment Rack - Weapons") < 0 || player.hasKeyItem("Equipment Rack - Armor") < 0)) {
+			if(rand(5) == 0 && rackCount() < 3) {
 				var rack:Number = 0;
-				//Already got weapon
-				if(player.hasKeyItem("Equipment Rack - Weapons") >= 0) rack = 0;
-				//Already got armor
-				else if(player.hasKeyItem("Equipment Rack - Armor") >= 0) rack = 1;
-				//Got neither - 50% of each
-				else if(rand(2) == 0) rack = 1;
+				var rackArray:Array = [];
+				if (player.hasKeyItem("Equipment Rack - Armor") < 0) rackArray[rackArray.length] = 0;
+				if (player.hasKeyItem("Equipment Rack - Weapons") < 0) rackArray[rackArray.length] = 1;
+				if (player.hasKeyItem("Equipment Rack - Shields") < 0) rackArray[rackArray.length] = 2;
+				rack = rackArray[rand(rackArray.length)];
 				outputText("While picking through the ruined houses and abandoned structures of this dilapidated village, you manage to find something useful!  There's an intact but empty ", false);
-				if(rack == 0) outputText("armor", false);
-				else outputText("weapon", false);
-				outputText(" rack here.  It looks like it could hold nine different ", false);
-				if(rack == 0) outputText("armors", false);
-				else outputText("weapons", false);
-				outputText(".  You check it over and spot an easy way to fold it up for transport.  This would be a fine addition to your camp, so you pack it up and haul it back.", false);
-				if(rack == 1) {
-					player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
-					//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
+				switch(rack) {
+					case 0:
+						outputText("armor");
+						break;
+					case 1:
+						outputText("weapon");
+						break;
+					case 2:
+						outputText("shield");
+						break;
+					default:
+						outputText("undefined");
 				}
-				else {
-					player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
-					//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
+				outputText(" rack here.  It looks like it could hold nine different ", false);
+				switch(rack) {
+					case 0:
+						outputText("armors");
+						break;
+					case 1:
+						outputText("weapons");
+						break;
+					case 2:
+						outputText("shields");
+						break;
+					default:
+						outputText("undefined");
+				}
+				outputText(".  You check it over and spot an easy way to fold it up for transport.  This would be a fine addition to your camp, so you pack it up and haul it back.", false);
+				switch(rack) {
+					case 0:
+						player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
+						break;
+					case 1:
+						player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
+						break;
+					case 2:
+						player.createKeyItem("Equipment Rack - Shields",0,0,0,0);
+						break;
+					default:
+						outputText("  <b>Please let Kitteh6660 know about this bug.</b>");
 				}
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -343,7 +377,7 @@ package classes.Scenes.NPCs
 						outputText("\"<i>Don't make any sudden moves!</i>\" A voice calls out, high pitched and a little squeaky, but firm and commanding. You freeze to avoid giving your assailant a reason to shoot at you again. \"<i>Stand up and turn around, slowly,</i>\" it commands again. You do as you are told.\n\n", false);
 
 						//[Jojo previously encountered]
-						if(monk > 0) {
+						if(monk != 0) {
 							outputText("The creature that has cornered you is clearly of the same race as Jojo, though notably a female member of his species. Her fur is thick with dust, but you can still easily make out its auburn color. Her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. She wears a tattered pair of pants and an equally ragged-looking shirt. A very large and wicked-looking dagger – more of a short sword really – is strapped to her hip, and she is menacing you with a blowpipe.\n\n", false);
 						}
 						//[Jojo not previously encountered]
@@ -2625,19 +2659,32 @@ package classes.Scenes.NPCs
 				//MOAR OPTIONS: Give Present\nAlchemy\nTeach Blowpipe
 				var eggs:Function = null;
 				if (flags[kFLAGS.AMILY_OVIPOSITION_UNLOCKED] > 0 && player.canOviposit()) eggs = layEggsInAmily;
-				choices("Appearance", amilyAppearance, "Talk", talkToAmilyCamp, "Make Love", fuckTheMouseBitch, "Give Present", giveAmilyAPresent, "Date", date,
-					"Lay Eggs", eggs, "Defur", defur, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Appearance", amilyAppearance);
+				addButton(1, "Talk", talkToAmilyCamp);
+				addButton(2, "Make Love", fuckTheMouseBitch);
+				addButton(3, "Give Present", giveAmilyAPresent);
+				addButton(4, "Date", date);
+				addButton(5, "Lay Eggs", eggs);
+				if (flags[kFLAGS.AMILY_NOT_FURRY] == 0) addButton(6, "Defur", amilyDefurryOfferAtCamp);
+				else if (player.hasItem(consumables.MOUSECO, 2)) addButton(6, "Refuzz", refuzzAmily);
+				if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
+					if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", amilyDestroyGladesToggle, null, null, null, "Request Amily to destroy any corrupted glades she can find.");
+					else addButton(7, "Stop Destroying", amilyDestroyGladesToggle, null, null, null, "Request Amily to stop destroying the corrupted glades.");
+				}
 				addButton(14, "Leave", camp.campLoversMenu);
-				if (player.hasItem(consumables.MOUSECO, 2) && flags[kFLAGS.AMILY_NOT_FURRY] > 0) addButton(4, "Refuzz", refuzzAmily);
 			}
 			//Corrupt
 			else {
 				//outputText("Options:\nAppearance\nGive Item\nSex\nTalk\n", false);
 				//  [Sex] [Give Item] [Talk] [Call Jojo]
-				choices("Appearance", amilyAppearance, "Give Item", giveAmilyAPresent, "Sex", fuckTheMouseBitch, "Talk", talkWithCORRUPTCUNT, "Defur", defur,
-					"", null, "", null, "", null, "", null, "", null);
+				addButton(0, "Appearance", amilyAppearance);
+				addButton(1, "Talk", talkWithCORRUPTCUNT);
+				addButton(2, "Sex", fuckTheMouseBitch);
+				addButton(3, "Give Item", giveAmilyAPresent);
+				if (flags[kFLAGS.AMILY_NOT_FURRY] == 0) addButton(4, "Defur", amilyDefurryOfferAtCamp);
+				else if (player.hasItem(consumables.MOUSECO, 2)) addButton(4, "Refuzz", refuzzAmily);
 				addButton(14, "Leave", camp.campLoversMenu);
-				if (player.hasItem(consumables.MOUSECO, 2) && flags[kFLAGS.AMILY_NOT_FURRY] > 0) addButton(4, "Refuzz", refuzzAmily);
 				if (!pregnancy.isPregnant && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
 				{
 					addButton(5, "Farm Work", sendCorruptCuntToFarm);
@@ -2797,6 +2844,21 @@ package classes.Scenes.NPCs
 			doNext(amilyFollowerEncounter);
 		}
 
+		private function amilyDestroyGladesToggle():void {
+			clearOutput();
+			if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] == 0) {
+				outputText("You ask Amily if she's willing to destroy the corrupted glades in the forest on sight. After all, the forest could be cleansed.");
+				outputText("\n\n\"<i>I'll destroy any corrupted glades I see. I'll make sure they don't live again,</i>\" Amily says. She grins and holds up the knife for emphasis.");
+				flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] = 1;
+			}
+			else {
+				outputText("You tell Amily that she doesn't have to destroy the foul glades in the forest.");
+				outputText("\n\n\"<i>All right but they might come back if you don't keep them at bay,</i>\" Amily says.");
+				flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] = 0;
+			}
+			doNext(amilyFollowerEncounter);
+		}
+		
 		// EVENT 2429: Talk to Amily in camp
 		public function talkToAmilyCamp():void {
 			amilySprite();

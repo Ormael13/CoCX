@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 
 //EXGARTUAN STATUS
@@ -67,6 +67,7 @@
 				trace("EXGARTUAN V1: " + player.statusAffectv1(StatusAffects.Exgartuan) + " V2: " + player.statusAffectv2(StatusAffects.Exgartuan));
 				if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && (!player.hasCock() || player.cockArea(0) < 100)) { //If too small dick, remove him
 					outputText("\n<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.  Perhaps you got too small for Exgartuan to handle?</b>\n");
+					awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, false, true);
 					player.removeStatusAffect(StatusAffects.Exgartuan);
 					needNext = true;
 				}
@@ -1066,6 +1067,7 @@ private function exgartuanBulgeTortureIII():void {
 	outputText(" hits you square in the face.  The surprising force of the blow sends you reeling, your hands clearing from the mighty demon as he points skyward, showering everything around you in black, warm ejaculate.  You care little, however, being too busy convulsing and indulging on every ounce of pleasure radiating through it.  It doesn't take long for you to black out, drawing an end to your excruciating experience.\n\n", false);
 	//[new page. lust resets to 0. corruption raises by 2. player gains ailment \"<i>Jizzpants</i>\"]
 	player.orgasm();
+	player.createStatusAffect(StatusAffects.Jizzpants, 1, 0, 0, 0);
 	dynStats("cor", 2);
 	doNext(exgartuanBulgeTortureIV);
 }

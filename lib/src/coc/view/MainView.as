@@ -15,6 +15,7 @@ package coc.view {
 	import flash.display.MovieClip;
 	import flash.display.DisplayObject;
 	import flash.display.InteractiveObject;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
@@ -78,13 +79,15 @@ package coc.view {
 		public var toolTipView:ToolTipView;
 		public var statsView:StatsView;
 
+		public var sideBarDecoration:Sprite;
+		
 		protected var options:Object;
 		// protected var allButtonTexts:Array;
 		protected var allButtons:Array;
 		protected var callbacks:Object = {}
 
 		//protected var model:GameModel;
-
+		
 		public var
 			newGameBG:MovieClip, 
 			dataBG:MovieClip, 
@@ -139,6 +142,8 @@ package coc.view {
 
 			this.nameBox.maxChars = 54;
 
+			this.sideBarDecoration = getChildByName("statsBarMarker") as Sprite;
+			
 			this.aCb = new ComboBox(); 
 			this.aCb.dropdownWidth = 200; 
 			this.aCb.width = 200; 

@@ -248,13 +248,20 @@ private function rathazulWorkOffer():Boolean {
 	}
 	//Offer dyes if offering something else.
 	if(player.gems >= 50) {
-		outputText("Rathazul offers, \"<i>Since you have enough gems to cover the cost of materials for my dyes as well, you could buy one of my dyes for your hair.  I will need 50 gems up-front.</i>\"\n\n", false);
+		outputText("Rathazul offers, \"<i>Since you have enough gems to cover the cost of materials for my dyes as well, you could buy one of my dyes for your hair.  ", false);
+		if (player.statusAffectv2(StatusAffects.MetRathazul) >= 8) outputText("I should be able to make exotic-colored dyes if you're interested.  ");
+		outputText("Or if you want some changes to your skin, I have skin oils and body lotions.  I will need 50 gems up-front.</i>\"\n\n");
 		spoken = true;
 		totalOffers++;
 		dyes = buyDyes;
 	}
-	if (player.hasItem(consumables.EQUINUM, 2)) {
-		outputText("The rat mentions, \"<i>You know, I could make something new if you're willing to hand over two of vials labeled \"Equinum\", one vial of minotaur blood and one hundred gems.</i>\"");
+	//Bee honey
+	if (player.hasItem(consumables.BEEHONY)) {
+		outputText("Rathazul offers, \"<i>If you're in need of a pure honey, I can distill the regular bee honey. You'll also need 25 gems up front.</i>\"\n\n");
+	}
+	//Pro Lactaid & Taurinum
+	if (player.statusAffectv2(StatusAffects.MetRathazul) >= 5) {
+		outputText("The rat mentions, \"<i>You know, I could make something new if you're willing to hand over two of vials labeled \"Equinum\", one vial of minotaur blood and one hundred gems. Or five bottles of Lactaid and two bottles of purified LaBova along with 250 gems.</i>\"\n\n");
 	}
 	//Reducto
 	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
@@ -309,18 +316,24 @@ private function rathazulWorkOffer():Boolean {
 		//In camp has no time passage if left.
 		menu();
 		if (showArmorMenu) addButton(0, "Armor", rathazulArmorMenu, null, null, null, "Ask Rathazul to make an armour for you.");
-		if (debimbo > 0) addButton(1, "Debimbo", makeADeBimboDraft, null, null, null, "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
-		addButton(2,"Buy Dye",dyes, null, null, null, "Ask him to make a dye for you. \n\nCost: 50 Gems.");
-		if (lethiciteDefense != null) addButton(3, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
+		if (dyes != null) {
+			addButton(1, "Buy Dye", buyDyes, null, null, null, "Ask him to make a dye for you. \n\nCost: 50 Gems.");
+			addButton(2, "Buy Oil", buyOils, null, null, null, "Ask him to make a skin oil for you. \n\nCost: 50 Gems.");
+			addButton(3, "Buy Lotion", buyLotions, null, null, null, "Ask him to make a body lotion for you. \n\nCost: 50 Gems.");
+		}
 		addButton(4, "Purify", purify, null, null, null, "Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
+		
+		if (debimbo > 0) addButton(5, "Debimbo", makeADeBimboDraft, null, null, null, "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		if (player.hasItem(consumables.BEEHONY)) addButton(6, consumables.PURHONY.shortName, rathazulMakesPureHoney, null, null, null, "Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
+		if (player.statusAffectv2(StatusAffects.MetRathazul) >= 5) addButton(7, "ProLactaid", rathazulMakesMilkPotion, null, null, null, "Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
+		if (player.statusAffectv2(StatusAffects.MetRathazul) >= 5) addButton(8, "Taurinum", rathazulMakesTaurPotion, null, null, null, "Ask him to brew a special potion that could aid in becoming a centaur. \n\nCost: 100 Gems \nNeeds 2 Equinum and 1 Minotaur Blood.");
+		if (reductos != null) addButton(9, "Reducto", reductos);
+		
+		if (lethiciteDefense != null) addButton(10, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
 		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
-			addButton(5, "Pure Potion", rathazulMakesPurifyPotion, null, null, null, "Ask him to brew a purification potion for Minerva.");
+			addButton(11, "Pure Potion", rathazulMakesPurifyPotion, null, null, null, "Ask him to brew a purification potion for Minerva.");
 		}
-		if (player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2)) {
-			addButton(6, "Pro Lactaid", rathazulMakesMilkPotion, null, null, null, "Ask him to brew a special milk potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
-		}
-		if (player.hasItem(consumables.EQUINUM, 2) && player.hasItem(consumables.MINOBLO, 1) && player.gems >= 100) addButton(7, "Taurinum", makeTaurPotion);
-		if (reductos != null) addButton(8, "Reducto", reductos);
+
 		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
 			addButton(14,"Leave", camp.campFollowers);
 		else
@@ -399,26 +412,6 @@ private function rathazulMakesPurifyPotion():void {
 	player.createKeyItem("Rathazul's Purity Potion", 0, 0, 0, 0);
 	menu();
 	addButton(0, "Next", campRathazul);
-}
-
-private function rathazulMakesMilkPotion():void {
-	clearOutput();
-	if (player.gems < 250) {
-		outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" Rathazul says.");
-		doNext(returnToRathazulMenu);
-		return;
-	}
-	else 
-	player.destroyItems(consumables.LACTAID, 5);
-	player.destroyItems(consumables.P_LBOVA, 2);
-	player.gems -= 250;
-	statScreenRefresh();
-	outputText("You hand over the ingredients and 250 gems.");
-	outputText("\n\n\"<i>I'll see what I can do,</i>\" he says as he takes the ingredients and begin brewing something. ");
-	outputText("\n\nA few minutes later, he comes back with the potion.  \"<i>It's ready. If you have some issues with lactation or you want to produce milk forever, drink this. Keep in mind that it might be irreversible,</i>\" he says. He hands you over the potion and goes back to working.  ");
-	inventory.takeItem(consumables.MILKPTN, returnToRathazulMenu);
-	//menu();
-	//addButton(0,"Next",campRathazul);
 }
 
 private function rathazulPurifySuccubiMilk():void {
@@ -721,7 +714,7 @@ private function craftDragonscaleArmor():void {
 	menu();
 	if (player.hasItem(useables.D_SCALE, 5)) {
 		addButton(0, "Armor", craftDragonscaleArmorForReal, 0, null, null, armors.DSCLARM.description);
-		//addButton(1, "Robe", craftDragonscaleArmorForReal, 0, null, null, armors.DSCLARM.description);
+		addButton(1, "Robe", craftDragonscaleArmorForReal, 1, null, null, armors.DSCLROB.description);
 	}
 	else outputText("\n\nYou realize you're still a bit short on dragonscales for the armor but you can have undergarments made instead.");
 	addButton(2, "Bra", craftDragonscaleArmorForReal, 2, null, null, undergarments.DS_BRA.description);
@@ -743,11 +736,14 @@ private function craftDragonscaleArmorForReal(type:int = 0):void {
 		case 0: //Armor
 			outputText(images.showImage("rathazul-craft-dragonscalearmor"));
 			outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ");
-			outputText("The armor is red and the breastplate has nicely decorated pauldrons to give an imposing looks. You touch the armor and feel the scaly texture. \"<i>It's quite flexible and should offer very good protection,</i>\" Rathazul says.", false);
+			outputText("The armor is red and the breastplate has nicely decorated pauldrons to give an imposing looks. You touch the armor and feel the scaly texture. \"<i>It's quite flexible and should offer very good protection,</i>\" Rathazul says.");
 			itype = armors.DSCLARM;
 			break;
-		case 1: //Robes, not used
-			itype = armors.DSCLARM;
+		case 1: //Robes
+			outputText(images.showImage("rathazul-craft-dragonscalerobes"));
+			outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the robes.  ");
+			outputText("The robe is red and appears to be textured with scales.  You touch the robes and feel the scaly texture. \"<i>It's quite flexible and should offer very good protection,</i>\" Rathazul says.");
+			itype = armors.DSCLROB;
 			break;
 		case 2: //Bra
 			outputText(images.showImage("rathazul-craft-dragonscalebra"));
@@ -805,6 +801,7 @@ private function craftMaraeArmor(divine:Boolean = false):void {
 	}
 }
 
+//Hair dyes
 private function buyDyes():void {
 	spriteSelect(49);
 	clearOutput();
@@ -820,7 +817,17 @@ private function buyDyes():void {
 	addButton(4, "Red", buyDye, consumables.RED_DYE);
 	addButton(5, "White", buyDye, consumables.WHITEDY);
 	addButton(6, "Gray", buyDye, consumables.GRAYDYE);
-	addButton(9, "Nevermind", buyDyeNevermind);
+	if (player.statusAffectv2(StatusAffects.MetRathazul) >= 8) {
+		addButton(7, "Blue", buyDye, consumables.BLUEDYE);
+		addButton(8, "Green", buyDye, consumables.GREEN_D);
+		addButton(9, "Orange", buyDye, consumables.ORANGDY);
+		addButton(10, "Purple", buyDye, consumables.PURPDYE);
+		addButton(11, "Pink", buyDye, consumables.PINKDYE);
+	}
+	if (player.statusAffectv2(StatusAffects.MetRathazul) >= 12) {
+		addButton(12, "Rainbow", buyDye, consumables.RAINDYE);
+	}
+	addButton(14, "Nevermind", buyDyeNevermind);
 }
 
 private function buyDye(dye:ItemType):void {
@@ -841,15 +848,136 @@ private function buyDyeNevermind():void {
 	doNext(returnToRathazulMenu);
 }
 
-private function makeTaurPotion():void {
+//Skin Oils
+private function buyOils():void {
 	spriteSelect(49);
 	clearOutput();
+	outputText("Rathazul smiles and pulls forth several bottles of skin oil.  Which type of skin oil would you like?");
+	outputText("\n\n<b>(-50 Gems)</b>");
+	player.gems -= 50;
+	statScreenRefresh();
+	menu();
+	addButton(0, "Dark", buyOil, consumables.DARK_OL);
+	addButton(1, "Ebony", buyOil, consumables.EBONYOL);
+	addButton(2, "Fair", buyOil, consumables.FAIR_OL);
+	addButton(3, "Light", buyOil, consumables.LIGHTOL);
+	addButton(4, "Mahogany", buyOil, consumables.MAHOGOL);
+	addButton(5, "Olive", buyOil, consumables.OLIVEOL);
+	addButton(6, "Russet", buyOil, consumables.RUSS_OL);
+	addButton(14, "Nevermind", buyOilNevermind);
+}
+
+private function buyOil(oil:ItemType):void {
+	spriteSelect(49);
+	clearOutput();
+	outputText(images.showImage("rathazul-buy-oil"));
+	inventory.takeItem(oil, returnToRathazulMenu);
+	statScreenRefresh();
+	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+}
+
+private function buyOilNevermind():void {
+	spriteSelect(49);
+	clearOutput();
+	outputText("You change your mind about the oil, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
+	player.gems += 50;
+	statScreenRefresh();
+	doNext(returnToRathazulMenu);
+}
+
+//Body Lotions
+private function buyLotions():void {
+	spriteSelect(49);
+	clearOutput();
+	outputText("Rathazul smiles and pulls forth several vials of body lotion.  Which type of body lotion would you like?");
+	outputText("\n\n<b>(-50 Gems)</b>");
+	player.gems -= 50;
+	statScreenRefresh();
+	menu();
+	addButton(0, "Clear", buyLotion, consumables.CLEARLN);
+	addButton(1, "Rough", buyLotion, consumables.ROUGHLN);
+	addButton(2, "Sexy", buyLotion, consumables.SEXY_LN);
+	addButton(3, "Smooth", buyLotion, consumables.SMTH_LN);
+	addButton(14, "Nevermind", buyLotionNevermind);
+}
+
+private function buyLotion(lotion:ItemType):void {
+	spriteSelect(49);
+	clearOutput();
+	outputText(images.showImage("rathazul-buy-lotion"));
+	inventory.takeItem(lotion, returnToRathazulMenu);
+	statScreenRefresh();
+	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+}
+
+private function buyLotionNevermind():void {
+	spriteSelect(49);
+	clearOutput();
+	outputText("You change your mind about the lotion, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
+	player.gems += 50;
+	statScreenRefresh();
+	doNext(returnToRathazulMenu);
+}
+
+//Turn several ingredients into a special potion/consumable.
+private function rathazulMakesPureHoney():void {
+	clearOutput();
+	if (player.gems < 25) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" Rathazul says.");
+		doNext(returnToRathazulMenu);
+		return;
+	}
+	player.destroyItems(consumables.BEEHONY, 1);
+	player.gems -= 25;
+	statScreenRefresh();
+	outputText("You hand over a vial of bee honey and the 25 gems.");
+	outputText("\n\n\"<i>I'll see what I can do,</i>\" he says as he takes the bee honey and begin brewing something. ");
+	outputText("\n\nA few minutes later, he comes back with the crystal vial that contains glittering liquid.  \"<i>It's ready. The honey should be pure now,</i>\" he says. He hands you over the vial of honey and goes back to working.  ");
+	inventory.takeItem(consumables.PURHONY, returnToRathazulMenu);
+}
+
+private function rathazulMakesMilkPotion():void {
+	clearOutput();
+	if (player.gems < 250) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" Rathazul says.");
+		doNext(returnToRathazulMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need five bottles of Lactaid and two bottles of purified LaBova,</i>\" Rathazul says.");
+		doNext(returnToRathazulMenu);
+		return;
+	}
+	player.destroyItems(consumables.LACTAID, 5);
+	player.destroyItems(consumables.P_LBOVA, 2);
+	player.gems -= 250;
+	statScreenRefresh();
+	outputText("You hand over the ingredients and 250 gems.");
+	outputText("\n\n\"<i>I'll see what I can do,</i>\" he says as he takes the ingredients and begin brewing something. ");
+	outputText("\n\nA few minutes later, he comes back with the potion.  \"<i>It's ready. If you have some issues with lactation or you want to produce milk forever, drink this. Keep in mind that it might be irreversible,</i>\" he says. He hands you over the potion and goes back to working.  ");
+	inventory.takeItem(consumables.MILKPTN, returnToRathazulMenu);
+}
+
+private function rathazulMakesTaurPotion():void {
+	spriteSelect(49);
+	clearOutput();
+	if (player.gems < 100) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" Rathazul says.");
+		doNext(returnToRathazulMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.EQUINUM, 2) && player.hasItem(consumables.MINOBLO, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need two vials of Equinum and one vial of minotaur blood,</i>\" Rathazul says.");
+		doNext(returnToRathazulMenu);
+		return;
+	}
 	player.destroyItems(consumables.EQUINUM, 2);
 	player.destroyItems(consumables.MINOBLO, 1);
 	player.gems -= 100;
 	statScreenRefresh();
 	outputText("You hand over two vials of Equinum, one vial of Minotaur Blood and one hundred gems to Rathazul, which he gingerly takes them and proceeds to make a special potion for you.");
 	outputText("\n\nAfter a while, the rat hands you a vial labeled \"Taurinum\" and nods.");
+	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
 	inventory.takeItem(consumables.TAURICO, returnToRathazulMenu);
 }
 

@@ -38,7 +38,10 @@ package coc.view {
                     "lustText",    "lustNum",    "lustBar",     // "lustUp",     "lustDown",
 					"minLustBar",
                     "fatigueText", "fatigueNum", "fatigueBar",  // "fatigueUp",  "fatigueDown",
-                    "hungerText",  "hungerNum",  "hungerBar",   // "fatigueUp",  "fatigueDown",
+                    "hungerText",  "hungerNum",  "hungerBar",   // 
+					"esteemText",  "esteemNum",  "esteemBar",   // 
+					"willText",    "willNum",    "willBar",     // 
+					"obeyText",    "obeyNum",    "obeyBar",     // 
                     "levelText",   "levelNum",                  // "levelUp",
                     "xpText",      "xpNum",      "xpBar",	    // "xpUp",       "xpDown",
 					"nameText",
@@ -63,7 +66,9 @@ package coc.view {
 					"lustUp",     "lustDown",
                     "fatigueUp",  "fatigueDown",
                     "hungerUp",   "hungerDown",
-                    
+					"esteemUp",   "esteemDown",
+                    "willUp",     "willDown",
+					"obeyUp",     "obeyDown",
                     // "levelUp",
                     "xpUp",       "xpDown"
                ];

@@ -141,11 +141,14 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	var kitsune:Function =null;
 	if(player.hasItem(consumables.FOXJEWL))
 		kitsune = lumiEnhanceFoxJewel;
-	var pigtruffle :Function = null;
+	var pigTruffle:Function = null;
 	if(player.hasItem(consumables.PIGTRUF))
-		pigtruffle = lumiEnhancePigtailTruffle;
+		pigTruffle = lumiEnhancePigtailTruffle;
+	var pureHoney:Function = null;
+	if(player.hasItem(consumables.PURHONY))
+		pureHoney = lumiEnhancePureHoney;
 	if(justCheck) {
-		return fox != null || kanga != null || seed != null || laBova != null || succuDelight != null || oviElix != null || lustDraft != null || kitsune != null || pigtruffle != null;
+		return fox != null || kanga != null || seed != null || laBova != null || succuDelight != null || oviElix != null || lustDraft != null || kitsune != null || pigTruffle != null || pureHoney != null;
 	}
 	clearOutput();
 	outputText("\"<i>Do you have 100 gems for de enhancement?</i>\" asks Lumi.\n\n", false); 
@@ -167,8 +170,9 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 				consumables.LABOVA_.shortName, laBova,
 				consumables.OVIELIX.shortName, oviElix,
 				consumables.SDELITE.shortName, succuDelight,
-				consumables.PIGTRUF.shortName, pigtruffle,
-				"Back", lumiLabChoices);
+				consumables.PIGTRUF.shortName, pigTruffle,
+				consumables.PURHONY.shortName, pureHoney);
+		addButton(14, "Back", lumiLabChoices);
 		return true;
 	}
 }
@@ -198,6 +202,9 @@ private function lumiEnhanceFoxJewel():void {
 }
 private function lumiEnhancePigtailTruffle():void {
 	lumiEnhanceGo(consumables.PIGTRUF);
+}
+private function lumiEnhancePureHoney():void {
+	lumiEnhanceGo(consumables.PURHONY);
 }
 
 private function lumiEnhanceGo(itype:ItemType):void
@@ -231,6 +238,9 @@ private function lumiEnhanceGo(itype:ItemType):void
 	}
 	else if(itype == consumables.PIGTRUF) {
 		nextItem = consumables.BOARTRU;
+	}
+	else if(itype == consumables.PURHONY) {
+		nextItem = consumables.SPHONEY;
 	}
 	player.gems -= 100;
 	statScreenRefresh();
