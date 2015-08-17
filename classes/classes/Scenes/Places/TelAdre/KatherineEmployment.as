@@ -744,7 +744,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("“<i>When are you going to start taking this seriously, kitty?  These skills are essential if you ever get sent outside the walls!</i>”\n\n");
 			outputText("“<i>Since when do you send people out into the desert anyway?  Besides, it’s hard to concentrate when you’re stuck in this stupid thing,</i>” the cat replies, tapping a claw-like fingernail meaningfully on the chastity belt she’s wearing.\n\n");
 			outputText("“<i>You can’t seriously be aroused already - I’m the only one here, and it’s not like I’m in heat.  It should only be bothering you if you’re too much of a slut to control yourself!</i>” Urta snaps back.\n\n");
-			outputText("Before things can escalate into a fight, you interject, yelling both of them to stay quiet!  This is not helping either of them!  You step between the two girls, crossing your arms and glaring at both of them.  You tell them to apologise to each other so the three of you can carry on.\n\n");
+			outputText("Before things can escalate into a fight, you interject, yelling both of them to stay quiet!  This is not helping either of them!  You step between the two girls, crossing your arms and glaring at both of them.  You tell them to apologize to each other so the three of you can carry on.\n\n");
 			outputText("Bristling, the two glower half-heartedly at each other and mumble a tired sounding, “<i>sorry,</i>” simultaneously.  You’re not sure if they’re really still hating each other, or they just don’t want to try and get along for whatever reasons.  Still, you suppose this will have to do, for the moment.  Turning to Urta, you ask her about the details of this training.  What exactly is Kath supposed to do?\n\n");
 			outputText("“<i>Well, part of being a Watch recruit is being able to look after yourself if you get sent out beyond the city, right?</i>”  The vulpine officer explains.  You nod in agreement, motioning for her to go on.  “<i>So, that means you need to know how to look after yourself out in the wilderness.  We covered firemaking and foraging already - she actually passed those pretty well, quicker than a lot of recruits I’ve seen,</i>” she admits, which makes Kath blink in shock at hearing her skills praised.\n\n");
 			outputText("You turn to smile at Kath and then ask.  If Kath did as well as Urta’s saying, what seems to be the problem?\n\n");
@@ -812,7 +812,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("“<i>Then what about at breakfast, when you were washing up?  Tail wagging all over the place - I could look right at your pussy every time it wasn’t hanging between your legs,</i>” Kath drawls.\n\n");
 			outputText("Looking at Urta you tell her that does seem like something she would do when drunk...\n\n");
 			outputText("“<i>I don’t drink that much in the morning, and certainly not while I’m working here!</i>” the vulpine herm retorts indignantly.\n\n");
-			outputText("Okay... you apologise.  Still you oughta do something about Kath, she really looks in pain...\n\n");
+			outputText("Okay... you apologize.  Still you oughta do something about Kath, she really looks in pain...\n\n");
 			outputText("Kath promptly clasps her hands in front of you and stares at you and Urta alike with her eyes as wide and pleading as possible... how is it that she can look so much like an adorable little kitten when she wants to?\n\n");
 			outputText("“<i>...Ugh, fine, I guess we can do something for her.  What do you have in mind? ...Besides taking the belt off, of course?</i>” Urta asks.\n\n");
 			outputText("Hmm... this is supposed to help Kath develop some resistance to lust, so actually fucking her is out of question.  Maybe a handjob?  Just to help her get her rocks off so she can focus on the task at hand?  Figuring this could also be a great opportunity to help them get along... you suggest Urta should be the one giving her a handjob.\n\n");
@@ -821,7 +821,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("“<i>Of course you would, you had nobody else to practice with,</i>” Kath retorts.  Urta flinches at that, looking genuinely wounded.\n\n");
 			outputText("“<i>Hey!</i>” you interject.  “<i>That is not something you say to someone who is using her off-time to help you out!  Maybe you should stay in your belt after all... you’ll cool off sometime later...</i>”\n\n");
 			outputText("“<i>You wouldn’t!</i>” Kath protests in horror.\n\n");
-			outputText("You wouldn’t?  After saying something so inconsiderate, you damn well should!  Or need you remind her that she was in basically the same situation as Urta before you met her?  You wouldn’t blame Urta for leaving her hanging after saying something like that.  If Kath has any hopes of getting out of that belt anytime soon, she’d better apologise!\n\n");
+			outputText("You wouldn’t?  After saying something so inconsiderate, you damn well should!  Or need you remind her that she was in basically the same situation as Urta before you met her?  You wouldn’t blame Urta for leaving her hanging after saying something like that.  If Kath has any hopes of getting out of that belt anytime soon, she’d better apologize!\n\n");
 			outputText("The feline herm has the decency to look genuinely ashamed of herself as she turns to Urta, “<i>I’m sorry, Ms. Urta,</i>” she says.\n\n");
 			outputText("“<i>...Just Urta, is fine,</i>” Urta grumbles, then heaves a sigh.\n\n");
 			outputText("You nod your head, that’s much better now...\n\n");
@@ -1101,7 +1101,7 @@ package classes.Scenes.Places.TelAdre{
 		private function katherineTrainingWithUrtaCompleteLeave():void
 		{
 			clearOutput();
-			outputText("You apologise to the amorous herms, but you really have to be going...\n\n");
+			outputText("You apologize to the amorous herms, but you really have to be going...\n\n");
 			outputText("“<i>Aw...</i>” the two sigh, clearly disappointed.  “<i>Well, I guess we’ll just try to have fun without you... but we’ll miss you,</i>” Urta says.  “<i>Yeah, so hurry back, lover,</i>” Kath winks, right before Urta reaches up and, to Kath’s own visible surprise, pulls her into a kiss... damn, but she must be drunk.\n\n");
 			outputText("On the way out, you pay your tab and wave to the two girls, who seem too busy with each other to notice... well... you’ll just find out how this ends via gossip later...");
 			doNext(camp.returnToCampUseFourHours); //Return to camp, use up four hours
