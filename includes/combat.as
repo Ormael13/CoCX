@@ -4671,7 +4671,7 @@ public function runAway(callHook:Boolean = true):void {
 			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
-		//Speeed dependant
+		//Speed dependent
 		else {
 			//Success
 			if(player.spe > rand(monster.spe+escapeMod)) {
