@@ -597,7 +597,7 @@ private function sendToFarm():void
 
 	outputText("\n\n“<i>No sneaking off,</i>” you warn. “<i>I want you to work hard and earn the fluids you’ll be given.</i>”");
 
-	outputText("\n\n“<i>As you wish [master],</i>” she sighs, before slowly sliding off in the direction of the lake. She will be utterly useless as either a worker or a protector, you think; however, you suspect if Whitney keeps her well fed she will be able to harvest latex from her, which is surely worth something, and maybe some good old fashioned exertion will do the wilful goo some good.");
+	outputText("\n\n“<i>As you wish [master],</i>” she sighs, before slowly sliding off in the direction of the lake. She will be utterly useless as either a worker or a protector, you think; however, you suspect if Whitney keeps her well fed she will be able to harvest latex from her, which is surely worth something, and maybe some good old fashioned exertion will do the willful goo some good.");
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] = 1;
 	
@@ -708,7 +708,7 @@ private function latexyEatsADickItem(item:ItemType):void {
 	}
 	else {
 		if(item == consumables.GROPLUS) {
-			outputText("Her " + gooCock() + " shivers, and starts to sprout outward from the base, lengthing before your very eyes.  One... two... three... new inches of gleaming prick reveal themselves to you!\n\n" + flags[kFLAGS.GOO_NAME] + " giggles, \"<i>You sure do like them big!</i>\"");
+			outputText("Her " + gooCock() + " shivers, and starts to sprout outward from the base, lengthening before your very eyes.  One... two... three... new inches of gleaming prick reveal themselves to you!\n\n" + flags[kFLAGS.GOO_NAME] + " giggles, \"<i>You sure do like them big!</i>\"");
 			flags[kFLAGS.GOO_DICK_LENGTH] += 3;
 		}
 		else if(item == consumables.REDUCTO) {
@@ -736,7 +736,7 @@ private function setLatexysBustSize():void {
 	outputText("You ask " + flags[kFLAGS.GOO_NAME] + " if she wouldn't mind keeping her tits around a certain size.");
 	//Low Obedience
 	if(gooObedience() < 60) {
-		outputText("\n\nShe puts her hands on her hips and shouts, \"<i>As if!  I'll make 'em as big or as small as I want!  You're already getting a sexy latex woman who's dependant on you for sexual fluids - you don't need to micromanage everything about me too!</i>\"  She blushes a little when she realized she just discussed her new self as 'sexy'.  She must like this a little more than she lets on.");
+		outputText("\n\nShe puts her hands on her hips and shouts, \"<i>As if!  I'll make 'em as big or as small as I want!  You're already getting a sexy latex woman who's dependent on you for sexual fluids - you don't need to micromanage everything about me too!</i>\"  She blushes a little when she realized she just discussed her new self as 'sexy'.  She must like this a little more than she lets on.");
 		gooObedience(-2);
 		menu();
 		addButton(0,"Next",approachLatexy);
@@ -883,7 +883,7 @@ private function feedLatexyCumIndirectly():void {
 	if(player.cockTotal() > 1) outputText("one");
 	else outputText("it");
 	outputText(", plumping it to full rigidity with a few quick strokes.  " + flags[kFLAGS.GOO_NAME] + " can only watch the salacious display with rapt attention, one hand nervously stroking her thigh while the other fiddles with her hair.  Willingly waiting, she seems to understand that you're just here to provide her with sustenance.  It doesn't make it any easier for her to restrain her lusts.");
-	outputText("\n\nAs you rapidly masturbate, " + flags[kFLAGS.GOO_NAME] + "'s hands slip into her oil-slicked tunnel.  Two of her fingers are devoured by the pliable slit, engulfed in sable moisture.  Then, a third joins its kind, nosing in to massage the slick sensual walls within.  The panting latex woman easily allows her fourth finger to stretch her slit wide, exposing the ebony interior to you as fuel for your masturbulatory ardor.  Her thumb grazes across her clit as she begins to rock her hips at you, lewdly thrusting as she begins to drool rivulets of raven honey.");
+	outputText("\n\nAs you rapidly masturbate, " + flags[kFLAGS.GOO_NAME] + "'s hands slip into her oil-slicked tunnel.  Two of her fingers are devoured by the pliable slit, engulfed in sable moisture.  Then, a third joins its kind, nosing in to massage the slick sensual walls within.  The panting latex woman easily allows her fourth finger to stretch her slit wide, exposing the ebony interior to you as fuel for your masturbatory ardor.  Her thumb grazes across her clit as she begins to rock her hips at you, lewdly thrusting as she begins to drool rivulets of raven honey.");
 	outputText("\n\nYou groan, equally enraptured by the display she's putting on for you.  Soon, you're ");
 	if(player.cumQ() < 250) outputText("oozing a thicker river of pre-cum than normal");
 	else if(player.cumQ() < 500) outputText("dripping even more pre-cum than usual");
@@ -1490,8 +1490,8 @@ private function femalePCDomFucksLatexGooFuta():void {
 	outputText("\n\nThat will not do.  You command her to stop");
 	if(flags[kFLAGS.LATEX_GOO_TIMES_FEMDOMMED_BY_PC] > 0) outputText(", and obediently, she does.  To reward her for being a good pet, you give her a deep tongue kiss.");
 	else {
-		outputText(", but the order goes unheeded.  " + flags[kFLAGS.GOO_NAME] + "'s nose disappears into the slimy mess that your pussy has become, pressing deeper and harder to gluttenously devour your juices.  Tired of her insubordination, you shove her back, shuddering when inch after inch of slithering tongue slides free.  The sensuously-skinned slut immediately tries to get back up, but you force her down and slap her, right across the face.  She stops cold, slowly raising a hand to her cheek.  Glittery black tears escape from her eyes as she apologizes, \"<i>I'm sorry!  I'm sorry!  I'll be good, I'll be good!  I promise!</i>\"");
-		outputText("\n\nYou nod, and then, before she dwell on her punishment, you give her a kiss.  She blushes purple afterward, giggling into her palm.");
+		outputText(", but the order goes unheeded.  " + flags[kFLAGS.GOO_NAME] + "'s nose disappears into the slimy mess that your pussy has become, pressing deeper and harder to gluttonously devour your juices.  Tired of her insubordination, you shove her back, shuddering when inch after inch of slithering tongue slides free.  The sensuously-skinned slut immediately tries to get back up, but you force her down and slap her, right across the face.  She stops cold, slowly raising a hand to her cheek.  Glittery black tears escape from her eyes as she apologizes, \"<i>I'm sorry!  I'm sorry!  I'll be good, I'll be good!  I promise!</i>\"");
+		outputText("\n\nYou nod, and then, before she can dwell on her punishment, you give her a kiss.  She blushes purple afterward, giggling into her palm.");
 	}
 	outputText("  You get dressed and leave with a swagger in your step.  A smiling, solid goo-girl sits in your wake.");
 	player.orgasm();
