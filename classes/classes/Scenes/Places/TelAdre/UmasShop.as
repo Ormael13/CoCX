@@ -114,7 +114,7 @@
 			// Loppe's revelation about your apparant relationship comes as something of a shock to you, but you try - and fail - to hide the suprise from your face." etc
 
 			outputText("Uma looks between the two of you with interest.  \"<i>[Boyfriend] huh?  So it's you whom I have to thank for the broken springs in Loppe's bed?</i>\" Uma says with a smile, offering you a hand.\n\n");
-			outputText("You give her a winning smile back and accept it, wondering if you should prepare yourself for a macho-type squeezing match.  Even as you shake her hand, you apologise, telling her it wasn't your intention to make Loppe's bed need replacement springs.\n\n");
+			outputText("You give her a winning smile back and accept it, wondering if you should prepare yourself for a macho-type squeezing match.  Even as you shake her hand, you apologize, telling her it wasn't your intention to make Loppe's bed need replacement springs.\n\n");
 			outputText("Loppe and Uma look at each other and then they both burst out laughing.  \"<i>Oh, sugar... you're so silly,</i>\" Loppe says.  \"<i>[name], I learned a long time ago that Loppe's beds must be both battle and waterproof.  So, her bed is custom made; you could have an army of minotaurs stomp through and it wouldn't even bend.</i>\" Uma says with a grin.\n\n");
 			outputText("You give them your best confused expression, realising that Uma and her daughter must have similar tastes in humor; she was evidently joking with you.\n\n");
 			outputText("Uma is the first to break the awkwardness.  \"<i>Well then, care to give me the details?  How did you two meet?  When did you start fooling around?  Has my daughter worked so hard you had to seek a healer yet?</i>\"\n\n");
@@ -198,7 +198,7 @@
 		{
 			if (noSex)
 			{
-				outputText("You sigh softly, but accept Uma's sexuality is the way it is and apologise for the problem.\n\n");
+				outputText("You sigh softly, but accept Uma's sexuality is the way it is and apologize for the problem.\n\n");
 				outputText("\"<i>Don't worry about that, it's nothing personal.  I just don't swing that way.  Although, if you were to make yourself a bit more feminine, I might consider it.  Maybe you could find yourself a nice little beauty salon somewhere?  I heard there are some treatments that can make you absolutely gorgeous.</i>\"\n\n");
 			}
 
@@ -255,7 +255,7 @@
 		{
 			clearOutput();
 			
-			outputText("You apologise and tell Uma that you've changed your mind, you don't want a massage right now.\n\n");
+			outputText("You apologize and tell Uma that you've changed your mind, you don't want a massage right now.\n\n");
 			outputText("\"<i>Very well, dear.</i>\"  Uma takes the catalogue back.");
 			
 			menu();
@@ -803,7 +803,7 @@
 			// Cashmonies time
 			if (player.gems < sessionCost)
 			{
-				outputText("You click your tongue and apologise to Uma, but you don't have enough gems to pay for your treatment...\n\n");
+				outputText("You click your tongue and apologize to Uma, but you don't have enough gems to pay for your treatment...\n\n");
 				outputText("Uma sighs, \"It's okay, dear.  Just come back when you do, my doors are always open.\"");
 				
 				menu();
@@ -1118,7 +1118,7 @@
 			outputText("\"<i>Good answer.</i>\"  Uma snorts.\n\n");
 			outputText("So, Uma really thinks dealing with Loppe's puberty wasn't so bad, you ask?  If Loppe's father had stayed, would she have been willing to go through it again with her next daughter?  And would she have been so cheerful if her rabbit lover had given her a bellyful of twins or triplets instead of just one lonely little Loppe kit?\n\n");
 			outputText("Uma looks distant for a moment, but quickly focuses back on you.  \"<i>Dear, when you've been through what I have, you learn not to dwell on what could have been... and instead focus on what is and its blessings.  I'm very fond of Loppe and I wouldn't mind if she had brothers or sisters.  Usa-chan might have disappeared, but her parting gift wasn't so bad, I think.  She left me with a bundle of hope I named Loppe, and I'm thankful for having my little laquine in my life.</i>\"\n\n");
-			outputText("You apologise for sticking your foot in your mouth, and tell Uma you've clearly kept her talking long enough.\n\n");
+			outputText("You apologize for sticking your foot in your mouth, and tell Uma you've clearly kept her talking long enough.\n\n");
 			outputText("\"<i>Oh, it's always a pleasure to talk to my little Loppe's [boyfriend].</i>\"  Uma smiles at you happily.  \"<i>Though call me old again and I'll make your life a living hell.</i>\"  She adds, still smiling happily.\n\n");
 			outputText("You get your things and get ready to leave - before you can bring yourself to go, however, you can't resist asking; Uma said the other kids in the village where Loppe grew called her \"<i>Furutama</i>\". What does that mean?\n\n");
 			outputText("\"<i>It means full balls, dear.</i>\"  Uma states matter of factly.\n\n");
@@ -1280,7 +1280,7 @@
 			outputText("Uma shakes her head lightly.  \"<i>I don't know what it is, dear.  But you're able to keep up with my little Loppe, while no other person that we've met so far can.  I suppose that's also part of the reason she chose to make you her official [boyfriend].  Much to the chagrin of her admirers.</i>\"  Uma chuckles.\n\n");
 			outputText("You can't resist a wry joke about Loppe having admirers when she's known to be so untameable in bed.\n\n");
 			outputText("\"<i>You'd be surprised with how much people actually enjoy Loppe's stamina.  Though anything more than a one night stand with her would probably put them in a coma for a few days.</i>\"  Uma chuckles.\n\n");
-			outputText("You thank Uma for telling you about her daughter's life and then apologise, as it's time for you to head back to camp.\n\n");
+			outputText("You thank Uma for telling you about her daughter's life and then apologize, as it's time for you to head back to camp.\n\n");
 			outputText("\"<i>Not a problem, dear.  I hope you will continue to maintain a healthy relationship with my daughter.</i>\" Uma chuckles.\n\n");
 			outputText("You promise her that you'll try, gather yourself together, and then politely head back to camp.\n\n");
 
@@ -1315,7 +1315,7 @@
 			outputText("\"<i>No, silly.  He asked her out.</i>\"\n\n");
 			outputText("Well, that's a surprise, you say; you didn't think people still took it that slow in Mareth.\n\n");
 			outputText("\"<i>Not everyone is crazy about getting into each other's pants all the time dear</i>\" Uma scolds you.  \"<i>If we did that all the time we wouldn't have to do anything but sleep with each other all the time, you know?</i>\"\n\n"); // I dont even know.
-			outputText("You apologise; there's so many monsters out in the wilderness who do think precisely that way that it's hard to remember there are still normal people, sometimes.\n\n");
+			outputText("You apologize; there's so many monsters out in the wilderness who do think precisely that way that it's hard to remember there are still normal people, sometimes.\n\n");
 			outputText("\"<i>It wasn't always like this, back then we were just simple people trying to live simple lives.</i>\"\n\n");
 			outputText("You admit that, and tell her to continue.\n\n");
 			outputText("\"<i>So they started dating.  And as is normal for a young couple, one day, after they had come back from a nice dinner, he suggested that he wanted to see Loppe naked.</i>\"\n\n");
@@ -1465,7 +1465,7 @@
 			outputText("Uma nods.  \"<i>She was the love of my life.  Unfortunately, it wasn't meant to be.  She left even before I found out I was pregnant with my little Loppe. Still... I enjoyed my time with her, and if we met again, I would love to spend more time with her.</i>\"  Uma smiles, though you detect a hint of sadness in her equine features.\n\n");
 			outputText("You ask who 'Usagi' was, as a person?  You know she was a herm bunny-morph and that she fathered Loppe, but how did she and Uma meet, and take their relationship that far?\n\n");
 			outputText("Uma smiles and looks to the distance.  \"<i>Usa-chan was a wandering warrior, always honorable and true, her skill with a sword was nothing short of amazing.  I don't think there's a single person alive able to match her.  She lived by the sword, back then, always challenging other warriors to hone her skill and travelling from village to village to find better, stronger, opponents.</i>\"  Uma sighs.\n\n");
-			outputText("\"<i>When I met her, she was just passing through our village, and had been suffering from chronic pain in her neck, so she came to me to request my services and, well, it was love at first sight.  After our session, she asked me out of a date and I accepted.  There wasn't a single night we didn't go out and make love under the stars.  But unfortunately Usa-chan left after a week.  She left me a note apologising for her departure and said that she couldn't stay, lest she mellow and lose her edge as a warrior.  And that was the last I saw of her.</i>\"  Uma sighs again.\n\n");
+			outputText("\"<i>When I met her, she was just passing through our village, and had been suffering from chronic pain in her neck, so she came to me to request my services and, well, it was love at first sight.  After our session, she asked me out of a date and I accepted.  There wasn't a single night we didn't go out and make love under the stars.  But unfortunately Usa-chan left after a week.  She left me a note apologizing for her departure and said that she couldn't stay, lest she mellow and lose her edge as a warrior.  And that was the last I saw of her.</i>\"  Uma sighs again.\n\n");
 			outputText("So, you're guessing Uma found out Usagi had left her a little going-away present some time after the rabbit warrior had left, you suggest?\n\n");
 			outputText("\"<i>Yes.  My morning sickness didn't start until a fortnight after Usagi had moved on.  Jolted the sadness right out of me too.  I hadn't even opened my clinic in those two weeks, and my friends were very worried. Loppe was just what I needed to pick up the pieces of my broken heart.</i>\"  She smiles, a motherly smile that makes her look absolutely stunning.\n\n");
 			outputText("You ask if Uma ever tried to send a message after Usagi, let her know about her fatherhood?\n\n");
@@ -1996,7 +1996,7 @@
 			{
 				outputText("\n\nUma wipes her face off some of your seed.  \"<i>I’m fine.  Sorry about that, dear... but blowing is not really my thing, you know?  The only other person I did this for was Loppe’s father, and even then I didn’t like it so much... maybe you should have gone to Loppe instead?</i>\"");
 				outputText("\n\nYou tell her you’ll remember that, ");
-				if(player.cor <= 40) outputText(" apologise, and ");
+				if(player.cor <= 40) outputText(" apologize, and ");
 				outputText("get up to start getting dressed before quietly heading back to camp.");
 			}
 			//Came on her face after second time:
