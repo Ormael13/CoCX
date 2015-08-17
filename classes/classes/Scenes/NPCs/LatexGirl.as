@@ -487,7 +487,7 @@ private function niceGuysKeepTheirGooGals():void {
 //Approach Her (Select From Slaves Tab)(F)
 public function approachLatexy():void {
 	clearOutput();
-	//First Line - Happiness Dependant
+	//First Line - Happiness Dependent
 	//(Sub 10)
 	if(gooHappiness() < 10) outputText(flags[kFLAGS.GOO_NAME] + " scowls up at your approach, her unhappiness clearly visible in her " + flags[kFLAGS.GOO_EYES] + " eyes.  You doubt her solid onyx face could be any more morose.");
 	//(Sub 20)
