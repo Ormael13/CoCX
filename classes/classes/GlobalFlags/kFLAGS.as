@@ -2251,11 +2251,11 @@ public static const JOY_TALKED_ABOUT_DEMONS:int                                 
 public static const JOY_TALKED_ABOUT_BABIES:int                                     = 2243;
 public static const JOY_EATEN_PINK_EGG:int                                          = 2244;
 public static const JOY_EATEN_BLUE_EGG:int                                          = 2245;
-public static const UNKNOWN_FLAG_NUMBER_02246:int                                   = 2246;
-public static const UNKNOWN_FLAG_NUMBER_02247:int                                   = 2247;
-public static const UNKNOWN_FLAG_NUMBER_02248:int                                   = 2248;
-public static const UNKNOWN_FLAG_NUMBER_02249:int                                   = 2249;
-public static const UNKNOWN_FLAG_NUMBER_02250:int                                   = 2250;
+public static const JOY_PREGNANCY_TYPE:int                                          = 2246;
+public static const JOY_PREGNANCY_INCUBATION:int                                    = 2247;
+public static const JOY_TWINS_BIRTHED:int                                           = 2248; //Twins birthed by Joy.
+public static const JOY_NIGHT_FUCK:int                                              = 2249;
+public static const JOY_TAKES_BABIES_AWAY_COUNTER:int                               = 2250; //Starts at 72 if you have at least 3 litters with Joy.
 public static const UNKNOWN_FLAG_NUMBER_02251:int                                   = 2251;
 public static const UNKNOWN_FLAG_NUMBER_02252:int                                   = 2252;
 public static const UNKNOWN_FLAG_NUMBER_02253:int                                   = 2253;

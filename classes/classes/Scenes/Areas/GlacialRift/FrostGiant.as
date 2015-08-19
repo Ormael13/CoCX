@@ -183,9 +183,9 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("\n\n");
 			combatRoundOver();
 		}
-		public function giantBoulderMiss(mode:int = 0):void {
+		public function giantBoulderMiss():void {
 			clearOutput();
-			if (mode == 0) outputText("His aim was perfect, if you had stood still. Watching him throw it at you gave you all the time you needed to avoid the large rock, though the debris from the impact might leave some bruises. ");
+			outputText("His aim was perfect, if you had stood still. Watching him throw it at you gave you all the time you needed to avoid the large rock, though the debris from the impact might leave some bruises. ");
 			if (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) player.removeStatusAffect(StatusAffects.GiantBoulder);
 			var damage:int = 10 + rand(str / 2);
 			damage = player.reduceDamage(damage);

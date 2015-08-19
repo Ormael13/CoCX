@@ -456,6 +456,10 @@ private function wait():void {
 		clearOutput();
 		(monster as FrostGiant).giantGrabFail(false);
 	}
+	else if (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		clearOutput();
+		(monster as FrostGiant).giantBoulderMiss();
+	}
 	else if (player.findStatusAffect(StatusAffects.IsabellaStunned) >= 0) {
 		clearOutput();
 		outputText("You wobble about for some time but manage to recover. Isabella capitalizes on your wasted time to act again.\n\n");
@@ -1892,6 +1896,10 @@ private function combatStatusesUpdate():void {
 		outputText("The feeling of the tight, leather straps holding tightly to your body while exposing so much of it turns you on a little bit more.\n\n", false);
 		dynStats("lus", 2);
 	}
+	//Giant boulder
+	if (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might take some serious damage.</b>\n\n");
+	}
 	regeneration(true);
 	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	if(player.HP <= 0) doNext(endHpLoss);
@@ -1999,7 +2007,9 @@ public function display():void {
 	}
 	outputText("<b>You are fighting ", false);
 	outputText(monster.a + monster.short + ":</b> \n");
-	if(player.findStatusAffect(StatusAffects.Blind) >= 0) outputText("It's impossible to see anything!\n");
+	if (player.findStatusAffect(StatusAffects.Blind) >= 0) {
+		outputText("It's impossible to see anything!\n");
+	}
 	else {
 		outputText(monster.long + "\n\n", false);
 		//Bonus sand trap stuff
@@ -3720,6 +3730,11 @@ public function spellArouse():void {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	fatigue(15,1);
 	statScreenRefresh();
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
 	if(monster.findStatusAffect(StatusAffects.Shell) >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -3795,7 +3810,12 @@ public function spellHeal():void {
 	}
 	doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-	fatigue(20,3);
+	fatigue(20, 3);
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
 	outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n", true);
 	//25% backfire!
 	if(rand(4) == 0) {
@@ -3816,6 +3836,7 @@ public function spellHeal():void {
 		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
 		HPChange(temp,false);
 	}
+	
 	outputText("\n\n", false);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
@@ -3839,6 +3860,11 @@ public function spellMight():void {
 	fatigue(25,1);
 	var tempStr:Number = 0;
 	var tempTou:Number = 0;
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
 	outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n", true);
 	//25% backfire!
 	if(rand(4) == 0) {
@@ -3891,7 +3917,12 @@ public function spellChargeWeapon():void {
 	}
 	doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-	fatigue(15,1);
+	fatigue(15, 1);
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
 	outputText("You utter words of power, summoning an electrical charge around your " + player.weaponName + ".  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n", true);
 	player.createStatusAffect(StatusAffects.ChargeWeapon,10*spellMod(),0,0,0);
 	statScreenRefresh();
@@ -3939,7 +3970,11 @@ public function spellBlind():void {
 			
 			player.createStatusAffect(StatusAffects.Blind, rand(4) + 1, 0, 0, 0);
 		}
-		
+		if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+			(monster as FrostGiant).giantBoulderHit(2);
+			enemyAI();
+			return;
+		}
 		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		if(monster.HP < 1) doNext(endHpVictory);
@@ -3995,6 +4030,11 @@ public function spellWhitefire():void {
 		(monster as Doppleganger).handleSpellResistance("whitefire");
 		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
+		return;
+	}
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
 		return;
 	}
 	outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n", true);

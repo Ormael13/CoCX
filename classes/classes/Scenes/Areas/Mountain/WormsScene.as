@@ -69,6 +69,7 @@ package classes.Scenes.Areas.Mountain
 		private function wormsOn():void {
 			clearOutput();
 			outputText("You actually think it's kind of a hot idea, and wonder if such creatures actually exist in this land as you make your way back to camp.");
+			outputText("\n\n<b>If you ever change your mind, you can toggle from Fetishes menu in game settings.</b>");
 			player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -76,6 +77,7 @@ package classes.Scenes.Areas.Mountain
 		private function wormsPartiallyOn():void {
 			clearOutput();
 			outputText("You shrug and keep walking, not sure how you feel about the strange sign.");
+			outputText("\n\n<b>If you ever change your mind, you can toggle from Fetishes menu in game settings.</b>");
 			player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
 			player.createStatusAffect(StatusAffects.WormsHalf, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
@@ -84,6 +86,7 @@ package classes.Scenes.Areas.Mountain
 		private function wormsOff():void {
 			clearOutput();
 			outputText("You shudder in revulsion and figure the sign to be the result of someone's perverted fantasy.");
+			outputText("\n\n<b>If you ever change your mind, you can toggle from Fetishes menu in game settings.</b>");
 			player.createStatusAffect(StatusAffects.WormsOff, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}

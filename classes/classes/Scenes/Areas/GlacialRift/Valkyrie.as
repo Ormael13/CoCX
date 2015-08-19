@@ -29,6 +29,11 @@ package classes.Scenes.Areas.GlacialRift
 			}
 			else
 			{
+				if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) > 0) {
+					outputText("and step away as you watch the valkyrie's blind attacks strike only air. ");
+					combatRoundOver();
+					return;
+				}
 				outputText("but she follows through with a rapid flurry of spear strikes, tearing into your [armorName] and the underlying flesh. ", false);
 				var attacks:int = 1 + rand(3);
 				var damage:int = 0
@@ -66,6 +71,11 @@ package classes.Scenes.Areas.GlacialRift
 			}
 			else
 			{
+				if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) > 0) {
+					outputText("and step away as you watch the valkyrie's blind bash strikes only air. ");
+					combatRoundOver();
+					return;
+				}
 				outputText("but you leave yourself vulnerable as she spins around and slams her heavy shield into you, knocking you ", false);
 				if (player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) 
 				{

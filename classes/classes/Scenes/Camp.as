@@ -198,6 +198,10 @@ private function doCamp():void { //Only called by playerMenu
 		arianScene.arianLaysEggs();
 		return;
 	}
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && flags[kFLAGS.JOY_NIGHT_FUCK] == 1) {
+		joyScene.wakeUpWithJoyPostFuck();
+		return;
+	}
 	if (flags[kFLAGS.EMBER_MORNING] > 0 && ((flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0 && model.time.hours >= flags[kFLAGS.BENOIT_CLOCK_ALARM]) || (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && model.time.hours >= 6))) {
 		hideMenus();
 		emberScene.postEmberSleep();
@@ -430,8 +434,8 @@ private function doCamp():void { //Only called by playerMenu
 		hideMenus();
 		return;
 	}
-	//Bimbo Jojo warning (Will be in 1.3)
-	/*if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && inventory.hasItemInStorage(consumables.BIMBOLQ) && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] >= 72 && flags[kFLAGS.JOJO_BIMBO_STATE] == 0) {
+	//Bimbo Jojo warning
+	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && inventory.hasItemInStorage(consumables.BIMBOLQ) && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] >= 72 && flags[kFLAGS.JOJO_BIMBO_STATE] == 0) {
 		joyScene.jojoPromptsAboutThief();
 		hideMenus();
 		return;
@@ -441,7 +445,12 @@ private function doCamp():void { //Only called by playerMenu
 		joyScene.jojoGetsBimbofied();
 		hideMenus();
 		return;
-	}*/
+	}
+	//Joy gives birth!
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && jojoScene.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && jojoScene.pregnancy.incubation == 0) {
+		joyScene.joyGivesBirth();
+		return;
+	}
 	//Rathazul freaks out about jojo
 	if(flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && campCorruptJojo()) {
 		finter.rathazulFreaksOverJojo();
@@ -1139,7 +1148,10 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Pure Jojo
 	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
 		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
-			outputText("Joy's tent is set up in a quiet corner of the camp, close to a boulder. Inside the tent, you can see a chest holding her belongings, as well as a few clothes and books spread about her bedroll. Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.\n\n");
+			outputText("Joy's tent is set up in a quiet corner of the camp, close to a boulder. Inside the tent, you can see a chest holding her belongings, as well as a few clothes and books spread about her bedroll. ");
+			if (flags[kFLAGS.JOJO_LITTERS] > 0 && model.time.hours >= 16 && model.time.hours < 19) outputText("You spot the little mice you had with Joy playing about close to her tent.");
+			else outputText("Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.");
+			outputText("\n\n");
 			addButton(2, "Joy", joyScene.approachCampJoy, null, null, null, "Go find Joy around the edges of your camp and meditate with her or have sex with her.");
 		}
 		else {
@@ -1677,6 +1689,10 @@ public function doSleep(clrScreen:Boolean = true):void {
 		else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
 			//outputText("You curl up next to Ember, planning to sleep for " + num2Text(timeQ) + " hour.  " + emberScene.emberMF("He", "She") + " drapes one of " + emberScene.emberMF("his", "her") + " wing over you, keeping you warm.");
 			emberScene.sleepWithEmber();
+			return;
+		}
+		else if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
+			joyScene.hornyJoyIsPregnant();
 			return;
 		}
 		else if(flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {

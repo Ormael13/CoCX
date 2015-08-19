@@ -9630,7 +9630,7 @@
 		
 		public function drakeHeart(player:Player):void {
 			outputText("You bring the flower up to your nose and smell it. It has exquisite smell. You suddenly have the strange desire to eat it. You pop the flower into your mouth and chew. It tastes like vanilla somehow. Before you know it, you're undergoing changes.");
-			kGAMECLASS.emberScene.emberTFs();
+			kGAMECLASS.emberScene.emberTFs(true);
 		}
 		
 		public function prisonBread(player:Player):void {
