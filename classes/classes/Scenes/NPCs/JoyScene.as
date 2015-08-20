@@ -212,7 +212,9 @@ package classes.Scenes.NPCs
 		public function joyAssDescript():String {
 			var text:String = "";
 			if (flags[kFLAGS.JOJO_ANAL_XP] == 0) text += "virgin ";
-			switch(rand(4)) {
+			else if (flags[kFLAGS.JOJO_ANAL_XP] < 5) text += "tight ";
+			else "loose ";
+			switch(rand(6)) {
 				case 0:
 					text += "ass";
 					break;
@@ -224,6 +226,12 @@ package classes.Scenes.NPCs
 					break;
 				case 3:
 					text += "butthole";
+					break;
+				case 4:
+					text += "rump";
+					break;
+				case 5:
+					text += "rear end";
 					break;
 				default:
 					text += "ass";
@@ -475,7 +483,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nHer weapon of choice is an unremarkable wooden staff, although you only see her use it to pose and tease you; running it between her breasts or between her legs and even licking it sometimes... Whenever she gets a reaction from you, she giggles girlishly.");
 			if (joyHasCock() && joySexCounter() > 0) outputText("\n\nFrom previous experience you can estimate she has a " + joyCockLength() + " inches long and " + joyCockGirth() + " inches thick dick. It looks surprisingly human, right underneath that, she has a pair of gonads that are about " + joyBallSize() + " " + (joyBallSize() == 1 ? "inch" : "inches") + " in diameter each.");
 			outputText("\n\nBetween her legs sits a " + joyPussyDescript() + " vagina. beads of lubricant occasionally form on her pink nether lips.");
-			outputText("\n\nBetween her squeezable jiggly bums she has a " + joyAssDescript() + ", where it belong.");
+			outputText("\n\nBetween her squeezable jiggly bums she has " + joyAssDescript() + ", where it belong.");
 			doNext(genericMenu);
 		}
 		
@@ -1432,7 +1440,7 @@ package classes.Scenes.NPCs
 			if (player.hasCock()) {
 				//Vaginal penetration
 				if (player.cockThatFits(joyVagCapacity()) >= 0) {
-					addButton(0, "Penetrate Joy", penetrateJoysPussy, null, null, null, "Penetrate Joy vaginally with your cock.");
+					addButton(0, "Vaginal Fuck", penetrateJoysPussy, null, null, null, "Penetrate Joy vaginally with your cock.");
 				}
 				else {
 					if (player.cockTotal() == 1) outputText("\n<b>Your cock is too big to fit in her pussy.</b>");
@@ -1440,7 +1448,7 @@ package classes.Scenes.NPCs
 				}
 				//Anal penetration
 				if (player.cockThatFits(joyAnalCapacity()) >= 0) {
-					addButton(1, "Anal", fuckJoyInTheAss, null, null, null, "Penetrate Joy anally with your cock.");
+					addButton(1, "Anal Fuck", fuckJoyInTheAss, null, null, null, "Take Joy from behind and make sure she gets it good!");
 				}
 				else {
 					if (player.cockTotal() == 1) outputText("\n<b>Your cock is too big to fit in her ass.</b>");
