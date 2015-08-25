@@ -86,9 +86,9 @@ internal function isabellaMoovesInGreeting():void {
 		outputText("  Isabella takes a deep breath before rising to her full, seven-foot-plus height. \"<i>" + player.short + ", I have thought long and hard on zis,</i>\" she begins.  \"<i>I vould like to join you at your camp and assist you on your quest.  It seems a worthy cause.</i>\"  The tall cow-girl brushes her unruly red locks back and admits, \"<i>I could use ze companionship...</i>\"\n\n", false);
 		
 		outputText("Well, you didn't expect that.  While you muse over the idea, Isabella sashays up to give you a hug.  Her tits ", false);
-		if(player.tallness < 80) outputText("crush around your head, smothering you in heavy, milk-filled breast-flesh", false);
+		if(player.tallness < 80) outputText("crush around your head, smothering you in heavy, milk-filled breast flesh", false);
 		else outputText("squeeze against your " + chestDesc() + ", the four hard nipples capping each milk-flooded breast pressing on your own.", false);
-		outputText("  You blush and squirm a little from the dark-hued warrioress' affections, yet you endure them all the same.\n\n", false);
+		outputText("  You blush and squirm a little from the dark-hued warrioress's affections, yet you endure them all the same.\n\n", false);
 		
 		outputText("Do you invite her to camp?", false);
 		doYesNo(moveTheBitchIn,turnDownIsabellaFollower);
