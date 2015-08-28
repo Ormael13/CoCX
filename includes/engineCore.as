@@ -1720,10 +1720,25 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
 		childStats += "<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n";
 	if (emberScene.emberChildren() > 0)
-		childStats += "<b>Total Children with Ember:</b> " + (emberScene.emberChildren()) + "\n";
+		childStats += "<b>Total Children With Ember:</b> " + (emberScene.emberChildren()) + "\n";
 	
 	if (flags[kFLAGS.EMBER_EGGS] > 0)
 		childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
+		
+	if (isabellaScene.totalIsabellaChildren() > 0) {
+		if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0)
+			childStats += "<b>Children With Isabella (Human, Males):</b> " + isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) + "\n";
+		if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) > 0)
+			childStats += "<b>Children With Isabella (Human, Females):</b> " + isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) + "\n";
+		if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) > 0)
+			childStats += "<b>Children With Isabella (Human, Herms):</b> " + isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) + "\n";
+		if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) > 0)
+			childStats += "<b>Children With Isabella (Cowgirl, Females):</b> " + isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) + "\n";
+		if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) > 0)
+			childStats += "<b>Children With Isabella (Cowgirl, Herms):</b> " + isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) + "\n";
+		childStats += "<b>Total Children With Isabella:</b> " + isabellaScene.totalIsabellaChildren() + "\n"
+	}
+		
 		
 	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0)
 		childStats += "<b>Children With Izma (Sharkgirls):</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + "\n";
@@ -1732,15 +1747,15 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 && flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
 		childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
 		
-	if (flags[kFLAGS.JOJO_LITTERS] > 0)
-		childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + flags[kFLAGS.JOJO_LITTERS] + "\n";
+	if (joyScene.getTotalLitters() > 0)
+		childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + joyScene.getTotalLitters() + "\n";
 		
 	if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
 	if (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Females):</b> " + (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE]) + "\n";
 	if (flags[kFLAGS.KELLY_KIDS] > 0)
-		childStats += "<b>Total Children with Kelly:</b> " + flags[kFLAGS.KELLY_KIDS] + "\n";
+		childStats += "<b>Total Children With Kelly:</b> " + flags[kFLAGS.KELLY_KIDS] + "\n";
 	if (kihaFollower.pregnancy.isPregnant)
 		childStats += "<b>Kiha's Pregnancy:</b> " + kihaFollower.pregnancy.incubation + "\n";
 	if (flags[kFLAGS.KIHA_CHILDREN_BOYS] > 0)
@@ -1766,7 +1781,7 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
 		childStats += "<b>Drider Children With Phylla:</b> " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n";
 	if (flags[kFLAGS.ANT_KIDS] > 0 && flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
-		childStats += "<b>Total Children with Phylla:</b> " + (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]) + "\n";
+		childStats += "<b>Total Children With Phylla:</b> " + (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]) + "\n";
 		
 	if (flags[kFLAGS.SHEILA_JOEYS] > 0)
 		childStats += "<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n";

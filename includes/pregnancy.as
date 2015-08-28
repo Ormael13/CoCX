@@ -460,7 +460,7 @@ public function updatePregnancy():Boolean {
 			}
 			if (player.pregnancyIncubation == 280) {
 				outputText("\n<b>Your belly is getting more noticably distended and squirming around.  You are probably pregnant.</b>\n", false);
-				if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) { //Bimbo Jojo, stage 2
+				if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 2
 					outputText("\nA pair of arms suddenly wrap themselves around you, stroking your belly. \"<i>Like, don't worry, [name]; I love you even if you are getting fat. Actually... this little pot belly of yours is, like, kinda sexy, y'know?</i>\" Joy declares.\n");
 					outputText("\nYou roll your eyes at Joy's teasing but appreciate her support all the same.\n");
 				}
@@ -1868,7 +1868,7 @@ public function updatePregnancy():Boolean {
 		}		
 
 		//Main Text here
-		if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && monk < 0 && !prison.inPrison) {
+		if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (monk < 0 || flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) && !prison.inPrison) {
 			if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
 				kGAMECLASS.joyScene.playerGivesBirthToJoyBabies();
 				return true;

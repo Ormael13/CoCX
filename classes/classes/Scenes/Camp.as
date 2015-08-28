@@ -951,7 +951,27 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		}
 		else if(model.time.hours == 20) outputText("Your favorite chocolate-colored cowgirl, Isabella, is moving about, gathering all of her scattered belongings and replacing them in her personal chest.  She yawns more than once, indicating her readiness to hit the hay, but her occasional glance your way lets you know she wouldn't mind some company before bed.", false);
 		else outputText("Isabella looks incredibly bored right now.", false);
-		outputText("\n\n", false);	
+		if (isabellaScene.totalIsabellaChildren() > 0) {
+			var babiesList:Array = [];
+			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0) {
+				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS))) + " human son" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) == 1 ? "" : "s"));
+			}
+			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) > 0) {
+				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS))) + " human daughter" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) == 1 ? "" : "s"));
+			}
+			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) > 0) {
+				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS))) + " human herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) == 1 ? "" : "s"));
+			}
+			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) > 0) {
+				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS))) + " human herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) == 1 ? "" : "s"));
+			}
+			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) > 0) {
+				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS))) + " human herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) == 1 ? "" : "s"));
+			}
+			outputText("  Isabella has set up a small part of her \"corner\" in the camp as a nursery. She has sawn a " + (Math.ceil(isabellaScene.totalIsabellaChildren() / 2) == 1 ? "barrel" : "number of barrels") + " in half and lined " + (Math.ceil(isabellaScene.totalIsabellaChildren() / 2) == 1 ? "it" : "them") + " with blankets and pillows to serve as rocking cribs. "); 
+			outputText("You have " + formatStringArray(babiesList) + " with her, all living here; unlike native Marethians, they will need years and years of care before they can go out into the world on their own.");
+		}
+		outputText("\n\n");
 		addButton(3, "Isabella", isabellaFollowerScene.callForFollowerIsabella);
 	}
 	//Izma
@@ -1687,9 +1707,13 @@ public function doSleep(clrScreen:Boolean = true):void {
 			return;
 		}
 		else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
-			//outputText("You curl up next to Ember, planning to sleep for " + num2Text(timeQ) + " hour.  " + emberScene.emberMF("He", "She") + " drapes one of " + emberScene.emberMF("his", "her") + " wing over you, keeping you warm.");
-			emberScene.sleepWithEmber();
-			return;
+			if (flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 3) {
+				outputText("You curl up next to Ember, planning to sleep for " + num2Text(timeQ) + " hour. Ember drapes one of " + emberScene.emberMF("his", "her") + " wing over you, keeping you warm.");
+			}
+			else {
+				emberScene.sleepWithEmber();
+				return;
+			}
 		}
 		else if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
 			joyScene.hornyJoyIsPregnant();
@@ -2364,22 +2388,33 @@ public function setLevelButton():Boolean {
 public function getCampPopulation():int {
 	var pop:int = 0; //Once you enter Mareth, this will increase to 1.
 	if (flags[kFLAGS.IN_INGNAM] <= 0) pop++; //You count toward the population!
-	pop += companionsCount()
+	pop += companionsCount();
+	//------------
 	//Misc check!
 	if (ceraphIsFollower()) pop--; //Ceraph doesn't stay in your camp.
 	if (player.armorName == "goo armor") pop++; //Include Valeria if you're wearing her.
 	if (flags[kFLAGS.CLARA_IMPRISONED] > 0) pop++;
 	if (flags[kFLAGS.ANEMONE_KID] > 0) pop++;
 	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) pop++;
+	//------------
 	//Children check!
-	if (sophieFollower() && flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) pop++;
-	if (sophieFollower() && flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0) pop += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
+	//Followers
+	if (followerEmber() && emberScene.emberChildren() > 0) pop += emberScene.emberChildren();
+	//Jojo's offsprings don't stay in your camp; they will join with Amily's litters as well.
+	if (sophieFollower()) {
+		if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) pop++;
+		if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT]) pop += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
+	}
 	
-	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 || flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) pop += flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS];
+	//Lovers
+	//Amily's offsprings don't stay in your camp.
+	//Helia can only have 1 child: Helspawn. She's included in companions count.
+	if (isabellaFollower() && isabellaScene.totalIsabellaChildren() > 0) pop += isabellaScene.totalIsabellaChildren();
+	if (izmaFollower() && izmaScene.totalIzmaChildren() > 0) pop += izmaScene.totalIzmaChildren();
+	if (followerKiha() && kihaFollower.totalKihaChildren() > 0) pop += kihaFollower.totalKihaChildren();
 	if (marbleFollower() && flags[kFLAGS.MARBLE_KIDS] > 0) pop += flags[kFLAGS.MARBLE_KIDS];
 	if (flags[kFLAGS.ANT_WAIFU] > 0 && (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)) pop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
-	if (kGAMECLASS.emberScene.emberChildren() > 0) pop += kGAMECLASS.emberScene.emberChildren();
-	if (kGAMECLASS.kihaFollower.totalKihaChildren() > 0) pop += kGAMECLASS.kihaFollower.totalKihaChildren();
+	//------------
 	//Return number!
 	return pop;
 }

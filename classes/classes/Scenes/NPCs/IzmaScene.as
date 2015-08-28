@@ -72,6 +72,10 @@ public function izmaSprite():void
 	spriteSelect(32);
 }
 
+public function totalIzmaChildren():int {
+	return (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]);
+}
+
 public function meetIzmaAtLake():void {
 	spriteSelect(32);
 	clearOutput();
@@ -1706,7 +1710,7 @@ public function izmaFollowerMenu():void {
 	var sex:Function = null;
 	if(player.lust >= 33) sex = izmaSexMenu;
 	var kids:Function = null;
-	if(flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) kids = izmaKidsPlaytime;
+	if(totalIzmaChildren() > 0) kids = izmaKidsPlaytime;
 	var deDickT:String = "";
 	var deDickB:Function = null;
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) {
@@ -2493,7 +2497,7 @@ private function childToggle():void {
 	else {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] = 1;
 		//Make kids and has said yes before.
-		if(flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) {
+		if(totalIzmaChildren() > 0) {
 			outputText("You tell Izma that you're ready to start trying for children again.  She grins with delight and suddenly pounces at you, giving you a kiss that leaves you breathless.  Then, while you're recovering from that, she races off and drinks down a slug of that potion - you figure it must be some kind of 'antidote' to the contraceptives already in her system.  From the gleam in her eye as she stalks back towards you, it looks like she intends to start making babies right now...\n\n", false);
 		}
 		else {
@@ -2683,7 +2687,7 @@ private function izmaKidsPlaytime():void {
 	
 	
 	outputText("Izma shows you to an isolated bend in the stream; this is where your children have chosen to settle themselves.  Though they have the physiques and minds of pre-teens already, it will still be several years before they are fully grown and ready to leave you and Izma.  ", false);
-	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] == 1) outputText("There is ", false);
+	if (totalIzmaChildren() == 1) outputText("There is ", false);
 	else outputText("There are ", false);
 	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0) {
 		if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] == 1) outputText("one shark-girl", false);

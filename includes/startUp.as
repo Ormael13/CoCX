@@ -85,7 +85,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
 	addButton(6, "Image Credits", imageCreditsScreen, null, null, null, "Check out who contributed to the image pack.");
 	addButton(7, "Debug Info", debugPane, null, null, null, "View debug information.");
-	addButton(8, "Mod Thread", openURL, "http://forum.fenoxo.com/thread-10915.html", null, null, "Check the official mod thread on Fenoxo's forum.");
+	addButton(8, "Mod Thread", openURL, "http://fenoxo.com/forum/index.php?/topic/5-coc-revamp-mod", null, null, "Check the official mod thread on Fenoxo's forum.");
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;
@@ -917,7 +917,7 @@ public function imageCreditsScreen():void
 //------------
 public function howToPlay():void {
 	clearOutput();
-	displayHeader("Settings");
+	displayHeader("Instructions");
 	outputText("<b><u>How To Play:</u></b>\nClick the buttons corresponding to the actions you want to take.  Your 'goal' is to obviously put an end to the demonic corruption around you, but do whatever the hell you want.  There is a story but sometimes it's fun to ignore it.\n\n", false);
 	outputText("<b>Exploration:</b>\nThe lake is a safe zone when you start the game.  It's a good place to explore, and Whitney's farm can offer some nice stat boosts to help get you on your feet. Once you feel comfortable, the forest is probably the next safest area, but beware of tentacle monsters.  The desert is the next toughest area, and the mountains offer further challenges.  There are more areas beyond that, but that's a good way to get started.  You'll uncover plenty of new 'places' exploring, which can be accessed from the <b>Places</b> menu.  You'll also find some interesting characters when you try to discover new explorable locations by choosing <b>Explore</b> twice.\n\n", false);
 	outputText("<b>Combat:</b>\nCombat is won by raising an opponent's lust to 100 or taking their HP to 0.  You lose if your enemy does the same to you.  Loss isn't game over, but some losses will make it harder in the future by lowering your stats.  Beware.  Don't be afraid to spam the <b>Run</b> option when you're in over your head.\n\n", false);

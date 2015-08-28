@@ -452,7 +452,7 @@ package classes.Scenes.NPCs
 					case 0:
 						outputText("You climb the boulder where Joy usually sits, and see her sitting cross legged with her eyes closed. She seems to be deep in meditation, but when you approach a soft snore confirms she's actually asleep. When you step closer however she suddenly shakes her head and opens her eyes groggily looking at you; then she beams at you and says, \"<i>Hey [name]! Did you need something? Or do you want to, like, do something fun; like touching my boobies or "); 
 						if (joyHasCock()) {
-							if (player.hasCock() && rand(2) == 0) ("rubbing our funsticks");
+							if (player.hasCock() && rand(2) == 0) outputText("rubbing our funsticks");
 							else outputText("playing with my funstick");
 						}
 						outputText("?</i>\"");
@@ -482,7 +482,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nShe's wearing monk robes that barely manage to contain her - " + Appearance.breastCup(flags[kFLAGS.JOY_BREAST_SIZE]) + "s you estimate - breasts, it seems that at the slightest move those pillowy orbs will burst out from their hiding place; you can even see her perky nipples occasionally poke from under her robes. She's barely managing to hold it closed by using her praying beads as a belt. Looking a bit lower you see a nice handful of ass, with supportive hips that give her a very sexy hourglass figure. She's cut her pants into a pair of tight fitting shorts and walks barefoot on her mousy footpaws.");
 			outputText("\n\nHer weapon of choice is an unremarkable wooden staff, although you only see her use it to pose and tease you; running it between her breasts or between her legs and even licking it sometimes... Whenever she gets a reaction from you, she giggles girlishly.");
 			if (joyHasCock() && joySexCounter() > 0) outputText("\n\nFrom previous experience you can estimate she has a " + joyCockLength() + " inches long and " + joyCockGirth() + " inches thick dick. It looks surprisingly human, right underneath that, she has a pair of gonads that are about " + joyBallSize() + " " + (joyBallSize() == 1 ? "inch" : "inches") + " in diameter each.");
-			outputText("\n\nBetween her legs sits a " + joyPussyDescript() + " vagina. beads of lubricant occasionally form on her pink nether lips.");
+			outputText("\n\nBetween her legs sits a " + joyPussyDescript() + ". Beads of lubricant occasionally form on her pink nether lips.");
 			outputText("\n\nBetween her squeezable jiggly bums she has " + joyAssDescript() + ", where it belong.");
 			doNext(genericMenu);
 		}
@@ -1099,7 +1099,7 @@ package classes.Scenes.NPCs
 			}
 			//Succubi Milk
 			if (player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) {
-				if (player.hasItem(consumables.P_DRAFT)) addButton(buttonPos++, consumables.P_S_MLK.shortName, giveJoyASuccubiMilk, true);
+				if (player.hasItem(consumables.P_S_MLK)) addButton(buttonPos++, consumables.P_S_MLK.shortName, giveJoyASuccubiMilk, true);
 				else addButton(buttonPos++, consumables.SUCMILK.shortName, giveJoyASuccubiMilk, false);
 				hasValidItems = true;
 			}
@@ -1344,7 +1344,7 @@ package classes.Scenes.NPCs
 			if (player.cor > 33) dynStats("cor", -1);
 			if (player.cor > 66) dynStats("cor", -1);
 			flags[kFLAGS.JOY_LACTAID_MILKED_COUNTER]++;
-			doNext(genericMenu);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Reducto
@@ -2136,7 +2136,7 @@ package classes.Scenes.NPCs
 				default:
 					babyGender2 = 3;
 			}
-			outputText("\n\nAs you wander through your camp, a heavy cramp hits you in the belly, followed by a rush of fluids that gush from your " + player.vaginaDescript() + ". Figuring it must be time, you yell, calling for Joy.");
+			outputText("As you wander through your camp, a heavy cramp hits you in the belly, followed by a rush of fluids that gush from your " + player.vaginaDescript() + ". Figuring it must be time, you yell, calling for Joy.");
 			outputText("\n\nThe mouse promptly wanders over. \"<i>Like, [name]? What's up? Why all the shouting? ...And " + player.clothedOrNakedLower("what happened to your [armor] - ") + "did you, like, pee yourself or something?</i>\" She asks, giving you a completely baffled expression.");
 			outputText("\n\nYou're in too much pain to explain right now, so you yell at Joy to help you undress, quick! And then to help you into your bed.");
 			outputText("\n\n\"<i>Like, what's going on?</i>\" Joy asks, but she, thankfully, instinctively starts doing what you told her to do; within moments she " + player.clothedOrNakedLower("has your [armor] off and ") + "is " + (player.isNaga() ? "slithering" : (player.isGoo() ? "sliding" : "walking")) + " you over to your " + camp.bedDesc() + ", where she helps you down.");

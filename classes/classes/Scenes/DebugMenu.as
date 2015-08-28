@@ -640,6 +640,7 @@ package classes.Scenes
 			addButton(4, "Debug Prison", debugPrison);
 			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
+			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth, null, null, null, "Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
