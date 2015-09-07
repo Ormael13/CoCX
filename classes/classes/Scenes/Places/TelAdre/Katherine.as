@@ -3306,7 +3306,7 @@ private function katSexMenu():void {
 		else if (isAt(KLOC_BAR_DRUNK)) {
 			suckle = null; //If she's drunk she wants sex, not suckling
 			if (getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex() && !getGame().urta.drainedByKath) seeUrta = katherineDrunkSeeUrta; //Different conversation if Kath is sloshed
-			if (getGame().isValaAtBar() && !getGame().urta.drainedByKath) seeVala = katherineSeeVala;
+			if (isValaAtBar() && !getGame().urta.drainedByKath) seeVala = katherineSeeVala;
 			backOpt = null; //Kath won't take no for an answer if she's sauced
 		}
 		else if (isAt(KLOC_BAR_URTA_REFUSED)) {
