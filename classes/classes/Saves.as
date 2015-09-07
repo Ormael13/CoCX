@@ -2024,8 +2024,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				inventory.createStorage();
 				var storage:ItemSlotClass = itemStorageGet()[i];
 				var savedIS:* = saveFile.data.itemStorage[i];
-				if (savedIS.shortName && savedIS.shortName.indexOf("Gro+") != -1)
-					savedIS.id = "GroPlus";
+				if (savedIS.shortName)
+				{
+					if (savedIS.shortName.indexOf("Gro+") != -1)
+						savedIS.id = "GroPlus";
+					else if (savedIS.shortName.indexOf("Sp Honey") != -1)
+						savedIS.id = "SpHoney";
+				}
 				if (savedIS.quantity>0)
 					storage.setItemAndQty(ItemType.lookupItem(savedIS.id || savedIS.shortName), savedIS.quantity);
 				else
@@ -2109,16 +2114,43 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 			
 		//ITEMZ. Item1
-		if (saveFile.data.itemSlot1.shortName && saveFile.data.itemSlot1.shortName.indexOf("Gro+") != -1)
-			saveFile.data.itemSlot1.id = "GroPlus";
-		if (saveFile.data.itemSlot2.shortName && saveFile.data.itemSlot2.shortName.indexOf("Gro+") != -1)
-			saveFile.data.itemSlot2.id = "GroPlus";
-		if (saveFile.data.itemSlot3.shortName && saveFile.data.itemSlot3.shortName.indexOf("Gro+") != -1)
-			saveFile.data.itemSlot3.id = "GroPlus";
-		if (saveFile.data.itemSlot4.shortName && saveFile.data.itemSlot4.shortName.indexOf("Gro+") != -1)
-			saveFile.data.itemSlot4.id = "GroPlus";
-		if (saveFile.data.itemSlot5.shortName && saveFile.data.itemSlot5.shortName.indexOf("Gro+") != -1)
-			saveFile.data.itemSlot5.id = "GroPlus";
+		if (saveFile.data.itemSlot1.shortName)
+		{
+			if (saveFile.data.itemSlot1.shortName.indexOf("Gro+") != -1)
+				saveFile.data.itemSlot1.id = "GroPlus";
+			else if (saveFile.data.itemSlot1.shortName.indexOf("Sp Honey") != -1)
+				saveFile.data.itemSlot1.id = "SpHoney";
+		}
+		if (saveFile.data.itemSlot2.shortName)
+		{
+			if (saveFile.data.itemSlot2.shortName.indexOf("Gro+") != -1)
+				saveFile.data.itemSlot2.id = "GroPlus";
+			else if (saveFile.data.itemSlot2.shortName.indexOf("Sp Honey") != -1)
+				saveFile.data.itemSlot2.id = "SpHoney";
+		}
+		if (saveFile.data.itemSlot3.shortName)
+		{
+			if (saveFile.data.itemSlot3.shortName.indexOf("Gro+") != -1)
+				saveFile.data.itemSlot3.id = "GroPlus";
+			else if (saveFile.data.itemSlot3.shortName.indexOf("Sp Honey") != -1)
+				saveFile.data.itemSlot3.id = "SpHoney";
+		}
+		if (saveFile.data.itemSlot4.shortName)
+		{
+			if (saveFile.data.itemSlot4.shortName.indexOf("Gro+") != -1)
+				saveFile.data.itemSlot4.id = "GroPlus";
+			else if (saveFile.data.itemSlot4.shortName.indexOf("Sp Honey") != -1)
+				saveFile.data.itemSlot4.id = "SpHoney";
+		}
+		if (saveFile.data.itemSlot5.shortName)
+		{
+			if (saveFile.data.itemSlot5.shortName.indexOf("Gro+") != -1)
+				saveFile.data.itemSlot5.id = "GroPlus";
+			else if (saveFile.data.itemSlot5.shortName.indexOf("Sp Honey") != -1)
+				saveFile.data.itemSlot5.id = "SpHoney";
+		}
+
+
 		player.itemSlot1.unlocked = true;
 		player.itemSlot1.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot1.id || saveFile.data.itemSlot1.shortName),

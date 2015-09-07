@@ -534,7 +534,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 			outputText(", you push the witch unceremoniously to the ground and deliver a slap to her breasts.  She cries out in pain as milk splashes out onto the sand.  A cruel smile is brought to your face and you start slapping them even harder, alternatively smacking her pair of cunts for good measure.  Surprisingly, her cries of pain begin to turn into moans of pleasure with every slap.  She might even be pushing into the blows slightly, though it is difficult to tell.  After a sizable pool of milk and her juices has drained into the sands beneath her, you reach down and start to drive your fingers hard into one of the sand witch's cunts.  The first few thrusts are enough to violently bring her to orgasm.  You trot forward slowly until you are over her and the witch suddenly hops up. Driving her face into your ", false);
 			//[has cunt]
 			if(player.hasVagina()) {
-				outputText(vaginaDescript(0) + ", she fingers herself even harder then you had been a moment ago.  Her lips lock unto your " + clitDescript() + " and she suckles on it, drawing a pained gasp from you and causing your pussy juices to gush over her face. You feel ", false);
+				outputText(vaginaDescript(0) + ", she fingers herself even harder than you had been a moment ago.  Her lips lock unto your " + clitDescript() + " and she suckles on it, drawing a pained gasp from you and causing your pussy juices to gush over her face. You feel ", false);
 				//[cunt size is small]
 				if(player.vaginalCapacity() < 10) outputText("one of her fingers ", false);
 				//[cunt size is normal]
@@ -553,7 +553,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 			}
 			//[does not has cunt]
 			else {
-				outputText(assholeDescript() + ", she fingers herself even harder then you had been a moment ago.  Her tongue drives into your " + assholeDescript() + ", licking enthusiastically as she squeezes her nipples. ", false);
+				outputText(assholeDescript() + ", she fingers herself even harder than you had been a moment ago.  Her tongue drives into your " + assholeDescript() + ", licking enthusiastically as she squeezes her nipples. ", false);
 				//[anus size is small]
 				if(player.analCapacity() < 10) outputText("The sensations are intense, and you could almost swear that her tongue is tracing a pattern as her mouth mutters strange sounds. ", false);
 				//[anus size is normal] 

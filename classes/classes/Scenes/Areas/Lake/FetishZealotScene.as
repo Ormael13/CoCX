@@ -174,7 +174,7 @@ package classes.Scenes.Areas.Lake
 					else if (player.totalCocks() == 2) {
 						outputText("With one hand on each of your " + multiCockDescriptLight() + ", you piston them like mad, ", false);
 					}
-					//oh no, is more then that
+					//oh no, is more than that
 					else {
 						outputText("Rapidly moving your hands between each rod in your " + multiCockDescriptLight() + ", you manage to piston each of them at an incredible rate, ", false);
 					}
