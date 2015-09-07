@@ -65,8 +65,11 @@
 //const JOJO_EGGCUBATE_COUNT:int = 591;
 
 public function jojoSprite():void {
-	if(tentacleJojo()) spriteSelect(81);
-	else spriteSelect(34);
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
+		if (tentacleJojo()) spriteSelect(81);
+		else spriteSelect(34);
+	}
+	//No Joy sprite yet.
 }
 
 private function assholeOrDP():String {
@@ -1613,7 +1616,7 @@ public function jojoFollowerMeditate():void {
 			}
 			addButton(1, "Give BJ", corruptJojoCunnilingus);
 			if (player.biggestTitSize() >= 2) addButton(6, (player.biggestLactation() > 1 ? "Suckle" : "Breasts"), corruptJojoBreasts); //All ya need is bewbs
-			addButton(9, "Back", playerMenu);
+			addButton(14, "Back", playerMenu);
 		}
 		
 		private function corruptJojoBJCruel():void {
@@ -2503,7 +2506,7 @@ private function jojoCampMenu():void {
 	if (player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(5, "Purge", wormRemoval, null, null, null, "Request him to purge the worms from your body.");
 	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0) addButton(8, "Rape", jojoAtCampRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
 	if (player.lust >= 33 && monk <= -3) addButton(8, "Sex", pureJojoSexMenu, null, null, null, "Initiate sexy time with the mouse-morph.");
-	addButton(9, "Leave", camp.campFollowers);
+	addButton(14, "Leave", camp.campFollowers);
 }
 
 
@@ -2512,6 +2515,7 @@ public function jojoAppearance():void
 {
 	clearOutput();
 	jojoSprite();
+	outputText(images.showImage("jojo-appearance"));
 	outputText("Jojo is a white furred mouse-morph with dish-like ears and a small muzzle below a sometimes twitchy nose. He watches you with striking blue eyes.\n\n");
 
 	outputText("He's wearing pale blue monk robes that are form fitting yet loose enough to allow him to move freely if the need arises. He also wears prayer beads, a cloth sash that holds his robe close and baggy pants cover his legs all the way to his mouse-like footpaws; on the back of his pants a small hole is cut to allow his ropy pink tail freedom.\n\n");

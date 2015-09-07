@@ -372,6 +372,13 @@
 		if(player.horns > 0) 
 			outputText("  Two antlers, forking into " + num2Text(player.horns) + " points, have sprouted from the top of your head, forming a spiky, regal crown of bone.");
 	}
+	if (player.hornType == HORNS_GOAT)
+	{
+		if (player.horns == 1) 
+			outputText("  A pair of stubby goat horns sprout from the sides of your head.");
+		else
+			outputText("  A pair of tall-standing goat horns sprout from the sides of your head.  They are curved and patterned with ridges.");
+	}
 	//BODY PG HERE
 	outputText("\n\nYou have a humanoid shape with the usual torso, arms, hands, and fingers.", false);
 	//WINGS!
@@ -638,11 +645,15 @@
 	}
 	else if(player.tailType == TAIL_TYPE_PIG) 
 	{
-		outputText("  A short, curly pig tail sprouts from just above your [ass].");
+		outputText("  A short, curly pig tail sprouts from just above your butt.");
 	}
 	else if(player.tailType == TAIL_TYPE_SCORPION) 
 	{
-		outputText("  A chitinous scorpion tail sprouts from just above your [ass], ready to dispense venom.");
+		outputText("  A chitinous scorpion tail sprouts from just above your butt, ready to dispense venom.");
+	}
+	else if (player.tailType == TAIL_TYPE_GOAT) 
+	{
+		outputText("  A very short, stubby goat tail sprouts from just above your butt.");
 	}
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 

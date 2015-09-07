@@ -2097,6 +2097,9 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0)
 		statEffects += "Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining (Lust resistance 20% lower, physical resistance 25% higher.)\n";
 
+	if (player.statusAffectv1(StatusAffects.AndysSmoke) > 0)
+		statEffects += "Andy's Pipe Smoke - " + player.statusAffectv1(StatusAffects.AndysSmoke) + " hours remaining (Speed temporarily lowered, intelligence temporarily increased.)\n";
+		
 	if (player.statusAffectv1(StatusAffects.IzumisPipeSmoke) > 0) 
 		statEffects += "Izumi's Pipe Smoke - " + player.statusAffectv1(StatusAffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
 

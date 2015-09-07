@@ -307,6 +307,11 @@ package classes.Scenes.NPCs
 			return flags[kFLAGS.JOJO_LITTERS] + flags[kFLAGS.JOY_TWINS_BIRTHED];
 		}
 		
+		private function incrementJoysCockFondness(amount:int):void {
+			flags[kFLAGS.JOY_COCK_FONDNESS] += amount;
+			if (flags[kFLAGS.JOY_COCK_FONDNESS] > 10) flags[kFLAGS.JOY_COCK_FONDNESS] = 10;
+		}
+		
 		//------------
 		// INTRO
 		//------------
@@ -447,6 +452,7 @@ package classes.Scenes.NPCs
 		
 		public function approachCampJoy():void {
 			clearOutput();
+			jojoScene.jojoSprite();
 			if (player.cor <= 33) {
 				switch(rand(2)) {
 					case 0:
@@ -478,6 +484,7 @@ package classes.Scenes.NPCs
 		
 		private function joysAppearance():void {
 			clearOutput();
+			outputText(images.showImage("joy-appearance"));
 			outputText("Joy, formerly known as Jojo, stands before you. Her face is curvy and feminine, with puffy lips and long eyelashes. Her eyes are blue and regard you with desire and happiness. She's currently posing and suckling on the tip of her ropy tail as you gaze at her.");
 			outputText("\n\nShe's wearing monk robes that barely manage to contain her - " + Appearance.breastCup(flags[kFLAGS.JOY_BREAST_SIZE]) + "s you estimate - breasts, it seems that at the slightest move those pillowy orbs will burst out from their hiding place; you can even see her perky nipples occasionally poke from under her robes. She's barely managing to hold it closed by using her praying beads as a belt. Looking a bit lower you see a nice handful of ass, with supportive hips that give her a very sexy hourglass figure. She's cut her pants into a pair of tight fitting shorts and walks barefoot on her mousy footpaws.");
 			outputText("\n\nHer weapon of choice is an unremarkable wooden staff, although you only see her use it to pose and tease you; running it between her breasts or between her legs and even licking it sometimes... Whenever she gets a reaction from you, she giggles girlishly.");
@@ -720,7 +727,7 @@ package classes.Scenes.NPCs
 		//------------
 		private function joyMeditationHighCorruptionLetsGo():void {
 			clearOutput();
-			outputText("\"<i>Great! Sit down!</i>\" she instructs, happily.");
+			outputText("\"<i>Great! Sit down!</i>\" she instructs, happily.\n\n");
 			joyMeditationFull(false);
 		}
 		
@@ -728,7 +735,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("You tell Joy you don't feel like meditating right now...");
 			outputText("\n\n\"<i>Ok, but don't let that icky stuff, like, control you or anything.</i>\" she says, then bites her lip and asks, \"<i>so... wanna touch my boobies? They're all soft and bouncy! And then you can rub my fun hole!</i>\" she giggles.");
-			doNext(playerMenu);
+			doNext(genericMenu);
 		}
 		
 		private function meditateWithJoy():void {
@@ -847,6 +854,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>Alright! Like, let's fuck!</i>\" She cheers, springing up - and hauling you painfully upright in the process because her tail is still looped around your neck, pulling you over onto your front. \"<i>Like, [name], this is no time to be lying down; we got sex to have.</i>\" She scolds when she turns to see what's happened to you.");
 			if (player.lust <= 33) dynStats("lus=", 33);
 			joySexMenu();
+			removeButton(14);
 		}
 		
 		private function failedMeditateNoThanks():void {
@@ -1104,7 +1112,7 @@ package classes.Scenes.NPCs
 				hasValidItems = true;
 			}
 			//Pink Egg
-			if (flags[kFLAGS.JOY_EATEN_PINK_EGG] < 2) {
+			if (flags[kFLAGS.JOY_COCK_FONDNESS] < 10) {
 				if (joyHasCock()) {
 					if (player.hasItem(consumables.PINKEGG)) {
 						addButton(buttonPos++, consumables.PINKEGG.shortName, giveJoyAPinkEgg, false);
@@ -1118,7 +1126,7 @@ package classes.Scenes.NPCs
 				}
 				else outputText("\n\n<b>Joy doesn't have a penis. There's no need to give her another pink egg.</b>");
 			}
-			else outputText("\n\n<b>Joy seems to be unwilling to eat any more pink eggs. She seems to like having a penis.</b>");
+			else outputText("\n\n<b>Joy seems to be unwilling to eat any more pink eggs. She seems to like having a penis." + (joyHasCock() ? "" : " That is, if she has one.") + "</b>");
 			//Blue Egg
 			if (flags[kFLAGS.JOY_EATEN_BLUE_EGG] < 1) {
 				if (player.hasItem(consumables.BLUEEGG)) {
@@ -1264,7 +1272,7 @@ package classes.Scenes.NPCs
 			outputText("You tell Joy that you do want her to eat it.");
 			outputText("\n\n\"<i>Like, okay, here goes...</i>\" She cracks the egg and gulps down the yolk, dropping the shell on the ground and giving out a throaty moan. As you watch, the bulge in her shorts shrinks smaller and smaller, until her crotch is completely flat. As if to confirm your suspicions, Joy pulls down her shorts and starts to feel the pink vagina that is now the only sexual organ present. \"<i>Aw... now I don't have a funstick anymore. I won't ever be able to grow it back, you know.</i>\" She tells you. She then starts to probe the interior of her sex, and you decide to leave her to get acquainted with her new body.");
 			flags[kFLAGS.JOY_COCK_SIZE] = 0;
-			flags[kFLAGS.JOY_EATEN_PINK_EGG]++;
+			incrementJoysCockFondness(1);
 			if (player.cor < 25) dynStats("cor", 1); //You monster!
 			doNext(genericMenu);
 		}
@@ -1462,7 +1470,7 @@ package classes.Scenes.NPCs
 				addButton(6, "Get Licked", haveJoyLickYourGinas, null, null, null, "Have Joy lick your pussy.");
 				if (joyHasCock()) addButton(7, "Get Penetrated", haveJoyStuffYourPussy, null, null, null, "Have Joy penetrate you vaginally with her cock.");
 			}
-			addButton(2, "Lick Joy", lickJoysGina, "Get a taste of Joy's pussy but you're sure she has a lot of pussy juice in store for you!");
+			addButton(2, "Lick Joy", lickJoysGina, null, null, null, "Get a taste of Joy's pussy but you're sure she has a lot of pussy juice in store for you!");
 			if (joyHasCock()) {
 				addButton(3, "Blow Joy", suckJoysCock, null, null, null, "Suck Joy's cock and get some taste of her cum!");
 				addButton(8, "Get Anal", haveJoyStuffYourButthole, null, null, null, "Have Joy take you from behind and put her cock to a good use.");
@@ -1503,7 +1511,7 @@ package classes.Scenes.NPCs
 			if (chance > 100) chance = 100;
 			if (rand(100) < chance) jojoScene.pregnancy.knockUp(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MOUSE);
 			player.orgasm();
-			dynStats("sens", -1, "cor", -1);
+			dynStats("sens", -1, "cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.TIMES_PENETRATED_JOY_VAGINALLY]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1526,8 +1534,8 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou can scarcely believe how good it feels, Joy's innards are velvety and warm and the tight ring of her anus holds your shaft into a vice-like grip; even as she clenches her ass in surprise at your sudden intrusion, you still manage to penetrate her with ease, due to the foreplay. In no time at all you're fully inside her, your cock throbbing in tune with her clenching ass" + joyHasCockText(" as well as her own cock") + ".");
 			outputText("\n\nYou give her some time to adjust and ask her if she's ready for this.");
 			outputText("\n\n\"<i>I'm, like, so ready for this!</i>\" Joy states, thrusting her rear into your crotch for emphasis. It looks like she's forgotten all about being nervous now that she's actually being buggered.");
-			outputText("\n\nYou grin and begin pumping into her."); 
-			if (flags[kFLAGS.JOJO_ANAL_XP] == 0) outputText(" <b>Joy has lost her anal virginity.</b>");
+			outputText("\n\nYou grin and begin pumping into her. "); 
+			if (flags[kFLAGS.JOJO_ANAL_XP] == 0) outputText("<b>Joy has lost her anal virginity.</b> ");
 			outputText("Her soft butt cushioning your hips with each slam forward, her wet snatch dripping and spilling her juices. " + (player.balls > 0 ? "Each time you thrust up into her, your balls slap against her pussy teasingly. " : "") + "Intent on making this as pleasurable as possible for both of you; you bend over her and lift one of her fuzzy orbs into your hands, pinching her erect nipple, while you reach down with your other hand to tease her " + joyHasCockText(joyCockDescript() + " and ") + "small clitty.");
 			outputText("\n\nJoy moans and squeaks, " + joyHasCockText("her cock throbbing and oozing pre as you keep brushing against her prostate, ") + " clearly getting into this. \"<i>Oh, wow, that's, like, hot! Give it to me, [name]!</i>\" She cries, her tail coiling around your waist.");
 			outputText("\n\nSince she's asked so nicely, you decide to give her exactly what she wants. You trust powerfully into her, digging as deep as you can into her furry bums and with a groan of pleasure you unleash a torrent of cum into Joy's inviting backside.");
@@ -1551,7 +1559,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nThen you get up and extend a hand to help Joy up as well, that's when you notice that she actually seems to be sleeping...");
 			outputText("\n\nYou chuckle and gather your things to go clean up, leaving Joy to rest.");
 			player.orgasm();
-			dynStats("sens", -1, "cor", -1);
+			dynStats("sens", -1, "cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.JOJO_ANAL_XP]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1620,6 +1628,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYour only reply is to tap her nose and leave with a giggle of your own.");
 			dynStats("lus", 20 + (player.lib / 5) + (player.cor / 10), "cor", -0.5);
 			flags[kFLAGS.JOJO_BLOWJOB_XP]++;
+			incrementJoysCockFondness(1);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1642,8 +1651,9 @@ package classes.Scenes.NPCs
 			outputText("\n\nJoy gasps and moans, eagerly blowing her load with full-body jerks and spasms until, at least, she peters out and her cock flops limply down between her legs, your front and hers painted in her spooge. \"<i>Wow... That's not, like, my favorite way to do things, but it's certainly pretty fun, y'know?</i>\" She comments. Stepping back, she gently brushes off some of the mixed spunk with her finger and slurps it up. \"<i>Mmm. We make a good mix.</i>\" She giggles");
 			outputText("\n\nYou " + player.clothedOrNakedLower("gather the discarded pieces of your " + player.armorDescript() + " and ") + "give her ass a good grope before leading the both of you towards the nearest stream to clean up.");
 			player.orgasm();
-			dynStats("cor", -0.5);
+			dynStats("cor", -(0.5 + Math.ceil(player.cor / 30)));
 			flags[kFLAGS.TIMES_FROTTED_WITH_JOY]++;
+			incrementJoysCockFondness(1);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1656,7 +1666,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou laugh at Joy's reaction and tell her to get off you and undress, you wouldn't want to get her" + player.clothedOrNakedLower(", or your,") + " clothes dirty.");
 			outputText("\n\nShe just licks her lips. \"<i>I can wash my own clothes, thank you. As for getting you dirty...</i>\" She leers down at you, gently stroking your crotch. \"<i>That implies I'm gonna spill some spunk...</i>\" She purrs, and then starts tugging down your undergarments.");
 			outputText("\n\nThat sounded like a promise... you decide to lean back and relax, telling her to show you just what she can do with those pretty lips of hers.");
-			outputText("\n\nJoy needs no encouragement; within moments she has your shaft sticking up into the air, hungrily licking her lips. \"<i>Baby... like, I'm gonna blow your mind...</i>\" She coos. She " + (player.cockTotal() > 1 ? "selects your largest " + player.cockDescript(player.biggestCockArea()) + " and " : "") + "takes your cock by her hand. \"<i>Mmm... Good enough to eat...</i>\" She promptly opens her mouth and engulfs your cock.");
+			outputText("\n\nJoy needs no encouragement; within moments she has your shaft sticking up into the air, hungrily licking her lips. \"<i>Baby... like, I'm gonna blow your mind...</i>\" She coos. She " + (player.cockTotal() > 1 ? "selects your largest " + player.cockDescript(player.biggestCockIndex()) + " and " : "") + "takes your cock by her hand. \"<i>Mmm... Good enough to eat...</i>\" She promptly opens her mouth and engulfs your cock.");
 			//Cock size check goes here
 			if (player.cockArea(player.smallestCockIndex()) < 12) {
 				outputText("\n\nWithin moments you can feel Joy's nose bump into your crotch, you're barely big enough to reach the back of her throat; still you can't help but moan at the feeling of Joy's slowly undulating tongue, as the warmth of her mouth spreads through your " + player.cockDescript() + ".");
@@ -1697,7 +1707,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nShe gives you a wide, goofy smile at that and coos in delight, leaning into your stroking hand.");
 			outputText("\n\nYou " + player.clothedOrNakedLower("gather your [armor] and ") + "leave to clean up.");
 			player.orgasm();
-			dynStats("cor", -0.5);
+			dynStats("cor", -(0.5 + Math.ceil(player.cor / 30)));
 			flags[kFLAGS.TIMES_GET_BLOWN_BY_JOY]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1731,7 +1741,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nJoy's tongue immediately snakes out and licks it up. \"<i>Better now?</i>\" She teases.");
 			outputText("\n\nYou just give her a thumbs up and leave.");
 			player.orgasm();
-			dynStats("cor", -0.5);
+			dynStats("cor", -(0.5 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.TIMES_GET_LICKED_BY_JOY]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1763,8 +1773,9 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>Yay!</i>\" Joy perks right up at that, throwing her arms into the air in delight.");
 			outputText("\n\nYou giggle at her reaction and gather your discarded clothes. Then take Joy's hand and begin making your way towards the nearest stream.");
 			player.orgasm();
-			dynStats("sens", 1, "cor", -1);
+			dynStats("sens", 1, "cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER]++;
+			incrementJoysCockFondness(2);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1814,8 +1825,9 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou laugh at Joy's mortified expression and comfort her by hugging her and telling her you would never refuse something as cute as her... but if she really expects to have a shot at your ass again she'd better grab your stuff and help you clean up. Then you release her and make your way towards the stream.");
 			outputText("\n\nThe mouse bimbo watches you go. \"<i>Like, [name], that was really mean!</i>\" She whines, then scampers after you.");
 			player.orgasm();
-			dynStats("sens", 1, "cor", -1);
+			dynStats("sens", 1, "cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER]++;
+			incrementJoysCockFondness(2);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2042,7 +2054,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou shrug and lay down beside Joy, gently stroking her belly as you do. Joy reaches out and embraces you, snuggling up and you sigh, letting sleep overtake you.");
 			outputText("\n\n\"<i>Love you...</i>\" Joy murmurs sleepily.");
 			player.orgasm();
-			dynStats("cor", -1);
+			dynStats("cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.TIMES_PENETRATED_JOY_VAGINALLY]++;
 			flags[kFLAGS.JOJO_ANAL_XP]++;
 			flags[kFLAGS.JOY_NIGHT_FUCK] = 1;
@@ -2217,6 +2229,7 @@ package classes.Scenes.NPCs
 			dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 			flags[kFLAGS.JOY_TWINS_BIRTHED]++;
 			if (flags[kFLAGS.JOY_TWINS_BIRTHED] >= 3 && flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] == 0) flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] = 72;
+			incrementJoysCockFondness(4);
 			playerGivesBirthToJoyBabiesPart2();
 		}
 		

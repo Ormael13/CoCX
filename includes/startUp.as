@@ -112,10 +112,15 @@ Open-source contributions by:<br>
 
 Game Mod by: Kitteh6660
 
-Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
-
-Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>  
+<b><u>Original Game Github</u></b>
+<br>Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
+<br>Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>  
 (requires an account, unfortunately)
+
+<b><u>Modded Game Github</u></b>
+<br>Source Code: <u><a href='https://github.com/Kitteh6660/Corruption-of-Champions'>https://github.com/Kitteh6660/Corruption-of-Champions</a></u>
+<br>Bug Tracker: <u><a href='https://github.com/Kitteh6660/Corruption-of-Champions/issues'>https://github.com/Kitteh6660/Corruption-of-Champions/issues</a></u>  
+(requires an account too, unfortunately)
 
 **<u>DISCLAIMER</u>**
 <br>- **There are many strange and odd fetishes contained in this flash.  Peruse at own risk.**
@@ -734,7 +739,7 @@ public function creditsScreen():void {
 	outputText("<ul>");
 	outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TF)</li>");
 	outputText("<li> FeiFongWong (Prisoner Mod)</li>");
-	outputText("<li> Foxxling (Lizan Rogue, Skin Oils & Body Lotions)</li>");
+	outputText("<li> Foxxling (Lizan Rogue, Skin Oils & Body Lotions, Black Cock)</li>");
 	outputText("<li> LukaDoc (Bimbo Jojo)</li>");
 	outputText("<li> Kitteh6660 (Behemoth, Cabin, Ingnam, Pure Jojo sex scenes. Feel free to help me with quality control.)</li>");
 	outputText("</ul>");

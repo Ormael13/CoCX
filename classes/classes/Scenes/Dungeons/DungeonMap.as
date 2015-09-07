@@ -780,14 +780,14 @@ package classes.Scenes.Dungeons {
 		
 		public function displayMap():void {
 			clearOutput();
-			outputText("<b><font face=\"Consolas\">");
+			outputText("<b><font face=\"_typewriter\">");
 			if (inRoomedDungeon) chooseRoomToDisplayD3();
 			else chooseRoomToDisplay();
 			outputText("</font></b>");
 			outputText("\n\n<b><u>Legend</u></b>");
-			outputText("\n<font face=\"Consolas\"><b>P</b></font> — Player Location");
-			outputText("\n<font face=\"Consolas\"><b>L</b></font> — Locked Door");
-			outputText("\n<font face=\"Consolas\"><b>S</b></font> — Stairs");
+			outputText("\n<font face=\"_typewriter\"><b>P</b></font> — Player Location");
+			outputText("\n<font face=\"_typewriter\"><b>L</b></font> — Locked Door");
+			outputText("\n<font face=\"_typewriter\"><b>S</b></font> — Stairs");
 			menu();
 			addButton(0, "Close Map", playerMenu);
 		}

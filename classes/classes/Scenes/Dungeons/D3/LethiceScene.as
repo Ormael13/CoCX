@@ -167,7 +167,19 @@ package classes.Scenes.Dungeons.D3
 
 			if (player.cor >= 80) outputText("Or maybe not... After all, you have Mareth to yourself.");
 			awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, true, true, false);
-			outputText("\n\n<b>THE END!</b> Now sit tight and wait until the official ending gets added!");
+			outputText("\n\n<b>THE END!</b> ");
+			if (silly()) {
+				switch(rand(2)) {
+					case 0:
+						outputText("#StillWaitingForFenoxoToFinishUpLethice");
+						break;
+					case 1:
+						outputText("Fenoxo, Y U NO finish up Lethice?");
+						break;
+					default:
+				}
+			}
+			else outputText("Now sit tight and wait until the official ending gets added!");
 			doNext(bringUpTheCredits);
 		}
 		

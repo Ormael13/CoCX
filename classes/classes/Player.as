@@ -848,6 +848,10 @@ use namespace kGAMECLASS;
 				if (faceType == 20)
 					race = "boar-morph";
 			}
+			if (satyrScore() >= 4)
+			{
+				race = "satyr";
+			}
 			if (dragonneScore() >= 6)
 			{
 				race = "dragonne-morph";
@@ -1494,6 +1498,26 @@ use namespace kGAMECLASS;
 			return pigCounter;
 		}
 		
+		public function satyrScore():Number
+		{
+			var satyrCounter:Number = 0;
+			if (lowerBody == LOWER_BODY_TYPE_HOOFED)
+				satyrCounter++;
+			if (tailType == TAIL_TYPE_GOAT)
+				satyrCounter++;
+			if (satyrCounter >= 2) {
+				if (earType == EARS_ELFIN)
+					satyrCounter++;
+				if (faceType == FACE_HUMAN)
+					satyrCounter++;
+				if (countCocksOfType(CockTypesEnum.HUMAN) > 0)
+					satyrCounter++;
+				if (balls > 0 && ballSize >= 2)
+					satyrCounter++;
+			}
+			return satyrCounter;
+		}
+		
 		//Dragonne
 		public function dragonneScore():Number
 		{
@@ -1780,7 +1804,7 @@ use namespace kGAMECLASS;
 		
 		public function clothedOrNakedLower(clothedText:String, nakedText:String = ""):String
 		{
-			return (armorName != "gear" ? clothedText : nakedText);
+			return (armorName != "gear" && (armorName != "lethicite armor" && lowerGarmentName == "nothing") ? clothedText : nakedText);
 		}
 		
 		public function shrinkTits(ignore_hyper_happy:Boolean=false):void
@@ -2238,7 +2262,10 @@ use namespace kGAMECLASS;
 				maxStr += statusAffectv1(StatusAffects.Might);
 				maxTou += statusAffectv2(StatusAffects.Might);
 			}
-			
+			if (findStatusAffect(StatusAffects.AndysSmoke) >= 0) {
+				maxSpe -= statusAffectv2(StatusAffects.AndysSmoke);
+				maxInt += statusAffectv3(StatusAffects.AndysSmoke);
+			}
 			if (stats == "str" || stats == "strength") return maxStr;
 			else if (stats == "tou" || stats == "toughness") return maxTou;
 			else if (stats == "spe" || stats == "speed") return maxSpe;

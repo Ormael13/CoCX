@@ -16,7 +16,7 @@
 //Set Up With The Travelling, Tainted Bazaar
 public function Bazaar(){
 }
-
+		public var blackCock:BlackCock = new BlackCock();
 		public var benoit:Benoit = new Benoit();
 		public var cinnabar:Cinnabar = new Cinnabar();
 		public var fapArena:FapArena = new FapArena();
@@ -81,38 +81,24 @@ public function winAgainstGuard():void {
 //[Enter]
 public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	clearOutput();
-	var rat:String = "Rat";
-	var lilium2:String = "Demon";
-	if(model.time.hours >= 15 && model.time.hours <= 20 && flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0) rat = "Cinnabar";
+	spriteSelect(-1);
 	//Make sure flags to allow entrance is set.
 	if(flags[kFLAGS.BAZAAR_ENTERED] == 0) flags[kFLAGS.BAZAAR_ENTERED] = 1;
 	outputText("You breeze past the crimson guard and enter the interior of the Bizarre Bazaar.  The ground is hard-packed, trampled as if walked over by hundreds of hooves, paws, and feet.  A massive bonfire rages in the center of the clearing, crackling and popping as it consumes its fuel gluttonously.  Surrounding the blazing behemoth are tiny, wheeled food-carts with vendors hawking everything from sausage to something called a 'marshmallow'.  Huge wagons ring the clearing, many set up to display exotic wares or services.  You can see everything from dancing centaurs to demons browsing the wares, but it seems an uneasy truce of sorts reigns here.  Then again, maybe the demons have just not had the chance to openly attack this place yet.", false);
 	outputText("\n\nOne of the wagons proudly proclaims itself to be \"Greta's Garments,\" though both 'G's are emphasized with cute, stylized devil horns, and the 'S' is shaped in the form of a spaded, demonic tail.  Obviously it must some kind of clothing shop.");
-	var roxanne2:Function = roxanne.RoxanneAppearance();
-	var roxanneT:String = "Lizans";
-	var demon:Function = null;
-	var tent:Function;
-	var benoit2:Function = null;
-	var benoitT:String = "MarketStall";
-	if (model.time.hours >= 9 && model.time.hours <= 17) {
-		if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && this.getGame().model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1)
-		{
-			if (flags[kFLAGS.TIMES_IN_BENOITS] == 0) 
-			{
-				outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
-			}
-			else 
-			{
-				outputText("\n\n" + benoit.benoitMF("Benoit","Benoite") + " the basilisk's stall looks open for business.  You could go see what's on offer.");
-				benoitT = benoit.benoitMF("Benoit","Benoite");
-			}
-			benoit2 = benoit.benoitIntro;
-		}
-	}
-	tent = fapArena.fapArenaGOOOO;
+	roxanne.RoxanneAppearance();
+	benoit.setBenoitShop();
 	fapArena.fapAppearance();
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] > 0) roxanneT = "Roxanne";
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] > 0) lilium2 = "Lilium";
+	blackCock.blackCockDescription();
+	//Set menu. The top row is always available.
+	menu();
+	addButton(0, "Shops", shopMenu);
+	addButton(1, (flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] > 0 ? "Fap Arena" : "Tent"), fapArena.fapArenaGOOOO);
+	addButton(2, "Food Tent", blackCock.enterTheBlackCock, null, null, null, "The incredible smell seems to come from that tent.", "The Black Cock");
+	addButton(4, "Back Alley", investigateBackAlley, null, null, null, "That back alley looks suspicious. Do you dare investigate?");
+	//Cinnabar
+	if (model.time.hours >= 15 && model.time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
+	//Griping Demons
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 0 && rand(4) == 0 && demons) {
 		overHearDemonsAboutSyrena();
 		return;
@@ -120,28 +106,29 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 1 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 2) && demons && rand(10) == 0) {
 		//[Repeat Variant]
 		outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>", false);
-		demon = overHearDemonsAboutSyrena;
+		addButton(6, "GripingDemons", overHearDemonsAboutSyrena, null, null, null, "Overhear the conversation of the two griping demons.", "Griping Demons");
 	}
-	var niamh:Function = null;
+	//Lilium
+	if (lilium.LiliumText(false) != null) {
+		addButton(7, (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] > 0 ? "Lilium" : "Demon"), lilium.LiliumText(false));
+	}
+	//Roxanne
+	addButton(8, (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] > 0 ? "Roxanne" : "Lizans"), (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] > 0 ? roxanne.RoxanneChooseApproachOrRepeat : roxanne.Roxanne1stApproach));
+	//Bimbo Niamh
 	if (flags[kFLAGS.NIAMH_STATUS] > 0 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
 		if (flags[kFLAGS.NIAMH_STATUS] == 2) outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
-		niamh = getGame().telAdre.niamh.bazaarNiamh;
+		addButton(9, "Niamh", getGame().telAdre.niamh.bazaarNiamh);
 	}
-	/*[S. Squeeze] [][][] [Leave]
-	choices(benoitT,benoit,rat,cinnabarAppearance(),"GripingDemons",demon,lilium,LiliumText(false),"Niamh",niamh,roxanneT,roxanne,"S. Squeeze",theSlipperySqueeze,"Tent",tent,"",0,"Leave",13);*/
-	menu();
-	addButton(0,benoitT,benoit2);
-	addButton(1,rat,cinnabar.cinnabarAppearance(false));
-	addButton(2,"Greta's",gretasGarments);
-	addButton(3,"GripingDemons",demon);
-	if(lilium.LiliumText(false) != null) addButton(4,lilium2,lilium.LiliumText(false));
-	addButton(5, "Niamh", niamh);
-	addButton(6,roxanneT,roxanne2);
-	addButton(7,"S. Squeeze",theSlipperySqueeze);
-	addButton(8,"Tent",tent);
-	addButton(9, "Back Alley", investigateBackAlley, null, null, null, "That back alley looks suspicious. Do you dare investigate?");
 	addButton(14,"Leave",camp.returnToCampUseOneHour);
-}	
+}
+
+private function shopMenu():void {
+	menu();
+	benoit.setBenoitShop(true);
+	addButton(1, "G. Garments", gretasGarments);
+	addButton(2, "S. Squeeze", theSlipperySqueeze);
+	addButton(4, "Back", enterTheBazaarAndMenu);
+}
 
 //Semen Bukkake and Massage Parlor
 //-Femboi Bunny owner - Joey
@@ -1033,7 +1020,7 @@ private function assaultYoRapistYo():void {
 	clearOutput();
 	//Strength Check
 	//[(If strength is less than 50)
-	if(player.str < 50) {
+	if(player.str + rand(30) < 50) {
 		outputText("Intending to turn the tables, you grip the feline man's wrists and pull as hard as you can to wrest yourself away from the strange figure.  Your muscles fail you, though, and the feline quickly pins your arms behind your back.  Though you strain against them, the stronger hands hold you in place.  You spit silent curses at yourself for not spending more time at the gym.  \"<i>Nice try.  It was almost... Cute.</i>\" You hear the figure snicker again behind you before you are promptly shoved through the entrance to the large tent.");
 		//Pass go collect 200 rape
 		menu();

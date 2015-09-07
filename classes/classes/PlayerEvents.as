@@ -767,6 +767,22 @@ package classes {
 				player.changeStatusValue(StatusAffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
 			}
+			if (player.findStatusAffect(StatusAffects.Fullness) >= 0) {
+				player.addStatusValue(StatusAffects.Fullness, 1, -1);
+				if (player.statusAffectv1(StatusAffects.Fullness) <= 0) player.removeStatusAffect(StatusAffects.Fullness);
+			}
+			if (player.findStatusAffect(StatusAffects.AndysSmoke) >= 0) {
+				player.addStatusValue(StatusAffects.AndysSmoke, 1, -1);
+				if (player.statusAffectv1(StatusAffects.AndysSmoke) <= 0) {
+					outputText("\n<b>The change in your mental prowess confirms that the effects of Nepenthe must have worn off.</b>\n");
+					var tempSpe:int = player.statusAffectv2(StatusAffects.AndysSmoke);
+					var tempInt:int = player.statusAffectv3(StatusAffects.AndysSmoke);
+					player.removeStatusAffect(StatusAffects.AndysSmoke);
+					dynStats("spe", -tempSpe); //Properly revert speed and intelligence.
+					dynStats("inte", -tempInt);
+					needNext = true;
+				}
+			}
 			if (getGame().model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
 				outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 				player.growTits(1, player.bRows(), false, 2);

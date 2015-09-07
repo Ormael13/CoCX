@@ -10,6 +10,7 @@ package classes
 	{
 		// Non-combat player perks
 		public static const AllNaturalOnaholeUsed:StatusAffectType = mk("all-natural onahole used");
+		public static const AndysSmoke:StatusAffectType = mk("Andy's Smoke"); //v1: Hours; v2: Speed; v3: Intelligence
 		public static const AteEgg:StatusAffectType = mk("ateEgg");
 		public static const AnemoneArousal:StatusAffectType = mk("Anemone Arousal");
 		public static const BimboChampagne:StatusAffectType = mk("Bimbo Champagne");
@@ -58,6 +59,7 @@ package classes
 		public static const FetishOn:StatusAffectType = mk("fetishON");
 		public static const FoundFactory:StatusAffectType = mk("Found Factory");
 		public static const FuckedMarble:StatusAffectType = mk("FuckedMarble");
+		public static const Fullness:StatusAffectType = mk("Fullness"); //Alternative to hunger
 		public static const Goojob:StatusAffectType = mk("GOOJOB");
 		public static const GooStuffed:StatusAffectType = mk("gooStuffed");
 		public static const Groundpound:StatusAffectType = mk("Groundpound");
@@ -164,12 +166,9 @@ package classes
 		public static const PrisonCaptorEllyScruffy:StatusAffectType = mk("prisonCaptorEllyScruffy");
 		public static const PrisonRestraints:StatusAffectType = mk("prisonRestraint");
 		public static const PrisonCaptorEllyScratch:StatusAffectType = mk("prisonCaptorEllyScatch");
-		/**
-		 * v1 = bonus index
-		 * v2 = bonus value
-		 * v3 = remaining time
-		 */
-		public static const UmasMassage:StatusAffectType = mk("Uma's Massage");
+		
+		
+		public static const UmasMassage:StatusAffectType = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusAffectType = mk("Uniball");
 		public static const UsedNaturalSelfStim:StatusAffectType = mk("used natural self-stim");
 		public static const used_self_dash_stim:StatusAffectType = mk("used self-stim");

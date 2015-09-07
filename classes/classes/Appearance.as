@@ -1184,6 +1184,18 @@
 					"snake dick"];
 				description += randomChoice(options);
 			}
+			else if (cockType == CockTypesEnum.RHINO) {
+				options = ["oblong cock",
+					"rhino dick",
+					"rhino cock",
+					"bulged rhino cock",
+					"rhino penis",
+					"rhink dong",
+					"oblong penis",
+					"oblong dong",
+					"oblong dick"];
+				description += randomChoice(options);
+			}
 			else {
 				description += randomChoice("cock", "prick", "pecker", "shaft");
 			}
@@ -2349,7 +2361,8 @@
 					[HORNS_COW_MINOTAUR, "cow"],
 					[HORNS_DRACONIC_X2, "2 draconic"],
 					[HORNS_DRACONIC_X4_12_INCH_LONG, "four 12\" long draconic"],
-					[HORNS_ANTLERS, "deer"]
+					[HORNS_ANTLERS, "deer"],
+					[HORNS_GOAT, "goat"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2386,7 +2399,8 @@
 					[TAIL_TYPE_MOUSE, "mouse"],
 					[TAIL_TYPE_BEHEMOTH, "behemoth"],
 					[TAIL_TYPE_PIG, "pig"],
-					[TAIL_TYPE_SCORPION, "scorpion"]
+					[TAIL_TYPE_SCORPION, "scorpion"],
+					[TAIL_TYPE_GOAT, "goat"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(

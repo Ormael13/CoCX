@@ -217,7 +217,8 @@ package classes
 		2 - minotaur (cowlike)
 		3 - Draconic/Lizard
 		4 - Double draconic
-		5 - Antlers*/
+		5 - Antlers
+		6 - Goat*/
 		public var hornType:Number = HORNS_NONE;
 		public var horns:Number = 0;
 
@@ -3492,6 +3493,9 @@ package classes
 				case CockTypesEnum.TENTACLE:
 					if (rand(2) == 0) return "mushroom-like tip";
 					return "wide plant-like crown";
+				case CockTypesEnum.RHINO:
+					if (rand(2) == 0) return "flared head";
+					return "rhinoceros dickhead";
 				default:
 			}
 			if (rand(2) == 0) return "crown";

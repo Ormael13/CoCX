@@ -68,7 +68,7 @@ package classes.Scenes.Dungeons.D3
 			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] > 0) outputText("Thanks to your readiness, you manage to leap out of the way! Lethice lets out a curse. \"<i>Fuck! Why won't you stand still?</i>\"");
 			else {
 				outputText("It's too late! The orb hits you and explodes, causing a blinding flash across the room! You groan and writhe in pain. ");
-				var dmg:int = ((inte * 2) + (100 - player.cor) + 100 + rand(150) * spellMod());
+				var dmg:int = Math.round((inte * 2) + (100 - player.cor) + 100 + rand(150) * spellMod());
 				dmg = player.reduceDamage(dmg);
 				player.takeDamage(dmg, true);
 			}

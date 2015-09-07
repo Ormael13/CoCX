@@ -242,6 +242,9 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 }
 
 private function armorShops():void {
+	clearOutput();
+	outputText("The shopping district of Tel’adre happens to be contained in a large dead end street, with a large set of doors at the entrance to protect it from thieves at night, you’d assume from a higher elevation it would look like a giant square courtyard. Due to the cities shopping area being condensed into one spot, most if not every visible wall has been converted into a store front, in the center of the area are some small stands, guess not everyone can afford a real store.");
+	outputText("\n\nRight off the bat you see the ‘Piercing Studio’, its piercing covered centaur sign is a real eye catcher. You can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand. As well as other shops lining the walls, perhaps those shops will be interesting as well.");
 	menu();
 	addButton(0, "Blacksmith", armorShop);
 	addButton(1, "Piercing", piercingStudio);
@@ -1923,7 +1926,7 @@ private function carpentryShopBuyWoodYes():void {
 			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 999) * 10);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 999);
 		}
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100");
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]);
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"", true);
 	statScreenRefresh();

@@ -10,7 +10,7 @@ package classes.Scenes.Areas.HighMountains
 	{
 		
 		public function checkRathazul():Boolean {
-			return (player.findStatusAffect(StatusAffects.CampRathazul) >= 0);
+			return (player.findStatusAffect(StatusAffects.CampRathazul) >= 0 || player.statusAffectv2(StatusAffects.MetRathazul) >= 3);
 		}
 		public function checkJojo():Boolean {
 			return (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0);

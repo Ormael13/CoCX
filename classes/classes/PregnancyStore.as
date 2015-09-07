@@ -43,6 +43,7 @@ package classes
 		public static const PREGNANCY_MINERVA:int				=  34;
 		public static const PREGNANCY_BEHEMOTH:int				=  35;
 		public static const PREGNANCY_PHOENIX:int				=  36;
+		public static const PREGNANCY_ANDY:int                  =  37; //This is functionally the same as Satyr but less corrupt. 10% chance of fauns, if ever implemented.
 		
 		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
 		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs

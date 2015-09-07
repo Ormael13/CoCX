@@ -88,6 +88,7 @@ public static const HORNS_COW_MINOTAUR:int                                      
 public static const HORNS_DRACONIC_X2:int                                           =   3;
 public static const HORNS_DRACONIC_X4_12_INCH_LONG:int                              =   4;
 public static const HORNS_ANTLERS:int                                               =   5;
+public static const HORNS_GOAT:int                                                  =   6;
 
 // antennae
 public static const ANTENNAE_NONE:int                                               =   0;
@@ -120,6 +121,7 @@ public static const TAIL_TYPE_FERRET:int                                        
 public static const TAIL_TYPE_BEHEMOTH:int                                          =  18;
 public static const TAIL_TYPE_PIG:int                                               =  19;
 public static const TAIL_TYPE_SCORPION:int                                          =  20;
+public static const TAIL_TYPE_GOAT:int                                              =  21;
 
 //breast size
 public static const BREAST_CUP_FLAT:int												=   0;

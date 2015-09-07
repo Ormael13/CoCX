@@ -77,20 +77,18 @@ WIN:
 		//End of Interface Implementation
 		
 //[Drinking Table Appearance]
-public function RoxanneAppearance():Function {
+public function RoxanneAppearance():void {
 	//When she there?
 	if(model.time.hours > 12 && model.time.hours < 19) {
 		//(Not Met) 
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] == 0) outputText("\n\nThere's a table with a half-dozen oddly-dressed lizans not too far from the fire.  A keg is set up a few feet away and they seem to be having a good time.", false);
 		//Met) 
 		else outputText("\n\nRoxanne and her usual crew are sitting at a table, drinking and telling bawdy stories near the fire.", false);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] == 0) return Roxanne1stApproach;
-		else return RoxanneChooseApproachOrRepeat;
 	}
-	return null;
+	//return null;
 }
 //[Drinking Table Approach, Not Met Yet]	
-private function Roxanne1stApproach():void {
+public function Roxanne1stApproach():void {
 	clearOutput();
 	spriteSelect(78);
 	outputText("You hesitantly approach the drinking lizard-folk, taking note of their unusual garments and appearance.  They all wear black jackets with silver trim, tight-fitting leather pants, and tall, black boots.  Oddly, the most feminine of them appears to be the leader.  Her jacket is filled out with large, well-rounded DD-cup breasts, and her boots forgo the traditional shape for a sluttier, higher heel.  Her scales are a dark purple, glittering darkly in the light, and while her head has a lizard-like shape, a pair of dragon-like horns bulge from the back of her skull in place of hair.  The other lizans all appear to be males, but they act as if they're quite intimidated by the feminine leader.\n\n", false);
@@ -104,7 +102,7 @@ private function Roxanne1stApproach():void {
 }
 
 //[Approach] – Flag as Met
-private function RoxanneChooseApproachOrRepeat():void {
+public function RoxanneChooseApproachOrRepeat():void {
 	spriteSelect(78);
 	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] == 0) {
@@ -154,7 +152,7 @@ private function RoxanneChooseApproachOrRepeat():void {
 	}
 	else outputText("If you're reading this, something broke.", false);
 	//Clear the 'are you losing the contest intionally flag'
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 0;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 0; //In case if lizans codex entry didn't unlock.
 	if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
 		outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")

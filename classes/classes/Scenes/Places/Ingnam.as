@@ -325,7 +325,7 @@ package classes.Scenes.Places
 		}
 		
 		public function addShopItem(item:ItemType, price:int, shop:int):void {
-			outputText("\n" + price + " gems - " + item.longName + "");
+			outputText("\n" + capitalizeFirstLetter(item.longName) + " - " + price + " gems");
 			var button:int = 0;
 			for (var i:int = 0; i < 14; i++) {
 				if (buttonIsVisible(i)) button++;
@@ -454,7 +454,7 @@ package classes.Scenes.Places
 				player.addStatusValue(StatusAffects.Drunk, 2, 1);
 				if (player.statusAffectv1(StatusAffects.Drunk) < 2) player.addStatusValue(StatusAffects.Drunk, 1, 1);
 				if (player.statusAffectv2(StatusAffects.Drunk) == 2) {
-					outputText("\n\n<b>You feel a bit drunk. Maybe you should cut back on the beers.</b>");
+					outputText("\n\n<b>You feel a bit drunk. Maybe you should cut back on the beers?</b>");
 				}
 				//Get so drunk you end up peeing! Genderless can still urinate.
 				if (player.statusAffectv2(StatusAffects.Drunk) >= 3) {

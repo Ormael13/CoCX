@@ -612,7 +612,7 @@ private function doCamp():void { //Only called by playerMenu
 		else outputText("Thick wooden walls have been erected to provide some defense.  ");
 	}
 	else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
-		outputText("Thick wooden walls have been erected; they surround one half of your camp perimeter and provide good defense, leaving the other half open for access to the stream.  ");
+		outputText("Thick wooden walls have been erected; they surround one half of your camp perimeter and provide good defense, leaving the another half open for access to the stream.  ");
 		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the walls; it gets closed at night to keep any invaders out.  ");
 		if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
 			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted near the gateway");
@@ -1870,27 +1870,29 @@ private function callRathazulAndEscapeBadEnd():void {
 
 //Bad End if you starved to death.
 public function badEndHunger():void {
+	clearOutput();
 	player.hunger = 0.1; //For Easy Mode/Debug Mode.
-	outputText("Too weak to be able to stand up, you collapse onto the ground. Your vision blurs as the world around you finally fades to black. ", true);
+	outputText("Too weak to be able to stand up, you collapse onto the ground. Your vision blurs as the world around you finally fades to black. ");
 	if (companionsCount() > 0) {
 		outputText("\n\n");
 		if (companionsCount() > 1) {
-			outputText("Your companions gather to mourn over your passing.", false);
+			outputText("Your companions gather to mourn over your passing.");
 		}
 		else {
-			outputText("Your fellow companion mourns over your passing.", false);
+			outputText("Your fellow companion mourns over your passing.");
 		}
 	}
 	player.HP = 0;
 	getGame().gameOver();
-	removeButton(1);
+	removeButton(1); //Can't continue, you're dead!
 }
 //Bad End if you have 100 min lust.
 public function badEndMinLust():void {
-	outputText("The thought of release overwhelms you. You frantically remove your " + player.armorName + " and begin masturbating furiously.  The first orgasm hits you but the desire persists.  You continue to masturbate but unfortunately, no matter how hard or how many times you orgasm, your desires will not go away.  Frustrated, you keep masturbating furiously but you are unable to stop.  Your minimum lust is too high.  No matter how hard you try, you cannot even satisfy your desires.\n\n", true);
-	outputText("You spend the rest of your life masturbating, unable to stop.", false)
+	clearOutput();
+	outputText("The thought of release overwhelms you. You frantically remove your " + player.armorName + " and begin masturbating furiously.  The first orgasm hits you but the desire persists.  You continue to masturbate but unfortunately, no matter how hard or how many times you orgasm, your desires will not go away.  Frustrated, you keep masturbating furiously but you are unable to stop.  Your minimum lust is too high.  No matter how hard you try, you cannot even satisfy your desires.");
+	outputText("\n\nYou spend the rest of your life masturbating, unable to stop.");
 	player.orgasm();
-	getGame().gameOver();	
+	getGame().gameOver();
 	removeButton(1); //Can't wake up, must load.
 }
 
@@ -2138,15 +2140,15 @@ private function buildCampWall():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
 	if (marbleFollower()) {
-		helperArray[helperArray.length] = "Marble"
+		helperArray[helperArray.length] = "Marble";
 		helpers++;
 	}
 	if (followerHel()) {
-		helperArray[helperArray.length] = "Helia"
+		helperArray[helperArray.length] = "Helia";
 		helpers++;
 	}
 	if (followerKiha()) {
-		helperArray[helperArray.length] = "Kiha"
+		helperArray[helperArray.length] = "Kiha";
 		helpers++;
 	}
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
@@ -2215,11 +2217,19 @@ private function buildCampGatePrompt():void {
 
 private function buildCampGate():void {
 	var helpers:int = 0;
-	var temp:int = 0;
-	if (marbleFollower()) helpers++;
-	if (followerHel()) helpers++;
-	if (followerKiha()) helpers++;
-	temp = helpers;
+	var helperArray:Array = [];
+	if (marbleFollower()) {
+		helperArray[helperArray.length] = "Marble";
+		helpers++;
+	}
+	if (followerHel()) {
+		helperArray[helperArray.length] = "Helia";
+		helpers++;
+	}
+	if (followerKiha()) {
+		helperArray[helperArray.length] = "Kiha";
+		helpers++;
+	}
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
 	player.addKeyValue("Carpenter's Toolbox", 1, -100);
 	clearOutput();
@@ -2227,25 +2237,7 @@ private function buildCampGate():void {
 	flags[kFLAGS.CAMP_WALL_GATE] = 1;
 	outputText("\n\nYou take the wood from supplies, saw the wood and cut them into planks before nailing them together. ");
 	if (helpers > 0) {
-		outputText("\n\n");
-		if (marbleFollower()) {
-			outputText("Marble");
-			if (temp >= 2) outputText(", ");
-			else if (temp == 1) outputText(", and ");
-			temp--;
-		}
-		if (followerHel()) {
-			outputText("Helia");
-			if (temp >= 2) outputText(", ");
-			else if (temp == 1) outputText(", and ");
-			temp--;
-		}
-		if (followerKiha()) {
-			outputText("Kiha");
-			if (temp >= 2) outputText(", ");
-			else if (temp == 1) outputText(", and ");
-			temp--;
-		}
+		outputText("\n\n" + formatStringArray(helperArray));
 		outputText(" " + (helpers == 1 ? "assists" : "assist") + " you with building the gate, helping to speed up the process and make construction less fatiguing.");
 	}
 	outputText("\n\nYou eventually finish building the gate.");
