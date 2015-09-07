@@ -434,7 +434,7 @@ private function RaphaelChooseFrisk():void {
 
 	outputText("Challenged, Raphael hops from his perch and leans against the wall like a misbehaved rascal at your approach. With his back towards the boulders, he has his hands behind his head and one foot up against the stacked cobblestone; braving his body like he's eager for your touch. \"<i>My, whatever are you talking about, señorita? Know something I don't?</i>\"\n\n", false); 
 
-	outputText("Noticing how Raphael leaves more room between his hands and his head then necessary, you reach beind his neck to retrieve the pilfered pendant, but when you do, there is none to be found. It's the only place he could have put it, but it's gone and he isn't using his arms!\n\n", false);
+	outputText("Noticing how Raphael leaves more room between his hands and his head than necessary, you reach beind his neck to retrieve the pilfered pendant, but when you do, there is none to be found. It's the only place he could have put it, but it's gone and he isn't using his arms!\n\n", false);
 	
 	/// Int/Spe Variables ///
 	//({Int or Spe below 24 and Cor is not higher than 19} 
@@ -455,7 +455,7 @@ private function RaphaelChooseFrisk():void {
 
 		//({If player corruption is below 15} 
 		if(player.cor <= 15) outputText("You have the stronge urge to grab hold of the oddly enlarged bulge between his legs and retrieve the necklace from within his pants, but the lewdness of the gesture keeps you from it.\n\n", false);
-		//{If player corruption is at or higher then 15} 
+		//{If player corruption is at or higher than 15} 
 		else outputText("With no intention to relent, you grab him by the oddly enlarged bulge in his tight leather pants and squeeze softly, discovering how several of his jewels are harder than others. He hid your gem amongst his own!\n\n", false);
 
 		outputText("\"<i>My, aren't we frisky. What happened to foreplay? Shouldn't you be buying me dinner before you ravish me? Breakfast perhaps?</i>\" Raphael clucks. \"<i>Although frankly.</i>\" He growls softly with low tone. \"<i>I would gladly suffer through a thousand indignities, for a mere touch from one such as you.</i>\"\n\n", false);
@@ -812,7 +812,7 @@ private function fenceRaphaelSexilyPtII():void {
 
 	outputText("<i>\"Well, it just so happens that your opponent was indeed none other than I.  And faced with such unfair odds...\"</i> the fox growls, <i>\"... this would be the perfect opportunity to show you what losing is like against such opposition.\"</i>\n\n", false);
 
-	outputText("You look up and ask him what he means, but the fox's friendly smile is ever-present as he taps you with his sheathed sword.  You fall silent when first he gently nudges it into your ribcage like scoring another few hits.  When he brushes it in cirles across your left breast however, it sends a shiver down your spine.  From there he drags it slowly down your body, from rib to rib, past your stomach, until he does no less then slide the sheath all the way between your legs.  Raphael has touched you many times before, but now his predatory smile does not change when he lifts the length into the folds of your " + vaginaDescript(0) + ".  As he stares you down, you realize this has been the most unambiguous gesture yet.  Looking into his deep, emerald eyes sparkling with crafty cunning, you feel how your very essence is held aloft upon his desires.  The ground moves out from under your feet as the sheath digs deeply into your labia.\n\n", false);
+	outputText("You look up and ask him what he means, but the fox's friendly smile is ever-present as he taps you with his sheathed sword.  You fall silent when first he gently nudges it into your ribcage like scoring another few hits.  When he brushes it in circles across your left breast however, it sends a shiver down your spine.  From there he drags it slowly down your body, from rib to rib, past your stomach, until he does no less than slide the sheath all the way between your legs.  Raphael has touched you many times before, but now his predatory smile does not change when he lifts the length into the folds of your " + vaginaDescript(0) + ".  As he stares you down, you realize this has been the most unambiguous gesture yet.  Looking into his deep, emerald eyes sparkling with crafty cunning, you feel how your very essence is held aloft upon his desires.  The ground moves out from under your feet as the sheath digs deeply into your labia.\n\n", false);
 
 	//{If PC has also reached the intelligence Apex}
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
