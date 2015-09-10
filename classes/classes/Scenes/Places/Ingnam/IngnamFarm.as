@@ -39,7 +39,7 @@ package classes.Scenes.Places.Ingnam
 			var chooser:int = rand(3);
 			outputText("You let the farmer know that you're here to work for the farm.");
 			if (chooser == 0) {
-				outputText("\n\n\"<i>Great! The stable needs cleaning. I understand it's not for the faint of the heart but I promise you'll be rewarded,</i>\" the farmer says. She guides you to the stables and hands you the shovel for cleaning" + (silly() ? " and a clothespin to clamp your nose shut": "") + ".");
+				outputText("\n\n\"<i>Great! The stable needs cleaning. I understand it's not for the faint of the heart but I promise you'll be rewarded,</i>\" the farmer says. She guides you to the stables and hands you the shovel for cleaning" + (silly() ? " and a clothespin to clip your nose shut": "") + ".");
 				outputText("\n\nYou spend half an hour cleaning the muck out of the stable. When you're finished cleaning the muck, the farmer comes back at you and instructs you to change the straw pile. You do as she instructs, sweeping all the old straw piles into one large pile. Finally, you spend the rest of the hour laying a new layer of straw for the horses to lay on.");
 				outputText("\n\n\"<i>I'll take care of these from there. Thank you for helping me. You've taken some of the load off my burden. Here's your payment,</i>\" she says. She hands you five gems.");
 				if (player.str < 25 && rand(2) == 0) {
@@ -54,8 +54,8 @@ package classes.Scenes.Places.Ingnam
 			}
 			else if (chooser == 1) {
 				outputText("\n\n\"<i>Great! I could use a hand harvesting crops,</i>\" she says, \"<i>We need five full baskets of crops.</i>\"");
-				outputText("\n\nShe escorts you to the field where the crops grow. She hands you the basket so you can collect the crops. \"<i>We'll harvest the crops. You only need to fill three, I'll take care of the rest,</i>\" she says.");
-				outputText("\n\nYou pick the corns from the plant one by one and put them into basket. This continues until the basket gets full after which you switch to another empty basket. You get back to harvesting and repeat until all the baskets are full. The farmer comes to see that you've filled all the baskets. \"<i>Good work! I'll take care of things from there. Here's your payment,</i>\" she says. She hands you the five gems.");
+				outputText("\n\nShe escorts you to the field where the crops grow. She hands you the basket so you can collect the crops. \"<i>We'll harvest the crops. You only need to fill five, I'll take care of the rest,</i>\" she says.");
+				outputText("\n\nYou pick the corn from the plant one by one and put them into basket. This continues until the basket gets full after which you switch to another empty basket. You get back to harvesting and repeat until all the baskets are full. The farmer comes to see that you've filled all the baskets. \"<i>Good work! I'll take care of things from there. Here's your payment,</i>\" she says. She hands you the five gems.");
 				if (player.str < 25 && rand(2) == 0) {
 					outputText("\n\nYou feel a bit stronger from all the hard work you've done.");
 					dynStats("str", 1);
