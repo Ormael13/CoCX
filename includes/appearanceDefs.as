@@ -52,6 +52,7 @@ public static const FACE_FERRET_MASK:int                                        
 public static const FACE_FERRET:int                                            		=   18;
 public static const FACE_PIG:int                                            		=   19;
 public static const FACE_BOAR:int                                            		=   20;
+public static const FACE_RHINO:int                                            		=   21;
 
 // tongueType
 public static const TONUGE_HUMAN:int                                                =   0;
@@ -80,6 +81,7 @@ public static const EARS_RACCOON:int                                            
 public static const EARS_MOUSE:int                                                  =  12;
 public static const EARS_FERRET:int                                                 =  13;
 public static const EARS_PIG:int                                                    =  14;
+public static const EARS_RHINO:int                                                  =  15;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;
@@ -89,6 +91,8 @@ public static const HORNS_DRACONIC_X2:int                                       
 public static const HORNS_DRACONIC_X4_12_INCH_LONG:int                              =   4;
 public static const HORNS_ANTLERS:int                                               =   5;
 public static const HORNS_GOAT:int                                                  =   6;
+public static const HORNS_UNICORN:int                                               =   7;
+public static const HORNS_RHINO:int                                                 =   8;
 
 // antennae
 public static const ANTENNAE_NONE:int                                               =   0;
@@ -122,6 +126,7 @@ public static const TAIL_TYPE_BEHEMOTH:int                                      
 public static const TAIL_TYPE_PIG:int                                               =  19;
 public static const TAIL_TYPE_SCORPION:int                                          =  20;
 public static const TAIL_TYPE_GOAT:int                                              =  21;
+public static const TAIL_TYPE_RHINO:int                                             =  22;
 
 //breast size
 public static const BREAST_CUP_FLAT:int												=   0;

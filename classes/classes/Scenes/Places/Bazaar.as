@@ -76,12 +76,13 @@ public function winAgainstGuard():void {
 	clearOutput();
 	outputText("With the gatekeeper defeated, you walk right past the unconscious guard and enter...", false);
 	cleanupAfterCombat(enterTheBazaarAndMenu);
-}	
+}
 
 //[Enter]
 public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	clearOutput();
 	spriteSelect(-1);
+	outputText(images.showImage("location-bazaar"));
 	//Make sure flags to allow entrance is set.
 	if(flags[kFLAGS.BAZAAR_ENTERED] == 0) flags[kFLAGS.BAZAAR_ENTERED] = 1;
 	outputText("You breeze past the crimson guard and enter the interior of the Bizarre Bazaar.  The ground is hard-packed, trampled as if walked over by hundreds of hooves, paws, and feet.  A massive bonfire rages in the center of the clearing, crackling and popping as it consumes its fuel gluttonously.  Surrounding the blazing behemoth are tiny, wheeled food-carts with vendors hawking everything from sausage to something called a 'marshmallow'.  Huge wagons ring the clearing, many set up to display exotic wares or services.  You can see everything from dancing centaurs to demons browsing the wares, but it seems an uneasy truce of sorts reigns here.  Then again, maybe the demons have just not had the chance to openly attack this place yet.", false);

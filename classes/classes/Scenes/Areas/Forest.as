@@ -27,7 +27,6 @@ package classes.Scenes.Areas
 		public var tamaniScene:TamaniScene = new TamaniScene();
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
-		public var cabinProgress:CabinProgress = new CabinProgress();
 		
 		public function Forest() { }
 		
@@ -134,7 +133,7 @@ package classes.Scenes.Areas
 						tamaniScene.encounterTamani();
 					break;
 				case 6: //Gather wood
-					cabinProgress.gatherWoods();
+					camp.cabinProgress.gatherWoods();
 					break;
 				default: //Failsafe mechanism
 					outputText("You enjoy a peaceful walk in the deepwoods.  It gives you time to think over the recent, disturbing events.", true);
@@ -292,7 +291,7 @@ package classes.Scenes.Areas
 					}
 					break;
 				case 7: //Gather woods
-					cabinProgress.gatherWoods();
+					camp.cabinProgress.gatherWoods();
 					break;
 				default: //Failsafe
 					if (player.cor < 80) {

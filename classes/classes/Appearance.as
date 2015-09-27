@@ -710,19 +710,6 @@
 					"unusual endowment",
 					"scaly shaft");
 			}
-			else if (cockType == CockTypesEnum.PIG) {
-				return randomChoice("pig cock",
-					"pig dick",
-					"pig penis",
-					"pig-like cock",
-					"pig-like dick",
-					"swine cock",
-					"swine penis",
-					"corkscrew-tipped cock",
-					"hoggish cock",
-					"pink pig-cock",
-					"pink pecker");
-			}
 			else if (cockType == CockTypesEnum.DISPLACER) {
 				return randomChoice("coerl cock",
 					"tentacle-tipped phallus",
@@ -748,6 +735,31 @@
 					"avian pecker",
 					"tapered cock",
 					"tapered prick");
+			}
+			else if (cockType == CockTypesEnum.PIG) {
+				return randomChoice("pig cock",
+					"pig dick",
+					"pig penis",
+					"pig-like cock",
+					"pig-like dick",
+					"swine cock",
+					"swine penis",
+					"corkscrew-tipped cock",
+					"hoggish cock",
+					"pink pig-cock",
+					"pink pecker");
+			}
+			else if (cockType == CockTypesEnum.RHINO) {
+				return randomChoice("oblong cock",
+					"oblong dick",
+					"oblong prick",
+					"rhino cock",
+					"rhino dick",
+					"rhino penis",
+					"rhino pecker",
+					"rhino prick",
+					"bulged rhino cock",
+					"bulged rhino dick");
 			}
 			return randomChoice("cock",
 				"prick",
@@ -2319,7 +2331,12 @@
 					[FACE_RACCOON_MASK, "raccoon mask"],
 					[FACE_RACCOON, "racoon"],
 					[FACE_BUCKTEETH, "buckteeth"],
-					[FACE_MOUSE, "mouse"]
+					[FACE_MOUSE, "mouse"],
+					[FACE_FERRET_MASK, "ferret mask"],
+					[FACE_FERRET, "ferret"],
+					[FACE_PIG, "pig"],
+					[FACE_BOAR, "boar"],
+					[FACE_RHINO, "rhino"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2351,7 +2368,10 @@
 					[EARS_FOX, "fox"],
 					[EARS_DRAGON, "dragon"],
 					[EARS_RACCOON, "raccoon"],
-					[EARS_MOUSE, "mouse"]
+					[EARS_MOUSE, "mouse"],
+					[EARS_FERRET, "ferret"],
+					[EARS_PIG, "pig"],
+					[EARS_RHINO, "rhino"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2362,7 +2382,8 @@
 					[HORNS_DRACONIC_X2, "2 draconic"],
 					[HORNS_DRACONIC_X4_12_INCH_LONG, "four 12\" long draconic"],
 					[HORNS_ANTLERS, "deer"],
-					[HORNS_GOAT, "goat"]
+					[HORNS_GOAT, "goat"],
+					[HORNS_RHINO, "rhino"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2400,7 +2421,8 @@
 					[TAIL_TYPE_BEHEMOTH, "behemoth"],
 					[TAIL_TYPE_PIG, "pig"],
 					[TAIL_TYPE_SCORPION, "scorpion"],
-					[TAIL_TYPE_GOAT, "goat"]
+					[TAIL_TYPE_GOAT, "goat"],
+					[TAIL_TYPE_RHINO, "rhino"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(

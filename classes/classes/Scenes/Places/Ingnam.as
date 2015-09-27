@@ -34,6 +34,7 @@ package classes.Scenes.Places
 				return;
 			}
 			clearOutput();
+			outputText(images.showImage("location-ingnam"));
 			outputText("Ingnam is a rich and prosperous village despite its small size. There is already a well-established array of shops with a constant hum of tradesmen and merchants. The temple sits within view of the patrons sitting at tables at the tavern which serves as a hub for people near and far to drink and dance. On the road leading out of the plaza that sits before the temple is a trail that meanders its way to a large farm in the distance.");
 			outputText("\n\nLooming ominously in the distance is a mountain known by the locals as Mount Ilgast. Surrounding Ingnam is a vast expanse of wilderness.");
 			if (model.time.hours >= 21 || model.time.hours < 6) outputText("\n\nIt's dark outside. Stars dot the night sky and a moon casts the moonlight over the landscape, providing little light. Shops are closed at this time.");
@@ -337,6 +338,7 @@ package classes.Scenes.Places
 		public function menuTemple():void {
 			hideMenus();
 			clearOutput();
+			outputText(images.showImage("location-ingnam-temple"));
 			outputText("The village’s temple appears humble looking from its stony exterior but the interior of temple is truly a marvel to behold - intricately decorated wooden arches adorned with complex patterns of arcane runes of the Old World, walls adorned with majestic tapestries depicting the Gods and their most valiant of feats and, to the end of the temple stands an incredibly designed shrine to the All-Giving, the mother of all Gods.");
 			outputText("\n\nIncense languorously wafts from the alcoves where offerings of fruit are left out for the Gods. Monks passively move amongst the parishioners, offering solace to those in need, food or drink to those who are weary, or in meditation.");
 			outputText("\n\nThere are several soft mats on the floor to provide soft areas for people to pray on.");
@@ -349,6 +351,7 @@ package classes.Scenes.Places
 		public function menuTavern():void {
 			hideMenus();
 			clearOutput();
+			outputText(images.showImage("location-ingnam-inn"));
 			outputText("The inn is a cozy little nook that exudes a warm and welcoming air. You see several guardsmen roaring with laughter over a few steins and a hand of cards, and some townsfolk chatting about random topics. The innkeeper stands behind the polished wooden counter, serving beverages to his patrons and cleaning up spilled drinks.");
 			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0 && flags[kFLAGS.INGNAM_GREETED_AFTER_LONGTIME] <= 0) {
 				welcomeBack();

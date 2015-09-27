@@ -113,8 +113,8 @@ package classes
 						"]",
 				"You choose the 'Berserker' perk, which unlocks the 'Berserk' magical ability.  Berserking increases attack and lust resistance but reduces physical defenses.");
 		public static const Blademaster:PerkType = mk("Blademaster", "Blademaster",
-				"Gain +10% to critical strike chance when wielding a sword and not using a shield.",
-				"You choose the 'Blademaster' perk.  Your chance of critical hit is increased by 10% as long as you're wielding a sword and not using a shield.");
+				"Gain +5% to critical strike chance when wielding a sword and not using a shield.",
+				"You choose the 'Blademaster' perk.  Your chance of critical hit is increased by 5% as long as you're wielding a sword and not using a shield.");
 		public static const BrutalBlows:PerkType = mk("Brutal Blows", "Brutal Blows",
 				"[if(player.str>=75)" +
 						"Reduces enemy armor with each hit." +
@@ -378,6 +378,8 @@ package classes
 				"Causes you to regularly lay eggs when not otherwise pregnant.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",
 				"Reduces the rate at which your corruption, libido, and lust increase. Reduces minimum libido slightly.");
+		public static const SatyrSexuality:PerkType = mk("Satyr Sexuality", "Satyr Sexuality",
+				"Thanks to your satyr biology, you now have the ability to impregnate both vaginas and asses. Also increases your virility rating. (Anal impregnation not implemented yet)");
 		public static const SlimeCore:PerkType = mk("Slime Core", "Slime Core",
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const SpiderOvipositor:PerkType = mk("Spider Ovipositor", "Spider Ovipositor",

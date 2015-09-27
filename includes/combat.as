@@ -495,9 +495,9 @@ private function struggle():void {
 	if (monster.findStatusAffect(StatusAffects.MinotaurEntangled) >= 0) {
 		clearOutput();
 		if (player.str / 9 + rand(20) + 1 >= 15) {
-			outputText("Utilizing every ounce of your strength and cunning, you squirm wildly, shrugging through weak spots in the chain's grip to free yourself!  Success!");
+			outputText("Utilizing every ounce of your strength and cunning, you squirm wildly, shrugging through weak spots in the chain's grip to free yourself!  Success!\n\n");
 			monster.removeStatusAffect(StatusAffects.MinotaurEntangled);
-			outputText("\n\n\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
+			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) outputText("\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
 			combatRoundOver();
 		}
 		//Struggle Free Fail*
@@ -1307,6 +1307,93 @@ public function goreAttack():void {
 		if(monster.lust >= 100) doNext(endLustVictory);
 	}
 }
+//Upheaval Attack
+public function upheavalAttack():void {
+	clearOutput();
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+	if (monster.short == "worms") {
+		outputText("Taking advantage of your new natural weapon, you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your horns to stab only at air.\n\n");
+		enemyAI();
+		return;
+	}
+	if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
+		outputText("You're too fatigued to use a charge attack!");
+		doNext(combatMenu);
+		return;
+	}
+	fatigue(15,2);
+	var damage:Number = 0;
+	//Amily!
+	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
+		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
+		enemyAI();
+		return;
+	}
+	//Bigger horns = better success chance.
+	//Small horns - 60% hit
+	if(player.horns >= 6 && player.horns < 12) {
+		temp = 60;
+	}
+	//bigger horns - 75% hit
+	if(player.horns >= 12 && player.horns < 20) {
+		temp = 75;
+	}
+	//huge horns - 90% hit
+	if(player.horns >= 20) {
+		temp = 80;
+	}
+	//Vala dodgy bitch!
+	if(monster.short == "Vala") {
+		temp = 20;
+	}
+	//Account for monster speed - up to -50%.
+	temp -= monster.spe/2;
+	//Account for player speed - up to +50%
+	temp += player.spe/2;
+	//Hit & calculation
+	if(temp >= rand(100)) {
+		var horns:Number = player.horns;
+		if (player.horns > 40) player.horns = 40;
+		damage = int(player.str + (player.tou / 2) + (player.spe / 2) + (player.level * 2) * 1.2 * (monster.damagePercent() / 100)); //As normal attack + horn length bonus
+		if(damage < 0) damage = 5;
+		//Normal
+		outputText("You hurl yourself towards [enemy] with your head low and jerk your head upward, every muscle flexing as you send [enemy] flying. ");
+		//Critical
+		if (combatCritical()) {
+			outputText("<b>Critical hit! </b>");
+			damage *= 1.75;
+		}
+		//CAP 'DAT SHIT
+		if(damage > player.level * 10 + 100) damage = player.level * 10 + 100;
+		if(damage > 0) {
+			if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+			//Round it off
+			damage = int(damage);
+			damage = doDamage(damage, true);
+		}
+		outputText("\n\n");
+	}
+	//Miss
+	else {
+		//Special vala changes
+		if(monster.short == "Vala") {
+			outputText("You lower your head and charge Vala, but she just flutters up higher, grabs hold of your horns as you close the distance, and smears her juicy, fragrant cunt against your nose.  The sensual smell and her excited moans stun you for a second, allowing her to continue to use you as a masturbation aid, but she quickly tires of such foreplay and flutters back with a wink.\n\n");
+			dynStats("lus", 5);
+		}
+		else outputText("You hurl yourself towards [enemy] with your head low and snatch it upwards, hitting nothing but air.");
+	}
+	//New line before monster attack
+	outputText("\n\n");
+	checkAchievementDamage(damage);
+	//Victory ORRRRR enemy turn.
+	if(monster.HP > 0 && monster.lust < 100) enemyAI();
+	else {
+		if(monster.HP <= 0) doNext(endHpVictory);
+		if(monster.lust >= 100) doNext(endLustVictory);
+	}
+}
 //Player sting attack
 public function playerStinger():void {
 	clearOutput();
@@ -1395,7 +1482,10 @@ public function combatParry():Boolean {
 	trace("Parried!");
 }
 public function combatCritical():Boolean {
-	return rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50) / 5 > rand(100)) || (player.findPerk(PerkLib.Blademaster) >= 0 && rand(100) < 10 && (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut"));
+	var critChance:int = 4;
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critChance += (player.inte - 50) / 50;
+	if (player.findPerk(PerkLib.Blademaster) >= 0 && (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut")) critChance += 5;
+	return rand(100) <= critChance;
 }
 
 public function combatBlock(doFatigue:Boolean = false):Boolean {
@@ -5315,6 +5405,10 @@ public function physicalSpecials():void {
 	//Gore if mino horns
 	if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) {
 		addButton(button++, "Gore", goreAttack, null, null, null, "Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
+	}
+	//Upheaval - requires rhino horn
+	if (player.hornType == HORNS_RHINO && player.horns >= 2 && player.faceType == FACE_RHINO) {
+		addButton(button++, "Upheaval", upheavalAttack, null, null, null, "Send your foe flying with your dual nose mounted horns. \n\nFatigue Cost: " + physicalCost(15) + "");
 	}
 	//Infest if infested
 	if (player.findStatusAffect(StatusAffects.Infested) >= 0 && player.statusAffectv1(StatusAffects.Infested) == 5 && player.hasCock()) {

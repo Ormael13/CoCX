@@ -793,7 +793,10 @@ use namespace kGAMECLASS;
 				if (lowerBody == 4)
 					race = "centaur-morph";
 				else
-					race = "equine-morph";
+					if (hornType == HORNS_UNICORN)
+						race = "unicorn-morph";
+					else
+						race = "equine-morph";
 			}
 			if (mutantScore() >= 5 && race == "human")
 				race = "corrupted mutant";
@@ -840,6 +843,7 @@ use namespace kGAMECLASS;
 				else
 					race = "mouse-morph";
 			}
+			//<mod>
 			if (pigScore() >= 4) 
 			{
 				race = "pig-morph";
@@ -851,6 +855,11 @@ use namespace kGAMECLASS;
 			if (satyrScore() >= 4)
 			{
 				race = "satyr";
+			}
+			if (rhinoScore() >= 4)
+			{
+				race = "rhino-morph";
+				if (faceType == 0) race = "rhino-" + mf("man", "girl");
 			}
 			if (dragonneScore() >= 6)
 			{
@@ -866,6 +875,7 @@ use namespace kGAMECLASS;
 			}
 			if (sirenScore() >= 4)
 				race = "siren";
+			//</mod>
 			if (lowerBody == 3)
 				race = "naga";
 			if (lowerBody == 4) {
@@ -1470,6 +1480,9 @@ use namespace kGAMECLASS;
 			return mutantCounter--;
 		}
 		
+		//------------
+		// Mod-Added
+		//------------
 		public function sirenScore():Number 
 		{
 			var sirenCounter:Number = 0;
@@ -1512,10 +1525,28 @@ use namespace kGAMECLASS;
 					satyrCounter++;
 				if (countCocksOfType(CockTypesEnum.HUMAN) > 0)
 					satyrCounter++;
-				if (balls > 0 && ballSize >= 2)
+				if (balls > 0 && ballSize >= 3)
 					satyrCounter++;
 			}
 			return satyrCounter;
+		}
+		
+		public function rhinoScore():Number
+		{
+			var rhinoCounter:Number = 0;
+			if (earType == EARS_RHINO)
+				rhinoCounter++;
+			if (tailType == TAIL_TYPE_RHINO)
+				rhinoCounter++;
+			if (faceType == FACE_RHINO)
+				rhinoCounter++;
+			if (hornType == HORNS_RHINO)
+				rhinoCounter++;
+			if (rhinoCounter >= 2 && skinTone == "gray")
+				rhinoCounter++;
+			if (rhinoCounter >= 2 && hasCock() && countCocksOfType(CockTypesEnum.RHINO) > 0)
+				rhinoCounter++;
+			return rhinoCounter;
 		}
 		
 		//Dragonne
@@ -2250,6 +2281,12 @@ use namespace kGAMECLASS;
 				maxSpe += 15;
 				maxTou -= 10;
 			}
+			if (rhinoScore() >= 4) {
+				maxStr += 15;
+				maxTou += 15;
+				maxSpe -= 10;
+				maxInt -= 10;
+			}
 			if (isNaga()) maxSpe += 10;
 			if (isTaur()) maxSpe += 20;
 			//Apply New Game+
@@ -2851,6 +2888,12 @@ use namespace kGAMECLASS;
 			}
 			
 			return true;
+		}
+		
+		public function setFurColor(colorArray:Array):void {
+			if (skinType == SKIN_TYPE_FUR) {
+				furColor = colorArray[rand(colorArray.length)];
+			}
 		}
 	}
 }

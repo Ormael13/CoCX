@@ -27,6 +27,13 @@ package classes.Items
 			outputText("You equip " + longName + ".  ");
 		}
 		
+		override public function get description():String {
+			var desc:String = _description;
+			//Value
+			desc += "\nBase value: " + String(value);
+			return desc;
+		}
+		
 		override public function canUse():Boolean {
 			if (!game.player.armor.supportsUndergarment) {
 				outputText("It would be awkward to put on undergarments when you're currently wearing your type of clothing. You should consider switching to different clothes. You put it back into your inventory.");

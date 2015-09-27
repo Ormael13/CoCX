@@ -550,6 +550,7 @@ private function owcaMainScreenOn():void {
 		doYesNo(createCallBackFunction2(acceptRebeccsPlea,false, true),declineRebeccsPlea);
 		return;
 	}
+	outputText(images.showImage("location-owca"));
 	//[if attitude > 80]
 	if(flags[kFLAGS.OWCAS_ATTITUDE] > 80) outputText("Villagers greet you as you arrive, praising your courage and your heroism.  People shake your hands or ask you to kiss them, as if they hoped your nobility were somehow contagious.  Once they're done complimenting and flattering you in every way possible, they leave you to your business.");
 	//[if 60<=attitude<80]
@@ -593,6 +594,7 @@ private function owcaMainScreenOn():void {
 //Tavern (Z)
 public function owcaTavern():void {
 	clearOutput();
+	outputText(images.showImage("location-owca-tavern"));
 	outputText("The tavern is nice and cozy; there are a few tables and chairs scattered around in no ordered pattern, and most clients here appear to belong to the same species.  By the crude wooden bar, you see a list of all the current drinks on sale:\n<i>");
 	//SheepMk
 	var milk:Function = createCallBackFunction(owcaBuySetup,consumables.SHEEPMK);

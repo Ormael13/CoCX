@@ -83,7 +83,7 @@
 	else if(player.faceType == FACE_FERRET)
 	{
 		if(player.skinType == SKIN_TYPE_PLAIN) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.",false);
-		else outputText("  Your face is coated in " + player.hairColor + " fur with [skin] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
+		else outputText("  Your face is coated in " + player.furColor + " fur with [skin] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
 	}
 	else if(player.faceType == FACE_RACCOON_MASK) 
 	{
@@ -99,7 +99,7 @@
 		else 
 		{
 			//(black/midnight furscales)
-			if(((player.hairColor == "black" || player.hairColor == "midnight") && (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES))) 
+			if(((player.furColor == "black" || player.furColor == "midnight") && (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES))) 
 				outputText("  Under your " + player.skinFurScales() + " hides a black raccoon mask, barely visible due to your inky hue, and");
 			else outputText("  Your " + player.skinFurScales() + " are decorated with a sly-looking raccoon mask, and under them");
 			outputText(" you have a human-shaped head with " + player.skin(true,false) + ".");
@@ -177,7 +177,7 @@
 		if(player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_GOO) 
 			outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The " + player.skin() + " that is revealed by your lack of fur looks quite unusual on so feline a face.", false);
 		if(player.skinType == SKIN_TYPE_FUR) 
-			outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.hairColor + ", hiding your " + player.skin(true,false) + " underneath.", false);
+			outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.furColor + ", hiding your " + player.skin(true,false) + " underneath.", false);
 		if(player.skinType == SKIN_TYPE_SCALES) 
 			outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering " + player.skinFurScales() + ".", false);
 		if(player.eyeType != EYES_BLACK_EYES_SAND_TRAP) 
@@ -187,7 +187,7 @@
 	if(player.faceType == FACE_COW_MINOTAUR) 
 	{
 		if(player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_GOO) 
-			outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of " + player.hairColor + " fuzz.", false);
+			outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of " + player.furColor + " fuzz.", false);
 		if(player.skinType == SKIN_TYPE_FUR) 
 			outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Your " + player.skinFurScales() + " thickens noticably on your head, looking shaggy and more than a little monstrous once laid over your visage.", false);
 		if(player.skinType == SKIN_TYPE_SCALES) 
@@ -221,7 +221,15 @@
 	}
 	if (player.faceType == FACE_BOAR)
 	{
-		outputText("Your face is like that of a boar, with " + player.skinTone + " skin underneath your (x color) fur, complete with tusks and a snout that is always wiggling.");
+		outputText("Your face is like that of a boar, ");
+		if (player.skinType == SKIN_TYPE_FUR) 
+			outputText("with " + player.skinTone + " skin underneath your " + player.furColor + " fur"); 
+		outputText(", complete with tusks and a snout that is always wiggling.");
+	}
+	if (player.faceType == FACE_RHINO)
+	{
+		outputText("Your face is like that of a rhino, with a long muzzle.");
+		if (player.hornType == HORNS_RHINO && player.horns >= 2) outputText("  A long horn protrudes from your nose, you estimate it to be about a foot long.");
 	}
 	//M/F stuff!
 	outputText("  It has " + player.faceDesc() + ".", false);
@@ -264,6 +272,12 @@
 			outputText("  A pair of vaguely egg-shaped, furry raccoon ears adorns your head.");
 		else if(player.earType == EARS_MOUSE) 
 			outputText("  A pair of large, dish-shaped mouse ears tops your head.");
+		//<mod>
+		else if(player.earType == EARS_PIG) 
+			outputText("  A pair of pointy, floppy pig ears have sprouted from the top of your head.");
+		else if(player.earType == EARS_RHINO) 
+			outputText("  A pair of open tubular rhino ears protrude from your head.");
+		//</mod>
 		if(player.antennae == ANTENNAE_BEE) 
 			outputText("  Floppy antennae also appear on your skull, bouncing and swaying in the breeze.", false);
 	}
@@ -284,8 +298,6 @@
 			outputText("  The " + hairDescript() + " on your head is parted by a pair of cute pointed ears, bigger than your old human ones.", false);
 		else if(player.earType == EARS_CAT) 
 			outputText("  The " + hairDescript() + " on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.", false);
-		else if(player.earType == EARS_PIG) 
-			outputText("  The " + hairDescript() + " on your head is parted by a pair of pointy, floppy pig’s ears. They often flick about when you’re not thinking about it.", false);
 		else if(player.earType == EARS_LIZARD) 
 			outputText("  The " + hairDescript() + " atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.", false);
 		else if(player.earType == EARS_BUNNY) 
@@ -300,6 +312,12 @@
 			outputText("  The " + hairDescript() + " on your head parts around a pair of egg-shaped, furry raccoon ears.");
 		else if(player.earType == EARS_MOUSE) 
 			outputText("  The " + hairDescript() + " atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
+		//<mod> Mod-added ears
+		else if(player.earType == EARS_PIG) 
+			outputText("  The " + hairDescript() + " on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
+		else if(player.earType == EARS_RHINO) 
+			outputText("  The " + hairDescript() + " on your head is parted by a pair of tubular rhino ears.");
+		//</mod>
 		if(player.antennae == ANTENNAE_BEE) 
 		{
 			if(player.earType == EARS_BUNNY) 
@@ -379,6 +397,20 @@
 		else
 			outputText("  A pair of tall-standing goat horns sprout from the sides of your head.  They are curved and patterned with ridges.");
 	}
+	if (player.hornType == HORNS_RHINO)
+	{
+		if (player.horns >= 2) {
+			if (player.faceType == FACE_RHINO)
+				outputText("  A second horn sprouts from your forehead just above the horn on your nose.");
+			else
+				outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.");
+			outputText("You estimate it to be about seven inches long.");
+		}
+		else {
+			outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.  You estimate it to be about six inches long.");
+		}
+
+	}
 	//BODY PG HERE
 	outputText("\n\nYou have a humanoid shape with the usual torso, arms, hands, and fingers.", false);
 	//WINGS!
@@ -393,7 +425,7 @@
 	if(player.wingType == WING_TYPE_SHARK_FIN) 
 		outputText("  A large shark-like fin has sprouted between your shoulder blades.  With it you have far more control over swimming underwater.", false);
 	if(player.wingType == WING_TYPE_FEATHERED_LARGE) 
-		outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the " + player.hairColor + "-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.", false);
+		outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the " + player.furColor + "-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.", false);
 	if(player.wingType == WING_TYPE_DRACONIC_SMALL) 
 		outputText("  Small, vestigial wings sprout from your shoulders.  They might look like bat's wings, but the membranes are covered in fine, delicate scales.");
 	else if(player.wingType == WING_TYPE_DRACONIC_LARGE) 
@@ -566,11 +598,11 @@
 	}
 	//TAILS
 	if(player.tailType == TAIL_TYPE_HORSE) 
-		outputText("  A long " + player.hairColor + " horsetail hangs from your " + buttDescript() + ", smooth and shiny.", false);
+		outputText("  A long " + player.furColor + " horsetail hangs from your " + buttDescript() + ", smooth and shiny.", false);
 	if(player.tailType == TAIL_TYPE_FERRET)
-		outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy " + player.hairColor + " fur.", false);
+		outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy " + player.furColor + " fur.", false);
 	if(player.tailType == TAIL_TYPE_DOG) 
-		outputText("  A fuzzy " + player.hairColor + " dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.", false);
+		outputText("  A fuzzy " + player.furColor + " dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.", false);
 	if(player.tailType == TAIL_TYPE_DEMONIC) 
 		outputText("  A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your " + player.leg() + " sensually at every opportunity.", false);
 	if(player.tailType == TAIL_TYPE_COW) 
@@ -601,7 +633,7 @@
 	}
 	if(player.tailType == TAIL_TYPE_CAT) 
 	{
-		outputText("  A soft " + player.hairColor + " cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.", false);
+		outputText("  A soft " + player.furColor + " cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.", false);
 	}
 	if(player.tailType == TAIL_TYPE_LIZARD) 
 	{
@@ -616,14 +648,14 @@
 		outputText("  A conical, ", false);
 		if(player.skinType == SKIN_TYPE_GOO) 
 			outputText("gooey, " + player.skinTone, false);
-		else outputText("furry, " + player.hairColor, false);
+		else outputText("furry, " + player.furColor, false);
 		outputText(", tail extends from your " + assDescript() + ", bouncing up and down as you move and helping to counterbalance you.", false);
 	}
 	else if(player.tailType == TAIL_TYPE_FOX) 
 	{
 		if(player.tailVenom <= 1) 
-			outputText("  A swishing " + player.hairColor + " fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
-		else outputText("  " + Num2Text(player.tailVenom) + " swishing " + player.hairColor + " fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
+			outputText("  A swishing " + player.furColor + " fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
+		else outputText("  " + Num2Text(player.tailVenom) + " swishing " + player.furColor + " fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
 	}
 	else if(player.tailType == TAIL_TYPE_DRACONIC) 
 	{
@@ -632,7 +664,7 @@
 	//appearance
 	else if(player.tailType == TAIL_TYPE_RACCOON) 
 	{
-		outputText("  A black-and-" + player.hairColor + "-ringed raccoon tail waves behind you.");
+		outputText("  A black-and-" + player.furColor + "-ringed raccoon tail waves behind you.");
 	}
 	else if(player.tailType == TAIL_TYPE_MOUSE) 
 	{
@@ -654,6 +686,10 @@
 	else if (player.tailType == TAIL_TYPE_GOAT) 
 	{
 		outputText("  A very short, stubby goat tail sprouts from just above your butt.");
+	}
+	else if (player.tailType == TAIL_TYPE_RHINO) 
+	{
+		outputText("  A ropey rhino tail sprouts from just above your butt, swishing from time to time.");
 	}
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
@@ -681,7 +717,7 @@
 	else if(player.lowerBody == LOWER_BODY_TYPE_BUNNY) 
 		outputText("  Your legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_HARPY) 
-		outputText("  Your legs are covered with " + player.hairColor + " plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.", false);
+		outputText("  Your legs are covered with " + player.furColor + " plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) 
 		outputText("  Your furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) 
@@ -985,6 +1021,10 @@
 		//Avian flavor
 		if (player.cocks[temp].cockType == CockTypesEnum.AVIAN) {
 			outputText("  It's a red, tapered cock that ends in a tip.  It rests nicely in a sheath.");
+		}
+		//Rhino flavor
+		if (player.cocks[temp].cockType == CockTypesEnum.RHINO) {
+			outputText("  It's a smooth, tough pink colored and takes on a long and narrow shape with an oval shaped bulge along the center.");
 		}
 		//Worm flavor
 		if(player.findStatusAffect(StatusAffects.Infested) >= 0)

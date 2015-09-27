@@ -13,7 +13,6 @@ package classes.Scenes
 	public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
-		public var giacomo:Giacomo = new Giacomo();
 
 		public function Exploration()
 		{
@@ -285,7 +284,7 @@ package classes.Scenes
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
-					giacomo.giacomoEncounter();
+					kGAMECLASS.giacomoShop.giacomoEncounter();
 					return;
 				}
 				else if (choosey == 1) {

@@ -111,15 +111,15 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nYou raise your [weapon] and cleanly slice through Lethice's neck. Demonic blood spills forth, staining the carpet. ");
 				if (silly()) outputText("<b>FATALITY!</b> ");
 			}
-			else outputText("You grab Lethice and snap her neck, putting an end to her corruptive conquests. ");
-			outputText("\n\nWith Lethice dead, your destiny as a Champion has been fulfilled. You step up the steps, sit on the throne, and look back and reflect on your past accomplishments.");
+			else outputText("\n\nYou grab Lethice and snap her neck, putting an end to her corruptive conquests. ");
+			outputText("\n\nWith Lethice dead, your destiny as a Champion has been fulfilled. You step up the steps, sit on the throne, and reflect on your past accomplishments.");
 			if (player.cor >= 70) outputText("\n\nYou could even rule Mareth!");
 			doNext(theFinalEndingPart3);
 		}
 		private function fuckLethice():void {
 			clearOutput();
 			outputText("Super-duper placeholder for epic fuck scene.");
-			outputText("\n\nWith Lethice overthrown, your destiny as a Champion has been fulfilled. You step up the steps, sit on the throne, and look back and reflect on your past accomplishments.");
+			outputText("\n\nWith Lethice overthrown, your destiny as a Champion has been fulfilled. You step up the steps, sit on the throne, and reflect on your past accomplishments.");
 			if (player.cor >= 70) outputText("\n\nYou could even rule Mareth!");
 			player.orgasm();
 			doNext(theFinalEndingPart3);

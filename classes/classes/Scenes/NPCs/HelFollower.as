@@ -1476,9 +1476,9 @@ private function muddyLizardFeet():void {
 
 //Take a Bath
 private function takeABath():void {
+	clearOutput();
 	//{First Time intro}
 	if(flags[kFLAGS.HEL_CAN_SWIM] == 0) {
-		clearOutput();
 		outputText("Noticing Hel smells particularly strongly of beer and sex - even for her - you ask your salamander lover if she'd like to join you for a dip in the stream.  Rather than with her usual energy, though, Hel's reply is to look quickly away and say, \"<i>Uh, not today, [name]. I'm, uh, not feeling in the swimming mood.</i>\"");
 		outputText("\n\nYou slump your shoulders and ask why not.");
 		
@@ -1492,7 +1492,7 @@ private function takeABath():void {
 	}
 	//{Repeat Intro (If you taught Hel to swin; else, play 1st Time)}
 	else {
-		clearOutput();
+		outputText(images.showImage("helia-swim"));
 		outputText("You ruffle Hel's hair and ask if the fiery salamander's up for a dip.");
 		outputText("\n\n\"<i>With you?  Always,</i>\" she answers with a bright smile.  Before you can blink she's grabbed your hand and is running toward the stream, bits of clothes flying off behind her.");
 		

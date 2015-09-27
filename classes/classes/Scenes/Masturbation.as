@@ -1867,11 +1867,15 @@ package classes.Scenes {
 			}
 			if (player.armor == armors.GOOARMR) {
 				var valeriaFluids:int = 0;
-				if (player.vaginas[0].vaginalWetness >= 3) valeriaFluids += player.vaginas[0].vaginalWetness * 3;
-				if (player.cumQ() < 100) valeriaFluids += (player.cumQ() / 5);
-				else if (player.cumQ() >= 100 && player.cumQ() < 500) valeriaFluids += 20 + (player.cumQ() / 20);
-				else if (player.cumQ() >= 500 && player.cumQ() < 3500) valeriaFluids += 40 + (player.cumQ() / 50);
-				else if (player.cumQ() >= 3500) valeriaFluids += 100;
+				if (player.hasVagina()) {
+					if (player.vaginas[0].vaginalWetness >= 3) valeriaFluids += player.vaginas[0].vaginalWetness * 3;
+				}
+				if (player.hasCock()) {
+					if (player.cumQ() < 100) valeriaFluids += (player.cumQ() / 5);
+					else if (player.cumQ() >= 100 && player.cumQ() < 500) valeriaFluids += 20 + (player.cumQ() / 20);
+					else if (player.cumQ() >= 500 && player.cumQ() < 3500) valeriaFluids += 40 + (player.cumQ() / 50);
+					else if (player.cumQ() >= 3500) valeriaFluids += 100;
+				}
 				valeriaFluids += Math.sqrt(player.lactationQ());
 				kGAMECLASS.valeria.feedValeria(valeriaFluids);
 				if (valeriaFluids > 0) outputText("\"<i>Thanks for the fluids!</i>\" Valeria says.  ");

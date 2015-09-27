@@ -30,10 +30,12 @@ package classes.Scenes.Dungeons
 		
 		//EVENTS
 		public function enterDungeon():void {
+			clearOutput();
+			outputText(images.showImage("dungeon-entrance-factory"));
 			kGAMECLASS.inDungeon = true;
-			outputText("Rounding a bend in the mountainous foothills, you stumble upon a large and rusted iron structure belching cloying pink smoke from its tall smokestacks.  A bevy of green-tinged copper pipes stem from the rear of the building, climbing up the steep mountainside and disappearing into a hole in its face.  It must be some kind of demonic factory, though you've no idea what they could be pumping out.  High atop the roof, you spy a huge water tower fed by smaller pipes that run down the building's side and off in the direction of the lake.\n\nThere are no windows to the hellish factory, with only a single iron door adorning the front wall.  If you go inside there will undoubtedly be many demons to fight and little chance to escape. Death or worse awaits should you fall into their hands.\n\nDo you enter the factory or leave?", true);
+			outputText("Rounding a bend in the mountainous foothills, you stumble upon a large and rusted iron structure belching cloying pink smoke from its tall smokestacks.  A bevy of green-tinged copper pipes stem from the rear of the building, climbing up the steep mountainside and disappearing into a hole in its face.  It must be some kind of demonic factory, though you've no idea what they could be pumping out.  High atop the roof, you spy a huge water tower fed by smaller pipes that run down the building's side and off in the direction of the lake.\n\nThere are no windows to the hellish factory, with only a single iron door adorning the front wall.  If you go inside there will undoubtedly be many demons to fight and little chance to escape. Death or worse awaits should you fall into their hands.\n\nDo you enter the factory or leave?");
 			if (flags[kFLAGS.FACTORY_FOUND] < 1) {
-				outputText("\n\n<b>The factory is now accessible from your places menu.</b>", false);
+				outputText("\n\n<b>The factory is now accessible from your places menu.</b>");
 				flags[kFLAGS.FACTORY_FOUND] = 1
 			}			
 			simpleChoices("Enter", roomLobby, "", null, "", null, "", null, "Leave", exitDungeon);

@@ -72,6 +72,7 @@ package classes.Scenes.Dungeons
 
 		public function openZeDoorToParadize():void {
 			clearOutput();
+			outputText(images.showImage("dungeon-entrance-desertcave"));
 			//Touch Sphere to Open: 
 			if(flags[kFLAGS.ENTERED_SANDWITCH_DUNGEON] == 0) {
 				outputText("You hesitantly touch the dark sphere, admiring its smooth, glossy finish.  Almost as soon as you come in contact with it, it recedes into the wall.  The doorway rumbles, a giant slab vanishing into the sandy depths, opening a portal to the inside.  Meticulous carvings inlaid with pearl depict large breasted witches in great quantity, and though the specific means of the glyphs are foreign to you, it's clear this place is some kind of sanctuary for sand witches.");

@@ -331,7 +331,7 @@ import classes.Items.JewelryLib;
 			else
 			{
 				//CoC_Settings.error("");
-				return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL FEN IMMEDIATELY.</b>";
+				return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL KITTEH IMMEDIATELY.</b>";
 			}
 		}
 		
@@ -364,7 +364,7 @@ import classes.Items.JewelryLib;
 		
 		public function hasMuzzle():Boolean
 		{
-			if (faceType == 1 || faceType == 2 || faceType == 6 || faceType == 7 || faceType == 9 || faceType == 11 || faceType == 12)
+			if (faceType == 1 || faceType == 2 || faceType == 6 || faceType == 7 || faceType == 9 || faceType == 11 || faceType == 12 || faceType == 21)
 				return true;
 			return false;
 		}
@@ -382,18 +382,18 @@ import classes.Items.JewelryLib;
 			//2 - dogface
 			//6 - kittah face
 			//9 - kangaface
-			if (faceType == 9 || faceType == 6 || faceType == 2 || faceType == 1 || faceType == 11)
+			if (faceType == FACE_KANGAROO || faceType == FACE_CAT || faceType == FACE_DOG || faceType == FACE_HORSE || faceType == FACE_FOX)
 			{
 				if (int(Math.random() * 2) == 0)
 					return "muzzle";
-				if (int(Math.random() * 3) == 0 && faceType == 1)
+				if (int(Math.random() * 3) == 0 && faceType == FACE_HORSE)
 					stringo = "long ";
-				if (int(Math.random() * 3) == 0 && faceType == 6)
+				if (int(Math.random() * 3) == 0 && faceType == FACE_CAT)
 					stringo = "feline ";
 				return stringo + "face";
 			}
 			//3 - cowface
-			if (faceType == 3)
+			if (faceType == FACE_COW_MINOTAUR)
 			{
 				if (Math.floor(Math.random() * 4) == 0)
 					stringo = "bovine ";
@@ -402,14 +402,14 @@ import classes.Items.JewelryLib;
 				return stringo + "face";
 			}
 			//4 - sharkface-teeth
-			if (faceType == 4)
+			if (faceType == FACE_SHARK_TEETH)
 			{
 				if (Math.floor(Math.random() * 4) == 0)
 					stringo = "angular ";
 				return stringo + "face";
 			}
 			//7 - lizard face (durned argonians!)
-			if (faceType == 7 || faceType == 12)
+			if (faceType == FACE_LIZARD || faceType == FACE_DRAGON)
 			{
 				if (Math.floor(Math.random() * 4) == 0)
 					stringo = "reptilian ";
@@ -419,12 +419,20 @@ import classes.Items.JewelryLib;
 					return stringo + "snout";
 				return stringo + "face";
 			}
-			if (faceType == 19)
+			if (faceType == FACE_PIG || faceType == FACE_BOAR)
 			{
 				if (Math.floor(Math.random() * 4) == 0)
-					stringo = "pig-like ";
+					stringo = (faceType == FACE_PIG ? "pig" : "boar") + "-like ";
 				if (Math.floor(Math.random() * 4) == 0)
 					return stringo + "snout";
+				return stringo + "face";
+			}
+			if (faceType == FACE_RHINO)
+			{
+				if (Math.floor(Math.random() * 4) == 0)
+					stringo = "rhino like ";
+				if (Math.floor(Math.random() * 4) == 0)
+					return stringo + "muzzle";
 				return stringo + "face";
 			}
 			return "face";

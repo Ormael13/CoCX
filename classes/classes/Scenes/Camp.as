@@ -2101,10 +2101,10 @@ public function wakeFromBadEnd():void {
 	if (player.gems < 0) player.gems = 0;
 	if (player.XP < 0) player.XP = 0;
 	//Deduct attributes.
-	if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.05) * penaltyMultiplier);
-	if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.05) * penaltyMultiplier);
-	if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.05) * penaltyMultiplier);
-	if (player.inte > 20) dynStats("int", Math.ceil( -player.inte * 0.05) * penaltyMultiplier);
+	if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.02) * penaltyMultiplier);
+	if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.02) * penaltyMultiplier);
+	if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.02) * penaltyMultiplier);
+	if (player.inte > 20) dynStats("inte", Math.ceil(-player.inte * 0.02) * penaltyMultiplier);
 	menu();
 	addButton(0, "Next", playerMenu);
 }
@@ -2568,6 +2568,58 @@ private function promptSaveUpdate():void {
 		doCamp();
 		return;
 	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 8) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 9;
+		if (player.skinType != SKIN_TYPE_FUR) {
+			doCamp();
+			return; //No fur? Return to camp.
+		}
+		//Update fur
+		clearOutput();
+		outputText("Starting in version 1.3 of the mod, fur colour is now separate from hair colour. So as a one-time offer, you can now choose fur colour!");
+		furColorSelection1();
+		return;
+	}
+}
+
+private function furColorSelection1():void {
+	menu();
+	addButton(0, "Brown", chooseFurColorSaveUpdate, "brown");
+	addButton(1, "Chocolate", chooseFurColorSaveUpdate, "chocolate");
+	addButton(2, "Auburn", chooseFurColorSaveUpdate, "auburn");
+	addButton(3, "Orange", chooseFurColorSaveUpdate, "orange");
+	
+	addButton(5, "Caramel", chooseFurColorSaveUpdate, "caramel");
+	addButton(6, "Peach", chooseFurColorSaveUpdate, "peach");
+	addButton(7, "Sandy Brown", chooseFurColorSaveUpdate, "sandy brown");
+	addButton(8, "Golden", chooseFurColorSaveUpdate, "golden");
+
+	addButton(4, "Next", furColorSelection2);
+}
+private function furColorSelection2():void {
+	menu();
+	addButton(0, "Midnight black", chooseFurColorSaveUpdate, "midnight black");
+	addButton(1, "Black", chooseFurColorSaveUpdate, "black");
+	addButton(2, "Dark gray", chooseFurColorSaveUpdate, "dark gray");
+	addButton(3, "Gray", chooseFurColorSaveUpdate, "gray");
+	
+	addButton(5, "Light gray", chooseFurColorSaveUpdate, "light gray");
+	addButton(6, "Silver", chooseFurColorSaveUpdate, "silver");
+	addButton(7, "White", chooseFurColorSaveUpdate, "white");
+	
+	addButton(10, "Orange&White", chooseFurColorSaveUpdate, "orange and white");
+	addButton(11, "Brown&White", chooseFurColorSaveUpdate, "brown and white");
+	addButton(12, "Black&White", chooseFurColorSaveUpdate, "black and white");
+	addButton(13, "Gray&White", chooseFurColorSaveUpdate, "gray and white");
+	
+	addButton(9, "Previous", furColorSelection1);
+}
+
+private function chooseFurColorSaveUpdate(color:String):void {
+	clearOutput();
+	outputText("You now have " + color + " fur. You will be returned to your camp now and you can continue your usual gameplay.");
+	player.furColor = color;
+	doNext(doCamp);
 }
 
 //Updates save. Done to ensure your save doesn't get screwed up.

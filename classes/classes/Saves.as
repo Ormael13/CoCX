@@ -815,6 +815,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.thickness = player.thickness;
 		saveFile.data.tone = player.tone;
 		saveFile.data.tallness = player.tallness;
+		saveFile.data.furColor = player.furColor;
 		saveFile.data.hairColor = player.hairColor;
 		saveFile.data.hairType = player.hairType;
 		saveFile.data.gills = player.gills;
@@ -1612,6 +1613,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.thickness = saveFile.data.thickness;
 		
 		player.tallness = saveFile.data.tallness;
+		if (saveFile.data.furColor == undefined)
+			player.furColor = "no";
+		else
+			player.furColor = saveFile.data.furColor;
 		player.hairColor = saveFile.data.hairColor;
 		if (saveFile.data.hairType == undefined)
 			player.hairType = 0;

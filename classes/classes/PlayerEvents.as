@@ -81,14 +81,10 @@ package classes {
 					player.hunger -= (2 * multiplier); //Hunger depletes faster in prison.
 				}
 				else {
+					if (player.hunger > 80) player.hunger -= (0.5 * multiplier); //If satiated, depletes at 2 points per hour.
 					if (player.hunger > 50) player.hunger -= (0.5 * multiplier);
 					if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
 					if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
-				}
-				//Caps hunger at 100. Occurs after hunger tick so you'll be able to see hunger showing 100/100.
-				if (player.hunger > 100)
-				{
-					player.hunger = 100;
 				}
 				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = 100; //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
 				if (player.hunger <= 0)
@@ -159,11 +155,13 @@ package classes {
 				}
 				if (flags[kFLAGS.VALERIA_FLUIDS] > 100) flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
+			//Recharge tail
 			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_SCORPION) { //Spider and Bee Sting Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				player.tailVenom += player.tailRecharge;
 				if (player.tailVenom > 100) player.tailVenom = 100;
 			}
+			//Flexibility perk
 			if (player.tailType == TAIL_TYPE_CAT && player.lowerBody == LOWER_BODY_TYPE_CAT && player.earType == EARS_CAT) { //Check for gain of cat agility - requires legs, tail, and ears
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
@@ -176,6 +174,20 @@ package classes {
 				player.removePerk(PerkLib.Flexibility);
 				needNext = true;
 			}
+			//Satyr Sexuality
+			if (player.satyrScore() >= 4 && player.balls > 0) {
+				if (player.findPerk(PerkLib.SatyrSexuality) < 0) {
+					outputText("\nYou feel a strange churning sensation in your [balls]. With you looking like a satyr, you have unlocked the potential to impregnate anally!\n\n(<b>Gained Perk: Satyr Sexuality</b>)\n");
+					player.createPerk(PerkLib.SatyrSexuality, 0, 0, 0, 0);
+					needNext = true;
+				}
+			}
+			else if (player.findPerk(PerkLib.SatyrSexuality) >= 0) { 
+				outputText("\nWith some of your satyr-like traits gone, so does your ability to anally impregnate others.\n\n(<b>Lost Perk: Satyr Sexuality</b>)\n");
+				player.removePerk(PerkLib.SatyrSexuality);
+				needNext = true;
+			}
+			//Reset bad end warning
 			if (flags[kFLAGS.FOX_BAD_END_WARNING] == 1) {
 				if (player.faceType != FACE_FOX || player.tailType != TAIL_TYPE_FOX || player.earType != EARS_FOX || player.lowerBody != LOWER_BODY_TYPE_FOX || player.skinType != SKIN_TYPE_FUR) {
 					flags[kFLAGS.FOX_BAD_END_WARNING] = 0;
@@ -317,12 +329,12 @@ package classes {
 			}
 			if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0) { //Spider and Bee ovipositor updates
 				if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (!player.isDrider() || player.tailType != TAIL_TYPE_SPIDER_ADBOMEN)) { //Remove dat shit!
-					outputText("\nYour ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
+					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
 					player.removePerk(PerkLib.SpiderOvipositor);
 					needNext = true;
 				}
 				else if (player.findPerk(PerkLib.BeeOvipositor) >= 0 && player.tailType != TAIL_TYPE_BEE_ABDOMEN) { //Remove dat shit!
-					outputText("\nYour ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
+					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
 					player.removePerk(PerkLib.BeeOvipositor);
 					needNext = true;
 				}

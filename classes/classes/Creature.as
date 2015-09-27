@@ -151,7 +151,12 @@ package classes
 		public var hairColor:String = "no";
 		public var hairLength:Number = 0;
 		
-		public var furColor:String = "no"; //Will be separate eventually.
+		private var _furColor:String = "no"; //Fur colour!
+		public function get furColor():String {
+			if (skinType == SKIN_TYPE_FUR) return _furColor;
+			else return hairColor;
+		}
+		public function set furColor(value:String):void { _furColor = value; }
 		/*Beardstyle
 		0- normal
 		1- goatee
@@ -1664,6 +1669,9 @@ package classes
 			//Messy Orgasms?
 			if (findPerk(PerkLib.MessyOrgasms) >= 0)
 				percent += 0.03;
+			//Satyr Sexuality
+			if (findPerk(PerkLib.SatyrSexuality) >= 0)
+				percent += 0.10;
 			//Fertite ring bonus!
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
 				percent += (jewelryEffectMagnitude / 100);
@@ -1730,6 +1738,8 @@ package classes
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (findPerk(PerkLib.BroBody) >= 0)
 				quantity += 200;
+			if (findPerk(PerkLib.SatyrSexuality) >= 0)
+				quantity += 50;
 			quantity += statusAffectv1(StatusAffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
@@ -2616,7 +2626,7 @@ package classes
 			//Fur handled a little differently since it uses
 			//haircolor
 			if (_skinType == 1)
-				skinzilla += hairColor + " ";
+				skinzilla += furColor + " ";
 			else
 				skinzilla += _skinTone + " ";
 			skinzilla += skinDesc;
@@ -2839,14 +2849,14 @@ package classes
 
 		public function canOvipositSpider():Boolean
 		{
-			if (eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tailType == 5)
+			if (eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tailType == TAIL_TYPE_SPIDER_ADBOMEN)
 				return true;
 			return false;
 		}
 
 		public function canOvipositBee():Boolean
 		{
-			if (eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tailType == 6)
+			if (eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tailType == TAIL_TYPE_BEE_ABDOMEN)
 				return true;
 			return false;
 		}

@@ -31,17 +31,19 @@ package classes.Scenes.Dungeons
 		public function DeepCave() {}
 		
 		public function enterDungeon():void {
+			clearOutput();
+			outputText(images.showImage("dungeon-entrance-deepcave"));
 			kGAMECLASS.inDungeon = true;
 			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 1) {
 				
-				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.", true);
-				outputText("\n\n<b>You've discovered the location of Zetaz's lair! You can visit anytime from the dungeons menu in Places tab.</b>", false);
+				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.");
+				outputText("\n\n<b>You've discovered the location of Zetaz's lair! You can visit anytime from the dungeons menu in Places tab.</b>");
 				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] = 1
 				simpleChoices("Enter", roomEntrance, "", null, "", null, "", null, "Leave", exitDungeon);
 			}
 			else 
 			{
-				outputText("You make your way back to the cave entrance.", true);
+				outputText("You make your way back to the cave entrance.");
 				doNext(roomEntrance);
 			}
 		}

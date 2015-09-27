@@ -15,6 +15,7 @@ package classes.Scenes.Places.Ingnam
 		public function menuFarm():void {
 			hideMenus();
 			clearOutput();
+			outputText(images.showImage("location-ingnam-farm"));
 			outputText("As you make your way up the dirt road to the farm, you immediately see the vast bountiful acres of crops ripe for harvest and dairy cows idly grazing in the fields by a large weather-worn barn. A wooden windmill creaks quietly nearby a quaint two-storey homestead.");
 			if (flags[kFLAGS.INGNAM_FARMER_MET] <= 0) {
 				outputText("\n\nYou hear a rustling from the swaying cornfield and instinctively tense up for a fight. To your relief it is the farm's owner who emerges. The farmer is woman of average build and she is modestly garbed in overalls. Wiping away her sweaty blond locks from her flushed face walks up to greet you with a warm smile.");
