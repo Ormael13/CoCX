@@ -3070,6 +3070,7 @@ private function sheilaCowgirlRapesYou():void {
 			
 			//reduce lust and lib, reset hrs since cum, lose 8 hrs if HP or 2-3 if lust loss?
 			player.orgasm();
+			sheilaPreg();
 			dynStats("lib", -1);
 			cleanupAfterCombat();
 		}
