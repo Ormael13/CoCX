@@ -45,7 +45,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	outputText("\n\nYou nod with a little too much enthusiasm.  She grabs you by the hand as she leaves a few gems on the table, careful not to touch any part of your that may be too sensitive at this point.");
 
 	outputText("\n\nAs she leads you into the alleys and apparently, towards her home, your mind and eyes");
-	if(player.inRut && player.hasCock()) outputText(" focus is on the hips of the fox-morph");
+	if(player.inRut && player.hasCock()) outputText(" focus is on the hips of the fox-morph");
 	else outputText(" focus on catching a glimpse of that amazing cock, and you keep imagining what she can do with it");
 	outputText(".  Your aggressive hormonal state demands that you ");
 	if(player.inRut && player.inHeat && player.hasCock() && player.hasVagina()) outputText(" put a baby in her, then let her put a baby in you");
@@ -70,7 +70,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	//Player in heat and rut:
 	if(player.inRut && player.inHeat && player.hasCock() && player.hasVagina()) {
 		outputText("\n\nYou turn Urta around and see in her eyes a desire nearly as big as in yours.  You practically throw yourself at her, pushing her against the wall, mauling her big breasts, assaulting her lips and rubbing your thighs against her big, erect horse-dong, not really sure yet how the hell you'll satisfy all your body's desires at once.  Urta growls with desire, ripping her dress open and the two of you quickly toss your [armor] all over the place.");
-		outputText("\n\nUrta looks like she's aboat to say something, but then she stops, confusion pushing aside horniness, if only for the moment.  \"<i>I... What are you going to use?  Your cock?  Your pussy?</i>\" she asks, panting with eagerness to begin.");
+		outputText("\n\nUrta looks like she's about to say something, but then she stops, confusion pushing aside horniness, if only for the moment.  \"<i>I... What are you going to use?  Your cock?  Your pussy?</i>\" she asks, panting with eagerness to begin.");
 		//[Cock] [Pussy])
 		menu();
 		if(player.cockThatFits(urta.urtaCapacity()) >= 0) addButton(0,"Cock",sateRutWithSoberUrta);
