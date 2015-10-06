@@ -2230,7 +2230,7 @@ private function takeTheKidsForWalk():void {
 	outputText("  Your child");
 	if(urtaKids() > 1) outputText("ren plead");
 	else outputText(" pleads");
-	outputText(".  Well, the vendors down at the market would make for a suitably far destination, which should give Urta plenty of time for herself, and you yourself wouldn't mind some ice cream either at that, so it's decided.  \"<i>Yay! You're the best " + player.mf("dad","mom") + " ever!</i>\" ");
+	outputText(".  Well, the vendors down at the market would make for a suitably far destination, which should give Lianna plenty of time for herself, and you yourself wouldn't mind some ice cream either at that, so it's decided.  \"<i>Yay! You're the best " + player.mf("dad","mom") + " ever!</i>\" ");
 	if(urtaKids() > 1) outputText("a chorus of excited cheers sounds out.");
 	else outputText("an excited cheer sounds out.");
 	outputText("  It's hard not to want to live up to that title with such ");
