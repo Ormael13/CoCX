@@ -1265,7 +1265,7 @@ public static const BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE:int                       
 public static const BEE_GIRL_COMBAT_LOSSES:int                                      = 1257;
 public static const KATHERINE_MILK_OPTIONS:int                                      = 1258;
 public static const SCYLLA_FURRY_FOURSOME_COUNT:int                                 = 1259;
-public static const UNKNOWN_FLAG_NUMBER_01260:int                                   = 1260;
+public static const SCYLLA_SMALLCOCK_INTRO:int		                                = 1260; // Player has had the initial lil' dick intro version with scylla
 public static const UNKNOWN_FLAG_NUMBER_01261:int                                   = 1261;
 public static const UNKNOWN_FLAG_NUMBER_01262:int                                   = 1262;
 public static const UNKNOWN_FLAG_NUMBER_01263:int                                   = 1263;

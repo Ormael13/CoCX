@@ -39,6 +39,11 @@ public function scyllaBarSelectAction():void {
 	if (model.time.totalTime == scyllaLastActionSelectionTime) return; //Only choose action once per visit to the bar
 	scyllaLastActionSelectionTime = model.time.totalTime;
 	scyllaAction = SCYLLA_NOT_PRESENT;
+	if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && (!player.hasCock() || player.longestCockLength() < 12) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0)
+	{
+		scyllaAction = SCYLLA_ACTION_FIRST_TALK;
+		return;
+	}
 	if (player.cocks.length > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
 		if (player.longestCockLength() >= 12) {
 			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0) {
@@ -94,7 +99,31 @@ public function talkToScylla():void {
 	outputText(images.showImage("scylla-first-meeting"), false);
 	outputText("You approach the busty stranger as her dark, curly black hair falls over her eyes.  She seems to be staring at the cup of coffee she's clutching. As she pours pale cream into it, her tongue absently licks the generous bulge of her scarlet, O-shaped lips. She notices the motion and shakes her head harshly, slamming the cream down too hard and shattering the ceramic. Milky white fluid splatters across her face and she utters a gasp that you think is only half surprise. Was it your imagination, or did that sound a little orgasmic? It might be a good idea to introduce yourself and help her clean up the mess.\n\n", false);
 
-	outputText("You step up to the woman and introduce yourself while you notice the white and black hat she wears is covering tiny bulges in her skull.  Brushing her jet hair from her eyes, she follows your glance and blushes a deep purple hue. Pulling the cowl back, she reveals the twin nub-like horns that mark demonic taint. Apologizing for the scene she caused, she introduces herself as Scylla. Though reluctant to discuss them, eventually your charisma wins her over and she speaks in a voice so soft you have to lean in to hear her.\n\n", false);
+	// New modified intro
+	if (!player.hasCock() || player.longestCockLength() < 12)
+	{
+		if (flags[kFLAGS.SCYLLA_SMALLCOCK_INTRO] == 0)
+		{
+			outputText("You step up to the woman and introduce yourself, noticing that the white and black hat she wears is covering tiny bulges in her skull.  Brushing her jet hair from her eyes, she follows your glance and blushes a deep purple hue. Pulling the cowl back, she reveals the twin nub-like horns that mark demonic taint. Apologizing for the scene she caused with the cup, she mumbles an introduction, getting as far as to explain that she is a nun before losing the thread entirely- evidently distracted by some inner turmoil. Following her gaze, you see that she’s staring at some of the other patrons- men whose massive members are visible through the knee-length bulge in their pant legs. You try to get her attention again, but she’s lost in a private world, her breath quick and shallow. Troublesome. If you want to keep her attention for any length of time, apparently you’ll need a monster cock swinging from your hips. You leave the size queen and go back to your soup.\n\n", false);
+			flags[kFLAGS.SCYLLA_SMALLCOCK_INTRO] = 1;
+		// END EVENT, TRIGGER REPEAT INTRO OPTIONS WHEN “NUN” IS SELECTED FROM WET BITCH- EVENING HOURS.
+		}
+		else
+		{
+			outputText("The nun has apparently given up on coffee and instead sit in silent prayer, her eyes closed to the temptations around her. You give an introduction another attempt, but she remains oblivious. Rude.\n\n", false);
+		}
+		doNext(camp.returnToCampUseOneHour);
+		return;
+	}
+	
+	if (flags[kFLAGS.SCYLLA_SMALLCOCK_INTRO] == 0)
+	{
+		outputText("You step up to the woman and introduce yourself while you notice the white and black hat she wears is covering tiny bulges in her skull.  Brushing her jet hair from her eyes, she follows your glance and blushes a deep purple hue. Pulling the cowl back, she reveals the twin nub-like horns that mark demonic taint. Apologizing for the scene she caused with the cup, she introduces herself as Scylla. Though reluctant to discuss them, eventually your charisma wins her over and she speaks in a voice so soft you have to lean in to hear her.\n\n", false);
+	}
+	else
+	{
+		outputText("Approaching the nun once more, you’re pleasantly surprised that you have her full attention. The " + cockDescript(0) + " bulging under your clothes may have something to do with her sudden attentiveness. Prying her gaze up to eye level, she offers a weak smile and a soft apology. She introduces herself as Scylla and offers you a seat. She seems troubled and before long you have the shy giantess of a woman laying her troubles out for you.\n\n");
+	}
 
 	//PC DID BLOW FACTORY UP
 	if(player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) outputText("\"<i>I was once a holy woman, sworn to relieve pain from any who suffer, but one night I experienced a dream. It told me that I must go on a pilgrimage to the distant mountains and save one who suffered greatly at an unjust hand. I travelled by day and fasted by night, but when I reached the mountains, I found that my vision had been a trick. Demons seized me and taunted me by saying that I was the one who suffered, for I had never known the touch of a lover. They dragged me to their terrible factory, where I beheld their sinful works and bound me to one of their devices. They promised that I would love my new life and to be sure that my 'suffering' lasted not a moment longer, they hooked a vial of alabaster liquid to my mouth. It was some blasphemous concentration of semen, sweat, and blood and the very smell of it nearly suffocated my mind. But just as the first drop touched my tongue, there was a terrible explosion, and the factory's machines detonated, as if struck down by the hands of the gods. I was saved and helped as many as I could from that den of inequity,</i>\" finishes Scylla.\n\n", false);
