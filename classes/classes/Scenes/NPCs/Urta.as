@@ -2276,7 +2276,7 @@ private function urtaAndScyllaBoningLikeBitchesSober():void {
 	outputText("\n\nThe gray-furred fox moans, \"<i>Oh yeahhh, you like that, don't you, hungry girl?</i>\"  She giggles nervously after the declaration and looks your way, embarrassed at her own forwardness.  You grin at your vulpine ");
 	if(!urtaLove()) outputText("fuck-buddy");
 	else outputText("lover");
-	outputText("'s lusty slip-up and skittish responses, pinching her booty for good measure while you decide just how to get involved in the potential ménage à trois.\n\nWhat do you do?");
+	outputText("'s lusty slip-up and skittish responses, pinching her booty for good measure while you decide just how to get involved in the potential <i>ménage à trois</i>.\n\nWhat do you do?");
 	dynStats("lus", 10 + player.lib/5, "resisted", false);
 	//Get worshipped requires gigantic dong
 	var worship:Function = null;

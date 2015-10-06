@@ -568,7 +568,7 @@ private function dungeonMenu():void {
 		else outputText("a ceiling so low you have to crouch");
 		outputText(".  To your surprise, nothing horrifying jumps out and tries to rape you.  You see a few horns of mead slung up in a wine rack - they smell a bit pungent, but alcohol improves with age they say...");
 		if (flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED] < 5) {
-			outputText("(There are " + (5 - flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED]) + "x God's Mead horns here to take.)\n\n");
+			outputText(" (There are " + (5 - flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED]) + "x God's Mead horns here to take.)\n\n");
 //			text4 = "God'sMead";
 //			choice4 = takeGodsMead;
 			addButton(3, "God'sMead", takeGodsMead);
@@ -576,7 +576,7 @@ private function dungeonMenu():void {
 		//Display Options: [GodsMead] [Climb Up]
 //		text3 = "Climb Up";
 //		choice3 = 11084;
-		addButton(2, "Clumb Up", dungeonEnterRoom, DUNGEON_HEL_GUARD_HALL);
+		addButton(2, "Climb Up", dungeonEnterRoom, DUNGEON_HEL_GUARD_HALL);
 	}
 	if(dungeonLoc == DUNGEON_HEL_STAIR_WELL) {
 		clearOutput();
