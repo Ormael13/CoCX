@@ -57,7 +57,7 @@ public function meetJackFrostInTheMountains():void {
 	
 	outputText("\n\nIt takes a while for his impressive orgasm to subside, but finally, he lets go of his hard throbbing shaft and moves his icy blue eyes to look at you.  \"<i>Oh, hey there little one, didn't see you sitting there.  Can I help you?</i>\"");
 	
-	outputText("\n\nYou apologise for interrupting him, wary of disturbing someone so huge, but you thought you had encountered snow and, well, you were curious to find where it was coming from.  It's been so dry since you came to this land; you can't recall seeing snow before.");
+	outputText("\n\nYou apologize for interrupting him, wary of disturbing someone so huge, but you thought you had encountered snow and, well, you were curious to find where it was coming from.  It's been so dry since you came to this land; you can't recall seeing snow before.");
 	
 	outputText("\n\nHe scratches his neck and nods.  \"<i>Indeed, little one, lately there has been no snow... I have no idea why... this world used to be so nice... always covered in white by this time of the year... but it doesn't matter.  If there's no snow, uncle Jack will just have to make some!  Though I didn't expect THIS would be the way I'd be making it snow.</i>\"  He chuckles, giving his shaft a few extra pumps and spraying a bit of snow on the ground.");
 	

@@ -139,7 +139,7 @@ package classes.display
 			helpLabel.defaultTextFormat = _textFormatLabel;			
 			helpLabel.multiline = true;
 			helpLabel.wordWrap = true;
-			helpLabel.autoSize = TextFieldAutoSize.LEFT; // With multiline enabled, this SHOULD force the textfield to resize itself vertically dependant on content.
+			helpLabel.autoSize = TextFieldAutoSize.LEFT; // With multiline enabled, this SHOULD force the textfield to resize itself vertically dependent on content.
 			helpLabel.htmlText = "<b>Keyboard Control Bindings:</b>\n\n";
 			helpLabel.htmlText += "Click a button next to the action you wish to bind to a new key, then hit the key you want to bind the selected action to.\n\n"
 			helpLabel.htmlText += "Custom bindings are stored inside your save game files.\n\n";

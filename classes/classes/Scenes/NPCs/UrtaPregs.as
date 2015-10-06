@@ -200,7 +200,7 @@ internal function urtaPreggoApproached():void {
 //[=Leave=]
 private function leavePreggoUrta():void {
 	clearOutput();
-	outputText("You apologise to Urta, but you just really don't feel in the mood right now, and step away from her and start heading towards the door as quickly as politeness allows; if she really is as horny as she claims to be, you're not eager to give her too much temptation.  You pause at the door and look back; Urta looks a little hurt, but mostly resigned, and is clearly trying to calm herself down with breathing exercises.  Given the way one of the staff is approaching with a fresh bucket for her cock to drip into, you don't think it's working too well.");
+	outputText("You apologize to Urta, but you just really don't feel in the mood right now, and step away from her and start heading towards the door as quickly as politeness allows; if she really is as horny as she claims to be, you're not eager to give her too much temptation.  You pause at the door and look back; Urta looks a little hurt, but mostly resigned, and is clearly trying to calm herself down with breathing exercises.  Given the way one of the staff is approaching with a fresh bucket for her cock to drip into, you don't think it's working too well.");
 	//PC leaves the Wet Bitch as per choosing to Leave ordinary Urta
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -390,7 +390,7 @@ private function goVisitUrtaBirfs(withUrta:Boolean = false):void {
 //[=No=]
 private function goAfterUrtaBirf():void {
 	clearOutput();
-	outputText("You apologise, but there are pressing matters you need to attend to today... but you'll make it up to her somehow, you promise.  Urta looks disappointed, but sighs sadly and nods her head.  \"<i>Of course.  You're still a busy adventurer and all that.  Well, don't worry; I'll make sure this little one gets home and settled in safely.</i>\"");
+	outputText("You apologize, but there are pressing matters you need to attend to today... but you'll make it up to her somehow, you promise.  Urta looks disappointed, but sighs sadly and nods her head.  \"<i>Of course.  You're still a busy adventurer and all that.  Well, don't worry; I'll make sure this little one gets home and settled in safely.</i>\"");
 	model.time.hours++;
 	doNext(playerMenu);
 }
@@ -637,7 +637,7 @@ private function getAnUrtaMassageWhenPreggo():void {
 	
 	outputText("\n\nYou suggest that perhaps the bedroll in your tent might suffice... or she could just give you a backrub while you're sitting.  \"<i>Well, let's give you that backrub, then; otherwise we might end up forgetting about the massage,</i>\" Urta laughs, trying to joke at her libido.  \"<i>Right, now, let's see, how does this work...</i>\"  She trails off.  Despite her offer, it's pretty obvious she's not exactly a professional masseuse.  At times she's too rough, and you have to warn her she's hurting your back, while other times she tickles you and you end up laughing.  In the end it's not as relaxing as you would have liked, though she did nail some knots and you do feel at least a bit more relaxed now.");
 	
-	outputText("\n\n\"<i>Sorry, [name], I don't really have a lot of experience with this,</i>\" Urta apologises, looking depressed at her apparent failure to help you.");
+	outputText("\n\n\"<i>Sorry, [name], I don't really have a lot of experience with this,</i>\" Urta apologizes, looking depressed at her apparent failure to help you.");
 	
 	//cor>50:
 	if(player.cor > 50) outputText("\n\nYou'll let it slide this time, but she really should practice this before trying it on you.");
@@ -827,7 +827,7 @@ public function urtaSpecialDeliveries():void {
 
 	outputText("\n\nYou silently make your way inside, careful not to disturb the sleeping vixen, but you only make it a few steps in.  Urta's exposed ear suddenly flickers rapidly and she snorts, stirring reluctantly from amidst her cocoon of bedding and yawning loudly as she struggles to haul her gravid form upright.  \"<i>Nice try, lover, but there's no hiding from my ears... or my nose, either,</i>\" she grins at you.  \"<i>So, what brings you here?</i>\"");
 	outputText("\n\nYou explain that you stopped by to make a delivery for Edryn and decided to check up on her.");
-	outputText("\n\n\"<i>You did?  Well, aren't you thoughtful; we're both doing fine, as you can see from the size of me,</i>\" she giggles, patting her belly.  \"<i>I just got back from a patrol, you see; I'm feeling kind of tired, that's all.</i>\"  You approach her and sit beside her, stroking her belly.  She gives an appreciative noise, one hand gently placing itself on yours as she enjoys your strokes.  \"<i>Mmm... I think we both like you doing that,</i>\" she tells you.  You carry on with your rubbing for a while longer, until Urta yawns.  \"<i>Much as I'm happy to see you, lover, I really need my sleep,</i>\" she apologises, and then snuggles her swollen form back down into her bedding, pulling the sheets up to her chin.");
+	outputText("\n\n\"<i>You did?  Well, aren't you thoughtful; we're both doing fine, as you can see from the size of me,</i>\" she giggles, patting her belly.  \"<i>I just got back from a patrol, you see; I'm feeling kind of tired, that's all.</i>\"  You approach her and sit beside her, stroking her belly.  She gives an appreciative noise, one hand gently placing itself on yours as she enjoys your strokes.  \"<i>Mmm... I think we both like you doing that,</i>\" she tells you.  You carry on with your rubbing for a while longer, until Urta yawns.  \"<i>Much as I'm happy to see you, lover, I really need my sleep,</i>\" she apologizes, and then snuggles her swollen form back down into her bedding, pulling the sheets up to her chin.");
 
 	outputText("\n\nYou stroke her arm, and tell her to rest well.  You get up and close the door to Urta's room and head back to Tel'Adre's main street, saying a farewell to Lianna along the way.");
 	flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] = 1;
@@ -883,7 +883,7 @@ private function yesUrtaHouseSex():void {
 //[=No=]
 private function noUrtaHouseSex():void {
 	clearOutput();
-	outputText("You smile at her and apologise, you're just not in the mood right now.");
+	outputText("You smile at her and apologize, you're just not in the mood right now.");
 	
 	outputText("\n\nUrta pouts in disappointment.  \"<i>Fooey.</i>\"  She declares glumly.  \"<i>And here I was getting all worked up... you're such a tease.</i>\"  She heaves a sigh.  \"<i>All right, you go and do whatever... I'll just have to sit here and wait for this to go down.</i>\"");
 	
@@ -2096,7 +2096,7 @@ private function giveTheKidsABath():void {
 	outputText("'s ear and tell ");
 	if(flags[kFLAGS.URTA_LATESTBORN_GENDER] >= 2) outputText("her");
 	else outputText("him");
-	outputText(" to apologise to Lianna for that.  \"<i>It's all right, [name].  " + urtaKidsText("He's just a kid","She's just a kid","They're just kids") + ", you can't expect to bathe kids and not get wet.</i>\"  You think you have a pretty clear idea of why Urta picked Lianna to care for the children.  Casually, you ask if Lianna's got any younger siblings; she seems like she's got a lot of practice at this.  She shakes her head, \"<i>This is the first time I got a job where kids are involved.  Either way, it's a lot easier than taking care of minotaurs.</i>\"  You can't help but wonder if she really did somehow take care of minotaurs at one point, or if this is just some colloquial expression.");
+	outputText(" to apologize to Lianna for that.  \"<i>It's all right, [name].  " + urtaKidsText("He's just a kid","She's just a kid","They're just kids") + ", you can't expect to bathe kids and not get wet.</i>\"  You think you have a pretty clear idea of why Urta picked Lianna to care for the children.  Casually, you ask if Lianna's got any younger siblings; she seems like she's got a lot of practice at this.  She shakes her head, \"<i>This is the first time I got a job where kids are involved.  Either way, it's a lot easier than taking care of minotaurs.</i>\"  You can't help but wonder if she really did somehow take care of minotaurs at one point, or if this is just some colloquial expression.");
 	
 	outputText("\n\n\"<i>Here, let me help you.</i>\"  She squeezes a handful of shampoo on her hands and begins scrubbing your ");
 	if(flags[kFLAGS.URTA_LATESTBORN_GENDER] >= 2) outputText("daughter");
@@ -2489,7 +2489,7 @@ private function lubeSpraySideEffects():void {
 //{If you already got one today and debug is off:
 //\"Sorry, [name].  I'm afraid I've ran out of spray for the day.  So you'll just have to come back tomorrow if you want more.\"
 
-//You apologise for forgetting, and tell her that you'll do that.
+//You apologize for forgetting, and tell her that you'll do that.
 //(Display options)
 //}
 
