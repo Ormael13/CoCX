@@ -272,7 +272,7 @@ package classes.Items.Consumables
 					getGame().dynStats("sen", 3);
 				}
 				if (player.cor >= 5) {
-					outputText("\n\nYou’re mind feels surprisingly clear of the twisted thoughts that have plagued it as of late, but you find yourself feeling more and more aroused than usual.");
+					outputText("\n\nYour mind feels surprisingly clear of the twisted thoughts that have plagued it as of late, but you find yourself feeling more and more aroused than usual.");
 					var corLoss:int = Math.min(0.1 * player.cor + 5, player.cor);
 					getGame().dynStats("cor", -corLoss, "lib", corLoss); //Lose corruption and gains that much libido
 				}

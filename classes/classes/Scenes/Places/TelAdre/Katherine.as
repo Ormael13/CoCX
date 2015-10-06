@@ -1035,7 +1035,7 @@ private function talkGangs():void {
 	outputText("She shakes her head and says, “<i>It can be really weird sometimes.  I know why the different gangs are doing what they do and I know why the watch does what it does.  I mean the law about not living in any of the abandoned houses - that makes no sense to anyone living on the street.  But it makes a lot of sense to someone working in the Watch.  Years ago some gangs fortified buildings and kept the watch out.  The leaders got drunk on power, some became corrupt - or maybe they were a little corrupt to begin with.  Anyway, they had to bring in some of the mages to clear them out and lots of innocent people got hurt.</i>”\n\n");
 	outputText("She gets up and paces back and forth.  “<i>All the problems are like that.  I can understand why captain Urta drinks and I know why all the city aldermen go gray.  Limited food and water, dangerous items that can get into the city, people so lost in lust that they forget to eat - and those are just everyday problems.  The city needs people to pull their weight, otherwise the whole place will just turn into a huge orgy and everyone will die of thirst because nobody fixed the pumps that bring water up from the deep aquifer.</i>”\n\n");
 	outputText("She walks over and cuddles against you.  “<i>Problem is I know what it looks like from the other side.  A bunch of stuck up assholes who ruin everyone’s day just cause they were here before the refugees arrived.  Mages who tell everyone what to do but won’t tell anyone what they’re doing - heck, they barely ever talk to anyone outside the watch and the aldermen.</i>”\n\n");
-	outputText("Kath sighs and then continues, “<i>there’s a reason everyone says something difficult is like herding cats.  We, along with a few other races, tend to be a lot more independent.  We’re even a little proud that we don’t listen to someone just because they say they’re in charge.  New gangs are always forming because we’d rather follow someone we can see and deal with.  Sure, the gang leaders play favorites and take the best food and so on, but at least we know who they are any where it goes.  We know who to complain to when things go wrong.</i>”\n\n");
+	outputText("Kath sighs and then continues, “<i>There’s a reason everyone says something difficult is like herding cats.  We, along with a few other races, tend to be a lot more independent.  We’re even a little proud that we don’t listen to someone just because they say they’re in charge.  New gangs are always forming because we’d rather follow someone we can see and deal with.  Sure, the gang leaders play favorites and take the best food and so on, but at least we know who they are any where it goes.  We know who to complain to when things go wrong.</i>”\n\n");
 	outputText("“<i>The short version is that there are no easy answers, at least to Tel’Adre’s troubles.</i>”  She lets go of you and flops back " + (isAt(KLOC_KATHS_APT) ? "onto the bed" : "into her chair") + ".  “<i>Now that you’ve got me all wound up thinking about the city I hope you’re going to help me take my mind off it.</i>”");
 	katSexMenu();
 }
@@ -5078,7 +5078,7 @@ public function repeatAmbushKatherineRecruitMent():void
 	clearOutput();
 	outputText("As you walk the streets of Tel’Adre, a familiar sight catches your eye.  In a nearby alley, a young looking cat-morph is being backed into a corner by three larger cat-morph men.  Though you still don’t know the girl’s name you remember the setup.");
 	outputText("\n\nYes, there are just enough dilapidated crates to conceal three or four more cats in ambush positions.  You can’t see Kath, but you");
-	if(player.cor < 75) outputText("hope she’s here so you can get to know her better.");
+	if(player.cor < 75) outputText(" hope she’s here so you can get to know her better.");
 	else 
 	{
 		if(player.hasCock() && player.hasVagina()) outputText("r dick swells and your pussy moistens");
@@ -5122,7 +5122,7 @@ private function bargainForKittahKataPussah2():void
 	outputText("Kath’s shoulders sag, and she sits down heavily on a crate.  She looks up at you and says, “<i>I joined the vagrant cats so I wouldn’t have to sell myself.  Not that most people want me.  And now my ‘friends’ just sold my ass for a drink of milk.</i>”  She sniffs a little and adds, “<i>I won’t fight, there’s no point.  Just do whatever you want.</i>”");
 	//(corruption <25)
 	if(player.cor < 25) outputText("\n\nIt really breaks your heart.  She’s so crushed right now that you have got to find some way to help her, some way to lift her spirits.");
-	else if(player.cor < 75) outputText("\n\nYou’re sure that right now Kath needs a shoulder to cry on.  A nastier part of you, a part with a strong connection to your groin, whispers that vulnerable girls love heros.");
+	else if(player.cor < 75) outputText("\n\nYou’re sure that right now Kath needs a shoulder to cry on.  A nastier part of you, a part with a strong connection to your groin, whispers that vulnerable girls love heroes.");
 	else outputText("\n\nYou promised yourself you’d play the long game with this pussy.  It takes all you’ve got not to tear her clothes off and rape her every way possible.  You have visions of her violated body curled in a ball and covered in your seed.  Finally you snap out of it.");
 	outputText("  She tenses as you put an arm around her shoulders.");
 
@@ -5306,7 +5306,7 @@ public function handjobbiesFurrDemCatFurries():void
 	else {
 		outputText("Not one to pass up a helpless young " + (hasCock() ? "herm" : "girl") + " you " + (flags[kFLAGS.KATHERINE_UNLOCKED] < 1 ? "strip all Katherine’s clothes off.  You" : "") + " play with her tail, eventually growing bored and pushing the tip deep inside her pussy.\n\n");
 		if (hasCock())
-			outputText("Next you run your hand " + (isAt(KLOC_DESERT) ? cockMultiple("along her cock", "s along her cocks") : "over the wall") + ", collect some of her still warm spunk");
+			outputText("Next you run your hand" + (isAt(KLOC_DESERT) ? cockMultiple(" along her cock", "s along her cocks") : " over the wall") + ", collect some of her still warm spunk");
 		else outputText("Next you collect some of her femcum on your fingers");
 		outputText(" and offer it to her.  Kath’s rough tongue licks every drop from your hand while you think of all the things you’d like to do with her body.");
 	}
@@ -5551,7 +5551,7 @@ private function bathTimeFuckKath():void {
 		if (pregSize() > 0)
 			outputText(", but with nowhere to go it forces her vagina open and then coats both " + (player.isNaga() ? "her legs and your tail" : "your legs and hers") + " with warm, sticky semen");
 		else
-			outputText("and forces it open.  Your hands can feel the flesh on Kath’s hips stretch and pull, trying to provide more skin for her rapidly expanding belly");
+			outputText(" and forces it open.  Your hands can feel the flesh on Kath’s hips stretch and pull, trying to provide more skin for her rapidly expanding belly");
 		outputText(".  Kath mewls at the feeling of being filled by so much seed." + (player.cumQ() > 3000 ? "  The water grows warm around you and changes color noticeably downstream.  You have to wonder just how much magic is used up each time you cum." : ""));
 	}
 

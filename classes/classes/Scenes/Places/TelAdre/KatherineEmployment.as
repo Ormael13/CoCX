@@ -341,9 +341,9 @@ package classes.Scenes.Places.TelAdre{
 		private function katherineTrainingStage2Horny():void
 		{
 			clearOutput();
-			outputText("Katherine returns much sooner than you expected and with energy to spare.  Her pupils are dilated and her head and tail both keep flicking from side to side.  “<i>There is the most amazing smell over that way</i>” she says, pointing inland toward a patch of bushes.\n\n");
-			outputText("You don’t need to go over to the bushes to find out what the smell is, it’s all over her.  It’s a sweet yet creamy scent, unlike anything back home.  It seems whisker fruits, or at least the blossoms of the tree it comes from, have a certain effect on your feline friend.\n\n");
-			outputText("As you smell Katherine she is busy sniffing you.  She rubs her nose against your cheek, her whiskers tickling your face and says, “<i>This place is really nice, I know what we could do.</i>”");
+			outputText("Katherine returns much sooner than you expected and with energy to spare.  Her pupils are dilated and her head and tail both flick continuously from side to side.  “<i>There is the most amazing smell over that way,</i>” she says, pointing inland toward a patch of bushes.\n\n");
+			outputText("You don’t need to go over to the bushes to find out what the smell is; it’s all over her.  It’s a sweet-yet-creamy scent, unlike anything back home.  It seems whisker fruits, or at least the blossoms of the tree it comes from, have a certain effect on your feline friend.\n\n");
+			outputText("As you smell Katherine she is likewise busy sniffing you.  She rubs her nose against your cheek, her whiskers tickling your face, and says, “<i>This place is really nice... I know what we could do.</i>”");
 			flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_LAKE; //Makes sure the scene happens on the shores of the lake
 			var penKath:Function = null;       //Fuck and give options only available for males and herms
 			var penAnal:Function = null;
@@ -464,9 +464,9 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You tell Kath that you feel she’s ready for testing.  She beams and nervously tries to smooth out her clothes.  The two of you walk to the Wet Bitch where, as expected, you find captain Urta sitting alone at her table reading reports and sipping something from a mug.\n\n");
 			if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > -1) {
 				if (flags[kFLAGS.TIMES_FUCKED_URTA] > 0) { //Urta is either your lover or a fuckbuddy
-					outputText("Urta gives you a big smile as you lead Katherine over to her table.  “<i>How’s it going " + player.short + "?</i>”  When Kath sits down she adds, “<i>And who’s this?</i>” in a friendly tone.\n\n");
-			outputText("You explain to Urta how you’ve been training Kath in the hopes of getting her a job in the watch.  Urta sips from her mug and listens closely as you go over the training.  When you finish Urta says, “<i>" + (urta.urtaLove() ? "You know I could have given you a hand with that love" : "Well love, the watch can always use new recruits if they’re well trained") + ".</i>”  Kath’s jaw hits the floor and she asks, “<i>You’re sleeping with the captain of the guard?</i>”\n\n");
-			outputText("Urta knocks back her mug and says, “<i>Oh yes, we’ve been sleeping together for a while.  I’m guessing from the look on your face you two have been sleeping together for a while too, hmmm?  Where have you been hiding her " + player.short + "?  And why haven’t you introduced us?</i>”");
+					outputText("Urta gives you a big smile as you lead Katherine over to her table.  “<i>How’s it going, " + player.short + "?</i>”  When Kath sits down, she adds, “<i>And who’s this?</i>” in a friendly tone.\n\n");
+			outputText("You explain to Urta how you’ve been training Kath in the hopes of getting her a job in the watch.  Urta sips from her mug and listens closely as you go over the training.  When you finish Urta says, “<i>" + (urta.urtaLove() ? "You know, I could have given you a hand with that, love" : "Well love, the watch can always use new recruits if they’re well trained") + ".</i>”  Kath’s jaw hits the floor and she asks, “<i>You’re sleeping with the captain of the guard?</i>”\n\n");
+			outputText("Urta knocks back her mug and says, “<i>Oh yes, we’ve been sleeping together for a while.  I’m guessing from the look on your face, you two have been sleeping together for a while too, hmmm?  Where have you been hiding her, " + player.short + "?  And why haven’t you introduced us?</i>”");
 					flags[kFLAGS.KATHERINE_URTA_AFFECTION] = 1;
 					if (urta.urtaLove() && (flags[kFLAGS.AMILY_VISITING_URTA] == 4 || flags[kFLAGS.URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER] > 0)) {
 						outputText("\n\nBefore Katherine can respond Urta adds, “<i>Don’t worry, I’m not angry about " + player.short + " sleeping around");
@@ -524,7 +524,7 @@ package classes.Scenes.Places.TelAdre{
 			clearOutput();
 			outputText("You go back to Kath’s alley and pace back and forth, waiting.  Hours later Kath races into the alley and leaps into your arms, nearly knocking you off your feet.  “<i>I did it!  I did it!</i>” she cries while hugging you tight enough to squeeze the breath out of you.  “<i>Oh thank you " + player.short + ", I couldn’t have done it without you.  The tests were hard but I knew what she wanted.</i>”\n\n");
 			outputText("You stroke her hair and Katherine finally calms down enough to show you her new badge.  “<i>I’m starting tomorrow.  Oh - and that’s not even the best part.  I didn’t know about this, but because I’m in the watch they can give me papers that show I have a good job, that I’m a good citizen.  I forget what it’s called, but it means I’ll be able to get a house really soon cause they know I’m good for it and I’ll be earning a wage.</i>”\n\n");
-			outputText("She looks around at the alley and says, “<i>We had some fun times here, but I won’t miss living on the street.</i>”  She gives you a kiss and adds, “<i>I have to run.  I’ve got equipment to pick up and patrol routes to memorize.  Next time you’re in town look for me at the wet bitch, I’ll try to hang around there.</i>”");
+			outputText("She looks around at the alley and says, “<i>We had some fun times here, but I won’t miss living on the street.</i>”  She gives you a kiss and adds, “<i>I have to run.  I’ve got equipment to pick up and patrol routes to memorize.  Next time you’re in town, look for me at the Wet Bitch; I’ll try to hang around there.</i>”");
 			doNext(camp.returnToCampUseFourHours); //Use up 4 hours, go back to camp
 		}
 		
