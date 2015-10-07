@@ -3577,9 +3577,9 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE2():void
 		outputText("\n\n\"<i>Well,</i>\" you answer, \"<i>perhaps that's why it's called 'making' love.</i>\"  Sheila doesn't answer, but smiles shyly.");
 		
 		//end scene if lust <30, else add minor lib-based lust damage and display choices for consensual sex plus [Leave Her Be]
-		dynStats("lus", player.lib/10+5, "resisted", false);
-		sheilaXP4Sex(false);
+		dynStats("lus", player.lib / 10 + 5, "resisted", false);
 		menu();
+		sheilaXP4Sex(false);
 		addButton(9,"LeaveHerBe",normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDEREBUTLEAVEHERBE);
 	}
 	else doNext(camp.returnToCampUseOneHour);
