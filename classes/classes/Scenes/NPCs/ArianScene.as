@@ -1783,7 +1783,7 @@ private function getBlownByArian():void {
 	
 	outputText("\n\nWith a few last huffs and gasps, it finally comes.  Orgasm rips through your flesh and sends your cum cascading from out of your [cock biggest] into Arian's suckling mouth - no point worrying about whether or not [Arian ey] wants it in the mouth now, it's here and [Arian ey]'ll just have to deal with it.");
 	
-	outputText("\n\nArian is surprised when the first jet of cum hits [Arian em] straight in [Arian em] throat, but never stops sucking.  Somehow Arian manages to drink your cum as fast as you can pump it into [Arian eir] eager maw; by the time you're done, Arian has developed a ");
+	outputText("\n\nArian is surprised when the first jet of cum hits [Arian em] straight in [Arian eir] throat, but never stops sucking.  Somehow Arian manages to drink your cum as fast as you can pump it into [Arian eir] eager maw; by the time you're done, Arian has developed a ");
 	if(player.cumQ() < 250) outputText("small");
 	else if(player.cumQ() < 1500) outputText("big");
 	else outputText("huge");
