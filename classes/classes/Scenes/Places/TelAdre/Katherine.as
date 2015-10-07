@@ -5284,7 +5284,7 @@ public function handjobbiesFurrDemCatFurries():void
 	}
 	if (hasCock()) {
 		outputText("\n\nKath’s next moan comes from the bottom of her lungs.  Thanks to you she’s already horny and now you decide to overload her senses.  Your fingers " + (hasBalls() ? "cup her balls" : "tease her clit") + " for just a moment before slipping " + (cockNumber < 2 ? "back " : "") + "into her dripping cunt.");
-		outputText("\n\nHer head tilts back, and she tries to find your mouth with her own.  As your tongues entwine, you " + /* (hasCock() ? "" : "push deeper than ever, massaging her inner walls") + */ "begin to slide your fingers in and out of her slit, making sure to rub hard against her tiny nub.  Your other hand ");
+		outputText("\n\nHer head tilts back, and she tries to find your mouth with her own.  As your tongues entwine, you begin to slide your fingers in and out of her slit, making sure to rub hard against her tiny nub.  Your other hand ");
 		if (cockNumber > 1) {
 			outputText("works up and down her " + cockAdj() + "shafts, alternating from one to the other.  Soon you can feel them both twitching, ready to fire their loads into a pair of fertile pussies.");
 			outputText("\n\nYou aim Katherine’s dicks");
