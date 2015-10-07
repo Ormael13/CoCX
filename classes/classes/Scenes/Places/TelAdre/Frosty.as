@@ -134,7 +134,8 @@ public function yesIWantYourFreeSampleYouFuckingDiseasedCupcakeSlut():void
 //[No]
 public function noIDontWantAFreebieDiseaseYouSlut():void {
 	clearOutput();
-	outputText("You’re too busy right now, so you deny the free service. “<i>Okeydokey, see you around, [name].</i>” Frosty does a twirl on one foot and runs back to her stand. Such a nice girl.");
+	outputText("You’re too busy right now, so you deny the free service. “<i>Okeydokey, see you around, [name]!</i>” Frosty does a twirl on one foot and runs back to her stand. Such a nice girl.");
+	menu();
 	addButton(0,"Next",kGAMECLASS.telAdre.telAdreMenu);
 }
 
