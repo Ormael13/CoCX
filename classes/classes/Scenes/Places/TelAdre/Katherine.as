@@ -5549,9 +5549,13 @@ private function bathTimeFuckKath():void {
 		if (player.cumQ() > 3000) outputText("Your overproductive " + (player.balls > 0 ? "testes outdo themselves" : "prostate outdoes itself") + ".  ");
 		outputText("Your cum launches out of your cock so forcefully that you have to hold Kath’s hips tightly to keep the two of your from being forced apart.  Your cum hammers against Kath’s cervix");
 		if (pregSize() > 0)
+		{
 			outputText(", but with nowhere to go it forces her vagina open and then coats both " + (player.isNaga() ? "her legs and your tail" : "your legs and hers") + " with warm, sticky semen");
+		}
 		else
+		{
 			outputText(" and forces it open.  Your hands can feel the flesh on Kath’s hips stretch and pull, trying to provide more skin for her rapidly expanding belly");
+		}
 		outputText(".  Kath mewls at the feeling of being filled by so much seed." + (player.cumQ() > 3000 ? "  The water grows warm around you and changes color noticeably downstream.  You have to wonder just how much magic is used up each time you cum." : ""));
 	}
 
