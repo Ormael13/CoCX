@@ -539,7 +539,9 @@
 			flags[kFLAGS.KATHERINE_VALA_AFFECTION]++;
 		}
 
-		public function needIntroductionFromScylla():Boolean { return model.time.hours > 8 && model.time.hours < 18 && player.hasKeyItem("Silver Kitty-Bell") >= 0; }
+		public function needIntroductionFromScylla():Boolean {
+			return model.time.hours > 8 && model.time.hours < 18 && player.hasKeyItem("Silver Kitty-Bell") >= 0;
+		}
 		
 //If player has Silver Bell key item and is at Wet Bitch when Scylla is not busy with her Addicts Anonymous group
 public function catMorphIntr():void {
@@ -5281,8 +5283,8 @@ public function handjobbiesFurrDemCatFurries():void
 		outputText("\n\nThe heat is intense and Kath’s " + knotAdj() + " knot swells at your ministrations.  Kath’s hips jerk forward, looking for a pussy to pack it into.");
 	}
 	if (hasCock()) {
-		outputText("\n\nKath’s next moan comes from the bottom of her lungs.  Thanks to you she’s already horny and now you decide to overload her senses.  You fingers " + (hasBalls() ? "cup her balls" : "tease her clit") + " for just a moment before slipping " + (cockNumber < 2 ? "back " : "") + "into her dripping cunt.");
-		outputText("\n\nHer head tilts back, and she tries to find your mouth with her own.  As your tongues entwine, you " + (hasCock() ? "" : "push deeper than ever, massaging her inner walls") + "begin to slide your fingers in and out of her slit, making sure to rub hard against her tiny nub.  Your other hand ");
+		outputText("\n\nKath’s next moan comes from the bottom of her lungs.  Thanks to you she’s already horny and now you decide to overload her senses.  Your fingers " + (hasBalls() ? "cup her balls" : "tease her clit") + " for just a moment before slipping " + (cockNumber < 2 ? "back " : "") + "into her dripping cunt.");
+		outputText("\n\nHer head tilts back, and she tries to find your mouth with her own.  As your tongues entwine, you " + /* (hasCock() ? "" : "push deeper than ever, massaging her inner walls") + */ "begin to slide your fingers in and out of her slit, making sure to rub hard against her tiny nub.  Your other hand ");
 		if (cockNumber > 1) {
 			outputText("works up and down her " + cockAdj() + "shafts, alternating from one to the other.  Soon you can feel them both twitching, ready to fire their loads into a pair of fertile pussies.");
 			outputText("\n\nYou aim Katherine’s dicks");
@@ -5546,16 +5548,13 @@ private function bathTimeFuckKath():void {
 	else if (player.cumQ() <= 1500)
 		outputText("Jet after jet fires into Kath’s waiting pussy.  It leaves you feeling a little weak but Kath seems pleased.  Her body convulses as she cums a second time.  Quite a bit of your sperm must have forced its way deeper, as you can feel her belly expand slightly.");
 	else {
-		if (player.cumQ() > 3000) outputText("Your overproductive " + (player.balls > 0 ? "testes outdo themselves" : "prostate outdoes itself") + ".  ");
+		if (player.cumQ() > 3000)
+			outputText("Your overproductive " + (player.balls > 0 ? "testes outdo themselves" : "prostate outdoes itself") + ".  ");
 		outputText("Your cum launches out of your cock so forcefully that you have to hold Kath’s hips tightly to keep the two of your from being forced apart.  Your cum hammers against Kath’s cervix");
 		if (pregSize() > 0)
-		{
 			outputText(", but with nowhere to go it forces her vagina open and then coats both " + (player.isNaga() ? "her legs and your tail" : "your legs and hers") + " with warm, sticky semen");
-		}
 		else
-		{
 			outputText(" and forces it open.  Your hands can feel the flesh on Kath’s hips stretch and pull, trying to provide more skin for her rapidly expanding belly");
-		}
 		outputText(".  Kath mewls at the feeling of being filled by so much seed." + (player.cumQ() > 3000 ? "  The water grows warm around you and changes color noticeably downstream.  You have to wonder just how much magic is used up each time you cum." : ""));
 	}
 

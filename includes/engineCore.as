@@ -300,6 +300,7 @@ private function levelUpStatToughness():void {
 	dynStats("tou", 5); //Gain +5 Toughness due to level
 	trace("HP: " + player.HP + " MAX HP: " + maxHP());
 	statScreenRefresh();
+	clearOutput();
 	outputText("You feel tougher from all the fights you have endured.");
 	doNext(perkBuyMenu);
 }
