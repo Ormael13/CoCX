@@ -342,7 +342,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			if (!noAdj)
 			{
 				//Adjectives first!
-				if (skinAdj != "")
+				if (skinAdj != "" && !noTone && skinTone != "rough gray")
 				{
 					skinzilla += skinAdj;
 					if (noTone)
