@@ -97,7 +97,7 @@
 		}
 		//End of Interface Implementation
 
-private function sheilaPreg():void {
+private function sheilaPreg(reducedChance:Boolean = false):void {
 	//CHANCE OF PREGGERS, GAO
 	if (pregnancy.isPregnant) return;
 	var chance:Number = 5;
@@ -105,6 +105,7 @@ private function sheilaPreg():void {
 	if (chance > 20) chance = 20;
 	chance += player.virilityQ() * 100;
 	if (chance > 75) chance = 75;
+	if (reducedChance) chance /= 3.0;
 	if (rand(100) <= chance) 
 	pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SHIELA);
 }
@@ -3067,6 +3068,7 @@ private function sheilaCowgirlRapesYou():void {
 			outputText("\n\nAs she panics and fusses her way back into her clothes, you lie there on the grass, tranquilly slipping into a doze.  Even if she does, what of it?  It was her idea in the first place...");
 			
 			//reduce lust and lib, reset hrs since cum, lose 8 hrs if HP or 2-3 if lust loss?
+			sheilaPreg(true);
 			player.orgasm();
 			dynStats("lib", -1);
 			cleanupAfterCombat();
