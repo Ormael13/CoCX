@@ -1070,7 +1070,7 @@ private function boneTheShitOutofKihaHolesWithHorsecock():void {
 	outputText("... a tight cock-sleeve already marked with your seed, just waiting to be mounted and impregnated with your young. You zero in on her cunt - her breeding hole - and step forward, ");
 	if(player.cocks[x].cockType.Index > 0) {
 		if(player.isTaur()) outputText("throwing your hooves onto the rock, looming over Kiha");
-		else outputText("fondling your beastial tool with one hand");
+		else outputText("fondling your bestial tool with one hand");
 	}
 	else {
 		outputText("[if (isTaur = true) \"throwing your hooves onto the rock, looming over Kiha\" else \"fondling your " + cockDescript(x) + " with one hand\"]");

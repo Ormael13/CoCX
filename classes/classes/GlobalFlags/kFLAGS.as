@@ -1108,7 +1108,7 @@ public static const FARM_INCUDRAFT_STORED:int										= 1099;
 public static const FOLLOWER_AT_FARM_AMILY_GIBS_MILK:int							= 1100;
 public static const FOLLOWER_AT_FARM_JOJO_GIBS_DRAFT:int							= 1101;
 public static const FOLLOWER_PRODUCTION_SOPHIE:int									= 1102;
-public static const FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE:int						= 1103;
+public static const FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE:int						= 1103;
 public static const FARM_EGG_STORED:int												= 1104;
 public static const FARM_EGG_COUNTDOWN:int											= 1105;
 public static const FOLLOWER_PRODUCTION_VAPULA:int									= 1106;
@@ -1265,7 +1265,7 @@ public static const BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE:int                       
 public static const BEE_GIRL_COMBAT_LOSSES:int                                      = 1257;
 public static const KATHERINE_MILK_OPTIONS:int                                      = 1258;
 public static const SCYLLA_FURRY_FOURSOME_COUNT:int                                 = 1259;
-public static const UNKNOWN_FLAG_NUMBER_01260:int                                   = 1260;
+public static const SCYLLA_SMALLCOCK_INTRO:int		                                = 1260; // Player has had the initial lil' dick intro version with scylla
 public static const UNKNOWN_FLAG_NUMBER_01261:int                                   = 1261;
 public static const UNKNOWN_FLAG_NUMBER_01262:int                                   = 1262;
 public static const UNKNOWN_FLAG_NUMBER_01263:int                                   = 1263;

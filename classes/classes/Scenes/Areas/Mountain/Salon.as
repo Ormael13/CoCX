@@ -413,8 +413,9 @@ private function dyeMenu():void {
 	addButton(1, "Orange", buyDye, consumables.ORANGDY);
 	addButton(2, "Pink", buyDye, consumables.PINKDYE);
 	addButton(3, "Purple", buyDye, consumables.PURPDYE);
-	addButton(4, "Back", hairDressingMainMenu);
+	addButton(4, "Green", buyDye, consumables.GREEN_D);
 	addButton(5, "Ext.Serum", buyDye, consumables.EXTSERM);
+	addButton(9, "Back", hairDressingMainMenu);
 }
 
 

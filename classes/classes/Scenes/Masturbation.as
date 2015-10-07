@@ -1888,7 +1888,6 @@ package classes.Scenes {
 		}
 		
 		private function onaholeContinuation():void {
-			clearOutput();
 			if (player.cocks.length > 1) {
 				if (player.gender == 3 && rand(2) == 0) {
 					doNext(onaholeMulticockContinuation);

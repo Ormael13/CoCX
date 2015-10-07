@@ -2974,12 +2974,12 @@ private function giveRubiATFItem(itype:ItemType):void {
 		}
 		//(Gaining Whiskers and Paws)
 		else if(flags[kFLAGS.RUBI_WHISKERS] != 1 || flags[kFLAGS.RUBI_HANDS] != 1) {
-			outputText("\n\nRubi's hands dart to [rubi eir] face this time as a number of whiskers sprout from [rubi eir] cheeks.  They twitch cutely at [rubi eir] touch, but that's not the full extend of the changes.  Rubi looks at [rubi eir] hands and gasps, marveling as they sprout a fine layer of white fur and morph.  Patches of skin on [rubi eir] palms and fingers brighten, becoming pink in colour, as the white fur overtakes the rest.  In the end, Rubi is left with a pair of paw-like hands.");
+			outputText("\n\nRubi's hands dart to [rubi eir] face this time as a number of whiskers sprout from [rubi eir] cheeks.  They twitch cutely at [rubi eir] touch, but that's not the full extend of the changes.  Rubi looks at [rubi eir] hands and gasps, marveling as they sprout a fine layer of white fur and morph.  Patches of skin on [rubi eir] palms and fingers brighten, becoming pink in color, as the white fur overtakes the rest.  In the end, Rubi is left with a pair of paw-like hands.");
 			flags[kFLAGS.RUBI_WHISKERS] = 1;
 			flags[kFLAGS.RUBI_HANDS] = 1;
 		}
 		else if(flags[kFLAGS.RUBI_LOWERBODY] != 1) {
-			outputText("\n\nRubi then sits down as a shooting pain seems to go up [rubi eir] legs.  [rubi Ey] cradles one leg as a similar process happens there, the foot being overtaken by white fur while pink pads form on the soles and toes.  [rubi Eir] heel lengthens as well, drawing itself away from the toes and forming what you're sure is a digitigrate structure.  Sure enough, when the transformation is over and Rubi takes a few tentative steps on [rubi eir] new legs, [rubi ey] is forced to walk on tip-toes, which really helps accentuate [rubi eir] ass.");
+			outputText("\n\nRubi then sits down as a shooting pain seems to go up [rubi eir] legs.  [rubi Ey] cradles one leg as a similar process happens there, the foot being overtaken by white fur while pink pads form on the soles and toes.  [rubi Eir] heel lengthens as well, drawing itself away from the toes and forming what you're sure is a digitigrade structure.  Sure enough, when the transformation is over and Rubi takes a few tentative steps on [rubi eir] new legs, [rubi ey] is forced to walk on tip-toes, which really helps accentuate [rubi eir] ass.");
 			flags[kFLAGS.RUBI_LOWERBODY] = 1;
 		}
 		//(Gaining Cat Penis)

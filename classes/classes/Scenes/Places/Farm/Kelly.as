@@ -1784,7 +1784,7 @@ private function rewardKelly():void {
 }
 
 //Hair Dye
-//Requires: Black dye, purple dye, blonde dye, pink dye, brown dye in inventory.  Dye can't be given if her hair is that colour already, e.g. brown can't be given straight away
+//Requires: Black dye, purple dye, blonde dye, pink dye, brown dye in inventory.  Dye can't be given if her hair is that color already, e.g. brown can't be given straight away
 private function dyeKellysBitchAssHair(color:ItemType):void {
 	clearOutput();
 	outputText("You tell her you've brought her a gift as you rummage around in your pockets.  Kelly looks apprehensive but pleasant surprise forms on her face when she catches the small vial of dye you throw at her.");
@@ -1825,7 +1825,7 @@ private function dyeKellysBitchAssHair(color:ItemType):void {
 		player.consumeItem(consumables.PINKDYE);
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "bright pink";
 	}
-	//Brown dye: Kelly smiles as she examines the regained chestnut brown colour of her hair and tail.
+	//Brown dye: Kelly smiles as she examines the regained chestnut brown color of her hair and tail.
 	else if(color == consumables.BROWN_D) {
 		outputText("\n\n\"<i>I'd almost forgotten what it looked like.</i>\"  She sighs, twisting a lock of it in a finger.  She looks quite different with her hair down - it reaches almost to her flanks.  \"<i>You'll bring more dye, right?  I'd love to do more colors.</i>\"  That depends, you say, on her being good.  Kelly sets her jaw determinedly as she begins the long process of retying her braid.");
 		outputText("\n\n\"<i>Of course, [Master].  Thank you for your reward!</i>\"");
