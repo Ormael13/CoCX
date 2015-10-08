@@ -628,7 +628,7 @@ public function katherineVisitNormal(checkTraining:Boolean = true):void
 			telAdre.katherineEmployment.katherineTrainingStage3();
 		else if (flags[kFLAGS.KATHERINE_TRAINING] >= 33)
 			telAdre.katherineEmployment.katherineTrainingStage2();
-		else telAdre.katherineEmployment.katherineTrainingStage1();
+		else telAdre.katherineEmployment.katherineTrainingStage1(false);
     }	
 }
 

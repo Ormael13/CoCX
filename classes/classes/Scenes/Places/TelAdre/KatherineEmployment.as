@@ -252,8 +252,9 @@ package classes.Scenes.Places.TelAdre{
 			doNext(katherineTrainingStage1);
 		}
 
-		public function katherineTrainingStage1():void
+		public function katherineTrainingStage1(clearOut:Boolean = true):void
 		{
+			if (clearOut) clearOutput();
 			outputText((flags[kFLAGS.KATHERINE_TRAINING] == 0 ? "  You" : "Kath readies herself quickly and you") + " lead her on a long, winding trek through the desert sands.  You always keep Tel’Adre in sight so that if the two of you are somehow separated Kath will be able to find her way home.\n\n");
 			outputText("You show her some strategies and good tricks for staying alive out here and moving across the sand without tiring yourself as much.  Kath’s good at listening and while she doesn’t improve much you know she’ll do better tomorrow.\n\n");
 			outputText("When you aren’t instructing her Kath complains about the sand, the heat and the weight of the sack.  You can tell when she really gets tired because she starts to concentrate more on walking than talking.  You can’t blame her.  The desert is difficult terrain to walk on, that’s why you chose it.\n\n");
