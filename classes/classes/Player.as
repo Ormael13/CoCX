@@ -704,6 +704,8 @@ use namespace kGAMECLASS;
 				counter++;
 			if (wingType == 12)
 				counter++;
+			if (findStatusAffect(StatusAffects.Uniball) >= 0)
+				counter++;
 			return counter;
 		}
 
@@ -1002,6 +1004,8 @@ use namespace kGAMECLASS;
 			if (lowerBody == 18)
 				dragonCounter++;
 			if (skinType == 2 && dragonCounter > 0)
+				dragonCounter++;
+			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG || hornType == HORNS_DRACONIC_X2)
 				dragonCounter++;
 			return dragonCounter;
 		}
