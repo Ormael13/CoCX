@@ -491,12 +491,14 @@ private function fireBow():void {
 	clearOutput();
 	if (player.fatigue + physicalCost(25) > 100) {
 		outputText("You're too fatigued to fire the bow!");
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	if (monster.findStatusAffect(StatusAffects.BowDisabled) >= 0) {
 		outputText("You can't use your bow right now!");
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	fatigue(25, 2);
@@ -660,13 +662,15 @@ public function fantasize():void {
 public function bite():void {
 	if(player.fatigue + physicalCost(25) > 100) {
 		outputText("You're too fatigued to use your shark-like jaws!", true);
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	//Worms are special
 	if(monster.short == "worms") {
 		outputText("There is no way those are going anywhere near your mouth!\n\n", true);
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	fatigue(25,2);
@@ -1077,7 +1081,8 @@ public function goreAttack():void {
 	}
 	if(player.fatigue + physicalCost(15) > 100) {
 		outputText("You're too fatigued to use a charge attack!");
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	fatigue(15,2);
@@ -3913,7 +3918,8 @@ public function kick():void {
 	outputText("", true);
 	if(player.fatigue + physicalCost(15) > 100) {
 		outputText("You're too fatigued to use a charge attack!", true);
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	fatigue(15,2);
