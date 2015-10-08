@@ -5,6 +5,7 @@ package classes
 import classes.PerkType;
 	import classes.StatusAffectType;
 	import classes.internals.Utils;
+	import flash.display.InteractiveObject;
 
 	public class Creature extends Utils
 	{
@@ -2379,6 +2380,22 @@ import classes.PerkType;
 				{
 					try
 					{
+						var cock:Cock = cocks[arraySpot];
+						if (cock.sock == "viridian")
+						{
+							removePerk(PerkLib.LustyRegeneration);
+						}
+						else if (cock.sock == "cockring")
+						{
+							var numRings:int = 0;
+							for (var i:int = 0; i < cocks.length; i++)
+							{
+								if (cocks[i].sock == "cockring") numRings++;
+							}
+							
+							if (numRings == 0) removePerk(PerkLib.PentUp);
+							else setPerkValue(PerkLib.PentUp, 1, 5 + (numRings * 5));
+						}
 						cocks.splice(arraySpot, totalRemoved);
 					}
 					catch (e:Error)
