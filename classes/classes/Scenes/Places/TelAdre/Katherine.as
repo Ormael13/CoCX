@@ -4318,7 +4318,7 @@ public function giveKatOralPenisWingWang():void {
 			}
 		}
 
-		outputText(" announce that the cat-girl is very welcome to cum soon, " + (doneBefore ? "as you're happy to do this to her again and again" : "since this probably won't be a one time offer and she doesn't have to postpone things so desperately") + ".\n\n");
+		outputText("After molesting her with your tongue you pull away for a moment and announce that the cat-girl is very welcome to cum soon, " + (doneBefore ? "as you're happy to do this to her again and again" : "since this probably won't be a one time offer and she doesn't have to postpone things so desperately") + ".\n\n");
 
 		outputText("“<i>Thank you,</i>” she gasps before mewling, a small trickle of drool running down her chin.  Somehow, she looks too adorable for you to point that out.  “<i>Ummm... I don't know how you want to finish, but... watch the knot, okay?  This is really amazing and it'd be such a waste if you were to harm yourself... I get the feeling that it'll start to bulge out really soon.</i>”\n\n");
 
