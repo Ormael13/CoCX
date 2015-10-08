@@ -3326,7 +3326,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nEmber growls, spins you around and steals a kiss right out of your mouth.  \"<i>I hate you... you... you sexy beast!</i>\"  Having said that " + emberMF("he", "she") + " unfurls her wings and flies off into the sky, barely managing to fly straight due to " + emberMF("his", "her") + " ");
 			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) outputText("protruding prick");
 			if (flags[kFLAGS.EMBER_GENDER] == 3) outputText(" and ");
-			if (flags[kFLAGS.EMBER_GENDER] >= 3) outputText("creaming wet vagina");
+			if (flags[kFLAGS.EMBER_GENDER] >= 2) outputText("creaming wet vagina");
 			outputText(".  No doubt " + emberMF("he", "she") + "'s off to take care of " + emberMF("his", "her") + " needs by " + emberMF("him", "her") + "self.  You doubt " + emberMF("he", "she") + "'s going to be happy once " + emberMF("his", "her") + " head is clear... still, " + emberMF("he", "she") + "'ll get over it.");
 			emberAffection(-10);
 			//Set some cooldown so this doesn't proc all the goddamn time!
