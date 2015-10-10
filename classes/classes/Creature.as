@@ -3427,6 +3427,7 @@ package classes
 					case CockTypesEnum.HORSE:
 					case CockTypesEnum.KANGAROO:
 					case CockTypesEnum.AVIAN:
+					case CockTypesEnum.ECHIDNA:
 						return true; //If there's even one cock of any of these types then return true
 					default:
 				}
@@ -3501,9 +3502,15 @@ package classes
 				case CockTypesEnum.TENTACLE:
 					if (rand(2) == 0) return "mushroom-like tip";
 					return "wide plant-like crown";
+				case CockTypesEnum.PIG:
+					if (rand(2) == 0) return "corkscrew tip";
+					return "corkscrew head";
 				case CockTypesEnum.RHINO:
 					if (rand(2) == 0) return "flared head";
 					return "rhinoceros dickhead";
+				case CockTypesEnum.ECHIDNA:
+					if (rand(2) == 0) return "quad heads";
+					return "echidna quad heads";
 				default:
 			}
 			if (rand(2) == 0) return "crown";

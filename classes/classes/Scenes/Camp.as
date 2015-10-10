@@ -2491,13 +2491,12 @@ private function promptSaveUpdate():void {
 	clearOutput();
 	if (flags[kFLAGS.MOD_SAVE_VERSION] < 2) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 2;
-		outputText("It appears that you are importing your save from vanilla CoC or older version of this mod.", true);
-		outputText("\n\nIs your file last saved in vanilla CoC or pre-version 0.7.1 of the mod?");
-		outputText("\n\nI'm only asking because older versions of the mod conflicted with flags. This is now fixed but I can't guarantee if your save is okay.");
-		outputText("\n\nPlease select the correct button. Choosing the mod will update the flags, this is necessary for saves from mod to avoid screwing up.");
-		menu();
-		addButton(0, "Vanilla", doCamp);
-		addButton(1, "Pre-0.7.1 mod", updateSaveFlags);
+		outputText("<b><u>CAUTION</u></b>\n");
+		outputText("It appears that you are importing your save from vanilla CoC.");
+		outputText("\n\nIf you're planning to save over your original save file, please stop to think. If you overwrite the save file from original game, it will no longer be backwards compatible with the original CoC.");
+		outputText("\n\nI suggest you create separate save files. I recommend you use slots 10-14 for saving your progress in this mod.");
+		outputText("\n\nWithout further ado, enjoy everything CoC Revamp Mod has to offer!");
+		doNext(doCamp);
 		return;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 2) {
@@ -2506,9 +2505,6 @@ private function promptSaveUpdate():void {
 		outputText("\n\nSome achievements, however, will require you to do it again.");
 		updateAchievements();
 		outputText("\n\nAchievements are saved in a special savefile so no matter what savefile you're on, any earned achievements will be added to that special savefile.");
-		outputText("\n\nTry restarting the game and check the achievements without loading! You'll see, it's permanent!");
-		
-		menu();
 		doNext(doCamp);
 		return;
 	}

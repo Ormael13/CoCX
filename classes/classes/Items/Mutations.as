@@ -9340,7 +9340,7 @@
 				}
 			}
 			//Turn ferret mask to full furface.
-			if(player.faceType == FACE_FERRET_MASK && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_FERRET && rand(4) == 0 && changes < changeLimit)
+			if(player.faceType == FACE_FERRET_MASK && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange.  You rub your face furiously in an attempt to ease the pain, but to no avail.  As the sensations pass, you examine your face in a nearby puddle.  <b>You nearly gasp in shock at the sight of your new ferret face!</b>");
 				player.faceType = FACE_FERRET;
@@ -9361,7 +9361,7 @@
 				changes++;
 			}
 			//No fur, has ferret ears, tail, and legs:
-			if(player.skinType != SKIN_TYPE_FUR && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_FERRET && rand(4) == 0 && changes < changeLimit)
+			if(player.skinType != SKIN_TYPE_FUR && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYour skin starts to itch like crazy as a thick coat of fur sprouts out of your skin.");
 				//If hair was not sandy brown, silver, white, or brown
@@ -9422,17 +9422,17 @@
 			{
 				outputText("\n\nYou scream in agony as a horrible pain racks the entire length of your snake-like coils.  Unable to take it anymore, you pass out.  When you wake up, you’re shocked to find that you no longer have the lower body of a snake.  Instead, you have soft, furry legs that resemble that of a ferret’s.  <b>You now have ferret legs!</b>");
 				changes++;
-				player.lowerBody = LOWER_BODY_FERRET;
+				player.lowerBody = LOWER_BODY_TYPE_FERRET;
 			}
 			//If legs are not ferret, has ferret ears and tail
-			if(player.lowerBody != LOWER_BODY_FERRET && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
+			if(player.lowerBody != LOWER_BODY_TYPE_FERRET && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
 			{
 				//-If centaur, has ferret ears and tail:
 				if(player.isTaur()) outputText("\n\nYou scream in agony as a horrible pain racks your entire horse lower half.  Unable to take it anymore, you pass out.  When you wake up, you’re shocked to find that you no longer have the lower body of a horse.  Instead, you have soft, furry legs that resemble that of a ferret’s.  <b>You now have ferret legs!</b>");
 
 				outputText("\n\nYou scream in agony as the bones in your legs begin to break and rearrange.  Even as the pain passes, an uncomfortable combination of heat and throbbing continues even after the transformation is over.  You rest for a moment, allowing the sensations to subside.  Now feeling more comfortable, <b>you stand up, ready to try out your new ferret legs!</b>");
 				changes++;
-				player.lowerBody = LOWER_BODY_FERRET;
+				player.lowerBody = LOWER_BODY_TYPE_FERRET;
 			}
 			//If ears are not ferret:
 			if(player.earType != EARS_FERRET && rand(4) == 0 && changes < changeLimit && rand(2.5) == 0 && changes < changeLimit)

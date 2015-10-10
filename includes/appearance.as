@@ -229,7 +229,18 @@
 	if (player.faceType == FACE_RHINO)
 	{
 		outputText("Your face is like that of a rhino, with a long muzzle.");
-		if (player.hornType == HORNS_RHINO && player.horns >= 2) outputText("  A long horn protrudes from your nose, you estimate it to be about a foot long.");
+		if (player.skinType != SKIN_TYPE_PLAIN)
+			outputText("  Oddly, your face is also covered in " + player.skinFurScales() + ".");
+	}
+	if (player.faceType == FACE_ECHIDNA)
+	{
+		outputText("Your odd visage consists of a long, thin echidna snout.");
+		if (player.skinType == SKIN_TYPE_PLAIN)
+			outputText("  The " + player.skin() + " that is revealed by your lack of fur looks quite unusual.");
+		else if (player.skinType == SKIN_TYPE_FUR)
+			outputText("  It's covered in " + player.skinFurScales() + ".");
+		else if (player.skinType == SKIN_TYPE_SCALES)
+			outputText("  It's covered in " + player.skinFurScales() + ", making your face even more unusual.");
 	}
 	//M/F stuff!
 	outputText("  It has " + player.faceDesc() + ".", false);
@@ -273,10 +284,12 @@
 		else if(player.earType == EARS_MOUSE) 
 			outputText("  A pair of large, dish-shaped mouse ears tops your head.");
 		//<mod>
-		else if(player.earType == EARS_PIG) 
+		else if (player.earType == EARS_PIG) 
 			outputText("  A pair of pointy, floppy pig ears have sprouted from the top of your head.");
-		else if(player.earType == EARS_RHINO) 
+		else if (player.earType == EARS_RHINO) 
 			outputText("  A pair of open tubular rhino ears protrude from your head.");
+		else if (player.earType == EARS_ECHIDNA)
+			outputText("  A pair of small rounded openings appear on your head that are your ears.");
 		//</mod>
 		if(player.antennae == ANTENNAE_BEE) 
 			outputText("  Floppy antennae also appear on your skull, bouncing and swaying in the breeze.", false);
@@ -317,6 +330,8 @@
 			outputText("  The " + hairDescript() + " on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
 		else if(player.earType == EARS_RHINO) 
 			outputText("  The " + hairDescript() + " on your head is parted by a pair of tubular rhino ears.");
+		else if(player.earType == EARS_RHINO) 
+			outputText("  Your " + hairDescript() + " makes it near-impossible to see the small, rounded openings that are your ears.");
 		//</mod>
 		if(player.antennae == ANTENNAE_BEE) 
 		{
@@ -347,7 +362,8 @@
 		outputText("  A slowly undulating tongue occasionally slips from between your lips.  It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.", false);
 	else if(player.tongueType == TONUGE_DRACONIC) 
 		outputText("  Your mouth contains a thick, fleshy tongue that, if you so desire, can telescope to a distance of about four feet.  It has sufficient manual dexterity that you can use it almost like a third arm.");
-
+	else if (player.tongueType == TONUGE_ECHIDNA)
+		outputText("  A thin echidna tongue, at least a foot long, occasionally flits out from between your lips.");
 	//Horns
 	//Demonic horns
 	if(player.hornType == HORNS_DEMON) 
@@ -694,7 +710,7 @@
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
 		outputText("  Two normal human legs grow down from your waist, ending in normal human feet.", false);
-	else if(player.lowerBody == LOWER_BODY_FERRET) outputText("  Two furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.", false);
+	else if(player.lowerBody == LOWER_BODY_TYPE_FERRET) outputText("  Two furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) 
 		outputText("  Your legs are muscled and jointed oddly, covered in fur, and end in a pair of bestial hooves.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_DOG) 
@@ -1025,6 +1041,10 @@
 		//Rhino flavor
 		if (player.cocks[temp].cockType == CockTypesEnum.RHINO) {
 			outputText("  It's a smooth, tough pink colored and takes on a long and narrow shape with an oval shaped bulge along the center.");
+		}
+		//Echidna flavor
+		if (player.cocks[temp].cockType == CockTypesEnum.ECHIDNA) {
+			outputText("  It is quite a sight to behold, coming well-equiped with four heads.");
 		}
 		//Worm flavor
 		if(player.findStatusAffect(StatusAffects.Infested) >= 0)

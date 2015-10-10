@@ -84,6 +84,7 @@
 				else if (i_creature.hairType == 2) description += "transparent ";
 				else if (i_creature.hairType == 3) description += "goo-";
 				else if (i_creature.hairType == 4) description += "tentacle-";
+				else if (i_creature.hairType == 4) description += "quill-";
 				description += "mane";
 				return description;
 			}
@@ -98,6 +99,7 @@
 			else if (i_creature.hairType == 2) description += "transparent ";
 			else if (i_creature.hairType == 3) description += "goo-";
 			else if (i_creature.hairType == 4) description += "tentacle-";
+			else if (i_creature.hairType == 4) description += "quill-";
 			description += "hair";
 
 			return description;
@@ -760,6 +762,18 @@
 					"rhino prick",
 					"bulged rhino cock",
 					"bulged rhino dick");
+			}
+			else if (cockType == CockTypesEnum.ECHIDNA) {
+				return randomChoice("strange echidna dick",
+					"strange echidna cock",
+					"echidna dick",
+					"echidna penis",
+					"echidna cock",
+					"exotic endowment",
+					"four-headed prick",
+					"four-headed penis",
+					"four-headed cock",
+					"four-headed dick");
 			}
 			return randomChoice("cock",
 				"prick",
@@ -2302,7 +2316,8 @@
 					[HAIR_FEATHER, "feather"],
 					[HAIR_GHOST, "transparent"],
 					[HAIR_GOO, "goopy"],
-					[HAIR_ANEMONE, "tentacle"]
+					[HAIR_ANEMONE, "tentacle"],
+					[HAIR_QUILL, "quill"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2336,7 +2351,8 @@
 					[FACE_FERRET, "ferret"],
 					[FACE_PIG, "pig"],
 					[FACE_BOAR, "boar"],
-					[FACE_RHINO, "rhino"]
+					[FACE_RHINO, "rhino"],
+					[FACE_ECHIDNA, "echidna"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2344,7 +2360,8 @@
 					[TONUGE_HUMAN, "human"],
 					[TONUGE_SNAKE, "snake"],
 					[TONUGE_DEMONIC, "demonic"],
-					[TONUGE_DRACONIC, "draconic"]
+					[TONUGE_DRACONIC, "draconic"],
+					[TONUGE_ECHIDNA, "echidna"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2371,7 +2388,8 @@
 					[EARS_MOUSE, "mouse"],
 					[EARS_FERRET, "ferret"],
 					[EARS_PIG, "pig"],
-					[EARS_RHINO, "rhino"]
+					[EARS_RHINO, "rhino"],
+					[EARS_ECHIDNA, "echidna"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2478,7 +2496,10 @@
 					[LOWER_BODY_TYPE_DRIDER_LOWER_BODY, "drider"],
 					[LOWER_BODY_TYPE_FOX, "fox"],
 					[LOWER_BODY_TYPE_DRAGON, "dragon"],
-					[LOWER_BODY_TYPE_RACCOON, "raccoon"]
+					[LOWER_BODY_TYPE_RACCOON, "raccoon"],
+					[LOWER_BODY_TYPE_FERRET, "ferret"],
+					[LOWER_BODY_TYPE_PIG, "pig"],
+					[LOWER_BODY_TYPE_ECHIDNA, "echidna"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(

@@ -475,6 +475,7 @@ public function confirmOverwrite(slot:String):void {
 	mainView.nameBox.visible = false;
 	clearOutput();
 	outputText("You are about to overwrite the following save slot: " + slot + ".");
+	outputText("\n\n<i>If you choose to overwrite a save file from the original CoC, it will no longer be playable on the original version. I recommend you use slots 10-14 for saving on the mod.</i>");
 	outputText("\n\n<b>ARE YOU SURE?</b>");
 	doYesNo(createCallBackFunction(saveGame, slot), saveScreen);
 }

@@ -429,8 +429,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4C_mod_snapshot_20150927";
-			version = ver + " (<b>Rhino TFs + Fur Colour</b>)";
+			ver = "0.9.4C_mod_snapshot_20151009";
+			version = ver + " (<b>Echidna TFs</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

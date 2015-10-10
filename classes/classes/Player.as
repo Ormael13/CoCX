@@ -861,6 +861,11 @@ use namespace kGAMECLASS;
 				race = "rhino-morph";
 				if (faceType == 0) race = "rhino-" + mf("man", "girl");
 			}
+			if (echidnaScore() >= 4)
+			{
+				race = "echidna-morph";
+				if (faceType == 0) race = "echidna-" + mf("boy", "girl");
+			}
 			if (dragonneScore() >= 6)
 			{
 				race = "dragonne-morph";
@@ -1049,7 +1054,7 @@ use namespace kGAMECLASS;
 			if (faceType == FACE_FERRET) counter+=2;
 			if (earType == EARS_FERRET) counter++;
 			if (tailType == TAIL_TYPE_FERRET) counter++;
-			if (lowerBody == LOWER_BODY_FERRET) counter++;
+			if (lowerBody == LOWER_BODY_TYPE_FERRET) counter++;
 			if (skinType == SKIN_TYPE_FUR && counter > 0) counter++;
 			return counter;
 		}
@@ -1547,6 +1552,26 @@ use namespace kGAMECLASS;
 			if (rhinoCounter >= 2 && hasCock() && countCocksOfType(CockTypesEnum.RHINO) > 0)
 				rhinoCounter++;
 			return rhinoCounter;
+		}
+		
+		public function echidnaScore():Number
+		{
+			var echidnaCounter:Number = 0;
+			if (earType == EARS_ECHIDNA)
+				echidnaCounter++;
+			if (tailType == TAIL_TYPE_ECHIDNA)
+				echidnaCounter++;
+			if (faceType == FACE_ECHIDNA)
+				echidnaCounter++;
+			if (tongueType == TONUGE_ECHIDNA)
+				echidnaCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_ECHIDNA)
+				echidnaCounter++;
+			if (echidnaCounter >= 2 && skinType == SKIN_TYPE_FUR)
+				echidnaCounter++;
+			if (echidnaCounter >= 2 && countCocksOfType(CockTypesEnum.ECHIDNA) > 0)
+				echidnaCounter++;
+			return echidnaCounter;
 		}
 		
 		//Dragonne
