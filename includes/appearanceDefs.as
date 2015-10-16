@@ -55,6 +55,7 @@ public static const FACE_PIG:int                                            		= 
 public static const FACE_BOAR:int                                            		=   20;
 public static const FACE_RHINO:int                                            		=   21;
 public static const FACE_ECHIDNA:int                                            	=   22;
+public static const FACE_DEER:int                                               	=   23;
 
 // tongueType
 public static const TONUGE_HUMAN:int                                                =   0;
@@ -86,6 +87,7 @@ public static const EARS_FERRET:int                                             
 public static const EARS_PIG:int                                                    =  14;
 public static const EARS_RHINO:int                                                  =  15;
 public static const EARS_ECHIDNA:int                                                =  16;
+public static const EARS_DEER:int                                                   =  17;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;
@@ -132,6 +134,7 @@ public static const TAIL_TYPE_SCORPION:int                                      
 public static const TAIL_TYPE_GOAT:int                                              =  21;
 public static const TAIL_TYPE_RHINO:int                                             =  22;
 public static const TAIL_TYPE_ECHIDNA:int                                           =  23;
+public static const TAIL_TYPE_DEER:int                                              =  24;
 
 //breast size
 public static const BREAST_CUP_FLAT:int												=   0;
@@ -271,8 +274,10 @@ public static const LOWER_BODY_TYPE_FOX:int                                     
 public static const LOWER_BODY_TYPE_DRAGON:int                                      =  18;
 public static const LOWER_BODY_TYPE_RACCOON:int                                     =  19;
 public static const LOWER_BODY_TYPE_FERRET:int                                      =  20;
-public static const LOWER_BODY_TYPE_PIG:int                                         =  21;
+public static const LOWER_BODY_TYPE_CLOVEN_HOOFED:int                               =  21;
+//public static const LOWER_BODY_TYPE_RHINO:int                                       =  22;
 public static const LOWER_BODY_TYPE_ECHIDNA:int                                     =  23;
+public static const LOWER_BODY_TYPE_DEERTAUR:int                                    =  24;
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;

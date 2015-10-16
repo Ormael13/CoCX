@@ -1,12 +1,6 @@
 package classes.Items.Consumables 
 {
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.internals.Utils;
-	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
-	import classes.CockTypesEnum;
-	import classes.PerkLib;
-	import classes.Player;
+	import classes.Items.*;
 	/**
 	 * Satyr Wine, part of the Black Cock by Foxxling
 	 * @author Kitteh6660

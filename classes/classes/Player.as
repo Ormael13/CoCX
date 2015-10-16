@@ -743,14 +743,6 @@ use namespace kGAMECLASS;
 			if (lizardScore() >= 4)
 			{
 				race = "lizan";
-				/*if (gender == 0) 
-					race = "lizan";
-				else if (gender == 1)
-					race = "male lizan";
-				else if (gender == 2)
-					race = "female lizan";
-				else
-					race = "hermaphrodite lizan";*/
 			}
 			if (dragonScore() >= 4)
 			{
@@ -866,6 +858,13 @@ use namespace kGAMECLASS;
 				race = "echidna-morph";
 				if (faceType == 0) race = "echidna-" + mf("boy", "girl");
 			}
+			if (deerScore() >= 4)
+			{
+				race = "deer-morph";
+				if (faceType == 0) race = "deer-" + mf("morph", "girl");
+				if (lowerBody == LOWER_BODY_TYPE_DEERTAUR) race = "deer-taur";
+			}
+			//Special, bizarre races
 			if (dragonneScore() >= 6)
 			{
 				race = "dragonne-morph";
@@ -1509,7 +1508,7 @@ use namespace kGAMECLASS;
 				pigCounter++;
 			if (faceType == FACE_PIG || FACE_BOAR)
 				pigCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_PIG)
+			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
 				pigCounter += 2;
 			if (pigCocks() > 0)
 				pigCounter++;
@@ -1572,6 +1571,26 @@ use namespace kGAMECLASS;
 			if (echidnaCounter >= 2 && countCocksOfType(CockTypesEnum.ECHIDNA) > 0)
 				echidnaCounter++;
 			return echidnaCounter;
+		}
+		
+		public function deerScore():Number
+		{
+			var deerCounter:Number = 0;
+			if (earType == EARS_DEER)
+				deerCounter++;
+			if (tailType == TAIL_TYPE_DEER)
+				deerCounter++;
+			if (faceType == FACE_DEER)
+				deerCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED || lowerBody == LOWER_BODY_TYPE_DEERTAUR)
+				deerCounter++;
+			if (hornType == HORNS_ANTLERS && horns >= 4)
+				deerCounter++;
+			if (deerCounter >= 2 && skinType == SKIN_TYPE_FUR)
+				deerCounter++;
+			if (deerCounter >= 3 && countCocksOfType(CockTypesEnum.HORSE) > 0)
+				deerCounter++;
+			return deerCounter;
 		}
 		
 		//Dragonne

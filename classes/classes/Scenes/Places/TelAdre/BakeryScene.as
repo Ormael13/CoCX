@@ -73,13 +73,19 @@ private function checkBakeryMenu():void {
 	outputText("Berry Cupcakes - 3 gems.\n", false);
 	outputText("Doughnuts - 5 gems.\n", false);
 	outputText("Pound Cake - 4 gems.\n", false);
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
+		outputText("Hard Biscuits - 5 gems (packed).\n", false);
+		outputText("Trail Mix - 20 gems (packed).\n", false);
+		addButton(5, "Hard Biscuits", buyHardBiscuits, null, null, null, consumables.H_BISCU.description);
+		addButton(6, "Trail Mix", buyTrailMix, null, null, null, consumables.TRAILMX.description);
+	}
 	if(flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] > 0) {
 		outputText("\'Special\' Eclair - 10 gems.\n", false);
-		minoCum = createCallBackFunction2(nomnomnom, "eclair", 10);
+		addButton(7, "SpecialEclair", nomnomnom, "eclair", 10);
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] >= 4) {
 		outputText("Giant Chocolate Cupcake - 500 gems.\n", false);
-		gcupcake = buySlutCake;
+		addButton(8, "GiantCupcake", buySlutCake);
 	}
 	outputText("\n");
 	displayIngredients();
@@ -87,17 +93,14 @@ private function checkBakeryMenu():void {
 	outputText("\nWhat will you order?", false);
 	
 	menu();
-	//choices("Brownies",createCallBackFunction2(nomnomnom, "brownies", 3),"Cookies",createCallBackFunction2(nomnomnom, "cookies", 4),"Cupcakes",2833,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5),"Pound Cake",createCallBackFunction2(nomnomnom, "pound cake", 4),"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,"",0,"Leave",bakeryuuuuuu);
+	addButton(0, "Brownies", nomnomnom, "brownies", 3);
+	addButton(1, "Cookies", nomnomnom, "cookies", 4);
+	addButton(2, "Cupcakes", nomnomnom, "cupcakes", 3);
+	addButton(3, "Doughnuts", nomnomnom, "doughnuts", 5);
+	addButton(4, "Pound Cake", nomnomnom, "pound cake", 4);
 	
-	addButton(0,"Brownies",createCallBackFunction2(nomnomnom, "brownies", 3));
-	addButton(1,"Cookies",createCallBackFunction2(nomnomnom, "cookies", 4));
-	addButton(2,"Cupcakes",createCallBackFunction2(nomnomnom, "cupcakes", 3));
-	addButton(3,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5));
-	addButton(4,"Pound Cake",createCallBackFunction2(nomnomnom, "pound cake", 4));
-	addButton(5,"SpecialEclair",minoCum);
-	addButton(6,"GiantCupcake",gcupcake);
-	addButton(8,"Ingredients",ingredientsMenu);
-	addButton(14,"Leave",bakeryuuuuuu);
+	addButton(9, "Ingredients", ingredientsMenu);
+	addButton(14, "Leave", bakeryuuuuuu);
 }
 
 private function displayIngredients():void {
@@ -140,7 +143,7 @@ private function talkToBaker():void {
 	addButton(5,"Fox Berry",talkAboutFoxBerry);
 	addButton(6,"Ringtail Fig",talkAFig);
 	addButton(7,"Mouse Cocoa",talkAboutMouseCocoa);
-	addButton(9,"Nevermind", talkBakeryMenu);
+	addButton(14,"Nevermind", talkBakeryMenu);
 }
 
 //[Bakery - Talk - Baker - Brownie]
@@ -432,6 +435,31 @@ private function buyFoxBerry():void {
 	inventory.takeItem(consumables.FOXBERY, ingredientsMenu);
 }
 
+private function buyHardBiscuits():void {
+	clearOutput();
+	if(player.gems < 5) {
+		outputText("You can't afford one of those!");
+		doNext(checkBakeryMenu);
+		return;
+	}
+	outputText("You pay five gems for a pack of hard biscuits.  ");
+	player.gems -= 5;
+	statScreenRefresh();
+	inventory.takeItem(consumables.H_BISCU, checkBakeryMenu);
+}
+
+private function buyTrailMix():void {
+	clearOutput();
+	if (player.gems < 20) {
+		outputText("You can't afford one of those!");
+		doNext(checkBakeryMenu);
+		return;
+	}
+	outputText("You pay twenty gems for a pack of trail mix.  ");
+	player.gems -= 20;
+	statScreenRefresh();
+	inventory.takeItem(consumables.TRAILMX, checkBakeryMenu);
+}
 
 private function easterBakeSale():void {
 	clearOutput();

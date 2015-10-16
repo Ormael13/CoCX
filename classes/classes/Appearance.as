@@ -80,11 +80,11 @@
 			//
 			//If furry and longish hair sometimes call it a mane (50%)
 			if (i_creature.skinType == 1 && i_creature.hairLength > 3 && rand(2) == 0) {
-				if (i_creature.hairType == 1) description += "feather-";
-				else if (i_creature.hairType == 2) description += "transparent ";
-				else if (i_creature.hairType == 3) description += "goo-";
-				else if (i_creature.hairType == 4) description += "tentacle-";
-				else if (i_creature.hairType == 4) description += "quill-";
+				if (i_creature.hairType == HAIR_FEATHER) description += "feather-";
+				else if (i_creature.hairType == HAIR_GHOST) description += "transparent ";
+				else if (i_creature.hairType == HAIR_GOO) description += "goo-";
+				else if (i_creature.hairType == HAIR_ANEMONE) description += "tentacle-";
+				else if (i_creature.hairType == HAIR_QUILL) description += "quill-";
 				description += "mane";
 				return description;
 			}
@@ -95,11 +95,11 @@
 			 return descript;
 			 }*/
 			//If nothing else used, use hair!
-			if (i_creature.hairType == 1) description += "feather-";
-			else if (i_creature.hairType == 2) description += "transparent ";
-			else if (i_creature.hairType == 3) description += "goo-";
-			else if (i_creature.hairType == 4) description += "tentacle-";
-			else if (i_creature.hairType == 4) description += "quill-";
+			if (i_creature.hairType == HAIR_FEATHER) description += "feather-";
+			else if (i_creature.hairType == HAIR_GHOST) description += "transparent ";
+			else if (i_creature.hairType == HAIR_GOO) description += "goo-";
+			else if (i_creature.hairType == HAIR_ANEMONE) description += "tentacle-";
+			else if (i_creature.hairType == HAIR_QUILL) description += "quill-";
 			description += "hair";
 
 			return description;
@@ -2352,7 +2352,8 @@
 					[FACE_PIG, "pig"],
 					[FACE_BOAR, "boar"],
 					[FACE_RHINO, "rhino"],
-					[FACE_ECHIDNA, "echidna"]
+					[FACE_ECHIDNA, "echidna"],
+					[FACE_DEER, "deer"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2389,7 +2390,8 @@
 					[EARS_FERRET, "ferret"],
 					[EARS_PIG, "pig"],
 					[EARS_RHINO, "rhino"],
-					[EARS_ECHIDNA, "echidna"]
+					[EARS_ECHIDNA, "echidna"],
+					[EARS_DEER, "deer"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2440,7 +2442,9 @@
 					[TAIL_TYPE_PIG, "pig"],
 					[TAIL_TYPE_SCORPION, "scorpion"],
 					[TAIL_TYPE_GOAT, "goat"],
-					[TAIL_TYPE_RHINO, "rhino"]
+					[TAIL_TYPE_RHINO, "rhino"],
+					[TAIL_TYPE_ECHIDNA, "echidna"],
+					[TAIL_TYPE_DEER, "deer"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2498,8 +2502,9 @@
 					[LOWER_BODY_TYPE_DRAGON, "dragon"],
 					[LOWER_BODY_TYPE_RACCOON, "raccoon"],
 					[LOWER_BODY_TYPE_FERRET, "ferret"],
-					[LOWER_BODY_TYPE_PIG, "pig"],
-					[LOWER_BODY_TYPE_ECHIDNA, "echidna"]
+					[LOWER_BODY_TYPE_CLOVEN_HOOFED, "cloven-hoofed"],
+					[LOWER_BODY_TYPE_ECHIDNA, "echidna"],
+					[LOWER_BODY_TYPE_ECHIDNA, "deertaur"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(

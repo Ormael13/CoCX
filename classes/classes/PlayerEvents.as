@@ -194,7 +194,7 @@ package classes {
 				}
 			}
 			/*if (flags[kFLAGS.PIG_BAD_END_WARNING] == 1) {
-				if (player.faceType != FACE_PIG || player.tailType != TAIL_TYPE_PIG || player.earType != EARS_PIG || player.lowerBody != LOWER_BODY_TYPE_PIG) {
+				if (player.faceType != FACE_PIG || player.tailType != TAIL_TYPE_PIG || player.earType != EARS_PIG || player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED) {
 					flags[kFLAGS.PIG_BAD_END_WARNING] = 0;
 				}
 			}*/

@@ -1454,12 +1454,12 @@ package classes.Scenes.Places.Bazaar
 				player.armType = ARM_TYPE_HUMAN;
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_HOOFED) {
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED) {
 				outputText("\n\nYou feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of goat legs</b>.");
-				player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+				player.lowerBody = LOWER_BODY_TYPE_CLOVEN_HOOFED;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_HOOFED && player.hornType == HORNS_GOAT && player.faceType != FACE_HUMAN) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED && player.hornType == HORNS_GOAT && player.faceType != FACE_HUMAN) {
 				outputText("\n\nYour face grows warm as suddenly your vision is engulfed in smoke, coughing and beating the smoke back you noticed a marked change in your features. Touching yourself you confirm you have a <b>normal human shaped face once again</b>.");
 				player.faceType = FACE_HUMAN;
 				changes++;
@@ -1558,7 +1558,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			// Special TFs
 			//------------
-			if (rand(4) == 0 && changes < changeLimit && player.hornType != HORNS_UNICORN && player.earType == EARS_HORSE && (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.horseScore() >= 3)) {
+			if (rand(4) == 0 && changes < changeLimit && player.hornType != HORNS_UNICORN && player.earType == EARS_HORSE && (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED || player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.horseScore() >= 3)) {
 				outputText("\n\nYou begin to feel an annoying tingling sensation at the top of your head. Reaching up to inspect it you find the <b>sharp nub of a horn protruding from the center of your forehead</b> and growing. Once it's complete you estimate it to be about six inches long.");
 				player.hornType = HORNS_UNICORN;
 				player.horns = 6;
@@ -1950,7 +1950,7 @@ package classes.Scenes.Places.Bazaar
 						outputText("You feel a sharp stinging at your toenails that only grows worse by the second. As you inspect your aching toes, you’re shocked to see that your toenails are lengthening, eventually becoming fierce claws. It would seem that the bottoms of your feet have changed as well. They’ve become padded!");
 						break;
 					case LOWER_BODY_TYPE_HOOFED:
-					case LOWER_BODY_TYPE_PIG:
+					case LOWER_BODY_TYPE_CLOVEN_HOOFED:
 						outputText("You nearly drop to the ground as a fuzzy sensation erupts at your hooves. Have they gone to sleep? As you inspect your feet, you find that they are no longer hooved! In fact, they look a lot like your old human feet. The only difference is that your toes are clawed, and the bottoms of your feet padded.");
 						break;
 					case LOWER_BODY_TYPE_HARPY:

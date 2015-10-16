@@ -11,7 +11,7 @@ package classes.Items.Consumables
 	 */
 	public class SkinOil extends Consumable 
 	{
-		private var _color:String
+		private var _color:String;
 		
 		public function SkinOil(id:String, color:String) 
 		{

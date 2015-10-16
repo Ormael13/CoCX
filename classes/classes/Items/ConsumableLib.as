@@ -27,19 +27,19 @@ package classes.Items
 		public const PSDELIT:SimpleConsumable = mk("PSDelit","PSDelit", "an untainted bottle of \"Succubi's Delight\"", curry(m.succubisDelight, false),  "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.", 20);
 		
 		//DYES
-		public const AUBURND:SimpleConsumable = mk("AuburnD","Auburn Dye", "a vial of auburn hair dye", curry(m.hairDye, "auburn"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const BLACK_D:SimpleConsumable = mk("Black D","Black Dye", "a vial of black hair dye", curry(m.hairDye, "black"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const BLOND_D:SimpleConsumable = mk("Blond D","Blond Dye", "a vial of blonde hair dye", curry(m.hairDye, "blonde"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const BLUEDYE:SimpleConsumable = mk("BlueDye","Blue Dye", "a vial of blue hair dye", curry(m.hairDye, "dark blue"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const BROWN_D:SimpleConsumable = mk("Brown D","Brown Dye", "a vial of brown hair dye", curry(m.hairDye, "brown"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const GRAYDYE:SimpleConsumable = mk("GrayDye","Gray Dye", "a vial of gray hair dye", curry(m.hairDye, "gray"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const GREEN_D:SimpleConsumable = mk("Green D","Green Dye", "a vial of green hair dye", curry(m.hairDye, "green"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const ORANGDY:SimpleConsumable = mk("OrangDy","Orange Dye", "a vial of brilliant orange hair dye", curry(m.hairDye, "bright orange"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const PINKDYE:SimpleConsumable = mk("PinkDye","Pink Dye", "a vial of bright pink hair dye", curry(m.hairDye, "neon pink"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const PURPDYE:SimpleConsumable = mk("PurpDye","Purple Dye", "a vial of purple hair dye", curry(m.hairDye, "purple"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const RAINDYE:SimpleConsumable = mk("RainDye","Rainbow Dye", "a vial of rainbow hair dye", curry(m.hairDye, "rainbow"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.", 1000);
-		public const RED_DYE:SimpleConsumable = mk("Red Dye","Red Dye", "a vial of red hair dye", curry(m.hairDye, "red"),"This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
-		public const WHITEDY:SimpleConsumable = mk("WhiteDy","White Dye", "a vial of white hair dye", curry(m.hairDye, "white"), "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.");
+		public const AUBURND:HairDye = new HairDye("AuburnD", "Auburn");
+		public const BLACK_D:HairDye = new HairDye("Black D", "Black");
+		public const BLOND_D:HairDye = new HairDye("Blond D", "Blond");
+		public const BLUEDYE:HairDye = new HairDye("BlueDye", "Blue");
+		public const BROWN_D:HairDye = new HairDye("Brown D", "Brown");
+		public const GRAYDYE:HairDye = new HairDye("GrayDye", "Gray");
+		public const GREEN_D:HairDye = new HairDye("Green D", "Green");
+		public const ORANGDY:HairDye = new HairDye("OrangDy", "Orange");
+		public const PINKDYE:HairDye = new HairDye("PinkDye", "Pink");
+		public const PURPDYE:HairDye = new HairDye("PurpDye", "Purple");
+		public const RAINDYE:HairDye = new HairDye("RainDye", "Rainbow", 1000);
+		public const RED_DYE:HairDye = new HairDye("Red Dye", "Red");
+		public const WHITEDY:HairDye = new HairDye("WhiteDy", "White");
 		
 		//SKIN OILS & BODY LOTIONS
 		public const DARK_OL:SkinOil = new SkinOil("DarkOil", "Dark");
@@ -83,6 +83,7 @@ package classes.Items
 		public const FISHFIL:SimpleConsumable = mk("FishFil", "FishFil", "a fish fillet", m.fishFillet, "A perfectly cooked piece of fish.  You're not sure what type of fish is, since you're fairly certain \"delicious\" is not a valid species.");
 		public const FR_BEER:SimpleConsumable = mk("Fr Beer", "Fr Beer", "a mug of frothy beer", m.frothyBeer, "A bottle of beer from The Black Cock.");
 		public const GODMEAD:SimpleConsumable = mk("GodMead","GodMead", "a pint of god's mead", m.godMead,"A horn of potent, honey-colored mead. A single whiff makes your head swim and your thoughts turn to violence and heroism.");
+		public const H_BISCU:SimpleConsumable = mk("H.Biscuits", "H.Biscuits", "a pack of hard biscuits", m.hardBiscuits, "These biscuits are tasteless, but they can stay edible for an exceedingly long time.", 5);
 		public const IZYMILK:SimpleConsumable = mk("IzyMilk","IzyMilk", "a bottle of Isabella's milk", m.isabellaMilk, "This is a bottle of Isabella's milk.  Isabella seems fairly certain it will invigorate you.");
 		public const M__MILK:SimpleConsumable = mk("M. Milk","M. Milk", "a clear bottle of milk from Marble", m.useMarbleMilk, "A clear bottle of milk from Marble's breasts. It smells delicious.");
 		public const MINOCUM:SimpleConsumable = mk("MinoCum", "MinoCum", "a sealed bottle of minotaur cum", curry(m.minotaurCum, false), "This bottle of minotaur cum looks thick and viscous.  You know it has narcotic properties, but aside from that its effects are relatively unknown.", 60);
@@ -93,9 +94,10 @@ package classes.Items
 		public const SATYR_W:SatyrWine        = new SatyrWine();
 		public const SHEEPMK:SimpleConsumable = mk("SheepMk","SheepMk", "a bottle of sheep milk", m.sheepMilk,"This bottle of sheep milk is said to have corruption-fighting properties.  It may be useful.");
 		public const S_WATER:SimpleConsumable = mk("S.Water", "SpringWtr", "a waterskin filled with spring water", m.springWater, "A waterskin full of purified water from Minerva's spring.  It's clean and clear, with a faint sweet scent to it.  You're sure it would be a very refreshing drink.");
+		public const TRAILMX:SimpleConsumable = mk("Trail Mix", "Trail Mix", "a pack of trail mix", m.trailMix, "This mix of nuts, dried fruits and berries is lightweight, easy to store and very nutritious.", 20);
 		public const URTACUM:SimpleConsumable = mk("UrtaCum", "UrtaCum", "a sealed bottle of Urta's cum", m.urtaCum, "This bottle of Urta's cum looks thick and viscous.  It's quite delicious.", 15);
 		public const W_PDDNG:SimpleConsumable = mk("W.Pddng","W.Pudding", "a slice of winter pudding", m.winterPudding,"A slice of delicious Winter Pudding.  It smells delicious. \n\nNote: Eating this might cause antlers to grow from your head.", 35);
-
+ 
 		//GROWERS/SHRINKERS
 		public const REDUCTO:Consumable = new Reducto();
 		public const GROPLUS:Consumable = new GroPlus();
@@ -136,7 +138,7 @@ package classes.Items
 		
 		//TRANSFORMATIVE ITEMS
 		public const B_GOSSR:SimpleConsumable = mk("B.Gossr","B.Gossr", "a bundle of black, gossamer webbing", curry(m.sweetGossamer, 1), "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you?");
-		public const BEEHONY:BeeHoney			= new BeeHoney(false, false);
+		public const BEEHONY:BeeHoney         = new BeeHoney(false, false);
 		public const BLACKPP:SimpleConsumable = mk("BlackPp","BlackPp", "a solid black canine pepper", curry(m.caninePepper, 3), "This solid black canine pepper is smooth and shiny, but something about it doesn't seem quite right...", 10);
 		public const BOARTRU:SimpleConsumable = mk("BoarTru", "BoarTruffle", "a boar truffle", curry(m.pigTruffle, true), "It’s clear where the pigtail truffle gets its name.  A small, curly sprig resembling a pig’s tail can be seen jutting out of it. Now that it’s been enhanced by Lumi, it’s larger and fuzzier than it was before, almost like a peach.");
 		public const BULBYPP:SimpleConsumable = mk("BulbyPp","BulbyPp", "a bulbous pepper", curry(m.caninePepper, 5), "This bulbous pepper has a slightly different shape than the other canine peppers, with two large orb-like protrusions at the base.", 10);
@@ -148,7 +150,8 @@ package classes.Items
 		public const EQUINUM:SimpleConsumable = mk("Equinum","Equinum", "a vial of Equinum", m.equinum, "This is a long flared vial with a small label that reads, \"<i>Equinum</i>\".  It is likely this potion is tied to horses in some way.");
 		public const FOXBERY:SimpleConsumable = mk("FoxBery","Fox Berry", "a fox berry", curry(m.foxTF,false), "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.");
 		public const FRRTFRT:SimpleConsumable = mk("Frrtfrt","FerretFrt","a ferret fruit", m.ferretTF, "This fruit is curved oddly, just like the tree it came from.  The skin is fuzzy and brown, like the skin of a peach.");
-		public const FOXJEWL:SimpleConsumable = mk("FoxJewl","Fox Jewel", "a fox jewel", curry(m.foxJewel,false), "A shining teardrop-shaped jewel.  An eerie blue flame dances beneath the surface.");
+		public const FOXJEWL:SimpleConsumable = mk("FoxJewl", "Fox Jewel", "a fox jewel", curry(m.foxJewel, false), "A shining teardrop-shaped jewel.  An eerie blue flame dances beneath the surface.");
+		public const GLDRIND:GoldenRind       = new GoldenRind();
 		public const GLDSEED:SimpleConsumable = mk("GldSeed","GoldenSeed", "a golden seed", curry(m.goldenSeed,0),"This seed looks and smells absolutely delicious.  Though it has an unusual color, the harpies prize these nuts as delicious treats.  Eating one might induce some physical transformations.");
 		public const GOB_ALE:SimpleConsumable = mk("Gob.Ale","Gob.Ale", "a flagon of potent goblin ale", m.goblinAle, "This sealed flagon of 'Goblin Ale' sloshes noisily with alcoholic brew.  Judging by the markings on the flagon, it's a VERY strong drink, and not to be trifled with.");
 		public const HUMMUS_:SimpleConsumable = mk("Hummus ","Hummus", "a blob of cheesy-looking hummus", m.Hummus, "This pile of hummus doesn't look that clean.  It looks bland.  So bland that you feel blander just by looking at it.", 100);

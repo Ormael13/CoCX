@@ -215,26 +215,29 @@
 		else outputText("covered with " + player.skinFurScales(), false);
 		outputText(" and shaped like that of a kangaroo, somewhat rabbit-like except for the extreme length of your odd visage.", false);
 	}
+	//<mod>
 	if (player.faceType == FACE_PIG)
 	{
-		outputText("Your face is like that of a pig, with " + player.skinTone + " skin, complete with a snout that is always wiggling.");
+		outputText("  Your face is like that of a pig, with " + player.skinTone + " skin, complete with a snout that is always wiggling.");
 	}
 	if (player.faceType == FACE_BOAR)
 	{
-		outputText("Your face is like that of a boar, ");
+		outputText("  Your face is like that of a boar, ");
 		if (player.skinType == SKIN_TYPE_FUR) 
 			outputText("with " + player.skinTone + " skin underneath your " + player.furColor + " fur"); 
 		outputText(", complete with tusks and a snout that is always wiggling.");
 	}
 	if (player.faceType == FACE_RHINO)
 	{
-		outputText("Your face is like that of a rhino, with a long muzzle.");
-		if (player.skinType != SKIN_TYPE_PLAIN)
-			outputText("  Oddly, your face is also covered in " + player.skinFurScales() + ".");
+		outputText("  Your face is like that of a rhino");
+		if (player.skinType == SKIN_TYPE_PLAIN)
+			outputText(", with " + player.skin() + ", complete with a long muzzle and a horn on your nose.");
+		else
+			outputText(" with a long muzzle and a horn on your nose.  Oddly, your face is also covered in " + player.skinFurScales() + ".");
 	}
 	if (player.faceType == FACE_ECHIDNA)
 	{
-		outputText("Your odd visage consists of a long, thin echidna snout.");
+		outputText("  Your odd visage consists of a long, thin echidna snout.");
 		if (player.skinType == SKIN_TYPE_PLAIN)
 			outputText("  The " + player.skin() + " that is revealed by your lack of fur looks quite unusual.");
 		else if (player.skinType == SKIN_TYPE_FUR)
@@ -242,6 +245,17 @@
 		else if (player.skinType == SKIN_TYPE_SCALES)
 			outputText("  It's covered in " + player.skinFurScales() + ", making your face even more unusual.");
 	}
+	if (player.faceType == FACE_DEER)
+	{
+		outputText("  Your face is like that of a deer, with a nose at the end of your muzzle.");
+		if (player.skinType == SKIN_TYPE_PLAIN)
+			outputText("  The " + player.skin() + " that is revealed by your lack of fur looks quite unusual.");
+		else if (player.skinType == SKIN_TYPE_FUR)
+			outputText("  It's covered in " + player.skinFurScales() + " that covers your " + player.skinTone + " skin underneath.");
+		else if (player.skinType == SKIN_TYPE_SCALES)
+			outputText("  It's covered in " + player.skinFurScales() + ", making your face looks more unusual.");
+	}
+	//</mod>
 	//M/F stuff!
 	outputText("  It has " + player.faceDesc() + ".", false);
 	//Eyes
@@ -290,6 +304,8 @@
 			outputText("  A pair of open tubular rhino ears protrude from your head.");
 		else if (player.earType == EARS_ECHIDNA)
 			outputText("  A pair of small rounded openings appear on your head that are your ears.");
+		else if (player.earType == EARS_DEER) 
+			outputText("  A pair of deer-like ears rise up from the top of your head.", false);
 		//</mod>
 		if(player.antennae == ANTENNAE_BEE) 
 			outputText("  Floppy antennae also appear on your skull, bouncing and swaying in the breeze.", false);
@@ -330,8 +346,10 @@
 			outputText("  The " + hairDescript() + " on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
 		else if(player.earType == EARS_RHINO) 
 			outputText("  The " + hairDescript() + " on your head is parted by a pair of tubular rhino ears.");
-		else if(player.earType == EARS_RHINO) 
+		else if(player.earType == EARS_ECHIDNA) 
 			outputText("  Your " + hairDescript() + " makes it near-impossible to see the small, rounded openings that are your ears.");
+		else if(player.earType == EARS_DEER) 
+			outputText("  The " + hairDescript() + " on your head parts around a pair of deer-like ears that grow up from your head.", false);
 		//</mod>
 		if(player.antennae == ANTENNAE_BEE) 
 		{
@@ -687,6 +705,7 @@
 		//appearance
 		outputText("  A naked, " + player.skinTone + " mouse tail pokes from your butt, dragging on the ground and twitching occasionally.");
 	}
+	//<mod>
 	else if(player.tailType == TAIL_TYPE_BEHEMOTH) 
 	{
 		outputText("  A long seemingly-tapering tail pokes from your butt, ending in spikes just like behemoth's.");
@@ -707,6 +726,15 @@
 	{
 		outputText("  A ropey rhino tail sprouts from just above your butt, swishing from time to time.");
 	}
+	else if (player.tailType == TAIL_TYPE_ECHIDNA) 
+	{
+		outputText("  A stumpy echidna tail forms just about your [ass].");
+	}
+	else if (player.tailType == TAIL_TYPE_DEER) 
+	{
+		outputText("  A very short, stubby deer tail sprouts from just above your butt.");
+	}
+	//</mod>
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
 		outputText("  Two normal human legs grow down from your waist, ending in normal human feet.", false);
@@ -746,7 +774,7 @@
 		outputText("  Two human-like legs grow down from your " + hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_RACCOON) 
 		outputText("  Your legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
-	else if(player.lowerBody == LOWER_BODY_TYPE_PIG) 
+	else if(player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED) 
 		outputText("  Two digitigrade legs form below your [hips], ending in cloven hooves.");
 	if(player.findPerk(PerkLib.Incorporeality) >= 0)
 		outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature.", false);

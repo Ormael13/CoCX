@@ -514,10 +514,13 @@ package classes.Scenes.Places
 			outputText("\n\n<b><u>Pricings</u></b>");
 			outputText("\n5 gems - Sandwich");
 			outputText("\n3 gems - Soup");
-
+			outputText("\n5 gems - Hard biscuits (Packed)");
+			outputText("\n10 gems - Trail mix (Packed)");
 			menu();
 			addButton(0, "Sandwich", buySandwich);
 			addButton(1, "Soup", buySoup);
+			addButton(2, "Biscuits", buyHardBiscuits);
+			addButton(3, "Trail Mix", buyTrailMix);
 			addButton(14, "Back", menuTavern);
 		}
 		
@@ -551,6 +554,32 @@ package classes.Scenes.Places
 			player.refillHunger(20);
 			cheatTime(1/12);
 			doNext(menuTavern);
+		}
+		
+		private function buyHardBiscuits():void {
+			clearOutput();
+			if(player.gems < 5) {
+				outputText("You can't afford one of those!");
+				doNext(orderFood);
+				return;
+			}
+			outputText("You pay five gems for a pack of hard biscuits.  ");
+			player.gems -= 5;
+			statScreenRefresh();
+			inventory.takeItem(consumables.H_BISCU, orderFood);
+		}
+
+		private function buyTrailMix():void {
+			clearOutput();
+			if (player.gems < 10) {
+				outputText("You can't afford one of those!");
+				doNext(orderFood);
+				return;
+			}
+			outputText("You pay twenty gems for a pack of trail mix.  ");
+			player.gems -= 10;
+			statScreenRefresh();
+			inventory.takeItem(consumables.TRAILMX, orderFood);
 		}
 		
 		public function hearRumors():void { //Hear rumors. Will be altered after defeating Lethice so he will say "Welcome back".
