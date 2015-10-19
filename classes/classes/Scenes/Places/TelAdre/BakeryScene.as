@@ -68,38 +68,44 @@ private function checkBakeryMenu():void {
 		outputText("While you're in line, a shaking centauress glances at you and whispers, \"<i>You need some too, don't ya hun?</i>\"  You look on in confusion, not really sure what she's insinuating.  Her eyes widen and she asks, \"<i>Aren't you addicted?</i>\" You nod, dumbly, and she smiles knowingly.  \"<i>There's a minotaur that works here with a bit of a fetish... just order a special eclair and he'll fix you right up.  Just keep it on the hush hush and hope there's some left after I get my dozen.</i>\"  The centaur licks her lips and prances around impatiently.\n\n", false);
 	}
 	//(display menu)
+	//Generic baked goods
 	outputText("Rich Chocolate Brownies - 3 gems.\n", false);
 	outputText("Fig Cookies - 4 gems.\n", false);
 	outputText("Berry Cupcakes - 3 gems.\n", false);
 	outputText("Doughnuts - 5 gems.\n", false);
 	outputText("Pound Cake - 4 gems.\n", false);
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
-		outputText("Hard Biscuits - 5 gems (packed).\n", false);
-		outputText("Trail Mix - 20 gems (packed).\n", false);
-		addButton(5, "Hard Biscuits", buyHardBiscuits, null, null, null, consumables.H_BISCU.description);
-		addButton(6, "Trail Mix", buyTrailMix, null, null, null, consumables.TRAILMX.description);
-	}
-	if(flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] > 0) {
-		outputText("\'Special\' Eclair - 10 gems.\n", false);
-		addButton(7, "SpecialEclair", nomnomnom, "eclair", 10);
-	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] >= 4) {
-		outputText("Giant Chocolate Cupcake - 500 gems.\n", false);
-		addButton(8, "GiantCupcake", buySlutCake);
-	}
-	outputText("\n");
-	displayIngredients();
-	
-	outputText("\nWhat will you order?", false);
-	
-	menu();
 	addButton(0, "Brownies", nomnomnom, "brownies", 3);
 	addButton(1, "Cookies", nomnomnom, "cookies", 4);
 	addButton(2, "Cupcakes", nomnomnom, "cupcakes", 3);
 	addButton(3, "Doughnuts", nomnomnom, "doughnuts", 5);
 	addButton(4, "Pound Cake", nomnomnom, "pound cake", 4);
-	
-	addButton(9, "Ingredients", ingredientsMenu);
+	//Food for modes that have hunger enabled
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
+		outputText("Hard Biscuits - 5 gems (packed).\n");
+		outputText("Trail Mix - 20 gems (packed).\n");
+		addButton(5, "Hard Biscuits", buyHardBiscuits, null, null, null, consumables.H_BISCU.description);
+		addButton(6, "Trail Mix", buyTrailMix, null, null, null, consumables.TRAILMX.description);
+	}
+	//Hummus available once a week
+	if (model.time.days % 7 == 0) {
+		outputText("Hummus - 100 gems (Weekly special only!).\n");
+		addButton(7, "Hummus", buyHummus, null, null, null, consumables.HUMMUS_.description);
+	}
+	//Special Eclair
+	if(flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] > 0) {
+		outputText("\'Special\' Eclair - 10 gems.\n");
+		addButton(8, "SpecialEclair", nomnomnom, "eclair", 10);
+	}
+	//Giant Cupcake
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] >= 4) {
+		outputText("Giant Chocolate Cupcake - 500 gems.\n", false);
+		addButton(9, "GiantCupcake", buySlutCake);
+	}
+	outputText("\n");
+	displayIngredients();
+	outputText("\nWhat will you order?");
+	//Ingredients and leave
+	addButton(10, "Ingredients", ingredientsMenu);
 	addButton(14, "Leave", bakeryuuuuuu);
 }
 
@@ -459,6 +465,19 @@ private function buyTrailMix():void {
 	player.gems -= 20;
 	statScreenRefresh();
 	inventory.takeItem(consumables.TRAILMX, checkBakeryMenu);
+}
+
+private function buyHummus():void {
+	clearOutput();
+	if (player.gems < 100) {
+		outputText("You can't afford one of those!");
+		doNext(checkBakeryMenu);
+		return;
+	}
+	outputText("You pay twenty gems for a pack of hummus.  ");
+	player.gems -= 100;
+	statScreenRefresh();
+	inventory.takeItem(consumables.HUMMUS_, checkBakeryMenu);
 }
 
 private function easterBakeSale():void {
