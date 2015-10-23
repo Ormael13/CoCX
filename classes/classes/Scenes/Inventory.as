@@ -7,6 +7,7 @@ package classes.Scenes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armor;
+	import classes.Items.ArmorLib;
 	import classes.Items.Useable;
 	import classes.Items.Weapon;
 	import classes.Items.WeaponLib;
@@ -54,8 +55,8 @@ package classes.Scenes
 			hideUpDown();
 			clearOutput();
 			outputText("<b><u>Equipment:</u></b>\n");
-			outputText("<b>Weapon</b>: " + player.weaponName + " (Attack - " + player.weaponAttack + ")\n");
-			outputText("<b>Armor : </b>" + player.armorName + " (Defense - " + player.armorDef + ")\n");
+			outputText("<b>Weapon:</b> " + player.weaponName + " (Attack - " + player.weaponAttack + ")\n");
+			outputText("<b>Armor:</b> " + player.armorName + " (Defense - " + player.armorDef + ")\n");
 			if (player.keyItems.length > 0) outputText("<b><u>\nKey Items:</u></b>\n");
 			for (x = 0; x < player.keyItems.length; x++) outputText(player.keyItems[x].keyName + "\n");
 			menu();
@@ -65,8 +66,8 @@ package classes.Scenes
 					foundItem = true;
 				}
 			}
-			if (player.weapon != WeaponLib.FISTS) {
-				addButton(5, "Unequip", unequipWeapon);
+			if (player.weapon != WeaponLib.FISTS || player.armor != ArmorLib.COMFORTABLE_UNDERCLOTHES) {
+				addButton(5, "Unequip", unequipMenu);
 			}
 			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false) {
 				if (getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
@@ -90,6 +91,9 @@ package classes.Scenes
 			if (!foundItem) {
 				outputText("\nYou have no usable items.");
 				doNext(playerMenu);
+				if (player.weapon != WeaponLib.FISTS || player.armor != ArmorLib.COMFORTABLE_UNDERCLOTHES) {
+					addButton(5, "Unequip", unequipMenu);
+				}
 				return;
 			}
 			if (getGame().inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv1(StatusAffects.Sealed) == 3) {
@@ -356,9 +360,36 @@ package classes.Scenes
 			itemGoNext();
 		}
 		
+		private function unequipMenu():void {
+			clearOutput();
+			outputText("<b><u>Equipment:</u></b>\n");
+			outputText("<b>Weapon:</b> " + player.weaponName + " (Attack - " + player.weaponAttack + ")\n");
+			outputText("<b>Armor:</b> " + player.armorName + " (Defense - " + player.armorDef + ")\n\n");
+			outputText("What would you like to unequip?");
+			menu();
+			if (player.weapon != WeaponLib.FISTS) {
+				addButton(0, "Weapon", unequipWeapon);
+				mainView.bottomButtons[0].toolTipText = player.weapon.description;
+			}
+			if (player.armor != ArmorLib.COMFORTABLE_UNDERCLOTHES) {
+				addButton(1, "Armor", unequipArmor);
+				mainView.bottomButtons[1].toolTipText = player.armor.description;
+			}
+			addButton(4, "Back", inventoryMenu);
+		}
 		private function unequipWeapon():void {
 			clearOutput();
 			takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
+		}
+		private function unequipArmor():void {
+			clearOutput();
+			if (player.armor == armors.GOOARMR) { //Valeria belongs in the camp, not in your inventory!
+				player.armor.removeText();
+				player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES); 
+				doNext(inventoryMenu);
+				return;
+			}
+			takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), inventoryMenu);
 		}
 		
 /* Never called
