@@ -63,6 +63,7 @@ private function minervaAppearance():void {
 }
 
 public function encounterMinerva():void {
+	if (flags[kFLAGS.MET_MINERVA] > 0) flags[kFLAGS.MET_MINERVA]++; //Increment counter by 1 if previously met Minerva.
 	if(flags[kFLAGS.MET_MINERVA] == 0) firstMinervaEncounter();
 	else if(flags[kFLAGS.MET_MINERVA] == 3) minervaThirdPlusEncounter();
 	else if(flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] > 0 && player.gender > 0 && flags[kFLAGS.MINERVA_LOVE] == 0 && rand(2) == 0) minervaAfterFiveTalksRomancing();
@@ -196,7 +197,6 @@ private function leaveMinervasFirstEncounter():void {
 private function repeatEncounterMinerva():void {
 	clearOutput();
 	spriteSelect(95);
-	flags[kFLAGS.MET_MINERVA]++;
 	outputText("You make your way up the mountain, looking for the oasis tower that you know has to be around here somewhere in the thick mist.  With a bit of searching, you locate the right path and head for the oasis, finally reaching it.  Panting from your long trek, you enter the tower through its crumbling doorway, wondering if Minerva will be home.");
 	outputText("\n\nUpon entering the humble home, you assess the state of the oasis.  The usual fruit trees and the clean pond are still here. Upon taking a closer look, you spot Minerva in the spring as she floats out from behind the cover of a tree.  The shark-like harpy is relaxing in the pure waters like she normally does.");
 	outputText("\n\nAs you approach the pond, she catches sight of you and twists in the water, swimming to the shore and wading out to greet you.  Her smooth sharkskin is glossy and dripping wet from her recent swim, the rolling moisture accentuating her well-defined curves.");
@@ -219,8 +219,8 @@ private function repeatEncounterMinerva():void {
 private function minervaThirdPlusEncounter():void {
 	clearOutput();
 	spriteSelect(95);
-	flags[kFLAGS.MET_MINERVA]++;
 	outputText("You make your way back up the mountain, passing the usual harpy nests as you go, looking for the oasis tower that you know has to be around here somewhere in the thick mountain mists.  After a tedious amount of time spent searching, you finally locate the path and start your journey toward the oasis.  The promise of a respite from your climb, along with food and company, compels you to continue until you finally reach the oasis tower.  Thankfully, you don't have to search long before you promptly catch sight of the crumbling tower.  Panting from your long trek, you enter the tower through a rusted, creaky door.");
+	if (flags[kFLAGS.MET_MINERVA] == 4) outputText("\n\n<b>(You have visited the tower enough times to be able to remember where to go. Unlocked Oasis Tower in Places menu!)</b>"); //Unlock Minerva's tower from Places menu.
 	outputText("\n\nSurprisingly, you don't see Minerva anywhere.  The shark-harpy isn't lounging in the water, or doing her usual calming exercises.  After a moment, though, a familiar shadow passes over you, and the siren in question lands nearby, smiling at you, looking blissfully happy to finally have some company.");
 	//No romance:
 	if(!minervaRomanced()) outputText("  \"<i>Welcome back, [name]!  It's good to see you again.  Have you come to give me some company, or would you like to partake in some of the fruit?  Or are you maybe here to sate your thirst?</i>\"");

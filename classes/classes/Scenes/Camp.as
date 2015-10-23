@@ -1294,6 +1294,7 @@ private function placesKnown():Boolean { //Returns true as soon as any known pla
 	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) return true;
 	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) return true;
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) return true;
+	if (flags[kFLAGS.MET_MINERVA] >= 4) return true;
 	return false;
 }
 
@@ -1325,6 +1326,7 @@ private function placesPage2():void {
 	flags[kFLAGS.PLACES_PAGE] = 1;
 	//turn on ruins
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "TownRuins", amilyScene.exploreVillageRuin);
+	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(1, "Oasis Tower", getGame().highMountains.minervaScene.encounterMinerva);
 	addButton(4, "Previous", placesToPage1);
 	addButton(9, "Back", playerMenu);
 }
