@@ -890,9 +890,9 @@ package classes.Scenes.Dungeons
 			menu();
 			addButton(0, "Grow Breasts", chooseBreasts, null, null, null, "Grow a new pair of breasts if flat-chested or grow existing breasts. \n\nAnd receive something else.");
 			addButton(1, "Grow Dick", chooseDick, null, null, null, "Grow a new penis. Somehow, you have a feeling that the new cock you'll receive won't be a normal cock. \n\nAnd receive something else.");
-			addButton(2, "Normal Face", normalFace, null, null, null, "Normalize your face. This will also change your ears back to human ears! \n\nAnd receive something else.");
-			addButton(3, "Normal Chest", normalChest, null, null, null, "Normalize your chest. This will shrink your oversized breasts to a modest size, if you have it. \n\nAnd receive something else.");
-			addButton(4, "Normal Groin", normalGroin, null, null, null, "Normalize your groin, removing any extra cocks and reset remaining cock to normal, if you have any. \n\nAnd receive something else.");
+			addButton(2, "Normal Face", normalFace, null, null, null, "Normalize your face. This will also remove your horns or antennae and change your ears back to human ears! \n\nAnd receive something else.");
+			addButton(3, "Normal Chest", normalChest, null, null, null, "Normalize your chest. This will shrink breasts larger than E-cup to a reasonable size and remove their other unusual traits, if you have it. This will also change your skin to human skin. \n\nAnd receive something else.");
+			addButton(4, "Normal Groin", normalGroin, null, null, null, "Normalize your groin, removing any extra cocks and reset remaining cock to normal, if you have any. Or grow genitalia for genderless. \n\nAnd receive something else.");
 			addButton(5, "Normal Legs", normalLegs, null, null, null, "Turn your legs back to normal. This will also remove your tail, if you have any! \n\nAnd receive something else.");
 			addButton(6, "More Lust", postOmnibusBoon, true, null, null, "Be always ready for sex.\n\nDo you think it is really good idea?");
 			addButton(8, "No (Let go)", letGoOmnibus, null, null, null, "Refuse the offer and let the demon go.");
@@ -1051,21 +1051,17 @@ package classes.Scenes.Dungeons
 				outputText("You now have " + allBreastsDescript() + ".  ", false);
 				temp++;
 			}
-			//Single row
-			else {
-				//Fix nips
-				if(player.nippleLength > 1) {
-					outputText("Your nipples shrink down to a more normal size.  ", false);
-					player.nippleLength = .75;
-					temp++;
-				}
-				if(player.hasFuckableNipples()) {
-					outputText("The vagina-like openings in your nipples close, sealing themselves shut.  ", false);
-					player.breastRows[0].fuckable = false;
-					temp++;
-				}
+			//Fix nips
+			if(player.nippleLength > 1) {
+				outputText("Your nipples shrink down to a more normal size.  ", false);
+				player.nippleLength = .75;
+				temp++;
 			}
-			//Normal chest, normal nips
+			if(player.hasFuckableNipples()) {
+				outputText("The vagina-like openings in your nipples close, sealing themselves shut.  ", false);
+				player.breastRows[0].fuckable = false;
+				temp++;
+			}
 			if(player.skinType != SKIN_TYPE_PLAIN) {
 				outputText("The skin on your body itches intensely as it sheds it's " + player.skinDesc + ", revealing " + player.skinTone + " skin.  ", false);
 				player.skinDesc = "skin";
@@ -1130,6 +1126,37 @@ package classes.Scenes.Dungeons
 					temp++;
 				}		
 			}
+			//Being genderless isn't normal too...
+			if (player.gender == GENDER_NONE) {
+				if (player.balls > 0 || player.femininity < 35 || rand(3) == 0) {
+					player.createCock();
+					player.cocks[0].cockType = CockTypesEnum.DEMON;
+					player.cocks[0].cockLength = 10;
+					player.cocks[0].cockThickness = 2;
+					outputText("A sudden pressure builds in your groin.  You look down in wonder, more than a little turned on by the prospect of growing your own penis.  Your skin ripples and bulges outwards, the sensation turning from pressure to feelings of intense warmth.  The bump distends, turning purple near the tip as it reaches three inches in size.  You touch it and cry out with pleasure, watching it leap forwards another inch in response.  Your tiny dick's crown becomes more and more defined as it grows larger, until you have what looks like a normal six inch dick.  You sigh with happiness and desire at your new addition.  Before you can enjoy it, another wave of heat washes through you, making your new addition respond.  It grows painfully hard as it crests eight inches in length.  ", false);
+					if (player.cor < 80) outputText("In horror you watch the skin turn a shiny-dark purple.  Tiny wriggling nodules begin to erupt from the purplish skin, making your cock look more like a crazed sex-toy than a proper penis.  You pant and nearly cum as it lengthens one last time, peaking at ten inches long.  One last ring of nodules forms around the edge of your demon-dick's crown, pulsating darkly with each beat of your horrified heart.", false);
+					else outputText("Curious, you watch the skin turn a shiny-dark purple.  Tiny wriggling nodules begin to erupt from the purplish skin, making your penis look more like those amazing cocks you saw on demons!  You pant and moan in happiness as it lengthens one last time, peaking at ten inches long.  The excitement of possessing such a magnificent pleasure tool makes you cum.  As one last ring of nodules forms around the edge of your new demon-dick's crown, you notice to your surprise that the liquid you ejaculated is pitch black!  But as your new cock pulsates darkly with each beat of your heart, the only thing you have on your mind is to try it out as soon as possible...", false);
+					if (player.balls == 0) {
+						player.balls = 2;
+						outputText("\n\nIncredible pain scythes through your crotch, doubling you over.  In shock, you barely register the sight before your eyes: <b>You have balls!</b>", false);
+						player.ballSize = 1;    
+					}
+				}
+				else {
+					player.createVagina();
+					outputText("An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + vaginaDescript(0) + "</b>!", false);
+				}
+				temp++;
+				outputText("\n\n", false);
+				player.genderCheck();
+			}
+			//Reduce excessive anal wetness
+			if (player.ass.analWetness >= ANAL_WETNESS_SLIMY) { 
+				outputText("The constant fluids leaking from your " + assDescript() + " slow down, then stop.  ", false);
+				player.ass.analWetness = ANAL_WETNESS_MOIST;
+				temp++;
+			}
+
 			//Nothing changed
 			if(temp == 0) {
 				outputText("You tingle briefly but feel no obvious change.  Your crotch isn't really in need of becoming more human.", false);

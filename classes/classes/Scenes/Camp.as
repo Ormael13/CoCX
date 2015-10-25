@@ -478,7 +478,7 @@ private function doCamp():void { //Only called by playerMenu
 	//Amily and/or Jojo freakout about Vapula!!
 	if(vapulaSlave() && ((player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] <= 0) || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] <= 0))) {
 		//Jojo but not Amily (Must not be bimbo!)
-		if((player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] == 0)
+		if((player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] == 0)
 			vapula.mouseWaifuFreakout(false,true);
 		//Amily but not Jojo
 		else if ((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && !player.findStatusAffect(StatusAffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] == 0) {
