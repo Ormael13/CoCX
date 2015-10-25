@@ -42,10 +42,18 @@ use namespace kGAMECLASS;
 		//Teasing attributes
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
-
+		
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
-
+		//Stats points stored
+		public var statPoints:Number = 0;
+		
+		//Temporary values for distributing attribute points.
+		public var tempStr:Number = 0;
+		public var tempTou:Number = 0;
+		public var tempSpe:Number = 0;
+		public var tempInt:Number = 0;
+		
 		//Number of times explored for new areas
 		public var explored:Number = 0;
 		public var exploredForest:Number = 0;
