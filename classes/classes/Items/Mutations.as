@@ -4352,7 +4352,7 @@
 		}		
 		
 		//Normal hummus
-		public function Hummus(player:Player):void
+		public function regularHummus(player:Player):void
 		{
 			player.slimeFeed();
 			clearOutput();
@@ -4551,6 +4551,26 @@
 				player.tailRecharge = 5;
 				changes++;
 			}
+			//Increase height up to 5 feet.
+			if (rand(2) == 0 && changes < changeLimit && player.tallness < 60) {
+				temp = rand(5) + 3;
+				//Slow rate of growth near ceiling
+				if (player.tallness > 90) temp = Math.floor(temp / 2);
+				//Never 0
+				if (temp == 0) temp = 1;
+				//Flavor texts.  Flavored like 1950's cigarettes. Yum.
+				if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.", false);
+				if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.", false);
+				if (temp == 7) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.", false);
+				player.tallness += temp;
+				changes++;
+			}
+			//Decrease height down to a minimum of 7 feet.
+			if (rand(2) == 0 && changes < changeLimit && player.tallness > 84) {
+				outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n", false);
+				player.tallness -= 1 + rand(3);
+				changes++;
+			}
 			//-----------------------
 			// SEXUAL TRANSFORMATIONS
 			//-----------------------
@@ -4563,8 +4583,9 @@
 			}
 			//Remove additional balls
 			if (player.balls > 2 && rand(3) == 0 && changes < changeLimit) {
-				if (player.ballSize > 5) {
-					player.ballSize -= 1 + rand(3);
+				if (player.ballSize > 2) {
+					if (player.ballSize > 5) player.ballSize -= 1 + rand(3);
+					player.ballSize -= 1;
 					outputText("\n\nYour scrotum slowly shrinks, settling down at a smaller size.  <b>Your " + ballsDescriptLight() + " are smaller now.</b>\n\n", false);
 				}
 				else {

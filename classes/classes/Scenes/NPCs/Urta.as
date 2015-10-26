@@ -3139,7 +3139,7 @@ private function urtaDiscussionTeaseAfterRomance():void {
 		addButton(0, "Her Place", goBackToUrtasForLuvinz, null, null, null, "Go to Urta's apartment for sex.");
 		addButton(1, "Suck Off", blowUrtaUnderTheTableLuv, null, null, null, "Suck Urta's dick until she cums!");
 		addButton(2, "Eat Out", eatUrtaOutNomNomPussy, null, null, null, "Get a taste of Urta's vagina! (And optionally, drink a glass of her cum.)");
-		addButton(3, "Vixen & Cream", vixenAndCreamPart1, true, null, null, "Try something special! \n\nNOTE: This is very long! Don't select this if you have ADHD.");
+		if (player.hasCock() && !player.isTaur()) addButton(3, "Vixen & Cream", vixenAndCreamPart1, true, null, null, "Try something special! \n\nNOTE: This is very long! Don't select this if you have ADHD.");
 		if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) removeButton(1); //Disables button.
 		
 	}

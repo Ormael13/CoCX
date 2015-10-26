@@ -1202,7 +1202,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			outputText("There is a note on your ");
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("bed inside your cabin.");
 			else outputText("bedroll");
-			outputText(". It reads \"<i>Come see me at the lake. I've finished your spider-silk ");
+			outputText(". It reads: \"<i>Come see me at the lake. I've finished your spider-silk ");
 			switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
 				case 1: 
 					outputText("armor");
