@@ -2058,7 +2058,7 @@ package classes.Scenes.Places.Bazaar
 		}
 		
 		public function mysteryMeatTFs():void {
-			outputText("\n\n<b>Mystery meat transformations are not yet implemented.</b>");
+			//outputText("\n\n<b>Mystery meat transformations are not yet implemented.</b>");
 		}
 	}
 
