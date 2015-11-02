@@ -533,7 +533,7 @@ public function useTentacleJojo():void {
 		outputText("Twinned dicks force themselves further into your throat, until you are sure they must be outlined and clearly visible to Jojo on your neck.  The mouse-dicks push further in, working their way down to the bottom of your esophagus before pulling back, dripping cum all the while.  Every now and then you get a feeling of fullness in your belly, and realize one of them must have shot off a load of spunk directly into you.  The brutal mouthfuck shows no sign of slowing down, forcing you to gasp in a breath through your nose every time the tentacles pull back.\n\n", false);
 	}
 	//Cumsplosion
-	outputText("Jojo unleashes a howl of beastial pleasure, and you feel the ", false);
+	outputText("Jojo unleashes a howl of bestial pleasure, and you feel the ", false);
 	if(player.hasVagina()) {
 		outputText("tentacles in your " + assholeOrDP() + " thicken perceptibly.  Bulges of cum work their way down the tentacles, spreading your " + assholeOrDP() + " wide before stuffing you full of mouse cream.  You can feel your bowels and uterus filling, expanding you until you look ", false);
 		if(player.pregnancyIncubation == 0) outputText("mildly pregnant", false);

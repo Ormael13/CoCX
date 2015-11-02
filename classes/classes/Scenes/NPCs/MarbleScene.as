@@ -853,7 +853,7 @@ private function drinkMarbleMilk():void {
 private function playerRefusesMarbleMilk():void {
 	clearOutput();
 	spriteSelect(41);
-	outputText("Taken aback by your refusal, she gives an annoyed hurumph before continuing on her way to the barn.  You shake your head and return to your explorations.", false);
+	outputText("\n\nTaken aback by your refusal, she gives an annoyed hurumph before continuing on her way to the barn. You shake your head and return to your explorations.", false);
 	//- either do another explore event, or end event
 	//(reduce affection by 5)
 	//(reduce addiction by 5)

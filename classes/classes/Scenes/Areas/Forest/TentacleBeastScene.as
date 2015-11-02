@@ -141,7 +141,7 @@ internal function tentacleVictoryRape():void {
 	//Male/Herm
 	if(player.gender == 1 || player.gender == 3) {
 		outputText("Seizing the opportunity, you rush the monster while it is stopped. You grab the fattest hollow tentacle you can find and summarily shit-kick the beast onto the ground. Holding the creature down with one foot, you take the hollow tentacle and poise it in front of your raging erection.\n\n", false); 
-		outputText("\"<i>You want dick milk, you freak?!</i>\", you bellow in triumph. \"<i>HERE YOU GO!</i>\"\n\n", false);
+		outputText("\"<i>You want dick milk, you freak?!</i>\" you bellow in triumph. \"<i>HERE YOU GO!</i>\"\n\n", false);
 		outputText("You impale the tentacle on your penis and begin humping wildly, treating the creature's armature as your own personal onahole. The creature squirms wildly, trying to escape your lust-driven strength. Replying with a swift kick with your free foot, the creature's resolve to escape wavers.\n\n", false); 
 		outputText("\"<i>Quit fuckin' squirming and take your MEDICINE!</i>\" you thunder as you cheap-shot the beast for good measure.\n\n", false);
 		outputText("Feeling your peak approach, you allow your muscles into their rhythmic contractions as you unload your cum into the creature like a howitzer attacking a fort. Laughing like a maniac with each shot, you see your jizz leak out as the creature struggles to assimilate your 'donation'.\n\n", false);
@@ -522,7 +522,7 @@ internal function tentacleLossRape():void {
 		outputText(".  You look down to see the end of a thorny tendril impaled in your pelvic region. Fiery pain courses through your veins as you feel the creature inject you with some sort of liquid. As the pain sears through you, your ", false);
 		if(player.cockTotal() > 1) outputText(multiCockDescriptLight() + " immediately become fully erect and leak pre-cum liberally from their tips.  ", false);
 		else outputText("member immediately becomes fully erect and pre-cum leaks liberally from your tip.  ", false);
-		outputText("  " + num2Text((player.totalNipples())) + " thorny tentacles pierce your nipples, and you feel as if someone shot acid into your tits, which immediately begin to swell.", false);
+		outputText("  " + Num2Text((player.totalNipples())) + " thorny tentacles pierce your nipples, and you feel as if someone shot acid into your tits, which immediately begin to swell.", false);
 		player.growTits(1,player.breastRows.length, false, 2);
 		outputText("\n\nRealizing what is about to happen, you try to struggle. The beast responds by slamming you to the ground a few times, stunning you. In your daze you see a monstrous, hollow tentacle poised over your ", false);
 		if(player.cockTotal() > 1) outputText("furious cocks.  ", false);

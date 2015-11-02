@@ -357,9 +357,9 @@ private function harvestEggs():void
 	clearOutput();
 	sophieSprite();
 	
-	outputText("You ask Sophie if it’s possible for her to produce eggs of a certain colour whilst she’s here.");
+	outputText("You ask Sophie if it’s possible for her to produce eggs of a certain color whilst she’s here.");
 
-	outputText("\n\n“<i>Using the lake magic? Sure,</i>” she says, yawning, and stretching. “<i>Some of my sisters used to come down here so they could get knocked up with eggs they could sell on the side. What colour would you like?</i>”");
+	outputText("\n\n“<i>Using the lake magic? Sure,</i>” she says, yawning, and stretching. “<i>Some of my sisters used to come down here so they could get knocked up with eggs they could sell on the side. What color would you like?</i>”");
 	
 	eggSelector();
 }
@@ -407,9 +407,9 @@ private function postEggSelector(selected:String):void
 	outputText("“<i>I’ll make some nice " + selected.toLowerCase() + "eggs for you then, hun,</i>” she says with a small grin. “<i>I can only produce one a week, though. I’ll put it with everything else you earn out of this hole in the ground. How’s that?</i>”");
 	
 	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 1;
-	if (flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] != selected)
+	if (flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE] != selected)
 	{
-		flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] = selected;
+		flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE] = selected;
 		flags[kFLAGS.FARM_EGG_STORED] = 0;
 		flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
 	}
@@ -1032,7 +1032,7 @@ private function kissSophieRecruitment():void {
 	if(player.cockTotal() > 3) outputText(" while the others press against her");
 	outputText(".  Sophie cries out in pleasure, almost waking up the entire neighbourhood - which would be a bad thing, considering your neighbours.  You quickly take another taste of her lips, shutting her up while you start to pound upwards into her hungry quim.");
 	
-	outputText("\n\nYour ravenous glans presses against the tight confines of your feathery matron, squeezing against her velvet walls with every push of your [hips].  The rose-coloured harpy rests herself against you, gently whispering cries into your ear as you focus all your carnal attention on the bouncing hips in front of you.");
+	outputText("\n\nYour ravenous glans presses against the tight confines of your feathery matron, squeezing against her velvet walls with every push of your [hips].  The rose-colored harpy rests herself against you, gently whispering cries into your ear as you focus all your carnal attention on the bouncing hips in front of you.");
 	outputText("\n\nThe two of you slump back, exhausted over a good night's sex.  Sophie lies in your arms, twirling her finger around your chest.");
 
 	outputText("\n\n\"<i>You've got a cute set up here, sweetheart.  I don't mind moving away from all those harpies, if there was the possibility that I could stay here with you.</i>\"");

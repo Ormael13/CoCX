@@ -340,19 +340,16 @@ private function attributeMenu():void {
 	menu();
 	//Add
 	if (player.statPoints > 0) {
-		if ((player.str + player.tempStr) < player.getMaxStats("str")) addButton(0, "Add STR", addAttribute, "str");
-		if ((player.tou + player.tempTou) < player.getMaxStats("tou")) addButton(1, "Add TOU", addAttribute, "tou");
-		if ((player.spe + player.tempSpe) < player.getMaxStats("spe")) addButton(2, "Add SPE", addAttribute, "spe");
-		if ((player.inte + player.tempInt) < player.getMaxStats("int")) addButton(3, "Add INT", addAttribute, "int");
+		if ((player.str + player.tempStr) < player.getMaxStats("str")) addButton(0, "Add STR", addAttribute, "str", null, null, "Add 1 point to Strength.", "Add Strength");
+		if ((player.tou + player.tempTou) < player.getMaxStats("tou")) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point to Toughness.", "Add Toughness");
+		if ((player.spe + player.tempSpe) < player.getMaxStats("spe")) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point to Speed.", "Add Speed");
+		if ((player.inte + player.tempInt) < player.getMaxStats("int")) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point to Intelligence.", "Add Intelligence");
 	}
 	//Subtract
-	if (player.tempStr > 0) addButton(5, "Sub STR", subtractAttribute, "str");
-	if (player.tempTou > 0) addButton(6, "Sub TOU", subtractAttribute, "tou");
-	if (player.tempSpe > 0) addButton(7, "Sub SPE", subtractAttribute, "spe");
-	if (player.tempInt > 0) addButton(8, "Sub INT", subtractAttribute, "int");
-	
-	//Tooltip Awesomeness!
-	
+	if (player.tempStr > 0) addButton(5, "Sub STR", subtractAttribute, "str", null, null, "Subtract 1 point from Strength.", "Subtract Strength");
+	if (player.tempTou > 0) addButton(6, "Sub TOU", subtractAttribute, "tou", null, null, "Subtract 1 point from Toughness.", "Subtract Toughness");
+	if (player.tempSpe > 0) addButton(7, "Sub SPE", subtractAttribute, "spe", null, null, "Subtract 1 point from Speed.", "Subtract Speed");
+	if (player.tempInt > 0) addButton(8, "Sub INT", subtractAttribute, "int", null, null, "Subtract 1 point from Intelligence.", "Subtract Intelligence");
 	
 	addButton(4, "Reset", resetAttributes);
 	addButton(9, "Done", finishAttributes);

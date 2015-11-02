@@ -295,7 +295,7 @@ public function approachKamiTheChristmasRoo():void {
 //[Player chooses 'Leave']
 public function skipOutAfterOpeningKamisBox():void {
 	clearOutput();
-	outputText("You politely decline Kami's sexual advances, apologising before making a turn for the door. You begin to wonder why you didn't buy anything at the bakery.");
+	outputText("You politely decline Kami's sexual advances, apologizing before making a turn for the door. You begin to wonder why you didn't buy anything at the bakery.");
 	//[Return to Tel Adre, KamiEnc = 1]
 	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
 	doNext(camp.returnToCampUseOneHour);

@@ -75,7 +75,7 @@ public function getClass(obj:Object):Class
 public function loadSaveDisplay(saveFile:Object, slotName:String):String
 {
 	var holding:String = "";
-	if (saveFile.data.exists)
+	if (saveFile.data.exists/* && saveFile.data.flags[2066] == undefined*/)
 	{
 		if (saveFile.data.notes == undefined)
 		{
@@ -122,7 +122,14 @@ public function loadSaveDisplay(saveFile:Object, slotName:String):String
 		holding += "\r";
 		return holding;
 	}
-	return slotName + ":  <b>EMPTY</b>\r     \r";
+	/*else if (saveFile.data.exists && saveFile.data.flags[2066] != undefined) //This check is disabled in CoC Revamp Mod. Otherwise, we would be unable to load mod save files!
+	{
+		return slotName + ":  <b>UNSUPPORTED</b>\rThis is a save file that has been created in a modified version of CoC.\r";
+	}*/
+	else
+	{
+		return slotName + ":  <b>EMPTY</b>\r     \r";
+	}
 }
 
 CONFIG::AIR
@@ -234,7 +241,7 @@ public function loadScreen():void
 	{
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
 		outputText(loadSaveDisplay(test, String(i + 1)), false);
-		if (test.data.exists)
+		if (test.data.exists/* && test.data.flags[2066] == undefined*/)
 		{
 			//trace("Creating function with indice = ", i);
 			(function(i:int):void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
@@ -253,7 +260,9 @@ public function loadScreen():void
 			})(i);
 		}
 		else
+		{
 			slots[i] = null;		// You have to set the parameter to 0 to disable the button
+		}
 	}
 	menu();
 	var s:int = 0

@@ -2905,7 +2905,7 @@
 			if (currCock == 3) {
 				//For samecocks
 				if (same) {
-					descript += randomChoice("three ", "group of ", "menage a trois of ", "triad of ", "triumvirate of ");
+					descript += randomChoice("three ", "group of ", "<i>ménage à trois</i> of ", "triad of ", "triumvirate of ");
 					descript += creature.cockAdjective();
 					if (normalCocks == 3) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
 					if (horseCocks == 3) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
@@ -3032,7 +3032,7 @@
 			if (currCock == 3) {
 				//For samecocks
 				if (same) {
-					descript += randomChoice("three ", "a group of ", "a menage a trois of ", "a triad of ", "a triumvirate of ");
+					descript += randomChoice("three ", "a group of ", "a <i>ménage à trois</i> of ", "a triad of ", "a triumvirate of ");
 					descript += cockAdjectives(averageLength, averageThickness, creature.cocks[currCock - 1].cockType, creature);
 					if (normalCocks == 3)
 						descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";

@@ -964,7 +964,7 @@ private function itsGood():void {
 	clearOutput();
 	spriteSelect(72);
 	outputText("You give Kiha a little wink and tell her's it great.  She breaks out into a big, dopey grin as you explain your delight at the fine, wood-smoked texture and delightful juiciness of the flash-cooked meat.  Kiha takes your compliments to heart, declaring, \"<i>O-of course it's good; just the fact that </i>I<i> cooked it ought to make it obvious!</i>\"");
-	outputText("[pg]You share a laugh with the pretty dragoness as she grabs a strip of meat and woofs it down.  Now uninhibited, the two of you dig into the meal, quickly devouring Kiha's \"<i>home cooking.</i>\"  By the time you're done, you're both a greasy mess thanks to your lack of utensils, your fingers and her claws slathered with meat juices and fat.  Each of you teases the other about your states of appearance.");
+	outputText("[pg]You share a laugh with the pretty dragoness as she grabs a strip of meat and wolfs it down.  Now uninhibited, the two of you dig into the meal, quickly devouring Kiha's \"<i>home cooking.</i>\"  By the time you're done, you're both a greasy mess thanks to your lack of utensils, your fingers and her claws slathered with meat juices and fat.  Each of you teases the other about your states of appearance.");
 	player.refillHunger(60);
 	outputText("[pg]You stand, trying to clean a bit of grease off your fingers, when suddenly you're pushed violently onto Kiha's grass nest.  Straddling you, the dragoness grins and begins pulling off your [armorName].  \"<i>Don't think I'm just going to let you walk on out of here without thanking me for the meal,</i>\" she growls lustily, her hot flesh pressing against you.");
 	//(Display normal sex options)
@@ -1184,7 +1184,7 @@ private function boneTheShitOutofKihaHolesWithHorsecock():void {
 	outputText("... a tight cock-sleeve already marked with your seed, just waiting to be mounted and impregnated with your young. You zero in on her cunt - her breeding hole - and step forward, ");
 	if(player.cocks[x].cockType.Index > 0) {
 		if(player.isTaur()) outputText("throwing your hooves onto the rock, looming over Kiha");
-		else outputText("fondling your beastial tool with one hand");
+		else outputText("fondling your bestial tool with one hand");
 	}
 	else {
 		outputText("[if (isTaur = true) \"throwing your hooves onto the rock, looming over Kiha\" else \"fondling your " + cockDescript(x) + " with one hand\"]");

@@ -37,7 +37,7 @@
 		public function circlejerk():void { //Not available if Kath has no cock
 			clearOutput();
 			outputText("There’s no reason to not have some fun with the two of them... plus you don’t think you’d be able resist the allure of joining two of your favourite girls in their bonding.  Stripping off your " + player.armorName + " you step behind the two girls and embrace Urta into a hug, hands wandering her body to loosen the straps of her armor.\n\n");
-			outputText("Urta seems to jump at your touch.  “<i>" + player.short + "?  What are you doing, you naughty [boy]?</i>”  She giggles.  Kath looks at you and smirks, “<i>Couldn’t resist getting into this, huh, " + player.short + "?  Well, why not?  After all, we’re technically a menage à trois, aren’t we?</i>”\n\n");
+			outputText("Urta seems to jump at your touch.  “<i>" + player.short + "?  What are you doing, you naughty [boy]?</i>”  She giggles.  Kath looks at you and smirks, “<i>Couldn’t resist getting into this, huh, " + player.short + "?  Well, why not?  After all, we’re technically a </i>ménage à trois</i>, aren’t we?</i>”\n\n");
 			outputText("You give both girls a winning smile and tell them that you’ll be joining in on their fun shortly, but first you have to take care of a problem... Urta here is a bit overdressed... and come to think of it, so is Kath.\n\n");
 			outputText("Smirking, the cat begins to remove her shirt, pulling it off and casting it aside.  “<i>How big of a mess are we going to make with just a circlejerk?</i>”\n\n");
 			outputText("“<i>Kitty, you got no idea who you’re talking about, do you?</i>” Urta says, letting the cat’s dick go to help you remove her clothes and armor as well.\n\n");

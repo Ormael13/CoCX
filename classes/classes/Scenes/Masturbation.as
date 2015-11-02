@@ -2063,15 +2063,12 @@ package classes.Scenes {
 		private function onaholeContinuation():void {
 			flags[kFLAGS.TIMES_MASTURBATED]++;
 			if (player.cocks.length > 1) {
-				if (player.gender == 3 && rand(2) == 0) {
-					doNext(onaholeMulticockContinuation);
-					return;
-				}
-				doNext(onaholeFutaContinuation);
+				if (player.gender == 3 && rand(2) == 0)
+					doNext(onaholeFutaContinuation);
+				else doNext(onaholeMulticockContinuation);
 			}
-			else if (player.gender == 3) {
+			else if (player.gender == 3)
 				doNext(onaholeFutaContinuation);
-			}
 			else {
 				player.orgasm();
 				doNext(camp.returnToCampUseOneHour);
@@ -3452,17 +3449,17 @@ package classes.Scenes {
 			var cockSocks:int = player.countCockSocks("gilded");
 			var gems:int = 10 + rand(20);
 			
-			if (player.cumQ() >= 10000 * cockSocks)
-				gems += player.cumQ() / 1350;
-			else if (player.cumQ() >= 5000 * cockSocks)
-				gems += player.cumQ() / 450;
-			else if (player.cumQ() >= 2500 * cockSocks)
-				gems += player.cumQ() / 150;
-			else if (player.cumQ() >= 1000 * cockSocks)
-				gems += player.cumQ() / 50;
-			else
+			if (player.cumQ() < 1000 * cockSocks)
 				gems += player.cumQ() / 10;
-				
+			else if (player.cumQ() < 2500 * cockSocks)
+				gems += player.cumQ() / 50;
+			else if (player.cumQ() < 5000 * cockSocks)
+				gems += player.cumQ() / 150;
+			else if (player.cumQ() < 10000 * cockSocks)
+				gems += player.cumQ() / 450;
+			else
+				gems += player.cumQ() / 1350;
+			
 			if (gems > 200 * cockSocks)
 				gems = 200 * cockSocks + rand(20);
 			
@@ -3492,13 +3489,13 @@ package classes.Scenes {
 				if (gemsCreated > 0) {
 					outputText(". You pop the toy from your rod and let your reflexes hump the sky.");
 					
-					outputText("\n\nPanting and humping hard, you watch the jet of cum shimmers through the air. Caught in the light of the golden cocksock, it beads and twists into small crystals.  In a glittering shower, ");
+					outputText("\n\nPanting and humping hard, you watch the jet of cum shimmers through the air. Caught in the light of the golden cocksock, it beads and twists into small crystals.  In a glittering shower, a ");
 					if (player.cumQ() < 25)
-						outputText("a sprinkle of");
+						outputText("sprinkle");
 					else if (player.cumQ() < 250)
-						outputText("a rain of");
-					else outputText("a torrent of");
-					outputText(" gems falls down upon your body instead of cum, bouncing off your " + player.skinFurScales() + ".\n\n<b>You force yourself to pick up the " + gemsCreated + " gems before passing out.</b>");
+						outputText("rain");
+					else outputText("torrent");
+					outputText(" of gems falls down upon your body instead of cum, bouncing off your " + player.skinFurScales() + ".\n\n<b>You force yourself to pick up the " + gemsCreated + " gems before passing out.</b>");
 				}
 				else {
 					outputText("as multiple streams of semen erupt from your dong, creating an impressive mess about you. Soaked in your own fluids, you take a moment to clean yourself up before replacing the toy in your bag and going to sleep, happy to be relieved of your urges.");
