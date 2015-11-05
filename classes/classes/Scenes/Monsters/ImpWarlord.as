@@ -8,7 +8,7 @@ package classes.Scenes.Monsters
 	public class ImpWarlord extends Imp
 	{
 		public function clawAttack():void {
-			outputText("The imp warlord suddenly charges at you with his claws ready! ");
+			outputText("The imp warlord charges at you with his claws ready! ");
 			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 				outputText("You manage to avoid his claws thanks to your reaction!");
 				combatRoundOver();
@@ -25,7 +25,7 @@ package classes.Scenes.Monsters
 		}
 
 		public function doubleAttack():void {
-			outputText("The imp warlord suddenly charges at you with his claws ready and sword raised! ");
+			outputText("The imp warlord charges at you with his claws ready and sword raised! ");
 			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
 				outputText("You manage to dodge his deadly attack!");
 				combatRoundOver();

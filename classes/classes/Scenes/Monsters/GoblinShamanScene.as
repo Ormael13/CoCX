@@ -180,7 +180,7 @@ package classes.Scenes.Monsters
 //[WIN RAEPZ]
 		public function goblinShamanRapeIntro():void
 		{
-			spriteSelect(24);
+			spriteSelect(124);
 			clearOutput();
 			outputText("The shaman falls to her feet, smashing her titties against the ground. She looks up at you and sniffles.");
 			//If cant rape or breastfeed
@@ -261,7 +261,7 @@ package classes.Scenes.Monsters
 		}
 		private function gobboButtSecks():void
 		{
-			spriteSelect(24);
+			spriteSelect(124);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			clearOutput();
@@ -288,7 +288,7 @@ package classes.Scenes.Monsters
 //[FEMSAUCE]
 		private function gobboGetsRapedFem():void
 		{
-			spriteSelect(24);
+			spriteSelect(124);
 			clearOutput();
 			if (player.isTaur()) {
 				outputText(images.showImage("goblin-win-female-taur-rapedfem"));
@@ -399,7 +399,7 @@ package classes.Scenes.Monsters
 		{
 			var x:Number = player.biggestCockIndex();
 			clearOutput();
-			spriteSelect(24);
+			spriteSelect(124);
 			outputText(images.showImage("goblin-win-male-corruptedfuck"));
 			outputText("You begin to remove your " + player.armorName + ", looking down on your helpless would-be-attacker and soon-to-be victim while licking your lips hungrily. Your " + multiCockDescriptLight(), false);
 			if (player.cockTotal() == 1) outputText(" is", false);
@@ -479,7 +479,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-corruptedbj"));
 			var x:Number = player.biggestCockIndex();
-			spriteSelect(24);
+			spriteSelect(124);
 			outputText("You whip out your stiffening maleness, revealing its ", false);
 			if (player.cockArea(x) < 80) outputText("nearly ", false);
 			outputText(" absurd size to your victim.  The goblin-girl's eyes grow to the size of dinner plates in shock as she takes in the view.   Knowing you'll try regardless of the size-mismatch, she spreads her legs and settles herself more comfortably on the ground.\n\n", false);
@@ -513,7 +513,7 @@ package classes.Scenes.Monsters
 //[DUDEGASM]
 		private function gobboGetsRapedMaleFits():void
 		{
-			spriteSelect(24);
+			spriteSelect(124);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.biggestCockIndex();
 			clearOutput();
@@ -594,7 +594,7 @@ package classes.Scenes.Monsters
 //Spider goblin condom
 		private function goblinCondomed(mode:Number = 0):void
 		{
-			spriteSelect(24);
+			spriteSelect(124);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-goblincondomed"));

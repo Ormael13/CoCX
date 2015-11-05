@@ -88,7 +88,6 @@ package classes.Scenes
 					if (impGob <= 3) impGob += 2;
 					else if (impGob < 7) impGob = 7;
 				}
-				if (debug) impGob -= 5;
 			}
 			//Imptacular Encounter
 			if (rand(10) < impGob) {
@@ -110,13 +109,13 @@ package classes.Scenes
 				//Imp Warlord
 				else if (impChooser >= 70 && impChooser < 90) {
 					kGAMECLASS.impScene.impWarlordEncounter();
-					spriteSelect(29);
+					spriteSelect(125);
 					return;
 				}
 				//Imp Overlord (Rare!)
 				else if (impChooser >= 90) {
 					kGAMECLASS.impScene.impOverlordEncounter();
-					spriteSelect(29);
+					spriteSelect(126);
 					return;
 				}
 				else {
@@ -150,13 +149,13 @@ package classes.Scenes
 				//Goblin warrior! (Equal chance with Goblin Shaman)
 				else if (goblinChooser >= 50 && goblinChooser < 65) {
 					kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
-					spriteSelect(24); //Will eventually have new sprite.
+					spriteSelect(123);
 					return;
 				}
 				//Goblin shaman!
 				else if (goblinChooser >= 65 && goblinChooser < 80) {
 					kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
-					spriteSelect(24); //Will eventually have new sprite.
+					spriteSelect(124);
 					return;
 				}
 				//Goblin elder!

@@ -548,6 +548,10 @@
 			return model.time.hours > 8 && model.time.hours < 18 && player.hasKeyItem("Silver Kitty-Bell") >= 0;
 		}
 		
+		public function katherineSprite():void {
+			spriteSelect(125); //Currently returns this sprite.
+		}
+		
 //If player has Silver Bell key item and is at Wet Bitch when Scylla is not busy with her Addicts Anonymous group
 public function catMorphIntr():void {
 	outputText("\n\nThe cum-drinking nun Scylla is here, apparently resting up between one of her missions.  Recalling the last 'mission' you went on, your hand unthinkingly touches the silver bell you received from that strange herm cat-morph.  Scylla could probably help you find her again.");
@@ -598,6 +602,7 @@ public function katherineGreeting():void {
 //Seeing Katherine
 public function visitKatherine():void {
 	clearOutput();
+	katherineSprite();
 	outputText(images.showImage("katherine-visit-alley"));
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] == 1) {
 		if (telAdre.katherineEmployment.initiateTraining()) return;
