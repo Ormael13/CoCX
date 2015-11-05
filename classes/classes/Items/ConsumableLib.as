@@ -37,7 +37,7 @@ package classes.Items
 		public const ORANGDY:HairDye = new HairDye("OrangDy", "Orange");
 		public const PINKDYE:HairDye = new HairDye("PinkDye", "Pink");
 		public const PURPDYE:HairDye = new HairDye("PurpDye", "Purple");
-		public const RAINDYE:HairDye = new HairDye("RainDye", "Rainbow", 1000);
+		public const RAINDYE:HairDye = new HairDye("RainDye", "Rainbow", 100);
 		public const RED_DYE:HairDye = new HairDye("Red Dye", "Red");
 		public const WHITEDY:HairDye = new HairDye("WhiteDy", "White");
 		

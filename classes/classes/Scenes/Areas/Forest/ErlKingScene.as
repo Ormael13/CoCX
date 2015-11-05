@@ -960,8 +960,9 @@ package classes.Scenes.Areas.Forest
 		}
 		
 		private function goldenRindBonus():void {
-			outputText("“<i>Oh, I also had this left over from brewing my Pucker,</i>” she says, popping out of the brush behind you.  You yelp in surprise.  She’d vanished into the forest in front of you a moment ago.  How did she move so quickly?  “<i>Here you go!</i>” she pipes up, depositing a small item in your hand before disappearing back into the woods.  If she can move that quickly and quietly through the woods, it’s pretty likely that her falling prey to the forest predators has been entirely voluntary.");
-			outputText("\n\nThis shimmering, citrus peel is shaped like a corkscrew and smells sweet and sour at the same time.  Do you eat it?");
+			clearOutput();
+			outputText("“<i>Oh, I also had this left over from brewing my Pucker,</i>” she says, popping out of the brush behind you.  You yelp in surprise.  She’d vanished into the forest in front of you a moment ago.  How did she move so quickly?  “<i>Here you go!</i>” she pipes up, depositing a small item in your hand before disappearing back into the woods.  If she can move that quickly and quietly through the woods, it’s pretty likely that her falling prey to the forest predators has been entirely voluntary.\n\n");
+			inventory.takeItem(consumables.GLDRIND, camp.returnToCampUseOneHour);
 		}
 		
 		public function deerTFs():void {
