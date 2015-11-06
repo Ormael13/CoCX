@@ -76,6 +76,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function theFinalEnding():void {
 			flags[kFLAGS.LETHICE_DEFEATED] = 1;
+			if (flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] == 0) flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] = 1; //Temporary measure to prevent dungeon from becoming unclearable if you have Basilisk immunity.
 			clearOutput();
 			outputText("\"<i>No! It cannot be!</i>\" Lethice screams. You walk over to her defeated form and yank the staff away from her. ");
 			cleanupAfterCombat();
@@ -132,7 +133,6 @@ package classes.Scenes.Dungeons.D3
 			if (flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] == 0) outputText("The incubus sighs and says, \"<i>So you've defeated Lethice? Very well, I'll offer you a safe passage out of this place. Get in there.</i>\"");
 			outputText("\n\nYou get into the lift and hold onto the railing before the platform lowers. While the platform does rock from side to side along the slow trip down, its motions are not erratic enough to put you in any significant danger. Even better, you aren't bothered by a single harpy along the way. This section of the high mountains seems to have been cleansed of them.");
 			outputText("\n\nThe platform touches down roughly thirty minutes after your departure, and you head back to camp with all due haste.");
-			
 			doNext(theFinalEndingPart4);
 		}
 
