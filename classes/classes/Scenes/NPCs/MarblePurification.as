@@ -1581,7 +1581,7 @@ package classes.Scenes.NPCs {
 	//displayed in the camp description if Clara was imprisoned in camp.
 	public function claraCampAddition():void
 	{
-		outputText("  Nearby the portal sits a large wooden cage for keeping Marble's sister Clara prisoner.  It is tall enough for her to stand in and long enough for her to lie down completely.  ");
+		outputText("Nearby the portal sits a large wooden cage for keeping Marble's sister Clara prisoner.  It is tall enough for her to stand in and long enough for her to lie down completely.  ");
 		//if (Clara was purified)
 		if(flags[kFLAGS.CLARA_PURIFIED] > 0)
 		{
@@ -1612,6 +1612,7 @@ package classes.Scenes.NPCs {
 				}
 			}
 		}
+		outputText("  ");
 	}
 }
 }

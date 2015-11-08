@@ -429,8 +429,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4_mod_1.3_rc3";
-			version = ver + " (<b>Release Candidate</b>)";
+			ver = "0.9.4_mod_1.3";
+			version = ver + " (<b>The Black Cock Update</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

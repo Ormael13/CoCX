@@ -937,7 +937,7 @@ internal function takeUrtaInTheButtPublically():void {
 	urtaSprite();
 	clearOutput();
 	var tooBig:Boolean = false;
-	if(player.cor < 30 && flags[kFLAGS.PC_FETISH] == 0 && flags[kFLAGS.MEANINGLESS_CORRUPTION] == 0) {
+	if(player.cor < (30 - player.corruptionTolerance()) && flags[kFLAGS.PC_FETISH] == 0) {
 		outputText("No way!  You're not going to do that in front of EVERYONE.", false);
 		doNext(telAdre.barTelAdre);
 		return;

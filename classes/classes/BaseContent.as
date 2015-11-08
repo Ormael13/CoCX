@@ -338,7 +338,7 @@
 		{
 			kGAMECLASS.addLockedButton(pos, toolTipText);
 		}
-		
+
 /* Replaced by Utils.formatStringArray, which does almost the same thing in one function
 		protected function clearList():void{
 			kGAMECLASS.clearList();

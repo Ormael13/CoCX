@@ -799,6 +799,14 @@ public function getButtonText(index:int):String {
 	}
 }
 
+/*public function setButtonToolTip(button:int, header:String = "", text:String = ""):void {
+	if (header == "") {
+		header = mainView.bottomButtons[button].labelText;
+	}
+	mainView.bottomButtons[button].toolTipHeader = header;
+	mainView.bottomButtons[button].toolTipText = text;
+}*/
+
 public function getButtonToolTipHeader(buttonText:String):String
 {
 	var toolTipHeader:String;
