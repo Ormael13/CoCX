@@ -963,10 +963,10 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS))) + " human herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) == 1 ? "" : "s"));
 			}
 			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) > 0) {
-				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS))) + " human herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) == 1 ? "" : "s"));
+				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS))) + " cow girl" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) == 1 ? "" : "s"));
 			}
 			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) > 0) {
-				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS))) + " human herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) == 1 ? "" : "s"));
+				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS))) + " cow herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) == 1 ? "" : "s"));
 			}
 			outputText("  Isabella has set up a small part of her \"corner\" in the camp as a nursery. She has sawn a " + (Math.ceil(isabellaScene.totalIsabellaChildren() / 2) == 1 ? "barrel" : "number of barrels") + " in half and lined " + (Math.ceil(isabellaScene.totalIsabellaChildren() / 2) == 1 ? "it" : "them") + " with blankets and pillows to serve as rocking cribs. "); 
 			outputText("You have " + formatStringArray(babiesList) + " with her, all living here; unlike native Marethians, they will need years and years of care before they can go out into the world on their own.");
@@ -2413,78 +2413,60 @@ public function getCampPopulation():int {
 
 private function fixFlags():void {
 	//Marae
-	if (player.findStatusAffect(StatusAffects.MetMarae) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.MetMarae) >= 0) {
 		flags[kFLAGS.MET_MARAE] = 1
 		player.removeStatusAffect(StatusAffects.MetMarae);		
 	}
-	if (player.findStatusAffect(StatusAffects.MaraesQuestStart) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.MaraesQuestStart) >= 0) {
 		flags[kFLAGS.MARAE_QUEST_START] = 1
 		player.removeStatusAffect(StatusAffects.MaraesQuestStart);
 	}
-	if (player.findStatusAffect(StatusAffects.MaraeComplete) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.MaraeComplete) >= 0) {
 		flags[kFLAGS.MARAE_QUEST_COMPLETE] = 1
 		player.removeStatusAffect(StatusAffects.MaraeComplete);		
 	}
-	if (player.findStatusAffect(StatusAffects.MaraesLethicite) >= 0)
-	{
-		flags[kFLAGS.MARAE_LETHICITE] = 3
+	if (player.findStatusAffect(StatusAffects.MaraesLethicite) >= 0) {
+		player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
 		player.removeStatusAffect(StatusAffects.MaraesLethicite);
 	}
 	//Factory Demons
-	if (player.findStatusAffect(StatusAffects.FactorySuccubusDefeated) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.FactorySuccubusDefeated) >= 0) {
 		flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] = 1;
 		player.removeStatusAffect(StatusAffects.FactorySuccubusDefeated);
 	}
-	if (player.findStatusAffect(StatusAffects.FactoryIncubusDefeated) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.FactoryIncubusDefeated) >= 0) {
 		flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
 		player.removeStatusAffect(StatusAffects.FactoryIncubusDefeated);
 	}
-	if (player.findStatusAffect(StatusAffects.FactoryOmnibusDefeated) >= 0) 
-	{
+	if (player.findStatusAffect(StatusAffects.FactoryOmnibusDefeated) >= 0) {
 		flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
 		player.removeStatusAffect(StatusAffects.FactoryOmnibusDefeated);
 	}
 	//Factory Variables
-	if (player.findStatusAffect(StatusAffects.FoundFactory) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.FoundFactory) >= 0) {
 		flags[kFLAGS.FACTORY_FOUND] = 1;
 		player.removeStatusAffect(StatusAffects.FoundFactory);
 	}
-	if (player.findStatusAffect(StatusAffects.IncubusBribed) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.IncubusBribed) >= 0) {
 		flags[kFLAGS.FACTORY_INCUBUS_BRIBED] = 1;
 		player.removeStatusAffect(StatusAffects.IncubusBribed);
 	}
-	if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
 		flags[kFLAGS.FACTORY_SHUTDOWN] = 1;
 		player.removeStatusAffect(StatusAffects.DungeonShutDown);
 	}
-	if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) {
 		flags[kFLAGS.FACTORY_SHUTDOWN] = 2;
 		player.removeStatusAffect(StatusAffects.FactoryOverload);
 	}
-	if (player.findStatusAffect(StatusAffects.TakenLactaid) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.TakenLactaid) >= 0) {
 		flags[kFLAGS.FACTORY_TAKEN_LACTAID] = 5 - (player.statusAffectv1(StatusAffects.TakenLactaid))
 		player.removeStatusAffect(StatusAffects.TakenLactaid);
 	}
-	if (player.findStatusAffect(StatusAffects.TakenGroPlus) >= 0)
-	{
+	if (player.findStatusAffect(StatusAffects.TakenGroPlus) >= 0) {
 		flags[kFLAGS.FACTORY_TAKEN_GROPLUS] = 5 - (player.statusAffectv1(StatusAffects.TakenGroPlus))
 		player.removeStatusAffect(StatusAffects.TakenGroPlus);
 	}
-	/*if (flags[kFLAGS.USE_12_HOURS] > 0)
-	{
-		player.hunger = flags[kFLAGS.USE_12_HOURS];
-		flags[kFLAGS.USE_12_HOURS] = 0;
-	}*/
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
 }
 private function promptSaveUpdate():void {
@@ -2575,6 +2557,14 @@ private function promptSaveUpdate():void {
 		outputText("Starting in version 1.3 of the mod, fur colour is now separate from hair colour. So as a one-time offer, you can now choose fur colour!");
 		furColorSelection1();
 		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 9) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 10;
+		if (flags[kFLAGS.MARAE_LETHICITE] > 0 && player.hasKeyItem("Marae's Lethicite") >= 0) {
+			player.removeKeyItem("Marae's Lethicite"); //Remove the old.
+			player.createKeyItem("Marae's Lethicite", flags[kFLAGS.MARAE_LETHICITE], 0, 0, 0);
+			flags[kFLAGS.MARAE_LETHICITE] = 0; //Reclaim the flag.
+		}
 	}
 }
 

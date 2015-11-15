@@ -39,12 +39,13 @@ public function scyllaBarSelectAction():void {
 	if (model.time.totalTime == scyllaLastActionSelectionTime) return; //Only choose action once per visit to the bar
 	scyllaLastActionSelectionTime = model.time.totalTime;
 	scyllaAction = SCYLLA_NOT_PRESENT;
-	if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && (!player.hasCock() || player.longestCockLength() < 12) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0)
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) return; //Factory still running? NoScylla4U
+	if ((!player.hasCock() || player.longestCockLength() < 12) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0)
 	{
 		scyllaAction = SCYLLA_ACTION_FIRST_TALK;
 		return;
 	}
-	if (player.cocks.length > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
+	if (player.cocks.length > 0) {
 		if (player.longestCockLength() >= 12) {
 			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0) {
 				scyllaAction = SCYLLA_ACTION_FIRST_TALK;

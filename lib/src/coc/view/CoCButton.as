@@ -13,6 +13,7 @@
 
 	import flash.display.MovieClip;
 	import flash.text.TextField;
+	import flash.text.TextFormat;
 
 	import flash.events.MouseEvent;
 
@@ -83,9 +84,14 @@
 			if(! this._labelField) return;
 
 			this.addChild(this._labelField);
-
+			
+			//Workaround for formatting
+			var fmt:TextFormat = this._labelField.getTextFormat();
+			fmt.bold = true;
+			this._labelField.defaultTextFormat = fmt;
+			
 			this._labelField.mouseEnabled = false;
-
+			
 			this._labelField.x = 0;
 			this._labelField.y = LABEL_FIELD_Y_OFFSET;
 			this._labelField.width = this.width;

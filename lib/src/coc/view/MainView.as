@@ -18,6 +18,7 @@ package coc.view {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.Font;
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
@@ -204,7 +205,8 @@ package coc.view {
 				buttonBackground9];
 
 			backgroundChildIndex = this.getChildIndex(background);
-			var originalTextFormat:TextFormat = this.toolTipView.hd.getTextFormat();
+			//var originalTextFormat:TextFormat = this.toolTipView.hd.getTextFormat();
+			var buttonFont:Font = new ButtonLabelFont();
 			for (bi = 0; bi < BOTTOM_BUTTON_COUNT; ++bi) {
 				b = new (bgClasses[bi % 10])();
 				b.name = 'b' + String((bi + 1) % 10) + 'BG';
@@ -224,7 +226,9 @@ package coc.view {
 				labelText.height = b.height - 4;
 				labelText.embedFonts = true;
 				//Create format.
-				var labelFormat:TextFormat = originalTextFormat;
+				var labelFormat:TextFormat = new TextFormat();
+				labelFormat.font = buttonFont.fontName;
+				labelFormat.bold = true;
 				labelFormat.align = TextFormatAlign.CENTER;
 				labelFormat.size = 18;
 				//Assign text format.

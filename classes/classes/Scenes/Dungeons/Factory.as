@@ -295,7 +295,7 @@ package classes.Scenes.Dungeons
 					outputText("The slutty succubus stands up, her puffy vulva coated in a shining pink fluid.  Did that just come out of you?  She grunts, her eyes glowing for a moment as the pink goop disappears into her skin, vanishing entirely.\n\n", false);
 					outputText("\"<i>Ahhhhh,</i>\" she sighs, \"<i>nothing like fresh Lethicite.  Mmmm, yours was potent!</i>\"\n\n", false);
 					outputText("You stand up, dissatisfied at the sudden lack of sensation you're forced to endure.  The gloating demoness looks rather pleased with herself, and brimming with newfound power.  You resolve to ", false);
-					if(flags[kFLAGS.MARAE_LETHICITE] <= 0) outputText("gather some yourself at the next opportunity...", false);
+					if(player.hasKeyItem("Marae's Lethicite") < 0) outputText("gather some yourself at the next opportunity...", false);
 					else outputText("devour Marae's as soon as you get a chance.", false);
 					outputText("You greedily gather up the lethicite splattered on your body and devour it, turning it into raw demonic power.  You really do need to get more of this... but first you know a certain demoness you intend to wrap around your ", false);
 					if(player.demonCocks() > 0) outputText("growing", false);
@@ -320,7 +320,7 @@ package classes.Scenes.Dungeons
 					outputText("The slutty succubus stands up, her puffy vulva coated in a shining pink fluid.  Did that just come out of you?  She grunts, her eyes glowing for a moment as the pink goop disappears into her skin, vanishing entirely.\n\n", false);
 					outputText("\"<i>Ahhhhh,</i>\" she sighs, \"<i>nothing like fresh Lethicite.  Mmmm your's was potent!</i>\"\n\n", false);
 					outputText("You stand up, dissatisfied at the sudden lack of sensation you're forced to endure.  The gloating demoness looks rather pleased with herself, and brimming with newfound power.  You resolve to ", false);
-					if(player.findStatusAffect(StatusAffects.MaraesLethicite) < 0) outputText("gather some yourself at the next opportunity...", false);
+					if (player.hasKeyItem("Marae's Lethicite") < 0) outputText("gather some yourself at the next opportunity...", false);
 					else outputText("devour Marae's as soon as you get a chance.", false);
 					outputText("  But first you know a certain demoness you intend to wrap around your ", false);
 					if(player.demonCocks() > 0) outputText("growing", false);
@@ -366,7 +366,7 @@ package classes.Scenes.Dungeons
 				outputText("The slutty succubus stands up, her puffy vulva coated in a shining pink fluid.  Did that just come out of you?  She grunts, her eyes glowing for a moment as the pink goop disappears into her skin, vanishing entirely.\n\n", false);
 				outputText("\"<i>Ahhhhh,</i>\" she sighs, \"<i>nothing like fresh Lethicite.  Mmmm, your's was soooo potent!</i>\"\n\n", false);
 				outputText("You stand up, dissatisfied at the sudden lack of sensation you're forced to endure.  The gloating demoness looks rather pleased with herself, and brimming with her new-found power.  You resolve to ", false);
-				if(player.findStatusAffect(StatusAffects.MaraesLethicite) < 0) outputText("gather some yourself at the next opportunity...", false);
+				if (player.hasKeyItem("Marae's Lethicite") < 0) outputText("gather some yourself at the next opportunity...", false);
 				else outputText("devour Marae's as soon as you get a chance.", false);
 				outputText("  But first you know a certain demoness you intend to wrap around your ", false);
 				if(player.demonCocks() > 0) outputText("growing", false);

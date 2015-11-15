@@ -69,7 +69,6 @@ package classes
 		public static const HorseWarning:StatusAffectType = mk("horse warning");
 		public static const ImmolationSpell:StatusAffectType = mk("Immolation Spell");
 		public static const ImpGangBang:StatusAffectType = mk("Imp GangBang");
-		public static const IncubusBribed:StatusAffectType = mk("IncubusBribed");
 		public static const Infested:StatusAffectType = mk("infested");
 		public static const IzmaBlowing:StatusAffectType = mk("IzmaBlowing");
 		public static const IzumisPipeSmoke:StatusAffectType = mk("Izumis Pipe Smoke");
@@ -151,6 +150,7 @@ package classes
 		public static const FactoryOmnibusDefeated:StatusAffectType = mk("FactoryOmnibusDefeated");
 		public static const FactoryOverload:StatusAffectType = mk("FactoryOverload");
 		public static const FactoryIncubusDefeated:StatusAffectType = mk("FactoryIncubusDefeated");
+		public static const IncubusBribed:StatusAffectType = mk("IncubusBribed");
 		public static const FactorySuccubusDefeated:StatusAffectType = mk("FactorySuccubusDefeated");		
 		public static const MaraeComplete:StatusAffectType = mk("Marae Complete");
 		public static const MaraesLethicite:StatusAffectType = mk("Marae's Lethicite");

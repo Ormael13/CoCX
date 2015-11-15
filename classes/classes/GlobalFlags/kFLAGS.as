@@ -2024,7 +2024,7 @@ public static const MET_MARAE:int                                               
 public static const MET_MARAE_CORRUPTED:int                                         = 2016;
 public static const MARAE_QUEST_START:int                                           = 2017;
 public static const MARAE_QUEST_COMPLETE:int                                        = 2018;
-public static const MARAE_LETHICITE:int                                             = 2019;
+public static const MARAE_LETHICITE:int                                             = 2019; //Not used anymore, may be reclaimed for later use.
 public static const FACTORY_FOUND:int                                               = 2020;
 public static const FACTORY_SUCCUBUS_DEFEATED:int                                   = 2021;
 public static const FACTORY_INCUBUS_DEFEATED:int                                    = 2022;

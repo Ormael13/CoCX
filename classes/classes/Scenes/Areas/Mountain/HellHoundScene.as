@@ -192,14 +192,15 @@ package classes.Scenes.Areas.Mountain
 			//Give a single piece of Lethicite, get hellfire
 			outputText("You produce the pink crystal and hand it to the master.  As the crystal touches his hand, he gives a low growl of pleasure and holds the crystal up to his eyes.  \"<i>Ah yes, excellent!  Thank you so much for this tasty treat of power.</i>\"\n\n", false);
 			//if (PC gave 2/3 Merae's crystal)
-			if (flags[kFLAGS.MARAE_LETHICITE] == 2) {
+			if (player.keyItemv1("Marae's Lethicite") == 2) {
 				outputText("He looks at the crystal for a moment, before biting off half of it and giving the other half back to you.  \"<i>This is enough for the hellfire, I think.  Go ahead and keep the rest, my favorite fan!</i>\"\n\n", false);
 				//Replace 2/3 Merae's Lethicite with regular lethicite.
-				flags[kFLAGS.MARAE_LETHICITE]--;
+				player.addKeyValue("Marae's Lethicite", 1, -1);
 			}
 			else {
 				//Remove 1 lethicite crystal from the PC
 				flags[kFLAGS.MARAE_LETHICITE]--;
+				player.addKeyValue("Marae's Lethicite", 1, -1);
 			}
 			outputText("He rolls the crystal around in his mouth for a few moments before swallowing the crystal.  In a moment, white flames rise up around his body, and he gives you a wicked grin.  \"<i>Now, let me give you the gift promised for this tribute.</i>\"\n\n", false);
 
@@ -294,6 +295,8 @@ package classes.Scenes.Areas.Mountain
 			outputText("You feel inclined to agree at the wonderful feeling of your new body, and the incredible amount of power you feel rushing through you.  You move one of your hands so that you can play with both your dicks and your cunts, relishing in the feeling of them and the flames that lie within.  You gasp for a moment, and open your mouth as a rush of heat rises up from your chest and a burst of flame emerges from your mouth.\n\n", false);
 
 			outputText("A powerful demon steps out in front of you, and picks up the crystal.  You can feel a strong connection with him, and you know this is your master.  \"<i>Well now, I think you need a new name now in commemoration of being the first three headed hellhound, and for being the one who will give me the world.</i>\"  He unceremoniously puts the crystal in his mouth and swallows it.  \"<i>Your new name is Cerberus, and you're my greatest pet.</i>\"  He steps closer and looks into your center head's eyes for a moment.  \"<i>That's much better than being a champion ever was, isn't it?</i>\"  You can't help but eagerly nod in agreement.", false);
+			player.orgasm();
+			dynStats("lib", 50, "cor", 100);
 			getGame().gameOver();
 
 		}

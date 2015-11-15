@@ -24,8 +24,7 @@ package classes.Scenes.Dungeons.D3
 		// IF you approach him, then we can track that (either you fight, or you talk and give him an item)
 		private function metIncubusMechanicInD1():Boolean
 		{
-			if (player.findStatusAffect(StatusAffects.FactoryIncubusDefeated) >= 0) return true;
-			if (player.findStatusAffect(StatusAffects.IncubusBribed) >= 0) return true;
+			if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] > 0 || flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) return true;
 			return false;
 		}
 		
@@ -46,7 +45,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nA");
 				if (metIncubusMechanicInD1()) outputText(" familiar,");
 				outputText(" demonic mechanic lounges against a gleaming, metallic control panel");
-				if (player.findStatusAffect(StatusAffects.IncubusBribed) >= 0) outputText(", a rolled-up hentai magazine tucked neatly into the chest-pocket of his overalls");
+				if (flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) outputText(", a rolled-up hentai magazine tucked neatly into the chest-pocket of his overalls");
 				if (metIncubusMechanicInD1()) outputText(". This is the same incubus you met back in the factory! He still sports his familiar, stained coveralls, and the crotch is as torn as ever, revealing a cock that looks like an odd hybrid of a tentacle, a bumpy demon-dong, and a stinger-ringed anemone cock. While you watch, it idly divides into two... four... eight narrow, writhing tendrils before merging back together into a three-inch-thick monster-cock.");
 				else outputText(". He sports a pair of stained coveralls, with the crotch torn open, revealing a cock that looks like an odd hybrid of tentacle, a bumpy demon-dong, and a stinger-ringed anemone cock. While you watch, it idly divides into two... four... eight narrow, writhing tendriles before merging back together into a three-inch-thick monster-cock.")
 				outputText(" It stiffens under your ocular attentions, and a timeless voice with the smoothness of silk, yet an undercurrent of rumbling gravel calls, \"<i>Eyes up here, Champion.</i>\"");
@@ -471,7 +470,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(" twat to silence him.");
 
 			outputText("\n\n\"<i>Are all demons controlled this easily?</i>\" you muse out loud. \"<i>A few squeezes from a cunt and you're content to let me do whatever I want to you. I could probably slap a collar around your neck and take you back to camp without hearing a word of complaint. Perhaps 'please fuck me,' but I doubt I'd hear any legitimate desire to come back here.</i>\" You lift yourself up an inch and glide back down, teasing him. \"<i>Poor boy, they keep you so pent up, don't they?");
-			if (player.findStatusAffect(StatusAffects.IncubusBribed) >= 0) outputText(" Nothing but hentai mags for you to drain your balls with....");
+			if (flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) outputText(" Nothing but hentai mags for you to drain your balls with....");
 			outputText("</i>\"");
 
 			outputText("\n\nThe incubus sighs and nods. \"<i>It isn't easy to get off when the bitches make you fix their machinery all day long. Are a few hours with a succubus every day too much to ask for?</i>\" You feel his cock twitch inside you at the word succubus, and you give his poor boner another squeeze from your cunt for being so honest.");

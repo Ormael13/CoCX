@@ -1754,7 +1754,7 @@ public function displayStats(e:MouseEvent = null):void
 
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0)
 	{
-		bodyStats += "<b>Hunger:</b> " + Math.floor(player.hunger) + " / 100 (";
+		bodyStats += "<b>Satiety:</b> " + Math.floor(player.hunger) + " / 100 (";
 		if (player.hunger <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
 		if (player.hunger > 0 && player.hunger < 10) bodyStats += "<font color=\"#C00000\">Starving</font>";
 		if (player.hunger >= 10 && player.hunger < 25) bodyStats += "<font color=\"#800000\">Very hungry</font>";
