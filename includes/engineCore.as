@@ -327,11 +327,19 @@ private function attributeMenu():void {
 	if (player.tempSpe > 0) addButton(7, "Sub SPE", subtractAttribute, "spe");
 	if (player.tempInt > 0) addButton(8, "Sub INT", subtractAttribute, "int");
 	
-	//Tooltip Awesomeness!
-	
-	
 	addButton(4, "Reset", resetAttributes);
 	addButton(9, "Done", finishAttributes);
+	
+	//Tooltip Awesomeness!
+	mainView.bottomButtons[0].toolTipText = "Add 1 point to Strength.";
+	mainView.bottomButtons[1].toolTipText = "Add 1 point to Toughness.";
+	mainView.bottomButtons[2].toolTipText = "Add 1 point to Speed.";
+	mainView.bottomButtons[3].toolTipText = "Add 1 point to Intelligence.";
+	mainView.bottomButtons[4].toolTipText = "Reset all stats points being currently allocated.";
+	mainView.bottomButtons[5].toolTipText = "Subtract 1 point from Strength.";
+	mainView.bottomButtons[6].toolTipText = "Subtract 1 point from Toughness.";
+	mainView.bottomButtons[7].toolTipText = "Subtract 1 point from Speed.";
+	mainView.bottomButtons[8].toolTipText = "Subtract 1 point from Intelligence.";
 }
 
 private function addAttribute(attribute:String):void {
