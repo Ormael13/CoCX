@@ -2,11 +2,7 @@
 //const PUMPKIN_FUCK_YEAR_DONE:int = 522;
 
 public function isHalloween():Boolean {
-	if (flags[kFLAGS.ITS_EVERY_DAY] <= 0)
-	{
-		return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10));
-	}
-	else return true;
+	return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
 }
 
 

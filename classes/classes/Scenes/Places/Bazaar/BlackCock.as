@@ -598,7 +598,7 @@ package classes.Scenes.Places.Bazaar
 		private function smokeSomeHookah():void {
 			clearOutput();
 			if (player.gems < 5) {
-				outputText("You realize you are short on gems. Andy gives you a bit of disappointed look and escort you back to the tent.");
+				outputText("You realize you are short on gems. Andy gives you a bit of disappointed look and escorts you back to the tent.");
 				doNext(enterTheBlackCock);
 				return;
 			}
@@ -674,7 +674,7 @@ package classes.Scenes.Places.Bazaar
 				if (player.dogCocks() > 0) {
 					outputText("\n\nYou take a thumb and use it to massage his knot; at the exact same moment he does the same to you and the two of you lock eyes. The teasing sensation intensifies but you both don't look away... this is a battle of wills. The painful pleasure of the teasing rises like a flock of angry birds from your [cock] into your head. The incredible sensation of your mutual knot play is almost unbearable. Yet still you look at him, your face and his both showing each other how incredible the sensations are. Soon enough you find yourself the victor as the horny satyr flinches and uses both his hands to pull your hand from his knot. You smile big as he looks over at you and says, \"<i>Alright [name] you win.</i>\" with a look of good humored fun on his face. You grab his dick and he grabs yours again, ready to get down to business.");
 				}
-				outputText("\n\nYou pump his dick with a tight fisted grip as he massages yours. The alien hand on your member doesn't jerk your [cock] the way you do. It's an odd sensation as he gives a firm squeeze every time his hand travels up your shaft towards your [cockHead]. He gasps beside you and you know he's enjoying your hand on his staff, jerking in the familiar way you pump your own [cock]. He scoots closer until his furred leg rests against your {leg/coil}. You have to reach around his trim waist and grab his dick, pumping it and feeling pre-cum drip down your fist as it rises and falls.");
+				outputText("\n\nYou pump his dick with a tight fisted grip as he massages yours. The alien hand on your member doesn't jerk your [cock] the way you do. It's an odd sensation as he gives a firm squeeze every time his hand travels up your shaft towards your [cockHead]. He gasps beside you and you know he's enjoying your hand on his staff, jerking in the familiar way you pump your own [cock]. He scoots closer until his furred leg rests against your [legs]. You have to reach around his trim waist and grab his dick, pumping it and feeling pre-cum drip down your fist as it rises and falls.");
 				outputText("\n\nSoon the both of you are breathing ragged breaths and trembling slightly.");
 				outputText("\n\n\"<i>Let me… just…</i>\" Andy Mathis says as he widens his legs, tightly fisting your [cock] in his odd massaging way of jerking off. It almost feels as if he is milking your dick. You find your hand wrapped around his waist and your head pressed against his as you hump into his hand, the familiar sensation of your impending ejaculation rising until the both of you shoot white hot goo into the air, an arcing X formed by the first few spurts of baby batter as you hold onto his spasming cock and you both gasp and groan.</i>\"");
 			}

@@ -23,11 +23,7 @@ Note on progression:
 //const TURKEY_FUCK_YEAR_DONE:int = 566;
 
 public function isThanksgiving():Boolean {
-	if (flags[kFLAGS.ITS_EVERY_DAY] <= 0)
-	{
-		return ((date.date >= 21 && date.month == 10) && (date.date < 30 && date.month == 10));
-	}
-	else return true;
+	return ((date.date >= 21 && date.month == 10) && (date.date < 30 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
 }
    
 //Introduction: -McGirt

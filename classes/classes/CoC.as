@@ -139,7 +139,6 @@ the text from being too boring.
 		include "../../includes/engineCore.as";
 
 		// Lots of constants
-		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
 		//Any classes that need to be made aware when the game is saved or loaded can add themselves to this array using saveAwareAdd.
@@ -429,7 +428,7 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4_mod_1.3.1";
+			ver = "0.9.4_mod_1.3.2";
 			version = ver + " (<b>Bug Fixing</b>)";
 
 			//Indicates if building for mobile?

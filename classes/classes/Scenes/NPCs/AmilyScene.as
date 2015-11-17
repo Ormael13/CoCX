@@ -2935,7 +2935,7 @@ package classes.Scenes.NPCs
 			menu();
 			if (player.hasCock()) {
 				if (player.cockThatFits(61) >= 0) addButton(0, "Fuck", takeChargeAmilyFuck, null, null, null, "Penetrate Amily vaginally.");
-				if (player.cockThatFits(50) >= 0) addButton(1, "Buttfuck", pureAmilyPutsItInYourRectumDamnNearKilledEm, null, null, null, "Take Amily from behind."); //ButtFuckButtFUCKBUTTFUCK
+				if (player.cockThatFits(50) >= 0) addButton(1, "Buttfuck", fuckPureAmilysHeiny, null, null, null, "Take Amily from behind."); //ButtFuckButtFUCKBUTTFUCK
 				addButton(2, "Get Sucked", takeChargeAmilyGetSucked, null, null, null, "Have Amily suck you off.");
 			}
 			if (player.hasVagina()) {
