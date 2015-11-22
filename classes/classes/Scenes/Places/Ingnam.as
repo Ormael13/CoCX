@@ -85,27 +85,29 @@ package classes.Scenes.Places
 			clearOutput();
 			hideMenus();
 			outputText("Your time has come to meet up with the village elders. You know you are going to get sent to the demon realm and you're most likely not going to be able to return to Ingnam. You give your family and friends a long farewell.");
-			if (player.weaponName != "fists") {
-				hasWeapon = true;
-				player.setWeapon(WeaponLib.FISTS);
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) { //Doesn't happen in New Game+.
+				if (player.weaponName != "fists") {
+					hasWeapon = true;
+					player.setWeapon(WeaponLib.FISTS);
+				}
+				while (player.hasItem(weapons.DAGGER, 1)) {
+					hasWeapon = true;
+					player.destroyItems(weapons.DAGGER, 1);
+				}
+				while (player.hasItem(weapons.PIPE, 1)) {
+					hasWeapon = true;
+					player.destroyItems(weapons.PIPE, 1);
+				}
+				while (player.hasItem(weapons.SPEAR, 1)) {
+					hasWeapon = true;
+					player.destroyItems(weapons.SPEAR, 1);
+				}
+				while (player.hasItem(weapons.KATANA, 1)) {
+					hasWeapon = true;
+					player.destroyItems(weapons.KATANA, 1);
+				}
+				if (hasWeapon) outputText("\n\n<b>Unfortunately, you were instructed to leave your weapon behind.</b>");
 			}
-			while (player.hasItem(weapons.DAGGER, 1)) {
-				hasWeapon = true;
-				player.destroyItems(weapons.DAGGER, 1);
-			}
-			while (player.hasItem(weapons.PIPE, 1)) {
-				hasWeapon = true;
-				player.destroyItems(weapons.PIPE, 1);
-			}
-			while (player.hasItem(weapons.SPEAR, 1)) {
-				hasWeapon = true;
-				player.destroyItems(weapons.SPEAR, 1);
-			}
-			while (player.hasItem(weapons.KATANA, 1)) {
-				hasWeapon = true;
-				player.destroyItems(weapons.KATANA, 1);
-			}
-			if (hasWeapon) outputText("\n\n<b>Unfortunately, you were instructed to leave your weapon behind.</b>");
 			flags[kFLAGS.IN_INGNAM] = 0;
 			flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] = 1;
 			doNext(kGAMECLASS.charCreation.arrival);

@@ -2644,11 +2644,11 @@ package classes.Scenes.NPCs
 		}
 
 		private function amilyMenu(output:Boolean = true):void {
+			menu();
 			//Innocent
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				//outputText("Options:\nAppearance\nTalk\nMake Love\n", false);
 				//MOAR OPTIONS: Give Present\nAlchemy\nTeach Blowpipe
-				menu();
 				addButton(0, "Appearance", amilyAppearance);
 				addButton(1, "Talk", talkToAmilyCamp);
 				addButton(2, "Make Love", fuckTheMouseBitch);
@@ -2676,7 +2676,7 @@ package classes.Scenes.NPCs
 				addButton(2, "Sex", fuckTheMouseBitch);
 				addButton(3, "Give Item", giveAmilyAPresent);
 				addButton(4, (flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? "Defur" : "Refuzz"), (flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? amilyDefurryOfferAtCamp: refuzzAmily));
-				addButton(14, "Leave", camp.campLoversMenu);
+				addButton(14, "Leave", camp.campSlavesMenu);
 				if (!pregnancy.isPregnant && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
 				{
 					addButton(5, "Farm Work", sendCorruptCuntToFarm, null, null, null, "Send Amily to the farm for work.");
@@ -2711,7 +2711,7 @@ package classes.Scenes.NPCs
 				}
 				if (player.hasVagina()) {
 					addButton(2, "Get Licked", corruptAmilyLickPussiesLikeAPro, null, null, null, "Have Amily lick your pussy.");
-					if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) addButton(3, "GetPen'ed", null, null, null, corruptAmilyCampBonesPCWithHerCock, "Have Amily fuck you vaginally.", "Get Penetrated");
+					if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) addButton(3, "GetPen'ed", corruptAmilyCampBonesPCWithHerCock, null, null, null, "Have Amily put her cock to good use by penetrating you vaginally.", "Get Penetrated");
 					addButton(4, "Scissor", corruptAmilyScissorsLikeAPro, null, null, null, "Do some girly fun-times with Amily.");
 				}
 				addButton(14, "Nevermind", amilyFollowerEncounter);

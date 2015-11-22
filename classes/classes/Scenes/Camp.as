@@ -2330,6 +2330,7 @@ private function ascendForReal():void {
 	performancePoints += Math.sqrt(childPerformance);
 	//Sum up ascension perk points!
 	player.ascensionPerkPoints += performancePoints;
+	player.knockUpForce(); //Clear pregnancy
 	//Scene GO!
 	clearOutput();
 	outputText("It's time for you to ascend. You walk to the center of the camp, announce that you're going to ascend to a higher plane of existence, and lay down. ");

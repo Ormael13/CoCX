@@ -236,7 +236,7 @@ package classes.Scenes
 			flags[kFLAGS.CODEX_CURRENT_PAGE] = PAGE_FACTIONS_1;
 			menu();
 			addCodexButton("Fetish Cult", "FetishCult", codexEntryFetish, kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
-			addCodexButton("Sand Witches", "SandWitches", codexEntryFetish, kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
+			addCodexButton("Sand Witches", "SandWitches", codexEntrySandWitches, kFLAGS.CODEX_ENTRY_SANDWITCHES);
 			
 			addButton(14, "Back", accessCodexMenu);
 		}
