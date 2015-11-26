@@ -816,13 +816,11 @@ package classes.Scenes.Areas.Forest
 
 			//Suck My Dick  /  Fuck Her Ass  /  Eat My Pussy  /  Milk Her Dick  /  Gifts
 			menu();
-			if (player.hasCock())
-			{
+			if (player.hasCock()) {
 				addButton(0, "Suck Me", gwynnSucksDicks);
 				addButton(1, "Assfuck", gwynnGetsButtfuxed);
 			}
-			if (player.hasVagina())
-			{
+			if (player.hasVagina()) {
 				addButton(2, "Eat Me", gwynnNomsDaCunts);
 			}
 			addButton(3, "Milk Dick", gwynnGetsDickmilked);

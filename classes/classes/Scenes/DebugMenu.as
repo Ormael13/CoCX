@@ -682,13 +682,14 @@ package classes.Scenes
 			outputText("This is the Flag Editor.  You can edit flags from here.  For flags reference, look at kFLAGS.as class file.  Please input any number from 0 to 2999.");
 			outputText("\n\n<b>WARNING: This might screw up your save file so backup your saves before using this!</b>");
 			mainView.nameBox.visible = true;
-			mainView.nameBox.x = mainView.mainText.x + 5;
-			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+			mainView.nameBox.width = 165;
 			mainView.nameBox.text = "";
 			mainView.nameBox.maxChars = 4;
 			mainView.nameBox.restrict = "0-9";
 			addButton(0, "OK", editFlag);
 			addButton(4, "Done", accessDebugMenu);
+			mainView.nameBox.x = mainView.mainText.x + 5;
+			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		}
 		
 		private function editFlag():void {

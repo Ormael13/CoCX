@@ -18,7 +18,26 @@ package classes.Items.Consumables
 			super(id, shortName, longName, value, description);
 		}
 		
+		override public function canUse():Boolean {
+			return true;
+		}
+		
 		override public function useItem():Boolean {
+			if (game.player.skinType == 1) { //Furry? You get to dye your hair or fur!
+				clearOutput();
+				game.menu();
+				game.addButton(0, "Hair", dyeHair);
+				game.addButton(1, "Fur", dyeFur);
+				game.addButton(4, "Nevermind", dyeCancel);
+			}
+			else { //No fur? Dye hair as usual.
+				dyeHair();
+			}
+			return true;
+		}
+		
+		private function dyeHair():void {
+			clearOutput();
 			if (game.player.hairLength == 0) {
 				outputText("You rub the dye into your bald head, but it has no effect.");
 			}
@@ -35,9 +54,25 @@ package classes.Items.Consumables
 				}
 			}
 			game.inventory.itemGoNext();
-			return true;	
 		}
 		
+		private function dyeFur():void {
+			clearOutput();
+			outputText("You rub the dye into your fur, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+			game.player.furColor = _color;
+			outputText("You now have " + game.player.furColor + " fur.");
+			if (game.player.lust > 50) {
+				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
+				game.dynStats("lus", -15);
+			}
+			game.inventory.itemGoNext();
+		}
+		
+		private function dyeCancel():void {
+			clearOutput();
+			outputText("You put the dye away.\n\n");
+			game.inventory.returnItemToInventory(this);
+		}
 	}
 
 }

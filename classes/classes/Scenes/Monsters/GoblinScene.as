@@ -646,7 +646,7 @@ package classes.Scenes.Monsters
 				outputText("loose strand you left in your secret cock-shawl. Pulling carefully, you unravel the delicate outer layer, leaving only the sticky strands covering the inner, juice-filled sheath. With a short bark of laughter, you pull out of the whorish girl, the spider silk condom sealing as your tip slides out. ");
 			}
 			else {
-				outputText("rim of your latex cock-sheath. Pulling carefully, you slowly remove your used condom and tie the open end. You look at it and you can see your cum inside the condom. ");
+				outputText("rim of your latex cock-sheath. Pulling carefully, you slowly remove your used condom and tie the open end shut. You look at it and you can see your cum inside the condom. ");
 			}
 			outputText("Then, wresting her feet apart, you unceremoniously dump her to the ground.\n\n", false);
 

@@ -1638,6 +1638,8 @@ public function displayStats(e:MouseEvent = null):void
 
 	if (flags[kFLAGS.BENOIT_EGGS] > 0)
 		childStats += "<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n";
+	if (flags[kFLAGS.FEMOIT_EGGS_LAID] > 0)
+		childStats += "<b>Benoite Eggs Produced:</b> " + flags[kFLAGS.FEMOIT_EGGS_LAID] + "\n";
 		
 	if (flags[kFLAGS.COTTON_KID_COUNT] > 0)
 		childStats += "<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n";
@@ -2214,6 +2216,7 @@ public function dynStats(... args):void
 			var argsi:String = (args[i] as String);
 			if (argsi == "lust") argsi = "lus";
 			if (argsi == "sens") argsi = "sen";
+			if (argsi == "inte") argsi = "int";
 			if (argsi.length <= 4) // Short
 			{
 				argIndex = argNamesShort.indexOf(argsi.slice(0, 3));

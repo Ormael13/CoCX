@@ -36,13 +36,13 @@ package classes.Scenes.Places.Bazaar
 				}
 				if (player.statusAffectv3(StatusAffects.AndysSmoke) < 15) { //Maximum intelligence boost is 15.
 					player.addStatusValue(StatusAffects.AndysSmoke, 3, 5);
-					dynStats("inte", 5);
+					dynStats("int", 5);
 				}
 				player.changeStatusValue(StatusAffects.AndysSmoke, 1, 8);
 			}
 			else {
-				dynStats("spe", -5, "inte", 5);
 				player.createStatusAffect(StatusAffects.AndysSmoke, 8, -5, 5, 0);
+				dynStats("spe", -5, "int", 5);
 			}
 			
 		}
@@ -704,11 +704,10 @@ package classes.Scenes.Places.Bazaar
 					outputText("\n\nThen he adds a fourth finger, his spit soaked digits widening and massaging their way into your body. You're trembling again and Andy looks up, asking for your permission again. You give the littler satyr the go ahead with another nod and he curls his thumb and dips his whole hand into your [asshole], stretching it and pushing you over the edge. Cringing and screaming you cum. Your spasming anal sleeve is the only signal Andy needs and as you lay there twitching he grabs the pipe and takes a deep drag, his big cock wet with his own release; he must have been jerking his cock while he fingered you. As the smoke blows you see the unmistakable shape of your own form tossing and turning through the air.");
 				}
 				else { //Gaping
-					outputText("\n\nAndy takes one look at your [asshole] and speaks up, \"<i>Is it ok if I try something?</i>\" He asks. Curious you ask him what it is and when he tells you it's a surprise you shrug and give him the go ahead. He hands you the pipe and tells you to take a deep drag. As you do he spits on his hand a few times before he begins working his spit shined fingers into your [asshole]. Soon there is a tightly clenched fist inside you, stretching.");
+					outputText("\n\nAndy takes one look at your [asshole] and speaks up, \"<i>Is it ok if I try something?</i>\" He asks. Curious you ask him what it is and when he tells you it's a surprise you shrug and give him the go ahead. He hands you the pipe and tells you to take a deep drag. As you do he spits on his hand a few times before he begins working his spit shined fingers into your [asshole]. Soon there is a tightly clenched fist inside you, stretching. Cringing and screaming you cum. Your spasming anal sleeve is the only signal Andy needs and as you lay there twitching he grabs the pipe and takes a deep drag, his big cock wet with his own release; he must have been jerking his cock while he fingered you. As the smoke blows you see the unmistakable shape of your own form tossing and turning through the air.");
 				}
-				outputText("\n\nAndy helps you to your feet, and gives you a quick embrace, \"<i>Gotta get back to work.</i>\" He says before grabbing his shirt and leaving you to redress.");
 			}
-			outputText("\n\nAs his hands slides down your stomach you flex [eachCock] in anticipation. He reaches down and wraps a tight grip around your [cock]. You look over and he catches your eye. The two of you are suddenly laughing as he maintains a firm grip on your [cock]. Once the joke is over he hands you the pipe and tells you to take a deep hit. As you do his soft fingers begin moving around your erect length, squeezing and teasing your [cock]. As the smoke blows out of your mouth he grabs the pot, taking a hit himself.");
+			outputText("\n\nAndy helps you to your feet, and gives you a quick embrace, \"<i>Gotta get back to work.</i>\" He says before grabbing his shirt and leaving you to redress.");
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
