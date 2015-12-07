@@ -14,24 +14,25 @@ package classes.Scenes
 		private var lastMenu:Function = null;
 		
 		public var setArrays:Boolean = false;
-		//public var consumableXML:XMLList = describeType(classes.Items.ConsumableLib).descendants("constant");
+
+		//Set up equipment arrays
+		public var weaponArray:Array = [];
+		public var shieldArray:Array = [];
+		public var armourArray:Array = [];
+		public var undergarmentArray:Array = [];
+		public var accessoryArray:Array = [];
+		
+		//Set up item arrays
+		public var transformativeArray:Array = [];
+		public var consumableArray:Array = [];
+		public var dyeArray:Array = [];
+		public var materialArray:Array = [];
+		public var rareArray:Array = [];
+		
 		
 		public function DebugMenu() 
 		{	
 		}
-		
-		/*public function buildArray():void {
-			if (setArrays) return;
-			trace("Setting arrays");
-			for each(var obj:Object in consumableXML) {
-				trace(getQualifiedClassName(consumables[obj.@name]));
-				if (!(getQualifiedClassName(obj) is Number || getQualifiedClassName(obj) is int || getQualifiedClassName(obj) is Array)) {
-					trace("Added " + obj.@name + "!");
-					kGAMECLASS.consumables.consumableItems.push(consumables[obj.@name]);
-				}
-			}
-			setArrays = true;
-		}*/
 		
 		public function accessDebugMenu():void {
 			//buildArray();
@@ -63,537 +64,375 @@ package classes.Scenes
 		
 		//Spawn items menu
 		private function itemSpawnMenu():void {
-			outputText("What item would you like to spawn?", true);
+			setItemArrays();
+			clearOutput();
+			outputText("Select a category.");
 			menu();
-			addButton(0, "Transformatives", itemSpawnTransformativesMenuI)
-			//addButton(0, "Transformatives", itemSpawnConsumableMenu)
-			addButton(1, "Consumables", itemSpawnConsumablesMenuI)
-			addButton(2, "Dyes", itemSpawnDyesMenuI)
-			addButton(3, "Materials", itemSpawnMaterialsMenu)
-			addButton(4, "Rare Items", itemSpawnRaresMenu)
-			addButton(5, "Weapons", itemSpawnWeaponsMenuI)
-			addButton(6, "Armours", itemSpawnArmoursMenuI)
-			addButton(7, "Accessories", itemSpawnAccessoriesMenuI)
-			addButton(8, "Shields", itemSpawnShieldsMenu);
-			addButton(9, "Undergarments", itemSpawnUndergarmentsMenu);
+			addButton(0, "Transformatives", displayItemPage, transformativeArray, 1);
+			addButton(1, "Consumables", displayItemPage, consumableArray, 1);
+			addButton(2, "Dyes", displayItemPage, dyeArray, 1);
+			addButton(3, "Materials", displayItemPage, materialArray, 1);
+			addButton(4, "Rare Items", displayItemPage, rareArray, 1);
+			addButton(5, "Weapons", displayItemPage, weaponArray, 1);
+			addButton(6, "Shields", displayItemPage, shieldArray, 1);
+			addButton(7, "Armours", displayItemPage, armourArray, 1);
+			addButton(8, "Undergarments", displayItemPage, undergarmentArray, 1);
+			addButton(9, "Accessories", displayItemPage, accessoryArray, 1);
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
-		private function addItemButton(item:*):void {
-			var button:int = 0;
-			var temp:int = 0;
-			var goal:int = 14;
-			while (temp < goal)
-			{
-				if (buttonIsVisible(temp)) {
-					button++;
-				}
-				if (button == 4 || button == 9) button++;
-				temp++;
-			}
-			addButton(button, item.shortName, giveItem, item);
-		}
-		
-		/*private function itemSpawnConsumableMenu(page:int = 0):void {
-			var temp:int = 0;
-			var btnTemp:int = 0;
-			var goal:int = 12;
-			var offset:int = 12;
-			menu();
-			while (temp < goal) {
-				if (kGAMECLASS.consumables.consumableItems[temp + (page * offset)] != undefined) {
-					addButton(btnTemp, kGAMECLASS.consumables.consumableItems[temp + (page * offset)].shortName, giveItem, kGAMECLASS.consumables.consumableItems[temp + (page * offset)])
-				}
-				if (kGAMECLASS.consumables.consumableItems[(page * offset) + 12] != undefined) {
-					addButton(4, "Next", itemSpawnConsumableMenu, page+1)
-				}
-				if (kGAMECLASS.consumables.consumableItems[(page * offset) - 1] != undefined) {
-					addButton(9, "Previous", itemSpawnConsumableMenu, page-1)
-				}
-				temp++;
-				btnTemp++;
-				if (btnTemp == 4 || btnTemp == 9) btnTemp++;
-			}
-			addButton(14, "Back", itemSpawnMenu);
-		}*/
-		
-		private function itemSpawnTransformativesMenuI():void {
-			lastMenu = itemSpawnTransformativesMenuI;
-			menu();
-			addItemButton(consumables.B_GOSSR);
-			addItemButton(consumables.BEEHONY);
-			addItemButton(consumables.BLACKPP);
-			addItemButton(consumables.BOARTRU);
-			
-			addItemButton(consumables.BULBYPP);
-			addItemButton(consumables.CANINEP);
-			addItemButton(consumables.DBLPEPP);
-			addItemButton(consumables.DRAKHRT);
-			
-			addItemButton(consumables.DRYTENT);
-			addItemButton(consumables.ECTOPLS);
-			addItemButton(consumables.EQUINUM);
-			addItemButton(consumables.FOXBERY);
-			
-			addButton(4, "Next", itemSpawnTransformativesMenuII);
-			//addButton(9, "Previous", itemSpawnTransformativesMenuI);
-			addButton(14, "Back", itemSpawnMenu);			
-		}
-		private function itemSpawnTransformativesMenuII():void {
-			lastMenu = itemSpawnTransformativesMenuII;
-			menu();
-			addItemButton(consumables.FRRTFRT);
-			addItemButton(consumables.FOXJEWL);
-			addItemButton(consumables.GLDSEED);
-			addItemButton(consumables.GOB_ALE);
-			
-			addItemButton(consumables.HUMMUS_);
-			addItemButton(consumables.IMPFOOD);
-			addItemButton(consumables.INCUBID);
-			addItemButton(consumables.KANGAFT);
-			
-			addItemButton(consumables.KNOTTYP);
-			addItemButton(consumables.LABOVA_);
-			addItemButton(consumables.LARGEPP);
-			addItemButton(consumables.MAGSEED);
-			
-			addButton(4, "Next", itemSpawnTransformativesMenuIII);
-			addButton(9, "Previous", itemSpawnTransformativesMenuI);		
-			addButton(14, "Back", itemSpawnMenu);			
-		}
-		private function itemSpawnTransformativesMenuIII():void {
-			lastMenu = itemSpawnTransformativesMenuIII;
-			menu();
-			addItemButton(consumables.MGHTYVG);
-			addItemButton(consumables.MOUSECO);
-			addItemButton(consumables.MINOBLO);
-			addItemButton(consumables.MYSTJWL);
-			
-			addItemButton(consumables.P_LBOVA);
-			addItemButton(consumables.PIGTRUF);
-			addItemButton(consumables.PRFRUIT);
-			addItemButton(consumables.PROBOVA);
-			
-			addItemButton(consumables.P_DRAFT);
-			addItemButton(consumables.P_S_MLK);
-			addItemButton(consumables.PSDELIT);
-			addItemButton(consumables.PURHONY);
-			
-			addButton(4, "Next", itemSpawnTransformativesMenuIV);
-			addButton(9, "Previous", itemSpawnTransformativesMenuII);
-			addButton(14, "Back", itemSpawnMenu);			
-		}
-		private function itemSpawnTransformativesMenuIV():void {
-			lastMenu = itemSpawnTransformativesMenuIV;
-			menu();
-			addItemButton(consumables.SDELITE);
-			addItemButton(consumables.S_DREAM);
-			addItemButton(consumables.SUCMILK);
-			addItemButton(consumables.REPTLUM);
-			
-			addItemButton(consumables.RINGFIG);
-			addItemButton(consumables.RIZZART);
-			addItemButton(consumables.S_GOSSR);
-			addItemButton(consumables.SHARK_T);
-			
-			addItemButton(consumables.SNAKOIL);
-			addItemButton(consumables.SPHONEY);
-			addItemButton(consumables.TAURICO);
-			addItemButton(consumables.TRAPOIL);
-			
-			addButton(4, "Next", itemSpawnTransformativesMenuV);
-			addButton(9, "Previous", itemSpawnTransformativesMenuIII);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnTransformativesMenuV():void {
-			lastMenu = itemSpawnTransformativesMenuV;
-			menu();
-			addItemButton(consumables.TSCROLL);
-			addItemButton(consumables.TSTOOTH);
-			addItemButton(consumables.VIXVIGR);
-			addItemButton(consumables.W_FRUIT);
-			
-			addItemButton(consumables.WETCLTH);
-			
-			addButton(9, "Previous", itemSpawnTransformativesMenuIV);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-
-		private function itemSpawnConsumablesMenuI():void {
-			lastMenu = itemSpawnConsumablesMenuI;
-			menu();
-			addItemButton(consumables.AKBALSL);
-			addItemButton(consumables.C__MINT);
-			addItemButton(consumables.CERUL_P);
-			addItemButton(consumables.COAL___);
-			
-			addItemButton(consumables.DEBIMBO);
-			addItemButton(consumables.EXTSERM);
-			addItemButton(consumables.F_DRAFT);
-			addItemButton(consumables.GROPLUS);
-			
-			addItemButton(consumables.HRBCNT);
-			addItemButton(consumables.ICICLE_);
-			addItemButton(consumables.KITGIFT);
-			addItemButton(consumables.L_DRAFT);
-			
-			addButton(4, "Next", itemSpawnConsumablesMenuII);
-			//addButton(9, "Previous", itemSpawnConsumablesMenuI);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnConsumablesMenuII():void {
-			lastMenu = itemSpawnConsumablesMenuII;
-			menu();
-			addItemButton(consumables.LACTAID);
-			addItemButton(consumables.LUSTSTK);
-			addItemButton(consumables.NUMBROX);
-			addItemButton(consumables.OVIELIX);
-			
-			addItemButton(consumables.PEPPWHT);
-			addItemButton(consumables.PRNPKR);
-			addItemButton(consumables.REDUCTO);
-			addItemButton(consumables.SENSDRF);
-			
-			addItemButton(consumables.SMART_T);
-			addItemButton(consumables.VITAL_T);
-			addItemButton(consumables.B__BOOK);
-			addItemButton(consumables.W__BOOK);	
-			
-			addButton(4, "Next", itemSpawnConsumablesMenuIII);
-			addButton(9, "Previous", itemSpawnConsumablesMenuI);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnConsumablesMenuIII():void {
-			lastMenu = itemSpawnConsumablesMenuIII;
-			menu();
-			addItemButton(consumables.BC_BEER);
-			addItemButton(consumables.BIMBOCH);
-			addItemButton(consumables.CCUPCAK);
-			addItemButton(consumables.FISHFIL);
-			
-			addItemButton(consumables.GODMEAD);
-			addItemButton(consumables.IZYMILK);
-			addItemButton(consumables.M__MILK);
-			addItemButton(consumables.MINOCUM);
-			
-			addItemButton(consumables.P_WHSKY);
-			addItemButton(consumables.PURPEAC);
-			addItemButton(consumables.SHEEPMK);
-			addItemButton(consumables.S_WATER);
-			
-			addButton(4, "Next", itemSpawnConsumablesMenuIV);
-			addButton(9, "Previous", itemSpawnConsumablesMenuII);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnConsumablesMenuIV():void {
-			lastMenu = itemSpawnConsumablesMenuIV;
-			menu();
-			addItemButton(consumables.NPNKEGG);
-			addItemButton(consumables.DRGNEGG);
-			addItemButton(useables.CONDOM);
-			addItemButton(consumables.MILKPTN);
-			
-			addItemButton(consumables.W_PDDNG);
-			
-			addButton(4, "Next", itemSpawnConsumablesMenuV);
-			addButton(9, "Previous", itemSpawnConsumablesMenuIII);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnConsumablesMenuV():void {
-			lastMenu = itemSpawnConsumablesMenuV;
-			menu();
-			addItemButton(consumables.BLACKEG);
-			addItemButton(consumables.L_BLKEG);
-			addItemButton(consumables.BLUEEGG);
-			addItemButton(consumables.L_BLUEG);
-			
-			addItemButton(consumables.BROWNEG);
-			addItemButton(consumables.L_BRNEG);
-			addItemButton(consumables.PINKEGG);
-			addItemButton(consumables.L_PNKEG);
-			
-			addItemButton(consumables.PURPLEG);
-			addItemButton(consumables.L_PRPEG);
-			addItemButton(consumables.WHITEEG);
-			addItemButton(consumables.L_WHTEG);
-			
-			//addButton(4, "Next", itemSpawnConsumablesMenuVI);
-			addButton(9, "Previous", itemSpawnConsumablesMenuIV);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		
-		private function itemSpawnDyesMenuI():void {
-			lastMenu = itemSpawnDyesMenuI;
-			menu();
-			addItemButton(consumables.AUBURND);
-			addItemButton(consumables.BLACK_D);
-			addItemButton(consumables.BLOND_D);
-			addItemButton(consumables.BLUEDYE);
-			
-			addItemButton(consumables.BROWN_D);
-			addItemButton(consumables.GRAYDYE);
-			addItemButton(consumables.GREEN_D);
-			addItemButton(consumables.ORANGDY);
-			
-			addItemButton(consumables.PINKDYE);
-			addItemButton(consumables.PURPDYE);
-			addItemButton(consumables.RAINDYE);
-			addItemButton(consumables.RED_DYE);
-			
-			addButton(4, "Next", itemSpawnDyesMenuII);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		
-		private function itemSpawnDyesMenuII():void {
-			lastMenu = itemSpawnDyesMenuII;
-			menu();
-			addItemButton(consumables.WHITEDY);
-			
-			addButton(9, "Previous", itemSpawnDyesMenuI);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		
-		private function itemSpawnMaterialsMenu():void {
-			lastMenu = itemSpawnMaterialsMenu;
-			menu();
-			addItemButton(useables.GREENGL);
-			addItemButton(useables.B_CHITN);
-			addItemButton(useables.T_SSILK);
-			addItemButton(useables.D_SCALE);
-			
-			addItemButton(useables.IMPSKLL);
-			addItemButton(useables.LETHITE);
-			
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		
-		private function itemSpawnRaresMenu():void {
-			lastMenu = itemSpawnRaresMenu;
-			menu();
-			addItemButton(consumables.BIMBOLQ);
-			addItemButton(consumables.BROBREW);
-			addItemButton(consumables.HUMMUS2);
-			addItemButton(consumables.P_PEARL);
-			
-			addItemButton(useables.DBGWAND);
-			addItemButton(useables.GLDSTAT);
-			
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		
-		private function itemSpawnWeaponsMenuI():void {
-			lastMenu = itemSpawnWeaponsMenuI;
-			menu();
-			addItemButton(weapons.B_SCARB);
-			addItemButton(weapons.B_SWORD);
-			addItemButton(weapons.BLUNDER);
-			addItemButton(weapons.CLAYMOR);
-			
-			addItemButton(weapons.CROSSBW);
-			addItemButton(weapons.E_STAFF);
-			addItemButton(weapons.FLAIL);
-			addItemButton(weapons.FLINTLK);
-			
-			addItemButton(weapons.URTAHLB);
-			addItemButton(weapons.H_GAUNT);
-			addItemButton(weapons.JRAPIER);
-			addItemButton(weapons.KATANA);
-			
-			addButton(4, "Next", itemSpawnWeaponsMenuII);
-			//addButton(9, "Previous", itemSpawnWeaponsMenuI);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnWeaponsMenuII():void {
-			lastMenu = itemSpawnWeaponsMenuII;
-			menu();
-			addItemButton(weapons.L__AXE);
-			addItemButton(weapons.L_DAGGR);
-			addItemButton(weapons.L_HAMMR);
-			addItemButton(weapons.L_STAFF);
-			
-			addItemButton(weapons.MACE);
-			addItemButton(weapons.PIPE);
-			addItemButton(weapons.PTCHFRK);			
-			addItemButton(weapons.RIDINGC);
-			
-			addItemButton(weapons.RRAPIER);
-			addItemButton(weapons.S_BLADE);
-			addItemButton(weapons.S_GAUNT);			
-			addItemButton(weapons.SCARBLD);
-			
-			
-			addButton(4, "Next", itemSpawnWeaponsMenuIII);
-			addButton(9, "Previous", itemSpawnWeaponsMenuI);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnWeaponsMenuIII():void {
-			lastMenu = itemSpawnWeaponsMenuIII;
-			menu();
-			addItemButton(weapons.SCIMITR);
-			addItemButton(weapons.SPEAR);
-			addItemButton(weapons.SUCWHIP);
-			addItemButton(weapons.W_STAFF);
-			
-			addItemButton(weapons.WARHAMR);
-			addItemButton(weapons.WHIP);			
-
-			//addButton(4, "Next", itemSpawnWeaponsMenuIV);
-			addButton(9, "Previous", itemSpawnWeaponsMenuII);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-
-		
-		private function itemSpawnArmoursMenuI():void {
-			lastMenu = itemSpawnArmoursMenuI;
-			menu();
-			addItemButton(armors.ADVCLTH);
-			addItemButton(armors.B_DRESS);
-			addItemButton(armors.BEEARMR);
-			addItemButton(armors.BIMBOSK);
-			
-			addItemButton(armors.BONSTRP);
-			addItemButton(armors.C_CLOTH);
-			addItemButton(armors.CHBIKNI);
-			addItemButton(armors.CLSSYCL);
-			
-			addItemButton(armors.DBARMOR);
-			addItemButton(armors.FULLCHN);
-			addItemButton(armors.FULLPLT);
-			addItemButton(armors.GELARMR);
-			
-			addButton(4, "Next", itemSpawnArmoursMenuII);
-			//addButton(9, "Previous", itemSpawnArmoursMenuI);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnArmoursMenuII():void {
-			lastMenu = itemSpawnArmoursMenuII;
-			menu();
-			addItemButton(armors.GOOARMR);
-			addItemButton(armors.I_CORST);
-			addItemButton(armors.I_ROBES);
-			addItemButton(armors.INDECST);
-			
-			addItemButton(armors.LEATHRA);
-			addItemButton(armors.URTALTA);
-			addItemButton(armors.LMARMOR);
-			addItemButton(armors.LTHCARM);
-			
-			addItemButton(armors.LTHRPNT);
-			addItemButton(armors.LTHRROB);
-			addItemButton(armors.M_ROBES);
-			addItemButton(armors.TBARMOR);
-			
-			addButton(4, "Next", itemSpawnArmoursMenuIII);
-			addButton(9, "Previous", itemSpawnArmoursMenuI);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnArmoursMenuIII():void {
-			lastMenu = itemSpawnArmoursMenuIII;
-			menu();
-			addItemButton(armors.NURSECL);
-			addItemButton(armors.OVERALL);
-			addItemButton(armors.R_BDYST);
-			addItemButton(armors.RBBRCLT);
-			
-			addItemButton(armors.S_SWMWR);
-			addItemButton(armors.SCALEML);
-			addItemButton(armors.SEDUCTA);
-			addItemButton(armors.SEDUCTU);
-			
-			addItemButton(armors.SS_ROBE);
-			addItemButton(armors.SSARMOR);
-			addItemButton(armors.T_BSUIT);
-			addItemButton(armors.TUBETOP);
-			
-			
-			addButton(4, "Next", itemSpawnArmoursMenuIV);
-			addButton(9, "Previous", itemSpawnArmoursMenuII);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnArmoursMenuIV():void {
-			lastMenu = itemSpawnArmoursMenuIV;
-			menu();
-			addItemButton(armors.W_ROBES);
-			
-			//addButton(4, "Next", itemSpawnArmoursMenuIV);
-			addButton(9, "Previous", itemSpawnArmoursMenuIII);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		
-		private function itemSpawnAccessoriesMenuI():void {
-			lastMenu = itemSpawnAccessoriesMenuI;
-			menu();
-			addItemButton(jewelries.CRIMRNG);
-			addItemButton(jewelries.FERTRNG);
-			addItemButton(jewelries.ICE_RNG);
-			addItemButton(jewelries.LIFERNG);
-			
-			addItemButton(jewelries.MYSTRNG);
-			addItemButton(jewelries.POWRRNG);
-			addItemButton(jewelries.PURERNG);
-			addItemButton(jewelries.DIAMRNG);
-			
-			addItemButton(jewelries.GOLDRNG);
-			addItemButton(jewelries.LTHCRNG);
-			addItemButton(jewelries.PLATRNG);
-			addItemButton(jewelries.SILVRNG);
-			
-			//addButton(4, "Next", itemSpawnAccessoriesMenuII);
-			//addButton(9, "Previous", itemSpawnAccessoriesMenuI);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		
-		private function itemSpawnShieldsMenu():void {
-			lastMenu = itemSpawnShieldsMenu;
-			menu();
-			addItemButton(shields.BUCKLER);
-			addItemButton(shields.DRGNSHL);
-			addItemButton(shields.GREATSH);
-			addItemButton(shields.KITE_SH);
-			addItemButton(shields.TOWERSH);
-			
-			//addButton(4, "Next", itemSpawnAccessoriesMenuII);
-			//addButton(9, "Previous", itemSpawnAccessoriesMenuI);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-
-		private function itemSpawnUndergarmentsMenu():void {
-			lastMenu = itemSpawnUndergarmentsMenu;
-			menu();
-			addItemButton(undergarments.C_BRA);
-			addItemButton(undergarments.C_LOIN);
-			addItemButton(undergarments.C_PANTY);
-			addItemButton(undergarments.DS_BRA);
-			
-			addItemButton(undergarments.DS_LOIN);
-			addItemButton(undergarments.DSTHONG);
-			addItemButton(undergarments.FURLOIN);
-			addItemButton(undergarments.GARTERS);
-			
-			addItemButton(undergarments.LTX_BRA);
-			addItemButton(undergarments.LTXSHRT);
-			addItemButton(undergarments.LTXTHNG);
-			addItemButton(undergarments.SS_BRA);
-			
-			addButton(4, "Next", itemSpawnUndergarmentsMenuII);
-			//addButton(9, "Previous", itemSpawnUndergarmentsMenu);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		private function itemSpawnUndergarmentsMenuII():void {
-			lastMenu = itemSpawnUndergarmentsMenuII;
-			menu();
-			addItemButton(undergarments.SS_LOIN);
-			addItemButton(undergarments.SSPANTY);
-			
-			//addButton(4, "Next", itemSpawnUndergarmentsMenuII);
-			addButton(9, "Previous", itemSpawnUndergarmentsMenu);
-			addButton(14, "Back", itemSpawnMenu);
-		}
-		
-		private function giveItem(item:*):void {
+		private function displayItemPage(array:Array, page:int):void {
 			clearOutput();
-			inventory.takeItem(item, lastMenu);
+			outputText("What item would you like to spawn? ");
+			menu();
+			var buttonPos:int = 0; //Button positions 4 and 9 are reserved for next and previous.
+			for (var i:int = 0; i < 12; i++) {
+				if (array[((page-1) * 12) + i] != undefined) {
+					if (array[((page-1) * 12) + i] != null) addButton(buttonPos, array[((page-1) * 12) + i].shortName, inventory.takeItem, array[((page-1) * 12) + i], createCallBackFunction2(displayItemPage, array, page));
+				}
+				buttonPos++;
+				if (buttonPos == 4 || buttonPos == 9) buttonPos++;
+			}
+			if (!isNextPageEmpty(array, page)) addButton(4, "Next", displayItemPage, array, page+1);
+			if (!isPreviousPageEmpty(array, page)) addButton(9, "Previous", displayItemPage, array, page-1);
+			addButton(14, "Back", itemSpawnMenu);
 		}
+		
+		private function isPreviousPageEmpty(array:Array, page:int):Boolean {
+			var isEmpty:Boolean = true;
+			for (var i:int = 0; i < 12; i++) {
+				if (array[((page-2) * 12) + i] != undefined) {
+					isEmpty = false;
+				}
+			}
+			return isEmpty;
+		}
+		
+		private function isNextPageEmpty(array:Array, page:int):Boolean {
+			var isEmpty:Boolean = true;
+			for (var i:int = 0; i < 12; i++) {
+				if (array[((page) * 12) + i] != undefined) {
+					isEmpty = false;
+				}
+			}
+			return isEmpty;
+		}
+		
+		private function setItemArrays():void {
+			if (setArrays) return; //Already set, cancel.
+			//Build arrays here
+			//------------
+			// Transformatives
+			//------------
+			//Page 1
+			transformativeArray.push(consumables.B_GOSSR);
+			transformativeArray.push(consumables.BEEHONY);
+			transformativeArray.push(consumables.BLACKPP);
+			transformativeArray.push(consumables.BOARTRU);
+			transformativeArray.push(consumables.BULBYPP);
+			transformativeArray.push(consumables.CANINEP);
+			transformativeArray.push(consumables.DBLPEPP);
+			transformativeArray.push(consumables.DRAKHRT);
+			transformativeArray.push(consumables.DRYTENT);
+			transformativeArray.push(consumables.ECTOPLS);
+			transformativeArray.push(consumables.EQUINUM);
+			transformativeArray.push(consumables.FOXBERY);
+			//Page 2
+			transformativeArray.push(consumables.FOXJEWL);
+			transformativeArray.push(consumables.FRRTFRT);
+			transformativeArray.push(consumables.GLDRIND);
+			transformativeArray.push(consumables.GLDSEED);
+			transformativeArray.push(consumables.GOB_ALE);
+			transformativeArray.push(consumables.HUMMUS_);
+			transformativeArray.push(consumables.IMPFOOD);
+			transformativeArray.push(consumables.INCUBID);
+			transformativeArray.push(consumables.KANGAFT);
+			transformativeArray.push(consumables.KNOTTYP);
+			transformativeArray.push(consumables.LABOVA_);
+			transformativeArray.push(consumables.LARGEPP);
+			//Page 3
+			transformativeArray.push(consumables.MAGSEED);
+			transformativeArray.push(consumables.MGHTYVG);
+			transformativeArray.push(consumables.MOUSECO);
+			transformativeArray.push(consumables.MINOBLO);
+			transformativeArray.push(consumables.MYSTJWL);
+			transformativeArray.push(consumables.P_LBOVA);
+			transformativeArray.push(consumables.PIGTRUF);
+			transformativeArray.push(consumables.PRFRUIT);
+			transformativeArray.push(consumables.PROBOVA);
+			transformativeArray.push(consumables.P_DRAFT);
+			transformativeArray.push(consumables.P_S_MLK);
+			transformativeArray.push(consumables.PSDELIT);
+			//Page 4
+			transformativeArray.push(consumables.PURHONY);
+			transformativeArray.push(consumables.SATYR_W);
+			transformativeArray.push(consumables.SDELITE);
+			transformativeArray.push(consumables.S_DREAM);
+			transformativeArray.push(consumables.SUCMILK);
+			transformativeArray.push(consumables.REPTLUM);
+			transformativeArray.push(consumables.RINGFIG);
+			transformativeArray.push(consumables.RIZZART);
+			transformativeArray.push(consumables.S_GOSSR);
+			transformativeArray.push(consumables.SHARK_T);
+			transformativeArray.push(consumables.SNAKOIL);
+			transformativeArray.push(consumables.SPHONEY);
+			//Page 5
+			transformativeArray.push(consumables.TAURICO);
+			transformativeArray.push(consumables.TRAPOIL);
+			transformativeArray.push(consumables.TSCROLL);
+			transformativeArray.push(consumables.TSTOOTH);
+			transformativeArray.push(consumables.VIXVIGR);
+			transformativeArray.push(consumables.W_FRUIT);
+			transformativeArray.push(consumables.WETCLTH);
+			
+			//------------
+			// Consumables
+			//------------
+			//Page 1
+			consumableArray.push(consumables.AKBALSL);
+			consumableArray.push(consumables.C__MINT);
+			consumableArray.push(consumables.CERUL_P);
+			consumableArray.push(consumables.COAL___);
+			consumableArray.push(consumables.DEBIMBO);
+			consumableArray.push(consumables.EXTSERM);
+			consumableArray.push(consumables.F_DRAFT);
+			consumableArray.push(consumables.GROPLUS);
+			consumableArray.push(consumables.HRBCNT);
+			consumableArray.push(consumables.ICICLE_);
+			consumableArray.push(consumables.KITGIFT);
+			consumableArray.push(consumables.L_DRAFT);
+			//Page 2
+			consumableArray.push(consumables.LACTAID);
+			consumableArray.push(consumables.LUSTSTK);
+			consumableArray.push(consumables.MILKPTN);
+			consumableArray.push(consumables.NUMBROX);
+			consumableArray.push(consumables.OVIELIX);
+			consumableArray.push(consumables.PEPPWHT);
+			consumableArray.push(consumables.PRNPKR);
+			consumableArray.push(consumables.REDUCTO);
+			consumableArray.push(consumables.SENSDRF);
+			consumableArray.push(consumables.SMART_T);
+			consumableArray.push(consumables.VITAL_T);
+			consumableArray.push(consumables.B__BOOK);
+			//Page 3
+			consumableArray.push(consumables.W__BOOK);
+			consumableArray.push(consumables.BC_BEER);
+			consumableArray.push(consumables.BHMTCUM);
+			consumableArray.push(consumables.BIMBOCH);
+			consumableArray.push(consumables.C_BREAD);
+			consumableArray.push(consumables.CCUPCAK);
+			consumableArray.push(consumables.FISHFIL);
+			consumableArray.push(consumables.FR_BEER);
+			consumableArray.push(consumables.GODMEAD);
+			consumableArray.push(consumables.H_BISCU);
+			consumableArray.push(consumables.IZYMILK);
+			consumableArray.push(consumables.M__MILK);
+			//Page 4
+			consumableArray.push(consumables.MINOCUM);
+			consumableArray.push(consumables.P_BREAD);
+			consumableArray.push(consumables.P_WHSKY);
+			consumableArray.push(consumables.PURPEAC);
+			consumableArray.push(consumables.SHEEPMK);
+			consumableArray.push(consumables.S_WATER);
+			consumableArray.push(consumables.NPNKEGG);
+			consumableArray.push(consumables.DRGNEGG);
+			consumableArray.push(consumables.W_PDDNG);
+			consumableArray.push(consumables.TRAILMX);
+			consumableArray.push(consumables.URTACUM);
+			consumableArray.push(null);
+			//Page 5
+			consumableArray.push(consumables.BLACKEG);
+			consumableArray.push(consumables.L_BLKEG);
+			consumableArray.push(consumables.BLUEEGG);
+			consumableArray.push(consumables.L_BLUEG);
+			consumableArray.push(consumables.BROWNEG);
+			consumableArray.push(consumables.L_BRNEG);
+			consumableArray.push(consumables.PINKEGG);
+			consumableArray.push(consumables.L_PNKEG);
+			consumableArray.push(consumables.PURPLEG);
+			consumableArray.push(consumables.L_PRPEG);
+			consumableArray.push(consumables.WHITEEG);
+			consumableArray.push(consumables.L_WHTEG);
+			
+			//------------
+			// Dyes
+			//------------
+			//Page 1
+			dyeArray.push(consumables.AUBURND);
+			dyeArray.push(consumables.BLACK_D);
+			dyeArray.push(consumables.BLOND_D);
+			dyeArray.push(consumables.BLUEDYE);
+			dyeArray.push(consumables.BROWN_D);
+			dyeArray.push(consumables.GRAYDYE);
+			dyeArray.push(consumables.GREEN_D);
+			dyeArray.push(consumables.ORANGDY);
+			dyeArray.push(consumables.PINKDYE);
+			dyeArray.push(consumables.PURPDYE);
+			dyeArray.push(consumables.RAINDYE);
+			dyeArray.push(consumables.RED_DYE);
+			//Page 2
+			dyeArray.push(consumables.WHITEDY);
+			
+			//------------
+			// Materials
+			//------------
+			//Page 1, which is the only page for material so far. :(
+			materialArray.push(useables.GREENGL);
+			materialArray.push(useables.B_CHITN);
+			materialArray.push(useables.T_SSILK);
+			materialArray.push(useables.D_SCALE);
+			materialArray.push(useables.IMPSKLL);
+			materialArray.push(useables.LETHITE);
+			materialArray.push(null);
+			materialArray.push(null);
+			materialArray.push(null);
+			materialArray.push(null);
+			materialArray.push(null);
+			materialArray.push(useables.CONDOM);
+			//------------
+			// Rare Items
+			//------------
+			//Page 1, again the only page available.
+			rareArray.push(consumables.BIMBOLQ);
+			rareArray.push(consumables.BROBREW);
+			rareArray.push(consumables.HUMMUS2);
+			rareArray.push(consumables.P_PEARL);
+			
+			rareArray.push(useables.DBGWAND);
+			rareArray.push(useables.GLDSTAT);
+			
+			//------------
+			// Weapons
+			//------------
+			//Page 1
+			weaponArray.push(weapons.B_SCARB);
+			weaponArray.push(weapons.B_SWORD);
+			weaponArray.push(weapons.BLUNDER);
+			weaponArray.push(weapons.CLAYMOR);
+			weaponArray.push(weapons.CROSSBW);
+			weaponArray.push(weapons.E_STAFF);
+			weaponArray.push(weapons.FLAIL);
+			weaponArray.push(weapons.FLINTLK);
+			weaponArray.push(weapons.URTAHLB);
+			weaponArray.push(weapons.H_GAUNT);
+			weaponArray.push(weapons.JRAPIER);
+			weaponArray.push(weapons.KATANA);
+			//Page 2
+			weaponArray.push(weapons.L__AXE);
+			weaponArray.push(weapons.L_DAGGR);
+			weaponArray.push(weapons.L_HAMMR);
+			weaponArray.push(weapons.L_STAFF);
+			weaponArray.push(weapons.MACE);
+			weaponArray.push(weapons.PIPE);
+			weaponArray.push(weapons.PTCHFRK);			
+			weaponArray.push(weapons.RIDINGC);
+			weaponArray.push(weapons.RRAPIER);
+			weaponArray.push(weapons.S_BLADE);
+			weaponArray.push(weapons.S_GAUNT);			
+			weaponArray.push(weapons.SCARBLD);
+			//Page 3
+			weaponArray.push(weapons.SCIMITR);
+			weaponArray.push(weapons.SPEAR);
+			weaponArray.push(weapons.SUCWHIP);
+			weaponArray.push(weapons.W_STAFF);
+			weaponArray.push(weapons.WARHAMR);
+			weaponArray.push(weapons.WHIP);
+			
+			//------------
+			// Shields
+			//------------
+			//Page 1, poor shield category is so lonely. :(
+			shieldArray.push(shields.BUCKLER);
+			shieldArray.push(shields.DRGNSHL);
+			shieldArray.push(shields.GREATSH);
+			shieldArray.push(shields.KITE_SH);
+			shieldArray.push(shields.TOWERSH);
+			
+			//------------
+			// Armours
+			//------------
+			//Page 1
+			armourArray.push(armors.ADVCLTH);
+			armourArray.push(armors.B_DRESS);
+			armourArray.push(armors.BEEARMR);
+			armourArray.push(armors.BIMBOSK);
+			armourArray.push(armors.BONSTRP);
+			armourArray.push(armors.C_CLOTH);
+			armourArray.push(armors.CHBIKNI);
+			armourArray.push(armors.CLSSYCL);
+			armourArray.push(armors.DBARMOR);
+			armourArray.push(armors.FULLCHN);
+			armourArray.push(armors.FULLPLT);
+			armourArray.push(armors.GELARMR);
+			//Page 2
+			armourArray.push(armors.GOOARMR);
+			armourArray.push(armors.I_CORST);
+			armourArray.push(armors.I_ROBES);
+			armourArray.push(armors.INDECST);
+			armourArray.push(armors.LEATHRA);
+			armourArray.push(armors.URTALTA);
+			armourArray.push(armors.LMARMOR);
+			armourArray.push(armors.LTHCARM);
+			armourArray.push(armors.LTHRPNT);
+			armourArray.push(armors.LTHRROB);
+			armourArray.push(armors.M_ROBES);
+			armourArray.push(armors.TBARMOR);
+			//Page 3
+			armourArray.push(armors.NURSECL);
+			armourArray.push(armors.OVERALL);
+			armourArray.push(armors.R_BDYST);
+			armourArray.push(armors.RBBRCLT);
+			armourArray.push(armors.S_SWMWR);
+			armourArray.push(armors.SCALEML);
+			armourArray.push(armors.SEDUCTA);
+			armourArray.push(armors.SEDUCTU);
+			armourArray.push(armors.SS_ROBE);
+			armourArray.push(armors.SSARMOR);
+			armourArray.push(armors.T_BSUIT);
+			armourArray.push(armors.TUBETOP);
+			//Page 4
+			armourArray.push(armors.W_ROBES);
+			
+			//------------
+			// Undergarments
+			//------------
+			//Page 1
+			undergarmentArray.push(undergarments.C_BRA);
+			undergarmentArray.push(undergarments.C_LOIN);
+			undergarmentArray.push(undergarments.C_PANTY);
+			undergarmentArray.push(undergarments.DS_BRA);
+			undergarmentArray.push(undergarments.DS_LOIN);
+			undergarmentArray.push(undergarments.DSTHONG);
+			undergarmentArray.push(undergarments.FURLOIN);
+			undergarmentArray.push(undergarments.GARTERS);
+			undergarmentArray.push(undergarments.LTX_BRA);
+			undergarmentArray.push(undergarments.LTXSHRT);
+			undergarmentArray.push(undergarments.LTXTHNG);
+			undergarmentArray.push(undergarments.SS_BRA);
+			//Page 2
+			undergarmentArray.push(undergarments.SS_LOIN);
+			undergarmentArray.push(undergarments.SSPANTY);
+			
+			//------------
+			// Accessories
+			//------------
+			//Page 1
+			accessoryArray.push(jewelries.CRIMRNG);
+			accessoryArray.push(jewelries.FERTRNG);
+			accessoryArray.push(jewelries.ICE_RNG);
+			accessoryArray.push(jewelries.LIFERNG);
+			accessoryArray.push(jewelries.MYSTRNG);
+			accessoryArray.push(jewelries.POWRRNG);
+			accessoryArray.push(jewelries.PURERNG);
+			accessoryArray.push(jewelries.DIAMRNG);
+			accessoryArray.push(jewelries.GOLDRNG);
+			accessoryArray.push(jewelries.LTHCRNG);
+			accessoryArray.push(jewelries.PLATRNG);
+			accessoryArray.push(jewelries.SILVRNG);
+			setArrays = true;
+		}
+		
+
 		
 		private function statChangeMenu():void {
 			outputText("Which attribute would you like to alter?", true);
@@ -640,6 +479,7 @@ package classes.Scenes
 			addButton(4, "Debug Prison", debugPrison);
 			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
+			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth, null, null, null, "Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -842,13 +682,14 @@ package classes.Scenes
 			outputText("This is the Flag Editor.  You can edit flags from here.  For flags reference, look at kFLAGS.as class file.  Please input any number from 0 to 2999.");
 			outputText("\n\n<b>WARNING: This might screw up your save file so backup your saves before using this!</b>");
 			mainView.nameBox.visible = true;
-			mainView.nameBox.x = mainView.mainText.x + 5;
-			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+			mainView.nameBox.width = 165;
 			mainView.nameBox.text = "";
 			mainView.nameBox.maxChars = 4;
 			mainView.nameBox.restrict = "0-9";
 			addButton(0, "OK", editFlag);
 			addButton(4, "Done", accessDebugMenu);
+			mainView.nameBox.x = mainView.mainText.x + 5;
+			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		}
 		
 		private function editFlag():void {

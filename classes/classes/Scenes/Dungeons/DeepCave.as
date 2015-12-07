@@ -31,17 +31,19 @@ package classes.Scenes.Dungeons
 		public function DeepCave() {}
 		
 		public function enterDungeon():void {
+			clearOutput();
+			outputText(images.showImage("dungeon-entrance-deepcave"));
 			kGAMECLASS.inDungeon = true;
 			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 1) {
 				
-				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.", true);
-				outputText("\n\n<b>You've discovered the location of Zetaz's lair! You can visit anytime from the dungeons menu in Places tab.</b>", false);
+				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.");
+				outputText("\n\n<b>You've discovered the location of Zetaz's lair! You can visit anytime from the dungeons menu in Places tab.</b>");
 				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] = 1
 				simpleChoices("Enter", roomEntrance, "", null, "", null, "", null, "Leave", exitDungeon);
 			}
 			else 
 			{
-				outputText("You make your way back to the cave entrance.", true);
+				outputText("You make your way back to the cave entrance.");
 				doNext(roomEntrance);
 			}
 		}
@@ -84,13 +86,13 @@ package classes.Scenes.Dungeons
 			outputText("Caught, you stand up and ready your " + player.weaponName + ", taking up a defensive stance to ready yourself for whatever new attacks this demon has.  Strangely, he just starts laughing again, and he has to stop to wipe tears from the corners of his eyes before he talks, \"<i>Oh that's rich!  I'm not here to fight you, Champion.  I doubt I'd stand much of a chance anyways.  I heard there were some renegades around this area, so I thought I'd show up to offer my services.  You see, I'm a procurer of strange and rare alchemical solutions.  Of course you beat down everyone before I got here, but I thought I'd stick around and see if some scouts were still around before I high-tailed it out of here.</i>\"\n\n", false);
 			outputText("You stare, blinking your eyes in confusion.  A demon of lust, and he's not interested in fighting or raping you?  He laughs again as he reads your expression and calmly states, \"<i>No, I'm far from your average incubus.  To tell the truth I enjoy a spirited debate or the thrill of discovery over sating my sexual appetite, though of course I do indulge that from time to time.</i>\"\n\n", false);
 			outputText("The strange incubus flashes you a smile that makes you feel a tad uncomfortable before he finally introduces himself, \"<i>The name's Sean, and as you seem to be kicking the living shit out of Lethice's followers and enemies alike, I'd like to be on your side.  So I propose a mutually beneficial agreement – I'll sell you items you can't get anywhere else, and you let me live in this cave.  What do you say?</i>\"\n\n", false);
-			simpleChoices("Deal", seanDeal, "No Deal", seanNoDeal, "Not Now", null, "", null, "", null);
+			simpleChoices("Deal", seanDeal, "No Deal", seanNoDeal, "Not Now", seanNotNow, "", null, "", null);
 		}
 		
 		private function seanDeal():void {
 			spriteSelect(52);
 			clearOutput();
-			outputText("\"<i>Excellent!  Give me a few moments to gather my things and I'll be open for business!</i>\" exclaims the strange demon.  If his story is true it's no wonder he doesn't get along with the rest of his kind.", false);
+			outputText("\"<i>Excellent!  Give me a few moments to gather my things and I'll be open for business!</i>\" exclaims the strange demon.  If his story is true it's no wonder he doesn't get along with the rest of his kind.");
 			
 			//[Next – to room]
 			flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = 1;
@@ -100,7 +102,13 @@ package classes.Scenes.Dungeons
 			spriteSelect(52);
 			clearOutput();
 			flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = -1;
-			outputText("Sean nods, grabs a pack, and takes off running before you have a chance to kill him.", false);
+			outputText("Sean nods, grabs a pack, and takes off running before you have a chance to kill him.");
+			doNext(roomEntrance);
+		}
+		private function seanNotNow():void {
+			spriteSelect(52);
+			clearOutput();
+			outputText("\"<i>Very well. Come back when you've changed your mind,</i>\" Sean sighs.");
 			doNext(roomEntrance);
 		}
 		
@@ -112,13 +120,14 @@ package classes.Scenes.Dungeons
 			}
 			clearOutput();
 			outputText("Sean nods at you and slicks his hair back into place, threading it carefully around the small nubs of his horns before asking, \"<i>What can I do for you?</i>\"", false);
-			var bimbo:Number = 0;
-			if(player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
-			if(player.hasItem(consumables.BIMBOCH,5) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
-				addButton(4, consumables.BIMBOLQ.shortName, kGAMECLASS.telAdre.niamh.yeahSeanLetsBimbooze);
-				outputText("  Luckily, you do!");
-			}
 			menu();
+			if (player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
+				outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
+				if (player.hasItem(consumables.BIMBOCH, 5)) {
+					addButton(4, consumables.BIMBOLQ.shortName, kGAMECLASS.telAdre.niamh.yeahSeanLetsBimbooze);
+					outputText("  Luckily, you do!");
+				}
+			}
 			addButton(0, consumables.NUMBROX.shortName, buyItem, 0);
 			addButton(1, consumables.SENSDRF.shortName, buyItem, 1);
 			addButton(2, consumables.REDUCTO.shortName, buyItem, 2);

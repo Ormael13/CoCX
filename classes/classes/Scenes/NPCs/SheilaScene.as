@@ -99,7 +99,7 @@
 		}
 		//End of Interface Implementation
 
-private function sheilaPreg():void {
+private function sheilaPreg(reducedChance:Boolean = false):void {
 	//CHANCE OF PREGGERS, GAO
 	if (pregnancy.isPregnant) return;
 	var chance:Number = 5;
@@ -107,6 +107,7 @@ private function sheilaPreg():void {
 	if (chance > 20) chance = 20;
 	chance += player.virilityQ() * 100;
 	if (chance > 75) chance = 75;
+	if (reducedChance) chance /= 3.0;
 	if (rand(100) <= chance) 
 	pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SHIELA);
 }
@@ -1757,7 +1758,7 @@ private function consensualSheila69(cock:Boolean = true):void {
 	if(cock) {
 		outputText("cock sinks down");
 		//[(small cock) 
-		if(player.cockThatFits(32) >= 0) outputText("into her warm, waiting mouth");
+		if(player.cockThatFits(32) >= 0) outputText(" into her warm, waiting mouth");
 		else outputText("; she lets go of it to grab her breasts instead, trying to push them around the sensitive shaft as she runs her tongue up the underside");
 		outputText(".");
 	}
@@ -2053,18 +2054,18 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	}
 	//(dog cock)
 	else {
-		outputText("You attempt to oblige her, but your swollen knot sticks firmly in her squeezing pussy, locking you into place.  After a few fruitless tugs, you give yourself up to your orgasm with an apology, slumping against her heaving chest and helplessly dumping the rest of your load into the twitching woman.");
+		outputText("You attempt to oblige her, but your swollen knot sticks firmly in her squeezing pussy, locking you into place.  After a few fruitless tugs, you give yourself up to your orgasm with an apology, slumping against her heaving chest and helplessly dumping the rest of your load into the twitching woman. ");
 		//[(big skeet)
 		if(player.cumQ() >= 1000) {
 			outputText("Her belly begins to round as your overproductive gonads push out your massive store of semen");
 			//[(huge skeet)
 			if(player.cumQ() >= 3000) outputText(", until it's stretched as far as possible and each successive jet forces out squirts of frothy jism from the tight seal her pussy makes around the knot");
-			outputText(".");
+			outputText(". ");
 		}
 		//[(multi)
-		if(player.cockTotal() > 2) outputText("  Your other cocks erupt as well, soaking her crotch and matting down the fur on her thighs with whiteness.");
+		if(player.cockTotal() > 2) outputText("Your other cocks erupt as well, soaking her crotch and matting down the fur on her thighs with whiteness. ");
 	}
-	outputText("  Both of your orgasms finish up");
+	outputText("Both of your orgasms finish up");
 	//(dog-c) 
 	if(player.hasKnot(x)) outputText(" and you finally manage to pull out of her");
 	outputText("; the two of you lie there breathing raggedly for several minutes.  Sheila breaks the silence first.");
@@ -3069,7 +3070,9 @@ private function sheilaCowgirlRapesYou():void {
 			outputText("\n\nAs she panics and fusses her way back into her clothes, you lie there on the grass, tranquilly slipping into a doze.  Even if she does, what of it?  It was her idea in the first place...");
 			
 			//reduce lust and lib, reset hrs since cum, lose 8 hrs if HP or 2-3 if lust loss?
+			sheilaPreg(true);
 			player.orgasm();
+			sheilaPreg();
 			dynStats("lib", -1);
 			cleanupAfterCombat();
 		}
@@ -3577,9 +3580,9 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE2():void
 		outputText("\n\n\"<i>Well,</i>\" you answer, \"<i>perhaps that's why it's called 'making' love.</i>\"  Sheila doesn't answer, but smiles shyly.");
 		
 		//end scene if lust <30, else add minor lib-based lust damage and display choices for consensual sex plus [Leave Her Be]
-		dynStats("lus", player.lib/10+5, "resisted", false);
-		sheilaXP4Sex(false);
+		dynStats("lus", player.lib / 10 + 5, "resisted", false);
 		menu();
+		sheilaXP4Sex(false);
 		addButton(9,"LeaveHerBe",normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDEREBUTLEAVEHERBE);
 	}
 	else doNext(camp.returnToCampUseOneHour);

@@ -293,181 +293,6 @@ public function doubleAttackOff():void {
 	doubleAttackOptions();
 }
 
-//Allocate attributes
-private function addStr():void {
-	if (player.statPoints > 0)
-	{
-		player.tempStr++;
-		player.statPoints--;
-	}
-	attributeMenu();
-}
-private function addTou():void {
-	if (player.statPoints > 0)
-	{
-		player.tempTou++
-		player.statPoints--;
-	}
-	attributeMenu();
-}
-private function addSpe():void {
-	if (player.statPoints > 0)
-	{
-		player.tempSpe++
-		player.statPoints--;
-	}
-	attributeMenu();
-}
-private function addInt():void {
-	if (player.statPoints > 0)
-	{
-		player.tempInt++
-		player.statPoints--;
-	}
-	attributeMenu();
-}
-
-private function subStr():void {
-	if (player.tempStr > 0)
-	{
-		player.tempStr--;
-		player.statPoints++;
-	}
-	attributeMenu();
-}
-private function subTou():void {
-	if (player.tempTou > 0)
-	{
-		player.tempTou--;
-		player.statPoints++;
-	}
-	attributeMenu();
-}
-private function subSpe():void {
-	if (player.tempSpe > 0)
-	{
-		player.tempSpe--
-		player.statPoints++;
-	}
-	attributeMenu();
-}
-private function subInt():void {
-	if (player.tempInt > 0)
-	{
-		player.tempInt--
-		player.statPoints++;
-	}
-	attributeMenu();
-}
-
-private function finishAttributes():void {
-	clearOutput()
-	if (player.tempStr > 0)
-	{
-		if (player.tempStr >= 3) outputText("Your muscles feel significantly stronger from your time adventuring.\n", false);
-		else outputText("Your muscles feel slightly stronger from your time adventuring.\n", false);
-	}
-	if (player.tempTou > 0)
-	{
-		if (player.tempTou >= 3) outputText("You feel tougher from all the fights you have endured.\n", false);
-		else outputText("You feel slightly tougher from all the fights you have endured.\n", false);
-	}
-	if (player.tempSpe > 0)
-	{
-		if (player.tempSpe >= 3) outputText("Your time in combat has driven you to move faster.\n", false);
-		else outputText("Your time in combat has driven you to move slightly faster.\n", false);
-	}
-	if (player.tempInt > 0)
-	{
-		if (player.tempInt >= 3) outputText("Your time spent fighting the creatures of this realm has sharpened your wit.\n", false);
-		else outputText("Your time spent fighting the creatures of this realm has sharpened your wit by a bit.\n", false);
-	}
-	if (player.tempStr + player.tempTou + player.tempSpe + player.tempInt <= 0 || player.statPoints > 0)
-	{
-		outputText("\nYou may allocate your remaining stat points later.", false);
-	}
-	dynStats("str", player.tempStr);
-	dynStats("tou", player.tempTou);
-	dynStats("spe", player.tempSpe);
-	dynStats("int", player.tempInt, "noBimbo", true); //Ignores bro/bimbo perks.
-	player.tempStr = 0;
-	player.tempTou = 0;
-	player.tempSpe = 0;
-	player.tempInt = 0;
-	if (player.perkPoints > 0) doNext(perkBuyMenu);
-	else doNext(playerMenu);
-	
-}
-
-private function resetAttributes():void {
-	while (player.tempStr > 0)
-	{
-		player.statPoints++
-		player.tempStr--;
-	}
-	while (player.tempTou > 0)
-	{
-		player.statPoints++
-		player.tempTou--;
-	}
-	while (player.tempSpe > 0)
-	{
-		player.statPoints++
-		player.tempSpe--;
-	}
-	while (player.tempInt > 0)
-	{
-		player.statPoints++
-		player.tempInt--;
-	}
-	attributeMenu();
-}
-
-private function attributeMenu():void {
-	outputText("You have <b>" + (player.statPoints) + "</b> left to spend.\n\n", true)
-	
-	outputText("Strength: ", false)
-	if (player.str < player.getMaxStats("str")) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n", false)
-	else outputText("" + Math.floor(player.str) + " (Maximum)\n", false)
-	
-	outputText("Toughness: ", false)
-	if (player.tou < player.getMaxStats("tou")) outputText("" + Math.floor(player.tou) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.tou + player.tempTou) + "\n", false)
-	else outputText("" + Math.floor(player.tou) + " (Maximum)\n", false)
-	
-	outputText("Speed: ", false)
-	if (player.spe < player.getMaxStats("spe")) outputText("" + Math.floor(player.spe) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.spe + player.tempSpe) + "\n", false)
-	else outputText("" + Math.floor(player.spe) + " (Maximum)\n", false)
-	
-	outputText("Intelligence: ", false)
-	if (player.inte < player.getMaxStats("int")) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n", false)
-	else outputText("" + Math.floor(player.inte) + " (Maximum)\n", false)
-
-	menu();
-	//Add
-	addButton(0, "Add STR", addStr, null, null, null, "Add 1 to strength.", "Add Strength");
-	addButton(1, "Add TOU", addTou, null, null, null, "Add 1 to toughness.", "Add Toughness");
-	addButton(2, "Add SPE", addSpe, null, null, null, "Add 1 to speed.", "Add Speed");
-	addButton(3, "Add INT", addInt, null, null, null, "Add 1 to intelligence.", "Add Intelligence");
-	//Subtract
-	addButton(5, "Sub STR", subStr, null, null, null, "Subtract 1 from strength.", "Subtract Strength");
-	addButton(6, "Sub TOU", subTou, null, null, null, "Subtract 1 from toughness.", "Subtract Toughness");
-	addButton(7, "Sub SPE", subSpe, null, null, null, "Subtract 1 from speed.", "Subtract Speed");
-	addButton(8, "Sub INT", subInt, null, null, null, "Subtract 1 from intelligence.", "Subtract Intelligence");
-	
-	addButton(4, "Reset", resetAttributes);
-	addButton(9, "Done", finishAttributes);
-	
-	if ((player.str + player.tempStr) >= player.getMaxStats("str") || player.statPoints <= 0) removeButton(0);
-	if ((player.tou + player.tempTou) >= player.getMaxStats("tou") || player.statPoints <= 0) removeButton(1);
-	if ((player.spe + player.tempSpe) >= player.getMaxStats("spe") || player.statPoints <= 0) removeButton(2);
-	if ((player.inte + player.tempInt) >= player.getMaxStats("int") || player.statPoints <= 0) removeButton(3);
-
-	if (player.tempStr <= 0) removeButton(5);
-	if (player.tempTou <= 0) removeButton(6);
-	if (player.tempSpe <= 0) removeButton(7);
-	if (player.tempInt <= 0) removeButton(8);
-}
-
 public function levelUpGo(e:MouseEvent = null):void {
 	clearOutput();
 	hideMenus();
@@ -495,36 +320,135 @@ public function levelUpGo(e:MouseEvent = null):void {
 		doNext(playerMenu);
 	}
 }
-/* Sorry but the mod level-up is still superior.
-private function levelUpStatStrength():void {
-	dynStats("str", 5); //Gain +5 Str due to level
+
+//Attribute menu
+private function attributeMenu():void {
 	clearOutput();
-	outputText("Your muscles feel significantly stronger from your time adventuring.");
-	doNext(perkBuyMenu);
+	outputText("You have <b>" + (player.statPoints) + "</b> left to spend.\n\n");
+	
+	outputText("Strength: ");
+	if (player.str < player.getMaxStats("str")) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n");
+	else outputText("" + Math.floor(player.str) + " (Maximum)\n");
+	
+	outputText("Toughness: ");
+	if (player.tou < player.getMaxStats("tou")) outputText("" + Math.floor(player.tou) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.tou + player.tempTou) + "\n");
+	else outputText("" + Math.floor(player.tou) + " (Maximum)\n");
+	
+	outputText("Speed: ");
+	if (player.spe < player.getMaxStats("spe")) outputText("" + Math.floor(player.spe) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.spe + player.tempSpe) + "\n");
+	else outputText("" + Math.floor(player.spe) + " (Maximum)\n");
+	
+	outputText("Intelligence: ");
+	if (player.inte < player.getMaxStats("int")) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n");
+	else outputText("" + Math.floor(player.inte) + " (Maximum)\n");
+
+	menu();
+	//Add
+	if (player.statPoints > 0) {
+		if ((player.str + player.tempStr) < player.getMaxStats("str")) addButton(0, "Add STR", addAttribute, "str", null, null, "Add 1 point to Strength.", "Add Strength");
+		if ((player.tou + player.tempTou) < player.getMaxStats("tou")) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point to Toughness.", "Add Toughness");
+		if ((player.spe + player.tempSpe) < player.getMaxStats("spe")) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point to Speed.", "Add Speed");
+		if ((player.inte + player.tempInt) < player.getMaxStats("int")) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point to Intelligence.", "Add Intelligence");
+	}
+	//Subtract
+	if (player.tempStr > 0) addButton(5, "Sub STR", subtractAttribute, "str", null, null, "Subtract 1 point from Strength.", "Subtract Strength");
+	if (player.tempTou > 0) addButton(6, "Sub TOU", subtractAttribute, "tou", null, null, "Subtract 1 point from Toughness.", "Subtract Toughness");
+	if (player.tempSpe > 0) addButton(7, "Sub SPE", subtractAttribute, "spe", null, null, "Subtract 1 point from Speed.", "Subtract Speed");
+	if (player.tempInt > 0) addButton(8, "Sub INT", subtractAttribute, "int", null, null, "Subtract 1 point from Intelligence.", "Subtract Intelligence");
+	
+	addButton(4, "Reset", resetAttributes);
+	addButton(9, "Done", finishAttributes);
 }
 
-private function levelUpStatToughness():void {
-	dynStats("tou", 5); //Gain +5 Toughness due to level
-	trace("HP: " + player.HP + " MAX HP: " + maxHP());
-	statScreenRefresh();
-	outputText("You feel tougher from all the fights you have endured.");
-	doNext(perkBuyMenu);
+private function addAttribute(attribute:String):void {
+	switch(attribute) {
+		case "str":
+			player.tempStr++;
+			break;
+		case "tou":
+			player.tempTou++;
+			break;
+		case "spe":
+			player.tempSpe++;
+			break;
+		case "int":
+			player.tempInt++;
+			break;
+		default:
+			player.statPoints++; //Failsafe
+	}
+	player.statPoints--;
+	attributeMenu();
+}
+private function subtractAttribute(attribute:String):void {
+	switch(attribute) {
+		case "str":
+			player.tempStr--;
+			break;
+		case "tou":
+			player.tempTou--;
+			break;
+		case "spe":
+			player.tempSpe--;
+			break;
+		case "int":
+			player.tempInt--;
+			break;
+		default:
+			player.statPoints--; //Failsafe
+	}
+	player.statPoints++;
+	attributeMenu();
+}
+private function resetAttributes():void {
+	//Increment unspent attribute points.
+	player.statPoints += player.tempStr;
+	player.statPoints += player.tempTou;
+	player.statPoints += player.tempSpe;
+	player.statPoints += player.tempInt;
+	//Reset temporary attributes to 0.
+	player.tempStr = 0;
+	player.tempTou = 0;
+	player.tempSpe = 0;
+	player.tempInt = 0;
+	//DONE!
+	attributeMenu();
+}
+private function finishAttributes():void {
+	clearOutput()
+	if (player.tempStr > 0)
+	{
+		if (player.tempStr >= 3) outputText("Your muscles feel significantly stronger from your time adventuring.\n");
+		else outputText("Your muscles feel slightly stronger from your time adventuring.\n");
+	}
+	if (player.tempTou > 0)
+	{
+		if (player.tempTou >= 3) outputText("You feel tougher from all the fights you have endured.\n");
+		else outputText("You feel slightly tougher from all the fights you have endured.\n");
+	}
+	if (player.tempSpe > 0)
+	{
+		if (player.tempSpe >= 3) outputText("Your time in combat has driven you to move faster.\n");
+		else outputText("Your time in combat has driven you to move slightly faster.\n");
+	}
+	if (player.tempInt > 0)
+	{
+		if (player.tempInt >= 3) outputText("Your time spent fighting the creatures of this realm has sharpened your wit.\n");
+		else outputText("Your time spent fighting the creatures of this realm has sharpened your wit slightly.\n");
+	}
+	if (player.tempStr + player.tempTou + player.tempSpe + player.tempInt <= 0 || player.statPoints > 0)
+	{
+		outputText("\nYou may allocate your remaining stat points later.", false);
+	}
+	dynStats("str", player.tempStr, "tou", player.tempTou, "spe", player.tempSpe, "int", player.tempInt, "noBimbo", true); //Ignores bro/bimbo perks.
+	player.tempStr = 0;
+	player.tempTou = 0;
+	player.tempSpe = 0;
+	player.tempInt = 0;
+	if (player.perkPoints > 0) doNext(perkBuyMenu);
+	else doNext(playerMenu);
 }
 
-private function levelUpStatSpeed():void {
-	dynStats("spe", 5); //Gain +5 speed due to level
-	clearOutput();
-	outputText("Your time in combat has driven you to move faster.");
-	doNext(perkBuyMenu);
-}
-
-private function levelUpStatIntelligence():void {
-	dynStats("int", 5); //Gain +5 Intelligence due to level
-	clearOutput();
-	outputText("Your time spent fighting the creatures of this realm has sharpened your wit.");
-	doNext(perkBuyMenu);
-}
-*/
 private function perkBuyMenu():void {
 	clearOutput();
 	var perkList:Array = buildPerkList();
@@ -879,6 +803,14 @@ public function getButtonText(index:int):String {
 		return mainView.bottomButtons[index].labelText;
 	}
 }
+
+/*public function setButtonToolTip(button:int, header:String = "", text:String = ""):void {
+	if (header == "") {
+		header = mainView.bottomButtons[button].labelText;
+	}
+	mainView.bottomButtons[button].toolTipHeader = header;
+	mainView.bottomButtons[button].toolTipText = text;
+}*/
 
 public function getButtonToolTipHeader(buttonText:String):String
 {
@@ -1711,6 +1643,8 @@ public function displayStats(e:MouseEvent = null):void
 
 	if (flags[kFLAGS.BENOIT_EGGS] > 0)
 		childStats += "<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n";
+	if (flags[kFLAGS.FEMOIT_EGGS_LAID] > 0)
+		childStats += "<b>Benoite Eggs Produced:</b> " + flags[kFLAGS.FEMOIT_EGGS_LAID] + "\n";
 		
 	if (flags[kFLAGS.COTTON_KID_COUNT] > 0)
 		childStats += "<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n";
@@ -1725,10 +1659,25 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0)
 		childStats += "<b>Ember Offspring (Herms):</b> " + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n";
 	if (emberScene.emberChildren() > 0)
-		childStats += "<b>Total Children with Ember:</b> " + (emberScene.emberChildren()) + "\n";
+		childStats += "<b>Total Children With Ember:</b> " + (emberScene.emberChildren()) + "\n";
 	
 	if (flags[kFLAGS.EMBER_EGGS] > 0)
 		childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
+		
+	if (isabellaScene.totalIsabellaChildren() > 0) {
+		if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0)
+			childStats += "<b>Children With Isabella (Human, Males):</b> " + isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) + "\n";
+		if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) > 0)
+			childStats += "<b>Children With Isabella (Human, Females):</b> " + isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) + "\n";
+		if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) > 0)
+			childStats += "<b>Children With Isabella (Human, Herms):</b> " + isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) + "\n";
+		if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) > 0)
+			childStats += "<b>Children With Isabella (Cowgirl, Females):</b> " + isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) + "\n";
+		if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) > 0)
+			childStats += "<b>Children With Isabella (Cowgirl, Herms):</b> " + isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) + "\n";
+		childStats += "<b>Total Children With Isabella:</b> " + isabellaScene.totalIsabellaChildren() + "\n"
+	}
+		
 		
 	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0)
 		childStats += "<b>Children With Izma (Sharkgirls):</b> " + flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + "\n";
@@ -1737,15 +1686,15 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0 && flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0)
 		childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
 		
-	if (flags[kFLAGS.JOJO_LITTERS] > 0)
-		childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + flags[kFLAGS.JOJO_LITTERS] + "\n";
+	if (joyScene.getTotalLitters() > 0)
+		childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + joyScene.getTotalLitters() + "\n";
 		
 	if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
 	if (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 		childStats += "<b>Children With Kelly (Females):</b> " + (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE]) + "\n";
 	if (flags[kFLAGS.KELLY_KIDS] > 0)
-		childStats += "<b>Total Children with Kelly:</b> " + flags[kFLAGS.KELLY_KIDS] + "\n";
+		childStats += "<b>Total Children With Kelly:</b> " + flags[kFLAGS.KELLY_KIDS] + "\n";
 	if (kihaFollower.pregnancy.isPregnant)
 		childStats += "<b>Kiha's Pregnancy:</b> " + kihaFollower.pregnancy.incubation + "\n";
 	if (flags[kFLAGS.KIHA_CHILDREN_BOYS] > 0)
@@ -1771,7 +1720,7 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
 		childStats += "<b>Drider Children With Phylla:</b> " + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] + "\n";
 	if (flags[kFLAGS.ANT_KIDS] > 0 && flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)
-		childStats += "<b>Total Children with Phylla:</b> " + (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]) + "\n";
+		childStats += "<b>Total Children With Phylla:</b> " + (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]) + "\n";
 		
 	if (flags[kFLAGS.SHEILA_JOEYS] > 0)
 		childStats += "<b>Children With Sheila (Joeys):</b> " + flags[kFLAGS.SHEILA_JOEYS] + "\n";
@@ -1812,7 +1761,7 @@ public function displayStats(e:MouseEvent = null):void
 
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0)
 	{
-		bodyStats += "<b>Hunger:</b> " + Math.floor(player.hunger) + " / 100 (";
+		bodyStats += "<b>Satiety:</b> " + Math.floor(player.hunger) + " / 100 (";
 		if (player.hunger <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
 		if (player.hunger > 0 && player.hunger < 10) bodyStats += "<font color=\"#C00000\">Starving</font>";
 		if (player.hunger >= 10 && player.hunger < 25) bodyStats += "<font color=\"#800000\">Very hungry</font>";
@@ -2087,6 +2036,9 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0)
 		statEffects += "Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining (Lust resistance 20% lower, physical resistance 25% higher.)\n";
 
+	if (player.statusAffectv1(StatusAffects.AndysSmoke) > 0)
+		statEffects += "Andy's Pipe Smoke - " + player.statusAffectv1(StatusAffects.AndysSmoke) + " hours remaining (Speed temporarily lowered, intelligence temporarily increased.)\n";
+		
 	if (player.statusAffectv1(StatusAffects.IzumisPipeSmoke) > 0) 
 		statEffects += "Izumi's Pipe Smoke - " + player.statusAffectv1(StatusAffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
 
@@ -2101,7 +2053,7 @@ public function displayStats(e:MouseEvent = null):void
 	// End Ongoing Stat Effects
 	menu();
 	if (player.statPoints > 0) {
-		outputText("\n\n<b>You have " + num2Text(player.statPoints) + " stats points to distribute.");
+		outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.");
 		addButton(1, "Stat Up", attributeMenu);
 	}
 	doNext(playerMenu);
@@ -2269,6 +2221,7 @@ public function dynStats(... args):void
 			var argsi:String = (args[i] as String);
 			if (argsi == "lust") argsi = "lus";
 			if (argsi == "sens") argsi = "sen";
+			if (argsi == "inte") argsi = "int";
 			if (argsi.length <= 4) // Short
 			{
 				argIndex = argNamesShort.indexOf(argsi.slice(0, 3));

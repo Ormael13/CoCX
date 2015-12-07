@@ -405,7 +405,8 @@
 					}
 					flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 				}
-				newGameGo();
+				if (flags[kFLAGS.LETHICE_DEFEATED] > 0) renamePrompt();
+				else newGameGo();
 				outputText("\n\n\n<b>You must select a name.</b>");
 				return;
 			}
@@ -413,6 +414,12 @@
 			boxNames.visible = false;
 			mainView.nameBox.visible = false;
 			player.short = mainView.nameBox.text;
+			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) { //Dirty checking as the NG+ flag is incremented after reincarnating.
+				clearOutput();
+				outputText("You shall be known as " + player.short + " now.");
+				ascensionMenu();
+				return;
+			}
 			customPlayerProfile = customName(mainView.nameBox.text);
 			menu();
 			if (customPlayerProfile != null) {
@@ -421,13 +428,18 @@
 				addButton(1, "Continue On", noCustomProfile);
 			}
 			else { //Proceed with normal character creation
-				outputText("\n\n\n\nAre you a man or a woman?");
-				addButton(0, "Man", isAMan);
-				addButton(1, "Woman", isAWoman);
-				if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] > 0) {
-					outputText("\n\nOr a hermaphrodite as you've unlocked hermaphrodite option!");
-					addButton(2, "Herm", isAHerm);
-				}
+				genericGenderChoice();
+			}
+		}
+		
+		private function genericGenderChoice():void {
+			outputText("Are you a man or a woman?");
+			menu();
+			addButton(0, "Man", isAMan);
+			addButton(1, "Woman", isAWoman);
+			if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] > 0) {
+				outputText("\n\nOr a hermaphrodite as you've unlocked hermaphrodite option!");
+				addButton(2, "Herm", isAHerm);
 			}
 		}
 		
@@ -440,15 +452,8 @@
 			}
 			else {
 				//After character creation the fact that customPlayerProfile is not null will activate a custom player setup 
-				outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...");
-				outputText("\n\n\n\nAre you a man or a woman?");
-				menu();
-				addButton(0, "Man", isAMan);
-				addButton(1, "Woman", isAWoman);
-				if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] > 0) {
-					outputText("\n\nOr a hermaphrodite as you've unlocked hermaphrodite option!");
-					addButton(2, "Herm", isAHerm);
-				}
+				outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...\n\n");
+				genericGenderChoice();
 			}
 		}
 		
@@ -538,44 +543,64 @@
 		}
 		
 		private function isAMan():void {
-			player.str += 3;
-			player.tou += 2;
-			
-			player.balls = 2;
-			player.ballSize = 1;
-			player.clitLength = 0;
+			//Attributes
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+				player.str += 3;
+				player.tou += 2;
+			}
+			//Body attributes
 			player.fertility = 5;
 			player.hairLength = 1;
 			player.tallness = 71;
 			player.tone = 60;
 			
-			player.createBreastRow();
+			//Genetalia
+			player.balls = 2;
+			player.ballSize = 1;
+			player.clitLength = 0;
 			player.createCock();
 			player.cocks[0].cockLength = 5.5;
 			player.cocks[0].cockThickness = 1;
 			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
+			
+			//Breasts
+			player.createBreastRow();
+			
+			//Gender set
 			player.gender = GENDER_MALE;
+			
+			//Choices
 			clearOutput();
 			outputText("You are a man.  Your upbringing has provided you an advantage in strength and toughness.\n\nWhat type of build do you have?");
 			simpleChoices("Lean", buildLeanMale, "Average", buildAverageMale, "Thick", buildThickMale, "Girly", buildGirlyMale, "", null);
 		}
 
 		private function isAWoman():void {
-			player.spe += 3;
-			player.inte += 2;
-			
-			player.balls = 0;
-			player.ballSize = 0;
-			player.clitLength = 0.5;
+			//Attributes
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+				player.spe += 3;
+				player.inte += 2;
+			}
+			//Body attributes
 			player.fertility = 10;
 			player.hairLength = 10;
 			player.tallness = 67;
 			player.tone = 30;
 			
-			player.createBreastRow();
+			//Genetalia
+			player.balls = 0;
+			player.ballSize = 0;
 			player.createVagina();
+			player.clitLength = 0.5;
+			
+			//Breasts
+			player.createBreastRow();
+			
+			//Gender set
 			player.gender = GENDER_FEMALE;
+			
+			//Choices
 			clearOutput();
 			outputText("You are a woman.  Your upbringing has provided you an advantage in speed and intellect.\n\nWhat type of build do you have?");
 			simpleChoices("Slender", buildSlenderFemale, "Average", buildAverageFemale, "Curvy", buildCurvyFemale, "Tomboyish", buildTomboyishFemale, "", null);
@@ -584,15 +609,18 @@
 		private function isAHerm():void {
 			player.gender = GENDER_HERM;
 			//Attributes
-			player.str+=1;
-			player.tou+=1;
-			player.spe+=1;
-			player.inte+= 1;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+				player.str+=1;
+				player.tou+=1;
+				player.spe+=1;
+				player.inte+= 1;
+			}
 			//Body attributes
+			player.fertility = 10;
+			player.hairLength = 10;
 			player.tallness = 69;
 			player.tone = 45;
-			player.hairLength = 10;
-			player.fertility = 10;
+			
 			//Genetalia
 			player.createVagina();
 			player.clitLength = .5;
@@ -601,9 +629,13 @@
 			player.cocks[0].cockThickness = 1;
 			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
+			
 			//Breasts
 			player.createBreastRow();
-			player.breastRows[0].breastRating = 2;
+			
+			//Gender set
+			player.gender = GENDER_HERM;
+			
 			//Choices
 			outputText("\n\nYou are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?", true);
 			menu();
@@ -855,7 +887,7 @@
 			menuBeardSettings();
 		}
 		private function menuBeardLength():void {
-			outputText("How long would you like your beard be? \n\nNote: Beard will slowly grow over time, just like in the real world. Unless you have no beard. You can change your beard style later in th game.", true);
+			outputText("How long would you like your beard be? \n\nNote: Beard will slowly grow over time, just like in the real world. Unless you have no beard. You can change your beard style later in the game.", true);
 			menu();
 			addButton(0, "No Beard", chooseBeardLength, 0);
 			addButton(1, "Trim", chooseBeardLength, 0.1);
@@ -875,15 +907,15 @@
 		//-- HEIGHT
 		//-----------------
 		private function setHeight():void {
-			menu();
+			clearOutput();
 			if (kGAMECLASS.testingBlockExiting)
 			{
 				// We're running under the testing script.
 				// Stuff a number in the box and go go go
 				mainView.nameBox.text = "69";
 			}
-			outputText("\n\nSet your height in inches.", false)
-			outputText("\nYou can choose any height between 4 feet (48 inches) and 8 feet (96 inches).", false)
+			outputText("Set your height in inches.");
+			outputText("\nYou can choose any height between 4 feet (48 inches) and 8 feet (96 inches).");
 			mainView.nameBox.visible = true;
 			mainView.nameBox.maxChars = 2;
 			mainView.nameBox.restrict = "0-9";
@@ -959,7 +991,7 @@
 		}
 		private function chooseCockLength(length:Number):void {
 			player.cocks[0].cockLength = length;
-			player.cocks[0].cockThickness = (length / 5);
+			player.cocks[0].cockThickness = (length / 5) - 0.1;
 			genericStyleCustomizeMenu();
 		}
 
@@ -3394,12 +3426,15 @@
 			hideStats();
 			clearOutput();
 			hideMenus();
-			outputText("The world around you suddenly becomes small and irrelevant. Around you is an endless void dotted with stars. You encompass everything and everything encompass you.");
+			mainView.nameBox.visible = false;
+			kGAMECLASS.displayHeader("Ascension");
+			outputText("The world you have departed is irrelevant and you are in an endless black void dotted with tens of thousands of stars. You encompass everything and everything encompasses you.");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			outputText("\n\n(When you're done, select Reincarnate.)");
 			menu();
-			addButton(0, "Perk Selection", ascensionPerkMenu, null, null, null, "Spend Ascension Perk Points on special perks!");
+			addButton(0, "Perk Select", ascensionPerkMenu, null, null, null, "Spend Ascension Perk Points on special perks!", "Perk Selection");
 			addButton(1, "Respec", respecLevelPerks, null, null, null, "Respec all level-up perks for 5 Ascension Perk Points?");
+			addButton(2, "Rename", renamePrompt, null, null, null, "Change your name at no charge?");
 			addButton(4, "Reincarnate", reincarnatePrompt, null, null, null, "Reincarnate and start an entirely new adventure?");
 		}
 		private function ascensionPerkMenu():void {
@@ -3449,6 +3484,11 @@
 				doNext(ascensionMenu);
 				return;
 			}
+			if (player.perkPoints == player.level - 1) {
+				outputText("There is no need to respec as you've already resetted your level-up perks.");
+				doNext(ascensionMenu);
+				return;
+			}
 			player.ascensionPerkPoints -= 5;
 			player.perkPoints = player.level - 1;
 			var ascendPerkTemp:Array = [];
@@ -3463,6 +3503,22 @@
 			}
 			outputText("Your level-up perks are now reset and you are refunded the perk points.");
 			doNext(ascensionMenu);
+		}
+		
+		private function renamePrompt():void {
+			clearOutput();
+			outputText("You may choose to change your name.");
+			mainView.nameBox.visible = true;
+			mainView.nameBox.width = 165;
+			mainView.nameBox.text = player.short;
+			mainView.nameBox.maxChars = 16;
+			mainView.nameBox.restrict = null;
+			menu();
+			addButton(0, "OK", chooseName);
+			addButton(4, "Back", ascensionMenu);
+			//Workaround
+			mainView.nameBox.x = mainView.mainText.x + 5;
+			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		}
 		
 		private function reincarnatePrompt():void {
@@ -3494,6 +3550,11 @@
 					if (inventory.armorRackDescription()) outputText(" Something clicks in your mind; they must be the old armors you had from your previous incarnation!");
 					else outputText("It's empty and you let out a sigh but you know you can bring it to Mareth.");
 				}
+				if (player.hasKeyItem("Equipment Rack - Shields") >= 0) {
+					outputText("\n\nThere is a shield rack. You look at it. ");
+					if (inventory.shieldRackDescription()) outputText(" Something clicks in your mind; they must be the old shields you had from your previous incarnation!");
+					else outputText("It's empty and you let out a sigh but you know you can bring it to Mareth.");
+				}
 				if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
 					outputText("\n\nThere is a jewelry box on the dresser. You walk over to the box, open it, and look inside. ");
 					if (inventory.jewelryBoxDescription()) outputText(" It's making sense! The contents must be from your past adventures.")
@@ -3502,9 +3563,17 @@
 			}
 			outputText("\n\nAfter looking around the room for a while, you look into the mirror and begin to recollect who you are...");
 			player.genderCheck();
-			doNext(genericStyleCustomizeMenu);
+			player.breastRows = [];
+			player.cocks = [];
+			player.vaginas = [];
+			doNext(routeToGenderChoiceReincarnation);
 		}
-
+		
+		private function routeToGenderChoiceReincarnation():void {
+			clearOutput();
+			genericGenderChoice();
+		}
+		
 		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean {
 			return perk.ptype.keepOnAscension(respec);
 		}

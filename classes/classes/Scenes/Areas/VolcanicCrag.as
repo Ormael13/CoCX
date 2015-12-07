@@ -50,10 +50,12 @@ package classes.Scenes.Areas
 					behemothScene.behemothIntro();
 					break;
 				case 1:
-					outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ");
+					outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ", true);
 					inventory.takeItem(consumables.DRAKHRT, camp.returnToCampUseOneHour);
+					break;
 				default:
 					outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting.", true);
+					doNext(camp.returnToCampUseOneHour);
 			}
 		}
 		

@@ -34,6 +34,7 @@ package classes.Scenes.Places
 				return;
 			}
 			clearOutput();
+			outputText(images.showImage("location-ingnam"));
 			outputText("Ingnam is a rich and prosperous village despite its small size. There is already a well-established array of shops with a constant hum of tradesmen and merchants. The temple sits within view of the patrons sitting at tables at the tavern which serves as a hub for people near and far to drink and dance. On the road leading out of the plaza that sits before the temple is a trail that meanders its way to a large farm in the distance.");
 			outputText("\n\nLooming ominously in the distance is a mountain known by the locals as Mount Ilgast. Surrounding Ingnam is a vast expanse of wilderness.");
 			if (model.time.hours >= 21 || model.time.hours < 6) outputText("\n\nIt's dark outside. Stars dot the night sky and a moon casts the moonlight over the landscape, providing little light. Shops are closed at this time.");
@@ -84,27 +85,29 @@ package classes.Scenes.Places
 			clearOutput();
 			hideMenus();
 			outputText("Your time has come to meet up with the village elders. You know you are going to get sent to the demon realm and you're most likely not going to be able to return to Ingnam. You give your family and friends a long farewell.");
-			if (player.weaponName != "fists") {
-				hasWeapon = true;
-				player.setWeapon(WeaponLib.FISTS);
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) { //Doesn't happen in New Game+.
+				if (player.weaponName != "fists") {
+					hasWeapon = true;
+					player.setWeapon(WeaponLib.FISTS);
+				}
+				while (player.hasItem(weapons.DAGGER, 1)) {
+					hasWeapon = true;
+					player.destroyItems(weapons.DAGGER, 1);
+				}
+				while (player.hasItem(weapons.PIPE, 1)) {
+					hasWeapon = true;
+					player.destroyItems(weapons.PIPE, 1);
+				}
+				while (player.hasItem(weapons.SPEAR, 1)) {
+					hasWeapon = true;
+					player.destroyItems(weapons.SPEAR, 1);
+				}
+				while (player.hasItem(weapons.KATANA, 1)) {
+					hasWeapon = true;
+					player.destroyItems(weapons.KATANA, 1);
+				}
+				if (hasWeapon) outputText("\n\n<b>Unfortunately, you were instructed to leave your weapon behind.</b>");
 			}
-			while (player.hasItem(weapons.DAGGER, 1)) {
-				hasWeapon = true;
-				player.destroyItems(weapons.DAGGER, 1);
-			}
-			while (player.hasItem(weapons.PIPE, 1)) {
-				hasWeapon = true;
-				player.destroyItems(weapons.PIPE, 1);
-			}
-			while (player.hasItem(weapons.SPEAR, 1)) {
-				hasWeapon = true;
-				player.destroyItems(weapons.SPEAR, 1);
-			}
-			while (player.hasItem(weapons.KATANA, 1)) {
-				hasWeapon = true;
-				player.destroyItems(weapons.KATANA, 1);
-			}
-			if (hasWeapon) outputText("\n\n<b>Unfortunately, you were instructed to leave your weapon behind.</b>");
 			flags[kFLAGS.IN_INGNAM] = 0;
 			flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] = 1;
 			doNext(kGAMECLASS.charCreation.arrival);
@@ -325,7 +328,7 @@ package classes.Scenes.Places
 		}
 		
 		public function addShopItem(item:ItemType, price:int, shop:int):void {
-			outputText("\n" + price + " gems - " + item.longName + "");
+			outputText("\n" + capitalizeFirstLetter(item.longName) + " - " + price + " gems");
 			var button:int = 0;
 			for (var i:int = 0; i < 14; i++) {
 				if (buttonIsVisible(i)) button++;
@@ -337,6 +340,7 @@ package classes.Scenes.Places
 		public function menuTemple():void {
 			hideMenus();
 			clearOutput();
+			outputText(images.showImage("location-ingnam-temple"));
 			outputText("The village’s temple appears humble looking from its stony exterior but the interior of temple is truly a marvel to behold - intricately decorated wooden arches adorned with complex patterns of arcane runes of the Old World, walls adorned with majestic tapestries depicting the Gods and their most valiant of feats and, to the end of the temple stands an incredibly designed shrine to the All-Giving, the mother of all Gods.");
 			outputText("\n\nIncense languorously wafts from the alcoves where offerings of fruit are left out for the Gods. Monks passively move amongst the parishioners, offering solace to those in need, food or drink to those who are weary, or in meditation.");
 			outputText("\n\nThere are several soft mats on the floor to provide soft areas for people to pray on.");
@@ -349,6 +353,7 @@ package classes.Scenes.Places
 		public function menuTavern():void {
 			hideMenus();
 			clearOutput();
+			outputText(images.showImage("location-ingnam-inn"));
 			outputText("The inn is a cozy little nook that exudes a warm and welcoming air. You see several guardsmen roaring with laughter over a few steins and a hand of cards, and some townsfolk chatting about random topics. The innkeeper stands behind the polished wooden counter, serving beverages to his patrons and cleaning up spilled drinks.");
 			if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0 && flags[kFLAGS.INGNAM_GREETED_AFTER_LONGTIME] <= 0) {
 				welcomeBack();
@@ -454,7 +459,7 @@ package classes.Scenes.Places
 				player.addStatusValue(StatusAffects.Drunk, 2, 1);
 				if (player.statusAffectv1(StatusAffects.Drunk) < 2) player.addStatusValue(StatusAffects.Drunk, 1, 1);
 				if (player.statusAffectv2(StatusAffects.Drunk) == 2) {
-					outputText("\n\n<b>You feel a bit drunk. Maybe you should cut back on the beers.</b>");
+					outputText("\n\n<b>You feel a bit drunk. Maybe you should cut back on the beers?</b>");
 				}
 				//Get so drunk you end up peeing! Genderless can still urinate.
 				if (player.statusAffectv2(StatusAffects.Drunk) >= 3) {
@@ -511,10 +516,13 @@ package classes.Scenes.Places
 			outputText("\n\n<b><u>Pricings</u></b>");
 			outputText("\n5 gems - Sandwich");
 			outputText("\n3 gems - Soup");
-
+			outputText("\n5 gems - Hard biscuits (Packed)");
+			outputText("\n10 gems - Trail mix (Packed)");
 			menu();
 			addButton(0, "Sandwich", buySandwich);
 			addButton(1, "Soup", buySoup);
+			addButton(2, "Biscuits", buyHardBiscuits);
+			addButton(3, "Trail Mix", buyTrailMix);
 			addButton(14, "Back", menuTavern);
 		}
 		
@@ -548,6 +556,32 @@ package classes.Scenes.Places
 			player.refillHunger(20);
 			cheatTime(1/12);
 			doNext(menuTavern);
+		}
+		
+		private function buyHardBiscuits():void {
+			clearOutput();
+			if(player.gems < 5) {
+				outputText("You can't afford one of those!");
+				doNext(orderFood);
+				return;
+			}
+			outputText("You pay five gems for a pack of hard biscuits.  ");
+			player.gems -= 5;
+			statScreenRefresh();
+			inventory.takeItem(consumables.H_BISCU, orderFood);
+		}
+
+		private function buyTrailMix():void {
+			clearOutput();
+			if (player.gems < 10) {
+				outputText("You can't afford one of those!");
+				doNext(orderFood);
+				return;
+			}
+			outputText("You pay twenty gems for a pack of trail mix.  ");
+			player.gems -= 10;
+			statScreenRefresh();
+			inventory.takeItem(consumables.TRAILMX, orderFood);
 		}
 		
 		public function hearRumors():void { //Hear rumors. Will be altered after defeating Lethice so he will say "Welcome back".

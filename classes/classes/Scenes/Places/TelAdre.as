@@ -3,6 +3,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.Items.Armor;
 	import classes.Scenes.Dungeons.DeepCave.ValaScene;
 	import classes.Scenes.Places.TelAdre.*;
 
@@ -117,7 +118,7 @@ private function encounterTelAdre():void {
 private function telAdreCrystal():void {
 	if(player.findStatusAffect(StatusAffects.TelAdre) < 0) player.createStatusAffect(StatusAffects.TelAdre,0,0,0,0);
 	//-70+ corruption, or possessed by exgartuan
-	if((player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.cor >= 70 + player.corruptionTolerance()) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+	if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.cor >= 70 + player.corruptionTolerance()) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n", false);
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.", false);
 		doNext(camp.returnToCampUseOneHour);
@@ -210,7 +211,8 @@ public function telAdreMenu():void {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
-	spriteSelect( -1);
+	spriteSelect(-1);
+	outputText(images.showImage("location-teladre"));
 	outputText("Tel'Adre is a massive city, though most of its inhabitants tend to hang around the front few city blocks.  It seems the fall of Mareth did not leave the city of Tel'Adre totally unscathed.  A massive tower rises up in the center of the city, shimmering oddly.  From what you overhear in the streets, the covenant's magic-users slave away in that tower, working to keep the city veiled from outside dangers.  There does not seem to be a way to get into the unused portions of the city, but you'll keep your eyes open.\n\n", true);
 	outputText("A sign depicting a hermaphroditic centaur covered in piercings hangs in front of one of the sandstone buildings, and bright pink lettering declares it to be the 'Piercing Studio'.  You glance over and see the wooden facade of Urta's favorite bar, 'The Wet Bitch'.  How strange that those would be what she talks about during a tour.  In any event you can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand, and a foppishly-dressed dog-man with large floppy ears seems to be running some kind of pawnshop in his stand.  Steam boils from the top of a dome-shaped structure near the far end of the street, and simple lettering painted on the dome proclaims it to be a bakery.  Perhaps those shops will be interesting as well.", false);
 	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && !kGAMECLASS.raphael.RaphaelLikes()) {
@@ -242,6 +244,9 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 }
 
 private function armorShops():void {
+	clearOutput();
+	outputText("The shopping district of Tel’adre happens to be contained in a large dead end street, with a large set of doors at the entrance to protect it from thieves at night, you’d assume from a higher elevation it would look like a giant square courtyard. Due to the cities shopping area being condensed into one spot, most if not every visible wall has been converted into a store front, in the center of the area are some small stands, guess not everyone can afford a real store.");
+	outputText("\n\nRight off the bat you see the ‘Piercing Studio’, its piercing covered centaur sign is a real eye catcher. You can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand. As well as other shops lining the walls, perhaps those shops will be interesting as well.");
 	menu();
 	addButton(0, "Blacksmith", armorShop);
 	addButton(1, "Piercing", piercingStudio);
@@ -1117,6 +1122,7 @@ public function barTelAdre():void {
 		loppe.loppeFirstMeeting();
 		return;
 	}
+	outputText(images.showImage("location-teladre-thewetbitch"));
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ");
 	if (player.humanScore() <= 3) outputText("despite your altered appearance, ");
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.");
@@ -1583,8 +1589,15 @@ public function armorShop():void {
 private function armorBuy(itype:ItemType):void {
 	spriteSelect(64);
 	clearOutput();
-	outputText("Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.\n\n", false);
-	outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+	if (itype is Armor) { 
+		outputText("Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.\n\n", false);
+		outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+	}
+	else {
+		outputText("Yvonne gives you a serious look, then nods.  She pulls the shield off a rack and shows it to you.\n\n", false);
+		outputText("She smiles broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+
+	}
 	if(player.gems < itype.value) {
 		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
 		//Goto shop main menu
@@ -1923,7 +1936,7 @@ private function carpentryShopBuyWoodYes():void {
 			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 999) * 10);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 999);
 		}
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100");
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]);
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"", true);
 	statScreenRefresh();

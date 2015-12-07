@@ -212,8 +212,7 @@ public function winAgainstMarae():void {
 			outputText("\n\nSomething shiny catches your eye. Clearly, this has to be Marae's lethicite!", false)
 			outputText("\n<b>(Key Item Gained: Marae's Lethicite!)</b>", false)
 			
-			player.createKeyItem("Marae's Lethicite", 0, 0, 0, 0);
-			flags[kFLAGS.MARAE_LETHICITE] = 3;
+			player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
 		}
 		outputText("\n\nAfter the death of a corrupted physical goddess, you see something odd. There is a pile of intact shards of bark. They looks large and thick enough to be workable. You give it an experiment punch. ")
 		if (player.str < 40) outputText("You scream as your hand hits the chitin. Maybe it's because you're not strong enough? ")
@@ -299,8 +298,7 @@ private function maraeStealLethicite():void {
 	if((player.spe > 35 && (rand(player.spe/3 + 30) > 20)) || (player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2))
 	{
 		outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You evade the gauntlet of grabbing tentacles that hang from the branches, snatch the large gem in both arms and run for the beach.  You do not hear the sounds of pursuit, only a disappointed sigh.", false);
-		player.createKeyItem("Marae's Lethicite", 0, 0, 0, 0);
-		flags[kFLAGS.MARAE_LETHICITE] = 3;
+		player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	//(FAIL)

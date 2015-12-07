@@ -331,7 +331,7 @@ import classes.Items.JewelryLib;
 			else
 			{
 				//CoC_Settings.error("");
-				return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL FEN IMMEDIATELY.</b>";
+				return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL KITTEH IMMEDIATELY.</b>";
 			}
 		}
 		
@@ -342,7 +342,7 @@ import classes.Items.JewelryLib;
 			if (!noAdj)
 			{
 				//Adjectives first!
-				if (skinAdj != "")
+				if (skinAdj != "" && !noTone && skinTone != "rough gray")
 				{
 					skinzilla += skinAdj;
 					if (noTone)
@@ -364,7 +364,7 @@ import classes.Items.JewelryLib;
 		
 		public function hasMuzzle():Boolean
 		{
-			if (faceType == 1 || faceType == 2 || faceType == 6 || faceType == 7 || faceType == 9 || faceType == 11 || faceType == 12)
+			if (faceType == FACE_HORSE || faceType == FACE_DOG || faceType == FACE_CAT || faceType == FACE_LIZARD || faceType == FACE_KANGAROO || faceType == FACE_FOX || faceType == FACE_DRAGON || faceType == FACE_RHINO || faceType == FACE_ECHIDNA || faceType == FACE_DEER)
 				return true;
 			return false;
 		}
@@ -381,19 +381,31 @@ import classes.Items.JewelryLib;
 			//1 - horse
 			//2 - dogface
 			//6 - kittah face
+			//7 - lizard face (durned argonians!)
 			//9 - kangaface
-			if (faceType == 9 || faceType == 6 || faceType == 2 || faceType == 1 || faceType == 11)
+			if (hasMuzzle())
 			{
-				if (int(Math.random() * 2) == 0)
-					return "muzzle";
-				if (int(Math.random() * 3) == 0 && faceType == 1)
+				if (int(Math.random() * 3) == 0 && faceType == FACE_HORSE)
 					stringo = "long ";
-				if (int(Math.random() * 3) == 0 && faceType == 6)
+				if (int(Math.random() * 3) == 0 && faceType == FACE_CAT)
 					stringo = "feline ";
-				return stringo + "face";
+				if (int(Math.random() * 3) == 0 && faceType == FACE_RHINO)
+					stringo = "rhino ";
+				if (int(Math.random() * 3) == 0 && (faceType == FACE_LIZARD || faceType == FACE_DRAGON))
+					stringo = "reptilian ";
+				switch(rand(3)) {
+					case 0:
+						return stringo + "muzzle";
+					case 1:
+						return stringo + "snout";
+					case 2:
+						return stringo + "face";
+					default:
+						return stringo + "face";
+				}
 			}
 			//3 - cowface
-			if (faceType == 3)
+			if (faceType == FACE_COW_MINOTAUR)
 			{
 				if (Math.floor(Math.random() * 4) == 0)
 					stringo = "bovine ";
@@ -402,27 +414,16 @@ import classes.Items.JewelryLib;
 				return stringo + "face";
 			}
 			//4 - sharkface-teeth
-			if (faceType == 4)
+			if (faceType == FACE_SHARK_TEETH)
 			{
 				if (Math.floor(Math.random() * 4) == 0)
 					stringo = "angular ";
 				return stringo + "face";
 			}
-			//7 - lizard face (durned argonians!)
-			if (faceType == 7 || faceType == 12)
+			if (faceType == FACE_PIG || faceType == FACE_BOAR)
 			{
 				if (Math.floor(Math.random() * 4) == 0)
-					stringo = "reptilian ";
-				if (Math.floor(Math.random() * 4) == 0)
-					return stringo + "muzzle";
-				if (Math.floor(Math.random() * 4) == 0)
-					return stringo + "snout";
-				return stringo + "face";
-			}
-			if (faceType == 19)
-			{
-				if (Math.floor(Math.random() * 4) == 0)
-					stringo = "pig-like ";
+					stringo = (faceType == FACE_PIG ? "pig" : "boar") + "-like ";
 				if (Math.floor(Math.random() * 4) == 0)
 					return stringo + "snout";
 				return stringo + "face";

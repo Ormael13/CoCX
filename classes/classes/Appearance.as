@@ -80,10 +80,11 @@
 			//
 			//If furry and longish hair sometimes call it a mane (50%)
 			if (i_creature.skinType == 1 && i_creature.hairLength > 3 && rand(2) == 0) {
-				if (i_creature.hairType == 1) description += "feather-";
-				else if (i_creature.hairType == 2) description += "transparent ";
-				else if (i_creature.hairType == 3) description += "goo-";
-				else if (i_creature.hairType == 4) description += "tentacle-";
+				if (i_creature.hairType == HAIR_FEATHER) description += "feather-";
+				else if (i_creature.hairType == HAIR_GHOST) description += "transparent ";
+				else if (i_creature.hairType == HAIR_GOO) description += "goo-";
+				else if (i_creature.hairType == HAIR_ANEMONE) description += "tentacle-";
+				else if (i_creature.hairType == HAIR_QUILL) description += "quill-";
 				description += "mane";
 				return description;
 			}
@@ -94,10 +95,11 @@
 			 return descript;
 			 }*/
 			//If nothing else used, use hair!
-			if (i_creature.hairType == 1) description += "feather-";
-			else if (i_creature.hairType == 2) description += "transparent ";
-			else if (i_creature.hairType == 3) description += "goo-";
-			else if (i_creature.hairType == 4) description += "tentacle-";
+			if (i_creature.hairType == HAIR_FEATHER) description += "feather-";
+			else if (i_creature.hairType == HAIR_GHOST) description += "transparent ";
+			else if (i_creature.hairType == HAIR_GOO) description += "goo-";
+			else if (i_creature.hairType == HAIR_ANEMONE) description += "tentacle-";
+			else if (i_creature.hairType == HAIR_QUILL) description += "quill-";
 			description += "hair";
 
 			return description;
@@ -710,19 +712,6 @@
 					"unusual endowment",
 					"scaly shaft");
 			}
-			else if (cockType == CockTypesEnum.PIG) {
-				return randomChoice("pig cock",
-					"pig dick",
-					"pig penis",
-					"pig-like cock",
-					"pig-like dick",
-					"swine cock",
-					"swine penis",
-					"corkscrew-tipped cock",
-					"hoggish cock",
-					"pink pig-cock",
-					"pink pecker");
-			}
 			else if (cockType == CockTypesEnum.DISPLACER) {
 				return randomChoice("coerl cock",
 					"tentacle-tipped phallus",
@@ -748,6 +737,43 @@
 					"avian pecker",
 					"tapered cock",
 					"tapered prick");
+			}
+			else if (cockType == CockTypesEnum.PIG) {
+				return randomChoice("pig cock",
+					"pig dick",
+					"pig penis",
+					"pig-like cock",
+					"pig-like dick",
+					"swine cock",
+					"swine penis",
+					"corkscrew-tipped cock",
+					"hoggish cock",
+					"pink pig-cock",
+					"pink pecker");
+			}
+			else if (cockType == CockTypesEnum.RHINO) {
+				return randomChoice("oblong cock",
+					"oblong dick",
+					"oblong prick",
+					"rhino cock",
+					"rhino dick",
+					"rhino penis",
+					"rhino pecker",
+					"rhino prick",
+					"bulged rhino cock",
+					"bulged rhino dick");
+			}
+			else if (cockType == CockTypesEnum.ECHIDNA) {
+				return randomChoice("strange echidna dick",
+					"strange echidna cock",
+					"echidna dick",
+					"echidna penis",
+					"echidna cock",
+					"exotic endowment",
+					"four-headed prick",
+					"four-headed penis",
+					"four-headed cock",
+					"four-headed dick");
 			}
 			return randomChoice("cock",
 				"prick",
@@ -1182,6 +1208,18 @@
 					"reptilian shaft",
 					"snake-shaft",
 					"snake dick"];
+				description += randomChoice(options);
+			}
+			else if (cockType == CockTypesEnum.RHINO) {
+				options = ["oblong cock",
+					"rhino dick",
+					"rhino cock",
+					"bulged rhino cock",
+					"rhino penis",
+					"rhink dong",
+					"oblong penis",
+					"oblong dong",
+					"oblong dick"];
 				description += randomChoice(options);
 			}
 			else {
@@ -2278,7 +2316,8 @@
 					[HAIR_FEATHER, "feather"],
 					[HAIR_GHOST, "transparent"],
 					[HAIR_GOO, "goopy"],
-					[HAIR_ANEMONE, "tentacle"]
+					[HAIR_ANEMONE, "tentacle"],
+					[HAIR_QUILL, "quill"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2307,7 +2346,14 @@
 					[FACE_RACCOON_MASK, "raccoon mask"],
 					[FACE_RACCOON, "racoon"],
 					[FACE_BUCKTEETH, "buckteeth"],
-					[FACE_MOUSE, "mouse"]
+					[FACE_MOUSE, "mouse"],
+					[FACE_FERRET_MASK, "ferret mask"],
+					[FACE_FERRET, "ferret"],
+					[FACE_PIG, "pig"],
+					[FACE_BOAR, "boar"],
+					[FACE_RHINO, "rhino"],
+					[FACE_ECHIDNA, "echidna"],
+					[FACE_DEER, "deer"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2315,7 +2361,8 @@
 					[TONUGE_HUMAN, "human"],
 					[TONUGE_SNAKE, "snake"],
 					[TONUGE_DEMONIC, "demonic"],
-					[TONUGE_DRACONIC, "draconic"]
+					[TONUGE_DRACONIC, "draconic"],
+					[TONUGE_ECHIDNA, "echidna"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2339,7 +2386,12 @@
 					[EARS_FOX, "fox"],
 					[EARS_DRAGON, "dragon"],
 					[EARS_RACCOON, "raccoon"],
-					[EARS_MOUSE, "mouse"]
+					[EARS_MOUSE, "mouse"],
+					[EARS_FERRET, "ferret"],
+					[EARS_PIG, "pig"],
+					[EARS_RHINO, "rhino"],
+					[EARS_ECHIDNA, "echidna"],
+					[EARS_DEER, "deer"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2349,7 +2401,9 @@
 					[HORNS_COW_MINOTAUR, "cow"],
 					[HORNS_DRACONIC_X2, "2 draconic"],
 					[HORNS_DRACONIC_X4_12_INCH_LONG, "four 12\" long draconic"],
-					[HORNS_ANTLERS, "deer"]
+					[HORNS_ANTLERS, "deer"],
+					[HORNS_GOAT, "goat"],
+					[HORNS_RHINO, "rhino"]
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2386,7 +2440,11 @@
 					[TAIL_TYPE_MOUSE, "mouse"],
 					[TAIL_TYPE_BEHEMOTH, "behemoth"],
 					[TAIL_TYPE_PIG, "pig"],
-					[TAIL_TYPE_SCORPION, "scorpion"]
+					[TAIL_TYPE_SCORPION, "scorpion"],
+					[TAIL_TYPE_GOAT, "goat"],
+					[TAIL_TYPE_RHINO, "rhino"],
+					[TAIL_TYPE_ECHIDNA, "echidna"],
+					[TAIL_TYPE_DEER, "deer"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2442,7 +2500,11 @@
 					[LOWER_BODY_TYPE_DRIDER_LOWER_BODY, "drider"],
 					[LOWER_BODY_TYPE_FOX, "fox"],
 					[LOWER_BODY_TYPE_DRAGON, "dragon"],
-					[LOWER_BODY_TYPE_RACCOON, "raccoon"]
+					[LOWER_BODY_TYPE_RACCOON, "raccoon"],
+					[LOWER_BODY_TYPE_FERRET, "ferret"],
+					[LOWER_BODY_TYPE_CLOVEN_HOOFED, "cloven-hoofed"],
+					[LOWER_BODY_TYPE_ECHIDNA, "echidna"],
+					[LOWER_BODY_TYPE_ECHIDNA, "deertaur"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
@@ -2843,7 +2905,7 @@
 			if (currCock == 3) {
 				//For samecocks
 				if (same) {
-					descript += randomChoice("three ", "group of ", "menage a trois of ", "triad of ", "triumvirate of ");
+					descript += randomChoice("three ", "group of ", "<i>ménage à trois</i> of ", "triad of ", "triumvirate of ");
 					descript += creature.cockAdjective();
 					if (normalCocks == 3) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
 					if (horseCocks == 3) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
@@ -2970,7 +3032,7 @@
 			if (currCock == 3) {
 				//For samecocks
 				if (same) {
-					descript += randomChoice("three ", "a group of ", "a menage a trois of ", "a triad of ", "a triumvirate of ");
+					descript += randomChoice("three ", "a group of ", "a <i>ménage à trois</i> of ", "a triad of ", "a triumvirate of ");
 					descript += cockAdjectives(averageLength, averageThickness, creature.cocks[currCock - 1].cockType, creature);
 					if (normalCocks == 3)
 						descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";

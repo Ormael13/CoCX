@@ -792,14 +792,14 @@ public function getMilked():void {
 	//If already at cap
 	if(flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) {
 		outputText(" and displays a warning that <b>you're producing more than Whitney can pay for</b>", false);
-		payout = 0;		
+		payout = 0;
 	}
 	if(payout > 0) {
 		//If over cap reduce payout to the difference
 		if(payout + flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] > cap) payout = cap - flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK];
 		//Keep track of how much is paid
 		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
-		outputText(" and automatically dispenses " + num2Text(payout) + " gems.  Whitney really went all out with this setup!", false);
+		outputText(" and automatically dispenses " + num2Text(payout) + " gem" + (payout == 1 ? "" : "s") + ".  Whitney really went all out with this setup!", false);
 		//Display a warning that you've capped out.
 		if(flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) outputText("  <b>The machinery warns you that Whitney can't afford any more this week!</b>", false);
 		player.gems += payout;

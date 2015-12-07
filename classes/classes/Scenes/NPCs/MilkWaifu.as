@@ -384,6 +384,7 @@ private function relaxWithMilkWaifu():void {
 //[Communal Bath] (PC must have 3+ of the following followers)
 private function communalBath():void {
 	clearOutput();
+	outputText(images.showImage("communal-bath"));
 	outputText("As you relax in the tub, you decide it's hardly fair to have all this milk and just hog it to yourself.  You sit up and give a sharp whistle, getting the attention of the rest of camp.  \"<i>Jump on in, everyone!</i>\" you shout, quickly grabbing " + flags[kFLAGS.MILK_NAME] + " by the waist and dragging her in.  She tumbles into her own lactation with a sharp cry of surprise, breaching a moment later with a splutter.");
 	//If PC has Isabella: 
 	if(isabellaFollowerScene.isabellaFollower()) {
@@ -422,7 +423,7 @@ private function communalBath():void {
 	//{If PC has Kiha:
 	if (kihaFollower.followerKiha()) {
 		outputText("\n\nKiha, your dear dusky dragoness, wanders over to see what the commotion is, but turns her nose up at the sight of you bathing in breastmilk.  \"<i>Ew.  How the hell can you just...  wallow in that?  Disgusting!</i>\"");
-		if (silly() && player.str > 80 && player.spe > 80) outputText("  Without warning her, you grab Kiha. \"<i>HEY, what are you doing, doofus?</i>\" she yells as you finally pull her into the milky bath. \"<i>What have you done, idiot!? Fine, I'll bathe. Are you happy, doofus?</i>\" she grumbles.")
+		if (silly() && player.str > 80 && player.spe > 80) outputText("  Without warning Kiha, you grab her. \"<i>HEY, what are you doing, doofus?</i>\" she yells as you finally pull her into the milky bath. \"<i>What have you done, idiot!? Fine, I'll bathe. Are you happy? Baka!</i>\" she grumbles.")
 	}
 	//[Combine]
 	outputText("\n\nSurrounded by friends and lovers, you relax in the pool, leaning your arms back over the rim and closing your eyes, sighing contentedly.  Your friends splash and play with each other, happy to enjoy a few blissful, normal moments away from the cares of the world, away from the demons, and the monsters, and the horror their world has become.  The waves displace beside you, milk parting as a pair of giant jugs move over to you; you look down to see " + flags[kFLAGS.MILK_NAME] + " curling up in your arm.  Her giant teats float atop the waters, boyantly swaying with a strange grace atop the sea of their own making.");

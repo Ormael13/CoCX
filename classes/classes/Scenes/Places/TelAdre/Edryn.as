@@ -460,7 +460,7 @@ private function fuckEdrynNonTaur():void {
 	else outputText("self with your hand", false);
 	outputText(", you guide your " + cockDescript(x) + " towards the shining, black horse-cunt in front of you.  It parts easily, like a velvet curtain.  You slowly slide forward into Edryn's welcoming nethers, enjoying not having to fight to get your large " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " in for a change.  She trembles as you pass the halfway point, ", false);
 	if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("feeling your ring of prepuce slipping between her lips.  ", false);
-	else outputText("squirting little bit of fluid on the floor.  ", false);
+	else outputText("squirting a little bit of fluid on the floor.  ", false);
 	outputText("The further you push inside, the more aware of her warmth you become.  Her body temperature is higher than a human's, and it feels almost good enough to make you melt.\n\n", false);
 
 	outputText("She whinnies and pushes back against you, forcing your entire " + cockDescript(x) + " to slip up her well-lubed passage.  You slap her ass, watching the furred flanks jiggle slightly.  Edryn looks over her shoulder again to and gives you a sultry look.  Before you can puzzle out what she's trying to tell you, her entire cunt contracts tightly, like a silken vise.  It wrings your " + cockDescript(x) + " tightly, immobilizing you inside the powerful centauress and making your " + player.legs() + " feel wobbly and weak.\n\n", false);

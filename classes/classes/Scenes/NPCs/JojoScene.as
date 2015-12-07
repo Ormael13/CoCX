@@ -8,7 +8,8 @@
 
 		public function JojoScene()
 		{
-			pregnancy = new PregnancyStore(0, 0, kFLAGS.JOJO_BUTT_PREGNANCY_TYPE, kFLAGS.JOJO_EGGCUBATE_COUNT);
+			pregnancy = new PregnancyStore(kFLAGS.JOY_PREGNANCY_TYPE, kFLAGS.JOY_PREGNANCY_INCUBATION, kFLAGS.JOJO_BUTT_PREGNANCY_TYPE, kFLAGS.JOJO_EGGCUBATE_COUNT);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 150, 120, 96, 72, 48);
 			CoC.timeAwareClassAdd(this);
 		}
 
@@ -16,7 +17,8 @@
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			trace("\nJojo time change: Time is " + model.time.hours + ", butt incubation: " + pregnancy.buttIncubation);
+			if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) trace("\nJoy time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation);
+			else trace("\nJojo time change: Time is " + model.time.hours + ", butt incubation: " + pregnancy.buttIncubation);
 			if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN]--;
 			if (player.findStatusAffect(StatusAffects.NoJojo) >= 0) player.removeStatusAffect(StatusAffects.NoJojo);
 			if (model.time.hours > 23 && player.statusAffectv1(StatusAffects.Meditated) > 0) {
@@ -38,6 +40,12 @@
 			if (flags[kFLAGS.JOJO_BIMBO_STATE] == 2 && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] < 24) {
 				flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO]++;
 			}
+			if (pregnancy.isPregnant) {
+				if (joyScene.joyPregnancyUpdate()) return true;
+			}
+			if (flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] > 1) {
+				flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER]--;
+			}
 			return false;
 		}
 	
@@ -57,8 +65,11 @@
 //const JOJO_EGGCUBATE_COUNT:int = 591;
 
 public function jojoSprite():void {
-	if(tentacleJojo()) spriteSelect(81);
-	else spriteSelect(34);
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
+		if (tentacleJojo()) spriteSelect(81);
+		else spriteSelect(34);
+	}
+	//No Joy sprite yet.
 }
 
 private function assholeOrDP():String {
@@ -522,7 +533,7 @@ public function useTentacleJojo():void {
 		outputText("Twinned dicks force themselves further into your throat, until you are sure they must be outlined and clearly visible to Jojo on your neck.  The mouse-dicks push further in, working their way down to the bottom of your esophagus before pulling back, dripping cum all the while.  Every now and then you get a feeling of fullness in your belly, and realize one of them must have shot off a load of spunk directly into you.  The brutal mouthfuck shows no sign of slowing down, forcing you to gasp in a breath through your nose every time the tentacles pull back.\n\n", false);
 	}
 	//Cumsplosion
-	outputText("Jojo unleashes a howl of beastial pleasure, and you feel the ", false);
+	outputText("Jojo unleashes a howl of bestial pleasure, and you feel the ", false);
 	if(player.hasVagina()) {
 		outputText("tentacles in your " + assholeOrDP() + " thicken perceptibly.  Bulges of cum work their way down the tentacles, spreading your " + assholeOrDP() + " wide before stuffing you full of mouse cream.  You can feel your bowels and uterus filling, expanding you until you look ", false);
 		if(player.pregnancyIncubation == 0) outputText("mildly pregnant", false);
@@ -1605,7 +1616,7 @@ public function jojoFollowerMeditate():void {
 			}
 			addButton(1, "Give BJ", corruptJojoCunnilingus);
 			if (player.biggestTitSize() >= 2) addButton(6, (player.biggestLactation() > 1 ? "Suckle" : "Breasts"), corruptJojoBreasts); //All ya need is bewbs
-			addButton(9, "Back", playerMenu);
+			addButton(14, "Back", playerMenu);
 		}
 		
 		private function corruptJojoBJCruel():void {
@@ -2495,7 +2506,7 @@ private function jojoCampMenu():void {
 	if (player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(5, "Purge", wormRemoval, null, null, null, "Request him to purge the worms from your body.");
 	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0) addButton(8, "Rape", jojoAtCampRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
 	if (player.lust >= 33 && monk <= -3) addButton(8, "Sex", pureJojoSexMenu, null, null, null, "Initiate sexy time with the mouse-morph.");
-	addButton(9, "Leave", camp.campFollowers);
+	addButton(14, "Leave", camp.campFollowers);
 }
 
 
@@ -2504,6 +2515,7 @@ public function jojoAppearance():void
 {
 	clearOutput();
 	jojoSprite();
+	outputText(images.showImage("jojo-appearance"));
 	outputText("Jojo is a white furred mouse-morph with dish-like ears and a small muzzle below a sometimes twitchy nose. He watches you with striking blue eyes.\n\n");
 
 	outputText("He's wearing pale blue monk robes that are form fitting yet loose enough to allow him to move freely if the need arises. He also wears prayer beads, a cloth sash that holds his robe close and baggy pants cover his legs all the way to his mouse-like footpaws; on the back of his pants a small hole is cut to allow his ropy pink tail freedom.\n\n");

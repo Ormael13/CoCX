@@ -833,7 +833,7 @@ private function begHolli4Watches():void {
 //Changes the dynamic significantly - Holli becomes very subservient in her scenes.
 //Guard Camp
 //Assert Self:
-//Success/Fail dependant on: Level, height, tone, width.
+//Success/Fail dependent on: Level, height, tone, width.
 
 private function domUpSomeHolli():void {
 	clearOutput();

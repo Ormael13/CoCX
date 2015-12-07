@@ -1,9 +1,5 @@
 ﻿public function isHolidays():Boolean {
-	if (flags[kFLAGS.ITS_EVERY_DAY] <= 0)
-	{
-		return (date.date >= 25 && date.month == 11);
-	}
-	else return false;
+	return (date.date >= 25 && date.month == 11 || flags[kFLAGS.ITS_EVERY_DAY] > 0);
 }
 
 public function xmasBitchEncounter():void

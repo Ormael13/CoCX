@@ -76,6 +76,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function theFinalEnding():void {
 			flags[kFLAGS.LETHICE_DEFEATED] = 1;
+			if (flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] == 0) flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] = 1; //Temporary measure to prevent dungeon from becoming unclearable if you have Basilisk immunity.
 			clearOutput();
 			outputText("\"<i>No! It cannot be!</i>\" Lethice screams. You walk over to her defeated form and yank the staff away from her. ");
 			cleanupAfterCombat();
@@ -111,15 +112,15 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nYou raise your [weapon] and cleanly slice through Lethice's neck. Demonic blood spills forth, staining the carpet. ");
 				if (silly()) outputText("<b>FATALITY!</b> ");
 			}
-			else outputText("You grab Lethice and snap her neck, putting an end to her corruptive conquests. ");
-			outputText("\n\nWith Lethice dead, your destiny as a Champion has been fulfilled. You step up the steps, sit on the throne, and look back and reflect on your past accomplishments.");
+			else outputText("\n\nYou grab Lethice and snap her neck, putting an end to her corruptive conquests. ");
+			outputText("\n\nWith Lethice dead, your destiny as a Champion has been fulfilled. You step up the steps, sit on the throne, and reflect on your past accomplishments.");
 			if (player.cor >= 70) outputText("\n\nYou could even rule Mareth!");
 			doNext(theFinalEndingPart3);
 		}
 		private function fuckLethice():void {
 			clearOutput();
 			outputText("Super-duper placeholder for epic fuck scene.");
-			outputText("\n\nWith Lethice overthrown, your destiny as a Champion has been fulfilled. You step up the steps, sit on the throne, and look back and reflect on your past accomplishments.");
+			outputText("\n\nWith Lethice overthrown, your destiny as a Champion has been fulfilled. You step up the steps, sit on the throne, and reflect on your past accomplishments.");
 			if (player.cor >= 70) outputText("\n\nYou could even rule Mareth!");
 			player.orgasm();
 			doNext(theFinalEndingPart3);
@@ -132,7 +133,6 @@ package classes.Scenes.Dungeons.D3
 			if (flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] == 0) outputText("The incubus sighs and says, \"<i>So you've defeated Lethice? Very well, I'll offer you a safe passage out of this place. Get in there.</i>\"");
 			outputText("\n\nYou get into the lift and hold onto the railing before the platform lowers. While the platform does rock from side to side along the slow trip down, its motions are not erratic enough to put you in any significant danger. Even better, you aren't bothered by a single harpy along the way. This section of the high mountains seems to have been cleansed of them.");
 			outputText("\n\nThe platform touches down roughly thirty minutes after your departure, and you head back to camp with all due haste.");
-			
 			doNext(theFinalEndingPart4);
 		}
 
@@ -167,7 +167,19 @@ package classes.Scenes.Dungeons.D3
 
 			if (player.cor >= 80) outputText("Or maybe not... After all, you have Mareth to yourself.");
 			awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, true, true, false);
-			outputText("\n\n<b>THE END!</b> Now sit tight and wait until the official ending gets added!");
+			outputText("\n\n<b>THE END!</b> ");
+			if (silly()) {
+				switch(rand(2)) {
+					case 0:
+						outputText("#StillWaitingForFenoxoToFinishUpLethice");
+						break;
+					case 1:
+						outputText("Fenoxo, Y U NO finish up Lethice?");
+						break;
+					default:
+				}
+			}
+			else outputText("Now sit tight and wait until the official ending gets added!");
 			doNext(bringUpTheCredits);
 		}
 		

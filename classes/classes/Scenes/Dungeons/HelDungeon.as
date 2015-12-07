@@ -173,6 +173,7 @@ package classes.Scenes.Dungeons
 		}
 		public function goToHeliaDungeon2():void {
 			clearOutput();
+			outputText(images.showImage("dungeon-entrance-phoenixtower"));
 			outputText("Within the hour, you and Helia are hiking up the narrow ledges and crevices of the high mountains, slowly but steadily climbing toward a snow-capped peak.  Hel certainly seems to know where she's going - she blazes a certain and steady trail, as if she knew every path and shortcut up the mountain.  By the time you near the peak, you're convinced she's been up here before - many times, even.");
 			outputText("\n\nEventually, you see the crest of a squat, thick stone tower on the mountainside.  Hel easily guides you toward it, giving you a helping hand over an unusually wide gorge that would have kept most stray minotaurs well away from the solitary spire.  As you scramble onto the tower's plateau, Hel grabs your shoulders and pins you to the ground - just in time to avoid the gaze of a low-flying harpy.");
 			outputText("\n\n\"<i>Quiet,</i>\" she hisses, lying atop you so that you can't jump up and expose your position.  \"<i>We can't take them all at once out in the open... This is going to be a sneaking mission, got it?</i>\"");
@@ -214,8 +215,9 @@ package classes.Scenes.Dungeons
 		
 		//For when you want to visit the tower again.
 		public function returnToHeliaDungeon():void {
-			clearOutput()
-			outputText("You make your way back to the high mountains. You hike up the narrow ledges and crevices of the high mountains, slowly but steadily climbing toward a snow-capped peak.");
+			clearOutput();
+			outputText(images.showImage("dungeon-entrance-phoenixtower"));
+			outputText("You make your way back to the high mountains. Next, you hike up the narrow ledges and crevices of the high mountains, slowly but steadily climbing toward a snow-capped peak.");
 			outputText("\n\nYou remember where the tower is. You make your way back to the tower.");
 			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
 			kGAMECLASS.inDungeon = true;

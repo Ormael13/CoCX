@@ -80,6 +80,7 @@ package classes.Scenes.Areas.Bog
 				if (player.lust >= 33) {
 					outputText("You wonder what you should do to the lizan.");
 					addButton(0, "Use Dick", rapeLizanInTheAss, null, null, null, "Anally penetrate him with your [cocks].");
+					addButton(1, "Use Pussy", rapeLizanWithPussy, null, null, null, "Get on top of the lizan and stuff his cock into your [pussy].");
 					addButton(4, "Leave", cleanupAfterCombat);
 					return;
 				}
@@ -275,7 +276,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nWith a hoarse groan you reach your climax.");
 			if (player.hasCock()) outputText("\n\nThe lizan's grip on your [cock] tightens and with a sudden shiver you're gushing into his hand.");
 			if (player.hasVagina()) outputText("\n\nYou shiver as the finger inside your [vagina] is painted with evidence of your orgasm.");
-			outputText("\n\nYour orgasm seems to spur the lizan on. His thrusts become irregular before he tightens his grip on your waist. He shoves in to the hilt and, yelling like a madman, explodes. You feel his cum surging into your [asshole] as a hot warmth swells and dribbles out of your [vagina] and down your [legs] in a sticky stream of lizan dick juice.");
+			outputText("\n\nYour orgasm seems to spur the lizan on. His thrusts become irregular before he tightens his grip on your waist. He shoves in to the hilt and, yelling like a madman, explodes. You feel his cum surging into your [asshole] as a hot warmth swells " + (player.hasVagina() ? "and dribbles out of your [vagina] and " : "") + "down your [legs] in a sticky stream of lizan dick juice.");
 			outputText("\n\nYou spend some time cuddling, the lizan's still on your back with his warm cock in your [asshole]. Eventually, you get up and give him a deep kiss before you return to your camp.");
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();

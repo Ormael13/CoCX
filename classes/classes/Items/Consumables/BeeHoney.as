@@ -24,7 +24,7 @@ package classes.Items.Consumables
 			var honeyDesc:String;
 			var honeyValue:int;
 			if (special) {
-				honeyName = "Sp Honey";
+				honeyName = "SpHoney";
 				honeyLong = "a bottle of special bee honey";
 				honeyDesc = "A clear crystal bottle of a dark brown fluid that you got from the bee handmaiden.  It gives off a strong sweet smell even though the bottle is still corked.";
 				honeyValue = SPECIAL_HONEY_VALUE;

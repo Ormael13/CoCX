@@ -743,14 +743,6 @@ use namespace kGAMECLASS;
 			if (lizardScore() >= 4)
 			{
 				race = "lizan";
-				/*if (gender == 0) 
-					race = "lizan";
-				else if (gender == 1)
-					race = "male lizan";
-				else if (gender == 2)
-					race = "female lizan";
-				else
-					race = "hermaphrodite lizan";*/
 			}
 			if (dragonScore() >= 4)
 			{
@@ -793,7 +785,10 @@ use namespace kGAMECLASS;
 				if (lowerBody == 4)
 					race = "centaur-morph";
 				else
-					race = "equine-morph";
+					if (hornType == HORNS_UNICORN)
+						race = "unicorn-morph";
+					else
+						race = "equine-morph";
 			}
 			if (mutantScore() >= 5 && race == "human")
 				race = "corrupted mutant";
@@ -840,6 +835,7 @@ use namespace kGAMECLASS;
 				else
 					race = "mouse-morph";
 			}
+			//<mod>
 			if (pigScore() >= 4) 
 			{
 				race = "pig-morph";
@@ -848,6 +844,27 @@ use namespace kGAMECLASS;
 				if (faceType == 20)
 					race = "boar-morph";
 			}
+			if (satyrScore() >= 4)
+			{
+				race = "satyr";
+			}
+			if (rhinoScore() >= 4)
+			{
+				race = "rhino-morph";
+				if (faceType == 0) race = "rhino-" + mf("man", "girl");
+			}
+			if (echidnaScore() >= 4)
+			{
+				race = "echidna-morph";
+				if (faceType == 0) race = "echidna-" + mf("boy", "girl");
+			}
+			if (deerScore() >= 4)
+			{
+				race = "deer-morph";
+				if (faceType == 0) race = "deer-" + mf("morph", "girl");
+				if (lowerBody == LOWER_BODY_TYPE_DEERTAUR) race = "deer-taur";
+			}
+			//Special, bizarre races
 			if (dragonneScore() >= 6)
 			{
 				race = "dragonne-morph";
@@ -862,6 +879,7 @@ use namespace kGAMECLASS;
 			}
 			if (sirenScore() >= 4)
 				race = "siren";
+			//</mod>
 			if (lowerBody == 3)
 				race = "naga";
 			if (lowerBody == 4) {
@@ -996,6 +1014,8 @@ use namespace kGAMECLASS;
 				counter++;
 			if (wingType == 12)
 				counter++;
+			if (findStatusAffect(StatusAffects.Uniball) >= 0)
+				counter++;
 			return counter;
 		}
 
@@ -1035,7 +1055,7 @@ use namespace kGAMECLASS;
 			if (faceType == FACE_FERRET) counter+=2;
 			if (earType == EARS_FERRET) counter++;
 			if (tailType == TAIL_TYPE_FERRET) counter++;
-			if (lowerBody == LOWER_BODY_FERRET) counter++;
+			if (lowerBody == LOWER_BODY_TYPE_FERRET) counter++;
 			if (skinType == SKIN_TYPE_FUR && counter > 0) counter++;
 			return counter;
 		}
@@ -1295,6 +1315,8 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (skinType == 2 && dragonCounter > 0)
 				dragonCounter++;
+			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG || hornType == HORNS_DRACONIC_X2)
+				dragonCounter++;
 			return dragonCounter;
 		}
 
@@ -1466,6 +1488,9 @@ use namespace kGAMECLASS;
 			return mutantCounter--;
 		}
 		
+		//------------
+		// Mod-Added
+		//------------
 		public function sirenScore():Number 
 		{
 			var sirenCounter:Number = 0;
@@ -1487,11 +1512,89 @@ use namespace kGAMECLASS;
 				pigCounter++;
 			if (faceType == FACE_PIG || FACE_BOAR)
 				pigCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_PIG)
+			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
 				pigCounter += 2;
 			if (pigCocks() > 0)
 				pigCounter++;
 			return pigCounter;
+		}
+		
+		public function satyrScore():Number
+		{
+			var satyrCounter:Number = 0;
+			if (lowerBody == LOWER_BODY_TYPE_HOOFED)
+				satyrCounter++;
+			if (tailType == TAIL_TYPE_GOAT)
+				satyrCounter++;
+			if (satyrCounter >= 2) {
+				if (earType == EARS_ELFIN)
+					satyrCounter++;
+				if (faceType == FACE_HUMAN)
+					satyrCounter++;
+				if (countCocksOfType(CockTypesEnum.HUMAN) > 0)
+					satyrCounter++;
+				if (balls > 0 && ballSize >= 3)
+					satyrCounter++;
+			}
+			return satyrCounter;
+		}
+		
+		public function rhinoScore():Number
+		{
+			var rhinoCounter:Number = 0;
+			if (earType == EARS_RHINO)
+				rhinoCounter++;
+			if (tailType == TAIL_TYPE_RHINO)
+				rhinoCounter++;
+			if (faceType == FACE_RHINO)
+				rhinoCounter++;
+			if (hornType == HORNS_RHINO)
+				rhinoCounter++;
+			if (rhinoCounter >= 2 && skinTone == "gray")
+				rhinoCounter++;
+			if (rhinoCounter >= 2 && hasCock() && countCocksOfType(CockTypesEnum.RHINO) > 0)
+				rhinoCounter++;
+			return rhinoCounter;
+		}
+		
+		public function echidnaScore():Number
+		{
+			var echidnaCounter:Number = 0;
+			if (earType == EARS_ECHIDNA)
+				echidnaCounter++;
+			if (tailType == TAIL_TYPE_ECHIDNA)
+				echidnaCounter++;
+			if (faceType == FACE_ECHIDNA)
+				echidnaCounter++;
+			if (tongueType == TONUGE_ECHIDNA)
+				echidnaCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_ECHIDNA)
+				echidnaCounter++;
+			if (echidnaCounter >= 2 && skinType == SKIN_TYPE_FUR)
+				echidnaCounter++;
+			if (echidnaCounter >= 2 && countCocksOfType(CockTypesEnum.ECHIDNA) > 0)
+				echidnaCounter++;
+			return echidnaCounter;
+		}
+		
+		public function deerScore():Number
+		{
+			var deerCounter:Number = 0;
+			if (earType == EARS_DEER)
+				deerCounter++;
+			if (tailType == TAIL_TYPE_DEER)
+				deerCounter++;
+			if (faceType == FACE_DEER)
+				deerCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED || lowerBody == LOWER_BODY_TYPE_DEERTAUR)
+				deerCounter++;
+			if (hornType == HORNS_ANTLERS && horns >= 4)
+				deerCounter++;
+			if (deerCounter >= 2 && skinType == SKIN_TYPE_FUR)
+				deerCounter++;
+			if (deerCounter >= 3 && countCocksOfType(CockTypesEnum.HORSE) > 0)
+				deerCounter++;
+			return deerCounter;
 		}
 		
 		//Dragonne
@@ -1780,7 +1883,7 @@ use namespace kGAMECLASS;
 		
 		public function clothedOrNakedLower(clothedText:String, nakedText:String = ""):String
 		{
-			return (armorName != "gear" ? clothedText : nakedText);
+			return (armorName != "gear" && (armorName != "lethicite armor" && lowerGarmentName == "nothing") ? clothedText : nakedText);
 		}
 		
 		public function shrinkTits(ignore_hyper_happy:Boolean=false):void
@@ -2226,6 +2329,12 @@ use namespace kGAMECLASS;
 				maxSpe += 15;
 				maxTou -= 10;
 			}
+			if (rhinoScore() >= 4) {
+				maxStr += 15;
+				maxTou += 15;
+				maxSpe -= 10;
+				maxInt -= 10;
+			}
 			if (isNaga()) maxSpe += 10;
 			if (isTaur()) maxSpe += 20;
 			//Apply New Game+
@@ -2238,7 +2347,10 @@ use namespace kGAMECLASS;
 				maxStr += statusAffectv1(StatusAffects.Might);
 				maxTou += statusAffectv2(StatusAffects.Might);
 			}
-			
+			if (findStatusAffect(StatusAffects.AndysSmoke) >= 0) {
+				maxSpe -= statusAffectv2(StatusAffects.AndysSmoke);
+				maxInt += statusAffectv3(StatusAffects.AndysSmoke);
+			}
 			if (stats == "str" || stats == "strength") return maxStr;
 			else if (stats == "tou" || stats == "toughness") return maxTou;
 			else if (stats == "spe" || stats == "speed") return maxSpe;
@@ -2824,6 +2936,12 @@ use namespace kGAMECLASS;
 			}
 			
 			return true;
+		}
+		
+		public function setFurColor(colorArray:Array):void {
+			if (skinType == SKIN_TYPE_FUR) {
+				furColor = colorArray[rand(colorArray.length)];
+			}
 		}
 	}
 }

@@ -467,7 +467,7 @@ private function slimeyPenorsAhoy():void {
 	if(player.isNaga()) outputText("slapping against your tail", false);
 	else if(player.isGoo()) outputText("smooshing against your goo", false);
 	else outputText("swiftly bruising your thighs", false);
-	outputText(".  A beastial groan rumbles from the goo-ghost as she continues to ride you, and despite everything, you begin to enjoy the treatment, going so far as to begin bucking your hips in rhythm.", false);
+	outputText(".  A bestial groan rumbles from the goo-ghost as she continues to ride you, and despite everything, you begin to enjoy the treatment, going so far as to begin bucking your hips in rhythm.", false);
 	if(player.balls > 0) outputText("  The near-vacant-minded girl rewards you with two slime-tentacles to fondle your scrotum.  You hiss in a sharp breath at the sudden stimulation, but swiftly come to welcome it.", false);
 	outputText("  Climax comes soon, and though the spell has started to wear off, a good thirty seconds of ejaculation leaves the ghost-girl-turned-slime even bigger than before; her breasts reaching at least G-cups that dangle just above her bloated belly, her butt jutting obscenely far behind her, and her hips as wide- or wider- than a cow's. Exhausted, you fall back, thinking the worst to be over. The slime, however, has other plans.\n\n", false);
 	

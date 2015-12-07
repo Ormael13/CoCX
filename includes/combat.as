@@ -456,6 +456,10 @@ private function wait():void {
 		clearOutput();
 		(monster as FrostGiant).giantGrabFail(false);
 	}
+	else if (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		clearOutput();
+		(monster as FrostGiant).giantBoulderMiss();
+	}
 	else if (player.findStatusAffect(StatusAffects.IsabellaStunned) >= 0) {
 		clearOutput();
 		outputText("You wobble about for some time but manage to recover. Isabella capitalizes on your wasted time to act again.\n\n");
@@ -491,9 +495,9 @@ private function struggle():void {
 	if (monster.findStatusAffect(StatusAffects.MinotaurEntangled) >= 0) {
 		clearOutput();
 		if (player.str / 9 + rand(20) + 1 >= 15) {
-			outputText("Utilizing every ounce of your strength and cunning, you squirm wildly, shrugging through weak spots in the chain's grip to free yourself!  Success!");
+			outputText("Utilizing every ounce of your strength and cunning, you squirm wildly, shrugging through weak spots in the chain's grip to free yourself!  Success!\n\n");
 			monster.removeStatusAffect(StatusAffects.MinotaurEntangled);
-			outputText("\n\n\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
+			if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) outputText("\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
 			combatRoundOver();
 		}
 		//Struggle Free Fail*
@@ -582,12 +586,14 @@ private function fireBow():void {
 	clearOutput();
 	if (player.fatigue + physicalCost(25) > player.maxFatigue()) {
 		outputText("You're too fatigued to fire the bow!");
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	if (monster.findStatusAffect(StatusAffects.BowDisabled) >= 0) {
 		outputText("You can't use your bow right now!");
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	fatigue(25, 2);
@@ -763,13 +769,15 @@ public function fantasize():void {
 public function bite():void {
 	if(player.fatigue + physicalCost(25) > player.maxFatigue()) {
 		outputText("You're too fatigued to use your shark-like jaws!", true);
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	//Worms are special
 	if(monster.short == "worms") {
 		outputText("There is no way those are going anywhere near your mouth!\n\n", true);
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	fatigue(25,2);
@@ -1214,7 +1222,8 @@ public function goreAttack():void {
 	}
 	if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
 		outputText("You're too fatigued to use a charge attack!");
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	fatigue(15,2);
@@ -1292,6 +1301,93 @@ public function goreAttack():void {
 			dynStats("lus", 5);
 		}
 		else outputText("You lower your head and charge " + monster.a + monster.short + ", only to be sidestepped at the last moment!");
+	}
+	//New line before monster attack
+	outputText("\n\n");
+	checkAchievementDamage(damage);
+	//Victory ORRRRR enemy turn.
+	if(monster.HP > 0 && monster.lust < 100) enemyAI();
+	else {
+		if(monster.HP <= 0) doNext(endHpVictory);
+		if(monster.lust >= 100) doNext(endLustVictory);
+	}
+}
+//Upheaval Attack
+public function upheavalAttack():void {
+	clearOutput();
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+	if (monster.short == "worms") {
+		outputText("Taking advantage of your new natural weapon, you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your horns to stab only at air.\n\n");
+		enemyAI();
+		return;
+	}
+	if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
+		outputText("You're too fatigued to use a charge attack!");
+		doNext(combatMenu);
+		return;
+	}
+	fatigue(15,2);
+	var damage:Number = 0;
+	//Amily!
+	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
+		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
+		enemyAI();
+		return;
+	}
+	//Bigger horns = better success chance.
+	//Small horns - 60% hit
+	if(player.horns >= 6 && player.horns < 12) {
+		temp = 60;
+	}
+	//bigger horns - 75% hit
+	if(player.horns >= 12 && player.horns < 20) {
+		temp = 75;
+	}
+	//huge horns - 90% hit
+	if(player.horns >= 20) {
+		temp = 80;
+	}
+	//Vala dodgy bitch!
+	if(monster.short == "Vala") {
+		temp = 20;
+	}
+	//Account for monster speed - up to -50%.
+	temp -= monster.spe/2;
+	//Account for player speed - up to +50%
+	temp += player.spe/2;
+	//Hit & calculation
+	if(temp >= rand(100)) {
+		var horns:Number = player.horns;
+		if (player.horns > 40) player.horns = 40;
+		damage = int(player.str + (player.tou / 2) + (player.spe / 2) + (player.level * 2) * 1.2 * (monster.damagePercent() / 100)); //As normal attack + horn length bonus
+		if(damage < 0) damage = 5;
+		//Normal
+		outputText("You hurl yourself towards [enemy] with your head low and jerk your head upward, every muscle flexing as you send [enemy] flying. ");
+		//Critical
+		if (combatCritical()) {
+			outputText("<b>Critical hit! </b>");
+			damage *= 1.75;
+		}
+		//CAP 'DAT SHIT
+		if(damage > player.level * 10 + 100) damage = player.level * 10 + 100;
+		if(damage > 0) {
+			if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+			//Round it off
+			damage = int(damage);
+			damage = doDamage(damage, true);
+		}
+		outputText("\n\n");
+	}
+	//Miss
+	else {
+		//Special vala changes
+		if(monster.short == "Vala") {
+			outputText("You lower your head and charge Vala, but she just flutters up higher, grabs hold of your horns as you close the distance, and smears her juicy, fragrant cunt against your nose.  The sensual smell and her excited moans stun you for a second, allowing her to continue to use you as a masturbation aid, but she quickly tires of such foreplay and flutters back with a wink.\n\n");
+			dynStats("lus", 5);
+		}
+		else outputText("You hurl yourself towards [enemy] with your head low and snatch it upwards, hitting nothing but air.");
 	}
 	//New line before monster attack
 	outputText("\n\n");
@@ -1391,7 +1487,10 @@ public function combatParry():Boolean {
 	trace("Parried!");
 }
 public function combatCritical():Boolean {
-	return rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50) / 5 > rand(100)) || (player.findPerk(PerkLib.Blademaster) >= 0 && rand(100) < 10 && (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut"));
+	var critChance:int = 4;
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critChance += (player.inte - 50) / 50;
+	if (player.findPerk(PerkLib.Blademaster) >= 0 && (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut")) critChance += 5;
+	return rand(100) <= critChance;
 }
 
 public function combatBlock(doFatigue:Boolean = false):Boolean {
@@ -1892,6 +1991,10 @@ private function combatStatusesUpdate():void {
 		outputText("The feeling of the tight, leather straps holding tightly to your body while exposing so much of it turns you on a little bit more.\n\n", false);
 		dynStats("lus", 2);
 	}
+	//Giant boulder
+	if (player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might take some serious damage.</b>\n\n");
+	}
 	regeneration(true);
 	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	if(player.HP <= 0) doNext(endHpLoss);
@@ -1999,7 +2102,9 @@ public function display():void {
 	}
 	outputText("<b>You are fighting ", false);
 	outputText(monster.a + monster.short + ":</b> \n");
-	if(player.findStatusAffect(StatusAffects.Blind) >= 0) outputText("It's impossible to see anything!\n");
+	if (player.findStatusAffect(StatusAffects.Blind) >= 0) {
+		outputText("It's impossible to see anything!\n");
+	}
 	else {
 		outputText(monster.long + "\n\n", false);
 		//Bonus sand trap stuff
@@ -2873,7 +2978,7 @@ public function tease(justText:Boolean = false):void {
 		//7 special Adjatha-crafted bend over bimbo times
 		case 7:
 			outputText("The glinting of light catches your eye and you whip around to inspect the glittering object, turning your back on " + monster.a + monster.short + ".  Locking your knees, you bend waaaaay over, " + chestDesc() + " swinging in the open air while your " + buttDescript() + " juts out at the " + monster.a + monster.short + ".  Your plump cheeks and " + hipDescript() + " form a jiggling heart-shape as you eagerly rub your thighs together.\n\n", false);
-			outputText("The clear, warm fluid of your happy excitement trickles down from your loins, polishing your " + player.skin() + " to a glossy, inviting shine.  Retrieving the useless- though shiny- bauble, you hold your pose for just a moment longer, a sly little smile playing across your lips as you wiggle your cheeks one more time before straightening up and turning back around.", false);
+			outputText("The clear, warm fluid of your happy excitement trickles down from your loins, polishing your " + player.skin() + " to a glossy, inviting shine.  Retrieving the useless, though shiny, bauble, you hold your pose for just a moment longer, a sly little smile playing across your lips as you wiggle your cheeks one more time before straightening up and turning back around.", false);
 			vagina = true;
 			chance++;
 			damage += 2;
@@ -3720,6 +3825,11 @@ public function spellArouse():void {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	fatigue(15,1);
 	statScreenRefresh();
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
 	if(monster.findStatusAffect(StatusAffects.Shell) >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -3795,7 +3905,12 @@ public function spellHeal():void {
 	}
 	doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-	fatigue(20,3);
+	fatigue(20, 3);
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
 	outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n", true);
 	//25% backfire!
 	if(rand(4) == 0) {
@@ -3816,6 +3931,7 @@ public function spellHeal():void {
 		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
 		HPChange(temp,false);
 	}
+	
 	outputText("\n\n", false);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
@@ -3839,6 +3955,11 @@ public function spellMight():void {
 	fatigue(25,1);
 	var tempStr:Number = 0;
 	var tempTou:Number = 0;
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
 	outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n", true);
 	//25% backfire!
 	if(rand(4) == 0) {
@@ -3891,7 +4012,12 @@ public function spellChargeWeapon():void {
 	}
 	doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-	fatigue(15,1);
+	fatigue(15, 1);
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
 	outputText("You utter words of power, summoning an electrical charge around your " + player.weaponName + ".  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n", true);
 	player.createStatusAffect(StatusAffects.ChargeWeapon,10*spellMod(),0,0,0);
 	statScreenRefresh();
@@ -3939,7 +4065,11 @@ public function spellBlind():void {
 			
 			player.createStatusAffect(StatusAffects.Blind, rand(4) + 1, 0, 0, 0);
 		}
-		
+		if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+			(monster as FrostGiant).giantBoulderHit(2);
+			enemyAI();
+			return;
+		}
 		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		if(monster.HP < 1) doNext(endHpVictory);
@@ -3995,6 +4125,11 @@ public function spellWhitefire():void {
 		(monster as Doppleganger).handleSpellResistance("whitefire");
 		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
+		return;
+	}
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
 		return;
 	}
 	outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n", true);
@@ -4197,7 +4332,8 @@ public function kick():void {
 	clearOutput();
 	if(player.fatigue + physicalCost(15) > player.maxFatigue()) {
 		outputText("You're too fatigued to use a charge attack!", true);
-		doNext(combatMenu);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 		return;
 	}
 	fatigue(15,2);
@@ -5000,7 +5136,7 @@ public function runAway(callHook:Boolean = true):void {
 			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
-		//Speeed dependant
+		//Speed dependent
 		else {
 			//Success
 			if(player.spe > rand(monster.spe+escapeMod)) {
@@ -5275,6 +5411,10 @@ public function physicalSpecials():void {
 	//Gore if mino horns
 	if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) {
 		addButton(button++, "Gore", goreAttack, null, null, null, "Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
+	}
+	//Upheaval - requires rhino horn
+	if (player.hornType == HORNS_RHINO && player.horns >= 2 && player.faceType == FACE_RHINO) {
+		addButton(button++, "Upheaval", upheavalAttack, null, null, null, "Send your foe flying with your dual nose mounted horns. \n\nFatigue Cost: " + physicalCost(15) + "");
 	}
 	//Infest if infested
 	if (player.findStatusAffect(StatusAffects.Infested) >= 0 && player.statusAffectv1(StatusAffects.Infested) == 5 && player.hasCock()) {

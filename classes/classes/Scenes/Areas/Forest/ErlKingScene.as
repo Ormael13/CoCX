@@ -450,11 +450,12 @@ package classes.Scenes.Areas.Forest
 
 			outputText("<b>You found " + gemFind + " gems.</b>\n\n");
 
-			var selector:int = rand(3);
+			var selector:int = rand(4);
 
 			if (selector == 0) inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
 			if (selector == 1) inventory.takeItem(consumables.FOXBERY, camp.returnToCampUseOneHour);
 			if (selector == 2) inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
+			if (selector == 3) inventory.takeItem(consumables.GLDRIND, camp.returnToCampUseOneHour);
 		}
 
 		protected function stopTheMadness():void
@@ -815,13 +816,11 @@ package classes.Scenes.Areas.Forest
 
 			//Suck My Dick  /  Fuck Her Ass  /  Eat My Pussy  /  Milk Her Dick  /  Gifts
 			menu();
-			if (player.hasCock())
-			{
+			if (player.hasCock()) {
 				addButton(0, "Suck Me", gwynnSucksDicks);
 				addButton(1, "Assfuck", gwynnGetsButtfuxed);
 			}
-			if (player.hasVagina())
-			{
+			if (player.hasVagina()) {
 				addButton(2, "Eat Me", gwynnNomsDaCunts);
 			}
 			addButton(3, "Milk Dick", gwynnGetsDickmilked);
@@ -954,7 +953,136 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Before you can stop her, she’s gone, and you pocket the small bottle for later.\n\n");
 
-			inventory.takeItem(consumables.PRNPKR, camp.returnToCampUseOneHour);
+			if (rand(4) > 0) inventory.takeItem(consumables.PRNPKR, camp.returnToCampUseOneHour);
+			else inventory.takeItem(consumables.PRNPKR, goldenRindBonus);
+		}
+		
+		private function goldenRindBonus():void {
+			clearOutput();
+			outputText("“<i>Oh, I also had this left over from brewing my Pucker,</i>” she says, popping out of the brush behind you.  You yelp in surprise.  She’d vanished into the forest in front of you a moment ago.  How did she move so quickly?  “<i>Here you go!</i>” she pipes up, depositing a small item in your hand before disappearing back into the woods.  If she can move that quickly and quietly through the woods, it’s pretty likely that her falling prey to the forest predators has been entirely voluntary.\n\n");
+			inventory.takeItem(consumables.GLDRIND, camp.returnToCampUseOneHour);
+		}
+		
+		public function deerTFs():void {
+			var changes:int = 0;
+			var changeLimit:int = 2;
+			var temp:int = 0;
+			var x:int = 0;
+			if (rand(2) == 0) changeLimit++;
+			if (rand(3) == 0) changeLimit++;
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
+			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			// Main TFs
+			//------------
+			//Gain deer ears
+			if (rand(3) == 0 && changes < changeLimit && player.earType != EARS_DEER) {
+				if (player.earType == -1) outputText("\n\nTwo painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur.  ");
+				if (player.earType == EARS_HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears.  ");
+				if (player.earType == EARS_DOG) outputText("\n\nYour ears change shape, morphing into from their doglike shape into deer-like ears!  ");
+				if (player.earType > EARS_DOG) outputText("\n\nYour ears change shape, morphing into teardrop-shaped deer ears!  ");
+				outputText("<b>You now have deer ears.</b>");
+				player.earType = EARS_DEER;
+				changes++;
+			}
+			//Gain deer tail
+			if (rand(3) == 0 && changes < changeLimit && player.earType == EARS_DEER && player.tailType != TAIL_TYPE_DEER) {
+				outputText("\n\nYou feel a tightening just above your ass, as if a massive hand was pinching you.  It releases with a curious “pomf”-ing noise.  You turn this way and that, finally managing to crane your neck to see your <b>fluffy, flicking deer tail.</b>");
+				player.tailType = TAIL_TYPE_DEER;
+				changes++;
+			}
+			//Gain deer horns AKA antlers
+			if (rand(3) == 0 && changes < changeLimit && player.hornType == HORNS_NONE) {
+				outputText("\n\nYou feel an immense pressure from your forehead, and you reach up, feeling the nubs of two new horns.");
+				player.hornType = HORNS_ANTLERS;
+				player.horns = 1;
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.horns > 0 && player.hornType != HORNS_ANTLERS) {
+				outputText("\n\nYou feel a strange twisting sensation from your horns as they extend outwards.  You reach up to feel them and realize that you’ve now got <b>pronged, stag-like horns.</b>");
+				player.hornType = HORNS_ANTLERS;
+				player.horns = 4;
+				changes++;
+			}
+			//Increase points on deer antlers
+			if (rand(3) == 0 && changes < changeLimit && player.hornType == HORNS_ANTLERS && player.horns < 30) {
+				outputText("\n\nYou feel a strange twisting sensation from your antlers as they extend and split outwards.  You reach up to feel them and realize that your antlers are now even more branched out.");
+				if (player.horns < 20 && rand(2) == 0) player.horns += (1 + rand(4));
+				player.horns++;
+				outputText("  After counting the number of points you have on your antlers, <b>you have " + player.horns + " points.</b>");
+				if (player.horns >= 30) outputText("<b>  It seems that your antlers can't get any more pointier.</b>");
+				changes++;
+			}
+			//Gain fur
+			if (rand(4) == 0 && changes < changeLimit && player.horns > 0 && player.skinType != SKIN_TYPE_FUR) {
+				outputText("\n\nFor a moment, it looks like a ray of sunlight has shimmered through the canopy. You blink and realize that your fur has become dappled, with lighter, sun-speckled spots highlighting it.");
+				player.skinType = SKIN_TYPE_FUR;
+				player.skinAdj = "";
+				player.skinDesc = "fur";
+				player.furColor = "brown";
+				changes++;
+			}
+			//Change face to normal
+			if (rand(3) == 0 && changes < changeLimit && player.earType == EARS_DEER && (player.faceType != FACE_HUMAN && player.faceType != FACE_DEER)) {
+				outputText("\n\nYour face grows warm as suddenly your vision is engulfed in smoke, coughing and beating the smoke back you noticed a marked change in your features. Touching yourself you confirm you have a <b>normal human shaped face once again</b>.");
+				player.faceType = FACE_HUMAN;
+				changes++;
+			}
+			//Gain deer face
+			if (rand(4) == 0 && changes < changeLimit && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.faceType != FACE_DEER) {
+				outputText("\n\nYou feel a grinding noise from your jaw, and a massive pressure in your sinuses, as your cheeks pinch in, followed immediately by a pointing of the lower half of your face.  You frantically (and gently) feel your face, discovering, to your surprise, that you’ve <b>gained the delicate facial features of a deer.</b>");
+				player.faceType = FACE_DEER;
+				changes++;
+			}
+			//Change legs to cloven hooves
+			if (rand(4) == 0 && changes < changeLimit && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.skinType == SKIN_TYPE_FUR && (player.lowerBody != LOWER_BODY_TYPE_DEERTAUR && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED)) {
+				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) {
+					outputText("\n\nYou feel a sharp stinging sensation from your hooves, accompanied by a loud CRACK.  You look down in alarm, prancing from one hooved foot to another, realizing that your solid, heavy hooves have been replaced with delicate, cloven hooves.  You squint, also noting a subtle thinness across your legs in general--if you had to guess, you’d hazard that you’re looking <b>more deer-like than horse-like</b>.");
+				}
+				else {
+					outputText("\n\nYou feel a strange tightness from your feet and nearly topple over as your balance shifts.  You’re balancing on your toes for some reason.  You look down in amazement as your legs slim and lengthen, your feet elongating and darkening at the ends until you’re balancing on <b>two, graceful deer legs</b>.");
+				}
+				if (player.isTaur()) player.lowerBody = LOWER_BODY_TYPE_DEERTAUR;
+				else player.lowerBody = LOWER_BODY_TYPE_CLOVEN_HOOFED;
+				changes++;
+			}
+			// Genital Changes
+			//------------
+			//Morph dick to horsediiiiick
+			if (rand(3) == 0 && changes < changeLimit && player.cocks.length > 0) {
+				var selectedCockValue:int = -1; //Changed as selectedCock and i caused duplicate var warnings
+				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
+				{
+					if (player.cocks[indexI].cockType != CockTypesEnum.HORSE)
+					{
+						selectedCockValue = indexI;
+						break;
+					}
+				}
+				if (selectedCockValue != -1) {
+					//Text for humandicks or others
+					if (player.cocks[selectedCockValue].cockType == CockTypesEnum.HUMAN || player.cocks[selectedCockValue].cockType.Index > 2) outputText("\n\nYour " + player.cockDescript(selectedCockValue) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
+					//Text for dogdicks
+					if (player.cocks[selectedCockValue].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
+					player.cocks[selectedCockValue].cockType = CockTypesEnum.HORSE;
+					player.increaseCock(selectedCockValue, 4);
+					dynStats("lib", 5, "sen", 4, "lus", 35);
+					outputText("<b>  You now have a");
+					if (player.horseCocks() > 1) outputText("nother");
+					outputText(" horse-penis.</b>");
+					changes++;
+				}
+			}
+			// Body thickness/tone changes
+			//------------
+			if (rand(3) == 0 && player.tone > 20) {
+				if (player.tone > 50) player.modTone(20, 2 + rand(3));
+				else player.modTone(20, 2);
+			}
+			if (rand(3) == 0 && player.thickness > 20) {
+				if (player.thickness > 50) player.modThickness(20, 2 + rand(3));
+				else player.modThickness(20, 2);
+			}
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 	}
 }

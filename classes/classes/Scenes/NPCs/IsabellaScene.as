@@ -12,13 +12,24 @@
 //260	Isabella angry counter
 //261  Times Izzy sleep-raped the PC?
 //-Has PC raped her?
-
+		
 		public function IsabellaScene()
 		{
+			pregnancy = new PregnancyStore(kFLAGS.ISABELLA_PREGNANCY_TYPE, kFLAGS.ISABELLA_PREGNANCY_INCUBATION, 0, 0);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 2160, 1920, 1680, 1440, 1200, 960, 720, 480, 240);
 			CoC.timeAwareClassAdd(this);
 		}
 		
 		private var checkedIsabella:int; //Make sure we test this event just once in timeChangeLarge
+		
+		public var pregnancy:PregnancyStore;
+		public var isabellaOffspringData:Array = [];
+		
+		public static const OFFSPRING_HUMAN_BOYS:int = 1;
+		public static const OFFSPRING_HUMAN_GIRLS:int = 2;
+		public static const OFFSPRING_HUMAN_HERMS:int = 3;
+		public static const OFFSPRING_COWGIRLS:int = 4;
+		public static const OFFSPRING_COWFUTAS:int = 5;
 		
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
@@ -35,6 +46,22 @@
 			}
 			if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN] > 1) {
 				flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN]--;
+			}
+			if (isabellaFollower()) {
+				if (flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] > 0) {
+					flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS]--;
+				}
+				if (flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] == 0 && player.hasCock()) {
+					isabellaFollowerScene.isabellaTalksAboutPotentialPregnancy();
+					return true;
+				}
+			}
+			if (pregnancy.isPregnant) {
+				pregnancy.pregnancyAdvance();
+				if (pregnancy.incubation == 0) {
+					isabellaFollowerScene.isabellaGivesBirth();
+					return true;
+				}
 			}
 			if (model.time.hours > 23) {
 				if (flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 1) flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] = 0;
@@ -55,6 +82,23 @@
 		}
 		//End of Interface Implementation
 
+		public function totalIsabellaChildren():int {
+			return (isabellaOffspringData.length / 2);
+		}
+		
+		public function getIsabellaChildType(type:int):int {
+			//1: Human boys
+			//2: Human girls
+			//3: Human herms
+			//4: Cowgirls
+			//5: Cowfutas
+			var count:int = 0;
+			for (var i:int = 0; i < isabellaOffspringData.length; i += 2) {
+				if (isabellaOffspringData[i] == type) count++;
+			}
+			return count;
+		}
+		
 public function isabellaGreeting():void {
 	spriteSelect(31);
 	clearOutput();

@@ -8,7 +8,8 @@ package classes
 	import classes.Items.JewelryLib;
 	import classes.internals.Utils;
 	import classes.Scenes.Places.TelAdre.UmasShop;
-	
+	import flash.display.InteractiveObject;
+
 	public class Creature extends Utils
 	{
 
@@ -151,7 +152,12 @@ package classes
 		public var hairColor:String = "no";
 		public var hairLength:Number = 0;
 		
-		public var furColor:String = "no"; //Will be separate eventually.
+		private var _furColor:String = "no"; //Fur colour!
+		public function get furColor():String {
+			if (skinType == SKIN_TYPE_FUR) return _furColor;
+			else return hairColor;
+		}
+		public function set furColor(value:String):void { _furColor = value; }
 		/*Beardstyle
 		0- normal
 		1- goatee
@@ -217,7 +223,8 @@ package classes
 		2 - minotaur (cowlike)
 		3 - Draconic/Lizard
 		4 - Double draconic
-		5 - Antlers*/
+		5 - Antlers
+		6 - Goat*/
 		public var hornType:Number = HORNS_NONE;
 		public var horns:Number = 0;
 
@@ -1663,6 +1670,9 @@ package classes
 			//Messy Orgasms?
 			if (findPerk(PerkLib.MessyOrgasms) >= 0)
 				percent += 0.03;
+			//Satyr Sexuality
+			if (findPerk(PerkLib.SatyrSexuality) >= 0)
+				percent += 0.10;
 			//Fertite ring bonus!
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
 				percent += (jewelryEffectMagnitude / 100);
@@ -1729,6 +1739,8 @@ package classes
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (findPerk(PerkLib.BroBody) >= 0)
 				quantity += 200;
+			if (findPerk(PerkLib.SatyrSexuality) >= 0)
+				quantity += 50;
 			quantity += statusAffectv1(StatusAffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
@@ -1846,11 +1858,9 @@ package classes
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
 			var index:Number = 0;
-			if (cocks[index].cockType == ctype)
-				return index;
-			while (index < cocks.length)
-			{
-				index++;
+			//if (cocks[index].cockType == ctype)
+			//	return index;
+			for (index = 0; index < cocks.length; index++) {
 				if (cocks[index].cockType == ctype)
 					return index;
 			}
@@ -2297,6 +2307,22 @@ package classes
 				{
 					try
 					{
+						var cock:Cock = cocks[arraySpot];
+						if (cock.sock == "viridian")
+						{
+							removePerk(PerkLib.LustyRegeneration);
+						}
+						else if (cock.sock == "cockring")
+						{
+							var numRings:int = 0;
+							for (var i:int = 0; i < cocks.length; i++)
+							{
+								if (cocks[i].sock == "cockring") numRings++;
+							}
+							
+							if (numRings == 0) removePerk(PerkLib.PentUp);
+							else setPerkValue(PerkLib.PentUp, 1, 5 + (numRings * 5));
+						}
 						cocks.splice(arraySpot, totalRemoved);
 					}
 					catch (e:Error)
@@ -2513,7 +2539,7 @@ package classes
 
 		public function isTaur():Boolean
 		{
-			if (lowerBody == LOWER_BODY_TYPE_CENTAUR || lowerBody == LOWER_BODY_TYPE_PONY)
+			if (lowerBody == LOWER_BODY_TYPE_CENTAUR || lowerBody == LOWER_BODY_TYPE_PONY || lowerBody == LOWER_BODY_TYPE_DEERTAUR)
 				return true;
 			return false;
 		}
@@ -2617,7 +2643,7 @@ package classes
 			//Fur handled a little differently since it uses
 			//haircolor
 			if (_skinType == 1)
-				skinzilla += hairColor + " ";
+				skinzilla += furColor + " ";
 			else
 				skinzilla += _skinTone + " ";
 			skinzilla += skinDesc;
@@ -2840,14 +2866,14 @@ package classes
 
 		public function canOvipositSpider():Boolean
 		{
-			if (eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tailType == 5)
+			if (eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tailType == TAIL_TYPE_SPIDER_ADBOMEN)
 				return true;
 			return false;
 		}
 
 		public function canOvipositBee():Boolean
 		{
-			if (eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tailType == 6)
+			if (eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tailType == TAIL_TYPE_BEE_ABDOMEN)
 				return true;
 			return false;
 		}
@@ -3418,6 +3444,7 @@ package classes
 					case CockTypesEnum.HORSE:
 					case CockTypesEnum.KANGAROO:
 					case CockTypesEnum.AVIAN:
+					case CockTypesEnum.ECHIDNA:
 						return true; //If there's even one cock of any of these types then return true
 					default:
 				}
@@ -3492,6 +3519,15 @@ package classes
 				case CockTypesEnum.TENTACLE:
 					if (rand(2) == 0) return "mushroom-like tip";
 					return "wide plant-like crown";
+				case CockTypesEnum.PIG:
+					if (rand(2) == 0) return "corkscrew tip";
+					return "corkscrew head";
+				case CockTypesEnum.RHINO:
+					if (rand(2) == 0) return "flared head";
+					return "rhinoceros dickhead";
+				case CockTypesEnum.ECHIDNA:
+					if (rand(2) == 0) return "quad heads";
+					return "echidna quad heads";
 				default:
 			}
 			if (rand(2) == 0) return "crown";

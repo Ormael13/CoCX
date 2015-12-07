@@ -373,7 +373,7 @@ package classes.Scenes.Places.Farm
 			if (flags[kFLAGS.FARM_EGG_STORED] > 0)
 			{
 				outputText("<b>" + flags[kFLAGS.FARM_EGG_STORED] + "x ");
-				outputText("large " + flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] + " egg");
+				outputText("large " + flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE] + " egg");
 				if (flags[kFLAGS.FARM_EGG_STORED] > 1) outputText("s");
 				outputText(".");
 				outputText("</b>\n");
@@ -394,7 +394,7 @@ package classes.Scenes.Places.Farm
 		{
 			if (flag == kFLAGS.FARM_SUCCUMILK_STORED) return consumables.SUCMILK;
 			if (flag == kFLAGS.FARM_INCUDRAFT_STORED) return consumables.INCUBID;
-			if (flag == kFLAGS.FARM_EGG_STORED) return kGAMECLASS.sophieBimbo.eggTypes[kGAMECLASS.sophieBimbo.eggColors.indexOf(flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE])];
+			if (flag == kFLAGS.FARM_EGG_STORED) return kGAMECLASS.sophieBimbo.eggTypes[kGAMECLASS.sophieBimbo.eggColors.indexOf(flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE])];
 			if (flag == kFLAGS.FARM_CONTRACEPTIVE_STORED) return consumables.HRBCNT;
 			
 			trace("No valid argument given.");

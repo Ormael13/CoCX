@@ -206,7 +206,7 @@ package classes.Scenes.Areas
 			//Worms
 			if (chooser == 2) {
 				//If worms are on and not infested.
-				if ((player.findStatusAffect(StatusAffects.WormsOn) >= 0 || (player.findStatusAffect(StatusAffects.WormsOff) >= 0 && rand(10) == 0)) && player.findStatusAffect(StatusAffects.Infested) < 0) {
+				if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 && player.findStatusAffect(StatusAffects.Infested) < 0) {
 					if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0 && rand(2) == 0) {
 						if (player.cor < 90) {
 							outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);
@@ -224,6 +224,10 @@ package classes.Scenes.Areas
 				else {
 					//If worms are off or the PC is infested, no worms.
 					if (player.findStatusAffect(StatusAffects.WormsOff) >= 0 || player.findStatusAffect(StatusAffects.Infested) >= 0 || (rand(2) == 0 && player.findStatusAffect(StatusAffects.WormsHalf) >= 0)) {
+						if (player.findStatusAffect(StatusAffects.WormsOff) >= 0 && player.findStatusAffect(StatusAffects.MetWorms) < 0) {
+							wormsScene.wormEncounter(); //You can only encounter the worms once.
+							return;
+						}
 						if (player.cor < 90) {
 							outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);
 							dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);

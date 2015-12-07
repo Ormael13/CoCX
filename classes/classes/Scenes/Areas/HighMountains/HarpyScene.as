@@ -29,27 +29,22 @@ package classes.Scenes.Areas.HighMountains
 				cleanupAfterCombat();
 				return;
 			}
-			var eggs:Function =null;
-			if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) eggs = spoidahsLegEggsInHarpeis;
-			var anal:Function =null;
-			var pussy:Function =null;
-			var scissor:Function =null;
-			var clitFuck:Function =null;
-
-			if (player.hasVagina() && player.clitLength >= 3.5) clitFuck = clitFuckAHarpy;
-			if (player.hasVagina()) {
-				if (player.isNaga()) outputText("  If you weren't a naga, you could scissor her.");
-				else scissor = harpyScissorSurprise;
-			}
-			if (player.cockThatFits(monster.vaginalCapacity()) >= 0) pussy = victoryHarpyGetsHerPussyRaped;
-			if (player.cockThatFits(monster.analCapacity()) >= 0) anal = winAndRapeHarpyAnally;
-
 			//Rape options
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  What do you do to her?", false);
-
-				choices("Anal", anal, "Oral", WinOnHarpyAndOralRape, "Pussy", pussy, "Scissor", scissor, "Lay Eggs", eggs,
-					"Clit Fuck", clitFuck, "", null, "", null, "", null, "Nothing", cleanupAfterCombat);
+				menu();
+				if (player.hasCock()) {
+					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "Anal", winAndRapeHarpyAnally, null, null, null, "Put your cock to a good use and take the harpy from behind.");
+					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1, "Pussy", victoryHarpyGetsHerPussyRaped, null, null, null, "That harpy's pussy looks inviting...");
+				}
+				addButton(2, "Oral", WinOnHarpyAndOralRape);
+				if (player.hasVagina()) {
+					if (player.isNaga()) outputText("  If you weren't a naga, you could scissor her.");
+					else addButton(3, "Scissor", harpyScissorSurprise, null, null, null, "Get into some girl-on-girl activity with the harpy.");
+					if (player.clitLength >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy, null, null, null, "Fuck the harpy with your big clit.");
+				}
+				if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis, null, null, null, "Use your ovipositor to lay the eggs into harpy.");
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			//Not horny?  Iz over
 			else cleanupAfterCombat();
@@ -81,6 +76,7 @@ package classes.Scenes.Areas.HighMountains
 
 		private function harpyGooGenderlessLoss():void
 		{
+			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			outputText("The triumphant harpy looks down at your goopy form, ready to take you.  She seems a little confused though, and begins poking at your gelatinous body.\n\n", false);
 
@@ -104,6 +100,7 @@ package classes.Scenes.Areas.HighMountains
 //Requires pussy or cock small enough for harpy!
 		private function harpyLossLust():void
 		{
+			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			//Merauder wroted.
 			var x:Number = -1;
@@ -164,6 +161,7 @@ package classes.Scenes.Areas.HighMountains
 //No genderless folks.
 		private function harpyDamageLoss():void
 		{
+			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 
 			var x:Number = -1;

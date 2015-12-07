@@ -1337,7 +1337,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	else {
 		outputText("\n\nLoppe watches you feast with an amused, loving smile.  \"<i>Sorry about that.  I still can't quite control myself, especially not when I have a cutie like you as my lover.  But... thanks for coming back again.  You're sweet, sugar!</i>\"");
 	}
-	outputText("\n\nWiping off the remnants of the post-sex meal, you're briefly disappointed that there isn't more - you're still only halfway home from famished.  \"<i>Sorry, but that's all that I had time to make,</i>\" Loppe apologises.  Then she grins,  \"<i>Looks like you enjoyed it, though; I knew you'd want something after the 'workout'.  If you want, I can also draw you a bath.</i>\"");
+	outputText("\n\nWiping off the remnants of the post-sex meal, you're briefly disappointed that there isn't more - you're still only halfway home from famished.  \"<i>Sorry, but that's all that I had time to make,</i>\" Loppe apologizes.  Then she grins,  \"<i>Looks like you enjoyed it, though; I knew you'd want something after the 'workout'.  If you want, I can also draw you a bath.</i>\"");
 
 	outputText("\n\nYou think it over, but then laugh and turn her down; just how can you trust her not to follow you into the bath and stuff you so full you can't get out of it?");
 	//[Libido >=50:
@@ -1645,7 +1645,7 @@ private function getAssFuckedByLoppeAsACentaur():void {
 
 	//(First Time)
 	if(flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
-		outputText("\n\n\"<i>I'm sorry I stuffed you that full,</i>\" Loppe apologises, having the decency to look sheepish.  \"<i>I just get so horny, and my balls fill up so fast, that I just can't help it.  If it makes you feel any better, I wind up just as bloated when I'm the one getting the dick; I can't stop milking a cock until they've stuffed me as full as I can get.</i>\"");
+		outputText("\n\n\"<i>I'm sorry I stuffed you that full,</i>\" Loppe apologizes, having the decency to look sheepish.  \"<i>I just get so horny, and my balls fill up so fast, that I just can't help it.  If it makes you feel any better, I wind up just as bloated when I'm the one getting the dick; I can't stop milking a cock until they've stuffed me as full as I can get.</i>\"");
 
 		outputText("\n\nWell... Loppe did warn you about her libido.");
 

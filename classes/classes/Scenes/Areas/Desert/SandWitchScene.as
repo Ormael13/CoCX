@@ -285,7 +285,7 @@ private function sandwitchRaped():void {
 				outputText("Using the corruption in your blood, you place your " + player.foot() + " upon the budding shoots, and wipe them from existence. The sand witch looks shocked at your display of power, only turning you on more. You undo your loin cloth and grope her nethers, only to find a surprise. She has " + num2Text(player.cocks.length + 1) + " loose wet cunts and each seems to be made to fit you exactly. Pushing her to the ground, you bring the seeping heads of your " + multiCockDescriptLight() + " to her nethers, slowly easing into her depths.  ", false);
 				outputText("Thrusting deep, you hit bottom, and marvel at the sensations as you feel the heads of your " + multiCockDescriptLight() + " rub against the end of her wet pussies, only making your desire to penetrate increase. As though responding to your will, your " + multiCockDescriptLight() + " grow just a tiny bit more in length and thickness.  ", false);
 				outputText("With a satisfied growl of lust from yourself, and a screech of pain from the sand witch, you break past her cervixes and into her wombs. Pulling the heads of your " + multiCockDescriptLight() + " from her wombs, you rub and rut at the outside of her cunts, bringing yourself closer and closer to your peak as the sand witch struggles, her eyes turning wide with fright as she starts to understand you hold more power than her.  ", false);
-				outputText("With a beastial cry of lust, you shove your shafts deep within her vaginas, past her cervices and into her womb where you blast your potent, corrupted, demon-tainted seed.  ", false);
+				outputText("With a bestial cry of lust, you shove your shafts deep within her vaginas, past her cervices and into her womb where you blast your potent, corrupted, demon-tainted seed.  ", false);
 				//A few dicks...
 				outputText("\n\nThe sand witch screams in savage denial as you plant your seed deep within her body, your corruption no doubt making it extra potent. You gaze into her eyes, reveling in her expression of horror. Without uttering a word, you continue to fuck her, making sure your seed is well-entrenched within her wombs, feeling it splatter and bubble around your " + multiCockDescriptLight() + ".  You wonder if she will remember the pleasure her body felt today, and if she will be more likely to drop to her knees before you than to fight... ", false);
 				outputText("Finally finished, you pull your " + multiCockDescriptLight() + " from her well used slits, your " + multiCockDescriptLight() + " drooling cum even now. With a grin, you walk away, happy with your little encounter.  ", false);
@@ -534,7 +534,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 			outputText(", you push the witch unceremoniously to the ground and deliver a slap to her breasts.  She cries out in pain as milk splashes out onto the sand.  A cruel smile is brought to your face and you start slapping them even harder, alternatively smacking her pair of cunts for good measure.  Surprisingly, her cries of pain begin to turn into moans of pleasure with every slap.  She might even be pushing into the blows slightly, though it is difficult to tell.  After a sizable pool of milk and her juices has drained into the sands beneath her, you reach down and start to drive your fingers hard into one of the sand witch's cunts.  The first few thrusts are enough to violently bring her to orgasm.  You trot forward slowly until you are over her and the witch suddenly hops up. Driving her face into your ", false);
 			//[has cunt]
 			if(player.hasVagina()) {
-				outputText(vaginaDescript(0) + ", she fingers herself even harder then you had been a moment ago.  Her lips lock unto your " + clitDescript() + " and she suckles on it, drawing a pained gasp from you and causing your pussy juices to gush over her face. You feel ", false);
+				outputText(vaginaDescript(0) + ", she fingers herself even harder than you had been a moment ago.  Her lips lock unto your " + clitDescript() + " and she suckles on it, drawing a pained gasp from you and causing your pussy juices to gush over her face. You feel ", false);
 				//[cunt size is small]
 				if(player.vaginalCapacity() < 10) outputText("one of her fingers ", false);
 				//[cunt size is normal]
@@ -553,7 +553,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 			}
 			//[does not has cunt]
 			else {
-				outputText(assholeDescript() + ", she fingers herself even harder then you had been a moment ago.  Her tongue drives into your " + assholeDescript() + ", licking enthusiastically as she squeezes her nipples. ", false);
+				outputText(assholeDescript() + ", she fingers herself even harder than you had been a moment ago.  Her tongue drives into your " + assholeDescript() + ", licking enthusiastically as she squeezes her nipples. ", false);
 				//[anus size is small]
 				if(player.analCapacity() < 10) outputText("The sensations are intense, and you could almost swear that her tongue is tracing a pattern as her mouth mutters strange sounds. ", false);
 				//[anus size is normal] 

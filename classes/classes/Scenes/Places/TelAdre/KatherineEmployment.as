@@ -252,8 +252,9 @@ package classes.Scenes.Places.TelAdre{
 			doNext(katherineTrainingStage1);
 		}
 
-		public function katherineTrainingStage1():void
+		public function katherineTrainingStage1(clearOut:Boolean = true):void
 		{
+			if (clearOut) clearOutput();
 			outputText((flags[kFLAGS.KATHERINE_TRAINING] == 0 ? "  You" : "Kath readies herself quickly and you") + " lead her on a long, winding trek through the desert sands.  You always keep Tel’Adre in sight so that if the two of you are somehow separated Kath will be able to find her way home.\n\n");
 			outputText("You show her some strategies and good tricks for staying alive out here and moving across the sand without tiring yourself as much.  Kath’s good at listening and while she doesn’t improve much you know she’ll do better tomorrow.\n\n");
 			outputText("When you aren’t instructing her Kath complains about the sand, the heat and the weight of the sack.  You can tell when she really gets tired because she starts to concentrate more on walking than talking.  You can’t blame her.  The desert is difficult terrain to walk on, that’s why you chose it.\n\n");
@@ -341,9 +342,9 @@ package classes.Scenes.Places.TelAdre{
 		private function katherineTrainingStage2Horny():void
 		{
 			clearOutput();
-			outputText("Katherine returns much sooner than you expected and with energy to spare.  Her pupils are dilated and her head and tail both keep flicking from side to side.  “<i>There is the most amazing smell over that way</i>” she says, pointing inland toward a patch of bushes.\n\n");
-			outputText("You don’t need to go over to the bushes to find out what the smell is, it’s all over her.  It’s a sweet yet creamy scent, unlike anything back home.  It seems whisker fruits, or at least the blossoms of the tree it comes from, have a certain effect on your feline friend.\n\n");
-			outputText("As you smell Katherine she is busy sniffing you.  She rubs her nose against your cheek, her whiskers tickling your face and says, “<i>This place is really nice, I know what we could do.</i>”");
+			outputText("Katherine returns much sooner than you expected and with energy to spare.  Her pupils are dilated and her head and tail both flick continuously from side to side.  “<i>There is the most amazing smell over that way,</i>” she says, pointing inland toward a patch of bushes.\n\n");
+			outputText("You don’t need to go over to the bushes to find out what the smell is; it’s all over her.  It’s a sweet-yet-creamy scent, unlike anything back home.  It seems whisker fruits, or at least the blossoms of the tree it comes from, have a certain effect on your feline friend.\n\n");
+			outputText("As you smell Katherine she is likewise busy sniffing you.  She rubs her nose against your cheek, her whiskers tickling your face, and says, “<i>This place is really nice... I know what we could do.</i>”");
 			flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_LAKE; //Makes sure the scene happens on the shores of the lake
 			var penKath:Function = null;       //Fuck and give options only available for males and herms
 			var penAnal:Function = null;
@@ -464,9 +465,9 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You tell Kath that you feel she’s ready for testing.  She beams and nervously tries to smooth out her clothes.  The two of you walk to the Wet Bitch where, as expected, you find captain Urta sitting alone at her table reading reports and sipping something from a mug.\n\n");
 			if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > -1) {
 				if (flags[kFLAGS.TIMES_FUCKED_URTA] > 0) { //Urta is either your lover or a fuckbuddy
-					outputText("Urta gives you a big smile as you lead Katherine over to her table.  “<i>How’s it going " + player.short + "?</i>”  When Kath sits down she adds, “<i>And who’s this?</i>” in a friendly tone.\n\n");
-			outputText("You explain to Urta how you’ve been training Kath in the hopes of getting her a job in the watch.  Urta sips from her mug and listens closely as you go over the training.  When you finish Urta says, “<i>" + (urta.urtaLove() ? "You know I could have given you a hand with that love" : "Well love, the watch can always use new recruits if they’re well trained") + ".</i>”  Kath’s jaw hits the floor and she asks, “<i>You’re sleeping with the captain of the guard?</i>”\n\n");
-			outputText("Urta knocks back her mug and says, “<i>Oh yes, we’ve been sleeping together for a while.  I’m guessing from the look on your face you two have been sleeping together for a while too, hmmm?  Where have you been hiding her " + player.short + "?  And why haven’t you introduced us?</i>”");
+					outputText("Urta gives you a big smile as you lead Katherine over to her table.  “<i>How’s it going, " + player.short + "?</i>”  When Kath sits down, she adds, “<i>And who’s this?</i>” in a friendly tone.\n\n");
+			outputText("You explain to Urta how you’ve been training Kath in the hopes of getting her a job in the watch.  Urta sips from her mug and listens closely as you go over the training.  When you finish Urta says, “<i>" + (urta.urtaLove() ? "You know, I could have given you a hand with that, love" : "Well love, the watch can always use new recruits if they’re well trained") + ".</i>”  Kath’s jaw hits the floor and she asks, “<i>You’re sleeping with the captain of the guard?</i>”\n\n");
+			outputText("Urta knocks back her mug and says, “<i>Oh yes, we’ve been sleeping together for a while.  I’m guessing from the look on your face, you two have been sleeping together for a while too, hmmm?  Where have you been hiding her, " + player.short + "?  And why haven’t you introduced us?</i>”");
 					flags[kFLAGS.KATHERINE_URTA_AFFECTION] = 1;
 					if (urta.urtaLove() && (flags[kFLAGS.AMILY_VISITING_URTA] == 4 || flags[kFLAGS.URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER] > 0)) {
 						outputText("\n\nBefore Katherine can respond Urta adds, “<i>Don’t worry, I’m not angry about " + player.short + " sleeping around");
@@ -524,7 +525,7 @@ package classes.Scenes.Places.TelAdre{
 			clearOutput();
 			outputText("You go back to Kath’s alley and pace back and forth, waiting.  Hours later Kath races into the alley and leaps into your arms, nearly knocking you off your feet.  “<i>I did it!  I did it!</i>” she cries while hugging you tight enough to squeeze the breath out of you.  “<i>Oh thank you " + player.short + ", I couldn’t have done it without you.  The tests were hard but I knew what she wanted.</i>”\n\n");
 			outputText("You stroke her hair and Katherine finally calms down enough to show you her new badge.  “<i>I’m starting tomorrow.  Oh - and that’s not even the best part.  I didn’t know about this, but because I’m in the watch they can give me papers that show I have a good job, that I’m a good citizen.  I forget what it’s called, but it means I’ll be able to get a house really soon cause they know I’m good for it and I’ll be earning a wage.</i>”\n\n");
-			outputText("She looks around at the alley and says, “<i>We had some fun times here, but I won’t miss living on the street.</i>”  She gives you a kiss and adds, “<i>I have to run.  I’ve got equipment to pick up and patrol routes to memorize.  Next time you’re in town look for me at the wet bitch, I’ll try to hang around there.</i>”");
+			outputText("She looks around at the alley and says, “<i>We had some fun times here, but I won’t miss living on the street.</i>”  She gives you a kiss and adds, “<i>I have to run.  I’ve got equipment to pick up and patrol routes to memorize.  Next time you’re in town, look for me at the Wet Bitch; I’ll try to hang around there.</i>”");
 			doNext(camp.returnToCampUseFourHours); //Use up 4 hours, go back to camp
 		}
 		
@@ -744,7 +745,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("“<i>When are you going to start taking this seriously, kitty?  These skills are essential if you ever get sent outside the walls!</i>”\n\n");
 			outputText("“<i>Since when do you send people out into the desert anyway?  Besides, it’s hard to concentrate when you’re stuck in this stupid thing,</i>” the cat replies, tapping a claw-like fingernail meaningfully on the chastity belt she’s wearing.\n\n");
 			outputText("“<i>You can’t seriously be aroused already - I’m the only one here, and it’s not like I’m in heat.  It should only be bothering you if you’re too much of a slut to control yourself!</i>” Urta snaps back.\n\n");
-			outputText("Before things can escalate into a fight, you interject, yelling both of them to stay quiet!  This is not helping either of them!  You step between the two girls, crossing your arms and glaring at both of them.  You tell them to apologise to each other so the three of you can carry on.\n\n");
+			outputText("Before things can escalate into a fight, you interject, yelling both of them to stay quiet!  This is not helping either of them!  You step between the two girls, crossing your arms and glaring at both of them.  You tell them to apologize to each other so the three of you can carry on.\n\n");
 			outputText("Bristling, the two glower half-heartedly at each other and mumble a tired sounding, “<i>sorry,</i>” simultaneously.  You’re not sure if they’re really still hating each other, or they just don’t want to try and get along for whatever reasons.  Still, you suppose this will have to do, for the moment.  Turning to Urta, you ask her about the details of this training.  What exactly is Kath supposed to do?\n\n");
 			outputText("“<i>Well, part of being a Watch recruit is being able to look after yourself if you get sent out beyond the city, right?</i>”  The vulpine officer explains.  You nod in agreement, motioning for her to go on.  “<i>So, that means you need to know how to look after yourself out in the wilderness.  We covered firemaking and foraging already - she actually passed those pretty well, quicker than a lot of recruits I’ve seen,</i>” she admits, which makes Kath blink in shock at hearing her skills praised.\n\n");
 			outputText("You turn to smile at Kath and then ask.  If Kath did as well as Urta’s saying, what seems to be the problem?\n\n");
@@ -812,7 +813,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("“<i>Then what about at breakfast, when you were washing up?  Tail wagging all over the place - I could look right at your pussy every time it wasn’t hanging between your legs,</i>” Kath drawls.\n\n");
 			outputText("Looking at Urta you tell her that does seem like something she would do when drunk...\n\n");
 			outputText("“<i>I don’t drink that much in the morning, and certainly not while I’m working here!</i>” the vulpine herm retorts indignantly.\n\n");
-			outputText("Okay... you apologise.  Still you oughta do something about Kath, she really looks in pain...\n\n");
+			outputText("Okay... you apologize.  Still you oughta do something about Kath, she really looks in pain...\n\n");
 			outputText("Kath promptly clasps her hands in front of you and stares at you and Urta alike with her eyes as wide and pleading as possible... how is it that she can look so much like an adorable little kitten when she wants to?\n\n");
 			outputText("“<i>...Ugh, fine, I guess we can do something for her.  What do you have in mind? ...Besides taking the belt off, of course?</i>” Urta asks.\n\n");
 			outputText("Hmm... this is supposed to help Kath develop some resistance to lust, so actually fucking her is out of question.  Maybe a handjob?  Just to help her get her rocks off so she can focus on the task at hand?  Figuring this could also be a great opportunity to help them get along... you suggest Urta should be the one giving her a handjob.\n\n");
@@ -821,7 +822,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("“<i>Of course you would, you had nobody else to practice with,</i>” Kath retorts.  Urta flinches at that, looking genuinely wounded.\n\n");
 			outputText("“<i>Hey!</i>” you interject.  “<i>That is not something you say to someone who is using her off-time to help you out!  Maybe you should stay in your belt after all... you’ll cool off sometime later...</i>”\n\n");
 			outputText("“<i>You wouldn’t!</i>” Kath protests in horror.\n\n");
-			outputText("You wouldn’t?  After saying something so inconsiderate, you damn well should!  Or need you remind her that she was in basically the same situation as Urta before you met her?  You wouldn’t blame Urta for leaving her hanging after saying something like that.  If Kath has any hopes of getting out of that belt anytime soon, she’d better apologise!\n\n");
+			outputText("You wouldn’t?  After saying something so inconsiderate, you damn well should!  Or need you remind her that she was in basically the same situation as Urta before you met her?  You wouldn’t blame Urta for leaving her hanging after saying something like that.  If Kath has any hopes of getting out of that belt anytime soon, she’d better apologize!\n\n");
 			outputText("The feline herm has the decency to look genuinely ashamed of herself as she turns to Urta, “<i>I’m sorry, Ms. Urta,</i>” she says.\n\n");
 			outputText("“<i>...Just Urta, is fine,</i>” Urta grumbles, then heaves a sigh.\n\n");
 			outputText("You nod your head, that’s much better now...\n\n");
@@ -1101,7 +1102,7 @@ package classes.Scenes.Places.TelAdre{
 		private function katherineTrainingWithUrtaCompleteLeave():void
 		{
 			clearOutput();
-			outputText("You apologise to the amorous herms, but you really have to be going...\n\n");
+			outputText("You apologize to the amorous herms, but you really have to be going...\n\n");
 			outputText("“<i>Aw...</i>” the two sigh, clearly disappointed.  “<i>Well, I guess we’ll just try to have fun without you... but we’ll miss you,</i>” Urta says.  “<i>Yeah, so hurry back, lover,</i>” Kath winks, right before Urta reaches up and, to Kath’s own visible surprise, pulls her into a kiss... damn, but she must be drunk.\n\n");
 			outputText("On the way out, you pay your tab and wave to the two girls, who seem too busy with each other to notice... well... you’ll just find out how this ends via gossip later...");
 			doNext(camp.returnToCampUseFourHours); //Return to camp, use up four hours

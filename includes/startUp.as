@@ -85,7 +85,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
 	addButton(6, "Image Credits", imageCreditsScreen, null, null, null, "Check out who contributed to the image pack.");
 	addButton(7, "Debug Info", debugPane, null, null, null, "View debug information.");
-	addButton(8, "Mod Thread", openURL, "http://forum.fenoxo.com/thread-10915.html", null, null, "Check the official mod thread on Fenoxo's forum.");
+	addButton(8, "Mod Thread", openURL, "http://fenoxo.com/forum/index.php?/topic/5-coc-revamp-mod", null, null, "Check the official mod thread on Fenoxo's forum.");
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;
@@ -112,10 +112,15 @@ Open-source contributions by:<br>
 
 Game Mod by: Kitteh6660
 
-Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
-
-Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>  
+<b><u>Original Game Github</u></b>
+<br>Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
+<br>Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>  
 (requires an account, unfortunately)
+
+<b><u>Modded Game Github</u></b>
+<br>Source Code: <u><a href='https://github.com/Kitteh6660/Corruption-of-Champions'>https://github.com/Kitteh6660/Corruption-of-Champions</a></u>
+<br>Bug Tracker: <u><a href='https://github.com/Kitteh6660/Corruption-of-Champions/issues'>https://github.com/Kitteh6660/Corruption-of-Champions/issues</a></u>  
+(requires an account too, unfortunately)
 
 **<u>DISCLAIMER</u>**
 <br>- **There are many strange and odd fetishes contained in this flash.  Peruse at own risk.**
@@ -277,10 +282,11 @@ public function settingsScreenGameSettings():void {
 	addButton(4, "Hyper Happy", toggleHyperHappy);
 	
 	addButton(5, "SFW Toggle", toggleSFW, null, null, null, "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
-	addButton(6, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
-	addButton(7, "Auto level", toggleAutoLevel, null, null, null, "Toggles automatic leveling when you accumulate sufficient experience.");
+	addButton(6, "Auto level", toggleAutoLevel, null, null, null, "Toggles automatic leveling when you accumulate sufficient experience.");
 	if (player.str > 0) addButton(8, "Enable Surv", enableSurvivalPrompt, null, null, null, "Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");	
 	if (player.str > 0) addButton(9, "Enable Real", enableRealisticPrompt, null, null, null, "Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");	
+	addButton(10, "Fetishes", fetishSubMenu, null, null, null, "Toggle some of the weird fetishes such as watersports and worms.");
+
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5)
 	{
 		removeButton(8);
@@ -410,6 +416,47 @@ public function toggleAutoLevel():void {
 	if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
 	else flags[kFLAGS.AUTO_LEVEL] = 0;
 	settingsScreenGameSettings();	
+}
+
+public function fetishSubMenu():void {
+	menu();
+	addButton(0, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
+	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 || player.findStatusAffect(StatusAffects.WormsOff) >= 0) addButton(1, "Worms", toggleWormsMenu, null, null, null, "Enable or disable worms. This will NOT cure infestation, if you have any.");
+	else addLockedButton(1, "Find the sign depicting the worms in the mountains to unlock this.");
+	addButton(4, "Back", settingsScreenGameSettings);
+}
+
+private function toggleWormsMenu():void {
+	clearOutput();
+	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0) {
+		outputText("You have chosen to encounter worms as you find the mountains");
+		if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0) outputText(" albeit at reduced encounter rate");
+		outputText(". You can get infested.");
+	}
+	if (player.findStatusAffect(StatusAffects.WormsOff) >= 0) {
+		outputText("You have chosen to avoid worms. You won't be able to get infested.");
+	}
+	menu();
+	addButton(0, "Enable", setWorms, true, false);
+	addButton(1, "Enable (Half)", setWorms, true, true);
+	addButton(2, "Disable", setWorms, false, false);
+	addButton(4, "Back", fetishSubMenu);
+}
+
+private function setWorms(enabled:Boolean, half:Boolean):void {
+	//Clear status effects
+	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0) player.removeStatusAffect(StatusAffects.WormsOn);
+	if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0) player.removeStatusAffect(StatusAffects.WormsHalf);
+	if (player.findStatusAffect(StatusAffects.WormsOff) >= 0) player.removeStatusAffect(StatusAffects.WormsOff);
+	//Set status effects
+	if (enabled) {
+		player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
+		if (half) player.createStatusAffect(StatusAffects.WormsHalf, 0, 0, 0, 0);
+	}
+	else {
+		player.createStatusAffect(StatusAffects.WormsOff, 0, 0, 0, 0);
+	}
+	toggleWormsMenu();
 }
 
 //Survival Mode
@@ -692,7 +739,8 @@ public function creditsScreen():void {
 	outputText("<ul>");
 	outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TF)</li>");
 	outputText("<li> FeiFongWong (Prisoner Mod)</li>");
-	outputText("<li> Foxxling (Lizan Rogue)</li>");
+	outputText("<li> Foxxling (Lizan Rogue, Skin Oils & Body Lotions, Black Cock)</li>");
+	outputText("<li> LukaDoc (Bimbo Jojo)</li>");
 	outputText("<li> Kitteh6660 (Behemoth, Cabin, Ingnam, Pure Jojo sex scenes. Feel free to help me with quality control.)</li>");
 	outputText("</ul>");
 	outputText("<b>Game Mod Bug Reporting:</b>\n");
@@ -874,7 +922,7 @@ public function imageCreditsScreen():void
 //------------
 public function howToPlay():void {
 	clearOutput();
-	displayHeader("Settings");
+	displayHeader("Instructions");
 	outputText("<b><u>How To Play:</u></b>\nClick the buttons corresponding to the actions you want to take.  Your 'goal' is to obviously put an end to the demonic corruption around you, but do whatever the hell you want.  There is a story but sometimes it's fun to ignore it.\n\n", false);
 	outputText("<b>Exploration:</b>\nThe lake is a safe zone when you start the game.  It's a good place to explore, and Whitney's farm can offer some nice stat boosts to help get you on your feet. Once you feel comfortable, the forest is probably the next safest area, but beware of tentacle monsters.  The desert is the next toughest area, and the mountains offer further challenges.  There are more areas beyond that, but that's a good way to get started.  You'll uncover plenty of new 'places' exploring, which can be accessed from the <b>Places</b> menu.  You'll also find some interesting characters when you try to discover new explorable locations by choosing <b>Explore</b> twice.\n\n", false);
 	outputText("<b>Combat:</b>\nCombat is won by raising an opponent's lust to 100 or taking their HP to 0.  You lose if your enemy does the same to you.  Loss isn't game over, but some losses will make it harder in the future by lowering your stats.  Beware.  Don't be afraid to spam the <b>Run</b> option when you're in over your head.\n\n", false);

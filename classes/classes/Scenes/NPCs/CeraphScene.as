@@ -545,7 +545,7 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			spriteSelect(7);
-			outputText("You nod, biting your lip anxiously and undoing your armor to give her better access to your body.	The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n", false);
+			outputText("You nod, biting your lip anxiously and undoing your armor to give her better access to your body.  The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n", false);
 			outputText("The idea turns you on immensely, and you pant and gasp as ", false);
 			if (player.totalCocks() > 0) {
 				outputText("pre-cum oozes from ", false);

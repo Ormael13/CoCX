@@ -39,6 +39,7 @@
 				"foot"						: function(thisPtr:*):* { return kGAMECLASS.player.foot(); },
 				"fullchest"					: function(thisPtr:*):* { return kGAMECLASS.player.allChestDesc(); },
 				"hair"						: function(thisPtr:*):* { return kGAMECLASS.hairDescript(); },
+				"haircolor"					: function(thisPtr:*):* { return kGAMECLASS.player.hairColor; },
 				"hairorfur"					: function(thisPtr:*):* { return kGAMECLASS.hairOrFur(); },
 				"he"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("he", "she"); },
 				"he2"						: function(thisPtr:*):* { return kGAMECLASS.player2.mf("he", "she"); },

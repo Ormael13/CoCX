@@ -52,18 +52,14 @@ private function favoriteSalonMenu():void {
 }
 
 private function salonFavoritesPaymentMenu():void {
-	var blow:Function = null;
-	if(player.hasCock()) blow = goblinHairDresserFacefuck;
-	var minoCum:Function = null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = goblinHairDresserFacefuck;
 	menu();
 	if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
-	addButton(0,"Goblin Blow",blow);
+	if(player.hasCock()) addButton(0,"Goblin Blow",goblinHairDresserFacefuck);
 	addButton(1,"Canine",gloryholeDoggie);
 	addButton(2,"Imp",gloryholeImp);
 	addButton(3,"Minotaur",gloryholeMinotaur);
 	addButton(4,"Incubus",gloryholeIncubus);
-	addButton(8,"Buy MinoCum",minoCum);
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(8,"Buy MinoCum",buyMinoCum);
 	addButton(14,"Back",favoriteSalonMenu);
 }
 
@@ -129,7 +125,9 @@ public function salonPurchaseMenu():void {
 
 private function hairDresserGreeting():void {
 	spriteSelect(38);
-	outputText("You step inside the cave, and are greeted by a sight you did not expect.  The cave's floor is covered with smooth wood panelling and the walls are nearly entirely covered with hanging mirrors.  The few stalactites have hooks drilled into them, from which hang hundreds of scissors, shears, razors, combs, and other hairstyling impliments.  It reminds you of the hair-cutter's shop in your hometown.", true);
+	clearOutput();
+	outputText(images.showImage("location-salon"));
+	outputText("You step inside the cave, and are greeted by a sight you did not expect.  The cave's floor is covered with smooth wood panelling and the walls are nearly entirely covered with hanging mirrors.  The few stalactites have hooks drilled into them, from which hang hundreds of scissors, shears, razors, combs, and other hairstyling impliments.  It reminds you of the hair-cutter's shop in your hometown.");
 	outputText("\n\nThere are a few chairs along the wall and goblins with latex dresses and gloves looking bored.  At the sight of you they perk up and clamor around you excitedly, until one with a gravity-defying chest pushes them apart and greets you.", false);
 	outputText("   \"<i>I apologize for my daughters,</i>\" she says as she presses herself against you.  \"<i>They're a bunch of brainless hussies for the most part.  My name is Lynnette, and welcome to my salon!  You want your hair cut or lengthened?  We've got you covered, and we don't ask for much - just a shot of cum.", false);
 	if(player.cockTotal() == 0) {
@@ -145,6 +143,7 @@ private function hairDresserGreeting():void {
 private function hairDresserRepeatGreeting():void {
 	clearOutput();
 	spriteSelect(38);
+	outputText(images.showImage("location-salon"));
 	var minoCum:Number = 0;
 	//Chance for mino craziness here
 	if(rand(5) == 0 && (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0)) {
@@ -319,6 +318,7 @@ private function gloryholeMinotaur(): void {
 
 private function goblinHairDresserFacefuck():void {
 	spriteSelect(38);
+	outputText(images.showImage("lynnette-blowjob"));
 	outputText("Lynnette licks her lips and practically tears her way into your " + player.armorName + ", having your crotch exposed in seconds.  Your " + cockDescript(0) + " flops out immediately, slapping her on the nose as it grows hard.  She wraps both hands around you and begins pumping with practiced ease, flicking her tongue over your crown and wrapping her lips ", true);
 	if(player.cocks[0].cockThickness >= 4) outputText("around as much of you as she can", false);
 	else outputText("around your first few inches", false);
@@ -637,6 +637,7 @@ public static const LYNNETTE_CARRYING_COUNT:int                                 
 //Impregnate
 private function fuckLynnette():void {
 	clearOutput();
+	outputText(images.showImage("lynnette-fuck"));
 	//Checks to see if you've cum withint hte past 24 hours.
 	if(flags[kFLAGS.LYNNETTE_FUCK_COUNTER] == 0) {
 		outputText("At your suggestion, Lynnette's eyelashes flutter dangerously low. She gives you a smokey look and asks, \"<i>Is that so?</i>\" She circles around you, looking you up and down with eyes that seem to bore right through your [armor]. She must see something she likes, because she dips forward, parting her weighty melons around your ");

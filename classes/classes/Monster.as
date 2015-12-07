@@ -613,6 +613,7 @@
 				attack &&= handleBlind();
 			}
 			attack &&= !playerDodged();
+			
 			return attack;
 		}
 
@@ -622,12 +623,7 @@
 			while (attacks>0){
 				if (attackSucceeded()){
 				    var damage:int = eOneAttack();
-					var didBlock:Boolean = combatBlock(true);
-					if (didBlock) {
-						outputText("You block " + a + short + "'s " + weaponVerb + " with your " + player.shieldName + "! ");
-						damage = 0;
-					}
-					else outputAttack(damage);
+					outputAttack(damage);
 					postAttack(damage);
 					game.statScreenRefresh();
 					outputText("\n", false);
@@ -751,6 +747,11 @@
 				if (plural) outputText("' attacks ", false);
 				else outputText("'s attack ", false);
 				outputText("with your " + player.weaponName + ".\n");
+				return true;
+			}
+			//Block with shield
+			if (combatBlock(true)) {
+				outputText("You block " + a + short + "'s " + weaponVerb + " with your " + player.shieldName + "! ");
 				return true;
 			}
 			return false;

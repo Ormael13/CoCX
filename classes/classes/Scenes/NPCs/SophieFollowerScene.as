@@ -188,7 +188,7 @@ private function whyIDidItToDebimboSophie():void {
 	clearOutput();
 	outputText("Gently, you decide to try and explain yourself, telling Sophie about how you came across the Bimbo Liqueur... how you decided to use it on her, and why.  She listens silently, averting her eyes from you as you talk.  You note, though, as you speak, that her hands slowly drift down, feeling along the new body she's been given as if discovering her enhanced 'assets' for the first time.  The platinum-blonde harpy shudders as her hands drift across her huge F-cups, fingertips gently caressing her prominent nipples, which stiffen instantly at her touch, ready to be played with or suckled on.");
 	
-	outputText("\n\nWhen you finish explaining yourself, there's a long moment of silence.  Sophie continues to avert her gaze, but you can see that's she's calmed somewhat, perhaps soothed by your honesty.  Finally, though, she speaks: quietly and with barely more than a whisper, the harpy woman says, \"<i>I can't go back.</i>\"");
+	outputText("\n\nWhen you finish explaining yourself, there's a long moment of silence.  Sophie continues to avert her gaze, but you can see that's she's calmed somewhat, perhaps soothed by your honesty.  Finally, though, she speaks: quietly, and with barely more than a whisper, the harpy woman says, \"<i>I can't go back.</i>\"");
 	
 	outputText("\n\nWhat?");
 	
@@ -212,7 +212,7 @@ private function apologizeToDebimboSophie():void {
 	
 	outputText("\n\nShe listens silently, averting her eyes from you as you talk.  You note, though, as you speak, that her hands slowly drift down, feeling along the new body she's been given as if discovering her enhanced 'assets' for the first time.  The platinum-blonde harpy shudders as her hands drift across her huge F-cups, fingertips gently caressing her prominent nipples, which stiffen instantly at her touch, ready to be played with or suckled on.");
 	
-	outputText("\n\nWhen you finish explaining yourself, there's a long moment of silence.  Sophie continues to avert her gaze, but you can see that's she's calmed somewhat, perhaps soothed by your honesty.  Finally, though, she speaks: quietly, and with barely more than a whisper, the harpy woman says \"<i>I can't go back.</i>\"");
+	outputText("\n\nWhen you finish explaining yourself, there's a long moment of silence.  Sophie continues to avert her gaze, but you can see that's she's calmed somewhat, perhaps soothed by your honesty.  Finally, though, she speaks: quietly, and with barely more than a whisper, the harpy woman says, \"<i>I can't go back.</i>\"");
 	
 	outputText("\n\nWhat?");
 	
@@ -357,9 +357,9 @@ private function harvestEggs():void
 	clearOutput();
 	sophieSprite();
 	
-	outputText("You ask Sophie if it’s possible for her to produce eggs of a certain colour whilst she’s here.");
+	outputText("You ask Sophie if it’s possible for her to produce eggs of a certain color whilst she’s here.");
 
-	outputText("\n\n“<i>Using the lake magic? Sure,</i>” she says, yawning, and stretching. “<i>Some of my sisters used to come down here so they could get knocked up with eggs they could sell on the side. What colour would you like?</i>”");
+	outputText("\n\n“<i>Using the lake magic? Sure,</i>” she says, yawning, and stretching. “<i>Some of my sisters used to come down here so they could get knocked up with eggs they could sell on the side. What color would you like?</i>”");
 	
 	eggSelector();
 }
@@ -407,9 +407,9 @@ private function postEggSelector(selected:String):void
 	outputText("“<i>I’ll make some nice " + selected.toLowerCase() + "eggs for you then, hun,</i>” she says with a small grin. “<i>I can only produce one a week, though. I’ll put it with everything else you earn out of this hole in the ground. How’s that?</i>”");
 	
 	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 1;
-	if (flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] != selected)
+	if (flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE] != selected)
 	{
-		flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLOURCHOICE] = selected;
+		flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE] = selected;
 		flags[kFLAGS.FARM_EGG_STORED] = 0;
 		flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
 	}
@@ -1032,7 +1032,7 @@ private function kissSophieRecruitment():void {
 	if(player.cockTotal() > 3) outputText(" while the others press against her");
 	outputText(".  Sophie cries out in pleasure, almost waking up the entire neighbourhood - which would be a bad thing, considering your neighbours.  You quickly take another taste of her lips, shutting her up while you start to pound upwards into her hungry quim.");
 	
-	outputText("\n\nYour ravenous glans presses against the tight confines of your feathery matron, squeezing against her velvet walls with every push of your [hips].  The rose-coloured harpy rests herself against you, gently whispering cries into your ear as you focus all your carnal attention on the bouncing hips in front of you.");
+	outputText("\n\nYour ravenous glans presses against the tight confines of your feathery matron, squeezing against her velvet walls with every push of your [hips].  The rose-colored harpy rests herself against you, gently whispering cries into your ear as you focus all your carnal attention on the bouncing hips in front of you.");
 	outputText("\n\nThe two of you slump back, exhausted over a good night's sex.  Sophie lies in your arms, twirling her finger around your chest.");
 
 	outputText("\n\n\"<i>You've got a cute set up here, sweetheart.  I don't mind moving away from all those harpies, if there was the possibility that I could stay here with you.</i>\"");
@@ -1116,7 +1116,7 @@ internal function sophieIncestInHerCooterOrSomethingIDunno():void {
 		outputText("\n\nYou clap your hands and applaud your daughter's work.  The curvy little harpy is working so hard to please her " + player.mf("daddy","mommy") + " and entice him into her nest...  ");
 		if(flags[kFLAGS.DAUGHTER_THREE_BIMBO] > 0 && flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 0) outputText("\"<i>L-like, did I do a good job, " + player.mf("Daddy","Mommy") + "?  I so totally did my best for you.  I know I'm not super sexy like Mom and my sisters... but, " + player.mf("Daddy","Mommy") + ".. I will like, still please you, like, totally the best that I can!</i>\"");
 		else outputText("\"<i>W-well, what did you think, " + player.mf("Dad","Mommy") + "?  Did I do a good job?  I know I'm not as hot as Mom, but I promise I'll please you as best I can!</i>\"");
-		outputText(" she says, wanting more then anything to be able to please you.");
+		outputText(" she says, wanting more than anything to be able to please you.");
 		
 		outputText("\n\nSmirking at your daughter and reaching out with your hands as you approach her, you grab her and pull your desirable daughter against you, pushing your hips together.  Your closely pressed bodies make sure she feels [oneCock] straining against the confines of your [armor].  The needy harpy lets out a coo as she grinds her body against your own, her hands gripping and sliding over you as she looks to you with her big, violet eyes.  Her desire for you is as clear as the lust on a goblin.  Reaching down, you grab her sumptuous harpy rump, kneading that luscious, spankable ass with hunger and desire, your rapidly growing need to fuck and breed this delectable bird-girl overpowering what little sense you have left.  Despite her 'normal' feet, the idea of fucking your eager, beautiful daughter fills you with an aching hunger that must be sated.");
 	}

@@ -11,7 +11,7 @@ package classes.Items.Consumables
 	 */
 	public class BodyLotion extends Consumable 
 	{
-		private var _adj:String
+		private var _adj:String;
 		
 		public function BodyLotion(id:String, adj:String, longAdj:String) 
 		{
