@@ -67,7 +67,7 @@
 			mainView.setButtonText(0, "Newgame"); // b1Text.text = "Newgame";
 			//flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 			
-			var showSpecialNames:Boolean = achievements[kACHIEVEMENTS.STORY_FINALBOSS] > 0;			
+			var showSpecialNames:Boolean = true; // achievements[kACHIEVEMENTS.STORY_FINALBOSS] > 0;			
 			
 			clearOutput();
 			outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\n");
@@ -433,8 +433,7 @@
 		
 		private function useCustomProfile():void {
 			clearOutput();
-			if (specialName(mainView.nameBox.text) != null) {
-				clearOutput();
+			if (specialName(player.short) != null) {
 				outputText("Your name defines everything about you, and as such, it is time to wake...\n\n");
 				flags[kFLAGS.HISTORY_PERK_SELECTED] = 1;
 				completeCharacterCreation(); //Skip character creation, customPlayerProfile will be called in completeCharacterCreation
@@ -525,7 +524,7 @@
 		//Determines if has character creation bonuses
 		private function customName(arg:String):Function {
 			for (var i:int = 0; i < customs.length; i++)
-				if (customs[i][0] == arg && !customs[i][3])
+				if (customs[i][0] == arg && !customs[i][2])
 					return customs[i][1];
 			return specialName(arg); //Must check against the special name list as well
 		}
@@ -533,7 +532,7 @@
 		//Does PC skip creation?
 		private function specialName(arg:String):Function {
 			for (var i:int = 0; i < customs.length; i++)
-				if (customs[i][0] == arg && customs[i][3])
+				if (customs[i][0] == arg && customs[i][2])
 					return customs[i][1];
 			return null;
 		}
@@ -1305,6 +1304,7 @@
 		}
 		
 		private function completeCharacterCreation():void {
+			clearOutput();
 			if (customPlayerProfile != null) {
 				customPlayerProfile();
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseGameModes);
