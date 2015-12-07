@@ -246,10 +246,6 @@ public function displayPerks(e:MouseEvent = null):void {
 		outputText("\n<b>You can adjust your double attack settings.</b>");
 		addButton(button++,"Dbl Options",doubleAttackOptions);
 	}
-	if(player.findPerk(PerkLib.Metamorph) >= 0 || kGAMECLASS.debug) {
-		outputText("\n<b>You can change your body.</b>");
-		addButton(button++,"Metamorph",PerkLib.Metamorph.metamorphOptions);
-	}
 }
 
 public function doubleAttackOptions():void {
