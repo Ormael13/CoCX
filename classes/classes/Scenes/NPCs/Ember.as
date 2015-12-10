@@ -34,7 +34,7 @@ package classes.Scenes.NPCs
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Miss/dodge
-			else if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("You dodge aside at the last second and Ember's claws whistle past you.");
+			else if(player.getEvasionRoll()) outputText("You dodge aside at the last second and Ember's claws whistle past you.");
 			else {
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage <= 0) outputText("Ember's claws scrape noisily but harmlessly off your [armor].");
@@ -56,7 +56,7 @@ package classes.Scenes.NPCs
 			}
 			else {
 				outputText("Ember inhales deeply, then "+ emberMF("his","her") + " jaws open up, releasing streams of fire, ice and lightning; magical rather than physical, the gaudy displays lose cohesion and amalgamate into a column of raw energy as they fly at you.");
-				if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("  It's a narrow thing, but you manage to throw yourself aside at the last moment.  Fortunately, the energy whirling around and tearing up the soil blinds Ember to your escape until you have recovered and are ready to keep fighting.");
+				if(player.getEvasionRoll()) outputText("  It's a narrow thing, but you manage to throw yourself aside at the last moment.  Fortunately, the energy whirling around and tearing up the soil blinds Ember to your escape until you have recovered and are ready to keep fighting.");
 				else {
 					outputText("  The pain as the deadly combination washes over you is indescribable.  It's a miracle that you endure it, and even Ember looks amazed to see you still standing. ");
 					var damage:Number = 100 + rand(100);
@@ -75,7 +75,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			outputText("Ember suddenly spins on "+ emberMF("his","her") + " heel, the long tail that splays behind " + emberMF("him","her") + " lashing out like a whip.  As it hurtles through the air towards you, your attention focuses on the set of spikes suddenly protruding from its tip!");
-			if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect() || rand(2) == 0) {
+			if(player.getEvasionRoll() || rand(2) == 0) {
 				outputText("  You ");
 				if(rand(2) == 0) outputText("duck under");
 				else outputText("leap over");
@@ -94,7 +94,7 @@ package classes.Scenes.NPCs
 			//Effect: Stuns the PC for one turn and deals some damage, not much though. (Note: PC's version of this does something different and Ember has no cooldown to use this again. Obviously do not spam or peeps will rage.)
 			//Description:
 			outputText("Ember bares "+ emberMF("his","her") + " teeth and releases a deafening roar; a concussive blast of force heads straight for you!  ");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You quickly manage to jump out of the way and watch in awe as the blast gouges into the ground you were standing on mere moments ago.");
 			}
 			else {

@@ -12,7 +12,7 @@ package classes.Scenes.Areas.Bog
 		//3 - spe
 		//4 - sens
 		public function blowGun():void {
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("The lizan flings himself back.  In the air he puts a blowgun to his lips.  You move just in time to avoid the tiny dart.");
 			}
 			else {
@@ -33,7 +33,7 @@ package classes.Scenes.Areas.Bog
 		}
 		
 		public function immaHurtYouBadly():void {
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("The lizan Rushes at you.  As you raise your [weapon] to defend yourself he dives to the side, using a blowgun to fire a single dart at you.  You somehow manage to dodge it.");
 			}
 			else {
@@ -54,7 +54,7 @@ package classes.Scenes.Areas.Bog
 		}
 		
 		public function wingstickThrow():void {
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("The lizan zips to the side and you hear the whistle of something being thrown. You sidestep just in time to see a wingstick fly past.");
 			}
 			else {
@@ -66,7 +66,7 @@ package classes.Scenes.Areas.Bog
 		}
 				
 		public function tongueAttack():void {
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("All you see is a flash of pink and without even thinking you twist out of its way and watch the lizan’s long tongue snap back into his mouth.");
 			}
 			else {

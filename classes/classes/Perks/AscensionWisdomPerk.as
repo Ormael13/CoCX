@@ -17,6 +17,10 @@ package classes.Perks
 			super("Ascension: Wisdom", "Ascension: Wisdom", "", "Increases experience gains by 10% per level.");
 		}
 		
+		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		{
+			return true;
+		}		
 	}
 
 }

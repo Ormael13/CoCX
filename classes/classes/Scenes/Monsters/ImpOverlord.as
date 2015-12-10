@@ -121,7 +121,7 @@ package classes.Scenes.Monsters
 			outputText("He moves his loincloth aside and strokes his demonic member quickly. Within moments, he fires a torrent of cum towards you! ");
 			lust -= 20;
 			if (lust < 0) lust = 0;
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his corrupted cum thanks to your reaction!");
 				combatRoundOver();
 				return;
@@ -141,7 +141,7 @@ package classes.Scenes.Monsters
 		
 		public function clawAttack():void {
 			outputText("The imp overlord suddenly charges at you with his claws ready! ");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You manage to avoid his claws thanks to your reaction!");
 				combatRoundOver();
 				return;
@@ -158,7 +158,7 @@ package classes.Scenes.Monsters
 
 		public function doubleAttack():void {
 			outputText("The imp overlord suddenly charges at you with his claws ready and scimitar raised! ");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his deadly attack!");
 				combatRoundOver();
 				return;

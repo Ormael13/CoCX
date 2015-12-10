@@ -8,7 +8,7 @@ package classes.Scenes.Areas.VolcanicCrag
 	{
 		public function tailWhip():void {
 			outputText("The behemoth charges at you with his spiked tail raised!  ");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge in time to avoid his swinging tail!");
 				combatRoundOver();
 				return;

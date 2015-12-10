@@ -59,7 +59,7 @@
 		protected function lustNeedle():void {
 			outputText("With a swift step, the assassin vanishes, her movements too quick for you to follow. You take a sharp breath as you feel her ample thighs clench your head in between them, her slick cunt in full view as you take in her scent.");
 			//Miss
-			if (combatMiss() || combatEvade()) 
+			if (player.getEvasionRoll()) 
 			{
 				//Miss: 
 				outputText("\nYou’ve already prepared, however, as you hold your breath and grab the goblin by her sides. Unhindered by her advance, you take the opportunity to move backwards, throwing the goblin off balance and leaving you only faintly smelling of her pussy.");
@@ -77,7 +77,7 @@
 		protected function dualShot():void {
 			outputText("The assassin throws a syringe onto the ground, shattering it and allowing the dissipating smoke from its contents to distract you long enough for her to slip underneath you. With a quick flick of her wrists two needles are placed into her hands, though you’ve already caught wind of her movements.");
 			//Miss: 
-			if (combatMiss() || combatEvade() || combatMisdirect() || combatFlexibility()) 
+			if (player.getEvasionRoll()) 
 			{
 				outputText("\nYou jump backwards, far enough to avoid her quick thrust upwards as she attempts to lick the area in which your crotch once stood. Realising her situation, she quickly removes herself from the ground and faces you, more determined than before.");
 			}

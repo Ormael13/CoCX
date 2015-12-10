@@ -20,7 +20,6 @@
 		//COMBAT AMILY STUFF
 		//(Has regular attack)
 		public function amilyAttack():void {
-			var dodged:Number = 0;
 			var damage:Number;
 			//return to combat menu when finished
 			doNext(game.playerMenu);
@@ -31,39 +30,28 @@
 				return;
 			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				dodged = 1;
-			}
-			//Determine if evaded
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				dodged = 2;
-			}
-			//("Misdirection"
-			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				dodged = 3;
-			}
-			//Determine if cat'ed
-			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				dodged = 4;
-			}
+			var dodged:String = player.getEvasionReason();
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str + weaponAttack) - Math.random()*(player.tou+player.armorDef));
 			//Dodged
-			if(dodged > 0) {
+			if(dodged != null) {
 				outputText("Amily dashes at you and swipes her knife, but you quickly sidestep the blow.", false);
 				//Add tags for miss/evade/flexibility/etc.
 				switch(dodged) {
-					case 1:
+					case EVASION_SPEED:
 						outputText(" [Dodge]", false);
 						break;
-					case 2:
+					case EVASION_EVADE:
 						outputText(" [Evade]", false);
 						break;
-					case 3:
+					case EVASION_MISDIRECTION:
 						outputText(" [Misdirect]", false);
 						break;
-					case 4:
+					case EVASION_FLEXIBILITY:
 						outputText(" [Flexibility]", false);
+						break;
+					case EVASION_UNHINDERED:
+						outputText(" [Unhindered]", false);
 						break;
 					default:
 						CoC_Settings.error();

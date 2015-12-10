@@ -9,15 +9,15 @@ package classes.Scenes.Places.Boat
 		
 		//Corrupted Marae's specials
 		public function tentacleAttack():void {
-			
 			outputText("You spot barrage of tentacles coming your way! You attempt to dodge your way out ", false);
-			if (combatEvade() || combatFlexibility() || combatMisdirect())
-			{
-				outputText("and you successfully dodge her tentacles thanks to your superior evasion!", false);
-			}
-			else if (combatMiss())
+			var evade:String = player.getEvasionReason();
+			if (evade == EVASION_SPEED)
 			{
 				outputText("and you successfully dodge her tentacles!", false);
+			}
+			else if (evade != null)
+			{
+				outputText("and you successfully dodge her tentacles thanks to your superior evasion!", false);
 			}
 			else
 			{
@@ -33,13 +33,14 @@ package classes.Scenes.Places.Boat
 		public function tentacleRape():void {
 			
 			outputText("You spot barrage of tentacles coming your way! The tentacles are coming your way, aiming for your groin! ", false);
-			if (combatEvade() || combatFlexibility() || combatMisdirect())
-			{
-				outputText("You manage to avoid her tentacles thanks to your superior evasion!", false);
-			}
-			else if (combatMiss())
+			var evade:String = player.getEvasionReason();
+			if (evade == EVASION_SPEED)
 			{
 				outputText("You manage to successfully run from her tentacles! ", false);
+			}
+			else if (evade != null)
+			{
+				outputText("You manage to avoid her tentacles thanks to your superior evasion!", false);
 			}
 			else
 			{

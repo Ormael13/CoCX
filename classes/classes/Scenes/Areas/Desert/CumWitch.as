@@ -37,19 +37,20 @@ package classes.Scenes.Areas.Desert
 			var hits:int = 5 + rand(8);
 			var bonus:int = 0;
 			var damage:int = 0;
-			while(hits > 0) {
-				if(combatMiss() || combatMisdirect()) {
+			while (hits > 0) {
+				var evade:String = player.getEvasionReason();
+				//Evade
+				if(evade == EVASION_EVADE) outputText("\nYou roll away from some of the hermaphrodite spunk, easily evading it.");
+				//Misdirect
+				else if(evade == EVASION_MISDIRECTION) outputText("\nYou feint one direction and then move another, misdirecting like a pro and avoiding some of the sexual artillery.");
+				//Flexibility
+				else if(evade == EVASION_FLEXIBILITY) outputText("\nYou twist aside, making the most of your cat-like reflexes to avoid some of the stuff.");
+				else if(evade == EVASION_SPEED || evade != null) { // failsafe
 					//Miss1
 					if(rand(3) == 0) outputText("\nA glob of her goo goes wide, over your shoulder!");
 					else if(rand(2) == 0) outputText("\nOne wave of alabaster falls short, to splatter at your [feet].");
 					else outputText("\nSome of the Cum Witch's cum nearly hits you, but you manage to step aside.");
 				}
-				//Evade
-				else if(combatEvade()) outputText("\nYou roll away from some of the hermaphrodite spunk, easily evading it.");
-				//Misdirect
-				else if(combatMisdirect()) outputText("\nYou feint one direction and then move another, misdirecting like a pro and avoiding some of the sexual artillery.");
-				//Flexibility
-				else if (combatFlexibility()) outputText("\nYou twist aside, making the most of your cat-like reflexes to avoid some of the stuff.");
 				//Dragon-shell shield
 				else if (player.shield == game.shields.DRGNSHL && rand(2) == 0) outputText("\nYou ready your dragon-shell shield, letting the futa-cum hit your shield. Within a short span of time, the cum is absorbed into your shield.");
 				else {
@@ -146,7 +147,7 @@ package classes.Scenes.Areas.Desert
 		//*Restores one third of her HP.
 		public function sandWitchCuntHeals():void {
 			outputText("The Witch smirks at you and holds her free hand under her robes.  When she pulls it out, you realize she's gathered a handful of her cum.  She holds it up and exhales over it, the air making a slight whistle as it blows through her parted lips.  The ebony sorceress then smears the goop over her wounds, which seem to drink in the cum and vanish before your eyes.  She scolds, \"<i>Physical damage?  How artless.</i>\"");
-			addHP(Math.floor(eMaxHP() * 0.33));
+			addHP(eMaxHP()*0.33);
 			fatigue += 10;
 			combatRoundOver();
 		}

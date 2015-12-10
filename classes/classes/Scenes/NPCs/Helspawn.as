@@ -42,7 +42,7 @@ private function calledShot():void {
 	outputText(flags[kFLAGS.HELSPAWN_NAME] + " draws back her bowstring, spending an extra second aiming before letting fly!");
 	var damage:Number = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 	//standard dodge/miss text
-	if(damage <= 0 || (rand(2) == 0 && (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()))) outputText("\nYou avoid the hit!");
+	if(damage <= 0 || (rand(2) == 0 && (player.getEvasionRoll()))) outputText("\nYou avoid the hit!");
 	else {
 		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while! ");
 		var affect:int = 20 + rand(5);
@@ -86,7 +86,7 @@ private function calledShot():void {
 			// Stuns a bitch
 			outputText(flags[kFLAGS.HELSPAWN_NAME] + " lashes out with her shield, trying to knock you back!");
 			//standard dodge/miss text
-			if(damage <= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("\nYou evade the strike.");
+			if(damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
 			else {
 				outputText("\nHer shield catches you right in the face, sending you tumbling to the ground and leaving you open to attack! ");
 				damage = player.takeDamage(damage, true);
@@ -103,7 +103,7 @@ private function calledShot():void {
 			var damage:Number = int((str) - rand(player.tou));
 			outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + " whips at you with her tail, trying to sear you with her brilliant flames!");
 			//standard dodge/miss text
-			if(damage <= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("\nYou evade the strike.");
+			if(damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
 			else {
 				outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + "'s tail catches you as you try to dodge.  Your [armor] sizzles, and you leap back with a yelp as she gives you a light burning. ");
 				damage = player.takeDamage(damage, true);

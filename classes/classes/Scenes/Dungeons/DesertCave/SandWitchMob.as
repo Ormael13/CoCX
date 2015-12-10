@@ -32,7 +32,7 @@ package classes.Scenes.Dungeons.DesertCave
 			outputText("The crowd parts, and a stockier, sturdier sorceress ambles out, fists up and head cocked back.  She makes to punch at you before pulling her fist at the last second, snapping her head forward in a powerful headbutt!  You barely have time to react!");
 			var damage:int = Math.round((str + weaponAttack + 10) - rand(player.tou) - player.armorDef);
 			//Dodge
-			if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if(player.getEvasionRoll()) {
 				outputText("\nThrowing yourself out of the way, you manage to avoid the hit.  Your foe doesn't seem nearly as pleased while she fades back in between her sisters.");
 			}
 			//Block
@@ -59,7 +59,7 @@ package classes.Scenes.Dungeons.DesertCave
 			
 			var bonus:int = 0;
 			//[If they attack lands]
-			if(!combatMiss() && !combatEvade() && !combatFlexibility() && !combatMisdirect()) {
+			if(!player.getEvasionRoll()) {
 				//[IF PC has solid body]
 				if(!player.isGoo()) {
 					outputText("\n\nThey crawl up your [legs].  You try to swat them all off, but there are too many.");

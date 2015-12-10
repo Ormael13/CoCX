@@ -17,6 +17,10 @@ package classes.Perks
 			super("Ascension: Corruption Tolerance", "Ascension: Corruption Tolerance", "", "Increases corruption tolerance by 5 per level and reduces corruption requirement by 5 per level.");
 		}
 		
+		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		{
+			return true;
+		}		
 	}
 
 }

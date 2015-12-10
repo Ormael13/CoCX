@@ -9,7 +9,7 @@ package classes.Scenes.Monsters
 	{
 		public function clawAttack():void {
 			outputText("The imp warlord charges at you with his claws ready! ");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You manage to avoid his claws thanks to your reaction!");
 				combatRoundOver();
 				return;
@@ -26,7 +26,7 @@ package classes.Scenes.Monsters
 
 		public function doubleAttack():void {
 			outputText("The imp warlord charges at you with his claws ready and sword raised! ");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his deadly attack!");
 				combatRoundOver();
 				return;
