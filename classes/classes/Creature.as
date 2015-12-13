@@ -3709,6 +3709,7 @@ package classes
 		   // speed
 		   if (useMonster && game.monster != null && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
 		   if (attackSpeed != int.MIN_VALUE && spe - attackSpeed > 0 && int(Math.random() * (((spe - attackSpeed) / 4) + 80)) > 80) return "Speed";
+		   //note, Player.speedDodge is still used, since this function can't return how close it was
 		   
 		   var roll:Number = rand(100);
 		   
