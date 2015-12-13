@@ -51,15 +51,6 @@
 		protected final function combatMiss():Boolean {
 			return game.combatMiss();
 		}
-		protected final function combatEvade():Boolean {
-			return game.combatEvade();
-		}
-		protected final function combatFlexibility():Boolean {
-			return game.combatFlexibility();
-		}
-		protected final function combatMisdirect():Boolean {
-			return game.combatMisdirect();
-		}
 		protected final function combatParry():Boolean {
 			return game.combatParry();
 		}
@@ -722,23 +713,28 @@
 				outputPlayerDodged(dodge);
 				return true;
 			}
+			var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
 			//Determine if evaded
-			if (combatEvade()) {
+			if (evasionResult == EVASION_EVADE) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
 				if (!plural) outputText("s");
 				outputText(" attack.\n", false);
 				return true;
 			}
 			//("Misdirection"
-			if (combatMisdirect()) {
+			if (evasionResult == EVASION_MISDIRECTION) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
 				return true;
 			}
 			//Determine if cat'ed
-			if (combatFlexibility()) {
+			if (evasionResult == EVASION_FLEXIBILITY) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
 				if (plural) outputText("' attacks.\n", false);
 				else outputText("'s attack.\n", false);
+				return true;
+			}
+			if (evasionResult != null) { // Failsafe fur unhandled
+				outputText("Using your superior combat skills you manage to avoid attack completely.\n", false);
 				return true;
 			}
 			//Parry with weapon
