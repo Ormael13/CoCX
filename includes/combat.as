@@ -42,6 +42,7 @@ public function endLustLoss():void
 
 //combat is over. Clear shit out and go to main
 public function cleanupAfterCombat(nextFunc:Function = null):void {
+	fireMagicLastTurn = -100;
 	if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
 	if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent;
 	if (inCombat) {
@@ -1473,15 +1474,6 @@ public function playerStinger():void {
 public function combatMiss():Boolean {
 	return player.spe - monster.spe > 0 && int(Math.random() * (((player.spe - monster.spe) / 4) + 80)) > 80;
 }
-public function combatEvade():Boolean {
-	return monster.short != "Kiha" && player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10;
-}
-public function combatFlexibility():Boolean {
-	return player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6;
-}
-public function combatMisdirect():Boolean {
-	return player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit";
-}
 public function combatParry():Boolean {
 	return player.findPerk(PerkLib.Parry) >= 0 && player.spe >= 50 && player.str >= 50 && rand(100) < ((player.spe - 50) / 5) && player.weapon != WeaponLib.FISTS;
 	trace("Parried!");
@@ -2031,7 +2023,10 @@ public function regeneration(combat:Boolean = true):void {
 		HPChange(Math.round(maxHP() * healingPercent / 100), false);
 	}
 }
-public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
+
+private var combatRound:int = 0;
+public function startCombat(monster_:Monster, plotFight_:Boolean = false):void {
+	combatRound = 0;
 	plotFight = plotFight_;
 	mainView.hideMenuButton( MainView.MENU_DATA );
 	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
@@ -2051,6 +2046,12 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	if(player.findPerk(PerkLib.Precision) >= 0 && player.inte >= 25) {
 		if(monster.armorDef <= 10) monster.armorDef = 0;
 		else monster.armorDef -= 10;
+	}
+	if (player.findPerk(PerkLib.Battlemage) >= 0 && player.lust >= 50) {
+		spellMight(true); // XXX: message?
+	}
+	if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust < getWhiteMagicLustCap()) {
+		spellChargeWeapon(true); // XXX: message?
 	}
 	monster.str += 25 * player.newGamePlusMod();
 	monster.tou += 25 * player.newGamePlusMod();
@@ -3711,6 +3712,7 @@ public function teaseXP(XP:Number = 0):void {
 
 //VICTORY OR DEATH?
 public function combatRoundOver():Boolean { //Called after the monster's action
+	combatRound++;
 	statScreenRefresh();
 	flags[kFLAGS.ENEMY_CRITICAL] = 0;
 	if (!inCombat) return false;
@@ -3750,6 +3752,12 @@ public function hasSpells():Boolean {
 public function spellCount():Number {
 	return player.spellCount();
 }
+public function getWhiteMagicLustCap():Number {
+	var whiteLustCap:int = player.maxLust() * 0.75;
+	if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whiteLustCap += (player.maxLust() * 0.1);
+	if (player.findPerk(PerkLib.FocusedMind) >= 0) whiteLustCap += (player.maxLust() * 0.1);
+	return whiteLustCap;
+}
 
 public function magicMenu():void {
 //Pass false to combatMenu instead:	menuLoc = 3;
@@ -3763,8 +3771,7 @@ public function magicMenu():void {
 	clearOutput();
 	outputText("What spell will you use?\n\n");
 	//WHITE SHITZ
-	var whiteLustCap:int = player.maxLust() * 0.75;
-	if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whiteLustCap += (player.maxLust() * 0.1);
+	var whiteLustCap:int = getWhiteMagicLustCap();
 	
 	if (player.lust >= whiteLustCap)
 		outputText("You are far too aroused to focus on white magic.\n\n");
@@ -3913,7 +3920,9 @@ public function spellHeal():void {
 	}
 	outputText("You focus on your body and its desire to end pain, trying to draw on your arousal without enhancing it.\n", true);
 	//25% backfire!
-	if(rand(4) == 0) {
+	var backfire:int = 25;
+	if (player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 15;
+	if(rand(100) < backfire) {
 		outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ", false);
 		if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
 		if(player.gender == 1) {
@@ -3944,37 +3953,9 @@ public function spellHeal():void {
 //(25) Might – increases strength/toughness by 5 * spellMod, up to a 
 //maximum of 15, allows it to exceed the maximum.  Chance of backfiring 
 //and increasing lust by 15.
-public function spellMight():void {
-	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(25) > player.maxFatigue()) {
-		outputText("You are too tired to cast this spell.", true);
-		doNext(magicMenu);
-		return;
-	}
-	doNext(combatMenu);
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-	fatigue(25,1);
-	var tempStr:Number = 0;
-	var tempTou:Number = 0;
-	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
-		(monster as FrostGiant).giantBoulderHit(2);
-		enemyAI();
-		return;
-	}
-	outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n", true);
-	//25% backfire!
-	if(rand(4) == 0) {
-		outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ", false);
-		if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
-		if(player.gender == 1) {
-			if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
-			else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.", false);
-		}
-		if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.", false);
-		if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
-		dynStats("lib", .25, "lus", 15);
-	}
-	else {
-		outputText("The rush of success and power flows through your body.  You feel like you can do anything!", false);
+public function spellMight(silent:Boolean = false):void {
+	
+	var doEffect:Function = function():* {
 		player.createStatusAffect(StatusAffects.Might,0,0,0,0);
 		temp = 10 * spellMod();
 		tempStr = temp;
@@ -3993,9 +3974,49 @@ public function spellMight():void {
 		}
 		player.str += player.statusAffectv1(StatusAffects.Might);
 		player.tou += player.statusAffectv2(StatusAffects.Might);
+		statScreenRefresh();
+	}
+	
+	if (silent)	{ // for Battlemage
+		doEffect.call();
+		return;
+	}
+	
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(25) > player.maxFatigue()) {
+		outputText("You are too tired to cast this spell.", true);
+		doNext(magicMenu);
+		return;
+	}
+	doNext(combatMenu);
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+	fatigue(25,1);
+	var tempStr:Number = 0;
+	var tempTou:Number = 0;
+	if (monster is FrostGiant && player.findStatusAffect(StatusAffects.GiantBoulder) >= 0) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
+	outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n", true);
+	//25% backfire!
+	var backfire:int = 25;
+	if (player.findPerk(PerkLib.FocusedMind) >= 0) backfire = 15;
+	if(rand(100) < backfire) {
+		outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ", false);
+		if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.", false);
+		if(player.gender == 1) {
+			if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.", false);
+			else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.", false);
+		}
+		if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.", false);
+		if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
+		dynStats("lib", .25, "lus", 15);
+	}
+	else {
+		outputText("The rush of success and power flows through your body.  You feel like you can do anything!", false);
+		doEffect.call();
 	}
 	outputText("\n\n", false);
-	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	if(player.lust >= player.maxLust()) doNext(endLustLoss);
@@ -4004,7 +4025,13 @@ public function spellMight():void {
 }
 
 //(15) Charge Weapon – boosts your weapon attack value by 10 * SpellMod till the end of combat.
-public function spellChargeWeapon():void {
+public function spellChargeWeapon(silent:Boolean = false):void {
+	if (silent) {
+		player.createStatusAffect(StatusAffects.ChargeWeapon,10*spellMod(),0,0,0);
+		statScreenRefresh();
+		return;
+	}
+	
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(15) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(magicMenu);
@@ -4103,6 +4130,25 @@ public function spellBlind():void {
 	enemyAI();
 }
 //(30) Whitefire – burns the enemy for 10 + int/3 + rand(int/2) * spellMod.
+private var fireMagicLastTurn:int = -100;
+private var fireMagicCumulated:int = 0;
+private function calcInfernoMod(damage:Number):int {
+	if (player.findPerk(PerkLib.RagingInferno) >= 0) {
+		if (combatRound - fireMagicLastTurn == 2) {
+			outputText("Traces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
+			damage = Math.round(damage * (1 + fireMagicCumulated * 0.2));
+			fireMagicCumulated++;
+			// XXX: Message?
+		} else {
+			if (combatRound - fireMagicLastTurn > 2 && fireMagicLastTurn > 0)
+				outputText("Unfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
+			fireMagicCumulated = 1;
+		}
+		fireMagicLastTurn = combatRound;
+	}
+	return damage;
+}
+
 public function spellWhitefire():void {
 	clearOutput();
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
@@ -4135,6 +4181,7 @@ public function spellWhitefire():void {
 	outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n", true);
 	temp = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
 	//High damage to goes.
+	temp = calcInfernoMod(temp);
 	if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
 	if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
 	outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
@@ -4253,6 +4300,8 @@ public function hellFire():void {
 	}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	fatigue(20, 1);
+	var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.cor / 5);
+	damage = calcInfernoMod(damage);
 	//Amily!
 	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
@@ -4265,7 +4314,7 @@ public function hellFire():void {
 		enemyAI();
 		return;
 	}
-	var damage:Number = (player.level * 8 + rand(10) + player.inte/2 + player.cor/5);
+	
 	if(player.findStatusAffect(StatusAffects.GooArmorSilence) < 0) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.", false);
 	
 	if(player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
@@ -4677,6 +4726,9 @@ public function dragonBreath():void {
 	fatigue(20, 1);
 	player.createStatusAffect(StatusAffects.DragonBreathCooldown,0,0,0,0);
 	var damage:Number = int(player.level * 8 + 25 + rand(10));
+	
+	damage = calcInfernoMod(damage);
+	
 	if(player.findStatusAffect(StatusAffects.DragonBreathBoost) >= 0) {
 		player.removeStatusAffect(StatusAffects.DragonBreathBoost);
 		damage *= 1.5;
@@ -4766,6 +4818,24 @@ public function fireballuuuuu():void {
 	}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	changeFatigue(20);
+	
+	//[Failure]
+	//(high damage to self, +10 fatigue on top of ability cost)
+	if(rand(5) == 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
+		if(player.findStatusAffect(StatusAffects.WebSilence) >= 0) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat. ", false);
+		else if(player.findStatusAffect(StatusAffects.GooArmorSilence) >= 0) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now. ");
+		else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat. ", false);
+		changeFatigue(10);
+		takeDamage(10 + rand(20), true);
+		outputText("\n\n");
+		enemyAI();
+		return;
+	}
+	
+	var damage:Number;
+	damage = int(player.level * 10 + 45 + rand(10));
+	damage = calcInfernoMod(damage);
+	
 	if(monster.findStatusAffect(StatusAffects.Shell) >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		enemyAI();
@@ -4783,18 +4853,6 @@ public function fireballuuuuu():void {
 		enemyAI();
 		return;
 	}
-	//[Failure]
-	//(high damage to self, +20 fatigue)
-	if(rand(5) == 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
-		if(player.findStatusAffect(StatusAffects.WebSilence) >= 0) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat. ", false);
-		else if(player.findStatusAffect(StatusAffects.GooArmorSilence) >= 0) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now. ");
-		else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat. ", false);
-		changeFatigue(10);
-		takeDamage(10 + rand(20), true);
-		outputText("\n\n");
-		enemyAI();
-		return;
-	}
 	if (monster is Doppleganger)
 	{
 		(monster as Doppleganger).handleSpellResistance("fireball");
@@ -4802,8 +4860,6 @@ public function fireballuuuuu():void {
 		spellPerkUnlock();
 		return;
 	}
-	var damage:Number;
-	damage = int(player.level * 10 + 45 + rand(10));
 	if(player.findStatusAffect(StatusAffects.GooArmorSilence) >= 0) {
 		outputText("<b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  When you can finally work your jaw enough to open your mouth, you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b> ", false);
 		player.removeStatusAffect(StatusAffects.GooArmorSilence);
@@ -5477,6 +5533,7 @@ public function corruptedFoxFire():void {
 	outputText("Holding out your palm, you conjure corrupted purple flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling lavender sparks everywhere.");
 
 	var dmg:int = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
+	dmg = calcInfernoMod(dmg);
 	if (monster.cor >= 66) dmg = Math.round(dmg * .66);
 	else if (monster.cor >= 50) dmg = Math.round(dmg * .8);
 	else if (monster.cor >= 25) dmg = Math.round(dmg * 1.0);
@@ -5520,6 +5577,7 @@ public function foxFire():void {
 	//Deals direct damage and lust regardless of enemy defenses.  Especially effective against corrupted targets.
 	outputText("Holding out your palm, you conjure an ethereal blue flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling azure sparks everywhere.");
 	var dmg:int = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
+	dmg = calcInfernoMod(dmg);
 	if (monster.cor < 33) dmg = Math.round(dmg * .66);
 	else if (monster.cor < 50) dmg = Math.round(dmg * .8);
 	else if (monster.cor < 75) dmg = Math.round(dmg * 1.0);
@@ -5698,6 +5756,7 @@ public function immolationSpell():void {
 	clearOutput();
 	outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of burning flames gathers around " + monster.a + monster.short + ", slowly burning " + monster.pronoun2 + ".");
 	var temp:int = int(75+(player.inte/3 + rand(player.inte/2)) * spellMod());
+	temp = calcInfernoMod(temp);
 	temp = doDamage(temp);
 	outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
 	player.removeStatusAffect(StatusAffects.ImmolationSpell);

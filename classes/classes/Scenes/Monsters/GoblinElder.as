@@ -95,7 +95,7 @@ package classes.Scenes.Monsters
 		//Melee specials
 		public function slash():void {
 			outputText("The goblin charges at you with her sword!  As soon as she approaches you, she swings her sword! ");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You avoid her slash!");
 			}
 			else {
@@ -111,7 +111,7 @@ package classes.Scenes.Monsters
 		
 		public function shieldBash():void {
 			outputText("The goblin charges at you with her shield! ");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You avoid her shield bash!");
 			}
 			else {

@@ -26,7 +26,7 @@ package classes.Scenes.Areas.Bog
 				outputText(capitalA + short + " completely misses you with a blind claw-attack!\n", false);
 			}
 			//Evade:
-			else if (game.combatMiss() || game.combatEvade() || game.combatFlexibility() || game.combatMisdirect()) outputText("The chameleon girl's claws slash towards you, but you lean away from them and they fly by in a harmless blur.");
+			else if (player.getEvasionRoll()) outputText("The chameleon girl's claws slash towards you, but you lean away from them and they fly by in a harmless blur.");
 			//Get hit
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou));
@@ -48,7 +48,7 @@ package classes.Scenes.Areas.Bog
 				outputText(capitalA + short + " completely misses you with a blind roll-kick!\n", false);
 			}
 			//Evade:
-			else if (game.combatMiss() || game.combatEvade() || game.combatFlexibility() || game.combatMisdirect()) {
+			else if (player.getEvasionRoll()) {
 				var damage2:Number = 1 + rand(10);
 				outputText("The chameleon girl leaps in your direction, rolls, and kicks at you.  You sidestep her flying charge and give her a push from below to ensure she lands face-first in the bog. ");
 				damage2 = game.doDamage(damage2, true);

@@ -17,6 +17,10 @@ package classes.Perks
 			super("Ascension: Desires", "Ascension: Desires", "", "Increases maximum lust by 5 per level.");
 		}
 		
+		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		{
+			return true;
+		}
 	}
 
 }

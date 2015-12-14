@@ -19,5 +19,10 @@ package classes.Perks
 			super("Wizard's Focus", "Wizard's Focus",
 					"Your wizard's staff grants you additional focus, reducing the use of fatigue for spells.");
 		}
+		
+		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		{
+			return true;
+		}		
 	}
 }

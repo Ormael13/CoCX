@@ -13,7 +13,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			outputText("The siren paces around you in circles, waiting for the right moment to strike.  Unexpectedly quick thanks to her clawed feet, she propels herself toward you at full speed.  Her maw opens wide to chomp on you, showing off multiple rows of glinting, razor-sharp teeth.");
 			var damage:int = int((str + 85) - rand(player.tou) - player.armorDef);
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("  You get out of the way just in time, Minerva making a loud chomping sound as she only catches the air.");
 			}
 			else if (combatBlock(true)) {
@@ -36,7 +36,7 @@ package classes.Scenes.Areas.HighMountains
 
 			var damage:int = int((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
 			spe -= 70;
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("  You jump out of the landing zone just in time, piles of dirt exploding in all directions as Minerva slams into the ground.");
 			}
 			//[else block]
@@ -77,7 +77,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Minerva charges at you, brandishing her halberd's sharp tip toward you.");
 			var damage:int = int((str + weaponAttack) - rand(player.tou));
 
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("  You sidestep the attack just as she thrusts the point past your face.");
+			if (player.getEvasionRoll()) outputText("  You sidestep the attack just as she thrusts the point past your face.");
 
 			//[else block]
 			else if (damage < 0) outputText("  With all your strength, you swing your [weapon], the blow landing on the side of Minerva's halberd and deflecting the goring strike away from you.");
@@ -96,7 +96,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("She moves in close, practically right in front of you and raises the halberd.");
 			var damage:int = int((str + 100) - rand(player.tou) - player.armorDef);
 
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("  You get out of the way quickly, her attack chopping deeply into the earth. ");
+			if (player.getEvasionRoll()) outputText("  You get out of the way quickly, her attack chopping deeply into the earth. ");
 
 			//[else block]
 			else if (damage < 0) outputText("  In a mad show of pure skill, you lift your hands, clamping them down on the cheeks of the halberd blade and stop Minerva's attack cold, bewildering the siren in the process.");

@@ -8,7 +8,7 @@ package classes.Scenes.Areas.GlacialRift
 		public var tempSpeedLoss:Number = 0;
 		
 		public function yetiClawAndPunch():void {
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("The yeti beast charges at you, though his claws only strike at air as you move nimbly over the ice flooring beneath you. The beast lets out an annoyed snarl.")
 			}
 			else {
@@ -32,7 +32,7 @@ package classes.Scenes.Areas.GlacialRift
 			combatRoundOver();
 		}
 		public function yetiTackleTumble():void {
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				//yeti takes moderate damage
 				outputText("Sensing the beast’s intentions as you hear the cracking of ice under his feet, you dart to the side as the beast launches at you. With wide eyes, the ice yeti collides face first into the wall of the cave with a yelped growl. It rubs its face as it glares at you. ");
 				var yetiDamage:Number = 30 + rand(50);
@@ -49,7 +49,7 @@ package classes.Scenes.Areas.GlacialRift
 			combatRoundOver();
 		}
 		public function yetiSnowball():void {
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("The beast steps back, magic condensing mist into ice within his hand. With narrow eyes you ready your body, and as soon as the ball of frost is whipped at you, you dart to the side avoiding it. The ice shatters uselessly against the wall, the ice yeti looking quite annoyed in your direction. ");
 			}
 			else {

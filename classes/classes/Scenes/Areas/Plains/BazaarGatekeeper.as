@@ -26,15 +26,16 @@ package classes.Scenes.Areas.Plains
 			else {
 				outputText("and slashes towards you. You attempt to dodge your way out ");
 			}
-			if (combatEvade() || combatMisdirect())
+			var evade:String = player.getEvasionReason();
+			if (evade == EVASION_EVADE || evade == EVASION_MISDIRECTION)
 			{
 				outputText("and you successfully dodge his scimitars thanks to your superior evasion! ", false);
 			}
-			else if (combatFlexibility())
+			else if (evade == EVASION_FLEXIBILITY)
 			{
 				outputText("and you use your incredible flexibility to barely fold your body and avoid his attacks!", false);
 			}
-			else if (combatMiss())
+			else if (evade == EVASION_SPEED || evade != null)
 			{
 				outputText("and you successfully dodge his scimitars! ", false);
 			}

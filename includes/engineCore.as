@@ -1,4 +1,4 @@
-﻿import classes.PerkClass;
+﻿import classes.*;
 import flash.text.TextFormat;
 // // import flash.events.MouseEvent;
 // 
@@ -234,17 +234,18 @@ public function displayPerks(e:MouseEvent = null):void {
 		temp++;
 	}
 	menu();
+	var button:int = 0;
+	addButton(button++, "Next", playerMenu);
 	if(player.perkPoints > 0) {
 		outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point", false);
 		if(player.perkPoints > 1) outputText("s", false);
 		outputText(" to spend.</b>", false);
-		addButton(1, "Perk Up", perkBuyMenu);
+		addButton(button++, "Perk Up", perkBuyMenu);
 	}
 	if(player.findPerk(PerkLib.DoubleAttack) >= 0) {
 		outputText("\n<b>You can adjust your double attack settings.</b>");
-		addButton(2,"Dbl Options",doubleAttackOptions);
+		addButton(button++,"Dbl Options",doubleAttackOptions);
 	}
-	addButton(0, "Next", playerMenu);
 }
 
 public function doubleAttackOptions():void {
@@ -633,6 +634,15 @@ public function buildPerkList():Array {
 	if(player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) {
 			_add(new PerkClass(PerkLib.Mage));
 	}
+	// Spell-boosting perks
+	// Battlemage: auto-use Might
+	if(player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusAffect(StatusAffects.KnowsMight) >= 0 && player.inte >= 60) {
+			_add(new PerkClass(PerkLib.Battlemage));
+	}
+	// Spellsword: auto-use Charge Weapon
+	if(player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusAffect(StatusAffects.KnowsCharge) >= 0 && player.inte >= 60) {
+			_add(new PerkClass(PerkLib.Spellsword));
+	}
 	//Tier 1 Intelligence Perks
 	if(player.level >= 6) {
 		if(player.inte >= 50)
@@ -648,6 +658,18 @@ public function buildPerkList():Array {
 	if(player.level >= 12) {
 		if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 75) {
 			_add(new PerkClass(PerkLib.Archmage));
+		}
+		if(player.inte >= 75) {
+				if(player.findPerk(PerkLib.Mage) >= 0)
+					_add(new PerkClass(PerkLib.FocusedMind));
+				
+				if (player.findPerk(PerkLib.Archmage) >= 0 && player.findPerk(PerkLib.Channeling) >= 0  &&
+				(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0
+				|| player.findPerk(PerkLib.FireLord) >= 0 
+				|| player.findPerk(PerkLib.Hellfire) >= 0 
+				|| player.findPerk(PerkLib.EnlightenedNinetails) >= 0
+				|| player.findPerk(PerkLib.CorruptedNinetails) >= 0))
+					_add(new PerkClass(PerkLib.RagingInferno));
 		}
 	}
 	//------------

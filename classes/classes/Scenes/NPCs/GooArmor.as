@@ -14,17 +14,18 @@ package classes.Scenes.NPCs
 		}
 		//ATTACK ONE: Greatsword
 		public function gooArmorAttackPhysical():void {
-			if(combatMiss()) {
-				outputText("The goo-armor rushes forward and swings her sword in a mighty arc, but you dodge it!");		
-			}
-			else if(combatEvade()) {
+			var evade:String = player.getEvasionReason();
+			if(evade == EVASION_EVADE) {
 				outputText("The goo-armor rushes forward and swings her sword in a mighty arc, but you evade the attack!");
 			}
-			else if(combatFlexibility()) {
+			else if(evade == EVASION_FLEXIBILITY) {
 				outputText("The goo-armor swings a greatsword at you in a mighty arc, but your cat-like flexibility makes it easy to twist out of the way.");		
 			}
-			else if(combatMisdirect()) {
+			else if(evade == EVASION_MISDIRECTION) {
 				outputText("The goo-armor swings a sword at you in a mighty arc, but your training with Raphael allows you to misdirect her into a miss!");	
+			}
+			else if(evade == EVASION_SPEED || evade != null) {
+				outputText("The goo-armor rushes forward and swings her sword in a mighty arc, but you dodge it!");		
 			}
 			//HIT!
 			else {

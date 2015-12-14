@@ -19,5 +19,10 @@ package classes.Perks
 			super("Wizard's Endurance", "Wizard's Endurance",
 					"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
 		}
+		
+		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		{
+			return true;
+		}		
 	}
 }

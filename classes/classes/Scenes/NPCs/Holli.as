@@ -107,7 +107,7 @@ package classes.Scenes.NPCs
 
 			//Blinded - no hit penalty
 			if (findStatusAffect(StatusAffects.Blind) >= 0) outputText("  Though the demon herself is blinded, the fresh eye on the flower seems more than capable of aiming for her!");
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("  Nimbly, you step aside and let the darts whistle by.");
 			}
 			//Hit
@@ -134,7 +134,7 @@ package classes.Scenes.NPCs
 				outputText("  Luckily, the demon's blindness makes it fairly easy to dodge the grasping roots, though there are a few close scrapes.");
 			}
 			//Miss
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("  It's a narrow thing, but you manage to avoid the roots - one of them almost grabs you, but you duck aside and let it find only its neighbor.");
 			}
 			//Hit

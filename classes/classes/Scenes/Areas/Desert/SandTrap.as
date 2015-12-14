@@ -47,7 +47,7 @@
 		private function sandTrapPheremones():void {
 			game.spriteSelect(97);
 			outputText("The sandtrap puckers its lips.  For one crazed moment you think it's going to blow you a kiss... but instead it spits clear fluid at you!   You desperately try to avoid it, even as your lower half is mired in sand.");
-			if(player.spe/10 + rand(20) > 10 || combatEvade() || combatFlexibility()) {
+			if(player.spe/10 + rand(20) > 10 || player.getEvasionRoll(false)) {
 				outputText("  Moving artfully with the flow rather than against it, you are able to avoid the trap's fluids, which splash harmlessly into the dune.");
 			}
 			else {
@@ -64,7 +64,7 @@
 			game.spriteSelect(97);
 			outputText("The sandtrap smiles at you winningly as it thrusts its hands into the sifting granules.  The sand beneath you suddenly seems to lose even more of its density; you're sinking up to your thighs!");
 			//Quicksand attack fail:
-			if(player.spe/10 + rand(20) > 10 || combatEvade() || combatFlexibility()) {
+			if(player.spe/10 + rand(20) > 10  || player.getEvasionRoll(false)) {
 				outputText("  Acting with alacrity, you manage to haul yourself free of the area affected by the sandtrap's spell, and set yourself anew.");
 			}
 			//Quicksand attack success: (Speed and Strength loss, ability to fly free lost)

@@ -118,7 +118,7 @@ package classes.Scenes.Dungeons.D3
 	
 			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			//Dodge
-			if (damage <= 0 || (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())) outputText(" You slide underneath the surprise swing!");
+			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swing!");
 			else
 			{
 				//Get hit
@@ -137,7 +137,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("Raising its hammer high overhead, the giant swiftly brings its hammer down in a punishing strike!");
 			
 			var damage:Number = 175 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if (damage <= 0 || rand(100) < 25 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" You're able to sidestep it just in time.");
+			if (damage <= 0 || rand(100) < 25 || player.getEvasionRoll()) outputText(" You're able to sidestep it just in time.");
 			else
 			{
 				//Hit
@@ -151,7 +151,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("The animated statue spins its hammer around, striking at your [weapon] with its haft.");
 	
 			//Avoid
-			if ((combatMiss() && combatMiss()) || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" You manage to hold onto your equipment, for now.");
+			if ((combatMiss() && combatMiss()) || player.getEvasionRoll(false)) outputText(" You manage to hold onto your equipment, for now.");
 			//Oh noes!
 			else
 			{
@@ -172,7 +172,7 @@ package classes.Scenes.Dungeons.D3
 
 			var damage:Number = (175 + int((str + weaponAttack) - rand(player.tou) - player.armorDef)) / (rand(3) + 2);
 			//Avoid
-			if (damage <= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" By the grace of the gods, you somehow avoid the spinning hammer.");
+			if (damage <= 0 || player.getEvasionRoll()) outputText(" By the grace of the gods, you somehow avoid the spinning hammer.");
 			else
 			{
 				//Hit

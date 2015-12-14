@@ -105,6 +105,9 @@ package classes
 		public static const ArousingAura:PerkType = mk("Arousing Aura", "Arousing Aura",
 				"Exude a lust-inducing aura (Req's corruption of 70 or more)",
 				"You choose the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.");
+		public static const Battlemage:PerkType = mk("Battlemage", "Battlemage",
+				"Start every battle with Might enabled, if you meet Black Magic requirements before it starts.",
+				"You choose the 'Battlemage' perk. You start every battle with Might effect, as long as your Lust is sufficient to cast it before battle.");
 		public static const Berzerker:PerkType = mk("Berzerker", "Berserker",
 				"[if(player.str>=75)" +
 						"Grants 'Berserk' ability." +
@@ -149,6 +152,9 @@ package classes
 		public static const FertilityPlus:PerkType = mk("Fertility+", "Fertility+",
 				"Increases fertility rating by 15 and cum volume by up to 50%.",
 				"You choose the 'Fertility+' perk, making it easier to get pregnant.  It also increases your cum volume by up to 50% (if appropriate)!");
+		public static const FocusedMind:PerkType = mk("Focused Mind", "Focused Mind",
+				"Black Magic is less likely to backfire and White Magic thresold is increased.",
+				"You choose the 'Focused Mind' perk. Black Magic is less likely to backfire and White Magic thresold is increased.");
 		public static const HoldWithBothHands:PerkType = mk("Hold With Both Hands", "Hold With Both Hands",
 				"Gain +20% strength modifier with melee weapons when not using a shield.",
 				"You choose the 'Hold With Both Hands' perk.  As long as you're wielding a melee weapon and you're not using a shield, you gain 20% strength modifier to damage.");
@@ -210,6 +216,9 @@ package classes
 		public static const Precision:PerkType = mk("Precision", "Precision",
 				"Reduces enemy armor by 10. (Req's 25+ Intelligence)",
 				"You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance from armor by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.");
+		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
+				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
+				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
 		public static const Regeneration:RegenerationPerk = new RegenerationPerk();
 		public static const Regeneration2:Regeneration2Perk = new Regeneration2Perk();
 		public static const Resistance:PerkType = mk("Resistance", "Resistance",
@@ -247,6 +256,9 @@ package classes
 		public static const Spellpower:PerkType = mk("Spellpower", "Spellpower",
 				"Increases base spell strength by 50%.",
 				"You choose the 'Spellpower' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base spell effects by 50%.");
+		public static const Spellsword:PerkType = mk("Spellsword", "Spellsword",
+				"Start every battle with Charge Weapon enabled, if you meet White Magic requirements before it starts.",
+				"You choose the 'Spellsword' perk. You start every battle with Charge Weapon effect, as long as your Lust is not preventing you from casting it before battle.");
 		public static const Survivalist:PerkType = mk("Survivalist", "Survivalist",
 				"Slows hunger rate by 20%.",
 				"You choose the 'Survivalist' perk.  With this perk, your hunger rate is reduced by 20%.");
@@ -275,6 +287,9 @@ package classes
 		public static const ThunderousStrikes:PerkType = mk("Thunderous Strikes", "Thunderous Strikes",
 				"+20% 'Attack' damage while strength is at or above 80.",
 				"You choose the 'Thunderous Strikes' perk, increasing normal damage by 20% while your strength is over 80.");
+		public static const Unhindered:PerkType = mk("Unhindered", "Unhindered",
+				"Increases chances of evading enemy attacks when you are naked.",
+				"You choose the 'Unhindered' perk, grantinc chance to evade when you are naked.");
 		public static const WeaponMastery:PerkType = mk("Weapon Mastery", "Weapon Mastery",
 				"[if(player.str>60)" +
 						"Doubles damage bonus of weapons classified as 'Large'." +
@@ -320,7 +335,7 @@ package classes
 
 		// Armor perks
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
-				"Spellcasting now consumes health instead of fatigue!");
+				"Spellcasting now consumes health instead of fatigue!",null,true);
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
 		public static const WizardsEndurance:WizardsEndurancePerk = new WizardsEndurancePerk();
 
@@ -350,13 +365,13 @@ package classes
 		public static const BunnyEggs:PerkType = mk("Bunny Eggs", "Bunny Eggs",
 				"Laying eggs has become a normal part of your bunny-body's routine.");
 		public static const CorruptedNinetails:PerkType = mk("Corrupted Nine-tails", "Corrupted Nine-tails",
-				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.");
+				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.",null,true);
 		public static const Diapause:PerkType = mk("Diapause", "Diapause",
 				"Pregnancy does not advance normally, but develops quickly after taking in fluids.");
 		public static const Dragonfire:PerkType = mk("Dragonfire", "Dragonfire",
 				"Allows access to a dragon breath attack.");
 		public static const EnlightenedNinetails:PerkType = mk("Enlightened Nine-tails", "Enlightened Nine-tails",
-				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.");
+				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.",null,true);
 		public static const Feeder:PerkType = mk("Feeder", "Feeder",
 				"Lactation does not decrease and gives a compulsion to breastfeed others.");
 		public static const Flexibility:PerkType = mk("Flexibility", "Flexibility",
@@ -452,9 +467,9 @@ package classes
 		// Monster perks
 		public static const Acid:PerkType = mk("Acid", "Acid", "");
 
-		private static function mk(id:String, name:String, desc:String, longDesc:String = null):PerkType
+		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
 		{
-			return new PerkType(id, name, desc, longDesc);
+			return new PerkType(id, name, desc, longDesc, keepOnAscension);
 		}
 	}
 }

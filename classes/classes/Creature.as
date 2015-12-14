@@ -3677,7 +3677,53 @@ package classes
 			if (mult < 20) mult = 20;
 			return mult;
 		}
+		
+	   /**
+		* Look into perks and special effects and @return summery extra chance to avoid attack granted by them.
+		*/
+	   public function getEvasionChance():Number
+	   {
+		   var chance:Number = 0;
+		   if (findPerk(PerkLib.Evade) >= 0) chance += 10;
+		   if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
+		   if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
+		   if (findPerk(PerkLib.Unhindered) >= 0 && armorName == "nothing") chance += 10;
+		   return chance;
+	   }
+	   
+	   public const EVASION_SPEED:String = "Speed"; // enum maybe?
+	   public const EVASION_EVADE:String = "Evade";
+	   public const EVASION_FLEXIBILITY:String = "Flexibility";
+	   public const EVASION_MISDIRECTION:String = "Misdirection";
+	   public const EVASION_UNHINDERED:String = "Unhindered";
+	   
+	   /**
+	    * Try to avoid and @return a reason if successfull or null if failed to evade.
+		* 
+		* If attacker is null then you can specify attack speed for enviromental and non-combat cases. If no speed and attacker specified and then only perks would be accounted.
+		* 
+		* This does NOT account blind!
+	    */
+	   public function getEvasionReason(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):String
+	   {
+		   // speed
+		   if (useMonster && game.monster != null && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
+		   if (attackSpeed != int.MIN_VALUE && spe - attackSpeed > 0 && int(Math.random() * (((spe - attackSpeed) / 4) + 80)) > 80) return "Speed";
+		   //note, Player.speedDodge is still used, since this function can't return how close it was
+		   
+		   var roll:Number = rand(100);
+		   
+		   // perks
+		   if (findPerk(PerkLib.Evade) >= 0 && (roll - 10 <= 0)) return "Evade";
+		   if (findPerk(PerkLib.Flexibility) >= 0 && (roll - 6 <= 0)) return "Flexibility";
+		   if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll - 10 <= 0)) return "Misdirection";
+		   if (findPerk(PerkLib.Unhindered) >= 0 && armorName == "nothing" && (roll - 10 <= 0)) return "Unhindered";
+		   return null;
+	   }
+	   
+	   public function getEvasionRoll(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):Boolean
+	   {
+		   return getEvasionReason(useMonster, attackSpeed) != null;
+	   }
 	}
 }
-
-
