@@ -98,6 +98,7 @@ use namespace kGAMECLASS;
 		public var itemSlots:Array;
 		
 		public var prisonItemSlots:Array = [];
+		public var previouslyWornClothes:Array = []; //For tracking achievement.
 		
 		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
@@ -254,10 +255,8 @@ use namespace kGAMECLASS;
 		}
 		override public function get armorDef():Number {
 			var armorDef:Number = _armor.def;
-			if (upperGarment == game.undergarments.SS_BRA) armorDef += 1;
-			if (upperGarment == game.undergarments.DS_BRA) armorDef += 2;
-			if (lowerGarment == game.undergarments.SS_LOIN || lowerGarment == game.undergarments.SSPANTY) armorDef += 1;
-			if (lowerGarment == game.undergarments.DS_LOIN || lowerGarment == game.undergarments.DSTHONG) armorDef += 2;
+			armorDef += upperGarment.armorDef;
+			armorDef += lowerGarment.armorDef;
 			//Blacksmith history!
 			if(armorDef > 0 && findPerk(PerkLib.HistorySmith) >= 0) {
 				armorDef = Math.round(armorDef * 1.1);
@@ -1884,6 +1883,13 @@ use namespace kGAMECLASS;
 		public function clothedOrNakedLower(clothedText:String, nakedText:String = ""):String
 		{
 			return (armorName != "gear" && (armorName != "lethicite armor" && lowerGarmentName == "nothing") ? clothedText : nakedText);
+		}
+		
+		public function addToWornClothesArray(armor:Armor):void {
+			for (var i:int = 0; i < previouslyWornClothes.length; i++) {
+				if (previouslyWornClothes[i] == armor.shortName) return; //Already have?
+			}
+			previouslyWornClothes.push(armor.shortName);
 		}
 		
 		public function shrinkTits(ignore_hyper_happy:Boolean=false):void

@@ -10,9 +10,6 @@ package classes
 	{
 
 		// UNSORTED perks TODO these are mostly incorrect perks: tested but never created
-		public static const Brawler:PerkType = mk("Brawler", "Brawler",
-				"Brawling experience allows you to make two unarmed attacks in a turn.",
-				"You choose the 'Brawler' perk, allowing you to make two unarmed attacks in a turn!");
 		public static const Buttslut:PerkType = mk("Buttslut", "Buttslut",
 				"");
 		public static const Focused:PerkType = mk("Focused", "Focused",
@@ -118,6 +115,9 @@ package classes
 		public static const Blademaster:PerkType = mk("Blademaster", "Blademaster",
 				"Gain +5% to critical strike chance when wielding a sword and not using a shield.",
 				"You choose the 'Blademaster' perk.  Your chance of critical hit is increased by 5% as long as you're wielding a sword and not using a shield.");
+		public static const Brawler:PerkType = mk("Brawler", "Brawler",
+				"Brawling experience allows you to make two unarmed attacks in a turn.",
+				"You choose the 'Brawler' perk, allowing you to make two unarmed attacks in a turn!");
 		public static const BrutalBlows:PerkType = mk("Brutal Blows", "Brutal Blows",
 				"[if(player.str>=75)" +
 						"Reduces enemy armor with each hit." +
@@ -288,8 +288,8 @@ package classes
 				"+20% 'Attack' damage while strength is at or above 80.",
 				"You choose the 'Thunderous Strikes' perk, increasing normal damage by 20% while your strength is over 80.");
 		public static const Unhindered:PerkType = mk("Unhindered", "Unhindered",
-				"Increases chances of evading enemy attacks when you are naked.",
-				"You choose the 'Unhindered' perk, grantinc chance to evade when you are naked.");
+				"Increases chances of evading enemy attacks when you are naked. (Undergarments won't disable this perk.)",
+				"You choose the 'Unhindered' perk, granting chance to evade when you are naked.");
 		public static const WeaponMastery:PerkType = mk("Weapon Mastery", "Weapon Mastery",
 				"[if(player.str>60)" +
 						"Doubles damage bonus of weapons classified as 'Large'." +

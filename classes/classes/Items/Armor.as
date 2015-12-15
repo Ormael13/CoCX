@@ -86,6 +86,7 @@ package classes.Items
 		}
 		
 		public function playerEquip():Armor { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+			game.player.addToWornClothesArray(this);
 			return this;
 		}
 		

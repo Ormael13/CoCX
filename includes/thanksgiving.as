@@ -314,13 +314,13 @@ public function turkeyGirlTwoTheTurkeningBySavinWhatADickInAButt():void {
 	outputText("\n\nAs you reach for some of your spices, you notice...  something...  poking its head into one of your satchels, rustling around.");
 	outputText("\n\nYou jump to your feet, readying your [weapon] for battle as you scan the perimeter.   A moment later, and you see a ponderous figure step out of the shadows behind a large rock.   At first glance, it looks like a normal girl dressed in a simple moccasin poncho, her bright red hair falling past her shoulders to rest on a pair of absolutely massive breasts.   Timidly, she steps forward, giving you a good look at her less human attributes: a pair of avian legs stick out beneath the hem of her clothes, and a large plume of feathers stick up from her big bubble-butt, each red feather nearly reaching the back of her head.   And her breasts...  each is easily the size of a goblin, so massive that it seems she can barely wobble along.");
 	outputText("\n\n“<i>G-gobble?</i>”  she asks quietly, her big blue eyes pleading at you.");
-	
+	awardAchievement("Gobble Gobble", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_II, true, true, false);
 	//[Shoo Off] [Let her Come] [Hello again!]
 	menu();
 	if(player.hasCock())
 	{
 		if(player.hasKeyItem("Deluxe Dildo") >= 0 || player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT)) {
-			outputText("\n\n<b>You could let her come, like last year, or great her in a whole new way (by clicking 'Hello Again')</b>");
+			outputText("\n\n<b>You could let her come, like last year, or greet her in a whole new way (by clicking 'Hello Again')</b>");
 			addButton(2,"Hello Again",helloAgain);
 			flags[kFLAGS.MORE_TURKEY] = 0;
 		}
@@ -499,7 +499,7 @@ public function pigSlutRoastingGreet():void {
 	outputText("\n\nShe moves in closer to talk right into your ear with a seductive voice, \"<i>Just throw a gem in that bucket over there and <i>she's</i> all yours for the night!</i>\"");
 	
 	outputText("\n\nYou grin. You could really go for a wild night right about now and a cheap whore sounds like just the right thing to ease your... stress.");
-	
+	awardAchievement("Thankslutting", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_I, true, true);
 	//{Lust = lust + 10}
 	dynStats("lus", 5);
 	menu();
@@ -510,7 +510,8 @@ public function pigSlutRoastingGreet():void {
 //[ In For A Gem... ] [ Not My Style ]
 
 public function disablePigSlut():void {
-	outputText("Pig sluts are not really your thing. You tell her that you have no interest in her. She seems to be a bit heartbroken.", true)
+	clearOutput();
+	outputText("Pig sluts are not really your thing. You tell her that you have no interest in her. She seems to be a bit heartbroken.");
 	flags[kFLAGS.PIG_SLUT_DISABLED] = 1;
 	doNext(telAdre.barTelAdre);
 }

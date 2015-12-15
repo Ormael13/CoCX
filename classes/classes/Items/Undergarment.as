@@ -29,9 +29,48 @@ package classes.Items
 		
 		override public function get description():String {
 			var desc:String = _description;
+			//Defense
+			if (armorDef > 0) desc += "\nDefense: " + String(armorDef);
+			//Sexiness
+			if (sexiness > 0) desc += "\nSexiness: " + String(sexiness);
 			//Value
 			desc += "\nBase value: " + String(value);
 			return desc;
+		}
+		
+		public function get armorDef():int {
+			switch(this.name) {
+				case "spider-silk bra":
+				case "spider-silk loincloth":
+				case "spider-silk panties":
+					return 1;
+				case "dragonscale bra":
+				case "dragonscale loincloth":
+				case "dragonscale thong":
+					return 2;
+				default:
+					return 0;
+			}
+		}
+		
+		public function get sexiness():int {
+			switch(this.name) {
+				case "spider-silk bra":
+				case "spider-silk loincloth":
+				case "spider-silk panties":
+				case "dragonscale bra":
+				case "dragonscale loincloth":
+				case "dragonscale thong":
+				case "fur loincloth":
+					return 1;
+				case "latex bra":
+				case "latex shorts":
+				case "latex thong":
+				case "stockings and garters":
+					return 2;
+				default:
+					return 0;
+			}
 		}
 		
 		override public function canUse():Boolean {

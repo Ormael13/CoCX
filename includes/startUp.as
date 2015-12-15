@@ -54,7 +54,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
 	clearOutput();
-	outputText(images.showImage("coc-logo"), false);
+	//outputText("<img src=\"logo\" id=\"coc-logo\" height=\"300\" width=\"400\" />\n");
 	outputText("<b>Corruption of Champions (" + version + ")</b>", false);
 	
 	if (CoC_Settings.debugBuild)
@@ -81,11 +81,11 @@ public function mainMenu(e:MouseEvent = undefined):void
 	addButton(1, "Settings", settingsScreenMain, null, null, null, "Configure game settings and enable cheats.");
 	addButton(2, "Instructions", howToPlay, null, null, null, "How to play.  Starting tips.  And hotkeys for easy left-handed play...");
 	addButton(3, "Achievements", achievements.achievementsScreen, null, null, null, "View all achievements you have unlocked so far.");
+	addButton(4, "Mod Thread", openURL, "http://fenoxo.com/forum/index.php?/topic/5-coc-revamp-mod", null, null, "Check the official mod thread on Fenoxo's forum.");
 		
 	addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
 	addButton(6, "Image Credits", imageCreditsScreen, null, null, null, "Check out who contributed to the image pack.");
-	addButton(7, "Debug Info", debugPane, null, null, null, "View debug information.");
-	addButton(8, "Mod Thread", openURL, "http://fenoxo.com/forum/index.php?/topic/5-coc-revamp-mod", null, null, "Check the official mod thread on Fenoxo's forum.");
+	//addButton(7, "Debug Info", debugPane, null, null, null, "View debug information.");
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;
@@ -99,40 +99,34 @@ public function startupScreenBody():void
 
 	// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
 	// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
-
-	outputText(<![CDATA[
-<br>(Formerly Unnamed Text Game)  
-<u>Created by: Fenoxo</u>
-
-Edited By:<br>
-&nbsp; &nbsp; &nbsp; Ashi, SoS, Prisoner416, Zeikfried, et al
-
-Open-source contributions by:<br>
-&nbsp; &nbsp; &nbsp; aimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, et al
-
-Game Mod by: Kitteh6660
-
-<b><u>Original Game Github</u></b>
-<br>Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
-<br>Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>  
-(requires an account, unfortunately)
-
-<b><u>Modded Game Github</u></b>
-<br>Source Code: <u><a href='https://github.com/Kitteh6660/Corruption-of-Champions'>https://github.com/Kitteh6660/Corruption-of-Champions</a></u>
-<br>Bug Tracker: <u><a href='https://github.com/Kitteh6660/Corruption-of-Champions/issues'>https://github.com/Kitteh6660/Corruption-of-Champions/issues</a></u>  
-(requires an account too, unfortunately)
-
-**<u>DISCLAIMER</u>**
-<br>- **There are many strange and odd fetishes contained in this flash.  Peruse at own risk.**
-<br>- **Please be 18 or the legal age to view porn before playing. If not, enable SFW Mode.**
-<br>- **Try to keep your keyboard clean.  Think of the children!**
-
-For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. 
-Check out Trials in Tainted Space as well!
-	
-Also go play <u>Nimin</u> by Xadera on furaffinity.
-
-	]]>, false, true);
+	// Fixed. No more markdown. :)
+	outputText("\n(Formerly Unnamed Text Game)");
+	//Brief credits
+	outputText("\n\n<b>Created by:</b> Fenoxo"); //The Original Creator
+	outputText("\n\n<b>Edited by:</b> "); //Edited By
+	outputText("\n\tAshi, SoS, Prisoner416, Zeikfried, et al");
+	outputText("\n\n<b>Open-source contributions by:</b> "); //Contributions
+	outputText("\n\taimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, et al");
+	outputText("\n\n<b>Game Mod by:</b> Kitteh6660"); //Mod Creator
+	//Github for Original
+	outputText("\n\n<b><u>Original Game Github</u></b>");
+	outputText("\n<b>Source Code:</b> <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>");
+	outputText("\n<b>Bug Tracker:</b> <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>");
+	outputText("\n(requires an account, unfortunately)");
+	//Github for Mod
+	outputText("\n\n<b><u>Modded Game Github</u></b>");
+	outputText("\n<b>Source Code:</b> <u><a href='https://github.com/Kitteh6660/Corruption-of-Champions'>https://github.com/Kitteh6660/Corruption-of-Champions</a></u>");
+	outputText("\n<b>Bug Tracker:</b> <u><a href='https://github.com/Kitteh6660/Corruption-of-Champions/issues'>https://github.com/Kitteh6660/Corruption-of-Champions/issues</a></u>");
+	outputText("\n(requires an account too, unfortunately)");
+	//Disclaimer
+	outputText("\n\n<b><u>DISCLAIMER</u></b>");
+	outputText("<li>There are many strange and odd fetishes contained in this flash.  Peruse at own risk.</li>");
+	outputText("<li>Please be 18 or the legal age to view porn before playing. If not, enable SFW Mode.</li>");
+	outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
+	//Other Info
+	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. ")
+	outputText("\n\nCheck out Trials in Tainted Space as well!");
+	outputText("\n\nAlso go play <u>Nimin</u> by Xadera on furaffinity.");
 
 	if(debug)
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");

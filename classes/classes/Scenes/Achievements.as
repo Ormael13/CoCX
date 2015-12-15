@@ -109,7 +109,7 @@ package classes.Scenes
 			
 			titleAchievementSection("Fashion"); //3 achievements
 			addAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD, "Equip wizard robes and magic staff.");
-			//addAchievement("Cosplayer", kACHIEVEMENTS.FASHION_COSPLAYER, "Wear 10 different clothings/armors.");
+			addAchievement("Cosplayer", kACHIEVEMENTS.FASHION_COSPLAYER, "Wear 10 different clothings/armors.");
 			addAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX, "Wear any form of kinky clothing and wield any form of whip.");
 			addAchievement("Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, "Wear no undergarments while wearing any clothes or armours.");
 			addAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, "Wear jewelry that is valued over 1,000 gems.");
