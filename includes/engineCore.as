@@ -597,6 +597,9 @@ public function buildPerkList():Array {
 	if(player.findPerk(PerkLib.Evade) >= 0 && player.findPerk(PerkLib.Runner) >= 0 && player.spe >= 50) {
 			_add(new PerkClass(PerkLib.DoubleAttack));
 	}
+	if(player.spe >= 80 && player.findPerk(PerkLib.Evade) >= 0 && player.findPerk(PerkLib.Agility) >= 0) {
+			_add(new PerkClass(PerkLib.Unhindered));
+	}
 	//Tier 1 Speed Perks
 	if(player.level >= 6) {
 		//Speedy Recovery - Regain Fatigue 50% faster speed.
@@ -604,7 +607,7 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.SpeedyRecovery));
 		}
 		//Agility - A small portion of your speed is applied to your defense rating when wearing light armors.
-		if(player.spe > 75 && player.findPerk(PerkLib.Runner) >= 0 && (player.armorPerk == "Light" || player.armorPerk == "Medium")) {
+		if(player.spe > 75 && player.findPerk(PerkLib.Runner) >= 0) {
 			_add(new PerkClass(PerkLib.Agility));
 		}
 		if(player.spe >= 60) {

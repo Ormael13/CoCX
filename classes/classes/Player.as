@@ -278,7 +278,7 @@ use namespace kGAMECLASS;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if(findPerk(PerkLib.Agility) >= 0) {
-				if(armorPerk == "Light") speedBonus += Math.round(spe/8);
+				if(armorPerk == "Light" || _armor.name == "nothing") speedBonus += Math.round(spe/8);
 				else if(armorPerk == "Medium") speedBonus += Math.round(spe/13);
 				if (speedBonus > 15) speedBonus = 15;
 			}
