@@ -5,7 +5,7 @@ package classes.Parser
 
 	public class Parser
 	{
-		import showdown.Showdown;
+		//import showdown.Showdown;
 
 		private var _ownerClass:*;			// main game class. Variables are looked-up in this class.
 		private var _settingsClass:*;		// global static class used for shoving conf vars around
@@ -693,11 +693,11 @@ package classes.Parser
 				// Split up into multiple variables for debugging (it was crashing at one point. Separating the calls let me delineate what was crashing)
 				var tmp1:String = this.parserState[sceneName];
 				var tmp2:String = recParser(tmp1, 0);			// we have to actually parse the scene now
-				var tmp3:String = Showdown.makeHtml(tmp2)
+				//var tmp3:String = Showdown.makeHtml(tmp2)
 
 
-
-				return tmp3;			// and then stick it on the display
+				return ""; //Fuck Showdown
+				//return tmp3;			// and then stick it on the display
 
 				//if (sceneParserDebug) trace("WARNING: Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
 			}
@@ -762,11 +762,11 @@ package classes.Parser
 
 				var tmp1:String = this.parserState[sceneName];
 				var tmp2:String = recParser(tmp1, 0);		// we have to actually parse the scene now
-				ret             = Showdown.makeHtml(tmp2)
+				//ret             = Showdown.makeHtml(tmp2)
 
 
 
-				_ownerClass.rawOutputText(ret, true);			// and then stick it on the display
+				//_ownerClass.rawOutputText(ret, true);			// and then stick it on the display
 
 				//if (sceneParserDebug) trace("WARNING: Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
 				if (sceneParserDebug) trace("WARNING: Scene contents after markdown: \"" + ret + "\"");
@@ -1088,11 +1088,11 @@ package classes.Parser
 			if (parseAsMarkdown)
 			{
 				// trace("WARNING: markdownificating");
-				ret = Showdown.makeHtml(ret);
+				//ret = Showdown.makeHtml(ret);
 
 
-				var regexPCloseTag:RegExp = /<\/p>/gi;
-				ret = ret.replace(regexPCloseTag,"</p>\n");
+				//var regexPCloseTag:RegExp = /<\/p>/gi;
+				//ret = ret.replace(regexPCloseTag,"</p>\n");
 				// Finally, add a additional newline after each closing P tag, because flash only
 				// outputs one newline per <p></p> tag, apparently flash again feels the need to be a special snowflake
 			}

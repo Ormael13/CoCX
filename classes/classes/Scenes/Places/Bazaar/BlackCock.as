@@ -1445,7 +1445,7 @@ package classes.Scenes.Places.Bazaar
 			//Transformations
 			if (rand(3) == 0 && changes < changeLimit && player.skinType == SKIN_TYPE_SCALES) {
 				outputText("\n\nYou feel an odd rolling sensation as your scales begin to shift, spreading and reforming as they grow and disappear, <b>becoming normal human skin</b>.");
-				player.skinType = SKIN_TYPE_SCALES;
+				player.skinType = SKIN_TYPE_PLAIN;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.armType != ARM_TYPE_HUMAN) {
@@ -1490,7 +1490,7 @@ package classes.Scenes.Places.Bazaar
 				player.antennae = ANTENNAE_NONE;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() == 1) {
+			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() == 1 && player.countCocksOfType(CockTypesEnum.HUMAN) == 0) {
 				outputText("You feel a stirring in your loins as your cock grows rock hard. You " + player.clothedOrNakedLower("pull it out from your [armor], to ") + "take a look. It seems you now <b>have a human dick again</b>.");
 				player.cocks.type = CockTypesEnum.HUMAN;
 				changes++;

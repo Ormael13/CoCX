@@ -610,9 +610,15 @@ public function buildPerkList():Array {
 		if(player.spe > 75 && player.findPerk(PerkLib.Runner) >= 0) {
 			_add(new PerkClass(PerkLib.Agility));
 		}
+		if(player.spe > 75 && player.findPerk(PerkLib.Runner) >= 0) {
+			_add(new PerkClass(PerkLib.Unhindered));
+		}
 		if(player.spe >= 60) {
 			_add(new PerkClass(PerkLib.LightningStrikes));
 		}
+		/*if(player.spe >= 60 && player.str >= 60) {
+			_add(new PerkClass(PerkLib.Brawler));
+		}*/ //Would it be fitting to have Urta teach you?
 	}
 	//Tier 2 Speed Perks
 	if(player.level >= 12) {
@@ -636,15 +642,6 @@ public function buildPerkList():Array {
 	}
 	if(player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) {
 			_add(new PerkClass(PerkLib.Mage));
-	}
-	// Spell-boosting perks
-	// Battlemage: auto-use Might
-	if(player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusAffect(StatusAffects.KnowsMight) >= 0 && player.inte >= 60) {
-			_add(new PerkClass(PerkLib.Battlemage));
-	}
-	// Spellsword: auto-use Charge Weapon
-	if(player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusAffect(StatusAffects.KnowsCharge) >= 0 && player.inte >= 60) {
-			_add(new PerkClass(PerkLib.Spellsword));
 	}
 	//Tier 1 Intelligence Perks
 	if(player.level >= 6) {
@@ -674,7 +671,17 @@ public function buildPerkList():Array {
 				|| player.findPerk(PerkLib.CorruptedNinetails) >= 0))
 					_add(new PerkClass(PerkLib.RagingInferno));
 		}
+		// Spell-boosting perks
+		// Battlemage: auto-use Might
+		if(player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusAffect(StatusAffects.KnowsMight) >= 0 && player.inte >= 80) {
+				_add(new PerkClass(PerkLib.Battlemage));
+		}
+		// Spellsword: auto-use Charge Weapon
+		if(player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusAffect(StatusAffects.KnowsCharge) >= 0 && player.inte >= 80) {
+				_add(new PerkClass(PerkLib.Spellsword));
+		}
 	}
+	
 	//------------
 	// LIBIDO
 	//------------

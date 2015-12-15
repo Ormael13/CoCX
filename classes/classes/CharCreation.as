@@ -71,7 +71,7 @@
 			
 			clearOutput();
 			outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\n");
-			if (showSpecialNames) outputText("\n\n\n\n");			
+			//if (showSpecialNames) outputText("\n\n\n\n");			
 			outputText("What is your name?");
 		
 			/*CODE FROM CMACLOAD HERE
@@ -119,8 +119,10 @@
 				boxNames.visible = true;
 			
 			//Reset autosave
-			player.slotName = "VOID";
-			player.autoSave = false;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+				player.slotName = "VOID";
+				player.autoSave = false;
+			}
 			//RESET DUNGEON
 			kGAMECLASS.inDungeon = false;
 			kGAMECLASS.dungeonLoc = 0;
@@ -241,6 +243,7 @@
 			kGAMECLASS.sand = 0;
 		//Replaced by flag	kGAMECLASS.beeProgress = 0;
 			kGAMECLASS.giacomo = 0;
+			kGAMECLASS.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			kGAMECLASS.inCombat = false;
 			kGAMECLASS.inDungeon = false;
@@ -991,7 +994,7 @@
 		}
 		private function chooseCockLength(length:Number):void {
 			player.cocks[0].cockLength = length;
-			player.cocks[0].cockThickness = (length / 5) - 0.1;
+			player.cocks[0].cockThickness = Math.floor(((length / 5) - 0.1) * 10) / 10;
 			genericStyleCustomizeMenu();
 		}
 
