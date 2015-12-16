@@ -893,14 +893,14 @@ public function imageCreditsScreen():void
 	{
 		outputText(<![CDATA[
 
-**Bundled Image Credits:**
+<b>Bundled Image Credits:</b>
 
-**Yoh-SL**
+<b>Yoh-SL</b>
 
-* Bee-Girl Monster Image
-* Goo-Girl Monster Image
-* Ceraph Monster Image
-* Sand-Witch (and sandwich)
+<li>Bee-Girl Monster Image</li>
+<li>Goo-Girl Monster Image</li>
+<li>Ceraph Monster Image</li>
+<li>Sand-Witch (and sandwich)</li>
 
 		]]>, false, true);
 	}
