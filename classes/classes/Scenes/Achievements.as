@@ -21,14 +21,14 @@ package classes.Scenes
 			if (descUnlocked == "") descUnlocked = descLocked;
 			if (isShadow && achievements[achievement] <= 0) return;
 			//Set text.
-			outputText("<b>" + title + ":</b> ");
+			outputText("<li><b>" + title + ":</b> ");
 			if (achievements[achievement] > 0) {
 				outputText("<font color=\"#008000\">Unlocked</font> - " + descUnlocked);
 				achievementsEarned++;
 			}
 			else outputText("<font color=\"#800000\">Locked</font> - " + descLocked);
 			if (isShadow) outputText(" - <font color=\"#660066\">Shadow Achievement</font>");
-			outputText("\n");
+			outputText("</li>");
 			achievementsTotal++;
 		}
 		

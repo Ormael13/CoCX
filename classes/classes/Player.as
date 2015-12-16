@@ -2341,6 +2341,10 @@ use namespace kGAMECLASS;
 				maxSpe -= 10;
 				maxInt -= 10;
 			}
+			if (satyrScore() >= 4) {
+				maxStr += 5;
+				maxSpe += 5;
+			}
 			if (isNaga()) maxSpe += 10;
 			if (isTaur()) maxSpe += 20;
 			//Apply New Game+

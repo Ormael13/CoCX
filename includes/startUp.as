@@ -891,18 +891,12 @@ public function imageCreditsScreen():void
 	displayHeader("Image Credits");
 	if (images.getLoadedImageCount() > 0)
 	{
-		outputText(<![CDATA[
-
-<b>Bundled Image Credits:</b>
-
-<b>Yoh-SL</b>
-
-<li>Bee-Girl Monster Image</li>
-<li>Goo-Girl Monster Image</li>
-<li>Ceraph Monster Image</li>
-<li>Sand-Witch (and sandwich)</li>
-
-		]]>, false, true);
+		outputText("<b>Bundled Image Credits:</b>\n\n");
+		outputText("<b>Yoh-SL</b>");
+		outputText("<li>Bee-Girl Monster Image</li>");
+		outputText("<li>Goo-Girl Monster Image</li>");
+		outputText("<li>Ceraph Monster Image</li>");
+		outputText("<li>Sand-Witch (and sandwich)</li>");
 	}
 	else
 	{
