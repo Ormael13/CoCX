@@ -367,7 +367,7 @@
 				var newGamePlusLevel:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				var gameMode:Number = flags[kFLAGS.HUNGER_ENABLED];
 				var hardcoreMode:int = flags[kFLAGS.HARDCORE_MODE];
-				var hardcoreSlot:int = flags[kFLAGS.HARDCORE_SLOT];
+				var hardcoreSlot:String = flags[kFLAGS.HARDCORE_SLOT];
 			}
 			//Clear plot storage array!
 			flags = new DefaultDict();
