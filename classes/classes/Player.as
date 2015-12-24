@@ -735,9 +735,16 @@ use namespace kGAMECLASS;
 			var race:String = "human";
 			if (catScore() >= 4) 
 			{
-				race = "cat-morph";
-				if (faceType == 0)
-					race = "cat-" + mf("boy", "girl");
+				if (isTaur() && lowerBody == LOWER_BODY_TYPE_CAT) {
+					race = "cat-taur";
+					if (faceType == 0)
+						race = "sphinx-morph"; // no way to be fully feral anyway
+				}
+				else {
+					race = "cat-morph";
+					if (faceType == 0)
+						race = "cat-" + mf("boy", "girl");
+				}
 			}
 			if (lizardScore() >= 4)
 			{
@@ -757,13 +764,19 @@ use namespace kGAMECLASS;
 			}
 			if (dogScore() >= 4)
 			{
-				race = "dog-morph";
-				if (faceType == 0)
-					race = "dog-" + mf("man", "girl");
+				if (isTaur() && lowerBody == LOWER_BODY_TYPE_DOG)
+					race = "dog-taur";
+				else {
+					race = "dog-morph";
+					if (faceType == 0)
+						race = "dog-" + mf("man", "girl");
+				}
 			}
 			if (foxScore() >= 4)
 			{
-				if (skinType == 1)
+				if (isTaur() && lowerBody == LOWER_BODY_TYPE_FOX)
+					race = "fox-taur";
+				else if (skinType == 1)
 					race = "fox-morph";
 				else
 					race = "fox-" + mf("morph", "girl");
@@ -781,7 +794,7 @@ use namespace kGAMECLASS;
 			}
 			if (horseScore() >= 3)
 			{
-				if (lowerBody == 4)
+				if (isTaur())
 					race = "centaur-morph";
 				else
 					if (hornType == HORNS_UNICORN)
@@ -822,7 +835,7 @@ use namespace kGAMECLASS;
 				race = "spider-morph";
 				if (mf("no", "yes") == "yes")
 					race = "spider-girl";
-				if (lowerBody == 16)
+				if (isDrider())
 					race = "drider";
 			}
 			if (kangaScore() >= 4)
@@ -859,16 +872,19 @@ use namespace kGAMECLASS;
 			}
 			if (deerScore() >= 4)
 			{
+				if (isTaur()) race = "deer-taur";
 				race = "deer-morph";
 				if (faceType == 0) race = "deer-" + mf("morph", "girl");
-				if (lowerBody == LOWER_BODY_TYPE_DEERTAUR) race = "deer-taur";
 			}
 			//Special, bizarre races
 			if (dragonneScore() >= 6)
 			{
-				race = "dragonne-morph";
-				if (faceType == 0)
-					race = "dragonne-" + mf("man", "girl");
+				if (isTaur()) race = "dragonne-taur";
+				else {
+					race  = "dragonne-morph";
+					if (faceType == 0)
+						race = "dragonne-" + mf("man", "girl");
+				}
 			}
 			if (manticoreScore() >= 6)
 			{
@@ -877,15 +893,19 @@ use namespace kGAMECLASS;
 					race = "manticore-" + mf("man", "girl");
 			}
 			if (sirenScore() >= 4)
+			{
 				race = "siren";
+			}
 			//</mod>
 			if (lowerBody == 3)
 				race = "naga";
-			if (lowerBody == 4) {
+				
+			if (lowerBody == LOWER_BODY_TYPE_HOOFED && isTaur()) {
 				if (wingType == WING_TYPE_FEATHERED_LARGE) race = "pegataur";
 				else race = "centaur";
 			}
-			if (lowerBody == 11)
+			
+			if (lowerBody == LOWER_BODY_TYPE_PONY)
 				race = "pony-kin";
 
 			if (gooScore() >= 3)
@@ -893,6 +913,8 @@ use namespace kGAMECLASS;
 				race = "goo-";
 				race += mf("boi", "girl");
 			}
+			
+			
 			return race;
 		}
 

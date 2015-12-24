@@ -242,6 +242,7 @@ public function startUrtaQuest():void {
 	player.nippleLength = .75;
 	player.skinTone = "black";
 	player.lowerBody = LOWER_BODY_TYPE_FOX;
+	player.legCount = 2;
 	player.earType = EARS_FOX;
 	player.faceType = FACE_FOX;
 	player.tailType = TAIL_TYPE_FOX;

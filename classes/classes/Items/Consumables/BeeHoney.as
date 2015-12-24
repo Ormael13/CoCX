@@ -159,9 +159,10 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Bee Legs
-			if (changes < changeLimit && player.lowerBody != CoC.LOWER_BODY_TYPE_BEE && player.lowerBody != CoC.LOWER_BODY_TYPE_CENTAUR && Utils.rand(4) == 0) {
+			if (changes < changeLimit && player.lowerBody != CoC.LOWER_BODY_TYPE_BEE && Utils.rand(4) == 0) {
 				outputText("\n\nYour legs tremble with sudden unbearable pain, as if they're being ripped apart from the inside out and being stitched together again all at once.  You scream in agony as you hear bones snapping and cracking.  A moment later the pain fades and you are able to turn your gaze down to your beautiful new legs, covered in shining black chitin from the thigh down, and downy yellow fuzz along your upper thighs.");
 				player.lowerBody = CoC.LOWER_BODY_TYPE_BEE;
+				player.legCount = 2;
 				changes++;
 			}
 			//-Nipples reduction to 1 per tit.

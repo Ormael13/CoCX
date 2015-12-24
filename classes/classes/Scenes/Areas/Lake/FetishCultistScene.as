@@ -45,9 +45,9 @@ package classes.Scenes.Areas.Lake
 			var sexed:Boolean = false;
 			outputText("The thoughts of fetishes have become so strong that they override everything else.  You see the cultist moving towards you, but you can't possibly fight any more.  She reaches out and touches you, and you fall to the ground as the multitudes of thoughts cascade into one.\n\n", false);
 			//ZOOKEEPER RAEPS.  WEIRDOZ
-			if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_NAGA) {
+			if (player.isTaur() || player.isNaga()) {
 				//Special centaur version by Astronomy
-				if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR && player.balls > 0 && player.totalCocks() > 0 && rand(4) < 3) {
+				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED && player.balls > 0 && player.totalCocks() > 0 && rand(4) < 3) {
 					if (player.cocks[0].cockType == CockTypesEnum.HORSE) {
 						outputText("The entrance door to the stables swings open. Standing there is the familiar sight of your favorite zookeeper.  She's wearing overalls and a plain, dirt marked t-shirt, but you notice the overalls have the familiar logo of the zoo – your home.  You can make out a part of the logo says  \"Featsy's Slutty Beast Zoo - Zoo Keeper\" on it. As she walks into the stables, you see she's carrying a small stool with her, a sight that fills you with anticipation. You watch her walk down the aisle in between all the stable stands, glancing between all the zoo's pet centaurs, yourself included.  Most of them are male and you can even see the odd herm going by her big pair of tits and large set of balls with a dangling cock. The zookeeper smiles lustfully as she looks from side to side at the different centaurs available. As she slowly walks towards you, you can't help but hope that she'll choose you for today's 'treatment'.  To your immense delight, you see that the girl has stopped in front of you.  You try to move but the ropes holding you in place arrest your movement.  The omnipresent weight of your cock as it dangles between your legs grows heavier and heavier as your body remembers the zookeeper.  The girl steps into your stand, closing the door behind her.  As you look at her, you can see her face is blushing red, and her eyes are clearly fixated on your " + cockDescript(0) + " and " + ballsDescriptLight() + ".\n\n", false);
 
@@ -83,7 +83,7 @@ package classes.Scenes.Areas.Lake
 				//common opening to all animal forms
 				outputText("You look up and find that you're behind a set of bars.  You panic for a moment before hearing someone whistling and turn towards the source of the sound, a feeling of dread falling over you as you recognize the tune.  The zoo keeper turns the corner; she is a busty girl wearing a tiny brown tube top with a name tag that says \"Featsy's Slutty Beast Stables - Stable-Mistress\".  She has a similarly colored brown cap, and a belt around her otherwise bare waist and long legs.  She is spinning a keyring around her finger while whistling her tune.  She stops at your cell and turns to look at you with a smile on her face, catching the keys in her hand.\n\n", false);
 				//Centaur
-				if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
+				if (player.isTaur()) {
 					//The scene for centaurs, greetings
 					outputText("\"<i>Well horsey, ready to entertain the guests?  Opening time is in twenty minutes.</i>\"  You shudder and look around for a moment. You're inside a square cell fifteen feet across, with a large, durable bed flat in a corner, and a feeding trough on the other side.  It's where you entertain your guests, and your keepers.  You are now wearing a saddle, with a bridle and bit.  You shake your head and fidget around on your four legs for a moment, trying to figure out what's going on; but you're unable to comprehend anything but what you are seeing around you and the thoughts that would be suitable are those of an exotic sex slave.\n\n", false);
 					//It's time to bend down for, you're too high up to lick her right now
@@ -132,7 +132,7 @@ package classes.Scenes.Areas.Lake
 					return;
 				}
 				//Naga
-				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
+				else if (player.isNaga()) {
 					//The scene for naga's getting their tails raped, start with the greetings
 					outputText("\"<i>Slick serpent, are you ready to entertain our guests?  Opening time is in 20 minutes.</i>\" You shudder and look around for a moment; you're inside a square cell fifteen feet across, with a pile of multi-colored pillows in the middle of the cell and a few hot stones on the sides of the room.  It's where you entertain your guests, and your keepers.  You shake your head and steady your headdress while fiddling with the multitudes of necklaces you're wearing. You keep trying to figure out what's going on; but you're unable to comprehend anything but what you are seeing around you, and the thoughts that would be suitable are those of an exotic sex slave...\n\n", false);
 
@@ -192,7 +192,7 @@ package classes.Scenes.Areas.Lake
 			//if(monster.armorName == "naughty nurse's uniform" && !sexed) {
 			if (rand(2) == 0 && !sexed) {
 				outputText("You stand up and look over at the cultist. She is now wearing a nurse's uniform with bared breasts.  You notice that your " + player.armorName + " changed into a bizarre cross between a patient's gown and a collection of black straps with buckles.  While tight in some places, it doesn't hinder your movement or hide your more sexual parts at all.", false);
-				if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
+				if (player.isTaur()) {
 					outputText("  It also dawns to your fogged mind that you now have a human-looking lower body, though your sexual organs are unchanged.", false);
 					if (player.cockTotal() > 0) outputText("  As you see your " + multiCockDescriptLight() + ", 'incredibly large' is the only qualifier you can think of.", false);
 				}
@@ -297,7 +297,7 @@ package classes.Scenes.Areas.Lake
 			else if (!sexed) {
 				//.Mistress and servant rape
 				outputText("Her outfit shifts into that of a noble woman, and she looks down at you.", false);
-				if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
+				if (player.isTaur()) {
 					outputText("  It dawns to your fogged mind that you now have a human-looking lower body, though your sexual organs are unchanged.", false);
 					if (player.cockTotal() > 0) outputText("  As you see your " + multiCockDescriptLight() + ", 'incredibly large' is the only qualifier you can think of.", false);
 				}
@@ -403,7 +403,7 @@ package classes.Scenes.Areas.Lake
 					outputText("She meekly leans back onto the ground and parts her legs with her hands, giving you a clear view of her needy hole through the large opening in her clothing.  \"<i>My lord, please fill me!</i>\" she begs you.  You stand and stride over to her.  \"<i>Yes little girl, accept my divine rod", false);
 					if (player.cocks.length > 1) outputText("s", false);
 					outputText(" in your pussy,</i>\" you reply.  ", false);
-					if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("You command her to get on all fours, then cover her and push ", false);
+					if (player.isTaur()) outputText("You command her to get on all fours, then cover her and push ", false);
 					else outputText("You grab hold of and lift her legs, then kneel down and push ", false);
 					if (player.cocks.length > 1) outputText("the first of ", false);
 					outputText("your ", false);
@@ -425,12 +425,12 @@ package classes.Scenes.Areas.Lake
 					outputText("  You pull out and the cultist slumps onto the ground contentedly, massaging her well-fucked, cum-filled pussy.  Looking at the cultist you wonder if she was able to make you spontaneously orgasm just from having an orgasm herself, or if she has the power of a real sex god?\n\n", false);
 				}
 				//(if player has a vagina)
-				else if (player.vaginas.length > 0 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+				else if (player.vaginas.length > 0 && !player.isTaur()) {
 					outputText("She meekly lies back on the ground and spreads her legs, one slightly in the air.  You have a clear view of her needy hole through the large opening in her clothing.  \"<i>My lord, please scissor me!</i>\" she begs you.  You stand and stride over to her. \"<i>Yes little girl, accept my divine lips on your pussy,</i>\" you reply.  You grab the leg she had in the air and pull yourself between her legs, pressing your " + vaginaDescript(0) + " against her own.  With a firm tug on her leg, you begin to push and rub your pussies together in earnest, and her eager moans soon fill the air.  The cultist climaxes unexpectedly quickly, and the feeling soon rushes through you as well.  You pull back and the cultist slumps onto the ground contentedly.  Looking at the cultist you wonder if she was able to make you spontaneously orgasm just from having an orgasm herself, or if she has the power of a real sex god?\n\n", false);
 				}
 				//Horsey
-				if (player.vaginas.length > 0 && player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
-					outputText("She meekly looks at your equine lower body, obviously unused to it, and tentatively asks if she can lick your pussy. Smiling, you present your buttocks to her and say, \"<i>Yes little girl, you can pleasure my divine lips with your tongue.</i>\" She happily gets to it, and you hear eager licking and sucking sounds as a warmth diffuses in your nether parts. She sure knows how to handle a cunt, and you find yourself cumming very quickly, as an incredibly huge orgasm shakes your whole body, sending girl-cum all over her face. You turn around and see the cultist with a look of utter bliss on her face, as if she's just been blessed.  You wonder from the quality of the orgasm she just gave you if she has the power of a real sex god.\n\n", false);
+				if (player.vaginas.length > 0 && player.isTaur()) {
+					outputText("She meekly looks at your bestial lower body, obviously unused to it, and tentatively asks if she can lick your pussy. Smiling, you present your buttocks to her and say, \"<i>Yes little girl, you can pleasure my divine lips with your tongue.</i>\" She happily gets to it, and you hear eager licking and sucking sounds as a warmth diffuses in your nether parts. She sure knows how to handle a cunt, and you find yourself cumming very quickly, as an incredibly huge orgasm shakes your whole body, sending girl-cum all over her face. You turn around and see the cultist with a look of utter bliss on her face, as if she's just been blessed.  You wonder from the quality of the orgasm she just gave you if she has the power of a real sex god.\n\n", false);
 				}
 				//(after either)
 				outputText("You get dressed and notice that the cultist is still lying on the ground in the perverted nun outfit, with a look of utter bliss on her face.  ", false);
