@@ -1734,7 +1734,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.hornType = saveFile.data.hornType;
 			
 		player.wingDesc = saveFile.data.wingDesc;
-		player.wingType = saveFile.data.wingType
+		player.wingType = saveFile.data.wingType;
 		player.lowerBody = saveFile.data.lowerBody;
 		player.tailType = saveFile.data.tailType;
 		player.tailVenom = saveFile.data.tailVenum;
