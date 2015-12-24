@@ -4419,9 +4419,10 @@ public function kick():void {
 	//(bunbun kick) 
 	else if(player.lowerBody == LOWER_BODY_TYPE_BUNNY) outputText("You leap straight into the air and lash out with both your furred feet simultaneously, slamming forward in a strong kick.  ", false);
 	//(centaur kick)
-	else if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("You lurch up onto your backlegs, lifting your forelegs from the ground a split-second before you lash them out in a vicious kick.  ", false);
-	//(bipedal hoof-kick) 
-	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("You twist and lurch as you raise a leg and slam your hoof forward in a kick.  ", false);
+	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_PONY || player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+		if(player.isTaur()) outputText("You lurch up onto your backlegs, lifting your forelegs from the ground a split-second before you lash them out in a vicious kick.  ", false);
+		//(bipedal hoof-kick) 
+		else outputText("You twist and lurch as you raise a leg and slam your hoof forward in a kick.  ", false);
 
 	if(flags[kFLAGS.PC_FETISH] >= 3) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
@@ -4477,8 +4478,9 @@ public function kick():void {
 	damage = player.str;
 	//Leg bonus
 	//Bunny - 20, Kangaroo - 35, 1 hoof = 30, 2 hooves = 40
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) damage += 40;
-	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) damage += 30;
+	if(player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_PONY || player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+		if(player.isTaur()) damage += 40;
+		else damage += 30;
 	else if(player.lowerBody == LOWER_BODY_TYPE_BUNNY) damage += 20;
 	else if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) damage += 35;
 	//Damage post processing!

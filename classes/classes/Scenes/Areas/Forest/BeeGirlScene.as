@@ -1266,7 +1266,7 @@ package classes.Scenes.Areas.Forest
 					else outputText("legs", false);
 					outputText(", making your thighs slick as your clit throbs almost painfully in the cold air. You begin to pant, your heart racing as the bee-girl slides back down your body, moaning as her breasts snag your nipples, rubbing them in a pleasurable way. She stops at head level, looking into your eyes with her own black orbs. She smiles at you and you realize that she is no longer pinning you with anything more than her own relatively light weight. You crease your brow with worry as you realize that running is the last thing on your mind, before the warm haze slips inside your skull.  The sexy bee leans in and kisses you softly, robbing you of your last shreds of resistance.\n\n", false);
 
-					if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+					if (player.isTaur()) {
 						outputText("She slips further down your chest, grabbing your " + player.allBreastsDescript() + " playfully. You feel her knee nudging against your " + vaginaDescript(0) + ", grinding roughly against it and sending shivers through your body. You yelp slightly as she bites one of your nipples, the sudden sensation giving way to moans of pleasure as she massages and pinches the other one. Her knee slides against your " + vaginaDescript(0) + ", flicking your " + clitDescript() + " and coating the bee-girl with your juices. You feel her straddle your legs, her feet deftly pulling your thigh into contact with her pussy, before she starts to rock against you.\n\n", false);
 						outputText("Her juices mix with your own as you feel yourself working steadily to climax. Noticing your heavy breathing and sudden vigor, she pulls away.  ", false);
 					}
@@ -1508,7 +1508,7 @@ package classes.Scenes.Areas.Forest
 				outputText("You begin pounding away at her, splattering honey over her thighs with your enthusiastic fucking.  Her passage is unlike anything you've ever had before.  It's tight, but overly slick and textured with small nubs and bumps that tease and caress in wonderful ways.   Her muscles clamp and squeeze her vaginal entrance tightly, turning it into an organic cock-ring.  You hold still while her cunt begins twitching and slightly rotating back and forth around your " + cockDescript(x) + ".    Her head is thrown back in what you assume is an orgasm, her arms mashing her tits together for even more pleasure.  The vacuum seal around your " + cockDescript(x) + " only gets tighter as her rippling, squeezing, twisting cunt stimulates your over-engorged " + cockDescript(x) + ".\n\n", false);
 				//cum
 				outputText("Taken beyond your limit, you lose control, feeling the tightness and warmth of your orgasm build at the base of your cock.   It builds and builds, held back by the bee's vice-like cunt, almost becoming painful with its intensity.   Just when you think you can't take any more pressure, you cum, HARD.   Your body clenches hard, spurting out each wave of fuck-juice with more force than the last.    Honey squirts from the bee-slut's fuck-hole, drenching the fuzz on her thighs and your legs with slippery sweetness.   Her cunt doesn't show any signs of slowing down, and your body obliges it, providing more cum than you thought yourself capable of.", false);
-				if (player.gender == 3 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("  You reach down and finger your " + vaginaDescript(0) + " roughly, lost in the throes of your orgasm.", false);
+				if (player.gender == 3 && !player.isTaur()) outputText("  You reach down and finger your " + vaginaDescript(0) + " roughly, lost in the throes of your orgasm.", false);
 				outputText("\n\n", false);
 				//wind down
 				outputText("At last her quivering quim releases your sore member", false);
@@ -1654,23 +1654,23 @@ package classes.Scenes.Areas.Forest
 			if (player.isTaur()) outputText("As you're going to explode, you smile evilly as an idea crosses your mind. You turn around swiftly, leaving her surprised and still in the position of licking your pussy, her slender and squirming tongue out, and her face covered in girl-cum.  ", false);
 			if (player.cumQ() < 25) {
 				outputText("You erupt, your " + cockDescript(0) + " pulsing and spraying ribbons of cum.  You milk your dick hard, pistoning your hand up and down mercilessly, trying to squeeze out every drop.  You watch each burst splatter into the bee-girl's hair and grin cruelly.  ", false);
-				if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("Spent at last, you rise up off of her, shivering as her tongue retracts from your woman-hood.", false);
+				if (!player.isTaur()) outputText("Spent at last, you rise up off of her, shivering as her tongue retracts from your woman-hood.", false);
 			}
 			if (player.cumQ() >= 25 && player.cumQ() < 250) {
 				outputText("You erupt, your " + cockDescript(0) + " pulsing in your hands and spraying out thick ribbons of cum.  You milk your dick hard, pistoning it relentlessly as it spurts more and more jism.  The orgasm drags on and on, your cum soaking your poor victim's hair and forehead with your sticky white juices.   Satisfied at last, ", false);
 				if (player.balls >= 2) outputText("with empty balls, ", false);
-				if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("you rise up off her, shivering as her slender and squirming tongue retracts from your " + vaginaDescript(0) + ".", false);
+				if (!player.isTaur()) outputText("you rise up off her, shivering as her slender and squirming tongue retracts from your " + vaginaDescript(0) + ".", false);
 				else outputText("you walk away from her smiling, and sated.", false);
 			}
 			if (player.cumQ() >= 250 && player.cumQ() < 500) {
 				outputText("Your " + cockDescript(0) + " erupts, writhing in your hands from the force of your orgasm as thick ropes of cum burst from you.   Each pulse of juice seems to drag on and on, each nearly as long as a normal man's orgasm.  Looking down, you see the bee's hair and face totally slimed with your cum, and a puddle forming below her.  ", false);
-				if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("You rise up off of her in mid-orgasm, aiming lower and painting her with each blast of seed.  ", false);
+				if (!player.isTaur()) outputText("You rise up off of her in mid-orgasm, aiming lower and painting her with each blast of seed.  ", false);
 				else outputText("You aim right at the oval of her face and paint her with each blast of seed.  ", false);
 				outputText("Your " + cockDescript(0) + " flexes powerfully with each load, until your victim is soaked from the waist up, her breasts and face plastered with goo.  You sigh contentedly and step away, watching the bee scoop up your leavings in both hands, one going to her mouth, the other to her sweet wet snatch.  Giggling to yourself, you walk away, sated.", false);
 			}
 			if (player.cumQ() >= 500) {
 				outputText("Your " + cockDescript(0) + " erupts like a volcano, shooting a constant thick stream of cum that pulses with each clench of your pelvic muscles.  The pressure only seems to increase as your urethra tries to deal with the huge load your body is producing.  ", false);
-				if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("You stand up off your victim, letting her tongue slip free from your soaked folds, and", false);
+				if (!player.isTaur()) outputText("You stand up off your victim, letting her tongue slip free from your soaked folds, and", false);
 				else outputText("You", false);
 				outputText(" plunge your " + cockDescript(0) + " deep into the bee-girl's mouth and throat, pumping cum directly into her belly.  She writhes underneath you, her oxygen supply cut off as your spunk floods her belly.  The feeling of her inhuman lips wrapped tight around your base only makes it worse, intensifying the eruption of baby-batter that's pumping into her.  Her eyes roll back as cum begins leaking from her nose, her belly beginning to look distended and pregnant with the amount of jism you've pumped in.   Certain she's had enough, you pull free, marveling at how your last spurt made her look nearly nine months pregnant.   You note she's passed out, but your orgasm is far from over, so you resume jacking off, hosing her down from head to toe in thick white goop.  ", false);
 				if (player.balls >= 2) outputText("Your balls eventually empty", false);
@@ -1810,7 +1810,7 @@ package classes.Scenes.Areas.Forest
 				//New PG
 				outputText("\n\n", false);
 				outputText("The both of you smell like sex as you pull free of her with a groan.  You move to kneel over her and use her unstained lips to dry your " + multiCockDescriptLight() + " one by one.  Her lips part slightly on instinct and you can feel her swallow the globs of jism that coat you.  Once she's done you stand up quickly, ", false);
-				if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("stuffing your " + multiCockDescriptLight() + " inside your " + player.armorName, false);
+				if (!player.isTaur()) outputText("stuffing your " + multiCockDescriptLight() + " inside your " + player.armorName, false);
 				else outputText("your glorious but spent " + multiCockDescriptLight() + " dangling under your belly,", false);
 				outputText(" and leave the completely exhausted and drenched woman on the forest floor, wings and legs still twitching slightly, sending a fine mist of cum across the ground around her.", false);
 			}

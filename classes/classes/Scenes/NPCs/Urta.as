@@ -1498,7 +1498,7 @@ private function comfortUrtaAfterTellinTruuf():void {
 	clearOutput();
 	outputText("You let Urta know that you understand.  After all, in a world like this monogamy is next to impossible.  There's no shame in what she did with Edryn or your relationship with Marble.  The two of you share a heartfelt hug and resolve to continue your relationship.", false);
 	//(If PC has Edryn (<3) & fits her req's)
-	if(((player.lowerBody == LOWER_BODY_TYPE_CENTAUR && player.totalCocks() > 0) ||
+	if(((player.isTaur() && player.totalCocks() > 0) ||
 		player.horseCocks() > 0 ||
 		(player.totalCocks() > 0 && player.cor > 50)) &&
 	  	player.statusAffectv1(StatusAffects.Edryn) >= 4)
@@ -2215,7 +2215,7 @@ public function scyllaAndUrtaSittingInATree():void {
 		outputText("Throughout the conversation she's weakly twitching her pelvis, rocking her hips against Scylla's face while her balls start to swell and churn in the nun's hands.  You close the door behind you carefully and drop the key on a crate.  It's time for some fun.\n\n", false);
 
 		// Butans
-		if (player.cockThatFits(urtaCapacity()) != -1 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR)
+		if (player.cockThatFits(urtaCapacity()) != -1 && !player.isTaur())
 		{
 			addButton(0, "Lap", makeUrtaSitOnYourLapWithScylla);
 			outputText("(You could make Urta sit on YOUR lap for a change, or you could jerk off and watch.");
@@ -2258,7 +2258,7 @@ public function scyllaAndUrtaSittingInATree():void {
 		outputText("Throughout the conversation she's weakly twitching her pelvis, rocking her hips against Scylla's face while her balls start to swell and churn in the nun's hands.  Thankfully the doorway is at such an angle that the bulk of the bar can't see inside, and it helps that no one seems inclined to bother the three of you for now.  What do you do?\n\n", false);
 
 		// Butans
-		if (player.cockThatFits(urtaCapacity()) != -1 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR)
+		if (player.cockThatFits(urtaCapacity()) != -1 && !player.isTaur())
 		{
 			addButton(0, "Lap", makeUrtaSitOnYourLapWithScylla);
 			outputText("(You could make Urta sit on YOUR lap for a change, or you could jerk off and watch.");

@@ -90,7 +90,7 @@ package classes.Scenes.NPCs
 			spriteSelect(7);
 			clearOutput();
 			//UBER-Fullbodypenetration
-			if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR && player.biggestCockArea() > 500 && (player.statusAffectv1(StatusAffects.Exgartuan) == 1 || monk >= 5)) {
+			if (!player.isTaur() && player.biggestCockArea() > 500 && (player.statusAffectv1(StatusAffects.Exgartuan) == 1 || monk >= 5)) {
 				hugeCorruptionForceFuckCeraph();
 				return;
 			}
