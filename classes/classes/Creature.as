@@ -269,6 +269,7 @@ package classes
 		18 - dragonfeet
 		19 - raccoonfeet*/
 		public var lowerBody:Number = LOWER_BODY_TYPE_HUMAN;
+		public var legCount:Number = 2;
 
 		/*tailType:
 		0 - none
@@ -1413,7 +1414,7 @@ package classes
 			var total:Number;
 			var bonus:Number = 0;
 			//Centaurs = +50 capacity
-			if (lowerBody == 4)
+			if (isTaur())
 				bonus = 50;
 			//Naga = +20 capacity
 			else if (lowerBody == 3)
@@ -1439,7 +1440,7 @@ package classes
 		{
 			var bonus:Number = 0;
 			//Centaurs = +30 capacity
-			if (lowerBody == 4)
+			if (isTaur())
 				bonus = 30;
 			if (findPerk(PerkLib.HistorySlut) >= 0)
 				bonus += 20;
@@ -2522,12 +2523,7 @@ package classes
 
 		public function isBiped():Boolean
 		{
-			//Naga/Centaur
-			if (lowerBody == LOWER_BODY_TYPE_NAGA || lowerBody == LOWER_BODY_TYPE_CENTAUR)
-				return false;
-			if (lowerBody == LOWER_BODY_TYPE_GOO || lowerBody == LOWER_BODY_TYPE_PONY)
-				return false;
-			return true;
+			return legCount == 2;
 		}
 
 		public function isNaga():Boolean
@@ -2539,7 +2535,7 @@ package classes
 
 		public function isTaur():Boolean
 		{
-			if (lowerBody == LOWER_BODY_TYPE_CENTAUR || lowerBody == LOWER_BODY_TYPE_PONY || lowerBody == LOWER_BODY_TYPE_DEERTAUR)
+			if (legCount > 2 && !isDrider()) // driders have genitals on their human part, inlike usual taurs... this is actually bad way to check, but too many places to fix just now
 				return true;
 			return false;
 		}
@@ -2560,6 +2556,11 @@ package classes
 		{
 			var select:Number = 0;
 			//lowerBody:
+			//4 legs - centaur!
+			if (isDrider())
+				return num2Text(legCount)+" spider legs";
+			if (isTaur())
+				return num2Text(legCount)+" legs";
 			//0 - normal
 			if (lowerBody == 0)
 				return "legs";
@@ -2572,9 +2573,6 @@ package classes
 			//3 - snakelike body
 			if (lowerBody == 3)
 				return "snake-like coils";
-			//4 - centaur!
-			if (lowerBody == 4)
-				return "four legs";
 			//8 - goo shit
 			if (lowerBody == 8)
 				return "mounds of goo";

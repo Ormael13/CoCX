@@ -91,7 +91,7 @@ public function keltEncounter():void {
 			return;
 		}
 		//Centaur bad end
-		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR && player.statusAffectv2(StatusAffects.Kelt) >= 100 && player.gender > 1) {
+		if(player.isTaur() && player.statusAffectv2(StatusAffects.Kelt) >= 100 && player.gender > 1) {
 			if(player.inte > rand(40) && player.statusAffectv2(StatusAffects.Kelt) < 130 && player.findStatusAffect(StatusAffects.KeltBadEndWarning) < 0) {
 				player.createStatusAffect(StatusAffects.KeltBadEndWarning,0,0,0,0);
 				outputText("You approach the farm, ready for another archery lesson.  Kelt is oblivious to your presence, busy practicing with his own bow for the moment.  The wind shifts and blows his musk your way.  Unconsciously, you breathe deeply, sending heat racing between your rear legs.  Alarm bells go off in your mind as you realize what his presence is doing to you, and you run away to your camp before he can notice you.  It's clear to you that you can't resist him much longer; the next time you meet him, you'll probably volunteer to become his brood-mare.  Perhaps you should avoid Kelt and the farm until you feel his influence less keenly.", true);
@@ -184,7 +184,7 @@ private function keltRequiresNakedness():void {
 	outputText("He slaps a hand on his bare chest proudly, and you realize that he means for you to strip down naked.  When you protest, his eyes narrow with irritation, and his sneer becomes more cruel.\r\r", false);
 	outputText("\"<i>Didn't know you were a coward, too.  That's fine... go fuck off, then.  You can't handle it, then go back to your camp and braid your hair, or something.  If you wait long enough, I'm sure a nice minotaur will come along to make you his bitch.  'Bout all you're good for, right?</i>\"\r\r", false);
 	outputText("Do you obey his demand?", false);
-	if(player.cor > 70 - player.corruptionTolerance() && player.inte > 40 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+	if(player.cor > 70 - player.corruptionTolerance() && player.inte > 40 && !player.isTaur()) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
 		simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "Fight Back", keltResistance, "", null, "Never", keltRefuseNakedness);
 		return;
@@ -341,7 +341,7 @@ private function keltRequiresBlowjobs():void {
 	}
 	simpleChoices("Shamefully", keltBlowjobRequirementShamefully, "Eagerly", keltBlowjobRequirementEagerly, "Never!", keltBlowjobRequirementNever, "", null, "FIGHT!", kelly.fightToBeatKelt);
 	//Never!			Shamefully			Eagerly
-	if(player.inte > 40 && player.cor > 70 - player.corruptionTolerance() && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+	if(player.inte > 40 && player.cor > 70 - player.corruptionTolerance() && !player.isTaur()) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
 		addButton(3, "Fight Back", keltResistance);
 	}
@@ -478,7 +478,7 @@ private function keltMainEncounterAfterNakedReq():void {
 				//(Yes[+5 Submissive]			No[Never event])
 				//Link this to reluctant && never
 				simpleChoices("Yes", keltReluctantlyGetNaked, "No", keltRefuseNakedness, "", null, "", null, "FIGHT!", kelly.fightToBeatKelt);
-				if (player.inte > 40 && player.cor > 70 - player.corruptionTolerance() && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+				if (player.inte > 40 && player.cor > 70 - player.corruptionTolerance() && !player.isTaur()) {
 					outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
 					addButton(2, "Fight Back",keltResistance);
 				}

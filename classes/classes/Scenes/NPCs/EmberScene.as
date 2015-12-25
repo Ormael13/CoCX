@@ -1715,6 +1715,7 @@ package classes.Scenes.NPCs
 					outputText("\n\nYou scream in agony as you feel the bones in your feet suddenly break and restructure themselves, toes fusing together, bone swelling out of the merged masses of flesh.  When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>");
 				}
 				player.lowerBody = LOWER_BODY_TYPE_DRAGON;
+				player.legCount = 2;
 				changes++;
 			}
 			//Gain Dragon Tail

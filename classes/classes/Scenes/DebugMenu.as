@@ -499,6 +499,7 @@ package classes.Scenes
 			player.faceType = FACE_CAT;
 			player.earType = EARS_CAT;
 			player.lowerBody = LOWER_BODY_TYPE_CAT;
+			player.legCount = 2;
 			player.skinType = SKIN_TYPE_FUR;
 			player.skinDesc = "fur";
 			//Draconic TF
@@ -520,6 +521,7 @@ package classes.Scenes
 			player.earType = EARS_CAT;
 			player.tailType = TAIL_TYPE_CAT;
 			player.lowerBody = LOWER_BODY_TYPE_CAT;
+			player.legCount = 2;
 			//Draconic TF
 			player.skinType = SKIN_TYPE_SCALES;
 			player.skinDesc = "scales";

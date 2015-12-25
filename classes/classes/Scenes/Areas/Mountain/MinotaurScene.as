@@ -426,7 +426,7 @@ private function girlRapeAMinotaur():void {
 	}
 	//Resume sexings, p2
 	outputText("\n\nAt last you feel the minotaur's meaty hands grab you by the ", false);
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("hindquarters, forcefully grinding your vagina along his length like a toy.  ", false);
+	if(player.isTaur()) outputText("hindquarters, forcefully grinding your vagina along his length like a toy.  ", false);
 	else outputText(hipDescript() + ", forcefully grinding up and down along his length like a cheap sex-toy.  ", false);
 	//Size variants
 	//Too small
@@ -517,7 +517,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 			return;
 		}
 		//Oral rape chance
-		if(rand(2) == 0 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+		if(rand(2) == 0 && !player.isTaur()) {
 			getOralRapedByMinotaur();
 			return;
 		}
@@ -541,7 +541,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 		
 		outputText("Suddenly you're grabbed from behind, your arms held together by a single massive, furry hand. A heavy, snorting breath brushes the top of your head. You turn your neck to see a massive bull-man. His impressive dick presses ", false);
 		
-		if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
+		if (player.isTaur())
 		{
 			outputText("against your buttocks", false);
 		}
@@ -579,7 +579,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 		player.buttChange(monster.cockArea(0), true);
 		minoCumAddiction(15);
 	}
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("\n\nHe positions himself behind your rear legs, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and you feel your stomach distending to accommodate his incredible size. Grabbing your ass, he begins to violently pound your backside with his massive member.  ", false);
+	if(player.isTaur()) outputText("\n\nHe positions himself behind your rear legs, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and you feel your stomach distending to accommodate his incredible size. Grabbing your ass, he begins to violently pound your backside with his massive member.  ", false);
 	else outputText("\n\nHe lifts you into the air, hefting your insignificant weight with little effort, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and looking down you can see your stomach distending to accommodate his incredible size. Using you like a human cock-sleeve, he simply holds you by the torso and begins lifting you up and down.  ", false);
 	
 	//Vag stretch texts
