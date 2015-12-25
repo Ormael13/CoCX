@@ -381,7 +381,6 @@
 				flags[kFLAGS.HARDCORE_SLOT] = hardcoreSlot;
 			}
 			//Set that jojo debug doesn't need to run
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102] = 1;
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02999] = 3;
 			//Time reset
 			model.time.days = 0;

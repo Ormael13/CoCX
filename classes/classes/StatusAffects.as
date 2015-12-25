@@ -106,7 +106,7 @@ package classes
 		public static const MarblesMilk:StatusAffectType = mk("Marbles Milk");
 		public static const MarbleSpecials:StatusAffectType = mk("MarbleSpecials");
 		public static const MarbleWithdrawl:StatusAffectType = mk("MarbleWithdrawl");
-		public static const Meditated:StatusAffectType = mk("Meditated");
+		public static const Meditated:StatusAffectType = mk("Meditated"); // DEPRECATED
 		public static const MeanToNaga:StatusAffectType = mk("MeanToNaga");
 		public static const MeetWanderer:StatusAffectType = mk("meet wanderer");
 		public static const MetRathazul:StatusAffectType = mk("metRathazul");

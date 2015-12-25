@@ -841,9 +841,9 @@ public function lickNieve():void {
 	if(!silly()) {
 		outputText("\n\nNieve lets out little gasps and sighs as you assault her clit with your tongue.  Not content to leave it at that, you dive in to her frigid, slick cunt, lapping and licking.  ");
 		//(Normal/Snake Tongue: 
-		if(player.tongueType != TONUGE_DEMONIC) outputText("It doesn't get far, but elicits squeals of surprise and pleasure from your elemental slave who's already grasping at the snow surrounding her for support.");
+		if(!player.hasLongTongue()) outputText("It doesn't get far, but elicits squeals of surprise and pleasure from your elemental slave who's already grasping at the snow surrounding her for support.");
 		//Demon Tongue: 
-		else if(player.tongueType == TONUGE_DEMONIC) outputText("Her eyes widen as you snake your impressive, demonic tongue into her. She grunts and squeals with pleasure, hands grasping piles of snow, wishing they were bedsheets.");
+		else outputText("Her eyes widen as you snake your impressive tongue into her. She grunts and squeals with pleasure, hands grasping piles of snow, wishing they were bedsheets.");
 		outputText("  After a minute of this, you realize you've lost the feeling in your tongue!  Pulling it back into your mouth, you find it warms back up quickly, and then you're at it again.");
 		
 		outputText("\n\nNot quite willing to let your precious tongue go numb like that again, you focus your attention on her clitoris and all the little sensitive spots along the inner thighs.  While your mouth is drawing her attention elsewhere, you carefully bury two fingers knuckle deep into her frozen fuckhole.");

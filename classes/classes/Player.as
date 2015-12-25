@@ -1338,7 +1338,7 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG || hornType == HORNS_DRACONIC_X2)
 				dragonCounter++;
-			if (player.findPerk(PerkLib.Dragonfire) >= 0)
+			if (findPerk(PerkLib.Dragonfire) >= 0)
 				dragonCounter++;
 			return dragonCounter;
 		}
@@ -1906,7 +1906,7 @@ use namespace kGAMECLASS;
 		
 		public function clothedOrNakedLower(clothedText:String, nakedText:String = ""):String
 		{
-			return (armorName != "gear" && (armorName != "lethicite armor" && lowerGarmentName == "nothing") ? clothedText : nakedText);
+			return (armorName != "gear" && (armorName != "lethicite armor" && lowerGarmentName == "nothing") && !isTaur() ? clothedText : nakedText);
 		}
 		
 		public function addToWornClothesArray(armor:Armor):void {
@@ -2247,14 +2247,14 @@ use namespace kGAMECLASS;
 			{
 				//Balls
 				var tempSpeedPenalty:Number = 0;
-				if (ballSize > 4) tempSpeedPenalty += Math.round((ballSize - 4) / 2);
+				var lim:int = isTaur() ? 9 : 4;
+				if (ballSize > lim) tempSpeedPenalty += Math.round((ballSize - lim) / 2);
 				//Breasts
-				if (hasBreasts())
-				{	
-					if (biggestTitSize() > 15) tempSpeedPenalty += (biggestTitSize() / 4);
-				}
+				lim = isTaur() ? BREAST_CUP_I : BREAST_CUP_G;
+				if (hasBreasts() && biggestTitSize() > lim) tempSpeedPenalty += ((biggestTitSize() - lim) / 2);
 				//Cocks
-				if (biggestCockArea() > 24) tempSpeedPenalty += ((biggestCockArea() - 24) / 6)
+				lim = isTaur() ? 72 : 24;
+				if (biggestCockArea() > lim) tempSpeedPenalty += ((biggestCockArea() - lim) / 6)
 				//Min-cap
 				var penaltyMultiplier:Number = 1;
 				penaltyMultiplier -= str * 0.1;
@@ -2300,9 +2300,14 @@ use namespace kGAMECLASS;
 				maxTou += 10;
 				maxInt += 10;
 			}
-			if (dogScore() >= 4 || foxScore() >= 4) {
+			if (dogScore() >= 4) {
 				maxSpe += 10;
 				maxInt -= 10;
+			}
+			if (foxScore() >= 4) {
+				maxStr -= 10;
+				maxSpe += 5;
+				maxInt += 5;
 			}
 			if (catScore() >= 4) {
 				maxSpe += 5;
@@ -2370,7 +2375,7 @@ use namespace kGAMECLASS;
 				maxSpe += 5;
 			}
 			if (isNaga()) maxSpe += 10;
-			if (isTaur()) maxSpe += 20;
+			if (isTaur() || isDrider()) maxSpe += 20;
 			//Apply New Game+
 			maxStr += 25 * newGamePlusMod();
 			maxTou += 25 * newGamePlusMod();

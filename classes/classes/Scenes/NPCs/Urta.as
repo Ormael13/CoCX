@@ -4969,6 +4969,7 @@ private function getAPetReward():void {
 	if(player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
 	else if(player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
 	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
+	else if(player.hasLongTongue()) outputText("inhumanly long ");
 	outputText("tongue along the vixen's thick cumvein, which pulses lightly.  Urta groans and runs a hand through your " + hairDescript() + ", gripping it solidly.  You can't help as you're forced further onto the warm rod.");
 
 	outputText("\n\nUrta's flare presses against the back of your throat for a moment before slipping down into your throat, bringing a groan up from your core.  The vibrations seem to please your lover, who shudders, and forces her massive cock further down your throat.  It's slightly uncomfortable, but it brings you such a thrill to know the kind of bliss you're giving your Owner.  You bob your head up and down, letting the cock penetrate your throat deeper with every thrust.  Urta's legs stiffen, and her breaths get quicker while the cock buried in your gullet twitches wildly. Clearly not wanting to cum in your mouth, she pulls out, leaving your maw with a wet <b>pop</b>, and aims her cock downwards... right towards the doggy bowl.");
@@ -4981,6 +4982,7 @@ private function getAPetReward():void {
 	if(player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
 	else if(player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
 	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
+	else if(player.hasLongTongue()) outputText("inhumanly long ");
 	outputText("tongue, lapping at the top layer and swallowing it down.  It's still warm, and quite salty with a bit of a sweet tang to it.  You quickly dive back into your 'reward', using your tongue as a spoon to consume every last drop in the bowl.  While you're busy doing that, Urta slides off the bed and takes up a position behind your body, ass high into the air, showing off all her goods.  The fox raises a paw, smearing some of her cum along your ");
 	if(player.hasCock()) outputText("shaft ");
 	if(player.gender == 3) outputText(" and ");

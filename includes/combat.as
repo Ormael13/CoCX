@@ -906,9 +906,11 @@ public function attack():void {
 	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
-	if(monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
+	if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
+		if (monster.findStatusAffect(StatusAffects.Blind) >= 0)
+			outputText("Blind basilisk can't use his eyes, so you can actually aim your strikes!  ", false);
 		//basilisk counter attack (block attack, significant speed loss): 
-		if(player.inte/5 + rand(20) < 25 && monster.findStatusAffect(StatusAffects.Blind) < 0) {
+		else if(player.inte/5 + rand(20) < 25) {
 			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.", false);
 			Basilisk.basiliskSpeed(player,20);
 			player.removeStatusAffect(StatusAffects.FirstAttack);
@@ -4479,10 +4481,10 @@ public function kick():void {
 	//Leg bonus
 	//Bunny - 20, Kangaroo - 35, 1 hoof = 30, 2 hooves = 40
 	if(player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_PONY || player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
-		if(player.isTaur()) damage += 40;
-		else damage += 30;
+		damage += 30;
 	else if(player.lowerBody == LOWER_BODY_TYPE_BUNNY) damage += 20;
-	else if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) damage += 35;
+	else if (player.lowerBody == LOWER_BODY_TYPE_KANGAROO) damage += 35;
+	if(player.isTaur()) damage += 10;
 	//Damage post processing!
 	if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 	if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);

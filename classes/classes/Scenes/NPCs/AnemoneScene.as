@@ -63,7 +63,7 @@ package classes.Scenes.NPCs
 		{
 			var needNext:Boolean = false;
 			if (flags[kFLAGS.ANEMONE_KID] > 0) {
-				if (flags[kFLAGS.KID_ITEM_FIND_HOURS] < 20) flags[kFLAGS.KID_ITEM_FIND_HOURS]++;
+				//if (flags[kFLAGS.KID_ITEM_FIND_HOURS] < 20) flags[kFLAGS.KID_ITEM_FIND_HOURS]++;
 				if (flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
 					kidABabysitsCows();
 					needNext = true;
@@ -1127,7 +1127,7 @@ package classes.Scenes.NPCs
 			spriteSelect(71);
 			outputText("You walk over to the barrel.  ");
 			//[(display if hourssinceKiditem >= 16)
-			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] >= 16) {
+			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] != model.time.days) {
 				outputText("An item sits next to it, left there by the anemone as a present to you.  Or 'rent', if you choose to think of it that way.  ");
 				item = getAnemoneItem;
 			}
@@ -1181,59 +1181,37 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			spriteSelect(71);
-			var choice:Number;
 			var itype:ItemType;
 			outputText("You reach down and pick up her present.  Today, she's left you ");
 			if (kidAXP() == 0) itype = consumables.DRYTENT;
 			else if (kidAXP() < 50) {
 				///[IncubusDraft/SuccubusMilk/ImpFood/MinoBlood/LargeAxe]
-				choice = rand(8);
-				if (choice == 0) itype = consumables.INCUBID;
-				else if (choice == 1) itype = consumables.SUCMILK;
-				else if (choice == 2) itype = consumables.IMPFOOD;
-				else if (choice == 3) itype = consumables.GOB_ALE;
-				else if (choice == 4) itype = consumables.WETCLTH;
-				else if (choice == 5) itype = consumables.L_DRAFT;
-				else if (choice == 6) itype = consumables.W_FRUIT;
-				else itype = consumables.EQUINUM;
+				itype = randomChoice(consumables.INCUBID, consumables.SUCMILK, consumables.IMPFOOD, consumables.GOB_ALE, consumables.WETCLTH, consumables.L_DRAFT, consumables.W_FRUIT, consumables.EQUINUM);
 			}
 			else if (kidAXP() < 75) {
 				//White Book/Bee Honey/Ovi Elixir/Shark Tooth/S. Swimwear/Lust Draft/Bimbo Liqueur(same odds as player drop)
-				choice = rand(6);
-				if (choice == 0) itype = consumables.W__BOOK;
-				else if (choice == 1) itype = consumables.BEEHONY;
-				else if (choice == 2) itype = consumables.OVIELIX;
-				else if (choice == 3) itype = consumables.SHARK_T;
-				else if (choice == 4) itype = armors.S_SWMWR;
-				else if (choice == 5) itype = consumables.L_DRAFT;
+				itype = randomChoice(consumables.W__BOOK,consumables.BEEHONY,consumables.OVIELIX,consumables.SHARK_T, armors.S_SWMWR, consumables.L_DRAFT);
 				if (rand(100) == 0) itype = consumables.BIMBOLQ;
 			}
 			else if (kidAXP() < 100) {
 				//Mino Blood/Large Axe/Comfortable Clothes/Lust Draft/Lust Dagger/Bro Brew(same odds as player drop)
-				choice = rand(5);
-				if (choice == 0) itype = consumables.MINOBLO;
-				else if (choice == 1) itype = weapons.L__AXE;
-				else if (choice == 2) itype = armors.C_CLOTH;
-				else if (choice == 3) itype = consumables.L_DRAFT;
-				else if (choice == 4) itype = weapons.L_DAGGR;
+				itype = randomChoice(consumables.MINOBLO, weapons.L__AXE, armors.C_CLOTH, consumables.L_DRAFT, weapons.L_DAGGR);
 				if (rand(100) == 0) itype = consumables.BROBREW;
 			}
 			else {
 				//T.Shark Tooth/Pink Gossamer/Black Gossamer/Reptilum
-				choice = rand(4);
-				if (choice == 0) itype = consumables.TSTOOTH;
-				else if (choice == 1) itype = consumables.S_GOSSR;
-				else if (choice == 2) itype = consumables.B_GOSSR;
-				else if (choice == 3) itype = consumables.REPTLUM;
-				if (rand(100) == 0) itype = consumables.BROBREW;
-				if (rand(100) == 0) itype = consumables.BIMBOLQ;
+				var choice:Number = rand(100);
+				if (choice == 0) itype = consumables.BROBREW;
+				else if (choice == 1) itype = consumables.BIMBOLQ;
+				else
+					itype = randomChoice(consumables.TSTOOTH, consumables.S_GOSSR,consumables.B_GOSSR,consumables.REPTLUM);
 			}
 			outputText(itype.longName + ".");
 			if (itype == weapons.L__AXE) outputText("  Holy... how did she drag this thing home!?");
 			outputText("\n\n");
 			inventory.takeItem(itype, playerMenu);
 			//(set hourssinceKiditem = 0)
-			flags[kFLAGS.KID_ITEM_FIND_HOURS] = 0;
+			flags[kFLAGS.KID_ITEM_FIND_HOURS] = model.time.days;
 		}
 
 //[Give Weapon]

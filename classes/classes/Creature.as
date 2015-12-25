@@ -2092,25 +2092,22 @@ package classes
 			//Dicks?
 			if (totalCocks() > 0)
 			{
-				if (hasVagina())
+				if (hasVagina()) // herm
 				{
 					if (biggestTitSize() >= 2) return female;
-					else if (biggestTitSize() == 1) {
-						if (kGAMECLASS.player.femininity > 50) return female;
-						else return male;
-					}
-					else return male;
+					else if (biggestTitSize() == 1) return kGAMECLASS.player.femininity > 50 ? female : male;
+					else return kGAMECLASS.player.femininity > 75 ? female : male;
 				}
 				else return male;
 			}
 			else
 			{
-				if (hasVagina())
-					if (biggestTitSize() == 0 && kGAMECLASS.player.femininity < 45) return male;
+				if (hasVagina()) // pure female
+					if (biggestTitSize() <= 1 && kGAMECLASS.player.femininity < 45) return male; // c-boy
 					else return female;
-				else
+				else // genderless
 				{
-					if (biggestTitSize() >= 3)
+					if (biggestTitSize() >= 3 || kGAMECLASS.player.femininity > 75)
 						return female;
 					else
 						return male;
@@ -3616,6 +3613,13 @@ package classes
 		private function breastSize(val:Number):String
 		{
 			return Appearance.breastSize(val);
+		}
+		
+		/**
+		 * Echidna 1 ft long (i'd consider it barely qualifying), demonic 2 ft long, draconic 4 ft long
+		 */
+		public function hasLongTongue():Boolean {
+			return tongueType == TONUGE_DEMONIC || tongueType == TONUGE_DRACONIC || tongueType == TONUGE_ECHIDNA;
 		}
 		
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
