@@ -329,6 +329,7 @@ package classes.Scenes.Areas
 			if (player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
 			else if (player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
 			else if (player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
+			else if(player.hasLongTongue()) outputText("inhumanly long ");
 			outputText("tongue inside her, eagerly licking out and guzzling down the remnants of the minotaur's present.");
 
 			outputText("\n\nThe minotaur, for his part, is in no rush to give you a cream pie of your own. His thrusts are slow and deliberate, with a rhythm that has you writhing with pleasure.  The three of you moan together like some kind of erotic pyramid.  The bull's assault on your ");

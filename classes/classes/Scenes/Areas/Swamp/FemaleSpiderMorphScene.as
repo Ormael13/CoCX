@@ -243,6 +243,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("The arachnid sex tastes... sweet - unnaturally so, almost cloying in its intensity.  You lean up to lick at her slimy black box, and as soon as you make contact with her oozing nether-lips, her legs give out, dropping her weight fully on to you and smothering you in her honey-dripping cunt.  Grunting in discomfort from the change in pressure, your aphrodisiac-addled mind remembers that licking her pussy will get you release.  You thrust your tongue forward with every ounce of your strength, burying ", false);
 			if (player.tongueType == TONUGE_SNAKE) outputText("the snake-like length the whole way into her womb, slithering right past her cervix.", false);
 			else if (player.tongueType == TONUGE_DEMONIC) outputText("the massive, demonic length into her vagina, curling it around the walls and stroking them all with even motions.", false);
+			else if (player.hasLongTongue()) outputText("the inhuman length into her vagina, curling it around the walls and stroking them all with even motions.", false);
 			else outputText("all of your length as deep into her passage as possible, licking and lapping at it in an orgasm-seeking frenzy.", false);
 			outputText("  The hard nub of her clit bumps your lower lip, and you start to open and close your jaw as fast as possible to stroke that tiny pleasure-organ off.\n\n", false);
 

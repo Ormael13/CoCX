@@ -107,7 +107,7 @@ public static const TIMES_FUCKED_SOPHIE_LESBIAN:int                             
 public static const EASY_MODE_ENABLE_FLAG:int                                       =   99; // Invincibility On - Easy Mode.    0=false, 1=true
 public static const CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE:int                      =  100; // Corrupt Marae Followups
 public static const FOUND_WIZARD_STAFF:int                                          =  101; // Found Wizard Staff
-public static const UNKNOWN_FLAG_NUMBER_00102:int                                   =  102; // Has extra jojo time been cleared? - Jojo Debug Flag
+public static const JOJO_LAST_MEDITATION:int                                        =  102; // Last time Jojo meditation used
 public static const TIMES_AUTOFELLATIOED_EXGARTUAN:int                              =  103; // Times Autofellated Exgartuan
 public static const WHITNEY_GEMS_PAID_THIS_WEEK:int                                 =  104; // Whitney Gems Paid Out That Week
 public static const TIMES_MET_SCYLLA_IN_ADDICTION_GROUP:int                         =  105; // SCYLLA:  Times met Addiction Group
