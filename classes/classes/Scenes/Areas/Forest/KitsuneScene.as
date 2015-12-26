@@ -2343,7 +2343,7 @@ package classes.Scenes.Areas.Forest
 							player.hairColor = randomChoice(elderKitsuneColors);
 							player.furColor == player.hairColor;
 							if (player.hairLength > 0) outputText("\n\Now you have " + player.hairColor + " fur and hair, like true kitsune elder. You look really regal!");
-							else outputText("\n\Now you have " + player.furColor + " fur, like true kitsune elder.");
+							else outputText("\n\Now you have " + player.furColor + " fur, like true kitsune elder. You look really regal!");
 						}
 						else { // no fur
 							player.hairColor = randomChoice(elderKitsuneColors);

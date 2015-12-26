@@ -1149,6 +1149,7 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 
 	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
 	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
+	mainView.bottomButtons[pos].alpha = 1; // failsafe to avoid possible problems with dirty hack
 	mainView.showBottomButton(pos, text, callback, toolTipText, toolTipHeader);
 	//mainView.setOutputText( currentText );
 	flushOutputTextToGUI();
@@ -1219,7 +1220,7 @@ public function addLockedButton(pos:int, toolTipText:String = ""):void {
  * Hides all bottom buttons.
  */
 public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
-	for (var i = 0; i <= 14; i++) {
+	for (var i:int = 0; i <= 14; i++) {
 		mainView.hideBottomButton(i);
 		mainView.bottomButtons[i].alpha = 1; // Dirty hack.
 	}

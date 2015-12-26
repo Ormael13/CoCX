@@ -1542,7 +1542,7 @@ public function rest():void {
 	if (timeQ == 0) {
 		var hpBefore:int = player.HP;
 		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) { //Rest until fully healed, midnight or hunger wake.
-			while (player.HP < player.maxHP() && player.fatigue < player.maxFatigue()) {
+			while (player.HP < player.maxHP() && player.fatigue > 0) {
 				timeQ += 1;
 				HPChange(hpRecovery * multiplier, false); // no display since it is meant to be full rest anyway
 				fatigue( -fatRecovery * multiplier); 

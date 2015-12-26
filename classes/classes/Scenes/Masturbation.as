@@ -1787,7 +1787,7 @@ package classes.Scenes {
 					if (player.dogCocks() > player.normalCocks() && player.dogCocks() > player.horseCocks()) { //Primary Dog
 						var dogIndex:int;
 						for (dogIndex = 0; dogIndex < player.cocks.length; dogIndex++) {
-							if (player.cocks[dogIndex].cockType == CockTypesEnum.DOG) break;
+							if (player.cocks[dogIndex].hasKnot()) break;
 						}
 						outputText("Your feel your knots bulging and swelling, growing tighter and tighter until they're nearly double the width of a " + player.cockDescript(dogIndex) + ".  The agonizing pressure builds higher and tighter with every passing second as you get closer and closer to orgasm.  ");
 					}
