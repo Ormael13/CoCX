@@ -1154,6 +1154,36 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	flushOutputTextToGUI();
 }
 
+public function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void {
+	//Removes sex-related button in SFW mode.
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
+			trace("Button removed due to SFW mode.");
+			return;
+		}
+	}
+
+	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
+	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
+	showBottomButtonDisabled(pos, text, toolTipText, toolTipHeader);
+	flushOutputTextToGUI();
+}
+		
+/** 
+ * Dirty hack, actually.
+ */
+private function showBottomButtonDisabled(index:int, label:String, toolTipViewText:String = '', toolTipViewHeader:String = ''):void {
+	var button:CoCButton = mainView.bottomButtons[index] as CoCButton;
+	if(! button) return;
+	button.labelText = label;
+	button.callback = null;
+	button.enabled = false;
+	button.toolTipHeader = toolTipViewHeader;
+	button.toolTipText = toolTipViewText;
+	button.alpha = 0.5;
+	button.visible = true;
+}
+
 public function setButtonTooltip(index:int, toolTipHeader:String = "", toolTipText:String = ""):void {
 	mainView.showBottomButton(index, mainView.bottomButtons[index].labelText, mainView.bottomButtons[index].callback, toolTipText, toolTipHeader);
 }
@@ -1189,21 +1219,10 @@ public function addLockedButton(pos:int, toolTipText:String = ""):void {
  * Hides all bottom buttons.
  */
 public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
-	mainView.hideBottomButton(0);
-	mainView.hideBottomButton(1);
-	mainView.hideBottomButton(2);
-	mainView.hideBottomButton(3);
-	mainView.hideBottomButton(4);
-	mainView.hideBottomButton(5);
-	mainView.hideBottomButton(6);
-	mainView.hideBottomButton(7);
-	mainView.hideBottomButton(8);
-	mainView.hideBottomButton(9);
-	mainView.hideBottomButton(10);
-	mainView.hideBottomButton(11);
-	mainView.hideBottomButton(12);
-	mainView.hideBottomButton(13);
-	mainView.hideBottomButton(14);
+	for (var i = 0; i <= 14; i++) {
+		mainView.hideBottomButton(i);
+		mainView.bottomButtons[i].alpha = 1; // Dirty hack.
+	}
 	flushOutputTextToGUI();
 }
 
