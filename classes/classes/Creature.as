@@ -2090,15 +2090,17 @@ package classes
 			//if (femWeight()) return female;
 			//else return male;
 			//Dicks?
-			if (totalCocks() > 0)
+			if (hasCock())
 			{
 				if (hasVagina()) // herm
 				{
 					if (biggestTitSize() >= 2) return female;
-					else if (biggestTitSize() == 1) return kGAMECLASS.player.femininity > 50 ? female : male;
-					else return kGAMECLASS.player.femininity > 75 ? female : male;
+					else if (biggestTitSize() == 1) return kGAMECLASS.player.femininity >= 50 ? female : male;
+					else return kGAMECLASS.player.femininity >= 75 ? female : male;
 				}
-				else return male;
+				else
+					if (biggestTitSize() >= 1 && kGAMECLASS.player.femininity > 55 || kGAMECLASS.player.femininity >= 75) return female; // d-girl
+					else return male;
 			}
 			else
 			{
@@ -2107,7 +2109,7 @@ package classes
 					else return female;
 				else // genderless
 				{
-					if (biggestTitSize() >= 3 || kGAMECLASS.player.femininity > 75)
+					if (biggestTitSize() >= 3 || kGAMECLASS.player.femininity >= 75)
 						return female;
 					else
 						return male;

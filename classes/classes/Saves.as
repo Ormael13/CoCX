@@ -820,6 +820,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.statPoints = player.statPoints;
 		saveFile.data.ascensionPerkPoints = player.ascensionPerkPoints;
 		//Appearance
+		saveFile.data.startingRace = player.startingRace;
 		saveFile.data.gender = player.gender;
 		saveFile.data.femininity = player.femininity;
 		saveFile.data.thickness = player.thickness;
@@ -1594,6 +1595,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.ascensionPerkPoints = saveFile.data.ascensionPerkPoints;
 		
 		//Appearance
+		if (saveFile.data.startingRace != undefined)
+			player.startingRace = saveFile.data.startingRace;
 		player.gender = saveFile.data.gender;
 		if (saveFile.data.femininity == undefined)
 			player.femininity = 50;
@@ -1624,8 +1627,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.thickness = saveFile.data.thickness;
 		
 		player.tallness = saveFile.data.tallness;
-		if (saveFile.data.furColor == undefined)
-			player.furColor = "no";
+		if (saveFile.data.furColor == undefined || saveFile.data.furColor == "no")
+			player.furColor = saveFile.data.hairColor;
 		else
 			player.furColor = saveFile.data.furColor;
 		player.hairColor = saveFile.data.hairColor;

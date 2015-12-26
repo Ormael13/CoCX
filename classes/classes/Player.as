@@ -12,7 +12,9 @@ import classes.Items.JewelryLib;
 import classes.Items.Shield;
 import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib;
+import classes.Items.UndergarmentLib
+import classes.Scenes.Areas.Forest;
+import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
 
 use namespace kGAMECLASS;
@@ -42,6 +44,8 @@ use namespace kGAMECLASS;
 		{
 			game.outputText(text, clear);
 		}
+		
+		public var startingRace:String = "human";
 		
 		//Autosave
 		public var slotName:String = "VOID";
@@ -1289,16 +1293,16 @@ use namespace kGAMECLASS;
 				kitsuneCounter++;
 			//If the character's kitsune score is greater than 1 and:
 			//If the character has "blonde","black","red","white", or "silver" hair, +1
-			if (kitsuneCounter > 0 && (hairColor == "golden blonde" || hairColor == "black" || hairColor == "red" || hairColor == "white" || hairColor == "silver blonde"))
+			if (kitsuneCounter > 0 && !InCollection(furColor, KitsuneScene.basicKitsuneHair) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
 				kitsuneCounter++;
 			//If the character's femininity is 40 or higher, +1
 			if (kitsuneCounter > 0 && femininity >= 40)
 				kitsuneCounter++;
 			//If the character has fur, scales, or gooey skin, -1
-			if (skinType > 1)
-				kitsuneCounter -= 2;
-			if (skinType == 1)
+			if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
 				kitsuneCounter--;
+			if (skinType > SKIN_TYPE_FUR)
+				kitsuneCounter -= skinType; // -2 sor scales, -3 for goo
 			//If the character has abnormal legs, -1
 			if (lowerBody != 0)
 				kitsuneCounter--;

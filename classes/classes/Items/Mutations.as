@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Areas.Forest.KitsuneScene;
 
 	public final class Mutations extends BaseContent
 	{
@@ -1363,21 +1364,19 @@
 			if (player.lowerBody != LOWER_BODY_TYPE_HOOFED && !player.isTaur()) {
 				if (changes < changeLimit && rand(3) == 0) {
 					changes++;
-					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
-						player.lowerBody = LOWER_BODY_TYPE_HOOFED;
-					}
 					//else if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
 					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 						outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!", false);
 						player.lowerBody = LOWER_BODY_TYPE_HOOFED;
 					}
 					//Catch-all
-					else {
+					else {	
+						if (player.lowerBody == LOWER_BODY_TYPE_HUMAN)
+							player.lowerBody = LOWER_BODY_TYPE_HOOFED;
 						outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a feral beast!</b>", false);
-						if (player.gender > 0) {
-							outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.", false);
-						}
 					}
+					if (player.gender > 0)
+						outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.", false);
 					dynStats("spe", 3);
 					//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>", false);
 					player.legCount = 4;
@@ -7176,13 +7175,12 @@
 			}
 
 			//[Change Hair Color: Golden-blonde or Reddish-orange]
-			if (player.hairColor != "golden-blonde" && player.hairColor != "reddish-orange" && player.hairColor != "silver" && player.hairColor != "white" && player.hairColor != "red" && player.hairColor != "black" && changes < changeLimit && rand(4) == 0) {
-				var hairTemp:int = rand(10);
-				if (hairTemp < 5) player.hairColor = "reddish-orange";
-				else if (hairTemp < 7) player.hairColor = "red";
-				else if (hairTemp < 8) player.hairColor = "golden-blonde";
-				else if (hairTemp < 9) player.hairColor = "silver";
-				else player.hairColor = "black";
+			var fox_hair:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
+			if (!InCollection(player.hairColor, fox_hair) && !InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors) && changes < changeLimit && rand(4) == 0) {
+				if (player.tailType == TAIL_TYPE_FOX && player.tailVenom > 1)
+					if(player.tailVenom < 9) player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
+					else player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
+				else player.hairColor = randomChoice(fox_hair);
 				outputText("\n\nYour scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become " + player.hairColor + "!");
 			}
 			//[Adjust hips toward 10 – wide/curvy/flared]
@@ -7272,7 +7270,7 @@
 
 			}
 			//Cum Multiplier Xform
-			if (player.cumQ() < 5000 < 2 && rand(3) == 0 && changes < changeLimit && player.hasCock()) {
+			if (player.cumQ() < 5000 && rand(3) == 0 && changes < changeLimit && player.hasCock()) {
 				temp = 2 + rand(4);
 				//Lots of cum raises cum multiplier cap to 2 instead of 1.5
 				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) temp += rand(10);
@@ -7362,7 +7360,16 @@
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinAdj = "";
 				player.skinDesc = "fur";
-				player.furColor = "orange and white"
+				if (player.kitsuneScore() >= 4)
+					if(InCollection(player.hairColor, KitsuneScene.basicKitsuneFur) || InCollection(player.hairColor, KitsuneScene.elderKitsuneColors))
+						player.furColor = player.hairColor;
+					else
+						if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9)
+							player.furColor = randomChoice(KitsuneScene.elderKitsuneColors);
+						else
+							player.furColor = randomChoice(KitsuneScene.basicKitsuneFur);
+				else
+					player.furColor = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
 				changes++;
 			}
 			//[Grow Fox Legs]
@@ -7740,18 +7747,20 @@
 				changes++;
 			}
 			//[Change Hair Color: Golden-blonde, SIlver Blonde, White, Black, Red]
-			if (((mystic && rand(2) == 0) || (!mystic && rand(4) == 0)) && changes < changeLimit && player.hairColor != "golden blonde" && player.hairColor != "silver blonde" && player.hairColor != "white" && player.hairColor != "black" && player.hairColor != "red") {
-				var hairTemp:int = rand(10);
-				if (hairTemp == 0) player.hairColor = "golden blonde";
-				else if (hairTemp == 1) player.hairColor = "silver blonde";
-				else if (hairTemp <= 3) player.hairColor = "white";
-				else if (hairTemp <= 6) player.hairColor = "black";
-				else player.hairColor = "red";
+			if (((mystic && rand(2) == 0) || (!mystic && rand(4) == 0)) && changes < changeLimit && !InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors)) {
+				if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9) player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
+				else player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
 				outputText("\n\nYour scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same " + player.hairColor + " as a kitsune's!");
 				changes++;
 			}
+			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
-			if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES && ((mystic) || (!mystic && rand(2) == 0))) {
+			if ((player.skinType == SKIN_TYPE_FUR 
+					&& !InCollection(player.furColor, KitsuneScene.basicKitsuneFur)
+					&& !InCollection(player.furColor, KitsuneScene.elderKitsuneColors)
+					&& !InCollection(player.furColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
+					)
+				|| player.skinType == SKIN_TYPE_SCALES && ((mystic) || (!mystic && rand(2) == 0))) {
 				outputText("\n\nYou begin to tingle all over your " + player.skin() + ", starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
 				if (player.skinType == SKIN_TYPE_FUR) outputText("  You stare in horror as you pull your fingers away holding a handful of " + player.furColor + " fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinTone + " skin.");
 				else if (player.skinType == SKIN_TYPE_SCALES) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinTone + " skin underneath.");
@@ -7759,49 +7768,21 @@
 				player.skinType = SKIN_TYPE_PLAIN;
 				player.skinAdj = "";
 				player.skinDesc = "skin";
-				if (!mystic && player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "light") {
-					var skinTemp:int = rand(3);
-					if (skinTemp == 0) player.skinTone = "tan";
-					else if (skinTemp == 1) player.skinTone = "olive";
-					else player.skinTone = "light";
-				}
-				else if (mystic && player.skinTone != "dark" && player.skinTone != "ebony" && player.skinTone != "ashen" && player.skinTone != "sable" && player.skinTone != "milky white") {
-					var skinT:int = rand(5);
-					if (skinT == 0) player.skinTone = "dark";
-					else if (skinT == 1) player.skinTone = "ebony";
-					else if (skinT == 2) player.skinTone = "ashen";
-					else if (skinT == 3) player.skinTone = "sable";
-					else player.skinTone = "milky white";
-				}
+				if (!InCollection(player.skinTone, tone)) player.skinTone = randomChoice(tone);
 				outputText(player.skinTone + " complexion.");
 				outputText("  <b>You now have " + player.skin() + "!</b>");
 				changes++;
 			}
 			//Change skin tone if not changed you!
-			else if (mystic && player.skinTone != "dark" && player.skinTone != "ebony" && player.skinTone != "ashen" && player.skinTone != "sable" && player.skinTone != "milky white" && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			else if (!InCollection(player.skinTone, tone) && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
-				var mtoneTemp:int = rand(5);
-				if (mtoneTemp == 0) player.skinTone = "dark";
-				else if (mtoneTemp == 1) player.skinTone = "ebony";
-				else if (mtoneTemp == 2) player.skinTone = "ashen";
-				else if (mtoneTemp == 3) player.skinTone = "sable";
-				else player.skinTone = "milky white";
-				outputText(player.skin() + "!</b>");
-				changes++;
-			}
-			//Change skin tone if not changed you!
-			else if (!mystic && player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "light" && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
-				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
-				var toneTemp:int = rand(3);
-				if (toneTemp == 0) player.skinTone = "tan";
-				else if (toneTemp == 1) player.skinTone = "olive";
-				else player.skinTone = "light";
+				player.skinTone = randomChoice(tone);
 				outputText(player.skin() + "!</b>");
 				changes++;
 			}
 			//[Change Skin Color: add "Tattoos"]
 			//From Tan, Olive, or Light skin tones
-			else if ((mystic && 9999 == 0 && (player.skinTone == "dark" || player.skinTone == "ebony" || player.skinTone == "ashen" || player.skinTone == "sable" || player.skinTone == "milky white")) || (!mystic && 9999 == 0 && (player.skinTone == "tan" || player.skinTone == "olive" || player.skinTone || "light")) && changes < changeLimit) {
+			else if (9999 == 0 && InCollection(player.skinTone, tone) && changes < changeLimit) {
 				outputText("You feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing tribal tattoos adorns your " + player.skin() + ".  The glow gradually fades, but the distinctive ");
 				if (mystic) outputText("angular");
 				else outputText("curved");

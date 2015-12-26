@@ -36,7 +36,7 @@
 				trace("RAPHAEL MET: " + flags[kFLAGS.RAPHAEL_MET]);
 				trace("RAPHAEL DRESS TIMER: " + flags[kFLAGS.RAPHAEL_DRESS_TIMER]);
 				trace("RAPHAEL DISGUSTED: " + flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE]);*/
-				if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0) { //Countdown to finale not currently engaged!
+				if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] <= 0) { //Countdown to finale not currently engaged!
 					//If the PC meets his criteria!
 					if (RaphaelLikes()) { //Not yet met!  MEETING TIEM!
 						if (flags[kFLAGS.RAPHAEL_MET] == 0) {
@@ -51,7 +51,7 @@
 								return true;
 							}
 							//Dress followup - Call picnic date prologue!
-							if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4)) {
+							if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4 || flags[kFLAGS.RAPHAEL_DRESS_TIMER] == -1)) {
 								outputText("<b>\nSomething unusual happens that morning...</b>\n");
 								doNext(RaphaelEncounterIIDressFollowup);
 								return true;
