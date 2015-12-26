@@ -66,24 +66,26 @@ public function outputList():String {
  * Alters player's HP.
  * @param	changeNum The amount to damage (negative) or heal (positive).
  * @param	display Show the damage or heal taken.
+ * @return  effective delta
  */
-public function HPChange(changeNum:Number, display:Boolean):void
+public function HPChange(changeNum:Number, display:Boolean):Number
 {
-	if(changeNum == 0) return;
+	var before:Number = player.HP;
+	if(changeNum == 0) return 0;
 	if(changeNum > 0) {
 		//Increase by 20%!
 		if(player.findPerk(PerkLib.HistoryHealer) >= 0) changeNum *= 1.2;
 		if(player.HP + int(changeNum) > maxHP()) {
 			if(player.HP >= maxHP()) {
-				if(display) outputText("You're as healthy as you can be.\n", false);
-				return;
+			if (display) HPChangeNotify(changeNum);
+				return player.HP - before;
 			}
-			if(display) outputText("Your HP maxes out at " + maxHP() + ".\n", false);
+			if (display) HPChangeNotify(changeNum);
 			player.HP = maxHP();
 		}
 		else
 		{
-			if(display) outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n", false);
+			if (display) HPChangeNotify(changeNum);
 			player.HP += int(changeNum);
 			mainView.statsView.showStatUp( 'hp' );
 			// hpUp.visible = true;
@@ -93,18 +95,38 @@ public function HPChange(changeNum:Number, display:Boolean):void
 	else
 	{
 		if(player.HP + changeNum <= 0) {
-			if(display) outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage, dropping your HP to 0.\n", false);
+			if (display) HPChangeNotify(changeNum);
 			player.HP = 0;
 			mainView.statsView.showStatDown( 'hp' );
 		}
 		else {
-			if(display) outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage.\n", false);
+			if (display) HPChangeNotify(changeNum);
 			player.HP += changeNum;
 			mainView.statsView.showStatDown( 'hp' );
 		}
 	}
 	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow.
 	statScreenRefresh();
+	return player.HP - before;
+}
+
+public function HPChangeNotify(changeNum:Number):void {
+	if (changeNum == 0) {
+		if(player.HP >= maxHP())
+			outputText("You're as healthy as you can be.\n", false);
+	}
+	else if (changeNum > 0) {
+		if(player.HP >= maxHP())
+			outputText("Your HP maxes out at " + maxHP() + ".\n", false);
+		else
+			outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n", false);
+	}
+	else {
+		if(player.HP <= 0)
+			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage, dropping your HP to 0.\n", false);
+		else
+			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage.\n", false);
+	}
 }
 		
 public function clone(source:Object):* {
@@ -650,6 +672,9 @@ public function buildPerkList():Array {
 		}
 		if(player.inte >= 60) {
 			_add(new PerkClass(PerkLib.Medicine));
+		}
+		if(player.findPerk(PerkLib.Channeling) >= 0 && player.inte >= 60) {
+				_add(new PerkClass(PerkLib.StaffChanneling));
 		}
 	}
 	//Tier 2 Intelligence perks

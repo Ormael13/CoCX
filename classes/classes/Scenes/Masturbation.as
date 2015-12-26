@@ -2369,6 +2369,8 @@ package classes.Scenes {
 			
 			dynStats("lus", -50, "cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10) HPChange(50, true);
+			fatigue(-10);
+			
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		

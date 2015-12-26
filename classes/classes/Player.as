@@ -873,8 +873,10 @@ use namespace kGAMECLASS;
 			if (deerScore() >= 4)
 			{
 				if (isTaur()) race = "deer-taur";
-				race = "deer-morph";
-				if (faceType == 0) race = "deer-" + mf("morph", "girl");
+				else {
+					race = "deer-morph";
+					if (faceType == 0) race = "deer-" + mf("morph", "girl");
+				}
 			}
 			//Special, bizarre races
 			if (dragonneScore() >= 6)
@@ -2248,7 +2250,7 @@ use namespace kGAMECLASS;
 				//Balls
 				var tempSpeedPenalty:Number = 0;
 				var lim:int = isTaur() ? 9 : 4;
-				if (ballSize > lim) tempSpeedPenalty += Math.round((ballSize - lim) / 2);
+				if (ballSize > lim && balls > 0) tempSpeedPenalty += Math.round((ballSize - lim) / 2);
 				//Breasts
 				lim = isTaur() ? BREAST_CUP_I : BREAST_CUP_G;
 				if (hasBreasts() && biggestTitSize() > lim) tempSpeedPenalty += ((biggestTitSize() - lim) / 2);

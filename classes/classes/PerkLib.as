@@ -201,8 +201,8 @@ package classes
 				"Take 20% less physical damage but gain lust when you take damage.",
 				"You choose the 'Masochist' perk, reducing the damage you take but raising your lust each time!  This perk only functions while your libido is at or above 60!");
 		public static const Medicine:PerkType = mk("Medicine", "Medicine",
-				"Grants 15% chance per round of cleansing poisons/drugs from your body.",
-				"You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically!");
+				"Grants 15% chance per round of cleansing poisons/drugs from your body. Increases HP restoration on rest.",
+				"You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically! Also, increases HP restoration on rest.");
 		public static const Nymphomania:PerkType = mk("Nymphomania", "Nymphomania",
 				"Raises minimum lust by up to 30.",
 				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by as much as 30 (If you already have minimum lust, the increase is 10-15).");
@@ -265,6 +265,9 @@ package classes
 		public static const Survivalist2:PerkType = mk("Survivalist 2", "Survivalist 2",
 				"Slows hunger rate by further 20%.",
 				"You choose the 'Survivalist 2' perk.  With this perk, your hunger rate is reduced by another 20%.");
+		public static const StaffChanneling:PerkType = mk("Staff Channeling", "Staff Channeling",
+				"Basic attack with wizard's staff is replaced with ranged magic bolt.",
+				"You choose the 'Staff Channeling' perk. Basic attack with wizard's staff is replaced with ranged magic bolt.");
 		public static const StrongBack:PerkType = mk("Strong Back", "Strong Back",
 				"Enables fourth item slot.",
 				"You choose the 'Strong Back' perk, enabling a fourth item slot.");

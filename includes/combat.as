@@ -223,7 +223,15 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	menu();
 	var attacks:Function = normalAttack;
 	//Standard menu before modifications.
-  	addButton(0, "Attack", attacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
+	if(!isWieldingRangedWeapon())
+		addButton(0, "Attack", attacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
+	else if (player.weaponName.indexOf("staff") != -1)
+		addButton(0, "M.Bolt", attacks, null, null, null, "Attempt to attack the enemy with magic bolt from your " + player.weaponName + ".  Damage done is determined by your intellegence, speed and weapon.", "Magic Bolt");
+	else if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponName == "flintlock pistol")
+		addButton(0, "Reload", attacks, null, null, null, "Your " + player.weaponName + " is out of ammo.  You'll have to reload it before attack.");
+	else
+		addButton(0, "Shoot", attacks, null, null, null, "Fire a round at your opponent with your " + player.weaponName + "!  Damage done is determined by your strength, speed and weapon.");
+		
 	addButton(1, "Tease", teaseAttack, null, null, null, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
 	if (canUseMagic()) addButton(2, "Spells", magicMenu, null, null, null, "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.");
 	addButton(3, "Items", inventory.inventoryMenu, null, null, null, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
@@ -997,12 +1005,22 @@ public function attack():void {
 	//------------
 	//Determine damage
 	//BASIC DAMAGE STUFF
+	
 	//Double Attack Hybrid Reductions
-	if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && player.str > 61 + (player.newGamePlusMod() * 15) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
-		damage = 60.5 + (player.newGamePlusMod() * 15);
+	var getBase:Function = function(init:Number):Number {
+		if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && init > 61 + (player.newGamePlusMod() * 15) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
+			return 60.5 + (player.newGamePlusMod() * 15);
+		} else return init;
+	};
+	
+	// init value depending on weapon type
+	if (isWieldingRangedWeapon()) {
+		if (player.weaponName.indexOf("staff") != -1) damage = getBase.call(null, player.inte) + player.spe * 0.1;
+		else damage = getBase.call(null, player.str) + player.spe * 0.2; // woudn't be better to use speed as base and int as extra?
 	}
-	else damage = player.str;
-	if (isWieldingRangedWeapon()) damage += (player.spe / 5);
+	else
+		damage = getBase.call(null, player.str);
+		
 	if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage += (player.str * 0.2);
 	//Weapon addition!
 	damage += player.weaponAttack;
@@ -1502,7 +1520,7 @@ public function combatBlock(doFatigue:Boolean = false):Boolean {
 	else return false;
 }
 public function isWieldingRangedWeapon():Boolean {
-	if (player.weaponName == "flintlock pistol" || player.weaponName == "crossbow" || player.weaponName == "blunderbuss rifle") return true;
+	if (player.weaponName == "flintlock pistol" || player.weaponName == "crossbow" || player.weaponName == "blunderbuss rifle" || player.weaponName.indexOf("staff") != -1 && player.findPerk(PerkLib.StaffChanneling) >= 0) return true;
 	else return false;
 }
 

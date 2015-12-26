@@ -335,7 +335,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 	//Sequence: When PC wakes up the next day.})
 	flags[kFLAGS.RAPHAEL_SECOND_DATE] = 1;
 	//Clear dress countdown.  Its over and done with.
-	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 7;
+	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	clearOutput();
 	
 	outputText("You awake to the soft patter of footsteps moving away from you. For a second you think nothing of it, but soon awake to the realization you might have been robbed again. When you sit up and notice a weight off your chest, you realize someone has made off with the priceless ruby pendant Raphael gifted you earlier. They swiped it straight off your neck!\n\n", false);

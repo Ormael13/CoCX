@@ -1060,7 +1060,7 @@ package classes.Scenes.NPCs
 		{
 			//Checks for special scenes go here!
 			//If the PC fulfills one of the requirements for the Special Scenes, they occur the moment the player picks the talk option.
-			if (player.isPregnant()) { //Extra check might protect against inappropriate Ember complaints
+			if (player.isPregnant() && emberHasCock()) { //Extra check might protect against inappropriate Ember complaints
 				if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
 					emberBitchesAboutPCBeingFullOfEggs();
 					doNext(camp.returnToCampUseOneHour);
