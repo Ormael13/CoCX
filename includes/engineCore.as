@@ -66,24 +66,26 @@ public function outputList():String {
  * Alters player's HP.
  * @param	changeNum The amount to damage (negative) or heal (positive).
  * @param	display Show the damage or heal taken.
+ * @return  effective delta
  */
-public function HPChange(changeNum:Number, display:Boolean):void
+public function HPChange(changeNum:Number, display:Boolean):Number
 {
-	if(changeNum == 0) return;
+	var before:Number = player.HP;
+	if(changeNum == 0) return 0;
 	if(changeNum > 0) {
 		//Increase by 20%!
 		if(player.findPerk(PerkLib.HistoryHealer) >= 0) changeNum *= 1.2;
 		if(player.HP + int(changeNum) > maxHP()) {
 			if(player.HP >= maxHP()) {
-				if(display) outputText("You're as healthy as you can be.\n", false);
-				return;
+			if (display) HPChangeNotify(changeNum);
+				return player.HP - before;
 			}
-			if(display) outputText("Your HP maxes out at " + maxHP() + ".\n", false);
+			if (display) HPChangeNotify(changeNum);
 			player.HP = maxHP();
 		}
 		else
 		{
-			if(display) outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n", false);
+			if (display) HPChangeNotify(changeNum);
 			player.HP += int(changeNum);
 			mainView.statsView.showStatUp( 'hp' );
 			// hpUp.visible = true;
@@ -93,18 +95,38 @@ public function HPChange(changeNum:Number, display:Boolean):void
 	else
 	{
 		if(player.HP + changeNum <= 0) {
-			if(display) outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage, dropping your HP to 0.\n", false);
+			if (display) HPChangeNotify(changeNum);
 			player.HP = 0;
 			mainView.statsView.showStatDown( 'hp' );
 		}
 		else {
-			if(display) outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage.\n", false);
+			if (display) HPChangeNotify(changeNum);
 			player.HP += changeNum;
 			mainView.statsView.showStatDown( 'hp' );
 		}
 	}
 	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow.
 	statScreenRefresh();
+	return player.HP - before;
+}
+
+public function HPChangeNotify(changeNum:Number):void {
+	if (changeNum == 0) {
+		if(player.HP >= maxHP())
+			outputText("You're as healthy as you can be.\n", false);
+	}
+	else if (changeNum > 0) {
+		if(player.HP >= maxHP())
+			outputText("Your HP maxes out at " + maxHP() + ".\n", false);
+		else
+			outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n", false);
+	}
+	else {
+		if(player.HP <= 0)
+			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage, dropping your HP to 0.\n", false);
+		else
+			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage.\n", false);
+	}
 }
 		
 public function clone(source:Object):* {
@@ -651,6 +673,9 @@ public function buildPerkList():Array {
 		if(player.inte >= 60) {
 			_add(new PerkClass(PerkLib.Medicine));
 		}
+		if(player.findPerk(PerkLib.Channeling) >= 0 && player.inte >= 60) {
+				_add(new PerkClass(PerkLib.StaffChanneling));
+		}
 	}
 	//Tier 2 Intelligence perks
 	if(player.level >= 12) {
@@ -1124,9 +1149,40 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 
 	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
 	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
+	mainView.bottomButtons[pos].alpha = 1; // failsafe to avoid possible problems with dirty hack
 	mainView.showBottomButton(pos, text, callback, toolTipText, toolTipHeader);
 	//mainView.setOutputText( currentText );
 	flushOutputTextToGUI();
+}
+
+public function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void {
+	//Removes sex-related button in SFW mode.
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
+			trace("Button removed due to SFW mode.");
+			return;
+		}
+	}
+
+	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
+	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
+	showBottomButtonDisabled(pos, text, toolTipText, toolTipHeader);
+	flushOutputTextToGUI();
+}
+		
+/** 
+ * Dirty hack, actually.
+ */
+private function showBottomButtonDisabled(index:int, label:String, toolTipViewText:String = '', toolTipViewHeader:String = ''):void {
+	var button:CoCButton = mainView.bottomButtons[index] as CoCButton;
+	if(! button) return;
+	button.labelText = label;
+	button.callback = null;
+	button.enabled = false;
+	button.toolTipHeader = toolTipViewHeader;
+	button.toolTipText = toolTipViewText;
+	button.alpha = 0.5;
+	button.visible = true;
 }
 
 public function setButtonTooltip(index:int, toolTipHeader:String = "", toolTipText:String = ""):void {
@@ -1164,21 +1220,10 @@ public function addLockedButton(pos:int, toolTipText:String = ""):void {
  * Hides all bottom buttons.
  */
 public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
-	mainView.hideBottomButton(0);
-	mainView.hideBottomButton(1);
-	mainView.hideBottomButton(2);
-	mainView.hideBottomButton(3);
-	mainView.hideBottomButton(4);
-	mainView.hideBottomButton(5);
-	mainView.hideBottomButton(6);
-	mainView.hideBottomButton(7);
-	mainView.hideBottomButton(8);
-	mainView.hideBottomButton(9);
-	mainView.hideBottomButton(10);
-	mainView.hideBottomButton(11);
-	mainView.hideBottomButton(12);
-	mainView.hideBottomButton(13);
-	mainView.hideBottomButton(14);
+	for (var i:int = 0; i <= 14; i++) {
+		mainView.hideBottomButton(i);
+		mainView.bottomButtons[i].alpha = 1; // Dirty hack.
+	}
 	flushOutputTextToGUI();
 }
 

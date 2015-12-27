@@ -79,17 +79,48 @@ package classes.internals
 		// This lets you pre-construct the argument, to make things cleaner
 		public static function randomChoice(...args):*
 		{
-			var choice:Number;
-			if ((args.length == 1) && (args[0] is Array))
+			var tar:Array;
+			
+			if (args.length == 1 && args[0] is Array) tar = args[0];
+			else if (args.length > 1) tar = args;
+			else throw new Error("RandomInCollection could not determine usage pattern.");
+			
+			return tar[rand(tar.length)];
+		}
+		
+		/**
+		 * Utility function to search for a specific value within a target array or collection of values.
+		 * Collection can be supplied either as an existing array or as varargs:
+		 * ex: 	InCollection(myValue, myArray)
+		 * 		InCollection(myValue, myPossibleValue1, myPossibleValue2, myPossibleValue3)
+		 * @param	tar			Target value to search for
+		 * @param	... args	Collection to look in
+		 * @return				Boolean true/false if found/not found.
+		 */
+		public function InCollection(tar:*, ... args):Boolean
+		{
+			if (args.length == 0) return false;
+			
+			var collection:*;
+			
+			for (var ii:int = 0; ii < args.length; ii++)
 			{
-				choice = int(Math.round(Math.random() * (args[0].length - 1)));
-				return args[0][choice];
+				collection = args[ii];
+				
+				if (!(collection is Array))
+				{
+					if (tar == collection) return true;
+				}
+				else
+				{
+					for (var i:int = 0; i < collection.length; i++)
+					{
+						if (tar == collection[i]) return true;
+					}
+				}
 			}
-			else
-			{
-				choice = int(Math.round(Math.random() * (args.length - 1)));
-				return args[choice];
-			}
+			
+			return false;
 		}
 		
 		public static function rand(max:Number):Number

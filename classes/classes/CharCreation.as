@@ -2952,12 +2952,12 @@
 			player.vaginas[0].vaginalLooseness = 0;
 			player.vaginas[0].vaginalWetness = 2; // wet
 			player.vaginas[0].virgin = 0;			
-			player.createStatusAffect(StatusAffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait			
-			player.clitLength = 1;
+			player.createStatusAffect(StatusAffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
+			player.clitLength = 0.3;
 			player.fertility = 5;
 			
 			if (player.bRows() == 0) player.createBreastRow();			
-			player.breastRows[0].breastRating = 2; // b-cup, 'cause huge boobs wouldn't fit your small frame... in fact, you almost considered to have flats
+			player.breastRows[0].breastRating = 1; // a-cup, 'cause huge boobs wouldn't fit your small frame... in fact, you almost considered to have flats
 			player.breastRows[0].fuckable = true; // some people have hammerspace to store gear when they don't need it, and you are jealous. from other side, you have cockspace to store cocks when you need them!
 			
 			player.ballSize = 0;
@@ -2971,7 +2971,6 @@
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // as most kitsune you love tentackles
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // and while they aren't really fitting your body...
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // do anyone really need a reason to have TENTACLES?
-			player.createCock(6, 1.2, CockTypesEnum.DRAGON); // to fit dragon score requirement for dragon stats... either this or dragon legs or scales :( sometimes even genius have to accept compromise
 			player.genderCheck();
 			
 			player.tallness = 48; // 120 cm
@@ -3105,7 +3104,7 @@
 			row++;
 			}while(row < 4 && rand(2) == 0 && player.breastRows[0].breastRating > 1); // if last row was flat do not add more
 						
-			var tent:Boolean = rand(20) == 0; // 20% chance to have tentacle cluster
+			var tent:Boolean = rand(5) == 0; // 20% chance to have tentacle cluster
 			var cocks:Number = rand(5)+(tent ? 4 : 2); // 2-6 mixed cocks
 			var i:int; 
 			for (i = 0; i < cocks; i++) 
@@ -3113,7 +3112,7 @@
 				player.createCock();
 				player.cocks[i].cockLength = Math.round((rand(220)/10+3)*10)/10; // 3-25 inches
 				player.cocks[i].cockThickness = Math.round((rand(player.cocks[i].cockLength)/10+1)*10)/10;
-				var type:Number = rand(85);			
+				var type:Number = rand(90);			
 				if (tent)
 					player.cocks[i].cockType = CockTypesEnum.TENTACLE;
 				else if(type < 25) // high chance
@@ -3122,7 +3121,7 @@
 					player.cocks[i].cockType = CockTypesEnum.HORSE;
 				else if(type < 40)
 				{
-					player.cocks[i].cockType = CockTypesEnum.DOG; // above average chance, since it is fox one as well
+					player.cocks[i].cockType = CockTypesEnum.DOG; // double chance, since it is fox one as well
 					player.cocks[i].knotMultiplier = 1.4;
 				}
 				else if(type < 45)
@@ -3130,7 +3129,7 @@
 				else if(type < 50)
 					player.cocks[i].cockType = CockTypesEnum.CAT;
 				else if(type < 60)
-					player.cocks[i].cockType = CockTypesEnum.TENTACLE; // above average chance, for no reason
+					player.cocks[i].cockType = CockTypesEnum.TENTACLE; // double chance, for no reason
 				else if(type < 65)
 					player.cocks[i].cockType = CockTypesEnum.LIZARD;
 				else if(type < 70)
@@ -3142,8 +3141,16 @@
 					player.cocks[i].cockType = CockTypesEnum.DRAGON;
 					player.cocks[i].knotMultiplier = 1.3;
 				}
+				else if(type < 85)
+				{
+					player.cocks[i].cockType = CockTypesEnum.DISPLACER;
+					player.cocks[i].knotMultiplier = 1.5;
+				}
 				else
 					player.cocks[i].cockType = CockTypesEnum.PIG;				
+					
+				if (player.cocks[i].knotMultiplier == 1 && rand(5) == 0)
+					player.cocks[i].knotMultiplier = 1.2 + rand(9) / 10.;
 			}
 			
 			
@@ -3161,7 +3168,7 @@
 			player.gender = GENDER_HERM;
 			
 			// lean build
-			player.tallness = 55+rand(35); // 145-230 cm
+			player.tallness = 47+rand(43); // 118-230 cm
 			player.hipRating = HIP_RATING_BOYISH;
 			player.buttRating = BUTT_RATING_TIGHT;
 			player.thickness = rand(10)+10; // lithe
@@ -3219,7 +3226,19 @@
 			if(rand(2) != 0) // 50% to have human lower body
 				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
 			else // totally random one
-				player.faceType = rand(21)+1; // since it is not a enum, it is impossible to make it auto-ajust...
+			{
+				player.lowerBody = rand(21) + 1; // since it is not a enum, it is impossible to make it auto-ajust...
+				if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
+					player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+					player.legCount = 4;
+				}
+				else if (player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY)
+					player.legCount = 8;
+				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA || player.lowerBody == LOWER_BODY_TYPE_GOO)	
+					player.legCount = 1;
+				else if (rand(15) == 0)
+					player.legCount = 4;
+			}
 			
 			player.tailType = rand(21); // always have totally random tail
 			if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN)
@@ -3230,15 +3249,11 @@
 					player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0); // spider abdomen have chance 50/50 to have ovipositor
 			}
 			
-			var tongue:Number = rand(100); // 70% normal tongue, 30% to non-human with even chances of every one
-			if(tongue<70)
+			// 70% normal tongue, 30% to non-human with even chances of every one
+			if(rand(100)<70)
 				player.tongueType = TONUGE_HUMAN;
-			else if(tongue<80)
-				player.tongueType = TONUGE_DEMONIC;
-			else if(tongue<90)
-				player.tongueType = TONUGE_DRACONIC;
 			else
-				player.tongueType = TONUGE_SNAKE;
+				player.tongueType = randomChoice(TONUGE_DEMONIC, TONUGE_DRACONIC, TONUGE_SNAKE);
 			
 			
 			var horns:Number = rand(100); // 70% no horns, 30% to random
@@ -3279,18 +3294,9 @@
 				player.armType = ARM_TYPE_HUMAN;
 			
 			
-			var hair:Number = rand(100); // 90% to have normal hair, even chances to have feathers, anemone or goo otherwise
-			if(hair<90)
-				player.hairType = HAIR_NORMAL;
-			else {
-				hair = rand(3);
-				if(hair == 0)
-					player.hairType = HAIR_FEATHER;
-				else if(hair == 1)
-					player.hairType = HAIR_GOO;
-				else if(hair == 2)
-					player.hairType = HAIR_ANEMONE;					
-			}
+			// 90% to have normal hair, even chances to have feathers, anemone or goo otherwise
+			if(rand(100) < 90)	player.hairType = HAIR_NORMAL;
+			else player.hairType = randomChoice(HAIR_FEATHER, HAIR_GOO, HAIR_ANEMONE);
 			
 			// wizard staff and modest robes
 			player.setWeapon(weapons.W_STAFF);
@@ -3392,6 +3398,7 @@
 		}
 
 		private function startTheGame():void {
+			player.startingRace = player.race();
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.")
 				getGame().saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])

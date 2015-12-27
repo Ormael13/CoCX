@@ -4709,7 +4709,7 @@ private function katDoubleHelixCraziness():void {
 	outputText("You simply lie back and enjoy her attentions; while pleasurable, they aren't as sexual as her previous efforts, and you find the experience more soothing than arousing. It takes a while, but finally with one last lick on ");
 	if(player.isNaga() || player.tailType == TAIL_TYPE_DEMONIC) outputText("the tip of your tail");
 	else outputText("your " + buttDescript());
-	outputText(", she finishes.  Katherine grins and happily declares, “<i>There you go, you're clean now!" + (hasAlready(KBIT_TRIED_DOUBLE_HELIX) ? "" : "Sorry for breaking my promise and knotting you.") + "</i>”\n\n");
+	outputText(", she finishes.  Katherine grins and happily declares, “<i>There you go, you're clean now!" + (hasAlready(KBIT_TRIED_DOUBLE_HELIX) ? "" : " Sorry for breaking my promise and knotting you.") + "</i>”\n\n");
 
 	outputText("Sitting up, you can't resist reaching over and ruffling her ears in a way that the cats you've met always liked, telling her that if this is how she'll apologize for " + (hasAlready(KBIT_TRIED_DOUBLE_HELIX) ? "knotting you, you don't mind her doing so again and again" : "it, you don't mind her doing so again") + ".\n\n");
 

@@ -2307,7 +2307,11 @@ package classes.Scenes.Areas.Forest
 			}
 		}
 
-//[Meditate]
+		public static var basicKitsuneHair:Array = ["white", "black", "black", "black", "red", "red", "red"];
+		public static var basicKitsuneFur:Array = ["orange and white", "black", "black and white", "red", "red and white", "white"];
+		public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
+		
+		//[Meditate]
 		private function meditateLikeAKitsuneEhQuestionMark():void
 		{
 			clearOutput();
@@ -2324,11 +2328,35 @@ package classes.Scenes.Areas.Forest
 					outputText("As the mystical flames wash over you, your mind is assaulted by a maelstrom of otherworldly knowledge and power.  For a moment it feels as though your mind will be torn asunder, but you are ready.  Your travels and meditations have prepared you well, and you open your mind to accept enlightenment.\n\n");
 					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  Untold cosmic power radiates from your very being!  Use it wisely...</b>");
 
-					outputText("\n\nYou pause for a moment to reflect on your newfound wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 					//Increment tail by 1, consume Fox Jewel, -2 COR, -20 LUST, +2 INT, Advance 1 hr and return to camp.
 					//Apply Nine-Tails perk if applicable.
 					player.tailVenom = 9;
 					player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
+					
+					// Nine tail kitsunes have their fur/hair color golden, silver or pure white
+					if (!InCollection(player.hairColor, elderKitsuneColors)) // wrong hair color
+						if (player.skinType == SKIN_TYPE_FUR && InCollection(player.furColor, elderKitsuneColors)) { // right fur color
+							player.hairColor = player.furColor;
+							if(player.hairLength > 0) outputText("\n\nNow you have " + player.hairColor + " hair matching your fur, like true kitsune elder. You look really regal!");
+						}
+						else if (player.skinType == SKIN_TYPE_FUR) { // wrong fur color
+							player.hairColor = randomChoice(elderKitsuneColors);
+							player.furColor = player.hairColor;
+							if (player.hairLength > 0) outputText("\n\Now you have " + player.hairColor + " fur and hair, like true kitsune elder. You look really regal!");
+							else outputText("\n\Now you have " + player.furColor + " fur, like true kitsune elder. You look really regal!");
+						}
+						else { // no fur
+							player.hairColor = randomChoice(elderKitsuneColors);
+							player.furColor = player.hairColor;
+							if (player.hairLength > 0) outputText("\n\Now you have " + player.hairColor + " hair, like true kitsune elder.");
+						}
+					else // right hair color
+						if (player.skinType == SKIN_TYPE_FUR && !InCollection(player.furColor, elderKitsuneColors)) { // wrong fur color
+							player.furColor = player.hairColor;
+							outputText("\n\Now you have " + player.furColor + " fur matching your hair, like true kitsune elder. You look really regal!");
+						}
+					
+					outputText("\n\nYou pause for a moment to reflect on your newfound wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 					dynStats("int", 2, "lus", -20, "cor", -2);
 				}
 				player.consumeItem(consumables.FOXJEWL);

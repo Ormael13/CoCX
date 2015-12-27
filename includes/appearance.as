@@ -54,7 +54,7 @@
 	//Discuss race
 	clearOutput();
 	displayHeader("Appearance");
-	if(race != "human")	outputText("You began your journey as a human, but gave that up as you explored the dangers of this realm.  ", false);
+	if(race != player.startingRace)	outputText("You began your journey as a " + player.startingRace+ ", but gave that up as you explored the dangers of this realm.  ", false);
 	//Height and race.
 	if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + Math.round(100 * (player.tallness * 2.54) / 100) + " centimetre tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 	else outputText("You are a " + Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
@@ -1172,15 +1172,6 @@
 					outputText("dog's cock.");
 				else
 					outputText("fox's cock.");
-
-				if(player.cocks[temp].knotMultiplier >= 1.8) 
-					outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost comically mismatched for your " + player.cockDescript(temp) + ".", false);
-				else if(player.cocks[temp].knotMultiplier >= 1.4) 
-					outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
-				else if(player.cocks[temp].knotMultiplier > 1) 
-					outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge your " + player.cockDescript(temp) + " inside a female.", false);
-				//List knot thickness
-				outputText("  The knot is " + Math.floor(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10)/10 + " inches thick when at full size.", false);
 			}
 			//Demon cock flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.DEMON) 
@@ -1229,6 +1220,18 @@
 			if (player.cocks[temp].cockType == CockTypesEnum.AVIAN) {
 				outputText("  It's a red, tapered cock that ends in a tip.  It rests nicely in a sheath.");
 			}
+
+			if(player.cocks[temp].knotMultiplier > 1) {
+				if(player.cocks[temp].knotMultiplier >= 1.8) 
+					outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost comically mismatched for your " + player.cockDescript(temp) + ".", false);
+				else if(player.cocks[temp].knotMultiplier >= 1.4) 
+					outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
+				else
+					outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge your " + player.cockDescript(temp) + " inside a female.", false);
+				//List knot thickness
+				outputText("  The knot is " + Math.floor(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10) / 10 + " inches thick when at full size.", false);
+			}
+				
 			if(player.cocks[temp].sock != "" && player.cocks[temp].sock != null)	// I dunno what was happening, but it looks like .sock is null, as it doesn't exist. I guess this is probably more left over from some of the restucturing.
 			{																		// Anyways, check against null values, and stuff works again.
 				trace("Found a sock description (WTF even is a sock?)", player.cocks[temp].sock);

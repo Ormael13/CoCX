@@ -23,16 +23,28 @@ package classes.Items.Consumables
 		}
 		
 		override public function useItem():Boolean {
-			if (game.player.skinType == 1) { //Furry? You get to dye your hair or fur!
-				clearOutput();
-				game.menu();
-				game.addButton(0, "Hair", dyeHair);
-				game.addButton(1, "Fur", dyeFur);
-				game.addButton(4, "Nevermind", dyeCancel);
+			clearOutput();
+			game.menu();
+			 
+			if (game.player.hairLength > 0) {
+				outputText("You have " + game.player.hairColor + " hair.");
+				if (game.player.hairColor != _color) game.addButton(0, "Hair", dyeHair);
+				else game.addButtonDisabled(0, "Hair", "Your already have " + game.player.hairColor + " hair!");
+			} else {
+				outputText("You have no hair.");
+				game.addButtonDisabled(0, "Hair", "You are bald!");
 			}
-			else { //No fur? Dye hair as usual.
-				dyeHair();
+			
+			if (game.player.skinType == 1) {
+				outputText("\n\nYou have " + game.player.furColor + " fur.");
+				if (game.player.furColor != _color) game.addButton(1, "Fur", dyeFur);
+				else game.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");
+			} else {
+				outputText("\n\nYou have no fur.");
+				game.addButtonDisabled(1, "Fur", "You have no fur!");
 			}
+			
+			game.addButton(4, "Nevermind", dyeCancel);
 			return true;
 		}
 		

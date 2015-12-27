@@ -36,7 +36,7 @@
 				trace("RAPHAEL MET: " + flags[kFLAGS.RAPHAEL_MET]);
 				trace("RAPHAEL DRESS TIMER: " + flags[kFLAGS.RAPHAEL_DRESS_TIMER]);
 				trace("RAPHAEL DISGUSTED: " + flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE]);*/
-				if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0) { //Countdown to finale not currently engaged!
+				if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] <= 0) { //Countdown to finale not currently engaged!
 					//If the PC meets his criteria!
 					if (RaphaelLikes()) { //Not yet met!  MEETING TIEM!
 						if (flags[kFLAGS.RAPHAEL_MET] == 0) {
@@ -51,7 +51,7 @@
 								return true;
 							}
 							//Dress followup - Call picnic date prologue!
-							if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4)) {
+							if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4 || flags[kFLAGS.RAPHAEL_DRESS_TIMER] == -1)) {
 								outputText("<b>\nSomething unusual happens that morning...</b>\n");
 								doNext(RaphaelEncounterIIDressFollowup);
 								return true;
@@ -335,7 +335,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 	//Sequence: When PC wakes up the next day.})
 	flags[kFLAGS.RAPHAEL_SECOND_DATE] = 1;
 	//Clear dress countdown.  Its over and done with.
-	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 7;
+	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	clearOutput();
 	
 	outputText("You awake to the soft patter of footsteps moving away from you. For a second you think nothing of it, but soon awake to the realization you might have been robbed again. When you sit up and notice a weight off your chest, you realize someone has made off with the priceless ruby pendant Raphael gifted you earlier. They swiped it straight off your neck!\n\n", false);

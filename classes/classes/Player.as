@@ -12,7 +12,9 @@ import classes.Items.JewelryLib;
 import classes.Items.Shield;
 import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib;
+import classes.Items.UndergarmentLib
+import classes.Scenes.Areas.Forest;
+import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
 
 use namespace kGAMECLASS;
@@ -42,6 +44,8 @@ use namespace kGAMECLASS;
 		{
 			game.outputText(text, clear);
 		}
+		
+		public var startingRace:String = "human";
 		
 		//Autosave
 		public var slotName:String = "VOID";
@@ -873,8 +877,10 @@ use namespace kGAMECLASS;
 			if (deerScore() >= 4)
 			{
 				if (isTaur()) race = "deer-taur";
-				race = "deer-morph";
-				if (faceType == 0) race = "deer-" + mf("morph", "girl");
+				else {
+					race = "deer-morph";
+					if (faceType == 0) race = "deer-" + mf("morph", "girl");
+				}
 			}
 			//Special, bizarre races
 			if (dragonneScore() >= 6)
@@ -1268,13 +1274,13 @@ use namespace kGAMECLASS;
 		{
 			var kitsuneCounter:int = 0;
 			//If the character has fox ears, +1
-			if (earType == 9)
+			if (earType == EARS_FOX)
 				kitsuneCounter++;
 			//If the character has a fox tail, +1
-			if (tailType == 13)
+			if (tailType == TAIL_TYPE_FOX)
 				kitsuneCounter++;
 			//If the character has two or more fox tails, +2
-			if (tailType == 13 && tailVenom >= 2)
+			if (tailType == TAIL_TYPE_FOX && tailVenom >= 2)
 				kitsuneCounter += 2;
 			//If the character has tattooed skin, +1
 			//9999
@@ -1283,31 +1289,31 @@ use namespace kGAMECLASS;
 				kitsuneCounter++;
 			//If the character's kitsune score is greater than 0 and:
 			//If the character has a normal face, +1
-			if (kitsuneCounter > 0 && faceType == 0)
+			if (kitsuneCounter > 0 && (faceType == FACE_HUMAN || faceType == FACE_FOX))
 				kitsuneCounter++;
 			//If the character's kitsune score is greater than 1 and:
 			//If the character has "blonde","black","red","white", or "silver" hair, +1
-			if (kitsuneCounter > 0 && (hairColor == "golden blonde" || hairColor == "black" || hairColor == "red" || hairColor == "white" || hairColor == "silver blonde"))
+			if (kitsuneCounter > 0 && (InCollection(furColor, KitsuneScene.basicKitsuneHair) || InCollection(furColor, KitsuneScene.elderKitsuneColors)))
 				kitsuneCounter++;
 			//If the character's femininity is 40 or higher, +1
 			if (kitsuneCounter > 0 && femininity >= 40)
 				kitsuneCounter++;
 			//If the character has fur, scales, or gooey skin, -1
-			if (skinType > 1)
-				kitsuneCounter -= 2;
-			if (skinType == 1)
+			if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
 				kitsuneCounter--;
+			if (skinType > SKIN_TYPE_FUR)
+				kitsuneCounter -= skinType; // -2 sor scales, -3 for goo
 			//If the character has abnormal legs, -1
-			if (lowerBody != 0)
+			if (lowerBody != LOWER_BODY_TYPE_HUMAN && lowerBody != LOWER_BODY_TYPE_FOX)
 				kitsuneCounter--;
 			//If the character has a nonhuman face, -1
-			if (faceType != 0)
+			if (faceType != FACE_HUMAN && faceType != FACE_FOX)
 				kitsuneCounter--;
 			//If the character has ears other than fox ears, -1
-			if (earType != 9)
+			if (earType != EARS_FOX)
 				kitsuneCounter--;
 			//If the character has tail(s) other than fox tails, -1
-			if (tailType != 13)
+			if (tailType != TAIL_TYPE_FOX)
 				kitsuneCounter--;
 
 			return kitsuneCounter;
@@ -2248,7 +2254,7 @@ use namespace kGAMECLASS;
 				//Balls
 				var tempSpeedPenalty:Number = 0;
 				var lim:int = isTaur() ? 9 : 4;
-				if (ballSize > lim) tempSpeedPenalty += Math.round((ballSize - lim) / 2);
+				if (ballSize > lim && balls > 0) tempSpeedPenalty += Math.round((ballSize - lim) / 2);
 				//Breasts
 				lim = isTaur() ? BREAST_CUP_I : BREAST_CUP_G;
 				if (hasBreasts() && biggestTitSize() > lim) tempSpeedPenalty += ((biggestTitSize() - lim) / 2);

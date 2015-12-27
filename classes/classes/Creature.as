@@ -2090,15 +2090,17 @@ package classes
 			//if (femWeight()) return female;
 			//else return male;
 			//Dicks?
-			if (totalCocks() > 0)
+			if (hasCock())
 			{
 				if (hasVagina()) // herm
 				{
 					if (biggestTitSize() >= 2) return female;
-					else if (biggestTitSize() == 1) return kGAMECLASS.player.femininity > 50 ? female : male;
-					else return kGAMECLASS.player.femininity > 75 ? female : male;
+					else if (biggestTitSize() == 1) return kGAMECLASS.player.femininity >= 50 ? female : male;
+					else return kGAMECLASS.player.femininity >= 75 ? female : male;
 				}
-				else return male;
+				else
+					if (biggestTitSize() >= 1 && kGAMECLASS.player.femininity > 55 || kGAMECLASS.player.femininity >= 75) return female; // d-girl
+					else return male;
 			}
 			else
 			{
@@ -2107,7 +2109,7 @@ package classes
 					else return female;
 				else // genderless
 				{
-					if (biggestTitSize() >= 3 || kGAMECLASS.player.femininity > 75)
+					if (biggestTitSize() >= 3 || kGAMECLASS.player.femininity >= 75)
 						return female;
 					else
 						return male;
@@ -3645,7 +3647,7 @@ package classes
 			}
 			//Modify armor rating based on weapons.
 			if (applyModifiers) {
-				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR) armorMod = 0;
+				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR || game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0) armorMod = 0;
 				if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
 				if (game.player.findPerk(PerkLib.LungingAttacks) >= 0) armorMod /= 2;
 				if (armorMod < 0) armorMod = 0;
