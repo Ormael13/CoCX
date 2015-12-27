@@ -1274,13 +1274,13 @@ use namespace kGAMECLASS;
 		{
 			var kitsuneCounter:int = 0;
 			//If the character has fox ears, +1
-			if (earType == 9)
+			if (earType == EARS_FOX)
 				kitsuneCounter++;
 			//If the character has a fox tail, +1
-			if (tailType == 13)
+			if (tailType == TAIL_TYPE_FOX)
 				kitsuneCounter++;
 			//If the character has two or more fox tails, +2
-			if (tailType == 13 && tailVenom >= 2)
+			if (tailType == TAIL_TYPE_FOX && tailVenom >= 2)
 				kitsuneCounter += 2;
 			//If the character has tattooed skin, +1
 			//9999
@@ -1289,11 +1289,11 @@ use namespace kGAMECLASS;
 				kitsuneCounter++;
 			//If the character's kitsune score is greater than 0 and:
 			//If the character has a normal face, +1
-			if (kitsuneCounter > 0 && faceType == 0)
+			if (kitsuneCounter > 0 && (faceType == FACE_HUMAN || faceType == FACE_FOX))
 				kitsuneCounter++;
 			//If the character's kitsune score is greater than 1 and:
 			//If the character has "blonde","black","red","white", or "silver" hair, +1
-			if (kitsuneCounter > 0 && !InCollection(furColor, KitsuneScene.basicKitsuneHair) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
+			if (kitsuneCounter > 0 && (InCollection(furColor, KitsuneScene.basicKitsuneHair) || InCollection(furColor, KitsuneScene.elderKitsuneColors)))
 				kitsuneCounter++;
 			//If the character's femininity is 40 or higher, +1
 			if (kitsuneCounter > 0 && femininity >= 40)
@@ -1304,16 +1304,16 @@ use namespace kGAMECLASS;
 			if (skinType > SKIN_TYPE_FUR)
 				kitsuneCounter -= skinType; // -2 sor scales, -3 for goo
 			//If the character has abnormal legs, -1
-			if (lowerBody != 0)
+			if (lowerBody != LOWER_BODY_TYPE_HUMAN && lowerBody != LOWER_BODY_TYPE_FOX)
 				kitsuneCounter--;
 			//If the character has a nonhuman face, -1
-			if (faceType != 0)
+			if (faceType != FACE_HUMAN && faceType != FACE_FOX)
 				kitsuneCounter--;
 			//If the character has ears other than fox ears, -1
-			if (earType != 9)
+			if (earType != EARS_FOX)
 				kitsuneCounter--;
 			//If the character has tail(s) other than fox tails, -1
-			if (tailType != 13)
+			if (tailType != TAIL_TYPE_FOX)
 				kitsuneCounter--;
 
 			return kitsuneCounter;
