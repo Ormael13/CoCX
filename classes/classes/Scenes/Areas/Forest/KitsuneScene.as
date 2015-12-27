@@ -2341,18 +2341,18 @@ package classes.Scenes.Areas.Forest
 						}
 						else if (player.skinType == SKIN_TYPE_FUR) { // wrong fur color
 							player.hairColor = randomChoice(elderKitsuneColors);
-							player.furColor == player.hairColor;
+							player.furColor = player.hairColor;
 							if (player.hairLength > 0) outputText("\n\Now you have " + player.hairColor + " fur and hair, like true kitsune elder. You look really regal!");
 							else outputText("\n\Now you have " + player.furColor + " fur, like true kitsune elder. You look really regal!");
 						}
 						else { // no fur
 							player.hairColor = randomChoice(elderKitsuneColors);
-							player.furColor == player.hairColor;
+							player.furColor = player.hairColor;
 							if (player.hairLength > 0) outputText("\n\Now you have " + player.hairColor + " hair, like true kitsune elder.");
 						}
 					else // right hair color
 						if (player.skinType == SKIN_TYPE_FUR && !InCollection(player.furColor, elderKitsuneColors)) { // wrong fur color
-							player.furColor == player.hairColor;
+							player.furColor = player.hairColor;
 							outputText("\n\Now you have " + player.furColor + " fur matching your hair, like true kitsune elder. You look really regal!");
 						}
 					
