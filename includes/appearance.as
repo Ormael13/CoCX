@@ -54,7 +54,7 @@
 	//Discuss race
 	clearOutput();
 	displayHeader("Appearance");
-	if(race != "human")	outputText("You began your journey as a human, but gave that up as you explored the dangers of this realm.  ", false);
+	if(race != player.startingRace)	outputText("You began your journey as a " + player.startingRace+ ", but gave that up as you explored the dangers of this realm.  ", false);
 	//Height and race.
 	if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + Math.round(100 * (player.tallness * 2.54) / 100) + " centimetre tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 	else outputText("You are a " + Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
@@ -474,10 +474,17 @@
 		outputText("  Shining black exoskeleton  covers your arms from the biceps down, resembling a pair of long black gloves from a distance.", false);	
 	//Done with head bits. Move on to body stuff
 	//Horse lowerbody, other lowerbody texts appear lower
-	if(player.lowerBody == LOWER_BODY_TYPE_PONY) 
-		outputText("  From the waist down you have an incredibly cute and cartoonish parody of a horse's body, with all four legs ending in flat, rounded feet.", false);
-	else if(player.isTaur()) 
-		outputText("  From the waist down you have the body of a horse, with all four legs capped by hooves.", false);
+	else if (player.isTaur()) 
+	{
+		if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) 
+			outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount)+ " legs capped by hooves.", false);
+		else if(player.lowerBody == LOWER_BODY_TYPE_PONY) 
+			outputText("  From the waist down you have an incredibly cute and cartoonish parody of a horse's body, with all " + num2Text(player.legCount)+ " legs ending in flat, rounded feet.", false);
+		else if(player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) 
+			outputText("  Where your legs would normally start you have grown the body of a spider, with " + num2Text(player.legCount)+ " spindly legs that sprout from its sides.", false);
+		else
+			outputText("   Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount)+ " legs.", false);
+	}
 	//Hip info only displays if you aren't a centaur. 
 	if(!player.isTaur()) 
 	{
@@ -737,47 +744,46 @@
 	//</mod>
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
-		outputText("  Two normal human legs grow down from your waist, ending in normal human feet.", false);
-	else if(player.lowerBody == LOWER_BODY_TYPE_FERRET) outputText("  Two furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.", false);
+		outputText("  " + Num2Text(player.legCount)+ " normal human legs grow down from your waist, ending in normal human feet.", false);
+	else if (player.lowerBody == LOWER_BODY_TYPE_FERRET) 
+		outputText("  " + Num2Text(player.legCount)+ " furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) 
-		outputText("  Your legs are muscled and jointed oddly, covered in fur, and end in a pair of bestial hooves.", false);
+		outputText("  Your " + num2Text(player.legCount)+ " legs are muscled and jointed oddly, covered in fur, and end in a bestial hooves.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_DOG) 
-		outputText("  Two digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.", false);
+		outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_NAGA) 
 		outputText("  Below your waist your flesh is fused together into a very long snake-like tail.", false);
 	//Horse body is placed higher for readability purposes
 	else if(player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) 
-		outputText("  Your perfect lissome legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.", false);
+		outputText("  Your " + num2Text(player.legCount)+ " perfect lissome legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS) 
-		outputText("  Your lithe legs are capped with flexible clawed feet.  Sharp black nails grow where once you had toe-nails, giving you fantastic grip.", false);
+		outputText("  Your " + num2Text(player.legCount)+ " lithe legs are capped with flexible clawed feet.  Sharp black nails grow where once you had toe-nails, giving you fantastic grip.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_BEE) 
-		outputText("  Your legs are covered in a shimmering insectile carapace up to mid-thigh, looking more like a pair of 'fuck-me-boots' than exoskeleton.  A bit of downy yellow and black fur fuzzes your upper thighs, just like a bee.", false);
+		outputText("  Your " + num2Text(player.legCount)+ " legs are covered in a shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.  A bit of downy yellow and black fur fuzzes your upper thighs, just like a bee.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_GOO) 
 		outputText("  In place of legs you have a shifting amorphous blob.  Thankfully it's quite easy to propel yourself around on.  The lowest portions of your " + player.armorName + " float around inside you, bringing you no discomfort.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_CAT) 
-		outputText("  Two digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws.", false);
+		outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_LIZARD) 
-		outputText("  Two digitigrade legs grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
+		outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_BUNNY) 
-		outputText("  Your legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.", false);
+		outputText("  Your " + num2Text(player.legCount)+ " legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_HARPY) 
-		outputText("  Your legs are covered with " + player.furColor + " plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.", false);
+		outputText("  Your " + num2Text(player.legCount)+ " legs are covered with " + player.furColor + " plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) 
-		outputText("  Your furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.", false);
+		outputText("  Your " + num2Text(player.legCount)+ " furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) 
-		outputText("  Your legs are covered in a reflective black, insectile carapace up to your mid-thigh, looking more like a pair of 'fuck-me-boots' than exoskeleton.", false);
-	else if(player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) 
-		outputText("  Where your legs would normally start you have grown the body of a spider, with eight spindly legs that sprout from its sides.", false);
+		outputText("  Your " + num2Text(player.legCount)+ " legs are covered in a reflective black, insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_FOX) 
-		outputText("  Your legs are crooked into high knees with hocks and long feet, like those of a fox; cute bulbous toes decorate the ends.");
+		outputText("  Your " + num2Text(player.legCount)+ " legs are crooked into high knees with hocks and long feet, like those of a fox; cute bulbous toes decorate the ends.");
 	else if(player.lowerBody == LOWER_BODY_TYPE_DRAGON) 
-		outputText("  Two human-like legs grow down from your " + hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
+		outputText("  " + Num2Text(player.legCount)+ " human-like legs grow down from your " + hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
 	else if(player.lowerBody == LOWER_BODY_TYPE_RACCOON) 
-		outputText("  Your legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
+		outputText("  Your " + num2Text(player.legCount)+ " legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
 	else if(player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED) 
-		outputText("  Two digitigrade legs form below your [hips], ending in cloven hooves.");
+		outputText("  " + Num2Text(player.legCount)+ " digitigrade legs form below your [hips], ending in cloven hooves.");
 	if(player.findPerk(PerkLib.Incorporeality) >= 0)
-		outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature.", false);
+		outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature.", false); // isn't goo transparent anyway?
 	
 	outputText("\n", false);
 	if (player.findStatusAffect(StatusAffects.GooStuffed) >= 0)
@@ -984,8 +990,8 @@
 	temp = 0;
 	if(player.cocks.length == 1) 
 	{
-		if(player.lowerBody==LOWER_BODY_TYPE_CENTAUR) 
-			outputText("\nEver since becoming a centaur, your equipment has shifted to lie between your rear legs, like a horse.", false);
+		if(player.isTaur()) 
+			outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.", false);
 		if (flags[kFLAGS.USE_METRICS] > 0) outputText("\nYour " + player.cockDescript(temp) + " is " + int(10 * player.cocks[temp].cockLength * 2.54) / 10 + " cm long and ", false);
 		else outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 		if(Math.round(10*player.cocks[temp].cockThickness)/10 < 10) 
@@ -1083,12 +1089,11 @@
 		outputText("\n", false);
 	}
 	if(player.cocks.length > 1) 
-	
 	{
 		temp = 0;
 		rando = rand(4);
-		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) 
-			outputText("\nWhere a horse's penis would usually be located, you have instead grown " + player.multiCockDescript() + "!\n", false);
+		if(player.isTaur()) 
+			outputText("\nBetween hind legs of your bestial body you have grown " + player.multiCockDescript() + "!\n", false);
 		else outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n", false);
 		while(temp < player.cocks.length) 
 		
@@ -1167,15 +1172,6 @@
 					outputText("dog's cock.");
 				else
 					outputText("fox's cock.");
-
-				if(player.cocks[temp].knotMultiplier >= 1.8) 
-					outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost comically mismatched for your " + player.cockDescript(temp) + ".", false);
-				else if(player.cocks[temp].knotMultiplier >= 1.4) 
-					outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
-				else if(player.cocks[temp].knotMultiplier > 1) 
-					outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge your " + player.cockDescript(temp) + " inside a female.", false);
-				//List knot thickness
-				outputText("  The knot is " + Math.floor(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10)/10 + " inches thick when at full size.", false);
 			}
 			//Demon cock flavor
 			if(player.cocks[temp].cockType == CockTypesEnum.DEMON) 
@@ -1224,6 +1220,18 @@
 			if (player.cocks[temp].cockType == CockTypesEnum.AVIAN) {
 				outputText("  It's a red, tapered cock that ends in a tip.  It rests nicely in a sheath.");
 			}
+
+			if(player.cocks[temp].knotMultiplier > 1) {
+				if(player.cocks[temp].knotMultiplier >= 1.8) 
+					outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost comically mismatched for your " + player.cockDescript(temp) + ".", false);
+				else if(player.cocks[temp].knotMultiplier >= 1.4) 
+					outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
+				else
+					outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge your " + player.cockDescript(temp) + " inside a female.", false);
+				//List knot thickness
+				outputText("  The knot is " + Math.floor(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10) / 10 + " inches thick when at full size.", false);
+			}
+				
 			if(player.cocks[temp].sock != "" && player.cocks[temp].sock != null)	// I dunno what was happening, but it looks like .sock is null, as it doesn't exist. I guess this is probably more left over from some of the restucturing.
 			{																		// Anyways, check against null values, and stuff works again.
 				trace("Found a sock description (WTF even is a sock?)", player.cocks[temp].sock);
@@ -1280,8 +1288,8 @@
 	//VAGOOZ
 	if(player.vaginas.length > 0) 
 	{
-		if(player.gender == 2 && player.lowerBody == LOWER_BODY_TYPE_CENTAUR) 
-			outputText("\nEver since becoming a centaur, your womanly parts have shifted to lie between your rear legs, in a rather equine fashion.", false);
+		if(player.gender == 2 && player.isTaur()) 
+			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.", false);
 		outputText("\n", false);
 		if (player.vaginas.length == 1) 
 			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10*2.54)/10 + "-centimetre clit", false);

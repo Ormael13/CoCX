@@ -1962,12 +1962,11 @@ internal function pcWinsDomFight():void {
 		outputText("[pg]Pinning her arms to the cold ground, you move your head down to her supple breast, gently flicking the little stubs of her nipples with your tongue.");
 
 		//PC has a demon/snake tongue: 
-		if(player.tongueType == TONUGE_SNAKE || player.tongueType == TONUGE_DEMONIC) {
+		if(player.hasLongTongue() || player.tongueType == TONUGE_SNAKE) {
 			outputText("[pg]Kiha initially reacts with titillation, then a sense of perverted violation as you wrap the hardening nub with your mouth muscle, ");
 			//Demon: 
-			if(player.tongueType == TONUGE_DEMONIC) outputText("taking to her pointed mammary like a boa to prey as you lather up each teat separately.  The hot-tempered dragon girl squirms, completely at your mercy while you have your fun."); 
-			//Snake: 
-			else outputText("stimulating the soft, nubby flesh with your forked tongue, hissing for effect as you do it.  Imagine the look on her face if you worked that little bugger over her clit; she'd go berserk!  But she hasn't earned that yet; what you want to hear is her begging for a good dicking first.");
+			if(player.hasLongTongue()) outputText("taking to her pointed mammary like a boa to prey as you lather up each teat separately.  The hot-tempered dragon girl squirms, completely at your mercy while you have your fun."); 
+			else if(player.tongueType == TONUGE_SNAKE) outputText("stimulating the soft, nubby flesh with your forked tongue, hissing for effect as you do it.  Imagine the look on her face if you worked that little bugger over her clit; she'd go berserk!  But she hasn't earned that yet; what you want to hear is her begging for a good dicking first.");
 		}
 		outputText("[pg]Her breathing becoming plagued with arousal and stimulus overload, she finally yields, beseeching you to stop playing with her breasts and to get on with \"<i>more important things.</i>\"");
 
@@ -2073,7 +2072,7 @@ private function guardMyCampKiha():void {
 			outputText("\n\nThe dragon-girl looks at you with a puzzled expression.  \"<i>Yeah, I'm fine; why do you ask?</i>\"");
 			outputText("\n\nYou tell her that you heard her complaining; you were just worried it might be something important.  After all, it looks like all that's wrong with her is that she's eaten too much, but what kind of " + player.mf("boyfriend", "girlfriend") + " would you be if you didn't make sure she was alright?");
 			outputText("\n\n\"<i>" + player.mf("B-boyfriend", "G-girlfriend") + "?</i>\" Kiha repeats, a faint flush on her cheeks.  Then what else you said sinks in and she looks offended.  \"<i>What do you mean, eating too much?</i>\" She snaps.");
-			outputText("\n\nYou simply point at her stomach, and she looks at it before scowling at you.  \"<i>For your information, this has nothing to do with food.  It's woman's problems.</i>\"  At your expression, she sighs.  \"<i>I told you that I wasn't always like this, right?  That the demons made me into what I am?</i>\"  When you nod, she continues.  \"<i>Well, what I used to be is a lizan - an anthropomorphic lizard.  When they made me into this thing, they changed a lot about me, but they didn't change a certain aspect.</i>\"  She pats her swollen midriff for emphasis.  \"<i>Unlike [you] mammals, we lizans don't do that nasty monthly bleeding stuff.  Instead, we have eggs form in our bellies when it's time; no sex happens, they come out the next day and it's over and done with.  We have someone fuck us, and, well...</i>\"");
+			outputText("\n\nYou simply point at her stomach, and she looks at it before scowling at you.  \"<i>For your information, this has nothing to do with food.  It's woman's problems.</i>\"  At your expression, she sighs.  \"<i>I told you that I wasn't always like this, right?  That the demons made me into what I am?</i>\"  When you nod, she continues.  \"<i>Well, what I used to be is a lizan - an anthropomorphic lizard.  When they made me into this thing, they changed a lot about me, but they didn't change a certain aspect.</i>\"  She pats her swollen midriff for emphasis.  \"<i>Unlike mammals, we lizans don't do that nasty monthly bleeding stuff.  Instead, we have eggs form in our bellies when it's time; no sex happens, they come out the next day and it's over and done with.  We have someone fuck us, and, well...</i>\"");
 			outputText("\n\nYou tell her you get the picture.  So, how often does this happen to her, anyway?");
 			outputText("\n\nKiha shrugs.  \"<i>Normal lizans only have to put up with it once a month.  Because of the demons, I've got to suffer like this twice a month.</i>\"");
 			outputText("\n\nYou give the temperamental dragon-girl as much sympathy as she will tolerate.  Curious, you then ask her what she's going to do with the eggs she's currently carrying.");

@@ -21,15 +21,6 @@
 			else trace("\nJojo time change: Time is " + model.time.hours + ", butt incubation: " + pregnancy.buttIncubation);
 			if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN]--;
 			if (player.findStatusAffect(StatusAffects.NoJojo) >= 0) player.removeStatusAffect(StatusAffects.NoJojo);
-			if (model.time.hours > 23 && player.statusAffectv1(StatusAffects.Meditated) > 0) {
-				player.removeStatusAffect(StatusAffects.Meditated);
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102] == 0) {
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102]++;
-					while (player.findStatusAffect(StatusAffects.Meditated) >= 0) {
-						player.removeStatusAffect(StatusAffects.Meditated);
-					}
-				}
-			}
 			if (pregnancy.isButtPregnant && pregnancy.buttIncubation == 0) {
 				jojoLaysEggs();
 				return true;
@@ -1034,9 +1025,9 @@ private function amilyAndJojoFuck():void {
 
 public function jojoFollowerMeditate():void {
 	jojoSprite();
-	if (player.statusAffectv1(StatusAffects.Meditated) > 0) {
+	if (flags[kFLAGS.JOJO_LAST_MEDITATION] == model.time.days) {
 		outputText("Jojo smiles and meditates with you.  The experience is calming, but it's so soon after your last session that you don't get much benefit from it.", doClear);
-		if (player.lust > 40) dynStats("lus", -10);
+		dynStats("lus", -30);
 	}
 	else {
 		outputText("The mouse monk leads you to a quiet spot away from the portal and the two of you sit down, him cross-legged and you mimicking to the best of your ability, back to back.  You close your eyes and meditate for half-an hour, centering your body and mind.  Afterwards, he guides you through stretches and exercises to help keep your bodies fit and healthy.\n\nWhen you are done, Jojo nods to you, and climbs back onto his rock, still thinking.", doClear);
@@ -1055,7 +1046,7 @@ public function jojoFollowerMeditate():void {
 		if (player.spe < 75) dynStats("spe", 1); //Speed boost to 75
 		if (player.inte < 80) dynStats("int", 1); //Int boost to 80
 		if (player.lib > 0) dynStats("lib", -1); //Libido lower to 15
-		player.createStatusAffect(StatusAffects.Meditated, 1, 0, 0, 0);
+		flags[kFLAGS.JOJO_LAST_MEDITATION] = model.time.days;
 		player.addStatusValue(StatusAffects.JojoMeditationCount, 1, 1);
 	}
 	doNext(camp.returnToCampUseOneHour);
@@ -2462,7 +2453,7 @@ public function jojoCamp():void {
 		jojoCampMenu();
 		return;
 	}
-	if (player.cor > 10 && player.statusAffectv1(StatusAffects.Meditated) <= 0) { //New "offer of help" menu
+	if (player.cor > 10 && flags[kFLAGS.JOJO_LAST_MEDITATION] != model.time.days) { //New "offer of help" menu
 		if (player.cor >= 40) {
 			outputText("You walk toward the boulder where Jojo usually sits, and as soon as you're close Jojo approaches you with urgency.  \"<i>By Marae! [name], we must do something! I feel the corruption surrounding you like a dense fog.  We need to meditate or I’m going to lose you!</i>\" Jojo pleads.\n\n");
 		}

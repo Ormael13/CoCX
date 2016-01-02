@@ -1498,7 +1498,7 @@ private function comfortUrtaAfterTellinTruuf():void {
 	clearOutput();
 	outputText("You let Urta know that you understand.  After all, in a world like this monogamy is next to impossible.  There's no shame in what she did with Edryn or your relationship with Marble.  The two of you share a heartfelt hug and resolve to continue your relationship.", false);
 	//(If PC has Edryn (<3) & fits her req's)
-	if(((player.lowerBody == LOWER_BODY_TYPE_CENTAUR && player.totalCocks() > 0) ||
+	if(((player.isTaur() && player.totalCocks() > 0) ||
 		player.horseCocks() > 0 ||
 		(player.totalCocks() > 0 && player.cor > 50)) &&
 	  	player.statusAffectv1(StatusAffects.Edryn) >= 4)
@@ -2215,7 +2215,7 @@ public function scyllaAndUrtaSittingInATree():void {
 		outputText("Throughout the conversation she's weakly twitching her pelvis, rocking her hips against Scylla's face while her balls start to swell and churn in the nun's hands.  You close the door behind you carefully and drop the key on a crate.  It's time for some fun.\n\n", false);
 
 		// Butans
-		if (player.cockThatFits(urtaCapacity()) != -1 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR)
+		if (player.cockThatFits(urtaCapacity()) != -1 && !player.isTaur())
 		{
 			addButton(0, "Lap", makeUrtaSitOnYourLapWithScylla);
 			outputText("(You could make Urta sit on YOUR lap for a change, or you could jerk off and watch.");
@@ -2258,7 +2258,7 @@ public function scyllaAndUrtaSittingInATree():void {
 		outputText("Throughout the conversation she's weakly twitching her pelvis, rocking her hips against Scylla's face while her balls start to swell and churn in the nun's hands.  Thankfully the doorway is at such an angle that the bulk of the bar can't see inside, and it helps that no one seems inclined to bother the three of you for now.  What do you do?\n\n", false);
 
 		// Butans
-		if (player.cockThatFits(urtaCapacity()) != -1 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR)
+		if (player.cockThatFits(urtaCapacity()) != -1 && !player.isTaur())
 		{
 			addButton(0, "Lap", makeUrtaSitOnYourLapWithScylla);
 			outputText("(You could make Urta sit on YOUR lap for a change, or you could jerk off and watch.");
@@ -4969,6 +4969,7 @@ private function getAPetReward():void {
 	if(player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
 	else if(player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
 	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
+	else if(player.hasLongTongue()) outputText("inhumanly long ");
 	outputText("tongue along the vixen's thick cumvein, which pulses lightly.  Urta groans and runs a hand through your " + hairDescript() + ", gripping it solidly.  You can't help as you're forced further onto the warm rod.");
 
 	outputText("\n\nUrta's flare presses against the back of your throat for a moment before slipping down into your throat, bringing a groan up from your core.  The vibrations seem to please your lover, who shudders, and forces her massive cock further down your throat.  It's slightly uncomfortable, but it brings you such a thrill to know the kind of bliss you're giving your Owner.  You bob your head up and down, letting the cock penetrate your throat deeper with every thrust.  Urta's legs stiffen, and her breaths get quicker while the cock buried in your gullet twitches wildly. Clearly not wanting to cum in your mouth, she pulls out, leaving your maw with a wet <b>pop</b>, and aims her cock downwards... right towards the doggy bowl.");
@@ -4981,6 +4982,7 @@ private function getAPetReward():void {
 	if(player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
 	else if(player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
 	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
+	else if(player.hasLongTongue()) outputText("inhumanly long ");
 	outputText("tongue, lapping at the top layer and swallowing it down.  It's still warm, and quite salty with a bit of a sweet tang to it.  You quickly dive back into your 'reward', using your tongue as a spoon to consume every last drop in the bowl.  While you're busy doing that, Urta slides off the bed and takes up a position behind your body, ass high into the air, showing off all her goods.  The fox raises a paw, smearing some of her cum along your ");
 	if(player.hasCock()) outputText("shaft ");
 	if(player.gender == 3) outputText(" and ");

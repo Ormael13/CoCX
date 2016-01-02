@@ -1527,37 +1527,50 @@ public function rest():void {
 	var multiplier:Number = 1.0;
 	var fatRecovery:Number = 4;
 	var hpRecovery:Number = 10;
+	
+	if (player.findPerk(PerkLib.Medicine) >= 0) hpRecovery *= 1.5;
+	
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
+		multiplier += 0.5;
+	//Marble withdrawal
+	if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0)
+		multiplier /= 2;
+	//Hungry
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
+		multiplier /= 2;
+		
 	if (timeQ == 0) {
-		timeQ = 4;
-		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) { //Rest until fully healed.
-			var healthToRestore:int = player.maxHP() - player.HP;
-			var fatigueToRestore:int = player.maxFatigue() - player.fatigue;
-			timeQ = Math.ceil(healthToRestore / hpRecovery);
-			if (Math.ceil(fatigueToRestore / fatRecovery) > timeQ) timeQ = Math.ceil(fatigueToRestore / fatRecovery);
+		var hpBefore:int = player.HP;
+		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) { //Rest until fully healed, midnight or hunger wake.
+			while (player.HP < player.maxHP() || player.fatigue > 0) {
+				timeQ += 1;
+				HPChange(hpRecovery * multiplier, false); // no display since it is meant to be full rest anyway
+				fatigue( -fatRecovery * multiplier); 
+				if (timeQ + model.time.hours == 24 || flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 5)
+					break;
+			}	
+			if (timeQ == 0) timeQ = 1;
 			if (timeQ > 21 - model.time.hours) timeQ = 21 - model.time.hours;
+		} else {
+			timeQ = Math.min(4, 21 - model.time.hours);
+			HPChange(timeQ * hpRecovery * multiplier, false);
+			fatigue(timeQ * -fatRecovery * multiplier); 
 		}
+		
+		
 		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
 		{
 			if (timeQ != 1) outputText("You head into your cabin to rest. You lie down on your bed to rest for " + num2Text(timeQ) + " hours.\n", false);
 			else outputText("You head into your cabin to rest. You lie down on your bed to rest for an hour.\n", false);
-			multiplier += 0.5;
 		}
 		else 
 		{
 			if (timeQ != 1) outputText("You lie down to rest for " + num2Text(timeQ) + " hours.\n", false);
 			else outputText("You lie down to rest for an hour.\n", false);
 		}
-		//Hungry
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
-		{
-			outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n", false);
-			multiplier *= 0.5;
-		}
 		//Marble withdrawal
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
-			hpRecovery /= 2;
-			fatRecovery /= 2;
 			dynStats("tou", -.1, "int", -.1);
 		}
 		//Bee cock
@@ -1568,10 +1581,13 @@ public function rest():void {
 		if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0 && valeria.valeriaFluidsEnabled()) {
 			outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 		}
-
-		//REGULAR HP/FATIGUE RECOVERY
-		HPChange(timeQ * hpRecovery * multiplier, true);
-		fatigue(timeQ * -fatRecovery * multiplier); 
+		//Hungry
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
+		{
+			outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n", false);
+		}
+		
+		kGAMECLASS.HPChangeNotify(player.HP - hpBefore);
 	}
 	else {
 		if(timeQ != 1) outputText("You continue to rest for " + num2Text(timeQ) + " more hours.\n", true);

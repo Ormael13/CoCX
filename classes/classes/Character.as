@@ -811,7 +811,7 @@ import classes.Items.JewelryLib;
 		{
 			if (arg > cockTotal() - 1 || arg < 0)
 				return false;
-			return (cocks[arg].cockType == CockTypesEnum.DOG || cocks[arg].cockType == CockTypesEnum.FOX || cocks[arg].cockType == CockTypesEnum.DISPLACER);
+			return cocks[arg].hasKnot();
 		}
 
 

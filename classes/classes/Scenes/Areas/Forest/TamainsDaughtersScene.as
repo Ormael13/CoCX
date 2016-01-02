@@ -736,7 +736,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	outputText("your " + multiCockDescriptLight() + ", keeping your more than turned on enough to go along with whatever they have planned.\n\n", false);
 	
 	//(regular lower body)
-	if(player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+	if(!player.isTaur()) {
 		outputText("The hands holding you slowly lower you into a comfortable feeling chair, securing your " + player.legs() + " into tightly bound stirrups.  A moment later, your hands are strapped into equally firm cuffs.  By this point, your lust-dulled mind has begun to worry, and you start to struggle, but binding leather straps are passed over your chest, midsection, and upper thighs, then tightened against the chair to completely restrain you.  Perhaps the only ", false);
 		if(cocks > 1) outputText(" things not restrained are your " + multiCockDescriptLight() + ", standing at attention despite, or perhaps because of, your predicament.\n\n", false);
 		else outputText(" thing not restrained is your " + multiCockDescriptLight() + ", standing at attention despite, or perhaps because of, your predicament.\n\n", false);

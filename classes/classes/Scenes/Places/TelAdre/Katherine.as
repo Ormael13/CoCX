@@ -4317,14 +4317,14 @@ public function giveKatOralPenisWingWang():void {
 		if (player.tongueType == TONUGE_SNAKE)
 			outputText((hasBalls() ? "The hand that was so far fingering her pushes her balls to the side, as you slowly move down and down her erection.  You" : "You slowly move your tongue down and down her erection and") + " gently hum into it before going nearly all the way down to the base, Katherine's eyes opening wide.  Your long, flexible forked tongue slips out and down" + (hasBalls() ? ", sliding along the side of her left testicle" : "") + " before finding your target: the cat-girl's clitoris.  Your other hand starts to gently tease her lower lips as you slowly move it, mostly pleasing her with your throat muscles and long, flexible tongue.\n\n");
 		// [Demonic tongue]
-		else if (player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_DRACONIC)
+		else if (player.hasLongTongue())
 			outputText((hasBalls() ? "The hand that was so far fingering her pushes her balls to the side, as you slowly move down and down her erection.  Stopping just before the place" : "You slowly move your tongue down and down her erection.  When it reaches the spot") + " where her knot usually pops out, you decide to give the girl a treat.  Slowly, your incredibly long flexible tongue moves towards your kittenish partner's pussy, giving it a long, sloppy lick.  Katherine's hips shiver and she only barely stops herself from pushing them forward.  Rewarding that show of self-control, you move your tongue up to wrap it around the very base of her penis just as the entire length of your inhuman muscle slips from your mouth; you manage to get the tip of it down, then brush it against the cat-girl's vagina.  Katherine just stares at you wide-eyed as you slip your demonic appendage inside her pussy, effectively pleasing nearly all of her lower's body erogenous zones at once.\n\n");
 		//([Normal tongue]
 		else outputText("Your hand remains in her pussy, however, adding to the multiple ways with which you please your lover.\n\n");
 
 		outputText("After a while of slurping on her cock and ");
 		if (player.tongueType == TONUGE_SNAKE) outputText("molesting her clit with your tongue");
-		else if (player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_DRACONIC) outputText("penetrating her with your tongue as you give her head");
+		else if (player.hasLongTongue()) outputText("penetrating her with your tongue as you give her head");
 		else outputText("fingering her");
 		if (!hasBalls())
 			outputText(", you pull away for a moment and");
@@ -4336,7 +4336,7 @@ public function giveKatOralPenisWingWang():void {
 				outputText("You attend to the cat-girl's member while teasing the insides of her pussy with your inhuman tongue, all the while slurping on her testicles.  Katherine has a look of bliss on her face - you think it may be too cruel not to push her to orgasm a bit more quickly than planned.\n\n");
 			}
 			//[Demon Tongue]
-			else if (player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_DRACONIC) {
+			else if (player.hasLongTongue()) {
 				outputText("You can feel Katherine shiver with helpless desire once she feels your excessively long tongue sliding over her balls.  You slide it upwards, teasing the knot area of her member, and then back down, oozing it over the poor kitten's clitoris and completely smothering it with your tongue.  Finally, you slip it inside as Katherine releases a loud scream of pleasure, then bites her own hand to silence herself.\n\n");
 
 				outputText("You attend to the cat-girl's member while teasing the insides of her pussy with your inhuman tongue, all the while slurping on her testicles.  Katherine has a look of bliss on her face - you think it may be too cruel not to push her to orgasm a bit more quickly than planned.\n\n");
@@ -4377,7 +4377,7 @@ public function giveKatOralPenisWingWang():void {
 			outputText("  Slowly, you pull her cock out of your mouth while Katherine smiles at you and purrs gratefully.");
 		}
 		//(Demon tongue)
-		else if (player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_DRACONIC) {
+		else if (player.hasLongTongue()) {
 			outputText("You separate the place where the knot should appear with your own fingers and dive down her shaft.  You're going to pleasure most of her anyway, as you repeat your trick, wrapping your " + (player.tongueType == TONUGE_DEMONIC ? "demonic" : "unhumanly long") + " appendage around the base of her cock with your other hand as your long tongue slides out to lick and play with her " + (hasBalls() ? "balls.  Sliding it along her testicles" : "clit.  That") + " seems to start igniting her orgasm - the bulge of her knot gets bigger, although it looks like you have a few moments.  You slide down further, " + (hasBalls() ? "rolling her balls and then lifting them to push" : "pushing") + " the tip of your tongue inside her pussy.  You can taste her feminine juices dripping out as her vagina starts to clench, her inner walls twitching and her knot bulging to full size");
 			//([If 6 inches knot]
 			if (knotSize >= 6) outputText(", even making it hard for you to keep your tongue buried all the way inside");
@@ -4405,20 +4405,20 @@ public function giveKatOralPenisWingWang():void {
 		outputText("Seeing one of her cocks bob and twitch as your face gets closer you decide to reward the eagerness and start with it.  You open your lips and lick the tip before slowly sliding down her crown and then lower, onto the shaft and down to the base.  Then, you pull your lips up, assaulting her with your tongue all along the way.  Her " + cockType() + " cock leaves your mouth with a loud slurp and you quickly go down the other one.  Katherine strokes your " + hairDescript() + ", very gently helping push you down her shaft.\n\n");
 
 		outputText("Her hands are actually in the way of what you have planned; with a glare you quickly tell her to let you do it your way.  Katherine mewls apologetically as you grab her erections with both hands and rub them up, down, and together, licking the touching tips with your tongue.");
-		if (player.tongueType == TONUGE_SNAKE || player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_DRACONIC) outputText("  Said tongue wraps around one erection and then the other, stroking gently with its long, flexible length.");
+		if (player.tongueType == TONUGE_SNAKE || player.hasLongTongue()) outputText("  Said tongue wraps around one erection and then the other, stroking gently with its long, flexible length.");
 		outputText("\n\n");
 
 		outputText("Next you move down from her erections, ");
 		if (hasBalls()) {
 			outputText("giving her balls a teasing lick before sucking one of them inside your mouth.");
-			if (player.tongueType == TONUGE_SNAKE || player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_DRACONIC) outputText("  Your long, flexible tongue once again slides out as you gently lift her testes up, easily dipping inside her wet pussy and stroking her inner walls as you suck.");
+			if (player.tongueType == TONUGE_SNAKE || player.hasLongTongue()) outputText("  Your long, flexible tongue once again slides out as you gently lift her testes up, easily dipping inside her wet pussy and stroking her inner walls as you suck.");
 			outputText("  You continue to minister to her balls, wrapping your fingers around her straining cocks, jerking them off slowly before nudging the balls up and diving into her wet pussy.\n\nYour");
 		}
 		else outputText("your");
 		outputText(" work here starts with soft kisses on her lower lips, and then slowly moves up to her clit.  Katherine's thighs gently bend as her feet rest on your shoulders, egging you on to give more attention to her drenched pussy.  You humor her, tongue sliding inside her as you suck on her clit while slowly jerking off both of her erections.  Her feminine juices start flowing even more freely - you find yourself suffused with almost as much taste as sound from her soft panting and moaning.\n\n");
 
 		//([Demon tongue]
-		if (player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_DRACONIC) outputText("The opportunity for some extra service doesn't escape you; you suck her clit in with your lips as the long, prehensile organ you house in your mouth slides up against " + (hasBalls() ? "her balls, rolling them and assaulting " : "") + "the base of one of her erections, slowly wrapping around it.  After getting a good tongue-grip on it, you slither further around and past it to do the same to her other cock.  Then, slowly, you start to stroke the twin canine penises with the wet muscle, causing Katherine to shake with helpless pleasure.  Continuing to suck on her clit meanwhile, your large flexible tongue also gives her twin penises a dream jerk-off.\n\n");
+		if (player.hasLongTongue()) outputText("The opportunity for some extra service doesn't escape you; you suck her clit in with your lips as the long, prehensile organ you house in your mouth slides up against " + (hasBalls() ? "her balls, rolling them and assaulting " : "") + "the base of one of her erections, slowly wrapping around it.  After getting a good tongue-grip on it, you slither further around and past it to do the same to her other cock.  Then, slowly, you start to stroke the twin canine penises with the wet muscle, causing Katherine to shake with helpless pleasure.  Continuing to suck on her clit meanwhile, your large flexible tongue also gives her twin penises a dream jerk-off.\n\n");
 
 		outputText("Slowly, you draw away from her, admiring your handiwork.  Katherine's erections are leaking pre-cum generously, while her pussy is drenching her seat and trickling copious fluid onto " + (hasBalls() ? "the underside of her balls.  Her thighs" : "her thighs.  Those") + " are gently shaking and her stare lacks focus.\n\n");
 
@@ -4429,7 +4429,7 @@ public function giveKatOralPenisWingWang():void {
 		outputText("She pants and whimpers at the lost stimulation, hands barely restrained from grabbing the reins herself and capping your efforts.  “<i>P... please!  I'm almost there!</i>”  Not willing to make her suffer, you decide to finish the job and make your kitten cum.\n\n");
 
 		//([Normal/Naga Tongue]
-		if (player.tongueType != TONUGE_DEMONIC && player.tongueType != TONUGE_DRACONIC) {
+		if (!player.hasLongTongue()) {
 			outputText("You wrap both your hands around her members just above the knot and start stroking her off, aiming them both at your mouth as you lick the tips.  Her knots swell to full size as she starts panting.");
 			//([If the character has a naga lower body or a demon tail]
 			if (player.isNaga() || player.tailType == TAIL_TYPE_DEMONIC) outputText("  Wanting to grant her maximum stimulation and complete release, you slip the tip of your tail inside the cat-girl, feeling her pussy gratefully squeeze it.");
@@ -4448,7 +4448,7 @@ public function giveKatOralPenisWingWang():void {
 	// All scenes (both single and double cock) end here
 	outputText("\n\nThe deed done, you straighten your back and wink at the cat-girl.  Katherine purrs as she jumps down next to you and pulls you in for a kiss.\n\n");
 	outputText("“<i>You were amazing!</i>” she exclaims, still short on breath.  ");
-	if (player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_DRACONIC) outputText("She runs her fingers along your lips.  “<i>I think I might be falling in love with the monster inside that pretty cave.</i>”\n\n");
+	if (player.hasLongTongue()) outputText("She runs her fingers along your lips.  “<i>I think I might be falling in love with the monster inside that pretty cave.</i>”\n\n");
 	else outputText("“<i>I hope that if I ever get to repay the favor, I can do as well as you.</i>”\n\n");
 
 	outputText("She kisses you again, her hands running down your back.  You worry that if this keeps going you may end up going another round immediately; separating yourself from the cat-herm with a kiss, " + (isAt(KLOC_DESERT) ? "you pack up the supplies and prepare for the trip back to Tel’Adre." : "you go your separate ways."));
@@ -4496,12 +4496,8 @@ public function giveKatOralPussyLicking():void { //This version assumes Kath has
 
 	outputText("She mewls again, clearly doing her best to resist and prolong the pleasure.  You decide it's time to get somewhat more serious.\n\n");
 
-	if (player.tongueType == TONUGE_SNAKE)
-		outputText("You finally make full use of your long, flexible forked tongue.  You tighten the abnormal muscles given to you by your transformation and slip it all the way in, the forked tip bumping against the back of her vagina even as the base of your tongue undulates against the underside of her clit.\n\n");
-	else if (player.tongueType == TONUGE_DEMONIC)
-		outputText("You finally make full use of your long and flexible demonic tongue.  You tighten the abnormal muscles given to you by your transformation and slip it all the way in, the tip bumping against the back of her vagina even as the base of your tongue undulates against the underside of her clit.\n\n");
-	else if (player.tongueType == TONUGE_DRACONIC)
-		outputText("You finally make full use of your long and flexible draconic tongue.  You tighten the abnormal muscles given to you by your transformation and slip it all the way in, the tip bumping against the back of her vagina even as the base of your tongue undulates against the underside of her clit.\n\n");
+	if (player.tongueType == TONUGE_SNAKE || player.hasLongTongue())
+		outputText("You finally make full use of your long, flexible tongue.  You tighten the abnormal muscles given to you by your transformation and slip it all the way in, the forked tip bumping against the back of her vagina even as the base of your tongue undulates against the underside of her clit.\n\n");
 	else outputText("You press your tongue against the underside of her clit and rock it from side to side, your tastebuds dragging against her most sensitive flesh.\n\n");
 
 	outputText("After molesting her clit with your tongue you pull away for a moment and announce that the cat-girl is very welcome to cum soon, as you're happy to do this to her again and again.\n\n");
@@ -4514,7 +4510,7 @@ public function giveKatOralPussyLicking():void { //This version assumes Kath has
 
 	outputText("\n\nThe deed done, you straighten your back and wink at the cat-girl.  Katherine purrs as she jumps down next to you and pulls you in for a kiss.\n\n");
 	outputText("“<i>You were amazing!</i>” she exclaims, still short on breath.  ");
-	if (player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_DRACONIC) outputText("She runs her fingers along your lips.  “<i>I think I might be falling in love with the monster inside that pretty cave.</i>”\n\n");
+	if (player.hasLongTongue()) outputText("She runs her fingers along your lips.  “<i>I think I might be falling in love with the monster inside that pretty cave.</i>”\n\n");
 	else outputText("“<i>I hope that if I ever get to repay the favor, I can do as well as you.</i>”\n\n");
 
 	outputText("She kisses you again, her hands running down your back.  You worry that if this keeps going you may end up going another round immediately; separating yourself from the cat-herm with a kiss, " + (isAt(KLOC_DESERT) ? "you pack up the supplies and prepare for the trip back to Tel’Adre." : "you go your separate ways."));
@@ -4713,7 +4709,7 @@ private function katDoubleHelixCraziness():void {
 	outputText("You simply lie back and enjoy her attentions; while pleasurable, they aren't as sexual as her previous efforts, and you find the experience more soothing than arousing. It takes a while, but finally with one last lick on ");
 	if(player.isNaga() || player.tailType == TAIL_TYPE_DEMONIC) outputText("the tip of your tail");
 	else outputText("your " + buttDescript());
-	outputText(", she finishes.  Katherine grins and happily declares, “<i>There you go, you're clean now!" + (hasAlready(KBIT_TRIED_DOUBLE_HELIX) ? "" : "Sorry for breaking my promise and knotting you.") + "</i>”\n\n");
+	outputText(", she finishes.  Katherine grins and happily declares, “<i>There you go, you're clean now!" + (hasAlready(KBIT_TRIED_DOUBLE_HELIX) ? "" : " Sorry for breaking my promise and knotting you.") + "</i>”\n\n");
 
 	outputText("Sitting up, you can't resist reaching over and ruffling her ears in a way that the cats you've met always liked, telling her that if this is how she'll apologize for " + (hasAlready(KBIT_TRIED_DOUBLE_HELIX) ? "knotting you, you don't mind her doing so again and again" : "it, you don't mind her doing so again") + ".\n\n");
 

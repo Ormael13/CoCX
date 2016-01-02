@@ -14,5 +14,8 @@ package classes.Items.Weapons
 			super("E.Staff", "E.Staff", "eldritch staff", "an eldritch staff", "thwack", 10, WeaponLib.DEFAULT_VALUE, "This eldritch staff once belonged to the Harpy Queen, who was killed after her defeat at your hands.  It fairly sizzles with magical power.", "Wizard's Focus", PerkLib.WizardsFocus, 0.6, 0, 0, 0);
 		}
 		
+		override public function get verb():String { 
+			return game.player.findPerk(PerkLib.StaffChanneling) >= 0 ? "shot" : "thwack"; 
+		}
 	}
 }

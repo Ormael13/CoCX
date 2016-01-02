@@ -3883,9 +3883,9 @@ private function giveMarbleTailjobRelease():void {
 	if(player.cor > 70) {
 		outputText("\n\nYou certainly don't mind the proof of your prowess marking your lower body like this, but you can think of something better to do with it.  In fact, you slowly move the tail towards your lips.");
 		//(Normal or Snake tongue) 
-		if(player.tongueType == TONUGE_SNAKE || player.tongueType == TONUGE_DEMONIC) outputText("  Your tongue runs along the length of the end of your tail, tasting both Marble's feminine secretions and her semen.  She gives you a smoldering gaze as you lick her juices up.  You grin at her.");
+		if(player.tongueType == TONUGE_SNAKE || player.hasLongTongue()) outputText("  Your tongue runs along the length of the end of your tail, tasting both Marble's feminine secretions and her semen.  She gives you a smoldering gaze as you lick her juices up.  You grin at her.");
 		//(Demon Tongue) 
-		if(player.tongueType == TONUGE_DEMONIC) outputText("  You decide to put on a show for Marble, moving your tail as you drop out a large piece of your inhumanly long tongue, licking up her secretions sensuously while staring at her.  She quickly blushes under your gaze.");
+		if(player.hasLongTongue()) outputText("  You decide to put on a show for Marble, moving your tail as you drop out a large piece of your inhumanly long tongue, licking up her secretions sensuously while staring at her.  She quickly blushes under your gaze.");
 		outputText("\n\n\"<i>Sweetie, you wouldn't be trying to make me horny all over again, would you?</i>\"");
 		outputText("\n\n\"<i>Well... certainly, when you're not in the mood, repeating this would be very nice.  I hope we can both have fun together next time, though... Thank you, sweetie.</i>\"");
 		player.slimeFeed();

@@ -614,7 +614,6 @@ package classes.Scenes.NPCs
 						outputText("a minotaur? Like, why would you want one of those big dumb brutes giving you a baby?</i>\" She wonders.");
 						break;
 					case PregnancyStore.PREGNANCY_KELT:
-					case PregnancyStore.PREGNANCY_MINOTAUR:
 						outputText("a centaur? Like, where did you find a centaur to give you a baby?</i>\" She asks, clearly baffled.");
 						break;
 					case PregnancyStore.PREGNANCY_MOUSE:
@@ -808,9 +807,9 @@ package classes.Scenes.NPCs
 				}
 				outputText("\n\nYou lose track of time while meditating, until you hear what is unmistakably a soft snore from Joy. You gently poke her belly and she hugs you and say sleepily, \"<i>Five more minutes " + player.mf("daddy", "mommy") + ".</i>\"");
 				outputText("\n\nYou gently shake her a bit and tell her to wake up; when it does not work you blow inside her ear softly and she jolts up. \"<i>Huh! What... Oh, I guess I must have, like, fallen asleep or something...</i>\" she says. Then she gets up and stretches.");
-				if (player.statusAffectv1(StatusAffects.Meditated) > 0) {
+				if (flags[kFLAGS.JOJO_LAST_MEDITATION] == model.time.days) {
 					outputText("\n\nIt's too soon since you last meditated, so you don't get much benefit from it. Still you feel your urges have calmed down a little, despite Joy's antics.");
-					if (player.lust > 40) dynStats("lus", -10);
+					dynStats("lus", -30);
 				}
 				else {
 					outputText("\n\nMeditating seems to have helped, and you feel more in control of yourself, despite Joy's antics.");
@@ -828,6 +827,7 @@ package classes.Scenes.NPCs
 					if (player.spe < 75) dynStats("spe", 1); //Speed boost to 75
 					if (player.inte < 80) dynStats("int", 1); //Int boost to 80
 					if (player.lib > 0) dynStats("lib", -1); //Libido lower to 15
+					flags[kFLAGS.JOJO_LAST_MEDITATION] = model.time.days;
 					if (flags[kFLAGS.JOY_INTELLIGENCE] < 50) flags[kFLAGS.JOY_INTELLIGENCE]++;
 				}
 				outputText("\n\nYou thank Joy for her help. She yawns, \"<i>Oh... Uh... Like... Anytime [name]...</i>\" she replies groggily, then begins walking towards the nearby stream, perhaps to spray some water on her face... You get up and go about your business.");

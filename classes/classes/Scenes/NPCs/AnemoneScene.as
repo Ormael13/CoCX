@@ -63,7 +63,7 @@ package classes.Scenes.NPCs
 		{
 			var needNext:Boolean = false;
 			if (flags[kFLAGS.ANEMONE_KID] > 0) {
-				if (flags[kFLAGS.KID_ITEM_FIND_HOURS] < 20) flags[kFLAGS.KID_ITEM_FIND_HOURS]++;
+				//if (flags[kFLAGS.KID_ITEM_FIND_HOURS] < 20) flags[kFLAGS.KID_ITEM_FIND_HOURS]++;
 				if (flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
 					kidABabysitsCows();
 					needNext = true;
@@ -349,18 +349,18 @@ package classes.Scenes.NPCs
 			if (player.biggestTitSize() > 2) outputText("making sure to let your " + player.allBreastsDescript() + " rub up against hers, ", false);
 			outputText("then pull apart from her and ", false);
 			//[(goddamn centaur)
-			if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("turn away, kneeling down to display your animalistic, musky pussy readily.", false);
+			if (player.isTaur()) outputText("turn away, kneeling down to display your animalistic pussy readily.", false);
 			else outputText("recline back on your " + player.legs() + ". Spreading your thighs, you reach down with two fingers and pull apart your " + vaginaDescript(0) + " welcomingly; it's the last act in your sexual performance.", false);
 			outputText("\n\n", false);
 
 			outputText("The anemone wastes no time in assessing your intention and crawls forward onto you, returning your kiss with equal passion.  ", false);
 			//[(no centaur)
-			if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("You take her by the upper arms and pull her on top of you as you lie back in the sun-warmed shallows.  ", false);
+			if (!player.isTaur()) outputText("You take her by the upper arms and pull her on top of you as you lie back in the sun-warmed shallows.  ", false);
 			outputText("Her hair drapes over you as she lines her penis up with your " + vaginaDescript(0) + ", delivering heat to your body, but this is dwarfed by the sensation of her entry as she pushes her cock in for the first time.  ", false);
 			player.cuntChange(monster.cockArea(0), true);
 			outputText("The penetration combines with the aphrodisiac being injected straight into your hungry pussy to produce a feeling like euphoria.  Unable to focus your thoughts any longer, you allow the anemone to take the lead as she begins pumping into you, coating your labia with a mixture of her pre-cum and your own secretion.  Soon you're moaning lustily with complete disregard for anything except the pleasure between you as your lover ups the pace; ", false);
 			//[(biped)
-			if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+			if (!player.isTaur()) {
 				outputText("as she thrusts hard and fast, her hair whips back and forth over your ", false);
 				//[(breasts>manly)
 				if (player.biggestTitSize() >= 1) outputText(breastDescript(0) + " and ", false);
@@ -379,7 +379,7 @@ package classes.Scenes.NPCs
 			//(squirter)
 			if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("soaks her crotch with juice and ", false);
 			outputText("wrings her penis, the blue shaft responds enthusiastically; she pushes deeply into you as it begins spasming and squirting its load.  Your partner's mouth hangs open as you squeeze the cum out of her; with all her muscle control taken away, her head hangs limply", false);
-			if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText(" on your back", false);
+			if (player.isTaur()) outputText(" on your back", false);
 			//[(notits)
 			else if (player.biggestTitSize() < 1) outputText(" on your chest", false);
 			else outputText(" between your breasts", false);
@@ -441,7 +441,7 @@ package classes.Scenes.NPCs
 
 					outputText("She pushes you back on your haunches and leans over your groin.  Her hair-tentacles slither forward over her shoulders and drop", false);
 					//[(normal)
-					if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText(" into your lap,", false);
+					if (!player.isTaur()) outputText(" into your lap,", false);
 					//(shitty taur)
 					else outputText(" downwards, onto your hams,", false);
 					outputText(" delivering lances of venom into your lower body.  The tingle warms your groin and more pre-cum leaks out of " + sMultiCockDesc() + ".  Her eyes lock onto a glistening dollop and she drops down quickly, enfolding the head of your " + cockDescript(x) + " in her cool mouth.  Her tongue dances around the crown of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ", relieving it of the sticky pre.  Looking ", false);
@@ -516,16 +516,16 @@ package classes.Scenes.NPCs
 					outputText(".\n\n", false);
 
 					outputText("Almost reverently, she caresses the shaft of your " + cockDescript(0) + ", stroking lightly up its enormous length.  She pulls it down to her eye level, inspecting the head from several angles.  Tentatively, she opens her mouth and pulls your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " into it, trying to fit your expansive dickflesh into a hole that even to your lust-crazed mind looks much too small.  Despite her best efforts, she can't get more than the crown past her lips, though the reflexive motions of her tongue poking around and inside the opening make you shiver and push out more pre-cum.  The anemone eventually pops your " + cockDescript(0) + " out of her mouth and frowns in frustration.  After a few seconds, she seems to reach a decision.  Moving your shaft out of the way, she walks around behind you.  She places one hand on your ", false);
-					if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("waist", false);
+					if (!player.isTaur()) outputText("waist", false);
 					else outputText("flank", false);
 					//[(not centaur)
-					if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText(" and pushes your shoulders down with the other", false);
+					if (!player.isTaur()) outputText(" and pushes your shoulders down with the other", false);
 					outputText(".  As she draws you backwards, you're forced to put your own ", false);
-					if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("hands ", false);
+					if (!player.isTaur()) outputText("hands ", false);
 					else outputText("forelegs knee-", false);
 					outputText("down in front of you to keep from falling face-first.  ", false);
 					//[(if non-centaur)
-					if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("The head of your " + cockDescript(0) + " dips into the lukewarm lakewater, sending a tingle down the shaft.  ", false);
+					if (!player.isTaur()) outputText("The head of your " + cockDescript(0) + " dips into the lukewarm lakewater, sending a tingle down the shaft.  ", false);
 					outputText("Behind you, the anemone has taken her blue, tentacled penis into her hand and is stroking it and fondling the tip, forcing her own pre-cum out and smearing it along her length.  Satisfied with its slipperiness, she edges forward until her cock is resting on your " + buttDescript() + ".  Drawing her hips back, she lines it up with your " + assholeDescript() + ", then thrusts forward while pulling back on your waist.  The wriggly feelers slip past your butthole and light up your insides with her potent venom.", false);
 					player.buttChange(monster.cockArea(0), true);
 					outputText("\n\n", false);
@@ -544,7 +544,7 @@ package classes.Scenes.NPCs
 					if (player.balls > 0) outputText(ballsDescriptLight() + " and ", false);
 					outputText(multiCockDescriptLight() + ".  Eventually you get to the point where you can't take it anymore, and when you feel the next orgasm drawing close you straighten up and begin ", false);
 					//[(man)
-					if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("clawing at your tormentor's tentacles, trying to pry them from " + sMultiCockDesc() + " by main force.", false);
+					if (!player.isTaur()) outputText("clawing at your tormentor's tentacles, trying to pry them from " + sMultiCockDesc() + " by main force.", false);
 					//(horse)
 					else outputText("bucking and stamping the ground, wanting to shake the tentacles loose but unable to reach them with your hands.", false);
 					outputText("  Looking a bit irritated that you want to bring her fun to an end, the anemone nevertheless relents and releases her visegrip on your " + multiCockDescriptLight() + ".  As the joy of seeing the way to your release cleared overtakes you, the anemone avails herself of your distraction to grab your arms and pull you toward her while pushing your " + player.legs() + " out from under you.  The two of you fall backward into the shallow water as " + sMultiCockDesc() + " begins unloading its immense backup of semen in a high arc.  The ", false);
@@ -554,8 +554,8 @@ package classes.Scenes.NPCs
 					else outputText("gouts", false);
 					outputText(" of jism ", false);
 					//[(height <4' and non-horse)
-					if (player.tallness < 48 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("fly over your head, and turning behind you, you see the anemone trying to catch them with an open mouth and her tongue out.", false);
-					else if (player.tallness < 84 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("catch the air and rain down on both your faces, splashing quietly where they hit water.", false);
+					if (player.tallness < 48 && !player.isTaur()) outputText("fly over your head, and turning behind you, you see the anemone trying to catch them with an open mouth and her tongue out.", false);
+					else if (player.tallness < 84 && !player.isTaur()) outputText("catch the air and rain down on both your faces, splashing quietly where they hit water.", false);
 					else {
 						outputText(" land right on your", false);
 						//[(if breasts)
@@ -569,7 +569,7 @@ package classes.Scenes.NPCs
 
 					outputText("Pushing your inert form off of her dick, she slips out from under you and sits up beside.  ", false);
 					//[(height <4' non-centaur)
-					if (player.tallness < 48 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("She looks you over, then bends down and drinks up as much of the semen floating in the water as she can find nearby.", false);
+					if (player.tallness < 48 && !player.isTaur()) outputText("She looks you over, then bends down and drinks up as much of the semen floating in the water as she can find nearby.", false);
 					else outputText("She leans over you and begins licking the semen off your body, not stopping until you're clean (if slightly sticky).", false);
 					outputText("  Having fed, she grins mischievously and grabs your " + cockDescript(0) + ", then tows your floating body to the shoreline with it.  She rolls you onto the sand and then swims for deep water, vanishing.", false);
 					//(pass 8 hours, minus libido, reset lust to min)
@@ -1127,7 +1127,7 @@ package classes.Scenes.NPCs
 			spriteSelect(71);
 			outputText("You walk over to the barrel.  ");
 			//[(display if hourssinceKiditem >= 16)
-			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] >= 16) {
+			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] != model.time.days) {
 				outputText("An item sits next to it, left there by the anemone as a present to you.  Or 'rent', if you choose to think of it that way.  ");
 				item = getAnemoneItem;
 			}
@@ -1181,59 +1181,37 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			spriteSelect(71);
-			var choice:Number;
 			var itype:ItemType;
 			outputText("You reach down and pick up her present.  Today, she's left you ");
 			if (kidAXP() == 0) itype = consumables.DRYTENT;
 			else if (kidAXP() < 50) {
 				///[IncubusDraft/SuccubusMilk/ImpFood/MinoBlood/LargeAxe]
-				choice = rand(8);
-				if (choice == 0) itype = consumables.INCUBID;
-				else if (choice == 1) itype = consumables.SUCMILK;
-				else if (choice == 2) itype = consumables.IMPFOOD;
-				else if (choice == 3) itype = consumables.GOB_ALE;
-				else if (choice == 4) itype = consumables.WETCLTH;
-				else if (choice == 5) itype = consumables.L_DRAFT;
-				else if (choice == 6) itype = consumables.W_FRUIT;
-				else itype = consumables.EQUINUM;
+				itype = randomChoice(consumables.INCUBID, consumables.SUCMILK, consumables.IMPFOOD, consumables.GOB_ALE, consumables.WETCLTH, consumables.L_DRAFT, consumables.W_FRUIT, consumables.EQUINUM);
 			}
 			else if (kidAXP() < 75) {
 				//White Book/Bee Honey/Ovi Elixir/Shark Tooth/S. Swimwear/Lust Draft/Bimbo Liqueur(same odds as player drop)
-				choice = rand(6);
-				if (choice == 0) itype = consumables.W__BOOK;
-				else if (choice == 1) itype = consumables.BEEHONY;
-				else if (choice == 2) itype = consumables.OVIELIX;
-				else if (choice == 3) itype = consumables.SHARK_T;
-				else if (choice == 4) itype = armors.S_SWMWR;
-				else if (choice == 5) itype = consumables.L_DRAFT;
+				itype = randomChoice(consumables.W__BOOK,consumables.BEEHONY,consumables.OVIELIX,consumables.SHARK_T, armors.S_SWMWR, consumables.L_DRAFT);
 				if (rand(100) == 0) itype = consumables.BIMBOLQ;
 			}
 			else if (kidAXP() < 100) {
 				//Mino Blood/Large Axe/Comfortable Clothes/Lust Draft/Lust Dagger/Bro Brew(same odds as player drop)
-				choice = rand(5);
-				if (choice == 0) itype = consumables.MINOBLO;
-				else if (choice == 1) itype = weapons.L__AXE;
-				else if (choice == 2) itype = armors.C_CLOTH;
-				else if (choice == 3) itype = consumables.L_DRAFT;
-				else if (choice == 4) itype = weapons.L_DAGGR;
+				itype = randomChoice(consumables.MINOBLO, weapons.L__AXE, armors.C_CLOTH, consumables.L_DRAFT, weapons.L_DAGGR);
 				if (rand(100) == 0) itype = consumables.BROBREW;
 			}
 			else {
 				//T.Shark Tooth/Pink Gossamer/Black Gossamer/Reptilum
-				choice = rand(4);
-				if (choice == 0) itype = consumables.TSTOOTH;
-				else if (choice == 1) itype = consumables.S_GOSSR;
-				else if (choice == 2) itype = consumables.B_GOSSR;
-				else if (choice == 3) itype = consumables.REPTLUM;
-				if (rand(100) == 0) itype = consumables.BROBREW;
-				if (rand(100) == 0) itype = consumables.BIMBOLQ;
+				var choice:Number = rand(100);
+				if (choice == 0) itype = consumables.BROBREW;
+				else if (choice == 1) itype = consumables.BIMBOLQ;
+				else
+					itype = randomChoice(consumables.TSTOOTH, consumables.S_GOSSR,consumables.B_GOSSR,consumables.REPTLUM);
 			}
 			outputText(itype.longName + ".");
 			if (itype == weapons.L__AXE) outputText("  Holy... how did she drag this thing home!?");
 			outputText("\n\n");
 			inventory.takeItem(itype, playerMenu);
 			//(set hourssinceKiditem = 0)
-			flags[kFLAGS.KID_ITEM_FIND_HOURS] = 0;
+			flags[kFLAGS.KID_ITEM_FIND_HOURS] = model.time.days;
 		}
 
 //[Give Weapon]

@@ -250,6 +250,11 @@ package classes
 			_cockType = value;
 		}
 		
+		public function hasKnot():Boolean
+		{
+			return knotMultiplier > 1;
+		}
+		
 		public function get knotMultiplier():Number 
 		{
 			return _knotMultiplier;

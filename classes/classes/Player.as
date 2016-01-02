@@ -12,7 +12,9 @@ import classes.Items.JewelryLib;
 import classes.Items.Shield;
 import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib;
+import classes.Items.UndergarmentLib
+import classes.Scenes.Areas.Forest;
+import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Places.TelAdre.UmasShop;
 
 use namespace kGAMECLASS;
@@ -42,6 +44,8 @@ use namespace kGAMECLASS;
 		{
 			game.outputText(text, clear);
 		}
+		
+		public var startingRace:String = "human";
 		
 		//Autosave
 		public var slotName:String = "VOID";
@@ -735,9 +739,16 @@ use namespace kGAMECLASS;
 			var race:String = "human";
 			if (catScore() >= 4) 
 			{
-				race = "cat-morph";
-				if (faceType == 0)
-					race = "cat-" + mf("boy", "girl");
+				if (isTaur() && lowerBody == LOWER_BODY_TYPE_CAT) {
+					race = "cat-taur";
+					if (faceType == 0)
+						race = "sphinx-morph"; // no way to be fully feral anyway
+				}
+				else {
+					race = "cat-morph";
+					if (faceType == 0)
+						race = "cat-" + mf("boy", "girl");
+				}
 			}
 			if (lizardScore() >= 4)
 			{
@@ -757,13 +768,19 @@ use namespace kGAMECLASS;
 			}
 			if (dogScore() >= 4)
 			{
-				race = "dog-morph";
-				if (faceType == 0)
-					race = "dog-" + mf("man", "girl");
+				if (isTaur() && lowerBody == LOWER_BODY_TYPE_DOG)
+					race = "dog-taur";
+				else {
+					race = "dog-morph";
+					if (faceType == 0)
+						race = "dog-" + mf("man", "girl");
+				}
 			}
 			if (foxScore() >= 4)
 			{
-				if (skinType == 1)
+				if (isTaur() && lowerBody == LOWER_BODY_TYPE_FOX)
+					race = "fox-taur";
+				else if (skinType == 1)
 					race = "fox-morph";
 				else
 					race = "fox-" + mf("morph", "girl");
@@ -781,7 +798,7 @@ use namespace kGAMECLASS;
 			}
 			if (horseScore() >= 3)
 			{
-				if (lowerBody == 4)
+				if (isTaur())
 					race = "centaur-morph";
 				else
 					if (hornType == HORNS_UNICORN)
@@ -822,7 +839,7 @@ use namespace kGAMECLASS;
 				race = "spider-morph";
 				if (mf("no", "yes") == "yes")
 					race = "spider-girl";
-				if (lowerBody == 16)
+				if (isDrider())
 					race = "drider";
 			}
 			if (kangaScore() >= 4)
@@ -859,16 +876,21 @@ use namespace kGAMECLASS;
 			}
 			if (deerScore() >= 4)
 			{
-				race = "deer-morph";
-				if (faceType == 0) race = "deer-" + mf("morph", "girl");
-				if (lowerBody == LOWER_BODY_TYPE_DEERTAUR) race = "deer-taur";
+				if (isTaur()) race = "deer-taur";
+				else {
+					race = "deer-morph";
+					if (faceType == 0) race = "deer-" + mf("morph", "girl");
+				}
 			}
 			//Special, bizarre races
 			if (dragonneScore() >= 6)
 			{
-				race = "dragonne-morph";
-				if (faceType == 0)
-					race = "dragonne-" + mf("man", "girl");
+				if (isTaur()) race = "dragonne-taur";
+				else {
+					race  = "dragonne-morph";
+					if (faceType == 0)
+						race = "dragonne-" + mf("man", "girl");
+				}
 			}
 			if (manticoreScore() >= 6)
 			{
@@ -877,15 +899,19 @@ use namespace kGAMECLASS;
 					race = "manticore-" + mf("man", "girl");
 			}
 			if (sirenScore() >= 4)
+			{
 				race = "siren";
+			}
 			//</mod>
 			if (lowerBody == 3)
 				race = "naga";
-			if (lowerBody == 4) {
+				
+			if (lowerBody == LOWER_BODY_TYPE_HOOFED && isTaur()) {
 				if (wingType == WING_TYPE_FEATHERED_LARGE) race = "pegataur";
 				else race = "centaur";
 			}
-			if (lowerBody == 11)
+			
+			if (lowerBody == LOWER_BODY_TYPE_PONY)
 				race = "pony-kin";
 
 			if (gooScore() >= 3)
@@ -893,6 +919,8 @@ use namespace kGAMECLASS;
 				race = "goo-";
 				race += mf("boi", "girl");
 			}
+			
+			
 			return race;
 		}
 
@@ -1246,13 +1274,13 @@ use namespace kGAMECLASS;
 		{
 			var kitsuneCounter:int = 0;
 			//If the character has fox ears, +1
-			if (earType == 9)
+			if (earType == EARS_FOX)
 				kitsuneCounter++;
 			//If the character has a fox tail, +1
-			if (tailType == 13)
+			if (tailType == TAIL_TYPE_FOX)
 				kitsuneCounter++;
 			//If the character has two or more fox tails, +2
-			if (tailType == 13 && tailVenom >= 2)
+			if (tailType == TAIL_TYPE_FOX && tailVenom >= 2)
 				kitsuneCounter += 2;
 			//If the character has tattooed skin, +1
 			//9999
@@ -1261,31 +1289,31 @@ use namespace kGAMECLASS;
 				kitsuneCounter++;
 			//If the character's kitsune score is greater than 0 and:
 			//If the character has a normal face, +1
-			if (kitsuneCounter > 0 && faceType == 0)
+			if (kitsuneCounter > 0 && (faceType == FACE_HUMAN || faceType == FACE_FOX))
 				kitsuneCounter++;
 			//If the character's kitsune score is greater than 1 and:
 			//If the character has "blonde","black","red","white", or "silver" hair, +1
-			if (kitsuneCounter > 0 && (hairColor == "golden blonde" || hairColor == "black" || hairColor == "red" || hairColor == "white" || hairColor == "silver blonde"))
+			if (kitsuneCounter > 0 && (InCollection(furColor, KitsuneScene.basicKitsuneHair) || InCollection(furColor, KitsuneScene.elderKitsuneColors)))
 				kitsuneCounter++;
 			//If the character's femininity is 40 or higher, +1
 			if (kitsuneCounter > 0 && femininity >= 40)
 				kitsuneCounter++;
 			//If the character has fur, scales, or gooey skin, -1
-			if (skinType > 1)
-				kitsuneCounter -= 2;
-			if (skinType == 1)
+			if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
 				kitsuneCounter--;
+			if (skinType > SKIN_TYPE_FUR)
+				kitsuneCounter -= skinType; // -2 sor scales, -3 for goo
 			//If the character has abnormal legs, -1
-			if (lowerBody != 0)
+			if (lowerBody != LOWER_BODY_TYPE_HUMAN && lowerBody != LOWER_BODY_TYPE_FOX)
 				kitsuneCounter--;
 			//If the character has a nonhuman face, -1
-			if (faceType != 0)
+			if (faceType != FACE_HUMAN && faceType != FACE_FOX)
 				kitsuneCounter--;
 			//If the character has ears other than fox ears, -1
-			if (earType != 9)
+			if (earType != EARS_FOX)
 				kitsuneCounter--;
 			//If the character has tail(s) other than fox tails, -1
-			if (tailType != 13)
+			if (tailType != TAIL_TYPE_FOX)
 				kitsuneCounter--;
 
 			return kitsuneCounter;
@@ -1315,6 +1343,8 @@ use namespace kGAMECLASS;
 			if (skinType == 2 && dragonCounter > 0)
 				dragonCounter++;
 			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG || hornType == HORNS_DRACONIC_X2)
+				dragonCounter++;
+			if (findPerk(PerkLib.Dragonfire) >= 0)
 				dragonCounter++;
 			return dragonCounter;
 		}
@@ -1882,7 +1912,7 @@ use namespace kGAMECLASS;
 		
 		public function clothedOrNakedLower(clothedText:String, nakedText:String = ""):String
 		{
-			return (armorName != "gear" && (armorName != "lethicite armor" && lowerGarmentName == "nothing") ? clothedText : nakedText);
+			return (armorName != "gear" && (armorName != "lethicite armor" && lowerGarmentName == "nothing") && !isTaur() ? clothedText : nakedText);
 		}
 		
 		public function addToWornClothesArray(armor:Armor):void {
@@ -2223,14 +2253,14 @@ use namespace kGAMECLASS;
 			{
 				//Balls
 				var tempSpeedPenalty:Number = 0;
-				if (ballSize > 4) tempSpeedPenalty += Math.round((ballSize - 4) / 2);
+				var lim:int = isTaur() ? 9 : 4;
+				if (ballSize > lim && balls > 0) tempSpeedPenalty += Math.round((ballSize - lim) / 2);
 				//Breasts
-				if (hasBreasts())
-				{	
-					if (biggestTitSize() > 15) tempSpeedPenalty += (biggestTitSize() / 4);
-				}
+				lim = isTaur() ? BREAST_CUP_I : BREAST_CUP_G;
+				if (hasBreasts() && biggestTitSize() > lim) tempSpeedPenalty += ((biggestTitSize() - lim) / 2);
 				//Cocks
-				if (biggestCockArea() > 24) tempSpeedPenalty += ((biggestCockArea() - 24) / 6)
+				lim = isTaur() ? 72 : 24;
+				if (biggestCockArea() > lim) tempSpeedPenalty += ((biggestCockArea() - lim) / 6)
 				//Min-cap
 				var penaltyMultiplier:Number = 1;
 				penaltyMultiplier -= str * 0.1;
@@ -2276,9 +2306,14 @@ use namespace kGAMECLASS;
 				maxTou += 10;
 				maxInt += 10;
 			}
-			if (dogScore() >= 4 || foxScore() >= 4) {
+			if (dogScore() >= 4) {
 				maxSpe += 10;
 				maxInt -= 10;
+			}
+			if (foxScore() >= 4) {
+				maxStr -= 10;
+				maxSpe += 5;
+				maxInt += 5;
 			}
 			if (catScore() >= 4) {
 				maxSpe += 5;
@@ -2346,7 +2381,7 @@ use namespace kGAMECLASS;
 				maxSpe += 5;
 			}
 			if (isNaga()) maxSpe += 10;
-			if (isTaur()) maxSpe += 20;
+			if (isTaur() || isDrider()) maxSpe += 20;
 			//Apply New Game+
 			maxStr += 25 * newGamePlusMod();
 			maxTou += 25 * newGamePlusMod();

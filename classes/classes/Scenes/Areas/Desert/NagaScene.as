@@ -259,8 +259,8 @@ private function nagaVictoryMale():void {
 	//Male or 50% herms
 	if(player.totalCocks() > 0) {
 		//Centaur
-		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
-			outputText("As your massive bulk looms over the defeated naga, your eyes gleam with desire. Your heart pounds in your ears as lusty thoughts echo in your head. You lift the snakewoman up into your arms, bringing her close before licking her neck and tasting her smooth scaly skin as her tail dangles down to the sand. As you touch her, she recovers, and her tail slowly wraps around your equine half to support her own weight. She returns your attentions by running her long forked tongue down your chest. Her scaly tail rubs sensually over your flesh as she continues to wind around you, caressing your " + cockDescript(0) + "  with her tip, making you hard in a flash. The naga wriggles free from your embrace and coils behind you. Her entire length is now wrapped around various portions of both your human and equine halves, and she uses her grip to dangle underneath you. Her hands reach out to take a firm hold of your " + cockDescript(0) + ".  You shiver as her tongue darts out and slides around your cock, pre-cum dripping from your head as she licks you. The agile naga lowers more of herself beneath you, spreading her pussy wide open before sliding onto your " + cockDescript(0) + " and letting out a hissy moan as you penetrate her. Your body tingles as her entire length quivers in pleasure, sending ripples over the flesh her tail is wrapped around.  Jolts of pleasure run through you as the naga woman grinds her hips against your " + cockDescript(0) + " , driving it into her as far as she can take.  With a loud and drawn-out moan, ", false);
+		if(player.isTaur()) {
+			outputText("As your massive bulk looms over the defeated naga, your eyes gleam with desire. Your heart pounds in your ears as lusty thoughts echo in your head. You lift the snakewoman up into your arms, bringing her close before licking her neck and tasting her smooth scaly skin as her tail dangles down to the sand. As you touch her, she recovers, and her tail slowly wraps around your lower half to support her own weight. She returns your attentions by running her long forked tongue down your chest. Her scaly tail rubs sensually over your flesh as she continues to wind around you, caressing your " + cockDescript(0) + "  with her tip, making you hard in a flash. The naga wriggles free from your embrace and coils behind you. Her entire length is now wrapped around various portions of both your humanoid and animalistic halves, and she uses her grip to dangle underneath you. Her hands reach out to take a firm hold of your " + cockDescript(0) + ".  You shiver as her tongue darts out and slides around your cock, pre-cum dripping from your head as she licks you. The agile naga lowers more of herself beneath you, spreading her pussy wide open before sliding onto your " + cockDescript(0) + " and letting out a hissy moan as you penetrate her. Your body tingles as her entire length quivers in pleasure, sending ripples over the flesh her tail is wrapped around.  Jolts of pleasure run through you as the naga woman grinds her hips against your " + cockDescript(0) + " , driving it into her as far as she can take.  With a loud and drawn-out moan, ", false);
 			//[normal cum load]
 			if(player.cumQ() < 250) outputText("you cum inside of her, ", false);
 			//[extra cum]
@@ -345,14 +345,14 @@ private function nagaVictoryFemale():void {
 	//4) Victory female
 	if(player.hasVagina()) {
 		//c) Centaur
-		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
+		if(player.isTaur()) {
 			//For inspiration in this noble venture: 
 			//http://imagemacros.files.wordpress.com/2009/10/im_a_horse.jpg?w=402&h=604
    			//(Loss by HPs)
 			//NO RAEP IF LOSS BY HPs, FUCK CENTAURS! SRSLY! GROW NORMAL LEGS!
    			//(Loss by Lust)
 			if(monster.lust > 99) {
-				outputText("As your prey falls to the ground, her body too filled with sexual desire to fight, you step over her, your tall frame towering over her own quivering body. She instantly grabs your shoulders, lust burning in her eyes. You wrap your arms around her, drawing her back against your chest and lifting her off the ground. She is facing away from you, but you can tell by the way she's responding that she is ready for whatever you're going to do to her. You begin by shifting one of your arms to hold her around her stomach, while your other hand begins working on her small but tender breasts. You begin to nibble at her ear, occasionally kissing her neck. The naga responds by wrapping her tail around your equine body, gently rubbing her sensitive underbelly against your equine fur.", false);
+				outputText("As your prey falls to the ground, her body too filled with sexual desire to fight, you step over her, your tall frame towering over her own quivering body. She instantly grabs your shoulders, lust burning in her eyes. You wrap your arms around her, drawing her back against your chest and lifting her off the ground. She is facing away from you, but you can tell by the way she's responding that she is ready for whatever you're going to do to her. You begin by shifting one of your arms to hold her around her stomach, while your other hand begins working on her small but tender breasts. You begin to nibble at her ear, occasionally kissing her neck. The naga responds by wrapping her tail around your lower body, gently rubbing her sensitive underbelly against your " + player.skin() + ".", false);
 				//(If PC is Herm i.e. Has a cock(s))
 				if(player.gender == 3) outputText("  As her tail gently squeezes your body, it draws your own " + multiCockDescriptLight() + " up against your body, her soft underbelly stimulating the sensitive skin.", false);
 				outputText("  With the added support, you are able to move your arm away from her stomach, moving your hand down to her covered snatch. It isn't hard to find as there is practically a river of her juices dripping from it. You peel away the scaly covering, and reveal her soaking wet lovehole. As you begin to play with her engorged clit, her soft moans begin to become more pronounced and you can feel her tail begin to wrap more tightly around your body. You feel a strange sensation as her tail brushes past your own " + vaginaDescript(0) + ", causing you to tense up a bit. It seems that she noticed, because she does it again a few seconds later. As she begins to rub your " + vaginaDescript(0) + " with her tail, your body begins to betray your own lusts.\n\n", false);
@@ -401,7 +401,7 @@ private function nagaVictoryFemale():void {
 private function nagaVictoryGenderless():void {
 	clearOutput();
 	//c)Centaur
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
+	if(player.isTaur()) {
 		outputText("You prance over to the prone form of the snake woman, plotting just what you will do to her body before realizing the severe lack of parts to use on her. You let loose a snort of frustration and paw at the ground. This complicates things, but you aren't going to let a little thing like having no genitalia stop you from having some fun.\n\n", false);
 		outputText("You position yourself over the uppermost part of her tail and lower yourself down onto her, the lower half of your body resting on her tail. You reach down to the scaly covering over her pussy and open it to reveal the soft folds inside. Gently you slide your tongue into her, making small circles every so often.\n\n", false);
 		outputText("A hiss of pleasure escapes from the naga's mouth as she brings her hands onto your head and grips you tightly. The lower portion of her tail wraps gently around you and she brings the tip of her tail up to your mouth. You shift your attention from her netherlips to start sucking on the tip of it, twirling your tongue around it sensually. After a moment, the naga takes her tongue out of your mouth and slides the now lubricated tail gently into your backside. You let out a slight gasp, but it is cut short as the naga brings your head back down to her pussy. You start licking again as the naga slides more of her tail into you, twitching the tip of it deep inside of you.\n\n", false);
@@ -496,7 +496,7 @@ internal function nagaFUCKSJOOOOOO():void {
 		else outputText("You fall to your knees, your battered body unable to hold itself up any longer.\n\n", false);
 		outputText("You hear the hiss of the naga's laughter as she slithers over to your prone form. Her long tail twists around you and tightens suddenly, pinning your arms to your sides", false);
 		//(if centaur)
-		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) 
+		if(player.isTaur()) 
 		{ 
 			outputText(" and clamping your legs to your stomach", false);
 		}

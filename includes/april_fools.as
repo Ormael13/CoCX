@@ -6,7 +6,7 @@ public function isAprilFools():Boolean {
 
 // Encounter Chance 1 out of 40 and only if you're a centaur
 public function poniesYN():Boolean {
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR && date.date == 1 && date.month == 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00118] == 0) {
+	if(player.lowerBody == LOWER_BODY_TYPE_HOOFED && player.isTaur() && date.date == 1 && date.month == 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00118] == 0) {
 		clearOutput();
 		outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n", false);
 		//(option: Approach? Leave them Be?)
@@ -71,6 +71,7 @@ public function derpyParty():void {
 
 	outputText("Your strong lower body has shrunk, the firm musculature replaced by an oddly cartoonish looking form.  In fact, from the waist down you look just like one of the ponies!  Everything looks to still be in the same general place, and a quick test of your new lower body proves it still functions somewhat the same. The new shape of your hooves takes a little while to get used to, but other than that you get used to your new lower body almost with no effort\n\n(<i>*Note:You should really check the character viewer</i>)", false);
 	player.lowerBody = LOWER_BODY_TYPE_PONY;
+	player.legCount = 4;
 	doNext(camp.returnToCampUseEightHours);
 }
 

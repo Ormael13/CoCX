@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Areas.Forest.KitsuneScene;
 
 	public final class Mutations extends BaseContent
 	{
@@ -523,7 +524,7 @@
 				changes++;
 			}
 			//+hooves
-			if (player.lowerBody != LOWER_BODY_TYPE_HOOFED && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+			if (player.lowerBody != LOWER_BODY_TYPE_HOOFED) {
 				if (changes < changeLimit && rand(3) == 0) {
 					changes++;
 					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
@@ -534,6 +535,7 @@
 					if (player.skinType != SKIN_TYPE_FUR) outputText("  A fine coat of fur grows out below your waist, itching briefly as it fills in.");
 					outputText("<b>  You now have hooves in place of your feet!</b>", false);
 					player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+					player.legCount = 2;
 					dynStats("spe", 1);
 					changes++;
 				}
@@ -1243,14 +1245,14 @@
 			//NON - GENDER SPECIFIC CHANGES
 			//Tail -> Ears -> Fur -> Face
 			//Centaur if hooved
-			if (changes < changeLimit && rand(6) == 0 && player.lowerBody == LOWER_BODY_TYPE_HOOFED) {
+			if (changes < changeLimit && rand(6) == 0 && player.lowerBody == LOWER_BODY_TYPE_HOOFED && !player.isTaur()) {
 				changes++;
 				outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.", false);
 				if (player.gender > 0) {
 					outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.", false);
 				}
 				dynStats("spe", 3);
-				player.lowerBody = LOWER_BODY_TYPE_CENTAUR;
+				player.legCount = 4;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
@@ -1347,28 +1349,38 @@
 				outputText("\n\nAfter drinking the potion, you feel a bit faster.");
 				dynStats("spe", 1);
 			}
-			//Centaur
-			if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LOWER_BODY_TYPE_HOOFED && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+			//classic horse-taur version
+			if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LOWER_BODY_TYPE_HOOFED && !player.isTaur()) {
 				changes++;
 				outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a centaur</b>.", false);
 				if (player.gender > 0) {
 					outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.", false);
 				}
 				dynStats("spe", 3);
-				player.lowerBody = LOWER_BODY_TYPE_CENTAUR;
+				player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+				player.legCount = 4;
 			}
-			//Give the player hooves
-			if (player.lowerBody != LOWER_BODY_TYPE_HOOFED && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+			//generic version
+			if (player.lowerBody != LOWER_BODY_TYPE_HOOFED && !player.isTaur()) {
 				if (changes < changeLimit && rand(3) == 0) {
 					changes++;
-					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
-					if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
-					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!", false);
+					//else if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
+					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
+						outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!", false);
+						player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+					}
 					//Catch-all
-					if (player.lowerBody > LOWER_BODY_TYPE_NAGA) outputText("\n\nYou stagger as your " + player.feet() + " change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
-					outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_HOOFED;
-					dynStats("cor", 0);
+					else {	
+						if (player.lowerBody == LOWER_BODY_TYPE_HUMAN)
+							player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+						outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a feral beast!</b>", false);
+					}
+					if (player.gender > 0)
+						outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the hind legs of your body.", false);
+					dynStats("spe", 3);
+					//outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>", false);
+					player.legCount = 4;
+					//dynStats("cor", 0);
 					changes++;
 				}
 			}
@@ -2224,6 +2236,7 @@
 				else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits.  Their flesh softens as your hooves reshape into furred paws.", false);
 				else outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on fur-covered paws!  <b>You now have paws</b>.", false);
 				player.lowerBody = LOWER_BODY_TYPE_DOG;
+				player.legCount = 2;
 				changes++;
 			}
 			//Change to dog-ears!  Requires dog-tail
@@ -3397,6 +3410,7 @@
 					if (player.lowerBody > LOWER_BODY_TYPE_NAGA) outputText("\n\nYou stagger as your " + player.feet() + " change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
 					outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>", false);
 					player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+					player.legCount = 2;
 					dynStats("cor", 0);
 					changes++;
 				}
@@ -3910,6 +3924,7 @@
 					outputText("  The goo firms up and you return to your previous height.  It would truly be hard to get any shorter than you already are!", false);
 				}
 				player.lowerBody = LOWER_BODY_TYPE_GOO;
+				player.legCount = 1;
 				return;
 			}
 			//3a. Grow vagina if none
@@ -4198,6 +4213,7 @@
 				if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.", false);
 				outputText("  But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours.", false);
 				player.lowerBody = LOWER_BODY_TYPE_NAGA;
+				player.legCount = 1;
 				changes++;
 			}
 			if (rand(4) == 0 && player.gills && changes < changeLimit) {
@@ -4287,6 +4303,7 @@
 			player.antennae = ANTENNAE_NONE;
 			player.faceType = FACE_HUMAN;
 			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+			player.legCount = 2;
 			player.wingType = WING_TYPE_NONE;
 			player.wingDesc = "non-existant";
 			player.tailType = TAIL_TYPE_NONE;
@@ -4383,24 +4400,28 @@
 			if (player.isTaur() && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
 				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				player.legCount = 2;
 				changes++;
 			}
 			//(Goo -> Normal Human Legs) (copy from elsewhere)
 			if (player.isGoo() && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				player.legCount = 2;
 				changes++;
 			}
 			//(Naga -> Normal Human Legs) (copy from elsewhere)
 			if (player.isNaga() && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				player.legCount = 2;
 				changes++;
 			}
 			//(Non-human -> Normal Human Legs)
 			if (player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				player.legCount = 2;
 				changes++;
 			}
 			//Remove Incorporeality Perk
@@ -4961,9 +4982,9 @@
 			//Da paws (if already haz ears & tail)
 			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_CAT) {
 				//hoof to cat:
-				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
+				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) {
 					outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred cat paws. <b>You now have cat paws.</b>", false);
-					if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("  You feel woozy and collapse on your side.  When you wake, you're no longer a centaur and your body has returned to a humanoid shape.", false);
+					if (player.isTaur()) outputText("  You feel woozy and collapse on your side.  When you wake, you're no longer a centaur and your body has returned to a humanoid shape.", false);
 				}
 				//Goo to cat
 				else if (player.lowerBody == LOWER_BODY_TYPE_GOO) {
@@ -4972,6 +4993,7 @@
 				//non hoof to cat:
 				else outputText("\n\nYou scream in agony as you feel the bones in your " + player.feet() + " break and begin to rearrange. When the pain fades, you feel surprisingly well-balanced. <b>You now have cat paws.</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_CAT;
+				player.legCount = 2;
 				changes++;
 			}
 			//TURN INTO A FURRAH!  OH SHIT
@@ -4984,7 +5006,7 @@
 				changes++;
 			}
 			//CAT-FACE!  FULL ON FURRY!  RAGE AWAY NEKOZ
-			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && player.skinType == SKIN_TYPE_FUR && player.faceType != FACE_CAT) {
+			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && (player.skinType == SKIN_TYPE_FUR || (player.skinType == SKIN_TYPE_SCALES && player.dragonneScore() >= 4)) && player.faceType != FACE_CAT) {
 				//Gain cat face, replace old face
 				temp = rand(3);
 				if (temp == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>", false);
@@ -5298,13 +5320,14 @@
 				//Hooves -
 				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.", false);
 				//TAURS -
-				else if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with lizard-like claws.", false);
+				else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with lizard-like claws.", false);
 				//feet types -
 				else if (player.lowerBody == LOWER_BODY_TYPE_HUMAN || player.lowerBody == LOWER_BODY_TYPE_DOG || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_BEE || player.lowerBody == LOWER_BODY_TYPE_CAT || player.lowerBody == LOWER_BODY_TYPE_LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.", false);
 				//Else –
 				else outputText("\n\nPain rips through your " + player.legs() + ", morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.", false);
 				outputText("  <b>You have reptilian legs and claws!</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_LIZARD;
+				player.legCount = 2;
 				changes++;
 			}
 			//-Tail – sinuous lizard tail
@@ -5669,6 +5692,7 @@
 				}
 				changes++;
 				player.lowerBody = LOWER_BODY_TYPE_BUNNY;
+				player.legCount = 2;
 			}
 			//BUN FACE!  REQUIREZ EARZ
 			if (player.earType == EARS_BUNNY && player.faceType != FACE_BUNNY && rand(3) == 0 && changes < changeLimit) {
@@ -6006,6 +6030,7 @@
 				//goo
 				else outputText("\n\nYour gooey undercarriage loses some of its viscosity, dumping you into the puddle that was once your legs. As you watch, the fluid pulls together into a pair of distinctly leg-like shapes, solidifying into a distinctly un-gooey form. You've even regained a pair of feet!  ", false);
 				player.lowerBody = LOWER_BODY_TYPE_HARPY;
+				player.legCount = 2;
 				changes++;
 				//(cont)
 				outputText("While humanoid in shape, they have two large, taloned toes on the front and a single claw protruding from the heel. The entire ensemble is coated in " + player.hairColor + " feathers from ankle to hip, reminding you of the bird-women of the mountains. <b>You now have harpy legs!</b>", false);
@@ -6279,7 +6304,7 @@
 			//-Roo footsies (Req: Tail)
 			if (player.lowerBody != LOWER_BODY_TYPE_KANGAROO && (type == 1 || player.tailType == TAIL_TYPE_KANGAROO) && changes < changeLimit && rand(4) == 0) {
 				//gain roo feet from centaur:
-				if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("\n\nYour backlegs suddenly wobble and collapse, causing you to pitch over onto your side.  Try as you might, you can't get them to stop spasming so you can stand back up; you thrash your hooves wildly as a pins-and-needles sensation overtakes your lower body.  A dull throbbing along your spine makes you moan in agony; it's as though someone had set an entire bookshelf on your shoulders and your spine were being compressed far beyond its limit.  After a minute of pain, the pressure evaporates and you look down at your legs.  Not only are your backlegs gone, but your forelegs have taken on a dogleg shape, with extremely long feet bearing a prominent middle toe!  You set about rubbing the feeling back into your legs and trying to move the new feet.  <b>You now have kangaroo legs!</b>", false);
+				if (player.isTaur()) outputText("\n\nYour backlegs suddenly wobble and collapse, causing you to pitch over onto your side.  Try as you might, you can't get them to stop spasming so you can stand back up; you thrash your hooves wildly as a pins-and-needles sensation overtakes your lower body.  A dull throbbing along your spine makes you moan in agony; it's as though someone had set an entire bookshelf on your shoulders and your spine were being compressed far beyond its limit.  After a minute of pain, the pressure evaporates and you look down at your legs.  Not only are your backlegs gone, but your forelegs have taken on a dogleg shape, with extremely long feet bearing a prominent middle toe!  You set about rubbing the feeling back into your legs and trying to move the new feet.  <b>You now have kangaroo legs!</b>", false);
 				//gain roo feet from naga:
 				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("\n\nYour tail quivers, then shakes violently, planting you on your face.  As you try to bend around to look at it, you can just see the tip shrinking out of your field of vision from the corner of your eye.  The scaly skin below your waist tightens intolerably, then splits; you wriggle out of it, only to find yourself with a pair of long legs instead!  A bit of hair starts to grow in as you stand up unsteadily on your new, elongated feet.  <b>You now have kangaroo legs!</b>  Now, what are you going to do with a giant shed snakeskin?", false);
 				//gain roo feet from slime:
@@ -6287,6 +6312,7 @@
 				//gain roo feet from human/bee/demon/paw/lizard:
 				else outputText("\n\nYour feet begin to crack and shift as the metatarsal bones lengthen.  Your knees buckle from the pain of your bones rearranging themselves, and you fall over.  After fifteen seconds of what feels like your feet being racked, the sensation stops.  You look down at your legs; they've taken a roughly dog-leg shape, but they have extremely long feet with a prominent middle toe!  As you stand up you find that you're equally comfortable standing flat on your feet as you are on the balls of them!  <b>You now have kangaroo legs!</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_KANGAROO;
+				player.legCount = 2;
 				changes++;
 			}
 			//-Roo tail (Req: Ears)
@@ -6551,18 +6577,21 @@
 			if (player.isTaur() && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
 				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				player.legCount = 2;
 				changes++;
 			}
 			//(Goo -> Normal Human Legs) (copy from elsewhere)
 			if (player.isGoo() && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				player.legCount = 2;
 				changes++;
 			}
 			//(Naga -> Normal Human Legs) (copy from elsewhere)
 			if (player.isNaga() && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				player.legCount = 2;
 				changes++;
 			}
 			//Drider butt
@@ -6585,6 +6614,7 @@
 			if (((type == 1 && player.lowerBody != LOWER_BODY_TYPE_DRIDER_LOWER_BODY && player.lowerBody != LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) || (type != 1 && player.lowerBody != LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS)) && (!player.isGoo() && !player.isNaga() && !player.isTaur()) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nStarting at your " + player.feet() + ", a tingle runs up your " + player.legs() + ", not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your " + buttDescript() + " in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a black, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS;
+				player.legCount = 2;
 				changes++;
 			}
 			//(Tail becomes spider abdomen GRANT WEB ATTACK)
@@ -6603,6 +6633,7 @@
 			if (type == 1 && player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS && rand(4) == 0 && player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
 				outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your " + buttDescript() + " is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_DRIDER_LOWER_BODY;
+				player.legCount = 8;
 				changes++;
 			}
 			if (rand(4) == 0 && player.gills && changes < changeLimit) {
@@ -7144,13 +7175,12 @@
 			}
 
 			//[Change Hair Color: Golden-blonde or Reddish-orange]
-			if (player.hairColor != "golden-blonde" && player.hairColor != "reddish-orange" && player.hairColor != "silver" && player.hairColor != "white" && player.hairColor != "red" && player.hairColor != "black" && changes < changeLimit && rand(4) == 0) {
-				var hairTemp:int = rand(10);
-				if (hairTemp < 5) player.hairColor = "reddish-orange";
-				else if (hairTemp < 7) player.hairColor = "red";
-				else if (hairTemp < 8) player.hairColor = "golden-blonde";
-				else if (hairTemp < 9) player.hairColor = "silver";
-				else player.hairColor = "black";
+			var fox_hair:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
+			if (!InCollection(player.hairColor, fox_hair) && !InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors) && changes < changeLimit && rand(4) == 0) {
+				if (player.tailType == TAIL_TYPE_FOX && player.tailVenom > 1)
+					if(player.tailVenom < 9) player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
+					else player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
+				else player.hairColor = randomChoice(fox_hair);
 				outputText("\n\nYour scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become " + player.hairColor + "!");
 			}
 			//[Adjust hips toward 10 – wide/curvy/flared]
@@ -7240,7 +7270,7 @@
 
 			}
 			//Cum Multiplier Xform
-			if (player.cumQ() < 5000 < 2 && rand(3) == 0 && changes < changeLimit && player.hasCock()) {
+			if (player.cumQ() < 5000 && rand(3) == 0 && changes < changeLimit && player.hasCock()) {
 				temp = 2 + rand(4);
 				//Lots of cum raises cum multiplier cap to 2 instead of 1.5
 				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) temp += rand(10);
@@ -7330,7 +7360,16 @@
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinAdj = "";
 				player.skinDesc = "fur";
-				player.furColor = "orange and white"
+				if (player.kitsuneScore() >= 4)
+					if(InCollection(player.hairColor, KitsuneScene.basicKitsuneFur) || InCollection(player.hairColor, KitsuneScene.elderKitsuneColors))
+						player.furColor = player.hairColor;
+					else
+						if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9)
+							player.furColor = randomChoice(KitsuneScene.elderKitsuneColors);
+						else
+							player.furColor = randomChoice(KitsuneScene.basicKitsuneFur);
+				else
+					player.furColor = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
 				changes++;
 			}
 			//[Grow Fox Legs]
@@ -7354,6 +7393,7 @@
 					outputText(".  When the spasms subside and you can once again stand, <b>you find that your legs have been changed to those of a fox!</b>");
 				}
 				player.lowerBody = LOWER_BODY_TYPE_FOX;
+				player.legCount = 2;
 				changes++;
 			}
 			//Grow Fox Ears]
@@ -7707,18 +7747,20 @@
 				changes++;
 			}
 			//[Change Hair Color: Golden-blonde, SIlver Blonde, White, Black, Red]
-			if (((mystic && rand(2) == 0) || (!mystic && rand(4) == 0)) && changes < changeLimit && player.hairColor != "golden blonde" && player.hairColor != "silver blonde" && player.hairColor != "white" && player.hairColor != "black" && player.hairColor != "red") {
-				var hairTemp:int = rand(10);
-				if (hairTemp == 0) player.hairColor = "golden blonde";
-				else if (hairTemp == 1) player.hairColor = "silver blonde";
-				else if (hairTemp <= 3) player.hairColor = "white";
-				else if (hairTemp <= 6) player.hairColor = "black";
-				else player.hairColor = "red";
+			if (((mystic && rand(2) == 0) || (!mystic && rand(4) == 0)) && changes < changeLimit && !InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors)) {
+				if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9) player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
+				else player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
 				outputText("\n\nYour scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same " + player.hairColor + " as a kitsune's!");
 				changes++;
 			}
+			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
-			if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES && ((mystic) || (!mystic && rand(2) == 0))) {
+			if ((player.skinType == SKIN_TYPE_FUR 
+					&& !InCollection(player.furColor, KitsuneScene.basicKitsuneFur)
+					&& !InCollection(player.furColor, KitsuneScene.elderKitsuneColors)
+					&& !InCollection(player.furColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
+					)
+				|| player.skinType == SKIN_TYPE_SCALES && ((mystic) || (!mystic && rand(2) == 0))) {
 				outputText("\n\nYou begin to tingle all over your " + player.skin() + ", starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
 				if (player.skinType == SKIN_TYPE_FUR) outputText("  You stare in horror as you pull your fingers away holding a handful of " + player.furColor + " fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinTone + " skin.");
 				else if (player.skinType == SKIN_TYPE_SCALES) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinTone + " skin underneath.");
@@ -7726,49 +7768,21 @@
 				player.skinType = SKIN_TYPE_PLAIN;
 				player.skinAdj = "";
 				player.skinDesc = "skin";
-				if (!mystic && player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "light") {
-					var skinTemp:int = rand(3);
-					if (skinTemp == 0) player.skinTone = "tan";
-					else if (skinTemp == 1) player.skinTone = "olive";
-					else player.skinTone = "light";
-				}
-				else if (mystic && player.skinTone != "dark" && player.skinTone != "ebony" && player.skinTone != "ashen" && player.skinTone != "sable" && player.skinTone != "milky white") {
-					var skinT:int = rand(5);
-					if (skinT == 0) player.skinTone = "dark";
-					else if (skinT == 1) player.skinTone = "ebony";
-					else if (skinT == 2) player.skinTone = "ashen";
-					else if (skinT == 3) player.skinTone = "sable";
-					else player.skinTone = "milky white";
-				}
+				if (!InCollection(player.skinTone, tone)) player.skinTone = randomChoice(tone);
 				outputText(player.skinTone + " complexion.");
 				outputText("  <b>You now have " + player.skin() + "!</b>");
 				changes++;
 			}
 			//Change skin tone if not changed you!
-			else if (mystic && player.skinTone != "dark" && player.skinTone != "ebony" && player.skinTone != "ashen" && player.skinTone != "sable" && player.skinTone != "milky white" && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			else if (!InCollection(player.skinTone, tone) && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
-				var mtoneTemp:int = rand(5);
-				if (mtoneTemp == 0) player.skinTone = "dark";
-				else if (mtoneTemp == 1) player.skinTone = "ebony";
-				else if (mtoneTemp == 2) player.skinTone = "ashen";
-				else if (mtoneTemp == 3) player.skinTone = "sable";
-				else player.skinTone = "milky white";
-				outputText(player.skin() + "!</b>");
-				changes++;
-			}
-			//Change skin tone if not changed you!
-			else if (!mystic && player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "light" && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
-				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
-				var toneTemp:int = rand(3);
-				if (toneTemp == 0) player.skinTone = "tan";
-				else if (toneTemp == 1) player.skinTone = "olive";
-				else player.skinTone = "light";
+				player.skinTone = randomChoice(tone);
 				outputText(player.skin() + "!</b>");
 				changes++;
 			}
 			//[Change Skin Color: add "Tattoos"]
 			//From Tan, Olive, or Light skin tones
-			else if ((mystic && 9999 == 0 && (player.skinTone == "dark" || player.skinTone == "ebony" || player.skinTone == "ashen" || player.skinTone == "sable" || player.skinTone == "milky white")) || (!mystic && 9999 == 0 && (player.skinTone == "tan" || player.skinTone == "olive" || player.skinTone || "light")) && changes < changeLimit) {
+			else if (9999 == 0 && InCollection(player.skinTone, tone) && changes < changeLimit) {
 				outputText("You feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing tribal tattoos adorns your " + player.skin() + ".  The glow gradually fades, but the distinctive ");
 				if (mystic) outputText("angular");
 				else outputText("curved");
@@ -8445,9 +8459,9 @@
 				//from amoeba non-feet
 				else if (player.isGoo()) outputText("\n\nYour gooey undercarriage begins to boil violently, and before you can do anything, it evaporates!  Left sitting on just the small pad of sticky half-dried slime that comprises your [butt], a sudden bulge under you is enough to push you onto your back.  Wondering idly and unable to see what's happening, you close your eyes and try to focus on what sensations you can feel from your lower body.  You feel... a swell of expansion, followed by weak muscles trying to contract for the first time, pulling flimsy, folded limbs apart and laying them flat.  As your attention wanders downward, you feel toes wiggling - far longer toes than you remember.  For several minutes you lie still and test muscles gingerly as your body solidifes, but when you can finally move again and look at your legs properly, what you see surprises you very little.  <b>You have fuzzy legs and a pair of long-toed raccoon paws!</b>");
 				//from hooves or hard feet, including centaurs and bees
-				else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_BEE || player.lowerBody == LOWER_BODY_TYPE_PONY || player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) {
+				else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BEE || player.lowerBody == LOWER_BODY_TYPE_PONY || player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS || player.isTaur()) {
 					outputText("\n\nYour [feet] feel very... wide, all of a sudden.  You clop around experimentally, finding them far less responsive and more cumbersome than usual.  On one step, one of your feet ");
-					if (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_PONY) outputText("pops right out of its hoof just in time");
+					if (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_PONY) outputText("pops right out of its hoof just in time");
 					else outputText("comes loose inside its long boot, and you pull it free with irritation only");
 					outputText(" for you to set it back down on a sharp rock!  Biting off a curse, you examine the new bare foot.  It looks much like a human's, except for the nearly-twice-as-long toes.  You find you can even use them to pick things up; the sharp rock is dropped into your hand and tossed far away.  The shed [foot] is quickly joined on the ground by its complement, revealing more long toes.  ");
 					if (player.isTaur()) outputText("For a few minutes you amuse yourself with your four prehensile feet... you even make up a game that involves juggling a stone under your body by tossing it between two feet while balancing on the others.  It's only a short while, however, before your lower stomach grumbles and a searing pain makes you miss your catch.  Anticipating what will happen, you lie down carefully and close your eyes, biting down on a soft wad of cloth.  The pain quickly returns and drives you into unconsciousness, and when you awaken, your back legs are gone.  ");
@@ -8460,6 +8474,7 @@
 					outputText("<b>You now have raccoon paws!</b>");
 				}
 				player.lowerBody = LOWER_BODY_TYPE_RACCOON;
+				player.legCount = 2;
 				changes++;
 			}
 			//gain half-coon face (prevented if already full-coon)
@@ -8783,6 +8798,7 @@
 						outputText("\n\n", false);
 						outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out as your toes splinter and curve cruelly. The pain slowly diminishes and your eyes look along a human leg that splinters at the foot into a claw with sharp black nails. When you relax, your feet grip the ground easily. <b>Your feet are now formed into demonic claws.</b>", false);
 						player.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
+						player.legCount = 2;
 					}
 				}
 				//Females/futa get high heels
@@ -8790,6 +8806,7 @@
 					outputText("\n\n", false);
 					outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out. The pain slowly diminishes and your eyes look along a human leg to a thin and sharp horn protruding from the heel. When you relax, your feet are pointing down and their old posture is only possible with an enormous effort. <b>Your feet are now formed into demonic high-heels.</b> Tentatively you stand up and try to take a few steps. To your surprise you feel as if you were born with this and stride vigorously forward, hips swaying.", false);
 					player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+					player.legCount = 2;
 				}
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
@@ -9133,6 +9150,7 @@
 				outputText("\n\nYou scream in agony as a horrible pain racks the entire length of your snake-like coils.  Unable to take it anymore, you pass out.  When you wake up, you’re shocked to find that you no longer have the lower body of a snake.  Instead, you have soft, furry legs that resemble that of a ferret’s.  <b>You now have ferret legs!</b>");
 				changes++;
 				player.lowerBody = LOWER_BODY_TYPE_FERRET;
+				player.legCount = 2;
 			}
 			//If legs are not ferret, has ferret ears and tail
 			if(player.lowerBody != LOWER_BODY_TYPE_FERRET && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
@@ -9143,6 +9161,7 @@
 				outputText("\n\nYou scream in agony as the bones in your legs begin to break and rearrange.  Even as the pain passes, an uncomfortable combination of heat and throbbing continues even after the transformation is over.  You rest for a moment, allowing the sensations to subside.  Now feeling more comfortable, <b>you stand up, ready to try out your new ferret legs!</b>");
 				changes++;
 				player.lowerBody = LOWER_BODY_TYPE_FERRET;
+				player.legCount = 2;
 			}
 			//If ears are not ferret:
 			if(player.earType != EARS_FERRET && rand(4) == 0 && changes < changeLimit && rand(2.5) == 0 && changes < changeLimit)
@@ -9257,20 +9276,21 @@
 				changes++;
 			}
 			//Gain pig tail even when centaur, needs pig ears.
-			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType != TAIL_TYPE_PIG && (player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_PONY)) {
+			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType != TAIL_TYPE_PIG && player.isTaur() && (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_PONY)) {
 				outputText("\n\nThere is a tingling in your [tail] as it begins to warp and change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b> This new, mismatched tail looks a bit odd on your horse lower body.");
 				player.tailType = TAIL_TYPE_PIG;
 				changes++;
 			}
 			//Turn your lower body into pig legs if you have pig ears and tail.
 			if (rand(boar ? 3 : 4) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED) {
-				if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) //Centaur
-					outputText("\n\nYou scream in agony as a horrible pain racks your entire horse lower half. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a horse. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>");
+				if (player.isTaur()) //Centaur
+					outputText("\n\nYou scream in agony as a horrible pain racks your entire bestial lower half. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the animal's lower body. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>");
 				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) //Naga
 					outputText("\n\nYou scream in agony as a horrible pain racks the entire length of your snake-like coils. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a snake. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>");
 				else //Bipedal
 					outputText("\n\nYou scream in agony as the bones in your legs break and rearrange. Once the pain subsides, you inspect your legs, finding that they are digitigrade and ending in cloven hooves. <b>You now have pig legs!</b>");
 				player.lowerBody = LOWER_BODY_TYPE_CLOVEN_HOOFED;
+				player.legCount = 2;
 				changes++;
 			}
 			//Gain pig face when you have the first three pig TFs.

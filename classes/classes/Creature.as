@@ -269,6 +269,7 @@ package classes
 		18 - dragonfeet
 		19 - raccoonfeet*/
 		public var lowerBody:Number = LOWER_BODY_TYPE_HUMAN;
+		public var legCount:Number = 2;
 
 		/*tailType:
 		0 - none
@@ -1413,7 +1414,7 @@ package classes
 			var total:Number;
 			var bonus:Number = 0;
 			//Centaurs = +50 capacity
-			if (lowerBody == 4)
+			if (isTaur())
 				bonus = 50;
 			//Naga = +20 capacity
 			else if (lowerBody == 3)
@@ -1439,7 +1440,7 @@ package classes
 		{
 			var bonus:Number = 0;
 			//Centaurs = +30 capacity
-			if (lowerBody == 4)
+			if (isTaur())
 				bonus = 30;
 			if (findPerk(PerkLib.HistorySlut) >= 0)
 				bonus += 20;
@@ -2089,27 +2090,26 @@ package classes
 			//if (femWeight()) return female;
 			//else return male;
 			//Dicks?
-			if (totalCocks() > 0)
+			if (hasCock())
 			{
-				if (hasVagina())
+				if (hasVagina()) // herm
 				{
 					if (biggestTitSize() >= 2) return female;
-					else if (biggestTitSize() == 1) {
-						if (kGAMECLASS.player.femininity > 50) return female;
-						else return male;
-					}
-					else return male;
+					else if (biggestTitSize() == 1) return kGAMECLASS.player.femininity >= 50 ? female : male;
+					else return kGAMECLASS.player.femininity >= 75 ? female : male;
 				}
-				else return male;
+				else
+					if (biggestTitSize() >= 1 && kGAMECLASS.player.femininity > 55 || kGAMECLASS.player.femininity >= 75) return female; // d-girl
+					else return male;
 			}
 			else
 			{
-				if (hasVagina())
-					if (biggestTitSize() == 0 && kGAMECLASS.player.femininity < 45) return male;
+				if (hasVagina()) // pure female
+					if (biggestTitSize() <= 1 && kGAMECLASS.player.femininity < 45) return male; // c-boy
 					else return female;
-				else
+				else // genderless
 				{
-					if (biggestTitSize() >= 3)
+					if (biggestTitSize() >= 3 || kGAMECLASS.player.femininity >= 75)
 						return female;
 					else
 						return male;
@@ -2522,12 +2522,7 @@ package classes
 
 		public function isBiped():Boolean
 		{
-			//Naga/Centaur
-			if (lowerBody == LOWER_BODY_TYPE_NAGA || lowerBody == LOWER_BODY_TYPE_CENTAUR)
-				return false;
-			if (lowerBody == LOWER_BODY_TYPE_GOO || lowerBody == LOWER_BODY_TYPE_PONY)
-				return false;
-			return true;
+			return legCount == 2;
 		}
 
 		public function isNaga():Boolean
@@ -2539,7 +2534,7 @@ package classes
 
 		public function isTaur():Boolean
 		{
-			if (lowerBody == LOWER_BODY_TYPE_CENTAUR || lowerBody == LOWER_BODY_TYPE_PONY || lowerBody == LOWER_BODY_TYPE_DEERTAUR)
+			if (legCount > 2 && !isDrider()) // driders have genitals on their human part, inlike usual taurs... this is actually bad way to check, but too many places to fix just now
 				return true;
 			return false;
 		}
@@ -2560,6 +2555,11 @@ package classes
 		{
 			var select:Number = 0;
 			//lowerBody:
+			//4 legs - centaur!
+			if (isDrider())
+				return num2Text(legCount)+" spider legs";
+			if (isTaur())
+				return num2Text(legCount)+" legs";
 			//0 - normal
 			if (lowerBody == 0)
 				return "legs";
@@ -2572,9 +2572,6 @@ package classes
 			//3 - snakelike body
 			if (lowerBody == 3)
 				return "snake-like coils";
-			//4 - centaur!
-			if (lowerBody == 4)
-				return "four legs";
 			//8 - goo shit
 			if (lowerBody == 8)
 				return "mounds of goo";
@@ -3620,6 +3617,13 @@ package classes
 			return Appearance.breastSize(val);
 		}
 		
+		/**
+		 * Echidna 1 ft long (i'd consider it barely qualifying), demonic 2 ft long, draconic 4 ft long
+		 */
+		public function hasLongTongue():Boolean {
+			return tongueType == TONUGE_DEMONIC || tongueType == TONUGE_DRACONIC || tongueType == TONUGE_ECHIDNA;
+		}
+		
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
 			var temp:Number = 0;
 			if (tou < 25) temp = (tou * 0.4);
@@ -3643,7 +3647,7 @@ package classes
 			}
 			//Modify armor rating based on weapons.
 			if (applyModifiers) {
-				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR) armorMod = 0;
+				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR || game.player.weaponName.indexOf("staff") != -1 && game.player.findPerk(PerkLib.StaffChanneling) >= 0) armorMod = 0;
 				if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
 				if (game.player.findPerk(PerkLib.LungingAttacks) >= 0) armorMod /= 2;
 				if (armorMod < 0) armorMod = 0;

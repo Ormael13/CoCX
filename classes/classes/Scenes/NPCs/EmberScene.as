@@ -1060,7 +1060,7 @@ package classes.Scenes.NPCs
 		{
 			//Checks for special scenes go here!
 			//If the PC fulfills one of the requirements for the Special Scenes, they occur the moment the player picks the talk option.
-			if (player.isPregnant()) { //Extra check might protect against inappropriate Ember complaints
+			if (player.isPregnant() && emberHasCock()) { //Extra check might protect against inappropriate Ember complaints
 				if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
 					emberBitchesAboutPCBeingFullOfEggs();
 					doNext(camp.returnToCampUseOneHour);
@@ -1715,6 +1715,7 @@ package classes.Scenes.NPCs
 					outputText("\n\nYou scream in agony as you feel the bones in your feet suddenly break and restructure themselves, toes fusing together, bone swelling out of the merged masses of flesh.  When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>");
 				}
 				player.lowerBody = LOWER_BODY_TYPE_DRAGON;
+				player.legCount = 2;
 				changes++;
 			}
 			//Gain Dragon Tail
