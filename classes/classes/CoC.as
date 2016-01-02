@@ -428,8 +428,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4_mod_1.3.6b";
-			version = ver + " (<b>Custom Characters, Perks, Refactors Ahoy!</b>)";
+			ver = "0.9.4_mod_1.3.7";
+			version = ver + " (<b>More code cleaning, Taur overhaul.</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

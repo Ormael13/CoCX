@@ -307,7 +307,7 @@ package classes.Scenes.Places.Bazaar
 			menu();
 			addButton(0, "Song", listenToAnitaSong, null, null, null, "Listen to Anita's performance. This will cost you five gems.");
 			if (player.lust >= 33) addButton(1, "Sex", rompUpAnitaOffer);
-			else addLockedButton(1, "You aren't aroused enough to do that.");
+			else addButtonDisabled(1, "Sex", "You aren't aroused enough to do that.");
 			addButton(4, "Nevermind", nevermindToAnita);
 		}
 		
@@ -384,11 +384,11 @@ package classes.Scenes.Places.Bazaar
 			}
 			menu();
 			if (player.canFly() && player.gender > 0) addButton(0, "Eagle Fuck", eagleFuckAnita, null, null, null, "Take a wild trip in the skies with Anita and fuck her!");
-			else addLockedButton(0, (!player.canFly() ? "You'll need wings for that." : "You need either a penis or a vagina to do that."));
+			else addButtonDisabled(0, "Eagle Fuck", (!player.canFly() ? "You'll need wings for that." : "You need either a penis or a vagina to do that."));
 			if (player.hasCock()) addButton(1, "Vaginal", vaginalFuckAnita);
-			else addLockedButton(1, "You'll need a penis for that.");
+			else addButtonDisabled(1, "Vaginal", "You'll need a penis for that.");
 			if (player.isBiped() || player.isNaga() || player.isGoo()) addButton(2, "Sixty Nine", sex69Anita);
-			else addLockedButton(2, "You won't be able to do this with your unusual body shape.");
+			else addButtonDisabled(2, "Sixty Nine", "You won't be able to do this with your unusual body shape.");
 			addButton(4, "Nevermind", nevermindToAnita);
 		}
 		
@@ -561,7 +561,7 @@ package classes.Scenes.Places.Bazaar
 			menu();
 			addButton(0, "Stash", checkAndyStash, null, null, null, "Go out the back of the tent and check out Andy's stash?");
 			if (player.lust >= 33) addButton(1, "Sex", rompUpWithAndyTheSatyr, null, null, null, "Proposition to have sex with the satyr.");
-			else addLockedButton(1, "You aren't aroused enough to consider this.");
+			else addButtonDisabled(1, "Sex", "You aren't aroused enough to consider this.");
 			addButton(4, "Nevermind", nevermindToAndy);
 		}
 		
@@ -740,11 +740,11 @@ package classes.Scenes.Places.Bazaar
 			outputText("\n\nHe looks up at you expectantly and you have to admit you got a little horny listening to his stories and his past. What do you want him to do now?");
 			dynStats("lus", 20, "resisted", false);
 			menu();
-			if (player.hasCock()) addButton(0, "Suck Cock", haveAndySuckYouOff, null, null, null, "Have Andy suck you off.");
-			else addLockedButton(0, "You'll need a cock to have Andy do this.");
-			if (player.hasVagina()) addButton(1, "Lick Pussy", haveAndyLickYouOut, null, null, null, "Have Andy lick your pussy.");
-			else addLockedButton(0, "You'll need a vagina to have Andy do this.");
-			addButton(2, "Rim Ass", haveAndyRimYouOmgItsGross, null, null, null, "Have Andy rim your ass. \n\nNOTE: Contains rimjob! You have been warned.");
+			if (player.hasCock()) addButton(0, "Suck my Cock", haveAndySuckYouOff, null, null, null, "Have Andy suck you off.");
+			else addButtonDisabled(0, "Suck my Cock", "You'll need a cock to have Andy do this.");
+			if (player.hasVagina()) addButton(1, "Lick my Pussy", haveAndyLickYouOut, null, null, null, "Have Andy lick your pussy.");
+			else addButtonDisabled(0, "Lick my Pussy", "You'll need a vagina to have Andy do this.");
+			addButton(2, "Rim my Ass", haveAndyRimYouOmgItsGross, null, null, null, "Have Andy rim your ass. \n\nNOTE: Contains rimjob! You have been warned.");
 			addButton(4, "Do Nothing", declineAndyOral);
 		}
 		
@@ -884,7 +884,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			menu();
 			if (player.hasCock()) addButton(0, "Fuck Him", fuckAndyTheSatyr, null, null, null, "Take Andy from behind and put your cock to good use.");
-			else addLockedButton(0, "You will need a penis for that.");
+			else addButtonDisabled(0, "Fuck Him", "You will need a penis for that.");
 			addButton(1, "Get Fucked", haveAndyFuckYouPrompt, null, null, null, "Get Andy to fuck you good!");
 		}
 		
@@ -1119,7 +1119,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", rompUpWithHarry);
-			else addLockedButton(0, "You aren't horny enough to consider this.");
+			else addButtonDisabled(0, "Sex", "You aren't horny enough to consider this.");
 			addButton(4, "Nevermind", nevermindToHarry);
 		}
 		
@@ -1302,9 +1302,9 @@ package classes.Scenes.Places.Bazaar
 			menu();
 			if (player.lust >= 33) {
 				if (!player.isTaur()) addButton(0, "Let Them", letTheSatyrsHaveTheirWayWithYou, null, null, null, "Let the satyrs have their way with you. This is going to be rough and intense. " + (player.hasVagina() ? "\n\nNOTE: Contains rimjob! You have been warned." : ""));
-				else addLockedButton(0, "You doubt you'll be able to participate into the orgy with your tauric body.");
+				else addButtonDisabled(0, "Let Them", "You doubt you'll be able to participate into the orgy with your tauric body.");
 			}
-			else addLockedButton(0, "You aren't horny enough to consider that.");
+			else addButtonDisabled(0, "Let Them", "You aren't horny enough to consider that.");
 			addButton(1, "No", dontLetTheSatyrsFuck);
 		}
 		

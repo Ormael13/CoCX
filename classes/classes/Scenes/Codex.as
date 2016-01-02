@@ -184,7 +184,7 @@ package classes.Scenes
 				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == codexEntryId) addButton(button, "( " + codexEntryName + " )", codexEntry);
 				else addButton(button, "" + codexEntryName + "", codexEntry);
 			}
-			else addLockedButton(button, "");
+			else addButtonDisabled(button, "???");
 		}
 		
 		private function menuRaces():void {

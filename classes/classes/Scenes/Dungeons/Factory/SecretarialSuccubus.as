@@ -73,7 +73,7 @@ package classes.Scenes.Dungeons.Factory
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 7;
-			this.gems = rand(25)+10;
+			this.gems = rand(25) + 10;
 			this.additionalXP = 50;
 			this.drop = new WeightedDrop(consumables.LACTAID, 1);
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;

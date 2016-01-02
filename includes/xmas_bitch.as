@@ -34,6 +34,7 @@ public function xmasBitchEncounter():void
 		else outputText("Kelly, though I think she's getting a big fat dildo this year");
 		outputText(".</i>\"\n\n", false);
 	}
+	awardAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I);
 	outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n", false);
 	if (player.cor >= 90 || monk >= 5 || player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0)
 	{

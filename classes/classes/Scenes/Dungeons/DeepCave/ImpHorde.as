@@ -223,6 +223,7 @@
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 10;
 			this.gems = 20 + rand(25);
+			this.additionalXP = 50;
 			this.drop = new WeightedDrop(armors.NURSECL, 1);
 			this.wingType = WING_TYPE_IMP;
 			this.wingDesc = "imp wings";

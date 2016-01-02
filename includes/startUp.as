@@ -77,7 +77,8 @@ public function mainMenu(e:MouseEvent = undefined):void
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
 	menu();
-	addButton(0, "Resume", resume, null, null, null, "Get back to gameplay?");
+	if (resume != null) addButton(0, "Resume", resume, null, null, null, "Get back to gameplay?");
+	else addButtonDisabled(0, "Resume", "Please start or load a game first.");
 	addButton(1, "Settings", settingsScreenMain, null, null, null, "Configure game settings and enable cheats.");
 	addButton(2, "Instructions", howToPlay, null, null, null, "How to play.  Starting tips.  And hotkeys for easy left-handed play...");
 	addButton(3, "Achievements", achievements.achievementsScreen, null, null, null, "View all achievements you have unlocked so far.");
@@ -416,7 +417,7 @@ public function fetishSubMenu():void {
 	menu();
 	addButton(0, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
 	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 || player.findStatusAffect(StatusAffects.WormsOff) >= 0) addButton(1, "Worms", toggleWormsMenu, null, null, null, "Enable or disable worms. This will NOT cure infestation, if you have any.");
-	else addLockedButton(1, "Find the sign depicting the worms in the mountains to unlock this.");
+	else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
 	addButton(4, "Back", settingsScreenGameSettings);
 }
 

@@ -204,10 +204,6 @@ package classes.Scenes
 			addButton(14, "Back", kGAMECLASS.mainMenu);
 		}
 		
-		public function achievementsStoryline():void {
-			
-		}
-		
 	}
 
 }

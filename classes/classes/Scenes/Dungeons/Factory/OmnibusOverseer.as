@@ -102,7 +102,8 @@ package classes.Scenes.Dungeons.Factory
 			this.lustVuln = 0.75;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 8;
-			this.gems = rand(25)+10;
+			this.gems = rand(25) + 10;
+			this.additionalXP = 75;
 			this.drop = new WeightedDrop(null, 1);
 			this.special1 = lustAura;
 			this.special2 = milkAttack;

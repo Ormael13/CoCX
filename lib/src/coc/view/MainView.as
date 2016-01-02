@@ -291,29 +291,38 @@ package coc.view {
 			}
 		}
 
-
-
 		//////// Internal(?) view update methods ////////
 
 		public function showBottomButton(index:int, label:String, callback:Function = null, toolTipViewText:String = '', toolTipViewHeader:String = ''):void {
-			// var buttonTF:TextField = this.bottomButtonTexts[index] as TextField,
-			// 	buttonBG:MovieClip = this.bottomButtonBGs[index] as MovieClip;
 			var button:CoCButton = this.bottomButtons[index] as CoCButton;
 
-			// Should error.
-			if(! button) return;
+			if (!button) return;
 			button.labelText = label;
 			button.callback = callback;
 			button.toolTipHeader = toolTipViewHeader;
 			button.toolTipText = toolTipViewText;
 			button.visible = true;
+			button.enabled = true;
 		}
 
+		public function showBottomButtonDisabled(index:int, label:String, toolTipViewText:String = '', toolTipViewHeader:String = ''):void {
+			var button:CoCButton = this.bottomButtons[index] as CoCButton;
+			
+			if (!button) return;
+			button.labelText = label;
+			button.callback = null;
+			button.toolTipHeader = toolTipViewHeader;
+			button.toolTipText = toolTipViewText;
+			button.alpha = 0.4;
+			button.visible = true;
+			button.enabled = false;
+		}
+		
 		public function hideBottomButton(index:int) {
 			var button:CoCButton = this.bottomButtons[index] as CoCButton;
 
 			// Should error.
-			if(! button) return;
+			if (!button) return;
 
 			button.visible = false;
 		}

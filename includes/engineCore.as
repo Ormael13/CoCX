@@ -1166,23 +1166,8 @@ public function addButtonDisabled(pos:int, text:String = "", toolTipText:String 
 
 	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
 	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
-	showBottomButtonDisabled(pos, text, toolTipText, toolTipHeader);
+	mainView.showBottomButtonDisabled(pos, text, toolTipText, toolTipHeader);
 	flushOutputTextToGUI();
-}
-		
-/** 
- * Dirty hack, actually.
- */
-private function showBottomButtonDisabled(index:int, label:String, toolTipViewText:String = '', toolTipViewHeader:String = ''):void {
-	var button:CoCButton = mainView.bottomButtons[index] as CoCButton;
-	if(! button) return;
-	button.labelText = label;
-	button.callback = null;
-	button.enabled = false;
-	button.toolTipHeader = toolTipViewHeader;
-	button.toolTipText = toolTipViewText;
-	button.alpha = 0.5;
-	button.visible = true;
 }
 
 public function setButtonTooltip(index:int, toolTipHeader:String = "", toolTipText:String = ""):void {
@@ -1210,10 +1195,6 @@ public function removeButton(arg:*):void {
 		buttonToRemove = Math.round(arg);
 	}
 	mainView.hideBottomButton( buttonToRemove );
-}
-
-public function addLockedButton(pos:int, toolTipText:String = ""):void {
-	addButton(pos, "LOCKED", doNothing, null, null, null, toolTipText);
 }
 
 /**

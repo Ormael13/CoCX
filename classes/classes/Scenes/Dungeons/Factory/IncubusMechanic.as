@@ -203,9 +203,11 @@ package classes.Scenes.Dungeons.Factory
 			this.level = 8;
 			this.drop = new WeightedDrop(consumables.GROPLUS, 1);
 			this.gems = rand(25) + 10;
+			this.additionalXP = 50;
 			if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] > 0) {
 				this.gems += rand(25) + 50;
-				this.level += 15;
+				this.additionalXP += 50;
+				this.level += 13;
 				this.bonusHP += 225;
 				this.str += 25;
 				this.tou += 20;

@@ -279,6 +279,8 @@
 		{
 			kGAMECLASS.hideMenus();
 		}
+		
+		//To be phased out
 		protected function choices(text1:String, butt1:Function,
 								text2:String, butt2:Function,
 								text3:String, butt3:Function,
@@ -303,6 +305,7 @@
 			);
 		}
 
+		//To be phased out
 		protected function simpleChoices(text1:String, butt1:Function,
 								text2:String, butt2:Function,
 								text3:String, butt3:Function,
@@ -324,6 +327,11 @@
 			kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
 		}
 		
+		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void
+		{
+			kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+		}
+		
 		protected function removeButton(arg:*):void
 		{
 			kGAMECLASS.removeButton(arg);
@@ -332,11 +340,6 @@
 		protected function hasButton(arg:*):Boolean
 		{
 			return kGAMECLASS.hasButton(arg);
-		}
-
-		protected function addLockedButton(pos:int, toolTipText:String = ""):void
-		{
-			kGAMECLASS.addLockedButton(pos, toolTipText);
 		}
 
 /* Replaced by Utils.formatStringArray, which does almost the same thing in one function

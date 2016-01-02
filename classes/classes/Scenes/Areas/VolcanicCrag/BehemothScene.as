@@ -22,9 +22,9 @@ package classes.Scenes.Areas.VolcanicCrag
 			addButton(0, "Fight", startFight, null, null, null, "Challenge the Behemoth.");
 			addButton(1, "Talk", talkToBehemothMenu, null, null, null, "Talk to Behemoth and discuss.");
 			if (player.lust >= 33) addButton(2, "Sex", behemothSexMenu, false, null, null, "Initiate sexy time with the Behemoth.");
-			else addLockedButton(2, "You are not aroused enough to initiate sex with the Behemoth.");
+			else addButtonDisabled(2, "Sex", "You are not aroused enough to initiate sex with the Behemoth.");
 			if (flags[kFLAGS.BEHEMOTH_TALKED_ABOUT_CUM] > 0) addButton(3, "Get Cum", getCum, null, null, null, "Get some of Behemoth's cum!");
-			else addLockedButton(3, "You need to have talked to the Behemoth about his cum.");
+			else addButtonDisabled(3, "???", "You need to have talked to the Behemoth about his cum.");
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}
 		
@@ -50,11 +50,11 @@ package classes.Scenes.Areas.VolcanicCrag
 			addButton(0, "Yourself", talkAboutYourself, null, null, null, "Talk to the behemoth about yourself.");
 			addButton(1, "Behemoth", talkAboutBehemoth, null, null, null, "Talk to the behemoth about himself.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] >= 1) addButton(2, "His Past", talkAboutSadStory, null, null, null, "Talk to the behemoth about his past.");
-			else addLockedButton(2, "Talk to the behemoth at least once to unlock this.");
+			else addButtonDisabled(2, "His Past", "Talk to the behemoth at least once to unlock this.");
 			if (timesSexed() >= 2) addButton(3, "His Cum", talkAboutHisCum, null, null, null, "Talk to the behemoth about the special properties of his cum and how he managed to cum that much despite his ball size."); 
-			else addLockedButton(3, "Have sex with the behemoth at least twice to unlock this.");
+			else addButtonDisabled(3, "His Cum", "Have sex with the behemoth at least twice to unlock this.");
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0) addButton(4, "Children", talkAboutHisChildren, null, null, null, "Talk to the behemoth about his son" + (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1 ? "" : "s") + ".");
-			else addLockedButton(4, "Have at least 1 child with him to unlock this.");
+			else addButtonDisabled(4, "???", "Have at least 1 child with him to unlock this.");
 			addButton(14, "Back", behemothMenu);
 		}
 		
@@ -254,16 +254,16 @@ package classes.Scenes.Areas.VolcanicCrag
 				if (player.cockThatFits(72) >= 0) addButton(0, "Anal Fuck", analPitchBehemoth, null, null, null, "Anally penetrate the behemoth.");
 				else outputText("\n\n<b>Unfortunately, your cock is too big to fit in his butthole.</b>");
 			}
-			else addLockedButton(0, "You need a cock for this.");
+			else addButtonDisabled(0, "Anal Fuck", "You need a cock for this.");
 			addButton(1, "GetAnalFucked", analCatchBehemoth, null, null, null, "Have him penetrate you anally.");
 			if (player.hasVagina()) addButton(2, "GetVagFucked", vagCatchBehemoth, null, null, null, "Have him penetrate you vaginally.");
-			else addLockedButton(2, "You need a vagina for this.");
+			else addButtonDisabled(2, "GetVagFucked", "You need a vagina for this.");
 			addButton(3, "Suck His Cock", suckThatBigCock, null, null, null, "Suck his wonderful cock and get stuffed with cum!");
 			if (timesSexed() >= 3) addButton(4, "Cum Bath", haveACumBathLiterally, null, null, null, "Have a (literal) cum bath!");
-			else addLockedButton(4, "Have sex with the behemoth enough times to unlock this!");
+			else addButtonDisabled(4, "Cum Bath", "Have sex with the behemoth enough times to unlock this!");
 			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0) {
 				if (timesSexed() >= 3) addButton(5, "Watersports", watersportsWithBehemoth, null, null, null, "Do some urine activity with him.");
-				else addLockedButton(5, "Have sex with the behemoth enough times to unlock this!");
+				else addButtonDisabled(5, "Watersports", "Have sex with the behemoth enough times to unlock this!");
 			}
 			if (!kGAMECLASS.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
 			else addButton(14, "Nevermind", cleanupAfterCombat);
