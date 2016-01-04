@@ -294,6 +294,10 @@ use namespace kGAMECLASS;
 			if(findStatusAffect(StatusAffects.Berzerking) >= 0) {
 				armorDef = 0;
 			}
+			//Berzerking+Cold Fury
+			if(findStatusAffect(StatusAffects.Berzerking) >= 0 && findPerk(PerkLib.ColdFury) >= 0) {
+				armorDef += 1;
+			}
 			if(kGAMECLASS.monster.findStatusAffect(StatusAffects.TailWhip) >= 0) {
 				armorDef -= kGAMECLASS.monster.statusAffectv1(StatusAffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
