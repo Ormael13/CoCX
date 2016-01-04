@@ -566,6 +566,11 @@ public function buildPerkList():Array {
 		if (player.str >= 80 && player.tou >= 60)
 			_add(new PerkClass(PerkLib.ShieldSlam));
 	}
+	//Tier 3 Strength Perks
+	if(player.level >= 18) {
+		if(player.findPerk(Berzerker) >= 0 && player.findPerk(ImprovedSelfControl) >= 0 && player.str >= 75)
+			_add(new PerkClass(PerkLib.ColdFury));
+	}
 	//------------
 	// TOUGHNESS
 	//------------
