@@ -2018,7 +2018,7 @@ public function regeneration(combat:Boolean = true):void {
 	if(combat) {
 		//Regeneration
 		healingPercent = 0;
-		if (player.hunger >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
+		if (player.hunger >= 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
 		{
 			if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 1;
 			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 1;
@@ -2032,7 +2032,7 @@ public function regeneration(combat:Boolean = true):void {
 	else {
 		//Regeneration
 		healingPercent = 0;
-		if (player.hunger >= 10 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
+		if (player.hunger >= 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)
 		{
 			if(player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 2;
 			if(player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 2;
