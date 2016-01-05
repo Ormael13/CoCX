@@ -173,7 +173,8 @@ package classes.Scenes.Areas.GlacialRift
 			this.gems = 30;
 			this.drop = new WeightedDrop()
 					.add(weapons.SPEAR, 1)
-					.add(consumables.W__BOOK, 2)
+					.add(shields.GREATSH, 2)
+					.add(consumables.W__BOOK, 4)					
 					.add(null, 18);
 			this.wingType = WING_TYPE_HARPY
 			this.wingDesc = "fluffy feathery"
