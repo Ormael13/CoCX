@@ -123,12 +123,12 @@ package classes {
 				//Goo armor prevents starvation completely!
 				if (player.armor == armors.GOOARMR)
 				{
-					if (player.hunger < 20)
+					if (player.hunger < 15)
 					{
 						outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your " + player.skinFurScales() + ".");
-						player.hunger = 25;
+						player.hunger = 20;
 					}
-					if (player.hunger < 25) player.hunger = 25; 
+					if (player.hunger < 20) player.hunger = 20; 
 				}
 			}
 			//Corruption check for achievement.
