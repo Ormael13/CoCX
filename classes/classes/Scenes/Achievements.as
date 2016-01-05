@@ -84,7 +84,11 @@ package classes.Scenes
 			addAchievement("Village", kACHIEVEMENTS.POPULATION_VILLAGE, "Have a camp population of 10.");
 			addAchievement("Town", kACHIEVEMENTS.POPULATION_TOWN, "Have a camp population of 25.");
 			addAchievement("City", kACHIEVEMENTS.POPULATION_CITY, "Have a camp population of 100.");
-			addAchievement("Metropolis", kACHIEVEMENTS.POPULATION_METROPOLIS, "Have a camp population of 500.", "", true);
+			addAchievement("Metropolis", kACHIEVEMENTS.POPULATION_METROPOLIS, "Have a camp population of 250.");
+			addAchievement("Megalopolis", kACHIEVEMENTS.POPULATION_MEGALOPOLIS, "Have a camp population of 500.");
+			addAchievement("City-State", kACHIEVEMENTS.POPULATION_CITY_STATE, "Have a camp population of 1,000.", "", true);
+			addAchievement("Kingdomn", kACHIEVEMENTS.POPULATION_KINGDOMN, "Have a camp population of 2,500.", "", true);
+			addAchievement("Empire", kACHIEVEMENTS.POPULATION_EMPIRE, "Have a camp population of 5,000.", "", true);
 			
 			titleAchievementSection("Time"); //9 achievements
 			addAchievement("It's been a month", kACHIEVEMENTS.TIME_MONTH, "Get to day 30.");
