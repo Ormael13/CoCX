@@ -78,7 +78,7 @@ package classes.Scenes
 			addAchievement("Illuistrous", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS, "Get to level 60.");
 			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to level 100.", "Get to level 100. (Your powers would have surpassed Marae's by now.)", true);
 			
-			titleAchievementSection("Population"); //6 achievements
+			titleAchievementSection("Population"); //10 achievements
 			addAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST, "Have a camp population of 2.");
 			addAchievement("Hamlet", kACHIEVEMENTS.POPULATION_HAMLET, "Have a camp population of 5.");
 			addAchievement("Village", kACHIEVEMENTS.POPULATION_VILLAGE, "Have a camp population of 10.");
