@@ -56,11 +56,11 @@ package classes.GlobalFlags
 		public static const POPULATION_VILLAGE:int				= 042; //Population 10
 		public static const POPULATION_TOWN:int					= 043; //Population 25
 		public static const POPULATION_CITY:int					= 044; //Population 100
-		public static const POPULATION_METROPOLIS:int			= 045; //Population 500 (shadow achievement)
-		public static const UNKNOWN_ACHIEVEMENT_046:int			= 046;
-		public static const UNKNOWN_ACHIEVEMENT_047:int			= 047;
-		public static const UNKNOWN_ACHIEVEMENT_048:int			= 048;
-		public static const UNKNOWN_ACHIEVEMENT_049:int			= 049;
+		public static const POPULATION_METROPOLIS:int				= 045; //Population 250
+		public static const POPULATION_MEGALOPOLIS:int				= 046; //Population 500
+		public static const POPULATION_CITY_STATE:int				= 047; //Population 1,000 (shadow achievement)
+		public static const POPULATION_KINGDOMN:int				= 048; //Population 2,500 (shadow achievement)
+		public static const POPULATION_EMPIRE:int				= 049; //Population 5,000 (shadow achievement)
 		
 		//Time Achievements (050-059)
 		public static const TIME_MONTH:int						= 050; //30 days
