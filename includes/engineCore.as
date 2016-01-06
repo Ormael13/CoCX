@@ -609,6 +609,9 @@ public function buildPerkList():Array {
 		if(player.tou >= 75) {
 			_add(new PerkClass(PerkLib.Resolute));
 		}
+		if(player.tou >= 75) {
+			_add(new PerkClass(PerkLib.Juggernaut));
+		}
 		if(player.tou >= 60) {
 			_add(new PerkClass(PerkLib.IronMan));
 		}
