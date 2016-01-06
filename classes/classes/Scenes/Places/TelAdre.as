@@ -1812,49 +1812,17 @@ public function carpentryShopInside():void {
 	clearOutput();
 	outputText("<i>So what will it be?</i>", false);
 	menu();
-	addButton(0, "Toolbox", carpentryShopBuySet);
-	addButton(1, "Buy Nails", carpentryShopBuyNails);
-	addButton(2, "Buy Wood", carpentryShopBuyWood);
-	addButton(3, "Sell Wood", carpentryShopSellWood);
+	addButton(0, "Buy Nails", carpentryShopBuyNails);
+	addButton(1, "Buy Wood", carpentryShopBuyWood);
+	//addButton(2, "Buy Stones", carpentryShopBuyStones);
+	//addButton(5, "Sell Nails", carpentryShopSellNails);	
+	addButton(6, "Sell Wood", carpentryShopSellWood);
+	//addButton(7, "Sell Stones", carpentryShopSellStones);
+	addButton(10, "Toolbox", carpentryShopBuySet);
+	//addButton(11, "NailsChest", carpentryShopBuySet2);
+	//addButton(12, "StoneBuildingsGuide", carpentryShopBuySet3);
 	addButton(14, "Leave", telAdreMenu);
 }
-//Buy toolbox
-public function carpentryShopBuySet():void {
-	if (player.hasKeyItem("Carpenter's Toolbox") >= 0)
-	{
-		outputText("<b>You already own a set of carpentry tools!</b>", true)
-		doNext(carpentryShopInside);
-		return;
-	}
-	outputText("You walk around for a while until you see a wooden toolbox. It's filled with assorted tools. One of them is a hammer. Another one is a saw. Even another is an axe. There is a measuring tape. There's even a book with hundreds of pages, all about how to use tools and it even has project instructions! There's also a compartment in the toolbox for nails. Just what you need to build your cabin. \n\n", true);
-	outputText("\"<i>Two hundred gems and it's all yours,</i>\" the shopkeeper says.\n\n");
-	outputText("Do you buy it?", false);
-	if (player.gems >= 200)
-	{
-		doYesNo(carpentryShopBuySetYes, carpentryShopBuySetNo);
-	}
-	else
-	{
-		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
-		doNext(carpentryShopInside);
-	}
-}
-
-public function carpentryShopBuySetYes():void {
-	player.gems -= 200;
-	outputText("You hand over two hundred gems to the shopkeeper. ", true);
-	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have your own tools for building stuff! \n\n", false);
-	outputText("<b>Gained Key Item: Carpenter's Toolbox!</b>", false)
-	player.createKeyItem("Carpenter's Toolbox", 0, 0, 0, 0);
-	statScreenRefresh();
-	doNext(carpentryShopInside);
-}
-
-public function carpentryShopBuySetNo():void {
-	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
-	outputText("\"<i>Suit yourself,</i>\" he says as you put the box of tools back where it was.", false);
-	doNext(carpentryShopInside);
-}	
 //Buy nails
 public function carpentryShopBuyNails():void {
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0)
@@ -1943,10 +1911,61 @@ private function carpentryShopBuyWoodYes():void {
 	doNext(carpentryShopBuyWood);
 }
 
-//Buy wood
+//Buy Stones
+//public function carpentryShopBuyStone():void {
+//	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of stones. I'll be selling wood at a price of 10 gems per wood plank.</i>\" \n\n", true);
+//	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "", false);
+//	addButton(0, "Buy 10", carpentryShopBuyStoneAmount, 10);
+//	addButton(1, "Buy 20", carpentryShopBuyStoneAmount, 20);
+//	addButton(2, "Buy 30", carpentryShopBuyStoneAmount, 30);
+//	addButton(3, "Buy 40", carpentryShopBuyStoneAmount, 40);
+//	addButton(4, "Buy 50", carpentryShopBuyStoneAmount, 50);
+//	addButton(14, "Back", carpentryShopInside)
+//}
+
+//private function carpentryShopBuyStoneAmount(amount:int):void {
+//	stone = amount;
+//	outputText("You ask him for " + amount + " wood planks. He replies \"<i>That'll be " + (amount * 20) + " gems, please.</i>\" \n\nDo you buy the wood?", true);
+//	doYesNo(carpentryShopBuyStoneYes, carpentryShopStoneWood);
+//}
+
+//Sell Nails
+public function carpentryShopSellNails():void {
+	outputText("You ask him if he's willing to buy nails from you. He says, \"<i>Certainly! I'll be buying nails at a rate of one gem per nail.</i>\" \n\n", true);
+	outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200", false);
+	menu();
+	if (player.keyItemv1("Carpenter's Toolbox") >= 10) addButton(0, "Sell 10", carpentryShopSellNailsAmount, 10);
+	if (player.keyItemv1("Carpenter's Toolbox") >= 25) addButton(1, "Sell 25", carpentryShopSellNailsAmount, 25);
+	if (player.keyItemv1("Carpenter's Toolbox") >= 50) addButton(2, "Sell 50", carpentryShopSellNailsAmount, 50);
+	if (player.keyItemv1("Carpenter's Toolbox") >= 75) addButton(3, "Sell 75", carpentryShopSellNailsAmount, 75);
+	if (player.keyItemv1("Carpenter's Toolbox") >= 100) addButton(3, "Sell 100", carpentryShopSellNailsAmount, 100);
+	if (player.keyItemv1("Carpenter's Toolbox") > 0) addButton(4, "Sell All", carpentryShopSellNailsAmount, player.keyItemv1("Carpenter's Toolbox"));
+	addButton(14, "Back", carpentryShopInside)
+}
+
+private function carpentryShopSellNailsAmount(amount:int):void {
+	nails = amount;
+	outputText("You're willing to offer " + num2Text(amount) + " " + (player.keyItemv1("Carpenter's Toolbox") == 1 ? "piece" : "pieces") + " of nails. He replies \"<i>I'll buy that for " + amount + " gems.</i>\" \n\nDo you sell the nails?", true);
+	doYesNo(carpentryShopSellNailsYes, carpentryShopSellNails);
+}
+
+private function carpentryShopSellNailsYes():void {
+	if (player.keyItemv1("Carpenter's Toolbox") >= nail)
+	{
+		player.gems += nail;
+		player.keyItemv1("Carpenter's Toolbox") -= nail;
+		outputText("You sign the permission form for " + num2Text(nail) + " " + (player.keyItemv1("Carpenter's Toolbox") ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nail + " gems,</i>\" he says.\n\n", true);
+		outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200");
+	}
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough nails.</i>\"", true);
+	statScreenRefresh();
+	doNext(carpentryShopSellNails);
+}
+
+//Sell wood
 public function carpentryShopSellWood():void {
 	outputText("You ask him if he's willing to buy wood from you. He says, \"<i>Certainly! I'll be buying wood at a rate of five gems per piece.</i>\" \n\n", true);
-	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100", false);
+	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/999", false);
 	menu();
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellWoodAmount, 1);
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellWoodAmount, 5);
@@ -1968,12 +1987,73 @@ private function carpentryShopSellWoodYes():void {
 		player.gems += (wood * 5);
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= wood;
 		outputText("You sign the permission form for " + num2Text(wood) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 5) + " gems,</i>\" he says.\n\n", true);
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/100");
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/999");
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough wood.</i>\"", true);
 	statScreenRefresh();
 	doNext(carpentryShopSellWood);
 }
+
+//Sell Stones
+//public function carpentryShopSellWood():void {
+//	outputText("You ask him if he's willing to buy wood from you. He says, \"<i>Certainly! I'll be buying wood at a rate of five gems per piece.</i>\" \n\n", true);
+//	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/100", false);
+//	menu();
+//	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellStoneAmount, 1);
+//	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellStoneAmount, 5);
+//	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellStoneAmount, 10);
+//	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellStoneAmount, 25);
+//	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 0) addButton(4, "Sell All", carpentryShopSellStoneAmount, flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES]);
+//	addButton(14, "Back", carpentryShopInside)
+//}
+
+//private function carpentryShopSellWoodAmount(amount:int):void {
+//	stone = amount;
+//	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stone. He replies \"<i>I'll buy that for " + (amount * 10) + " gems.</i>\" \n\nDo you sell the stones?", true);
+//	doYesNo(carpentryShopSellStoneYes, carpentryShopSellStone);
+//}
+
+//Buy toolbox
+public function carpentryShopBuySet():void {
+	if (player.hasKeyItem("Carpenter's Toolbox") >= 0)
+	{
+		outputText("<b>You already own a set of carpentry tools!</b>", true)
+		doNext(carpentryShopInside);
+		return;
+	}
+	outputText("You walk around for a while until you see a wooden toolbox. It's filled with assorted tools. One of them is a hammer. Another one is a saw. Even another is an axe. There is a measuring tape. There's even a book with hundreds of pages, all about how to use tools and it even has project instructions! There's also a compartment in the toolbox for nails. Just what you need to build your cabin. \n\n", true);
+	outputText("\"<i>Two hundred gems and it's all yours,</i>\" the shopkeeper says.\n\n");
+	outputText("Do you buy it?", false);
+	if (player.gems >= 200)
+	{
+		doYesNo(carpentryShopBuySetYes, carpentryShopBuySetNo);
+	}
+	else
+	{
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		doNext(carpentryShopInside);
+	}
+}
+
+public function carpentryShopBuySetYes():void {
+	player.gems -= 200;
+	outputText("You hand over two hundred gems to the shopkeeper. ", true);
+	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have your own tools for building stuff! \n\n", false);
+	outputText("<b>Gained Key Item: Carpenter's Toolbox!</b>", false)
+	player.createKeyItem("Carpenter's Toolbox", 0, 0, 0, 0);
+	statScreenRefresh();
+	doNext(carpentryShopInside);
+}
+
+public function carpentryShopBuySetNo():void {
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	outputText("\"<i>Suit yourself,</i>\" he says as you put the box of tools back where it was.", false);
+	doNext(carpentryShopInside);
+}
+
+//NailsChest
+
+//StoneBuildingsGuide
 
 private function urtaIsABadass():void {
 	flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] = 1;
