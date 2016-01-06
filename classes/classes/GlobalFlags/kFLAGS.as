@@ -2272,7 +2272,7 @@ public static const BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER:int                    
 public static const CODEX_ENTRY_RHINOS:int                                          = 2264;
 public static const CODEX_ENTRY_ECHIDNAS:int                                        = 2265;
 public static const URTA_VIXEN_AND_CREAM_COUNTER:int                                = 2266;
-public static const UNKNOWN_FLAG_NUMBER_02267:int                                   = 2267;
+public static const CAMP_CABIN_STONE_RESOURCES:int                                   = 2267;
 public static const UNKNOWN_FLAG_NUMBER_02268:int                                   = 2268;
 public static const UNKNOWN_FLAG_NUMBER_02269:int                                   = 2269;
 public static const UNKNOWN_FLAG_NUMBER_02270:int                                   = 2270;
