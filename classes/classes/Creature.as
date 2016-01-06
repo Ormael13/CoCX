@@ -3441,6 +3441,9 @@ package classes
 			if (findPerk(PerkLib.ImmovableObject) >= 0 && tou >= 75) {
 				mult *= 0.9;
 			}
+			if (findPerk(PerkLib.Juggernaut) >= 0 && tou >= 75 && armorPerk == "Heavy") {
+				mult *= 0.9;
+			}			
 			
 			//--STATUS AFFECTS--
 			//Black cat beer = 25% reduction!
