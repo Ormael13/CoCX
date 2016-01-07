@@ -76,13 +76,15 @@ package classes.Scenes.Areas.GlacialRift
 				}
 				else if (player.str >= 20 && player.str < 40) {
 					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
-					damage = 10 + rand(str * 0.5);
+					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 10 + rand(str * 0.5);
 					player.takeDamage(damage, true);
+					}
 				}
 				else if (player.str < 20) {
 					outputText("The giant squeezes you mercilessly, the pressure on your body reaching critical levels. The giant doesn't seem to want to murder you, fortunately, so he lessens his grip slightly. No dice escaping it though. ");
-					damage = 20 + rand(str * 0.75);
+					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 20 + rand(str * 0.75);
 					player.takeDamage(damage, true);
+					}
 				}
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("The thought of being constricted turns you on a bit. ")
