@@ -195,7 +195,11 @@ package classes.GlobalFlags
 		public static const GENERAL_DICK_BANISHER:int			= 166;
 		public static const GENERAL_ULTRA_PERKY:int				= 167;
 		public static const GENERAL_UP_TO_11:int				= 168; //This one goes to eleven.
-		public static const UNKNOWN_ACHIEVEMENT_169:int			= 169;
+		public static const GENERAL_YOU_BASTARD:int			= 169;
+		public static const GENERAL_YABBA_DABBA_DOO:int			= 170;
+		public static const GENERAL_ANTWORKS:int			= 171;
+		public static const UNKNOWN_ACHIEVEMENT_172:int			= 172;
+		public static const UNKNOWN_ACHIEVEMENT_173:int			= 173;
 		
 	}
 
