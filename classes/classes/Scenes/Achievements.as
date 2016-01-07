@@ -201,6 +201,7 @@ package classes.Scenes
 			addAchievement("Now You're Fucking With Portals", kACHIEVEMENTS.GENERAL_FUCK_WITH_PORTALS, "Engage in portal sex with Ceraph.", "", true);
 			addAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD, "Punch a tree until wood falls out... Wait, what?", "", true);
 			addAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER, "Remove cocks from at least three dedickable NPCs. Don't you think they'll miss having their own cocks?", "", true);
+			addAchievement("You Bastard", kACHIEVEMENTS.GENERAL_YOU_BASTARD, "Remove cocks from at least seven dedickable NPCs. Take that, dedickers!", "", true);
 			addAchievement("Up to Eleven", kACHIEVEMENTS.GENERAL_UP_TO_11, "Take your height up to 11 feet.");
 			
 			menu();
