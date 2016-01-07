@@ -2380,6 +2380,15 @@ use namespace kGAMECLASS;
 				maxSpe += 15;
 				maxTou -= 10;
 			}
+			if (sirenScore() >= 4) {
+				maxStr += 5;
+				maxSpe += 20;
+				maxTou -= 5;
+			}
+			if (demonScore() >= 4) {
+				maxSpe += 5;
+				maxInt += 5;
+			}
 			if (rhinoScore() >= 4) {
 				maxStr += 15;
 				maxTou += 15;
