@@ -233,7 +233,8 @@
 				}
 				
 				player.addStatusValue(StatusAffects.Tentagrappled, 1, 1);
-				player.takeDamage(75 + rand(15));
+				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {player.takeDamage(75 + rand(15));
+				}
 				game.dynStats("lus+", 3 + rand(3));
 				if (flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus+", 5);
 				combatRoundOver();
@@ -259,7 +260,8 @@
 			}
 	
 			player.addStatusValue(StatusAffects.Tentagrappled, 1, 1);
-			player.takeDamage(75 + rand(15));
+			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {player.takeDamage(75 + rand(15));
+			}
 			game.dynStats("lus+", 3 + rand(3));
 			combatRoundOver();
 		}
