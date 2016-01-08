@@ -1091,8 +1091,8 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	if (flags[kFLAGS.ANT_WAIFU] > 0) {
 		outputText("You see Phylla's anthill in the distance.  Every now and then you see");
 		//If PC has children w/ Phylla:
-		if(flags[kFLAGS.ANT_KIDS] > 0 && flags[kFLAGS.ANT_KIDS] < 250) outputText(" one of your children exit the anthill to unload some dirt before continuing back down into the colony.  It makes you feel good knowing your offspring are so productive.");
-		if(flags[kFLAGS.ANT_KIDS] > 250 && flags[kFLAGS.ANT_KIDS] < 1,000) outputText(" few of your many children exit the anthill to unload some dirt before vanishing back inside.  It makes you feel good knowing your offspring are so productive.");
+		if(flags[kFLAGS.ANT_KIDS] > 0 && flags[kFLAGS.ANT_KIDS] <= 250) outputText(" one of your children exit the anthill to unload some dirt before continuing back down into the colony.  It makes you feel good knowing your offspring are so productive.");
+		if(flags[kFLAGS.ANT_KIDS] > 250 && flags[kFLAGS.ANT_KIDS] <= 1,000) outputText(" few of your many children exit the anthill to unload some dirt before vanishing back inside.  It makes you feel good knowing your offspring are so productive.");
 		if(flags[kFLAGS.ANT_KIDS] > 1,000) outputText(" some of your chilren exit the anthill using main or one of the additionaly entrances to unload some dirt. Some of them instead of unloading dirt comming out to fullfill some other task that their mother gave them.  You feel a little nostalgic seeing how this former small colony grown to such a magnificent size.");
 		else outputText(" Phylla appear out of the anthill to unload some dirt.  She looks over to your campsite and gives you an excited wave before heading back into the colony.  It makes you feel good to know she's so close.");
 		outputText("\n\n");
