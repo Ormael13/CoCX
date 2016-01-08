@@ -1070,7 +1070,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nThe second your eyes lock onto her back, you feel something in your mind twitch.  You see the same thing happen to her as her whole body twitches.  She quickly turns around and runs over to you.");
 				outputText("\n\n\"<i>You came back! I mean... I hope you like it. I mean welcome... What do you want to talk about?</i>\"");
 			}
-			//[Talk] [Sex] [Lay Eggs / Don't Lay Eggs] [Children] [Appearance] [Gems]
+			//[Talk] [Sex] [Lay Eggs / Don't Lay Eggs] [Children] [Appearance] [Gems] [Stones]
 			menu();
 			addButton(0, "Talk", phyllaTalkChoices);
 			if (player.lust >= 33) addButton(1, "Sex", phyllaSexMenu);
@@ -1079,7 +1079,7 @@ package classes.Scenes.Areas.Desert
 			if (flags[kFLAGS.ANT_KIDS] > 0) addButton(3, "Children", phyllasKidsChildren);
 			addButton(4, "Appearance", phyllaPearance);
 			addButton(5, "Find Gems", phyllaDigsForGems);
-			//addButton(6, "Stones", phyllaStones);
+			addButton(6, "Take Stones", phyllaStones);
 			addButton(14, "Back", camp.campLoversMenu);
 
 			flags[kFLAGS.PHYLLA_CAMP_VISITS]++;
@@ -2644,43 +2644,32 @@ package classes.Scenes.Areas.Desert
 		}
 
 //[Stones]
-		//private function phyllaStones():void
-		//{
-			//clearOutput();
-			//var kidsMod:int = 0;
-			//if (flags[kFLAGS.ANT_KIDS] > 10) kidsMod++;
-			//if (flags[kFLAGS.ANT_KIDS] > 50) kidsMod++;
-			//if (flags[kFLAGS.ANT_KIDS] > 150) kidsMod++;
-			//if (flags[kFLAGS.ANT_KIDS] > 300) kidsMod++;
-			//if (flags[kFLAGS.ANT_KIDS] > 600) kidsMod++;
-			//if (flags[kFLAGS.ANT_KIDS] > 1000) kidsMod++;
-			//if (flags[kFLAGS.ANT_KIDS] > 2000) kidsMod++;
-			
-				//var stones:int = 0;
-				//stones = 10 + rand(10) + kidsMod * 2;
-				//player.stones += stones;
-				//statScreenRefresh();
-				//If Phylla IS NOT Laying Eggs
-				//if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
-					//outputText("You ask Phylla is she's found any gems while digging out her colony.  She nods happily and runs over to a small stone chest and rifles though it.  After a moment, she runs back over to you and holds up all four of her hands.");
-					//outputText("\n\n\"<i>I hope... this is enough, I mean... they're rare, even down here.</i>\"  You mess up her hair with your hand, laughing. Telling her it's enough, you advise her to keep looking.  She gives you a playful salute as you place the gems into your pouch.");
-					//outputText("\n\nYou gain " + gems + " gems.");
-					//outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"  She asks excitedly.");
-				}
-				//If Phylla IS Laying Eggs
-				//else {
-					//outputText("You ask Phylla if she or her children have found any gems while digging.  She nods happily and closes her eyes, tilting her head back slightly.  After a moment one your children scampers in. He runs overs to a small stone chest in the corner of Phylla's room and after a moment of rifling through it he finds what he's looking for.  Walking over to you, he presents his findings.  You accept the gems he's retrieved.");
-					//if corruption under 50
-					//if (player.cor < 50) outputText("\n\nYou pat him on the head for a job well done as he walks deeper into the colony leaving you alone with Phylla.");
-					//If corruption over 50
-					//else outputText("\n\nYou count the gems, and give both him and Phylla a look of disappointment.  Sighing heavily, you point decisively at the exit and your child hangs his head in shame as he heads back into the tunnels.  Phylla looks just as depressed and just stares at the ground, unable to really move due to her 'pregnancy.'");
-					//outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"");
-					//outputText("\n\nYou gain " + gems + " gems.");
-				}
+		private function phyllaStones():void
+		{
+			stone = 2 + rand(10);
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] += stone;
+			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 200) awardAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
+			statScreenRefresh();
+			//If Phylla IS NOT Laying Eggs
+			if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
+				outputText("You ask Phylla is she's got any spare stones from digging, which you can take.  She nods happily and runs over to a small stone pile and rifles though it.  After a moment, she runs back over to you and holds up all four of her hands.");
+				outputText("\n\n\"<i>I hope... this is enough, I mean... we almost always digging, so there will be more of them soon.</i>\"  You mess up her hair with your hand, laughing. Telling her it's enough, you advise her to keep some of them instead throwing outside.  She gives you a playful salute as you taking the stones from her hands.");
+				outputText("\n\nYou gain " + stone + " stones.");
+				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"  She asks excitedly.");
 			}
-			//flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 1;
-			//doNext(camp.returnToCampUseOneHour);
-		//}
+			//If Phylla IS Laying Eggs
+			else {
+				outputText("You ask Phylla if she allow take you few of the stones that her or her children have gathered while digging.  She nods happily and closes her eyes, tilting her head back slightly.  After a moment one your children scampers in. He runs overs to a stone pile in the corner of Phylla's room and after a moment of gathering walking over to you, he giving you few stones.  You accept them.");
+				//if corruption under 50
+				if (player.cor < 50) outputText("\n\nYou pat him on the head for a job well done as he walks deeper into the colony leaving you alone with Phylla.");
+				//If corruption over 50
+				else outputText("\n\nYou count the stones, and give both him and Phylla a look of disappointment.  Sighing heavily, you point decisively at the exit and your child hangs his head in shame as he heads back into the tunnels.  Phylla looks just as depressed and just stares at the ground, unable to really move due to her 'pregnancy.'");
+				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"");
+				outputText("\n\nYou gain " + stone + " stones.");
+			}
+			doNext(camp.returnToCampUseOneHour);
+		}
 
 //Drider/Bee impregnation scene for Phylla (universal unless otherwise specified, which will include varied intros and stuff.
 //Sex > [Egg Phylla]
