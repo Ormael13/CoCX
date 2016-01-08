@@ -194,7 +194,7 @@ package classes.Scenes
 			addAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK, "Buy a total of 100 wood.");
 			addAchievement("Deforester", kACHIEVEMENTS.GENERAL_DEFORESTER, "Cut down 100 wood pieces.");
 			addAchievement("Yabba Dabba Doo", kACHIEVEMENTS.GENERAL_YABBA_DABBA_DOO, "Buy a total of 100 stones.");
-			//addAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS, "Gather a total of 200 stones with Phylla help.");
+			addAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS, "Gather a total of 200 stones with Phylla help.");
 			addAchievement("Home Sweet Home", kACHIEVEMENTS.GENERAL_HOME_SWEET_HOME, "Finish the cabin and complete it with furnishings.");
 			addAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY, "Spend the night outside your camp.");
 			addAchievement("My Tent's (not) Better Than Yours", kACHIEVEMENTS.GENERAL_MY_TENT_NOT_BETTER, "Sleep in Arian's tent.");
