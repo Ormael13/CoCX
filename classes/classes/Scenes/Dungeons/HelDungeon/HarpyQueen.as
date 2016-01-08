@@ -24,8 +24,9 @@ package classes.Scenes.Dungeons.HelDungeon
 			//Struggle Fail: 
 			if(rand(10) > 0 && player.str/5 + rand(20) < 23 || wait) {
 				outputText("You give a mighty try, but cannot pull free of the magic ropes!  The Harpy Queen laughs uproariously, pulling at your arms harder.");
-				var damage:int = 25 + rand(10);
+				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {var damage:int = 25 + rand(10);
 				damage = player.takeDamage(damage, true);
+				}
 			}
 			else {
 				outputText("With supreme effort, you pull free of the magic ropes, causing the queen to tumble to her hands and knees.");

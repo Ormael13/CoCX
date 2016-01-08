@@ -48,7 +48,8 @@
 		protected function nagaConstrict():void {
 			outputText("The naga draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!", false);
 			player.createStatusAffect(StatusAffects.NagaBind,0,0,0,0); 
-			player.takeDamage(2+rand(4));
+			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {player.takeDamage(2+rand(4));
+			}
 			combatRoundOver();
 		}
 		

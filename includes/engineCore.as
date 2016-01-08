@@ -554,6 +554,10 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.BrutalBlows));
 		if(player.str >= 50)
 			_add(new PerkClass(PerkLib.IronFists));
+		if(player.str >= 65 && player.findPerk(IronFists) >= 0 && player.newGamePlusMod >= 1)
+			_add(new PerkClass(PerkLib.IronFists2));
+		if(player.str >= 80 && player.findPerk(IronFists2) >= 0 && player.newGamePlusMod >= 2)
+			_add(new PerkClass(PerkLib.IronFists3));			
 		if(player.str >= 50 && player.spe >= 50)
 			_add(new PerkClass(PerkLib.Parry));
 	}
@@ -565,6 +569,11 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.HoldWithBothHands));
 		if (player.str >= 80 && player.tou >= 60)
 			_add(new PerkClass(PerkLib.ShieldSlam));
+	}
+	//Tier 3 Strength Perks
+	if(player.level >= 18) {
+		if(player.findPerk(Berzerker) >= 0 && player.findPerk(ImprovedSelfControl) >= 0 && player.str >= 75)
+			_add(new PerkClass(PerkLib.ColdFury));
 	}
 	//------------
 	// TOUGHNESS
@@ -599,6 +608,9 @@ public function buildPerkList():Array {
 	if(player.level >= 12) {
 		if(player.tou >= 75) {
 			_add(new PerkClass(PerkLib.Resolute));
+		}
+		if(player.tou >= 75) {
+			_add(new PerkClass(PerkLib.Juggernaut));
 		}
 		if(player.tou >= 60) {
 			_add(new PerkClass(PerkLib.IronMan));

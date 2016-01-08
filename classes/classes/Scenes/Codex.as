@@ -138,6 +138,9 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] > 0) {
 				num++;
 			}
+			if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] > 0) {
+				num++;
+			}
 			//Factions
 			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] > 0) {
 				num++;
@@ -226,6 +229,9 @@ package classes.Scenes
 			addCodexButton("Satyrs", "Satyrs", codexEntrySatyrs, kFLAGS.CODEX_ENTRY_SATYRS);
 			addCodexButton("Succubus", "Succubus", codexEntrySuccubus, kFLAGS.CODEX_ENTRY_SUCCUBUS);
 			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
+			
+			//3rd row
+			addCodexButton("Zebras, Zebras", codexEntryZebras, kFLAG.CODEX_ENTRY_ZEBRAS);
 			
 			//addButton(4, "Next", menuRacesIII);
 			addButton(9, "Previous", menuRaces);
@@ -775,6 +781,32 @@ package classes.Scenes
 			outputText("Like the satyrs, the behemoth are all-male race. Unlike satyrs, they are incapable of impregnating males. To reproduce, they rely on the females of other races as long as they are pure. Gestation period typically lasts two months, much longer than the typical gestation period in Mareth, and it takes two years for the newborn behemoth to fully mature into an adult.");
 			headerSub("Social structure");
 			outputText("Behemoths typically live in villages and caves. The leadership of tribes are determined by which is the strongest of all. Once a year, they host \"Feats of Strength\", a contest consisting of several gauntlets and competitions. Among one of them is the \"Cum-Out\" where the objective is for the behemoths to cum as much as they can in a single orgasm.");
+			setCodexMenusAfterDisplay();
+		}
+		
+		private function codexEntryZebras():void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Zebras";
+			clearOutput();
+			headerMain("Zebra-morphs");
+			outputText("<b>Genders:</b> Male, Female\n");
+			outputText("<b>Height:</b> 5 feet 5 inches to 6 feet\n");
+			outputText("<b>Build:</b> Lean/slender\n");
+			outputText("<b>Skin:</b> Zebra pattern\n");
+			outputText("<b>Fur:</b> Zebra pattern with mohawk-style mane\n");			
+			outputText("<b>Eyes:</b> Brown to black\n");
+			outputText("<b>Diet:</b> Herbivore, specializes on grass, but herbs and shrubs are part of their diet\n");
+			headerSub("Appearance");
+			outputText("The head and face is similar to that found on a zebra, though the nose is shorter. The mane looks like mohawk which begin at hairline and extends to middle of back. Legs are digitigrade ending in hooves. Long tail with a tuft of hair at end.Upper body in human (arms, hands, fingers, breasts).");
+			headerSub("Reproduction");
+			outputText("Typical reproduction. The stallion treats all women with the attention. When a foal is born, the foal is treated with the same rank his mother has.");
+			headerSub("Social structure");
+			outputText("Zebras are polygamous, one stallion with several mares and young offspring form a harem. Before beginning a harem, males are in bachelor groups, females are in natal harems composed of females only until taken into a stallion's harem.\n");
+			outputText("The rank among mares in a harem is the order they were brought into it. When a new mare is brought into the harem, the other members treat her with disdain, making sure she knows her place, the bottom.\n");
+			outputText("The acquisition of a new mare to a harem is the stallion impregnation of the mare.\n"); 
+			outputText("Stallions are passive in most instances except in dealing with others trying to take away part or all of the stallion’s harem, or conflicts when trying for a new mare for his harem. Other causes exist, of course.");
+			headerSub("Natural enemies");
+			outputText("Zebra-morphs show great anxiety when near lion-morphs since millennia have passed where they were the prey to the lion-morphs.");
+			outputText("\n\n(Written by: Rycharde) ")
 			setCodexMenusAfterDisplay();
 		}
 	}

@@ -19,6 +19,7 @@ package classes.Scenes.Camp
 		
 		public var maxNailSupply:int = 200;
 		public var maxWoodSupply:int = 999;
+		public var maxStoneSupply:int = 999;
 		
 		public function CabinProgress() {
 			
@@ -383,7 +384,7 @@ package classes.Scenes.Camp
 		//Stage 11 - Build cabin part 4 - Install flooring.
 		private function buildCabinPart4():void {
 			clearOutput();
-			outputText("You can continue working on your cabin. Do you start work on installing flooring for your cabin? (Cost: 200 nails and 50 wood.)\n");
+			outputText("You can continue working on your cabin. Do you start work on installing flooring for your cabin? (Cost: 200 nails and 50 wood.)\n"); //What about adding few stones here additionaly? 50 maybe?
 			checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox"))
 			{

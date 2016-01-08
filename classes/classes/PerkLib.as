@@ -131,6 +131,9 @@ package classes
 		public static const ColdBlooded:PerkType = mk("Cold Blooded", "Cold Blooded",
 				"Reduces minimum lust by up to 20, down to min of 20. Caps min lust at 80.",
 				"You choose the 'Cold Blooded' perk.  Thanks to increased control over your desires, your minimum lust is reduced! (Caps minimum lust at 80. Won't reduce minimum lust below 20 though.)");
+		public static const ColdFury:PerkType = mk("Cold Fury", "Cold Fury",
+				"Berserking does not reduce your armor and even very slightly increase it.",
+				"You choose the 'Cold Fury' perk, causing Berserking not only not reducing your armor and even slightly increasing it.");
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
@@ -177,9 +180,18 @@ package classes
 		public static const IronFists:PerkType = mk("Iron Fists", "Iron Fists",
 				"Hardens your fists to increase attack rating by 5.",
 				"You choose the 'Iron Fists' perk, hardening your fists. This increases attack power by 5.");
+		public static const IronFists2:PerkType = mk("Iron Fists 2", "Iron Fists 2",
+				"Further hardens your fists to increase attack rating by another 5.",
+				"You choose the 'Iron Fists 2' perk, further hardening your fists. This increases attack power by another 5.");
+		public static const IronFists3:PerkType = mk("Iron Fists 3", "Iron Fists 3",
+				"Even more hardens your fists to increase attack rating again by 5.",
+				"You choose the 'Iron Fists 3' perk, even further hardening your fists. This increases attack power again by 5.");				
 		public static const IronMan:PerkType = mk("Iron Man", "Iron Man",
 				"Reduces the fatigue cost of physical specials by 50%.",
 				"You choose the 'Iron Man' perk, reducing the fatigue cost of physical special attacks by 50%");
+		public static const Juggernaut:PerkType = mk("Juggernaut", "Juggernaut",
+				"When wearing heavy armor, you have extra 10% damage resistance and are immune to damage from being constricted/squeezed.",
+				"You choose the 'Juggernaut' perk, granting extra 10% damage resistance when wearing heavy armor and immunity to damage from been constricted/squeezed.");
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if(player.spe>=60)" +
 						"Increases the attack damage for non-heavy weapons.</b>" +

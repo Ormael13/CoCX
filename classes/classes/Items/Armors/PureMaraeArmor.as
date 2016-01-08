@@ -13,12 +13,12 @@ package classes.Items.Armors
 	{
 		public function PureMaraeArmor() 
 		{
-			super("DB.Armr","D.B.Armor","divine bark armor","a suit of divine bark armor",30,1100,"This suit of armor is finely made from the white bark you've received from Marae as a reward.");
+			super("DB.Armr","D.B.Armor","divine bark armor","a suit of divine bark armor",40,1100,"This suit of armor is finely made from the white bark you've received from Marae as a reward.");
 		}
 		
 		override public function get supportsBulge():Boolean { return true; }
 		
-		override public function get def():Number { return 30 - int(game.player.cor / 5); }
+		override public function get def():Number { return 40 - int(game.player.cor / 5); }
 		
 		override public function useText():void
 		{
