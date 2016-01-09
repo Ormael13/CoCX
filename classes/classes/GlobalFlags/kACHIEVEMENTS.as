@@ -83,8 +83,8 @@ package classes.GlobalFlags
 		public static const DUNGEON_PHOENIX_FALL:int			= 065;
 		public static const DUNGEON_ACCOMPLICE:int				= 066; //shadow achievement
 		public static const DUNGEON_EXTREMELY_CHASTE_DELVER:int	= 067; //shadow achievement
-		public static const UNKNOWN_ACHIEVEMENT_068:int			= 068;
-		public static const UNKNOWN_ACHIEVEMENT_069:int			= 069;
+		public static const DUNGEON_DELVER_APPRENTICE:int			= 068;
+		public static const DUNGEON_END_OF_REIGN:int			= 069;
 		
 		//Fashion and Wealth Achievements (070-074)(075-079)
 		public static const FASHION_WANNABE_WIZARD:int			= 070;
