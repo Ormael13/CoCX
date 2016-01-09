@@ -2709,9 +2709,9 @@ private function updateAchievements():void {
 	if (getCampPopulation() >= 100) awardAchievement("City", kACHIEVEMENTS.POPULATION_CITY);
 	if (getCampPopulation() >= 250) awardAchievement("Metropolis", kACHIEVEMENTS.POPULATION_METROPOLIS);
 	if (getCampPopulation() >= 500) awardAchievement("Megalopolis", kACHIEVEMENTS.POPULATION_MEGALOPOLIS);
-	if (getCampPopulation() >= 1,000) awardAchievement("City-State", kACHIEVEMENTS.POPULATION_CITY_STATE);
-	if (getCampPopulation() >= 2,500) awardAchievement("Kingdomn", kACHIEVEMENTS.POPULATION_KINGDOMN);
-	if (getCampPopulation() >= 5,000) awardAchievement("Empire", kACHIEVEMENTS.POPULATION_EMPIRE);
+	if (getCampPopulation() >= 1000) awardAchievement("City-State", kACHIEVEMENTS.POPULATION_CITY_STATE);
+	if (getCampPopulation() >= 2500) awardAchievement("Kingdomn", kACHIEVEMENTS.POPULATION_KINGDOMN);
+	if (getCampPopulation() >= 5000) awardAchievement("Empire", kACHIEVEMENTS.POPULATION_EMPIRE);
 	
 	//Time
 	if (model.time.days >= 30) awardAchievement("It's been a month", kACHIEVEMENTS.TIME_MONTH);
