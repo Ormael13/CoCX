@@ -59,7 +59,7 @@ package classes.GlobalFlags
 		public static const POPULATION_METROPOLIS:int				= 045; //Population 250
 		public static const POPULATION_MEGALOPOLIS:int				= 046; //Population 500
 		public static const POPULATION_CITY_STATE:int				= 047; //Population 1,000 (shadow achievement)
-		public static const POPULATION_KINGDOMN:int				= 048; //Population 2,500 (shadow achievement)
+		public static const POPULATION_KINGDOM:int				= 048; //Population 2,500 (shadow achievement)
 		public static const POPULATION_EMPIRE:int				= 049; //Population 5,000 (shadow achievement)
 		
 		//Time Achievements (050-059)
