@@ -59,7 +59,7 @@ package classes.GlobalFlags
 		public static const POPULATION_METROPOLIS:int				= 045; //Population 250
 		public static const POPULATION_MEGALOPOLIS:int				= 046; //Population 500
 		public static const POPULATION_CITY_STATE:int				= 047; //Population 1,000 (shadow achievement)
-		public static const POPULATION_KINGDOMN:int				= 048; //Population 2,500 (shadow achievement)
+		public static const POPULATION_KINGDOM:int				= 048; //Population 2,500 (shadow achievement)
 		public static const POPULATION_EMPIRE:int				= 049; //Population 5,000 (shadow achievement)
 		
 		//Time Achievements (050-059)
@@ -83,8 +83,8 @@ package classes.GlobalFlags
 		public static const DUNGEON_PHOENIX_FALL:int			= 065;
 		public static const DUNGEON_ACCOMPLICE:int				= 066; //shadow achievement
 		public static const DUNGEON_EXTREMELY_CHASTE_DELVER:int	= 067; //shadow achievement
-		public static const UNKNOWN_ACHIEVEMENT_068:int			= 068;
-		public static const UNKNOWN_ACHIEVEMENT_069:int			= 069;
+		public static const DUNGEON_DELVER_APPRENTICE:int			= 068;
+		public static const DUNGEON_END_OF_REIGN:int			= 069;
 		
 		//Fashion and Wealth Achievements (070-074)(075-079)
 		public static const FASHION_WANNABE_WIZARD:int			= 070;

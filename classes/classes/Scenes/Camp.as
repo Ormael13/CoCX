@@ -625,7 +625,8 @@ private function doCamp():void { //Only called by playerMenu
 		}
 	}
 	else outputText("You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.  ", false);
-	outputText("The portal shimmers in the background as it always does, looking menacing and reminding you of why you came.\n\n", false);
+	if(flags[kFLAGS.ANT_KIDS] > 1000) outputText("The portal shimmers in the background as it always does, looking menacing and reminding you of why you came.  Really close to it there is a small entrance to the underground maze created by your ant children.  And due to Phylla wish from time to time one of your children comming out this entrance to check on the situation near portal.  You feel a little more safe now knowing that it will be harder for anyone to go near the portal without been noticed or...if someone came out of the portal.\n\n", false);
+	else outputText("The portal shimmers in the background as it always does, looking menacing and reminding you of why you came.\n\n", false);
 
 	//Ember's anti-minotaur crusade!
 	if(flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
@@ -1090,7 +1091,9 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	if (flags[kFLAGS.ANT_WAIFU] > 0) {
 		outputText("You see Phylla's anthill in the distance.  Every now and then you see");
 		//If PC has children w/ Phylla:
-		if(flags[kFLAGS.ANT_KIDS] > 0) outputText(" one of your many children exit the anthill to unload some dirt before continuing back down into the colony.  It makes you feel good knowing your offspring are so productive.");
+		if(flags[kFLAGS.ANT_KIDS] > 0 && flags[kFLAGS.ANT_KIDS] <= 250) outputText(" one of your children exit the anthill to unload some dirt before continuing back down into the colony.  It makes you feel good knowing your offspring are so productive.");
+		if(flags[kFLAGS.ANT_KIDS] > 250 && flags[kFLAGS.ANT_KIDS] <= 1000) outputText(" few of your many children exit the anthill to unload some dirt before vanishing back inside.  It makes you feel good knowing your offspring are so productive.");
+		if(flags[kFLAGS.ANT_KIDS] > 1000) outputText(" some of your children exit the anthill using main or one of the additionaly entrances to unload some dirt. Some of them instead of unloading dirt comming out to fullfill some other task that their mother gave them.  You feel a little nostalgic seeing how this former small colony grown to such a magnificent size.");
 		else outputText(" Phylla appear out of the anthill to unload some dirt.  She looks over to your campsite and gives you an excited wave before heading back into the colony.  It makes you feel good to know she's so close.");
 		outputText("\n\n");
 		addButton(8,"Phylla", getGame().desert.antsScene.introductionToPhyllaFollower);
@@ -2706,9 +2709,9 @@ private function updateAchievements():void {
 	if (getCampPopulation() >= 100) awardAchievement("City", kACHIEVEMENTS.POPULATION_CITY);
 	if (getCampPopulation() >= 250) awardAchievement("Metropolis", kACHIEVEMENTS.POPULATION_METROPOLIS);
 	if (getCampPopulation() >= 500) awardAchievement("Megalopolis", kACHIEVEMENTS.POPULATION_MEGALOPOLIS);
-	if (getCampPopulation() >= 1,000) awardAchievement("City-State", kACHIEVEMENTS.POPULATION_CITY_STATE);
-	if (getCampPopulation() >= 2,500) awardAchievement("Kingdomn", kACHIEVEMENTS.POPULATION_KINGDOMN);
-	if (getCampPopulation() >= 5,000) awardAchievement("Empire", kACHIEVEMENTS.POPULATION_EMPIRE);
+	if (getCampPopulation() >= 1000) awardAchievement("City-State", kACHIEVEMENTS.POPULATION_CITY_STATE);
+	if (getCampPopulation() >= 2500) awardAchievement("Kingdom", kACHIEVEMENTS.POPULATION_KINGDOM);
+	if (getCampPopulation() >= 5000) awardAchievement("Empire", kACHIEVEMENTS.POPULATION_EMPIRE);
 	
 	//Time
 	if (model.time.days >= 30) awardAchievement("It's been a month", kACHIEVEMENTS.TIME_MONTH);
@@ -2740,9 +2743,11 @@ private function updateAchievements():void {
 		if (flags[kFLAGS.TIMES_ORGASMED] <= 0 && flags[kFLAGS.MOD_SAVE_VERSION] == kGAMECLASS.modSaveVersion) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
 	}
 	if (kGAMECLASS.dungeons.checkLethiceStrongholdClear()) {
+		awardAchievement("End of Reign", kACHIEVEMENTS.DUNGEON_END_OF_REIGN);
 		dungeonsCleared++;
 	}
-	if (dungeonsCleared >= 3) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
+	if (dungeonsCleared >= 1) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
+	if (dungeonsCleared >= 3) awardAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER_APPRENTICE);
 	if (dungeonsCleared >= 5) awardAchievement("Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
 	
 	//Fashion

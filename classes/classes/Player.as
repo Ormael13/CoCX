@@ -1489,6 +1489,9 @@ use namespace kGAMECLASS;
 				sharkCounter++;
 			if (tailType == 7)
 				sharkCounter++;
+			//skin counting only if PC got any other shark traits
+			if (skinType == 0 && sharkCounter > 0)
+				sharkCounter++;
 			return sharkCounter;
 		}
 
