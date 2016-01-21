@@ -7,6 +7,7 @@
 	import classes.Items.JewelryLib;
 	import classes.Items.UseableLib;
 	import classes.Items.WeaponLib;
+	import classes.Items.ShieldLib;
 	import classes.Items.UndergarmentLib;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 	import classes.Scenes.NPCs.Kiha;
@@ -65,6 +66,9 @@
 		}
 		protected function get weapons():WeaponLib{
 			return game.weapons;
+		}
+		protected function get shields():ShieldLib{
+			return game.shields;
 		}
 		protected function get armors():ArmorLib{
 			return game.armors;

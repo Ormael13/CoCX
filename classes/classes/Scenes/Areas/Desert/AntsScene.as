@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.Desert
 {
 	import classes.*;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Forest.TentacleBeast;
@@ -2646,16 +2647,16 @@ package classes.Scenes.Areas.Desert
 //[Stones]
 		private function phyllaStones():void
 		{
-			stone = 2 + rand(10);
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] += stone;
+			var stones:int = 2 + rand(10);
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] += stones;
 			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 200) awardAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stones;
 			statScreenRefresh();
 			//If Phylla IS NOT Laying Eggs
 			if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
 				outputText("You ask Phylla is she's got any spare stones from digging, which you can take.  She nods happily and runs over to a small stone pile and rifles though it.  After a moment, she runs back over to you and holds up all four of her hands.");
 				outputText("\n\n\"<i>I hope... this is enough, I mean... we almost always digging, so there will be more of them soon.</i>\"  You mess up her hair with your hand, laughing. Telling her it's enough, you advise her to keep some of them instead throwing outside.  She gives you a playful salute as you taking the stones from her hands.");
-				outputText("\n\nYou gain " + stone + " stones.");
+				outputText("\n\nYou gain " + stones + " stones.");
 				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"  She asks excitedly.");
 			}
 			//If Phylla IS Laying Eggs
@@ -2666,7 +2667,7 @@ package classes.Scenes.Areas.Desert
 				//If corruption over 50
 				else outputText("\n\nYou count the stones, and give both him and Phylla a look of disappointment.  Sighing heavily, you point decisively at the exit and your child hangs his head in shame as he heads back into the tunnels.  Phylla looks just as depressed and just stares at the ground, unable to really move due to her 'pregnancy.'");
 				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"");
-				outputText("\n\nYou gain " + stone + " stones.");
+				outputText("\n\nYou gain " + stones + " stones.");
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
