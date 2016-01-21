@@ -163,7 +163,7 @@ package classes.Scenes
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0
 			outputText("You open your codex. Which topic would you like to read?\n\n");
-			outputText("Codex entries unlocked: " + checkUnlocked() + "/23");
+			outputText("Codex entries unlocked: " + checkUnlocked() + "/24");
 			addButton(0, "Races", menuRaces);
 			addButton(1, "Cults", menuFactions);
 			addButton(2, "Others", menuItems);
@@ -231,7 +231,7 @@ package classes.Scenes
 			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 			
 			//3rd row
-			addCodexButton("Zebras, Zebras", codexEntryZebras, kFLAG.CODEX_ENTRY_ZEBRAS);
+			addCodexButton("Zebras", "Zebras", codexEntryZebras, kFLAGS.CODEX_ENTRY_ZEBRAS);
 			
 			//addButton(4, "Next", menuRacesIII);
 			addButton(9, "Previous", menuRaces);

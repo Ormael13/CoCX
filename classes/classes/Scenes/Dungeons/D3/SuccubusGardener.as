@@ -3,6 +3,7 @@
 	import classes.Appearance;
 	import classes.Monster;
 	import classes.StatusAffects;
+	import classes.PerkLib;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	
@@ -233,7 +234,8 @@
 				}
 				
 				player.addStatusValue(StatusAffects.Tentagrappled, 1, 1);
-				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {player.takeDamage(75 + rand(15));
+				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+					player.takeDamage(75 + rand(15));
 				}
 				game.dynStats("lus+", 3 + rand(3));
 				if (flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus+", 5);
@@ -260,7 +262,8 @@
 			}
 	
 			player.addStatusValue(StatusAffects.Tentagrappled, 1, 1);
-			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {player.takeDamage(75 + rand(15));
+			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+				player.takeDamage(75 + rand(15));
 			}
 			game.dynStats("lus+", 3 + rand(3));
 			combatRoundOver();
