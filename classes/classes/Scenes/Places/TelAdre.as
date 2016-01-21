@@ -40,6 +40,7 @@
 		
 		public var nails:Number = 0;
 		public var wood:Number = 0;
+		public var stone:Number = 0;
 		
 		public function TelAdre()
 		{
@@ -1803,21 +1804,26 @@ private function debitJewel(itype:ItemType):void {
 //-- CARPENTRY SHOP
 //-----------------
 public function carpentryShopEntry():void {
-	outputText("You enter the shop marked by a sign with hammer and saw symbol painted on it. There are array of tools all hung neatly. A six feet tall zebra-morph stallion stands behind the counter. He appears to be wearing typical lumberjack outfit.\n\n", true);
-	outputText("\"<i>Welcome to my hardware shop dear customer. Feel free to look around,</i>\" he says. \n\n", false); //Still not have any idea how to make codex for zebra-morphs unlocks. Kitteh would you kindly help me on that?
+	clearOutput();
+	outputText("You enter the shop marked by a sign with hammer and saw symbol painted on it. There are array of tools all hung neatly. A six feet tall zebra-morph stallion stands behind the counter. He appears to be wearing typical lumberjack outfit.\n\n");
+	outputText("\"<i>Welcome to my hardware shop dear customer. Feel free to look around,</i>\" he says. \n\n"); //Still not have any idea how to make codex for zebra-morphs unlocks. Kitteh would you kindly help me on that?
+	if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_ZEBRAS] = 1;
+		outputText("<b>New codex entry unlocked: Zebras!</b>")
+	}
 	doNext(carpentryShopInside);
 }
 
 public function carpentryShopInside():void {
 	clearOutput();
-	outputText("<i>So what will it be?</i>", false);
+	outputText("<i>So what will it be?</i>");
 	menu();
 	addButton(0, "Buy Nails", carpentryShopBuyNails);
 	addButton(1, "Buy Wood", carpentryShopBuyWood);
-	addButton(2, "Buy Stones", carpentryShopBuyStones);
+	addButton(2, "Buy Stones", carpentryShopBuyStone);
 	addButton(5, "Sell Nails", carpentryShopSellNails);	
 	addButton(6, "Sell Wood", carpentryShopSellWood);
-	addButton(7, "Sell Stones", carpentryShopSellStones);
+	addButton(7, "Sell Stones", carpentryShopSellStone);
 	addButton(10, "Toolbox", carpentryShopBuySet);
 	//addButton(11, "NailsChest", carpentryShopBuySet2);
 	//addButton(12, "StoneBuildingsGuide", carpentryShopBuySet3);
@@ -1825,10 +1831,10 @@ public function carpentryShopInside():void {
 }
 //Buy nails
 public function carpentryShopBuyNails():void {
-	if (player.hasKeyItem("Carpenter's Toolbox") >= 0)
-	{
-		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to two hundred nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n", true);
-		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200", false)
+	clearOutput();
+	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
+		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to two hundred nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
+		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200")
 		else outputText("Nails: " + 0 + "/200", false)
 		addButton(0, "Buy 10", carpentryShopBuyNailsAmount, 10);
 		addButton(1, "Buy 25", carpentryShopBuyNailsAmount, 25);
@@ -1837,8 +1843,7 @@ public function carpentryShopBuyNails():void {
 		addButton(4, "Buy 100", carpentryShopBuyNailsAmount, 100);
 		addButton(14, "Back", carpentryShopInside)
 	}
-	else
-	{
+	else {
 		outputText("You ask him if he has nails for sale. He replies \"<i>I do. But I'm sorry, my friend. You don't have a toolbox. How are you going to carry nails safely?</i>\" ", true);
 		doNext(carpentryShopInside);
 	}
@@ -1971,11 +1976,11 @@ private function carpentryShopSellNailsAmount(amount:int):void {
 }
 
 private function carpentryShopSellNailsYes():void {
-	if (player.keyItemv1("Carpenter's Toolbox") >= nail)
+	if (player.keyItemv1("Carpenter's Toolbox") >= nails)
 	{
-		player.gems += nail;
-		player.keyItemv1("Carpenter's Toolbox") -= nail;
-		outputText("You sign the permission form for " + num2Text(nail) + " " + (player.keyItemv1("Carpenter's Toolbox") ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nail + " gems,</i>\" he says.\n\n", true);
+		player.gems += nails;
+		player.addKeyValue("Carpenter's Toolbox", 1, -nails);
+		outputText("You sign the permission form for " + num2Text(nails) + " " + (player.keyItemv1("Carpenter's Toolbox") ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n", true);
 		outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200");
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough nails.</i>\"", true);

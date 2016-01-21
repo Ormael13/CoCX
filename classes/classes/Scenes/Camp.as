@@ -569,7 +569,7 @@ private function doCamp():void { //Only called by playerMenu
 			outputText(num2Text(flags[kFLAGS.MARBLE_KIDS]) + " child", false);
 			if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("ren", false);
 		}
-		outputText(".  ", false);
+		outputText(".\n\n");
 	}
 	//HARPY ROOKERY
 	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0) {
@@ -602,6 +602,7 @@ private function doCamp():void { //Only called by playerMenu
 		else {
 			outputText("An immense harpy rookery dominates the edge of your camp, towering over the rest of it.  Innumerable harpies flit around it, always working on it, assisted from below by the few sisters unlucky enough to be flightless.  ");
 		}
+		outputText("\n\n");
 	}
 	//Traps
 	if(player.findStatusAffect(StatusAffects.DefenseCanopy) >= 0) {
@@ -623,10 +624,12 @@ private function doCamp():void { //Only called by playerMenu
 			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
 			else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
 		}
+		outputText("\n\n");
 	}
-	else outputText("You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.  ", false);
-	if(flags[kFLAGS.ANT_KIDS] > 1000) outputText("The portal shimmers in the background as it always does, looking menacing and reminding you of why you came.  Really close to it there is a small entrance to the underground maze created by your ant children.  And due to Phylla wish from time to time one of your children comming out this entrance to check on the situation near portal.  You feel a little more safe now knowing that it will be harder for anyone to go near the portal without been noticed or...if someone came out of the portal.\n\n", false);
-	else outputText("The portal shimmers in the background as it always does, looking menacing and reminding you of why you came.\n\n", false);
+	else outputText("You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.  ");
+	outputText("The portal shimmers in the background as it always does, looking menacing and reminding you of why you came.");
+	if (flags[kFLAGS.ANT_KIDS] > 1000) outputText(" Really close to it there is a small entrance to the underground maze created by your ant children. And due to Phylla wish from time to time one of your children comming out this entrance to check on the situation near portal. You feel a little more safe now knowing that it will be harder for anyone to go near the portal without been noticed or...if someone came out of the portal.");
+	outputText("\n\n");
 
 	//Ember's anti-minotaur crusade!
 	if(flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
