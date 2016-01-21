@@ -69,7 +69,7 @@ package classes.Scenes
 			{
 				flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
 			}
-			if (flags[kFLAGS.ROGAR_DISABLED] > 0)
+			if (flags[kFLAGS.ROGAR_DISABLED] > 0 || flags[kFLAGS.ROGAR_PHASE] >= 3)
 			{
 				flags[kFLAGS.CODEX_ENTRY_ORCS] = 1;
 			}
@@ -152,7 +152,7 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_MAGIC] > 0) {
 				num++;
 			}
-			if (num >= 23) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
+			if (num >= 24) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
 			return num;
 		}
 		

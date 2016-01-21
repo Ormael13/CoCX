@@ -429,7 +429,7 @@ the text from being too boring.
 
 			//Version NUMBER
 			ver = "0.9.4_mod_1.3.8";
-			version = ver + " (<b>More code cleaning, Taur overhaul.</b>)";
+			version = ver + " (<b>More changes.</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
