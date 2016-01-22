@@ -408,6 +408,8 @@ package classes
 				"Causes you to regularly lay eggs when not otherwise pregnant.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",
 				"Reduces the rate at which your corruption, libido, and lust increase. Reduces minimum libido slightly.");
+		public static const RapierTraining:PerkType = mk("Rapier Training", "Rapier Training",
++				"After finishing of your training, increase attack power of any rapier you're using.");
 		public static const SatyrSexuality:PerkType = mk("Satyr Sexuality", "Satyr Sexuality",
 				"Thanks to your satyr biology, you now have the ability to impregnate both vaginas and asses. Also increases your virility rating. (Anal impregnation not implemented yet)");
 		public static const SlimeCore:PerkType = mk("Slime Core", "Slime Core",

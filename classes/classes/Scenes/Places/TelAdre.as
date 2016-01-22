@@ -279,11 +279,11 @@ public function houses():void {
 		}
 	}
 	menu();
-	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower()) addButton(0,"Arian's",kGAMECLASS.arianScene.visitAriansHouse);
-	addButton(1,"Orphanage",orphanage);
+	if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 5) addButton(0, "Kath's Apt", katherine.visitAtHome);
 	if (kGAMECLASS.urtaPregs.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0)
-		addButton(2, "Urta's House", (katherine.isAt(Katherine.KLOC_URTAS_HOME) ? katherine.katherineAtUrtas : kGAMECLASS.urtaPregs.visitTheHouse));
-	if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 5) addButton(3, "Kath's Apt", katherine.visitAtHome);
+		addButton(1, "Urta's House", (katherine.isAt(Katherine.KLOC_URTAS_HOME) ? katherine.katherineAtUrtas : kGAMECLASS.urtaPregs.visitTheHouse));
+	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower()) addButton(2,"Arian's",kGAMECLASS.arianScene.visitAriansHouse);
+	addButton(3,"Orphanage",orphanage);
 	addButton(14,"Back",telAdreMenu);
 }
 
@@ -1836,6 +1836,7 @@ public function carpentryShopBuyNails():void {
 		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to two hundred nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200")
 		else outputText("Nails: " + 0 + "/200", false)
+		menu();
 		addButton(0, "Buy 10", carpentryShopBuyNailsAmount, 10);
 		addButton(1, "Buy 25", carpentryShopBuyNailsAmount, 25);
 		addButton(2, "Buy 50", carpentryShopBuyNailsAmount, 50);
@@ -1880,7 +1881,8 @@ private function carpentryShopBuyNailsYes():void {
 //Buy wood
 public function carpentryShopBuyWood():void {
 	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 10 gems per wood plank.</i>\" \n\n", true);
-	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "", false);
+	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/999", false);
+	menu();
 	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
 	addButton(1, "Buy 20", carpentryShopBuyWoodAmount, 20);
 	addButton(2, "Buy 30", carpentryShopBuyWoodAmount, 30);
@@ -1919,7 +1921,8 @@ private function carpentryShopBuyWoodYes():void {
 //Buy Stones
 public function carpentryShopBuyStone():void {
 	outputText("You ask him if he has stones for sale. He replies \"<i>Certainly! I've got extra supply of stones. I'll be selling stones at a price of 20 gems per stone.</i>\" \n\n", true);
-	outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "", false);
+	outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/999", false);
+	menu();
 	addButton(0, "Buy 10", carpentryShopBuyStoneAmount, 10);
 	addButton(1, "Buy 20", carpentryShopBuyStoneAmount, 20);
 	addButton(2, "Buy 30", carpentryShopBuyStoneAmount, 30);

@@ -208,11 +208,11 @@ package classes.Scenes.Dungeons
 		//Bed
 		private function constructFurnitureBedPrompt():void {
 			clearOutput();
-			outputText("Would you like to construct a bed? (Cost: 30 nails and 15 wood.)\n\n");
+			outputText("Would you like to construct a bed? (Cost: 45 nails and 25 wood.)\n\n");
 			camp.cabinProgress.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox"))
 			{
-				if (player.keyItemv1("Carpenter's Toolbox") >= 30 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 15)
+				if (player.keyItemv1("Carpenter's Toolbox") >= 45 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 25)
 				{
 					doYesNo(constructFurnitureBed, menuFurniture);
 				}
@@ -231,14 +231,14 @@ package classes.Scenes.Dungeons
 		
 		private function constructFurnitureBed():void {
 			clearOutput();
-			outputText("You take the book from your toolbox and flip pages until you reach pages about how to construct a bed. You follow the instructions.\n\n");
+			outputText("You take the book from your toolbox and flip pages until you reach pages about how to construct a bed. After moment of thinking over something you looking for a model that could be used by two people. Maybe someday you will need that extra space to sleep since it's Mareth after all. You follow the instructions.\n\n");
 			outputText("You pick up the wood and begin to construct a bed frame. You put it together and drive nails into place with your hammer.\n\n");
-			outputText("Next, you add a wooden slab to the bed for mattress. With the bed finished, you go outside to pick up your bedroll and bring it inside. It easily converts to mattress, sheet, and pillow. It took you two hours to completely make a bed from the beginning!\n\n");
+			outputText("Next, you add a wooden slab to the bed for mattress. With the bed finished, you go outside to pick up your bedroll and bring it inside. It easily converts to mattress, sheet, and pillow. It took you two hours to completely make a large bed from the beginning!\n\n");
 			outputText("<b>You have finished your bed! (HP and Fatigue recovery increased by 50%!)</b> \n\n");
-			player.addKeyValue("Carpenter's Toolbox", 1, -30);
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 15;
+			player.addKeyValue("Carpenter's Toolbox", 1, -45);
+			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 25;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] = 1;
-			fatigue(30);
+			fatigue(40);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		//Nightstand
