@@ -241,7 +241,7 @@ package classes.Scenes.Camp
 		}
 		
 		public function checkMaterials():void {
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/999" " \n");
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + maxWoodSupply + " \n");
 			outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/" + maxNailSupply + " \n");
 		}
 		
