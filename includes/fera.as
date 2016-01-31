@@ -54,7 +54,7 @@ public function pumpkinFuck():void {
 	if(player.balls > 0) outputText("balls deep ");
 	else outputText("hilt deep ");
 	outputText("or not.  Not that you mind - the swollen labia seem to be doing an adequate job of smooching all over your shaft as it passes through their glossy gates.");
-	if(player.cocks[0].cockLength >= 20) outputText("  After you've fed over a foot of your [cock biggest] into the gluttenous gourd, you briefly wonder where it's all going.  The pumpkin can't be more than a foot and a half across, yet it's sucking down the second foot now, and you have yet to hit any wall!  The suction suddenly increases, yanking you deeper, faster, and you forget all about the whys, whens, and whatevers.  It feels great.");
+	if(player.cocks[0].cockLength >= 20) outputText("  After you've fed over a foot of your [cock biggest] into the gluttonous gourd, you briefly wonder where it's all going.  The pumpkin can't be more than a foot and a half across, yet it's sucking down the second foot now, and you have yet to hit any wall!  The suction suddenly increases, yanking you deeper, faster, and you forget all about the whys, whens, and whatevers.  It feels great.");
 	outputText("\n\n");
 	if(player.balls > 0) outputText("Your [balls] slap");
 	else outputText("Your groin slaps");
