@@ -189,7 +189,7 @@
 		if(player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_GOO) 
 			outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of " + player.furColor + " fuzz.", false);
 		if(player.skinType == SKIN_TYPE_FUR) 
-			outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Your " + player.skinFurScales() + " thickens noticably on your head, looking shaggy and more than a little monstrous once laid over your visage.", false);
+			outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Your " + player.skinFurScales() + " thickens noticeably on your head, looking shaggy and more than a little monstrous once laid over your visage.", false);
 		if(player.skinType == SKIN_TYPE_SCALES) 
 			outputText("  Your face resembles a minotaur's, though strangely it is covered in shimmering scales, right up to the flat cow-like nose that protrudes from your face.", false);
 	}
@@ -586,7 +586,7 @@
 		{
 			outputText("  Your " + buttDescript(), false);
 			if(player.buttRating < 4) 
-				outputText(" is barely noticable, showing off the muscles of your haunches.", false);
+				outputText(" is barely noticeable, showing off the muscles of your haunches.", false);
 			if(player.buttRating >= 4 && player.buttRating < 6) 
 				outputText(" matches your toned equine frame quite well.", false);
 			if(player.buttRating >= 6 && player.buttRating <10) 
@@ -827,7 +827,7 @@
 		{
 			if(player.buttPregnancyIncubation < 125 && player.buttPregnancyIncubation >= 75) 
 			{
-				outputText("<b>You've got the begginings of a small pot-belly.</b>", false);
+				outputText("<b>You've got the beginnings of a small pot-belly.</b>", false);
 			}
 			else if(player.buttPregnancyIncubation >= 50) 
 			{
@@ -855,7 +855,7 @@
 			}
 			if(player.pregnancyIncubation <= 360 && player.pregnancyIncubation > 288) 
 			{
-				outputText("<b>Your belly is more noticably distended.   You're pretty sure it's Urta's.</b>", false);
+				outputText("<b>Your belly is more noticeably distended.   You're pretty sure it's Urta's.</b>", false);
 			}
 			if(player.pregnancyIncubation <= 288 && player.pregnancyIncubation > 216) 
 			{
@@ -900,7 +900,7 @@
 			}
 			if(player.pregnancyIncubation <= 280 && player.pregnancyIncubation > 216) 
 			{
-				outputText("<b>Your belly is more noticably distended.   You are probably pregnant.</b>", false);
+				outputText("<b>Your belly is more noticeably distended.   You are probably pregnant.</b>", false);
 			}
 			if(player.pregnancyIncubation <= 216 && player.pregnancyIncubation > 180) 
 			{
@@ -962,7 +962,7 @@
 			if(temp == 3) 
 				outputText("\n--Your fourth set of tits cradles ", false);
 			if(temp == 4) 
-				outputText("\n--Your fifth and final mammory grouping swells with ", false);
+				outputText("\n--Your fifth and final mammary grouping swells with ", false);
 			outputText(num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + " with ", false);
 			outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples per breast
 			if (flags[kFLAGS.USE_METRICS] > 0 ) outputText(int(player.nippleLength * 2.54 * 10) / 10 + "-cm "); //Centimeter

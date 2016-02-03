@@ -113,7 +113,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 280) {
-				outputText("\n<b>Your belly is getting more noticably distended.   You are probably pregnant.</b>\n", false);
+				outputText("\n<b>Your belly is getting more noticeably distended.   You are probably pregnant.</b>\n", false);
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 216) {
@@ -157,7 +157,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 280) {
-				outputText("\n<b>Your belly is getting more noticably distended and squirming around.  You are probably pregnant.</b>\n", false);
+				outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n", false);
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 216) {
@@ -315,7 +315,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 178) {
-				outputText("\n<b>Your belly is getting more noticably distended.   You are probably pregnant.</b>\n", false);
+				outputText("\n<b>Your belly is getting more noticeably distended.   You are probably pregnant.</b>\n", false);
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 156) {
@@ -359,7 +359,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 280) {
-				outputText("\n<b>Your belly is getting more noticably distended and squirming around.  You are probably pregnant.</b>\n", false);
+				outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n", false);
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 216) {
@@ -459,7 +459,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if (player.pregnancyIncubation == 280) {
-				outputText("\n<b>Your belly is getting more noticably distended and squirming around.  You are probably pregnant.</b>\n", false);
+				outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n", false);
 				if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 2
 					outputText("\nA pair of arms suddenly wrap themselves around you, stroking your belly. \"<i>Like, don't worry, [name]; I love you even if you are getting fat. Actually... this little pot belly of yours is, like, kinda sexy, y'know?</i>\" Joy declares.\n");
 					outputText("\nYou roll your eyes at Joy's teasing but appreciate her support all the same.\n");
@@ -581,7 +581,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 280) {
-				outputText("\n<b>Your belly is getting more noticably distended and squirming around.  You are probably pregnant.</b>\n", false);
+				outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n", false);
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 216) {
@@ -643,7 +643,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 250) {
-				outputText("\n<b>Your belly is getting more noticably distended and squirming around.  You are probably pregnant.</b>\n", false);
+				outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n", false);
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 216) {
@@ -1060,7 +1060,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 240) {
-				outputText("\n<b>Your belly is getting more noticably distended and squirming around.  You are probably pregnant.</b>\n", false);
+				outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n", false);
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 216) {
@@ -1638,7 +1638,7 @@ public function updatePregnancy():Boolean {
 						
 			//OLD TXToutputText("The anemone writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back into your " + vaginaDescript(0)+ ".  As the tentacled crown brushes past your lips a venomous heat fills your crotch - you feel the thing shift and flatten itself against your insides, then a pinch on your vaginal walls where the little anemone was pressing on them.  This can't be good.\n\n", false);
 
-			outputText("\n\nPush as you might, you can't get it to peek back out even the slightest bit.  What's worse, the heat isn't subsiding, as the tentacles are now lodged inside your pussy!  Prodding and pulling at your " + vaginaDescript(0) + " is only worsening the effect; " + player.sMultiCockDesc() + " and your clitoris harden as you attempt to retrieve your invader.  Your probes get weaker and weaker as your vagina spasms to each stroke of your insides; each time you touch the creature, the sensation is being transmitted right back to your nerves.  Eventually you push yourself to accidental orgasm; your " + vaginaDescript(0) + " quivers around your fingers and your " + player.multiCockDescriptLight() + " does the best ejaculation it can manange with hardly any warmup time and no direct stimulation.  Even after the orgasm ends, the tentacles continue to torment your groin.  <b>You are VERY horny with this thing inside you... though you can't reach it, maybe there's a way to crowd it out?</b>\n\n", false);
+			outputText("\n\nPush as you might, you can't get it to peek back out even the slightest bit.  What's worse, the heat isn't subsiding, as the tentacles are now lodged inside your pussy!  Prodding and pulling at your " + vaginaDescript(0) + " is only worsening the effect; " + player.sMultiCockDesc() + " and your clitoris harden as you attempt to retrieve your invader.  Your probes get weaker and weaker as your vagina spasms to each stroke of your insides; each time you touch the creature, the sensation is being transmitted right back to your nerves.  Eventually you push yourself to accidental orgasm; your " + vaginaDescript(0) + " quivers around your fingers and your " + player.multiCockDescriptLight() + " does the best ejaculation it can manage with hardly any warmup time and no direct stimulation.  Even after the orgasm ends, the tentacles continue to torment your groin.  <b>You are VERY horny with this thing inside you... though you can't reach it, maybe there's a way to crowd it out?</b>\n\n", false);
 			//(reduce lust to min, increased minimum lust by 30 until halfway through PC's next pregnancy)]
 			player.orgasm();
 			dynStats("lib", 2, "sen", 5);

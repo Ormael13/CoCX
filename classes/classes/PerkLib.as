@@ -156,8 +156,8 @@ package classes
 				"Increases fertility rating by 15 and cum volume by up to 50%.",
 				"You choose the 'Fertility+' perk, making it easier to get pregnant.  It also increases your cum volume by up to 50% (if appropriate)!");
 		public static const FocusedMind:PerkType = mk("Focused Mind", "Focused Mind",
-				"Black Magic is less likely to backfire and White Magic thresold is increased.",
-				"You choose the 'Focused Mind' perk. Black Magic is less likely to backfire and White Magic thresold is increased.");
+				"Black Magic is less likely to backfire and White Magic threshold is increased.",
+				"You choose the 'Focused Mind' perk. Black Magic is less likely to backfire and White Magic threshold is increased.");
 		public static const HoldWithBothHands:PerkType = mk("Hold With Both Hands", "Hold With Both Hands",
 				"Gain +20% strength modifier with melee weapons when not using a shield.",
 				"You choose the 'Hold With Both Hands' perk.  As long as you're wielding a melee weapon and you're not using a shield, you gain 20% strength modifier to damage.");
