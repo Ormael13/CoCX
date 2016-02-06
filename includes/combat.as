@@ -226,7 +226,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if(!isWieldingRangedWeapon())
 		addButton(0, "Attack", attacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
 	else if (player.weaponName.indexOf("staff") != -1)
-		addButton(0, "M.Bolt", attacks, null, null, null, "Attempt to attack the enemy with magic bolt from your " + player.weaponName + ".  Damage done is determined by your intellegence, speed and weapon.", "Magic Bolt");
+		addButton(0, "M.Bolt", attacks, null, null, null, "Attempt to attack the enemy with magic bolt from your " + player.weaponName + ".  Damage done is determined by your intelligence, speed and weapon.", "Magic Bolt");
 	else if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponName == "flintlock pistol")
 		addButton(0, "Reload", attacks, null, null, null, "Your " + player.weaponName + " is out of ammo.  You'll have to reload it before attack.");
 	else
@@ -1843,8 +1843,8 @@ private function combatStatusesUpdate():void {
 		}
 		else if(monster.lust < 75) outputText("Your arousing aura seems to be visibly affecting " + monster.a + monster.short + ", making " + monster.pronoun2 + " squirm uncomfortably.\n\n", false);
 		else if(monster.lust < 85) {
-			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as " + monster.pronoun1 + " inadvertantly basks in your presence.\n\n", false);
-			else outputText(monster.capitalA + monster.short + "' skin colors red as " + monster.pronoun1 + " inadvertantly bask in your presence.\n\n", false);
+			if(!monster.plural) outputText(monster.capitalA + monster.short + "'s skin colors red as " + monster.pronoun1 + " inadvertently basks in your presence.\n\n", false);
+			else outputText(monster.capitalA + monster.short + "' skin colors red as " + monster.pronoun1 + " inadvertently bask in your presence.\n\n", false);
 		}
 		else {
 			if(!monster.plural) outputText("The effects of your aura are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begins to shake and steal glances at your body.\n\n", false);
@@ -5263,7 +5263,7 @@ public function runAway(callHook:Boolean = true):void {
 		if(player.spe > rand(monster.spe + escapeMod) || (player.findPerk(PerkLib.Runner) >= 0 && rand(100) < 50)) {
 			if(player.findPerk(PerkLib.Runner) >= 0) outputText("Using your skill at running, y");
 			else outputText("Y");
-			outputText("ou easily outpace the dragon, who begins hurling imprecations at you.  \"What the hell, [name], you weenie; are you so scared that you can't even stick out your punishment?\"");
+			outputText("You easily outpace the dragon, who begins hurling imprecations at you.  \"What the hell, [name], you weenie; are you so scared that you can't even stick out your punishment?\"");
 			outputText("\n\nNot to be outdone, you call back, \"Sucks to you!  If even the mighty Last Ember of Hope can't catch me, why do I need to train?  Later, little bird!\"");
 			inCombat = false;
 			clearStatuses(false);
