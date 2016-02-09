@@ -104,6 +104,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.tailType = TAIL_TYPE_HARPY;
 			this.wingType = WING_TYPE_FEATHERED_LARGE;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

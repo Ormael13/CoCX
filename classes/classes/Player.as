@@ -289,19 +289,18 @@ use namespace kGAMECLASS;
 			//Acupuncture effect
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) armorDef *= UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI;
 			if (findPerk(PerkLib.ChiReflowAttack) >= 0) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;
-			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
-			if(findStatusAffect(StatusAffects.Berzerking) >= 0) {
-				armorDef = 0;
+			if (findStatusAffect(StatusAffects.Berzerking) >= 0) {
+				if (findPerk(PerkLib.ColdFury) < 0)
+					armorDef = 0;
+				else
+					armorDef /= 2;
 			}
-			//Berzerking+Cold Fury
-			if(findStatusAffect(StatusAffects.Berzerking) >= 0 && findPerk(PerkLib.ColdFury) >= 0) {
-				armorDef += 1;
-			}
-			if(kGAMECLASS.monster.findStatusAffect(StatusAffects.TailWhip) >= 0) {
+			if (kGAMECLASS.monster.findStatusAffect(StatusAffects.TailWhip) >= 0) {
 				armorDef -= kGAMECLASS.monster.statusAffectv1(StatusAffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
 			}
+			armorDef = Math.round(armorDef);
 			return armorDef;
 		}
 		public function get armorBaseDef():Number {

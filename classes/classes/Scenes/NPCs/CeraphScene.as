@@ -97,7 +97,7 @@ package classes.Scenes.NPCs
 			if (player.cockArea(0) <= monster.vaginalCapacity()) {
 				//[Male] Fuck 'Dat Pussah
 				//[lust]
-				if (monster.lust > 99) {
+				if (monster.lust >= monster.eMaxLust()) {
 					outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Mindful of her demonic wiles, you pull her hands together and use a few tattered strips of cloth to bind them over her head.  Moaning with helpless desire, the demon grinds her crotch against your " + player.leg() + ", spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n", false);
 				}
 				//[hp]
@@ -146,7 +146,7 @@ package classes.Scenes.NPCs
 			else {
 				//[MALE TOO DAMN BIGGA WIGGA]
 				//[lust] 
-				if (monster.lust > 99) outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Wary of the demon's wiles, you pull her hands together and use some scraps of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your " + player.leg() + ", spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n", false);
+				if (monster.lust >= monster.eMaxLust()) outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Wary of the demon's wiles, you pull her hands together and use some scraps of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your " + player.leg() + ", spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n", false);
 				//[hp] 
 				else outputText("Ignoring her grunts of pain, you force Ceraph onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat. Wary of the demon's abilities, you tie up her hands with a few pieces of tattered cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her enticing purple cunt.\n\n", false);
 
@@ -206,7 +206,7 @@ package classes.Scenes.NPCs
 			spriteSelect(7);
 			clearOutput();
 			//lust
-			if (monster.lust > 99) outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants. Wary of the demon's wiles, you pull her hands together and use some tattered strips of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your " + player.leg() + ", spreading her thighs apart into a near split and giving you a world-class view of her pulsating black demon-cock.\n\n", false);
+			if (monster.lust >= monster.eMaxLust()) outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants. Wary of the demon's wiles, you pull her hands together and use some tattered strips of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your " + player.leg() + ", spreading her thighs apart into a near split and giving you a world-class view of her pulsating black demon-cock.\n\n", false);
 			//[hp] 
 			else outputText("Ignoring her grunts of pain, you force Ceraph onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat.  Mindful of the demon's abilities, you tie up her hands with some tattered strips of cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her pulsating black demon-cock.\n\n", false);
 

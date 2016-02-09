@@ -110,6 +110,7 @@ package classes.Scenes.Dungeons.Factory
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.tailType = TAIL_TYPE_DEMONIC;
+			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

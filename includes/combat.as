@@ -51,7 +51,7 @@ public function cleanupAfterCombat(nextFunc:Function = null):void {
 		//Clear itemswapping in case it hung somehow
 //No longer used:		itemSwapping = false;
 		//Player won
-		if(monster.HP < 1 || monster.lust > 99) {
+		if(monster.HP < 1 || monster.lust >= monster.eMaxLust()) {
 			awardPlayer(nextFunc);
 		}
 		//Player lost
@@ -1189,7 +1189,7 @@ public function attack():void {
 	
 	if (monster is JeanClaude && player.findStatusAffect(StatusAffects.FirstAttack) < 0)
 	{
-		if (monster.HP < 1 || monster.lust > 99)
+		if (monster.HP < 1 || monster.lust >= monster.eMaxLust())
 		{
 			// noop
 		}
@@ -1331,7 +1331,7 @@ public function goreAttack():void {
 	if(monster.HP > 0 && monster.lust < 100) enemyAI();
 	else {
 		if(monster.HP <= 0) doNext(endHpVictory);
-		if(monster.lust >= 100) doNext(endLustVictory);
+		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
 	}
 }
 //Upheaval Attack
@@ -1418,7 +1418,7 @@ public function upheavalAttack():void {
 	if(monster.HP > 0 && monster.lust < 100) enemyAI();
 	else {
 		if(monster.HP <= 0) doNext(endHpVictory);
-		if(monster.lust >= 100) doNext(endLustVictory);
+		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
 	}
 }
 //Player sting attack
@@ -1688,7 +1688,7 @@ public function awardPlayer(nextFunc:Function = null):void
 	}
 	if (player.findPerk(PerkLib.HistoryWhore) >= 0) {
 		var bonusGems3:int = (monster.gems * 0.04) * player.teaseLevel;
-		if (monster.lust >= 100) monster.gems += bonusGems3;
+		if (monster.lust >= monster.eMaxLust()) monster.gems += bonusGems3;
 	}
 	if (player.findPerk(PerkLib.AscensionFortune) >= 0) {
 		monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.1);
@@ -2112,8 +2112,8 @@ public function display():void {
 	var lustDisplay:String = "";
 	var math:Number = monster.HPRatio();
 	//hpDisplay = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
-	hpDisplay = monster.HP + " / " + monster.eMaxHP() + " (" + (int(math * 1000) / 10) + "%)";
-	lustDisplay = Math.floor(monster.lust) + " / " + 100;
+	hpDisplay = Math.floor(monster.HP) + " / " + monster.eMaxHP() + " (" + (int(math * 1000) / 10) + "%)";
+	lustDisplay = Math.floor(monster.lust) + " / " + monster.eMaxLust();;
 
 	//trace("trying to show monster image!");
 	if (monster.imageName != "")
@@ -3745,7 +3745,7 @@ public function combatRoundOver():Boolean { //Called after the monster's action
 		doNext(endHpVictory);
 		return true;
 	}
-	if(monster.lust > 99) {
+	if(monster.lust >= monster.eMaxLust()) {
 		doNext(endLustVictory);
 		return true;
 	}
@@ -3877,7 +3877,7 @@ public function spellArouse():void {
 		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		doNext(playerMenu);
-		if(monster.lust >= 100) doNext(endLustVictory);
+		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
 		else enemyAI();
 		return;
 	}
@@ -3925,7 +3925,7 @@ public function spellArouse():void {
 	doNext(playerMenu);
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
-	if(monster.lust >= 100) doNext(endLustVictory);
+	if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
 	else enemyAI();
 	return;	
 }
@@ -4536,7 +4536,7 @@ public function kick():void {
 	}
 	outputText("\n\n", false);
 	checkAchievementDamage(damage);
-	if(monster.HP < 1 || monster.lust > 99) combatRoundOver();
+	if(monster.HP < 1 || monster.lust >= monster.eMaxLust()) combatRoundOver();
 	else enemyAI();
 }
 
@@ -4587,7 +4587,7 @@ public function PCWebAttack():void {
 	}
 	awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 	outputText("\n\n", false);
-	if(monster.HP < 1 || monster.lust > 99) combatRoundOver();
+	if(monster.HP < 1 || monster.lust >= monster.eMaxLust()) combatRoundOver();
 	else enemyAI();
 }
 public function nagaBiteAttack():void {
@@ -4635,7 +4635,7 @@ public function nagaBiteAttack():void {
        outputText("You lunge headfirst, fangs bared. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, knocking your head away with enough force to make your ears ring.", false);
 	}
 	outputText("\n\n", false);
-	if(monster.HP < 1 || monster.lust > 99) combatRoundOver();
+	if(monster.HP < 1 || monster.lust >= monster.eMaxLust()) combatRoundOver();
 	else enemyAI();
 }
 public function spiderBiteAttack():void {
@@ -4685,7 +4685,7 @@ public function spiderBiteAttack():void {
        outputText("You lunge headfirst, fangs bared. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, pushing you back out of range.", false);
 	}
 	outputText("\n\n", false);
-	if(monster.HP < 1 || monster.lust > 99) combatRoundOver();
+	if(monster.HP < 1 || monster.lust >= monster.eMaxLust()) combatRoundOver();
 	else enemyAI();
 }
 

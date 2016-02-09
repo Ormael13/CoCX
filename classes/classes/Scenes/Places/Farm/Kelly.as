@@ -344,7 +344,7 @@ internal function defeatKellyNDBREAKHIM():void {
 	//Cut these: You swing your [weapon], ready to use force against the restless centaur if necessary.
 	//Cut these: \"<i>Easy now, okay? You don't have your bow, and you know what I can do with my [weapon]. Now if you just calm down I promise I'll be much nicer this time.</i>\"
 	//lust/HP: 
-	if(monster.lust > 99) outputText("Kelt moans, mauling at his mantits in his lust before he realizes what's going on");
+	if(monster.lust >= monster.eMaxLust()) outputText("Kelt moans, mauling at his mantits in his lust before he realizes what's going on");
 	else outputText("Kelt groans, slumping slightly from all the damage you've done to him");
 	outputText(".  You close in, saying, \"<i>Easy now, okay?  You know what I can do with my [weapon].  Now if you just calm down, I promise I'll be much nicer this time.</i>\"");
 	

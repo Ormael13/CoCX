@@ -163,12 +163,13 @@ package classes.Scenes.Places.Boat
 			this.armorName = "bark";
 			this.armorDef = 30;
 			this.bonusHP = 4750;
+			this.bonusLust = 80;
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
 				this.bonusHP += 2700;
 				if (game.flags[kFLAGS.MINERVA_TOWER_TREE] > 0) this.bonusHP += 1000;
 			}
 			this.lust = 30;
-			this.lustVuln = .04;
+			this.lustVuln = .07;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 99;
 			this.additionalXP = 2500;
@@ -186,6 +187,7 @@ package classes.Scenes.Places.Boat
 			}
 			this.createPerk(PerkLib.Tank, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Tank2, 0, 0, 0, 0);
+			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

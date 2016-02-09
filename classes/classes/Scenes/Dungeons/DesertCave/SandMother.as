@@ -147,6 +147,7 @@ package classes.Scenes.Dungeons.DesertCave
 			this.gems = rand(15) + 55;
 			this.createPerk(PerkLib.Resolute,0,0,0,0);
 			this.createPerk(PerkLib.Focused,0,0,0,0);
+			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			this.drop = NO_DROP;
 			checkMonster();
 		}

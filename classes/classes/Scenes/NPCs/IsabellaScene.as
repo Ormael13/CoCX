@@ -1144,7 +1144,7 @@ public function PCVictoryOnIsabellaButtsex():void {
 	var y:Number = player.cockThatFits2(monster.analCapacity());
 	clearOutput();
 	outputText("Milk, huh?  No, that won't do.  You tell the ", false);
-	if(monster.lust > 99) outputText("horny ", false);
+	if(monster.lust >= monster.eMaxLust()) outputText("horny ", false);
 	outputText("cow-slut to roll over and get on all fours.  ", false);
 	if(monster.HP < 1) outputText("She struggles to comply, heaving her hefty body until she's wobbling on all fours, nearly falling into the dirt.", false);
 	else outputText("She struggles to comply, pulling her hands away from her erogenous zones as she wobbles onto shaky hands and knees.", false);
@@ -1353,7 +1353,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	var x:Number = player.biggestCockIndex();
 	clearOutput();
 	outputText("You toss aside your " + player.armorName + " to reveal your " + cockDescript(x) + " to the ", false);
-	if(monster.lust > 99) outputText("lusty", false);
+	if(monster.lust >= monster.eMaxLust()) outputText("lusty", false);
 	else outputText("weakened", false);
 	outputText(" cow-girl.  Her eyes go wide as she beholds the full, revealed length, watching it ", false);
 	if(player.lust > 70) outputText("pulsate with your raging lust", false);
@@ -1369,7 +1369,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	if(player.cor < 33) outputText("I'm sorry, but you're too hot to resist, and it's better I do this than try to force it in a hole that could never accept it,", false);
 	else if(player.cor < 66) {
 		outputText("This isn't up for discussion.  ", false);
-		if(monster.lust > 99) outputText("You're so drippy that you want this anyway,", false);
+		if(monster.lust >= monster.eMaxLust()) outputText("You're so drippy that you want this anyway,", false);
 		else outputText("You lost and you've got to deal with the consequences,", false);
 	}
 	else outputText("Tough shit,", false);
@@ -1432,7 +1432,7 @@ public function vaginalProdNPokeIsabella():void {
 	if(x < 0) x = 0;
 	clearOutput();
 	outputText("You smirk down at Isabella as you tell her that milk is the least of your concerns.  The ", false);
-	if(monster.lust > 99) outputText("lusty", false);
+	if(monster.lust >= monster.eMaxLust()) outputText("lusty", false);
 	else outputText("defeated", false);
 	outputText(" cow-girl pales and asks, ");
 	if (isabellaAccent()) outputText("\"<i>But vhy not?  Mein milk is so gooood.</i>\"");
@@ -1512,7 +1512,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	var x:Number = player.smallestCockIndex();
 	clearOutput();
 	outputText("You toss aside your " + player.armorName + " to reveal your " + cockDescript(x) + " to the ", false);
-	if(monster.lust > 99) outputText("lusty", false);
+	if(monster.lust >= monster.eMaxLust()) outputText("lusty", false);
 	else outputText("weakened", false);
 	outputText(" cow-girl.  She squeals in delight at the sight of your " + multiCockDescriptLight(), false);
 	if(player.cockTotal() > 1) outputText(", singling the smallest one out for some reason", false);
@@ -1524,7 +1524,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	else if(player.cor < 66) outputText("bringing a tiny blush to your cheeks", false);
 	else outputText("but you aren't really bothered by it in the slightest", false);
 	outputText(".  You clear your throat and try to regain control of the situation by demanding that she service you with her breasts.  Isabella happily accedes, even going so far as to clap excitedly as she sheds her top.  She seems to genuinely relish the idea, to a degree that makes her forget ", false);
-	if(monster.lust > 99) outputText("her own needs.", false);
+	if(monster.lust >= monster.eMaxLust()) outputText("her own needs.", false);
 	else outputText("her wounds.", false);
 	outputText("\n\n", false);
 	

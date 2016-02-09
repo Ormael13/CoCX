@@ -494,7 +494,7 @@ private function cramANippleInIt():void {
 	//COMBAT
 	else {
 		//(Lust Win)
-		if(monster.lust > 99) outputText("Sophie pants and pulls herself up to her knees.  She barely keeps her balance as she rams four of her fingers deep into her dripping pussy, fiddling at her clit with her thumb.  The harpy opens her mouth to beg for your milk with her glossy lips as you slowly undress.\n\n", false);
+		if(monster.lust >= monster.eMaxLust()) outputText("Sophie pants and pulls herself up to her knees.  She barely keeps her balance as she rams four of her fingers deep into her dripping pussy, fiddling at her clit with her thumb.  The harpy opens her mouth to beg for your milk with her glossy lips as you slowly undress.\n\n", false);
 		//(HP Win)
 		else outputText("You pull the dazed and defeated harpy up to her knees.  She sways unsteadily as you undress and expose your " + allBreastsDescript() + " to the cool mountain air.   Sophie's eyes open wider as she struggles back to consciousness, and the hungry harpy happily opens her mouth into a wide 'O', begging for your milk.\n\n", false);
 	}

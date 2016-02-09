@@ -194,6 +194,7 @@ package classes.Scenes.Dungeons.DeepCave
 			this.drop = new WeightedDrop(consumables.BIMBOLQ, 1);
 			this.wingType = WING_TYPE_IMP;
 			this.wingDesc = "small";
+			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

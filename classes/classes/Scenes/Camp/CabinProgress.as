@@ -240,9 +240,19 @@ package classes.Scenes.Camp
 			outputText(")</b>");
 		}
 		
-		public function checkMaterials():void {
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + maxWoodSupply + " \n");
+		public function checkMaterials(highlight:int = 0):void {
+			//Nails
+			if (highlight == 1) outputText("<b>");
 			outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/" + maxNailSupply + " \n");
+			if (highlight == 1) outputText("</b>");
+			//Wood
+			if (highlight == 2) outputText("<b>");
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + maxWoodSupply + " \n");
+			if (highlight == 2) outputText("</b>");
+			//Stones
+			if (highlight == 3) outputText("<b>");
+			outputText("Stones: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + maxStoneSupply + " \n");
+			if (highlight == 3) outputText("</b>");
 		}
 		
 		//STAGE 6 - Work on cabin part 2. Planning your cabin.

@@ -156,7 +156,7 @@ internal function oasisSexing():void {
 		outputText("You do your best to keep a vague mental catalogue of what has been in where, but eventually it becomes impossible to remember the type or number of demonic dicks that have filled you with their cum. The sand below your ass is wet with seed that has spilled out of your overflowing " + vaginaDescript(0) + " and there is every indication of more to come.\n\n", false);
 	}
 	//If you got here by winning combat!
-	if((monster.HP < 1 || monster.lust > 99) && getGame().inCombat) {
+	if((monster.HP < 1 || monster.lust >= monster.eMaxLust()) && getGame().inCombat) {
 		outputText("You fuck and fuck until not a single demon is capable of servicing your needs. They lie moaning and panting at the edge of the oasis, unable to move. You survey the fallen fiends with just a touch of pride and a whole lot of satisfaction, your body feeling stronger for the endurance exercise.", false);
 		cleanupAfterCombat();
 		player.orgasm();

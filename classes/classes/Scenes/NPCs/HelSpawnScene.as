@@ -1449,7 +1449,7 @@ internal function loseSparringToDaughter():void {
 internal function beatUpYourDaughter():void {
 	clearOutput();
 	//{If Sluttymander loses to lust (you monster)}:
-	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 && monster.lust > 99) {
+	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 && monster.lust >= monster.eMaxLust()) {
 		outputText("\"<i>N-no more...</i>\" the slutty little salamander moans, slumping down to the ground, arms wrapping around herself.  \"<i>Fuck, you're sexy... so horny...</i>\" she groans, hands slipping down to her soaked bikini bottom.");
 		
 		outputText("\n\nShaking your head, you give her a little push, flopping her onto her back.  She just lets out a little whimper and finally tears her panties away, giving her unrestricted access to her sodden box.  \"<i>Hey, d-don't just leave me like this,</i>\" she whines, but to no avail.");

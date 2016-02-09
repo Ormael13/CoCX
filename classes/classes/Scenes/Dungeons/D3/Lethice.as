@@ -146,14 +146,13 @@ package classes.Scenes.Dungeons.D3
 				armorDef = 32;
 			}
 			this.bonusHP = 1200;
+			this.bonusLust = 80;
 			this.additionalXP = 1000;
 			this.gems = 500 + rand(50);
 			this.level = 30;
-			
 			this.lustVuln = 0.3;
-			
 			this.drop = NO_DROP //new WeightedDrop(weapons.L_STAFF, 1);
-			
+			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			this.checkMonster();
 		}
 		

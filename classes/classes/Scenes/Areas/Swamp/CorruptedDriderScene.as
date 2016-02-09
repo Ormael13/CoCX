@@ -154,7 +154,7 @@ package classes.Scenes.Areas.Swamp
 			//situation when she kisses you with potent, envenomed lips.  Get 
 			//moderately hypno'ed into cumming into her over and over again?
 			outputText("Eager to plumb the depths of this greedy spider's snatch, you practically tear your way out of your " + player.armorName + " in your hurry to get naked.  Through it all ", false);
-			if (monster.lust > 99) {
+			if (monster.lust >= monster.eMaxLust()) {
 				outputText("she looks ", false);
 				if (player.tallness > 72) outputText("up ", false);
 				outputText("at you with her " + monster.skinTone + " eyes opened wide and her tongue hanging from her mouth, panting lewdly.  Carapace-clad digits sink into her dripping honey-pot over and over while she watches, deep in her own lusty haze.  She retracts her engorged demon-cock so as to have better access to that feminine hole.", false);
@@ -938,7 +938,7 @@ package classes.Scenes.Areas.Swamp
 				outputText("Smirking to yourself, you advance on the collapsed girl, [cock " + y + "] straining against your clothing in anticipation of what's to come.");
 			}
 			outputText("\n\nDarting forwards suddenly, you seize her wrists, pulling her arms above her head");
-			if (monster.lust > 99) outputText(" and away from her quivering snatch");
+			if (monster.lust >= monster.eMaxLust()) outputText(" and away from her quivering snatch");
 			outputText(", her struggles useless against your steely grip.  The defeated drider's eyes darken as she looks up at you, but before she can protest you roughly flip her onto her back, splashing both of you with dank water as she flails about in the shallow muck around your feet.  Spindly legs flail feebly as you grasp both of her wrists in one hand, sliding the other down her arm until it grazes softly across her first row of breasts.  You gently squeeze the supple flesh, fingers rolling a pert nipple as it slides between them and eliciting a surprised, pleasure-laden gasp from the spider-taur.  Your member twitches as you play with her, reminding you that you've still got to deal with the woman before you can have any real fun.  Reluctantly you remove your hand from her chest, catching what sounded like a soft sigh from the drider's mouth as you start to circle around her.");
 
 			outputText("\n\nMoving behind her back, you lift up her human half until you can firmly pin her arms together behind her back.  She writhes as you ");

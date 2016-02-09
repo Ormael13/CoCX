@@ -228,7 +228,7 @@ package classes.Scenes.NPCs
 				var x:Number = player.cockThatFits(36);
 				outputText("Rubbing yourself through your " + player.armorName + ", you look over the anemone; your attention wanders down her torso to the blue slit between her legs", false);
 				//[(lust victory)
-				if (monster.lust > 99) outputText(", which she's currently diddling with the hand she's not using to stroke her cock", false);
+				if (monster.lust >= monster.eMaxLust()) outputText(", which she's currently diddling with the hand she's not using to stroke her cock", false);
 				outputText(".  Unfastening your garments, you stroke " + sMultiCockDesc() + " to full hardness and approach her.  The anemone looks up at you, still somewhat befogged; then, as you stand over her, she leans forward and opens her mouth invitingly.\n\n", false);
 
 				outputText("You smile at how eager she is for you, but shake your head.  The anemone closes her mouth and looks at you quizzically.  <i>\"No?\"</i> she asks.  Only then does she follow your gaze down to her pussy.  The skin on her face darkens a bit as she realizes your intention... which turns out to be a blush, by the looks of the shy glance she gives you next!  <i>\"Umm.\"</i>  The anemone's fingers", false);
@@ -333,7 +333,7 @@ package classes.Scenes.NPCs
 
 			outputText("The anemone looks vacantly up at you as you approach.  Reaching forward, you take her cock in your hand", false);
 			//[(lust victory)
-			if (monster.lust > 99) outputText(" after brushing hers aside", false);
+			if (monster.lust >= monster.eMaxLust()) outputText(" after brushing hers aside", false);
 			outputText(" and begin to fondle the crown, with its slippery tentacles.  As expected, her venom flows into your hand, imparting a sensation of heat that slides up your arm and diffuses into a gentle warmth.  After a few rubs, you lean down and carefully take her penis into your mouth.  It tastes of the lakewater and heats your mouth as it did your hand; ", false);
 			//[(HP victory)
 			if (monster.HP < 1) outputText("you can feel it harden as ", false);
@@ -687,7 +687,7 @@ package classes.Scenes.NPCs
 			//victory sex choice for males with cock fit 48 or females with clit >7": "her anus"
 			//(change "If you do, which of your parts" to "If you do, which part" in pre-sex choice menu)
 			outputText("Imagining your climax already, you look over the anemone.  Your gaze lingers on her breasts; she sticks them out enticingly, trying to catch your interest");
-			if (monster.lust > 99) outputText(" as she plays with herself");
+			if (monster.lust >= monster.eMaxLust()) outputText(" as she plays with herself");
 			outputText(".  Nice, but not what you're looking for...  ");
 			if (!player.isTaur()) {
 				outputText("Opening your [armor] a bit, you stroke ");

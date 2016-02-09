@@ -380,7 +380,7 @@ package classes.Scenes.Areas.Bog
 		
 		public function rapeLizanInTheAss():void {
 			clearOutput();
-			if (monster.lust >= 100) {
+			if (monster.lust >= monster.eMaxLust()) {
 				outputText("The lizan does little to resist. He just continues his intense masturbation as you push him over to make his rectal passage more accessible. The horny guy even lifts his tail, eagerly giving you access to his back door. From the look of things he is neither a virgin nor a frequent taker. ");
 				outputText("\n\nWith his chest on the ground he continues to pump his cocks, his hole winking in invitation. When you slide your hands across his self parting ass cheeks he arches his back and groans, begging for it. Not being one to disappoint you spit into your hand while marveling at how simple lust has turned this pure creature into your hot little boy slut. After spit shining your [cock] you aim it towards the horny guy's back door, and enter without one thought of knocking.");
 				if (player.smallestCockLength() < 7) outputText("\n\nThe lizan groans as you sink into his heated tunnel. With your [cock] inside his anal ring flexes against you, tightening around your dick as he pushes back against you. You grab his hips and begin roughly pounding the lizan's hole. With every rough thrust the lizan spreads his legs and tail, attempting to allow you deeper access. As you wreck his ass with your [cock] he continues pumping his dual dicks, even as his chest and chin slide through the dirt. You toss your head back, lost in the sensation of his squeezing hole while he obviously loves the feeling of your [cock].");

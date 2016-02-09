@@ -351,7 +351,7 @@ private function nagaVictoryFemale():void {
    			//(Loss by HPs)
 			//NO RAEP IF LOSS BY HPs, FUCK CENTAURS! SRSLY! GROW NORMAL LEGS!
    			//(Loss by Lust)
-			if(monster.lust > 99) {
+			if(monster.lust >= monster.eMaxLust()) {
 				outputText("As your prey falls to the ground, her body too filled with sexual desire to fight, you step over her, your tall frame towering over her own quivering body. She instantly grabs your shoulders, lust burning in her eyes. You wrap your arms around her, drawing her back against your chest and lifting her off the ground. She is facing away from you, but you can tell by the way she's responding that she is ready for whatever you're going to do to her. You begin by shifting one of your arms to hold her around her stomach, while your other hand begins working on her small but tender breasts. You begin to nibble at her ear, occasionally kissing her neck. The naga responds by wrapping her tail around your lower body, gently rubbing her sensitive underbelly against your " + player.skin() + ".", false);
 				//(If PC is Herm i.e. Has a cock(s))
 				if(player.gender == 3) outputText("  As her tail gently squeezes your body, it draws your own " + multiCockDescriptLight() + " up against your body, her soft underbelly stimulating the sensitive skin.", false);
@@ -914,7 +914,7 @@ public function naggaTease():void {
 		outputText("\n\n", false);
 		//OLD
 		//monster.lust += 5 + rand(15);
-		if(monster.lust > 99) {
+		if(monster.lust >= monster.eMaxLust()) {
 			doNext(kGAMECLASS.endLustVictory);
 			return;
 		}
