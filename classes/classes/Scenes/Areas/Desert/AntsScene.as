@@ -501,7 +501,8 @@ package classes.Scenes.Areas.Desert
 		
 		//Refuse sex. This disables further encounter.
 		private function refuseAntSex():void {
-			outputText("Your mind finally fires up; she's not worth your time. You quickly dart off towards the door, leaving Phylla heart-broken.", true)
+			clearOutput();
+			outputText("Your mind finally fires up; she's not worth your time. You quickly dart off towards the door, leaving Phylla heart-broken.");
 			outputText("\n\n\"<i>What are you doing? I mean... You won't?</i>\" She looks down, tears leaking from her eyes.");
 			outputText("\n\nYou have a feeling that you won't see her again.");
 			flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] = 1;
@@ -2645,8 +2646,8 @@ package classes.Scenes.Areas.Desert
 		}
 
 //[Stones]
-		private function phyllaStones():void
-		{
+		private function phyllaStones():void {
+			clearOutput();
 			var stones:int = 2 + rand(10);
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] += stones;
 			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 200) awardAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS);
@@ -2661,7 +2662,7 @@ package classes.Scenes.Areas.Desert
 			}
 			//If Phylla IS Laying Eggs
 			else {
-				outputText("You ask Phylla if she allow take you few of the stones that her or her children have gathered while digging.  She nods happily and closes her eyes, tilting her head back slightly.  After a moment one your children scampers in. He runs overs to a stone pile in the corner of Phylla's room and after a moment of gathering walking over to you, he giving you few stones.  You accept them.");
+				outputText("You ask Phylla if she allows you to take few of the stones that her or her children have gathered while digging.  She nods happily and closes her eyes, tilting her head back slightly.  After a moment one your children scampers in. He runs overs to a stone pile in the corner of Phylla's room and after a moment of gathering walking over to you, he giving you few stones.  You accept them.");
 				//if corruption under 50
 				if (player.cor < 50) outputText("\n\nYou pat him on the head for a job well done as he walks deeper into the colony leaving you alone with Phylla.");
 				//If corruption over 50
