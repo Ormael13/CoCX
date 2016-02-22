@@ -37,7 +37,7 @@ LoppeDenial: Counter for determining when Loppe is willing to go through with th
 //Appearance (edited) (C)
 private function appearanceOfLoppe():void {
 	clearOutput();
-	if(flags[kFLAGS.LOPPE_FURRY] == 0) {
+	if (flags[kFLAGS.LOPPE_FURRY] == 0) {
 		outputText("Loppe is a 6'2\" bunny-girl with deep brown eyes set in her pretty face.  Shoulder-length black hair and a pair of snow-white rabbit ears adorn the top of her head, tilted and lying backward to conceal the insides.  Curiously, her face is that of a normal human woman.");
 		outputText("\n\nHer body is covered in smooth olive-colored skin, save for her wrists, where she has a pair of fluffy cushion-like fur bracelets; her legs are what you would expect of a bunny, curved and with elongated furry feet; her fur color is snow-white.  Her butt is firm and girly; it fills out her shorts nicely.  If you were to look at her from behind, her hips and butt would form a perfect heart shape.  A long, elegantly-cared for black horse's tail falls from her butt, easily reaching to the back of her knees.");
 
@@ -126,7 +126,7 @@ private function yesToLoppeMeetingTwo():void {
 
 	outputText("\n\nYou watch her as she goes, and then get up to try to leave, elbowing your way through the crowd");
 	//[(corr < 40)]
-	if(player.cor < 40) outputText(" as politely as possible. It felt nice to see a display like that here; makes it feel a little less like a wasteland of sex-mad monsters and a little more like home");
+	if (player.cor < 40) outputText(" as politely as possible. It felt nice to see a display like that here; makes it feel a little less like a wasteland of sex-mad monsters and a little more like home");
 	outputText(".");
 
 	outputText("\n\nAs you exit the bar you hear someone say, \"<i>Hey!  Wait up!</i>\"");
@@ -170,9 +170,9 @@ private function sureBakeryWithLoppe():void {
 	outputText("\n\nYou tell her that you aren't, you just didn't expect her to have such an appetite.  With a playful smile, you ask what other not-so-dainty secrets she's hiding; does she burp loudly to show she enjoyed her meal?  Loppe smiles mischievously, \"<i>Oh, my sweet " + player.mf("boy","girl") + "...  When I get my hands on something I like, I eat it up whole...</i>\"  Slowly, you feel a foot gently glide across your [legs].");
 
 	//(Low Libido)
-	if(player.lib < 33) outputText("\n\nWell, now.  This is a different kind of world, indeed, but this feels a little too quick.  You're not sure you're all that comfortable with the bunny-girl feeling you up under the table, cute as she may be.  An awkward silence falls over the both of you as you try to think of a polite way to stop or slow her advances without telling her off... thankfully, the waitress arrives to take your orders.");
+	if (player.lib < 33) outputText("\n\nWell, now.  This is a different kind of world, indeed, but this feels a little too quick.  You're not sure you're all that comfortable with the bunny-girl feeling you up under the table, cute as she may be.  An awkward silence falls over the both of you as you try to think of a polite way to stop or slow her advances without telling her off... thankfully, the waitress arrives to take your orders.");
 	//(Moderate Libido)
-	else if(player.lib < 66) outputText("\n\nWell, now.  This is a different kind of world, indeed, but this feels a little too quick.  Still, it's not entirely unwelcome, and while you decide to leave your hand where it is, you allow her to continue, not hiding that you recognize what she's doing and you rather like it.  However, the waitress stops your playing around with her approach.");
+	else if (player.lib < 66) outputText("\n\nWell, now.  This is a different kind of world, indeed, but this feels a little too quick.  Still, it's not entirely unwelcome, and while you decide to leave your hand where it is, you allow her to continue, not hiding that you recognize what she's doing and you rather like it.  However, the waitress stops your playing around with her approach.");
 	//(High Libido)
 	else outputText("\n\nWell, now.  You surreptitiously slide a hand under the table and start stroking her calf through her robe, casually commenting that she must have quite an appetite for such a little lady.");
 
@@ -183,10 +183,10 @@ private function sureBakeryWithLoppe():void {
 	outputText("\n\nLoppe clicks her tongue in disappointment and quietly retracts her foot.  \"<i>You know what I want, sugar.</i>\"  She smiles lasciviously, reinforcing the double entendre behind her apparently innocuous words.");
 
 	//(if PC has >= 30 gems)
-	if(player.gems >= 30) {
+	if (player.gems >= 30) {
 		outputText("\n\nYou tell the waitress, a fetching young cat-woman, what you'd like, and pull out the thirty gems needed to cover the tab; as mostly specialty items not on the usual menu, the price is a bit higher.");
 		//[(corr > 40)
-		if(player.cor > 40) outputText("  A small voice inside wonders if she'd eat so extravagantly were she footing her own bill.");
+		if (player.cor > 40) outputText("  A small voice inside wonders if she'd eat so extravagantly were she footing her own bill.");
 		//remove 30 gems
 		player.gems -= 30;
 		statScreenRefresh();
@@ -250,17 +250,17 @@ private function yesLoppesHouse():void {
 	outputText("\n\n\"<i>I always get giddy when I can spend time with a sexy thing like you...</i>\" she replies, \"<i>but I was just recalling some of my earlier encounters.  I should warn you, I tend to get very, and I do mean <b>very</b> carried away during the act.  Things can get pretty intense.</i>\"");
 
 	//(Min Lust >= 50)
-	if(player.minLust() >= 50) {
+	if (player.minLust() >= 50) {
 		outputText("\n\nYou grin and warn her that your appetite is a lot higher than normal; you are usually so aroused that you have no doubt you can go at it a lot more than the average person.");
 		outputText("\n\nLoppe shoots you a sultry look.  \"<i>Well, sugar, I guess I'll just have to take care of this 'endless lust' of yours, huh?</i>\"  She tightens her hold on your hand and starts walking faster, eager to get you to her place.");
 	}
 	//(else High Libido)
-	else if(player.lib >= 70) {
+	else if (player.lib >= 70) {
 		outputText("\n\nYou smirk back and announce that you like it intense.  Perhaps she's the one who should watch out?");
 		outputText("\n\n\"<i>Oh, I like the sound of that... let's go, sugar!</i>\"  Loppe tightens her hold on your hand and starts walking faster, eager to get you to her place.");
 	}
 	//(else High Toughness and has beaten mino mob)
-	else if(player.tou >= 70) {
+	else if (player.tou >= 70) {
 		outputText("\n\nYou tell her that you're confident in your stamina.  Truth be told, you can withstand a fight with a whole mob of minotaurs and still have enough energy left to fight off demons.");
 		outputText("\n\nLoppe smirks.  \"<i>So if I manage to tire you out, that would make me stronger than a mob of minotaurs, right?  Okay!  Challenge accepted!</i>\"  She tightens her hold on your hand and starts walking faster, eager to get you to her place.");
 	}
@@ -302,18 +302,18 @@ private function talkWithLoppe():void {
 	//Loppe
 	addButton(0,"Loppe",talkWithLoppeAboutLoppe);
 	//Children (available after having sex with Loppe at least once)
-	if(flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(1,"Children",askLoppeAboutChildren);
+	if (flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(1,"Children",askLoppeAboutChildren);
 	//Gossip (after sexin' once)
-	if(flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(2,"Gossip",gossipWithLoppe);
+	if (flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(2,"Gossip",gossipWithLoppe);
 	//Working (after [Loppe]
-	if(flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] > 0) addButton(3,"Working",talkWithLoppeAboutWorking);
+	if (flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] > 0) addButton(3,"Working",talkWithLoppeAboutWorking);
 	//Her Mom (available after choosing \"<i>Loppe</i>\" at least once)
-	if(flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] > 0) addButton(4,"Her Mom",chatWithLoppeAboutHerMom);
+	if (flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] > 0) addButton(4,"Her Mom",chatWithLoppeAboutHerMom);
 	//Her Village (after [Loppe]
-	if(flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] > 0) addButton(5,"Her Village",chatWithLoppeAboutLoppesVillage);
+	if (flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] > 0) addButton(5,"Her Village",chatWithLoppeAboutLoppesVillage);
 	//The curse (unfinished; available after choosing \"<i>Loppe</i>\" at least once)
 	//Fondle (after "Loppe"; see appropriate section)
-	if(flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] > 0 && flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(6,"Tease Her",fondleAndTease);
+	if (flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] > 0 && flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(6,"Tease Her",fondleAndTease);
 	addButton(14,"Back",loppeGenericMeetings);
 }
 
@@ -335,7 +335,7 @@ private function talkWithLoppeAboutLoppe():void {
 	outputText("\n\nYou tell her that from what her mom says, Loppe definitely must take after her dad's side of the family, giving her a winsome grin. Loppe smiles at you.");
 
 	//(if first dialogue)
-	if(flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] == 0) {
+	if (flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] == 0) {
 		outputText("\n\n\"<i>Flatterer...  To tell the truth I used to look a lot more like my dad, but then came the curse...</i>\"");
 		outputText("\n\nCurse?");
 
@@ -377,7 +377,7 @@ private function askLoppeAboutChildren():void {
 	outputText("\n\nIt makes sense she wouldn't want to be a mother right now... but, what about being a father?  How can she control that?");
 	outputText("\n\nLoppe grins at you.  \"<i>I have taken special measures to ensure neither my partners nor I will end up with an unexpected package.</i>\"");
 	//(If EdrynKids or CottonKids =>1:
-	if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("\n\nYou warn her that might not be enough, as you've learned the hard way you're a bit too potent for most herbal contraceptives to handle.");
+	if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] > 0) outputText("\n\nYou warn her that might not be enough, as you've learned the hard way you're a bit too potent for most herbal contraceptives to handle.");
 
 	outputText("\n\nLoppe winks.  \"<i>I know herbs aren't totally reliable for a fact, plus I've been around, so I realized I needed something a bit more... permanent... some time ago.  I've had a local wizard place a spell on me to make me completely sterile; and if I ever want to have kids, all I need to do is say a small incantation and the spell vanishes.</i>\"");
 
@@ -469,17 +469,17 @@ private function gossipWithLoppe():void {
 	//Urta
 	addButton(0,"Urta",gossipWithLoppeAboutUrta);
 	//Scylla (Must have helped her enough times to know she needs cum to survive.)
-	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) addButton(1,"Scylla",gossipWithLoppeAboutScylla);
+	if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) addButton(1,"Scylla",gossipWithLoppeAboutScylla);
 	//Jasun
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] > 0) addButton(2,"Jasun",gossipWithLoppeAboutJasun);
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] > 0) addButton(2,"Jasun",gossipWithLoppeAboutJasun);
 	//Heckel
-	if(flags[kFLAGS.MET_HECKEL] > 0) addButton(3,"Heckel",gossipWithLoppeAboutHeckel);
+	if (flags[kFLAGS.MET_HECKEL] > 0) addButton(3,"Heckel",gossipWithLoppeAboutHeckel);
 	//Edryn
 	addButton(4,"Edryn",gossipWithLoppeAboutEdryn);
 	//Lottie
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
 	//Cotton
-	if(flags[kFLAGS.COTTON_MET_FUCKED] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
+	if (flags[kFLAGS.COTTON_MET_FUCKED] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
 	//Back (spacebar default)
 	addButton(14,"Back",talkWithLoppe);
 }
@@ -488,12 +488,12 @@ private function gossipWithLoppe():void {
 private function gossipWithLoppeAboutUrta():void {
 	clearOutput();
 	//(if UrtaSex or UrtaLover flags are NOT active)
-	if(flags[kFLAGS.TIMES_FUCKED_URTA] <= 0 || flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1) {
+	if (flags[kFLAGS.TIMES_FUCKED_URTA] <= 0 || flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1) {
 		outputText("\"<i>Ah, so you've met Watch Captain Urta?  She's famous around here, you know; people say she's a legendary bare-knuckle brawler and one of the toughest guards on the force.  The only problem is that she's not really that easy to approach... I guess she prefers to keep to herself.  Although she acts very friendly with that pretty centauress, Edryn.</i>\"");
 		outputText("\n\nLoppe taps her lips thinking of what else she could add, but shrugs.  \"<i>I guess that's all I have on her - I don't really know her that well.  Sorry!</i>\"");
 		doNext(camp.returnToCampUseOneHour);
 	}
-	else if(flags[kFLAGS.LOPPE_URTA_CHATS] == 0) {
+	else if (flags[kFLAGS.LOPPE_URTA_CHATS] == 0) {
 		outputText("Loppe smirks at you.  \"<i>I heard she's been getting along nicely with a certain outsider; you wouldn't happen to know anything about that, would you, [name]?</i>\"");
 		//[It's Me] [No]
 		menu();
@@ -647,11 +647,11 @@ private function gossipWithLoppeAboutLottie():void {
 	clearOutput();
 	outputText("\"<i>That pig-girl that started hanging around the gym in the evenings?  I heard about her... I believe she wants to get fit,</i>\" Loppe comments conversationally.");
 	//(if PC's training Lottie)
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] == 1) {
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] == 1) {
 		outputText("\n\n\"<i>Seems like she found a gym buddy.  That's great; poor thing could really use some help with that.  She tries hard in short bursts, but she needs to actually stick with it and eat a proper diet.  Ah, I suppose I should hide the carrot cake before saying that, huh?</i>\"");
 	}
 	//(else if PC's met Lottie)
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
+	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
 		outputText("\n\n\"<i>Poor girl hasn't found a real partner to help her yet.  Maybe you could give her a little attention if you're going to be around?  I bet she'd be grateful.</i>\"");
 	}
 	else {
@@ -703,7 +703,7 @@ private function chatWithLoppeAboutHerMom():void {
 	outputText("\n\nLoppe shakes her head.  \"<i>As far as I can tell, mom isn't seeing anyone.  And that's the way it's been, ever since I was a little girl.  I don't think mom could bear to have a relationship after my father... but she doesn't let that get to her either, as far as I can tell...  Why the sudden interest in my mom's sex life, anyway?  You interested in her?</i>\"");
 	outputText("\n\nYou ignore the question and point out that if Uma's got a girlfriend of her own, never mind if she's been playing the field, well, she can't really get upset if her daughter's found herself a lover... or several.");
 	//(If PC is male:)
-	if(player.gender == 1) outputText("  Well, from what Loppe's told you, Uma wouldn't be attracted to you anyway.");
+	if (player.gender == 1) outputText("  Well, from what Loppe's told you, Uma wouldn't be attracted to you anyway.");
 	outputText("\n\nLoppe giggles and grins. \"<i>Silly [name].  I don't need several lovers.  Just one... the perfect one.  And I don't think my mom would be upset either way.  She knows I'm a big girl now.</i>\"");
 
 	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 0)
@@ -746,23 +746,23 @@ private function chatWithLoppeAboutLoppesVillage():void {
 private function loppeSexChoice(bakery:Boolean = false):void {
 	clearOutput();
 	//First Time Intro (edited)
-	if(flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
+	if (flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
 		//first-time only output, if not coming from bakery date
-		if(!bakery) {
+		if (!bakery) {
 			outputText("That 'workout' seems like a nice option right now.");
 			outputText("\n\nLoppe lifts an eyebrow and smiles at you.  \"<i>Are you sure, sugar?  I tend to get carried away, so it can be pretty intense.</i>\"");
 			//(Min Lust >= 50)
-			if(player.minLust() >= 50) {
+			if (player.minLust() >= 50) {
 				outputText("\n\nYou grin and warn her that your appetite is a lot higher than normal; you are usually so aroused that you have no doubt you can go at it a lot more than the average person.");
 				outputText("\n\nLoppe shoots you a sultry look.  \"<i>Well, sugar, I guess I'll just have to take care of this 'endless lust' of yours, huh?</i>\" She tightens her hold on your hand and starts walking faster, eager to get you to her place.");
 			}
 			//(else High Libido)
-			else if(player.lib >= 70) {
+			else if (player.lib >= 70) {
 				outputText("\n\nYou smirk back and announce that you like it intense.  Perhaps she's the one who should watch out?");
 				outputText("\n\n\"<i>Oh, I like the sound of that... let's go, sugar!</i>\"  Loppe tightens her hold on your hand and starts walking faster, eager to get you to her place.");
 			}
 			//(else High Toughness and has beaten mino mob)
-			else if(player.tou >= 70) {
+			else if (player.tou >= 70) {
 				outputText("\n\nYou tell her that you're confident in your stamina.  Truth be told, you can withstand a fight with a whole mob of minotaurs and still have enough energy left to fight off demons.");
 				outputText("\n\nLoppe smirks.  \"<i>So if I manage to tire you out, that would make me stronger than a mob of minotaurs, right?  Okay!  Challenge accepted!</i>\"  She tightens her hold on your hand and starts walking faster, eager to get you to her place.");
 			}
@@ -770,7 +770,7 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 			else {
 				outputText("\n\nYou tell her that, even despite that, you still want this.");
 				//[(lib>40)]
-				if(player.lib >= 40) outputText(".. it almost sounds exciting.");
+				if (player.lib >= 40) outputText(".. it almost sounds exciting.");
 			}
 			outputText("\n\n\"<i>It's your call, sugar, but once I get going I don't think I'll be able to stop myself, so I hope you're willing to forgive me for anything that I might do.</i>\"");
 
@@ -782,7 +782,7 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 
 		outputText("\n\nOnce you get to the front door you're surprised to see that Loppe's house is most unusual.  The structure is the same as all other houses in Tel'Adre but the decoration is what sets it apart, it is covered in symbols that just don't any make sense to you; noticing your confusion, Loppe explains, \"<i>Mom drew these, it's supposed to be something to help ward off bad influences.  It's a cultural thing.</i>\" Loppe grins.");
 		//[(corr < 40)]
-		if(player.cor < 40) outputText("  You tell her they're quite nice... though privately you're curious what the interior looks like.");
+		if (player.cor < 40) outputText("  You tell her they're quite nice... though privately you're curious what the interior looks like.");
 		else outputText("  They don't seem to work very well - after all, <i>you're</i> here.");
 
 		outputText("\n\nLoppe smiles and produces a key.  With a click the door unlocks and the two of you step inside.  If the exterior was unusual, the interior is even moreso; the first thing that catches your eye is the door; it's a sliding door, covered with some sort of film or paper that effectively prevents anyone from seeing beyond it.  Why they would need something like that, considering whoever got in had to get past the front door, is anyone's guess...");
@@ -799,15 +799,15 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 		outputText("\n\n\"<i>So, sugar,</i>\" she says, interrupting your reverie, \"<i>we can do this however you like.  I don't really mind pitching or catching, especially with a cutie like you.</i>\"  Loppe winks at you, posing for your benefit.\n\n");
 
 		//[(any cock fits area 80)
-		if(player.hasCock()) {
-			if(player.smallestCockArea() <= loppeCapacity()) outputText("Pulling her onto your dick would result in some cowgirl fun, though you'd have to deal with her cock pointed right at you when she came.  ");
+		if (player.hasCock()) {
+			if (player.smallestCockArea() <= loppeCapacity()) outputText("Pulling her onto your dick would result in some cowgirl fun, though you'd have to deal with her cock pointed right at you when she came.  ");
 			else outputText("As good as it would feel to shove your [cock smallest] into her cunt, the nervous looks she's giving it tell you what her response would probably be.  ");
 		}
 		//[(any cock)
-		if(player.hasCock()) outputText("You could just whip it out and ask what she thinks of it, compared to hers - it might lead to some cross words and crossed swords, though.  ");
-		if(player.hasVagina()) outputText("You could take her monster length vaginally, but if her libido is what she claims, you'll probably wind up quite stretched.  ");
+		if (player.hasCock()) outputText("You could just whip it out and ask what she thinks of it, compared to hers - it might lead to some cross words and crossed swords, though.  ");
+		if (player.hasVagina()) outputText("You could take her monster length vaginally, but if her libido is what she claims, you'll probably wind up quite stretched.  ");
 		//[(boobs >= boobjob req)
-		if(player.biggestTitSize() >= 5) outputText("Her hardening horsecock looks like it would fit between your [chest], an act likely to net you a messy demonstration of her enthusiasm.  ");
+		if (player.biggestTitSize() >= 5) outputText("Her hardening horsecock looks like it would fit between your [chest], an act likely to net you a messy demonstration of her enthusiasm.  ");
 		outputText("There's always the option to receive her anally, though with her vaunted libido, you'd probably end up so flooded with her cum that it would wash from your mouth.  Or you could be a prick-tease and leave.");
 		//Display sex options
 		//[Cowgirl][Frot][TakeVaginal][Boobjob][TakeAnal][Bail]
@@ -818,18 +818,18 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 		outputText("\n\nThe dancer grins and gives you a little peck on the lips.  \"<i>Can't get enough laquine loving, can you?</i>\"");
 
 		//(High Min Lust)
-		if(player.minLust() >= 50) {
+		if (player.minLust() >= 50) {
 			outputText("\n\nWell, after all, how many people can actually sate your hunger for sex?");
 			outputText("\n\nLoppe grins at you.  \"<i>I just knew you'd come back for more.</i>\"  She takes your hand in hers and fairly drags you along, already heading for the door.");
 		}
 		//(High Libido)
-		else if(player.lib >= 70) {
+		else if (player.lib >= 70) {
 			outputText("\n\nYou thought you held out pretty well last time.");
 			outputText("\n\nLoppe smiles teasingly at you.  \"<i>Really?  Care to remind me who was snoring on my bed, too spent to stay awake?</i>\"");
 			outputText("\n\nWho, indeed?  Didn't Loppe herself fall asleep at the same time?  Your lover giggles.  \"<i>I was just being nice, sugar; I thought you'd like to sleep with someone besides you.  But if you're so confident in your abilities, why don't you follow me and show me just what you're made of?</i>\"");
 		}
 		//(High Toughness)
-		else if(player.tou >= 70) {
+		else if (player.tou >= 70) {
 			outputText("\n\nThe test of your stamina was nice; now you want a rematch.");
 			outputText("\n\nLoppe grins at you.  \"<i>I'm always up for a rematch... literally.</i>\"  The statement draws your eyes to the bulge in her shorts, and you note that it is indeed bigger than usual.  Loppe doesn't bother saying anything else; she takes your hand and begins leading you back to her home.");
 		}
@@ -843,15 +843,15 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 		outputText("\n\n\"<i>How will you be having me, sugar?</i>\" she asks, hopefully.\n\n");
 
 		//[(any cock fits area 80)
-		if(player.hasCock()) {
-			if(player.smallestCockArea() <= loppeCapacity()) outputText("Pulling her onto your dick would result in some cowgirl fun, though you'd have to deal with her cock pointed right at you when she came.  ");
+		if (player.hasCock()) {
+			if (player.smallestCockArea() <= loppeCapacity()) outputText("Pulling her onto your dick would result in some cowgirl fun, though you'd have to deal with her cock pointed right at you when she came.  ");
 			else outputText("As good as it would feel to shove your [cock smallest] into her cunt, the nervous looks she's giving it tell you what her response would probably be.  ");
 		}
 		//[(any cock)
-		if(player.hasCock()) outputText("You could just whip it out and ask what she thinks of it, compared to hers - it might lead to some cross words and crossed swords, though.  ");
-		if(player.hasVagina()) outputText("You could take her monster length vaginally, but if her libido is what she claims, you'll probably wind up quite stretched.  ");
+		if (player.hasCock()) outputText("You could just whip it out and ask what she thinks of it, compared to hers - it might lead to some cross words and crossed swords, though.  ");
+		if (player.hasVagina()) outputText("You could take her monster length vaginally, but if her libido is what she claims, you'll probably wind up quite stretched.  ");
 		//[(boobs >= boobjob req)
-		if(player.biggestTitSize() >= 5) outputText("Her hardening horsecock looks like it would fit between your [chest], an act likely to net you a messy demonstration of her enthusiasm.  ");
+		if (player.biggestTitSize() >= 5) outputText("Her hardening horsecock looks like it would fit between your [chest], an act likely to net you a messy demonstration of her enthusiasm.  ");
 		outputText("There's always the option to receive her anally, though with her vaunted libido, you'd probably end up so flooded with her cum that it would wash from your mouth.  Or you could be a prick-tease and leave.");
 		//[(loppesexed)
 		outputText("  Just jerking that cock and squeezing it so hard her balls swell up when she comes, though, that might be fun.  It'd be interesting to see how big they can get.");
@@ -859,26 +859,26 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 		//Display sex options
 		//[Cowgirl][CockWorship][TakeVaginal][Boobjob][TakeAnal][Squeezejob][Bail]
 	}
-	if(player.lust < 33) {
+	if (player.lust < 33) {
 		player.lust = 33;
 		dynStats("lus", .2);
 	}
 	//Display sex options
 	//[Cowgirl][Frot][TakeVaginal][Boobjob][TakeAnal][Bail]
 	menu();
-	//if(flags[kFLAGS.LOPPE_TIMES_SEXED] > 0)
-	if(player.hasCock() && player.lust >= 33) {
-		if(player.cockThatFits(loppeCapacity()) >= 0)
+	//if (flags[kFLAGS.LOPPE_TIMES_SEXED] > 0)
+	if (player.hasCock() && player.lust >= 33) {
+		if (player.cockThatFits(loppeCapacity()) >= 0)
 			addButton(0,"Cow-girl",loppeRidesCocks);
 	}
-	if(player.hasCock() && player.lust >= 33)
+	if (player.hasCock() && player.lust >= 33)
 		addButton(1,"Get BJ",loppeWorshipsDicks);
-	if(player.hasVagina() && player.lust >= 33)
+	if (player.hasVagina() && player.lust >= 33)
 		addButton(2,"TakeVaginal",getFuckedInYerTwatYaCunt);
-	if(player.biggestTitSize() >= 4) addButton(3,"Boob-job",boobjobLoppe);
-	if(flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(4,"SqueezeJob",loppeSqueezedickWhateverThatIs);
-	if(player.isTaur() && player.lust >= 33) addButton(5,"TakeAnal",getAssFuckedByLoppeAsACentaur);
-	else if(player.lust >= 33) addButton(5,"TakeAnal",getButtFuckedNonHoarseByLoppe);
+	if (player.biggestTitSize() >= 4) addButton(3,"Boob-job",boobjobLoppe);
+	if (flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(4,"SqueezeJob",loppeSqueezedickWhateverThatIs);
+	if (player.isTaur() && player.lust >= 33) addButton(5,"TakeAnal",getAssFuckedByLoppeAsACentaur);
+	else if (player.lust >= 33) addButton(5,"TakeAnal",getButtFuckedNonHoarseByLoppe);
 	addButton(14,"Leave",beATeaseAndLeaveLoppeAfterSexInvite);
 }
 
@@ -890,7 +890,7 @@ private function loppeRidesCocks():void {
 	outputText(images.showImage("loppe-rides-your-cocks"));
 	outputText("Looking over the hermaphroditic, horse-cocked bunny-girl, you contemplate your options.  You settle yourself ");
 	//[(not centaur)]
-	if(!player.isTaur()) outputText("on her bed, making yourself comfortable, and start suggestively stroking yourself");
+	if (!player.isTaur()) outputText("on her bed, making yourself comfortable, and start suggestively stroking yourself");
 	//(centaur)
 	else outputText("cumbersomely on the floor, rolling over and spreading your hindlegs to expose yourself");
 	outputText(".  Quietly, you ask Loppe how she would feel about indulging her feminine half.");
@@ -900,47 +900,47 @@ private function loppeRidesCocks():void {
 	var x:int = player.cockThatFits(loppeCapacity());
 	var y:int = player.cockThatFits2(loppeCapacity());
 
-	if(y >= 0 && player.cockTotal() == 2) outputText("  \"<i>In fact... I could just eat both of those up.</i>\"");
+	if (y >= 0 && player.cockTotal() == 2) outputText("  \"<i>In fact... I could just eat both of those up.</i>\"");
 	//(3+ fit cocks)
-	else if(y >= 0 && player.cockTotal() == 3) outputText("  \"<i>But I'm afraid I'll only be able to handle two of them.</i>\"");
-	if(player.cockTotal() > 1 && y >= 0) outputText("\n\nBetter than the usual reaction... at least she's willing to give more than one some love.");
+	else if (y >= 0 && player.cockTotal() == 3) outputText("  \"<i>But I'm afraid I'll only be able to handle two of them.</i>\"");
+	if (player.cockTotal() > 1 && y >= 0) outputText("\n\nBetter than the usual reaction... at least she's willing to give more than one some love.");
 
 	outputText("\n\nLoppe pushes you on your back and gently takes hold of ");
-	if(y >= 0) outputText("two of ");
+	if (y >= 0) outputText("two of ");
 	outputText("your cock");
-	if(y >= 0) outputText("s");
+	if (y >= 0) outputText("s");
 	outputText(", rubbing gently.  \"<i>Just sit back and leave everything in my capable hands, sugar.</i>\"");
 
 	outputText("\n\nYour lover starts slowly, stroking you and milking small beads of pre, which she promptly smears all over, getting your dick");
-	if(y >= 0) outputText("s");
+	if (y >= 0) outputText("s");
 	outputText(" nice and slick.  You gasp in pleasure and surprise as you feel Loppe's erect cock sidle up to yours, helping lube you with its leaking pre. Raising up your hips, you clumsily try to ");
-	if(y < 0) outputText("slide your shaft against her");
+	if (y < 0) outputText("slide your shaft against her");
 	else outputText("pinion her shaft between your");
 	outputText(" own, shivering from the sensation of your sensitive " + player.skin() + " against her proud horseflesh, already drooling even though you can plainly feel that it's only half-erect.");
-	if(player.balls > 0) outputText("  Your [balls] gently brush and rub against her own swollen cum-factories, and you can't wait to empty your overfilled sac into her waiting womb.");
+	if (player.balls > 0) outputText("  Your [balls] gently brush and rub against her own swollen cum-factories, and you can't wait to empty your overfilled sac into her waiting womb.");
 
 	outputText("\n\n\"<i>Okay, that's enough foreplay!</i>\" Loppe announces suddenly, eyeing your " + cockDescript(x) + " with a hunger that you never expected to see on her face.  Loppe quickly straddles you, aligning it with her pussy");
-	if(y >= 0) outputText("; its neighbor is aimed for her tight rosebud");
+	if (y >= 0) outputText("; its neighbor is aimed for her tight rosebud");
 	outputText(".  \"<i>Itadakimasu!</i>\" Loppe says, licking her lips as she finally slides you home.");
 
 	outputText("\n\nYou moan softly; she's so warm inside, burning with lust and dripping with arousal, her innards stretching so perfectly to fit around every contour and groove of your shaft");
-	if(player.cockTotal() > 1) outputText("s");
+	if (player.cockTotal() > 1) outputText("s");
 	outputText(", yet squeezing you as tightly as a velvety vise.  In fact, she's gripping you so hard that you can't seem to push yourself any further into her depths; she's squeezing you much too tightly to move in or out, an outright amazing feat, if Loppe gets half as much action as she claims to.");
 
 	outputText("\n\nUnfortunately for you, Loppe seems utterly consumed in her lust.  She pants and drools as she begins to brutally gyrate her hips atop you, bouncing on your prick");
-	if(y >= 0) outputText("s");
+	if (y >= 0) outputText("s");
 	outputText(" with happy squeals of pleasure and happiness, softly accompanied by the wet sounds of your coupling.  You gasp and cry, savoring every motion as she squeezes and wriggles, her inner walls rippling so deliciously around your cock");
-	if(y >= 0) outputText("s");
+	if (y >= 0) outputText("s");
 	outputText(", stroking them in the most delicious way.  You thrust your hips, trying to slip deeper inside her, but still she's holding you at bay.");
 
 	outputText("\n\nLoppe doesn't bother answering your plea, instead doubling over and delivering a kiss on your lips to try and silence you.  Her hips grind against your own, forcing you to fully hilt yourself within her despite the seal formed by her constricting cunt");
-	if(y >= 0) outputText(" and watertight ass");
+	if (y >= 0) outputText(" and watertight ass");
 	outputText(".  The sensation borders on the thin line between pleasure and pain, and you can't help but moan into Loppe's kiss; you wrap your ");
-	if(player.isDrider()) outputText("spindly legs");
-	else if(player.isTaur()) outputText("forelegs");
+	if (player.isDrider()) outputText("spindly legs");
+	else if (player.isTaur()) outputText("forelegs");
 	else outputText("arms");
 	outputText(" around the bunny-girl's ");
-	if(flags[kFLAGS.LOPPE_FURRY] == 0) outputText("silky-smooth");
+	if (flags[kFLAGS.LOPPE_FURRY] == 0) outputText("silky-smooth");
 	else outputText("softly furred");
 	outputText(" back and hold her tight against you, her long horse-cock sandwiched between your bellies, smearing both of you with drooling precum, rivers of the stuff flowing out steadily with every thrust and grind the two of you make.");
 
@@ -948,7 +948,7 @@ private function loppeRidesCocks():void {
 
 	outputText("\n\n");
 	//[(not horse)]
-	if(!player.isTaur()) {
+	if (!player.isTaur()) {
 		outputText("<b>You realize that if you keep holding onto Loppe, you're going to end up with a face covered in herm-cum - if you act quickly, though, you can avoid the impromptu facial.  You could even turn her hose of a cock back on her.</b>");
 		//[NoFace] [Facial] [HoseHer]
 		menu();
@@ -969,10 +969,10 @@ private function loppeRidesYouNoFaceJizz():void {
 	var y:int = player.cockThatFits2(loppeCapacity());
 
 	outputText("You let go of the horse-dicked rabbit and she gratefully swivels herself fully upright, cock jutting out over your belly - instinctively, your ");
-	if(player.isTaur()) outputText("foreleg tucks under her cock, angling it away from your body.");
+	if (player.isTaur()) outputText("foreleg tucks under her cock, angling it away from your body.");
 	else outputText("hand lunges forward and places itself underneath, fingers curling around as you push it further up, aiming it over your shoulder.  You can feel it throbbing like mad against your fingers, can feel the impressive bulge of semen as it distends her urethra and surges up towards her flared tip.");
 	outputText("  With an ululation of ecstasy, she literally explodes into orgasm, a great gout of cum visibly flying through the air with such force you can hear it splattering against the wall.  This is followed by a second eruption, then a third, a fourth... they just keep coming!  All the while, she bounces, moans, and writhes, her rapacious pussy gripping and squeezing");
-	if(y >= 0) outputText(" while her ass suckles on your second cock with just as much eagerness");
+	if (y >= 0) outputText(" while her ass suckles on your second cock with just as much eagerness");
 	outputText(".");
 
 	outputText("\n\nIt's too much to resist and, fighting to keep yourself from accidentally leaning your head into the line of fire, you cry out as you give yourself over to orgasm.");
@@ -986,10 +986,10 @@ private function loppeRidesYouSpunksInYourEye():void {
 	var y:int = player.cockThatFits2(loppeCapacity());
 
 	outputText("You keep your ");
-	if(player.isDrider()) outputText("legs");
+	if (player.isDrider()) outputText("legs");
 	else outputText("arms");
 	outputText(" wrapped around your lover, welcoming what's approaching as her horse-prick throbs and her flared tip inflates.  With a rapturous howl the laquine's cumslit opens like a floodgate, spurting jet after jet of cum onto your [chest], [face] and even the wall behind you; her own pillowy breasts and face are splashed with the force of her orgasm.  Her tight pussy contracts, milking your " + cockDescript(x) + " for all its worth");
-	if(y >= 0) outputText(", while her anal ring constricts your " + cockDescript(y) + " tightly, intent on holding you in place");
+	if (y >= 0) outputText(", while her anal ring constricts your " + cockDescript(y) + " tightly, intent on holding you in place");
 	outputText(".");
 
 	outputText("\n\nThe smell of her juices fills the air and floods your nostrils, the copious cum painting itself over both your bodies in great smears that make things deliciously slick and slippery.  The combination of this stimulus with the expert milking of her wonderfully tight nethers and your own hyper-aroused state renders you unable to hold out any more.  With a great shout of your own, you unleash your orgasm into her waiting depths.");
@@ -1002,7 +1002,7 @@ private function loppeRidesYouHoseHer():void {
 	clearOutput();
 
 	outputText("You let go of Loppe, and she gratefully swivels herself fully upright, cock jutting out over your belly - your hand lunges forward and places itself palm upright underneath the shaft, fingers curling around as you push it further up and up until it's pointing, as best you can make it, at her face!  You can feel it throbbing like mad against your fingers, can feel the impressive bulge of semen as it distends her urethra and surges up towards her flared tip.  With an ululation of ecstasy, she literally explodes into orgasm, cum geysering from her cock and squarely into her face, causing her to choke and splutter at the surprise facial, the pearly spooge splattering down her throat and onto her breasts.  With a laugh she shakes her head, closing her eyes and opening her mouth; even as she continues to bounce and buck and grind against you, her cock keeps spurting cum, and she clumsily tries to catch it, eagerly swallowing down mouthful after mouthful.  She's actually quite good at it, but despite her best efforts, her hair, ears, face and breasts end up completely plastered in cum... not that this stops her from milking you with her lower hole");
-	if(player.cockTotal() > 1) outputText("s");
+	if (player.cockTotal() > 1) outputText("s");
 	outputText(" until you can't help it and cum yourself.");
 	loppeRidesPCCockFinal();
 }
@@ -1014,14 +1014,14 @@ private function loppeRidesPCCockFinal():void {
 
 	outputText(images.showImage("loppe-rides-your-cock"));
 	outputText("\n\nYour " + cockDescript(x) + " gushes fluids into her hungry womb");
-	if(y >= 0 || player.hasVagina()) {
+	if (y >= 0 || player.hasVagina()) {
 		outputText(", while ");
-		if(y>= 0) outputText("your second " + cockDescript(y) + " just as easily pumps her perverted ass full of baby juice");
-		if(y>= 0 && player.hasVagina()) outputText(" and ");
-		if(player.hasVagina()) {
+		if (y>= 0) outputText("your second " + cockDescript(y) + " just as easily pumps her perverted ass full of baby juice");
+		if (y>= 0 && player.hasVagina()) outputText(" and ");
+		if (player.hasVagina()) {
 			outputText("your [vagina] ");
-			if(player.wetness() < 3) outputText("drizzles");
-			else if(player.wetness() < 5) outputText("spatters");
+			if (player.wetness() < 3) outputText("drizzles");
+			else if (player.wetness() < 5) outputText("spatters");
 			else outputText("gushes");
 			outputText(" femcum onto the bed below you, forgotten during the act but not unsympathetic to her ministrations");
 		}
@@ -1029,16 +1029,16 @@ private function loppeRidesPCCockFinal():void {
 	outputText(".  You cry out as you cum long and hard, arching your back off of the bed in your pleasure before finishing and collapsing, gasping for breath as, above you, the laquine comes to her own climactic end.");
 
 	outputText("\n\nLoppe slumps atop you, rubbing your bodies together as her hips slow down.  Spent from your recent orgasm, you resolve to just wrap your ");
-	if(player.isDrider() || player.isTaur()) outputText("forelegs");
+	if (player.isDrider() || player.isTaur()) outputText("forelegs");
 	else outputText("arms");
 	outputText(" around her, pulling her into a post-coital cuddle.  Her wet cock quietly slaps against your belly as she embraces you back, clearly savoring the closeness the same way you are.  However, moments later, you feel Loppe's hips start to twitch, slowly building into more lustful thrustings, seconds before Loppe pushes herself back into a deliberately upright position, her pace building steadily.  With a lusty smile and a mischievous twinkle in her eyes, Loppe looks you straight in the eye as she proclaims, \"<i>It's time for round two, [name]!</i>\"");
 
 	//(High libido or High Min lust)
-	if(player.lib >= 70 || player.minLust() >= 50) {
+	if (player.lib >= 70 || player.minLust() >= 50) {
 		outputText("\n\nYou remember what she told you about her libido and shrug; what's another round, after all?  You're happy to finally have someone capable of sating your endless hunger for sex.  [EachCock] begins to harden again, and the girl on top of you gives you a knowing smile.");
 	}
 	//(Medium libido or Medium Min lust)
-	else if(player.lib >= 50 || player.minLust() >= 35) {
+	else if (player.lib >= 50 || player.minLust() >= 35) {
 		outputText("\n\nYou remember what she told you about her libido, but another round?  So soon?  Sighing, you tell Loppe that you just can't handle so much sex in such a short notice; she'd have to at least give you a few moments to recover.");
 	}
 	else {
@@ -1047,37 +1047,37 @@ private function loppeRidesPCCockFinal():void {
 
 	outputText("\n\nLoppe quietly disentangles herself from your half-staff ");
 	outputText(multiCockDescriptLight() + " and slides down your body, pressing her soft, cum-slickened breasts against you.  You moan as the smooth curves of her chest press against [eachCock]; the cum-slick ");
-	if(flags[kFLAGS.LOPPE_FURRY] == 0) outputText("skin");
+	if (flags[kFLAGS.LOPPE_FURRY] == 0) outputText("skin");
 	else outputText("fur");
 	outputText(" give you the impression of being wrapped in the moist folds of a woman's sex.  As Loppe slides further down you feel her teasingly licking at the tip");
-	if(y >= 0) outputText("s");
+	if (y >= 0) outputText("s");
 	outputText(" of your " + multiCockDescriptLight() + ".");
 
 	outputText("\n\nThe skillful dance of her warm, wet tongue on the sensitive skin of your post-orgasmic member");
-	if(y >= 0) outputText("s");
+	if (y >= 0) outputText("s");
 	outputText(" pull");
-	if(y < 0) outputText("s");
+	if (y < 0) outputText("s");
 	outputText(" an involuntary shudder from you; the erotic stimulation sends blood pulsing back into your veins, and your shaft");
-	if(y >= 0) outputText("s rise");
+	if (y >= 0) outputText("s rise");
 	else outputText(" rises");
 	outputText(" to full mast again, so swiftly ");
-	if(y < 0) outputText("it almost smacks");
+	if (y < 0) outputText("it almost smacks");
 	else outputText("they almost smack");
 	outputText(" the laquine on her nose, leaving you ready to be mounted by her once again.");
 
 	outputText("\n\n\"<i>I can't remember the last time I've had so much fun with anyone else,</i>\" Loppe whispers, shivering.  \"<i>Now, sugar... it's time for another session, and you'd best be ready for overtime");
-	if(player.minLust() <= 30 && player.lib <= 50) outputText("; if I have to stop to tend to you after every coupling, I'll never get these empty");
+	if (player.minLust() <= 30 && player.lib <= 50) outputText("; if I have to stop to tend to you after every coupling, I'll never get these empty");
 	outputText(".</i>\"  She points with a smirk to her swollen balls.  Er... didn't she just blow her load? Her balls look at least as full as, if not fuller than, when you started, and they nearly slosh with eagerness to be rid of their cargo!");
 
 	outputText("\n\nLoppe straddles you and with a mischievous smirk, she says, \"<i>I'm not stopping until I'm completely satisfied, sugar.  So sit back and relax; this could take some time.</i>\"  She doesn't bother waiting for an answer before she sinks, impaling herself upon your shaft");
-	if(y >= 0) outputText("s");
+	if (y >= 0) outputText("s");
 	outputText(" once more.  You moan as once again you follow the lusty dickgirl into the throes of pleasure...");
 
 	outputText("\n\n<b>One hour and several orgasms later...</b>");
 
 	outputText("\n\n\"<i>Thanks, sugar.  You're the best!  I feel completely satisfied!</i>\" Loppe says, happily smiling and hugging you tightly.  As she snuggles up to you, you can feel the distinct bump of her gravid-looking belly rubbing against your " + player.skin() + "; the cum-filled flesh deforms as the pressure pushes some of the skin-stretching load out of her nethers and further smears the proof of your pleasure on your entwined lower halves, but even so she still looks ready to pop with three or four kids.  You consider answering her, but find that you lack the will to do so... in fact, you lack the energy to do anything at all, Loppe having fucked you until you were shooting blanks");
 	//[(if high cum amount)]
-	if(player.cumQ() >= 500) outputText(" despite your usually messy orgasms");
+	if (player.cumQ() >= 500) outputText(" despite your usually messy orgasms");
 	outputText(".");
 
 	outputText("\n\nOnce Loppe has made herself comfortable, she gives you a little peck on the cheek, then slowly extends her tongue to lick an errant droplet of cum from your nose.  She sets her head on your shoulder and begins snoring lightly; sleep has apparently claimed the satisfied herm.  It's not long before Loppe's soft snoring and warm embrace lull you into a sleepy afterglow as well.");
@@ -1091,7 +1091,7 @@ private function loppeRidesPCCockFinal():void {
 	outputText("\n\nLoppe giggles, sauntering over to you and helping you up, before offering you the tray with a small peck on the cheek.  \"<i>Here you go; I made these especially for you.  Eat up!</i>\"  Ravenously, you dig into the humble fare, finding it takes the edge off of your fatigue... though your muscles still feel drained and weak from the amount of 'exercise' you gave them.");
 
 	//(First Time)
-	if(flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
+	if (flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
 		outputText("\n\nLoppe zeroes in on a trembling hand and takes the tray from you as you finish, then grins nervously.  \"<i>Sorry about that, sugar.  I guess I might have overdone it, but it was so exciting being with someone new.  If it was too much, I'll be happy to make it up to you - maybe a date, or... maybe another, much slower session.</i>\"  She looks slyly at you.  \"<i>Whichever you're up for.</i>\"");
 		outputText("\n\nBefore you have a chance to answer, she leans in and captures your lips in a kiss.");
 	}
@@ -1100,7 +1100,7 @@ private function loppeRidesPCCockFinal():void {
 	}
 	outputText("\n\nReleasing you, Loppe points to a nearby chair.  \"<i>I've laid out your [armor] over there, but feel free to stay as long as you want to.</i>\"  You thank her for the kind offer, but the last thing you need are imps or goblins getting into your supplies and making off with your things.  You redress yourself, negligently allowing Loppe glimpses of your naked body as you do so");
 	//[(Exhibitionist)
-	if(flags[kFLAGS.PC_FETISH] > 0) outputText("; it gives you something of a thrill, though nowhere near as much as taking them off for her in the first place did");
+	if (flags[kFLAGS.PC_FETISH] > 0) outputText("; it gives you something of a thrill, though nowhere near as much as taking them off for her in the first place did");
 	outputText(".  Finished, you depart.");
 	player.orgasm();
 	dynStats("tou", .5, "lib", .5, "sen", -4);
@@ -1117,21 +1117,21 @@ private function loppeWorshipsDicks():void {
 	clearOutput();
 	outputText(images.showImage("loppe-worships-your-cock"));
 	outputText("As your eyes sweep over the naked half-breed's form, they focus on her equine masculinity, already standing proud and eager at the prospect of sex.  Distinctly aware of your own male appendage");
-	if(player.cockTotal() > 1) outputText("s");
+	if (player.cockTotal() > 1) outputText("s");
 	outputText(", you conversationally ask Loppe what she thinks of your [cock biggest], an idea starting to form in your mind.");
 
 	//(if cock area <= 17.5)
-	if(player.biggestCockArea() <= 17.5) {
+	if (player.biggestCockArea() <= 17.5) {
 		outputText("\n\n\"<i>What do I think about your dick?  Well... it's much smaller than my own, but it's cute.  And to be honest I wouldn't mind having it fill me up, even if you won't be able to go that deep.</i>\"");
 		outputText("\n\nLoppe laughs.  \"<i>Or, were you thinking I'd care about who has the biggest dick between us?  As long as you can hump me till I blow a load of my own, I'm fine.  And, to be entirely honest, lately I find myself getting off on anything... so, as long as you don't mind a little tussle in the bed, I certainly don't mind getting on with a cutie like you.</i>\"  She winks and blows you a kiss.");
 	}
-	else if(player.biggestCockArea() <= 35) {
+	else if (player.biggestCockArea() <= 35) {
 		outputText("\n\n\"<i>What do I think about your dick?  Well, it's about the same size as mine, which is good, I think... and it looks hard too.  I can see the veins bulge each time it throbs.  Looks tasty... and I wouldn't mind having something like that inside me.</i>\"  She nods appreciatively.");
 	}
 	else { //cock area > 35
 		outputText("\n\n\"<i>What do I think about your dick?  Well... it's huge!  So big, hard and juicy - that's a cock I can really get my hands around.  To be honest with you, I'm having a hard time not taking it for a spin.  Such a wonderful looking member... ");
 		//[(if cock area > Loppe's capacity)
-		if(player.biggestCockArea() > loppeCapacity()) outputText("even if it does look too big to fit.");
+		if (player.biggestCockArea() > loppeCapacity()) outputText("even if it does look too big to fit.");
 		else outputText("or maybe I should get a taste first?");
 		outputText("</i>\"  She licks her lips.");
 	}
@@ -1156,13 +1156,13 @@ private function loppeWorshipsDicks():void {
 	outputText("\n\nLoppe unlatches from you with a <b>'pop'</b>.  \"<i>Thanks for the meal, sugar,</i>\" she grins.  \"<i>Now... I can see you're still hard, so how about some more fun?  Hmm?  I'll be wanting to have some of my own, of course.</i>\"  She unbends, to rest your wet shaft in her cleavage.");
 
 	outputText("\n\nUsing her hands and arms, Loppe grinds her soft boobs against your [cock biggest], milking a few more dollops of cum from you, slickening her breasts, as well as your saliva-coated prick.  You shudder and instinctively thrust your cock into her soft ");
-	if(flags[kFLAGS.LOPPE_FURRY] > 0) outputText("fluffy ");
+	if (flags[kFLAGS.LOPPE_FURRY] > 0) outputText("fluffy ");
 	outputText("cleavage; her ");
-	if(flags[kFLAGS.LOPPE_FURRY] == 0) outputText("skin");
+	if (flags[kFLAGS.LOPPE_FURRY] == 0) outputText("skin");
 	else outputText("fur");
 	outputText(" against your [cock biggest] sends tingles of pleasure rippling through your loins.  The half-breed doesn't stop her ministrations, barely noticing your reaction.  All she does is giggle as you continue pumping more of your slick pre all over her breasts.  Murmuring and moaning appreciatively, you continue to thrust and grind, eagerly spilling pre-cum all over your herm lover's cleavage and midriff, though you can't prevent one sudden spurt from landing right on her face");
 	//[(lib > 40)
-	if(player.lib >= 40) outputText(" - nor would you want to; she looks just right covered in your fluids");
+	if (player.lib >= 40) outputText(" - nor would you want to; she looks just right covered in your fluids");
 	outputText(".");
 
 	outputText("\n\n\"<i>All ready!</i>\"  Loppe declares, letting go of your slick shaft and delivering a parting peck.  You wonder what exactly you're ready for, other than the obvious... it doesn't stop you from continuing to thrust in anticipation of your second release.");
@@ -1170,7 +1170,7 @@ private function loppeWorshipsDicks():void {
 	outputText("\n\nLoppe pushes you back onto the bed and straddles you, stroking her equine-prick in order to milk more pre and spread it over her shaft.  \"<i>It's time to give this wonderful [cock biggest] of yours a ride of its own,</i>\" she hums.  She aligns her tool with your own, rubbing your slick lengths together as she begins humping.  You grind and slide your wet, pre-smeared shaft against hers, groaning and hissing at the sparks of pleasure the slippery friction sends surging into your brain.");
 
 	outputText("\n\nLoppe pants over you, humping your shaft as she looks deeply into your eyes with a gaze fogged by pleasure.  You can feel the warmth emanating from her equine endowment as she leaks copious amounts of pre over your own shaft.  With a gasp of surprise and without slowing her rhythm, Loppe cums.  Rope after sticky rope of cum splashes across your belly and your [chest].  You squeeze her ass, feeling her tail swishing across your fingers as you grind and rut against her, cock to cock");
-	if(player.balls > 0) outputText(" and balls to balls");
+	if (player.balls > 0) outputText(" and balls to balls");
 	outputText(", the delicious friction pushing you over the edge.");
 
 	outputText("\n\n\"<i>Can you see... how much I love... your cock, now?</i>\"  Loppe asks, panting.  Panting right back, you answer her with your eyes as your cock proclaims its love for her, dropping the last dike of resistance and yielding to your overreaching orgasm.  The pleasure of cumming fills your addled brain again as you spray your cock-juice all over your lover's belly, breasts, face and dick, soaking her with every last drop you can dredge up.  Your orgasm triggers another of Loppe's own, and with a groan, she gives you a coating of her own issue.  After spewing the last of her load onto you, she collapses and gives you a gooey hug, followed by a slimy kiss on your cheek.");
@@ -1178,10 +1178,10 @@ private function loppeWorshipsDicks():void {
 	outputText("\n\n\"<i>You're the best, sugar.</i>\"  You simply nod, too dazed to really listen.  She humps you a couple more times, noting your softening member.  Giggling, she says,  \"<i>It's too early for you to go soft on me, [name].  I still have a lot of appreciation to show you... and I'm sure you still want to show your appreciation for me too.  So get ready for round two!</i>\"  She leers at you, licking her lips in blatant anticipation.");
 
 	//Low Libido:
-	if(player.lib < 33 && player.minLust() < 30) outputText("\n\nYou groan from the depths of your throat; Loppe and her libido...");
+	if (player.lib < 33 && player.minLust() < 30) outputText("\n\nYou groan from the depths of your throat; Loppe and her libido...");
 
 	//{Moderate Libido:
-	else if(player.lib < 66 && player.minLust() < 50) outputText("\n\nWith a wince of equal parts anticipated pleasure and pain, you ready yourself for a long session.");
+	else if (player.lib < 66 && player.minLust() < 50) outputText("\n\nWith a wince of equal parts anticipated pleasure and pain, you ready yourself for a long session.");
 	//High Libido:
 	else outputText("\n\nYour fatigue ebbs away, chased off by your eagerness for more of the incredible sex you just had.");
 
@@ -1206,76 +1206,76 @@ private function getFuckedInYerTwatYaCunt():void {
 	outputText(images.showImage("loppe-sticks-it-in-your-vagoo"));
 	outputText("As you contemplate the delicious possibilities that the herm presents, your eyes are drawn to her admirable piece of horse-meat.  With a half-grin, you settle yourself on her bed, ");
 	//[(mans)
-	if(!player.isTaur()) outputText("spreading your labia in an invitation that needs no words.");
+	if (!player.isTaur()) outputText("spreading your labia in an invitation that needs no words.");
 	else outputText("exposing your rump and spreading your hind legs in your best effort to make her feel welcome.");
 
 	outputText("\n\nLoppe smirks at you and winks.  \"<i>Don't worry; I'll treat you like a ");
 	//[(femininity <= 40)
-	if(player.femininity > 50) outputText("princess.  A sexy, smoking hot princess");
+	if (player.femininity > 50) outputText("princess.  A sexy, smoking hot princess");
 	else outputText("prince.  A dashing, dandy prince");
 	outputText(" that I intend to fill up with my laquine love.</i>\"  She wastes no time and pounces on the bed, ready to bury her face between your [legs], licking her lips while taking deep breaths to inhale as much of your pheromones as she can.  You blink at the speed with which she moves, but smile, repositioning yourself to give her better access");
 	//[(herm non-horse)
-	if(player.gender == 3 && !player.isTaur()) {
+	if (player.gender == 3 && !player.isTaur()) {
 		outputText(", though she needs to move aside " + sMultiCockDesc() + " ");
-		if(player.balls > 0) outputText("and [balls] ");
+		if (player.balls > 0) outputText("and [balls] ");
 		outputText("to really get at your cunt");
 	}
 	outputText(".");
 
 	outputText("\n\n\"<i>Sugar, you have no idea how good you smell.  Oh, I just have to get a taste of that sweet-looking pussy of yours.</i>\"  Loppe dives forward");
 	//[(not horse and herm)
-	if(!player.isTaur() && player.gender == 3) {
+	if (!player.isTaur() && player.gender == 3) {
 		outputText(", under your ");
-		if(player.balls > 0) outputText("[sack]");
+		if (player.balls > 0) outputText("[sack]");
 		else outputText(multiCockDescriptLight());
 		outputText(",");
 	}
 	outputText(" to lick and kiss your sensitive labia.  You arch your back and thrust your crotch at her, letting the laquine have your precious pussy to taste and suckle and ravage... she's pretty good with that tongue of hers.  Loppe lifts her head and wipes her face with her arm.  \"<i>I'm even better with this,</i>\" she says, mirroring your thoughts and holding her painfully erect equine-shaft.  You watch as it throbs, every vein bulging visibly, balls engorged as they churn up a load of cum to deposit in your waiting womb.  She ducks to take another lick, tasting you like one tastes a fine wine.");
 
-	if(player.vaginas[0].virgin) {
+	if (player.vaginas[0].virgin) {
 		outputText("\n\n\"<i>You taste like a virgin, [name].  But that's impossible, right?  There's no way a hottie like you would let a silly horse-bunny like me be your first.</i>\"");
 		//[(low corr)]
-		if(player.cor < 50) outputText("  You look coy, for her benefit, and cast your eyes down shyly.");
+		if (player.cor < 50) outputText("  You look coy, for her benefit, and cast your eyes down shyly.");
 		else outputText("  You do your best to warn her away from the topic with your eyes, eager to get on with the fuck.");
 		//(not for horsez)
-		if(!player.isTaur()) outputText("\n\nLoppe gasps and persists.  \"<i>Wow... I'll actually get to be your first... are you sure that's okay?</i>\"");
+		if (!player.isTaur()) outputText("\n\nLoppe gasps and persists.  \"<i>Wow... I'll actually get to be your first... are you sure that's okay?</i>\"");
 
 		outputText("\n\nYou reach out ");
-		if(player.cor < 50) outputText("and tap her playfully on the nose");
+		if (player.cor < 50) outputText("and tap her playfully on the nose");
 		else outputText("in your irritation and squeeze her face imploringly");
 		outputText(".  Would you be here, with your clothes off in Loppe's bed, if you weren't okay with it?");
 
 		outputText("\n\nShe swallows audibly and grins.  \"<i>I assure you I'll be gentle and that I'll make your first time as memorable as I can.  You're not leaving this room until you are completely satisfied, I promise!</i>\"");
 	}
 	//(else if vaginalLooseness < 3)
-	else if(player.looseness() < 3) outputText("\n\n\"<i>You taste so sweet... I knew I was right to call you 'sugar', sugar!</i>\" Loppe comments with a smile and lick of her lips.  \"<i>But enough foreplay!</i>\"");
+	else if (player.looseness() < 3) outputText("\n\n\"<i>You taste so sweet... I knew I was right to call you 'sugar', sugar!</i>\" Loppe comments with a smile and lick of her lips.  \"<i>But enough foreplay!</i>\"");
 	else outputText("\n\n\"<i>I see I'm not dealing with a rookie,</i>\" she muses.  \"<i>You must be quite experienced.  But no worries, I'm pretty skillful with my tool; I assure you I'll give you a ride unlike any other!</i>\"");
 
 	outputText("\n\nLoppe aligns her flared tip with your [vagina] and finally pushes herself in, plumbing your depths with her delicious, juicy horse-prick; pre-cum helps her entrance as she pushes as far as she can inside your depths with flared tip caressing your walls as she finally");
-	if(player.vaginalCapacity() >= 35) outputText(" bottoms out, completely hilted inside you");
+	if (player.vaginalCapacity() >= 35) outputText(" bottoms out, completely hilted inside you");
 	//[else:
 	else outputText(" bumps against your cervix");
 	outputText(". You moan in delight as she sinks into you");
-	if(player.vaginas[0].virgin) outputText(", repressing a shiver of pain as she tears through your hymen, taking your virginity");
-	else if(player.vaginalCapacity() < 35) outputText(", forcing your entrance wide to accommodate herself");
+	if (player.vaginas[0].virgin) outputText(", repressing a shiver of pain as she tears through your hymen, taking your virginity");
+	else if (player.vaginalCapacity() < 35) outputText(", forcing your entrance wide to accommodate herself");
 	outputText(".");
 	//cuntchange, but suppress standard messages
 	player.cuntChange(35,true,true,false);
 
 	outputText("\n\n\"<i>Ah, It feels even better than it tastes...</i>\" Loppe says airily as she begins humping you, her powerful hips working to bring both of you closer to the edge and beyond.");
 	//[(not horse)
-	if(!player.isTaur()) outputText("  You wrap your [legs] around her hips as best you can, thrusting in your efforts to meet her strong rhythm, feeling your cunt rippling around her wonderfully long, thick horsecock.");
+	if (!player.isTaur()) outputText("  You wrap your [legs] around her hips as best you can, thrusting in your efforts to meet her strong rhythm, feeling your cunt rippling around her wonderfully long, thick horsecock.");
 
 	outputText("\n\nLoppe's technique is exquisite; she gyrates her hips with each thrust, making sure to press her flare against that special spot inside you that makes you scream in pleasure, once she sees your reaction, she deliberately drags her tip across it with each pass, depositing huge amounts of pre.");
 
 	outputText("\n\nYou hiss and shudder, writhing across the bedsheets as your lover works her magic on you, filling you with pleasure.  Juices flow wet and thick from your pussy");
-	if(player.hasCock()) outputText(", precum begins to drool from your " + multiCockDescriptLight());
+	if (player.hasCock()) outputText(", precum begins to drool from your " + multiCockDescriptLight());
 	outputText(".");
 
 	//Not Centaur:
-	if(!player.isTaur()) {
+	if (!player.isTaur()) {
 		outputText("\n\nYou grab Loppe's face to kiss her passionately. One hand strokes her long, dark hair, while the other slides down her back - it takes some work to position yourself right, but you're finally able to grasp her balls, kneading and jiggling them in the palm of your hand, fingers curling around to tickle their way into her wet, dripping cunt.\n\nLoppe breaks the kiss and gasps. \"<i>If you... ah... keep this up, sugar, you'll be getting a healthy dose of laquine love anytime now.  Oh, right there!</i>\" Loppe moves to kiss along your collarbone and suckle on your neck.\n\nWell, now, if that isn't encouraging in its own right... your free hand starts to play with her long, rabbit-like ears - after all, those should be sensitive, right?  Them being erogenous zones makes as much sense as anything about your relationship with Loppe does - even as your busy hand continues to massage her balls and her pussy, flicking her clit and pumping your increasingly juice-smeared fingers into her neglected, greedily-sucking hole, you grind your hips into hers, gyrating in a countermeasure to her own motions");
-		if(player.gender >= 3) outputText(" and smearing both your bellies with herm-pre");
+		if (player.gender >= 3) outputText(" and smearing both your bellies with herm-pre");
 		outputText(".");
 	}
 	//Centaur:
@@ -1287,9 +1287,9 @@ private function getFuckedInYerTwatYaCunt():void {
 		outputText("\n\nWith a pointed comment about her not being enough of a stallion to please a proper mare and a laugh for emphasis, you push your hips back with extra force, moaning at the feeling of her horse-cock inside your mare's cunt.  The lusty half-breed doesn't bother replying, she just thrusts against you as hard as she can, pistoning in and out of your [vagina] with abandon.  Each slap of your hips sends pleasure rippling through you.  You gasp and moan, flicking your fingers across your [nipples] for further stimulus.  You rut back against your hybrid herm lover as hard as you can... just a little more, oh, you're so close!");
 	}
 	outputText("\n\nLoppe gasps and screams, almost neighing, as you feel her cock bulge right before the first of many ropes of cum splatter against the walls of your womb.  You cry out in delight as the sensation of steaming hot spunk gushing into you sets your inflamed nerves alight; your cunt squeezes down on her cock rapturously as you shudder and heave your way to your own climax");
-	if(player.hasCock()) {
+	if (player.hasCock()) {
 		outputText(", neglected cock fountaining cum ");
-		if(player.cumQ() < 500) outputText("between you and painting you both");
+		if (player.cumQ() < 500) outputText("between you and painting you both");
 		else outputText("gushing onto the bedsheets and smearing your belly");
 		outputText(" with this aspect of your dual-sexed orgasm");
 	}
@@ -1298,7 +1298,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	outputText("\n\nLoppe's endless ropes of semen fill you to the brim within instants; the excess jets out of the seal formed by her cock, smearing her bedsheets with the results of your coupling.  By the time she's spent you're lying in a pool of your combined juices, completely matted with cum and utterly satisfied.  Loppe sighs and smiles at you.  \"<i>So... how did you like your ride, sugar?</i>\" she asks, lightly humping you with her slowly softening horse-prick as she leans over you.");
 
 	outputText("\n\nYou smile, stroke her cheek, and give her a kiss.  Loppe grins happily at you. \"<i>... Let's not waste any time and get started with round 2!</i>\" She says excitedly");
-	if(!player.isTaur() && player.hasCock()) outputText(", giving you a quick peck on the cheek and licking a small gob of cum that seems to have stuck to your chin");
+	if (!player.isTaur() && player.hasCock()) outputText(", giving you a quick peck on the cheek and licking a small gob of cum that seems to have stuck to your chin");
 	outputText(".");
 
 	outputText("\n\nAlready...?  Loppe smiles and gives you a kiss, straight on the lips; as the two of you lock lips you can feel her cock, still buried inside you, hardening once more.  It throbs as it fills you up again, still leaking cum.  Breaking the kiss, Loppe gives you a seductive glance and says as innocently as she can.  \"<i>You did say anytime, sugar... and the time is now!</i>\"  You barely have time to protest before she begins humping you once more, droplets of your previous session splattering about with each slap of your hips...");
@@ -1313,7 +1313,7 @@ private function getFuckedInYerTwatYaCunt():void {
 
 	outputText("\n\nWords fail you, and you give her ");
 	//[(low corr)
-	if(player.cor < 50) outputText("a pleading look... and if there's maybe a trace of horror dancing in the depths of your eyes, well, that's understandable, isn't it?");
+	if (player.cor < 50) outputText("a pleading look... and if there's maybe a trace of horror dancing in the depths of your eyes, well, that's understandable, isn't it?");
 	else outputText("an incendiary glare, letting her know just what you think of her posturing.");
 	outputText("  Loppe bursts out laughing.  \"<i>Just kidding, sugar.  If we go another round I think my dick might fall off.</i>\"");
 
@@ -1326,10 +1326,10 @@ private function getFuckedInYerTwatYaCunt():void {
 	outputText("\n\n\"<i>Oh, you're awake.  Great!  I brought something to eat,</i>\" Loppe says, casually walking towards you with a tray containing a sandwich and some milk.");
 
 	outputText("\n\nYour belly rumbles, reminding you that even if you don't look like it, you still just woke up after a marathon sex session, and you gratefully accept her offer of food.");
-	if(silly()) outputText("  \"<i>Da! Sandvich is kredit to team!</i>\"");
+	if (silly()) outputText("  \"<i>Da! Sandvich is kredit to team!</i>\"");
 
 	//(First Time)
-	if(flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
+	if (flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
 		outputText("\n\nLoppe grins nervously as you ravenously tuck into your meal, hovering by your side until you finish.  Once you're done, she gives you a sheepish smile.  \"<i>Sorry about that.  I guess I might have overdone it, but it was so exciting being with someone new.  If it was too much, I'll be happy to make it up to you - maybe a date, or... maybe another, much slower session.</i>\"  She looks slyly at you.  \"<i>Whichever you're up for.</i>\"");
 		outputText("\n\nBefore you have a chance to answer, she leans in and captures your lips in a kiss.");
 	}
@@ -1341,7 +1341,7 @@ private function getFuckedInYerTwatYaCunt():void {
 
 	outputText("\n\nYou think it over, but then laugh and turn her down; just how can you trust her not to follow you into the bath and stuff you so full you can't get out of it?");
 	//[Libido >=50:
-	if(player.lib >= 50 || player.minLust() >= 30) outputText("  Not that you didn't just titillate yourself thinking of it...");
+	if (player.lib >= 50 || player.minLust() >= 30) outputText("  Not that you didn't just titillate yourself thinking of it...");
 	outputText("  Your lover laughs, \"<i>Okay, you got me there... but, anyway, I have some chores to run for my mom, so I guess I'll see you later?</i>\"");
 
 	outputText("\n\nYou slide out from beneath the covers and start redressing yourself.  Once you're done, Loppe steals a quick peck on the lips before you head out.");
@@ -1369,7 +1369,7 @@ private function getButtFuckedNonHoarseByLoppe():void {
 	outputText("\n\nLoppe moves back towards the bed and gently places the vial beside you.  \"<i>Since you're so eager for this, you may do the honors.</i>\"  She crosses her arms and stands beside the bed, waiting for you to get started; her cock looks painfully erect and throbs visibly.");
 
 	//(PC has Anal Wetness)
-	if(player.ass.analWetness > 0) {
+	if (player.ass.analWetness > 0) {
 		outputText("\n\nYou smirk and fold your arms - you don't need it; your ass makes its own lube.  Loppe's eyes widen in surprise.  \"<i>What? Are you serious?</i>\"  A coy look and an elevated rear invite her to see for herself, but for emphasis, you suck with exaggerated innocence on the tip of a finger.  Already, you can feel your arousal stimulating you, resulting in beads of moisture welling up within your sex-ready hole.  Loppe reaches in and thrusts her index finger into your butt, gasping in surprise.  \"<i>Wow... you really are full of surprises, aren't you, sugar?</i>\"");
 		outputText("\n\nYou simply moan and arch your back, so conditioned to anal sex that even this blunt insertion is arousing and wonderfully stimulating rather than painful, as it would have been to a neophyte. To encourage her to get started, you press back against her hand, grinding your ass against the palm.");
 		outputText("\n\nLoppe smirks.  \"<i>Have some patience, sugar.  Even if I can get myself pretty slick, it doesn't hurt to have a little something extra to help me ease myself in, y'know?  Plus I want to feel those wonderful hands of yours, so get to work!</i>\"  Loppe presents you her erect horse-prick.");
@@ -1390,7 +1390,7 @@ private function getButtFuckedNonHoarseByLoppe():void {
 	outputText("\n\nLoppe pants and smiles at you.  \"<i>Now you've done it... you got me really going now, so get ready.  I'll give you a ride you won't forget anytime soon!</i>\" your lover hurriedly snatches the vial of lube and puts it away, then literally pounces on your elevated butt and aligns the tip with your moist rosebud.");
 
 	//(if Anal Looseness == 0)
-	if(player.ass.analLooseness == 0) {
+	if (player.ass.analLooseness == 0) {
 		outputText("\n\nLoppe presses her flared head against your tight little hole, but it won't go in, despite all the lube.  \"<i>Wow, sugar.  You're really tight here... how many times have you done this before?</i>\"");
 		outputText("\n\nYou admit this is your first time.  Loppe's eyes open wide in surprise.  \"<i>Really?  So I get to be the first to spread this gorgeous butt of yours?  Are you sure... ?</i>\"");
 		outputText("\n\nYou shake your head and your ass emphatically.  This far in, there's nothing to second-guess.  \"<i>Wow... I'm honored, sugar!</i>\" Loppe gushes.  \"<i>I'll make sure to be as gentle as possible.  Try to relax; it'll make this easier.</i>\"");
@@ -1401,7 +1401,7 @@ private function getButtFuckedNonHoarseByLoppe():void {
 		outputText("\n\nOnce inside, Loppe slowly slides forward, aided by the lube you've poured on her shaft earlier, until she's as far in as she's going to get.");
 	}
 	//(else if Anal Looseness < 3)
-	else if(player.ass.analLooseness < 3) {
+	else if (player.ass.analLooseness < 3) {
 		outputText("\n\nLoppe presses her flared head against your [butt]; it takes a little work, but she manages to pop her tip inside your waiting hole.  You shiver and let out a purr of pleasure at being filled so...");
 
 		outputText("\n\n\"<i>I see that you're no stranger to anal, sugar.  But damn, you're still tight!</i>\" Loppe sighs, shuddering as your sphincter contracts around her shaft.");
@@ -1421,31 +1421,31 @@ private function getButtFuckedNonHoarseByLoppe():void {
 	outputText("\n\nShivering around the horse-cock spearing your tingling ass, you grind back against your hermaphrodite lover in physical encouragement, impatient with desire.  Loppe giggles, amused by your reactions.");
 
 	outputText("\n\nYou moan as Loppe quickly pulls out, leaving you with a feeling of uncomfortable emptiness; but soon she thrusts herself back inside, filling you up once more.  She initially sets upon a slow, long rhythm but quickly speeds up as your moans and gasps of pleasure encourage her to go further.  \"<i>How is it, sugar?  It feels pretty good back here,</i>\"  Loppe pants, humping you.  You simply nod, groaning softly at the sensations filling you");
-	if(player.hasCock()) {
+	if (player.hasCock()) {
 		outputText(", cock");
-		if(player.cockTotal() > 1) outputText("s");
+		if (player.cockTotal() > 1) outputText("s");
 		outputText(" dripping pre");
-		if(player.hasVagina()) outputText(" and");
+		if (player.hasVagina()) outputText(" and");
 	}
-	else if(player.hasVagina()) outputText(", ");
-	if(player.hasVagina()) outputText(" pussy oozing femlube");
+	else if (player.hasVagina()) outputText(", ");
+	if (player.hasVagina()) outputText(" pussy oozing femlube");
 	outputText("... you beg her to go faster, to do it harder!");
 
 	outputText("\n\nLoppe happily complies, thrusting herself deeper and stronger.  ");
 	//[(cock)
-	if(player.hasCock()) outputText("One of her hands reaches around to grasp your pre-slickned [cock biggest], stroking you in time with her thrusts.  ");
-	if(player.gender == 2) outputText("One of her hands reaches around to tease your dripping [vagina] and erect [clit], dipping a finger in every time she bottoms out.  ");
+	if (player.hasCock()) outputText("One of her hands reaches around to grasp your pre-slickned [cock biggest], stroking you in time with her thrusts.  ");
+	if (player.gender == 2) outputText("One of her hands reaches around to tease your dripping [vagina] and erect [clit], dipping a finger in every time she bottoms out.  ");
 	outputText("Wet slapping noises fill the room, and you gasp in pleasure each time her cum-churning balls slap against ");
-	if(player.balls > 0) outputText("yours");
+	if (player.balls > 0) outputText("yours");
 	else outputText("your [butt]");
 	outputText(".  Loppe lays down on top of you, panting hotly on your neck, moaning in pleasure each time your sphincter contracts.");
 
 	outputText("\n\nWith a groan, she jams herself as far in as she can, grasping your [hips] tightly.  You can feel her balls churning against your butt, her throbbing dick seemingly growing fatter as cum travels up her urethra; finally, with a moan, she explodes inside you, filling you up with hot laquine cream.  You gasp and shudder as shot after shot of herm-spunk rushes in; you'd almost swear you can hear it slurping and splashing as it cascades into your belly, and you're positive you can feel your stomach start to distend from the glutinous mass of semen building up inside of you.  You struggle to hold back your own orgasm but finally lose the battle, crying out as it rocks through you.");
-	if(player.hasVagina()) {
+	if (player.hasVagina()) {
 		outputText("  A gush of sexual fluids from your crotch ");
-		if(player.wetness() < 3) outputText("spatters");
-		else if(player.wetness() < 4) outputText("splashes");
-		else if(player.wetness() < 5) outputText("drenches");
+		if (player.wetness() < 3) outputText("spatters");
+		else if (player.wetness() < 4) outputText("splashes");
+		else if (player.wetness() < 5) outputText("drenches");
 		else outputText("completely soaks");
 		outputText(" the bed-linen under you.");
 	}
@@ -1468,7 +1468,7 @@ private function getButtFuckedNonHoarseByLoppe():void {
 
 	outputText("\n\n\"<i>Now you're just being silly; I'm not that virile... nobody's that virile.</i>\"  The laquine pouts, clearly upset.  ");
 	//[(has had 1+ satyr babies)
-	if(flags[kFLAGS.SATYR_KIDS] > 0) outputText("You laugh softly; hopefully she'll never have to meet the creature that dispelled that same doubt in you.  ");
+	if (flags[kFLAGS.SATYR_KIDS] > 0) outputText("You laugh softly; hopefully she'll never have to meet the creature that dispelled that same doubt in you.  ");
 	outputText("\"<i>I think this is time for sleeping, not joking.</i>\"  With a trace of wounded dignity, she lays herself down and curls into your back, one arm wrapped around your gurgling belly.");
 
 	outputText("\n\nEven if you wanted to get out now, you doubt you could with her arm and the dead weight of her deposit.  Sighing, you relax next to the petulant half-breed and let sleep claim you...");
@@ -1482,15 +1482,15 @@ private function getButtFuckedNonHoarseByLoppe():void {
 	outputText("\n\nYou think it over, then shake your head.  No, you feel too queasy still to really eat anything for a while yet.");
 
 	//(First Time)
-	if(flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
+	if (flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
 		outputText("Loppe laughs nervously.  \"<i>Sorry about that.  It's just that I usually can't bag a real cutie like you, and I think I might have gone a bit overboard... is there anyway I can make it up to you?</i>\"");
 
 		outputText("\n\nYou'll tell her if you think of something... though watching her sweat over your meaning is almost recompense enough already.");
 		outputText("\n\n\"<i>H-hey, I know for a fact that you enjoyed it too, so try not to think of anything too abusive... unless you want another round?</i>\"");
 		//(Low Libido)
-		if(player.lib < 33) outputText("\n\nYou give her a flat stare, letting your expression speak for you.");
+		if (player.lib < 33) outputText("\n\nYou give her a flat stare, letting your expression speak for you.");
 		//(Medium Libido)
-		else if(player.lib < 66) outputText("\n\nYou tell her that maybe you'll take her up on that... some other time.");
+		else if (player.lib < 66) outputText("\n\nYou tell her that maybe you'll take her up on that... some other time.");
 		//(High Libido)
 		else outputText("\n\nIt's tempting, but no.");
 		outputText("\n\nLoppe averts her eyes, rubbing the back of her neck with a sorrowful attitude.  \"<i>Well... I guess I don't have anything clever to say.  I'll understand if you don't come back, but... I really, really did enjoy our time together.</i>\"");
@@ -1532,14 +1532,14 @@ private function getAssFuckedByLoppeAsACentaur():void {
 
 	outputText("\n\n\"<i>Mmm... maybe it's the horse in me, but this sounds like a wonderful idea.  If you're willing to let me loose back there, I'm going to enjoy this...</i>\"  Loppe croons, already advancing towards you, hands reaching out to grab at your flank.  You're more than prepared for her...");
 	//[ass wet)
-	if(player.ass.analWetness > 0) outputText("  She doesn't even have to bother with lube; your ass is wet enough to accommodate her on its own.");
+	if (player.ass.analWetness > 0) outputText("  She doesn't even have to bother with lube; your ass is wet enough to accommodate her on its own.");
 
 	outputText("\n\n\"<i>You might be even more eager than me - just give me a moment to set myself up,</i>\"  Loppe insists, giving your [ass] an appreciative slap.  From behind you, you can hear her bustling around, muttering, \"<i>Where did I put my lube?</i>\"  A triumphant exclamation follows, and you hear the wet, sloppy sound of fluid being enthusiastically applied to a sizable cock as the laquine eagerly strokes herself off.  You can already imagine that thick shaft of hers piercing your interior, satiating your hungry bottom with the heavy load contained in those balls.");
 
 	outputText("\n\nSo caught up are you in your fantasy that you don't realize Loppe has finished lubing herself up and is behind you until you feel hands caressing your flanks.  \"<i>Alright, sugar, let's just see what we're getting into...</i>\"  One hand continues to rub your ass, while the other begins pressing something against your black rosebud...");
 
 	//(if Anal Looseness == 0)
-	if(player.ass.analLooseness == 0) {
+	if (player.ass.analLooseness == 0) {
 		outputText("\n\nIt won't go in, despite all the lube.  \"<i>Wow, sugar.  You're really tight here... how many times have you done this before?</i>\"");
 
 		outputText("\n\nYou admit this is your first time.  Loppe's eyes open wide in surprise.  \"<i>Really?  So I get to be the first to spread this gorgeous butt of yours?  Are you sure... ?</i>\"");
@@ -1553,7 +1553,7 @@ private function getAssFuckedByLoppeAsACentaur():void {
 		outputText("\n\nOnce inside, Loppe slowly slides forward, aided by the lube you've poured on her shaft earlier, until she's as far in as she's going to get.");
 	}
 	//(else if Anal Looseness < 3)
-	else if(player.ass.analLooseness < 3) {
+	else if (player.ass.analLooseness < 3) {
 		outputText("\n\nLoppe presses her flared head against your [butt]; it takes a little work, but she manages to pop her tip inside your waiting hole.  You shiver and let out a purr of pleasure at being filled so...");
 		outputText("\n\n\"<i>I see that you're no stranger to anal, sugar.  But damn, you're still tight!</i>\" Loppe sighs, shuddering as your sphincter contracts around her shaft.");
 
@@ -1567,48 +1567,48 @@ private function getAssFuckedByLoppeAsACentaur():void {
 		outputText("\n\nWell, in that case, surely Loppe knows what to do.  You push back against her, sliding several more inches into yourself, and Loppe giggles.  \"<i>Of course I do, sugar.</i>\"  She bucks her hips into you, quickly hilting herself within your gaping, accommodating ass.  You gasp in pleasure and surprise as you suddenly find yourself filled with Loppe's equine-prick, moaning audibly as Loppe settles inside you, and turn to smile at her, eager to see what she can do once she really gets going.");
 	}
 	outputText("\n\nA hand grips either of your hips; the half-breed grinds her crotch against your ass before she pulls herself out and then thrusts back in.  It's a little awkward, but soon she starts to pick up her rhythm, her flared head scraping against your inner walls, her balls slapping meatily against you");
-	if(player.balls > 0) outputText("rs");
-	else if(player.hasVagina()) outputText("r pussy");
+	if (player.balls > 0) outputText("rs");
+	else if (player.hasVagina()) outputText("r pussy");
 	outputText(".");
 
 	outputText("\n\nYou moan as she gets into her task");
-	if(player.hasCock()) outputText(", feeling your erect [cock] press against your underbelly, mashed between your centaur half and the soft carpet of Loppe's room.  You hope she doesn't mind a few stains...  ");
+	if (player.hasCock()) outputText(", feeling your erect [cock] press against your underbelly, mashed between your centaur half and the soft carpet of Loppe's room.  You hope she doesn't mind a few stains...  ");
 	//(else vag)
-	else if(player.hasVagina()) outputText("; your cunt is sopping, making a small pool of juices one the floor.  ");
+	else if (player.hasVagina()) outputText("; your cunt is sopping, making a small pool of juices one the floor.  ");
 	else outputText(".  ");
 	outputText("She seems more worked up than usual, perhaps because you have a horse-like lower body?  \"<i>Are your instincts acting up?</i>\" you tease her.  \"<i>Or do you just love ass that much?</i>\"");
 
 	outputText("\n\n\"<i>A little from column A... and a whole lot from column B,</i>\" Loppe grunts, without breaking her frantic pace.  \"<i>Instinct's part of it - I'm stallion enough that when I see a nice flank, I wanna fuck it.  But it's the fact that this is you and your incredible ass that's... that's driving me wild!</i>\"  She shudders, spasming so hard you can feel her cock twitching inside of you, eyes rolling in her head as she frantically pistons back and forth, too worked up to care that this is the wrong hole entirely - she's a stallion on a mission, and that mission is to breed you like a proper broodmare.");
-	if(player.gender <= 1) outputText("  Even if you are the wrong sex entirely for that.");
+	if (player.gender <= 1) outputText("  Even if you are the wrong sex entirely for that.");
 
 	outputText("\n\nHer enthusiasm is contagious, and you find yourself bucking against her with almost as much eagerness as she's using to fuck your [asshole].  The pleasure is exquisite; that flared tip of hers plugs your hole in a most wonderful way... it's almost like every thrust fills up a part of you that was missing, while every pull creates a vacuum that threatens to suck that big horse-dick right where it belongs.  ");
 	//[PC has cock:
-	if(player.hasCock()) outputText("  The bumps against your prostate send waves of pleasure running through [eachCock] and spreading along your body, until they reach your throat and come out as a ragged groan.  ");
+	if (player.hasCock()) outputText("  The bumps against your prostate send waves of pleasure running through [eachCock] and spreading along your body, until they reach your throat and come out as a ragged groan.  ");
 	outputText("If she keeps this up for too much longer, you will pop any moment now...");
 
 	outputText("\n\n\"<i>Ohhh!  G-gonna cum... [name], your ass is incredible!</i>\"  Loppe moans, humping your butt like a herm possessed, delirious with her eagerness to climax.  Precum shoots in spurts easily equal to the orgasms of normal men and dickgirls; when she blows, it's going to be a big one...");
 
 	outputText("\n\nYou clench your ass and groan, shuddering as you try to stop Loppe's movements with your gripping sphincter.  The ferocious climax brought by your anal stimulation sends waves of pleasure coursing along your body, rattling your teeth and making you see stars.");
-	if(player.hasCock()) outputText("  [EachCock] spasms and unloads beneath you, smearing you and the carpet below and pooling thickly with fluid forced out by the prostate stimulation.");
-	if(player.hasVagina()) outputText("  Your vagina contracts, trying to grip at a phantom member as you spill your fluids on the carpet beneath you.");
+	if (player.hasCock()) outputText("  [EachCock] spasms and unloads beneath you, smearing you and the carpet below and pooling thickly with fluid forced out by the prostate stimulation.");
+	if (player.hasVagina()) outputText("  Your vagina contracts, trying to grip at a phantom member as you spill your fluids on the carpet beneath you.");
 
 	outputText("\n\nThe scent of your orgasm and the feeling of your sphincter clenching around her cock as tightly as it can is too much for Loppe, who roughly slams into you one last time and whinnies with glee as she floods your ass with cum.  She continues to thrust and rut and buck as she fills you with splurt after gush of hot, thick herm spunk.  The liquid warmth of Loppe's orgasm only enhances your afterglow, and slowly you feel yourself filled until you");
-	if(player.skinType != SKIN_TYPE_SCALES) outputText(" have goosebumps all over your body");
+	if (player.skinType != SKIN_TYPE_SCALES) outputText(" have goosebumps all over your body");
 	else outputText("r scales are practically standing on end");
 	outputText(".");
 
 	outputText("\n\n\"<i>Ohhh... you are incredible, [name].  ");
 	//[PC has dick that fits)
-	if(player.cockThatFits(loppeCapacity()) >= 0) outputText("Though I hope you won't mind riding me, sometime,</i>\" she laughs.  \"<i>");
+	if (player.cockThatFits(loppeCapacity()) >= 0) outputText("Though I hope you won't mind riding me, sometime,</i>\" she laughs.  \"<i>");
 	outputText("How about another round, hmm?  Big strong 'taur like you should certainly be able to hold a little more loving inside of you, right?</i>\"  She croons happily, running her hands up and down your ass as if trying to entice you.");
 
 	//(Low Libido)
-	if(player.lib < 33) {
+	if (player.lib < 33) {
 		outputText("\n\nCentaur or not, you do have your limits...");
 		outputText("\n\n\"<i>Oh, I'll be gentle with you,</i>\"  Loppe murmurs... though the way she's looking at you and already starting to hump your ass again, having never pulled out, makes her reassurance less than reassuring.");
 	}
 	//(Medium Libido)
-	else if(player.lib < 66) {
+	else if (player.lib < 66) {
 		outputText("\n\nYou stop and consider her words... you still do have some fight left in you.");
 		outputText("\n\n\"<i>You want to see what kind of bronco buster I am?  Alright, let's get ready to do some real riding!</i>\" Loppe cheers, already beginning to thrust back and forth.");
 	}
@@ -1644,7 +1644,7 @@ private function getAssFuckedByLoppeAsACentaur():void {
 	outputText("\n\nYou exit the bathroom, much lighter than you were previously.");
 
 	//(First Time)
-	if(flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
+	if (flags[kFLAGS.LOPPE_TIMES_SEXED] == 0) {
 		outputText("\n\n\"<i>I'm sorry I stuffed you that full,</i>\" Loppe apologizes, having the decency to look sheepish.  \"<i>I just get so horny, and my balls fill up so fast, that I just can't help it.  If it makes you feel any better, I wind up just as bloated when I'm the one getting the dick; I can't stop milking a cock until they've stuffed me as full as I can get.</i>\"");
 
 		outputText("\n\nWell... Loppe did warn you about her libido.");
@@ -1673,7 +1673,7 @@ private function loppeSqueezedickWhateverThatIs():void {
 	clearOutput();
 	outputText(images.showImage("loppe-orgazm-denial"));
 	//(if LoppeDenial == 0)
-	if(flags[kFLAGS.LOPPE_DENIAL_COUNTER] == 0) {
+	if (flags[kFLAGS.LOPPE_DENIAL_COUNTER] == 0) {
 		outputText("After seeing Loppe's prodigious output, you wonder how she would handle not being able to orgasm.");
 
 		outputText("\n\n\"<i>Different?  What do you have in mind?</i>\"  She asks curiously.");
@@ -1687,7 +1687,7 @@ private function loppeSqueezedickWhateverThatIs():void {
 		outputText("\n\n\"<i>Hmm... I like the long, hard orgasm part,  and I haven't ever tried something like this - let's do it!</i>\"");
 	}
 	//(else if LoppeDenial == 1)
-	else if(flags[kFLAGS.LOPPE_DENIAL_COUNTER] == 1) {
+	else if (flags[kFLAGS.LOPPE_DENIAL_COUNTER] == 1) {
 		outputText("\n\nWith a wry smile, you hold out a hand in response to her question, curling it into a half-clenched fist.  Loppe follows curiously, then starts when you squeeze it shut.");
 		outputText("\n\n\"<i>It was kind of painful last time, but... I won't deny that it felt good.</i>\"  She smiles, then nods.  \"<i>Let's do it.</i>\"");
 	}
@@ -1700,7 +1700,7 @@ private function loppeSqueezedickWhateverThatIs():void {
 		return;
 	}
 	outputText("\n\nYou sit yourself down comfortably ");
-	if(!player.isTaur()) outputText("on");
+	if (!player.isTaur()) outputText("on");
 	else outputText("beside");
 	outputText(" the bed and pat the sheets with one hand; Loppe seats herself obediently next to you.  She doesn't bother hiding her excitement, letting her equine endowment bob as she settles herself; she sits beside you as instructed and rests her hands on her lap.  \"<i>Ok, I'm very ready for whatever you got planned,</i>\" Loppe giggles as her cock throbs; a small dollop of precum slowly pools inside her flare.");
 
@@ -1741,7 +1741,7 @@ private function loppeSqueezedickWhateverThatIs():void {
 	outputText("\n\nLoppe gasps raggedly, trying to recapture her breath.  \"<i>Please... you have to let me go.  It hurts!  I-I need to cum!  If you keep holding me I'm going to explode... ah!  No!  Here it comes again!</i>\"  She warns as you feel her rock hard shaft throb once more; yet another toe curling orgasm approaches, and you're not sure how much more she can physically take.");
 
 	//(Low corruption, no new pg)
-	if(player.cor < 50) {
+	if (player.cor < 50) {
 		outputText("  You loosen your grip; this was supposed to be pleasurable, not painful, so it's definitely time to stop.");
 		//Goto [Let Go]
 		menu();
@@ -1768,7 +1768,7 @@ private function letsLoppeGoCum():void {
 	outputText("\n\nHaving caught her breath and recovered her senses, Loppe looks at you with a smile.  \"<i>No kidding.  I don't think I've ever come so hard before.  You really know how to get a girl worked up, don't you?  I still can't feel my toes.</i>\"  She tries to wiggle them experimentally, but if they're moving, you can't tell under the complete glazing she gave herself.  \"<i>Help me up, we should get cleaned up.</i>\"");
 
 	//[(low corr)
-	if(player.cor < 50) {
+	if (player.cor < 50) {
 		outputText("\n\nYou nod and give her a hand to rise to her feet.  Not the brightest idea, in retrospect; she's so numb from the waist down that she promptly collapses against you and it's only your swift action that keeps her from falling.  The creamy-white liquid is now smeared all over your front, and Loppe giggles and delivers a cum-caked kiss straight to your lips.  \"<i>As fun as that was, I think I'll want to wait some time before trying that again.</i>\"");
 		outputText("\n\nThe two of you manage to clean up the worst of the mess you've made, and you move to leave.  Loppe draws you into another, much cleaner, kiss before letting you go.  \"<i>See you later, sugar!</i>\"");
 	}
@@ -1808,15 +1808,15 @@ private function superLoppeOrgasmDenialGo():void {
 	outputText("\n\nYou sigh reluctantly; she's a real spoilsport.  \"<i>And that's exactly why you love me.  I keep you wanting more.  Now, onwards!</i>\"");
 
 	//[(med-high corr)
-	if(player.cor >= 66) outputText("\n\nYou leave her assertion unanswered and haul your childish date to the bath; soon, the two of you are clean enough that you can dry yourself off and pull your clothes on.");
+	if (player.cor >= 66) outputText("\n\nYou leave her assertion unanswered and haul your childish date to the bath; soon, the two of you are clean enough that you can dry yourself off and pull your clothes on.");
 
 	outputText("\n\n\"<i>Bye, sugar!");
-	if(player.hasCock()) outputText("  Maybe next time I'll be the one to give you a bit of a holdout!");
+	if (player.hasCock()) outputText("  Maybe next time I'll be the one to give you a bit of a holdout!");
 	outputText("</i>\"");
 	//leave, set LoppeDenial flag = 7
 	flags[kFLAGS.LOPPE_DENIAL_COUNTER] = 5;
 	//(very high corr)
-	if(player.cor >= 90) {
+	if (player.cor >= 90) {
 		outputText("\n\nYou laugh softly, staring at her with hooded eyes.  \"<i>I just squeezed your dick until your balls inflated so much that they hurt, then kept torturing you until you came so hard you screamed and fainted.  What makes you think I love you?</i>\"");
 
 		outputText("\n\nLoppe looks hurt and, for once, is at a loss for words.  To torment her further, you give her a smile just warm enough to make her think you might be joking, but not open enough to assuage her doubts.  You leave her like that, confused in a pool of her own wasted seed, as you step out of her room to take advantage of the clean bath first.");
@@ -1854,32 +1854,32 @@ private function boobjobLoppe():void {
 	outputText("\n\nEmboldened, you clasp your breasts firmer together and start to rise and fall, slowly scraping your " + player.skin() + " up and down the half-breed's prick.  It feels so hot and firm against your chest, growing increasingly damp as Loppe oozes gouts as voluminous as the cumshots of ordinary men, making your breasts and her prick alike equally slippery and enabling you to stroke her faster and faster. \"<i>K-keep that up and I'm gonna shoot anytime,</i>\" Loppe groans, trying to hump into your cleavage.");
 
 	//[(Normal/Naga tongue)
-	if(!player.hasLongTongue()) outputText("\n\nYou bend your head and lean down, letting your tongue flick out of your lips and slide gently across the flared head of Loppe's horse-prick, seductively tasting the sweet-salty flavor of her pre.  \"<i>Ah!  Hmm... I seriously hope you like the taste, because you're getting a faceful anytime now!</i>\"  Loppe moans.");
+	if (!player.hasLongTongue()) outputText("\n\nYou bend your head and lean down, letting your tongue flick out of your lips and slide gently across the flared head of Loppe's horse-prick, seductively tasting the sweet-salty flavor of her pre.  \"<i>Ah!  Hmm... I seriously hope you like the taste, because you're getting a faceful anytime now!</i>\"  Loppe moans.");
 	//Demon/Dragon:
 	else outputText("\n\nYour inhumanly long tongue slithers out of your mouth like a tentacle, swiping itself playfully across Loppe's flare to give you a taste of sweet and salty precum before you send it questing down, curling in a spiral pattern around her long shaft and burrowing into your cleavage to lap and squeeze and massage, filling your senses with the tang of her overheated cock.  \"<i>D-damn, sugar!  Such a wonderful tongue you have,</i>\" she groans, equine member throbbing against your hold.");
 
 	outputText("\n\n\"<i>C-cumming!</i>\" is all the warning you get before Loppe's slit opens wide and she begins spewing rope upon rope of hot jism.  You ");
-	if(player.hasLongTongue()) outputText("retract your tongue into your mouth and ");
+	if (player.hasLongTongue()) outputText("retract your tongue into your mouth and ");
 	outputText("barely shut your eyes in time, continuing to pump and squeeze with your tits even as your lover paints your upper body white in fresh spooge.  You can't see anything; all you know is the wet splashing of cum against your face, the intimate smell of hot, musky cock-cream assaulting your nose with the subtlety of a battering ram, Loppe's ecstatic moans and gasps and howls filling your ears.  Finally, the deluge stops; your hair is soaked in spunk, dripping wetly onto the floor, and you shake your head to try and fling off some of the worst of the gooey gunk, allowing you to look the panting girl in the eyes.");
 
 	outputText("\n\nShe looks back with the hungry stare of a predator eyeing a morsel.  \"<i>Boobies!</i>\" Loppe yells as she pounces you, trying to force you backward onto her bed.");
 
 	//[(non-horse and str < 40 or horse and str < 20)
-	if((player.str < 50 && !player.isTaur()) || (player.str < 30 && player.isTaur())) {
+	if ((player.str < 50 && !player.isTaur()) || (player.str < 30 && player.isTaur())) {
 		outputText("  Struggle as you may, you're powerless to stop the drooling laquine as she sends you crashing down on her bed.  The whole piece of furniture shakes ominously with the force of your impact, and for a moment you think it will break apart.");
 		outputText("\n\nLeft a bit dizzied after this sudden turn of events, you yelp in surprise when a rock-hard, hot, throbbing horse-cock is shoved between your [chest].  Loppe works over your boobs like a ravenous beast, not caring that she's spewing pre all over your face and even sometimes forcing you to taste her as she pushes her shaft up your mouth.  \"<i>So soft... so hot...</i>\" she moans as she continues to drool in lust.");
 
 		outputText("\n\nYou open your mouth, about to say something - and Loppe promptly shoves her cock-head inside.  With a gag and a splutter at the sudden intrusion, your hands dart to her shaft, but she only feeds it deeper inside of you - she stops, however, before she enters your throat, letting you taste the cum still dripping from her flare.");
 
 		outputText("\n\n\"<i>Tittyfuck AND oral!?  You're the best!  You're making me a very, very happy girl!</i>\"  Loppe exclaims, oblivious to any protests you might make as she begins rutting you even harder.  \"<i>I got a present coming for you riiiight now!  Ah!</i>\"  Groaning sharply, she fills your mouth with huge ropes of spunk, and you have no choice but to swallow...  Without any way to struggle, you do your best to lick at the part of her cock that's in your mouth, ");
-		if(player.tongueType > TONUGE_HUMAN) outputText("looping your inhuman tongue around it and stroking for extra stimulus even while ");
+		if (player.tongueType > TONGUE_HUMAN) outputText("looping your inhuman tongue around it and stroking for extra stimulus even while ");
 		outputText("grabbing your breasts and squeezing the horsemeat between them.  The sooner you help her get over this frenzy, the sooner she'll get off of you... hopefully.  \"<i>Ah, sugar!  I knew you liked it rough!</i>\" your suddenly forceful lover shouts, ominously.");
 		outputText("\n\n<b>Many orgasms later...</b>");
 
 		outputText("\n\n\"<i>Aaaah...</i>\"  Loppe sighs, shooting her last (you hope) orgasm down your throat.  Finally, after what seems like an eternity, she withdraws from your mouth and falls nervelessly to lie beside you.  \"<i>Hmm... you look so sexy when you're full, sugar,</i>\" she idly comments, rubbing your amazingly distended belly and making her many mouthfuls of cum swish and churn underneath the skin in response to her motions.");
 
 		outputText("\n\nAny pithy retorts you might have had are drowned out by a belch hard enough to make Loppe's ears flap about as if blown by a strong breeze, the laquine wrinkling her nose as she gets hit in the face by the fumes of your cum-soaked breath.  \"<i>Err... did I do that?</i>\" she asks, smiling nervously");
-		if(silly()) outputText(".  You can't help but think of Family Matters");
+		if (silly()) outputText(".  You can't help but think of Family Matters");
 		outputText(".  You simply nod and groan, hands cradling your distended gut.  Loppe snuggles up against you, rubbing your bloated midriff.  \"<i>Sorry about that... hmm, how about we just cuddle and rest?</i>\"");
 
 		outputText("\n\nWith one last belch for confirmation and possibly chastisement, you allow the herm bunny-hybrid to snuggle up against you, close your eyes, and try to doze off whilst ignoring the complaints of your over-stretched stomach.");
@@ -1915,7 +1915,7 @@ private function boobjobLoppe():void {
 		//Laughing, you blow her a kiss and make your way out of the house.
 		//end scene
 		outputText("\n\n");
-		if(player.cor >= 60) outputText("You don't really feel like it, but you figure you had better humor the greedy herm if you want to keep fucking her whenever you like.  ");
+		if (player.cor >= 60) outputText("You don't really feel like it, but you figure you had better humor the greedy herm if you want to keep fucking her whenever you like.  ");
 		outputText("Oh, well... you reach down and heft the surprised hybrid off of the floor and onto her spattered bed, then slide yourself into it as best you can, wrapping your arms around her.  She hugs you back, then yawning widely.  \"<i>Naptime...</i>\"");
 		outputText("\n\nGiven she seems unlikely to let you go, you decide you may as well enjoy a brief doze too.");
 	}
@@ -1923,7 +1923,7 @@ private function boobjobLoppe():void {
 	outputText("\n\nYou have the distinct feeling that someone is licking your [nipples]... and when you finally open your eyes, you're introduced to a pair of rabbit-like ears.  Loppe looks up, licking a stray dollop of cum from her nose.  \"<i>Hey, sleepyhead!  I was just finishing cleaning you up.</i>\"");
 	outputText("\n\nYour face must be showing thoughts, because she looks away defensively.  \"<i>It's not like I licked all of you clean...</i>\"  Loppe protests.  \"<i>Okay... I might have done most of you, but only because you're sweet and I don't mind tasting myself...</i>\"");
 	outputText("\n\n\"<i>Anyway, I set your [armor] over there.</i>\"  She points to a chair nearby.   You thank her and pick yourself out of bed ");
-	if((player.str < 50 && !player.isTaur()) || (player.str < 30 && player.isTaur())) outputText("- while your stomach is still heavily swollen and gurgles in protest, it's not bad enough to impair you - ");
+	if ((player.str < 50 && !player.isTaur()) || (player.str < 30 && player.isTaur())) outputText("- while your stomach is still heavily swollen and gurgles in protest, it's not bad enough to impair you - ");
 	outputText("before going over and dressing yourself.  Loppe waves goodbye to you as you head out once again.");
 
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
@@ -1960,7 +1960,7 @@ private function beATeaseAndLeaveLoppeAfterSexInvite():void {
 //Fondle&Tease (rewritten and edited)(C)
 //req LoppeChat > 1
 private function fondleAndTease(output:Boolean = true):void {
-	if(output) {
+	if (output) {
 		clearOutput();
 		outputText("You lean in over the table and tell Loppe you'd like to talk about her.  She looks vaguely confused.  \"<i>Well, I already told you about everything I can think of.  Was there something you wanted to explore in more detail?</i>\"");
 
@@ -2079,7 +2079,7 @@ private function teaseLoppeNSuck():void {
 	outputText("\n\nLoppe's legs grab you under your arms, pulling you closer to her tool.  \"<i>Please, sugar.  Stop teasing me and help me.  You have no idea how badly I want to put my dick between those wonderful lips of yours!</i>\"");
 
 	outputText("\n\nWith a smile to yourself, you oblige");
-	if(player.tongueType > TONUGE_HUMAN) outputText(", inhumanly long tongue looping out to coil wetly around the length");
+	if (player.tongueType > TONGUE_HUMAN) outputText(", inhumanly long tongue looping out to coil wetly around the length");
 	outputText(".  You suckle gently, letting the salty tang of hot spunk wash over your tastebuds, and then start to gulp and swallow your way down her prick's sizable length.");
 
 	outputText("\n\n\"<i>Ah!  Oh, yes!  That hits the spot!</i>\" Loppe cries in relief.");

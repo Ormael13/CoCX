@@ -107,8 +107,8 @@ package classes
 			outputText("It's really no surprise that you were sent through the portal to deal with the demons - you look enough like one as-is.  Your numerous fetish-inducing piercings, magical fox-tails, and bimbo-licious personality were all the motivation the elders needed to keep you from corrupting the village youth.");
 			//2/26/2013 8:18:21	rdolave@gmail.com	Character Creation	"female DD breasts feminity 100 butt size 5 hip size 5 body thickness 10 clit I would like her nipples pierced with Ceraphs piercing
 			//(on a side note how much do you think it would cost to add bell nipple,labia and clit piercings as well as an option for belly button piercings would like to see belly button piecings with a few different options as well.  Also would love to have handcuff ear piercings.)"	Would like the bimbo brain and bimbo body perks as well as the nine tail PerkLib.  demonic high heels, pink skin, obscenely long pink hair  would like her to be a kitsune with the nine tails.  pink fur.  starting equipment would like to be the succubus whip and nurse's outfit.  Also would like the xmas perk and all three Vday perks	Aria
-			if(!player.hasVagina()) player.createVagina();
-			if(player.femininity < 80) player.femininity = 80;
+			if (!player.hasVagina()) player.createVagina();
+			if (player.femininity < 80) player.femininity = 80;
 			player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0);
 			player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 			player.tailType = TAIL_TYPE_FOX;
@@ -154,15 +154,15 @@ package classes
 			player.earType = EARS_FOX;
 			player.tailType = TAIL_TYPE_FOX;
 			player.tailVenom = 1;
-			if(player.biggestTitSize() > 1) player.breastRows[0].breastRating = 1;
-			if(!player.hasCock()) {
+			if (player.biggestTitSize() > 1) player.breastRows[0].breastRating = 1;
+			if (!player.hasCock()) {
 				player.createCock();
 				player.cocks[0].cockType = CockTypesEnum.DOG;
 				player.cocks[0].cockLength = 8;
 				player.cocks[0].cockThickness = 1;
 				player.cocks[0].knotMultiplier = 1.4;
 			}
-			if(!player.hasVagina()) {
+			if (!player.hasVagina()) {
 				player.createVagina();
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 				player.clitLength = 0.25;
@@ -215,12 +215,12 @@ package classes
 			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Tank, 0, 0, 0, 0);
-			player.createStatusAffect(StatusAffects.KnowsArouse,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsHeal,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsMight,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 			//magic, 50 Int, 50 tough, Speed 15, Str 10, 30 corruption, 30 libido, 10 sensitivity.
 			player.inte = 50;
 			player.tou = 50;
@@ -235,8 +235,8 @@ package classes
 		private function customCharaun():void {
 			outputText("As a gifted fox with a juicy, thick knot, a wet cunt, and magical powers, you have no problems with being chosen as champion.");
 			//Herm, Fox Cock: (27"l x 1.4"w, knot multiplier 3.6), No Balls, Cum Multiplier: 7,500, Vaginal Wetness: 5, Clit length: 0.5, Virgin, Fertility: 15	9-tailed "enlightened" kitsune( a pure-blooded kitsune with the "Enlightened Nine-tails" perk and magic specials) 
-			if(!player.hasCock()) player.createCock();
-			if(!player.hasVagina()) player.createVagina();
+			if (!player.hasCock()) player.createCock();
+			if (!player.hasVagina()) player.createVagina();
 			player.gender = 3;
 			player.cocks[0].cockLength = 27;
 			player.cocks[0].cockThickness = 1.4;
@@ -273,7 +273,7 @@ package classes
 			player.breastRows[2].fuckable = true;
 			player.breastRows[3].breastRating = 1;
 			player.breastRows[3].fuckable = true;
-			player.tongueType = TONUGE_DEMONIC;
+			player.tongueType = TONGUE_DEMONIC;
 			player.nippleLength = 0.1;
 			//Starting with an Inscribed Spellblade and Bondage Straps.	Charaun
 			player.setArmor(armors.BONSTRP);
@@ -328,7 +328,7 @@ package classes
 			//Bow
 			player.createKeyItem("Bow",0,0,0,0);
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-			player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
+			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
 			//Is it possible to get extra starting perks added? If so, I'd like History: Religious added to whatever is selected on creation. If not, please ignore this line.
 			//Freckled skinAdj
 			player.skinAdj = "freckled";
@@ -378,9 +378,9 @@ package classes
 		private function customGalatea():void {
 			//"(Dangit Fenoxo!  Stop adding sexy must-have things to the game!  If it's not too late to update it I've added in that sexy new armor.  Thanks!)		
 			//Other:
-			if(!player.hasVagina()) {
+			if (!player.hasVagina()) {
 				player.createVagina();
-				if(player.clitLength == 0) player.clitLength = 0.25;
+				if (player.clitLength == 0) player.clitLength = 0.25;
 			}
 			kGAMECLASS.genderCheck();
 			//Hair length: Very long
@@ -393,7 +393,7 @@ package classes
 			player.tallness = 64;
 	
 			//Perks: Feeder, Strong Back, Strong Back 2
-			player.createStatusAffect(StatusAffects.Feeder,0,0,0,0);
+			player.createStatusEffect(StatusEffects.Feeder,0,0,0,0);
 			player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
 	
 			player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0);
@@ -431,11 +431,11 @@ package classes
 		private function customHikari():void {
 			//Character Creation	If possible I would like a herm with a cat cock that is 10 inches by 4 inches. Anything else is up to you.	I would like a herm catmorph with two large d breasts and shoulder length hair. Also if possible I would like to start with some gel armor. Everything else is fair game.	Hikari
 			outputText("As a herm with a super-thick cat-cock, D-cup breasts, and out-of-this-world armor, you're a natural pick for champion.");
-			if(!player.hasCock()) player.createCock();
+			if (!player.hasCock()) player.createCock();
 			player.cocks[0].cockType = CockTypesEnum.CAT;
 			player.cocks[0].cockLength = 10;
 			player.cocks[0].cockThickness = 4;
-			if(!player.hasVagina()) player.createVagina();
+			if (!player.hasVagina()) player.createVagina();
 			player.breastRows[0].breastRating = 4;
 			player.hairLength = 10;
 			player.setArmor(armors.GELARMR);
@@ -491,7 +491,7 @@ package classes
 			//- olive complexion
 			player.skinTone = "olive";
 			//- demon tongue (oral fetish ;d)
-			player.tongueType = TONUGE_DEMONIC;
+			player.tongueType = TONGUE_DEMONIC;
 			//- 5 foot 9 inch tall
 			player.tallness = 69;
 			//- average build
@@ -517,7 +517,7 @@ package classes
 		private function customKatti():void {
 			outputText("You have big breasts with big, fuckable nipples on them, and no matter what, your vagina always seems to be there to keep you company.");
 			//Gender: Female	
-			if(!player.hasVagina()) {
+			if (!player.hasVagina()) {
 				player.createVagina();
 				kGAMECLASS.genderCheck();
 			}
@@ -534,7 +534,7 @@ package classes
 		
 		private function customLeah():void {
 			player.setArmor(armors.LEATHRA);
-	//		if(player.findPerk(PerkLib.WizardsEndurance) < 0) player.createPerk(PerkLib.WizardsEndurance,30,0,0,0);
+	//		if (player.findPerk(PerkLib.WizardsEndurance) < 0) player.createPerk(PerkLib.WizardsEndurance,30,0,0,0);
 			player.setWeapon(weapons.W_STAFF);
 			player.itemSlot1.setItemAndQty(consumables.B__BOOK, 1);
 			player.itemSlot2.setItemAndQty(consumables.W__BOOK, 2);
@@ -560,7 +560,7 @@ package classes
 			player.skinType = SKIN_TYPE_PLAIN;
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_NONE;
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 			player.femininity = 85;
 			player.beardLength = 0;
 			player.beardStyle = 0;
@@ -592,11 +592,11 @@ package classes
 		private function customLucina():void {
 			//428347355782040	Character Creation	Female,wetness=wet, Looseness=normal,not a virgin, Fertility high i guess i dont really care can be up to you.	for her face normal human, ears i want Elvin, no tails, just normal skin, body thickness i want to be slender, body tone kinda athletic but not too much, hair i want really long i think like a 30 on the codex number i think and her hair color light blonde, i want her to have normal D size breast with you can choose how you want them really though i dont think i really care, nipple size i dont care, her skin color a fair light light color but not too pale, for her starting equipment i want im not sure what i want her to wear but basically i want a Elvin archer with a bow. so maybe you can do something about the clothing. i just want a Elvin character in the game since theres goblins plus another archer besides kelt a female one add to that.	Lucina
 			outputText("You're a blond, fair-skinned lass with a well-made bow and the skills to use it.  You have D-cup breasts and a very moist cunt that's seen a little action.  You're fit and trim, but not too thin, nor too well-muscled.  All in all, you're a good fit for championing your village's cause.");
-			if(!player.hasVagina()) player.createVagina();
+			if (!player.hasVagina()) player.createVagina();
 			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
 			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 			player.vaginas[0].virgin = false;
-			if(player.femininity < 80) player.femininity = 80;
+			if (player.femininity < 80) player.femininity = 80;
 			player.fertility = 40;
 			player.earType = EARS_ELFIN;
 			player.thickness = 25;
@@ -606,7 +606,7 @@ package classes
 			player.breastRows[0].breastRating = 4;
 			player.skinTone = "light";
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-			player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
+			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
 			player.createKeyItem("Bow",0,0,0,0);
 		}
 		
@@ -644,7 +644,7 @@ package classes
 			player.hairColor = "brown";
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_NONE;
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 			player.femininity = 50;
 			player.beardLength = 0;
 			player.beardStyle = 0;
@@ -670,7 +670,7 @@ package classes
 			player.hairColor = "blue";
 			player.skinDesc = "fur";
 			player.tone = 88;
-			player.tongueType = TONUGE_DRACONIC;
+			player.tongueType = TONGUE_DRACONIC;
 			//gel plate armor, warhammer, 88 body tone, 1 breast row, flat manly breasts, 0.2 inch nipples, 1 on each breast, draconic tongue, short hair-blue, light skin."	Lukaz
 			player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
@@ -761,7 +761,7 @@ package classes
 			player.teaseLevel = 4;
 			player.thickness = 10;
 			player.tone = 75;
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 			
 			//Posted everything above sorry if it wasn't supposed to go there.
 			//starting equipment: black leather armor surrounded by voluminous robes
@@ -863,7 +863,7 @@ package classes
 			//Muscle Tone- A bit above average enough to trigger a mention of it in the desc.
 			player.tone = 55;
 			//Nipples-  As above on size but the black sand trap nipples.
-			player.createStatusAffect(StatusAffects.BlackNipples,0,0,0,0);
+			player.createStatusEffect(StatusEffects.BlackNipples,0,0,0,0);
 			//Hair Length- Long
 			player.hairLength = 16;
 			//Hair Color- Black
@@ -936,7 +936,7 @@ package classes
 			player.breastRows[3].breastRating = 5;
 			player.breastRows[3].nipplesPerBreast = 4;
 			player.breastRows[3].fuckable = true;
-			if(!player.hasCock()) player.createCock();
+			if (!player.hasCock()) player.createCock();
 			player.createCock();
 			player.createCock();
 			player.createCock();
@@ -975,16 +975,16 @@ package classes
 			//Muscle: 75/100"
 			player.tone = 75;
 			//for wetness a squirter, looseness a 2 and capacity at 140.
-			if(!player.hasVagina()) player.createVagina();
+			if (!player.hasVagina()) player.createVagina();
 			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-			player.createStatusAffect(StatusAffects.BonusVCapacity,132,0,0,0);
+			player.createStatusEffect(StatusEffects.BonusVCapacity,132,0,0,0);
 			//Virgin, high fertility like in the email I sent before.  dragon wings, nine fox tails,  dragon legs, eight DD breasts with four fuckable nipples each, dragon tongue, waist length hair, large dragon wings.
 			player.wingType = WING_TYPE_DRACONIC_LARGE;
 			player.wingDesc = "large, draconic";
 			player.tailType = TAIL_TYPE_FOX;
 			player.tailVenom = 9;
 			player.lowerBody = LOWER_BODY_TYPE_DRAGON;
-			player.tongueType = TONUGE_DRACONIC;
+			player.tongueType = TONGUE_DRACONIC;
 			player.hairLength = 45;
 			player.createPerk(PerkLib.EnlightenedNinetails,0,0,0,0);
 			player.gender = 3;
@@ -1041,7 +1041,7 @@ package classes
 			player.skinType = SKIN_TYPE_PLAIN;
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_NONE;
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 			player.femininity = 85;
 			player.beardLength = 0;
 			player.beardStyle = 0;
@@ -1139,8 +1139,8 @@ package classes
 		private function customRope():void {
 			//529315025394020	Character Creation	Neuter (no genitals) "50-50 masculine-feminine ratio. Shark teeth."	Rope
 			outputText("Despite outward appearances, you're actually something of a neuter, with shark-like teeth, an androgynous face, and a complete lack of genitalia.");
-			if(player.hasCock()) player.removeCock(0,1);
-			if(player.hasVagina()) player.removeVagina();
+			if (player.hasCock()) player.removeCock(0,1);
+			if (player.hasVagina()) player.removeVagina();
 			player.gender = 0;
 			player.femininity = 50;
 			player.faceType = FACE_SHARK_TEETH;
@@ -1247,14 +1247,14 @@ package classes
 		
 		private function customSora():void {
 			//Character Creation	Female,virgin	A kitsune with a snake-like tongue	Sora
-			if(player.hasVagina()) player.vaginas[0].virgin = true;
-			player.tongueType = TONUGE_SNAKE;
+			if (player.hasVagina()) player.vaginas[0].virgin = true;
+			player.tongueType = TONGUE_SNAKE;
 			player.earType = EARS_FOX;
 			player.tailType = TAIL_TYPE_FOX;
 			player.tailVenom = 2;
 			player.inte = 30;
-			if(player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
-			else player.addStatusValue(StatusAffects.BonusVCapacity,1,5+rand(10));
+			if (player.findStatusEffect(StatusEffects.BonusVCapacity) < 0) player.createStatusEffect(StatusEffects.BonusVCapacity,0,0,0,0);
+			else player.addStatusValue(StatusEffects.BonusVCapacity,1,5+rand(10));
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
 		
@@ -1285,7 +1285,7 @@ package classes
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_FOX;
 			player.tailVenom = 4;
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 			player.femininity = 90;
 			player.beardLength = 0;
 			player.beardStyle = 0;
@@ -1316,7 +1316,7 @@ package classes
 			player.hairLength = 69.2;
 			player.hairType = 4;
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-			player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
+			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
 			player.createKeyItem("Bow", 0, 0, 0, 0);
 			
 			player.createKeyItem("Zetaz's Map", 0, 0, 0, 0);
@@ -1333,7 +1333,7 @@ package classes
 			player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 			player.createKeyItem("Equipment Storage - Jewelry Box",0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsWhitefire, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.KnowsWhitefire, 0, 0, 0, 0);
 			
 			player.createPerk(PerkLib.HistoryFighter, 		0, 0, 0, 0);
 			player.createPerk(PerkLib.Acclimation, 			0, 0, 0, 0);
@@ -1371,8 +1371,8 @@ package classes
 			player.itemSlot3.setItemAndQty(consumables.OVIELIX, 1);
 			player.itemSlot4.setItemAndQty(consumables.REPTLUM, 1);
 			
-			player.createStatusAffect(StatusAffects.TelAdre, 1, 0, 0, 0);
-			//player.createStatusAffect(StatusAffects.MetWhitney, 2, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.TelAdre, 1, 0, 0, 0);
+			//player.createStatusEffect(StatusEffects.MetWhitney, 2, 0, 0, 0);
 			
 			// Izma
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] = 1;
@@ -1449,7 +1449,7 @@ package classes
 			player.hairColor = "red";
 			//Face: Gorgeous Feminine, long demonic tongue, cat ears
 			player.femininity = 100;
-			player.tongueType = TONUGE_DEMONIC;
+			player.tongueType = TONGUE_DEMONIC;
 			player.earType = EARS_CAT;
 			//Body: Very muscular, average weight, plump ass, above average thighs, cat tail and cat paws
 			player.tone = 80;
@@ -1499,7 +1499,7 @@ package classes
 			player.skinType = SKIN_TYPE_PLAIN;
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_NONE;
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 			player.femininity = 70;
 			player.beardLength = 0;
 			player.beardStyle = 0;
@@ -1550,7 +1550,7 @@ package classes
 			player.setWeapon(weapons.B_SWORD);
 			player.setArmor(armors.SSARMOR);
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-			player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
+			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
 			player.createKeyItem("Bow",0,0,0,0);
 			inventory.createStorage();
 			inventory.createStorage();
@@ -1609,7 +1609,7 @@ package classes
 			player.vaginas[0].vaginalLooseness = 0;
 			player.vaginas[0].vaginalWetness = 2; // wet
 			player.vaginas[0].virgin = 0;			
-			player.createStatusAffect(StatusAffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
+			player.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
 			player.clitLength = 0.3;
 			player.fertility = 5;
 			
@@ -1623,7 +1623,7 @@ package classes
 
 			player.ass.analWetness = 2; // moist
 			player.ass.analLooseness = 1; // not virgin
-			player.createStatusAffect(StatusAffects.BonusACapacity, 100, 0, 0, 0);			
+			player.createStatusEffect(StatusEffects.BonusACapacity, 100, 0, 0, 0);			
 
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // as most kitsune you love tentackles
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // and while they aren't really fitting your body...
@@ -1649,7 +1649,7 @@ package classes
 			player.earType = EARS_FOX;
 			player.tailType = TAIL_TYPE_FOX; // soft fur feels so lovely... too bad having too much fox fur would make you dumber, and while you would enjoy feline body, channeling magic using nine tails is great benefit which is hard to give up
 			player.tailVenom = 9;			
-			player.tongueType = TONUGE_DRACONIC; // tongue as long as your whole body height! almost tentackle! and so much fun to use!
+			player.tongueType = TONGUE_DRACONIC; // tongue as long as your whole body height! almost tentackle! and so much fun to use!
 			player.hornType = HORNS_DRACONIC_X2; // draconic horns adds to your exotic look, counts towards dragon score and keeps your tentacle hair out of your face! and your partners can use them as handles on occasions, letting your delicate ears uncrumpled!
 			player.horns = 12;
 			player.wingType = WING_TYPE_DRACONIC_LARGE; // wings! to fly!
@@ -1667,7 +1667,7 @@ package classes
 			if (player.weapon == WeaponLib.FISTS) player.setWeapon(weapons.SUCWHIP); // have succubus whip, to get corruption quickly when desired
 			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry(jewelries.PURERNG);
 			if (debug) {
-				if (player.findStatusAffect(StatusAffects.Kelt) < 0) player.createStatusAffect(StatusAffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.			
+				if (player.findStatusEffect(StatusEffects.Kelt) < 0) player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.			
 				if (player.hasKeyItem("Bow") < 0 && player.hasKeyItem("Kelt's Bow") < 0) player.createKeyItem("Bow", 0, 0, 0, 0);			
 				flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4; // Raphael is too picky, and also pretty much unfinished - you can't continue training after chase scene.			
 				if (player.teaseLevel < 3) player.teaseLevel = 3; }			
@@ -1725,9 +1725,9 @@ package classes
 			player.earsPLong = "Crimstone earrings";
 			player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0); // with Omnibus' Gift it would give 50 min lust... perfect!
 			
-			player.createStatusAffect(StatusAffects.KnowsHeal, 0, 0, 0, 0); // to compliment history
+			player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0); // to compliment history
 			
-			if (debug) { player.createStatusAffect(StatusAffects.TelAdre, 1, 1, 0, 0); flags[kFLAGS.BAZAAR_ENTERED] = 1; } // small straightforward cheating			
+			if (debug) { player.createStatusEffect(StatusEffects.TelAdre, 1, 1, 0, 0); flags[kFLAGS.BAZAAR_ENTERED] = 1; } // small straightforward cheating			
 			
 			player.hoursSinceCum = 0;
 			player.fatigue = 0;
@@ -1754,7 +1754,7 @@ package classes
 			do{
 			player.createBreastRow();
 			var size:Number = 0;
-			if(row==0)
+			if (row==0)
 				player.breastRows[row].breastRating = rand(6);
 			else
 				player.breastRows[row].breastRating = player.breastRows[row-1].breastRating - rand(2); // lower rows are same size or one size smaller than upper
@@ -1772,33 +1772,33 @@ package classes
 				var type:Number = rand(90);			
 				if (tent)
 					player.cocks[i].cockType = CockTypesEnum.TENTACLE;
-				else if(type < 25) // high chance
+				else if (type < 25) // high chance
 					player.cocks[i].cockType = CockTypesEnum.HUMAN;
-				else if(type < 30)
+				else if (type < 30)
 					player.cocks[i].cockType = CockTypesEnum.HORSE;
-				else if(type < 40)
+				else if (type < 40)
 				{
 					player.cocks[i].cockType = CockTypesEnum.DOG; // double chance, since it is fox one as well
 					player.cocks[i].knotMultiplier = 1.4;
 				}
-				else if(type < 45)
+				else if (type < 45)
 					player.cocks[i].cockType = CockTypesEnum.DEMON;
-				else if(type < 50)
+				else if (type < 50)
 					player.cocks[i].cockType = CockTypesEnum.CAT;
-				else if(type < 60)
+				else if (type < 60)
 					player.cocks[i].cockType = CockTypesEnum.TENTACLE; // double chance, for no reason
-				else if(type < 65)
+				else if (type < 65)
 					player.cocks[i].cockType = CockTypesEnum.LIZARD;
-				else if(type < 70)
+				else if (type < 70)
 					player.cocks[i].cockType = CockTypesEnum.ANEMONE;
-				else if(type < 75)
+				else if (type < 75)
 					player.cocks[i].cockType = CockTypesEnum.KANGAROO;
-				else if(type < 80)
+				else if (type < 80)
 				{
 					player.cocks[i].cockType = CockTypesEnum.DRAGON;
 					player.cocks[i].knotMultiplier = 1.3;
 				}
-				else if(type < 85)
+				else if (type < 85)
 				{
 					player.cocks[i].cockType = CockTypesEnum.DISPLACER;
 					player.cocks[i].knotMultiplier = 1.5;
@@ -1813,10 +1813,10 @@ package classes
 			
 			// 40% to have no balls, 40% to one pair, 20% to 2 pairs
 			var balls:Number = rand(5);
-			if(balls <= 1){player.balls = 0;}
-			else if(balls <= 3){player.balls = 2;}
-			else if(balls == 4){player.balls = 4;}
-			if(player.balls>0)player.ballSize = rand(4)+1;
+			if (balls <= 1){player.balls = 0;}
+			else if (balls <= 3){player.balls = 2;}
+			else if (balls == 4){player.balls = 4;}
+			if (player.balls>0)player.ballSize = rand(4)+1;
 			player.cumMultiplier = 5+player.ballSize*player.balls*2.5+rand(25);
 			
 			player.ass.analLooseness = rand(3);
@@ -1847,13 +1847,13 @@ package classes
 			player.cor += 2;
 
 			var skin:Number = rand(100);			
-			if(skin < 50){
+			if (skin < 50){
 				player.skinType = SKIN_TYPE_PLAIN; // skin, 50%
 				player.skinDesc = "skin";}
-			else if(skin < 80){
+			else if (skin < 80){
 				player.skinType = SKIN_TYPE_FUR; // fur, 30%
 				player.skinDesc = "fur";}
-			else if(skin < 95){
+			else if (skin < 95){
 				player.skinType = SKIN_TYPE_SCALES; // scales, 15%
 				player.skinDesc = "scales";}
 			else{
@@ -1861,26 +1861,26 @@ package classes
 				player.skinDesc = "skin";
 				player.skinAdj = "slimy";}
 					
-			if(rand(3) != 0) // 2/3 to have human face
+			if (rand(3) != 0) // 2/3 to have human face
 				player.faceType = FACE_HUMAN;
 			else // totally random one
 				player.faceType = rand(20)+1; // since it is not a enum, it is impossible to make it auto-ajust...
 				
-			if(player.faceType == FACE_SPIDER_FANGS && rand(2) == 0)
+			if (player.faceType == FACE_SPIDER_FANGS && rand(2) == 0)
 					player.eyeType = EYES_FOUR_SPIDER_EYES; // 50% to have spider eyes with spider fangs
-			else if(rand(20) == 0) // 5% for inhuman eyes otherwise
-				if(rand(2) == 0)
+			else if (rand(20) == 0) // 5% for inhuman eyes otherwise
+				if (rand(2) == 0)
 					player.eyeType = EYES_FOUR_SPIDER_EYES;
 				else
 					player.eyeType = EYES_BLACK_EYES_SAND_TRAP;
 
-			if(player.faceType == FACE_HUMAN && rand(2)!=0) // if human face, 50% to have human ears
+			if (player.faceType == FACE_HUMAN && rand(2)!=0) // if human face, 50% to have human ears
 				player.earType = EARS_HUMAN;
 			else // totally random one
 				player.earType = rand(14)+1; // since it is not a enum, it is impossible to make it auto-ajust...
 
 
-			if(rand(2) != 0) // 50% to have human lower body
+			if (rand(2) != 0) // 50% to have human lower body
 				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
 			else // totally random one
 			{
@@ -1898,29 +1898,29 @@ package classes
 			}
 			
 			player.tailType = rand(21); // always have totally random tail
-			if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN)
+			if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN)
 			{ // insect abdomens comes with poison
 				player.tailVenom = 5;
 				player.tailRecharge = 5;
-				if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && rand(2)==0)
+				if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && rand(2)==0)
 					player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0); // spider abdomen have chance 50/50 to have ovipositor
 			}
 			
 			// 70% normal tongue, 30% to non-human with even chances of every one
-			if(rand(100)<70)
-				player.tongueType = TONUGE_HUMAN;
+			if (rand(100)<70)
+				player.tongueType = TONGUE_HUMAN;
 			else
-				player.tongueType = randomChoice(TONUGE_DEMONIC, TONUGE_DRACONIC, TONUGE_SNAKE);
+				player.tongueType = randomChoice(TONGUE_DEMONIC, TONGUE_DRACONIC, TONGUE_SNAKE);
 			
 			
 			var horns:Number = rand(100); // 70% no horns, 30% to random
-			if(horns<70)
+			if (horns<70)
 				player.hornType = HORNS_NONE;
-			else if(horns<80){
+			else if (horns<80){
 				player.hornType = HORNS_DEMON;
 				player.horns = (rand(4)+1)*2; // 1-4 pairs
 				}
-			else if(horns<90){
+			else if (horns<90){
 				player.hornType = HORNS_COW_MINOTAUR;
 				player.horns = 2;}
 			else{
@@ -1928,13 +1928,13 @@ package classes
 				player.horns = 2;}
 			
 			var wings:Number = rand(4); // always have wings to fly... small boon to make up for lack of fighting power
-			if(wings == 0){
+			if (wings == 0){
 				player.wingType = WING_TYPE_BAT_LIKE_LARGE;
 				player.wingDesc = "large, bat-like";}
-			else if(wings == 1){
+			else if (wings == 1){
 				player.wingType = WING_TYPE_FEATHERED_LARGE;
 				player.wingDesc = "large, feathered";}
-			else if(wings == 2){
+			else if (wings == 2){
 				player.wingType = WING_TYPE_DRACONIC_LARGE;
 				player.wingDesc = "large, draconic";}
 			else{
@@ -1943,16 +1943,16 @@ package classes
 				
 			
 			var arms:Number = rand(100); // if have harpy wings 33% chance to have harpy hands, otherwise 5% to have spider hands
-			if(player.wingType == WING_TYPE_FEATHERED_LARGE && rand(4) == 0)
+			if (player.wingType == WING_TYPE_FEATHERED_LARGE && rand(4) == 0)
 				player.armType = ARM_TYPE_HARPY;
-			else if(rand(20) == 0)
+			else if (rand(20) == 0)
 				player.armType = ARM_TYPE_SPIDER;
 			else
 				player.armType = ARM_TYPE_HUMAN;
 			
 			
 			// 90% to have normal hair, even chances to have feathers, anemone or goo otherwise
-			if(rand(100) < 90)	player.hairType = HAIR_NORMAL;
+			if (rand(100) < 90)	player.hairType = HAIR_NORMAL;
 			else player.hairType = randomChoice(HAIR_FEATHER, HAIR_GOO, HAIR_ANEMONE);
 			
 			// wizard staff and modest robes
@@ -1968,9 +1968,9 @@ package classes
 			player.createPerk(PerkLib.SpellcastingAffinity, 50, 0, 0, 0);
 			
 			// and knows white magic
-			player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 
 			player.hoursSinceCum = 0;
 			player.fatigue = 0;

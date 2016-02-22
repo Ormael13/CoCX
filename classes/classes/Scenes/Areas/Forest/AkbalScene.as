@@ -18,7 +18,7 @@ package classes.Scenes.Areas.Forest
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = 1;
 			if (hpVictory) //[General Victory]
 			{
-				/*if(rand(10) == 0) {
+				/*if (rand(10) == 0) {
 				   outputText("Akbal falls to the ground, but as you raise your " + player.weaponName + " to deliver the final blow, a harsh ripping sound rends the air.  A dark form covered in burning violet light flies out of the jaguar's body; the demon has fled, leaving a corpse behind.  You have no doubt that the demon can gain another body, but it's best to take the old one with you to make sure it doesn't regain its form easily.", false);
 				   //9999 change monster name to let itemloot know what item to drop.
 				   short = "Akbitch";
@@ -58,7 +58,7 @@ package classes.Scenes.Areas.Forest
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = -1;
 			flags[kFLAGS.AKBAL_BITCH_Q] = 0;
 			clearOutput();
-			if(pcCameWorms){
+			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
 				doNext(loseToAckballllllz);
 			} else if (hpVictory) {
@@ -105,7 +105,7 @@ package classes.Scenes.Areas.Forest
 
 				outputText("Akbal gives a muffled scream at first but soon he gets the message. His tongue slithers into your " + vaginaDescript(0) + ".  You lift yourself a little; well... you lean forward a bit to let the demon actually breath.  This proves to be the right choice as Akbal is ravenous for your " + vaginaDescript(0) + ".\n\n", false);
 
-				outputText("He drills his tonuge into you, mercilessly attacking your " + clitDescript() + " as you scream, howl and cringe in ecstasy.  He begins to lift up, probably to get the weight of your body off of the rest of his face, but you grab his tender furry balls in your hand and he stops before you're forced to do something drastic.\n\n", false);
+				outputText("He drills his TONGUE into you, mercilessly attacking your " + clitDescript() + " as you scream, howl and cringe in ecstasy.  He begins to lift up, probably to get the weight of your body off of the rest of his face, but you grab his tender furry balls in your hand and he stops before you're forced to do something drastic.\n\n", false);
 
 				outputText("After dropping a line about how he has to make you cum or get his head ripped off Akbal whines, obviously distressed at not being able to slip his aching member into your " + vaginaDescript(0) + ".\n\n", false);
 
@@ -289,7 +289,7 @@ package classes.Scenes.Areas.Forest
 
 					outputText("Akbal gives a muffled scream at first but soon he gets the message. His tongue slithers into your " + vaginaDescript(0) + ".  You lift yourself a little; well... you lean forward a bit to let the demon actually breath.  This proves to be the right choice as Akbal is ravenous for your " + vaginaDescript(0) + ".\n\n", false);
 
-					outputText("He drills his tonuge into you, mercilessly attacking your " + clitDescript() + " as you scream, howl and cringe in ecstasy.  He begins to lift up, probably to get the weight of your body off of the rest of his face, but you grab his tender furry balls in your hand and he stops before you're forced to do something drastic.\n\n", false);
+					outputText("He drills his TONGUE into you, mercilessly attacking your " + clitDescript() + " as you scream, howl and cringe in ecstasy.  He begins to lift up, probably to get the weight of your body off of the rest of his face, but you grab his tender furry balls in your hand and he stops before you're forced to do something drastic.\n\n", false);
 
 					outputText("After dropping a line about how he has to make you cum or get his head ripped off Akbal whines, obviously distressed at not being able to slip his aching member into your " + vaginaDescript(0) + ".\n\n", false);
 
@@ -863,7 +863,7 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
 					player.buttRating++;
 				}
-				player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 				doNext(camp.returnToCampUseEightHours);
 				return;
 			}
@@ -941,7 +941,7 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
 					player.buttRating++;
 				}
-				player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 				doNext(camp.returnToCampUseEightHours);
 				return;
 			}
@@ -1021,7 +1021,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
 				player.buttRating++;
 			}
-			player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -1160,7 +1160,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 			dynStats("cor", 5);
 			player.slimeFeed();
-			player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseEightHours);
 		}
 

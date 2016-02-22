@@ -72,7 +72,7 @@ package classes.Scenes.Dungeons.Factory
 		
 		private function wonInDungeon1(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(pcCameWorms){
+			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(game.endLustLoss);
 			} else {
@@ -87,7 +87,7 @@ package classes.Scenes.Dungeons.Factory
 		}
 		
 		private function cockTripAttack():void {
-			if (findStatusAffect(StatusAffects.Blind) >= 0) { //Blind dodge change
+			if (findStatusEffect(StatusEffects.Blind) >= 0) { //Blind dodge change
 				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
 				game.combatRoundOver();
 				return;
@@ -117,7 +117,7 @@ package classes.Scenes.Dungeons.Factory
 		}
 		
 		private function spoogeAttack():void {
-			if (findStatusAffect(StatusAffects.Blind) >= 0) { //Blind dodge change
+			if (findStatusEffect(StatusEffects.Blind) >= 0) { //Blind dodge change
 				outputText(capitalA + short + " pumps and thrusts his hips lewdly before cumming with intense force in your direction!  Thankfully his aim was off due to the blindness currently affect him.");
 				game.combatRoundOver();
 				return;
@@ -134,18 +134,18 @@ package classes.Scenes.Dungeons.Factory
 				case 0: //Face
 					outputText("face.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your mouth and nose!  You can feel it moving around inside you, doing its best to prepare you for its master.");
 					game.dynStats("lus", 3);
-					if (player.findStatusAffect(StatusAffects.DemonSeed) < 0)
-						player.createStatusAffect(StatusAffects.DemonSeed, 5, 0, 0, 0);
-					else player.addStatusValue(StatusAffects.DemonSeed, 1, 7);
+					if (player.findStatusEffect(StatusEffects.DemonSeed) < 0)
+						player.createStatusEffect(StatusEffects.DemonSeed, 5, 0, 0, 0);
+					else player.addStatusValue(StatusEffects.DemonSeed, 1, 7);
 					player.slimeFeed();
 					break;
 				case 1: //Chest
 					if (player.hasFuckableNipples()) {
 						outputText(allBreastsDescript() + ".  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your open nipples.  You can feel it moving around inside you, doing its best to prepare you for its master.");
 						game.dynStats("lus", 3);
-						if (player.findStatusAffect(StatusAffects.DemonSeed) < 0)
-							player.createStatusAffect(StatusAffects.DemonSeed, 5, 0, 0, 0);
-						else player.addStatusValue(StatusAffects.DemonSeed, 1, 8);
+						if (player.findStatusEffect(StatusEffects.DemonSeed) < 0)
+							player.createStatusEffect(StatusEffects.DemonSeed, 5, 0, 0, 0);
+						else player.addStatusValue(StatusEffects.DemonSeed, 1, 8);
 						player.slimeFeed();
 					}
 					else outputText(allBreastsDescript() + ".  Thankfully it doesn't seem to have much effect.");
@@ -154,9 +154,9 @@ package classes.Scenes.Dungeons.Factory
 					if (player.vaginas.length > 0) {
 						outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + player.vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.");
 						game.dynStats("lus", 3);
-						if (player.findStatusAffect(StatusAffects.DemonSeed) < 0)
-							player.createStatusAffect(StatusAffects.DemonSeed, 5, 0, 0, 0);
-						else player.addStatusValue(StatusAffects.DemonSeed, 1, 8);
+						if (player.findStatusEffect(StatusEffects.DemonSeed) < 0)
+							player.createStatusEffect(StatusEffects.DemonSeed, 5, 0, 0, 0);
+						else player.addStatusValue(StatusEffects.DemonSeed, 1, 8);
 						player.slimeFeed();
 					}
 					else outputText("crotch.  Thankfully, it doesn't seem to have much effect.");

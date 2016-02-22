@@ -34,7 +34,16 @@
 		// arianMF("master","mistress")
 		// arianMF("male","girly")
 
-
+		public var emberLookups:Object = // For subject: "ember"
+		{
+			"man"		: function(thisPtr:CoC):String { return kGAMECLASS.arianScene.emberMF("man", "woman") },
+			
+			"ey"		: function(thisPtr:CoC):String {return kGAMECLASS.emberScene.emberMF("he","she")},
+			"em"		: function(thisPtr:CoC):String {return kGAMECLASS.emberScene.emberMF("him","her")},
+			"eir"		: function(thisPtr:CoC):String {return kGAMECLASS.emberScene.emberMF("his","her")},
+			"eirs"		: function(thisPtr:CoC):String {return kGAMECLASS.emberScene.emberMF("his","hers")},
+			"emself"	: function(thisPtr:CoC):String {return kGAMECLASS.emberScene.emberMF("himself","herself")}
+		}
 
 		public var rubiLookups:Object = // For subject: "rubi"
 		{

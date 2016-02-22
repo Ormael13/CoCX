@@ -117,7 +117,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nOkay, so he's an explorer. What sort of something interesting did he find?");
 			outputText("\n\n\"<i>I've met that Oni named Izumi in the high mountains. She claims to be the 'Font of All Strength' and while she's indeed strong, I'm even stronger! The duel lasted for quite some time but I emerged victorious and in the end, I had sex with her. I'm quite relieved to find someone who's pure.</i>\"");
 			//Tel'Adre
-			if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) {
+			if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) {
 				outputText("\n\nYou ask the behemoth if he ever visited Tel'Adre.");
 				outputText("\n\n\"<i>Of course. It's a really nice place and there is that hermaphrodite gray fox named Urta who usually hang out at \"The Wet Bitch\". I have no idea why the bar has such suggestive name. Anyways, I've made a stop at the bakery and tried out the delicious brownies. I've worked out at the gym; it's a pretty great place to hang out!</i>\"");
 			}
@@ -174,7 +174,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			clearOutput();
 			outputText("You tell him that you're here to fight. \"<i>All right! Get ready,</i>\" he says with a grin and claws raised.");
 			startCombat(new Behemoth());
-			monster.createStatusAffect(StatusAffects.Spar,0,0,0,0);
+			monster.createStatusEffect(StatusEffects.Spar,0,0,0,0);
 		}
 		
 		public function winAgainstBehemoth():void {
@@ -386,7 +386,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (hungerRefill < 40) hungerRefill = 40;
 			outputText(images.showImage("behemoth-blowjob"), false);
 			outputText("Your eyes draw near the big bulge in his loincloth and you lick your lips as if you're hungry. ");
-			if (player.findStatusAffect(StatusAffects.LustyTongue) >= 0) {
+			if (player.findStatusEffect(StatusEffects.LustyTongue) >= 0) {
 				outputText("Your body tingles with arousal as your " + tongueDescript() + " makes contact with your lips. ");
 				dynStats("lus", 30);
 			}

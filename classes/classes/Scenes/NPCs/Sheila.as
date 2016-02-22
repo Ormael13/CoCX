@@ -18,16 +18,16 @@ package classes.Scenes.NPCs
 			var damage:Number = 0;
 			spe -= 30;
 			//Midget misfire (if PC < 3'6"):
-			if(player.tallness < 42 && rand(2) == 0) {
+			if (player.tallness < 42 && rand(2) == 0) {
 				outputText("Sheila bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you. ");
 				damage = 3 + rand(10);
 				damage = kGAMECLASS.doDamage(damage, true);
 			}
 			//Miss:
-			else if(player.getEvasionRoll() || findStatusAffect(StatusAffects.Blind) >= 0) {
+			else if (player.getEvasionRoll() || findStatusEffect(StatusEffects.Blind) >= 0) {
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils with fist raised, but you lean away from the uppercut, catching a faceful of her breasts instead!  Sheila squeals and pushes away from you");
 				//[(libido>40)
-				if(player.lib > 40) {
+				if (player.lib > 40) {
 					outputText(", though not before you have a chance to stick your tongue in her cleavage!");
 				}
 				else outputText(".");
@@ -40,12 +40,12 @@ package classes.Scenes.NPCs
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils just as quickly, launching herself at your face with a fist raised in front of her.  She lands a staggering crack on your jaw which knocks your head back and blurs your vision!  ");
 				//deals minor concussion which adds 5-10 pts fatigue, may stun pc and prevent attack, misses while blinded or misfires on pcs under 3'6")
 				kGAMECLASS.fatigue(5+rand(5));
-				if(rand(2) == 0 && player.findPerk(PerkLib.Resolute) < 0) {
-					player.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
+				if (rand(2) == 0 && player.findPerk(PerkLib.Resolute) < 0) {
+					player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 					outputText("<b>You are stunned!</b>  ");
 				}
 				damage = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
-				if(damage < 1) damage = 2;
+				if (damage < 1) damage = 2;
 				damage = player.takeDamage(damage, true);
 			}
 			spe += 30;
@@ -57,7 +57,7 @@ package classes.Scenes.NPCs
 			var damage:Number = 0;
 			spe -= 60;
 			//Miss:
-			if(player.getEvasionRoll() || (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) == 0)) {
+			if (player.getEvasionRoll() || (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) == 0)) {
 				outputText("Sheila squats down, then bounds explosively toward you!  She swings her leg out in front to kick, but you roll to the side and she slips past your shoulder.  You hear an \"<i>Oof!</i>\" as she lands on her butt behind you.  When you turn to look, she's already back to her feet, rubbing her smarting posterior and looking a bit embarrassed.");
 				//(small Sheila HP loss)
 				damage = 3 + rand(10);
@@ -68,12 +68,12 @@ package classes.Scenes.NPCs
 			else {
 				outputText("Sheila squats down, then bounds explosively toward you feet-first!  She snaps one leg out softly just as she reaches your chest, then twists her body to the side, bringing her other leg over and landing a kick to the rear of your skull!  Your vision blurs and you wobble on your feet as she pushes off your chest.  ");
 				//Stun triggered:
-				if(player.findPerk(PerkLib.Resolute) < 0) {
-					player.createStatusAffect(StatusAffects.Stunned,2,0,0,0);
+				if (player.findPerk(PerkLib.Resolute) < 0) {
+					player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 					outputText("<b>You are stunned!</b>  ");
 				}
 				damage = int((str + 50 + weaponAttack) - rand(player.tou) - player.armorDef);
-				if(damage < 1) damage = 2;
+				if (damage < 1) damage = 2;
 				damage = player.takeDamage(damage, true);
 				kGAMECLASS.fatigue(10+rand(6));
 			}
@@ -98,30 +98,30 @@ package classes.Scenes.NPCs
 		//Demon Sheila Combat - Special Attacks
 		//1: Suspicious Glint (int-based hit chance)
 		private function suspiciousGlint():void {
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(2) == 0) {
 				outputText("Sheila's blind eyes glint suspiciously as she focuses her power, trying to send her fantasy to anything caught in their stare.  It seems to work - the rock next to you vibrates a little.");
 			}
 			//Miss:
-			else if(player.inte / 15 + rand(20) + 1 > 16) {
+			else if (player.inte / 15 + rand(20) + 1 > 16) {
 				outputText("Sheila's eyes glint suspiciously as she proclaims her affection for you and begs you to look into them, but you keep your head down and focus on her feet.  You can feel her stare boring holes into you, but eventually she abandons the attempt.");
 			}
 			//Hit:
 			else {
 				outputText("Sheila's eyes glint suspiciously, and you feel your mind slowing down and your body heating up as you meet her lascivious gaze.  Too late you look away, but the damage is done; her fantasies of ");
-				if(!player.hasCock()) outputText("burying her drooling tail inside you until it squirts");
+				if (!player.hasCock()) outputText("burying her drooling tail inside you until it squirts");
 				else outputText("riding your dick to the hilt");
 				outputText(" run rampant inside your head and crowd out everything else.  \"<i>Did you see it, [name]?  My love for you?</i>\" Sheila asks, smiling.  God, did you ever!  You can hardly focus on anything!");
 				//big (20+) int drop and big lib-based lust gain if successful, locks Infest command for the fight if successful, always misses if Sheila is blinded
-				if(findStatusAffect(StatusAffects.TwuWuv) < 0) {
-					createStatusAffect(StatusAffects.TwuWuv,0,0,0,0);
+				if (findStatusEffect(StatusEffects.TwuWuv) < 0) {
+					createStatusEffect(StatusEffects.TwuWuv,0,0,0,0);
 					var counter:int = 40+rand(5);
 					showStatDown( 'inte' );
 					// inteDown.visible = true;
 					// inteUp.visible = false;
 					while(counter > 0) {
-						if(player.inte >= 2) {
+						if (player.inte >= 2) {
 							player.inte--;
-							addStatusValue(StatusAffects.TwuWuv,1,1);
+							addStatusValue(StatusEffects.TwuWuv,1,1);
 						}
 						counter--;
 					}
@@ -136,9 +136,9 @@ package classes.Scenes.NPCs
 			outputText("Sheila giggles and strokes her " + game.sheilaScene.sheilaCup() + " breasts, trying to entice you.");
 			//results, no new pg
 			//[(sheila corruption < 20; 'miss')
-			if(game.sheilaScene.sheilaCorruption() < 20) outputText("  But with nothing there for her to work with, it's a lot like being teased by a dressmaker's mannequin.");
+			if (game.sheilaScene.sheilaCorruption() < 20) outputText("  But with nothing there for her to work with, it's a lot like being teased by a dressmaker's mannequin.");
 			//(else if sheila corruption < 150; 'hit')
-			else if(game.sheilaScene.sheilaCorruption() < 150) {
+			else if (game.sheilaScene.sheilaCorruption() < 150) {
 				outputText("  As her hands run over the soft-looking mammaries, kneading and squeezing them, teasing the nipples relentlessly until she lets out a cute little moan, you feel the blood rush to your face.  \"<i>Enjoying this, are you?</i>\" she calls sweetly.  \"<i>Why don't you stop being contrary and come play with them too?</i>\"");
 				//med lib-based lust damage if 20 < sheila corruption < 150
 				game.dynStats("lus", 25+player.lib/10);
@@ -155,10 +155,10 @@ package classes.Scenes.NPCs
 			outputText("Sheila waits patiently, staring at you and stroking her dark, spaded tail with its opposite.  A line of the always-oozing oil falls from the slit, pooling in the smooth brown coil; she unwinds it rapidly, flinging the liquid at your face playfully.  ");
 			//results, no new PG
 			//Hit:
-			if(!player.getEvasionRoll()) {
+			if (!player.getEvasionRoll()) {
 				outputText("It lands on target, and you're forced to close your eyes lest it get in them!");
-				player.createStatusAffect(StatusAffects.Blind,1,0,0,0);
-				player.createStatusAffect(StatusAffects.SheilaOil,0,0,0,0);
+				player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
+				player.createStatusEffect(StatusEffects.SheilaOil,0,0,0,0);
 			}
 			else {
 				outputText("You easily lean away from the path of her tainted fluids, and she sighs.  \"<i>You're no fun, mate.</i>\"");
@@ -174,7 +174,7 @@ package classes.Scenes.NPCs
 			lust = 100;
 			HP = 0;
 			//(if PC lust < 30)
-			if(player.lust < 33) {
+			if (player.lust < 33) {
 				outputText("\n\nYou're not that interested, though; Sheila harrumphs as you pass her by and leave.");
 				cleanupAfterCombat();
 				return;
@@ -188,13 +188,13 @@ package classes.Scenes.NPCs
 		private function lickEmAndStickEm():void {
 			outputText("Sheila's voice gets closer, becoming disarmingly apologetic as you scrub furiously at your face in darkness.  \"<i>Oh, my.  I didn't mean to get that in your eyes... let me help clean you up, love.</i>\"  Your face is gently gripped between her hands and pulled down, then the demon begins passing her tongue over you affectionately, wiping the fluid away with long, ticklish licks as you wait for the other shoe to fall.");
 			outputText("\"<i>All better,</i>\" Sheila announces.  With her thumb, she gingerly pushes one eyelid up before you can pull away, proving her claim - and causing you to look right into her own glowing, purple iris.  A fantasy invades your mind, one where ");
-			if(player.hasCock()) outputText("[oneCock] fucks Sheila to the base while her tail snakes around and penetrates your [vagOrAss]");
+			if (player.hasCock()) outputText("[oneCock] fucks Sheila to the base while her tail snakes around and penetrates your [vagOrAss]");
 			else outputText("you take Sheila from behind by plunging her spaded tail into your [vagina] as she lies face-down on the ground with her ass pushed in the air");
 			outputText(".");
 			//results, no new pg
 			//[(int check passed)
 			//Miss:
-			if(player.inte / 15 + rand(20) + 1 > 16) {
+			if (player.inte / 15 + rand(20) + 1 > 16) {
 				outputText("\n\nBefore the fantasy can advance, you recoil and pull out of the demon's hands, shoving her away.");
 				game.dynStats("lus", 15+player.sens/20 + player.lib/20);
 			}
@@ -214,11 +214,11 @@ package classes.Scenes.NPCs
 			outputText("For a moment, all goes quiet, save for a soft rustle.\n\n");
 			//results, no new pg
 			//[(sheila corruption < 100; hit, 'light damage')]
-			if(game.sheilaScene.sheilaCorruption() < 100) {
+			if (game.sheilaScene.sheilaCorruption() < 100) {
 				outputText("The silence is broken with a giggle as the demon catches you in an embrace, pressing her " + game.sheilaScene.sheilaCup() + " breasts into you.  You shiver as she drags the perky nipples over your " + player.skinFurScales() + ", but push her away.");
 				game.dynStats("lus", 15+player.sens/20 + player.lib/20);
 			}
-			else if(game.sheilaScene.sheilaCorruption() < 300) {
+			else if (game.sheilaScene.sheilaCorruption() < 300) {
 				outputText("A sigh ends the silence as your body is partially enfolded in the hot valley of an aroused Sheila's cleavage. As the demon grabs you and pushes her tits into you, the skin-on-" + player.skinFurScales() + " contact makes you shiver, and your attempts to get free meet with some resistance... or rather, a lack of resistance, as the soft, yielding breast flesh quivers and heats to your touch without moving the demon overmuch.  You accidentally brush her nipples several times before you can escape, unleashing horny moans from Sheila that linger in your mind.");
 				game.dynStats("lus", 25+player.sens/20 + player.lib/20);
 			}
@@ -232,15 +232,15 @@ package classes.Scenes.NPCs
 
 		private function demonSheilaAI():void {
 			//Count up till give up!
-			if(findStatusAffect(StatusAffects.Counter) < 0) createStatusAffect(StatusAffects.Counter,0,0,0,0);
-			addStatusValue(StatusAffects.Counter,1,1);
-			if(statusAffectv1(StatusAffects.Counter) >= 5) {
+			if (findStatusEffect(StatusEffects.Counter) < 0) createStatusEffect(StatusEffects.Counter,0,0,0,0);
+			addStatusValue(StatusEffects.Counter,1,1);
+			if (statusEffectv1(StatusEffects.Counter) >= 5) {
 				sitAndPout();
 				return;
 			}
 			var choices:Array = [];
 
-			if(player.findStatusAffect(StatusAffects.SheilaOil) < 0) {
+			if (player.findStatusEffect(StatusEffects.SheilaOil) < 0) {
 				choices = [suspiciousGlint,
 					tittyMonsterAttack,
 					splashAttackLookOutShellEvolveIntoGyrados];
@@ -265,13 +265,13 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(game.flags[kFLAGS.SHEILA_DEMON] == 1) game.sheilaScene.beatUpDemonSheila();
+			if (game.flags[kFLAGS.SHEILA_DEMON] == 1) game.sheilaScene.beatUpDemonSheila();
 			else game.sheilaScene.sheilaGotWhomped();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(game.flags[kFLAGS.SHEILA_DEMON] == 1) game.sheilaScene.loseToSheila();
+			if (game.flags[kFLAGS.SHEILA_DEMON] == 1) game.sheilaScene.loseToSheila();
 			else game.sheilaScene.getBeatUpBySheila();
 		}
 
@@ -293,11 +293,11 @@ package classes.Scenes.NPCs
 			
 			// this.plural = false;
 			this.createVagina(game.flags[kFLAGS.SHEILA_XP] <= 3 && !sheilaDemon, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 30, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			this.createBreastRow(game.flags[kFLAGS.SHEILA_CORRUPTION]/10);
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,20,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6*12;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;

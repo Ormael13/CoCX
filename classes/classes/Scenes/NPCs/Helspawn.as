@@ -11,18 +11,18 @@ package classes.Scenes.NPCs
 			var choices:Array = [];
 			choices[choices.length] = helspawnTwinStrikes;
 			//Bowmander only
-			if(flags[kFLAGS.HELSPAWN_WEAPON] == "bow") choices[choices.length] = calledShot;
+			if (flags[kFLAGS.HELSPAWN_WEAPON] == "bow") choices[choices.length] = calledShot;
 			//Zerker ability
-			if(weaponAttack < 50 || flags[kFLAGS.HELSPAWN_WEAPON] == "scimitar") choices[choices.length] = helSpawnBerserk;	//Shield Bash (Shieldmander Only)
-			if(flags[kFLAGS.HELSPAWN_WEAPON] == "scimitar and shield") choices[choices.length] = helSpawnShieldBash;
+			if (weaponAttack < 50 || flags[kFLAGS.HELSPAWN_WEAPON] == "scimitar") choices[choices.length] = helSpawnBerserk;	//Shield Bash (Shieldmander Only)
+			if (flags[kFLAGS.HELSPAWN_WEAPON] == "scimitar and shield") choices[choices.length] = helSpawnShieldBash;
 			//Tease (Sluttymander Only)
-			if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) choices[choices.length] = sluttyMander;
+			if (flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) choices[choices.length] = sluttyMander;
 			//Focus (Chastemander Only)
 			//Self-healing & lust restoration
-			if(flags[kFLAGS.HELSPAWN_PERSONALITY] < 50) choices[choices.length] = helSpawnFocus;
+			if (flags[kFLAGS.HELSPAWN_PERSONALITY] < 50) choices[choices.length] = helSpawnFocus;
 			choices[rand(choices.length)]();
 			//Tail Whip
-			if(rand(4) == 0) tailWhipShitYo();
+			if (rand(4) == 0) tailWhipShitYo();
 			combatRoundOver();
 		}
 
@@ -30,9 +30,9 @@ package classes.Scenes.NPCs
 // Two light attacks
 private function helspawnTwinStrikes():void {
 	//if Bowmander
-	if(flags[kFLAGS.HELSPAWN_WEAPON] == "bow") outputText(flags[kFLAGS.HELSPAWN_NAME] + " leaps back out of your reach and nocks a pair of blunted arrows, drawing them back together and loosing them at once!\n");
+	if (flags[kFLAGS.HELSPAWN_WEAPON] == "bow") outputText(flags[kFLAGS.HELSPAWN_NAME] + " leaps back out of your reach and nocks a pair of blunted arrows, drawing them back together and loosing them at once!\n");
 	else outputText(flags[kFLAGS.HELSPAWN_NAME] + " lunges at you, scimitar cleaving through the air toward your throat!\n");
-	createStatusAffect(StatusAffects.Attacks,0,0,0,0);
+	createStatusEffect(StatusEffects.Attacks,0,0,0,0);
 	eAttack();
 }
 
@@ -42,14 +42,14 @@ private function calledShot():void {
 	outputText(flags[kFLAGS.HELSPAWN_NAME] + " draws back her bowstring, spending an extra second aiming before letting fly!");
 	var damage:Number = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 	//standard dodge/miss text
-	if(damage <= 0 || (rand(2) == 0 && (player.getEvasionRoll()))) outputText("\nYou avoid the hit!");
+	if (damage <= 0 || (rand(2) == 0 && (player.getEvasionRoll()))) outputText("\nYou avoid the hit!");
 	else {
 		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while! ");
 		var affect:int = 20 + rand(5);
-		if(player.findStatusAffect(StatusAffects.CalledShot) >= 0) {
+		if (player.findStatusEffect(StatusEffects.CalledShot) >= 0) {
 			while(affect > 0 && player.spe >= 2) {
 				affect--;
-				player.addStatusValue(StatusAffects.CalledShot,1,1);
+				player.addStatusValue(StatusEffects.CalledShot,1,1);
 				player.spe--;
 				showStatDown( 'spe' );
 				// speDown.visible = true;
@@ -57,10 +57,10 @@ private function calledShot():void {
 			}
 		}
 		else {
-			player.createStatusAffect(StatusAffects.CalledShot,0,0,0,0);
+			player.createStatusEffect(StatusEffects.CalledShot,0,0,0,0);
 			while(affect > 0 && player.spe >= 2) {
 				affect--;
-				player.addStatusValue(StatusAffects.CalledShot,1,1);
+				player.addStatusValue(StatusEffects.CalledShot,1,1);
 				player.spe--;
 				showStatDown( 'spe' );
 				// speDown.visible = true;
@@ -86,12 +86,12 @@ private function calledShot():void {
 			// Stuns a bitch
 			outputText(flags[kFLAGS.HELSPAWN_NAME] + " lashes out with her shield, trying to knock you back!");
 			//standard dodge/miss text
-			if(damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
+			if (damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
 			else {
 				outputText("\nHer shield catches you right in the face, sending you tumbling to the ground and leaving you open to attack! ");
 				damage = player.takeDamage(damage, true);
-				if(rand(2) == 0 && player.findStatusAffect(StatusAffects.Stunned) < 0) {
-					player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+				if (rand(2) == 0 && player.findStatusEffect(StatusEffects.Stunned) < 0) {
+					player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 					outputText(" <b>The hit stuns you.</b>");
 				}
 			}
@@ -103,7 +103,7 @@ private function calledShot():void {
 			var damage:Number = int((str) - rand(player.tou));
 			outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + " whips at you with her tail, trying to sear you with her brilliant flames!");
 			//standard dodge/miss text
-			if(damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
+			if (damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
 			else {
 				outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + "'s tail catches you as you try to dodge.  Your [armor] sizzles, and you leap back with a yelp as she gives you a light burning. ");
 				damage = player.takeDamage(damage, true);
@@ -115,7 +115,7 @@ private function calledShot():void {
 			// Medium Lust damage
 			outputText(flags[kFLAGS.HELSPAWN_NAME] + " jumps just out of reach before spinning around, planting her weapon in the ground as she turns her backside to you and gives her sizable ass a rhythmic shake, swaying her full hips hypnotically.");
 			//if no effect:
-			if(rand(2) == 0) outputText("\nWhat the fuck is she trying to do?  You walk over and give her a sharp kick in the kiester, \"<i>Keep your head in the game, kiddo.  Pick up your weapon!</i>\"");
+			if (rand(2) == 0) outputText("\nWhat the fuck is she trying to do?  You walk over and give her a sharp kick in the kiester, \"<i>Keep your head in the game, kiddo.  Pick up your weapon!</i>\"");
 			else {
 				outputText("\nDat ass.  You lean back, enjoying the show as the slutty little salamander slips right past your guard, practically grinding up against you until you can feel a fire boiling in your loins!");
 				var lustDelta:Number = player.lustVuln * (10 + player.lib/10);
@@ -133,7 +133,7 @@ private function calledShot():void {
 		private function helSpawnFocus():void {
 			outputText("Seeing a momentary lull in the melee, " + flags[kFLAGS.HELSPAWN_NAME] + " slips out of reach, stumbling back and clutching at the bruises forming all over her body.  \"<i>Come on, " + flags[kFLAGS.HELSPAWN_NAME] + ", you can do this. Focus, focus,</i>\" she mutters, trying to catch her breath.  A moment later and she seems to have taken a second wind as she readies her weapon with a renewed vigor.");
 			lust -= 30;
-			if(lust < 0) lust = 0;
+			if (lust < 0) lust = 0;
 			addHP(eMaxHP() / 3.0);
 		}
 
@@ -167,11 +167,11 @@ private function calledShot():void {
 							".  Pacing around you, the well-built young warrior intently studies her mentor's defenses, readying for your next attack.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 85, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 85, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E+"));
 			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,85,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,85,0,0,0);
 			this.tallness = 90;
 			this.hipRating = HIP_RATING_CURVY+2;
 			this.buttRating = BUTT_RATING_LARGE+1;
@@ -198,7 +198,7 @@ private function calledShot():void {
 			this.gems = 10 + rand(5);
 			this.tailType = TAIL_TYPE_LIZARD;
 			this.tailRecharge = 0;
-			this.createStatusAffect(StatusAffects.Keen, 0, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.drop = NO_DROP;
 			checkMonster();
 		}

@@ -31,11 +31,11 @@ package classes.Scenes.Areas
 			}
 			//Add some holiday cheer
 			if (isHolidays() && date.fullYear > flags[kFLAGS.CANDY_CANE_YEAR_MET] && rand(5) == 0) {
-				kGAMECLASS.candyCaneTrapDiscovery();
+				kGAMECLASS.xmas.xmasMisc.candyCaneTrapDiscovery();
 				return;
 			}
 			if (isHolidays() && date.fullYear > flags[kFLAGS.POLAR_PETE_YEAR_MET] && rand(4) == 0 && silly()) {
-				kGAMECLASS.polarPete();
+				kGAMECLASS.xmas.xmasMisc.polarPete();
 				flags[kFLAGS.POLAR_PETE_YEAR_MET] = date.fullYear;
 				return;
 			}

@@ -3,7 +3,7 @@
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkLib;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	
 	/**
 	 * ...
@@ -63,7 +63,7 @@
 			else outputText("  You smile widely at your clone as you begin to shake off your [armor].");
 			outputText("  [He] moans lowly in miserable disbelief, but [he]’s not capable of resisting you as, butt naked, you sit yourself down and methodically repeat the action, sliding your hands over and into [his] replicated clothing, finding [his] warm flesh, clutching and testing it curiously. Obviously you’ve laid your fingers upon this many times before, but touching it now second hand causes an emotion you cannot name to rise in your breast. Is this getting you hot? Yes. In the strangest, most perverse way imaginable, it is.");
 			
-			if(player.vaginas.length == 0 && player.cocks.length == 0) 
+			if (player.vaginas.length == 0 && player.cocks.length == 0) 
 			{
 				outputText("\n\nStrangely, the more you think about fucking this strange creature, the hotter your groin becomes. In moments, you find your fingers pushing against a dampening slit with feather-light caresses. <b>Somehow this place's magic has given you a vagina to match your duplicate!</b> You pull away with a shuddering breath and marvel at the glittering wetness oozing down your fingertips. This is going to be fun.");
 				player.createVagina();

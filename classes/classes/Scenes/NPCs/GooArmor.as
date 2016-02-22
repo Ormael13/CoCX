@@ -8,30 +8,30 @@ package classes.Scenes.NPCs
 	public class GooArmor extends GooGirl
 	{
 		public function gooArmorAI():void {
-			if(rand(2) == 0 && player.findStatusAffect(StatusAffects.GooArmorSilence) < 0) gooSilenceAttack();
-			else if(rand(3) > 0) gooArmorAttackPhysical();
+			if (rand(2) == 0 && player.findStatusEffect(StatusEffects.GooArmorSilence) < 0) gooSilenceAttack();
+			else if (rand(3) > 0) gooArmorAttackPhysical();
 			else gooArmorAttackTwoGooConsume();
 		}
 		//ATTACK ONE: Greatsword
 		public function gooArmorAttackPhysical():void {
 			var evade:String = player.getEvasionReason();
-			if(evade == EVASION_EVADE) {
+			if (evade == EVASION_EVADE) {
 				outputText("The goo-armor rushes forward and swings her sword in a mighty arc, but you evade the attack!");
 			}
-			else if(evade == EVASION_FLEXIBILITY) {
+			else if (evade == EVASION_FLEXIBILITY) {
 				outputText("The goo-armor swings a greatsword at you in a mighty arc, but your cat-like flexibility makes it easy to twist out of the way.");		
 			}
-			else if(evade == EVASION_MISDIRECTION) {
+			else if (evade == EVASION_MISDIRECTION) {
 				outputText("The goo-armor swings a sword at you in a mighty arc, but your training with Raphael allows you to misdirect her into a miss!");	
 			}
-			else if(evade == EVASION_SPEED || evade != null) {
+			else if (evade == EVASION_SPEED || evade != null) {
 				outputText("The goo-armor rushes forward and swings her sword in a mighty arc, but you dodge it!");		
 			}
 			//HIT!
 			else {
 				outputText("The goo-armor rushes forward and swings her sword in a mighty arc.  You aren't quite quick enough to dodge her blow, and the goopy sword slams into you, throwing you back and leaving a nasty welt. ");
 				var damage:Number = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
-				if(damage <= 0) damage = 1;
+				if (damage <= 0) damage = 1;
 				damage = player.takeDamage(damage, true);
 			}
 			combatRoundOver();
@@ -39,19 +39,19 @@ package classes.Scenes.NPCs
 		//ATTACK TWO: Goo Consume
 		public function gooArmorAttackTwoGooConsume():void {
 			outputText("Suddenly, the goo-girl leaks half-way out of her heavy armor and lunges at you.  You attempt to dodge her attack, but she doesn't try and hit you - instead, she wraps around you, pinning your arms to your chest.  More and more goo latches onto you - you'll have to fight to get out of this.");
-			player.createStatusAffect(StatusAffects.GooArmorBind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.GooArmorBind,0,0,0,0);
 			combatRoundOver();
 		}
 		//(Struggle)
 		public function struggleAtGooBind():void {
 			clearOutput();
 			//If fail:
-			if(rand(10) > 0 && player.str/5 + rand(20) < 23) {
+			if (rand(10) > 0 && player.str/5 + rand(20) < 23) {
 				outputText("You try and get out of the goo's grasp, but every bit of goop you pull off you seems to be replaced by twice as much!");
 				//(If fail 5 times, go to defeat scene)
-				player.addStatusValue(StatusAffects.GooArmorBind,1,1);
-				if(player.statusAffectv1(StatusAffects.GooArmorBind) >= 5) {
-					if(findStatusAffect(StatusAffects.Spar) >= 0) game.valeria.pcWinsValeriaSparDefeat();
+				player.addStatusValue(StatusEffects.GooArmorBind,1,1);
+				if (player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
+					if (findStatusEffect(StatusEffects.Spar) >= 0) game.valeria.pcWinsValeriaSparDefeat();
 					else game.dungeons.heltower.gooArmorBeatsUpPC();
 					return;
 				}
@@ -59,7 +59,7 @@ package classes.Scenes.NPCs
 			//If succeed: 
 			else {
 				outputText("You finally pull the goop off of you and dive out of her reach before the goo-girl can re-attach herself to you.  Pouting, she refills her suit of armor and reassumes her fighting stance.");
-				player.removeStatusAffect(StatusAffects.GooArmorBind);
+				player.removeStatusEffect(StatusEffects.GooArmorBind);
 			}
 			combatRoundOver();
 		}
@@ -67,7 +67,7 @@ package classes.Scenes.NPCs
 		public function gooSilenceAttack():void {
 			outputText("The goo pulls a hand off her greatsword and shoots her left wrist out towards you.  You recoil as a bit of goop slaps onto your mouth, preventing you from speaking - looks like you're silenced until you can pull it off!");
 			//(No spells until PC passes a moderate STR check or burns it away)
-			player.createStatusAffect(StatusAffects.GooArmorSilence,0,0,0,0);
+			player.createStatusEffect(StatusEffects.GooArmorSilence,0,0,0,0);
 			combatRoundOver();
 		}
 		
@@ -78,7 +78,7 @@ package classes.Scenes.NPCs
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (findStatusAffect(StatusAffects.Spar) >= 0) game.valeria.pcWinsValeriaSpar();
+			if (findStatusEffect(StatusEffects.Spar) >= 0) game.valeria.pcWinsValeriaSpar();
 			else game.dungeons.heltower.beatUpGooArmor();
 		}
 		
@@ -88,7 +88,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
 				doNext(game.endLustLoss);
 			} else {
-				if(findStatusAffect(StatusAffects.Spar) >= 0) game.valeria.pcWinsValeriaSparDefeat();
+				if (findStatusEffect(StatusEffects.Spar) >= 0) game.valeria.pcWinsValeriaSparDefeat();
 				else game.dungeons.heltower.gooArmorBeatsUpPC();
 			}
 		}

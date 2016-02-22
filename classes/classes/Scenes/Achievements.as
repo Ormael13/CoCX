@@ -138,7 +138,7 @@ package classes.Scenes
 			//addAchievement("Damage Sponge", kACHIEVEMENTS.COMBAT_DAMAGE_SPONGE, "Take a total of 10,000 damage.");
 			addAchievement("Bloodletter", kACHIEVEMENTS.COMBAT_BLOOD_LETTER, "Deal a total of 50,000 damage.");
 			
-			titleAchievementSection("Holiday Events"); //10 achievements
+			titleAchievementSection("Seasonal Events"); //10 achievements
 			addAchievement("Egg Hunter", kACHIEVEMENTS.HOLIDAY_EGG_HUNTER, "Find 10 eggs as random drops during Easter event.", "", true);
 			addAchievement("Happy Birthday, Helia!", kACHIEVEMENTS.HOLIDAY_HELIA_BIRTHDAY, "Participate into Helia's birthday event. (August)", "", true);
 			addAchievement("Thankslutting", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_I, "Meet the Piggy-Slut (Thanksgiving)", "", true);

@@ -1,5 +1,6 @@
 ﻿package classes 
 {
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
 	import classes.Scenes.Camp;
@@ -38,10 +39,7 @@
 		{
 			kGAMECLASS.cheatTime(time, needNext);
 		}
-		/*protected function incrementDay(time:Number):void
-		{
-			kGAMECLASS.incrementDay(time);
-		}*/
+
 		protected function get timeQ():Number
 		{
 			return kGAMECLASS.timeQ;
@@ -73,34 +71,29 @@
 			return kGAMECLASS.awardAchievement(title, achievement, display, nl, nl2);
 		}
 		
-		protected function isHalloween():Boolean
-		{
-			return kGAMECLASS.isHalloween();
+		//SEASONAL EVENTS!
+		protected function isHalloween():Boolean {
+			return kGAMECLASS.fera.isItHalloween();
 		}
 
-		protected function isValentine():Boolean
-		{
-			return kGAMECLASS.isValentine();
+		protected function isValentine():Boolean {
+			return kGAMECLASS.valentines.isItValentine();
 		}
 
-		protected function isHolidays():Boolean
-		{
-			return kGAMECLASS.isHolidays();
+		protected function isHolidays():Boolean {
+			return kGAMECLASS.xmas.isItHolidays();
 		}
 
-		public function isEaster():Boolean
-		{
-			return kGAMECLASS.isEaster();
+		protected function isEaster():Boolean {
+			return kGAMECLASS.plains.bunnyGirl.isItEaster();
 		}
 
-		protected function isThanksgiving():Boolean
-		{
-			return kGAMECLASS.isThanksgiving();
+		protected function isThanksgiving():Boolean {
+			return kGAMECLASS.thanksgiving.isItThanksgiving();
 		}
 
-		protected function isAprilFools():Boolean
-		{
-			return kGAMECLASS.isAprilFools();
+		protected function isAprilFools():Boolean {
+			return kGAMECLASS.aprilFools.isItAprilFools();
 		}
 		
 		protected function get date():Date
@@ -143,18 +136,7 @@
 		{
 			kGAMECLASS.inRoomedDungeonResume = v;
 		}
-		
-/*
-		protected function get itemSubMenu():Boolean
-		{
-			return kGAMECLASS.itemSubMenu;
-		}
-		protected function set itemSubMenu(value:Boolean):void
-		{
-			kGAMECLASS.itemSubMenu = value;
-		}
-*/
-		
+
 		protected function showStats():void
 		{
 			kGAMECLASS.showStats();
@@ -474,36 +456,6 @@
 		protected function assholeOrPussy():String {
 			return Appearance.assholeOrPussy(player);
 		}
-
-/* Replaced by calls to Appearance.breastDescript
-		protected function npcBreastDescript(size:Number):String {
-			return kGAMECLASS.npcBreastDescript(size);
-		}
-*/
-/* Was never used
-		protected  function eButtDescript():String {
-			return Appearance.buttDescriptionShort(monster);
-		}
-*/
-/* Now in Utils.as
-		protected function num2TextBest(number:int, capitalised:Boolean = false, positional:Boolean = false):String
-		{
-			return kGAMECLASS.num2TextBest(number, capitalised, positional);
-		}
-		
-		protected function num2Text(number:int):String
-		{
-			return kGAMECLASS.num2Text(number);
-		}
-		protected function Num2Text(number:int):String
-		{
-			return kGAMECLASS.Num2Text(number);
-		}
-		protected  function num2Text2(number:int):String
-		{
-			return kGAMECLASS.num2Text2(number);
-		}
-*/
 		
 		protected function nippleDescript(rowNum:Number):String
 		{
@@ -515,13 +467,6 @@
 			return kGAMECLASS.player.cockDescript(cockNum);
 		}
 		
-/*
-		protected function cockAdjective(cockNum:Number = -1):String
-		{
-			return kGAMECLASS.cockAdjective(cockNum);
-		}
-*/
-		
 		protected function multiCockDescript():String
 		{
 			return kGAMECLASS.player.multiCockDescript();
@@ -532,34 +477,10 @@
 			return kGAMECLASS.player.multiCockDescriptLight();
 		}
 		
-/*
-		protected function eMultiCockDescriptLight():String
-		{
-			return kGAMECLASS.eMultiCockDescriptLight();
-		}
-		
-		protected function eCockHead(cockNum:Number = 0):String
-		{
-			return kGAMECLASS.eCockHead(cockNum);
-		}
-		
-		protected function eCockDescript(cockIndex:Number = 0):String
-		{
-			return kGAMECLASS.eCockDescript(cockIndex);
-		}
-*/
-		
 		protected function breastDescript(rowNum:Number):String
 		{
 			return player.breastDescript(rowNum);
 		}
-		
-/*
-		protected function cockHead(cockNum:Number = 0):String
-		{
-			return kGAMECLASS.cockHead(cockNum);
-		}
-*/
 		
 		protected function breastSize(val:Number):String
 		{
@@ -601,20 +522,6 @@
 			return kGAMECLASS.allVaginaDescript();
 		}
 		
-/* Now called directly
-		protected function breastCup(val:Number):String
-		{
-			return Appearance.breastCup(val);
-		}
-*/
-		
-/* Replaced with calls to Appearance.cockDescription
-		protected function NPCCockDescript(cockType:*,cockLength:Number=0,lust:Number=50):String
-		{
-			return kGAMECLASS.NPCCockDescript(cockType,cockLength,lust);
-		}
-*/
-		
 		/**
 		 * Apply statmods to the player. dynStats wraps the regular stats call, but supports "named" arguments of the form:
 		 * 		"statname", value.
@@ -650,14 +557,6 @@
 		{
 			kGAMECLASS.fatigue(mod,type);
 		}
-
-
-/*
-		protected function get eventParser():Function
-		{
-			return kGAMECLASS.eventParser;
-		}
-*/
 		
 		protected function playerMenu():void { kGAMECLASS.playerMenu(); }
 		
@@ -745,18 +644,6 @@
 		protected function get inventory():Inventory{
 			return kGAMECLASS.inventory;
 		}
-
-/* No longer used
-		protected function get itemSwapping():Boolean
-		{
-			return kGAMECLASS.itemSwapping;
-		}
-		
-		protected function set itemSwapping(val:Boolean):void
-		{
-			kGAMECLASS.itemSwapping = val;
-		}
-*/
 		
 		protected function get time():TimeModel
 		{
@@ -767,59 +654,6 @@
 		{
 			kGAMECLASS.time = val;
 		}
-		
-/* Finally got rid of this var
-		protected function get menuLoc():Number
-		{
-			return kGAMECLASS.menuLoc;
-		}
-		
-		protected function set menuLoc(val:Number):void
-		{
-			kGAMECLASS.menuLoc = val;
-		}
-*/
-		
-/* Classes should now use inCombat instead of setting gameState directly
-		protected function get gameState():Number
-		{
-			return kGAMECLASS.gameState;
-		}
-		
-		protected function set gameState(val:Number):void
-		{
-			kGAMECLASS.gameState = val;
-		}
-*/
-
-/*
-		protected function get itemSlots():Array
-		{
-			return kGAMECLASS.player.itemSlots;
-		}
-*/
-		
-/*
-		protected function get itemStorage():Array
-		{
-			return kGAMECLASS.itemStorage;
-		}
-
-		protected function set itemStorage(val:Array):void
-		{
-			kGAMECLASS.itemStorage = val;
-		}
-		
-		protected function get gearStorage():Array
-		{
-			return kGAMECLASS.gearStorage;
-		}
-		
-		protected function set gearStorage(val:Array):void
-		{
-			kGAMECLASS.gearStorage = val;
-		}
-*/
 		
 		protected function get temp():int
 		{
@@ -928,17 +762,6 @@
 		// lookups into objects ie "umasShop.firstVisitPart1" -> kGAMECLASS["umasShop"].["firstVisitPart1"]()
 		// @aimozg: but kGAMECLASS.umasShop.firstVisistPart1 instead of String is compile-time safe.
 		// Clearly this isn't going to fly long term, but it's... functional for now.
-
-		/* @aimozg commented this out because telAdre
-		protected function get armorShops():Function
-		{
-			return kGAMECLASS.armorShops;
-		}
-
-		protected function get telAdreMenu():Function
-		{
-			return kGAMECLASS.telAdreMenu;
-		}*/
 
 	}
 

@@ -19,18 +19,18 @@ package classes.Scenes.Monsters
 			//Makes sure to not stack spell effects.
 			if (lust < 50) spellChooser = rand(3);
 			if (lust > 75) spellChooser = rand(3) + 3;
-			if (spellChooser == 0 && findStatusAffect(StatusAffects.ChargeWeapon) >= 0) {
+			if (spellChooser == 0 && findStatusEffect(StatusEffects.ChargeWeapon) >= 0) {
 				spellChooser = rand(5) + 1;
 			}
-			if (spellChooser == 5 && findStatusAffect(StatusAffects.Might) >= 0) {
+			if (spellChooser == 5 && findStatusEffect(StatusEffects.Might) >= 0) {
 				spellChooser = rand(5);
-				if (spellChooser == 0 && findStatusAffect(StatusAffects.ChargeWeapon) >= 0) spellChooser++;
+				if (spellChooser == 0 && findStatusEffect(StatusEffects.ChargeWeapon) >= 0) spellChooser++;
 			}
 			//Spell time!
 			//Charge Weapon
 			if (spellChooser == 0 && fatigue <= (100 - spellCostCharge)) {
 				outputText("The imp utters word of power, summoning an electrical charge around his scimitar. <b>It looks like he'll deal more physical damage now!</b>");
-				createStatusAffect(StatusAffects.ChargeWeapon, 25, 0, 0, 0);
+				createStatusEffect(StatusEffects.ChargeWeapon, 25, 0, 0, 0);
 				this.weaponAttack += 25;
 				fatigue += spellCostCharge;
 			}
@@ -39,7 +39,7 @@ package classes.Scenes.Monsters
 				outputText("The imp glares at you and points at you! A bright flash erupts before you!  ");
 				if (rand(player.inte / 5) <= 4) {
 					outputText("<b>You are blinded!</b>");
-					player.createStatusAffect(StatusAffects.Blind, 1 + rand(3), 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
 				else {
 					outputText("You manage to blink in the nick of time!");
@@ -78,7 +78,7 @@ package classes.Scenes.Monsters
 			else if (spellChooser == 5 && fatigue <= (100 - spellCostMight)) {
 				outputText("He flushes, drawing on his body's desires to empower his muscles and toughen his up.");
 				outputText("The rush of success and power flows through his body.  He feels like he can do anything!", false);
-				createStatusAffect(StatusAffects.Might, 20, 20, 0, 0);
+				createStatusEffect(StatusEffects.Might, 20, 20, 0, 0);
 				fatigue += spellCostMight;
 			}
 			combatRoundOver();
@@ -170,7 +170,7 @@ package classes.Scenes.Monsters
 				if (damage < 30) damage = 30; //Min-cap damage.
 				if (damage >= 50) {
 					outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
-					player.createStatusAffect(StatusAffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				}
 				else {
 					outputText("Thankfully the wounds aren't that serious. ");

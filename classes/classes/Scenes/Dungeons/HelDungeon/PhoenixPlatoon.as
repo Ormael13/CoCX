@@ -9,7 +9,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			outputText("You fall back under a hail of scimitar attacks.  The sheer number of phoenixes attacking is bad enough, but their attacks are perfectly coordinated, leaving virtually no room for escape or maneuver without getting hit!\n");
 			//(Effect: Multiple medium-damage attacks)
 			//(Effect: Multiple light attacks)
-			createStatusAffect(StatusAffects.Attacks,2+rand(3),0,0,0);
+			createStatusEffect(StatusEffects.Attacks,2+rand(3),0,0,0);
 			eAttack();
 			combatRoundOver();
 		}
@@ -31,17 +31,17 @@ package classes.Scenes.Dungeons.HelDungeon
 		}
 
 		public function phoenixPlatoonAI():void {
-			if(findStatusAffect(StatusAffects.Platoon) < 0) {
+			if (findStatusEffect(StatusEffects.Platoon) < 0) {
 				phoenixPlatoonRush();
-				createStatusAffect(StatusAffects.Platoon,0,0,0,0);
+				createStatusEffect(StatusEffects.Platoon,0,0,0,0);
 			}
-			else if(statusAffectv1(StatusAffects.Platoon) == 0) {
+			else if (statusEffectv1(StatusEffects.Platoon) == 0) {
 				phoenixPlatoonFireBreath();
-				addStatusValue(StatusAffects.Platoon,1,1);
+				addStatusValue(StatusEffects.Platoon,1,1);
 			}
 			else {
 				phoenixPlatoonLustbang()
-				removeStatusAffect(StatusAffects.Platoon);
+				removeStatusEffect(StatusEffects.Platoon);
 			}
 		}
 		

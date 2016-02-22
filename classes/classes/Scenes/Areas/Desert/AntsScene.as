@@ -223,7 +223,7 @@ package classes.Scenes.Areas.Desert
 			outputText("As the demons bear down on the ant-girl, you burst from your hiding place, raising your [weapon] to the air and uttering an impressive war cry.  Nobody, ant or otherwise, is getting raped if you have any say in the matter!");
 			outputText("\n\nYou are now fighting demons!");
 			startCombat(new DemonPack());
-			monster.createStatusAffect(StatusAffects.phyllafight, 0, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.phyllafight, 0, 0, 0, 0);
 			doNext(playerMenu);
 		}
 
@@ -324,7 +324,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nAs you raise a hand to wave, you're stopped as you hear the sounds of a shambling and banging from across the arena.  A large silhouetted beast is poked and prodded into the staging area across from you. You narrow your eyes, trying to get a glimpse of your opponent. As you do, the gates of the staging areas drop and a very angry and enraged tentacle beast thrashes out into the center of the arena.");
 				outputText("\n\nYou're fighting a tentacle beast!");
 				startCombat(new TentacleBeast());
-				monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 			}
 			//►[Fight #2]
 			else if (flags[kFLAGS.ANT_ARENA_WINS] + flags[kFLAGS.ANT_ARENA_LOSSES] == 1) {
@@ -332,7 +332,7 @@ package classes.Scenes.Areas.Desert
 				outputText("When you arrive in the colosseum, you tell the fight manager you're ready; he nods and leads you down into one of the two staging areas for the arena.  You watch through the bars as the stadium fills almost to capacity, still resistant to the idea of so many ants living right under the sands; there must be hundreds.  Gazing out into the cheering crowd, you spot the royal family sitting in their reserved area.  The princess waves at you excitedly with two of her arms, but her mother grabs them and lowers them.  Chylla herself looks as regal and reserved as ever.  You catch the queen smiling at you, but there's something wicked behind the smile.  Before you can contemplate what it might be, the gates raise on both sides of the colosseum and you are pushed out.");
 				outputText("\n\nYou're now fighting a minotaur and it's wielding a Giant Axe!  You quickly put two and two together and realize Chylla has set you up by arming the minotaur!  You brace yourself as the beastman charges you, roaring wildly.");
 				startCombat(new Minotaur(true));
-				monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 			}
 			//►[Fight #3]
 			else {
@@ -343,9 +343,9 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nYou're fighting a gnoll!");
 				flags[kFLAGS.MET_ANT_ARENA_GNOLL]++;
 				startCombat(new Gnoll());
-				monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 			}
-			monster.createStatusAffect(StatusAffects.PhyllaFight, 0, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.PhyllaFight, 0, 0, 0, 0);
 			doNext(playerMenu);
 		}
 
@@ -798,7 +798,7 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nClosing her eyes to enjoy your efforts, Phylla utters a pathetic moan as she better positions herself against your face.  Once she's found her optimal position you find your face pinned between her cunt and cushioned floor, the ansty Princess completely intent on keeping you there until you've done your duty.");
 			outputText("\n\nTaking her cue, you remove your tongue from inside her and spread her lips apart with your hands, then begin to tease the tip of her long clit with your tongue, allowing the soft yet bumpy texture of your tongue to slide along the full length of her love button.");
 			//If Snake Tongue:
-			if (player.tongueType == TONUGE_SNAKE) outputText("  You run the split of your forked mouth muscle from the tip of her clit to the base.  As your textured feeler makes its way down, you wrap around the rest of her long clitorus, like a boa constrictor.  Once your split reaches the hood of her clit you roll and flick the tip of your tongue rapidly.  Pulling at your hair she gasps for breath in between teeth grinding moans.");
+			if (player.tongueType == TONGUE_SNAKE) outputText("  You run the split of your forked mouth muscle from the tip of her clit to the base.  As your textured feeler makes its way down, you wrap around the rest of her long clitorus, like a boa constrictor.  Once your split reaches the hood of her clit you roll and flick the tip of your tongue rapidly.  Pulling at your hair she gasps for breath in between teeth grinding moans.");
 			outputText("\n\nA surprised, muffled moan escapes from your lover's mouth as you lick past one particular spot near the hood of her clit.  More out of curiosity than anything else you \"retrace\" your efforts past that spot.  Again, Phylla whines out in unrestrained ecstasy, signalling that you found a sensitive spot.  You half hum, half sigh into her vagina, knowing full well further 'investigation' around this area will make Phylla act like a bug caught in a spider web.  Phylla tenses up as she figures out you've found her weakness.  You hear her pleading that you focus on all of her stiff nub.  Obviously, she has no idea how intense this can get and isn't too keen to find out.  But you can't pass this up!  With a playful little war cry, you take to her sensitive spot.  You immediately began licking and smashing your tongue against it like there's no tomorrow.");
 			outputText("\n\nYou hear her attempt to say something before her body takes over her mind.  She drowns herself out in moaning and whining as she braces her thighs against your shoulders and head, violently shaking your entrapped head back and forth, while simultaneously grinding her hips into your face. You ravenously assault her clit with no regard for her other desires;  She'll overcome her doubts and see that your \"technique\" is more than adequate. Gazing upwards, you see her face as she looks completely overcome with euphoria.");
 			outputText("\n\nPhylla quickly begins to grind her clit against your mouth harder and faster. Drenching your already wet face in even greater volumes of her lady juices. She furiously works her hips to yield more pleasure.");
@@ -1787,7 +1787,7 @@ package classes.Scenes.Areas.Desert
 				//(Transitions to Doggy style Phylla)
 			}
 			//PC has one-two dicks 42 to 48 inches in length:
-			//if(player.cockTotal() >= 2)
+			//if (player.cockTotal() >= 2)
 			//outputText("\n\nWell, if she wants more dick, then maybe she can be persuaded to put her mouth to use?  Expertly positioning your prick(s), you give her a quick jab in the chin in order to get her attention, causing her to look up at your over her shoulder.  You give her a knowing look and shoot a glance down at what poked her in the chin; she follows your gaze.  \"<i>Well, you did want more of them,</i>\" you convey to her with a wickedly playful grin, as though you're a kid in candy shop.  Phylla takes to your  " + cockDescript(a/ & b) + " with a zeal you've never seen before, especially in a woman so shy and uncertain. (Transitions to Doggy style Phylla)
 
 			//Doggy style Phylla:
@@ -1983,7 +1983,7 @@ package classes.Scenes.Areas.Desert
 				//If PC has IS pregnant:
 				if (player.pregnancyIncubation > 0) outputText("\n\nThe feeling of your pregnancies is instantly transferred between yourself and Phylla; you feel the warmth and energy of her unborn children inside of you, and you can feel her experiencing the warmth of the life still growing within you.  At this moment, you two understand perfectly what it's like for each other to be with child; it's a pretty... enlightening experience... that's distracting you from the task at hand.");
 				//If PC has been pregnant:
-				else if (player.statusAffectv1(StatusAffects.Birthed) > 0) outputText("\n\nYou've been pregnant before, but this... this is completely different.  You feel every stage that each of Phylla's eggs in her abdomen is in.  You feel what it's like to have your only goal, your only want in life being to mate and have children for the rest of your life.  It's an amazing turn on for you - you feel a warmth start to spread between your own legs.");
+				else if (player.statusEffectv1(StatusEffects.Birthed) > 0) outputText("\n\nYou've been pregnant before, but this... this is completely different.  You feel every stage that each of Phylla's eggs in her abdomen is in.  You feel what it's like to have your only goal, your only want in life being to mate and have children for the rest of your life.  It's an amazing turn on for you - you feel a warmth start to spread between your own legs.");
 				//If PC has NEVER been pregnant:
 				else outputText("\n\nIt's one of the most interesting feelings you've ever felt; you feel every stage of pregnancy at once - every stage of each egg in Phylla's ever-laying abdomen.  It makes you want to experience the joys of being pregnant as a flood of maternal thoughts flood your mind.  Though you keep in mind the disadvantages as well - you don't want to go overboard.  You feel what it's like to have your only goal in life be to breed continuously.  It's an amazing turn on for you as you feel a warmth start to spread between your own legs.");
 			}

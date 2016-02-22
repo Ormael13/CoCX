@@ -49,7 +49,7 @@ package classes.Scenes
 			if (player.exploredMountain > 0) addButton(5, "Mountain", kGAMECLASS.mountain.exploreMountain, null, null, null, "Visit the mountain. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
 			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp, null, null, null, "Visit the wet swamplands. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", kGAMECLASS.plains.explorePlains, null, null, null, "Visit the plains. \n\nRecommended level: 10" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
-			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(8, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods, null, null, null, "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.statusAffectv1(StatusAffects.ExploredDeepwoods) : ""));
+			if (player.findStatusEffect(StatusEffects.ExploredDeepwoods) >= 0) addButton(8, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods, null, null, null, "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.statusEffectv1(StatusEffects.ExploredDeepwoods) : ""));
 
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(10, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain, null, null, null, "Visit the high mountains where basilisks and harpies are found. \n\nRecommended level: 10" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(11, "Bog", kGAMECLASS.bog.exploreBog, null, null, null, "Visit the dark bog. \n\nRecommended level: 14" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
@@ -273,10 +273,10 @@ package classes.Scenes
 				//Used for chosing 'repeat' encounters.
 				var choosey:Number = rand(6);
 				//2 (gargoyle) is never chosen once cathedral is discovered.
-				if(choosey == 2 && flags[kFLAGS.FOUND_CATHEDRAL] == 1)
+				if (choosey == 2 && flags[kFLAGS.FOUND_CATHEDRAL] == 1)
 				{
 					choosey = rand(5);
-					if(choosey >= 2) choosey++;
+					if (choosey >= 2) choosey++;
 				}
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {

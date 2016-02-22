@@ -120,7 +120,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You smile and thank the centauress for her help.  “<i>It was nothing,</i>” she replies, looking quite pleased at your thanks all the same.\n\n");
 			flags[kFLAGS.KATHERINE_TRAINING] |= KBIT_TRAINING_TALK_EDRYN; //Using a mask so it doesn’t matter what order you talk to Edryn and Urta in
 			var cockFitIndex:int = player.cockThatFits(300);
-			if ((cockFitIndex >= 0 && player.cockArea(cockFitIndex) >= 24) && (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.horseCocks() > 0 || player.cor > 50 || player.statusAffectv1(StatusAffects.Edryn) > 0)) {
+			if ((cockFitIndex >= 0 && player.cockArea(cockFitIndex) >= 24) && (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.horseCocks() > 0 || player.cor > 50 || player.statusEffectv1(StatusEffects.Edryn) > 0)) {
 				outputText("“<i>So... I don’t suppose there’s anything else you might have on your mind...?</i>”  She gives you a coy look and fiddles with a nipple through her shirt.");
 				doYesNo((edryn.pregnancy.isPregnant ? pregnantEdrynSexSelector : edryn.edrynSexSelecter), telAdre.barTelAdre);
 			}
@@ -243,7 +243,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("Stepping into the alleyway you put down the sack of spare equipment you gathered at camp and tell Kath that it’s time.  She nervously get up from the old packing crate she was sitting on.  Her tail twitches as she approaches and she asks you what the sack is for.\n\n");
 			outputText("You tell her it’s all supplies for her to train with.  Until she finishes training she’s going to have to carry this bundle with her at all times.  Kath picks it up and just manages to heft the sack onto her shoulder.  Hopefully the weight will help build her strength and her endurance.\n\n");
 			outputText("You lead Kath through the streets of Tel’Adre and despite having lived here her whole life she doesn’t realize where you’re going until you reach the gates.  “<i>We’re going into the desert?  What if some monster eats me?  I heard there are these man eating nagas out here that love cat flesh.</i>”\n\n");
-			if (player.statusAffectv2(StatusAffects.Naga) != 0)
+			if (player.statusEffectv2(StatusEffects.Naga) != 0)
 				outputText("You almost laugh.  Of all the dangers of the desert she picks the naga.  There’s only one way the naga would eat Kath and they would both enjoy it.  ");
 			outputText("You tell Kath that this is the best way for her to learn survival skills.  Besides you’re always going to be with her out in the desert and you’ve crossed it uncounted times and you’re still here.\n\n");
 			outputText("Kath nods, adjusts the sack, steels herself and follows you out into the wastes for some very practical survival training.");

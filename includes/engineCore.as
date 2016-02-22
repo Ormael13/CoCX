@@ -48,13 +48,13 @@ public function outputList():String {
 	var stuff:String = "";
 	for(var x:int = 0; x < list.length; x++) {
 		stuff += list[x];
-		if(list.length == 2 && x == 1) {
+		if (list.length == 2 && x == 1) {
 			stuff += " and ";
 		}
-		else if(x < list.length-2) {
+		else if (x < list.length-2) {
 			stuff += ", ";
 		}
-		else if(x < list.length-1) {
+		else if (x < list.length-1) {
 			stuff += ", and ";
 		}
 	}
@@ -71,12 +71,12 @@ public function outputList():String {
 public function HPChange(changeNum:Number, display:Boolean):Number
 {
 	var before:Number = player.HP;
-	if(changeNum == 0) return 0;
-	if(changeNum > 0) {
+	if (changeNum == 0) return 0;
+	if (changeNum > 0) {
 		//Increase by 20%!
-		if(player.findPerk(PerkLib.HistoryHealer) >= 0) changeNum *= 1.2;
-		if(player.HP + int(changeNum) > maxHP()) {
-			if(player.HP >= maxHP()) {
+		if (player.findPerk(PerkLib.HistoryHealer) >= 0) changeNum *= 1.2;
+		if (player.HP + int(changeNum) > maxHP()) {
+			if (player.HP >= maxHP()) {
 			if (display) HPChangeNotify(changeNum);
 				return player.HP - before;
 			}
@@ -94,7 +94,7 @@ public function HPChange(changeNum:Number, display:Boolean):Number
 	//Negative HP
 	else
 	{
-		if(player.HP + changeNum <= 0) {
+		if (player.HP + changeNum <= 0) {
 			if (display) HPChangeNotify(changeNum);
 			player.HP = 0;
 			mainView.statsView.showStatDown( 'hp' );
@@ -112,17 +112,17 @@ public function HPChange(changeNum:Number, display:Boolean):Number
 
 public function HPChangeNotify(changeNum:Number):void {
 	if (changeNum == 0) {
-		if(player.HP >= maxHP())
+		if (player.HP >= maxHP())
 			outputText("You're as healthy as you can be.\n", false);
 	}
 	else if (changeNum > 0) {
-		if(player.HP >= maxHP())
+		if (player.HP >= maxHP())
 			outputText("Your HP maxes out at " + maxHP() + ".\n", false);
 		else
 			outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n", false);
 	}
 	else {
-		if(player.HP <= 0)
+		if (player.HP <= 0)
 			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage, dropping your HP to 0.\n", false);
 		else
 			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage.\n", false);
@@ -151,7 +151,7 @@ public function clearOutput():void {
 	forceUpdate();
 	currentText = "";
 	mainView.clearOutputText();
-	if(gameState != 3) mainView.hideMenuButton( MainView.MENU_DATA );
+	if (gameState != 3) mainView.hideMenuButton( MainView.MENU_DATA );
 	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 	mainView.hideMenuButton( MainView.MENU_LEVEL );
 	mainView.hideMenuButton( MainView.MENU_PERKS );
@@ -167,8 +167,8 @@ public function rawOutputText(output:String, purgeText:Boolean = false):void
 {
 	
 	//OUTPUT!
-	if(purgeText) {
-		//if(!debug) mainText.htmlText = output;
+	if (purgeText) {
+		//if (!debug) mainText.htmlText = output;
 		//trace("Purging and writing Text", output);
 		clearOutput();
 		currentText = output;
@@ -213,15 +213,15 @@ public function outputText(output:String,
 	output = this.parser.recursiveParser(output, parseAsMarkdown);
 
 	//OUTPUT!
-	if(purgeText) {
-		//if(!debug) mainText.htmlText = output;
+	if (purgeText) {
+		//if (!debug) mainText.htmlText = output;
 		currentText = output;
 	}
 	else {
 		currentText += output;
-		//if(!debug) mainText.htmlText = currentText;
+		//if (!debug) mainText.htmlText = currentText;
 	}
-	if(debug) 
+	if (debug) 
 	{
 		mainView.setOutputText( currentText );
 	}
@@ -258,13 +258,13 @@ public function displayPerks(e:MouseEvent = null):void {
 	menu();
 	var button:int = 0;
 	addButton(button++, "Next", playerMenu);
-	if(player.perkPoints > 0) {
+	if (player.perkPoints > 0) {
 		outputText("\n<b>You have " + num2Text(player.perkPoints) + " perk point", false);
-		if(player.perkPoints > 1) outputText("s", false);
+		if (player.perkPoints > 1) outputText("s", false);
 		outputText(" to spend.</b>", false);
 		addButton(button++, "Perk Up", perkBuyMenu);
 	}
-	if(player.findPerk(PerkLib.DoubleAttack) >= 0) {
+	if (player.findPerk(PerkLib.DoubleAttack) >= 0) {
 		outputText("\n<b>You can adjust your double attack settings.</b>");
 		addButton(button++,"Dbl Options",doubleAttackOptions);
 	}
@@ -273,14 +273,14 @@ public function displayPerks(e:MouseEvent = null):void {
 public function doubleAttackOptions():void {
 	clearOutput();
 	menu();
-	if(flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
+	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
 		outputText("You will currently always double attack in combat.  If your strength exceeds sixty, your double-attacks will be done at sixty strength in order to double-attack.");
 		outputText("\n\nYou can change it to double attack until sixty strength and then dynamicly switch to single attacks.");
 		outputText("\nYou can change it to always single attack.");
 		addButton(1,"Dynamic",doubleAttackDynamic);
 		addButton(2,"Single",doubleAttackOff);
 	}
-	else if(flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
+	else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
 		outputText("You will currently double attack until your strength exceeds sixty, and then single attack.");
 		outputText("\n\nYou can choose to force double attacks at reduced strength (when over sixty, it makes attacks at a strength of sixty.");
 		outputText("\nYou can change it to always single attack.");
@@ -326,7 +326,7 @@ public function levelUpGo(e:MouseEvent = null):void {
 		doNext(attributeMenu);
 	}
 	//Spend attribute points
-	else if(player.statPoints > 0) {
+	else if (player.statPoints > 0) {
 		attributeMenu();
 	}
 	//Spend perk points
@@ -473,7 +473,7 @@ private function perkBuyMenu():void {
 	
 	if (perkList.length == 0) {
 		outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
-		if(player.perkPoints > 1) outputText("s");
+		if (player.perkPoints > 1) outputText("s");
 		outputText(".");
 		doNext(playerMenu);
 		return;
@@ -534,36 +534,36 @@ public function buildPerkList():Array {
 	//------------
 	// STRENGTH
 	//------------
-	if(player.str >= 25) {
+	if (player.str >= 25) {
 		_add(new PerkClass(PerkLib.StrongBack));
 	}
-	if(player.findPerk(PerkLib.StrongBack) >= 0 && player.str >= 50) {
+	if (player.findPerk(PerkLib.StrongBack) >= 0 && player.str >= 50) {
 		_add(new PerkClass(PerkLib.StrongBack2));
 	}
 	//Tier 1 Strength Perks
-	if(player.level >= 6) {
+	if (player.level >= 6) {
 		//Thunderous Strikes - +20% basic attack damage while str > 80.
-		if(player.str >= 80) {
+		if (player.str >= 80) {
 			_add(new PerkClass(PerkLib.ThunderousStrikes));
 		}
 		//Weapon Mastery - Doubles weapon damage bonus of 'large' type weapons. (Minotaur Axe, M. Hammer, etc)
-		if(player.str > 60) {
+		if (player.str > 60) {
 			_add(new PerkClass(PerkLib.WeaponMastery));
 		}
-		if(player.str >= 75)
+		if (player.str >= 75)
 			_add(new PerkClass(PerkLib.BrutalBlows));
-		if(player.str >= 50)
+		if (player.str >= 50)
 			_add(new PerkClass(PerkLib.IronFists));
-		if(player.str >= 65 && player.findPerk(PerkLib.IronFists) >= 0 && player.newGamePlusMod() >= 1)
+		if (player.str >= 65 && player.findPerk(PerkLib.IronFists) >= 0 && player.newGamePlusMod() >= 1)
 			_add(new PerkClass(PerkLib.IronFists2));
-		if(player.str >= 80 && player.findPerk(PerkLib.IronFists2) >= 0 && player.newGamePlusMod() >= 1)
+		if (player.str >= 80 && player.findPerk(PerkLib.IronFists2) >= 0 && player.newGamePlusMod() >= 1)
 			_add(new PerkClass(PerkLib.IronFists3));
-		if(player.str >= 50 && player.spe >= 50)
+		if (player.str >= 50 && player.spe >= 50)
 			_add(new PerkClass(PerkLib.Parry));
 	}
 	//Tier 2 Strength Perks
-	if(player.level >= 12) {
-		if(player.str >= 75)
+	if (player.level >= 12) {
+		if (player.str >= 75)
 			_add(new PerkClass(PerkLib.Berzerker));
 		if (player.str >= 80)
 			_add(new PerkClass(PerkLib.HoldWithBothHands));
@@ -571,48 +571,48 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.ShieldSlam));
 	}
 	//Tier 3 Strength Perks
-	if(player.level >= 18) {
-		if(player.findPerk(PerkLib.Berzerker) >= 0 && player.findPerk(PerkLib.ImprovedSelfControl) >= 0 && player.str >= 75)
+	if (player.level >= 18) {
+		if (player.findPerk(PerkLib.Berzerker) >= 0 && player.findPerk(PerkLib.ImprovedSelfControl) >= 0 && player.str >= 75)
 			_add(new PerkClass(PerkLib.ColdFury));
 	}
 	//------------
 	// TOUGHNESS
 	//------------
 	//slot 2 - toughness perk 1
-	if(player.findPerk(PerkLib.Tank) < 0 && player.tou >= 25) {
+	if (player.findPerk(PerkLib.Tank) < 0 && player.tou >= 25) {
 		_add(new PerkClass(PerkLib.Tank));
 	}
 	//slot 2 - regeneration perk
-	if(player.findPerk(PerkLib.Tank) >= 0 && player.tou >= 50) {
+	if (player.findPerk(PerkLib.Tank) >= 0 && player.tou >= 50) {
 		_add(new PerkClass(PerkLib.Regeneration));
 	}
-	if(player.tou >= 50 && player.str >= 50) {
+	if (player.tou >= 50 && player.str >= 50) {
 		_add(new PerkClass(PerkLib.ImprovedEndurance));
 	}
 	//Tier 1 Toughness Perks
-	if(player.level >= 6) {
-		if(player.findPerk(PerkLib.Tank) >= 0 && player.tou >= 60) {
+	if (player.level >= 6) {
+		if (player.findPerk(PerkLib.Tank) >= 0 && player.tou >= 60) {
 			_add(new PerkClass(PerkLib.Tank2));
 		}
-		if(player.findPerk(PerkLib.Regeneration) >= 0 && player.tou >= 70) {
+		if (player.findPerk(PerkLib.Regeneration) >= 0 && player.tou >= 70) {
 			_add(new PerkClass(PerkLib.Regeneration2));
 		}
-		if(player.tou >= 75) {
+		if (player.tou >= 75) {
 			_add(new PerkClass(PerkLib.ImmovableObject));
 		}
-		if(player.tou >= 50) {
+		if (player.tou >= 50) {
 			_add(new PerkClass(PerkLib.ShieldMastery));
 		}
 	}
 	//Tier 2 Toughness Perks
-	if(player.level >= 12) {
-		if(player.tou >= 75) {
+	if (player.level >= 12) {
+		if (player.tou >= 75) {
 			_add(new PerkClass(PerkLib.Resolute));
 		}
-		if(player.tou >= 75) {
+		if (player.tou >= 75) {
 			_add(new PerkClass(PerkLib.Juggernaut));
 		}
-		if(player.tou >= 60) {
+		if (player.tou >= 60) {
 			_add(new PerkClass(PerkLib.IronMan));
 		}
 	}
@@ -620,44 +620,44 @@ public function buildPerkList():Array {
 	// SPEED
 	//------------
 	//slot 3 - speed perk
-	if(player.spe >= 25) {
+	if (player.spe >= 25) {
 			_add(new PerkClass(PerkLib.Evade));
 	}
 	//slot 3 - run perk
-	if(player.spe >= 25) {
+	if (player.spe >= 25) {
 			_add(new PerkClass(PerkLib.Runner));
 	}
 	//slot 3 - Double Attack perk
-	if(player.findPerk(PerkLib.Evade) >= 0 && player.findPerk(PerkLib.Runner) >= 0 && player.spe >= 50) {
+	if (player.findPerk(PerkLib.Evade) >= 0 && player.findPerk(PerkLib.Runner) >= 0 && player.spe >= 50) {
 			_add(new PerkClass(PerkLib.DoubleAttack));
 	}
 
 	//Tier 1 Speed Perks
-	if(player.level >= 6) {
+	if (player.level >= 6) {
 		//Speedy Recovery - Regain Fatigue 50% faster speed.
-		if(player.findPerk(PerkLib.Evade) >= 0 && player.spe >= 60) {
+		if (player.findPerk(PerkLib.Evade) >= 0 && player.spe >= 60) {
 			_add(new PerkClass(PerkLib.SpeedyRecovery));
 		}
 		//Agility - A small portion of your speed is applied to your defense rating when wearing light armors.
-		if(player.spe > 75 && player.findPerk(PerkLib.Runner) >= 0) {
+		if (player.spe > 75 && player.findPerk(PerkLib.Runner) >= 0) {
 			_add(new PerkClass(PerkLib.Agility));
 		}
-		if(player.spe >= 75 && player.findPerk(PerkLib.Evade) >= 0 && player.findPerk(PerkLib.Agility) >= 0) {
+		if (player.spe >= 75 && player.findPerk(PerkLib.Evade) >= 0 && player.findPerk(PerkLib.Agility) >= 0) {
 				_add(new PerkClass(PerkLib.Unhindered));
 		}
-		if(player.spe >= 60) {
+		if (player.spe >= 60) {
 			_add(new PerkClass(PerkLib.LightningStrikes));
 		}
-		/*if(player.spe >= 60 && player.str >= 60) {
+		/*if (player.spe >= 60 && player.str >= 60) {
 			_add(new PerkClass(PerkLib.Brawler));
 		}*/ //Would it be fitting to have Urta teach you?
 	}
 	//Tier 2 Speed Perks
-	if(player.level >= 12) {
-		if(player.spe >= 75) {
+	if (player.level >= 12) {
+		if (player.spe >= 75) {
 			_add(new PerkClass(PerkLib.LungingAttacks));
 		}
-		if(player.spe >= 80 && player.str >= 60) {
+		if (player.spe >= 80 && player.str >= 60) {
 			_add(new PerkClass(PerkLib.Blademaster));
 		}
 	}
@@ -665,41 +665,41 @@ public function buildPerkList():Array {
 	// INTELLIGENCE
 	//------------
 	//Slot 4 - precision - -10 enemy toughness for damage calc
-	if(player.inte >= 25) {
+	if (player.inte >= 25) {
 			_add(new PerkClass(PerkLib.Precision));
 	}
 	//Spellpower - boosts spell power
-	if(player.inte >= 50) {
+	if (player.inte >= 50) {
 			_add(new PerkClass(PerkLib.Spellpower));
 	}
-	if(player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) {
+	if (player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) {
 			_add(new PerkClass(PerkLib.Mage));
 	}
 	//Tier 1 Intelligence Perks
-	if(player.level >= 6) {
-		if(player.inte >= 50)
+	if (player.level >= 6) {
+		if (player.inte >= 50)
 			_add(new PerkClass(PerkLib.Tactician));
-		if(spellCount() > 0 && player.findPerk(PerkLib.Spellpower) >= 0 && player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 60) {
+		if (spellCount() > 0 && player.findPerk(PerkLib.Spellpower) >= 0 && player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 60) {
 			_add(new PerkClass(PerkLib.Channeling));
 		}
-		if(player.inte >= 60) {
+		if (player.inte >= 60) {
 			_add(new PerkClass(PerkLib.Medicine));
 		}
-		if(player.findPerk(PerkLib.Channeling) >= 0 && player.inte >= 60) {
+		if (player.findPerk(PerkLib.Channeling) >= 0 && player.inte >= 60) {
 				_add(new PerkClass(PerkLib.StaffChanneling));
 		}
 	}
 	//Tier 2 Intelligence perks
-	if(player.level >= 12) {
-		if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 75) {
+	if (player.level >= 12) {
+		if (player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 75) {
 			_add(new PerkClass(PerkLib.Archmage));
 		}
-		if(player.inte >= 75) {
-				if(player.findPerk(PerkLib.Mage) >= 0)
+		if (player.inte >= 75) {
+				if (player.findPerk(PerkLib.Mage) >= 0)
 					_add(new PerkClass(PerkLib.FocusedMind));
 				
 				if (player.findPerk(PerkLib.Archmage) >= 0 && player.findPerk(PerkLib.Channeling) >= 0  &&
-				(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0
+				(player.findStatusEffect(StatusEffects.KnowsWhitefire) >= 0
 				|| player.findPerk(PerkLib.FireLord) >= 0 
 				|| player.findPerk(PerkLib.Hellfire) >= 0 
 				|| player.findPerk(PerkLib.EnlightenedNinetails) >= 0
@@ -708,11 +708,11 @@ public function buildPerkList():Array {
 		}
 		// Spell-boosting perks
 		// Battlemage: auto-use Might
-		if(player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusAffect(StatusAffects.KnowsMight) >= 0 && player.inte >= 80) {
+		if (player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusEffect(StatusEffects.KnowsMight) >= 0 && player.inte >= 80) {
 				_add(new PerkClass(PerkLib.Battlemage));
 		}
 		// Spellsword: auto-use Charge Weapon
-		if(player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusAffect(StatusAffects.KnowsCharge) >= 0 && player.inte >= 80) {
+		if (player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusEffect(StatusEffects.KnowsCharge) >= 0 && player.inte >= 80) {
 				_add(new PerkClass(PerkLib.Spellsword));
 		}
 	}
@@ -723,31 +723,31 @@ public function buildPerkList():Array {
 	//slot 5 - libido perks
 
 	//Slot 5 - Fertile+ increases cum production and fertility (+15%)
-	if(player.lib >= 25) {
+	if (player.lib >= 25) {
 			_add(new PerkClass(PerkLib.FertilityPlus,15,1.75,0,0));
 	}
-	if(player.lib >= 25 && player.inte >= 50) {
+	if (player.lib >= 25 && player.inte >= 50) {
 		_add(new PerkClass(PerkLib.ImprovedSelfControl));
 	}
 	//Slot 5 - minimum libido
-	if(player.minLust() >= 20) {
+	if (player.minLust() >= 20) {
 			_add(new PerkClass(PerkLib.ColdBlooded,20,0,0,0));
 	}
-	if(player.lib >= 50) {
+	if (player.lib >= 50) {
 			_add(new PerkClass(PerkLib.HotBlooded,20,0,0,0));
 	}
 	//Tier 1 Libido Perks
-	if(player.level >= 6) {
+	if (player.level >= 6) {
 		//Slot 5 - minimum libido
 		//Slot 5 - Fertility- decreases cum production and fertility.
 		if (player.lib < 25) {
 				_add(new PerkClass(PerkLib.FertilityMinus, 15, 0.7, 0, 0));
 		}
-		if(player.lib >= 60) {
+		if (player.lib >= 60) {
 			_add(new PerkClass(PerkLib.WellAdjusted));
 		}
 		//Slot 5 - minimum libido
-		if(player.lib >= 60 && player.cor >= 50) {
+		if (player.lib >= 60 && player.cor >= 50) {
 			_add(new PerkClass(PerkLib.Masochist));
 		}
 	}
@@ -759,38 +759,38 @@ public function buildPerkList():Array {
 	// CORRUPTION
 	//------------
 	//Slot 7 - Corrupted Libido - lust raises 10% slower.
-	if(player.cor >= 25) {
+	if (player.cor >= 25) {
 			_add(new PerkClass(PerkLib.CorruptedLibido,20,0,0,0));
 	}
 	//Slot 7 - Seduction (Must have seduced Jojo
-	if(player.cor >= 50) {
+	if (player.cor >= 50) {
 			_add(new PerkClass(PerkLib.Seduction));
 	}
 	//Slot 7 - Nymphomania
-	if(player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 75) {
+	if (player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 75) {
 			_add(new PerkClass(PerkLib.Nymphomania));
 	}
 	//Slot 7 - UNFINISHED :3
-	if(minLust() >= 20 && player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 50) {
+	if (minLust() >= 20 && player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 50) {
 			_add(new PerkClass(PerkLib.Acclimation));
 	}
 	//Tier 1 Corruption Perks - acclimation over-rides
-	if(player.level >= 6)
+	if (player.level >= 6)
 	{
-		if(player.cor >= 60 && player.findPerk(PerkLib.CorruptedLibido) >= 0) {
+		if (player.cor >= 60 && player.findPerk(PerkLib.CorruptedLibido) >= 0) {
 			_add(new PerkClass(PerkLib.Sadist));
 		}
-		if(player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 70) {
+		if (player.findPerk(PerkLib.CorruptedLibido) >= 0 && player.cor >= 70) {
 			_add(new PerkClass(PerkLib.ArousingAura));
 		}
 	}
 	//Tier 1 Misc Perks
-	if(player.level >= 6) {
+	if (player.level >= 6) {
 		_add(new PerkClass(PerkLib.Resistance));
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) _add(new PerkClass(PerkLib.Survivalist));
 	}
 	//Tier 2 Misc Perks
-	if(player.level >= 12 && player.findPerk(PerkLib.Survivalist) > 0) {
+	if (player.level >= 12 && player.findPerk(PerkLib.Survivalist) > 0) {
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) _add(new PerkClass(PerkLib.Survivalist2));
 	}
 	// FILTER PERKS
@@ -818,7 +818,7 @@ public function applyPerk(perk:PerkClass):void {
 }
 
 public function buttonIsVisible(index:int):Boolean {
-	if( index < 0 || index > 14 ) {
+	if ( index < 0 || index > 14 ) {
 		return undefined;
 	}
 	else {
@@ -830,12 +830,12 @@ public function buttonText(buttonName:String):String {
 	var matches:*,
 		buttonIndex:int;
 
-	if(buttonName is String) {
-		if( /^buttons\[[0-9]\]/.test( buttonName ) ) {
+	if (buttonName is String) {
+		if ( /^buttons\[[0-9]\]/.test( buttonName ) ) {
 			matches = /^buttons\[([0-9])\]/.exec( buttonName );
 			buttonIndex = parseInt( matches[ 1 ], 10 );
 		}
-		else if( /^b[0-9]Text$/.test( buttonName ) ) {
+		else if ( /^b[0-9]Text$/.test( buttonName ) ) {
 			matches = /^b([0-9])Text$/.exec( buttonName );
 			buttonIndex = parseInt( matches[ 1 ], 10 );
 
@@ -858,7 +858,7 @@ public function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
 public function getButtonText(index:int):String {
 	var matches:*;
 
-	if(index < 0 || index > 14) {
+	if (index < 0 || index > 14) {
 		return '';
 	}
 	else {
@@ -928,7 +928,7 @@ public function getButtonToolTipText(buttonText:String):String
 	//------------
 	// COMBAT 
 	//------------
-	if(buttonText.indexOf("Defend") != -1) { //Not used at the moment.
+	if (buttonText.indexOf("Defend") != -1) { //Not used at the moment.
 		toolTipText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
 	}
 	//Urta's specials - MOVED
@@ -939,53 +939,53 @@ public function getButtonToolTipText(buttonText:String):String
 	// MASTURBATION 
 	//------------
 	//Masturbation Toys
-	if(buttonText == "Masturbate") {
+	if (buttonText == "Masturbate") {
 		toolTipText = "Selecting this option will make you attempt to manually masturbate in order to relieve your lust buildup.";
 	}
-	if(buttonText == "Meditate") {
+	if (buttonText == "Meditate") {
 		toolTipText = "Selecting this option will make you attempt to meditate in order to reduce lust and corruption.";
 	}
-	if(buttonText.indexOf("AN Stim-Belt") != -1) {
+	if (buttonText.indexOf("AN Stim-Belt") != -1) {
 		toolTipText = "This is an all-natural self-stimulation belt.  The methods used to create such a pleasure device are unknown.  It seems to be organic in nature.";
 	}
-	if(buttonText.indexOf("Stim-Belt") != -1) {
+	if (buttonText.indexOf("Stim-Belt") != -1) {
 		toolTipText = "This is a self-stimulation belt.  Commonly referred to as stim-belts, these are clockwork devices designed to pleasure the female anatomy.";
 	}
-	if(buttonText.indexOf("AN Onahole") != -1) {
+	if (buttonText.indexOf("AN Onahole") != -1) {
 		toolTipText = "An all-natural onahole, this device looks more like a bulbous creature than a sex-toy.  Nevertheless, the slick orifice it presents looks very inviting.";
 	}
-	if(buttonText.indexOf("D Onahole") != -1) {
+	if (buttonText.indexOf("D Onahole") != -1) {
 		toolTipText = "This is a deluxe onahole, made of exceptional materials and with the finest craftsmanship in order to bring its user to the height of pleasure.";
 	}
-	if(buttonText.indexOf("Onahole") != -1) {
+	if (buttonText.indexOf("Onahole") != -1) {
 		toolTipText = "This is what is called an 'onahole'.  This device is a simple textured sleeve designed to fit around the male anatomy in a pleasurable way.";
 	}
-	if(buttonText.indexOf("Dual Belt") != -1) {
+	if (buttonText.indexOf("Dual Belt") != -1) {
 		toolTipText = "This is a strange masturbation device, meant to work every available avenue of stimulation.";
 	}
-	if(buttonText.indexOf("C. Pole") != -1) {
+	if (buttonText.indexOf("C. Pole") != -1) {
 		toolTipText = "This 'centaur pole' as it's called appears to be a sex-toy designed for females of the equine persuasion.  Oddly, it's been sculpted to look like a giant imp, with an even bigger horse-cock.";
 	}
-	if(buttonText.indexOf("Fake Mare") != -1) {
+	if (buttonText.indexOf("Fake Mare") != -1) {
 		toolTipText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
 	}
 	//Books
-	if(buttonText.indexOf("Dangerous Plants") != -1) {
+	if (buttonText.indexOf("Dangerous Plants") != -1) {
 		toolTipText = "This is a book titled 'Dangerous Plants'.  As explained by the title, this tome is filled with information on all manner of dangerous plants from this realm.";
 	}
-	if(buttonText.indexOf("Traveler's Guide") != -1) {
+	if (buttonText.indexOf("Traveler's Guide") != -1) {
 		toolTipText = "This traveler's guide is more of a pamphlet than an actual book, but it still contains some useful information on avoiding local pitfalls.";
 	}
-	if(buttonText.indexOf("Yoga Guide") != -1) {
+	if (buttonText.indexOf("Yoga Guide") != -1) {
 		toolTipText = "This leather-bound book is titled 'Yoga for Non-Humanoids.' It contains numerous illustrations of centaurs, nagas and various other oddly-shaped beings in a variety of poses.";
 	}
-	if(buttonText.indexOf("Hentai Comic") != -1) {
+	if (buttonText.indexOf("Hentai Comic") != -1) {
 		toolTipText = "This oddly drawn comic book is filled with images of fornication, sex, and overly large eyeballs.";
 	}
 	//------------
 	// TITLE SCREEN 
 	//------------
-	if(buttonText.indexOf("ASPLODE") != -1) {
+	if (buttonText.indexOf("ASPLODE") != -1) {
 		toolTipText = "MAKE SHIT ASPLODE";
 	}
 	return toolTipText;
@@ -1071,7 +1071,7 @@ public function createCallBackFunction(func:Function, arg:*, arg2:* = null, arg3
 	if (func == null) {
 		CoC_Settings.error("createCallBackFunction(null," + arg + ")");
 	}
-	if( arg == -9000 || arg == null )
+	if ( arg == -9000 || arg == null )
 	{
 /*		if (func == eventParser){
 			CoC_Settings.error("createCallBackFunction(eventParser,"+arg+")");
@@ -1145,7 +1145,7 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	var callback:Function;
 
 	/* Let the mainView decide if index is valid
-		if(pos > 14) {
+		if (pos > 14) {
 			trace("INVALID BUTTON");
 			return;
 		}
@@ -1187,7 +1187,7 @@ public function setButtonTooltip(index:int, toolTipHeader:String = "", toolTipTe
 }
 
 public function hasButton(arg:*):Boolean {
-	if( arg is String )
+	if ( arg is String )
 		return mainView.hasButton( arg as String );
 	else
 		return false;
@@ -1199,11 +1199,11 @@ public function hasButton(arg:*):Boolean {
  */
 public function removeButton(arg:*):void {
 	var buttonToRemove:int = 0;
-	if(arg is String) {
+	if (arg is String) {
 		buttonToRemove = mainView.indexOfButtonWithLabel( arg as String );
 	}
-	if(arg is Number) {
-		if(arg < 0 || arg > 14) return;
+	if (arg is Number) {
+		if (arg < 0 || arg > 14) return;
 		buttonToRemove = Math.round(arg);
 	}
 	mainView.hideBottomButton( buttonToRemove );
@@ -1285,7 +1285,7 @@ public function choices(text1:String, butt1:Function,
 	menu();
 	for (tmpJ = 0; tmpJ < 10; tmpJ += 1)
 	{
-		if(buttonEvents[tmpJ] == -9000 || buttonEvents[tmpJ] == 0 || buttonEvents[tmpJ] == null) {
+		if (buttonEvents[tmpJ] == -9000 || buttonEvents[tmpJ] == 0 || buttonEvents[tmpJ] == null) {
 			mainView.hideBottomButton( tmpJ );
 		}
 		else {
@@ -1388,9 +1388,9 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 	function showPage( pageIndex :int ) :void {
 		var currentPageItems :Array; // holds the current page of items.
 
-		if( pageIndex < 0 )
+		if ( pageIndex < 0 )
 			pageIndex = 0;
-		if( pageIndex >= pageCount )
+		if ( pageIndex >= pageCount )
 			pageIndex = pageCount - 1;
 
 		currentPageIndex = pageIndex;
@@ -1425,7 +1425,7 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 
 	pageCount = Math.ceil( menuItems.length / itemsPerPage );
 
-	if( typeof cancelFunction != 'function' )
+	if ( typeof cancelFunction != 'function' )
 		cancelFunction = 0;
 
 	showPage( 0 );
@@ -1572,7 +1572,7 @@ public function hideUpDown():void {
 
 public function physicalCost(mod:Number):Number {
 	var costPercent:Number = 100;
-	if(player.findPerk(PerkLib.IronMan) >= 0) costPercent -= 50;
+	if (player.findPerk(PerkLib.IronMan) >= 0) costPercent -= 50;
 	mod *= costPercent/100;
 	return mod;
 }
@@ -1580,19 +1580,19 @@ public function physicalCost(mod:Number):Number {
 public function spellCost(mod:Number):Number {
 	//Addiditive mods
 	var costPercent:Number = 100;
-	if(player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
-	if(player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
+	if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
+	if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
 	
 	//Limiting it and multiplicative mods
-	if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
+	if (player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
 	
 	mod *= costPercent/100;
 	
-	if(player.findPerk(PerkLib.HistoryScholar) >= 0) {
-		if(mod > 2) mod *= .8;
+	if (player.findPerk(PerkLib.HistoryScholar) >= 0) {
+		if (mod > 2) mod *= .8;
 	}
-	if(player.findPerk(PerkLib.BloodMage) >= 0 && mod < 5) mod = 5;
-	else if(mod < 2) mod = 2;
+	if (player.findPerk(PerkLib.BloodMage) >= 0 && mod < 5) mod = 5;
+	else if (mod < 2) mod = 2;
 	
 	mod = Math.round(mod * 100)/100;
 	return mod;
@@ -1606,25 +1606,25 @@ public function spellCost(mod:Number):Number {
 //	3 - non-bloodmage magic
 public function fatigue(mod:Number,type:Number  = 0):void {
 	//Spell reductions
-	if(type == 1) {
+	if (type == 1) {
 		mod = spellCost(mod);
 		
 		//Blood mages use HP for spells
-		if(player.findPerk(PerkLib.BloodMage) >= 0) {
+		if (player.findPerk(PerkLib.BloodMage) >= 0) {
 			takeDamage(mod);
 			statScreenRefresh();
 			return;
 		}                
 	}
 	//Physical special reductions
-	if(type == 2) {
+	if (type == 2) {
 		mod = physicalCost(mod);
 	}
-	if(type == 3) {
+	if (type == 3) {
 		mod = spellCost(mod);
 	}
-	if(player.fatigue >= player.maxFatigue() && mod > 0) return;
-	if(player.fatigue <= 0 && mod < 0) return;
+	if (player.fatigue >= player.maxFatigue() && mod > 0) return;
+	if (player.fatigue <= 0 && mod < 0) return;
 	//Fatigue restoration buffs!
 	if (mod < 0) {
 		var multi:Number = 1;
@@ -1636,19 +1636,19 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 		mod *= multi;
 	}
 	player.fatigue += mod;
-	if(mod > 0) {
+	if (mod > 0) {
 		mainView.statsView.showStatUp( 'fatigue' );
 		// fatigueUp.visible = true;
 		// fatigueDown.visible = false;
 	}
-	if(mod < 0) {
+	if (mod < 0) {
 		mainView.statsView.showStatDown( 'fatigue' );
 		// fatigueDown.visible = true;
 		// fatigueUp.visible = false;
 	}
 	dynStats("lus", 0, "resisted", false); //Force display fatigue up/down by invoking zero lust change.
-	if(player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
-	if(player.fatigue < 0) player.fatigue = 0;
+	if (player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
+	if (player.fatigue < 0) player.fatigue = 0;
 	statScreenRefresh();
 }
 //function changeFatigue
@@ -1668,7 +1668,7 @@ public function displayStats(e:MouseEvent = null):void
 	var combatStats:String = "";
 	
 	if (player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow") >= 0)
-		combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + " / 100\n";
+		combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusEffectv1(StatusEffects.Kelt)) + " / 100\n";
 		
 	combatStats += "<b>Damage Resistance:</b> " + (100 - Math.round(player.damagePercent(true))) + "-" + (100 - Math.round(player.damagePercent(true) - player.damageToughnessModifier(true))) + "% (Higher is better.)\n";
 
@@ -1695,8 +1695,8 @@ public function displayStats(e:MouseEvent = null):void
 	// Begin Children Stats
 	var childStats:String = "";
 	
-	if (player.statusAffectv1(StatusAffects.Birthed) > 0)
-		childStats += "<b>Times Given Birth:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n";
+	if (player.statusEffectv1(StatusEffects.Birthed) > 0)
+		childStats += "<b>Times Given Birth:</b> " + player.statusEffectv1(StatusEffects.Birthed) + "\n";
 		
 	if (flags[kFLAGS.AMILY_MET] > 0)
 		childStats += "<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n";
@@ -1849,9 +1849,9 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.lactationQ() > 0)
 		bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
 	
-	if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
-		bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusAffectv2(StatusAffects.Feeder);
-		if (player.statusAffectv2(StatusAffects.Feeder) >= 72)
+	if (player.findStatusEffect(StatusEffects.Feeder) >= 0) {
+		bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusEffectv2(StatusEffects.Feeder);
+		if (player.statusEffectv2(StatusEffects.Feeder) >= 72)
 			bodyStats += " (Too long! Sensitivity Increasing!)";
 		
 		bodyStats += "\n";
@@ -1892,14 +1892,14 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0)
 		bodyStats += "<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n";
 		
-	if (player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) {
-		if (player.statusAffectv1(StatusAffects.SlimeCraving) >= 18)
+	if (player.findStatusEffect(StatusEffects.SlimeCraving) >= 0) {
+		if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18)
 			bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
 		else {
 			if (player.findPerk(PerkLib.SlimeCore) >= 0)
-				bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusAffectv1(StatusAffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n";
+				bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusEffectv1(StatusEffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n";
 			else
-				bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusAffectv1(StatusAffects.SlimeCraving)) + " hours until you start losing strength.\n";
+				bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusEffectv1(StatusEffects.SlimeCraving)) + " hours until you start losing strength.\n";
 		}
 	}
 	
@@ -1945,10 +1945,10 @@ public function displayStats(e:MouseEvent = null):void
 	// Begin Addition Stats
 	var addictStats:String = "";
 	//Marble Milk Addition
-	if (player.statusAffectv3(StatusAffects.Marble) > 0) {
+	if (player.statusEffectv3(StatusEffects.Marble) > 0) {
 		addictStats += "<b>Marble Milk:</b> ";
 		if (player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0)
-			addictStats += Math.round(player.statusAffectv2(StatusAffects.Marble)) + "%\n";
+			addictStats += Math.round(player.statusEffectv2(StatusEffects.Marble)) + "%\n";
 		else if (player.findPerk(PerkLib.MarbleResistant) >= 0)
 			addictStats += "0%\n";
 		else
@@ -2019,11 +2019,11 @@ public function displayStats(e:MouseEvent = null):void
 		interpersonStats += "<b>Katherine Submissiveness:</b> " + telAdre.katherine.submissiveness() + "\n";
 	}
 
-	if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
-		if (player.statusAffectv2(StatusAffects.Kelt) >= 130)
+	if (player.findStatusEffect(StatusEffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
+		if (player.statusEffectv2(StatusEffects.Kelt) >= 130)
 			interpersonStats += "<b>Submissiveness To Kelt:</b> " + 100 + "%\n";
 		else
-			interpersonStats += "<b>Submissiveness To Kelt:</b> " + Math.round(player.statusAffectv2(StatusAffects.Kelt) / 130 * 100) + "%\n";
+			interpersonStats += "<b>Submissiveness To Kelt:</b> " + Math.round(player.statusEffectv2(StatusEffects.Kelt) / 130 * 100) + "%\n";
 			
 	}
 	
@@ -2082,34 +2082,34 @@ public function displayStats(e:MouseEvent = null):void
 	var statEffects:String = "";
 	
 	if (player.inHeat)
-		statEffects += "Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining\n";
+		statEffects += "Heat - " + Math.round(player.statusEffectv3(StatusEffects.Heat)) + " hours remaining\n";
 		
 	if (player.inRut)
-		statEffects += "Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining\n";
+		statEffects += "Rut - " + Math.round(player.statusEffectv3(StatusEffects.Rut)) + " hours remaining\n";
 		
-	if (player.statusAffectv1(StatusAffects.Luststick) > 0)
-		statEffects += "Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining\n";
+	if (player.statusEffectv1(StatusEffects.Luststick) > 0)
+		statEffects += "Luststick - " + Math.round(player.statusEffectv1(StatusEffects.Luststick)) + " hours remaining\n";
 		
-	if (player.statusAffectv1(StatusAffects.LustStickApplied) > 0)
-		statEffects += "Luststick Application - " + Math.round(player.statusAffectv1(StatusAffects.LustStickApplied)) + " hours remaining\n";
+	if (player.statusEffectv1(StatusEffects.LustStickApplied) > 0)
+		statEffects += "Luststick Application - " + Math.round(player.statusEffectv1(StatusEffects.LustStickApplied)) + " hours remaining\n";
 		
-	if (player.statusAffectv1(StatusAffects.LustyTongue) > 0)
-		statEffects += "Lusty Tongue - " + Math.round(player.statusAffectv1(StatusAffects.LustyTongue)) + " hours remaining\n";
+	if (player.statusEffectv1(StatusEffects.LustyTongue) > 0)
+		statEffects += "Lusty Tongue - " + Math.round(player.statusEffectv1(StatusEffects.LustyTongue)) + " hours remaining\n";
 		
-	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0)
-		statEffects += "Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining (Lust resistance 20% lower, physical resistance 25% higher.)\n";
+	if (player.statusEffectv1(StatusEffects.BlackCatBeer) > 0)
+		statEffects += "Black Cat Beer - " + player.statusEffectv1(StatusEffects.BlackCatBeer) + " hours remaining (Lust resistance 20% lower, physical resistance 25% higher.)\n";
 
-	if (player.statusAffectv1(StatusAffects.AndysSmoke) > 0)
-		statEffects += "Andy's Pipe Smoke - " + player.statusAffectv1(StatusAffects.AndysSmoke) + " hours remaining (Speed temporarily lowered, intelligence temporarily increased.)\n";
+	if (player.statusEffectv1(StatusEffects.AndysSmoke) > 0)
+		statEffects += "Andy's Pipe Smoke - " + player.statusEffectv1(StatusEffects.AndysSmoke) + " hours remaining (Speed temporarily lowered, intelligence temporarily increased.)\n";
 		
-	if (player.statusAffectv1(StatusAffects.IzumisPipeSmoke) > 0) 
-		statEffects += "Izumi's Pipe Smoke - " + player.statusAffectv1(StatusAffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
+	if (player.statusEffectv1(StatusEffects.IzumisPipeSmoke) > 0) 
+		statEffects += "Izumi's Pipe Smoke - " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
 
-	if (player.statusAffectv1(StatusAffects.UmasMassage) > 0) 
-		statEffects += "Uma's Massage - " + player.statusAffectv3(StatusAffects.UmasMassage) + " hours remaining.\n";
+	if (player.statusEffectv1(StatusEffects.UmasMassage) > 0) 
+		statEffects += "Uma's Massage - " + player.statusEffectv3(StatusEffects.UmasMassage) + " hours remaining.\n";
 		
-	if (player.statusAffectv1(StatusAffects.Dysfunction) > 0) 
-		statEffects += "Dysfunction - " + player.statusAffectv1(StatusAffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
+	if (player.statusEffectv1(StatusEffects.Dysfunction) > 0) 
+		statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
 
 	if (statEffects != "")
 		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects, false);
@@ -2168,18 +2168,18 @@ public function lustPercent():Number {
 	//TOTAL IS LIMITED TO 75%!
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//Corrupted Libido reduces lust gain by 10%!
-	if(player.findPerk(PerkLib.CorruptedLibido) >= 0) lust -= 10;
+	if (player.findPerk(PerkLib.CorruptedLibido) >= 0) lust -= 10;
 	//Acclimation reduces by 15%
-	if(player.findPerk(PerkLib.Acclimation) >= 0) lust -= 15;
+	if (player.findPerk(PerkLib.Acclimation) >= 0) lust -= 15;
 	//Purity blessing reduces lust gain
-	if(player.findPerk(PerkLib.PurityBlessing) >= 0) lust -= 5;
+	if (player.findPerk(PerkLib.PurityBlessing) >= 0) lust -= 5;
 	//Resistance = 10%
-	if(player.findPerk(PerkLib.Resistance) >= 0) lust -= 10;
+	if (player.findPerk(PerkLib.Resistance) >= 0) lust -= 10;
 	if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 	
-	if(lust < minLustCap) lust = minLustCap;
-	if(player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) {
-		if(lust >= 80) lust = 100;
+	if (lust < minLustCap) lust = minLustCap;
+	if (player.statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
+		if (lust >= 80) lust = 100;
 		else lust += 20;
 	}
 	lust += Math.round(player.perkv1(PerkLib.PentUp)/2);
@@ -2189,14 +2189,14 @@ public function lustPercent():Number {
 	//DRAWBACKS TO JUSTIFY IT.
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//Bimbo body slows lust gains!
-	if((player.findStatusAffect(StatusAffects.BimboChampagne) >= 0 || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
-	if(player.findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
-	if(player.findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
+	if ((player.findStatusEffect(StatusEffects.BimboChampagne) >= 0 || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
+	if (player.findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
+	if (player.findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
 	//Omnibus' Gift reduces lust gain by 15%
-	if(player.findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
+	if (player.findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
 	//Luststick reduces lust gain by 10% to match increased min lust
-	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
-	if(player.findStatusAffect(StatusAffects.Berzerking) >= 0) lust *= .6;
+	if (player.findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
+	if (player.findStatusEffect(StatusEffects.Berzerking) >= 0) lust *= .6;
 	if (player.findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
 	
 	//Items
@@ -2205,12 +2205,12 @@ public function lustPercent():Number {
 	if (player.weapon == weapons.HNTCANE) lust *= 0.75;
 	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
-	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
+	var statIndex:int = player.findStatusEffect(StatusEffects.UmasMassage);
 	if (statIndex >= 0)
 	{
-		if (player.statusAffect(statIndex).value1 == UmasShop.MASSAGE_RELIEF || player.statusAffect(statIndex).value1 == UmasShop.MASSAGE_LUST)
+		if (player.statusEffect(statIndex).value1 == UmasShop.MASSAGE_RELIEF || player.statusEffect(statIndex).value1 == UmasShop.MASSAGE_LUST)
 		{
-			lust *= player.statusAffect(statIndex).value2;
+			lust *= player.statusEffect(statIndex).value2;
 		}
 	}
 	
@@ -2349,7 +2349,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	//These are reset when up/down arrows are hidden with 
 	//hideUpDown();
 	//Just check str because they are either all 0 or real values
-	if(oldStats.oldStr == 0) {
+	if (oldStats.oldStr == 0) {
 		oldStats.oldStr = player.str;
 		oldStats.oldTou = player.tou;
 		oldStats.oldSpe = player.spe;
@@ -2364,15 +2364,15 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	}
 	//MOD CHANGES FOR PERKS
 	//Bimbos learn slower
-	if(!noBimbo)
+	if (!noBimbo)
 	{
-		if(player.findPerk(PerkLib.FutaFaculties) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0  || player.findPerk(PerkLib.BroBrains) >= 0) {
-			if(intel > 0) intel /= 2;
-			if(intel < 0) intel *= 2;
+		if (player.findPerk(PerkLib.FutaFaculties) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0  || player.findPerk(PerkLib.BroBrains) >= 0) {
+			if (intel > 0) intel /= 2;
+			if (intel < 0) intel *= 2;
 		}
-		if(player.findPerk(PerkLib.FutaForm) >= 0 || player.findPerk(PerkLib.BimboBody) >= 0  || player.findPerk(PerkLib.BroBody) >= 0) {
-			if(libi > 0) libi *= 2;
-			if(libi < 0) libi /= 2;
+		if (player.findPerk(PerkLib.FutaForm) >= 0 || player.findPerk(PerkLib.BimboBody) >= 0  || player.findPerk(PerkLib.BroBody) >= 0) {
+			if (libi > 0) libi *= 2;
+			if (libi < 0) libi /= 2;
 		}
 	}
 	
@@ -2385,10 +2385,10 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if (resisted) lust2 *= 1 + (player.newGamePlusMod() * 0.2);
 	
 	//lust resistance
-	if(lust2 > 0 && resisted) lust2 *= lustPercent()/100;
-	if(libi > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) libi *= 0.75;
-	if(corr > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) corr *= 0.5;
-	if(corr > 0 && player.findPerk(PerkLib.PureAndLoving) >= 0) corr *= 0.75;
+	if (lust2 > 0 && resisted) lust2 *= lustPercent()/100;
+	if (libi > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) libi *= 0.75;
+	if (corr > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) corr *= 0.5;
+	if (corr > 0 && player.findPerk(PerkLib.PureAndLoving) >= 0) corr *= 0.75;
 	if (corr > 0 && player.weapon == weapons.HNTCANE) corr *= 0.5;
 	if (player.findPerk(PerkLib.AscensionMoralShifter) >= 0) corr *= 1 + (player.perkv1(PerkLib.AscensionMoralShifter) * 0.2);
 	//Change original stats
@@ -2398,23 +2398,23 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	player.inte+=intel;
 	player.lib += libi;
 	
-	if(player.sens > 50 && sens > 0) sens/=2;
-	if(player.sens > 75 && sens > 0) sens/=2;
-	if(player.sens > 90 && sens > 0) sens/=2;
-	if(player.sens > 50 && sens < 0) sens*=2;
-	if(player.sens > 75 && sens < 0) sens*=2;
-	if(player.sens > 90 && sens < 0) sens*=2;
+	if (player.sens > 50 && sens > 0) sens/=2;
+	if (player.sens > 75 && sens > 0) sens/=2;
+	if (player.sens > 90 && sens > 0) sens/=2;
+	if (player.sens > 50 && sens < 0) sens*=2;
+	if (player.sens > 75 && sens < 0) sens*=2;
+	if (player.sens > 90 && sens < 0) sens*=2;
 	
 	player.sens+=sens;
 	player.lust+=lust2;
 	player.cor += corr;
 	
 	//Bonus gain for perks!
-	if(player.findPerk(PerkLib.Strong) >= 0 && stre >= 0) player.str+=stre*player.perk(player.findPerk(PerkLib.Strong)).value1;
-	if(player.findPerk(PerkLib.Tough) >= 0 && toug >= 0) player.tou+=toug*player.perk(player.findPerk(PerkLib.Tough)).value1;
-	if(player.findPerk(PerkLib.Fast) >= 0 && spee >= 0) player.spe+=spee*player.perk(player.findPerk(PerkLib.Fast)).value1;
-	if(player.findPerk(PerkLib.Smart) >= 0 && intel >= 0) player.inte+=intel*player.perk(player.findPerk(PerkLib.Smart)).value1;
-	if(player.findPerk(PerkLib.Lusty) >= 0 && libi >= 0) player.lib+=libi*player.perk(player.findPerk(PerkLib.Lusty)).value1;
+	if (player.findPerk(PerkLib.Strong) >= 0 && stre >= 0) player.str+=stre*player.perk(player.findPerk(PerkLib.Strong)).value1;
+	if (player.findPerk(PerkLib.Tough) >= 0 && toug >= 0) player.tou+=toug*player.perk(player.findPerk(PerkLib.Tough)).value1;
+	if (player.findPerk(PerkLib.Fast) >= 0 && spee >= 0) player.spe+=spee*player.perk(player.findPerk(PerkLib.Fast)).value1;
+	if (player.findPerk(PerkLib.Smart) >= 0 && intel >= 0) player.inte+=intel*player.perk(player.findPerk(PerkLib.Smart)).value1;
+	if (player.findPerk(PerkLib.Lusty) >= 0 && libi >= 0) player.lib+=libi*player.perk(player.findPerk(PerkLib.Lusty)).value1;
 	if (player.findPerk(PerkLib.Sensitive) >= 0 && sens >= 0) player.sens += sens * player.perk(player.findPerk(PerkLib.Sensitive)).value1;
 
 	// Uma's Str Cap from Perks (Moved to max stats)
@@ -2434,18 +2434,18 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	}*/
 	
 	//Keep stats in bounds
-	if(player.cor < 0) player.cor = 0;
-	if(player.cor > 100) player.cor= 100;
-	if(player.str > player.getMaxStats("str")) player.str = player.getMaxStats("str");
-	if(player.str < 1) player.str = 1;
-	if(player.tou > player.getMaxStats("tou")) player.tou = player.getMaxStats("tou");
-	if(player.tou < 1) player.tou = 1;
-	if(player.spe > player.getMaxStats("spe")) player.spe = player.getMaxStats("spe");
-	if(player.spe < 1) player.spe = 1;
-	if(player.inte > player.getMaxStats("inte")) player.inte= player.getMaxStats("inte");
-	if(player.inte < 1) player.inte = 1;
-	if(player.lib > 100) player.lib = 100;
-	if(player.lib < 0) player.lib = 0;
+	if (player.cor < 0) player.cor = 0;
+	if (player.cor > 100) player.cor= 100;
+	if (player.str > player.getMaxStats("str")) player.str = player.getMaxStats("str");
+	if (player.str < 1) player.str = 1;
+	if (player.tou > player.getMaxStats("tou")) player.tou = player.getMaxStats("tou");
+	if (player.tou < 1) player.tou = 1;
+	if (player.spe > player.getMaxStats("spe")) player.spe = player.getMaxStats("spe");
+	if (player.spe < 1) player.spe = 1;
+	if (player.inte > player.getMaxStats("inte")) player.inte= player.getMaxStats("inte");
+	if (player.inte < 1) player.inte = 1;
+	if (player.lib > 100) player.lib = 100;
+	if (player.lib < 0) player.lib = 0;
 	//Minimum libido. Rewritten.
 	var minLib:Number = 0;
 	
@@ -2479,24 +2479,24 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	}
 	
 	//Minimum sensitivity.
-	if(player.sens > 100) player.sens = 100;
-	if(player.sens < 10) player.sens = 10;
+	if (player.sens > 100) player.sens = 100;
+	if (player.sens < 10) player.sens = 10;
 	
 	//Add HP for toughness change.
 	HPChange(toug*2, false);
 	//Reduce hp if over max
-	if(player.HP > maxHP()) player.HP = maxHP();
+	if (player.HP > maxHP()) player.HP = maxHP();
 	
 	//Combat bounds
-	if(player.lust > player.maxLust()) player.lust = player.maxLust();
-	//if(player.lust < player.lib) {
+	if (player.lust > player.maxLust()) player.lust = player.maxLust();
+	//if (player.lust < player.lib) {
 	//        player.lust=player.lib;
 	//
 	//Update to minimum lust if lust falls below it.
-	if(player.lust < minLust()) player.lust = minLust();
+	if (player.lust < minLust()) player.lust = minLust();
 	//worms moved to minLust() in Player.as.
-	if(player.lust > player.maxLust()) player.lust = player.maxLust();
-	if(player.lust < 0) player.lust = 0;
+	if (player.lust > player.maxLust()) player.lust = player.maxLust();
+	if (player.lust < 0) player.lust = 0;
 
 	//Refresh the stat pane with updated values
 	//mainView.statsView.showUpDown();
@@ -2520,10 +2520,10 @@ public function showUpDown():void { //Moved from StatsView.
 	for each(statName in allStats) {
 		oldStatName = _oldStatNameFor(statName);
 
-		if(player[statName] > oldStats[oldStatName]) {
+		if (player[statName] > oldStats[oldStatName]) {
 			mainView.statsView.showStatUp(statName);
 		}
-		if(player[statName] < oldStats[oldStatName]) {
+		if (player[statName] < oldStats[oldStatName]) {
 			mainView.statsView.showStatDown(statName);
 		}
 	}
@@ -2539,38 +2539,54 @@ public function range(min:Number, max:Number, round:Boolean = false):Number
 
 public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 	//Virginity check
-	if(player.vaginas[vIndex].virgin) {
-		if(display) outputText("\nYour " + vaginaDescript(vIndex) + " loses its virginity!", false);
+	if (player.vaginas[vIndex].virgin) {
+		if (display) outputText("\nYour " + vaginaDescript(vIndex) + " loses its virginity!", false);
 		player.vaginas[vIndex].virgin = false;
 	}        
 	//If cock is bigger than unmodified vagina can hold - 100% stretch!
-	if(player.vaginas[vIndex].capacity() <= monster.cocks[cIndex].cArea()) {
-		if(player.vaginas[vIndex] < 5) {
+	if (player.vaginas[vIndex].capacity() <= monster.cocks[cIndex].cArea()) {
+		if (player.vaginas[vIndex] < 5) {
 			trace("CUNT STRETCHED: By cock larger than it's total capacity.");
-			if(display) {
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ", false);
+			if (display) {
+				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);
+				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ", false);
+				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ", false);
+				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ", false);
+				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ", false);
 			}
 			player.vaginas[vIndex].vaginalLooseness++;
 		}
 	}
 	//If cock is within 75% of max, streeeeetch 33% of the time
-	if(player.vaginas[vIndex].capacity() * .75 <= monster.cocks[cIndex].cArea()) {
-		if(player.vaginas[vIndex] < 5) {
+	if (player.vaginas[vIndex].capacity() * .75 <= monster.cocks[cIndex].cArea()) {
+		if (player.vaginas[vIndex] < 5) {
 			trace("CUNT STRETCHED: By cock @ 75% of capacity.");
-			if(display) {
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ", false);
-				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ", false);
+			if (display) {
+				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);
+				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ", false);
+				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>  ", false);
+				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now loose.</b>  ", false);
+				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " loses its virgin-like tightness.</b>  ", false);
 			}
 			player.vaginas[vIndex].vaginalLooseness++;
 		}
 	}
+}
+
+//Updates the player's gender
+public function genderCheck():void {
+	if (player.cocks.length > 0) {
+		if (player.vaginas.length > 0)
+			player.gender = 3;
+		else
+			player.gender = 1;
+	}
+	else if (player.vaginas.length > 0)
+		player.gender = 2;
+	else
+		player.gender = 0;
+	//Fertility fixing
+	if (player.hasVagina() && player.fertility < 0) player.fertility = 0;
 }
 
 /**

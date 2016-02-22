@@ -18,10 +18,10 @@
 //const GAR_NAME_TALKS:int = 831;
 
 private function gargoyleConfidence(arg:Number = 0):Number {
-	if(arg != 0) {
+	if (arg != 0) {
 		flags[kFLAGS.GAR_CONFIDENCE] += arg;
-		if(flags[kFLAGS.GAR_CONFIDENCE] > 100) flags[kFLAGS.GAR_CONFIDENCE] = 100;
-		else if(flags[kFLAGS.GAR_CONFIDENCE] < 0) flags[kFLAGS.GAR_CONFIDENCE] = 0;
+		if (flags[kFLAGS.GAR_CONFIDENCE] > 100) flags[kFLAGS.GAR_CONFIDENCE] = 100;
+		else if (flags[kFLAGS.GAR_CONFIDENCE] < 0) flags[kFLAGS.GAR_CONFIDENCE] = 0;
 	}
 	return flags[kFLAGS.GAR_CONFIDENCE];
 }
@@ -32,12 +32,12 @@ public function gargoylesTheShowNowOnWBNetwork():void {
 	//(When using the “Explore” option; perhaps a 15-25% chance of discovery per go)
 	outputText("You set off in search of new horizons, setting off from camp in a completely new direction than you've ever tried before.  Away from the parts of Mareth you have thus far discovered, much of the world seems to be a barren wasteland");
 	//if Desert is discovered:
-	if(player.exploredDesert > 0) outputText(", making even the desert seem healthy and full of life");
+	if (player.exploredDesert > 0) outputText(", making even the desert seem healthy and full of life");
 	outputText(".  Your trip soon begins to seem unproductive, having found no new areas of Mareth or any contact with its inhabitants.  You sigh and turn back towards camp.");
 	
 	outputText("\n\nHowever, soon you catch the faintest glimpse of <b>something</b> in the distance!  Squinting, you shield your eyes from the sun and try to discern the strange glint on the horizon, but it's simply too far away.  Well, whatever it is, it certainly merits a check – it could be anything, perhaps a city, ");
 	//if Tel'Adre has been discovered:
-	if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) outputText("or the ruins of one of Tel'Adre's more distant neighbors, ");
+	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("or the ruins of one of Tel'Adre's more distant neighbors, ");
 	outputText("or (even) some demon enclave that needs destroying.  With a quick check of your [weapon], you begin the long trek towards the shimmer in the distance.");
 	
 	//[Next]
@@ -60,7 +60,7 @@ private function gargoyleMeeting2():void {
 	outputText("\n\nHowever, what most catches your eye upon entering the sanctuary are the statues that line the walls.  Beautifully carved gray stone idols of creatures, chimeras, and nearer to the altar, god-like beings, are each set into their own little alcove.  Unfortunately most have been destroyed along with the cathedral, each lying in a pile of its own shattered debris; some having whole limbs or other extremities broken off and carried away by looters, leaving them mere shadows of their former glory.");
 	
 	outputText("\n\nAll of them but one.  In the farthest, darkest alcove you see a single statue that still seems intact. It is of a woman – well, more like a succubus than a human woman.  Though posed in a low, predatory crouch, she would normally stand nearly six feet tall, hair sculpted to fall playfully about her shoulders.  A pair of bat-like wings protruding from her back curl back to expose the lush, smooth orbs of her breasts, easily DD's on a human.  A spiked, mace-like tail curls about her legs that are attached to the pedestal upon which she's placed.  As you stand marveling at the statue's beauty, you cannot help but notice the slit of her pussy nearly hidden beneath her.  Oddly, it seems to have been carved hollow so that you could easily stick a few fingers inside if you so choose.");
-	if(player.lib >= 40) outputText("  Maybe you could take this with you as a life-sized sex toy?");
+	if (player.lib >= 40) outputText("  Maybe you could take this with you as a life-sized sex toy?");
 	
 	outputText("\n\nHowever, your attention is soon drawn from her body to the pedestal upon which she stands.  A pair of solid gold chains extend from the pedestal to her wrists, binding the statue.  You notice a plaque has been bolted to the pedestal, a feature not present on any of the other statues here.  Leaning down, you blow a sizable amount of dust from the plaque, revealing the following short inscription:");
 	
@@ -92,7 +92,7 @@ private function breakZeChains():void {
 	//Introduces two new values: " + flags[kFLAGS.GAR_NAME] + ", the gargoyle's name, given by the Champion, and Confidence, a value that has a base score of 0 (submissive/slave) rising to 100 (equal). Negatives are possible.
 	outputText("You swing your [weapon] up over your head and strike the chains.");
 	//if using your hands:
-	if(player.weaponName == "fists") outputText("  \"<i>OW! Dammit, that hurt!</i>\"  What the hell were you thinking!?  Still, looks like you got results...");
+	if (player.weaponName == "fists") outputText("  \"<i>OW! Dammit, that hurt!</i>\"  What the hell were you thinking!?  Still, looks like you got results...");
 	outputText("  An ear-splitting <i>SCHING!</i> echoes through the cathedral as shards of gold go flying.  You recoil, shielding your face from the surprisingly explosive force of the chains' shattering.  When the dust settles you cautiously lower your arms, giving you a good view of what lies – or rather, kneels – before you:");
 	
 	outputText("\n\nThe gargoyle has stepped down from her pedestal, and now kneels as a supplicant before a king, forehead near the ground and weight rested upon her stone knuckles even as her massive wingspan unfolds behind her and her mace-like tail swishes rapidly behind her.  Slowly, the gargoyle raises her head to gaze upon you, her now ruby-red eyes staring into yours. Her smooth, nippleless breasts heave, once-stone hair falling forward in strands, fringing her smooth, angular face.  Her thin, gray lips slowly curl into a small, sultry smile as she says, just on the edge of hearing...");
@@ -171,7 +171,7 @@ private function carnalOrder():void {
 	outputText("Well, well. " + flags[kFLAGS.GAR_NAME] + " seems willing to follow any order you give, no matter how carnal, and you could not help but notice her rather <i>arousing</i> attributes earlier.  Smirking wickedly, you command your new gargoyle to finger herself.");
 	
 	outputText("\n\n\"<i>Master reminds me of the last master,</i>\" she says quietly, almost coldly, but does not hesitate to flop onto her taut butt and spread her legs wide for you.  Easily, she slips three fingers into her slit, which stretches slightly to accommodate the insertion.  Watching you intently, she begins to rapidly piston her fingers in and out, masturbating to a rhythm near that to your ");
-	if(player.cor < 40) outputText("flustered");
+	if (player.cor < 40) outputText("flustered");
 	else outputText("excited");
 	outputText(" heartbeat.  The way she watches you, unblinking, as she fingers herself is rather unnerving, and you soon command her to stop.  She does so immediately, though with what you think might have been a sigh, and assumes a low crouch to await your next command.");
 	gargoyleStarterMenu();
@@ -188,7 +188,7 @@ private function firstGargoyleTalk():void {
 	outputText("\n\n\"<i>Who was. . . she?</i>\"");
 	outputText("\n\n\"<i>She was. . . Master.</i>\"");
 	//(Silly mode)
-	if(silly()) outputText("\n\n\"<i>You know 'master' is masculine, right?</i>\"\n\n\"<i>Indeed.  Master was male, too.</i>\"\n\n\"<i>But you just. . . Nevermind.</i>\"");
+	if (silly()) outputText("\n\n\"<i>You know 'master' is masculine, right?</i>\"\n\n\"<i>Indeed.  Master was male, too.</i>\"\n\n\"<i>But you just. . . Nevermind.</i>\"");
 	outputText("\n\n\"<i>Fine,</i>\" you sigh.  Apparently she doesn't want to tell you, and you don't feel like pressing the issue just yet.  \"<i>In that case, what happened here?</i>\"");
 	
 	outputText("\n\nSuddenly, " + flags[kFLAGS.GAR_NAME] + " breaks the stare and looks away, as if in shame.  \"<i>The demons' doom that even now blights Mareth took its toll here, too.  The people of a town no longer here believed they were safe under Marae's roof.  Protected.  Their faith was. . . Misplaced.</i>\"");
@@ -233,50 +233,50 @@ private function reassureTheGargoyle():void {
 //[b]Player Returns to the Cathedral A[/b]
 public function returnToCathedral(woken:Boolean = false):void {
 	flags[kFLAGS.FOUND_CATHEDRAL] = 1;
-	if(!woken) {
+	if (!woken) {
 		clearOutput();
-		if(rand(3) == 0) outputText("You make your way back to the ruined Cathedral in the wastelands.  You notice some of the debris has been cleared away from the courtyard, and some of the windows have been boarded up.  " + flags[kFLAGS.GAR_NAME] + "'s obviously been working since you last left, trying to make the building more habitable.  With your path less obstructed than before, you enter.");
+		if (rand(3) == 0) outputText("You make your way back to the ruined Cathedral in the wastelands.  You notice some of the debris has been cleared away from the courtyard, and some of the windows have been boarded up.  " + flags[kFLAGS.GAR_NAME] + "'s obviously been working since you last left, trying to make the building more habitable.  With your path less obstructed than before, you enter.");
 		//[b]Player Returns to the Cathedral B[/b]
-		else if(rand(2) == 0) outputText("You spot the Cathedral in the distance, and see plumes of smoke rising. Alarmed, you ready your [weaponName] and rush over.  To your relief, however, you discover the burning objects are just a few dead imps that were looking for easy pillage, but found the Cathedral's newly-awoken protector instead.  Stepping around their charred corpses, you enter.");
+		else if (rand(2) == 0) outputText("You spot the Cathedral in the distance, and see plumes of smoke rising. Alarmed, you ready your [weaponName] and rush over.  To your relief, however, you discover the burning objects are just a few dead imps that were looking for easy pillage, but found the Cathedral's newly-awoken protector instead.  Stepping around their charred corpses, you enter.");
 		//[b]Player Returns to the Cathedral C[/b]
 		else outputText("You wander into the Cathedral grounds, and are rather alarmed to see a pair of little green goblin sluts poking around outside, trying to cart off some of the stone tombstones for their nefarious schemes.  They see you approaching, however, and quickly flee – more interested in salvage than fighting or fucking today.  Chuckling to yourself, you enter.");
 	}
 	menu();
 	//[b]Cathedral Interior – 06:00 –> 09:00 & 18:00 –> 21:00[/b]
-	if(model.time.hours <= 9 || model.time.hours >= 18 || woken) {
-		if(!woken) {
+	if (model.time.hours <= 9 || model.time.hours >= 18 || woken) {
+		if (!woken) {
 			outputText("\n\nIn the dim ");
-			if(model.time.hours <= 9) outputText("early morning");
+			if (model.time.hours <= 9) outputText("early morning");
 			else outputText("late evening");
 			outputText(" light streaming in from the broken windows, you see " + flags[kFLAGS.GAR_NAME] + " poking around some of the rubble, slowly but surely making efforts to repair the damage done to the Cathedral.  Seeing you, however, she immediately drops what she was doing and ");
-			if(gargoyleConfidence() < 70) outputText("kneels before you, head bowed low.");
-			else if(gargoyleConfidence() < 99) outputText("bows low before you, a small smile on her stone lips.");
+			if (gargoyleConfidence() < 70) outputText("kneels before you, head bowed low.");
+			else if (gargoyleConfidence() < 99) outputText("bows low before you, a small smile on her stone lips.");
 			else outputText("with a sexy sway of her hips, approaches you and lays a small but tender kiss upon your cheek before bowing her head to you.");
 			
 			outputText("\n\n\"<i>Master has returned,</i>\" " + flags[kFLAGS.GAR_NAME] + " says ");
-			if(gargoyleConfidence() > 50) outputText("happily.");
+			if (gargoyleConfidence() > 50) outputText("happily.");
 			else outputText("solemnly.");
 			outputText("  \"<i>What would you have of me?</i>\"");
 		}
 		//(Display options: [Sex] [Rituals] [Talk] [Appearance] and [Leave]. If Confidence is 70+, also display the option for [Kinky Rituals])
-		if(player.lust >= 33) addButton(0,"Sex",gargoyleSexMenu);
+		if (player.lust >= 33) addButton(0,"Sex",gargoyleSexMenu);
 		addButton(1,"Rituals",ritualGargoyle);
-		if(flags[kFLAGS.GAR_HISTORY] < 3 || flags[kFLAGS.GAR_CATHEDRAL] < 3 || flags[kFLAGS.GAR_NAME_TALKS] < 3) addButton(2,"Talk",talkToGargoyle);
+		if (flags[kFLAGS.GAR_HISTORY] < 3 || flags[kFLAGS.GAR_CATHEDRAL] < 3 || flags[kFLAGS.GAR_NAME_TALKS] < 3) addButton(2,"Talk",talkToGargoyle);
 		addButton(3,"Appearance",gargoyleAppearance);
-		if(gargoyleConfidence() >= 70 && flags[kFLAGS.RITUAL_INTRO] > 0) addButton(4,"Kinky Rituals",gargoyleKinkyRituals);
+		if (gargoyleConfidence() >= 70 && flags[kFLAGS.RITUAL_INTRO] > 0) addButton(4,"Kinky Rituals",gargoyleKinkyRituals);
 	}
 	//[b]Cathedral Interior: 10:00 –> 17:00[/b]
 	else {
-		if(!woken) {
+		if (!woken) {
 			outputText("\n\nWithin the ruins, you can see " + flags[kFLAGS.GAR_NAME] + " perched atop her pedestal in a low, predatory crouch, much as you found her.  Waving a hand in front of her eyes, you confirm she's in some sort of dormant mode.  A simple touch from her Master could revive her");
-			if(player.lust >= 33) outputText(", or you could use her to satisfy your own urges, not unlike a life-size sex toy");
+			if (player.lust >= 33) outputText(", or you could use her to satisfy your own urges, not unlike a life-size sex toy");
 			outputText("."); 
 		}
 		//(Display options: [Wake Her] [Use Her (if Lust >= 30)] [Appearance] and [Leave])
 		addButton(0,"Wake Her",returnToCathedral,true);
-		if(player.lust >= 33) {
-			if(player.hasCock()) addButton(1,"Use Her",useGargoyleMaleHerm);
-			else if(player.hasVagina()) addButton(1,"Use Her",useHerGargoyleFemale);
+		if (player.lust >= 33) {
+			if (player.hasCock()) addButton(1,"Use Her",useGargoyleMaleHerm);
+			else if (player.hasVagina()) addButton(1,"Use Her",useHerGargoyleFemale);
 		}
 		addButton(3,"Appearance",gargoyleAppearance);
 	}
@@ -288,11 +288,11 @@ private function gargoyleSexMenu():void {
 	clearOutput();
 	outputText("You approach " + flags[kFLAGS.GAR_NAME] + " and tell her you have some... pressure that needs relieving.");
 	//(if Confidence =< 69:
-	if(gargoyleConfidence() <= 69) outputText("  The gargoyle bows low before you, her face expressionless.  \"<i>By your command, Master.  How would you have me?</i>\"");
+	if (gargoyleConfidence() <= 69) outputText("  The gargoyle bows low before you, her face expressionless.  \"<i>By your command, Master.  How would you have me?</i>\"");
 	else outputText("  Her ruby-red eyes lock with yours and a sultry grin plays across her gray marble features.  She slides an arm around your waist and presses her sizable, surprisingly soft breasts against your chest.  \"<i>How would Master have me?</i>\"");
 	menu();
 	//(If Male, display options: [Vaginal] [Anal] [Titfuck] [Strap-on] [Leave])
-	if(player.gender == 1) {
+	if (player.gender == 1) {
 		addButton(1,"Anal",gargoyleAnal);
 		addButton(0,"Vaginal",gargoyleCoochiiGetsPlowed);
 		addButton(2,"Titfuck",titFuckTheGargoyle);
@@ -300,13 +300,13 @@ private function gargoyleSexMenu():void {
 		addButton(4,"Leave",returnToCathedral);
 	}	
 	//(If Female, display options: [Tail Fuck] and [Ride Strap-on] [Leave])
-	if(player.gender == 2) {
+	if (player.gender == 2) {
 		addButton(0,"Tail Fuck",tailFuckGargoyleScene);
 		addButton(1,"Strap-On",strapOnGargoyle);
 		addButton(4,"Leave",returnToCathedral);
 	}
 	//(If Herm, display all above options)
-	if(player.gender == 3) {
+	if (player.gender == 3) {
 		addButton(1,"Anal",gargoyleAnal);
 		addButton(0,"Vaginal",gargoyleCoochiiGetsPlowed);
 		addButton(2,"Titfuck",titFuckTheGargoyle);
@@ -315,7 +315,7 @@ private function gargoyleSexMenu():void {
 		addButton(14,"Leave",returnToCathedral);
 	}
 	//(If Genderless, display [Strap-on] [Leave])
-	if(player.gender == 0) {
+	if (player.gender == 0) {
 		addButton(3,"Strap-On",strapOnGargoyle);
 		addButton(14,"Leave",returnToCathedral);
 	}
@@ -331,7 +331,7 @@ private function gargoyleAnal():void {
 	outputText("\n\nDeciding you've gotten her more than ready, you grasp your [cock biggest] and push the head against her still-tight ass.  Her mouth forms a sharp “O” of pleasure as you grab her hips and push into her.  Though you've lubed her up plenty, her passage is still incredibly tight, and so cool inside it takes a force of will to keep your cock from wilting.  But all it takes is one look at her face over her shoulder, eyes rolled back in pleasure, to keep you thrusting in at full mast.");
 	
 	//(if PC's first cock is 50 inches or bigger; Silly Mode only:)
-	if(player.cocks[player.biggestCockIndex()].cockLength >= 50) {
+	if (player.cocks[player.biggestCockIndex()].cockLength >= 50) {
 		outputText("\n\nKnowing full well the living statue doesn't have much in the way of anatomy, you continue to push more and more of monstrous manhood into " + flags[kFLAGS.GAR_NAME] + "'s asshole, watching with glee as her stomach begins to distend with the massive size of your prick.  Then her chest bulges, making her gasp in pain and clutch at her breast; that doesn't stop you, though.  With one mighty, massive thrust, you slam yourself up to the hilt in " + flags[kFLAGS.GAR_NAME] + "'s ass, and watch with glee as the head bursts out of her mouth, squirting pre and drool all over the floor.  The poor gargoyle makes a muffled scream and starts flailing around helplessly, trying to do <i>something</i> about the massive member now protruding from her mouth.");
 		
 		outputText("\n\nWith gusto, you start hammering away at your living cock-sleeve, using her entire body as one great big ona-hole to take your gargantuan girth.  Resigned to her fate, " + flags[kFLAGS.GAR_NAME] + " slumps forward and grasps the head of your [cock biggest], giving you a handy through her mouth as her innards milk the rest of your shaft.");
@@ -343,7 +343,7 @@ private function gargoyleAnal():void {
 	else {
 		outputText("\n\nYou spend a few minutes making short, slow thrusts into the gargoyle's ass, slowly working your way further and further inside her until you bottom out");
 		//if Balls:
-		if(player.balls > 0) outputText(", your balls slapping against her butt");
+		if (player.balls > 0) outputText(", your balls slapping against her butt");
 		outputText(".  \"<i>M-Master,</i>\" she pants, chest heaving after the experience.  You give her a playful push, leaving her face on the cold stone floor as you withdraw your cock to the tip from her cold stone insides.  She clenches up tight as you slam yourself back in, nearly making you cum on the spot.  Now you're the one moaning, and so decide to reward her with a sharp slap on the ass.  She makes a little squeak when you strike her, but she tightens up wonderfully, her anal passage trying to milk you as you withdraw.  You give her another swat as you push back in, and are treated to the same results.  Grinning, you pick up your pace, alternating between pounding her tight asshole and slapping her taut butt cheeks.");
 		
 		outputText("\n\nSoon, she's moaning again, this time all in pleasure, utterly enthralled in the assault you're laying onto her behind.  Her spiked tail and wings spasm and twitch wildly around you, a sure sign of her having given over to the pleasure of your rough buttfucking.  She's only able to keep up for a few minutes, however, before you feel her ass contracting hard upon your shaft, her muscles clamping down as her body prepares for a massive anal orgasm.  Pleased that your ministrations are close to bringing her to orgasm, you let yourself go, and quickly feel the tell-tale rush of seed up your shaft.  You hold out for just a moment more, until " + flags[kFLAGS.GAR_NAME] + " cries out with pleasure, letting loose a scream that echoes to the rafters.  You cum, too, shooting your jism up her ass in thick spurts that only serve to provide you further lubrication, letting you pound her hard until you've shot off every last bit of cum.");
@@ -360,7 +360,7 @@ private function gargoyleAnal():void {
 private function gargoyleCoochiiGetsPlowed():void {
 	clearOutput();
 	var x:int = player.cockThatFits(60);
-	if(x < 0) x = player.smallestCockIndex();
+	if (x < 0) x = player.smallestCockIndex();
 	
 	outputText("You gently push " + flags[kFLAGS.GAR_NAME] + " onto her back and spread her long, marble legs, giving you a clear view of her tight little pussy.  You brush your hand along her thighs, making her gasp with the sensation as your knuckles run along her smooth, cool flesh.  Your fingers come to her small clit, and you caress her tiny pleasure buzzer, eliciting a tiny moan from the gargoyle.  Grinning, you give it another flick; " + flags[kFLAGS.GAR_NAME] + " squirms, trying to either enhance or end the sensation, you can't be sure.  You start to finger her clitty harder, creating little circles around it as you slip another finger into her tight passage.");
 	
@@ -369,7 +369,7 @@ private function gargoyleCoochiiGetsPlowed():void {
 	outputText("\n\nYou pull your " + cockDescript(x) + " from your [armor], letting it flop down atop her crotch.  Embarrassed, " + flags[kFLAGS.GAR_NAME] + " looks away as you rub the underside of your cock across her mons, spitting on it for a bit of extra lubricant.  You lean back, lining the tip of your cockhead with the gargoyle's tight slit, and press forward.  She lets out a sharp gasp as your cock presses against her, pushing it past her lips and finally slipping into her depths.");
 	
 	outputText("\n\nThough her opening was painfully tight, her inner passage expands easily around your cock, letting you slip in more and more of your dickmeat until you're buried ");
-	if(player.cockArea(x) > 60) outputText("as far as she can take you.");
+	if (player.cockArea(x) > 60) outputText("as far as she can take you.");
 	else outputText("up to the hilt inside her.");
 	outputText("  Now that you're so deep in the gargoyle, you can see her visibly trembling, panting with pleasure.  Leaning down, you cup her cheek and plant a kiss on her thin lips.  She returns it eagerly, letting your probing tongue in to play with hers.  Mid-kiss, she wraps her arms and legs around you, holding you close against her heaving chest.");
 	outputText("\n\nYou start to thrust against her, making short, fast strokes in and out of her cool passage.  Soon, you're both moaning with pleasure as you change the tempo, switching to long and hard pumps that make the Cathedral echo with the sound of your hips slapping into " + flags[kFLAGS.GAR_NAME] + "'s raised asscheeks.  She can only hold on to you tighter, biting her lower lip, eyes closed, as you start to well and truly pound her.");
@@ -377,7 +377,7 @@ private function gargoyleCoochiiGetsPlowed():void {
 	outputText("\n\nTo your dismay, you feel the tell-tale clenching in your gut, signaling your impending orgasm.  You clutch at " + flags[kFLAGS.GAR_NAME] + "'s shoulders as you slam into her one last time, as far as you'll go, and shoot out the first of your load.  The sensation of your thick, hot jizz exploding into her sets the gargoyle off as well: she rolls her head back and lets out a soft scream, crunching down on your cock until you're afraid it's going to burst.  You bury your face in her neck and let her milk your cock for all it's worth, until your spooge threatens to overflow and pool on the ground.");
 	
 	outputText("\n\nThe two of you lay there for a while after, until your " + cockDescript(x) + " has deflated and you've both stopped panting from exertion and pleasure.  Giving her another kiss, you pull out of her cold depths – now significantly warmer thanks to your passion – and stuff your dick back into your armor.");
-	if(gargoyleConfidence() >= 70) outputText("  Before you can stand, though, " + flags[kFLAGS.GAR_NAME] + " hugs her arms tightly around you pulling you down on top of her and mashing your face between her soft tits.");
+	if (gargoyleConfidence() >= 70) outputText("  Before you can stand, though, " + flags[kFLAGS.GAR_NAME] + " hugs her arms tightly around you pulling you down on top of her and mashing your face between her soft tits.");
 	
 	outputText("\n\n\"<i>Thank you, Master,</i>\" she says, running a hand through your " + hairDescript() + ".  \"<i>That was wonderful.</i>\"");
 	
@@ -403,7 +403,7 @@ private function titFuckTheGargoyle():void {
 	outputText("\n\nYou grab " + flags[kFLAGS.GAR_NAME] + " and push her down hard, slamming your cock down her throat as you cum.  A human would surely have choked with this maneuver – instead, " + flags[kFLAGS.GAR_NAME] + " squirms and flails, but you can see and feel her swallow your cum as it pours into her mouth, her throat massaging your flaring head, milking it harder than any tit-job ever could have.  Once her face has been ground into your pubes, you buck your hips sharply, thrusting into her throat as the last of your jizz spurts out and down her gizzard.");
 	
 	outputText("\n\nBy the time you're done, " + flags[kFLAGS.GAR_NAME] + "'s face is an utter mess, with white lines trickling down her cheeks.  You drag your [cock biggest] out of her with a wet POP, unleashing a dam of jizz that quickly leaks out of her agape mouth to stain her breasts and belly.  You chuckle at the sight");
-	if(gargoyleConfidence() >= 70) outputText(", and to your surprise, so does " + flags[kFLAGS.GAR_NAME] + "");
+	if (gargoyleConfidence() >= 70) outputText(", and to your surprise, so does " + flags[kFLAGS.GAR_NAME] + "");
 	outputText(".");
 	
 	outputText("\n\n\"<i>Was that... pleasing, Master?</i>\" she asks innocently.");
@@ -426,11 +426,11 @@ private function strapOnGargoyle():void {
 	
 	outputText("\n\n\"<i>Well, someone's enjoying herself,</i>\" you tease, and immediately " + flags[kFLAGS.GAR_NAME] + " freezes, her mouth agape with embarrassment.  With a little laugh, you give her a pat on the thigh and start to strip out of your [armor].  But you can't just leave " + flags[kFLAGS.GAR_NAME] + " without SOME stimulation: ");
 	//(If Human Legs/Feet [ie, needs toes], as new paragraph): 
-	if(!player.isTaur() && !player.isGoo() && !player.isDrider() && !player.isNaga()) outputText("you reveal your leg first, moving slowly and sensually, giving her a tantalizing look at your nethers before hiding them again.  With a wide grin, you creep your foot up to her thighs and gently run your heel along her smooth, tender flesh.  You come to the base of her rod, standing stark straight in the air like a flag-pole.  As you strip, you grasp her cock between your big and second toe, sliding them up the smooth shaft to the tip.  " + flags[kFLAGS.GAR_NAME] + " moans, rolling her head back as you start to foot-fuck her cock, slowly putting more and more pressure on the steel member until it's pressed against her belly.  Your heel takes over, running quickly along the underside of her cock as you finally rid yourself of your [armor].");
+	if (!player.isTaur() && !player.isGoo() && !player.isDrider() && !player.isNaga()) outputText("you reveal your leg first, moving slowly and sensually, giving her a tantalizing look at your nethers before hiding them again.  With a wide grin, you creep your foot up to her thighs and gently run your heel along her smooth, tender flesh.  You come to the base of her rod, standing stark straight in the air like a flag-pole.  As you strip, you grasp her cock between your big and second toe, sliding them up the smooth shaft to the tip.  " + flags[kFLAGS.GAR_NAME] + " moans, rolling her head back as you start to foot-fuck her cock, slowly putting more and more pressure on the steel member until it's pressed against her belly.  Your heel takes over, running quickly along the underside of her cock as you finally rid yourself of your [armor].");
 	//Else, continued from above paragraph:
 	else outputText("you giver her a good show, putting on a brief striptease for the gargoyle.  You strip your [armor] slowly, sensually, showing only the barest hints of your privates until the last moment, when the last piece of your clothing falls to the floor.");
 	//(From Both, if has Vagina:) 
-	if(player.hasVagina()) {
+	if (player.hasVagina()) {
 		outputText("\n\n" + flags[kFLAGS.GAR_NAME] + " is panting with lust by the time you're done teasing and stripping for her. Now nude, you drop back to your knees over her holy rod-cock, straddling her hips and lining her up with your [vagina]. You lower yourself until the tip of the rod is pressing against your lower lips – you're pleasantly surprised by the warm tingling sensation that quickly spreads out around the point of contact, and your cunny responds immediately by letting loose a little trickle of moisture that beads down on the gargoyle's shaft.");
 		
 		outputText("\n\nWithout further ado, you drop down on the strap-on, lowering yourself onto the tingling metal rod until your groin is pressed against " + flags[kFLAGS.GAR_NAME] + "'s.  She, all the while, is biting her lower lip and whimpering with pleasure as your [vagina] swallows her length. Once you've taken all she has to offer, you begin grinding your hips against her, rocking back and forth atop the gargoyle.  To your surprise, " + flags[kFLAGS.GAR_NAME] + " grabs you, squeezing her long fingers into your [hips] and pulling you up, almost off her rod. You decide to go with it; you grab her tits for support and start to bounce on her cock.");
@@ -474,7 +474,7 @@ private function tailFuckGargoyleScene():void {
 	outputText("\n\nWhen you've finished, you carefully extricate yourself from the gargoyle's tail and, a bit bow-legged, gather up your [armor].  By the time you're dressed, " + flags[kFLAGS.GAR_NAME] + "'s cleaned herself off and is eagerly awaiting some token of your approval.");
 	
 	outputText("\n\n\"<i>Was Master satisfied?</i>\" she asks");
-	if(gargoyleConfidence() > 70) outputText(" with just a hint of a smile");
+	if (gargoyleConfidence() > 70) outputText(" with just a hint of a smile");
 	outputText(".");
 	
 	outputText("\n\nYou rub her head and tell her that oh, yes you were. You leave her with a gratified smile on her thin lips.");
@@ -519,11 +519,11 @@ private function useHerGargoyleFemale():void {
 //[b]Ritual (First Time)[/b]
 private function ritualGargoyle():void {
 	clearOutput();
-	if(flags[kFLAGS.RITUAL_INTRO] == 0) {
+	if (flags[kFLAGS.RITUAL_INTRO] == 0) {
 		flags[kFLAGS.RITUAL_INTRO] = 1;
 		outputText("You note that the sanctuary's altar has been cleared of rubble, and a number of candles have been lit upon it. Resting atop the flat stone surface is a simple iron bowl filled with what appears to be water. Curious, you ask " + flags[kFLAGS.GAR_NAME] + " what she's been up to.");
 		outputText("\n\n\"<i>Long before Master came, I watched over the parishioners and their faith. They performed strange sacraments and rituals to purify the body and dispel evils. ");
-		if(gargoyleConfidence() < 50) outputText(" Forgive my impertinence, but");
+		if (gargoyleConfidence() < 50) outputText(" Forgive my impertinence, but");
 		outputText(" I thought perhaps Master might someday have need of these rites, and prepared them for you.  I know a ritual to purify the body, another to purify the mind, and a third that banishes evil creatures and spirits, though I warn you: cleansing the body can best be done through pain, and banishment may be as... invasive... as the possession itself.  Does Master have need of these?</i>\"");
 	}
 	//[b]Ritual (Any after First)[/b]
@@ -535,7 +535,7 @@ private function ritualGargoyle():void {
 	menu();
 	addButton(0,"Body",bodyRitual);
 	addButton(1,"Mind",mindGargoyleRitual);
-	if(player.findStatusAffect(StatusAffects.Infested) >= 0 || player.findStatusAffect(StatusAffects.Exgartuan) >= 0) addButton(2,"Banish",banishmentGargoyleRitual);
+	if (player.findStatusEffect(StatusEffects.Infested) >= 0 || player.findStatusEffect(StatusEffects.Exgartuan) >= 0) addButton(2,"Banish",banishmentGargoyleRitual);
 	addButton(4,"Leave",returnToCathedral);
 }
 
@@ -605,10 +605,10 @@ private function mindGargoyleRitual():void {
 private function banishmentGargoyleRitual():void {
 	clearOutput();
 	outputText("Talking about " + flags[kFLAGS.GAR_NAME] + "'s rituals, you explain that you seem to have picked up ");
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) outputText("a hitchhiker");
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) outputText("a hitchhiker");
 	else outputText("some hitchhikerss");
 	outputText(" in your travels, and would like to rid yourself of them.  She tells you to strip and brace yourself against the altar.  \"<i>Unfortunately, as you have been invaded, so too is this a very... invasive ritual.</i>\"  You nod your assent – you really want to get ");
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) outputText("this bastard");
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) outputText("this bastard");
 	else outputText("these bastards");
 	outputText(" out of your system.");
 	
@@ -617,26 +617,26 @@ private function banishmentGargoyleRitual():void {
 	outputText("\n\nYou try your best to relax yourself, though as soon as you make any headway, you feel an intense, invasive pressure against your [asshole].  You take a deep breath, grit your teeth, and force yourself to relax.  The smooth holy rod slips in, forcing its way inexorably into your anus.  You feel a burning sensation begin to spread throughout your body, creeping outward from your asshole like little tendrils of fire.");
 	
 	outputText("\n\n\"<i>Do not worry, Master,</i>\" " + flags[kFLAGS.GAR_NAME] + " says");
-	if(gargoyleConfidence() >= 50) outputText(" soothingly, using her free hand to stroke your thighs");
+	if (gargoyleConfidence() >= 50) outputText(" soothingly, using her free hand to stroke your thighs");
 	outputText(".  \"<i>The pain is necessary.  Everything will be all right.</i>\"");
 	
 	outputText("\n\nStill, you can't help but hiss in agony as the holy burn spreads through you, seeping into your vulnerable gentials and sensitive chest.");
 	//with Exgartuan:
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) outputText("  Booming from within you, you hear the demon's voice: \"<i>Hey!  What the shit is this!?  What're you doing? Fucking stop, you ingrate!</i>\"");
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) outputText("  Booming from within you, you hear the demon's voice: \"<i>Hey!  What the shit is this!?  What're you doing? Fucking stop, you ingrate!</i>\"");
 	//with Worms: 
 	else outputText("  Gratifyingly, however, you can feel the infestation within you squirming and writhing, desperately seeking escape.");
 	
 	outputText("\n\nSuddenly, the holy rod jammed up your [asshole] makes a loud hissing sound, and withdraws.  Panting, you collapse to the ground, gripping your gut.  It's over, and you feel... alone.  The ");
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) outputText("creature within you has");
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) outputText("creature within you has");
 	else outputText("creatures within you have");
 	outputText(" been absorbed and purged by the rod, which " + flags[kFLAGS.GAR_NAME] + " proceeds to chuck out a window.  Hopefully she has more, in case you ever get ");
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) outputText("possessed");
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) outputText("possessed");
 	else outputText("infested");
 	outputText(" again.");
 	
 	outputText("\n\nStill panting and gasping from your ordeal, you notice " + flags[kFLAGS.GAR_NAME] + " looming over you, smiling.  You could be a dick for all that pain she caused you, or thank her for helping you.");
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) player.removeStatusAffect(StatusAffects.Exgartuan);
-	else player.removeStatusAffect(StatusAffects.Infested);
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) player.removeStatusEffect(StatusEffects.Exgartuan);
+	else player.removeStatusEffect(StatusEffects.Infested);
 	player.takeDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
@@ -676,7 +676,7 @@ private function cuddleForBanishments():void {
 //(While Confidence 70+)
 private function gargoyleKinkyRituals():void {
 	clearOutput();
-	if(flags[kFLAGS.KINKY_RITUALS_SPOKEN] == 0) {
+	if (flags[kFLAGS.KINKY_RITUALS_SPOKEN] == 0) {
 		outputText("You broach the subject of rituals to your gargoyle and are met with a surprisingly coy smile from her.  You ask her what's on her mind, to which " + flags[kFLAGS.GAR_NAME] + " chuckles and says, \"<i>I've been thinking, Master. If you so desire, it may be possible to... enhance... the rituals that I've been using.</i>\"");
 		outputText("\n\nYou ask her exactly what she has in mind.");
 		outputText("\n\n\"<i>The last Master was obsessed with pleasures of the flesh, and when she learned I was able to perform spiritual rituals, designed corrupted versions of them to fit her tastes.  If you'll allow it, I believe I can strike a middle-ground – making the rituals more pleasurable to us both, without the corrupting influence.  Would Master be interested in attempting one with me?</i>\"");
@@ -691,7 +691,7 @@ private function gargoyleKinkyRituals():void {
 	menu();
 	addButton(0,"Body",kinkyBodyRitual);
 	addButton(1,"Mind",mindRitualPervy);
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(2,"Banish",banishPervRitual);
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0 || player.findStatusEffect(StatusEffects.Infested) >= 0) addButton(2,"Banish",banishPervRitual);
 	addButton(4,"Leave",returnToCathedral);
 }
 
@@ -703,7 +703,7 @@ private function kinkyBodyRitual():void {
 	outputText("You tell " + flags[kFLAGS.GAR_NAME] + " that you could stand to reverse some of the corruption that has affected your body.  With an eager nod, she strips you down, takes you to a side alcove near the altar and instructs you to spread your arms and legs.  Putting your trust in your little gargoyle, you do so, allowing her to bind you spread-eagle with long leather straps.");
 	
 	outputText("\n\nYou watch over your shoulder as she retrieves a small riding crop from her altar and, giving it an experimental crack in her palm, saunters back over to you.  Still grinning, she presses herself up against your bare back");
-	if(player.biggestTitSize() >= 1) outputText(", cupping your [chest] in her cold stone hands");
+	if (player.biggestTitSize() >= 1) outputText(", cupping your [chest] in her cold stone hands");
 	outputText(".  Your [nipples] go rock hard from her cold touch, and you shudder as she gently nips your ear and drags the length of the crop along your thighs.");
 	
 	outputText("\n\n\"<i>You've been a very naughty " + player.mf("boy","girl") + ", to have a body so warped,</i>\" she says, again running the crop along your incredibly sensitive inner thighs, making you tremble with the sensation.  You're acutely aware of her large, soft breasts pressing into your sweat-slicked back.  Huskily, " + flags[kFLAGS.GAR_NAME] + " whispers, \"<i>Don't worry, Master. I'll take good care of you...</i>\"  CRACK!  She lays on with the crop, a short, stinging stoke across your thigh.  You gasp, as much in pleasure as in pain, still reveling in the sensation of her embrace.");
@@ -712,13 +712,13 @@ private function kinkyBodyRitual():void {
 	
 	outputText("\n\nShe plays easily within you, running her cool appendage over your own tongue, letting it slide across your teeth and cheeks as she slides a hand down to your ");
 	//if Male/Herm: 
-	if(player.hasCock()) outputText(cockDescript(0));
-	else if(player.hasVagina()) outputText(vaginaDescript());
+	if (player.hasCock()) outputText(cockDescript(0));
+	else if (player.hasVagina()) outputText(vaginaDescript());
 	else outputText("barren crotch");
 	outputText(".  She breaks the kiss and steps back, laying on one last time – CRACK! with the crop, stinging you again with an intense mix of pain and pleasure.  Gasping and panting from stimulation, you nearly collapse when " + flags[kFLAGS.GAR_NAME] + " unbinds you, though she's quick to catch you before you fall.");
 	
 	outputText("\n\nShe guides you over to the altar and helps you lie atop it to rest.  Once you're comfortably situated, " + flags[kFLAGS.GAR_NAME] + " slips up beside you, resting her cheek ");
-	if(player.biggestTitSize() < 1) outputText("on your chest");
+	if (player.biggestTitSize() < 1) outputText("on your chest");
 	else outputText("between your [chest]");
 	outputText(".  Already, you feel more thick-skinned and less lusty, and so give an appreciative grin to your cute little gargoyle.  In response, she nuzzles against you and wraps her bat-like wings protectively around the two of you.");
 	
@@ -758,40 +758,40 @@ private function banishPervRitual():void {
 	clearOutput();
 	//(PC is cleared of Worms and/or Exgartuan)
 	outputText("You explain to " + flags[kFLAGS.GAR_NAME] + " that you seem to have picked up ");
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) outputText("a hitchhiker");
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) outputText("a hitchhiker");
 	else outputText("some hitchhikers");
 	outputText(" in your travels, and you're tired of ");
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) outputText("it");
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) outputText("it");
 	else outputText("them");
 	outputText(".  She gives you an understanding nod and tells you to strip.  As you do so, she dips beneath the altar, reappearing with a silver, blue-rune covered rod nestled into what looks like a leather thong.  " + flags[kFLAGS.GAR_NAME] + " slips the thong on, letting a slight gasp escape her lips as the inner end of the rod enters her.");
 	
 	outputText("\n\nShe gives the shaft of the strap-on a few experimental strokes and, satisfied, says, \"<i>I've turned down the power of the runes, so it will not hurt you so much... though it will take longer than normal.  I suggest you lubricate it, Master.</i>\"  Smiling, she sits herself atop the alter and presents her silver “cock” to you.  You kneel and slip your face between her spread legs, giving the rod a quick lick.  It's incredibly smooth and quite cold, much like its wearer, but your tongue comes away with a warm tingle spreading through it – not pain, but more like numbness.  You take the rod into your mouth, running your tongue across its length and thrusting your face against it, blowing it like a cock while getting it sopping wet with your saliva.  You've only been at it for a minute when you notice " + flags[kFLAGS.GAR_NAME] + " is bucking her hips slightly and moaning quietly, obviously getting more than a little enjoyment from the sensation.  Perhaps she can feel through it, like a real dick?  Grinning, you redouble your efforts to suck her off.");
 	
 	outputText("\n\n\"<i>Enough, Master,</i>\" she gasps, pushing you back.  Breathing heavily, she takes you by the hand and gets you to brace yourself against the altar.  Your entire mouth is numb now, tingling from the strange sensation given off by the holy rod-cock.  " + flags[kFLAGS.GAR_NAME] + " slips behind you, putting a cool, soft hand on your [hips] as she lines up for penetration.  You grip down hard on the edge of the altar, and try your best to relax your sphincter as you begin to feel a tingling pressure against your back door.");
-	if(player.ass.analWetness > 0) outputText("  She slips in easily, sliding her tingling holy rod into you until her hips are pressed against your [butt]");
+	if (player.ass.analWetness > 0) outputText("  She slips in easily, sliding her tingling holy rod into you until her hips are pressed against your [butt]");
 	else outputText("  She slowly but surely coaxes the holy rod into your asshole, making long and slow thrusts into you until she finally bottoms out");
 	outputText(".");
 
 	outputText("\n\nWith her rod firmly inside you, " + flags[kFLAGS.GAR_NAME] + " puts her hands on your [hips] for leverage and begins to pull out again, leaving a hot, intense tingling sensation in your rectum.  She thrusts in, this time much more quickly than you were expecting, making you gasp and moan as her hips slam into yours.");
 	//If PC has Worms: 
-	if(player.findStatusAffect(StatusAffects.Exgartuan) < 0) outputText("  You can feel her cock ram against your prostate, and shudder as the writhing mass of worms begin to panic as her cock pushes against them, obviously causing the creatures great pain.");
+	if (player.findStatusEffect(StatusEffects.Exgartuan) < 0) outputText("  You can feel her cock ram against your prostate, and shudder as the writhing mass of worms begin to panic as her cock pushes against them, obviously causing the creatures great pain.");
 	outputText("  " + flags[kFLAGS.GAR_NAME] + " begins to fuck you in earnest, hammering your [asshole] with the strap-on until you're both panting and gasping, nearly overwhelmed by sensation.");
 	//(If PC has Exgartuan: 
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) outputText("  You can hear the demonic voice of Exgartuan inside your mind, yelling and cursing as he is rapidly drained from your body and sealed into the holy rod within you.");
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) outputText("  You can hear the demonic voice of Exgartuan inside your mind, yelling and cursing as he is rapidly drained from your body and sealed into the holy rod within you.");
 	
 	//(If PC has a cock:
-	if(player.hasCock()) {
+	if (player.hasCock()) {
 		outputText("\n\n" + flags[kFLAGS.GAR_NAME] + " suddenly releases your hips and, pressing her soft breasts into your sweat-slicked back, grabs your [cock biggest] in her cold hand.  You let out a little gasp as she begins to jerk you off, rapidly pistoning your cock as she continues to pound your ass.  Between the dual stimulation, you feel a pressure begin to swell up inside your abused prostate, a tell-tale sign of orgasm.  She gives you a few last thrusts before you cum, splattering the altar with thick ropes of cum as you both yell in ecstasy.");
 	}
 	else {
 		outputText("\n\n" + flags[kFLAGS.GAR_NAME] + " reaches the peak of her speed, utterly reaming you as ");
-		if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) outputText("Exgartuan is");
+		if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) outputText("Exgartuan is");
 		else outputText("the worms are");
 		outputText(" sucked from your body. Suddenly, she leans in and presses her lips to yours, thrusting her tongue against yours, letting you feel her begin to convulse and shake with release. Cupping her cheek, you return the kiss with gusto, willing yourself toward an anal orgasm. Within moments, the incredible tingling and the rapid ass-fucking combine toward your own climax, and you squeeze down hard upon the rod inside you as you cum, shaking and shuddering in the gargoyle's grasp.");
 	}
 	
 	outputText("\n\nSuddenly, the holy rod jammed up your [asshole] makes a loud hissing sound, and withdraws. Panting, you collapse to the ground, gripping your gut.  It's over, and though a part of you feels suddenly very empty, it's soon forgotten as " + flags[kFLAGS.GAR_NAME] + " slips down beside you, having already tossed the holy rod out the window.  The creature");
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) outputText(" within you has");
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) outputText(" within you has");
 	else outputText("s within you have");
 	outputText(" been absorbed and purged by the rod; and you can't help but hope she has more... just in case.");
 	
@@ -799,8 +799,8 @@ private function banishPervRitual():void {
 	
 	outputText("\n\nEventually, though, you know you need to get back to camp.  You try to tell " + flags[kFLAGS.GAR_NAME] + ", but to your surprise, she's fast asleep, snoring softly.  With a grin, you untangle yourself from her embrace and find something to cover her with before giving her another kiss and making your way home.");
 	//(Return PC to camp, advance time 1 hour)
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0) player.removeStatusAffect(StatusAffects.Exgartuan);
-	else player.removeStatusAffect(StatusAffects.Infested);
+	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) player.removeStatusEffect(StatusEffects.Exgartuan);
+	else player.removeStatusEffect(StatusEffects.Infested);
 	player.takeDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	gargoyleConfidence(2);
@@ -810,31 +810,31 @@ private function banishPervRitual():void {
 
 //[b]Talk[/b]
 private function talkToGargoyle(output:Boolean = true):void {
-	if(output) {
+	if (output) {
 		clearOutput();
 		outputText("You take a seat on one of the sanctuary's pews, motioning for " + flags[kFLAGS.GAR_NAME] + " to join you.");
 		//If Confidence <50:
-		if(gargoyleConfidence() < 50) outputText("  She meekly approaches her Master and kneels before you, head bowed submissively.");
+		if (gargoyleConfidence() < 50) outputText("  She meekly approaches her Master and kneels before you, head bowed submissively.");
 		//if Confidence = 51-69: 
-		else if(gargoyleConfidence() < 70) outputText("  She nearly skips to follow you, assuming her low crouch at your feet and looking up at your expectantly.");
+		else if (gargoyleConfidence() < 70) outputText("  She nearly skips to follow you, assuming her low crouch at your feet and looking up at your expectantly.");
 		else outputText("  Happily, she takes a seat beside you and slips an arm around your shoulders, locking you in companionable closeness.");
 		outputText("  You tell her you'd like to talk for a few minutes, which immediately causes her eyes to brighten excitedly.  \"<i>Master honors me...  What would you like to talk about?</i>\"");
 	}
 	//(Display Options: [History] [Cathedral] " + flags[kFLAGS.GAR_NAME] + " [Leave])
 	//(Whenever the player selects a topic, play one of the following dialogue scenes then return the PC to the main interaction menu and increase Confidence by +10, unless noted otherwise. Once a scene has been played, it will not play again. Once all three in a topic are played, it closes.)
 	menu();
-	if(flags[kFLAGS.GAR_HISTORY] < 3) addButton(0,"History",historyGo);
-	if(flags[kFLAGS.GAR_CATHEDRAL] < 3) addButton(1,"Cathedral",cathedralTalks);
-	if(flags[kFLAGS.GAR_NAME_TALKS] < 3) addButton(2,"Her",talkAboutGarName);
+	if (flags[kFLAGS.GAR_HISTORY] < 3) addButton(0,"History",historyGo);
+	if (flags[kFLAGS.GAR_CATHEDRAL] < 3) addButton(1,"Cathedral",cathedralTalks);
+	if (flags[kFLAGS.GAR_NAME_TALKS] < 3) addButton(2,"Her",talkAboutGarName);
 	addButton(4,"Back",returnToCathedral);
 }
 
 private function historyGo():void {
-	if(flags[kFLAGS.GAR_HISTORY] == 0) {
+	if (flags[kFLAGS.GAR_HISTORY] == 0) {
 		flags[kFLAGS.GAR_HISTORY] = 1;
 		talkToGargoyleHistoryA();
 	}
-	else if(flags[kFLAGS.GAR_HISTORY] == 1) {
+	else if (flags[kFLAGS.GAR_HISTORY] == 1) {
 		historyOfGargoylesB();
 		flags[kFLAGS.GAR_HISTORY] = 2;
 	}
@@ -875,7 +875,7 @@ private function comfortGargoyleDumbness():void {
 	gargoyleConfidence(10);
 	outputText("You sigh and reach over to " + flags[kFLAGS.GAR_NAME] + "; ");
 	//if Confidence <50:
-	if(gargoyleConfidence() < 50) outputText("she recoils, but ");
+	if (gargoyleConfidence() < 50) outputText("she recoils, but ");
 	outputText("you cup her cheek, and turn her to face you.  If she could produce tears, you're sure they'd be streaming down her cheeks.  You give her your most reassuring smile and lean in to give her a quick kiss on the brow.  She gasps, but before you know it, she has leapt into your lap and has buried her face into your chest, holding onto you as if for dear life.  You put your arms around her and hold her close while she cries, spending the next few minutes either whispering reassurances to her or stroking her back and hair.  Eventually, she calms down.  Ever so shyly, " + flags[kFLAGS.GAR_NAME] + " returns the kiss you'd given her.  \"<i>I'm sorry, Master,</i>\" she whispers, curling up beside you.  \"<i>I should have been strong enough to protect my people.  I know that.  That it's my fault they've all been dragged off to some unholy carnal pit.  I just...</i>\"  You stop her before she can go on and tell her that no, it wasn't her fault.  She couldn't have done anything to stop it.  She tries to give you a brave smile and says, \"<i>I know. Can we... talk about something else, Master?</i>\"");
 	//(Return PC to the Talk menu)
 	talkToGargoyle(false);
@@ -885,11 +885,11 @@ private function comfortGargoyleDumbness():void {
 private function historyOfGargoylesB():void {
 	clearOutput();
 	outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about the demons coming to Mareth");
-	if(gargoyleConfidence() >= 70) outputText(" if she's up to it");
+	if (gargoyleConfidence() >= 70) outputText(" if she's up to it");
 	outputText(".  ");
 	outputText("Hesitantly, she nods her assent, though she says, \"<i>I'm sorry, Master, but I must warn you: I was greatly abused by the demons.  They are responsible for everything that is wrong with my world");
 	//if Confidence >70: 
-	if(gargoyleConfidence() > 70) outputText(", and I despise them with every fiber of my being");
+	if (gargoyleConfidence() > 70) outputText(", and I despise them with every fiber of my being");
 	outputText(".  I may not be the most fair nor most balanced source of information.</i>\"");
 	
 	outputText("\n\nYou tell her that's fine.  She steels herself, then begins to speak: \"<i>The demons arrived decades ago.  I can't remember how long, exactly; I spent most of that time chained and dormant until you found me, and time blurred.  When they arrived, it was like a tidal wave of corruption...  They swept down from the mountains and stormed through the fields.  They took the world by surprise, capturing... capturing much of it in short order.  There was little the people could do to stop them.  Some people fled, some people died, many more were captured and turned into-into sex toys o-or worse...</i>\" she trails off, shaking visibly.  The memory must be horrible for her.  \"<i>I'm sorry, Master.  It's just... those corrupt monsters came here near the end of the first year.  We'd held off so long... but it wasn't enough.</i>\"  She falls silent, looking shamefully away.  You suppose that's all you'll get out of her for now.");
@@ -901,10 +901,10 @@ private function historyOfGargoylesB():void {
 private function gargoyleHistoryC():void {
 	clearOutput();
 	//(PC has both Isabella and Izma as followers)
-	if(kGAMECLASS.izmaScene.izmaFollower() && kGAMECLASS.isabellaFollowerScene.isabellaFollower()) {
+	if (kGAMECLASS.izmaScene.izmaFollower() && kGAMECLASS.isabellaFollowerScene.isabellaFollower()) {
 		outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about the world of Mareth.  Giving it a few moments of quiet thought, she answers: \"<i>I do not have any experience outside of the church grounds, Master, but I remember the words of the last Master, and the parishioners before her.  There are... the world has a vast expanse of plains and woodlands, broken up by a mountain range and lake.  Those last two are populated by savage beasts, minotaurs, cow-girls, anemone, and shark-people, both of whom will rend your flesh or rape you half to death.</i>\"");
 		outputText("\n\nWhoa, there. You stop " + flags[kFLAGS.GAR_NAME] + " and explain to her that some of your lovers – mates, even – are just such beasts.  You tell her a little bit about Izma and Isabella, enforcing the fact that they're both not only quite friendly, but sweet as well.  They're just regular people");
-		if(gargoyleConfidence() > 50) outputText(" just like her");
+		if (gargoyleConfidence() > 50) outputText(" just like her");
 		outputText(".  If she could, you're sure " + flags[kFLAGS.GAR_NAME] + " would be blushing bright crimson as you educate her on a little inter-special tolerance and understanding.  Chastened, she nods her comprehension when you're finished and, after a long pause, asks, \"<i>I-If Master really has many... girlfriends... does... no, it's silly, of course not...</i>\"");
 		outputText("\n\nGiving her a pat on the head, you encourage her to speak her mind.  Meekly she whimpers, \"<i>If master has many girlfriends... what am I?</i>\"");
 		outputText("\n\nOh shit.  Here we go.  You suppose you could dodge the bullet, or you could tell her what you really think: is she just a slave you wandered into owning, or do you think something more of her?");
@@ -915,7 +915,7 @@ private function gargoyleHistoryC():void {
 		addButton(2,"Girlfriend",gargoylesAreGirlfriends);
 	}
 	//(If PC has Marble as a follower)
-	else if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
+	else if (player.findStatusEffect(StatusEffects.CampMarble) >= 0) {
 		outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about the world of Mareth.  Giving it a few moments of quiet thought, she answers: \"<i>I do not have any experience outside of the church grounds, Master, but I remember the words of the last Master, and the parishioners before her.  I believe there is a lake not far from here.  Beyond that, the world has a vast expanse of plains and woodlands, broken up by a great mountain range – strange monsters live there, but worst of all are savage bull-like beasts called Minotaurs.  And the cow-girls... Lacta-Bovines, I think they're called, who're just as nasty.</i>\"");
 		outputText("\n\nYou cut " + flags[kFLAGS.GAR_NAME] + " off right there, and explain that one of those 'savage beasts' is your lover, Marble, who's really quite sweet.  The gargoyle makes a horrified gasp and covers her mouth.  \"<i>I'm so sorry, Master! I didn't know...  All I'd heard were stories, years ago.  I didn't mean... but...  I-I didn't know Master had a girlfriend,</i>\" she whines pitifully.  Obviously, knowing that she's not your only lady-friend has upset the poor thing.");
 		outputText("\n\nWell.  What do you say to that: that you're not exclusive with Marble, or that " + flags[kFLAGS.GAR_NAME] + " doesn't count, being a statue and all?");
@@ -925,7 +925,7 @@ private function gargoyleHistoryC():void {
 		addButton(1,"Doesn'tCount",gargoyleDoesntCountAsAWaifu);
 	}
 	//(If PC has Izma as a follower)
-	else if(kGAMECLASS.izmaScene.izmaFollower()) {
+	else if (kGAMECLASS.izmaScene.izmaFollower()) {
 		outputText("You ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about the world of Mareth.  Giving it a few moments of quiet thought, she answers: \"<i>I do not have any experience outside of the church grounds, Master, but I remember the words of the last Master, and the parishioners before her.  There are... the world has a vast expanse of plains and woodlands, broken up by a great mountain range.  There is a lake not far from here, if I recall; a race of very dangerous shark-folk live there.</i>\"  With a chuckle, you tell " + flags[kFLAGS.GAR_NAME] + " that you're more than well aware of that; indeed, you consider one such creature to be your mate, your beta.  She makes a slight gasp, and gushes out an apology.  \"<i>I'm so sorry, Master!  I hadn't realized... I thought...</i>\" she falls silent for a moment, then says shyly, \"<i>I wasn't aware Master had a girlfriend.</i>\"  Obviously, knowing that she's not your only lady-friend has upset the poor thing.");
 		
 		outputText("\n\nWell. What do you say to that: that you're not exclusive with Izma, or that she doesn't count, being a statue and all?");
@@ -1013,17 +1013,17 @@ private function gargoylesAreGirlfriends():void {
 	//(All Other Display Options: [Strap-on] [Leave])
 	//(Use normal sex scenes for above options, as well as Leave options.
 	menu();
-	if(player.hasCock()) addButton(0,"Vaginal",gargoyleCoochiiGetsPlowed);
+	if (player.hasCock()) addButton(0,"Vaginal",gargoyleCoochiiGetsPlowed);
 	else addButton(1,"Strap-on",strapOnGargoyle);
 	addButton(4,"Leave",camp.returnToCampUseOneHour);
 }
 
 private function cathedralTalks():void {
-	if(flags[kFLAGS.GAR_CATHEDRAL] == 0) {
+	if (flags[kFLAGS.GAR_CATHEDRAL] == 0) {
 		flags[kFLAGS.GAR_CATHEDRAL]++;
 		talkCathedralA();
 	}
-	else if(flags[kFLAGS.GAR_CATHEDRAL] == 1) {
+	else if (flags[kFLAGS.GAR_CATHEDRAL] == 1) {
 		cathedralBTalk();
 		flags[kFLAGS.GAR_CATHEDRAL] = 2;
 	}
@@ -1092,7 +1092,7 @@ private function cathedralC():void {
 	clearOutput();
 	outputText("As you sit down with " + flags[kFLAGS.GAR_NAME] + " to talk, you remember her words when you first met indicating that she could not – or would not – leave the Cathedral, even if you asked her to.   You ask her about that.");
 	outputText("\n\n\"<i>Master,</i>\" " + flags[kFLAGS.GAR_NAME] + " says, now looking you straight in the eye, \"<i>the Cathedral is my home, the only home I've ever known.  Even if I could leave, I would not want to");
-	if(gargoyleConfidence() > 69) outputText(" unless it were to be with you, that is");
+	if (gargoyleConfidence() > 69) outputText(" unless it were to be with you, that is");
 	outputText(".  But I am bound to this place, Master. I could not leave even if I wanted to.  My makers were wary of their creation, and chose to bind me here; they thought that if I ever rebelled, I would not do much harm if contained within the Cathedral.</i>\"");
 	
 	outputText("\n\nYou ask her if any of the other gargoyles ever rebelled.  This causes her to look away quickly, hiding her face.  \"<i>Yes,</i>\" she whispers.  \"<i>One.  When the demons came, a single gargoyle saw his chance to escape his fetters and threw open the doors when all the parish was gathered within taking shelter from the attack.  They were helpless to resist the demons, no matter how hard the rest of us fought to protect them....</i>\"");
@@ -1137,11 +1137,11 @@ private function berateDatGargoyle4SomeSavin():void {
 }
 
 private function talkAboutGarName():void {
-	if(flags[kFLAGS.GAR_NAME_TALKS] == 0) {
+	if (flags[kFLAGS.GAR_NAME_TALKS] == 0) {
 		flags[kFLAGS.GAR_NAME_TALKS] = 1;
 		garNameA();
 	}
-	else if(flags[kFLAGS.GAR_NAME_TALKS] == 1) {
+	else if (flags[kFLAGS.GAR_NAME_TALKS] == 1) {
 		flags[kFLAGS.GAR_NAME_TALKS] = 2;
 		garNameB();
 	}
@@ -1159,23 +1159,23 @@ private function garNameA():void {
 	outputText("Curious about your gargoyle, you ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about her life before you arrived.  She makes a nervous chuckle at the request, and shyly says, \"<i>Master is too kind...  I am no one special...</i>\"");
 	
 	outputText("\n\nYou urge her on, adding that you can make it a command if you have to.  She fidgets awkwardly for a moment, but finally says, \"<i>If Master insists.  I was sculpted in a village not far from here.  The high priest ordered me and a dozen others from the finest sculptor in the land.  We were perfect, in a way.  Each of us was unique, complete, made to be as human as you ");
-	if(player.race() == "human") outputText("are");
+	if (player.race() == "human") outputText("are");
 	else outputText("once were");
 	outputText(", Master, and more.  We were to be their guardians, protectors – their perfect servants.</i>\"");
 	
 	outputText("\n\n\"<i>When the demons came...I survived, the others didn't.  I was here alone for a while after that.  Then, perhaps ten years ago, the last Master came.  She came here seeking shelter from a great horde of demons; what she found was me, all alone.</i>\"");
 	
 	outputText("\n\nYou ask her to tell you a little about the \"<i>last Master.</i>\"  Hesitantly, she agrees: \"<i>Master came here seeking refuge.  Bound as I was, I could not help but to protect the Cathedral – and her – from the imps that pursued her.  She was a sorceress of some skill, however, and when I told her of my bonds, she manipulated the magics that control me so that I was forced to serve her.  Those same magics are why I am bound to serve you, Master.</i>\"");
-	if(gargoyleConfidence() > 69) outputText("  She continues, \"<i>though even were I not compelled to, I would still serve you,</i>\" she says with a playful wink.");
+	if (gargoyleConfidence() > 69) outputText("  She continues, \"<i>though even were I not compelled to, I would still serve you,</i>\" she says with a playful wink.");
 
 	outputText("\n\n\"<i>When the last Master found me, I was not myself, however.  The coming of the demons was still vivid in my mind; the scars of their abuse weigh heavily upon me even now, yet they were crippling when she bound me.  I suppose it could have been worse – I could have been taken by a demon or a true sadist, but my time with her nearly destroyed my mind.");
 	//If Confidence =<69:
-	if(gargoyleConfidence() <= 69) outputText("\n\nAfter what she did to me, I cannot enjoy sex; just the thought of it makes me shudder.</i>\"");
+	if (gargoyleConfidence() <= 69) outputText("\n\nAfter what she did to me, I cannot enjoy sex; just the thought of it makes me shudder.</i>\"");
 	else outputText("After what she did to me, I never thought I'd enjoy sex again.</i>\"  With a loving smile, " + flags[kFLAGS.GAR_NAME] + " takes your hand in hers and brushes it against her cheek.  \"<i>But for you, Master, I think I could make an exception.</i>\"");
 	
 	outputText("\n\nYou can't help but ask... what is it that her last Master did that was so awful, that made her fear you when you first met her, and now makes her terrified of the most intimate of contact?");
 	//If Confidence =<69:
-	if(gargoyleConfidence() <= 69) outputText("  \"<i>I'm sorry, Master, I can't... it hurts too much to think about it.</i>\"");
+	if (gargoyleConfidence() <= 69) outputText("  \"<i>I'm sorry, Master, I can't... it hurts too much to think about it.</i>\"");
 	else outputText("  \"<i>Sorry, Master. I just....Don't want to talk about it right now.  Ask me again some time.</i>\"");
 	
 	outputText("\n\nYou consider pressing the issue, but remember that you've been away from camp a bit too long.  You resolve to ask her next time, and take your leave of the gargoyle.");
@@ -1264,10 +1264,10 @@ private function gargoyleAppearance():void {
 	clearOutput();
 	outputText("" + flags[kFLAGS.GAR_NAME] + " is a gray marble statue that, through magics you can't quite grasp, has been animated.");
 	outputText("\n\nShe stands roughly six feet tall, with a slender, girly frame.  She wears no clothes, seemingly possessing no modesty at all, and uses her brutally spiked tail as a weapon.  She has a cute, somewhat angular face that is very feminine.  Her skin and hair are a light shade of gray, though she has solid, ruby-red eyes which ");
-	if(gargoyleConfidence() < 70) outputText("glow timidly, reflecting a submissive and servile nature in the gargoyle.");
+	if (gargoyleConfidence() < 70) outputText("glow timidly, reflecting a submissive and servile nature in the gargoyle.");
 	else outputText("have a cool fire in them, showing her steadily-growing confidence and warmth toward you.");
 	outputText("  Her skin is cold and smooth to the touch, a consequence of her marble material, yet she is quite soft, almost squishy.  " + flags[kFLAGS.GAR_NAME] + " has a pair of cute little horns upon her brow, and has bat-like wings sprouting from her back which give a gentle flap every few seconds, an unconscious gesture on her part as you stare at her.  She has a long, spiked tail that curls ");
-	if(gargoyleConfidence() < 70) outputText("timidly");
+	if (gargoyleConfidence() < 70) outputText("timidly");
 	else outputText("playfully");
 	outputText(" about her thighs.  She has two normal human legs sculpted to end in normal human feet.");
 	

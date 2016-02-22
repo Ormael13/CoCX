@@ -137,12 +137,12 @@ package classes.Scenes.Dungeons
 			outputText("You take the book titled 'Combat Manual' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n");
 			//(One of the following random effects happens)
 			var choice:Number = rand(3);
-			if(choice == 0) {
+			if (choice == 0) {
 				outputText("You learn a few new guarding stances that seem rather promising.");
 				//(+2 Toughness)
 				dynStats("tou", 2);
 			}
-			else if(choice == 1) {
+			else if (choice == 1) {
 				outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
 				//(+2 Intelligence)
 				dynStats("int", 2);

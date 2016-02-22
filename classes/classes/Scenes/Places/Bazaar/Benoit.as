@@ -34,10 +34,10 @@ private function benoitLover():Boolean {
 	return flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] >= 2;
 }
 public function benoitAffection(changes:Number = 0):Number {
-	if(changes != 0) {
+	if (changes != 0) {
 		flags[kFLAGS.BENOIT_AFFECTION] += changes;
-		if(flags[kFLAGS.BENOIT_AFFECTION] > 100) flags[kFLAGS.BENOIT_AFFECTION] = 100;
-		else if(flags[kFLAGS.BENOIT_AFFECTION] < 0) flags[kFLAGS.BENOIT_AFFECTION] = 0;
+		if (flags[kFLAGS.BENOIT_AFFECTION] > 100) flags[kFLAGS.BENOIT_AFFECTION] = 100;
+		else if (flags[kFLAGS.BENOIT_AFFECTION] < 0) flags[kFLAGS.BENOIT_AFFECTION] = 0;
 	}
 	return flags[kFLAGS.BENOIT_AFFECTION];
 }
@@ -189,15 +189,15 @@ public function benoitIntro():void {
 	var suggestText:String = "";
 	var suggest:Function = null;
 	var womb:Function = null;
-	if(flags[kFLAGS.TIMES_IN_BENOITS] == 0) {
+	if (flags[kFLAGS.TIMES_IN_BENOITS] == 0) {
 		outputText("You cautiously approach the stall.  The shadow thrown by its large, overhanging canopy makes it quite difficult to see into its interior, and getting inside is made even more hazardous by the sheer volume of objects which clutter the area around it and hang out of the shelves arranged along its wooden walls.  Everything Mareth has ever created or distilled seems to be here - or at least, everything Mareth has ever thrown out.  Pots, pans, ugly crockery, shelves stuffed with clothing, a spice rack bulging with all manner of suspect-looking potions... you imagine you could probably find anything you'd ever want in here - or something closely resembling it - if you looked hard enough.");
 		outputText("\n\n\"<i>Allo?</i>\" says a raspy voice from further in the gloom.  \"<i>'Oo is zair?</i>\"  You can make out a counter constructed from crates, and a tall, thin shape behind it - a lizan, by the looks of his build and smooth scales.  Something about his shape makes you feel uneasy, though... you shift further in to take a closer look at the stall owner.  He's seated in the only area of his shop not taken up by junk, right next to a heap of rugs and robes, and has a fez perched on top of his blunt head.  It's when he turns his grey slit eyes to you that you realize what is putting you on edge - it's a basilisk!  Panic grips you as you try to wrench your eyes away... which you do, easily.  Curious despite yourself, you look back tentatively.  The creature's eyes seem oddly milky, and they seem to be staring beyond you.  Realisation takes hold when you see the white stick balanced carefully on the counter's side.");
 		outputText("\n\n\"<i>Yes, go ahead, stare,</i>\" says the basilisk in a long-suffering tone, making you jump. \"<i>It is a funny joke, yes?  Believe me, I wake up laughing about it every morning.  At least here zey stare.  In ze mountains, zey are so embarrassed zey can't even look at me.  Or at least I assume zey can't.</i>\"  He straightens his back and sets his jaw.  \"<i>'Owever, my slack-jawed friend, zis is not a freak show.  Zis is Benoit's Spectacular Salvage Shop!  So if you are not 'ere to buy or sell salvage... kindly piss off.</i>\"");
 		
 		outputText("\n\nYou wonder how a blind anything can make it in such a rough and ready place as the Bazaar, but then Benoit curls " + benoitMF("his","her") + " claws protectively into what appears to be a pile of robes sitting next to " + benoitMF("him","her") + ", which opens dark brown eyes and sets its muzzle on the counter, looking at you plaintively.  The Alsatian buried within the cloth looks to you like a big softy, but you're willing to concede the point as made.");
 	}
-	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) {
-		if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0) benoitAndFemPCTalkAboutEggings();
+	else if (flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) {
+		if (flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0) benoitAndFemPCTalkAboutEggings();
 		suggest = eggySuggest;
 		suggestText = "Suggest";
 	}
@@ -269,11 +269,11 @@ public function benoitIntro():void {
 	else
 	{
 		//Subsequent Visit, Affection 0-10: 
-		if(benoitAffection() <= 10) outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then looks at you sourly.  \"<i>Well?</i>\" " + benoitMF("he","she") + " rasps.");
+		if (benoitAffection() <= 10) outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then looks at you sourly.  \"<i>Well?</i>\" " + benoitMF("he","she") + " rasps.");
 		//Benoit reacts after fucking the PC.
-		else if(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 1 && flags[kFLAGS.BENOIT_POST_FIRSTFUCK_TALK] == 0)
+		else if (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 1 && flags[kFLAGS.BENOIT_POST_FIRSTFUCK_TALK] == 0)
 			firstTimeAfterBoningEncounterBenoit();
-		else if(benoitAffection() < 35) outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then relaxes in " + benoitMF("his","her") + " seat.  \"<i>Allo again, " + player.short + ".  What brings you 'ere?</i>\"");
+		else if (benoitAffection() < 35) outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then relaxes in " + benoitMF("his","her") + " seat.  \"<i>Allo again, " + player.short + ".  What brings you 'ere?</i>\"");
 		//Subsequent Visit, Affection 35+ but pre-lover/pre-fem: 
 		else
 		{
@@ -300,9 +300,9 @@ public function benoitIntro():void {
 	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(3, "Feminize", benoitFeminise);
 	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) addButton(3, "Herminize", benoitHerminise);
 	//Basilisk Womb
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
+	if (flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
 	//Suggest & sex
-	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
+	if (flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
 	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33) addButton(6, "Sex", femoitSexIntro);
 }
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
@@ -313,7 +313,7 @@ private function buyOrSellExplanationFirstTime():void {
 
 public function benoitsBuyMenu():void {
 	clearOutput();
-	if(flags[kFLAGS.BENOIT_1] == 0) updateBenoitInventory();
+	if (flags[kFLAGS.BENOIT_1] == 0) updateBenoitInventory();
 	if (flags[kFLAGS.BENOIT_EXPLAINED_SHOP] == 0) buyOrSellExplanationFirstTime();
 	var buyMod:Number = 2;
 	
@@ -370,15 +370,15 @@ private function benoitTransactBuy(slot:int = 1):void {
 	
 	if (flags[kFLAGS.BENOIT_STATUS] == 1) buyMod = 1.66;
 	
-	if(slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
-	else if(slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
+	if (slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
+	else if (slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
 	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
-	if(player.gems < int(buyMod * itype.value)) {
+	if (player.gems < int(buyMod * itype.value)) {
 		outputText("You consider making a purchase, but you lack the gems to go through with it.");
 		doNext(benoitsBuyMenu);
 		return;
 	}
-	if(benoitLover()) outputText("After examining what you've picked out with " + benoitMF("his","her") + " fingers, " + benoitMF("Benoit","Benoite") + " hands it over and accepts your gems with a grin.");
+	if (benoitLover()) outputText("After examining what you've picked out with " + benoitMF("his","her") + " fingers, " + benoitMF("Benoit","Benoite") + " hands it over and accepts your gems with a grin.");
 	else outputText("After examining what you've picked out with " + benoitMF("his", "her") + " fingers, " + benoitMF("Benoit","Benoite") + " hands it over, names the price and accepts your gems with a curt nod.\n\n");
 	//(+3 Affection)
 	benoitAffection(3);
@@ -390,7 +390,7 @@ private function benoitTransactBuy(slot:int = 1):void {
 
 private function benoitSellTransact(slot:int, sellMod:int):void {
 	clearOutput();
-	if(benoitLover()) outputText("Benoit" + benoitMF("","e") + " gives your object the briefest of goings-over with " + benoitMF("his","her") + " fingers before stowing it away and handing over your gem reward with a trusting smile.");
+	if (benoitLover()) outputText("Benoit" + benoitMF("","e") + " gives your object the briefest of goings-over with " + benoitMF("his","her") + " fingers before stowing it away and handing over your gem reward with a trusting smile.");
 	else outputText("Following a painstaking examination of what you've given " + benoitMF("him", "her") + " with his hands and nose, Benoit grudgingly accepts it and carefully counts out your reward.");
 	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
 		while (player.itemSlots[slot].quantity > 0) {
@@ -504,10 +504,10 @@ public function updateBenoitInventory():void {
 	if (rand(100) < 4) {
 		//There is a 4% chance the following items will appear in Slot 2: Bimbo Liqueur, Large Pink Egg, Large Blue Egg, Bro Brew, T. Shark Tooth.
 		temp = rand(5);
-		if(temp == 0) flags[kFLAGS.BENOIT_2] = consumables.BIMBOLQ.id;
-		else if(temp == 1) flags[kFLAGS.BENOIT_2] = consumables.L_PNKEG.id;
-		else if(temp == 2) flags[kFLAGS.BENOIT_2] = consumables.L_BLUEG.id;
-		else if(temp == 3) flags[kFLAGS.BENOIT_2] = consumables.BROBREW.id;
+		if (temp == 0) flags[kFLAGS.BENOIT_2] = consumables.BIMBOLQ.id;
+		else if (temp == 1) flags[kFLAGS.BENOIT_2] = consumables.L_PNKEG.id;
+		else if (temp == 2) flags[kFLAGS.BENOIT_2] = consumables.L_BLUEG.id;
+		else if (temp == 3) flags[kFLAGS.BENOIT_2] = consumables.BROBREW.id;
 		else flags[kFLAGS.BENOIT_2] = consumables.TSTOOTH.id;
 	}
 	
@@ -633,18 +633,18 @@ private function talkToBenoit():void {
 	clearOutput();
 
 	//(+5 Affection per day if used)
-	if(flags[kFLAGS.BENOIT_TALKED_TODAY] == 0) {
+	if (flags[kFLAGS.BENOIT_TALKED_TODAY] == 0) {
 		flags[kFLAGS.BENOIT_TALKED_TODAY] = 1;
 		benoitAffection(5);
 	}
 	//Basilisk Womb
 	//Requires: Had sex with Benoit at least twice, have vagina, select talk
-	if(((flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 2 && player.inte >= 60 && flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 0) || flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 2) && player.hasVagina()) {
+	if (((flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 2 && player.inte >= 60 && flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 0) || flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 2) && player.hasVagina()) {
 		outputText("You ask " + benoitMF("Benoit","Benoite") + " if " + benoitMF("he","she") + " has ever thought about trying to do something to help his people's plight.");
 		
 		outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" " + benoitMF("he","she") + " says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about... making certain zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" " + benoitMF("he","she") + " trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?  Even more crazy to be still sinking zem when a good woman is giving me 'er love for no reason except through ze kindness of 'er 'art.  Still... it is so frustrating, being able to sink clearly about zese sings and not being able to do anysing about it.</i>\"");
 		
-		if(player.inte >= 60) {
+		if (player.inte >= 60) {
 			outputText("\n\nYour mind wanders.  You doubt that even if you wanted to you could turn into a basilisk proper, but you wonder if there's some kind of transformation that would allow a human womb to mimic that of another race.");
 			outputText("\n\nBenoit answers warily.  \"<i>A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do... if you were so minded.  But, [name], tell me you're not going to do somesing so reckless as experiment on your body?</i>\"");
 			//toggle on "Bas. Womb" from benoit's main menu.
@@ -658,7 +658,7 @@ private function talkToBenoit():void {
 		doNext(camp.returnToCampUseOneHour);
 	}
 	//First time Talk: 
-	else if(flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] == 0) {
+	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] == 0) {
 		flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY]++;
 		outputText("You take a moment to look the strange merchant over.  Although blind, " + benoitMF("he","she") + " doesn't seem very old - " + benoitMF("he","she") + " retains the tight, thin muscular frame of other basilisks you've seen, but looks to be slightly shorter and for all his proud, cruel profile seems slightly shabby around the edges.  In what is presumably a nod towards civilized manners, " + benoitMF("he","she") + " is wearing a pair of denim long johns as well as his fez, perched upon one of his head spines.  You introduce yourself, and then decide to ask " + benoitMF("him","her") + " about basilisks.");
 		
@@ -701,9 +701,9 @@ private function talkToBenoit():void {
 		/* BUILD ZE CHOICES!*/
 		var choices:Array = [0,1,2,3,4,5,6,7,8];
 		//option 9 is non-lover non-fem only
-		if(!benoitLover() && benoitMF("he","she") == "he") choices[choices.length] = 9;
+		if (!benoitLover() && benoitMF("he","she") == "he") choices[choices.length] = 9;
 		//Special male benoit fucker only talks
-		if(benoitLover() && benoitMF("he","she") == "he" && player.hasVagina()) {
+		if (benoitLover() && benoitMF("he","she") == "he" && player.hasVagina()) {
 			choices[choices.length] = 10;
 			choices[choices.length] = 11;
 			choices[choices.length] = 12;
@@ -720,81 +720,81 @@ private function talkToBenoit():void {
 		//Pick one and go!
 		choice = choices[rand(choices.length)];
 		//(Randomly generated)
-		if(choice == 0) {
+		if (choice == 0) {
 			outputText("You ask if all basilisks talk as " + benoitMF("he","she") + " does.");
 			outputText("\n\n\"<i>Only on zis side of ze mountain,</i>\" comes the reply.  \"<i>Ze uzzer side are all stuck-up snobs who speak 'orribly.  Zey are all pale and flabby too, and zeir cooking is terrible.  Pwah!</i>\"  " + benoitMF("He","She") + " makes an exasperated gesture with a claw.");
 		}
-		else if(choice == 1) {
+		else if (choice == 1) {
 			outputText("You ask " + benoitMF("Benoit","Benoite") + " about the dog.");
 			outputText("\n\n\"<i>Pierre 'asn't been giving you trouble, as 'e?  Big stupid mutt does not know 'is mouth from 'is arse.  Which is why 'e checks so often,</i>\" says the basilisk fondly, rubbing the Alsatian behind his ear.  \"<i>I found 'im prowling around eating scraps from ze food sellers when I first got ere; I sink 'e must 'ave belonged to anuzzer trader 'oo left " + benoitMF("him","her") + " behind.  I do not sink I could run this shop without " + benoitMF("him","her") + " - every evening I go out into the wilds with " + benoitMF("him","her") + " and 'unt down more salvage.  'Ee is so good at finding perfectly good sings other people 'ave left behind.  Particularly cloze.  'E loves robes, Pierre.  Don't you, boy?</i>\"  Pierre whines.");
 		}
-		else if(choice == 2) {
+		else if (choice == 2) {
 			outputText("You ask " + benoitMF("him","her") + " about the sign above the shop.");
 			outputText("\n\n\"<i>It's good, isn't it?</i>\"  the trader says proudly.  \"<i>I got a catguy to do it when I first got 'ere and didn't know ze language so well.  'E suggested...</i>\"  " + benoitMF("He","She") + " spreads " + benoitMF("his","her") + " claws expressively.  \"<i>'Salamander's Salubrious Salvage'.  Because, everyone likes salamanders, and once zey get in and realize I am not a salamander and it is just a play on words, zey would be so entranced by what I am selling zey would not care.</i>\"  " + benoitMF("Benoit","Benoite") + " taps the counter happily.  \"<i>In gold print, too!  It is a surprise it has not brought more customers in.</i>\"");
 			outputText("\n\nYou decide not to disillusion the blind basilisk.");
 		}
-		else if(choice == 3) {
+		else if (choice == 3) {
 			outputText("You ask if " + benoitMF("he","she") + " has always been blind.");
 			outputText("\n\n\"<i>I don't know,</i>\" " + benoitMF("he","she") + " says. \"<i>Ask me what red is.</i>\"");
 			outputText("\n\nYou ask what red is.");
 			outputText("\n\n\"<i>'Ow ze fuck should I know?</i>\" the basilisk replies, deadpan.  \"<i>Stop asking stupid questions.</i>\"");
 			outputText("\n\nYou decide not to pursue the subject.");
 		}
-		else if(choice == 4) {
+		else if (choice == 4) {
 			outputText("You ask " + benoitMF("Benoit","Benoite") + " how " + benoitMF("he","she") + " got into this line of work.");
 			outputText("\n\n\"<i>I 'ave always worked with salvage,</i>\" " + benoitMF("he","she") + " shrugs.  \"<i>Back in ze mountains I worked in ze magpie room - obviously, because I was no good on ze outside.  You can tell from ze weight of sings, and 'ow zey smell, what it is and 'ow much it is worth.  More zan zat you can tell... what it meant to its last owner.  Zat is ze true worse of an object.</i>\"  " + benoitMF("He","She") + " taps his claws on the counter, lost in thought.  \"<i>Ze magpie room is amazing, [name], I wish I could show it to you.  Such good acoustics, filled with ze sound and smell of a thousand pieces of junk - every day a new symphony.  And 'oo would ever steal ze demons' treasures?  You would 'ave to be mad to try to steal from a hall full of basilisks.  Or blind.</i>\"");
 			outputText("\n\n" + benoitMF("He","She") + " laughs throatily, then sighs.  \"<i>Ah, but it was rotten, really - always a sour note underneath everysing.  A thousand basilisks, driven by nussing but greed and lust.  I got sick of it, being stuck in zat place with zose thoughts, zat 'opeless cycle, and one day ran away.  I took what I could carry and used zat to start up here.  Away from ze mountains, I can zink clearly.  I can say what ze uzzer basilisks only know at ze back of zeir minds.</i>\"  " + benoitMF("Benoit","Benoite") + " slams a fist into the counter, making you jump.  \"<i>Don't ever make a deal with a demon, [name],</i>\" " + benoitMF("he","she") + " says, voice thick with rage.  \"<i>Even when you sink it is a win-win?  Zey will still find a way to fuck you good.</i>\"");
 			dynStats("cor", -1);
 		}
-		else if(choice == 5) {
+		else if (choice == 5) {
 			outputText("You ask Benoit if " + benoitMF("he","she") + " can tell you anything about the Bazaar.");
 			
 			outputText("\n\n\"<i>You are really asking zis question to a blind person?</i>\" comes the reply.  \"<i>Ok, I will tell you what I know, for what it is worth.  Over zeir by ze fire, I know zeir are lizans having a good time, because zey shout insults when zey get really drunk.  Zey would get violent with me I sink, if it weren't for Pierre.  Zeir leader has a big problem with her male hormones, judging from ze way she smells.</i>\"  " + benoitMF("He","She") + " sniggers with a distinct lack of sympathy.  \"<i>In ze uzzer direction, I can smell a lot of males together in one place.  Smell like zey are doing something very macho - and a bit painful, from ze sound of zeir walk afterwards.</i>\"  " + benoitMF("He","She") + " points in the opposite direction.  \"<i>Zerr are plenty of, ow you say, crumpets who work around here.  Some of zem can do some pretty wild sings for you, for a fee.  Or so I'm told.</i>\"  " + benoitMF("He","She") + " coughs.");
 		}
-		else if(choice == 6) {
+		else if (choice == 6) {
 			outputText("You ask " + benoitMF("Benoit","Benoite") + " for any rumors going around.");
 			//[Deep cave cleared: 
-			if(flags[kFLAGS.DEFEATED_ZETAZ] > 0) outputText("\n\n\"<i>Somesing strange did 'appen ze uzzer day, now you mention it,</i>\" " + benoitMF("he","she") + " says, tapping a curved tooth.  \"<i>I got a big group of imps in ere.  I normally don't serve zem because zey are always stealing sings whilst one of zem is paying, but zese guys seemed too worked up to even sink about lifting ze shop - zey smelt of fear.  Zey were buying lots of food and survival gear - one of zem kept going on and on about ze fact zey left \"<i>ze fairy</i>\" behind, until one of ze uzzers slapped 'im and said if 'ee didn't shut up, 'ee would be ze fairy.</i>\"  " + benoitMF("Benoit","Benoite") + " shrugs.  \"<i>Nasty little sings.  Tasty, though.</i>\"");
+			if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) outputText("\n\n\"<i>Somesing strange did 'appen ze uzzer day, now you mention it,</i>\" " + benoitMF("he","she") + " says, tapping a curved tooth.  \"<i>I got a big group of imps in ere.  I normally don't serve zem because zey are always stealing sings whilst one of zem is paying, but zese guys seemed too worked up to even sink about lifting ze shop - zey smelt of fear.  Zey were buying lots of food and survival gear - one of zem kept going on and on about ze fact zey left \"<i>ze fairy</i>\" behind, until one of ze uzzers slapped 'im and said if 'ee didn't shut up, 'ee would be ze fairy.</i>\"  " + benoitMF("Benoit","Benoite") + " shrugs.  \"<i>Nasty little sings.  Tasty, though.</i>\"");
 			//[Factory not cleared: 
-			else if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) outputText("\n\n\"<i>Not anysing very interesting,</i>\" " + benoitMF("he","she") + " shrugs.  \"<i>I get a few customers from ze desert city, Tel'Adre, coming in 'ere in secret to pick up a few sings zey cannot find back 'ome.  So zey are still a sing.  You 'ave to wonder ow much longer zey can keep hiding, though.</i>\"");
+			else if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) outputText("\n\n\"<i>Not anysing very interesting,</i>\" " + benoitMF("he","she") + " shrugs.  \"<i>I get a few customers from ze desert city, Tel'Adre, coming in 'ere in secret to pick up a few sings zey cannot find back 'ome.  So zey are still a sing.  You 'ave to wonder ow much longer zey can keep hiding, though.</i>\"");
 			else {
 				//[Factory destroyed: 
-				if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2){
+				if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2){
 					outputText("\n\n\"<i>I don't know what is 'appening exactly,</i>\" " + benoitMF("he","she") + " says, leaning over the counter. \"<i>But ze demons 'oo I trade with, zey seem very worked up about sumsing.  Sumsing went wrong at one of zeir facilities, I sink.  I also get a number of shark ladies coming in ere, asking if I sell fresh water.  Zey also seem very unhappy.</i>\"");
 				}
 				else outputText("\n\n\"<i>I don't know what is 'appening exactly,</i>\" " + benoitMF("he","she") + " says, leaning over the counter.  \"<i>But ze demons 'oo I trade with, zey seem very worked up about somesing.  Sumsing went wrong at one of zeir facilities, I sink.  I also hear a number of passers-by talking about ze lake.  Apparently it is much cleaner now; many are going back to use it for water.  Now if only someone could make zose crazy cultists go away, eh?</i>\"");
 			}
 		}
-		else if(choice == 7) {
+		else if (choice == 7) {
 			outputText("You ask if " + benoitMF("he","she") + "'s ever had any trouble with the demons who frequent the Bazaar.");
 			outputText("\n\n\"<i>Not really,</i>\" " + benoitMF("he","she") + " replies.  \"<i>I don't like zem, but zey are my main source of income.  Zey are always coming in here to sell zeir fluids.  The truth is it's worthless - I pour most of ze disgusting stuff away.  But it is worth paying for zeir custom because zey are always buying many more potions.  It isn't a good demon party unless you 'ave sprouted two new dicks and four new nipples for it, apparently.  Always one of zem is asking if zey can 'do ze dinosaur' as way of payment.  I 'ate zem so much.</i>\"");
-			if(silly()) outputText("\n\nThe basilisk rubs Pierre behind the ear as " + benoitMF("he","she") + " thinks.  \"<i>I did once get a group of demons coming in ere, asking me what 'cheese omelette' is in basilisk.  When I told zem, zey ran away laughing, shouting 'Zat is all you can say! Zat is all you can say!'</i>\"  " + benoitMF("He","She") + " shrugs, irritated.  \"<i>Arseholes.</i>\"");
+			if (silly()) outputText("\n\nThe basilisk rubs Pierre behind the ear as " + benoitMF("he","she") + " thinks.  \"<i>I did once get a group of demons coming in ere, asking me what 'cheese omelette' is in basilisk.  When I told zem, zey ran away laughing, shouting 'Zat is all you can say! Zat is all you can say!'</i>\"  " + benoitMF("He","She") + " shrugs, irritated.  \"<i>Arseholes.</i>\"");
 		}
-		else if(choice == 8) {
+		else if (choice == 8) {
 			outputText("You ask " + benoitMF("Benoit","Benoite") + " what results when basilisks mate with harpies.");
 			outputText("\n\n\"<i>Most of ze time?  Basilisks,</i>\" " + benoitMF("he","she") + " replies, carefully counting gems with " + benoitMF("his","her") + " fingers.  \"<i>Some of ze time?  'Arpies.  But ze arpies feed zeir basilisk children to zeir chicks if ze former do not get away in time, so it works out.  Really, we are doing zem and ze world a favor by stealing zeir eggs - if we weren't around ze 'ole world would be drowned in guano by now.</i>\"  Satisfied with the takings, " + benoitMF("he","she") + " stows the money away underneath the counter.  \"<i>Very rarely, you get cockatrices.  Now ZEY are weird-looking.</i>\"");
 		}
-		else if(choice == 9) {
+		else if (choice == 9) {
 			//non-lover non-fem only
 			outputText("You ask if " + benoitMF("Benoit","Benoite") + " really can tell who you are just by smell.");
 			
-			if(player.race() == "human") outputText("\n\n\"<i>Certainly!</i>\" " + benoitMF("he","she") + " smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  The basilisk scratches " + benoitMF("his","her") + " jaw absent-mindedly.  \"<i>If you do not mind me saying so, [name], you also smell... different.  Like you do not really belong 'ere.  In ze nicest possible way, of course.</i>\"");
+			if (player.race() == "human") outputText("\n\n\"<i>Certainly!</i>\" " + benoitMF("he","she") + " smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  The basilisk scratches " + benoitMF("his","her") + " jaw absent-mindedly.  \"<i>If you do not mind me saying so, [name], you also smell... different.  Like you do not really belong 'ere.  In ze nicest possible way, of course.</i>\"");
 			else outputText("\n\n\"<i>Certainly!</i>\" " + benoitMF("he","she") + " smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  You look down at yourself, then back at the basilisk suspiciously, before saying you don't much look or feel human.  \"<i>Oh, I do not doubt zat,</i>\" says the trader.  \"<i>You 'umans and your flexible genes - zat makes you very alluring, as I am sure you 'ave already noticed, eh?  I am sure somebody 'oo relied upon sight would not be able to tell you are 'uman.  But 'oo you are underneath all zat, zat never changes, and I can smell zat.  All you are doing really is dressing up as something else.  If you wanted to, you could change back tomorrow, if you 'ad ze right ingredienns.</i>\"");
 			//[(male Benoit only)
-			if(benoitMF("he","she") == "he") outputText("  There's a hint of longing jealousy in the basilisk's voice and when " + benoitMF("he","she") + " lapses into silence you decide not to push the subject.");
+			if (benoitMF("he","she") == "he") outputText("  There's a hint of longing jealousy in the basilisk's voice and when " + benoitMF("he","she") + " lapses into silence you decide not to push the subject.");
 		}
 		//Male Benoit Lover Talk options
 		//(Randomly generated.  Added to normal talk options after PC has had sex with Benoit two times or more regardless of womb quest.)
-		else if(choice == 10) {
+		else if (choice == 10) {
 			outputText("You ask Benoit there is anything useful " + benoitMF("he","she") + " can tell you about the demon strongholds.");
 			
 			outputText("\n\n\"<i>I'm afraid I cannot be very 'elpful zeir, [name],</i>\" "+benoitMF("he","she")+" sighs.  \"<i>Unless you want me to tell you what zey smell like.  I do not sink you want to be knowing zis.  Ze demons, zey were not much in ze business of telling us what zeir plans were, and zey did not much like 'anging around us, which is understandable.   Zair is every treasure you can ever imagine in ze magpie room, but zeir is no way you could ever get at zem unless you could work out some way of making many undreds of basilisks close zeir eyes at once.</i>\"");
 		}
-		else if(choice == 11) {
+		else if (choice == 11) {
 			outputText("You ask Benoit if " + benoitMF("he","she") + " can suggest anything to help you fight his brethren in the high mountains.");
 			outputText("\n\n\"<i>You could carry a mirror with you,</i>\" " + benoitMF("he","she") + " says, pointing.  \"<i>There's one over zair, isn't zair?</i>\" You report that it is cracked badly - at any rate, you're not carrying a bulky mirror up a mountain two or three times a day.  \"<i>I will give it to you half price,</i>\" " + benoitMF("he","she") + " says hopefully.  \"<i>Sink 'ow useful it will be to check for transformations!  You could get somebody else to carry it for you... ok, alright, so you don't want ze mirror.  Most prey, my bruzzers are expecting zem to lash out in a panic.  So use sings which do not involve approaching.  We do not like magic or ranged sings, zey are too unpredictable - I suggest using zem.</i>\"");
 		}
-		else if(choice == 12) {
+		else if (choice == 12) {
 			outputText("\"<i>Gnoll.</i>\"");
 			outputText("\n\n You make a gentle humming noise.");
 			outputText("\n\n\"<i>Bee maiden,</i>\" says Benoit after a moment.");
@@ -809,7 +809,7 @@ private function talkToBenoit():void {
 			
 			outputText("\n\n\"<i>Oh, I see.  You are pulling my tail.  Very amusing.</i>\"  You laugh even harder at the expression of wounded dignity which replaces the terror.");
 		}
-		else if(choice == 13) {
+		else if (choice == 13) {
 			outputText("You ask Benoit if " + benoitMF("he","she") + " really, <b>really</b> can tell who you are just by smell.");
 			
 			outputText("\n\n\"<i>Well, of course I can,</i>\" " + benoitMF("he","she") + " says teasingly.  \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of 'appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"");
@@ -867,12 +867,12 @@ private function benoitAndFemPCTalkAboutEggings():void {
 //Suggest: 
 private function eggySuggest():void {
 	clearOutput();
-	if(flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == .5) {
+	if (flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == .5) {
 		suggestSexAfterBasiWombed(true);
 		return;
 	}
-	if(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 0) {
-		if(player.isTaur()) {
+	if (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 0) {
+		if (player.isTaur()) {
 			outputText("You silently reach across the counter to squeeze " + benoitMF("his","her") + " hands again.  " + benoitMF("Benoit","Benoite") + " grins with deep affection at you and, hand in hand, the two of you quietly debunk to the store room again.");
 			outputText("\n\nOnce again, you carefully inch your blind charge to a clear cranny and push " + benoitMF("him","her") + " against a wooden wall, standing back to slowly peel off your [armor].  You grin as you ostentatiously drop each piece onto the packed earth, allowing " + benoitMF("him","her") + " to guess what it is by the sound it makes.  " + benoitMF("His","Her") + " breathing comes heavier as your undergarments make a feathery sound as they fall.  As you take " + benoitMF("his","her") + " hands and lay them upon your naked skin, you think about how you want to go about this.");
 		}
@@ -885,7 +885,7 @@ private function eggySuggest():void {
 		return;
 	}
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
-	if(player.isTaur()) {
+	if (player.isTaur()) {
 		//Suggest: 
 		outputText("You reach your fingers across the counter and lightly touch " + benoitMF("Benoit","Benoite") + "'s hands, saying you don't mind working out a few natural urges, if " + benoitMF("he","she") + "'s in the mood.");
 		outputText("\n\n“You- I- what?” " + benoitMF("he","she") + " replies, looking slightly stunned. “You don't? Are you...I don't know if...” you reach across and squeeze " + benoitMF("Benoit","Benoite") + "'s hands until " + benoitMF("his","her") + " nervous babble dies out and hesitantly, " + benoitMF("he","she") + " squeezes back.  Still holding " + benoitMF("his","her") + " hand, you move behind the crates and then gently lead " + benoitMF("him","her") + " behind the stall's canopy.");
@@ -893,32 +893,32 @@ private function eggySuggest():void {
 		outputText("\n\n“Zis will sound strange,” says " + benoitMF("Benoit","Benoite") + " in a thick voice, “But- would you mind if I just touched you a bit first? All I know about you is ze sound of your voice.”  You acquiesce and draw close, taking " + benoitMF("his","her") + " hands once again and gently laying them upon you.  You sigh as, holding " + benoitMF("his","her") + " index claws back, " + benoitMF("he","she") + " begins to move them slowly up and down.");
 		outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel like you're being read like a book in Braille.  “Good Gods,” " + benoitMF("he","she") + " murmurs as " + benoitMF("his","her") + " hands lead back onto your flanks.  “Good Gods!” " + benoitMF("he","she") + " cries out as " + benoitMF("he","she") + " follows you all the way back to your mighty, powerful rear.  “I knew you were a centaur because of all ze clip clopping,” " + benoitMF("he","she") + " says, rubbing your side back and forth in wonder.  “But to know it and actually feel it, zey are somesing very different.” " + benoitMF("He","She") + " sighs.  “I 'ope you do not mind zis being a bit... awkward, but I am guessing you are probably used to zat by now, yes?”");
 		// Herm: 
-		if(player.gender == 3) {
+		if (player.gender == 3) {
 			outputText("\n\n" + benoitMF("His","Her") + " hands travel down your behind until, with a sharp intake of breath, " + benoitMF("he","she") + " touches [oneCock].  “Aren't you just full of surprises,” " + benoitMF("he","she") + " says dryly.  After a pause, " + benoitMF("he","she") + " slowly wraps " + benoitMF("his","her") + " dry, smooth grasp around your semi-erect cock and moves it up and down, rubbing and coiling you until you are straining.");
 			//[cock 10 inches or less: 
-			if(player.longestCockLength() <= 10) outputText("  Although this is evidently an uncanny experience for " + benoitMF("him","her") + ", " + benoitMF("he","she") + " does manage a cocky smile as " + benoitMF("his","her") + " hand moves around your male sex. “Mine is bigger,” " + benoitMF("he","she") + " teases.  Unable to reward " + benoitMF("his","her") + " cheek from where " + benoitMF("he","she") + " is, you simply snort and shuffle your hooves, impatient now with need.");
+			if (player.longestCockLength() <= 10) outputText("  Although this is evidently an uncanny experience for " + benoitMF("him","her") + ", " + benoitMF("he","she") + " does manage a cocky smile as " + benoitMF("his","her") + " hand moves around your male sex. “Mine is bigger,” " + benoitMF("he","she") + " teases.  Unable to reward " + benoitMF("his","her") + " cheek from where " + benoitMF("he","she") + " is, you simply snort and shuffle your hooves, impatient now with need.");
 			//[cock  >10 inches: 
 			else outputText("  This is evidently an uncanny experience for " + benoitMF("him","her") + ", the alien nature of it deepening as " + benoitMF("his","her") + " hands moves around your male sex. “Oly Gods [name], you are a monster,” " + benoitMF("he","she") + " says thickly.  You smile and stamp your hooves, impatient now with need.");
 		}
 		outputText("\n\n" + benoitMF("His","Her") + " hands trail upwards, moving over your bestial behind, exploring your soft flesh until " + benoitMF("he","she") + " touches your lips.  You close your eyes and sigh as " + benoitMF("he","she") + " slowly parts them with " + benoitMF("his","her") + " smooth fingers and slides into your [vagina].  Although " + benoitMF("his","her") + " breath is becoming increasingly heavy " + benoitMF("he","she") + " also seems genuinely curious about you; with surprising gentleness " + benoitMF("his","her") + " fingers travel over and around your moistening sex, exploring your every fold, working deeper and deeper as " + benoitMF("he","she") + " does.  You let " + benoitMF("him","her") + " know what pleases you by sighing when " + benoitMF("he","she") + " touches a sweet spot, moving deliberately with " + benoitMF("his","her") + " finger's motions so " + benoitMF("he","she") + " may give them better attention.  " + benoitMF("He","She") + " soon finds your [clit], beginning to bulge with need; slowly " + benoitMF("he","she") + " circles it and then flicks at it, gently frigging you.");
 		//[In heat:]
-		if(player.inHeat) outputText("  By now your vagina is practically gushing, your bodies' own deep seated pheromone need stoked to blazing heights by the basilisk's gentle, painstaking exploration of your body.  You cannot stop thrusting yourself against " + benoitMF("his","her") + " soaked hand, announcing how badly you want this with heavy moans.");
+		if (player.inHeat) outputText("  By now your vagina is practically gushing, your bodies' own deep seated pheromone need stoked to blazing heights by the basilisk's gentle, painstaking exploration of your body.  You cannot stop thrusting yourself against " + benoitMF("his","her") + " soaked hand, announcing how badly you want this with heavy moans.");
 			
 		outputText("\n\nThe scent of your arousal is in the air and as " + benoitMF("Benoit","Benoite") + " breathes it in " + benoitMF("his","her") + " own breath comes heavier.  " + benoitMF("His","Her") + " erection bulges in " + benoitMF("his","her") + " long johns and you decide it's time for you to take charge; you back up, butting " + benoitMF("him","her") + " insistently with your powerful body until you have " + benoitMF("him","her") + " pinned against a space upon the opposite wall.  You watch " + benoitMF("him","her") + " over your shoulder as " + benoitMF("he","she") + " unbuckles himself and lets " + benoitMF("his","her") + " trousers fall.  Stoked by the pheromones simmering off your body, " + benoitMF("his","her") + " long, thin purple erection is straining and " + benoitMF("he","she") + " arches " + benoitMF("his","her") + " back and opens " + benoitMF("his","her") + " mouth as you flare your [butt] and press yourself against it.  You know just from looking at " + benoitMF("his","her") + " intense arousal you're going to have to go slow to stop " + benoitMF("him","her") + " from shooting " + benoitMF("his","her") + " bolt straight away; with a wicked smile your partner can't see, you suppose such is your effect on " + benoitMF("him","her") + " it may not even matter if " + benoitMF("he","she") + " does.  Still, as " + benoitMF("he","she") + " lays " + benoitMF("his","her") + " hands upon your flanks, and you lean back with a sigh and slowly slide " + benoitMF("his","her") + " length into your moistened [vagina] as gently as you can.");
 		player.cuntChange(12,true,true,false);
 		outputText("\n\nBenoit's dick is incredibly smooth and you move down onto it with incredible, slick ease.  Rather than burying yourself onto it straight away you stop with only a third of it in your wet depths and slowly bring it out of you, dipping yourself slowly.  You stop with " + benoitMF("his","her") + " sensitive head just inside and work your [hips] around deliberately, sighing as it rotates slowly around your slick walls.  " + benoitMF("Benoit","Benoite") + " moans dryly and you feel " + benoitMF("his","her") + " body tense; immediately you stop your movements and wait, only gradually beginning to gyrate and thrust again when " + benoitMF("he","she") + " has calmed down.  You slide more of " + benoitMF("him","her") + " into you when you bend forwards again, this time leaving only " + benoitMF("his","her") + " base outside of you; you sigh as you feel " + benoitMF("him","her") + " creeping further into your moist depths.  " + benoitMF("He","She") + " makes a bestial noise and tries to thrust himself into you and upon you; tutting mockingly, you pull yourself away from " + benoitMF("him","her") + " and stop moving until, with what is evidently a huge force of will, the basilisk calms himself, backs himself against the wall and allows you to work " + benoitMF("him","her") + ".");
 		
 		//[Small capacity: 
-		if(player.vaginalCapacity() <= 30) outputText("\n\nYou slide back down onto " + benoitMF("him","her") + ", cooing this time as you feel " + benoitMF("him","her") + " bottom out with several inches of " + benoitMF("him","her") + " still outside of you.  " + benoitMF("His","Her") + " thin, long length could not be more perfect for your tight sex; " + benoitMF("he","she") + " rubs your walls up and down as you dreamily thrust in and out of " + benoitMF("his","her") + " body, sending waves of pleasure flowing through you.");
+		if (player.vaginalCapacity() <= 30) outputText("\n\nYou slide back down onto " + benoitMF("him","her") + ", cooing this time as you feel " + benoitMF("him","her") + " bottom out with several inches of " + benoitMF("him","her") + " still outside of you.  " + benoitMF("His","Her") + " thin, long length could not be more perfect for your tight sex; " + benoitMF("he","she") + " rubs your walls up and down as you dreamily thrust in and out of " + benoitMF("his","her") + " body, sending waves of pleasure flowing through you.");
 		//Large capacity: 
 		else outputText("\n\nYou slide back down onto " + benoitMF("him","her") + ", cooing this time as your groin meets " + benoitMF("his","her") + " muscled thighs with a wet kiss, your sex swallowing " + benoitMF("his","her") + " cock whole.  You begin to ride " + benoitMF("him","her") + " hard and slow, bending " + benoitMF("his","her") + " cock upwards to push at your sensitive walls, waves of pleasure starting to flow through you.");
 		
 		outputText("\n\nYou keep at this slow ride for what feels like hours, stopping and starting, pulling and pushing deliberately to keep the basilisk you have backed into a corner under your control.  The pace of the fuck is clearly agonising for " + benoitMF("Benoit","Benoite") + "; " + benoitMF("he","she") + " pants, tenses and gasps to the wet movement of your [vagina], " + benoitMF("his","her") + " face and chest red with extreme arousal, but " + benoitMF("he","she") + " lets you stay in control, eventually unable to do anything but lie back and let you have your way with " + benoitMF("him","her") + ".");
 		//[Lactation: 
-		if(player.lactationQ() >= 50) outputText("  The slow, sensual sex is enough for you to begin to bead milk from your sensitive [nipples]; you moan as the flow intensifies until you are instinctively kneading your [chest], spurting your sweet, warm fluids onto the floor.  " + benoitMF("Benoit","Benoite") + " starts in genuine amazement at the sound.  “Mammals are so damn weird,” " + benoitMF("he","she") + " mutters, making you giggle.");
+		if (player.lactationQ() >= 50) outputText("  The slow, sensual sex is enough for you to begin to bead milk from your sensitive [nipples]; you moan as the flow intensifies until you are instinctively kneading your [chest], spurting your sweet, warm fluids onto the floor.  " + benoitMF("Benoit","Benoite") + " starts in genuine amazement at the sound.  “Mammals are so damn weird,” " + benoitMF("he","she") + " mutters, making you giggle.");
 		
 		outputText("\n\nYour lust ratchets up as " + benoitMF("his","her") + " warm hands continue to move over your behind, and at last losing your discipline you begin to thrust into " + benoitMF("him","her") + " with abandon, eager now for your peak.  " + benoitMF("Benoit","Benoite") + " pants as you really begin to fuck " + benoitMF("him","her") + " and thrusts with you; the wetness of your arousal spatters against " + benoitMF("his","her") + " thighs as your body slaps into the basilisk's tight muscles.  " + benoitMF("He","She") + " makes a harsh, bestial noise when " + benoitMF("he","she") + " cums; " + benoitMF("his","her") + " blind eyes roll as " + benoitMF("he","she") + " clutches your back and shoots surge after surge of cum into your churning depths.  The warmth of " + benoitMF("his","her") + " jizz and " + benoitMF("his","her") + " helpless bucking thrust you to your own orgasm; irrepressible pulses of pleasure overwhelm your mind and you can do nothing for long minutes except cry and squeal against the basilisk, clutching " + benoitMF("him","her") + " back as you work " + benoitMF("his","her") + " dick for every last drop.");
-		if(player.gender == 3) outputText("  [EachCock] thickens and spurts in sympathy to your female high, spattering the floor with white paint.");
+		if (player.gender == 3) outputText("  [EachCock] thickens and spurts in sympathy to your female high, spattering the floor with white paint.");
 	}
 	else {
 		outputText("You reach your fingers across the counter and lightly touch " + benoitMF("Benoit","Benoite") + "'s hands, saying you don't mind working out a few natural urges, if " + benoitMF("he","she") + "'s in the mood.");
@@ -930,30 +930,30 @@ private function eggySuggest():void {
 		outputText("\n\n\"<i>Zis will sound strange,</i>\" says " + benoitMF("Benoit","Benoite") + " in a low, thick voice, \"<i>But - would you mind if I just touched you a bit first?  All I know about you is your smell and ze sound of your voice.</i>\"  You acquiesce and draw close, taking " + benoitMF("his","her") + " hands once again and gently laying them upon your body.  You sigh as, holding " + benoitMF("his","her") + " index claws back, " + benoitMF("he","she") + " begins to move them slowly up and down.");
 		
 	//[Demon: 
-		if(player.horns > 0 && player.hornType == HORNS_DEMON && player.tailType == TAIL_TYPE_DEMONIC && player.demonScore() >= 3) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " touches your horns and pauses; " + benoitMF("he","she") + " reaches around, finds and grips your tail, running " + benoitMF("his","her") + " pads up to the spaded point.  \"<i>So,</i>\" " + benoitMF("he","she") + " says quietly.  \"<i>You are one of zem.</i>\"  " + benoitMF("He","She") + " is silent for a while before finding a warm smile.  \"<i>But I am being silly.  I know you are different inside.</i>\"");
+		if (player.horns > 0 && player.hornType == HORNS_DEMON && player.tailType == TAIL_TYPE_DEMONIC && player.demonScore() >= 3) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " touches your horns and pauses; " + benoitMF("he","she") + " reaches around, finds and grips your tail, running " + benoitMF("his","her") + " pads up to the spaded point.  \"<i>So,</i>\" " + benoitMF("he","she") + " says quietly.  \"<i>You are one of zem.</i>\"  " + benoitMF("He","She") + " is silent for a while before finding a warm smile.  \"<i>But I am being silly.  I know you are different inside.</i>\"");
 		//[Dog enough for ears and tail: 
-		else if(player.earType == EARS_DOG && player.tailType == TAIL_TYPE_DOG && player.dogScore() >= 3) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " grins as " + benoitMF("he","she") + " finds your floppy ears and outright laughs when " + benoitMF("he","she") + " reaches around and touches your tail. \"<i>I like dogs, but not ZAT much, [name],</i>\" " + benoitMF("he","she") + " laughs.");
+		else if (player.earType == EARS_DOG && player.tailType == TAIL_TYPE_DOG && player.dogScore() >= 3) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " grins as " + benoitMF("he","she") + " finds your floppy ears and outright laughs when " + benoitMF("he","she") + " reaches around and touches your tail. \"<i>I like dogs, but not ZAT much, [name],</i>\" " + benoitMF("he","she") + " laughs.");
 		//[Cat/Bunny enough for ditto: 
-		else if(player.catScore() >= 3 && player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " grins as " + benoitMF("he","she") + " finds your ears, outright laughs when " + benoitMF("he","she") + " reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" " + benoitMF("he","she") + " chuckles huskily.");
+		else if (player.catScore() >= 3 && player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " grins as " + benoitMF("he","she") + " finds your ears, outright laughs when " + benoitMF("he","she") + " reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" " + benoitMF("he","she") + " chuckles huskily.");
 		//[Avian with wings and feet:  
-		else if(player.lowerBody == LOWER_BODY_TYPE_HARPY && player.wingType == WING_TYPE_FEATHERED_LARGE) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " finds your wings and follows them up as far as " + benoitMF("he","she") + " can reach, making you twitch as " + benoitMF("he","she") + " caresses your delicate pinfeathers; " + benoitMF("he","she") + " carefully shifts " + benoitMF("his","her") + " feet forward to touch at your own clawed toes.  \"<i>So,</i>\" " + benoitMF("he","she") + " sighs, a smile playing on " + benoitMF("his","her") + " lips as " + benoitMF("he","she") + " touches your shoulder.  \"<i>What is in front of me is a terrible 'arpy.  Come from ze skies to ravish me.</i>\"");
+		else if (player.lowerBody == LOWER_BODY_TYPE_HARPY && player.wingType == WING_TYPE_FEATHERED_LARGE) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " finds your wings and follows them up as far as " + benoitMF("he","she") + " can reach, making you twitch as " + benoitMF("he","she") + " caresses your delicate pinfeathers; " + benoitMF("he","she") + " carefully shifts " + benoitMF("his","her") + " feet forward to touch at your own clawed toes.  \"<i>So,</i>\" " + benoitMF("he","she") + " sighs, a smile playing on " + benoitMF("his","her") + " lips as " + benoitMF("he","she") + " touches your shoulder.  \"<i>What is in front of me is a terrible 'arpy.  Come from ze skies to ravish me.</i>\"");
 		//[Reptile/Naga: 
-		else if(player.skinType == SKIN_TYPE_SCALES && (player.lizardScore() >= 3 || player.nagaScore() >= 3) || player.dragonScore() >= 3) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " starts slightly when " + benoitMF("he","she") + " touches your scales, and then caresses the reptilian parts of your body with increasing interest.  \"<i>I cannot believe I did not realize you were a sister of ze scales,</i>\" " + benoitMF("he","she") + " says huskily.  \"<i>Zat is very... interesting.</i>\"  You can see real arousal in the tense lines of " + benoitMF("his","her") + " face now.");
+		else if (player.skinType == SKIN_TYPE_SCALES && (player.lizardScore() >= 3 || player.nagaScore() >= 3) || player.dragonScore() >= 3) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " starts slightly when " + benoitMF("he","she") + " touches your scales, and then caresses the reptilian parts of your body with increasing interest.  \"<i>I cannot believe I did not realize you were a sister of ze scales,</i>\" " + benoitMF("he","she") + " says huskily.  \"<i>Zat is very... interesting.</i>\"  You can see real arousal in the tense lines of " + benoitMF("his","her") + " face now.");
 		//[Bee: 
-		else if((player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE) && player.lowerBody == LOWER_BODY_TYPE_BEE) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " finds your diaphanous wings and follows them up as far as " + benoitMF("he","she") + " can reach, " + benoitMF("his","her") + " grip on your sensitive membranes making you twitch a bit; then " + benoitMF("he","she") + " sends " + benoitMF("his","her") + " hands trailing down your carapace-armored limbs.  \"<i>I sought you just liked wearing big boots,</i>\" " + benoitMF("he","she") + " murmurs.  \"<i>But zis is actually a part of you?  'Ow... interesting.</i>\"");
+		else if ((player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE) && player.lowerBody == LOWER_BODY_TYPE_BEE) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  " + benoitMF("He","She") + " finds your diaphanous wings and follows them up as far as " + benoitMF("he","she") + " can reach, " + benoitMF("his","her") + " grip on your sensitive membranes making you twitch a bit; then " + benoitMF("he","she") + " sends " + benoitMF("his","her") + " hands trailing down your carapace-armored limbs.  \"<i>I sought you just liked wearing big boots,</i>\" " + benoitMF("he","she") + " murmurs.  \"<i>But zis is actually a part of you?  'Ow... interesting.</i>\"");
 		//[Centaur: 
-		else if(player.isTaur()) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" " + benoitMF("he","she") + " murmurs as " + benoitMF("his","her") + " hands lead back onto your flanks.  \"<i>Good Gods!</i>\" " + benoitMF("he","she") + " cries out as " + benoitMF("he","she") + " follows you all the way back to your mighty, powerful rear.  \"<i>I knew you were a centaur because of all ze clopping,</i>\" " + benoitMF("he","she") + " says, rubbing your flank back and forth in wonder.  \"<i>But to know it and actually feel it, zey are very different.</i>\"  " + benoitMF("He","She") + " sighs.  \"<i>Zis is going to be a bit... awkward, but I am guessing you are all too used to zat by now, yes?</i>\"");
-		else if(player.isDrider()) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" " + benoitMF("he","she") + " murmurs as " + benoitMF("his","her") + " hands lead back onto your tough exoskeleton. \"<i>Good Gods!</i>\" " + benoitMF("he","she") + " cries out as " + benoitMF("he","she") + " follows your bulging abdomen all the way back to your spinnerets. \"<i>I knew you were a spider because of all ze click-clacking,</i>\" " + benoitMF("he","she") + " says, " + benoitMF("his","her") + " fingers feeling around one of your intricate, many-jointed legs in wonder.  \"<i>But to know it and actually feel it, zey are very different.</i>\"");
+		else if (player.isTaur()) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" " + benoitMF("he","she") + " murmurs as " + benoitMF("his","her") + " hands lead back onto your flanks.  \"<i>Good Gods!</i>\" " + benoitMF("he","she") + " cries out as " + benoitMF("he","she") + " follows you all the way back to your mighty, powerful rear.  \"<i>I knew you were a centaur because of all ze clopping,</i>\" " + benoitMF("he","she") + " says, rubbing your flank back and forth in wonder.  \"<i>But to know it and actually feel it, zey are very different.</i>\"  " + benoitMF("He","She") + " sighs.  \"<i>Zis is going to be a bit... awkward, but I am guessing you are all too used to zat by now, yes?</i>\"");
+		else if (player.isDrider()) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" " + benoitMF("he","she") + " murmurs as " + benoitMF("his","her") + " hands lead back onto your tough exoskeleton. \"<i>Good Gods!</i>\" " + benoitMF("he","she") + " cries out as " + benoitMF("he","she") + " follows your bulging abdomen all the way back to your spinnerets. \"<i>I knew you were a spider because of all ze click-clacking,</i>\" " + benoitMF("he","she") + " says, " + benoitMF("his","her") + " fingers feeling around one of your intricate, many-jointed legs in wonder.  \"<i>But to know it and actually feel it, zey are very different.</i>\"");
 		//[Slime: 
-		else if(player.isGoo()) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>I knew you were different from ze squishy sounds you made,</i>\" " + benoitMF("he","she") + " murmurs as " + benoitMF("his","her") + " hands sink into your soft, amorphous mass.  \"<i>But zis is...good Gods, zis is strange.  And zis doesn't 'urt you at all?</i>\" " + benoitMF("he","she") + " asks incredulously as " + benoitMF("he","she") + " gently pokes a finger into you.  You answer " + benoitMF("his","her") + " question by giggling.  \"<i>Zat must come in very useful,</i>\" " + benoitMF("he","she") + " says, shaking " + benoitMF("his","her") + " head in wonder.  You push yourself slowly up " + benoitMF("his","her") + " arms and tell " + benoitMF("him","her") + " " + benoitMF("he","she") + " has no idea.");
+		else if (player.isGoo()) outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>I knew you were different from ze squishy sounds you made,</i>\" " + benoitMF("he","she") + " murmurs as " + benoitMF("his","her") + " hands sink into your soft, amorphous mass.  \"<i>But zis is...good Gods, zis is strange.  And zis doesn't 'urt you at all?</i>\" " + benoitMF("he","she") + " asks incredulously as " + benoitMF("he","she") + " gently pokes a finger into you.  You answer " + benoitMF("his","her") + " question by giggling.  \"<i>Zat must come in very useful,</i>\" " + benoitMF("he","she") + " says, shaking " + benoitMF("his","her") + " head in wonder.  You push yourself slowly up " + benoitMF("his","her") + " arms and tell " + benoitMF("him","her") + " " + benoitMF("he","she") + " has no idea.");
 		else outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>You 'umans are so squishy, fuzzy and 'ot,</i>\" " + benoitMF("he","she") + " says huskily. \"<i>'Ow can you stand it?</i>\"");
-		if(player.hasCock()) {
+		if (player.hasCock()) {
 			outputText("\n\n" + benoitMF("His","Her") + " hands travel downwards until, with a sharp intake of breath, " + benoitMF("he","she") + " touches [oneCock].  \"<i>Aren't you just full of surprises,</i>\" " + benoitMF("he","she") + " says dryly.  After a pause, " + benoitMF("he","she") + " slowly wraps " + benoitMF("his","her") + " smooth hand around your semi-erect cock and moves it up and down, rubbing and coiling you until you are straining."); 
-			if(player.cocks[player.biggestCockIndex()].cockLength < 10) outputText("  Although this is evidently an uncanny experience for " + benoitMF("him","her") + ", " + benoitMF("he","she") + " does manage a cocky smile as " + benoitMF("his","her") + " hand moves along your male sex.  \"<i>Mine is bigger,</i>\" " + benoitMF("he","she") + " teases.  You reward " + benoitMF("his","her") + " cheek by doing some feeling yourself, grasping and pinching at " + benoitMF("his","her") + " tight, supple behind through " + benoitMF("his","her") + " trousers, making " + benoitMF("him","her") + " gasp as you move into " + benoitMF("him","her") + ".");
+			if (player.cocks[player.biggestCockIndex()].cockLength < 10) outputText("  Although this is evidently an uncanny experience for " + benoitMF("him","her") + ", " + benoitMF("he","she") + " does manage a cocky smile as " + benoitMF("his","her") + " hand moves along your male sex.  \"<i>Mine is bigger,</i>\" " + benoitMF("he","she") + " teases.  You reward " + benoitMF("his","her") + " cheek by doing some feeling yourself, grasping and pinching at " + benoitMF("his","her") + " tight, supple behind through " + benoitMF("his","her") + " trousers, making " + benoitMF("him","her") + " gasp as you move into " + benoitMF("him","her") + ".");
 			else outputText("  This is evidently an uncanny experience for " + benoitMF("him","her") + ", the alien nature of it deepening as " + benoitMF("his","her") + " hands moves along your male sex. \"<i>'Oly Gods, [name]; you are a monster,</i>\" " + benoitMF("he","she") + " says thickly.  You smile and decide it's time to do some feeling yourself; you grasp and pinch at " + benoitMF("his","her") + " tight, supple behind through " + benoitMF("his","her") + " trousers, making " + benoitMF("him","her") + " gasp as you move into " + benoitMF("him","her") + ".");
 		}
 		outputText("\n\n" + benoitMF("His","Her") + " hands trail further down, moving into your inner thighs, exploring your soft flesh until " + benoitMF("he","she") + " touches your lips.  You close your eyes and sigh as " + benoitMF("he","she") + " slowly parts them with " + benoitMF("his","her") + " smooth fingers and slides into your [vagina].  Although " + benoitMF("his","her") + " breath is becoming increasingly heavy " + benoitMF("he","she") + " also seems genuinely curious about you; with surprising gentleness " + benoitMF("his","her") + " fingers travel over and around your moistening sex, exploring your every fold, working deeper and deeper as " + benoitMF("he","she") + " does.  You let " + benoitMF("him","her") + " know what pleases you by sighing when " + benoitMF("he","she") + " touches a sweet spot, moving deliberately with " + benoitMF("his","her") + " finger's motions so " + benoitMF("he","she") + " may give them better attention.  " + benoitMF("He","She") + " soon finds your [clit], beginning to bulge with need; slowly " + benoitMF("he","she") + " circles it and then flicks at it, gently frigging you.");
-		if(player.inHeat) outputText(" By now your vagina is practically gushing, your body's own deep-seated pheromone need stoked to blazing heights by the basilisk's gentle, painstaking exploration.  You cannot stop yourself thrusting against " + benoitMF("his","her") + " soaked hand, announcing how badly you want this with heavy moans.");
+		if (player.inHeat) outputText(" By now your vagina is practically gushing, your body's own deep-seated pheromone need stoked to blazing heights by the basilisk's gentle, painstaking exploration.  You cannot stop yourself thrusting against " + benoitMF("his","her") + " soaked hand, announcing how badly you want this with heavy moans.");
 		
 		outputText("\n\nThe scent of your arousal is in the air and as " + benoitMF("Benoit","Benoite") + " inhales it, " + benoitMF("his","her") + " own breath comes heavier.  " + benoitMF("His","Her") + " erection bulges in " + benoitMF("his","her") + " long johns and you decide it's time for you to take charge; you push " + benoitMF("him","her") + " against the wall, unbuckle " + benoitMF("him","her") + " and let " + benoitMF("his","her") + " trousers fall.  Stoked by the pheromones simmering off your body, " + benoitMF("his","her") + " long, thin, purple erection is straining and " + benoitMF("he","she") + " arches " + benoitMF("his","her") + " back and opens " + benoitMF("his","her") + " mouth as you lay a hand on it.  You know just from looking at " + benoitMF("his","her") + " straining prick you're going to have to go slow for " + benoitMF("him","her") + " not to shoot " + benoitMF("his","her") + " bolt straight away; with a wicked smile your partner can't see, you suppose that such is your body's effect on " + benoitMF("him","her") + " it may not even matter if " + benoitMF("he","she") + " does.  As lost as the horny lizan is to the haze of " + benoitMF("his","her") + " pleasure, you remind " + benoitMF("him","her") + " of reality the best way you know how, guiding " + benoitMF("his","her") + " hands to your [hips] and with a sigh, slowly sliding " + benoitMF("his","her") + " length into your moistened [vagina] with as much grace as your eagerness can stand.");
 
@@ -961,22 +961,22 @@ private function eggySuggest():void {
 		
 		outputText("\n\nBenoit's dick is incredibly smooth and you move down onto it with slick ease.  Rather than burying yourself onto it straight away, you stop with only a third of it in your wet depths and bring it out of you, dipping yourself slowly.  You stop with " + benoitMF("his","her") + " sensitive head just inside and work your thighs around deliberately, sighing as it rotates around your slick walls.  " + benoitMF("Benoit","Benoite") + " moans and you feel " + benoitMF("his","her") + " body tense; immediately you halt your movements and wait, only gradually beginning to gyrate and thrust again when " + benoitMF("he","she") + " has calmed down.  You slide more inside when you bend forwards again, this time leaving only " + benoitMF("his","her") + " base outside of you; a sigh rolls from you as you feel " + benoitMF("him","her") + " creeping further into your moist depths.  " + benoitMF("He","She") + " makes a bestial noise and tries to thrust himself into you and upon you; tutting mockingly, you pull yourself away from " + benoitMF("him","her") + " and stop moving until, with what is evidently a huge force of will, the basilisk calms himself, backs himself against the wall and allows you to work " + benoitMF("him","her") + ".");
 		
-		if(player.vaginalCapacity() < 15) outputText("\n\nYou slide back down onto " + benoitMF("him","her") + ", cooing this time as you feel " + benoitMF("him","her") + " bottom out with several inches still outside.  " + benoitMF("His","Her") + " thin member could not be more perfect for your tight sex; " + benoitMF("he","she") + " rubs your walls up and down as you dreamily thrust in and out of " + benoitMF("his","her") + " body, sending waves of pleasure washing through you.");
+		if (player.vaginalCapacity() < 15) outputText("\n\nYou slide back down onto " + benoitMF("him","her") + ", cooing this time as you feel " + benoitMF("him","her") + " bottom out with several inches still outside.  " + benoitMF("His","Her") + " thin member could not be more perfect for your tight sex; " + benoitMF("he","she") + " rubs your walls up and down as you dreamily thrust in and out of " + benoitMF("his","her") + " body, sending waves of pleasure washing through you.");
 		else outputText("\n\nYou slide back down onto " + benoitMF("him","her") + ", cooing this time as your groin meets " + benoitMF("his","her") + " muscular thighs with a wet kiss, your sex swallowing " + benoitMF("his","her") + " cock whole.  You begin to ride " + benoitMF("him","her") + " hard and slow, bending " + benoitMF("his","her") + " cock upwards to push at your sensitive walls, waves of pleasure starting to wash through you.");
 		
 		outputText("\n\nYou keep at this for what feels like hours, stopping and starting, pulling and pushing deliberately to keep the basilisk you have backed into a corner under your control.  The pace of the fuck is clearly agonising for " + benoitMF("Benoit","Benoite") + "; " + benoitMF("he","she") + " pants, tenses and gasps to the wet movement of your [vagina], " + benoitMF("his","her") + " face and chest heaving with extreme arousal, but " + benoitMF("he","she") + " lets you stay in command, eventually giving up on anything but lying back and letting you have your way with " + benoitMF("him","her") + ".  To give " + benoitMF("him","her") + " something to do, you grab " + benoitMF("his","her") + " hands and lay them upon your [chest]; after exploring your flesh for a time, " + benoitMF("he","she") + " finds your [nipple]s and begins to knead them, placing each nub between two fingers and rubbing them insistently.");
-		if(player.lactationQ() > 100) {
+		if (player.lactationQ() > 100) {
 			outputText("  You moan as your breasts reward " + benoitMF("his","her") + " attention with spurts of milk; " + benoitMF("he","she") + " starts in genuine amazement when they ");
-			if(!player.isTaur()) outputText("hit " + benoitMF("him","her") + " in the face");
+			if (!player.isTaur()) outputText("hit " + benoitMF("him","her") + " in the face");
 			else outputText("trickle over " + benoitMF("his","her") + " fingers");
 			outputText(".  \"<i>Mammals are so damn weird,</i>\" " + benoitMF("he","she") + " mutters, making you giggle.");
 		}
 		outputText("\n\nYour lust ratchets up as " + benoitMF("his","her") + " warm hands continue to move, and at last losing your discipline you thrust into " + benoitMF("him","her") + " with abandon, eager now for your peak.  " + benoitMF("Benoit","Benoite") + " pants as you really begin to fuck " + benoitMF("him","her") + " and begins to thrust with you; you clutch " + benoitMF("his","her") + " neck and bite into " + benoitMF("his","her") + " shoulder as you pound into each other, the wetness of your arousal spattering against " + benoitMF("his","her") + " thighs as your body slaps into the basilisk's tight muscles.  " + benoitMF("He","She") + " makes a harsh, bestial noise when " + benoitMF("he","she") + " cums; " + benoitMF("his","her") + " blind eyes roll as " + benoitMF("he","she") + " clutches your back and shoots surge after surge of cum into your churning depths.  The warmth of " + benoitMF("his","her") + " jizz and " + benoitMF("his","her") + " helpless bucking thrust you to your own orgasm; irrepressible pulses of pleasure overwhelm your mind and you can do nothing for long minutes except cry and squeal on top of the basilisk, clutching " + benoitMF("him","her") + " back as you work " + benoitMF("his","her") + " dick for every last drop of cum.");
-		if(player.hasCock()) {
-			if(!player.isTaur()) outputText("  Stuck between your two burning bodies, y");
+		if (player.hasCock()) {
+			if (!player.isTaur()) outputText("  Stuck between your two burning bodies, y");
 			else outputText("Y");
 			outputText("our " + cockDescript(0) + " spurts in sympathy to your female high, soaking ");
-			if(!player.isTaur()) outputText("both of you");
+			if (!player.isTaur()) outputText("both of you");
 			else outputText("the dry dirt");
 			outputText(" with white.");
 		}
@@ -1033,12 +1033,12 @@ private function firstTimeAfterBoningEncounterBenoit():void {
 //Let " + benoitMF("him","her") + "(not for horses): 
 private function repeatSexWithBenoitLetHim():void {
 	clearOutput();
-	if(player.isTaur()) {
+	if (player.isTaur()) {
 		outputText("\n\nFor the moment you don't do anything; you simply stand back and let " + benoitMF("his","her") + " hands slowly move across your frame.  One of " + benoitMF("his","her") + " hands comes to rest upon your [nipples]; as " + benoitMF("he","she") + " gently teases and kneads the soft, sensitive flesh " + benoitMF("his","her") + " other hand drift downwards, across your belly, around your waist and down your velvety back.  Although " + benoitMF("he","she") + " is familiar with your frame by now " + benoitMF("Benoit","Benoite") + " never seems to stop being enthralled by your body; there is an unconscious frown of concentration on " + benoitMF("his","her") + " face as " + benoitMF("his","her") + " smooth hands move across your warm skin, as if " + benoitMF("he","she") + " were mapping you in " + benoitMF("his","her") + " mind's eye.");
 		outputText("\n\nThis slow, gentle pressure is all very well, but you can't help but wonder if you can't awaken something a bit more bestial in the timid basilisk.  The thought of making " + benoitMF("him","her") + " lose " + benoitMF("his","her") + " self-control over you makes you grin, and tenderly but firmly you put your hands on " + benoitMF("his","her") + " claws and tell " + benoitMF("him","her") + " to stop.  " + benoitMF("He","She") + " looks at you in puzzlement.  Smiling, you begin to give " + benoitMF("him","her") + " some of " + benoitMF("his","her") + " own treatment; your hands drift softly over " + benoitMF("his","her") + " tight, smooth flesh, working down " + benoitMF("his","her") + " flat stomach until they reach " + benoitMF("his","her") + " long johns.  You slowly unbuckle them and let them fall, releasing " + benoitMF("his","her") + " long, thin erection.  With one hand you circle the base gently; even touching this least sensitive part of " + benoitMF("his","her") + " dick makes " + benoitMF("him","her") + " grunt with need, the thump of " + benoitMF("his","her") + " heart reverberating through " + benoitMF("his","her") + " scales, and " + benoitMF("he","she") + " involuntarily thrusts forwards, trying to get more of your hand upon " + benoitMF("him","her") + ".  Again, you tell " + benoitMF("him","her") + " to be still.  You continue to almost-masturbate " + benoitMF("him","her") + ", your one hand rubbing the very base of " + benoitMF("his","her") + " cock and the lips from which it thrusts, whilst you very gently sway your powerful back hips, your [vagina] beginning to moisten at the sight of the basilisk's intense arousal.  The scent of your sex is in the air and the fact you cannot reach back and do anything about it only intensifies your excitement.  " + benoitMF("Benoit","Benoite") + " is clenching " + benoitMF("his","her") + " pointed teeth, trembling slightly like a pipe about to burst, " + benoitMF("his","her") + " tail thrashing fitfully as you ponderously turn and lead your rump into " + benoitMF("him","her") + ", smearing your essence over " + benoitMF("his","her") + " incredibly receptive nostrils.  All " + benoitMF("he","she") + " can smell is your own arousal as you begin to talk huskily, saying you've been a naughty girl playing in the mountains, you've teased and run away and mocked every creature you've found but now a big bad basilisk has got you cornered, and what is the big bad basilisk going to do now it's got this naughty girl all to itself...?");
 		
 		outputText("\n\nBenoit surges forwards, grasps you by the [butt], turns and pinions you to the wall.  Your laughs turn to gasps as with an almost pained growl, " + benoitMF("Benoit","Benoite") + " thrusts himself straight into your moist twat.  You can only clutch at the wall of the wagon as " + benoitMF("he","she") + " begins to fuck you with abandon, pushing your human front forwards as " + benoitMF("he","she") + " levers your [hips] upwards with each thrust.  " + benoitMF("He","She") + " is clumsy with lust as well as blind, uncaring of anything but the need to clench your body and hilt himself in your depths, unable to take hold of himself with your pussy juices coating " + benoitMF("his","her") + " nose and burning an unstoppable path to " + benoitMF("his","her") + " brain.  " + benoitMF("His","Her") + " pheromone driven callousness and the discomfort of the wood against your hands ");
-		if(player.biggestTitSize() >= 1) outputText("and [fullChest] ");
+		if (player.biggestTitSize() >= 1) outputText("and [fullChest] ");
 		outputText("augments the roughness of the fuck and you find yourself getting carried along with it, thrusting your powerful rump back against the basilisk and clenching " + benoitMF("him","her") + " deeper into you, delighting in " + benoitMF("his","her") + " firm, dense mass pounding into you.  Your [vagina] dribbles juices around " + benoitMF("his","her") + " impatient, straining dick, practically foaming as " + benoitMF("his","her") + " smooth length rubs forcefully all along your sensitive tunnel.");
 		player.cuntChange(14,true,true,false);
 		
@@ -1048,7 +1048,7 @@ private function repeatSexWithBenoitLetHim():void {
 		
 		outputText("\n\nWhen " + benoitMF("he","she") + " slides into you " + benoitMF("he","she") + " does so with virtually no resistance whatsoever; the two of you have turned your pussy into an inviting, gooey sleeve.  ");
 		//[Tight: 
-		if(player.vaginalCapacity() < 30) outputText("You don't mind; your tight sex is a perfect fit for " + benoitMF("his","her") + " smooth, thin dick, and you work with " + benoitMF("him","her") + " as " + benoitMF("he","she") + " thrusts, pulling and pushing your walls in time with " + benoitMF("his","her") + " length, your lubrication allowing " + benoitMF("him","her") + " to quickly increase the tempo until the two of you are once again bucking against each other gleefully, your fluids spattering against each other.");
+		if (player.vaginalCapacity() < 30) outputText("You don't mind; your tight sex is a perfect fit for " + benoitMF("his","her") + " smooth, thin dick, and you work with " + benoitMF("him","her") + " as " + benoitMF("he","she") + " thrusts, pulling and pushing your walls in time with " + benoitMF("his","her") + " length, your lubrication allowing " + benoitMF("him","her") + " to quickly increase the tempo until the two of you are once again bucking against each other gleefully, your fluids spattering against each other.");
 		//Loose: 
 		else outputText("Although " + benoitMF("he","she") + " is long " + benoitMF("he","she") + " barely even touches the sides of your encompassing twat.  The sensation isn't great for you until " + benoitMF("he","she") + " really starts to go to town, ramming into you with all " + benoitMF("he","she") + "'s got, beating a wet staccato against your [butt], pushing against your [clit] as " + benoitMF("he","she") + " sheaths himself in you.  Your fluids begin to dribble onto your hooves as your slick pleasure button bulges with increasing delight.");
 		outputText("\n\nThe difference in the position makes " + benoitMF("his","her") + " dick bend into you at a different angle, stroking a neglected spot which soon has you gasping with need.  " + benoitMF("Benoit","Benoite") + " is not as maddened as " + benoitMF("he","she") + " was the first time, and " + benoitMF("he","she") + " has the composure to draw himself out; " + benoitMF("he","she") + " slows himself down and then back up again, fucking you magisterially, withdrawing himself almost all the way out of you before slamming firmly back in, stopping whilst hilted in you until you beg and moan for " + benoitMF("him","her") + " to continue.  You give yourself up to the dominant rut you've awoken in " + benoitMF("him","her") + ", thrusting back into " + benoitMF("him","her") + " as you are fucked up to a second ecstatic height and then a third; everything disappearing underneath a timeless red haze, of having your [butt] in the air and being given what a mare needs.");
@@ -1068,12 +1068,12 @@ private function repeatSexWithBenoitLetHim():void {
 		
 		
 		outputText("\n\nHe pulls out of you, trailing threads of semen as " + benoitMF("he","she") + " goes, before slowly turning you around, painstakingly feeling around for a clear space with " + benoitMF("his","her") + " feet, and then putting you down, gently but firmly positioning you on your hands and ");
-		if(player.isBiped()) outputText("knees");
+		if (player.isBiped()) outputText("knees");
 		else outputText("lower body");
 		outputText(".  " + benoitMF("His","Her") + " hands descend upon your [butt]; grinning, you poke it outwards invitingly, sighing with affected frustration as the blind basilisk painstakingly lines up " + benoitMF("his","her") + " next shot with your drooling, sticky sex.");
 		
 		outputText("\n\nWhen " + benoitMF("he","she") + " slides into you " + benoitMF("he","she") + " does so with virtually no resistance whatsoever; the two of you have turned your pussy into an inviting, gooey sleeve.  ");
-		if(player.vaginalCapacity() < 30) outputText("You don't mind; your tight sex is a perfect fit for " + benoitMF("his","her") + " smooth, thin dick, and you work with " + benoitMF("him","her") + " as " + benoitMF("he","she") + " thrusts, pulling and pushing your walls in time with " + benoitMF("his","her") + " length, your lubrication allowing " + benoitMF("him","her") + " to quickly increase the tempo until the two of you are once again bucking against each other gleefully, your fluids spattering against each other.");
+		if (player.vaginalCapacity() < 30) outputText("You don't mind; your tight sex is a perfect fit for " + benoitMF("his","her") + " smooth, thin dick, and you work with " + benoitMF("him","her") + " as " + benoitMF("he","she") + " thrusts, pulling and pushing your walls in time with " + benoitMF("his","her") + " length, your lubrication allowing " + benoitMF("him","her") + " to quickly increase the tempo until the two of you are once again bucking against each other gleefully, your fluids spattering against each other.");
 		else outputText("Although " + benoitMF("he","she") + " is long, " + benoitMF("he","she") + " barely even touches the sides of your encompassing twat.  The sensation isn't great for you until " + benoitMF("he","she") + " really starts to go to town, ramming into you with all " + benoitMF("he","she") + "'s got, beating a wet staccato against your [butt].  You send a hand roaming back around and begin to finger your [clit] as " + benoitMF("he","she") + " sheaths himself in you, " + benoitMF("his","her") + " fluids running down your fingers as you work your slick, bulging pleasure button with increasing delight.");
 		player.cuntChange(10,true,true,false);
 		outputText("  The difference in the position makes " + benoitMF("his","her") + " dick bend into you at an angle, stroking a neglected spot which soon has you gasping with need.  " + benoitMF("Benoit","Benoite") + " is not as maddened as " + benoitMF("he","she") + " was the first time, and " + benoitMF("he","she") + " has the composure to draw himself out; " + benoitMF("he","she") + " slows himself down and then back up again, fucking you magisterially, withdrawing himself almost completely before slamming firmly back in, stopping whilst hilted in you until you beg and moan for " + benoitMF("him","her") + " to continue.  You give yourself up to the dominant rut you've awoken in " + benoitMF("him","her") + ", thrusting back into " + benoitMF("him","her") + " as you are fucked up to a second ecstatic height and then a third; everything disappearing underneath a timeless red haze, of being on your hands and knees with your [butt] in the air and being given what a female animal needs.");
@@ -1092,14 +1092,14 @@ private function repeatSexWithBenoitLetHim():void {
 //Take charge: 
 private function repeatBenoitFuckTakeCharge():void {
 	clearOutput();
-	if(player.isTaur()) {
+	if (player.isTaur()) {
 		outputText("\n\nFor the moment you don't do anything; you simply stand back and let " + benoitMF("his","her") + " hands slowly move across your frame.  One of " + benoitMF("his","her") + " hands comes to rest upon your [nipple]; as " + benoitMF("he","she") + " gently teases and kneads the soft, sensitive flesh " + benoitMF("his","her") + " other hand drift downwards, across your belly, then slowly back along your vast equine frame.  Although " + benoitMF("he","she") + " is familiar with your frame by now " + benoitMF("Benoit","Benoite") + " never seems to stop being enthralled by your body; there is an unconscious frown of concentration on " + benoitMF("his","her") + " face as " + benoitMF("his","her") + " smooth hands move across your warm skin, as if " + benoitMF("he","she") + " were mapping you in " + benoitMF("his","her") + " mind's eye.");
 		
 		//[Herm:
-		if(player.isTaur()) outputText("\n\n" + benoitMF("His","Her") + " hands travel downwards until, with a small grin, " + benoitMF("he","she") + " finds what " + benoitMF("he","she") + " knows is there.  " + benoitMF("He","She") + " wraps " + benoitMF("his","her") + " dry, smooth grasp around your semi-erect cock and moves it up and down, rubbing and coiling you until you are straining.  You close your eyes and sigh, enjoying the masterful treatment that both of you can only feel, not see.");
+		if (player.isTaur()) outputText("\n\n" + benoitMF("His","Her") + " hands travel downwards until, with a small grin, " + benoitMF("he","she") + " finds what " + benoitMF("he","she") + " knows is there.  " + benoitMF("He","She") + " wraps " + benoitMF("his","her") + " dry, smooth grasp around your semi-erect cock and moves it up and down, rubbing and coiling you until you are straining.  You close your eyes and sigh, enjoying the masterful treatment that both of you can only feel, not see.");
 		
 		outputText("\n\n" + benoitMF("His","Her") + " hands trail upwards, moving over your bestial behind, exploring your soft flesh until " + benoitMF("he","she") + " touches your lips.  You close your eyes and sigh as " + benoitMF("he","she") + " slowly parts them with " + benoitMF("his","her") + " smooth fingers and slides into your [vagina].  Although " + benoitMF("his","her") + " breath is becoming increasingly heavy " + benoitMF("he","she") + " also seems genuinely curious about you; with surprising gentleness " + benoitMF("his","her") + " fingers travel over and around your moistening sex, exploring your every fold, working deeper and deeper as " + benoitMF("he","she") + " does.  You let " + benoitMF("him","her") + " know what pleases you by sighing when " + benoitMF("he","she") + " touches a sweet spot, moving deliberately with " + benoitMF("his","her") + " finger's motions so " + benoitMF("he","she") + " may give them better attention.  " + benoitMF("He","She") + " soon finds your [clit], beginning to bulge with need; slowly " + benoitMF("he","she") + " circles it and then flicks at it, gently frigging you.");
-		if(player.inHeat) outputText("  By now your vagina is practically gushing, your bodies' own deep seated pheromone need stoked to blazing heights by the basilisk's gentle, painstaking exploration of your body.  You cannot stop thrusting yourself against " + benoitMF("his","her") + " soaked hand, announcing how badly you want this with heavy moans.");
+		if (player.inHeat) outputText("  By now your vagina is practically gushing, your bodies' own deep seated pheromone need stoked to blazing heights by the basilisk's gentle, painstaking exploration of your body.  You cannot stop thrusting yourself against " + benoitMF("his","her") + " soaked hand, announcing how badly you want this with heavy moans.");
 		
 		outputText("\n\nThe scent of your arousal is in the air and as " + benoitMF("Benoit","Benoite") + " breathes it in " + benoitMF("his","her") + " own breath comes heavier.  " + benoitMF("His","Her") + " erection bulges in " + benoitMF("his","her") + " long johns and you decide it's time for you to take charge; you back up, butting " + benoitMF("him","her") + " insistently with your powerful body until you have " + benoitMF("him","her") + " pinned against a space upon the opposite wall.  You watch " + benoitMF("him","her") + " over your shoulder as " + benoitMF("he","she") + " unbuckles himself and lets " + benoitMF("his","her") + " trousers fall.  Stoked by the pheromones simmering off your body, " + benoitMF("his","her") + " long, thin purple erection is straining and " + benoitMF("he","she") + " arches " + benoitMF("his","her") + " back and opens " + benoitMF("his","her") + " mouth as you flare your [butt] and press yourself against it.  You know just from looking at " + benoitMF("his","her") + " intense arousal you're going to have to go slow to stop " + benoitMF("him","her") + " from shooting " + benoitMF("his","her") + " bolt straight away; with a wicked smile your partner can't see, you suppose such is your effect on " + benoitMF("him","her") + " it may not even matter if " + benoitMF("he","she") + " does.  Still, as " + benoitMF("he","she") + " lays " + benoitMF("his","her") + " hands upon your flanks, and with a sigh you lead back and slowly slide " + benoitMF("his","her") + " length into your moistened [vagina], it is as gently as you can.");
 		
@@ -1107,18 +1107,18 @@ private function repeatBenoitFuckTakeCharge():void {
 		
 		outputText("\n\n");
 		//[Small capacity:]
-		if(player.vaginalCapacity() < 30) outputText("You slide back down onto " + benoitMF("him","her") + ", cooing this time as you feel " + benoitMF("him","her") + " bottom out with several inches of " + benoitMF("him","her") + " still outside of you.  " + benoitMF("His","Her") + " thin, long length could not be more perfect for your tight sex; " + benoitMF("he","she") + " rubs your walls up and down as you dreamily thrust in and out of " + benoitMF("his","her") + " body, sending waves of pleasure flowing through you.");
+		if (player.vaginalCapacity() < 30) outputText("You slide back down onto " + benoitMF("him","her") + ", cooing this time as you feel " + benoitMF("him","her") + " bottom out with several inches of " + benoitMF("him","her") + " still outside of you.  " + benoitMF("His","Her") + " thin, long length could not be more perfect for your tight sex; " + benoitMF("he","she") + " rubs your walls up and down as you dreamily thrust in and out of " + benoitMF("his","her") + " body, sending waves of pleasure flowing through you.");
 		//Large capacity: 
 		else outputText("You slide back down onto " + benoitMF("him","her") + ", cooing this time as your groin meets " + benoitMF("his","her") + " muscular thighs with a wet kiss, your sex swallowing " + benoitMF("his","her") + " cock whole.  You begin to ride " + benoitMF("him","her") + " hard and slow, bending " + benoitMF("his","her") + " cock upwards to push at your sensitive walls, waves of pleasure starting to flow through you.");
 		
 		outputText("\n\nYou keep at this slow ride for what feels like hours, stopping and starting, pulling and pushing deliberately to keep the basilisk you have backed into a corner under your control.  The pace of the fuck is clearly agonising for " + benoitMF("Benoit","Benoite") + "; " + benoitMF("he","she") + " pants, tenses and gasps to the wet movement of your [vagina], " + benoitMF("his","her") + " face and chest red with extreme arousal, but " + benoitMF("he","she") + " lets you stay in control, eventually unable to do anything but lie back and let you have your way with " + benoitMF("him","her") + ".");
 		player.cuntChange(14,true,true,false);
 		//[Lactation: 
-		if(player.lactationQ() >= 50) outputText("  The slow, sensual sex is enough for you to begin to bead milk from your sensitive [nipples]; you moan as the flow intensifies until you are instinctively kneading your [chest], spurting your sweet, warm fluids onto the floor.  " + benoitMF("Benoit","Benoite") + " starts in genuine amazement at the sound.  “Mammals are so damn weird,” " + benoitMF("he","she") + " mutters, making you giggle.");
+		if (player.lactationQ() >= 50) outputText("  The slow, sensual sex is enough for you to begin to bead milk from your sensitive [nipples]; you moan as the flow intensifies until you are instinctively kneading your [chest], spurting your sweet, warm fluids onto the floor.  " + benoitMF("Benoit","Benoite") + " starts in genuine amazement at the sound.  “Mammals are so damn weird,” " + benoitMF("he","she") + " mutters, making you giggle.");
 		
 		outputText("\n\nYour lust ratchets up as " + benoitMF("his","her") + " warm hands continue to move over your behind, and at last losing your discipline you begin to thrust into " + benoitMF("him","her") + " with abandon, eager now for your peak.  " + benoitMF("Benoit","Benoite") + " pants as you really begin to fuck " + benoitMF("him","her") + " and thrusts with you; the wetness of your arousal spatters against " + benoitMF("his","her") + " thighs as your body slaps into the basilisk's tight muscles.  " + benoitMF("He","She") + " makes a harsh, bestial noise when " + benoitMF("he","she") + " cums; " + benoitMF("his","her") + " blind eyes roll as " + benoitMF("he","she") + " clutches your back and shoots surge after surge of cum into your churning depths.  The warmth of " + benoitMF("his","her") + " jizz and " + benoitMF("his","her") + " helpless bucking thrust you to your own orgasm; irrepressible pulses of pleasure overwhelm your mind and you can do nothing for long minutes except cry and squeal against the basilisk, clutching " + benoitMF("him","her") + " back as you work " + benoitMF("his","her") + " dick for every last drop.");
 		//[Herm: 
-		if(player.hasCock()) outputText("  [EachCock] thickens and spurts in sympathy to your female high, spattering the floor with white paint.");
+		if (player.hasCock()) outputText("  [EachCock] thickens and spurts in sympathy to your female high, spattering the floor with white paint.");
 		
 		outputText("\n\nYou puddle onto the packed earth floor and cuddle for a while, holding each other as you bask in the afterglow, silently listening to the far away bustle and clatter of the carnival.");
 		
@@ -1127,11 +1127,11 @@ private function repeatBenoitFuckTakeCharge():void {
 	else {
 		outputText("For the moment you don't do anything; you simply stand back and let " + benoitMF("his","her") + " hands slowly move across your frame.  One of " + benoitMF("his","her") + " hands comes to rest upon your " + nippleDescript(0) + "; as " + benoitMF("he","she") + " gently teases and kneads the soft, sensitive flesh " + benoitMF("his","her") + " other hand drift downwards, across your belly, around over the crack of your [butt] then down to cup your behind.  Although " + benoitMF("he","she") + " is familiar with your frame by now " + benoitMF("Benoit","Benoite") + " never seems to stop being enthralled by your body; there is an unconscious frown of concentration on " + benoitMF("his","her") + " face as " + benoitMF("his","her") + " smooth hands move across your warm skin, as if " + benoitMF("he","she") + " were mapping you in " + benoitMF("his","her") + " mind's eye.");
 		
-		if(player.hasCock()) outputText("\n\n" + benoitMF("His","Her") + " hands travel downwards until, with a small grin, " + benoitMF("he","she") + " finds what " + benoitMF("he","she") + " knows is there.  " + benoitMF("He","She") + " wraps " + benoitMF("his","her") + " dry, smooth grasp around your semi-erect cock and moves it up and down, rubbing and coiling you until you are straining.  You decide it's time to do some feeling yourself; you grasp and pinch at " + benoitMF("his","her") + " tight, supple behind through " + benoitMF("his","her") + " trousers, making " + benoitMF("him","her") + " gasp as you move into " + benoitMF("him","her") + ".");
+		if (player.hasCock()) outputText("\n\n" + benoitMF("His","Her") + " hands travel downwards until, with a small grin, " + benoitMF("he","she") + " finds what " + benoitMF("he","she") + " knows is there.  " + benoitMF("He","She") + " wraps " + benoitMF("his","her") + " dry, smooth grasp around your semi-erect cock and moves it up and down, rubbing and coiling you until you are straining.  You decide it's time to do some feeling yourself; you grasp and pinch at " + benoitMF("his","her") + " tight, supple behind through " + benoitMF("his","her") + " trousers, making " + benoitMF("him","her") + " gasp as you move into " + benoitMF("him","her") + ".");
 		
 		//begin copypasta
 		outputText("" + benoitMF("His","Her") + " hands trail further down, moving into your inner thighs, exploring your soft flesh until " + benoitMF("he","she") + " touches your lips.  You close your eyes and sigh as " + benoitMF("he","she") + " slowly parts them with " + benoitMF("his","her") + " smooth fingers and slides into your [vagina].  Although " + benoitMF("his","her") + " breath is becoming increasingly heavy " + benoitMF("he","she") + " also seems genuinely curious about you; with surprising gentleness " + benoitMF("his","her") + " fingers travel over and around your moistening sex, exploring your every fold, working deeper and deeper as " + benoitMF("he","she") + " does.  You let " + benoitMF("him","her") + " know what pleases you by sighing when " + benoitMF("he","she") + " touches a sweet spot, moving deliberately with " + benoitMF("his","her") + " finger's motions so " + benoitMF("he","she") + " may give them better attention.  " + benoitMF("He","She") + " soon finds your [clit], beginning to bulge with need; slowly " + benoitMF("he","she") + " circles it and then flicks at it, gently frigging you.");
-		if(player.inHeat) outputText("  By now your vagina is practically gushing, your body's own deep-seated pheromone need stoked to blazing heights by the basilisk's gentle, painstaking exploration.  You cannot stop yourself thrusting against " + benoitMF("his","her") + " soaked hand, announcing how badly you want this with heavy moans.");
+		if (player.inHeat) outputText("  By now your vagina is practically gushing, your body's own deep-seated pheromone need stoked to blazing heights by the basilisk's gentle, painstaking exploration.  You cannot stop yourself thrusting against " + benoitMF("his","her") + " soaked hand, announcing how badly you want this with heavy moans.");
 		
 		outputText("\n\nThe scent of your arousal is in the air and as " + benoitMF("Benoit","Benoite") + " inhales it, " + benoitMF("his","her") + " own breath comes heavier.  " + benoitMF("His","Her") + " erection bulges in " + benoitMF("his","her") + " long johns and you decide it's time for you to take charge; you push " + benoitMF("him","her") + " against the wall, unbuckle " + benoitMF("him","her") + " and let " + benoitMF("his","her") + " trousers fall.  Stoked by the pheromones simmering off your body, " + benoitMF("his","her") + " long, thin, purple erection is straining and " + benoitMF("he","she") + " arches " + benoitMF("his","her") + " back and opens " + benoitMF("his","her") + " mouth as you lay a hand on it.  You know just from looking at " + benoitMF("his","her") + " straining prick you're going to have to go slow for " + benoitMF("him","her") + " not to shoot " + benoitMF("his","her") + " bolt straight away; with a wicked smile your partner can't see, you suppose that such is your body's effect on " + benoitMF("him","her") + " it may not even matter if " + benoitMF("he","she") + " does.  Still, as you once again lay " + benoitMF("his","her") + " hands upon you, brace " + benoitMF("him","her") + " against the wall and, with a sigh, slowly slide " + benoitMF("his","her") + " length into your moistened [vagina], it is as gently as your eagerness can stand.");
 		player.cuntChange(10,true,true,false);
@@ -1139,25 +1139,25 @@ private function repeatBenoitFuckTakeCharge():void {
 		outputText("\n\nBenoit's dick is incredibly smooth and you move down onto it with slick ease.  Rather than burying yourself onto it straight away, you stop with only a third of it in your wet depths and bring it out of you, dipping yourself slowly.  You stop with " + benoitMF("his","her") + " sensitive head just inside and work your [hips] around deliberately, sighing as it rotates around your slick walls.  " + benoitMF("Benoit","Benoite") + " moans and you feel " + benoitMF("his","her") + " body tense; immediately you halt your movements and wait, only gradually beginning to gyrate and thrust again when " + benoitMF("he","she") + " has calmed down.  You slide more inside when you bend forwards again, this time leaving only " + benoitMF("his","her") + " base outside of you; a sigh rolls from you as you feel " + benoitMF("him","her") + " creeping further into your moist depths.  " + benoitMF("He","She") + " makes a bestial noise and tries to thrust himself into you and upon you; tutting mockingly, you pull yourself away from " + benoitMF("him","her") + " and stop moving until, with what is evidently a huge force of will, the basilisk calms himself, backs himself against the wall and allows you to work " + benoitMF("him","her") + ".");
 		
 		//[Small capacity: 
-		if(player.vaginalCapacity() < 30) outputText("\n\nYou slide back down onto " + benoitMF("him","her") + ", cooing this time as you feel " + benoitMF("him","her") + " bottom out with several inches still outside.  " + benoitMF("His","Her") + " thin member could not be more perfect for your tight sex; " + benoitMF("he","she") + " rubs your walls up and down as you dreamily thrust in and out of " + benoitMF("his","her") + " body, sending waves of pleasure washing through you.");
+		if (player.vaginalCapacity() < 30) outputText("\n\nYou slide back down onto " + benoitMF("him","her") + ", cooing this time as you feel " + benoitMF("him","her") + " bottom out with several inches still outside.  " + benoitMF("His","Her") + " thin member could not be more perfect for your tight sex; " + benoitMF("he","she") + " rubs your walls up and down as you dreamily thrust in and out of " + benoitMF("his","her") + " body, sending waves of pleasure washing through you.");
 		else outputText("\n\nYou slide back down onto " + benoitMF("him","her") + ", cooing this time as your groin meets " + benoitMF("his","her") + " muscled thighs with a wet kiss, your sex swallowing " + benoitMF("his","her") + " cock whole.  You begin to ride " + benoitMF("him","her") + " hard and slow, bending " + benoitMF("his","her") + " cock upwards to push at your sensitive walls, waves of pleasure starting to wash through you.");
 
 		outputText("\n\nYou keep at this for what feels like hours, stopping and starting, pulling and pushing deliberately to keep the basilisk you have backed into a corner under your control.  The pace of the fuck is clearly agonising for " + benoitMF("Benoit","Benoite") + "; " + benoitMF("he","she") + " pants, tenses and gasps to the wet movement of your [vagina], " + benoitMF("his","her") + " face and chest heaving with extreme arousal, but " + benoitMF("he","she") + " lets you stay in command, eventually giving up on anything but lying back and letting you have your way with " + benoitMF("him","her") + ".  To give " + benoitMF("him","her") + " something to do, you grab " + benoitMF("his","her") + " hands and lay them upon your [chest]; after exploring your flesh for a time, " + benoitMF("he","she") + " finds your [nipple]s and begins to knead them, placing each nub between two fingers and rubbing them insistently.");
 		//[Lactation: 
-		if(player.lactationQ() > 100) {
+		if (player.lactationQ() > 100) {
 			outputText("  You moan as your breasts reward " + benoitMF("his","her") + " attention with spurts of milk; " + benoitMF("he","she") + " starts in genuine amazement when they ");
-			if(!player.isTaur()) outputText("hit " + benoitMF("him","her") + " in the face");
+			if (!player.isTaur()) outputText("hit " + benoitMF("him","her") + " in the face");
 			else outputText("trickle over " + benoitMF("his","her") + " fingers");
 			outputText(".  \"<i>Mammals are so damn weird,</i>\" " + benoitMF("he","she") + " mutters, making you giggle.");
 		}
 		
 		outputText("\n\nYour lust ratchets up as " + benoitMF("his","her") + " warm hands continue to move, and at last losing your discipline you thrust into " + benoitMF("him","her") + " with abandon, eager now for your peak.  " + benoitMF("Benoit","Benoite") + " pants as you really begin to fuck " + benoitMF("him","her") + " and begins to thrust with you; you clutch " + benoitMF("his","her") + " neck and bite into " + benoitMF("his","her") + " shoulder as you pound into each other, the wetness of your arousal spattering against " + benoitMF("his","her") + " thighs as your body slaps into the basilisk's tight muscles.  " + benoitMF("He","She") + " makes a harsh, bestial noise when " + benoitMF("he","she") + " cums; " + benoitMF("his","her") + " blind eyes roll as " + benoitMF("he","she") + " clutches your back and shoots surge after surge of cum into your churning depths.  The warmth of " + benoitMF("his","her") + " jizz and " + benoitMF("his","her") + " helpless bucking thrust you to your own orgasm; irrepressible pulses of pleasure overwhelm your mind and you can do nothing for long minutes except cry and squeal on top of the basilisk, clutching " + benoitMF("him","her") + " back as you work " + benoitMF("his","her") + " dick for every last drop of cum.");
-		if(player.hasCock()) {
+		if (player.hasCock()) {
 			//[(not horse)
-			if(!player.isTaur()) outputText("  Stuck between your two burning bodies, y");
+			if (!player.isTaur()) outputText("  Stuck between your two burning bodies, y");
 			else outputText("Y");
 			outputText("our " + cockDescript(0) + " spurts in sympathy to your female high, soaking ");
-			if(!player.isTaur()) outputText("both of you");
+			if (!player.isTaur()) outputText("both of you");
 			else outputText("the dry dirt");
 			outputText(" with white.");
 		}
@@ -1178,11 +1178,11 @@ private function tryToConvertToBassyWomb():void {
 	clearOutput();
 	//[Ingredients not in inventory: ]
 	//A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do...
-	if(!(player.hasItem(consumables.OVIELIX,2) && player.hasItem(consumables.REPTLUM) && player.hasItem(consumables.GOB_ALE))) {
+	if (!(player.hasItem(consumables.OVIELIX,2) && player.hasItem(consumables.REPTLUM) && player.hasItem(consumables.GOB_ALE))) {
 		outputText("You don't have the necessary ingredients to attempt this yet.  You recall " + benoitMF("Benoit","Benoite") + " mentioning that you would need Reptilum, two Ovi Elixirs, and Goblin Ale.");
 		doNext(benoitIntro);
 	}
-	/*else if(player.isTaur()) {
+	/*else if (player.isTaur()) {
 		outputText("\"<i>Forgive me, [name],</i>\" Benoit says, clearly troubled, as you begin hauling out the ingredients and announcing your plan.  \"<i>I sink your body is already stressed enough wis 'aving to pump so little blood so far... I would razer you not take furzer risks on my account until your form is more... compact.  I cannot be a part of zis... 'owever much I would like to.  You mean too much to me, you see.</i>\"");
 		outputText("\n\nLeft speechless by " + benoitMF("his","her") + " frankness, you can only sweep the items back into your bag.");
 		//return to shop menu
@@ -1201,7 +1201,7 @@ private function tryToConvertToBassyWomb():void {
 		
 		outputText("\n\nThe mixture has a lingering bite of mint overlaying the all-consuming burn of alcohol; you are reminded vaguely of the sticky liqueurs that populated the recesses of cupboards back home.  You smack your lips and plonk the bowl back down with deliberate loudness after you have finished; " + benoitMF("Benoit","Benoite") + " clutches the counter tensely as you wait.  You haven't died straight away, so that's a positive... an immense gurgle comes from your belly and you double over as your insides shift and the contents of your gut churn.  The sensation is not painful exactly but you feel like you've lost all control of your insides; you clutch your sides and try to breathe levelly as your stomach turns upside down and makes a sound like trapped gas.  Eventually you feel something like a bubble form just below your gut; slowly your insides settle as the bubble grows larger and larger, until the sensation slowly fades.  Cautiously you walk back and forth a few times, before poking your tummy.");
 		//[No oviposition:
-		if(player.findPerk(PerkLib.Oviposition) < 0) outputText("  You feel slightly bloated, but otherwise fine; you sense that you can lay eggs of your own volition now.");
+		if (player.findPerk(PerkLib.Oviposition) < 0) outputText("  You feel slightly bloated, but otherwise fine; you sense that you can lay eggs of your own volition now.");
 		else outputText("You feel slightly bloated, but otherwise fine; you sense that were you to get impregnated by basilisk seed, the eggs you produce would be pure basilisk.");
 		
 		outputText("\n\n\"<i>[name]?</i>\" says " + benoitMF("Benoit","Benoite") + " nervously.  \"<i>Are you all right?  Shall I call ze sawbones? I will call ze sawbones.  'E is mostly good at taking people apart and putting zem back togezzer again, but I am sure 'e can give you a good purgative if we rush...</i>\"  You toy with the idea of staging a dramatic allergic reaction, but deciding not to fray " + benoitMF("his","her") + " nerves any further you tell " + benoitMF("him","her") + " you feel absolutely fine.  Indeed, stroking your belly, you are almost certain that it worked.");
@@ -1212,9 +1212,9 @@ private function tryToConvertToBassyWomb():void {
 		flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] = .5;
 		
 		//[Lust 30 or more: 
-		if(player.lust >= 33) {
+		if (player.lust >= 33) {
 			outputText("  You grin and say you're not sure it worked, but you suppose there's only one real way of finding out...");
-			if(player.tallness <= 78 && !player.isTaur()) outputText("  The basilisk is still for a moment, and then with a sudden surge of movement, grabs you by the waist and hoists you over " + benoitMF("his","her") + " shoulder.  You squeal in mock terror as " + benoitMF("he","she") + " hauls you as fast as " + benoitMF("he","she") + " can into the back room, knocking over half " + benoitMF("his","her") + " stock as " + benoitMF("he","she") + " does.");
+			if (player.tallness <= 78 && !player.isTaur()) outputText("  The basilisk is still for a moment, and then with a sudden surge of movement, grabs you by the waist and hoists you over " + benoitMF("his","her") + " shoulder.  You squeal in mock terror as " + benoitMF("he","she") + " hauls you as fast as " + benoitMF("he","she") + " can into the back room, knocking over half " + benoitMF("his","her") + " stock as " + benoitMF("he","she") + " does.");
 			else outputText("  The basilisk is still for a moment, and then with a sudden surge of movement, grabs you by the waist and frenetically attempts to hoist you over " + benoitMF("his","her") + " shoulder.  You are far too big for " + benoitMF("him","her") + " though; after several valiant attempts, " + benoitMF("he","she") + " collapses against a shelf.  Laughing, you pick the stricken, panting reptile up, hoist " + benoitMF("him","her") + " over your own shoulder, and navigate a path into the back room.");
 			doNext(createCallBackFunction(suggestSexAfterBasiWombed,false));
 			return;
@@ -1228,20 +1228,20 @@ private function tryToConvertToBassyWomb():void {
 private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 	clearOutput();
 	//Subsequent \"<i>Suggest</i>\" if initial sex option not taken: 
-	if(later) {
+	if (later) {
 		outputText("You smile coquettishly and ask if " + benoitMF("he","she") + "'s interested in taking your new body for a... test drive.  ");
 		//(6'6 or less: 
-		if(player.tallness <= 78 && !player.isTaur()) outputText("The basilisk is still for a moment, and then with a sudden surge of movement, grabs you by the waist and hoists you over " + benoitMF("his","her") + " shoulder.  You squeal in mock terror as " + benoitMF("he","she") + " hauls you as fast as " + benoitMF("he","she") + " can into the back room, knocking over half " + benoitMF("his","her") + " stock as " + benoitMF("he","she") + " does.");
+		if (player.tallness <= 78 && !player.isTaur()) outputText("The basilisk is still for a moment, and then with a sudden surge of movement, grabs you by the waist and hoists you over " + benoitMF("his","her") + " shoulder.  You squeal in mock terror as " + benoitMF("he","she") + " hauls you as fast as " + benoitMF("he","she") + " can into the back room, knocking over half " + benoitMF("his","her") + " stock as " + benoitMF("he","she") + " does.");
 		else outputText("The basilisk is still for a moment, and then with a sudden surge of movement, grabs you by the waist and frenetically attempts to hoist you over " + benoitMF("his","her") + " shoulder.  You are far too big for " + benoitMF("him","her") + " though; after several valiant attempts, " + benoitMF("he","she") + " collapses against a shelf.  Laughing, you pick the stricken, panting reptile up, hoist " + benoitMF("him","her") + " over your own shoulder, and navigate a path into the back room.");
 		outputText("\n\n");
 	}
-	if(!player.isTaur()) {
+	if (!player.isTaur()) {
 		//Both go to: [>6'6: 
-		if(player.tallness > 78) outputText("You haul your lizard boy into the cramped space of the backroom before gently setting " + benoitMF("him","her") + " down.  Now that your gut has settled you feel imbued with an odd, ripe sensation; your belly bulges ever-so-slightly with unfertilized eggs and you feel red, soft and ready.  You begin to disrobe eagerly; having recovered himself slightly, " + benoitMF("Benoit","Benoite") + " shrugs out of " + benoitMF("his","her") + " trousers, reaching out to you before stopping.  Grinning kindly at the emasculated basilisk, you lower yourself onto the floor, spread your [hips] casually and then ask if " + benoitMF("he","she") + " see... smells anything interesting.");
+		if (player.tallness > 78) outputText("You haul your lizard boy into the cramped space of the backroom before gently setting " + benoitMF("him","her") + " down.  Now that your gut has settled you feel imbued with an odd, ripe sensation; your belly bulges ever-so-slightly with unfertilized eggs and you feel red, soft and ready.  You begin to disrobe eagerly; having recovered himself slightly, " + benoitMF("Benoit","Benoite") + " shrugs out of " + benoitMF("his","her") + " trousers, reaching out to you before stopping.  Grinning kindly at the emasculated basilisk, you lower yourself onto the floor, spread your [hips] casually and then ask if " + benoitMF("he","she") + " see... smells anything interesting.");
 		else outputText("" + benoitMF("Benoit","Benoite") + " staggers into the back room, bumping into several things as " + benoitMF("he","she") + " sets you down, thankfully onto a clear space on the ground.  " + benoitMF("He","She") + " leans into you, " + benoitMF("his","her") + " weight pushing you onto the ground, hands flying over your [armor], fumbling off clasps and belts when " + benoitMF("he","she") + " finds them.  Now that your gut has settled you feel imbued with an odd, ripe sensation; your belly bulges ever-so-slightly with unfertilized eggs and you feel red, soft and ready.  You work with " + benoitMF("him","her") + ", wriggling out of your clothes and ripping " + benoitMF("his","her") + " own trousers off, spreading your [hips] eagerly as " + benoitMF("his","her") + " long, smooth prick springs to attention.");
 		
 		outputText("\n\nThe basilisk needs no further invitation.  In a moment " + benoitMF("he","she") + " is upon you, " + benoitMF("his","her") + " tight, muscled chest pressed against your [chest], " + benoitMF("his","her") + " flat stomach rubbing over your own fertile belly and the head of " + benoitMF("his","her") + " dick pushed against your moist lips.");
-		if(player.hasCock()) outputText("  " + benoitMF("He","She") + " deliberately rubs himself up and down your body, and the [cock] trapped between your warm bodies quickly hardens against the warm, smooth friction.");
+		if (player.hasCock()) outputText("  " + benoitMF("He","She") + " deliberately rubs himself up and down your body, and the [cock] trapped between your warm bodies quickly hardens against the warm, smooth friction.");
 		outputText("  Despite " + benoitMF("his","her") + " blindness, " + benoitMF("he","she") + " slides straight into your moist depths, making you coo as " + benoitMF("his","her") + " hard, smooth spur glides across your sensitive walls, slowly bringing himself out before thrusting himself in again, working more and more of " + benoitMF("his","her") + " length into you.  Never quite able to control himself around your body, it's obvious in the strain in " + benoitMF("his","her") + " face and the raggedness of " + benoitMF("his","her") + " breath against your skin that " + benoitMF("he","she") + " is exercising every restraint " + benoitMF("he","she") + " has not to fuck you into the ground; " + benoitMF("he","she") + " pushes " + benoitMF("his","her") + " dick upwards with each return thrust to bump deliberately against your [clit], sending irresistible spasms of pleasure chiming through you.  Pushed inexorably upwards you curl an arm around " + benoitMF("his","her") + " neck, kiss " + benoitMF("his","her") + " nose and grit your teeth, then whisper into " + benoitMF("his","her") + " ear to stop holding back.  " + benoitMF("Benoit","Benoite") + " pauses for a moment to gather " + benoitMF("his","her") + " breath, hilted entirely in your wet cunt, then hooks " + benoitMF("his","her") + " hips around yours, entrapping you around " + benoitMF("his","her") + " body, before beginning to fuck your softened, ripe body like a jackhammer.  " + benoitMF("He","She") + " pounds into you with everything " + benoitMF("he","she") + "'s got, clenching you as your gushing [vagina] deliriously spatters fluids across your entwined bodies.  Lost in rut now, " + benoitMF("Benoit","Benoite") + " licks your face with " + benoitMF("his","her") + " long tongue, the soft, sticky pressure against your reddened cheeks only seeming to make the contrasting sensation of " + benoitMF("his","her") + " long prick taking you deep even more overwhelming.");
 		player.cuntChange(14,true,true,false);
 		
@@ -1259,7 +1259,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 		outputText("You haul your lizard boy into the cramped space of the backroom before gently setting " + benoitMF("him","her") + " down.  Now that your gut has settled, you feel imbued with an odd, ripe sensation; your horse belly bulges ever so slightly with unfertilized eggs and you feel red, soft and ready.  You begin to shrug your clothes off eagerly; having recovered himself slightly " + benoitMF("Benoit","Benoite") + " shrugs out of " + benoitMF("his","her") + " trousers, reaching out to you before stopping, blushing furiously.  Grinning kindly at the emasculated basilisk, you lower yourself onto the floor, flare your [hips] casually and then ask if " + benoitMF("he","she") + " see... smells anything interesting.");
 		outputText("\n\nThe basilisk needs no further invitation.  In a moment " + benoitMF("he","she") + " is upon you, " + benoitMF("his","her") + " tight, muscled chest is pressed against your [ass], " + benoitMF("his","her") + " hands moving over your own fertile belly and the head of " + benoitMF("his","her") + " dick pushed against your moist [vagina].");
 		//[Herm:
-		if(player.hasCock()) outputText("  " + benoitMF("He","She") + " deliberately moves " + benoitMF("his","her") + " hand over [oneCock] before trapping it in " + benoitMF("his","her") + " warm grasp.   It quickly hardens against " + benoitMF("his","her") + " warm, smooth friction.");
+		if (player.hasCock()) outputText("  " + benoitMF("He","She") + " deliberately moves " + benoitMF("his","her") + " hand over [oneCock] before trapping it in " + benoitMF("his","her") + " warm grasp.   It quickly hardens against " + benoitMF("his","her") + " warm, smooth friction.");
 		outputText("  Used to your body now despite " + benoitMF("his","her") + " blindness, " + benoitMF("he","she") + " slides straight into your moist depths, making you coo as " + benoitMF("his","her") + " hard, smooth spur glides across your sensitive walls, slowly bringing himself out before thrusting himself in again, working more and more of " + benoitMF("his","her") + " long length into you.   Never quite able to control himself around your body, it's obvious in the strain of the muscles pressed against you and the raggedness of " + benoitMF("his","her") + " breath upon your skin that " + benoitMF("he","she") + " is exercising every restraint " + benoitMF("he","she") + " has not to fuck you into the ground; " + benoitMF("he","she") + " pushes " + benoitMF("his","her") + " dick downwards with each return thrust to bump deliberately against your [clit], sending irresistible spasms of pleasure chiming through you.  You slowly move forwards until your arms are braced against the wall, before gritting over your shoulder to " + benoitMF("him","her") + " to stop holding back.  " + benoitMF("Benoit","Benoite") + " pauses for a moment to gather " + benoitMF("his","her") + " breath, hilted entirely in your wet cunt, then hooks " + benoitMF("his","her") + " strong arms around your back end, entrapping you around " + benoitMF("his","her") + " body, before beginning to fuck your softened, ripe body like a jackhammer.  " + benoitMF("He","She") + " pounds into you with everything " + benoitMF("he","she") + "'s got, clenching you as your gushing [vagina] deliriously spatters fluids across your entwined bodies."); 
 		player.cuntChange(14,true,true,false);
 
@@ -1278,7 +1278,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 	//(Oviposition perk added)
 	player.createPerk(PerkLib.BasiliskWomb,0,0,0,0);
 	outputText("\n\n(<b>Perk Unlocked: Basilisk Womb - You can now give birth to female basilisks.</b>)");
-	if(player.findPerk(PerkLib.Oviposition) < 0) {
+	if (player.findPerk(PerkLib.Oviposition) < 0) {
 		player.createPerk(PerkLib.Oviposition,0,0,0,0);
 		outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
 	}
@@ -1292,7 +1292,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 //happens only at night, after all other night events
 //PC lays 2 eggs per 10 points of Fertility they have
 public function popOutBenoitEggs():void {
-	if(player.vaginas.length == 0) {
+	if (player.vaginas.length == 0) {
 		outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
 		player.createVagina();
 		player.genderCheck();
@@ -1300,9 +1300,9 @@ public function popOutBenoitEggs():void {
 	outputText("\nA sudden pressure in your belly rouses you, making you moan softly in pain as you feel your womb rippling and squeezing, the walls contracting around the ripe eggs inside you.  You drag yourself from your bedding, divesting yourself of your lower clothes and staggering out into the middle of the camp.  Squatting upright, you inhale deeply and start to concentrate.");
 	
 	outputText("\n\nA thick, green slime begins to flow from your stretched netherlips, splatting wetly onto the ground below you and quickly soaking into the dry earth.  You settle easily into the rhythm of pushing with your contractions and breathing deeply when they ebb.  The eggs inside you move quickly, lubricated by the strange slime that cushioned them in your womb; sized and shaped just right, the pressure of their passage stretches you in the most delightful way, your [clit] growing erect ");
-	if(player.hasCock()) outputText("and [eachCock] starting to leak pre-cum ");
+	if (player.hasCock()) outputText("and [eachCock] starting to leak pre-cum ");
 	outputText("as you find yourself being moved to climax by the birthing.  You see no point in resisting and reach down to begin fiddling with yourself, moaning in pain-spiked pleasure as the stimulus overwhelms you.  With an orgasmic cry, you release your eggs into the world amidst a gush of femcum");
-	if(player.hasCock()) outputText(" and a downpour of semen");
+	if (player.hasCock()) outputText(" and a downpour of semen");
 	outputText(".");
 	
 	outputText("\n\nWhen you find yourself able to stand, you examine what it is you have birthed: " + num2Text(Math.floor(player.totalFertility() / 10)) + " large, jade-colored eggs, the unmistakable shape of reptile eggs.  You pick one up and hold it gently against your ear; inside, you can hear a little heart, beating strong and quick; " + benoitMF("Benoit","Benoite") + "'s child and yours.  You place the egg back down and gather them all up, moving them closer to the campfire to warm while you recover from your exertions.");
@@ -1312,13 +1312,13 @@ public function popOutBenoitEggs():void {
 	outputText("\n\n\"<i>What is it?!</i>\" " + benoitMF("he","she") + " snarls, displaying " + benoitMF("his","her") + " fangs when " + benoitMF("he","she") + " pops " + benoitMF("his","her") + " head irritably out of the door.  " + benoitMF("He","She") + " stops and inhales through " + benoitMF("his","her") + " nose, starting lightly when " + benoitMF("he","she") + " recognizes your scent.  \"<i>Oops!  [name], I am zo sorry, I did not think it would be you.  But why are you here at such an early hour?</i>\"");
 	
 	outputText("\n\nYou smile at your blind lover and tell " + benoitMF("him","her") + " that " + benoitMF("he","she") + "'s a father");
-	if(flags[kFLAGS.BENOIT_EGGS] > 0) outputText(" once more");
+	if (flags[kFLAGS.BENOIT_EGGS] > 0) outputText(" once more");
 	outputText(".  Well, " + benoitMF("he","she") + " will be when this ");
-	if(flags[kFLAGS.BENOIT_EGGS] > 0) outputText("latest ");
+	if (flags[kFLAGS.BENOIT_EGGS] > 0) outputText("latest ");
 	outputText("clutch hatches, anyway.");
 	
 	//First Time: 
-	if(flags[kFLAGS.BENOIT_EGGS] == 0) {
+	if (flags[kFLAGS.BENOIT_EGGS] == 0) {
 		outputText("\n\nHe beams with joy, then looks confused.  \"<i>But... why have you brought zem 'ere?</i>\" " + benoitMF("he","she") + " questions.");
 		
 		outputText("\n\nYou explain that you don't feel your camp is safe enough to keep them there, and " + benoitMF("Benoit","Benoite") + " nods.  \"<i>Yes, I can see your point... come, give zem 'ere, and I shall look after them for ze both of us.</i>\"");

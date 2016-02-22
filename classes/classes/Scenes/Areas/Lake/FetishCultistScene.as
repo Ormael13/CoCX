@@ -189,7 +189,7 @@ package classes.Scenes.Areas.Lake
 				}
 			}
 			//Nurse raeeeepp
-			//if(monster.armorName == "naughty nurse's uniform" && !sexed) {
+			//if (monster.armorName == "naughty nurse's uniform" && !sexed) {
 			if (rand(2) == 0 && !sexed) {
 				outputText("You stand up and look over at the cultist. She is now wearing a nurse's uniform with bared breasts.  You notice that your " + player.armorName + " changed into a bizarre cross between a patient's gown and a collection of black straps with buckles.  While tight in some places, it doesn't hinder your movement or hide your more sexual parts at all.", false);
 				if (player.isTaur()) {
@@ -675,8 +675,8 @@ package classes.Scenes.Areas.Lake
 			player.orgasm();
 			dynStats("lib", .2);
 			//You've now been milked, reset the timer for that
-			player.addStatusValue(StatusAffects.Feeder, 1, 1);
-			player.changeStatusValue(StatusAffects.Feeder, 2, 0);
+			player.addStatusValue(StatusEffects.Feeder, 1, 1);
+			player.changeStatusValue(StatusEffects.Feeder, 2, 0);
 			cleanupAfterCombat();
 		}
 	}

@@ -65,11 +65,11 @@ package classes.Scenes.Areas.Forest
 			if (clearScreen) clearOutput();
 			spriteSelect(6);
 			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, antennae, and luscious black lips that glimmer wetly");
-			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) { //Exgartuan messes with things!
+			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) { //Exgartuan messes with things!
 				beeEncounterWithExgartuan();
 				return;
 			}
-			if (player.findStatusAffect(StatusAffects.Infested) >= 0 || player.findStatusAffect(StatusAffects.WormPlugged) >= 0) { //Worms now mess with things too!
+			if (player.findStatusEffect(StatusEffects.Infested) >= 0 || player.findStatusEffect(StatusEffects.WormPlugged) >= 0) { //Worms now mess with things too!
 				beeEncounterWithWorms();
 				return;
 			}
@@ -385,7 +385,7 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			spriteSelect(6);
 			outputText("You slowly " + (player.isTaur() ? "trot" : "walk") + " toward the bee girl, your mind in a haze.  Her antennae wiggle in anticipation and she gives you a lusty smile, eager to fill your ass with her payload.  You start to take off your clothes, the last of your underwear falling to the forest floor as you reach her.\n\n");
-			outputText("The bee maiden puts her hands on your shoulders.  She draws you gently into a kiss, but as her sweet saliva prepares you for what is to come you feel one of your annelid passengers slither down " + (player.findStatusAffect(StatusAffects.WormPlugged) >= 0 ? "from your cervix and poke out of your cunt" : "your urethra and wrap itself around the tip of your cock") + ".  The bee girl pulls back from the kiss, looks down and jumps back, the color draining from her face.\n\n");
+			outputText("The bee maiden puts her hands on your shoulders.  She draws you gently into a kiss, but as her sweet saliva prepares you for what is to come you feel one of your annelid passengers slither down " + (player.findStatusEffect(StatusEffects.WormPlugged) >= 0 ? "from your cervix and poke out of your cunt" : "your urethra and wrap itself around the tip of your cock") + ".  The bee girl pulls back from the kiss, looks down and jumps back, the color draining from her face.\n\n");
 			outputText("<i>“By my queen!  That izzz dizzzguzzting!  How can you zzztand it?  Ugh, no, I can't lay my queen'zzz preciouzzz eggzzz in a body with thozzze.”</i>  A few drips of fluid dribble from the tip of her ovipositor and she adds, <i>“and I zzzo wanted to.  I really have to find zzzomeone who can take thezzze and keep them zzzafe.”</i>\n\n");
 			outputText("She lifts off, hovering a few feet off the ground.  <i>“Good luck getting rid of thozzze thingzzz.  When you do, come find me and I'll fill you zzzo full of lovely eggzzz,”</i> she promises, her fingers idly stroking her sex.  She shakes her head, deliberately getting control of herself and forcing her fingers away from her slit, then flies up through a hole in the canopy.\n\n");
 			outputText("Alone and aroused, all you can do is put your clothes back on and travel back to your camp, hoping no imps ambush you on the way.");
@@ -1219,7 +1219,7 @@ package classes.Scenes.Areas.Forest
 			}
 			else {
 				//Male + venomz
-				if ((player.findStatusAffect(StatusAffects.ParalyzeVenom) >= 0 || player.findStatusAffect(StatusAffects.lustvenom) >= 0) && !sexed && player.cockTotal() == 1) {
+				if ((player.findStatusEffect(StatusEffects.ParalyzeVenom) >= 0 || player.findStatusEffect(StatusEffects.lustvenom) >= 0) && !sexed && player.cockTotal() == 1) {
 					outputText("The bee-girl stands directly over you, looking down at you with a triumphant cute smile across her face, her eyes surveying every millimeter of your body. All you can do is lay there looking up at her fine figure and a profile of her ample breasts with a knowing smile on your face. She crouches down on all fours, just out of your reach, and begins to rhythmically shake her extended abdomen like a child's toy.\n\n", false);
 
 					outputText("Suddenly reality kicks in as you feel the venom coursing though your body, and your heart begins to race faster and faster by the minute. A dull pain swells deep inside your head as if it were about to explode; you try to lift your arms to cradle your head but can't, and slowly a new sensation takes over as your manhood begins to swell in size and length, trying to break through your clothes. A faint buzzing sound comes seemingly from nowhere, growing louder and getting closer every second. As the pain in your head decreases, you suddenly feel parched, your mouth as dry as the desert sands.  You try to let out a moan but all you can do is breathe rapidly, as if you are burning up inside.\n\n", false);
@@ -1335,7 +1335,7 @@ package classes.Scenes.Areas.Forest
 				outputText("(You could focus on your snakelike, 'naga' attributes.)\n", false);
 				naga = corruptNagaBitchesRapeABee;
 			}
-			if (player.cor >= 75 && player.str >= 60 && (player.tongueType == TONUGE_SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4)) {
+			if (player.cor >= 75 && player.str >= 60 && (player.tongueType == TONGUE_SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4)) {
 				outputText("(You could play with her a bit and try to make her lay eggs into herself.)\n", false);
 				gentleman = beeGirlRapeForTheDistinguishedGentleman;
 			}
@@ -1702,7 +1702,7 @@ package classes.Scenes.Areas.Forest
 
 			//[random effects: roll for one
 			var choices:Array = [];
-			if (player.tongueType == TONUGE_SNAKE) choices[choices.length] = 0;
+			if (player.tongueType == TONGUE_SNAKE) choices[choices.length] = 0;
 			if (player.hasCock()) choices[choices.length] = 1;
 			if (player.hasVagina()) choices[choices.length] = 2;
 			if (player.biggestTitSize() >= 4) choices[choices.length] = 3;
@@ -1958,7 +1958,7 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			outputText("You advance on your ", false);
-			if(monster.HP < 1) outputText("hapless", false);
+			if (monster.HP < 1) outputText("hapless", false);
 			else outputText("horny", false);
 			outputText(" foe, pulling your new favorite toy from your pouch like a knight drawing a sword.  The only difference is, your \"sword\" jiggles and leaks pink fluid.   Rushing forward, you close the distance in a leap and gently slap her face.   She looks up at you, dazed and confused, opening her mouth in protest.   The artificial dong easily muffles her noise-hole. From the blush that colors her cheeks, you can tell its fluids are already starting to affect her.\n\n", false);
 			
@@ -1973,7 +1973,7 @@ package classes.Scenes.Areas.Forest
 			outputText("She cries out in ecstasy, spurting yellowish-white goo all over herself from her gaping ovipositor.  Eggs begin tumbling from the quivering black tube, rolling off her belly and thighs into the puddle of goo on the ground as her orgasmic contractions force them out, one after another.  They come out in twos and threes, passing through the widened hole with ease.  She buzzes and hums behind you, in her own little world, probably imagining she's fertilizing someone's backdoor.  You shrug and return to stroking the ovipositor, giggling a bit as it hardens nearly as much as a dick and gives a few last mighty squirts, depositing the last egg into the massive pile.\n\n", false);
 			
 			outputText("You release it as she passes out, smiling when you realize she'll probably be leaking eggs with every step from now on.  ", false);
-			if(player.cor < 50) outputText("You feel kind of bad for her, but y", false);
+			if (player.cor < 50) outputText("You feel kind of bad for her, but y", false);
 			else outputText("Y", false);
 			outputText("ou really need to get back to camp and get off after such an intense experience.  Maybe you should give your honey-flavored dildo a shot?", false);
 			dynStats("lus", (20+player.lib/5+player.cor/10));
@@ -2018,8 +2018,8 @@ package classes.Scenes.Areas.Forest
 			//set lust to 0, increase sensitivity slightly
 			dynStats("lib", .2, "lus", -50);
 			//You've now been milked, reset the timer for that
-			player.addStatusValue(StatusAffects.Feeder, 1, 1);
-			player.changeStatusValue(StatusAffects.Feeder, 2, 0);
+			player.addStatusValue(StatusEffects.Feeder, 1, 1);
+			player.changeStatusValue(StatusEffects.Feeder, 2, 0);
 			cleanupAfterCombat();
 		}
 

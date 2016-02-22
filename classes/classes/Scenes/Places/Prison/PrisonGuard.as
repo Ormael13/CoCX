@@ -35,7 +35,7 @@ package classes.Scenes.Places.Prison
 		{
 			hideMenus();
 			clearOutput();
-			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0 && player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) <= 1)
+			if (flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0 && player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) <= 1)
 			{
 				return prison.prisonCaptorRandomEventSounds();
 			}
@@ -46,16 +46,16 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonGuardAttack():Boolean
 		{
-			if(prison.prisonCanEscapeFight(false))
+			if (prison.prisonCanEscapeFight(false))
 			{
 				outputText("It occurs to you that if you were to resist you just might get the better of your guard and make good an escape. ",false);
-				if(rand(100) < player.obey - (player.level + player.esteem * 0.25))
+				if (rand(100) < player.obey - (player.level + player.esteem * 0.25))
 				{
-					if(player.obey < 45)
+					if (player.obey < 45)
 					{
 						outputText("However, something deep inside you tells you that this is not the right moment to make a stand. Instead you cower meekly as your guard looms over you.\n",false);
 					}
-					else if(player.obey < 75)
+					else if (player.obey < 75)
 					{
 						outputText("However, your conditioning gets the better of your desire for freedom and you fall to your knees submissively as the " + guardPronoun1 + " looms over you.\n",false);
 						dynStats("lus", 100);
@@ -82,11 +82,11 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				if(player.obey < 45)
+				if (player.obey < 45)
 				{
 					outputText("Unfortunately for you,",false);
 				}
-				else if(player.obey < 75)
+				else if (player.obey < 75)
 				{
 					outputText("Something inside you is relieved that",false);
 					dynStats("lus", 15);
@@ -98,7 +98,7 @@ package classes.Scenes.Places.Prison
 				}
 				
 				outputText(" your restraints prevent you from putting up any significant fight",false);
-				if(player.lust > 80)
+				if (player.lust > 80)
 				{
 					outputText(" -- not that you'd last long in a fight with your current state of arousal anyway.  Seeing this fact written on your face, the " + guardType + " chuckles and temporarily removes your bindings.\n",false);
 				}
@@ -119,7 +119,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonGuardAttackFight():void
 		{
-			if(player.will > prison.prisonWillCost(15))
+			if (player.will > prison.prisonWillCost(15))
 			{
 				outputText("\n\nYou steel yourself for combat, feeling a sudden rush of self confidence.",false);
 				prison.changeWill(-prison.prisonWillCost(15));
@@ -136,11 +136,11 @@ package classes.Scenes.Places.Prison
 		public function prisonGuardAttackSubmit():void
 		{
 			outputText("\n\n",false);
-			if(player.obey < 45)
+			if (player.obey < 45)
 			{
 				outputText("Something deep inside you tells you that this is not the right moment to make a stand. Instead you cower meekly as the " + guardType + " looms over you.\n",false);
 			}
-			else if(player.obey < 75)
+			else if (player.obey < 75)
 			{
 				outputText("Your conditioning gets the better of your desire for freedom and you fall to your knees submissively as the " + guardType + " looms over you.\n",false);
 				dynStats("lus", 100);
@@ -161,13 +161,13 @@ package classes.Scenes.Places.Prison
 			outputText("You flip the bird to the " + guardType + " to put a warning signal that you do not want " + guardPronoun2 + " to mess with you. You WANT Elly, not some random guards messing with your body.");
 			outputText("\n\nThe " + guardType + " gets angry and storms off, leaving your cell and locking the cell door.");
 			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] > 0) flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 0;
-			player.changeStatusValue(StatusAffects.PrisonRestraints, 1, 1);
+			player.changeStatusValue(StatusEffects.PrisonRestraints, 1, 1);
 			doNext(playerMenu);
 		}
 		
 		public function prisonCaptorLoadGuard(randomGuard:Boolean, guardID:String = "default"):void
 		{
-			if(randomGuard)
+			if (randomGuard)
 			{
 				var guardID:String = randomGuardList[rand(randomGuardList.length)];
 			}

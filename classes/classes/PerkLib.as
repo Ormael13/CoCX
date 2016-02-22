@@ -106,7 +106,7 @@ package classes
 				"Start every battle with Might enabled, if you meet Black Magic requirements before it starts.",
 				"You choose the 'Battlemage' perk. You start every battle with Might effect, as long as your Lust is sufficient to cast it before battle.");
 		public static const Berzerker:PerkType = mk("Berzerker", "Berserker",
-				"[if(player.str>=75)" +
+				"[if (player.str>=75)" +
 						"Grants 'Berserk' ability." +
 						"|" +
 						"<b>You aren't strong enough to benefit from this anymore.</b>" +
@@ -119,7 +119,7 @@ package classes
 				"Brawling experience allows you to make two unarmed attacks in a turn.",
 				"You choose the 'Brawler' perk, allowing you to make two unarmed attacks in a turn!");
 		public static const BrutalBlows:PerkType = mk("Brutal Blows", "Brutal Blows",
-				"[if(player.str>=75)" +
+				"[if (player.str>=75)" +
 						"Reduces enemy armor with each hit." +
 						"|" +
 						"<b>You aren't strong enough to benefit from this anymore.</b>" +
@@ -140,7 +140,7 @@ package classes
 		public static const DoubleAttack:PerkType = mk("Double Attack", "Double Attack",
 				"[if (player.spe<50)" +
 						"<b>You're too slow to double attack!</b>" +
-						"|[if(player.str<61)" +
+						"|[if (player.str<61)" +
 						"Allows you to perform two melee attacks per round." +
 						"|" +
 						"<b>You are stronger than double attack allows.  To choose between reduced strength double-attacks and a single strong attack, access \"Dbl Options\" in the perks menu.</b>" +
@@ -165,7 +165,7 @@ package classes
 				"Raises minimum lust by up to 20.",
 				"You choose the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20! (If you already have some minimum lust, it will be increased by 10)");
 		public static const ImmovableObject:PerkType = mk("Immovable Object", "Immovable Object",
-				"[if(player.tou>=75)" +
+				"[if (player.tou>=75)" +
 						"Grants 10% physical damage reduction.</b>" +
 						"|" +
 						"<b>You aren't tough enough to benefit from this anymore.</b>" +
@@ -193,14 +193,14 @@ package classes
 				"When wearing heavy armor, you have extra 10% damage resistance and are immune to damage from being constricted/squeezed.",
 				"You choose the 'Juggernaut' perk, granting extra 10% damage resistance when wearing heavy armor and immunity to damage from been constricted/squeezed.");
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
-				"[if(player.spe>=60)" +
+				"[if (player.spe>=60)" +
 						"Increases the attack damage for non-heavy weapons.</b>" +
 						"|" +
 						"<b>You are too slow to benefit from this perk.</b>" +
 						"]",
 				"You choose the 'Lightning Strikes' perk, increasing the attack damage for non-heavy weapons.</b>");
 		public static const LungingAttacks:PerkType = mk("Lunging Attacks", "Lunging Attacks",
-				"[if(player.spe>=75)" +
+				"[if (player.spe>=75)" +
 						"Grants 50% armor penetration for standard attacks." +
 						"|" +
 						"<b>You are too slow to benefit from this perk.</b>" +
@@ -219,7 +219,7 @@ package classes
 				"Raises minimum lust by up to 30.",
 				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by as much as 30 (If you already have minimum lust, the increase is 10-15).");
 		public static const Parry:PerkType = mk("Parry", "Parry",
-				"[if(player.spe>=50)" +
+				"[if (player.spe>=50)" +
 						"Increases deflect chance by up to 10% while wielding a weapon. (Speed-based)." +
 						"|" +
 						"<b>You are not durable enough to gain benefit from this perk.</b>" +
@@ -237,7 +237,7 @@ package classes
 				"Reduces lust gain by 10%.",
 				"You choose the 'Resistance' perk, reducing the rate at which your lust increases by 10%.");
 		public static const Resolute:PerkType = mk("Resolute", "Resolute",
-				"[if(player.tou>=75)" +
+				"[if (player.tou>=75)" +
 						"Grants immunity to stuns and some statuses.</b>" +
 						"|" +
 						"<b>You aren't tough enough to benefit from this anymore.</b>" +
@@ -253,7 +253,7 @@ package classes
 				"Upgrades your tease attack, making it more effective.",
 				"You choose the 'Seduction' perk, upgrading the 'tease' attack with a more powerful damage and a higher chance of success.");
 		public static const ShieldMastery:PerkType = mk("Shield Mastery", "Shield Mastery",
-				"[if(player.tou>=50)" +
+				"[if (player.tou>=50)" +
 						"Increases block chance by up to 10% while using a shield (Toughness-based)." +
 						"|" +
 						"<b>You are not durable enough to gain benefit from this perk.</b>" +
@@ -287,7 +287,7 @@ package classes
 				"Enables fifth item slot.",
 				"You choose the 'Strong Back 2: Strong Harder' perk, enabling a fifth item slot.");
 		public static const Tactician:PerkType = mk("Tactician", "Tactician",
-				"[if(player.inte>=50)" +
+				"[if (player.inte>=50)" +
 						"Increases critical hit chance by up to 10% (Intelligence-based)." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
@@ -306,7 +306,7 @@ package classes
 				"Increases chances of evading enemy attacks when you are naked. (Undergarments won't disable this perk.)",
 				"You choose the 'Unhindered' perk, granting chance to evade when you are naked.");
 		public static const WeaponMastery:PerkType = mk("Weapon Mastery", "Weapon Mastery",
-				"[if(player.str>60)" +
+				"[if (player.str>60)" +
 						"Doubles damage bonus of weapons classified as 'Large'." +
 						"|" +
 						"<b>You aren't strong enough to benefit from this anymore.</b>" +
@@ -422,21 +422,23 @@ package classes
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
 				
 		// Quest, Event & NPC perks
+		public static const AChristmasCarol:PerkType = mk("A Christmas Carol", "A Christmas Carol",
+				"Grants year-round access to Christmas event. Note that some events are only accessible once per year.", null, true);
 		public static const BasiliskResistance:PerkType = mk("Basilisk Resistance", "Basilisk Resistance",
 				"Grants immunity to Basilisk's paralyzing gaze. Disables Basilisk Bad End.");
 		public static const BulgeArmor:PerkType = mk("Bulge Armor", "Bulge Armor",
 				"Grants a 5 point damage bonus to dick-based tease attacks.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",
-				"Vaginal and Anal capacities increased by 30.");
+				"Vaginal and Anal capacities increased by 30.", null, true);
 		public static const ElvenBounty:ElvenBountyPerk = new ElvenBountyPerk();
 		public static const FerasBoonAlpha:PerkType = mk("Fera's Boon - Alpha", "Fera's Boon - Alpha",
-				"Increases the rate your cum builds up and cum production in general.");
+				"Increases the rate your cum builds up and cum production in general.", null, true);
 		public static const FerasBoonBreedingBitch:PerkType = mk("Fera's Boon - Breeding Bitch", "Fera's Boon - Breeding Bitch",
-				"Increases fertility and reduces the time it takes to birth young.");
+				"Increases fertility and reduces the time it takes to birth young.", null, true);
 		public static const FerasBoonMilkingTwat:PerkType = mk("Fera's Boon - Milking Twat", "Fera's Boon - Milking Twat",
 				"Keeps your pussy from ever getting too loose and increases pregnancy speed.");
 		public static const FerasBoonSeeder:PerkType = mk("Fera's Boon - Seeder", "Fera's Boon - Seeder",
-				"Increases cum output by 1,000 mLs.");
+				"Increases cum output by 1,000 mLs.", null, true);
 		public static const FerasBoonWideOpen:PerkType = mk("Fera's Boon - Wide Open", "Fera's Boon - Wide Open",
 				"Keeps your pussy permanently gaped and increases pregnancy speed.");
 		public static const FireLord:PerkType = mk("Fire Lord", "Fire Lord",
@@ -466,13 +468,13 @@ package classes
 		public static const OmnibusGift:PerkType = mk("Omnibus' Gift", "Omnibus' Gift",
 				"Increases minimum lust but provides some lust resistance.");
 		public static const OneTrackMind:PerkType = mk("One Track Mind", "One Track Mind",
-				"Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.");
+				"Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.", null, true);
 		public static const PilgrimsBounty:PerkType = mk("Pilgrim's Bounty", "Pilgrim's Bounty",
-				"Causes you to always cum as hard as if you had max lust.");
+				"Causes you to always cum as hard as if you had max lust.", null, true);
 		public static const PureAndLoving:PerkType = mk("Pure and Loving", "Pure and Loving",
-				"Your caring attitude towards love and romance makes you slightly more resistant to lust and corruption.");
+				"Your caring attitude towards love and romance makes you slightly more resistant to lust and corruption.", null, true);
 		public static const SensualLover:PerkType = mk("Sensual Lover", "Sensual Lover",
-				"Your sensual attitude towards love and romance makes your tease ability slightly more effective.");
+				"Your sensual attitude towards love and romance makes your tease ability slightly more effective.", null, true);
 		public static const Whispered:PerkType = mk("Whispered", "Whispered",
 				"Akbal's blessings grant limited telepathy that can induce fear.");
 				

@@ -5,8 +5,8 @@ package classes.Scenes.Dungeons.HelDungeon
 	public class HarpyMob extends Monster
 	{
 		public function harpyHordeAI():void {
-			if(rand(3) == 0) harpyHordeLustAttack();
-			else if(rand(3) > 0) harpyHordeClawFlurry()
+			if (rand(3) == 0) harpyHordeLustAttack();
+			else if (rand(3) > 0) harpyHordeClawFlurry()
 			else harpyHordeGangBangAttack();
 		}
 		
@@ -14,7 +14,7 @@ package classes.Scenes.Dungeons.HelDungeon
 		public function harpyHordeClawFlurry():void {
 			outputText("The harpies lunge at you, a veritable storm of talons and claws raining down around you.  You stumble back, trying desperately to deflect some of the attacks, but there are simply too many to block them all!  Only a single harpy in the brood seems to be holding back...\n");
 			//(Effect: Multiple light attacks)
-			createStatusAffect(StatusAffects.Attacks,3+rand(3),0,0,0);
+			createStatusEffect(StatusEffects.Attacks,3+rand(3),0,0,0);
 			eAttack();
 			combatRoundOver();
 		}
@@ -22,23 +22,23 @@ package classes.Scenes.Dungeons.HelDungeon
 		//ATTACK TWO: Gangbang
 		public function harpyHordeGangBangAttack():void {
 			outputText("Suddenly, a pair of harpies grabs you from behind, holding your arms to keep you from fighting back! Taking advantage of your open state, the other harpies leap at you, hammering your chest with punches and kicks - only one hangs back from the gang assault.\n\n");
-			player.createStatusAffect(StatusAffects.HarpyBind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.HarpyBind,0,0,0,0);
 			//(PC must struggle:
 			harpyHordeGangBangStruggle(false);
 		}
 		
 		public function harpyHordeGangBangStruggle(clearDisp:Boolean = true):void {
-			if(clearDisp) clearOutput();
+			if (clearDisp) clearOutput();
 			//Failure: 
 			//If fail:
-			if(rand(10) > 0 && player.str/5 + rand(20) < 23) {
+			if (rand(10) > 0 && player.str/5 + rand(20) < 23) {
 				var damage:Number = 80 + rand(40);
 				outputText("You struggle in the harpies' grasp, but can't quite get free.  The brood continues to hammer away at your defenseless self. ");
 				damage = player.takeDamage(damage, true);
 			}
 			//Success: 
 			else {
-				player.removeStatusAffect(StatusAffects.HarpyBind);
+				player.removeStatusEffect(StatusEffects.HarpyBind);
 				outputText("With a mighty roar, you throw off the harpies grabbing you and return to the fight!");
 			}
 			combatRoundOver();
@@ -47,11 +47,11 @@ package classes.Scenes.Dungeons.HelDungeon
 		//ATTACK THREE: LUSTY HARPIES!
 		public function harpyHordeLustAttack():void {
 			outputText("The harpies back off for a moment, giving you room to breathe - only to begin a mini strip-tease, pulling off bits of clothing to reveal their massive asses and hips or bearing their small, perky tits.  They caress themselves and each other, moaning lewdly.  Distracted by the burlesque, you don't notice a lipstick-wearing harpy approach you until it's too late!  She plants a kiss right on your lips, ");
-			if(player.findPerk(PerkLib.LuststickAdapted) >= 0) outputText("doing relatively little thanks to your adaptation");
+			if (player.findPerk(PerkLib.LuststickAdapted) >= 0) outputText("doing relatively little thanks to your adaptation");
 			else {
 				outputText("sending shivers of lust up your spine");
 				game.dynStats("lus", 5);
-				if(player.hasCock()) game.dynStats("lus", 15);
+				if (player.hasCock()) game.dynStats("lus", 15);
 			}
 			outputText(".");
 			game.dynStats("lus", 10);

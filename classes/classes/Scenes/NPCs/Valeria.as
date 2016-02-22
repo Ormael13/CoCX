@@ -15,9 +15,9 @@
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
-			if (player.statusAffectv1(StatusAffects.GooStuffed) > 0) {
-				player.addStatusValue(StatusAffects.GooStuffed,1,-1);
-				if (player.statusAffectv1(StatusAffects.GooStuffed) <= 0)
+			if (player.statusEffectv1(StatusEffects.GooStuffed) > 0) {
+				player.addStatusValue(StatusEffects.GooStuffed,1,-1);
+				if (player.statusEffectv1(StatusEffects.GooStuffed) <= 0)
 				{
 					valeria.birthOutDatGooSlut();
 					return true;
@@ -67,7 +67,7 @@ private function valeriaAppearance():void {
 	outputText("Valeria is a 6 foot tall goo-girl composed of a viscous blue goop.  She is currently wearing a suit of plated armor, and wields her gooey greatsword as a weapon.  She has a beautiful feminine face with strong, angular features, and has affected short-cropped gooey hair, hanging just past her cheeks.  Her hips are average, with a muscular, gropable bum.  Unlike most goos, Valeria has formed two normal human legs ending in normal human feet out of her gooey lower body.");
 	outputText("\n\nShe has a pair of C-cup breasts, with a single 0.5 inch nipple on each breast.");
 	//[If Valeria is cock'd:]
-	if(flags[kFLAGS.VELARIA_FUTA] == 1) outputText("\n\nWhen you desire it, she's able to form an impressive human-shaped cock above her twat, usually capping out at about 12 inches. Gooey as it is, it constantly dribbles bits of goop, not unlike pre-cum.");
+	if (flags[kFLAGS.VELARIA_FUTA] == 1) outputText("\n\nWhen you desire it, she's able to form an impressive human-shaped cock above her twat, usually capping out at about 12 inches. Gooey as it is, it constantly dribbles bits of goop, not unlike pre-cum.");
 	outputText("\n\nShe has created an easily stretchable, gooey cunt between her legs, with a tiny 0.2 inch clitoris.");
 	outputText("\n\nShe generally doesn't bother to affect an anus, though you can't imagine it'd be too difficult to penetrate her gooey, gropable behind.");
 	doNext(valeriaFollower);
@@ -81,7 +81,7 @@ private function valeriaSpar():void {
 	outputText("\n\nYou take Valeria out to the fringe of camp and ready your [weapon] as she forms a gooey greatsword in her hands.");
 	//(Play normal combat scenes, with EXP rewards. No rape options, however; use the following outtros:)
 	startCombat(new GooArmor());
-	monster.createStatusAffect(StatusAffects.Spar,0,0,0,0);
+	monster.createStatusEffect(StatusEffects.Spar,0,0,0,0);
 	monster.gems = 0;
 	doNext(playerMenu);
 }
@@ -101,7 +101,7 @@ public function pcWinsValeriaSparDefeat(offCamp:Boolean = false):void {
 	spriteSelect(79);
 	if (!offCamp) {
 		outputText("You collapse, ");
-		if(player.HP < 1) outputText("in too much pain");
+		if (player.HP < 1) outputText("in too much pain");
 		else outputText("too turned on");
 		outputText(" to fight any longer.  Valeria's on you in a heartbeat, her gooey greatsword pressed to your throat.\n\n");
 	}
@@ -109,7 +109,7 @@ public function pcWinsValeriaSparDefeat(offCamp:Boolean = false):void {
 	outputText("\n\nYou nod emphatically.");
 	outputText("\n\n\"<i>Tsk,</i>\" she sighs, shaking her head.  \"<i>Only reason I tagged along with you is I thought you might actually have a chance, Champion.  If you can't beat little old me... Oh, whatever am I going to do with you?</i>\" she chuckles");
 	//[if PC lost via HP or has no gender: 
-	if((player.HP < 1 || player.gender == 0) && !offCamp) {
+	if ((player.HP < 1 || player.gender == 0) && !offCamp) {
 		outputText(", offering you a hand up.");
 		outputText("\n\n\"<i>C'mon, let's get back to camp.</i>\"");
 		//(Return to main Camp menu)
@@ -126,10 +126,10 @@ public function pcWinsValeriaSparDefeat(offCamp:Boolean = false):void {
 //Followers -- [Valeria] -- [Sex]
 private function followersValeriaSex(display:Boolean = true):void {
 	spriteSelect(79);
-	if(display) {
+	if (display) {
 		clearOutput();
 		outputText("With a lusty grin, you ask your gooey friend if ");
-		if(player.gender > 0) outputText("she's interested in a little fluid exchange");
+		if (player.gender > 0) outputText("she's interested in a little fluid exchange");
 		else outputText("she wouldn't mind helping you get some release, despite your genderlessness");
 		outputText(".");
 		outputText("\n\n\"<i>Hmm... I suppose that could be arranged. What did you have in mind, partner?</i>\"");
@@ -137,14 +137,14 @@ private function followersValeriaSex(display:Boolean = true):void {
 	//(Display Options: \"<i>[Penetrate Her](Cockwielder PC Only)  [Get Fucked]  [Gooflation] 
 	//[Get Dominated](Must have a gender)  [Dick/No Dick])
 	/*var penetrate:Function = null;
-	if(player.hasCock()) penetrate = penetrateValeria;
+	if (player.hasCock()) penetrate = penetrateValeria;
 	var getFucked:Function = valeriaGetFucked;
 	var gooFlation:Function = gooFlation;
 	var dominated:Function = null;
-	if(player.gender > 0) dominated = valeriaSexDominated;
+	if (player.gender > 0) dominated = valeriaSexDominated;
 	var dickToggle:Function = valeriaDickToggle;
 	var dickText:String = "Grow Dick";
-	if(flags[kFLAGS.VELARIA_FUTA] == 1) {
+	if (flags[kFLAGS.VELARIA_FUTA] == 1) {
 		dickText = "Lose Dick";
 	}*/
 	menu();
@@ -163,7 +163,7 @@ private function valeriaDickToggle():void {
 	spriteSelect(79);
 	clearOutput();
 	//[If Valeria has a dick:] 
-	if(flags[kFLAGS.VELARIA_FUTA] == 1) {
+	if (flags[kFLAGS.VELARIA_FUTA] == 1) {
 		outputText("Before you do anything, you ask Valeria if she wouldn't mind hiding her facsimile of a dick, at least when you aren't having sex.");
 		outputText("\n\n\"<i>Aww,</i>\" she groans, \"<i>I was starting to get used to my little buddy there, too.  But, if that's what you want... I guess I'll oblige.</i>\"");
 		outputText("\n\nYou're gratified to see her thick gooey dick retract and dissipate into her groin.");
@@ -176,7 +176,7 @@ private function valeriaDickToggle():void {
 		flags[kFLAGS.VELARIA_FUTA] = 1;
 		outputText("Struggling to find a less-than-awkward way of phrasing this, you ask Valeria if she wouldn't mind growing a certain extra appendage for you.");
 		//(If PC is female/herm(not maleherm)/genderless:)
-		if(!player.hasCock() || (player.gender == 3 && player.averageBreastSize() >= 2)) {
+		if (!player.hasCock() || (player.gender == 3 && player.averageBreastSize() >= 2)) {
 			outputText("\n\nShe cocks an eyebrow at you. \"<i>You know, I'm pretty fond of being a girl... But for you, partner, I guess I could manage a little something extra.</i>\"");
 			outputText("\n\nYou watch as, with a grunt of effort, Valeria's crotch expands.  A hefty twelve-inch human-like cock sprouts above her gooey cunt, twitching and dripping gooey pre-cum.  Your armor-goo shudders slightly.");
 			outputText("\n\n\"<i>Well, this is going to be... different. So, what do you say we put this third leg of mine to good use, huh?</i>\"");
@@ -202,12 +202,12 @@ public function valeriaGetFucked():void {
 	clearOutput();
 	outputText(images.showImage("valeria-sex-getfucked"));
 	outputText("You disrobe and, ");
-	if(player.hasVagina()) outputText("stroking the slick lips of your [vagina], ask Valeria to fuck you.");
+	if (player.hasVagina()) outputText("stroking the slick lips of your [vagina], ask Valeria to fuck you.");
 	else outputText("posing seductively, ask Valeria to fuck you.");
 	outputText("\n\nShe grins.  \"<i>You just lie back and let me take care of everything, partner.</i>\"  You do as she asks, flopping onto your back ");
-	if(player.isBiped()) outputText("and spreading your legs ");
+	if (player.isBiped()) outputText("and spreading your legs ");
 	outputText("as Valeria ");
-	if(flags[kFLAGS.VELARIA_FUTA] == 0) outputText("forms a thick, gooey cock");
+	if (flags[kFLAGS.VELARIA_FUTA] == 0) outputText("forms a thick, gooey cock");
 	else outputText("grabs her thick, gooey cock");
 	outputText(" and looms over you.");
 	outputText("\n\nSurprisingly, she kneels over your shoulders and lets her cock flip onto your chin.  \"<i>Well, get it ready.  Come on.</i>\"");
@@ -215,48 +215,48 @@ public function valeriaGetFucked():void {
 	outputText("\n\nValeria lets out a long, low moan as you fellate her goo-cock and runs her hand through your [hair], urging you onwards.  You continue on for a few minutes, slowly working her slick cock in and out of your throat until she eventually pushes your head back and withdraws herself, already panting from the pleasure.  \"<i>That's enough, [name].  Time for the main event, I think.</i>\"");
 	outputText("\n\nThe tip of her goopy cock slips out of your well-used mouth, leaving its sticky, citrusy residue clinging to your lips.  Valeria slides back along your chest, ");
 	//[if PC has C-cups or bigger, 
-	if(player.biggestTitSize() > 3) outputText("bumping over your [chest] and stopping for a brief moment to tickle your sensitive tits with her goopy bottom before ");
+	if (player.biggestTitSize() > 3) outputText("bumping over your [chest] and stopping for a brief moment to tickle your sensitive tits with her goopy bottom before ");
 	outputText("coming to a stop over your crotch.  She pours herself into your lap, ");
 	//[if PC has cock: \"<i>
-	if(player.hasCock()) outputText("her gooey ass devouring your " + cockDescript(0) + " as she slides down your belly");
-	if(player.hasCock() && player.hasVagina()) outputText(" and ");
-	if(player.hasVagina()) outputText(" letting bits of her goo-body slither into your wet, waiting [vagina], ever so slightly peeling your walls apart");
+	if (player.hasCock()) outputText("her gooey ass devouring your " + cockDescript(0) + " as she slides down your belly");
+	if (player.hasCock() && player.hasVagina()) outputText(" and ");
+	if (player.hasVagina()) outputText(" letting bits of her goo-body slither into your wet, waiting [vagina], ever so slightly peeling your walls apart");
 	//If PC has no gender 
-	if(player.gender == 0) outputText("poking the shaft of her cock gingerly, teasingly against your [asshole]");
+	if (player.gender == 0) outputText("poking the shaft of her cock gingerly, teasingly against your [asshole]");
 	outputText(".");
 	
 	outputText("\n\nShe rocks back in your lap, sticking her arms to your [legs] for support as she slings her legs over your shoulders.  She grabs her cock, stroking it sensually");
-	if(player.hasCock()) outputText(", as she rhythmically flexes her ass cheeks, shifting her fluidity around your shaft within her with a feeling like lotion-covered hands gently stroking you");
+	if (player.hasCock()) outputText(", as she rhythmically flexes her ass cheeks, shifting her fluidity around your shaft within her with a feeling like lotion-covered hands gently stroking you");
 	outputText(".");
 	
 	//(If Female)
-	if(!player.hasCock() && player.hasVagina()) {
+	if (!player.hasCock() && player.hasVagina()) {
 		outputText("\n\nValeria gives you a little grin and, still grasping her cock, begins to push it downward.  Her shaft slides down her body in a way that only a goo-girl's appendage could, its base traveling down her groin until her rod flops wetly onto the lips of your [vagina].  Though her cock sits neatly atop your entrance, Valeria only gives you a little smirk and pushes down again.  Her gooey prick folds in on itself, slathering your pussylips with slime as she literally pours herself into you, reconstituting her cock to perfectly fill each and every crevase of your eager [vagina]."); 
 		outputText("\n\nValeria sits in your lap, seemingly motionless, but you can feel her cock pouring in and out of your cunt, fucking you as fast and hard as any solid prick ever could.  Your breath catches in your throat as Valeria utterly fills you, stretching your cunt with her massive, malleable member until she threatens to tear you apart.  Her gooey prick slams through your cervix, battering the entrance to your womb.  Were she solid, you're sure you would be in incredible pain; but being so soft and slippery, all you feel is pleasure as she fills and empties you.");
 		outputText("\n\nGrinning wickedly, Valeria shifts her legs closer to her body, running them over your [chest]. You gasp as her soft, sticky goo slithers across your sensitive flesh.  Her feet stop just atop your [nipples].");
 		//(paragraph finishes with the below:)
 		//(If PC has normal tits)
-		if(!player.hasFuckableNipples()) outputText("  Valeria swirls her heels around your sensitive [nipples], letting the tips slip into her gooey feet.  She rocks her heels back and forth, popping your nips in and out of her gooey body, feeling like little pinches and squeezes on your defenseless flesh.");
+		if (!player.hasFuckableNipples()) outputText("  Valeria swirls her heels around your sensitive [nipples], letting the tips slip into her gooey feet.  She rocks her heels back and forth, popping your nips in and out of her gooey body, feeling like little pinches and squeezes on your defenseless flesh.");
 		//if PC has nipplecunts)
 		else outputText("  The goo-girl, still grinning, picks her feet up off your chest. You can only watch as both her dainty feet swirl and bend, reconstituting themselves as a pair of massive flared horsecocks.  You barely have time to yelp before she plunges both of her bestial shafts deep into your [chest].  You moan like a whore as the goo-girl triple-penetrates you, ramming her three cocks into your stretched cunt and the holes on your chest.");
 		//(end if)
 		player.cuntChange(10,true,true,false);
 		outputText("\n\nUnder Valeria's triple attacks on your [vagina] and [nipples], you cannot last very long.  Gasping with pleasure, you feel your climax rising.  But not one to be outdone, your gooey lover lets out her own long, loud moan and rams her cock");
-		if(player.hasFuckableNipples()) outputText("s");
+		if (player.hasFuckableNipples()) outputText("s");
 		outputText(" deeper inside you than ever before.  You feel streaks of goo pouring into you as she cums, pouring her essence into your womb ");
-		if(player.hasFuckableNipples()) outputText("and [chest] ");
+		if (player.hasFuckableNipples()) outputText("and [chest] ");
 		outputText("until slime overflows from inside you, pooling under her hips.  Filled beyond your capacity, you scream your pleasure and cum, clamping down on Valeria's cock");
-		if(player.hasFuckableNipples()) outputText("s");
+		if (player.hasFuckableNipples()) outputText("s");
 		outputText(" until they literally pop inside you, flowing back out in goopy streaks.");
 	}
 	//(If Male/Herm)
-	else if(player.hasCock()) {
+	else if (player.hasCock()) {
 		outputText("\n\nWith your cock stuffed into Valeria's warm, gooey innards, the goo-girl makes a show of rocking herself back and forth in your lap, using her entire bottom like one sopping-wet cunt riding your cock.  With her own rod in hand, she pushes down, letting the base of her prick shift down her body until it bends around your hips and pops back into form just above your [butt].  Your eyes go wide, but when you try to yelp, Val roughly shoves one of her feet into your mouth.  \"<i>Shh, partner,</i>\" she laughs, flicking your tongue with her soft, citrusy toes, \"<i>just let it happen... It'll be good, I promise.</i>\"");
 		
 		outputText("\n\nResigned, you let the goo-girl have her way.  You try your best to relax as her goo-cock slithers between your ass-cheeks, her prick remaining just hard enough for her to hotdog herself between your cheeks.  But rather than penetrate, she instead seems content for the moment to rock her hips in your lap, riding your " + cockDescript(0) + " and fucking your butt-cheeks with her own rod.  As she rides you, Valeria slips a little more foot into your mouth, pouring her leg into you until you get the hint and start to suckle her dainty toes, easily slipping your tongue into her soft body to taste her insides.");
 		outputText("\n\nJust as you're getting into the rhythm of things, you feel a sudden pressure against your [asshole].  Oh, shit.  You squirm and try to relax yourself, but surprisingly, you don't feel the hard pinch of a cock's insertion.  Instead, Valeria pours a tiny trickle of herself into your anus, slowly but surely stretching you out as her cock inflates half-way inside you.  You groan in pleasure as she stretches you out and redoubles her pace on your " + cockDescript(0));
 		//(if Herm: [
-		if(player.hasVagina()) {
+		if (player.hasVagina()) {
 			player.cuntChange(10,true,true,false);
 			outputText(", the double-attack's pleasure is so great that you barely even notice her creating a second cock above the first and pouring it into your unused [vagina], filling your last hole up with a firm, gooey cock");
 		}
@@ -264,12 +264,12 @@ public function valeriaGetFucked():void {
 		player.buttChange(10,true,true,false);
 		
 		outputText("\n\nValeria begins to buck her hips in your lap, stuffing your hole");
-		if(player.hasVagina()) outputText("s");
+		if (player.hasVagina()) outputText("s");
 		outputText(" and fucking your " + cockDescript(0) + " with one fluid, passionate motion.  You're both moaning openly now, nearly overwhelmed by a multitude of pleasures.  You can feel your impending orgasm rising, and by the heightening pitch of Valeria's moans, she seems to be just as close to the edge."); 
 		outputText("\n\nYou cum, screaming as you unload into Valeria's depths.  You can see your cum spurting into her, swirling and dancing in her brightly-colored, transparent body.  She echoes your cry as you feel hot goo squirting into you, her cock");
-		if(player.hasVagina()) outputText("s");
+		if (player.hasVagina()) outputText("s");
 		outputText(" literally popping as she climaxes, filling your stretched ass ");
-		if(player.hasVagina()) outputText("and vag ");
+		if (player.hasVagina()) outputText("and vag ");
 		outputText("with warm, sticky goop.");
 	}
 	//(If PC is Genderless OR [Gooflation])
@@ -291,7 +291,7 @@ public function valeriaGetFucked():void {
 
 public function gooFlation(clearText:Boolean = true):void {
 	spriteSelect(79);
-	if(clearText) {
+	if (clearText) {
 		clearOutput();
 		outputText("\"<i>Just relax, partner,</i>\" she grins, reaching up to run a hand through your [hair].  \"<i>Just let ol' Valeria take care of everything...</i>\"");
 		outputText("\n\nYou bite your lip as you feel Valeria's feet shifting around behind you.  Suddenly there are ten tendrils of warm goo snaking around your [butt], tickling and caressing your sensitive flesh.");
@@ -301,7 +301,7 @@ public function gooFlation(clearText:Boolean = true):void {
 	}
 	outputText(images.showImage("valeria-sex-gooflation"));
 	outputText("\n\nValeria, still curled up in your lap, gives you nothing but a cute, innocent little smile as you feel her toes growing and expanding into ten long, slender tentacles prying at your buttcheeks, seeking entrance to your ");
-	if(!player.hasVagina()) outputText("one lonely ");
+	if (!player.hasVagina()) outputText("one lonely ");
 	outputText("hole.  You gulp as the tentacle-fuck begins, her long tendrils pouring one by one into your [asshole], each so small and soft it easily slips inside you.  One piles onto another, tickling and teasing your anal walls as more and more of her slithers into you.");
 	player.buttChange(30,true,true,false);
 	outputText("\n\nYou grunt and gasp as the last of her toe-tentacles pierces your sphincter and joins its sisters inside your ass.  As she pours more and more of her cock-toe-tendrils into you, you begin to see Valeria's body shrinking and deflating... Oh, god...");
@@ -310,9 +310,9 @@ public function gooFlation(clearText:Boolean = true):void {
 	outputText("\n\n\"<i>VALERIA!</i>\" you shout, poking your stomach.  Your flesh quivers, shaking like a great big bowl of goo.");
 	outputText("\n\n\"<i>Hey there, partner,</i>\" you hear a laugh from inside you.  Before you can say anything else to the goo-girl inside you, your stomach rumbles.  You double over, half in pleasure half in pain as something lurches inside you.  You feel a rush going out your colon, and just squat in time for Val to explode out of your ass in one massive thrust.  You cum, an anal orgasm rocking your body as Valeria pops out your bum, pouring out of your well-stretched sphincter.");
 	//(All Genders Reconvene) 
-	if(clearText) {
+	if (clearText) {
 		outputText("\n\nYou collapse, goop flowing freely from your abused body.  Laughing, Valeria pours out of your lap, ");
-		if(player.gender > 0) outputText("patting her belly full of your juices, ");
+		if (player.gender > 0) outputText("patting her belly full of your juices, ");
 		outputText("and looms over you.  \"<i>That was fun, partner,</i>\" she says, leaning down to give you a wet peck on the cheek. \"<i>Let's do that again soon, alright?</i>\"");
 		player.orgasm();
 		dynStats("sen", 1);
@@ -356,31 +356,31 @@ public function valeriaSexDominated(offCamp:Boolean = false):void {
 	outputText("\n\nWith a sexual swing of her hips, Valeria closes the distance between you and presses her lips to yours.  One of her arms easily wraps around your neck, pulling you close to her as her other snakes into your clothes, teasing and caressing your inner thighs.  Suddenly, Valeria gives you a rough push, throwing you onto your ass.  She looms over you, licking her lips and placing one of her gooey feet firmly on your chest.  Goop seeps out of her heels, slithering out to bind your arms and [legs] as she encases your torso.");
 	outputText("\n\n\"<i>Just lie back and submit, partner. It'll be better that way...</i>\"");
 	//(PC has Vagina)
-	if(player.hasVagina() && (!player.hasCock() || rand(2) == 0)) {
+	if (player.hasVagina() && (!player.hasCock() || rand(2) == 0)) {
 		outputText("\n\nValeria begins to use her goo to peel back your clothes, soon revealing your defenseless [vagina].  She makes a show of licking her lips as tendrils of goo seep into your cunt, filling you utterly.  You meekly submit to your gooey captor, letting Valeria have her way with you. Seeing your lack of resistance, she smiles and coos what a good " + player.mf("boy","girl") + " you are, slowly withdrawing herself from your [vagina].");
 		outputText("\n\nYou have only a moment to figure out what's coming before her goo - now perfectly shaped like the inside of your cunt - slams back into you like a stiff cock.  You can't help yourself as a moan escapes your lips, barely audible through the goop covering your mouth.");
 		player.cuntChange(player.vaginalCapacity(),true,true,false);
 		outputText("\n\n\"<i>Oh, you like that, do you?</i>\" the armor-goo asks, smiling evilly.  \"<i>Hmm, maybe if you're a good " + player.mf("boy","girl") + ", I'll let you get off, too</i>\"  Still grinning, she begins to hammer her cock-like appendage into your pussy, fucking you fast and hard with her goo-dildo.");
 		//[If PC has breasts > A-cups: 
-		if(player.biggestTitSize() > 1) {
+		if (player.biggestTitSize() > 1) {
 			outputText("  As she hammers your cunny, bits of her goo swirl around your [chest], squeezing and massaging your tits. You squirm as she roughly teases your boobs, pinching at your nipples and squeezing your tender flesh roughly.");
-			if(player.lactationQ() > 0) outputText("  To her delight, a spray of warm milk jets out of your sore nipples, milky white mixing into blue goo like oil in water.  \"<i>Mmm, tasty!</i>\" she teases, massaging more and more from you.");
+			if (player.lactationQ() > 0) outputText("  To her delight, a spray of warm milk jets out of your sore nipples, milky white mixing into blue goo like oil in water.  \"<i>Mmm, tasty!</i>\" she teases, massaging more and more from you.");
 		}
 		outputText("\n\nShe continues to pound your cunt mercilessly, her grin spreading to inhuman width as your juices begin to flow around and into her gooey penetration. She soaks your fem-lube up greedily, enjoying the meal, but her fucking is relentless until you feel orgasm approaching. \"<i>Aw, ");
-		if(player.tallness > 60) outputText("big ");
+		if (player.tallness > 60) outputText("big ");
 		else outputText("little ");
 		outputText(player.mf("boy","girl") + " ready to cum?</i>\" she withdraws herself from you, leaving you feeling suddenly very, very empty.  \"<i>I didn't say you could cum yet, slut! I'm not done with you yet.</i>\"");
 		outputText("\n\nYou gulp nervously as Valeria withdraws the goo from your entire body, leaving you naked save for the bonds she's placed on your wrists.  Roughly, she grabs your [hips] and rolls you over, forcing you into a kneeling position.  Grinning, she grabs your hair and pushes your face in the dirt, grinding your cheeks into the hard-packed ground as her hips press against your [butt].  You feel a warm, slick shaft plop between your asscheeks, grinding between them; another leaps up, wrapping around you, prodding at the entrance to your [vagina].");
 
 		outputText("\n\nYou can only grit your teeth as Valeria pushes into you, leaning in as she slides her twin cocks into your cunt and asshole, meeting no resistance thanks to her goopy nature");
-		if(player.vaginalCapacity() > 80 || player.analCapacity() > 80) outputText(" and your own receptibility");
+		if (player.vaginalCapacity() > 80 || player.analCapacity() > 80) outputText(" and your own receptibility");
 		outputText(".  Hugging your back, the goo-girl grabs at your [chest], squeezing your tits and pinching at your nipples.  \"<i>Moan for me, bitch,</i>\" Valeria growls into your ear, giving your [nipples] a particularly violent tug.  You let out a lewd, whorish moan.  The goo-girl grins, her tongue lashing out to lick your ear as she rewards you with a single long thrust into your depths, filling and stretching your [vagina] and [asshole] completely before withdrawing.");
 		outputText("\n\n\"<i>Well?</i>\" she demands, her cocks utterly still at the entrances to your holes.  \"<i>Don't stop moaning 'til I let you cum, you hear me?</i>\"");
 		outputText("\n\nYou let out a whimpered moan, and immediately Valeria slams herself back into you.  Your moan turns into a scream of pleasure, but obediently you do as Valeria commanded and moan as she withdraws.  She thrusts right back into you, stretching you out wonderfully.  You fall into a happy pace, moaning and groaning as Valeria fucks you roughly, stuffing both your holes with her goo and savaging your breasts until your mind goes hazy with pleasure.");
 		outputText("\n\n\"<i>Here we go...</i>\" Valeria grunts, \"<i>Now you can cum.  Go ahead, little bitch.  Feed me.</i>\"");
 		outputText("\n\nYou cum at her command, fem-spunk gushing out of your [vagina] and into the goo-cock stuffed up your twat.  Both your holes contract hard on Valeria's dicks.  Laughing, the goo-girl absorbs your cum, growing larger and larger as you feed her, until she towers over you, her massive cocks now painfully stretching your walls.  \"<i>Oh, that's good.  Good, girl, good.  Yes, let it all out, just like that... just like that,</i>\" she coos, soaking your juices up until your orgasm finally passes.  Sated, she withdraws from inside you, leaving a decidedly empty feeling in your gut as she allows you to stand.");
 		outputText("\n\n\"<i>Mmm, not bad, partner</i>\" Valeria says, patting her full belly.  You can see a bit of your cum ");
-		if(player.lactationQ() > 0) outputText("and milk ");
+		if (player.lactationQ() > 0) outputText("and milk ");
 		outputText("swirling around inside her.  \"<i>We'll do this again sometime,</i>\" she adds, walking off to another part of camp with a wink.");
 	}
 	//(PC has Dick)
@@ -388,7 +388,7 @@ public function valeriaSexDominated(offCamp:Boolean = false):void {
 		outputText("\n\nValeria begins to use her goo to peel back your clothes, soon revealing your defenseless, half-erect  package.  She makes a show of licking her lips as tendrils of goo wrap tightly around [eachCock] like a warm, wet onahole. You submit to your gooey bonds, and seeing your lack of resistance, Valeria smiles down at you and squeezes your " + multiCockDescriptLight() + " tighter.");
 		outputText("\n\nYou gasp with pleasure as she starts to stroke [eachCock], jerking you off as she looms over you, grinning wickedly.  \"<i>Oh, you like that do you?</i>\" the armor-goo asks.  \"<i>Well then, I might just let you get off, too... If you're a good " + player.mf("boy","girl") + "</i>\"  She starts to increase her tempo, making you squirm and writhe as she wanks your " + multiCockDescriptLight() + ", licking her lips as little bubbles of pre start to form.");
 		outputText("\n\nHelpless, you can only submit and try to enjoy yourself as the armored goo-girl continues to milk you.  She jerks you off mercilessly, her grin spreading to inhuman width as your pre begins to flow around and into her gooey 'hands.'  She soaks your pre-cum up greedily, enjoying the meal, but her fucking is relentless until you feel orgasm approaching.  \"<i>Aw, ");
-		if(player.tallness > 60) outputText("big");
+		if (player.tallness > 60) outputText("big");
 		else outputText("little");
 		outputText(" " + player.mf("boy","girl") + " ready to cum? Well, go on then - we've got time for more.</i>\"");
 		outputText("\n\nYou cum, ropes of thick, white jizz shooting out of your cock and into the goo's waiting body.  Laughing, the goo-girl absorbs your cum, growing larger and larger as you feed her until she towers over you, her expanding breasts and belly now hanging over you.  \"<i>Oh, that's good. Good, " + player.mf("boy","girl") + ", good.  Yes, let it all out, just like that... just like that,</i>\" she coos, soaking your cum up until your orgasm finally passes.");
@@ -422,7 +422,7 @@ private function talkWithValeria():void {
 	outputText("\n\n\"<i>I dunno, partner,</i>\" she teases, sitting down beside you, \"<i>That's asking an awful lot.</i>\"");
 	outputText("\n\nYou roll your eyes and, after a few pleasantries, venture to ask her... well, what the hell she is, exactly.  She's not at all like the average goo-girl wandering around Mareth.  She talks, she walks on two legs...");
 	outputText("\n\nShe laughs girlishly, waving you off like you've said something absurd.  \"<i>I'm not a real goo, you know. At least, I didn't start out this way,</i>\" she adds, indicating her gooey blue form.  \"<i>No, I was a human, like you");
-	if(player.race() != "human") outputText(" were");
+	if (player.race() != "human") outputText(" were");
 	outputText(".  I just, I dunno, changed, I guess.</i>\"");
 	outputText("\n\nChanged?");
 	outputText("\n\n\"<i>Well, yeah. Back when the demons first came.  One of them took me and... changed me,</i>\" she says quietly, looking quickly away. \"<i>I don't know if there were real goo-girls or slimes back then.  I guess I was something of an experiment - a prototype, maybe.  The magic the demons used on me wasn't quite the same as whatever creates the goos nowadays, though.  I'm as mentally capable as I ever was, can talk, walk on two legs... The whole deal.  Biggest change is that shit like this happens,</i>\" she adds, picking up a nearby rock and poking into her belly. It floats listlessly inside her, darkly visible through her gooey skin.");
@@ -441,7 +441,7 @@ private function flirtWithValeria():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You slip an arm around Valeria's slender shoulders and pull her close.  Patting your crotch, you tell her you're practically a gourmet chef for a girl like her.  She giggles and slips a hand easily into your [armor], ");
-	if(player.hasCock()) outputText("brushing along the length of your rapidly-hardening cock");
+	if (player.hasCock()) outputText("brushing along the length of your rapidly-hardening cock");
 	else outputText("brushing a wet, warm knuckle across your [clit]");
 	outputText(".");
 	
@@ -455,7 +455,7 @@ private function acceptValeriasNeeds():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You smile and tell Valeria that you're perfectly all right with her special needs");
-	if(player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) outputText(" after all, you have the same ones");
+	if (player.findStatusEffect(StatusEffects.SlimeCraving) >= 0) outputText(" after all, you have the same ones");
 	outputText(", as long as they don't interfere with your mission as Champion.");
 	outputText("\n\n\"<i>They won't, partner,</i>\" Valeria says with a little wink. \"<i>I give you my word.</i>\"");
 	outputText("\n\nNodding, you ruffle her gooey hair and get back to business.");
@@ -487,41 +487,41 @@ public function valeriaAndGooThreeStuff():void {
 	clearOutput();
 	outputText("You cautiously approach with Valeria's voice egging you on, \"<i>We gonna fuck her? We're gonna fuck her, ain't we, [name]?</i>\" She affectionately fondles your ");
 	var list:Array = ["[hips]"];
-	if(player.balls > 0) list.push("[balls]");
-	if(player.totalCocks() > 0) list.push("[multiCockDescriptLight]");
-	if(player.hasVagina()) list.push("[vagina]");
+	if (player.balls > 0) list.push("[balls]");
+	if (player.totalCocks() > 0) list.push("[multiCockDescriptLight]");
+	if (player.hasVagina()) list.push("[vagina]");
 	list.push("[asshole]");
 	list.push("[nipples]");
 	outputText(formatStringArray(list) + " with liquid-soft caresses, almost ephemeral and yet still so perfectly all-consuming, filling every tiny imperfection in your [skin] with blue, gooey goodness and teasing whatever entrances she can get at. ");
 /*
 	clearList();
 	addToList("[hips]");
-	if(player.balls > 0) addToList("[balls]");
-	if(player.totalCocks() > 0) addToList("[multiCockDescriptLight]");
-	if(player.hasVagina()) addToList("[vagina]");
+	if (player.balls > 0) addToList("[balls]");
+	if (player.totalCocks() > 0) addToList("[multiCockDescriptLight]");
+	if (player.hasVagina()) addToList("[vagina]");
 	addToList("[asshole]");
 	addToList("[nipples]");
 	outputText(outputList() + " with liquid-soft caresses, almost ephemeral and yet still so perfectly all-consuming, filling every tiny imperfection in your [skin] with blue, gooey goodness and teasing whatever entrances she can get at. ");
 */
-	if(player.hasCock()) {
+	if (player.hasCock()) {
 		outputText("You sigh as [eachCock] stands at full erection. Bluish coating");
-		if(player.cockTotal() > 1) outputText("s");
+		if (player.cockTotal() > 1) outputText("s");
 		outputText(" barely thicker than a condom stretch");
-		if(player.cockTotal() == 1) outputText("es");
+		if (player.cockTotal() == 1) outputText("es");
 		outputText(" around ");
-		if(player.cockTotal() == 1) outputText("it as it distends");
+		if (player.cockTotal() == 1) outputText("it as it distends");
 		else outputText("them as they distend");
 		outputText(" Valeria's increasingly liquescent form. Dripping off the tip");
-		if(player.cockTotal() > 1) outputText("s");
+		if (player.cockTotal() > 1) outputText("s");
 		outputText(", sapphire slime falls in long gooey stands, yet the whole time you feel as if a dozen hands are dragging lubricant-coated feathers over the whole of your sensitive organ");
-		if(player.cockTotal() > 1) outputText("s");
+		if (player.cockTotal() > 1) outputText("s");
 		outputText(".");
 	}
-	else if(player.hasVagina()) outputText("You sigh your as [vagina] is tenderly caressed by what feels like dozens of lubricant-soaked feathers, tickling at the skin in a way that makes your entrance grow hot enough to make you wonder why Valeria hasn't been cooked into steam. The airtight seal over your mons is steadily shifting around and about to stimulate you. Sometimes, a narrow band of semi-solid goo slips between your lips like an oh-so-narrow thong, the slime mixing with your own suddenly-copious sexual juices to form a salacious, barely restrained soup of girlish need. She holds herself back from diving into your entrance... for now.");
+	else if (player.hasVagina()) outputText("You sigh your as [vagina] is tenderly caressed by what feels like dozens of lubricant-soaked feathers, tickling at the skin in a way that makes your entrance grow hot enough to make you wonder why Valeria hasn't been cooked into steam. The airtight seal over your mons is steadily shifting around and about to stimulate you. Sometimes, a narrow band of semi-solid goo slips between your lips like an oh-so-narrow thong, the slime mixing with your own suddenly-copious sexual juices to form a salacious, barely restrained soup of girlish need. She holds herself back from diving into your entrance... for now.");
 	else outputText("You sigh as your [asshole] is tenderly licked and tickled by what feels like dozens of inhumanly long tongues, slathering over it in such wide circles that your cheeks get a thorough lashing as well. Bands as firm and strong as leather straps slip into place around your [butt] to spread you wide open, and one of the slender, slime-crafted organs slithers deeper to taste your rosebud, never quite pushing in.");
 	outputText("\n\nYour gait turns a little stuttery in no time flat, and your hips sway and jerk erratically as you approach the fallen goo, helplessly bound to respond to the sensuous caresses of the body-clinging goo. She somehow keeps it up even after you're looming over your defeated foe, giggling airily as you examine your prize.");
 	
-	if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("\n\nUnfortunately for you, the fuck-hungry goo-slut is intent on taking command here.");
+	if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("\n\nUnfortunately for you, the fuck-hungry goo-slut is intent on taking command here.");
 	else outputText("\n\nJust like last time, the fuck-hungry goo-slut is taking command.");
 	outputText("  She surprises you by contorting your body with pressure from an unexpected angle, tipping you head over heels, right toward the wide-eyed goo-girl you just managed to defeat!");
 	
@@ -530,13 +530,13 @@ public function valeriaAndGooThreeStuff():void {
 	outputText("\n\nThe bluish");
 	if (monster.skinTone != "blue") outputText(" " + (monster as GooGirl).gooColor6());
 	outputText(" juices slowly meld together until you cannot tell one from the other, and they firm up into a semi-translucent, flat-bottomed sphere, trapping you there. Your debauched and hopelessly aroused state is visible to any who would wander by, stroked by dark-colored currents that wrap around your ");
-	if(player.hasCock() || player.hasVagina()) outputText("genitals");
+	if (player.hasCock() || player.hasVagina()) outputText("genitals");
 	else outputText("[asshole]");
 	outputText(" with sinful tightness. An involuntary shiver of excitement traverses up your spine, though your body is held almost completely stock-still in its sloshing vice.");
 	
 	outputText("\n\nA distortion becomes visible on the arced field of blue before you, slowly resolving into the familiar, sloppy visage of Valeria. A second later, another, unfamiliar face follows, coming up beside her, but a blue hand flattens against the top of the newcomer to smush it away into nothing. Valeria says, \"<i>No way, toots. Let momma do the talkin'....</i>\"");
 	outputText("\n\nYou ");
-	if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("demand that she release you");
+	if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("demand that she release you");
 	else outputText("playfully comment that she really ought to release you");
 	outputText(", but the troublesome, liquid armor shakes her head negatively.");
 	outputText("\n\n\"<i>You just sit tight, [name]. I'm gonna give my sister a fun new experience and fill you with so much pleasure that you'll feel like you're gonna pop.</i>\" She disappears back into the azure blob before you can respond. The fading ripples almost mock your inability to reply as they smooth into nonexistence.");
@@ -548,125 +548,125 @@ public function valeriaAndGooThreeStuff():void {
 private function valeriaGooRapeII():void {
 	clearOutput();
 	outputText("The lump that bumped you earlier smacks off ");
-	if(player.biggestTitSize() >= 3) outputText("the valley of your cleavage");
+	if (player.biggestTitSize() >= 3) outputText("the valley of your cleavage");
 	else outputText("your chest");
 	outputText(" once more, and this time you catch a glimpse of it out of the corner of your eye. It's the goo-girl's core, clasped in a fist of deep-blue. It pulses faintly as it's held there, just before you, while subtle vibrations and temperature fluctuations alert you to some kind of secret communications between the two women. Just what are they planning?");
 	outputText("\n\nYou get your answer in the form of a sudden");
-	if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText(", unexpected");
+	if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText(", unexpected");
 	else outputText(" but expected");
 	outputText(" pressure at your [asshole]. It's so... so slick that you have to wonder how they can manage to push with such authority at your rearmost orifice, but they manage it all the same. You clench to deny them entrance, squeezing your sphincter shut tighter than locked door. Valeria's giggling voice coos from somewhere below, \"<i>Oh, don't be a spoilsport. Come on, it'll be fun.</i>\"");
 	
-	if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("\n\nYou hold tight anyway, at least until she yanks your cheeks wide-open and twists whatever it is she's trying to force inside you, slowly spreading you open with a soft, organic, anal drilling.");
+	if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("\n\nYou hold tight anyway, at least until she yanks your cheeks wide-open and twists whatever it is she's trying to force inside you, slowly spreading you open with a soft, organic, anal drilling.");
 	else outputText("You hold tight, keeping up your faux resistance until she yanks your cheeks open and twists her gooey reaming-tool into a sphincter-penetrating drill bit.");
 	outputText(" Spinning faster and faster, the intruding, cylindrical slime dilates your [asshole] to its maximum gape in four or five seconds, hardening its exterior into an butt-stuffing goo-pipe. You can feel it snaking around through your bowels, plumbing deeper inside you than you would have thought possible before stopping what feels like halfway through your large intestine.");
 	//{Butt-change: full anal size}
 	player.buttChange(player.analCapacity() * .75,true,true,false);
 	//Lay pipes in cooch! {reqiores non pregnant}
-	if(!player.isPregnant() && player.hasVagina()) {
-		if(silly()) outputText("\n\n\"<i>But wait, there's more!</i>\" Billy Mays announces.");
+	if (!player.isPregnant() && player.hasVagina()) {
+		if (silly()) outputText("\n\n\"<i>But wait, there's more!</i>\" Billy Mays announces.");
 		outputText("\n\nShortly after, a similar sized blob of semi-liquid matter rubs over your [vagina], brushing aside Valeria's feathery teases to spread your lips around the slick bubble, shooting tingles of pleasure through your body. You try to shift, to grind against the messy intruder, but all restrained as you are, all you can do is quiver against your bindings, vibrating in pleasures that would be plain to any watchers. The penetration doesn't stop Valeria's teases either. The talented woman continues to roll feathery caresses over the exterior of your genitalia while opening you open as wide as any dick you've ever taken, burrowing a tunnel straight to your cervix.");
 		//{cuntChange: MAXIMUM}
 		player.cuntChange(player.vaginalCapacity() * .75,true,true,false);
 		outputText("\n\nThere, the cerulean shaft batters hard against the restrictive opening to your womb, pushing with firm pressure until some slime rolls into your empty, baby-making chamber. You cannot help but cry out to the sensation of your incredibly thorough doublestuffing. Wincing, you endure the slow stretching of your inner gates, and once the tunneling ooze has established a decent-size path to your uterus, the outside solidifies, much like the one in your ass. A suction starts on your [clit] to distract you from this, and its success is evidenced by the copious fuck-juices your [vagina] feeds the mixed goo-girls.");
 	}
 	//Fuckable nipples
-	if(player.hasFuckableNipples() && player.biggestTitSize() >= 5) {
+	if (player.hasFuckableNipples() && player.biggestTitSize() >= 5) {
 		outputText("\n\nYour [fullChest] are roughly squeezed and groped by what feels like Valeria's hands, pressed together and pulled apart. Sometimes they even pull on them, suctioning your tits hard enough to make them appear larger for a time. No matter what, the licentious caresses always come back to your [nipples], squeezing and tugging on them until your lust makes them as wet and free-flowing");
-		if(player.hasVagina()) outputText(" as your snatch");
+		if (player.hasVagina()) outputText(" as your snatch");
 		else outputText(" as the randiest slut's snatch");
 		outputText(". Valeria takes this as an invitation, and " + num2Text(player.totalNipples()) + " phallic objects greedily push at your cunt-nipples, eagerly sliding themselves inside your welcome chest-pussies. Looking down, you can see the navy-blue outlines of the phallic tendrils waving and writhing as they push their way deep, embedding themselves tit-deep in blissful warmth.");
 	}
 	//Dick
-	if(player.hasCock()) {
+	if (player.hasCock()) {
 		outputText("\n\nValeria's voice calls out once more, \"<i>You didn't think I'd forget ");
-		if(player.cockTotal() == 1) outputText("this little guy");
+		if (player.cockTotal() == 1) outputText("this little guy");
 		else outputText("these little guys");
 		outputText(", did you? ");
-		if(player.biggestCockArea() >= 50) outputText("...Maybe big guy is a bit more appropriate. Whatever. ");
+		if (player.biggestCockArea() >= 50) outputText("...Maybe big guy is a bit more appropriate. Whatever. ");
 		outputText("I was just saving the best for last. Hold on tight, tiger.</i>\"");
 		outputText("\n\nThe sleeve of squishy ecstasy surrounding [eachCock] tightens up a little to hold your twitching, ecstatic boner");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(" in place, and something even warmer than the slippery container");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(" pushes at your head");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(", circling your urethra");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(". You inadvertantly clench your muscles in a way that makes your " + multiCockDescriptLight() + " so very swollen, in turn making it that much easier for the gelatinous fiend to have her way with your cumslit");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(". You feel that warm, wet fluid slowly peel it open and push inside. It doesn't hurt at all, but it is a little weird having your " + multiCockDescriptLight() + " slowly stuffed in such a way. The warmth travels the whole way down your dick");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(" to your middle, where you can feel it travel a bit further before it finally stops at your [balls].");
 	}
 	//Merge
 	outputText("\n\nGiggling, the sapphire slut does something that makes the body-wrapping sphere jiggle and contract slightly. ");
-	if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] > 0) outputText("You grin in eager anticipation, waiting to feel the flood of fluid that you know is coming. It won't take long.... You feel it in your butt first.");
+	if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] > 0) outputText("You grin in eager anticipation, waiting to feel the flood of fluid that you know is coming. It won't take long.... You feel it in your butt first.");
 	else outputText("At first, you don't realize what it is. You're floating in a bit of a sexual daze by now and barely cogent of what's going on, but it does feel quite nice, whatever it is. The spreading heat in your posterior is what finally clues you in to what's happening.");
 	outputText(" Pumping deep into your bowels, the hardened protrusion is no longer simply stuffing you. It's pumping something slick and wet and oh so gooey straight into your [asshole], filling you up so strangely that you aren't sure what to make of beyond how... well, good it feels to be stuffed like this.");
 	
 	//{Vagina!}
-	if(player.hasVagina()) {
+	if (player.hasVagina()) {
 		outputText("\n\nYe gods, this is good! You shudder as the tube in your twat follows the anal-obsessed booty-filler, shooting thick globs of gel-like material into your open, receptive womb. You can feel the bulges of ooze making the semi-solid pipe bulge in your channel, massaging your walls and cervix as they pass. They roll out into your rapidly-filling womb in a way that forces a blissful maternal glow to your cheeks and rounds your belly more than a little bit. You swoon, ");
-		if(player.wetness() <= 2) outputText("leaking");
-		else if(player.wetness() <= 3) outputText("dripping");
+		if (player.wetness() <= 2) outputText("leaking");
+		else if (player.wetness() <= 3) outputText("dripping");
 		else outputText("squirting");
 		outputText(" your girlcum in feverish releases of ecstasy, repeatedly getting off on this perverse, doubled slime-flation.");
 	}
 	//{titties}
-	if(player.hasFuckableNipples() && player.biggestTitSize() >= 5) {
+	if (player.hasFuckableNipples() && player.biggestTitSize() >= 5) {
 		outputText("\n\nYour breasts soon experience something similar as the tentacle-like phalli convulse and squirt, ejaculating thick streamers of something hot straight into your tits. Rather than feeling the copious goo-spoo rolling back out your entrances, you just get fuller and fuller until you see the curve of your ");
-		if(player.bRows() > 1) outputText("top row of breasts");
+		if (player.bRows() > 1) outputText("top row of breasts");
 		else outputText("breasts");
 		outputText(" pulling away from your body, gaining cup sizes in a span of seconds, your skin stretching taut under the moist deluge. Your tit-twats quiver with delight, feeling nothing but obscene, ever-growing pleasure until they're squeezing down on the sloppy tentacle-cocks, milking them to cum harder and faster, which in turn bloats your ecstatic tits into blissful, bloated orbs.");
 	}
 	//{cocks!}
-	if(player.hasCock()) {
+	if (player.hasCock()) {
 		outputText("\n\nThe sealed, cock-plugging tube");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(" in [eachCock] ");
-		if(player.totalCocks() > 1) outputText("do not");
+		if (player.totalCocks() > 1) outputText("do not");
 		else outputText("does not");
 		outputText(" differ greatly from Valeria's other liquid attentions. ");
-		if(player.totalCocks() > 1) outputText("They start");
+		if (player.totalCocks() > 1) outputText("They start");
 		else outputText("It starts");
 		outputText(" by thickening, stretching your cumvein");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(" as wide as ");
-		if(player.totalCocks() > 1) outputText("they");
+		if (player.totalCocks() > 1) outputText("they");
 		else outputText("it");
 		outputText("'ll go without pain and then rolling thick pulses of gelatinous matter into your urethra");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText("s");
 		outputText(". The sleeve");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(" squeeze");
-		if(player.totalCocks() == 1) outputText("s");
+		if (player.totalCocks() == 1) outputText("s");
 		outputText(" down on your length");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(" harder, starting to slide around in ways that would be impossible for a vagina, and you find yourself helplessly blowing your load straight into the dick-plug");
-		if(player.totalCocks() > 1) outputText("s");
+		if (player.totalCocks() > 1) outputText("s");
 		outputText(", spurting bliss that can't even hope to escape from your loins. You feel ");
-		if(player.balls == 0) outputText("something expanding as you cum, filling up with spunk or slime or some mixture of the two");
+		if (player.balls == 0) outputText("something expanding as you cum, filling up with spunk or slime or some mixture of the two");
 		else outputText("your [balls] expanding as you cum, filling up with spunk or slime or some mixture of the two, weighing down your sack with ever-increasing heaviness. Tender licks of tongue roll across the surface as you fill beyond completely");
 		outputText(".");
 	}
 	//Butt fillinggasm
 	outputText("\n\nWhimpering in ecstasy, you groan out with each ass-filling pump, letting your attention focus on the feeling of being filled. The imprisoning orb slowly loses cohesion, freeing you to instinctively rub your bloating belly as it expands");
-	if(player.biggestTitSize() >= 5 && player.hasFuckableNipples()) outputText(", pausing to handle your hefty, swelling tits");
+	if (player.biggestTitSize() >= 5 && player.hasFuckableNipples()) outputText(", pausing to handle your hefty, swelling tits");
 	outputText(", moaning and groaning as Valeria's shape gradually coalesces back around you. The goo-girl's core vanishes from view and reappears down south, pressing against your [asshole] as the \"pipe\" that filled you so full melts into slime. You scream in anal ecstasy as it slips past your ring, lodging firmly in your butt while the jellied mass inside convulses, rubbing against your walls in all the right ways, almost like it's experiencing an orgasm all its own.");
 	outputText("\n\nYou shake and squirm on the ground, writhing in climax until your slime-filling settles enough to allow you to take stock of your situation. Valeria is back in place, forming her usual protective coating.");
-	if(player.biggestTitSize() >= 5 && player.hasFuckableNipples()) {
+	if (player.biggestTitSize() >= 5 && player.hasFuckableNipples()) {
 		for(var x:int = 0; x < player.bRows(); x++) {
 			player.breastRows[x].breastRating += 3 + rand(3);
 		}
 		outputText(" Your tits have grown much larger, " + player.breastCup(0) + "-cups at least.");
 	}
-	if(player.hasCock() && player.balls > 0) {
+	if (player.hasCock() && player.balls > 0) {
 		player.ballSize += 3 + rand(2);
 		outputText(" Your balls look positively swollen with libidinous juices.");
 	}
 	outputText(" Your belly is stuffed into a parody of a pregnant woman's");
-	if(player.hasVagina()) outputText(", so gravid from both holes that a real mother would be shamed by your obscene \"pregnancy.\"");
+	if (player.hasVagina()) outputText(", so gravid from both holes that a real mother would be shamed by your obscene \"pregnancy.\"");
 	else outputText(".");
 	
 	outputText("\n\nYou stagger up on your [legs] and wobble off back towards camp, wondering how long you're going to be travelling for two...");
@@ -682,48 +682,48 @@ private function valeriaGooRapeII():void {
 	//v2 = cock fill = 1, balls fill = 2
 	//v3 = cunt fill?
 	//v4 = tit fill?
-	player.createStatusAffect(StatusAffects.GooStuffed, 10 + rand(300), 0, 0, 0);
+	player.createStatusEffect(StatusEffects.GooStuffed, 10 + rand(300), 0, 0, 0);
 	player.buttKnockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
 	if (player.hasVagina()) {
-		player.changeStatusValue(StatusAffects.GooStuffed, 3, 1);
+		player.changeStatusValue(StatusEffects.GooStuffed, 3, 1);
 		player.knockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
 	}
-	if(player.hasCock()) {
-		if(player.balls > 0) player.changeStatusValue(StatusAffects.GooStuffed,2,2);
-		else player.changeStatusValue(StatusAffects.GooStuffed,2,1);
+	if (player.hasCock()) {
+		if (player.balls > 0) player.changeStatusValue(StatusEffects.GooStuffed,2,2);
+		else player.changeStatusValue(StatusEffects.GooStuffed,2,1);
 	}
-	if(player.biggestTitSize() >= 5 && player.hasFuckableNipples()) player.changeStatusValue(StatusAffects.GooStuffed,4,1);
+	if (player.biggestTitSize() >= 5 && player.hasFuckableNipples()) player.changeStatusValue(StatusEffects.GooStuffed,4,1);
 	cleanupAfterCombat();
 }
 
 //Random Goo-girl Cum-Out:
 public function birthOutDatGooSlut():void {
 	outputText("\n<b>Something odd happens...</b>\nA sudden, violent lurch in your gut nearly knocks you off your [feet]! You lower yourself to the ground before the quaking in your middle can upend you and cradle your slime-bloated belly, wondering if you're finally going to get relief from walking around with a gutful of goo.");
-	if(player.statusAffectv4(StatusAffects.GooStuffed) > 0) outputText(" Your tits are even wobbling around wildly, shaking and jiggling obscenely inside your [armor] in a way that makes you your [nipples] more than a little leaky.");
+	if (player.statusEffectv4(StatusEffects.GooStuffed) > 0) outputText(" Your tits are even wobbling around wildly, shaking and jiggling obscenely inside your [armor] in a way that makes you your [nipples] more than a little leaky.");
 	outputText("\n\nYou get your answer when your [asshole] opens up to expose the goo-girl's slick core, forcing you to shudder with ecstasy as it gradually slips through your stretching anus and unleashes a torrent of slime. You bend down onto your hands, letting it pass, cumming unexpectedly at the way it caresses you as it exits your body and moaning like a some ");
-	if(player.skinType == SKIN_TYPE_FUR) outputText("furry ");
+	if (player.skinType == SKIN_TYPE_FUR) outputText("furry ");
 	outputText("bitch in heat. Gods, there's so much!");
-	if(player.statusAffectv4(StatusAffects.GooStuffed) > 0) {
+	if (player.statusEffectv4(StatusEffects.GooStuffed) > 0) {
 		outputText("\n\n");
-		if(!player.hasFuckableNipples()) outputText("Stiffening up");
+		if (!player.hasFuckableNipples()) outputText("Stiffening up");
 		else outputText("Opening up");
 		outputText(", your [nipples], suddenly disgorge rivers of gelatinous slime, adding to growing puddle below with, odd-colored obscene lactation. You grab one with one hand and squeeze, shooting out huge streamers of milky-goo until your tit is sore and aching. You repeat on the other side");
-		if(player.bRows() > 1) outputText(" and the next row down");
-		if(player.bRows() > 2) outputText(", and so on");
+		if (player.bRows() > 1) outputText(" and the next row down");
+		if (player.bRows() > 2) outputText(", and so on");
 		outputText(", working out every drop of thick, body-filling slime while your ass is still busy draining. Even after they empty, they don't seem to lose a single bit of the size they've gained....");
 	}
-	if(player.hasCock() && player.statusAffectv2(StatusAffects.GooStuffed) > 0) {
+	if (player.hasCock() && player.statusEffectv2(StatusEffects.GooStuffed) > 0) {
 		outputText("\n\n[EachCock] suddenly fills to twitching tumescence and explodes in a completely untelegraphed orgasm, throwing huge strands of odd-colored cum in ");
-		if(player.balls > 0) outputText("ball-clenching");
+		if (player.balls > 0) outputText("ball-clenching");
 		else outputText("body-clenching");
 		outputText(" quivers of beatific enjoyment. It's so thick, and there's so much that your blissful explosions soon turn into a constantly flowing river of ejaculatory ecstasy. You grab hold with one hand and squeeze to milk out every last drop, throbbing long after you empty. A few trickles of white ooze out after, but that's all the proper spunk you see.");
-		if(player.statusAffectv2(StatusAffects.GooStuffed) >= 2) outputText("  Your balls keep their enhanced sized. Odd.");
+		if (player.statusEffectv2(StatusEffects.GooStuffed) >= 2) outputText("  Your balls keep their enhanced sized. Odd.");
 	}
-	if(player.hasVagina() && player.statusAffectv3(StatusAffects.GooStuffed) > 0) {
+	if (player.hasVagina() && player.statusEffectv3(StatusEffects.GooStuffed) > 0) {
 		outputText("\n\nBirthing out a geyser of slime, your [vagina] practically glows with the pleasure of releasing its slimy package into the congealing puddle below. Your lips grow so puffy and sensitive from the experience that your pussy looks obscenely bloated, like it's been suckled for hours upon hours, but all it's doing is cumming nonstop while it releases its long-held burden.");
 	}
 	outputText("\n\nYou pant to try and catch your breath as the fluid gathers up beside you and grows a friendly, smiling face. It gives you a simple smile and a kiss on your brow before leaving you to recover, heading in the direction of the lake.\n");
-	player.removeStatusAffect(StatusAffects.GooStuffed);
+	player.removeStatusEffect(StatusEffects.GooStuffed);
 	player.knockUpForce(); //Clear the false pregnancy
 	player.buttKnockUpForce(); //Clear the false pregnancy
 }

@@ -16,8 +16,7 @@ package classes.Perks
 
 		public function ElvenBountyPerk()
 		{
-			super("Elven Bounty", "Elven Bounty",
-					"After your encounter with an elf, her magic has left you with increased fertility and virility.");
+			super("Elven Bounty", "Elven Bounty", "After your encounter with an elf, her magic has left you with increased fertility and virility.", null, true);
 		}
 	}
 }

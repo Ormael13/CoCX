@@ -65,8 +65,8 @@ package classes.Scenes.Areas.HighMountains
 				if (player.armorDef > 0) outputText(", but your defense has been reduced");
 				outputText("! ");
 				player.takeDamage(damage, true);
-				if (findStatusAffect(StatusAffects.TailWhip) >= 0) addStatusValue(StatusAffects.TailWhip, 1, 10);
-				else createStatusAffect(StatusAffects.TailWhip, 10, 0, 0, 0);
+				if (findStatusEffect(StatusEffects.TailWhip) >= 0) addStatusValue(StatusEffects.TailWhip, 1, 10);
+				else createStatusEffect(StatusEffects.TailWhip, 10, 0, 0, 0);
 			}
 			combatRoundOver();
 		}
@@ -141,9 +141,9 @@ package classes.Scenes.Areas.HighMountains
 		{
 			//The Siren's Song (2-part attack) (Rarely used or when she's desperate aka: Less than 10% hp)
 			//[part 1]
-			if (findStatusAffect(StatusAffects.SirenSong) < 0) {
+			if (findStatusEffect(StatusEffects.SirenSong) < 0) {
 				outputText("Minerva begins to hum a pleasant tune.  It might be better to stand back to see what she's up to!");
-				createStatusAffect(StatusAffects.SirenSong, 0, 0, 0, 0);
+				createStatusEffect(StatusEffects.SirenSong, 0, 0, 0, 0);
 			}
 			//[part 2]
 			else {
@@ -155,14 +155,14 @@ package classes.Scenes.Areas.HighMountains
 					outputText("  Your mind clouds over as the song flows through your ears and fills your mind with sweet bliss.  You lower your [weapon] and dreamily walk into the siren's sweet embrace.  You absent-mindedly disrobe yourself as you move in closer, the song getting louder with each step you take, until you finally bury yourself into the siren's soft bosom and she wraps her feathery arms around your body.  She stops singing her beautiful song and whispers into your ear, \"<i>You're all mine now.</i>\"");
 					game.dynStats("lus", 999);
 				}
-				removeStatusAffect(StatusAffects.SirenSong);
+				removeStatusEffect(StatusEffects.SirenSong);
 			}
 			combatRoundOver();
 		}
 
 		override protected function performCombatAction():void
 		{
-			if (findStatusAffect(StatusAffects.SirenSong) >= 0) sirensSong();
+			if (findStatusEffect(StatusEffects.SirenSong) >= 0) sirensSong();
 			else if (rand(25) == 0 || (HP < 100 && rand(2) == 0)) sirensSong();
 			//Else choose randomly!
 			else {

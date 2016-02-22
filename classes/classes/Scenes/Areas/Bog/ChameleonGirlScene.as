@@ -106,7 +106,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nYou gasp as you're stretched wide and filled more completely than you can imagine; the girl standing over you looks extremely pleased with herself.  She starts to move her tail ever so slightly, its every movement filling you with a painful pleasure as your pussy is repeatedly stretched.  Too turned on by the sensation to be angry at her for taking advantage of you, your sexual fluids drip from your cunt and erect maleness like a faucet.");
 
 			outputText("\n\nThe weight lifts from your chest, but you're kept where you are by what's filling you.  The chameleon girl slides her foot down your belly, dragging her dull claws lightly over your skin.  Her ankle bumps into the hard shaft of your prick, and she lifts her foot, balancing herself in practiced form on the other.  She chuckles quietly and bites her fingertip, teasing along your aching cock with her sole.  Its skin is smooth, and feels like thick, supple leather when she grips you with it.  You can tell from her flexibility that her feet are made for gripping and climbing trees, and she easily finds a hold on your cock.  Thankfully taking care to keep her claws out of the way, she begins to jerk you off with her foot, sliding the whole sole up and down");
-			//[if(cockarea <40)
+			//[if (cockarea <40)
 			if (player.cockArea(x) < 40) outputText(" and occasionally lifting it to take the shaft between two dexterous toes and work it more delicately");
 			outputText(".  She blushes as she watches your breaths turn to pants from the pleasure.");
 

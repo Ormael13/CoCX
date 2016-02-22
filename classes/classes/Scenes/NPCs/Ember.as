@@ -19,7 +19,7 @@ package classes.Scenes.NPCs
 			outputText("The dragon moans, weaving softly from side to side, eyes glazed and tongue lolling at the intimate prospect of sex... but then, to your surprise, " + emberMF("he","she") + " visibly shakes it off and recomposes " + emberMF("him","her") + "self, frowning at you.");
 			outputText("\n\n\"<i>W-what do you think you're doing!?  I'm not some ordinary monster!  Don't think you can seduce me out of a battle!</i>\"");
 			outputText("\n\nDespite Ember's initial display; you realize that, Ember was still a ways from " + emberMF("his","her") + " peak arousal.  The dragon flies off in a huff, irritated that you would stoop to fighting in a such a manner.");
-			if(player.lib >= 50) outputText("  How boring.");
+			if (player.lib >= 50) outputText("  How boring.");
 			gems = 0;
 			XP = 0;
 			HP = 0;
@@ -30,14 +30,14 @@ package classes.Scenes.NPCs
 			//Basic attack, average damage, average accuracy
 			outputText("With a growl, the dragon lashes out in a ferocious splay-fingered slash, "+ emberMF("his","her") + " claws poised to rip into your flesh.  ");
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(2) == 0) {
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Miss/dodge
-			else if(player.getEvasionRoll()) outputText("You dodge aside at the last second and Ember's claws whistle past you.");
+			else if (player.getEvasionRoll()) outputText("You dodge aside at the last second and Ember's claws whistle past you.");
 			else {
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
-				if(damage <= 0) outputText("Ember's claws scrape noisily but harmlessly off your [armor].");
+				if (damage <= 0) outputText("Ember's claws scrape noisily but harmlessly off your [armor].");
 				else {
 					outputText("Ember's claws rip into you, leaving stinging wounds. ");
 					damage = player.takeDamage(damage, true);
@@ -48,7 +48,7 @@ package classes.Scenes.NPCs
 		
 		//Dragon Breath: Very rare attack, very high damage
 		private function embersSupahSpecialDragonBreath():void {
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(2) == 0) {
 				//Blind Ember: 
 				outputText("The blinded dragon tracks you with difficulty as you sprint around the landscape; seeing an opportunity, you strafe around " + emberMF("his","her") + " side, planting yourself behind a large flat boulder near " + emberMF("him","her") + " and pelting " + emberMF("him","her") + " with a small rock.  The scream as the dragon turns the magical conflagration toward you, only to have it hit the rock and blow up in " + emberMF("his","her") + " face, is quite satisfying.");
 				//(Ember HP damage)
@@ -56,7 +56,7 @@ package classes.Scenes.NPCs
 			}
 			else {
 				outputText("Ember inhales deeply, then "+ emberMF("his","her") + " jaws open up, releasing streams of fire, ice and lightning; magical rather than physical, the gaudy displays lose cohesion and amalgamate into a column of raw energy as they fly at you.");
-				if(player.getEvasionRoll()) outputText("  It's a narrow thing, but you manage to throw yourself aside at the last moment.  Fortunately, the energy whirling around and tearing up the soil blinds Ember to your escape until you have recovered and are ready to keep fighting.");
+				if (player.getEvasionRoll()) outputText("  It's a narrow thing, but you manage to throw yourself aside at the last moment.  Fortunately, the energy whirling around and tearing up the soil blinds Ember to your escape until you have recovered and are ready to keep fighting.");
 				else {
 					outputText("  The pain as the deadly combination washes over you is indescribable.  It's a miracle that you endure it, and even Ember looks amazed to see you still standing. ");
 					var damage:Number = 100 + rand(100);
@@ -69,15 +69,15 @@ package classes.Scenes.NPCs
 		//Tailslap: Rare attack, high damage, low accuracy
 		private function emberTailSlap():void {
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0) {
 				outputText(capitalA + short + " completely misses you with a blind tail-slap!", false);
 				combatRoundOver();
 				return;
 			}
 			outputText("Ember suddenly spins on "+ emberMF("his","her") + " heel, the long tail that splays behind " + emberMF("him","her") + " lashing out like a whip.  As it hurtles through the air towards you, your attention focuses on the set of spikes suddenly protruding from its tip!");
-			if(player.getEvasionRoll() || rand(2) == 0) {
+			if (player.getEvasionRoll() || rand(2) == 0) {
 				outputText("  You ");
-				if(rand(2) == 0) outputText("duck under");
+				if (rand(2) == 0) outputText("duck under");
 				else outputText("leap over");
 				outputText(" the tail at the last moment, causing Ember to lose control of "+ emberMF("his","her") + " own momentum and stumble.");
 			}
@@ -99,11 +99,11 @@ package classes.Scenes.NPCs
 			}
 			else {
 				outputText("Try as you might, you can't seem to protect yourself; and the blast hits you like a stone, throwing you to the ground. ");
-				if(player.findPerk(PerkLib.Resolute) < 0) {
+				if (player.findPerk(PerkLib.Resolute) < 0) {
 					outputText("Your head swims - it'll take a moment before you can regain your balance. ");
-					player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+					player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 				}
-				createStatusAffect(StatusAffects.StunCooldown,4,0,0,0);
+				createStatusEffect(StatusEffects.StunCooldown,4,0,0,0);
 				var damage:Number = 10 + rand(10);
 				damage = player.takeDamage(damage, true);
 			}
@@ -116,9 +116,9 @@ package classes.Scenes.NPCs
 				emberReactsToLustiness();
 				return;
 			}
-			if (findStatusAffect(StatusAffects.StunCooldown) >= 0) {
-				addStatusValue(StatusAffects.StunCooldown, 1, -1);
-				if (statusAffectv1(StatusAffects.StunCooldown) <= 0) removeStatusAffect(StatusAffects.StunCooldown);
+			if (findStatusEffect(StatusEffects.StunCooldown) >= 0) {
+				addStatusValue(StatusEffects.StunCooldown, 1, -1);
+				if (statusEffectv1(StatusEffects.StunCooldown) <= 0) removeStatusEffect(StatusEffects.StunCooldown);
 			}
 			else if (rand(3) == 0) {
 				dragonFarce();
@@ -155,14 +155,14 @@ package classes.Scenes.NPCs
 				this.pronoun2 = "her";
 				this.pronoun3 = "her";
 			}
-			if(gender == 1 || gender == 3) {
+			if (gender == 1 || gender == 3) {
 				this.createCock(16,2,CockTypesEnum.DRAGON);
 				this.balls = 2;
 				this.ballSize = 4;
 				this.cumMultiplier = 3;
 				// this.hoursSinceCum = 0;
 			}
-			if(gender >= 2) {
+			if (gender >= 2) {
 				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
 				createBreastRow(Appearance.breastCupInverse("F"));
 			} else {

@@ -13,6 +13,11 @@
 	import classes.GlobalFlags.kACHIEVEMENTS; // This file creates the flags for the achievements system.
 	import classes.Scenes.Dungeons.DungeonEngine; // This file creates all the dungeons, their rooms, and their completion states except for D3. This also includes cabin code. See file for more details.
 	import classes.Scenes.Dungeons.D3.D3; // Likely due to D3's complexity, that dungeon is split out separately.
+	import classes.Scenes.Seasonal.AprilFools;
+	import classes.Scenes.Seasonal.Fera;
+	import classes.Scenes.Seasonal.Thanksgiving;
+	import classes.Scenes.Seasonal.Valentines;
+	import classes.Scenes.Seasonal.XmasBase;
 
 	import classes.CoC_Settings; // This file creates basic variables for CoC itself (debug flags, buffers, button manipulation)
 
@@ -44,7 +49,7 @@ the text from being too boring.
 	import classes.Creature; // Creates basic information for all characters in CoC. Contains many descriptors.
 	import classes.ItemSlotClass; // Creates item slots
 	import classes.PerkClass; // The function in this file pulls perk information from PerkLib for later querying
-	import classes.StatusAffectClass; // Similar to PerkClass, but for status effects in combat.
+	import classes.StatusEffectClass; // Similar to PerkClass, but for status effects in combat.
 	import classes.VaginaClass; // Creates vaginas
 	import classes.ImageManager; // Image voodoo for sprites
 	import classes.internals.Utils; // This file contains much voodoo for randomizing item arrays and other useful functions.
@@ -73,9 +78,9 @@ the text from being too boring.
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Places.*;
 	import classes.Scenes.Places.TelAdre.*;
+	import classes.Scenes.Seasonal.*;
 	import classes.Scenes.Quests.*;
-	//import coc.view.MainView; // Creates the framework for the game screen.
-	import coc.view.MainView;
+	import coc.view.MainView; // Creates the framework for the game screen.
 	import coc.model.GameModel; // Uncertain.
 	import coc.model.TimeModel; // Various time-related functions for setting the game clock and querying its state.
 
@@ -133,9 +138,6 @@ the text from being too boring.
 
 		include "../../includes/eventTest.as";
 		
-		
-		include "../../includes/transform.as";
-		
 		include "../../includes/engineCore.as";
 
 		// Lots of constants
@@ -166,7 +168,7 @@ the text from being too boring.
 		
 		// /
 		private var _perkLib:PerkLib = new PerkLib();// to init the static
-		private var _statusAffects:StatusAffects = new StatusAffects();// to init the static
+		private var _statusEffects:StatusEffects = new StatusEffects();// to init the static
 		public var charCreation:CharCreation = new CharCreation();
 		public var saves:Saves = new Saves(gameStateDirectGet, gameStateDirectSet);
 		// Items/
@@ -181,6 +183,7 @@ the text from being too boring.
 		public var miscItems:MiscItemLib = new MiscItemLib();
 		// Scenes/
 		public var camp:Camp = new Camp(campInitialize);
+		public var dreams:Dreams = new Dreams();
 		public var exploration:Exploration = new Exploration();
 		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
 		public var inventory:Inventory = new Inventory(saves);
@@ -255,6 +258,12 @@ the text from being too boring.
 		public var dungeons:DungeonEngine = new DungeonEngine();
 		public var ingnam:Ingnam = new Ingnam();
 		public var prison:Prison = new Prison();
+		// Scenes/Seasonal/
+		public var aprilFools:AprilFools = new AprilFools();
+		public var fera:Fera = new Fera();
+		public var thanksgiving:Thanksgiving = new Thanksgiving();
+		public var valentines:Valentines = new Valentines();
+		public var xmas:XmasBase = new XmasBase();
 		// Scenes/Quests/
 		public var urtaQuest:UrtaQuest = new UrtaQuest();
 		
@@ -268,27 +277,26 @@ the text from being too boring.
 		public var mainViewManager:MainViewManager = new MainViewManager();
 		// Other scenes
 
-		include "../../includes/april_fools.as";
-
-		include "../../includes/dreams.as";
+//Moved to Scenes/Holidays		include "../../includes/april_fools.as";
+//Moved to Scenes		include "../../includes/dreams.as";
 		//include "../../includes/dungeon2Supplimental.as";
 		//include "../../includes/dungeonCore.as";
 //No longer needed. This file has been chopped up and spread throughout the codebase:		include "../../includes/dungeonEvents.as";
 		//include "../../includes/dungeonHelSupplimental.as";
 		//include "../../includes/dungeonSandwitch.as";
-		include "../../includes/fera.as";
+//Moved to Scenes/Holidays		include "../../includes/fera.as";
 //Moved to Scenes/Masturbation.as		include "../../includes/masturbation.as";
-		include "../../includes/pregnancy.as";
-		include "../../includes/runa.as";
+		include "../../includes/pregnancy.as"; //The only file left to be sorted out. Once it's done, the commented-out code can be deleted.
+//This is never implemented. So it's removed.		include "../../includes/runa.as";
 //No longer needed. This file has been split:		include "../../includes/symGear.as";
-		include "../../includes/tamaniDildo.as";
-		include "../../includes/thanksgiving.as";
-		include "../../includes/valentines.as";
+//No longer needed. This file has ben split:		include "../../includes/tamaniDildo.as";
+//Moved to Scenes/Holidays		include "../../includes/thanksgiving.as";
+//Moved to Scenes/Holidays		include "../../includes/valentines.as";
 //Moved to Scenes/Areas/Mountain		include "../../includes/worms.as";
-		include "../../includes/xmas_bitch.as";
-		include "../../includes/xmas_gats_not_an_angel.as";
-		include "../../includes/xmas_jack_frost.as";
-		include "../../includes/xmas_misc.as";
+//Moved to Scenes/Holidays		include "../../includes/xmas_bitch.as";
+//Moved to Scenes/Holidays		include "../../includes/xmas_gats_not_an_angel.as";
+//Moved to Scenes/Holidays		include "../../includes/xmas_jack_frost.as";
+//Moved to Scenes/Holidays		include "../../includes/xmas_misc.as";
 	
 		
 		/****
@@ -365,12 +373,6 @@ the text from being too boring.
 			return Utils.rand(max);
 		}
 
-		// holidayz
-		public function isEaster():Boolean
-		{
-			return plains.bunnyGirl.isItEaster();
-		}
-
 		public function CoC()
 		{
 			// Cheatmode.
@@ -428,8 +430,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4_mod_1.3.10";
-			version = ver + " (<b>More changes.</b>)";
+			ver = "0.9.4_mod_1.3.11";
+			version = ver + " (<b>Refactors Ahoy</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -485,45 +487,7 @@ the text from being too boring.
 			//1 = in combat
 			//2 = in combat in grapple
 			//3 = at start or game over screen
-//GameState 4 eliminated			//4 = at giacomo
-//GameState 5 eliminated			//5 = getting succubi potion
-//GameState 6 eliminated			//6 = at alchemist choices.
-//GameState 7 eliminated			//7 = item duuuuump
-//GameState 8 eliminated			//8 = worked at farm
 			gameState = 0;
-
-//Gone, last use replaced by newRound arg for combatMenu
-			//Another state variable used for menu display used everywhere
-			//menuLoc
-			//0 - normal
-			//1 - items menu - no heat statuses when leaving it in combat
-			//2 - needs to add an hour after grabbing item
-			//3 - In tease menu - no heat statuses when leaving it.
-//MenuLoc 8 eliminated			//8 - Find Farm Pepper - 2 hours wait
-//MenuLoc 9 eliminated			//9 - Armor shop
-//MenuLoc 10 eliminated			//10- Tailor shop
-//MenuLoc 11 eliminated			//11- Midsleep loot
-//MenuLoc 12 eliminated			//12 - lumi potions
-//MenuLoc 13 eliminated			//13 - lumi enhancements
-//MenuLoc 14 eliminated			//14 - late night receive item
-//MenuLoc 15 eliminated			//15 - Weapon shop in TelAdra
-//MenuLoc 16 eliminated			//16 - Incubus Shop
-//MenuLoc 17 eliminated			//17 - 4 hours wait
-//MenuLoc 18 eliminated			//18 - 8 hours wait
-//MenuLoc 19 eliminated			//19 - Bakery!
-//MenuLoc 20 eliminated			//20 - weapon rack stuffing
-//MenuLoc 21 eliminated			//21 - weapon rack taking
-//MenuLoc 24 eliminated			//24 - Niamh booze
-//MenuLoc 25 eliminated			//25 - Owca Shop
-//MenuLoc 26 eliminated			//26 - Benoit Shop
-//MenuLoc 27 eliminated			//27 - Chicken Harpy Shop
-//MenuLoc 28 eliminated			//28 - Items menu
-//			menuLoc = 0;
-
-			//State variable used to indicate whether inside an item submenu
-			//The item sub menu
-//			itemSubMenu = false;
-			//} endregion 
 
 			/**
 			 * Display Variables
@@ -623,7 +587,7 @@ the text from being too boring.
 			registerClassAlias("KeyItemClass", KeyItemClass);
 			registerClassAlias("Monster", Monster);
 			registerClassAlias("Player", Player);
-			registerClassAlias("StatusAffectClass", StatusAffectClass);
+			registerClassAlias("StatusEffectClass", StatusEffectClass);
 			registerClassAlias("VaginaClass", VaginaClass);
 			//registerClassAlias("Enum", Enum);
 

@@ -56,7 +56,7 @@ package classes.Scenes.Places.Boat
 		//Pure Marae's specials
 		public function smite():void {
 			outputText("Marae mouths a chant. The clouds gather and quickly darkens. <b>It looks like a lightning might strike you!</b>");
-			createStatusAffect(StatusAffects.Uber, 1, 0, 0, 0);
+			createStatusEffect(StatusEffects.Uber, 1, 0, 0, 0);
 			combatRoundOver();
 		}
 		public function smiteHit():void {
@@ -70,7 +70,7 @@ package classes.Scenes.Places.Boat
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			if (findStatusAffect(StatusAffects.Uber) >= 0) removeStatusAffect(StatusAffects.Uber);
+			if (findStatusEffect(StatusEffects.Uber) >= 0) removeStatusEffect(StatusEffects.Uber);
 			combatRoundOver();
 		}
 		
@@ -85,23 +85,23 @@ package classes.Scenes.Places.Boat
 		}
 		
 		override public function doAI():void {
-			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
+			if (findStatusEffect(StatusEffects.Stunned) >= 0) {
 				outputText("Your foe is too dazed from your last hit to strike back!", false)
-				if (findStatusAffect(StatusAffects.Uber) >= 0) {
+				if (findStatusEffect(StatusEffects.Uber) >= 0) {
 					outputText(" You've managed to interrupt her smite attack!");
-					removeStatusAffect(StatusAffects.Uber);
+					removeStatusEffect(StatusEffects.Uber);
 				}
-				if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
-				else addStatusValue(StatusAffects.Stunned, 1, -1);
+				if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
+				else addStatusValue(StatusEffects.Stunned, 1, -1);
 				combatRoundOver();
 				return;
 			}
-			if (findStatusAffect(StatusAffects.Fear) >= 0) {
+			if (findStatusEffect(StatusEffects.Fear) >= 0) {
 				game.outputText("\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.\n\n");
-				removeStatusAffect(StatusAffects.Fear);
+				removeStatusEffect(StatusEffects.Fear);
 			}
 			var chooser:int = rand(10);
-			if (findStatusAffect(StatusAffects.Uber) >= 0) {
+			if (findStatusEffect(StatusEffects.Uber) >= 0) {
 				smiteHit();
 				return;
 			}

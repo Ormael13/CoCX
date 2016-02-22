@@ -44,7 +44,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("Lethice hisses at you. \"<i>Today is the day you'll die!</i>\" She raises her staff and makes a series of strange arcane gestures you've never even seen! One of the panels on the floor slides open and the hidden compartment raises to reveal a suit of strange, purple armor seeming to be made of glowing lethicite. What catches your eyes the most is the intricately-decorated hole at the groin area, presumably to expose the wearer's nether regions. You can only imagine how many mortals were turned into demons to harvest enough lethicite to create such an imposing armor. ");
 			outputText("\n\nIn no time, she quickly strips out her fetish churchwear and slips into the armor. She definitely looks more imposing yet her slavering cunt remains visible. \"<i>Like this beauty? I've turned hundreds of mortals into a demon to harvest enough lethicite. It takes a lot of work to forge this armor considering the strange properties of lethicite. You may think lethicite is one of demon's favorite treats but it has some uses!</i>\" Lethice says, glaring at you.");
 			startCombat(new Lethice());
-			monster.createStatusAffect(StatusAffects.Berzerking, 50, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Berzerking, 50, 0, 0, 0);
 			monster.createPerk(PerkLib.LustyRegeneration, 0, 0, 0, 0);
 			monster.bonusHP += 200;
 			monster.lustVuln -= 0.05;
@@ -57,7 +57,7 @@ package classes.Scenes.Dungeons.D3
 			monster.fatigue = 0;
 			monster.imageName = "lethice-phase2";
 			if (monster.lustVuln < 0.1) monster.lustVuln = 0.1;
-			monster.long = "She is no doubt the Queen of the Demons. She has pink skin, a rare example among demons. Her eyes are black with yellow iris and slit pupil. Her fangs are clearly visible, protruding along her upper row of teeth. She has long, luxurious purple hair with black roses woven in it, parted by her pair of goat horns and multiple pairs of demonic horns. She has numerous lethicite piercings piercing her ears. Huge draconic wings grow from her back, easily rivaling a full-fledged dragon-morph. Her feet end in high heels. " + (monster.findStatusAffect(StatusAffects.Berzerking) >= 0 ? "She's wearing a suit of lethicite armor that exposes her lethicite-pierced nipples and her glistening vagina." : "She's wearing a set of fetishy churchwear that doesn't seem to cover her B-cup breasts and her glistening vagina.") + " She's currently wielding an ebony staff topped with lethicite.";
+			monster.long = "She is no doubt the Queen of the Demons. She has pink skin, a rare example among demons. Her eyes are black with yellow iris and slit pupil. Her fangs are clearly visible, protruding along her upper row of teeth. She has long, luxurious purple hair with black roses woven in it, parted by her pair of goat horns and multiple pairs of demonic horns. She has numerous lethicite piercings piercing her ears. Huge draconic wings grow from her back, easily rivaling a full-fledged dragon-morph. Her feet end in high heels. " + (monster.findStatusEffect(StatusEffects.Berzerking) >= 0 ? "She's wearing a suit of lethicite armor that exposes her lethicite-pierced nipples and her glistening vagina." : "She's wearing a set of fetishy churchwear that doesn't seem to cover her B-cup breasts and her glistening vagina.") + " She's currently wielding an ebony staff topped with lethicite.";
 			monster.weaponAttack = 50;
 			monster.armorName = "lethicite armor";
 			monster.armorDef = 32;
@@ -141,8 +141,8 @@ package classes.Scenes.Dungeons.D3
 			outputText("By the time you finally arrive at your camp, joy spreads throughout you. ");
 			if (camp.companionsCount() >= 3) outputText("The camp folks are already cheering for you even before you arrived.");
 			//Followers!
-			if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0) outputText("\n\nRathazul hollers \"<i>Good news, everyone! Lethice is dead!</i>\"");
-			if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("\n\nThe mouse monk, Jojo, cheers for you. \"<i>The source of the corruption is gone.</i>\"");
+			if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) outputText("\n\nRathazul hollers \"<i>Good news, everyone! Lethice is dead!</i>\"");
+			if (player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) outputText("\n\nThe mouse monk, Jojo, cheers for you. \"<i>The source of the corruption is gone.</i>\"");
 			//Lovers!
 			if (camp.amilyFollower()) outputText("\n\nAmily the mouse-girl is already dancing and cheering. \"<i></i>\"");
 			if (camp.followerHel()) outputText("\n\nHelia the salamander girl smiles and gives you a hug. \"<i>You've really whopped that demon queen's ass, lover!</i>\" Hel chuckles. ");

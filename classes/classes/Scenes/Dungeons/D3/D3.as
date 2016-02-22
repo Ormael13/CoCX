@@ -7,7 +7,7 @@ package classes.Scenes.Dungeons.D3
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Dungeons.Factory.IncubusMechanic;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.PerkLib;
 	import classes.CockTypesEnum;
 	import classes.PregnancyStore;

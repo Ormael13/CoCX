@@ -52,19 +52,19 @@
 				"cockfit":
 					function(thisPtr:*, aspect:*):*
 					{
-						if(!kGAMECLASS.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
+						if (!kGAMECLASS.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
 						else
 						{
-							if(kGAMECLASS.player.cockThatFits(aspect) >= 0) return kGAMECLASS.player.cockDescript(kGAMECLASS.player.cockThatFits(aspect));
+							if (kGAMECLASS.player.cockThatFits(aspect) >= 0) return kGAMECLASS.player.cockDescript(kGAMECLASS.player.cockThatFits(aspect));
 							else return kGAMECLASS.player.cockDescript(kGAMECLASS.player.smallestCockIndex());
 						}
 					},
 				"cockfit2":
 					function(thisPtr:*, aspect:*):*
 					{
-						if(!kGAMECLASS.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
+						if (!kGAMECLASS.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
 						else {
-							if(kGAMECLASS.player.cockThatFits2(aspect) >= 0) return kGAMECLASS.player.cockDescript(kGAMECLASS.player.cockThatFits2(aspect));
+							if (kGAMECLASS.player.cockThatFits2(aspect) >= 0) return kGAMECLASS.player.cockDescript(kGAMECLASS.player.cockThatFits2(aspect));
 							else return kGAMECLASS.player.cockDescript(kGAMECLASS.player.smallestCockIndex());
 						}
 					},
@@ -76,33 +76,33 @@
 							return "<b>(Attempt to parse cockhead when none present.)</b>";
 						}
 						else {
-							if(kGAMECLASS.player.cockThatFits(aspect) >= 0) return kGAMECLASS.player.cockHead(kGAMECLASS.player.cockThatFits(aspect));
+							if (kGAMECLASS.player.cockThatFits(aspect) >= 0) return kGAMECLASS.player.cockHead(kGAMECLASS.player.cockThatFits(aspect));
 							else return kGAMECLASS.player.cockHead(kGAMECLASS.player.smallestCockIndex());
 						}
 					},
 				"cockheadfit2":
 					function(thisPtr:*, aspect:*):*
 					{
-						if(!kGAMECLASS.player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
+						if (!kGAMECLASS.player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
 						else {
-							if(kGAMECLASS.player.cockThatFits2(aspect) >= 0) return kGAMECLASS.player.cockHead(kGAMECLASS.player.cockThatFits2(aspect));
+							if (kGAMECLASS.player.cockThatFits2(aspect) >= 0) return kGAMECLASS.player.cockHead(kGAMECLASS.player.cockThatFits2(aspect));
 							else return kGAMECLASS.player.cockHead(kGAMECLASS.player.smallestCockIndex());
 						}
 					},
 				"cock":
 					function(thisPtr:*, aspect:*):*
 					{
-						if(!kGAMECLASS.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
+						if (!kGAMECLASS.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
 						else
 						{
-							if(aspect-1 >= 0 && aspect-1 < kGAMECLASS.player.cockTotal()) return kGAMECLASS.player.cockDescript(aspect - 1);
+							if (aspect-1 >= 0 && aspect-1 < kGAMECLASS.player.cockTotal()) return kGAMECLASS.player.cockDescript(aspect - 1);
 							else return "<b>(Attempt To Parse CockDescript for Invalid Cock)</b>";
 						}
 					},
 				"cockhead":
 					function(thisPtr:*, aspect:*):*
 					{
-						if(!kGAMECLASS.player.hasCock()) return "<b>(Attempt to parse cockHead when none present.)</b>";
+						if (!kGAMECLASS.player.hasCock()) return "<b>(Attempt to parse cockHead when none present.)</b>";
 						else
 						{
 							var intAspect:int = int(aspect - 1);
@@ -123,7 +123,8 @@
 			// NPCs:
 			"rubi"		: rubiLookups,
 			"arian"		: arianLookups,
-
+			"ember"		: emberLookups,
+			
 			// PC Attributes:
 
 			"cock"		: cockLookups,

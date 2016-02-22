@@ -35,7 +35,7 @@ package classes.Scenes.Monsters
 		public function goblinWarriorEncounter():void {
 			clearOutput();
 			//First Time Intro
-			if(flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] == 0)
+			if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] == 0)
 			{
 				outputText("As you take a stroll, a goblin jumps out of nearby bushes! Unlike most of the goblins you've seen so far, the goblin is wearing armor. She wields a sword in her right hand and a shield in her left hand.");
 				outputText("\n\n\"<i>I'm going to beat you just so I can fuck you,</i>\" she says.");
@@ -60,28 +60,28 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if (doSFWloss()) return;
 			var x:int;
-			if(player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious warrior saunters up, a pair of fluid filled potions in her hands. She forcibly jams the Lust Drafts, emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
+			if (player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious warrior saunters up, a pair of fluid filled potions in her hands. She forcibly jams the Lust Drafts, emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
 
-			if(player.cockThatFits(monster.vaginalCapacity()) >= 0 && player.hasCock() && (!player.hasVagina() || rand(2) == 0)) 
+			if (player.cockThatFits(monster.vaginalCapacity()) >= 0 && player.hasCock() && (!player.hasVagina() || rand(2) == 0)) 
 			{
 				x = player.cockThatFits(monster.vaginalCapacity());
-				if(x < 0) x = player.smallestCockIndex();
+				if (x < 0) x = player.smallestCockIndex();
 				outputText("You tear through your " + player.armorName + " in a rush, anything to release [eachCock] from its hellish confinement.  You’re so aroused, so horny.  Any passing thoughts of modesty are immediately discarded and forgotten, washed away under the wave of your all-consuming lust as your fingers slide home around [oneCock] and begin to play with the turgid tool.  You immediately buck from the sensation of incredible, pent-up need, nearly cumming on the spot.  Looking up, you meet the emerald-skinned woman’s eyes pleadingly.");
 				outputText("\n\nThe goblin warrior watches impassively for a moment, but as your need intensifies, her attitude softens while your member hardens.  \"<i>Oh, I think I’m gonna regret this, but ");
-				if(player.cockTotal() == 1) outputText("that thing");
+				if (player.cockTotal() == 1) outputText("that thing");
 				else outputText("those things");
 				outputText(" look mighty tasty.  You don’t mind if I sample just a little bit of your seed do you?</i>\"  The crimson-maned beauty kneels down next to you and lets her tiny, delicate digits dance across the underside of [oneCock], drawing a lurid moan from your lips as she wonders out loud, “I don’t hear a no, " + player.mf("stud","sexy") + ".  That’s good... I’m just going to take a little bit of cum... just a few squirts.  Surely a ");
-				if(player.tallness >= 60) outputText("big, ");
+				if (player.tallness >= 60) outputText("big, ");
 				outputText(player.mf("strapping young man","sexy breeder") + " will have enough jizz to pay for " + player.mf("his","her") + " trespass?</i>\"");
 				outputText("  Those delightful, dancing fingers pirouette down to your ");
-				if(player.balls > 0) outputText("[sack], giving it a gentle caress before vanishing.");
-				else if(player.hasVagina()) outputText(vaginaDescript() + ", the tips giving your soaked mound only the barest ghost of a touch.");
+				if (player.balls > 0) outputText("[sack], giving it a gentle caress before vanishing.");
+				else if (player.hasVagina()) outputText(vaginaDescript() + ", the tips giving your soaked mound only the barest ghost of a touch.");
 				else outputText("taint, the tips giving your sensitive skin only the barest ghost of a touch.");
 
 				outputText("\n\nShe explains, \"<i>I won’t help with that until you give me an answer.  Be honest with yourself - you don’t care about other girls at all.  You just came up here to fuck a goblin warrior.  Am I right?</i>\"");
 
 				outputText("\n\nYou try to answer ‘no’, but it trails off into a weak, ");
-				if(player.femininity < 40) outputText("almost ");
+				if (player.femininity < 40) outputText("almost ");
 				outputText("girlish moan.  The need thrumming through [eachCock] is telling you - no, demanding - that you do what she says and fuck her.  Like a beast in rut, you groan.  You look the short-but-stacked aggressor in her big, liquid blue eyes and make a decision entirely rationalized by your aching, drug-fueled needs.  Still pumping your shaft like a man possessed, you whimper, \"<i>Yes... I... I came to have sex with you.</i>\"");
 				outputText("\n\nVeridian skin caresses you just above");
 				if (player.hasSheath()) outputText(" the sheath");
@@ -94,60 +94,60 @@ package classes.Scenes.Monsters
 				outputText("\n\nToes smear your precum around your " + player.cockHead(x) + " before the warm soles drag them down the " + num2Text(Math.round(player.cocks[x].cockLength)) + " inches of your length, basting your " + cockDescript(x) + " in a mixture of goblin sweat and your personal juices.  You moan in delight, your sounds of rapture muted by the puffy, soaked lips that obscure your mouth, your cock spurting helpless trails of white submissively onto her feet.  Every brush of your lips is rewarded with caresses from the goblin’s tiny toes.  Every lick sends those squeezing, cum-lubed feet sliding up and down.  Every suck on her clit causes her pace to increase.  With encouragement like that, you cannot stop yourself from attending to the goblin’s syrupy box, worshipping her womanhood like a slave before an altar of a glorious god.");
 				outputText("\n\nThe short, stacked woman moves her legs to lay your cock on her left foot while the entirety of her right foot presses down on your " + cockDescript(x) + "’s underside, squeezing a thick flow of your pent-up jism from the cum-slit at its tip.  Her sole rocks up and down your length, milking dollop after dollop of jizz onto the goblin’s toes.  After a while, she switches her legs to let her now-soaked foot do the rest of the squeezing.  You happily squirt and squirm, dripping like a sieve but not yet achieving true release.  The goblin, having no such problem, cums noisily atop you, numerous times.  Each successive squirt of girl-fluid soaks your face more than the one before, and by the time she’s done, your " + hairDescript() + " is sticky with it, half-buried in a puddle of goblin-lust.  You’re so close.  So very close.  Just a little bit more... a few more strokes.");
 				outputText("\n\n\"<i>");
-				if(silly()) outputText("Stop right there, criminal scum.");
+				if (silly()) outputText("Stop right there, criminal scum.");
 				else outputText("Hold your horses.");
 				outputText("</i>\"  The emerald warrior glances over her shoulder at you and urges, \"<i>Come on now.  Fill me up.  Let out all that spunk I’ve been making build up ");
-				if(player.balls > 0) outputText("in your balls");
+				if (player.balls > 0) outputText("in your balls");
 				else outputText("inside you");
 				outputText(".  Pay your ‘fine’, and I might let you go.</i>\"");
-				if(player.balls > 0) outputText("  A hand squeezes your [sack] encouragingly");
+				if (player.balls > 0) outputText("  A hand squeezes your [sack] encouragingly");
 				else outputText("  Hands squeeze your [butt] encouragingly");
 				outputText(" as the goblin impales herself to the hilt with a sloppy squelch.  You orgasm, cumming hard inside her.  Your back arches, your body clenches, and rope after rope of seed sprays inside the goblin’s baby-hungry womb.  Her pussy seems to drink it down, wicking the jizz away from you just as fast as you can put it out.");
-				if(player.cumQ() >= 750) {
+				if (player.cumQ() >= 750) {
 					outputText("  Even her near-supernatural fertility can’t keep up with your fantastic virility, and soon the goblin is sporting a small bump on her belly.");
-					if(player.cumQ() >= 2000) outputText("  It swells to a rounded, pregnant dome by the time you finish.");
+					if (player.cumQ() >= 2000) outputText("  It swells to a rounded, pregnant dome by the time you finish.");
 				}
 				outputText("  All of your passion spends itself in the glorious climax, leaving you feeling like an empty, wasted husk.");
 				outputText("\n\nStanding up with your white goo dripping from her nethers, the goblin gives you a wink and disappears around a corner, leaving you alone to slumber.");
 			}
 			//ii. Lust Loss - Male - No Fit
-			else if(player.biggestCockArea() > monster.vaginalCapacity() && player.hasCock() && (!player.hasVagina() || rand(2) == 0))
+			else if (player.biggestCockArea() > monster.vaginalCapacity() && player.hasCock() && (!player.hasVagina() || rand(2) == 0))
 			{
 				x = player.biggestCockIndex();
 				outputText("You tear through your [armor] in a rush, anything to release [eachCock] from its hellish confinement.  You’re so aroused, so horny.  Any passing thoughts of modesty are immediately discarded and forgotten, washed away under the wave of your all-consuming lust as your fingers slide home around [oneCock] and begin to play with the turgid tool.  You immediately buck from the sensation of incredible, pent-up need, nearly cumming on the spot.  Looking up, you meet the emerald-skinned woman’s eyes pleadingly.");
 				outputText("\n\nThe warrior sighs and grumbles, \"<i>Another one with a fucking tree-trunk for a cock.</i>\"  She begrudgingly slips out of her straps, perky, dark-green nipples popping free from their confinement to jut proudly from her chest.  “The downside of being a goblin,” explains the athletic green-skinned beauty, \'<i>is that around a dick like that... a heaving, pulsating tower of cock-flesh like that... I’ve just gotta TRY it.</i>\"  Now nude, your captor saunters up, wide hips shaking from side to side with every step.  \"<i>Being a size-queen is suffering,</i>\" she finishes with a wry smile.");
 				outputText("\n\nYou watch her tirade with confused indifference, comprehending little beyond the petite slut’s desire to mount your member.  Tracing your hands over the pulsating veins on your " + cockDescript(x) + ", your body continues on autopilot, masturbating hard and fast for the emerald beauty as she climbs atop you.  Her juicy gash spreads over the bulge of your urethra as the goblin sinks down atop you, her legs splaying to the sides obscenely.  She commands, \"<i>Hands off bub.  You lost to a goblin, and that means you get to be a dad, whether you want to or not.</i>\"");
 				outputText("\n\nThe puffy emerald curtains drape your dick in elastic goblin pussy and brush your feverishly pumping fingers away.  Your captor lets a lewd moan slip through her lips as she begins grinding along your mammoth pole, dragging dark-hued genetalia back and forth on your massive dong.  A perky, hard little clit pops out of the top of the goblin’s glittery pussy-folds, visibly twitching in a display of supreme enjoyment.  Driven by your own insatiable desire, you shift under her, trying to slide your " + cockDescript(x) + " even faster through her pussy.");
-				if(player.biggestCockLength() > player.tallness/2) outputText("  Your incredibly long phallus blocks your view of the sultry goblin, and you never see the blow coming.");
+				if (player.biggestCockLength() > player.tallness/2) outputText("  Your incredibly long phallus blocks your view of the sultry goblin, and you never see the blow coming.");
 				outputText("  A none-too-tender swat connects with your ");
-				if(player.balls > 0) outputText("[balls]");
+				if (player.balls > 0) outputText("[balls]");
 				else outputText("cock");
 				outputText(" as the goblin grunts, \"<i>Stop squirming!</i>\"");
 				outputText("\n\nYou hesitantly obey, too startled by the sudden pain to risk movement again.  You’ll just have to wait until the short, stacked woman decides she’s had her fun and lets you get off.");
 
 				outputText("\n\n\"<i>Oh, you finally figured it out?  You’re just livestock to me - just a cum-nozzle for me to play with until I tire of you and put you up in a pen.  Maybe if your cum is thick enough, I’ll take you back and chain you up with our other animals.  Of course, if I did that you’d have to pump out enough spunk to keep a few dozen matrons pregnant,</i>\" says the viridian tart in between the lurid squelches of her flexible pussy on your dick.  No... if she takes you back, you’ll never get to do what you came here for!  She drags herself forward until she’s ");
-				if(player.biggestCockLength() < player.tallness/2) outputText("sitting on your face, the " + player.cockHead(x) + " of your maleness jutting against her drooling lips.");
+				if (player.biggestCockLength() < player.tallness/2) outputText("sitting on your face, the " + player.cockHead(x) + " of your maleness jutting against her drooling lips.");
 				else outputText("sitting on the ground ‘above’ you, your " + player.cockHead(x) + " reaching all the way up to spear her moist box, judging by what you’re feeling anyway.");
 
 				outputText("\n\nHer soft feet clasp your dick from each side, displaying a level of flexibility you would not have expected from the girl.  The supple soles slide and caress your length.  Her toes curl around to stroke the sensitive sides of your urethral bulge.  Even the hard knobs of her heels cradle your " + cockDescript(x) + " underside as she masturbates you with her feet.");
 
 				outputText("\n\nLubricated as they are by the copious vaginal drippings, the warrior's feet have an easy time bringing you to the very edge of orgasm.  Every squishy, delicate step she takes brings you closer and closer, and soon you are trembling beneath her sweat and fem-spunk lubricated soles.  ");
-				if(player.cumQ() >= 1000) outputText("You spurt huge dollops of pre-cum into her waiting twat thanks to your prodigious virility, though it is only a hint of things to come.  ");
-				else if(player.cumQ() >= 250) outputText("You drool a steady flow of pre-cum into her waiting twat, though it’s only a hint of things to come.  ");
+				if (player.cumQ() >= 1000) outputText("You spurt huge dollops of pre-cum into her waiting twat thanks to your prodigious virility, though it is only a hint of things to come.  ");
+				else if (player.cumQ() >= 250) outputText("You drool a steady flow of pre-cum into her waiting twat, though it’s only a hint of things to come.  ");
 				outputText("  \"<i>It won’t be long now.  Yeah, I’m a warrior, but I take care of myself too.  I keep these puppies nice and moisturized, just in case I need to use them on a freak-cock like yours.</i>\"");
 
 				outputText("\n\nYou try to grunt in protest, but it’s muffled by your ");
 
-				if(player.biggestCockLength() >= player.tallness/2) outputText("pulsating, iron-hard cock");
+				if (player.biggestCockLength() >= player.tallness/2) outputText("pulsating, iron-hard cock");
 				else outputText("captor’s pillowy asscheeks");
 				outputText(".  The goblin pulls hard with her feet, and her sloppy, stretched cunt just barely slurps in your entire " + player.cockHead(x) + ".  You shiver in delight from the tight, vise-like grip constricting your maleness, and nearly erupt from sensation when the little green minx manages to pull another inch inside herself.  She trembles and shudders, her feet suddenly going wild along your length.  The goblin’s cushy soles smear along your " + cockDescript(x) + " with the wild abandon of one lost to pleasure, her juices squirting out from her slit as she climaxes.  The onslaught of touches is too much for your straining member, and with a tight, hot clench, you feel your imminent release has arrived.  A fat bulge appears at the base of your shaft, coupled with an explosion of warm pleasure from within you.  It travels from your base all the way towards the tip, before disappearing into the goblin with a cunt-stretching squirt.  She moans out loud, clearly enjoying the sensation of being stuffed with cream, and the two of you sigh together while your dick finishes pumping ");
-				if(player.cumQ() <= 10) outputText("dribbles");
-				else if(player.cumQ() <= 100) outputText("squirts");
-				else if(player.cumQ() <= 250) outputText("thick wads");
-				else if(player.cumQ() <= 1750) outputText("waves of gooey spooge");
+				if (player.cumQ() <= 10) outputText("dribbles");
+				else if (player.cumQ() <= 100) outputText("squirts");
+				else if (player.cumQ() <= 250) outputText("thick wads");
+				else if (player.cumQ() <= 1750) outputText("waves of gooey spooge");
 				else outputText("rivers of cum");
 				outputText(" into the goblin’s box.");
-				if(player.cumQ() >= 2500) outputText(" Her belly rounds up nicely under your voluminous attentions.");
+				if (player.cumQ() >= 2500) outputText(" Her belly rounds up nicely under your voluminous attentions.");
 
 				outputText("\n\nThe green girl gives your " + cockDescript(x) + " a few last affectionate squeezes before she disentangles herself from you.  You slump down, still feeling a little turned on, and return to masturbating.  The goblin laughs, \"<i>A few more performances like that and I just might have to keep you.</i>\"  You play with yourself until you fall asleep, and even then, you dream of the feel of that silken pussy back on top of your dick.");
 			}
@@ -155,7 +155,7 @@ package classes.Scenes.Monsters
 			else {
 				outputText("Defeated by your own needs, your fingers dart to your [armor], rapidly disassembling it in your hurry to expose your aching, tender puss to the goblin’s eyes.  The warrior watches you with an unimpressed, bemused expression, though she remains rooted in place, her gaze locked onto you as you succumb to your lusts.  Knowing that you have an audience, you twist and contort your body to present your [chest] and [vagina] to the petite greenskin.  Glistening moisture forms on your exposed nether-lips, tempting you to slide your fingers into their slick warmth.  As if you could resist.");
 				outputText("\n\nYou begin masturbating, violently and unabashedly ravishing your form, forgetting entirely about the one who put you in such a state.  Parting your slippery flesh with questing digits, you lose yourself to the pleasant, warm explosions firing through your nerves with every caress of your honeypot.  At the same time, the fingers on your free hand ");
-				if(player.hasFuckableNipples()) outputText("piston in and out of your [nipple], masturbating it just as hard as the real thing.");
+				if (player.hasFuckableNipples()) outputText("piston in and out of your [nipple], masturbating it just as hard as the real thing.");
 				else outputText("squeeze around a taut nipple, twisting and pulling on it unthinkingly.");
 				outputText("  Your masturbatory reverie is interrupted sudden impacts against both your wrists.");
 
@@ -185,7 +185,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			outputText("The warrior falls to her feet, smashing her titties against the confines of her breastplate. She looks up at you and sniffles.")
 			//If cant rape or breastfeed
-			if (player.lust < 30 && player.findStatusAffect(StatusAffects.Feeder) < 0) {
+			if (player.lust < 30 && player.findStatusEffect(StatusEffects.Feeder) < 0) {
 				cleanupAfterCombat();
 				return;
 			}
@@ -223,7 +223,7 @@ package classes.Scenes.Monsters
 					spiderCondom = goblinCondomed;
 			}
 			//Breastfeed adds an option
-			if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+			if (player.findStatusEffect(StatusEffects.Feeder) >= 0) {
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
@@ -256,8 +256,8 @@ package classes.Scenes.Monsters
 			//set lust to 0, increase sensitivity slightly
 			dynStats("lib", .2, "lus", -50);
 			//You've now been milked, reset the timer for that
-			player.addStatusValue(StatusAffects.Feeder,1,1);
-			player.changeStatusValue(StatusAffects.Feeder,2,0);
+			player.addStatusValue(StatusEffects.Feeder,1,1);
+			player.changeStatusValue(StatusEffects.Feeder,2,0);
 			cleanupAfterCombat();
 		}
 		private function gobboButtSecks():void

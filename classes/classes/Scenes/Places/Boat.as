@@ -13,20 +13,20 @@ package classes.Scenes.Places
 	{
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:MaraeScene = new MaraeScene();
-		public function Boat()
-		{
-		}
+		
+		public function Boat() { }
+		
 		public function discoverBoat():void {
-			player.createStatusAffect(StatusAffects.BoatDiscovery,0,0,0,0);
+			player.createStatusEffect(StatusEffects.BoatDiscovery,0,0,0,0);
 			outputText("You journey around the lake, seeking demons to fight", true);
-			if(player.cor > 60) outputText(" or fuck", false);
+			if (player.cor > 60) outputText(" or fuck", false);
 			outputText(".  The air is fresh, and the grass is cool and soft under your feet.   Soft waves lap against the muddy sand of the lake-shore, as if radiating outward from the lake.   You pass around a few bushes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n", false);
 			outputText("<b>You have discovered the lake boat!</b>\n(You may return and use the boat to explore the lake's interior by using the 'places' menu.)", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function boatExplore():void
 		{
-			player.addStatusValue(StatusAffects.BoatDiscovery, 1, 1);
+			player.addStatusValue(StatusEffects.BoatDiscovery, 1, 1);
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();

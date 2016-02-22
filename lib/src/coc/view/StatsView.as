@@ -20,7 +20,7 @@ package coc.view {
         public function StatsView(mainView:MovieClip/*, model:GameModel*/) {
             super();
 
-            if(! mainView) {
+            if (! mainView) {
                 return;
             }
 
@@ -198,10 +198,10 @@ package coc.view {
             for each(statName in allStats) {
                 oldStatName = _oldStatNameFor(statName);
 
-                if(this.model.player[statName] > this.model.oldStats[oldStatName]) {
+                if (this.model.player[statName] > this.model.oldStats[oldStatName]) {
                     this.showStatUp(statName);
                 }
-                if(this.model.player[statName] < this.model.oldStats[oldStatName]) {
+                if (this.model.player[statName] < this.model.oldStats[oldStatName]) {
                     this.showStatDown(statName);
                 }
             }

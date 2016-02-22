@@ -125,7 +125,7 @@ public function debugPane():void
 public function toggleHaltSettings():void
 {
 	//toggle debug
-	if(CoC_Settings.haltOnErrors)
+	if (CoC_Settings.haltOnErrors)
 		CoC_Settings.haltOnErrors = false;
 	else
 		CoC_Settings.haltOnErrors = true;

@@ -92,19 +92,19 @@
 			this.special1 = selfCorruption;
 			//Create jojo sex attributes
 			//Variations based on jojo's corruption.
-			if(game.monk == 3) {
+			if (game.monk == 3) {
 				this.lust += 30;
 				this.cocks[0].cockThickness += .2;
 				this.cocks[0].cockLength += 1.5;
-				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 2;
+				if (player.gender == 1 || player.gender == 3) this.ass.analLooseness = 2;
 			}
-			if(game.monk == 4) {
+			if (game.monk == 4) {
 				this.lust += 40;
 				this.cocks[0].cockThickness += .5;
 				this.cocks[0].cockLength += 3.5;
-				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 3;
+				if (player.gender == 1 || player.gender == 3) this.ass.analLooseness = 3;
 			}
-			if(game.monk == 5) {
+			if (game.monk == 5) {
 				this.lust += 50;
 				this.cocks[0].cockThickness += 1;
 				this.cocks[0].cockLength += 5.5;
@@ -112,7 +112,7 @@
 				this.tou += 30;
 				this.cor += 10;
 				this.HP += 60;
-				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 4;
+				if (player.gender == 1 || player.gender == 3) this.ass.analLooseness = 4;
 				this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";
 			}
 			this.drop = NO_DROP;

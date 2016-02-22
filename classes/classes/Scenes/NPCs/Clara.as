@@ -19,24 +19,24 @@
 		protected function claraDrugAttack():void {
 			var temp2:Number = rand(2);
 			var color:String = "";
-			if(temp2 == 0) color = "red";
-			if(temp2 == 1) color = "black";
+			if (temp2 == 0) color = "red";
+			if (temp2 == 1) color = "black";
 			//Throw offensive potions at the player
 			outputText("Clara suddenly snatches something from a pouch at her belt. \"<i>Try this, little cutie!</i>\" She snarls, and throws a vial of potion at you.", false);
 			//Dodge chance!
-			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if ((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n", false);		
 			}
 			else
 			{
 				//Get hit!
 				//Temporary heat
-				if(color == "red") {
+				if (color == "red") {
 					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-					if(player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat,0,0,0,0);
+					if (player.findStatusEffect(StatusEffects.TemporaryHeat) < 0) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
 				}
 				//Increase fatigue
-				if(color == "black") {
+				if (color == "black") {
 					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
 					game.fatigue(10 + rand(25));
 				}
@@ -48,8 +48,8 @@
 		protected function claraTeaseAttack():void
 		{
 			//[cocked PCs only] 
-			if(rand(3) == 0) outputText("Clara hesitates, then lifts up her dress and shows you her womanhood.  Then she slowly utters, \"<i>You know, I’m still a virgin.  You’d be the first thing to ever enter inside this hole, something that Marble never could have offered you.</i>\"  What would it be like, you wonder for a moment, before catching yourself and trying to focus back on the fight.");
-			else if(rand(2) == 0) outputText("Clara seems to relax for a moment and bounces her breasts in her hands.  \"<i>Come on, you know how good it is to drink cow-girl milk, just give up!</i>\" she coos.  Despite yourself, you can’t help but remember what it was like, and find yourself becoming aroused.");
+			if (rand(3) == 0) outputText("Clara hesitates, then lifts up her dress and shows you her womanhood.  Then she slowly utters, \"<i>You know, I’m still a virgin.  You’d be the first thing to ever enter inside this hole, something that Marble never could have offered you.</i>\"  What would it be like, you wonder for a moment, before catching yourself and trying to focus back on the fight.");
+			else if (rand(2) == 0) outputText("Clara seems to relax for a moment and bounces her breasts in her hands.  \"<i>Come on, you know how good it is to drink cow-girl milk, just give up!</i>\" she coos.  Despite yourself, you can’t help but remember what it was like, and find yourself becoming aroused.");
 			else outputText("Instead of attacking, Clara runs her hands up and down her body, emphasizing all the curves it has.  \"<i>You were made to be the milk slave of this, stop fighting it!</i>\" she says almost exasperated.  Even so, you find your gaze lingering on those curves against your will.");
 			outputText("\n");
 			game.dynStats("lus",5+player.lib/20);
@@ -61,10 +61,10 @@
 		{
 			outputText("Clara glares at you, clearly being worn down.  Then strange lights start dancing around her hand and she points it in your direction.");
 			//Successful: 
-			if(player.inte / 5 + rand(20) + 1 < 14)
+			if (player.inte / 5 + rand(20) + 1 < 14)
 			{
 				outputText("\nA bright flash of light erupts in your face, blinding you!  You desperately blink and rub your eyes while Clara cackles with glee.");
-				player.createStatusAffect(StatusAffects.Blind,1,0,0,0);
+				player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 			}
 			else outputText("\nYou manage to close your eyes just in time to avoid being blinded by the bright flash of light that erupts in your face!  Clara curses when she see's you're unaffected by her magic.");
 			combatRoundOver();
@@ -72,9 +72,9 @@
 		public function claraGropesBlindPCs():void
 		{
 			//Clara gropes the PC while they're blinded.  Damage is based on corruption + sensitivity.
-			if(player.hasCock() && (!player.hasVagina() || rand(2) == 0)) outputText("Suddenly Clara wraps an arm around you, and sticks a hand into your " + player.armorName + "!  She is able to give your " + multiCockDescriptLight + " a good fondle before you can push her away.  \"<i>Admit it - I make you soo hard, don't I?</i>\" she taunts you behind your dazzled vision.");
+			if (player.hasCock() && (!player.hasVagina() || rand(2) == 0)) outputText("Suddenly Clara wraps an arm around you, and sticks a hand into your " + player.armorName + "!  She is able to give your " + multiCockDescriptLight + " a good fondle before you can push her away.  \"<i>Admit it - I make you soo hard, don't I?</i>\" she taunts you behind your dazzled vision.");
 			//Vagina: 
-			else if(player.hasVagina()) outputText("A sudden rush of Clara's hoofs clopping is the only warning you get before her attack comes, and you try to bring up your guard, only for her to deftly move past your defense and stick a hand into your " + player.armorName + "!  She manages to worm her way to your [vagina] and pinches your [clit] before you can push her back out!  \"<i>Hmm, yeah, you're soo wet for me.</i>\" she taunts you behind your dazzled vision.");
+			else if (player.hasVagina()) outputText("A sudden rush of Clara's hoofs clopping is the only warning you get before her attack comes, and you try to bring up your guard, only for her to deftly move past your defense and stick a hand into your " + player.armorName + "!  She manages to worm her way to your [vagina] and pinches your [clit] before you can push her back out!  \"<i>Hmm, yeah, you're soo wet for me.</i>\" she taunts you behind your dazzled vision.");
 			//Bum: 
 			else outputText("Thanks to Clara robbing you of your sight, you lose track of her.  She takes advantage of this, and grabs you from behind, and rubs her considerable curvy cans against your undefended back!  You manage to get her off you after a moment, but not before she gives your [ass] a smack.  \"<i>Everyone will be soo much happier when yoou finally stop fighting me!</i>\" she taunts you behind your dazzled vision.");
 			game.dynStats("lus",7+player.lib/15);
@@ -89,15 +89,15 @@
 		}
 		override protected function performCombatAction():void
 		{
-			if(player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) >= 0 && player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10) 
+			if (player.findStatusEffect(StatusEffects.ClaraFoughtInCamp) >= 0 && player.statusEffectv1(StatusEffects.ClaraCombatRounds) >= 10) 
 			{
 				HP = 0;
 				combatRoundOver();
 			}
-			if(HP < 50 && rand(2) == 0) {
+			if (HP < 50 && rand(2) == 0) {
 				notMurbleEnjoysTheLacticAcid();
 			}
-			else if(player.findStatusAffect(StatusAffects.Blind) >= 0)
+			else if (player.findStatusEffect(StatusEffects.Blind) >= 0)
 			{
 				claraGropesBlindPCs();
 			}
@@ -108,20 +108,20 @@
 				trace("ACTION SELECTED: " + action);
 				actions[action]();
 			}
-			if(player.findStatusAffect(StatusAffects.ClaraCombatRounds) < 0) player.createStatusAffect(StatusAffects.ClaraCombatRounds,1,0,0,0);
-			else player.addStatusValue(StatusAffects.ClaraCombatRounds,1,1);
+			if (player.findStatusEffect(StatusEffects.ClaraCombatRounds) < 0) player.createStatusEffect(StatusEffects.ClaraCombatRounds,1,0,0,0);
+			else player.addStatusValue(StatusEffects.ClaraCombatRounds,1,1);
 
 			//Bonus damage if not in camp
-			if(HP > 0 && lust < 100 && player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) < 0) claraBonusBaseLustDamage();
+			if (HP > 0 && lust < 100 && player.findStatusEffect(StatusEffects.ClaraFoughtInCamp) < 0) claraBonusBaseLustDamage();
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
 			//PC wins via turn count
-			if(player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) >= 0 && player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10) {}
+			if (player.findStatusEffect(StatusEffects.ClaraFoughtInCamp) >= 0 && player.statusEffectv1(StatusEffects.ClaraCombatRounds) >= 10) {}
 			else {
 				clearOutput();
 				//PC wins via health
-				if(HP <= 0) outputText("The pissed off cowgirl finally collapses to the ground.  She tries to stand up again, but finds that she can’t.  \"<i>Noo!</i>\" she cries out in frustration, \"<i>You were the perfect slave!  We were meant to be toogether!</i>\"\n\n");
+				if (HP <= 0) outputText("The pissed off cowgirl finally collapses to the ground.  She tries to stand up again, but finds that she can’t.  \"<i>Noo!</i>\" she cries out in frustration, \"<i>You were the perfect slave!  We were meant to be toogether!</i>\"\n\n");
 				//PC wins via lust
 				else outputText("The fury and anger finally give out to the overwhelming lust that you’ve help Clara feel.  She can’t fight anymore, and falls onto her backside.  She starts feeling herself up, and desperately asks you to fuck her.\n\n");
 			}

@@ -56,12 +56,12 @@ public function urtaBusy():Boolean {
 	return (telAdre.edryn.pregnancy.type == PregnancyStore.PREGNANCY_TAOTH || flags[kFLAGS.URTA_QUEST_STATUS] == -1);
 }
 public function isUrta():Boolean {
-	if(flags[kFLAGS.URTA_QUEST_STATUS] > 0 && flags[kFLAGS.URTA_QUEST_STATUS] < 1) {
-		if(player.short == "Urta") {
-			if(player.hasCock()) {
-				if(player.cocks[0].cockLength == 20 && player.cocks[0].cockThickness == 3) {
-					if(player.hasVagina()) {
-						if(player.breastRows[0].breastRating == 7) return true;
+	if (flags[kFLAGS.URTA_QUEST_STATUS] > 0 && flags[kFLAGS.URTA_QUEST_STATUS] < 1) {
+		if (player.short == "Urta") {
+			if (player.hasCock()) {
+				if (player.cocks[0].cockLength == 20 && player.cocks[0].cockThickness == 3) {
+					if (player.hasVagina()) {
+						if (player.breastRows[0].breastRating == 7) return true;
 					}
 				}
 			}
@@ -112,7 +112,7 @@ private function comfortUrtaAfterFamFamTalk():void {
 	outputText("You lean over the table and take Urta's hands in your own.  Her downy fur ruffles as you give her a comforting squeeze, the tension oozing from her body at your touch.  Urta sniffles a little and wipes her moistened cheek on her shoulder, muttering, \"<i>Oh, " + player.short + ", you're too good for me.</i>\"  She pulls back and gives you a knowing smile.  \"<i>You don't have to worry, really.  You turned this down on her luck lush into a happy woman.</i>\"");
 
 	outputText("\n\nUrta pauses then gives you a wry smile as her voice turns husky.  \"<i>Or should I say you've made me a happy herm?  A VERY happy herm.</i>\"  A cylindrical distension begins to rise up her dress.  The sheer fabric strains, but contains it for now.  The tip of the distortion disappears into the foxy fox's ample bust.  You can see the flare peaking out of that simple valley, already oozing slightly.  Urta follows your gaze down and smirks.  \"<i>You know, I used to hate having this happen,</i>\" she says as she stands up and stretches, showing the bulge off to you and anyone else lucky enough to glance in her direction.  Sliding into your arms, the vixen plants a ");
-	if(urta.urtaDrunk()) outputText("boozy ");
+	if (urta.urtaDrunk()) outputText("boozy ");
 	outputText("kiss on your lips as she hugs you tight - tight enough that you feel every vein through the concealing silk of her outfit.  \"<i>I'm a lucky girl.</i>\"");
 
 	outputText("\n\nYou return the hug with every fiber of your being, holding her tight.  Nuzzling at your neck, Urta lets her head come to rest on your shoulder.  Her eyes slowly close as she says, \"<i>Just... hold me, " + player.short + ".</I>\"  As if you were going to do anything else!  You cradle the abused vixen for as long as she needs, which turns out to be long enough for her throbbing erection to actually recede, forgotten for the time being.");
@@ -153,7 +153,7 @@ private function whoCaresUrtaAfterFamFamTalk():void {
 	outputText("\n\nYou tell her that you asked about her parents, not a summary of every misfortune to ever befall her.  Then, you leave, sending a barmaid her way with a drink.  The whiny cunt will likely need it to get over her bruised pride.  You doubt it will stop her from jumping your bones the next time you visit.  Her libido's too high for her to resist.");
 	urta.urtaLove(-10);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] -= 5;
-	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 1) flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 1;
+	if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 1) flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -166,8 +166,8 @@ public function infertilityQuestions():void {
 	outputText("\n\nHow can that be?");
 	outputText("\n\nSeeing your look, Urta sighs, \"<i>I really don't know.  A crazy birth defect?  A curse?  The doctors I spoke with told me that my body doesn't seem to fully accept my penis, and it's causing an imbalance through my whole system.  I suppose it might be to blame for my sex drive... but I haven't heard any complaints from you.</i>\"  She gives you a conspiratorial wink.");
 	outputText("\n\nWell, ");
-	if(player.cor < 33) outputText("you have nothing to complain about there.  Your sexual romps with Urta are always a delight.");
-	else if(player.cor < 66) outputText("she's definitely a handful in the sack, you've got to give her that.");
+	if (player.cor < 33) outputText("you have nothing to complain about there.  Your sexual romps with Urta are always a delight.");
+	else if (player.cor < 66) outputText("she's definitely a handful in the sack, you've got to give her that.");
 	else outputText("she's a willing fuck, so no complaints there.  Now if she would just get on with it - if you wanted to flirt, you would've instigated it.");
 	outputText("\n\nThe prick-vixen catches herself wandering off topic and forcibly drags herself back to the discussion.  \"<i>Anyway, they couldn't do anything for me.  They don't know how to fix me, and that's that.  I'm an infertile, horse-cock endowed herm bitch.</i>\"  She smirks ruefully, \"<i>All of that has made me what I am today - A fierce brawler, a citizen, a captain, and the luckiest herm this side of Lake Marae.  After all, I have you for a lover.</i>\" The gray-furred vulpine girl taps her chin in thought, \"<i>I still wonder if the mages of the Covenant could find anything with their magic, though.  Still, they've enough to worry about with maintaining the wards to keep the demons out.</i>\"");
 	outputText("\n\nMaybe they could help.  Urta has to have some kind of connections she can lean on as guard captain, doesn't she?  You say as much.");
@@ -260,7 +260,7 @@ public function startUrtaQuest():void {
 	player.hipRating = 12;
 	player.buttRating = 12;
 	player.ass.analLooseness = 2;
-	player.createStatusAffect(StatusAffects.BonusVCapacity,58,0,0,0);
+	player.createStatusEffect(StatusEffects.BonusVCapacity,58,0,0,0);
 	player.createVagina();
 	player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
 	player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
@@ -440,7 +440,7 @@ private function getHelBangedAsUrta():void {
 	outputText("\n\nMai blushes a bright scarlet, causing her sister and the redhead to burst out laughing. \"<i>Oh, hey wait! I recognize you!</i>\" Helia says with a snap of her fingers. \"<i>" + player2.short + "'s mentioned you! You're Urta, right? Captain of the Guard Urta?</i>\"");
 
 	outputText("\n\nShe knows " + player2.short + "? You quickly nod as your mind quickly reaches its inevitable conclusions. Well, you suppose you can't judge... you haven't exactly been monogamous, either, after all. It isn't fair to expect that from " + player2.mf("him","her") + ", is it?  Still, you shift awkwardly in your seat, nursing your new drink as the scaly warrior girl starts recounting the fights she and " + player2.short + " used to have");
-	if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] > 0) outputText(", and even how they worked together to bring down an evil sorceress and save her father. Your heart swells with pride as she recounts " + player2.short + " doing so a noble thing, and for a moment you know you made the right pick in a lover..");
+	if (flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] > 0) outputText(", and even how they worked together to bring down an evil sorceress and save her father. Your heart swells with pride as she recounts " + player2.short + " doing so a noble thing, and for a moment you know you made the right pick in a lover..");
 	outputText(".  You sit and listen for a long few minutes, sipping at the beer until the liquid courage starts to work its wonders, giving you a little tingle... and helping to open you up, too.  Soon, you're drawn into the conversation, joking and teasing with the other girls as if you'd been friends for ages.");
 
 	outputText("\n\nEventually, though, a particularly lewd joke from the salamander causes your old \"<i>friend</i>\" to remind you of your quest, hitting the underside of the table with an audible THUMP! that shocks the others. They look at you with questioning eyes.... It's time to either hit the road or get some much-needed relief, because this boner isn't going anywhere without your help.");
@@ -491,9 +491,9 @@ private function fuckHelAndKitsunesAsUrta():void {
 
 	outputText("\n\n\"<i>Oooooh yeah, that's a good cock,</i>\" she laughs, reaching down to stroke your rock-hard member.");
 	//If PC has a cock:
-	if(player2.hasCock()) {
+	if (player2.hasCock()) {
 		outputText("  \"<i>I've got a better one ");
-		if(helFollower.followerHel()) outputText("at home");
+		if (helFollower.followerHel()) outputText("at home");
 		else outputText("at my beck and call");
 		outputText(", you know...  But we've got that in common, don't we?  Mmm, maybe we can share it some day?  A horny girl like you'd just love that, woudn't you? Getting to worship " + player2.mf("his","her") + " cock beside me while my tail fills your ass so full you scream....</i>");
 	}
@@ -523,32 +523,32 @@ private function visitPCPreUrtaQuest(truth:Boolean):void {
 	clearOutput();
 	outputText("You set out for " + player2.short + "'s camp, known to you thanks to the amazing efforts of your scouts.  Behind you, the tower slowly shrinks, less imposing now that you've finished that step on your journey.   Ahead lies uncertainty and struggle.  You know you'll likely wind up fighting the corrupted denizens of the lost regions of Mareth in your travels, and it's likely at least a demon or two will get in your way.  Still, as you exit the city gates, you give your home a forlorn gaze.  At least there's one bright patch ahead - your lover's camp.");
 	outputText("\n\nThe sun has set by the time you get there, but the darkness conceals your movements thanks to your natural fur color.  ");
-	if(player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 && player.findStatusAffect(StatusAffects.PureCampJojo) >= 0)
+	if (player.findStatusEffect(StatusEffects.JojoNightWatch) >= 0 && player.findStatusEffect(StatusEffects.PureCampJojo) >= 0)
 		outputText("You easily sneak past a mouse monk.  He's looking towards the sky mostly, perhaps watching for imps.  ");
-	if(flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.ANEMONE_KID] > 0)
+	if (flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.ANEMONE_KID] > 0)
 		outputText("A confused-looking anemone with a " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " nearly sees you, but you duck around a rock and escape her notice.  ");
-	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.HOLLI_DEFENSE_ON] > 0)
+	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.HOLLI_DEFENSE_ON] > 0)
 		outputText("A dangling tentacle nearly hits you in the dark.  You roll aside at the last moment, looking up to see dozens of the things idly dangling around.  When did this camp get such a corrupt tree in it?  You suppose it must have its uses in defending against foes from the sky...  ");
-	if(camp.companionsCount() > 2) outputText("There are a number of people in the camp, but you avoid them as you head towards " + player2.short + "'s bunk.  ");
+	if (camp.companionsCount() > 2) outputText("There are a number of people in the camp, but you avoid them as you head towards " + player2.short + "'s bunk.  ");
 	outputText("The camp looks pretty nice actually.  Living out here must have given " + player2.mf("him","her") + " plenty of time to improve it.");
 	outputText("\n\n" + player2.short + " is slumbering fitfully on " + player2.mf("his","her") + " blanket.  " + player2.mf("He","She") + " looks so cute, sleeping like this.  It's amazing how " + player2.mf("he","she") + " has the courage to stay out here, day after day, month after month, guarding this portal to keep " + player2.mf("his","her") + " village safe");
-	if(flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(", no matter why " + player2.mf("he","she") + " was sent here");
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(", no matter why " + player2.mf("he","she") + " was sent here");
 	outputText(".  You gently press on " + player2.mf("his","her") + " shoulder and shake " + player2.mf("him","her") + " awake, holding your index finger across " + player2.mf("his","her") + " lips to shush " + player2.mf("him","her") + " to silence.  " + player2.mf("His","Her") + " eyes snap open, worried until " + player2.mf("he","she") + " recognizes you.  \"<i>What are you doing here?</i>\" " + player2.mf("he","she") + " asks in a whisper.");
 
 	//{TELL HIM ZE TRUFF}
-	if(truth)
+	if (truth)
 	{
 		outputText("\n\nYou sit down across from " + player2.mf("him","her") + ", helping " + player2.mf("him","her") + " up to a sitting position as you explain.  " + player2.mf("His","Her") + " eyes widen as " + player2.mf("he","she") + " takes in the news, clearly disbelieving your explanation at first.  " + player2.mf("He","She") + " listens all the same, gradually coming to accept your explanation for truth.  When you tell " + player2.mf("him","her") + " you have to leave, alone, to continue your journey, ");
-		if(player2.cor < 33) outputText(player2.mf("he","she") + " argues that " + player2.mf("he","she") + " should come anyway.  You tell " + player2.mf("him","her") + " no, firmly, even though it breaks your heart.");
-		else if(player2.cor < 66) outputText(player2.mf("he","she") + " nods understandingly, not surprised that you have to handle this quest alone.  The two of you are alike in that way - each with their own burden to bear.");
+		if (player2.cor < 33) outputText(player2.mf("he","she") + " argues that " + player2.mf("he","she") + " should come anyway.  You tell " + player2.mf("him","her") + " no, firmly, even though it breaks your heart.");
+		else if (player2.cor < 66) outputText(player2.mf("he","she") + " nods understandingly, not surprised that you have to handle this quest alone.  The two of you are alike in that way - each with their own burden to bear.");
 		else outputText(player2.mf("he","she") + " nods dismissively, trusting you to handle it alone you suppose.  " + player2.short + " always was hard like that, even though " + player2.mf("he","she") + " clearly likes you.");
 		outputText("  You hold on to " + player2.mf("him","her") + ", for comfort, dreading the long day ahead.  " + player2.mf("He","She") + " pats your back comfortingly as you cry, and when you break from the hug, " + player2.mf("he","she") + "'s looking at you expectantly.");
-		if(flags[kFLAGS.SLEEP_WITH] != "" && flags[kFLAGS.SLEEP_WITH] != 0) outputText("  " + player2.short + " suggests the two of you move off, so as not to wake " + flags[kFLAGS.SLEEP_WITH] + " in the night.");
+		if (flags[kFLAGS.SLEEP_WITH] != "" && flags[kFLAGS.SLEEP_WITH] != 0) outputText("  " + player2.short + " suggests the two of you move off, so as not to wake " + flags[kFLAGS.SLEEP_WITH] + " in the night.");
 	}
 	//{LIE}
 	else {
 		outputText("\n\nYou sit down across from " + player2.mf("him","her") + ", helping " + player2.mf("him","her") + " up to a sitting position as you tell " + player2.mf("him","her") + " that you just wanted to sneak away for a little while, to be with " + player2.mf("him","her") + " as proper lovers, for the night.  " + player2.short + " smiles a little at that, looking up at you expectantly.  Since you came all this way, you must have something in mind for how you plan to stay the night with " + player2.mf("him","her") + ".");
-		if(flags[kFLAGS.SLEEP_WITH] != "" && flags[kFLAGS.SLEEP_WITH] != 0) outputText("  " + player2.short + " suggests the two of you move off, so as not to wake " + flags[kFLAGS.SLEEP_WITH] + " in the night.");
+		if (flags[kFLAGS.SLEEP_WITH] != "" && flags[kFLAGS.SLEEP_WITH] != 0) outputText("  " + player2.short + " suggests the two of you move off, so as not to wake " + flags[kFLAGS.SLEEP_WITH] + " in the night.");
 	}
 	//[SEX OPTIONS GO HURRRR]
 	//Snuggle, put cock in cocked PC ass, ride PC cock vaginally, Fuck Girlvag with yer dick, maybe a sixtynine?
@@ -556,13 +556,13 @@ private function visitPCPreUrtaQuest(truth:Boolean):void {
 	menu();
 	addButton(0,"Cuddle",snuggleWithUrta, truth);
 	//Put Urta dick in girl PC's vag(C)*
-	if(player2.hasVagina())
+	if (player2.hasVagina())
 		addButton(1, buttonFuckVagText, putUrtasWangInPCsCunt, truth);
 	//Put a PC dick in Urta's vag(C)*
-	if(player2.cockThatFits(urta.urtaCapacity()) >= 0)
+	if (player2.cockThatFits(urta.urtaCapacity()) >= 0)
 		addButton(2,"Ride Dick",putAPCDickInUrtaCoochies, truth);
 	//Put Urta dick in the PC's asshole [Cocked PCs](C)*
-	if(player2.hasCock())
+	if (player2.hasCock())
 		addButton(3,"Fuck Ass",urtaPutsHerDickInPCsWithDicks, truth);
 	//PC blows Urta(C)*
 	addButton(4,"Get BJ",pcBlowsUrtasDong, truth);
@@ -575,23 +575,23 @@ private function urtaPutsHerDickInPCsWithDicks(truth:Boolean):void {
 	outputText("You push " + player2.short + " down onto the ground, glad that " + player2.mf("he","she") + "'s not wearing " + player2.mf("his","her") + " gear right now.  Unfortunately, you've still got to get out of yours, an action made all the more difficult by the heat welling up in your groin.  Your rebellious cock is already half-stiff, lifting the hem of your armored skirt away from your thighs.  Fingers scrabbling, you struggle with your chestpiece's bindings.  Your nipples stiffen, scraping against the inside of it while you fight to remove it.  You straddle " + player2.short + "'s waist to hold " + player2.mf("him","her") + " down while you work the bothersome, restraining material free, practically grinding your semi-rigid dick against " + player2.mf("his","hers") + " in excitement.  " + player2.mf("His","Her") + " hands begin aiding you in your task, allowing your tightly compressed breasts to finally, happily breathe.   They jiggle as they flop free, and to your delight, " + player2.short + "'s eyes lock on them.");
 	outputText("\n\nGrabbing hold of " + player2.mf("his","her") + " head, you pull " + player2.short + "'s lips to one of your puckered nipples.  " + player2.mf("He","She") + " swallows it immediately, grabbing hold of your tits to squeeze and fondle them, openly enjoying the fruits of your womanly shape.  Tingles of electric enjoyment fire from your unrestrained areola when " + player2.mf("he","she") + " squeezes down on the other with " + player2.mf("his","her") + " fingers, expertly twisting the little nub around to give you the maximum pleasure.  In no time flat, you're humping " + player2.mf("his","her") + " " + player2.cockDescript(player2.biggestCockIndex()) + " openly, letting " + player2.mf("him","her") + " guide your motions with deft, controlling touches to your onyx nipples.  Your pre-cum bubbles out unhindered, the thick gobs swaying and splattering on " + player2.mf("his","her") + " belly and rigid tool, quickly lubricating the phallic embrace into a sticky, hot mess.");
 	outputText("\n\n" + player2.short + " releases your tender tits after a few particularly sloppy thrusts.  You can feel " + player2.mf("his","her") + " " + player2.cockDescript(player2.biggestCockIndex()) + " releasing some of its own pre-cum onto your cock's thick spooge-vein, and " + player2.mf("his","her") + " hands fall to grab at the blanket below, unintentionally clenching at the waves of pleasure you're giving " + player2.mf("him","her") + ".  You bend now, onto all fours");
-	if(player2.tallness < 60) outputText(" and let your tits hang over " + player2.mf("his","her") + " " + player2.face());
-	else if(player2.tallness < 76) outputText(" and let your tits swing between you");
-	else if(player2.tallness < 84) outputText(" and let your tits smash into " + player2.mf("his","her"));
+	if (player2.tallness < 60) outputText(" and let your tits hang over " + player2.mf("his","her") + " " + player2.face());
+	else if (player2.tallness < 76) outputText(" and let your tits swing between you");
+	else if (player2.tallness < 84) outputText(" and let your tits smash into " + player2.mf("his","her"));
 	else outputText(" and let your tits sway over " + player2.mf("his","her") + " belly");
 	outputText(", giving " + player2.mf("him","her") + " something to enjoy while you begin to shift position, dragging your dick down " + player2.mf("his","her") + " length");
-	if(player2.hasVagina()) outputText(", past " + player2.mf("his","her") + " pussy,");
+	if (player2.hasVagina()) outputText(", past " + player2.mf("his","her") + " pussy,");
 	outputText(" and towards the prize you've been wanting since you got here - " + player2.mf("his","her") + " asshole.");
 	outputText("\n\nYou glance up at " + player2.mf("his","her") + " face when your oozing, fat cock-tip presses into " + player2.mf("his","her") + " sphincter, looking for assent.  " + player2.mf("He","She") + " gives it a moment later, moaning and rubbing " + player2.mf("his","her") + " butt back into you, butthole clenching and relaxing a little more with every contact.");
-	if(player2.analCapacity() > 70) outputText("  Thankfully, " + player2.mf("he","she") + "'s nice and stretched from all the butt-fucking " + player2.mf("he","she") + "'s had to take, and you easily pop inside.  It feels so good that your flare grows wider, pulling you deeper into that welcoming, tight anal heat.");
-	else if(player2.analCapacity() > 50) outputText("  Thankfully, " + player2.mf("he","she") + "'s got plenty of give in " + player2.mf("his","her") + " back-door, and you pop inside after applying a little more pressure.  It feels so good that your flare grows wider, slowing your descent into that tight, anal heat.");
+	if (player2.analCapacity() > 70) outputText("  Thankfully, " + player2.mf("he","she") + "'s nice and stretched from all the butt-fucking " + player2.mf("he","she") + "'s had to take, and you easily pop inside.  It feels so good that your flare grows wider, pulling you deeper into that welcoming, tight anal heat.");
+	else if (player2.analCapacity() > 50) outputText("  Thankfully, " + player2.mf("he","she") + "'s got plenty of give in " + player2.mf("his","her") + " back-door, and you pop inside after applying a little more pressure.  It feels so good that your flare grows wider, slowing your descent into that tight, anal heat.");
 	else outputText("  Unfortunately, there's not much give in " + player2.mf("his","her") + " back-door, and you have to sit there smearing pre over it, again and again, each time pushing a little harder.  After what feels like the fiftieth try, you finally pop your fat flare into " + player2.mf("his","her") + " rectum, the tight anal heat causing you to flare from the force of " + player2.mf("his","her") + " pressure.  Slowly, you push inch after throbbing inch of your swollen, stallion-like erection into " + player2.mf("his","her") + " asshole.");
-	if(player2.ass.analLooseness == 0) {
+	if (player2.ass.analLooseness == 0) {
 		outputText("  <b>You've taken " + player2.mf("his","her") + " anal virginity!</b>");
 		player2.ass.analLooseness = 1;
 	}
 	outputText("  " + player2.short + " writhes as " + player2.mf("he","she") + " takes you, " + player2.mf("his","her") + " hips lifting slightly off the ground to make sure you grind into " + player2.mf("his","her") + " prostate.  A long strand of clear excitement oozes from " + player2.mf("his","her") + " tip");
-	if(player2.cockTotal() > 1) outputText("s");
+	if (player2.cockTotal() > 1) outputText("s");
 	outputText(", thick, viscous, and clinging to the drying mess you left behind.");
 
 	outputText("\n\nGrabbing hold of you by the scruff of your neck, " + player2.short + " pulls you down into a kiss.  You passionately french " + player2.mf("him","her") + " and try your hardest to time your thrusts to each plunging slurp your tongue makes into " + player2.mf("his","her") + " oral cavity.  Together, you make love, mouth to mouth and cock to ass.  " + player2.mf("His","Her") + " dark pucker wrings at your horse-cock, the tight muscles at " + player2.mf("his","her") + " entrance seizing every time your sheath tickles up against them.  Groaning into " + player2.mf("his","her") + " mouth, you lose whatever control you had and let your equine dong take over, helpless to resist your overpowering lust.  You pound " + player2.mf("his","her") + " clenching anus hard and fast, breaking the kiss as you moan, forgetting how to do anything but hold your body in position and drive your thighs back and forth, back and forth-and-back-forth, faster and faster.");
@@ -599,22 +599,22 @@ private function urtaPutsHerDickInPCsWithDicks(truth:Boolean):void {
 	outputText("\n\nYour balls begin to tingle with warmth in that familiar way that they do just before you cum, rising slightly involuntarily as your sack starts to pull tight and release.  Your cock flexes inside your lover's asshole hard enough to squeeze a spurt of dick-juice onto " + player2.mf("his","her") + " chest, and with an exultant moan, you declare, \"<i>I'm gonna...  CUUUUUUM!</i>\"  " + player2.short + " answers you with a moan of " + player2.mf("his","her") + " own, digging " + player2.mf("his","her") + " hands into your swaying, unrestrained tits as " + player2.mf("he","she") + " releases.");
 
 	outputText("\n\nYou ram your turgid mass in until your sheath is smashed flat against your abdominals, almost painfully.  Below, your taut sack expands slightly before shrinking, pumping hot pleasure through your abdomen and down your rapidly dilating urethra.  You can feel it dilate the base of your cock, stopped up for a second by " + player2.short + "'s sphincter, and then it pushes through, widening " + player2.mf("his","her") + " butthole in the process.  Your flare feels as wide as one of Aunt Nancy's plates back at the bar, immobilizingly thick and pulsing with every hammering heartbeat that pounds through it.  You release some of your pent-up, achingly hot seed into " + player2.mf("his","her") + " butt with a cry of joy.  Wriggling down against " + player2.mf("him","her") + ", you squeeze " + player2.mf("his","her") + " pulsing erection");
-	if(player2.cockTotal() > 1) outputText("s");
+	if (player2.cockTotal() > 1) outputText("s");
 	outputText(" between your bodies, " + player2.mf("his","her") + " liquid love exploding all over your cock-locked forms.  Each time you cum, a fresh-squeezed spurt of semen splatters into your tits, " + player2.mf("his","her") + " prostate violently being milked by the heady flows of vixen-spunk you force inside " + player2.mf("his","her") + " rectum.");
-	if(player2.hasVagina()) outputText("  You don't notice the female fluids that drip from " + player2.mf("his","her") + " sodden slit - they soak into your big balls, already forgotten.");
+	if (player2.hasVagina()) outputText("  You don't notice the female fluids that drip from " + player2.mf("his","her") + " sodden slit - they soak into your big balls, already forgotten.");
 	outputText("\n\n" + player2.short + " kisses you, or at least tries to - " + player2.mf("his","her") + " body wiggles " + player2.mf("him","her") + " away with every blissful spurt that " + player2.mf("he","she") + " makes");
-	if(player2.cumQ() >= 500) {
+	if (player2.cumQ() >= 500) {
 		outputText(", made worse by the sheer volume of spunk " + player2.mf("his","her") + " cock");
-		if(player2.cockTotal() > 1) outputText("s exude");
+		if (player2.cockTotal() > 1) outputText("s exude");
 		else outputText(" exudes");
 	}
 	outputText(".  Wonderfully, " + player2.mf("his","her") + " belly begins to round out from your seemingly endless flow of animal jizz.  Without meaning to, you imagine " + player2.mf("him","her") + " as your uber-pregnant, belly-dragging brood-mare, cum drooling from every packed hole and " + player2.mf("his","her") + " body drenched in excess.  The thought sets off another explosive orgasm, even before the first has finished.  Your climax is so powerful that your balls feel like they're being squeezed in a vice.  " + player2.short + "'s asshole fountains cum around the edges of your potent phallus as it's filled beyond capacity.  " + player2.mf("His","Her") + " belly rounds just as you imagined it, and you begin to piston your hips while your eyes roll back, unseeing.  You don't care, you're drooling all over your spunked up broodmare and giving " + player2.mf("him","her") + " another load of kits, even if it is in " + player2.mf("his","her") + " ass!");
 
 	outputText("\n\nEven after your orgasm ends and your strength gives out, you keep working your massive, monstrous dong into " + player2.short + "'s ass with weak little strokes.  " + player2.mf("He","She") + " makes a pained, plaintive moan, just loud enough for you to hear.  That distressed keen is all it takes to shake you out of your fuck-hungry rut, and you immediately pull out, panting and placing a compassionate hand on " + player2.short + "'s face.  " + player2.mf("He","She") + " sighs with relief as a river of your alabaster goo escapes the well-stretched confines of " + player2.mf("his","her") + " over-inseminated anus.  It soaks the blanket utterly");
-	if(player2.cumQ() >= 500) {
+	if (player2.cumQ() >= 500) {
 		outputText(", mixing with " + player2.mf("his","her") + " own ");
-		if(player2.cumQ() < 1000) outputText("puddly");
-		else if(player2.cumQ() < 2500) outputText("small lake-sized");
+		if (player2.cumQ() < 1000) outputText("puddly");
+		else if (player2.cumQ() < 2500) outputText("small lake-sized");
 		else outputText("massive, lake-sized");
 		outputText(" mess - only now do you realize just how much your lover could produce!  The");
 	}
@@ -675,17 +675,17 @@ private function putAPCDickInUrtaCoochies(truth:Boolean):void {
 	outputText("You push " + player2.short + " down onto the ground, glad that " + player2.mf("he","she") + "'s not wearing " + player2.mf("his","her") + " gear right now.  Unfortunately, you've still got to get out of yours, an action made all that more difficult by the heat welling up in your groin.  Your rebellious cock is already half-stiff, lifting the hem of your armored skirt away from your thighs.  Fingers scrabbling, you struggle with your chestpiece's bindings.  Your nipples stiffen, scraping against the inside of it while you fight with to remove it.  You straddle " + player2.short + "'s waist to hold " + player2.mf("him","her") + " down while you work the bothersome, restraining material free, practically grinding your semi-rigid dick against " + player2.mf("his","hers") + " in excitement.  " + player2.mf("His","Her") + " hands begin aiding you in your task, allowing your tightly compressed breasts to finally, happily breathe.");
 
 	outputText("\n\nYour cock throbs in tune with your heartbeat, each pulsation causing a thick gobbet of anticipatory precum to splat wetly onto your lover's belly, but you aren't in the mood to indulge it this time.  If you're risking the possibility of never returning to your lover's arms again, then you want to remind yourself yet again of the first man ");
-	if(player2.gender == 3) outputText("...well, close enough... ");
+	if (player2.gender == 3) outputText("...well, close enough... ");
 	outputText("to ever fuck you like a woman.  Grabbing " + player2.mf("his","her") + " face, you pull " + player2.mf("him","her") + " into a deep, passionate kiss, unthinkingly grinding your dripping cock and steadily-wettening gash into " + player2.mf("his","her") + " belly and rubbing your own pebbly onyx nipples against " + player2.mf("his","her") + " nipples.  " + player2.mf("His","Her") + " own " + player2.cockDescript(x) + " begins to drool precum");
-	if(player2.hasVagina()) outputText(", " + player2.mf("his","her") + " cunt dripping wetly onto the ground from the stimulus");
+	if (player2.hasVagina()) outputText(", " + player2.mf("his","her") + " cunt dripping wetly onto the ground from the stimulus");
 	outputText(", the fluid rolling down its length to puddle with yours on " + player2.mf("his","her") + " belly and filling your writhing, passionate embrace with hot, sticky sweetness.");
 
 	outputText("\n\nBut this isn't all you intend to settle for, and you break the kiss with some reluctance, a glistening streamer tentatively linking your lips together.  You growl in your throat and nuzzle your cheek against your lover's, before you rise up and take a step back.");
 
 	//{If PC is Centaur or Drider:}
-	if(player2.isTaur() || player2.isDrider()) {
+	if (player2.isTaur() || player2.isDrider()) {
 		outputText("\n\nYou carefully kneel down on all fours, moving your tail out of the way and giving a flirty wiggle of your ass to entice your ");
-		if(!player2.isDrider()) outputText("quadrapedal");
+		if (!player2.isDrider()) outputText("quadrapedal");
 		else outputText("octapedal");
 		outputText(" partner to mount you - encouragement " + player2.mf("he","she") + " doesn't really need that much of.  Forelegs draping themselves over your shoulders, there is a little awkwardness as the two of you try to position " + player2.mf("his","her") + " cock inside of you, but it doesn't take that much experimentation before it slides inside you.");
 
@@ -700,23 +700,23 @@ private function putAPCDickInUrtaCoochies(truth:Boolean):void {
 		outputText("\n\nYour balls begin to tingle with warmth in that familiar way that they do just before you cum, rising slightly involuntarily as your sack starts to pull tight and release.  Your cock flexes, bulging in your fingers as the climax builds up within the cumvein and stretches it out, and with an exultant moan, you declare, \"<i>I'm gonna...  CUUUUUUM!</i>\"  " + player2.short + " answers you with a moan of " + player2.mf("his","her") + " own, ramming with increasing speed and force into your cunt.");
 
 		outputText("\n\nYour equine cock-head flares wider and wider as that oh-so-familiar feeling of hot pleasure begins pumping its way up from your swaying balls and along your fat dick, your heart hammering inside your chest and your flare seeming to pulse with every beat of your heart.  Thick, hot, salty jizz spurts and sprays in load after load from your cock, gushing onto the earth below you and rapidly saturating it, leaving you kneeling over an ever-growing puddle of sex-scented mud.  As you arch your back and thrust out your dick, your cunt tightens, anchoring " + player2.short + " inside of you and giving " + player2.mf("him","her") + " no choice but to cum in turn");
-		if(player2.hasVagina()) outputText(", " + player2.mf("his","her") + " female jizz spattering unnoticed onto the ground behind the pair of you");
+		if (player2.hasVagina()) outputText(", " + player2.mf("his","her") + " female jizz spattering unnoticed onto the ground behind the pair of you");
 		outputText(".");
 
 		//PC Cum=Normal or lower:
-		if(player2.cumQ() < 500) outputText("\n\n" + player2.mf("He","She") + " sprays " + player2.mf("his","her") + " hot jizz into your milking cunt and you greedily swallow it all, netherlips flexing eagerly in an attempt to coax even more from " + player2.mf("him","her") + ".  While you can feel that delicious cum slurping around inside of you, your mind is still fixated on the image of your womb filled full and ripe and so you find yourself distantly disappointed that this is all " + player2.mf("he","she") + " can manage.");
+		if (player2.cumQ() < 500) outputText("\n\n" + player2.mf("He","She") + " sprays " + player2.mf("his","her") + " hot jizz into your milking cunt and you greedily swallow it all, netherlips flexing eagerly in an attempt to coax even more from " + player2.mf("him","her") + ".  While you can feel that delicious cum slurping around inside of you, your mind is still fixated on the image of your womb filled full and ripe and so you find yourself distantly disappointed that this is all " + player2.mf("he","she") + " can manage.");
 
 		//PC Cum=High:
-		else if(player2.cumQ() < 1000) outputText("\n\nYou moan and whimper with glee as wave after wave of spooge surges into your burning cunt and is sucked up into your aching womb, stretching it into a blatant little bulge of a belly by the time " + player2.mf("he","she") + " has shot " + player2.mf("his","her") + " load.  Your free hand caresses the filled flesh, feeling it squish and churn, and while the skin is delightfully sensitive, you want <i>more</i>...");
+		else if (player2.cumQ() < 1000) outputText("\n\nYou moan and whimper with glee as wave after wave of spooge surges into your burning cunt and is sucked up into your aching womb, stretching it into a blatant little bulge of a belly by the time " + player2.mf("he","she") + " has shot " + player2.mf("his","her") + " load.  Your free hand caresses the filled flesh, feeling it squish and churn, and while the skin is delightfully sensitive, you want <i>more</i>...");
 
 		//(PC Cum=VeryHigh:
-		else if(player2.cumQ() < 2500) outputText("\n\nYou let out a howl of joy as your lover's inhuman load begins inflating your womb like a balloon... bigger, bigger, bigger, you want to be bigger!  Oh, yes, yes - you can feel your belly growing round and full and heavy with the sloshing cum your " + player2.short + " is stuffing into your womb; by the time " + player2.mf("he","she") + " has stopped, you look and feel like a full-term mother.  Your belly hangs down barely inches off of the ground, swaying gently to and fro with your motions.");
+		else if (player2.cumQ() < 2500) outputText("\n\nYou let out a howl of joy as your lover's inhuman load begins inflating your womb like a balloon... bigger, bigger, bigger, you want to be bigger!  Oh, yes, yes - you can feel your belly growing round and full and heavy with the sloshing cum your " + player2.short + " is stuffing into your womb; by the time " + player2.mf("he","she") + " has stopped, you look and feel like a full-term mother.  Your belly hangs down barely inches off of the ground, swaying gently to and fro with your motions.");
 
 		//(PC Cum=Extreme:
 		else outputText("\n\nYou let out a high-pitched scream of pleasure as the veritable fountain of cum you call your " + player2.mf("boy","girl") + "friend stretches your womb to impossible depths with " + player2.mf("his","her") + " inhuman loads of jizz.  Your belly grows and grows and grows, and it seems to show no sign of stopping; the skin is stretched so tight, the fur pulled into a glossy tautness by your distended womb, that even the merest whisper of wind sends sparks of pleasure crashing through your mind.  You grow inexorably tighter, fuller, and heavier, until the pleasure of being stuffed so overwhelmingly full starts to become slightly painful and fear begins to dilute your belly-lust: is " + player2.mf("he","she") + " ever going to <b>stop</b>?  Thankfully, at last, it ends.  Cum spurts noisily out around the impromptu plug of " + player2.mf("his","her") + " dick, but without the added pressure of " + player2.mf("his","her") + " torrential climax adding to it, even that small mercy feels so good that you'd collapse if you weren't already on the ground.  Your womb has grown so distended that you are no longer kneeling but laying atop it, feeling the seething ocean of " + player2.short + "'s seed churning inside you as you try to regain some semblance of coherent thought.");
 
 		outputText("\n\nYour lover delicately supports " + player2.mf("him","her") + "self atop you for a while longer to catch " + player2.mf("his","her") + " strength back, then carefully extracts " + player2.mf("him","her") + "self from you.  Your muscles are so limp that you find yourself ");
-		if(player2.cumQ() < 1000) outputText("falling face-first into the jizz-mud");
+		if (player2.cumQ() < 1000) outputText("falling face-first into the jizz-mud");
 		else outputText("not even bothering trying to move your swollen bulk");
 		outputText(", and you smile dopily up at " + player2.mf("him","her") + ", love shining in your eyes.  Carefully, " + player2.mf("he","she") + " positions " + player2.mf("him","her") + "self beside you and strokes your face before closing " + player2.mf("his","her") + " eyes, making it quite clear " + player2.mf("he","she") + " intends to go to sleep right here.  You see no point in fighting the inevitable and instead give yourself over to slumber - wouldn't be the first time you woke up in dried cum-mud, after all...");
 	}
@@ -733,23 +733,23 @@ private function putAPCDickInUrtaCoochies(truth:Boolean):void {
 		outputText("\n\nYour balls begin to tingle with warmth in that familiar way that they do just before you cum, rising slightly involuntarily as your sack starts to pull tight and release.  Your cock flexes, bulging in " + player2.short + "'s fingers as the climax builds up within the cumvein and stretches it out.  With an exultant moan, you declare, \"<i>I'm gonna...  CUUUUUUM!</i>\"  " + player2.short + " answers you with a moan of " + player2.mf("his","her") + " own, ramming with increasing speed and force into your cunt.");
 
 		outputText("\n\nYour equine cock-head just flares wider and wider as that oh-so-familiar feeling of hot pleasure begins pumping its way up from your swaying balls and along your fat dick, your heart hammering inside your chest and your flare seeming to pulse with every beat.  Thick, hot, salty jizz spurts and sprays in load after load from your cock, rising up into the air and then falling back onto you, completely plastering your tits and belly in your own spunk, smearing your face with it and forcing you to lick it up.  As you arch your back and thrust up your dick, your cunt tightens, anchoring " + player2.short + " inside of you and giving " + player2.mf("him","her") + " no choice but to cum in turn");
-		if(player2.hasVagina()) outputText(", " + player2.mf("his","her") + " female jizz spattering unnoticed onto the ground beneath the pair of you");
+		if (player2.hasVagina()) outputText(", " + player2.mf("his","her") + " female jizz spattering unnoticed onto the ground beneath the pair of you");
 		outputText(".");
 
 		//(PC Cum=Normal or lower:
-		if(player2.cumQ() < 500) outputText("\n\n" + player2.mf("He","She") + " sprays " + player2.mf("his","her") + " hot jizz into your milking cunt and you greedily swallow it all, netherlips flexing eagerly in an attempt to coax even more from " + player2.mf("him","her") + "; while you can feel that delicious cum slurping around inside of you, your mind is still fixated on the image of your womb filled full and ripe and so you find yourself distantly disappointed that this is all " + player2.mf("he","she") + " can manage.");
+		if (player2.cumQ() < 500) outputText("\n\n" + player2.mf("He","She") + " sprays " + player2.mf("his","her") + " hot jizz into your milking cunt and you greedily swallow it all, netherlips flexing eagerly in an attempt to coax even more from " + player2.mf("him","her") + "; while you can feel that delicious cum slurping around inside of you, your mind is still fixated on the image of your womb filled full and ripe and so you find yourself distantly disappointed that this is all " + player2.mf("he","she") + " can manage.");
 
 		//(PC Cum=High:
-		else if(player2.cumQ() < 1000) outputText("\n\nYou moan and whimper with glee as wave after wave of spooge surges into your burning cunt and is sucked up into your aching womb, stretching it into a blatant little bulge of a belly by the time " + player2.mf("he","she") + " has shot " + player2.mf("his","her") + " load.  Your hands caress the filled flesh, feeling it squish and churn, and while the skin is delightfully sensitive, you want <i>more</i>...");
+		else if (player2.cumQ() < 1000) outputText("\n\nYou moan and whimper with glee as wave after wave of spooge surges into your burning cunt and is sucked up into your aching womb, stretching it into a blatant little bulge of a belly by the time " + player2.mf("he","she") + " has shot " + player2.mf("his","her") + " load.  Your hands caress the filled flesh, feeling it squish and churn, and while the skin is delightfully sensitive, you want <i>more</i>...");
 
 		//(PC Cum=VeryHigh:)
-		else if(player2.cumQ() < 2500) outputText("\n\nYou let out a howl of joy as your lover's inhuman load begins inflating your womb like a balloon... bigger, bigger, bigger, you want to be bigger!  Oh, yes, yes - you can feel your belly growing round and full and heavy with the sloshing cum your " + player2.short + " is stuffing into your womb; by the time " + player2.mf("he","she") + " has stopped, you look and feel like a full-term mother.  Your belly weighs you down with its solid, fluid-filled mass, swaying gently to and fro with your motions.");
+		else if (player2.cumQ() < 2500) outputText("\n\nYou let out a howl of joy as your lover's inhuman load begins inflating your womb like a balloon... bigger, bigger, bigger, you want to be bigger!  Oh, yes, yes - you can feel your belly growing round and full and heavy with the sloshing cum your " + player2.short + " is stuffing into your womb; by the time " + player2.mf("he","she") + " has stopped, you look and feel like a full-term mother.  Your belly weighs you down with its solid, fluid-filled mass, swaying gently to and fro with your motions.");
 
 		//(PC Cum=Extreme:
 		else outputText("\n\nYou let out a high-pitched scream of pleasure as the veritable fountain of cum you call your " + player2.mf("boyfriend","girlfriend") + " stretches your womb to impossible depths with " + player2.mf("his","her") + " inhuman loads of jizz.  Your belly grows and grows and grows, and it seems to show no sign of stopping; the skin is stretched so tight, the fur pulled into a glossy tautness by your distended womb, that even the merest whisper of wind sends sparks of pleasure crashing through your mind.  You grow inexorably tighter, fuller, heavier, until the pleasure of being stuffed so overwhelmingly full starts to become slightly painful and fear begins to dilute your belly-lust... is " + player2.mf("he","she") + " ever going to <b>stop</b>?  Thankfully, at last, it ends. Cum spurts noisily out around the impromptu plug of " + player2.mf("his","her") + " dick, but without the added pressure of " + player2.mf("his","her") + " torrential climax adding to it even that small mercy feels so heavenly that your muscles lose what little strength they had left. Unbalanced by the churning mass of spunk in your womb you slowly topple onto your side, some distant part of your mind grateful that " + player2.short + " is quick enough to ease your graceless change of position so that you don't bash your head on a rock. You smile in contentment as your hand languidly explores the large expanse of your inflated belly. Your womb is so distended that, if you had a twin sister, she could probably just about fit inside your newly stretched cavern... well, if she curled up like a baby, anyway.");
 
 		outputText("\n\nWith a sigh, your " + player2.short + " gently ruffles your hair, but makes no attempt at trying to shift you.  You welcome " + player2.mf("his","her") + " lethargic contentment; with how limp your muscles are after a good fucking");
-		if(player2.cumQ() >= 1000) outputText(" not to mention the weight of your overstuffed belly");
+		if (player2.cumQ() >= 1000) outputText(" not to mention the weight of your overstuffed belly");
 		outputText(" you don't really feel inclined to move, either.  Instead, you yawn loudly, make yourself comfortable upon your lover's stomach, and allow yourself to drift off to sleep - already, you can hear the quiet breathing of " + player2.short + " as " + player2.mf("he","she") + " does the same thing.");
 	}
 	player.orgasm();
@@ -762,15 +762,15 @@ private function putAPCDickInUrtaCoochies(truth:Boolean):void {
 private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	clearOutput();
 	outputText("You push " + player2.short + " down on " + player2.mf("his","her") + " back, a task made all the more difficult by your growing arousal.  Thankfully, " + player2.mf("he","she") + "'s not wearing " + player2.mf("his","her") + " usual " + player2.armorName + ".  Instead, " + player2.mf("his","her") + " form is bared to your probing fingertips, pliant and exposed.  You cannot help but dip a finger into " + player2.mf("his","her") + " moist delta, parting the oozing veil to enjoy the view of " + player2.mf("his","her") + " ");
-	if(player.vaginaType() != 5) outputText("pink, ");
+	if (player.vaginaType() != 5) outputText("pink, ");
 	outputText("pulsing interior.  The sight is exciting in the extreme, immediately sending your heartbeat through the roof.  Your tremendous horse-cock is immediately stiffened by your ardor, along with your coal-black nipples, and your armor-plated skirt begins to rise, as if by magic.");
 
 	outputText("\n\n" + player2.short + " giggles at the tenting garment, playfully reaching under to caress the sensitive bottom of your swelling bulge.  Fresh length quickly surges out of your sheath in response, popping your tip past the hem in a second to hang there, pulsing, stiff, and slowly winking your urethra at your lover's face.  Your nipples grow so hard that they're almost painful, and they scrape against the interior of your leather breastplate irritatingly.  Struggling with the straps, you do your best to undo the offending armor, but it just... won't... come... free!   Damnit!");
 
 	outputText("\n\nYou twist around and grab at the straps holding your gear together with hands shaking so hard they fumble off of them more often than not.  " + player2.short + " laughs again at your mistake, gently cupping your smooth nutsack in " + player2.mf("his","her") + " hand.  Your mammoth balls are so large that they hang partway off " + player2.mf("his","her") + " palm on either side, but " + player2.mf("he","she") + " doesn't seem to mind.  In fact, " + player2.mf("he","she") + " begins to roll them back and forth luxuriously.  Your tip flares slightly as it releases a slippery deposit onto ");
-	if(player2.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("the curve of " + player2.mf("his","her") + " pregnant belly");
-	else if(player2.tone >= 65) outputText("" + player2.mf("his","her") + " toned abdomen");
-	else if(player2.tone < 30) outputText("" + player2.mf("his","her") + " soft, forgiving middle");
+	if (player2.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("the curve of " + player2.mf("his","her") + " pregnant belly");
+	else if (player2.tone >= 65) outputText("" + player2.mf("his","her") + " toned abdomen");
+	else if (player2.tone < 30) outputText("" + player2.mf("his","her") + " soft, forgiving middle");
 	else outputText("" + player2.mf("his","her") + " belly");
 	outputText(".  The attentions drive your attempts to dislodge the offending garments from your lusty frame to new levels.  Metal rivets slowly give before finally snapping apart to free your left shoulder.  Your left nipple tingles with pleasant, palpable relief, and you turn to the other side, intent on ripping it off, so that you can be with your lover, skin to skin.");
 
@@ -781,38 +781,38 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	outputText("\n\nYou answer with a feral, lusty snarl ");
 	//{fork centaurs/nagas/goo here}
 	//{centaur}
-	if(player2.isTaur())
+	if (player2.isTaur())
 	{
 		outputText("and climb off the 'taur-" + player2.mf("man","woman") + ".  " + player2.mf("He","She") + " smirks up at you, until you bid " + player2.mf("him","her") + " to rise, telling " + player2.mf("him","her") + " that you plan to mount " + player2.mf("him","her") + " like the fertile filly " + player2.mf("he","her") + " is. Reluctantly, " + player2.short + " clatters up onto " + player2.mf("his","her") + " hooves.");
-		if(player2.tailType > TAIL_TYPE_NONE) outputText("  You stroke " + player2.mf("his","her") + " tail as you shift it aside");
+		if (player2.tailType > TAIL_TYPE_NONE) outputText("  You stroke " + player2.mf("his","her") + " tail as you shift it aside");
 		else outputText("  You stroke " + player2.mf("his","her") + " swollen sex as you admire it");
 		outputText(", making sure you've got the perfect view of " + player2.mf("his","her") + " lube-slimed horse-cunt.  Unbidden, your cock thickens, disgorging a potent trail of animal-pre down its underside in anticipation.");
-		if(player2.wetness() >= 4) outputText("  Fuck, " + player2.mf("he","she") + "'s wetter than Edryn!  Just look at those heavy trails of slick moisture as they run down " + player2.mf("his","her") + " rump and hindlegs.");
-		else if(player2.wetness() >= 2) outputText("  Fuck, " + player2.mf("he","she") + "'s as wet as Edryn!  Beads of moisture are forming on " + player2.mf("his","her") + " clit, ready to drop to the ground.");
+		if (player2.wetness() >= 4) outputText("  Fuck, " + player2.mf("he","she") + "'s wetter than Edryn!  Just look at those heavy trails of slick moisture as they run down " + player2.mf("his","her") + " rump and hindlegs.");
+		else if (player2.wetness() >= 2) outputText("  Fuck, " + player2.mf("he","she") + "'s as wet as Edryn!  Beads of moisture are forming on " + player2.mf("his","her") + " clit, ready to drop to the ground.");
 		else outputText("  Fuck, " + player2.mf("he","she") + "'s almost as wet as Edryn!  Just getting a sniff of " + player2.mf("his","her") + " horny horse-snatch has your head swimming!");
 		outputText("  You give it a lick and shudder, taking in a few deep lungfuls of " + player2.mf("his","her") + " scent.");
-		if(player2.tallness >= 84) outputText("  Before you know what you're doing, you've pulled " + player2.mf("his","her") + " back to a rock and climbed atop it, bringing your cock level with that heavenly hole.");
+		if (player2.tallness >= 84) outputText("  Before you know what you're doing, you've pulled " + player2.mf("his","her") + " back to a rock and climbed atop it, bringing your cock level with that heavenly hole.");
 		else outputText("  Before you know what you're doing, you've raised yourself up to your full height, bringing your cock level with that heavenly hole.");
 	}
 	//{goo}
-	else if(player2.isGoo()) {
+	else if (player2.isGoo()) {
 		outputText("and roll the gooey woman so " + player2.mf("he","she") + "'s face down.  " + player2.mf("He","She") + " holds " + player2.mf("him","her") + "self up off the dry dirt with " + player2.mf("his","her") + " palms, sweet, slimy bottom upraised above " + player2.mf("his","her") + " goopy undercarriage.  Amazingly, there's a slight parting in the mass of slime, right between where " + player2.mf("his","her") + " legs would be, if " + player2.mf("he","she") + " had them.  A narrow, barely visible divide can be spotted inside, capped with the telltale bulge of " + player2.mf("his","her") + " ");
-		if(player2.clitLength < .5) outputText("tiny ");
-		else if(player2.clitLength >= 2.5) outputText("massive ");
+		if (player2.clitLength < .5) outputText("tiny ");
+		else if (player2.clitLength >= 2.5) outputText("massive ");
 		outputText("button.  You nuzzle up to that slick slime-cunt, sniffing at " + player2.mf("his","her") + " super-wet snatch, taking the pheromones as deeply inside yourself as possible.  " + player2.mf("His","Her") + " femininity is so strong that it makes your head spin and your dick ache.  Glancing down as you lick the moisture from your muzzle, you see the rigid, over-engorged veins standing out in harsh relief on your equine tool.  Your legs seem to move on their own, lining you up with the moisture-laden slit just inches away.");
 	}
 	//{nagas}
-	else if(player2.isNaga()) {
+	else if (player2.isNaga()) {
 		outputText("and roll the snake-woman over so " + player2.mf("he","she") + "'s prostrate on the ground, barely holding " + player2.mf("him","her") + " front half up with " + player2.mf("his","her") + " arms.  " + player2.mf("His","Her") + " loins are flat on the ground, undulating slightly as " + player2.mf("he","she") + " grinds " + player2.mf("his","her") + " moist clit against it for sensation.  Your lover's anatomy poses a problem for your choice of positions, but then, inspiration strikes.  You come up under the hind part of " + player2.mf("his","her") + " snake-tail, and hoisting it up, you support half over your shoulder.  As expected, " + player2.mf("he","she") + " has all the flexibility of the serpent " + player2.mf("he","she") + " so resembles, and " + player2.mf("his","her") + " tail bends down just far enough for " + player2.mf("his","her") + " cunt to hang a mere inch above your rigid tool, right where " + player2.mf("his","her") + " body changes from snake to person.");
-		if(player2.wetness() >= 3) outputText("  " + player2.mf("His","Her") + " moisture drizzles from that wanton slit, basting you with " + player2.mf("his","her") + " fragrant femininity, and you have a hard time not taking " + player2.mf("him","her") + " here and now.");
+		if (player2.wetness() >= 3) outputText("  " + player2.mf("His","Her") + " moisture drizzles from that wanton slit, basting you with " + player2.mf("his","her") + " fragrant femininity, and you have a hard time not taking " + player2.mf("him","her") + " here and now.");
 		outputText("  The tail you're holding up coils in, sliding around your arm and middle, wrapping you up in snakey snugness.  With impeccable control, " + player2.mf("he","she") + " squeezes a little bit, bringing " + player2.mf("his","her") + " cunt close enough to breathe foggy moisture on your equine tool.");
 	}
 	//{biped}
 	else {
 		outputText("and roll " + player2.mf("him","her") + " over on " + player2.mf("his","her") + " hands and knees, lifting that sweet butt up in the air where you can admire it.  You kneel behind " + player2.mf("his","her") + " and, pressing your nose into " + player2.mf("his","her") + " fragrant quim, you extend your tongue, letting the smooth oral muscle taste " + player2.mf("his","her") + " juices and tease at " + player2.mf("his","her") + " engorging clit.  " + player2.short + " moans and presses back into you, crying out like a true bitch in heat, one in need of a thorough rutting.  The thought hits your cock like a lightning bolt, and it fills out to painful proportions, every vein and bulge standing out in stark relief, thumping obscenely to the tune of your insatiable lust.  You moan into " + player2.mf("his","her") + " lovely-tasting snatch, gulping down ");
-		if(player2.wetness() < 3) outputText("every drop of nectar that " + player2.mf("he","she") + " gives up");
-		else if(player2.wetness() < 4) outputText("the copious drops of nectar " + player2.mf("he","she") + " gives up");
-		else if(player2.wetness() < 5) outputText("the drizzling moisture that oozes from " + player2.mf("his","her") + " twat");
+		if (player2.wetness() < 3) outputText("every drop of nectar that " + player2.mf("he","she") + " gives up");
+		else if (player2.wetness() < 4) outputText("the copious drops of nectar " + player2.mf("he","she") + " gives up");
+		else if (player2.wetness() < 5) outputText("the drizzling moisture that oozes from " + player2.mf("his","her") + " twat");
 		else outputText("the rivers of girl-lube that run unimpeded from " + player2.mf("his","her") + " sopping twat");
 		outputText(".  You sniff in great lungfuls of " + player2.mf("his","her") + ", your head swimming with need, and before you know it, you've risen behind " + player2.mf("him","her") + ", your oozing flare just inches from that delectable opening.");
 	}
@@ -820,7 +820,7 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	outputText("\n\nGrabbing hold of " + player2.short + " by " + player2.mf("his","her") + " waist, you level your phallus up against " + player2.mf("his","her") + " lips and press forward, hard.  " + player2.mf("His","Her") + " velvet curtains part slowly under your relentless pressure, a hanging veil of lubricants sheathing your head as it batters its way inside " + player2.mf("him","her") + " in pliant depths.  " + player2.mf("He","She") + " fits you like a glove, a soft, squishy, velvet-lined glove that squeezes back against you oh-so-perfectly.  You groan in delight, but " + player2.mf("he","she") + "'s only taken a few inches - there's at least fifteen more, throbbing bigger in excitement.  " + player2.short + " grunts out loud, pushing back against you, stretching " + player2.mf("him","her") + "self around you to take a little bit more.  " + player2.mf("His","Her") + " lips cling to your girth, welcoming ever greater lengths of your iron shaft into the swelteringly pleasant embrace of " + player2.mf("his","her") + " needy hole.  When your medial ring catches " + player2.mf("his","her") + " clit, " + player2.mf("he","she") + " moans, shaking " + player2.mf("his","her") + " asscheeks at you.");
 
 	outputText("\n\nYou smack " + player2.short + " on the ass, and " + player2.mf("he","she") + " wiggles again, this time slower, and more sensually.  " + player2.mf("His","Her") + " cunt feels sinfully tight around you");
-	if(player2.vaginalCapacity() >= 200) outputText(", though you know " + player2.mf("he","she") + " can handle cocks with Edryn's ease");
+	if (player2.vaginalCapacity() >= 200) outputText(", though you know " + player2.mf("he","she") + " can handle cocks with Edryn's ease");
 	outputText(".  It's a wonderful sensation, and you push the rest of the way in with one, hard thrust.  Your sheath is pushed back against you, releasing an extra inch of horse-cock into your partners willing, lube-dripping pussy.  The oversensitive horseflesh bombards you with a wave of fresh feelings so strong that your legs nearly fold under you.  You dig your hands into " + player2.short + "'s haunches for support and hang on for dear life, instinctively plowing " + player2.mf("his","her") + " [vagina] like your life depended on it.");
 
 	outputText("\n\nMoaning, " + player2.mf("he","she") + " looks over " + player2.mf("his","her") + " shoulder and whispers, \"<i>Do it!  I can-can't take much more!</i>\"");
@@ -828,9 +828,9 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	outputText("\n\nYou oblige your lover's request (as if you had any other option) and hammer your oozing dick deep into " + player2.short + "'s puffy vagina so hard that your tip butts up against " + player2.mf("his","her") + " cervix, bowing it in towards " + player2.mf("his","her") + " unprotected womb.  " + player2.mf("He","She") + " squeezes down like a vice, wringing your cock with juicy, slippery walls.  You moan with " + player2.mf("him","her") + ", balls tensing, lifting slightly in your sack as they ready your juicy load.  Climactic bliss erupts from within and your flare nearly doubles in size, locking itself in the honeyed heaven it so loves to nestle itself into.  Bubbling heat builds inside until you feel as if your body is about to light aflame, and then, in a dizzying rush, you release the first sticky deposit into your lover's womb.  " + player2.mf("He","She") + " moans, wiggling happily as some slips into " + player2.mf("his","her") + " womb, while the rest begins to flood every nook and cranny of " + player2.mf("his","her") + " violated tunnel.");
 
 	outputText("\n\nAgain and again, you fire sticky white loads deep into " + player2.short + "'s body, anchored tightly by the flaring horse-cock you used to hate, but have come to accept with " + player2.short + "'s help.  " + player2.mf("He","She") + " taught you that you could be loved, and as you thoroughly seed " + player2.mf("his","her") + " womb a teardrop of moisture beads at the corner of your eye.  " + player2.mf("He","She") + " loves you, cock and all, and there's nothing you'd rather be doing than spending the night with " + player2.mf("him","her") + ".  " + player2.mf("His","Her") + " belly rounds slightly");
-	if(player2.pregnancyIncubation > 0 && player2.pregnancyIncubation < 150) outputText(" (more than it already is)");
+	if (player2.pregnancyIncubation > 0 && player2.pregnancyIncubation < 150) outputText(" (more than it already is)");
 	outputText(" from your prodigious deposit.  The illusion of knocking " + player2.mf("him","her") + " up takes hold of you, and your orgasm redoubles, fresh waves of horse-cum pouring out of you unceasingly.  " + player2.short + " moans, rubbing " + player2.mf("him","her") + " taut");
-	if(player2.pregnancyIncubation > 0 && player2.pregnancyIncubation < 150) outputText(" pregnant");
+	if (player2.pregnancyIncubation > 0 && player2.pregnancyIncubation < 150) outputText(" pregnant");
 	outputText(" dome, until at last you finally spend the last of your spunk.");
 
 	//Hermaphrodite cums!
@@ -845,7 +845,7 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	outputText("\n\nYou lay down on " + player2.mf("his","her") + " back, exhausted, and " + player2.mf("he","she") + " rolls onto " + player2.mf("his","her") + " side, taking you with " + player2.mf("his","her") + ".  Snuggled together, genitals still locked and dripping, the two of your doze off together, whispering sweet nothings into the still, night air.");
 	//Slimefeed!   Virgin removal + stretching silently
 	player2.slimeFeed();
-	if(player2.vaginas[0].virgin) {
+	if (player2.vaginas[0].virgin) {
 		player2.vaginas[0].virgin = false;
 		outputText("\n\n<b>You took " + player2.short + "'s virginity!</b>");
 	}
@@ -860,27 +860,27 @@ private function snuggleWithUrta(truth:Boolean):void {
 	clearOutput();
 	outputText("You think it over and decide that, for once, you'd like to focus more on love and less on lust.  \"<i>Well... I'd really just like to have a snuggle with you, " + player2.short + " - if that's alright?</i>\"  You ask quietly, tail instinctively wagging in an effort to be endearing.  Your lover nods " + player2.mf("his","her") + " head and answers in the positive, opening " + player2.mf("his","her") + " arms for further effect.  You waste no time and eagerly sidle into " + player2.mf("his","her") + " arms.");
 	//[If PC Centaur or Drider:
-	if(player2.isTaur() || player2.isDrider()) {
+	if (player2.isTaur() || player2.isDrider()) {
 		outputText("  It's rather awkward, thanks to " + player2.mf("his","her") + " clunky ");
-		if(player2.isTaur()) outputText("centaur");
+		if (player2.isTaur()) outputText("centaur");
 		else outputText("drider");
 		outputText(" body, but you manage to press up against " + player2.mf("his","her") + " ");
-		if(player2.isTaur()) outputText("forehoofs");
+		if (player2.isTaur()) outputText("forehoofs");
 		else outputText("first two pairs of spidery limbs");
 		outputText(".");
 	}
 	//[if PC Naga:]
-	else if(player2.isNaga()) outputText("  " + player2.mf("His","Her") + " serpentine coils loop snugly around your waist, curling around your legs and holding you gently in place.");
+	else if (player2.isNaga()) outputText("  " + player2.mf("His","Her") + " serpentine coils loop snugly around your waist, curling around your legs and holding you gently in place.");
 	//[if PC Goo:
-	else if(player.isGoo()) outputText("  " + player2.mf("His","Her") + " soft, squishy goo-body eagerly accepts you, the gelatinous mass of " + player2.mf("his","her") + " lower torso reaching out to softly envelop you in its cool, wet embrace.");
+	else if (player.isGoo()) outputText("  " + player2.mf("His","Her") + " soft, squishy goo-body eagerly accepts you, the gelatinous mass of " + player2.mf("his","her") + " lower torso reaching out to softly envelop you in its cool, wet embrace.");
 	//[Else:
 	else outputText("  Knees to knees, it takes you a few moments to figure out how to properly position your legs, but you eventually manage it.");
 
 	outputText("\n\nProperly positioned, you tuck your vulpine face into your lover's neck, softly inhaling " + player2.mf("his","her") + " scent, listening to the beating of " + player2.mf("his","her") + " heart, basking in the warmth of " + player2.mf("his","her") + " body and simply savoring being so close to the person you love.  Of course, being here like this, breasts pressed to your lover's chest, is all your traitorous horse-cock needs to show itself, wetly sliding from your sheath and poking eagerly into your lover's side.  You giggle nervously and blush, unable to help the flush of shame that slides through your heart, for all that " + player2.short + " has assured you that " + player2.mf("he","she") + " loves you despite your dick.");
 
 	outputText("\n\nYour lover simply smiles at you, and gives your cock a ");
-	if(player2.cor < 33) outputText("playful pat");
-	else if(player2.cor < 66) outputText("gentle stroke");
+	if (player2.cor < 33) outputText("playful pat");
+	else if (player2.cor < 66) outputText("gentle stroke");
 	else outputText("lascivious caress");
 	outputText(" before pulling you tighter into " + player2.mf("his","her") + " embrace.  Eager to forget your embarrassment, you focus on holding " + player2.mf("him","her") + " tight and close.  Your prick slowly slides back into its sheath from the lack of stimulus as you focus on how safe and content you feel to be here, being held like this.");
 
@@ -923,7 +923,7 @@ private function morningAfterCampVisitEmbark(truth:Boolean):void {
 //Intro(C)*
 public function runIntoAGoblin(camped:Boolean = false):void {
 	clearOutput();
-	if(camped) {
+	if (camped) {
 		outputText("Holding the pendant in front of you, you set off in a random direction from the camp, hoping it will give you some kind of sign.  A couple times, you could swear it flickered with an inner light, but the passing luminance could just be a reflection of the omnipresent sun.  You wipe the sweat from your brow and turn around, a little confused as to how you should progress.");
 	}
 	else {
@@ -940,7 +940,7 @@ public function runIntoAGoblin(camped:Boolean = false):void {
 public function winFuckAGoblinBroodmotherAsUrta():void {
 	clearOutput();
 	outputText("You greedily eye the ");
-	if(monster.HP < 1) outputText("submissive");
+	if (monster.HP < 1) outputText("submissive");
 	else outputText("feverishly masturbating");
 	outputText(" form of your opponent and can't resist licking your black lips in anticipation - any guilt about fucking someone besides " + player2.short + " that might make it through the haze of lust consuming you is quickly extinguished by your conviction that " + player2.mf("he","she") + " would understand.  Your growing tower of fuck-meat is already lifting the hem of your armored skirt, making it even easier to grab its lower edge and flip it up out of the way as you advance towards your assailant, eager to see what you can do about blowing off some steam...");
 
@@ -981,7 +981,7 @@ public function urtaLosesToGoblin():void {
 	clearOutput();
 	//Urta bad end, written by Kinathis... Buckle up for the worst writing you have ever seen!....Okay lets do this! Raaaaa!!! o-o What did i get myself into...
     //Loss by lust intro(C)*
-	if(player.lust >= player.maxLust()) {
+	if (player.lust >= player.maxLust()) {
 		outputText("Your aching body buckles under the goblin's lusty assault.  As if the constant flow of precum that soaks your skirt isn't enough, your raw desire for the goblin's curvy little body explodes from you.  The iron-hard pole of animalistic breeding meat throbs powerfully as it stands tall against your otherwise feminine body, lifting your protective skirt and making it gather up around your waist.  Unable to stop yourself, your hands grab hold of the aching, arm-sized length of horseflesh as you sink to your knees.  Without missing a beat, your hands stroke and squeeze your fat equine endowment with feverish need.  Almost instantly, your over-productive organ soaks your squeezing hands in streams of thick, musky pre; clear, sticky rivulets that drip all the way down to your aching, pulsating balls.  Your huge, sterile, stallion-nuts swell and bloat with their massive load.  The poor things ache to be unleashed inside your assailant's cum-craving womb.");
 		outputText("\n\nGiggling impishly, the pregnancy-obsessed seductress sashays her way over to you.  The voluptuous woman looks at your masturbating form for a moment, admiring your well endowed body before making her move.  Shoving you down, she pulls your face into her bountiful bosom, nearly suffocating you in sweet, soft titflesh as she grinds her curvy little body against you.  \"<i>Ohhh... look at that big beast you have there.  You're going to love feeling my tight little puss wraped around your stallion-cock, aren't you?  Just look at those huge balls - I think I found myself a keeper.  Now, don't you worry about anything, dear.  Just lay back and let me milk all the sperm from those big, round cum-dispensers of yours,</i>\" the kid-crazy woman says before she pulls a few red vials from her bags and forces them against your lips, massaging your throat to make sure you swallow every drop.");
 		outputText("\n\nYou were pretty horny before, but after these doses there's only one thought you're capable of processing: the searing desire to rut and breed.  As soon as that bubbling concoction hits your stomach a throaty groan tears itself from your dark lips.  The chemical aphrodisiac surges right to your brain and over-aroused equine erection.  Your already iron-hard horseflesh seems to swell even bigger from your newfound arousal; the bloated, blunt crown belching forth a thick, musky bolt of sticky pre all up the dominant goblin's back.  Feeling your hot, thick juice shoot across her flesh only seems to make her more hungry for you.  If you can pump out pre-cum like that, just what kind of flood are you going to make when you really cum?");
@@ -1111,7 +1111,7 @@ private function urtaGameOver():void {
 
 public function urtaSpecials():void {
 //Gone	menuLoc = 3;
-	if (getGame().inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 5) {
+	if (getGame().inCombat && player.findStatusEffect(StatusEffects.Sealed) >= 0 && player.statusEffectv2(StatusEffects.Sealed) == 5) {
 		clearOutput();
 		outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
 		getGame().enemyAI();
@@ -1137,7 +1137,7 @@ private function urtaMetabolize():void {
 
 private function urtaSecondWind():void {
 	clearOutput();
-	if(monster.findStatusAffect(StatusAffects.UrtaSecondWinded) >= 0) {
+	if (monster.findStatusEffect(StatusEffects.UrtaSecondWinded) >= 0) {
 		outputText("You've already pushed yourself as hard as you can!");
 //Gone		menuLoc = 3;
 //		doNext(getGame().combatMenu);
@@ -1145,7 +1145,7 @@ private function urtaSecondWind():void {
 		addButton(0, "Next", kGAMECLASS.combatMenu, false);
 		return;
 	}
-	monster.createStatusAffect(StatusAffects.UrtaSecondWinded,0,0,0,0);
+	monster.createStatusEffect(StatusEffects.UrtaSecondWinded,0,0,0,0);
 	HPChange(Math.round(player.maxHP()/2),false);
 	fatigue(-50);
 	dynStats("lus", -50);
@@ -1155,9 +1155,9 @@ private function urtaSecondWind():void {
 
 //Combo: 3x attack, higher miss chance, guaranteed hit vs blind
 private function urtaComboAttack():void {
-	if(player.findStatusAffect(StatusAffects.Attacks) < 0) {
+	if (player.findStatusEffect(StatusEffects.Attacks) < 0) {
 		clearOutput();
-		if(player.fatigue + 25 > player.maxFatigue()) {
+		if (player.fatigue + 25 > player.maxFatigue()) {
 			outputText("You are too fatigued to use that attack!");
 //Gone			menuLoc = 3;
 //			doNext(getGame().combatMenu);
@@ -1167,28 +1167,28 @@ private function urtaComboAttack():void {
 		}
 		fatigue(25);
 	}
-	if(player.findStatusAffect(StatusAffects.Attacks) < 0)
-		player.createStatusAffect(StatusAffects.Attacks,3,0,0,0);
+	if (player.findStatusEffect(StatusEffects.Attacks) < 0)
+		player.createStatusEffect(StatusEffects.Attacks,3,0,0,0);
 	else {
-		player.addStatusValue(StatusAffects.Attacks,1,-1);
+		player.addStatusValue(StatusEffects.Attacks,1,-1);
 		trace("DECREMENDED ATTACKS");
-		if(player.statusAffectv1(StatusAffects.Attacks) <= 1) {
+		if (player.statusEffectv1(StatusEffects.Attacks) <= 1) {
 			trace("REMOVED ATTACKS");
-			player.removeStatusAffect(StatusAffects.Attacks);
+			player.removeStatusEffect(StatusEffects.Attacks);
 		}
 	}
 	//Blind
-	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
+	if (player.findStatusEffect(StatusEffects.Blind) >= 0) {
 		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
 	var damage:Number;
 	//Determine if dodged!
-	if(monster.findStatusAffect(StatusAffects.Blind) < 0 && (rand(3) == 0 || (player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80))) {
-		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
-		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
-		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
+	if (monster.findStatusEffect(StatusEffects.Blind) < 0 && (rand(3) == 0 || (player.findStatusEffect(StatusEffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80))) {
+		if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
+		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
+		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
 		outputText("\n", false);
-		if(player.findStatusAffect(StatusAffects.Attacks) >= 0) {
+		if (player.findStatusEffect(StatusEffects.Attacks) >= 0) {
 			urtaComboAttack();
 			return;
 		}
@@ -1200,10 +1200,10 @@ private function urtaComboAttack():void {
 	}
 	//Determine damage
 	/*Determine damage - str modified by enemy toughness!
-	if(player.hasPerk("Double Attack") >= 0 && player.str <= 60) {
-		if(player.weaponName == "deadly spear") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "jeweled rapier") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "katana") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef - 5));
+	if (player.hasPerk("Double Attack") >= 0 && player.str <= 60) {
+		if (player.weaponName == "deadly spear") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
+		else if (player.weaponName == "jeweled rapier") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
+		else if (player.weaponName == "katana") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef - 5));
 		else damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef));
 	}*/
 	//Basic damage stuff
@@ -1212,23 +1212,23 @@ private function urtaComboAttack():void {
 	damage += player.weaponAttack;
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	if(rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
+	if (rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
 		crit = true;
 		damage *= 2;
 	}
 	//Start figuring enemy damage resistance
 	var reduction:Number = rand(monster.tou);
 	//Add in enemy armor if needed
-	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
+	if (player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
 		reduction += monster.armorDef;
 		//Remove half armor for lunging strikes
-		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
+		if (player.findPerk(PerkLib.LungingAttacks) >= 0)
 			reduction -= monster.armorDef/2;
 	}
 	//Take 5 off enemy armor for katana
-	if(player.weaponName == "katana") {
+	if (player.weaponName == "katana") {
 		//Knock off 5
-		if(monster.armorDef >= 5) reduction -= 5;
+		if (monster.armorDef >= 5) reduction -= 5;
 		//Less than 5 armor?  TAKE IT ALL!
 		else reduction -= monster.armorDef;
 	}
@@ -1236,32 +1236,32 @@ private function urtaComboAttack():void {
 	damage -= reduction;
 	//Damage post processing!
 	//Thunderous Strikes
-	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
+	if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
 		damage *= 1.2;
 	//One final round
 	damage = Math.round(damage);
 
-	if(damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+	if (damage > 0) {
+		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		damage = kGAMECLASS.doDamage(damage);
 	}
-	if(damage <= 0) {
+	if (damage <= 0) {
 		damage = 0;
 		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
 	}
 	else {
 		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
-		if(crit) outputText(" <b>*CRIT*</b>");
+		if (crit) outputText(" <b>*CRIT*</b>");
 	}
-	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
-		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
-		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
+	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+		if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
+		if (monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
 	outputText("\n", false);
 	//Kick back to main if no damage occured!
-	if(monster.HP >= 1 && monster.lust <= 99) {
-		if(player.findStatusAffect(StatusAffects.Attacks) >= 0) {
+	if (monster.HP >= 1 && monster.lust <= 99) {
+		if (player.findStatusEffect(StatusEffects.Attacks) >= 0) {
 			trace("MORE ATTACK");
 			urtaComboAttack();
 			return;
@@ -1271,7 +1271,7 @@ private function urtaComboAttack():void {
 		kGAMECLASS.enemyAI();
 	}
 	else {
-		if(monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
+		if (monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
 		else doNext(kGAMECLASS.endLustVictory);
 	}
 }
@@ -1279,7 +1279,7 @@ private function urtaComboAttack():void {
 //Dirt Kick
 private function urtaDirtKick():void {
 	clearOutput();
-	if(player.fatigue + 5 > player.maxFatigue()) {
+	if (player.fatigue + 5 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that ability!");
 //Gone		menuLoc = 3;
 //		doNext(getGame().combatMenu);
@@ -1289,22 +1289,22 @@ private function urtaDirtKick():void {
 	}
 	fatigue(5);
 	//Blind
-	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
+	if (player.findStatusEffect(StatusEffects.Blind) >= 0) {
 		outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
 	else outputText("Spinning about, you drag your footpaw through the dirt, kicking a wave of debris towards " + monster.a + monster.short + "!  ");
 	//Dodged!
-	if(rand(20) + 1 + monster.spe/20 > 15 + player.spe/20) {
+	if (rand(20) + 1 + monster.spe/20 > 15 + player.spe/20) {
 		outputText(monster.mf("He","She") + " manages to shield " + monster.mf("his","her") + " eyes.  Damn!\n\n");
 		kGAMECLASS.enemyAI();
 		return;
 	}
-	else if(monster.findStatusAffect(StatusAffects.Blind) >= 0) {
+	else if (monster.findStatusEffect(StatusEffects.Blind) >= 0) {
 		outputText(monster.mf("He","She") + "'s already blinded.  What a waste.\n\n");
 	}
 	else {
 		outputText(monster.mf("He","She") + "'s blinded!\n\n");
-		monster.createStatusAffect(StatusAffects.Blind,2 + rand(3),0,0,0);
+		monster.createStatusEffect(StatusEffects.Blind,2 + rand(3),0,0,0);
 	}
 	kGAMECLASS.enemyAI();
 }
@@ -1312,7 +1312,7 @@ private function urtaDirtKick():void {
 //SideWinder: 70% damage + stun chance
 private function urtaSidewinder():void {
 	clearOutput();
-	if(player.fatigue + 10 > player.maxFatigue()) {
+	if (player.fatigue + 10 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that attack!");
 //Gone		menuLoc = 3;
 //		doNext(getGame().combatMenu);
@@ -1322,26 +1322,26 @@ private function urtaSidewinder():void {
 	}
 	fatigue(10);
 	//Blind
-	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
+	if (player.findStatusEffect(StatusEffects.Blind) >= 0) {
 		outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
 	else outputText("You make a wide swing to the side, hoping to stun your foe!  ");
 	var damage:Number;
 	//Determine if dodged!
-	if((player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
-		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
-		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
-		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
+	if ((player.findStatusEffect(StatusEffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
+		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
+		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
 		outputText("\n\n", false);
 		kGAMECLASS.enemyAI();
 		return;
 	}
 	//Determine damage
 	/*Determine damage - str modified by enemy toughness!
-	if(player.hasPerk("Double Attack") >= 0 && player.str <= 60) {
-		if(player.weaponName == "deadly spear") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "jeweled rapier") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "katana") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef - 5));
+	if (player.hasPerk("Double Attack") >= 0 && player.str <= 60) {
+		if (player.weaponName == "deadly spear") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
+		else if (player.weaponName == "jeweled rapier") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
+		else if (player.weaponName == "katana") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef - 5));
 		else damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef));
 	}*/
 	//Basic damage stuff
@@ -1352,23 +1352,23 @@ private function urtaSidewinder():void {
 	damage *= .7;
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	if(rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
+	if (rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
 		crit = true;
 		damage *= 1.75;
 	}
 	//Start figuring enemy damage resistance
 	var reduction:Number = rand(monster.tou);
 	//Add in enemy armor if needed
-	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
+	if (player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
 		reduction += monster.armorDef;
 		//Remove half armor for lunging strikes
-		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
+		if (player.findPerk(PerkLib.LungingAttacks) >= 0)
 			reduction -= monster.armorDef/2;
 	}
 	//Take 5 off enemy armor for katana
-	if(player.weaponName == "katana") {
+	if (player.weaponName == "katana") {
 		//Knock off 5
-		if(monster.armorDef >= 5) reduction -= 5;
+		if (monster.armorDef >= 5) reduction -= 5;
 		//Less than 5 armor?  TAKE IT ALL!
 		else reduction -= monster.armorDef;
 	}
@@ -1376,41 +1376,41 @@ private function urtaSidewinder():void {
 	damage -= reduction;
 	//Damage post processing!
 	//Thunderous Strikes
-	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
+	if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
 		damage *= 1.2;
 	//One final round
 	damage = Math.round(damage);
 
-	if(damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+	if (damage > 0) {
+		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		damage = kGAMECLASS.doDamage(damage);
 	}
-	if(damage <= 0) {
+	if (damage <= 0) {
 		damage = 0;
 		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
 	}
 	else {
 		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
-		if(crit) outputText(" <b>*CRIT*</b>");
+		if (crit) outputText(" <b>*CRIT*</b>");
 	}
-	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
-		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
-		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
+	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+		if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
+		if (monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
-	if(monster.findStatusAffect(StatusAffects.Stunned) < 0 && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0) {
-		if(monster.tou/10 + rand(20) + 1 < 20) {
+	if (monster.findStatusEffect(StatusEffects.Stunned) < 0 && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0) {
+		if (monster.tou/10 + rand(20) + 1 < 20) {
 			outputText("\n<b>" + monster.capitalA + monster.short + " is stunned!</b>");
-			monster.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
+			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}
 	}
-	else if(monster.findPerk(PerkLib.Resolute) >= 0) {
+	else if (monster.findPerk(PerkLib.Resolute) >= 0) {
 		outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
 	}
 	outputText("\n", false);
 	//Kick back to main if no damage occured!
-	if(monster.HP >= 1 && monster.lust <= 99) {
-		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) {
+	if (monster.HP >= 1 && monster.lust <= 99) {
+		if (player.findStatusEffect(StatusEffects.FirstAttack) >= 0) {
 			kGAMECLASS.attack();
 			return;
 		}
@@ -1418,7 +1418,7 @@ private function urtaSidewinder():void {
 		kGAMECLASS.enemyAI();
 	}
 	else {
-		if(monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
+		if (monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
 		else doNext(kGAMECLASS.endLustVictory);
 	}
 }
@@ -1427,7 +1427,7 @@ private function urtaSidewinder():void {
 //Vault: Use the halberd to support her weight and deliver a high power kick to the enemy, deals 15% more damage. If the enemy is stunned, auto-critical. This is like the move she uses during the fight against the wolf in that scene at Tel'Adre.
 private function urtaVaultAttack():void {
 	clearOutput();
-	if(player.fatigue + 20 > player.maxFatigue()) {
+	if (player.fatigue + 20 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that attack!");
 //Gone		menuLoc = 3;
 //		doNext(getGame().combatMenu);
@@ -1436,24 +1436,24 @@ private function urtaVaultAttack():void {
 		return;
 	}
 	fatigue(20);
-	if(player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv2(StatusAffects.Sealed) == 0) {
+	if (player.findStatusEffect(StatusEffects.Sealed) >= 0 && player.statusEffectv2(StatusEffects.Sealed) == 0) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The seals have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		kGAMECLASS.enemyAI();
 		return;
 	}
 	//Blind
-	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
+	if (player.findStatusEffect(StatusEffects.Blind) >= 0) {
 		outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 	}
 	else outputText("You leap into the air, intent on slamming your " + player.weaponName + " into your foe!  ");
 	var damage:Number;
 	//Determine if dodged!
-	if((player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
-		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
-		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
-		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
+	if ((player.findStatusEffect(StatusEffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
+		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
+		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
 		outputText("\n", false);
-		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) {
+		if (player.findStatusEffect(StatusEffects.FirstAttack) >= 0) {
 			kGAMECLASS.attack();
 			return;
 		}
@@ -1463,10 +1463,10 @@ private function urtaVaultAttack():void {
 	}
 	//Determine damage
 	/*Determine damage - str modified by enemy toughness!
-	if(player.hasPerk("Double Attack") >= 0 && player.str <= 60) {
-		if(player.weaponName == "deadly spear") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "jeweled rapier") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
-		else if(player.weaponName == "katana") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef - 5));
+	if (player.hasPerk("Double Attack") >= 0 && player.str <= 60) {
+		if (player.weaponName == "deadly spear") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
+		else if (player.weaponName == "jeweled rapier") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou));
+		else if (player.weaponName == "katana") damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef - 5));
 		else damage = int((player.str + player.weaponAttack) - Math.random()*(monster.tou + monster.armorDef));
 	}*/
 	//Basic damage stuff
@@ -1477,23 +1477,23 @@ private function urtaVaultAttack():void {
 	damage *= 1.25;
 	//Determine if critical hit!
 	var crit:Boolean = false;
-	if(monster.findStatusAffect(StatusAffects.Stunned) >= 0 || rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
+	if (monster.findStatusEffect(StatusEffects.Stunned) >= 0 || rand(100) <= 4 || (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50 && (player.inte - 50)/5 > rand(100))) {
 		crit = true;
 		damage *= 2;
 	}
 	//Start figuring enemy damage resistance
 	var reduction:Number = rand(monster.tou);
 	//Add in enemy armor if needed
-	if(player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
+	if (player.weaponName != "jeweled rapier" && player.weaponName != "deadly spear") {
 		reduction += monster.armorDef;
 		//Remove half armor for lunging strikes
-		if(player.findPerk(PerkLib.LungingAttacks) >= 0)
+		if (player.findPerk(PerkLib.LungingAttacks) >= 0)
 			reduction -= monster.armorDef/2;
 	}
 	//Take 5 off enemy armor for katana
-	if(player.weaponName == "katana") {
+	if (player.weaponName == "katana") {
 		//Knock off 5
-		if(monster.armorDef >= 5) reduction -= 5;
+		if (monster.armorDef >= 5) reduction -= 5;
 		//Less than 5 armor?  TAKE IT ALL!
 		else reduction -= monster.armorDef;
 	}
@@ -1501,32 +1501,32 @@ private function urtaVaultAttack():void {
 	damage -= reduction;
 	//Damage post processing!
 	//Thunderous Strikes
-	if(player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
+	if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80)
 		damage *= 1.2;
 	//One final round
 	damage = Math.round(damage);
 
-	if(damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
+	if (damage > 0) {
+		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
 		damage = kGAMECLASS.doDamage(damage);
 	}
-	if(damage <= 0) {
+	if (damage <= 0) {
 		damage = 0;
 		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
 	}
 	else {
 		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
-		if(crit) outputText(" <b>*CRIT*</b>");
+		if (crit) outputText(" <b>*CRIT*</b>");
 	}
-	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
-		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
-		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
+	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+		if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
+		if (monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
 	outputText("\n", false);
 	//Kick back to main if no damage occured!
-	if(monster.HP >= 1 && monster.lust <= 99) {
-		if(player.findStatusAffect(StatusAffects.FirstAttack) >= 0) {
+	if (monster.HP >= 1 && monster.lust <= 99) {
+		if (player.findStatusEffect(StatusEffects.FirstAttack) >= 0) {
 			kGAMECLASS.attack();
 			return;
 		}
@@ -1534,7 +1534,7 @@ private function urtaVaultAttack():void {
 		kGAMECLASS.enemyAI();
 	}
 	else {
-		if(monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
+		if (monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
 		else doNext(kGAMECLASS.endLustVictory);
 	}
 }
@@ -1578,7 +1578,7 @@ public function nagaPleaseNagaStoleMyDick():void {
 //Urta Wins*
 public function urtaBeatsUpSiriusRadio():void {
 	//Beaten via Lust:
-	if(monster.lust >= 99) outputText("The naga's hands begin pumping his erect prick as his eyes grow hazier and hazier, the lids slowly sliding shut across them.  He arches his back and lets a cry of defiance and pleasure as he explosively splurts cum onto the ground at your feet, then quietly collapses onto his own coils, murmuring softly.  You wait, but it looks like he's fallen asleep... sheesh.");
+	if (monster.lust >= 99) outputText("The naga's hands begin pumping his erect prick as his eyes grow hazier and hazier, the lids slowly sliding shut across them.  He arches his back and lets a cry of defiance and pleasure as he explosively splurts cum onto the ground at your feet, then quietly collapses onto his own coils, murmuring softly.  You wait, but it looks like he's fallen asleep... sheesh.");
 	//Beaten via HP:
 	else outputText("Your latest blow lands with a crunch on his jaw and he collapses bodily onto the ground at your feet, clearly out cold.");
 
@@ -1674,7 +1674,7 @@ public function urtaLosesToSirriusSnakeRadio():void {
 	clearOutput();
 	flags[kFLAGS.URTA_BECOMES_SNAKE_SLAVE] = 1;
 	//Loss by HP:
-	if(player.HP < 1) outputText("You cry out in pain as the bruises and buffets you've taken overwhelm you.  You struggle to stay upright, but to no avail; your injured body has reached its limits and you collapse, helpless and at the mercy of your assailant.");
+	if (player.HP < 1) outputText("You cry out in pain as the bruises and buffets you've taken overwhelm you.  You struggle to stay upright, but to no avail; your injured body has reached its limits and you collapse, helpless and at the mercy of your assailant.");
 	//Loss by Lust:
 	else outputText("With a hollow moan of anguish, you cast aside your halberd and fall to your knees, tears stinging your eyes as you desperately jerk and maul at your huge horse-prick.  The cursed thing has betrayed you again, and now you're too addled by lust and need to defend yourself from whatever this naga has in store for you.");
 
@@ -1802,7 +1802,7 @@ public function winRapeHyenaPrincess():void {
 	outputText("Laughing at the Amazonian princess, you unbuckle your skirt, not even bothering to shed your armor.  Sure, your hard onyx nipples are digging into the inner lining of your leather breastplate, but it's just another pleasant sensation feeding your arousal.  In the back of your mind, you hope " + player2.short + " won't mind this indiscretion - you can't afford to go wandering around unsated in a place like this.  If a succubus found you all alone and turned on, you might actually fall for her tricks, resistant as you are.  You pray that " + player2.mf("he","she") + "'ll understand.");
 
 	outputText("\n\nYour guilt temporarily assuaged, you round on your prize, letting her see the sheer girth of your rising horse-cock, the mottled pink and black flesh thickening and filling until it gleams in the sunlight.  The gnoll gasps while her bright-pink girl-cock sprouts from her clitoral hood, nearly matching you in size and length.  \"<i>It's soo... big!</i>\" she says, almost reverently");
-	if(monster.HP < 1) outputText(".  In spite of her wounded state, she seems to be quite excited by the situation");
+	if (monster.HP < 1) outputText(".  In spite of her wounded state, she seems to be quite excited by the situation");
 	outputText(".");
 
 	outputText("\n\nPrancing up confidently, you smear your dick across her nose, distracting her with your potent, equine scent while you pull a spear from her backpack.  You pull her wrists together behind her back and smack the spear into her hands.  It bursts into a sticky mess, shrouding her hands and restraining them together.  The gnoll starts to struggle, but you easily push her over, rolling her over unmercifully.");
@@ -1870,7 +1870,7 @@ public function useSuccubiMilkOnGnollPrincesses():void {
 	outputText("\n\nHer first time? She's a... virgin?");
 
 	outputText("\n\nWell, as they say, she'll still TECHNICALLY be one after you're done with her!  You give her ass another harsh slap, making the gnoll squeal as you force your giant wang into her asshole.  She's incredibly tight, and her anal muscles desperately try to repel your advance.  But you persist, lavishing the slut with thick dollops of pre that help speed and ease your entry, lubricating her anus until after a few minutes of short, jackhammering thrusts she's as wet and sloppy as ");
-	if(flags[kFLAGS.URTA_FUCKED_HEL] == 1) outputText("that salamander slut's cunt");
+	if (flags[kFLAGS.URTA_FUCKED_HEL] == 1) outputText("that salamander slut's cunt");
 	else outputText("a mino-cum addicted whore's sodden cunt");
 	outputText(".  As you start to pick up the pace, bucking your hips into the thick cushion of her rump, the gnoll princess starts mewling pathetically, panting and moaning like a little slut.");
 
@@ -1911,7 +1911,7 @@ public function useSuccubiMilkOnGnollPrincesses():void {
 public function loseToGnollPrincessAndGetGangBanged():void {
 	clearOutput();
 	flags[kFLAGS.URTA_TAKEN_BY_GNOLLS] = 1;
-	if(player.lust >= player.maxLust()) {
+	if (player.lust >= player.maxLust()) {
 		outputText("Sinking to your knees, utterly overwhelmed by lust, you gaze up the clit-cocked amazon, licking your chops. She responds by disdainfully pushing you down with one of her soft, padded paws.  \"<i>Did you really think you could trespass in my mother's territory and go unpunished?</i>\"");
 
 		outputText("\n\n\"<i>I didn't know!</i>\" you whimper, \"<i>Honest!  I just had to-ooooohhhh...</i>\"");
@@ -1958,7 +1958,7 @@ private function loseToGnollAsUrtaEpilogue():void {
 	clearOutput();
 	//Loss Epilogue✓
 	//[HP]
-	if(player.HP < 1) outputText("Ouch... what happened to you?  You blink a few times, ignoring the buzzing throb of pain that rises up like a dormant monster in the back of your head.");
+	if (player.HP < 1) outputText("Ouch... what happened to you?  You blink a few times, ignoring the buzzing throb of pain that rises up like a dormant monster in the back of your head.");
 	//[Lust]
 	else outputText("Oh, gods... what happened to you?  You blink a few times, ignoring the gentle throb coming from your well-used member.");
 	outputText("  There's a constant, loud thrum of many voices talking all at once that makes it hard to think, and when you finally come to focus in the dim lighting, you can see why.  There are dozens, if not hundreds, of gnolls here, assembled in the faint light of some kind of feast hall, most of them male.");
@@ -1966,7 +1966,7 @@ private function loseToGnollAsUrtaEpilogue():void {
 	outputText("\n\nRecoiling in terror, you try to turn, scrambling madly at your restraints.  The shock of being tied down only spurs you to struggle harder, and you madly twist and writhe against the leather bands binding you to the wall.");
 
 	outputText("\n\n\"<i>Ah... my prize awakens,</i>\" remarks a rich, female voice, steeped in arrogance and pride, \"<i>");
-	if(player.HP < 1) outputText("I hope I wasn't too rough on you");
+	if (player.HP < 1) outputText("I hope I wasn't too rough on you");
 	else outputText("I hope you enjoyed the journey here");
 	outputText(".</i>\"");
 
@@ -1979,7 +1979,7 @@ private function loseToGnollAsUrtaEpilogue():void {
 	outputText("\n\nYou nod your head.");
 
 	outputText("\"<i>Good girl,</i>\" she says encouragingly.  ");
-	if(player.HP >= 1) outputText("You shudder at the memory of your meeting, leaking a little more lubricant.  ");
+	if (player.HP >= 1) outputText("You shudder at the memory of your meeting, leaking a little more lubricant.  ");
 	outputText("As if by magic, a knife appears in the gnoll princess' hand, and she swiftly lays into the bindings holding your feet.  With your feet free, you can flex your legs a little.  They ache from being immobile so long.  Just how long were you hanging there, anyway?  The gnoll princess - it bears to reason she can only be a princess, considering how she is dressed compared to the rest of the gnolls here - rises up on her paws to reach the leather around your arm.  Quickly, she slashes through both restraints.  There's a moment of panic when you begin to fall; you can't possibly catch yourself on your weakened legs.  The princess secures you easily as she discards the knife.  \"<i>Did you think I'd let my favorite piece of property get damaged?</i>\"");
 
 	outputText("\n\n\"<i>Thanks,</i>\" you say, blushing harder.  Your new 'owner' (at least until you escape, you remind yourself) sets you down on a simple bench at her table before seating herself next to you.  \"<i>I told you I'd make it enjoyable if you came along nicely.  Here, have some of this; it's going to make the orgy a lot more fun for all of us,</i>\" she says while handing you a corked off water-skin.  You hesitantly pop the top and give it a sniff.  It smells like alcohol - very, very strong alcohol - with something else added.  \"<i>Drink it,</i>\" your makeshift mistress commands, lifting the bottom of it.");
@@ -2246,7 +2246,7 @@ private function introSuccubiAndMinotaur():void {
 public function urtaSubmitsToMinotaurBadEnd():void {
 	clearOutput();
 	outputText("You mouth opens, drooling with hunger that you know only the sexy beast across from you can sate.");
-	if(monster.findStatusAffect(StatusAffects.MinotaurEntangled) >= 0) outputText("   Seeing the fire in your eyes change from a determined glare to a lusty look, the minotaur pulls you over, carefully unwinding the chain from around you, so as not to damage you.");
+	if (monster.findStatusEffect(StatusEffects.MinotaurEntangled) >= 0) outputText("   Seeing the fire in your eyes change from a determined glare to a lusty look, the minotaur pulls you over, carefully unwinding the chain from around you, so as not to damage you.");
 	outputText("  Your once foe removes his loincloth to fully expose the mammoth between his legs, three feet long and nearly twice as girthy as your own.  You're so dazed by his imposing manhood, that you totally miss him flinging his loincloth at you.  It smacks wetly into your face, smothering you in his syrupy spooge.");
 	outputText("\n\nFlopping down on your ass, tail swishing happily, you lap at the moist interior of the minotaur lord's only garment.  His constantly drooling cock has utterly soaked the fabric with his pre-cum.  It tastes and smells so strong, and you just can't get enough, humming happily as your tongue draws dollop after dollop into your greedy maw.  Your body shudders with each swallow, and your cock pulses below, rigid and fitfully flaring reflexively.");
 
@@ -2349,7 +2349,7 @@ private function submissiveMinoUrtaBadEndPtIII():void {
 public function winRapeAMinoLordAsUrta():void {
 	clearOutput();
 	outputText("Exulting in your victory, you quickly undress, barely paying heed to the ");
-	if(monster.lust >= monster.eMaxLust()) outputText("lusty");
+	if (monster.lust >= monster.eMaxLust()) outputText("lusty");
 	else outputText("pained");
 
 	outputText(" moos coming from your defeated foe.  Thankfully, the straps on your armor don't give you much trouble today, and you're able to slip out of your gear in short order.  That's a pleasant blessing given how hard your horse-cock was getting just prior to being granted freedom from your weighty, armored skirt.  There's something to be said for felling your foes and standing over them, naked, victorious, and ready to ravage their anuses.");
@@ -2399,10 +2399,10 @@ public function winRapeAMinoLordAsUrta():void {
 public function urtaLosesToMinotaurRoughVersion():void {
 	clearOutput();
 	outputText("You collapse to your knees, too ");
-	if(player.HP < 1) outputText("battered and bruised");
+	if (player.HP < 1) outputText("battered and bruised");
 	else outputText("weak from lust");
 	outputText(" to continue fighting.  The hulking bull-man snorts as he approaches you, ");
-	if(monster.lust < 70) outputText("barely deigning to give your far smaller cock a contemptuous look, ");
+	if (monster.lust < 70) outputText("barely deigning to give your far smaller cock a contemptuous look, ");
 	outputText("before he reaches down to grab you.  From somewhere deep inside of you, you manage to draw up one last dredge of resistance, and you promptly snap your teeth shut on his hairy arm.  A tiny part of you feels ashamed at reverting to such primitive behavior, but practicality trumps sentiment on this occasion.  He growls angrily and shakes his arm, trying to send you flying, but fails; you just bite him harder and harder with each shake, until the thick, coppery tang of blood floods your tongue... and makes your belly reel and roil, causing you to feel sicker than that time you tried to eat three bowls of canine pepper salsa with extra peppers in a single sitting (you were drunk then, in your defense).  You try to fight it off, but you can't escape, and instead you let go of your assailant's arm, the motion hurling you to the ground, where you retch and gag... how could you have forgotten that minotaur blood can transform other people into minotaurs?  Or your own adverse reaction to transformation items?");
 
 	outputText("\n\nThe minotaur doesn't seem to mind the blood dripping down his form as he advances on you, cuffing the side of your head for your impertinence.  His strike is strong enough to send stars careening through your field of view, dazing you badly enough that you momentarily forget where you are.  You would tumble to the ground from your failing balance if it wasn't for the strong, shaggy hand grabbing hold of you by the shoulder.");
@@ -2480,7 +2480,7 @@ public function beatMinoLordOnToSuccubi():void {
 	outputText("\n\n\"<i>Not a chance,</i>\" you retort.  \"<i>Now move aside.</i>\"");
 
 	//{If Urta raped Fido:}
-	if(flags[kFLAGS.URTA_RAPED_MINO_LORD] > 0) {
+	if (flags[kFLAGS.URTA_RAPED_MINO_LORD] > 0) {
 		outputText("\n\n\"<i>Why so reluctant my dear?  You didn't seem to mind when you were fucking my pet earlier, so why refuse now?</i>\"  She sucks on a finger tantalisingly.");
 
 		outputText("\n\nYou laugh your bitterest laugh.  \"<i>Him?  Only because I was desperately horny - I wouldn't fuck him with the end of this halberd otherwise, and the same goes for you.</i>\"");
@@ -2502,12 +2502,12 @@ public function beatMinoLordOnToSuccubi():void {
 //Tick Message:
 public function milkyUrtaTic():void {
 	outputText("Your body heats up with the effects of the succubus-cow milk...  ");
-	if(player.lust < 50) outputText("Thankfully it hasn't become too distracting yet.");
-	else if(player.lust < 75) outputText("You don't know how much longer you'll be able to withstand the effects of the milk.");
+	if (player.lust < 50) outputText("Thankfully it hasn't become too distracting yet.");
+	else if (player.lust < 75) outputText("You don't know how much longer you'll be able to withstand the effects of the milk.");
 	else outputText("Those orbs full of milky goodness are starting to look more attractive by the minute... if you don't finish this quickly you might end up giving up!");
 	outputText("\n\n");
-	player.addStatusValue(StatusAffects.MilkyUrta,1,-1);
-	if(player.statusAffectv1(StatusAffects.MilkyUrta) <= 0) player.removeStatusAffect(StatusAffects.MilkyUrta);
+	player.addStatusValue(StatusEffects.MilkyUrta,1,-1);
+	if (player.statusEffectv1(StatusEffects.MilkyUrta) <= 0) player.removeStatusEffect(StatusEffects.MilkyUrta);
 	dynStats("lus", 10);
 }
 
@@ -2519,7 +2519,7 @@ public function milkyUrtaTic():void {
 public function urtaBeatsUpCowcubi():void {
 	clearOutput();
 	//HP:
-	if(monster.HP < 1) {
+	if (monster.HP < 1) {
 		outputText("The succubus trips and falls on her face, dropping her whip at your feet.  You quickly take her whip and use it to bind her hands behind her back.");
 		outputText("\n\n\"<i>Oh, bondage... now you're getting me worked up,</i>\" she laughs and looks up at you seductively.");
 		outputText("\n\n\"<i>Breathing gets you worked up,</i>\" is your flatly intoned reply.");
@@ -2607,7 +2607,7 @@ private function fuckTheCowCubi():void {
 public function urtaLosesToCowCubi():void {
 	clearOutput();
 	outputText("Sinking to your knees, ");
-	if(player.HP < 1) outputText("you struggle futilely to rise.  Your arms are shaking and bloody.  It's just too hard.  Your muscles just won't respond, and you fall flat on your face, unable to get up.  The succubus laughs at your plight, and places both her hands on your head.  You struggle, but you're too wounded to wiggle free.  Her magic begins to pulse through your brain, thrumming erotically through your consciousness.  Your heart begins to beat faster and faster, blood rushing to your extremities.  You moan, rigidly, exquisitely hard, your member rising through the soft moss below.  You might have been resistant to her magic at a distance, but nothing could protect you from this.  You NEED to fuck.");
+	if (player.HP < 1) outputText("you struggle futilely to rise.  Your arms are shaking and bloody.  It's just too hard.  Your muscles just won't respond, and you fall flat on your face, unable to get up.  The succubus laughs at your plight, and places both her hands on your head.  You struggle, but you're too wounded to wiggle free.  Her magic begins to pulse through your brain, thrumming erotically through your consciousness.  Your heart begins to beat faster and faster, blood rushing to your extremities.  You moan, rigidly, exquisitely hard, your member rising through the soft moss below.  You might have been resistant to her magic at a distance, but nothing could protect you from this.  You NEED to fuck.");
 	else outputText("you start pulling at your [armor], struggling with every strap and piece of restraining, constricting leather.  Your lust-clouded mind can barely focus to work your fumbling fingers against the snaps and straps.  In your haste, with balancing forgotten, you tumble onto your face, smearing your dick exquisitely between your fallen form and a patch of soft moss.  You mewl pitifully in protest.  You need to fuck!");
 	outputText("\n\nThe succubus laughs cruelly, her throaty voice bursting with contemptuous mirth.  \"<i>Such a pretty little foxy...</i>\"  She kneels in front of you, meeting your lusty, vacant gaze as you slowly grind your hips in the dirt, smearing your pre beneath you like some kind of wanton, heat-addled animal.  \"<i>You have so much potential as a pet - a knock-out body, nice tits that have just enough bounce... not too saggy either... and that cock.  I always wanted a real dog for a pet.  Yes, yes, you're a fox,</i>\" she says, stroking your nose affectionately.  You lick her finger into your mouth, pleading with her to undress you and take you in the only way you can think to.  \"<i>You're still my little bitch, aren't you?</i>\"");
 
@@ -2628,7 +2628,7 @@ public function urtaLosesToCowCubi():void {
 	outputText("\n\nInside her flexible twat, your dick loses itself to the pleasure.  It's so hard and rigid, as thick and engorged as it's ever been, flaring wildly while the silken walls stroke it up and down, over and over.  It's as if her pussy has a hand around you, jerking you off with her inner, velvet-soft walls, constantly drizzling bubbly, tingly lube all over your shaft.  Her pussy is like a honeyed, clutching cock-heaven, one you never want to leave.  You're sure that if you weren't so obsessed with drinking down her milk, you'd be cumming already, splattering jizz into that rippling, ecstasy-inducing fuck-hole, but for now, you're content to ride along, drinking and sagging against her plush, milk-filled tits, your dick drooling while it experiences bliss like you've never known before.");
 
 	outputText("\n\nThose beautiful, plump, tasty little milk-spouts suddenly retract, back to perky, three-quarter-inch nubs.  You're yanked back of her mammoth udder by a cruel yank on your hair and immediately placed onto the other jiggling mound.  Four fresh teats swell into your unresisting maw while the other side dribbles a few last trickles, and then you're drinking again, suckling the succubus's sensuous lactation down with gusto.  Sharp, manicured nails play through your hair while the quad milk injection does its job, filling you with vitality");
-	if(player.HP < player.maxHP()) outputText(" and healing your wounds");
+	if (player.HP < player.maxHP()) outputText(" and healing your wounds");
 	outputText(".  Your own nipples have long since become fully engorged, taut black tit-caps, pebbly and sensitive.  They drag up and down the fat bottoms of the demoness's swollen underbust with every swallow and gasping breath you take.");
 
 	outputText("\n\n\"<i>Drink long and drink deep,</i>\" her voice coos in your ear, accompanied by a comforting caress of your poor, swollen nutsack.  It feels utterly tight, straining to contain the sloshing cum-factories within.  As you drink, your back begins to arch uncomfortably.  You're being pushed away by your stuffed, wobbly gut.  It's begun to slosh with every swallow, but you've never felt better.  A steady, placid buzz has settled over your awareness, and you feel totally compelled to <i>drink long and drink deep</i>.  No problem!  You love this milk.  You'll just drink for a few more hours and then fight her off - after you cum.");
@@ -2740,23 +2740,23 @@ private function urtaArrivesAtCampForFukks():void {
 
 	outputText("\n\n\"<i>Hi, " + player.short + "...</i>\" she manages to pant out.  Looking at the state of her, you take a wild guess and suggest she spoke to her 'guest'.  \"<i>Yeah... Taoth's promised to get out of me, but, first, we need to give him a new host body... well, <b>I</b> need to give him a new body.</i>\"  Urta still has control enough to look sheepish, despite the fact her body is blatantly screaming for release.  \"<i>I-I'd rather do it with you, but ");
 	//if genderless:
-	if(player.gender == 0) outputText("seeing as how you can't make babies");
+	if (player.gender == 0) outputText("seeing as how you can't make babies");
 	else outputText("if you'd rather not");
 	outputText(", I can always go and use Edryn...</i>\"");
 
 	outputText("\n\n\"<i>What do we do, " + player2.short + "?</i>\" she pants, practically whimpering.  \"<i>We need to choose fast... I can't hold.... hold back much longer!</i>\"");
 
 	outputText("\n\nWell, this is quite the surprise!  You have no idea who 'Taoth' is, but you can only guess that it's some kind of spirit or demon or something.  She seems to have been put into some kind of wild rut and heat, determined to produce a baby to release this... thing from inside of her.  Do you");
-	if(player.gender > 0) outputText(" fuck the horny fox and help her out of her predicament, or");
+	if (player.gender > 0) outputText(" fuck the horny fox and help her out of her predicament, or");
 	outputText(" send her to Tel'Adre to find a suitable partner, like Edryn?");
-	/*if(player.hasCock()) {
-		if(player.cockThatFits(urtaCapacity()) < 0) outputText("  A shame you're too big to fit inside her.");
+	/*if (player.hasCock()) {
+		if (player.cockThatFits(urtaCapacity()) < 0) outputText("  A shame you're too big to fit inside her.");
 	}*/
 	//Genderless PCs auto-select the Edryn option, KnockUrta requires PC has penis, KnockMe requires PC has vagina
 	menu();
 	//[KnockUrta] [KnockMe] [Edryn]
-	if(player.hasCock()) addButton(0,"KnockUrta",knockUpUrtaWithGodChild);
-	if(player.hasVagina()) addButton(1,"KnockMe",getKnockedUpWithGodChild);
+	if (player.hasCock()) addButton(0,"KnockUrta",knockUpUrtaWithGodChild);
+	if (player.hasVagina()) addButton(1,"KnockMe",getKnockedUpWithGodChild);
 	addButton(2,"Edryn",urtaAndEdrynGodChild);
 
 }
@@ -2764,33 +2764,33 @@ private function urtaArrivesAtCampForFukks():void {
 private function knockUpUrtaWithGodChild():void {
 	clearOutput();
 	var x:int = player.cockThatFits(urta.urtaCapacity());
-	if(x < 0) x = player.smallestCockIndex();
+	if (x < 0) x = player.smallestCockIndex();
 	outputText("Well, this problem seems like it can solved the same way you've dealt with most of Urta's issues - with the judicious application of sperm.  You strip out of your [armor], which causes the lust-crazed vixen's eyes to bulge in appreciation, her mouth beginning to drool nearly as much as her genitals.  She whimpers needily, \"<i>Now?  Can we do it now?</i>\"  One after another, she takes trembling steps towards you, each movement a shuffling half-step, as if she's afraid you'll run away.  Feverish sweat drips from her forehead, and her ears are constantly twitching this way and that.");
 	outputText("\n\nYou admit to her that you'll fuck her and fill her, whatever it takes to help her through this.");
 	outputText("\n\nAt first, the gray-furred fox smiles gratefully, like someone finding water after a day without, but then, it twists into a manic, depraved grin, full of teeth and slavering saliva.  She doubles over like she's in pain, her legs pulled tight to her heaving breasts.  Uncoiling like a spring, the fertility-crazed vixen launches herself toward you, a ball of flying, sexual fury.  She slams into your [chest], hurling you over to the ground, kissing you with lip-bruising force, her tongue forcing its way into your mouth, slapping at your tongue, lapping at every crevice of your oral opening.");
 
 	outputText("\n\nYou feel wetness dripping in the middle of your [fullChest] and over [eachCock], the twin streams of sex-lube just pouring out of Urta like water from a broken dam.  Her green eyes pin you under their overly intense weight, searching you.  She holds herself like that, grinding her fat, flared cockhead along your middle, smearing her plush vulva and sweaty nutsack against");
-	if(player.cockTotal() == 1) outputText(" your own");
+	if (player.cockTotal() == 1) outputText(" your own");
 	else outputText(" [oneCock]");
 	outputText(".  The nub of her clit is a diamond-hard button that drags across your sensitive " + player.skin() + ", aggressively smashed into your genitals.  Still, somehow, she seems to be holding back, probing you with some last vestige of sanity for your consent.");
 
 	outputText("\n\nSighing, you figure you may as well lie back and enjoy it, and you push your tongue back against hers, letting her set the fevered, frenzied pace but along for the ride regardless.  She picks up on the change in your attitude and shifts, a soft-fingered grip snaring [oneCock] and lifting it up, pressing it into the slick wetness between her thighs.  You gasp, muffled by her overwhelmingly intense french-kiss, the fox-girl's puffy black lips smothering your own in warm, wet affection.  Likewise, the onyx opening of her vagina yields against your " + cockDescript(x) + ", clinging tightly around your girth as they swallow the first few inches of you.  Already, you can feel her inner walls massaging your tender erection towards orgasm.  They squeeze and tug on your " + player.cockHead(x) + " powerfully while small squirts of fox-lube drizzle down to your [sheath].  The fox drives herself the rest of the way down onto you.  Her hips hit yours with a loud smack, splattering her moisture down your [legs].");
 
 	outputText("\n\nFinally, Urta breaks the kiss, panting for air as she begins to buck and rock atop you.  Your " + cockDescript(x) + " shivers against the squeezing pressures the frenzied fox is forcing upon you, and already you can feel yourself trickling and leaking into her sodden vice.  Both of your bodies have become absolutely drenched in sticky, musky horse-pre");
-	if(player.cockTotal() > 1) outputText(", the mess made worse by your multiple-cocked virility.  There's so much that the clear juices roll off you to either side, puddling in your blankets below");
+	if (player.cockTotal() > 1) outputText(", the mess made worse by your multiple-cocked virility.  There's so much that the clear juices roll off you to either side, puddling in your blankets below");
 	outputText(".  Her nipples dig into yours");
-	if(player.hasFuckableNipples()) {
+	if (player.hasFuckableNipples()) {
 		outputText(", kissing into the ");
-		if(player.lactationQ() > 50) outputText("milky, ");
+		if (player.lactationQ() > 50) outputText("milky, ");
 		outputText("wet holes on your tits, drawing fresh gasps of delight from your overwhelmed brain");
 	}
 	else outputText(", shooting tingling excitement through your nubs as you grind against each other");
 	outputText(".  Urta's artless humping would be cringeworthy if she weren't so incredibly wet or overly tight.");
 	outputText("\n\nThe confused girl begins to moan, howl even, yipping wildly as she bottoms out again and again, slathering your loins in her honeyed, female syrup.  She shudders, lost to lust, and the clingy, clenching hole gives a tremendous squeeze around your " + cockDescript(x) + ".  Urta babbles, \"<i>So good... so good...</i>\" over and over, her eyes rolling wildly.  You grab hold of her cushiony, furry behind like a drowning man holding on to a life raft while the pleasure mounts within you, seeming to bubble out of your very balls.  \"<i>Cumcumcumcum!</i>\" the vixen chants, milking you desperately.  You do just that, squirting out a nice, thick load for the her greedy pussy to drink down.  The runny girl-cum that's oozing over your ");
-	if(player.balls > 0) outputText("[sack]");
+	if (player.balls > 0) outputText("[sack]");
 	else outputText("taint");
 	outputText(" tints off-white from your liquid, squirting out of her tunnel faster than ever when she climaxes with you");
-	if(player.cumQ() > 1000) outputText(", belly rounded with wobbly, womb-packing spunk");
+	if (player.cumQ() > 1000) outputText(", belly rounded with wobbly, womb-packing spunk");
 	outputText(".");
 	outputText("\n\nYou come down from your orgasmic high, slumping back into the messy mud below.  It's beginning to dry and harden already, the moisture being wicked away by the parched earth.  You'd get up, but Urta isn't done!  She begins bouncing again, her spasming inner walls rippling expertly around you as she rides you rough and dirty, keeping you so hard that it hurts, even after such a potent orgasm.");
 
@@ -2810,9 +2810,9 @@ private function postFuckUrtaUp():void {
 	outputText("\n\nThankfully, Urta spares you the trouble, waking up with a moan.  \"<i>Oh... I feel so full,</i>\" she grumbles, struggling to get up under the weight of her belly.  When she realizes what's holding her down, she stops, staring at it in dumbfounded awe.  \"<i>" + player.short + ", is this really...?</i>\"  When you nod, she shakes her head in disbelief.   \"<i>Incredible... it really is real.  Oh, " + player.short + ", I just... I just don't have the words to tell you how I feel about this.</i>\"");
 	outputText("\n\nYou ask her what she's going to do now.  Urta looks thoughtful.  \"<i>Well... the Covenant would want me to stay with them and give birth to Taoth amongst them.  So, I guess, from here, I'll be going to them.</i>\"  She looks at her belly quietly, and you have a feeling she'd be looking at her feet instead if she could still see them.  \"<i>..." + player.short + "?  I don't suppose you would come with me?   Please?  I know you're dedicated to guarding this portal, but it would really mean a lot to me if I could have you at my side for however long this pregnancy is going to last.</i>\"");
 	outputText("\n\nYou give the matter some thought, and decide that the risk is worth it");
-	if(flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(" - besides, given you know that you're nothing but a sacrifice the demons are too lazy to collect, it's not like they'll really send an invasion through");
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(" - besides, given you know that you're nothing but a sacrifice the demons are too lazy to collect, it's not like they'll really send an invasion through");
 	outputText(".  Urta's joyous expression makes it quite clear that you chose the right choice.  The two of you gather your things, dress Urta in her clothes as best you can (adding a blanket for extra protection and modesty), ");
-	if(camp.followersCount() >= 2) outputText("leave instructions to your fellow camp-dwellers to look after the place, ");
+	if (camp.followersCount() >= 2) outputText("leave instructions to your fellow camp-dwellers to look after the place, ");
 	outputText("and set off into the wasteland in the direction of Tel'Adre.  Urta needs to stop and rest on several occasions, weighed down by her sudden and highly advanced pregnancy, but she soldiers on without complaint, taking whatever support you give to her.  You can feel the strange god-child kicking incessantly inside her belly as you walk together.");
 
 	outputText("\n\nBefore you know it, the two of you are being waved through the gates.  Edryn boggles at the sight of her friend swollen up with pregnancy, but doesn't protest as you assist Urta in clambering up onto the centauress' back. Together, the two of you manage to haul the unnaturally gravid fox to the Covenant's tower.  Countless guards have to be addressed at each step of the journey, but eventually, you're both brought to a comfortable chamber and allowed to rest... when the mages aren't busily probing Urta with magic, that is.  Urta has you stay by her side the entire time, and you do your best to continue supporting her, not leaving even when she falls asleep on your shoulder, completely tuckered out.  You snuggle up against her once the mages finally agree to let you snooze with her, under the vigilant eyes of your guards.  Rest comes surprisingly easy, despite the tensions of your present situation, and you drift off wondering how long it will take Urta to give birth.");
@@ -2838,7 +2838,7 @@ private function preggedUrtaWithGodChildEpilogue():void {
 	outputText("\n\nThe voice isn't spoken aloud but inside you, inside your head.  A glance to Urta reveals that she heard it too.  The creature - Taoth, you correct yourself, cocks its head toward Urta, giving her thigh a familiar pat.  Her pregnancy-gaped vagina slowly closes at the touch, the damage of its passing instantly mended.");
 
 	outputText("\n\n<i>Thank you, Urta-mother.</i>  The mental voice speaks again, unmatched by the newborn's vocal cords.  It steps over Urta confidently, the long, loping stride seeming... almost unnatural in the way that the limbs seem to sway and dance.  A moment of panic surges through you - what if he hurts her?!  You start to move, to interpose yourself between it (him?), but Urta puts a reassuring hand to your chest, flicking her emerald eyes towards you, begging you not to interfere.  You step away, reluctantly");
-	if(player.cor > 66) outputText(", what do you care, anyway?");
+	if (player.cor > 66) outputText(", what do you care, anyway?");
 	else outputText(".");
 	outputText("\n\n<i>I shall uphold my end of the bargain, Urta-mother.</i>  A tiny hand presses against your foxy lover's middle, glowing amber in the dim lighting of the birthing chamber.  Urta whimpers, knees quaking, as if undergoing great pain.  <i>Relax, Urta-mother.  I have undone the damage caused by my presence, and bestowed a gift as well.  No longer shall you suffer on, infertile.  Your fertility and virility are now YOURS to command.  Pregnant or father, the choice is yours and yours alone.</i>  Urta looks nervously around the room, flicking her eyes between the assembled, awestruck wizards and wise-men.");
 
@@ -2862,36 +2862,36 @@ private function getKnockedUpWithGodChild():void {
 	outputText(" oven.  Her green eyes bulge obscenely at the sight of your naked flesh, locked tight to every curve of your shape.  The vixen takes one shuffling step after another.  It's clear from her crazed panting and trembling fingertips that she's trying to keep herself from jumping you with limited success.  She's like an addict eyeing a cornucopia stuffed with her favorite drugs, knowing that she must take it slow but helpless against her desire to gluttonously gorge.");
 
 	outputText("\n\nYou toss a little fuel on the fire by spreading your legs");
-	if(player.balls > 0) outputText(" and lifting your balls");
+	if (player.balls > 0) outputText(" and lifting your balls");
 	outputText(", exposing your puffy lips, and spreading them wide to expose your ");
-	if(player.vaginaType() != 5) outputText("pink, ");
+	if (player.vaginaType() != 5) outputText("pink, ");
 	else outputText("dusky, ");
 	outputText("glistening interior.  Urta whines, high pitched and keening, and she doubles over, pumping her cock with both hands, unashamedly masturbating at the sight of your exposed, vulnerable womanhood.  She grunts, swinging her hips lewdly back and forth, actually fucking her hands now, mouth open and panting, \"<i>Gonna... gonna fuck ya!  Fullofbabies!</i>\"");
 
 	outputText("\n\nThe rutting prick-vixen thrusts so hard that the momentum carries her closer, and in her almost drunken haste, she tumbles head over heels.  With a ");
-	if(player.wetness() >= 4) outputText("wet ");
+	if (player.wetness() >= 4) outputText("wet ");
 	outputText("squish, she lands nose-deep in your vagina, immediately licking at it and tickling you with her smooth, slippery tongue.  \"<i>Mmmmm,</i>\" she purrs as she suckles your [clit].  Inching upward, the dripping wet fox-girl licks higher and higher, her tongue smearing across the " + player.skinFurScales() + " that covers your ");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("rounded ");
+	if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("rounded ");
 	outputText("belly.  Urta's rigid onyx nipples tickle your [legs] as they drag upward, each immensely erect and engorged, just a little pebbly in texture.  She reaches your [chest], kissing up the ");
-	if(player.biggestTitSize() > 1) outputText("soft curve");
+	if (player.biggestTitSize() > 1) outputText("soft curve");
 	else outputText("flat muscles");
 	outputText(" until she hits your [nipple].  ");
-	if(player.hasFuckableNipples()) outputText("Her tongue plunges inside, savoring the feminine lubricants");
+	if (player.hasFuckableNipples()) outputText("Her tongue plunges inside, savoring the feminine lubricants");
 	else outputText("Her tongue plays across the surface, the heat of her breath shooting tingles up your spine");
 	outputText(".  The further she climbs, the further up your [legs] you can feel her stallion-cock rising, a trail of clear pre-cum in its wake.");
 
 	outputText("\n\nShe peaks up at you from below as she climbs, snarling, \"<i>I'm gonna fuck you so hard your cunt's going to turn into a mold of my dick, useless for anyone but ME!</i>\"  Her pupils are dilated crazily, and you have to wonder if she even realizes what she's saying at this point.  You put your hands on her cheeks, and pulling her up so that you can feel her blunt tip pressing deliciously upon your mound, you gently kiss her.  Urta's passion has her feverish.  You can feel the heat through her ebony lips as they press against your own.  She sags into you, distracted from her inescapable lust long enough to enjoy a tender moment with you.  You grab her butt and squeeze after a moment - she may be distracted, but her tongue and heat have spawned a similar level of need... of heat within you.");
 
 	outputText("\n\nUrta blinks, the craziness returning in a snap, and without any warning, she grabs your shoulders, levering every ounce of her strength into violently penetrating you.  There's an audible, squishing-wet sound as her fat flare rams down your canal, scraping every sensitive bundle of nerves along the way.  It batters you wildly, stretching you ");
-	if(player.vaginalCapacity() < 60) outputText("a little painfully");
+	if (player.vaginalCapacity() < 60) outputText("a little painfully");
 	else outputText("deliciously");
 	outputText(".  Her hands roam over the rest of your body with unrestrained ardor, groping and squeezing, pulling and tweaking.   Meanwhile, her hips smack against your own, smushing her sheath up against your puffy lips, her steamy sex dripping girl-lube down the back of her balls into a thick puddle on your blanket.  SLAP!  The sweaty nutsack slaps loud enough to be heard all over as Urta crudely fucks you, humping you artlessly, her hips beating out a confused, staccato rhythm.");
 	player.cuntChange(60,true,true,false);
 
 	outputText("\n\nYou hold on to her waist for support, teeth clacking against each other with each bone-jarring, cunt-filling rut.  Urta's gone absolutely wild!  Her copious, ever-dripping pre is pouring out of your abused, cock-gaped slit, unimpeded by the girthy horse-cock that enters and exits, so fast it might as well be a blur.  Helpless under the onslaught, you moan");
-	if(player.hasCock()) {
+	if (player.hasCock()) {
 		outputText(", your own forgotten length");
-		if(player.cockTotal() > 1) outputText("s");
+		if (player.cockTotal() > 1) outputText("s");
 		outputText(" laying on your stomach, bouncing fitfully but ultimately ignored.");
 	}
 	else outputText(", the slippery wetness of your [vagina] and the sheer hardness of your [clit] overwhelming.");
@@ -2900,63 +2900,63 @@ private function getKnockedUpWithGodChild():void {
 	outputText("\n\n\"<i>Tight cunt!  Gonna... gonna... no, I gotta... gotta fill it up!</i>\" she cries, arching her back, tits jiggling over top of you as she climaxes.  Her sodden twat explodes over the back of her balls, splattering wetness in a five foot cone behind her.  At the same time, that slick sack begins to twitch again and again.  It feels like it's vibrating against your [butt], actually shuddering as liquid weight shifts and moves, pumping through the cock-bitch's interior.  Her sheath peels back a little further, and the gigantic equine length inside you distorts slightly, the fat shaft stretching your lips even wider as a huge wad of cum travels through the turgid horse-cock.");
 
 	outputText("\n\nThere's an audible gurgle from inside you, and you feel the sticky, slippery spooge spreading through every nook and cranny of your [vagina], some even dripping into your womb.  Urta howls, yipping into the air as she crams herself even further inside you, butting her fat, flaring cockhead right up against your cervix.  The next cum-wave hits you with such pressure that most of it floods directly into your uterus, shooting straight through your slightly-dilated cervix without too much resistance.  You can feel it sloshing around, the heavy weight of the fox's liquid love filling you fuller and fuller, while the frothy, wasted sperm drips out of your wide-spread fuckhole.  Again and again, her orgasm inseminates your womb, seemingly without limit, rounding your belly with the slightest bump.  As the pressure builds, more and more of her baby batter slops out your entrance onto ");
-	if(player.balls > 0) outputText("both sets of");
+	if (player.balls > 0) outputText("both sets of");
 	else outputText("her");
 	outputText(" balls, slathering them with slick spunk.");
 
 	var ballWorship:Array = [];
-	if((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) && jojoScene.campCorruptJojo()) ballWorship[ballWorship.length] = 0;
-	if((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) || jojoScene.campCorruptJojo()) ballWorship[ballWorship.length] = 1;
-	if(sophieBimbo.bimboSophie()) ballWorship[ballWorship.length] = 2;
-	if(helFollower.followerHel()) ballWorship[ballWorship.length] = 3;
-	if(latexGirl.latexGooFollower()) ballWorship[ballWorship.length] = 4;
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) ballWorship[ballWorship.length] = 5;
+	if ((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) && jojoScene.campCorruptJojo()) ballWorship[ballWorship.length] = 0;
+	if ((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) || jojoScene.campCorruptJojo()) ballWorship[ballWorship.length] = 1;
+	if (sophieBimbo.bimboSophie()) ballWorship[ballWorship.length] = 2;
+	if (helFollower.followerHel()) ballWorship[ballWorship.length] = 3;
+	if (latexGirl.latexGooFollower()) ballWorship[ballWorship.length] = 4;
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) ballWorship[ballWorship.length] = 5;
 	var choice:int;
-	if(ballWorship.length > 0) choice = ballWorship[rand(ballWorship.length)];
+	if (ballWorship.length > 0) choice = ballWorship[rand(ballWorship.length)];
 	else choice = -1;
 
 	//{Both mouse pets}
-	if(choice == 0) {
+	if (choice == 0) {
 		outputText("\n\nUrta gasps when a pair of tongues find their way around her balls.  Looking back, she sees a pair of visages you'd recognize anywhere; the mousy head of your twin pets, Jojo and Amily.  The smooth mouse-tongues hungrily devour Urta's excess seed, accompanied by pleased giggles when the weighty orbs twitch with barely restrained pleasure.  Again and again, the mouth muscles smear themselves over every messy, slime-soaked fold, leaving nothing by a polished veneer of mouse-spit in their wake.  The sounds of masturbation accompany the ball-worship, leaving you no doubt about your pets' current states.  They love it, and when Urta turns back to you with a smile, you realize she doesn't mind either.");
 	}
 	//{If Jojo/Amily pet}
-	else if(choice == 1) {
+	else if (choice == 1) {
 		outputText("\n\nUrta gasps when a tongue finds its way around her balls.  Looking back, she sees a visage you'd recognize anywhere; the mousy head of your pet, ");
-		if(jojoScene.campCorruptJojo()) outputText("Jojo");
+		if (jojoScene.campCorruptJojo()) outputText("Jojo");
 		else outputText("Amily");
 		outputText(".  The smooth mouse-tongue hungrily devours Urta's excess seed, accompanied by pleased giggles when the weighty orbs twitch with barely restrained pleasure.  Again and again, the mouth muscle smears itself over every messy, slime-soaked fold, leaving nothing but a polished veneer of mouse-spit in its wake.  The sounds of masturbation accompany the ball-worship, leaving you no doubt about your pet's current state.  They love it, and when Urta turns back to you with a smile, you realize she doesn't mind either.");
 	}
 	//{Bimbo Sophie ball worship here}
-	else if(choice == 2) {
+	else if (choice == 2) {
 		outputText("\n\nUrta gasps when gold gilt lips find their way onto her steaming, cum-drenched ball-sack.  Looking back, she can see the slutty bimbo harpy servicing her nuts, her plump puckers wrapped around one of the prodigious, cum-bloated testes.  \"<i>Mmmmmmm,</i>\" she coos around the fat gonad, sloppily kissing and licking, her tongue sliding through every crevice of the folded, sex-stained skin.  In no time flat, the big bootied bird bitch has polished away the slime and replaced it with a shining veneer of gold gloss overlaid in clear saliva.  Sophie giggles when Urta's dick begins to twitch inside you, rigid and ready for more.  The bimbo seems thrilled to polish the fox-girl's big, bouncy balls, and when Urta turns back to you with a blissful smile on her face, you realize she's enjoying it too.");
 	}
-	else if(choice == 3) {
+	else if (choice == 3) {
 		outputText("\n\nUrta gasps when a slithering tongue winds its way around her balls.  Looking back, she sees a scaley visage you'd recognize anywhere - the salamander berserker, Hel.   Hel chuckles around the black, slime-slicked folds in her mouth.  \"<i>Didja thfwink joo could, mmmm, get thwis fwox all to yerself, " + player2.short + "?</i>\" she says through the mouthful of vixensack.   The salamander-slut releases the musky black skin from her oral grip and continues, \"<i>You know I'm always up to get dirty with you and your friends, lover mine.</i>\"  She returns her attentions to the cum-bloated orbs before her, licking every bit of mixed cum from Urta's sack, replacing the thick sludge with a veneer of shining spit.");
-		if(player.balls > 0) outputText("  She does the same to your own [balls], even giving your [asshole] a happy, sloppy kiss before returning to polishing the supple, skin-shrouded spheres just ahead.");
+		if (player.balls > 0) outputText("  She does the same to your own [balls], even giving your [asshole] a happy, sloppy kiss before returning to polishing the supple, skin-shrouded spheres just ahead.");
 		outputText("  Helia seems thrilled to be egging you both on to new heights of pleasure, and when Urta turns back to you with a blissful smile on her face, you realize she's enjoying it too.");
 	}
 	//{Latexy}
-	else if(choice == 4) {
+	else if (choice == 4) {
 		outputText("\n\nUrta gasps when a slithering tongue winds its way around her balls.  Looking back, she sees an inky black visage you'd recognize anywhere - your pet latex-girl, " + flags[kFLAGS.GOO_NAME] + ".  The still-rutting fox-futa seems a little put off by your ebony-skinned slave's dusky visage, but as more and more slippery latex bathes her balls, Urta's confusion softens into pleased acceptance.  Her thick, cum-bloated balls are getting some much-needed TLC, and she's clearly too turned on to care.  " + flags[kFLAGS.GOO_NAME] + " smoothly sucks one into her mouth, devouring the messy proof of your lover's virility from every inch of the vulpine gal's ball-shroud.   When Urta's nut pops out, it's solid black, encased in wonderful, constricting latex.  She repeats the action on the other side so as to fully clean the fox, and then she turns to you, applying the same treatment to every messy spot below your waist.  Of course, she keeps returning to the blissful, fuck-crazed fox's balls, thickening the plump latex bindings around them at every turn.");
 	}
 	//{Valeria}
-	else if(choice == 5) outputText("\n\nUrta gasps when moist pressure suddenly envelops her balls.  Looking back, she sees a puddle of blue goo you'd recognize anywhere - your friendly, armored goo-girl, Valeria.  The slimy seductress seems to have left her armor behind for now, opting to condense herself into a moist ball of slime with only her breasts, shoulders, and head coming out of the top of it.  Each of her ponderous, growing tits is far larger than normal, nearly as big as a beachball and capped with plump mouths in place of nipples that can only be described as gifted 'cock-sucking lips'.  Each of those mouths is pressed next to the other, tit to tit, and together, they've pulled Urta's sack into their gelatinous, slippering interior.  The skin that restrains Urta's tortured balls slides through the semipermeable membrane between them.  Her gonads are floating inside the warm, cushiony blue mass while the lips kiss all over her sheath, taint, and loins, even inserting slobbering slippery tongues into her cunt.  Meanwhile, the accumulated sex-slime that coated Urta's testicular endowments has begun to lift away, absorbed into the goo-girl for sustenance.  She seems thrilled to have found such an erotic situation to plunge herself into, and judging by the blissful expression your foxy lover's face, she's enjoying it just as much.");
+	else if (choice == 5) outputText("\n\nUrta gasps when moist pressure suddenly envelops her balls.  Looking back, she sees a puddle of blue goo you'd recognize anywhere - your friendly, armored goo-girl, Valeria.  The slimy seductress seems to have left her armor behind for now, opting to condense herself into a moist ball of slime with only her breasts, shoulders, and head coming out of the top of it.  Each of her ponderous, growing tits is far larger than normal, nearly as big as a beachball and capped with plump mouths in place of nipples that can only be described as gifted 'cock-sucking lips'.  Each of those mouths is pressed next to the other, tit to tit, and together, they've pulled Urta's sack into their gelatinous, slippering interior.  The skin that restrains Urta's tortured balls slides through the semipermeable membrane between them.  Her gonads are floating inside the warm, cushiony blue mass while the lips kiss all over her sheath, taint, and loins, even inserting slobbering slippery tongues into her cunt.  Meanwhile, the accumulated sex-slime that coated Urta's testicular endowments has begun to lift away, absorbed into the goo-girl for sustenance.  She seems thrilled to have found such an erotic situation to plunge herself into, and judging by the blissful expression your foxy lover's face, she's enjoying it just as much.");
 	//{If no ball licking}
 	else {
 		outputText("\n\nSmiling, Urta continues to slowly hump you.  Inside, her horse-cock has begun to soften, allowing much of her bounty to slide out, but her motions don't slow.  She kisses you all over - on your lips, your [chest], your shoulders, and even the nape of your neck.  You groan, more turned on than ever, tilting your head back and allowing her to ply your sensitive flesh with kisses.  Inside you, the spent equine dong has begun to stiffen anew, the soaked balls shuddering with every slap against your [butt] as she makes ready for round two.  You're nearly as ready as she is.");
 	}
 	//{CONTINUE HERE}
 	outputText("\n\nPulling out, Urta swats your [butt], lingering just long enough to give it a familiar squeeze.  She commands, \"<i>Ass up in the air, I'm going to take you like an animal!</i>\"  Holding it one-handed, the furry hermaphrodite slaps her equine phallus against you, encouraging you to roll over.  You're horny as hell, your [vagina] hanging open in the shape of the recently departed animal dong, and you willingly assume the position, [butt] up in the air");
-	if(player.tailType > TAIL_TYPE_NONE) outputText(", though getting your tail angled right to allow her entrance is a bit of a challenge");
-	else if(player.isTaur()) outputText(", though getting down on your hands and forelegs is a bit challenging for you");
+	if (player.tailType > TAIL_TYPE_NONE) outputText(", though getting your tail angled right to allow her entrance is a bit of a challenge");
+	else if (player.isTaur()) outputText(", though getting down on your hands and forelegs is a bit challenging for you");
 	else outputText(", [face] buried in your blankets soaked with Urta's musky fluid");
 	outputText(".");
 	outputText("\n\nFrom behind, the hot, familiar head of your lover's member pierces your womanly view.  It slides through your slick, cum-soaked passage with ease, butting right up against your cervix as it bottoms out again.  Urta kneads the " + player.skinFurScales() + " on your [butt], happily beginning to hump you all over again.  The wet squishes are much louder, wetter, and noisier than ever before.  Voraciously, the fox-girl pounds you, a brutal, wet fuck that sends leftover cum, pre and girlish lube splattering everywhere.  Your blankets, if they weren't already, are now ruined, soaked in an inch-deep puddle of sex.");
 
 	outputText("\n\nWhen her massive shaft bottoms out again, it scrapes across your g-spot in just the right way, and the fireworks going off in your [vagina] push you so far past the point of orgasm that your muscles seize.  ");
-	if(player.wetness() >= 5) outputText("Lady-spunk showers out of your spasming twat, glazing Urta's bouncy ballsack with your lusty liquid.");
-	else if(player.wetness() >= 3) outputText("Lady-spunk drools out of your spasming twat in thick streams, glazing Urta's bouncy ballsack with your liquid lust.");
-	else if(player.wetness() >= 1) outputText("Lady-spunk drips from your spasming twat in steady trickles, glazing Urta's bouncy ballsack with your liquid lust.");
+	if (player.wetness() >= 5) outputText("Lady-spunk showers out of your spasming twat, glazing Urta's bouncy ballsack with your lusty liquid.");
+	else if (player.wetness() >= 3) outputText("Lady-spunk drools out of your spasming twat in thick streams, glazing Urta's bouncy ballsack with your liquid lust.");
+	else if (player.wetness() >= 1) outputText("Lady-spunk drips from your spasming twat in steady trickles, glazing Urta's bouncy ballsack with your liquid lust.");
 	outputText("  The hungry mouth between her legs wastes no time in cleaning them.");
 	outputText("  Again and again, muscular contractions wiggle through your canal, wringing Urta's swollen staff of impregnation, milking it for more, even though your womb is STILL slightly distended from her last deposit.");
 	outputText("\n\n\"<i>You're gonna be so pregnant, " + player.short + "!</i>\" she cries, smacking her hand across your [butt] hard enough to feel the ripple through your middle.  \"<i>You're going to be the mother of a god, and then... then I'll knock you up with kits!  We'll have so many babies, " + player.short + "...</i>\"  Her hand caresses your rump as she rambles, plowing your wet pussy again and again.  \"<i>You're so hot, lover...  Mmmm, your tight little box already knows my dick doesn't it?  I think it's gonna... ooooohhhh...  I'm gonna cum again!</i>\"");
@@ -2975,9 +2975,9 @@ private function getKnockedUpWithGodChild():void {
 private function getKnockedUpUrtaEpilogue():void {
 	clearOutput();
 	outputText("When you wake, you're ");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("much more ");
+	if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("much more ");
 	outputText("pregnant ");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("than before");
+	if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("than before");
 	else outputText("- very pregnant");
 	outputText(".  Whatever Urta just put inside you, it's developing fast.  Fast enough to give you a wobbling gait and a straining midriff.  You give the snoring fox a prod.  Her only reaction is to swat at your finger with her fluffy tail and roll over snoring, so this time, you jab her hard, in the butt-cheek.  She yelps, sitting upright immediately.");
 	outputText("\n\n\"<i>What was that for - oooh gods...  did I - are you...  We need to get you to the Covenant!</i>\" she stutters on her way to a decision.  You nod - you've no idea what this thing is going to do to your body before it comes out, but having a magically gifted organization tending to your welfare will be a start.  You'll just have to hope the demons don't make a move on the portal in your absence.");
@@ -3004,11 +3004,11 @@ private function getKnockedUpByUrtaEpilogueII():void {
 	outputText("\n\n<i>I live.</i>");
 
 	outputText("\n\nThe voice isn't spoken aloud but inside you, inside your head.  A glance to Urta reveals that she heard it too.  The creature - Taoth, you correct yourself, cocks its head toward Urta, giving your thigh a familiar pat.");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("  Somehow, you're still just as pregnant with something as you were before.");
+	if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("  Somehow, you're still just as pregnant with something as you were before.");
 	outputText("  You're filled with vigor at the touch, the stress of the birth fading immediately.  Even your poor, tortured vagina tingles, the pain fading.  You can feel the pregnant gape receding, as if the birth never happened.");
 
 	outputText("\n\n<i>Thank you, Urta-father.</i>  The mental voice speaks again, unmatched by the newborn's vocal cords.  It approaches Urta confidently, with long, loping steps, seeming... almost unnatural in the way that the limbs seem to sway and dance.  Just a few steps away from Urta, a moment of panic surges through you - what if he hurts her?!  You start to rise, to interpose yourself between them, but Urta puts a reassuring hand to your chest, flicking her emerald eyes towards you, begging you not to interfere.  You lay back down, reluctantly");
-	if(player.cor >= 66) outputText(", what do you care, anyway?");
+	if (player.cor >= 66) outputText(", what do you care, anyway?");
 	else outputText(".");
 	outputText("\n\n<i>I shall uphold my end of the bargain, Urta-father.</i>  A tiny hand presses against your foxy lover's middle, glowing amber in the dim lighting of the birthing chamber.  Urta whimpers, knees wobbling, as if undergoing great pain.  \"<i>Relax, Urta-father.  I have undone the damage caused by my presence, and bestowed a gift as well.  No longer shall you suffer on, infertile.  Your fertility and virility are now YOURS to command.  Pregnant or father, the choice is yours and yours alone.</i>\"  Urta looks nervously around the room, flicking her eyes between the assembled, awestruck wizards and wise-men.");
 
@@ -3073,7 +3073,7 @@ private function urtaAndEdrynGodChildEpilogueII():void {
 	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("  The centaur guardswoman is still just as pregnant with your offspring as before.  Your child is unharmed by whatever just transpired.");
 	outputText("  Edryn's eyes immediately close, sinking into a deep, restful sleep.");
 	outputText("\n\n<i>Thank you, Urta-father.</i>  The mental voice speaks again, unmatched by the newborn's vocal cords.  It strides confidently forward, with long, loping steps, seeming... almost unnatural in the way that the limbs seem to sway and dance.  Just a few steps away from Urta, a moment of panic surges through you - what if he hurts her?!  You start to interpose yourself between them, but Urta puts a reassuring hand to your chest, flicking her emerald eyes towards you, begging you not to interfere.  You step back, reluctantly");
-	if(player.cor > 66) outputText(", what do you care, anyway?");
+	if (player.cor > 66) outputText(", what do you care, anyway?");
 	else outputText(".");
 	outputText("\n\n<i>I shall uphold my end of the bargain, Urta-father.</i>  A tiny hand presses against your foxy lover's middle, glowing amber in the dim lighting of the birthing chamber.  Urta whimpers, knees wobbling, as if undergoing great pain.  <i>Relax, Urta-father.  I have undone the damage caused by my presence, and bestowed a gift as well.  No longer shall you suffer on, infertile.  Your fertility and virility are now YOURS to command.  Mother or father, the choice is yours and yours alone.</i>  Urta looks nervously around the room, flicking her eyes between the assembled, awestruck wizards and wise-men.");
 	outputText("\n\n<i>None but you, your love, and Edryn-mother have heard this.  Be well, Urta-father, and should we meet again, do not expect my deals to be so favorable.</i>");

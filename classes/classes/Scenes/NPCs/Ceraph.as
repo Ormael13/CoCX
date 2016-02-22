@@ -12,7 +12,7 @@
 		private function ceraphSpecial1():void
 		{
 			game.spriteSelect(7);
-			if (findStatusAffect(StatusAffects.Uber) < 0) {
+			if (findStatusEffect(StatusEffects.Uber) < 0) {
 				if (rand(2) == 0) {
 					outputText("Ceraph winks and says, \"<i>Have you ever cum without being touched? You will.</i>\"\n\n", false);
 				}
@@ -20,12 +20,12 @@
 					outputText("Ceraph titters, \"<i>Let me show you the true power of an Omnibus.</i>\"\n\n", false);
 				}
 				outputText("Despite her sultry tease, you can tell she's starting to build up to something big...", false);
-				createStatusAffect(StatusAffects.Uber, 0, 0, 0, 0);
+				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
 			}
 			else {
 				//(Next Round)
-				if (statusAffectv1(StatusAffects.Uber) == 0) {
-					addStatusValue(StatusAffects.Uber, 1, 1);
+				if (statusEffectv1(StatusEffects.Uber) == 0) {
+					addStatusValue(StatusEffects.Uber, 1, 1);
 					if (rand(2) == 0) outputText("The demonic hermaphrodite begins forging demonic symbols in the air before her, each glowing brilliant pink before they blur away in a haze.", false);
 					else outputText("The demonette makes obscene motions with her hands, as if masturbating an imaginary cock or vagina while her hands are wreathed in pink flames.", false);
 					outputText("  <b>She's about to unleash something huge!</b>", false);
@@ -33,7 +33,7 @@
 				}
 				//FIRE!
 				else {
-					removeStatusAffect(StatusAffects.Uber);
+					removeStatusEffect(StatusEffects.Uber);
 					//(Avoid!)
 					if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
 						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Thanks to your decision to wait, it's easy to avoid the onrushing flames and her attack.\n\n", false);
@@ -51,14 +51,14 @@
 //[SPECIAL] – Whip Binding
 		private function ceraphSpecial2():void
 		{
-			if (player.findStatusAffect(StatusAffects.Bound) < 0) {
+			if (player.findStatusEffect(StatusEffects.Bound) < 0) {
 				outputText("Ceraph snaps her whip at you, lightning fast.  Unable to avoid the blinding speed of her attack, you find yourself wrapped from head to toe in the strong leather of her whip.  Remarkably, the fire dies out everywhere the whip touches you, leaving you bound but unharmed.", false);
 				//If player has l2 piercing
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("  Gods this turns you on!", false);
 					game.dynStats("lus", 5);
 				}
-				player.createStatusAffect(StatusAffects.Bound, 2 + rand(5), 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Bound, 2 + rand(5), 0, 0, 0);
 			}
 			//[SPECIAL WHILE PC RESTRAINED]
 			else {
@@ -84,13 +84,13 @@
 		{
 			clearOutput();
 			outputText("You wriggle in the tight binding, trying your best to escape.  ", false);
-			if (player.statusAffectv1(StatusAffects.Bound) - 1 <= 0) {
+			if (player.statusEffectv1(StatusEffects.Bound) - 1 <= 0) {
 				outputText("With a mighty twist and stretch, the whip gives and uncurls from you all at once.  You've regained your freedom", false);
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText(", though you miss the tight leathery embrace", false);
 				}
 				outputText("!", false);
-				player.removeStatusAffect(StatusAffects.Bound);
+				player.removeStatusEffect(StatusEffects.Bound);
 				combatRoundOver();
 				return;
 			}
@@ -99,11 +99,11 @@
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("  You get nice and hot from being so effectively restrained, maybe you should just accept it?", false);
 				}
-				player.addStatusValue(StatusAffects.Bound, 1, -1);
+				player.addStatusValue(StatusEffects.Bound, 1, -1);
 				//Strong characters break free faster
 				if (player.str > 65 && rand(player.str) > 45) {
 					outputText("  Though you didn't break free, it seems like your mighty struggles loosened the whip slightly...", false);
-					player.addStatusValue(StatusAffects.Bound, 1, -1);
+					player.addStatusValue(StatusEffects.Bound, 1, -1);
 				}
 			}
 			outputText("\n\n", false);
@@ -149,7 +149,7 @@
 			//First hit!
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(10) != 9) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(10) != 9) {
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Determine if dodged!
@@ -196,7 +196,7 @@
 			outputText("\n", false);
 			//SECOND ATTACK HERE------
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(10) != 9) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(10) != 9) {
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Determine if dodged!
@@ -247,11 +247,11 @@
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(4);
-			if (player.findStatusAffect(StatusAffects.Bound) >= 0) {
+			if (player.findStatusEffect(StatusEffects.Bound) >= 0) {
 				ceraphSpecial2();
 				return;
 			}
-			if (findStatusAffect(StatusAffects.Uber) >= 0) {
+			if (findStatusEffect(StatusEffects.Uber) >= 0) {
 				ceraphSpecial1();
 				return;
 			}
@@ -279,7 +279,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(pcCameWorms){
+			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
@@ -297,11 +297,11 @@
 			// this.plural = false;
 			this.createCock(10,2,CockTypesEnum.DEMON);
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 20, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,15,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,15,0,0,0);
 			this.tallness = 5*12+6;
 			this.hipRating = HIP_RATING_CURVY;
 			this.buttRating = BUTT_RATING_NOTICEABLE;

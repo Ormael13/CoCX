@@ -50,7 +50,7 @@ package coc.view {
 				by = button.y;
 
 			// TODO: Should we try to remove some of these numbers?
-			/*if(this.model.mobile) {
+			/*if (this.model.mobile) {
 				bx = (bx >= 410 ? 405: bx);
 				this.x = bx + 98;
 				this.y = by - 347;

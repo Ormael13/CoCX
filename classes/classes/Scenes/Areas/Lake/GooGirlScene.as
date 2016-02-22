@@ -50,7 +50,7 @@ package classes.Scenes.Areas.Lake
 //New Perk – Slime Core (requires goo player, random drop rate?)
 		private function coreDropChance():void
 		{
-			if (rand(4) == 0 && player.findStatusAffect(StatusAffects.SlimeCraving) >= 0 && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4) {
+			if (rand(4) == 0 && player.findStatusEffect(StatusEffects.SlimeCraving) >= 0 && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4) {
 				outputText("\n\nAs the goo-girl slithers away, into the lake's placid waves, you notice she seems to have left behind a small blob. Upon investigation, it appears to be a tiny, ruby heart, encased in a slimy " + gooColor8() + " membrane. As you reach to pick it up, the jelly ball quivers and pulses with a warm, cheerful light. Your fingers close on it and the nucleus slides through your palm, into your body!\n\n", false);
 
 				outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes. The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences. There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n\n", false);
@@ -467,8 +467,8 @@ package classes.Scenes.Areas.Lake
 			coreDropChance();
 			player.orgasm();
 			//You've now been milked, reset the timer for that
-			player.addStatusValue(StatusAffects.Feeder, 1, 1);
-			player.changeStatusValue(StatusAffects.Feeder, 2, 0);
+			player.addStatusValue(StatusEffects.Feeder, 1, 1);
+			player.changeStatusValue(StatusEffects.Feeder, 2, 0);
 			cleanupAfterCombat();
 		}
 

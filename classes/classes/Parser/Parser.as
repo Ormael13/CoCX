@@ -235,7 +235,7 @@ package classes.Parser
 			}
 			if (thing.hasOwnProperty("getDescription") && subject.indexOf(".") > 0)
 			{
-				if(argTemp.length > 1) {
+				if (argTemp.length > 1) {
 					return thing.getDescription(descriptorArray[1], aspect);
 				}
 				else {
@@ -417,19 +417,19 @@ package classes.Parser
 			var condArg2:* = convertConditionalArgumentFromStr(condArgStr2);
 
 			//Perform check
-			if(operator == "=")
+			if (operator == "=")
 				retVal = (condArg1 == condArg2);
-			else if(operator == ">")
+			else if (operator == ">")
 				retVal = (condArg1 > condArg2);
-			else if(operator == "==")
+			else if (operator == "==")
 				retVal = (condArg1 == condArg2);
-			else if(operator == "<")
+			else if (operator == "<")
 				retVal = (condArg1 < condArg2);
-			else if(operator == ">=")
+			else if (operator == ">=")
 				retVal = (condArg1 >= condArg2);
-			else if(operator == "<=")
+			else if (operator == "<=")
 				retVal = (condArg1 <= condArg2);
-			else if(operator == "!=")
+			else if (operator == "!=")
 				retVal = (condArg1 != condArg2);
 			else
 				retVal = (condArg1 != condArg2);

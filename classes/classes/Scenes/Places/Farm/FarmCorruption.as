@@ -6,7 +6,7 @@ package classes.Scenes.Places.Farm
 	import classes.Items.Consumables.SimpleConsumable;
 	import classes.ItemSlotClass;
 	import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	
 	/**
 	 * ...
@@ -518,7 +518,7 @@ package classes.Scenes.Places.Farm
 					{
 						takeoverPromptKelly();
 					}
-					else if (player.findStatusAffect(StatusAffects.MarbleRapeAttempted) >= 0)
+					else if (player.findStatusEffect(StatusEffects.MarbleRapeAttempted) >= 0)
 					{
 						takeoverPromptMarbleRape();
 					}
@@ -623,7 +623,7 @@ package classes.Scenes.Places.Farm
 			else outputText(".");
 
 			// if PC has Kelly or PC raped Marble
-			if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 || player.findStatusAffect(StatusAffects.MarbleRapeAttempted) >= 0)
+			if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 || player.findStatusEffect(StatusEffects.MarbleRapeAttempted) >= 0)
 			{
 				outputText("\n\nShe doesn’t move or shoo you away, but you can see a great deal of tenseness in her face. “<i>I already told you, I don’t want you on my farm,</i>” she says when you are face to face, her voice low and angry. You shoot your hands up and look around you in mocking exasperation, appealing to an audience that isn’t there.");
 			}
@@ -644,7 +644,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\n“<i>Cute. But, you know, Kelt had a bow. He practiced with it every day. To protect your farm, I believe.</i>” You pause and look her dead in the eye. “<i>Get a good look at Kelt recently? Would you like that to happen to you? To be on your knees, begging me to cum on your face? Because the way I see it, there isn’t much protecting your farm these days. Just about anyone could walk in here and do as they please. As you sleep, perhaps? Quietly taint your food whilst you work? Are you really going to hold onto that crossbow for the rest of your life?</i>” Whitney’s grip is trembling slightly, you can see it in the bolt and string.");
 			}
 			// else if PC raped Marble
-			else if (player.findStatusAffect(StatusAffects.MarbleRapeAttempted) >= 0)
+			else if (player.findStatusEffect(StatusEffects.MarbleRapeAttempted) >= 0)
 			{
 				outputText("\n\n“<i>Cute. But, you know, Marble had a hammer which made that thing look like a peashooter. She practiced with it every day. To protect your farm, I believe?</i>” You pause and look her dead in the eye. “<i>If I remember right, after I finished with her, she was a whimpering mess. How well has she been fighting since, because the way I see it, there isn’t much protecting your farm these days. Just about anyone could walk in here and do as they please. As you sleep, perhaps? Quietly taint your food whilst you work? Are you really going to hold onto that crossbow for the rest of your life?</i>” Whitney’s grip is trembling slightly, you can see it in the bolt and string.");
 			}
@@ -658,7 +658,7 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>All I want is to... maximize this farm’s productivity. There’s a lot of slack around here that needs picking up, if you ask me.</i>” You put your hands behind your back and begin to slowly pace back and forth in the pepper patch. She’s still pointing the crossbow, but the arrow’s barb is getting increasingly erratic. “<i>You will let me use the farm as I please. I will send... help... to you, as I see fit. In return, I guarantee that I will not make any attempts on your person, and I guarantee that no harm will come to your farm.</i>” The barb trembles for a while longer. ");
 
 			// if PC has Kelly or PC raped Marble
-			if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 || player.findStatusAffect(StatusAffects.MarbleRapeAttempted) >= 0)
+			if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 || player.findStatusEffect(StatusEffects.MarbleRapeAttempted) >= 0)
 			{
 				outputText("\n\nYou have to admit, it’s going to be plenty painful if she fires it, so much so that you don’t know what will happen afterwards; an image of an inferno consuming a barn flits through your mind. After what seems like an hour of deliberation, though, Whitney lowers the crossbow.");
 
@@ -670,7 +670,7 @@ package classes.Scenes.Places.Farm
 			else
 			{
 				// if Marble is at the Farm
-				if (player.findStatusAffect(StatusAffects.MarbleRapeAttempted) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0)
+				if (player.findStatusEffect(StatusEffects.MarbleRapeAttempted) < 0 && player.findStatusEffect(StatusEffects.NoMoreMarble) < 0)
 				{
 					outputText("\n\n“<i>Marble will not stand for it,</i>” Whitney says, her voice barely above a whisper.");
 
@@ -699,7 +699,7 @@ package classes.Scenes.Places.Farm
 
 			flags[kFLAGS.FARM_CORRUPTION_STARTED] = 1;
 			
-			if (player.findStatusAffect(StatusAffects.NoMoreMarble) < 0) flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0; // Don't have to care about recruitment paths -- she'll fuck off based on corruption before the player can corrupt the farm.
+			if (player.findStatusEffect(StatusEffects.NoMoreMarble) < 0) flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0; // Don't have to care about recruitment paths -- she'll fuck off based on corruption before the player can corrupt the farm.
 			
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -856,9 +856,9 @@ package classes.Scenes.Places.Farm
 				else addButton(0, "Whitney", dogeCorruptedMissionComplete);
 			}
 			
-			if (player.findStatusAffect(StatusAffects.MarbleRapeAttempted) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) addButton(1, "Marble", farm.meetMarble);
+			if (player.findStatusEffect(StatusEffects.MarbleRapeAttempted) < 0 && player.findStatusEffect(StatusEffects.NoMoreMarble) < 0 && player.findStatusEffect(StatusEffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) addButton(1, "Marble", farm.meetMarble);
 			
-			if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && player.findStatusAffect(StatusAffects.KeltOff) < 0)
+			if (player.findStatusEffect(StatusEffects.Kelt) >= 0 && player.findStatusEffect(StatusEffects.KeltOff) < 0)
 			{
 				if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(2, "Kelly", farm.kelly.breakingKeltOptions);
 				else if (flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_TALKED_FARM_MANAGEMENT] == 0) addButton(2, "Kelt", keltAChangeInManagement);
@@ -867,7 +867,7 @@ package classes.Scenes.Places.Farm
 			
 			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) 
 			{
-				if (player.findStatusAffect(StatusAffects.Milked) >= 0) 
+				if (player.findStatusEffect(StatusEffects.Milked) >= 0) 
 				{
 					outputText("\n\n<b>Your " + nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>", false);
 				}
@@ -875,7 +875,7 @@ package classes.Scenes.Places.Farm
 				addButton(3,"Get Milked", farm.getMilked);
 			}
 			
-			if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0)
+			if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0)
 			{
 				addButton(4,"Milk Cock", farm.cockPumping);
 			}
@@ -1302,7 +1302,7 @@ package classes.Scenes.Places.Farm
 		{
 			menu();
 			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_BREASTMILKER_UPGRADE] == 0) addButton(0, "Breast Milker", investmentBreastMilker);
-			if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] == 0) addButton(1, "Cock Milker", investmentCockMilker);
+			if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0 && flags[kFLAGS.QUEUE_COCKMILKER_UPGRADE] == 0) addButton(1, "Cock Milker", investmentCockMilker);
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0 && flags[kFLAGS.QUEUE_REFINERY_UPGRADE] == 0) addButton(2, "Refinery", investmentRefinery);
 			if (flags[kFLAGS.FARM_UPGRADES_CONTRACEPTIVE] == 0 && flags[kFLAGS.QUEUE_CONTRACEPTIVE_UPGRADE] == 0) addButton(3, "Contraceptive", investmentContraceptive);
 			if (flags[kFLAGS.FARM_UPGRADES_MILKTANK] == 0 && kGAMECLASS.milkWaifu.milkSlave() && flags[kFLAGS.QUEUE_MILKTANK_UPGRADE] == 0) addButton(4, "MilkTank", investmentMilktank);
@@ -2213,7 +2213,7 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\n“<i>Sorry,</i>” she mumbles, actually looking ashamed. “<i>I can’t - ‘s just too hot now. I told you [master], I told you I wouldn’t be any-</i>“ you shush her kindly.");
 
-				if(player.cocks.length > 2)
+				if (player.cocks.length > 2)
 				{
 					outputText("\n\n“<i>Put your other hand on this.</i>” Slowly she withdraws her fingers from her panties and wraps them around your [cock biggest3]. You sigh to the hot, damp pressure now ringing yet another constituent of your obscene tangle of pricks. “<i>Work them both at the same time - that’s it...</i>” She exceeds your expectations by swiftly picking up a steady beat, jerking your cocks with her smooth, exacting grasp in tandem. Focused back on [eachCock] she quickly forgets her doubt, slipping easily back into subspace.");
 				}
@@ -6375,7 +6375,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\n“<i>It’s just from watching you, [master],</i>” she replies quietly, as relaxing sensation inundates your lower half. “<i>When you sl- move around, you can see where the stress lands and builds. You may not have any hinges down here, but that don’t mean you don’t have the same needs as animals that do.</i>”");
 
 				outputText("\n\n“<i>You watch me a lot, then?</i>” Silence from behind you as the questing, rubbing oil moves down almost to your tip.");
-				if (player.tongueType == TONUGE_SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
+				if (player.tongueType == TONGUE_SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
 				outputText(" “<i>I imagine watching your [master] move around is almost a masochistic experience for you. Something so alien and unnerving now linked forever with pleasure and obedience. Is that how it is? You can’t stop staring at my beautiful, deadly form because it’s almost like a slutty punishment for you?</i>”");
 
 				outputText("\n\n“<i>S-something like that,</i>” Whitney whispers, shakily. You smile serenely as a warm, oily hand grasps your reptilian tip, moving up and down in an almost masturbatory rhythm. It took almost as long again for her to rub oil into your coils as she spent on the rest of her body, but it was well worth it.");

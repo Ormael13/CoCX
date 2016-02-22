@@ -9,8 +9,8 @@ package classes.Scenes.Areas.Swamp
 		//==============================
 		private function spiderStandardAttack():void {
 			//SPIDER HORDE ATTACK - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
-			if(findStatusAffect(StatusAffects.MissFirstRound) >= 0 || player.getEvasionRoll()) {
-				removeStatusAffect(StatusAffects.MissFirstRound);
+			if (findStatusEffect(StatusEffects.MissFirstRound) >= 0 || player.getEvasionRoll()) {
+				removeStatusEffect(StatusEffects.MissFirstRound);
 				outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to beat them all back, though, with some literal covering fire from Kiha.", false);
 			}
 			//SPIDER HORDE ATTACK - Hit
@@ -18,24 +18,24 @@ package classes.Scenes.Areas.Swamp
 				outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to knock most of them away, but a few nasty hits manage to punch through your [armorName].  ", false);
 				//Determine damage - str modified by enemy toughness!
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef) + 20;
-				if(damage > 0) damage = player.takeDamage(damage);
-				if(damage <= 0) {
+				if (damage > 0) damage = player.takeDamage(damage);
+				if (damage <= 0) {
 					damage = 0;
-					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);
+					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 				}
-				else if(damage < 6) outputText("You are struck a glancing blow by " + a + short + "! ", false);
-				else if(damage < 11) outputText(capitalA + short + " wounds you! ", false);
-				else if(damage < 21) outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
-				else if(damage > 20) {
+				else if (damage < 6) outputText("You are struck a glancing blow by " + a + short + "! ", false);
+				else if (damage < 11) outputText(capitalA + short + " wounds you! ", false);
+				else if (damage < 21) outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
+				else if (damage > 20) {
 					outputText(capitalA + short + " <b>mutilate", false);
 					outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
 				}
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
 				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
-				if(damage > 0) {
-					if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
-						if(!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
+				if (damage > 0) {
+					if (lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
+						if (!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
 						else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.", false);
 						lust += 10 * lustVuln;
 					}
@@ -48,14 +48,14 @@ package classes.Scenes.Areas.Swamp
 		//SPIDER HORDE WEB - Hit
 		private function spoidahHordeWebLaunchahs():void {
 			//SPIDER HORDE WEB - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
-			if(findStatusAffect(StatusAffects.MissFirstRound) >= 0 || player.getEvasionRoll()) {
+			if (findStatusEffect(StatusEffects.MissFirstRound) >= 0 || player.getEvasionRoll()) {
 				outputText("One of the driders launches a huge glob of webbing right at you!  Luckily, Kiha manages to burn it out of the air with a well-timed gout of flame!", false);
 				combatRoundOver();
 			}
 			else {
 				outputText("Some of the spiders and driders launch huge globs of wet webbing right at you, hitting you in the torso!  You try to wiggle out, but it's no use; you're stuck like this for now.  Though comfortingly, the driders' open stance and self-satisfaction allow Kiha to blast them in the side with a huge conflagration!", false);
 				//(PC cannot attack or use spells for one turn; can use Magical Special and Possess)
-				player.createStatusAffect(StatusAffects.UBERWEB,0,0,0,0);
+				player.createStatusEffect(StatusEffects.UBERWEB,0,0,0,0);
 				HP -= 250;
 				combatRoundOver();
 			}
@@ -73,7 +73,7 @@ package classes.Scenes.Areas.Swamp
 		override protected function performCombatAction():void
 		{
 			game.spriteSelect(72);
-			if(rand(2) == 0 || player.findStatusAffect(StatusAffects.UBERWEB) >= 0) spiderStandardAttack();
+			if (rand(2) == 0 || player.findStatusEffect(StatusEffects.UBERWEB) >= 0) spiderStandardAttack();
 			else spoidahHordeWebLaunchahs();
 		}
 

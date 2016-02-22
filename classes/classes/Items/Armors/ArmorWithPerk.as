@@ -62,7 +62,7 @@ package classes.Items.Armors
 /*
 		override public function equipEffect(player:Player, output:Boolean):void
 		{
-			if(player.findPerk(playerPerk) < 0)
+			if (player.findPerk(playerPerk) < 0)
 				player.createPerk(playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4);
 		}
 

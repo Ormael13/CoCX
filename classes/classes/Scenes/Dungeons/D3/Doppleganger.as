@@ -4,7 +4,7 @@ package classes.Scenes.Dungeons.D3
 	import classes.Cock;
 	import classes.Monster;
 	import classes.VaginaClass;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	
 	/**
 	 * ...
@@ -16,7 +16,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function mirrorAttack(damage:Number):void
 		{
-			this.createStatusAffect(StatusAffects.MirroredAttack, 0, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.MirroredAttack, 0, 0, 0, 0);
 			
 			outputText("As you swing your [weapon] at the doppleganger, " + player.mf("he", "she") + " smiles mockingly, and mirrors your move exactly, lunging forward with " + player.mf("his", "her") + " duplicate " + weaponName + ".");
 			
@@ -178,8 +178,8 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function doAI():void
 		{
-			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
-				removeStatusAffect(StatusAffects.Stunned);
+			if (findStatusEffect(StatusEffects.Stunned) >= 0) {
+				removeStatusEffect(StatusEffects.Stunned);
 				outputText("Your duplicate is too stunned, buying you another round!");
 				combatRoundOver();
 				return;

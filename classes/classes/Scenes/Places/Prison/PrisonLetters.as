@@ -39,7 +39,7 @@ package classes.Scenes.Places.Prison
 				if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 3) flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = model.time.days;
 			}
 			//Post-birthing
-			if(player.hipRating < 10) {
+			if (player.hipRating < 10) {
 				player.hipRating++;
 				outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".", false);
 			}
@@ -80,7 +80,7 @@ package classes.Scenes.Places.Prison
 		public function letterFromIzma():void {
 			initialMessage("Izma");
 			outputText("\"<i>Hello, my Alpha. Today I gave birth to a ");
-			if(rand(100) <= 59) {
+			if (rand(100) <= 59) {
 				outputText("shark-girl", false);
 				flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS]++;
 			}

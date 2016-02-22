@@ -23,9 +23,9 @@ package classes.Scenes.Areas.Bog
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
-			if (player.statusAffectv1(StatusAffects.PhoukaWhiskeyAffect) > 0) {
-				player.addStatusValue(StatusAffects.PhoukaWhiskeyAffect, 1, -1); //Count down hours until player is not drunk
-				if (player.statusAffectv1(StatusAffects.PhoukaWhiskeyAffect) <= 0) {
+			if (player.statusEffectv1(StatusEffects.PhoukaWhiskeyAffect) > 0) {
+				player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 1, -1); //Count down hours until player is not drunk
+				if (player.statusEffectv1(StatusEffects.PhoukaWhiskeyAffect) <= 0) {
 					kGAMECLASS.consumables.P_WHSKY.phoukaWhiskeyExpires(player);
 					return true;
 				}
@@ -98,7 +98,7 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 			var hasAlcohol:Boolean = player.hasItem(consumables.P_WHSKY, 1);
 			outputText("You follow some firmer ground into one of the many copses of dead trees.  The bog is quiet and still here.  Up ahead you see something glint in the hollow of a dead tree, but before you can investigate the firm ground beneath your feet liquefies and you begin to sink.\n\nYou try to leap to another muddy lump of exposed ground, but even before you land it has gone soft as well.  You are soon encased in mud almost to your waist.\n\nThat's when you feel something slick and warm dart past you in the muck.  Wherever it goes it drags a thick net behind it.  Your ");
-			if(player.isNaga()) outputText("tail is");
+			if (player.isNaga()) outputText("tail is");
 			else outputText("legs are");
 			outputText(" soon tangled in a solid web of intertwined roots.  Once you are bound in place, a large black eel launches itself free of the muck and lands in a nearby puddle.\n\nYour attacker seems to melt, then reforms, becoming a five inch tall " + phoukaName() + ".  His skin and wings are coal black, and his eyes are green and shiny like those of a cat.  He isn't wearing any clothes, and a fully erect cock almost an inch long juts out of his groin.  Apart from that and a lack of breasts, his body looks feminine, much like the faeries of the woods.\n\nThe " + phoukaName() + " leers at you, clearly deciding what he wants to do next.");
 			if (hasAlcohol) outputText("\n\nYou suspect that if you offer up that whiskey in your pack the " + phoukaName() + " probably won’t try to rape you.");
@@ -142,7 +142,7 @@ package classes.Scenes.Areas.Bog
 		protected function phoukaStartFightSilenced():void
 		{
 			startCombat(new Phouka(phoukaName()));
-			player.createStatusAffect(StatusAffects.WebSilence, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.WebSilence, 0, 0, 0, 0);
 		}
 
 		protected function phoukaTalk():void
@@ -163,7 +163,7 @@ package classes.Scenes.Areas.Bog
 				else outputText("fuckable little " + phoukaName());
 				outputText(" but he must not feel like listening.  He launches a ball of black mud at your face, sealing your mouth with sticky and [if (corruption <= 50)ewww -][if (corruption > 50)mmmm -] salty muck.");
 				startCombat(new Phouka(phoukaName()));
-				player.createStatusAffect(StatusAffects.WebSilence, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.WebSilence, 0, 0, 0, 0);
 			}
 			else { //The phouka would rather talk
 				outputText("\n\nThe " + phoukaName());
@@ -415,7 +415,7 @@ package classes.Scenes.Areas.Bog
 
 		protected function phoukaLeaveOnLustWin(newScreen:Boolean = true):void
 		{
-			if(newScreen) clearOutput();
+			if (newScreen) clearOutput();
 			else outputText("\n\n");
 			outputText("The lusty " + phoukaName() + " continues to pound his cock into the earth as you prepare to go, oblivious to your presence.");
 			kGAMECLASS.clearStatuses(false);

@@ -47,20 +47,20 @@ package classes.Scenes.Explore {
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.findStatusAffect(StatusAffects.SuccubiNight) >= 0 && (player.hasCock() || player.gender == 0)) { //Call secksins!
-				if (player.findStatusAffect(StatusAffects.RepeatSuccubi) >= 0) {
+			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.findStatusEffect(StatusEffects.SuccubiNight) >= 0 && (player.hasCock() || player.gender == 0)) { //Call secksins!
+				if (player.findStatusEffect(StatusEffects.RepeatSuccubi) >= 0) {
 					if (getGame().vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) //VapulaSurprise
 						getGame().vapula.vapulaAssistsCeruleanSuccubus();
 					else nightSuccubiRepeat(); //Normal night succubi shit
 				}
 				else {
 					nightSuccubiFirstTime();
-					player.createStatusAffect(StatusAffects.RepeatSuccubi, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.RepeatSuccubi, 0, 0, 0, 0);
 				}
 				//Lower count if multiples stacked up.
-				if (player.statusAffectv1(StatusAffects.SuccubiNight) > 1)
-					player.addStatusValue(StatusAffects.SuccubiNight, 1, -1);
-				else player.removeStatusAffect(StatusAffects.SuccubiNight);
+				if (player.statusEffectv1(StatusEffects.SuccubiNight) > 1)
+					player.addStatusValue(StatusEffects.SuccubiNight, 1, -1);
+				else player.removeStatusEffect(StatusEffects.SuccubiNight);
 				return true;
 			}
 			return false;
@@ -73,14 +73,14 @@ package classes.Scenes.Explore {
 			if (kGAMECLASS.giacomo == 0) {
 				firstEncounter();
 			}
-			else if (player.findStatusAffect(StatusAffects.WormOffer) < 0 && player.findStatusAffect(StatusAffects.Infested) >= 0) { //If infested && no worm offer yet
+			else if (player.findStatusEffect(StatusEffects.WormOffer) < 0 && player.findStatusEffect(StatusEffects.Infested) >= 0) { //If infested && no worm offer yet
 				outputText("Upon walking up to Giacomo's wagon, he turns to look at you and cocks an eyebrow in curiosity and mild amusement.\n\n");
 				outputText("\"<i>Been playing with creatures best left alone, I see</i>,\" he chuckles.  \"<i>Infestations of any kind are annoying, yet your plight is quite challenging given the magnitude of corrupt creatures around here.  It is not the first time I have seen one infested with THOSE worms.</i>\"\n\n");
 				outputText("You ask how he knows of your change and the merchant giggles heartily.\n\n");
 				outputText("\"<i>Do not look at me as if I am a mystic,</i>\" Giacomo heckles lightly.  \"<i>Your crotch is squirming.</i>\"\n\n");
 				outputText("Looking down, you realize how right he is and attempt to cover yourself in embarrassment.\n\n");
 				outputText("\"<i>Fear not!</i>\" the purveyor jingles.  \"<i>I have something that will cure you of those little bastards.  Of course, there is also a chance that it will purge your system in general.  This potion is not cheap.  I will trade it for 175 gems.</i>\"\n\n");
-				player.createStatusAffect(StatusAffects.WormOffer, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.WormOffer, 0, 0, 0, 0);
 				if (player.gems < 175) { //Broke as a joke
 					outputText("You realize you don't have enough gems for such a pricey potion, but perhaps there is something else in his inventory you can buy.");
 				}
@@ -95,7 +95,7 @@ package classes.Scenes.Explore {
 				outputText("You spy the merchant Giacomo in the distance.  He makes a beeline for you, setting up his shop in moments.  ");
 				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?");
 			}
-			var deworm:Function = (player.findStatusAffect(StatusAffects.WormOffer) >= 0 && player.findStatusAffect(StatusAffects.Infested) >= 0 ? wormRemovalOffer : null);
+			var deworm:Function = (player.findStatusEffect(StatusEffects.WormOffer) >= 0 && player.findStatusEffect(StatusEffects.Infested) >= 0 ? wormRemovalOffer : null);
 			simpleChoices("Potions", potionMenu, "Books", bookMenu, "Erotica", eroticaMenu, "Worm Cure", deworm, "Leave", camp.returnToCampUseOneHour);
 			statScreenRefresh();
 		}
@@ -562,7 +562,7 @@ package classes.Scenes.Explore {
 			if (player.HP > int(player.maxHP() * .15))
 				player.HP = int(player.maxHP() * .15);
 			//Maybe add a random chance of losing a random transformation with a smaller chance of losing ALL transformations except gender changes. This will probably be a bitch to implement.
-			player.removeStatusAffect(StatusAffects.Infested);
+			player.removeStatusEffect(StatusEffects.Infested);
 			dynStats("lib", -1, "lus", -99, "cor", -4);
 			player.gems -= 175;
 			statScreenRefresh();
@@ -685,8 +685,8 @@ package classes.Scenes.Explore {
 				
 		private function nightSuccubiRepeat():void {
 			spriteSelect(8);
-			if(player.gender == 0) {
-				if(flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] == 0) {
+			if (player.gender == 0) {
+				if (flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] == 0) {
 					outputText("\nAs you sleep, your rest becomes increasingly disturbed. You feel a great weight on top of you and you find it difficult to breathe. Stirred to consciousness, your eyes are greeted by an enormous pair of blue-tinged breasts. The nipples are quite long and thick and are surrounded by large, round areola. A deep, feminine voice breaks the silence, \"<i>I was wondering if you would wake up.</i>\" You turn your head to the voice to see the visage of a sharp featured, attractive woman. The woman grins mischievously and speaks again, \"<i>I was hoping that idiot, Giacomo, did not dilute the 'potion' again.</i>\" Your campfire reflects off the woman's face and her beauty contains some sharply contrasting features. The pupils of her eyes are slit like a cat's. As she grins, she bares her teeth, which contain two pairs of long and short fangs. This woman is clearly NOT human! In shock, you attempt to get up, only prompting the woman to prove her inhuman nature by grabbing your shoulders and pinning you to the ground. You see that each finger on her hand also contains a fourth joint, further proving her status. Before you can speak a word, the woman begins mocking your fear and places her face in front of yours. Her face is almost certainly demonic in nature.\n\n", false);
 					outputText("She quickly moves down to your crotch...only to discover no organs down there.\n\n", false);
 					outputText("*record scratch*\n\n", false);
@@ -741,16 +741,16 @@ package classes.Scenes.Explore {
 			}
 			player.orgasm();
 			dynStats("cor", 2);
-			if(player.gender == 1) {
-				if(player.cor < 66) {
+			if (player.gender == 1) {
+				if (player.cor < 66) {
 					outputText("\nAgainst your better judgment, you've again partaken of the cerulean elixir and fallen asleep. You are quickly awakened by a thick nipple being thrust into your mouth and torrents of breast milk gushing down your throat as the succubus returns to have her way with you. Looking up, your eyes meet hers as a hungry manipulative grin stretches across her blue face. Unable to control your lust, your prick jumps to attention, which prompts the demoness to ", false);
-					if(player.isTaur()) outputText(" crouch between your legs and impale herself on your " + cockDescript(0) + " with a wet sound caused by her well-lubricated vulva. Y", false);
+					if (player.isTaur()) outputText(" crouch between your legs and impale herself on your " + cockDescript(0) + " with a wet sound caused by her well-lubricated vulva. Y", false);
 					else outputText(" open her womb and quickly consume your " + cockDescript(0) + ". She embraces you, entrapping your head in her cleavage as y", false);
 					outputText("ou quickly feel her superhuman vaginal muscles work and stroke your " + cockDescript(0) + " better than any human woman or pair of hands could ever hope to accomplish. You are helpless as your unholy embrace milks the both of you in an infernal symphony of debauchery. The familiar cramp of an impending ejaculation grips you and your twitching signals the succubus of your approaching climax.\n\n", false);
-					if(player.isTaur()) outputText("Pushing on your forelegs, she engulfs even more of your " + cockDescript(0), false);
+					if (player.isTaur()) outputText("Pushing on your forelegs, she engulfs even more of your " + cockDescript(0), false);
 					else outputText("Almost crushing your pelvis, she wraps her legs around your body", false);
 					outputText(" and her muscles churn mercilessly demanding that you release your 'milk' as freely as she has released hers into you. Stimulated beyond any human ability to maintain control, you bear down and release a milky flood of your own inside the succubus. Moaning in ecstasy, she ", false);
-					if(player.isTaur()) outputText("arches under your belly as you feel your " + cockDescript(0) + " bending pleasurably inside her, and", false);
+					if (player.isTaur()) outputText("arches under your belly as you feel your " + cockDescript(0) + " bending pleasurably inside her, and", false);
 					else outputText("releases you from her grip, allowing you to finally breathe deeply, and leans back, arching high to reveal your joined genitals in the moonlight. You visibly see", false);
 					outputText(" her contractions milking your " + cockDescript(0) + " as fiercely as a maid milks a cow! Another torrent of cum pushes its way out of your body and you let out a moan of pleasure and exhaustion.\n\n", false);
 					outputText("As you are passing out, you feel a deep kiss upon your lips from the succubus. \"You taste better each time we join. Call upon me soon, lest I take what I want from you anyway,\", says the lustful creature.\n\n", false);
@@ -761,29 +761,29 @@ package classes.Scenes.Explore {
 					outputText("The succubus comes, as you predicted. Despite her obvious strength and size difference to you, you grab her and push her down to the ground and immediately push your angry cock into her hairy hole. The succubus, surprised and enthralled, laughs at your aggression.\n\n", false);
 					outputText("\"<i>I thought I was the hungry one.</i>\", she chuckles. \"I am all yours, little man. FEED ME!\"\n\n", false);
 					outputText("You begin bucking your ", false);
-					if(player.isTaur()) outputText("flanks", false);
+					if (player.isTaur()) outputText("flanks", false);
 					else outputText("hips", false);
 					outputText(" in the all-too-familiar rhythm, hammering away at the succubus' cunt. Impressed with your initiative, she chooses to remain submissive as you work up an impressive load of spunk. Trying with all of your might, you continue to hold off your orgasm, painfully, as you continue stimulating your inhuman lover.\n\n", false);
 					outputText("However, she senses your control and immediately brings her own muscles into the little love game. With one good squeeze, she breaks down any control and resistance you have. Sensing you are about to explode, she ", false);
-					if(player.isTaur()) outputText("pushes on your forelegs, impaling herself even deeper on your " + cockDescript(0), false);
+					if (player.isTaur()) outputText("pushes on your forelegs, impaling herself even deeper on your " + cockDescript(0), false);
 					else outputText("wraps her legs around your hips and bears down", false);
 					outputText(". You feel the head of your prick push past the dilated opening in her cervix, which immediately contracts around your head. Your penis is literally trapped and caught in her womb!\n\n", false);
 					outputText("Groaning loudly, long muscle spasms release the painfully stored semen into the deepest parts of the succubus. The sensation of your hot cum so deep inside her body triggers her peak. ", false);
 					
-					if(player.isTaur()) outputText("She moans inhumanly, and reflexively digs her claws into your forelegs. Searing with lust, the pain means little to you as you only feel the sensation of your body forcing your fluids out of your body and into hers. You press your " + cockDescript(0) + " into her", false);
+					if (player.isTaur()) outputText("She moans inhumanly, and reflexively digs her claws into your forelegs. Searing with lust, the pain means little to you as you only feel the sensation of your body forcing your fluids out of your body and into hers. You press your " + cockDescript(0) + " into her", false);
 					else outputText("She embraces you, moaning inhumanly, and reflexively digs her claws into your back. Searing with lust, the pain means little to you as you only feel the sensation of your body forcing your fluids out of your body and into hers. You slam your pelvis into hers", false);
 					outputText(", as if to force yourself to cum harder than you already are capable of, prompting an equally pleasurable reaction from her.\n\n", false);
 					outputText("For the first time since you have had your 'visits', the succubus appears winded. Without another word, her muscles release your manhood, which she quickly licks clean of your intermingled juices.  She tongues your face in lustful approval and flies away. You quickly fall asleep, utterly spent.  ", false);
 					dynStats("lib", -1);
 				}
 			}
-			else if(player.gender == 3) {
+			else if (player.gender == 3) {
 				//Bad End-Cerulean Succubus Futa/herm
 				//[Conditions: Corruption >50. Drink 10 Cerulean potions over the course of 20 Days. (Other stipulations as required that prevent interference with other events-to be determined)]
-				if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10 && player.cor > 50) {
+				if (flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10 && player.cor > 50) {
 					outputText("\nAs the Succubus mounts you, an uncontrollable urge takes over your mind and body. Without any thought, you quickly thrust one of her nipples in your mouth and begin suckling wildly like a newborn child. The Succubus cries in shock and pleasure as you begin feeding from her and quickly begins her ritualistic milking of your dong. The warm milk passes into your mouth and down your throat, where it settles peacefully in your stomach. The sensation of fulfillment from her tits is only eclipsed by the massive load of semen you feel cramping your prostate.", false);
 					//[ (Herm-Dickgirl variant only)
-					if(player.balls > 0) outputText("  Even your nuts are unbearably sore.", false);
+					if (player.balls > 0) outputText("  Even your nuts are unbearably sore.", false);
 					outputText("  As the milk begins to dry out of the Succubus' tit, you release it from your control and launch an impossible load of cum into the succubus. The demoness releases her hold of your cock and hops off your crotch and jumps to place her mouth over your erupting penis. Reflexively grabbing her head, you push your cock as deep as you can in her mouth and for minutes, pump stream after stream of hot lust into her gullet. After the last load leaves your dong, you pass out.\n\n", false);
 		
 					outputText("After a short time, you wake up sore from head to toe. The Succubus is sitting next to you with an utterly satisfied look on her face.\n\n", false);
@@ -792,7 +792,7 @@ package classes.Scenes.Explore {
 		
 					outputText("As you stand, you feel awkward as your body does not feel right. You look at the Succubus and she no longer appears as large as she once was. Quick to realize a problem, you look at your reflection in a small bucket at your campsite. Other than your own unique facial features, you see ANOTHER Cerulean Succubus looking back at you! You ARE a Cerulean Succubus!", false);
 					//[(if the player has a large number of transformations) 
-					if(player.horseScore() + player.dogScore() + player.nagaScore() + player.goblinScore() + player.sharkScore() + player.minoScore() + player.cowScore() > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.", false);
+					if (player.horseScore() + player.dogScore() + player.nagaScore() + player.goblinScore() + player.sharkScore() + player.minoScore() + player.cowScore() > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.", false);
 					outputText("  As the reality soaks in, you feel a sharp pain in your stomach and your cock. You NEED to feed. Cum, milk, it doesn't matter. Likewise, your dick is hard and you need to cum. Despite your need, you cannot bring yourself to masturbate. You want ANOTHER'S attention.\n\n", false);
 		
 					outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.", false);
@@ -809,8 +809,8 @@ package classes.Scenes.Explore {
 					outputText("Your consciousness begins to fade as the orgasm subsides. The succubus pops her tit out of your mouth and squeezes more of her essence into the empty bottle. She licks your lips and flies away just in time for you to pass out.  ", false);
 					//Clear out any queue'ed events if bad-end
 					//coming.  PC has to dig his own grave.
-					if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10) {
-						player.removeStatusAffect(StatusAffects.SuccubiNight);
+					if (flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10) {
+						player.removeStatusEffect(StatusEffects.SuccubiNight);
 					}
 					fatigue(20);
 					player.cumMultiplier++;

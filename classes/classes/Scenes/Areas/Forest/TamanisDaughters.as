@@ -9,19 +9,19 @@ package classes.Scenes.Areas.Forest
 	{
 		private function midRoundMadness():void {
 			var selector:Number = rand(4);
-			if(selector == 0) {
+			if (selector == 0) {
 				outputText("A slender hand reaches inside your " + player.armorName + " and gives your ", false);
-				if(player.balls > 0) {
-					if(rand(2) == 0) outputText(player.multiCockDescriptLight(), false);
+				if (player.balls > 0) {
+					if (rand(2) == 0) outputText(player.multiCockDescriptLight(), false);
 					else outputText(player.ballsDescriptLight(), false);
 				}
 				else outputText(player.multiCockDescriptLight(), false);
 				outputText(" a gentle squeeze.  You twist away but your breathing gets a little heavier.\n\n", false);
 			}
-			else if(selector == 1) {
+			else if (selector == 1) {
 				outputText("A girl latches onto your " + player.legs() + " and begins caressing your body lovingly, humming happily.  You quickly shake her loose but the attention makes you blush a little more.\n\n", false);
 			}
-			else if(selector == 2) {
+			else if (selector == 2) {
 				outputText("One of your daughters launches onto your back and presses her hard, pierced nipples against your neck.  She whispers in your ear, \"<i>Twist my nipples dad!</i>\"\n\n", false);
 				outputText("You reach back and throw her off, but her perverted taunts still leave you feeling a little hot under the collar.\n\n", false);
 			}
@@ -61,8 +61,8 @@ package classes.Scenes.Areas.Forest
 			if (special3 != null) select++;
 			switch (rand(select)) {
 				case 0:
-					createStatusAffect(StatusAffects.Attacks, int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20), 0, 0, 0); //Tamani's Daughters get multiattacks!
-					if (statusAffectv1(StatusAffects.Attacks) > 20) addStatusValue(StatusAffects.Attacks, 1, -(statusAffectv1(StatusAffects.Attacks) - 20));
+					createStatusEffect(StatusEffects.Attacks, int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20), 0, 0, 0); //Tamani's Daughters get multiattacks!
+					if (statusEffectv1(StatusEffects.Attacks) > 20) addStatusValue(StatusEffects.Attacks, 1, -(statusEffectv1(StatusEffects.Attacks) - 20));
 					eAttack();
 					break;
 				case 1:
@@ -85,7 +85,7 @@ package classes.Scenes.Areas.Forest
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(pcCameWorms){
+			if (pcCameWorms){
 				outputText("\n\nYour foes seem visibly disgusted and leave, telling you to, \"<i>quit being so fucking gross...</i>\"");
 				game.cleanupAfterCombat();
 			} else {
@@ -105,11 +105,11 @@ package classes.Scenes.Areas.Forest
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_TIGHT);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,25,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,25,0,0,0);
 			this.tallness = 40;
 			this.hipRating = HIP_RATING_AMPLE+1;
 			this.buttRating = BUTT_RATING_NOTICEABLE+1;

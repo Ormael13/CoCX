@@ -9,16 +9,16 @@ package classes.Scenes.Areas.Plains
 		private function satyrAttack():void {
 			outputText("The satyr swings at you with one knuckled fist.  ");
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind punch!\n", false);
 			}
 			//Evade: 
-			else if(player.getEvasionRoll()) {
+			else if (player.getEvasionRoll()) {
 				outputText("He snarls as you duck his blow and it swishes harmlessly through the air.");
 			}
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou));
-				if(damage > 0) {
+				if (damage > 0) {
 					outputText("It feels like you just got hit with a wooden club! ");
 					damage = player.takeDamage(damage, true);
 				}
@@ -37,20 +37,20 @@ package classes.Scenes.Areas.Plains
 		
 		internal function satyrCharge():void {
 			outputText("Lowering his horns, the satyr digs his hooves on the ground and begins snorting; he's obviously up to something.  ");
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
 			}
 			else {
 				var evade:String = player.getEvasionReason();
-				if(evade == EVASION_EVADE) {
+				if (evade == EVASION_EVADE) {
 					outputText("He charges at you with a loud bleat, but using your evasive skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
 					HP -= 5;
 				}
-				else if(evade == EVASION_FLEXIBILITY) {
+				else if (evade == EVASION_FLEXIBILITY) {
 					outputText("He charges at you with a loud bleat, but using your flexibility, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
 					HP -= 5;
 				}
-				else if(evade == EVASION_MISDIRECTION) {
+				else if (evade == EVASION_MISDIRECTION) {
 					outputText("He charges at you with a loud bleat, but using your misdirecting skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
 					HP -= 5;
 				}
@@ -60,11 +60,11 @@ package classes.Scenes.Areas.Plains
 				}
 				else {
 					var damage:Number = int((str + weaponAttack) - rand(player.tou));
-					if(damage > 0) {
+					if (damage > 0) {
 						outputText("He charges at you with a loud bleat, catching you off-guard and sending you flying into the ground.");
-						if(player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) {
+						if (player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) {
 							outputText("  The pain of the impact is so big you feel completely dazed, almost seeing stars.");
-							player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+							player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 						}
 						outputText(" ");
 						damage = player.takeDamage(damage, true);
@@ -87,10 +87,10 @@ package classes.Scenes.Areas.Plains
 		//5:(Only executed at high lust) 
 		private function highLustChugRape():void {
 			outputText("Panting with barely-contained lust, the Satyr charges at you and tries to ram you into the ground.  ");
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
 			}
-			else if(player.getEvasionRoll()) {
+			else if (player.getEvasionRoll()) {
 				outputText("As he charges you, you grab him by the horns and spin around, sending him away.");
 			}
 			else {
@@ -104,15 +104,15 @@ package classes.Scenes.Areas.Plains
 		
 		override protected function performCombatAction():void
 		{
-			if(lust >= 75 && rand(2) == 0) highLustChugRape();
-			else if(lust < 75 && rand(2) == 0) {
-				if(rand(2) == 0) satyrBate();
+			if (lust >= 75 && rand(2) == 0) highLustChugRape();
+			else if (lust < 75 && rand(2) == 0) {
+				if (rand(2) == 0) satyrBate();
 				else bottleChug();
 			}
-			else if(findStatusAffect(StatusAffects.Charged) < 0) satyrCharge();
+			else if (findStatusEffect(StatusEffects.Charged) < 0) satyrCharge();
 			else {
 				satyrAttack();
-				removeStatusAffect(StatusAffects.Charged);
+				removeStatusEffect(StatusEffects.Charged);
 			}
 		}
 
@@ -147,7 +147,7 @@ package classes.Scenes.Areas.Plains
 			createBreastRow(0);
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_NORMAL;
-			this.createStatusAffect(StatusAffects.BonusACapacity,20,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = rand(37) + 64;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;

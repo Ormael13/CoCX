@@ -12,14 +12,12 @@ package classes.Scenes.Dungeons.Factory
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.gender > 0) {
-				var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? game.succubusGetsDildoed : null);
-				
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?", true);
 					game.dynStats("lus", 1);
 					game.simpleChoices("Yes", factory.doRapeSuccubus, "", null, "", null, "", null, "No", factory.doLeaveSuccubus);
 					if (player.hasKeyItem("Deluxe Dildo") >= 0) game.addButton(1, "Dildo Rape", factory.dildoSuccubus);
-				} else if (player.lust>=33){
+				} else if (player.lust >= 33) {	
 					outputText("You smile in satisfaction as the " + short + " gives up on fighting you and starts masturbating, begging for you to fuck her.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?", true);
 					game.dynStats("lus", 1);
 					game.simpleChoices("Yes", factory.doRapeSuccubus, "", null, "", null, "", null, "No", factory.doLeaveSuccubus);
@@ -34,7 +32,7 @@ package classes.Scenes.Dungeons.Factory
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(pcCameWorms){
+			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(game.endLustLoss);
 			} else {
@@ -49,7 +47,7 @@ package classes.Scenes.Dungeons.Factory
 			this.long = "The succubus across from you balances gracefully on her spiked heels, twirling and moving unpredictably.  Sexy dark stockings hug every curve of her perfectly shaped flesh until they disappear into her tiny miniskirt.  Her impressive breasts wobble delightfully as she moves, despite the inadequate efforts of her straining vest.  A pair of foot-long horns curve up from her otherwise perfect face and forehead, wreathed in lustrous blonde hair.  The very air around her is filled with an unidentifiable fragrance that makes you tingle and shiver.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 30, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
