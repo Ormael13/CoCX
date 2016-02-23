@@ -12,19 +12,19 @@ import classes.Items.JewelryLib;
 		private var _femininity:Number = 50;
 
 		// This is the easiest way I could think of to apply "flat" bonuses to certain stats without having to write a whole shitload of crazyshit
-		// I think a better long-term solution may be to hang function references off the end of the statusAffect class and move all of the value
+		// I think a better long-term solution may be to hang function references off the end of the statusEffect class and move all of the value
 		// calculation into methods of ContentClasses, so rather than having walls of logic, we just call the method reference with a value, and get back the modified value.
 		// It's still shitty, but it would possibly be an improvement.
 		public function get femininity():Number
 		{
 			var fem:Number = _femininity;
-			var statIndex:int = this.findStatusAffect(StatusAffects.UmasMassage);
+			var statIndex:int = this.findStatusEffect(StatusEffects.UmasMassage);
 
 			if (statIndex >= 0)
 			{
-				if (this.statusAffect(statIndex).value1 == UmasShop.MASSAGE_MODELLING_BONUS)
+				if (this.statusEffect(statIndex).value1 == UmasShop.MASSAGE_MODELLING_BONUS)
 				{
-					fem += this.statusAffect(statIndex).value2;
+					fem += this.statusEffect(statIndex).value2;
 				}
 			}
 			
@@ -457,9 +457,9 @@ import classes.Items.JewelryLib;
 		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
-			if (findStatusAffect(StatusAffects.Contraceptives) >= 0 && arg < 1)
+			if (findStatusEffect(StatusEffects.Contraceptives) >= 0 && arg < 1)
 				return;
-//			if (findStatusAffect(StatusAffects.GooStuffed) >= 0) return; //No longer needed thanks to PREGNANCY_GOO_STUFFED being used as a blocking value
+//			if (findStatusEffect(StatusEffects.GooStuffed) >= 0) return; //No longer needed thanks to PREGNANCY_GOO_STUFFED being used as a blocking value
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000
 			if (arg >= 1)
@@ -497,7 +497,7 @@ import classes.Items.JewelryLib;
 		public function buttKnockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
-			if (findStatusAffect(StatusAffects.Contraceptives) >= 0 && arg < 1)
+			if (findStatusEffect(StatusEffects.Contraceptives) >= 0 && arg < 1)
 				return;
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000
@@ -778,19 +778,19 @@ import classes.Items.JewelryLib;
 
 		/*OLD AND UNUSED
 		   public function breastCupS(rowNum:Number):String {
-		   if(breastRows[rowNum].breastRating < 1) return "tiny";
-		   else if(breastRows[rowNum].breastRating < 2) return "A";
-		   else if(breastRows[rowNum].breastRating < 3) return "B";
-		   else if(breastRows[rowNum].breastRating < 4) return "C";
-		   else if(breastRows[rowNum].breastRating < 5) return "D";
-		   else if(breastRows[rowNum].breastRating < 6) return "DD";
-		   else if(breastRows[rowNum].breastRating < 7) return "E";
-		   else if(breastRows[rowNum].breastRating < 8) return "F";
-		   else if(breastRows[rowNum].breastRating < 9) return "G";
-		   else if(breastRows[rowNum].breastRating < 10) return "GG";
-		   else if(breastRows[rowNum].breastRating < 11) return "H";
-		   else if(breastRows[rowNum].breastRating < 12) return "HH";
-		   else if(breastRows[rowNum].breastRating < 13) return "HHH";
+		   if (breastRows[rowNum].breastRating < 1) return "tiny";
+		   else if (breastRows[rowNum].breastRating < 2) return "A";
+		   else if (breastRows[rowNum].breastRating < 3) return "B";
+		   else if (breastRows[rowNum].breastRating < 4) return "C";
+		   else if (breastRows[rowNum].breastRating < 5) return "D";
+		   else if (breastRows[rowNum].breastRating < 6) return "DD";
+		   else if (breastRows[rowNum].breastRating < 7) return "E";
+		   else if (breastRows[rowNum].breastRating < 8) return "F";
+		   else if (breastRows[rowNum].breastRating < 9) return "G";
+		   else if (breastRows[rowNum].breastRating < 10) return "GG";
+		   else if (breastRows[rowNum].breastRating < 11) return "H";
+		   else if (breastRows[rowNum].breastRating < 12) return "HH";
+		   else if (breastRows[rowNum].breastRating < 13) return "HHH";
 		   return "massive custom-made";
 		 }*/
 		public function viridianChange():Boolean

@@ -18,9 +18,9 @@ package classes.Scenes.NPCs
 			game.spriteSelect(72);
 			outputText("Before you can stop to think, the dragon-woman steps back - throwing her axe into the air before she starts sprinting towards you. In seconds she's reached a hair's distance between her lithe form and your own, her fist recoiling and time seemingly stopping to allow you to note the powerful energy seeping from her arms.  ", false);
 			//Miss:
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
 				outputText("You take the opportunity to walk away, watching the slow-motion attack unravel before you; the fire bursts from her knuckle in the shape of a bird in flight, wings unfurled.  ", false);
-				if(rand(2) == 0) outputText("You only owned an XJasun back home, so you don't really understand the reference.", false);
+				if (rand(2) == 0) outputText("You only owned an XJasun back home, so you don't really understand the reference.", false);
 				else outputText("You stifle a laugh as your memories turn to many an evening spent with your friends in front of your SharkCube console, contesting each other in games of ridiculous, stylized combat.", false);
 			}
 			else {
@@ -29,12 +29,12 @@ package classes.Scenes.NPCs
 				damage += 5;
 				
 				outputText("A torrent of heat bursts from between her fingertips as she thrusts her clenched fist forward, the ball of intense flame writhing and burning with a fury unknown to mankind. With one fell swoop, the combined power of her love, anger, and sorrow pushes you backward, launching you out of the swamp and into Marble's pillowy chest. \"<i>Ara ara,</i>\" she begins, but you've already pushed yourself away from the milky hell-prison as you run back towards ");
-				if(!game.kihaFollower.followerKiha()) outputText("the swamp");
+				if (!game.kihaFollower.followerKiha()) outputText("the swamp");
 				else outputText("the fight");
 				outputText(". ", false);
 				damage = player.takeDamage(damage, true);
 				outputText("\n");
-				if(player.HP >= 1) outputText("You follow the shrill cry of \"<i>B-BAKA!</i>\" in the distance until you reach the exact location you were in a few seconds earlier, prepared to fight again.", false);
+				if (player.HP >= 1) outputText("You follow the shrill cry of \"<i>B-BAKA!</i>\" in the distance until you reach the exact location you were in a few seconds earlier, prepared to fight again.", false);
 			}
 			combatRoundOver();
 		}
@@ -44,19 +44,19 @@ package classes.Scenes.NPCs
 			outputText("The draconic girl throws her trusty weapon into the sodden ground, using the distraction to build up balls of flame around her fists.  She runs towards you, launching herself in your direction with a flurry of punches.\n", false);
 
 			//Dodged
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
 				outputText("You manage to jump to the side, intense heat rushing past you as you narrowly avoid her advance.  You twist around, finding that she's reunited with her axe and angrier than before.", false);
 			}
 			//Determine if evaded
-			else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evasion, you manage to jump to the side, intense heat rushing past you as you narrowly avoid her advance.  You twist around, finding that she's reunited with her axe and angrier than before.", false);
 			}
 			//("Misdirection"
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using your skills at misdirection, you manage to make Kiha think you're going to dodge one way before stepping in the other direction.  You turn back, finding she has her axe in hand and looks rather steamed.", false);
 			}
 			//Determine if cat'ed
-			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("Using your cat-like reflexes, you manage to jump to the side, intense heat rushing past you as you narrowly avoid her advance.  You twist around, finding that she's reunited with her axe and angrier than before.", false);
 			}
 			//HIT!
@@ -76,15 +76,15 @@ package classes.Scenes.NPCs
 			outputText("Kiha throws her arms back and roars, exhaling a swirling tornado of fire directly at you!\n", false);
 			//Miss:
 			//Determine if evaded
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your talent for evasion, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
 			}
 			//("Misdirection"
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
 				outputText("Using your talent for misdirection, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
 			}
 			//Determine if cat'ed
-			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("Using your cat-like flexibility, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
 			}
 			else {
@@ -106,7 +106,7 @@ package classes.Scenes.NPCs
 		*/
 		override protected function handleFear():Boolean
 		{
-			removeStatusAffect(StatusAffects.Fear);
+			removeStatusEffect(StatusEffects.Fear);
 			outputText("Kiha shudders for a moment, then looks your way with a clear head.  \"<i>Fear was the first thing the demons taught us to overcome.  Do you think it would stay my blade?</i>\"\n", false);
 			return true;
 		}
@@ -139,11 +139,11 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.spiderfight) >= 0)
+			if (findStatusEffect(StatusEffects.spiderfight) >= 0)
 				game.kihaFollower.playerBeatsUpKihaPreSpiderFight();
-			else if(findStatusAffect(StatusAffects.DomFight) >= 0)
+			else if (findStatusEffect(StatusEffects.DomFight) >= 0)
 				game.kihaFollower.pcWinsDomFight();
-			else if(findStatusAffect(StatusAffects.Spar) >= 0)
+			else if (findStatusEffect(StatusEffects.Spar) >= 0)
 				game.kihaFollower.winSparWithKiha();
 			else game.kihaScene.kihaVictoryIntroduction();
 		}
@@ -151,11 +151,11 @@ package classes.Scenes.NPCs
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.spiderfight) >= 0)
+			if (findStatusEffect(StatusEffects.spiderfight) >= 0)
 				game.kihaFollower.loseKihaPreSpiderFight();
-			else if(findStatusAffect(StatusAffects.DomFight) >= 0)
+			else if (findStatusEffect(StatusEffects.DomFight) >= 0)
 				game.kihaFollower.pcLosesDomFight();
-			else if(findStatusAffect(StatusAffects.Spar) >= 0)
+			else if (findStatusEffect(StatusEffects.Spar) >= 0)
 				game.kihaFollower.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");
@@ -177,11 +177,11 @@ package classes.Scenes.NPCs
 				this.long += "Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
 			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,40,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 6*12+1;
 			this.hipRating = HIP_RATING_AMPLE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;

@@ -29,19 +29,19 @@ package classes.Scenes.Places.Bazaar
 		}
 		
 		private function applyAndysSmokeEffect():void {
-			if (player.findStatusAffect(StatusAffects.AndysSmoke) >= 0) {
-				if (player.statusAffectv2(StatusAffects.AndysSmoke) > -15) { //Maximum speed loss is -15.
-					player.addStatusValue(StatusAffects.AndysSmoke, 2, -5);
+			if (player.findStatusEffect(StatusEffects.AndysSmoke) >= 0) {
+				if (player.statusEffectv2(StatusEffects.AndysSmoke) > -15) { //Maximum speed loss is -15.
+					player.addStatusValue(StatusEffects.AndysSmoke, 2, -5);
 					dynStats("spe", -5);
 				}
-				if (player.statusAffectv3(StatusAffects.AndysSmoke) < 15) { //Maximum intelligence boost is 15.
-					player.addStatusValue(StatusAffects.AndysSmoke, 3, 5);
+				if (player.statusEffectv3(StatusEffects.AndysSmoke) < 15) { //Maximum intelligence boost is 15.
+					player.addStatusValue(StatusEffects.AndysSmoke, 3, 5);
 					dynStats("int", 5);
 				}
-				player.changeStatusValue(StatusAffects.AndysSmoke, 1, 8);
+				player.changeStatusValue(StatusEffects.AndysSmoke, 1, 8);
 			}
 			else {
-				player.createStatusAffect(StatusAffects.AndysSmoke, 8, -5, 5, 0);
+				player.createStatusEffect(StatusEffects.AndysSmoke, 8, -5, 5, 0);
 				dynStats("spe", -5, "int", 5);
 			}
 			
@@ -170,7 +170,7 @@ package classes.Scenes.Places.Bazaar
 				doNext(checkFoodMenu);
 				return;
 			}
-			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.findStatusAffect(StatusAffects.Fullness) >= 0 && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
+			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.findStatusEffect(StatusEffects.Fullness) >= 0 && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
 				outputText("<b>You are too full to consider eating that.</b>");
 				doNext(checkFoodMenu);
 				return;
@@ -235,8 +235,8 @@ package classes.Scenes.Places.Bazaar
 				default:
 					player.refillHunger(50);
 			}
-			if (player.findStatusAffect(StatusAffects.Fullness) < 0) player.createStatusAffect(StatusAffects.Fullness, 4, 0, 0, 0);
-			else player.changeStatusValue(StatusAffects.Fullness, 1, 4);
+			if (player.findStatusEffect(StatusEffects.Fullness) < 0) player.createStatusEffect(StatusEffects.Fullness, 4, 0, 0, 0);
+			else player.changeStatusValue(StatusEffects.Fullness, 1, 4);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1249,7 +1249,7 @@ package classes.Scenes.Places.Bazaar
 				doNext(enterTheBlackCock);
 				return;
 			}
-			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.findStatusAffect(StatusAffects.Fullness) >= 0 && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
+			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.findStatusEffect(StatusEffects.Fullness) >= 0 && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
 				outputText("<b>You are too full to consider ordering that that.</b>");
 				doNext(enterTheBlackCock);
 				return;
@@ -1261,8 +1261,8 @@ package classes.Scenes.Places.Bazaar
 			player.refillHunger(35);
 			if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 2);
 			player.modTone(0, 1);
-			if (player.findStatusAffect(StatusAffects.Fullness) < 0) player.createStatusAffect(StatusAffects.Fullness, 2, 0, 0, 0);
-			else player.changeStatusValue(StatusAffects.Fullness, 1, 2);
+			if (player.findStatusEffect(StatusEffects.Fullness) < 0) player.createStatusEffect(StatusEffects.Fullness, 2, 0, 0, 0);
+			else player.changeStatusValue(StatusEffects.Fullness, 1, 2);
 			flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1421,11 +1421,11 @@ package classes.Scenes.Places.Bazaar
 				if (player.cumMultiplier < 50) player.cumMultiplier += 0.5;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.findStatusAffect(StatusAffects.BonusVCapacity) >= 0) {
+			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.findStatusEffect(StatusEffects.BonusVCapacity) >= 0) {
 				outputText("\n\nYou feel a tingling sensation in your vagina… that was weird.");
-				if (player.findStatusAffect(StatusAffects.BonusVCapacity) >= 0) {
-					player.addStatusValue(StatusAffects.BonusVCapacity, 1, -(rand(5) + 5));
-					if (player.findStatusAffect(StatusAffects.BonusVCapacity) <= 0) player.removeStatusAffect(StatusAffects.BonusVCapacity);
+				if (player.findStatusEffect(StatusEffects.BonusVCapacity) >= 0) {
+					player.addStatusValue(StatusEffects.BonusVCapacity, 1, -(rand(5) + 5));
+					if (player.findStatusEffect(StatusEffects.BonusVCapacity) <= 0) player.removeStatusEffect(StatusEffects.BonusVCapacity);
 				}
 				changes++;
 			}
@@ -1651,7 +1651,7 @@ package classes.Scenes.Places.Bazaar
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 			}
 			//Restart hair growth
-			if(rand(3) == 0 && changes < changeLimit && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0) {
+			if (rand(3) == 0 && changes < changeLimit && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0) {
 				outputText("\n\nYou feel an itching sensation in your scalp as you realize the change. <b>Your hair is growing normally again!</b>");
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 				changes++;
@@ -1764,17 +1764,17 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Boost vaginal capacity without gaping
-			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) < 40) {
-				if (player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
-				player.addStatusValue(StatusAffects.BonusVCapacity, 1, 5);
+			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 40) {
+				if (player.findStatusEffect(StatusEffects.BonusVCapacity) < 0) player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5);
 				outputText("\n\nThere is a sudden... emptiness within your " + vaginaDescript(0) + ". Somehow you know you could accommodate even larger... insertions.");
 				changes++;
 			}
 			//Boost anal capacity without gaping
-			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) < 60) {
-				if (player.statusAffectv1(StatusAffects.BonusACapacity) < 60) {
-					if (player.findStatusAffect(StatusAffects.BonusACapacity) < 0) player.createStatusAffect(StatusAffects.BonusACapacity, 0, 0, 0, 0);
-					player.addStatusValue(StatusAffects.BonusACapacity, 1, 5);
+			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 60) {
+				if (player.statusEffectv1(StatusEffects.BonusACapacity) < 60) {
+					if (player.findStatusEffect(StatusEffects.BonusACapacity) < 0) player.createStatusEffect(StatusEffects.BonusACapacity, 0, 0, 0, 0);
+					player.addStatusValue(StatusEffects.BonusACapacity, 1, 5);
 					outputText("\n\nYou feel... more accommodating somehow. Your " + assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.", false);
 					changes++;
 				}
@@ -1993,9 +1993,9 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Gain Echidna tongue
-			if (rand(3) == 0 && changes < changeLimit && player.echidnaScore() >= 2 && player.tongueType != TONUGE_ECHIDNA) {
+			if (rand(3) == 0 && changes < changeLimit && player.echidnaScore() >= 2 && player.tongueType != TONGUE_ECHIDNA) {
 				outputText("\n\nYou feel an uncomfortable pressure in your tongue as it begins to shift and change. Within moments, you are able to behold your long, thin tongue. It has to be at least a foot long. <b>You now have an echidna tongue!</b>");
-				player.tongueType = TONUGE_ECHIDNA;
+				player.tongueType = TONGUE_ECHIDNA;
 				changes++;
 			}
 			//Gain quill hair
@@ -2005,7 +2005,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Gain Echidna face if you have the right conditions.
-			if (rand(4) == 0 && changes < changeLimit && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_ECHIDNA && player.tailType == TAIL_TYPE_ECHIDNA && player.tongueType == TONUGE_ECHIDNA) {
+			if (rand(4) == 0 && changes < changeLimit && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_ECHIDNA && player.tailType == TAIL_TYPE_ECHIDNA && player.tongueType == TONGUE_ECHIDNA) {
 				outputText("You groan loudly as the bones in your face begin to reshape and rearrange. Most notable, you feel your mouth lengthening into a long, thin snout. <b>You now have an echidna face!</b>");
 				player.faceType = FACE_ECHIDNA;
 				changes++;
@@ -2044,7 +2044,7 @@ package classes.Scenes.Places.Bazaar
 				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
 				changes++;
 			}
-			if (rand(3) == 0 && (rand(2) == 0 || !player.inHeat) && player.hasVagina() && player.statusAffectv2(StatusAffects.Heat) < 30) {
+			if (rand(3) == 0 && (rand(2) == 0 || !player.inHeat) && player.hasVagina() && player.statusEffectv2(StatusEffects.Heat) < 30) {
 				player.goIntoHeat(true);
 			}
 			//Thickness and hip modifier

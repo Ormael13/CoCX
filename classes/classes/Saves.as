@@ -959,20 +959,20 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		}
 		
 		//Set Status Array
-		for (i = 0; i < player.statusAffects.length; i++)
+		for (i = 0; i < player.statusEffects.length; i++)
 		{
 			saveFile.data.statusAffects.push([]);
-				//trace("Saveone statusAffects");
+				//trace("Saveone statusEffects");
 		}
 		//Populate Status Array
-		for (i = 0; i < player.statusAffects.length; i++)
+		for (i = 0; i < player.statusEffects.length; i++)
 		{
-			//trace("Populate One statusAffects");
-			saveFile.data.statusAffects[i].statusAffectName = player.statusAffect(i).stype.id;
-			saveFile.data.statusAffects[i].value1 = player.statusAffect(i).value1;
-			saveFile.data.statusAffects[i].value2 = player.statusAffect(i).value2;
-			saveFile.data.statusAffects[i].value3 = player.statusAffect(i).value3;
-			saveFile.data.statusAffects[i].value4 = player.statusAffect(i).value4;
+			//trace("Populate One statusEffects");
+			saveFile.data.statusAffects[i].statusAffectName = player.statusEffect(i).stype.id;
+			saveFile.data.statusAffects[i].value1 = player.statusEffect(i).value1;
+			saveFile.data.statusAffects[i].value2 = player.statusEffect(i).value2;
+			saveFile.data.statusAffects[i].value3 = player.statusEffect(i).value3;
+			saveFile.data.statusAffects[i].value4 = player.statusEffect(i).value4;
 		}
 		//Set keyItem Array
 		for (i = 0; i < player.keyItems.length; i++)
@@ -1715,7 +1715,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		player.faceType = saveFile.data.faceType;
 		if (saveFile.data.tongueType == undefined)
-			player.tongueType = TONUGE_HUMAN;
+			player.tongueType = TONGUE_HUMAN;
 		else
 			player.tongueType = saveFile.data.tongueType;
 		if (saveFile.data.earType == undefined)
@@ -1838,9 +1838,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.vaginas[i].vaginalLooseness = saveFile.data.vaginas[i].vaginalLooseness;
 			player.vaginas[i].fullness = saveFile.data.vaginas[i].fullness;
 			player.vaginas[i].virgin = saveFile.data.vaginas[i].virgin;
-			if(saveFile.data.vaginas[i].type == undefined) player.vaginas[i].type = 0;
+			if (saveFile.data.vaginas[i].type == undefined) player.vaginas[i].type = 0;
 			else player.vaginas[i].type = saveFile.data.vaginas[i].type;
-			if(saveFile.data.vaginas[i].labiaPierced == undefined) {
+			if (saveFile.data.vaginas[i].labiaPierced == undefined) {
 				player.vaginas[i].labiaPierced = 0;
 				player.vaginas[i].labiaPShort = "";
 				player.vaginas[i].labiaPLong = "";
@@ -2025,17 +2025,17 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
 			if (saveFile.data.statusAffects[i].statusAffectName == "Lactation EnNumbere") continue; // ugh...
-			var stype:StatusAffectType = StatusAffectType.lookupStatusAffect(saveFile.data.statusAffects[i].statusAffectName);
+			var stype:StatusEffectType = StatusEffectType.lookupStatusEffect(saveFile.data.statusAffects[i].statusAffectName);
 			if (stype == null){
 				CoC_Settings.error("Cannot find status affect '"+saveFile.data.statusAffects[i].statusAffectName+"'");
 				continue;
 			}
-			player.createStatusAffect(stype,
+			player.createStatusEffect(stype,
 					saveFile.data.statusAffects[i].value1,
 					saveFile.data.statusAffects[i].value2,
 					saveFile.data.statusAffects[i].value3,
 					saveFile.data.statusAffects[i].value4);
-				//trace("StatusAffect " + player.statusAffect(i).stype.id + " loaded.");
+				//trace("StatusEffect " + player.statusEffect(i).stype.id + " loaded.");
 		}
 		//Make sure keyitems exist!
 		if (saveFile.data.keyItems != undefined)
@@ -2257,33 +2257,33 @@ public function unFuckSave():void
 	//Fixing shit!
 
 	// Fix duplicate elven bounty perks
-	if(player.findPerk(PerkLib.ElvenBounty) >= 0) {
+	if (player.findPerk(PerkLib.ElvenBounty) >= 0) {
 		//CLear duplicates
 		while(player.perkDuplicated(PerkLib.ElvenBounty)) player.removePerk(PerkLib.ElvenBounty);
 		//Fix fudged preggers value
-		if(player.perkv1(PerkLib.ElvenBounty) == 15) {
+		if (player.perkv1(PerkLib.ElvenBounty) == 15) {
 			player.setPerkValue(PerkLib.ElvenBounty,1,0);
 			player.addPerkValue(PerkLib.ElvenBounty,2,15);
 		}
 	}
 	
-	if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0)
+	if (player.findStatusEffect(StatusEffects.KnockedBack) >= 0)
 	{
-		player.removeStatusAffect(StatusAffects.KnockedBack);
+		player.removeStatusEffect(StatusEffects.KnockedBack);
 	}
 	
-	if (player.findStatusAffect(StatusAffects.Tentagrappled) >= 0)
+	if (player.findStatusEffect(StatusEffects.Tentagrappled) >= 0)
 	{
-		player.removeStatusAffect(StatusAffects.Tentagrappled);
+		player.removeStatusEffect(StatusEffects.Tentagrappled);
 	}
 
 	if (isNaN(model.time.minutes)) model.time.minutes = 0;
 	if (isNaN(model.time.hours)) model.time.hours = 0;
 	if (isNaN(model.time.days)) model.time.days = 0;
 
-	if (player.findStatusAffect(StatusAffects.SlimeCraving) >= 0 && player.statusAffectv4(StatusAffects.SlimeCraving) == 1) {
-		player.changeStatusValue(StatusAffects.SlimeCraving, 3, player.statusAffectv2(StatusAffects.SlimeCraving)); //Duplicate old combined strength/speed value
-		player.changeStatusValue(StatusAffects.SlimeCraving, 4, 1); //Value four indicates this tracks strength and speed separately
+	if (player.findStatusEffect(StatusEffects.SlimeCraving) >= 0 && player.statusEffectv4(StatusEffects.SlimeCraving) == 1) {
+		player.changeStatusValue(StatusEffects.SlimeCraving, 3, player.statusEffectv2(StatusEffects.SlimeCraving)); //Duplicate old combined strength/speed value
+		player.changeStatusValue(StatusEffects.SlimeCraving, 4, 1); //Value four indicates this tracks strength and speed separately
 	}
 	
 	// Fix issues with corrupt cockTypes caused by a error in the serialization code.
@@ -2397,22 +2397,22 @@ public function unFuckSave():void
 		if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] > 0) {
 			flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_TYPE]   = PregnancyStore.PREGNANCY_PLAYER;
 			flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] *= 24; //Convert pregnancy to days
-			flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]  = player.statusAffectv3(StatusAffects.Tamani);
+			flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]  = player.statusEffectv3(StatusEffects.Tamani);
 		}
 
 		if (flags[kFLAGS.TAMANI_PREGNANCY_TYPE] != 0) return; //Must be a new format save
-		if (player.findStatusAffect(StatusAffects.TamaniFemaleEncounter) >= 0) player.removeStatusAffect(StatusAffects.TamaniFemaleEncounter); //Wasn't used in previous code
-		if (player.findStatusAffect(StatusAffects.Tamani) >= 0) {
-			if (player.statusAffectv1(StatusAffects.Tamani) == -500) { //This used to indicate that a player had met Tamani as a male
+		if (player.findStatusEffect(StatusEffects.TamaniFemaleEncounter) >= 0) player.removeStatusEffect(StatusEffects.TamaniFemaleEncounter); //Wasn't used in previous code
+		if (player.findStatusEffect(StatusEffects.Tamani) >= 0) {
+			if (player.statusEffectv1(StatusEffects.Tamani) == -500) { //This used to indicate that a player had met Tamani as a male
 				flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = 0;
 				flags[kFLAGS.TAMANI_MET]                  = 1; //This now indicates the same thing
 			}
-			else flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = player.statusAffectv1(StatusAffects.Tamani) * 24; //Convert pregnancy to days
-			flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] = player.statusAffectv2(StatusAffects.Tamani);
-			flags[kFLAGS.TAMANI_PREGNANCY_COUNT]     = player.statusAffectv3(StatusAffects.Tamani);
-			flags[kFLAGS.TAMANI_TIMES_IMPREGNATED]   = player.statusAffectv4(StatusAffects.Tamani);
+			else flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = player.statusEffectv1(StatusEffects.Tamani) * 24; //Convert pregnancy to days
+			flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] = player.statusEffectv2(StatusEffects.Tamani);
+			flags[kFLAGS.TAMANI_PREGNANCY_COUNT]     = player.statusEffectv3(StatusEffects.Tamani);
+			flags[kFLAGS.TAMANI_TIMES_IMPREGNATED]   = player.statusEffectv4(StatusEffects.Tamani);
 			if (flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] > 0) flags[kFLAGS.TAMANI_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
-			player.removeStatusAffect(StatusAffects.Tamani);
+			player.removeStatusEffect(StatusEffects.Tamani);
 		}
 
 		if (flags[kFLAGS.EGG_WITCH_TYPE] == PregnancyStore.PREGNANCY_BEE_EGGS || flags[kFLAGS.EGG_WITCH_TYPE] == PregnancyStore.PREGNANCY_DRIDER_EGGS) return; //Must be a new format save
@@ -2616,7 +2616,7 @@ public function loadText(saveText:String):void
 //*******
 //This is the modified if for initialising saveFile in saveGameObject(). It assumes the save type parameter passed is an int, that 0 means a slot-save, and is called saveType.
 /*
-   if(saveType != 0)
+   if (saveType != 0)
    {
    saveFile = new Object();
 

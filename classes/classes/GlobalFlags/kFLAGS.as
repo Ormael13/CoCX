@@ -2276,7 +2276,7 @@ public static const CAMP_CABIN_STONE_RESOURCES:int                              
 public static const ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO:int                        = 2268;
 public static const ACHIEVEMENT_PROGRESS_ANTWORKS:int                               = 2269;
 public static const CODEX_ENTRY_ZEBRAS:int                                          = 2270;
-public static const UNKNOWN_FLAG_NUMBER_02271:int                                   = 2271;
+public static const ACHIEVEMENT_PROGRESS_EGG_HUNTER:int                             = 2271;
 public static const UNKNOWN_FLAG_NUMBER_02272:int                                   = 2272;
 public static const UNKNOWN_FLAG_NUMBER_02273:int                                   = 2273;
 public static const UNKNOWN_FLAG_NUMBER_02274:int                                   = 2274;

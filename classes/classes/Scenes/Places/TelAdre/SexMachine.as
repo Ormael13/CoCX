@@ -10,13 +10,13 @@
 
 public function exploreShowers():void {
 	clearOutput();
-	/*if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
+	/*if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("You toss ten gems to centaur and head towards the back.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();
 	}*/
 	hideUpDown();
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] <= 1 && flags[kFLAGS.DISABLED_SEX_MACHINE] <= 0) {
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] <= 1 && flags[kFLAGS.DISABLED_SEX_MACHINE] <= 0) {
 		outputText("Having worked your body to a pleasant soreness as well as coating your " + player.skinDesc + " in a thin sheen of sweat and pheromones, you decide to hit up the showers to wash off and relax in the hot water.  ", false);
 		outputText("You walk into the back halls of the gym, quickly realizing you aren't quite sure where you're headed.  You turn a couple corners, walking down the halls looking for someone, and are about to turn back when you see a goblin round the corner up ahead.\n\n", false);
 	
@@ -31,7 +31,7 @@ public function exploreShowers():void {
 	}
 	//Go directly to sex if you know what's in store!
 	else {
-		if(flags[kFLAGS.BROOKE_MET] == 0) telAdre.brooke.meetBrookeFirstTime();
+		if (flags[kFLAGS.BROOKE_MET] == 0) telAdre.brooke.meetBrookeFirstTime();
 		else useTheSexMachine();
 	}
 }
@@ -56,12 +56,12 @@ private function useTheSexMachine():void {
 	clearOutput();
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] = 2;
 	//[If you decide to mess with the machine: Male]
-	if(player.gender == 1) {
-		if(flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_MALE] == 0) {
+	if (player.gender == 1) {
+		if (flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_MALE] == 0) {
 			outputText("You sit on the padded bench, looping your legs behind the machine's soft foam leg lift bars. There's even straps to prevent you from slipping. The machine's monitor blinks to life, instructing you to strap in your legs, your waist, and then place your arms in the cuffs on the lowered bars to either side of your head.\n\n", false);
 
 			outputText("You do as you're told, and as soon as you're all strapped in, and your arms are in place, the cuffs tighten, quickly securing you to the machine! It lifts you off the padded bench, slipping it behind you for you to lean against at an angle on your back. It takes no time at all for the shifting mechanical parts to begin working your already sore arms and legs, leaving you helpless to fight against them as you're already strapped in. You grunt in effort, attempting to get free from the crazed weight machine, only to have it increase the pace. The screen flashes once more, stating that it is beginning \"phase two\". Quickly your pants are removed, revealing " + sMultiCockDesc() + " and your " + assholeDescript() + " to the cool air. Almost instantly a firm, phallic-shaped metallic object is pressed against your anus, but it goes no further.  Another device slips around your ", false);
-			if(player.cockTotal() > 1) outputText("primary ", false);
+			if (player.cockTotal() > 1) outputText("primary ", false);
 			outputText("cock, tightening around your member while beginning to hum softly.\n\n", false);
 
 			outputText("It takes little time for " + sMultiCockDesc() + " to grow hard, your lust betraying you as another phallic shaped metallic length is presented in front of your face. A small shock is delivered to your " + assholeDescript() + ", causing you to gasp, and allowing the phallic length to slip deep into your mouth, giving you little choice but to suck on the device. The tube-like length on your " + cockDescript(0) + " continues its assault, humming and stroking your firm cock, starting to suck softly to pleasure your mighty rod; so much that you nearly don't notice as a small tube slips into the tip of your penis, beginning to slowly devour your leaking pre-cum.\n\n", false);
@@ -73,7 +73,7 @@ private function useTheSexMachine():void {
 			outputText("  The machine's screen states that it is now entering \"Harvest phase\", and goes into high gear. The phallus in your ass bucks you forward, forcing your hips to buck and grind against the tight mechanical cunt as it quickly grinds against your cock.  Even the device forced inside your mouth begins to vibrate and hum, and you swear you taste your own cum leaking from it.\n\n", false);
 
 			outputText("The phallus in your anus begins to rub firmly against your prostate, as if it was locating it and locking onto it. Within moments you cry out in orgasmic pleasure, ", false);
-			if(player.balls > 0) outputText("your " + ballsDescriptLight() + " pulling up tightly ", false);
+			if (player.balls > 0) outputText("your " + ballsDescriptLight() + " pulling up tightly ", false);
 			else outputText("prostate pulsing madly ", false);
 			outputText("as you pump your thick seed into the machine's waiting tube.\n\n", false);
 
@@ -104,8 +104,8 @@ private function useTheSexMachine():void {
 		flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_MALE]++;
 	}
 	//[If you decide to mess with the machine, female:]
-	else if(player.gender == 2) {
-		if(flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_FEMALE] == 0) {
+	else if (player.gender == 2) {
+		if (flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_FEMALE] == 0) {
 			outputText("You gently sit on the padded bench, curious as to what this machine might actually accomplish, noting the various odds and ends that seem more devious in nature than exercise inclined. The screen before you quickly flickers to life, welcoming you and asking you to kindly place your " + player.feet() + " in the appropriate safety straps and place your arms in the secure cuffs. You wonder briefly if this is a good idea, but work your way into the tight fitting straps anyways.\n\n", false);
 	
 			outputText("Within moments, the machine lifts you up, pulling your arms out and apart, away from your sore aching body.  After such a workout you can do little to fight the strong pull of the mechanical assailant. It whirs to life, stating that it is beginning \"Phase 1: Preconditioning\".\n\n", false);
@@ -118,13 +118,13 @@ private function useTheSexMachine():void {
 			outputText("\n\n", false);
 	
 			outputText("You gasp in pleasure, unable to move, fight, or even touch yourself as the machine begins to fuck you with its metallic cocks. The screen flashes, showing 'phase one is completed', and that it has begun phase two, 'implantation'. You don't have time to question the machine's intentions as it begins to fuck you harder and faster, your juices and arousal only helping the machine to continue.", false);
-			if(player.biggestTitSize() >= 2) outputText("  It slips a fourth cock between your " + chestDesc() + ", using two arms to press them together and fuck your tits as well, splashing a burst of mysterious cum on your face with every thrust.", false);
+			if (player.biggestTitSize() >= 2) outputText("  It slips a fourth cock between your " + chestDesc() + ", using two arms to press them together and fuck your tits as well, splashing a burst of mysterious cum on your face with every thrust.", false);
 			outputText("\n\n", false);
 	
 			outputText("It doesn't take long until the cock in your mouth cums, spraying a thicker, heavier load of the heavenly seed down your throat and into your stomach. You gasp, swallowing without a choice, as your eyes roll back in your head, the machine ramming its cock into your g-spot, pushing you almost instantly to orgasm. You moan out loud, the cock popping out of your mouth now that its finished delivering its load. Your rippling vaginal walls milk the fake dick in your cunt, as it and the prick in your ass begin to cum heavily.  Every hole is quickly filled with mysterious jizz, stuffing you completely.\n\n", false);
 	
 			outputText("Finally the machine slows down, beginning to lower you back onto the padded bench with ", false);
-			if(player.biggestTitSize() >= 2) outputText("your breasts covered in cum and ", false);
+			if (player.biggestTitSize() >= 2) outputText("your breasts covered in cum and ", false);
 			outputText("jizz leaking from every hole on your body. You groan, sore and stiff from the brutal workout but happy with afterglow. The screen before you appears to be saving data on your measurements, as well as physical stress levels. The final number flies past too fast for you to read, but the label sends a chill up your spine: \"Pregnancy percentage chance\".\n\n", false);
 	
 			outputText("It isn't long until the goblin comes into the room gasping. \"<i>You used my baby? You... wait, it worked? It worked! Tell me, how was it?  Wait no, don't tell me, it was wonderful of course!</i>\" the red-headed goblin beams.  She's covered from head to toe in grease, wearing dirty clothing that has various tools sticking out of every pocket; a stereotypical engineer. \"<i>The machine is made to milk studly men dry and use their cum to impregnate goblin females.  It automates the process!  But if you want to use it too, feel free, sexy.</i>\"  She winks at you lewdly. \"<i>But who knows what kind of cum will knock you up!</i>\"\n\n", false);
@@ -143,7 +143,7 @@ private function useTheSexMachine():void {
 			player.cuntChange(30,true,true,false);
 			player.buttChange(30,true,true,false);
 			outputText("  They begin to stroke slowly", false);
-			if(player.biggestTitSize() >= 2) outputText(", and it doesn't take long for the machine to slip a cock between your breasts as well, starting to tit fuck you as it rotates you in your restraints to optimize your position", false);
+			if (player.biggestTitSize() >= 2) outputText(", and it doesn't take long for the machine to slip a cock between your breasts as well, starting to tit fuck you as it rotates you in your restraints to optimize your position", false);
 			else outputText(" while the machine rotates you in place to optimized your positioning.", false);
 			outputText(".\n\n", false);
 																														   
@@ -154,8 +154,8 @@ private function useTheSexMachine():void {
 		flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_FEMALE]++;
 	}
 	//[Sexless]
-	else if(player.gender == 0) {
-		if(flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_EUNUCH] == 0) {
+	else if (player.gender == 0) {
+		if (flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_EUNUCH] == 0) {
 			outputText("You sit down on the padded bench and look around at the odd weight-lifting machine nearby. Various parts look less than pleasant, and less than exercise orientated on further inspection.  It makes you question the uses of this machine. The screen before you flashes to life, politely asking you to place your arms and legs in the cuffs and buckle yourself in.\n\n", false);
 
 			outputText("You raise an eyebrow, wondering what you're getting yourself into as you buckle yourself to the machine, hoping this isn't a mistake. It doesn't take long for you to realize it is. The machine lifts you up, stripping your " + player.armorName + " off of you and spreading your arms and legs. First, a round device that appears to be made to hold a penis slips up, rubbing against your flat pelvis. It tries for a few moments, lifting up two other smaller devices made for smaller dicks before it gives up, the screen reading \"error\". Shortly afterward, a cock-like metallic device is lifted up to your groin, rubbing around as it leaks lubrication, searching for an entrance until once again the screen reads \"error\".\n\n", false);
@@ -196,13 +196,13 @@ private function useTheSexMachine():void {
 	}
 	//[Hermaphrodite]
 	else {
-		if(flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_HERM] == 0) {
+		if (flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_HERM] == 0) {
 			outputText("You sigh with relaxation as you lean back on the padded bench, stretching your arms above your head as you investigate the workings of the machine around you. Various parts are questionable for their purpose and intent, but the machine's complexity leaves their true uses beyond your imaginings. You finally notice the screen in front of you has turned on, politely informing you that you need to place your limbs into the safety straps, and buckle yourself in.\n\n", false);
 
 			outputText("You raise an eyebrow but do as you are told, curious as to what the machine can truly do.  You're quickly strapped down and lifted into the air. You gasp as your limbs are forced apart, leaving you helpless to the machinations of this device. It doesn't take long for you to feel the cold tip of a metallic cock press against your labia, stroking up and down those sensitive folds.\n\n", false);
 
 			outputText("You moan gently, feeling a slight dampness beginning to form between your legs as your ", false);
-			if(player.cockTotal() > 1) outputText("primary cock", false);
+			if (player.cockTotal() > 1) outputText("primary cock", false);
 			else outputText(cockDescript(0), false);
 			outputText(" is gently stroked by the sheathe-like device now slipping over it. It rubs the flaccid member gently, stroking it up and down as it begins to swell with blood, growing harder by the second. You shudder with pleasure, wondering what could come next, only to be forced to gasp by a firm press on your " + assholeDescript() + ". A metallic cock presses hard against your muscular ring, taking the opportunity given by your gasp of surprise to force another cock into your mouth.\n\n", false);
 
@@ -212,11 +212,11 @@ private function useTheSexMachine():void {
 			outputText("  You moan lustfully, your girly juices beginning to flow down your thighs as the cock begins to thrust deep inside of you.  The metallic sleeve on your member thrusts down around you, even as the machine penetrates your " + vaginaDescript() + ". It's almost as if you were fucking your own cunt!\n\n", false);
 
 			outputText("You moan around the cock in your mouth, tasting the heady and thick cum it gives you, letting it trickle down the back of your throat slowly as it bucks in your mouth, leaving you helpless to call for help as every part of you is fucked.", false);
-			if(player.biggestTitSize() >= 2) outputText("  Well, not every part of you, but that is rapidly fixed as a final cock rubs against your " + chestDesc() + ", starting to stimulate your chest as well.", false);
+			if (player.biggestTitSize() >= 2) outputText("  Well, not every part of you, but that is rapidly fixed as a final cock rubs against your " + chestDesc() + ", starting to stimulate your chest as well.", false);
 			outputText("\n\n", false);
 
 			outputText("It doesn't take long, the pressure on your prostate from the cock in your ass, your dick being stroked and milked, and your cunt being fucked pushes you over the edge. The sudden outlet of sexual fluids is impressive. Your ass, throat, and cunt are all filled with cum at the same time.", false);
-			if(player.biggestTitSize() >= 2) outputText("  The cock on your chest pumps cum onto your " + chestDesc() + ", as y", false);
+			if (player.biggestTitSize() >= 2) outputText("  The cock on your chest pumps cum onto your " + chestDesc() + ", as y", false);
 			else outputText("  Y", false);
 			outputText("our cock is milked of all its cum by the tube that was gently slipped into the tip of it when you were too lost in your own lusts to notice. You pant as the device gently sets you down onto the padded bench, the screen seeming to save some varied information about you.\n\n", false);
 
@@ -248,7 +248,7 @@ private function useTheSexMachine():void {
 		flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_HERM]++;
 	}
 	//PREG IT UP!
-	if(player.hasVagina()) {
+	if (player.hasVagina()) {
 		temp = rand(6);
 		switch(temp) {
 			case 0:

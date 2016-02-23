@@ -12,13 +12,13 @@ package classes.Scenes.Areas.HighMountains
 	{
 
 		public static function basiliskSpeed(player:Player,amount:Number = 0):void {
-			if(player.spe - amount < 1) {
+			if (player.spe - amount < 1) {
 				amount = player.spe - 1;
-				if(amount < 0) amount = 0;
+				if (amount < 0) amount = 0;
 			}
 			player.spe -= amount;
-			if(player.findStatusAffect(StatusAffects.BasiliskSlow) >= 0) player.addStatusValue(StatusAffects.BasiliskSlow,1,amount);
-			else player.createStatusAffect(StatusAffects.BasiliskSlow,amount,0,0,0);
+			if (player.findStatusEffect(StatusEffects.BasiliskSlow) >= 0) player.addStatusValue(StatusEffects.BasiliskSlow,1,amount);
+			else player.createStatusEffect(StatusEffects.BasiliskSlow,amount,0,0,0);
 			showStatDown( 'spe' );
 			// speUp.visible = false;
 			// speDown.visible = true;
@@ -40,7 +40,7 @@ package classes.Scenes.Areas.HighMountains
 					game.dynStats("lus", 3);
 					//apply status here
 					basiliskSpeed(player,20);
-					player.createStatusAffect(StatusAffects.BasiliskCompulsion,0,0,0,0);
+					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
 					flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
 				}
 			}
@@ -56,7 +56,7 @@ package classes.Scenes.Areas.HighMountains
 		//Special 3: basilisk tail swipe (Small physical damage):
 		private function basiliskTailSwipe():void {
 			outputText("The basilisk suddenly whips its tail at you, swiping your " + player.feet() + " from under you!  You quickly stagger upright, being sure to hold the creature's feet in your vision.  ", false);
-			if(damage == 0) outputText("The fall didn't harm you at all.  ", false);
+			if (damage == 0) outputText("The fall didn't harm you at all.  ", false);
 			var damage:Number = int((str + 20) - Math.random()*(player.tou+player.armorDef));
 			damage = player.takeDamage(damage, true);			
 			game.combatRoundOver();
@@ -67,8 +67,8 @@ package classes.Scenes.Areas.HighMountains
 
 		override protected function performCombatAction():void
 		{
-			if(player.findStatusAffect(StatusAffects.BasiliskCompulsion) < 0 && rand(3) == 0 && findStatusAffect(StatusAffects.Blind) < 0) compulsion();
-			else if(rand(3) == 0) basiliskTailSwipe();
+			if (player.findStatusEffect(StatusEffects.BasiliskCompulsion) < 0 && rand(3) == 0 && findStatusEffect(StatusEffects.Blind) < 0) compulsion();
+			else if (rand(3) == 0) basiliskTailSwipe();
 			else eAttack();
 		}
 
@@ -100,7 +100,7 @@ package classes.Scenes.Areas.HighMountains
 			createBreastRow(0);
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 6*12+2;
 			this.hipRating = HIP_RATING_SLENDER+1;
 			this.buttRating = BUTT_RATING_AVERAGE;

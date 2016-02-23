@@ -86,11 +86,11 @@ package classes.Scenes
 			}
 			
 			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
-				if (getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
+				if (getGame().xmas.xmasMisc.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
 					if (flags[kFLAGS.NIEVE_STAGE] == 1)
 						outputText("\nThere's some odd snow here that you could do something with...\n");
-					else outputText("\nYou have a snow" + getGame().nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
-					addButton(11, "Snow", getGame().nieveBuilding);
+					else outputText("\nYou have a snow" + getGame().xmas.xmasMisc.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
+					addButton(11, "Snow", getGame().xmas.xmasMisc.nieveBuilding);
 					foundItem = true;
 				}
 				if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1) {
@@ -115,7 +115,7 @@ package classes.Scenes
 				}
 				return;
 			}
-			if (getGame().inCombat && player.findStatusAffect(StatusAffects.Sealed) >= 0 && player.statusAffectv1(StatusAffects.Sealed) == 3) {
+			if (getGame().inCombat && player.findStatusEffect(StatusEffects.Sealed) >= 0 && player.statusEffectv1(StatusEffects.Sealed) == 3) {
 				outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
 				getGame().enemyAI();
 				return;
@@ -161,21 +161,21 @@ package classes.Scenes
 				outputText("\n\n");
 			}
 			//Armor Rack
-			if(player.hasKeyItem("Equipment Rack - Armor") >= 0) {
+			if (player.hasKeyItem("Equipment Rack - Armor") >= 0) {
 				outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.");
 				addButton(5, "A.Rack Put", pickItemToPlaceInArmorRack);
 				if (armorRackDescription()) addButton(6, "A.Rack Take", pickItemToTakeFromArmorRack);
 				outputText("\n\n");
 			}
 			//Shield Rack
-			if(player.hasKeyItem("Equipment Rack - Shields") >= 0) {
+			if (player.hasKeyItem("Equipment Rack - Shields") >= 0) {
 				outputText("There's a shield rack set up here, set up to hold up to nine various shields.");
 				addButton(7, "S.Rack Put", pickItemToPlaceInShieldRack);
 				if (shieldRackDescription()) addButton(8, "S.Rack Take", pickItemToTakeFromShieldRack);
 				outputText("\n\n");
 			}
 			//Jewelry box
-			if(player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
+			if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
 				outputText("Your jewelry box is located ");
 				if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED])
 				{
@@ -264,7 +264,7 @@ package classes.Scenes
 			temp = itemStorage.length;
 			while(temp > 0) {
 				temp--;
-				if(itemStorage[temp].itype == itype && itemStorage[temp].quantity > 0) {
+				if (itemStorage[temp].itype == itype && itemStorage[temp].quantity > 0) {
 					itemStorage[temp].quantity--;
 					return true;
 				}
@@ -273,7 +273,7 @@ package classes.Scenes
 		}
 		
 		public function giveHumanizer():void {
-			if(flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
+			if (flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
 				outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
 				getGame().gameOver();
 				return;

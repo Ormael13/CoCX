@@ -11,7 +11,7 @@
 			//Chances to miss:
 			var damage:Number = 0;
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0) {
 				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n", false);
 			}
 			//Determine if dodged!
@@ -83,12 +83,12 @@
 		public function akbalLustAttack():void
 		{
 			//*Lust Attack - 
-			if (player.findStatusAffect(StatusAffects.Whispered) < 0)
+			if (player.findStatusEffect(StatusEffects.Whispered) < 0)
 			{
 				outputText("You hear whispering in your head. Akbal begins speaking to you as he circles you, telling all the ways he'll dominate you once he beats the fight out of you.", false);
 				//(Lust increase)
 				game.dynStats("lus", 7 + (100 - player.inte) / 10);
-				player.createStatusAffect(StatusAffects.Whispered,0,0,0,0);
+				player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
 			}
 			//Continuous Lust Attack - 
 			else
@@ -109,10 +109,10 @@
 				outputText("Akbal's eyes fill with light, and a strange sense of fear begins to paralyze your limbs.", false);
 				//(Speed decrease)
 				game.dynStats("spe", speedChange);
-				if (player.findStatusAffect(StatusAffects.AkbalSpeed) >= 0)
-					player.addStatusValue(StatusAffects.AkbalSpeed, 1, speedChange);
+				if (player.findStatusEffect(StatusEffects.AkbalSpeed) >= 0)
+					player.addStatusValue(StatusEffects.AkbalSpeed, 1, speedChange);
 				else
-					player.createStatusAffect(StatusAffects.AkbalSpeed, speedChange, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.AkbalSpeed, speedChange, 0, 0, 0);
 			}
 			//*Special Attack B - 
 			else

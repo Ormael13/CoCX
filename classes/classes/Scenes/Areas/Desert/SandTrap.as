@@ -9,14 +9,14 @@
 		public function sandTrapWait():void {
 			clearOutput();
 			game.spriteSelect(97);
-			if(findStatusAffect(StatusAffects.Climbed) < 0) createStatusAffect(StatusAffects.Climbed,0,0,0,0);
+			if (findStatusEffect(StatusEffects.Climbed) < 0) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
 			outputText("Instead of attacking, you turn away from the monster and doggedly attempt to climb back up the pit, digging all of your limbs into the soft powder as you climb against the sandslide.");
-			if(trapLevel() == 4) {
+			if (trapLevel() == 4) {
 				outputText("\n\nYou eye the ground above you.  The edge of the pit is too sheer, the ground too unstable... although it looks like you can fight against the currents carrying you further down, it seems impossible to gain freedom with the sand under the monster's spell.");
 			}
 			else {
 				//Strength check success: [Player goes up one level, does not go down a level this turn]
-				if(player.str/10 + rand(20) > 10) {
+				if (player.str/10 + rand(20) > 10) {
 					outputText("\n\nSweat beads your forehead - trying to clamber out of this pit is like running against the softest treadmill imaginable.  Nonetheless, through considerable effort you see you've managed to pull further clear of the sandtrap's grasp.  \"<i>Watching you squirm around like that gets me so hot,</i>\" it calls up to you.  Turning around you see that the creature is rubbing its hands all over its lean body whilst watching you struggle.  \"<i>Such an energetic little mating dance, just for me... mmm, prey who do that are always the best!</i>\"");
 					trapLevel(2);
 				}
@@ -32,14 +32,14 @@
 		}
 
 		public function trapLevel(adjustment:Number = 0):Number {
-			if(findStatusAffect(StatusAffects.Level) < 0) createStatusAffect(StatusAffects.Level,4,0,0,0);
-			if(adjustment != 0) {
-				addStatusValue(StatusAffects.Level,1,adjustment);
+			if (findStatusEffect(StatusEffects.Level) < 0) createStatusEffect(StatusEffects.Level,4,0,0,0);
+			if (adjustment != 0) {
+				addStatusValue(StatusEffects.Level,1,adjustment);
 				//Keep in bounds ya lummox
-				if(statusAffectv1(StatusAffects.Level) < 1) changeStatusValue(StatusAffects.Level,1,1);
-				if(statusAffectv1(StatusAffects.Level) > 4) changeStatusValue(StatusAffects.Level,1,4);
+				if (statusEffectv1(StatusEffects.Level) < 1) changeStatusValue(StatusEffects.Level,1,1);
+				if (statusEffectv1(StatusEffects.Level) > 4) changeStatusValue(StatusEffects.Level,1,4);
 			}
-			return statusAffectv1(StatusAffects.Level);
+			return statusEffectv1(StatusEffects.Level);
 		}
 
 
@@ -47,7 +47,7 @@
 		private function sandTrapPheremones():void {
 			game.spriteSelect(97);
 			outputText("The sandtrap puckers its lips.  For one crazed moment you think it's going to blow you a kiss... but instead it spits clear fluid at you!   You desperately try to avoid it, even as your lower half is mired in sand.");
-			if(player.spe/10 + rand(20) > 10 || player.getEvasionRoll(false)) {
+			if (player.spe/10 + rand(20) > 10 || player.getEvasionRoll(false)) {
 				outputText("  Moving artfully with the flow rather than against it, you are able to avoid the trap's fluids, which splash harmlessly into the dune.");
 			}
 			else {
@@ -64,29 +64,29 @@
 			game.spriteSelect(97);
 			outputText("The sandtrap smiles at you winningly as it thrusts its hands into the sifting granules.  The sand beneath you suddenly seems to lose even more of its density; you're sinking up to your thighs!");
 			//Quicksand attack fail:
-			if(player.spe/10 + rand(20) > 10  || player.getEvasionRoll(false)) {
+			if (player.spe/10 + rand(20) > 10  || player.getEvasionRoll(false)) {
 				outputText("  Acting with alacrity, you manage to haul yourself free of the area affected by the sandtrap's spell, and set yourself anew.");
 			}
 			//Quicksand attack success: (Speed and Strength loss, ability to fly free lost)
 			else {
 				outputText("  You can't get free in time and in a panic you realize you are now practically wading in sand.  Attempting to climb free now is going to be very difficult.");
-				if(player.canFly()) outputText("  You try to wrench yourself free by flapping your wings, but it is hopeless.  You are well and truly snared.");
+				if (player.canFly()) outputText("  You try to wrench yourself free by flapping your wings, but it is hopeless.  You are well and truly snared.");
 				trapLevel(-1);
-				if(findStatusAffect(StatusAffects.Climbed) < 0) createStatusAffect(StatusAffects.Climbed,0,0,0,0);
+				if (findStatusEffect(StatusEffects.Climbed) < 0) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
 			}
 		}
 
 		override protected function performCombatAction():void
 		{
-			if (findStatusAffect(StatusAffects.Level) >= 0) {
-				if (trapLevel() == 4 && findStatusAffect(StatusAffects.Climbed) < 0) nestleQuikSandAttack();
+			if (findStatusEffect(StatusEffects.Level) >= 0) {
+				if (trapLevel() == 4 && findStatusEffect(StatusEffects.Climbed) < 0) nestleQuikSandAttack();
 				else sandTrapPheremones();
 //PC sinks a level (end of any turn in which player didn't successfully \"<i>Wait</i>\"):
-				if (findStatusAffect(StatusAffects.Climbed) < 0) {
+				if (findStatusEffect(StatusEffects.Climbed) < 0) {
 					outputText("\n\nRivulets of sand run past you as you continue to sink deeper into both the pit and the sand itself.");
 					trapLevel(-1);
 				}
-				else removeStatusAffect(StatusAffects.Climbed);
+				else removeStatusEffect(StatusEffects.Climbed);
 				combatRoundOver();
 			} else super.performCombatAction();
 		}
@@ -109,7 +109,7 @@
 		public function SandTrap()
 		{
 			//1/3 have fertilized eggs!
-			if(rand(3) == 0) this.createStatusAffect(StatusAffects.Fertilized,0,0,0,0);
+			if (rand(3) == 0) this.createStatusEffect(StatusEffects.Fertilized,0,0,0,0);
 			this.a = "the ";
 			if (game.silly())
 				this.short = "sand tarp";
@@ -147,7 +147,7 @@
 			this.gems = 2 + rand(5);
 			this.drop = new ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
 			this.tailType = TAIL_TYPE_DEMONIC;
-			createStatusAffect(StatusAffects.Level,4,0,0,0);
+			createStatusEffect(StatusEffects.Level,4,0,0,0);
 			checkMonster();
 		}
 		

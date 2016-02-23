@@ -105,7 +105,7 @@ package coc.view {
 			//this.options = options || {} Is this even used?
 			super();
 
-			/*if(! model) {
+			/*if (! model) {
 				trace("MainView/constructor: Game model not passed in.  Don't publish MainView.fla with Ctrl-Enter/Cmd-Enter.  Rather, go to File > Publish to build the SWC.");
 				throw new ArgumentError("MainView/constructor: MainView must be constructed with a GameModel as its first argument.");
 			}*/
@@ -163,7 +163,7 @@ package coc.view {
 			for(ci = 0; ci < this.numChildren; ++ci) {
 				t = this.getChildAt(ci) as TextField;
 
-				if(! t) {
+				if (! t) {
 					continue;
 				}
 
@@ -362,13 +362,13 @@ package coc.view {
 		protected function textForBG(bg:DisplayObject):TextField {
 			var textName:String;
 
-			if(! bg) {
+			if (! bg) {
 				throw new ArgumentError("MainView.textForBG() must be called with a DisplayObject as its argument.");
 			}
 
 			textName = bg.name.replace(/BG$/, 'Text');
 
-			if(bg.name == 'levelBG')
+			if (bg.name == 'levelBG')
 				textName += '2';
 
 			return this[textName] as TextField;
@@ -403,13 +403,13 @@ package coc.view {
 
 		// TODO: Refactor button set-up code to use callback and toolTipViewText here.
 		public function setButton(index:int, label:String = '', callback:Function = null, toolTipViewText:String = '') {
-			if(index < 0 || index >= BOTTOM_BUTTON_COUNT) {
+			if (index < 0 || index >= BOTTOM_BUTTON_COUNT) {
 				trace("MainView.setButton called with out of range index:", index);
 				// throw new RangeError();
 				return;
 			}
 
-			if(label) {
+			if (label) {
 				this.showBottomButton(index, label, callback, toolTipViewText);
 			}
 			else {
@@ -432,7 +432,7 @@ package coc.view {
 			var i:int;
 
 			for(i = 0; i < this.bottomButtons.length; ++i) {
-				if(this.getButtonText(i) === labelText)
+				if (this.getButtonText(i) === labelText)
 					return i;
 			}
 
@@ -450,7 +450,7 @@ package coc.view {
 		public function getButtonText(index:int):String {
 //			var matches:*;
 
-			if(index < 0 || index > BOTTOM_BUTTON_COUNT) {
+			if (index < 0 || index > BOTTOM_BUTTON_COUNT) {
 				return '';
 			}
 			else {
@@ -474,7 +474,7 @@ package coc.view {
 		}
 
 		public function buttonIsVisible(index:int):Boolean {
-			if(index < 0 || index > BOTTOM_BUTTON_COUNT) {
+			if (index < 0 || index > BOTTOM_BUTTON_COUNT) {
 				return undefined;
 			}
 			else {
@@ -495,16 +495,16 @@ package coc.view {
 		public function setMenuButton(name:String, label:String = '', callback:Function = null):void {
 			var button:CoCButton = this.getMenuButtonByName(name);
 
-			if(! button) {
+			if (! button) {
 				throw new ArgumentError("MainView.setMenuButton: Invalid menu button name: " + String(name));
 			}
 
-			if(label) {
+			if (label) {
 				button.labelText = label;
 				button.toolTipHeader = label;
 			}
 
-			if(callback != null) {
+			if (callback != null) {
 				button.callback = callback;
 			}
 		}
@@ -574,7 +574,7 @@ package coc.view {
 		//////// misc... ////////
 
 		public function invert():void {
-			if(! this.blackBackground.visible) {
+			if (! this.blackBackground.visible) {
 				this.blackBackground.visible = true;
 			}
 			else {
@@ -603,7 +603,7 @@ package coc.view {
 			var scale:Number;
 
 			// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
-			if(index < 0) { // = SHOW_SPRITES_FLAG from flagDefs...
+			if (index < 0) { // = SHOW_SPRITES_FLAG from flagDefs...
 				this.sprite.visible = false;
 				this.spriteOld.visible = false;
 			}

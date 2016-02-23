@@ -29,12 +29,18 @@ package classes.Items
 		
 		override public function get description():String {
 			var desc:String = _description;
+			desc += "\n\nType: Undergarment ";
+			if (type == 0) desc += "(Upper)";
+			else if (type == 1) desc += "(Lower)";
+			else if (type == 2) desc += "(Full)";
 			//Defense
 			if (armorDef > 0) desc += "\nDefense: " + String(armorDef);
 			//Sexiness
 			if (sexiness > 0) desc += "\nSexiness: " + String(sexiness);
 			//Value
 			desc += "\nBase value: " + String(value);
+			//Naga wearable?
+			if (type == 0 && perk == "NagaWearable" && game.player.isNaga()) desc += "\nNagas aren't restricted from wearing this type of lower undergarment.";
 			return desc;
 		}
 		
@@ -61,13 +67,15 @@ package classes.Items
 				case "dragonscale bra":
 				case "dragonscale loincloth":
 				case "dragonscale thong":
-				case "fur loincloth":
 					return 1;
+				case "fundoshi":
+				case "fur loincloth":
+					return 2;
 				case "latex bra":
 				case "latex shorts":
 				case "latex thong":
 				case "stockings and garters":
-					return 2;
+					return 3;
 				default:
 					return 0;
 			}

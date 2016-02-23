@@ -37,7 +37,7 @@ package classes.Items
 		public const ORANGDY:HairDye = new HairDye("OrangDy", "Orange");
 		public const PINKDYE:HairDye = new HairDye("PinkDye", "Pink");
 		public const PURPDYE:HairDye = new HairDye("PurpDye", "Purple");
-		public const RAINDYE:HairDye = new HairDye("RainDye", "Rainbow", 100);
+		public const RAINDYE:HairDye = new HairDye("RainDye", "Rainbow");
 		public const RED_DYE:HairDye = new HairDye("Red Dye", "Red");
 		public const WHITEDY:HairDye = new HairDye("WhiteDy", "White");
 		
@@ -129,7 +129,7 @@ package classes.Items
 		public const MILKPTN:SimpleConsumable = mk("MilkPtn","ProLactaid", "a bottle labelled \"Pro Lactaid\"", m.milkPotion, "A bottle filled with white liquid which is distilled from Lactaid and LaBovas.  Rathazul mentioned that this potion will greatly improve your lactation. There's the possibility of permanently lactating, even if you're a male.", 120);
 		public const NUMBROX:SimpleConsumable = mk("NumbRox","Numb Rox", "a strange packet of candy called 'Numb Rocks'", m.numbRocks, "This packet of innocuous looking 'candy' guarantees to reduce troublesome sensations and taste delicious.", 15);
 		public const OVIELIX:OvipositionElixir = new OvipositionElixir();
-		public const PEPPWHT:SimpleConsumable = mk("PeppWht","PeppWht", "a vial of peppermint white", function(player:Player):void{getGame().peppermintWhite(player)}, "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.", 120);
+		public const PEPPWHT:SimpleConsumable = mk("PeppWht","PeppWht", "a vial of peppermint white", function(player:Player):void{getGame().xmas.xmasMisc.peppermintWhite(player)}, "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.", 120);
 		public const PRNPKR :SimpleConsumable  = mk("PrnsPkr", "P.Pucker", "a vial of pinkish fluid", m.princessPucker, "A vial filled with a viscous pink liquid. A label reads \"Princess Pucker\".");
 		public const SENSDRF:SimpleConsumable = mk("SensDrf","SensDraft", "a bottle of sensitivity draft", m.sensitivityDraft, "This carefully labelled potion is a 'Sensitivity Draft', and if the diagrams are any indication, it will make your body more sensitive.", 15);
 		public const SMART_T:SimpleConsumable = mk("Smart T","Scholars T.", "a cup of scholar's tea", m.scholarsTea, "This powerful brew supposedly has mind-strengthening effects.");
@@ -188,7 +188,7 @@ package classes.Items
 
 		public const LARGE_EGGS:Array = [L_BLKEG,L_BLUEG,L_BRNEG,L_PNKEG,L_PRPEG,L_WHTEG];
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];
-		private var mutations:Mutations;
+		public var mutations:Mutations;
 
 		/**
 		 * A handy function to create SimpleConsumables (useable by any player, effect is a function accepting player:Player,

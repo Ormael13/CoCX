@@ -44,11 +44,11 @@ package classes.Scenes.Areas
 			if (isHolidays()) {
 				//Gats xmas adventure!
 				if (rand(5) == 0 && player.gender > 0 && isHolidays() && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0 && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0 && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0 && player.hasKeyItem("North Star Key") < 0)) {
-					kGAMECLASS.gatsSpectacularRouter();
+					kGAMECLASS.xmas.snowAngel.gatsSpectacularRouter();
 					return;
 				}
 				if (rand(6) == 0 && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear && silly()) {
-					kGAMECLASS.meetJackFrostInTheMountains();
+					kGAMECLASS.xmas.jackFrost.meetJackFrostInTheMountains();
 					return;
 				}
 			}
@@ -83,7 +83,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//10% chance of hairdresser encounter if not found yet
-			if (rand(10) == 0 && player.findStatusAffect(StatusAffects.HairdresserMeeting) < 0) chooser = 4;
+			if (rand(10) == 0 && player.findStatusEffect(StatusEffects.HairdresserMeeting) < 0) chooser = 4;
 			if ((rand(8) == 0 && flags[kFLAGS.MARAE_QUEST_START] >= 1) && flags[kFLAGS.FACTORY_FOUND] <= 0) {
 				trace("Dungeon start!")
 				kGAMECLASS.dungeons.enterFactory();
@@ -115,7 +115,7 @@ package classes.Scenes.Areas
 			//Minotauuuuur
 			if (chooser == 1) {
 				spriteSelect(44);
-				if (player.findStatusAffect(StatusAffects.TF2) < 0 && player.level <= 1 && player.str <= 40) {
+				if (player.findStatusEffect(StatusEffects.TF2) < 0 && player.level <= 1 && player.str <= 40) {
 					if (silly()) {
 						//(Ideally, this should occur the first time the player would normally get an auto-rape encounter with the minotaur. The idea is to give a breather encounter to serve as a warning of how dangerous the mountain is)
 						outputText("Crossing over the treacherous mountain paths, you walk past an ominous cave.  The bones and the smell of death convince you to hasten your pace.  However, as you walk by, you hear a deep bellow and a snort as a monstrous man with a bull's head steps out.  With hell in his eyes and a giant ax in his hand, he begins to approach you in clear rage.  As he comes out into the light, you see that he is completely naked and sports a monstrous erection as angry as the minotaur himself, freely leaking a steady stream of pre-cum as he stalks you.\n\n", true);
@@ -133,12 +133,12 @@ package classes.Scenes.Areas
 						outputText("Crossing over the treacherous mountain paths, you walk past an ominous cave.  The bones and the smell of death convince you to hasten your pace.  However, as you walk by, you hear a deep bellow and a snort as a monstrous man with a bull's head steps out.  With hell in his eyes and a giant ax in his hand, he begins to approach you in clear rage.  As he comes out into the light, you see that he is completely naked and sports a monstrous erection as angry as the minotaur himself, freely leaking a steady stream of pre-cum as he stalks you.\n\n", true);
 						outputText("You stumble in your attempt to escape and realize that you are completely helpless.  The minotaur towers over you and heaves his ax for a <i>coup de grace</i>.  As he readies the blow, another beast-man slams into him from the side.  The two of them begin to fight for the honor of raping you, giving you the opening you need to escape.  You quietly sneak away while they fight – perhaps you should avoid the mountains for now?\n\n", false);
 					}
-					player.createStatusAffect(StatusAffects.TF2, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.TF2, 0, 0, 0, 0);
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
 				//Mino gangbang
-				if (player.findStatusAffect(StatusAffects.MinoPlusCowgirl) < 0 || rand(10) == 0) {
+				if (player.findStatusEffect(StatusEffects.MinoPlusCowgirl) < 0 || rand(10) == 0) {
 					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.cowScore() >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && player.minotaurAddicted()) {
 						//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 						//Must be addicted to minocum
@@ -169,8 +169,8 @@ package classes.Scenes.Areas
 						return;
 					}
 					flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] = 1;
-					if (player.findStatusAffect(StatusAffects.MinoPlusCowgirl) < 0) player.createStatusAffect(StatusAffects.MinoPlusCowgirl, 0, 0, 0, 0);
-					else player.addStatusValue(StatusAffects.MinoPlusCowgirl, 1, 1);
+					if (player.findStatusEffect(StatusEffects.MinoPlusCowgirl) < 0) player.createStatusEffect(StatusEffects.MinoPlusCowgirl, 0, 0, 0, 0);
+					else player.addStatusValue(StatusEffects.MinoPlusCowgirl, 1, 1);
 					outputText("As you pass a shadowy cleft in the mountainside, you hear the sounds of a cow coming out from it. Wondering how a cow got up here, but mindful of this land's dangers, you cautiously sneak closer and peek around the corner.\n\n", true);
 					outputText("What you see is not a cow, but two large human-shaped creatures with pronounced bovine features -- tails, horns, muzzles, and hooves instead of feet. They're still biped, however, and their genders are obvious due to their stark nudity. One has massive, udder-like breasts and wide hips, the other a gigantic, horse-like dong and a heavy set of balls more appropriate to a breeding stud than a person. You've stumbled upon a cow-girl and a minotaur.\n\n", false);
 					if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
@@ -206,8 +206,8 @@ package classes.Scenes.Areas
 			//Worms
 			if (chooser == 2) {
 				//If worms are on and not infested.
-				if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 && player.findStatusAffect(StatusAffects.Infested) < 0) {
-					if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0 && rand(2) == 0) {
+				if (player.findStatusEffect(StatusEffects.WormsOn) >= 0 && player.findStatusEffect(StatusEffects.Infested) < 0) {
+					if (player.findStatusEffect(StatusEffects.WormsHalf) >= 0 && rand(2) == 0) {
 						if (player.cor < 90) {
 							outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);
 							dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);
@@ -223,8 +223,8 @@ package classes.Scenes.Areas
 				}
 				else {
 					//If worms are off or the PC is infested, no worms.
-					if (player.findStatusAffect(StatusAffects.WormsOff) >= 0 || player.findStatusAffect(StatusAffects.Infested) >= 0 || (rand(2) == 0 && player.findStatusAffect(StatusAffects.WormsHalf) >= 0)) {
-						if (player.findStatusAffect(StatusAffects.WormsOff) >= 0 && player.findStatusAffect(StatusAffects.MetWorms) < 0) {
+					if (player.findStatusEffect(StatusEffects.WormsOff) >= 0 || player.findStatusEffect(StatusEffects.Infested) >= 0 || (rand(2) == 0 && player.findStatusEffect(StatusEffects.WormsHalf) >= 0)) {
+						if (player.findStatusEffect(StatusEffects.WormsOff) >= 0 && player.findStatusEffect(StatusEffects.MetWorms) < 0) {
 							wormsScene.wormEncounter(); //You can only encounter the worms once.
 							return;
 						}
@@ -246,9 +246,9 @@ package classes.Scenes.Areas
 			//Hellhound
 			if (chooser == 3) {
 				spriteSelect(27);
-				if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 && rand(2) == 0) {
+				if (player.findStatusEffect(StatusEffects.WormsOn) >= 0 && rand(2) == 0) {
 					//If lowered encounter rate, 25% chance, otherwise 50%.
-					if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0 && rand(2) == 0) {
+					if (player.findStatusEffect(StatusEffects.WormsHalf) >= 0 && rand(2) == 0) {
 						hellHoundScene.hellhoundEncounter();
 						return;
 					}
@@ -326,10 +326,10 @@ package classes.Scenes.Areas
 			outputText("\n\nA giggle comes from your side, as you see the cow-girl is back up onto her knees, having recovered from her exalted orgasm.  She crawls forward, kneeling just over your head and leaning in to kiss her minotaur lover.  The two whisper sweet nothings to each other, too vague and indistinct to hear, but it doesn't matter.  All you can focus on is the dick lodged firmly inside of you... that, and the soaking cunt of the cow-girl just inches from your face.  Alabaster droplets drip down her legs, one even landing on your lips.  Before you can stop yourself, you lick them clean, savoring the taste of the second-hand cum.");
 
 			outputText("\n\nSome part of your mind voices a complaint at what comes next, a voice that's quickly squelched inside the addiction-fueled haze of your brain.  You pull your head upwards and extend your tongue, slurping a large glob of cum from the cow-girl's snatch.  There's a surprised yelp from above you, followed by a coo of pleasure.  To your surprise, the cow-girl actually lowers her cunt down onto your face, giggling madly, filling your nostrils with the scent of her muff, with the scent of recent sex.  Not letting this opportunity go to waste, you repay her actions from earlier, slipping your ");
-			if (player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
-			else if (player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
-			else if (player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
-			else if(player.hasLongTongue()) outputText("inhumanly long ");
+			if (player.tongueType == TONGUE_SNAKE) outputText("serpentine ");
+			else if (player.tongueType == TONGUE_DEMONIC) outputText("demonic ");
+			else if (player.tongueType == TONGUE_DRACONIC) outputText("draconic ");
+			else if (player.hasLongTongue()) outputText("inhumanly long ");
 			outputText("tongue inside her, eagerly licking out and guzzling down the remnants of the minotaur's present.");
 
 			outputText("\n\nThe minotaur, for his part, is in no rush to give you a cream pie of your own. His thrusts are slow and deliberate, with a rhythm that has you writhing with pleasure.  The three of you moan together like some kind of erotic pyramid.  The bull's assault on your ");
@@ -381,10 +381,10 @@ package classes.Scenes.Areas
 			//Chance to impregnate PC, get mino-fix, and maybe relief from feeder perk.
 			player.minoCumAddiction(10);
 			player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
-			if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+			if (player.findStatusEffect(StatusEffects.Feeder) >= 0) {
 				//You've now been milked, reset the timer for that
-				player.addStatusValue(StatusAffects.Feeder, 1, 1);
-				player.changeStatusValue(StatusAffects.Feeder, 2, 0);
+				player.addStatusValue(StatusEffects.Feeder, 1, 1);
+				player.changeStatusValue(StatusEffects.Feeder, 2, 0);
 			}
 			//(Acquired minotaur cum!)
 			model.time.hours++;
@@ -426,7 +426,7 @@ package classes.Scenes.Areas
 				outputText("reluctantly.", false);
 			outputText("\n\nOnly now do you notice other faces peeking over ledges and ridges. You count at least two goblins and one imp who quickly pull back. From the sounds, they were busy getting themselves off.", false);
 			//[if first appearance of this event]
-			if (player.statusAffectv1(StatusAffects.MinoPlusCowgirl) == 0)
+			if (player.statusEffectv1(StatusEffects.MinoPlusCowgirl) == 0)
 				outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.", false);
 			//Lust!
 			dynStats("lus", 5 + player.lib / 20 + player.minoScore() + player.cowScore());

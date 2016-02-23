@@ -59,7 +59,7 @@ package classes.Scenes
 		}
 		//Ensures that none of the codex entries can be Lost Forever.
 		public function setFlags():void {
-			if (player.findStatusAffect(StatusAffects.KnowsCharge) >= 0 || player.findStatusAffect(StatusAffects.KnowsBlind) >= 0 || player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findStatusAffect(StatusAffects.KnowsArouse) >= 0 || player.findStatusAffect(StatusAffects.KnowsHeal) >= 0 || player.findStatusAffect(StatusAffects.KnowsMight) >= 0 )
+			if (player.findStatusEffect(StatusEffects.KnowsCharge) >= 0 || player.findStatusEffect(StatusEffects.KnowsBlind) >= 0 || player.findStatusEffect(StatusEffects.KnowsWhitefire) >= 0 || player.findStatusEffect(StatusEffects.KnowsArouse) >= 0 || player.findStatusEffect(StatusEffects.KnowsHeal) >= 0 || player.findStatusEffect(StatusEffects.KnowsMight) >= 0 )
 			{
 				if (flags[kFLAGS.CODEX_ENTRY_MAGIC] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_MAGIC] = 1;

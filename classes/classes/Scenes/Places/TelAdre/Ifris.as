@@ -8,8 +8,8 @@ public function Ifris(){
 //Hours - 15+
 
 public function ifrisIntro():Boolean {
-	if(model.time.hours >= 15) {
-		if(flags[kFLAGS.MET_IFRIS] > 0) outputText("\n\nIfris is standing in the corner of the room, wearing her usual black bikini and eyeing you as soon as you walk in.", false);
+	if (model.time.hours >= 15) {
+		if (flags[kFLAGS.MET_IFRIS] > 0) outputText("\n\nIfris is standing in the corner of the room, wearing her usual black bikini and eyeing you as soon as you walk in.", false);
 		else outputText("\n\nIn the corner of the room stands a lone figure, her bright cherry-red skin making her stand out.  A long, spaded tail swishes behind her slowly, the length much thicker than most demon tails you've seen.  She couldn't be more than five feet tall, her slender, lithe form looking more athletic than muscular.  A black bikini covers just enough to be modest, her supple C-cup breasts more perky than they have a right to be.  She slowly rolls a lock of springy, curly hair around one index finger, her glowing crimson gaze set on a nearby weight-lifting machine incredulously.  Feeling your eyes on her glistening, oiled skin, she slowly turns them to you instead.", false);
 		return true;
 	}
@@ -21,7 +21,7 @@ public function ifrisIntro():Boolean {
 public function approachIfris():void {
 	spriteSelect(28);
 	clearOutput();
-	if(flags[kFLAGS.MET_IFRIS] == 0) {
+	if (flags[kFLAGS.MET_IFRIS] == 0) {
 		flags[kFLAGS.MET_IFRIS] = 1;
 		outputText("The curious, appraising gaze on her pretty face turns into a pleased smile as you walk over, and her clawed toes click gently on the floor as she takes the last few steps to meet you. As you open your mouth to speak she preempts you, those pretty, black-painted lips parting, a voice too husky and smooth to be up to any good greeting you.\n\n", false);
 	
@@ -32,10 +32,10 @@ public function approachIfris():void {
 		outputText("\"<i>It's nice to meet you. Are you here to use the machines, or were you just hoping to watch the pretty bodies working up a sweat?</i>\" she giggles cutely, two of her clawed fingers covering her mouth demurely.\n\n", false);
 	}
 	//2a-Repeat approach, no sex-
-	else if(flags[kFLAGS.TIMES_FUCKED_IFRIS_BLOWJOB] + flags[kFLAGS.TIMES_FUCKED_IFRIS_LICKED] == 0) {
+	else if (flags[kFLAGS.TIMES_FUCKED_IFRIS_BLOWJOB] + flags[kFLAGS.TIMES_FUCKED_IFRIS_LICKED] == 0) {
 		outputText("Ifris grins as you walk over again, the devil girl's dark tongue dabbing at her even darker lips as she all but coos up at you.\n\n", false);
 
-		if(flags[kFLAGS.IFRIS_SHOWED_OFF] == 0) outputText("\"<i>Hello darling... here to actually give me a show?</i>\"\n\n", false);
+		if (flags[kFLAGS.IFRIS_SHOWED_OFF] == 0) outputText("\"<i>Hello darling... here to actually give me a show?</i>\"\n\n", false);
 		else outputText("\"<i>Hello darling... here to give another show? I did so enjoy your last performance.</i>\"\n\n", false);
 	}
 	//2b-Repeat approach, had oral-
@@ -56,7 +56,7 @@ public function approachIfris():void {
 private function workOutForIfris():void {
 	spriteSelect(28);
 	clearOutput();
-	if(player.fatigue > 70) {
+	if (player.fatigue > 70) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
 		doNext(telAdre.gymDesc);
 		return;
@@ -73,7 +73,7 @@ private function workOutForIfris():void {
 private function askIfrisToJoinYou():void {
 	spriteSelect(28);
 	clearOutput();
-	if(player.fatigue > 70) {
+	if (player.fatigue > 70) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
 		doNext(telAdre.gymDesc);
 		return;
@@ -92,7 +92,7 @@ private function liftWhileIfrisWatches():void {
 	spriteSelect(28);
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
 	clearOutput();
-	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
+	if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();
@@ -103,8 +103,8 @@ private function liftWhileIfrisWatches():void {
 
 	outputText("\"<i>Mmm... lovely. Maybe next time I'll get to see a little more.</i>\" She grins a little then, exposing her fanged teeth to you briefly before she turns and slinks from the gym, her posh little bottom swaying more than it has any real right to. You can't help but stare until she's gone, and you shake your head, trying to clear it to go about your business...", false);
 	//Stat changes HERE!
-	if(player.str < 90) dynStats("str", .5);
-	if(player.tou < 40) dynStats("tou", .3);
+	if (player.str < 90) dynStats("str", .5);
+	if (player.tou < 40) dynStats("tou", .3);
 	dynStats("lus", 5);
 	//Body changes here
 	//Muscleness boost!
@@ -118,7 +118,7 @@ private function showOffForIfris():void {
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
 	fatigue(30);
 	clearOutput();
-	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
+	if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();
@@ -126,7 +126,7 @@ private function showOffForIfris():void {
 	outputText("You look at the settings on the machine for a moment before deciding to give the red cutie something to really remember. You set the bar on the bottom rung, rubbing your hands together a few times in preparation as you lay on the bench. Her red eyes go a little wide, slender black eyebrows lifting on her smooth forehead as she watches you. You can't help but feel as though she's almost rooting for you, the way she does a cute little hop and clasps her hands together...\n\n", false);
 	
 	//4b2-PC fails strength requirement considerably!-
-	if(player.str < 40) {
+	if (player.str < 40) {
 		outputText("Gripping the bars tightly, you grit your teeth and give a mighty push upwards! Or not so much, though you struggle valiantly against the weight. You just can't seem to budge it however, and a sharp pain in your arms tells you just what a bad idea this was! You give a cry of pain, releasing the bar and rubbing your biceps.\n\n", false);
 
 		outputText("Ifris only rolls her eyes, flipping a hand at you dismissively as she walks away, murmuring.\n\n", false);
@@ -141,7 +141,7 @@ private function showOffForIfris():void {
 		return;
 	}	
 	//4b1-PC fails strength requirement!-
-	if(player.str < 75) {
+	if (player.str < 75) {
 		outputText("Gripping the bars tightly, you grit your teeth and give a mighty push upwards! Your muscles strain and you grunt with effort, but the considerable weight barely budges. You hear her make a little disappointed, \"<i>awww...</i>\" as she watches you for a few long moments, but no matter how much the humiliation motivates you, you just can't seem to do it.\n\n", false);
 
 		outputText("\"<i>Oh well...</i>\" She sighs, clearly crestfallen. Cocking one fist on her hip, she gives your " + player.leg() + " a light pat as she leaves your presence, vanishing out the door within moments.\n\n", false);
@@ -152,11 +152,11 @@ private function showOffForIfris():void {
 		return;
 	}
 	//4b5-PC masculinity > 60, corruption > 75, has cow features-
-	if(player.gender == 0 || (player.femininity < 40 && player.cor > 75 && player.faceType == FACE_COW_MINOTAUR)) {
+	if (player.gender == 0 || (player.femininity < 40 && player.cor > 75 && player.faceType == FACE_COW_MINOTAUR)) {
 		outputText("Ifris watches you for a moment as you move down to the bench, but her eyes clearly wander elsewhere now and then. The pleasant smile never leaves her pretty face, but it's clear she's distracted or even disinterested for some reason. Soon enough she turns to leave, a bored little sigh leaving her. Her hips sway with a sexy gait as though it were natural, though nothing about her seems particularly excited at the moment...", false);
 		//Stat changes HERE!
-		if(player.str < 90) dynStats("str", .5);
-		if(player.tou < 40) dynStats("tou", .3);
+		if (player.str < 90) dynStats("str", .5);
+		if (player.tou < 40) dynStats("tou", .3);
 		//Body changes here
 		//Muscleness boost!
 		outputText(player.modTone(85,5+rand(5)), false);
@@ -164,14 +164,14 @@ private function showOffForIfris():void {
 		return;
 	}
 	//4b3-PC succeeds! Is male/herm-
-	if(player.hasCock()) {
+	if (player.hasCock()) {
 		//Double dickings!
-		if(player.cockTotal() > 1 && rand(2) == 0 && player.cockThatFits(70) != -1 && player.cockThatFits2(70) != -1) {
+		if (player.cockTotal() > 1 && rand(2) == 0 && player.cockThatFits(70) != -1 && player.cockThatFits2(70) != -1) {
 			ifrisDP();
 			return;
 		}
 		//First time
-		if(flags[kFLAGS.TIMES_FUCKED_IFRIS_BLOWJOB] == 0) {
+		if (flags[kFLAGS.TIMES_FUCKED_IFRIS_BLOWJOB] == 0) {
 			outputText("Gripping the bars tightly, you grit your teeth and give a mighty push upwards! Your muscles strain and you grunt with effort, a little amazed gasp leaving the red beauty's lips as the weights lift slowly but surely. You can't help but grin proudly as your elbows lock, the weight completely lifted, and you bring it back down, only to push again.\n\n", false); 
 	
 			outputText("Ifris moves closer, her oiled skin glistening as she watches your muscles straining, bending in to get a closer look. As you look down you notice her bend forward, the weight momentarily forgotten as those luscious, perfect mounds of tit-flesh almost spill out of her bikini top. She grins slowly at you, following your gaze, and even giving a teasing little shake, making the orbs jiggle.\n\n", false); 
@@ -187,8 +187,8 @@ private function showOffForIfris():void {
 			outputText("Pleased with her effect on you thus far, her gaze shifts to your face while her lovely mouth parts, the heat of her breath much greater than a normal human by several degrees.  It washes over your cock in heavy, moist puffs. With a little teasing flick of her wet tongue over the tip of your shaft, she takes it into her mouth, suckling gently. The devil's mouth is so wet, so delightfully hot, her cheeks hollowing out almost instantly as she sucks hard on that pulsing tip. Slowly she descends, thick cock-pillows smoothly gliding down your shaft as she takes more and more into her mouth. There isn't even a pause as you hit the back of her throat and she keeps going, eyes narrowing in lust as she gazes at your expression when her lips meet your crotch in the most intimate kiss you can imagine.\n\n", false);
 	
 			outputText("Suddenly it seems she loses her patience for teasing, much to your delight, and the hard, long pull on your cock as she pulls back is like heaven, her cheeks caved inward. She descends quickly, all but face-fucking herself on your rod again and again, lewd, wet squelching rising up from her stuffed throat. It isn't long before you're groaning in ecstasy, wishing you had the strength to grip her head, make her slow down so you can draw it out and enjoy it, but all too soon the pleasure is rushing up to meet you, your " + ballsDescriptLight() + " tightening, even as she cups ", false);
-			if(player.balls > 0) outputText("them and gently squeezes the sack.\n\n", false);
-			else if(player.hasVagina()) outputText("your lower lips and gently squeezes.\n\n", false);
+			if (player.balls > 0) outputText("them and gently squeezes the sack.\n\n", false);
+			else if (player.hasVagina()) outputText("your lower lips and gently squeezes.\n\n", false);
 			else outputText("your taint and gently squeezes.\n\n", false);
 
 			outputText("Just as you can take no more, the pretty devil buries her face in your crotch, swallowing around your dick desperately. You give a shout of pleasure as your length swells and twitches, the hot bursts of your seed pumping down into her belly. She waits patiently, almost looking like she's smiling around the base of your dick, even as her eyes flutter, almost rolling back in her head. Finally the bursts of your cum subside and she slowly pulls up off your shaft, giving the oversensitive tip one last hard, almost painful suckle before parting from your flesh with a lewd plop. She licks her lips slowly, leaving you panting and feeling light-headed as she rises, only giving your cock a gentle pat as she passes by, leaving with a spring in her step and a trail of glistening wetness down her thighs...", false);
@@ -198,11 +198,11 @@ private function showOffForIfris():void {
 			outputText("Ifris all but squeals in delight as you tell her you're totally up for smashing that record, a wide grin spreading her thick lips, briefly worrying you when you see those sharp teeth of hers... but then you remind yourself how good she is with them, as you lay back onto the bench, gripping the bars above you. The devil girl doesn't even wait this time, tugging your bottoms down right away to get at your " + cockDescript(0) + ". She sits upon your " + player.legs() + ", her posh butt so nice and soft against you as she waits for you to begin.\n\n", false);
 
 			outputText("The moment you lift the weight for the first time, she bends down, rubbing her smooth cheek against your half-turgid member", false);
-			if(player.balls > 0) outputText(", her hand cupping your " + ballsDescriptLight(), false);
+			if (player.balls > 0) outputText(", her hand cupping your " + ballsDescriptLight(), false);
 			outputText(". Smiling, she watches you carefully, her tongue sliding out of her lips, laving up the underside of the shaft, urging it on its final steps to full hardness. She groans in desire as she takes your " + player.cockHead() + " into her mouth once again, pulling a moan from you with her first, hard suckle upon your sensitive tip; it seems she doesn't want to tease anymore.\n\n", false);
 
 			outputText("The sexy little dark-haired devil takes your dick to the ", false);
-			if(player.hasSheath()) outputText("sheath", false);
+			if (player.hasSheath()) outputText("sheath", false);
 			else outputText("base", false);
 			outputText(" in her throat once again, holding there until you push the weight up, sliding up the length with your movement, and then back down as you lower, encouraging your exercise with the pleasure of her sweet mouth. Knowing you can't keep it up forever though, she merely urges you to do better before giving in, her hand gripping the base of your " + cockDescript(0) + " tightly as her head starts to bob purposefully up and down your massive length.\n\n", false);
 
@@ -213,8 +213,8 @@ private function showOffForIfris():void {
 		flags[kFLAGS.TIMES_FUCKED_IFRIS_BLOWJOB]++;
 	}
 	//4b4-PC succeeds! Is female!-
-	else if(player.hasVagina()) {
-		if(flags[kFLAGS.TIMES_FUCKED_IFRIS_LICKED] == 0) {
+	else if (player.hasVagina()) {
+		if (flags[kFLAGS.TIMES_FUCKED_IFRIS_LICKED] == 0) {
 			outputText("Gripping the bars tightly, you grit your teeth and give a mighty push upwards! Your muscles strain and you grunt with effort, a little amazed gasp leaving the red beauty's lips as the weights lift slowly but surely. You can't help but grin proudly as your elbows lock, the weight completely lifted, and you bring it back down, only to push again.\n\n", false);
 	
 			outputText("Ifris moves closer, her oiled skin glistening as she watches your muscles straining, bending in to get a closer look. As you look down you notice her bend forward, the weight momentarily forgotten as those luscious, perfect mounds of tit-flesh almost spill out of her bikini top. She grins slowly at you, following your gaze, and even giving a teasing little shake, making the orbs jiggle.\n\n", false);
@@ -228,7 +228,7 @@ private function showOffForIfris():void {
 			outputText("The warmth in your belly grows and spreads as the sensual, intense sex grows more urgent, and soon enough the black-haired beauty pulls from your nipples, her fingers sliding from your dripping slit just long enough to push your bottoms down completely. She bends in, those thick dick-sucking lips put to a much different use as they press to your pussy and suckle upon it, her heated tongue sliding deep within you, lashing against your sensitive walls, much to your delight. Her tail sways quicker behind her as she suckles on your pussy like her life depends on it... and that's more than you could ever ask for right then and there.\n\n", false);
 	
 			outputText("Your back arches, ", false);
-			if(player.isNaga()) outputText("your powerful tail flexing to and fro while your belly clenches", false);
+			if (player.isNaga()) outputText("your powerful tail flexing to and fro while your belly clenches", false);
 			else outputText("toes curling while your belly clenches", false);
 			outputText(", and your muscles contract as your orgasm hits. A muffled moan leaves Ifris, invading your cunt as you clutch her head to you, riding her pretty face, lost in your tide of ecstasy. When you finally come down, she pulls free of your pussy with a cute little gasp, followed by a giggle. Looking down through your hazy eyes, you see her lovely face glistening with your own juices, and she gives your thigh a little kiss. Standing up, she turns and leaves you laying there panting, a spring in her step, and a trail of clear wetness leaking down her inner thighs...", false);
 		}
@@ -237,7 +237,7 @@ private function showOffForIfris():void {
 			outputText("Ifris all but squeals in delight as you tell her you're totally up for smashing that record, a wide grin spreading her thick lips, briefly worrying you when you see those sharp teeth of hers... but then you remind yourself how good she is with them, as you lay back onto the bench, gripping the bars above you. The devil girl doesn't even wait this time, leaning up to give your cheek a little peck as she pulls your " + chestDesc() + " free of your top.\n\n", false);
 
 			outputText("She leans in before you've started, peppering your " + nippleDescript(0) + "s and ", false);
-			if(player.biggestTitSize() >= 1) outputText("breasts", false);
+			if (player.biggestTitSize() >= 1) outputText("breasts", false);
 			else outputText("chest", false);
 			outputText(" with soft kisses, teasing the nubs to hardness with flicks of her tongue. You eagerly lift your " + player.legs() + " as she slides down, pulling your bottoms away to expose your moistening cunt to her hungry gaze.  Urging your " + player.legs() + " apart, she crawls between them, tail swaying behind her as she waits for you to begin. You comply with her wishes, eager to feel the pleasure of her mouth more than the burn of your exercise, and you're not left wanting.\n\n", false);
 
@@ -250,8 +250,8 @@ private function showOffForIfris():void {
 		flags[kFLAGS.TIMES_FUCKED_IFRIS_LICKED]++;
 	}
 	//Stat changes HERE!
-	if(player.str < 90) dynStats("str", .5);
-	if(player.tou < 40) dynStats("tou", .3);
+	if (player.str < 90) dynStats("str", .5);
+	if (player.tou < 40) dynStats("tou", .3);
 	player.orgasm();
 	//Body changes here
 	//Muscleness boost!
@@ -278,41 +278,41 @@ private function ifrisDP():void {
 
 	outputText("You set the machine's bar back in place, letting your worn-out limbs go slack across Ifris's body, your hands coming to rest on her tight, squeezable butt.  The two slick holes start a whole new wave of contractations, and without the distraction of the weights, you're unable to resist.  ", false);
 	//(Knotting - req's 2 dogdicks!)
-	if(player.dogCocks() >= 2) {
+	if (player.dogCocks() >= 2) {
 		outputText("Both your canine cocks bloat with seed, the knot's distending and stretching so wide that Ifris couldn't pull off if she wanted.  A moment later, the twin dog-dicks explode pillars of alabaster cream, painting the truly knotted woman's innards white.  ", false);
-		if(player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
+		if (player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
 		outputText("Throughout the massive release, you're softly grunting, held immobile by your animalistic body's instincts as your peckers try their damnedest to impregnate your overly fit mate.  You're still cumming, but your knots are starting to deflate at last.  ", false);
 	}
 	//(Nodule growing, unholy demonocity)
-	else if(player.demonCocks() >= 2) {
+	else if (player.demonCocks() >= 2) {
 		outputText("Both your demonic cocks explode inside Ifris, the nodules along each shaft swelling out, thickening to stroke and caress your oily lover's inner walls.  A moment later, the tainted tips explode out, spurting demon-spunk into both silky tunnels.  ", false);
-		if(player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
+		if (player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
 		outputText("At the same time, your hands squeeze hard on her butt-cheeks and your hips start to jack-hammer against her, slamming into her as if she was a worthless piece of meat for you to impregnate.  You shiver, feeling not entirely in control of yourself, the demonic influence of your tainted members robbing you of control.  ", false);
 	}
 	//Flaring - req's 2 horsecocks!)
-	else if(player.horseCocks() >= 2) {
+	else if (player.horseCocks() >= 2) {
 		outputText("Both your equine cocks explode inside Ifris, their tips swelling outward into thick flares that plug her stuffed channels.  A moment later, the swollen tips unleash pillars of alabaster cream, painting everything above the flares white.  ", false);
-		if(player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
+		if (player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
 		outputText("Your hips begin to rock and thrust, and no matter what you try to do, you cannot seem to still your body, your animal instincts owning your waist as you inseminate your seductive, teasing lover's body.  ", false);
 	}
 	//(Tentacle pistoning + head-mushrooming)
-	else if(player.tentacleCocks() >= 2) {
+	else if (player.tentacleCocks() >= 2) {
 		outputText("Both your plant-like pricks explode inside Ifris, the purplish tips swelling up inside her to disproportionate sizes.  A moment later, the vine-dicks explode out twin pillars of ropey seed, painting her inner walls with spunk.  ", false);
-		if(player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
+		if (player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
 		outputText("At the same time, both tentacle-shafts curl and piston, winding around in other in the space between your bodies, curling and thrusting to rub every inch of your sensitive, prehensile shafts against Ifris' pussy-walls.  You shake and shudder, feeling more like a tentacle beast than a " + player.mf("man","woman") + ".  ", false);
 	}
 	//(Anemone - stinging funtimes)
-	else if(player.anemoneCocks() >= 2) {
+	else if (player.anemoneCocks() >= 2) {
 		outputText("Both your unusual, aquatic cocks explode inside Ifris, their shafts thickening as the prepare for release.  A moment later, they explode out twin pillars of alabaster cum, painting her inner walls with gooey spunk.  ", false);
-		if(player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
+		if (player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
 		outputText("At the same time, your stinging cilia go wild, pricking her inside and out, uncontrollably forcing aphrodisiacs into your partner's shuddering, orgasmic body.  The drugs force her to climb to whole new plateaus of pleasure, making her squeal with unrepentant pleasure.  You convulse and get off even more forcefully from using your strange members in such a way.  ", false);
 	}
 	//(Standard)
 	else {
 		outputText("Both your cocks explode inside Ifris, submitting alabaster pillars to her request for your release.  The red-hued sexpot exhales a happy hum and rocks her hips back and forth, her oily, lubricated holes squeezing your dicks for every drop of delectable seed.  ", false);
-		if(player.cockTotal() > 2) {
+		if (player.cockTotal() > 2) {
 			outputText("The ", false);
-			if(player.cockTotal() == 1) outputText("one unbound prick remaining paints the muscular woman's lower back with goo, but she doesn't seem to mind.", false);
+			if (player.cockTotal() == 1) outputText("one unbound prick remaining paints the muscular woman's lower back with goo, but she doesn't seem to mind.", false);
 			else outputText("other, unbound pricks paint the muscular woman's lower back in goo, but she doesn't seem to mind.", false);
 			outputText("  ", false);
 		}
@@ -321,19 +321,19 @@ private function ifrisDP():void {
 	outputText("She purrs, \"<i>Delightful,</i>\" into your ear and plants a wet kiss on you, surely leaving a dusky, black lip-print on your neck.\n\n", false);
 	
 	outputText("The last few contractions work through you, emptying the last of your load inside Ifris and allowing you to feel utterly, completely at peace.  Sliding up, she lets your slowly-deflating cocks ", false);
-	if(player.dogCocks() >= 2) outputText("noisily pop free", false);
+	if (player.dogCocks() >= 2) outputText("noisily pop free", false);
 	else outputText("slide", false);
 	outputText(" from her sperm-glazed snatch and anus.  Her body's warmth vanishes as she stands, and with a wink, she reattaches her bikini bottom, the tight garment moulding to her soaked camel-toe and holding in all of your leavings.  She walks away without another word, ", false);
-	if(player.cumQ() >= 1000) outputText("her body bloated with cum and sloshing audibly with every step", false);
-	else if(player.cumQ() >= 500) outputText("her belly bloated and gurgling with every step", false);
+	if (player.cumQ() >= 1000) outputText("her body bloated with cum and sloshing audibly with every step", false);
+	else if (player.cumQ() >= 500) outputText("her belly bloated and gurgling with every step", false);
 	else outputText("her body double-stuffed with seed", false);
 	outputText(".  You slump back and breathe heavy, feeling like you've just run a marathon.\n\n", false);
 	
 	outputText("It is some time until you gain the energy to rise.", false);
 	fatigue(10);
 	//Stat changes HERE!
-	if(player.str < 90) dynStats("str", .75);
-	if(player.tou < 40) dynStats("tou", .5);
+	if (player.str < 90) dynStats("str", .75);
+	if (player.tou < 40) dynStats("tou", .5);
 	player.orgasm();
 	//Body changes here
 	//Muscleness boost!

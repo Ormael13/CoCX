@@ -48,7 +48,7 @@ public function eventParser(eventNo:Function):void {
 		//Clear sprite if not in combat
 		if (!inCombat && eventNo != cleanupAfterCombat) spriteSelect(-1);
 		//Clear pic if not in combat
-		//if(!inCombat() && eventNo != cleanupAfterCombat) clearImages();
+		//if (!inCombat() && eventNo != cleanupAfterCombat) clearImages();
 		//Reset newgame buttons till back at camp
 		mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo );
 		if (eventNo != 1) {
@@ -66,21 +66,21 @@ public function eventParser(eventNo:Function):void {
 			mainView.hideMenuButton( MainView.MENU_STATS );
 		}
 		*/
-		/*if(eventNo == 1000 && gameState == 1 && menuLoc == 1) {
+		/*if (eventNo == 1000 && gameState == 1 && menuLoc == 1) {
 			menuLoc = 0;
 			outputText("\n\n", false);
-			if(!combatRoundOver()) enemyAI();
+			if (!combatRoundOver()) enemyAI();
 			else outputText(monster.capitalA + monster.short + " is defeated!");
 			return;
 		}*/
 
 /*
-		if(eventNo < 1000) doSystem(eventNo);
-		if(eventNo >=1000 && eventNo < 2000) errorPrint(eventNo); //No events should be in this range anymore. Previously called inventory.doItems(eventNo);
-		if(eventNo >=2000 && eventNo < 5000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doEvent(eventNo);
-		if(eventNo >=5000 && eventNo < 7000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doCombat(eventNo);
-		if(eventNo >= 10000 && eventNo < 10999) errorPrint(eventNo); //No events should be in this range anymore. Previously called charCreation.doCreation(eventNo);
-		if(eventNo >= 11000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doDungeon(eventNo);
+		if (eventNo < 1000) doSystem(eventNo);
+		if (eventNo >=1000 && eventNo < 2000) errorPrint(eventNo); //No events should be in this range anymore. Previously called inventory.doItems(eventNo);
+		if (eventNo >=2000 && eventNo < 5000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doEvent(eventNo);
+		if (eventNo >=5000 && eventNo < 7000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doCombat(eventNo);
+		if (eventNo >= 10000 && eventNo < 10999) errorPrint(eventNo); //No events should be in this range anymore. Previously called charCreation.doCreation(eventNo);
+		if (eventNo >= 11000) errorPrint(eventNo); //No events should be in this range anymore. Previously called doDungeon(eventNo);
 	}
 
 	else
@@ -142,7 +142,7 @@ public function doSystem(eventNo:Number):void {
 	//(clear data/appearance buttons if not at camp
 	//trace("System Event", eventNo)
 
-	if(eventNo != 1)
+	if (eventNo != 1)
 	{
 		hideMenus();
 	}
@@ -552,7 +552,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 
 		//IMP GANGBAAAAANGA
 		//The more imps you create, the more often you get gangraped.
-		temp = player.statusAffectv1(StatusAffects.BirthedImps) * 2;
+		temp = player.statusEffectv1(StatusEffects.BirthedImps) * 2;
 		if (temp > 7) temp = 7;
 		if (player.findPerk(PerkLib.PiercedLethite) >= 0) temp += 4;
 		if (player.inHeat) temp += 2;
@@ -566,8 +566,8 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 				anemoneScene.goblinNightAnemone();
 				needNext = true;
 			}
-			else if (temp > rand(100) && player.findStatusAffect(StatusAffects.DefenseCanopy) < 0) {
-				if (player.gender > 0 && (player.findStatusAffect(StatusAffects.JojoNightWatch) < 0 || player.findStatusAffect(StatusAffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) && (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0)) {
+			else if (temp > rand(100) && player.findStatusEffect(StatusEffects.DefenseCanopy) < 0) {
+				if (player.gender > 0 && (player.findStatusEffect(StatusEffects.JojoNightWatch) < 0 || player.findStatusEffect(StatusEffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) && (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0)) {
 					impScene.impGangabangaEXPLOSIONS();
 					doNext(playerMenu);
 					return true;
@@ -580,7 +580,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 					outputText("\n<b>Helia informs you over a mug of beer that she whupped some major imp asshole last night.  She wiggles her tail for emphasis.</b>\n");
 					needNext = true;
 				}
-				else if (player.gender > 0 && player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 && player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
+				else if (player.gender > 0 && player.findStatusEffect(StatusEffects.JojoNightWatch) >= 0 && player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) {
 					outputText("\n<b>Jojo informs you that he dispatched a crowd of imps as they tried to sneak into camp in the night.</b>\n");
 					needNext = true;
 				}
@@ -592,14 +592,14 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 					outputText("\n<b>Your sleep is momentarily disturbed by the sound of tiny clawed feet skittering away in all directions.  When you sit up, you can make out Kid A holding a struggling, concussed imp in a headlock and wearing a famished expression.  You catch her eye and she sheepishly retreats to a more urbane distance before beginning her noisy meal.</b>\n");
 					needNext = true;
 				}
-				else if(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "") && (player.inte / 5) >= rand(15)) {
+				else if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "") && (player.inte / 5) >= rand(15)) {
 					outputText("\n<b>Your sleep is momentarily disturbed by the sound of imp hands banging against your cabin door. Fortunately, you've locked the door before you've went to sleep.</b>\n");
 					needNext = true;
 				}
 			}
 			//wormgasms
-			else if (flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && player.findStatusAffect(StatusAffects.Infested) < 0) {
-				if (player.hasCock() && (player.findStatusAffect(StatusAffects.JojoNightWatch) < 0 || player.findStatusAffect(StatusAffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
+			else if (flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && player.findStatusEffect(StatusEffects.Infested) < 0) {
+				if (player.hasCock() && (player.findStatusEffect(StatusEffects.JojoNightWatch) < 0 || player.findStatusEffect(StatusEffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
 					kGAMECLASS.mountain.wormsScene.nightTimeInfestation();
 					return true;
 				}
@@ -611,7 +611,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 					outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");
 					needNext = true;
 				}
-				else if (player.gender > 0 && player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 && player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
+				else if (player.gender > 0 && player.findStatusEffect(StatusEffects.JojoNightWatch) >= 0 && player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) {
 					outputText("\n<b>Jojo informs you that he dispatched a horde of tiny, white worms as they tried to sneak into camp in the night.</b>\n");
 					needNext = true;
 				}
@@ -718,11 +718,11 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			}
 		}
 		//Egg loot!
-		if(player.findStatusAffect(StatusAffects.LootEgg) >= 0) {
+		if (player.findStatusEffect(StatusEffects.LootEgg) >= 0) {
 			trace("EGG LOOT HAS");
-			if (player.findStatusAffect(StatusAffects.Eggs) < 0) { //Handling of errors.
+			if (player.findStatusEffect(StatusEffects.Eggs) < 0) { //Handling of errors.
 				outputText("Oops, looks like something went wrong with the coding regarding gathering eggs after pregnancy. Hopefully this should never happen again. If you encounter this again, please let Kitteh6660 know so he can fix it.");
-				player.removeStatusAffect(StatusAffects.LootEgg);
+				player.removeStatusEffect(StatusEffects.LootEgg);
 				doNext(playerMenu);
 				return true;
 			}
@@ -731,10 +731,10 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 					[
 						[consumables.BROWNEG,consumables.PURPLEG,consumables.BLUEEGG,consumables.PINKEGG,consumables.WHITEEG,consumables.BLACKEG],
 						[consumables.L_BRNEG,consumables.L_PRPEG,consumables.L_BLUEG,consumables.L_PNKEG,consumables.L_WHTEG,consumables.L_BLKEG]]
-							[player.statusAffect(player.findStatusAffect(StatusAffects.Eggs)).value2 || 0][player.statusAffect(player.findStatusAffect(StatusAffects.Eggs)).value1 || 0] ||
+							[player.statusEffect(player.findStatusEffect(StatusEffects.Eggs)).value2 || 0][player.statusEffect(player.findStatusEffect(StatusEffects.Eggs)).value1 || 0] ||
 							consumables.BROWNEG;
-			player.removeStatusAffect(StatusAffects.LootEgg);
-			player.removeStatusAffect(StatusAffects.Eggs);
+			player.removeStatusEffect(StatusEffects.LootEgg);
+			player.removeStatusEffect(StatusEffects.Eggs);
 			trace("TAKEY NAU");
 			inventory.takeItem(itype, playerMenu);
 			return true;
@@ -745,15 +745,15 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 	
 	// Hanging the Uma massage update here, I think it should work...
 	telAdre.umasShop.updateBonusDuration(time);
-	if (player.findStatusAffect(StatusAffects.UmasMassage) >= 0)
+	if (player.findStatusEffect(StatusEffects.UmasMassage) >= 0)
 	{
-		trace("Uma's massage bonus time remaining: " + player.statusAffectv3(StatusAffects.UmasMassage));
+		trace("Uma's massage bonus time remaining: " + player.statusEffectv3(StatusEffects.UmasMassage));
 	}
 	
 	highMountains.izumiScenes.updateSmokeDuration(time);
-	if (player.findStatusAffect(StatusAffects.IzumisPipeSmoke) >= 0)
+	if (player.findStatusEffect(StatusEffects.IzumisPipeSmoke) >= 0)
 	{
-		trace("Izumis pipe smoke time remaining: " + player.statusAffectv1(StatusAffects.IzumisPipeSmoke));
+		trace("Izumis pipe smoke time remaining: " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke));
 	}
 	
 	//Drop axe if too short!
@@ -878,7 +878,7 @@ public function cheatTime(time:Number, needNext:Boolean = false):void {
 	while(time > 0) {
 		time--;
 		model.time.hours++;
-		if(model.time.hours > 23) {
+		if (model.time.hours > 23) {
 			model.time.days++;
 			model.time.hours = 0;
 		}
@@ -890,39 +890,39 @@ public function growHair(amount:Number = .1):Boolean {
 	//Grow hair!
 	temp = player.hairLength;
 	player.hairLength += amount;
-	if(player.hairLength > 0 && temp == 0) {
+	if (player.hairLength > 0 && temp == 0) {
 		outputText("\n<b>You are no longer bald.  You now have " + hairDescript() + " coating your head.\n</b>", false);
 		return true;
 	}
-	else if(player.hairLength >= 1 && temp < 1) {
+	else if (player.hairLength >= 1 && temp < 1) {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.hairLength >= 3 && temp < 3) {
+	else if (player.hairLength >= 3 && temp < 3) {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.hairLength >= 6 && temp < 6) {
+	else if (player.hairLength >= 6 && temp < 6) {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.hairLength >= 10 && temp < 10) {
+	else if (player.hairLength >= 10 && temp < 10) {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.hairLength >= 16 && temp < 16) {
+	else if (player.hairLength >= 16 && temp < 16) {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.hairLength >= 26 && temp < 26) {
+	else if (player.hairLength >= 26 && temp < 26) {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.hairLength >= 40 && temp < 40) {
+	else if (player.hairLength >= 40 && temp < 40) {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.hairLength >= 40 && player.hairLength >= player.tallness && temp < player.tallness) {
+	else if (player.hairLength >= 40 && player.hairLength >= player.tallness && temp < player.tallness) {
 		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
 		return true;
 	}
@@ -935,27 +935,27 @@ public function growBeard(amount:Number = .1):Boolean {
 	var tempBeard:Number = player.beardLength;
 	player.beardLength += amount;
 
-	if(player.beardLength > 0 && tempBeard == 0) {
+	if (player.beardLength > 0 && tempBeard == 0) {
 		outputText("\n<b>You feel a tingling in your cheeks and chin.  You now have " + beardDescript() + " coating your cheeks and chin.\n</b>", false);
 		return true;
 	}
-	else if(player.beardLength >= 0.2 && tempBeard < 0.2) {
+	else if (player.beardLength >= 0.2 && tempBeard < 0.2) {
 		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.beardLength >= 0.5 && tempBeard < 0.5) {
+	else if (player.beardLength >= 0.5 && tempBeard < 0.5) {
 		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.beardLength >= 1.5 && tempBeard < 1.5) {
+	else if (player.beardLength >= 1.5 && tempBeard < 1.5) {
 		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.beardLength >= 3 && tempBeard < 3) {
+	else if (player.beardLength >= 3 && tempBeard < 3) {
 		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
 		return true;
 	}
-	else if(player.beardLength >= 6 && tempBeard < 6) {
+	else if (player.beardLength >= 6 && tempBeard < 6) {
 		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
 		return true;
 	}

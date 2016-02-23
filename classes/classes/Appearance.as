@@ -90,7 +90,7 @@
 			}
 			//if medium length refer to as locks sometimes
 			//CUT - locks is plural and screws up tense.
-			/*if(creature.hairLength >= 3 && creature.hairLength < 16 && rand(2) == 0) {
+			/*if (creature.hairLength >= 3 && creature.hairLength < 16 && rand(2) == 0) {
 			 descript += "locks of hair";
 			 return descript;
 			 }*/
@@ -319,7 +319,7 @@
 					"slippery "];
 				description += randomChoice(options);
 			}
-			if (!haveDescription && i_creature.findStatusAffect(StatusAffects.BlackNipples) >= 0) {
+			if (!haveDescription && i_creature.findStatusEffect(StatusEffects.BlackNipples) >= 0) {
 				options = ["black ",
 					"ebony ",
 					"sable "];
@@ -354,25 +354,25 @@
 			}
 			return description;
 			/*OLD
-			 if(creature.breastRows[rowNum].lactationMultiplier >= 1.5 && creature.breastRows[rowNum].lactationMultiplier < 1.75) {
-			 if(creature.breastRows[rowNum].milkFullness > 75) return "over-full leaking teat";
-			 if(rand(2) == 0) return "milky teat";
+			 if (creature.breastRows[rowNum].lactationMultiplier >= 1.5 && creature.breastRows[rowNum].lactationMultiplier < 1.75) {
+			 if (creature.breastRows[rowNum].milkFullness > 75) return "over-full leaking teat";
+			 if (rand(2) == 0) return "milky teat";
 			 else return "milk spout";
 			 }
-			 if(creature.breastRows[rowNum].lactationMultiplier >= 1.75) {
-			 if(creature.breastRows[rowNum].milkFullness > 75) return "over-full leaking teat";
-			 if(rand(2) == 0) return "milk-drooling teat";
+			 if (creature.breastRows[rowNum].lactationMultiplier >= 1.75) {
+			 if (creature.breastRows[rowNum].milkFullness > 75) return "over-full leaking teat";
+			 if (rand(2) == 0) return "milk-drooling teat";
 			 else return "drippy cow-teat";
 			 }
-			 if(creature.lust > 75) {
-			 if(rand(2) == 0) return "painfully hard nipple";
+			 if (creature.lust > 75) {
+			 if (rand(2) == 0) return "painfully hard nipple";
 			 else return "over-stimulated nipple";
 			 }
-			 if(creature.lust > 50) {
-			 if(rand(2) == 0) return "erect nipple";
+			 if (creature.lust > 50) {
+			 if (rand(2) == 0) return "erect nipple";
 			 else return "hard nipple";
 			 }
-			 if(creature.breastRows[rowNum].milkFullness > 75) return "milky over-full nipple";
+			 if (creature.breastRows[rowNum].milkFullness > 75) return "milky over-full nipple";
 			 return "nipple";
 			 */
 		}
@@ -546,7 +546,7 @@
 		//This allows a single cockDescription function to produce output for both cockDescript and the old NPCCockDescript.
 		public static function cockDescription(cockType:CockTypesEnum, length:Number, girth:Number, lust:int = 50, cumQ:Number = 10, isPierced:Boolean = false, hasSock:Boolean = false, isGooey:Boolean = false): String {
 			if (rand(2) == 0) {
-				if(cockType == CockTypesEnum.HUMAN) return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey) + " " + cockNoun(cockType);
+				if (cockType == CockTypesEnum.HUMAN) return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey) + " " + cockNoun(cockType);
 				else return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey) + ", " + cockNoun(cockType);
 			}
 			return cockNoun(cockType);
@@ -1043,11 +1043,11 @@
 			}
 			//Length/Thickness done.  Moving on to special animal characters/lust stuff.
 			/*Animal Fillers - turned off due to duplication in noun segment
-			 else if(type == 1 && descripts == 0 && rand(2) == 0) {
-			 if(rand(2) == 0) descript += "flared ";
+			 else if (type == 1 && descripts == 0 && rand(2) == 0) {
+			 if (rand(2) == 0) descript += "flared ";
 			 else descript += "musky ";
 			 }
-			 else if(type == 2 && descripts == 0 && rand(2) == 0) {
+			 else if (type == 2 && descripts == 0 && rand(2) == 0) {
 			 descript += "musky ";
 			 }*/
 			//FINAL FALLBACKS - lust descriptors
@@ -1305,7 +1305,7 @@
 			var description:String = "";
 			var options:Array;
 
-			if (i_plural && (i_creature.findStatusAffect(StatusAffects.Uniball) < 0)) {
+			if (i_plural && (i_creature.findStatusEffect(StatusEffects.Uniball) < 0)) {
 				if (i_creature.balls == 1) {
 					if (i_withArticle) {
 						options = ["a single",
@@ -1387,7 +1387,7 @@
 
 			}
 			//UNIBALL
-			if (i_creature.findStatusAffect(StatusAffects.Uniball) >= 0) {
+			if (i_creature.findStatusEffect(StatusEffects.Uniball) >= 0) {
 				if (description) description += " ";
 				options = ["tightly-compressed",
 					"snug",
@@ -1446,7 +1446,7 @@
 			description += randomChoice(options);
 			if (i_plural) description += "s";
 
-			if (i_creature.findStatusAffect(StatusAffects.Uniball) >= 0 && rand(2) == 0) {
+			if (i_creature.findStatusEffect(StatusEffects.Uniball) >= 0 && rand(2) == 0) {
 				if (rand(3) == 0)
 					description += " merged into a cute, spherical package";
 				else if (rand(2) == 0)
@@ -1588,7 +1588,7 @@
 			}
 			description += randomChoice(options);
 			//Something that would be nice to have but needs a variable in Creature or Character.
-			//if(i_creature.bunnyScore() >= 3) description += "rabbit hole";
+			//if (i_creature.bunnyScore() >= 3) description += "rabbit hole";
 			
 			return description;
 		}
@@ -1641,7 +1641,7 @@
 					haveDescription = true;
 				}
 				/*Horse descriptors - 50%
-				 if(creature.skinType == 1 > 2 && !descripted && rand(2) == 0) {
+				 if (creature.skinType == 1 > 2 && !descripted && rand(2) == 0) {
 				 descripted = true;
 				 descript += "mare-";
 				 }*/
@@ -1998,7 +1998,7 @@
 						"bottom"];
 			
 			description += randomChoice(options);
-			//if(rando == 2) desc += "cheeks";
+			//if (rando == 2) desc += "cheeks";
 			return description;
 		}
 
@@ -2134,7 +2134,7 @@
 		private static function humanDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.HUMAN);
 			return descript;
 		}
@@ -2142,7 +2142,7 @@
 		private static function kangaDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.KANGAROO);
 			return descript;
 		}
@@ -2150,7 +2150,7 @@
 		public static function dogDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.DOG);
 			return descript;
 		}
@@ -2158,7 +2158,7 @@
 		private static function foxDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.FOX);
 			return descript;
 		}
@@ -2166,7 +2166,7 @@
 		private static function tentacleDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.TENTACLE);
 			return descript;
 		}
@@ -2174,7 +2174,7 @@
 		private static function demonDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.DEMON);
 			return descript;
 		}
@@ -2184,7 +2184,7 @@
 		public static function horseDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.HORSE);
 			return descript;
 		}
@@ -2192,7 +2192,7 @@
 		private static function catDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.CAT);
 			return descript;
 		}
@@ -2200,7 +2200,7 @@
 		private static function anemoneDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.ANEMONE);
 			return descript;
 		}
@@ -2208,7 +2208,7 @@
 		private static function dragonDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.DRAGON);
 			return descript;
 		}
@@ -2216,7 +2216,7 @@
 		private static function displacerDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.DISPLACER);
 			return descript;
 		}
@@ -2224,7 +2224,7 @@
 		private static function snakeDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.LIZARD);
 			return descript;
 		}
@@ -2232,7 +2232,7 @@
 		private static function pigDescript(cockNum:Number):String
 		{
 			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 			descript += cockNoun(CockTypesEnum.PIG);
 			return descript;
 		}
@@ -2368,11 +2368,11 @@
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
 				[
-					[TONUGE_HUMAN, "human"],
-					[TONUGE_SNAKE, "snake"],
-					[TONUGE_DEMONIC, "demonic"],
-					[TONUGE_DRACONIC, "draconic"],
-					[TONUGE_ECHIDNA, "echidna"]
+					[TONGUE_HUMAN, "human"],
+					[TONGUE_SNAKE, "snake"],
+					[TONGUE_DEMONIC, "demonic"],
+					[TONGUE_DRACONIC, "draconic"],
+					[TONGUE_ECHIDNA, "echidna"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2651,7 +2651,7 @@
 			var storage:String = "";
 			if (creature.breastRows.length == 0) return "unremarkable chest muscles ";
 			if (creature.breastRows.length == 2) {
-				//if(creature.totalBreasts() == 4) storage += "quartet of ";
+				//if (creature.totalBreasts() == 4) storage += "quartet of ";
 				storage += "two rows of ";
 			}
 			if (creature.breastRows.length == 3) {
@@ -2764,7 +2764,7 @@
 				else descript += "breasts";
 			}
 			if (temp14 == 3) {
-				//if(creature.breastRows[temp142].breastRating > 6) descript += "rack";
+				//if (creature.breastRows[temp142].breastRating > 6) descript += "rack";
 				descript += "breasts";
 			}
 			if (temp14 == 4) descript += "tits";

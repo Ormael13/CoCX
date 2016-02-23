@@ -103,7 +103,7 @@ package classes.Items
 		{
 			if (output) clearOutput();
 			if (canUse(player, true)) {
-				if(output) outputText("You equip your " + _name + ".  ");
+				if (output) outputText("You equip your " + _name + ".  ");
 				var oldArmor:Armor = player.armor;
 				oldArmor.unequip(player, returnOldItem, output);
 				player.setArmorHiddenField(this);

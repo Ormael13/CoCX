@@ -64,7 +64,7 @@ package classes.Scenes.Areas.Lake
 			else {
 				if (findPerk(PerkLib.Acid) >= 0) {
 					outputText("delivers a painful slap across your cheek.  You gasp when the light stinging becomes a searing burn that seems to get worse as time goes on! ", false);
-					if (player.findStatusAffect(StatusAffects.AcidSlap) < 0) player.createStatusAffect(StatusAffects.AcidSlap, 0, 0, 0, 0);
+					if (player.findStatusEffect(StatusEffects.AcidSlap) < 0) player.createStatusEffect(StatusEffects.AcidSlap, 0, 0, 0, 0);
 				}
 				else outputText(", painfully smacking her gooey limbs against your head.  You shake your " + player.hairDescript() + ", clearing your head of the dazing slap. ", false);
 			}
@@ -103,7 +103,7 @@ package classes.Scenes.Areas.Lake
 		private function gooEngulph():void
 		{
 			outputText("The goo-girl gleefully throws her entire body at you and, before you can get out of the way, she has engulfed you in her oozing form! Tendrils of " + skinTone + " slime slide up your nostrils and through your lips, filling your lungs with the girl's muck. You begin suffocating!", false);
-			if (player.findStatusAffect(StatusAffects.GooBind) < 0) player.createStatusAffect(StatusAffects.GooBind, 0, 0, 0, 0);
+			if (player.findStatusEffect(StatusEffects.GooBind) < 0) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
 			combatRoundOver();
 		}
 
@@ -153,11 +153,11 @@ package classes.Scenes.Areas.Lake
 			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + player.chestDesc() + ".") : "");
 			// this.long = false;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 9001, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 9001, 0, 0, 0);
 			this.createBreastRow(playerHasBigBoobs ? player.biggestTitSize() : 3);
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
-			this.createStatusAffect(StatusAffects.BonusACapacity,9001,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,9001,0,0,0);
 			this.tallness = rand(8) + 70;
 			this.hipRating = HIP_RATING_AMPLE;
 			this.buttRating = BUTT_RATING_LARGE;

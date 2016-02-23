@@ -12,7 +12,7 @@ package classes.Scenes.Quests.UrtaQuest
 
 		override protected function performCombatAction():void
 		{
-			if (findStatusAffect(StatusAffects.MilkyUrta) < 0 && rand(3) == 0) cowCubiMilkSprayAttack();
+			if (findStatusEffect(StatusEffects.MilkyUrta) < 0 && rand(3) == 0) cowCubiMilkSprayAttack();
 			else if (HP < 400) drinkMinoCum();
 			else if (player.HP < 100) eAttack();
 			else if (player.lust >= 90) succubusTease();
@@ -34,7 +34,7 @@ package classes.Scenes.Quests.UrtaQuest
 			else {
 				outputText("All you manage to do is cover your face; the rest of you, however, gets completely soaked in the demon's corrupted milk.  Looking down at yourself, you realize that you are panting, and the places where the milk splashed your fur begin to heat up.  Oh no! <b>You'd better finish off this succubus before you succumb to your lusts!</b>");
 				kGAMECLASS.dynStats("lus", 15);
-				createStatusAffect(StatusAffects.MilkyUrta, 3, 0, 0, 0);
+				createStatusEffect(StatusEffects.MilkyUrta, 3, 0, 0, 0);
 			}
 			combatRoundOver();
 		}
@@ -43,12 +43,12 @@ package classes.Scenes.Quests.UrtaQuest
 		{
 			outputText("Smiling wryly and licking her lips, the succubus-cow procures a bottle of her pet's cum with her probing tail.");
 //Success:
-			if (findStatusAffect(StatusAffects.DrankMinoCum) < 0 || findStatusAffect(StatusAffects.DrankMinoCum2) < 0) {
+			if (findStatusEffect(StatusEffects.DrankMinoCum) < 0 || findStatusEffect(StatusEffects.DrankMinoCum2) < 0) {
 				outputText("\n\nSmiling triumphantly, she takes the bottle and opens it with a pop, drinking the contents with glee.  When done, she throws the bottle away and smacks her lips.  \"<i>Nothing like a bottle of minotaur cum to get you back on your feet, right?</i>\"  She grins, her pussy dripping with more juices.");
 				addHP(400);
 				lust += 25;
-				if (findStatusAffect(StatusAffects.DrankMinoCum) < 0) createStatusAffect(StatusAffects.DrankMinoCum, 0, 0, 0, 0);
-				else createStatusAffect(StatusAffects.DrankMinoCum2, 0, 0, 0, 0);
+				if (findStatusEffect(StatusEffects.DrankMinoCum) < 0) createStatusEffect(StatusEffects.DrankMinoCum, 0, 0, 0, 0);
+				else createStatusEffect(StatusEffects.DrankMinoCum2, 0, 0, 0, 0);
 			}
 			//Failure:
 			else {
@@ -94,7 +94,7 @@ package classes.Scenes.Quests.UrtaQuest
 			this.long = "You are fighting a milky, cow-like succubus.  She stands about seven feet tall and is hugely voluptuous, with breasts three times the size of her head, tipped with a cluster of four obscenely teat-like nipples.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  A small cowbell is tied at the base of the arrow-head with a cute little ribbon.  Wide, cow-like horns, easily appropriate for a minotaur, rise from her head, and she flicks bovine ears about the sides of her head whilst sashaying from side to side on demonic, high-heeled feet.  Her skin is a vibrant purple with splotches of shiny black here and there, including one large spot covering her right eye.  She's using a leather whip as a weapon.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 300, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 300, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("G"));
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;

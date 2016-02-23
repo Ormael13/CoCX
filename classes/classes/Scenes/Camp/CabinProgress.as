@@ -240,9 +240,19 @@ package classes.Scenes.Camp
 			outputText(")</b>");
 		}
 		
-		public function checkMaterials():void {
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + maxWoodSupply + " \n");
+		public function checkMaterials(highlight:int = 0):void {
+			//Nails
+			if (highlight == 1) outputText("<b>");
 			outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/" + maxNailSupply + " \n");
+			if (highlight == 1) outputText("</b>");
+			//Wood
+			if (highlight == 2) outputText("<b>");
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + maxWoodSupply + " \n");
+			if (highlight == 2) outputText("</b>");
+			//Stones
+			if (highlight == 3) outputText("<b>");
+			outputText("Stones: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + maxStoneSupply + " \n");
+			if (highlight == 3) outputText("</b>");
 		}
 		
 		//STAGE 6 - Work on cabin part 2. Planning your cabin.
@@ -290,8 +300,8 @@ package classes.Scenes.Camp
 			outputText("Today is the day you'll actually work on building your own cabin! You clear a space and set up some rocks. You take the book from your toolbox and open it. You turn pages until you come across an instruction on how to construct frame. \n\n");
 			//if (kGAMECLASS.amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) outputText("\"<i>PLACEHOLDER</i>\" Amily asks. \n\n");
 			outputText("You start to construct a wooden frame according to the instructions. Using your hammer and nails, you put the wood frame together and put it up. You then add temporary supports to ensure it doesn't fall down. You make two more frames of the same shape. Lastly, you construct one more frame, this time the frame is designed to have door and window.\n\n");
-			if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0) outputText("\"<i>My, my. What are you building?</i>\" Rathazul asks. \n\n");
-			if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("\"<i>You're building something?</i>\" Jojo asks. \n\n");
+			if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) outputText("\"<i>My, my. What are you building?</i>\" Rathazul asks. \n\n");
+			if (player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) outputText("\"<i>You're building something?</i>\" Jojo asks. \n\n");
 			if (camp.marbleFollower()) outputText("\"<i>Sweetie, you're building a cabin? That's nice,</i>\" Marble says. \n\n");
 			if (camp.companionsCount() > 0) outputText("You announce that yes, you're building a cabin.\n\n");
 			outputText("You nail the frames together and finally you secure the frame to the foundation.\n\n");

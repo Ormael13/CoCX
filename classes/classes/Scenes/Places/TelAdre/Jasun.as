@@ -25,13 +25,13 @@
 public function changingRoom():void {
 	//Charge for gym if no lifetime member!
 	clearOutput();
-	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
+	if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("You toss ten gems to centaur and head towards the back.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();
 	}
 	//AT CHANGING ROOM (1ST TIME)
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] == 0) {
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] == 0) {
 		outputText("You walk into the largest of the changing rooms and take a look about.  The room's walls appear to be some kind of adobe material and are rough to the touch, but flush and with few cracks.  You'd hazard that this building must be pretty new.  Looking to the right of the entrance, you find a series of rudimentary sinks and shiny metal plates on the walls above them which function as mirrors.  In front of you are six changing stalls, and immediately to your left are a few bathroom stalls.  You find it pretty practical that all of these things are together in one room, but are rather curious as to why there are so few of these rooms in the first place.\n\n", false);
 	}
 	//AT CHANGING ROOM (2ND+ TIME)
@@ -48,17 +48,17 @@ public function changingRoom():void {
 private function meetJasun():void {
 	clearOutput();
 	spriteSelect(33);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] == 0) {
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] == 0) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179]++;
 		outputText("As your eyes survey the room, you see a very thick figure step out from one of the changing stalls.  He is at least six feet tall from your guesstimate and has a massive barreled chest, the kind that could no doubt bench press anything the creature's own weight.  His shoulder span must be at least ", false);
-		if(silly()) outputText("six", false);
+		if (silly()) outputText("six", false);
 		else outputText("three", false);
 		outputText(" feet given the thickness of his muscles and how they flex passively with every tiny movement of his toned and highly desirable body.  Now that you've used the word creature to describe him, though, you find yourself drawn to the oddities that you find on this man's figure.  He has gray skin that has a sheen over it much like you'd imagine an underwater creature would have to facilitate aquatic travel.  His short and coarse silver hair is pulled back into a tiny ponytail, presumably to keep it out of the way.  A finned tail with a hook on the top fin extends from the back of his pelvis and swishes around, knocking back and forth the towel that covers his butt.  From behind, you find the swish and teasing of his chiseled ass hypnotizing... intoxicating, even...\n\n", false);
 
 		outputText("Before long, you blink a couple of times and break through your prior distraction.  You can see in the mirror before the man that he has been watching your revelry of his form.  A grin plays across the man's features and within it you find several rows of razor-sharp teeth, forcing you to gulp instinctively as you think of what sort of damage those could do to your tender flesh.  ", false);
 	
 		//IF MALE
-		if(player.gender <= 1) {
+		if (player.gender <= 1) {
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning back to the mirror.\n\n", false);
 			outputText("You doubt he'd have the nerve to murder someone here, but you feel like you've wasted your time.", false);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] = 0;
@@ -74,7 +74,7 @@ private function meetJasun():void {
 			outputText("\"<i>Excuse me, my lady, but you're staring again.</i>\"  You see that same old smirk play over his features again, clearly proud of himself being so desirable despite his attempts to play it off smoothly.\n\n", false);
 			
 			//IF FAIL FITNESS CHECK
-			if(player.tone < 75) {
+			if (player.tone < 75) {
 				outputText("\"<i>Hrm, I was going to suggest something, but quite frankly, you'd just hold me back. Maybe we'll meet each other again at some point when you're better fleshed out.</i>\" He grins and thrusts himself past you to leave the changing room. You feel flushed from contact with his skin and otherwise long to be around him more - to think, he hadn't even introduced himself.  You leave the changing room and try to get your wits back about you for whatever happens next.\n\n", false);
 				//(+15 Lust, back to gym entrance)
 				dynStats("lus", (10+player.lib/10));
@@ -86,7 +86,7 @@ private function meetJasun():void {
 			outputText("\"<i>You know, looking over your form, maybe this could work out for the both of us...</i>\"  As he sort of trails off, your eyebrows perk up, clearly intrigued by whatever he could possibly suggest to you.  \"<i>I've been looking for a challenge in the water... I haven't had a real challenge in a very long time.</i>\"  You aren't sure what he means exactly, especially as he's been very ambiguous with you so far, but you have a pretty good feeling what he needs of you.\n\n", false);
 	
 			//IF DONT HAVE THE BIKINI ON
-			if(player.armorName != "slutty swimwear") {
+			if (player.armorName != "slutty swimwear") {
 				outputText("\"<i>I was going to ask you to swim with me for a bit to get my blood really pumping, but you don't look like you're prepped for swimming at all!  Come back with the right gear on and maybe we can talk more about this.</i>\"  He walks with a very justified pose out of the room, almost exaggeratedly, and brushes by you just enough to make you blush from contact with his rough, and yet very arousing skin.  The right gear? Surely he's talking about a swimsuit?  Where can you get one of those... maybe the tailor in town has one, but if not there, then maybe you'll just have to find one on your journey.\n\n", false);
 				//(+15 Lust, back to gym entrance)
 				dynStats("lus", (10+player.lib/10));
@@ -102,13 +102,13 @@ private function meetJasun():void {
 		}
 	}
 	//Met Jasun but not boned!
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180] == 0) {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] == 0) {
+	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180] == 0) {
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] == 0) {
 			outputText("While you look around the changing room, one of the gym's other patron asks you if you're looking for Jasun.  Seeing your confusion, they describe the hunky shark guy you met before.  You nod and smile, happy to have learned his name.\n\n", false);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181]++;
 		}
 		//If you're a dude.
-		if(player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
+		if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it.  He glances your way and smirks.\n\n", false);
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning to walk away.\n\n", false);
 			outputText("You doubt he'd have the nerve to murder someone here, but you feel like you've wasted your time.", false);
@@ -116,12 +116,12 @@ private function meetJasun():void {
 			return;
 		}
 		//IF YOU FAIL TO MEET ANY OF HIS CRITERIA NOW
-		if(player.tone < 75 || player.armorName != "slutty swimwear") {
+		if (player.tone < 75 || player.armorName != "slutty swimwear") {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it. As he turns to greet you, though, you notice that his smirk suddenly turns around to a sense of shock. He's noticed that you're not quite the same as you were before, and you know it. He pauses a moment before turning back toward the mirror and addressing you without eye contact.\n\n", false);
 			
 			outputText("\"<i>" + player.short + ", you know, I still don't think you're quite ready to swim with me. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe when you're ", false);
-			if(player.tone < 75) outputText("fit enough", false);
-			else if(player.armorName != "slutty swimwear") outputText("properly attired", false);
+			if (player.tone < 75) outputText("fit enough", false);
+			else if (player.armorName != "slutty swimwear") outputText("properly attired", false);
 			else outputText("a little more compatible with me", false);
 			outputText(", we can go swim.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n", false);
 			//(-15 Lust, back to gym entrance)
@@ -136,7 +136,7 @@ private function meetJasun():void {
 	//Repeat
 	else {
 		//If you're a dude.
-		if(player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
+		if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it.  He glances your way and smirks.\n\n", false);
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning to walk away.\n\n", false);
 			outputText("You doubt he'd have the nerve to murder someone here, but it's clear that so long as you lack a vagina Jasun will have no interest in you.  What a waste.", false);
@@ -144,7 +144,7 @@ private function meetJasun():void {
 			return;
 		}
 		//IF YOU FAIL TO MEET ANY OF HIS CRITERIA NOW
-		if(player.tone < 75 || player.armorName != "slutty swimwear") {
+		if (player.tone < 75 || player.armorName != "slutty swimwear") {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it. As he turns to greet you, though, you notice that his smirk suddenly turns around to a sense of shock. He's noticed that you're not quite the same as you were before, and you know it. He pauses a moment before turning back toward the mirror and addressing you without eye contact.\n\n", false);
 			
 			outputText("\"<i>" + player.short + ", you know, I see that a lot has changed with you. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe things will be like they were before in time.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n", false);
@@ -167,7 +167,7 @@ private function meetJasun2():void {
 	clearOutput();
 	spriteSelect(33);
 	outputText("You and he walk together for what can't be a very long time. He winds around the back side of the gym, avoiding the weightlifting room and going past the track altogether. You didn't even know that there were areas of the gym beyond what you had previously seen. He easily pushes aside a very thick door with one arm ", false);
-	if(player.str < 50) outputText("that you're pretty sure you couldn't have moved on your own at all ", false);
+	if (player.str < 50) outputText("that you're pretty sure you couldn't have moved on your own at all ", false);
 	outputText("and then suddenly stops. The light in the room blinds you for a moment, but then your eyes adjust and what you see makes you gasp. There's an entire swimming pool in here, and it's absolutely gargantuan! You pull away from the shark-man and walk up to the water, running your hand through it and looking about like a kid who just walked into a toy store. He walks up behind you slowly and sits down on the ledge into the pool beside you.\n\n", false);
 
 	outputText("\"<i>My name is Jasun, " + player.short + ". My people love the water, but most of them are ferocious and have lost their way. Seeing as I could no longer stay with them without risking my own life constantly, I came to Tel'Adre and set about working with the gym here to set up this wondrous pool. I spend most of my time here. Not many people get to use it, but I think you are ready.</i>\" He smiles at you without baring his teeth and you're flattered, knowing how difficult that must be for something with his jaw structure. \"<i>Come, let's swim.</i>\" He puts out his hand, palm up, literally asking for your hand for him to take you into the water.\n\n", false);
@@ -205,7 +205,7 @@ private function jasunSecks():void {
 	spriteSelect(33);
 	//Increment 'times had sex'
 	player.slimeFeed();
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180] == 0) {
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180] == 0) {
 		outputText("He grips your back firmly in one of his thick, clawed hands and kisses your neck thoroughly. As he does so, he uses his other hand to play with your nipples, working them up to standing on end with little to no work necessary. You gasp as he sucks on your neck, biting down with some of his front teeth slightly in order to tease you further. One of your hands reaches back behind his head, grabs his hair, and tugs. He chuckles in response, finding your aggression refreshing given how soft you've been with each other thus far. He goes back to nibbling at your neck and playing with your nipples. In response to this constant arousal, you use your other hand to start playing with his huge cock, toying with the rim and otherwise stroking his rod under the water. You notice immediately after touching it that it's slick to the touch, as if the males of his species do the lubrication. Swooning from his constant teasing torture, you stroke him up and down, fondling the large sack at the base of his dick with your fingers. He twitches in response to this, and you smile in finding some way to get back at him for his handiwork. He keeps going, but now his hand falls from your nipple down to your womanhood. As his finger trails down the length of your body, he uses one of his claws to cut an ever so thin line down your flesh, mixing pain with pleasure as you yearn for him to reach inside of you.\n\n", false);
 	
 		outputText("He reaches your silky folds, pushes aside your skimpy bikini, and reaches in with first one, and then two fingers. His claws poke you thoroughly, but manage to only add in a constant measure of pain to all of the pleasure of the experience; you don't mind at all. The more work he does on you, the more work you do on him, now gripping his shaft with both of your hands and working it ferociously. You fondle the tip and the base at once, and in response to the pain he gives you, occasionally grip hard enough to make him wince. It seems that he enjoys this sort of aggression, though, and presses into you stronger each time you do it. After a bit more work on your part, pre-cum starts bubbling out of his penis and filling the water around the two of you. It's colorless, but nearly causes you to orgasm when it hits your slick cunt, making it practically beg to be filled. You thrust your hips onto his hand, Jasun now ramming his whole hand in and out of you rhythmically, opening you up for him to enter you himself. You almost lose consciousness from the mix of his pre in the water turning you on and the pain and pleasure of your coming orgasm, but somehow manage to keep working him, tightening your grip around his head and shaft, making him grunt more frequently in response. Just then, you throw your head back in ecstasy and cum from his fisting you, and his cock erupts straight into the water at practically the same time, splashing your breasts with his juices underwater. The water seems to be warming up significantly, raising noticeably in temperature from cum mixing in with it. Sighing in release, you find yourself turned on yet again by his cum flushing your skin, and are not quite ready for this to be over. Bringing your head back down to meet his eyes with yours, he knows what you want, and you nod meekly, practically begging for him to join with you.\n\n", false);

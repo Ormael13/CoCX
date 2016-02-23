@@ -7,12 +7,12 @@
 	{
 		protected function hellhoundFire():void {
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0) {
+			if(findStatusEffect(StatusEffects.Blind) >= 0) {
 				outputText(capitalA + short + " completely misses you with a wave of dark fire! Thank the gods it's blind!", false);
 				combatRoundOver();
 				return;
 			}
-			/*if(player.hasStatusAffect(StatusAffects.Web_dash_Silence) >= 0) {
+			/*if(player.hasStatusEffect(StatusEffects.Web_dash_Silence) >= 0) {
 				outputText("You reach inside yourself to breathe flames, but as you ready to release a torrent of fire, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n", false);
 				changeFatigue(10);
 				takeDamage(10+rand(20));
@@ -47,7 +47,7 @@
 			doNext(game.playerMenu);
 		}
 		protected function hellhoundScent():void {
-			if(player.findStatusAffect(StatusAffects.NoFlee) >= 0) {
+			if(player.findStatusEffect(StatusEffects.NoFlee) >= 0) {
 				if(spe == 100) {
 					hellhoundFire();
 					return;
@@ -60,32 +60,9 @@
 			else {
 				spe += 40;
 				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a fiery grin - he seems to have acquired your scent!  It'll be hard to get away now...", false);
-				player.createStatusAffect(StatusAffects.NoFlee,0,0,0,0);
+				player.createStatusEffect(StatusEffects.NoFlee,0,0,0,0);
 			}
 			combatRoundOver();
-			/*if(spe >= 80) {
-				if(spe == 100) {
-					hellhoundFire();
-					return;
-				}
-				else {
-					outputText("The hellhound sniffs your scent again, seemingly gaining more and more energy as he circles faster around you.", false);
-					spe = 100;	
-				}
-			}
-			else {
-				spe += 40;
-				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a firey grin - He seems to have aquired you scent!  Running away will now be much more difficult...", false);
-			}
-			if(player.HP <= 0) {
-				doNext(endHpLoss);
-				return;
-			}
-			if(player.lust > player.maxLust()) {
-				doNext(endLustLoss);
-				return;
-			}
-			doNext(1);*/
 		}
 		
 

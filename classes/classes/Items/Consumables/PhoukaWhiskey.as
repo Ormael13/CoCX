@@ -6,7 +6,7 @@ package classes.Items.Consumables
 	import classes.GlobalFlags.kFLAGS;
     import classes.Player;
 	import classes.PregnancyStore;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
     import classes.internals.Utils;
 	import classes.Items.Consumable;
 
@@ -96,21 +96,21 @@ package classes.Items.Consumables
 			var sensChange:int = (player.sens < 10 ? player.sens : 10);
 			var speedChange:int = (player.spe < 20 ? player.spe : 20);
 			var intChange:int = (player.inte < 20 ? player.inte : 20);
-			if (player.findStatusAffect(StatusAffects.PhoukaWhiskeyAffect) >= 0) {
-				var drinksSoFar:int = player.statusAffectv2(StatusAffects.PhoukaWhiskeyAffect);
+			if (player.findStatusEffect(StatusEffects.PhoukaWhiskeyAffect) >= 0) {
+				var drinksSoFar:int = player.statusEffectv2(StatusEffects.PhoukaWhiskeyAffect);
 				if (drinksSoFar < 4)
-					player.addStatusValue(StatusAffects.PhoukaWhiskeyAffect, 1, 8 - (2 * drinksSoFar));
+					player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 1, 8 - (2 * drinksSoFar));
 				else
-					player.addStatusValue(StatusAffects.PhoukaWhiskeyAffect, 1, 1); //Always get at least one more hour of drunkenness
-				player.addStatusValue(StatusAffects.PhoukaWhiskeyAffect, 2, 1);
-				player.addStatusValue(StatusAffects.PhoukaWhiskeyAffect, 3, 256 * libidoChange + sensChange);
-				player.addStatusValue(StatusAffects.PhoukaWhiskeyAffect, 4, 256 * speedChange + intChange);
+					player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 1, 1); //Always get at least one more hour of drunkenness
+				player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 2, 1);
+				player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 3, 256 * libidoChange + sensChange);
+				player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 4, 256 * speedChange + intChange);
 				outputText("\n\nOh, it tastes so good.  This stuff just slides down your throat.");
 				game.dynStats("lib", libidoChange, "sens", -sensChange, "spe", -speedChange, "int", -intChange);
 			}
 			else { //First time
-				player.createStatusAffect(StatusAffects.PhoukaWhiskeyAffect, 8, 1, 256 * libidoChange + sensChange, 256 * speedChange + intChange);
-					//The four stats we’re affecting get paired together to save space. This way we don’t need a second StatusAffect to store more info.
+				player.createStatusEffect(StatusEffects.PhoukaWhiskeyAffect, 8, 1, 256 * libidoChange + sensChange, 256 * speedChange + intChange);
+					//The four stats we’re affecting get paired together to save space. This way we don’t need a second StatusEffect to store more info.
 				game.dynStats("lib", libidoChange, "sens", -sensChange, "spe", -speedChange, "int", -intChange);
 			}
 			game.statScreenRefresh();
@@ -118,16 +118,16 @@ package classes.Items.Consumables
 		
 		public function phoukaWhiskeyExpires(player:Player):void
 		{
-			var numDrunk:int = player.statusAffectv2(StatusAffects.PhoukaWhiskeyAffect);
-			var libidoSensCombined:int = player.statusAffectv3(StatusAffects.PhoukaWhiskeyAffect);
-			var intSpeedCombined:int = player.statusAffectv4(StatusAffects.PhoukaWhiskeyAffect);
+			var numDrunk:int = player.statusEffectv2(StatusEffects.PhoukaWhiskeyAffect);
+			var libidoSensCombined:int = player.statusEffectv3(StatusEffects.PhoukaWhiskeyAffect);
+			var intSpeedCombined:int = player.statusEffectv4(StatusEffects.PhoukaWhiskeyAffect);
 			
 			var sensChange:int = libidoSensCombined & 255;
 			var libidoChange:int = (libidoSensCombined - sensChange) / 256;
 			var intChange:int = intSpeedCombined & 255;
 			var speedChange:int = (intSpeedCombined - intChange) / 256;
 			game.dynStats("lib", -libidoChange , "sens", sensChange, "spe", speedChange, "int", intChange); //Get back all the stats you lost
-			player.removeStatusAffect(StatusAffects.PhoukaWhiskeyAffect);
+			player.removeStatusEffect(StatusEffects.PhoukaWhiskeyAffect);
 			if (numDrunk > 3)
 				outputText("\n<b>The dizzy sensation dies away and is replaced by a throbbing pain that starts in your skull and then seems to run all through your body, seizing up your joints and making your stomach turn.  The world feels like it’s off kilter and you aren’t in any shape to face it.  You suppose you could down another whiskey, but right now that doesn’t seem like such a good idea.</b>\n");
 			else if (numDrunk > 1)

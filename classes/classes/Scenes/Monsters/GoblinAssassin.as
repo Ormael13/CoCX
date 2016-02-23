@@ -9,11 +9,11 @@
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(5);
 			var color:String = "";
-			if(temp2 == 0) color = "red";
-			if(temp2 == 1) color = "green";
-			if(temp2 == 2) color = "blue";
-			if(temp2 == 3) color = "white";
-			if(temp2 == 4) color = "black";
+			if (temp2 == 0) color = "red";
+			if (temp2 == 1) color = "green";
+			if (temp2 == 2) color = "blue";
+			if (temp2 == 3) color = "white";
+			if (temp2 == 4) color = "black";
 			//Throw offensive potions at the player
 			if (color != "blue") {
 				outputText(capitalA + short + " uncorks a glass bottle full of " + color + " fluid and swings her arm, flinging a wave of fluid at you.", false);
@@ -21,34 +21,34 @@
 			//Drink blue pots
 			else {
 				outputText(capitalA + short + " pulls out a blue vial and uncaps it, swiftly downing its contents.", false);
-				if(HPRatio() < 1) {
+				if (HPRatio() < 1) {
 					outputText("  She looks to have recovered from some of her wounds!\n", false);
 					addHP(eMaxHP() /4);
 				}
 				else outputText("  There doesn't seem to be any effect.\n", false);
 			}
 			//Dodge chance!
-			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if ((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n", false);		
 			}
 			//Get hit!
 			//Temporary heat
-			if(color == "red") {
+			if (color == "red") {
 				outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-				if(player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat,0,0,0,0);
+				if (player.findStatusEffect(StatusEffects.TemporaryHeat) < 0) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
 			}
 			//Green poison
-			if(color == "green") {
+			if (color == "green") {
 				outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
-				if(player.findStatusAffect(StatusAffects.Poison) < 0) player.createStatusAffect(StatusAffects.Poison,0,0,0,0);
+				if (player.findStatusEffect(StatusEffects.Poison) < 0) player.createStatusEffect(StatusEffects.Poison,0,0,0,0);
 			}
 			//sticky flee prevention
-			if(color == "white") {
+			if (color == "white") {
 				outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n", false);
-				if(player.findStatusAffect(StatusAffects.NoFlee) < 0) player.createStatusAffect(StatusAffects.NoFlee,0,0,0,0);
+				if (player.findStatusEffect(StatusEffects.NoFlee) < 0) player.createStatusEffect(StatusEffects.NoFlee,0,0,0,0);
 			}
 			//Increase fatigue
-			if(color == "black") {
+			if (color == "black") {
 				outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
 				game.fatigue(10 + rand(25));
 			}
@@ -123,11 +123,11 @@
 			this.long = "Her appearance is that of a regular goblin, curvy and pale green, perhaps slightly taller than the norm. Her wavy, untamed hair is a deep shade of blue, covering her pierced ears and reaching just above her shoulders. Her soft curves are accentuated by her choice of wear, a single belt lined with assorted needles strapped across her full chest and a pair of fishnet stockings reaching up to her thick thighs. She bounces on the spot, preparing to dodge anything you might have in store, though your eyes seem to wander towards her bare slit and jiggling ass. Despite her obvious knowledge in combat, she’s a goblin all the same – a hard cock can go a long way.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 90, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 90, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
 			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,50,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 35 + rand(4);
 			this.hipRating = HIP_RATING_AMPLE+2;
 			this.buttRating = BUTT_RATING_LARGE;

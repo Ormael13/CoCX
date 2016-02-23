@@ -12,7 +12,7 @@
 //Intro
 public function findTheFrogGirl():void {
 	clearOutput();
-	if(flags[kFLAGS.TIMES_ENCOUNTERED_FROG] == 0) {
+	if (flags[kFLAGS.TIMES_ENCOUNTERED_FROG] == 0) {
 		outputText("You begin your trudge through the bog, slogging through the soupy muck.  Insects buzz by every second, spinning in hectic spirals around your head.");
 		outputText("\n\nYou soon become aware of a new sound behind the buzzing - a musical chirping.  Step by step, you move toward it, pushing aside hanging curtains of gray moss until the dark trees of the swamp give way to the wide roots of mangroves.  The sporadic notes trickle into your ears, and you feel unusually relaxed as you move toward their source.");
 		outputText("\n\nThe wide roots of the trees create separate, tiny ponds, where it looks like condensed water has collected into pools of pristine, blue water.  The chirping echoes from the high walls of mangrove roots, coming from a slim figure seated in the largest pool.  Vaguely feminine, it sits cross-legged and waist-deep in the pool, arms open wide and welcoming.  Light glints off the smooth skin of the lithe form as her lips part, issuing out another stream of alluring, musical notes.");
@@ -41,8 +41,8 @@ private function followDatFrog():void {
 	outputText("You splash your way up the terrace of pools, shedding your [armor] as you do so, leaving your gear draped over the mangrove ridges.  She holds her arms out to you as you step naked into her pool.  She rises to meet you, and you notice that the water concealed a swollen, pregnant belly.");
 	outputText("\n\nHer skin is slimy to the touch, and as she pulls you in close, she leaves her ichor on your arms and [chest].  It tingles where it touches you, and the sunlight seems to grow a bit brighter around you.  Her song continues, and you swear that you can see the music floating in the air, every different note a different neon light drifting through the air.  Half focused, your eyes dart back and forth, tracking the tiny motes of light.");
 	outputText("\n\nHer round belly rubs against ");
-	if(player.hasCock()) outputText("[eachCock]");
-	else if(player.hasVagina()) outputText("your [vagina]");
+	if (player.hasCock()) outputText("[eachCock]");
+	else if (player.hasVagina()) outputText("your [vagina]");
 	else outputText("your bare but sensitive groin");
 	outputText(" as she raises her fingertips to your lips.  Entranced by her song, you open your mouth, taking her in.  The thin layer of slime on it tastes citrusy and sweet, and another heady rush clouds your conscious mind.  The colors of her song drift more intensely through the air, and you smile bemusedly as she pushes you back, letting you rest against the root wall, floating comfortably in the water.");
 	outputText("\n\nYour arms drape over the lip of the pool as she smiles, stroking your cheek, sending another rush of colors and lights through your head.  Drugged and relaxed, you let your [legs] drift lazily in the pool as the frog girl smiles, biting her lower lip mischievously.");
@@ -113,7 +113,7 @@ private function questDatFrogGirl():void {
 	outputText("\n\nYou wonder what it would be like to carry the massive load of eggs. Do you want to offer to carry the frog’s eggs or continue on your way?");
 	menu();
 	addButton(4,"Leave",continueOnYourWay);
-	if(player.hasVagina()) addButton(0,"Vaginally",superBonusFrogEggsInYerCooch);
+	if (player.hasVagina()) addButton(0,"Vaginally",superBonusFrogEggsInYerCooch);
 	addButton(1,"Carry",carryBeeGirlsEggsVoluntarilyYouButtSlut);
 }
 
@@ -132,8 +132,8 @@ private function carryBeeGirlsEggsVoluntarilyYouButtSlut():void {
 	outputText("\n\n\"<i>Omigosh, really?</i>\" she says, lunging forward with a splash.  She throws her arms around your shoulders.  \"<i>I promise to make it absolutely amazing for you.</i>\"");
 	outputText("\n\nThe slime on her arms tingles against you, and as she undresses you, peeling away your [armor], she leaves slimy, tingly prints on your arms, stomach, and [chest].  As you watch her, her movements seem to leave trails of light, and the sunlight seems to grow a bit brighter around you.  She hums to herself, and you swear that you can see the music floating in the air, every different note a different neon light drifting through the air.  Half focused, your eyes dart back and forth, tracking the tiny motes of light.");
 	outputText("\n\nHer round belly rubs against ");
-	if(player.hasCock()) outputText("[eachCock]");
-	else if(player.hasVagina()) outputText("your [vagina]");
+	if (player.hasCock()) outputText("[eachCock]");
+	else if (player.hasVagina()) outputText("your [vagina]");
 	else outputText("your bare but sensitive groin");
 	outputText(" as she raises her fingertips to your lips.  Entranced by her song, you open your mouth, taking her in.  The thin layer of slime on it tastes citrusy and sweet, and another heady rush clouds your conscious mind.  The colors of her song drift more intensely through the air, and you smile bemusedly as she pushes you back, letting you rest against the root wall, floating comfortably in the water.");
 	outputText("\n\nYour arms drape over the lip of the pool as she smiles, stroking your cheek, sending another rush of colors and lights through your head.  Drugged and relaxed, you let your [legs] drift lazily in the pool as the frog girl smiles, biting her lower lip mischievously.");
@@ -203,7 +203,7 @@ public function birthFrogEggsAnal():void {
 	//[Anal moistness +2, Hips +1]
 	player.hipRating++;
 	player.ass.analWetness += 1;
-	if(player.ass.analWetness > 5) player.ass.analWetness = 5;
+	if (player.ass.analWetness > 5) player.ass.analWetness = 5;
 	player.orgasm();
 	dynStats("sen", 1);
 }
@@ -218,7 +218,7 @@ private function superBonusFrogEggsInYerCooch():void {
 	outputText("\n\nYou hear the frog girl coo as she touches her pussy against yours, smearing her slickness against your mound.  Her touch sends shivery, silvery sensations up your spine, and you feel your own wetness oozing out against her.");
 	outputText("\n\nThicker slime adheres her pussy to yours, making every grind and shove a shared sensation. As she squeezes down on her belly, pressure builds against your opening, and her pussy lips spread against yours, parting you open to take the first of her eggs.  As the jelly-like mass over her egg begins to squeeze into you, the world goes purple, then blue, then the water around you seems to rise slowly up into the air.");
 	outputText("\n\nIf you could think clearly at this point, you would attribute this to the mind-bending frog slime, but all you can think about is the sensation of your pussy spreading wider and wider, taking in another goo-covered egg.  The frog girl’s thighs clamp around you, one against your belly, the other");
-	if(player.tailType > TAIL_TYPE_NONE) outputText(" hooked over your tail,");
+	if (player.tailType > TAIL_TYPE_NONE) outputText(" hooked over your tail,");
 	else outputText(" clasped against your [ass],");
 	outputText(" smearing more and more of her slime against your body.");
 	player.cuntChange(25,true,true,false);
@@ -235,7 +235,7 @@ private function superBonusFrogEggsInYerCooch():void {
 
 //Vaginal Egg birth
 public function layFrogEggs():void {
-	if(player.vaginas.length == 0) {
+	if (player.vaginas.length == 0) {
 		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold: a vagina.  ", false);
 		player.createVagina();
 		player.genderCheck();
@@ -268,11 +268,11 @@ public function layFrogEggs():void {
 	outputText("\n\nWith a wince, you head back to camp, hoping that the frog slime hasn’t affected you permanently.");
 	
 	//[Vaginal gape +1/Vaginal Moistness +1/Hips +1, Sensitivity +1]
-	if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) {
+	if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) {
 		player.vaginas[0].vaginalWetness++;
 		outputText("  It rapidly becomes clear that it has.  <b>Your pussy is wetter than ever.</b>");
 	}
-	if(player.hipRating < 25) {
+	if (player.hipRating < 25) {
 		player.hipRating++;
 		outputText("  There's an extra thickness to your [hips] as well.");
 	}

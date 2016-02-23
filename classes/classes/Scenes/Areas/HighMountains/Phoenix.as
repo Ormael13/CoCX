@@ -30,9 +30,9 @@ package classes.Scenes.Areas.HighMountains
 		}
 		
 		protected function phoenixFireBreath():void {
-			if (findStatusAffect(StatusAffects.Uber) < 0) {
+			if (findStatusEffect(StatusEffects.Uber) < 0) {
 				outputText("Suddenly the phoenix disengages from you and loops through the air, giving out a loud cry before she starts to barrel down at you. She’s clearly building up for something, so you’d better wait until she makes her move if you want a chance to dodge!");
-				createStatusAffect(StatusAffects.Uber, 0, 0, 0, 0);
+				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
 			}
 			else {
 				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
@@ -45,7 +45,7 @@ package classes.Scenes.Areas.HighMountains
 					damage = player.reduceDamage(damage);
 					player.takeDamage(damage, true);
 				}
-				removeStatusAffect(StatusAffects.Uber);
+				removeStatusEffect(StatusEffects.Uber);
 			}
 			combatRoundOver();
 		}
@@ -71,7 +71,7 @@ package classes.Scenes.Areas.HighMountains
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(4);
-			if (findStatusAffect(StatusAffects.Uber) >= 0) {
+			if (findStatusEffect(StatusEffects.Uber) >= 0) {
 				phoenixFireBreath();
 				return;
 			}
@@ -117,11 +117,11 @@ package classes.Scenes.Areas.HighMountains
 			// this.plural = false;
 			this.createCock(8, 1.2, CockTypesEnum.LIZARD);
 			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_MOIST;
-			this.createStatusAffect(StatusAffects.BonusACapacity,20,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6 * 12 + 6;
 			this.tailType = TAIL_TYPE_LIZARD;
 			this.hipRating = HIP_RATING_CURVY;

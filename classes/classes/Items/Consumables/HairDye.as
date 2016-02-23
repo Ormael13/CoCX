@@ -9,11 +9,13 @@ package classes.Items.Consumables
 	{
 		private var _color:String;
 		
-		public function HairDye(id:String, color:String, value:int = ConsumableLib.DEFAULT_VALUE) 
+		public function HairDye(id:String, color:String) 
 		{
 			_color = color.toLowerCase();
 			var shortName:String = color + " Dye";
 			var longName:String = "a vial of " + _color + " hair dye";
+			var value:int = ConsumableLib.DEFAULT_VALUE;
+			if (color == "rainbow") value = 100;
 			var description:String = "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.";
 			super(id, shortName, longName, value, description);
 		}

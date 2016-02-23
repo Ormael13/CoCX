@@ -28,7 +28,7 @@ package classes.Scenes.Areas.GlacialRift
 				combatRoundOver();
 				return;
 			}
-			else if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) > 0) {
+			else if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) > 0) {
 					outputText("and step away as you watch the valkyrie's blind attacks strike only air. ");
 					combatRoundOver();
 					return;
@@ -71,7 +71,7 @@ package classes.Scenes.Areas.GlacialRift
 				combatRoundOver();
 				return;
 			}
-			else if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) > 0) {
+			else if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) > 0) {
 					outputText("and step away as you watch the valkyrie's blind bash strikes only air. ");
 					combatRoundOver();
 					return;
@@ -82,7 +82,7 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) 
 				{
 					outputText("off balance. ", false)
-					player.createStatusAffect(StatusAffects.Stunned, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				}
 				else outputText("backwards. ", false)
 				var damage:int = ((str + 50) + rand(50))

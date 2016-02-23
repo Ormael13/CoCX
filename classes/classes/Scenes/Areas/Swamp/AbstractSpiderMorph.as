@@ -15,16 +15,16 @@ package classes.Scenes.Areas.Swamp
 
 		override protected function performCombatAction():void
 		{
-			if(player.spe >= 2 && rand(2) == 0) {
+			if (player.spe >= 2 && rand(2) == 0) {
 				spiderMorphWebAttack();
 			}
-			else if(player.findStatusAffect(StatusAffects.WebSilence) < 0 && rand(3) == 0) {
+			else if (player.findStatusEffect(StatusEffects.WebSilence) < 0 && rand(3) == 0) {
 				spiderSilence();
 			}
-			else if(player.findStatusAffect(StatusAffects.Disarmed) < 0 && player.weaponName != "fists" && rand(3) == 0) {
+			else if (player.findStatusEffect(StatusEffects.Disarmed) < 0 && player.weaponName != "fists" && rand(3) == 0) {
 				spiderDisarm();
 			}
-			else if(rand(2) == 0 || player.spe < 2) getBitten();
+			else if (rand(2) == 0 || player.spe < 2) getBitten();
 			else eAttack();
 		}
 
@@ -35,7 +35,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			outputText("Turning to the side, " + a + short + " raises " + mf("his", "her") + " abdomen and unleashes a spray of webbing in your direction!  ", false);
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " misses completely due to their blindness.", false);
 			}
 			//Determine if dodged!
@@ -56,11 +56,11 @@ package classes.Scenes.Areas.Swamp
 			}
 			//Got hit
 			else {
-				if (player.findStatusAffect(StatusAffects.Web) < 0) {
+				if (player.findStatusEffect(StatusEffects.Web) < 0) {
 					outputText("The silky strands hit you, webbing around you and making it hard to move with any degree of speed.", false);
 					if (player.canFly()) outputText("  Your wings struggle uselessly in the bindings, no longer able to flap fast enough to aid you.", false);
 					outputText("\n", false);
-					player.createStatusAffect(StatusAffects.Web, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Web, 0, 0, 0, 0);
 				}
 				else {
 					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n", false);
@@ -75,7 +75,7 @@ package classes.Scenes.Areas.Swamp
 				showStatDown('spe');
 				// speUp.visible = false;
 				// speDown.visible = true;
-				player.addStatusValue(StatusAffects.Web, 1, amount);
+				player.addStatusValue(StatusEffects.Web, 1, amount);
 
 			}
 			combatRoundOver();
@@ -85,7 +85,7 @@ package classes.Scenes.Areas.Swamp
 		public function getBitten():void
 		{
 			//-Languid Bite - Inflicted on PC's who have been reduced to 1 speed by webbing, raises arousal by 60.
-			if (player.spe < 2 && player.findStatusAffect(StatusAffects.Web) >= 0) {
+			if (player.spe < 2 && player.findStatusEffect(StatusEffects.Web) >= 0) {
 				outputText("The arachnid aggressor slowly saunters forward while you struggle under the heaps of webbing, gently placing " + mf("his", "her") + " arms around your back in a tender hug.  " + mf("His", "Her") + " fangs slide into your neck with agonizing slowness, immediately setting off a burning heat inside you that makes you dizzy and weak.  ", false);
 				if (player.hasCock()) {
 					outputText(player.SMultiCockDesc() + " turns rock hard and squirts weakly, suddenly so aroused that it starts soaking your " + player.armorName, false);
@@ -105,7 +105,7 @@ package classes.Scenes.Areas.Swamp
 			}
 			outputText("The spider-" + mf("boy", "girl") + " lunges forward with " + mf("his", "her") + " mouth open, " + mf("his", "her") + " two needle-like fangs closing rapidly.  ", false);
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " misses completely due to their blindness.", false);
 			}
 			//Determine if dodged!
@@ -145,7 +145,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			outputText(capitalA + short + " shifts and sprays webbing, aiming a tight strand of it at your " + player.weaponName + ".  ", false);
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("The blind web-shot goes horribly wide, missing you entirely.", false);
 			}
 			//Determine if dodged!
@@ -175,7 +175,7 @@ package classes.Scenes.Areas.Swamp
 				player.setWeapon(WeaponLib.FISTS);
 //No longer appears to be used				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
 //				player.weapon.unequip(player,false,true);
-				player.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Disarmed, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}
@@ -185,7 +185,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			outputText(capitalA + short + " squirts a concentrated spray of " + mf("his", "her") + " webs directly at your face!  ", false);
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
 				outputText("The blind web-shot goes horribly wide, missing you entirely.", false);
 			}
 			//Determine if dodged!
@@ -206,7 +206,7 @@ package classes.Scenes.Areas.Swamp
 			}
 			else {
 				outputText("They hit you before you can move, covering most of your nose and mouth and making it hard to breathe.  You'll be unable to use your magic while you're constantly struggling just to draw air!\n", false);
-				player.createStatusAffect(StatusAffects.WebSilence, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.WebSilence, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}

@@ -33,7 +33,7 @@
 			toolTipText:String;
 
 		public function CoCButton(labelField:TextField = null, backgroundGraphic:MovieClip = null):void {
-			if(backgroundGraphic) {
+			if (backgroundGraphic) {
 				this.x = backgroundGraphic.x;
 				this.y = backgroundGraphic.y;
 			}
@@ -54,17 +54,17 @@
 		//////// Mouse Events... ////////
 
 		public function hover(event: MouseEvent = null):void {
-			if(this.backgroundGraphic)
+			if (this.backgroundGraphic)
 				this.backgroundGraphic.alpha = 0.5;
 		}
 
 		public function dim(event:MouseEvent = null):void {
-			if(this.backgroundGraphic)
+			if (this.backgroundGraphic)
 				this.backgroundGraphic.alpha = 1;
 		}
 
 		public function click(event:MouseEvent = null):void {
-			if(this._callback != null)
+			if (this._callback != null)
 				this._callback();
 		}
 
@@ -81,7 +81,7 @@
 
 			this._labelField = value;
 
-			if(! this._labelField) return;
+			if (! this._labelField) return;
 
 			this.addChild(this._labelField);
 			
@@ -107,7 +107,7 @@
 
 			this._backgroundGraphic = value;
 
-			if(! this._backgroundGraphic) return;
+			if (! this._backgroundGraphic) return;
 
 			this.addChildAt(this._backgroundGraphic, 0);
 
@@ -141,10 +141,10 @@
 		}
 
 		override public function set width(value:Number):void {
-			if(this.backgroundGraphic)
+			if (this.backgroundGraphic)
 				this.backgroundGraphic.width = value;
 
-			if(this.labelField)
+			if (this.labelField)
 				this.labelField.width = value;
 		}
 
@@ -153,7 +153,7 @@
 		}
 
 		override public function set height(value:Number):void {
-			if(this.backgroundGraphic)
+			if (this.backgroundGraphic)
 				this.backgroundGraphic.height = value;
 			// TODO: Do anything to the text field?
 		}

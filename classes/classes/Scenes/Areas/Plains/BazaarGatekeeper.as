@@ -18,7 +18,7 @@ package classes.Scenes.Areas.Plains
 		public function scimitarAttack():void {
 			
 			outputText("The gatekeeper raises his scimitars ", false);
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) > 0) {
+			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) > 0) {
 				outputText("and slashes his scimitars blindly, missing you by a great deal!");
 				combatRoundOver();
 				return;
@@ -50,7 +50,7 @@ package classes.Scenes.Areas.Plains
 		}
 		
 		public function scimitarCrossAttack():void {
-			if (findStatusAffect(StatusAffects.Uber) <= 0) {
+			if (findStatusEffect(StatusEffects.Uber) <= 0) {
 				outputText("The gatekeeper raises his scimitars! Judging from the way he is holding, <b>he is going to cross-slash you!</b>");
 				combatRoundOver();
 				return;
@@ -58,7 +58,7 @@ package classes.Scenes.Areas.Plains
 			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] > 0) {
 				outputText("The gatekeeper slashes his scimitar towards you! Thanks to your preparedness, you manage to avoid his scimitars in the nick of time.");
 			}
-			else if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) > 0) {
+			else if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) > 0) {
 				outputText("The blind gatekeeper slashes his scimitars wide, missing you by a great deal!");
 			}
 			else {
@@ -67,28 +67,28 @@ package classes.Scenes.Areas.Plains
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			removeStatusAffect(StatusAffects.Uber);
+			removeStatusEffect(StatusEffects.Uber);
 			combatRoundOver();
 		}
 		
 		override public function doAI():void
 		{
-			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
+			if (findStatusEffect(StatusEffects.Stunned) >= 0) {
 				outputText("Your foe is too dazed from your last hit to strike back!", false)
-				if (findStatusAffect(StatusAffects.Uber) >= 0) {
+				if (findStatusEffect(StatusEffects.Uber) >= 0) {
 					outputText(" You've managed to interrupt his special attack!");
-					removeStatusAffect(StatusAffects.Uber);
+					removeStatusEffect(StatusEffects.Uber);
 				}
-				if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
-				else addStatusValue(StatusAffects.Stunned, 1, -1);
+				if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
+				else addStatusValue(StatusEffects.Stunned, 1, -1);
 				combatRoundOver();
 				return;
 			}
-			if (findStatusAffect(StatusAffects.Fear) >= 0) {
+			if (findStatusEffect(StatusEffects.Fear) >= 0) {
 				game.outputText("The gatekeeper appears to be immune to your fear.\n\n");
-				removeStatusAffect(StatusAffects.Fear);
+				removeStatusEffect(StatusEffects.Fear);
 			}
-			if (findStatusAffect(StatusAffects.Uber) >= 0) {
+			if (findStatusEffect(StatusEffects.Uber) >= 0) {
 				scimitarCrossAttack();
 				return;
 			}

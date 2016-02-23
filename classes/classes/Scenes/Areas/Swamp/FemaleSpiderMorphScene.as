@@ -241,8 +241,8 @@ package classes.Scenes.Areas.Swamp
 			outputText("To emphasize her point, the spider-girl bites down on your " + player.leg() + " and squirts a fresh load of her overwhelming, sexual venom deep inside you.  Another squirt gushes out, soaking the dominatrix's fingertip, and you pant and beg for release, knowing you'll do anything she asks at this point.  In response, the exoskeleton-covered legs spread further apart, lowering those midnight lips close enough to be within easy licking distance.  The first bead of moisture drops down to splat on your lips, and you lick it off unthinkingly, getting your first taste of your spidery mistress.\n\n", false);
 
 			outputText("The arachnid sex tastes... sweet - unnaturally so, almost cloying in its intensity.  You lean up to lick at her slimy black box, and as soon as you make contact with her oozing nether-lips, her legs give out, dropping her weight fully on to you and smothering you in her honey-dripping cunt.  Grunting in discomfort from the change in pressure, your aphrodisiac-addled mind remembers that licking her pussy will get you release.  You thrust your tongue forward with every ounce of your strength, burying ", false);
-			if (player.tongueType == TONUGE_SNAKE) outputText("the snake-like length the whole way into her womb, slithering right past her cervix.", false);
-			else if (player.tongueType == TONUGE_DEMONIC) outputText("the massive, demonic length into her vagina, curling it around the walls and stroking them all with even motions.", false);
+			if (player.tongueType == TONGUE_SNAKE) outputText("the snake-like length the whole way into her womb, slithering right past her cervix.", false);
+			else if (player.tongueType == TONGUE_DEMONIC) outputText("the massive, demonic length into her vagina, curling it around the walls and stroking them all with even motions.", false);
 			else if (player.hasLongTongue()) outputText("the inhuman length into her vagina, curling it around the walls and stroking them all with even motions.", false);
 			else outputText("all of your length as deep into her passage as possible, licking and lapping at it in an orgasm-seeking frenzy.", false);
 			outputText("  The hard nub of her clit bumps your lower lip, and you start to open and close your jaw as fast as possible to stroke that tiny pleasure-organ off.\n\n", false);
@@ -476,7 +476,7 @@ package classes.Scenes.Areas.Swamp
 			clearOutput();
 			spriteSelect(73);
 			outputText("The spider-girl drops to her knees and wobbles unsteadily", false);
-			if (monster.lust > 99) outputText(", thrusting two of her carapace-covered finger-tips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"", false);
+			if (monster.lust >= monster.eMaxLust()) outputText(", thrusting two of her carapace-covered finger-tips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"", false);
 			else outputText(", too wounded to fight back or run away.", false);
 			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nWhat do you do to her?", false);
@@ -506,7 +506,7 @@ package classes.Scenes.Areas.Swamp
 			outputText(".  You slap her hands away and pry her legs open, getting a nice, close look at her vagina.\n\n", false);
 
 			outputText("Her pussy is dark, like her nipples, though the lips of her sex are closer to a pure midnight-black than the dusky skin of those tiny nubs.  A sheen of feminine lube has built up over her vulva, making her outer labia and skin glisten noticeably in the muted sunlight that filters down to the swamp floor.  Around her vagina, the skin rapidly fades from dark chocolate back to the porcelain white of the rest of her body.  You prod and play with the moist slit, feeling the soft skin part around your fingers like a soft velvet glove.  She grows wetter in response, giving up plaintive little moans at your incursion", false);
-			if (monster.lust > 99) outputText(" until she's panting and her tiny clit has emerged, hard as a rock", false);
+			if (monster.lust >= monster.eMaxLust()) outputText(" until she's panting and her tiny clit has emerged, hard as a rock", false);
 			outputText(".\n\n", false);
 
 			outputText("The spider-kin's honeyed onyx-hued pussy is irresistible, and you remove your " + player.armorName + " to prepare for the coming sex.  While you're distracted, the defeated arachnid-morph begins to masturbate while watching you with wide, eager eyes.  You grab a nearby vine and yank the slut's hands away from her pussy.  She protests, but you smirk and inform her she won't get her mitts back until she gets you off.  The spider-girl nods mutely, though confusion crosses her face once you start circling her, coming up next to her chest.\n\n", false);
@@ -632,10 +632,10 @@ package classes.Scenes.Areas.Swamp
 			clearOutput();
 			spriteSelect(73);
 			outputText("You peel off your " + player.armorName + " while you gaze disdainfully down at your prize.  ", false);
-			if (monster.lust > 99) outputText("She's moaning plaintively and happily fingering herself, practically offering her juicy box to you.", false);
+			if (monster.lust >= monster.eMaxLust()) outputText("She's moaning plaintively and happily fingering herself, practically offering her juicy box to you.", false);
 			else outputText("She's groaning painfully and struggling to move before falling back down, legs akimbo, inadvertantly displaying her pussy to you.", false);
 			outputText("  Sighing, you grab her narrow frame, admiring the lightness of her body as you heft her up and position her onto her hands and knees.  ", false);
-			if (monster.lust > 99) outputText("She mewls with disappointment.  ", false);
+			if (monster.lust >= monster.eMaxLust()) outputText("She mewls with disappointment.  ", false);
 			outputText("This is a much better position for her; ass-up, with her pussy and pucker fully exposed.\n\n", false);
 
 			outputText("The spider-morph looks back fearfully, but she flexes her back to raise up her abdomen and allow you easier access to her holes like the obedient slut she truly is.  You wrap your arms around the heavy, exoskeletal organ and step forward, leveraging your " + cockDescript(x) + " to slide it into her welcoming pussy.  The arachnid cunt sucks you in with a wet slurp, welcoming your cock to the oozing sheath with uncommon eagerness until the plush black pussy lips are compressing against your loins.  You have trouble not giving into the hot, moist pressure of the silken canal and rutting her like a beast then and there, but a tighter, better hole beckons for your now-lubricated fuck-stick's attention.\n\n", false);

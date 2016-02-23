@@ -14,9 +14,9 @@ package classes.Items
 		
 		public static const NOTHING:Nothing = new Nothing();
 		
-		public const BUCKLER:Shield = new Shield("Buckler", "Buckler", "buckler", "a buckler", 5, 50, "A simple wooden rounded shield.  \n\nType: Shield \nBlock rating: 5 \nValue: 50");
-		public const GREATSH:Shield = new Shield("GreatSh", "GreatShld", "greatshield", "a greatshield", 12, 300, "A large metal shield.  \n\nType: Shield \nBlock rating: 12 \nValue: 300");
-		public const KITE_SH:Shield = new Shield("Kite Sh", "KiteShield", "kite shield", "a kite shield", 8, 150, "An average-sized kite shield.  \n\nType: Shield \nBlock rating: 8 \nValue: 150");
+		public const BUCKLER:Shield = new Shield("Buckler", "Buckler", "buckler", "a buckler", 5, 50, "A simple wooden rounded shield.");
+		public const GREATSH:Shield = new Shield("GreatSh", "GreatShld", "greatshield", "a greatshield", 12, 300, "A large metal shield. It's a bit heavy.");
+		public const KITE_SH:Shield = new Shield("Kite Sh", "KiteShield", "kite shield", "a kite shield", 8, 150, "An average-sized kite shield.");
 		public const TOWERSH:Shield = new TowerShield();
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
 		

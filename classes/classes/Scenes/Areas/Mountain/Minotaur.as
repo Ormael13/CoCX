@@ -17,8 +17,8 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
-				removeStatusAffect(StatusAffects.PhyllaFight);
+			if (findStatusEffect(StatusEffects.PhyllaFight) >= 0) {
+				removeStatusEffect(StatusEffects.PhyllaFight);
 				outputText("You defeat a minotaur!  ", true);
 				game.desert.antsScene.phyllaBeatAMino();
 			} else {
@@ -28,8 +28,8 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
-				removeStatusAffect(StatusAffects.PhyllaFight);
+			if (findStatusEffect(StatusEffects.PhyllaFight) >= 0) {
+				removeStatusEffect(StatusEffects.PhyllaFight);
 				game.desert.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){
 				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.", false);
@@ -49,7 +49,7 @@
 		{
 			//Most times they dont have an axe
 			hasAxe = axe || rand(3)==0;
-			var furColor:String = randomChoice("black","brown");
+			this.furColor = randomChoice("black","brown");
 
 			trace("Minotaur Constructor!");
 			trace(game.flags);
@@ -66,7 +66,7 @@
 			createBreastRow(0);
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_NORMAL;
-			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = rand(37) + 84;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE;

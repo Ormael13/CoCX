@@ -11,9 +11,9 @@
 		{
 			outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.", true);
 			//Boobfeed.
-			if(player.findStatusAffect(StatusAffects.Feeder) >= 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.findStatusEffect(StatusEffects.Feeder) >= 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				//Eligable to rape
-				if(player.lust >= 33 && player.gender > 0) {
+				if (player.lust >= 33 && player.gender > 0) {
 					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?", false);
 					game.simpleChoices("B.Feed",game.lake.greenSlimeScene.rapeOozeWithMilk,"Rape",game.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"Leave",game.cleanupAfterCombat);
 				}
@@ -24,7 +24,7 @@
 				}
 			}
 			//Not a breastfeeder
-			else if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?", false);
 				game.doYesNo(game.lake.greenSlimeScene.slimeVictoryRape, game.cleanupAfterCombat);
 			}

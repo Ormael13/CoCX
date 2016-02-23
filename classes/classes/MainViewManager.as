@@ -495,12 +495,12 @@ package classes
 		}
 		
 		public function keyPressed(event:KeyboardEvent):void {
-			if(event.keyCode == Keyboard.SHIFT) {
+			if (event.keyCode == Keyboard.SHIFT) {
 				flags[kFLAGS.SHIFT_KEY_DOWN] = 1;
 			}
 		}
 		public function keyReleased(event:KeyboardEvent):void {
-			if(event.keyCode == Keyboard.SHIFT) {
+			if (event.keyCode == Keyboard.SHIFT) {
 				flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
 			}
 		}

@@ -55,31 +55,31 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScratch(valueNum:Number) : Number
 		{
-			if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyScratch) < 0)
+			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScratch) < 0)
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScratch,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScratch,0,0,0,0);
 			}
-			return player["statusAffectv" + String(valueNum)](StatusAffects.PrisonCaptorEllyScratch);
+			return player["statusEffectv" + String(valueNum)](StatusEffects.PrisonCaptorEllyScratch);
 		}
 		
 		public function prisonCaptorScratchSet(valueNum:Number, newVal:Number) : void
 		{
-			if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyScratch) < 0)
+			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScratch) < 0)
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScratch,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScratch,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScratch,valueNum,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScratch,valueNum,newVal);
 		}
 		
 		public function prisonCaptorScratchChange(valueNum:Number, changeVal:Number) : void
 		{
 			var newVal:* = undefined;
-			if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyScratch) < 0)
+			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScratch) < 0)
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScratch,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScratch,0,0,0,0);
 			}
-			newVal = player["statusAffectv" + String(valueNum)](StatusAffects.PrisonCaptorEllyScratch) + changeVal;
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScratch, valueNum, newVal);
+			newVal = player["statusEffectv" + String(valueNum)](StatusEffects.PrisonCaptorEllyScratch) + changeVal;
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScratch, valueNum, newVal);
 		}
 		
 		public function selectPunishmentEvent(lightChance:int = 0):void {
@@ -97,31 +97,31 @@ package classes.Scenes.Places.Prison
 		}
 		
 		/*public function restraintDescriptionsV1():Boolean {
-			if (player.statusAffectv1(StatusAffects.PrisonRestraints) == 1) {
+			if (player.statusEffectv1(StatusEffects.PrisonRestraints) == 1) {
 				return true;
 			}
 			else return false;
 		}
 		public function restraintDescriptionsV2():Boolean {
-			if (player.statusAffectv2(StatusAffects.PrisonRestraints) == 1) {
+			if (player.statusEffectv2(StatusEffects.PrisonRestraints) == 1) {
 				outputText("Your legs are fettered and chained securely to the wall.");
 				return true;
 			}
-			else if (player.statusAffectv2(StatusAffects.PrisonRestraints) >= 2) {
+			else if (player.statusEffectv2(StatusEffects.PrisonRestraints) >= 2) {
 				outputText("You are hogtied and chained to the wall. You find this demoralizing and fatiguing.");
 				return true;
 			}
 			else return false;
 		}
 		public function restraintDescriptionsV3():Boolean {
-			if (player.statusAffectv3(StatusAffects.PrisonRestraints) > 0) {
+			if (player.statusEffectv3(StatusEffects.PrisonRestraints) > 0) {
 				outputText("Your arms are bound behind your back.");
 				return true;
 			}
 			else return false;
 		}
 		public function restraintDescriptionsV4():Boolean {
-			if (player.statusAffectv4(StatusAffects.PrisonRestraints) > 0) {
+			if (player.statusEffectv4(StatusEffects.PrisonRestraints) > 0) {
 				return true;
 			}
 			else return false;

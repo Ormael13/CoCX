@@ -10,7 +10,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			outputText("Brigid stalks forward with confidence, her shield absorbing your defensive blows until she's right on top of you. She bats your [weapon] aside and thrashes you with her hot poker, scalding your " + player.skin() + " and sending you reeling. ");
 			//(Effect: Heavy Damage)
 			var damage:Number = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if(damage < 30) damage = 30;
+			if (damage < 30) damage = 30;
 			damage = player.takeDamage(damage, true);
 			game.combatRoundOver();
 		}
@@ -21,8 +21,8 @@ package classes.Scenes.Dungeons.HelDungeon
 			//(Effect: Stagger/Stun)
 			var damage:Number = 5;
 			damage = player.takeDamage(damage, true);
-			if(player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
-			else player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+			if (player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
+			else player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 			game.combatRoundOver();
 		}
 
@@ -34,14 +34,14 @@ package classes.Scenes.Dungeons.HelDungeon
 		}
 		override protected function performCombatAction():void
 		{
-			if(player.findStatusAffect(StatusAffects.Stunned) >= 0) {
-				player.removeStatusAffect(StatusAffects.Stunned);
-				if(rand(2) == 0) BrigidAssGrind();
+			if (player.findStatusEffect(StatusEffects.Stunned) >= 0) {
+				player.removeStatusEffect(StatusEffects.Stunned);
+				if (rand(2) == 0) BrigidAssGrind();
 				else brigidPoke();
 				return;
 			}
-			if(rand(3) == 0) BrigidAssGrind();
-			else if(rand(2) == 0) brigidBop();
+			if (rand(3) == 0) BrigidAssGrind();
+			else if (rand(2) == 0) brigidBop();
 			else brigidPoke();
 		}
 
@@ -65,7 +65,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
 			if (LOWER_BODY_TYPE_HARPY > 0) {
-				this.createStatusAffect(StatusAffects.BonusVCapacity, LOWER_BODY_TYPE_HARPY, 0, 0, 0);
+				this.createStatusEffect(StatusEffects.BonusVCapacity, LOWER_BODY_TYPE_HARPY, 0, 0, 0);
 			}
 			createBreastRow(Appearance.breastCupInverse("D"));
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;

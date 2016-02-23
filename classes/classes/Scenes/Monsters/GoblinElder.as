@@ -19,21 +19,21 @@ package classes.Scenes.Monsters
 			//Makes sure to not stack spell effects.
 			if (lust < 50) spellChooser = rand(3);
 			if (lust > 75) spellChooser = rand(3) + 3;
-			if (spellChooser == 0 && findStatusAffect(StatusAffects.ChargeWeapon) >= 0) {
+			if (spellChooser == 0 && findStatusEffect(StatusEffects.ChargeWeapon) >= 0) {
 				spellChooser = rand(5) + 1;
 			}
 			if (spellChooser == 4 && HPRatio() >= 0.7) {
 				spellChooser++;
 			}
-			if (spellChooser == 5 && findStatusAffect(StatusAffects.Might) >= 0) {
+			if (spellChooser == 5 && findStatusEffect(StatusEffects.Might) >= 0) {
 				spellChooser = rand(5);
-				if (spellChooser == 0 && findStatusAffect(StatusAffects.ChargeWeapon) >= 0) spellChooser++;
+				if (spellChooser == 0 && findStatusEffect(StatusEffects.ChargeWeapon) >= 0) spellChooser++;
 			}
 			//Spell time!
 			//Charge Weapon
 			if (spellChooser == 0 && fatigue <= (100 - spellCostCharge)) {
 				outputText("The goblin utters word of power, summoning an electrical charge around her sword. <b>It looks like she'll deal more physical damage now!</b>");
-				createStatusAffect(StatusAffects.ChargeWeapon, 15 * spellMultiplier(), 0, 0, 0);
+				createStatusEffect(StatusEffects.ChargeWeapon, 15 * spellMultiplier(), 0, 0, 0);
 				this.weaponAttack += 15 * spellMultiplier();
 				fatigue += spellCostCharge;
 			}
@@ -42,7 +42,7 @@ package classes.Scenes.Monsters
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
 				if (rand(player.inte / 5) <= 4) {
 					outputText("<b>You are blinded!</b>");
-					player.createStatusAffect(StatusAffects.Blind, 1 + rand(3), 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
 				else {
 					outputText("You manage to blink in the nick of time!");
@@ -84,7 +84,7 @@ package classes.Scenes.Monsters
 			else if (spellChooser == 5 && fatigue <= (100 - spellCostMight)) {
 				outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 				outputText("The rush of success and power flows through her body.  She feels like she can do anything!", false);
-				createStatusAffect(StatusAffects.Might, 15 * spellMultiplier(), 15 * spellMultiplier(), 0, 0);
+				createStatusEffect(StatusEffects.Might, 15 * spellMultiplier(), 15 * spellMultiplier(), 0, 0);
 				str += 15 * spellMultiplier();
 				tou += 15 * spellMultiplier();
 				fatigue += spellCostMight;
@@ -119,7 +119,7 @@ package classes.Scenes.Monsters
 				//Get hit
 				if (rand(100) < 40 && player.findPerk(PerkLib.Resolute) < 0) {
 					outputText("The impact from the shield has left you with a concussion. <b>You are stunned.</b> ");
-					player.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}
 				var damage:int = str + rand(10);
 				damage = player.reduceDamage(damage);
@@ -169,11 +169,11 @@ package classes.Scenes.Monsters
 			this.imageName = "goblinelder";
 			this.long = "The goblin before you stands a little over four feet tall. It's difficult to determine an age of goblin thanks to their corrupt nature but this one looks unusual. Her skin tone is yellowish-green skin and her hair is crimson black. Her body is painted in imp and minotaur blood to scare away anybody who would try to rape her. She's wearing a shark-tooth necklace and her ears are pierced with what appears to be lethicite. Her breasts look to be FF-cups despite her \"age\". Unlike most goblins, she's well armed. She's wielding a crudely fashioned metal sword and a large metal square shield. She's wearing a spider-silk loincloth and the imp skulls hang from the leather strap holding her loincloth together. Her helmet is fashioned out of a minotaur skull and her chestpiece appears to be carved from minotaur ribcage. Her pauldrons are also fashioned from bones. Despite how well-armored she is, her lethicite-pierced nipples are exposed. It's obvious she has travelled quite a lot and slain a lot of minotaurs and imps. She must have lived long thanks to Reducto to keep her breasts at normal size.";
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("FF"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 48;
 			this.hipRating = HIP_RATING_AMPLE+2;
 			this.buttRating = BUTT_RATING_LARGE;

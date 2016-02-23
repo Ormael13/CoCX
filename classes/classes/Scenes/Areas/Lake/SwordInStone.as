@@ -29,7 +29,7 @@
 				
 				doNext(camp.returnToCampUseOneHour);
 				
-				player.createStatusAffect(StatusAffects.BSwordBroken,0,0,0,0);
+				player.createStatusEffect(StatusEffects.BSwordBroken,0,0,0,0);
 			}
 		}
 
@@ -63,7 +63,7 @@
 				outputText("The blade itself is three and a half feet of the purest, shining steel you have ever seen.  It truly is a beautiful blade.\n\n", false);
 				dynStats("lib", -(player.lib/3), "lus", -15);
 				inventory.takeItem(weapons.B_SWORD, camp.returnToCampUseOneHour);
-				player.createStatusAffect(StatusAffects.TookBlessedSword,0,0,0,0);
+				player.createStatusEffect(StatusEffects.TookBlessedSword,0,0,0,0);
 			}
 		}
 	}

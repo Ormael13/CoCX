@@ -4,7 +4,7 @@ package classes
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkType;
-	import classes.StatusAffectType;
+	import classes.StatusEffectType;
 	import classes.Items.JewelryLib;
 	import classes.internals.Utils;
 	import classes.Scenes.Places.TelAdre.UmasShop;
@@ -346,7 +346,7 @@ package classes
 		public var eyeType:Number = EYES_HUMAN;
 
 		//TongueType
-		public var tongueType:Number = TONUGE_HUMAN;
+		public var tongueType:Number = TONGUE_HUMAN;
 
 		//ArmType
 		public var armType:Number = ARM_TYPE_HUMAN;
@@ -460,7 +460,7 @@ package classes
 		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
 		//Someone call the grammar police!
 		//TODO: Move monster status effects into perks. Needs investigation though.
-		public var statusAffects:Array;
+		public var statusEffects:Array;
 
 		//Constructor
 		public function Creature()
@@ -472,7 +472,7 @@ package classes
 			//vaginas: Vector.<Vagina> = new Vector.<Vagina>();
 			breastRows = [];
 			_perks = [];
-			statusAffects = [];
+			statusEffects = [];
 			//keyItems = new Array();
 		}
 
@@ -551,7 +551,7 @@ package classes
 						else
 						{
 							//If the next slot is later we are go
-							if(perk(counter).perkName <= ptype.name) {
+							if (perk(counter).perkName <= ptype.name) {
 								arrayed = true;
 								perks.splice(counter, 0, newKeyItem);
 								keySlot = counter;
@@ -723,28 +723,28 @@ package classes
 		
 		//{region StatusEffects
 		//Create a status
-		public function createStatusAffect(stype:StatusAffectType, value1:Number, value2:Number, value3:Number, value4:Number):void
+		public function createStatusEffect(stype:StatusEffectType, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newStatusAffect:StatusAffectClass = new StatusAffectClass(stype,value1,value2,value3,value4);
-			statusAffects.push(newStatusAffect);
-			//trace("createStatusAffect -> "+statusAffects.join(","));
+			var newStatusEffect:StatusEffectClass = new StatusEffectClass(stype,value1,value2,value3,value4);
+			statusEffects.push(newStatusEffect);
+			//trace("createStatusEffect -> "+statusEffects.join(","));
 			//trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
 		}
 		
 		//Remove a status
-		public function removeStatusAffect(stype:StatusAffectType):void
+		public function removeStatusEffect(stype:StatusEffectType):void
 		{
-			var counter:Number = findStatusAffect(stype);
+			var counter:Number = findStatusEffect(stype);
 			if (counter < 0) return;
-			statusAffects.splice(counter, 1);
-			//trace("removeStatusAffect -> "+statusAffects.join(","));
+			statusEffects.splice(counter, 1);
+			//trace("removeStatusEffect -> "+statusEffects.join(","));
 		}
 		
-		public function findStatusAffect(stype:StatusAffectType):Number
+		public function findStatusEffect(stype:StatusEffectType):Number
 		{
-			for (var counter:int = 0; counter < statusAffects.length; counter++)
+			for (var counter:int = 0; counter < statusEffects.length; counter++)
 			{
-				if (statusAffect(counter).stype == stype)
+				if (statusEffect(counter).stype == stype)
 					return counter;
 			}
 			return -1;
@@ -752,9 +752,9 @@ package classes
 		//}endregion
 		
 		
-		public function changeStatusValue(stype:StatusAffectType, statusValueNum:Number = 1, newNum:Number = 0):void
+		public function changeStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
-			var counter:Number = findStatusAffect(stype);
+			var counter:Number = findStatusEffect(stype);
 			//Various Errors preventing action
 			if (counter < 0)return;
 			if (statusValueNum < 1 || statusValueNum > 4)
@@ -763,18 +763,18 @@ package classes
 				return;
 			}
 			if (statusValueNum == 1)
-				statusAffect(counter).value1 = newNum;
+				statusEffect(counter).value1 = newNum;
 			if (statusValueNum == 2)
-				statusAffect(counter).value2 = newNum;
+				statusEffect(counter).value2 = newNum;
 			if (statusValueNum == 3)
-				statusAffect(counter).value3 = newNum;
+				statusEffect(counter).value3 = newNum;
 			if (statusValueNum == 4)
-				statusAffect(counter).value4 = newNum;
+				statusEffect(counter).value4 = newNum;
 		}
 		
-		public function addStatusValue(stype:StatusAffectType, statusValueNum:Number = 1, bonus:Number = 0):void
+		public function addStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, bonus:Number = 0):void
 		{
-			var counter:Number = findStatusAffect(stype);
+			var counter:Number = findStatusEffect(stype);
 			//Various Errors preventing action
 			if (counter < 0)
 			{
@@ -786,51 +786,51 @@ package classes
 				return;
 			}
 			if (statusValueNum == 1)
-				statusAffect(counter).value1 += bonus;
+				statusEffect(counter).value1 += bonus;
 			if (statusValueNum == 2)
-				statusAffect(counter).value2 += bonus;
+				statusEffect(counter).value2 += bonus;
 			if (statusValueNum == 3)
-				statusAffect(counter).value3 += bonus;
+				statusEffect(counter).value3 += bonus;
 			if (statusValueNum == 4)
-				statusAffect(counter).value4 += bonus;
+				statusEffect(counter).value4 += bonus;
 		}
 		
-		public function statusAffect(idx:int):StatusAffectClass
+		public function statusEffect(idx:int):StatusEffectClass
 		{
-			return statusAffects [idx];
+			return statusEffects [idx];
 		}
 		
-		public function statusAffectv1(stype:StatusAffectType):Number
+		public function statusEffectv1(stype:StatusEffectType):Number
 		{
-			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffect(counter).value1;
+			var counter:Number = findStatusEffect(stype);
+			return (counter<0)?0:statusEffect(counter).value1;
 		}
 		
-		public function statusAffectv2(stype:StatusAffectType):Number
+		public function statusEffectv2(stype:StatusEffectType):Number
 		{
-			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffect(counter).value2;
+			var counter:Number = findStatusEffect(stype);
+			return (counter<0)?0:statusEffect(counter).value2;
 		}
 
-		public function statusAffectv3(stype:StatusAffectType):Number
+		public function statusEffectv3(stype:StatusEffectType):Number
 		{
-			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffect(counter).value3;
+			var counter:Number = findStatusEffect(stype);
+			return (counter<0)?0:statusEffect(counter).value3;
 		}
 
-		public function statusAffectv4(stype:StatusAffectType):Number
+		public function statusEffectv4(stype:StatusEffectType):Number
 		{
-			var counter:Number = findStatusAffect(stype);
-			return (counter<0)?0:statusAffect(counter).value4;
+			var counter:Number = findStatusEffect(stype);
+			return (counter<0)?0:statusEffect(counter).value4;
 		}
 
 		public function removeStatuses():void
 		{
-			var counter:Number = statusAffects.length;
+			var counter:Number = statusEffects.length;
 			while (counter > 0)
 			{
 				counter--;
-				statusAffects.splice(counter, 1);
+				statusEffects.splice(counter, 1);
 			}
 		}		
 		
@@ -1428,11 +1428,11 @@ package classes
 				bonus += 10;
 			if (findPerk(PerkLib.Cornucopia) >= 0)
 				bonus += 30;
-			if(findPerk(PerkLib.FerasBoonWideOpen) >= 0)
+			if (findPerk(PerkLib.FerasBoonWideOpen) >= 0)
 				bonus += 25;
-			if(findPerk(PerkLib.FerasBoonMilkingTwat) >= 0)
+			if (findPerk(PerkLib.FerasBoonMilkingTwat) >= 0)
 				bonus += 40;
-			total = (bonus + statusAffectv1(StatusAffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
+			total = (bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
 			return total;
 		}
 		
@@ -1450,7 +1450,7 @@ package classes
 				bonus += 10;
 			if (ass.analWetness > 0)
 				bonus += 15;
-			return ((bonus + statusAffectv1(StatusAffects.BonusACapacity) + 6 * ass.analLooseness * ass.analLooseness) * (1 + ass.analWetness / 10));
+			return ((bonus + statusEffectv1(StatusEffects.BonusACapacity) + 6 * ass.analLooseness * ass.analLooseness) * (1 + ass.analWetness / 10));
 		}
 		
 		public function hasFuckableNipples():Boolean
@@ -1521,21 +1521,21 @@ package classes
 		}
 		public function milked():void
 		{
-			if (findStatusAffect(StatusAffects.LactationReduction) >= 0)
-				changeStatusValue(StatusAffects.LactationReduction, 1, 0);
-			if (findStatusAffect(StatusAffects.LactationReduc0) >= 0)
-				removeStatusAffect(StatusAffects.LactationReduc0);
-			if (findStatusAffect(StatusAffects.LactationReduc1) >= 0)
-				removeStatusAffect(StatusAffects.LactationReduc1);
-			if (findStatusAffect(StatusAffects.LactationReduc2) >= 0)
-				removeStatusAffect(StatusAffects.LactationReduc2);
-			if (findStatusAffect(StatusAffects.LactationReduc3) >= 0)
-				removeStatusAffect(StatusAffects.LactationReduc3);
+			if (findStatusEffect(StatusEffects.LactationReduction) >= 0)
+				changeStatusValue(StatusEffects.LactationReduction, 1, 0);
+			if (findStatusEffect(StatusEffects.LactationReduc0) >= 0)
+				removeStatusEffect(StatusEffects.LactationReduc0);
+			if (findStatusEffect(StatusEffects.LactationReduc1) >= 0)
+				removeStatusEffect(StatusEffects.LactationReduc1);
+			if (findStatusEffect(StatusEffects.LactationReduc2) >= 0)
+				removeStatusEffect(StatusEffects.LactationReduc2);
+			if (findStatusEffect(StatusEffects.LactationReduc3) >= 0)
+				removeStatusEffect(StatusEffects.LactationReduc3);
 			if (findPerk(PerkLib.Feeder) >= 0)
 			{
 				//You've now been milked, reset the timer for that
-				addStatusValue(StatusAffects.Feeder,1,1);
-				changeStatusValue(StatusAffects.Feeder, 2, 0);
+				addStatusValue(StatusEffects.Feeder,1,1);
+				changeStatusValue(StatusEffects.Feeder, 2, 0);
 			}
 		}
 		public function boostLactation(todo:Number):Number
@@ -1549,16 +1549,16 @@ package classes
 			//Prevent lactation decrease if lactating.
 			if (todo >= 0)
 			{
-				if (findStatusAffect(StatusAffects.LactationReduction) >= 0)
-					changeStatusValue(StatusAffects.LactationReduction, 1, 0);
-				if (findStatusAffect(StatusAffects.LactationReduc0) >= 0)
-					removeStatusAffect(StatusAffects.LactationReduc0);
-				if (findStatusAffect(StatusAffects.LactationReduc1) >= 0)
-					removeStatusAffect(StatusAffects.LactationReduc1);
-				if (findStatusAffect(StatusAffects.LactationReduc2) >= 0)
-					removeStatusAffect(StatusAffects.LactationReduc2);
-				if (findStatusAffect(StatusAffects.LactationReduc3) >= 0)
-					removeStatusAffect(StatusAffects.LactationReduc3);
+				if (findStatusEffect(StatusEffects.LactationReduction) >= 0)
+					changeStatusValue(StatusEffects.LactationReduction, 1, 0);
+				if (findStatusEffect(StatusEffects.LactationReduc0) >= 0)
+					removeStatusEffect(StatusEffects.LactationReduc0);
+				if (findStatusEffect(StatusEffects.LactationReduc1) >= 0)
+					removeStatusEffect(StatusEffects.LactationReduc1);
+				if (findStatusEffect(StatusEffects.LactationReduc2) >= 0)
+					removeStatusEffect(StatusEffects.LactationReduc2);
+				if (findStatusEffect(StatusEffects.LactationReduc3) >= 0)
+					removeStatusEffect(StatusEffects.LactationReduc3);
 			}
 			if (todo > 0)
 			{
@@ -1734,15 +1734,15 @@ package classes
 				quantity += 200;
 			if (findPerk(PerkLib.MagicalVirility) >= 0)
 				quantity += 200;
-			if(findPerk(PerkLib.FerasBoonSeeder) >= 0)
+			if (findPerk(PerkLib.FerasBoonSeeder) >= 0)
 				quantity += 1000;
-			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
+			//if (hasPerk("Elven Bounty") >= 0) quantity += 250;;
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (findPerk(PerkLib.BroBody) >= 0)
 				quantity += 200;
 			if (findPerk(PerkLib.SatyrSexuality) >= 0)
 				quantity += 50;
-			quantity += statusAffectv1(StatusAffects.Rut);
+			quantity += statusEffectv1(StatusEffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
 				quantity *= (1 + (jewelryEffectMagnitude / 100));
@@ -1775,7 +1775,7 @@ package classes
 			if (findPerk(PerkLib.FerasBoonSeeder) >= 0) cumCap += 1000;
 			cumCap += perkv1(PerkLib.ElvenBounty);
 			if (findPerk(PerkLib.BroBody) >= 0) cumCap += 200;
-			cumCap += statusAffectv1(StatusAffects.Rut);
+			cumCap += statusEffectv1(StatusEffects.Rut);
 			cumCap *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			//Alter capacity by accessories.
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY) cumCap *= (1 + (jewelryEffectMagnitude / 100));
@@ -1998,7 +1998,7 @@ package classes
 		public function canFly():Boolean
 		{
 			//web also makes false!
-			if (findStatusAffect(StatusAffects.Web) >= 0)
+			if (findStatusEffect(StatusEffects.Web) >= 0)
 				return false;
 			return _wingType == 2 || _wingType == 7 || _wingType == 9 || _wingType == 11 || _wingType == 12;
 
@@ -2411,92 +2411,92 @@ package classes
 		public function buttChangeNoDisplay(cArea:Number):Boolean {
 			var stretched:Boolean = false;
 			//cArea > capacity = autostreeeeetch half the time.
-			if(cArea >= analCapacity() && rand(2) == 0) {
-				if(ass.analLooseness >= 5) {}
+			if (cArea >= analCapacity() && rand(2) == 0) {
+				if (ass.analLooseness >= 5) {}
 				else ass.analLooseness++;
 				stretched = true;
 				//Reset butt stretchin recovery time
-				if(findStatusAffect(StatusAffects.ButtStretched) >= 0) changeStatusValue(StatusAffects.ButtStretched,1,0);
+				if (findStatusEffect(StatusEffects.ButtStretched) >= 0) changeStatusValue(StatusEffects.ButtStretched,1,0);
 			}
 			//If within top 10% of capacity, 25% stretch
-			if(cArea < analCapacity() && cArea >= .9*analCapacity() && rand(4) == 0) {
+			if (cArea < analCapacity() && cArea >= .9*analCapacity() && rand(4) == 0) {
 				ass.analLooseness++;
 				stretched = true;
 			}
 			//if within 75th to 90th percentile, 10% stretch
-			if(cArea < .9 * analCapacity() && cArea >= .75 * analCapacity() && rand(10) == 0) {
+			if (cArea < .9 * analCapacity() && cArea >= .75 * analCapacity() && rand(10) == 0) {
 				ass.analLooseness++;
 				stretched = true;
 			}
 			//Anti-virgin
-			if(ass.analLooseness == 0) {
+			if (ass.analLooseness == 0) {
 				ass.analLooseness++;
 				stretched = true;
 			}
 			//Delay un-stretching
-			if(cArea >= .5 * analCapacity()) {
+			if (cArea >= .5 * analCapacity()) {
 				//Butt Stretched used to determine how long since last enlargement
-				if(findStatusAffect(StatusAffects.ButtStretched) < 0) createStatusAffect(StatusAffects.ButtStretched,0,0,0,0);
+				if (findStatusEffect(StatusEffects.ButtStretched) < 0) createStatusEffect(StatusEffects.ButtStretched,0,0,0,0);
 				//Reset the timer on it to 0 when restretched.
-				else changeStatusValue(StatusAffects.ButtStretched,1,0);
+				else changeStatusValue(StatusEffects.ButtStretched,1,0);
 			}
-			if(stretched) {
+			if (stretched) {
 				trace("BUTT STRETCHED TO " + (ass.analLooseness) + ".");
 			}
 			return stretched;
 		}
 
 		public function cuntChangeNoDisplay(cArea:Number):Boolean{
-			if(vaginas.length == 0) return false;
+			if (vaginas.length == 0) return false;
 			var stretched:Boolean = false;
-			if(findPerk(PerkLib.FerasBoonMilkingTwat) < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
+			if (findPerk(PerkLib.FerasBoonMilkingTwat) < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
 			//cArea > capacity = autostreeeeetch.
-			if(cArea >= vaginalCapacity()) {
-				if(vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
+			if (cArea >= vaginalCapacity()) {
+				if (vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
 				else vaginas[0].vaginalLooseness++;
 				stretched = true;
 			}
 			//If within top 10% of capacity, 50% stretch
-			else if(cArea >= .9 * vaginalCapacity() && rand(2) == 0) {
+			else if (cArea >= .9 * vaginalCapacity() && rand(2) == 0) {
 				vaginas[0].vaginalLooseness++;
 				stretched = true;
 			}
 			//if within 75th to 90th percentile, 25% stretch
-			else if(cArea >= .75 * vaginalCapacity() && rand(4) == 0) {
+			else if (cArea >= .75 * vaginalCapacity() && rand(4) == 0) {
 				vaginas[0].vaginalLooseness++;
 				stretched = true;
 				}
 			}
 			//If virgin
-			if(vaginas[0].virgin) {
+			if (vaginas[0].virgin) {
 				vaginas[0].virgin = false;
 			}
 			//Delay anti-stretching
-			if(cArea >= .5 * vaginalCapacity()) {
+			if (cArea >= .5 * vaginalCapacity()) {
 				//Cunt Stretched used to determine how long since last enlargement
-				if(findStatusAffect(StatusAffects.CuntStretched) < 0) createStatusAffect(StatusAffects.CuntStretched,0,0,0,0);
+				if (findStatusEffect(StatusEffects.CuntStretched) < 0) createStatusEffect(StatusEffects.CuntStretched,0,0,0,0);
 				//Reset the timer on it to 0 when restretched.
-				else changeStatusValue(StatusAffects.CuntStretched,1,0);
+				else changeStatusValue(StatusEffects.CuntStretched,1,0);
 			}
-			if(stretched) {
+			if (stretched) {
 				trace("CUNT STRETCHED TO " + (vaginas[0].vaginalLooseness) + ".");
 			}
 			return stretched;
 		}
 		
 		public function get inHeat():Boolean {
-			return findStatusAffect(StatusAffects.Heat) >= 0;
+			return findStatusEffect(StatusEffects.Heat) >= 0;
 		}
 		
 		public function get inRut():Boolean {
-			return findStatusAffect(StatusAffects.Rut) >= 0;
+			return findStatusEffect(StatusEffects.Rut) >= 0;
 		}
 
 		public function bonusFertility():Number
 		{
 			var counter:Number = 0;
 			if (inHeat)
-				counter += statusAffectv1(StatusAffects.Heat);
+				counter += statusEffectv1(StatusEffects.Heat);
 			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				counter += 15;
 			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25)
@@ -3399,7 +3399,7 @@ package classes
 		 * Echidna 1 ft long (i'd consider it barely qualifying), demonic 2 ft long, draconic 4 ft long
 		 */
 		public function hasLongTongue():Boolean {
-			return tongueType == TONUGE_DEMONIC || tongueType == TONUGE_DRACONIC || tongueType == TONUGE_ECHIDNA;
+			return tongueType == TONGUE_DEMONIC || tongueType == TONGUE_DRACONIC || tongueType == TONGUE_ECHIDNA;
 		}
 		
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
@@ -3447,13 +3447,13 @@ package classes
 			
 			//--STATUS AFFECTS--
 			//Black cat beer = 25% reduction!
-			if (statusAffectv1(StatusAffects.BlackCatBeer) > 0)
+			if (statusEffectv1(StatusEffects.BlackCatBeer) > 0)
 				mult *= 0.75;
 			// Uma's Massage bonuses
-			var statIndex:int = findStatusAffect(StatusAffects.UmasMassage);
+			var statIndex:int = findStatusEffect(StatusEffects.UmasMassage);
 			if (statIndex >= 0) {
-				if (statusAffect(statIndex).value1 == UmasShop.MASSAGE_RELAXATION) {
-					mult *= statusAffect(statIndex).value2;
+				if (statusEffect(statIndex).value1 == UmasShop.MASSAGE_RELAXATION) {
+					mult *= statusEffect(statIndex).value2;
 				}
 			}
 			//Round things off.

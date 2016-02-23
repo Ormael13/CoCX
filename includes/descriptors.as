@@ -8,7 +8,7 @@ public function sackDescript():String
 }
 
 public function cockClit(number:int = 0):String {
-	if(player.hasCock() && number >= 0 && number < player.cockTotal()) return player.cockDescript(number);
+	if (player.hasCock() && number >= 0 && number < player.cockTotal()) return player.cockDescript(number);
 	else return clitDescript();
 }
 

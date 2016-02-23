@@ -26,12 +26,12 @@ package classes.Scenes.Dungeons.Factory
 		
 		private function lustAura():void {
 			outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.");
-			if (findStatusAffect(StatusAffects.LustAura) >= 0) {
+			if (findStatusEffect(StatusEffects.LustAura) >= 0) {
 				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.");
 				game.dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)));
 			}
 			else {
-				createStatusAffect(StatusAffects.LustAura, 0, 0, 0, 0);
+				createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
 			}
 			game.combatRoundOver();
 		}
@@ -110,6 +110,7 @@ package classes.Scenes.Dungeons.Factory
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.tailType = TAIL_TYPE_DEMONIC;
+			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -16,14 +16,14 @@
 //[Mage's Tower]
 public function visitZeMagesTower():void {
 	
-	if(flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
+	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
 	else towerFollowUpVisits();
 	menu();
-	if(flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17)  {
+	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17)  {
 		addButton(1,"You Okay?",youOkayBuddy);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] > 0) addButton(2,"Mali",talkToMali);
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] > 0) addButton(2,"Mali",talkToMali);
 	}
-	if(flags[kFLAGS.TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
+	if (flags[kFLAGS.TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
 	addButton(0,"Study",studyInTA);
 	flags[kFLAGS.TIMES_BEEN_TO_LIBRARY]++;
 	addButton(4,"Back",telAdre.telAdreMenu);
@@ -52,7 +52,7 @@ private function firstTowerVisit():void {
 private function towerFollowUpVisits():void {
 	clearOutput();
 	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == -1) { //Return visits before you meet Quinn. Either you meet him or you continue to go to the library at night like some bibliophile vampire
-		if(model.time.hours <= 17) {
+		if (model.time.hours <= 17) {
 			outputText("You return to the mage's tower.  Entering the main room, you're surprised to see a man carefully turning the pages of one of the tomes");
 			commonQuinnTroduction();
 		}
@@ -64,7 +64,7 @@ private function towerFollowUpVisits():void {
 	}
 	
 	//(follow-up visits, 6:00 – 17:00)
-	if(model.time.hours <= 17) {
+	if (model.time.hours <= 17) {
 		outputText("You return to the mage's tower.  Entering the main room, Quinn is carefully inspecting the pages of a book.  The room looks slightly more organized from when you last saw it, but it looks as though Quinn will be working on it for some time.");
 		outputText("\n\nHe notices you've arrived and quirks an eyebrow.  \"<i>Yes?</i>\" he asks wearily, \"<i>Is there something I can assist you with?</i>\"");
 		//If the player has encountered Asa Mali they may ask for Mali.  Otherwise they can either leave, ask to study, or ask Quinn if he is okay.
@@ -98,7 +98,7 @@ private function commonQuinnTroduction():void {
 private function studyInTA():void {
 	clearOutput();
 	//[Study, 6:00-17:00]
-	if(model.time.hours <= 17) {
+	if (model.time.hours <= 17) {
 		outputText("You ask Quinn if you can use the library to study and learn.");
 		outputText("\n\n\"<i>I'm afraid that I may have not made myself clear earlier, the library is not presently open,</i>\" Quinn sighs, rubbing his forehead.  \"<i>This means that it is closed, which is the opposite state of open.  While it is in this state its services are unavailable to the general public.  The general public in this particular instance are also the ones directly responsible for the necessity of it closing, leading to further hesitation in the Covenant's willingness to hasten the opening.  Your interest is noted, filed, and considered, but will be regarded as a data point and not the quote unquote voice of the people.</i>\"");
 		outputText("\n\nQuinn pauses for a few more moments, looking you in the eye thoughtfully before finishing with \"<i>That means no, in case we're unclear.</i>\"");
@@ -114,44 +114,44 @@ private function studyInTA():void {
 			outputText("Without Quinn to hassle you and request your absence from the presences, you have some time to read");
 		}
 		outputText(" through some of the literature collected by the Covenant.");
-		if(rand(3) == 0) {
+		if (rand(3) == 0) {
 			//magic)
 			outputText("\n\nSelecting a book at chance from the mess across the tables, you are delighted to find that it is a tome about magic.  Though the language used is archaic at first you slowly find yourself getting the grasp of it and understanding more of the theory put down in the text.  You find yourself thinking about how to apply the things you're reading about to your own abilities, and figuring out how to better utilize magic yourself.  In short, you experience the condition known as \"learning\", and feel smarter for it.");
 			dynStats("int", 3+rand(4));
 			//(Intelligence increase)
 			//Smart enough for arouse and doesnt have it
-			if(player.inte >= 25 && player.findStatusAffect(StatusAffects.KnowsArouse) < 0) {
+			if (player.inte >= 25 && player.findStatusEffect(StatusEffects.KnowsArouse) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>", false);
-				player.createStatusAffect(StatusAffects.KnowsArouse,0,0,0,0);
+				player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
-			else if(player.inte >= 30 && player.findStatusAffect(StatusAffects.KnowsHeal) < 0) {
+			else if (player.inte >= 30 && player.findStatusEffect(StatusEffects.KnowsHeal) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>", false);
-				player.createStatusAffect(StatusAffects.KnowsHeal,0,0,0,0);
+				player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
-			else if(player.inte >= 40 && player.findStatusAffect(StatusAffects.KnowsMight) < 0) {
+			else if (player.inte >= 40 && player.findStatusEffect(StatusEffects.KnowsMight) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>", false);
-				player.createStatusAffect(StatusAffects.KnowsMight,0,0,0,0);
+				player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
-			else if(player.inte >= 25 && player.findStatusAffect(StatusAffects.KnowsCharge) < 0) {
+			else if (player.inte >= 25 && player.findStatusEffect(StatusEffects.KnowsCharge) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>", false);
-				player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
+				player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
-			else if(player.inte >= 30 && player.findStatusAffect(StatusAffects.KnowsBlind) < 0) {
+			else if (player.inte >= 30 && player.findStatusEffect(StatusEffects.KnowsBlind) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>", false);
-				player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
+				player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
 			}
 			//Smart enough for arouse and doesnt have it
-			else if(player.inte >= 40 && player.findStatusAffect(StatusAffects.KnowsWhitefire) < 0) {
+			else if (player.inte >= 40 && player.findStatusEffect(StatusEffects.KnowsWhitefire) < 0) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>", false);
-				player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
+				player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 			}
 		}
 		//OR (player is bimbo/bimbro/whatever) 
-		else if((player.lib > 75 || player.cor > 75 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0 || player.findPerk(PerkLib.BroBrains) >= 0) && rand(2) == 0) outputText("\n\nYou pick up a book from a table randomly and open it up.  Incredibly disappointed, you soon realize that there are no pictures of people fucking at all.  Reading sucks.  You eventually toss the book aside and resolve to go do something more fun.");
+		else if ((player.lib > 75 || player.cor > 75 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0 || player.findPerk(PerkLib.BroBrains) >= 0) && rand(2) == 0) outputText("\n\nYou pick up a book from a table randomly and open it up.  Incredibly disappointed, you soon realize that there are no pictures of people fucking at all.  Reading sucks.  You eventually toss the book aside and resolve to go do something more fun.");
 		//OR (history) 
 		else outputText("\n\nSelecting a book randomly from the scattered tomes, you find a historical text documenting life in Mareth.  It's dreadfully dull, and though you do your best to learn what you can the dry work is putting you to sleep.  Eventually you close the book and accept that you're not going to be learning anything tonight.");
 		menu();
@@ -177,7 +177,7 @@ private function youOkayBuddy():void {
 //[Mali]
 private function talkToMali():void {
 	clearOutput();
-	if(flags[kFLAGS.TIMES_VISITED_MALI] == 0) {
+	if (flags[kFLAGS.TIMES_VISITED_MALI] == 0) {
 		outputText("You mention to Quinn that you're looking to speak with Mali.  \"<i>Ah, Asa Mali, our very own Alissyn del Aliana.</i>\"  Quinn chuckles and rubs his chin.  You think you're talking about the same person.  \"<i>How mysterious that she of all people should have a visitor.  Am I setting up a forbidden tryst?  A secret rendezvous?  Or perhaps, given the nature of her work, something far more... ominous.</i>\"  He looms curiously, but you clear your throat and ask if she's in.  Disappointed, he sighs and gestures up the stairs.  \"<i>Yes, our sylvan sorceress is not that much of a socialite.</i>\"");
 		
 		outputText("\n\nTurning on his heel he ascends and unlocks a hidden, secure-looking door to the second floor, beckoning you to follow him.  The staircase loops around the wall of the tower, and you pass many closed doors as you make your way up.  Strange and unfamiliar sounds come from more than a few of them, but Quinn seems to ignore them completely.  Apparently they're to be expected from the tower.  Finally, after climbing higher than any other building in the town (but yet with a great deal more to go), he turns and raps sharply on a wooden door.");
@@ -202,7 +202,7 @@ private function talkToMali():void {
 		doNext(camp.returnToCampUseOneHour);
 	}	
 	//[[Mali], player has spellblade]
-	else if((player.weaponName == "inscribed spellblade" || player.hasItem(weapons.S_BLADE)) && flags[kFLAGS.MALI_TAKEN_BLADE] == 0) {
+	else if ((player.weaponName == "inscribed spellblade" || player.hasItem(weapons.S_BLADE)) && flags[kFLAGS.MALI_TAKEN_BLADE] == 0) {
 		outputText("You tell Quinn you're here to see Mali.  He seems intrigued by the wrapped blade you're carrying, but doesn't ask any questions.  Unlocking the second floor as usual, he escorts you to Mali's quarters.");
 		outputText("\n\n\"<i>What's that?</i>\" Mali asks, curious when you pull out the inscribed spellblade.  You place it down on the desk and explain that you got it from... from...  Mali's eyes light up at your strained inability to explain.  \"<i>Yes!</i>\" she says excitedly, reaching over the desk and grabbing your cheeks.  She plants a quick and enthusiastic kiss on your lips in thanks, looking back down at the sword and running her hands over it.");
 		

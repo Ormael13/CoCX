@@ -61,21 +61,21 @@
 		}
 		
 		public function wetnessFactor():Number {
-			if(vaginalWetness == 0) return 1.25;
-			if(vaginalWetness == 1) return 1;
-			if(vaginalWetness == 2) return 0.8;
-			if(vaginalWetness == 3) return 0.7;
-			if(vaginalWetness == 4) return 0.6;
-			if(vaginalWetness == 5) return 0.5;
+			if (vaginalWetness == 0) return 1.25;
+			if (vaginalWetness == 1) return 1;
+			if (vaginalWetness == 2) return 0.8;
+			if (vaginalWetness == 3) return 0.7;
+			if (vaginalWetness == 4) return 0.6;
+			if (vaginalWetness == 5) return 0.5;
 			return .5;
 		}
 		public function capacity():Number {
-			if(vaginalLooseness == 0) return 8;
-			if(vaginalLooseness == 1) return 16;
-			if(vaginalLooseness == 2) return 24;
-			if(vaginalLooseness == 3) return 36;
-			if(vaginalLooseness == 4) return 56;
-			if(vaginalLooseness == 5) return 100;
+			if (vaginalLooseness == 0) return 8;
+			if (vaginalLooseness == 1) return 16;
+			if (vaginalLooseness == 2) return 24;
+			if (vaginalLooseness == 3) return 36;
+			if (vaginalLooseness == 4) return 56;
+			if (vaginalLooseness == 5) return 100;
 			return 10000;
 		}
 	}

@@ -61,7 +61,7 @@
 					break;
 			}
 			//Talk abouts it mang!
-			if(changed) outputText("The fetish cultist's clothing shifts and twists, taking on the appearance of a " + armorName + ".\n\n", false);
+			if (changed) outputText("The fetish cultist's clothing shifts and twists, taking on the appearance of a " + armorName + ".\n\n", false);
 			lust += lustVuln * 3;
 		}
 
@@ -69,13 +69,13 @@
 
 		private function cultistRaisePlayerLust():void {
 			//Two text variants!
-			if(rand(2) == 0) {
-				if(armorName == PERVY_NUNS_CLOTHING) outputText("She suddenly stops chanting and spreads her legs, opening her loose pussy wide with one hand while moaning like a whore.  She toys with her breasts and fondles one of her nipples with her other hand.\n\nDespite yourself,  you can't help but be aroused by the scene.", false);
-				if(armorName == NOBLES_CLOTHING) outputText("She suddenly blushes and start giggling, saying: 'Really my lord!' in a suave, submitting voice while pulling down her skirt.  The movement lets you get an even better look down her cleavage, and her breasts appear even fuller than before.\n\nDespite yourself, you can't help but be aroused by the scene.", false);
-				if(armorName == SWIMSUIT) outputText("She does a series of lewd stretches, showing off her tightly-clad, sexy body in every possible detail.  In particular, her excited, blood-gorged pussy lips, clearly outlined, seem to be begging for you to come and grope them... and that's just for a start.  Despite yourself, you can't help but be aroused by the scene.", false);
-				if(armorName == TEACHERS_OUTFIT) outputText("Obviously very flexible, she arches her back with one hand on her hip, displaying her firm round ass while looking at you with a lascivious expression.  She says in a sexy voice, \"<i>Maybe we should have a... private talk after class...</i>\"  Despite yourself, you can't help but be aroused by the scene.", false);
-				if(armorName == NAUGHTY_NURSES_UNIFORM) outputText("Still displaying her figure in her tight suit, she asks with a lewd smile, \"<i>Is there one of your needs I could satisfy, my dear?</i>\"  She grabs one of her firm, full breasts, \"<i>Are you thirsty, maybe?</i>\"  Despite yourself, you can't help but be aroused by the scene.", false);
-				if(armorName == FETISHY_OUTFIT) outputText("She suddenly starts posing in sexy outfits.  Despite yourself, you can't help but be aroused by it.", false);
+			if (rand(2) == 0) {
+				if (armorName == PERVY_NUNS_CLOTHING) outputText("She suddenly stops chanting and spreads her legs, opening her loose pussy wide with one hand while moaning like a whore.  She toys with her breasts and fondles one of her nipples with her other hand.\n\nDespite yourself,  you can't help but be aroused by the scene.", false);
+				if (armorName == NOBLES_CLOTHING) outputText("She suddenly blushes and start giggling, saying: 'Really my lord!' in a suave, submitting voice while pulling down her skirt.  The movement lets you get an even better look down her cleavage, and her breasts appear even fuller than before.\n\nDespite yourself, you can't help but be aroused by the scene.", false);
+				if (armorName == SWIMSUIT) outputText("She does a series of lewd stretches, showing off her tightly-clad, sexy body in every possible detail.  In particular, her excited, blood-gorged pussy lips, clearly outlined, seem to be begging for you to come and grope them... and that's just for a start.  Despite yourself, you can't help but be aroused by the scene.", false);
+				if (armorName == TEACHERS_OUTFIT) outputText("Obviously very flexible, she arches her back with one hand on her hip, displaying her firm round ass while looking at you with a lascivious expression.  She says in a sexy voice, \"<i>Maybe we should have a... private talk after class...</i>\"  Despite yourself, you can't help but be aroused by the scene.", false);
+				if (armorName == NAUGHTY_NURSES_UNIFORM) outputText("Still displaying her figure in her tight suit, she asks with a lewd smile, \"<i>Is there one of your needs I could satisfy, my dear?</i>\"  She grabs one of her firm, full breasts, \"<i>Are you thirsty, maybe?</i>\"  Despite yourself, you can't help but be aroused by the scene.", false);
+				if (armorName == FETISHY_OUTFIT) outputText("She suddenly starts posing in sexy outfits.  Despite yourself, you can't help but be aroused by it.", false);
 			}
 			else {
 				outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.", false);
@@ -86,26 +86,26 @@
 			else doNext(game.combatMenu);
 		}
 		private function cultistLustTransfer():void {
-			if(lust <= 30 || rand(2) == 0) {
+			if (lust <= 30 || rand(2) == 0) {
 				outputText("Her eyes glaze over, ", false);
-				if(player.cor < 40) outputText("and you're almost afraid to know ", false);
+				if (player.cor < 40) outputText("and you're almost afraid to know ", false);
 				else outputText("and you wish you knew ", false);
 				outputText("what she is thinking of since you can almost feel her own lust building.", false);
 				lust += 10;
 			}
 			else {
 				outputText("Her eyes glaze over and you feel your mind suddenly becoming filled with a blur of every sexual perversion you could possibly think of, and then some.", false);
-				if(player.vaginas.length > 0) {
+				if (player.vaginas.length > 0) {
 					outputText("  You feel your " + vaginaDescript(0) + " soaking itself in a sudden burst", false);
-					if(player.cockTotal() > 0)  outputText(", while a sudden influx of pre-cum blurts out and streams down your " + player.multiCockDescriptLight() + ", painfully hardened by a vast amount of blood rushing to your groin", false);
+					if (player.cockTotal() > 0)  outputText(", while a sudden influx of pre-cum blurts out and streams down your " + player.multiCockDescriptLight() + ", painfully hardened by a vast amount of blood rushing to your groin", false);
 					outputText(".", false);
 				}
-				else if(player.cockTotal() > 0) outputText("  A sudden influx of pre-cum blurts out and streams down your " + player.multiCockDescriptLight() + ", painfully hardened by a vast amount of blood rushing to your groin.", false);
-				if(player.gender == 0) outputText("  Your genderless body is suddenly filled by a perverted warmth.", false);
+				else if (player.cockTotal() > 0) outputText("  A sudden influx of pre-cum blurts out and streams down your " + player.multiCockDescriptLight() + ", painfully hardened by a vast amount of blood rushing to your groin.", false);
+				if (player.gender == 0) outputText("  Your genderless body is suddenly filled by a perverted warmth.", false);
 				outputText("\n\nYou notice that the young woman seems to have calmed down some.", false);
 				game.dynStats("lus", (lust/3 * (1 + player.cor/300)));
 				lust -= 50;
-				if(lust < 0) lust = 10;
+				if (lust < 0) lust = 10;
 			}
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
@@ -116,18 +116,18 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			var temp2:Function =null;
-			if(player.findStatusAffect(StatusAffects.Feeder) >= 0) temp2 = game.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
+			if (player.findStatusEffect(StatusEffects.Feeder) >= 0) temp2 = game.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
 			if (hpVictory) {
 				outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.", true);
 			} else {
 				outputText("Overwhelmed by her lusts, the cultist loses the ability to control herself and collapses.", true);
 			}
-			if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?", false);
 				game.simpleChoices("Sex", game.lake.fetishCultistScene.playerRapesCultist, "", null, "", null, "B. Feed", temp2, "Leave", game.cleanupAfterCombat);
 			}
 			else {
-				if(temp2!=null && flags[kFLAGS.SFW_MODE] <= 0) {
+				if (temp2!=null && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  She looks like she might take some of your milk if you offered it to her.  What do you do?", false);
 					game.simpleChoices("B. Feed", temp2, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
 				}

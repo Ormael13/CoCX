@@ -19,7 +19,7 @@ package classes.Items.Consumables
 			return false;
 		}
 		//Oviposition Elixer!
-		/* Notes on StatusAffects.Eggs
+		/* Notes on StatusEffects.Eggs
 		 v1 = egg type.
 		 v2 = size - 0 for normal, 1 for large
 		 v3 = quantity
@@ -45,17 +45,17 @@ package classes.Items.Consumables
 			if (game.player.pregnancyIncubation == 0) { //If the player is not pregnant, get preggers with eggs!
 				outputText("\n\nThe elixir has an immediate effect on your belly, causing it to swell out slightly as if pregnant.  You guess you'll be laying eggs sometime soon!");
 				game.player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
-				game.player.createStatusAffect(StatusAffects.Eggs, Utils.rand(6), 0, Utils.rand(3) + 5, 0);
+				game.player.createStatusEffect(StatusEffects.Eggs, Utils.rand(6), 0, Utils.rand(3) + 5, 0);
 				return(false);
 			}
 			var changeOccurred:Boolean = false;
 			if (game.player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //If player already has eggs, chance of size increase!
-				if (game.player.findStatusAffect(StatusAffects.Eggs) >= 0) {
+				if (game.player.findStatusEffect(StatusEffects.Eggs) >= 0) {
 					//If eggs are small, chance of increase!
-					if (game.player.statusAffectv2(StatusAffects.Eggs) == 0) {
+					if (game.player.statusEffectv2(StatusEffects.Eggs) == 0) {
 						//1 in 2 chance!
 						if (Utils.rand(3) == 0) {
-							game.player.addStatusValue(StatusAffects.Eggs, 2, 1);
+							game.player.addStatusValue(StatusEffects.Eggs, 2, 1);
 							outputText("\n\nYour pregnant belly suddenly feels heavier and more bloated than before.  You wonder what the elixir just did.");
 							changeOccurred = true;
 						}
@@ -63,7 +63,7 @@ package classes.Items.Consumables
 					//Chance of quantity increase!
 					if (Utils.rand(2) == 0) {
 						outputText("\n\nA rumble radiates from your uterus as it shifts uncomfortably and your belly gets a bit larger.");
-						game.player.addStatusValue(StatusAffects.Eggs,3, Utils.rand(4) + 1);
+						game.player.addStatusValue(StatusEffects.Eggs,3, Utils.rand(4) + 1);
 						changeOccurred = true;
 					}
 				}

@@ -14,24 +14,24 @@
 			if (short == "goblin warrior") multiplier += 0.5;
 			if (short == "goblin elder") multiplier += 1;
 			multiplier += player.newGamePlusMod() * 0.5;
-			if(short == "Tamani") temp2 = rand(5);
-			if(short == "Tamani's daughters") temp2 = rand(5);
+			if (short == "Tamani") temp2 = rand(5);
+			if (short == "Tamani's daughters") temp2 = rand(5);
 			var color:String = "";
-			if(temp2 == 0) color = "red";
-			if(temp2 == 1) color = "green";
-			if(temp2 == 2) color = "blue";
-			if(temp2 == 3) color = "white";
-			if(temp2 == 4) color = "black";
+			if (temp2 == 0) color = "red";
+			if (temp2 == 1) color = "green";
+			if (temp2 == 2) color = "blue";
+			if (temp2 == 3) color = "white";
+			if (temp2 == 4) color = "black";
 			//Throw offensive potions at the player
-			if(color != "blue") {
-				if(short == "Tamani's daughters") outputText("Tamani uncorks a glass bottle full of " + color + " fluid and swings her arm, flinging a wave of fluid at you.", false);
+			if (color != "blue") {
+				if (short == "Tamani's daughters") outputText("Tamani uncorks a glass bottle full of " + color + " fluid and swings her arm, flinging a wave of fluid at you.", false);
 				else outputText(capitalA + short + " uncorks a glass bottle full of " + color + " fluid and swings her arm, flinging a wave of fluid at you.", false);
 			}
 			//Drink blue pots
 			else {
-				if(short == "Tamani's daughters") {
+				if (short == "Tamani's daughters") {
 					outputText("Tamani pulls out a blue vial and uncaps it, then douses the mob with the contents.", false);
-					if(HPRatio() < 1) {
+					if (HPRatio() < 1) {
 						outputText("  Though less effective than ingesting it, the potion looks to have helped the goblins recover from their wounds!\n", false);
 						addHP(80 * multiplier);
 					}
@@ -40,7 +40,7 @@
 				}
 				else {
 					outputText(capitalA + short + " pulls out a blue vial and uncaps it, swiftly downing its contents.", false);
-					if(HPRatio() < 1) {
+					if (HPRatio() < 1) {
 						outputText("  She looks to have recovered from some of her wounds!\n", false);
 						addHP((eMaxHP() / 4) * multiplier);
 						if (short == "Tamani") addHP((eMaxHP() / 4) * multiplier);
@@ -51,7 +51,7 @@
 				return;
 			}
 			//Dodge chance!
-			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if ((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n", false);
 			}
 			else {
@@ -59,17 +59,17 @@
 				if (color == "red") {
 					//Temporary heat
 					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-					if (player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat, 0, multiplier, 0, 0);
+					if (player.findStatusEffect(StatusEffects.TemporaryHeat) < 0) player.createStatusEffect(StatusEffects.TemporaryHeat, 0, multiplier, 0, 0);
 				}
 				else if (color == "green") {
 					//Green poison
 					outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
-					if (player.findStatusAffect(StatusAffects.Poison) < 0) player.createStatusAffect(StatusAffects.Poison, 0, multiplier, 0, 0);
+					if (player.findStatusEffect(StatusEffects.Poison) < 0) player.createStatusEffect(StatusEffects.Poison, 0, multiplier, 0, 0);
 				}
 				else if (color == "white") {
 					//sticky flee prevention
 					outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n", false);
-					if (player.findStatusAffect(StatusAffects.NoFlee) < 0) player.createStatusAffect(StatusAffects.NoFlee, 0, 0, 0, 0);
+					if (player.findStatusEffect(StatusEffects.NoFlee) < 0) player.createStatusEffect(StatusEffects.NoFlee, 0, 0, 0, 0);
 				}
 				else if (color == "black") {
 					//Increase fatigue
@@ -139,11 +139,11 @@
 			this.imageName = "goblin";
 			this.long = "The goblin before you is a typical example of her species, with dark green skin, pointed ears, and purple hair that would look more at home on a punk-rocker.  She's only about three feet tall, but makes up for it with her curvy body, sporting hips and breasts that would entice any of the men in your village were she full-size.  There isn't a single scrap of clothing on her, just lewd leather straps and a few clinking pouches.  She does sport quite a lot of piercings – the most noticeable being large studs hanging from her purple nipples.  Her eyes are fiery red, and practically glow with lust.  This one isn't going to be satisfied until she has her way with you.  It shouldn't be too hard to subdue such a little creature, right?";
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 35 + rand(4);
 			this.hipRating = HIP_RATING_AMPLE+2;
 			this.buttRating = BUTT_RATING_LARGE;

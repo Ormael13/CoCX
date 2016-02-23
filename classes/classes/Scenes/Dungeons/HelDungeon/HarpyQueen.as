@@ -5,8 +5,8 @@ package classes.Scenes.Dungeons.HelDungeon
 	public class HarpyQueen extends Monster
 	{
 		public function harpyQueenAI():void {
-			if(rand(4) == 0) eldritchRopes();
-			else if(rand(2) == 0) lustSpikeAttack();
+			if (rand(4) == 0) eldritchRopes();
+			else if (rand(2) == 0) lustSpikeAttack();
 			else windSlamAttack();
 		}
 		//ATTACK ONE: ELDRITCH ROPES
@@ -15,14 +15,14 @@ package classes.Scenes.Dungeons.HelDungeon
 			//(Effect: Grab + Physical Damage)
 			var damage:int = 25 + rand(10);
 			damage = player.takeDamage(damage, true);
-			createStatusAffect(StatusAffects.QueenBind,0,0,0,0);
+			createStatusEffect(StatusEffects.QueenBind,0,0,0,0);
 			combatRoundOver();
 		}
 
 		public function ropeStruggles(wait:Boolean = false):void {
 			clearOutput();
 			//Struggle Fail: 
-			if(rand(10) > 0 && player.str/5 + rand(20) < 23 || wait) {
+			if (rand(10) > 0 && player.str/5 + rand(20) < 23 || wait) {
 				outputText("You give a mighty try, but cannot pull free of the magic ropes!  The Harpy Queen laughs uproariously, pulling at your arms harder.");
 				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {var damage:int = 25 + rand(10);
 				damage = player.takeDamage(damage, true);
@@ -30,7 +30,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			}
 			else {
 				outputText("With supreme effort, you pull free of the magic ropes, causing the queen to tumble to her hands and knees.");
-				removeStatusAffect(StatusAffects.QueenBind);
+				removeStatusEffect(StatusEffects.QueenBind);
 			}
 			combatRoundOver();
 		}
@@ -104,6 +104,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.tailType = TAIL_TYPE_HARPY;
 			this.wingType = WING_TYPE_FEATHERED_LARGE;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

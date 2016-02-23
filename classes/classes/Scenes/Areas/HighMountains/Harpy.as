@@ -18,8 +18,8 @@
 		protected function harpyUberCharge():void
 		{
 			//(Harpy special attack 1, part one)
-			if (findStatusAffect(StatusAffects.Uber) < 0) {
-				createStatusAffect(StatusAffects.Uber, 0, 0, 0, 0);
+			if (findStatusEffect(StatusEffects.Uber) < 0) {
+				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
 				outputText("Flapping her wings frantically, she flies away from you and gains height, hanging in the light before you.  She lets out a shrill and terrifying cry, narrowing her eyes as she focuses in on you!", false);
 			}
 			//(Harpy special attack 1, part two if PC does anything but "Wait")
@@ -28,12 +28,12 @@
 					outputText("The harpy lets out a terrible cry and drops, reaching an almost impossible speed as she dives down at you.  Her eyes are narrowed like a true bird of prey.  You were too busy with your own attack to avoid it!  Her claws surge down and pierce your " + player.armorName + " like paper, driving hard into the flesh beneath and making you cry out in pain.  The harpy dumps you onto the ground, your wounds bleeding profusely. ", false);
 					var damage:Number = (160 + rand(20)) * (1 + (player.newGamePlusMod() / 2));
 					player.takeDamage(damage, true);					
-					removeStatusAffect(StatusAffects.Uber);
+					removeStatusEffect(StatusEffects.Uber);
 				}
 				else {
 					outputText("You stand firm and ready yourself as the crazed harpy hovers above you. Letting out an ear-splitting cry she dives at you with her claws extended, reaching an incredible speed before she levels out.  The harpy is heading right for you!  Thanks to your ready position, you manage to dive aside just as the harpy reaches you.  She clips you slightly, spinning you as you dive for the ground.  You hit the ground hard, but look up in time to see her make a rough, graceless landing.  Her body rolls until it reached a standstill.  The enraged harpy drags herself up and takes flight once more!  ", false);
 					player.takeDamage(10 + rand(10), true);
-					removeStatusAffect(StatusAffects.Uber);
+					removeStatusEffect(StatusEffects.Uber);
 					HP -= 20;
 				}
 			}
@@ -52,7 +52,7 @@
 		override protected function performCombatAction():void
 		{
 			var select:Number = 1;
-			if (findStatusAffect(StatusAffects.Uber) >= 0) {
+			if (findStatusEffect(StatusEffects.Uber) >= 0) {
 				harpyUberCharge();
 				return;
 			}
@@ -99,11 +99,11 @@
 			this.long = "You are fighting a tall, deranged harpy. She appears very human, about six feet six inches tall but covered in a fine layer of powder-blue down. Her arms are sinewy and muscular, with a long web connecting them to her ample hips, covered in stringy blue feathers to aid her flight. A larger pair of powdery-blue wings also protrudes from her shoulder blades, flapping idly. She appears quite deranged as she circles you, approaching and backing away erratically. Her face is quite beautiful, with fine lilac makeup adorning the features of a handsome woman, and her lips are traced with rich golden lipstick. As she circles you, squawking frantically and trying to intimidate you, your eyes are drawn to her slender torso and small, pert breasts, each the size of a small fruit and covered in a layer of the softest feathers which ripple and move with the gusts from her wings. As astounding as her breasts are, her egg-bearing hips are even more impressive.  They're twice as wide as her torso, with enormous, jiggling buttocks where her huge, meaty thighs are coming up to meet them. Her legs end in three-pronged talons; their shadowy black curves glinting evilly in the light.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_GAPING_WIDE);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("B"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,20,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6*12+6;
 			this.hipRating = HIP_RATING_INHUMANLY_WIDE;
 			this.buttRating = BUTT_RATING_EXPANSIVE;

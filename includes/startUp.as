@@ -13,7 +13,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 {
 	stage.focus = (mainView as MainView).mainText;
 	
-	if(CONFIG::debug)
+	if (CONFIG::debug)
 	{
 		CoC_Settings.debugBuild = true;
 	}
@@ -129,21 +129,21 @@ public function startupScreenBody():void
 	outputText("\n\nCheck out Trials in Tainted Space as well!");
 	outputText("\n\nAlso go play <u>Nimin</u> by Xadera on furaffinity.");
 
-	if(debug)
-		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
-	if(flags[kFLAGS.SHOW_SPRITES_FLAG])
+	if (debug)
+		outputText("\n\n<b>DEBUG MODE ENABLED: ITEMS WILL NOT BE CONSUMED BY USE.</b>");
+	if (flags[kFLAGS.SHOW_SPRITES_FLAG])
 		outputText("\n\n<b>Sprites disabled.</b>");
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
-		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>");
-	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
+	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
+		outputText("\n\n<b>Easy Mode On: Bad-ends can be ignored.</b>");
+	if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>");
 	if (flags[kFLAGS.ITS_EVERY_DAY])
 		outputText("\n\n<b>Eternal holiday enabled.</b>");
-	if(isEaster())
-		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
-	if(isValentine())
+	if (plains.bunnyGirl.isItEaster())
+		outputText("\n\n<b>It's Easter! Enjoy the eggs!</b>");
+	if (valentines.isItValentine())
 		outputText("\n\n<b>It's Valentine's!</b>");
-	if(helFollower.isHeliaBirthday())
+	if (helFollower.isHeliaBirthday())
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
 }
@@ -182,7 +182,7 @@ public function settingsScreenGameSettings():void {
 	
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
 
-	if(debug)
+	if (debug)
 		outputText("Debug Mode: <font color=\"#008000\"><b>ON</b></font>\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
 	else
 		outputText("Debug Mode: <font color=\"#800000\"><b>OFF</b></font>\n Items consumption will occur as normal.");
@@ -206,14 +206,14 @@ public function settingsScreenGameSettings():void {
 		outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 100% more HP and does more 50% damage.");
 	}
 
-	/*if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
+	/*if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
 		outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is easier.");
 	else
 		outputText("Easy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Bad-ends can ruin your game and combat is challenging.");
 
 	outputText("\n\n");*/
 	outputText("\n\n");
-	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
+	if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 		outputText("Silly Mode: <font color=\"#008000\"><b>ON</b></font>\n Crazy, nonsensical, and possibly hilarious things may occur.");
 	else
 		outputText("Silly Mode: <font color=\"#800000\"><b>OFF</b></font>\n You're an incorrigable stick-in-the-mud with no sense of humor.");
@@ -223,7 +223,7 @@ public function settingsScreenGameSettings():void {
 	outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
 	outputText("\n\n");
 
-	if(flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
+	if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
 	{
 		outputText("Low standards Mode: <font color=\"#008000\"><b>ON</b></font>\n NPCs ignore body type preferences.");
 		outputText("\n (Not gender preferences though. You still need the right hole.)");
@@ -233,7 +233,7 @@ public function settingsScreenGameSettings():void {
 
 	outputText("\n\n");
 
-	if(flags[kFLAGS.HYPER_HAPPY])
+	if (flags[kFLAGS.HYPER_HAPPY])
 	{
 		outputText("Hyper Happy Mode: <font color=\"#008000\"><b>ON</b></font>\n Only reducto and humus shrink endowments.");
 		outputText("\n Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
@@ -307,7 +307,7 @@ public function settingsScreenGameSettings():void {
 public function toggleDebug():void
 {
 	//toggle debug
-	if(debug)
+	if (debug)
 		debug = false;
 	else
 		debug = true;
@@ -352,7 +352,7 @@ public function chooseDifficulty(difficulty:int = 0):void {
 /*public function toggleEasyModeFlag():void
 {
 	//toggle easy mode
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0)
+	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0)
 		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
 	else
 		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
@@ -364,7 +364,7 @@ public function chooseDifficulty(difficulty:int = 0):void {
 public function toggleSillyFlag():void
 {
 	//toggle silly mode
-	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
+	if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = false;
 	else
 		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = true;
@@ -376,7 +376,7 @@ public function toggleSillyFlag():void
 public function toggleStandards():void
 {
 	//toggle low standards
-	if(flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
+	if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
 		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = false;
 	else
 		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = true;
@@ -387,7 +387,7 @@ public function toggleStandards():void
 public function toggleHyperHappy():void
 {
 	//toggle hyper happy
-	if(flags[kFLAGS.HYPER_HAPPY])
+	if (flags[kFLAGS.HYPER_HAPPY])
 		flags[kFLAGS.HYPER_HAPPY] = false;
 	else
 		flags[kFLAGS.HYPER_HAPPY] = true;
@@ -416,19 +416,19 @@ public function toggleAutoLevel():void {
 public function fetishSubMenu():void {
 	menu();
 	addButton(0, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
-	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 || player.findStatusAffect(StatusAffects.WormsOff) >= 0) addButton(1, "Worms", toggleWormsMenu, null, null, null, "Enable or disable worms. This will NOT cure infestation, if you have any.");
+	if (player.findStatusEffect(StatusEffects.WormsOn) >= 0 || player.findStatusEffect(StatusEffects.WormsOff) >= 0) addButton(1, "Worms", toggleWormsMenu, null, null, null, "Enable or disable worms. This will NOT cure infestation, if you have any.");
 	else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
 	addButton(4, "Back", settingsScreenGameSettings);
 }
 
 private function toggleWormsMenu():void {
 	clearOutput();
-	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0) {
+	if (player.findStatusEffect(StatusEffects.WormsOn) >= 0) {
 		outputText("You have chosen to encounter worms as you find the mountains");
-		if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0) outputText(" albeit at reduced encounter rate");
+		if (player.findStatusEffect(StatusEffects.WormsHalf) >= 0) outputText(" albeit at reduced encounter rate");
 		outputText(". You can get infested.");
 	}
-	if (player.findStatusAffect(StatusAffects.WormsOff) >= 0) {
+	if (player.findStatusEffect(StatusEffects.WormsOff) >= 0) {
 		outputText("You have chosen to avoid worms. You won't be able to get infested.");
 	}
 	menu();
@@ -440,16 +440,16 @@ private function toggleWormsMenu():void {
 
 private function setWorms(enabled:Boolean, half:Boolean):void {
 	//Clear status effects
-	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0) player.removeStatusAffect(StatusAffects.WormsOn);
-	if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0) player.removeStatusAffect(StatusAffects.WormsHalf);
-	if (player.findStatusAffect(StatusAffects.WormsOff) >= 0) player.removeStatusAffect(StatusAffects.WormsOff);
+	if (player.findStatusEffect(StatusEffects.WormsOn) >= 0) player.removeStatusEffect(StatusEffects.WormsOn);
+	if (player.findStatusEffect(StatusEffects.WormsHalf) >= 0) player.removeStatusEffect(StatusEffects.WormsHalf);
+	if (player.findStatusEffect(StatusEffects.WormsOff) >= 0) player.removeStatusEffect(StatusEffects.WormsOff);
 	//Set status effects
 	if (enabled) {
-		player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
-		if (half) player.createStatusAffect(StatusAffects.WormsHalf, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.WormsOn, 0, 0, 0, 0);
+		if (half) player.createStatusEffect(StatusEffects.WormsHalf, 0, 0, 0, 0);
 	}
 	else {
-		player.createStatusAffect(StatusAffects.WormsOff, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.WormsOff, 0, 0, 0, 0);
 	}
 	toggleWormsMenu();
 }
@@ -515,10 +515,10 @@ public function settingsScreenInterfaceSettings():void {
 		
 	outputText("\n\n");
 	
-	if(flags[kFLAGS.SHOW_SPRITES_FLAG] == 0) {
+	if (flags[kFLAGS.SHOW_SPRITES_FLAG] == 0) {
 		outputText("Sprites: <font color=\"#008000\"><b>ON</b></font>\n You like to look at pretty pictures.");
 		outputText("\n\n");
-		if(flags[kFLAGS.SPRITE_STYLE] == 0)
+		if (flags[kFLAGS.SPRITE_STYLE] == 0)
 			outputText("Sprite Type: <b>New</b>\n 16-bit sprites will be used.");
 		else
 			outputText("Sprite Type: <b>Old</b>\n 8-bit sprites will be used.");
@@ -530,14 +530,14 @@ public function settingsScreenInterfaceSettings():void {
 	
 	outputText("\n\n");
 	
-	if(flags[kFLAGS.USE_12_HOURS] > 0)
+	if (flags[kFLAGS.USE_12_HOURS] > 0)
 		outputText("Time Format: <b>12 hours</b>\n Time will display in 12 hours format (AM/PM)");
 	else
 		outputText("Time Format: <b>24 hours</b>\n Time will display in 24 hours format.");
 		
 	outputText("\n\n");
 	
-	if(flags[kFLAGS.USE_METRICS] > 0)
+	if (flags[kFLAGS.USE_METRICS] > 0)
 		outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
 	else
 		outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");

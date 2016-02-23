@@ -154,7 +154,7 @@ package classes.Scenes.Areas.Swamp
 			//situation when she kisses you with potent, envenomed lips.  Get 
 			//moderately hypno'ed into cumming into her over and over again?
 			outputText("Eager to plumb the depths of this greedy spider's snatch, you practically tear your way out of your " + player.armorName + " in your hurry to get naked.  Through it all ", false);
-			if (monster.lust > 99) {
+			if (monster.lust >= monster.eMaxLust()) {
 				outputText("she looks ", false);
 				if (player.tallness > 72) outputText("up ", false);
 				outputText("at you with her " + monster.skinTone + " eyes opened wide and her tongue hanging from her mouth, panting lewdly.  Carapace-clad digits sink into her dripping honey-pot over and over while she watches, deep in her own lusty haze.  She retracts her engorged demon-cock so as to have better access to that feminine hole.", false);
@@ -228,7 +228,7 @@ package classes.Scenes.Areas.Swamp
 			else outputText("You mumble out a denial.  You're not a beast... you just like to take charge and fuck.  It's just so hard to resist jumping on a nice wet pussy and making it squirt while you pack it full... no!  That's not what...\n\n", false);
 
 			outputText("\"<i>Oooh, are you leaking out more pre-cum already?  You're insatiable!  I bet you start thinking about your next fuck before you even finish getting off, don't you?  You can deny it all you want, but I felt your dick puff up a little bit more as soon as I said it.  No matter what you think, your cock is a dumb, happy little tattle-tale that always tells the girls exactly what you're thinking.</i>\"", false);
-			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("  Exgartuan mumbles telepathicaly, \"<i>Fuck yes I do, but I wanna see how this plays out.</i>\"", false);
+			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("  Exgartuan mumbles telepathicaly, \"<i>Fuck yes I do, but I wanna see how this plays out.</i>\"", false);
 			outputText("  She adds, \"<i>Face the music - there's nothing you love more than defeating someone and letting your dick tell you what to do.  You dumb... domineering... beast...</i>\"\n\n", false);
 
 			outputText("Gods!  It's getting so hard to think with that tight cunt clutching at your cock and the soft, feminine enunciations constantly interrupting your thoughts.  How can she concentrate with the stink of sex hanging so thick in the air?  Your " + cockDescript(x) + " is so horny, why aren't you fucking her yet?  You shudder weakly and remember ", false);
@@ -336,7 +336,7 @@ package classes.Scenes.Areas.Swamp
 			if (monster.nipplesPierced > 0) outputText("pierced nipples, circling the metallic stud", false);
 			else outputText("nipples, circling the moist bud", false);
 			outputText(" with your tongue", false);
-			if (player.tongueType > TONUGE_HUMAN) outputText(" as the rest of its demonic length lashes out and wraps around her pillowy bosom", false);
+			if (player.tongueType > TONGUE_HUMAN) outputText(" as the rest of its demonic length lashes out and wraps around her pillowy bosom", false);
 			outputText(".  With your free hand you massage one of her top breasts, your forearm pressing against the one below it.  The drider has no choice but to satisfy your hunger for her motherly tits, holding the back of your head with her hard gloved hand and groping your " + assDescript() + " with the other.  You begin to gyrate your hips in a sideways motion, allowing the demon-cock inside of you to grind against your inner walls with every bump protruding from its dark body.  The spider-woman bites her bottom lip as she forces herself not to paint your " + vaginaDescript(0) + " with her fervent seed.  You take your time switching through various techniques, slapping your butt against her groin or squeezing your thighs together and tightening your muscles against her thickness. Each advance is met with her lustful thrusting, the spider's cock pumping in and out in accordance to your own hip movements.  The slick juices of her cunt mix with yours, and you dwell in the pleasure of your " + vaginaDescript(0) + " filled with her own hot sex.\n\n", false);
 
 			outputText("You begin to feel yourself coming to a climax, increasing your movements and forcing the drider-woman to pump faster inside of you.  Lurching back, you drive yourself into the arachnid's crotch, her fat, demonic cock squeezing itself against your gripping walls.  Unable to take the pressure, your plaything explodes inside of you, hot white seed splattering against your inner walls and slowly oozing outside with every thrust.  You grind yourself against the spunk-machine forced inside, your orgasm causing you to shudder in pleasure along with her.  In the fullness of your vagina and time, you lay flat against her exhausted figure, your hips still squeezing the last few remaining drops of spooge left drooling from the spider's tip.  You figure it wouldn't hurt to lay still for another few hours, comfortable against the soft, plush curves of your new mate.", false);
@@ -938,7 +938,7 @@ package classes.Scenes.Areas.Swamp
 				outputText("Smirking to yourself, you advance on the collapsed girl, [cock " + y + "] straining against your clothing in anticipation of what's to come.");
 			}
 			outputText("\n\nDarting forwards suddenly, you seize her wrists, pulling her arms above her head");
-			if (monster.lust > 99) outputText(" and away from her quivering snatch");
+			if (monster.lust >= monster.eMaxLust()) outputText(" and away from her quivering snatch");
 			outputText(", her struggles useless against your steely grip.  The defeated drider's eyes darken as she looks up at you, but before she can protest you roughly flip her onto her back, splashing both of you with dank water as she flails about in the shallow muck around your feet.  Spindly legs flail feebly as you grasp both of her wrists in one hand, sliding the other down her arm until it grazes softly across her first row of breasts.  You gently squeeze the supple flesh, fingers rolling a pert nipple as it slides between them and eliciting a surprised, pleasure-laden gasp from the spider-taur.  Your member twitches as you play with her, reminding you that you've still got to deal with the woman before you can have any real fun.  Reluctantly you remove your hand from her chest, catching what sounded like a soft sigh from the drider's mouth as you start to circle around her.");
 
 			outputText("\n\nMoving behind her back, you lift up her human half until you can firmly pin her arms together behind her back.  She writhes as you ");
