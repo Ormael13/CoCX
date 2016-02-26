@@ -1352,7 +1352,7 @@ private function urtaPregCravings():void {
 	outputText(".  You smile apologetically down at her and ask her if she's found out what she's been craving yet.  \"<i>What do you think?</i>\"  She mumbles sarcastically, a playful twinkle in her eye, then starts noisily slurping and sucking, tongue frenziedly lapping at your intruding dick and her eyes rolling shut in obvious enjoyment as she gulps down the precum she's eagerly coaxing from you.");
 	
 	outputText("\n\nYou moan and try your best not to just grab onto her head and face-fuck her.  ");
-	if (player.cockTotal() > 2) outputText("The rest of your " + multiCockDescriptLight() + " are as erect as your [cock biggest] dribbling pre along their lengths as they slap Urta during her frenzied bobs.  ");
+	if (player.cockTotal() > 2) outputText("The rest of your " + player.multiCockDescriptLight() + " are as erect as your [cock biggest] dribbling pre along their lengths as they slap Urta during her frenzied bobs.  ");
 	outputText("You tell Urta that you're getting close; if she keeps up with this you won't last much longer.");
 	
 	outputText("\n\nIf she hears you, Urta isn't put off - instead, she redoubles her efforts, gurgling and moaning as she deepthroats your cock as best she can");
@@ -1657,7 +1657,7 @@ private function acceptUrtaRimJobbies():void {
 		outputText("\n\nYou stand up and face your back to her, letting her look at your [ass].  With a grunt of effort, Urta hauls herself upright and then positions herself behind your horsey-ass, squeezing and kneading the muscles of your flanks with her skilled fingers. She inhales as if to calm herself, then gently slides one finger into the still-loose and stretched ring of your anal muscles.  You wince in pain at the sudden intrusion, shaking a bit.");
 	}
 	outputText("\n\n\"<i>Right...</i>\"  With that, she leans in and gently begins to run the tip of her warm, wet tongue around your back passage, gently applying saliva to the soreness.  It still hurts a bit, but the feel of Urta's wet tongue on your ass does help you get over the pain, though the kinkiness of the act does not go unnoticed.");
-	if (player.cockTotal() > 1) outputText("  Especially not if your " + multiCockDescriptLight() + " have anything to say about it, throbbing at the mere feeling of Urta's wet tongue.");
+	if (player.cockTotal() > 1) outputText("  Especially not if your " + player.multiCockDescriptLight() + " have anything to say about it, throbbing at the mere feeling of Urta's wet tongue.");
 	else if (player.cockTotal() == 1) outputText("  Especially not if your [cock] has anything to say about it, throbbing at the mere feeling of Urta's wet tongue.");
 	else if (player.hasVagina()) outputText("  Especially not if your [pussy] has any say in the matter, winking at Urta, hoping for a licking of its own.");
 	outputText("  She slowly begins deepening the pseudo-kiss, pressing more and more of her wet tongue against you until she is taking slow, languid licks up and down the lengths of the chasm, slathering your burning skin with her cooling goo.");
@@ -2273,7 +2273,7 @@ private function takeTheKidsForWalk():void {
 	
 	outputText("\n\n\"<i>How did it go?</i>\"");
 	
-	outputText("\n\nWithout a hitch, you reply.  The " + num2Text(urtaKids()+1) + " of you stopped for some ice cream along the way.  \"<i>Good, now off you go.  Bathtime.</i>\"  She states, ushering your little fox");
+	outputText("\n\nWithout a hitch, you reply.  The " + num2Text(urtaKids() +1) + " of you stopped for some ice cream along the way.  \"<i>Good, now off you go.  Bathtime.</i>\"  She states, ushering your little fox");
 	if (urtaKids() > 1) outputText("es");
 	outputText(" towards the bathroom.  There is a " + urtaKidsText("shrill protest","shrill protest","chorus of shrill protests") + ", but " + urtaKidsText("he","she","they") + " clearly understand");
 	if (urtaKids() == 1) outputText("s");
@@ -2768,7 +2768,7 @@ private function liannaHandjobbies():void {
 	//If more than one dick:
 	if (player.cockTotal() > 1) {
 		outputText("\n\n\"<i>I need to get something first.</i>\"  She ducks out into her closet once more, rummaging through it until she emerges with a box full of cock-rings.  Okay, this doesn't look so inviting...");
-		outputText("\n\nShe ducks close to you and analyses your " + multiCockDescriptLight() + ".  \"<i>I think this one should do.</i>\"  She says, caressing your [cock biggest].  You murmur appreciatively at the stimulus, but you don't forget what's coming next even as your traitorous flesh erects itself for her.  She fishes for a cock-ring and attaches it to your other dick");
+		outputText("\n\nShe ducks close to you and analyses your " + player.multiCockDescriptLight() + ".  \"<i>I think this one should do.</i>\"  She says, caressing your [cock biggest].  You murmur appreciatively at the stimulus, but you don't forget what's coming next even as your traitorous flesh erects itself for her.  She fishes for a cock-ring and attaches it to your other dick");
 		if (player.cockTotal() > 2) outputText("s");
 		outputText(", effectively binding them at their base.  You groan hollowly at this; though this certainly will mean less mess, you're not so sure you're going to enjoy the sensation of trying to cum through the " + num2Text(player.cockTotal()-1) + " cocks that have been blocked up.  Satisfied with her work, she looks at your [cock biggest].");
 	}

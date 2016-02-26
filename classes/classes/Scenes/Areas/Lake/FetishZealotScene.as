@@ -28,7 +28,7 @@ package classes.Scenes.Areas.Lake
 		//something with the lust transfer spell), gains 5 
 		//lust on each turn of combat
 //Standard attack enabled: does a little bit of lust damage 
-		//in addition to regular damage (lib/20 + rand(4)+1)
+		//in addition to regular damage (lib/20 + rand(4) +1)
 
 
 		/*
@@ -114,7 +114,7 @@ package classes.Scenes.Areas.Lake
 			if (broseph == "dude") {
 				outputText("He starts to look up, but then his gazes fixes directly on your ", false);
 				if (player.cockTotal() > 0) {
-					outputText(multiCockDescriptLight() + ".  You feel yourself grow hard ", false);
+					outputText(player.multiCockDescriptLight() + ".  You feel yourself grow hard ", false);
 					if (player.hasVagina()) {
 						outputText("and wet ", false);
 					}
@@ -130,9 +130,9 @@ package classes.Scenes.Areas.Lake
 			else {
 				outputText("He starts to look up, but his gazes fixes on your skirt, just barely covering your ", false);
 				if (player.hasVagina()) {
-					outputText(vaginaDescript(0) + " ", false);
+					outputText(player.vaginaDescript(0) + " ", false);
 					if (player.cockTotal() > 0) {
-						outputText("and your " + multiCockDescriptLight() + " ", false);
+						outputText("and your " + player.multiCockDescriptLight() + " ", false);
 					}
 				}
 				else {
@@ -140,7 +140,7 @@ package classes.Scenes.Areas.Lake
 				}
 				outputText("from this angle.  You feel hot under his gaze ", false);
 				if (player.cockTotal() > 0) {
-					outputText(", and your " + multiCockDescriptLight() + " start", false);
+					outputText(", and your " + player.multiCockDescriptLight() + " start", false);
 					if (player.cockTotal() == 1) {
 						outputText("s", false);
 					}
@@ -161,22 +161,22 @@ package classes.Scenes.Areas.Lake
 					//Give the zealot a blowjob
 					outputText("You take a hold of his nicely sized balls in one hand and the base of his cock in the other.  You give the tip a few licks before running your tongue down its length, making sure to coat every bit of it in your saliva along the way.  His aroused groans let you know that you are giving a good demonstration.  You give his balls a soft rub as you stick the end inside your mouth and run your tongue around it; the taste of his pre is almost like candy to you.\n\n", false);
 					//now the favor is returned
-					outputText("You stand up and indicate to him that it is now his turn, and while he is disappointed that the blowjob ended before he came, he still eagerly kneels down in front of your exposed " + multiCockDescriptLight() + " and licks his lips eagerly.  He tries to imitate your performance on his manhood onto your " + cockDescript(0) + ", but he sometimes messes up the order, or does something too fast or slow.  Fortunately, he is a good student, and under your guidance he is soon sucking cock like a pro.  He tickles you with his tongue in just the right way, and gives just the right amount of attention to each part of your length.  ", false);
-					if (player.hasVagina()) outputText("You slip one of your fingers inside your " + vaginaDescript(0) + ", wishing that it could get some attention, but this lesson is about pleasing <i>men</i>.  ", false);
+					outputText("You stand up and indicate to him that it is now his turn, and while he is disappointed that the blowjob ended before he came, he still eagerly kneels down in front of your exposed " + player.multiCockDescriptLight() + " and licks his lips eagerly.  He tries to imitate your performance on his manhood onto your " + player.cockDescript(0) + ", but he sometimes messes up the order, or does something too fast or slow.  Fortunately, he is a good student, and under your guidance he is soon sucking cock like a pro.  He tickles you with his tongue in just the right way, and gives just the right amount of attention to each part of your length.  ", false);
+					if (player.hasVagina()) outputText("You slip one of your fingers inside your " + player.vaginaDescript(0) + ", wishing that it could get some attention, but this lesson is about pleasing <i>men</i>.  ", false);
 					outputText("You feel yourself getting close to the edge and tell him to stop.  He looks up at you uncertain for a moment, and you tell him \"<i>It's time for the main event.</i>\"\n\n", false);
 					//jerking off contest
-					outputText("He eagerly stands up and wraps his hands around his fine cock, you quickly try to do the same with your " + multiCockDescript() + ".  \"<i>I won't lose to you so easily, professor!</i>\" he declares to you, \"<i>Don't act so confidently on your first time.</i>\" you reply.  Then the two of you are madly jerking yourselves off in a mad effort to get off before the other, your respective cocks already moist from the blowjobs they just received.  ", false);
+					outputText("He eagerly stands up and wraps his hands around his fine cock, you quickly try to do the same with your " + player.multiCockDescript() + ".  \"<i>I won't lose to you so easily, professor!</i>\" he declares to you, \"<i>Don't act so confidently on your first time.</i>\" you reply.  Then the two of you are madly jerking yourselves off in a mad effort to get off before the other, your respective cocks already moist from the blowjobs they just received.  ", false);
 					//just one cock
 					if (player.totalCocks() == 1) {
-						outputText("You piston your hands on your " + cockDescript(0) + ", ", false);
+						outputText("You piston your hands on your " + player.cockDescript(0) + ", ", false);
 					}
 					//nope two
 					else if (player.totalCocks() == 2) {
-						outputText("With one hand on each of your " + multiCockDescriptLight() + ", you piston them like mad, ", false);
+						outputText("With one hand on each of your " + player.multiCockDescriptLight() + ", you piston them like mad, ", false);
 					}
 					//oh no, is more than that
 					else {
-						outputText("Rapidly moving your hands between each rod in your " + multiCockDescriptLight() + ", you manage to piston each of them at an incredible rate, ", false);
+						outputText("Rapidly moving your hands between each rod in your " + player.multiCockDescriptLight() + ", you manage to piston each of them at an incredible rate, ", false);
 					}
 					outputText("pushing your pleasure to incredible levels at an impressive rate.  Though, to your amazement, you hear your student give a gasp of pleasure just before you yourself are pushed over the edge.  The student had surpassed the teacher.\n\n", false);
 				}
@@ -191,19 +191,19 @@ package classes.Scenes.Areas.Lake
 					//blowjob
 					outputText("You take a hold of his nicely sized balls in one hand and the base of his cock in the other.  You give the tip a few licks before running your tongue down its length,  making sure to coat every bit of it in your saliva along the way.  His aroused groans let you know that you are giving a good demonstration.  You give his balls a soft rub as you stick the end inside your mouth and run your tongue around it; the taste of his pre is almost like candy to you.\n\n", false);
 					//cunalinguss
-					outputText("You stand up and indicate that it is now his turn, and while he is disappointed that the blowjob ended before he came, he still eagerly kneels down in front of your " + vaginaDescript(0) + ".  You gingerly lift up your skirt ", false);
+					outputText("You stand up and indicate that it is now his turn, and while he is disappointed that the blowjob ended before he came, he still eagerly kneels down in front of your " + player.vaginaDescript(0) + ".  You gingerly lift up your skirt ", false);
 					if (player.balls > 0) {
-						outputText("and move your " + ballsDescriptLight() + " out of the way ", false);
+						outputText("and move your " + player.ballsDescriptLight() + " out of the way ", false);
 					}
-					outputText("so he has access to your " + vaginaDescript(0) + ".  He sets to work, and you give him careful instructions on where to lick, how hard, and such.  He easily catches on, and soon he is probing all the right places, and giving the right amount of attention to every part of you.  ", false);
+					outputText("so he has access to your " + player.vaginaDescript(0) + ".  He sets to work, and you give him careful instructions on where to lick, how hard, and such.  He easily catches on, and soon he is probing all the right places, and giving the right amount of attention to every part of you.  ", false);
 					if (player.cockTotal() > 0) {
-						outputText("You give your " + multiCockDescriptLight() + " a few gentle strokes, wishing he would give that a little attention too, but this is a lesson on how to please a <i>woman</i>.  ", false);
+						outputText("You give your " + player.multiCockDescriptLight() + " a few gentle strokes, wishing he would give that a little attention too, but this is a lesson on how to please a <i>woman</i>.  ", false);
 					}
 					outputText("You feel yourself getting close to the edge and tell him to stop.  He looks up at you uncertain for a moment, and you tell him \"<i>It's time for the main event.</i>\"\n\n", false);
 					//prick in the twat
-					outputText("He eagerly stands up and starts to push you back against your desk, his fine cock already inside your " + vaginaDescript(0) + ".  He pushes you onto your back and grabs ahold of your legs, starting to make strong thrusts deep inside you, his cock seeming to fit your " + vaginaDescript(0) + " perfectly.  Any pretense of professionalism is lost in the moment, as all you can care about is the feeling of his exquisite cock perfectly filling you, pushing in and out.  All too soon, you hear him gasp, and the wonderful feeling of sweet release fills you.  ", false);
+					outputText("He eagerly stands up and starts to push you back against your desk, his fine cock already inside your " + player.vaginaDescript(0) + ".  He pushes you onto your back and grabs ahold of your legs, starting to make strong thrusts deep inside you, his cock seeming to fit your " + player.vaginaDescript(0) + " perfectly.  Any pretense of professionalism is lost in the moment, as all you can care about is the feeling of his exquisite cock perfectly filling you, pushing in and out.  All too soon, you hear him gasp, and the wonderful feeling of sweet release fills you.  ", false);
 					if (player.cockTotal() > 0) {
-						outputText("Your " + multiCockDescriptLight() + " spasms and covers you with a liberal amount of your own fluids.  ", false);
+						outputText("Your " + player.multiCockDescriptLight() + " spasms and covers you with a liberal amount of your own fluids.  ", false);
 					}
 					outputText("After a moment, your student pulls out of you and helps you back up.\n\n", false);
 				}
@@ -272,22 +272,22 @@ package classes.Scenes.Areas.Lake
 			//If player has a dick, chose one of these at random if the player has both
 			if (player.cockTotal() > 0 && (player.gender != 3 || rand(2) == 0)) {
 				outputText("As you move towards him, he drops onto all fours with his head down and ass in the air.  He seems to have started making a prayer: \"<i>Forgive me my lord, for I have failed to protect your holdings and will now accept your punishment by being violated by the one who defeated me.</i>\" ", false);
-				if (player.cor < 50) outputText("You stop and stare at him for a moment, in complete disbelief at this bizarre 'prayer'.  You consider just leaving him alone, but sensing your hesitation, the zealot looks up to you with a horrified expression.  \"<i>You must violate me!</i>\"  He cries out to you, \"<i>Please, let me finish my prayer, put your " + cockDescript(0) + " in my ass.</i>\"  Well, he did ask you...\n\n", false);
+				if (player.cor < 50) outputText("You stop and stare at him for a moment, in complete disbelief at this bizarre 'prayer'.  You consider just leaving him alone, but sensing your hesitation, the zealot looks up to you with a horrified expression.  \"<i>You must violate me!</i>\"  He cries out to you, \"<i>Please, let me finish my prayer, put your " + player.cockDescript(0) + " in my ass.</i>\"  Well, he did ask you...\n\n", false);
 				else outputText("You chuckle at him, he <i>accepts</i> his punishment?  Oh, you are going to enjoy this so much.\n\n", false);
-				outputText("You remove your " + player.armorName + " and stride up behind him, and grab his rear end to line up your " + cockDescript(0) + " with his loose hole as he continues his prayer: \"<i>Soon a man will violate my ass, like so many others have done in your holy worship.  Woe is me, to be treated like this by someone who doesn't follow us.</i>\" You shake your head at this absurdity and plunge your " + cockDescript(0) + " inside his waiting hole.  Amazingly, his hole somehow manages to fit you perfectly.  Since he seems to have no problem taking you, you waste no time in getting the anal rape on.\n\n", false);
+				outputText("You remove your " + player.armorName + " and stride up behind him, and grab his rear end to line up your " + player.cockDescript(0) + " with his loose hole as he continues his prayer: \"<i>Soon a man will violate my ass, like so many others have done in your holy worship.  Woe is me, to be treated like this by someone who doesn't follow us.</i>\" You shake your head at this absurdity and plunge your " + player.cockDescript(0) + " inside his waiting hole.  Amazingly, his hole somehow manages to fit you perfectly.  Since he seems to have no problem taking you, you waste no time in getting the anal rape on.\n\n", false);
 				outputText("\"<i>My shame brings the one within me their pleasure; such a tragedy has befallen me.</i>\" he continues.  \"<i>Shut up and take it like a man!</i>\" you tell him, and start fucking him more and more roughly.  You reach around him and grab his balls, and start to grip them painfully.    He isn't perturbed, and continues his prayers between his gasps: \"<i>Agh, The horror, I'm being tortur- ah, while being raped ungh, and I'm loving every moment.  Oug!</i>\"  Having had enough, you squeeze his sack hard, at the same time as you cum inside his ass.\n\n", false);
 				outputText("Your lusts sated for now, you rise up off of him and put your " + player.armorName + " back on.  You decide to leave him lying there, still doubled over in pain from the damage you did to his balls.\n\n", false);
 			}
 			//If player has a vagina, again, if both, chose one at random
 			else if (player.hasVagina()) {
 				outputText("As you move towards him, he lays back onto the ground, his cock almost pointing straight up in the air.  He clasps his hands in front of his face and starts praying: \"<i>Forgive me my lord, for I have failed to protect your holdings and will now accept your punishment by being violated by the one who defeated me.</i>\" ", false);
-				if (player.cor < 50) outputText("You stop and stare at him for a moment, in complete disbelief at this bizarre 'prayer'.  You consider just leaving him alone, but sensing your hesitation, the zealot looks up to you with a horrified expression.  \"<i>You must violate me!</i>\"  He cries out at you, \"<i>Please, let me finish my prayer, take me within your " + vaginaDescript(0) + " for your own pleasure.</i>\"  Well, he did ask you...\n\n", false);
+				if (player.cor < 50) outputText("You stop and stare at him for a moment, in complete disbelief at this bizarre 'prayer'.  You consider just leaving him alone, but sensing your hesitation, the zealot looks up to you with a horrified expression.  \"<i>You must violate me!</i>\"  He cries out at you, \"<i>Please, let me finish my prayer, take me within your " + player.vaginaDescript(0) + " for your own pleasure.</i>\"  Well, he did ask you...\n\n", false);
 				else outputText("You chuckle at him, he <i>accepts</i> his punishment?  Oh, you are going to enjoy this so much.\n\n", false);
-				outputText("You remove your " + player.armorName + " and stride over top of him, looking down at the defeated zealot as he continues his prayer.  \"<i>I am a wretched man to have allowed a woman like you to have defeated me.  Woe is me, lying at your feet.</i>\"  You shake your head at this absurdity and lower yourself down to get to the fun part.  You eagerly grab his cock and guide it towards your " + vaginaDescript(0) + ", awaiting the pleasure you are sure it will bring you.  \"<i>Look at me, so eager to be violated despite why it is happening to me, and yet she teases me and draws it out, making it so much more painful.</i>\"\n\n", false);
+				outputText("You remove your " + player.armorName + " and stride over top of him, looking down at the defeated zealot as he continues his prayer.  \"<i>I am a wretched man to have allowed a woman like you to have defeated me.  Woe is me, lying at your feet.</i>\"  You shake your head at this absurdity and lower yourself down to get to the fun part.  You eagerly grab his cock and guide it towards your " + player.vaginaDescript(0) + ", awaiting the pleasure you are sure it will bring you.  \"<i>Look at me, so eager to be violated despite why it is happening to me, and yet she teases me and draws it out, making it so much more painful.</i>\"\n\n", false);
 				outputText("With a laugh, you impale yourself on his cock and despite how ", false);
 				if (player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_LOOSE) outputText("tight", false);
 				else outputText("loose", false);
-				outputText(" you are, he still seems to fit you like a glove.  With no need to adjust to his presence inside you, you immediately start to roughly fuck him.  To make sure he doesn't enjoy himself too much, you start to twist and pull at his nipples.  Between his gasps of pleasure and pain, he continues his prayer: \"<i>Gah, oh woe is me, ah-gha, my punishment is my pleas- agh!  My eternal torment will be –ugha, never being able to –hah, enjoy this forever.  Ugha!</i>\"  Finally tired of his antics, you punch him in the stomach, as his amazing rod pumping within your " + vaginaDescript(0) + " pushes you over the edge of an orgasm.\n\n", false);
+				outputText(" you are, he still seems to fit you like a glove.  With no need to adjust to his presence inside you, you immediately start to roughly fuck him.  To make sure he doesn't enjoy himself too much, you start to twist and pull at his nipples.  Between his gasps of pleasure and pain, he continues his prayer: \"<i>Gah, oh woe is me, ah-gha, my punishment is my pleas- agh!  My eternal torment will be –ugha, never being able to –hah, enjoy this forever.  Ugha!</i>\"  Finally tired of his antics, you punch him in the stomach, as his amazing rod pumping within your " + player.vaginaDescript(0) + " pushes you over the edge of an orgasm.\n\n", false);
 				outputText("Your lusts sated for now, you rise up off of him and put your " + player.armorName + " back on.  You decide to leave him lying there, still coughing from the blow to his stomach.  ", false);
 				player.cuntChange(monster.cockArea(0), true);
 			}

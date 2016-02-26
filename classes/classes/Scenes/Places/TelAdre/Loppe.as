@@ -895,7 +895,7 @@ private function loppeRidesCocks():void {
 	else outputText("cumbersomely on the floor, rolling over and spreading your hindlegs to expose yourself");
 	outputText(".  Quietly, you ask Loppe how she would feel about indulging her feminine half.");
 
-	outputText("\n\n\"<i>I would love to, sugar!</i>\"  Loppe gazes at your " + multiCockDescriptLight() + ".");
+	outputText("\n\n\"<i>I would love to, sugar!</i>\"  Loppe gazes at your " + player.multiCockDescriptLight() + ".");
 	//[(2 fit cocks)
 	var x:int = player.cockThatFits(loppeCapacity());
 	var y:int = player.cockThatFits2(loppeCapacity());
@@ -919,7 +919,7 @@ private function loppeRidesCocks():void {
 	outputText(" own, shivering from the sensation of your sensitive " + player.skin() + " against her proud horseflesh, already drooling even though you can plainly feel that it's only half-erect.");
 	if (player.balls > 0) outputText("  Your [balls] gently brush and rub against her own swollen cum-factories, and you can't wait to empty your overfilled sac into her waiting womb.");
 
-	outputText("\n\n\"<i>Okay, that's enough foreplay!</i>\" Loppe announces suddenly, eyeing your " + cockDescript(x) + " with a hunger that you never expected to see on her face.  Loppe quickly straddles you, aligning it with her pussy");
+	outputText("\n\n\"<i>Okay, that's enough foreplay!</i>\" Loppe announces suddenly, eyeing your " + player.cockDescript(x) + " with a hunger that you never expected to see on her face.  Loppe quickly straddles you, aligning it with her pussy");
 	if (y >= 0) outputText("; its neighbor is aimed for her tight rosebud");
 	outputText(".  \"<i>Itadakimasu!</i>\" Loppe says, licking her lips as she finally slides you home.");
 
@@ -988,8 +988,8 @@ private function loppeRidesYouSpunksInYourEye():void {
 	outputText("You keep your ");
 	if (player.isDrider()) outputText("legs");
 	else outputText("arms");
-	outputText(" wrapped around your lover, welcoming what's approaching as her horse-prick throbs and her flared tip inflates.  With a rapturous howl the laquine's cumslit opens like a floodgate, spurting jet after jet of cum onto your [chest], [face] and even the wall behind you; her own pillowy breasts and face are splashed with the force of her orgasm.  Her tight pussy contracts, milking your " + cockDescript(x) + " for all its worth");
-	if (y >= 0) outputText(", while her anal ring constricts your " + cockDescript(y) + " tightly, intent on holding you in place");
+	outputText(" wrapped around your lover, welcoming what's approaching as her horse-prick throbs and her flared tip inflates.  With a rapturous howl the laquine's cumslit opens like a floodgate, spurting jet after jet of cum onto your [chest], [face] and even the wall behind you; her own pillowy breasts and face are splashed with the force of her orgasm.  Her tight pussy contracts, milking your " + player.cockDescript(x) + " for all its worth");
+	if (y >= 0) outputText(", while her anal ring constricts your " + player.cockDescript(y) + " tightly, intent on holding you in place");
 	outputText(".");
 
 	outputText("\n\nThe smell of her juices fills the air and floods your nostrils, the copious cum painting itself over both your bodies in great smears that make things deliciously slick and slippery.  The combination of this stimulus with the expert milking of her wonderfully tight nethers and your own hyper-aroused state renders you unable to hold out any more.  With a great shout of your own, you unleash your orgasm into her waiting depths.");
@@ -1013,10 +1013,10 @@ private function loppeRidesPCCockFinal():void {
 	var y:int = player.cockThatFits2(loppeCapacity());
 
 	outputText(images.showImage("loppe-rides-your-cock"));
-	outputText("\n\nYour " + cockDescript(x) + " gushes fluids into her hungry womb");
+	outputText("\n\nYour " + player.cockDescript(x) + " gushes fluids into her hungry womb");
 	if (y >= 0 || player.hasVagina()) {
 		outputText(", while ");
-		if (y>= 0) outputText("your second " + cockDescript(y) + " just as easily pumps her perverted ass full of baby juice");
+		if (y>= 0) outputText("your second " + player.cockDescript(y) + " just as easily pumps her perverted ass full of baby juice");
 		if (y>= 0 && player.hasVagina()) outputText(" and ");
 		if (player.hasVagina()) {
 			outputText("your [vagina] ");
@@ -1046,12 +1046,12 @@ private function loppeRidesPCCockFinal():void {
 	}
 
 	outputText("\n\nLoppe quietly disentangles herself from your half-staff ");
-	outputText(multiCockDescriptLight() + " and slides down your body, pressing her soft, cum-slickened breasts against you.  You moan as the smooth curves of her chest press against [eachCock]; the cum-slick ");
+	outputText(player.multiCockDescriptLight() + " and slides down your body, pressing her soft, cum-slickened breasts against you.  You moan as the smooth curves of her chest press against [eachCock]; the cum-slick ");
 	if (flags[kFLAGS.LOPPE_FURRY] == 0) outputText("skin");
 	else outputText("fur");
 	outputText(" give you the impression of being wrapped in the moist folds of a woman's sex.  As Loppe slides further down you feel her teasingly licking at the tip");
 	if (y >= 0) outputText("s");
-	outputText(" of your " + multiCockDescriptLight() + ".");
+	outputText(" of your " + player.multiCockDescriptLight() + ".");
 
 	outputText("\n\nThe skillful dance of her warm, wet tongue on the sensitive skin of your post-orgasmic member");
 	if (y >= 0) outputText("s");
@@ -1216,7 +1216,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	outputText(" that I intend to fill up with my laquine love.</i>\"  She wastes no time and pounces on the bed, ready to bury her face between your [legs], licking her lips while taking deep breaths to inhale as much of your pheromones as she can.  You blink at the speed with which she moves, but smile, repositioning yourself to give her better access");
 	//[(herm non-horse)
 	if (player.gender == 3 && !player.isTaur()) {
-		outputText(", though she needs to move aside " + sMultiCockDesc() + " ");
+		outputText(", though she needs to move aside " + player.sMultiCockDesc() + " ");
 		if (player.balls > 0) outputText("and [balls] ");
 		outputText("to really get at your cunt");
 	}
@@ -1227,7 +1227,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	if (!player.isTaur() && player.gender == 3) {
 		outputText(", under your ");
 		if (player.balls > 0) outputText("[sack]");
-		else outputText(multiCockDescriptLight());
+		else outputText(player.multiCockDescriptLight());
 		outputText(",");
 	}
 	outputText(" to lick and kiss your sensitive labia.  You arch your back and thrust your crotch at her, letting the laquine have your precious pussy to taste and suckle and ravage... she's pretty good with that tongue of hers.  Loppe lifts her head and wipes her face with her arm.  \"<i>I'm even better with this,</i>\" she says, mirroring your thoughts and holding her painfully erect equine-shaft.  You watch as it throbs, every vein bulging visibly, balls engorged as they churn up a load of cum to deposit in your waiting womb.  She ducks to take another lick, tasting you like one tastes a fine wine.");
@@ -1269,7 +1269,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	outputText("\n\nLoppe's technique is exquisite; she gyrates her hips with each thrust, making sure to press her flare against that special spot inside you that makes you scream in pleasure, once she sees your reaction, she deliberately drags her tip across it with each pass, depositing huge amounts of pre.");
 
 	outputText("\n\nYou hiss and shudder, writhing across the bedsheets as your lover works her magic on you, filling you with pleasure.  Juices flow wet and thick from your pussy");
-	if (player.hasCock()) outputText(", precum begins to drool from your " + multiCockDescriptLight());
+	if (player.hasCock()) outputText(", precum begins to drool from your " + player.multiCockDescriptLight());
 	outputText(".");
 
 	//Not Centaur:

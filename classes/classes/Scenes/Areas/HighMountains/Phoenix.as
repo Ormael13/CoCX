@@ -61,7 +61,7 @@ package classes.Scenes.Areas.HighMountains
 				if (player.hasCock() && player.hasVagina()) outputText("whilst your");
 				if (player.hasVagina()) outputText("thighs are suddenly soaked by a torrent of girlcum as your body reacts to the potent chemicals");
 				outputText(".");
-				var lustDmg:Number = (30 + rand(30)) * (game.lustPercent()/100);
+				var lustDmg:Number = (30 + rand(30)) * (player.lustPercent() / 100);
 				game.dynStats("lus", lustDmg, "resisted", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDmg*10)/10) + "</font>)</b>");
 			}

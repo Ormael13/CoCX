@@ -145,7 +145,7 @@
 					game.combatRoundOver();
 					return;
 				}
-				outputText("You are burned badly by the flames! ("+player.takeDamage(40)+")", false);
+				outputText("You are burned badly by the flames! ("+player.takeDamage(40) +")", false);
 				;
 			}
 			game.combatRoundOver();

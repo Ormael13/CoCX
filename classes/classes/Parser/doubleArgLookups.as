@@ -96,7 +96,7 @@
 						else
 						{
 							if (aspect-1 >= 0 && aspect-1 < kGAMECLASS.player.cockTotal()) return kGAMECLASS.player.cockDescript(aspect - 1);
-							else return "<b>(Attempt To Parse CockDescript for Invalid Cock)</b>";
+							else return "<b>(Attempt To Parse player.cockDescript for Invalid Cock)</b>";
 						}
 					},
 				"cockhead":

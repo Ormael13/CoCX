@@ -337,7 +337,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			
 			str += ". " + player.mf("He", "She") + " keeps exploring the area around " + player.mf("his", "her") +" mouth with " + player.mf("his", "her") +" tongue with a horribly acquisitive, sensual interest.";
-			str += " " + player.mf("He", "She") + " moves around on " + player.mf("his", "her") +" " + player.legs() + " with a twitchy jerkiness, " + player.mf("his", "her") + " " + game.hipDescript() + " swinging and tightening.";
+			str += " " + player.mf("He", "She") + " moves around on " + player.mf("his", "her") +" " + player.legs() + " with a twitchy jerkiness, " + player.mf("his", "her") + " " + player.hipDescript() + " swinging and tightening.";
 			if (player.tailType != 0) str += " " + player.mf("His", "Her") + " tail flicks this way and that.";
 			str += " " + player.mf("He", "She") + " wields the exact same " + player.weaponName + " you do, and is dressed in the mirror image of your " + player.armorName +  ". ";
 			if (player.biggestTitSize() >= 2) str += "It’s difficult not to notice the way the mirror image of your " + player.breastDescript(player.biggestTitRow()) + " ebbs and heaves within it.";

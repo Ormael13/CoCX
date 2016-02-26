@@ -13,7 +13,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPunishmentStockades():void
 		{
 			//Punishment Intro 
-			outputText("(Placeholder) " + prison.prisonCaptor.captorTitle + " " + prison.prisonCaptor.captorName + " drags you to the stockades in the middle of the room, forces you to bend over them, and clamps your head and hands securely within them. She then inserts a cleverly shaped dildo in your ass. Aside from the penetrating tip, it is thin, broad, and rigid in order to allow other things to enter your " + assholeDescript() + " while it is in place, with a handle on the outside of your " + assDescript() + " that curves upward in a hook-like shape. She then attaches a chain between the handle and the ceiling, and tightens it such that should your [legs] go slack even the slightest bit, the entire weight of your torso would be suspended by your asshole. \n\n",false);
+			outputText("(Placeholder) " + prison.prisonCaptor.captorTitle + " " + prison.prisonCaptor.captorName + " drags you to the stockades in the middle of the room, forces you to bend over them, and clamps your head and hands securely within them. She then inserts a cleverly shaped dildo in your ass. Aside from the penetrating tip, it is thin, broad, and rigid in order to allow other things to enter your " + player.assholeDescript() + " while it is in place, with a handle on the outside of your " + player.assDescript() + " that curves upward in a hook-like shape. She then attaches a chain between the handle and the ceiling, and tightens it such that should your [legs] go slack even the slightest bit, the entire weight of your torso would be suspended by your asshole. \n\n",false);
 			outputText("(Placeholder)\"<i>Since you seem reluctant to accept what you are, I think it's time for a bit of a crash course. When you have shown you truly understand that your only value is as a source of pleasure and entertainment for others, I will give you a chance to apologize for your impertinance. Until then, you will remain hanging by your ass locked in my stockades, and you will <b>learn</b> from it. And then, if I feel like it, you will hang there some more for no other reason than because it gives <b>me</b> pleasure to see squirm. And you will learn from that, too.</i>\"",false);
 			
 			// dont really know what this does 
@@ -63,7 +63,7 @@ package classes.Scenes.Places.Prison
 					prison.changeEsteem(-1,prison.inPrison);
 					break;
 				case 1:
-					outputText("(Placeholder) A passing guard sees your predicament, and decides to \"help\" by feeding you his cock. With your head securely clamped in the stocks and the ring gag holding your mouth wide open, all you can do is drool and look up plaintively as he stuffs your throat. However, at the last moment he says that the " + prison.prisonCaptor.captorTitle + " probably wouldn't be happy if he provided you with extra \"nutrition\" right now, so instead he pulls out of your mouth and coats your [face] instead. He cums for what seems like minutes, not only covering your face in a thick layer of jizz but soaking your " + hairDescript() + " as well. He leaves you to drown in your humiliation while spunk drips from your chin, slides down your neck, and dries into a sticky crust in your hair and on your face.",false);
+					outputText("(Placeholder) A passing guard sees your predicament, and decides to \"help\" by feeding you his cock. With your head securely clamped in the stocks and the ring gag holding your mouth wide open, all you can do is drool and look up plaintively as he stuffs your throat. However, at the last moment he says that the " + prison.prisonCaptor.captorTitle + " probably wouldn't be happy if he provided you with extra \"nutrition\" right now, so instead he pulls out of your mouth and coats your [face] instead. He cums for what seems like minutes, not only covering your face in a thick layer of jizz but soaking your " + player.hairDescript() + " as well. He leaves you to drown in your humiliation while spunk drips from your chin, slides down your neck, and dries into a sticky crust in your hair and on your face.",false);
 					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4,player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) + 1);
 					prison.changeEsteem(-5,prison.inPrison);
 					prison.changeObey(0.5,prison.inPrison);
@@ -252,10 +252,10 @@ package classes.Scenes.Places.Prison
 			outputText("(Placeholder)A dark resolve comes over your [captorTitle], and [captorhe] drags you to the stone box in the corner of the room and presses a hidden switch somewhere near its base. The front panel slides open and " + prison.prisonCaptor.captorPronoun1 + " quickly forces you inside the narrow chamber.\n\n",false);
 			outputText("\"<i>I'm afraid I've done you a disservice by allowing you to take my kindness for granted for so long. Well, I'll correct that mistake today. You will soon feel like you are being harshly punished, but trust me, in the end you will thank me for it. You will thank me for breaking you of your false impressions about your station in life. You will thank me because you will understand just how kind I have been. You will thank me because you will have a new found appreciation for the truth that both your mind and your body eventually submit to my will no matter how hard you try to fight it. And until you <b>do</b> thank me <b>and</b> apologize for your bad behavior, you <b>will</b> remain in this box and learn its very direct and pointed lesson.</i>\"\n\n",false);
 			outputText("With that very conclusive statement " + prison.prisonCaptor.captorPronoun1 + " fastens a girdle around your waste and uses four belts to attach it to vertical metal bars in each of the four corners of the stone box. Once the belts are properly tightened you realize that they are designed to hold you securely in the center of the stone box. You can barely squirm more than an inch in any direction, and thus are completely unable to lean on the walls of the chamber.\n\n",false);
-			outputText("But despite preventing any sideways movement, the straps wrap around the bars in a way that does allow you to crouch and stand freely. You understand why as your " + prison.prisonCaptor.captorTitle + " presents the final piece of the puzzle: a horizontal bar with a collection of demonically animated monstrous dildos bristling upwards along its length. Grinning, " + prison.prisonCaptor.captorPronoun1 + " positions the bar between your [legs] at a height where even if you stand on the tips of your toes the wriggling beasts can just barely find their way into your " + assholeDescript(),false);
+			outputText("But despite preventing any sideways movement, the straps wrap around the bars in a way that does allow you to crouch and stand freely. You understand why as your " + prison.prisonCaptor.captorTitle + " presents the final piece of the puzzle: a horizontal bar with a collection of demonically animated monstrous dildos bristling upwards along its length. Grinning, " + prison.prisonCaptor.captorPronoun1 + " positions the bar between your [legs] at a height where even if you stand on the tips of your toes the wriggling beasts can just barely find their way into your " + player.assholeDescript(),false);
 			if (player.vaginas.length > 0)
 			{
-				outputText(" and " + vaginaDescript(),false);
+				outputText(" and " + player.vaginaDescript(),false);
 			}
 			outputText(". And with you properly strapped into the hellish box, " + prison.prisonCaptor.captorTitle + " " + prison.prisonCaptor.captorName + " shoves a penis gag down your throat, straps it in place, and closes the stone door without another word. You are left in complete darkness and silence with nothing to keep you company but your panicked thoughts and the ravenous shafts between your legs.",false);
 			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,12 + rand(4));
@@ -341,20 +341,20 @@ package classes.Scenes.Places.Prison
 			statusVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus);
 			if (statusVal <= 1)
 			{
-				outputText("There is now less than an inch of dildo wriggling around inside your " + assholeDescript(),false);
+				outputText("There is now less than an inch of dildo wriggling around inside your " + player.assholeDescript(),false);
 			}
 			else if (statusVal >= 20)
 			{
-				outputText("You've sank down as far as you can go and your " + assDescript() + " now rests on the bar. Over 20 inches of dildo are buried in your " + assholeDescript(),false);
+				outputText("You've sank down as far as you can go and your " + player.assDescript() + " now rests on the bar. Over 20 inches of dildo are buried in your " + player.assholeDescript(),false);
 			}
 			else
 			{
-				outputText("There are now almost " + Math.ceil(statusVal) + " inches of dildo wriggling around inside your " + assholeDescript(),false);
+				outputText("There are now almost " + Math.ceil(statusVal) + " inches of dildo wriggling around inside your " + player.assholeDescript(),false);
 			}
 			
 			if (player.vaginas.length > 0)
 			{
-				outputText(" and " + vaginaDescript(),false);
+				outputText(" and " + player.vaginaDescript(),false);
 			}
 			outputText(". ",false);
 			if (verbose)
@@ -708,7 +708,7 @@ package classes.Scenes.Places.Prison
 				}
 				else if (statusVal <= 90)
 				{
-					outputText(" Your face, " + allChestDesc() + ", knees, and indeed pratically your whole body are coated in a sticky residue from wallowing back and forth in the lake of cum that has formed between the cask and the basin. ",false);
+					outputText(" Your face, " + player.allChestDesc() + ", knees, and indeed pratically your whole body are coated in a sticky residue from wallowing back and forth in the lake of cum that has formed between the cask and the basin. ",false);
 				}
 				else
 				{

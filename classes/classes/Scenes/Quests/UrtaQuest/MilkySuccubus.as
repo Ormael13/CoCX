@@ -119,7 +119,7 @@ package classes.Scenes.Quests.UrtaQuest
 			this.lustVuln = .3;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 16;
-			this.gems = rand(25)+10;
+			this.gems = rand(25) +10;
 			this.additionalXP = 50;
 			this.drop = NO_DROP;
 			this.hornType = HORNS_DRACONIC_X2;

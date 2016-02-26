@@ -1319,7 +1319,7 @@ package classes.Scenes.NPCs
 			else if (player.cor <= 66) outputText("\n\nHer milk tasted really good and you're eager to try more, so you agree.");
 			else outputText("\n\nMilking a cow-mouse seems like fun, so you eagerly agree.");
 			outputText("\n\n\"<i>Well then, sexy, if you're so eager, what are you waiting for?</i>\" Joy purrs, leaning on her huge breasts with a coy smile on her face, her tail swaying gently behind her with its top curled into a strangely heart-like shape...");
-			outputText("\n\nYou approach the first of Joy milky teats and bring your mouth around a leaking nipple; gently you close your mouth around it and give the nipple a little flick with your " + tongueDescript() + ", then begin suckling gently, enjoying the rich flavor and texture of Joy's milk.");
+			outputText("\n\nYou approach the first of Joy milky teats and bring your mouth around a leaking nipple; gently you close your mouth around it and give the nipple a little flick with your " + player.tongueDescript() + ", then begin suckling gently, enjoying the rich flavor and texture of Joy's milk.");
 			outputText("\n\nThe mouse moans faintly; partly in pleasure, partly from relief. \"<i>Like, that feels sooo good...</i>\" She murmurs to you, or maybe to herself.");
 			if (player.cor <= 33) outputText("\n\nYou keep suckling her, just enjoying the delicious milk that pours into your mouth. You feel completely relaxed, it's almost like this world's problems was a far-away memory...");
 			else if (player.cor <= 66) outputText("\n\nYou keep suckling from her, the erotism of the act is not lost to you as her delicious milk pours into your mouth, yet... you can't help but relax, rather than get excited at the act of drinking Joy's milk; it almost feels like this world's problems was a far away-memory...");
@@ -1572,11 +1572,11 @@ package classes.Scenes.NPCs
 			outputText("\n\nJoy squeaks in delight. \"<i>Mmm... little Joyjoy likes that... but little Joyjoy will like your tongue in her much more.</i>\" She grins wickedly down at you" + joyHasCockText(", removing her hand from her cock and coiling her tail around it instead") + ".");
 			outputText("\n\nYou smirk and tell Joy that if she wants it, then she should ask nicely. Then you insert another finger and begin slowly pumping them, making Joy even wetter.");
 			outputText("\n\n\"<i>Ooh!</i>\" She moans. \"<i>Like, please, [name]; lick my needy little pussy! It's so hooot... like, stick your tongue in there and put the fire out.</i>\" She pleads.");
-			outputText("\n\nWell... you were actually looking for a bit of foreplay, but the urgency with which she pleads makes it clear that she's just too aroused to engage in any foreplay. So you pull your fingers out and extend your " + tongueDescript() + " to give her pussy a wet lick.");
+			outputText("\n\nWell... you were actually looking for a bit of foreplay, but the urgency with which she pleads makes it clear that she's just too aroused to engage in any foreplay. So you pull your fingers out and extend your " + player.tongueDescript() + " to give her pussy a wet lick.");
 			outputText("\n\nShe shudders in delight and gives a wordless squeak" + joyHasCockText(", her tail stroking her erect cock with increased pace") + ".");
 			outputText("\n\nYou quickly close your mouth around her labia, just in time to receive a sudden serving of deliciously sweet girl-cum; you savour every drop as you drink from Joy, kissing and slurping her lower lips, as well as teasing her little hard clitty with your nose.");
 			outputText("\n\nShe wriggles and squeaks, pushing herself forward to grind her cunt against your face" + joyHasCockText(", her balls flopping into your nose at the motion") + ". \"<i>Like, ooh, yeah, that's the stuff, [name]!</i>\"");
-			outputText("\n\nYour slurping mouth curls into a smile when you see the effect you're having on the horny bimbo mouse; then you decide to step up the game by plugging your " + tongueDescript() + " as far as you can inside Joy's wanton cunt.");
+			outputText("\n\nYour slurping mouth curls into a smile when you see the effect you're having on the horny bimbo mouse; then you decide to step up the game by plugging your " + player.tongueDescript() + " as far as you can inside Joy's wanton cunt.");
 			if (player.tongueType > 0) {
 				outputText("\n\n\"<i>Oh! Oh-oh fuck yeah!</i>\" Joy howls with horny glee, as your long undulating tongue slithers inside her warm, wet depths like a snake; licking every little crevice and bump, tasting every cranny and nook of Joy's vagina.");
 				outputText("\n\nJoy's vagina tries to grasp at your tongue, but your mobile appendage is easily able to slip and massage her insides.");
@@ -1610,10 +1610,10 @@ package classes.Scenes.NPCs
 			outputText("\n\nWhich turns out to not be much. \"<i>Like... I don't want teasing; I want you to suck my cock!</i>\" She whines.");
 			outputText("\n\nThe moment a bead of pre shows up atop Joy's cock is the moment you strike.");
 			if (player.tongueType > 0) {
-				outputText("\n\nYou extend your " + tongueDescript() + ", swiping the bead of pre, coiling your tongue around Joy's cock and entering Joy's pussy; all in one fell swoop. You don't even wait for Joy's gasp of surprise before you pull your tongue back and dive forwards to engulf Joy's " + joyCockDescript() + ".");
+				outputText("\n\nYou extend your " + player.tongueDescript() + ", swiping the bead of pre, coiling your tongue around Joy's cock and entering Joy's pussy; all in one fell swoop. You don't even wait for Joy's gasp of surprise before you pull your tongue back and dive forwards to engulf Joy's " + joyCockDescript() + ".");
 			}
 			else {
-				outputText("\n\nYou extend your " + tongueDescript() + ", licking the bead of pre clean and guiding Joy's cock inside the warm confines of your mouth.");
+				outputText("\n\nYou extend your " + player.tongueDescript() + ", licking the bead of pre clean and guiding Joy's cock inside the warm confines of your mouth.");
 			}
 			outputText("\n\n\"<i>Oh! [name]!</i>\" Joy yelps, arching her back in delight.");
 			outputText("\n\nThis is just the reaction you were hoping for, your mouth curls into a smile even as you get right into your task and begin bobbing on Joy's lap.");
@@ -1623,7 +1623,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nJoy's cum tastes... unique... you'd call it cheesy... yes, definitely cheesy... almost like cream cheese. It's not unpleasant in the slightest, and you find yourself eagerly drinking all of Joy's load, even squeezing her balls a bit to milk more out of her. ");
 			player.refillHunger(Math.floor(joyCumQ() / 25), false);
 			outputText("\n\nJoy gasps and heaves, until finally she comes to a stop. \"<i>Wow... Like, your mouth is in-fucking-credible.</i>\" Joy says, then giggles mindlessly at some pun only she can see in what she just said. \"<i>Are you, like, gonna nurse on my cock all day? Or are you gonna, like, let me go? Cause, y'know, if you wanna keep sucking, I'm sure your little Joyjoy can come up with some more mousy cum and fill you until you got a nice big squishy belly.</i>\" She laughs, smirking at the thought.");
-			outputText("\n\nA spark of mischief shines in your eyes and you jump to kiss Joy straight on the lips, invading the mouth of the surprised mouse bimbo and feeding her with her own cum; you kiss her deeply, spreading as much cum inside her mouth as can with your " + tongueDescript() + ". You break the kiss to look at the panting mouse, nearly breathless from your kiss.");
+			outputText("\n\nA spark of mischief shines in your eyes and you jump to kiss Joy straight on the lips, invading the mouth of the surprised mouse bimbo and feeding her with her own cum; you kiss her deeply, spreading as much cum inside her mouth as can with your " + player.tongueDescript() + ". You break the kiss to look at the panting mouse, nearly breathless from your kiss.");
 			outputText("\n\nShe shakes her head rapidly, ears flapping in the air, then gives a loud, deliberate swallow. \"<i>Mmm... I taste yummy, don't I, lover " + player.mf("boy", "girl") + "?</i>\" She giggles.");
 			outputText("\n\nYour only reply is to tap her nose and leave with a giggle of your own.");
 			dynStats("lus", 20 + (player.lib / 5) + (player.cor / 10), "cor", -0.5);
@@ -1642,10 +1642,10 @@ package classes.Scenes.NPCs
 			else if (player.isTaur() || player.isDrider()) outputText("foreleg");
 			else if (player.isNaga()) outputText("serpentine tail");
 			else if (player.isGoo()) outputText("the mass of goo that makes up your legs");
-			outputText(" and sliding up to caress your " + assDescript() + ". She leans in close, breasts pushing against yours, and places a hungry kiss at the corner of your mouth. \"<i>Mmm... what do you have, like, in mind?</i>\" She murmurs throatily.");
+			outputText(" and sliding up to caress your " + player.assDescript() + ". She leans in close, breasts pushing against yours, and places a hungry kiss at the corner of your mouth. \"<i>Mmm... what do you have, like, in mind?</i>\" She murmurs throatily.");
 			outputText("\n\nYou press hard against her, groping her breast as both your " + player.cockDescript() + " and Joy's " + joyCockDescript() + " grow hard with arousal. You tweak her nipple and Joy moans, you seize the opportunity and release her breast, looping your arm around her neck to pull her in for a kiss, mashing her " + joyBreastDescript() + " against your " + player.breastDescript(0) + ". Then break the kiss as you tell her to just enjoy herself and do what feels natural.");
 			outputText("\n\nJoy moans and kisses you again, thrusting her tongue hungrily into your mouth and thrusting her hips strongly, grinding her " + joyCockLength() + "-inch cock against your own " + player.cockDescript() + ".");
-			outputText("\n\nYou grind against her yourself; beads of pre form on your tips, and as they slide along your shafts, slickening the both of you, you grind harder and harder against Joy, attacking her mouth with your own " + tongueDescript() + ".");
+			outputText("\n\nYou grind against her yourself; beads of pre form on your tips, and as they slide along your shafts, slickening the both of you, you grind harder and harder against Joy, attacking her mouth with your own " + player.tongueDescript() + ".");
 			outputText("\n\nJoy starts to buck and thrust; evidently she's so horny and turned on that she can't muster the patience to slip her cock into any available hole, she's content to just grind it against your own in hopes that the friction will let her get off.");
 			outputText("\n\nYou do the same, feeling yourself approach the edge quickly. You thrust against her once more and groan into her mouth as you begin cumming, painting both your bellies as well as your chests in hot spunk.");
 			outputText("\n\nJoy gasps and moans, eagerly blowing her load with full-body jerks and spasms until, at least, she peters out and her cock flops limply down between her legs, your front and hers painted in her spooge. \"<i>Wow... That's not, like, my favorite way to do things, but it's certainly pretty fun, y'know?</i>\" She comments. Stepping back, she gently brushes off some of the mixed spunk with her finger and slurps it up. \"<i>Mmm. We make a good mix.</i>\" She giggles");
@@ -1789,7 +1789,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou ask if she's insinuating that you're not clean.");
 			outputText("\n\nAt that, she looks startled. \"<i>Like, no! That's not what I meant! I mean, I...</i>\" She trails off, clearly too confused to really know what to say or do anymore.");
 			outputText("\n\nYou give her junk a soft stroke and turn around; you walk a bit and bend over slightly, then slap your own butt. Finally you look at her and ask her if she really doesn't want a piece of your ass.");
-			outputText("\n\nShe swallows hard, fixated on your " + assDescript() + ", " + joyCockDescript() + " hard as you've ever seen it. \"<i>Like, okay, if you're really sure that, y'know, this is what you want...</i>\" She grumbles. \"<i>But I'm not touching that ass until I've, liked, lubed you up good!</i>\" She insists, stamping one little foot for emphasis.");
+			outputText("\n\nShe swallows hard, fixated on your " + player.assDescript() + ", " + joyCockDescript() + " hard as you've ever seen it. \"<i>Like, okay, if you're really sure that, y'know, this is what you want...</i>\" She grumbles. \"<i>But I'm not touching that ass until I've, liked, lubed you up good!</i>\" She insists, stamping one little foot for emphasis.");
 			outputText("\n\nYou smile and tell her you wouldn't have it any other way.");
 			outputText("\n\nStill muttering to herself, the mouse herm stalks over to you, stripping her clothes and dropping them in a heap; then gives your left asscheek a stinging slap. Then, she starts to jerk herself off with one hand, the other diving into her ever-wet cunt. \"<i>Gonna lube you up... Like, gonna stuff you fulla pre... make you nice and stretchy for my cock...</i>\" She murmurs to herself. Then, feeling she has enough sexual fluids on her hands, she reaches out and sticks a finger without warning into your asshole.");
 			outputText("\n\nYou yelp at the sudden intrusion and tell her to be gentler. That hurts!");
@@ -1800,7 +1800,7 @@ package classes.Scenes.NPCs
 			if (player.hasCock()) outputText("You moan again as she happens to poke your prostate.");
 			outputText("\n\nEmboldened, the mouse begins to pump the finger in, then, when she thinks you're stretched out, she adds another finger and continues pumping. \"<i>Like... when can I put my cock in, [name]?</i>\" She pleads.");
 			outputText("\n\nYou sigh as you feel you're ready and tell her she can go ahead, but be gentle.");
-			outputText("\n\nJoy pulls her fingers out so fast you almost hear a \"<i>pop</i>\" sound, and then she grabs either of your hips, banging her " + joyCockDescript() + " impatiently against your ass. Pulling back just enough to line it up with your " + assDescript() + ", she starts to push it home. ");
+			outputText("\n\nJoy pulls her fingers out so fast you almost hear a \"<i>pop</i>\" sound, and then she grabs either of your hips, banging her " + joyCockDescript() + " impatiently against your ass. Pulling back just enough to line it up with your " + player.assDescript() + ", she starts to push it home. ");
 			player.buttChange(joyCockLength() * joyCockGirth(), true);
 			outputText("\n\nYou moan deeply, pushing back against Joy to help her ease herself into your ass. ");
 			if (player.hasCock()) outputText("Your " + player.cockDescript() + " throbs in pleasure as she brushes against your prostate. ");
@@ -1817,7 +1817,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nG-Get you pregnant? You burst out laughing, then explain to Joy that the only way she could get you pregnant is " + (player.hasVagina() ? "if she had fucked your pussy" : "if you had a pussy") + ".");
 			outputText("\n\nShe just gives you a serious look. \"<i>I was a guy who grew tits and a pussy. You never know. You NEVER know.</i>\" She tells you darkly.");
 			outputText("\n\nYou chuckle and tell her that if she DOES get you ass-pregnant, you expect her to take full responsibility.");
-			outputText("\n\nShe giggles; \"<i>Oh? Like, how?</i>\" Her tail slithers around to caress your " + assDescript() + ".");
+			outputText("\n\nShe giggles; \"<i>Oh? Like, how?</i>\" Her tail slithers around to caress your " + player.assDescript() + ".");
 			outputText("\n\nYou begin explaining that she'll have to pamper and spoil you, bringing you food in bed, handing out massages, as well as helping you birth and watch the baby when it's born. Finally with a smirk, you tell her that there'll be no sex until the baby is born.");
 			outputText("\n\nJoy is smiling all through your explanation, right up until you mention that last part. Then her face falls. \"<i>No sex!</i>\" She blurts, horrified.");
 			outputText("\n\nYou nod and look at her, gauging her reaction.");
@@ -2248,12 +2248,12 @@ package classes.Scenes.NPCs
 			if (player.buttRating < 14 && rand(2) == 0) {
 				if (player.buttRating < 10) {
 					player.buttRating++;
-					outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.", false);				
+					outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.", false);				
 				}
 				//Big butts grow slower!
 				else if (player.buttRating < 14 && rand(2) == 0) {
 					player.buttRating++;
-					outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.", false);
+					outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.", false);
 				}
 			}
 			outputText("\n");

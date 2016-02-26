@@ -129,15 +129,12 @@ the text from being too boring.
 		include "../../includes/input.as";
 		include "../../includes/OnLoadVariables.as";
 		include "../../includes/startUp.as";
-		include "../../includes/debug.as";
 		
 		include "../../includes/combat.as";
+		include "../../includes/debug.as";
 //No longer needed. This file has been chopped up and spread throughout the codebase:		include "../../includes/doEvent.as";
 		include "../../includes/eventParser.as";
-		
-
 		include "../../includes/eventTest.as";
-		
 		include "../../includes/engineCore.as";
 
 		// Lots of constants
@@ -170,6 +167,7 @@ the text from being too boring.
 		private var _perkLib:PerkLib = new PerkLib();// to init the static
 		private var _statusEffects:StatusEffects = new StatusEffects();// to init the static
 		public var charCreation:CharCreation = new CharCreation();
+		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var saves:Saves = new Saves(gameStateDirectGet, gameStateDirectSet);
 		// Items/
 		public var mutations:Mutations = new Mutations();
@@ -353,10 +351,7 @@ the text from being too boring.
 		public var funcs:Array;
 		public var oldStats:*; // I *think* this is a generic object
 		public var inputManager:InputManager;
-
-		public var monkey:ChaosMonkey;
-		public var testingBlockExiting:Boolean;
-
+		
 		public var kFLAGS_REF:*;
 		public var kACHIEVEMENTS_REF:*;
 
@@ -384,13 +379,6 @@ the text from being too boring.
 			this.kACHIEVEMENTS_REF = kACHIEVEMENTS; 
 			// cheat for the parser to be able to find kFLAGS
 			// If you're not the parser, DON'T USE THIS
-
-			// This is a flag used to prevent the game from exiting when running under the automated tester
-			// (the chaos monkey)
-			testingBlockExiting = false;
-			
-			// Used for stopping chaos monkey on syntax errors. Separate flag so we can make stopping optional
-			CoC_Settings.haltOnErrors = false;
 			
 			this.parser = new Parser(this, CoC_Settings);
 
@@ -403,9 +391,9 @@ the text from being too boring.
 			this.mainView.onNewGameClick = charCreation.newGameGo;
 			this.mainView.onAppearanceClick = appearance;
 			this.mainView.onDataClick = saves.saveLoad;
-			this.mainView.onLevelClick = levelUpGo;
-			this.mainView.onPerksClick = displayPerks;
-			this.mainView.onStatsClick = displayStats;
+			this.mainView.onLevelClick = playerInfo.levelUpGo;
+			this.mainView.onPerksClick = playerInfo.displayPerks;
+			this.mainView.onStatsClick = playerInfo.displayStats;
 
 			// Set up all the messy global stuff:
 			
@@ -430,8 +418,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4_mod_1.3.11";
-			version = ver + " (<b>Refactors Ahoy</b>)";
+			ver = "0.9.4_mod_1.3.12";
+			version = ver + " (<b>Refactors Ahoy II</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -440,8 +428,6 @@ the text from being too boring.
 			this.images = new ImageManager(stage);
 			this.inputManager = new InputManager(stage, false);
 			include "../../includes/ControlBindings.as";
-
-			this.monkey = new ChaosMonkey(this);
 
 			//} endregion
 
@@ -570,7 +556,7 @@ the text from being too boring.
 			// ******************************************************************************************
 
 			mainView.aCb.dataProvider = new DataProvider([{label:"TEMP",perk:new PerkClass(PerkLib.Acclimation)}]);
-			mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
+			mainView.aCb.addEventListener(Event.CHANGE, playerInfo.changeHandler); 
 			 
 			//mainView._getButtonToolTipText = getButtonToolTipText;
 

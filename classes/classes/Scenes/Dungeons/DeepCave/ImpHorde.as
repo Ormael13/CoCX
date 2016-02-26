@@ -30,11 +30,11 @@
 				//(OH SHIT IT GOES OFF) 
 				//+50 lust!
 				game.dynStats("lus", 50);
-				outputText("The imps in the back finish their spell-casting, and point at you in unison.  A wave of pure arousal hits you with the force of a freight train.   Your equipment rubs across your suddenly violently sensitive " + nippleDescript(0), false);
+				outputText("The imps in the back finish their spell-casting, and point at you in unison.  A wave of pure arousal hits you with the force of a freight train.   Your equipment rubs across your suddenly violently sensitive " + player.nippleDescript(0), false);
 				if (player.biggestLactation() > 1) outputText(" as they begin to drip milk", false);
 				outputText(".  The lower portions of your coverings ", false);
 				if (player.cockTotal() > 0) {
-					outputText("are pulled tight by your " + multiCockDescript() + ", ", false);
+					outputText("are pulled tight by your " + player.multiCockDescript() + ", ", false);
 					if (player.totalCocks() > 1) outputText("each ", false);
 					outputText("beading a drop of pre-cum at the tip", false);
 					if (player.hasVagina()) outputText(", and in addition, the clothes around your groin ", false);
@@ -66,7 +66,7 @@
 					outputText(capitalA + short + "' misguided spooge flies everyone.  A few bursts of it don't even land anywhere close to you!\n", false);
 				}
 				//Determine if dodged!
-				else if (player.spe - spe > 0 && rand(((player.spe-spe)/4)+90) > 80) {
+				else if (player.spe - spe > 0 && rand(((player.spe-spe)/4) +90) > 80) {
 					damage = rand(4);
 					if (damage == 0) outputText("A wad of cum spatters into the floor as you narrowly sidestep it.\n", false);
 					else if (damage == 1) outputText("One of the imps launches his seed so hard it passes clean over you, painting the wall white.\n", false);
@@ -132,7 +132,7 @@
 					outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				}
 				//Determine if dodged!
-				else if (player.spe - spe > 0 && rand(((player.spe-spe)/4)+90) > 80) {
+				else if (player.spe - spe > 0 && rand(((player.spe-spe)/4) +90) > 80) {
 					if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n", false);
 					else if (player.spe - spe >= 8 && player.spe-spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n", false);
 					else if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n", false);

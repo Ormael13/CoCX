@@ -92,7 +92,7 @@ package classes.Scenes.Dungeons.Factory
 				game.combatRoundOver();
 				return;
 			}
-			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + game.buttDescript() + " and pull your " + player.legs() + " out from under you.");
+			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + player.buttDescript() + " and pull your " + player.legs() + " out from under you.");
 			if ((player.spe-30) > rand(60)) {
 				outputText("  You spin as you fall, twisting your " + player.legs() + " free and springing back to your " + player.feet() + " unharmed.");
 			}

@@ -17,7 +17,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4) +80)) > 80) {
 				outputText("Izma attempts to get close, but you manage to side-step her before she can lay her gauntleted hands on you.\n", false);
 				return;
 			}
@@ -48,7 +48,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4) +80)) > 80) {
 				outputText("Izma tries to clinch you, but you use your speed to keep just out of reach.\n", false);
 				return;
 			}

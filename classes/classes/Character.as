@@ -9,47 +9,6 @@ import classes.Items.JewelryLib;
 	 */
 	public class Character extends Creature
 	{
-		private var _femininity:Number = 50;
-
-		// This is the easiest way I could think of to apply "flat" bonuses to certain stats without having to write a whole shitload of crazyshit
-		// I think a better long-term solution may be to hang function references off the end of the statusEffect class and move all of the value
-		// calculation into methods of ContentClasses, so rather than having walls of logic, we just call the method reference with a value, and get back the modified value.
-		// It's still shitty, but it would possibly be an improvement.
-		public function get femininity():Number
-		{
-			var fem:Number = _femininity;
-			var statIndex:int = this.findStatusEffect(StatusEffects.UmasMassage);
-
-			if (statIndex >= 0)
-			{
-				if (this.statusEffect(statIndex).value1 == UmasShop.MASSAGE_MODELLING_BONUS)
-				{
-					fem += this.statusEffect(statIndex).value2;
-				}
-			}
-			
-			if (fem > 100)
-			{
-				fem = 100;
-			}
-			
-			return fem;
-		}
-		
-		public function set femininity(value:Number):void
-		{
-			if (value > 100)
-			{
-				value = 100;
-			}
-			else if (value < 0)
-			{
-				value = 0;
-			}
-			
-			_femininity = value;
-		}
-
 		//BEARDS! Not used anywhere right now but WHO WANTS A BEARD?
 		//Kitteh6660: I want a beard! I'll code in obtainable beard. (DONE!)
 
@@ -851,16 +810,136 @@ import classes.Items.JewelryLib;
 			return max;
 		}
 		
+		public function growHair(amount:Number = .1):Boolean {
+			//Grow hair!
+			var tempHair:Number = hairLength;
+			hairLength += amount;
+			if (hairLength > 0 && tempHair == 0) {
+				game.outputText("\n<b>You are no longer bald.  You now have " + hairDescript() + " coating your head.\n</b>", false);
+				return true;
+			}
+			else if (hairLength >= 1 && tempHair < 1) {
+				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (hairLength >= 3 && tempHair < 3) {
+				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (hairLength >= 6 && tempHair < 6) {
+				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (hairLength >= 10 && tempHair < 10) {
+				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (hairLength >= 16 && tempHair < 16) {
+				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (hairLength >= 26 && tempHair < 26) {
+				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (hairLength >= 40 && tempHair < 40) {
+				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (hairLength >= 40 && hairLength >= tallness && tempHair < tallness) {
+				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
+				return true;
+			}
+			return false;
+		}
+
+		public function growBeard(amount:Number = .1):Boolean {
+			//Grow beard!
+			var tempBeard:Number = beardLength;
+			beardLength += amount;
+			if (beardLength > 0 && tempBeard == 0) {
+				game.outputText("\n<b>You feel a tingling in your cheeks and chin.  You now have " + beardDescript() + " coating your cheeks and chin.\n</b>", false);
+				return true;
+			}
+			else if (beardLength >= 0.2 && tempBeard < 0.2) {
+				game.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (beardLength >= 0.5 && tempBeard < 0.5) {
+				game.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (beardLength >= 1.5 && tempBeard < 1.5) {
+				game.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (beardLength >= 3 && tempBeard < 3) {
+				game.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+				return true;
+			}
+			else if (beardLength >= 6 && tempBeard < 6) {
+				game.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
+				return true;
+			}
+
+			return false;
+		}
+		
+		public function hairOrFur():String
+		{
+			return Appearance.hairOrFur(this);
+		}
+		
+		public function hairDescript():String
+		{
+			return Appearance.hairDescription(this);
+		}
+
+		public function beardDescript():String
+		{
+			return Appearance.beardDescription(this);
+		}
+		
+		public function hipDescript():String
+		{
+			return Appearance.hipDescription(this);
+		}
+		
+		public function assDescript():String
+		{
+			return buttDescript();
+		}
+		
 		public function buttDescript():String
 		{
 			return Appearance.buttDescription(this);
 		}
 
+		public function tongueDescript():String
+		{
+			return Appearance.tongueDescription(this);
+		}
+		
 		public function hornDescript():String
 		{
 			return Appearance.DEFAULT_HORNS_NAMES[hornType] + " horns";
 		}
 
+		public function tailDescript():String
+		{
+			return Appearance.tailDescript(this);
+		}
+		
+		public function oneTailDescript():String
+		{
+			return Appearance.oneTailDescript(this);
+		}
+		
+		public function wingsDescript():String
+		{
+			return Appearance.wingsDescript(this);
+		}
+		
 	}
 
 }

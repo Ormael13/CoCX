@@ -1046,14 +1046,14 @@
 				var cock:Cock = (cocks[i] as Cock);
 				result += Pronoun3+(i>0?(" #"+(i+1)):"")+" "+cock.cockType.toString().toLowerCase()+" cock is ";
 				result += Appearance.inchesAndFeetsAndInches(cock.cockLength)+" long and "+cock.cockThickness+"\" thick";
-				if (cock.isPierced) result+= ", pierced with "+cock.pLongDesc;
-				if (cock.knotMultiplier!=1) result += ", with knot of size "+cock.knotMultiplier;
+				if (cock.isPierced) result += ", pierced with " + cock.pLongDesc;
+				if (cock.knotMultiplier != 1) result += ", with knot of size " + cock.knotMultiplier;
 				result+=".\n";
 			}
-			if (balls>0 || ballSize>0) result += Hehas+Appearance.numberOfThings(balls,"ball")+" of size "+ballSize+".\n";
-			if (cumMultiplier!=1 || cocks.length>0) result += Pronoun1+" "+have+" cum multiplier "+cumMultiplier+". ";
-			if (hoursSinceCum>0 || cocks.length>0) result += "It were "+hoursSinceCum+" hours since "+pronoun1+" came.\n\n";
-			for (i = 0; i<vaginas.length; i++){
+			if (balls > 0 || ballSize > 0) result += Hehas + Appearance.numberOfThings(balls, "ball") + " of size " + ballSize+".\n";
+			if (cumMultiplier != 1 || cocks.length > 0) result += Pronoun1 + " " + have+" cum multiplier " + cumMultiplier + ". ";
+			if (hoursSinceCum > 0 || cocks.length > 0) result += "It were " + hoursSinceCum + " hours since " + pronoun1 + " came.\n\n";
+			for (i = 0; i < vaginas.length; i++) {	
 				var vagina:VaginaClass = (vaginas[i] as VaginaClass);
 				result += Pronoun3+ (i>0?(" #"+(i+1)):"")+" "+(Appearance.DEFAULT_VAGINA_TYPE_NAMES[vagina.type]||("vaginaType#"+vagina.type))+(vagina.virgin?" ":" non-")+"virgin vagina is ";
 				result += Appearance.describeByScale(vagina.vaginalLooseness,Appearance.DEFAULT_VAGINA_LOOSENESS_SCALES,"tighter than","looser than");
@@ -1065,7 +1065,7 @@
 				}
 				result+=".\n";
 			}
-			if (breastRows.length>0){
+			if (breastRows.length > 0) {	
 				var nipple:String = nippleLength+"\" ";
 				if (nipplesPierced) nipple+="pierced by "+nipplesPLong;
 				for (i = 0; i < breastRows.length; i++) {

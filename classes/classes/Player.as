@@ -115,126 +115,126 @@ use namespace kGAMECLASS;
 		//override public function set armors
 		override public function set armorValue(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.armorValue.");
+			CoC_Settings.error("ERROR: attempt to directly set armorValue.");
 		}
 
 		override public function set armorName(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.armorName.");
+			CoC_Settings.error("ERROR: attempt to directly set armorName.");
 		}
 
 		override public function set armorDef(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.armorDef.");
+			CoC_Settings.error("ERROR: attempt to directly set armorDef.");
 		}
 
 		override public function set armorPerk(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.armorPerk.");
+			CoC_Settings.error("ERROR: attempt to directly set armorPerk.");
 		}
 
 		//override public function set weapons
 		override public function set weaponName(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.weaponName.");
+			CoC_Settings.error("ERROR: attempt to directly set weaponName.");
 		}
 
 		override public function set weaponVerb(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.weaponVerb.");
+			CoC_Settings.error("ERROR: attempt to directly set weaponVerb.");
 		}
 
 		override public function set weaponAttack(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.weaponAttack.");
+			CoC_Settings.error("ERROR: attempt to directly set weaponAttack.");
 		}
 
 		override public function set weaponPerk(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.weaponPerk.");
+			CoC_Settings.error("ERROR: attempt to directly set weaponPerk.");
 		}
 
 		override public function set weaponValue(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.weaponValue.");
+			CoC_Settings.error("ERROR: attempt to directly set weaponValue.");
 		}
 
 		//override public function set jewelries
 		override public function set jewelryName(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.jewelryName.");
+			CoC_Settings.error("ERROR: attempt to directly set jewelryName.");
 		}
 		
 		override public function set jewelryEffectId(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectId.");
+			CoC_Settings.error("ERROR: attempt to directly set jewelryEffectId.");
 		}
 		
 		override public function set jewelryEffectMagnitude(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.jewelryEffectMagnitude.");
+			CoC_Settings.error("ERROR: attempt to directly set jewelryEffectMagnitude.");
 		}
 				
 		override public function set jewelryPerk(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.jewelryPerk.");
+			CoC_Settings.error("ERROR: attempt to directly set jewelryPerk.");
 		}
 		
 		override public function set jewelryValue(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.jewelryValue.");
+			CoC_Settings.error("ERROR: attempt to directly set jewelryValue.");
 		}
 
 		//override public function set shields
 		override public function set shieldName(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.shieldName.");
+			CoC_Settings.error("ERROR: attempt to directly set shieldName.");
 		}
 		
 		override public function set shieldBlock(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.shieldBlock.");
+			CoC_Settings.error("ERROR: attempt to directly set shieldBlock.");
 		}
 		
 		override public function set shieldPerk(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.shieldPerk.");
+			CoC_Settings.error("ERROR: attempt to directly set shieldPerk.");
 		}
 		
 		override public function set shieldValue(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.shieldValue.");
+			CoC_Settings.error("ERROR: attempt to directly set shieldValue.");
 		}
 		
 		//override public function set undergarments
 		override public function set upperGarmentName(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.upperGarmentName.");
+			CoC_Settings.error("ERROR: attempt to directly set upperGarmentName.");
 		}
 		
 		override public function set upperGarmentPerk(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.upperGarmentPerk.");
+			CoC_Settings.error("ERROR: attempt to directly set upperGarmentPerk.");
 		}
 		
 		override public function set upperGarmentValue(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.upperGarmentValue.");
+			CoC_Settings.error("ERROR: attempt to directly set upperGarmentValue.");
 		}
 
 		override public function set lowerGarmentName(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.lowerGarmentName.");
+			CoC_Settings.error("ERROR: attempt to directly set lowerGarmentName.");
 		}
 		
 		override public function set lowerGarmentPerk(value:String):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.lowerGarmentPerk.");
+			CoC_Settings.error("ERROR: attempt to directly set lowerGarmentPerk.");
 		}
 		
 		override public function set lowerGarmentValue(value:Number):void
 		{
-			CoC_Settings.error("ERROR: attempt to directly set player.lowerGarmentValue.");
+			CoC_Settings.error("ERROR: attempt to directly set lowerGarmentValue.");
 		}
 		
 		
@@ -330,10 +330,10 @@ use namespace kGAMECLASS;
 				attack += 5;
 			}
 			if (findPerk(PerkLib.IronFists2) >= 0 && str >= 65 && weaponName == "fists") {
-				attack += 5;
+				attack += 3;
 			}
 			if (findPerk(PerkLib.IronFists3) >= 0 && str >= 80 && weaponName == "fists") {
-				attack += 5;
+				attack += 3;
 			}			
 			if (findStatusEffect(StatusEffects.Berzerking) >= 0) attack += 30;
 			attack += statusEffectv1(StatusEffects.ChargeWeapon);
@@ -1879,27 +1879,31 @@ use namespace kGAMECLASS;
 
 		}
 
+		public function spellMod():Number {
+			var mod:Number = 1;
+			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) mod += .5;
+			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) mod += .5;
+			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) mod += .5;
+			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) mod += .5;
+			if (findPerk(PerkLib.WizardsFocus) >= 0) {
+				mod += perkv1(PerkLib.WizardsFocus);
+			}
+			if (findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+			if (jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (jewelryEffectMagnitude / 100);
+			if (countCockSocks("blue") > 0) mod += (countCockSocks("blue") * .05);
+			if (findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (perkv1(PerkLib.AscensionMysticality) * 0.05);
+			return mod;
+		}
+		
 		public function hasSpells():Boolean
 		{
-			return spellCount()>0;
+			return spellCount() > 0;
 		}
 
 		public function spellCount():Number
 		{
-			return [StatusEffects.KnowsArouse,StatusEffects.KnowsHeal,StatusEffects.KnowsMight,StatusEffects.KnowsCharge,StatusEffects.KnowsBlind,StatusEffects.KnowsWhitefire]
-					.filter(function(item:StatusEffectType,index:int,array:Array):Boolean{
-						return this.findStatusEffect(item)>=0;},this)
-					.length;
-		}
-
-		public function hairDescript():String
-		{
-			return Appearance.hairDescription(this);
-		}
-
-		public function beardDescript():String
-		{
-			return Appearance.beardDescription(this);
+			return [StatusEffects.KnowsArouse, StatusEffects.KnowsHeal, StatusEffects.KnowsMight, StatusEffects.KnowsCharge, StatusEffects.KnowsBlind, StatusEffects.KnowsWhitefire].filter(function(item:StatusEffectType, index:int, array:Array):Boolean {
+						return this.findStatusEffect(item) >= 0; }, this).length;
 		}
 
 		public function armorDescript(nakedText:String = "gear"):String

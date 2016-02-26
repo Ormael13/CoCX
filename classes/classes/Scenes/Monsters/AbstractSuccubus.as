@@ -78,7 +78,7 @@ package classes.Scenes.Monsters
 							game.dynStats("lus", -15);
 						}
 						if (player.gender == 2) {
-							outputText("groin, making your " + vaginaDescript(0) + " sting with pain", false);
+							outputText("groin, making your " + player.vaginaDescript(0) + " sting with pain", false);
 							damage = 10;
 							game.dynStats("lus", -8);
 						}
@@ -188,7 +188,7 @@ package classes.Scenes.Monsters
 				if (breastRows.length > 1) {
 					//50 + 10% per breastRow + breastSize%
 					outputText(capitalA + short + " caresses " + pronoun2 + " some of her rows of ample chest-flesh before shaking it all from side to side enticingly.", false);
-					if (lust >= 50) outputText(", your " + nippleDescript(0) + "s painfully visible.", false);
+					if (lust >= 50) outputText(", your " + player.nippleDescript(0) + "s painfully visible.", false);
 					else outputText(".", false);
 					if (rand(100) <= (54 + (breastRows.length - 1) * 15 + breastRows[0].breastRating)) {
 						game.dynStats("lus", rand(breastRows[0].breastRating) + breastRows.length * breastRows[0].breasts + 5);

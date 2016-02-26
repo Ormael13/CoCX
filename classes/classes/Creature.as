@@ -383,7 +383,29 @@ package classes
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
 		public var ass:AssClass = new AssClass();
-
+		
+		private var _femininity:Number = 50;
+		public function get femininity():Number {
+			var fem:Number = _femininity;
+			var statIndex:int = this.findStatusEffect(StatusEffects.UmasMassage);
+			if (statIndex >= 0) {
+				if (this.statusEffect(statIndex).value1 == UmasShop.MASSAGE_MODELLING_BONUS) {
+					fem += this.statusEffect(statIndex).value2;
+				}
+			}
+			if (fem > 100)
+				fem = 100;
+			return fem;
+		}
+		public function set femininity(value:Number):void
+		{
+			if (value > 100)
+				value = 100;
+			else if (value < 0)
+				value = 0;
+			_femininity = value;
+		}
+		
 		public function validate():String
 		{
 			var error:String = "";
@@ -479,12 +501,11 @@ package classes
 		//Functions			
 		public function orgasm():void
 		{
-			game.dynStats("lus=",0,"res",false);
+			game.dynStats("lus=", 0, "res", false);
 			hoursSinceCum = 0;
-			flags[kFLAGS.TIMES_ORGASMED] += 1;
+			flags[kFLAGS.TIMES_ORGASMED]++;
 			
 			if (countCockSocks("gilded") > 0) {
-			
 				var randomCock:int = rand( cocks.length );
 				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
 				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n" );
@@ -2069,12 +2090,6 @@ package classes
 				}
 			}
 		}
-		//Not used anymore
-		/*public function guyGirl(caps:Boolean = false):String
-		{
-			if (caps) return mf("Guy", "Girl");
-			else return mf("guy", "girl");
-		}*/
 		
 		public function mfn(male:String, female:String, neuter:String):String
 		{
@@ -2095,51 +2110,27 @@ package classes
 				if (hasVagina()) // herm
 				{
 					if (biggestTitSize() >= 2) return female;
-					else if (biggestTitSize() == 1) return kGAMECLASS.player.femininity >= 50 ? female : male;
-					else return kGAMECLASS.player.femininity >= 75 ? female : male;
+					else if (biggestTitSize() == 1) return femininity >= 50 ? female : male;
+					else return femininity >= 75 ? female : male;
 				}
 				else
-					if (biggestTitSize() >= 1 && kGAMECLASS.player.femininity > 55 || kGAMECLASS.player.femininity >= 75) return female; // d-girl
+					if (biggestTitSize() >= 1 && femininity > 55 || femininity >= 75) return female; // d-girl
 					else return male;
 			}
 			else
 			{
 				if (hasVagina()) // pure female
-					if (biggestTitSize() <= 1 && kGAMECLASS.player.femininity < 45) return male; // c-boy
+					if (biggestTitSize() <= 1 && femininity < 45) return male; // c-boy
 					else return female;
 				else // genderless
 				{
-					if (biggestTitSize() >= 3 || kGAMECLASS.player.femininity >= 75)
+					if (biggestTitSize() >= 3 || femininity >= 75)
 						return female;
 					else
 						return male;
 				}
 			}
 		}
-		//Not used anymore
-		/*public function boyGirl(caps:Boolean = false):String
-		{
-			if (caps) return mf("Boy", "Girl");
-			else return mf("boy", "girl");
-		}*/
-		
-		/*public function heShe(caps:Boolean = false):String
-		{
-			if (caps) return mf("He", "She");
-			else return mf("he", "she");
-		}*/
-		
-		/*public function himHer(caps:Boolean = false):String
-		{
-			if (caps) return mf("Him", "Her");
-			else return mf("him", "her");
-		}*/
-		
-		/*public function maleFemale(caps:Boolean = false):String
-		{
-			if (caps) return mf("Male", "Female");
-			else return mf("male", "female");
-		}*/
 		
 		public function maleFemaleHerm(caps:Boolean = false):String
 		{
@@ -2161,80 +2152,6 @@ package classes
 			}
 			else return "<b>Gender error!</b>";
 		}
-		
-		/*public function hisHer(caps:Boolean = false):String
-		{
-			if (caps) return mf("His", "Her");
-			else return mf("his", "her");
-		}*/
-		
-		//sir/madam (Not even used in the codebase. WHYYYYY?)
-		/*public function sirMadam(caps:Boolean = false):String
-		{
-			//Dicks?
-			if (totalCocks() > 0)
-			{
-				//herm
-				if (hasVagina())
-				{
-					//Boy unless has tits!
-					if (biggestTitSize() >= 2)
-					{
-						if (caps)
-							return "Madam";
-						else
-							return "madam";
-					}
-					else
-					{
-						if (caps)
-							return "Sir";
-						else
-							return "sir";
-					}
-				}
-				//Dude
-				else
-				{
-					if (caps)
-						return "Sir";
-					else
-						return "sir";
-				}
-			}
-			//No dicks
-			else
-			{
-				//Girl
-				if (hasVagina())
-				{
-					if (caps)
-						return "Madam";
-					else
-						return "madam";
-				}
-				//Eunuch!
-				else
-				{
-					//Called girl if has tits!
-					if (biggestTitSize() >= 2)
-					{
-						if (caps)
-							return "Madam";
-						else
-							return "madam";
-					}
-					//Called dude with no tits
-					else
-					{
-						if (caps)
-							return "Sir";
-						else
-							return "sir";
-					}
-				}
-			}
-		}*/
 		
 		//Create a cock. Default type is HUMAN
 		public function createCock(clength:Number = 5.5, cthickness:Number = 1,ctype:CockTypesEnum=null):Boolean
@@ -3227,9 +3144,16 @@ package classes
 			return false;
 		}
 		
-		public function sheathDescription():String {
+		public function sheathDescript():String {
 			if (hasSheath()) return "sheath";
 			return "base";
+		}
+		
+		public function cockClit(number:int = 0):String {
+			if (hasCock() && number >= 0 && number < cockTotal())
+				return cockDescript(number);
+			else
+				return clitDescript();
 		}
 		
 		public function vaginaDescript(idx:int = 0):String
@@ -3237,6 +3161,13 @@ package classes
 			return Appearance.vaginaDescript(this, 0);
 		}
 
+		public function allVaginaDescript():String {
+			if (vaginas.length == 1)
+				return vaginaDescript(rand(vaginas.length - 1));
+			else
+				return vaginaDescript(rand(vaginas.length - 1)) + "s";
+		}
+		
 		public function nippleDescript(rowIdx:int):String
 		{
 			return Appearance.nippleDescription(this, rowIdx);
@@ -3253,7 +3184,11 @@ package classes
 			if (biggestTitSize() < 1) return "chest";
 			return allBreastsDescript();
 		}
-
+		
+		public function biggestBreastSizeDescript():String {
+			return Appearance.biggestBreastSizeDescript(this);
+		}
+		
 		public function clitDescript():String {
 			return Appearance.clitDescription(this);
 		}
@@ -3351,7 +3286,12 @@ package classes
 
 			return description;
 		}
-
+		
+		public function assholeDescript():String
+		{
+			return Appearance.assholeDescript(this);
+		}
+		
 		public function assholeOrPussy():String
 		{
 			return Appearance.assholeOrPussy(this);
@@ -3367,11 +3307,26 @@ package classes
 			return Appearance.multiCockDescript(this);
 		}
 
+		public function ballDescript(forcedSize:Boolean = true):String
+		{
+			return Appearance.ballsDescription(forcedSize, false, this);
+		}
+		
+		public function ballsDescript(forcedSize:Boolean = true):String
+		{
+			return ballsDescriptLight(forcedSize);
+		}
+		
 		public function ballsDescriptLight(forcedSize:Boolean = true):String
 		{
 			return Appearance.ballsDescription(forcedSize, true, this);
 		}
-
+		
+		public function simpleBallsDescript():String
+		{
+			return Appearance.ballsDescription(false, true, this);
+		}
+		
 		public function sackDescript():String
 		{
 			return Appearance.sackDescript(this);
@@ -3461,6 +3416,76 @@ package classes
 			//Caps damage reduction at 80%.
 			if (mult < 20) mult = 20;
 			return mult;
+		}
+		
+		public function lustPercent():Number {
+			var lust:Number = 100;
+			var minLustCap:Number = 25;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 3) minLustCap -= flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 5;
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) minLustCap -= 15;
+			//2.5% lust resistance per level - max 75.
+			if (level < 100) {
+				if (level <= 11) lust -= (level - 1) * 3;
+				else if (level > 11 && level <= 21) lust -= (30 + (level - 11) * 2);
+				else if (level > 21 && level <= 31) lust -= (50 + (level - 21) * 1);
+				else if (level > 31) lust -= (60 + (level - 31) * 0.2);
+			}
+			else lust = 25;
+			
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//ADDITIVE REDUCTIONS
+			//THESE ARE FLAT BONUSES WITH LITTLE TO NO DOWNSIDE
+			//TOTAL IS LIMITED TO 75%!
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//Corrupted Libido reduces lust gain by 10%!
+			if (findPerk(PerkLib.CorruptedLibido) >= 0) lust -= 10;
+			//Acclimation reduces by 15%
+			if (findPerk(PerkLib.Acclimation) >= 0) lust -= 15;
+			//Purity blessing reduces lust gain
+			if (findPerk(PerkLib.PurityBlessing) >= 0) lust -= 5;
+			//Resistance = 10%
+			if (findPerk(PerkLib.Resistance) >= 0) lust -= 10;
+			if (findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
+			
+			if (lust < minLustCap) lust = minLustCap;
+			if (statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
+				if (lust >= 80) lust = 100;
+				else lust += 20;
+			}
+			lust += Math.round(perkv1(PerkLib.PentUp)/2);
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//MULTIPLICATIVE REDUCTIONS
+			//THESE PERKS ALSO RAISE MINIMUM LUST OR HAVE OTHER
+			//DRAWBACKS TO JUSTIFY IT.
+			//++++++++++++++++++++++++++++++++++++++++++++++++++
+			//Bimbo body slows lust gains!
+			if ((findStatusEffect(StatusEffects.BimboChampagne) >= 0 || findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
+			if (findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
+			if (findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
+			//Omnibus' Gift reduces lust gain by 15%
+			if (findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
+			//Luststick reduces lust gain by 10% to match increased min lust
+			if (findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
+			if (findStatusEffect(StatusEffects.Berzerking) >= 0) lust *= .6;
+			if (findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
+			
+			//Items
+			if (jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (jewelryEffectMagnitude / 100);
+			if (armorName == game.armors.DBARMOR.name) lust *= 0.9;
+			if (weaponName == game.weapons.HNTCANE.name) lust *= 0.75;
+			// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
+			// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
+			var statIndex:int = findStatusEffect(StatusEffects.UmasMassage);
+			if (statIndex >= 0)
+			{
+				if (statusEffect(statIndex).value1 == UmasShop.MASSAGE_RELIEF || statusEffect(statIndex).value1 == UmasShop.MASSAGE_LUST)
+				{
+					lust *= statusEffect(statIndex).value2;
+				}
+			}
+			
+			lust = Math.round(lust);
+			return lust;
 		}
 		
 		/**

@@ -7,7 +7,7 @@
 	{
 		public function wormAttack():void {
 			//Dodged!
-			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4) +80)) > 80) {
 				outputText("The worm colony flails at you with its simulated arms, but its lack of coordination allows you to easily dodge its attack.\n", false);
 				combatRoundOver();
 				return;
@@ -70,7 +70,7 @@
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			outputText("Overcome by your "+(hpVictory?"wounds":"lust")+", you sink to your knees as the colony of worms swarms all over your body...\n\n", true);
+			outputText("Overcome by your "+(hpVictory?"wounds":"lust") +", you sink to your knees as the colony of worms swarms all over your body...\n\n", true);
 			game.mountain.wormsScene.infest1();
 		}
 		

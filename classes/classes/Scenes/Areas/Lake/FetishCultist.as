@@ -80,7 +80,7 @@
 			else {
 				outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.", false);
 			}
-			game.dynStats("lus", (player.lib/10 + player.cor/20)+4);
+			game.dynStats("lus", (player.lib/10 + player.cor/20) +4);
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
 			else doNext(game.combatMenu);
@@ -96,7 +96,7 @@
 			else {
 				outputText("Her eyes glaze over and you feel your mind suddenly becoming filled with a blur of every sexual perversion you could possibly think of, and then some.", false);
 				if (player.vaginas.length > 0) {
-					outputText("  You feel your " + vaginaDescript(0) + " soaking itself in a sudden burst", false);
+					outputText("  You feel your " + player.vaginaDescript(0) + " soaking itself in a sudden burst", false);
 					if (player.cockTotal() > 0)  outputText(", while a sudden influx of pre-cum blurts out and streams down your " + player.multiCockDescriptLight() + ", painfully hardened by a vast amount of blood rushing to your groin", false);
 					outputText(".", false);
 				}

@@ -1904,7 +1904,7 @@
 			outputText("\n\nGrunting softly at her ministrations, you let your [hips] shiver as she passes over your " + player.cockHead(x) + " once more.  Her tightly sealed lips glide over your spit-slicked length at an even, nerve-tickling pace");
 			if (player.cocks[x].cockLength < 9) outputText(" until she hits your [sheath]");
 			else outputText(" until she has her mouth as full as she can handle");
-			outputText(".  She holds you like that, letting you feel her hot breath wash over the [skinFurScales] of your crotch.  Her tongue wags back and forth underneath you, slipping and sliding against you. Inside her mouth, your " + cockDescript(x) + " twitches and jumps in her maw.  Beads of pre-cum are beading and dripping out onto her busy organ.");
+			outputText(".  She holds you like that, letting you feel her hot breath wash over the [skinFurScales] of your crotch.  Her tongue wags back and forth underneath you, slipping and sliding against you. Inside her mouth, your " + player.cockDescript(x) + " twitches and jumps in her maw.  Beads of pre-cum are beading and dripping out onto her busy organ.");
 			
 			outputText("\n\nUma's shaft-muffled voice mumbles, \"<i>");
 			if (flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) outputText("Girls taste better.");
@@ -1932,7 +1932,7 @@
 				else outputText(" is");
 				outputText(" the perfect mate to your spare length");
 				if (player.cockTotal() > 2) outputText("s");
-				outputText(", and soon you are dribbling and dripping from all of your " + multiCockDescriptLight() + ".");
+				outputText(", and soon you are dribbling and dripping from all of your " + player.multiCockDescriptLight() + ".");
 			}
 			
 			outputText("\n\nWhile the steady pleasure her mouth and tongue gives you has you feeling very, very good, it isn't quite bringing you towards the orgasm you came here craving.  You suggest she begin to bob up and down on you. \"<i>Cocks need to feel like they're fucking something,</i>\" you ");
@@ -1957,7 +1957,7 @@
 			}
 			//{More than five blowjobs!}
 			else {
-				outputText("\n\nUma valiantly holds herself in place on your " + cockDescript(x) + ", just in time for the flow of your juices to turn white and salty, an inevitable prelude to the coming discharge of your orgasm.  She noisily slurps, emptying her mouth of precum to make room, and in the process, inadvertently provides you with even more impetus to unload.  ");
+				outputText("\n\nUma valiantly holds herself in place on your " + player.cockDescript(x) + ", just in time for the flow of your juices to turn white and salty, an inevitable prelude to the coming discharge of your orgasm.  She noisily slurps, emptying her mouth of precum to make room, and in the process, inadvertently provides you with even more impetus to unload.  ");
 				if (player.cumQ() <= 25) outputText("She dutifully swallows every drop of your average-sized load, her long tongue slipping and sliding around your shaft as she ensures it is completely cleaned.");
 				else if (player.cumQ() <= 100) 
 				{

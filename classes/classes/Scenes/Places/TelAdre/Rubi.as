@@ -783,15 +783,15 @@ public function fuckRubi():void {
 	clearOutput();
 	rubiSprite();
 	//(-100 Arousal)
-	outputText("You take Rubi by the hand and head into the bedroom, clutching [rubi em] close.  You sit on the edge of the soft fluffy bed and pull the little demon " + rubiMF("boy","girl") + " onto your lap.  The two of you kiss, letting your " + tongueDescript() + " explore the depths of your partner's mouth.");
+	outputText("You take Rubi by the hand and head into the bedroom, clutching [rubi em] close.  You sit on the edge of the soft fluffy bed and pull the little demon " + rubiMF("boy","girl") + " onto your lap.  The two of you kiss, letting your " + player.tongueDescript() + " explore the depths of your partner's mouth.");
 	outputText("\n\nRunning your hands along Rubi's body, you pull and tear at the clothes keeping you apart.  Garments fly as you ravish each other, and it isn't long before you're both naked, with Rubi straddling your waist.  " + rubiMF("He giggles and reaches between his legs","She giggles and reaches between her legs") + ", wrapping slender fingers around your ");
 	if (player.hasCock())
 	{
 		// trace("Rubi - PlayerHasCock");
-		outputText(cockDescript(x), false);
+		outputText(player.cockDescript(x), false);
 	}
 	else
-		outputText(clitDescript(), false);
+		outputText(player.clitDescript(), false);
 	outputText(".");
 
 	var size:int = 0;
@@ -822,7 +822,7 @@ public function fuckRubi():void {
 	if (player.hasCock()) outputText("cock");
 	else outputText("clit");
 	outputText(", Rubi slips off your lap and kneels on the floor.  [rubi Ey] pauses a moment, taking in your ");
-	if (player.hasCock()) outputText(cockDescript(x));
+	if (player.hasCock()) outputText(player.cockDescript(x));
 	else outputText("[clit]");
 	outputText(" with [rubi eir] eyes before leaning in and giving it a tentative lick, which sends a shiver up your spine.  Seeing that, [rubi ey] gives a little smile and licks again, running [rubi eir] smooth tongue all along the length of your ");
 	if (player.hasCock()) outputText("swollen member");
@@ -838,7 +838,7 @@ public function fuckRubi():void {
 	if (size < 2) {
 		//(Normal/Incubus Rubi)
 		outputText("\n\nFiguring [rubi ey]'s had enough time in charge, you stand and get behind Rubi, pushing [rubi em] so that [rubi eir] chest and head are resting on the edge of the bed.  You lift [rubi eir] tail and place your ");
-		if (player.hasCock()) outputText(cockDescript(x));
+		if (player.hasCock()) outputText(player.cockDescript(x));
 		else outputText("[clit]");
 		outputText(" at [rubi eir] tight ");
 		if (flags[kFLAGS.RUBI_NO_CUNT] > 0) outputText("tailhole");
@@ -851,7 +851,7 @@ public function fuckRubi():void {
 	//(These two paragraphs for cocks over 24 area)
 	else {
 		outputText("\n\nFiguring [rubi ey]'s had enough time in charge, you stand and get behind Rubi, pushing [rubi em] so that [rubi eir] chest and head are resting on the edge of the bed.  You lift [rubi eir] tail, press [rubi eir] legs together, and place your ");
-		if (player.hasCock()) outputText(cockDescript(x));
+		if (player.hasCock()) outputText(player.cockDescript(x));
 		else outputText("[clit]");
 		outputText(" at the space just below [rubi eir] ");
 		if (flags[kFLAGS.RUBI_NO_CUNT] > 0) outputText("balls");
@@ -861,7 +861,7 @@ public function fuckRubi():void {
 		if (rubiBimbo()) outputText(", not that [rubi ey] needs the extra lubrication, as she's practically dripping like a faucet, which dribbles down [rubi eir] legs suitably enough");
 		outputText(".");
 		outputText("\n\nYou press forward, your enormous ");
-		if (player.hasCock()) outputText(cockDescript(x));
+		if (player.hasCock()) outputText(player.cockDescript(x));
 		else outputText("[clit]");
 		outputText(" slipping between Rubi's thighs, which grip you tightly.  You feel [rubi eir] ");
 		if (flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText("hard cock");
@@ -883,7 +883,7 @@ public function fuckRubi():void {
 	outputText("\n\nYou keep this up for as long as you can, steeling yourself until you just can't take any more.  With a final, deep thrust, you groan and let your mind blank as the orgasm overtakes you.  ");
 	//(Player has cock under 24 area?)
 	if (player.hasCock() && player.cockArea(x) <= rubiCapacity()) {
-		outputText("Your " + cockDescript(x) + " engorges for a second before erupting deep inside your demonic little fucktoy.  ");
+		outputText("Your " + player.cockDescript(x) + " engorges for a second before erupting deep inside your demonic little fucktoy.  ");
 		if (player.cumQ() < 250) outputText("Cum dribbles out from [rubi eir] hole as you give a couple extra thrusts.");
 		else if (player.cumQ() < 1000) outputText("A generous amount of cum trickles from [rubi eir] depths as you give a couple extra thrusts.");
 		else if (player.cumQ() < 2000) {
@@ -894,15 +894,15 @@ public function fuckRubi():void {
 		}
 	}
 	else if (player.hasCock()) {
-		outputText("Your " + cockDescript(x) + " engorges for a second before erupting beneath Rubi, splattering [rubi em] and the blankets ");
+		outputText("Your " + player.cockDescript(x) + " engorges for a second before erupting beneath Rubi, splattering [rubi em] and the blankets ");
 		if (player.cumQ() < 250) outputText("with a fair amount of your seed.");
 		else if (player.cumQ() < 1000) outputText("with a generous amount of your spunk.");
 		else outputText("with a veritable torrent of potent pearlescent spooge.");
 	}
 	//(Player has clit?)
-	else outputText("  Your " + clitDescript() + " throbs and engorges briefly as your " + vaginaDescript(0) + " reflexively contracts and a warm feeling rocks through your entire body.  Femjuices run down your [legs] and relief overtakes you like a powerful wave upon a beach.");
+	else outputText("  Your " + player.clitDescript() + " throbs and engorges briefly as your " + player.vaginaDescript(0) + " reflexively contracts and a warm feeling rocks through your entire body.  Femjuices run down your [legs] and relief overtakes you like a powerful wave upon a beach.");
 
-	outputText("\n\nYou stumble backwards, pulling your " + cockClit(x) + " out of Rubi and collapse on the bed next to [rubi em].  [rubi Ey] cuddles up next to you, in a mixed puddle of spunk, and hugs you close.  \"<i>That was ");
+	outputText("\n\nYou stumble backwards, pulling your " + player.cockClit(x) + " out of Rubi and collapse on the bed next to [rubi em].  [rubi Ey] cuddles up next to you, in a mixed puddle of spunk, and hugs you close.  \"<i>That was ");
 	if (rubiBimbo() && flags[kFLAGS.RUBI_DEBIMBO] == 0) outputText("like, totally ");
 	else outputText("absolutely ");
 	outputText("fantastic babe,</i>\" [rubi ey] murmurs before drifting off into a sex-filled dreamland.");
@@ -954,7 +954,7 @@ public function dildoFuckRubi():void {
 
 	outputText("\n\nYou also lie down, and align the other end with your [vagOrAss], and slip it inside.  Warmth radiates outwards as the drug takes full effect, your whole body becoming aroused.");
 	//(If player has pussy)
-	if (player.hasVagina()) outputText("  Your " + clitDescript() + " stiffens, aching for attention.  It peeks from your folds like a shy little lewd faerie.");
+	if (player.hasVagina()) outputText("  Your " + player.clitDescript() + " stiffens, aching for attention.  It peeks from your folds like a shy little lewd faerie.");
 	//(If player has a cock)
 	if (player.hasCock()) outputText("  Meanwhile, [eachCock] stiffens, throbbing as the drug overtakes it.");
 	if (player.lactationQ() > 0) outputText("  As the warmth spreads up your body, not even your breasts are left alone.  Your nipples harden and begin leaking milk, which pours down the sides of your body and is soaked up into the cushions beneath you.");
@@ -982,7 +982,7 @@ public function dildoFuckRubi():void {
 	//(PC has cock?)
 	if (player.hasCock()) outputText("[eachCock], stroking it fervently, in desperate need of release.");
 	//(PC doesn't have cock, but has pussy?)
-	else if (player.hasVagina()) outputText("your " + clitDescript() + ", rubbing it frantically, in desperate need of release.");
+	else if (player.hasVagina()) outputText("your " + player.clitDescript() + ", rubbing it frantically, in desperate need of release.");
 	//(PC doesn't have either, but breasts above A-cup?)
 	else outputText("your [chest], rubbing your nipples vigorously, in desperate need of release.");
 	//(Bonus, fuckable nipples?)
@@ -1001,7 +1001,7 @@ public function dildoFuckRubi():void {
 		outputText(".");
 	}
 	//(PC has pussy?)
-	if (player.hasVagina()) outputText("  Your " + vaginaDescript(0) + " clenches down on the enormous invader, which at this point feels like an enormous steel rod lodged firmly inside you, and a spray of fem-juices erupts from your nethers, coating the already slick dildo and Rubi.");
+	if (player.hasVagina()) outputText("  Your " + player.vaginaDescript(0) + " clenches down on the enormous invader, which at this point feels like an enormous steel rod lodged firmly inside you, and a spray of fem-juices erupts from your nethers, coating the already slick dildo and Rubi.");
 	//(PC lactating?)
 	if (player.lactationQ() > 0) outputText("  Your breasts shudder and quake as the orgasmic tsunami washes over them, spraying your sweet smelling milk all over yourself, Rubi and the couch.");
 
@@ -1244,7 +1244,7 @@ private function waitAndGetNTRedLikeTheBoyBitchYouAre():void {
 	outputText("\n\nMaking your way back to the front window with shaking knees, you see the wolfman's glistening red canine cock just slide right inside Rubi's eager hole.  Her mouth opens, and you can just imagine the low moan that rumbles out, since you've heard her make that noise on several occasions.  A small pang of jealousy arises within you that this man gives her the same reaction.  As Rubi's wolfish lover begins to assail this new territory, more \"<i>oohs</i>\" and \"<i>aahs</i>\" roll out of her mouth and into your imagination.  You're a little ashamed of yourself, but you have to admit this is turning you on.");
 	if (!player.isTaur()) {
 		outputText("\n\nAs the lovemaking continues, you find your hand descending into your [armor] to fondle ");
-		if (player.hasVagina()) outputText("your " + vaginaDescript());
+		if (player.hasVagina()) outputText("your " + player.vaginaDescript());
 		else if (player.hasCock()) outputText("[eachCock]");
 		outputText(".  ");
 	}
@@ -2429,7 +2429,7 @@ private function getFuckedByRubi():void {
 	if (!player.hasVagina()) outputText("asshole");
 	else outputText("cunt");
 	outputText(" of yours all ready for me.</i>\"  Rubi's head descends between your legs");
-	if (player.hasCock()) outputText(", ignoring your " + multiCockDescriptLight() + " completely,");
+	if (player.hasCock()) outputText(", ignoring your " + player.multiCockDescriptLight() + " completely,");
 	outputText(" and presses [rubi eir] face into your [vagOrAss], inhaling deeply.  [rubi Eir] lips pucker as [rubi ey] plants a kiss directly onto your ");
 	if (!player.hasVagina()) outputText("ass");
 	else outputText("moistening pussy");

@@ -259,7 +259,7 @@ package classes {
 				}
 			}
 			if (player.findPerk(PerkLib.MaraesGiftButtslut) >= 0 && player.ass.analWetness < 2) { //Prevent Buttsluts from getting dry backdoors
-				outputText("\n<b>Your " + getGame().assholeDescript() + " quickly re-moistens.  It looks like Marae's 'gift' can't be removed.</b>\n");
+				outputText("\n<b>Your " + player.assholeDescript() + " quickly re-moistens.  It looks like Marae's 'gift' can't be removed.</b>\n");
 				player.ass.analWetness = 2;
 				needNext = true;
 			}
@@ -495,7 +495,7 @@ package classes {
 					player.breastRows[0].breastRating = 5;
 					if (player.findPerk(PerkLib.FutaFaculties) >= 0)
 						outputText("\n<b>Your tits get nice and full again.  You'll have lots of fun now that your breasts are back to being big, swollen knockers!</b>\n");
-					else outputText("\n<b>Your " + getGame().breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n");
+					else outputText("\n<b>Your " + player.breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n");
 					getGame().dynStats("int", -1, "lus", 15);
 					needNext = true;
 				}
@@ -513,7 +513,7 @@ package classes {
 					player.breastRows[0].breastRating = 5;
 					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findStatusEffect(StatusEffects.BimboChampagne) >= 0)
 						outputText("\n<b>Your boobies like, get all big an' wobbly again!  You'll have lots of fun now that your tits are back to being big, yummy knockers!</b>\n");
-					else outputText("\n<b>Your " + getGame().breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n");
+					else outputText("\n<b>Your " + player.breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n");
 					getGame().dynStats("int", -1, "lus", 15);
 					needNext = true;
 				}
@@ -581,7 +581,7 @@ package classes {
 				}
 				else { //Bigga titayz
 					if (player.breastRows[0].breastRating < 5) {
-						outputText("\nYour " + getGame().breastDescript(0) + " start to jiggle and wobble as time passes, seeming to refill with your inexhaustible supply of milk.  It doesn't look like you'll be able to keep them below a DD cup so long as you're so focused on breast-feeding.\n");
+						outputText("\nYour " + player.breastDescript(0) + " start to jiggle and wobble as time passes, seeming to refill with your inexhaustible supply of milk.  It doesn't look like you'll be able to keep them below a DD cup so long as you're so focused on breast-feeding.\n");
 						player.breastRows[0].breastRating = 5;
 						needNext = true;
 					}
@@ -618,7 +618,7 @@ package classes {
 			if (player.findStatusEffect(StatusEffects.Milked) >= 0) { //"Milked"
 				player.addStatusValue(StatusEffects.Milked, 1, -1);
 				if (player.statusEffectv1(StatusEffects.Milked) <= 0) {
-					outputText("\n<b>Your " + getGame().nippleDescript(0) + "s are no longer sore from the milking.</b>\n");
+					outputText("\n<b>Your " + player.nippleDescript(0) + "s are no longer sore from the milking.</b>\n");
 					player.removeStatusEffect(StatusEffects.Milked);
 					needNext = true;
 				}
@@ -645,7 +645,7 @@ package classes {
 				if (player.statusEffectv1(StatusEffects.LactationReduction) >= 48) {
 					if (player.findStatusEffect(StatusEffects.LactationReduc0) < 0) {
 						player.createStatusEffect(StatusEffects.LactationReduc0, 0, 0, 0, 0);
-						if (player.biggestLactation() >= 1) outputText("\n<b>Your " + getGame().nippleDescript(0) + "s feel swollen and bloated, needing to be milked.</b>\n");
+						if (player.biggestLactation() >= 1) outputText("\n<b>Your " + player.nippleDescript(0) + "s feel swollen and bloated, needing to be milked.</b>\n");
 						if (player.biggestLactation() <= 2) player.createStatusEffect(StatusEffects.LactationReduc1, 0, 0, 0, 0);
 						if (player.biggestLactation() <= 1) player.createStatusEffect(StatusEffects.LactationReduc2, 0, 0, 0, 0);
 						needNext = true;
@@ -674,26 +674,26 @@ package classes {
 				if (player.vaginas.length > 0) {
 					if (player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
 						if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE && player.statusEffectv1(StatusEffects.CuntStretched) >= 200) {
-							outputText("\nYour " + getGame().vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
+							outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
 							player.vaginas[0].vaginalLooseness--;
 							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 							needNext = true;
 						}
 						if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING && player.statusEffectv1(StatusEffects.CuntStretched) >= 100) {
-							outputText("\nYour " + getGame().vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
+							outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
 							player.vaginas[0].vaginalLooseness--;
 							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 							needNext = true;
 						}
 						if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE && player.statusEffectv1(StatusEffects.CuntStretched) >= 70) {
-							outputText("\nYour " + getGame().vaginaDescript(0) + " recovers from your ordeals and becomes tighter.\n");
+							outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals and becomes tighter.\n");
 							player.vaginas[0].vaginalLooseness--;
 							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 							needNext = true;
 						}
 					}
 					if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR && player.statusEffectv1(StatusEffects.CuntStretched) >= 50) {
-						outputText("\nYour " + getGame().vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n");
+						outputText("\nYour " + player.vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n");
 						player.vaginas[0].vaginalLooseness--;
 						player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 						needNext = true;
@@ -703,25 +703,25 @@ package classes {
 			if (player.findStatusEffect(StatusEffects.ButtStretched) >= 0) { //Butt stretching stuff
 				player.addStatusValue(StatusEffects.ButtStretched, 1, 1);
 				if (player.ass.analLooseness == 2 && player.statusEffectv1(StatusEffects.ButtStretched) >= 72) {
-					outputText("\n<b>Your " + getGame().assholeDescript() + " recovers from your ordeals, tightening up a bit.</b>\n");
+					outputText("\n<b>Your " + player.assholeDescript() + " recovers from your ordeals, tightening up a bit.</b>\n");
 					player.ass.analLooseness--;
 					player.changeStatusValue(StatusEffects.ButtStretched, 1, 0);
 					needNext = true;
 				}
 				if (player.ass.analLooseness == 3 && player.statusEffectv1(StatusEffects.ButtStretched) >= 48) {
-					outputText("\n<b>Your " + getGame().assholeDescript() + " recovers from your ordeals, tightening up a bit.</b>\n");
+					outputText("\n<b>Your " + player.assholeDescript() + " recovers from your ordeals, tightening up a bit.</b>\n");
 					player.ass.analLooseness--;
 					player.changeStatusValue(StatusEffects.ButtStretched, 1, 0);
 					needNext = true;
 				}
 				if (player.ass.analLooseness == 4 && player.statusEffectv1(StatusEffects.ButtStretched) >= 24) {
-					outputText("\n<b>Your " + getGame().assholeDescript() + " recovers from your ordeals and becomes tighter.</b>\n");
+					outputText("\n<b>Your " + player.assholeDescript() + " recovers from your ordeals and becomes tighter.</b>\n");
 					player.ass.analLooseness--;
 					player.changeStatusValue(StatusEffects.ButtStretched, 1, 0);
 					needNext = true;
 				}
 				if (player.ass.analLooseness == 5 && player.statusEffectv1(StatusEffects.ButtStretched) >= 12) {
-					outputText("\n<b>Your " + getGame().assholeDescript() + " recovers from the brutal stretching it has received and tightens up.</b>\n");
+					outputText("\n<b>Your " + player.assholeDescript() + " recovers from the brutal stretching it has received and tightens up.</b>\n");
 					player.ass.analLooseness--;
 					player.changeStatusValue(StatusEffects.ButtStretched, 1, 0);
 					needNext = true;
@@ -729,7 +729,7 @@ package classes {
 			}
 			if (player.findPerk(PerkLib.SlimeCore) >= 0) { //Lose slime core perk
 				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
-					outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into " + player.skin() + " while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + getGame().chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + getGame().buttDescript() + ".  A delicious pressure pulses in your abdomen and you loosen your " + player.armorName + " as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
+					outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into " + player.skin() + " while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + player.buttDescript() + ".  A delicious pressure pulses in your abdomen and you loosen your " + player.armorName + " as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
 	
 					outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
 					player.createKeyItem("Ruby Heart", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
@@ -860,16 +860,16 @@ package classes {
 				if (flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] > 0) {
 					switch (flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]) {
 						case 1:
-							if (!needNext) needNext = getGame().growHair(0.2);
-							else getGame().growHair(0.2);
+							if (!needNext) needNext = player.growHair(0.2);
+							else player.growHair(0.2);
 							break;
 						case 2:
-							if (!needNext) needNext = getGame().growHair(0.5);
-							else getGame().growHair(0.5);
+							if (!needNext) needNext = player.growHair(0.5);
+							else player.growHair(0.5);
 							break;
 						case 3:
-							if (!needNext) needNext = getGame().growHair(1.1);
-							else getGame().growHair(1.1);
+							if (!needNext) needNext = player.growHair(1.1);
+							else player.growHair(1.1);
 						default:
 					}
 					flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING]--;
@@ -890,9 +890,9 @@ package classes {
 				}
 				//Hair grows if not disabled by lizardness
 				if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
-					if (!needNext) needNext = getGame().growHair(0.1);
-					else getGame().growHair(0.1);
-					if (player.beardLength > 0 && player.beardLength < 12) getGame().growBeard(0.02);
+					if (!needNext) needNext = player.growHair(0.1);
+					else player.growHair(0.1);
+					if (player.beardLength > 0 && player.beardLength < 12) player.growBeard(0.02);
 				}
 				//Clear dragon breath cooldown!
 				if (player.findStatusEffect(StatusEffects.DragonBreathCooldown) >= 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
@@ -942,8 +942,8 @@ package classes {
 				}
 				if (player.hasCock() && player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (player.eggs() >= 20 && rand(6) == 0)) { //Drider dreams proc
 					outputText("\nIn a moonlit forest, you hang upside down from a thick tree branch suspended by only a string of webbing.  You watch with rising lust as a hapless traveler strolls along below, utterly unaware of the trap you've set.  Your breath catches as " + player.mf("he","she") + " finally encounters your web, flailing against the sticky strands in a futile attempt to free " + player.mf("him","her") + "self.  Once the traveller's struggles slow in fatigue, you descend easily to the forest floor, wrapping " + player.mf("him","her") + " in an elegant silk cocoon before pulling " + player.mf("him","her") + " up into the canopy.  Positioning your catch against the tree's trunk, you sink your fangs through the web and into flesh, feeling " + player.mf("his","her") + " body heat with every drop of venom.  Cutting " + player.mf("his","her") + " crotch free of your webbing, you open " + player.mf("his","her") + " [armor] and release the ");
-					if (player.hasVagina()) outputText(getGame().vaginaDescript(0) + " and ");
-					outputText(getGame().cockDescript(0) + " therein; you lower yourself onto " + player.mf("him","her") + " over and over again, spearing your eager pussy with " + player.mf("him","her") + " prick");
+					if (player.hasVagina()) outputText(player.vaginaDescript(0) + " and ");
+					outputText(player.cockDescript(0) + " therein; you lower yourself onto " + player.mf("him","her") + " over and over again, spearing your eager pussy with " + player.mf("him","her") + " prick");
 					if (player.hasVagina()) outputText(" while you bend and force your own into her cunt");
 					outputText(".  It's not long until you feel ");
 					if (player.hasVagina()) outputText("her pussy clenching around you as you orgasm explosively inside, followed by ");
