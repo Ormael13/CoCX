@@ -70,7 +70,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 83) {
+			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4) +80)) > 83) {
 				outputText("The salamander rushes at you, knocking aside your defensive feint and trying to close the distance between you.  She lashes out at your feet with her tail, and you're only just able to dodge the surprise attack.", false);
 				return;
 			}
@@ -114,16 +114,16 @@ package classes.Scenes.NPCs
 
 		private function helCleavage():void {
 			//FAIL
-			if ((player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) || (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
+			if ((player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) || (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4) +80)) > 80)) {
 				outputText("To your surprise, the salamander suddenly pulls up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms reaches around your waist, and the other toward your head, but you roll away from her grip and push her bodily away.  She staggers a moment, but then quickly yanks the jangling bikini top back down with a glare.\n", false);
 			}
 			//Attack 3 – Lust – Cleavage (Failure)
 			else {
 				outputText("To your surprise, the salamander suddenly yanks up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms encircles your waist, and the other forcefully shoves your face into her cleavage.  She jiggles her tits around your face for a moment before you're able to break free, though you can feel a distinct heat rising in your loins.  As quickly as they were revealed, the breasts are concealed again and your opponent is ready for more combat!", false);
-				var lust:Number = 20 + rand(10) + player.sens/10 + rand(player.lib/20);
+				var lust:Number = 20 + rand(10) + player.sens/10 + rand(player.lib/20) * (1 + (player.newGamePlusMod() * 0.2));
 				game.dynStats("lus", lust);
 				//Apply resistance
-				lust *= game.lustPercent()/100;
+				lust *= player.lustPercent() / 100;
 				//Clean up
 				lust = Math.round(lust * 10)/10;
 				outputText(" <b>(<font color=\"#ff00ff\">+" + lust + " lust</font>)</b>\n", false);

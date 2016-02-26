@@ -460,80 +460,12 @@
 			return description;
 		}
 
-/* This special version was only called from Creature.cockMultiLDescriptionShort, and then only if the creature had just one cock.
-	The cock index of 99 was never used, so the extra cock names at the end of the function were never seen as output.
-	Replaced with a call to the more common cockDesript function.
-		public static function cockDescription(i_creature:Creature, i_cockIndex:Number):String
-		{
-			if (i_creature.totalCocks() == 0) {
-				CoC_Settings.error("<b>ERROR: CockDescript Called But No Cock Present</b>");
-				return "<b>ERROR: CockDescript Called But No Cock Present</b>";
-			}
-			if (i_creature.totalCocks() <= i_cockIndex || (i_cockIndex == 99 || i_cockIndex == -1)) {
-				CoC_Settings.error("<b>ERROR: CockDescript called with index of " + i_cockIndex + " - out of BOUNDS</b>");
-				return "<b>ERROR: CockDescript called with index of " + i_cockIndex + " - out of BOUNDS</b>";
-			}
-
-			//Cocknum 99 to default to boring descriptions!
-			if (i_cockIndex != 99) {
-				switch (i_creature.cocks[i_cockIndex].cockType) {
-					case CockTypesEnum.ANEMONE:
-					case CockTypesEnum.BEE:
-					case CockTypesEnum.CAT:
-					case CockTypesEnum.DEMON:
-					case CockTypesEnum.DISPLACER:
-					case CockTypesEnum.DOG:
-					case CockTypesEnum.DRAGON:
-					case CockTypesEnum.FOX:
-					case CockTypesEnum.HORSE:
-					case CockTypesEnum.HUMAN:
-					case CockTypesEnum.KANGAROO:
-					case CockTypesEnum.LIZARD:
-					case CockTypesEnum.PIG:
-					case CockTypesEnum.TENTACLE:
-						return cockNoun(i_creature.cocks[i_cockIndex].cockType);
-					default:
-						CoC_Settings.error("cockDescription failed to describe your cock");
-						trace("ERROR: Cock type failed to match. " + i_creature.cocks[i_cockIndex].cockType);
-						return "cockDescription failed to describe your cock";
-				}
-			}
-			i_cockIndex = 0; //I'm pretty sure this 99 business never gets used anywhere in the code, so this whole lower part of the function is probably orphaned code.
-
-			var description:String = "";
-			var options:Array;
-
-			//50% of the time add a descriptor
-			if (rand(2) == 0)
-				description += i_creature.cockAdjective(i_cockIndex) + " ";
-			var rando:Number = 0;
-			options = ["cock",
-				"prick",
-				"pecker",
-				"shaft",
-				"dick",
-				"manhood",
-				"member",
-				"meatstick",
-				"schlong",
-				"wang",
-				"fuckpole",
-				"package",
-				"love muscle",
-				"rod",
-				"anaconda"];
-			description += randomChoice(options);
-
-			return description;
-		}
-*/
-
 		public static function cockDescript(creature:Creature, cockIndex:Number = 0):String
 		{
-			if (creature.cocks.length == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
+			if (creature.cocks.length == 0) return "<b>ERROR: cockDescript Called But No Cock Present</b>";
 			var cockType:CockTypesEnum = CockTypesEnum.HUMAN;
 			if (cockIndex != 99) { //CockIndex 99 forces a human cock description
-				if (creature.cocks.length <= cockIndex) return "<b>ERROR: CockDescript called with index of " + cockIndex + " - out of BOUNDS</b>";
+				if (creature.cocks.length <= cockIndex) return "<b>ERROR: cockDescript called with index of " + cockIndex + " - out of BOUNDS</b>";
 				cockType = creature.cocks[cockIndex].cockType;
 			}
 			var isPierced:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
@@ -542,8 +474,8 @@
 			return cockDescription(cockType, creature.cocks[cockIndex].cockLength, creature.cocks[cockIndex].cockThickness, creature.lust, creature.cumQ(), isPierced, hasSock, isGooey);
 		}
 
-		//This function takes all the variables independently so that a creature object is not required for a cockDescription.
-		//This allows a single cockDescription function to produce output for both cockDescript and the old NPCCockDescript.
+		//This function takes all the variables independently so that a creature object is not required for a player.cockDescription.
+		//This allows a single player.cockDescription function to produce output for both player.cockDescript and the old NPCCockDescript.
 		public static function cockDescription(cockType:CockTypesEnum, length:Number, girth:Number, lust:int = 50, cumQ:Number = 10, isPierced:Boolean = false, hasSock:Boolean = false, isGooey:Boolean = false): String {
 			if (rand(2) == 0) {
 				if (cockType == CockTypesEnum.HUMAN) return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey) + " " + cockNoun(cockType);
@@ -1283,7 +1215,7 @@
 			//Add s if plural
 			if (i_creature.cockTotal() > 1) description += "s";
 			//Reset to normal description if singular
-			else description = cockDescription(i_creature, 0);
+			else description = player.cockDescription(i_creature, 0);
 			return description;
 		}
 		*/
@@ -1478,7 +1410,7 @@
 		}
 
 /* Moved to Creature.as
-		public static function sheathDescription(i_character:Character):String
+		public static function sheathDescript(i_character:Character):String
 		{
 			if (i_character.hasSheath()) return "sheath";
 			else return "base";

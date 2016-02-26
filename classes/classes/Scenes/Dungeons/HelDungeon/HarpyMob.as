@@ -108,7 +108,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 18;
-			this.gems = rand(25)+140;
+			this.gems = rand(25) +140;
 			this.additionalXP = 50;
 			this.tailType = TAIL_TYPE_HARPY;
 			this.drop = NO_DROP;

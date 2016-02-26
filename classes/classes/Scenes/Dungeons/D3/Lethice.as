@@ -36,7 +36,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("Lethice raises her lethicite-topped staff and chants repeatedly. She makes a series of arcane gestures, drawing on her own lust to inflict it upon you! ");
 			var lustDmg:Number = (5 + (inte / 10) * spellMod() + rand(player.lib - player.inte * 2 + player.cor) / 5);
 			if (lustDmg < 10) lustDmg = 10;
-			lustDmg *= game.lustPercent() / 100;
+			lustDmg *= player.lustPercent() / 100;
 			lustDmg *= 1 + (player.newGamePlusMod() * 0.2);
 			fatigue += 3;
 			game.dynStats("lus+", lustDmg, "resisted", false);

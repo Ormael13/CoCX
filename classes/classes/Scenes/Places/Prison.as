@@ -1044,23 +1044,23 @@ package classes.Scenes.Places
 			}
 			if (player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) > 0)
 			{
-				outputText("\n\nMomentarily she breaks her piercing stare and speaks. \"<i>Welcome back, slave</i>\" she intones in a voice every bit as beautiful and compelling as her face, \"<i>I take it your field education went well. Did you give yourself a lesson about fighting back by letting a few nice minotaurs rape you? Or maybe you went for some 'archery lessons' with that centaur fellow.</i>\" She leans in close to you gives your " + assDescript() + " a fierce but playful slap. \"<i>You could certainly learn some useful things from him.</i>\" She closes the distance further, and her natural, musky, alluring scent washes over you. For a moment you aren't sure if you want to fall to your knees and embrace her or cower pitifully in the shadow of her overpowering presence. Your gaze becomes transfixed on the mesmerizing movements of her deliciously pouty crimson lips.",false);
+				outputText("\n\nMomentarily she breaks her piercing stare and speaks. \"<i>Welcome back, slave</i>\" she intones in a voice every bit as beautiful and compelling as her face, \"<i>I take it your field education went well. Did you give yourself a lesson about fighting back by letting a few nice minotaurs rape you? Or maybe you went for some 'archery lessons' with that centaur fellow.</i>\" She leans in close to you gives your " + player.assDescript() + " a fierce but playful slap. \"<i>You could certainly learn some useful things from him.</i>\" She closes the distance further, and her natural, musky, alluring scent washes over you. For a moment you aren't sure if you want to fall to your knees and embrace her or cower pitifully in the shadow of her overpowering presence. Your gaze becomes transfixed on the mesmerizing movements of her deliciously pouty crimson lips.",false);
 				outputText("\n\n\"<i>Whatever you may have been doing, I'm pleased that you've decided to come back and continue your formal education with me. I know you are eager for it to be complete, but rememeber it takes time to understand that you are...</i>\" Defying all reason, she somehow moves even closer to you.",false);
 				outputText("\n\n\"<i>a pliable...</i>\" Her strawberry tongue traces the contours of her lips as she purrs the word, then darts out to tease yours. Shivers run down your spine.",false);
-				outputText("\n\n\"<i>obedient...</i>\" The fingers of her right hand gently caress your " + chestDesc() + ".",false);
-				outputText("\n\n\"<i>servile...</i>\" The fingers of her left hand forcefully probe your " + assholeDescript() + ".",false);
+				outputText("\n\n\"<i>obedient...</i>\" The fingers of her right hand gently caress your " + player.chestDesc() + ".",false);
+				outputText("\n\n\"<i>servile...</i>\" The fingers of her left hand forcefully probe your " + player.assholeDescript() + ".",false);
 				outputText("\n\n\"<i>piece of flesh...</i>\" Her now fully erect cock grinds against your ",false);
 				if (player.cocks.length == 0)
 				{
-				  outputText(clitDescript() + ".",false);
+				  outputText(player.clitDescript() + ".",false);
 				}
 				else if (player.cocks.length == 1)
 				{
-				  outputText(cockDescript(0) + ".",false);
+				  outputText(player.cockDescript(0) + ".",false);
 				}
 				else
 				{
-				  outputText(multiCockDescriptLight() + ".",false);
+				  outputText(player.multiCockDescriptLight() + ".",false);
 				}
 				
 				outputText("\n\n\"<i>whose only reason to exist is to entertain and please others.</i>\" She abruptly shoves you to the ground, and in the sudden absence of her closeness ",false);
@@ -1083,15 +1083,15 @@ package classes.Scenes.Places
 			outputText("\n\n\"<i>By now, any number of monsters and demons must have tried to make you their property, so you no doubt assume that my intentions are the same. In one sense they surely are. The others wanted to own your body, as I now do.</i>\" She emphasizes this point by kicking you onto your back and resting her spiked boot on your [chest]. \"<i>The difference is that where they aim to merely destroy your mind so they can claim your body, I will instead own your mind and you will willingly give me your body. The process of you learning that you are my property will be slow, subtle, and humiliating... but when it is complete, you will beg me to let you experience it again.</i>\" Smiling wickedly, she slides her foot down your torso and begins using her boot covered toe to gently caress your ",false);
 			if (player.cocks.length == 0)
 			{
-				outputText(clitDescript() + ".",false);
+				outputText(player.clitDescript() + ".",false);
 			}
 			else if (player.cocks.length == 1)
 			{
-				outputText(cockDescript(0) + ".",false);
+				outputText(player.cockDescript(0) + ".",false);
 			}
 			else
 			{
-				outputText(multiCockDescriptLight() + ".",false);
+				outputText(player.multiCockDescriptLight() + ".",false);
 			}
 			
 			outputText("\n\n\"<i>But you <b>will</b> learn.</i>\"",false);
@@ -1862,7 +1862,7 @@ package classes.Scenes.Places
 			}
 			prisonLoadGuard(true);
 			outputText("You call out for your guard for what feels like an eternity.  Just as you are beginining to lose hope that anyone will hear you, the sound of footsteps comes echoing down the hallway.\n\n",false);
-			outputText("As the " + prisonGuard.guardType + " enters the room, " + prisonGuard.guardPronoun1 + " sees you kneeling on all fours presenting your " + buttDescript() + " to him like a bitch in heat. As seductively as you can, you ask " + prisonGuard.guardPronoun2 + " how long it has been since " + prisonGuard.guardPronoun1 + " had a good fuck and offer " + prisonGuard.guardPronoun2 + " one in exchange for your freedom.\n\n",false);
+			outputText("As the " + prisonGuard.guardType + " enters the room, " + prisonGuard.guardPronoun1 + " sees you kneeling on all fours presenting your " + player.buttDescript() + " to him like a bitch in heat. As seductively as you can, you ask " + prisonGuard.guardPronoun2 + " how long it has been since " + prisonGuard.guardPronoun1 + " had a good fuck and offer " + prisonGuard.guardPronoun2 + " one in exchange for your freedom.\n\n",false);
 			sexyScore = rand(100);
 			sexyScore = sexyScore + prisonGuard.guardEscapeSeduceBonus;
 			sexyScore = sexyScore + player.cor * 0.25;
@@ -2056,7 +2056,7 @@ package classes.Scenes.Places
 		{
 			for (var i:int = 0; i < 10; i++) {
 				if (player.prisonItemSlots[i*2] != undefined) {
-					player.itemSlot(i).setItemAndQty(ItemType.lookupItem(player.prisonItemSlots[i*2]), player.prisonItemSlots[(i*2)+1]);
+					player.itemSlot(i).setItemAndQty(ItemType.lookupItem(player.prisonItemSlots[i*2]), player.prisonItemSlots[(i*2) +1]);
 				}
 			}
 			player.prisonItemSlots = []; //CLEAR!
@@ -2948,7 +2948,7 @@ package classes.Scenes.Places
 					{
 						if (player.findStatusEffect(StatusEffects.Heat) >= 0)
 						{
-							outputText("Your mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.",false);
+							outputText("Your mind clouds as your " + player.vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.",false);
 							temp = player.findStatusEffect(StatusEffects.Heat);
 							if (player.statusEffectv1(StatusEffects.Heat) < 100) player.addStatusValue(StatusEffects.Heat, 1, 10);
 							if (player.statusEffectv2(StatusEffects.Heat) < 100) player.addStatusValue(StatusEffects.Heat, 2, 10);
@@ -2957,7 +2957,7 @@ package classes.Scenes.Places
 						}
 						if (player.findStatusEffect(StatusEffects.Heat) < 0)
 						{
-							outputText("Your mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize <b>you have gone into heat</b>!", false);
+							outputText("Your mind clouds as your " + player.vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize <b>you have gone into heat</b>!", false);
 							player.createStatusEffect(StatusEffects.Heat, 20, 20, 96, 0);
 							dynStats("sens", 10);
 						}

@@ -30,7 +30,7 @@ package classes.Scenes.Areas.Plains
 		private function satyrBate():void {
 			outputText("He glares at you, panting while his tongue hangs out and begins to masturbate.  You can nearly see his lewd thoughts reflected in his eyes, as beads of pre form on his massive cock and begin sliding down the erect shaft.");
 			//(small Libido based Lust increase, and increase lust)
-			game.dynStats("lus", (player.lib/5)+4);
+			game.dynStats("lus", (player.lib/5) +4);
 			lust += 5;
 			combatRoundOver();
 		}

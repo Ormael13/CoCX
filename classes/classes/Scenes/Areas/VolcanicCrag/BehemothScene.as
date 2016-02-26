@@ -387,13 +387,13 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText(images.showImage("behemoth-blowjob"), false);
 			outputText("Your eyes draw near the big bulge in his loincloth and you lick your lips as if you're hungry. ");
 			if (player.findStatusEffect(StatusEffects.LustyTongue) >= 0) {
-				outputText("Your body tingles with arousal as your " + tongueDescript() + " makes contact with your lips. ");
+				outputText("Your body tingles with arousal as your " + player.tongueDescript() + " makes contact with your lips. ");
 				dynStats("lus", 30);
 			}
 			outputText("The behemoth looks at you with a grin and says, \"<i>See something you want, " + player.short + "?</i>\" You give him a nod and smile.");
 			outputText("\n\nYou move his loincloth aside to reveal his monster cock. Now that's a " + (silly() ? "dig bick": "big dick") + "! Time for a little foreplay; you stroke his cock and the behemoth lets out a moan. \"<i>I love it when you do this! It gets my dick really nice and hard,</i>\" he says. You give his balls a caress and you swirl your finger around his cockhead. Precum leaks from his cock.");
 			outputText("\n\nSatisfied with the precum leaking, you slowly slide his cock into your mouth, trying to suppress your gag reflex. His cock slides in inch by inch until it reaches the back of your mouth. \"<i>Whoa, ease up, " + player.mf("boy", "girl") + ". I don't want you to choke on my cock. You know you don't have to swallow my entire cock length,</i>\" he says with a smile.");
-			outputText("\n\nYour " + tongueDescript() + " swirls around his cock and you bob your head up and down eagerly; the behemoth lets out a purr and moan happily as you're giving his cock a good sucking.");
+			outputText("\n\nYour " + player.tongueDescript() + " swirls around his cock and you bob your head up and down eagerly; the behemoth lets out a purr and moan happily as you're giving his cock a good sucking.");
 			outputText("\n\nYou continue to suck his meaty cock until the behemoth announces, \"<i>Gonna cum! Prepare to get stuffed!</i>\" Your eyes widen as cum erupts from his cock and into your mouth. You have no choice but to swallow the delicious behemoth-cum and you lose count after the tenth jet of cum. Your belly practically inflates with cum.");
 			player.refillHunger(hungerRefill);
 			player.slimeFeed();
@@ -477,7 +477,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			else {
 				outputText("\n\nYou join him in filling the bucket with warm yellow liquid. You " + player.clothedOrNakedLower((player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") ? "take advantage of the opening in your lethicite armor, " : "open up your [armor], "));
 				if (player.hasCock()) { //Cock has priority over vagina.
-					outputText("aim your " + cockDescript(player.biggestCockIndex()) + " into the bucket and let out a pressure as your urine mingles with the behemoth's.");
+					outputText("aim your " + player.cockDescript(player.biggestCockIndex()) + " into the bucket and let out a pressure as your urine mingles with the behemoth's.");
 				}
 				else if (player.hasVagina() && !player.hasCock()) { //Vagina but no cock.
 					outputText("move over the bucket and let out the pressure as your urine mingles with the behemoth's.");

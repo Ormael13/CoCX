@@ -51,7 +51,7 @@ package classes.Scenes.Dungeons.Factory
 				else {
 					outputText("The milk splashes into your " + player.armorName + ", soaking you effectively.  ");
 					if (player.cocks.length > 0) {
-						outputText("Your " + cockDescript(0) + " gets hard as the milk lubricates and stimulates it.  ");
+						outputText("Your " + player.cockDescript(0) + " gets hard as the milk lubricates and stimulates it.  ");
 						game.dynStats("lus", 5);
 					}
 					if (player.vaginas.length > 0) {
@@ -60,7 +60,7 @@ package classes.Scenes.Dungeons.Factory
 					}
 				}
 				game.dynStats("lus", 7 + player.sens / 20);
-				if (player.biggestLactation() > 1) outputText("Milk dribbles from your " + allBreastsDescript() + " in sympathy.");
+				if (player.biggestLactation() > 1) outputText("Milk dribbles from your " + player.allBreastsDescript() + " in sympathy.");
 			}
 			game.combatRoundOver();
 		}

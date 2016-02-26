@@ -98,7 +98,7 @@ package classes.Scenes.Areas.Swamp
 			this.a = "the ";
 			this.short = "mob of spiders-morphs";
 			this.imageName = "spidermorphmob";
-			this.long = "You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While "+(player.level <= 13?"you'd never face such a large horde on your own":"you could probably handle them alone")+", you have a powerful ally in this fight - the dragoness Kiha!";
+			this.long = "You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While "+(player.level <= 13?"you'd never face such a large horde on your own":"you could probably handle them alone") +", you have a powerful ally in this fight - the dragoness Kiha!";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
@@ -127,7 +127,7 @@ package classes.Scenes.Areas.Swamp
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 18;
-			this.gems = rand(25)+40;
+			this.gems = rand(25) +40;
 			this.special1 = game.packAttack;
 			this.special2 = game.lustAttack;
 			this.tailType = TAIL_TYPE_SPIDER_ADBOMEN;

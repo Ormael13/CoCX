@@ -84,7 +84,7 @@ package classes.Scenes.Areas.HighMountains
 				else {
 					outputText("  You can understand firsthand just how potent and addictive that fluid is...", false);
 				}
-				if (player.hasCock()) outputText("  " + SMultiCockDesc() + " twitches and dribbles its own pre-seed, but it doesn't smell anywhere near as good!", false);
+				if (player.hasCock()) outputText("  " + player.SMultiCockDesc() + " twitches and dribbles its own pre-seed, but it doesn't smell anywhere near as good!", false);
 				outputText("  Shuddering and moaning, your body is wracked by ever-increasing arousal.  Fantasies of crawling under the beast-men's soaked legs and lapping at their drooling erections inundate your mind, your body shivering and shaking in response.  ", false);
 				if (player.lust <= 99) outputText("You pull back from the brink with a start.  It'll take more than a little drugged pre-cum to bring you down!", false);
 				else outputText("You sigh and let your tongue loll out.  It wouldn't so bad, would it?", false);
@@ -95,7 +95,7 @@ package classes.Scenes.Areas.HighMountains
 		//Grope
 		private function minotaurGangGropeAttack():void {
 			game.spriteSelect(94);
-			outputText("Strong hands come from behind and slide under your equipment to squeeze your " + chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now", false);
+			outputText("Strong hands come from behind and slide under your equipment to squeeze your " + player.chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + player.nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now", false);
 			if (player.lust >= 80) outputText(", and your pussy is absolutely soaking wet", false);
 			outputText(".", false);
 			game.dynStats("lus", (5 + player.sens/10));
@@ -104,7 +104,7 @@ package classes.Scenes.Areas.HighMountains
 		//Gang Grope
 		private function minotaurGangGangGropeAttack():void {
 			game.spriteSelect(94);
-			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + game.buttDescript() + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your " + player.chestDesc() + " and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.", false);
+			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + game.player.buttDescript() + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your " + player.chestDesc() + " and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.", false);
 			game.dynStats("lus", (15 + player.sens/10));
 			combatRoundOver();
 		}

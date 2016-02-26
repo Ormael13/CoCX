@@ -479,13 +479,14 @@ private function doCamp():void { //Only called by playerMenu
 	if (vapulaSlave() && ((player.findStatusEffect(StatusEffects.PureCampJojo) >= 0 && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] <= 0) || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] <= 0))) {
 		//Jojo but not Amily (Must not be bimbo!)
 		if ((player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] == 0)
-			vapula.mouseWaifuFreakout(false,true);
+			vapula.mouseWaifuFreakout(false, true);
 		//Amily but not Jojo
 		else if ((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && !player.findStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] == 0) {
-			vapula.mouseWaifuFreakout(true,false);
+			vapula.mouseWaifuFreakout(true, false);
 		}
 		//Both
-		else vapula.mouseWaifuFreakout(true,true);
+		else
+			vapula.mouseWaifuFreakout(true, true);
 		hideMenus();
 		return;
 	}
@@ -1869,11 +1870,11 @@ public function badEndGIANTBALLZ():void {
 	else getGame().gameOver();
 }
 private function applyReductoAndEscapeBadEnd():void {
-	outputText("You smear the foul-smelling paste onto your " + sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
+	outputText("You smear the foul-smelling paste onto your " + player.sackDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
 	player.ballSize -= (4 + rand(6));
 	if (player.ballSize < 1) player.ballSize = 1;
 	if (player.ballSize > 18 + (player.str / 2) + (player.tallness / 4)) player.ballSize = 17 + (player.str / 2) + (player.tallness / 4);
-	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
+	outputText("You feel your scrotum shift, shrinking down along with your " + player.ballsDescriptLight() + ".  ", false);
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ", false);
 	dynStats("lib", -2, "lus", -10);
 	player.consumeItem(consumables.REDUCTO, 1);
@@ -1886,7 +1887,7 @@ private function callRathazulAndEscapeBadEnd():void {
 	player.ballSize -= (4 + rand(6));
 	if (player.ballSize < 1) player.ballSize = 1;
 	if (player.ballSize > 18 + (player.str/2) + (player.tallness / 4)) player.ballSize = 16 + (player.str/2) + (player.tallness / 4)
-	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ", false);
+	outputText("You feel your scrotum shift, shrinking down along with your " + player.ballsDescriptLight() + ".  ", false);
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ", false);
 	outputText("\"<i>Try not to make your balls bigger. If it happens, make sure you have Reducto,</i>\" he says.  He returns to his alchemy equipment, working on who knows what.\n\n", false)
 	doNext(camp.returnToCampUseOneHour);
@@ -2079,7 +2080,7 @@ private function exgartuanCampUpdate():void {
 		else if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() < 12)
 		{
 			clearOutput();
-			outputText("<b>Black milk dribbles from your " + nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>", false);
+			outputText("<b>Black milk dribbles from your " + player.nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>", false);
 			player.removeStatusEffect(StatusEffects.Exgartuan);
 		}		
 	}
@@ -2382,14 +2383,14 @@ public function setLevelButton():Boolean {
 			mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
 			mainView.levelButton.toolTipText = "Level up to increase your maximum HP by 15 and gain 5 attribute points and 1 perk points.";
 			if (flags[kFLAGS.AUTO_LEVEL] > 0) {
-				kGAMECLASS.levelUpGo();
+				kGAMECLASS.playerInfo.levelUpGo();
 				return true; //True indicates that you should be routed to level-up.
 			}
 			
 		}
 		mainView.showMenuButton( MainView.MENU_LEVEL );
 		mainView.statsView.showLevelUp();
-		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || kGAMECLASS.buildPerkList().length <= 0) && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) {
+		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || kGAMECLASS.playerInfo.buildPerkList().length <= 0) && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) {
 			mainView.statsView.hideLevelUp();
 		}
 	}

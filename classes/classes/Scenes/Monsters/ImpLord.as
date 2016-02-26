@@ -79,7 +79,7 @@
 			// Imps now only have demon dicks.
 			// Not sure if I agree with this, I can imagine the little fuckers abusing the
 			// shit out of any potions they can get their hands on.
-			this.createCock(rand(2)+11,2.5,CockTypesEnum.DEMON);
+			this.createCock(rand(2) +11,2.5,CockTypesEnum.DEMON);
 			this.balls = 2;
 			this.ballSize = 1;
 			this.cumMultiplier = 3;

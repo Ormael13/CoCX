@@ -61,7 +61,7 @@ package classes.Scenes.Monsters
 			else if (spellChooser == 3 && fatigue <= (100 - spellCostArouse)) {
 				outputText("He makes a series of arcane gestures, drawing on his lust to inflict it upon you! ");
 				var lustDamage:int = (inte / 5) + rand(10);
-				lustDamage = lustDamage * (game.lustPercent() / 100);
+				lustDamage = lustDamage * (player.lustPercent() / 100);
 				game.dynStats("lus", lustDamage, "resisted", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
 				fatigue += spellCostArouse;
@@ -120,6 +120,7 @@ package classes.Scenes.Monsters
 		{
 			outputText("He moves his loincloth aside and strokes his demonic member quickly. Within moments, he fires a torrent of cum towards you! ");
 			lust -= 20;
+			fatigue += 15;
 			if (lust < 0) lust = 0;
 			if (player.getEvasionRoll()) {
 				outputText("You manage to dodge his corrupted cum thanks to your reaction!");
@@ -208,7 +209,7 @@ package classes.Scenes.Monsters
 			// Imps now only have demon dicks.
 			// Not sure if I agree with this, I can imagine the little fuckers abusing the
 			// shit out of any potions they can get their hands on.
-			this.createCock(rand(2)+12,2.5,CockTypesEnum.DEMON);
+			this.createCock(rand(2) +12,2.5,CockTypesEnum.DEMON);
 			this.balls = 2;
 			this.ballSize = 1;
 			this.cumMultiplier = 3;

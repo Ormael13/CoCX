@@ -116,13 +116,7 @@ private function breakZeChains():void {
 }
 
 private function nameZeGargoyle():void {
-	if (kGAMECLASS.testingBlockExiting)
-	{
-		// We're running under the testing script.
-		// Stuff a name in the box and go go go
-		mainView.nameBox.text = "Derpgoyle";
-	}
-	else if (mainView.nameBox.text == "" || mainView.nameBox.text == "0") {
+	if (mainView.nameBox.text == "" || mainView.nameBox.text == "0") {
 		// Name flag is used to track access into Gargoyles content. Default is "0" so somewhere the "0" string is coalescing to integer 0.
 		// Solution? Fuck you for naming your Gargoyle "0".
 		clearOutput();
@@ -366,7 +360,7 @@ private function gargoyleCoochiiGetsPlowed():void {
 	
 	outputText("\n\nYou're rewarded for your efforts by " + flags[kFLAGS.GAR_NAME] + " bucking her hips into your hands, moaning, \"<i>M-Master... please...</i>\"  Not done teasing her yet, you put your other hand on her flat belly and start to crawl it up, tickling her as you make your way toward her sizable breasts.  You glomp onto one of them, giving it a rough squeeze as you drive your finger into her a little further than before.  \"<i>Masterrrrr...</i>\" " + flags[kFLAGS.GAR_NAME] + " whines, reaching up to stroke your cheek.  Deciding you've teased the poor girl enough, you prepare for the main course.");
 	
-	outputText("\n\nYou pull your " + cockDescript(x) + " from your [armor], letting it flop down atop her crotch.  Embarrassed, " + flags[kFLAGS.GAR_NAME] + " looks away as you rub the underside of your cock across her mons, spitting on it for a bit of extra lubricant.  You lean back, lining the tip of your cockhead with the gargoyle's tight slit, and press forward.  She lets out a sharp gasp as your cock presses against her, pushing it past her lips and finally slipping into her depths.");
+	outputText("\n\nYou pull your " + player.cockDescript(x) + " from your [armor], letting it flop down atop her crotch.  Embarrassed, " + flags[kFLAGS.GAR_NAME] + " looks away as you rub the underside of your cock across her mons, spitting on it for a bit of extra lubricant.  You lean back, lining the tip of your cockhead with the gargoyle's tight slit, and press forward.  She lets out a sharp gasp as your cock presses against her, pushing it past her lips and finally slipping into her depths.");
 	
 	outputText("\n\nThough her opening was painfully tight, her inner passage expands easily around your cock, letting you slip in more and more of your dickmeat until you're buried ");
 	if (player.cockArea(x) > 60) outputText("as far as she can take you.");
@@ -376,10 +370,10 @@ private function gargoyleCoochiiGetsPlowed():void {
 	
 	outputText("\n\nTo your dismay, you feel the tell-tale clenching in your gut, signaling your impending orgasm.  You clutch at " + flags[kFLAGS.GAR_NAME] + "'s shoulders as you slam into her one last time, as far as you'll go, and shoot out the first of your load.  The sensation of your thick, hot jizz exploding into her sets the gargoyle off as well: she rolls her head back and lets out a soft scream, crunching down on your cock until you're afraid it's going to burst.  You bury your face in her neck and let her milk your cock for all it's worth, until your spooge threatens to overflow and pool on the ground.");
 	
-	outputText("\n\nThe two of you lay there for a while after, until your " + cockDescript(x) + " has deflated and you've both stopped panting from exertion and pleasure.  Giving her another kiss, you pull out of her cold depths – now significantly warmer thanks to your passion – and stuff your dick back into your armor.");
+	outputText("\n\nThe two of you lay there for a while after, until your " + player.cockDescript(x) + " has deflated and you've both stopped panting from exertion and pleasure.  Giving her another kiss, you pull out of her cold depths – now significantly warmer thanks to your passion – and stuff your dick back into your armor.");
 	if (gargoyleConfidence() >= 70) outputText("  Before you can stand, though, " + flags[kFLAGS.GAR_NAME] + " hugs her arms tightly around you pulling you down on top of her and mashing your face between her soft tits.");
 	
-	outputText("\n\n\"<i>Thank you, Master,</i>\" she says, running a hand through your " + hairDescript() + ".  \"<i>That was wonderful.</i>\"");
+	outputText("\n\n\"<i>Thank you, Master,</i>\" she says, running a hand through your " + player.hairDescript() + ".  \"<i>That was wonderful.</i>\"");
 	
 	outputText("\n\nYou give her a pat on the head and head on back to camp.");
 	player.orgasm();
@@ -712,8 +706,8 @@ private function kinkyBodyRitual():void {
 	
 	outputText("\n\nShe plays easily within you, running her cool appendage over your own tongue, letting it slide across your teeth and cheeks as she slides a hand down to your ");
 	//if Male/Herm: 
-	if (player.hasCock()) outputText(cockDescript(0));
-	else if (player.hasVagina()) outputText(vaginaDescript());
+	if (player.hasCock()) outputText(player.cockDescript(0));
+	else if (player.hasVagina()) outputText(player.vaginaDescript());
 	else outputText("barren crotch");
 	outputText(".  She breaks the kiss and steps back, laying on one last time – CRACK! with the crop, stinging you again with an intense mix of pain and pleasure.  Gasping and panting from stimulation, you nearly collapse when " + flags[kFLAGS.GAR_NAME] + " unbinds you, though she's quick to catch you before you fall.");
 	
@@ -743,7 +737,7 @@ private function mindRitualPervy():void {
 	
 	outputText("\n\nYou do as she so obviously wishes, and spread her legs to get a good look at her now-sopping wet slit. Her vagina seems small, but an experimental touch proves it to be quite malleable – and your single touch causes " + flags[kFLAGS.GAR_NAME] + " to arch her back, gasping with the sudden pleasure.  Smiling at the adorable, enraptured look on her face, you start lapping with a vengeance, grasping her thighs and burying your face between her legs.  You flick your tongue into her smooth, cool slit, lapping up a few drops of water with each flick of your dexterous tongue, and eliciting a gasp or moan each time.");
 	
-	outputText("\n\nSoon, " + flags[kFLAGS.GAR_NAME] + " is clutching at her breasts and quickly fingering her cherry-nub clit as you lick her out, trying her best to keep an even rhythm with you, even as the waterfall comes to an end and you begin to feel light-headed, as if a fog has lifted from your mind.  By way of thanks, you redouble your efforts to pleasure her, ramming your tongue into her depths and fucking her mercilessly.  Quickly, she begins to tense, stopping her own actions to grasp at your " + hairDescript() + " and shove your face further into her crotch, locking her legs and tail around your back as she approaches orgasm.");
+	outputText("\n\nSoon, " + flags[kFLAGS.GAR_NAME] + " is clutching at her breasts and quickly fingering her cherry-nub clit as you lick her out, trying her best to keep an even rhythm with you, even as the waterfall comes to an end and you begin to feel light-headed, as if a fog has lifted from your mind.  By way of thanks, you redouble your efforts to pleasure her, ramming your tongue into her depths and fucking her mercilessly.  Quickly, she begins to tense, stopping her own actions to grasp at your " + player.hairDescript() + " and shove your face further into her crotch, locking her legs and tail around your back as she approaches orgasm.");
 	
 	outputText("\n\nScreaming, " + flags[kFLAGS.GAR_NAME] + " arches her back and thrusts out her bat-wings to their full expanse, clamping down on your tongue as she cums.  You slow your pace, giving her a last few licks as she pants, gasps, and moans, slowly coming down from an orgasmic high.  She collapses backwards, clutching her chest and staring into the rafters.  Chuckling, you stand and give her a pleased pat on the inner thigh, letting her know she did a good job for you.  You leave her smiling atop the altar, slowly getting her breath under control.");
 	//(Return PC to camp, advance time 1 hour)

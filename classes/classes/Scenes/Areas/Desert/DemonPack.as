@@ -67,7 +67,7 @@
 				}
 				if (player.vaginas.length > 0) {
 					if (!player.hasCock()) outputText("Your ", false);
-					outputText(game.vaginaDescript(0) + " burns ", false);
+					outputText(player.vaginaDescript(0) + " burns ", false);
 				}
 				outputText("with arousal.  You make a grab for the nearest demon and catch a handful of jiggly breast. You try desperately to use your other arm to pull her closer to slake your thirst but you both go tumbling to the ground. The demonic leader laughs out loud and the rest of the tribe falls on you, grabbing for anything it can find.", false);
 				doNext(game.desert.oasis.oasisSexing);
@@ -121,7 +121,7 @@
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 6;
-			this.gems = rand(25)+10;
+			this.gems = rand(25) +10;
 			this.drop = new WeightedDrop().addMany(1,
 							consumables.SUCMILK,
 							consumables.INCUBID,

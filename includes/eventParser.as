@@ -91,39 +91,33 @@ public function eventParser(eventNo:Function):void {
 */
 
 public function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
-	if (testingBlockExiting) {
-		doNext(camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
-	}
-	else {
-		var textChoices:Number = rand(4);
-		if (clear) clearOutput();
-		outputText("\n\n<font color=\"#800000\">")
-		if (textChoices == 0) outputText("<b>GAME OVER</b>");
-		if (textChoices == 1) outputText("<b>Game over, man! Game over!</b>");
-		if (textChoices == 2) outputText("<b>You just got Bad-Ended!</b>");
-		if (textChoices == 3) outputText("<b>Your adventures have came to an end...</b>");
-		outputText("</font>");
-		//Delete save on hardcore.
-		if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-			outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
-			flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
-			var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
-			if (test.data.exists)
-			{
-				trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
-				test.clear();
-			}
+	var textChoices:Number = rand(4);
+	if (clear) clearOutput();
+	outputText("\n\n<font color=\"#800000\">")
+	if (textChoices == 0) outputText("<b>GAME OVER</b>");
+	if (textChoices == 1) outputText("<b>Game over, man! Game over!</b>");
+	if (textChoices == 2) outputText("<b>You just got Bad-Ended!</b>");
+	if (textChoices == 3) outputText("<b>Your adventures have came to an end...</b>");
+	outputText("</font>");
+	//Delete save on hardcore.
+	if (flags[kFLAGS.HARDCORE_MODE] > 0) {
+		outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
+		flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
+		var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
+		if (test.data.exists)
+		{
+			trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
+			test.clear();
 		}
-		flags[kFLAGS.TIMES_BAD_ENDED]++;
-		awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
-		menu();
-		addButton(0, "Game Over", gameOverMenuOverride, null, null, null, "Your game has ended. Please load a saved file or start a new game.");
-		if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Continue", camp.wakeFromBadEnd, null, null, null, "It's all just a dream. Wake up.");
-		//addButton(3, "NewGamePlus", charCreation.newGamePlus, null, null, null, "Start a new game with your equipment, experience, and gems carried over.");
-		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", playerMenu);
-		gameOverMenuOverride();
-		
 	}
+	flags[kFLAGS.TIMES_BAD_ENDED]++;
+	awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
+	menu();
+	addButton(0, "Game Over", gameOverMenuOverride, null, null, null, "Your game has ended. Please load a saved file or start a new game.");
+	if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Continue", camp.wakeFromBadEnd, null, null, null, "It's all just a dream. Wake up.");
+	//addButton(3, "NewGamePlus", charCreation.newGamePlus, null, null, null, "Start a new game with your equipment, experience, and gems carried over.");
+	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", playerMenu);
+	gameOverMenuOverride();
 	inCombat = false;
 	dungeonLoc = 0; //Replaces inDungeon = false;
 }
@@ -884,81 +878,4 @@ public function cheatTime(time:Number, needNext:Boolean = false):void {
 		}
 	}
 	statScreenRefresh();
-}
-
-public function growHair(amount:Number = .1):Boolean {
-	//Grow hair!
-	temp = player.hairLength;
-	player.hairLength += amount;
-	if (player.hairLength > 0 && temp == 0) {
-		outputText("\n<b>You are no longer bald.  You now have " + hairDescript() + " coating your head.\n</b>", false);
-		return true;
-	}
-	else if (player.hairLength >= 1 && temp < 1) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.hairLength >= 3 && temp < 3) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.hairLength >= 6 && temp < 6) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.hairLength >= 10 && temp < 10) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.hairLength >= 16 && temp < 16) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.hairLength >= 26 && temp < 26) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.hairLength >= 40 && temp < 40) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.hairLength >= 40 && player.hairLength >= player.tallness && temp < player.tallness) {
-		outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-		return true;
-	}
-	return false;
-}
-
-public function growBeard(amount:Number = .1):Boolean {
-	//Grow beard!
-
-	var tempBeard:Number = player.beardLength;
-	player.beardLength += amount;
-
-	if (player.beardLength > 0 && tempBeard == 0) {
-		outputText("\n<b>You feel a tingling in your cheeks and chin.  You now have " + beardDescript() + " coating your cheeks and chin.\n</b>", false);
-		return true;
-	}
-	else if (player.beardLength >= 0.2 && tempBeard < 0.2) {
-		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.beardLength >= 0.5 && tempBeard < 0.5) {
-		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.beardLength >= 1.5 && tempBeard < 1.5) {
-		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.beardLength >= 3 && tempBeard < 3) {
-		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
-		return true;
-	}
-	else if (player.beardLength >= 6 && tempBeard < 6) {
-		outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + beardDescript() + ".\n</b>", false);
-		return true;
-	}
-
-	return false;
 }

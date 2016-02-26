@@ -45,9 +45,9 @@ package classes.Scenes.Places.Boat
 			else
 			{
 				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me!</i>\" Marae giggles. ", false);
-				var lustDmg:int = (20 + rand(player.cor / 10) + rand(player.sens / 5) + rand(player.lib / 10) + rand(10)) * (game.lustPercent() / 100);
+				var lustDmg:int = (20 + rand(player.cor / 10) + rand(player.sens / 5) + rand(player.lib / 10) + rand(10)) * (player.lustPercent() / 100);
 				game.dynStats("lust", lustDmg, "resisted", false);
-				outputText("(+" + lustDmg + " lust)");
+				outputText("<b>(<font color=\"#ff00ff\">" + lustDmg + "</font> lust)</b>");
 				
 			}
 			combatRoundOver();

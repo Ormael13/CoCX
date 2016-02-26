@@ -982,7 +982,7 @@ package classes.Scenes.Places.Bazaar
 		
 		private function vagOrAss(vaginal:Boolean):String {
 			if (vaginal) return player.vaginaDescript();
-			else return assDescript();
+			else return player.assDescript();
 		}
 		
 		private function haveAndyFuckYou(isVaginal:Boolean):void {
@@ -1626,7 +1626,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			//Removes antennaes!
 			if (rand(3) == 0 && changes < changeLimit && player.antennae > ANTENNAE_NONE) {
-				outputText("\n\nYour " + hairDescript() + " itches so you give it a scratch, only to have your antennae fall to the ground. What a relief. <b>You've lost your antennae!</b>", false);
+				outputText("\n\nYour " + player.hairDescript() + " itches so you give it a scratch, only to have your antennae fall to the ground. What a relief. <b>You've lost your antennae!</b>", false);
 				changes++;
 				player.antennae = ANTENNAE_NONE;
 			}
@@ -1757,8 +1757,8 @@ package classes.Scenes.Places.Bazaar
 			}
 			//Grow balls
 			if (rand(3) == 0 && changes < changeLimit && player.balls > 0 && player.ballSize < 4) {
-				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin. You pause to examine the changes and your roving fingers discover your " + simpleBallsDescript() + " have grown larger than a human's.");
-				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + sackDescript() + ". Walking becomes difficult as you discover your " + simpleBallsDescript() + " have enlarged again.");
+				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin. You pause to examine the changes and your roving fingers discover your " + player.simpleBallsDescript() + " have grown larger than a human's.");
+				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + player.sackDescript() + ". Walking becomes difficult as you discover your " + player.simpleBallsDescript() + " have enlarged again.");
 				dynStats("lib", 1, "lus", 3);
 				player.ballSize++;
 				changes++;
@@ -1767,7 +1767,7 @@ package classes.Scenes.Places.Bazaar
 			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 40) {
 				if (player.findStatusEffect(StatusEffects.BonusVCapacity) < 0) player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
 				player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5);
-				outputText("\n\nThere is a sudden... emptiness within your " + vaginaDescript(0) + ". Somehow you know you could accommodate even larger... insertions.");
+				outputText("\n\nThere is a sudden... emptiness within your " + player.vaginaDescript(0) + ". Somehow you know you could accommodate even larger... insertions.");
 				changes++;
 			}
 			//Boost anal capacity without gaping
@@ -1775,7 +1775,7 @@ package classes.Scenes.Places.Bazaar
 				if (player.statusEffectv1(StatusEffects.BonusACapacity) < 60) {
 					if (player.findStatusEffect(StatusEffects.BonusACapacity) < 0) player.createStatusEffect(StatusEffects.BonusACapacity, 0, 0, 0, 0);
 					player.addStatusValue(StatusEffects.BonusACapacity, 1, 5);
-					outputText("\n\nYou feel... more accommodating somehow. Your " + assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.", false);
+					outputText("\n\nYou feel... more accommodating somehow. Your " + player.assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.", false);
 					changes++;
 				}
 			}
@@ -2014,7 +2014,7 @@ package classes.Scenes.Places.Bazaar
 			//------------
 			//Hair stops growing
 			if (rand(4) == 0 && changes < changeLimit && player.echidnaScore() >= 2 && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
-				outputText("\n\nYour scalp tingles oddly. In a panic, you reach up to your " + hairDescript() + ", but thankfully it appears unchanged.\n");
+				outputText("\n\nYour scalp tingles oddly. In a panic, you reach up to your " + player.hairDescript() + ", but thankfully it appears unchanged.\n");
 				outputText("(<b>Your hair has stopped growing.</b>)");
 				changes++;
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
@@ -2029,8 +2029,8 @@ package classes.Scenes.Places.Bazaar
 				player.cumMultiplier += temp;
 				//Flavor text
 				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.", false);
-				if (player.balls > 0) outputText("\n\nYou feel a churning in your " + ballsDescriptLight() + ". It quickly settles, leaving them feeling somewhat more dense.", false);
-				outputText(" A bit of milky pre dribbles from your " + multiCockDescriptLight() + ", pushed out by the change.", false);
+				if (player.balls > 0) outputText("\n\nYou feel a churning in your " + player.ballsDescriptLight() + ". It quickly settles, leaving them feeling somewhat more dense.", false);
+				outputText(" A bit of milky pre dribbles from your " + player.multiCockDescriptLight() + ", pushed out by the change.", false);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.gender == GENDER_MALE && player.averageBreastSize() > 2 && flags[kFLAGS.HYPER_HAPPY] == 0) {

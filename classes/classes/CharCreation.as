@@ -393,12 +393,6 @@
 		}
 		
 		private function chooseName():void {
-			if (kGAMECLASS.testingBlockExiting) {
-				// We're running under the testing script.
-				// Stuff a name in the box and go go go
-				mainView.nameBox.text = "Derpy";
-				return;
-			}
 			if (mainView.nameBox.text == "") {
 				//If part of newgame+, don't fully wipe.
 				if (player.XP > 0 && player.explored == 0) {
@@ -748,7 +742,7 @@
 		private function setHair(choice:String):void {
 			player.hairColor = choice;
 			clearOutput();
-			outputText("You have " + hairDescript() + ".\n\nYou will proceed to customization.");
+			outputText("You have " + player.hairDescript() + ".\n\nYou will proceed to customization.");
 			//chooseEndowment(false);
 			genericStyleCustomizeMenu();
 		}
@@ -872,12 +866,6 @@
 		//-----------------
 		private function setHeight():void {
 			clearOutput();
-			if (kGAMECLASS.testingBlockExiting)
-			{
-				// We're running under the testing script.
-				// Stuff a number in the box and go go go
-				mainView.nameBox.text = "69";
-			}
 			outputText("Set your height in inches.");
 			outputText("\nYou can choose any height between 4 feet (48 inches) and 8 feet (96 inches).");
 			mainView.nameBox.visible = true;

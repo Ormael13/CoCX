@@ -130,7 +130,7 @@ package classes.Scenes.NPCs
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 16;
-			this.gems = rand(25)+40;
+			this.gems = rand(25) +40;
 			this.drop = NO_DROP;
 			checkMonster();
 		}

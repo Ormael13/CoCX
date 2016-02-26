@@ -239,7 +239,7 @@ package classes.Scenes.Areas.HighMountains
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 16;
-			this.gems = rand(25)+10;
+			this.gems = rand(25) +10;
 			this.additionalXP = 50;
 			this.drop = new WeightedDrop(consumables.PURPEAC, 1);
 			this.wingType = WING_TYPE_HARPY;

@@ -26,7 +26,7 @@ package classes.Scenes.Areas.Plains
 				return;
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4) +80)) > 80) {
 				outputText("You see the gnoll's black lips pull back ever so slightly and the powerful muscles in her shapely thighs tense moments before she charges.  With a leap you throw yourself to the side, feeling the wind and fury pass through where you had just been standing.  You gracefully turn to face the hyena as she does the same, knowing that could have been very bad.", false);
 				return;
 			}
@@ -85,7 +85,7 @@ package classes.Scenes.Areas.Plains
 					outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound", false);
 					if (player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?", false);
 					else outputText(".", false);
-					game.dynStats("lus", (player.lib/20 + rand(4)+1));
+					game.dynStats("lus", (player.lib/20 + rand(4) +1));
 				}
 				if (lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
 					if (!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
@@ -110,7 +110,7 @@ package classes.Scenes.Areas.Plains
 				outputText("The gnoll pulls a javelin from behind her and throws it at you, but blind as she is, it goes wide.", false);
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4) +80)) > 80) {
 				outputText("The gnoll pulls a long, dark wooden javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  The spear flashes through the distance towards your vulnerable form.  Even as you see doom sailing towards you, a primal instinct to duck pulls you down, and you feel the wind from the massive missile as it passes close to your ear.", false);
 			}
 			//Determine if evaded
@@ -164,8 +164,8 @@ package classes.Scenes.Areas.Plains
 				outputText("The gnoll tries to catch you with a brutal snap-kick, but blind as she is, she completely misses.", false);
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				outputText("The gnoll grins at you before striding forward and pivoting.  A spotted leg snaps up and out, flashing through the air towards your " + chestDesc() + ".  You step back just in time, robbing the blow of force.  The paw lightly strikes your torso before the female hyena springs back, glaring at you.", false);
+			else if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4) +80)) > 80) {
+				outputText("The gnoll grins at you before striding forward and pivoting.  A spotted leg snaps up and out, flashing through the air towards your " + player.chestDesc() + ".  You step back just in time, robbing the blow of force.  The paw lightly strikes your torso before the female hyena springs back, glaring at you.", false);
 			}
 			//Determine if evaded
 			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
@@ -186,11 +186,11 @@ package classes.Scenes.Areas.Plains
 				damage += int(str - Math.random()*(player.tou) - player.armorDef);
 				//No damage
 				if (damage <= 0) {
-					outputText("The gnoll tries to catch your " + chestDesc() + " with a snap-kick, but you manage to block the vicious blow.", false);
+					outputText("The gnoll tries to catch your " + player.chestDesc() + " with a snap-kick, but you manage to block the vicious blow.", false);
 				}
 				//<Hyena Attack 3 – Snap Kick – Successful>
 				else {
-					outputText("A glint enters the dark eyes of the gnoll before she strides forward and pivots.  A long, spotted leg snaps up and out to slam against your " + chestDesc(), false);
+					outputText("A glint enters the dark eyes of the gnoll before she strides forward and pivots.  A long, spotted leg snaps up and out to slam against your " + player.chestDesc(), false);
 					if (player.biggestTitSize() >= 1) outputText(", sending a wave of pain through the sensitive flesh", false);
 					outputText(".  A small, traitorous part of you can't help but notice a flash of long, dark flesh beneath her loincloth even as you stagger back from the impact. ", false);
 					game.dynStats("lus", 2);

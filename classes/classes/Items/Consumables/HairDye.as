@@ -56,12 +56,12 @@ package classes.Items.Consumables
 				outputText("You rub the dye into your bald head, but it has no effect.");
 			}
 			else if (game.player.hairColor.indexOf("rubbery") != -1 || game.player.hairColor.indexOf("latex-textured") != -1) {
-				outputText("You massage the dye into your " + game.hairDescript() + " but the dye cannot penetrate the impermeable material your hair is composed of.");
+				outputText("You massage the dye into your " + game.player.hairDescript() + " but the dye cannot penetrate the impermeable material your hair is composed of.");
 			}
 			else {
-				outputText("You rub the dye into your " + game.hairDescript() + ", then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+				outputText("You rub the dye into your " + game.player.hairDescript() + ", then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
 				game.player.hairColor = _color;
-				outputText("You now have " + game.hairDescript() + ".");
+				outputText("You now have " + game.player.hairDescript() + ".");
 				if (game.player.lust > 50) {
 					outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 					game.dynStats("lus", -15);

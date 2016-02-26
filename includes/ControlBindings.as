@@ -10,7 +10,7 @@ inputManager.AddBindableControl(
 	function():void {
 		if (mainView.menuButtonIsVisible(MainView.MENU_STATS) && player.str > 0)
 		{
-			displayStats(undefined);
+			kGAMECLASS.playerInfo.displayStats();
 		}
 	});
 
@@ -20,7 +20,7 @@ inputManager.AddBindableControl(
 	function():void {
 		if (mainView.menuButtonIsVisible(MainView.MENU_LEVEL) && player.str > 0)
 		{
-			levelUpGo(undefined);
+			kGAMECLASS.playerInfo.levelUpGo();
 		}
 	});
 
@@ -245,7 +245,7 @@ inputManager.AddBindableControl(
 	function():void {
 		if (mainView.menuButtonIsVisible(MainView.MENU_PERKS))
 		{
-			displayPerks(undefined);
+			kGAMECLASS.playerInfo.displayPerks();
 		}
 	});
 

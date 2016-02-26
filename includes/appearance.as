@@ -314,42 +314,42 @@
 	else 
 	{
 		if (player.earType == EARS_HUMAN) 
-			outputText("  Your " + hairDescript() + " looks good on you, accentuating your features well.", false);
+			outputText("  Your " + player.hairDescript() + " looks good on you, accentuating your features well.", false);
 		else if (player.earType == EARS_FERRET) 
-			outputText("  A pair of small, rounded ferret ears burst through the top of your " + hairDescript() + ".", false);
+			outputText("  A pair of small, rounded ferret ears burst through the top of your " + player.hairDescript() + ".", false);
 		else if (player.earType == EARS_HORSE) 
-			outputText("  The " + hairDescript() + " on your head parts around a pair of very horse-like ears that grow up from your head.", false);
+			outputText("  The " + player.hairDescript() + " on your head parts around a pair of very horse-like ears that grow up from your head.", false);
 		else if (player.earType == EARS_DOG) 
-			outputText("  The " + hairDescript() + " on your head is overlapped by a pair of pointed dog ears.", false);
+			outputText("  The " + player.hairDescript() + " on your head is overlapped by a pair of pointed dog ears.", false);
 		else if (player.earType == EARS_COW) 
-			outputText("  The " + hairDescript() + " on your head is parted by a pair of rounded cow ears that stick out sideways.", false);
+			outputText("  The " + player.hairDescript() + " on your head is parted by a pair of rounded cow ears that stick out sideways.", false);
 		else if (player.earType == EARS_ELFIN) 
-			outputText("  The " + hairDescript() + " on your head is parted by a pair of cute pointed ears, bigger than your old human ones.", false);
+			outputText("  The " + player.hairDescript() + " on your head is parted by a pair of cute pointed ears, bigger than your old human ones.", false);
 		else if (player.earType == EARS_CAT) 
-			outputText("  The " + hairDescript() + " on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.", false);
+			outputText("  The " + player.hairDescript() + " on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.", false);
 		else if (player.earType == EARS_LIZARD) 
-			outputText("  The " + hairDescript() + " atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.", false);
+			outputText("  The " + player.hairDescript() + " atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.", false);
 		else if (player.earType == EARS_BUNNY) 
-			outputText("  A pair of floppy rabbit ears stick up out of your " + hairDescript() + ", bouncing around as you walk.", false);
+			outputText("  A pair of floppy rabbit ears stick up out of your " + player.hairDescript() + ", bouncing around as you walk.", false);
 		else if (player.earType == EARS_KANGAROO) 
-			outputText("  The " + hairDescript() + " atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.", false);
+			outputText("  The " + player.hairDescript() + " atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.", false);
 		else if (player.earType == EARS_FOX) 
-			outputText("  The " + hairDescript() + " atop your head is parted by a pair of large, adept fox ears that always seem to be listening.");
+			outputText("  The " + player.hairDescript() + " atop your head is parted by a pair of large, adept fox ears that always seem to be listening.");
 		else if (player.earType == EARS_DRAGON) 
-			outputText("  The " + hairDescript() + " atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.", false);
+			outputText("  The " + player.hairDescript() + " atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.", false);
 		else if (player.earType == EARS_RACCOON) 
-			outputText("  The " + hairDescript() + " on your head parts around a pair of egg-shaped, furry raccoon ears.");
+			outputText("  The " + player.hairDescript() + " on your head parts around a pair of egg-shaped, furry raccoon ears.");
 		else if (player.earType == EARS_MOUSE) 
-			outputText("  The " + hairDescript() + " atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
+			outputText("  The " + player.hairDescript() + " atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
 		//<mod> Mod-added ears
 		else if (player.earType == EARS_PIG) 
-			outputText("  The " + hairDescript() + " on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
+			outputText("  The " + player.hairDescript() + " on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
 		else if (player.earType == EARS_RHINO) 
-			outputText("  The " + hairDescript() + " on your head is parted by a pair of tubular rhino ears.");
+			outputText("  The " + player.hairDescript() + " on your head is parted by a pair of tubular rhino ears.");
 		else if (player.earType == EARS_ECHIDNA) 
-			outputText("  Your " + hairDescript() + " makes it near-impossible to see the small, rounded openings that are your ears.");
+			outputText("  Your " + player.hairDescript() + " makes it near-impossible to see the small, rounded openings that are your ears.");
 		else if (player.earType == EARS_DEER) 
-			outputText("  The " + hairDescript() + " on your head parts around a pair of deer-like ears that grow up from your head.", false);
+			outputText("  The " + player.hairDescript() + " on your head parts around a pair of deer-like ears that grow up from your head.", false);
 		//</mod>
 		if (player.antennae == ANTENNAE_BEE) 
 		{
@@ -361,7 +361,7 @@
 	
 	//Beards!
 	if (player.beardLength > 0) {
-		outputText("  You have a " + beardDescript() + " ");
+		outputText("  You have a " + player.beardDescript() + " ");
 		if (player.beardStyle != BEARD_GOATEE) {
 			outputText("covering your ");
 			if (rand(2) == 0) outputText("jaw");
@@ -490,7 +490,7 @@
 	{
 		if (player.thickness > 70) 
 		{
-			outputText("  You have " + hipDescript(), false);
+			outputText("  You have " + player.hipDescript(), false);
 			if (player.hipRating < 6) 
 			{
 				if (player.tone < 65) 
@@ -508,7 +508,7 @@
 		}
 		else if (player.thickness < 30) 
 		{
-			outputText("  You have " + hipDescript(), false);
+			outputText("  You have " + player.hipDescript(), false);
 			if (player.hipRating < 6) 
 				outputText(" that match your trim, lithe body, and", false);
 			if (player.hipRating >= 6 && player.hipRating < 10) 
@@ -523,7 +523,7 @@
 		//STANDARD
 		else 
 		{
-			outputText("  You have " + hipDescript(), false);
+			outputText("  You have " + player.hipDescript(), false);
 			if (player.hipRating < 6) 
 				outputText(", and", false);
 			if (player.femininity > 50) 
@@ -553,7 +553,7 @@
 					else if (player.hasCock()) 
 						outputText(player.multiCockDescript() + " plenty of room to swing", false);
 					else if (player.hasVagina()) 
-						outputText(vaginaDescript() + " a nice, wide berth", false);
+						outputText(player.vaginaDescript() + " a nice, wide berth", false);
 					else outputText("vacant groin plenty of room", false);
 					outputText(", and", false);
 				}
@@ -567,7 +567,7 @@
 		//FATBUTT
 		if (player.tone < 65) 
 		{
-			outputText("  Your " + buttDescript(), false);
+			outputText("  Your " + player.buttDescript(), false);
 			if (player.buttRating < 4) 
 				outputText(" is lean, from what you can see of it.", false);
 			if (player.buttRating >= 4 && player.buttRating < 6) 
@@ -584,7 +584,7 @@
 		//GIRL LOOK AT DAT BOOTY
 		else 
 		{
-			outputText("  Your " + buttDescript(), false);
+			outputText("  Your " + player.buttDescript(), false);
 			if (player.buttRating < 4) 
 				outputText(" is barely noticeable, showing off the muscles of your haunches.", false);
 			if (player.buttRating >= 4 && player.buttRating < 6) 
@@ -605,7 +605,7 @@
 		//TUBBY ASS
 		if (player.tone < 60) 
 		{
-			outputText(" your " + buttDescript(), false);
+			outputText(" your " + player.buttDescript(), false);
 			if (player.buttRating < 4) 
 				outputText(" looks great under your gear.", false);
 			if (player.buttRating >= 4 && player.buttRating < 6) 
@@ -622,7 +622,7 @@
 		//FITBUTT
 		else 
 		{
-			outputText(" your " + buttDescript(), false);
+			outputText(" your " + player.buttDescript(), false);
 			if (player.buttRating < 4) 
 				outputText(" molds closely against your form.", false);
 			if (player.buttRating >= 4 && player.buttRating < 6) 
@@ -639,13 +639,13 @@
 	}
 	//TAILS
 	if (player.tailType == TAIL_TYPE_HORSE) 
-		outputText("  A long " + player.furColor + " horsetail hangs from your " + buttDescript() + ", smooth and shiny.", false);
+		outputText("  A long " + player.furColor + " horsetail hangs from your " + player.buttDescript() + ", smooth and shiny.", false);
 	if (player.tailType == TAIL_TYPE_FERRET)
 		outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy " + player.furColor + " fur.", false);
 	if (player.tailType == TAIL_TYPE_DOG) 
-		outputText("  A fuzzy " + player.furColor + " dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.", false);
+		outputText("  A fuzzy " + player.furColor + " dogtail sprouts just above your " + player.buttDescript() + ", wagging to and fro whenever you are happy.", false);
 	if (player.tailType == TAIL_TYPE_DEMONIC) 
-		outputText("  A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your " + player.leg() + " sensually at every opportunity.", false);
+		outputText("  A narrow tail ending in a spaded tip curls down from your " + player.buttDescript() + ", wrapping around your " + player.leg() + " sensually at every opportunity.", false);
 	if (player.tailType == TAIL_TYPE_COW) 
 		outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.", false);
 	if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) 
@@ -674,29 +674,29 @@
 	}
 	if (player.tailType == TAIL_TYPE_CAT) 
 	{
-		outputText("  A soft " + player.furColor + " cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.", false);
+		outputText("  A soft " + player.furColor + " cat-tail sprouts just above your " + player.buttDescript() + ", curling and twisting with every step to maintain perfect balance.", false);
 	}
 	if (player.tailType == TAIL_TYPE_LIZARD) 
 	{
-		outputText("  A tapered tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance.", false);
+		outputText("  A tapered tail hangs down from just above your " + player.assDescript() + ".  It sways back and forth, assisting you with keeping your balance.", false);
 	}
 	if (player.tailType == TAIL_TYPE_RABBIT) 
-		outputText("  A short, soft bunny tail sprouts just above your " + assDescript() + ", twitching constantly whenever you don't think about it.", false);
+		outputText("  A short, soft bunny tail sprouts just above your " + player.assDescript() + ", twitching constantly whenever you don't think about it.", false);
 	else if (player.tailType == TAIL_TYPE_HARPY) 
-		outputText("  A tail of feathers fans out from just above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.", false);
+		outputText("  A tail of feathers fans out from just above your " + player.assDescript() + ", twitching instinctively to help guide you if you were to take flight.", false);
 	else if (player.tailType == TAIL_TYPE_KANGAROO) 
 	{
 		outputText("  A conical, ", false);
 		if (player.skinType == SKIN_TYPE_GOO) 
 			outputText("gooey, " + player.skinTone, false);
 		else outputText("furry, " + player.furColor, false);
-		outputText(", tail extends from your " + assDescript() + ", bouncing up and down as you move and helping to counterbalance you.", false);
+		outputText(", tail extends from your " + player.assDescript() + ", bouncing up and down as you move and helping to counterbalance you.", false);
 	}
 	else if (player.tailType == TAIL_TYPE_FOX) 
 	{
 		if (player.tailVenom <= 1) 
-			outputText("  A swishing " + player.furColor + " fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
-		else outputText("  " + Num2Text(player.tailVenom) + " swishing " + player.furColor + " fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
+			outputText("  A swishing " + player.furColor + " fox's brush extends from your " + player.assDescript() + ", curling around your body - the soft fur feels lovely.");
+		else outputText("  " + Num2Text(player.tailVenom) + " swishing " + player.furColor + " fox's tails extend from your " + player.assDescript() + ", curling around your body - the soft fur feels lovely.");
 	}
 	else if (player.tailType == TAIL_TYPE_DRACONIC) 
 	{
@@ -765,7 +765,7 @@
 	else if (player.lowerBody == LOWER_BODY_TYPE_CAT) 
 		outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws.", false);
 	else if (player.lowerBody == LOWER_BODY_TYPE_LIZARD) 
-		outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
+		outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow down from your " + player.hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
 	else if (player.lowerBody == LOWER_BODY_TYPE_BUNNY) 
 		outputText("  Your " + num2Text(player.legCount)+ " legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.", false);
 	else if (player.lowerBody == LOWER_BODY_TYPE_HARPY) 
@@ -777,7 +777,7 @@
 	else if (player.lowerBody == LOWER_BODY_TYPE_FOX) 
 		outputText("  Your " + num2Text(player.legCount)+ " legs are crooked into high knees with hocks and long feet, like those of a fox; cute bulbous toes decorate the ends.");
 	else if (player.lowerBody == LOWER_BODY_TYPE_DRAGON) 
-		outputText("  " + Num2Text(player.legCount)+ " human-like legs grow down from your " + hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
+		outputText("  " + Num2Text(player.legCount)+ " human-like legs grow down from your " + player.hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
 	else if (player.lowerBody == LOWER_BODY_TYPE_RACCOON) 
 		outputText("  Your " + num2Text(player.legCount)+ " legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
 	else if (player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED) 
@@ -935,13 +935,13 @@
 	//Chesticles..I mean bewbz.
 	if (player.breastRows.length == 1) 
 	{
-		outputText("You have " + num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + ", each supporting ", false);
+		outputText("You have " + num2Text(player.breastRows[temp].breasts) + " " + player.breastDescript(temp) + ", each supporting ", false);
 		outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples.
 		if (flags[kFLAGS.USE_METRICS] > 0 ) outputText(int(player.nippleLength * 2.54 * 10) / 10 + "-cm "); //Centimeter display
 		else outputText(int(player.nippleLength * 10) / 10 + "-inch "); //Inches display
-		outputText(nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? "." : "s."), false); //Nipple description and plural
+		outputText(player.nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? "." : "s."), false); //Nipple description and plural
 		if (player.breastRows[0].milkFullness > 75) 
-			outputText("  Your " + breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.", false);
+			outputText("  Your " + player.breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.", false);
 		if (player.breastRows[0].breastRating >= 1) 
 			outputText("  You could easily fill a " + player.breastCup(temp) + " bra.", false);
 		//Done with tits.  Move on.
@@ -963,15 +963,15 @@
 				outputText("\n--Your fourth set of tits cradles ", false);
 			if (temp == 4) 
 				outputText("\n--Your fifth and final mammary grouping swells with ", false);
-			outputText(num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + " with ", false);
+			outputText(num2Text(player.breastRows[temp].breasts) + " " + player.breastDescript(temp) + " with ", false);
 			outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples per breast
 			if (flags[kFLAGS.USE_METRICS] > 0 ) outputText(int(player.nippleLength * 2.54 * 10) / 10 + "-cm "); //Centimeter
 			else outputText(int(player.nippleLength * 10) / 10 + "-inch "); //Inches
-			outputText(nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? " each." : "s each."), false); //Description and Plural
+			outputText(player.nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? " each." : "s each."), false); //Description and Plural
 			if (player.breastRows[temp].breastRating >= 1) 
 				outputText("  They could easily fill a " + player.breastCup(temp) + " bra.", false);
 			if (player.breastRows[temp].milkFullness > 75) 
-				outputText("  Your " + breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.", false);
+				outputText("  Your " + player.breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.", false);
 			temp++;
 		}
 		//Done with tits.  Move on.
@@ -993,7 +993,7 @@
 		if (player.isTaur()) 
 			outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.", false);
 		if (flags[kFLAGS.USE_METRICS] > 0) outputText("\nYour " + player.cockDescript(temp) + " is " + int(10 * player.cocks[temp].cockLength * 2.54) / 10 + " cm long and ", false);
-		else outputText("\nYour " + cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
+		else outputText("\nYour " + player.cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 		if (Math.round(10*player.cocks[temp].cockThickness)/10 < 10) 
 		{
 			if (flags[kFLAGS.USE_METRICS] > 0) {
@@ -1253,31 +1253,31 @@
 		if (player.findStatusEffect(StatusEffects.Uniball) >= 0)
 		{
 			if (player.skinType != SKIN_TYPE_GOO) 
-				outputText("Your [sack] clings tightly to your groin, holding " + ballsDescript() + " snugly against you.");
+				outputText("Your [sack] clings tightly to your groin, holding " + player.ballsDescript() + " snugly against you.");
 			else if (player.skinType == SKIN_TYPE_GOO) 
-				outputText("Your [sack] clings tightly to your groin, dripping and holding " + ballsDescript() + " snugly against you.");
+				outputText("Your [sack] clings tightly to your groin, dripping and holding " + player.ballsDescript() + " snugly against you.");
 		}
 		else if (player.cockTotal() == 0) 
 		{
 			if (player.skinType == SKIN_TYPE_PLAIN) 
-				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
+				outputText("A " + player.sackDescript() + " with " + player.ballsDescript() + " swings heavily under where a penis would normally grow.", false);
 			if (player.skinType == SKIN_TYPE_FUR) 
-				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under where a penis would normally grow.", false);
+				outputText("A fuzzy " + player.sackDescript() + " filled with " + player.ballsDescript() + " swings low under where a penis would normally grow.", false);
 			if (player.skinType == SKIN_TYPE_SCALES) 
-				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
+				outputText("A scaley " + player.sackDescript() + " hugs your " + player.ballsDescript() + " tightly against your body.", false);
 			if (player.skinType == SKIN_TYPE_GOO) 
-				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
+				outputText("An oozing, semi-solid sack with " + player.ballsDescript() + " swings heavily under where a penis would normally grow.", false);
 		}
 		else 
 		{
 			if (player.skinType == SKIN_TYPE_PLAIN) 
-				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
+				outputText("A " + player.sackDescript() + " with " + player.ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 			if (player.skinType == SKIN_TYPE_FUR) 
-				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your " + player.multiCockDescriptLight() + ".", false);
+				outputText("A fuzzy " + player.sackDescript() + " filled with " + player.ballsDescript() + " swings low under your " + player.multiCockDescriptLight() + ".", false);
 			if (player.skinType == SKIN_TYPE_SCALES) 
-				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
+				outputText("A scaley " + player.sackDescript() + " hugs your " + player.ballsDescript() + " tightly against your body.", false);
 			if (player.skinType == SKIN_TYPE_GOO) 
-				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
+				outputText("An oozing, semi-solid sack with " + player.ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 		}
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ", false);
 		if (Math.round(player.ballSize) == 1) 
@@ -1292,14 +1292,14 @@
 			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.", false);
 		outputText("\n", false);
 		if (player.vaginas.length == 1) 
-			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10*2.54)/10 + "-centimetre clit", false);
-			else outputText("You have a " + vaginaDescript(0) + ", with a " + int(player.clitLength*10)/10 + "-inch clit", false);
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have a " + player.vaginaDescript(0) + ", with a " + int(player.clitLength*10*2.54)/10 + "-centimetre clit", false);
+			else outputText("You have a " + player.vaginaDescript(0) + ", with a " + int(player.clitLength*10)/10 + "-inch clit", false);
 		if (player.vaginas[0].virgin) 
 			outputText(" and an intact hymen", false);
 		outputText(".  ", false);
 		if (player.vaginas.length > 1) 
-			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10*2.54)/10 + "-centimetre clits each.  ", false);
-			else outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + int(player.clitLength*10)/10 + "-inch clits each.  ", false);
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You have " + player.vaginas.length+ " " + player.vaginaDescript(0) + "s, with " + int(player.clitLength*10*2.54)/10 + "-centimetre clits each.  ", false);
+			else outputText("You have " + player.vaginas.length+ " " + player.vaginaDescript(0) + "s, with " + int(player.clitLength*10)/10 + "-inch clits each.  ", false);
 		if (player.lib < 50 && player.lust < 50) //not particularly horny
 		
 		{
@@ -1315,11 +1315,11 @@
 			if (player.vaginas[0].vaginalWetness>= VAGINA_WETNESS_WET) 
 			{
 				if (player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_LOOSE) 
-					outputText("your " + vaginaDescript(0) + ". ", false);
+					outputText("your " + player.vaginaDescript(0) + ". ", false);
 				if (player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_GAPING_WIDE) 
-					outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ", false);
+					outputText("your " + player.vaginaDescript(0) + ", its lips slightly parted. ", false);
 				if (player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_GAPING_WIDE) 
-					outputText("the massive hole that is your " + vaginaDescript(0) + ".  ", false);
+					outputText("the massive hole that is your " + player.vaginaDescript(0) + ".  ", false);
 			}
 		}
 		if ((player.lib>=50 || player.lust >=50) && (player.lib< 80 && player.lust < 80)) //kinda horny
@@ -1340,11 +1340,11 @@
 			}				
 			//Different description based on vag looseness
 			if (player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_LOOSE) 
-				outputText("your " + vaginaDescript(0) + ". ", false);
+				outputText("your " + player.vaginaDescript(0) + ". ", false);
 			if (player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_GAPING_WIDE) 
-				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ", false);
+				outputText("your " + player.vaginaDescript(0) + ", its lips slightly parted. ", false);
 			if (player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_GAPING_WIDE) 
-				outputText("the massive hole that is your " + vaginaDescript(0) + ".  ", false);
+				outputText("the massive hole that is your " + player.vaginaDescript(0) + ".  ", false);
 		}
 		if ((player.lib> 80 || player.lust > 80)) //WTF horny!
 		
@@ -1370,9 +1370,9 @@
 			}				
 			//Different description based on vag looseness
 			if (player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_LOOSE) 
-				outputText("your " + vaginaDescript(0) + ". ", false);
+				outputText("your " + player.vaginaDescript(0) + ". ", false);
 			if (player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VAGINA_LOOSENESS_GAPING_WIDE) 
-				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ", false);
+				outputText("your " + player.vaginaDescript(0) + ", its lips slightly parted. ", false);
 			if (player.vaginas[0].vaginalLooseness>= VAGINA_LOOSENESS_GAPING_WIDE) 
 				outputText("the massive hole that is your cunt.  ", false);
 		}
@@ -1388,7 +1388,7 @@
 	if (player.ass) 
 	{
 		outputText("\n", false);
-		outputText("You have one " + assholeDescript() + ", placed between your butt-cheeks where it belongs.\n", false);
+		outputText("You have one " + player.assholeDescript() + ", placed between your butt-cheeks where it belongs.\n", false);
 	}
 	//Piercings!
 	if (player.eyebrowPierced > 0) 
@@ -1402,9 +1402,9 @@
 	if (player.tonguePierced > 0) 
 		outputText("\nThough not visible, you can plainly feel your " + player.tonguePShort + " secured in your tongue.", false);
 	if (player.nipplesPierced == 3) 
-		outputText("\nYour " + nippleDescript(0) + "s ache and tingle with every step, as your heavy " + player.nipplesPShort + " swings back and forth.", false);
+		outputText("\nYour " + player.nippleDescript(0) + "s ache and tingle with every step, as your heavy " + player.nipplesPShort + " swings back and forth.", false);
 	else if (player.nipplesPierced > 0) 
-		outputText("\nYour " + nippleDescript(0) + "s are pierced with " + player.nipplesPShort + ".", false);
+		outputText("\nYour " + player.nippleDescript(0) + "s are pierced with " + player.nipplesPShort + ".", false);
 	if (player.totalCocks() > 0) 
 	{
 		if (player.cocks[0].pierced > 0) 
@@ -1417,9 +1417,9 @@
 	if (player.hasVagina()) 
 	{
 		if (player.vaginas[0].labiaPierced > 0) 
-			outputText("\nYour " + vaginaDescript(0) + " glitters with the " + player.vaginas[0].labiaPShort + " hanging from your lips.", false);
+			outputText("\nYour " + player.vaginaDescript(0) + " glitters with the " + player.vaginas[0].labiaPShort + " hanging from your lips.", false);
 		if (player.vaginas[0].clitPierced > 0) 
-			outputText("\nImpossible to ignore, your " + clitDescript() + " glitters with its " + player.vaginas[0].clitPShort + ".", false);
+			outputText("\nImpossible to ignore, your " + player.clitDescript() + " glitters with its " + player.vaginas[0].clitPShort + ".", false);
 	}
 	//MONEY!
 	if (player.gems == 0) 

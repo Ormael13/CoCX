@@ -88,7 +88,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 19;
-			this.gems = rand(25)+140;
+			this.gems = rand(25) +140;
 			this.additionalXP = 50;
 			this.wingType = WING_TYPE_FEATHERED_LARGE;
 			this.tailType = TAIL_TYPE_DEMONIC;

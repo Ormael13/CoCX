@@ -558,7 +558,7 @@ package classes.Scenes
 			for (var i:int = 0; i < 10; i++) {
 				if (player.prisonItemSlots[i*2] != null && player.prisonItemSlots[i*2] != undefined) {
 					outputText("\n" + player.prisonItemSlots[i*2]);
-					outputText(" x" + player.prisonItemSlots[(i*2)+1]);
+					outputText(" x" + player.prisonItemSlots[(i*2) +1]);
 				}
 			}
 			flushOutputTextToGUI();

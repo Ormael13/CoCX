@@ -341,15 +341,15 @@ package classes.Scenes.Seasonal {
 			outputText("\n\nKami squeals between each of your dominating thrusts");
 			//[If player has balls]
 			if (player.balls > 0) outputText(", your balls slapping against her with every push");
-			outputText(".  \"<i>Anh! No! Ah!</i>\"  She winces between each thrust, your [hips] doing little to help as they pick up the pace.  You continue pounding her ass for as long as you can, briefly releasing her wrists to give her bubble-butt a hard smack.  Kami's passage is warm and moist with your pre, and it isn't long before you find your cock sliding in and out of your slut's snug ass-tunnel as if it was made for you.  Eventually, Kami's vice-like grip on your " + cockDescript(x) + " loosens, and she begins lose herself to your dominating display.  Swaying her head side to side in enjoyment, you fuck her raw and hard - her hat bobbing up and down in a manner as hypnotising as her jiggling flesh.  You pull her to the ground to give her your final few thrusts before you churn out your spunk, falling over her and weakly bucking like some manner of beast.");
+			outputText(".  \"<i>Anh! No! Ah!</i>\"  She winces between each thrust, your [hips] doing little to help as they pick up the pace.  You continue pounding her ass for as long as you can, briefly releasing her wrists to give her bubble-butt a hard smack.  Kami's passage is warm and moist with your pre, and it isn't long before you find your cock sliding in and out of your slut's snug ass-tunnel as if it was made for you.  Eventually, Kami's vice-like grip on your " + player.cockDescript(x) + " loosens, and she begins lose herself to your dominating display.  Swaying her head side to side in enjoyment, you fuck her raw and hard - her hat bobbing up and down in a manner as hypnotising as her jiggling flesh.  You pull her to the ground to give her your final few thrusts before you churn out your spunk, falling over her and weakly bucking like some manner of beast.");
 
 			outputText("\n\n\Kami squeals excitedly as she reaches her own climax underneath you, tugging rapidly on her precum-soaked herm cock, milking it like crazy onto the ground beneath her.  You can feel her dripping fem-sex mesh against your own [sack] as you empty into her tight passage.");
 
 			//{If cum quantity = light, medium}
-			if (player.cumQ() < 1000) outputText("  \"<i>Mmm... just like that, babe,</i>\" Kami moans submissively, her asshole clenching one last time before you pull out and climb off your satiated conquest, your " + cockDescript(x) + " still dripping creamy white spunk.");
+			if (player.cumQ() < 1000) outputText("  \"<i>Mmm... just like that, babe,</i>\" Kami moans submissively, her asshole clenching one last time before you pull out and climb off your satiated conquest, your " + player.cockDescript(x) + " still dripping creamy white spunk.");
 			//{if cum quantity ≧ heavy}
 			else
-				outputText("  One of Kami's hands flies from her dick to her suddenly swollen belly as your mighty seed gushes forth.  The unexpectedly heavy girl sinks further into the ground, your load swishing back up and loosening her tunnel around you and forcing you to remove your still-spewing " + cockDescript(x) + " before something unfortunate happens.  Semen starts tumbling out as soon as you dismount your kangaroo conquest, but judging by the slow pace, she's going to look heavily pregnant for a while.");
+				outputText("  One of Kami's hands flies from her dick to her suddenly swollen belly as your mighty seed gushes forth.  The unexpectedly heavy girl sinks further into the ground, your load swishing back up and loosening her tunnel around you and forcing you to remove your still-spewing " + player.cockDescript(x) + " before something unfortunate happens.  Semen starts tumbling out as soon as you dismount your kangaroo conquest, but judging by the slow pace, she's going to look heavily pregnant for a while.");
 			
 			outputText("\n\n\Replacing your clothes, you give Kami one last glance over before you leave.  She's lying happily encumbered on the floor, covered in a combination of your fluids.  She'll probably be good to head home later - that is, if she can still walk.");
 			//[Player heads back to camp, An hour passes, Lust is reduced to zero and KamiEnc = 1]
@@ -424,7 +424,7 @@ package classes.Scenes.Seasonal {
 			outputText("You chuckle heartily - of course you're going to ravish her!  How ridiculous to assume otherwise.  In a split second, you've already grabbed her by her arms, forcing her back against the wall.  Kami passionately yelps, but her eagerness to grind against your growing package reveals her true intentions.");
 			outputText("\n\nTaking the initiative, you hold the waitress by the throat whilst you free room in your [armor] for your succulent snatch-hungry sausages.  Wasting no time at all, you align your rock-hard rods underneath her huge phallus and directly at her needy orifices, moving your hands underneath her legs and lifting her slightly to add leverage for yourself.  Kami pants in anticipation, gently pressing herself against your cockheads in an attempt to entice you.  Ever the tease, you notice the waitress gasp between her delectable lips.  \"<i>Are you gonna put those fine-ass rods to use, or do I have to do it myself?</i>\"  Not about to disappoint, you push into her, penetrating the soft confines of her pussy before reaching into her tight little ass, slowly but steadily plunging further and further inside until your needy tools can't reach any further.  \"<i>F-Fuck!  Drill me hard!</i>\" she cries desperately.");
 			outputText("\n\nRearing out slower than you had entered, her hips support yourself as you dive your way back in, slowly speeding up the frequency of your thrusts each time.  As you aggressively pump into your new kanga-slut, you force the waitress to press further against the alleyway wall behind her, her arms spreading out while her pillowy chest is squished against the brick.");
-			outputText("\n\n\"<i>I could do this all goddamn day!</i>\"  Kami screams, your wicked thrashing leaving her pelvis moist with sheer bliss.  You can already feel your own orgasm approaching, so with due haste you grab Kami's ample bust and pick up your thrusts energetically, ramming your cocks home with as much speed as you can muster.  Your ass-engorged " + cockDescript(x) + " cums first, packing Kami's tight hole with your sticky seed, shortly followed by your other " + cockDescript(y) + " giving her delicate-yet-punished pussy the same treatment.");
+			outputText("\n\n\"<i>I could do this all goddamn day!</i>\"  Kami screams, your wicked thrashing leaving her pelvis moist with sheer bliss.  You can already feel your own orgasm approaching, so with due haste you grab Kami's ample bust and pick up your thrusts energetically, ramming your cocks home with as much speed as you can muster.  Your ass-engorged " + player.cockDescript(x) + " cums first, packing Kami's tight hole with your sticky seed, shortly followed by your other " + player.cockDescript(y) + " giving her delicate-yet-punished pussy the same treatment.");
 			
 			outputText("\n\nKami is only seconds behind, her figure leaning forward into your arms and spasming up against you in a sexual seizure.  \"<i>Oh my god!</i>\"  The 'roo girl squeals, her tongue lolling out in intense arousal as her 14 inch cock spurts its pent-up frustration all over your abdomen.  You can feel the fur on her thighs standing briefly on end as she coils them around you, the sensation gradually fading away slowly as her frantic panting slows down.");
 			
@@ -922,9 +922,9 @@ package classes.Scenes.Seasonal {
 				if (x <= 0 && player.hasVagina() && player.clitLength >= 3.5 && rand(2) == 0) x = -1;
 				else x = player.smallestCockIndex();
 			}
-			outputText("You look your naked, icy lover up and down, thinking of all the things you could do to her.  She raises a white eyebrow at you curiously while you take in her statuesque form.  A thin layer of frost covers her flesh, giving her pale blue skin a sparkling, shimmering appearance.  You find yourself getting aroused at all the potentialities.  Your " + cockClit(x) + " rises to attention as you ponder it, and with a smirk, you finally settle on something.");
+			outputText("You look your naked, icy lover up and down, thinking of all the things you could do to her.  She raises a white eyebrow at you curiously while you take in her statuesque form.  A thin layer of frost covers her flesh, giving her pale blue skin a sparkling, shimmering appearance.  You find yourself getting aroused at all the potentialities.  Your " + player.cockClit(x) + " rises to attention as you ponder it, and with a smirk, you finally settle on something.");
 			
-			outputText("\n\nFirst you disrobe, tossing your clothes aside, and order Nieve onto her knees.  She does so immediately, and without needing to be told what to do, she leans in and grasps your " + cockClit(x) + " with one hand.  Like the rest of her, Nieve's hands are freezing cold, and though it's a strange sensation at first, it's not at all painful or uncomfortable.  \"<i>Allow me, [Master],</i>\" she says, licking the tip of your " + cockClit(x) + " with a wet, cold \"<i>schlick</i>\" that makes you shiver.");
+			outputText("\n\nFirst you disrobe, tossing your clothes aside, and order Nieve onto her knees.  She does so immediately, and without needing to be told what to do, she leans in and grasps your " + player.cockClit(x) + " with one hand.  Like the rest of her, Nieve's hands are freezing cold, and though it's a strange sensation at first, it's not at all painful or uncomfortable.  \"<i>Allow me, [Master],</i>\" she says, licking the tip of your " + player.cockClit(x) + " with a wet, cold \"<i>schlick</i>\" that makes you shiver.");
 			
 			outputText("\n\nNot wasting any time, she takes the whole tip into her mouth, swirling her tongue around it with practiced ease.");
 			//(If small cock/clit (<6): 
@@ -939,7 +939,7 @@ package classes.Scenes.Seasonal {
 				else if (player.clitLength >= 24) outputText("  She has to take a breath almost immediately, saying, \"<i>By the fat man's beard this thing is huge.  You must make the rest of this world jealous.</i>\"");
 				else outputText("  \"<i>Mmm,</i>\" she smacks her lips and takes a quick breath, \"<i>Such a nice example of a candycane right here.  Let's go in for another taste.</i>\"");
 			}
-			outputText("  And with that she dives back down onto your " + cockClit(x) + ".  Her head bobs and bows, giving the sensation of an icecube running up and down your ");
+			outputText("  And with that she dives back down onto your " + player.cockClit(x) + ".  Her head bobs and bows, giving the sensation of an icecube running up and down your ");
 			if (x >= 0) outputText("dick");
 			else outputText("clit");
 			outputText(" at great speed.");
@@ -993,8 +993,8 @@ package classes.Scenes.Seasonal {
 				else outputText("I bet even men get jealous of this bad girl");
 				outputText(".</i>\"");
 			}
-			outputText("\n\nEventually you just can't handle anymore and your body tenses.  Your legs lock up, " + cockClit(x) + " trembling, back arching slightly. Nieve notices this and latches on to the tip just in time as an orgasm rocks your body.");
-			if (x >= 0) outputText("  Your " + cockClit(x) + " quivers and spurts cum directly into Nieve's eager mouth, who gulps it down as if she were drinking direct from the tap.");
+			outputText("\n\nEventually you just can't handle anymore and your body tenses.  Your legs lock up, " + player.cockClit(x) + " trembling, back arching slightly. Nieve notices this and latches on to the tip just in time as an orgasm rocks your body.");
+			if (x >= 0) outputText("  Your " + player.cockClit(x) + " quivers and spurts cum directly into Nieve's eager mouth, who gulps it down as if she were drinking direct from the tap.");
 			outputText("\n\nAs you come down from your little orgasmic high, you glance down at the ice woman, ");
 			if (x < 0 || player.cumQ() <= 250) outputText("who has a bit of cum dribbling down her chin");
 			else if (player.cumQ() <= 400) outputText("who has a steady stream of cum pouring from her mouth");
@@ -1003,12 +1003,12 @@ package classes.Scenes.Seasonal {
 			else outputText("whose stomach is rather large, like a pregnant woman's, from the sheer amount of cum you've pumped into her gullet");
 			outputText(".  With a smirk, you tell her it's not over yet.  That was just the appetizer.");
 
-			outputText("\n\nWith a command Nieve falls backwards into the white, glittering powder and spreads her legs, revealing her deep blue nethers, wet and slick despite the intense cold of her body.  With a smile spreading across your face, you get down onto your knees between hers, and rub the head of your " + cockClit(x) + " against her icy cavern.  A chill runs down it and up your spine, but you ignore it. You tease and taunt Nieve's cunt, flicking her joy buzzer ");
-			if (x >= 0) outputText("with your " + cockDescript(x) + "");
+			outputText("\n\nWith a command Nieve falls backwards into the white, glittering powder and spreads her legs, revealing her deep blue nethers, wet and slick despite the intense cold of her body.  With a smile spreading across your face, you get down onto your knees between hers, and rub the head of your " + player.cockClit(x) + " against her icy cavern.  A chill runs down it and up your spine, but you ignore it. You tease and taunt Nieve's cunt, flicking her joy buzzer ");
+			if (x >= 0) outputText("with your " + player.cockDescript(x) + "");
 			else outputText("with yours");
 			outputText(", and just slipping the tip in before pulling out.  You do this until your snowbound lover is biting her lip, squirming with barely contained pleasure.");
 			
-			outputText("\n\nRight as she begins to open her mouth, to beg you to just stop it and fuck her, you slip your " + cockClit(x) + " in ");
+			outputText("\n\nRight as she begins to open her mouth, to beg you to just stop it and fuck her, you slip your " + player.cockClit(x) + " in ");
 			//(if too big: 
 			if (x >= 0) {
 				if (player.cockArea(x) >= 130) outputText("at least as far as it will go, ");
@@ -1024,14 +1024,14 @@ package classes.Scenes.Seasonal {
 				//(Cocksize 70/Clit 24)
 				else if (player.cockArea(x) <= 70) outputText("Nieve's cunt feels like an icy vice on your oversized cock, but even so, you manage to hit all the right places.  Soon she is wriggling around, eyes tightly shut as she pants for breath.");
 				//(Cocksize 130+/Clit 48+)
-				else outputText("Though you can't fit your entire " + cockClit(x) + " inside, you are amazed at how much she takes.  Her pale blue stomach bulges with every thrust.  Soon Nieve is wriggling, her eyes slightly open as she bites her lip in ecstasy.");
+				else outputText("Though you can't fit your entire " + player.cockClit(x) + " inside, you are amazed at how much she takes.  Her pale blue stomach bulges with every thrust.  Soon Nieve is wriggling, her eyes slightly open as she bites her lip in ecstasy.");
 			}
 			else {
 				if (player.clitLength <= 4) outputText("Your meager clit isn't much, but at this angle you manage to hit all the right places.  Soon Nieve is wriggling around, eyes staring up at you, urging you on faster and faster.");
 				else if (player.clitLength <= 12) outputText("At this angle you manage to hit all the right places.  Soon Nieve is wriggling around, eyes tightly shut as she whispers dirty words you can't even make out.");
 				else if (player.cockArea(x) <= 24) outputText("Nieve's cunt feels like an icy vice on your oversized clitty, but even so, you manage to hit all the right places.  Soon she is wriggling around, eyes tightly shut as she pants for breath.");
 				//(Cocksize 130+/Clit 48+)
-				else outputText("Though you can't fit your entire " + cockClit(x) + " inside, you are amazed at how much she takes.  Her pale blue stomach bulges with every thrust.  Soon Nieve is wriggling, her eyes slightly open as she bites her lip in ecstasy.");
+				else outputText("Though you can't fit your entire " + player.cockClit(x) + " inside, you are amazed at how much she takes.  Her pale blue stomach bulges with every thrust.  Soon Nieve is wriggling, her eyes slightly open as she bites her lip in ecstasy.");
 			}
 			outputText("\n\nNieve's body tenses underneath you while a deep, \"<i>Ohhh yes!</i>\" rolls from her lips languidly.  She bites her deep blue lip, stifling any more cries.  Her already tight, bitingly cold quim grips you tighter causing your entire body to shiver.  Her arms extend out into the snow, twitching wildly.  Her legs, meanwhile, can't decide whether they want to grip your neck or bow outwards.  As the orgasm crashes over her body you know you can't hold out much longer either.");
 			
@@ -1039,7 +1039,7 @@ package classes.Scenes.Seasonal {
 			//((Clitfucking?)
 			if (x < 0) outputText("  Your [clit] suddenly feels suddenly warm, like every nerve ending inside were on fire. It aches and pulses with the rest of your body, as though it were a little cock longing to cum.");
 			else {
-				outputText("  Your " + cockClit(x) + " aches and pulses with need before ");
+				outputText("  Your " + player.cockClit(x) + " aches and pulses with need before ");
 				if (player.cumQ() < 100) outputText("spilling its meager offering into the ice spirit's womb");
 				else if (player.cumQ() < 250) outputText("ejecting streams of white hot jizz into the ice spirit's hungry snatch");
 				else if (player.cumQ() < 400) outputText("painting the ice spirit's insides with your cream until some begins to pour out");

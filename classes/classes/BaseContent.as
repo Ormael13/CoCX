@@ -225,6 +225,11 @@
 			kGAMECLASS.startCombatImmediate(monster, _plotFight);
 		}
 
+		protected function displayHeader(text:String):void
+		{
+			kGAMECLASS.displayHeader(text);
+		}
+		
 		// Needed in a few rare cases for dumping text coming from a source that can't properly escape it's brackets
 		// (Mostly traceback printing, etc...)
 		protected function rawOutputText(output:String, purgeText:Boolean = false):void
@@ -323,203 +328,9 @@
 		{
 			return kGAMECLASS.hasButton(arg);
 		}
-
-/* Replaced by Utils.formatStringArray, which does almost the same thing in one function
-		protected function clearList():void{
-			kGAMECLASS.clearList();
-		}
-
-		protected function addToList(arg:*):void{
-			kGAMECLASS.addToList(arg);
-		}
-
-		protected function outputList():String{
-			return kGAMECLASS.outputList();
-		}
-*/
 		
 		protected function openURL(url:String):void{
 			return kGAMECLASS.openURL(url);
-		}
-		
-		protected function sackDescript():String
-		{
-			return Appearance.sackDescript(player);
-		}
-		
-		protected function cockClit(value:int = 0):String
-		{
-			return kGAMECLASS.cockClit(value);
-		}
-		
-/* Was only used in Scylla's code. Replaced with conditionals
-		protected function balls(balls:*, noBalls:*):String
-		{
-			return kGAMECLASS.balls(balls, noBalls);
-		}
-*/
-		
-		protected function sheathDesc():String
-		{
-			return kGAMECLASS.player.sheathDescription();
-		}
-		
-		protected function chestDesc():String
-		{
-			return player.chestDesc();
-			//return Appearance.chestDesc(player);
-		}
-		
-		protected function allChestDesc():String
-		{
-			return player.allChestDesc();
-		}
-		
-		protected function allBreastsDescript():String
-		{
-			return kGAMECLASS.allBreastsDescript();
-		}
-		
-		protected function sMultiCockDesc():String
-		{
-			return kGAMECLASS.player.sMultiCockDesc();
-		}
-		
-		protected function SMultiCockDesc():String
-		{
-			return kGAMECLASS.player.SMultiCockDesc();
-		}
-		
-		protected function oMultiCockDesc():String
-		{
-			return kGAMECLASS.player.oMultiCockDesc();
-		}
-		
-		protected function OMultiCockDesc():String
-		{
-			return kGAMECLASS.player.OMultiCockDesc();
-		}
-		
-		protected function tongueDescript():String
-		{
-			return kGAMECLASS.tongueDescript();
-		}
-		
-		protected function ballsDescriptLight(forcedSize:Boolean = true):String {
-			return kGAMECLASS.ballsDescriptLight(forcedSize);
-		}
-
-		protected function ballDescript():String {
-			return kGAMECLASS.ballDescript();
-		}
-
-		/* All calls changed to monster.ballsDescriptLight
-		protected function eBallsDescriptLight():String {
-			return kGAMECLASS.eBallsDescriptLight();
-		}
-		*/
-		
-		/* Was never called
-		protected function eBallsDescript():String {
-			return kGAMECLASS.eBallsDescript();
-		}
-		*/
-
-		protected function ballsDescript():String {
-			return kGAMECLASS.ballsDescript();
-		}
-		
-		protected function simpleBallsDescript():String {
-			return kGAMECLASS.simpleBallsDescript();
-		}
-
-		protected function assholeDescript():String {
-			return kGAMECLASS.assholeDescript();
-		}
-		
-		protected function eAssholeDescript():String {
-			return Appearance.assholeDescript(monster);
-		}
-				
-		protected function hipDescript():String {
-			return kGAMECLASS.hipDescript();
-		}
-		
-		protected function assDescript():String {
-			return kGAMECLASS.assDescript();
-		}
-		
-		protected  function buttDescript():String {
-			return kGAMECLASS.buttDescript();
-		}
-
-		protected function assholeOrPussy():String {
-			return Appearance.assholeOrPussy(player);
-		}
-		
-		protected function nippleDescript(rowNum:Number):String
-		{
-			return kGAMECLASS.nippleDescript(rowNum);
-		}
-		
-		protected function cockDescript(cockNum:int = 0):String
-		{
-			return kGAMECLASS.player.cockDescript(cockNum);
-		}
-		
-		protected function multiCockDescript():String
-		{
-			return kGAMECLASS.player.multiCockDescript();
-		}
-		
-		protected function multiCockDescriptLight():String
-		{
-			return kGAMECLASS.player.multiCockDescriptLight();
-		}
-		
-		protected function breastDescript(rowNum:Number):String
-		{
-			return player.breastDescript(rowNum);
-		}
-		
-		protected function breastSize(val:Number):String
-		{
-			return Appearance.breastSize(val);
-		}
-		
-		protected function biggestBreastSizeDescript():String
-		{
-			return Appearance.biggestBreastSizeDescript(player);
-		}
-		
-		protected function hairDescript():String
-		{
-			return kGAMECLASS.hairDescript();
-		}
-		
-		protected function beardDescript():String
-		{
-			return kGAMECLASS.beardDescript();
-		}
-		
-		protected function hairOrFur():String
-		{
-			return kGAMECLASS.hairOrFur();
-		}
-		
-		protected function clitDescript():String
-		{
-			return kGAMECLASS.clitDescript();
-		}
-		
-		protected function vaginaDescript(vaginaNum:Number = 0):String
-		{
-			return kGAMECLASS.vaginaDescript(vaginaNum);
-		}
-		
-		protected function allVaginaDescript():String
-		{
-			return kGAMECLASS.allVaginaDescript();
 		}
 		
 		/**
@@ -745,10 +556,6 @@
 		
 		protected function buttonIsVisible(index:int):Boolean {
 			return kGAMECLASS.buttonIsVisible(index);
-		}
-		
-		protected function levelUpGo():void {
-			return kGAMECLASS.levelUpGo();
 		}
 				
 		/**

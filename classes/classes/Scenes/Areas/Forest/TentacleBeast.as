@@ -12,7 +12,7 @@
 			var temp:int = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
 			if (temp < 0) temp = 0;
 			//Miss
-			if (temp == 0 || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
+			if (temp == 0 || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4) +80)) > 80)) {
 				outputText("However, you quickly evade the clumsy efforts of the abomination to strike you.", false);
 			}
 			//Hit
@@ -38,7 +38,7 @@
 					//Female Version:
 					else if (player.hasVagina()) outputText("The creature quickly positions a long tentacle with a single sucker over your clitoris. You feel the power of the suction on you, and your body quickly heats up.  Your clit engorges, prompting the beast to latch the sucker onto your " + player.clitDescript() + ".\n", false);
 					//Genderless
-					else outputText("The creature quickly positions a long tentacle against your " + game.assholeDescript() + ". It circles your pucker with slow, delicate strokes that bring unexpected warmth to your body.\n", false);
+					else outputText("The creature quickly positions a long tentacle against your " + player.assholeDescript() + ". It circles your pucker with slow, delicate strokes that bring unexpected warmth to your body.\n", false);
 					game.dynStats("lus", (8+player.sens/20));
 					player.createStatusEffect(StatusEffects.TentacleBind,0,0,0,0);
 				}
@@ -139,7 +139,7 @@
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 6;
-			this.gems = rand(15)+5;
+			this.gems = rand(15) +5;
 			this.drop = new WeightedDrop(null, 1);
 			this.special1 = tentaclePhysicalAttack;
 			this.special2 = tentacleEntwine;
