@@ -87,7 +87,7 @@ package classes.Scenes.Areas.Forest
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foes seem visibly disgusted and leave, telling you to, \"<i>quit being so fucking gross...</i>\"");
-				game.cleanupAfterCombat();
+				game.combat.cleanupAfterCombat();
 			} else {
 				game.forest.tamaniDaughtersScene.loseToDaughters();
 			}

@@ -64,7 +64,7 @@ package classes.Scenes.NPCs
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to mind at all...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.anemoneScene.loseToAnemone();
 			}

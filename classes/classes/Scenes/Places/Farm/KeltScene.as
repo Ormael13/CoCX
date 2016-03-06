@@ -150,7 +150,7 @@ public function fightToBeatKeltVictoryLust():void {
 }	
 
 private function chooseToFinishKelt():void {
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	outputText("\n\nYou step over to the defeated centaur, wondering what you should do.", false)
 	addButton(0, "Kill Him", youBadEndKeltForGood);
 	addButton(1, "Rape Him", fuckKeltsShitUp);

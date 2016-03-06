@@ -617,7 +617,7 @@ package classes.Scenes.Areas.Forest
 				player.buttChange(25, true);
 			}
 			if (postCombat)
-				cleanupAfterCombat(camp.returnToCampUseFourHours);
+				combat.cleanupAfterCombat(camp.returnToCampUseFourHours);
 			else doNext(camp.returnToCampUseFourHours);
 		}
 		
@@ -1215,7 +1215,7 @@ package classes.Scenes.Areas.Forest
 					player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				}
 				player.slimeFeed();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			else {
 				//Male + venomz
@@ -1227,7 +1227,7 @@ package classes.Scenes.Areas.Forest
 					outputText("Several more bee-girls appear and gracefully land all around you, apparently communicating with each other by vibrating their abdomens. She leans forward over you, brushing one of her breasts across the side of your face as she loosens your clothing to release your fully erect manhood. She forcefully grabs it with both hands and begins to squeeze it, as if trying to choke it. Your vision starts to blur; if she were to stroke your member right now, you could die happily knowing you had felt that kind of pleasure. The bee-girl continues to choke your member for several minutes, forcing the blood upwards.\n\n", false);
 
 					outputText("Slowly she gets to her feet and stands directly over your manhood.  'At last,' you think to yourself, 'one final moment of pleasure.'  You close your eyes and allow yourself the fantasy of her lowering herself upon you. A few seconds pass before you open your eyes to see what she is doing. A sudden wave of panic comes over you as you watch her arch her abdomen down between her legs; a split second later you feel a sharp pain at the base of your member. Your eyes close as you try in vain to scream before you pass out.", false);
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					outputText("\n\nSeveral hours later you wake up free of pain - if anything you feel great, a warm tingling sensation rippling through your whole body every time you move as you sit upright. As you look down you see you are still naked and covered in your own seed. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
 					sexed = true;
 					player.orgasm();
@@ -1252,7 +1252,7 @@ package classes.Scenes.Areas.Forest
 					if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 					player.buttChange(25, true, true, false);
 
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					return;
 				}
 				//FEMALES
@@ -1281,7 +1281,7 @@ package classes.Scenes.Areas.Forest
 					player.slimeFeed();
 					player.orgasm();
 					dynStats("int", -.5);
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					return;
 				}
 				//Hermz/Genderless (Lazy way, unfinished?)
@@ -1360,7 +1360,7 @@ package classes.Scenes.Areas.Forest
 				outputText("The heads of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " rub back and forth against the bee-girl's lips and face, and finally curiosity leads her to begin tasting, her surprisingly long tongue lassoing and swirling around every tip she can reach in turn, darting from one to another as if tasting flowers to provide an experience almost as unique as her pussy.\n\n", false);
 				outputText("You feel her abdomen pressing against your rear as you drive into her, the pressure in your groin building as her pussy and ass tighten around you. With a groan you cum, your hot seed gushing in alternating spurts out of each of your shafts into her eager little holes while your tight cunt juices itself with your own brand of honey. She clenches you tightly, her belly distending slightly as you empty your load into her pussy and ass while she squeals again at getting her face covered in seed.  Exhausted from the battle and the fuck, she relaxes and collapses on the ground, panting heavily and half-conscious.", false);
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			if (player.cockTotal() == 2 && rand(2) == 0) {
@@ -1371,7 +1371,7 @@ package classes.Scenes.Areas.Forest
 				outputText("At this the bee-girl shrieks in utter bliss as her eyes roll back and she can't fight back the tingles coursing through her as you stretch her pussy lips.  You let go of her hands and watch with a satisfied grin as she tosses, turns, and clings to the dirt with a rich mix of pain and pleasure from the rough double-penetration. Suddenly you're caught off guard slightly as she pushes forward, almost tackling you. For an instant you're prepared to finish off the bee-girl, but the lust in her eyes is easy enough to read and she looks down, begging to be fucked and filled.  Grabbing onto her arms to brace against and suckling at her ample breast, you force your twin rods into her again and again while a pool of her sexual juices and sweet nectar form at your crotch from each slip in to her moist wetness. The bee-slut moans as you push your rock-hard cocks into her slick pussy, and you can just see the detectable bump of your cock head edging along her stomach, but strong as you are the tightness is overwhelming as her pussy muscles clench about your cocks.\n\n", false);
 				outputText("Letting go of your hands the bee-girl leans back and her mouth opens in a powerful scream of ecstasy that you're sure will scatter any wild-life or imps who hear the noise. As she flings herself back, your body clenches and a torrential storm of white, warm cum soars from the tip of your members into her innermost spaces. Unable to cope with the feelings coursing through her, the bee-girl nearly faints as she comes to a rest on your chest.  You catch your breath and the last couple of cum shots is milked by her still clenching pussy. Rolling over, you free both of your cocks from her fuck-hole and watch with more than a bit of satisfaction.  The dam breaks and a sea of white escapes her stretched, well-lubricated pussy. Pleased with your latest jaunt through the forest, you collect your gear and settle off, leaving the cum-drenched bee-girl covered in your seed.", false);
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			else beeAlternate();
@@ -1493,7 +1493,7 @@ package classes.Scenes.Areas.Forest
 					outputText(". Once she looks comfortable you make your way back to camp, thoroughly satisfied.", false);
 				}
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			else if (rand(2) == 0) {
 				outputText("Firmly grasping her thighs at the joining of her smooth carapace and soft skin, you force them open, revealing the source of her irresistible scent.   She buzzes pitifully in protest ", false);
@@ -1519,7 +1519,7 @@ package classes.Scenes.Areas.Forest
 				if (player.cumQ() >= 500 && player.cumQ() < 1000) outputText("You smile proudly at your handy-work, noting how bloated and distended the bee's abdomen is.  It bulges obscenely, nearly double its previous size.  A sizable river of your spunk drools from between your legs, but amazingly she seems able to keep most of your over-sized orgasm in.", false);
 				if (player.cumQ() >= 1000) outputText("You giggle at your poor victim's state.  She really is a mess.  Her abdomen and belly are both swollen, making her look pregnant in both her bee AND human halves.   A practical river of spunk drools from her glossy pussy-lips, pooling below her.  Even her ovipositor dangles down, dripping with your seed, forced out from her abdomen by the sheer amount of spunk she's carrying.  It twitches, bulges moving along its length, eventually dropping egg after egg on the ground, unable to keep in its cargo.", false);
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			//Male 2
 			else {
@@ -1528,7 +1528,7 @@ package classes.Scenes.Areas.Forest
 				outputText("Unhindered, you start to fuck her. Her pussy tightens and convulses around your cock, becoming slick with her juices and your pre-cum. You can smell the sickly combination of nectar, sweat and love juices hanging thickly in the air. Your breathing becomes heavy while her moans get deeper and lust-filled. Her reluctance evaporates, her struggling shifts into more receptive movements against your body, her hips rocking against yours with each thrust, forcing your " + player.cockDescript(x) + " deeper into her tight honeypot.\n\n", false);
 				outputText("Letting go of her arms, you grip the base of her abdomen for leverage and let her arms and legs slide around you as your pace increases. You feel her abdomen pressing against your rear as you drive into her, the pressure in your " + player.ballsDescriptLight() + " building as her pussy tightens around you. With a groan you cum, your hot seed gushing inside of her. She clenches you tightly, her pussy milking your " + player.cockDescript(x) + " for every ounce, until the sticky white fluid is pouring from around your " + player.cockDescript(x) + ". Exhausted from the battle and the fuck, she relaxes and collapses on the ground, panting heavily and half-conscious.", false);
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 
@@ -1600,7 +1600,7 @@ package classes.Scenes.Areas.Forest
 				else outputText("In no time you both orgasm, sweet girl-cum coating both your faces as you work each other's cunt with desperation born of desire.  ", false);
 			}
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //FUTA Fallback
@@ -1678,7 +1678,7 @@ package classes.Scenes.Areas.Forest
 				outputText(", and you turn your back on your soaked, cum-bloated conquest and the puddle of spooge that's rapidly wicking into the ground.", false);
 			}
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //(can replace normal rape victory scenes if corruption>75, and strength>60, and while player has naga tongue, dick, vagina, or d-cup or larger breasts)
@@ -1746,9 +1746,9 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Damn, that probably did some ear damage but was it ever worth it!  The bee-girl, having finally redirected every egg she had into her own swollen butthole and ceased climaxing, passes out.  You gather your things and leave her contorted and soaked body behind you as you head back to camp.", false);
 			//(gain 20 fatigue if spd<50)
-			if (player.spe < 50) fatigue(20);
+			if (player.spe < 50) player.changeFatigue(20);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -1816,7 +1816,7 @@ package classes.Scenes.Areas.Forest
 			}
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Naga on Bee Scene
@@ -1950,7 +1950,7 @@ package classes.Scenes.Areas.Forest
 				player.orgasm();
 			}
 			doNext(camp.returnToCampUseOneHour);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function beeGirlsGetsDildoed():void {
@@ -1977,7 +1977,7 @@ package classes.Scenes.Areas.Forest
 			else outputText("Y", false);
 			outputText("ou really need to get back to camp and get off after such an intense experience.  Maybe you should give your honey-flavored dildo a shot?", false);
 			dynStats("lus", (20+player.lib/5+player.cor/10));
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		public function milkAndHoneyAreKindaFunny():void
@@ -2020,7 +2020,7 @@ package classes.Scenes.Areas.Forest
 			//You've now been milked, reset the timer for that
 			player.addStatusValue(StatusEffects.Feeder, 1, 1);
 			player.changeStatusValue(StatusEffects.Feeder, 2, 0);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -2062,7 +2062,7 @@ package classes.Scenes.Areas.Forest
 			outputText("\n\nYou pull yourself free on unsteady legs, her gaping hole gushing emerald lube while her chitinous abdomen flops listlessly over her egg-filled ass.  You cut her free from your sticky webbing and gather up your [armor], shuffling back to camp as she collapses exhausted on her side, both hands wrapped around her tremendously swollen midsection.");
 			player.dumpEggs();
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

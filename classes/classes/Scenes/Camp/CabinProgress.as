@@ -108,7 +108,7 @@ package classes.Scenes.Camp
 		//STAGE 2 - Survey and clear area for cabin site.
 		private function startLayout():void {
 			outputText("You finally decide to begin your project: a cabin.  A comfortable cabin, come complete with a bed and nightstand along with some furniture. \n\nYou begin clearing away loose debris by picking up loose rocks and sticks and move them somewhere. It takes one hour and you feel a bit exhausted but you've finished creating a space.")
-			fatigue(50);
+			player.changeFatigue(50);
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 3;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -131,7 +131,7 @@ package classes.Scenes.Camp
 		
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			outputText("While exploring the forest, you survey the trees. The trees are at the right thickness. You could cut down the trees. \n\n");
 			menu();
 			if (player.fatigue > player.maxFatigue() - 30) {
@@ -179,7 +179,7 @@ package classes.Scenes.Camp
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
 			awardAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD);
-			fatigue(50, 2);
+			player.changeFatigue(50, 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Cut down the tree yourself with large axe.
@@ -190,7 +190,7 @@ package classes.Scenes.Camp
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
-			fatigue(50, 2);
+			player.changeFatigue(50, 2);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 
@@ -217,7 +217,7 @@ package classes.Scenes.Camp
 			outputText("It takes some time but you eventually bring the last of wood back to your camp. \n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + Math.floor(player.str / 5));
 			incrementWoodSupply(20 + Math.floor(player.str / 5));
-			fatigue(50, 2);
+			player.changeFatigue(50, 2);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		
@@ -313,7 +313,7 @@ package classes.Scenes.Camp
 			if (camp.companionsCount() == 1) outputText("Your lone camp follower comes to see what you've been working on. They nod in approval, impressed by your handiwork.");
 			else if (camp.companionsCount() > 1) outputText("Your camp followers come to see what you've built so far. Most of them are even impressed.");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 9;
-			fatigue(100);
+			player.changeFatigue(100);
 			doNext(camp.returnToCampUseEightHours);
 		}
 		
@@ -350,7 +350,7 @@ package classes.Scenes.Camp
 			outputText("Several hours flew by as you've managed to complete the walls and roof. Finally, you apply paint on the roof and walls to ensure that it's waterproof and protected from the elements. \n\n");
 			outputText("<b>You have finished constructing the walls and roof!</b>\n\n");		
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 10;
-			fatigue(100);
+			player.changeFatigue(100);
 			doNext(camp.returnToCampUseEightHours);
 		}
 		
@@ -387,7 +387,7 @@ package classes.Scenes.Camp
 			outputText("Next, you flip the book pages until you come across instructions on how to construct a window with functional shutters. You measure and cut the wood into the correct sizes before you nail it together into a frame. Next, you construct two shutters and install the shutters into window frame. Finally, you install the window into place.\n\n");
 			outputText("<b>You have finished installing the door and window!</b>\n\n");		
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 11;
-			fatigue(100);
+			player.changeFatigue(100);
 			doNext(camp.returnToCampUseFourHours);
 		}
 		
@@ -427,7 +427,7 @@ package classes.Scenes.Camp
 			outputText("<b>Congratulations! You have finished your cabin structure! You may want to construct some furniture though.</b>\n\n");		
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 12;
 			flags[kFLAGS.CAMP_BUILT_CABIN] = 1;
-			fatigue(100);
+			player.changeFatigue(100);
 			doNext(enterCabinFirstTime);
 		}
 

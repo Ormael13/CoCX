@@ -757,7 +757,7 @@ private function firstOralReactionChooseEncourage():void {
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.", false);
 	//ENCOURAGEMENT +2
 	lottieMorale(3);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -779,7 +779,7 @@ private function firstAnalReactionChooseEncourage():void {
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.", false);
 	//ENCOURAGEMENT +2
 	lottieMorale(3);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -801,7 +801,7 @@ private function lottieLowMoraleWeightGainEncourage():void {
 	outputText("<b>...</b>After a good workout, you decide to return back to camp, exhausted.", false);
 	//ENCOURAGEMENT +2
 	lottieMorale(3);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -812,7 +812,7 @@ private function lottieLowMorealeWeightGainAbuse():void {
 	outputText("You increase your grip on Lottie's face, pulling her towards you as you growl. She squeals, apologizing over and over again for her uselessness – but that's not enough. It's never enough. You take your hand off her chin, and she recoils, trying to rub the pain away. You look around for anyone curious enough to watch you but, as far as you know, the only person in the entire cafe at this time is the clerk who's thankfully taken a break for now. Without anyone to bear witness, you remove yourself from the seat and walk towards Lottie, who quickly jumps out of hers, backing away from you. You growl for her to come to you, but she winces in response. You dash quickly to her side, grabbing her arm. She could yell at any time, but you know she won't – she's weak, dependent. You're the only one who can save her from her body. And now you're about to tell her what happens when you're denied. Thwack! The sound of you backhanding your pig-slut rings through the entire cafe, though not a single soul is there to watch as Lottie crumples to the ground in a sobbing heap. You growl at her to stand up, and she complies. You've got some exercise to catch up on.\n\n", false);
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.", false);
 	lottieMorale(-10);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -824,7 +824,7 @@ private function lottieMediumMoraleWeightGainEncourage():void {
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.", false);
 	//ENCOURAGEMENT +2
 	lottieMorale(3);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 //If Abuse]
@@ -844,7 +844,7 @@ private function lottieHighMoraleWeightGainEncourage():void {
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.", false);
 	//ENCOURAGEMENT +2
 	lottieMorale(3);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -866,7 +866,7 @@ private function lottieHighMoraleWeightGainFATTYLOVESIT():void {
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.", false);
 	//ENCOURAGEMENT +2
 	lottieMorale(3);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 //[If Abuse]
@@ -887,7 +887,7 @@ private function lottieLowMoraleWeightLossEncourage():void {
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.", false);
 	//ENCOURAGEMENT +2
 	lottieMorale(3);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -907,7 +907,7 @@ private function lottieMediumMoraleWeightLossEncourage():void {
 	outputText("You congratulate her on her success, you're quite proud that she's getting results so quickly. Lottie beams at you, clearly just as excited with the news. You ask her if she wants to meet you in the sauna for some 'stretches' – emphasising the last word heavily whilst making exaggerated quotation marks with your fingers. \"<i>Haha, I'm sorry " + player.short + ", but to tell you the truth, my butt still hurts from the last time we stretched. Would it be okay if we, erm, did some regular exercises for now?</i>\" You both chuckle, despite the fact you were completely serious about boning her in the sauna. Regardless, you decide to give it a rest and tell her you're going to go hit the track, if she's willing to join you.\n\n", false);
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.", false);
 	lottieMorale(4);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -927,7 +927,7 @@ private function lottieHighMoraleWeightLossEncourage():void {
 	outputText("You congratulate her on her success, you're quite proud that she's really getting used to the consistent workout. Lottie beams at you, clearly just as excited with the news. You ask her if she wants to meet you in the sauna for some 'stretches' – emphasising the last word heavily whilst making exaggerated quotation marks with your fingers. \"<i>Haha, I'm sorry " + player.short + ", but to tell you the truth, my butt still hurts from the last time we stretched. Would it be okay if we, erm, did some regular exercises for now?</i>\" You both chuckle, despite the fact you were completely serious about boning her in the sauna. Regardless, you decide to give it a rest and tell her you're going to go hit the track, if she's willing to join you.\n\n", false);
 	outputText("<b>...</b>After a good workout, you decide to return back to camp, exhausted.", false);
 	lottieMorale(4);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -948,7 +948,7 @@ private function lottieHighMoraleWeightLossFATTYLOVESIT():void {
 	outputText("You rub her shoulder, telling her she shouldn't feel ashamed of her body – whether she gains or loses weight, you'll still love her for who she is, as should she. Lottie chuckles before placing her hand on yours. \"<i>Y'know, you really know how to make a girl feel better about themselves, " + player.short + ". Even if it's just a sentence or two, I- it really helps. Thanks.</i>\" You nod in agreement before giving her a peck on the forehead and leading her out on the tracks. You figure a little working out would help clear her mind.\n\n", false);
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.", false);
 	lottieMorale(4);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1285,7 +1285,7 @@ private function boastAtLottie():void {
 	outputText(". She looks up at you and sniffles, but you just grunt in response, disappointed with her efforts. She sighs and tries her best to do it again.\n\n", false);
 
 	outputText("After a few more attempts at the weights, she eventually buckles under the pressure and gives up, walking home by herself. You snort and continue a few more well-earned reps before dropping down and recharging for the night.", false);
-	fatigue(10);
+	player.changeFatigue(10);
 	dynStats("str", .25);
 	lottieMorale(-3);
 	doNext(camp.returnToCampUseOneHour);
@@ -1300,7 +1300,7 @@ private function trainWithLottie():void {
 	dynStats("str", .1);
 	lottieMorale(2);
 	lottieTone(2);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1313,7 +1313,7 @@ private function boastAtFitLottie():void {
 	outputText("After a few more attempts at the weights, she eventually buckles under the pressure and gives up, walking home by herself. You snort and continue a few more well-earned reps before dropping down and recharging for the night.", false);
 	dynStats("str", .25);
 	lottieMorale(-3);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1327,7 +1327,7 @@ private function trainWithFitLottie():void {
 	dynStats("str", .1);
 	lottieMorale(2);
 	lottieTone(2);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1356,7 +1356,7 @@ private function sprintAndLeaveLottieBehind():void {
 	outputText("A few rounds later, you've exhausted yourself so you decide to return home. You notice that Lottie's nowhere in sight, but it's her loss - not yours.", false);
 	dynStats("tou", .2, "spe", .25);
 	lottieMorale(-3);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1368,7 +1368,7 @@ private function jogWithLottie():void {
 	dynStats("tou", .1, "spe", .1);
 	lottieMorale(2);
 	lottieTone(2);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Sprint]
@@ -1379,7 +1379,7 @@ private function sprintAndLeaveFitLottieBehind():void {
 	outputText("A few rounds later and you've exhausted yourself, so you decide to return home. You notice that Lottie's nowhere in sight, but it's her loss - not yours.", false);
 	dynStats("tou", .2, "spe", .25);
 	lottieMorale(-3);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Jog]
@@ -1389,7 +1389,7 @@ private function jogWithFitLottie():void {
 	outputText("You decide that sprinting would be a waste of time and effort, though taking things faster wouldn't be any harm. You scrap the power walking and head off on a light run, poking your tongue playfully at Lottie – signalling the start of a race. She quickly picks up the idea and starts to chase after you, her perky tits bouncing away whilst she tries to overtake you. You both spend the good part of the evening running a fair distance, before deciding to retire for the night. You're both tired, but satisfied with today's efforts.\n\n", false);
 	lottieMorale(2);
 	lottieTone(2);
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1412,7 +1412,7 @@ private function lottieYogaAlone():void {
 	outputText(player.modThickness(30,1), false);
 	outputText(player.modTone(60,1), false);
 	lottieMorale(-2);
-	fatigue(5);
+	player.changeFatigue(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1427,7 +1427,7 @@ private function togetherLottieYoga():void {
 	outputText("The class ends a while later, Lottie continuing to tease you as you walk out of the gym. You note in your head that you'll get her back later, but for now you're exhausted.", false);
 	lottieMorale(4);
 	lottieTone(1);
-	fatigue(5);
+	player.changeFatigue(5);
 	dynStats("lus", 80);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1453,7 +1453,7 @@ private function jumpInPoolBeforeLottieSeesYourWingWang():void {
 	dynStats("lus", 40);
 	lottieTone(2);
 	lottieMorale(-1);
-	fatigue(5);
+	player.changeFatigue(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Wait]
@@ -1471,7 +1471,7 @@ private function waitAndShowLottieYourPoolBoner():void {
 	dynStats("lus", 80);
 	lottieTone(2);
 	lottieMorale(2);
-	fatigue(5);
+	player.changeFatigue(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 

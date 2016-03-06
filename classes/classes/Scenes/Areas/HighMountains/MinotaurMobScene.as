@@ -270,7 +270,7 @@ internal function minotaurDeFeet():void {
 	if (doSFWloss()) return;
 	if (!player.hasVagina()) {
 		outputText("As you slump down in defeat, your horny beast-children take note of your missing femininity.  They growl in displeasure and depart, but not before kicking you unconsciousness.  \"<i>Bitch.</i>\"");
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		return;
 	}
 	//(HP)
@@ -394,7 +394,7 @@ private function nonAddictMinotaurGangBang():void {
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "cor", 1);
 	player.slimeFeed();
 	player.minoCumAddiction(20);
-	if (getGame().inCombat) cleanupAfterCombat();
+	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else {
 		outputText("\n\n", false);
 		inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]), camp.returnToCampUseEightHours);
@@ -489,7 +489,7 @@ private function loseToMinoMobVeryPregnant():void {
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", 1);
 	player.slimeFeed();
 	player.minoCumAddiction(15);
-	if (getGame().inCombat) cleanupAfterCombat();
+	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseEightHours);
 }
 		
@@ -593,7 +593,7 @@ private function analSpearSemiPregMinotaurGangbang():void {
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", 1);
 	player.slimeFeed();
 	player.minoCumAddiction(15);
-	if (getGame().inCombat) cleanupAfterCombat();
+	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseEightHours);
 }
 
@@ -621,7 +621,7 @@ internal function victoryMinotaurGang():void {
 	choices("Gangbang", victoryAllThePenetrationsMinotaurGangBang,
 			"Tit-Fuck", titFuck, "Nipple-Fuck", nipFuck,
 			"Get Licked", createCallBackFunction(forceMinitaurToGiveOral, 0),
-			"Get Sucked", getSuck, "Discipline", disciplineEldestMinotaurSon, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
+			"Get Sucked", getSuck, "Discipline", disciplineEldestMinotaurSon, "", null, "", null, "", null, "Leave", combat.cleanupAfterCombat);
 }
 //*[Victory Tit-Fuck] (for only the fattest of fat bitch titties) 
 private function victoryMinotaurGangTitFuck():void {
@@ -725,7 +725,7 @@ private function victoryMinotaurGangTitFuck():void {
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", .5);
 	player.slimeFeed();
 	player.minoCumAddiction(15);
-	if (getGame().inCombat) cleanupAfterCombat();
+	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else {
 		outputText("\n\n", false);
 		inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]), camp.returnToCampUseOneHour);
@@ -823,7 +823,7 @@ private function victoryAllThePenetrationsMinotaurGangBang():void {
 	player.slimeFeed();
 	player.minoCumAddiction(20);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -939,7 +939,7 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 	player.orgasm();
 	dynStats("sen", -1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1007,7 +1007,7 @@ private function victoryBJNippleFuckMinotaurGang():void {
 	player.minoCumAddiction(10);
 	player.slimeFeed();
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1124,7 +1124,7 @@ private function disciplineEldestMinotaurSon():void {
 
 	outputText("Finished with your son, you push him on his back.  You have had enough of him, for now... If he dares to ambush you again, then you will be more than happy to discipline him again.  After getting dressed, you proceed to walk away.  Your last image of your son is the image of him futilely masturbating, but his cock is too thick and too numb for him to truly get off.  Profoundly amused, you leave the mountains and return to camp.", false);
 	player.orgasm();
-	doNext(cleanupAfterCombat);
+	doNext(combat.cleanupAfterCombat);
 }
 }
 }

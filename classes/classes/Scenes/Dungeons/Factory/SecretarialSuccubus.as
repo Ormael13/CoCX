@@ -34,7 +34,7 @@ package classes.Scenes.Dungeons.Factory
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to care...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				doNext(factory.doLossSuccubus);
 			}

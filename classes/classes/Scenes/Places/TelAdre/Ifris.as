@@ -109,14 +109,14 @@ private function liftWhileIfrisWatches():void {
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)), false);
-	fatigue(30);
+	player.changeFatigue(30);
 	doNext(camp.returnToCampUseOneHour);
 }
 //4b-PC decides to show off, possible strength requirement?-
 private function showOffForIfris():void {
 	spriteSelect(28);
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
-	fatigue(30);
+	player.changeFatigue(30);
 	clearOutput();
 	if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
@@ -330,7 +330,7 @@ private function ifrisDP():void {
 	outputText(".  You slump back and breathe heavy, feeling like you've just run a marathon.\n\n", false);
 	
 	outputText("It is some time until you gain the energy to rise.", false);
-	fatigue(10);
+	player.changeFatigue(10);
 	//Stat changes HERE!
 	if (player.str < 90) dynStats("str", .75);
 	if (player.tou < 40) dynStats("tou", .5);

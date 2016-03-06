@@ -48,7 +48,7 @@ public class Saves extends BaseContent {
 	}
 
 CONFIG::AIR {
-public var airFile:File;
+	public var airFile:File;
 }
 public var file:FileReference;
 public var loader:URLLoader;
@@ -56,6 +56,8 @@ public var loader:URLLoader;
 public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9", "CoC_10", "CoC_11", "CoC_12", "CoC_13", "CoC_14"];
 public var versionProperties:Object = { "legacy" : 100, "0.8.3f7" : 124, "0.8.3f8" : 125, "0.8.4.3":119, "latest" : 119 };
 public var savedGameDir:String = "data/com.fenoxo.coc";
+
+public var notes:String = "";
 
 public function cloneObj(obj:Object):Object
 {
@@ -723,11 +725,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	if (mainView.nameBox.text != "")
 	{
 		saveFile.data.notes = mainView.nameBox.text;
-		getGame().notes = mainView.nameBox.text;
+		notes = mainView.nameBox.text;
 	}
 	else
 	{
-		saveFile.data.notes = getGame().notes;
+		saveFile.data.notes = notes;
 		mainView.nameBox.visible = false;
 	}
 	if (flags[kFLAGS.HARDCORE_MODE] > 0)
@@ -1327,6 +1329,7 @@ public function onDataLoaded(evt:Event):void
 
 		doNext(returnToSaveMenu);
 	}
+	loadPermObject();
 	statScreenRefresh();
 	//playerMenu();
 }
@@ -1362,7 +1365,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		inventory.clearGearStorage();
 		player.short = saveFile.data.short;
 		player.a = saveFile.data.a;
-		game.notes = saveFile.data.notes;
+		notes = saveFile.data.notes;
 		
 		//flags
 		for (var i:int = 0; i < flags.length; i++)

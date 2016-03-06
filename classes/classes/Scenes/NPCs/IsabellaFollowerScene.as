@@ -1549,7 +1549,7 @@ private function isabellaBarnFuckPartII():void {
 	outputText("\n\nYou look over your shoulders as Whitney throws the door open, her pitchfork at the ready, as if expecting some demon.  You grin sheepishly, your bare [ass] staring the farmer girl right in the face as your trouser snake drips onto the barn floor.  Silently, Whitney turns on a heel and withdraws, closing the door behind her.  A silent moment passes before you and Isabella erupt in laughter, both reaching for your clothes.");
 	player.orgasm();
 	dynStats("lib", -1, "sen", -3);
-	fatigue(-25);
+	player.changeFatigue(-25);
 	isabellaKnockUpAttempt();
 	doNext(camp.returnToCampUseTwoHours);
 }

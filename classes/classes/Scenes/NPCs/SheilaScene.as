@@ -528,7 +528,7 @@ private function sheilaPologyFight():void {
 //requires PC has mastered the spell and has enough fatigue/lust to use it
 private function sheilaPologyCastArouse():void {
 	clearOutput();
-	fatigue(15,1);
+	player.changeFatigue(15,1);
 	outputText("You nod at the woman and tell her that you forgive her, even as the gears of revenge turn in the dark corners of your mind.  As she smiles and begins to babble in relief, you focus on her slender body and recite under your breath the first of the formulae that will leave her a gibbering, begging mess.");
 	
 	outputText("\n\n\"<i>-wanna thank you for not taking it personally.  I mean... it was a rough day, yeah, but I had no idea that it was that close to the surface, that I'd lose control after just a little teasing from you, y'know?</i>\"  You nod again in mock understanding as your eyes move to the woman's crotch and your litany to its second phase.");
@@ -633,7 +633,7 @@ private function sheilaReallyMadStandGround():void {
 	startCombat(new Sheila());
 	if (silly()) {
 		monster.HP *= 1.2;
-		fatigue(-10);
+		player.changeFatigue(-10);
 		HPChange(20,false);
 	}
 }
@@ -1230,7 +1230,7 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 	outputText("\n\nSheila colors again.  \"<i>I don't use it around anyone!  O-okay... just for tonight, but promise you won't tease me!  Promise!</i>\"  She looks you in the eye imploringly, then continues.  \"<i>I was named after a famous bloke, so it's a little too silly for me.  But if you want, you can call me... Harriet.</i>\"");
 	outputText("\n\nYou nod sagely and get up to dress.  Sheila, or Harriet, does the same, shimmying into her panties and shorts quickly and pulling her top on.  Finished, she drags you off to the night's lodgings anxiously, hat in hand and body language more closely resembling a giddy girl's on her first date than a grizzled, solitary hunter's.");
 	//advance time to 6:00, gain 3 hours rest
-	fatigue(-20);
+	player.changeFatigue(-20);
 	HPChange(player.maxHP()/2,false);
 	if (model.time.hours > 6) model.time.days++;
 	model.time.hours = 6;
@@ -2436,7 +2436,7 @@ internal function sheilaGotWhomped():void {
 //if choosing Let Her Go and sheila xp > -3, set sheila xp = -1, then give xp/gems and Next button to camp
 private function letSheilaGo():void {
 	if (flags[kFLAGS.SHEILA_XP] >= -3) flags[kFLAGS.SHEILA_XP] = -1;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[Victory Rapin' - Rape Pussy] - uses cockarea <= 48:
@@ -2587,7 +2587,7 @@ private function rapeSheilasCooter():void {
 			sheilaCorruption(-10);
 		}*/
 	}
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[Victory Rapin' - Forced Oral] - no corruption transfer, but adds some to PC
@@ -2767,7 +2767,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 		player.orgasm();
 		dynStats("lib", -1, "cor", 1);
 	}
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[Dildo Rape] - requires DX Dildo
@@ -2837,7 +2837,7 @@ private function sheilaGetsRapedWithADildont():void {
 		sheilaCorruption(-10);
 	}
 	dynStats("lus", player.lib/3, "resisted", false);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //loss in combat: 
@@ -2853,7 +2853,7 @@ internal function getBeatUpBySheila():void {
 		else outputText("fantasies of her, stark naked but for her hat and waiting with her legs open");
 		outputText(".");
 		//lose 8 hrs if HP < 1 or 1 hr if lust > 99, no gem loss 
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	//(else monster lust >= 75)
 	else {
@@ -2963,7 +2963,7 @@ private function sheilaCowgirlRapesYou():void {
 			//reset hours since cum, pass 1 hr if lust loss or 8 if HP
 			player.orgasm();
 			dynStats("sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		//(else sens < 50)
 		else {
@@ -2985,7 +2985,7 @@ private function sheilaCowgirlRapesYou():void {
 			//huge sens-based lust damage and lose 8 hrs if HP loss or plus med libido and return to camp if lust loss
 			dynStats("sen", 3, "lus", 50+player.lib/10, "resisted", false);
 			//end cock don't fit branch
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 	//(else if cock fit 32)
@@ -3016,7 +3016,7 @@ private function sheilaCowgirlRapesYou():void {
 			outputText("\n\n\"<i>No, I'm...</i>\" she attempts, frowning, then slumps her shoulders in defeat.  \"<i>You're right.  This is wrong.  I'm sorry.</i>\"  Sheila turns and quietly pulls her shorts back up, fastening her belt, then locates her top and slips it over her breasts.  She picks up the rest of her stuff, looks back at you once, then lopes off.  You watch her go with high energy and mixed feelings - of all things, the image of her pulling the shirt down over her flushed, sweating back sticks in your head, taunting you and keeping your prick hard long after she's gone.");
 			//end scene and return to camp, plus some libido, plus lots of lust
 			dynStats("lib", 1, "lus", 70);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			return;
 		}
 		//(else lib >= 25)
@@ -3074,7 +3074,7 @@ private function sheilaCowgirlRapesYou():void {
 			player.orgasm();
 			sheilaPreg();
 			dynStats("lib", -1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 	//if not ended prematurely by small cock and lib < 25, PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
@@ -3162,7 +3162,7 @@ private function sheilaForcedOralGeneric():void {
 	outputText("\n\nBefore you can ask for her meaning, she backs away and slips on her bottoms.  Studiously avoiding further eye contact, Sheila gathers her things and leaves you behind with her long, bounding run; tired from the struggle, you try to turn her words over in your head, but only muddle them further as you slip into a doze.");
 	
 	//end scene, add fatigue if long tongue, very big lib-based lust gain, gain libido if lust hits 100; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
-	if (player.tongueType > TONGUE_HUMAN) fatigue(15);
+	if (player.tongueType > TONGUE_HUMAN) player.changeFatigue(15);
 	dynStats("lus", player.lib/3+30, "resisted", false);
 	if (player.lust >= player.maxLust()) dynStats("lib", 1);
 	sheilaCorruptionUpdate();
@@ -3175,7 +3175,7 @@ private function sheilaForcedOralGeneric():void {
 		dynStats("cor", 10);
 		sheilaCorruption(-10);
 	}*/
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Normal preg notif #1 (sheilapreg = 4 and demon sheila = 0 and sheila xp >= -2 and joeycount = 0):
@@ -3369,7 +3369,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOut():void {
 		outputText("\n\nIt takes a minute for your fatigued brain to come around to the fact that she's actually flirting with you!  Dumbly you look back at her, trying to make your exhaustion apparent in your eyes so you won't have to speak.");
 		
 		outputText("\n\n\"<i>Oh... oh!  Right, sorry.  I wasn't even thinking about that, mate.  It must be hard to fly and shoot at the same time.</i>\"  You nod gratefully, and she wraps her arms around your neck.  \"<i>Offer's on the table if you want it later, though.</i>\"  She kisses you on the lips, then releases you and walks away slowly, swaying her hips and peering over her shoulder for your benefit.  Seems like archery hits her mark?");
-		fatigue(20);
+		player.changeFatigue(20);
 	}
 	//(else spd >= 80 and Runner perk)
 	else if (player.spe >= 80 && player.findPerk(PerkLib.Runner) >= 0) {
@@ -3697,7 +3697,7 @@ private function sheilaGoesDemon():void {
 	//good place to cut off content if you don't have time to code it all in one go
 	if (!getGame().inCombat)
 		doNext(camp.returnToCampUseOneHour);
-	else cleanupAfterCombat();
+	else combat.cleanupAfterCombat();
 }
 
 //Demon Sheila encounter (demon sheila = 1 and sheilapreg < 4)
@@ -4064,8 +4064,8 @@ private function loseToDemonSheila():void {
 	//suppress the "you'll probably come to in eight hours blah blah" message, subtract gems and add 8 hours, go to camp
 	player.orgasm();
 	player.HP = player.maxHP();
-	fatigue(-50);
-	cleanupAfterCombat();
+	player.changeFatigue(-50);
+	combat.cleanupAfterCombat();
 }
 
 //Loss - normal cocks get rode (for cockarea <= 56)
@@ -4133,7 +4133,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 		dynStats("cor", 10);
 		sheilaCorruption(-10);
 		if (getGame().inCombat)
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
 	//(else if no balls)
@@ -4190,7 +4190,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 		sheilaPreg();
 		sheilaCorruption(-10);
 		if (getGame().inCombat)
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
 }
@@ -4234,7 +4234,7 @@ private function tailSpadeSoundingForFuckHugeDongsWithDemonSheila():void {
 	dynStats("cor", 10);
 	sheilaCorruption(-10);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -4385,7 +4385,7 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 	player.orgasm();
 	dynStats("lib", -1, "sen", -2);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -4408,7 +4408,7 @@ private function aintGotNoGenderAndKangarooRaped():void {
 	//big lib-based lust gain, med lib gain if lust hits 100, pass 1 hour
 	dynStats("lus", 20+player.lib/4, "resisted", false);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -4424,11 +4424,11 @@ internal function beatUpDemonSheila(output:Boolean = true):void {
 	//[(lust < 30)]
 	if (player.lust <= 33 && output) {
 		outputText("\n\nYou're just not horny enough to consider fucking her right now, though, and she wilts a bit as you turn away.  \"<i>Sorry, I was just having fun... I'll see you soon, then?</i>\" she calls, hopefully.");
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		return;
 	}
 	if (player.gender == 0){
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		return;
 	}
 	//if lust high enough, display choices [Missionary][Big Dick+Thighs][Penetration, In Spades][Nipple Kisses][Anal Hate-fuck(req >= 75 corr and monster lust >99 or monster HP < 1 to appear)]
@@ -4514,7 +4514,7 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 		sheilaPreg();
 		//if short scene, sheilapreg check, reduce PC lust and libido
 		if (getGame().inCombat)
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
 	//(else if RNG doesn't end scene)
@@ -4571,7 +4571,7 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 			sheilaCorruption(10);
 		}
 		if (getGame().inCombat)
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
 }
@@ -4660,7 +4660,7 @@ private function sheilaAnalHateFuckAGoGoNO():void {
 	player.orgasm();
 	dynStats("lib", -1, "cor", 2);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -4695,7 +4695,7 @@ private function sheilaAnalHateFuckAGoGoGETYOUSOMEWORMS():void {
 	dynStats("lus", player.lib/5);
 	flags[kFLAGS.SHEILA_DISABLED] = 3;
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -4757,7 +4757,7 @@ private function analHateFucksWithJojoNo(clear:Boolean):void {
 	//lust raised, plus some corruption
 	dynStats("lus", player.lib/3, "cor", 2);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -4807,7 +4807,7 @@ private function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	flags[kFLAGS.SHEILA_DISABLED] = 4;
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -4949,7 +4949,7 @@ private function bigDickAndThighs():void {
 		sheilaCorruption(10);
 	}
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -5028,7 +5028,7 @@ private function winAgainstDemoNSheilaForVaginas():void {
 		dynStats("cor", -10);
 	}
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -5053,7 +5053,7 @@ public function breakScarredBlade():void {
 		outputText("You throw the sword towards the tree and it lodges partway into the tree. With the additional leverage, you push and pull the sword to the side repeatedly. The metal groans and the lethicite cracks. After a few minutes of bending, one segment of the saber finally breaks off.");
 	}
 	outputText("\n\nYou examine the now-broken saber thoroughly to find out that it no longer moves at all. Whatever demonic power inside the scarred blade must be gone now. It looks like the sword is still usable. ");
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	//inventory.takeItem(weapons.B_SCARB, camp.returnToCamp);
 }
 

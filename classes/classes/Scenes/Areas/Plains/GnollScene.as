@@ -95,7 +95,7 @@ package classes.Scenes.Areas.Plains
 			outputText("The hyena girl slumps against your body, but only for a moment.  Then she's suddenly up again, sliding her bizarre member out of you with an obscene slurp.  She leans down to pat your cheek and giggles, \"<i>Thanks, lover.</i>\"   Then she sprints off towards the horizon.", false);
 			outputText("  A whimper bubbles up your throat and comes out as a half-giggle as you slump down unconscious.", false);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -119,9 +119,9 @@ package classes.Scenes.Areas.Plains
 					addButton(2, "TakeHerClit", takeGnollClit, null, null, null, "Put your vagina to use and ride the gnoll's clit.", "Take Her Clit");
 				}
 				addButton(3, "SuckHerClit", suckGnollClit, null, null, null, "Suck the gnoll's clit.", "Suck Her Clit");
-				addButton(4, "Leave", cleanupAfterCombat);
+				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 //DickDownClit
@@ -148,7 +148,7 @@ package classes.Scenes.Areas.Plains
 			else outputText("Your " + player.cockDescript(x) + " convulses, pouring cum into her.  Her clitoris bulges even more as the jism backs up, the skin pulling tight and shiny as the pressure builds.  Finally gouts of cum begin spurting back out the tip of her clitoris, splashing against your crotch.", false);
 			outputText("  With a lusty groan, you pull out with a long, slippery sound, and leave the gnoll panting on the dusty ground.", false);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //DickInAss
@@ -224,7 +224,7 @@ package classes.Scenes.Areas.Plains
 				outputText("Satisfied, you leave the gnoll to her pleasures, gather your " + player.armorName + ", and head back to camp.", false);
 			}
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //SuckHerClit
@@ -238,7 +238,7 @@ package classes.Scenes.Areas.Plains
 			outputText("The massive clit-dick then begins to flutter and twitch as the gnoll starts to cum.  Her feet stamp the ground to either side of you and she abruptly screams into the sky.  Her warbling cry then seems to collapse inward, and her entire body slumps to the ground, unconscious.\n\n", false);
 			outputText("You leave her there on the sun-caked ground and head back to camp.", false);
 			dynStats("lus=", player.maxLust());
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //TakeHerClit
@@ -253,7 +253,7 @@ package classes.Scenes.Areas.Plains
 			outputText("Every few strokes, the fake dick starts to fail you and you reach forward to slap her again.  Pump pump slap.  Thrust thrust smack.  Grunt grunt slap.  By the time your body rises up to the quivering summit of orgasm, the gnoll's face is purple with bruises.  You scream your orgasm to the sky, bearing down hard on her hollow clitoris, and come hard enough that you see stars.\n\n", false);
 			outputText("When you can get your feet under yourself again, you stand up, letting the now-shrunken clitoris fall out of your " + player.vaginaDescript(0) + " with a wet plop.  You leave her there on the sun-caked ground and head back to camp.", false);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		internal function yoDawgIHeardULiekGNollBallzzzdahdakjldh():void
@@ -307,7 +307,7 @@ package classes.Scenes.Areas.Plains
 			//[24 hours pass, player asshole size increased, sensitivity significantly lowered, toughness lowered temporarily, fatigue maxed, remove one succubi's dream]
 			player.orgasm();
 			dynStats("lib", 2, "sen", -10);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		/*

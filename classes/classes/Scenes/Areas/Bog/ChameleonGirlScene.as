@@ -81,7 +81,7 @@ package classes.Scenes.Areas.Bog
 			else {
 				outputText("\n\nThe Chameleon Girl gives you a once-over, but finding no genitals, she sighs and slaps you hard enough to have you black out.");
 				player.takeDamage(20);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 
@@ -114,7 +114,7 @@ package classes.Scenes.Areas.Bog
 
 			//send player back to camp, reset hours since cum, remove gems and add time
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -147,7 +147,7 @@ package classes.Scenes.Areas.Bog
 
 			outputText("\n\nShe catches herself, and looks back down at you and sneers.  \"<i>Y-yeah, and you better not come back around my bog again,</i>\" she says between tired breaths as she takes the silk from your wrists and dresses herself again.  She splashes off through the water, leaving you in silence.  You take a while to recover from the experience before managing to work up the energy to get out of the mud and back to your camp.");
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//send player back to camp, reset hours since cum, remove gems and add time
 		}
 
@@ -168,7 +168,7 @@ package classes.Scenes.Areas.Bog
 			//set lust to 100, return to camp
 			dynStats("lus=", player.maxLust());
 			player.lust = player.maxLust();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//VICTORY SCENES INTRO(Z edited)
@@ -187,7 +187,7 @@ package classes.Scenes.Areas.Bog
 				if (player.lust >= 33) outputText("  Do you use the girl in her weakened state to get yourself off?  Or maybe you could punish her bad attitude with an item from your bags...");
 			}
 			if (player.lust < 33 || player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			//(Display Options: [Fuck Her Face] [Pussy Rub] [Herm Style Pussyrub] [Incubi Draft] [Succubi Milk] [Lust&Sens Drafts])
@@ -201,7 +201,7 @@ package classes.Scenes.Areas.Bog
 			//let PC use item
 			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) item = useAnItemOnTheChamcham;
 			else if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) item = useAnItemOnTheChamcham;
-			simpleChoices("Use Dick", dick, "Use Pussy", pussy, "Herm Style", herm, "Use Item", item, "Leave", cleanupAfterCombat);
+			simpleChoices("Use Dick", dick, "Use Pussy", pussy, "Herm Style", herm, "Use Item", item, "Leave", combat.cleanupAfterCombat);
 		}
 
 		//-Herm Victory (Z edited)
@@ -227,7 +227,7 @@ package classes.Scenes.Areas.Bog
 			if (player.cor < 50) outputText("and guiltily ");
 			outputText("roll her onto her back and get up to collect your things, rinsing yourself with the water and shaking the mud out before putting your " + player.armorName + " back on and heading back to camp.");
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//-Male (Z edited)
@@ -256,7 +256,7 @@ package classes.Scenes.Areas.Bog
 			outputText("  Satisfied, you put your " + player.armorName + " back on and head back to camp.");
 			//send player back to camp, reset hours since cum, add gems and time
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//-Female (for herms without dicks) (Z edited)
@@ -283,7 +283,7 @@ package classes.Scenes.Areas.Bog
 			outputText("roll her onto her back and get up to collect your things, shaking out the mud and water before putting your " + player.armorName + " back on and heading to camp.");
 			//send player back to camp, reset hours since cum, add gems and time
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//Item Use Scenes Intro (Victory) (Z edited)
@@ -334,7 +334,7 @@ package classes.Scenes.Areas.Bog
 				player.consumeItem(consumables.SUCMILK);
 				dynStats("cor", 5);
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//-Lust and Sens Draft (you you you you you need to find more ways to start sentences without using pronouns, she?) (Z edited)
@@ -365,7 +365,7 @@ package classes.Scenes.Areas.Bog
 				var x:int = player.cockThatFits(monster.vaginalCapacity());
 				if (x < 0) {
 					outputText("COCK ERROR");
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					return;
 				}
 				outputText("\n\nYou gently tug at the knot of her thong, and the fabric easily slips away from her wide hips.  Her arousal is obvious; she's practically drooling lubricant.  The sight is just too enticing; you hastily shed your " + player.armorName + " and position your " + player.cockDescript(x) + " in front of her needy fuck-hole.  She gasps sharply and arches her back as you press the head of your erect member against her slick lips; her hands shoot out and grab at your arms, trying desperately to pull you in to her.  With a smile you oblige, pushing deep into her pussy.  Already too far gone with your earlier teasing, she immediately cries out in orgasm, the walls of her cunt squeezing your cock with all they've got.  Though you expect her to relax into a stupor after the release, she's clearly not satisfied with just cumming once while you're still inside her, gripping you tightly with her hands and beginning to slide her hips up and down your cock.");
@@ -379,7 +379,7 @@ package classes.Scenes.Areas.Bog
 			player.consumeItem(consumables.SENSDRF);
 			if (player.hasItem(consumables.L_DRAFT)) player.consumeItem(consumables.L_DRAFT);
 			else player.consumeItem(consumables.F_DRAFT);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

@@ -585,7 +585,7 @@ private function cramANippleInIt():void {
 	//increment times bfed.
 	flags[kFLAGS.BREASTFEAD_SOPHIE_COUNTER]++;
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	//You've now been milked, reset the timer for that
 	if (player.findStatusEffect(StatusEffects.Feeder) >= 0) {
@@ -939,9 +939,9 @@ internal function sophieLostCombat():void {
 	}
 	if (dickRape != null || cuntFuck != null || clitFuck != null || bimbo != null) {
 		outputText("  What do you do to her?", false);
-		simpleChoices("Use Dick",dickRape,"Scissor",cuntFuck,"Fuck wClit",clitFuck,"Bimbo Her",bimbo,"Leave",cleanupAfterCombat);
+		simpleChoices("Use Dick", dickRape, "Scissor", cuntFuck, "Fuck wClit", clitFuck, "Bimbo Her", bimbo, "Leave", combat.cleanupAfterCombat);
 	}
-	else cleanupAfterCombat();
+	else combat.cleanupAfterCombat();
 }
 internal function sophieWonCombat():void {
 	sophieBimbo.sophieSprite();
@@ -988,7 +988,7 @@ private function maleVictorySophieRape():void {
 	dynStats("sen", -1);
 	//Fuck & Preg counter
 	sophieFucked();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 	
 //Male 'Doesn't Fit'
@@ -1045,7 +1045,7 @@ private function maleVictorySophieRapeHUGE():void {
 	dynStats("sen", -1);
 	//Fuck & Preg counter
 	sophieFucked();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Female Pussy Grind
@@ -1104,7 +1104,7 @@ private function sophieVictoryPussyGrind():void {
 	dynStats("sen", -1);
 	//Fuck & Piss-off counter
 	sophieFucked(false);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 	
 //Female Clit-Fucking
@@ -1145,7 +1145,7 @@ private function fuckDatClit():void {
 	monster.HP = 2;
 	player.lust = player.maxLust();
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	player.orgasm();
 	dynStats("sen", 1);
 }
@@ -1200,7 +1200,7 @@ private function tinyDickSupremeSophieLoss():void {
 	dynStats("sen", 5);
 	sophieFucked();
 	luststickApplication(8);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Normal Sized Wang Rape – Kisstacular + Hypno
@@ -1246,7 +1246,7 @@ private function normalLossRapuuuuSophie():void {
 	dynStats("sen", 5);
 	sophieFucked();
 	luststickApplication(8);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Too Big – Get knocked out and wake up with your dick covered in kisses.  Status for 16 hours (8 more after waking up)
@@ -1262,7 +1262,7 @@ private function tooBigForOwnGoodSophieLossRape():void {
 	dynStats("sen", 5);
 	sophieFucked();
 	luststickApplication(16);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //No Dong – You wake up at the bottom of the mountain.
 private function SophieLossRapeNoDonguuuu():void {
@@ -1272,7 +1272,7 @@ private function SophieLossRapeNoDonguuuu():void {
 	
 	outputText("By the time you wake up, you're at the bottom of the mountain, and you feel as if you've fallen down the entire thing.  Obviously Sophie had enough care not to drop you to your death, but she didn't do you any favors on the ride either.   Yeesh.", false);
 	dynStats("str", -1,"tou", -1);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	//If not pissed increment times pissed
 	if (flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] <= 0) {
 		flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] = 72 + rand(100);

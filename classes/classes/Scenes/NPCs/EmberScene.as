@@ -2224,7 +2224,7 @@ package classes.Scenes.NPCs
 			emberAffection(1);
 			//reset Dragonbreath counter to ready, increase lust slightly if low or med affection, add heat/rut if high dragon-score, damage toughness slightly if high affection and low PC corruption
 			if (emberAffection() < 75) dynStats("lus", 20);
-			fatigue( -50);
+			player.changeFatigue( -50);
 			player.slimeFeed();
 			HPChange(player.maxHP() * .33, false);
 			doNext(camp.returnToCampUseOneHour);
@@ -2290,7 +2290,7 @@ package classes.Scenes.NPCs
 				outputText("\n\n\"<i>Okay, let's go back then,</i>\" Ember says, pulling you close and walking back to the camp with you.");
 				emberAffection(5);
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function loseToEmberSpar():void
@@ -2322,7 +2322,7 @@ package classes.Scenes.NPCs
 
 				emberAffection(-5);
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			HPChange(player.maxHP() * .33, false);
 		}
 
@@ -3753,7 +3753,7 @@ package classes.Scenes.NPCs
 							outputText("\nYou decide to check up on Ember and see how she's been doing.  Once you're close enough she looks at you with tired eyes; clearly she hasn't been getting much sleep lately.  \"<i>[name], perfect timing!  I need you to help me drain my breasts, they're so heavy they hurt.</i>\"\n\nYou look at her breasts; they're so swollen they're at least a cup-size bigger than usual, maybe as much as two.  You can readily believe that she's in pain from carrying so much, and agree to help her out, then ask if she has any particular preferences.\n\n\"<i>Just take care of it... NOW!</i>\" Ember growls.\n\nWith a long-suffering sigh, you seat yourself down beside her, gently lift up one of her milk-bloated breasts, close your lips softly around the nipple, and start to suckle.  At once your efforts are rewarded with a long, strong gush of sweet, cool dragon-milk.  Ember sighs in relief and reaches out to hold your head against her breast.\n\nYou suckle gently, wondering how well Ember will take to nursing a real baby, but simply enjoying being so close to her.  You drink and drink, alternating between breasts, until finally you've vented the worst of the pressure, at the cost of visibly distending your own stomach with the amount of milk you've drunk.  You settle back on your [ass] and stifle a belch, looking at Ember and wondering what she thinks of your efforts to help.\n\nEmber yawns.  \"<i>Good... I feel much better, now I think I need a nap.</i>\"\n\nYou sigh softly, watch as she falls over on her side, belly visibly jiggling as she disturbs the unborn dragon in her womb, and is soon fast asleep.  You clamber back upright and leave her to get some rest; you've a feeling it won't be too long before she gives birth.\n");
 							player.refillHunger(40, false);
 						}
-						fatigue(-25);
+						player.changeFatigue(-25);
 						return true;
 				default:
 			}
@@ -4560,7 +4560,7 @@ package classes.Scenes.NPCs
 
 			outputText("\n\nYou head off yourself, ready to resume the rest of your day.");
 			//2 hours pass, PC's fatigue is healed some, Libido is reduced.
-			fatigue(-20);
+			player.changeFatigue(-20);
 			dynStats("lib", -1);
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -4629,7 +4629,7 @@ package classes.Scenes.NPCs
 				}
 				else if (chooser == 1) {
 					outputText("\n\nAs you approach Ember's den, you notice that something is amiss... upon closer inspection you conclude that Ember is not home... could " + emberMF("he", "she") + " still be out, flying and exploring?");
-					outputText("\n\nWell, Ember is a big [girl], you're pretty sure " + emberMF("he", "she") + " can handle " + emberMF("himself", "herself") + "; so you decide to go back to your " + camp.homeDesc() + ".");
+					outputText("\n\nWell, Ember is a big " + emberMF("boy", "girl") + ", you're pretty sure " + emberMF("he", "she") + " can handle " + emberMF("himself", "herself") + "; so you decide to go back to your " + camp.homeDesc() + ".");
 					outputText("\n\nAs you enter your " + camp.homeDesc() + ", you are greatly surprised to see your " + camp.bedDesc() + " occupied by a certain sleeping " + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "dragon" : emberMF("dragon-boy", "dragon-girl")) + "; and judging by the state of the " + camp.bedDesc() + " as well as the... messy... way Ember is sleeping, it would seem " + emberMF("he", "she") + " tosses around in " + emberMF("his", "her") + " sleep. With a sigh, you clear your throat to wake up Ember.");
 					outputText("\n\nEmber yawns and mutters something about you getting back to bed... well... you'd love to, so you decide to be a bit more aggressive and shake Ember awake.");
 					outputText("\n\n\"<i>Wha... Ok! I'm up, I'm up!</i>\" Ember complains, rubbing the sleep off " + emberMF("his", "her") + " eyes. \"<i>What is it?</i>\"");
@@ -4643,7 +4643,7 @@ package classes.Scenes.NPCs
 				}
 				else {
 					outputText("\n\nAs you approach Ember's den, you notice that something is amiss... upon closer inspection you conclude that Ember is not home... ]could " + emberMF("he", "she") + " still be out, flying and exploring?");
-					outputText("\n\nWell, Ember is a big [girl], you're pretty sure " + emberMF("he", "she") + " can handle " + emberMF("himself", "herself") + "; so you decide to go back to your " + camp.homeDesc() + ".");
+					outputText("\n\nWell, Ember is a big " + emberMF("boy", "girl") + ", you're pretty sure " + emberMF("he", "she") + " can handle " + emberMF("himself", "herself") + "; so you decide to go back to your " + camp.homeDesc() + ".");
 					outputText("\n\nWhen you enter your " + camp.homeDesc() + ", you notice something unusual laying atop your " + camp.bedDesc() + ". It's a bloom you haven't seen before, no matter how far and wide your travels, with an almost heart-shaped blossom made from concentric rings of petals; purple, pink and gold. Its beautiful and it smells sweet, clean and pure. You wonder who would be responsible for this unexpected gift, but no one seems to be around... scratching your head in thought you walk outside and realize a very distinct set of prints going in and out of your " + camp.homeDesc() + "; using the survival skills you've developed, you conclude that these prints could only belong to Ember, and seem recent too... Considering the dragon's temper, you understand why " + emberMF("he", "she") + " didn't stick around to give it to you " + emberMF("him", "her") + "self, still that was sweet...");
 				}
 			}
@@ -4678,7 +4678,7 @@ package classes.Scenes.NPCs
 					outputText("\n\nWith a final powerful suckle, you finally drain the last of Ember's milk... for the 8th time you believe... tired and full... you don't even bother getting off the sleeping dragon.  You settle your head between Ember's soft, milky mounds, and surrounded by their soft " + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "scales" : "flesh") + ", you fall asleep right there...");
 					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					player.slimeFeed();
-					fatigue(-40);
+					player.changeFatigue(-40);
 				}
 				else if (chooser == 1 && ((player.lib + (player.cor/2)) >= 50 || player.lust >= 70) && flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 0) { //Lusty tease
 					outputText("\n\nAfter a hard day's work, all you want to do is head to your " + camp.homeDesc() + ", flop down and pass out. Still, you figure that it couldn't hurt to check in on Ember before you turn in, maybe " + emberMF("he", "she") + "'d some company for the night... ");

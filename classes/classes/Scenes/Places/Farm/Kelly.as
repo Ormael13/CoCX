@@ -441,7 +441,7 @@ internal function defeatKellyNDBREAKHIM():void {
 	player.orgasm();
 	dynStats("cor", 5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 2;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Win Second Fight (Third Feminizing Encounter):
@@ -528,7 +528,7 @@ outputText("\n\nKelly remains quiet for a couple of seconds before slowly mutter
 	player.orgasm();
 	dynStats("cor", 5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 3;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Fourth encounter
@@ -630,7 +630,7 @@ private function keltFucksShitUpII():void {
 		flags[kFLAGS.KELT_BREAK_LEVEL]--;
 		if (flags[kFLAGS.KELT_BREAK_LEVEL] < 1) flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
 	}
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 

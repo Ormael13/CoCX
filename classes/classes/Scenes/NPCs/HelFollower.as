@@ -1074,7 +1074,7 @@ private function heliaRoughSex(output:Boolean = true):void {
 	}
 	if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
 	if (getGame().inCombat)
-		addButton(14, "Leave", cleanupAfterCombat);
+		addButton(14, "Leave", combat.cleanupAfterCombat);
 	else addButton(14, "Back", heliaFollowerMenu);
 }
 
@@ -1174,7 +1174,7 @@ private function possessIzma():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -1215,7 +1215,7 @@ private function inCampHelNagaLuv():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }	
 
@@ -1246,7 +1246,7 @@ private function nagaCoilForHelCampWithGirls():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }	
 
@@ -1289,7 +1289,7 @@ private function centaurMountsCampHel():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }	
 
@@ -1323,7 +1323,7 @@ private function femtaurPlusCampHel():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1349,7 +1349,7 @@ private function heliaFollowerTentafuck():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1362,7 +1362,7 @@ private function boxWithInCampHel():void {
 	
 	//{Make an INT or STR check, whichever is higher:
 	outputText("\n\nYou toss your [armor] aside and assume your own battle stance, your powerful muscles tightening beneath your " + player.skinFurScales() + ", ready to spring into action.  You move slowly, cautiously; you and Hel begin to circle each other like predators observing their prey, each watching the other for any momentary lapse, any split-second vulnerabilities.  Suddenly, Hel lashes out, a quick one-two jab at you, narrowly blocked in your guard.  You grind your feet into the ground, deflecting her inhumanly-strong blows as best you can.  She launches a third strike, but you duck aside, spinning into her guard and delivering a hard jab to her gut.  The salamander recoils, swinging her fiery tail at you as she gets some distance, staggering back from the hit.  You exchange another quick flurry of blows, punches connecting, blocked, or dodged in rapid succession.  The fight drags on, neither of you able to land a telling blow, your strikes deflected or dodged, your prowess in battle nearly matched.");
-	fatigue(5+rand(20));
+	player.changeFatigue(5+rand(20));
 	//If INT check succeeds: 
 	if (player.inte/20 + 1 + rand(20) >= 13) {
 		outputText("\n\nUntil you see an opening: only for a second, Hel leaves her side exposed between attacks.  You take a step back, inviting her to attack; the salamander lunges just as planned, throwing a mighty punch your way, which you nimbly dodge, putting you just inside her guard.  With all your force, you slam your elbow into her side, throwing your fiery foe to the ground with an audible \"<i>OOF!</i>\"  She's barely landed on her big ol' ass before you jump on her, tackling Hel while she's down and pinning her.  The salamander flails, trying to throw you off, but you hold fast and count down:");

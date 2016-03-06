@@ -187,7 +187,7 @@
 			outputText("\n\n<b>(Key Item Acquired: Laybans!)</b>");
 			flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 			player.orgasm();
-			cleanupAfterCombat(d3.resumeFromFight);
+			combat.cleanupAfterCombat(d3.resumeFromFight);
 		}
 		
 		public function killYourself():void
@@ -195,9 +195,9 @@
 			clearOutput();
 			outputText("You hold its gaze for a moment more, and then with a single, fluid movement turn and smash your [weapon] into the engraved mirror. A shrill scream mingles with the sound of breaking glass, but by the time the shards begin to tinkle and chime to the floor it’s keened away, and when you turn back the doppelganger is gone. The shrill sound could have been the sound of the mirror itself when you hit it, you suppose. This could all have been a very strange fugue. Certainly, standing here now in this dishevelled storage room, it’s difficult to believe what just happened. Shaking your head, you make sure the protective glasses you came here for are still in your pocket before heading to the door and leaving.");
 			flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			menu();
-			cleanupAfterCombat(d3.resumeFromFight);
+			combat.cleanupAfterCombat(d3.resumeFromFight);
 		}
 		
 		public function inSovietCoCSelfFucksYou():void

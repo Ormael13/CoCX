@@ -371,7 +371,7 @@ private function relaxWithMilkWaifu():void {
 	outputText("You sit in the tub for a while, letting the fragrant fluids soak into your " + player.skinFurScales() + ".  You spend the better part of an hour lounging, letting your cares float away in " + flags[kFLAGS.MILK_NAME] + "'s endless white bounty.  Finally though, you pull out the tub's plug and climb out, finding a towel nearby.  Thankfully, the milk doesn't seem to leave behind any residue, and you feel clean and refreshed, if a bit horny.");
 	//(+Lust, -Fatigue)
 	dynStats("lus", 10+player.sens/10, "resisted", false);
-	fatigue(-34);
+	player.changeFatigue(-34);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -426,7 +426,7 @@ private function communalBath():void {
 	
 	outputText("\n\nThe lot of you carry on like this for nearly an hour, enjoying what little relaxation you're able to get in these dark times.  Eventually, though, you know you must return to your duties.  You and your companions one by one pull yourselves out of the pool, stopping to help " + flags[kFLAGS.MILK_NAME] + " and her bloated breasts; towels are passed around between joking and flirting hands, a few are even cracked over bare skin, making girls scream and yelp.  The camp is soon a mess of laughing and playing, with you in the center of it, teasing your lovers between shameless gropes and playful caresses.");
 	player.refillHunger(50);
-	fatigue(-40);
+	player.changeFatigue(-40);
 	HPChange(player.maxHP()*.33,false);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -481,7 +481,7 @@ private function dontFuckTheMilkWaifu():void {
 	//[+Lust, +HP, -Fatigue]
 	dynStats("lus", 10+player.sens/10, "resisted", false);
 	HPChange(player.maxHP()*.33,false);
-	fatigue(-20);
+	player.changeFatigue(-20);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -580,7 +580,7 @@ private function drinkAndFapturbate():void {
 	else outputText("stumbles away, tenderly cupping her bright-red teats");
 	outputText(".  Smirking and sexually sated, you pop the drain in the tub and stand there while the sex-scented lactic bathwater runs out the drain.  A quick toweling off later, and you're ready to go, feeling slightly refreshed and fairly sated.  It does take you a little longer to get your [armor] equally dry and back in place, but you manage.");
 	player.orgasm();
-	fatigue(-33);
+	player.changeFatigue(-33);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -619,7 +619,7 @@ private function nyanCatMilkTime():void {
 		
 		//If PC has Sophie or Isabella:
 		else outputText("\n\nThough you didn't intend for this to turn communal, " + flags[kFLAGS.MILK_NAME] + " certainly has more than enough to share.  You relax as the last trickles of milk pour into the pool, her breasts looking positively deflated.  You decide to leave the plug in for your friends as you clamber out, figuring they'll want to stockpile a little for the day before you drain it.  With her tits lightened for the moment, " + flags[kFLAGS.MILK_NAME] + " reaches up and pulls you down to her, just long enough to plant a kiss on your cheek and whisper, \"<i>Thank you, [name].  That felt good.</i>\"");
-		fatigue(-50);
+		player.changeFatigue(-50);
 		dynStats("lus", 10+player.sens/10, "resisted", false);
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -647,7 +647,7 @@ private function finishMilkNormall():void {
 	
 	outputText("\n\nAs soon as the explosive boobgasm subsides, she collapses back against you, chest heaving with pleasured exhaustion.  The milky stream trickles down to naught, her breasts momentarily depleted.  " + flags[kFLAGS.MILK_NAME] + " looks up at you and smiles ever so slightly, caressing your cheek before cupping her obviously-sore teats and staggering to her feet, searching for a towel.");
 	outputText("\n\n\"<i>Thank you, [name],</i>\" she says simply as you dry yourself off.");
-	fatigue(-50);
+	player.changeFatigue(-50);
 	dynStats("lus", 10+player.sens/10, "resisted", false);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -665,7 +665,7 @@ private function suckleDatMilk():void {
 	outputText("\n\nEventually, the boobgasm subsides, leaving " + flags[kFLAGS.MILK_NAME] + " a quivering, panting pile of lust in your arms, her fingers absently rubbing through her panties as the last dribbles of milk trickle down her chest and your chin.  Taking the first deep breath you've managed to get in the last few minutes, you grab a towel from nearby and try to dry yourself and the leaky girl off as best you can, brushing off the gallons of milk that have washed over you both.  When you're done, " + flags[kFLAGS.MILK_NAME] + " leans over and plants a long, lusty kiss on your lips, her tongue lapping up little drops of her own milk still inside your mouth.  She breaks the kiss after a long, pleasant moment, whispering \"<i>Thank you, [name].</i>\"");
 	player.slimeFeed();
 	player.refillHunger(50);
-	fatigue(-50);
+	player.changeFatigue(-50);
 	dynStats("lus", 10+player.sens/10, "resisted", false);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -685,7 +685,7 @@ private function fuckDatMilkSlat():void {
 	outputText("\n\nWhen your dick's finally depleted its load, you pull out with a contented sigh, wiping the last drops of spunk off on " + flags[kFLAGS.MILK_NAME] + "'s thigh.  She rolls over, a lust-dazed smile on her face, idly fingering her well-stuffed cunt and caressing her ample bosoms.  A momentary come-hither look from her beckons you over, and " + flags[kFLAGS.MILK_NAME] + " pulls you into her arms with a girlish giggle, resting you on your back and nuzzling her cheek on your [chest].  You drift off into pleasant repose, both sexually contented and your lover well-milked.");
 	player.orgasm();
 	dynStats("sen", -1);
-	fatigue(-10);
+	player.changeFatigue(-10);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -716,7 +716,7 @@ private function titFuckDatMilkSlut():void {
 	outputText("\n\nYou sigh contentedly and give " + flags[kFLAGS.MILK_NAME] + " an affectionate pat on the boob, watching as her flesh quivers at your touch.  She smiles at you with a lusty warmth, blowing you a kiss as you grab a towel to dry yourself off; you look back to see her happily masterbating, finishing the job you started with one hand knuckle-deep inside her as the other idly plays with the frothy cream you've left between her boobs.");
 	player.orgasm();
 	dynStats("sen", -1);
-	fatigue(-10);
+	player.changeFatigue(-10);
 	doNext(camp.returnToCampUseOneHour);
 	
 }

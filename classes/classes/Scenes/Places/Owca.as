@@ -344,11 +344,11 @@ private function wakeUpAfterDemonGangBangs():void {
 	model.time.days++;
 	outputText("When you wake up, you are alone, and your restraints are broken.  You are sloshing in a pool of stinky juices; your mouth and ears are still full of it.  Your whole body is covered with a thin white layer that must certainly be dried spooge.  Underneath, you're nothing but bruises and every movement seems to hurt.  A few meters away, outside the pit, you notice your items and your gear.  The village itself appears to be empty... your best assumption is that the residents are hiding, either from shame at having sacrificed you or from awkwardness at the prospect of talking to a sloshing, crusty cumdumpster.  Wearily, you head back to your camp.");
 	//+med-high corruption, - libido, - toughness, - strength, +20 fatigue, high imp preg chance, slimefeed
-	fatigue(20);
+	player.changeFatigue(20);
 	player.slimeFeed();
 	dynStats("str", -2,"tou", -2, "spe", -1, "int", -1, "lib", 1, "sen", 1, "lus=", 100, "cor", 3);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	//PC is redirected to camp, next morning. No nightly camp scenes or dreams.
 }
@@ -381,14 +381,14 @@ public function defeetVapulasHorde():void {
 	else {
 		outputText("\n\nThough the display as they explore each other is somewhat arousing, you can't really get into it as you are, and simply use your new-found freedom to climb out of the hole.  It's too dark to return to the village now, so you head back to camp.");
 		flags[kFLAGS.VAPULA_SUBMISSIVENESS] -= 5;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	
 }
 private function noVapulaSex():void {
 	clearOutput();
 	flags[kFLAGS.VAPULA_SUBMISSIVENESS] -= 5;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Yes/
 //[Yes: submissiveness is lowered by 10. No or auto-reject: submissiveness is lowered by 5.]
@@ -522,7 +522,7 @@ private function rapeZeVapula():void {
 	//PC is redirected to camp, next morning. No nightly camp scenes. 
 	model.time.hours = 7;
 	model.time.days++;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Main Owca Village menu (Z)
@@ -770,7 +770,7 @@ private function rapeRebecc(outside:Boolean = false):void {
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -815,7 +815,7 @@ public function beatUpOwca():void {
 private function leaveOwcaAfterWhupping():void {
 	//tag for calling last plea
 	flags[kFLAGS.REBECCS_LAST_PLEA] = 1;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Village Torching scene - requires a fire skill (Z)
 private function torchOwcaMotherFuckers():void {
@@ -837,9 +837,9 @@ private function torchUpVillagersAndLeave():void {
 	clearOutput();
 	outputText("You don't think you're going to see these villagers again, and you don't really want to.");
 	//Corruption +15 (plus extra for rape), ~ 1000 gems, fatigue set to 100
-	fatigue(100);
+	player.changeFatigue(100);
 	statScreenRefresh();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //End of quest
 //Lose to Villagers (Z)
@@ -850,7 +850,7 @@ public function loseToOwca():void {
 	outputText("you are being uncomfortably transported to a destination you can guess easily.  Too dazed to resist or even worry about it; you are promptly brought to the dreaded pit, where the villagers tie you up and rudely shackle you.  Then, before you even realize how desperate your situation is, they're all gone.  Your numerous bruises and fatigue get the better of you and you quickly fall asleep.");
 	//redirect to dusk transition text, restore hp/fat consonant with sleeping until nightfall
 	HPChange(50,false);
-	fatigue(-30);
+	player.changeFatigue(-30);
 	//after nightly scene, next encounter is Post-Mob Encounter
 	doNext(loseOrSubmitToVapula);
 	player.createStatusEffect(StatusEffects.LostVillagerSpecial,0,0,0,0);
@@ -881,7 +881,7 @@ private function forgiveOwca():void {
 	flags[kFLAGS.OWCA_ANGER_DISABLED] = 1;
 	//To main owca menu
 	if (getGame().inCombat)
-		cleanupAfterCombat(gangbangVillageStuff);
+		combat.cleanupAfterCombat(gangbangVillageStuff);
 	else doNext(gangbangVillageStuff);
 }
 //Option: Leave (Z)
@@ -890,7 +890,7 @@ private function fuckThisShit():void {
 	outputText("You stare at the wretched, whimpering creature before you for a moment.  There's nothing to say.  Without a word, you head back to your camp, carefully closing Rebecc's door behind you as you leave.");
 	flags[kFLAGS.REBECCS_LAST_PLEA] = 1;
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 //Rebecc's Last Plea (Z)
@@ -964,7 +964,7 @@ private function subdueVapula():void {
 	if (player.gender > 0 && (player.lust >= 33 - player.corruptionTolerance())) fuck = rapeZeVapula;
 	var enslave:Function = null;
 	if (player.gender > 0 && (player.cor >= 66 - player.corruptionTolerance())) enslave = enslaveVapulaWithYourWang;
-	simpleChoices("Disband", disbandHorde, "EnslaveVapula", enslave, "JustFuckEm", fuck, "", null, "Skip Out", cleanupAfterCombat);
+	simpleChoices("Disband", disbandHorde, "EnslaveVapula", enslave, "JustFuckEm", fuck, "", null, "Skip Out", combat.cleanupAfterCombat);
 }
 //Option: Disband (Z)
 private function disbandHorde():void {
@@ -978,7 +978,7 @@ private function disbandHorde():void {
 	//Attitude set to 100
 	flags[kFLAGS.OWCAS_ATTITUDE] = 100;
 	flags[kFLAGS.OWCA_SACRIFICE_DISABLED] = 1;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Option: Enslave - penis version (requires D2 completion and libido >= 60 and corr >= 70) (Z)
 private function enslaveVapulaWithYourWang():void {
@@ -1007,7 +1007,7 @@ private function enslaveVapulaWithYourWang():void {
 	//Attitude set to 100, sacrifices will never be asked again. Lust set to 80 if below.
 	if (player.lust < 80) player.lust = 80;
 	dynStats("lus", 0.1);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Option: Enslave - vagina version (requires D2 completion and libido >= 60 and corr >= 70 and, apparently, no centaurs)(Z)
 //NOTE: No Centaurs. Fuck Centaurs.
@@ -1030,7 +1030,7 @@ private function enslaveVapulaAsACuntWielder():void {
 	flags[kFLAGS.OWCAS_ATTITUDE] = 100;
 	flags[kFLAGS.OWCA_SACRIFICE_DISABLED] = 1;
 	//Chance to trigger imp gangbang is increased by 7%!
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 	
 }

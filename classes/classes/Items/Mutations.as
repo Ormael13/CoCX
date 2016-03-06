@@ -3075,7 +3075,7 @@
 			//Heals the player 70-100 health
 			HPChange(70 + rand(31), true);
 			//Restores a portion of fatigue (once implemented)
-			kGAMECLASS.changeFatigue(-25);
+			player.changeFatigue(-25);
 			//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
 			if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
 				player.addStatusValue(StatusEffects.BottledMilk, 1, (6 + rand(6)));
@@ -6358,7 +6358,7 @@
 			}
 			if (changes == 0) {
 				outputText("\n\nIt did not seem to have any effects, but you do feel better rested.", false);
-				fatigue(-40);
+				player.changeFatigue(-40);
 			}
 			player.refillHunger(20);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -6643,7 +6643,7 @@
 			}
 			if (changes == 0) {
 				outputText("\n\nThe sweet silk energizes you, leaving you feeling refreshed.", false);
-				fatigue(-33);
+				player.changeFatigue(-33);
 			}
 			player.refillHunger(5);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -6730,7 +6730,7 @@
 			//HP restore for bros!
 			if (player.findPerk(PerkLib.BroBody) >= 0 || player.findPerk(PerkLib.FutaForm) >= 0) {
 				outputText("You crack open the can and guzzle it in a hurry.  Goddamn, this shit is the best.  As you crush the can against your forehead, you wonder if you can find a six-pack of it somewhere?\n\n", false);
-				fatigue(-33);
+				player.changeFatigue(-33);
 				HPChange(100, true);
 				player.refillHunger(30);
 				return;
@@ -6938,7 +6938,7 @@
 			clearOutput();
 			outputText("You swallow down the bottle of Isabella's milk.", false);
 			if (player.fatigue > 0) outputText("  You feel much less tired! (-33 fatigue)", false);
-			fatigue(-33);
+			player.changeFatigue(-33);
 			player.refillHunger(20);
 		}
 
@@ -7224,7 +7224,7 @@
 				outputText("\n\nSuddenly, you are there, at a demonic camp, and you spy the forms of an incubus and a succubus, their bodies locked together at the hips and slowly undulating, even in sleep.  You carefully prance around their slumbering forms and find their supplies.  With the utmost care, you put your razor-sharp teeth to work, and slowly, meticulously rip through their packs - not with the intention of theft, but with mischief.  You make sure to leave small holes in the bottom of each, and after making sure your stealth remains unbroken, you urinate on their hooves.");
 				outputText("\n\nThey don't even notice, so lost in the subconscious copulation as they are.  Satisfied at your petty tricks, you scurry off into the night, a red blur amidst the foliage.");
 				changes++;
-				fatigue(-10);
+				player.changeFatigue(-10);
 			}
 
 			//dog cocks!
@@ -7448,7 +7448,7 @@
 			}
 			if (changes == 0) {
 				outputText("\n\nWell that didn't do much, but you do feel a little refreshed!");
-				fatigue(-5);
+				player.changeFatigue(-5);
 			}
 			player.refillHunger(15);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -7491,7 +7491,7 @@
 			player.slimeFeed();
 			outputText("You gulp the bottle's contents, and its sweet taste immediately invigorates you, making you feel calm and concentrated", true);
 			//-30 fatigue, -2 libido, -10 lust]
-			fatigue(-30);
+			player.changeFatigue(-30);
 			dynStats("lib", -.25, "lus", -10, "cor", -0.5);
 			player.refillHunger(20);
 		}
@@ -7501,7 +7501,7 @@
 			player.slimeFeed();
 			outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ", true);
 			//-30 fatigue, -2 libido, -10 lust]
-			fatigue(-10);
+			player.changeFatigue(-10);
 			dynStats("lus", -25, "cor", (-3 - rand(2)), "resisted", false);
 			HPChange(20 + (5 * player.level) + rand(5 * player.level), true);
 			player.refillHunger(10);
@@ -7559,7 +7559,7 @@
 				//(if PC has breath weapon)
 				outputText("\n\nA sudden surge of energy fills your being and you feel like you could blast anything to atoms with a single breath, like the mighty dragons of legends.");
 			}
-			fatigue( -20);
+			player.changeFatigue( -20);
 			player.refillHunger(50);
 		}
 
@@ -8320,7 +8320,7 @@
 		{
 			clearOutput();
 			outputText("You bite into the sweet, juicy peach, feeling a sensation of energy sweeping through your limbs and your mind.  You feel revitalized, refreshed, and somehow cleansed.  ");
-			fatigue(-15);
+			player.changeFatigue(-15);
 			HPChange(Math.round(player.maxHP() * 0.25), true);
 			player.refillHunger(25);
 		}
@@ -8454,7 +8454,7 @@
 				if (player.isNaga()) {
 					outputText("\n\nYour body straightens and telescopes suddenly and without the length of your snake half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated.  As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new legs!  The tattered snake-skin continues melding into your groin as you examine the fuzzy legs and long-toed, sensitive feet.  <b>Looks like you now have raccoon hind-paws...</b> and an upset stomach.");
 					dynStats("lus", -30);
-					fatigue(5);
+					player.changeFatigue(5);
 				}
 				//from amoeba non-feet
 				else if (player.isGoo()) outputText("\n\nYour gooey undercarriage begins to boil violently, and before you can do anything, it evaporates!  Left sitting on just the small pad of sticky half-dried slime that comprises your [butt], a sudden bulge under you is enough to push you onto your back.  Wondering idly and unable to see what's happening, you close your eyes and try to focus on what sensations you can feel from your lower body.  You feel... a swell of expansion, followed by weak muscles trying to contract for the first time, pulling flimsy, folded limbs apart and laying them flat.  As your attention wanders downward, you feel toes wiggling - far longer toes than you remember.  For several minutes you lie still and test muscles gingerly as your body solidifes, but when you can finally move again and look at your legs properly, what you see surprises you very little.  <b>You have fuzzy legs and a pair of long-toed raccoon paws!</b>");
@@ -8516,12 +8516,12 @@
 			//fatigue damage (only if face change was not triggered)
 			else if (rand(2) == 0 && changes < changeLimit && (player.faceType != FACE_RACCOON_MASK && player.faceType != FACE_RACCOON)) {
 				outputText("\n\nYou suddenly feel tired and your eyelids are quite heavy.  Checking your reflection, you can see small dark rings have begun to form under your eyes.");
-				fatigue(10);
+				player.changeFatigue(10);
 				changes++;
 			}
 			if (changes == 0) {
 				outputText("\n\nYawning, you figure you could really use a nap.");
-				fatigue(5);
+				player.changeFatigue(5);
 			}
 			player.refillHunger(30);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -9175,7 +9175,7 @@
 			{
 				outputText("\n\nYour eyes widen.  With the consumption of the fruit, you feel much more energetic.  You’re wide awake now!");
 				changes++;
-				fatigue(-10);
+				player.changeFatigue(-10);
 			}
 			player.refillHunger(20);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -9416,7 +9416,7 @@
 		public function trailMix(player:Player):void {
 			outputText("You eat the trail mix. You got energy boost from it!");
 			player.refillHunger(30);
-			fatigue(-20);
+			player.changeFatigue(-20);
 			HPChange(Math.round(player.maxHP() * 0.1), true);
 		}
 	}

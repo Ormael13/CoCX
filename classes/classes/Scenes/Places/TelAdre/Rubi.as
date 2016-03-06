@@ -566,7 +566,7 @@ public function getTeaFromRubi():void {
 	player.gems -= 6;
 	rubiAffection(5);
 	player.refillHunger(7);
-	fatigue(-25);
+	player.changeFatigue(-25);
 	if (rubiAffection() >= 30 && flags[kFLAGS.RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -1361,7 +1361,7 @@ private function chocoRubiMassage():void {
 	outputText("\n\nRubi whimpers, \"<i>I-uh... ummm, [name], I'm getting c-c-close,</i>\" without stopping.  [rubi Eir] tail is slowly rubbing on your [leg] as [rubi ey] tries to keep [rubi eir] rebellious hips in place, but they jerk and stutter again and again, pressing [rubi eir] hot little tool into the towel.  You're totally and completely relaxed, and [rubi ey]'s wound tighter than a spring.");
 
 	outputText("\n\nDo you let [rubi em] release or force [rubi em] to stay all bottled up?  [rubi Ey] has been awful nice...");
-	fatigue(-40);
+	player.changeFatigue(-40);
 	dynStats("lib", -1, "lus", 5);
 	flags[kFLAGS.TIMES_RUBI_MASSAGED]++;
 	//[Release] [Nope]

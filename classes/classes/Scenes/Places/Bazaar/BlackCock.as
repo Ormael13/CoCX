@@ -1373,7 +1373,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\nFinally exhausted, you slump on one of the satyrs, embracing his warm body. The rest of the satyrs are finally spent as well. When you've finally recovered from the ordeal, you get yourself cleaned up" + player.clothedOrNaked(", redress yourself") + " and return to your camp.");
 			}
 			player.orgasm();
-			fatigue(25);
+			player.changeFatigue(25);
 			dynStats("lib", 1, "sens", 2, "cor", 1);
 			if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
 			player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);

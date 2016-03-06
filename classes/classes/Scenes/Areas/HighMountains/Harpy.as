@@ -69,7 +69,7 @@
 		{
 			if (pcCameWorms) {
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.highMountains.harpyScene.harpyLossU();
 			}

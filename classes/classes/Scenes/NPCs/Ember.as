@@ -23,7 +23,7 @@ package classes.Scenes.NPCs
 			gems = 0;
 			XP = 0;
 			HP = 0;
-			game.cleanupAfterCombat();
+			game.combat.cleanupAfterCombat();
 		}
 		//Ember Attacks:
 		private function emberAttack():void {
@@ -52,7 +52,7 @@ package classes.Scenes.NPCs
 				//Blind Ember: 
 				outputText("The blinded dragon tracks you with difficulty as you sprint around the landscape; seeing an opportunity, you strafe around " + emberMF("his","her") + " side, planting yourself behind a large flat boulder near " + emberMF("him","her") + " and pelting " + emberMF("him","her") + " with a small rock.  The scream as the dragon turns the magical conflagration toward you, only to have it hit the rock and blow up in " + emberMF("his","her") + " face, is quite satisfying.");
 				//(Ember HP damage)
-				game.doDamage(50);
+				game.combat.doDamage(50);
 			}
 			else {
 				outputText("Ember inhales deeply, then "+ emberMF("his","her") + " jaws open up, releasing streams of fire, ice and lightning; magical rather than physical, the gaudy displays lose cohesion and amalgamate into a column of raw energy as they fly at you.");
@@ -149,12 +149,10 @@ package classes.Scenes.NPCs
 			this.imageName = "ember";
 			this.long = "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + emberMF("he", "she") + " lashes " + emberMF("his", "her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
 			// this.plural = false;
+			this.pronoun1 = game.emberScene.emberMF("he", "she");
+			this.pronoun2 = game.emberScene.emberMF("him", "her");
+			this.pronoun3 = game.emberScene.emberMF("his", "her");
 			var gender:int = game.flags[kFLAGS.EMBER_GENDER];
-			if (gender==0){
-				this.pronoun1 = "she";
-				this.pronoun2 = "her";
-				this.pronoun3 = "her";
-			}
 			if (gender == 1 || gender == 3) {
 				this.createCock(16,2,CockTypesEnum.DRAGON);
 				this.balls = 2;
@@ -168,6 +166,7 @@ package classes.Scenes.NPCs
 			} else {
 				createBreastRow(Appearance.breastCupInverse("flat"));
 			}
+
 			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
 			this.tallness = rand(8) + 70;

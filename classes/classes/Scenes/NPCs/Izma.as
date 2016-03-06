@@ -38,7 +38,7 @@ package classes.Scenes.NPCs
 			}
 			outputText("Izma rushes you with impressive speed, striking a few precise locations on your joints with her fingertips before leaping back.  It doesn't hurt, but you feel tired and sore. \"<i>Pressure points...</i>\" she laughs, seeing your confused expression.", false);
 			//(Fatigue damage)
-			game.fatigue(20+rand(20));
+			player.changeFatigue(20+rand(20));
 		}
 
 		private function IzmaSpecials2():void {
@@ -132,7 +132,7 @@ package classes.Scenes.NPCs
 		{
 			if (pcCameWorms){
 				outputText("\n\n\"<i>Gross!</i>\" Izma cries as she backs away, leaving you to recover alone.");
-				game.cleanupAfterCombat();
+				game.combat.cleanupAfterCombat();
 			} else {
 				game.izmaScene.IzmaWins();
 			}

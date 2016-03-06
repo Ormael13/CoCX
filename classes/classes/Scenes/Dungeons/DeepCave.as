@@ -194,7 +194,7 @@ package classes.Scenes.Dungeons
 				clearOutput();
 				outputText("The pod's wall bursts under your onslaught.  The strength goes out of the tentacles holding you at once, giving them all the power of a limp noodle.  The spongy surface of the pod gives out, and the 'petals' split apart, falling down to the ground with a heavy 'thwack'.  You stand there, exulting in your freedom.  You've won!\n\nThe rapier you approached originally still lies there, and you claim your prize.", false);
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//Vala
@@ -318,9 +318,9 @@ package classes.Scenes.Dungeons
 			//[Fuck] [Leave]
 			if (player.gender > 0) {
 				outputText(" What will you do?", false);
-				simpleChoices("Fuck",vala.valaFightVictoryFuck,"", null,"", null,"", null,"Leave",cleanupAfterCombat);
+				simpleChoices("Fuck",vala.valaFightVictoryFuck,"", null,"", null,"", null,"Leave", combat.cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 		
 		//Imp gang
@@ -332,11 +332,11 @@ package classes.Scenes.Dungeons
 			else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.", false);
 			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?", false);
-				if (player.gender == 1) simpleChoices("Rape",impGangGetsRapedByMale,"", null,"", null,"", null,"Leave",cleanupAfterCombat);
-				if (player.gender == 2) simpleChoices("Rape",impGangGetsRapedByFemale,"", null,"", null,"", null,"Leave",cleanupAfterCombat);
-				if (player.gender == 3) simpleChoices("Male Rape",impGangGetsRapedByMale,"Female Rape",impGangGetsRapedByFemale,"", null,"", null,"Leave",cleanupAfterCombat);
+				if (player.gender == 1) simpleChoices("Rape",impGangGetsRapedByMale,"", null,"", null,"", null,"Leave", combat.cleanupAfterCombat);
+				if (player.gender == 2) simpleChoices("Rape",impGangGetsRapedByFemale,"", null,"", null,"", null,"Leave", combat.cleanupAfterCombat);
+				if (player.gender == 3) simpleChoices("Male Rape",impGangGetsRapedByMale,"Female Rape",impGangGetsRapedByFemale,"", null,"", null,"Leave", combat.cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 		public function impGangGetsRapedByMale():void {
 			clearOutput();
@@ -361,7 +361,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("Satisfied, you redress and prepare to continue with your exploration of the cave.", false);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		public function impGangGetsRapedByFemale():void {
 			clearOutput();
@@ -384,7 +384,7 @@ package classes.Scenes.Dungeons
 			if (player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.", false);
 			player.orgasm();
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		public function loseToImpMob():void {
 			clearOutput();
@@ -545,7 +545,7 @@ package classes.Scenes.Dungeons
 			outputText(".  Zetaz scrambles out the south door, never once looking back at the tattered remnants of his old home.", false);
 			outputText("\n\n<b>(Key Item Acquired: Zetaz's Map!)</b>", false);
 			player.createKeyItem("Zetaz's Map",0,0,0,0);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 			
 		//[Sexual Interrogation]
@@ -606,7 +606,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("<b>(Key Item Acquired: Zetaz's Map!)</b>", false);
 			player.createKeyItem("Zetaz's Map",0,0,0,0);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//[Tighten Strap] 
@@ -624,7 +624,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("<b>(Key Item Acquired: Zetaz's Map!)</b>", false);
 			player.createKeyItem("Zetaz's Map",0,0,0,0);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//[END HIM – Ew death!]
@@ -637,7 +637,7 @@ package classes.Scenes.Dungeons
 			player.createKeyItem("Zetaz's Map",0,0,0,0);
 			//(ZETAZ IS DEAD)
 			flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED]++;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//[Lose to Zetaz]
@@ -967,7 +967,7 @@ package classes.Scenes.Dungeons
 			//Done if escaped
 			if (monster.lust == 100) {
 				flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			//[BAD-END GO]

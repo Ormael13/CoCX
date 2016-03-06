@@ -44,7 +44,7 @@ package classes.Scenes.Quests.UrtaQuest
 				outputText("\n\nThe minotaur glares at you and snorts, obviously pissed at not getting his serving...");
 				addStatusValue(StatusEffects.MinoMilk, 1, 1);
 			}
-			kGAMECLASS.combatRoundOver();
+			combatRoundOver();
 		}
 
 		private function minotaurDisarm():void
@@ -64,7 +64,7 @@ package classes.Scenes.Quests.UrtaQuest
 					player.createStatusEffect(StatusEffects.Disarmed, 2, 0, 0, 0);
 				}
 			}
-			kGAMECLASS.combatRoundOver();
+			combatRoundOver();
 		}
 
 		private function minotaurLordEntangle():void
@@ -128,7 +128,7 @@ package classes.Scenes.Quests.UrtaQuest
 			//(1)
 			if (player.lust <= 75) outputText("  You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.");
 			else outputText("  <b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
-			kGAMECLASS.combatRoundOver();
+			combatRoundOver();
 		}
 
 		override public function defeated(hpVictory:Boolean):void

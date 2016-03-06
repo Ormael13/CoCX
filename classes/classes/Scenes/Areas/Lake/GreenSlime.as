@@ -15,20 +15,20 @@
 				//Eligable to rape
 				if (player.lust >= 33 && player.gender > 0) {
 					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?", false);
-					game.simpleChoices("B.Feed",game.lake.greenSlimeScene.rapeOozeWithMilk,"Rape",game.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"Leave",game.cleanupAfterCombat);
+					game.simpleChoices("B.Feed",game.lake.greenSlimeScene.rapeOozeWithMilk,"Rape",game.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"Leave",game.combat.cleanupAfterCombat);
 				}
 				//Rapes not on the table.
 				else {
 					outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?", false);
-					game.doYesNo(game.lake.greenSlimeScene.rapeOozeWithMilk,game.cleanupAfterCombat);
+					game.doYesNo(game.lake.greenSlimeScene.rapeOozeWithMilk,game.combat.cleanupAfterCombat);
 				}
 			}
 			//Not a breastfeeder
 			else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?", false);
-				game.doYesNo(game.lake.greenSlimeScene.slimeVictoryRape, game.cleanupAfterCombat);
+				game.doYesNo(game.lake.greenSlimeScene.slimeVictoryRape, game.combat.cleanupAfterCombat);
 			}
-			else game.cleanupAfterCombat();
+			else game.combat.cleanupAfterCombat();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

@@ -112,9 +112,9 @@ package classes.Scenes.Areas.Swamp
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nWhat do you do?", false);
 				choices("Butt Fuck", buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK, "Fuck Pussy", vagFuck, "Bondage Fuck", careful, "FuckSpinner", fuckSpinner, "Ride Cock", rideCock,
-					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "", null, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "", null, "B.Titfuck", bikiniTits, "Leave", combat.cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 //Lose to drider
@@ -123,7 +123,7 @@ package classes.Scenes.Areas.Swamp
 			spriteSelect(77);
 			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
 				clearOutput();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			//Build array of choices
@@ -307,7 +307,7 @@ package classes.Scenes.Areas.Swamp
 			monster.HP = 2;
 			player.lust = player.maxLust();
 			flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
 		}
@@ -346,7 +346,7 @@ package classes.Scenes.Areas.Swamp
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("cor", .5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //*Victory Rape: Ride Ovi Vaginal (done)
@@ -417,7 +417,7 @@ package classes.Scenes.Areas.Swamp
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("cor", .5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -520,7 +520,7 @@ package classes.Scenes.Areas.Swamp
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("cor", .5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //*Victory Spinneret Penetration - written by Sham (done)
@@ -573,7 +573,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("Your lust sated, you disengage from her with a little pop, leaving her to lick her lips happily and groan unintelligible babble.  You wipe your " + player.cockDescript(x) + " off on her hair to clean it off a bit, then redress and head out.  With a glance at the snoozing drider over your shoulder, you head out of the smelly swamp and start back towards camp.", false);
 			player.orgasm();
 			dynStats("cor", .5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //*Loss Ride Ovi Anal unsexed - gats (done)
@@ -630,7 +630,7 @@ package classes.Scenes.Areas.Swamp
 			//(slimefeed, set lust to 100?)
 			player.slimeFeed();
 			dynStats("sen", 1, "lus", 800, "cor", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //*Loss Vaginal Impregnation and forced BJ - Symphonie (done)
@@ -724,7 +724,7 @@ package classes.Scenes.Areas.Swamp
 			player.knockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER, 151);
 			dynStats("lib", 1, "lus=", 100, "cor", 1);
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //*Loss Ride & Impregnate Butt (done)
@@ -778,7 +778,7 @@ package classes.Scenes.Areas.Swamp
 			player.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 200, 10); //Butt pregnancy goes faster
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1, "cor", .5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //*Asspreg egg 'birth': (done)
@@ -881,7 +881,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("Finally done, you pull out of the drider, collapsing on her spider-back with a contented sigh.  Completely insensate after the anal ravaging you just gave her, the drider poses no threat as you leisurely gather " + player.sMultiCockDesc() + " back into your " + player.armorName + " and lower yourself off her cum-soaked abdomen.  You give her a final, playful ass slap as you dismount before heading back to camp.", false);
 			if (silly()) outputText("\n\n(Driders butt-sex is awesome.)", false);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -1042,7 +1042,7 @@ package classes.Scenes.Areas.Swamp
 			}
 
 			//Plus gems and such
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

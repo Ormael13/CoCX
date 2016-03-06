@@ -113,7 +113,7 @@ package classes.Scenes.Areas.Swamp
 			game.spriteSelect(77);
 			if (lust > 70 && rand(4) == 0) driderMasturbate();
 			//1/4 chance of silence if pc knows spells
-			else if (game.hasSpells() && player.findStatusEffect(StatusEffects.WebSilence) < 0 && rand(4) == 0) {
+			else if (player.hasSpells() && player.findStatusEffect(StatusEffects.WebSilence) < 0 && rand(4) == 0) {
 				spiderSilence();
 			}
 			//1/4 chance of disarm
@@ -137,7 +137,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe drider licks her lips in anticipation...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.swamp.corruptedDriderScene.loseToDrider();
 			}

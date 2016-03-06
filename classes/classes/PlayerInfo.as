@@ -34,7 +34,7 @@ package classes
 			
 			combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * player.spellMod()) + "%\n";
 			
-			combatStats += "<b>Spell Cost:</b> " + kGAMECLASS.spellCost(100) + "%\n";
+			combatStats += "<b>Spell Cost:</b> " + player.spellCost(100) + "%\n";
 			
 			if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
 				combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";

@@ -508,7 +508,7 @@ internal function IzmaWins():void {
 		outputText("\n\nIzma looks on in horror as you push out the load of wormy cargo onto the sand at her feet, only snapping out of her daze as several of the parasites begin climbing her ankle with an eye toward her cock.  She shrieks and jumps back, then drags her foot in the sand, dislodging or pulverizing the squirming vermin.  \"<i>" + player.short + ", that's nasty!  Get away!  Get away and don't talk to me again!  Ugh!</i>\"  She takes off, grabbing her chest of books and kicking sand up in her flight down the beach.", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
 		player.orgasm();
-		doNext(cleanupAfterCombat);
+		doNext(combat.cleanupAfterCombat);
 		return;
 	}
 	//(without worms)
@@ -763,7 +763,7 @@ private function loseToIzma():void {
 	else outputText("  You embrace the dreams fully, desperate to cling to them as long as you can. It's getting so hard to care about your former mission anymore; why fight the demons when you can just give it up and surrender yourself to Izma? Yes... such a strong, powerful, worthy alpha she is; Izma is all you need. Let her take control of your life, why don't you?", false);
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
 	player.slimeFeed();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[Final loss sex scene]
@@ -888,7 +888,7 @@ private function victoryPenisIzma():void {
 	if (flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]] (Izmafight +1)
 	else victorzChoice();
@@ -932,7 +932,7 @@ private function eatIzmasLeafAfterRapinHer():void {
 	//[(if Izmafight <=4) 
 	if (flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("  You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]]
 	else victorzChoice();
@@ -949,7 +949,7 @@ private function dontEatIzamsLeafAfterRape():void {
 	
 	outputText("You slap the leaf out of her hand.  \"<i>Try getting stronger before you impose your decisions on others!</i>\" you bark.  \"<i>Whether I decide to have your kids or not is none of your business; you should be grateful at the chance to father them with someone tougher than you!</i>\"  She shivers and nods meekly, and you turn about and pick your way back to camp.\n\n", false);
 	player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	//(Izmafight +1)
 	flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]++;
 }
@@ -976,7 +976,7 @@ private function takeItInZeButtVictoryLikeFromIzma():void {
 	if (flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]]
 	else victorzChoice();
@@ -1002,7 +1002,7 @@ private function leaveIzmaVictoryTease():void {
 	
 	flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]++;
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[Victor's choice] (tacks onto end of victory sex if Izmafight >= 5)
@@ -1017,7 +1017,7 @@ private function chooseIzmaTooth():void {
 	outputText("You accept the tooth from her with a polite word of thanks.", false);
 	//(gain 1 t-shark toof)
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.TSTOOTH.id;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Gloves]
@@ -1033,7 +1033,7 @@ private function chooseIzmaGloves():void {
 	//(gain 1 Hooked gauntlets) 
 	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = weapons.H_GAUNT.id;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235]++;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 private function chooseYourIzmaWeapon():void {
@@ -3241,7 +3241,7 @@ private function radarIzmaAnalDomResultTuckIn():void {
 		if (player.fatigue < 70) {
 			outputText("you eventually get her back to her bedroll.  She smiles sheepishly as you lay her on the bedding to sleep off your passionate throes.  She's comfortable, but the effort is exhausting.");
 			dynStats("cor", -2);
-			fatigue(30);
+			player.changeFatigue(30);
 		}
 		else outputText("you try and get her to her bedroll, but you are simply too exhausted.  Izma tells you not to worry about her and go get some rest; that she'll be okay in the grass.  You groggily agree as you set her down, telling her she better be ready for more sex if you want it; something she approves of as she hums and drifts off to sleep.");
 	}

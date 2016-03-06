@@ -8,13 +8,16 @@ package classes.Scenes.Explore
 	import classes.Scenes.Areas.Bog.*;
 	import classes.Scenes.Areas.Desert.*;
 	import classes.Scenes.Areas.Forest.*;
+	import classes.Scenes.Areas.GlacialRift.*;
 	import classes.Scenes.Areas.HighMountains.*;
 	import classes.Scenes.Areas.Lake.*;
 	import classes.Scenes.Areas.Mountain.*;
 	import classes.Scenes.Areas.Plains.*;
 	import classes.Scenes.Areas.Swamp.*;
+	import classes.Scenes.Areas.VolcanicCrag.*;
 	import classes.Scenes.Dungeons.DeepCave.*;
 	import classes.Scenes.Dungeons.DesertCave.*;
+	import classes.Scenes.Dungeons.D3.*;
 	import classes.Scenes.Dungeons.Factory.*;
 	import classes.Scenes.Dungeons.HelDungeon.*;
 	import classes.Scenes.Monsters.*;
@@ -22,6 +25,7 @@ package classes.Scenes.Explore
 	import classes.Scenes.Places.Boat.*;
 	import classes.Scenes.Places.Farm.*;
 	import classes.Scenes.Places.Owca.*;
+	import classes.Scenes.Places.Prison.*;
 	import classes.Scenes.Quests.UrtaQuest.*;
 
 	public class ExploreDebug extends BaseContent
@@ -54,6 +58,7 @@ package classes.Scenes.Explore
 			function ():Monster {return new FemaleSpiderMorph();},
 			function ():Monster {return new FetishCultist();},
 			function ():Monster {return new FetishZealot();},
+			function ():Monster {return new FrostGiant();},
 			function ():Monster {return new Gnoll();},
 			function ():Monster {return new GnollSpearThrower();},
 			function ():Monster {return new Goblin();},
@@ -79,10 +84,13 @@ package classes.Scenes.Explore
 			function ():Monster {return new Satyr();},
 			function ():Monster {return new SharkGirl();},
 			function ():Monster {return new TentacleBeast();},
+			function ():Monster {return new Valkyrie();},
 			function ():Monster {return new WormMass();},
+			function ():Monster {return new Yeti();},
 			// ...NPCs, quest, and named monsters second, ...
 			function ():Monster {return new Akbal();},
 			function ():Monster {return new Amily();},
+			function ():Monster {return new Behemoth();},
 			function ():Monster {return new Brigid();},
 			function ():Monster {return new Ceraph();},
 			function ():Monster {return new GooArmor();},
@@ -98,6 +106,7 @@ package classes.Scenes.Explore
 			function ():Monster {return new Jojo();},
 			function ():Monster {return new Kelt();},
 			function ():Monster {return new Kiha();},
+			function ():Monster {return new Lethice();},
 			function ():Monster {return new LustyDemons();},
 			function ():Monster {return new Marble();},
 			function ():Monster {return new MilkySuccubus();},
@@ -107,6 +116,7 @@ package classes.Scenes.Explore
 			function ():Monster {return new PhoenixPlatoon();},
 			function ():Monster {return new SandMother();},
 			function ():Monster {return new SandWitchMob();},
+			function ():Monster {return new Scruffy();},
 			function ():Monster {return new SecretarialSuccubus();},
 			function ():Monster {return new Shouldra();},
 			function ():Monster {return new Sirius();},
@@ -121,6 +131,7 @@ package classes.Scenes.Explore
 			function ():Monster {return new Sheila();},
 			function ():Monster {return new Holli();},
 			function ():Monster {return new Helspawn();},
+			function ():Monster {return new Marae();},
 			function ():Monster {return new Ember();}
 		];
 
@@ -144,21 +155,21 @@ package classes.Scenes.Explore
 				m.onDefeated = function (hpVictory:Boolean):void
 				{
 					getGame().inCombat = false;
-					getGame().clearStatuses(false);
+					getGame().combat.clearStatuses(false);
 					statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				m.onWon = function (hpVictory:Boolean, pcCameWorms:Boolean):void
 				{
 					getGame().inCombat = false;
-					getGame().clearStatuses(false);
+					getGame().combat.clearStatuses(false);
 					statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				m.onPcRunAttempt = function ():void
 				{
 					getGame().inCombat = false;
-					getGame().clearStatuses(false);
+					getGame().combat.clearStatuses(false);
 					statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};

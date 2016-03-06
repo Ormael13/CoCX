@@ -87,7 +87,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe spiders smile to one at another as they watch your display, then close in...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.kihaFollower.loseToSpiderMob();
 			}
@@ -128,8 +128,8 @@ package classes.Scenes.Areas.Swamp
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 18;
 			this.gems = rand(25) +40;
-			this.special1 = game.packAttack;
-			this.special2 = game.lustAttack;
+			this.special1 = game.combat.packAttack;
+			this.special2 = game.combat.lustAttack;
 			this.tailType = TAIL_TYPE_SPIDER_ADBOMEN;
 			this.drop = NO_DROP;
 			checkMonster();

@@ -167,7 +167,7 @@ package classes.Scenes.NPCs
 		{
 			if (pcCameWorms){
 				outputText("\n\n\"<i>Ick,</i>\" Isabella tuts as she turns to leave...");
-				game.cleanupAfterCombat();
+				game.combat.cleanupAfterCombat();
 			} else {
 				game.isabellaScene.isabellaDefeats();
 			}

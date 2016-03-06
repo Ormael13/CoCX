@@ -167,9 +167,9 @@ package classes.Scenes.NPCs
 				var bikiniTits:Function =null;
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 				choices("Your Ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "Her Butt", anal, "Lay Egg", eggs,
-					"", null, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+					"", null, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", combat.cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 //anal: -requires butthole
@@ -215,7 +215,7 @@ package classes.Scenes.NPCs
 			outputText(" giggle from the blue girl.  Standing up, you gather your gear and blow her a kiss before you leave.  She darkens in color, her camouflage reflex causing her to 'blush' in discomfort at this display of affection.", false);
 			//(pass 1 hour, reduce lust to min)
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -274,7 +274,7 @@ package classes.Scenes.NPCs
 				outputText("After the last of your cum has been squeezed out, you pull your " + player.cockDescript(0) + " out and rinse it off in the lakewater.  You gather your gear while the anemone holds her belly and smiles placidly, staring into the sky.", false);
 				//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			//Too-big male: -requires cockarea > 36
 			else {
@@ -318,7 +318,7 @@ package classes.Scenes.NPCs
 				else outputText("she continues to sputter and cough up bubbles of your spunk.", false);
 				//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 
@@ -390,7 +390,7 @@ package classes.Scenes.NPCs
 			//(reduce lust to min, pregnancy check)
 			//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //loss rapes:
@@ -404,7 +404,7 @@ package classes.Scenes.NPCs
 				outputText("You collapse face-first into the lake, weakened by your damage.  The last thing you hear before passing out is a faint <i>\"What?\"</i>\n\n", false);
 
 				outputText("Several minutes later you awake to feel yourself washed onto the sand and hurting all over.  <i>\"You... dead?\"</i> The anemone is still with you; she must have found a stick from somewhere and is sitting next to you, judiciously poking you with it.  As you force your eyes open in answer she drops the stick with a startled yelp and hugs her knees to her chest.  Too beat-up to say anything, you can only stare at her, which unnerves her further. <i>\"Umm... bye,\"</i> she says, getting to her feet.  She heads for the water again, leaving you alone to recover.", false);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			//loss, pre-sex worm shot reaction:
@@ -426,7 +426,7 @@ package classes.Scenes.NPCs
 				//(1 hour pass, lose 1/10th of max hp from current hp, lose 20 lust)
 				player.takeDamage(10);
 				dynStats("lus", -20);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			//loss, male:
@@ -506,7 +506,7 @@ package classes.Scenes.NPCs
 					outputText(".  The blue girl continues to stroke your privates with her tentacle hair, flicking your urethra with her tongue, until you've come twice more.  Nor does she display any intention of stopping there, but mercifully you black out and collapse into the water.  Half-frowning, the anemone shrugs and pushes your insensible form up onto the sandy shore.", false);
 					//(pass 8 hours, reset lust to min)
 					player.orgasm();
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 				}
 				//loss, too-big male (cock > 5" width or > 48" length):
 				else {
@@ -575,7 +575,7 @@ package classes.Scenes.NPCs
 					//(pass 8 hours, minus libido, reset lust to min)
 					player.orgasm();
 					dynStats("lib", -1);
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 				}
 			}
 			//loss rape, vaginal (only full females):
@@ -603,7 +603,7 @@ package classes.Scenes.NPCs
 				//(reduce lust to min, add 10 lust, pregnancy check)
 				player.orgasm();
 				dynStats("lib", 1, "lus", 10);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 
@@ -820,7 +820,7 @@ package classes.Scenes.NPCs
 			//end scene, reset hours since cum and lust, reduce libido and sens a little
 			player.orgasm();
 			dynStats("lib", -.5, "sen", -.5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Hotdog!]
@@ -874,7 +874,7 @@ package classes.Scenes.NPCs
 			//end scene, reset hours since cum and lust, reduce libido and sens a bit
 			player.orgasm();
 			dynStats("lib", -.5, "sen", -.5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Fuck Off]
@@ -889,7 +889,7 @@ package classes.Scenes.NPCs
 
 			//-30 lust)
 			dynStats("lus", -20);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Bee on Anemone: Finished (Zeik)
@@ -968,7 +968,7 @@ package classes.Scenes.NPCs
 			}
 			player.dumpEggs();
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Drider on Anemone: Finished (Zeik)
@@ -1046,7 +1046,7 @@ package classes.Scenes.NPCs
 			//ponytailed anemone with Lisa Loeb glasses WHEN
 			player.dumpEggs();
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -1532,7 +1532,7 @@ package classes.Scenes.NPCs
 			//else if no HP or lust outcome triggered: pass 1 hour, gain 40 xp, increment fatigue by 10
 			else {
 				if (player.level < 10) player.XP += 30;
-				fatigue(10);
+				player.changeFatigue(10);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}

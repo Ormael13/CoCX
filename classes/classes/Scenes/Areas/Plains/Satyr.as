@@ -126,7 +126,7 @@ package classes.Scenes.Areas.Plains
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe satyr laughs heartily at your eagerness...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.plains.satyrScene.loseToSatyr();
 			}

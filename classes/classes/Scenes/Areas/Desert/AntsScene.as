@@ -244,7 +244,7 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nYou stagger backwards and almost fall over completely, but the ant manages to catch you. Though she herself is thin, her four arms are surprisingly strong; they do little to help the disorientation, even so.  The world spins round and round as you struggle to shake off your vertigo and the girl lowers you to the ground.  Once your thoughts are collected enough to at least sit up unassisted, you find your new friend standing in front of you with a huge smile.  You feel an odd kinship from her, as though you've known her your whole life.  That can't be right; you shake your head again trying to clear your mind.  The female... ant-morph breaks into a sprint away from you and the cart, before you can ask her what just happened.  You would attempt to pursue, but she's very quick and you can yet hardly stand upright.  She leaves you surrounded by useless trinkets in a barren part of the desert and completely stunned as to what just transpired.  Although, looking around, you think you have a better idea of where you might be in the desert - you may even know how to find that large anthill you saw when the ant-morph kissed you.  Unconsciously you whisper a name quietly under your breath as you picture the scene: \"<i>Phylla...</i>\"");
 			outputText("\n\nYou exhale a loud sigh.  This land is still full of surprises, even after all you've seen.");
 			flags[kFLAGS.PHYLLA_SAVED] = 1;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Enter The Colony]
@@ -357,10 +357,10 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nYou give her a nod and she sets to work. She nervously dresses your wounds by using some strange paste and strips of cloth.  You try to make small talk but find it awkward under heavy guard.  Clearly you're still not welcome here.  Once Phylla's done, all but one of the guards disappear with her into the tunnels.");
 			outputText("\n\nYou recognize the remaining guard as the guide from your first time here. At least, so you think - the only distinguishing factor is the old rusty blade he holds.  He waits patiently as you redress, then leads you out of the colony.");
 			//(Player Recovers 10 Fatigue)
-			fatigue(10);
+			player.changeFatigue(10);
 			//(+1 Win Score)
 			flags[kFLAGS.ANT_ARENA_WINS]++;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //►(Tentacle Beast - Loss) Standard Tentacle Beast Loss Scene.
@@ -376,7 +376,7 @@ package classes.Scenes.Areas.Desert
 				antastrophyBadEnd();
 				return;
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //►(Minotaur- Win)
@@ -386,10 +386,10 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\n\"<i>I... I w-was wondering... I mean...</i>\"  She raises her head to yours and just as you assume she's about to kiss you, one of the guards grunts loudly, interrupting the moment.  He then motions her to follow him into the tunnels.");
 			outputText("\n\nYou hear someone else clear their throat behind you, and turn to see your guide, his trusty rusty blade at his side.  He simply shows you to the exit of the arena before turning and walking away.  Apparently he trusts you enough to see yourself out?  You follow the lit tunnel back to the surface.");
 			//(Player Recovers 10 Fatigue)
-			fatigue(10);
+			player.changeFatigue(10);
 			//(+1 Win Score)
 			flags[kFLAGS.ANT_ARENA_WINS]++;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //►(Minotaur- Loss)
@@ -403,7 +403,7 @@ package classes.Scenes.Areas.Desert
 				antastrophyBadEnd();
 				return;
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function phyllaPCBeatsGnoll():void
@@ -428,7 +428,7 @@ package classes.Scenes.Areas.Desert
 			}
 			//(+1 Win Score)
 			flags[kFLAGS.ANT_ARENA_WINS]++;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function phyllaGnollBeatsPC():void
@@ -449,7 +449,7 @@ package classes.Scenes.Areas.Desert
 				antastrophyBadEnd();
 				return;
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 

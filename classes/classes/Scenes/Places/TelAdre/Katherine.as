@@ -5520,7 +5520,7 @@ private function bathTimeCentaurPenetrated():void {
 	player.slimeFeed();
 	player.orgasm();
 	orgasm();
-	fatigue(15); //Some extra fatigue for dragging your girlfriend's ass halfway home
+	player.changeFatigue(15); //Some extra fatigue for dragging your girlfriend's ass halfway home
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);
 	doNext(camp.returnToCampUseOneHour);

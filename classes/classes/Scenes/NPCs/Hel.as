@@ -158,7 +158,7 @@ package classes.Scenes.NPCs
 		{
 			if (pcCameWorms){
 				outputText("\n\nHelia waits it out in stoic silence...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				if (findStatusEffect(StatusEffects.Sparring) >= 0) game.helFollower.loseToSparringHeliaLikeAButtRapedChump();
 				else game.helScene.loseToSalamander();

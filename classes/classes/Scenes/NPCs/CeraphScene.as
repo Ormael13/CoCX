@@ -194,7 +194,7 @@ package classes.Scenes.NPCs
 			player.orgasm();
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 			if (getGame().inCombat)
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -251,7 +251,7 @@ package classes.Scenes.NPCs
 			dynStats("lib", 3, "sen", 3,"cor", 1);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 			if (getGame().inCombat)
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -281,7 +281,7 @@ package classes.Scenes.NPCs
 			player.earsPLong = "Green gem-stone ear-studs";
 			flags[kFLAGS.PC_FETISH] = 1;
 			dynStats("lus", 25, "cor", 5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[OH SHIT SON MOAR SHIT GETTING PIERCEDEDEDED] – NIPPLEZ GO
@@ -308,7 +308,7 @@ package classes.Scenes.NPCs
 			player.nipplesPShort = "seamless black nipple-studs";
 			player.nipplesPLong = "Seamless black nipple-studs";
 			flags[kFLAGS.PC_FETISH] = 2;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[OH SHIT!  WHY DOES FEN KEEP WIRTING THAT 3RD TIME – CROTCH GO]
@@ -362,7 +362,7 @@ package classes.Scenes.NPCs
 
 			outputText("You tremble in impotent fury at the violation as the demoness flounces away.  You'd pursue her, but between her ideas and exposing your crotch to the entire area, you need to cum more than anything.  You scurry back to camp, too horny to think straight and your new piercing aching just enough to keep you from forgetting about it.", false);
 			dynStats("lus", 25, "cor", 5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[FINAL ENCOUNTER LEVEL]
@@ -633,7 +633,7 @@ package classes.Scenes.NPCs
 		public function winRapeChoices():void
 		{
 			//FOLLOWER CHANCE:
-			var leave:Function = cleanupAfterCombat;
+			var leave:Function = combat.cleanupAfterCombat;
 			if (!getGame().inCombat) {
 				//Load ceraph and set up win conditions
 				startCombat(new Ceraph());
@@ -671,14 +671,14 @@ package classes.Scenes.NPCs
 
 				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "B.Titfuck", bikiniTits, "Leave", leave);
 				/*
-				 if (player.gender == 1) doYesNo(maleFuckCeraphsPussy,cleanupAfterCombat);
-				 if (player.gender == 2) doYesNo(rideCeraphsCockLikeaBAWSSexclamation11eleven,cleanupAfterCombat);
-				 if (player.gender == 3) simpleChoices("Fuck Her",maleFuckCeraphsPussy,"Ride Her",rideCeraphsCockLikeaBAWSSexclamation11eleven,"",0,"",0,"Leave",cleanupAfterCombat);
+				 if (player.gender == 1) doYesNo(maleFuckCeraphsPussy, combat.cleanupAfterCombat);
+				 if (player.gender == 2) doYesNo(rideCeraphsCockLikeaBAWSSexclamation11eleven, combat.cleanupAfterCombat);
+				 if (player.gender == 3) simpleChoices("Fuck Her",maleFuckCeraphsPussy,"Ride Her",rideCeraphsCockLikeaBAWSSexclamation11eleven,"",0,"",0,"Leave", combat.cleanupAfterCombat);
 				 */
 			}
 			else {
 				if (getGame().inCombat)
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 				else doNext(ceraphFollowerScene.ceraphFollowerAppearance);
 			}
 		}
@@ -739,7 +739,7 @@ package classes.Scenes.NPCs
 			outputText("Her whip uncurls itself from around you, but by some sorcerous trick, you're unable to separate your limbs and free yourself.  Ceraph snickers and gives your rump a crack with her whip before sauntering off, leaving you to lie there, growing more and more sexually frustrated.  Eventually you doze off into a sort of half-sleep, dreaming of being dominated as the demon's fluids dry on your face.", false);
 			dynStats("lus", 200);
 			if (getGame().inCombat)
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -823,7 +823,7 @@ package classes.Scenes.NPCs
 			}
 			outputText("(Do you accept Ceraph's Offer?)", false);
 			//Y/N – remove 1 fetish level or +10 gems
-			doYesNo(ceraphsNiceOffer, cleanupAfterCombat);
+			doYesNo(ceraphsNiceOffer, combat.cleanupAfterCombat);
 			player.orgasm();
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 		}
@@ -844,7 +844,7 @@ package classes.Scenes.NPCs
 				player.gems += 10;
 			}
 			outputText("\n\nThe abused demon-dom laughs, \"<i>What?  Did you expect me to trick you?  No, I liked today.  It's so hard to find someone who can go toe to toe with me AND find incredible ways to abuse my body.</i>\"\n\nShe lays back and relaxes, falling asleep after the intense fuck.", false);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		/*
@@ -1451,7 +1451,7 @@ package classes.Scenes.NPCs
 			outputText(", you drop her like a discarded rag.  She moans and begins masturbating, half-insensate from the rough treatment.  You ignore her, get dressed, and get out of there before the mountain's beasts show up.  Ceraph is in for a wild night!", false);
 			player.orgasm();
 			if (getGame().inCombat)
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 

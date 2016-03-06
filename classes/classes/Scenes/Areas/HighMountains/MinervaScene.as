@@ -717,7 +717,7 @@ private function bathTimeWithMinerva():void {
 	outputText("\n\nLeaning in, she gives you a gentle kiss on the lips before finally letting go of you.  \"<i>I wish you didn't have to go, but I understand that you must.  I'll miss you, you know?  Make sure you come back soon, all right?</i>\"  she asks, a sparkle of hope in her eyes.  Smiling back at the happy siren, you nod, reassuring the herm that you will come back as soon as you can, returning her embrace for a moment before turning and heading back for your camp.");
 	// PC returns to camp.
 	dynStats("lus", 10+player.lib/10);
-	fatigue(-30);
+	player.changeFatigue(-30);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -847,7 +847,7 @@ private function fuckMinervasAsshole():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -953,7 +953,7 @@ private function minervaCowgirlSex():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1043,7 +1043,7 @@ private function minervaLapSex():void {
 	player.orgasm();
 	dynStats("sen", -1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1124,7 +1124,7 @@ private function noBallsMinervaAndContinuation(clear:Boolean = true):void {
 	
 	dynStats("lus", 20);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -1202,7 +1202,7 @@ private function letMinervaSuckYouOff():void {
 	player.orgasm();
 
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1271,7 +1271,7 @@ private function fuckMinervaWithHerHandsBehindHerBack():void {
 	dynStats("sen", -1);
 	player.orgasm();
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -1350,7 +1350,7 @@ private function pcGetsEatenOutByMinerva():void {
 	dynStats("sen", -2);
 	player.orgasm();
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1452,7 +1452,7 @@ private function getButtFuckedYouSlut():void {
 	flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 	player.orgasm();
 	dynStats("sen", -1);
-	if (getGame().inCombat) cleanupAfterCombat();
+	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1467,7 +1467,7 @@ internal function loseToMinerva():void {
 		// PC gains 1 Purity peach
 		monster.createStatusEffect(StatusEffects.PeachLootLoss,0,0,0,0);
 		inventory.takeItem(consumables.PURPEAC, camp.returnToCampUseOneHour);
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	//PC loss by Lust
 	else {
@@ -1475,7 +1475,7 @@ internal function loseToMinerva():void {
 		outputText("\n\n\"<i>W-well... don't worry, Minerva is going to take care of you, just tell me how you want it, all right?</i>\" she says earnestly, clearly intending to finish what she started and help you with your battle induced lust.");
 		//Take PC to sex menu
 		minervaSexMenu(false);
-		addButton(14,"Leave",cleanupAfterCombat);
+		addButton(14,"Leave", combat.cleanupAfterCombat);
 	}
 }
 
@@ -1488,14 +1488,14 @@ internal function beatUpDatSharpie():void {
 		outputText("With your final blow against the siren, you send her silver halberd flying from her hands.  The metal weapon skitters across the ground as Minerva herself falls to the soft moss, her sharky skin covered in sweat and bruises as she sits her butt down, letting out a sigh.  \"<i>Wow... you sure are something, aren't you...  I'm glad this was just a friendly spar and not a real fight,</i>\" she says with a content smile on her face as she looks up at you.  You could swear that she is even blushing a little.  \"<i>Such a big strong warrior you are.</i>\"");
 		outputText("\n\nAfter a moment, the siren manages to get up before presenting you with a freshly picked peach and a small sack.  \"<i>I get these gems from the harpies, they seem to like shiny things, but I have no use for them... though I could do with some decorations I guess.  And here's a peach, as well, it'll help you regain your strength... not that you need it with how strong you are...</i>\" she says with a coy chuckle.\n\n");
 		//PC gains 1 purity peach
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	//Win by lust
 	else {
 		outputText("Your final move finishes the horny siren, her shorts bulging obscenely and soaked with her arousal.  Falling to her knees, Minerva desperately grabs hold of her shorts, yanking them from her curvy hips, letting out a gasp of relief and a moan of need.  Between the lusty herm's legs stands her painfully hard cock, all sixteen thick inches throbbing with desperate need, her thighs soaked in womanly juices.  Minerva's hands grab hold of her cock, stroking herself as she slips a pair of fingers into her quivering, slippery quim.  \"<i>Oh, [name], p-please... ohhh... look what you've done.  So mean, getting me so horny like this,</i>\" she says before letting out a long moan.");
 		outputText("\n\nShe's looking up at you with her debilitating lust clear in her eyes.  \"<i>W-well... think you could help little old me with this...  Just tell me what to do, I need it so badly.</i>\"");
 		minervaSexMenu(false);
-		addButton(14,"Leave",cleanupAfterCombat);
+		addButton(14,"Leave", combat.cleanupAfterCombat);
 	}
 }
 

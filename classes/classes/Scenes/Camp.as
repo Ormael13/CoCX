@@ -1554,7 +1554,7 @@ public function rest():void {
 			while (player.HP < player.maxHP() || player.fatigue > 0) {
 				timeQ += 1;
 				HPChange(hpRecovery * multiplier, false); // no display since it is meant to be full rest anyway
-				fatigue( -fatRecovery * multiplier); 
+				player.changeFatigue( -fatRecovery * multiplier); 
 				if (timeQ + model.time.hours == 24 || flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 5)
 					break;
 			}	
@@ -1563,7 +1563,7 @@ public function rest():void {
 		} else {
 			timeQ = Math.min(4, 21 - model.time.hours);
 			HPChange(timeQ * hpRecovery * multiplier, false);
-			fatigue(timeQ * -fatRecovery * multiplier); 
+			player.changeFatigue(timeQ * -fatRecovery * multiplier); 
 		}
 		
 		
@@ -1624,7 +1624,7 @@ public function doWait():void {
 			outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 			//fatigue
 			fatRecovery /= 2;
-			fatigue(-fatRecovery * timeQ);
+			player.changeFatigue(-fatRecovery * timeQ);
 		}
 		//Bee cock
 		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
@@ -1637,7 +1637,7 @@ public function doWait():void {
 		//REGULAR HP/FATIGUE RECOVERY
 		else {
 			//fatigue
-			fatigue(-fatRecovery * timeQ); 
+			player.changeFatigue(-fatRecovery * timeQ); 
 		}
 	}
 	else {
@@ -1851,7 +1851,7 @@ public function sleepRecovery(display:Boolean = false):void {
 	//REGULAR HP/FATIGUE RECOVERY
 	HPChange(timeQ * hpRecovery * multiplier, display);
 	//fatigue
-	fatigue(-(timeQ * fatRecovery * multiplier));
+	player.changeFatigue(-(timeQ * fatRecovery * multiplier));
 }
 
 //Bad End if your balls are too big. Only happens in Realistic Mode.
@@ -2199,7 +2199,7 @@ private function buildCampWall():void {
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
 	if (fatigueAmount < 15) fatigueAmount = 15;
-	fatigue(fatigueAmount);
+	player.changeFatigue(fatigueAmount);
 	if (helpers >= 2) {
 		outputText("\n\nThanks to your assistants, the construction takes only one hour!");
 		doNext(camp.returnToCampUseOneHour);
@@ -2273,7 +2273,7 @@ private function buildCampGate():void {
 	if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
 	fatigueAmount /= (helpers + 1);
 	if (fatigueAmount < 15) fatigueAmount = 15;
-	fatigue(fatigueAmount);
+	player.changeFatigue(fatigueAmount);
 	doNext(camp.returnToCampUseOneHour);
 }
 

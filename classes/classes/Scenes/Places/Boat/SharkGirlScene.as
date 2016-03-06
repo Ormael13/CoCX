@@ -91,9 +91,9 @@ internal function sharkWinChoices():void {
 		if (player.hasCock()) addButton(0, "Use Dick", sharkgirlDickFuck);
 		if (player.hasVagina()) addButton(1, (player.isNaga() ? "Pussy Oral" : "Pussy w/69"), sharkgirlSixtyNine);
 		if (player.hasKeyItem("Deluxe Dildo") >= 0) addButton(2, "Dildo Rape", sharkGirlGetsDildoed);
-		addButton(4, "Leave", cleanupAfterCombat);
+		addButton(4, "Leave", combat.cleanupAfterCombat);
 	}
-	else cleanupAfterCombat();
+	else combat.cleanupAfterCombat();
 }
 
 //Male and Herm: 
@@ -127,7 +127,7 @@ private function sharkgirlDickFuck():void {
 	
 		outputText("The shark girl cries out in orgasm, her pussy tightening as the feelers wrap around your cock. The pleasure drives you over the edge, and you pump your load of cum into her needy pussy, the feelers milking you for every drop you have. You pull out, satisfied, and as you turn to leave you see the shark girl rubbing cum into her cunt and winking at you.", false);
 	}
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	player.orgasm();
 	dynStats("sen", -1);
 	if (player.cor < 33) dynStats("cor", 1);
@@ -164,7 +164,7 @@ private function sharkgirlSixtyNine():void {
 	
 		outputText("Thoroughly satisfied, you leave the shark girl on the ground covered in your fluids and depart for your camp.", false);
 	}
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	player.orgasm();
 	dynStats("sen", -1);
 	if (player.cor < 33) dynStats("cor", 1);
@@ -198,7 +198,7 @@ public function sharkGirlGetsDildoed():void {
 	outputText("Damn that was hot!  You'll need to sate yourself once you get back to camp for sure.  Maybe you should give this dildo a whirl?  It still smells of your victim.", false);
 	
 	dynStats("lus", (20 + player.lib / 5 + player.cor / 10));
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Shark girl Bad End.
@@ -286,7 +286,7 @@ Putting it on: (Lust increases)
 internal function sharkLossRape():void {
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		doSFWloss();
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		return;
 	}
 	clearOutput();
@@ -298,7 +298,7 @@ internal function sharkLossRape():void {
 		else outputText("horny ", false);
 		outputText("to fight on.\n\n", false);
 		outputText("The shark girl does a little victory dance, swaying her hips to and fro before moving over to you. She quickly removes your " + player.armorName + ", but her smile fades to a blank expression when she notices you lack any genitalia. \"<i>What the...</i>\" she mumbles, poking you in the groin. Finding you completely useless, she growls in frustration and stomps on your face in anger. The sudden pain makes you pass out.", false);
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		dynStats("tou", -2);
 		return;
 	}
@@ -322,7 +322,7 @@ internal function sharkLossRape():void {
 		//(Corruption +2, Intelligence -4)
 		player.orgasm();
 		if (player.cor < 30) dynStats("cor", 1);
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		return;
 	}
 	//Male:
@@ -342,7 +342,7 @@ internal function sharkLossRape():void {
 		player.orgasm();
 		dynStats("sen", 1);
 		if (player.cor < 30) dynStats("cor", 1);
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		return;
 	}
 	doNext(playerMenu);

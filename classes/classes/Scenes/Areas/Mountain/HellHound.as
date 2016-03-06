@@ -16,7 +16,7 @@
 				outputText("You reach inside yourself to breathe flames, but as you ready to release a torrent of fire, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n", false);
 				changeFatigue(10);
 				takeDamage(10+rand(20));
-				enemyAI();
+				monster.doAI();
 				return;
 			}*/
 			if(player.findPerk(PerkLib.Evade) >= 0 && player.spe >= 35 && rand(3) != 0) {
@@ -36,11 +36,11 @@
 				game.dynStats("lus", 20+(player.sens/10));
 				statScreenRefresh();
 				if(player.HP <= 0) {
-					doNext(game.endHpLoss);
+					doNext(game.combat.endHpLoss);
 					return;
 				}
 				if(player.lust >= player.maxLust()) {
-					doNext(game.endLustLoss);
+					doNext(game.combat.endLustLoss);
 					return;
 				}		
 			}
@@ -73,9 +73,9 @@
 				//Rape if not naga, turned on, and girl that can fit!
 				if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 					outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?", false);
-					game.simpleChoices("Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
+					game.simpleChoices("Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", game.combat.cleanupAfterCombat);
 				} else {
-					game.cleanupAfterCombat();
+					game.combat.cleanupAfterCombat();
 				}
 			} else {
 				outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
@@ -88,11 +88,11 @@
 						temp2 = game.mountain.hellHoundScene.hellHoundPropahRape;
 					}
 					outputText(".  What do you do?", false);
-					game.simpleChoices("Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", game.cleanupAfterCombat);
+					game.simpleChoices("Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", game.combat.cleanupAfterCombat);
 				}
 				else {
 					outputText("You turn away, not really turned on enough to be interested in such an offer.", false);
-					game.cleanupAfterCombat();
+					game.combat.cleanupAfterCombat();
 				}
 			}
 		}
@@ -101,7 +101,7 @@
 		{
 			if(pcCameWorms){
 				outputText("\n\nThe hellhound snorts and leaves you to your fate.", false);
-				doNext(game.cleanupAfterCombat);
+				doNext(game.combat.cleanupAfterCombat);
 			} else {
 				game.mountain.hellHoundScene.hellhoundRapesPlayer();
 			}

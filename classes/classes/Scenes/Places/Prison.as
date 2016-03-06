@@ -1368,7 +1368,7 @@ package classes.Scenes.Places
 				doNext(playerMenu);
 				return;
 			}
-			fatigue(25);
+			player.changeFatigue(25);
 			outputText("You decide to pass the time with a workout regimen of pushups, situps, makeshift pull ups and other activities to improve your strength and endurance. ", false);
 			if (player.str < 25)
 			{
@@ -1426,7 +1426,7 @@ package classes.Scenes.Places
 				doNext(playerMenu);
 				return;
 			}
-			fatigue(30);
+			player.changeFatigue(30);
 			outputText("You decide to pass the time with a cardio training regimen of jumping jacks, jogging in circles, and other calisthenics to improve your speed and endurance ",false);
 			if (player.tou < 25)
 			{
@@ -2265,7 +2265,7 @@ package classes.Scenes.Places
 				fatigueChange = fatigueChange + 0.01;
 			}
 			changeWill(willChange);
-			fatigue(fatigueChange);
+			player.changeFatigue(fatigueChange);
 			dynStats("lus", lustChange);
 			return needNext;
 		}
@@ -2313,21 +2313,21 @@ package classes.Scenes.Places
 				statusVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus);
 				if (statusVal <= 3)
 				{
-					fatigue((20 - statusVal) * 0.35);
+					player.changeFatigue((20 - statusVal) * 0.35);
 				}
 				else if (statusVal <= 7)
 				{
-					fatigue(statusVal * 0.4);
+					player.changeFatigue(statusVal * 0.4);
 					dynStats("lus", statusVal * 0.2);
 				}
 				else if (statusVal <= 17)
 				{
-					fatigue(statusVal * 0.4);
+					player.changeFatigue(statusVal * 0.4);
 					dynStats("lus", statusVal * 0.4);
 				}
 				else
 				{
-					fatigue(statusVal * 0.4);
+					player.changeFatigue(statusVal * 0.4);
 					dynStats("lus", statusVal * 0.5);
 				}
 				

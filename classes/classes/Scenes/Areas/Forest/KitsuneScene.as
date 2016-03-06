@@ -140,7 +140,7 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			outputText("There's no way you're going to go gallivanting off into the woods after some flame.  You shake your head to clear your thoughts, and warily turn away to head back toward camp.  You could almost swear for a moment the flame looked disappointed, and you chuckle lightly at such a silly thought.");
 			//Advance time 1 hour, return to camp.
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -228,7 +228,7 @@ package classes.Scenes.Areas.Forest
 			outputText("<b>You have received a Kitsune's Gift!</b>\n");
 			if (getGame().inCombat) {
 				flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.KITGIFT.id;
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			else {
 				//add Kitsune's Gift to inventory
@@ -631,7 +631,7 @@ package classes.Scenes.Areas.Forest
 
 		private function outro(tentacles:Boolean = false):void
 		{
-			fatigue(15);
+			player.changeFatigue(15);
 			kitsuneSprite();
 			dynStats("tou", -2);
 			if (player.fatigue > 80 && player.fatigue < 100) {
@@ -665,7 +665,7 @@ package classes.Scenes.Areas.Forest
 				model.time.days++;
 				if (!getGame().inCombat)
 					doNext(camp.returnToCampUseOneHour);
-				else cleanupAfterCombat();
+				else combat.cleanupAfterCombat();
 			}
 		}
 
@@ -822,7 +822,7 @@ package classes.Scenes.Areas.Forest
 			outputText("The last thing you see before blacking out is a pair of delightfully plump, round cheeks jiggling happily as the kitsune gathers her robes.");
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 // For Females and Genderless
@@ -858,7 +858,7 @@ package classes.Scenes.Areas.Forest
 			outputText("The last thing you see before blacking out is a pair of delightfully plump, round cheeks jiggling happily as the kitsune gathers her robes.");
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Blonde-exclusive
@@ -914,7 +914,7 @@ package classes.Scenes.Areas.Forest
 			// Advance time 8hrs, lose X gems, return to camp. +Sensitivity +Libido
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Black-hair-exclusive
@@ -948,7 +948,7 @@ package classes.Scenes.Areas.Forest
 				player.addStatusValue(StatusEffects.Feeder, 1, 1);
 				player.changeStatusValue(StatusEffects.Feeder, 2, 0);
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 // lose, requires balls and cumQ() > 1000
@@ -991,7 +991,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
 			if (player.cumQ() < 30000) player.cumMultiplier += 5;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Redhead-exclusive
@@ -1044,7 +1044,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 8 hrs, lose X gems, return to camp. +Sensitivity, +Libido.
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[WIN FIGHT]
@@ -1230,7 +1230,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Anal] - requires cock area 144 or less
@@ -1299,7 +1299,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Tribbing] - requires vagina
@@ -1341,7 +1341,7 @@ package classes.Scenes.Areas.Forest
 			player.clitLength += 0.1 + rand(3) / 10;
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Tail Job] - requires cock
@@ -1383,7 +1383,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 1hr and return to camp.  +Sensitivity
 			player.orgasm();
 			dynStats("sen", 5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Tentacles] - requires 3+ tentacles of 30" or longer
@@ -1455,7 +1455,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 1hr and return to camp.  +Sensitivity, +Libido
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -1562,7 +1562,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
 			player.consumeItem(consumables.F_DRAFT);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -1638,7 +1638,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Lactaid]
@@ -1699,7 +1699,7 @@ package classes.Scenes.Areas.Forest
 			dynStats("lib", 1, "sen", 1);
 			//consume lactaid
 			player.consumeItem(consumables.LACTAID);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -1770,7 +1770,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -1829,7 +1829,7 @@ package classes.Scenes.Areas.Forest
 			player.changeStatusValue(StatusEffects.Feeder, 2, 0);
 			player.orgasm();
 			dynStats("sen", 3);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[GetBJ] - requires cock 108 area or less
@@ -1919,7 +1919,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[GetLicked] - requires a vagina
@@ -1952,7 +1952,7 @@ package classes.Scenes.Areas.Forest
 			outputText("She licks her lips in satisfaction, then wipes her mouth on her sleeve, sighing happily before slumping back to rest against the side of a tree.  You lie splayed out on the ground in ecstasy for several minutes before finally summoning up the strength to stand, and when you do so, a cursory glance around suggests that the wily kitsune has made her getaway.  As you gather your things and prepare to head back to camp, you can almost hear the faint echo of a mischievous giggle filtering through the forest.");
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Redhead-exclusive
@@ -1996,7 +1996,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Helix] - requires herm
@@ -2065,7 +2065,7 @@ package classes.Scenes.Areas.Forest
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Remove Dick]
@@ -2163,7 +2163,7 @@ package classes.Scenes.Areas.Forest
 			//Return to camp, advance time 1hr, +Sensitivity
 			player.orgasm();
 			dynStats("sen", 3);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Non-futa Redhead: [Bondage] - requires a cock with area <= 144 due to some anal
@@ -2214,7 +2214,7 @@ package classes.Scenes.Areas.Forest
 			//advance time 1hr and return to camp, +Sensitivity, +Libido
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		/*Use whichever enhancement scene(s) you feel like.

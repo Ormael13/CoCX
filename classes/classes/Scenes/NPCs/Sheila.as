@@ -21,7 +21,7 @@ package classes.Scenes.NPCs
 			if (player.tallness < 42 && rand(2) == 0) {
 				outputText("Sheila bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you. ");
 				damage = 3 + rand(10);
-				damage = kGAMECLASS.doDamage(damage, true);
+				damage = game.combat.doDamage(damage, true);
 			}
 			//Miss:
 			else if (player.getEvasionRoll() || findStatusEffect(StatusEffects.Blind) >= 0) {
@@ -39,7 +39,7 @@ package classes.Scenes.NPCs
 			else {
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils just as quickly, launching herself at your face with a fist raised in front of her.  She lands a staggering crack on your jaw which knocks your head back and blurs your vision!  ");
 				//deals minor concussion which adds 5-10 pts fatigue, may stun pc and prevent attack, misses while blinded or misfires on pcs under 3'6")
-				kGAMECLASS.fatigue(5+rand(5));
+				player.changeFatigue(5+rand(5));
 				if (rand(2) == 0 && player.findPerk(PerkLib.Resolute) < 0) {
 					player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 					outputText("<b>You are stunned!</b>  ");
@@ -61,8 +61,7 @@ package classes.Scenes.NPCs
 				outputText("Sheila squats down, then bounds explosively toward you!  She swings her leg out in front to kick, but you roll to the side and she slips past your shoulder.  You hear an \"<i>Oof!</i>\" as she lands on her butt behind you.  When you turn to look, she's already back to her feet, rubbing her smarting posterior and looking a bit embarrassed.");
 				//(small Sheila HP loss)
 				damage = 3 + rand(10);
-				damage = kGAMECLASS.doDamage(damage);
-				outputText(" (" + damage + ")");
+				damage = game.combat.doDamage(damage, true);
 			}
 			//Hit:
 			else {
@@ -75,7 +74,7 @@ package classes.Scenes.NPCs
 				damage = int((str + 50 + weaponAttack) - rand(player.tou) - player.armorDef);
 				if (damage < 1) damage = 2;
 				damage = player.takeDamage(damage, true);
-				kGAMECLASS.fatigue(10+rand(6));
+				player.changeFatigue(10+rand(6));
 			}
 			spe += 60;
 			combatRoundOver();
@@ -176,7 +175,7 @@ package classes.Scenes.NPCs
 			//(if PC lust < 30)
 			if (player.lust < 33) {
 				outputText("\n\nYou're not that interested, though; Sheila harrumphs as you pass her by and leave.");
-				cleanupAfterCombat();
+				game.combat.cleanupAfterCombat();
 				return;
 			}
 			combatRoundOver();

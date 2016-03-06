@@ -212,7 +212,7 @@ package classes.Scenes.Areas.GlacialRift
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			cleanupAfterCombat();
+			game.combat.cleanupAfterCombat();
 		}
 		
 		public function FrostGiant() 

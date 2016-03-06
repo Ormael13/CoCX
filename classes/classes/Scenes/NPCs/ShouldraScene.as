@@ -163,7 +163,7 @@ internal function defeatDannyPhantom():void {
 		outputText("With an ear-splitting, ghostly wail that forces you to your knees, the ", false);
 		if (flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] >= 1) outputText("ghost ", false);
 		outputText("girl falls back, overcome by her injuries. Before you can stop her, she simply becomes insubstantial, her clothes undergoing the change as well. A breeze slips through the ruins, picking the ghost up and scattering her to the winds.", false);
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	//(defeat by lust)
 	else {
@@ -196,7 +196,7 @@ private function noSlimingSlimer():void {
 	if (flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] == 0) outputText("girl (what was that about her 'taking over' a goblin?)", false);
 	else outputText("spirit", false);
 	outputText(", and a twinge of guilt runs through you.", false);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //(let her in)
@@ -312,7 +312,7 @@ private function sharkyEctoginas():void {
 	outputText("With that settled, you and your temporary ghostly companion decide to part ways here. Pushing out of your stomach, the ghost girl flows out of you and reforms, giving you a quick hug and a reassurance of the good time she had. As she begins her trek back to the ruined city, she warns that if you expect her to follow along with your wishes, you'd best be ready to put up a fight.", false);
 	player.orgasm();
 	flags[kFLAGS.TIMED_SHARKGINAS]++;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 	
 //Shark Girl x Ghost Girl - Penis Scene (Saliva Growth)
@@ -353,7 +353,7 @@ private function ghostIzmaPenis():void {
 	outputText("With that settled, you and your temporary ghostly companion decide to part ways here. Pushing out of your stomach, the ghost girl flows out of you and reforms, giving you a quick hug and a reassurance of the good time she had. As she begins her trek back to the ruined city, she warns that if you expect her to follow along with your wishes, you'd best be ready to put up a fight.", false);
 	player.orgasm();
 	flags[kFLAGS.TIMES_SHARKPENISED]++;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Slime x Ghost Girl - Introduction
@@ -433,7 +433,7 @@ private function slimeGinaFlation():void {
 	player.orgasm();
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -492,7 +492,7 @@ private function slimeyPenorsAhoy():void {
 	flags[kFLAGS.SHOULDRA_SLIME_PENOR_TIMES]++;
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -540,7 +540,7 @@ private function genderlessGhostBuster():void {
 	outputText("Her pleasure dealt with, the ghost girl appears head-first from your belly, flowing out and reconstituting herself into the normal, brown-eyed girl you first encountered.  Almost as an afterthought, she smiles, moving to her clothing and swiftly dressing, then gives you a little wave before wandering away, rounding a corner and disappearing from sight. You resolve to find her again- her magic was pretty fun!", false);
 	player.orgasm();
 	flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT]++;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Penis Scene
 private function penisLossThatIsntALoss():void {
@@ -611,7 +611,7 @@ private function penisLossThatIsntALoss():void {
 	flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES]++;
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -654,7 +654,7 @@ private function ghostBJFinisher(inside:Boolean):void {
 	}
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -675,7 +675,7 @@ private function dewormYourGhost():void {
 	dynStats("lus", 15);
 	outputText("There's silence for a moment, then you are almost rendered unconscious as she cries, \"<i>NOOOOOOOOPE,</i>\" telepathically, surging out of your body in record time. She corporealizes and backs away from you until she bumps into one of the ruined buildings. Then, she's off, booking it down the street to get as far away from you as possible. You shrug, figuring at the very least you dealt with her arousal, albeit in an unexpected way, and begin your trek back to your camp.", false);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.SHOULDRA_WORM_SCENE_COUNTER]++;
 }
@@ -719,7 +719,7 @@ private function penisGartuanGhostSmexVictory():void {
 	player.orgasm();
 	flags[kFLAGS.SHOULDRA_EXGARTUAN_SPIRIT_SEX_COUNT]++;
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -745,7 +745,7 @@ private function ghostGinaWinSexings():void {
 	player.orgasm();
 	flags[kFLAGS.SHOULDRA_VAGINAL_POSSESSIONS]++;
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 //Hermaphrodite Scene
@@ -818,7 +818,7 @@ private function hermaphroditeGhostsCumEctoplasm():void {
 	player.orgasm();
 	flags[kFLAGS.SHOULDRA_HERMSEX_COUNT]++;
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -879,7 +879,7 @@ private function ourDadTaughtUsNotToBeAshamedOfOurDicks():void {
 	flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES]++;
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -900,7 +900,7 @@ private function loseToShouldraWithWorms():void {
 	outputText("The ghost-girl responds by meeting your eyes and staring daggers at them, and before you can stop her, she leaps towards you, spins, and cracks a kick against the side of your neck. You go tumbling to the ground and unsteadily raise your head to watch her stomp away, grumbling about worms and freaky fetishists. The pavement rushes up to meet you, and the world fades away as you slip into unconsciousness.", false);
 	flags[kFLAGS.SHOULDRA_WORM_SCENE_COUNTER]++;
 	player.takeDamage(10000);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Vagina Scene
@@ -922,7 +922,7 @@ private function ghostGinaLosses():void {
 	dynStats("sen", 1);
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -951,7 +951,7 @@ private function loseToShouldraAsHerm():void {
 	dynStats("sen", 1);
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -1053,7 +1053,7 @@ private function shouldraGiantCockLoss():void {
 	flags[kFLAGS.SHOULDRA_USES_YOUR_GIANT_COCK_COUNT]++;
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -1107,7 +1107,7 @@ private function genderlessShouldrasLossRapes():void {
 	dynStats("sen", 1);
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -1152,7 +1152,7 @@ private function ghostGartuanLossSceneOrSomeShit():void {
 	flags[kFLAGS.SHOULDRA_EXGARTUAN_SPIRIT_SEX_COUNT]++;
 	player.orgasm();
 	dynStats("sen", 1);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[super secret paladin 'sex' scene; prerequisites: human face, human body, human legs, no tail, no horns, light/olive/dark/ebony complexion, slightly to severely masculine face, 0-15 corruption, 4-10 inch normal penis, 1-2 inch testicles, no-adjective to narrow hips, height between 5'5</i>\" and 6'5</i>\"]  
@@ -1225,7 +1225,7 @@ private function ginaBoobgartuanShouldra():void {
 	player.orgasm();
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -1306,7 +1306,7 @@ private function slimeGhostGalForHerms(clearOut:Boolean = false):void {
 	dynStats("sen", -1);
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);

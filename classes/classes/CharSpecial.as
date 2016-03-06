@@ -4,6 +4,7 @@ package classes
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Items.*;
+	import classes.Saves;
 	import fl.controls.ComboBox;
 	import flash.events.Event;
 	/**
@@ -554,7 +555,7 @@ package classes
 			player.sens = 15;
 			player.lib = 15;
 			player.cor = 0;
-			kGAMECLASS.notes = "No Notes Available.";
+			getGame().saves.notes = "No Notes Available.";
 			player.HP = kGAMECLASS.maxHP();
 			player.hairLength=13;
 			player.skinType = SKIN_TYPE_PLAIN;
@@ -636,7 +637,7 @@ package classes
 			player.sens = 15;
 			player.lib = 15;
 			player.cor = 0;
-			kGAMECLASS.notes = "No Notes Available.";
+			getGame().saves.notes = "No Notes Available.";
 			player.HP = kGAMECLASS.maxHP();
 			player.hairLength = 1;
 			player.skinType = SKIN_TYPE_PLAIN;
@@ -1035,7 +1036,7 @@ package classes
 			player.sens = 15;
 			player.lib = 15;
 			player.cor = 0;
-			kGAMECLASS.notes = "No Notes Available.";
+			getGame().saves.notes = "No Notes Available.";
 			player.HP = kGAMECLASS.maxHP();
 			
 			player.skinType = SKIN_TYPE_PLAIN;
@@ -1278,7 +1279,7 @@ package classes
 			player.sens = 100;
 			player.lib = 30;
 			player.cor = 71;
-			kGAMECLASS.notes = "Cheater!";
+			getGame().saves.notes = "Cheater!";
 			player.HP = kGAMECLASS.maxHP();
 			player.hairLength = 10;
 			player.skinType = SKIN_TYPE_PLAIN;
@@ -1493,7 +1494,7 @@ package classes
 			player.sens = 15;
 			player.lib = 15;
 			player.cor = 0;
-			kGAMECLASS.notes = "No Notes Available.";
+			getGame().saves.notes = "No Notes Available.";
 			player.HP = kGAMECLASS.maxHP();
 			player.hairLength = 10;
 			player.skinType = SKIN_TYPE_PLAIN;

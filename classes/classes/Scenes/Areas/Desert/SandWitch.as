@@ -18,7 +18,7 @@
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0){
 				game.desert.sandWitchScene.beatSandwitch();
 			} else {
-				game.finishCombat();
+				game.combat.finishCombat();
 			}
 		}
 
@@ -26,7 +26,7 @@
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe witch blanches and backs away, leaving you to your fate.");
-				game.cleanupAfterCombat();
+				game.combat.cleanupAfterCombat();
 			} else {
 				game.desert.sandWitchScene.sandwitchRape();
 			}

@@ -75,7 +75,7 @@ package classes.Scenes.Areas.Lake
 							player.orgasm();
 							dynStats("int", -2);
 							dynStats("lus", 10);
-							cleanupAfterCombat();
+							combat.cleanupAfterCombat();
 						}
 						return;
 					}
@@ -127,7 +127,7 @@ package classes.Scenes.Areas.Lake
 						player.orgasm();
 						dynStats("int", -2);
 						dynStats("lus", 10);
-						cleanupAfterCombat();
+						combat.cleanupAfterCombat();
 					}
 					return;
 				}
@@ -183,7 +183,7 @@ package classes.Scenes.Areas.Lake
 						player.orgasm();
 						dynStats("int", -2);
 						dynStats("lus", 10);
-						cleanupAfterCombat();
+						combat.cleanupAfterCombat();
 					}
 					return;
 				}
@@ -289,7 +289,7 @@ package classes.Scenes.Areas.Lake
 					player.orgasm();
 					dynStats("int", -2);
 					dynStats("lus", 10);
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					if (changedBoobs) outputText("\n\nYou notice that the changes you experienced to your breasts while in the fantasy are still affecting you.", false);
 					if (changedCock) outputText("\n\nYou notice that the changes you experienced to your genitals while in the fantasy are still affecting you.", false);
 				}
@@ -383,7 +383,7 @@ package classes.Scenes.Areas.Lake
 					player.orgasm();
 					dynStats("int", -2);
 					dynStats("lus", 10);
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 				}
 			}
 		}
@@ -472,7 +472,7 @@ package classes.Scenes.Areas.Lake
 				var fuckVag:Function =null;
 				if (player.hasVagina()) vibe = swimsuitVibrators;
 				if (player.hasCock()) fuckVag = plugSwimsuitVag;
-				simpleChoices("FuckHerVag", fuckVag, "Vibrator", vibe, "", null, "", null, "Leave", cleanupAfterCombat);
+				simpleChoices("FuckHerVag", fuckVag, "Vibrator", vibe, "", null, "", null, "Leave", combat.cleanupAfterCombat);
 				return;
 			}
 			else {
@@ -501,7 +501,7 @@ package classes.Scenes.Areas.Lake
 					outputText("You make her rub your body down, but you don't really have a means to rape her.  Afterwards you do feel better, but didn't get any real release.  Disappointed, you continue on your way.", false);
 				}
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//PC goes for the vagina
@@ -535,7 +535,7 @@ package classes.Scenes.Areas.Lake
 			outputText("You stand up and clean yourself off, thoroughly satisfied with the encounter.  The cultist, on the other hand, collapses in a quivering pile of pleasure on the ground.", false);
 			//set PC's lust to minimum
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//PC goes for the vagina vibrators
@@ -570,7 +570,7 @@ package classes.Scenes.Areas.Lake
 				monster.HP = 2;
 				player.lust = player.maxLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				player.orgasm();
 				dynStats("lib", 1, "sen", -3);
 			}
@@ -595,7 +595,7 @@ package classes.Scenes.Areas.Lake
 				//end scene
 				player.orgasm();
 				dynStats("lib", 1, "sen", -3);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 
@@ -677,7 +677,7 @@ package classes.Scenes.Areas.Lake
 			//You've now been milked, reset the timer for that
 			player.addStatusValue(StatusEffects.Feeder, 1, 1);
 			player.changeStatusValue(StatusEffects.Feeder, 2, 0);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

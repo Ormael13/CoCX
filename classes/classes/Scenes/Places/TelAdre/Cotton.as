@@ -334,7 +334,7 @@ private function acceptYoga():void {
 	//(Increases muscle tone up to 50, speed and feminine features.)
 	player.modTone(52,1);
 	flags[kFLAGS.TIMES_HAD_YOGA]++;
-	fatigue(20);
+	player.changeFatigue(20);
 	dynStats("spe", 1, "lus", (5+player.lib/20+player.sens/20));
 }
 

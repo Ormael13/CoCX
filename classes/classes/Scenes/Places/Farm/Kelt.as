@@ -121,7 +121,7 @@ package classes.Scenes.Places.Farm
 		{
 			if (pcCameWorms){
 				outputText("\n\nKelt recoils for a moment before assuming a look of superiority...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.farm.kelly.keltFucksShitUp();
 			}

@@ -83,7 +83,7 @@ package classes.Scenes.Areas.Swamp
 			//The other 50% will start combat and then immediately attempt to run.
 			else {
 				startCombat(new FemaleSpiderMorph());
-				kGAMECLASS.runAway();
+				combat.runAway();
 			}
 		}
 
@@ -268,7 +268,7 @@ package classes.Scenes.Areas.Swamp
 			dynStats("lib", 2, "sen", 1);
 			if (!getGame().inCombat)
 				doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 		//*Defeat Male
@@ -373,7 +373,7 @@ package classes.Scenes.Areas.Swamp
 			dynStats("lib", 2, "sen", 1);
 			if (!getGame().inCombat)
 				doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 		//*Defeat Male - Too Big
@@ -449,14 +449,14 @@ package classes.Scenes.Areas.Swamp
 			dynStats("lib", 2, "sen", 1);
 			if (!getGame().inCombat)
 				doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 		public function loseToFemaleSpiderMorph():void
 		{
 			if (flags[kFLAGS.SFW_MODE] > 0 && getGame().inCombat) { //No rape in SFW mode.
 				clearOutput();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			if (player.hasCock()) {
@@ -466,7 +466,7 @@ package classes.Scenes.Areas.Swamp
 			else if (player.hasVagina()) defeatFemale();
 			else {
 				outputText("The spider-girl knocks you out, muttering something about 'genderless freaks' the entire time.", true);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 
@@ -490,9 +490,9 @@ package classes.Scenes.Areas.Swamp
 					if (player.cockThatFits(monster.analCapacity()) != -1) analFuck = evilSpiderGirlVictoryAnal;
 					else outputText("  <b>Her ass is too tight for you to fit inside.</b>", false);
 				}
-				simpleChoices("Fuck Ass", analFuck, "Fuck Pussy", pussyFuck, "Scissor", scissor, "", null, "Leave", cleanupAfterCombat);
+				simpleChoices("Fuck Ass", analFuck, "Fuck Pussy", pussyFuck, "Scissor", scissor, "", null, "Leave", combat.cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 		//*Victory Female
@@ -552,7 +552,7 @@ package classes.Scenes.Areas.Swamp
 			player.orgasm();
 			if (!getGame().inCombat)
 				doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 		//*Victory Male
@@ -619,7 +619,7 @@ package classes.Scenes.Areas.Swamp
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
 			if (!getGame().inCombat)
 				doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 		//*Victory Anal:
@@ -688,7 +688,7 @@ package classes.Scenes.Areas.Swamp
 			player.orgasm();
 			if (!getGame().inCombat)
 				doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 		//*Egg Sack Find

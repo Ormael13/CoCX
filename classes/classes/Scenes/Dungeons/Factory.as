@@ -453,7 +453,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nThe succubus licks her fingers clean, looking totally recovered.  In the blink of an eye, she dashes out the door, disappearing.", false);
 				player.orgasm();
 				dynStats("cor", 5);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			//FEMSAUCE
 			else {
@@ -477,7 +477,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYou turn away with a bemused sigh.  When you glance back, she has vanished!", false);
 			player.orgasm();
 			dynStats("cor", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//doNext(roomBreakRoom);
 		}
 		public function doForcefeedSuccubus():void {
@@ -526,7 +526,7 @@ package classes.Scenes.Dungeons
 			outputText(".", false);
 			outputText("\n\nYou turn away with a bemused sigh.  When you glance back, she has vanished!", false);
 			dynStats("lus", -50);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//doNext(roomBreakRoom);
 		}
 		public function dildoSuccubus():void {
@@ -543,7 +543,7 @@ package classes.Scenes.Dungeons
 			if (player.cor > 75) outputText("giving it a long lick to taste the succubi's delicious flavor ", false);
 			outputText("and put it away.  When you glance back towards the Succubus, she's gone, leaving you alone and horny...", false);
 			dynStats("lus", (20 + (player.lib/5) + (player.cor/10)));
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//doNext(roomBreakRoom);
 		}
 		public function doLossSuccubus():void {
@@ -609,7 +609,7 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function doLeaveSuccubus():void {
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//doNext(roomBreakRoom);			
 		}
 		
@@ -675,7 +675,7 @@ package classes.Scenes.Dungeons
 				dynStats("cor", 20);
 				if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 				if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(doBadEndGeneric);
-				else cleanupAfterCombat();
+				else combat.cleanupAfterCombat();
 				return;
 			}
 			//Tentacle gangbang
@@ -724,7 +724,7 @@ package classes.Scenes.Dungeons
 					player.buttChange(monster.cockArea(0), true);
 					if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 					if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(doBadEndGeneric);
-					else cleanupAfterCombat();
+					else combat.cleanupAfterCombat();
 					return;
 				}
 				//Male/Genderless
@@ -758,7 +758,7 @@ package classes.Scenes.Dungeons
 					if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 					dynStats("cor", 25);
 					if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(doBadEndGeneric);
-					else cleanupAfterCombat();
+					else combat.cleanupAfterCombat();
 				}
 			}
 		}
@@ -772,7 +772,7 @@ package classes.Scenes.Dungeons
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("cor", 2);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//doNext(roomFurnaceRoom);
 		}
 		public function doRapeIncubus():void {
@@ -810,7 +810,7 @@ package classes.Scenes.Dungeons
 				if (player.cumQ() >= 400) outputText("A massive cock-distending bulge of cum works through your shaft, splashing into the demon's rectum in an explosive burst of pleasure. Unfortunately for your victim, it is only the first of many such cum-blasts. In no time flat, jism is spurting from his overfilled rectum while his belly looks a few months pregnant. You feel weak from discharging so much fluid, and y", false);
 				outputText("ou fall back, the fluid of your orgasm dripping from your " + player.cockDescript(0) + " and the gaping asshole of your latest conquest.\n\nYou turn to gather your " + player.armorName + ", and when you look back the demon is gone, leaving only a small puddle of male fluids in his wake.", false);
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				//doNext(roomFurnaceRoom);
 			}
 			//(VAGINAL - Requires Vagina)
@@ -839,7 +839,7 @@ package classes.Scenes.Dungeons
 				player.cuntChange(player.vaginalCapacity()*.8, true);
 				player.orgasm();
 				dynStats("cor", 2);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				//doNext(roomFurnaceRoom);
 			}
 		}
@@ -855,11 +855,11 @@ package classes.Scenes.Dungeons
 			player.refillHunger(50);
 			outputText("\n\n", false);
 			outputText("You push the exhausted demon down and idly collect the cum from your face with your fingers, slowly licking each clean.  Feeling rather sensual and sated, you decide to resume exploring the factory.\n\nAfter redressing you turn about, and see the demon is gone, leaving only a small pool of cum in his wake.", false);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//doNext(roomFurnaceRoom);
 		}
 		public function doLeaveIncubus():void {
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//doNext(roomFurnaceRoom);
 		}
 		
@@ -1196,21 +1196,21 @@ package classes.Scenes.Dungeons
 			player.createPerk(PerkLib.OmnibusGift,0,0,0,0);
 			player.orgasm();
 			dynStats("cor", 2);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//doNext(roomForemanOffice);
 		}
 		
 		private function letGoOmnibus():void {
 			spriteSelect(16);
 			outputText("You refuse to fall for her ploy, and decide not to take her up on her offer.  However, being that she is so thoroughly defeated, you allow her to escape, promising her far worse should she ever oppose you in the future.\n\n\"<i>Thank you, merciful hero!</i>\" she says and she sprints out the door.  Wings unfurl from her back and she takes flight, disappearing out a skylight above the main factory floor.", true);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//doNext(roomForemanOffice);
 		}
 		private function killOmnibus():void {
 			spriteSelect(16);
 			outputText("You step forwards and grab her by the head.  With an abrupt twist you snap her neck, ending at least one small part of the demonic threat.", true);
 			flags[kFLAGS.D1_OMNIBUS_KILLED] = 1;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//doNext(roomForemanOffice);
 		}
 		

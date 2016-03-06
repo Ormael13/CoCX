@@ -178,7 +178,7 @@ package classes.Scenes.Areas.Forest
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe kitsune recoils before running off, no longer interested in you...");
-				game.cleanupAfterCombat();
+				game.combat.cleanupAfterCombat();
 			} else {
 				game.forest.kitsuneScene.loseToKitsunes();
 			}

@@ -86,7 +86,7 @@ package classes.Scenes.NPCs
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				if (findStatusEffect(StatusEffects.Spar) >= 0) game.valeria.pcWinsValeriaSparDefeat();
 				else game.dungeons.heltower.gooArmorBeatsUpPC();

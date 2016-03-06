@@ -244,7 +244,7 @@ package classes.Scenes.Areas.Lake
 			}
 			outputText("  The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
 			dynStats("lus", player.cor / 20 + player.lib / 10);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function zealotDefeated():void
@@ -257,9 +257,9 @@ package classes.Scenes.Areas.Lake
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?", false);
 				var bikiniTits:Function = null;
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
-				simpleChoices("Yes", zealotWinRape, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+				simpleChoices("Yes", zealotWinRape, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", combat.cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 
@@ -292,7 +292,7 @@ package classes.Scenes.Areas.Lake
 				player.cuntChange(monster.cockArea(0), true);
 			}
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

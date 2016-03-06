@@ -46,7 +46,7 @@ package classes.Scenes.Dungeons.DeepCave
 			spriteSelect(85);
 			clearOutput();
 			hideUpDown();
-			fatigue(5,0);
+			player.changeFatigue(5,0);
 			player.orgasm();
 			//(Male)
 			if (player.gender == 1) {
@@ -159,7 +159,7 @@ package classes.Scenes.Dungeons.DeepCave
 			clearOutput();
 			hideUpDown();
 			player.orgasm();
-			fatigue(5,0);
+			player.changeFatigue(5,0);
 			if (player.cockTotal() > 0) {
 				var x:Number = player.cockThatFits(60);
 				trace("X IS MOTHERFUCKER: " + x);
@@ -534,7 +534,7 @@ package classes.Scenes.Dungeons.DeepCave
 			flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
 			//Mark as defeated in combat
 			flags[kFLAGS.TIMES_PC_DEFEATED_VALA_AND_RAEPED]++;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//Purified Fairy

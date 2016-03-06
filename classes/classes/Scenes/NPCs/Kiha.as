@@ -159,7 +159,7 @@ package classes.Scenes.NPCs
 				game.kihaFollower.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.kihaScene.kihaLossIntro();
 			}

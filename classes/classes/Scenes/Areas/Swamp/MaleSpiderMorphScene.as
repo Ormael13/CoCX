@@ -79,9 +79,9 @@ package classes.Scenes.Areas.Swamp
 			if (player.gender > 0 && player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nWhat do you do?", false);
 				//[CHOICES]
-				simpleChoices("Mount", mount, "FuckHisButt", buttfuck, "Frot", frot, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+				simpleChoices("Mount", mount, "FuckHisButt", buttfuck, "Frot", frot, "B.Titfuck", bikiniTits, "Leave", combat.cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 //Loss selector
@@ -95,7 +95,7 @@ package classes.Scenes.Areas.Swamp
 				spriteSelect(74);
 				outputText("The raven-haired spider-guy tears off your " + player.armorName + ", and disgusted by what he finds, he kicks you in the head, knocking you out.", true);
 				player.HP = 1;
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			var select:Number = choices[rand(choices.length)];
@@ -161,7 +161,7 @@ package classes.Scenes.Areas.Swamp
 			else outputText("rivers", false);
 			outputText(" of semen sliding out of the abused opening.  He rolls onto his side and pants, still leaking his thick goo from the limp, weak little cock between his legs.  You bend down and wipe your dick off on his face, letting him lick at it like a trained puppy.  Once cleaned, you get dressed and wander back to camp, leaving the spider to recover from the ordeal.", false);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //*Victory Frotting? (too biggo)
@@ -200,7 +200,7 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("You stretch and sigh with contentment, looking over your cum-covered conquest while he tries to clean himself off.  Absolutely perfect.", false);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //*Victory Cowgirl
@@ -250,7 +250,7 @@ package classes.Scenes.Areas.Swamp
 			//Pregnancy Goes Here
 			player.knockUp(PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.INCUBATION_SPIDER, 151);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //*Loss: Get butt-fucked
@@ -328,7 +328,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("  Your eyelids flutter and droop, your tongue lolls out of your mouth, and you start drooling all over yourself.  Zombie-like, your body keeps shaking, locked in orgasm, even after the spider dumps you in the dirt and walks away.", false);
 			player.slimeFeed();
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //*Loss: Impregnation?
@@ -394,7 +394,7 @@ package classes.Scenes.Areas.Swamp
 			player.slimeFeed();
 			player.orgasm();
 			player.knockUp(PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.INCUBATION_SPIDER);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function spiderPregVagBirth():void

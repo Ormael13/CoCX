@@ -437,7 +437,7 @@ package classes.Scenes.Places.Prison
 			else outputText("Scruffy collapses from his overwhelming arousal.");
 			outputText("\n\nYou drag him out the door. Hopefully he won't bother you for a while.");
 			prison.randomCooldownScruffy += 12 + rand(36);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		public function prisonCaptorRandomEventJizzJanitorLoss():void {
@@ -449,7 +449,7 @@ package classes.Scenes.Places.Prison
 			player.changeStatusValue(StatusEffects.PrisonRestraints, 2, 2);
 			player.changeStatusValue(StatusEffects.PrisonRestraints, 3, 2);
 			player.changeStatusValue(StatusEffects.PrisonRestraints, 4, 3);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

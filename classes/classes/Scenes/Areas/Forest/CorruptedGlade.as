@@ -317,43 +317,43 @@ package classes.Scenes.Areas.Forest {
 				case 0: //Fire breath
 					outputText("You charge the fire within you and as soon as you build it up enough, you unleash it on the glade, lighting them on fire. By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
 					destroyAmount++;
-					fatigue(20, 1);
+					player.changeFatigue(20, 1);
 					break;
 				case 1: //Nine tails foxfire
 					outputText("Holding out your palm, you conjure a flame that dances across your fingertips.  You launch it at the glade with a ferocious throw, and it bursts on impact, setting the glade on fire. By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
 					destroyAmount++;
-					fatigue(20, 1);
+					player.changeFatigue(20, 1);
 					break;
 				case 2: //Whitefire
 					outputText("You narrow your eyes, focusing your mind with deadly intent. You snap your fingers and the glade is enveloped in a flash of white flames! By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
 					destroyAmount++;
-					fatigue(20, 1);
+					player.changeFatigue(20, 1);
 					break;
 				case 3: //Axe
 					outputText("You grab an axe from your toolbox and hack away at the plants without mercy. Eventually, you manage to chop down every perverted plant in the glade save for some of the trees. They gradually wither away. ");
 					outputText("Finally, you chop down the trees with all your strength, making wedge-shaped cuts. With one last almighty swing, the tree falls and lands on the ground with a loud THUD. It looks like they would make fine wood. You chop the tree into several pieces and haul the wood to your camp. ");
 					camp.cabinProgress.incrementWoodSupply(10);
-					fatigue(30 - (player.str / 10));
+					player.changeFatigue(30 - (player.str / 10));
 					outputText("\n\n");
 					break;
 				case 4: //Weapon
 					outputText("You ready your [weapon] and hack away at the plants without mercy. Eventually, you manage to cut down every perverted plant in the glade except for the trees. They gradually wither away. You give the breast-knotted trees some vandalism before turning to leave.\n\n");
-					fatigue(40 - (player.str / 5));
+					player.changeFatigue(40 - (player.str / 5));
 					break;
 				case 5: //Your strength!
 					if (player.str < 30) { //Low strength.
 						outputText("You grab at one of the plants and easily rip the flower stem. Next, you grab one of the vines and focus on tearing it but despite your best efforts, you can't tear it. Sighing with frustration, you drop the vine. You'll have to come back later. \n\n");
-						fatigue(50);
+						player.changeFatigue(50);
 						doNext(camp.returnToCampUseOneHour);
 						return;
 					}
 					else if (player.str >= 30 && player.str < 70) { //Medium strength
 						outputText("You grab at one of the plants and easily rip the flower stem. Next, you grab one of the vines and focus on tearing it and with all your efforts, you manage to tear it. Finally, you look up at the tree but there's no way you could easily take down the tree. \n\n");
-						fatigue(40);
+						player.changeFatigue(40);
 					}
 					else { //High strength
 						outputText("You grab the pussy-flowers and cock-vines and tear them with little effort. Next, you look up at the breast-knotted tree and grab the knots. With some efforts, you yank and rip out the knots. Finally, you twist and snap the tree, ending its life. \n\n");
-						fatigue(30);
+						player.changeFatigue(30);
 					}
 					break;
 				default:

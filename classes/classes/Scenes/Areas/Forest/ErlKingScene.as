@@ -226,7 +226,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Within a few moments, the wind picks up, blowing the fog away, leaving no trace of the mysterious Huntsman, save for a small package on the ground.  You hurriedly pick it up, unable to shake the eerie feeling that you’re being watched.\n\n");
 
-			fatigue(10);
+			player.changeFatigue(10);
 			
 			if (waited)
 				inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
@@ -298,7 +298,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("It looks like you’re in the clear... for now.\n\n");
 
-			fatigue(10);
+			player.changeFatigue(10);
 
 			if (rand(5) == 0)
 			{
@@ -399,7 +399,7 @@ package classes.Scenes.Areas.Forest
 			outputText("<b>You’ve lost " + gemLoss + " gems.</b>\n\n");
 			inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
 			dynStats("sen-", 2, "lib+", 2, "cor+", 1, "lus=", 0);
-			fatigue(10);
+			player.changeFatigue(10);
 			player.orgasm();
 			player.slimeFeed();
 		}
@@ -425,7 +425,7 @@ package classes.Scenes.Areas.Forest
 			outputText("Even with so many of these thoughts crowding your mind, there’s still a tiny spark of resentment burning.  You could rush him and turn the tables on this cocky asshole.\n\n");
 
 			//Sex	 	What’s my prize?		Stop the Madness 		Surrender Forever		How Dare You!
-			fatigue(10);
+			player.changeFatigue(10);
 			menu();
 			addButton(0, "Sex", predatoryPrey);
 			addButton(1, "Prize?", whatsMyPrize);

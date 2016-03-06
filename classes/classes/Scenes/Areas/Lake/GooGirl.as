@@ -126,7 +126,7 @@ package classes.Scenes.Areas.Lake
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe goo-girl seems confused but doesn't mind.");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.lake.gooGirlScene.getBeatByGooGirl();
 			}

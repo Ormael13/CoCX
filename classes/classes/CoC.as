@@ -11,6 +11,7 @@
 	import classes.GlobalFlags.kFLAGS; // This file contains most of the persistent gamestate flags.
 	import classes.GlobalFlags.kGAMECLASS; // This file creates the gameclass that the game will run within.
 	import classes.GlobalFlags.kACHIEVEMENTS; // This file creates the flags for the achievements system.
+	import classes.Scenes.Combat.Combat;
 	import classes.Scenes.Dungeons.DungeonEngine; // This file creates all the dungeons, their rooms, and their completion states except for D3. This also includes cabin code. See file for more details.
 	import classes.Scenes.Dungeons.D3.D3; // Likely due to D3's complexity, that dungeon is split out separately.
 	import classes.Scenes.Seasonal.AprilFools;
@@ -122,19 +123,19 @@ the text from being too boring.
 		// Include the functions. ALL THE FUNCTIONS
 //No longer needed. Added into CharCreation.as:		include "../../includes/customCharCreation.as";
 		
-		include "../../includes/descriptors.as";
-		include "../../includes/appearance.as";
+//No longer needed:		include "../../includes/descriptors.as";
+//No longer needed. Moved to PlayerAppearance.as:		include "../../includes/appearance.as";
 
 //No longer needed:		include "../../includes/InitialiseUI.as";
 		include "../../includes/input.as";
 		include "../../includes/OnLoadVariables.as";
 		include "../../includes/startUp.as";
 		
-		include "../../includes/combat.as";
+//No longer needed. Split up into 3 files.		include "../../includes/combat.as";
 		include "../../includes/debug.as";
 //No longer needed. This file has been chopped up and spread throughout the codebase:		include "../../includes/doEvent.as";
 		include "../../includes/eventParser.as";
-		include "../../includes/eventTest.as";
+//Merged into debug.as:		include "../../includes/eventTest.as";
 		include "../../includes/engineCore.as";
 
 		// Lots of constants
@@ -167,6 +168,7 @@ the text from being too boring.
 		private var _perkLib:PerkLib = new PerkLib();// to init the static
 		private var _statusEffects:StatusEffects = new StatusEffects();// to init the static
 		public var charCreation:CharCreation = new CharCreation();
+		public var playerAppearance:PlayerAppearance = new PlayerAppearance();
 		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var saves:Saves = new Saves(gameStateDirectGet, gameStateDirectSet);
 		// Items/
@@ -186,6 +188,7 @@ the text from being too boring.
 		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
 		public var inventory:Inventory = new Inventory(saves);
 		public var masturbation:Masturbation = new Masturbation();
+		public var pregnancyProgress:PregnancyProgression = new PregnancyProgression();
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
@@ -197,6 +200,8 @@ the text from being too boring.
 		public var plains:Plains = new Plains();
 		public var swamp:Swamp = new Swamp();
 		public var volcanicCrag:VolcanicCrag = new VolcanicCrag();
+		// Scenes/Combat/
+		public var combat:Combat = new Combat();
 		// Scenes/Dungeons
 		public var brigidScene:BrigidScene = new BrigidScene();
 		public var d3:D3 = new D3();
@@ -273,29 +278,7 @@ the text from being too boring.
 		private var _updateHack:Sprite = new Sprite();
 		
 		public var mainViewManager:MainViewManager = new MainViewManager();
-		// Other scenes
-
-//Moved to Scenes/Holidays		include "../../includes/april_fools.as";
-//Moved to Scenes		include "../../includes/dreams.as";
-		//include "../../includes/dungeon2Supplimental.as";
-		//include "../../includes/dungeonCore.as";
-//No longer needed. This file has been chopped up and spread throughout the codebase:		include "../../includes/dungeonEvents.as";
-		//include "../../includes/dungeonHelSupplimental.as";
-		//include "../../includes/dungeonSandwitch.as";
-//Moved to Scenes/Holidays		include "../../includes/fera.as";
-//Moved to Scenes/Masturbation.as		include "../../includes/masturbation.as";
-		include "../../includes/pregnancy.as"; //The only file left to be sorted out. Once it's done, the commented-out code can be deleted.
-//This is never implemented. So it's removed.		include "../../includes/runa.as";
-//No longer needed. This file has been split:		include "../../includes/symGear.as";
-//No longer needed. This file has ben split:		include "../../includes/tamaniDildo.as";
-//Moved to Scenes/Holidays		include "../../includes/thanksgiving.as";
-//Moved to Scenes/Holidays		include "../../includes/valentines.as";
-//Moved to Scenes/Areas/Mountain		include "../../includes/worms.as";
-//Moved to Scenes/Holidays		include "../../includes/xmas_bitch.as";
-//Moved to Scenes/Holidays		include "../../includes/xmas_gats_not_an_angel.as";
-//Moved to Scenes/Holidays		include "../../includes/xmas_jack_frost.as";
-//Moved to Scenes/Holidays		include "../../includes/xmas_misc.as";
-	
+		//Scenes in includes folder GONE! Huzzah!
 		
 		/****
 			This is used purely for bodges while we get things cleaned up.
@@ -304,7 +287,6 @@ the text from being too boring.
 			certain functions, even though they were in the same scope as the
 			function calling them.
 		****/
-//Looks like this dangerous little var is no longer used anywhere, huzzah.		public var semiglobalReferencer :* = {};
 
 		public var mainView :MainView;
 
@@ -322,15 +304,10 @@ the text from being too boring.
 		public var images:ImageManager;
 		public var player:Player;
 		public var player2:Player;
-//No longer used:		public var tempPerk:PerkClass;
 		public var monster:Monster;
-//No longer used:		public var itemSwapping:Boolean;
 		public var flags:DefaultDict;
 		public var achievements:DefaultDict;
 		private var gameState:int;
-//Gone, last use replaced by newRound arg for combatMenu:		public var menuLoc:Number;
-//No longer used:		public var itemSubMenu:Boolean;
-//No longer used:		public var supressGoNext:Boolean = false;
 		public var time :TimeModel;
 		public var currentText:String;
 
@@ -339,13 +316,12 @@ the text from being too boring.
 		public var foundDesert:Boolean;
 		public var foundMountain:Boolean;
 		public var foundLake:Boolean;
+		//These plot variables are to be replaced.
 		public var whitney:Number;
 		public var monk:Number;
 		public var sand:Number;
 		public var giacomo:int;
-//Replaced by flag		public var beeProgress:Number;
-//Now in Inventory.as		public var itemStorage:Array;
-//Now in Inventory.as		public var gearStorage:Array;
+
 		public var temp:int;
 		public var args:Array;
 		public var funcs:Array;
@@ -354,7 +330,7 @@ the text from being too boring.
 		
 		public var kFLAGS_REF:*;
 		public var kACHIEVEMENTS_REF:*;
-
+		
 		public function get inCombat():Boolean { return gameState == 1; }
 		
 		public function set inCombat(value:Boolean):void { gameState = (value ? 1 : 0); }
@@ -389,7 +365,7 @@ the text from being too boring.
 
 			// Hooking things to MainView.
 			this.mainView.onNewGameClick = charCreation.newGameGo;
-			this.mainView.onAppearanceClick = appearance;
+			this.mainView.onAppearanceClick = playerAppearance.appearance;
 			this.mainView.onDataClick = saves.saveLoad;
 			this.mainView.onLevelClick = playerInfo.levelUpGo;
 			this.mainView.onPerksClick = playerInfo.displayPerks;
@@ -418,8 +394,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4_mod_1.3.12";
-			version = ver + " (<b>Refactors Ahoy II</b>)";
+			ver = "0.9.4_mod_1.3.13";
+			version = ver + " (<b>Refactors Ahoy III</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

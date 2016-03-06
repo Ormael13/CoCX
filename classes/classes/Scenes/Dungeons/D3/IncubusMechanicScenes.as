@@ -226,7 +226,7 @@ package classes.Scenes.Dungeons.D3
 			flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_KILLED;
 			clearOutput();
 			outputText("He proves blessedly easy to kill, and you roll the body off the cliffs to avoid alerting any of Lethice's other ilk.");
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
 		private function letMechanicGo(hpVictory:Boolean):void
@@ -242,7 +242,7 @@ package classes.Scenes.Dungeons.D3
 	
 			outputText("\n\nThe incubus mechanic flies away for good, though you can’t can say whether he will wreak havoc or live quietly.");
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 		
 		private function buttfuckTheMechanic(hpVictory:Boolean):void
@@ -338,7 +338,7 @@ package classes.Scenes.Dungeons.D3
 			player.orgasm();
 			dynStats("cor+", 5);
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 		
 		private const MECHANIC_DEMON_COCK:int = 0;
@@ -522,7 +522,7 @@ package classes.Scenes.Dungeons.D3
 			player.orgasm();
 			dynStats("cor+", 5);
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 		
 		public function mechanicFuckedYouUp(hpVictory:Boolean, pcCameWorms:Boolean):void

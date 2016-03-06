@@ -99,7 +99,7 @@ package classes.Scenes.Places.Prison
 					break;
 				case 3:
 					outputText("(Placeholder) A guard enters, but rather than helping you or taking advantage of your helplessness he adjusts the chain attached to the hook in your ass, shortening it by several inches leaving you barely able to reach the ground. He then looks on, chuckling with amusement as you wear yourself out trying to avoid the mortifying situation of being left hanging helplessly by your asshole.",false);
-					fatigue(20);
+					player.changeFatigue(20);
 					break;
 			}
 			doNext(camp.returnToCampUseOneHour);
@@ -610,13 +610,13 @@ package classes.Scenes.Places.Prison
 						outputText("Spurred on by your success, you return to the dildo and repeat the process. On your third trip back to the dildo, however, the click in the valve sounds a bit different and in addition to the basin lid opening behind you it seems to trigger a demoralizing change in the dildo. Before you can react the portion of the dildo inside your mouth balloons out like the knot in a dog's cock, more than doubling in diameter and stretching your jaw to its limit. When you try to extract it from your throat you find you are unable to squeeze the knot past your teeth, and so you spend the rest of the hour struggling to breath around the intruder. Meanwhile, cum continues to pour out of the dong, filling your stomach to capacity and dribbling out the corners of your mouth and over your cheeks and chin like a perverse fountain. Needless to say, the experience leaves you feeling particularly helpless.",false);
 						prison.changeObey(0.5,prison.inPrison);
 						player.refillHunger(5);
-						fatigue(5);
+						player.changeFatigue(5);
 						fillVal = fillVal + (1 + rand(2));
 						break;
 					case 1:
 						outputText("Spurred on by your success, you return to the dildo and repeat the process. On your third trip back to the dildo, however, the click in the valve sounds a bit different and in addition to the basin lid opening behind you it seems to trigger a demoralizing change in the dildo. A new ring of holes pops open around the shaft an additional three inches below the original set. You spend the rest of the hour working to envelop the full ten inches of dildo now required to make a proper seal and generate suction, but when you finally do you are unable to pump the shaft fast enough to trigger the pressure valve again. Needless to say, the experience leaves you feeling helpless and exhausted.",false);
 						prison.changeObey(0.5,prison.inPrison);
-						fatigue(15);
+						player.changeFatigue(15);
 						fillVal = fillVal + (1 + rand(2));
 						break;
 					case 2:

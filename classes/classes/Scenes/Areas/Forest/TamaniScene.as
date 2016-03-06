@@ -341,7 +341,7 @@ internal function tamaniSexLetHer():void {
 		//Combat end: 
 		if (getGame().inCombat) {
 			outputText("  After the stress and strain of a lost fight and the stress of having your seed so expertly stolen, you lie down on your flank and go to sleep.", false);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			player.orgasm();
 		}
 		//(Noncombat end: 
@@ -384,7 +384,7 @@ internal function tamaniSexLetHer():void {
 			//Combat end: 
 			if (getGame().inCombat) {
 				outputText("You black out, exhausted from the ordeal.", false);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				player.orgasm();
 			}
 			//(Noncombat end: 
@@ -436,7 +436,7 @@ internal function tamaniSexLetHer():void {
 			//Combat end: 
 			if (getGame().inCombat) {
 				outputText("You black out, exhausted from the ordeal.", false);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				player.orgasm();
 			}
 			//(Noncombat end: 
@@ -491,7 +491,7 @@ internal function tamaniSexLost():void {
 	outputText("Tamani removes the ring once you have finished.  She seals the bottle and places it in her pouch as you drop to the ground, exhausted.  All you can do is watch as she walks away, her ass swaying confidently from side to side.  Your last thought before you pass out is how much easier it would've been to just fuck her.", false);
 	player.orgasm();
 	dynStats("lib", .5, "sen", -1, "cor", .5);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 	
 //[NORMAL COMBAT – VICTORY RAEEP]
@@ -537,7 +537,7 @@ internal function tamaniSexWon():void {
 		outputText("any more cream to give to me?</i>\"\n\n", false);
 		outputText("She doesn't give you a chance to answer as she wobbles off, jiggling pleasantly in all the right places, \"<i>Of course you do.  I'll be back for the rest later!</i>\"\n\n", false);
 		player.orgasm();
-		if (getGame().inCombat) cleanupAfterCombat();
+		if (getGame().inCombat) combat.cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
 	//Too big? Jerk off with feet and bukkake
@@ -565,7 +565,7 @@ internal function tamaniSexWon():void {
 		outputText("Tamani wiggles in the sexiest way as she leaves, arousing your body all over again...", false);
 		player.orgasm();
 		dynStats("lus", 35);
-		if (getGame().inCombat) cleanupAfterCombat();
+		if (getGame().inCombat) combat.cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
 }
@@ -836,7 +836,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 		player.orgasm();
 		dynStats("int", -.5, "sen", -1);
 	}
-	if (getGame().inCombat) cleanupAfterCombat();
+	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -857,7 +857,7 @@ internal function tamaniAnalShits():void {
 	outputText("You can feel the cum building up inside you, and you know that you won't be able to hold out much longer.  Looking down, you can see that Tamani isn't far from orgasm, either.  Her fingers slip rapidly in and out of her cunt, and the look on her face is one of thoughtless bliss.  She shudders and goes limp in your grasp just as you cum, painting the insides of her ass with your semen.  Her eyes are still rolled up into the back of her head as you pull your softening prick out of her ass.  You drop her, letting her legs fall back to the ground with a dull thud.  She turns over onto her side, looking up at you.  Between exhausted pants, she manages to say, \"<i>Don't... think that I... enjoyed that... or anything... I'll be back for you, and you better not...</i>\" before she passes out.  You shake your head and laugh at the stubborn little slut as you tuck " + player.sMultiCockDesc() + " back into your " + player.armorName + " and head back to your camp.", false);
 	
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 internal function tamaniBeaten():void {
@@ -892,7 +892,7 @@ internal function tamaniBeaten():void {
 	if (player.fertilizedEggs() == 0) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 72);
 	player.dumpEggs();
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 	
 //Butts McGee Facesitting Tamaniz

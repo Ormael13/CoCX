@@ -1216,7 +1216,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("“<i>Feel free to come back if you want me to clean your clock again, yeah?</i>”  She calls after you with a grin.  You shake your head ruefully as you make your way down the mountain and back to your camp.  Overall, that could have gone better, but it could have gone a lot worse, too.\n\n");
 
 			menu();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		// Call this shit at the top of any "Stay" scene for shared initial content
@@ -1305,7 +1305,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("“<i>Well, I gotta admit, that wasn’t exactly how I was expecting the fight to end,</i>” she says, scratching the back of her neck in a manner that seems almost coquettish. “<i>But it was pretty fun all the same. Next time you’re in the neighborhood, let me know if you’re up for a rematch, or... whatever.  Okay?</i>” She asks, retaking her seat by the fire and retrieving her pipe.  You nod, absently, still kind of dazed after the abortive end to the fight, and wander off to find somewhere to wash the increasingly unpleasant feeling contents of your underclothing away.\n\n");
 
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		// Loss scene for buttstuffins
@@ -1372,7 +1372,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Either way, after assuring Izumi that you’ll survive, you stagger out of the cave and begin to make your decidedly wobbly way back to camp.  Hopefully, your bruises won’t keep you awake....\n\n");
 
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		// Super Ordinary Regular Missionary Sexy Time, honest
@@ -1408,7 +1408,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You nod, pulling yourself to your feet and after exchanging a hasty goodbye with Izumi, you stumble towards the exit.  You’re not quite sure about ‘next time’, but you have to admit that really could have gone worse....\n\n");
 
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		// No bits, no scenes. Izumi had no scenes written for genderless players. In some cases, other scenes would do a p. reasonable job with some reformatting.
@@ -1435,7 +1435,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("She gently lowers you toward the floor, and releases her grip on your ankles.  “I-I guess you can go, yeah?” She says, motioning toward the entrance to her cave.  Paying you no mind, she heads off toward her tent, clearly no longer interested in you.\n\n");
 
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		// Big bad oni gonna eatcha
@@ -1481,7 +1481,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Izumi is gracious or wracked by her guilty conscious enough to let you rest up quietly in her cave without further molestation until the pounding in your head fades away.  As you carefully pick your way back down the mountain, you muster up a half-hearted wave of goodbye back to the cheerfully waving giantess.  While you’re not sure if you’d exactly describe what you just experienced as fun... at the very least, you’re glad she didn’t <i>actually</i> try to eat you.  Deep down though, part of you can’t help wondering if she really would...\n\n");
 
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		/**
@@ -1544,7 +1544,8 @@ package classes.Scenes.Areas.HighMountains
 				if (monster.lust >= monster.eMaxLust()) // I assume LustMax is always presumed to be 100?
 				{
 					// Gonna refactor the tease attack code to seperate out the display elements from the action elements, so I we can grab a player-appropriate text blurb
-					outputText("[teaseText]");
+					//outputText("[teaseText]");
+					getGame().combat.combatTeases.tease(true);
 					outputText("Izumi pays your attempts to distract her no mind, focused entirely on her strange ritual. You slink forwards, hoping that something a little more... hands on might do the trick. But ");
 				}
 				else
@@ -1639,7 +1640,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("She swirls around and disappears into the gloom of the cave in a flurry of scented smoke.  For your part, you’re left with a long trek home and a complete lack of any idea what the hell just happened.  But on the upside, you <i>do</i> also have a nice stack of shiny gems to make up for the confusion.\n\n");
 
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		// Kinda friendly fux
@@ -1720,7 +1721,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("“<i>It’s just a little thank you gift. You know, for uh...</i>”  She winks, provocatively.  “<i>Services rendered?</i>”  Smiling, you make your way back to camp, feeling decidedly good about yourself.\n\n");
 
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		// Fuck dat giant oni butt
@@ -1903,7 +1904,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		// Huehue, Tentacruel!
@@ -1947,7 +1948,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Amidst some miscellaneous junk that you cannot for the life of you figure out, you find a small pile of gems.  You help yourself to them as payment for the good time you just showed the uppity Oni, stow them safely away and wander back to camp, whistling happily to yourself.\n\n");
 
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		// Facefuck
@@ -2014,7 +2015,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("On the way out, you notice a small leather bag just laying out in the open.  Inspecting it, you discover it to be filled with a small fortune in gems!  You decide to take it with you - after all, it’s not like Izumi seems to need the money, plus she <i>did</i> try to rape you, so it’s technically a trophy.  Feeling decidedly more light hearted about your situation, you leave the cave and make your way back to camp, happily inspecting the gems as you go.\n\n");
 
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		// Nice horn, be a shame if somebody got it all sticky, huh?
@@ -2069,7 +2070,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("By the time you get back to camp, you’re almost feeling good enough to whistle.");
 
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

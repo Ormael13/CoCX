@@ -126,7 +126,7 @@ private function declineBimboSophie():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
 	clearOutput();
 	outputText("You turn and flee the mountain, before she can compel you to take her to camp and fuck like bunnies.  Who knows when you'd have time to explore with a lust-crazed bird-woman like that around.  She'll find a mate soon enough, you're sure of that.\n\n", false);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 private function acceptBimboSophie():void {
@@ -178,7 +178,7 @@ private function acceptBimboSophie():void {
 	}
 	outputText("\n\n", false);
 	outputText("Well, you know where to find her any time you want to fuck the motherly bimbo.\n<b>(Bimbo Sophie has been added to your slaves!)</b>", false);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Follower In Camp Text:
 public function sophieCampLines():void {

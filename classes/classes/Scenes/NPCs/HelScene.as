@@ -266,7 +266,7 @@ internal function loseToSalamander():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 
@@ -442,7 +442,7 @@ private function declineHelSexings():void {
 	outputText("You nod, and return the wave before heading back to your camp.", false);
 	helFollower.helAffection(1);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -473,7 +473,7 @@ internal function beatUpHelAndStealHerWalletFromHerVagina():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -510,7 +510,7 @@ internal function fuckHelsAss():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -540,7 +540,7 @@ internal function helBlowsYou():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -575,7 +575,7 @@ internal function dpHel():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -605,7 +605,7 @@ internal function getLickedByHel():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -635,7 +635,7 @@ internal function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void 
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -674,7 +674,7 @@ internal function helTailPegging(loss:Boolean = false):void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -717,7 +717,7 @@ private function nagaCoilsUpHel():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -749,7 +749,7 @@ private function nagaCoilsUpAnalNaga():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -799,7 +799,7 @@ private function mountHel():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -852,7 +852,7 @@ private function helVaginaTaur69():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -910,7 +910,7 @@ private function helPossessionShitPoopCock():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -948,7 +948,7 @@ private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	//Bump down follower tracking affection too
 	helFollower.helAffection(-15);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -978,7 +978,7 @@ private function receiveCorruptRimjobsFromHel():void {
 	//Bump up follower tracking affection too
 	helFollower.helAffection(-15);
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -1478,7 +1478,7 @@ private function nomOnIzzyTitWithSallyMancer():void {
 
 	outputText("That finally serves to get Hel off of Isabella's tit.  With a smirk that's still drooling breast milk, the salamander says, \"<i>Oooh, a three-way.  Now we're talking!  What do you say, lover?  Want to join in on a little girl-on-girl?</i>\"\n\n", false);
 	dynStats("lus", 40);
-	fatigue(-40);
+	player.changeFatigue(-40);
 	
 	var dick:Function = null;
 	var dick2:Number = 0;

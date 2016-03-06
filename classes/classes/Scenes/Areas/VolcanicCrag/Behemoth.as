@@ -37,7 +37,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
 			if (pcCameWorms){
 				outputText("\n\nYour opponent doesn't seem to care.");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.volcanicCrag.behemothScene.loseToBehemoth();
 			}

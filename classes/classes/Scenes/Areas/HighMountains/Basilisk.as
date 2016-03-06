@@ -48,7 +48,7 @@ package classes.Scenes.Areas.HighMountains
 			else {
 				outputText("You concentrate, focus your mind and resist the basilisk's psychic compulsion.", false);
 			}
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 
 
@@ -59,7 +59,7 @@ package classes.Scenes.Areas.HighMountains
 			if (damage == 0) outputText("The fall didn't harm you at all.  ", false);
 			var damage:Number = int((str + 20) - Math.random()*(player.tou+player.armorDef));
 			damage = player.takeDamage(damage, true);			
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 
 		//basilisk physical attack: With lightning speed, the basilisk slashes you with its index claws!
@@ -81,7 +81,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe basilisk smirks, but waits for you to finish...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.highMountains.basiliskScene.loseToBasilisk();
 			}

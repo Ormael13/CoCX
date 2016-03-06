@@ -14,7 +14,7 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		
 		public function loseToGiant():void {
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		public function winAgainstGiant():void {
@@ -26,10 +26,10 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
-				addButton(4, "Leave", cleanupAfterCombat);
+				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
 			else {
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			//addButton(3, "Suck Him Off", suckHimOff);
 		}
@@ -55,7 +55,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Your spurts continue, producing more spunk as the second pass. You keep shooting ropes of jizz until finally he opens his bloodshot eyes and looks directly at you; knowing this is your cue to take your leave, you remove your " + player.multiCockDescriptLight() + " from the giant's nose and shoot your final rope into his eye. Jumping down before he can swat you off his face, the giant, now quite infuriated, looses another roar as he gets up and tries to hack out the copious gobs of cum in areas where it should not normally go.\n\n");
 			outputText("As he continues to bellow and scream, you stuff your " + player.multiCockDescriptLight() + " back into your " + player.armorName + ", grab your loot and immediately DIP. The giant was mean enough before he was nasally violated, and you hear his cries well after he's beyond the horizon.");
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//Females and hermaphrodites
@@ -77,7 +77,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("The giant, however, still needs his release and as he continues pumping, you reach climax more times than you can count. At last, you hear the giant moan, and he drops you on the base of his dick while he finishes himself off. Too exhausted to move, you lay there as the giant cums, gallons of cum shooting in an arc, in slow motion, landing directly on you. You barely manage to gulp down enough to keep from drowning. The giant laughs and grabs you, licks you clean, and sets you down, sheltering you from the cold with his hands and allowing you to fix your armor. Once you redress, the giant lets out a bellowing laugh and saunters off behind a mountain.");
 			player.refillHunger(50);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//All genders!
@@ -98,19 +98,19 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("You yelp in surprise as as the giant cums, filling your bowels completely and stuffing your stomach. The giant laughs and grabs you, licks you clean, and sets you down, sheltering you from the cold with his hands and allowing you to fix your armor. Once you redress, the giant lets out a bellowing laugh and saunters off behind a mountain. You feel warm thanks to being stuffed with his cum.");
 			player.refillHunger(30);
 			player.orgasm();
-			cleanupAfterCombat();			
+			combat.cleanupAfterCombat();			
 		}
 		
 		private function suckHimOff():void {
 			clearOutput();
 			outputText("PLACEHOLDER");
 			player.refillHunger(100);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		private function exitGiant():void {
 			menu();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 

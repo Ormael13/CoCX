@@ -22,7 +22,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			outputText(" to continue the fight.  You quickly snatch the keys from inside her shield, and hook them onto your own belt.");
 			//(New Key Item: Harpy Key A)
 			player.createKeyItem("Harpy Key A",0,0,0,0);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			flags[kFLAGS.HEL_BRIGID_DEFEATED] = 1;
 		}
 

@@ -249,7 +249,7 @@ private function gooNagaRape():void {
 		outputText("You cry out and shudder as you feel wave after wave of the naga's orgasm rushing over your body, bringing you to a strange orgasmic bliss of your own.", false);
 	} 
 	outputText("  For a moment you just sit there in post orgasmic bliss, the walls of the naga convulsing around your gooey half. You decide that the snake woman has had enough and slowly withdraw yourself from her abused love canal. You gather up your things and head back to your camp, leaving the naga lying in the sands.", false);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //3) Victory male
@@ -310,7 +310,7 @@ private function nagaVictoryMale():void {
 		}
 		//Corrupted (event raises fatigue by 20)
 		else {
-			fatigue(20);
+			player.changeFatigue(20);
 			outputText("Your mind fills with obscene and corrupted fantasies as you behold the defeated creature lying before you.  Leaning forward to get a closer look, your thoughts wander, and you find yourself wondering what you could do to her extremely flexible body.  Unable to contain your undying lust, you remove your " + player.armorName + " and lay on top of her, rapidly moving your hands across her scaly form in a hunt for her pussy.  The snakewoman struggles weakly beneath you, but you easily pin her to the ground. Her tail thrashes in the sand as you locate the mound of scales covering her nether-lips. You open it roughly and shove your fingers in, smiling at her cries of denial. To put an end to her complaints, you suddenly move forward and drive your " + player.cockDescript(0) + " inside her all at once, not caring whether it fits or not. The lack of lubrication couldn't bother you less. You can practically taste the incredible sensations of her love-canal as it begins to moisten. Hungering for more, you start to pound the snake woman mercilessly. Shoving your entire length in and out of her abused cunt causes her to whimper and moan in a mixture of pain and pleasure. She responds to your brutality in kind, biting at your shoulder. It takes a few seconds before your arm grows numb, and you realize too late that this little bitch is injecting you with her venom! You pry her off before she can finish, her fangs still dripping with lethal fluid. This fat little worm has gone way too far.\n\n", false);
 	     	//[player has more than 1 dick]
 			if (player.cockTotal() > 1) {
@@ -336,7 +336,7 @@ private function nagaVictoryMale():void {
 	}
 	outputText("You think it would be a very good idea to come to the desert more often.", false);
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	return;
 }
 
@@ -394,7 +394,7 @@ private function nagaVictoryFemale():void {
 	}
 	outputText("You think it would be a very good idea to come to the desert more often.", false);
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	return;
 }
 
@@ -434,7 +434,7 @@ private function nagaVictoryGenderless():void {
 	}
 	outputText("You think it would be a very good idea to come to the desert more often.", false);
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	return;    	
 }
 
@@ -688,7 +688,7 @@ internal function nagaFUCKSJOOOOOO():void {
 		outputText("You bring your mouth back to her awaiting hole and redouble your efforts. You can feel that she is nearing her peak as you continue to lick at her pussy. With a final shudder the naga climaxes, squeezing you firmly against her, coating your chin and nose with her thick honey.  As the naga relaxes her grip you slide out from her loosened tail coils.  Exhausted, you lose consciousness, but when you awake, you grab your things and leave the moistened sands behind.", false);
 	}
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 internal function nagaRapeChoice():void {
@@ -701,51 +701,51 @@ internal function nagaRapeChoice():void {
 	if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("Your body aches for further satisfaction - do you rape the snake woman?", false);
 		if (player.lowerBody == LOWER_BODY_TYPE_GOO) {
-			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
-			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
-			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", cleanupAfterCombat);
-			if (player.gender == 3) simpleChoices("As Male", nagaVictoryMale, "As Female", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
+			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", combat.cleanupAfterCombat);
+			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", combat.cleanupAfterCombat);
+			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", combat.cleanupAfterCombat);
+			if (player.gender == 3) simpleChoices("As Male", nagaVictoryMale, "As Female", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "Leave", combat.cleanupAfterCombat);
 			return;
 		}
 		else {
-			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "", null, "", null, "Lay Eggs", eggs, "No", cleanupAfterCombat);
-			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "", null, "", null, "Lay Eggs", eggs, "No", cleanupAfterCombat);
-			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "", null, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
-			if (player.gender == 3) simpleChoices("As Male", nagaVictoryMale, "As Female", nagaVictoryFemale, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
+			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "", null, "", null, "Lay Eggs", eggs, "No", combat.cleanupAfterCombat);
+			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "", null, "", null, "Lay Eggs", eggs, "No", combat.cleanupAfterCombat);
+			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "", null, "", null, "Lay Eggs", eggs, "Leave", combat.cleanupAfterCombat);
+			if (player.gender == 3) simpleChoices("As Male", nagaVictoryMale, "As Female", nagaVictoryFemale, "", null, "Lay Eggs", eggs, "Leave", combat.cleanupAfterCombat);
 			return;	
 		}
 	}
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 public function nagaPlayerConstrict():void {
 	clearOutput();
-	if (player.fatigue + kGAMECLASS.physicalCost(10) > 100) {
+	if (player.fatigue + player.physicalCost(10) > 100) {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...", true);
 //Gone		menuLoc = 1;
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
 	//Cannot be used on plural enemies
 	if (monster.plural) {
 		outputText("You launch yourself at " + monster.a + monster.short + ", but with multiple enemies, wrapping one up would leave you completely open to attack.  You hastily slither backwards before you expose yourself to danger.", true);
 		outputText("\n\n", false);
-		kGAMECLASS.enemyAI();
+		monster.doAI();
 		return;
 	}
 	if (monster.short == "pod") {
 		outputText("You can't constrict something you're trapped inside of!", true);
 //Gone		menuLoc = 1;
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
-	fatigue(10,2);
+	player.changeFatigue(10,2);
 	//Amily!
 	if (monster.findStatusEffect(StatusEffects.Concentration) >= 0) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
-		kGAMECLASS.enemyAI();
+		monster.doAI();
 		return;
 	}
 	//WRAP IT UPPP
@@ -765,37 +765,37 @@ public function nagaPlayerConstrict():void {
 		outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " +monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back. ", false);
 		player.takeDamage(5, true);
 		if (player.HP <= 0) {
-			doNext(kGAMECLASS.endHpLoss);
+			doNext(combat.endHpLoss);
 			return;
 		}
 	}
 	outputText("\n\n", false);
-	kGAMECLASS.enemyAI();
+	monster.doAI();
 }
 
 public function naggaSqueeze():void {
 	clearOutput();
-	if (player.fatigue + kGAMECLASS.physicalCost(20) > player.maxFatigue()) {
+	if (player.fatigue + player.physicalCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to squeeze " + monster.a + " " + monster.short + ".");
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
 	//Squeeze -
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified. ", false);
 	var damage:int = monster.eMaxHP() * (.10 + rand(15) / 100);
-	kGAMECLASS.doDamage(damage, true, true);
-	fatigue(20, 2);
+	combat.doDamage(damage, true, true);
+	player.changeFatigue(20, 2);
 	//Enemy faints -
 	if (monster.HP < 1) {
 		outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ", false);
 		if (monster.short == "demons")
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.", false);
 		outputText("\n\n", false);
-		doNext(kGAMECLASS.endHpVictory);
+		doNext(combat.endHpVictory);
 		return;
 	}
 	outputText("\n\n", false);
-	kGAMECLASS.enemyAI();
+	monster.doAI();
 }
 //Tease
 public function naggaTease():void {
@@ -811,7 +811,7 @@ public function naggaTease():void {
 	}
 	//(Otherwise)
 	else {
-		kGAMECLASS.fatigueRecovery();
+		combat.fatigueRecovery();
 		var damage:Number = 0;
 		var chance:Number= 0;
 		var bimbo:Boolean = false;
@@ -904,22 +904,22 @@ public function naggaTease():void {
 				damage *= 1.15;
 			}
 			monster.teased(damage);
-			kGAMECLASS.teaseXP(1);
+			combat.combatTeases.teaseXP(1);
 		}
 		//Nuttin honey
 		else {
-			kGAMECLASS.teaseXP(5);
+			combat.combatTeases.teaseXP(5);
 			outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
 		}
 		outputText("\n\n", false);
 		//OLD
 		//monster.lust += 5 + rand(15);
 		if (monster.lust >= monster.eMaxLust()) {
-			doNext(kGAMECLASS.endLustVictory);
+			doNext(combat.endLustVictory);
 			return;
 		}
 	}
-	kGAMECLASS.enemyAI();
+	monster.doAI();
 }
 
 public function nagaLeggoMyEggo():void {
@@ -927,7 +927,7 @@ public function nagaLeggoMyEggo():void {
 	outputText("You release " + monster.a + monster.short + " from " + monster.pronoun3 + " bonds, and " + monster.pronoun1 + " drops to the ground, catching " + monster.pronoun3 + " breath before " + monster.pronoun1 + " stands back up, apparently prepared to fight some more.", false);
 	outputText("\n\n", false);
 	monster.removeStatusEffect(StatusEffects.Constricted);
-	kGAMECLASS.enemyAI();
+	monster.doAI();
 }
 
 
@@ -962,7 +962,7 @@ private function eggUpANagaSpiderLike():void {
 	outputText("\n\nA while later, you awaken alone in the desert sand.  Getting your shaky legs under you and stifling a yawn, you head back to camp.  You should come to the desert more often.");
 	player.dumpEggs();
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Bee Naga Scene: Finished (Fenoxo) (edited)
@@ -1004,7 +1004,7 @@ private function beePositANagaPlease():void {
 	outputText("\n\nYou should definitely come to the desert more often.");
 	player.dumpEggs();
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 	}
 }

@@ -36,32 +36,6 @@ public function silly():Boolean {
 
 }
 
-/* Replaced by Utils.formatStringArray, which does almost the same thing in one function
-public function clearList():void {
-	list = [];
-}
-public var list:Array = [];
-public function addToList(arg:*):void {
-	list[list.length] = arg;
-}
-public function outputList():String {
-	var stuff:String = "";
-	for(var x:int = 0; x < list.length; x++) {
-		stuff += list[x];
-		if (list.length == 2 && x == 1) {
-			stuff += " and ";
-		}
-		else if (x < list.length-2) {
-			stuff += ", ";
-		}
-		else if (x < list.length-1) {
-			stuff += ", and ";
-		}
-	}
-	list = [];
-	return stuff;        
-}
-*/
 /**
  * Alters player's HP.
  * @param	changeNum The amount to damage (negative) or heal (positive).
@@ -320,7 +294,7 @@ public function getButtonToolTipHeader(buttonText:String):String
 	itype = ItemType.lookupItemByShort(buttonText);
 	if (itype != null) temp = itype.longName;
 	if (temp != "") {
-		temp = capitalizeFirstLetter(temp);
+		temp = Utils.capitalizeFirstLetter(temp);
 		toolTipHeader = temp;
 	}
 	
@@ -1000,95 +974,6 @@ public function hideUpDown():void {
 	oldStats.oldHunger = 0;
 }
 
-public function physicalCost(mod:Number):Number {
-	var costPercent:Number = 100;
-	if (player.findPerk(PerkLib.IronMan) >= 0) costPercent -= 50;
-	mod *= costPercent/100;
-	return mod;
-}
-
-public function spellCost(mod:Number):Number {
-	//Addiditive mods
-	var costPercent:Number = 100;
-	if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
-	if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-	
-	//Limiting it and multiplicative mods
-	if (player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
-	
-	mod *= costPercent/100;
-	
-	if (player.findPerk(PerkLib.HistoryScholar) >= 0) {
-		if (mod > 2) mod *= .8;
-	}
-	if (player.findPerk(PerkLib.BloodMage) >= 0 && mod < 5) mod = 5;
-	else if (mod < 2) mod = 2;
-	
-	mod = Math.round(mod * 100)/100;
-	return mod;
-}
-
-//Modify fatigue
-//types:
-//  0 - normal
-//	1 - magic
-//	2 - physical
-//	3 - non-bloodmage magic
-public function fatigue(mod:Number,type:Number  = 0):void {
-	//Spell reductions
-	if (type == 1) {
-		mod = spellCost(mod);
-		
-		//Blood mages use HP for spells
-		if (player.findPerk(PerkLib.BloodMage) >= 0) {
-			takeDamage(mod);
-			statScreenRefresh();
-			return;
-		}                
-	}
-	//Physical special reductions
-	if (type == 2) {
-		mod = physicalCost(mod);
-	}
-	if (type == 3) {
-		mod = spellCost(mod);
-	}
-	if (player.fatigue >= player.maxFatigue() && mod > 0) return;
-	if (player.fatigue <= 0 && mod < 0) return;
-	//Fatigue restoration buffs!
-	if (mod < 0) {
-		var multi:Number = 1;
-		
-		if (player.findPerk(PerkLib.HistorySlacker) >= 0) multi *= 1.2;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi *= 1.1;
-		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi *= 1.5;
-		
-		mod *= multi;
-	}
-	player.fatigue += mod;
-	if (mod > 0) {
-		mainView.statsView.showStatUp( 'fatigue' );
-		// fatigueUp.visible = true;
-		// fatigueDown.visible = false;
-	}
-	if (mod < 0) {
-		mainView.statsView.showStatDown( 'fatigue' );
-		// fatigueDown.visible = true;
-		// fatigueUp.visible = false;
-	}
-	dynStats("lus", 0, "resisted", false); //Force display fatigue up/down by invoking zero lust change.
-	if (player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
-	if (player.fatigue < 0) player.fatigue = 0;
-	statScreenRefresh();
-}
-//function changeFatigue
-public function changeFatigue(changeF:Number):void {
-	fatigue(changeF);
-}
-public function minLust():Number {
-	return player.minLust();
-}
-
 public function openURL(url:String):void
 {
     navigateToURL(new URLRequest(url), "_blank");
@@ -1355,9 +1240,9 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 			minLib = 50;
 		}
 	}
-	if (minLib < (minLust() * 2 / 3))
+	if (minLib < (player.minLust() * 2 / 3))
 	{
-		minLib = (minLust() * 2 / 3);
+		minLib = (player.minLust() * 2 / 3);
 	}
 	if (player.jewelryEffectId == JewelryLib.PURITY)
 	{
@@ -1390,7 +1275,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	//        player.lust=player.lib;
 	//
 	//Update to minimum lust if lust falls below it.
-	if (player.lust < minLust()) player.lust = minLust();
+	if (player.lust < player.minLust()) player.lust = player.minLust();
 	//worms moved to minLust() in Player.as.
 	if (player.lust > player.maxLust()) player.lust = player.maxLust();
 	if (player.lust < 0) player.lust = 0;
@@ -1486,7 +1371,7 @@ public function doSFWloss():Boolean {
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (player.HP <= 0) outputText("You collapse from your injuries.");
 		else outputText("You collapse from your overwhelming desires.");
-		if (inCombat) cleanupAfterCombat();
+		if (combat.inCombat) combat.cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour)
 		return true;
 	}

@@ -1913,7 +1913,7 @@ private function rideUrtaInButtAtHomeLove():void {
 		outputText("\n\n", false);
 	}
 	//(+10 fatigue!)
-	fatigue(10);
+	player.changeFatigue(10);
 	outputText("Exhausted, you drag yourself up, slowly feeling Urta and her sloshing deposit sliding out of you.  Her cock and its spooge and latex shrouded tip flops out with a loud 'schhhlurp', plopping down onto her.  The fox is completely insensate, and at a glance even her balls have shrunk from unloading so much thick cream.  You lean down and give Urta a quick kiss on her lips and a gentle squeeze on her nipple before you rise.\n\n", false);
 
 	outputText("She comes out of her stupor and murmurs, \"<i>Mmmm, that was nice,</i>\" as she stretches.  With practiced motions she slides off her condom, ties it off, and tosses it into a waste-can half filled with the things.  ", false);
@@ -5274,7 +5274,7 @@ private function urtaTakesPCOnWalkies():void {
 		outputText("\n\nUrta becomes shy at the noise, especially since she wasn’t able to get all the cum out of her fur. Noticing this, you grab her in your arms, and look deep into her eyes. She stares back, captivated, and you give her a long and passionate kiss.");
 		outputText("\n\nWith such a public display of affection – not to mention the noise you were making – there’s no doubt of the devotion you have for each other.");
 		outputText("\n\nAfter what seems like a delightful eternity, Urta pulls back and looks wistfully into your eyes. \"<i>Um… drinks tomorrow, then?</i>\" Her voice is breathy and excited. It seems she likes being shown off.");
-		fatigue(40);
+		player.changeFatigue(40);
 		player.orgasm();
 		player.slimeFeed();
 		if (player.lib < 60) dynStats("lib", 1);

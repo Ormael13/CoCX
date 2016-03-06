@@ -51,7 +51,7 @@ package classes.Scenes.Areas.Bog
 			else if (player.getEvasionRoll()) {
 				var damage2:Number = 1 + rand(10);
 				outputText("The chameleon girl leaps in your direction, rolls, and kicks at you.  You sidestep her flying charge and give her a push from below to ensure she lands face-first in the bog. ");
-				damage2 = game.doDamage(damage2, true);
+				damage2 = game.combat.doDamage(damage2, true);
 				outputText("<b>(<font color=\"#800000\">" + damage2 + "</font>)</b>");
 			}
 			//Get hit
@@ -87,7 +87,7 @@ package classes.Scenes.Areas.Bog
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe chameleon girl recoils.  \"<i>Ew, gross!</i>\" she screetches as she runs away, leaving you to recover from your defeat alone.");
-				game.cleanupAfterCombat();
+				game.combat.cleanupAfterCombat();
 			} else {
 				game.bog.chameleonGirlScene.loseToChameleonGirl();
 			}

@@ -35,7 +35,7 @@ package classes.Scenes.Areas.Mountain
 		{
 			if (flags[kFLAGS.SFW_MODE] > 0 && getGame().inCombat) { //No rape in SFW mode.
 				clearOutput();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			clearOutput();
@@ -58,7 +58,7 @@ package classes.Scenes.Areas.Mountain
 				player.orgasm();
 				dynStats("lib", 1, "sen", 1, "cor", 1);
 				player.cumMultiplier += .5;
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			//[PLAYER'S COCKS ARE BIG ENOUGH TO BE INFECTED]
 			else if (player.findStatusEffect(StatusEffects.Infested) < 0 && player.biggestCockArea() >= 40 && player.hasCock()) {
@@ -115,7 +115,7 @@ package classes.Scenes.Areas.Mountain
 					flags[kFLAGS.EVER_INFESTED] = 1;
 					if (player.cor < 25) player.cor = 25;
 				}
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
 			else if (player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody != LOWER_BODY_TYPE_NAGA) {
@@ -158,7 +158,7 @@ package classes.Scenes.Areas.Mountain
 				player.knockUpForce(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusEffectv1(StatusEffects.WormPlugged)); //Will be cleared when the WormPlugged effect ends
 				player.orgasm();
 				dynStats("lib", 1, "cor", 1);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			//[GENDERLESS OR MALE WITH DICK TOO SMALL]
 			else {
@@ -190,7 +190,7 @@ package classes.Scenes.Areas.Mountain
 				player.buttChange(monster.cockArea(0), true);
 				player.orgasm();
 				dynStats("lib", 1, "cor", 1);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 	}
