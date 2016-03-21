@@ -376,6 +376,7 @@ private function genderlessShouldraMasturbation():void {
 	player.orgasm();
 	dynStats("sen", -2);
 	shouldraSleeping((10 + rand(26)), true);
+	flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT]++;
 	inventory.takeItem(consumables.ECTOPLS, camp.returnToCampUseOneHour);
 }
 
@@ -457,6 +458,7 @@ private function nongenderlessAnalShouldraMasturbation():void {
 	player.ass.analLooseness = 5;
 	shouldraSleeping((10 + rand(26)), true);
 	outputText("\n\n", false);
+	flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT]++;
 	inventory.takeItem(consumables.ECTOPLS, camp.returnToCampUseOneHour);
 }
 
@@ -601,6 +603,7 @@ private function shouldraTongueLicksPCs():void {
 	dynStats("lib", .25, "sen", -2);
 	outputText("\n\nYou wake some time later, lying naked beside a pile of your [armor].  You're right back at camp.  The ghost girl managed to drag you back somehow - no doubt interested in keeping the location of her secret goodies safe.");
 	shouldraSleeping((10 + rand(26)), true);
+	flags[kFLAGS.SHOULDRA_TONGUE_LICKS_TIMES]++;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1352,6 +1355,7 @@ private function edwardShouldraDickHandsPartII():void {
 	outputText("\n\n\"<i>Don't go about ignoring me ever again.</i>\"  Okay, never mind.  The now stone-faced ghoul sits on top of you and gives your thumb a little squeeze... pushing some sort of liquid up and out of the top much to your horror.  \"<i>You missed a great fucking orgasm, let me tell you,</i>\" she says, being unusually bubbly - which is probably more terrifying than any other of her moods.  The ghost girl runs her roulette wheel of emotion again, giving you a cocky smirk as she phases into your body.");
 	outputText("\n\nThe dream was all too real, it turns out.\n\n(<b>Minimum Lust reduced!</b>)");
 	//Libido and Sensitivity slight increase
+	flags[kFLAGS.SHOULDRA_TIMES_NIGHT_RAPED_PC]++;
 	doNext(playerMenu);
 }
 
