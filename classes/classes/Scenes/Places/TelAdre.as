@@ -2258,7 +2258,7 @@ private function weightLifting():void {
 		statScreenRefresh();
 	}
 	//[Lift Weights] +25 fatigue!
-	fatigue(25);
+	player.changeFatigue(25);
 	//TEXTS!
 	outputText("You walk up to the weights and begin your workout.  ", false);
 	//(< 25 str)
@@ -2309,7 +2309,7 @@ private function goJogging():void {
 		statScreenRefresh();
 	}
 	//[Jogging] +30 fatigue!
-	fatigue(30);
+	player.changeFatigue(30);
 	//Text!
 	outputText("You hit the jogging track, ", false);
 	//(<25 tou)

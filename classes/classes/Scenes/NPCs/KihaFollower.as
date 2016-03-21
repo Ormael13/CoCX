@@ -222,7 +222,7 @@ private function warnKihaOfHerImpendingDemise():void {
 	//Set first round cover
 	monster.createStatusEffect(StatusEffects.MissFirstRound,0,0,0,0);
 	HPChange(100,false);
-	fatigue(-30);
+	player.changeFatigue(-30);
 	dynStats("lus", -40);
 }
 
@@ -237,7 +237,7 @@ private function letTheSpidersHaveTheirWayWithKiha():void {
 
 	outputText("Before you can answer, the drider has grabbed her own cock and shuffled into the maelstrom of sexual energy now surrounding Kiha.  You laugh and gather your belongings, and hit the road.  Maybe that'll teach the bitch for trying to fuck with YOU.", false);
 	//(Kiha's State becomes Shaken)
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Help Kiha (Z)
 private function helpKihaAgainstSpoidahs():void {
@@ -257,7 +257,7 @@ private function helpKihaAgainstSpoidahs():void {
 	startCombat(new SpiderMorphMob());
 	//st - say, 100 hp, -30 fatigue, and -40 lust - then have her cover for you for the first few rounds if you lost to her so you can blitz them or heal. -Z)
 	HPChange(100,false);
-	fatigue(-30);
+	player.changeFatigue(-30);
 	dynStats("lus", -40);
 }
 //Leave Her (Z)
@@ -269,7 +269,7 @@ private function leaveKihaToSpoidahHorde():void {
 
 	outputText("\n\nServes that bitch right.", false);
 	//(Kiha's state becomes Shaken)
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 
@@ -303,7 +303,7 @@ public function beatSpiderMob():void {
 
 	//(Kiha's State becomes Friendly)
 	flags[kFLAGS.KIHA_AFFECTION_LEVEL] = 1;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 public function loseToSpiderMob():void {
@@ -314,7 +314,7 @@ public function loseToSpiderMob():void {
 	outputText("[pg]When they've finally gone, you manage to crawl over to Kiha and ask if she's all right.  All you get is a blank stare.  You try to make her as comfortable as possible, but there's nothing much you can do for her after that.  Once she's somewhat cleaned up and you've patched up her wounds, you limp back to camp.", false);
 	//(Kiha's State becomes Friendly)
 	flags[kFLAGS.KIHA_AFFECTION_LEVEL] = 1;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Meeting Kiha - \"<i>Friendly</i>\" State (Z)
@@ -412,7 +412,7 @@ internal function winSparWithKiha():void {
 		outputText("[pg]You sigh and head back towards your stuff.", false);
 		kihaAffection(20);
 	}
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Spar with Friendly Kiha - Kiha Wins (Z)
 internal function sparWithFriendlyKihaLose():void {
@@ -433,7 +433,7 @@ internal function sparWithFriendlyKihaLose():void {
 		outputText("[pg]You dust yourself off and head back to the center of camp under the dragoness's watchful gaze.", false);
 	}
 	kihaAffection(10);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Hug Friendly/Warm Kiha (Z)
 private function hugFriendWarmKiha():void {
@@ -1842,7 +1842,7 @@ internal function pcLosesDomFight():void {
 	spriteSelect(72);
 	outputText("\"<i>Ha! You better shape up quick!  If you lose to </i>me<i>, you'll certainly lose to the demons!</i>\"  Kiha exclaims, victorious over your bruised and battered form.  The strain is too much, and you end up passing out.");
 	outputText("[pg]You awake on your bedspread, being tended to by Kiha as she rubs ointment on your bruises and wounds. \"<i>Look, I know that was just a friendly sparring match, but seriously: You can't lose like that to the Demons.  I can't think of what I'd do if my special Idiot were turned into... one of them.</i>\"  Kiha says somberly.  You're touched by her concern, but you assure her that no demon will take you alive.  She smiles and places a hand on your shoulder, but the look she gives you seems to hint that you missed her point entirely.");
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //[PC wins the fight]
 internal function pcWinsDomFight():void {
@@ -1999,7 +1999,7 @@ internal function pcWinsDomFight():void {
 	//outputText("[pg]Kiha nods, as best she can with her head pinned against the tree trunk, and then grins.  \"<i>Just the way I like it, [name]. Let's get back to camp; no doubt there are demons that need our feet up their asses.</i>\"  That sounds like a good idea.  (And maybe she can clean herself up when she gets back).");
 	outputText("[pg]Kiha nods, as best she can with her head pinned, and then she grins.  \"<i>Dominance isn't something you do once and get forever, [name].  If you want to stay on top with me, you'd better back it up with your actions.  It takes more than a few losses to make me ANYONE's bitch.</i>\"  Well, that's probably as good as you'll get out of her for now.  You suggest heading back to camp; no doubt there's some demons needing feet up their asses.  Kiha replies, \"<i>Sounds like a good idea, [master].</i>\"  There's an undercurrent of humor in her words, but she's the one who couldn't handle you in a fight.");
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 private function kihaDestroyGladesToggle():void {

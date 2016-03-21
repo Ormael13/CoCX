@@ -31,7 +31,7 @@
 				game.simpleChoices("B. Feed", game.forest.beeGirlScene.milkAndHoneyAreKindaFunny, "", null, "", null, "", null, "Leave", leaveAfterDefeating);
 			}
 			else {
-                game.finishCombat();
+                game.combat.finishCombat();
             }
 		}
 		
@@ -42,14 +42,14 @@
 			else {
 				flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++; //All wins by lust count towards the desire option, even when you leave
 			}
-			game.cleanupAfterCombat();
+			game.combat.cleanupAfterCombat();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe bee-girl goes white and backs away with a disgusted look on her face.\n\n");
-				game.cleanupAfterCombat();
+				game.combat.cleanupAfterCombat();
 			}
 			else {
 				game.forest.beeGirlScene.beeRapesYou();
@@ -112,7 +112,7 @@
 				}
 			}
 			if (player.lust >= player.maxLust())
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			else doNext(game.playerMenu);
 		}
 

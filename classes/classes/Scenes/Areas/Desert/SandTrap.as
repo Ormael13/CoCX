@@ -100,7 +100,7 @@
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe sand trap seems bemused by the insects your body houses...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.desert.sandTrapScene.sandtrapmentLoss(true);
 			}

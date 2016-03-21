@@ -66,7 +66,7 @@
 			}
 			outputText("\n");
 			if (player.lust >= player.maxLust())
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			else doNext(game.playerMenu);
 		}
 		

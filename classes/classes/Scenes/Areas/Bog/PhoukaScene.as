@@ -418,8 +418,8 @@ package classes.Scenes.Areas.Bog
 			if (newScreen) clearOutput();
 			else outputText("\n\n");
 			outputText("The lusty " + phoukaName() + " continues to pound his cock into the earth as you prepare to go, oblivious to your presence.");
-			kGAMECLASS.clearStatuses(false);
-			kGAMECLASS.awardPlayer(); //This will provide loot and return to camp, 1 hour used
+			kGAMECLASS.combat.clearStatuses(false);
+			kGAMECLASS.combat.awardPlayer(); //This will provide loot and return to camp, 1 hour used
 		}
 
 		internal function phoukaPlayerWins(hpVictory:Boolean):void
@@ -427,8 +427,8 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 			if (hpVictory) { //You win by physical damage, the phouka cheats and runs
 				outputText("The seriously injured " + phoukaName() + " stumbles backward, but before you can strike again it twists and stretches in mid-air, dropping to the ground in the form of a long black eel.  You're pretty sure you hear the eel curse at you as it dives into the mire and sinks out of view.\n\nWith your attacker gone you struggle and strain to get yourself free of the thick mass of roots and muck around your [legs].  Your lower half is soaked and you decide to head home.");
-				kGAMECLASS.clearStatuses(false);
-				kGAMECLASS.awardPlayer();  //This will provide loot and return to camp, 1 hour used
+				kGAMECLASS.combat.clearStatuses(false);
+				kGAMECLASS.combat.awardPlayer();  //This will provide loot and return to camp, 1 hour used
 			}
 			else { //You win by lust and have the chance to fuck the phouka if you’re horny
 				outputText("The " + phoukaName() + " collapses to the ground and begins to jab his cock into the peat.");
@@ -474,7 +474,7 @@ package classes.Scenes.Areas.Bog
 				outputText("Your belly begins to deflate and a stream of nearly black sludge oozes from your vagina.  You lay on the ground and wait, wondering how this birth will go.  As your belly gets flatter and flatter you begin to wonder where the baby is.\n\nThen you feel it - something is stuck inside you.  You begin to push and realize it's not stuck - it doesn't want to come out, and it's holding on to your cervix!  Your body, on the other hand, does want it out and keeps going through contraction after contraction to rid you of this little, freeloading bastard.  The black molasses makes your birth canal sticky, helping to hold the baby in place.  You soon lose track of time as the contractions keep coming.  After several minutes you are beginning to wonder if you'll ever be free of this child when you feel a tingling in your clit.\n\nDespite the pain, or perhaps because of it, your body is headed for an orgasm!  At first you try to fight it, but you soon realize there’s no point.  You’re still in enough pain that you can do nothing but lie there and wait.  Finally you cum and you feel a wash of girl-cum drip from your gaping hole.[if (hasCock = true) At the same time [eachCock] fires numerous strands of cum, coating you and the ground around you.]  Luckily all the girl-cum you produced also fills your pussy and starts to dilute the thick black molasses inside you.  After many more contractions, you feel the baby shift inside you and it finally pops free, landing on the ground between your thighs.\n\nThe " + phoukaName() + " seems to be almost full grown at birth.  He spins round and stares at you, as if it's your fault he had to leave the comfort of your womb.  Before you recover enough to do much, he spreads his wings, shakes the sludge away and flies off toward the bog.\n\nYou lay on the ground, utterly exhausted by the ordeal.  You can feel a slight burning sensation inside your pussy and a throbbing from your womb.  You’re sure that carrying that nasty looking black sludge around inside you has affected your ability to produce children.");
 				player.fertility -= 18; //At low fertility the PC just gained up to 3 fertility due to standard post-pregnancy code. So -18 is really more like -10.
 				if (player.fertility < 5) player.fertility = 5;
-				fatigue(75);
+				player.changeFatigue(75);
 				flags[kFLAGS.BIRTHS_PHOUKA]++;
 				player.orgasm();
 			}
@@ -482,12 +482,12 @@ package classes.Scenes.Areas.Bog
 				outputText("Your belly begins to deflate and a stream of thick grey sugary sludge dribbles from your vagina.  You lay on the ground and wait, wondering how this birth will go.  As your belly gets flatter and flatter you begin to wonder where the baby is.\n\nThen you feel it - something is stuck inside you.  You begin to push and realize it's not stuck - it doesn't want to come out and it's holding on to your cervix!  Your body, on the other hand, does want it out and keeps going through contraction after contraction to rid you of this little freeloading bastard.  After several minutes you are beginning to wonder if you'll ever be free of this child, when it suddenly shifts inside you and pops free, landing on the ground between your thighs.\n\nThe " + phoukaName() + " seems to be almost full grown at birth.  He spins round and stares at you, as if it's your fault he had to leave the comfort of your womb.  Before you recover enough to do much, he spreads his wings, shakes the sludge away and flies off toward the bog.\n\nYou lay on the ground, exhausted by the ordeal and wondering if carrying that nasty looking sludge around inside you has affected your ability to produce children.");
 				player.fertility -= 8; //At low fertility the PC just gained up to 3 fertility due to standard post-pregnancy code. So - 8 is really more like -5.
 				if (player.fertility < 5) player.fertility = 5;
-				fatigue(50);
+				player.changeFatigue(50);
 				flags[kFLAGS.BIRTHS_PHOUKA]++;
 			}
 			else {
 				outputText("Your belly begins to deflate and a stream of sweet smelling sugary water rushes from your vagina.  You lay on the ground and wait, hoping this birth will be relatively painless.  You only have to give one little push and you feel a tiny shape slide gently down your birth canal.  Before you're ready for it you expel a little faerie onto the ground between your legs.\n\nThe full grown faerie looks up at you and smiles.  She shakes her little pink faerie wings out until they're dry, then does a little circuit around you, looking you over.  She zips up to your face and gives you a kiss on the cheek before backing away.\n\nThe faerie girl starts to fly higher and higher, waving to you as she goes.  Finally she turns and zips off towards the forest to meet her sisters.");
-				fatigue(5);
+				player.changeFatigue(5);
 				flags[kFLAGS.BIRTHS_FAERIE]++;
 			}
 		}
@@ -635,7 +635,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nThe goat morph begins to dissolve and reform.  Soon you're looking at a tiny faerie that buzzes up in front of your face.  He says <i>“[if (hasVagina = true)Well I enjoyed that, and it looks like you did too.  Next time I catch ya I really want te try yer cunt.  Can’t wait te see yer belly all swollen up with my seed.][if (hasVagina = false)Do us both a favor - eat some eggs or drink some milk before ye come back.  Since you like being my bitch so much ye might as well have the right parts for it.]”</i> With that the " + phoukaName() + " buzzes up into the canopy and out of sight.");
 			if (postCombat) {
 				outputText("\n\nYou work to pull your [if (isNaga = true)tail][if (isNaga = false)legs] free from the cool muck before you get chilled to the bone.");
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			else {
 				outputText("\n\nYou collect your clothes and scramble to get out of the bog before anything else finds you.");
@@ -733,8 +733,8 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nYour sphincter clenches on the intruder, either trying to force it out or draw more in, even you can't say which.  You let out a sigh and put a hand on your belly, still heavy with a thick cum slurry.\n\nYou're just about to [if (isTaur = true)stand up when your partner thrusts forward][if (isTaur = false)roll off your spent partner when he thrusts upward] violently with his hips.  Caught off guard you try to steady yourself, only to feel his hands [if (isTaur = true)grip your flanks][if (isTaur = false)wrap around your waist].  The " + phoukaName() + " cums a second time, blasting another load of cum deep into your bowels.  Your stomach muscles are no match for this wave of spooge and [if (isTaur = true)you feel your heavy belly sink deeper into the bog][if (isTaur = false)you topple forward], stuffed with enough cum for anyone to assume you're pregnant with twins.  More than that you can feel each of the one-way valves in your gut give way, one after another, until a fountain of thick sugary sperm bubbles into your stomach.  If the " + phoukaName() + " had made one more deposit you probably would have tasted it.\n\nYour partner pushes on you, [if (isTaur = true)pulling his spent member from your rectum.  ][if (isTaur = false)rolling you off of him, wheezing, <i>“Air, air!”</i> ]He shrinks back to his normal size and recovers faster than you.  Before he leaves, he takes the time to pat your belly. <i>“Awful waste lad.  Go swallow an egg, a pink one.  That or suck down some o’ that succubi milk.  Then you come back here and I'll give you a real party.”</i>");
 				dynStats("cor", rand(1) + 3); //Extra two corruption for being enough of a pervert to want to fuck the phouka
 				if (postCombat) {
-					kGAMECLASS.clearStatuses(false);
-					kGAMECLASS.awardPlayer(); //This will provide loot and return to camp, 1 hour used
+					kGAMECLASS.combat.clearStatuses(false);
+					kGAMECLASS.combat.awardPlayer(); //This will provide loot and return to camp, 1 hour used
 				}
 				else doNext(camp.returnToCampUseOneHour); //Return to camp, 1 hour used
 			}
@@ -781,8 +781,8 @@ package classes.Scenes.Areas.Bog
 			outputText("  Satisfied, you march back to camp.");
 			dynStats("cor", rand(1) + 3); //Extra two corruption for being enough of a pervert to want to fuck the phouka
 			if (postCombat) {
-				kGAMECLASS.clearStatuses(false);
-				kGAMECLASS.awardPlayer();  //This will provide loot and return to camp, 1 hour used
+				kGAMECLASS.combat.clearStatuses(false);
+				kGAMECLASS.combat.awardPlayer();  //This will provide loot and return to camp, 1 hour used
 			}
 			else doNext(camp.returnToCampUseOneHour); //Return to camp, 1 hour used
 		}
@@ -870,8 +870,8 @@ package classes.Scenes.Areas.Bog
 					outputText("\n\nSatisfied for now you begin to put your clothes back on.  Maybe that " + phoukaName() + " will learn, maybe not.");
 					if (player.cor > 50) outputText("  But either way you plan to return and give all of them that lesson.");
 					if (postCombat) {
-						kGAMECLASS.clearStatuses(false);
-						kGAMECLASS.awardPlayer();  //This will provide loot and return to camp, 1 hour used
+						kGAMECLASS.combat.clearStatuses(false);
+						kGAMECLASS.combat.awardPlayer();  //This will provide loot and return to camp, 1 hour used
 					}
 					else doNext(camp.returnToCampUseOneHour); //Return to camp, 1 hour used
 			}
@@ -882,7 +882,7 @@ package classes.Scenes.Areas.Bog
 				if (phoukaForm == PHOUKA_FORM_HORSE && !player.isTaur()) outputText("wait for the throbbing pain in your pelvis to subside.  Then you ");
 				if (postCombat) {
 					outputText("pull your [if (isNaga = true)tail][if (isNaga = false)legs] free from the cool muck before you get chilled to the bone.");
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 				}
 				else {
 					outputText("collect your clothes and begin the long march out of the bog.  ");

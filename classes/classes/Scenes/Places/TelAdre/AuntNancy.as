@@ -450,7 +450,7 @@ private function auntNancyPoonPartIV():void {
 	player.orgasm();
 	dynStats("str", .3,"tou", .3);
 	//[+35 Fatigue]
-	fatigue(35);
+	player.changeFatigue(35);
 	//[+20 Relationship with Aunt Nancy, PillowTalk += 1]
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] += 20;
 	

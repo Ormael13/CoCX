@@ -34,12 +34,12 @@
 			game.outputText(text,clear);
 		}
 		protected final function combatRoundOver():void{
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
-		protected final function cleanupAfterCombat():void
+		/*protected final function combat.cleanupAfterCombat():void
 		{
-			game.cleanupAfterCombat();
-		}
+			game.combat.cleanupAfterCombat();
+		}*/
 		protected static function showStatDown(a:String):void{
 			kGAMECLASS.mainView.statsView.showStatDown(a);
 		}
@@ -50,13 +50,13 @@
 			game.doNext(eventNo);
 		}
 		protected final function combatMiss():Boolean {
-			return game.combatMiss();
+			return game.combat.combatMiss();
 		}
 		protected final function combatParry():Boolean {
-			return game.combatParry();
+			return game.combat.combatParry();
 		}
 		protected final function combatBlock(doFatigue:Boolean = false):Boolean {
-			return game.combatBlock(doFatigue);
+			return game.combat.combatBlock(doFatigue);
 		}
 		protected function get consumables():ConsumableLib{
 			return game.consumables;
@@ -640,8 +640,7 @@
 				attacks--;
 			}
 			removeStatusEffect(StatusEffects.Attacks);
-//			if (!game.combatRoundOver()) game.doNext(1);
-			game.combatRoundOver(); //The doNext here was not required
+			combatRoundOver(); //The doNext here was not required
 		}
 
 		/**
@@ -817,7 +816,7 @@
 				removeStatusEffect(StatusEffects.Constricted);
 			}
 			addStatusValue(StatusEffects.Constricted, 1, -1);
-			game.combatRoundOver();
+			combatRoundOver();
 			return false;
 		}
 
@@ -841,7 +840,7 @@
 				if (plural) game.outputText(capitalA + short + " are too busy shivering with fear to fight.", false);
 				else game.outputText(capitalA + short + " is too busy shivering with fear to fight.", false);
 			}
-			game.combatRoundOver();
+			combatRoundOver();
 			return false;
 		}
 
@@ -854,7 +853,7 @@
 			else game.outputText("Your foe is too dazed from your last hit to strike back!", false);
 			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
-			game.combatRoundOver();
+			combatRoundOver();
 			return false;
 		}
 
@@ -881,7 +880,7 @@
 		 */
 		public function defeated(hpVictory:Boolean):void
 		{
-			game.finishCombat();
+			game.combat.finishCombat();
 		}
 
 		/**
@@ -898,7 +897,7 @@
 				player.lust = 0;
 			}
 			game.inCombat = false;
-			game.clearStatuses(false);
+			game.combat.clearStatuses(false);
 			var temp:Number = rand(10) + 1;
 			if (temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.", false);
@@ -1189,7 +1188,7 @@
 				//Deal damage if still wounded.
 				else {
 					var store:Number = eMaxHP() * (3 + rand(4))/100;
-					store = game.doDamage(store);
+					store = game.combat.doDamage(store);
 					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
 				}

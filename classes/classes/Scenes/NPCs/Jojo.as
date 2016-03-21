@@ -41,7 +41,7 @@
 			}
 			
 			if (lust >= 100) {
-				doNext(game.endLustVictory);
+				doNext(game.combat.endLustVictory);
 				return;
 			}
 			else if (lust >= 85)

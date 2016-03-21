@@ -152,7 +152,7 @@ public function meanGooGirlRecruitment():void {
 	if (player.inte >= 60) {
 		outputText("\n\nYou quickly find a few pieces of wood and some strong reeds to use as rope.  It takes no more than 15 minutes to assemble the gathered components into a crude travois - one you'll have to carry.  Lifting the giant-breasted pile of sexy latex onto your construction proves to be quite the task, but you manage, barely.  Dragging her back to camp is no easier, but thanks to your quick wit, you save yourself a ton of effort.");
 		//{fatigue + 20}
-		fatigue(20);
+		player.changeFatigue(20);
 	}
 	//{Strong:}
 	else if (player.str >= 60) {
@@ -160,12 +160,12 @@ public function meanGooGirlRecruitment():void {
 		if (player.tou < 40) {
 			outputText("Halfway there, you get too tired to continue.  You may be strong, but you don't have the endurance to heft a burden like this long term.  You'll have to leave her for now and try to recapture her once she's conscious.");
 			doNext(camp.returnToCampUseOneHour);
-			fatigue(30);
+			player.changeFatigue(30);
 			return;
 		}
 		outputText("You're out of breath when you get to camp, but you made it!  It'll take awhile for you to catch your wind after all that work...  Your arms and legs are still burning from the exertion!");
 		
-		fatigue(10);
+		player.changeFatigue(10);
 	}
 	//Too weak and dumb: 
 	else {
@@ -353,19 +353,19 @@ private function niceGuysTakeLatexHome():void {
 	if (player.inte >= 60) {
 		outputText("You quickly find a few pieces of wood and some strong reeds to use as rope.  It takes no more than 15 minutes to assemble the gathered components into a crude travois - one you'll have to carry.  Lifting the giant-breasted pile of sexy latex onto your construction proves to be quite the task, but you manage, barely.  Dragging her back to camp is no easier, but thanks to your quick wit, you save yourself a ton of effort.");
 		//{fatigue + 20}
-		fatigue(20);
+		player.changeFatigue(20);
 	}
 	//{Strong:}
 	else if (player.str >= 60) {
 		outputText("You heave her up over your shoulder, straining your capable muscles to hold up those giant mammaries and remain upright.  The task is arduous, but you're strong enough for anything!  ");
 		if (player.tou < 40) {
 			outputText("Halfway there, you get too tired to continue.  You may be strong, but you don't have the endurance to heft a burden like this long term.  You'll have to leave her for now and try to find her once she's conscious.");
-			fatigue(30);
+			player.changeFatigue(30);
 			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
 		outputText("You're out of breath when you get to camp, but you made it!  It'll take awhile for you to catch your wind after all that work...  Your arms and legs are still burning from the exertion!");
-		fatigue(10);
+		player.changeFatigue(10);
 	}
 	//{Too weak and dumb:}
 	else {
@@ -1599,7 +1599,7 @@ private function malePCDomFucksLatexGoo():void {
 	if (player.cumQ() >= 1500) temp += 10;
 	if (player.cumQ() >= 2000) temp += 10;
 	gooFluid(temp);
-	fatigue(10);
+	player.changeFatigue(10);
 	gooObedience(4);
 	gooHappiness(2);
 	doNext(camp.returnToCampUseOneHour);
@@ -1658,7 +1658,7 @@ private function feedLatexySomeMilk():void {
 	if (player.lactationQ() >= 4000) temp += 10;
 	if (player.lactationQ() >= 8000) temp += 10;
 	gooFluid(temp);
-	fatigue(5);
+	player.changeFatigue(5);
 	player.orgasm();
 	dynStats("sen", 2);
 	doNext(camp.returnToCampUseOneHour);

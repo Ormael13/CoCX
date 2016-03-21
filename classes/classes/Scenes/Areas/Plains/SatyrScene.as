@@ -241,7 +241,7 @@ internal function loseToSatyr():void {
 	player.orgasm();
 	dynStats("sen", 3);
 	if (player.cor < 50) dynStats("cor", 1);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Victory Rapes
@@ -255,7 +255,7 @@ internal function defeatASatyr():void {
 	var butt:Function = null;
 	var faces:Function = null;
 	if (player.lust < 33 || flags[kFLAGS.SFW_MODE] > 0) {
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		return;
 	}
 	if (player.lust >= 33 && player.gender > 0) {
@@ -267,7 +267,7 @@ internal function defeatASatyr():void {
 	}
 	var bikiniTits:Function = null;
 	if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-	simpleChoices("FuckHisButt", butt, "Ride Face", faces, "B.Titfuck", bikiniTits, "", null, "Leave", cleanupAfterCombat);
+	simpleChoices("FuckHisButt", butt, "Ride Face", faces, "B.Titfuck", bikiniTits, "", null, "Leave", combat.cleanupAfterCombat);
 }
 //Female (Z)
 private function femaleTakesAdvantageOfSatyr():void {
@@ -300,7 +300,7 @@ private function femaleTakesAdvantageOfSatyr():void {
 	outputText("\n\nYou grind your pussy into his face one last time, then, with regal delicacy, you remove yourself from the unconscious, sex-splattered satyr.  Picking up your clothes, you redress yourself.  Once you're decent, you leave the unconscious goatman as prey for whatever creature comes to investigate the stink of cum spattered about in such copious quantities.");
 	//reduce lust
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 	
 //Male (Z)
@@ -336,7 +336,7 @@ private function malesTakeAdvantageOfSatyrs():void {
 	outputText("\n\nSated for the moment, your gaze drifts towards the satyr.  He makes no sound; indeed, when you take a better look at him, you realize he's fallen asleep, still idly shaking his ass back and forth and jerking his cum-dribbling cock.  You don't even spare him a contemptuous look as you pull your bottoms up and head back.");
 	//reduce lust
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 

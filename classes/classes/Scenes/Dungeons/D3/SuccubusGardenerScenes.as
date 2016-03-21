@@ -188,7 +188,7 @@
 			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_KILLED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
 		private function leaveHer():void
@@ -199,7 +199,7 @@
 			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_LEFT;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
 		public function surrenderToTheGardener(hpVictory:Boolean = false):void

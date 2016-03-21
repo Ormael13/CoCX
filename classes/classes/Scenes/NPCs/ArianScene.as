@@ -2980,7 +2980,7 @@ private function giveArianLactaid():void {
 		addButton(0,"Next",giveArianAnItem);
 	}
 	else { //Lizard milk! Recover some HP and fatigue.
-		fatigue(-15);
+		player.changeFatigue(-15);
 		HPChange(player.maxHP() * .2, false);
 		outputText("\n\nAfter some time, Arian begins panting, sweating as [Arian eir] body temperature goes up.  \"<i>I feel... hot.</i>\"  In an attempt to lower [Arian eir] body temperature, Arian discards [Arian eir] robes and lays down on [Arian eir] bed, fanning herself with [Arian eir] clawed hands.");
 		
@@ -3367,7 +3367,7 @@ private function treatCorruption():void {
 		
 		outputText("\n\nYou do as you are instructed, and note that, once you do feel better, you literally feel better; your thoughts are less clouded by corruption than they were before");
 		dynStats("cor", -1);
-		fatigue(20);
+		player.changeFatigue(20);
 		if (player.cor == 0) outputText(" - in fact, you're quite sure that Arian has purified you entirely");
 		outputText(".  You thank the lizan for [Arian eir] magical treatment.");
 		
@@ -3403,7 +3403,7 @@ private function imbueTalisman():void {
 	Immolation Spell: 2x Goblin Ale and 1x Sweet Gossamer. - Deals damage over time.
 	//Back is also present as an option, and returns PC to previous menu.
 	*/
-	outputText("\n\n<b>Shielding Spell:</b> Two Black Chitin and One Tough Silk - Increases defense for the duration of the battle.");
+	outputText("\n\n<b>Shielding Spell:</b> 2x Black Chitin and 1x Tough Silk - Increases defense for the duration of the battle.");
 	outputText("\n<b>Immolation Spell:</b> 2x Goblin Ale and 1x Sweet Gossamer - Deals damage over time.");
 	menu();
 	if (player.hasItem(useables.B_CHITN,2) && player.hasItem(useables.T_SSILK)) addButton(0,"Shielding",arianSpellPlace,"Shielding Spell");

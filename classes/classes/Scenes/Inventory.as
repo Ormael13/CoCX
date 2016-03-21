@@ -117,13 +117,13 @@ package classes.Scenes
 			}
 			if (getGame().inCombat && player.findStatusEffect(StatusEffects.Sealed) >= 0 && player.statusEffectv1(StatusEffects.Sealed) == 3) {
 				outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
-				getGame().enemyAI();
+				monster.doAI();
 				return;
 			}
 			outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
 			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
 			if (getGame().inCombat)
-				addButton(14, "Back", kGAMECLASS.combatMenu, false); //Player returns to the combat menu on cancel
+				addButton(14, "Back", combat.combatMenu, false); //Player returns to the combat menu on cancel
 			else addButton(14, "Back", playerMenu);
 //Gone			menuLoc = 1;
 		}
@@ -247,7 +247,7 @@ package classes.Scenes
 				}
 			}
 			if (getGame().inCombat) {
-				enemyAI();
+				monster.doAI();
 				return;
 			}
 			if (showNext)
@@ -361,21 +361,21 @@ package classes.Scenes
 				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
 			}
 			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
-/* menuLoc is no longer needed, after enemyAI game will always move to the next round			
+/* menuLoc is no longer needed, after monster.doAI game will always move to the next round			
 			else if (menuLoc == 1) {
 				menuLoc = 0;
 				if (!combatRoundOver()) {
 					outputText("\n\n");
-					enemyAI();
+					monster.doAI();
 				}
 			}
 */
 		}
 		
 		private function inventoryCombatHandler():void {
-			if (!combatRoundOver()) { //Check if the battle is over. If not then go to the enemy's action.
+			if (!combat.combatRoundOver()) { //Check if the battle is over. If not then go to the enemy's action.
 				outputText("\n\n");
-				enemyAI();
+				monster.doAI();
 			}
 		}
 		private function deleteItemPrompt(item:Useable, slotNum:int):void {

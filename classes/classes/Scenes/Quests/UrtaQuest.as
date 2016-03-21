@@ -1114,7 +1114,7 @@ public function urtaSpecials():void {
 	if (getGame().inCombat && player.findStatusEffect(StatusEffects.Sealed) >= 0 && player.statusEffectv2(StatusEffects.Sealed) == 5) {
 		clearOutput();
 		outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
-		getGame().enemyAI();
+		monster.doAI();
 		return;
 	}
 	menu();
@@ -1124,15 +1124,15 @@ public function urtaSpecials():void {
 	addButton(3, "Dirt Kick", urtaDirtKick, null, null, null, "Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 5");
 	addButton(4, "Metabolize", urtaMetabolize, null, null, null, "Convert 10% of your maximum HP into fatigue.");
 	addButton(5, "SecondWind", urtaSecondWind, null, null, null, "Regain 50% of your HP, 50 fatigue, and reduce lust by 50 once per fight.", "Second Wind");
-	addButton(14, "Back", getGame().combatMenu, false);
+	addButton(14, "Back", combat.combatMenu, false);
 }
 
 private function urtaMetabolize():void {
 	clearOutput();
 	var damage:int = player.takeDamage(Math.round(player.maxHP()/10));
 	outputText("You work your body as hard as you can, restoring your fatigue at the cost of health. (" + damage + ")\nRestored 20 fatigue!\n\n");
-	fatigue(-20);
-	kGAMECLASS.enemyAI();
+	player.changeFatigue(-20);
+	monster.doAI();
 }
 
 private function urtaSecondWind():void {
@@ -1142,15 +1142,15 @@ private function urtaSecondWind():void {
 //Gone		menuLoc = 3;
 //		doNext(getGame().combatMenu);
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
 	monster.createStatusEffect(StatusEffects.UrtaSecondWinded,0,0,0,0);
 	HPChange(Math.round(player.maxHP()/2),false);
-	fatigue(-50);
+	player.changeFatigue(-50);
 	dynStats("lus", -50);
 	outputText("Closing your eyes for a moment, you focus all of your willpower on pushing yourself to your absolute limits, forcing your lusts down and drawing on reserves of energy you didn't know you had!\n\n");
-	kGAMECLASS.enemyAI();
+	monster.doAI();
 }
 
 //Combo: 3x attack, higher miss chance, guaranteed hit vs blind
@@ -1162,10 +1162,10 @@ private function urtaComboAttack():void {
 //Gone			menuLoc = 3;
 //			doNext(getGame().combatMenu);
 			menu();
-			addButton(0, "Next", kGAMECLASS.combatMenu, false);
+			addButton(0, "Next", combat.combatMenu, false);
 			return;
 		}
-		fatigue(25);
+		player.changeFatigue(25);
 	}
 	if (player.findStatusEffect(StatusEffects.Attacks) < 0)
 		player.createStatusEffect(StatusEffects.Attacks,3,0,0,0);
@@ -1194,7 +1194,7 @@ private function urtaComboAttack():void {
 		}
 		else {
 			outputText("\n", false);
-			kGAMECLASS.enemyAI();
+			monster.doAI();
 			return;
 		}
 	}
@@ -1243,7 +1243,7 @@ private function urtaComboAttack():void {
 
 	if (damage > 0) {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		damage = kGAMECLASS.doDamage(damage);
+		damage = combat.doDamage(damage);
 	}
 	if (damage <= 0) {
 		damage = 0;
@@ -1268,11 +1268,11 @@ private function urtaComboAttack():void {
 		}
 		trace("DONE ATTACK");
 		outputText("\n", false);
-		kGAMECLASS.enemyAI();
+		monster.doAI();
 	}
 	else {
-		if (monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
-		else doNext(kGAMECLASS.endLustVictory);
+		if (monster.HP <= 0) doNext(combat.endHpVictory);
+		else doNext(combat.endLustVictory);
 	}
 }
 
@@ -1284,10 +1284,10 @@ private function urtaDirtKick():void {
 //Gone		menuLoc = 3;
 //		doNext(getGame().combatMenu);
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
-	fatigue(5);
+	player.changeFatigue(5);
 	//Blind
 	if (player.findStatusEffect(StatusEffects.Blind) >= 0) {
 		outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
@@ -1296,7 +1296,7 @@ private function urtaDirtKick():void {
 	//Dodged!
 	if (rand(20) + 1 + monster.spe/20 > 15 + player.spe/20) {
 		outputText(monster.mf("He","She") + " manages to shield " + monster.mf("his","her") + " eyes.  Damn!\n\n");
-		kGAMECLASS.enemyAI();
+		monster.doAI();
 		return;
 	}
 	else if (monster.findStatusEffect(StatusEffects.Blind) >= 0) {
@@ -1306,7 +1306,7 @@ private function urtaDirtKick():void {
 		outputText(monster.mf("He","She") + "'s blinded!\n\n");
 		monster.createStatusEffect(StatusEffects.Blind,2 + rand(3),0,0,0);
 	}
-	kGAMECLASS.enemyAI();
+	monster.doAI();
 }
 
 //SideWinder: 70% damage + stun chance
@@ -1317,10 +1317,10 @@ private function urtaSidewinder():void {
 //Gone		menuLoc = 3;
 //		doNext(getGame().combatMenu);
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
-	fatigue(10);
+	player.changeFatigue(10);
 	//Blind
 	if (player.findStatusEffect(StatusEffects.Blind) >= 0) {
 		outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
@@ -1333,7 +1333,7 @@ private function urtaSidewinder():void {
 		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
 		outputText("\n\n", false);
-		kGAMECLASS.enemyAI();
+		monster.doAI();
 		return;
 	}
 	//Determine damage
@@ -1383,7 +1383,7 @@ private function urtaSidewinder():void {
 
 	if (damage > 0) {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		damage = kGAMECLASS.doDamage(damage);
+		damage = combat.doDamage(damage);
 	}
 	if (damage <= 0) {
 		damage = 0;
@@ -1411,15 +1411,15 @@ private function urtaSidewinder():void {
 	//Kick back to main if no damage occured!
 	if (monster.HP >= 1 && monster.lust <= 99) {
 		if (player.findStatusEffect(StatusEffects.FirstAttack) >= 0) {
-			kGAMECLASS.attack();
+			combat.attack();
 			return;
 		}
 		outputText("\n", false);
-		kGAMECLASS.enemyAI();
+		monster.doAI();
 	}
 	else {
-		if (monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
-		else doNext(kGAMECLASS.endLustVictory);
+		if (monster.HP <= 0) doNext(combat.endHpVictory);
+		else doNext(combat.endLustVictory);
 	}
 }
 
@@ -1432,13 +1432,13 @@ private function urtaVaultAttack():void {
 //Gone		menuLoc = 3;
 //		doNext(getGame().combatMenu);
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
-	fatigue(20);
+	player.changeFatigue(20);
 	if (player.findStatusEffect(StatusEffects.Sealed) >= 0 && player.statusEffectv2(StatusEffects.Sealed) == 0) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The seals have made normal attack impossible!  Maybe you could try something else?\n\n", false);
-		kGAMECLASS.enemyAI();
+		monster.doAI();
 		return;
 	}
 	//Blind
@@ -1454,11 +1454,11 @@ private function urtaVaultAttack():void {
 		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
 		outputText("\n", false);
 		if (player.findStatusEffect(StatusEffects.FirstAttack) >= 0) {
-			kGAMECLASS.attack();
+			combat.attack();
 			return;
 		}
 		else outputText("\n", false);
-		kGAMECLASS.enemyAI();
+		monster.doAI();
 		return;
 	}
 	//Determine damage
@@ -1508,7 +1508,7 @@ private function urtaVaultAttack():void {
 
 	if (damage > 0) {
 		if (player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		damage = kGAMECLASS.doDamage(damage);
+		damage = combat.doDamage(damage);
 	}
 	if (damage <= 0) {
 		damage = 0;
@@ -1527,15 +1527,15 @@ private function urtaVaultAttack():void {
 	//Kick back to main if no damage occured!
 	if (monster.HP >= 1 && monster.lust <= 99) {
 		if (player.findStatusEffect(StatusEffects.FirstAttack) >= 0) {
-			kGAMECLASS.attack();
+			combat.attack();
 			return;
 		}
 		outputText("\n", false);
-		kGAMECLASS.enemyAI();
+		monster.doAI();
 	}
 	else {
-		if (monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);
-		else doNext(kGAMECLASS.endLustVictory);
+		if (monster.HP <= 0) doNext(combat.endHpVictory);
+		else doNext(combat.endLustVictory);
 	}
 }
 
@@ -1564,7 +1564,7 @@ public function nagaPleaseNagaStoleMyDick():void {
 	outputText("\n\n\"<i>You invade my territory... ssstep on my tail... and have the gall to tell me you're not going to make up for it!</i>\"  He hisses ominously.  \"<i>Hey, it was an acci-</i>\"  \"<i>Worthlesss female!  You are mine!</i>\"  He charges at you!");
 
 	outputText("\n\n<b>It's a fight!</b>");
-	kGAMECLASS.clearStatuses(false);
+	kGAMECLASS.combat.clearStatuses(false);
 	startCombat(new Sirius());
 }
 
@@ -1781,7 +1781,7 @@ private function gnollAlphaBitchIntro():void {
 
 	outputText("\n\nHow wrong you are.  A spear smacks into the ground, the tip exploding into some sticky, restraining substance by your foot.  A high pitched war-cry chases the missile, barely giving you the warning you need to avoid the onrushing gnoll!  This one doesn't quite look like what you'd expect from their race, but she's moving too fast to really dwell on it.");
 	outputText("\n\n<b>It's a fight!</b>");
-	kGAMECLASS.clearStatuses(false);
+	kGAMECLASS.combat.clearStatuses(false);
 	startCombat(new GnollSpearThrower());
 	monster.bonusHP = 350;
 	monster.short = "alpha gnoll";
@@ -2098,7 +2098,7 @@ private function urtaSleepsArmored():void {
 	outputText("\n\nA quick and messy fap in the morning takes care of the tension that built up overnight.  The ground happily drinks away the evidence of your lust.");
 	//{Recover less HP/fatigue or something}
 	HPChange(.5 * player.maxHP(),false);
-	fatigue(-50);
+	player.changeFatigue(-50);
 	player.orgasm();
 	menu();
 	addButton(0,"Next",introSuccubiAndMinotaur);
@@ -2109,7 +2109,7 @@ private function urtaSleepsNaked():void {
 	clearOutput();
 	outputText("You bed down for the night, languidly removing your armor and stretching in the pale moonlight.  The cool air feels wonderful on your skin, particularly after being bound up in that restricting armor all day.  You yawn and wrap yourself up in a blanket, swifly falling asleep in the soft grasses at the edges of the plains, comforted by the gentle hooting of the owls in the woods to the west.");
 	HPChange(player.maxHP(),false);
-	fatigue(-100);
+	player.changeFatigue(-100);
 	dynStats("lus", 10);
 	menu();
 	addButton(0,"Next",urtaGetsTentaRaped);
@@ -2221,7 +2221,7 @@ private function introSuccubiAndMinotaur():void {
 	outputText("\n\nThe minotaur lord thunders towards you, picking up the loose chain to use a weapon.  It's a fight!");
 
 	//{start fight}
-	kGAMECLASS.clearStatuses(false);
+	kGAMECLASS.combat.clearStatuses(false);
 	startCombat(new MinotaurLord());
 }
 
@@ -2488,7 +2488,7 @@ public function beatMinoLordOnToSuccubi():void {
 	outputText("\n\n\"<i>We'll see how your tune changes when you're licking my heels and begging for a drop of my milk!</i>\"  She snaps her whip angrily.");
 
 	outputText("\n\n<b>It's a fight!</b>");
-	kGAMECLASS.clearStatuses(false);
+	kGAMECLASS.combat.clearStatuses(false);
 	player.setWeapon(weapons.URTAHLB);
 	//player.weapon = weapons.URTAHLB;
 	startCombat(new MilkySuccubus(),true);

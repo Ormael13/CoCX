@@ -271,7 +271,7 @@ public function sandWitchGetsGhostly():void {
 	}
 	shouldraSleeping(10,true);
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Follower Shouldra - Masturbation Scenes

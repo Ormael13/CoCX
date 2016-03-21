@@ -203,7 +203,7 @@ package classes.Scenes.Dungeons
 				kGAMECLASS.inDungeon = false;
 				player.orgasm();
 				dynStats("lib", 1, "sen", -1);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			//[Bad end for small cocks]
 			outputText("\n\nYou spend the rest of your life being a bitch to the sand witches.  Kept naked and hard all the time, you're chained-up like an animal in the chamber with your hands tied behind your back, making sure you don't play with yourself.  The witches do mess with you from time to time, but mostly they just let you drown in your lust.  Many nights you yearn to feel the touch of your mistresses. You want them to humiliate you if it means they'll pleasure your little cock.  Sometimes, when a group of witches walk by, you try to look as wanting as possible.  They just walk by, saying how desperate and sad you look, leave you alone with that raging hard-on.");
@@ -295,7 +295,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.inDungeon = false;
 			player.orgasm();
 			dynStats("lib", 1, "sen", -1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//[Sand-witch mob Bad end for Females]
@@ -444,7 +444,7 @@ package classes.Scenes.Dungeons
 				if (player.hasVagina()) addButton(1,"Forced Lick",forceCunnilingusRimjobClitAndNipple);
 			}
 			//Present PC with Leave and Orgy options
-			addButton(14,"Leave",cleanupAfterCombat);
+			addButton(14,"Leave", combat.cleanupAfterCombat);
 		}
 
 		//Dicked Win Sex
@@ -527,7 +527,7 @@ package classes.Scenes.Dungeons
 			}
 			player.orgasm();
 			dynStats("sen", -1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 			
 		//*Sapphic Win Sex
@@ -586,7 +586,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nAfter that morale boost, you climb out of the writhing orgy of fem-flesh and dust yourself off, ready to explore further inside this den of inequity.");
 			player.orgasm();
 			dynStats("sen", -1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function volunteerConfirmation():void {
@@ -938,7 +938,7 @@ package classes.Scenes.Dungeons
 				player.orgasm();
 				dynStats("sen", 5);
 				if (player.cumQ() < 60000) player.cumMultiplier += 2;
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 
@@ -975,7 +975,7 @@ package classes.Scenes.Dungeons
 			if (player.ballSize < 7) player.ballSize++;
 			player.orgasm();
 			dynStats("lib", 1, "sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//Avoid The Too Big Loss Facial
@@ -995,7 +995,7 @@ package classes.Scenes.Dungeons
 			if (player.ballSize > 5) player.ballSize -= Math.round(player.ballSize * 0.333);
 			player.cumMultiplier = Math.round(player.cumMultiplier * .75);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		//TDM's generic loss to cum witch scene
 		//requires that the PC have a dick that can fit inside the cum witch's vagina.  The scene can be used with herms.
@@ -1061,7 +1061,7 @@ package classes.Scenes.Dungeons
 			if (player.cumQ() >= 200) dynStats("str", -1);
 			if (player.cumQ() >= 3000) dynStats("str", -1);
 			//Usual loss text+gem loss.
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -1080,7 +1080,7 @@ package classes.Scenes.Dungeons
 				else if (player.hasVagina()) {
 					savinMakesAwesomeFemdom();
 				}
-				else cleanupAfterCombat();
+				else combat.cleanupAfterCombat();
 			}
 		}
 
@@ -1106,7 +1106,7 @@ package classes.Scenes.Dungeons
 			
 			if (getGame().inCombat) {
 				if (monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
-				else addButton(14,"Leave",cleanupAfterCombat);
+				else addButton(14,"Leave", combat.cleanupAfterCombat);
 			}
 			else addButton(14,"Back",playerMenu);
 		}
@@ -1115,7 +1115,7 @@ package classes.Scenes.Dungeons
 		public function declineSandWitch():void {
 			clearOutput();
 			outputText("Dusting yourself off, you lower your [weapon] and leave the cum witch to recover from the humiliation of losing to you.  The haunted, hungry look in her eyes leaves little doubt that she'll challenge you again or that she still wants to fuck you.  For now, she slips down into her own puddled cum, idly touching herself.");
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			else doNext(playerMenu);
 		}
 
@@ -1208,11 +1208,11 @@ package classes.Scenes.Dungeons
 				player.orgasm();
 			}
 			if (kGAMECLASS.inDungeon) {
-				if (getGame().inCombat) cleanupAfterCombat();
+				if (getGame().inCombat) combat.cleanupAfterCombat();
 				else doNext(playerMenu);
 			}
 			else { 
-				if (getGame().inCombat) cleanupAfterCombat();
+				if (getGame().inCombat) combat.cleanupAfterCombat();
 				else doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -1251,11 +1251,11 @@ package classes.Scenes.Dungeons
 			outputText("\n\nExhausted at last, you pat your " + player.cockDescript(x) + " affectionately.  You'd wipe it off on the witch's hair, if it wasn't messier than the " + player.skin() + " you plan to clean.  She begins to lick her fingers and clean the stuff off her face.  You just laugh, and get dressed.  There's still much to do.");
 			player.orgasm();
 			if (kGAMECLASS.inDungeon) {
-				if (getGame().inCombat) cleanupAfterCombat();
+				if (getGame().inCombat) combat.cleanupAfterCombat();
 				else doNext(playerMenu);
 			}
 			else { 
-				if (getGame().inCombat) cleanupAfterCombat();
+				if (getGame().inCombat) combat.cleanupAfterCombat();
 				else doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -1290,11 +1290,11 @@ package classes.Scenes.Dungeons
 			player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 			player.orgasm();
 			if (kGAMECLASS.inDungeon) {
-				if (getGame().inCombat) cleanupAfterCombat();
+				if (getGame().inCombat) combat.cleanupAfterCombat();
 				else doNext(playerMenu);
 			}
 			else { 
-				if (getGame().inCombat) cleanupAfterCombat();
+				if (getGame().inCombat) combat.cleanupAfterCombat();
 				else doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -1330,11 +1330,11 @@ package classes.Scenes.Dungeons
 			
 			player.orgasm();
 			if (kGAMECLASS.inDungeon) {
-				if (getGame().inCombat) cleanupAfterCombat();
+				if (getGame().inCombat) combat.cleanupAfterCombat();
 				else doNext(playerMenu);
 			}
 			else { 
-				if (getGame().inCombat) cleanupAfterCombat();
+				if (getGame().inCombat) combat.cleanupAfterCombat();
 				else doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -1400,7 +1400,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nSilently, you nod, and collapse atop her, head buried in her milk-laden chest as you pass out from sexual exhaustion.");
 			player.orgasm();
 			dynStats("sen", 2);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//knock up hurrrr
 			player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 		}
@@ -1418,7 +1418,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nSilently, you nod, and collapse atop her, head buried in her milk-laden chest as you pass out from sexual exhaustion.");
 			player.orgasm();
 			dynStats("sen", 2);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//knock up hurrrr
 			player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 		}
@@ -2348,7 +2348,7 @@ package classes.Scenes.Dungeons
 			if (player.HP < 1) outputText("in exhaustion");
 			else outputText("with lust");
 			outputText(", the Sand Mother sinks back into her throne with sweat and milk staining her silky robes.  She groans softly, the milk-stains slowly spreading as you consider your options.  This woman dared to stand against you.  What do you do?");
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			//[Fuck Her Cunt] [ScissorAnDrink] [Talk Her Down]
 			menu();
 			addButton(0,"TalkHerDown",talkDownTheMother, null, null, null, "Talk the Sand Mother down. Convince her that you're not a demon.", "Talk Her Down");
@@ -2442,7 +2442,7 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			dynStats("cor", 1);
 			if (!getGame().inCombat) doNext(playerMenu);
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 		//*Fuck Her Cunt
 		//>Sets to resisting with options for repeat rapes.
@@ -2517,7 +2517,7 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			dynStats("cor", 1);
 			if (!getGame().inCombat) doNext(playerMenu);
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 		//*ScissorAnDrink
@@ -2567,7 +2567,7 @@ package classes.Scenes.Dungeons
 			player.orgasm();
 			dynStats("cor", 1);
 			if (!getGame().inCombat) doNext(playerMenu);
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 			
 		//*Lose Male Loss
@@ -3769,7 +3769,7 @@ package classes.Scenes.Dungeons
 			outputText("  You could probably masturbate in the tub if you wanted to, or maybe pull the dusky milk-maid in for company....  What do you do?");
 			//{If can masturbate [Drink & Masturbate] [Milk Girl] [Relax]}
 			//{otherwise [next] to relaxing}
-			fatigue(-10);
+			player.changeFatigue(-10);
 			menu();
 			addButton(0,"Next",finishMilkBath);
 			if (player.gender > 0) addButton(1,"DrinkNFap",drinkNFap, null, null, null, "Drink some milk and masturbate.", "Drink & Masturbate");
@@ -3782,7 +3782,7 @@ package classes.Scenes.Dungeons
 			outputText("You sit in the tub for a while, letting the fragrant fluids soak into your " + player.skinFurScales() + ".  Yet, you have work to do, and eventually, you tire of relaxing in the sand witches' endless white bounty.  You pull out the tub's plug and climb out, finding a towel on the wall.  Thankfully, the milk doesn't seem to leave behind any residue, and you feel clean and refreshed, if a bit horny.");
 			//(+Lust, -Fatigue)
 			dynStats("lus", 10);
-			fatigue(-50);
+			player.changeFatigue(-50);
 			doNext(playerMenu);
 		}
 
@@ -3833,7 +3833,7 @@ package classes.Scenes.Dungeons
 			outputText("You allow the girl to continue for a long, long while until your entire body feels deeply refreshed, her milk having soaked into your body and making you feel fresh and revitalized. You start to thank the milk girl for the pleasurable company, but when you open your mouth, she slips into your arms and presses her lips to yours.  Chuckling to yourself, you hold the girl as tight against yourself as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before turning back to the task at hand.");
 			//[+Lust, +HP, -Fatigue]
 			HPChange(player.maxHP()*.33,false);
-			fatigue(-20);
+			player.changeFatigue(-20);
 			doNext(playerMenu);
 		}
 
@@ -3860,7 +3860,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYour entire body feels deeply refreshed, her milk having soaked into your body and making you feel fresh and revitalized, and every muscle seems to have relaxed thanks to your blissful coitus.  You start to thank the milk girl for the pleasurable company, but when you open your mouth, she presses her lips to yours for a long, tongue-filled kiss.  Chuckling to yourself, you hold the girl as tightly as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before turning back to the task at hand.");
 			//[+Lust, +HP, -Fatigue]
 			player.orgasm();
-			fatigue(-15);
+			player.changeFatigue(-15);
 			doNext(playerMenu);
 		}
 
@@ -3884,7 +3884,7 @@ package classes.Scenes.Dungeons
 			//[+Lust, +HP, -Fatigue]
 			player.orgasm();
 			doNext(playerMenu);
-			fatigue(-15);
+			player.changeFatigue(-15);
 			doNext(playerMenu);
 		}
 			
@@ -3931,7 +3931,7 @@ package classes.Scenes.Dungeons
 			}
 			outputText("\n\nA drawn out, low coo of contentment emanates from the other girl as you separate from her, and she bashfully whispers, \"<i>Thank you,</i>\" as she drags her gigantic tits over the puddly, milk-slicked floor.  Smirking and sexually sated, you pop the drain in the tub and stand there while the sex-scented lactic bathwater runs out the drain.  A quick toweling off later, and you're ready to go, feeling slightly refreshed and fairly sated.  It does take you a little longer to get your [armor] equally dry and back in place, but you manage.");
 			
-			fatigue(-15);
+			player.changeFatigue(-15);
 			player.orgasm();
 			dynStats("sen", -3);
 			doNext(playerMenu);
@@ -4035,7 +4035,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("\n\nYou soon find your way to the hidden caves of the Sand Witches, where you present your new daughter to the nursery.  The sand witches there aren't too happy about the idea of looking after her themselves, insisting you should stay here with them and rear her yourself, but you are insistent that you cannot stay here and it's not safe to keep your daughter with you.  Finally, they give in and start fussing over your daughter, giving you the opportunity to quietly slip out and head back home.\n");
 			if (prison.inPrison) outputText("\n\nWith your daughter safely delivered to the cave of the Sand Witches, you return to the prison.");
-			fatigue(40);
+			player.changeFatigue(40);
 		}
 		
 		//ROOMS

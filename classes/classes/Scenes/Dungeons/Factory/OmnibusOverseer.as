@@ -18,7 +18,7 @@ package classes.Scenes.Dungeons.Factory
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to care...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				factory.doLossOmnibus();
 			}
@@ -33,7 +33,7 @@ package classes.Scenes.Dungeons.Factory
 			else {
 				createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
 			}
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 		
 		private function milkAttack():void {
@@ -62,7 +62,7 @@ package classes.Scenes.Dungeons.Factory
 				game.dynStats("lus", 7 + player.sens / 20);
 				if (player.biggestLactation() > 1) outputText("Milk dribbles from your " + player.allBreastsDescript() + " in sympathy.");
 			}
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 		
 		public function OmnibusOverseer()

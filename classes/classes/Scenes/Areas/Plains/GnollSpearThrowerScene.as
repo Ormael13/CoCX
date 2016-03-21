@@ -151,7 +151,7 @@ package classes.Scenes.Areas.Plains
 			outputText("  The last thing you hear before blackness overtakes you is the barking laugh of the hyena as she leaves her newest conquest to sleep in the fields of grass.", false);
 			player.orgasm();
 			dynStats("sen", 2);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function hyenaVictory():void
@@ -167,9 +167,9 @@ package classes.Scenes.Areas.Plains
 				menu();
 				if (player.hasCock()) addButton(0, "Get BJ", hyenaVictoryRapeFellatio, null, null, null, "Make the gnoll suck you off.", "Get Blowjob");
 				if (player.hasVagina()) addButton(1, "Get Licked", victoryRapeHyenaCunnilingus, null, null, null, "Make the gnoll lick your pussy.");
-				addButton(4, "Leave", cleanupAfterCombat);
+				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
-			else doNext(cleanupAfterCombat);
+			else doNext(combat.cleanupAfterCombat);
 		}
 
 //<Hyena Defeat - Fellatio>
@@ -239,7 +239,7 @@ package classes.Scenes.Areas.Plains
 			}
 			outputText("The world goes gray and fuzzy as your lose yourself in the afterglow of the powerful orgasm.  When you last sit up, dizzy, you find that the hyena has disappeared.  You find your " + player.armorName + " neatly folded next to you, but absolutely coated in the juices of the departed amazon.  Next to this musky pile is a small bag containing her gift to you.", false);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //<Hyena Defeat – Cunnilingus>
@@ -271,7 +271,7 @@ package classes.Scenes.Areas.Plains
 
 			outputText("When you awake some time later, still heady with pleasure, you find your " + player.armorName + " piled neatly next to you, along with what appears to be a thank you gift from the now-absent gnoll.  The memory of the amazon's incredible strength and lithe form brings a smile to your lips as you prepare to leave.", false);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

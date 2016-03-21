@@ -81,7 +81,7 @@ package classes.Scenes.Dungeons.DesertCave
 						outputText("  A small set of stones settle on your [balls].");
 						bonus++;
 					}
-					outputText("  " + game.num2Text(player.totalNipples()) + " crawl up to your chest and over your top " + player.nippleDescript(0) + "s");
+					outputText("  " + num2Text(player.totalNipples()) + " crawl up to your chest and over your top " + player.nippleDescript(0) + "s");
 					if (player.bRows() > 1) {
 						if (player.bRows() == 2) outputText(" and");
 						else outputText(",");

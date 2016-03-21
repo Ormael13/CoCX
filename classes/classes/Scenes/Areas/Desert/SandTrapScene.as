@@ -127,7 +127,7 @@ private function startSandTarpFight():void {
 public function sandtrapmentLoss(clear:Boolean = false):void {
 	if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
 		clearOutput();
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		return;
 	}
 	if (flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
@@ -178,9 +178,9 @@ internal function pcBeatsATrap():void {
 		outputText("\n\nBefore you go, you take in the helpless body of your would-be ambusher.  What do you do?");
 		
 		choices("Naga3Some", nagaThreeSome, "UseYourCock", putYourDickInIt, "RideVaginal", rideDatSantTrap, "Handjob", useSandTarpsHand, "", null,
-			"", null, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+			"", null, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", combat.cleanupAfterCombat);
 	}
-	else cleanupAfterCombat();
+	else combat.cleanupAfterCombat();
 }
 
 //Male/Herm loss (Z)
@@ -229,7 +229,7 @@ private function dickwieldersLoseToSandTarps():void {
 	dynStats("lib", 1);
 	player.slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Female loss (Z)
@@ -263,7 +263,7 @@ private function chicksLoseToSandTarp():void {
 	dynStats("lib", 1);
 	player.slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Unsexed (Z)
@@ -298,7 +298,7 @@ private function genderlessLoss():void {
 	dynStats("lib", 1);
 	player.slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 private function sandTrapPregChance():void {
@@ -458,7 +458,7 @@ private function useSandTarpsHands():void {
 	outputText("\n\n\"<i>Not today, I think,</i>\" you say over your shoulder, as you clamber out of its pit.  \"<i>I think you'll have to try a bit harder if you want to get what you want from this lion.</i>\"  Your smile broadens as a deeply frustrated moan reaches your ears from behind you...");
 	player.orgasm();
 	dynStats("sen", -1);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 
@@ -487,7 +487,7 @@ private function rideDatSandTarpLikeIts1999():void {
 	outputText("\n\nIt takes the creature several moments to gather its wits.  \"<i>Th-thank you, lion.</i>\"  Glowing with satisfaction, you begin the climb out of your conquest's hole and back towards camp.");
 	player.orgasm();
 	dynStats("sen", -1);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //\"<i>Vagina</i>\" (Z)
 private function stickWangInSandgina():void {
@@ -529,7 +529,7 @@ private function stickWangInSandgina():void {
 	outputText("\n\n\"<i>Thank you for your seed, lion,</i>\" its sleepy words reach you as you pull yourself clear of the hollow and step out towards camp.  \"<i>Perhaps next time we meet I will return the favor, hmm?</i>\"  In your wearily tranquil fug you can't tell if it intends this as an invitation or a threat.");
 	player.orgasm();
 	dynStats("sen", -1);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Naga Threesome (Z)
@@ -592,7 +592,7 @@ private function nagaThreesomeWithSandTrap():void {
 	outputText("\n\n\"<i>That was wonderful,</i>\" she whispers as she slowly releases you and begins to trail off into the shimmering heat.  \"<i>Everything is so much more fun when you do it with two.</i>\"");
 	outputText("\n\nYou definitely think visiting the desert more often is a good idea.");
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Sandtrap Bad End

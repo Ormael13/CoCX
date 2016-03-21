@@ -47,11 +47,11 @@ package classes.Scenes.Areas.Forest
 						buttFuck = rapeAkbal;
 					outputText("\n\nDo you rape him?", false);
 					//Rape / Don't Rape
-					kGAMECLASS.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+					kGAMECLASS.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, "Leave", combat.cleanupAfterCombat);
 					return;
 				}
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function akbalWon(hpVictory:Boolean,pcCameWorms:Boolean):void{
@@ -129,7 +129,7 @@ package classes.Scenes.Areas.Forest
 			//END CENTAUR STUFF
 			player.orgasm();
 			dynStats("cor+",1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		//Standard rapes - buttfucks and oral
@@ -211,7 +211,7 @@ package classes.Scenes.Areas.Forest
 				}
 				player.orgasm();
 				dynStats("cor", 1);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 					//END NAGA STUFF
 			}
 			//Centaur RAPPUUUUU
@@ -299,7 +299,7 @@ package classes.Scenes.Areas.Forest
 				}
 				player.orgasm();
 				dynStats("cor", 1);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 					//END CENTAUR STUFF
 			}
@@ -358,7 +358,7 @@ package classes.Scenes.Areas.Forest
 			}
 			player.orgasm();
 			dynStats("cor", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		private function girlsRapeAkbal():void
@@ -587,7 +587,7 @@ package classes.Scenes.Areas.Forest
 				//Preggers chance!
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		private function loseToAckballllllz():void

@@ -149,7 +149,7 @@
 			player.obey = 10;
 			player.esteem = 50;
 			player.will = 80;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) kGAMECLASS.notes = "No Notes Available.";
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) getGame().saves.notes = "No Notes Available.";
 			player.lust = 15;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];

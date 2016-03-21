@@ -590,7 +590,7 @@ private function mindGargoyleRitual():void {
 	outputText("\n\nYou do so, taking a long draught of the holy water.  By the time you've set the bowl down, you feel light-headed, as if a fog has receded from your mind.  You gasp happily, able to think more clearly than you have in days.  You thank " + flags[kFLAGS.GAR_NAME] + ", give her a pat on the head, and head back to camp with a skip in your step.");
 	dynStats("lus", -10, "cor", -.5);
 	//player.takeDamage(Math.round(player.maxHP()/2));
-	fatigue(50);
+	player.changeFatigue(50);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -632,7 +632,7 @@ private function banishmentGargoyleRitual():void {
 	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) player.removeStatusEffect(StatusEffects.Exgartuan);
 	else player.removeStatusEffect(StatusEffects.Infested);
 	player.takeDamage(Math.round(player.maxHP()/3));
-	fatigue(10);
+	player.changeFatigue(10);
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
 	addButton(0,"Nothing",dontFreakOutAfterBanishment);
 	addButton(1,"Cuddle",cuddleForBanishments);
@@ -742,7 +742,7 @@ private function mindRitualPervy():void {
 	outputText("\n\nScreaming, " + flags[kFLAGS.GAR_NAME] + " arches her back and thrusts out her bat-wings to their full expanse, clamping down on your tongue as she cums.  You slow your pace, giving her a last few licks as she pants, gasps, and moans, slowly coming down from an orgasmic high.  She collapses backwards, clutching her chest and staring into the rafters.  Chuckling, you stand and give her a pleased pat on the inner thigh, letting her know she did a good job for you.  You leave her smiling atop the altar, slowly getting her breath under control.");
 	//(Return PC to camp, advance time 1 hour)
 	dynStats("int", .5, "lus", -10, "cor", -.5);
-	fatigue(50);
+	player.changeFatigue(50);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -796,7 +796,7 @@ private function banishPervRitual():void {
 	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0) player.removeStatusEffect(StatusEffects.Exgartuan);
 	else player.removeStatusEffect(StatusEffects.Infested);
 	player.takeDamage(Math.round(player.maxHP()/3));
-	fatigue(10);
+	player.changeFatigue(10);
 	gargoyleConfidence(2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1065,7 +1065,7 @@ private function encourageGargoyleWaifuToDoSomething():void {
 	
 	outputText("\n\nWithin the hour, the two of you have made a sizable dent in the debris of the Cathedral, and " + flags[kFLAGS.GAR_NAME] + " has even managed to hang one of the candelabras back up in the rafters.  Exhausted, you say goodbye to the happy little gargoyle and head on back to camp.");
 	//(Return PC to camp, advance time 1 hour, +10 fatigue.
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 

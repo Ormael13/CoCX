@@ -61,7 +61,7 @@
 			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_KILLED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
 		private function letHerGo():void
@@ -71,7 +71,7 @@
 			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_RELEASED;
 
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 
 		private function maleFuckHer():void
@@ -119,7 +119,7 @@
 			player.orgasm();
 			dynStats("cor+", 5);
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight)
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight)
 		}
 
 		private const HORZGOG:int = 0;
@@ -248,7 +248,7 @@
 			dynStats("cor+", 5);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			menu();
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 		
 		public function inSovietCoCPonyRidesYou(hpVictory:Boolean, pcCameWorms:Boolean):void

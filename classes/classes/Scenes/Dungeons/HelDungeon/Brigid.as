@@ -12,7 +12,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			var damage:Number = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if (damage < 30) damage = 30;
 			damage = player.takeDamage(damage, true);
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 
 		//Attack Two: SHIELD BOP! OOM BOP!
@@ -23,14 +23,14 @@ package classes.Scenes.Dungeons.HelDungeon
 			damage = player.takeDamage(damage, true);
 			if (player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
 			else player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 
 		//Attack Three: Harpy Ass Grind GO!
 		private function BrigidAssGrind():void {
 			outputText("Brigid grins as she approaches you.  She handily deflects a few defensive blows and grabs you by the shoulders.  She forces you onto your knees and before you can blink, has turned around and smashed your face into her ass!  \"<i>Mmm, you like that, don'tcha?</i>\" she growls, grinding her huge, soft ass across your face, giving you an up-close and personal feel of her egg-laying hips.");
 			game.dynStats("lus", 30);
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 		override protected function performCombatAction():void
 		{

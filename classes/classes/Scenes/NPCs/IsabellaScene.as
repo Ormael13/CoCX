@@ -271,7 +271,7 @@ public function tryToTalkDownAngryCow():void {
 		outputText("Your reply is blotted out by the thundering of her hooves as she lowers her shield and charges.\n\n", false);
 		startCombat(new Isabella());
 		if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(-2);
-		kGAMECLASS.enemyAI();
+		monster.doAI();
 	}
 	//(int below 50)
 	else if (player.inte < 50) {
@@ -357,7 +357,7 @@ public function nomOnMommaIzzysTits():void {
 			else outputText("  It looks like she fucked you in your sleep again.  You wish you wouldn't fall asleep so soundly after drinking her milk so that you could contribute to the sex, but you wake so COMPLETELY SATED in every way that you know it's going to be hard to ever turn her down.", false);
 			//(no lust!, minus 50 fatigue)
 			player.orgasm();
-			fatigue(-50);
+			player.changeFatigue(-50);
 			//increment sleep rape counter
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261]++;
 		}
@@ -367,7 +367,7 @@ public function nomOnMommaIzzysTits():void {
 			if (isabellaAccent()) outputText("\"<i>Did you enjoy mein snack?  I think ve both needed ze drink, no?</i>\" You nod, stand up stretch, feeling energized and awake.", false);
 			else outputText("\"<i>Did you enjoy the snack?  I think we both needed the drink, no?</i>\" You nod, stand up stretch, feeling energized and awake.", false);
 			//(-65 fatigue)
-			fatigue(-65);
+			player.changeFatigue(-65);
 		}
 	}
 	//Voluntary Nursing (Small Characters)
@@ -430,7 +430,7 @@ public function nomOnMommaIzzysTits():void {
 			}
 			//(no lust!, minus 50 fatigue)
 			player.orgasm();
-			fatigue(-50);
+			player.changeFatigue(-50);
 			//increment sleep rape counter
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261]++;
 		}
@@ -439,7 +439,7 @@ public function nomOnMommaIzzysTits():void {
 			if (isabellaAccent()) outputText("You wake an hour later in a pile of blankets on the ground, feeling quite sated and rested.  Isabella is humming a pretty tune a few feet away and sharpening the bottom edge of a massive shield with a whetstone.  She stops when she notices you and sets the massive metal object aside with a noisy 'thunk'.  She reaches down for you with surprising quickness and lifts you up to kiss you on the forehead, saying, \"<i>Did you have a gud nap?  Ya?  Thanks for being such a thirsty drinker, I haven't felt this light in days.</i>\"  Isabella sets you back on your feet and you stretch, feeling remarkably energized.", false);
 			else outputText("You wake an hour later in a pile of blankets on the ground, feeling quite sated and rested.  Isabella is humming a pretty tune a few feet away and sharpening the bottom edge of a massive shield with a whetstone.  She stops when she notices you and sets the massive metal object aside with a noisy 'thunk'.  She reaches down for you with surprising quickness and lifts you up to kiss you on the forehead, saying, \"<i>Did you have a good nap?  Ya?  Thanks for being such a thirsty drinker, I haven't felt this light in days.</i>\"  Isabella sets you back on your feet and you stretch, feeling remarkably energized.", false);
 			//(-65 fatigue)
-			fatigue(-65);
+			player.changeFatigue(-65);
 		}
 	}
 	//Follower stuff
@@ -726,7 +726,7 @@ public function IsabellaWinsAndSpanks():void {
 		outputText("You go back to sleep, your backside bruised and your belly full of Isabella's milk.\n\n", false);
 		//(+4 sensitivity, -100 lust if masochist, -40 fatigue)
 		player.refillHunger(30);
-		fatigue(-40);
+		player.changeFatigue(-40);
 		dynStats("sen", 4);
 		if (player.findPerk(PerkLib.Masochist) >= 0) player.orgasm();
 	}
@@ -787,7 +787,7 @@ public function IsabellaWinsAndSpanks():void {
 		outputText("You go back to sleep, your backside bruised and your belly full of Isabella's milk.", false);
 		//(+4 sensitivity, -100 lust if masochist, -40 fatigue)
 		player.refillHunger(30);
-		fatigue(-40);
+		player.changeFatigue(-40);
 		dynStats("sen", 4);
 		if (player.findPerk(PerkLib.Masochist) >= 0) player.orgasm();
 	}
@@ -797,7 +797,7 @@ public function IsabellaWinsAndSpanks():void {
 			return;
 		}
 	}
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[Isabella rapes you with her ass]
@@ -933,7 +933,7 @@ public function isabellaRapesYouWithHerAss():void {
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(4);
 	player.orgasm();
 	dynStats("sen", 2);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[OPTIONAL GET RAPED AFTER SPANKING/FEEDING]
@@ -977,7 +977,7 @@ public function IsabellaPostSpankFeedSex():void {
 	outputText(" She climbs up on woozy legs and walks off, leaving you to doze in the defiled well of earth like a discarded tissue.\n\n", false);
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(3);
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //LOSS
@@ -987,7 +987,7 @@ public function isabellaDefeats():void {
 		else IsabellaWinsAndSpanks();
 	}
 	else {
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 }
 
@@ -1001,7 +1001,7 @@ public function defeatIsabella():void {
 		outputText(" cow-girl a push, and she immediately slumps down, defeated.  Since this was just a light-hearted sparring match, you help her up and back to camp, where she can ", false);
 		if (monster.HP < 1) outputText("recuperate.", false);
 		else outputText("take care of her needs (or be taken care of).", false);
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		return;
 	}
 	outputText("You push the ", false);
@@ -1026,7 +1026,7 @@ public function defeatIsabella():void {
 	if (monster.HP < 1) outputText("She acts so haughty, but she can't hide how her nipples are tenting her sheer top.", false);
 	else outputText("She acts like all she needs is a milking, but you can smell the dampness she's trickling from 'down under'.", false);
 	if (player.lust < 33) {
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		return;
 	}
 	/*
@@ -1051,7 +1051,7 @@ public function defeatIsabella():void {
 		if (player.cocks[player.shortestCockIndex()].cockLength < 9 && player.lust >= 33) smallTitFuck = tinyVictoryTittyFuckingFuntimesWithMilk;
 	}
 	choices("Lactation69", lactation, "Buttsex", buttsex, "Sixty-Nine", sixtyNine, "Vaginal", vaginalSex, "Big Titfuck", bigTitFuck,
-		"Small Titfuck", smallTitFuck, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
+		"Small Titfuck", smallTitFuck, "", null, "", null, "", null, "Leave", combat.cleanupAfterCombat);
 }
 //[LACTATION 69]
 public function victoryLactation69():void {
@@ -1136,7 +1136,7 @@ public function victoryLactation69():void {
 	//Reset anger
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //[VICTORY BUTTSEX]
 public function PCVictoryOnIsabellaButtsex():void {
@@ -1228,7 +1228,7 @@ public function PCVictoryOnIsabellaButtsex():void {
 	outputText("You get dressed and set off, feeling quite proud of how you handled the haughty foreign bovine.", false);
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(3);
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[Victory 69]
@@ -1344,7 +1344,7 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(9);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	player.slimeFeed();
-	if (getGame().inCombat) cleanupAfterCombat();
+	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1423,7 +1423,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(3);
 	outputText("Shrugging, you wipe " + player.sMultiCockDesc() + " off on her lips and get dressed.  This cow is one marvelous cum-dump.", false);
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[VAGINAL PROD N' POKE]
@@ -1503,7 +1503,7 @@ public function vaginalProdNPokeIsabella():void {
 	//Reset anger
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(7);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	player.orgasm();
 }
 
@@ -1560,7 +1560,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	//Reset anger
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(8);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 	player.orgasm();
 }
 

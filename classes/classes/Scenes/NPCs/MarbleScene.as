@@ -542,7 +542,7 @@ private function apologizetoWalkingTitsIMEANMARBLE():void {
 	applyMarblesMilk();
 	dynStats("lib", .2, "lus", (5 + player.lib/10));
 	HPChange(100,false);
-	fatigue(-50);
+	player.changeFatigue(-50);
 	//increase PC lust (5+ lib/10), health (100), and lib (0.2), reduce fatigue by (50)
 	//end event
 	doNext(camp.returnToCampUseOneHour);
@@ -586,7 +586,7 @@ internal function marbleFightWin():void {
 	//Options, rape in room, milk (Spy's submission - not included yet) and, don't rape.
 	var feed:Function = null;
 	if (player.findPerk(PerkLib.Feeder) >= 0 || player.lactationQ() > 200) feed = forceFeedMarble;
-	simpleChoices("Feed Her", feed, "RapeInRoom", rapeMarbleInHerRoom, "", null, "", null, "Leave", cleanupAfterCombat);
+	simpleChoices("Feed Her", feed, "RapeInRoom", rapeMarbleInHerRoom, "", null, "", null, "Leave", combat.cleanupAfterCombat);
 }
 internal function marbleFightLose():void {
 	spriteSelect(41);
@@ -596,7 +596,7 @@ internal function marbleFightLose():void {
 	//lose by lust
 	else outputText("Overcome by desire, you fall to your knees, and start masturbating furiously.  Disgusted with you, Marble hits you upside the head once more, knocking you over.  ", false);
 	outputText("She leans in close to your head and whispers \"<i>Don't ever come near me again, or I will crush your head with this hammer.</i>\"  She stands up and walks away from you as you pass out from your head injuries.  ", false);	
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Rape in room (Z)
@@ -672,7 +672,7 @@ private function rapeMarbleInHerRoom():void {
 	flags[kFLAGS.FARM_DISABLED] = 1;
 	
 	//End event
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Force-feed (by Spy) (Z)
@@ -707,7 +707,7 @@ private function forceFeedMarble():void {
 	//You've now been milked, reset the timer for that
 	player.addStatusValue(StatusEffects.Feeder,1,1);
 	player.changeStatusValue(StatusEffects.Feeder,2,0);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 private function resistMarbleInitially():void {
@@ -834,7 +834,7 @@ private function drinkMarbleMilk():void {
 	applyMarblesMilk();
 	HPChange(10, false);
 	player.refillHunger(20);
-	fatigue(-20);
+	player.changeFatigue(-20);
 	//(increase player lust by a 20 and libido, if player lust is over a threshold like 60, trigger milk sex scene)
 	dynStats("lib", 1, "lus", 20);
 	if (player.lust > 60) {
@@ -2110,7 +2110,7 @@ private function marbleKidsPlaytime():void {
 			outputText("\n\nThe game finally ends with the bovine saviour victorious over the horde of ravenous monsters  - somewhere along the line it was decided that hostages were no fun and single combat wasn't impressive enough, and you exhausted your theatrical skills to provide a bevy of satisfyingly scary faces and growls - and the people of the land (you) rejoicing.  You're left a bit tired afterwards, but you certainly don't regret having played with your child.");
 		}
 		//increase fatigue by 10, decrease lust by 5, and decrease libido by 1, advance time by 1 hour
-		fatigue(10);
+		player.changeFatigue(10);
 	}
 	//Tales of adventure (Z)
 	//requires at least 2 kids
@@ -2121,7 +2121,7 @@ private function marbleKidsPlaytime():void {
 		if (player.cor < 66) outputText("  You do make sure to skip over the items of a more explicit nature throughout.");
 		outputText("  Eventually your story comes to an end, and you bid farewell to your kids.");
 		//increase fatigue by 5 per kid, decrease lust by 5 per kid, and decrease libido by 1, advance time by 1 hour
-		fatigue(10);
+		player.changeFatigue(10);
 	}
 	//Take us to see Auntie (Z)
 	if (select == 3) {
@@ -2130,7 +2130,7 @@ private function marbleKidsPlaytime():void {
 		outputText("\n\nYou join her with the kids and help keep them under control while they play with their Auntie and the toy she's made them.  As tiring as it is for the canine farmer, you can tell that she loves spending time with these kids and listening to their excited voices call her <i>Auntie</i>.");
 		outputText("\n\nWhen the hour is nearly up, you tell your offspring that it is time to wind down and get ready to leave.  There are some protests, but they don't last long when Whitney promises a treat to each of them as they leave.  She goes off into the kitchen briefly, and when you've got the girls all ready to leave, she reappears with a tray of muffins, one for each child.  It is with smiling faces full of baked goodness that your kids return to camp.");
 		//increase fatigue by 5 per kid, decrease lust by 5 per kid, and decrease libido by 1, advance time by 1 hour
-		fatigue(10);
+		player.changeFatigue(10);
 		//end event
 	}
 	//Marble teaching her children how to construct small things and work with wood. (Z)
@@ -2169,7 +2169,7 @@ private function marbleKidsPlaytime():void {
 		else outputText("embraces you strongly, pressing her warm body against yours.");
 		outputText("\n\n\"<i>Thank you sweetie.  I love you.</i>\"\n\n");
 		//increase fatigue by 15, decrease lust by 10, and decrease libido by 1
-		fatigue(15);
+		player.changeFatigue(15);
 		//Takes 1-2 hours?
 		inventory.takeItem(consumables.W_FRUIT, camp.returnToCampUseOneHour);
 		//end event

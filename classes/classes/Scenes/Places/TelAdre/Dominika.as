@@ -865,7 +865,7 @@ private function dominikaBlowjobs2():void {
 	//[Disagreed/Neutral with Dominika]
 	else outputText("It deeply bothers you, leaving a sense of anxiety behind that you don't know how to deal with. You'll have to just hope something comes along that reminds you.", false);
 	outputText("\n\nEither way, it's another day.", false);
-	fatigue(-20);
+	player.changeFatigue(-20);
 	flags[kFLAGS.DOMINIKA_LAST_HYPNO_SUCK_COUNT] = timesFellatrixSucked();
 	flags[kFLAGS.DOMINIKA_TIMES_HYPNO_BJ]++;
 	model.time.days++;

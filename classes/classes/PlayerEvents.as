@@ -91,13 +91,13 @@ package classes {
 				{
 					if (prison.inPrison) {
 						kGAMECLASS.prison.changeWill(-1, prison.inPrison);
-						fatigue(2);
+						player.changeFatigue(2);
 					}
 					else {
 						//Lose HP and makes fatigue go up. Lose body weight and muscles.
 						if (player.thickness < 25) {
 							player.takeDamage(player.maxHP() / 25);
-							fatigue(2);
+							player.changeFatigue(2);
 							dynStats("str", -0.5);
 							dynStats("tou", -0.5);
 						}

@@ -183,9 +183,9 @@ public function loseAgainstMarae():void {
 	else {
 		if (player.HP <= 0) outputText("You collapse, too weak to continue fighting. \"<i>Get some rest, champion,</i>\" Marae says. You finally black out. \n\nBy the time you wake up, you find yourself in your camp.", true)
 		else outputText("Your desire to keep fighting has been slain by your overwhelming lust and you collapse. \"<i>Control your urges and get some rest, champion,</i>\" Marae says. You finally black out from your lust. \n\nBy the time you wake up, you find yourself in your camp.", true)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
-	cleanupAfterCombat(); //Failsafe
+	combat.cleanupAfterCombat(); //Failsafe
 }
 
 
@@ -224,7 +224,7 @@ public function winAgainstMarae():void {
 		outputText("\n\nWith the tentacles blocking your boat gone, you get into your boat and sail back to the shore and return to your camp.", false)
 		awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
 		flags[kFLAGS.CORRUPTED_MARAE_KILLED] = 1;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
@@ -237,7 +237,7 @@ public function winAgainstMarae():void {
 		player.createKeyItem("Divine Bark Plates", 0, 0, 0, 0);
 		awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
 		flags[kFLAGS.PURE_MARAE_ENDGAME] = 2;
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 }	
 

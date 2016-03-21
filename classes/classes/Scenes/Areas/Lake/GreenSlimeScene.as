@@ -767,7 +767,7 @@ internal function rapeOozeWithMilk():void {
 	//You've now been milked, reset the timer for that
 	player.addStatusValue(StatusEffects.Feeder,1,1);
 	player.changeStatusValue(StatusEffects.Feeder,2,0);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 		public function slimeVictoryRape():void
@@ -786,7 +786,7 @@ internal function rapeOozeWithMilk():void {
 				//female or futa
 				else if (player.gender > 0) femaleRapesOoze();
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			return;
 		}
 
@@ -807,7 +807,7 @@ internal function rapeOozeWithMilk():void {
 				if (temp == 0) oozeRapesYouOrally();
 				if (temp == 1) oozeButtRapesYou();
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			return;
 		}
 	}

@@ -137,7 +137,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.highMountains.minotaurMobScene.minotaurDeFeet();
 			}

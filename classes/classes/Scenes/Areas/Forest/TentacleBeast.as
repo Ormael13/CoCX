@@ -61,9 +61,9 @@
 			else {
 				if (!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
-					game.doYesNo(game.forest.tentacleBeastScene.tentacleVictoryRape,game.cleanupAfterCombat);
+					game.doYesNo(game.forest.tentacleBeastScene.tentacleVictoryRape,game.combat.cleanupAfterCombat);
 				} else {
-					game.cleanupAfterCombat();
+					game.combat.cleanupAfterCombat();
 				}
 			}
 		}

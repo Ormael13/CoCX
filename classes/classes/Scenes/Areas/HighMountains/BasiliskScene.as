@@ -75,9 +75,9 @@ package classes.Scenes.Areas.HighMountains
 			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Certain that the creature won't dare try and turn its eyes on you again, you take your time to look the tall reptile over directly for the first time.  Perhaps you could use it to satisfy your baser urges. If so, what part of it do you choose?", false);
 				//[Tongue][Ass]
-				simpleChoices("Tongue", tongueBasiliskSmex, "Ass", evil, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
+				simpleChoices("Tongue", tongueBasiliskSmex, "Ass", evil, "", null, "Lay Eggs", eggs, "Leave", combat.cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 		
 		//Player Victory sex:
@@ -123,7 +123,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			player.orgasm();
 			dynStats("lib-", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//basilisk Defeat: Anal 
@@ -168,7 +168,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You are shaken out of it by an urgent, rasping moan from the basilisk. You sense movement overhead and look up. The lizard has seen in the water's reflection what you can take in with your own eyes; several harpies circling overhead like vultures, waiting patiently for you to leave.  The smiles which plaster their faces are possibly the least kindly you have ever seen.  The basilisk whines again, this time with a desperate pleading edge.  You kneel down and comfortingly stroke your victim's scaled head, glorying in the moment of false hope you give it.  \"<i>Get hard,</i>\" you whisper.  The creature clenches as its no doubt aching cock strains to attention again.  \"<i>Don't worry,</i>\" you murmur into its ear. \"<i>I'm sure the nice birdies will shake you out of it.  Eventually.</i>\"  You get up, dress yourself, and leave.  A pitiless grin slowly spreads across your face as behind you, the opening strains of what promises to be a very long, violent, and feathery rape reach your ears...", false);
 			player.orgasm();
 			dynStats("cor", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//Player Defeated:
@@ -233,7 +233,7 @@ package classes.Scenes.Areas.HighMountains
 			//INSERT OPTIONAL OTHER MONSTER FINDINGS!
 			player.orgasm();
 			dynStats("sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		//basilisk vag rape
 		//Requires: Player has vag and is in heat, currently has egg pregnancy, or has oviposition perk
@@ -281,7 +281,7 @@ package classes.Scenes.Areas.HighMountains
 			//longer to be laid than usual): 
 			player.orgasm();
 			dynStats("sen", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		public function basiliskBirth():void {
@@ -440,7 +440,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("Eventually you notice that your dick is no longer trapped in sucking wet, and coming out of your daze you find yourself without harpy companions, leaving your petrified form in a mingled pool of harpy juices and your own jizz.  After another ten or twenty minutes of being forced to lie there and marinate in your own shameful memories, you find with great relief you can begin to move your fingers again.  Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you pick yourself up and redress before anything else finds you and woozily begin to make your way back down the mountain.  The whole experience feels like it may have been a lucid sex nightmare to your sluggish mind and you could almost believe it- if you didn't reek of sticky harpy sex and your own musk.", false);
 				
 				//(add harpy lipstick effect, add 20 fatigue and lose 100 lust if M/H, or add 100 lust if F/U)
-				fatigue(20);
+				player.changeFatigue(20);
 				kGAMECLASS.sophieScene.luststickApplication(20);
 				player.orgasm();
 			}
@@ -635,7 +635,7 @@ package classes.Scenes.Areas.HighMountains
 			else outputText(".  You reach up and slice him free from the webbing, carefully placing him on the ground below.  The blindfold stays, though.  You're kind, not stupid.  With your good deed for the day complete, you gather yourself up and head back to camp.");
 			player.dumpEggs();
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		private function layBeeEggsInABasilisk():void {
@@ -695,7 +695,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nAs you remove your depleted appendage from the violated basilisk's ass, he falls to the side, no longer able to keep himself upright.  Laying like this, you can see the beast's horribly-distended stomach, almost able to make out the outline of each individual egg but for the scales in the way. You nod approvingly and bend down to give to the lizard a quick kiss on the cheek for being such a good sport about the whole thing - though, not being an idiot, you don't untie him.  After that, you buzz away contentedly, idly thinking about returning the next time you'll need a receptacle for your eggs.");
 			player.dumpEggs();
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

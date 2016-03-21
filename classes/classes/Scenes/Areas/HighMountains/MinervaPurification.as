@@ -799,7 +799,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nMinerva's womanly body drenched with water, her ample toned features growing much more defined with all the water clinging to her body. Seeing your stares gives Minerva a kinky thrill, grinning she spins in the water and turns away from you, striking a pose for you and pushing her luscious round ass out, the water beading down her naked body as she looks back at you and gives you her usual sharky grin. \"<i>See anything you like darling?</i>\"");
 			outputText("\n\nGrinning back at her you reach out to try and grab the teasing siren only for her spin away from your grasp and splash through the waters away from you, her delightfully bountiful butt swaying as she wades through the water. Not one to just let such teasing go you give chase, splashing through the water and sending it all over. Your watery games last for a while, both of you splashing around, playing and flirting until you're both tired and retire to simply laying on the soft mossy bank together. \"<i>This was so fun, I'm so glad you came to visit,</i>\" Minerva says to you before rolling over onto her stomach and resting her head in her hands as she just watches you for a bit. \"<i>You know... I'm feeling a little frisky,</i>\" she says before rolling on top of you and drawing a finger gently across your [chest] slowly, \"<i>how about we have some fun, my love?</i>\"");
 			dynStats("cor", -1);
-			fatigue(-10);
+			player.changeFatigue(-10);
 			doYesNo(pureMinervaSexMenu, declineSpringSex);
 		}
 		private function declineSpringSex():void {
@@ -1015,7 +1015,7 @@ package classes.Scenes.Areas.HighMountains
 			flags[kFLAGS.TIMES_BUTTFUCKED_MINERVA]++;
 			player.orgasm();
 			dynStats("sen", -1);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1125,7 +1125,7 @@ package classes.Scenes.Areas.HighMountains
 			player.orgasm();
 			kGAMECLASS.highMountains.minervaScene.tryToImpregnateMinerva();
 			dynStats("lus", 20);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1227,7 +1227,7 @@ package classes.Scenes.Areas.HighMountains
 			flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 			player.orgasm();
 			dynStats("sen", -1);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1320,7 +1320,7 @@ package classes.Scenes.Areas.HighMountains
 			flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 			player.orgasm();
 			dynStats("sen", -1);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1397,7 +1397,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nFor a long while, you just lay there, cuddled up with the mostly naked siren, the two of you idly chatting about various things that come to mind. Eventually, you must leave the gentle embrace and return to your duties as a Champion. Disentangling yourself from Minerva, you straighten your clothes out and, with a smile, tell her you had a wonderful time. Grinning up at you, Minerva climbs back onto her feet and pulls you into a deep, tongue-tangling goodbye kiss. \"<i>It was amazing, we have to do this again. Perhaps next time, I can do you, hmm?</i>\" she suggests, not wanting to be greedy and get all the pleasure. Giving you another peck on the cheek, the siren sends you on your way after telling you to come back and visit soon.");
 			
 			dynStats("lus", 20);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1472,7 +1472,7 @@ package classes.Scenes.Areas.HighMountains
 			//PC returns to camp.
 			player.orgasm();
 
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1600,7 +1600,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nGrinning ear to ear, Minerva seems to be somewhat revitalized by your acceptance, pulling you closer the siren broodmother gets to work on you, her tongue happily licking up the cum caked mess that is your body. It's a big job but before long you're mostly cleaned, if a little damp from the licking. Letting out a deep sigh your lover relaxes next to you, her arms cradling her massive belly, swollen by not only your soon to be birthed offspring but what you can only guess has to be perhaps a dozen liters of thick sticky baby cream. As if sensing your thoughts Minerva pats her belly gently. \"<i>So warm, I've never felt so full before in my life. You know, as perverted as it is, I'm sure the little ones appreciate the warmth, even if they are swimming in their daddy's sperm...</i>\" she says before shaking her head. \"<i>Well no matter. Let's just...rest for a while...</i>\" The tired siren says before cuddling up against her, her freshly cleaned body still so swollen with your fresh sperm injections, it will be some time before she absorbs it all. For now though all you can think of is resisting, the urge to sleep soon overcoming you as your head rests against Minerva's shoulder.");
 			cheatTime(1); //Ensure that the clock is not at 6am to prevent weirdness.
 			player.orgasm();
-			fatigue(30);
+			player.changeFatigue(30);
 			doNext(postPregnancyStage3Sleep);
 		}
 		private function postPregnancyStage3Sleep():void {
@@ -1609,7 +1609,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nNodding in acceptance you happily bite into the sweet, juicy fruit. Once you taste that delicious fruit you can't help but wolf it down, the juices running down your chin as they quench your thirst, the tasty flesh helping to sate the hunger that pains your stomach. You eat your fill of the sweet fruit, Minerva handing you a peach each time you finish until you're full and satisfied once more. ");
 			player.slimeFeed();
 			player.refillHunger(100);
-			fatigue(-100);
+			player.changeFatigue(-100);
 			outputText(" ");
 			HPChange(player.maxHP(), true)
 			outputText("\nWith you fed and rested, the golden broodmother helps you to your feet, despite all the sleep you got; your legs are still a bit wobbly. Thankfully Minerva helps you steady yourself. \"< i > My goodness, are you alright? I guess you're not quite recovered are you, are you sure you don't want to rest more? < / i >\" the gentle maternal herm asks you, knowing that you must get back to your important work soon.");

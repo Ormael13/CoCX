@@ -487,7 +487,7 @@ package classes.Scenes.Places
 			player.gems -= 2;
 			outputText("\"<i>I'd like a glass of milk please,</i>\" you say. You hand over the two gems to the innkeeper and he pours you a glass of milk.");
 			outputText("\n\nYou drink the cup of milk. You feel calm and refreshed. ");
-			fatigue(-15);
+			player.changeFatigue(-15);
 			HPChange(player.maxHP() / 4, false);
 			player.refillHunger(10);
 			cheatTime(1/12);
@@ -503,7 +503,7 @@ package classes.Scenes.Places
 			player.gems -= 3;
 			outputText("\"<i>I'd like a glass of root beer please,</i>\" you say. You hand over the three gems to the innkeeper and he pours you a glass of root beer.");
 			outputText("\n\nYou drink the cup of root beer. Refreshing! ");
-			fatigue(-15);
+			player.changeFatigue(-15);
 			HPChange(player.maxHP() / 4, false);
 			player.refillHunger(10);
 			cheatTime(1/12);

@@ -24,7 +24,7 @@ package classes.Scenes.Areas.GlacialRift
 				dynStats("str", -1);
 				if (player.spe > 50) dynStats("spe", -1);
 				dynStats("spe", -1);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 		
@@ -45,7 +45,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Before you can respond, she reaches over and nicks " + gemPenalty + " gems from you and launches off into the sky. Half-dazed by lust of your own, you stagger to your feet and head back to camp.\n\n")
 			dynStats("lust", 50);
 			player.gems -= gemPenalty
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -68,10 +68,10 @@ package classes.Scenes.Areas.GlacialRift
 					addButton(2, "Get Licked", valkyrieLicksYou);
 					addButton(3, "Scissor", valkyrieScissor);
 				}
-				addButton(4, "Leave", cleanupAfterCombat);
+				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
 			else {
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 		
@@ -94,7 +94,7 @@ package classes.Scenes.Areas.GlacialRift
 			else outputText("You clutch at the valkyrie and brace for the inevitable, cumming more and more inside her despite your impending doom.\n\n");
 			outputText("Then suddenly, the valkyrie spreads her wings and flies, pulling up with so little room to spare that you can feel your cheek brush the snow. Panting, she flaps her wings one last time before setting the two of you down on the coast, overlooking the glacial drop into the frigid water.\n\n");
 			outputText("You shudder, reeling from the orgasm and near - death experience at the same time. No less exhausted, the valkyrie collapses onto you, her head coming to rest on your lap. It seems you made a good impression on the valkyrie as she drifts off to sleep, your cum and hers pooling between her legs. You fish a blanket (and a few gems) out of her pack, cover her up as best you can, and stumble on back to camp.");
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		//Anal Fuck
 		private function valkyrieAnalFuck():void {
@@ -110,7 +110,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("With such a tight, eager partner, you manage to last quite some time. Yet, all good things come to an end. With a mighty roar, you slam your cock as far into her as it will go and cum, painting her insides with your seed. She, too, climaxes as you fill her, her pucker squeezing you for everything you’re worth as her unused cunny squirts a bit of femcum onto her thighs and legs. Laughing gaily, you keep on pounding her ass until you’re utterly spent and deflating, and your partner has collapsed, her face buried in the snow.\n\n")
 			outputText("You withdraw with a wet “POP!”, and watch with a grin as your seed trickles out of her now-gaping anus, pooling with her own juices beneath her. You give her bruised, bright-red butt a gentle pat as you sheathe your cock back in your armor and head on back to camp, leaving your insensate lover in a cun-soaked heap on the ice.")
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		//Get Licked
 		private function valkyrieLicksYou():void {
@@ -125,7 +125,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText(".\n\n");
 			outputText("Utterly satisfied, you let the valkyrie go. She collapses, dragging her finger and tongue out of you before she face-plants in the snow. You giggle, giving her a pat on her cum-soaked head before grabbing a few of your gems and heading back to camp.");
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		//Scissor
 		private function valkyrieScissor():void {
@@ -137,7 +137,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("You cup her cheeks and give her a kiss full on the lips. When you break it, she’s smiling beautifully. That smile, and her pussy stroking yours, sends you over the edge. You hold your winged lover tight and cum, moaning into her shoulder as you ride out a powerful orgasm. Still smiling, the valkyrie wraps her wings around you and lets out a little moan, and you feel her squirting onto you, soaking your already sodden crotch with her femspunk.")
 			outputText("Exhausted from the playful sex, the valkyrie collapses on her back, utterly spent. You give her a pat on the cheek and a quick kiss before grabbing a few gems and heading on back to camp. ")
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 	}

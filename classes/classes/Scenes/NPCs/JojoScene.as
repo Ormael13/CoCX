@@ -1084,10 +1084,10 @@ public function jojoFollowerMeditate():void {
 			if (player.lust > 33 && player.gender > 0) {
 				clearOutput();
 				outputText("You smile in satisfaction as Jojo" + (hpVictory ? " collapses, unable to continue fighting" :" collapses and begins masturbating feverishly") + ".  Sadly you realize your own needs have not been met.  Of course, you could always rape the poor thing...\n\nDo you rape him?");
-				doYesNo(postCombatRape, getGame().cleanupAfterCombat);
+				doYesNo(postCombatRape, combat.cleanupAfterCombat);
 			}
 			else {
-				getGame().finishCombat();
+				combat.finishCombat();
 			}
 		}
 		
@@ -1127,7 +1127,7 @@ public function jojoFollowerMeditate():void {
 					jojosFifthRape();
 			}
 			doNext(camp.returnToCampUseOneHour);
-			if (postCombat) getGame().cleanupAfterCombat();
+			if (postCombat) combat.cleanupAfterCombat();
 		}
 		
 		private function jojosFirstRape():void {
@@ -1527,7 +1527,7 @@ public function jojoFollowerMeditate():void {
 			//Placeholder till I'm less lazy
 			outputText("You fuck your mousey slut for what feels like hours, orgasming until both of you are tired and worn out.  ");
 			player.orgasm();
-			fatigue(-20);
+			player.changeFatigue(-20);
 			if (player.lib > 40) {
 				outputText("When you're done you feel more clear-headed, but Jojo looks hornier than ever.");
 				dynStats("lib", -4);
@@ -1587,7 +1587,7 @@ public function jojoFollowerMeditate():void {
 					statScreenRefresh();
 				}
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		private function corruptJojoSexMenu():void {
@@ -2206,7 +2206,7 @@ private function beeEggsInCorruptJojo():void {
 	flags[kFLAGS.TIMES_EGGED_JOJO]++;
 	player.dumpEggs();
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Jojo Got Laid With Fertilized Bee Eggs (Zedit)
 public function jojoLaysEggs():void {
@@ -2928,7 +2928,7 @@ public function apparantlyJojoDOESlift():void
 		outputText("By the end of the training session you are covered in sweat, your lungs heaving for breath.\n\n");
 		outputText("As you bow to Jojo he bows back and says, “<i>Go get some rest [name], you’ve earned it.</i>”\n\n");
 		
-		fatigue(60);
+		player.changeFatigue(60);
 
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] == 5)
 		{
@@ -2950,7 +2950,7 @@ public function apparantlyJojoDOESlift():void
 		outputText("Jojo switches up the way he is instructing you.  Largely due to your increased endurance, the two of you spend more time moving through forms together and practicing strikes and maneuvers.  When it comes time for a brief lecture, he breaks out one of the few scrolls he has from his order and tells you what he knows about the contents.\n\n");
 		outputText("Before too long, the two of you are up again and practicing forms and mock strikes, even sparring briefly from time to time.  By the end of the intense training session you are covered in sweat... but so is Jojo, and neither of you are out of breath. As you bow to Jojo he returns the gesture and says, “<i>Go get some rest [name], you’ve earned it.</i>”\n\n");
 		
-		fatigue(60);
+		player.changeFatigue(60);
 
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] == 10)
 		{
@@ -2970,7 +2970,7 @@ public function apparantlyJojoDOESlift():void
 		outputText("Then the two of you are back up, sweeping gracefully through forms and striking invisible enemies with fierce blows.  By the end of the intense training session both you and Jojo are tired, having trained to both of your limits.\n\n");
 		outputText("As the two of you give each other decidedly shaky bows, Jojo says, “<i>Great effort [name], you are... wow... I need a rest. I’ve earned it.</i>”  The two of you share a laugh and end you training.\n\n");
 		
-		fatigue(60);
+		player.changeFatigue(60);
 
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 16 && player.inte >= 70)
 		{
@@ -2990,7 +2990,7 @@ public function apparantlyJojoDOESlift():void
 		outputText("Jojo smiles, “<i>In all honesty [name], I should be asking you to teach me, but I’ll do my best.</i>”\n\n");
 		outputText("There are no lectures.  Neither you nor Jojo are masters, but as of right now, the two of you have exhausted the small store of knowledge available to you from the Celestial Lotus.  You and Jojo instead practice to exhaustion, heaving and panting for breath, whilst still finding time to enjoy each others company.\n\n");
 		
-		fatigue(60);
+		player.changeFatigue(60);
 
 		//{each scene only shows if the follower is there}
 		var enlightenedBlurbs:Array = new Array();

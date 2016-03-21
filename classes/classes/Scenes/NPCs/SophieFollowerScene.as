@@ -101,7 +101,7 @@ private function bimboSophieAgain():void {
 	flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] = 0;
 	player.consumeItem(consumables.BIMBOLQ);
 	if (getGame().inCombat)
-		cleanupAfterCombat(); //(Display Sophie's normal options.You monster)
+		combat.cleanupAfterCombat(); //(Display Sophie's normal options.You monster)
 	else sophieBimbo.approachBimboSophieInCamp(false);
 }
 
@@ -179,7 +179,7 @@ private function letDebimboSophieGo():void {
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -201,7 +201,7 @@ private function whyIDidItToDebimboSophie():void {
 	outputText("\n\nYou nod, and tell Sophie to make herself at home.");
 	outputText("\n\n(<b>Sophie has been moved to the \"Followers\" tab!</b>)");
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -226,7 +226,7 @@ private function apologizeToDebimboSophie():void {
 	//{Sophie has been moved to the \"Followers\" tab!}
 	outputText("\n\n(<b>Sophie has been moved to the \"Followers\" tab!</b>)");
 	if (getGame().inCombat)
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -989,7 +989,7 @@ private function sophieSpecial():void {
 	outputText("\n\nYou feel like you may need to rest a few hours.");
 	player.orgasm();
 	if (sophieBimbo.sophieIsInSeason()) sophieBimbo.sophiePregChance();
-	fatigue(15);
+	player.changeFatigue(15);
 	doNext(camp.returnToCampUseOneHour);
 }
 

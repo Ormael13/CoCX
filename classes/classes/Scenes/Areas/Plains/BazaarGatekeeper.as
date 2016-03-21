@@ -112,7 +112,7 @@ package classes.Scenes.Areas.Plains
 			else {
 				outputText("You collapse from your overwhelming desires and black out. When you wake up, you realize that you are in a random location in the plains. You make your way back to your camp.", true);
 			}
-			doNext(cleanupAfterCombat);
+			doNext(game.combat.cleanupAfterCombat);
 		}
 		
 		public function BazaarGatekeeper() 

@@ -1213,7 +1213,7 @@ private function finishTitWorshipWivUrta():void {
 	
 	outputText("\n\nYou'll keep that in mind.  Having said that, you kiss her goodbye and find your [armor], then excuse yourself.");
 	dynStats("lus", 20);
-	fatigue(40);
+	player.changeFatigue(40);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1310,7 +1310,7 @@ private function stayForHorseDickings():void {
 	
 	//(Consume 1 extra hour if you go this route.)
 	doNext(camp.returnToCampUseTwoHours);
-	fatigue(-50);
+	player.changeFatigue(-50);
 }
 
 //Cravings
@@ -1896,7 +1896,7 @@ private function stayToPlay():void {
 		
 		outputText("\n\nYou finish eating and get up to take your dish to kitchen, when Lianna stops you from doing so.  \"<i>I got this,</i>\"  She states, taking your dish from your hands and proceeding to do the same for everyone else.  You thank Urta for the invitation, kissing her before telling her you should be going.  \"<i>Thank you, lover.</i>\"");
 		//Token 1 HP damage? Due to failed cooking?
-		fatigue(-10);
+		player.changeFatigue(-10);
 		player.takeDamage(10);
 		//Recover some fatigue due to excellent food, by Lianna.
 		doNext(camp.returnToCampUseOneHour);
@@ -1910,7 +1910,7 @@ private function stayToPlay():void {
 		outputText("\n\nOnce again, Lianna's cooking is heavenly.  It's a wonder someone who comes up with such crazy experiments can even cook, let alone something so good.  You find yourself smiling as you eat.  Urta watches your every mouthful, clearly envious and angry with herself at not being able to cook like the hired help.");
 		outputText("\n\nAfter you're done, Lianna begins collecting the dishes.  Satisfied with your newly filled belly, you kiss Urta and head towards Tel'Adre's streets.  Urta gives you an embarrassed smile and pats your back, then lets you go.");
 		//Token 1 HP damage? Due to failed cooking?
-		fatigue(-10);
+		player.changeFatigue(-10);
 		player.takeDamage(10);
 		//Recover some fatigue due to excellent food, by Lianna.
 		doNext(camp.returnToCampUseOneHour);
@@ -2186,7 +2186,7 @@ private function noBathPleaseUrtaLian():void {
 	outputText("\n\nWith a shrug, you promptly squeeze a sizable mass of liquid soap over her shoulders, put the bottle down, and then start to massage it into the soft, luxuriant black and white fur that covers her body.  You ask her how you're doing.  \"<i>Pretty good, but scrub my upper back a bit more.</i>\"  You begin caressing and squeezing her shoulders, trying your best to rub out any knots or tension she can feel, asking her to speak up about what she wants you to do.  \"<i>Just finish up with my lower back and I'm good.</i>\"  You confirm you understand, then roll your hands down into the small of her back, hovering above her ass but never straying down that far, as she gives no sign she wants you to go that low.  Finally, you declare you're done.  She gets up and stretches herself, her tail waving lazily as she does so, then she turns to look at you.  \"<i>You sure you don't want me to scrub your back?</i>\"");
 	
 	outputText("\n\nYou tell her that you're sure; besides, it's probably time you got going anyway.  \"<i>All right then.</i>\"  She goes to the shower to rinse off.  Seeing no point in waiting after what you were just doing, you follow after her.  Once rinsed and dressed, you politely say your goodbyes to the skunkette and head off.");
-	fatigue(-25);
+	player.changeFatigue(-25);
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -2209,7 +2209,7 @@ private function getABackWashFromLianna():void {
 	outputText("\n\nYou tell her it was the least you could do after she was so diligent at doing your back.");
 	
 	outputText("\n\n\"<i>If you'll excuse me, I gotta go rinse off,</i>\" She says moving towards the shower.  Seeing no point in waiting after what you were just doing, you follow after her.  Once rinsed and dressed, you politely say your goodbyes to the skunkette and head off.");
-	fatigue(-30);
+	player.changeFatigue(-30);
 	dynStats("lus", player.sens/10);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2282,7 +2282,7 @@ private function takeTheKidsForWalk():void {
 	outputText(" off to the bathroom.  You can't help but note how good Lianna is at making kids do what she says.");
 	
 	outputText("\n\nGiven that the skunk is heading up to the bath herself, you decide to show yourself out and quietly leave.");
-	fatigue(10);
+	player.changeFatigue(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 

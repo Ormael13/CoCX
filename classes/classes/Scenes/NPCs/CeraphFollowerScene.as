@@ -217,9 +217,9 @@ package classes.Scenes.NPCs
 				if (player.hasVagina()) cunting = ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
 
 
-				simpleChoices("Collar Her", collarCeraph, "Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "Leave", cleanupAfterCombat);
+				simpleChoices("Collar Her", collarCeraph, "Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "Leave", combat.cleanupAfterCombat);
 			}
-			else simpleChoices("Collar Her", collarCeraph, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
+			else simpleChoices("Collar Her", collarCeraph, "", null, "", null, "", null, "Leave", combat.cleanupAfterCombat);
 		}
 
 //Collar Ceraph After 4th Defeat + Rape: (Zeddited)
@@ -277,11 +277,11 @@ package classes.Scenes.NPCs
 				}
 				var cunting:Function =null;
 				if (player.hasVagina()) cunting = ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
-				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "", null, "Leave", cleanupAfterCombat);
+				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "", null, "Leave", combat.cleanupAfterCombat);
 			}
 			else {
 				outputText("  You don't really have the equipment to.  Oh well.", false);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 
@@ -314,11 +314,11 @@ package classes.Scenes.NPCs
 				}
 				var cunting:Function =null;
 				if (player.hasVagina()) cunting = ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
-				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "", null, "Leave", cleanupAfterCombat);
+				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "", null, "Leave", combat.cleanupAfterCombat);
 			}
 			else {
 				outputText("  You don't really have the equipment to.  Oh well.", false);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 

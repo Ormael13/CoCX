@@ -267,7 +267,7 @@ internal function kihaVictoryIntroduction():void {
 		outputText("\n\nNow that she's a captive audience, you could always talk to her.", false);
 		addButton(4, "Talk", rapeKihaWithWORDS, null, null, null, "Talk with Kiha and try to make progress.");
 	}
-	addButton(14, "Leave", cleanupAfterCombat);
+	addButton(14, "Leave", combat.cleanupAfterCombat);
 }
 //*Generic PC Loss Intro 
 internal function kihaLossIntro():void {
@@ -303,7 +303,7 @@ internal function kihaLossIntro():void {
 	else {
 		outputText("Kiha pulls her axe back in a two handed grip, and you're sure the moment of your death is upon you.  A moment later, the flat of the blade slams into your head, knocking you unconscious.", false);
 		player.takeDamage(1000);
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 }
 
@@ -347,14 +347,14 @@ private function kihaMilkTitHumiliation():void {
 	else outputText("Damn, that was hot.", false);
 	player.orgasm();
 	dynStats("tou", -1, "sen", 5);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //Genderless - Lukadoc (Zed)
 private function kihaGenderlessBeating():void {
 	spriteSelect(72);
 	outputText("\"<i>What a pussy!</i>\" she yells at you, noticing your lack of any gender upon denuding you.  \"<i>What's the problem, runt? Too scared that evil imps and goblins will abuse you?</i>\"  She hits the ground with her tail in frustration and grabs her axe. \"<i>What a waste of time. You're useless both in battle and out of it.</i>\"  She begins kicking you, eventually hitting you hard enough to knock you unconscious.", false);
 	player.takeDamage(1000);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //*Male - Adj
@@ -395,7 +395,7 @@ private function kihaRapesMen():void {
 	
 	outputText("When you come to, your throat feels raw, the taste of her pussy still on your lips.  Surprisingly, your groin is wet, but not sticky, without a trace of semen anywhere.  She must've licked " + player.sMultiCockDesc() + " clean after you passed out.  Your " + player.hipDescript() + " are still sore from the wild woman's ride, so it takes you longer than usual to limp your way back to camp.", false);
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //*Herm - Adj
 private function kihaRapesHerms():void {
@@ -432,7 +432,7 @@ private function kihaRapesHerms():void {
 	if (dicked) outputText("\n\nAs she steps back into the mire, the sound of her muttering carries back to you. \"<i>Much as I'd like to keep it, better to be done with this,</i>\" she sighs, glancing down at her turgid, draconic shaft.  \"<i>Just as well I held onto all those pink eggs after that crystal vial knocked me up.</i>\"  The rest of that story is lost to you, however, as her lean, swaying torso is swallowed back into the swamp's embrace.", false);
 	player.orgasm();
 	dynStats("lib", 1, "sen", 3);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Mutual Masturbation - A Tsundere Masturbation Christmas Carol, by Gats Dickings
@@ -486,7 +486,7 @@ private function tsundereMasturbationChristmasCarol():void {
 	
 	outputText("\"<i>I... hate you... </i>\" she whispers, before turning in for a deep slumber.  You watch her soft face as she snores, graceful as a pig, before walking back to camp.", false);
 	if (!player.hasCock()) dynStats("lus", 120);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //*Victory Tail-dildo, for girls - Fencrafted for maximum pomf (Zed)
 private function kihaVictoryPomfTail():void {
@@ -538,7 +538,7 @@ private function kihaVictoryPomfTail():void {
 	
 	outputText("Your only response is to get dressed, enjoying the pleasant tingle of her bubbling saliva on your girl-parts.  Kiha glares at you, futilely shaking her hips as if that would somehow quell the tide of lust washing through her body.  Maybe another of the swamp's denizens will keep her company in your absence?", false);
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //*Victory Dicking - Fencrafted
 private function victoryDickKiha():void {
@@ -637,7 +637,7 @@ private function victoryDickKiha():void {
 		outputText("  Somehow, you doubt she'll learn anything from the encounter.", false);
 	}
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 private function kihaRapesLittleGirlsISawItOnTheNews():void {
@@ -666,7 +666,7 @@ private function kihaRapesLittleGirlsISawItOnTheNews():void {
 	outputText("By the time you come to, Kiha is long gone.", false);
 	player.orgasm();
 	dynStats("sen", 2);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //Conversation Only - Emotional Rape! (40- Corruption! PUREBABIES ONLY) (Zed)
@@ -713,7 +713,7 @@ private function rapeKihaWithWORDS():void {
 		outputText("You sit down next to Kiha and start to talk again.  While she initially gives the barest hint of a smile, she soon begins to sulk.  No matter what you say or do you can't seem to bring her out of it.  Perhaps for now, there's simply no more to discuss with her.", false);
 	}
 	if (flags[kFLAGS.KIHA_TALK_STAGE] < 3) flags[kFLAGS.KIHA_TALK_STAGE]++;
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 /*Conversation Level 5: requires Lottie as follower, and to have given her enough bee honey, demon items, or harpy seeds to grow wings
 
@@ -804,7 +804,7 @@ private function analRapuzulaKiha():void {
 		outputText("Deciding that you are done here, you retrieve your " + player.armorName + " and leave the girl. Perhaps now she'll treat you with a little more respect. You return to camp.", false);
 	}
 	player.orgasm();
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 		//const GOTTEN_INQUISITOR_ARMOR:int = 415;

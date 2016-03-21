@@ -36,9 +36,9 @@ package classes.Scenes.Monsters
 				outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.", true);
 				if (monster.HP <= 0) {
 					addButton(0, "Kill Him", killImp);
-					addButton(4, "Leave", cleanupAfterCombat);
+					addButton(4, "Leave", combat.cleanupAfterCombat);
 				}
-				else cleanupAfterCombat();
+				else combat.cleanupAfterCombat();
 				return;
 			}
 			if (player.lust > 33) {
@@ -56,7 +56,7 @@ package classes.Scenes.Monsters
 					else addButton(1, "Female Rape", rapeImpWithPussy);
 				}
 				else if (maleRape == null && !player.hasFuckableNipples() && !canFeed && !canBikiniTits && !player.canOvipositBee()) {
-					cleanupAfterCombat(); //Only happens when there's no way to fuck the imp
+					combat.cleanupAfterCombat(); //Only happens when there's no way to fuck the imp
 					return;
 				}
 				addButton(0, (player.isTaur() ? "Centaur Rape" : "Male Rape"), maleRape);
@@ -64,68 +64,10 @@ package classes.Scenes.Monsters
 			}
 			if (canFeed) addButton(3, "Breastfeed", areImpsLactoseIntolerant);
 			if (canBikiniTits) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, 1);
+			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, true);
 			addButton(6, "Kill Him", killImp);
 			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
-			addButton(14, "Leave", cleanupAfterCombat);
-			
-			/* The old way
-			var maleRape:Function =null;
-			var femaleRape:Function =null;
-			var centaurGang:Function =null;
-			var feeder:Function =null;
-			var nipFuck:Function =null;
-			var bikiniTits:Function =null;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-			if (player.hasFuckableNipples() && player.lust >= 33) nipFuck = noogaisNippleRape;
-			if (player.findStatusEffect(StatusEffects.Feeder) >= 0) feeder = areImpsLactoseIntolerant;
-			//Taurs have different scenes
-			if (player.isTaur()) {
-				if (player.hasCock() && player.lust >= 33) {
-					if (player.cockThatFits(monster.analCapacity()) == -1) outputText("\n\n<b>You're too big to rape an imp with " + player.oMultiCockDesc() + ".</b>");
-					else maleRape = centaurOnImpStart;
-				}
-				if (player.hasVagina() && player.lust >= 33) {
-					maleRape = centaurOnImpStart;
-					centaurGang = centaurGirlOnImps;
-				}
-				if (nipFuck + femaleRape  + maleRape + feeder <= 0) cleanupAfterCombat();
-				else simpleChoices("Centaur Rape",maleRape,"NippleFuck",nipFuck,"Group Vaginal",centaurGang,"Breastfeed",feeder,"Leave",cleanupAfterCombat);
-				return;
-			}
-			//Regular folks!
-			else {
-				if (player.hasCock() && player.lust >= 33) {
-					if (player.cockThatFits(monster.analCapacity()) == -1) outputText("\n\n<b>You're too big to rape an imp with " + player.oMultiCockDesc() + ".</b>");
-					else maleRape = rapeImpWithDick;
-				}
-				if (player.hasVagina()) femaleRape = rapeImpWithPussy;
-			}
-			var eggDump:Boolean = false;
-			if (player.canOvipositBee()) eggDump = true;
-			if (nipFuck == null && femaleRape == null && maleRape == null && feeder == null && bikiniTits == null && !eggDump || flags[kFLAGS.SFW_MODE] > 0) {
-				if (monster.HP <= 0) {
-					addButton(6, "Kill Him", killImp);
-				}
-				addButton(14, "Leave", cleanupAfterCombat);
-				//cleanupAfterCombat();
-			}
-			else {
-				menu();
-				addButton(0,"Male Fuck",maleRape);
-				addButton(1,"Female Fuck",femaleRape);
-				addButton(2,"NippleFuck",nipFuck);
-				addButton(3,"Breastfeed",feeder);
-				addButton(4, "B.Titfuck", bikiniTits);
-				if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) {
-					addButton(5, "Use Condom", maleRape, 1);
-				}
-				if (eggDump > 0) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
-				if (monster.HP <= 0) addButton(6, "Kill Him", killImp);
-				addButton(14,"Leave",cleanupAfterCombat);
-				//choices("Male Rape",maleRape,"Female Rape",femaleRape,"NippleFuck",nipFuck,"Breastfeed",feeder,"B.Titfuck",bikiniTits,"",0,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
-			}
-			*/
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 		private function rapeImpWithDick(condomed:Boolean = false):void {
 			var x:Number = player.cockThatFits(monster.analCapacity());
@@ -178,7 +120,7 @@ package classes.Scenes.Monsters
 			}
 			player.orgasm();
 			if (!condomed) dynStats("cor", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		private function rapeImpWithPussy():void {
 			clearOutput();
@@ -207,7 +149,7 @@ package classes.Scenes.Monsters
 			}
 			player.orgasm();
 			dynStats("cor", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		private function sprocketImp():void {
@@ -262,7 +204,7 @@ package classes.Scenes.Monsters
 			// hpDown.visible = true;
 			player.HP -= 10;
 			if (player.HP < 1) player.HP = 1;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		private function centaurGirlOnImps():void {
 			clearOutput();
@@ -317,7 +259,7 @@ package classes.Scenes.Monsters
 				player.orgasm();
 				dynStats("cor", 1);
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		private function centaurOnImpStart():void {
 			clearOutput();
@@ -358,7 +300,7 @@ package classes.Scenes.Monsters
 				centaurOnImpResults(1);
 				//<<End>>
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			else {
@@ -378,7 +320,7 @@ package classes.Scenes.Monsters
 					centaurOnImpResults(2);
 					//<<End>>
 					player.orgasm();
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					return;
 				}
 				//<<Cock: large, Cor 50+>>
@@ -388,7 +330,7 @@ package classes.Scenes.Monsters
 					centaurOnImpResults(1);
 					//<<End>>
 					player.orgasm();
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					return;
 				}
 			}
@@ -406,7 +348,7 @@ package classes.Scenes.Monsters
 					centaurOnImpResults(2);
 					//<<End>>
 					player.orgasm();
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					return;
 				}
 				//<< 1 or 2 cocks, Cor 50+>>
@@ -420,7 +362,7 @@ package classes.Scenes.Monsters
 						//<<Goto I1>> 
 						centaurOnImpResults(1);
 						player.orgasm();
-						cleanupAfterCombat();
+						combat.cleanupAfterCombat();
 						return;
 					}
 					//<<Cor 80+>> 
@@ -439,7 +381,7 @@ package classes.Scenes.Monsters
 						if (player.cumQ() > 250) outputText("Beneath you the creature's belly is distending more and more, and you can feel some of the overflowing cum filling back out until it is pouring out of the creature's unconscious mouth and overstretched ass, forming a spermy pool beneath it.", false);
 						outputText("With on last grunt you begin extracting the tentacles back out, almost cumming again from the tightness around them.  You give your " + player.cockDescript(player.smallestCockIndex()) + " one last shake over the creature's face before trotting away satisfied and already thinking about the next creature you might abuse.", false);
 						player.orgasm();
-						cleanupAfterCombat();
+						combat.cleanupAfterCombat();
 						return;
 					}
 				}
@@ -460,12 +402,12 @@ package classes.Scenes.Monsters
 					centaurOnImpResults(1);
 					//<<End>>
 					player.orgasm();
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					return;
 				}
 			}
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		//CUNTS
 		private function centaurOnImpFemale(vape:Boolean = false):void {
@@ -497,7 +439,7 @@ package classes.Scenes.Monsters
 				outputText("When the creature completely bottoms out inside of you, you begin trotting forward with a wicked grin.  The creature's hands grasp your flanks desperately, and its " + monster.cockDescriptShort(0) + " bounces inside your " + player.vaginaDescript(0) + ", adding to your sensation.  The movement is causing the imp to push himself even harder against you as it tries to not fall off, and it is all you can do to keep an eye on where you are going.  Soon you can feel the imp's sperm filling your " + player.vaginaDescript(0) + " and overflowing even as your cunt-muscles try to milk it of all of its seed. Unsatisfied you begin to speed up as you use its " + monster.cockDescriptShort(0) + " to bring about your own orgasm.  The small creature is unable to let go without hurting itself.  It hangs on desperately while you increase the pace and begin making short jumps to force it deeper into you.  The feeling of sperm dripping out and over your " + player.clitDescript() + " pushes you over and cry out in intense pleasure.  When you finally slow down and clear your head the imp is nowhere to be seen.  Trotting back along the trail of sperm you left behind you find only its small satchel.", false);
 				player.cuntChange(monster.cockArea(0), true, true, false);
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 				//END OF NON GAPE CASE
 			}
@@ -535,11 +477,11 @@ package classes.Scenes.Monsters
 				if (player.cor < 80) outputText("promise to yourself that you will not do that again.", false);
 				else outputText("find your cunt juices already dripping down your legs in anticipation of doing this again.", false);
 				player.orgasm();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		/*
@@ -643,13 +585,13 @@ package classes.Scenes.Monsters
 			//set lust to 0, increase sensitivity slightly
 			dynStats("lib", .2, "lus", -50);
 			player.milked();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		public function impGangGetsWhooped():void {
 			clearOutput();
 			outputText("With the imps defeated, you check their bodies for any gems before you go back to sleep.");
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			goNext(timeQ, false);
 		}
 		
@@ -1330,7 +1272,7 @@ package classes.Scenes.Monsters
 					}
 				}
 			}
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			else doNext(playerMenu);
 		}
 		
@@ -1353,7 +1295,7 @@ package classes.Scenes.Monsters
 		
 				player.orgasm();
 				dynStats("lib", 1, "sen", 1, "cor", 1);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			//Lust loss
@@ -1422,7 +1364,7 @@ package classes.Scenes.Monsters
 						outputText("He slowly withdraws his still-pumping cock from you, coating your throat and then mouth with an almost continual spray of his unnaturally hot and sticky demon seed. The imp pulls out of your mouth just in time to splatter your face with his cum before his orgasm stops, coating your lips, nose, eyes, and hair with his incredibly thick and sticky cum.\n\n", false);
 						outputText("You fall to the ground gasping, exhausted and unable to move, the demon cum on your face and inside you still burning with intense heat and corruption. You lose consciousness, your " + player.cockDescript(0) + " still firmly erect, your lust not sated.", false);
 						dynStats("lus", 20, "cor", 2);
-						cleanupAfterCombat();
+						combat.cleanupAfterCombat();
 						player.slimeFeed();
 						return;					
 					}
@@ -1448,7 +1390,7 @@ package classes.Scenes.Monsters
 			else {
 				outputText("\n<b>You fall, defeated by the imp!</b>\nThe last thing you see before losing consciousness is the creature undoing its crude loincloth to reveal a rather disproportionately-sized member.", false);
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//noogai McNipple-holes
@@ -1540,7 +1482,7 @@ package classes.Scenes.Monsters
 			//Gain xp and gems here
 			player.orgasm();
 			dynStats("sen", -3, "cor", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//IMP LORD
@@ -1604,17 +1546,17 @@ package classes.Scenes.Monsters
 				outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
 				if (monster.short != "imp overlord") addButton(0, "Kill Him", killImp);
 				else {
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					return;
 				}
-				addButton(4, "Leave", cleanupAfterCombat);
+				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
 			else {
 				outputText("The muscular imp groans in pained arousal, his loincloth being pushed to the side by his thick, powerful dick.  Grabbing the useless clothing, he rips it from his body, discarding it.  The imp's eyes lock on his cock as he becomes completely ignorant of your presence.  His now insatiable lust has completely clouded his judgment.  Wrapping both of his hands around his pulsing member he begins to masturbate furiously, attempting to relieve the pressure you've caused.");
 				//Leave // Rape]
 				menu();
 				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0, "Sex", sexAnImpLord);
-				addButton(4,"Leave",cleanupAfterCombat);
+				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
 		}
 		public function loseToAnImpLord():void {
@@ -1624,7 +1566,7 @@ package classes.Scenes.Monsters
 			else {
 				outputText("Taking a look at your defeated form, the " + monster.short + " snarls, \"<i>Useless,</i>\" before kicking you in the head, knocking you out cold.");
 				player.takeDamage(9999);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 		
@@ -1646,7 +1588,7 @@ package classes.Scenes.Monsters
 				if (player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
-			addButton(14,"Leave",cleanupAfterCombat);
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 		
 		//MALE ANAL
@@ -1704,7 +1646,7 @@ package classes.Scenes.Monsters
 			outputText("\n\nYou stumble slightly as you gather up your [armor], and begin to get dressed.");
 			player.orgasm();
 			dynStats("cor", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//MALE BLOW
@@ -1752,7 +1694,7 @@ package classes.Scenes.Monsters
 			outputText("\n\nYou gather your things and put your [armor] back on before turning to leave.  You chance one last glance back at the defeated imp. You notice him laying down on his back, his hands working his own still hard length furiously.  You head back for camp and allow the imp to enjoy the afterglow of his meal.");
 			player.orgasm();
 			dynStats("cor", 1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//FEMALE VAGINAL
@@ -1798,7 +1740,7 @@ package classes.Scenes.Monsters
 			player.orgasm();
 			dynStats("cor", 1);
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//FEEDER BREASTFEED RAPE
@@ -1901,7 +1843,7 @@ package classes.Scenes.Monsters
 			player.addStatusValue(StatusEffects.Feeder,1,1);
 			player.changeStatusValue(StatusEffects.Feeder,2,0);
 			player.boostLactation(0.1);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//MALE LOSE
@@ -1950,7 +1892,7 @@ package classes.Scenes.Monsters
 			player.orgasm();
 			dynStats("sen", 2, "cor", 1);
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//FEMALE LOSE
@@ -1988,7 +1930,7 @@ package classes.Scenes.Monsters
 			player.orgasm();
 			dynStats("cor", 1);
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		private function putBeeEggsInAnImpYouMonster():void {
@@ -2047,7 +1989,7 @@ package classes.Scenes.Monsters
 			player.orgasm();
 			dynStats("sen", -1);
 			player.dumpEggs();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function loseToAnImpOverlord():void {
@@ -2057,7 +1999,7 @@ package classes.Scenes.Monsters
 			else {
 				outputText("Taking a look at your defeated form, the " + monster.short + " snarls, \"<i>Useless,</i>\" before kicking you in the head, knocking you out cold.");
 				player.takeDamage(9999);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 		
@@ -2106,7 +2048,7 @@ package classes.Scenes.Monsters
 			player.orgasm();
 			dynStats("sen", 2, "cor", 1);
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//FEMALE LOSE
@@ -2144,7 +2086,7 @@ package classes.Scenes.Monsters
 			player.orgasm();
 			dynStats("cor", 1);
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		private function killImp():void {
@@ -2154,10 +2096,10 @@ package classes.Scenes.Monsters
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
 			addButton(0, "Take Skull", takeSkull);
-			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(1, "Leave", combat.cleanupAfterCombat);
 		}
 		private function takeSkull():void {
-			inventory.takeItem(useables.IMPSKLL, cleanupAfterCombat);
+			inventory.takeItem(useables.IMPSKLL, combat.cleanupAfterCombat);
 		}
 	}
 }

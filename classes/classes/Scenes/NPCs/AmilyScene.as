@@ -3008,7 +3008,7 @@ package classes.Scenes.NPCs
 			var refillAmount:int = (10 + (flags[kFLAGS.AMILY_CUP_SIZE] * 2)) * flags[kFLAGS.AMILY_LACTATION_RATE];
 			if (refillAmount > 100) refillAmount = 100;
 			player.refillHunger(refillAmount, false);
-			fatigue(-refillAmount / 2);
+			player.changeFatigue(-refillAmount / 2);
 			doNext(camp.returnToCampUseOneHour);
 			dynStats("spe", .3, "lus", 10, "cor", -.5);
 		}
@@ -6298,7 +6298,7 @@ package classes.Scenes.NPCs
 			outputText("; the very idea of a mousy slut eager for cum distills into one massive load of cum, and you dump it all in her mouth.\n\nYou sigh, sated for now and leave her to clean herself up.", false);
 			player.orgasm();
 			dynStats("lib", -2, "cor", 5);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		//[Female]
@@ -6336,7 +6336,7 @@ package classes.Scenes.NPCs
 			outputText("Finally done, you let go of her and get up; she proceeds to slump down and give a small burp of satisfaction, then drift off into sleep. You untie her and proceed to get dressed; you give her a light pat on the thigh and return to your camp. You'll have to do this again sometime later...", false);
 			player.orgasm();
 			dynStats("lib", -2, "cor", 5);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 

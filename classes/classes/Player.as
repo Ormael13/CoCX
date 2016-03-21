@@ -85,7 +85,7 @@ use namespace kGAMECLASS;
 
 		//Player pregnancy variables and functions
 		override public function pregnancyUpdate():Boolean {
-			return game.updatePregnancy(); //Returns true if we need to make sure pregnancy texts aren't hidden
+			return game.pregnancyProgress.updatePregnancy(); //Returns true if we need to make sure pregnancy texts aren't hidden
 		}
 
 		// Inventory
@@ -1906,6 +1906,87 @@ use namespace kGAMECLASS;
 						return this.findStatusEffect(item) >= 0; }, this).length;
 		}
 
+		public function spellCost(mod:Number):Number {
+			//Addiditive mods
+			var costPercent:Number = 100;
+			if (findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= perkv1(PerkLib.SpellcastingAffinity);
+			if (findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= perkv1(PerkLib.WizardsEndurance);
+			
+			//Limiting it and multiplicative mods
+			if (findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
+			
+			mod *= costPercent/100;
+			
+			if (findPerk(PerkLib.HistoryScholar) >= 0) {
+				if (mod > 2) mod *= .8;
+			}
+			if (findPerk(PerkLib.BloodMage) >= 0 && mod < 5) mod = 5;
+			else if (mod < 2) mod = 2;
+			
+			mod = Math.round(mod * 100)/100;
+			return mod;
+		}
+		
+		public function physicalCost(mod:Number):Number {
+			var costPercent:Number = 100;
+			if (findPerk(PerkLib.IronMan) >= 0) costPercent -= 50;
+			mod *= costPercent/100;
+			return mod;
+		}
+		
+		//Modify fatigue
+		//types:
+		//  0 - normal
+		//	1 - magic
+		//	2 - physical
+		//	3 - non-bloodmage magic
+		public function changeFatigue(mod:Number,type:Number  = 0):void {
+			//Spell reductions
+			if (type == 1) {
+				mod = spellCost(mod);
+				
+				//Blood mages use HP for spells
+				if (findPerk(PerkLib.BloodMage) >= 0) {
+					takeDamage(mod);
+					return;
+				}                
+			}
+			//Physical special reductions
+			if (type == 2) {
+				mod = physicalCost(mod);
+			}
+			if (type == 3) {
+				mod = spellCost(mod);
+			}
+			if (fatigue >= maxFatigue() && mod > 0) return;
+			if (fatigue <= 0 && mod < 0) return;
+			//Fatigue restoration buffs!
+			if (mod < 0) {
+				var multi:Number = 1;
+				
+				if (findPerk(PerkLib.HistorySlacker) >= 0) multi *= 1.2;
+				if (findPerk(PerkLib.ControlledBreath) >= 0 && cor < (30 + corruptionTolerance())) multi *= 1.1;
+				if (findPerk(PerkLib.SpeedyRecovery) >= 0) multi *= 1.5;
+				
+				mod *= multi;
+			}
+			fatigue += mod;
+			if (mod > 0) {
+				game.mainView.statsView.showStatUp( 'fatigue' );
+				// fatigueUp.visible = true;
+				// fatigueDown.visible = false;
+			}
+			if (mod < 0) {
+				game.mainView.statsView.showStatDown( 'fatigue' );
+				// fatigueDown.visible = true;
+				// fatigueUp.visible = false;
+			}
+			kGAMECLASS.dynStats("lus", 0, "resisted", false); //Force display fatigue up/down by invoking zero lust change.
+			if (fatigue > maxFatigue()) fatigue = maxFatigue();
+			if (fatigue < 0) fatigue = 0;
+			kGAMECLASS.statScreenRefresh();
+		}
+		
 		public function armorDescript(nakedText:String = "gear"):String
 		{
 			var textArray:Array = [];

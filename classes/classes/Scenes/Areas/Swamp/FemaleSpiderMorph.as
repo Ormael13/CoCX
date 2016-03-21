@@ -20,7 +20,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe spider flashes a predatory grin while she waits it out...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.swamp.femaleSpiderMorphScene.loseToFemaleSpiderMorph();
 			}

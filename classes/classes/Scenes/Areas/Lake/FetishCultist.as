@@ -82,8 +82,8 @@
 			}
 			game.dynStats("lus", (player.lib/10 + player.cor/20) +4);
 			if (player.lust >= player.maxLust())
-				doNext(game.endLustLoss);
-			else doNext(game.combatMenu);
+				doNext(game.combat.endLustLoss);
+			else doNext(game.combat.combatMenu);
 		}
 		private function cultistLustTransfer():void {
 			if (lust <= 30 || rand(2) == 0) {
@@ -108,8 +108,8 @@
 				if (lust < 0) lust = 10;
 			}
 			if (player.lust >= player.maxLust())
-				doNext(game.endLustLoss);
-			else doNext(game.combatMenu);
+				doNext(game.combat.endLustLoss);
+			else doNext(game.combat.combatMenu);
 		}
 		
 
@@ -124,14 +124,14 @@
 			}
 			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?", false);
-				game.simpleChoices("Sex", game.lake.fetishCultistScene.playerRapesCultist, "", null, "", null, "B. Feed", temp2, "Leave", game.cleanupAfterCombat);
+				game.simpleChoices("Sex", game.lake.fetishCultistScene.playerRapesCultist, "", null, "", null, "B. Feed", temp2, "Leave", game.combat.cleanupAfterCombat);
 			}
 			else {
 				if (temp2!=null && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  She looks like she might take some of your milk if you offered it to her.  What do you do?", false);
-					game.simpleChoices("B. Feed", temp2, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
+					game.simpleChoices("B. Feed", temp2, "", null, "", null, "", null, "Leave", game.combat.cleanupAfterCombat);
 				}
-				else game.cleanupAfterCombat();
+				else game.combat.cleanupAfterCombat();
 			}
 		}
 

@@ -4,6 +4,7 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
 	import classes.Scenes.Camp;
+	import classes.Scenes.Combat.Combat;
 	import classes.Scenes.Places.Ingnam;
 	import classes.Scenes.Places.Prison;
 	import classes.Scenes.Dungeons.D3.D3;
@@ -61,6 +62,11 @@
 			return kGAMECLASS.d3;
 		}
 
+		protected function get combat():Combat
+		{
+			return kGAMECLASS.combat;
+		}
+		
 		public function goNext(time:Number,defNext:Boolean):Boolean
 		{
 			return kGAMECLASS.goNext(time,defNext);
@@ -101,23 +107,15 @@
 			return kGAMECLASS.date;
 		}
 
-/*
-		protected function inCombat():Boolean
-		{
-			return kGAMECLASS.inCombat();
-		}
-*/
 		//Curse you, CoC updates!
 		protected function get inDungeon():Boolean
 		{
 			return kGAMECLASS.inDungeon;
 		}
-/* inDungeon is now read only
 		protected function set inDungeon(v:Boolean):void
 		{
 			kGAMECLASS.inDungeon = v;
 		}
-*/
 		
 		protected function get inRoomedDungeon():Boolean
 		{
@@ -137,79 +135,48 @@
 			kGAMECLASS.inRoomedDungeonResume = v;
 		}
 
+		/** Displays the sprite on the lower-left corner. */
+		protected function spriteSelect(choice:Number = 0):void
+		{
+			kGAMECLASS.spriteSelect(choice);
+		}
+		
+		/** Refreshes the stats panel. */
+		protected function statScreenRefresh():void
+		{
+			kGAMECLASS.statScreenRefresh();
+		}
+		
+		/** Displays the stats panel. */
 		protected function showStats():void
 		{
 			kGAMECLASS.showStats();
 		}
 
-		protected function statScreenRefresh():void
-		{
-			kGAMECLASS.statScreenRefresh();
-		}
-
-		protected function cleanupAfterCombat(nextFunc:Function = null):void
-		{
-			kGAMECLASS.cleanupAfterCombat(nextFunc);
-		}
-
-		protected function combatRoundOver():void
-		{
-			kGAMECLASS.combatRoundOver();
-		}
-
-		protected function enemyAI():void
-		{
-			kGAMECLASS.enemyAI();
-		}
-
-		protected function spriteSelect(choice:Number = 0):void
-		{
-			kGAMECLASS.spriteSelect(choice);
-		}
-
+		/** Hide the stats panel. */
 		protected function hideStats():void
 		{
 			kGAMECLASS.hideStats();
 		}
+		
+		/** Hide the up/down arrows. */
 		protected function hideUpDown():void
 		{
 			kGAMECLASS.hideUpDown();
 		}
 
-		/* This class extends Utils, no need for a non-static version of this function
-		protected function curry(func:Function,...args):Function
-		{
-			return Utils.curry.apply(null,[func].concat(args));
-		}
-		*/
-		
-		/* None of these functions are called anymore
-		protected function lazyIndex(obj:*,...args):Function
-		{
-			return Utils.lazyIndex.apply(null,[obj].concat(args));
-		}
-		protected function lazyCallIndex(func:Function,...args):Function
-		{
-			return Utils.lazyCallIndex.apply(null,[func].concat(args));
-		}
-		protected function lazyCallIndexCall(func:Function,...args):Function
-		{
-			return Utils.lazyCallIndexCall.apply(null,[func].concat(args));
-		}
-		*/
-
+		/** Create a function that will pass one argument. */
 		protected function createCallBackFunction(func:Function, arg:*):Function
 		{
 			return kGAMECLASS.createCallBackFunction(func,arg);
 		}
 
+		/** Create a function that will pass multiple arguments. 
+		 * @deprecated	This function is deprecated.
+		 */
 		protected function createCallBackFunction2(func:Function, ...args):Function
 		{
 			return kGAMECLASS.createCallBackFunction2.apply(null,[func].concat(args));
-		}
-
-		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
-			kGAMECLASS.startCombat(monster_,plotFight_);
 		}
 
 		protected function doSFWloss():Boolean {
@@ -220,9 +187,18 @@
 			kGAMECLASS.creditsScreen();
 		}
 		
+		/**
+		 * Start a new combat.
+		 * @param	monster_ The new monster to be initialized.
+		 * @param	plotFight_ Determines if the fight is important. Also prevents randoms from overriding uniques.
+		 */
+		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
+			kGAMECLASS.combat.beginCombat(monster_, plotFight_);
+		}
+		
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
-			kGAMECLASS.startCombatImmediate(monster, _plotFight);
+			kGAMECLASS.combat.beginCombatImmediate(monster, _plotFight);
 		}
 
 		protected function displayHeader(text:String):void
@@ -267,7 +243,9 @@
 			kGAMECLASS.hideMenus();
 		}
 		
-		//To be phased out
+		/** Creates a menu with 10 buttons. 
+		 * @deprecated	This is deprecated. Use a series of addButton instead.
+		 */
 		protected function choices(text1:String, butt1:Function,
 								text2:String, butt2:Function,
 								text3:String, butt3:Function,
@@ -292,7 +270,9 @@
 			);
 		}
 
-		//To be phased out
+		/** Creates a menu with 5 buttons. 
+		 * @deprecated	This is deprecated. Use a series of addButton instead.
+		 */
 		protected function simpleChoices(text1:String, butt1:Function,
 								text2:String, butt2:Function,
 								text3:String, butt3:Function,
@@ -362,11 +342,6 @@
 		protected function HPChange(changeNum:Number,display:Boolean):void
 		{
 			kGAMECLASS.HPChange(changeNum,display);
-		}
-
-		protected function fatigue(mod:Number,type:Number=0):void
-		{
-			kGAMECLASS.fatigue(mod,type);
 		}
 		
 		protected function playerMenu():void { kGAMECLASS.playerMenu(); }

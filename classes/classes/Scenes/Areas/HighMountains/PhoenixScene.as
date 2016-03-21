@@ -56,9 +56,9 @@ package classes.Scenes.Areas.HighMountains
 				addButton(3, "Ride Anal", rideAnal);
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
 				//addButton(5, "Suck Her Dick", rideAnal);
-				addButton(14, "Leave", cleanupAfterCombat);
+				addButton(14, "Leave", combat.cleanupAfterCombat);
 			}
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 		
 		public function missionaryWithPhoenix():void {
@@ -99,7 +99,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nYou wipe your cock" + (player.cocks.length == 1 ? "": "s") + " on some of the girl's less-stained feathers before tucking " + (player.cocks.length == 1 ? "it": "them") + " away, snatching a gempurse from her discarded armour before starting on your journey back to camp, whistling all the way.");
 			player.orgasm();
 			dynStats("sens", -2);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		public function fuckPhoenixsButt():void {
@@ -117,7 +117,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Satisfied, you make your way back to your camp.");
 			player.orgasm();
 			dynStats("sens", -2);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		public function getWanked():void {
@@ -134,7 +134,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nYour " + player.cockDescript() + " explodes, pumping a thick load into the shocked phoenix’s mouth. She gags on your cum, finally swallowing it as the last of your sperm drips into her mouth. With a grin, you tell her what a good job she did as you withdraw your " + player.cockDescript() + " from her grip. With little rivulets of cum dripping down her face, the halfbreed collapses onto her back, rapidly fingering herself.");
 			flags[kFLAGS.PHOENIX_WANKED_COUNTER]++;
 			player.orgasm();
-			cleanupAfterCombat();			
+			combat.cleanupAfterCombat();			
 		}
 		
 		public function rideVaginal():void {
@@ -153,7 +153,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nUnable to take the cumulative pleasure, the phoenix cums. You go wide-eyed as her burning-hot cum pours into your waiting womb, scalding your depths with her sizzling, potent seed. You can only keep riding her, letting her jizz flow into you until the heat and pleasure sends you over the edge too. You hug the phoenix tight as orgasm hits you, shuddering and gasping as ecstasy threatens to overwhelm you. Your [vagina] milks your lover for every last drop until, breathless, you release your death-hold on your lover, letting her flop insensate to the ground.");
 			outputText("\n\nYou stand, a bit bow-legged, and watch as a bucket’s worth of her extra seed pours out of your sodden twat, pooling on the phoenix’s breasts and belly. Giggling, you stumble off her and collect your " + player.armorName + ".");
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		public function rideAnal():void {
@@ -171,7 +171,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nUnable to hold on for long, you bite down on her pink nipple and cum, letting waves of pleasure wash over you from your rectal intruder. Your sphincter crunches down hard on the lizard prick inside you, milking it just like a pussy would until, spurred on by your orgasm and bite to her most sensitive flesh, the phoenix-girl cums. You yelp as her burning-hot cum rushes into your ass, scalding your walls until you feel a massive wave of pleasure crash into you -- a second orgasm! Your mind goes utterly numb, nearly blacking out as tremors of ecsatcy pump into you from her dick.");
 			outputText("\n\nWhen you come to your senses a few minutes later, the phoenix girl is asleep, still holding you tight. You pull her deflated lizard dick out of your ass and shudder as a torrent of her sizzling-hot spunk dribbles out onto her thighs and hips. You wriggle out of her tight embrace and give her a little kiss on the cheek before collecting your " + player.armorName + " and heading out.");
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//LOSS! GET RAPED!
@@ -231,7 +231,7 @@ package classes.Scenes.Areas.HighMountains
 		}
 		
 		public function cockwielderLossScenePart3():void {
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			clearOutput();
 			outputText("You come to your senses a few hours later, barely able to open your eyes and feeling like you’ve just been fed through a thresher. Every movement is agony to your worn, abused body, but you manage to bring a hand to your face, shivering as your fingers sink into a thick layer of cold, congealed spunk. As you start wiping away as much as possible, you can only guess how at the number of orgasms it took for the phoenix to build up such a thick coating. You jerkily start to sit up, moving as slowly as possible to try and avoid overwhelming your cramped muscles.");
 			outputText("\n\nLooking down at your filth-encrusted body, you wince at the state of your " + player.armorName + ", then nearly gag as you see the ungodly amount of half-dried spunk that covers your crotch. The cold, jelly-like liquid clings to your [cock], slowly dripping down to the floor in huge globules that run along your shaft. The feeling makes your cock twitch and you instantly cry out, painfully realising that one of the after-effects of getting ridden for so long is an incredible amount of soreness.");
@@ -271,7 +271,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText(". \"<i>I hope you've learned your lesson,</i>\" she says as she pulls her cock out of your leaking backdoor. She wipes her cock clean on your [armor], before she moves her loincloth back in place. \"<i>See you around!</i>\" The phoenix says with a wink as she walks off.");
 			dynStats("str", -1);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		//Non-sexy bad end, loss by HP 4 times in a row.

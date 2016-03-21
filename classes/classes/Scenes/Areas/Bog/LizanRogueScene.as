@@ -81,12 +81,12 @@ package classes.Scenes.Areas.Bog
 					outputText("You wonder what you should do to the lizan.");
 					addButton(0, "Use Dick", rapeLizanInTheAss, null, null, null, "Anally penetrate him with your [cocks].");
 					addButton(1, "Use Pussy", rapeLizanWithPussy, null, null, null, "Get on top of the lizan and stuff his cock into your [pussy].");
-					addButton(4, "Leave", cleanupAfterCombat);
+					addButton(4, "Leave", combat.cleanupAfterCombat);
 					return;
 				}
 				else {
 					outputText("You rummage through his bag for something valuable.");
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					return;
 				}
 			}
@@ -105,19 +105,19 @@ package classes.Scenes.Areas.Bog
 		
 		public function leaveLizanAfterCombat():void {
 			outputText("After chatting for a bit the two of you part ways, having gotten a good workout in the process. ");
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		public function loseToLizan():void {
 			clearOutput();
 			if (player.cor > 30) {
 				outputText("Unable to continue fighting, you collapse from " + (player.lust >= player.maxLust() ? "overwhelming desires": "your injuries") + ". The lizan steps over to you, intent on punishing you. ");
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			else {
 				outputText("You are forced to raise your hand in defeat and the lizan celebrates with a few acrobatic flips and plenty of bragging. After a quick friendly chat the two of you part ways, having gotten a good workout in the process. ");
 				dynStats("str", 1, "tou", 1);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}			
 		}
 		
@@ -150,7 +150,7 @@ package classes.Scenes.Areas.Bog
 				}
 			}
 			else { //Multi cocks
-				outputText("\n\nLike a snake his tongue slithers from his lips and begins to encircle your [cock], the moves on until it has formed at least two coils around each of your cocks. The surprisingly firm snake like organ massages all of your dicks in firm rhythmic strokes. It feels like a family of hot, wet snakes are writhing around [eachCock], squeezing with practiced ease as saliva trickles down your shafts. ");
+				outputText("\n\nLike a snake his tongue slithers from his lips and begins to encircle your [cock], then moves on until it has formed at least two coils around each of your cocks. The surprisingly firm snake like organ massages all of your dicks in firm rhythmic strokes. It feels like a family of hot, wet snakes are writhing around [eachCock], squeezing with practiced ease as saliva trickles down your shafts. ");
 				if (player.balls > 0) outputText("You groan as you feel his spit drip down your [balls] and [legs].");
 				if (player.isBiped()) outputText("\n\nPrompting you to spread your [legs] and lean back, letting the lizan know how much you're enjoying this odd tongue job.");
 				outputText("\n\nThis lizan is obviously used to orally accommodating multiple cocks. His head begins to bob slightly, pulling [eachCock] wrapped in his gloriously talented tongue with it. The lizan rubs your [legs] with his cool scaly hands, causing you to thrust towards his face. After a few minutes of intense cock squeezing he begins to untangle his insanely long tongue from [eachCock]. The process gives your surging erections time to cool down before the main event. Once finished he licks his lips before giving you a self satisfied smile.");
@@ -177,7 +177,7 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 		}
 		
 		public function consensualGetFucked():void {
@@ -231,7 +231,7 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 		}
 		
 		public function consensualGetButtFucked():void {
@@ -281,7 +281,7 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 		}
 		
 		public function consensualDoublePenetration():void {
@@ -342,7 +342,7 @@ package classes.Scenes.Areas.Bog
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 		}
 		
 		public function consensualWatersports():void { //Yay watersports!
@@ -375,7 +375,7 @@ package classes.Scenes.Areas.Bog
 			outputText(" You cuddle with the lizan for a moment before you have to part ways" + player.clothedOrNaked(" and redress yourself in your [armor]", "") + ".");
 			outputText("\n\n\"<i>I hope you come back later,</i>\" the lizan says with a smile. You give him a kiss before you return to your camp.");
 			doNext(camp.returnToCampUseOneHour);
-			if (getGame().inCombat) cleanupAfterCombat();
+			if (getGame().inCombat) combat.cleanupAfterCombat();
 		}
 		
 		public function rapeLizanInTheAss():void {
@@ -413,7 +413,7 @@ package classes.Scenes.Areas.Bog
 			}
 			outputText("\n\nYou leave the passed out lizan where he lies, his newly abused little hole dripping your cream. You raid his pack and leave.");
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 		
 		public function rapeLizanWithPussy():void {
@@ -441,7 +441,7 @@ package classes.Scenes.Areas.Bog
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 

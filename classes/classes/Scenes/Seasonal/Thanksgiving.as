@@ -307,7 +307,7 @@ package classes.Scenes.Seasonal {
 				player.createPerk(PerkLib.Cornucopia,0,0,0,0);
 			}
 			//HP set to full, fatigue to 0?
-			fatigue(-100);
+			player.changeFatigue(-100);
 			HPChange(3000,false);
 			doNext(camp.returnToCampUseTwoHours);
 		}

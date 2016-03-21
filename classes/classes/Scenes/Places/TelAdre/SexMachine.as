@@ -265,7 +265,7 @@ private function useTheSexMachine():void {
 				break;
 		}
 	}
-	fatigue(10);
+	player.changeFatigue(10);
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }

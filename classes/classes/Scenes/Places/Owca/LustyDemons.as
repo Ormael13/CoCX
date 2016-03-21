@@ -29,7 +29,7 @@ package classes.Scenes.Places.Owca
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe demons smile to one at another as they watch your display, then close in...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.owca.loseOrSubmitToVapula();
 			}
@@ -81,8 +81,8 @@ package classes.Scenes.Places.Owca
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 14;
 			this.gems = 150 + rand(100);
-			this.special1 = game.packAttack;
-			this.special2 = game.lustAttack;
+			this.special1 = game.combat.packAttack;
+			this.special2 = game.combat.lustAttack;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;

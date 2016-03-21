@@ -1510,7 +1510,7 @@ package classes.Scenes.NPCs {
 			//Restore 20% of PC's health
 			HPChange(Math.round(player.maxHP()*.2),false);
 			//Restore 30 fatigue
-			fatigue(-30);
+			player.changeFatigue(-30);
 			//increase lust by 15
 			kGAMECLASS.stats(0,0,0,0,0,0,15,0);
 			//increase Marble lust by 10

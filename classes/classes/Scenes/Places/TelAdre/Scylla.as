@@ -1692,7 +1692,7 @@ private function feedingScyllaCumStepTwo():void {
 }
 
 private function cumFeedScyllaShesACoolGirl():void {
-	fatigue(10);
+	player.changeFatigue(10);
 	scyllaSprite();
 	clearOutput();
 	outputText(images.showImage("scylla-feed-jizz-solo-three"), false);

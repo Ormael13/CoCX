@@ -38,7 +38,7 @@
 				//Increase fatigue
 				if (color == "black") {
 					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
-					game.fatigue(10 + rand(25));
+					player.changeFatigue(10 + rand(25));
 				}
 			}
 			combatRoundOver();

@@ -182,7 +182,7 @@
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foes don't seem put off enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.dungeons.deepcave.loseToImpMob();
 			}

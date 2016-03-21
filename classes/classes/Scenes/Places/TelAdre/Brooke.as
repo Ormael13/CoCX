@@ -112,7 +112,7 @@ public function repeatChooseShower():void {
 			outputText("\n\nYour shower proceeds uneventfully.  While the cleanliness is nice, occasionally a rogue wish wants her to show up and 'ruin' your shower time.  Brooke is nowhere to be found, though, and just a short while later, you're clean as a whistle and out the door.");
 		}
 		doNext(camp.returnToCampUseOneHour);
-		fatigue(-5);
+		player.changeFatigue(-5);
 	}
 	//Between 16:00 and 18:00
 	//Third encounter; body tone 30 minimum
@@ -555,7 +555,7 @@ public function brookeAnal():void {
 	outputText("\n\nWith some reluctance, she eventually lets go of your spent, flaccid cock, conceding momentary defeat.  The water's long-since turned cold, and you spend the remainder of your time together washing and drying each other off.  She does all she can to entice you some more – she fondles your " + player.cockDescript(x) + " and kisses your neck sensually, eager for some more anal-play, but you're just too worn from her earlier energy.  She pouts, but gives in, finally allowing you to slip on your [armor] and leave the gym in peace.");
 	//Lust reduced to 0, fatigue increased by 15
 	player.orgasm();
-	fatigue(15);
+	player.changeFatigue(15);
 	flags[kFLAGS.TIMES_IN_BROOKES_BUTT]++;
 	brookeAffection(10);
 	doNext(camp.returnToCampUseOneHour);
@@ -611,7 +611,7 @@ public function tribadism():void {
 	//Lust reduced to 0, fatigue increased by 15
 	player.orgasm();
 	dynStats("sen", -2);
-	fatigue(15);
+	player.changeFatigue(15);
 	brookeAffection(10);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -987,7 +987,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		// Lust reduced to 0, sensitivity decreased by 2, fatigue increased by 10
 		player.orgasm();
 		dynStats("sen", 0-2);
-		fatigue(10);
+		player.changeFatigue(10);
 	}
 	//{Female only}
 	else if (player.hasVagina() && x < 0) {
@@ -1040,7 +1040,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		// Lust reduced to 0, sensitivity decreased by 2, fatigue increased by 10
 		player.orgasm();
 		dynStats("sen", -2);
-		fatigue(10);
+		player.changeFatigue(10);
 	}
 	//{Herms only}
 	else {
@@ -1137,7 +1137,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		// Lust reduced to 0, sensitivity decreased by 2, fatigue increased by 10
 		player.orgasm();
 		dynStats("sen", -2);
-		fatigue(10);
+		player.changeFatigue(10);
 	}
 	brookeAffection(10);
 	doNext(camp.returnToCampUseOneHour);

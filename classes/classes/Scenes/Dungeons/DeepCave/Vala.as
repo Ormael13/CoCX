@@ -91,7 +91,7 @@ package classes.Scenes.Dungeons.DeepCave
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.dungeons.deepcave.loseToVala();
 			}

@@ -70,25 +70,25 @@ package classes.Scenes.Dungeons.D3
 			
 			if (HP < 1)
 			{
-				doNext(game.endHpVictory);
+				doNext(game.combat.endHpVictory);
 				return;
 			}
 			
-			if (lust > 99)
+			if (lust >= eMaxLust())
 			{
-				doNext(game.endLustVictory);
+				doNext(game.combat.endLustVictory);
 				return;
 			}
 			
 			if (player.HP < 1)
 			{
-				doNext(game.endHpLoss);
+				doNext(game.combat.endHpLoss);
 				return;
 			}
 			
 			if (player.lust >= player.maxLust())
 			{
-				doNext(game.endLustLoss);
+				doNext(game.combat.endLustLoss);
 				return;
 			}
 			

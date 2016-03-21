@@ -238,7 +238,7 @@ package classes.Scenes.Dungeons
 			player.addKeyValue("Carpenter's Toolbox", 1, -45);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 25;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] = 1;
-			fatigue(40);
+			player.changeFatigue(40);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		//Nightstand
@@ -274,7 +274,7 @@ package classes.Scenes.Dungeons
 			player.addKeyValue("Carpenter's Toolbox", 1, -20);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 10;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] = 1;
-			fatigue(20);
+			player.changeFatigue(20);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Dresser
@@ -311,7 +311,7 @@ package classes.Scenes.Dungeons
 			player.addKeyValue("Carpenter's Toolbox", 1, -50);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 30;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] = 1;
-			fatigue(60);
+			player.changeFatigue(60);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Table
@@ -347,7 +347,7 @@ package classes.Scenes.Dungeons
 			player.addKeyValue("Carpenter's Toolbox", 1, -20);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 15;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] = 1;
-			fatigue(50);
+			player.changeFatigue(50);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Chair
@@ -391,7 +391,7 @@ package classes.Scenes.Dungeons
 				outputText("<b>Of course, you could construct another chair.</b> \n\n");
 				flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] = 1;
 			}
-			fatigue(20);
+			player.changeFatigue(20);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Bookshelf
@@ -430,7 +430,7 @@ package classes.Scenes.Dungeons
 			player.addKeyValue("Carpenter's Toolbox", 1, -75);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 25;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] = 1;
-			fatigue(50);
+			player.changeFatigue(50);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Desk
@@ -467,7 +467,7 @@ package classes.Scenes.Dungeons
 			outputText("The paint dries relatively quickly and it only took you two hours to finish your desk! \n\n");
 			outputText("<b>You have finished your desk!</b> \n\n");
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] = 1;
-			fatigue(60);
+			player.changeFatigue(60);
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		//Chair for Desk
@@ -503,7 +503,7 @@ package classes.Scenes.Dungeons
 			player.addKeyValue("Carpenter's Toolbox", 1, -40);
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 10;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] = 1;
-			fatigue(20);
+			player.changeFatigue(20);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

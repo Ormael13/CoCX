@@ -352,7 +352,7 @@ private function fuckYoDaughtersHomie():void {
 	if (tamaniPresent) kGAMECLASS.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
 	player.cumMultiplier += .3;
-	if (getGame().inCombat) cleanupAfterCombat();
+	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseFourHours);
 }
 
@@ -705,7 +705,7 @@ private function legTamanisDaughtersRAEPYou():void {
 	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
 	if (tamaniPresent) kGAMECLASS.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
-	if (getGame().inCombat) cleanupAfterCombat();
+	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseFourHours);
 }
 
@@ -831,7 +831,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 			outputText("   Fucks & Love,\n", false);
 			outputText("      -Tamani</i>", false);
 		}
-		cleanupAfterCombat();
+		combat.cleanupAfterCombat();
 	}
 	//(ALT – BAD END GATEWAY)
 	else {
@@ -886,7 +886,7 @@ private function tamaniDaughtersDeclineBadEnd():void {
 	outputText("The restraints pop off you at once, and you pull the tubes and IV's from your skin.  You grunt with discomfort and remove the final tube from your " + player.assholeDescript() + ".  Climbing off the table, your " + player.legs() + " wobble unsteadily as you try to get your balance.   The goblin says, \"<i>Go on home dad before I strap you back down and teach you to enjoy my gifts!</i>\"\n\n", false);
 	
 	outputText("You sheepishly leave the cave and head home, glad to be out of there before your growing tribe of daughters decides to milk you forever.\n\n", false);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 //[Rather Fill Individually]
 private function tamanisDaughtersFillIndividuallyBADEND():void {
@@ -1018,7 +1018,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	//daughter countdown reset. 
 	player.orgasm();
 	dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "cor", 1);
-	if (getGame().inCombat) cleanupAfterCombat();
+	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1046,9 +1046,9 @@ internal function combatWinAgainstDaughters():void {
 		outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses, unable to continue fighting.", true);
 		if (player.lust >= 33 && player.cockTotal() > 0) {
 			outputText("In spite of their injuries, they do try to present their bodies in as lewd a way as possible.  You could still fuck them, but things might get out of hand...\n\nDo you fuck them?", true);
-			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);
+			doYesNo(fuckYoDaughtersHomie, combat.cleanupAfterCombat);
 		}
-		else cleanupAfterCombat();
+		else combat.cleanupAfterCombat();
 		return;
 	}
 	else {
@@ -1056,9 +1056,9 @@ internal function combatWinAgainstDaughters():void {
 		dynStats("lus", 5);
 		if (player.lust >= 33 && player.cockTotal() > 0) {
 			outputText("You could still fuck them, but things might get out of hand...\n\nDo you fuck them?", false);
-			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);
+			doYesNo(fuckYoDaughtersHomie, combat.cleanupAfterCombat);
 		}
-		else cleanupAfterCombat();
+		else combat.cleanupAfterCombat();
 		return;
 	}
 }
@@ -1075,7 +1075,7 @@ internal function loseToDaughters():void {
 		outputText("\n\nYou give up, you're just too turned on by the sea of sexually charged deviants to resist them anymore.  You're ready to fuck them all.", false);
 		if (player.cockTotal() == 0) {
 			outputText("The sexy sluts pout, \"<i>Why did you have to go and get rid of your dick!?</i>\" before something hits you in the head, HARD, knocking you out.", false);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			return;
 		}
 		if (tamaniPresent) {
@@ -1094,7 +1094,7 @@ internal function loseToDaughters():void {
 		outputText("\n\nOverwhelmed by your wounds, you can't even try to stop the goblin horde...", false);
 		if (player.cockTotal() == 0) {
 			outputText("The sexy sluts pout, \"<i>Why did you have to go and get rid of your dick!?</i>\" before something hits you in the head, HARD, knocking you out.", false);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			return;
 		}
 		if (tamaniPresent) {

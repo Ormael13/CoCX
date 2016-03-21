@@ -157,7 +157,7 @@ package classes.Scenes.Areas.Lake
 			player.slimeFeed();
 			player.orgasm();
 			dynStats("sen", 4);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Defeat – Male
@@ -188,7 +188,7 @@ package classes.Scenes.Areas.Lake
 			player.orgasm();
 			dynStats("sen", 4);
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Defeat – Herm
@@ -210,7 +210,7 @@ package classes.Scenes.Areas.Lake
 			player.orgasm();
 			dynStats("sen", 4);
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Defeat – Female
@@ -265,7 +265,7 @@ package classes.Scenes.Areas.Lake
 			player.orgasm();
 			dynStats("sen", 4);
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Goo pregnancy- 3-4 days]
@@ -295,7 +295,7 @@ package classes.Scenes.Areas.Lake
 			//Victory – Neuter
 			if (player.gender == 0 || player.lust < 33 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("The goo-girl, while an unusual creature, seems unable to communicate and clearly has nothing of value.  Of no particular use in your quest, you shoo the dripping blob back to the shore. She seems disappointed at first, but bounces back quickly enough, spotting movement in the lake.  She splashes in and takes off at top speed, " + gooColor9() + " blur while you take your leave.", false);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 			else {
 				outputText("With the goo-girl defeated, her unusual body is at your mercy.  What do you do?", false);
@@ -366,7 +366,7 @@ package classes.Scenes.Areas.Lake
 					if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");
 					else outputText("Do you offer a threesome with the girl to Valeria? She'll likely try flood with you with more sloshing, shuddering pleasure than your body can handle.");
 				}
-				choices(sex1S, sex1N, sex2S, sex2N, sex3S, sex3N, sex4S, sex4N, "Lay Eggs", eggs, "", null, "", null, "Valeria", valeria, "Make Slave", gooTF, "Leave", cleanupAfterCombat);
+				choices(sex1S, sex1N, sex2S, sex2N, sex3S, sex3N, sex4S, sex4N, "Lay Eggs", eggs, "", null, "", null, "Valeria", valeria, "Make Slave", gooTF, "Leave", combat.cleanupAfterCombat);
 			}
 		}
 
@@ -417,7 +417,7 @@ package classes.Scenes.Areas.Lake
 			}
 			player.orgasm();
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Victory – Herm
@@ -443,7 +443,7 @@ package classes.Scenes.Areas.Lake
 			coreDropChance();
 			player.orgasm();
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //FEMALE VICTORIES
@@ -469,7 +469,7 @@ package classes.Scenes.Areas.Lake
 			//You've now been milked, reset the timer for that
 			player.addStatusValue(StatusEffects.Feeder, 1, 1);
 			player.changeStatusValue(StatusEffects.Feeder, 2, 0);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Exhibitionist Perk]
@@ -491,7 +491,7 @@ package classes.Scenes.Areas.Lake
 			coreDropChance();
 			player.orgasm();
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //[Normal Female] 
@@ -513,7 +513,7 @@ package classes.Scenes.Areas.Lake
 			coreDropChance();
 			player.orgasm();
 			player.slimeFeed();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Ooze and Goo scene (one shot voyeur scene similar to the minotaur peep-show)– 
@@ -547,7 +547,7 @@ package classes.Scenes.Areas.Lake
 			outputText("\n\nThis continues on for quite some time with the honey googirl greedily sucking down everything it can from your ovipositor, stroking it and squeezing your abdomen to work out all of its sweet fluid and eggs.  When you finally decide enough is enough, you retract your black tube and rise back up to your [feet].  Turning to look at the goo, you see her idly rubbing at her distended honey-colored belly, imitating a pregnant mother before she slides back down the lakeshore; your numerous eggs bounce around inside her infused body.  She turns one last time to you and waves before sinking below the surface.");
 			player.dumpEggs();
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

@@ -943,7 +943,7 @@ package classes.Scenes.NPCs
 			if (player.str <= 66) dynStats("str", 0.5);
 			if (player.str < 90) dynStats("str", 0.5);
 			dynStats("str", 0.5);
-			fatigue(40);
+			player.changeFatigue(40);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1017,7 +1017,7 @@ package classes.Scenes.NPCs
 			if (player.tou <= 66) dynStats("tou", 0.5);
 			if (player.tou < 90) dynStats("tou", 0.5);
 			dynStats("tou", 0.5);
-			fatigue(40);
+			player.changeFatigue(40);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1064,7 +1064,7 @@ package classes.Scenes.NPCs
 			if (player.spe <= 66) dynStats("spe", 0.5);
 			if (player.spe < 90) dynStats("spe", 0.5);
 			dynStats("spe", 0.5);
-			fatigue(40);
+			player.changeFatigue(40);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1340,7 +1340,7 @@ package classes.Scenes.NPCs
 			var refillAmount:int = (flags[kFLAGS.JOY_BREAST_SIZE] + 6) * 5;
 			if (refillAmount > (120 - player.hunger)) refillAmount = (120 - player.hunger); //Constrain max weight gain to +2.
 			player.refillHunger(refillAmount);
-			fatigue(-40);
+			player.changeFatigue(-40);
 			HPChange(50 + player.maxHP() / 5, false);
 			dynStats("lus", 20 + (player.lib / 5));
 			//Libido reduction

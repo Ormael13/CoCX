@@ -659,7 +659,7 @@ package classes.Scenes.Explore {
 				outputText("She smiles and flies off, leaving you with a fresh bottle of \"Cerulean Potion\".  As pleasing as the experience was, it has left you thoroughly exhausted.");
 					//[Mechanics: Corruption increase same as male counterpart. No hit point recover for that night. When fatigue model is implemented, no fatigue recovery and add 25 points]
 			}
-			fatigue(20);
+			player.changeFatigue(20);
 			player.orgasm();
 			dynStats("lib", .5);
 			doNext(ceruleanSuccubusEncounterPart4);
@@ -812,7 +812,7 @@ package classes.Scenes.Explore {
 					if (flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10) {
 						player.removeStatusEffect(StatusEffects.SuccubiNight);
 					}
-					fatigue(20);
+					player.changeFatigue(20);
 					player.cumMultiplier++;
 					//[Maintain first encounter mechanics. New variable to keep track of subsequent encounters within a specific time period]
 				}

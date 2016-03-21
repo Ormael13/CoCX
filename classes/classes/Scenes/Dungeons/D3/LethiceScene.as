@@ -79,7 +79,7 @@ package classes.Scenes.Dungeons.D3
 			if (flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] == 0) flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] = 1; //Temporary measure to prevent dungeon from becoming unclearable if you have Basilisk immunity.
 			clearOutput();
 			outputText("\"<i>No! It cannot be!</i>\" Lethice screams. You walk over to her defeated form and yank the staff away from her. ");
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			inventory.takeItem(weapons.L_STAFF, theFinalEndingPart2);
 		}
 		

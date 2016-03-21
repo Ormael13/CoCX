@@ -51,7 +51,7 @@ package classes.Scenes.Places.Ingnam
 					outputText("\n\nYour efforts have helped to improve your stamina.");
 					dynStats("tou", 1);
 				}
-				fatigue(20);
+				player.changeFatigue(20);
 			}
 			else if (chooser == 1) {
 				outputText("\n\n\"<i>Great! I could use a hand harvesting crops,</i>\" she says, \"<i>We need five full baskets of crops.</i>\"");
@@ -65,7 +65,7 @@ package classes.Scenes.Places.Ingnam
 					outputText("\n\nYour efforts have helped to improve your stamina.");
 					dynStats("tou", 1);
 				}
-				fatigue(20);
+				player.changeFatigue(20);
 			}
 			else {
 				outputText("\n\n\"<i>Great! The cows need to be milked. It should be a simple task,</i>\" she says. She escorts you to the cow pen and says, \"<i>Fill as much buckets as you can but make sure all the cows are milked. When you're done, we'll haul the buckets. I have things to attend. Good luck!</i>\"");
@@ -73,7 +73,7 @@ package classes.Scenes.Places.Ingnam
 				outputText("\n\nBy the time you've finished milking all the cows, you are left with ten full buckets of milk. The farmer comes back and says, \"<i>Did you milk all these cows?</i>\" You give her a nod and show her the full buckets of milk. \"<i>Thank you. You know what? You've deserved some free milk! Now would be a good time for some break,</i>\" She says happily. She fills a cup with milk and gives it to you. You promptly drink the milk. Wow, this stuff is delicious when it's freshly milked! After a good drink, you strike up some conversation with her.");
 				player.refillHunger(20);
 				player.HP += 50;
-				fatigue(-10);
+				player.changeFatigue(-10);
 				outputText("\n\nAfter a few minutes of chatting, the break is over and you help her with hauling the buckets to her farmhouse, four at a time. After three trips, she gives you a final task of filling the milk bottles. You carefully pour the milk through a funnel into the bottle and when you manage to fill it, you move on to the next bottle. You repeat the process until the buckets are empty. \"<i>Good work! You have finished your work! Here's your payment,</i>\" she says as she hands you the five gems you deserve.");
 				if (player.str < 25 && rand(2) == 0) {
 					outputText("\n\nYou feel a bit stronger from all the hard work you've done.");
@@ -83,9 +83,9 @@ package classes.Scenes.Places.Ingnam
 					outputText("\n\nYour efforts have helped to improve your stamina.");
 					dynStats("tou", 1);
 				}
-				fatigue(10);
+				player.changeFatigue(10);
 			}
-			if (player.findPerk(PerkLib.HistorySlacker) >= 0) fatigue(-5);
+			if (player.findPerk(PerkLib.HistorySlacker) >= 0) player.changeFatigue(-5);
 			outputText("\n\nYou walk back to Ingnam.");
 			player.gems += 5;
 			statScreenRefresh();

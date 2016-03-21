@@ -80,7 +80,7 @@ package classes.Scenes.Areas.Mountain
 			if (player.cor < 40) dynStats("tou", -2, "cor", 1);
 			//[if corrupt]
 			else dynStats("cor", 1.5);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		public function hellHoundGetsRaped():void
@@ -98,7 +98,7 @@ package classes.Scenes.Areas.Mountain
 			//[if player has no endowments] 
 			if (player.gender == 0) outputText("The two heads stare at your lack of sexual endowments for a few seconds before looking up at you sadly.  With a whine, the hellhound wanders off.  Feeling rather unsatisfied, you think that you should probably fix your lack of sexual 'parts'...", false);
 			else player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 
@@ -314,7 +314,7 @@ package classes.Scenes.Areas.Mountain
 			if (player.cor < 20) {
 				outputText("The corrupt juice burns on your tongue, far worse than the hottest spicy dish you have ever had. You instantly back off from his member, cursing this abomination of nature. Leaving the submissive creature as it is, you head back for your camp.", false);
 				dynStats("lus", -99);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			//--- ELSE (CORRUPTION >= 20) ---
@@ -328,7 +328,7 @@ package classes.Scenes.Areas.Mountain
 					player.takeDamage(20);
 					dynStats("lus", -99);
 					//--> deals 20dmg (lowering hp to a minimum of 1), introduces inability to masturbate
-					cleanupAfterCombat();
+					combat.cleanupAfterCombat();
 					return;
 				}
 				//--- ELSE (CORRUPTION >= 40) ---
@@ -377,7 +377,7 @@ package classes.Scenes.Areas.Mountain
 				//Preggers chance!
 				player.knockUp(PregnancyStore.PREGNANCY_HELL_HOUND, PregnancyStore.INCUBATION_HELL_HOUND, 101);
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 	}
 }

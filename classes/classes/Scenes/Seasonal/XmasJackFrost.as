@@ -135,7 +135,7 @@ package classes.Scenes.Seasonal {
 				//Skip to next day...
 				flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
 				HPChange(player.maxHP(), false);
-				fatigue(-100);
+				player.changeFatigue(-100);
 				doNext(camp.returnToCampUseEightHours);
 			}
 			//Rathazul
@@ -555,7 +555,7 @@ package classes.Scenes.Seasonal {
 				}
 				HPChange(player.maxHP(), false);
 				player.hunger = 100;
-				fatigue(-100);
+				player.changeFatigue(-100);
 				flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
 				doNext(camp.returnToCampUseEightHours);
 			}

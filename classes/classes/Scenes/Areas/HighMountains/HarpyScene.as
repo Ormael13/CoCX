@@ -26,7 +26,7 @@ package classes.Scenes.Areas.HighMountains
 			else outputText("The harpy can't contain her lust anymore and crumples to the ground before you, on her knees with her plush, heavy ass resting on her feet. She coos pathetically, with one hand between her legs furiously fingering herself, and the other pressed against your crotch, a needy look in her eyes.", false);
 			//Genderless get nothing.
 			if (player.gender == 0) {
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			//Rape options
@@ -44,10 +44,10 @@ package classes.Scenes.Areas.HighMountains
 					if (player.clitLength >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy, null, null, null, "Fuck the harpy with your big clit.");
 				}
 				if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis, null, null, null, "Use your ovipositor to lay the eggs into harpy.");
-				addButton(14, "Leave", cleanupAfterCombat);
+				addButton(14, "Leave", combat.cleanupAfterCombat);
 			}
 			//Not horny?  Iz over
-			else cleanupAfterCombat();
+			else combat.cleanupAfterCombat();
 		}
 
 		public function harpyLossU():void
@@ -59,7 +59,7 @@ package classes.Scenes.Areas.HighMountains
 			//Genderless people get boned
 			if (player.gender == 0 && player.isGoo()) {
 				harpyGooGenderlessLoss();
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				return;
 			}
 			//Dick that fits or has cunt
@@ -70,7 +70,7 @@ package classes.Scenes.Areas.HighMountains
 			//No fitu
 			else {
 				outputText("Though you've been defeated by the harpy, it doesn't seem she wants anything to do with you, and gives you a whack upside your head before departing.", true);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 
@@ -153,7 +153,7 @@ package classes.Scenes.Areas.HighMountains
 
 				outputText("In your last conscious moment before you pass out from the hit, you hear the harpy sisters cackling above you.", false);
 			}
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			player.orgasm();
 			dynStats("lib", 1);
 		}
@@ -278,8 +278,8 @@ package classes.Scenes.Areas.HighMountains
 			}
 
 			outputText("After a few hours, when you wake, every muscle in your body is aching as though you've just run a marathon. Looking down at your " + player.legs() + " in a weary haze, you see signs that even after you'd blacked out, your body had continued to be abused by the three lust-crazed harpies.", false);
-			fatigue(20);
-			cleanupAfterCombat();
+			player.changeFatigue(20);
+			combat.cleanupAfterCombat();
 			player.orgasm();
 			dynStats("str", -1, "tou", -1, "lib", 1, "sen", 2);
 		}
@@ -356,7 +356,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("Once your flow of seed subsides, you pull free of the fat-reared harpy.  She collapses into an orgasm-wracked pile on the ground, her plump ass and tender thighs waving in the air for whomever comes along after you.  You wipe yourself down and continue on your way, pleased with the brutal fuck and looking forward to your NEXT encounter...", false);
 
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			player.orgasm();
 		}
 
@@ -413,7 +413,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Throwing your head back and crying out in sheer lust-consumed ecstasy, you hilt your " + player.cockDescript(x) + " deep inside her thick, tight anus, releasing a flood of hot, sticky seed into her butt. The sudden surge of cum into her rough depths causes the exhausted harpy to tense up once more, and she releases a second, more pathetic wave of her fluids, a little less than last time. Her creamy feminine cum leaks out over your thighs as you lock with her. Your eyes roll back from the intensity of your orgasm, and you bite down on your bottom lip; for what seems like weeks you cum into her plump rump, her hands pressed on your chest as if trying to push you away. Eventually, your flow subsides, and the harpy collapses on top of you, sound asleep.\n\n", false);
 
 			outputText("Still leaking seed, you pull free of her gaping ass, and dump the worthless bird-slut on the floor in a heap. Passed out and woefully exposed, her lush holes await whatever horny beast or demon will come alone after you.", false);
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			player.orgasm();
 		}
 
@@ -517,7 +517,7 @@ package classes.Scenes.Areas.HighMountains
 			monster.HP = 2;
 			player.lust = player.maxLust();
 			flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 			player.orgasm();
 			dynStats("lib", 1);
 		}
@@ -581,7 +581,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("\n\nYou smile to yourself as you grab a few gems from the slumbering girl, making a mental note to visit the mountains again sometime.");
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 		private function spoidahsLegEggsInHarpeis():void
@@ -644,7 +644,7 @@ package classes.Scenes.Areas.HighMountains
 
 			player.dumpEggs();
 			player.orgasm();
-			cleanupAfterCombat();
+			combat.cleanupAfterCombat();
 		}
 
 //Fuck a harpy with the players throbbing clit.
@@ -682,7 +682,7 @@ package classes.Scenes.Areas.HighMountains
 				monster.HP = 2;
 				player.lust = player.maxLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 				player.orgasm();
 				dynStats("lib", .5, "sen", -1);
 			}
@@ -690,7 +690,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText(" the harpy's eyes close, and she slips into unconsciousness.  You give her round bottom a little pat before you depart, still shivering from the cascades of pleasure it brought you.");
 				player.orgasm();
 				dynStats("sen", -1);
-				cleanupAfterCombat();
+				combat.cleanupAfterCombat();
 			}
 		}
 

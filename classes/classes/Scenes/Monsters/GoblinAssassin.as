@@ -50,7 +50,7 @@
 			//Increase fatigue
 			if (color == "black") {
 				outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
-				game.fatigue(10 + rand(25));
+				player.changeFatigue(10 + rand(25));
 			}
 			combatRoundOver();
 			return;
@@ -108,7 +108,7 @@
 		{
 			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"", false);
-				game.cleanupAfterCombat();
+				game.combat.cleanupAfterCombat();
 			} 
 			else {
 				game.goblinAssassinScene.gobboAssassinBeatYaUp();

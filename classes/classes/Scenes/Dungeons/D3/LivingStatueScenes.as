@@ -47,7 +47,7 @@ package classes.Scenes.Dungeons.D3
 			
 			player.createKeyItem("Stone Statue Lethicite", 0, 0, 0, 0);
 
-			cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}
 		
 		public function fuckinMarbleOP(hpVictory:Boolean, pcCameWorms:Boolean):void

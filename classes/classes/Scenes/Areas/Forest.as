@@ -410,7 +410,7 @@ package classes.Scenes.Areas
 				else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + player.multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually, your body tenses and a light load of jizz erupts from your loins, but the orgasm is truly mild compared to what you need.  You're far too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later, " + player.sMultiCockDesc() + " has softened enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the forest floor.", false);
 			}
 			dynStats("lus", 25 + rand(player.cor / 5), "resisted", false);
-			fatigue(5);
+			player.changeFatigue(5);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Catch a Satyr using the corrupt glade and either leave or have your way with him.

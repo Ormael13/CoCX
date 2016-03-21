@@ -314,7 +314,7 @@ private function fuckFuckingFuckFlowerP2():void {
 	dynStats("cor", 1);
 	flags[kFLAGS.TIMES_FUCKED_FLOWER] = 1;
 	if (flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 4;
-	fatigue(5);
+	player.changeFatigue(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -357,7 +357,7 @@ private function rideDatFuckingFukkFlowerP2():void {
 	outputText("\n\nYou swoon from it all, your body slowly relaxing, sinking back to the ground.  The fuck-flower visibly swallows your juices, a bulge visible on the stem.  It detaches with a hungry pop, strands of its slime webbing the space between person and plant for a second before it withdraws completely.  Slowing gradually, the corrupt greenery resumes its formerly placid, open state, aimed at the sky.  You can see the tentacle-like stamen still wiggling inside, but they seem a little more lethargic now.  Your [vagina] twitches in rememberence of their caresses, and you wonder when you'll take advantage of this wondrous gift next.");
 	player.orgasm();
 	dynStats("cor", 1);
-	fatigue(5);
+	player.changeFatigue(5);
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER] = 1;
 	if (flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 4;
 	doNext(camp.returnToCampUseOneHour);
@@ -436,7 +436,7 @@ private function fuckTheFlower():void {
 	outputText("\n\nYou sigh, utterly exhausted and drained of sperm.  What a rush!  Your [armor] slips on easily after that ordeal, though your muscles are a bit sore.");
 	player.orgasm();
 	dynStats("cor", 1);
-	fatigue(5);
+	player.changeFatigue(5);
 	if (flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
 	flags[kFLAGS.TIMES_FUCKED_FLOWER]++;
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
@@ -448,7 +448,7 @@ private function drinkThePlantGirlsSap():void {
 	clearOutput();
 	//Regain 50 fatigue but gain 1 corruption, .5 libido, 15 lust, and 1 sensitivity.
 	dynStats("lib", .5, "sen", 1, "lus", 15, "cor", 1);
-	fatigue(-50);
+	player.changeFatigue(-50);
 	outputText("Feeling like you could use a pick-me-up, you prance up to the tree-boobs and give them an appraising look.  The're pert and rounded, smooth despite the roughness of the bark around them.  When you touch one, it feels warm, soft, and exquisitely tender, just like a breast should.  A small droplet beads on the tree-tit and drips on the ground while you man-handle it, smelling strongly of maple syrup.  Chuckling at that, you run your finger around the almond-colored protrusion and gather up a touch of the fluid.  The digit tastes sweet in a comforting, familiar way, and when you remove your sticky finger from your lips, you look back with undisguised hunger.");
 	outputText("\n\nThe tree's nipples look larger and harder after your inspection, and when you take one into your mouth, it immediately releases a trickle of its amber syrup onto your hungry tongue.  A shiver runs down your spine from the sweet taste, a rush of sugary delight invigorating your body as you drink.  Unfortunately, the tree's tit soon empties of its delicious treat, and you have to slide around to the other.  You wrap your arms around the trunk for stability as you suck");
 	if (silly()) outputText(", tree hugger that you are");
@@ -499,7 +499,7 @@ private function torchP3Tree():void {
 	outputText(".");
 	
 	outputText("\n\nThis time, it stays suitably lit.  The tree makes a handy torch for a few hours while it burns to ash, but leaves behind a thick, cloying smoke that takes forever to dissipate.  At least that nuisance plant is gone for good.");
-	fatigue(100);
+	player.changeFatigue(100);
 	flags[kFLAGS.FUCK_FLOWER_KILLED] = 1;
 	doNext(camp.returnToCampUseTwoHours);
 }
@@ -708,7 +708,7 @@ private function haveAMapleSyrupSnack():void {
 	outputText("\n\nPerhaps later.  You burp and walk off, having gotten just what you wanted.");
 	//stat changes n' shit
 	dynStats("lib", .5, "sen", 1, "lus", 15, "cor", 1);
-	fatigue(-60);
+	player.changeFatigue(-60);
 	doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -1144,7 +1144,7 @@ internal function defeatHolli():void {
 	}
 	outputText("\n\n(Key Item Gained: Holli's Ashes)");
 	player.createKeyItem("Holli's Ashes",0,0,0,0);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 	
 //[yes gimme monk pls]
@@ -1155,7 +1155,7 @@ private function recruitJojoToCamp():void {
 	player.createStatusEffect(StatusEffects.PureCampJojo,0,0,0,0);
 	outputText("\n\n(Key Item Gained: Holli's Ashes)");
 	player.createKeyItem("Holli's Ashes",0,0,0,0);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 
 //[no want]
@@ -1164,7 +1164,7 @@ private function dontRecruitJojoToCamp():void {
 	outputText("You hold your tongue, allowing Jojo to make his way back to the forest.");
 	outputText("\n\n(Key Item Gained: Holli's Ashes)");
 	player.createKeyItem("Holli's Ashes",0,0,0,0);
-	cleanupAfterCombat();
+	combat.cleanupAfterCombat();
 }
 	
 //>Lose

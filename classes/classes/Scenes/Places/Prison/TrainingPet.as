@@ -934,12 +934,12 @@ package classes.Scenes.Places.Prison
 			else if (player.hunger < 20)
 			{
 				outputText("(Placeholder) (Training Crate Behave) You pass an hour trying to behave but are too hungry to settle down, and end up wallowing and whining instead.\n\n");
-				fatigue(7);
+				player.changeFatigue(7);
 			}
 			else if (player.lust > 90)
 			{
 				outputText("(Placeholder) (Training Crate Behave) You pass an hour trying to behave but are too horny to settle down, and end up wallowing and whining instead.\n\n");
-				fatigue(7);
+				player.changeFatigue(7);
 			}
 			else
 			{
@@ -949,7 +949,7 @@ package classes.Scenes.Places.Prison
 			}
 			
 			
-			fatigue(7);
+			player.changeFatigue(7);
 			outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
 			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
 			doNext(camp.returnToCampUseOneHour);
@@ -962,12 +962,12 @@ package classes.Scenes.Places.Prison
 			if (player.will < 10)
 			{
 				outputText("(Placeholder) (Training Crate Misbehave) Being low on willpower, your tantrum is especially pathetic.");
-				fatigue(20);
+				player.changeFatigue(20);
 				prison.changeEsteem(1);
 			}
 			else
 			{
-				fatigue(15);
+				player.changeFatigue(15);
 				prison.changeEsteem(2);
 			}
 			prison.changeWill(-10);
@@ -1069,7 +1069,7 @@ package classes.Scenes.Places.Prison
 					clearOutput();
 					outputText("(Placeholder) (Training Crate Callout) You allow her to leash you, and she walks you around your cell so that you can stretch and work the cramps out of your muscles.\n\n");
 					prison.changeEsteem(-2, prison.inPrison);
-					fatigue(-50);
+					player.changeFatigue(-50);
 					behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) + 2;
 					outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
 					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);

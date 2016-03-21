@@ -191,7 +191,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			}
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", behemothSexMenu, true, null, null, "Initiate sexy time with the Behemoth.");
-			addButton(4, "Leave", cleanupAfterCombat);
+			addButton(4, "Leave", combat.cleanupAfterCombat);
 		}
 		
 		public function loseToBehemoth():void {
@@ -207,7 +207,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (doSFWloss()) {
 				outputText("\n\n\"<i>I win and you know what that means? I'll take some of your gems,</i>\" he says and he takes " + gemsLost + " gems from your pouch, \"<i>I'll take care of you while you're recovering.</i>\" You black out...");
 				HPChange(player.maxHP() / 2, false);
-				fatigue(-50);
+				player.changeFatigue(-50);
 				return;
 			}
 			if (player.HP <= 0) outputText("You collapse from your injuries.");
@@ -266,7 +266,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				else addButtonDisabled(5, "Watersports", "Have sex with the behemoth enough times to unlock this!");
 			}
 			if (!kGAMECLASS.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
-			else addButton(14, "Nevermind", cleanupAfterCombat);
+			else addButton(14, "Nevermind", combat.cleanupAfterCombat);
 		}
 		
 		private function analPitchBehemoth():void {
@@ -289,7 +289,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nYou give him a kiss on one of his cheeks and let him know that you'll be going. \"<i>See you later,</i>\" the behemoth says with a smile on his face. You redress and leave back to your camp.");
 			player.orgasm();
 			flags[kFLAGS.BEHEMOTH_ANAL_PITCH]++;
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (kGAMECLASS.inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -346,7 +346,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			flags[kFLAGS.BEHEMOTH_ANAL_CATCH]++;
 			dynStats("str", 0.5, "tou", 0.5);
 			HPChange(50 + (player.maxHP() / 5), false);
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (kGAMECLASS.inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -375,7 +375,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH]++;
 			dynStats("str", 0.5, "tou", 0.5);
 			HPChange(50 + (player.maxHP() / 5), false);
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (kGAMECLASS.inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -401,7 +401,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nYou lay next to him and rest for an hour before you say your goodbyes to the behemoth and walk back to your camp.");
 			flags[kFLAGS.BEHEMOTH_COCK_SUCKED]++;
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (kGAMECLASS.inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -432,11 +432,11 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nYou get out of the cum-filled basin and " + (player.isGoo() ? "absorb the cum into your gooey body": "shake the excessive cum off") + " before " + player.clothedOrNaked("getting yourself re-dressed into your [armor] and") + " rustle the behemoth's hair.  \"<i>See you later. Come back anytime for more fun,</i>\" the behemoth says. You give him a final kiss before you make your way back to camp, already feeling a lot better.");
 			flags[kFLAGS.BEHEMOTH_CUM_BATH]++;
 			HPChange(player.maxHP() / 2, false);
-			fatigue(-50);
+			player.changeFatigue(-50);
 			if (player.armor == armors.GOOARMR) kGAMECLASS.valeria.feedValeria(100);
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
 			player.slimeFeed();
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (kGAMECLASS.inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseTwoHours);
 		}
 		
@@ -490,14 +490,14 @@ package classes.Scenes.Areas.VolcanicCrag
 				outputText("\n\n\"<i>Don't go yet!</i>\" he chuckles. You watch as the bucket is being filled nearly to the brim with urine. Fortunately, the urine stream does get thinner and stops as the behemoth finishes peeing. He sets the urine-filled bucket down, walks over to you and gives your [chest] a good caress.");
 				outputText("\n\nThe behemoth gives you a lingering kiss on your " + (timesSexed() >= 5 ? "lips": "cheeks") + " before you make your way back to camp.");
 			}
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (kGAMECLASS.inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function watersportsShower():void {
 			clearOutput();
 			outputText("PLACEHOLDER");
-			if (kGAMECLASS.inCombat) cleanupAfterCombat();
+			if (kGAMECLASS.inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 		

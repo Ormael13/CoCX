@@ -74,7 +74,7 @@
 				else if (color == "black") {
 					//Increase fatigue
 					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
-					game.fatigue(10 + rand(25) * multiplier);
+					player.changeFatigue(10 + rand(25) * multiplier);
 				}
 			}
 			if (!plural) combatRoundOver();
@@ -121,11 +121,11 @@
 		{
 			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.", false);
-				game.cleanupAfterCombat();
+				game.combat.cleanupAfterCombat();
 			} else if (pcCameWorms) {
 				outputText("\n\nThe goblin's eyes go wide and she turns to leave, no longer interested in you.", false);
 				player.orgasm();
-				doNext(game.cleanupAfterCombat);
+				doNext(game.combat.cleanupAfterCombat);
 			} else {
 				game.goblinScene.goblinRapesPlayer();
 			}

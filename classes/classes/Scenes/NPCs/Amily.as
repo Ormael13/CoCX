@@ -26,7 +26,7 @@
 			//Blind dodge change
 			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
-				game.combatRoundOver();
+				game.combat.combatRoundOver();
 				return;
 			}
 			//Determine if dodged!
@@ -80,7 +80,7 @@
 			}
 			game.statScreenRefresh();
 			outputText("\n", false);
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 
 		//(Special Attacks)
@@ -131,7 +131,7 @@
 			//Dodge all!
 			else outputText("Amily dashes at you and quickly slashes you twice, but you quickly sidestep her first blow and jump back to avoid any follow-ups.", false);
 
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 
 		//-Poison Dart: Deals speed and str damage to the PC. (Not constant)
@@ -141,7 +141,7 @@
 			//Blind dodge change
 			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack from her dartgun!\n", false);
-				game.combatRoundOver();
+				game.combat.combatRoundOver();
 				return;
 			}
 			//Determine if dodged!
@@ -212,14 +212,14 @@
 					player.takeDamage(8999);
 				}
 			}
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 
 		//Concentrate: always avoids the next attack. Can be disrupted by tease/seduce.
 		private function amilyConcentration():void {
 			outputText("Amily takes a deep breath and attempts to concentrate on your movements.", false);
 			createStatusEffect(StatusEffects.Concentration,0,0,0,0);
-			game.combatRoundOver();
+			game.combat.combatRoundOver();
 		}
 
 		//(if PC uses tease/seduce after this)
