@@ -158,6 +158,9 @@
 			if (short == "doppleganger" || short == "pod" || short == "sand trap" || short == "sand tarp") {
 				temp += 200 * player.newGamePlusMod();
 			}
+			else if (short == "Lethice") {
+				temp += 1200 * player.newGamePlusMod();
+			}
 			else if (short == "Marae") {
 				temp += 2500 * player.newGamePlusMod();
 			}

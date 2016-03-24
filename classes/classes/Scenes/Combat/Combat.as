@@ -184,6 +184,7 @@ package classes.Scenes.Combat
 			if (player.findStatusEffect(StatusEffects.ThroatPunch) >= 0) temp = true;
 			if (player.findStatusEffect(StatusEffects.WebSilence) >= 0) temp = true;
 			if (player.findStatusEffect(StatusEffects.GooArmorSilence) >= 0) temp = true;
+			if (player.findStatusEffect(StatusEffects.WhipSilence) >= 0) temp = true;
 			return temp;
 		}
 
@@ -266,8 +267,19 @@ package classes.Scenes.Combat
 			if (CoC_Settings.debugBuild && !debug) addButton(9, "Inspect", debugInspect, null, null, null, "Use your debug powers to inspect your enemy.");
 			//Modify menus.
 			if (monster.findStatusEffect(StatusEffects.AttackDisabled) >= 0) {
-				outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
-				attacks = null;
+				if (monster.short == "minotaur lord") {
+					outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
+					attacks = null;
+				}
+				else if (monster.short == "Lethice") {
+					outputText("\n<b>Lethice's wings continue to flap and she keeps herself just out of reach.</b>");
+					if (isWieldingRangedWeapon()) {
+						outputText(" <b>Fortunately, you have a ranged weapon.</b>");
+					}
+					else {
+						attacks = null;
+					}
+				}
 			}
 			//Knocked back
 			if (player.findStatusEffect(StatusEffects.KnockedBack) >= 0)
@@ -675,6 +687,12 @@ package classes.Scenes.Combat
 				monster.doAI();
 				return;
 			}
+			if (player.findStatusEffect(StatusEffects.TaintedMind) >= 0 && !isWieldingRangedWeapon()) {
+				(monster as DriderIncubus).taintedMindAttackAttempt();
+				monster.doAI();
+				return;
+			}
+			flags[kFLAGS.LAST_ATTACK_TYPE] = 0;
 			//Reload
 			if (player.weaponName == "flintlock pistol") {
 				if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0) {
@@ -1023,6 +1041,8 @@ package classes.Scenes.Combat
 			}
 			
 			outputText("\n", false);
+			if (isWieldingRangedWeapon()) flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+			if (player.weaponName.indexOf("staff") != -1 && player.findPerk(PerkLib.StaffChanneling) >= 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 			checkAchievementDamage(damage);
 			//Kick back to main if no damage occured!
 			if (monster.HP >= 1 && monster.lust <= 99) {
@@ -1067,11 +1087,17 @@ package classes.Scenes.Combat
 			else return false;
 		}
 		public function isWieldingRangedWeapon():Boolean {
-			if (player.weaponName == "flintlock pistol" || player.weaponName == "crossbow" || player.weaponName == "blunderbuss rifle" || player.weaponName.indexOf("staff") != -1 && player.findPerk(PerkLib.StaffChanneling) >= 0) return true;
+			if (player.weaponName == "flintlock pistol" || player.weaponName == "crossbow" || player.weaponName == "blunderbuss rifle" || (player.weaponName.indexOf("staff") != -1 && player.findPerk(PerkLib.StaffChanneling) >= 0)) return true;
 			else return false;
 		}
 
-		//DEAL DAMAGE
+		/**
+		 * Deal damage to opponent.
+		 * @param	damage	The amount of damage dealt.
+		 * @param	apply	If true, deducts HP from monster.
+		 * @param	display	If true, displays the damage done.
+		 * @return	damage	The amount of damage.
+		 */
 		public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 			if (player.findPerk(PerkLib.Sadist) >= 0) {
 				damage *= 1.2;
@@ -1552,6 +1578,48 @@ package classes.Scenes.Combat
 			//Giant boulder
 			if (player.findStatusEffect(StatusEffects.GiantBoulder) >= 0) {
 				outputText("<b>There is a large boulder coming your way. If you don't avoid it in time, you might take some serious damage.</b>\n\n");
+			}
+			if (player.findStatusEffect(StatusEffects.DriderIncubusVenom) >= 0) {
+				//Chance to cleanse!
+				if (player.findPerk(PerkLib.Medicine) >= 0 && rand(100) <= 14) {
+					outputText("You manage to cleanse the drider incubus venom from your system with your knowledge of medicine!\n\n", false);
+					player.str += player.statusEffectv1(StatusEffects.DriderIncubusVenom);
+					mainView.statsView.showStatUp('str');
+					player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
+				}
+			}
+			//Drider Incubus' purple haze
+			if (player.findStatusEffect(StatusEffects.PurpleHaze) >= 0) {
+				outputText("<b>The purple haze is filling your vision with unsubtle erotic imagery, arousing you.</b>\n\n");
+				dynStats("lus", 3);
+			}
+			//Minotaur King's musk
+			if (player.findStatusEffect(StatusEffects.MinotaurKingMusk) >= 0) {
+				outputText("<b>The smell of the minotaur pheronome is intense, turning you on. You should try to deal with him as soon as possible.</b>\n\n");
+				dynStats("lus", 2);
+			}
+			//Minotaur King Touched
+			if (player.findStatusEffect(StatusEffects.MinotaurKingsTouch) >= 0) {
+				outputText("<b>The residual cum from the Minotaur King continues to arouse you.</b>\n\n");
+				dynStats("lus", 1);
+			}
+			//Pigby's Hands
+			if (player.findStatusEffect(StatusEffects.PigbysHands) >= 0) {
+				dynStats("lus", 3);
+			}
+			//Whip Silence
+			if (player.findStatusEffect(StatusEffects.WhipSilence) >= 0) {
+				if (player.statusEffectv1(StatusEffects.WhipSilence) > 0) {
+					outputText("<b>You are silenced by the burning cord wrapped around your neck. It's painful... and arousing too.</b> ");
+					player.takeDamage(10 + rand(8), true);
+					dynStats("lus", 4);
+					player.addStatusValue(StatusEffects.WhipSilence, 1, -1);
+					outputText("\n\n");
+				}
+				else {
+					outputText("The cord has finally came loose and falls off your neck. It dissipates immediately. You can cast spells again now!\n\n");
+					player.removeStatusEffect(StatusEffects.WhipSilence);
+				}
 			}
 			regeneration(true);
 			if (player.lust >= player.maxLust()) doNext(endLustLoss);

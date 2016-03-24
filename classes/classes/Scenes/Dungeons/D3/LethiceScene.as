@@ -1,4 +1,5 @@
-package classes.Scenes.Dungeons.D3 
+//OLD
+/*package classes.Scenes.Dungeons.D3 
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
@@ -222,4 +223,4 @@ package classes.Scenes.Dungeons.D3
 		}
 	}
 
-}
+}*/

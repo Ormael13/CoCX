@@ -2054,7 +2054,7 @@ private function dungeons():void {
 	//Turn on dungeon 2
 	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", dungeon2.enterDungeon, null, null, null, "Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (kGAMECLASS.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
 	//Turn on dungeon 3
-	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", kGAMECLASS.d3.enterD3, null, null, null, "Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + (flags[kFLAGS.LETHICE_DEFEATED] > 0 ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (kGAMECLASS.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
+	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", kGAMECLASS.d3.enterD3, null, null, null, "Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + (flags[kFLAGS.LETHICE_DEFEATED] > 0 ? "\n\nYou have defeated Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (kGAMECLASS.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
 	//Side dungeons
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon, null, null, null, "Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (kGAMECLASS.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon, null, null, null, "Re-visit the tower you went there as part of Helia's quest." + (kGAMECLASS.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
@@ -2591,6 +2591,15 @@ private function promptSaveUpdate():void {
 			flags[kFLAGS.MARAE_LETHICITE] = 0; //Reclaim the flag.
 		}
 	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 10) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 11;
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02108] > 0) {
+			outputText("Due to the official release of Lethice, you can now fight her again! Be prepared to face Drider Incubus and Minotaur King beforehand!");
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02108] = 0; //Reclaim the flag and display message.
+			doNext(doCamp);
+			return;
+		}
+	}
 }
 
 private function furColorSelection1():void {
@@ -2780,7 +2789,6 @@ private function updateAchievements():void {
 	//General
 	if (flags[kFLAGS.DEMONS_DEFEATED] >= 25 && model.time.days >= 10) awardAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER);
 	
-	
 	var NPCsBadEnds:int = 0; //Check how many NPCs got bad-ended.
 	if (flags[kFLAGS.D1_OMNIBUS_KILLED] > 0) NPCsBadEnds++;
 	if (flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED] > 0) NPCsBadEnds++;
@@ -2792,7 +2800,9 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 3) NPCsBadEnds++; //Dungeon 3 encounters
 	if (flags[kFLAGS.D3_CENTAUR_DEFEATED] == 1) NPCsBadEnds++;
 	if (flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] == 1) NPCsBadEnds++;
-	if (flags[kFLAGS.LETHICE_DEFEATED] == 2) NPCsBadEnds++;
+	if (flags[kFLAGS.DRIDERINCUBUS_KILLED] > 0) NPCsBadEnds++;
+	if (flags[kFLAGS.MINOTAURKING_KILLED] > 0) NPCsBadEnds++;
+	if (flags[kFLAGS.LETHICE_KILLED] > 0) NPCsBadEnds++;
 	
 	if (NPCsBadEnds >= 3) awardAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER);
 
