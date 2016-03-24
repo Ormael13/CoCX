@@ -50,12 +50,9 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Minerva
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 8 == 0) {
-				if (flags[kFLAGS.MET_MINERVA] < 4)
-				{
-					minervaScene.encounterMinerva();
-					return;
-				}
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 8 == 0 && flags[kFLAGS.MET_MINERVA] < 4) {
+				minervaScene.encounterMinerva();
+				return;
 			}
 			//25% minotaur sons!
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3 && rand(4) == 0 && player.hasVagina()) {

@@ -113,6 +113,7 @@ private function minervaAppearance():void {
 
 public function encounterMinerva():void {
 	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) {
+		if (flags[kFLAGS.MET_MINERVA] > 0) flags[kFLAGS.MET_MINERVA]++; //Increment counter by 1 if previously met Minerva.
 		if (flags[kFLAGS.MET_MINERVA] == 0) firstMinervaEncounter();
 		else if (flags[kFLAGS.MET_MINERVA] == 3) minervaThirdPlusEncounter();
 		else if (flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] > 0 && player.gender > 0 && flags[kFLAGS.MINERVA_LOVE] == 0 && rand(2) == 0) minervaAfterFiveTalksRomancing();
@@ -267,18 +268,13 @@ public function repeatEncounterMinerva():void {
 private function minervaThirdPlusEncounter():void {
 	clearOutput();
 	minervaSprite();
-	flags[kFLAGS.MET_MINERVA]++;
 	outputText("You make your way back up the mountain, passing the usual harpy nests as you go, looking for the oasis tower that you know has to be around here somewhere in the thick mountain mists.  After a tedious amount of time spent searching, you finally locate the path and start your journey toward the oasis.  The promise of a respite from your climb, along with food and company, compels you to continue until you finally reach the oasis tower.  Thankfully, you don't have to search long before you promptly catch sight of the crumbling tower.  Panting from your long trek, you enter the tower through a rusted, creaky door.");
-	if (flags[kFLAGS.MET_MINERVA] == 4)
-	{
-		outputText("\n\n<b>You have visited her enough times to be able to remember where to go. Unlocked Oasis Tower in Places menu!</b>", false);
-	}
+	if (flags[kFLAGS.MET_MINERVA] == 4) outputText("\n\n<b>(You have visited the tower enough times to be able to remember where to go. Unlocked Oasis Tower in Places menu!)</b>"); //Unlock Minerva's tower from Places menu.
 	outputText("\n\nSurprisingly, you don't see Minerva anywhere.  The shark-harpy isn't lounging in the water, or doing her usual calming exercises.  After a moment, though, a familiar shadow passes over you, and the siren in question lands nearby, smiling at you, looking blissfully happy to finally have some company.");
 	//No romance:
 	if (!minervaRomanced()) outputText("  \"<i>Welcome back, [name]!  It's good to see you again.  Have you come to give me some company, or would you like to partake in some of the fruit?  Or are you maybe here to sate your thirst?</i>\"");
 	else outputText("  \"<i>Darling!  Coming to visit me all the way out here!  How sweet of you!</i>\"");
 	outputText("  Minerva says as she strides toward you, her generous hips swaying back and forth, as if to entice you into her arms.");
-	
 	menu();
 	//[Talk] [Sex] [Eat] [Fight] [Leave]
 	genericMenu();
