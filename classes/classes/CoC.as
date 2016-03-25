@@ -394,8 +394,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4_mod_1.3.13";
-			version = ver + " (<b>Refactors Ahoy III</b>)";
+			ver = "1.0.2_mod_1.3.14";
+			version = ver + " (<b>The Real Lethice</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

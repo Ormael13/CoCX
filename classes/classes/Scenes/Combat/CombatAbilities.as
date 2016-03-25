@@ -293,6 +293,7 @@ package classes.Scenes.Combat
 			if (monster.short == "Holli" && monster.findStatusEffect(StatusEffects.HolliBurning) < 0) (monster as Holli).lightHolliOnFireMagically();
 			outputText("\n\n", false);
 		 	combat.checkAchievementDamage(temp);
+			flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 			flags[kFLAGS.SPELLS_CAST]++;
 			spellPerkUnlock();
 			monster.HP -= temp;
@@ -414,7 +415,7 @@ package classes.Scenes.Combat
 				dynStats("lib", .25, "lus", 15);
 			}
 			else {
-				temp = int((player.level + (player.inte/1.5) + rand(player.inte)) * player.spellMod())
+				temp = int((player.level + (player.inte / 1.5) + rand(player.inte)) * player.spellMod());
 				//temp = int((player.inte/(2 + rand(3)) * player.spellMod()) * (maxHP()/150));
 				if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
 				outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
@@ -1072,9 +1073,11 @@ package classes.Scenes.Combat
 				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
 				if (monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			}
-			dmg = combat.doDamage(dmg);
-			outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
+			outputText("  ");
+			dmg = combat.doDamage(dmg, true, true);
+			outputText("\n\n");
 			statScreenRefresh();
+			flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 			flags[kFLAGS.SPELLS_CAST]++;
 			spellPerkUnlock();
 			if (monster.HP < 1) doNext(combat.endHpVictory);
@@ -1115,9 +1118,11 @@ package classes.Scenes.Combat
 				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
 				if (monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			}
-			dmg = combat.doDamage(dmg);
-			outputText("  <b>(<font color=\"#800000\">" + dmg + "</font>)</b>\n\n", false);
+			outputText("  ");
+			dmg = combat.doDamage(dmg, true, true);
+			outputText("\n\n");
 			statScreenRefresh();
+			flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 			flags[kFLAGS.SPELLS_CAST]++;
 			spellPerkUnlock();
 			if (monster.HP < 1) doNext(combat.endHpVictory);
@@ -1619,6 +1624,7 @@ package classes.Scenes.Combat
 				return;
 			}
 			else outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>\n\n");
+			flags[kFLAGS.LAST_ATTACK_TYPE] = 1;
 		 	combat.checkAchievementDamage(damage);
 			monster.doAI();
 		}
@@ -1837,6 +1843,7 @@ package classes.Scenes.Combat
 			//New line before monster attack
 			outputText("\n\n");
 		 	combat.checkAchievementDamage(damage);
+			flags[kFLAGS.LAST_ATTACK_TYPE] = 0;
 			//Victory ORRRRR enemy turn.
 			if (monster.HP > 0 && monster.lust < 100) monster.doAI();
 			else {
@@ -1923,6 +1930,7 @@ package classes.Scenes.Combat
 			}
 			//New line before monster attack
 			outputText("\n\n");
+			flags[kFLAGS.LAST_ATTACK_TYPE] = 0;
 		 	combat.checkAchievementDamage(damage);
 			//Victory ORRRRR enemy turn.
 			if (monster.HP > 0 && monster.lust < 100) monster.doAI();
@@ -2194,6 +2202,7 @@ package classes.Scenes.Combat
 				if (monster.findStatusEffect(StatusEffects.TimesBashed) < 0) monster.createStatusEffect(StatusEffects.TimesBashed, player.findPerk(PerkLib.ShieldSlam) >= 0 ? 0.5 : 1, 0, 0, 0);
 				else monster.addStatusValue(StatusEffects.TimesBashed, 1, player.findPerk(PerkLib.ShieldSlam) >= 0 ? 0.5 : 1);
 			}
+			flags[kFLAGS.LAST_ATTACK_TYPE] = 0;
 			combat.checkAchievementDamage(damage);
 			player.changeFatigue(20,2);
 			outputText("\n\n");

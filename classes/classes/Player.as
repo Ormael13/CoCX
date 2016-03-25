@@ -2691,10 +2691,20 @@ use namespace kGAMECLASS;
 			if (findStatusEffect(StatusEffects.GardenerSapSpeed) >= 0)
 			{
 				spe += statusEffectv1(StatusEffects.GardenerSapSpeed);
-				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
+				kGAMECLASS.mainView.statsView.showStatUp('spe');
 				removeStatusEffect(StatusEffects.GardenerSapSpeed);
 			}
-			if (findStatusEffect(StatusEffects.VineHealUsed) >= 0) removeStatusEffect(StatusEffects.VineHealUsed);
+			if (findStatusEffect(StatusEffects.DriderIncubusVenom) >= 0) {
+				str += statusEffectv1(StatusEffects.DriderIncubusVenom);
+				kGAMECLASS.mainView.statsView.showStatUp('str');
+				removeStatusEffect(StatusEffects.DriderIncubusVenom);
+			}
+			if (findStatusEffect(StatusEffects.PurpleHaze) >= 0) removeStatusEffect(StatusEffects.PurpleHaze);
+			if (findStatusEffect(StatusEffects.TaintedMind) >= 0) removeStatusEffect(StatusEffects.TaintedMind);
+			if (findStatusEffect(StatusEffects.MinotaurKingMusk) >= 0) removeStatusEffect(StatusEffects.MinotaurKingMusk);
+			if (findStatusEffect(StatusEffects.MinotaurKingsTouch) >= 0) removeStatusEffect(StatusEffects.MinotaurKingsTouch);
+			if (findStatusEffect(StatusEffects.PigbysHands) >= 0) removeStatusEffect(StatusEffects.PigbysHands);
+			if (findStatusEffect(StatusEffects.WhipSilence) >= 0) removeStatusEffect(StatusEffects.WhipSilence);
 		}
 
 		public function consumeItem(itype:ItemType, amount:int = 1):Boolean {

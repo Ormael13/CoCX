@@ -1430,6 +1430,7 @@ package classes.Scenes.Combat
 				else if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
 			}
 			outputText("\n\n", false);
+			flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		}
 
 		public function teaseXP(XP:Number = 0):void {

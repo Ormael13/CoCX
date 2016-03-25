@@ -2237,7 +2237,7 @@ private function talkWithMarbleAtCamp():void {
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 1;
 	}
 	//The player has discovered the factory
-	else if (player.findStatusEffect(StatusEffects.FoundFactory) >= 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 2)
+	else if (flags[kFLAGS.FACTORY_FOUND] > 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 2)
 	{
 		outputText("You tell Marble you found a demonic factory and relate everything you know about it.  \"<i>Be careful in there,</i>\" Marble tells you, \"<i>I'm certain that place will consume you if you're unprepared.</i>\"", false);
 		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 2;		

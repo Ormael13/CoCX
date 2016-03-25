@@ -57,7 +57,6 @@ package classes
 		public static const Feeder:StatusEffectType = mk("Feeder");
 		public static const Fertilized:StatusEffectType = mk("Fertilized");
 		public static const FetishOn:StatusEffectType = mk("fetishON");
-		public static const FoundFactory:StatusEffectType = mk("Found Factory");
 		public static const FuckedMarble:StatusEffectType = mk("FuckedMarble");
 		public static const Fullness:StatusEffectType = mk("Fullness"); //Alternative to hunger
 		public static const Goojob:StatusEffectType = mk("GOOJOB");
@@ -150,6 +149,7 @@ package classes
 		public static const FactoryOmnibusDefeated:StatusEffectType = mk("FactoryOmnibusDefeated");
 		public static const FactoryOverload:StatusEffectType = mk("FactoryOverload");
 		public static const FactoryIncubusDefeated:StatusEffectType = mk("FactoryIncubusDefeated");
+		public static const FoundFactory:StatusEffectType = mk("Found Factory");
 		public static const IncubusBribed:StatusEffectType = mk("IncubusBribed");
 		public static const FactorySuccubusDefeated:StatusEffectType = mk("FactorySuccubusDefeated");		
 		public static const MaraeComplete:StatusEffectType = mk("Marae Complete");
@@ -166,7 +166,6 @@ package classes
 		public static const PrisonCaptorEllyScruffy:StatusEffectType = mk("prisonCaptorEllyScruffy");
 		public static const PrisonRestraints:StatusEffectType = mk("prisonRestraint");
 		public static const PrisonCaptorEllyScratch:StatusEffectType = mk("prisonCaptorEllyScatch");
-		
 		
 		public static const UmasMassage:StatusEffectType = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType = mk("Uniball");
@@ -213,16 +212,20 @@ package classes
 		public static const Keen:StatusEffectType = mk("keen");
 		public static const Level:StatusEffectType = mk("level");
 		public static const KitsuneFight:StatusEffectType = mk("Kitsune Fight");
+		public static const LethicesRapeTentacles:StatusEffectType = mk("Lethices Rape Tentacles");
 		public static const LustAura:StatusEffectType = mk("Lust Aura");
 		public static const LustStick:StatusEffectType = mk("LustStick");
 		public static const Milk:StatusEffectType = mk("milk");
 		public static const MilkyUrta:StatusEffectType = mk("Milky Urta");
 		public static const MinoMilk:StatusEffectType = mk("Mino Milk");
 		public static const MinotaurEntangled:StatusEffectType = mk("Minotaur Entangled");
+
 		public static const MissFirstRound:StatusEffectType = mk("miss first round");
 		public static const NoLoot:StatusEffectType = mk("No Loot");
+		public static const OnFire:StatusEffectType = mk("On Fire");
 		public static const PCTailTangle:StatusEffectType = mk("PCTailTangle");
 		public static const PeachLootLoss:StatusEffectType = mk("Peach Loot Loss");
+
 		// @aimozg i don't know and do not fucking care if these two should be merged
 		public static const PhyllaFight:StatusEffectType = mk("PhyllaFight");
 		public static const phyllafight:StatusEffectType = mk("phyllafight");
@@ -267,6 +270,7 @@ package classes
 		public static const DemonSeed:CombatStatusEffect = mk2("DemonSeed");
 		public static const Disarmed:CombatStatusEffect = mk2("Disarmed");
 		public static const DriderKiss:CombatStatusEffect = mk2("Drider Kiss");
+
 		public static const FirstAttack:CombatStatusEffect = mk2("FirstAttack");
 		public static const GiantGrabbed:CombatStatusEffect = mk2("Giant Grabbed");
 		public static const GiantStrLoss:CombatStatusEffect = mk2("GiantStrLoss");
@@ -316,6 +320,14 @@ package classes
 		public static const ShowerDotEffect:CombatStatusEffect = mk2("Shower Dot Effect");
 		public static const GardenerSapSpeed:CombatStatusEffect = mk2("Sap Speed");
 		public static const VineHealUsed:CombatStatusEffect = mk2("Vine Heal Used");
+		
+		public static const DriderIncubusVenom:CombatStatusEffect = mk2("Drider Incubus Venom");
+		public static const PurpleHaze:StatusEffectType = mk("PurpleHaze");
+		public static const TaintedMind:StatusEffectType = mk("Tainted Mind");
+		public static const MinotaurKingMusk:StatusEffectType = mk("Minotaur King Musk");
+		public static const MinotaurKingsTouch:StatusEffectType = mk("Minotaur Kings Touch");
+		public static const PigbysHands:StatusEffectType = mk("Pigbys Hands");
+		public static const WhipSilence:CombatStatusEffect = mk2("Whip-Silence");
 
 		/**
 		 * Creates non-combat status affect
