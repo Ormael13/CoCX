@@ -35,7 +35,7 @@ package classes.Scenes.Dungeons.D3
 			this.ballSize = 4;
 			this.hipRating = HIP_RATING_SLENDER;
 			this.buttRating = BUTT_RATING_TIGHT;
-			initStrTouSpeInte(100, 100, 100, 100);
+			initStrTouSpeInte(110, 110, 110, 110);
 			initLibSensCor(100, 40, 100);
 			this.weaponName = "whip";
 			this.weaponAttack = 25;
@@ -53,6 +53,8 @@ package classes.Scenes.Dungeons.D3
 			this.level = 25;
 			this.lustVuln = 0.15;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.Tank, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Tank2, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			this.checkMonster();
 		}
@@ -882,7 +884,7 @@ package classes.Scenes.Dungeons.D3
 		private function sonicwhip():void
 		{
 			outputText("Lethice raises her sizzling, flame-spitting whip high up overhead, then snaps her arm out and back in an instant, cracking the whip so hard that it gives birth to a shockwave of flame and cacophonous thunder. There’s no avoiding the all-encompassing wave of energy. There’s not even time to brace yourself. It slams into you, rattling bones and scorching flesh. ");
-			var damage:Number = 75 + weaponAttack + str;
+			var damage:Number = (75 + weaponAttack + str) * (1 + (player.newGamePlusMod() * 0.3));
 			damage = player.takeDamage(damage, true);
 		}
 		

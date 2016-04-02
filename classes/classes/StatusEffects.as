@@ -199,7 +199,7 @@ package classes
 		public static const Drunk:StatusEffectType = mk("Drunk");
 		public static const Earthshield:StatusEffectType = mk("Earthshield");
 		public static const Fear:StatusEffectType = mk("Fear");
-		public static const FearCounter:StatusEffectType = mk("FearCounter");
+		//public static const FearCounter:StatusEffectType = mk("FearCounter");
 		public static const GenericRunDisabled:StatusEffectType = mk("Generic Run Disabled");
 		public static const Gigafire:StatusEffectType = mk("Gigafire");
 		public static const GottaOpenGift:StatusEffectType = mk("Gotta Open Gift");

@@ -197,24 +197,28 @@ package classes.Scenes
 			consumableArray.push(consumables.EXTSERM);
 			consumableArray.push(consumables.F_DRAFT);
 			consumableArray.push(consumables.GROPLUS);
+			consumableArray.push(consumables.H_PILL);
 			consumableArray.push(consumables.HRBCNT);
 			consumableArray.push(consumables.ICICLE_);
 			consumableArray.push(consumables.KITGIFT);
-			consumableArray.push(consumables.L_DRAFT);
 			//Page 2
+			consumableArray.push(consumables.L_DRAFT);
 			consumableArray.push(consumables.LACTAID);
 			consumableArray.push(consumables.LUSTSTK);
 			consumableArray.push(consumables.MILKPTN);
+			consumableArray.push(consumables.NUMBOIL);
 			consumableArray.push(consumables.NUMBROX);
 			consumableArray.push(consumables.OVIELIX);
 			consumableArray.push(consumables.PEPPWHT);
+			consumableArray.push(consumables.PPHILTR);
 			consumableArray.push(consumables.PRNPKR);
+			consumableArray.push(consumables.PROMEAD);
 			consumableArray.push(consumables.REDUCTO);
+			//Page 3
 			consumableArray.push(consumables.SENSDRF);
 			consumableArray.push(consumables.SMART_T);
 			consumableArray.push(consumables.VITAL_T);
 			consumableArray.push(consumables.B__BOOK);
-			//Page 3
 			consumableArray.push(consumables.W__BOOK);
 			consumableArray.push(consumables.BC_BEER);
 			consumableArray.push(consumables.BHMTCUM);
@@ -223,11 +227,11 @@ package classes.Scenes
 			consumableArray.push(consumables.CCUPCAK);
 			consumableArray.push(consumables.FISHFIL);
 			consumableArray.push(consumables.FR_BEER);
+			//Page 4
 			consumableArray.push(consumables.GODMEAD);
 			consumableArray.push(consumables.H_BISCU);
 			consumableArray.push(consumables.IZYMILK);
 			consumableArray.push(consumables.M__MILK);
-			//Page 4
 			consumableArray.push(consumables.MINOCUM);
 			consumableArray.push(consumables.P_BREAD);
 			consumableArray.push(consumables.P_WHSKY);
@@ -236,11 +240,20 @@ package classes.Scenes
 			consumableArray.push(consumables.S_WATER);
 			consumableArray.push(consumables.NPNKEGG);
 			consumableArray.push(consumables.DRGNEGG);
+			//Page 5
 			consumableArray.push(consumables.W_PDDNG);
 			consumableArray.push(consumables.TRAILMX);
 			consumableArray.push(consumables.URTACUM);
 			consumableArray.push(null);
-			//Page 5
+			consumableArray.push(null);
+			consumableArray.push(null);
+			consumableArray.push(null);
+			consumableArray.push(null);
+			consumableArray.push(null);
+			consumableArray.push(null);
+			consumableArray.push(null);
+			consumableArray.push(null);
+			//Page 6
 			consumableArray.push(consumables.BLACKEG);
 			consumableArray.push(consumables.L_BLKEG);
 			consumableArray.push(consumables.BLUEEGG);
@@ -322,15 +335,16 @@ package classes.Scenes
 			weaponArray.push(weapons.L_DAGGR);
 			weaponArray.push(weapons.L_HAMMR);
 			weaponArray.push(weapons.L_STAFF);
+			weaponArray.push(weapons.L_WHIP);
 			weaponArray.push(weapons.MACE);
 			weaponArray.push(weapons.PIPE);
 			weaponArray.push(weapons.PTCHFRK);			
 			weaponArray.push(weapons.RIDINGC);
 			weaponArray.push(weapons.RRAPIER);
 			weaponArray.push(weapons.S_BLADE);
-			weaponArray.push(weapons.S_GAUNT);			
-			weaponArray.push(weapons.SCARBLD);
+			weaponArray.push(weapons.S_GAUNT);
 			//Page 3
+			weaponArray.push(weapons.SCARBLD);
 			weaponArray.push(weapons.SCIMITR);
 			weaponArray.push(weapons.SPEAR);
 			weaponArray.push(weapons.SUCWHIP);

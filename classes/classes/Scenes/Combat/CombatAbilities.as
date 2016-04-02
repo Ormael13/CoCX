@@ -416,10 +416,8 @@ package classes.Scenes.Combat
 			}
 			else {
 				temp = int((player.level + (player.inte / 1.5) + rand(player.inte)) * player.spellMod());
-				//temp = int((player.inte/(2 + rand(3)) * player.spellMod()) * (maxHP()/150));
-				if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
-				outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
-				HPChange(temp, false);
+				outputText("You flush with success as your wounds begin to knit. ", false);
+				HPChange(temp, true);
 			}
 			
 			outputText("\n\n", false);
@@ -571,25 +569,97 @@ package classes.Scenes.Combat
 			else monster.doAI();
 		}
 		
-		//Arian's stuff
+		//------------
+		// TALISMAN
+		//------------
 		//Using the Talisman in combat
+		public function dispellingSpell():void {
+			clearOutput();
+			outputText("You gather energy in your Talisman and unleash the spell contained within.  An orange light appears and flashes briefly before vanishing. \n");
+			//Remove player's effects
+			if (player.findStatusEffect(StatusEffects.ChargeWeapon) >= 0) {
+				outputText("\nYour weapon no longer glows as your spell is dispelled.");
+				player.removeStatusEffect(StatusEffects.ChargeWeapon);
+			}
+			if (player.findStatusEffect(StatusEffects.Might) >= 0) {
+				outputText("\nYou feel a bit weaker as your strength-enhancing spell wears off.");
+				player.str -= player.statusEffectv1(StatusEffects.Might);
+				player.tou -= player.statusEffectv2(StatusEffects.Might);
+				player.removeStatusEffect(StatusEffects.Might);
+				showStatDown("str");
+				showStatDown("tou");
+				statScreenRefresh();
+			}
+			//Remove opponent's effects
+				if (player.findStatusEffect(StatusEffects.ChargeWeapon) >= 0) {
+				outputText("\nThe glow around " + monster.a + monster.short + "'s " + monster.weaponName + " fades completely.");
+				monster.weaponAttack -= monster.statusEffectv1(StatusEffects.ChargeWeapon);
+				monster.removeStatusEffect(StatusEffects.ChargeWeapon);
+			}
+			if (monster.findStatusEffect(StatusEffects.Fear) >= 0) {
+				outputText("\nThe dark illusion around " + monster.a + " " + monster.short + " finally dissipates, leaving " + monster.pronoun2 + " no longer fearful as " + monster.pronoun1 + " regains confidence.");
+				monster.spe += monster.statusEffectv1(StatusEffects.Fear);
+				monster.removeStatusEffect(StatusEffects.Fear);
+			}
+			if (monster.findStatusEffect(StatusEffects.Illusion) >= 0) {
+				outputText("\nThe reality around " + monster.a + " " + monster.short + " finally snaps back in place as your illusion spell fades.");
+				monster.spe += monster.statusEffectv1(StatusEffects.Illusion);
+				monster.removeStatusEffect(StatusEffects.Illusion);
+			}
+
+			if (player.findStatusEffect(StatusEffects.Might) >= 0) {
+				outputText("\nYou feel a bit weaker as your strength-enhancing spell wears off.");
+				monster.str -= monster.statusEffectv1(StatusEffects.Might);
+				monster.tou -= monster.statusEffectv2(StatusEffects.Might);
+				monster.removeStatusEffect(StatusEffects.Might);
+				statScreenRefresh();
+			}
+			if (monster.findStatusEffect(StatusEffects.Shell) >= 0) {
+				outputText("\nThe magical shell around " + monster.a + " " + monster.short + " shatters!");
+				monster.removeStatusEffect(StatusEffects.Shell);
+			}
+			outputText("\n");
+			getGame().arianScene.clearTalisman();
+			monster.doAI();
+		}
+		
+		public function healingSpell():void {
+			clearOutput();
+			outputText("You gather energy in your Talisman and unleash the spell contained within.  A green aura washes over you and your wounds begin to close quickly. By the time the aura fully fades, you feel much better. ");
+			var temp:int = ((player.level * 5) + (player.inte / 1.5) + rand(player.inte)) * player.spellMod() * 1.5;
+			HPChange(temp, true);
+			getGame().arianScene.clearTalisman();
+			monster.doAI();
+		}
+		
 		public function immolationSpell():void {
 			clearOutput();
-			outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of burning flames gathers around " + monster.a + monster.short + ", slowly burning " + monster.pronoun2 + ".");
-			var temp:int = int(75+(player.inte/3 + rand(player.inte/2)) * player.spellMod());
+			outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of burning flames gathers around " + monster.a + monster.short + ", slowly burning " + monster.pronoun2 + ". ");
+			var temp:int = int(75 + (player.inte / 2 + rand(player.inte)) * player.spellMod());
 			temp = calcInfernoMod(temp);
-			temp = combat.doDamage(temp);
-			outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
-			player.removeStatusEffect(StatusEffects.ImmolationSpell);
+			temp = combat.doDamage(temp, true, true);
+			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(player.inte / 25), 0, 0, 0);
+			if (monster.short == "goo girl") {
+				outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ", false);
+				if (monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
+			}
 			getGame().arianScene.clearTalisman();
 			monster.doAI();
 		}
 
+		public function lustReductionSpell():void {
+			clearOutput();
+			outputText("You gather energy in your Talisman and unleash the spell contained within.  A pink aura washes all over you and as soon as the aura fades, you feel much less hornier.");
+			var temp:int = 30 + rand(player.inte / 5) * player.spellMod();
+			outputText(" <b>(-" + temp + " lust)</b>\n\n");
+			getGame().arianScene.clearTalisman();
+			monster.doAI();
+		}
+		
 		public function shieldingSpell():void {
 			clearOutput();
 			outputText("You gather energy in your Talisman and unleash the spell contained within.  A barrier of light engulfs you, before turning completely transparent.  Your defense has been increased.\n\n");
 			player.createStatusEffect(StatusEffects.Shielding,0,0,0,0);
-			player.removeStatusEffect(StatusEffects.ShieldingSpell);
 			getGame().arianScene.clearTalisman();
 			monster.doAI();
 		}
@@ -637,12 +707,17 @@ package classes.Scenes.Combat
 				addButton(button++, "FoxFire", foxFire, null, null, null, "Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + player.spellCost(35));
 				addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent, lowering their speed. The more you cast this in a battle, the lesser effective it becomes. \n\nFatigue Cost: " + player.spellCost(25));
 			}
-			if (player.findStatusEffect(StatusEffects.ShieldingSpell) >= 0) addButton(8, "Shielding", shieldingSpell);
-			if (player.findStatusEffect(StatusEffects.ImmolationSpell) >= 0) addButton(8, "Immolation", immolationSpell);
+			if (player.hasKeyItem("Arian's Charged Talisman") >= 0) {
+				if (player.keyItemv1("Arian's Charged Talisman") == 1) addButton(button++, "Dispel", dispellingSpell);
+				if (player.keyItemv1("Arian's Charged Talisman") == 2) addButton(button++, "Healing", healingSpell);
+				if (player.keyItemv1("Arian's Charged Talisman") == 3) addButton(button++, "Immolation", immolationSpell);
+				if (player.keyItemv1("Arian's Charged Talisman") == 4) addButton(button++, "Lust Reduc", lustReductionSpell);
+				if (player.keyItemv1("Arian's Charged Talisman") == 5) addButton(button++, "Shielding", shieldingSpell);
+			}
 			addButton(14, "Back", combat.combatMenu, false);
 		}
 		
-		/*private function fireBreathMenu():void { (Doesn't seem to be used.)
+		/*private function fireBreathMenu():void { (Doesn't seem to be used. Besides, there are 14 slots.)
 			clearOutput();
 			outputText("Which of your special fire-breath attacks would you like to use?");
 			simpleChoices("Akbal's", fireballuuuuu, "Hellfire", hellFire, "Dragonfire", dragonBreath, "", null, "Back", playerMenu);
@@ -1059,7 +1134,7 @@ package classes.Scenes.Combat
 			//Deals direct damage and lust regardless of enemy defenses.  Especially effective against non-corrupted targets.
 			outputText("Holding out your palm, you conjure corrupted purple flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling lavender sparks everywhere.");
 
-			var dmg:int = int(10+(player.inte/3 + rand(player.inte/2)) * player.spellMod());
+			var dmg:int = int(10 + (player.inte / 3 + rand(player.inte / 2)) * player.spellMod());
 			dmg = calcInfernoMod(dmg);
 			if (monster.cor >= 66) dmg = Math.round(dmg * .66);
 			else if (monster.cor >= 50) dmg = Math.round(dmg * .8);
@@ -1157,17 +1232,20 @@ package classes.Scenes.Combat
 			//Inflicts fear and reduces enemy SPD.
 			outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill " + monster.a + monster.short + "'s mind with visions of otherworldly terror that defy description.");
 			//(succeed)
-			if (player.inte / 10 + rand(20) + 1 > monster.inte / 10 + 10 + (monster.statusEffectv1(StatusEffects.FearCounter) * 2)) {
+			if (player.inte / 10 + rand(20) + 1 > monster.inte / 10 + 10 + (monster.statusEffectv2(StatusEffects.Fear) * 2)) {
 				outputText("  They cower in horror as they succumb to your illusion, believing themselves beset by eldritch horrors beyond their wildest nightmares.\n\n");
-				if (monster.statusEffectv1(StatusEffects.FearCounter) > 0) monster.addStatusValue(StatusEffects.FearCounter, 1, 1)
-				else monster.createStatusEffect(StatusEffects.FearCounter, 1, 0, 0, 0);
-				monster.createStatusEffect(StatusEffects.Fear, 1, 0, 0, 0);
+				//Create status effect and increment.
+				if (monster.statusEffectv2(StatusEffects.Fear) > 0)
+					monster.addStatusValue(StatusEffects.Fear, 2, 1)
+				else
+					monster.createStatusEffect(StatusEffects.Fear, 0, 1, 0, 0);
+				monster.addStatusValue(StatusEffects.Fear, 1, 5);
 				monster.spe -= 5;
 				if (monster.spe < 1) monster.spe = 1;
 			}
 			else {
 				outputText("  The dark fog recedes as quickly as it rolled in as they push back your illusions, resisting your hypnotic influence.");
-				if (monster.statusEffectv1(StatusEffects.FearCounter) >= 4) outputText(" Your foe might be resistant by now.");
+				if (monster.statusEffectv2(StatusEffects.Fear) >= 4) outputText(" Your foe might be resistant by now.");
 				outputText("\n\n");
 			}
 			monster.doAI();

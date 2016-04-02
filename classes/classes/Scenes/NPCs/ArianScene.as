@@ -3396,22 +3396,44 @@ private function imbueTalisman():void {
 	outputText("\n\nYou start observing the parchment, contemplating your choices.  So, what spell will you have [Arian em] place in the talisman?");
 	
 	/*The list:
-	Healing Spell: 2x Wet Cloth and 2x Vitality T. - Heals the PC, no chance for failure.
-	Lust Reduction Spell: 2x Lust Draft and 1x Fuck Draft. - Reduces the PC's current lust, no chance for failure. 
-	Shielding Spell: 2x Black Chitin and 1x Tough Silk. - Increases defense for the duration of the battle.
-	Dispelling Spell: 1x White Book and 1x Black Book - Cancels all magical and alchemical effects currently affecting the PC, beneficial or not. (Does not cancel the effects of demon's lust aura.)
-	Immolation Spell: 2x Goblin Ale and 1x Sweet Gossamer. - Deals damage over time.
 	//Back is also present as an option, and returns PC to previous menu.
 	*/
-	outputText("\n\n<b>Shielding Spell:</b> 2x Black Chitin and 1x Tough Silk - Increases defense for the duration of the battle.");
-	outputText("\n<b>Immolation Spell:</b> 2x Goblin Ale and 1x Sweet Gossamer - Deals damage over time.");
+	outputText("\n\n<b>Dispelling Spell:</b> 1x White Book and 1x Black Book - Cancels all magical and alchemical effects currently affecting the PC, beneficial or not. (Does not cancel the effects of demon's lust aura.)");
+	outputText("\n<b>Healing Spell:</b> 2x Wet Cloth and 2x Vitality T. - Heals the user, no chance for failure. More powerful than standard healing spell.");
+	outputText("\n<b>Immolation Spell:</b> 2x Goblin Ale and 1x Sweet Gossamer - Sets your opponent on fire, dealing damage over time.");
+	outputText("\n<b>Lust Reduction Spell:</b> 2x Lust Draft and 1x Fuck Draft. - Reduces the PC's current lust, no chance for failure.");
+	outputText("\n<b>Shielding Spell:</b> 2x Black Chitin and 1x Tough Silk - Increases defense for the duration of the battle.");
 	menu();
-	if (player.hasItem(useables.B_CHITN,2) && player.hasItem(useables.T_SSILK)) addButton(0,"Shielding",arianSpellPlace,"Shielding Spell");
-	if (player.hasItem(consumables.GOB_ALE,2) && player.hasItem(consumables.S_GOSSR)) addButton(1,"Immolation",arianSpellPlace,"Immolation Spell");
+	//Dispelling
+	if (player.hasItem(consumables.W__BOOK, 1) && player.hasItem(consumables.B__BOOK, 1))
+		addButton(0, "Dispelling", arianSpellPlace, "Dispelling Spell", null, null, "Cancels all magical and alchemical effects currently affecting the PC, beneficial or not. (Does not cancel the effects of demon's lust aura.)");
+	else
+		addButtonDisabled(0, "Dispelling", "You don't have the required ingredients.");
+	//Healing
+	if (player.hasItem(consumables.WETCLTH, 2) && player.hasItem(consumables.VITAL_T, 2))
+		addButton(1, "Healing", arianSpellPlace, "Healing Spell", null, null, "Heals the user, no chance for failure. More powerful than standard healing spell.");
+	else
+		addButtonDisabled(1, "Healing", "You don't have the required ingredients.");
+	//Immolation
+	if (player.hasItem(consumables.GOB_ALE, 2) && player.hasItem(consumables.S_GOSSR))
+		addButton(2, "Immolation", arianSpellPlace, "Immolation Spell", null, null, "Sets your opponent on fire, dealing damage over time.");
+	else
+		addButtonDisabled(2, "Immolation", "You don't have the required ingredients.");
+	//Lust Reduction
+	if (player.hasItem(consumables.L_DRAFT, 2) && player.hasItem(consumables.F_DRAFT, 1))
+		addButton(3, "Lust Reduc", arianSpellPlace, "Lust Reduction Spell", null, null, "Reduces the user's current lust, no chance for failure.", "Lust Reduction");
+	else
+		addButtonDisabled(3, "Lust Reduc", "You don't have the required ingredients.", "Lust Reduction");
+	//Shielding
+	if (player.hasItem(useables.B_CHITN, 2) && player.hasItem(useables.T_SSILK))
+		addButton(4, "Shielding", arianSpellPlace, "Shielding Spell", null, null, "Increases defense for the duration of the battle.");
+	else
+		addButtonDisabled(4, "Shielding", "You don't have the required ingredients.");
+	//CANCEL!
 	addButton(14,"Back",arianHomeMenu);
 }
 
-private function arianSpellPlace(spell:String):void {
+private function arianSpellPlace(spell:*):void {
 	clearOutput();
 	outputText("You tell Arian that you want [Arian em] to place the " + spell + " spell in your talisman for you.");
 	
@@ -3429,22 +3451,35 @@ private function arianSpellPlace(spell:String):void {
 	
 	outputText("\n\n(<b>Your talisman has been imbued with the " + spell + ". You can use it from the M. Specials menu in combat.</b>)\n\n");
 	clearCharges();
-	if (spell == "Shielding Spell") {
-		player.createStatusEffect(StatusEffects.ShieldingSpell,0,0,0,0);
-		//Shielding Spell: 2x Black Chitin and 1x Tough Silk. - Increases defense for the duration of the battle.
-		player.consumeItem(useables.B_CHITN,2);
-		player.consumeItem(useables.T_SSILK);
+	if (spell == "Dispelling Spell") {
+		spell = 1;
+		player.consumeItem(consumables.W__BOOK, 2);
+		player.consumeItem(consumables.B__BOOK, 2);
+	}
+	if (spell == "Healing Spell") {
+		spell = 2;
+		player.consumeItem(consumables.WETCLTH, 2);
+		player.consumeItem(consumables.VITAL_T, 2);
 	}
 	if (spell == "Immolation Spell") {
-		player.createStatusEffect(StatusEffects.ImmolationSpell,0,0,0,0);
-		//Immolation Spell: 2x Goblin Ale and 1x Sweet Gossamer. - Deals damage over time.
-		player.consumeItem(consumables.GOB_ALE,2);
+		spell = 3;
+		player.consumeItem(consumables.GOB_ALE, 2);
 		player.consumeItem(consumables.S_GOSSR);
+	}
+	if (spell == "Lust Reduction Spell") {
+		spell = 4;
+		player.consumeItem(consumables.L_DRAFT, 2);
+		player.consumeItem(consumables.F_DRAFT);
+	}
+	if (spell == "Shielding Spell") {
+		spell = 5;
+		player.consumeItem(useables.B_CHITN, 2);
+		player.consumeItem(useables.T_SSILK);
 	}
 	//If charged, stay chargggggeeed
 	if (player.hasKeyItem("Arian's Talisman") >= 0) {
 		player.removeKeyItem("Arian's Talisman");
-		player.createKeyItem("Arian's Charged Talisman",0,0,0,0);
+		player.createKeyItem("Arian's Charged Talisman", spell, 0, 0, 0);
 	}
 	doNext(camp.returnToCampUseOneHour);
 }

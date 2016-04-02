@@ -47,8 +47,8 @@ public function HPChange(changeNum:Number, display:Boolean):Number
 	var before:Number = player.HP;
 	if (changeNum == 0) return 0;
 	if (changeNum > 0) {
-		//Increase by 20%!
-		if (player.findPerk(PerkLib.HistoryHealer) >= 0) changeNum *= 1.2;
+		if (player.findPerk(PerkLib.HistoryHealer) >= 0) changeNum *= 1.2; //Increase by 20%!
+		if (player.armor.name == "skimpy nurse's outfit") changeNum *= 1.1; //Increase by 10%!
 		if (player.HP + int(changeNum) > maxHP()) {
 			if (player.HP >= maxHP()) {
 			if (display) HPChangeNotify(changeNum);

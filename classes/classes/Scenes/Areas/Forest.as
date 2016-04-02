@@ -160,9 +160,10 @@ package classes.Scenes.Areas
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100 && rand(100) >= Math.round(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] * 0.75)) choice[choice.length] = 3; //Corrupted Glade
 			choice[choice.length] = 4; //Trip on a root
 			if (rand(2) == 0) choice[choice.length] = 5; //Bee-girl encounter
-			if (rand(2) == 0) choice[choice.length] = 6; //Pigtail Truffle
+			if (rand(2) == 0) choice[choice.length] = 6; //Pigtail Truffle or Healing Pill
 			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100 && rand(2) == 0) choice[choice.length] = 7; //Gather woods
-			choice[choice.length] = 8; //Peaceful walk in woods
+			if (player.level >= 3 || model.time.days >= 20) choice[choice.length] = 8; //Mimic or Succubus (UTG)
+			choice[choice.length] = 9; //Peaceful walk in woods
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
@@ -280,17 +281,34 @@ package classes.Scenes.Areas
 					beeGirlScene.beeEncounter();
 					break;
 				case 6: 
-					if (rand(4) > 0) { //Pigtail truffle FOUND!
-						outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
-						inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
-					}
-					else { //Chitin freebie!
-						outputText("You find a large piece of insectile carapace obscured in the ferns to your left.  It's mostly black with a thin border of bright yellow along the outer edge.  There's still a fair portion of yellow fuzz clinging to the chitinous shard.  It feels strong and flexible - maybe someone can make something of it.  ", true);
-						inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
+					switch(rand(8)) {
+						case 0:
+							outputText("You find a large piece of insectile carapace obscured in the ferns to your left. It's mostly black with a thin border of bright yellow along the outer edge. There's still a fair portion of yellow fuzz clinging to the chitinous shard. It feels strong and flexible - maybe someone can make something of it. ");
+							inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
+							break;
+						case 1:
+						case 2:
+							outputText("You find a pill stamped with the letter 'H' discarded on the ground.");
+							inventory.takeItem(consumables.H_PILL, camp.returnToCampUseOneHour);
+							break;
+						case 3:
+						case 4:
+						case 5:
+						case 6:
+						case 7:
+						default:
+							outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
+							inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
 					}
 					break;
 				case 7: //Gather woods
 					camp.cabinProgress.gatherWoods();
+					break;
+				case 8:
+					if (rand(2) == 0)
+						getGame().mimicScene.mimicTentacleStart(3);
+					else
+						getGame().succubusScene.encounterSuccubus();
 					break;
 				default: //Failsafe
 					if (player.cor < 80) {

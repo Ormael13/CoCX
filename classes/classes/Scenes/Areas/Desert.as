@@ -112,6 +112,11 @@ package classes.Scenes.Areas
 				choices[choices.length] = kGAMECLASS.dungeons.desertcave.fightCumWitch;
 				args[args.length] = -8008;
 			}
+			//Encounter Mimic
+			if (player.level >= 3 || model.time.days >= 20) {
+				choices[choices.length] = getGame().mimicScene.mimicTentacleStart;
+				args[args.length] = 1;
+			}
 			//Encounter Marcus
 			choices[choices.length] = wanderer.wandererRouter;
 			args[args.length] = -8008;

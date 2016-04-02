@@ -800,9 +800,11 @@ package classes.Scenes.Dungeons.D3
 		
 		private function goKillYourself():void {
 			clearOutput();
-			outputText("There is nothing worse than being humiliated and turned into a corrupted, lustful dog. Death is a better option for sure. Reaching your shaking hand into your pack, you pull out a cyanide pill and pop it into your mouth then swallow. Your mouth foams as your heart stops beating.");
-			outputText("\n\nAs your vision begins to fade into blackness, the last word you hear is Lethice screaming \"<i>NOOOOOOOOOOOOOOO!</i>\" You give her the last laugh before finally passing away.");
-			player.takeDamage(player.HP, false);
+			outputText("There is nothing worse than being humiliated and turned into a corrupted, lustful dog who serves only the Queen of the Demons. Death is a better option for sure. Reaching your shaking hand into your pack, you pull out a cyanide pill and pop it into your mouth then swallow. Your mouth foams as your heart stops beating.");
+			outputText("\n\nAs your vision begins to fade into blackness, the last word you hear is Lethice screaming \"<i>NOOOOOOOOOOOOOOO!</i>\" ");
+			outputText("\n\nYou give her the last laugh before finally passing away. ");
+			awardAchievement("NOOOOOOOOOOOO!", kACHIEVEMENTS.GENERAL_NOOOOOOO);
+			player.takeDamage(player.HP + 9999, false);
 			getGame().gameOver();
 		}
 		
@@ -833,10 +835,11 @@ package classes.Scenes.Dungeons.D3
 				flags[kFLAGS.LETHICE_KILLED] = 1;
 			}
 			else if (method == 1) {
-				outputText("Lethice probably deserves a punishment that would fit her foul deeds indeed. You raise your [weapon] and slice through her neck, causing her head to fall to the floor and demonic blood spills forth. You pick up your prize and show it to the demons to let them know not to mess with you. ");				
+				outputText("Lethice probably deserves a punishment that would fit her foul deeds indeed. You raise your [weapon] and slice through her neck, causing her head to fall to the floor and demonic blood spills forth. You pick up your prize and show it to the demons to let them know not to mess with you. ");
 				flags[kFLAGS.LETHICE_KILLED] = 2; // 2 indicates Lethice beheaded
 			}
 			outputText("The assembled demons scatter at the sight, fearful they’ll fall next - and rightly so. So long as they remain, there’s always the chance another will take her place.");
+			if (method == 1) awardAchievement("Off With Her Head!", kACHIEVEMENTS.GENERAL_OFF_WITH_HER_HEAD, true, true, false);
 			postTheChoice();
 		}
 		
@@ -1208,6 +1211,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("You may have defeated Lethice and completed the main story but the fun isn't over! It's time for you to return to the game and begin a new era of Mareth.");
 			outputText("\n\n<b>You can now ascend if you like. Search for the book in the ruined cathedral and perform the ritual at your camp.</b>");
 			awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, true, true, false);
+			if (player.level <= 1) awardAchievement("Ultimate Noob", kACHIEVEMENTS.CHALLENGE_ULTIMATE_NOOB, true, true, false);
 			inDungeon = false;
 			inRoomedDungeon = false;
 			player.HP = player.maxHP();

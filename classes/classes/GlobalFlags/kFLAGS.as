@@ -2277,8 +2277,8 @@ public static const ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO:int                    
 public static const ACHIEVEMENT_PROGRESS_ANTWORKS:int                               = 2269;
 public static const CODEX_ENTRY_ZEBRAS:int                                          = 2270;
 public static const ACHIEVEMENT_PROGRESS_EGG_HUNTER:int                             = 2271;
-public static const UNKNOWN_FLAG_NUMBER_02272:int                                   = 2272;
-public static const UNKNOWN_FLAG_NUMBER_02273:int                                   = 2273;
+public static const CURRENT_WEATHER:int                                             = 2272;
+public static const WEATHER_CHANGE_COOLDOWN:int                                     = 2273; //4 hours to prevent weather from changing too fast.
 public static const UNKNOWN_FLAG_NUMBER_02274:int                                   = 2274;
 public static const UNKNOWN_FLAG_NUMBER_02275:int                                   = 2275;
 public static const UNKNOWN_FLAG_NUMBER_02276:int                                   = 2276;
