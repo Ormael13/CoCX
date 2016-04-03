@@ -942,7 +942,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function gropehands():void
 		{
-			outputText("<i>“Let’s see how you fight while you’re being groped, shall we? A shame Pigby isn’t around to see how I’ve improved his hands,”</i> Lethice murmurs. Cupping her hands into a parody of lecher’s grip, the corruptive Queen squeezes and chants. Immediately, you feel phantasmal hands all over your body, reaching through your armor to fondle your bare [skinFurScalesNoun]. Digits slip into your [butt]. Fingertips brush your [nipples]. Warm palms slide down your quivering belly toward your vulnerable loins.");
+			outputText("<i>“Let’s see how you fight while you’re being groped, shall we? A shame Pigby isn’t around to see how I’ve improved his hands,”</i> Lethice murmurs. Cupping her hands into a parody of lecher’s grip, the corruptive Queen squeezes and chants. Immediately, you feel phantasmal hands all over your body, reaching through your armor to fondle your bare [skinFurScales]. Digits slip into your [butt]. Fingertips brush your [nipples]. Warm palms slide down your quivering belly toward your vulnerable loins.");
 			outputText("\n\nYou glare daggers at Lethice, but she merely laughs. <i>“A shame I never got to convince him that his hands were so much more effective when used like this.”</i>");
 			game.dynStats("lus",5);
 			player.createStatusEffect(StatusEffects.PigbysHands,0,0,0,0);

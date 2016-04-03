@@ -288,7 +288,7 @@ package classes.Scenes.Areas
 							break;
 						case 1:
 						case 2:
-							outputText("You find a pill stamped with the letter 'H' discarded on the ground.");
+							outputText("You find a pill stamped with the letter 'H' discarded on the ground. ");
 							inventory.takeItem(consumables.H_PILL, camp.returnToCampUseOneHour);
 							break;
 						case 3:

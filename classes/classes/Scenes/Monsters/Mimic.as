@@ -58,7 +58,10 @@ package classes.Scenes.Monsters
 				default:
 					this.imageName = "mimic";
 			}
-			if (type == 2) this.createCock(80, 16, CockTypesEnum.HUMAN);
+			if (type == 2) 
+				this.createCock(80, 16, CockTypesEnum.HUMAN);
+			else
+				this.initedGenitals = true;
 			this.balls = 0;
 			this.ballSize = 0;
 			if (type == 1)

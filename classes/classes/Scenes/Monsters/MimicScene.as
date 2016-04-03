@@ -56,7 +56,7 @@ package classes.Scenes.Monsters
 			else if (mimicAppearance == 3) outputText("giant dick ", false);
 			else outputText("chest ", false);
 			//d100 roll (0-99) + inte/3 vs 75
-			if (rand(100) + Math.floor(player.inte / 1.5) >= 75) {
+			if (rand(100) + Math.floor(player.inte / 1.5) >= 80) {
 				//another d100 roll + inte/3 vs only 50 this time
 				if (rand(player.inte) + Math.floor(player.inte / 3) >= 50 + player.newGamePlusMod() * 10) {
 					//find a cool item!
@@ -107,7 +107,7 @@ package classes.Scenes.Monsters
 		//If you lose to Mimic.
 		public function mimicTentacle2():void
 		{
-			var tempSize:Number = Math.round((player.breastRows[0].nippleLength + player.cocks[0].cockLength / 2) * 100) / 100;
+			var tempSize:Number = Math.round((player.averageNippleLength() + player.cocks[0].cockLength / 2) * 100) / 100;
 			var nippleCockDescript:String = player.nippleDescript(0);
 			//If its a box or a rock, it swallows you whole!
 			if (mimicAppearance != 2 && mimicAppearance != 3) outputText("\n\nWith you collapsing from being unable to put up any further fight, you are unable to prevent yourself from being dragged into the thing’s enormous maw. You are pulled deeper and deeper into the monster’s surprisingly vast innards, and the light streaming in through its jaws grows more and more faint, until with a final <i>*snap*</i>, the light is cut off completely. Surrounded by total darkness and gripped by what must be hundreds of tentacles, you let loose an involuntary moan of terror as the finality of your fate sinks home. ", false);
@@ -429,14 +429,15 @@ package classes.Scenes.Monsters
 		}
 
 		public function mimicTentacleEnd():void {
-			outputText("Much to your surprise, you wake up some time later. You aren’t sure where you are, or how you got there, but you are certainly glad to be alive. You are covered in some kind of slime, and your body seems strangely sensitive. ", true);
+			clearOutput();
+			outputText("Much to your surprise, you wake up some time later. You aren’t sure where you are, or how you got there, but you are certainly glad to be alive. You are covered in some kind of slime, and your body seems strangely sensitive. ");
 			if (player.hasVagina()) {
 				if (mimicAppearance == 2 || mimicAppearance == 3) 
 				{
 					if (rand(5) > player.vaginas[0].vaginalWetness) 
 					{
 						player.vaginas[0].vaginalWetness++;
-						outputText("<b>Strangely, even after that ordeal, your vagina seems wetter than usual.</b> ", false);
+						outputText("<b>Strangely, even after that ordeal, your vagina seems wetter than usual.</b> ");
 					}
 				}
 				else
@@ -444,7 +445,7 @@ package classes.Scenes.Monsters
 					if (rand(5) > player.vaginas[0].vaginalLooseness) 
 					{
 						player.vaginas[0].vaginalLooseness++;
-						outputText("<b>Your cunt is painfully stretched from the ordeal, temporarily enlarged.</b> ", false);
+						outputText("<b>Your cunt is painfully stretched from the ordeal, temporarily enlarged.</b> ");
 					}
 				}
 			}

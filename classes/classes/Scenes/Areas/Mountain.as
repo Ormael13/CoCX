@@ -29,6 +29,8 @@ package classes.Scenes.Areas
 		{
 			player.exploredMountain++;
 			var chooser:Number = rand(5);
+			if (chooser == 5 && player.level < 3 && model.time.days < 20) //Disable mimic if requirements not met (Can still be encountered in level 1 run)
+				chooser = rand(4);
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
@@ -83,7 +85,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//10% chance of hairdresser encounter if not found yet
-			if (rand(10) == 0 && player.findStatusEffect(StatusEffects.HairdresserMeeting) < 0) chooser = 4;
+			if (rand(10) == 0 && player.findStatusEffect(StatusEffects.HairdresserMeeting) < 0) chooser = 5;
 			if ((rand(8) == 0 && flags[kFLAGS.MARAE_QUEST_START] >= 1) && flags[kFLAGS.FACTORY_FOUND] <= 0) {
 				trace("Dungeon start!")
 				kGAMECLASS.dungeons.enterFactory();
@@ -107,10 +109,6 @@ package classes.Scenes.Areas
 				spriteSelect(44);
 				minotaurScene.minoAddictionBadEndEncounter();
 				return;
-			}
-			//Disable mimic if requirements not met (Can still be encountered in level 1 run)
-			if (chooser == 5 && player.level < 3 && model.time.days < 20) {
-				chooser = rand(4);
 			}
 			//Generic Goblin/Imp encounter
 			if (chooser == 0) {
@@ -261,13 +259,13 @@ package classes.Scenes.Areas
 				}
 				hellHoundScene.hellhoundEncounter();
 			}
-			//Hairdresser
-			if (chooser == 4) {
-				salon.hairDresser();
-			}
 			//Mimic
-			if (chooser == 5) {
+			if (chooser == 4) {
 				getGame().mimicScene.mimicTentacleStart(2);
+			}
+			//Hairdresser
+			if (chooser == 5) {
+				salon.hairDresser();
 			}
 		}
 		

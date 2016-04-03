@@ -15,7 +15,7 @@ package classes.Scenes.Monsters
 			if (player.hasCock()) {
 				outputText("She's expressing interest in your [cock] and says, \"<i>Hello dearie. You've got that wonderful cock of yours and I'd like to offer my pussy to you. It'll be very pleasurable. What do you say?</i>\"");
 				menu();
-				addButton(0, "Fight", startCombatImmediate, new Succubus());
+				addButton(0, "Fight", fightAgainstSuccubus);
 				addButton(1, "Accept", loseToSuccubus, false);
 				addButton(4, "Run", tryToFlee);
 			}
@@ -23,6 +23,10 @@ package classes.Scenes.Monsters
 				outputText("She starts to close the distance by charging at you! It's a fight!");
 				startCombat(new Succubus());
 			}
+		}
+		
+		public function fightAgainstSuccubus():void {
+			startCombatImmediate(new Succubus());
 		}
 		
 		public function winAgainstSuccubus():void {

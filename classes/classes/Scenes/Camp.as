@@ -1865,9 +1865,13 @@ public function badEndGIANTBALLZ():void {
 		outputText("\n\nFortunately, you have some Reducto.  You can shrink your balls and get back to your adventures!", false)
 		addButton(1, "Reducto", applyReductoAndEscapeBadEnd);
 	}
-	else if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) {
+	if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) {
 		outputText("\n\nYou could call for Rathazul to help you.", false)
 		addButton(2, "Rathazul", callRathazulAndEscapeBadEnd);		
+	}
+	if (shouldraFollower.followerShouldra()) {
+		outputText("\n\nYou could call for Shouldra to shrink your monstrous balls.", false)
+		addButton(3, "Shouldra", shouldraFollower.shouldraReductosYourBallsUpInsideYa, true);		
 	}
 	else getGame().gameOver();
 }
@@ -2104,13 +2108,16 @@ public function wakeFromBadEnd():void {
 		outputText("\n\nYou realize the consequences of having oversized balls and you NEED to shrink it right away. Reducto will do.");
 		player.ballSize = (14 + (player.str / 2) + (player.tallness / 4));
 	}
-	outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
+	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] > 0 || debug)
+		outputText("\n\nYou get up, still feeling confused from the nightmares.");
+	else
+		outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
 	//Skip time forward
 	model.time.days++;
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
 	else model.time.hours = 6;
 	//Set so you're in camp.
-	kGAMECLASS.inDungeon = false;
+	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
 	getGame().inCombat = false;
@@ -2121,6 +2128,7 @@ public function wakeFromBadEnd():void {
 	//PENALTY!
 	var penaltyMultiplier:int = 1;
 	penaltyMultiplier += flags[kFLAGS.GAME_DIFFICULTY] * 0.5;
+	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] > 0 || debug) penaltyMultiplier = 0;
 	//Deduct XP and gems.
 	player.gems -= int((player.gems / 10) * penaltyMultiplier);
 	player.XP -= int((player.level * 10) * penaltyMultiplier);
