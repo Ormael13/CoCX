@@ -1979,7 +1979,7 @@ package classes.Scenes.Combat
 				damage = int(player.str + (player.tou / 2) + (player.spe / 2) + (player.level * 2) * 1.2 * (monster.damagePercent() / 100)); //As normal attack + horn length bonus
 				if (damage < 0) damage = 5;
 				//Normal
-				outputText("You hurl yourself towards [enemy] with your head low and jerk your head upward, every muscle flexing as you send [enemy] flying. ");
+				outputText("You hurl yourself towards the foe with your head low and jerk your head upward, every muscle flexing as you send your enemy flying. ");
 				//Critical
 				if (combat.combatCritical()) {
 					outputText("<b>Critical hit! </b>");
@@ -2004,7 +2004,7 @@ package classes.Scenes.Combat
 					outputText("You lower your head and charge Vala, but she just flutters up higher, grabs hold of your horns as you close the distance, and smears her juicy, fragrant cunt against your nose.  The sensual smell and her excited moans stun you for a second, allowing her to continue to use you as a masturbation aid, but she quickly tires of such foreplay and flutters back with a wink.\n\n");
 					dynStats("lus", 5);
 				}
-				else outputText("You hurl yourself towards [enemy] with your head low and snatch it upwards, hitting nothing but air.");
+				else outputText("You hurl yourself towards the foe with your head low and snatch it upwards, hitting nothing but air.");
 			}
 			//New line before monster attack
 			outputText("\n\n");
