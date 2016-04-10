@@ -26,7 +26,6 @@
 	}
 	
 public function farmExploreEncounter():void {
-//outputText("Whitney marches up to you as soon as you approach the farm, a stoic expression plastered across her face.");
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] > 0)
 	{
 		farmCorruption.rootScene();

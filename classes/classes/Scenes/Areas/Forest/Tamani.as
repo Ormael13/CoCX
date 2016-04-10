@@ -79,23 +79,13 @@ package classes.Scenes.Areas.Forest
 
 		override public function defeated(hpVictory:Boolean):void
 		{
+			clearOutput();
 			if (hpVictory) {
-				outputText("Tamani is defeated!", true);
+				outputText("Tamani is defeated!");
 			} else {
-				outputText("Tamani gives up on defeating you and starts masturbating!", true);
+				outputText("Tamani gives up on defeating you and starts masturbating!");
 			}
-			if (player.lust >= 33 && player.totalCocks() > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?", false);
-				var temp:Function = null;
-				var temp2:Function = null;
-				if (player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = game.forest.tamaniScene.tamaniAnalShits;
-				//NOT PREGGERS
-				if (!game.forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) {
-					temp2 = game.forest.tamaniScene.tamaniBeaten;
-				}
-				game.simpleChoices("Fuck", game.forest.tamaniScene.tamaniSexWon, "Buttfuck", temp, "", null, "Lay Eggs", temp2, "Leave", game.combat.cleanupAfterCombat);
-			}
-			else game.combat.cleanupAfterCombat();
+			game.forest.tamaniScene.tamaniVictoryMenu();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

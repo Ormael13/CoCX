@@ -539,7 +539,7 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				outputText("You decide it’s better not to tell the erstwhile Demon Queen who she was, and what she’s done. If she doesn’t remember anything, then... well, you did intend to give her a second chance, didn’t you? Reminding her of what her horde has done to the world can only lead to misery, and her drawing the ire of those she’s hurt.");
-				outputText("\n\nSo you give her the name of [lethice.name], and tell her that she’s a creation of the goddess Marae, a redeemed soul made manifest. She stares at you with wide eyes as you half-explain and half-lie about her origins, who she is now and what world she’s been born into. The very mention of demons, creatures running wild across the tainted realm, sends shivers through her, and recounting their deeds to destroy her <i>“mother”</i> and the pure beings of Mareth brings tears to her eyes.");
+				outputText("\n\nSo you give her the name of " + flags[kFLAGS.LETHICE_NAME] + ", and tell her that she’s a creation of the goddess Marae, a redeemed soul made manifest. She stares at you with wide eyes as you half-explain and half-lie about her origins, who she is now and what world she’s been born into. The very mention of demons, creatures running wild across the tainted realm, sends shivers through her, and recounting their deeds to destroy her <i>“mother”</i> and the pure beings of Mareth brings tears to her eyes.");
 			}
 			menu();
 			addButton(0,"Next",redemptionIV);

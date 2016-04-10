@@ -2279,8 +2279,8 @@ public static const CODEX_ENTRY_ZEBRAS:int                                      
 public static const ACHIEVEMENT_PROGRESS_EGG_HUNTER:int                             = 2271;
 public static const CURRENT_WEATHER:int                                             = 2272;
 public static const WEATHER_CHANGE_COOLDOWN:int                                     = 2273; //4 hours to prevent weather from changing too fast.
-public static const UNKNOWN_FLAG_NUMBER_02274:int                                   = 2274;
-public static const UNKNOWN_FLAG_NUMBER_02275:int                                   = 2275;
+public static const TAMANI_DEFEAT_COUNTER:int                                       = 2274; //If this reaches 4, you can bad-end Tamani.
+public static const TAMANI_BAD_ENDED:int                                            = 2275; //Determines if Tamani is bad-ended. (Killed)
 public static const UNKNOWN_FLAG_NUMBER_02276:int                                   = 2276;
 public static const UNKNOWN_FLAG_NUMBER_02277:int                                   = 2277;
 public static const UNKNOWN_FLAG_NUMBER_02278:int                                   = 2278;

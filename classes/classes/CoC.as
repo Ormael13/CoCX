@@ -396,8 +396,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_1.3.16";
-			version = ver + " (<b>Nostalgia Ahoy</b>)";
+			ver = "1.0.2_mod_1.3.17";
+			version = ver + " (<b>More Fixes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

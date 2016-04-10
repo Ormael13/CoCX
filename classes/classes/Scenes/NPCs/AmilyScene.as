@@ -289,7 +289,7 @@ package classes.Scenes.NPCs
 				if (player.findStatusEffect(StatusEffects.Infested) < 0) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
 			}
 			//Corrupt blow up! - requires you've met Amily
-			if (flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && player.cor > 25 + player.corruptionTolerance()) {
+			if (flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && (player.cor > 25 + player.corruptionTolerance() || player.cor > 75)) {
 				meetAmilyAsACorruptAsshat();
 				return;
 			}

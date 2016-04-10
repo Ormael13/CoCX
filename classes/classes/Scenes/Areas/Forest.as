@@ -45,7 +45,7 @@ package classes.Scenes.Areas
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100 && rand(100) >= Math.round(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] * 0.5)) choice[choice.length] = 2; //Corrupted Glade
 			choice[choice.length] = 3; //Akbal
 			choice[choice.length] = 4; //Kitsunes
-			if (flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) choice[choice.length] = 5; //Tamani
+			if (flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && flags[kFLAGS.TAMANI_BAD_ENDED] == 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) choice[choice.length] = 5; //Tamani
 			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100 && rand(2) == 0) choice[choice.length] = 6; //Gather woods
 			
 			//Every tenth exploration finds a pumpkin if eligible!
@@ -206,7 +206,7 @@ package classes.Scenes.Areas
 			//==============================
 			switch(select) {
 				case 0: //Tamani 25% of all goblin encounters encounter rate
-					if (rand(4) <= 0 && flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
+					if (rand(4) <= 0 && flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && flags[kFLAGS.TAMANI_BAD_ENDED] == 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
 						if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
 							tamaniDaughtersScene.encounterTamanisDaughters();
 						}
