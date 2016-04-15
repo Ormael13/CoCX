@@ -2957,78 +2957,56 @@ private function findLostIzmaKidsII():void {
 }
 
 //Ask Izma About Removing Her Dick
-private function removeIzmasPenis():void {
+private function removeIzmasPenis(forced:Boolean = false):void {
 	clearOutput();
-	if (flags[kFLAGS.ASKED_IZMA_ABOUT_WANG_REMOVAL] == 0) {
-		outputText("You ask Izma if she wouldn't mind getting rid of her dick for you, her Alpha.  She recoils at the mention, a haughty look on her angular visage.  \"<i>Tch, why would I want to get rid of my pride and joy?  My dick feels so good... I would never want to lose it,</i>\" Izma answers with a hint of rebellion.");
-		outputText("\n\nShe isn't happy with the idea, but if you want, you could assert yourself as an Alpha to overcome it.");
-		flags[kFLAGS.ASKED_IZMA_ABOUT_WANG_REMOVAL] = 1;
-		menu();
-		addButton(0,"Okay",izmaFollowerMenu);
-		addButton(1,"Force Her",forceIzmaPenis);
-		return;
+	var gemCost:int = 0;
+	if (forced) {
+		outputText("Izma takes a half step back when you glide forward, penetrating her personal space with the effortless authority of one who has repeatedly demonstrated it.  You look your Beta in the eye and remind her EXACTLY how the shark people do it.  The strong rule.  The strong give the orders.  The weak MUST obey the strong, and Izma... she is weak.  She casts her eyes down, away from your imperious gaze, and she stammers, \"<i>Yes... yes, my Alpha,</i>\" in a suitably chastised manner.");
+		outputText("\n\nWith your power unquestioned, you again bring up the question of removing her dick, and what the best way to go about it would be.  Izma pouts, but willingly answers, \"<i>Well, ever since we mutated, most transformation items will make us very ill.  Somehow, that change seems to fight almost any other.  I'd guess it has something to do with the demonic taint.  If ANYTHING would work on a tigershark like me, it would be the demonic items.  You might have to use a lot of them, though. Marethians aren't as susceptible to change as off-worlders like you.</i>\"");
+		outputText("\n\nYou consider before asking if five bottles of Succubi milk would be enough to remove her dick.  Izma adjusts her spectacles and sighs, \"<i>Well... probably, but I don't want to!  Life is so much more fun with a dick!</i>\"");
+		outputText("\n\nYou make a quick, horizontal gesture with your hand flat, cutting off her whining.  You're in charge.  She isn't.");
+		if (player.newGamePlusMod()) {
+			outputText("\n\n\"<i>And one more thing. Bring me a lot of gems" + (silly() ? ". I'm getting fucking tired of Champions removing my dick" : "") + ",</i>\" Izma warns.");
+		}
 	}
 	else {
-		outputText("You bring up the idea of removing her dick again, and Izma just sighs \"<i>Why?  Why can't you just... be happy with me like I am?  I don't want to be just another shark-girl!</i>\"");
-		outputText("\n\nGrabbing her quickly, you pull her into your arms and quietly assert, \"<i>You're my beta, and you'll be whatever I want you to be.  Trust me, I'll make it every bit as good as before, if not better.</i>\"");
-		outputText("\n\nIzma gives a little snort and says, \"<i>Whatever... just... either do it, or don't.  I don't want to keep talking about it.  Do you have five succubi milks or not?</i>\"");
+		if (flags[kFLAGS.ASKED_IZMA_ABOUT_WANG_REMOVAL] == 0) {
+			outputText("You ask Izma if she wouldn't mind getting rid of her dick for you, her Alpha.  She recoils at the mention, a haughty look on her angular visage.  \"<i>Tch, why would I want to get rid of my pride and joy?  My dick feels so good... I would never want to lose it,</i>\" Izma answers with a hint of rebellion.");
+			outputText("\n\nShe isn't happy with the idea, but if you want, you could assert yourself as an Alpha to overcome it.");
+			flags[kFLAGS.ASKED_IZMA_ABOUT_WANG_REMOVAL] = 1;
+			menu();
+			addButton(0, "Okay", izmaFollowerMenu);
+			addButton(1, "Force Her", removeIzmasPenis, true);
+			return;
+		}
+		else {
+			outputText("You bring up the idea of removing her dick again, and Izma just sighs \"<i>Why?  Why can't you just... be happy with me like I am?  I don't want to be just another shark-girl!</i>\"");
+			outputText("\n\nGrabbing her quickly, you pull her into your arms and quietly assert, \"<i>You're my beta, and you'll be whatever I want you to be.  Trust me, I'll make it every bit as good as before, if not better.</i>\"");
+			outputText("\n\nIzma gives a little snort and says, \"<i>Whatever... just... either do it, or don't.  I don't want to keep talking about it.  Do you have five succubi milks or not?</i>\"");
+			if (player.newGamePlusMod() > 0) {
+				if (player.newGamePlusMod() >= 1) gemCost += 1000;
+				if (player.newGamePlusMod() >= 2) gemCost += 2000;
+				if (player.newGamePlusMod() >= 3) gemCost += 3000;
+				if (player.newGamePlusMod() >= 4) gemCost += 4000;
+				outputText("\n\n\"<i>And one more thing. You'll also need " + addComma(gemCost) + " gems before I'll accept as well,</i>\" Izma says.");
+			}
+		}
 	}
 	//COUNT MILK TOTAL
 	var succMilk:int = 0;
 	var pMilk:int = 0;
-	var count:int = 5;
-	while(count > 0) {
-		if (player.hasItem(consumables.SUCMILK,count)) {
-		   succMilk = count;
-		   break;
-		}
-		count--;
+	if (player.hasItem(consumables.SUCMILK)) {
+		succMilk = player.itemCount(consumables.SUCMILK);
 	}
-	count = 5;
-	while(count > 0) {
-		if (player.hasItem(consumables.P_S_MLK,count)) {
-			pMilk = count;
-			break;
-		}
-		count--;
+	if (player.hasItem(consumables.P_S_MLK)) {
+		pMilk = player.itemCount(consumables.P_S_MLK);
 	}
 	if (succMilk + pMilk < 5) {
 		outputText("\n\nNow, if you can find enough succubi milk, you can get rid of that troublesome member.");
 		doNext(izmaFollowerMenu);
 	}
-	else {
-		outputText("\n\nYou have enough succubi milk already. <b>Do you want to get rid of Izma's penis?</b>");
-		simpleChoices("Remove Dick", izmaDickToggle, "", null, "", null, "", null, "Back", izmaFollowerMenu);
-	}
-}
-
-private function forceIzmaPenis():void {
-	clearOutput();
-	outputText("Izma takes a half step back when you glide forward, penetrating her personal space with the effortless authority of one who has repeatedly demonstrated it.  You look your Beta in the eye and remind her EXACTLY how the shark people do it.  The strong rule.  The strong give the orders.  The weak MUST obey the strong, and Izma... she is weak.  She casts her eyes down, away from your imperious gaze, and she stammers, \"<i>Yes... yes, my Alpha,</i>\" in a suitably chastised manner.");
-	outputText("\n\nWith your power unquestioned, you again bring up the question of removing her dick, and what the best way to go about it would be.  Izma pouts, but willingly answers, \"<i>Well, ever since we mutated, most transformation items will make us very ill.  Somehow, that change seems to fight almost any other.  I'd guess it has something to do with the demonic taint.  If ANYTHING would work on a tigershark like me, it would be the demonic items.  You might have to use a lot of them, though. Marethians aren't as susceptible to change as off-worlders like you.</i>\"");
-	outputText("\n\nYou consider before asking if five bottles of Succubi milk would be enough to remove her dick.  Izma adjusts her spectacles and sighs, \"<i>Well... probably, but I don't want to!  Life is so much more fun with a dick!</i>\"");
-	outputText("\n\nYou make a quick, horizontal gesture with your hand flat, cutting off her whining.  You're in charge.  She isn't.");
-	//COUNT MILK TOTAL
-	var succMilk:int = 0;
-	var pMilk:int = 0;
-	var count:int = 5;
-	while(count > 0) {
-		if (player.hasItem(consumables.SUCMILK,count)) {
-		   succMilk = count;
-		   break;
-		}
-		count--;
-	}
-	count = 5;
-	while(count > 0) {
-		if (player.hasItem(consumables.P_S_MLK,count)) {
-			pMilk = count;
-			break;
-		}
-		count--;
-	}
-	if (succMilk + pMilk < 5) {
-		outputText("\n\nNow, if you can find enough succubi milk, you can get rid of that troublesome member.");
+	else if (player.gems < gemCost) {
+		outputText("\n\nNow, if you can afford the gems before Izma accepts that, you can get rid of that troublesome member.");
 		doNext(izmaFollowerMenu);
 	}
 	else {
@@ -3041,7 +3019,14 @@ private function forceIzmaPenis():void {
 private function izmaDickToggle():void {
 	clearOutput();
 	if (flags[kFLAGS.IZMA_NO_COCK] == 0) {
-		outputText("With a flourish, you produce five bottles of creamy demonic milk, the glass tinkling merrily in the breeze.  Izma frowns, but steps out of her skirt, grumping, \"<i>If I have to lose it, I'd at least want to be able to say goodbye.</i>\"  As the grass-skirt squishes into a pile on the ground, you hand the first bottle to Izma.  She makes a face, but pops the cork nonetheless. Her throat bobs as she chucks down the liquid, the bottle quickly emptying.");
+		var gemCost:int = 0;
+		if (player.newGamePlusMod() > 0) {
+			if (player.newGamePlusMod() >= 1) gemCost += 1000;
+			if (player.newGamePlusMod() >= 2) gemCost += 2000;
+			if (player.newGamePlusMod() >= 3) gemCost += 3000;
+			if (player.newGamePlusMod() >= 4) gemCost += 4000;
+		}
+		outputText("With a flourish, you produce " + (gemCost > 0 ? addComma(gemCost) + " gems and " : "") + "five bottles of creamy demonic milk, the glass tinkling merrily in the breeze.  Izma frowns, but steps out of her skirt, grumping, \"<i>If I have to lose it, I'd at least want to be able to say goodbye.</i>\"  As the grass-skirt squishes into a pile on the ground, you hand the first bottle to Izma.  She makes a face, but pops the cork nonetheless. Her throat bobs as she chucks down the liquid, the bottle quickly emptying.");
 		outputText("\n\n\"<i>Ahhh,</i>\" Izma says with a satisfied tone before catching herself.  Did she enjoy the taste? The tigershark-girl shivers and starts to ask, \"<i>Is it hot out...?  Oh... it's just me, isn't it?</i>\"");
 		outputText("\n\nYou nod and quietly note a trickle of moisture running down the girl's reddish-orange thigh, speeding toward the ground.  The next bottle doesn't garner the protest the first did; if anything, Izma seems eager to take it from you.  In an instant, the cork is off and the bottle is docked with her lips.  Izma drinks deep and fast, finishing the milk far more quickly than the previous dose.  She tosses the bottle over her shoulder and moans sensuously, her hands cupping her breasts as inches of length vanish down below.  Tiny dribbles of white leak from the diminishing member, matched by runners of clear fluid from beneath her ball-swollen sack.");
 		outputText("\n\nWhen she calms down, you realize Izma is sweating heavily.  You hold out the remaining bottles, and she snatches one from your grip.  The shark-girl growls, \"<i>You never said it tasted this good!</i>\" and chugs.  She finishes it in seconds, immediately snatching the next dose from you.  Her cock is shrinking, her nipples are tightening, and she's cumming weak ropes of spunk into the dirt, but it doesn't slow her consumption at all.  If anything, Izma seems even more driven to the drinks.  The fourth bottle disappears in seconds, and Izma is visibly shaking all over, as if locked in orgasm.");
@@ -3060,11 +3045,15 @@ private function izmaDickToggle():void {
 			count++;
 			dynStats("cor", 3);
 		}
+
+		player.gems -= gemCost;
+		statScreenRefresh();
 	}
 	else {
 		//Re-Herm Izma:
 		outputText("You flash Izma a smile and tell her she can regrow her penis.  She cheers so violently that her glasses nearly go flying, \"<i>Hell yes!</i>\"  The black-striped girl digs into her trunk and pulls out a strange tablet, popping it into her mouth before you can change your mind.  She chews vigorously, finishing it in seconds.  Izma cups her drooling snatch and moans, her palms slowly pushed away from her body by a red, masculine member.  It grows larger by the second, soon surpassing six inches, then eight, then ten, and not stopping until it's as big as it used to be.  A second later, a spherical protrusion falls down, filling out a new-grown flap of skin.  Plop!  Another joins it.  Finally, two more orbs fall from her body into her new ballsack.  <b>Izma is a herm again!</b>");
 		flags[kFLAGS.IZMA_NO_COCK] = 0;
+		dynStats("cor", -2);
 	}
 	doNext(camp.returnToCampUseOneHour);
 }

@@ -228,6 +228,7 @@ private function rathazulWorkOffer():Boolean {
 			outputText("The rat mentions, \"<i>I see you have a number of demonic items on your person.  For 20 gems I could attempt to remove the taint from one of them, rendering it a good deal safer for consumption.  Of course it would not remove most of the transformative properties of the item...</i>\"\n\n", false);
 		purify = true;
 		spoken = true;
+		totalOffers += pCounter;
 	}
 	//Offer dyes if offering something else.
 	if (player.gems >= 50) {
@@ -236,7 +237,7 @@ private function rathazulWorkOffer():Boolean {
 		outputText("Or if you want some changes to your skin, I have skin oils and body lotions.  I will need 50 gems up-front.</i>\"\n\n");
 		dyes = true;
 		spoken = true;
-		totalOffers += pCounter;
+		totalOffers++;
 	}
 	//Offer purity philter and numbing oil.
 	if (player.gems >= 100) {

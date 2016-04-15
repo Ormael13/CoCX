@@ -278,6 +278,10 @@ use namespace kGAMECLASS;
 			//Bonus defense
 			if (armType == ARM_TYPE_SPIDER) armorDef += 2;
 			if (lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS || lowerBody == LOWER_BODY_TYPE_BEE) armorDef += 2;
+			//Bonus when being a samurai
+			if (armor == game.armors.SAMUARM && weapon == game.weapons.KATANA) {
+				armorDef += 2;
+			}
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (findPerk(PerkLib.Agility) >= 0) {
@@ -326,15 +330,17 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && weaponPerk != "Large") {
 				attack += Math.round((spe - 50) / 3);
 			}
-			if (findPerk(PerkLib.IronFists) >= 0 && str >= 50 && weaponName == "fists") {
+			//Iron fists bonus!
+			if (findPerk(PerkLib.IronFists) >= 0 && str >= 50 && weaponName == "fists")
 				attack += 5;
-			}
-			if (findPerk(PerkLib.IronFists2) >= 0 && str >= 65 && weaponName == "fists") {
+			if (findPerk(PerkLib.IronFists2) >= 0 && str >= 65 && weaponName == "fists")
 				attack += 3;
-			}
-			if (findPerk(PerkLib.IronFists3) >= 0 && str >= 80 && weaponName == "fists") {
+			if (findPerk(PerkLib.IronFists3) >= 0 && str >= 80 && weaponName == "fists")
 				attack += 3;
-			}			
+			//Bonus for being samurai!
+			if (armor == game.armors.SAMUARM && weapon == game.weapons.KATANA)
+				attack += 2;
+			//Berserking bonus!
 			if (findStatusEffect(StatusEffects.Berzerking) >= 0) attack += 30;
 			attack += statusEffectv1(StatusEffects.ChargeWeapon);
 			return attack;

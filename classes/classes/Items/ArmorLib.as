@@ -36,6 +36,7 @@ package classes.Items
 		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
 		public const INDECST:ArmorWithPerk = new ArmorWithPerk("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,800,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",
 				PerkLib.SluttySeduction,6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
+		public const KIMONO :Armor = new Armor("Kimono ","Kimono ","kimono","a traditional kimono",2,500,"This is a type of robes also known as kimono traditionally worn by the people of the far East. It's pretty elegant.","Light");
 		public const LEATHRA:Armor = new Armor("LeathrA","LeathrA","leather armor segments","a set of leather armor",5,76,"This is a suit of well-made leather armor.  It looks fairly rugged.","Light");
 		public const URTALTA:LeatherArmorSegments = new LeatherArmorSegments();
 		public const LMARMOR:LustyMaidensArmor = new LustyMaidensArmor();
@@ -51,6 +52,7 @@ package classes.Items
 		public const RBBRCLT:ArmorWithPerk = new ArmorWithPerk("RbbrClt","Rbbr Fetish","rubber fetish clothes","a set of revealing rubber fetish clothes",3,1000,"A revealing set of fetish-wear.  Upgrades your tease attack with the \"Slutty Seduction\" perk.","Light",
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy rubberwear allows you access to 'Seduce', an improved form of 'Tease'.", true, false);
 		public const S_SWMWR:SluttySwimwear = new SluttySwimwear();
+		public const SAMUARM:Armor = new Armor("SamuArm","Samu.Armor","samurai armor","a suit of samurai armor",18,300,"This suit of armor is originally worn by the Samurai, the warriors from the far East.");
 		public const SCALEML:Armor = new Armor("ScaleMl","Scale Mail","scale-mail armor","a set of scale-mail armor",12,170,"This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.");
 		public const SEDUCTA:SeductiveArmor = new SeductiveArmor();
 		public const SEDUCTU:SeductiveArmorUntrapped = new SeductiveArmorUntrapped();

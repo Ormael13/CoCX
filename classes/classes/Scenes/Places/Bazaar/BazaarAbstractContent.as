@@ -12,8 +12,7 @@ package classes.Scenes.Places.Bazaar
 		protected function get bazaar():Bazaar {
 			return kGAMECLASS.bazaar;
 		}
-		public function BazaarAbstractContent()
-		{
-		}
+		
+		public function BazaarAbstractContent() {}
 	}
 }

@@ -2610,6 +2610,10 @@ private function promptSaveUpdate():void {
 			return;
 		}
 	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 11) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 12;
+		flags[kFLAGS.KAIZO_MODE] = 0;
+	}
 	doCamp();
 }
 

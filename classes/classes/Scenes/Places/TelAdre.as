@@ -1506,6 +1506,7 @@ public function tailorShoppe():void {
 	
 	addButton(10, armors.LTHRPNT.shortName, buyClothes, armors.LTHRPNT);
 	addButton(11, armors.BIMBOSK.shortName, buyClothes, armors.BIMBOSK);
+	addButton(12, armors.KIMONO.shortName, buyClothes, armors.KIMONO);
 	
 	addButton(4, "Next", undergarmentSection);
 	addButton(14, "Leave", telAdreMenu);
@@ -1567,24 +1568,25 @@ public function armorShop():void {
 	//outputText("\"<i>Vat can Yvonne make for you?  Ze platemail?  Or someting a bit lighter?</i>\" she asks you.", false);
 	outputText("\"<i>What can I make for you?  Platemail?  Or something that breathes a little easier?</i>\" Yvonne asks, fanning herself.");
 	
-	choices(armors.CHBIKNI.shortName,createCallBackFunction(armorBuy, armors.CHBIKNI),
-			armors.FULLCHN.shortName,createCallBackFunction(armorBuy, armors.FULLCHN),
-			armors.FULLPLT.shortName,createCallBackFunction(armorBuy, armors.FULLPLT),
-			armors.INDECST.shortName,createCallBackFunction(armorBuy, armors.INDECST),
-			armors.LTHRROB.shortName,createCallBackFunction(armorBuy, armors.LTHRROB),
-			armors.SCALEML.shortName,createCallBackFunction(armorBuy, armors.SCALEML),
-			shields.BUCKLER.shortName, createCallBackFunction(armorBuy, shields.BUCKLER),
-			shields.KITE_SH.shortName, createCallBackFunction(armorBuy, shields.KITE_SH),
-			shields.GREATSH.shortName, createCallBackFunction(armorBuy, shields.GREATSH),
-			shields.TOWERSH.shortName, createCallBackFunction(armorBuy, shields.TOWERSH));
-			
-	var egg:Function =null;
+	menu();
+	addButton(0, armors.CHBIKNI.shortName, armorBuy, armors.CHBIKNI);
+	addButton(1, armors.FULLCHN.shortName, armorBuy, armors.FULLCHN);
+	addButton(2, armors.FULLPLT.shortName, armorBuy, armors.FULLPLT);
+	addButton(3, armors.INDECST.shortName, armorBuy, armors.INDECST);
+	addButton(4, armors.LTHRROB.shortName, armorBuy, armors.LTHRROB);
+	addButton(5, armors.SCALEML.shortName, armorBuy, armors.SCALEML);
+	addButton(6, armors.SAMUARM.shortName, armorBuy, armors.SAMUARM);
+	addButton(7, shields.BUCKLER.shortName, armorBuy, shields.BUCKLER);
+	addButton(8, shields.KITE_SH.shortName, armorBuy, shields.KITE_SH);
+	addButton(9, shields.GREATSH.shortName, armorBuy, shields.GREATSH);
+	addButton(10, shields.TOWERSH.shortName, armorBuy, shields.TOWERSH);
+
 	if (player.hasKeyItem("Dragon Eggshell") >= 0) {
 		outputText("\n\nThough the pieces on display have their arguable attractions, none of them really interest you.  Yvonne taps her foot impatiently.  \"<i>Well, I could make you something to order... if you have any decent materials, cutie.  200 gems.</i>\"");
 		if (player.gems < 200) {
 			outputText("\n\nYou can't afford that!");
 		}
-		else addButton(10, "Eggshell", kGAMECLASS.emberScene.getSomeStuff);
+		else addButton(12, "Eggshell", kGAMECLASS.emberScene.getSomeStuff);
 	}
 	addButton(13, "Flirt", yvonneFlirt);
 	addButton(14, "Leave", telAdreMenu);

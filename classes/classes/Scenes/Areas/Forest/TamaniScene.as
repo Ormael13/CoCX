@@ -849,7 +849,7 @@ public function tamaniVictoryMenu():void {
 		addButton(0, "Fuck", tamaniSexWon);
 		addButton(1, "Buttfuck", tamaniAnalShits);
 		if (!getGame().forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) addButton(2, "Lay Eggs", tamaniBeaten); //NOT PREGGERS
-		if (flags[kFLAGS.TAMANI_DEFEAT_COUNTER] >= 4 && monster.HP <= 0) addButton(3, "Bad-End Her", killTamani);
+		if (flags[kFLAGS.TAMANI_DEFEAT_COUNTER] >= 4 && monster.HP <= 0) addButton(3, "NO MORE!", killTamaniChoice);
 		addButton(4, "Leave", combat.cleanupAfterCombat);
 	}
 	else {
@@ -920,12 +920,36 @@ internal function tamaniBeaten():void {
 	combat.cleanupAfterCombat();
 }
 
+private function killTamaniChoice():void {
+	clearOutput();
+	outputText("Tamani has really gotten to your nerves and you tire of her forcing herself upon you. You kick Tamani once and she writhes in pain. \"<i>Guess you don't want me anymore?</i>\" Tamani sniffles.");
+	outputText("");
+	menu();
+	if (silly()) {
+		addButton(0, "FIGHT", killTamani);
+		addButton(1, "MERCY", spareTamani);
+	}
+	else {
+		addButton(0, "Kill Her", killTamani);
+		addButton(1, "Spare Her", spareTamani);
+	}
+}
+
 private function killTamani():void {
 	clearOutput();
-	outputText("Tamani has really gotten to your nerves and you tire of her forcing herself upon you. You step over and grab her head. \"<i>NO!</i>\" Tamani cries out. You tell her that she should haven't had forced herself upon you. You snap her neck and set her lifeless body on the ground.");
+	outputText("You step over and grab her head. \"<i>NO!</i>\" Tamani cries out. You tell her that she shouldn't have forced herself upon you. You snap her neck and set her lifeless body on the ground.");
+	flags[kFLAGS.TAMANI_BAD_ENDED] = 1;
+	postTamaniRemoval();
+}
+private function spareTamani():void {
+	clearOutput();
+	outputText("You tell her that should she ever cross paths again, she's going to have a really bad time. \"<i>Yes...</i>\" Tamani sniffles, tears welling up in her face. She gets up and leaves her satchel on the ground before running into the foliage, never to be seen again.");
+	flags[kFLAGS.TAMANI_BAD_ENDED] = 0.5;
+	postTamaniRemoval();
+}
+private function postTamaniRemoval():void {
 	outputText("\n\nWith Tamani no more, you take her satchel and return to your camp.");
 	monster.XP += 100; //Gain more XP as Tamani's removed from the game.
-	flags[kFLAGS.TAMANI_BAD_ENDED] = 1;
 	player.createKeyItem("Tamani's Satchel", 2, 1, 1, 100);
 	if (pregnancy.isPregnant) pregnancy.knockUpForce(); //Clear pregnancy.
 	combat.cleanupAfterCombat();

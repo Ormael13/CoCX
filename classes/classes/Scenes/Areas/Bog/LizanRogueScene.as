@@ -75,12 +75,12 @@ package classes.Scenes.Areas.Bog
 		
 		public function winAgainstLizan():void {
 			clearOutput();
+			outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
 			if (player.cor > 30) {
-				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
-				if (player.lust >= 33) {
+				if (player.lust >= 33 && player.gender > 0) {
 					outputText("You wonder what you should do to the lizan.");
-					addButton(0, "Use Dick", rapeLizanInTheAss, null, null, null, "Anally penetrate him with your [cocks].");
-					addButton(1, "Use Pussy", rapeLizanWithPussy, null, null, null, "Get on top of the lizan and stuff his cock into your [pussy].");
+					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss, null, null, null, "Anally penetrate him with your [cocks].");
+					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy, null, null, null, "Get on top of the lizan and stuff his cock into your [pussy].");
 					addButton(4, "Leave", combat.cleanupAfterCombat);
 					return;
 				}
@@ -91,7 +91,6 @@ package classes.Scenes.Areas.Bog
 				}
 			}
 			else {
-				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
 				dynStats("str", 1, "tou", 1);
 				if (player.lust >= 33) {
 					outputText("<b>You could have sex with him if you like to.</b> ");

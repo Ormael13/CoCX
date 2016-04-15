@@ -383,8 +383,6 @@
 				flags[kFLAGS.HARDCORE_MODE] = hardcoreMode;
 				flags[kFLAGS.HARDCORE_SLOT] = hardcoreSlot;
 			}
-			//Set that jojo debug doesn't need to run
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02999] = 3;
 			//Time reset
 			model.time.days = 0;
 			model.time.hours = 0;
@@ -1416,9 +1414,11 @@
 			outputText("<b>Survival mode:</b> Like normal but with hunger enabled.\n", false);
 			outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. In addition, it's a bad idea to have oversized parts. \n", false);
 			outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n", false);
-			outputText("<b>Brutal Hardcore mode:</b> The hardest game mode ever. Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n", false);
+			outputText("<b>Brutal Hardcore mode:</b> Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n", false);
+			//outputText("<b>Kaizo mode:</b> The ABSOLUTELY HARDEST game mode ever. Lots of things are changed and Lethice has sent out her minions to wall the borders and put up a lot of puzzles. Can you defeat her in this mode in as few bad ends as possible?\n", false);
 			
 			simpleChoices("Normal", chooseModeNormal, "Survival", chooseModeSurvival, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "Brutal HC", chooseModeBrutalHardcore);
+			//addButton(12, "KAIZO", chooseModeKaizo);
 		}
 
 		private function startTheGame():void {

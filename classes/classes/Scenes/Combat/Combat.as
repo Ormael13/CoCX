@@ -1698,6 +1698,9 @@ package classes.Scenes.Combat
 			monster.spe += 25 * player.newGamePlusMod();
 			monster.inte += 25 * player.newGamePlusMod();
 			monster.level += 30 * player.newGamePlusMod();
+			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+				monster.level = Math.round(monster.level ^ 1.4);
+			}
 			//Adjust lust vulnerability in New Game+.
 			if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.8;
 			else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.65;
