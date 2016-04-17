@@ -393,9 +393,9 @@
 		{
 			clearOutput();
 			outputText("The room is light, but not overwhelmingly bright, with cool breezes gently wafting through, tingling deliciously on your exposed [skin] and setting the chimes hanging from the rafters gently a-tinkle.  A number of large potted plants occupy the corners of the room, and there's even a tiny fountain with stones in it, the tumble of water over rocks creating a strangely soothing melody.  A small brazier produces a sweet, calming smell from incense burning in it.  The pride of the room is a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.\n\n");
-			outputText("\"<i>Before we get started, I'll have to ask you to hand over a few gems for my services, dear." + (flags[kFLAGS.LOPPE_PC_MET_UMA] > 0 ? " Even if you are my little Loppe's [boyfriend], this is still a business." : "") + "</i>\"\n\n");
+			outputText("\"<i>Before we get started, I'll have to ask you to hand over a few gems for my services, dear." + (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1 ? " Even if you are my little Loppe's [boyfriend], this is still a business." : "") + "</i>\"\n\n");
 			outputText("You tell her that's alright, fishing in your belongings for the gems that the mare masseur needs for this particular service... which you remember she hasn't told you yet?\n\n");
-			outputText("Uma slaps her forehead.  \"<i>Sorry about that, dear.  " + (flags[kFLAGS.LOPPE_PC_MET_UMA] > 0 ? "Usually I charge 100 gems for this kind of service, but since you're my little horsey-hopper's [boyfriend], I'll give you a discount... how about 75 gems instead?" : "The usual price is 100 gems if that's okay with you?") + "</i>\"\n\n");
+			outputText("Uma slaps her forehead.  \"<i>Sorry about that, dear.  " + (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1 ? "Usually I charge 100 gems for this kind of service, but since you're my little horsey-hopper's [boyfriend], I'll give you a discount... how about 75 gems instead?" : "The usual price is 100 gems if that's okay with you?") + "</i>\"\n\n");
 			var massageCost:int = 100;
 			if (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1) massageCost -= 25;
 			
