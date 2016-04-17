@@ -211,19 +211,9 @@ package classes.Scenes.NPCs
 			if (emberAffection() <= 25) outputText("Ember sighs as you approach, and doesn't even look you in the eye before speaking.  \"<i>What do you want?</i>\"");
 			//Moderate Affection:
 			else if (emberAffection() <= 75) outputText("Ember fidgets as " + emberMF("his", "her") + " tail starts to sway from side to side, " + emberMF("he", "she") + " looks at you and asks, \"<i>What is it?</i>\"");
+			//High Affection:
 			else outputText("Ember's eyes light up as you close in on " + emberMF("him", "her") + ", and " + emberMF("he", "she") + " smiles nervously.  \"<i>Y-Yes?</i>\"");
 			//OPTIONS HERE
-			//[APPEARANCE]
-			/*Talk (always available)
-			 Egg (get a dragon egg, available if she has a pussy and received Ovi Elixir before hatching) (unlimited times/day)
-			 Milk (get dragon milk, available if " + emberMF("he","she") + " has received Lactaid before hatching.) (unlimited times/day)
-			 Blood (get dragon blood, always available) (1 time/day)
-			 Sex (have sex, always available)
-			 Spar (fight Ember)*/
-			//var egg:Function =null;
-			//var milk:Function =null;
-			//if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || player.hasItem(consumables.OVIELIX, 1)) && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) egg = emberIsAnEggFactory;
-			//if (flags[kFLAGS.EMBER_MILK] > 0 /* || (player.hasItem(consumables.LACTAID, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 50)*/) milk = getMilkFromEmber;
 			menu();
 			addButton(0, "Appearance", embersAppearance, null, null, null, "Examine Ember's appearance.");
 			addButton(1, "Talk", talkToEmber, null, null, null, "Talk to Ember about some topics.");
@@ -237,7 +227,6 @@ package classes.Scenes.NPCs
 				else addButton(7, "Sleep With", sleepWithEmber, null, null, null, "Spend the night with Ember.");
 			}
 			addButton(14, "Back", camp.campFollowers);
-			//choices("Appearance", embersAppearance, "Talk", talkToEmber, "DrinkBlood", bloodForTheBloodGod, "Drink Milk", milk, "Get Egg", egg, "Sex", emberSexMenu, "Spar", decideToSparEmbra, "", 0, "", 0, "Back", 74);
 		}
 
 //Approach for sex - initial output when selecting [Sex] menu (Z)

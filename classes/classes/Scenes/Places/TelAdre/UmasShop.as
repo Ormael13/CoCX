@@ -55,16 +55,13 @@
 			outputText("You make your way to Uma's shop.  It's close to Loppe's house");
 			
 			// Added some shit for variance if the players not (presumably) sexed up Loppe too much in the past.
-			if (flags[kFLAGS.LOPPE_TIMES_SEXED] <= 3)
-			{
+			if (flags[kFLAGS.LOPPE_TIMES_SEXED] <= 3 && flags[kFLAGS.LOPPE_PC_MET_UMA] == 0) {
 				outputText(" but you've never noticed the quaint storefront before.  ");
 			}
-			else if (flags[kFLAGS.LOPPE_TIMES_SEXED] <= 8)
-			{
+			else if (flags[kFLAGS.LOPPE_TIMES_SEXED] <= 8) {
 				outputText(" and the homely building has caught your eye once or twice in the past.  ");
 			}
-			else 
-			{
+			else  {
 				outputText(" and from there you've seen the humble exterior many times.  ");
 			}
 			
@@ -140,9 +137,7 @@
 			outputText("\"<i>Yeah, she is nice, she's just a little... quirky sometimes,</i>\" Loppe agrees.  \"<i>And I think she likes you too, sugar; nice work.</i>\"  She grins, patting you on the shoulder.\n\n");
 			outputText("You tell her that you're glad, but you have other things to do, so you'll catch her some other time. \"<i>Alright sugar, see you around,</i>\" Loppe announces as she turns and walks away, back in the direction of her home, leaving you to start heading back to what passes for yours in this world.\n\n");
 			
-			outputText("<b>Uma's Clinic is now available from the Tel'Adre shops menu!</b>");
-			
-			
+			outputText("<b>You now have discount on Uma's services!</b>");
 
 			// Flag the shop visit
 			// There's still a flag left over from Loppe's initial content that I dont' think is actually used.
@@ -163,7 +158,23 @@
 			clearOutput();
 			
 			// Hide the stuff that dun make no sense if you're dropping back from a menu inside the clinic
-			if (!returnedTo)
+			if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 0) {
+				outputText("You wander around Tel'Adre for a good while until something has caught your eyes. The exterior is unlike anything you've seen before. ");
+				outputText("\"Kemono's Oriental Clinic\" is written on a wooden board above the entryway. You open the door and head inside.\n\n");
+				outputText("The strange internal hallway appears strange, but the waiting room outside is light and airy.  Windows are adorned with multiple elaborate windchimes, which tinkle and clatter softly as a cooling breeze drifts through the house. A huge shelf dominates one wall, covered in - you find yourself double-checking - what look like tiny, miniature versions of trees.  A nondescript statue-fountain stands in one corner, water welling from its tip and flowing gently down its sides to create a calming sound.  In another corner, there is a small garden of colorful, polished stones and soft white sand.  Multiple lushly-cushioned chairs complete the room, obviously a waiting room - a dense bead curtain cordons off a doorway leading deeper inside the building, and Loppe's mother must clearly lie beyond.\n\n");
+				outputText("A bipedal humanoid horse with unmistakable human features walks over to greet you. She's huge, easily seven feet tall, certainly far bigger than the half-horse who brought you here, with full, round breasts and wide womanly hips clearly delineated by the strange dress that she wears, a rich blue with a pattern of white snowflakes on it.  She looks "); 
+				// Assuming Uma is ~7' tall == 84". 6" leeway for the variants or more? PAGING FENOXO!
+				if (player.tallness < 78)
+					outputText("down at you ");
+				else if (player.tallness < 90)
+					outputText("straight at you ");
+				else
+					outputText("up at you ");
+				outputText("with a soft expression; her features are maternal and friendly, but there's a playful twinkle in her eye that makes her look younger than she really is. For all that, she's clearly a mature woman but still strong and attractive. Black hair, starting to go gray at the tips, is worn in a long, elegant braid, the end knotted around an elaborate butterfly hairpin. While her fur is a beautiful shade of chestnut brown, her large eyes are a deep brown, almost black. She casually flicks an equine ear in a manner that invites you to try her services.\n\n");
+				outputText("You introduce yourself to the equine woman. \"<i>Welcome. I'm Uma and I run this business. If you need massaging services, let me know,</i>\" Uma says.");
+				flags[kFLAGS.LOPPE_PC_MET_UMA] = 0.5;
+			}
+			else if (!returnedTo)
 			{
 				outputText("You decide to pay Uma a visit at the clinic, so you follow the way through the streets to the apparently humble clinic.  Once there, you open the door and enter.\n\n");
 				outputText("The interior of Uma's clinic is as calm and quiet as usual.  There don't seem to be any customers present at this moment, and you announce your presence by knocking gently on a counter.  The tall horse-woman walks softly out through the beaded curtain, giving you a friendly smile.\n\n");
@@ -204,7 +215,7 @@
 
 			menu();
 			addButton(0, "Massage", massageMenu);
-			addButton(1, "Acupunct.", acupunctureMenu);
+			addButton(1, "Acupuncture", acupunctureMenu);
 			addButton(2, "Talk", talkMenu);
 			
 			if (!noSex)
@@ -381,14 +392,15 @@
 		public function massageMain(selectedMassage:int):void
 		{
 			clearOutput();
-			
 			outputText("The room is light, but not overwhelmingly bright, with cool breezes gently wafting through, tingling deliciously on your exposed [skin] and setting the chimes hanging from the rafters gently a-tinkle.  A number of large potted plants occupy the corners of the room, and there's even a tiny fountain with stones in it, the tumble of water over rocks creating a strangely soothing melody.  A small brazier produces a sweet, calming smell from incense burning in it.  The pride of the room is a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.\n\n");
-			outputText("\"<i>Before we get started, I'll have to ask you to hand over a few gems for my services, dear.  Even if you are my little Loppe's [boyfriend], this is still a business.</i>\"\n\n");
+			outputText("\"<i>Before we get started, I'll have to ask you to hand over a few gems for my services, dear." + (flags[kFLAGS.LOPPE_PC_MET_UMA] > 0 ? " Even if you are my little Loppe's [boyfriend], this is still a business." : "") + "</i>\"\n\n");
 			outputText("You tell her that's alright, fishing in your belongings for the gems that the mare masseur needs for this particular service... which you remember she hasn't told you yet?\n\n");
-			outputText("Uma slaps her forehead.  \"<i>Sorry about that, dear.  Usually I charge 100 gems for this kind of service, but since you're my little horsey-hopper's [boyfriend], I'll give you a discount... how about 75 gems instead?</i>\"\n\n");
-
+			outputText("Uma slaps her forehead.  \"<i>Sorry about that, dear.  " + (flags[kFLAGS.LOPPE_PC_MET_UMA] > 0 ? "Usually I charge 100 gems for this kind of service, but since you're my little horsey-hopper's [boyfriend], I'll give you a discount... how about 75 gems instead?" : "The usual price is 100 gems if that's okay with you?") + "</i>\"\n\n");
+			var massageCost:int = 100;
+			if (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1) massageCost -= 25;
+			
 			// Not enough cashmonies to pay for massage
-			if (player.gems < 75)
+			if (player.gems < massageCost)
 			{
 				outputText("You tell her that you don't have that many gems on you right now.\n\n");
 				outputText("Uma sighs and shakes her head.  \"<i>Sorry dear, but if you can't pay I can't treat you.</i>\"\n\n");
@@ -401,9 +413,9 @@
 			}
 			
 			outputText("You tell her that sounds fair, withdrawing the gems and handing them to her.\n\n");
-			player.gems -= 75;
+			player.gems -= massageCost;
 
-			outputText("\"<i>Thanks, dear,</i>\" Uma  beams, pocketing the gems and walking towards the table.  \"<i>Okay, get yourself stripped naked and lay down on the table, face up for me dear.</i>\"\n\n");
+			outputText("\"<i>Thanks, dear,</i>\" Uma beams, pocketing the gems and walking towards the table.  \"<i>Okay, get yourself stripped naked and lay down on the table, face up for me dear.</i>\"\n\n");
 			outputText("You promptly set about removing your [armorname], ");
 			
 			// If player is Exhibitionist
@@ -664,13 +676,15 @@
 		public function needleworkUndoCost():int
 		{
 			var baseCost:int = 125;
-			
-			if (flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO] != 0)
-			{
-				// 25 per undo?
-				baseCost += (25 * flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO]);
+			if (flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO] != 0) {
+				baseCost += (25 * flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO]); // 25 per undo?
 			}
+			//Cap price at 1000 gems
 			if (baseCost > 1000) baseCost = 1000;
+			//Not a boy/girlfriend of Loppe? Be charged the full price.
+			if (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1) {
+				baseCost *= 2;
+			}
 			return baseCost;
 		}
 		
@@ -764,14 +778,14 @@
 			outputText("You tell her that you want to try one of those acupuncture sessions of hers.\n\n");
 			
 			var sessionCost:int = 125;
+			if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 0) sessionCost *= 2;
 			
 			if (hasNeedleworkPerk())
 			{
 				sessionCost = this.needleworkUndoCost();
 				outputText("\"<i>Well, since I have already modified your chi in the past, we would first have to undo those changes... I cannot predict how further modifications to the natural flow through your body could interact.  Reversing past changes becomes increasingly more complex, so I have to warn you that it can become a costly process.</i>\"\n\n");
 				outputText("You tell her that you understand what she's saying, and consider the decision carefully.  You ask her how difficult she estimates the process would be, given the past sessions you have endured.\n\n");
-				outputText("The mare takes a moment to inspect you carefully, seeming to look through rather than at you.  \"<i>This could be quite a challenge, even for my skills... but, seeing as you're my little hoppers special someone, just for you I will have to ask for " + String(sessionCost) + " gems.  That's half the price of what I'd usually charge for work this difficult.</i>\"\n\n");
-				
+				outputText("The mare takes a moment to inspect you carefully, seeming to look through rather than at you.  \"<i>This could be quite a challenge, even for my skills... " + (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1 ? "but, seeing as you're my little hoppers special someone, just for you I will have to ask for " + String(sessionCost) + " gems. That's half the price of what I'd usually charge for work this difficult." : "I will have to ask for " + String(sessionCost) + " gems.") + "</i>\"\n\n");
 				menu();
 				addButton(0, "Undo", needleworkSession, NEEDLEWORK_UNDO);
 			}

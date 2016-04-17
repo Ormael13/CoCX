@@ -254,10 +254,7 @@ private function armorShops():void {
 	addButton(2, "Tailor", tailorShoppe);
 	addButton(3, "Weapons", weaponShop);
 	addButton(4, "Jewelry", jewelShopEntry);
-	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1)
-	{
-		addButton(5, "Clinic", umasShop.enterClinic);
-	}
+	addButton(5, "Clinic", umasShop.enterClinic);
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4)
 	{
 		addButton(6, "Carpenter", carpentryShopEntry);

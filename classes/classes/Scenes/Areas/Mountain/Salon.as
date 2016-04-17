@@ -54,12 +54,13 @@ private function favoriteSalonMenu():void {
 private function salonFavoritesPaymentMenu():void {
 	menu();
 	if (flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
-	if (player.hasCock()) addButton(0,"Goblin Blow",goblinHairDresserFacefuck);
-	addButton(1,"Canine",gloryholeDoggie);
-	addButton(2,"Imp",gloryholeImp);
-	addButton(3,"Minotaur",gloryholeMinotaur);
-	addButton(4,"Incubus",gloryholeIncubus);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(8,"Buy MinoCum",buyMinoCum);
+	if (player.hasCock()) addButton(0, "Goblin Blow", goblinHairDresserFacefuck, null, null, null, "Let Lynnette suck you off.");
+	addButton(1, "Canine", gloryholeDoggie, null, null, null, "Suck that knotted cock.");
+	addButton(2, "Imp", gloryholeImp, null, null, null, "Suck that demonic cock. Judging from the constant bobbing, someone must have been trying hard to hover at the right height.");
+	addButton(3, "Minotaur", gloryholeMinotaur, null, null, null, "Suck that huge minotaur cock!");
+	addButton(4, "Incubus", gloryholeIncubus, null, null, null, "Suck that incubus cock. It gives off that pleasant spicy scent.");
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(8, "Buy MinoCum", buyMinoCum, null, null, null, "Buy a bottle of minotaur cum for 60 gems?");
+	if (player.hasItem(consumables.MINOCUM) || player.hasItem(consumables.P_M_CUM) || player.hasItem(consumables.URTACUM) || player.hasItem(consumables.BHMTCUM)) addButton(9, "Give Cum", giveCumOptions);
 	addButton(14,"Back",favoriteSalonMenu);
 }
 
@@ -72,27 +73,28 @@ private function salonPaymentMenu():void {
 	addButton(3, "Minotaur", gloryholeMinotaur, null, null, null, "Suck that huge minotaur cock!");
 	addButton(4, "Incubus", gloryholeIncubus, null, null, null, "Suck that incubus cock. It gives off that pleasant spicy scent.");
 	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(8, "Buy MinoCum", buyMinoCum, null, null, null, "Buy a bottle of minotaur cum for 60 gems?");
+	if (player.hasItem(consumables.MINOCUM) || player.hasItem(consumables.P_M_CUM) || player.hasItem(consumables.URTACUM) || player.hasItem(consumables.BHMTCUM)) addButton(9, "Give Cum", giveCumOptions);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
-		private function buyMinoCum():void{
-			if (player.gems < 60)
-			{
-				outputText("You can't afford any minotaur cum right now!", true);
-				if (flags[kFLAGS.SALON_PAID] == 0)
-					doNext(salonGreeting);
-				else
-					salonPurchaseMenu();
-			}
-			else
-			{
-				player.gems -= 60;
-				outputText("You happily give Lynnette 60 gems and pick up the bottle full of glistening, heavenly cum.  ", true);
-				statScreenRefresh();
-				inventory.takeItem(consumables.MINOCUM, camp.returnToCampUseOneHour);
-			}
-		}
-		
+private function buyMinoCum():void{
+	if (player.gems < 60)
+	{
+		outputText("You can't afford any minotaur cum right now!", true);
+		if (flags[kFLAGS.SALON_PAID] == 0)
+			doNext(salonGreeting);
+		else
+			salonPurchaseMenu();
+	}
+	else
+	{
+		player.gems -= 60;
+		outputText("You happily give Lynnette 60 gems and pick up the bottle full of glistening, heavenly cum.  ", true);
+		statScreenRefresh();
+		inventory.takeItem(consumables.MINOCUM, camp.returnToCampUseOneHour);
+	}
+}
+
 public function salonPurchaseMenu():void {
 	flags[kFLAGS.SALON_PAID] = 1;
 	spriteSelect(38);
@@ -314,6 +316,37 @@ private function gloryholeMinotaur(): void {
 	player.refillHunger(30);
 	player.minoCumAddiction(10);
 	doNext(hairDressingMainMenu);
+}
+
+private function giveCumOptions():void {
+	menu();
+	if (player.hasItem(consumables.MINOCUM) || player.hasItem(consumables.P_M_CUM)) {
+		addButton(0, "Minotaur", giveCumToLynnette, 0);
+	}
+	if (player.hasItem(consumables.URTACUM)) {
+		addButton(1, "Urta's", giveCumToLynnette, 1);
+	}
+	if (player.hasItem(consumables.BHMTCUM)) {
+		addButton(2, "Behemoth's", giveCumToLynnette, 2);
+	}
+	addButton(4, "Back", salonPaymentMenu);
+}
+
+private function giveCumToLynnette(type:int):void {
+	outputText("You show Lynnette the bottle of " + (type == 0 ? "minotaur" : (type == 1 ? "Urta's" : "Behemoth's")) + " cum. Lynnette gingerly takes the bottle from you and says, \"<i>I'll gladly accept those, thanks. Now what can I do for you?</i>\"");
+	if (type == 0) { //Minotaur Cum
+		if (player.hasItem(consumables.MINOCUM))
+			player.destroyItems(consumables.MINOCUM, 1);
+		else
+			player.destroyItems(consumables.P_M_CUM, 1);
+	}
+	else if (type == 1) { //Urta's Cum
+		player.destroyItems(consumables.URTACUM, 1);
+	}
+	else { //Behemoth's Cum
+		player.destroyItems(consumables.BHMTCUM, 1);
+	}
+	salonPurchaseMenu();
 }
 
 private function goblinHairDresserFacefuck():void {

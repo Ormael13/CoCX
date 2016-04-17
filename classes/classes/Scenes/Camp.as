@@ -693,20 +693,72 @@ private function doCamp():void { //Only called by playerMenu
 	//Set up rest stuff
 	//Night
 	if (model.time.hours < 6 || model.time.hours > 20) {
-		if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n\n", false);
-		else outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n\n", false);
+		if (flags[kFLAGS.GAME_END] == 0) { //Lethice not defeated
+			outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n");
+		}
+		else { //Lethice defeated, proceed with weather
+			switch(flags[kFLAGS.CURRENT_WEATHER]) {
+				case 0:
+				case 1:
+					outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n");
+					break;
+				case 2:
+					outputText("It is dark out. The sky is covered by clouds and you could faintly make out the red spot in the clouds which is presumed to be the moon. It's far too dark to leave camp.\n\n");
+					break;
+				case 3:
+					outputText("It is dark out. The sky is covered by clouds raining water upon the ground. It's far too dark to leave camp.\n\n");
+					break;
+				case 4:
+					outputText("It is dark out. The sky is covered by clouds raining water upon the ground and occasionally the sky flashes with lightning. It's far too dark to leave camp.\n\n");
+					break;
+				default:
+					outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n");
+			}
+		}
 		if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
-			outputText("Your camp is silent as your companions are sleeping right now.\n", false);
+			outputText("Your camp is silent as your companions are sleeping right now.\n");
 		}
 		exploreEvent = null;
 		placesEvent = null;
 	}
 	//Day Time!
 	else {
-		if (model.time.hours == 19) outputText("The sun is close to the horizon, getting ready to set. ", false);
-		if (model.time.hours == 20) outputText("The sun has already set below the horizon. The sky glows orange. ", false);
-		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n", false);
+		if (flags[kFLAGS.GAME_END] > 0) { //Lethice defeated
+			switch(flags[kFLAGS.CURRENT_WEATHER]) {
+				case 0:
+					outputText("The sun shines brightly, illuminating the now-blue sky. ");
+					break;
+				case 1:
+					outputText("The sun shines brightly, illuminating the now-blue sky. Occasional clouds dot the sky, appearing to form different shapes. ");
+					break;
+				case 2:
+					outputText("The sky is light gray as it's covered by the clouds. ");
+					break;
+				case 3:
+					outputText("The sky is fairly dark as it's covered by the clouds that rain water upon the lands. ");
+					break;
+				case 4:
+					outputText("The sky is dark as it's thick with dark grey clouds that rain and occasionally the sky flashes with lightning. ");
+					break;
+			}
+		}
+		if (model.time.hours == 19) {
+			if (flags[kFLAGS.CURRENT_WEATHER] < 2)
+				outputText("The sun is close to the horizon, getting ready to set. ");
+			else
+				outputText("Though you cannot see the sun, the sky began to glow orange. ");
+		}
+		if (model.time.hours == 20) {
+			if (flags[kFLAGS.CURRENT_WEATHER] < 2)
+				outputText("The sun has already set below the horizon. The sky glows orange. ");
+			else
+				outputText("Even with the clouds, the sky is glowing bright orange. The sun may have already set at this point. ");
+		}
+		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n");
+
 	}
+	//Weather!
+
 	
 	//Unlock cabin.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 14)

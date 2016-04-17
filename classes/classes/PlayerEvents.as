@@ -897,6 +897,9 @@ package classes {
 				//Clear dragon breath cooldown!
 				if (player.findStatusEffect(StatusEffects.DragonBreathCooldown) >= 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 			}
+			if (flags[kFLAGS.WEATHER_CHANGE_COOLDOWN] > 0) {
+				flags[kFLAGS.WEATHER_CHANGE_COOLDOWN]--;
+			}
 			return needNext;
 		}
 		
@@ -1005,6 +1008,27 @@ package classes {
 				outputText("\nYou can’t help it anymore, you need to find the bee girl right now.  You rush off to the forest to find the release that you absolutely must have.  Going on instinct you soon find the bee girl's clearing and her in it.\n\n");
 				getGame().forest.beeGirlScene.beeSexForCocks(false);
 				return true;
+			}
+			if (flags[kFLAGS.GAME_END] > 0 && flags[kFLAGS.WEATHER_CHANGE_COOLDOWN] <= 0) {
+				var randomWeather:int = rand(100);
+				flags[kFLAGS.WEATHER_CHANGE_COOLDOWN] = 6 + rand(48);
+				if (randomWeather < 40) { //Clear
+					flags[kFLAGS.CURRENT_WEATHER] = 0;
+				}
+				else if (randomWeather >= 40 && randomWeather < 60) { //A few clouds
+					flags[kFLAGS.CURRENT_WEATHER] = 1;
+				}
+				else if (randomWeather >= 60 && randomWeather < 80) { //Cloudy
+					flags[kFLAGS.CURRENT_WEATHER] = 2;
+				}
+				else if (randomWeather >= 80 && randomWeather < 96) { //Rainy
+					flags[kFLAGS.CURRENT_WEATHER] = 3;
+					flags[kFLAGS.WEATHER_CHANGE_COOLDOWN] /= 2;
+				}
+				else if (randomWeather >= 96) { //Thunderstorm
+					flags[kFLAGS.CURRENT_WEATHER] = 4;
+					flags[kFLAGS.WEATHER_CHANGE_COOLDOWN] /= 3;
+				}
 			}
 			return false;
 		}
