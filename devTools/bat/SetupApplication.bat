@@ -10,7 +10,7 @@
 set AND_CERT_NAME="Corruption-of-Champions-AIR"
 set AND_CERT_PASS=testpassword
 set AND_CERT_FILE=cert\CorruptionofChampionsAIR.p12
-set AND_ICONS=icons/android
+set AND_ICONS=icons
 
 set AND_SIGNING_OPTIONS=-storetype pkcs12 -keystore "%AND_CERT_FILE%" -storepass %AND_CERT_PASS%
 
@@ -19,13 +19,13 @@ set IOS_DIST_CERT_FILE=
 set IOS_DEV_CERT_FILE=
 set IOS_DEV_CERT_PASS=
 set IOS_PROVISION=cert\CorruptionofChampionsAIR.mobileprovision
-set IOS_ICONS=icons/ios
+set IOS_ICONS=icons
 
 set IOS_DEV_SIGNING_OPTIONS=-storetype pkcs12 -keystore "%IOS_DEV_CERT_FILE%" -storepass %IOS_DEV_CERT_PASS% -provisioning-profile %IOS_PROVISION%
 set IOS_DIST_SIGNING_OPTIONS=-storetype pkcs12 -keystore "%IOS_DIST_CERT_FILE%" -provisioning-profile %IOS_PROVISION%
 
 :: Application descriptor
-set APP_XML=application.xml
+set APP_XML=..\application.xml
 
 :: Files to package
 set APP_DIR=bin

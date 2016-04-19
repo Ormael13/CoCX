@@ -368,6 +368,7 @@
 			//player.perkPoints = player.level - 1;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
 				var newGamePlusLevel:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				var difficulty:int = flags[kFLAGS.GAME_DIFFICULTY];
 				var gameMode:Number = flags[kFLAGS.HUNGER_ENABLED];
 				var hardcoreMode:int = flags[kFLAGS.HARDCORE_MODE];
 				var hardcoreSlot:String = flags[kFLAGS.HARDCORE_SLOT];
@@ -379,6 +380,7 @@
 			//Carry over data if new game plus.
 			if (newGamePlusLevel > 0) {
 				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = newGamePlusLevel;
+				flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
 				flags[kFLAGS.HUNGER_ENABLED] = gameMode;
 				flags[kFLAGS.HARDCORE_MODE] = hardcoreMode;
 				flags[kFLAGS.HARDCORE_SLOT] = hardcoreSlot;
