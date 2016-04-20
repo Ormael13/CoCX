@@ -937,8 +937,8 @@
 			
 			addButton(0, "Job", talkJob);
 			addButton(1, "Sexuality", talkSexuality);
-			addButton(2, "Loppe", talkLoppe);
-			addButton(3, "Loppe's Dad", talkLoppesDad);
+			if (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1) addButton(2, "Loppe", talkLoppe);
+			if (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1) addButton(3, "Loppe's Dad", talkLoppesDad);
 			addButton(14, "Back", enterClinic, true);
 		}
 		
@@ -962,7 +962,7 @@
 			outputText("You nod your head thoughtfully, digesting what you have been told.\n\n");
 			outputText("\"<i>Another key point, is that acupuncture is much more disruptive to the flow of chi than do-in.  Usually, in order to make something better, or different, something else has to change... and not always for the better.  I could make you faster, able to move better, but that would seal some of the chi going into your muscles, which means you would never be as strong as you were meant to be...  though sometimes, depending on what you're trying to achieve, that could actually benefit you.</i>\"  Uma smiles.\n\n");
 			outputText("You tell her that you appreciate her taking the time to explain her job to you; maybe at some point in the future you'll have a need for her special skills, but, right now, you think you've taken enough of her time.\n\n");
-			outputText("\"<i>It's always pleasure speaking to the [man] that wooed my little Loppe, dear.  Come visit soon, will you?</i>\"\n\n");
+			outputText("\"<i>" + (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1 ? "It's always pleasure speaking to the [man] that wooed my little Loppe, dear. " : "") + "Come visit soon, will you?</i>\"\n\n");
 			outputText("You promise you'll try, and then head back to camp.");
 
 			menu();
@@ -989,7 +989,7 @@
 			outputText("That makes you think, and you ask how much effort Uma has to put into keeping her little tete-a-tetes discrete? After all, you don't think too many boyfriends, husbands or fathers would be happy to hear about her seducing their girlfriends, wives or daughters.\n\n");
 			outputText("Uma smiles at you mischievously.  \"<i>On the contrary, my naive little friend.  This is an oriental clinic, and there are many types of therapy, for various problems, including sex life.  Some of the women I seduce are actually straight, and let's just say sometimes they need to be reminded of what a good penis can do for them.  And the only way to do that, well... is by making them want one in the first place.  A caress here, a press there, a little lick later... and they are practically on fire, orgasming time and again, begging me to fuck them.  The only problem is that I don't have the equipment.</i>\"  Uma winks at you.  \"<i>Once they leave my clinic, they're satisfied and much hornier than usual.  So the first thing they do is go home to share their pleasure with their husbands.</i>\"\n\n");
 			outputText("You can't resist the wry grin as you comment that it must do wonders for the reputation of her business.\n\n");
-			outputText("Uma nods.  \"<i>It does, but as you can see, the clinic is pretty empty most of the time.  It just so happens that we're really expensive, especially considering our... extra services.  But don't worry, [name].  Since you're my little Loppe's [boyfriend], I'll be happy to give you a pretty good discount on our services.</i>\"\n\n");
+			outputText("Uma nods.  \"<i>It does, but as you can see, the clinic is pretty empty most of the time.  It just so happens that we're really expensive, especially considering our... extra services." + (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1 ? "  But don't worry, [name].  Since you're my little Loppe's [boyfriend], I'll be happy to give you a pretty good discount on our services." : "") + "</i>\"\n\n");
 			outputText("You laugh at that, thanking her for her generosity and her time, and then tell her it's time for you to go.  Uma smiles at you and says, \"<i>Come visit me again soon.</i>\"\n\n");
 			outputText("You promise that you will, and then head out of the quaint little clinic and back to camp.\n\n");
 
