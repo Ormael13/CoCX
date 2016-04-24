@@ -84,28 +84,12 @@ package classes.Scenes
 					foundItem = true;
 				}
 			}
-			
-			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
-				if (getGame().xmas.xmasMisc.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
-					if (flags[kFLAGS.NIEVE_STAGE] == 1)
-						outputText("\nThere's some odd snow here that you could do something with...\n");
-					else outputText("\nYou have a snow" + getGame().xmas.xmasMisc.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
-					addButton(11, "Snow", getGame().xmas.xmasMisc.nieveBuilding);
-					foundItem = true;
-				}
-				if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1) {
-					if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) outputText("\nHolli is in her tree at the edges of your camp.  You could go visit her if you want.\n");
-					addButton(12, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), getGame().holliScene.treeMenu);
-					foundItem = true;
-				}
-				if (player.hasKeyItem("Dragon Egg") >= 0) {
-					getGame().emberScene.emberCampDesc();
-					addButton(13, "Egg", getGame().emberScene.emberEggInteraction);
-					foundItem = true;
-				}
-			}
 			if (!getGame().inCombat) {
 				addButton(10, "Unequip", manageEquipment);
+			}
+			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0 && checkKeyItems(true)) {
+				addButton(12, "Key Items", checkKeyItems);
+				foundItem = true;
 			}
 			if (!foundItem) {
 				outputText("\nYou have no usable items.");
@@ -124,8 +108,8 @@ package classes.Scenes
 			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
 			if (getGame().inCombat)
 				addButton(14, "Back", combat.combatMenu, false); //Player returns to the combat menu on cancel
-			else addButton(14, "Back", playerMenu);
-//Gone			menuLoc = 1;
+			else
+				addButton(14, "Back", playerMenu);
 		}
 		
 		public function stash():void {
@@ -631,7 +615,45 @@ package classes.Scenes
 		public function unequipShield():void {
 			takeItem(player.setShield(ShieldLib.NOTHING), inventoryMenu);
 		}
-
+		
+		public function checkKeyItems(countOnly:Boolean = false):Boolean {
+			var foundItem:Boolean = false
+			var button:int = 0;
+			if (!countOnly) menu();
+			if (getGame().xmas.xmasMisc.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
+				if (!countOnly) {
+					if (flags[kFLAGS.NIEVE_STAGE] == 1)
+						outputText("\nThere's some odd snow here that you could do something with...\n");
+					else
+						outputText("\nYou have a snow" + getGame().xmas.xmasMisc.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
+					addButton(button++, "Snow", getGame().xmas.xmasMisc.nieveBuilding);
+				}
+				foundItem = true;
+			}
+			if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1) {
+				if (!countOnly) {
+					if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) outputText("\nHolli is in her tree at the edges of your camp.  You could go visit her if you want.\n");
+					addButton(button++, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), getGame().holliScene.treeMenu);
+				}
+				foundItem = true;
+			}
+			if (player.hasKeyItem("Dragon Egg") >= 0) {
+				if (!countOnly) {
+					getGame().emberScene.emberCampDesc();
+					addButton(button++, "Egg", getGame().emberScene.emberEggInteraction);
+				}
+				foundItem = true;
+			}
+			if (player.hasKeyItem("Tamani's Satchel") >= 0) {
+				if (!countOnly) {
+					addButton(button++, "Satchel", getGame().forest.tamaniScene.openTamanisSatchel);
+				}
+				foundItem = true;
+			}
+			if (!countOnly) addButton(14, "Back", inventoryMenu);
+			return foundItem;
+		}
+		
 		//Pick item to take from storage
 		private function pickItemToTakeFromShieldRack():void {
 			callNext = pickItemToTakeFromShieldRack;

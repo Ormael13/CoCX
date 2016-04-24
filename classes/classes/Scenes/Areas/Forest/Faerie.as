@@ -28,7 +28,7 @@ public function encounterFaerie():void {
 			else outputText("\n\nYou lazily make a grab for her and easily snatch her out of the air.  Her body is sticky with a mix of desire and your last encounter.  You can feel her humping against your pinky while she begs, \"<i>Come on, let me crawl into your " + player.armorName + " and wrap myself around your shaft.  I promise I'll only drink a little pre-cum this time, just enough to let me get off.  I'll be a good faerie slut, just let me get you off!</i>\"\n\nDo you let the faerie get you off?", false);
 			dynStats("lus", player.lib/10+2);
 			doYesNo(faerieCaptureHJ, letFaerieGo);
-			if (player.statusEffectv1(StatusEffects.FaerieFucked) < 5) addButton(2, "Never", disableFaerieEncounterForGood);
+			addButton(2, "Never", disableFaerieEncounterForGood);
 			return;
 		}
 		dynStats("lus", player.lib/10+2);
@@ -46,8 +46,11 @@ public function encounterFaerie():void {
 	outputText("The faerie slows the beating of her wings and hovers towards you. You dismiss your fearful notions, certain a small faerie is quite harmless to you.\n\n", false);
 	outputText("How do you react?", false);
 	//Shoo Away, Nothing, RAEP
-	if (player.hasVagina()) simpleChoices("Shoo Away", faerieShooAway, "Nothing", faerieDoNothing, "Rape", faerieRAEP, "", null, "", null);
-	else simpleChoices("Shoo Away", faerieShooAway, "Nothing", faerieDoNothing, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Shoo Away", faerieShooAway);
+	addButton(1, "Nothing", faerieDoNothing);
+	if (player.hasVagina()) addButton(2, "Rape", faerieRAEP);
+	addButton(4, "No More!", disableFaerieEncounterForGood, true);
 }
 
 private function faerieRAEP():void {
@@ -203,11 +206,17 @@ private function letFaerieGo():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 //Disable Faerie encounter
-private function disableFaerieEncounterForGood():void {
+private function disableFaerieEncounterForGood(alt:Boolean = false):void {
 	spriteSelect(17);
 	clearOutput();
-	outputText("You apologize and release her, letting her fly away on gossamer wings.  She thanks you, buzzing up to your lips and planting a chaste kiss on your mouth.  She zips away into the woods without a glance back...", false);
-	outputText("\n\nYou make a mental note and resolve to never catch her again.");
+	if (alt) {
+		outputText("You tell the fairy to never bother you again. She looks heartbroken but knows that she's making the promise never to bother you.", false);
+		outputText("\n\nYou have the feeling that you'll never be seeing her again...");
+	}
+	else {
+		outputText("You apologize and release her, letting her fly away on gossamer wings.  She thanks you, buzzing up to your lips and planting a chaste kiss on your mouth.  She zips away into the woods without a glance back...", false);
+		outputText("\n\nYou make a mental note and resolve to never catch her again.");
+	}
 	flags[kFLAGS.FAERIE_ENCOUNTER_DISABLED] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }

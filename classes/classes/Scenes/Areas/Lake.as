@@ -35,7 +35,7 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			if (player.exploredLake % 20 == 0) {
+			if (player.exploredLake % 20 == 0 || (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 10 && rand(5) == 0)) {
 				calluScene.ottahGirl();
 				return;
 			}
@@ -50,7 +50,7 @@ package classes.Scenes.Areas
 				addButton(3, "Black", eggChoose, 5);
 				addButton(4, "Purple", eggChoose, 1);
 				addButton(5, "Brown", eggChoose, 0);
-				addButton(9, "Escape", eggChooseEscape);
+				addButton(14, "Escape", eggChooseEscape);
 				return;
 			}
 			//Did it already output something?

@@ -86,7 +86,7 @@ package classes.Scenes.Areas.Bog
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms) {
-				outputText("\n\nThe chameleon girl recoils.  \"<i>Ew, gross!</i>\" she screetches as she runs away, leaving you to recover from your defeat alone.");
+				outputText("\n\nThe chameleon girl recoils.  \"<i>Ew, gross!</i>\" she screeches as she runs away, leaving you to recover from your defeat alone.");
 				game.combat.cleanupAfterCombat();
 			} else {
 				game.bog.chameleonGirlScene.loseToChameleonGirl();

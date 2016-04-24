@@ -604,7 +604,7 @@ package classes
 			}
 			//TAILS
 			if (player.tailType == TAIL_TYPE_HORSE) 
-				outputText("  A long " + player.furColor + " horsetail hangs from your " + player.buttDescript() + ", smooth and shiny.", false);
+				outputText("  A long " + player.hairColor + " horsetail hangs from your " + player.buttDescript() + ", smooth and shiny.", false);
 			if (player.tailType == TAIL_TYPE_FERRET)
 				outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy " + player.furColor + " fur.", false);
 			if (player.tailType == TAIL_TYPE_DOG) 

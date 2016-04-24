@@ -56,9 +56,9 @@ package classes.GlobalFlags
 		public static const POPULATION_VILLAGE:int				= 042; //Population 10
 		public static const POPULATION_TOWN:int					= 043; //Population 25
 		public static const POPULATION_CITY:int					= 044; //Population 100
-		public static const POPULATION_METROPOLIS:int				= 045; //Population 250
-		public static const POPULATION_MEGALOPOLIS:int				= 046; //Population 500
-		public static const POPULATION_CITY_STATE:int				= 047; //Population 1,000 (shadow achievement)
+		public static const POPULATION_METROPOLIS:int			= 045; //Population 250
+		public static const POPULATION_MEGALOPOLIS:int			= 046; //Population 500
+		public static const POPULATION_CITY_STATE:int			= 047; //Population 1,000 (shadow achievement)
 		public static const POPULATION_KINGDOM:int				= 048; //Population 2,500 (shadow achievement)
 		public static const POPULATION_EMPIRE:int				= 049; //Population 5,000 (shadow achievement)
 		
@@ -122,13 +122,15 @@ package classes.GlobalFlags
 		public static const HOLIDAY_CHRISTMAS_III:int			= 098;
 		public static const HOLIDAY_VALENTINE:int				= 099;
 		
-		//Realistic and Hardcore Achievements (100-109)
+		//Hunger Achievements (100-104)
 		public static const REALISTIC_TASTES_LIKE_CHICKEN:int	= 100;
 		public static const REALISTIC_CHAMPION_NEEDS_FOOD:int	= 101; //Champion needs food badly!
 		public static const REALISTIC_GOURMAND:int				= 102;
 		public static const REALISTIC_GLUTTON:int				= 103;
 		public static const REALISTIC_FASTING:int				= 104;
-		public static const UNKNOWN_ACHIEVEMENT_105:int			= 105;
+		
+		//Challenge Achievements (105-109)
+		public static const CHALLENGE_ULTIMATE_NOOB:int			= 105; //Defeat Lethice at level 1.
 		public static const UNKNOWN_ACHIEVEMENT_106:int			= 106;
 		public static const UNKNOWN_ACHIEVEMENT_107:int			= 107;
 		public static const UNKNOWN_ACHIEVEMENT_108:int			= 108;
@@ -195,11 +197,11 @@ package classes.GlobalFlags
 		public static const GENERAL_DICK_BANISHER:int			= 166;
 		public static const GENERAL_ULTRA_PERKY:int				= 167;
 		public static const GENERAL_UP_TO_11:int				= 168; //This one goes to eleven.
-		public static const GENERAL_YOU_BASTARD:int			= 169;
+		public static const GENERAL_YOU_BASTARD:int				= 169;
 		public static const GENERAL_YABBA_DABBA_DOO:int			= 170;
-		public static const GENERAL_ANTWORKS:int			= 171;
-		public static const UNKNOWN_ACHIEVEMENT_172:int			= 172;
-		public static const UNKNOWN_ACHIEVEMENT_173:int			= 173;
+		public static const GENERAL_ANTWORKS:int				= 171;
+		public static const GENERAL_OFF_WITH_HER_HEAD:int		= 172; //Awarded for beheading Lethice.
+		public static const GENERAL_NOOOOOOO:int				= 173; //Insert Darth Vader voice here.
 		
 	}
 

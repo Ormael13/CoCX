@@ -127,33 +127,26 @@ public function encounterMarae():void {
 				outputText("Spellbound, you watch as she forces more and more fingers into her hungry flower-hole, \"<i>Ever since then, I've just been drinking in more and corruption, and waiting for someone to come here and help fill my hole.  I've played with my flower for what has felt like days on end.  Every time I come harder and harder.  The more I let go the better it is.  Do you know what I did this morning?  I let my branches grow tentacles to fuck my mouth and pussy at the same time.  I came over and over and over, and then I had my roots pull in all the cum they could find to fill my womb with.</i>\"\n\n", false);
 				outputText("You gasp at the change she has gone through, getting more than a little turned on yourself.  Thinking that a once chaste goddess has been reduced to a horny slut makes you wonder how you stand any chance of victory.  Marae keeps up her show, \"<i>It's so good.  Come join me in it.  I gave in to the pleasure already.  If you look behind me, you can see what's left of my soul.  I could feel it dripping out through my cunny a little bit each time I came.  After a while it flowed together and started to crystalize.  I think the demons call it lethicite, but I just wish I still had a soul so I could do it all over again.  Come fuck me, I want to watch you go mad while you cum out your soul.</i>\"\n\n", false);
 				outputText("It sounds like a very pleasant offer, but it would mean the total abandonment of your reasons for coming here.   You could probably get away if you were to run, she doesn't seem to be nearly as powerful.  Or you could risk trying to steal the lethicite before making your getaway, but it wouldn't be hard for her to catch you that close.", false);
-				simpleChoices("Run",runFromPervertedGoddess,"Lethicite",maraeStealLethicite,"Accept",maraeBadEnd,"FIGHT!",promptFightMarae1,"", null);
+				simpleChoices("Run", runFromPervertedGoddess, "Lethicite", maraeStealLethicite, "Accept", maraeBadEnd, "", null, "", null);
+				addButton(3, "FIGHT!", promptFightMarae, encounterMarae);
 			}
 			//Repeat corrupt meeting
 			else {
 				outputText("Marae smiles and leans forwards, cupping her breasts in her hands.  Amazingly, she flows out from the tree, standing as a free woman before you.  She massages her G-sized breasts, winking lewdly and pinching her shining purplish nipples, squeezing out droplets of honey-colored sap.  She blows you a kiss while the flower at her groin opens welcomingly.  She moans, \"<i>Reconsider my offer yet, " + player.short + "?  I won't force you, but don't you want to spend eternity in heaven with a living goddess?</i>\"", false);
 				//Yes - accept, No- run
 				doYesNo(maraeBadEnd, runFromPervertedGoddess);
-				addButton(3, "FIGHT!", promptFightMarae1);
+				addButton(3, "FIGHT!", promptFightMarae, encounterMarae);
 			}
 		}
 	}
 }
 
 //Prompts
-private function promptFightMarae1():void {
-	outputText("Are you sure you want to fight Marae? She is the life-goddess of Mareth. This is going to be extremely difficult battle.", true)
-	doYesNo(initiateFightMarae, encounterMarae);
+private function promptFightMarae(cancelFunction:Function):void {
+	clearOutput();
+	outputText("Are you sure you want to fight Marae? She is the life-goddess of Mareth. This is going to be extremely difficult battle.");
+	doYesNo(initiateFightMarae, cancelFunction);
 }	
-
-private function promptFightMarae2():void {
-	outputText("Are you sure you want to fight Marae? She is the life-goddess of Mareth. This is going to be extremely difficult battle.", true)
-	doYesNo(initiateFightMarae, level2MaraeEncounter);
-}
-private function promptFightMarae3():void {
-	outputText("Are you sure you want to fight Marae? She is the life-goddess of Mareth. This is going to be extremely difficult battle.", true);
-	doYesNo(initiateFightMarae, camp.returnToCampUseOneHour);
-}
 
 //FIGHT!
 public function initiateFightMarae():void {
@@ -397,12 +390,15 @@ public function level2MaraeEncounter():void {
 	if (!player.canFly()) {
 		outputText("You don't see any escape! If you like, you can attempt to fight her, but really?", false);
 		doNext(MaraeIIStageII);
-		addButton(3, "FIGHT!", promptFightMarae2);
+		addButton(3, "FIGHT!", promptFightMarae, level2MaraeEncounter);
 	}
 	//Can fly?  Choice to run
 	else {
 		outputText("You don't think she's counted on your wings.  If you tried to fly you could probably get out of the reach of her tentacles in short order.", false);
-		simpleChoices("Stay",MaraeIIStageII,"", null,"", null,"FIGHT!",promptFightMarae2,"Fly Away",MaraeIIFlyAway);
+		menu();
+		addButton(0, "Stay", MaraeIIStageII);
+		addButton(3, "FIGHT!", promptFightMarae, level2MaraeEncounter);
+		addButton(4, "Fly Away", MaraeIIFlyAway);
 	}
 }
 
@@ -663,7 +659,7 @@ public function level3MaraeEncounter():void {
 	outputText("Once again, you approach the island where the corrupted goddess resides and set foot on the island. \"<i>Coming back for more?</i>\" Marae coos.");
 	outputText("\n\n(Do you fight Marae or stay with her and abandon your quests? Or you could leave if you want.)");
 	menu();
-	addButton(0, "Fight Her", promptFightMarae3, null, null, null, "Fight Marae the corrupted goddess!");
+	addButton(0, "Fight Her", promptFightMarae, level3MaraeEncounter, null, null, "Fight Marae the corrupted goddess!");
 	addButton(1, "Stay With Her", maraeBadEnd, null, null, null, "Stay with Marae and end your adventures?");
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }

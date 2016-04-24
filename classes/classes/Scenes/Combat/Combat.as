@@ -974,7 +974,8 @@ package classes.Scenes.Combat
 						monster.teased(monster.lustVuln * (5 + player.cor / 12));
 					}
 					if (player.weaponName == "succubi whip") {
-						if (player.cor < 90) dynStats("cor", .3);
+						if (player.cor < 60) dynStats("cor", .2);
+						if (player.cor < 90) dynStats("cor", .1);
 						if (!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and moans involuntarily from the whip's touches.", false);
 						else outputText("\n" + monster.capitalA + monster.short + " shiver and moan involuntarily from the whip's touches.", false);
 						monster.teased(monster.lustVuln * (20 + player.cor / 15));
@@ -983,6 +984,17 @@ package classes.Scenes.Combat
 							dynStats("lus", 1);
 						}
 						
+					}
+					if (player.weaponName == "Lethice's whip") {
+						if (player.cor < 60) dynStats("cor", .3);
+						if (player.cor < 90) dynStats("cor", .1);
+						if (!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and moans involuntarily from the flaming whip's touches.", false);
+						else outputText("\n" + monster.capitalA + monster.short + " shiver and moan involuntarily from the flaming whip's touches.", false);
+						monster.teased(monster.lustVuln * (25 + player.cor / 10));
+						if (rand(2) == 0) {
+							outputText(" You get a sexual thrill from it. ", false);
+							dynStats("lus", 1);
+						}
 					}
 				}
 				//Weapon Procs!
@@ -1686,6 +1698,9 @@ package classes.Scenes.Combat
 			monster.spe += 25 * player.newGamePlusMod();
 			monster.inte += 25 * player.newGamePlusMod();
 			monster.level += 30 * player.newGamePlusMod();
+			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+				monster.level = Math.round(monster.level ^ 1.4);
+			}
 			//Adjust lust vulnerability in New Game+.
 			if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.8;
 			else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.65;

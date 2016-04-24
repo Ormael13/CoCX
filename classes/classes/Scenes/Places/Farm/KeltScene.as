@@ -154,14 +154,15 @@ private function chooseToFinishKelt():void {
 	outputText("\n\nYou step over to the defeated centaur, wondering what you should do.", false)
 	addButton(0, "Kill Him", youBadEndKeltForGood);
 	addButton(1, "Rape Him", fuckKeltsShitUp);
-	addButton(4, "Leave", leaveKelt4Good);
+	addButton(4, "TakeBow&Leave", leaveKelt4Good);
 }
 
 //Give Kelt the Bad End!
 private function youBadEndKeltForGood():void {
-	outputText("You suddenly grab Kelt by his neck. The centaur yells \"<i>Nooooo! Don't you do that, bitch!</i>\"\n\n", true);
-	outputText("With an abrupt twist, you snap his neck, ending his life. You grab the bow from Kelt. Seeing how it looks stronger than your flimsy bow, you snap the old bow and throw it onto the ground. You are proud of the newly-taken bow.\n\n", false);
-	outputText("<b>(You got Kelt's Bow!)</b>", false);
+	clearOutput();
+	outputText("Without a second thought, you grab Kelt by his neck. The centaur yells \"<i>Nooooo! Don't you do that, bitch!</i>\"\n\n");
+	outputText("With an abrupt twist, you snap his neck, ending his life. You grab the bow from Kelt. Seeing how it looks stronger than your flimsy bow, you snap the old bow and throw it onto the ground. You are proud of the newly-taken bow.\n\n");
+	outputText("<b>(You got Kelt's Bow!)</b>");
 	player.removeKeyItem("Bow");
 	player.createKeyItem("Kelt's Bow", 0, 0, 0, 0);
 	//player.removeStatusEffect(StatusEffects.Kelt);
@@ -172,7 +173,12 @@ private function youBadEndKeltForGood():void {
 }
 
 private function leaveKelt4Good():void {
-	outputText("Determining he's not worth your time, you walk away. Somehow, you've got the feeling that you won't be seeing him again.", true);
+	clearOutput();
+	outputText("Determining he's not worth your time, you walk away. Somehow, you've got the feeling that you won't be seeing him again.");
+	outputText("You also find the bow that Kelt left behind. Seeing how it looks stronger than your flimsy bow, you snap the old bow and throw it onto the ground. You are proud of the newly-taken bow.\n\n");
+	outputText("<b>(You got Kelt's Bow!)</b>");
+	player.removeKeyItem("Bow");
+	player.createKeyItem("Kelt's Bow", 0, 0, 0, 0);
 	player.createStatusEffect(StatusEffects.KeltOff, 0, 0, 0, 0);
 	doNext(camp.returnToCampUseOneHour);
 }

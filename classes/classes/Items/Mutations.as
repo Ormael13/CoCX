@@ -4384,7 +4384,7 @@
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			clearOutput();
-			outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.", false);
+			outputText("You crack open the small clay jar to reveal a lightly colored paste that smells surprisingly delicious. You begin eating it with your fingers, wishing all the while for some crackers...", false);
 			player.refillHunger(20);
 			if (player.humanScore() > 4) {
 				outputText("\n\nYou blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?", false);
@@ -4672,6 +4672,12 @@
 			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
 				outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
 				player.vaginaType(0);
+				changes++;
+			}
+			//Reduce wetness down to a minimum of 2
+			if (changes < changeLimit && rand(3) == 0 && player.hasVagina() && player.vaginas[0].vaginalWetness > 2) {
+				outputText("\n\nThe constant flow of fluids that sluice from your " + player.vaginaDescript(0) + " slow down, leaving you feeling a bit less like a sexual slip-'n-slide.");
+				player.vaginas[0].vaginalWetness--;
 				changes++;
 			}
 			//Fertility Decrease:
@@ -9440,6 +9446,46 @@
 			player.refillHunger(30);
 			player.changeFatigue(-20);
 			HPChange(Math.round(player.maxHP() * 0.1), true);
+		}
+		
+		//Retro UTG stuff!
+		public function healPill(player:Player):void {
+			var rand:int = Math.random() * 100;
+			outputText("You pop the small pill into your mouth and swallow. ");
+			if (HPChange(50 + player.tou, true)) outputText("Some of your wounds are healed. ");
+			else outputText("You feel an odd sensation. ");
+			if (rand < 70 && player.lib < 40) {
+				outputText("You feel a sense of warmth spread through your erogenous areas.");
+				dynStats("lib", 1);
+			}
+			if (rand >= 70 && rand <= 90) {
+				outputText("Your body tingles and feels more sensitive.");
+				dynStats("sens", 4);
+			}
+			if (rand > 90) {
+				outputText("You shudder as a small orgasm passes through you. When you recover you actually feel more aroused.");
+				dynStats("lus", 5);
+			}
+		}
+		
+		public function purityPhilter(player:Player):void {
+			outputText("You uncap the small silver vial and place it to your lips. Tilting your head back, you pour the cold tasteless liquid down your throat.\n\n", true);
+			if (player.cor < 20) outputText("You shiver as your body is suffused with a cold, refreshing feeling. You feel much calmer than before.", false);
+			if (player.cor >= 20 && player.cor < 40) outputText("You break out into a cold sweat as the freezing liquid surges through your body. Dispite the discomfort, your thoughts do seem clearer.", false);
+			if (player.cor >= 40 && player.cor < 60) outputText("As the freezing liquid hits your stomach, you suddenly feel like you're standing in a blizzard. Your hands and feet go numb, and even though you've never felt colder in your life, you're covered in sweat. Eventually, you begin to feel more normal, and your thoughts definitely seem clearer.", false);
+			if (player.cor >= 60) outputText("As you swallow the liquid, you fall gasping to your knees. It feels like someone shoved an icicle through your middle. You break out in a cold sweat as the sensation spreads, and you feel like your blood is freezing in your veins. Mercifully, you pass out.\n\nLater, when you wake up, the constant haze of lust that usually clouds your thoughts seems a bit thinner.", false);
+			var corLoss:Number = 5 + Math.floor(player.cor / 10);
+			dynStats("cor", -corLoss);
+		}
+		
+		public function numbingOil(player:Player):void {
+			outputText("You open the bottle and begin pouring the oil all over your body.\r\r");
+			if (player.sens < 20) outputText("Your skin tingles slightly, and afterwords, you feel less sensitive than before.");
+			if (player.sens >= 20 && player.sens < 40) outputText("Your skin burns a bit, but eventually the burning fades away, leaving your skin less sensitive than before.");
+			if (player.sens >= 40 && player.sens < 60) outputText("Your skin burns and itches unbearably for several minutes, but eventually returns to normal. You feel less sensitive than before.");
+			if (player.sens >= 60) outputText("As you finish rubbing the oil into your skin, you fall gasping to your knees. It feels like someone lit you on fire, and that the fire is made of biting ants. You write in agony for a few minutes until the sensations fade. You feel slightly less sensitive than before.");
+			var senLoss:Number = 5 + Math.floor(player.sens);
+			dynStats("sen", -senLoss);
 		}
 	}
 }

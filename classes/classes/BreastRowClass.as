@@ -17,7 +17,8 @@
 		public var milkFullness:Number = 0;
 		public var fullness:Number = 0;
 		public var fuckable:Boolean = false;
-
+		public var nippleCocks:Boolean = false;
+		
 		public function validate():String
 		{
 			var error:String = "";

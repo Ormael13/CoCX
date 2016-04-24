@@ -150,11 +150,12 @@ private function rathazulWorkOffer():Boolean {
 	var totalOffers:int = 0;
 	var spoken:Boolean = false;
 	var showArmorMenu:Boolean = false;
-	var purify:Function = null;
-	var debimbo:int = 0;
-	var reductos:Function = null;
+	var dyes:Boolean = false;
+	var purify:Boolean = false;
+	var philters:Boolean = false;
+	var debimbo:Boolean = false;
+	var reductos:Boolean = false;
 	var lethiciteDefense:Function = null;
-	var dyes:Function = null;
 	if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
 		collectRathazulArmor();
 		return true;
@@ -210,58 +211,52 @@ private function rathazulWorkOffer():Boolean {
 	if (player.hasKeyItem("Tentacled Bark Plates") >= 0 || player.hasKeyItem("Divine Bark Plates") >= 0) showArmorMenu = true;
 	var pCounter:int = 0;
 	//Item purification offer
-	if (player.hasItem(consumables.INCUBID)) {
-		purify = purifySomething;
-		totalOffers++;
+	if (player.hasItem(consumables.INCUBID))
 		pCounter++;
-	}
-	if (player.hasItem(consumables.SUCMILK)) {
-		purify = purifySomething;
-		totalOffers++;
+	if (player.hasItem(consumables.SUCMILK))
 		pCounter++;
-	}
-	if (player.hasItem(consumables.SDELITE)) {
-		purify = purifySomething;
-		totalOffers++;
+	if (player.hasItem(consumables.SDELITE))
 		pCounter++;
-	}
-	if (player.hasItem(consumables.LABOVA_)) {
-		purify = purifySomething;
-		totalOffers++;
+	if (player.hasItem(consumables.LABOVA_))
 		pCounter++;
-	}
-	if (player.hasItem(consumables.MINOCUM)) {
-		purify = purifySomething;
-		totalOffers++;
+	if (player.hasItem(consumables.MINOCUM))
 		pCounter++;
-	}
-	//Single Offer
-	if (pCounter == 1) {
-		outputText("The rat mentions, \"<i>I see you have at least one tainted item on you... for 20 gems I could remove most of the taint, making it a good deal safer to use.  Of course, who knows what kind of freakish transformations it would cause...</i>\"\n\n", false);
+	if (pCounter > 0) {
+		if (pCounter == 1) 
+			outputText("The rat mentions, \"<i>I see you have at least one tainted item on you... for 20 gems I could remove most of the taint, making it a good deal safer to use.  Of course, who knows what kind of freakish transformations it would cause...</i>\"\n\n", false);
+		else
+			outputText("The rat mentions, \"<i>I see you have a number of demonic items on your person.  For 20 gems I could attempt to remove the taint from one of them, rendering it a good deal safer for consumption.  Of course it would not remove most of the transformative properties of the item...</i>\"\n\n", false);
+		purify = true;
 		spoken = true;
-		totalOffers++;
-	}
-	if (pCounter > 1) {
-		outputText("The rat mentions, \"<i>I see you have a number of demonic items on your person.  For 20 gems I could attempt to remove the taint from one of them, rendering it a good deal safer for consumption.  Of course it would not remove most of the transformative properties of the item...</i>\"\n\n", false);
-		spoken = true;
-		totalOffers+=2;
+		totalOffers += pCounter;
 	}
 	//Offer dyes if offering something else.
 	if (player.gems >= 50) {
 		outputText("Rathazul offers, \"<i>Since you have enough gems to cover the cost of materials for my dyes as well, you could buy one of my dyes for your hair.  ", false);
 		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 8) outputText("I should be able to make exotic-colored dyes if you're interested.  ");
 		outputText("Or if you want some changes to your skin, I have skin oils and body lotions.  I will need 50 gems up-front.</i>\"\n\n");
+		dyes = true;
 		spoken = true;
 		totalOffers++;
-		dyes = buyDyes;
+	}
+	//Offer purity philter and numbing oil.
+	if (player.gems >= 100) {
+		outputText("Rathazul offers, \"<i>I can make something for you. Something to counter the corruption of this realm and if you're feeling too sensitive, I have these oils. I'll need 100 gems up-front.</i>\"");
+		philters = true;
+		spoken = true;
+		totalOffers++;
 	}
 	//Bee honey
 	if (player.hasItem(consumables.BEEHONY)) {
 		outputText("Rathazul offers, \"<i>If you're in need of a pure honey, I can distill the regular bee honey. You'll also need 25 gems up front.</i>\"\n\n");
+		spoken = true;
+		totalOffers++;
 	}
 	//Pro Lactaid & Taurinum
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) {
 		outputText("The rat mentions, \"<i>You know, I could make something new if you're willing to hand over two of vials labeled \"Equinum\", one vial of minotaur blood and one hundred gems. Or five bottles of Lactaid and two bottles of purified LaBova along with 250 gems.</i>\"\n\n");
+		spoken = true;
+		totalOffers++;
 	}
 	//Reducto
 	if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0 && player.statusEffectv2(StatusEffects.MetRathazul) >= 4) {
@@ -271,10 +266,8 @@ private function rathazulWorkOffer():Boolean {
 		outputText(" gems for each jar of ointment you want.</i>\"\n\n");
 		totalOffers++;
 		spoken = true;
-		reductos = buyReducto;
+		reductos = true;
 	}
-
-	
 	//Vines
 	if (player.keyItemv1("Marae's Lethicite") > 0 && player.findStatusEffect(StatusEffects.DefenseCanopy) < 0 && player.findStatusEffect(StatusEffects.CampRathazul) >= 0) {
 		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n");
@@ -291,7 +284,7 @@ private function rathazulWorkOffer():Boolean {
 			outputText("You recall that Rathazul is willing to make something to cure bimbo liqueur for 250 gems and five Scholar's Teas.");
 			if (player.hasItem(consumables.SMART_T,5) && player.gems >= 250) {
 				totalOffers++;
-				debimbo = 1; 
+				debimbo = true; 
 			}
 			else if (!player.hasItem(consumables.SMART_T,5)) outputText("  You should probably find some if you want that...");
 			else outputText("  You need more gems to afford that, though.");
@@ -315,24 +308,51 @@ private function rathazulWorkOffer():Boolean {
 		outputText("Will you take him up on an offer or leave?", false);
 		//In camp has no time passage if left.
 		menu();
-		if (showArmorMenu) addButton(0, "Armor", rathazulArmorMenu, null, null, null, "Ask Rathazul to make an armour for you.");
-		if (dyes != null) {
+		var button:int = 8; //After the 8th button, the menus will dynamically fill in.
+		//These options are always available.
+		if (showArmorMenu) {
+			addButton(0, "Armor", rathazulArmorMenu, null, null, null, "Ask Rathazul to make an armour for you.");
+		}
+		else {
+			addButtonDisabled(0, "Armor", "You don't have sufficient materials that can be made into armour.");
+		}
+		if (dyes) {
 			addButton(1, "Buy Dye", buyDyes, null, null, null, "Ask him to make a dye for you. \n\nCost: 50 Gems.");
 			addButton(2, "Buy Oil", buyOils, null, null, null, "Ask him to make a skin oil for you. \n\nCost: 50 Gems.");
 			addButton(3, "Buy Lotion", buyLotions, null, null, null, "Ask him to make a body lotion for you. \n\nCost: 50 Gems.");
 		}
-		addButton(4, "Purify", purify, null, null, null, "Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
-		
-		if (debimbo > 0) addButton(5, "Debimbo", makeADeBimboDraft, null, null, null, "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
-		if (player.hasItem(consumables.BEEHONY)) addButton(6, consumables.PURHONY.shortName, rathazulMakesPureHoney, null, null, null, "Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
-		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(7, "ProLactaid", rathazulMakesMilkPotion, null, null, null, "Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
-		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(8, "Taurinum", rathazulMakesTaurPotion, null, null, null, "Ask him to brew a special potion that could aid in becoming a centaur. \n\nCost: 100 Gems \nNeeds 2 Equinum and 1 Minotaur Blood.");
-		if (reductos != null) addButton(9, "Reducto", reductos);
-		
-		if (lethiciteDefense != null) addButton(10, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
-		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
-			addButton(11, "Pure Potion", rathazulMakesPurifyPotion, null, null, null, "Ask him to brew a purification potion for Minerva.");
+		else {
+			addButtonDisabled(1, "Buy Dye", "You can't afford to buy dyes.\n\n50 gems required.");
+			addButtonDisabled(2, "Buy Oil", "You can't afford to buy oil.\n\n50 gems required.");
+			addButtonDisabled(3, "Buy Lotion", "You can't afford to buy lotions.\n\n50 gems required.");
 		}
+		if (purify) {
+			addButton(4, "Purify", purifySomething, null, null, null, "Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
+		}
+		else {
+			addButtonDisabled(4, "Purify", "You don't have any items that can be purified.");
+		}
+		if (philters) {
+			addButton(5, consumables.H_PILL.shortName, buyPuritySomething, consumables.H_PILL);
+			addButton(6, consumables.PPHILTR.shortName, buyPuritySomething, consumables.PPHILTR);
+			addButton(7, consumables.NUMBOIL.shortName, buyPuritySomething, consumables.NUMBOIL);
+		}
+		else {
+			addButtonDisabled(5, consumables.H_PILL.shortName, "You can't afford to buy this.\n\n100 gems required.");
+			addButtonDisabled(6, consumables.PPHILTR.shortName, "You can't afford to buy this.\n\n100 gems required.");
+			addButtonDisabled(7, consumables.NUMBOIL.shortName, "You can't afford to buy this.\n\n100 gems required.");
+		}
+		//These will be filled in.
+		if (reductos) addButton(button++, "Reducto", buyReducto);
+		if (debimbo) addButton(button++, "Debimbo", makeADeBimboDraft, null, null, null, "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		if (player.hasItem(consumables.BEEHONY)) addButton(button++, consumables.PURHONY.shortName, rathazulMakesPureHoney, null, null, null, "Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
+		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(button++, "ProLactaid", rathazulMakesMilkPotion, null, null, null, "Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
+		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(button++, "Taurinum", rathazulMakesTaurPotion, null, null, null, "Ask him to brew a special potion that could aid in becoming a centaur. \n\nCost: 100 Gems \nNeeds 2 Equinum and 1 Minotaur Blood.");
+		
+		
+		if (lethiciteDefense != null) addButton(button++, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
+		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10))
+			addButton(button++, "Pure Potion", rathazulMakesPurifyPotion, null, null, null, "Ask him to brew a purification potion for Minerva.");
 
 		if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0)
 			addButton(14,"Leave", camp.campFollowers);
@@ -362,7 +382,7 @@ private function purifySomething():void {
 		addButton(3, "LaBova", rathazulPurifyLaBova);
 	}
 	if (player.hasItem(consumables.MINOCUM)) {
-		addButton(4,"MinoCum",purifyMinoCum);
+		addButton(4, "MinoCum", purifyMinoCum);
 	}
 	addButton(14,"Back",rathazulWorkOffer);
 }
@@ -917,6 +937,13 @@ private function buyLotionNevermind():void {
 	player.gems += 50;
 	statScreenRefresh();
 	doNext(returnToRathazulMenu);
+}
+
+private function buyPuritySomething(item:ItemType):void {
+	player.gems -= 100;
+	statScreenRefresh();
+	inventory.takeItem(item, returnToRathazulMenu);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
 //Turn several ingredients into a special potion/consumable.

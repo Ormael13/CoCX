@@ -81,7 +81,7 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again. If you had the right materials, you might be able to mix something to heal the damage her captors have done to the fairy's mind.\n\n", false);
 			//Choicez go here.  I can haz fucks?
 			simpleChoices("", null, "", null, "Reject", rejectFuckingVala, "", null, "", null);
-			if (player.hasItem(consumables.PURHONY, 1) || player.hasItem(consumables.P_PEARL, 1)) addButton(0, "Fix Her", healVala);
+			if (player.hasItem(consumables.PURHONY, 1) || player.hasItem(consumables.P_PEARL, 1) || player.hasItem(consumables.PPHILTR, 1)) addButton(0, "Fix Her", healVala);
 			if (player.gender > 0) addButton(1, "Sex", ValaGetsSexed);
 		}
 		
@@ -97,6 +97,16 @@ package classes.Scenes.Dungeons.DeepCave
 				else outputText(player.leg(), false);
 				outputText(" as you walk, and you end up dragging her across the dungeon floor leaving a trail of her cum behind you. Before things can get too out of hand with the needy girl, you pull out the vial of Pure Honey and arrange the equipment in front of you. Using the cleanest of the pipettes, you take a small portion of the honey and mix it with what you hope to be water, diluting the rich mixture to a less viscous state. Working quickly, you manage to produce a draught that the weak girl can tolerate. By now, she's managed to work her way to a sitting position and is grinding her dripping sex against your " + player.foot() + ". You lean down and hold her nose to make her open her mouth. She gleefully opens wide, tongue thrashing about in anticipation. You pour the sweet-smelling concoction down her anxious throat and begin to re-cork the rest of your honey.\n\n", false);
 				outputText("The effects of your cure are more violent than you expected. The fairy thrashes wildly, causing you to drop your bottle of Pure Honey, sending it spilling over the table, shattering the delicate equipment and ruining the unlabeled concoctions within. Moving to keep the girl from hurting herself in her seizure, you hold her head against your chest and wait out the wild bucking. Gradually, her motions slow and her breath calms to a more normal pace. When she looks back up at you, her eyes are clear at last, the pollution of lust burned away by the honey's restorative properties. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. The fate you've saved me from was worse than any death these wretched creatures could have subjected me to.</i>\"", false);
+				//[Next]
+				doNext(healValaPartTwoTheHealingHealsOfRevenge);
+			}
+			else if (player.hasItem(consumables.PPHILTR,1)) {
+				player.consumeItem(consumables.PPHILTR, 1);
+				outputText("You have the hunch that Purity Philter will do the trick. You set the broken girl down and she clings onto your ", false);
+				if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("tail", false);
+				else outputText(player.leg(), false);
+				outputText(" as you walk, and you end up dragging her across the dungeon floor leaving a trail of her cum behind you. Before things can get too out of hand with the needy girl, you pull out the vial of Purity Philter and forcibly hold her mouth open. She makes no protestation, instead gleefully opens wide, tongue thrashing about in anticipation. You pour the entire cool liquid into her mouth. Freezing sensations surges through her as she stiffens, feeling almost frozen in place.\n\n", false);
+				outputText("The effects of your cure are more potent than you expected. The fairy lays stiffly and you wait patiently for a few minutes. Gradually, her motions slow and her breath calms to a more normal pace. When she looks back up at you, her eyes are clear at last, the pollution of lust burned away by the honey's restorative properties. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. The fate you've saved me from was worse than any death these wretched creatures could have subjected me to.</i>\"", false);
 				//[Next]
 				doNext(healValaPartTwoTheHealingHealsOfRevenge);
 			}

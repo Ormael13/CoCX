@@ -1083,11 +1083,16 @@ private function shouldraReductoMenu():void {
 	choices("Balls", balls, "Breasts", breasts, "Clit", clit, "Cock", cock, "Nipples", nipples, "Butt", butt, "", null, "", null, "", null, "Back", shouldraTalkMenu);
 }
 //Balls
-private function shouldraReductosYourBallsUpInsideYa():void {
+public function shouldraReductosYourBallsUpInsideYa(rescue:Boolean = false):void {
 	flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN] = 72;
 	clearOutput();
 	spriteSelect(67);
-	outputText("\"<i>Why would you want to shrivel these delicious cumquats?</i>\"  Shouldra's arsenal of puns doesn't affect your request in the slightest.  The ghost girl moves into a quick spell, savoring your testicles before finishing.");
+	if (rescue) {
+		outputText("\"<i>Gone a bit too far and got those delicious cumquats too big?</i>\"  Shouldra's arsenal of puns and teases don't affect your request in the slightest.  The ghost girl moves into a quick spell, savoring your testicles before finishing.");
+		if (player.ballSize > 18 + (player.str / 2) + (player.tallness / 4)) player.ballSize = 16 + (player.str / 2) + (player.tallness / 4);
+	}
+	else
+		outputText("\"<i>Why would you want to shrivel these delicious cumquats?</i>\"  Shouldra's arsenal of puns doesn't affect your request in the slightest.  The ghost girl moves into a quick spell, savoring your testicles before finishing.");
 	//this.player.ballSize = this.player.ballSize - (2 + this.rand(4));
 	player.ballSize -= (2 + rand(4));
 	if (player.ballSize < 1) player.ballSize = 1;

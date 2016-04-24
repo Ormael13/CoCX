@@ -693,20 +693,72 @@ private function doCamp():void { //Only called by playerMenu
 	//Set up rest stuff
 	//Night
 	if (model.time.hours < 6 || model.time.hours > 20) {
-		if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n\n", false);
-		else outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light.  It's far too dark to leave camp.\n\n", false);
+		if (flags[kFLAGS.GAME_END] == 0) { //Lethice not defeated
+			outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n");
+		}
+		else { //Lethice defeated, proceed with weather
+			switch(flags[kFLAGS.CURRENT_WEATHER]) {
+				case 0:
+				case 1:
+					outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n");
+					break;
+				case 2:
+					outputText("It is dark out. The sky is covered by clouds and you could faintly make out the red spot in the clouds which is presumed to be the moon. It's far too dark to leave camp.\n\n");
+					break;
+				case 3:
+					outputText("It is dark out. The sky is covered by clouds raining water upon the ground. It's far too dark to leave camp.\n\n");
+					break;
+				case 4:
+					outputText("It is dark out. The sky is covered by clouds raining water upon the ground and occasionally the sky flashes with lightning. It's far too dark to leave camp.\n\n");
+					break;
+				default:
+					outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n");
+			}
+		}
 		if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
-			outputText("Your camp is silent as your companions are sleeping right now.\n", false);
+			outputText("Your camp is silent as your companions are sleeping right now.\n");
 		}
 		exploreEvent = null;
 		placesEvent = null;
 	}
 	//Day Time!
 	else {
-		if (model.time.hours == 19) outputText("The sun is close to the horizon, getting ready to set. ", false);
-		if (model.time.hours == 20) outputText("The sun has already set below the horizon. The sky glows orange. ", false);
-		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n", false);
+		if (flags[kFLAGS.GAME_END] > 0) { //Lethice defeated
+			switch(flags[kFLAGS.CURRENT_WEATHER]) {
+				case 0:
+					outputText("The sun shines brightly, illuminating the now-blue sky. ");
+					break;
+				case 1:
+					outputText("The sun shines brightly, illuminating the now-blue sky. Occasional clouds dot the sky, appearing to form different shapes. ");
+					break;
+				case 2:
+					outputText("The sky is light gray as it's covered by the clouds. ");
+					break;
+				case 3:
+					outputText("The sky is fairly dark as it's covered by the clouds that rain water upon the lands. ");
+					break;
+				case 4:
+					outputText("The sky is dark as it's thick with dark grey clouds that rain and occasionally the sky flashes with lightning. ");
+					break;
+			}
+		}
+		if (model.time.hours == 19) {
+			if (flags[kFLAGS.CURRENT_WEATHER] < 2)
+				outputText("The sun is close to the horizon, getting ready to set. ");
+			else
+				outputText("Though you cannot see the sun, the sky began to glow orange. ");
+		}
+		if (model.time.hours == 20) {
+			if (flags[kFLAGS.CURRENT_WEATHER] < 2)
+				outputText("The sun has already set below the horizon. The sky glows orange. ");
+			else
+				outputText("Even with the clouds, the sky is glowing bright orange. The sun may have already set at this point. ");
+		}
+		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n");
+
 	}
+	//Weather!
+
 	
 	//Unlock cabin.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 14)
@@ -747,6 +799,8 @@ private function doCamp():void { //Only called by playerMenu
 	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", rest, null, null, null, "Rest for four hours.\n\nShift-click to rest until fully healed or night comes.");
 	if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", doSleep, null, null, null, "Turn yourself in for the night.");
 
+	if (isAprilFools()) addButton(12, "Cash Shop", getGame().aprilFools.pay2WinSelection, null, null, null, "Need more gems? Want to buy special items to give you the edge? Purchase with real money!");
+	
 	//Remove buttons according to conditions.
 	if (model.time.hours >= 21 || model.time.hours < 6) {
 		removeButton(0); //Explore
@@ -1863,9 +1917,13 @@ public function badEndGIANTBALLZ():void {
 		outputText("\n\nFortunately, you have some Reducto.  You can shrink your balls and get back to your adventures!", false)
 		addButton(1, "Reducto", applyReductoAndEscapeBadEnd);
 	}
-	else if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) {
+	if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) {
 		outputText("\n\nYou could call for Rathazul to help you.", false)
 		addButton(2, "Rathazul", callRathazulAndEscapeBadEnd);		
+	}
+	if (shouldraFollower.followerShouldra()) {
+		outputText("\n\nYou could call for Shouldra to shrink your monstrous balls.", false)
+		addButton(3, "Shouldra", shouldraFollower.shouldraReductosYourBallsUpInsideYa, true);		
 	}
 	else getGame().gameOver();
 }
@@ -2102,13 +2160,16 @@ public function wakeFromBadEnd():void {
 		outputText("\n\nYou realize the consequences of having oversized balls and you NEED to shrink it right away. Reducto will do.");
 		player.ballSize = (14 + (player.str / 2) + (player.tallness / 4));
 	}
-	outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
+	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] > 0 || debug)
+		outputText("\n\nYou get up, still feeling confused from the nightmares.");
+	else
+		outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
 	//Skip time forward
 	model.time.days++;
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
 	else model.time.hours = 6;
 	//Set so you're in camp.
-	kGAMECLASS.inDungeon = false;
+	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
 	getGame().inCombat = false;
@@ -2119,6 +2180,7 @@ public function wakeFromBadEnd():void {
 	//PENALTY!
 	var penaltyMultiplier:int = 1;
 	penaltyMultiplier += flags[kFLAGS.GAME_DIFFICULTY] * 0.5;
+	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] > 0 || debug) penaltyMultiplier = 0;
 	//Deduct XP and gems.
 	player.gems -= int((player.gems / 10) * penaltyMultiplier);
 	player.XP -= int((player.level * 10) * penaltyMultiplier);
@@ -2600,6 +2662,11 @@ private function promptSaveUpdate():void {
 			return;
 		}
 	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 11) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 12;
+		flags[kFLAGS.KAIZO_MODE] = 0;
+	}
+	doCamp();
 }
 
 private function furColorSelection1():void {
@@ -2788,6 +2855,7 @@ private function updateAchievements():void {
 
 	//General
 	if (flags[kFLAGS.DEMONS_DEFEATED] >= 25 && model.time.days >= 10) awardAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER);
+	if (flags[kFLAGS.LETHICE_KILLED] == 2) awardAchievement("Off With Her Head!", kACHIEVEMENTS.GENERAL_OFF_WITH_HER_HEAD);
 	
 	var NPCsBadEnds:int = 0; //Check how many NPCs got bad-ended.
 	if (flags[kFLAGS.D1_OMNIBUS_KILLED] > 0) NPCsBadEnds++;
@@ -2797,6 +2865,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.JOJO_DEAD_OR_GONE] == 2) NPCsBadEnds++;
 	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) NPCsBadEnds++;
 	if (flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) NPCsBadEnds++;
+	if (flags[kFLAGS.TAMANI_BAD_ENDED] > 0) NPCsBadEnds++;
 	if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 3) NPCsBadEnds++; //Dungeon 3 encounters
 	if (flags[kFLAGS.D3_CENTAUR_DEFEATED] == 1) NPCsBadEnds++;
 	if (flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] == 1) NPCsBadEnds++;

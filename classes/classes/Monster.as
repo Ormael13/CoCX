@@ -1113,6 +1113,7 @@
 
 		public function combatRoundUpdate():void
 		{
+			var store:Number = 0;
 			if (findStatusEffect(StatusEffects.MilkyUrta) >= 0) {
 				game.urtaQuest.milkyUrtaTic();
 			}
@@ -1190,10 +1191,26 @@
 				}
 				//Deal damage if still wounded.
 				else {
-					var store:Number = eMaxHP() * (3 + rand(4))/100;
+					store = eMaxHP() * (3 + rand(4))/100;
 					store = game.combat.doDamage(store);
 					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
+				}
+			}
+			if (findStatusEffect(StatusEffects.OnFire) >= 0) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.OnFire,1,-1);
+				//Heal fire
+				if (statusEffectv1(StatusEffects.OnFire) <= 0) {
+					outputText("The flames engulfing " + a + short + " finally fades.\n\n", false);
+					removeStatusEffect(StatusEffects.OnFire);
+				}
+				//Deal damage if still on fire.
+				else {
+					store = eMaxHP() * (4 + rand(5))/100;
+					store = game.combat.doDamage(store);
+					if (plural) outputText(capitalA + short + " continue to burn from the flames engulfing " + pronoun2 + ". <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
+					else outputText(capitalA + short + " continuew to burn from the flames engulfing " + pronoun2 + ". <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
 				}
 			}
 			if (findStatusEffect(StatusEffects.Timer) >= 0) {

@@ -62,10 +62,7 @@ public function essrayleMeetingI():void {
 	}
 	flags[kFLAGS.MET_ESSY]++;
 	//[Yes] [No]
-	menu();
-	addButton(1,"Yes",plantsForMe);
-	addButton(2,"No",noPlantsForMe);
-	
+	doYesNo(plantsForMe, noPlantsForMe);
 }
  
 //>If No

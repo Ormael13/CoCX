@@ -743,7 +743,7 @@ package classes.Scenes.Places.Bazaar
 			if (player.hasCock()) addButton(0, "Suck my Cock", haveAndySuckYouOff, null, null, null, "Have Andy suck you off.");
 			else addButtonDisabled(0, "Suck my Cock", "You'll need a cock to have Andy do this.");
 			if (player.hasVagina()) addButton(1, "Lick my Pussy", haveAndyLickYouOut, null, null, null, "Have Andy lick your pussy.");
-			else addButtonDisabled(0, "Lick my Pussy", "You'll need a vagina to have Andy do this.");
+			else addButtonDisabled(1, "Lick my Pussy", "You'll need a vagina to have Andy do this.");
 			addButton(2, "Rim my Ass", haveAndyRimYouOmgItsGross, null, null, null, "Have Andy rim your ass. \n\nNOTE: Contains rimjob! You have been warned.");
 			addButton(4, "Do Nothing", declineAndyOral);
 		}
@@ -1301,14 +1301,17 @@ package classes.Scenes.Places.Bazaar
 			outputText("\n\n\"<i>Hey… yuuz gonna jus' stand there and watch or you wanta cum sit on this gud dick?</i>\" He slurs through a thick auburn beard, holding his dick in one hand and a beer in another. Without waiting for an answer two hands at either sides catch you by the wrists.");
 			menu();
 			if (player.lust >= 33) {
-				if (!player.isTaur()) addButton(0, "Let Them", letTheSatyrsHaveTheirWayWithYou, null, null, null, "Let the satyrs have their way with you. This is going to be rough and intense. " + (player.hasVagina() ? "\n\nNOTE: Contains rimjob! You have been warned." : ""));
+				if (!player.isTaur()) {
+					addButton(0, "Let Them", letTheSatyrsHaveTheirWayWithYou, false, null, null, "Let the satyrs have their way with you. This is going to be rough and intense. ");
+					if (player.hasVagina()) addButton(5, "No Rimjobs", letTheSatyrsHaveTheirWayWithYou, true, null, null, "Let the satyrs have their way with you. This is going to be rough and intense. Also signal that you don't want to rim one of the satyr's asses.");
+				}
 				else addButtonDisabled(0, "Let Them", "You doubt you'll be able to participate into the orgy with your tauric body.");
 			}
 			else addButtonDisabled(0, "Let Them", "You aren't horny enough to consider that.");
 			addButton(1, "No", dontLetTheSatyrsFuck);
 		}
 		
-		private function letTheSatyrsHaveTheirWayWithYou():void {
+		private function letTheSatyrsHaveTheirWayWithYou(noRimjob:Boolean = false):void {
 			clearOutput();
 			outputText(images.showImage("satyr-gang-bang"));
 			if (!player.isTaur()) {
@@ -1328,10 +1331,17 @@ package classes.Scenes.Places.Bazaar
 					else if (player.isNaga()) outputText("The satyr embraces your coils as they slide around his body. ");
 					outputText("With a happy smile he enters you with a greedy shove of his hips.");
 					player.cuntChange(24, true);
-					if (player.vaginas[0].vaginalLooseness <= 1) outputText("\n\nYour mouth stretches open into a howl of mixed pain and pleasure as your [pussy] is forcibly stretched by the satyr's giant dick. The constant pounding of your [asshole] is soon joined by a girthy prick sawing in and out of your vagina. You begin to tremble uncontrollably as you are fucked raw by multiple rough girthy dicks. As soon as you open your mouth to howl in ecstasy another satyr hops on the table, this one smashing his little black cherry into your open mouth. You can barely concentrate on rimming the satyr on your face as your [vagina] and [ass] are roughly fucked as you find yourself trembling and moaning into the sweaty ass engulfing your [face]. Your [pussy] feels like it's being split open by the hot meat slicing through your vaginal opening. Luckily it only takes you a short time to adapt to the sensation. As you are violently fucked, the satyr on your face presses his hot little bud into your face. You can taste the bitter sweetness of another man's seed dripping from his happy hole. Your [pussy] and [ass] are being stuffed and pounded by pros and you know one of the satyrs surrounding you, jerking their dicks, was fucking this one. You swirl your tongue and press it into him. The little guy doesn't survive the quick licks and soon explodes onto your [fullChest], his seed joining his buddy's.");
-					else if (player.vaginas[0].vaginalLooseness <= 3) outputText("\n\nYour mouth stretches open into a groan dripping with pleasure as the dick slides into your [vagina]. As soon as your mouth is open another satyr hops onto the table, his hooves clicking on the wood as he squats and offers you his black little cherry. Looking up you can plainly see that he was just getting fucked; his hole drips pearly white seed down onto his fuzzy balls, his heavy ass cheeks naturally spreading. He smashes his greedy ass into your face. You revel in the dicks pounding your [asshole] and [pussy] as you taste the potent bitter sweetness of the seed leaking from the satyr. You swirl your tongue as your body is propelled up and down the table. The fucked satyr doesn't manage to hold on for long and soon he's squirting all over your [fullChest].");
-					else outputText("\n\nYou grin as the dick slams into your [pussy] with a sudden deep thrust. The satyr looks down with wide eyes and then up. With a snarl he begins pounding for all he's worth. Your [pussy] is being pounded harder and faster than your [asshole] and you can't help loving the dual sensations. The clattering of hooves on table makes you look up. Above you is a satyr, squatting to offer you his black rosebud. Looking up you can plainly see that he was recently getting fucked; his hole drips pearly white seed as he smashes it into your face. You revel in the dicks pounding your [asshole] and [pussy] as you taste the potent bitter sweetness of the seed leaking from the satyr. You swirl your tongue as your body is propelled up and down the table. The fucked satyr doesn't manage to hold on for long and soon he's squirting his hot load all over your [fullChest].");
-					outputText("\n\nThe spent satyr hops off of your [face] with a happy bleat and you watch him get shoved back into the table as a taller satyr grabs his horns and begins pounding him again, just as you are being pounded by the satyrs pushing you across the table.");
+					if (noRimjob) {
+						if (player.vaginas[0].vaginalLooseness <= 1) outputText("\n\nYour mouth stretches open into a howl of mixed pain and pleasure as your [pussy] is forcibly stretched by the satyr's giant dick. The constant pounding of your [asshole] is soon joined by a girthy prick sawing in and out of your vagina. You begin to tremble uncontrollably as you are fucked raw by multiple rough girthy dicks. Your [pussy] feels like it's being split open by the hot meat slicing through your vaginal opening. Luckily it only takes you a short time to adapt to the sensation. Your [pussy] and [ass] are being stuffed and pounded by pros and you know one of the satyrs surrounding you, jerking their dicks, was fucking this one. ");
+						else if (player.vaginas[0].vaginalLooseness <= 3) outputText("\n\nYour mouth stretches open into a groan dripping with pleasure as the dick slides into your [vagina]. You revel in the dicks pounding your [asshole] and [pussy].");
+						else outputText("\n\nYou grin as the dick slams into your [pussy] with a sudden deep thrust. The satyr looks down with wide eyes and then up. With a snarl he begins pounding for all he's worth. Your [pussy] is being pounded harder and faster than your [asshole] and you can't help loving the dual sensations. The clattering of hooves on table makes you look up. You revel in the dicks pounding your [asshole] and [pussy].");
+					}
+					else {
+						if (player.vaginas[0].vaginalLooseness <= 1) outputText("\n\nYour mouth stretches open into a howl of mixed pain and pleasure as your [pussy] is forcibly stretched by the satyr's giant dick. The constant pounding of your [asshole] is soon joined by a girthy prick sawing in and out of your vagina. You begin to tremble uncontrollably as you are fucked raw by multiple rough girthy dicks. As soon as you open your mouth to howl in ecstasy another satyr hops on the table, this one smashing his little black cherry into your open mouth. You can barely concentrate on rimming the satyr on your face as your [vagina] and [ass] are roughly fucked as you find yourself trembling and moaning into the sweaty ass engulfing your [face]. Your [pussy] feels like it's being split open by the hot meat slicing through your vaginal opening. Luckily it only takes you a short time to adapt to the sensation. As you are violently fucked, the satyr on your face presses his hot little bud into your face. You can taste the bitter sweetness of another man's seed dripping from his happy hole. Your [pussy] and [ass] are being stuffed and pounded by pros and you know one of the satyrs surrounding you, jerking their dicks, was fucking this one. You swirl your tongue and press it into him. The little guy doesn't survive the quick licks and soon explodes onto your [fullChest], his seed joining his buddy's.");
+						else if (player.vaginas[0].vaginalLooseness <= 3) outputText("\n\nYour mouth stretches open into a groan dripping with pleasure as the dick slides into your [vagina]. As soon as your mouth is open another satyr hops onto the table, his hooves clicking on the wood as he squats and offers you his black little cherry. Looking up you can plainly see that he was just getting fucked; his hole drips pearly white seed down onto his fuzzy balls, his heavy ass cheeks naturally spreading. He smashes his greedy ass into your face. You revel in the dicks pounding your [asshole] and [pussy] as you taste the potent bitter sweetness of the seed leaking from the satyr. You swirl your tongue as your body is propelled up and down the table. The fucked satyr doesn't manage to hold on for long and soon he's squirting all over your [fullChest].");
+						else outputText("\n\nYou grin as the dick slams into your [pussy] with a sudden deep thrust. The satyr looks down with wide eyes and then up. With a snarl he begins pounding for all he's worth. Your [pussy] is being pounded harder and faster than your [asshole] and you can't help loving the dual sensations. The clattering of hooves on table makes you look up. Above you is a satyr, squatting to offer you his black rosebud. Looking up you can plainly see that he was recently getting fucked; his hole drips pearly white seed as he smashes it into your face. You revel in the dicks pounding your [asshole] and [pussy] as you taste the potent bitter sweetness of the seed leaking from the satyr. You swirl your tongue as your body is propelled up and down the table. The fucked satyr doesn't manage to hold on for long and soon he's squirting his hot load all over your [fullChest].");
+						outputText("\n\nThe spent satyr hops off of your [face] with a happy bleat and you watch him get shoved back into the table as a taller satyr grabs his horns and begins pounding him again, just as you are being pounded by the satyrs pushing you across the table.");
+					}
 				}
 				if (player.hasCock()) {
 					outputText("\n\nAs you are fucked hard, your wagging of [eachCock] draws the attention of several of the satyrs. Despite the fact that most of them are already getting fucked you can see them eyeing your meat in obvious hunger.");
@@ -1493,14 +1503,14 @@ package classes.Scenes.Places.Bazaar
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() == 1 && player.countCocksOfType(CockTypesEnum.HUMAN) == 0) {
 				outputText("You feel a stirring in your loins as your cock grows rock hard. You " + player.clothedOrNakedLower("pull it out from your [armor], to ") + "take a look. It seems you now <b>have a human dick again</b>.");
-				player.cocks.type = CockTypesEnum.HUMAN;
+				player.cocks[0].cockType = CockTypesEnum.HUMAN;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() > 1 && (player.cockTotal() - player.countCocksOfType(CockTypesEnum.HUMAN)) > 0) {
 				outputText("One of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull it out from your [armor], releasing", "notice") + " a plume of thick smoke. When you look down you see it has <b>become a human dick</b>.");
 				for (var i:int = 0; i < player.cockTotal(); i++) {
-					if (player.cocks[i].type != CockTypesEnum.HUMAN) {
-						player.cocks[i].type = CockTypesEnum.HUMAN;
+					if (player.cocks[i].cockType != CockTypesEnum.HUMAN) {
+						player.cocks[i].cockType = CockTypesEnum.HUMAN;
 						break;
 					}
 				}

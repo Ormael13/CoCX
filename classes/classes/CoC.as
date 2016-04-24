@@ -211,11 +211,13 @@ the text from being too boring.
 		public var giacomoShop:Giacomo = new Giacomo();
 		// Scenes/Monsters/
 		public var goblinScene:GoblinScene = new GoblinScene();
-		public var impScene:ImpScene = new ImpScene();
 		public var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
 		public var goblinWarriorScene:GoblinWarriorScene = new GoblinWarriorScene();
 		public var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
 		public var goblinElderScene:GoblinElderScene = new GoblinElderScene();
+		public var impScene:ImpScene = new ImpScene();
+		public var mimicScene:MimicScene = new MimicScene();
+		public var succubusScene:SuccubusScene = new SuccubusScene();
 		// Scenes/NPC/
 		public var amilyScene:AmilyScene = new AmilyScene();
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
@@ -394,8 +396,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_1.3.14";
-			version = ver + " (<b>The Real Lethice</b>)";
+			ver = "1.0.2_mod_1.3.20";
+			version = ver + " (<b>More Fixes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

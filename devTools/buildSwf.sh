@@ -75,7 +75,8 @@ echo "Setting Application Descriptor version number to ${COC_VERSION_APK}"
 /bin/sed -r \
     -e "s@(<versionNumber>).*(<\/versionNumber>)@\1${COC_VERSION_APK}\2@" \
     -e "s@(<content>).*(<\/content>)@\1${SWF_NAME}\2@" \
-    ./devTools/application.xml > ./tmp/application.xml
+    ./application.xml
+# > ./tmp/application.xml
 
 $ADT \
 -package \
@@ -108,6 +109,6 @@ echo Done. Building android package.
 # -storepass testpassword \
 # -provisioning-profile ./devTools/cert/Fake.mobileprovision \
 # ../binRepo/CoC-${COC_VERSION}.ipa \
-# ./devTools/application.xml \
+# ./application.xml \
 # -C ../binRepo . \
 # -C ./devTools/icons/ios .

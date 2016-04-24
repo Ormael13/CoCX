@@ -121,6 +121,40 @@
 			flags[kFLAGS.DLC_APRIL_FOOLS] = 1;
 			doNext(playerMenu);
 		}
+		
+		public function pay2WinSelection():void {
+			clearOutput();
+			displayHeader("Premium Shop");
+			outputText("Don't feel like trying to earn these items? Need more gems? Why not purchase them yourself?");
+			outputText("\n\n<b><u>Gems</u></b>");
+			outputText("\n1000 Gems - $0.99");
+			outputText("\n2500 Gems - $1.99");
+			outputText("\n5000 Gems - $2.99");
+			outputText("\n10,000 Gems - $4.99");
+			outputText("\n25,000 Gems - $7.99");
+			outputText("\n\n<b><u>Special Items</u></b>");
+			outputText("\nLethicite Armour - $2.99");
+			outputText("\nDivine Bark Armour - $0.99");
+			outputText("\nLethicite Staff - $0.99");
+			outputText("\nLethice's Whip - $0.99");
+			outputText("\n5x Lethicite - $0.99");
+			outputText("\n5x Premium Mead - $1.99");
+			outputText("\n5x Peppermint White - $2.99");
+			menu();
+			addButton(0, "1000 Gems", buyDLCPrompt, "1000 Gems", "$0.99", pay2WinSelection, "Top up on gems to make sure you can afford what you want!");
+			addButton(1, "2500 Gems", buyDLCPrompt, "2500 Gems", "$1.99", pay2WinSelection, "Top up on gems to make sure you can afford what you want!");
+			addButton(2, "5000 Gems", buyDLCPrompt, "5000 Gems", "$2.99", pay2WinSelection, "Top up on gems to make sure you can afford what you want!");
+			addButton(3, "10,000 Gems", buyDLCPrompt, "10,000 Gems", "$4.99", pay2WinSelection, "Top up on gems to make sure you can afford what you want!");
+			addButton(4, "25,000 Gems", buyDLCPrompt, "25,000 Gems", "$7.99", pay2WinSelection, "Top up on gems to make sure you can afford what you want!");
+			addButton(5, armors.LTHCARM.shortName, buyDLCPrompt, armors.LTHCARM.longName, "$2.99", pay2WinSelection);
+			addButton(6, armors.DBARMOR.shortName, buyDLCPrompt, armors.DBARMOR.longName, "$0.99", pay2WinSelection);
+			addButton(7, weapons.L_STAFF.shortName, buyDLCPrompt, weapons.L_STAFF.longName, "$0.99", pay2WinSelection);
+			addButton(8, weapons.L_WHIP.shortName, buyDLCPrompt, weapons.L_WHIP.longName, "$0.99", pay2WinSelection);
+			addButton(9, useables.LETHITE.shortName, buyDLCPrompt, "5x " + useables.LETHITE.longName, "$0.99", pay2WinSelection);
+			addButton(10, consumables.PROMEAD.shortName, buyDLCPrompt, "5x " + consumables.PROMEAD.longName, "$1.99", pay2WinSelection);
+			addButton(11, consumables.PEPPWHT.shortName, buyDLCPrompt, "5x " + consumables.PEPPWHT.longName, "$2.99", pay2WinSelection);
+			addButton(14, "Back", playerMenu);
+		}
 	}
 }
 

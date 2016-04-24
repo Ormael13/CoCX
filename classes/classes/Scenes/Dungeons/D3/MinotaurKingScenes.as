@@ -61,7 +61,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (player.cocks[i].cockLength <= 12)
 				{
-					if (smallCockIdx != -1 && player.cocks[smallCockIdx].cockLength < player.cocks[i].cockLength)
+					if (smallCockIdx == -1 && player.cocks[smallCockIdx].cockLength < player.cocks[i].cockLength)
 					{
 						smallCockIdx = i;
 					}

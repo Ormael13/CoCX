@@ -498,7 +498,7 @@ public function settingsScreenInterfaceSettings():void {
 		outputText("Font: <b>Lucida Sans Typewriter</b>\n");
 	}
 	else 
-		outputText("Font: <b>Georgia</b>\n");
+		outputText("Font: <b>Palatino Linotype</b>\n");
 		
 	outputText("\n\n");
 	

@@ -248,6 +248,12 @@ package classes.Scenes.Areas.Forest
 			menu();
 			addButton(0, "Run", repeatWildHuntChase);
 			addButton(1, "Wait", repeatWildHuntWait);
+			if (playerHuntScore() >= 200) {
+				outputText("Since you're definitely able to escape, you could purposefully hold back your speed and keep the chase interesting.");
+				addButton(5, "Run (Get Caught)", repeatWildHuntCaught, 110);
+				addButton(10, "Run (Lose)", repeatWildHuntCaught, 90);
+			}
+			
 		}
 
 		protected function repeatWildHuntWait():void
@@ -337,7 +343,12 @@ package classes.Scenes.Areas.Forest
 			outputText("The ropes are thicker than your wrist, and you could probably untie them, given time, but the spin of the net, combined with the mind-bending terror of the fog has left you no room to think.  The hounds are snarling, the world is spinning, you’re prey, and you’ve been caught.\n\n");
 
 			if (player.bunnyScore() >= 4 || player.kitsuneScore() >= 4 || player.harpyScore() >= 4 || pScore > 100) repeatWildHuntAWinnerIsYou();
-			else repeatWildHuntGivenToTheHounds();
+			else {
+				repeatWildHuntGivenToTheHounds();
+				//menu();
+				//addButton(0, "Next", repeatWildHuntGivenToTheHounds);
+				//addButton(1, "FIGHT!", fightTheHounds); (If I have time)
+			}
 		}
 
 		public function repeatWildHuntGivenToTheHounds():void

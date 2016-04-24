@@ -2,6 +2,7 @@
 {
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Items.JewelryLib;
+import classes.GlobalFlags.kFLAGS;
 
 /**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
@@ -781,7 +782,10 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.Tank) >= 0) max += 50;
 			if (findPerk(PerkLib.Tank2) >= 0) max += Math.round(tou);
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
-			max += level * 15;
+			if (flags[kFLAGS.KAIZO_MODE] >= 1)
+				max += level * 5;
+			else
+				max += level * 15;
 			if (jewelryEffectId == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude;
 			max *= 1 + (countCockSocks("green") * 0.02);
 			max = Math.round(max);

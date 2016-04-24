@@ -35,7 +35,7 @@ package classes.Scenes.Dungeons.D3
 			this.ballSize = 4;
 			this.hipRating = HIP_RATING_SLENDER;
 			this.buttRating = BUTT_RATING_TIGHT;
-			initStrTouSpeInte(100, 100, 100, 100);
+			initStrTouSpeInte(110, 110, 110, 110);
 			initLibSensCor(100, 40, 100);
 			this.weaponName = "whip";
 			this.weaponAttack = 25;
@@ -53,6 +53,8 @@ package classes.Scenes.Dungeons.D3
 			this.level = 25;
 			this.lustVuln = 0.15;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.Tank, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Tank2, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			this.checkMonster();
 		}
@@ -882,7 +884,7 @@ package classes.Scenes.Dungeons.D3
 		private function sonicwhip():void
 		{
 			outputText("Lethice raises her sizzling, flame-spitting whip high up overhead, then snaps her arm out and back in an instant, cracking the whip so hard that it gives birth to a shockwave of flame and cacophonous thunder. There’s no avoiding the all-encompassing wave of energy. There’s not even time to brace yourself. It slams into you, rattling bones and scorching flesh. ");
-			var damage:Number = 75 + weaponAttack + str;
+			var damage:Number = (75 + weaponAttack + str) * (1 + (player.newGamePlusMod() * 0.3));
 			damage = player.takeDamage(damage, true);
 		}
 		
@@ -940,7 +942,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function gropehands():void
 		{
-			outputText("<i>“Let’s see how you fight while you’re being groped, shall we? A shame Pigby isn’t around to see how I’ve improved his hands,”</i> Lethice murmurs. Cupping her hands into a parody of lecher’s grip, the corruptive Queen squeezes and chants. Immediately, you feel phantasmal hands all over your body, reaching through your armor to fondle your bare [skinFurScalesNoun]. Digits slip into your [butt]. Fingertips brush your [nipples]. Warm palms slide down your quivering belly toward your vulnerable loins.");
+			outputText("<i>“Let’s see how you fight while you’re being groped, shall we? A shame Pigby isn’t around to see how I’ve improved his hands,”</i> Lethice murmurs. Cupping her hands into a parody of lecher’s grip, the corruptive Queen squeezes and chants. Immediately, you feel phantasmal hands all over your body, reaching through your armor to fondle your bare [skinFurScales]. Digits slip into your [butt]. Fingertips brush your [nipples]. Warm palms slide down your quivering belly toward your vulnerable loins.");
 			outputText("\n\nYou glare daggers at Lethice, but she merely laughs. <i>“A shame I never got to convince him that his hands were so much more effective when used like this.”</i>");
 			game.dynStats("lus",5);
 			player.createStatusEffect(StatusEffects.PigbysHands,0,0,0,0);

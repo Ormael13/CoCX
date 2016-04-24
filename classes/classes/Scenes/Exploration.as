@@ -117,13 +117,32 @@ package classes.Scenes
 					return;
 				}
 				else {
-					outputText("An imp wings out of the sky and attacks!", true);
+					if (rand(10) == 0) { //Two imps clashing, UTG stuff.
+						outputText("A small imp bursts from behind a rock and buzzes towards you. You prepare for a fight, but it stays high and simply flies above you. Suddenly another imp appears from nowhere and attacks the first. In the tussle one of them drops an item, which you handily catch, as the scrapping demons fight their way out of sight. ");
+						switch(rand(3)) {
+							case 0:
+								inventory.takeItem(consumables.SUCMILK, camp.returnToCampUseOneHour);
+								break;
+							case 1:
+								inventory.takeItem(consumables.INCUBID, camp.returnToCampUseOneHour);
+								break;
+							case 2:
+								inventory.takeItem(consumables.IMPFOOD, camp.returnToCampUseOneHour);
+								break;
+							default:
+								camp.returnToCampUseOneHour(); //Failsafe
+						}
+					}
+					else {
+						outputText("An imp wings out of the sky and attacks!", true);
+						startCombat(new Imp());
+						spriteSelect(29);
+					}
+					//Unlock if haven't already.
 					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+						outputText("\n\n<b>New codex entry unlocked: Imps!</b>");
 					}
-					startCombat(new Imp());
-					spriteSelect(29);
 				}
 				return;
 			}
@@ -166,7 +185,7 @@ package classes.Scenes
 					outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"", true);
 					if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
 						flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+						outputText("\n\n<b>New codex entry unlocked: Goblins!</b>");
 					}
 					startCombat(new Goblin());
 					spriteSelect(24);
@@ -176,7 +195,7 @@ package classes.Scenes
 					outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"", true);
 					if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
 						flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+						outputText("\n\n<b>New codex entry unlocked: Goblins!</b>");
 					}
 					startCombat(new Goblin());
 					spriteSelect(24);
@@ -184,7 +203,6 @@ package classes.Scenes
 				}
 			}
 		}
-		
 		
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
@@ -304,12 +322,15 @@ package classes.Scenes
 					return;
 				}
 				//Monster - 50/50 imp/gob split.
-				else {
+				else if (rand(100) < 99) {
 					player.explored++;
 					genericGobImpEncounters(true);
 					return;
 				}
-				outputText("You wander around, fruitlessly searching for new places.", true);
+				else { //Easter egg!
+					outputText("You wander around, fruitlessly searching for new places.", true);
+				}
+				
 			}
 			player.explored++;
 			doNext(camp.returnToCampUseOneHour);
