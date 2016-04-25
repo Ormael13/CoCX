@@ -2557,7 +2557,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("\n\nA few minutes later, you separate from her drained teat and wipe the white from your chin.  That hit the spot.");
 			
-			outputText("\n\n\"<i>Ahhhh,</i>\" the Cum Witch sighs, slumping down into the puddles of sex, \"<i>Told... told you... you couldn't - mmmm... break me...</i>\"");
+			outputText("\n\n\"<i>Ahhhh,</i>\" the Sand Mother sighs, slumping down into the puddles of sex, \"<i>Told... told you... you couldn't - mmmm... break me...</i>\"");
 			
 			if (flags[kFLAGS.SAND_WITCHES_COWED] == 0) {
 				outputText("\n\nThe witches are suitably cowed, but you've ruined any chance at a friendly peace with them.");
