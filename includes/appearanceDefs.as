@@ -108,6 +108,7 @@ public static const ANTENNAE_BEE:int                                            
 public static const ARM_TYPE_HUMAN:int                                              =   0;
 public static const ARM_TYPE_HARPY:int                                              =   1;
 public static const ARM_TYPE_SPIDER:int                                             =   2;
+public static const ARM_TYPE_SALAMANDER:int									                    		=   5;
 
 // tailType
 public static const TAIL_TYPE_NONE:int                                              =   0;
@@ -135,6 +136,7 @@ public static const TAIL_TYPE_GOAT:int                                          
 public static const TAIL_TYPE_RHINO:int                                             =  22;
 public static const TAIL_TYPE_ECHIDNA:int                                           =  23;
 public static const TAIL_TYPE_DEER:int                                              =  24;
+public static const TAIL_TYPE_SALAMANDER:int							                    			=  25;
 
 // wingType
 public static const WING_TYPE_NONE:int                                              =   0;
@@ -176,6 +178,7 @@ public static const LOWER_BODY_TYPE_CLOVEN_HOOFED:int                           
 //public static const LOWER_BODY_TYPE_RHINO:int                                       =  22;
 public static const LOWER_BODY_TYPE_ECHIDNA:int                                     =  23;
 public static const LOWER_BODY_TYPE_DEERTAUR:int                                    =  24; // DEPRECATED, use LOWER_BODY_TYPE_CLOVEN_HOOFED and legCount=4
+public static const LOWER_BODY_TYPE_SALAMANDER:int						                			=  25;
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;
