@@ -1535,6 +1535,29 @@ use namespace kGAMECLASS;
 			return mutantCounter--;
 		}
 		
+		//Salamander score
+		public function salamanderScore():Number
+		{
+			var salamanderCounter:Number = 0;
+			if (faceType == 0)
+				salamanderCounter++;
+			if (earType == 0)
+				salamanderCounter++;
+			if (armType == 5)
+				salamanderCounter++;
+			if (lowerBody == 25)
+				salamanderCounter++;
+			if (tailType == TAIL_TYPE_SALAMANDER)
+				salamanderCounter++;
+			if (lizardCocks() > 0)
+				salamanderCounter++;
+			if (findPerk(PerkLib.Lustzerker) >= 0)
+				salamanderCounter++;
+			if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
+				salamanderCounter++;
+			return salamanderCounter;
+		}
+		
 		//------------
 		// Mod-Added
 		//------------
