@@ -1559,8 +1559,6 @@ use namespace kGAMECLASS;
 				salamanderCounter++;
 			if (findPerk(PerkLib.Lustzerker) >= 0)
 				salamanderCounter++;
-			if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
-				salamanderCounter++;
 			return salamanderCounter;
 		}
 		
