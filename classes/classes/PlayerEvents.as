@@ -174,6 +174,19 @@ package classes {
 				player.removePerk(PerkLib.Flexibility);
 				needNext = true;
 			}
+			//Lustzerker perk
+			if (player.tailType == TAIL_TYPE_SALAMANDER && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && player.armType == ARM_TYPE_SALAMANDER) { //Check for gain of lustzerker - requires legs, arms and tail
+				if (player.findPerk(PerkLib.Lustzerker) < 0) {
+					outputText("\nAfter drinking to the last drop another hip flask of firewater you starts to feel weird maybe slight unpleasant feeling inside your body.  Like many tiny flames cursing inside your veins making you ponder what just happening with your body.  Remembering about salamanders natural talent to enter berserk-like state you quessing it's could be that.\n\n(<b>Gained Perk: Lustzerker</b>)");
+					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
+					needNext = true;
+				}
+			}
+			else if (player.findPerk(PerkLib.Lustzerker) >= 0) { //Remove lustzerker perk if not meeting requirements
+				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that slight warm feeling inside your body anymore meaning for now no more lustzerking.\n\n(<b>Lost Perk: Lustzerker</b>)");
+				player.removePerk(PerkLib.Lustzerker);
+				needNext = true;
+			}
 			//Satyr Sexuality
 			if (player.satyrScore() >= 4 && player.balls > 0) {
 				if (player.findPerk(PerkLib.SatyrSexuality) < 0) {
