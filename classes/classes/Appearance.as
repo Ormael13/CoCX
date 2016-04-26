@@ -2358,7 +2358,8 @@
 				[
 					[ARM_TYPE_HUMAN, "human"],
 					[ARM_TYPE_HARPY, "harpy"],
-					[ARM_TYPE_SPIDER, "spider"]
+					[ARM_TYPE_SPIDER, "spider"],
+					[ARM_TYPE_SALAMANDER, "salamander"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2386,7 +2387,8 @@
 					[TAIL_TYPE_GOAT, "goat"],
 					[TAIL_TYPE_RHINO, "rhino"],
 					[TAIL_TYPE_ECHIDNA, "echidna"],
-					[TAIL_TYPE_DEER, "deer"]
+					[TAIL_TYPE_DEER, "deer"],
+					[TAIL_TYPE_SALAMANDER, "salamander"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2446,7 +2448,8 @@
 					[LOWER_BODY_TYPE_FERRET, "ferret"],
 					[LOWER_BODY_TYPE_CLOVEN_HOOFED, "cloven-hoofed"],
 					[LOWER_BODY_TYPE_ECHIDNA, "echidna"],
-					[LOWER_BODY_TYPE_ECHIDNA, "deertaur"]
+					[LOWER_BODY_TYPE_ECHIDNA, "deertaur"],
+					[LOWER_BODY_TYPE_SALAMANDER, "salamander"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(

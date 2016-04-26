@@ -342,6 +342,7 @@ use namespace kGAMECLASS;
 				attack += 2;
 			//Berserking bonus!
 			if (findStatusEffect(StatusEffects.Berzerking) >= 0) attack += 30;
+			if(findStatusAffect(StatusAffects.Lustzerking) >= 0) attack += 30;
 			attack += statusEffectv1(StatusEffects.ChargeWeapon);
 			return attack;
 		}
@@ -865,6 +866,11 @@ use namespace kGAMECLASS;
 					race = "mouse-" + mf("boy", "girl");
 				else
 					race = "mouse-morph";
+			}
+			if (salamanderScore() >= 4)
+			{
+				if (isTaur()) race = "salamander-taur";
+				else race = "salamander-morph";
 			}
 			//<mod>
 			if (pigScore() >= 4) 
@@ -1533,6 +1539,27 @@ use namespace kGAMECLASS;
 					mutantCounter--;
 			}
 			return mutantCounter--;
+		}
+		
+		//Salamander score
+		public function salamanderScore():Number
+		{
+			var salamanderCounter:Number = 0;
+			if (faceType == 0)
+				salamanderCounter++;
+			if (earType == 0)
+				salamanderCounter++;
+			if (armType == 5)
+				salamanderCounter++;
+			if (lowerBody == 25)
+				salamanderCounter++;
+			if (tailType == TAIL_TYPE_SALAMANDER)
+				salamanderCounter++;
+			if (lizardCocks() > 0)
+				salamanderCounter++;
+			if (findPerk(PerkLib.Lustzerker) >= 0)
+				salamanderCounter++;
+			return salamanderCounter;
 		}
 		
 		//------------
@@ -2492,6 +2519,10 @@ use namespace kGAMECLASS;
 				maxStr += 5;
 				maxSpe += 5;
 			}
+			if (salamanderScore() >= 4) {
+				maxStr += 5;
+				maxTou += 5;
+			}
 			if (isNaga()) maxSpe += 10;
 			if (isTaur() || isDrider()) maxSpe += 20;
 			//Apply New Game+
@@ -2546,6 +2577,9 @@ use namespace kGAMECLASS;
 			}
 			if (findStatusEffect(StatusEffects.Berzerking) >= 0) {
 				removeStatusEffect(StatusEffects.Berzerking);
+			}
+			if(findStatusAffect(StatusAffects.Lustzerking) >= 0) {
+				removeStatusAffect(StatusAffects.Lustzerking);
 			}
 			if (kGAMECLASS.monster.findStatusEffect(StatusEffects.TailWhip) >= 0) {
 				kGAMECLASS.monster.removeStatusEffect(StatusEffects.TailWhip);
