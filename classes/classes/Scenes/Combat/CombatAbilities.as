@@ -680,6 +680,10 @@ package classes.Scenes.Combat
 			if (player.findPerk(PerkLib.Berzerker) >= 0) {
 				addButton(button++, "Berserk", berzerk, null, null, null, "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
 			}
+			//Lustzerk
+			if (player.findPerk(PerkLib.Lustzerker) >= 0) {
+				addButton(button++, "Lustserk", lustzerk, null, null, null, "Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero!");
+			}
 			//Fire Breath
 			if (player.findPerk(PerkLib.Dragonfire) >= 0) {
 				addButton(button++, "DragonFire", dragonBreath, null, null, null, "Unleash fire from your mouth. This can only be done once a day. \n\nFatigue Cost: " + player.spellCost(20), "Dragon Fire");
@@ -733,6 +737,20 @@ package classes.Scenes.Combat
 			outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n");
 			player.createStatusEffect(StatusEffects.Berzerking, 0, 0, 0, 0);
 			monster.doAI();
+		}
+		
+		public function lustzerk():void {
+			clearOutput();
+			if(player.findStatusAffect(StatusAffects.Lustzerking) >= 0) {
+				outputText("You're already pretty goddamn mad and lustfull!", true);
+				doNext(magicalSpecials);
+				return;
+			}
+		
+		//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+			outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n", true);
+			player.createStatusAffect(StatusAffects.Lustzerking,0,0,0,0);
+			enemyAI();
 		}
 		
 		//Dragon Breath
@@ -1364,6 +1382,8 @@ package classes.Scenes.Combat
 				case TAIL_TYPE_DRACONIC:
 				case TAIL_TYPE_RACCOON:
 					addButton(button++, "Tail Whip", tailWhipAttack, null, null, null, "Whip your foe with your tail to enrage them and lower their defense!");
+				case TAIL_TYPE_SALAMANDER:
+					addButton(button++, "Tail Slap", tailSlapAttack, null, null, null, "Set ablaze in red-hot lames your tail to whip your foe with it to hurt and burn them!");
 				default:
 			}
 			if (player.shield != ShieldLib.NOTHING) {
@@ -2250,6 +2270,27 @@ package classes.Scenes.Combat
 			}
 			outputText("\n\n");
 			monster.doAI();
+		}
+		
+		public function tailSlapAttack():void {
+			clearOutput();
+			outputText("With a simple thought you set your tail ablaze.");
+			//miss
+			if((player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+				outputText("  Twirling like a top, you swing your tail, but connect with only empty air.");
+			}
+			else {
+				if(!monster.plural) outputText("  Twirling like a top, you bat your opponent with your tail.");
+				else outputText("  Twirling like a top, you bat your opponents with your tail.");
+				var damage:Number = int((player.str) - rand(monster.tou) - monster.armorDef);
+				damage = calcInfernoMod(damage);
+				damage = doDamage(damage);
+				outputText("  Your tail slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+				checkAchievementDamage(damage);
+			}
+			fatigue(40,2);
+			outputText("\n\n");
+			enemyAI();
 		}
 
 		public function shieldBash():void {
