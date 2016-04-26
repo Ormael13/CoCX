@@ -866,6 +866,11 @@ use namespace kGAMECLASS;
 				else
 					race = "mouse-morph";
 			}
+			if (salamanderScore() >= 4)
+			{
+				if (isTaur()) race = "salamander-taur";
+				else race = "salamander-morph";
+			}
 			//<mod>
 			if (pigScore() >= 4) 
 			{
@@ -2514,6 +2519,10 @@ use namespace kGAMECLASS;
 			if (satyrScore() >= 4) {
 				maxStr += 5;
 				maxSpe += 5;
+			}
+			if (salamanderScore() >= 4) {
+				maxStr += 5;
+				maxTou += 5;
 			}
 			if (isNaga()) maxSpe += 10;
 			if (isTaur() || isDrider()) maxSpe += 20;
