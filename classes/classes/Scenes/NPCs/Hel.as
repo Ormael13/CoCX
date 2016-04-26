@@ -206,8 +206,8 @@ package classes.Scenes.NPCs
 			this.drop = new ChainedDrop().
 					add(armors.CHBIKNI,1/20).
 					add(weapons.SCIMITR,1/20).
-					add(consumables.REPTLUM,0.7);
-			this.tailType = TAIL_TYPE_LIZARD;
+					add(consumables.SALAMFW,0.7);
+			this.tailType = TAIL_TYPE_SALAMANDER;
 			this.tailRecharge = 0;
 			this.createStatusEffect(StatusEffects.Keen,0,0,0,0);
 			checkMonster();
