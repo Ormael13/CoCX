@@ -602,7 +602,7 @@ package classes.Scenes.Places
 			}
 			else if (flags[kFLAGS.INGNAM_RUMORS] == 2) {
 				outputText("\n\nHe nods and says, \"<i>Would you really like to know something special?</i>\" You nod in response and he continues, \"<i>One time I've seen a man with cat ears and a tail. I thought they were just accessories but he insisted it was real. So I tugged on his ears and it was... real. I thought he used a lot of glue but he insisted that it's real. His ears do feel real. His tail even swished from side to side like it's an actual cat tail. He told me about something called 'Whisker Fruit' or something. So my guess is that the food in the so-called 'demon realm' can change you.</i>\"");
-				outputText("\n\nYou tell him if he has some tips for you. He says, \"<i>Yes. If I were you, I would eat them only as last resort. Even a food that could transform you can make the difference betweeen life and death.</i>\" You thank him for the advice.");
+				outputText("\n\nYou tell him if he has some tips for you. He says, \"<i>Yes. If I were you, I would eat them only as last resort. Even a food that could transform you can make the difference between life and death.</i>\" You thank him for the advice.");
 				outputText("\n\n\"<i>You're welcome. I have nothing left to tell you but you're always welcome,</i>\" he says.");
 				flags[kFLAGS.INGNAM_RUMORS] = 3; //Finished
 			}

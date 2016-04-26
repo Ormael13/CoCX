@@ -92,7 +92,6 @@ package classes.Items
 		public const P_WHSKY:PhoukaWhiskey    = new PhoukaWhiskey();
 		public const PROMEAD:SimpleConsumable = mk("ProMead", "ProMead", "a pint of premium god\'s mead", m.proMead, null);
 		public const PURPEAC:SimpleConsumable = mk("PurPeac", "PurPeac", "a pure peach", m.purityPeach, "This is a peach from Minerva's spring, yellowy-orange with red stripes all over it.", 10);
-		public const SATYR_W:SatyrWine        = new SatyrWine();
 		public const SHEEPMK:SimpleConsumable = mk("SheepMk","SheepMk", "a bottle of sheep milk", m.sheepMilk,"This bottle of sheep milk is said to have corruption-fighting properties.  It may be useful.");
 		public const S_WATER:SimpleConsumable = mk("S.Water", "SpringWtr", "a waterskin filled with spring water", m.springWater, "A waterskin full of purified water from Minerva's spring.  It's clean and clear, with a faint sweet scent to it.  You're sure it would be a very refreshing drink.");
 		public const TRAILMX:SimpleConsumable = mk("TrailMx", "Trail Mix", "a pack of trail mix", m.trailMix, "This mix of nuts, dried fruits and berries is lightweight, easy to store and very nutritious.", 20);
@@ -178,6 +177,7 @@ package classes.Items
 		public const RINGFIG:SimpleConsumable = mk("RingFig","RingFig","a ringtail fig", m.ringtailFig,"A dried fig with two lobes and thin dark rings just below its stem.  The skin is wrinkly and it looks vaguely like a bulging scrotum.");
 		public const RIZZART:RizzaRoot			= new RizzaRoot();
 		public const S_GOSSR:SimpleConsumable = mk("S.Gossr","S.Gossr", "a bundle of pink, gossamer webbing", curry(m.sweetGossamer,0), "These strands of gooey pink gossamer seem quite unlike the normal silk that spider-morphs produce.  It smells sweet and is clearly edible, but who knows what it might do to you?");
+		public const SATYR_W:SatyrWine        = new SatyrWine();
 		public const SHARK_T:SimpleConsumable = mk("Shark.T","Shark.T", "a sharp shark tooth", curry(m.sharkTooth,0), "A glinting white tooth, very sharp and intimidating.");
 		public const SNAKOIL:SimpleConsumable = mk("SnakOil", "SnakOil", "a vial of snake oil", m.snakeOil, "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, yellowish liquid. The odor is abominable.");
 		public const SPHONEY:Consumable		  = new BeeHoney(false, true);
