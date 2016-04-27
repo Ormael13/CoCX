@@ -121,6 +121,7 @@ package classes
 			player.skinTone = "pink";
 			player.skinType = SKIN_TYPE_FUR;
 			player.skinDesc = "fur";
+			player.furColor = "pink";
 			player.hairColor = "pink";
 			player.hairLength = 50;
 			player.hipRating = 5;
@@ -254,6 +255,7 @@ package classes
 			player.createPerk(PerkLib.EnlightenedNinetails,0,0,0,0);
 			//if possible with fur, Hair color: "midnight black", Skin/Fur color: "ashen grayish-blue",  Height: 65", Tone: 100, Thickness: 0, Hip rating: 6, Butt rating: 3,Feminimity: 50,  ( 4 rows of breasts (Descending from the top ones: D,C,B,A), nipple length: 0.1", Fuckable, 1 nipple per breast, Tongue type: demon
 			player.hairColor = "midnight black";
+			player.furColor = "ashen grayish-blue";
 			player.skinType = SKIN_TYPE_FUR;
 			player.skinDesc = "fur";
 			player.skinTone = "ashen grayish-blue";
@@ -366,9 +368,11 @@ package classes
 			outputText("Your orange and black tiger stripes make you cut a more imposing visage than normal, and with your great strength, armor, and claymore, you're a natural pick for champion.");
 			//well to start off the name would be Cody
 			//-Cat with (black and orange tiger fur if possible) if not just Orange fur
-			player.hairColor = "black and orange";
+			player.hairColor = "black";
+			player.furColor = "black and orange striped";
 			player.skinType = SKIN_TYPE_FUR;
 			player.skinDesc = "fur";
+			player.skinTone = "light";
 			//-Chainmail armor
 			player.setArmor(armors.FULLCHN);
 			//-Large Claymore (i understand 40 Strength is need so if he could start with that would be great if not hit the gyms)"
@@ -669,6 +673,7 @@ package classes
 			player.tailType = TAIL_TYPE_DRACONIC;
 			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "blue";
+			player.furColor = "blue";
 			player.skinDesc = "fur";
 			player.tone = 88;
 			player.tongueType = TONGUE_DRACONIC;
@@ -857,6 +862,7 @@ package classes
 			//White Fur (if possible)
 			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "white";
+			player.furColor = "white";
 			player.skinDesc = "fur";
 			//Body Thickness/breastsize/- As if I had selected the ""Average"" body type from the start.
 			player.createBreastRow();
@@ -920,6 +926,7 @@ package classes
 			player.skinType = SKIN_TYPE_FUR;
 			player.skinDesc = "fur";
 			player.hairColor = "silver";
+			player.furColor = "silver";
 			player.faceType = FACE_FOX;
 			player.earType = EARS_FOX;
 			player.createBreastRow();
@@ -1053,6 +1060,7 @@ package classes
 			player.skinDesc = "fur";
 			player.skinType = SKIN_TYPE_FUR;
 			player.skinTone = "light";
+			player.furColor = "silver";
 			player.hairColor = "silver";
 			player.hairLength=10;
 			//shoulder length silver hair

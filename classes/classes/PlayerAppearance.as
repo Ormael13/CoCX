@@ -441,7 +441,7 @@ package classes
 				outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.", false);
 			//Done with head bits. Move on to body stuff
 			//Horse lowerbody, other lowerbody texts appear lower
-			else if (player.isTaur()) 
+			if (player.isTaur()) 
 			{
 				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) 
 					outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount)+ " legs capped by hooves.", false);
@@ -450,7 +450,7 @@ package classes
 				else if (player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) 
 					outputText("  Where your legs would normally start you have grown the body of a spider, with " + num2Text(player.legCount)+ " spindly legs that sprout from its sides.", false);
 				else
-					outputText("   Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount)+ " legs.", false);
+					outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount)+ " legs.", false);
 			}
 			//Hip info only displays if you aren't a centaur. 
 			if (!player.isTaur()) 
@@ -649,7 +649,7 @@ package classes
 			}
 			if(player.tailType == TAIL_TYPE_SALAMANDER) 
 			{
-				outputText("  A tapered, covered in red scales tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance. When you are in battle or when you want could set ablaze whole tail in red-hot fire.", false);
+				outputText("  A tapered, covered in red scales tail hangs down from just above your " + player.assDescript() + ".  It sways back and forth, assisting you with keeping your balance. When you are in battle or when you want could set ablaze whole tail in red-hot fire.", false);
 			}
 			if (player.tailType == TAIL_TYPE_RABBIT) 
 				outputText("  A short, soft bunny tail sprouts just above your " + player.assDescript() + ", twitching constantly whenever you don't think about it.", false);
@@ -738,7 +738,7 @@ package classes
 			else if (player.lowerBody == LOWER_BODY_TYPE_LIZARD) 
 				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow down from your " + player.hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
 			else if(player.lowerBody == LOWER_BODY_TYPE_SALAMANDER) 
-				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your " + hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
+				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your " + player.hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.", false);
 			else if (player.lowerBody == LOWER_BODY_TYPE_BUNNY) 
 				outputText("  Your " + num2Text(player.legCount)+ " legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.", false);
 			else if (player.lowerBody == LOWER_BODY_TYPE_HARPY) 

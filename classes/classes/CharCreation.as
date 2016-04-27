@@ -23,8 +23,8 @@
 		public const MAX_MYSTICALITY_LEVEL:int = 10;
 		public const MAX_WISDOM_LEVEL:int = 5;
 		public const MAX_FORTUNE_LEVEL:int = -1; //No maximum level.
-		public const MAX_VIRILITY_LEVEL:int = 5;
-		public const MAX_FERTILITY_LEVEL:int = 5;
+		public const MAX_VIRILITY_LEVEL:int = 15;
+		public const MAX_FERTILITY_LEVEL:int = 15;
 		
 		private var specialCharacters:CharSpecial = new CharSpecial();
 		private var customPlayerProfile:Function;

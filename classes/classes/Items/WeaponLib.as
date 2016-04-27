@@ -30,7 +30,7 @@ package classes.Items
 		public const L_DAGGR:Weapon = new Weapon("L.Daggr","L.Daggr","lust-enchanted dagger","an aphrodisiac-coated dagger","stab",3,150,"A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.","Aphrodisiac Weapon");
 		public const L_HAMMR:LargeHammer = new LargeHammer();
 		public const L_STAFF:LethiciteStaff = new LethiciteStaff();
-		public const L_WHIP :Weapon = new Weapon("L. Whip", "L. Whip", "Lethice's whip", "a flaming whip once belonged to Lethice", "whip-crack", 16, 2000, "This whip once belonged to Lethice who was defeated by your hands.");
+		public const L_WHIP :Weapon = new Weapon("L. Whip", "L. Whip", "Lethice's whip", "a flaming whip once belonged to Lethice", "whip-crack", 16, 2000, "This whip once belonged to Lethice who was defeated at your hands.");
 		public const MACE   :Weapon = new Weapon("Mace   ","Mace","mace","a mace","smash",9,100,"This is a mace, designed to be able to crush against various defenses.");
 		public const PIPE   :Weapon = new Weapon("Pipe   ","Pipe","pipe","a pipe","smash",5,25,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool.");
 		public const PTCHFRK:Weapon = new Weapon("PtchFrk","Pitchfork","pitchfork","a pitchfork","stab",10,200,"This is a pitchfork.  Intended for farm work but also useful as stabbing weapon.");

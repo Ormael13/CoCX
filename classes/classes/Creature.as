@@ -3471,7 +3471,8 @@ package classes
 			if (findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
 			if (findStatusEffect(StatusEffects.Berzerking) >= 0) lust *= .6;
 			if (findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
-			
+			//Berserking removes half!
+			if (findStatusEffect(StatusEffects.Lustzerking) >= 0) lust += ((100 - lust) / 2);
 			//Items
 			if (jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (jewelryEffectMagnitude / 100);
 			if (armorName == game.armors.DBARMOR.name) lust *= 0.9;

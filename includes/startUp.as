@@ -728,11 +728,12 @@ public function creditsScreen():void {
 	outputText("</ul>");
 	outputText("<b>Game Mod Supplementary Events:</b>\n");
 	outputText("<ul>");
-	outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TF)</li>");
+	outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TFs)</li>");
 	outputText("<li> FeiFongWong (Prisoner Mod)</li>");
 	outputText("<li> Foxxling (Lizan Rogue, Skin Oils & Body Lotions, Black Cock)</li>");
 	outputText("<li> LukaDoc (Bimbo Jojo)</li>");
 	outputText("<li> Kitteh6660 (Behemoth, Cabin, Ingnam, Pure Jojo sex scenes. Feel free to help me with quality control.)</li>");
+	outputText("<li> Ormael (Salamander TFs)</li>");
 	outputText("</ul>");
 	outputText("<b>Game Mod Bug Reporting:</b>\n");
 	outputText("<ul>");

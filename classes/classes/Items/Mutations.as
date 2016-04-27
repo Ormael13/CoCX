@@ -5464,12 +5464,12 @@
 				if (player.cocks.length > 0 && (player.gender != 3 || rand(2) == 0)) {
 					outputText("filling ", false);
 					if (player.cocks.length > 1) outputText("each of ", false);
-					outputText("your " + multiCockDescriptLight() + " with the desire to breed.  You get a bit hornier when you realize your sex-drive has gotten a boost.", false);
+					outputText("your " + player.multiCockDescriptLight() + " with the desire to breed.  You get a bit hornier when you realize your sex-drive has gotten a boost.", false);
 				}
 				//(COOCH)
-				else if (player.hasVagina()) outputText("puddling in your " + vaginaDescript(0) + ".  An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.", false);
+				else if (player.hasVagina()) outputText("puddling in your " + player.vaginaDescript(0) + ".  An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.", false);
 				//(TARDS)
-				else outputText("puddling in your featureless crotch for a split-second before it slides into your " + assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.", false);
+				else outputText("puddling in your featureless crotch for a split-second before it slides into your " + player.assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.", false);
 				dynStats("lib", 2);
 				changes++;
 			}
@@ -5507,7 +5507,7 @@
 					//Stop loopahn when dick be found
 					if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
 				}
-				outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your " + player.armorName + " to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
+				outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your " + player.armorName + " to investigate.  Your " + player.cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
 				if (player.hasSheath()) outputText("sheath ", false);
 				else outputText("base ", false);
 				outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ", false);
@@ -5522,7 +5522,7 @@
 				//Actually xform it nau
 				if (player.hasSheath()) {
 					player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-					if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>", false);
+					if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + player.cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>", false);
 				}
 				else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
 				changes++;
@@ -5546,7 +5546,7 @@
 				//(REMOVE SHEATH IF NECESSARY)
 				if (player.hasSheath()) {
 					player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-					if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>", false);
+					if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + player.cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>", false);
 				}
 				else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
 				changes++;
@@ -5574,7 +5574,7 @@
 			}
 			//-Nipples reduction to 1 per tit.
 			if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nA chill runs over your " + allBreastsDescript() + " and vanishes.  You stick a hand under your " + player.armorName + " and discover that your extra nipples are missing!  You're down to just one per ", false);
+				outputText("\n\nA chill runs over your " + player.allBreastsDescript() + " and vanishes.  You stick a hand under your " + player.armorName + " and discover that your extra nipples are missing!  You're down to just one per ", false);
 				if (player.biggestTitSize() < 1) outputText("'breast'.", false);
 				else outputText("breast.", false);
 				changes++;
@@ -5585,18 +5585,23 @@
 			}
 			//Increase player's breast size, if they are big DD or smaller
 			if (player.smallestTitSize() < 6 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.", false);
+				outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + player.breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.", false);
 				player.breastRows[player.smallestTitRow()].breastRating++;
 				changes++;
 			}
 			
 			//Physical changes:
-			//Tail - unlocks enhanced with fire tail whip attack
-			if (player.tailType != TAIL_TYPE_SALAMANDER && changes < changeLimit && rand(3) == 0) {
+			//Tail - 1st gain reptilian tail, 2nd unlocks enhanced with fire tail whip attack
+			if (player.tailType != TAIL_TYPE_LIZARD && player.tailType != TAIL_TYPE_SALAMANDER && changes < changeLimit && rand(3) == 0) {
 				//No tail
-				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail!</b>", false);
+				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + player.assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  <b>You now have a reptilian tail!</b>", false);
 				//Yes tail
-				else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail.</b>", false);
+				else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  <b>You now have a reptilian tail.</b>", false);
+				player.tailType = TAIL_TYPE_LIZARD;
+				changes++;
+			}
+			if (player.tailType == TAIL_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou feel a strange heating sensation in your tail and when you grab your own tail, you can see that it retains the same shape though the color changes to red. It becomes hotter to the touch and you let go of your tail before it gets too hot. For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail!</b>", false);
 				player.tailType = TAIL_TYPE_SALAMANDER;
 				changes++;
 			}

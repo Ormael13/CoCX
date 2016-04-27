@@ -2476,6 +2476,16 @@ public function unFuckSave():void
 	if (player.hasKeyItem("Laybans") >= 0) {
 		flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 	}
+	//Rigidly enforce rank caps
+	if (player.perkv1(PerkLib.AscensionDesires) > getGame().charCreation.MAX_DESIRES_LEVEL) player.setPerkValue(PerkLib.AscensionDesires, 1, getGame().charCreation.MAX_DESIRES_LEVEL);
+	if (player.perkv1(PerkLib.AscensionEndurance) > getGame().charCreation.MAX_ENDURANCE_LEVEL) player.setPerkValue(PerkLib.AscensionEndurance, 1, getGame().charCreation.MAX_ENDURANCE_LEVEL);
+	if (player.perkv1(PerkLib.AscensionFertility) > getGame().charCreation.MAX_FERTILITY_LEVEL) player.setPerkValue(PerkLib.AscensionFertility, 1, getGame().charCreation.MAX_FERTILITY_LEVEL);
+	if (player.perkv1(PerkLib.AscensionMoralShifter) > getGame().charCreation.MAX_MORALSHIFTER_LEVEL) player.setPerkValue(PerkLib.AscensionMoralShifter, 1, getGame().charCreation.MAX_MORALSHIFTER_LEVEL);
+	if (player.perkv1(PerkLib.AscensionMysticality) > getGame().charCreation.MAX_MYSTICALITY_LEVEL) player.setPerkValue(PerkLib.AscensionMysticality, 1, getGame().charCreation.MAX_MYSTICALITY_LEVEL);
+	if (player.perkv1(PerkLib.AscensionTolerance) > getGame().charCreation.MAX_TOLERANCE_LEVEL) player.setPerkValue(PerkLib.AscensionTolerance, 1, getGame().charCreation.MAX_TOLERANCE_LEVEL);
+	if (player.perkv1(PerkLib.AscensionVirility) > getGame().charCreation.MAX_VIRILITY_LEVEL) player.setPerkValue(PerkLib.AscensionVirility, 1, getGame().charCreation.MAX_VIRILITY_LEVEL);
+	if (player.perkv1(PerkLib.AscensionWisdom) > getGame().charCreation.MAX_WISDOM_LEVEL) player.setPerkValue(PerkLib.AscensionWisdom, 1, getGame().charCreation.MAX_WISDOM_LEVEL);
+	//Unstick shift key flag
 	flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
 }
 

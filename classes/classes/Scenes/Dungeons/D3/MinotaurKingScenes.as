@@ -56,24 +56,14 @@ package classes.Scenes.Dungeons.D3
 			}
 			menu();
 			addButton(0,"Kill Them",this.murderhobo);
-			var smallCockIdx:int = -1;
-			for(var i:int = 0; i < player.cocks.length; i++)
-			{
-				if (player.cocks[i].cockLength <= 12)
-				{
-					if (smallCockIdx == -1 && player.cocks[smallCockIdx].cockLength < player.cocks[i].cockLength)
-					{
-						smallCockIdx = i;
-					}
-				}
-			}
+			var smallCockIdx:int = player.smallestCockIndex();
 			if (smallCockIdx != -1)
 			{
 				addButton(1,"Docking",this.dockucocku,smallCockIdx);
 			}
 			if (player.hasCock())
 			{
-				addButton(2,"Buttfuck",this.buttufucku);
+				if (player.cockThatFits(200) >= 0) addButton(2,"Buttfuck",this.buttufucku);
 				addButton(3,"Titfuck",this.titfuckCowslut);
 				addButton(4,"SloppySeconds",this.sloppySeconds);
 			}
@@ -167,6 +157,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function buttufucku():void
 		{
+			var x:int = player.cockThatFits(200);
 			flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 			clearOutput();
 			outputText("Why fuck the spoiled tart when you’ve got such a virile, muscular specimen at your beck and call? He’s pumping his cock with wild, frenetic strokes, spurting bullet-sized bursts of pre-cum over his musky balls and abdominal fur, but no matter how he tugs or squeezes, he doesn’t seem to be getting any closer to release.");
@@ -176,12 +167,12 @@ package classes.Scenes.Dungeons.D3
 				outputText("s");
 			}
 			outputText(" at the thought, growing hard and firm, ready to batter through the bull’s clenching ring. This is going to be fun.");
-			outputText("\n\nYou kick the minotaur King’s legs apart for better access and sidle in close, one hand idly pumping at " + player.biggestCockIndex() + " while you do your damnedest not to give in to the delicious scent. No matter how pernicious the desire to indulge in his aroma, how wonderful it would be to press your cheek against that pillar of masculinity and lick, you know you have to resist it or you’ll forget all about getting yourself off and taking down Lethice.");
-			outputText("\n\nShe’s watching you too. Her hungry, soulless eyes are watching you stroke your cock, watching you line it up with the angry pucker of the minotaur King’s asshole. The corrupt Queen licks her lips when you push forward. You rub your " + player.cockHead(player.biggestCockIndex()) + " against her most trusted servant’s entrance, slowly splitting his derriere, reshaping it into a vessel for your pleasure. He’s tight, tighter than you would expect from such a massive creature. His asshole clutches at every inch of cock you feed it, almost like it wants to squeeze you off, to massage you with rapt enthusiasm.");
+			outputText("\n\nYou kick the minotaur King’s legs apart for better access and sidle in close, one hand idly pumping at " + player.cockDescript() + " while you do your damnedest not to give in to the delicious scent. No matter how pernicious the desire to indulge in his aroma, how wonderful it would be to press your cheek against that pillar of masculinity and lick, you know you have to resist it or you’ll forget all about getting yourself off and taking down Lethice.");
+			outputText("\n\nShe’s watching you too. Her hungry, soulless eyes are watching you stroke your cock, watching you line it up with the angry pucker of the minotaur King’s asshole. The corrupt Queen licks her lips when you push forward. You rub your " + player.cockHead(x) + " against her most trusted servant’s entrance, slowly splitting his derriere, reshaping it into a vessel for your pleasure. He’s tight, tighter than you would expect from such a massive creature. His asshole clutches at every inch of cock you feed it, almost like it wants to squeeze you off, to massage you with rapt enthusiasm.");
 			outputText("\n\nThe royal minotaur’s pained moo tells quite the different story. His horned visage stares down at you in disbelief, but his cock perceptibly plumps between his fingers, displaying a network of bulging veins all too happy to have you stimulate him from behind. Slapping his ass, you give him more of what his body so unsubtly craves. You thrust");
 			if (player.biggestCockLength() >= 24)
 			{
-				outputText(" until his belly bulges with the clear outline of your " + player.biggestCockIndex() + ", displaying just how fully he has been taken to the entire assemblage. You’ve claimed this once noble beast, turned his body into a fuzzy, pleasant-smelling condom for your excessively-large cock.");
+				outputText(" until his belly bulges with the clear outline of your " + player.cockDescript(x) + ", displaying just how fully he has been taken to the entire assemblage. You’ve claimed this once noble beast, turned his body into a fuzzy, pleasant-smelling condom for your excessively-large cock.");
 			}
 			else if (player.biggestCockLength() >= 12)
 			{
@@ -194,7 +185,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			else
 			{
-				outputText(" until you’ve buried the entirety of your " + player.biggestCockIndex() + " inside his snugly squeezing intestines, repurposing his digestive system into your own personal, phallus playground.");
+				outputText(" until you’ve buried the entirety of your " + player.cockDescript(x) + " inside his snugly squeezing intestines, repurposing his digestive system into your own personal, phallus playground.");
 			}
 			outputText("\n\nThis really is a first class asshole. It’s elastic enough to take anything you could offer it and strong enough to provide the perfect amount of friction. Whenever that friction flags, you can just slap him on the ass, and he tightens right up. Best of all, his constantly-dribbling pre-spunk inevitably drips down onto your member as you saw it between his buttcheeks, lubricating you with enough of the sticky to stuff to making fucking him an absolute breeze.");
 			outputText("\n\nWhat a waste of perfectly good muscle. All this time, this big, slutty minotaur has been free to wander around ramming his cock inside of everyone else when he had a treasure like this packed between his tight, toned buttcheeks. Grabbing hold of his thighs, you snarl and pound his ass harder. Your heartbeat is hammering in your ears. Your dick is hard enough to chisel stone, and you’re having a really hard time seeing anything past the swaying horse-cock a few inches in front of you.");

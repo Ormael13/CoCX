@@ -287,7 +287,7 @@ package classes
 		public static const LizanBlowpipe:CombatStatusEffect = mk2("Lizan Blowpipe");
 		public static const LustStones:CombatStatusEffect = mk2("lust stones");
 		public static const lustvenom:CombatStatusEffect = mk2("lust venom");
-		public static const Lustzerking:CombatStatusAffect = mk2("Lustzerking");
+		public static const Lustzerking:CombatStatusEffect = mk2("Lustzerking");
 		public static const Might:CombatStatusEffect = mk2("Might");
 		public static const NagaBind:CombatStatusEffect = mk2("Naga Bind");
 		public static const NagaVenom:CombatStatusEffect = mk2("Naga Venom");

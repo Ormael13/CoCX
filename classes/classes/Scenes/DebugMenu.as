@@ -173,10 +173,11 @@ package classes.Scenes
 			transformativeArray.push(consumables.RINGFIG);
 			transformativeArray.push(consumables.RIZZART);
 			transformativeArray.push(consumables.S_GOSSR);
+			transformativeArray.push(consumables.SALAMFW);
 			transformativeArray.push(consumables.SHARK_T);
 			transformativeArray.push(consumables.SNAKOIL);
-			transformativeArray.push(consumables.SPHONEY);
 			//Page 5
+			transformativeArray.push(consumables.SPHONEY);
 			transformativeArray.push(consumables.TAURICO);
 			transformativeArray.push(consumables.TRAPOIL);
 			transformativeArray.push(consumables.TSCROLL);

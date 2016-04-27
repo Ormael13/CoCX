@@ -682,7 +682,7 @@ package classes.Scenes.Combat
 			}
 			//Lustzerk
 			if (player.findPerk(PerkLib.Lustzerker) >= 0) {
-				addButton(button++, "Lustserk", lustzerk, null, null, null, "Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is reduced to zero!");
+				addButton(button++, "Lustserk", lustzerk, null, null, null, "Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust resistance is halved!");
 			}
 			//Fire Breath
 			if (player.findPerk(PerkLib.Dragonfire) >= 0) {
@@ -741,16 +741,15 @@ package classes.Scenes.Combat
 		
 		public function lustzerk():void {
 			clearOutput();
-			if(player.findStatusAffect(StatusAffects.Lustzerking) >= 0) {
+			if(player.findStatusEffect(StatusEffects.Lustzerking) >= 0) {
 				outputText("You're already pretty goddamn mad and lustfull!", true);
 				doNext(magicalSpecials);
 				return;
 			}
-		
-		//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+			//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 			outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n", true);
-			player.createStatusAffect(StatusAffects.Lustzerking,0,0,0,0);
-			enemyAI();
+			player.createStatusEffect(StatusEffects.Lustzerking,0,0,0,0);
+			monster.doAI();
 		}
 		
 		//Dragon Breath
@@ -2276,21 +2275,21 @@ package classes.Scenes.Combat
 			clearOutput();
 			outputText("With a simple thought you set your tail ablaze.");
 			//miss
-			if((player.findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
-				outputText("  Twirling like a top, you swing your tail, but connect with only empty air.");
+			if((player.findStatusEffect(StatusEffects.Blind) >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+				outputText(" Twirling like a top, you swing your tail, but connect with only empty air.");
 			}
 			else {
-				if(!monster.plural) outputText("  Twirling like a top, you bat your opponent with your tail.");
-				else outputText("  Twirling like a top, you bat your opponents with your tail.");
+				if(!monster.plural) outputText(" Twirling like a top, you bat your opponent with your tail.");
+				else outputText(" Twirling like a top, you bat your opponents with your tail.");
 				var damage:Number = int((player.str) - rand(monster.tou) - monster.armorDef);
 				damage = calcInfernoMod(damage);
-				damage = doDamage(damage);
+				damage = combat.doDamage(damage);
 				outputText("  Your tail slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
-				checkAchievementDamage(damage);
+				combat.checkAchievementDamage(damage);
 			}
-			fatigue(40,2);
+			player.changeFatigue(40,2);
 			outputText("\n\n");
-			enemyAI();
+			monster.doAI();
 		}
 
 		public function shieldBash():void {

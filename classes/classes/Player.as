@@ -342,7 +342,7 @@ use namespace kGAMECLASS;
 				attack += 2;
 			//Berserking bonus!
 			if (findStatusEffect(StatusEffects.Berzerking) >= 0) attack += 30;
-			if(findStatusAffect(StatusAffects.Lustzerking) >= 0) attack += 30;
+			if (findStatusEffect(StatusEffects.Lustzerking) >= 0) attack += 30;
 			attack += statusEffectv1(StatusEffects.ChargeWeapon);
 			return attack;
 		}
@@ -2578,8 +2578,8 @@ use namespace kGAMECLASS;
 			if (findStatusEffect(StatusEffects.Berzerking) >= 0) {
 				removeStatusEffect(StatusEffects.Berzerking);
 			}
-			if(findStatusAffect(StatusAffects.Lustzerking) >= 0) {
-				removeStatusAffect(StatusAffects.Lustzerking);
+			if (findStatusEffect(StatusEffects.Lustzerking) >= 0) {
+				removeStatusEffect(StatusEffects.Lustzerking);
 			}
 			if (kGAMECLASS.monster.findStatusEffect(StatusEffects.TailWhip) >= 0) {
 				kGAMECLASS.monster.removeStatusEffect(StatusEffects.TailWhip);

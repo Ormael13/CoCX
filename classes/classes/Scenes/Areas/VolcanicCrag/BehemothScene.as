@@ -368,7 +368,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (player.hasCock()) outputText("Your [cock] shoots ropes of jism at the Behemoth.");
 			outputText("\n\nSpent, the behemoth lays next to you and says, \"<i>I love you, " + player.mf("dude", "chick") + "." + (flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH] == 0 ? " If you ever get pregnant, I want to let you know that pregnancy lasts <b>two months</b>. My cum won't fertilize your womb if you're not pure enough." : "") + "</i>\" You smile at him while rubbing your cum-filled belly and fall into a nice nap.");
 			outputText("\n\n<b>Some time later...</b>");
-			outputText("\n\nYou wake up from your nap refreshed and invigorated and give the Behemoth a kiss before you " + player.clothedOrNaked("redress yourself in your [armor], and") + "make your way back to your camp.");
+			outputText("\n\nYou wake up from your nap refreshed and invigorated and give the Behemoth a kiss before you " + player.clothedOrNaked("redress yourself in your [armor], and ") + "make your way back to your camp.");
 			player.orgasm();
 			player.slimeFeed();
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3 && player.cor < 25 + player.corruptionTolerance()) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);

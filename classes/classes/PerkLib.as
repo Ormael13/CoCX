@@ -399,6 +399,8 @@ package classes
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
 		public static const Incorporeality:PerkType = mk("Incorporeality", "Incorporeality",
 				"Allows you to fade into a ghost-like state and temporarily possess others.");
+		public static const Lustzerker:PerkType = mk("Lustserker", "Lustserker",
+				"Grants 'Lustserk' ability.");
 		public static const MilkMaid:MilkMaidPerk = new MilkMaidPerk();
 		public static const MinotaurCumAddict:PerkType = mk("Minotaur Cum Addict", "Minotaur Cum Addict",
 				"Causes you to crave minotaur cum frequently.  You cannot shake this addiction.");
