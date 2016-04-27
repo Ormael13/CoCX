@@ -210,7 +210,7 @@ package classes.Scenes.Dungeons.D3
 
 			clearOutput();
 			outputText("The mechanic collapses, his overalls");
-			if (hpVictory) outputText(" falling off his prone from, shredded.");
+			if (hpVictory) outputText(" falling off his prone form, shredded.");
 			else outputText(" hanging open as he reaches down for his exposed, dangling cock to wildly masturbate.");
 			outputText(" He seems surprisingly human like that, just as mortal as anyone. You could let him go, play with him some, or cleanse the world of another demon.");
 
