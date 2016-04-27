@@ -630,7 +630,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nThe sight of such a magnificent, victorious orgy sends shivers of delight through you almost as sexual as the wet, tight hug of your consort’s sex around your");
 			if(player.hasCock())
 			{
-				outputText(" [cock]");
+				outputText(" [cock].");
 			}
 			else
 			{
