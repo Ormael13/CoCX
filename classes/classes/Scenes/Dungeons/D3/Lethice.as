@@ -123,8 +123,9 @@ package classes.Scenes.Dungeons.D3
 					{
 						outputText(" quickness");
 					}
-					outputText(" to stay safe. Either way, you’re free for now.</b>");
+					outputText(" to stay safe. Either way, you’re free for now.");
 				}
+				outputText("</b>");
 			}
 			if (game.monster.findStatusEffect(StatusEffects.Shell) >= 0)
 			{

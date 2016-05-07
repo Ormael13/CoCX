@@ -3364,12 +3364,24 @@ package classes.Scenes.Dungeons
 			outputText(" that reminds you that you got exactly you asked for, even if she made you like it a little bit more than you would have liked...");
 			outputText("<b>");
 			if (virility) {
-				outputText("\n\n(Perk Unlocked: Magical Virility - 200 mLs more cum per orgasm and enhanced virility.)");
-				player.createPerk(PerkLib.MagicalVirility,0,0,0,0);
+				if (player.findPerk(PerkLib.MagicalVirility) < 0) {
+					outputText("\n\n(Perk Unlocked: Magical Virility - 200 mLs more cum per orgasm and enhanced virility.)");
+					player.createPerk(PerkLib.MagicalVirility,0,0,0,0);
+				}
+				else if (player.perkv1(PerkLib.MagicalVirility) < 3) {
+					outputText("\n\n(Perk Upgraded: Magical Virility - 100 mLs more cum per orgasm and enhanced virility.)");
+					player.addPerkValue(PerkLib.MagicalVirility, 1, 1);
+				}
 			}
 			else {
-				outputText("\n\n(Perk Unlocked: Magical Fertility - 10% higher chance of pregnancy and increased pregnancy speed.)");
-				player.createPerk(PerkLib.MagicalFertility,0,0,0,0);
+				if (player.findPerk(PerkLib.MagicalFertility) < 0) {
+					outputText("\n\n(Perk Unlocked: Magical Fertility - 10% higher chance of pregnancy and increased pregnancy speed.)");
+					player.createPerk(PerkLib.MagicalFertility,0,0,0,0);
+				}
+				else if (player.perkv1(PerkLib.MagicalFertility) < 3) {
+					outputText("\n\n(Perk Upgraded: Magical Fertility - 5% higher chance of pregnancy.)");
+					player.addPerkValue(PerkLib.MagicalFertility, 1, 1);
+				}
 			}
 			flags[kFLAGS.BEEN_BLESSED_BY_CUM_WITCH] = 1;
 			player.orgasm();

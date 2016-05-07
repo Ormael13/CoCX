@@ -1454,9 +1454,9 @@
 			kGAMECLASS.ingnam.menuIngnam();
 		}
 
-		//-----------------
-		//-- ASCENSION
-		//-----------------
+		//------------
+		// ASCENSION
+		//------------
 		public function ascensionMenu():void {
 			hideStats();
 			clearOutput();
@@ -1468,10 +1468,13 @@
 			outputText("\n\n(When you're done, select Reincarnate.)");
 			menu();
 			addButton(0, "Perk Select", ascensionPerkMenu, null, null, null, "Spend Ascension Perk Points on special perks!", "Perk Selection");
-			addButton(1, "Respec", respecLevelPerks, null, null, null, "Respec all level-up perks for 5 Ascension Perk Points?");
-			addButton(2, "Rename", renamePrompt, null, null, null, "Change your name at no charge?");
+			addButton(1, "Perm Perks", ascensionPermeryMenu, null, null, null, "Spend Ascension Perk Points to make certain perks permanent.", "Perk Selection");
+			addButton(2, "Respec", respecLevelPerks, null, null, null, "Respec all level-up perks for 5 Ascension Perk Points?");
+			addButton(3, "Rename", renamePrompt, null, null, null, "Change your name at no charge?");
 			addButton(4, "Reincarnate", reincarnatePrompt, null, null, null, "Reincarnate and start an entirely new adventure?");
 		}
+		
+		//Perk Selection
 		private function ascensionPerkMenu():void {
 			clearOutput();
 			outputText("You can spend your Ascension Perk Points on special perks not available at level-up!");
@@ -1488,7 +1491,6 @@
 			addButton(8, "Wisdom", ascensionPerkSelection, PerkLib.AscensionWisdom, MAX_WISDOM_LEVEL, null, PerkLib.AscensionWisdom.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionWisdom) + " / " + MAX_WISDOM_LEVEL);
 			addButton(14, "Back", ascensionMenu);
 		}
-		
 		private function ascensionPerkSelection(perk:* = null, maxLevel:int = 10):void {
 			clearOutput();
 			outputText("Perk Effect: " + perk.longDesc);
@@ -1511,7 +1513,110 @@
 			else player.createPerk(perk, 1, 0, 0, 0);
 			ascensionPerkSelection(perk, maxLevel);
 		}
-		
+		//Perk Permery
+		private function ascensionPermeryMenu():void {
+			clearOutput();
+			outputText("For the price of a few points, you can make certain perks permanent and they will carry over in future ascensions. In addition, if the perks come from transformations, they will stay even if you no longer meet the requirements.");
+			outputText("\n\nCurrent Cost: " + permanentizeCost() + " Ascension Points");
+			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+			var button:int = 0;
+			menu();
+			for (var i:int = 0; i < player.perks.length; i++) {
+				if (isPermable(player.perks[i].ptype)) {
+					if (player.perks[i].value4 == 0)
+						addButton(button++, player.perks[i].ptype.id, permanentizePerk, player.perks[i].ptype, null, null, player.perks[i].ptype.desc());
+					else
+						addButtonDisabled(button++, player.perks[i].ptype.id, "This perk is already made permanent and will carry over in all subsequent ascensions.");
+				}
+			}
+			addButton(14, "Back", ascensionMenu);
+		}
+		private function permanentizePerk(perk:PerkType):void {
+			//Not enough points or perk already permed? Cancel.
+			if (player.ascensionPerkPoints < permanentizeCost()) return;
+			if (player.perkv4(perk) > 0) return;
+			//Deduct points
+			player.ascensionPerkPoints -= permanentizeCost();
+			//Permanentize a perk
+			player.addPerkValue(perk, 4, 1);
+			ascensionPermeryMenu();
+		}
+		private function permanentizeCost():int {
+			var count:int = 1;
+			//Transformation Perks
+			if (player.perkv4(PerkLib.Flexibility) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.SatyrSexuality) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.Lustzerker) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.CorruptedNinetails) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.EnlightenedNinetails) > 0) {
+				count++;
+			}
+			//Event Perks
+			if (player.perkv4(PerkLib.Androgyny) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.MaraesGiftButtslut) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.MaraesGiftFertility) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.MaraesGiftProfractory) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.MaraesGiftStud) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.PurityBlessing) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.MagicalFertility) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.MagicalVirility) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.Hellfire) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.FireLord) > 0) {
+				count++;
+			}
+			if (player.perkv4(PerkLib.Dragonfire) > 0) {
+				count++;
+			}
+			return count;
+		}
+		private function isPermable(perk:PerkType):Boolean {
+			//Transformation Perks
+			if (perk == PerkLib.Flexibility) return true;
+			if (perk == PerkLib.SatyrSexuality) return true;
+			if (perk == PerkLib.Lustzerker) return true;
+			if (perk == PerkLib.CorruptedNinetails) return true;
+			if (perk == PerkLib.EnlightenedNinetails) return true;
+			//Event Perks
+			if (perk == PerkLib.Androgyny) return true;
+			if (perk == PerkLib.MaraesGiftButtslut) return true;
+			if (perk == PerkLib.MaraesGiftFertility) return true;
+			if (perk == PerkLib.MaraesGiftProfractory) return true;
+			if (perk == PerkLib.MaraesGiftStud) return true;
+			if (perk == PerkLib.PurityBlessing) return true;
+			if (perk == PerkLib.MagicalFertility) return true;
+			if (perk == PerkLib.MagicalVirility) return true;
+			if (perk == PerkLib.Hellfire) return true;
+			if (perk == PerkLib.FireLord) return true;
+			if (perk == PerkLib.Dragonfire) return true;
+			return false;
+		}
+		//Respec
 		private function respecLevelPerks():void {
 			clearOutput();
 			if (player.ascensionPerkPoints < 5) {
@@ -1539,7 +1644,7 @@
 			outputText("Your level-up perks are now reset and you are refunded the perk points.");
 			doNext(ascensionMenu);
 		}
-		
+		//Rename
 		private function renamePrompt():void {
 			clearOutput();
 			outputText("You may choose to change your name.");
@@ -1610,7 +1715,7 @@
 		}
 		
 		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean {
-			return perk.ptype.keepOnAscension(respec);
+			return perk.ptype.keepOnAscension(respec) || perk.value4 > 0;
 		}
 
 		private function isSpecialKeyItem(keyName:* = null):Boolean {

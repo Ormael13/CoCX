@@ -43,12 +43,9 @@ package classes.Scenes.Dungeons.D3
 		}
 		
 		public function encounterLethice():void {
-			if(player.cor < 90)
-			{
+			if (player.cor < 90)
 				goFight();
-			}
-			else
-			{
+			else {
 				menu();
 				addButton(0,"Fight",goFight);
 				addButton(1,"Consort",joinHer);

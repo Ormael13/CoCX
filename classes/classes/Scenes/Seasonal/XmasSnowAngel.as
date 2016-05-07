@@ -388,7 +388,9 @@ package classes.Scenes.Seasonal {
 			//[if you haven't been introduced to christmas via elf or otherwise] 
 			if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) outputText("\n\nYou have no idea what that is.");
 			awardAchievement("A Christmas Carol", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_II);
-			player.createPerk(PerkLib.AChristmasCarol, 0, 0, 0, 0);
+			if (player.findPerk(PerkLib.AChristmasCarol) < 0) {
+				player.createPerk(PerkLib.AChristmasCarol, 0, 0, 0, 0);
+			}			
 			//[end, get The North Star & A Christmas Carol perks]
 			//The North Star
 			//Witness picnic events with North & Carol at the High Mountain.

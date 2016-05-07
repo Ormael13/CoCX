@@ -1688,7 +1688,7 @@ package classes
 			if (findPerk(PerkLib.OneTrackMind) >= 0)
 				percent += 0.03;
 			if (findPerk(PerkLib.MagicalVirility) >= 0)
-				percent += 0.05;
+				percent += 0.05 + (perkv1(PerkLib.MagicalVirility) * 0.01);
 			//Messy Orgasms?
 			if (findPerk(PerkLib.MessyOrgasms) >= 0)
 				percent += 0.03;
@@ -1754,7 +1754,7 @@ package classes
 			if (findPerk(PerkLib.FerasBoonAlpha) >= 0)
 				quantity += 200;
 			if (findPerk(PerkLib.MagicalVirility) >= 0)
-				quantity += 200;
+				quantity += 200 + (perkv1(PerkLib.MagicalVirility) * 100);
 			if (findPerk(PerkLib.FerasBoonSeeder) >= 0)
 				quantity += 1000;
 			//if (hasPerk("Elven Bounty") >= 0) quantity += 250;;
@@ -2423,7 +2423,7 @@ package classes
 			if (findPerk(PerkLib.FerasBoonBreedingBitch) >= 0)
 				counter += 30;
 			if (findPerk(PerkLib.MagicalFertility) >= 0)
-				counter += 10;
+				counter += 10 + (perkv1(PerkLib.MagicalFertility) * 5);
 			counter += perkv2(PerkLib.ElvenBounty);
 			counter += perkv1(PerkLib.PiercedFertite);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)

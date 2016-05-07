@@ -23,19 +23,33 @@ package classes
 */
 		// Player creation perks
 		public static const Fast:PerkType = mk("Fast", "Fast",
-				"Gains speed 25% faster.");
+				"Gains speed 25% faster.", null, true);
 		public static const Lusty:PerkType = mk("Lusty", "Lusty",
-				"Gains lust 25% faster.");
+				"Gains lust 25% faster.", null, true);
 		public static const Pervert:PerkType = mk("Pervert", "Pervert",
-				"Gains corruption 25% faster. Reduces corruption requirement for high-corruption variant of scenes.");
+				"Gains corruption 25% faster. Reduces corruption requirement for high-corruption variant of scenes.", null, true);
 		public static const Sensitive:PerkType = mk("Sensitive", "Sensitive",
-				"Gains sensitivity 25% faster.");
+				"Gains sensitivity 25% faster.", null, true);
 		public static const Smart:PerkType = mk("Smart", "Smart",
-				"Gains intelligence 25% faster.");
+				"Gains intelligence 25% faster.", null, true);
 		public static const Strong:PerkType = mk("Strong", "Strong",
-				"Gains strength 25% faster.");
+				"Gains strength 25% faster.", null, true);
 		public static const Tough:PerkType = mk("Tough", "Tough",
-				"Gains toughness 25% faster.");
+				"Gains toughness 25% faster.", null, true);
+		// Female creation perks
+		public static const BigClit:PerkType = mk("Big Clit", "Big Clit",
+				"Allows your clit to grow larger more easily and faster.", null, true);
+		public static const BigTits:PerkType = mk("Big Tits", "Big Tits",
+				"Makes your tits grow larger more easily.", null, true);
+		public static const Fertile:PerkType = mk("Fertile", "Fertile",
+				"Makes you 15% more likely to become pregnant.", null, true);
+		public static const WetPussy:PerkType = mk("Wet Pussy", "Wet Pussy",
+				"Keeps your pussy wet and provides a bonus to capacity.", null, true);
+		// Male creation perks
+		public static const BigCock:PerkType = mk("Big Cock", "Big Cock",
+				"Gains cock size 25% faster and with less limitations.", null, true);
+		public static const MessyOrgasms:PerkType = mk("Messy Orgasms", "Messy Orgasms",
+				"Produces 50% more cum volume.", null, true);
 				
 		// Ascension perks
 		public static const AscensionDesires:AscensionDesiresPerk = new AscensionDesiresPerk();
@@ -47,43 +61,28 @@ package classes
 		public static const AscensionTolerance:AscensionTolerancePerk = new AscensionTolerancePerk();
 		public static const AscensionVirility:AscensionVirilityPerk = new AscensionVirilityPerk();
 		public static const AscensionWisdom:AscensionWisdomPerk = new AscensionWisdomPerk();
-		
-		// Female creation perks
-		public static const BigClit:PerkType = mk("Big Clit", "Big Clit",
-				"Allows your clit to grow larger more easily and faster.");
-		public static const BigTits:PerkType = mk("Big Tits", "Big Tits",
-				"Makes your tits grow larger more easily.");
-		public static const Fertile:PerkType = mk("Fertile", "Fertile",
-				"Makes you 15% more likely to become pregnant.");
-		public static const WetPussy:PerkType = mk("Wet Pussy", "Wet Pussy",
-				"Keeps your pussy wet and provides a bonus to capacity.");
-		// Male creation perks
-		public static const BigCock:PerkType = mk("Big Cock", "Big Cock",
-				"Gains cock size 25% faster and with less limitations.");
-		public static const MessyOrgasms:PerkType = mk("Messy Orgasms", "Messy Orgasms",
-				"Produces 50% more cum volume.");
 
 		// History perks
 		public static const HistoryAlchemist:PerkType = mk("History: Alchemist", "History: Alchemist",
-				"Alchemical experience makes items more reactive to your body.");
+				"Alchemical experience makes items more reactive to your body.", null, true);
 		public static const HistoryFighter:PerkType = mk("History: Fighter", "History: Fighter",
-				"A Past full of conflict increases physical damage dealt by 10%.");
+				"A Past full of conflict increases physical damage dealt by 10%.", null, true);
 		public static const HistoryFortune:PerkType = mk("History: Fortune", "History: Fortune",
-				"Your luck and skills at gathering currency allows you to get 15% more gems from victories.");
+				"Your luck and skills at gathering currency allows you to get 15% more gems from victories.", null, true);
 		public static const HistoryHealer:PerkType = mk("History: Healer", "History: Healer",
-				"Healing experience increases HP gains by 20%.");
+				"Healing experience increases HP gains by 20%.", null, true);
 		public static const HistoryReligious:PerkType = mk("History: Religious", "History: Religious",
-				"Replaces masturbate with meditate when corruption less than or equal to 66. Reduces minimum libido slightly.");
+				"Replaces masturbate with meditate when corruption less than or equal to 66. Reduces minimum libido slightly.", null, true);
 		public static const HistoryScholar:PerkType = mk("History: Scholar", "History: Scholar",
-				"Time spent focusing your mind makes spellcasting 20% less fatiguing.");
+				"Time spent focusing your mind makes spellcasting 20% less fatiguing.", null, true);
 		public static const HistorySlacker:PerkType = mk("History: Slacker", "History: Slacker",
-				"Regenerate fatigue 20% faster.");
+				"Regenerate fatigue 20% faster.", null, true);
 		public static const HistorySlut:PerkType = mk("History: Slut", "History: Slut",
-				"Sexual experience has made you more able to handle large insertions and more resistant to stretching.");
+				"Sexual experience has made you more able to handle large insertions and more resistant to stretching.", null, true);
 		public static const HistorySmith:PerkType = mk("History: Smith", "History: Smith",
-				"Knowledge of armor and fitting increases armor effectiveness by roughly 10%.");
+				"Knowledge of armor and fitting increases armor effectiveness by roughly 10%.", null, true);
 		public static const HistoryWhore:PerkType = mk("History: Whore", "History: Whore",
-				"Seductive experience causes your tease attacks to be 15% more effective.");
+				"Seductive experience causes your tease attacks to be 15% more effective.", null, true);
 
 		// Ordinary (levelup) perks
 		public static const Acclimation:PerkType = mk("Acclimation", "Acclimation",

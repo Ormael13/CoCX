@@ -14,7 +14,7 @@ package classes.Items.Consumables
 		}
 		
 		override public function useItem():Boolean {
-			outputText("Feeling parched you tug the cork from a bottle of wine. As you put the bottle to your lips and drink of the rich, invigorating liquid you soon find yourself with an empty bottle and a smile. ");
+			outputText("Feeling parched you tug the cork from a bottle of wine. As you put the bottle to your lips and drink the rich, invigorating liquid you soon find yourself with an empty bottle and a smile. ");
 			getGame().player.refillHunger(10);
 			getGame().bazaar.blackCock.satyrTFs();
 			return false;

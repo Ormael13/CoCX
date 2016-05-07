@@ -1783,12 +1783,17 @@ package classes.Scenes.NPCs
 			var isVirgin:Boolean = (player.ass.analLooseness == 0);
 			clearOutput();
 			outputText("You " + player.clothedOrNakedLower("take off your [armor] and ") + "show Joy your naked body" + (player.hasCock() || player.hasVagina() ? " and" : "") + (player.hasCock() ? " your hardening " + player.cockDescript() : "") + (player.hasCock() && player.hasVagina() ? " and" : "") + (player.hasVagina() ? " moistening " + player.vaginaDescript() : "") + ". You close in on Joy and gently stroke her cheek, pulling her close for a quick kiss; then taking the opportunity grab at her " + joyCockDescript() + " through her shorts and whisper to her that you would like her up your butt.");
-			outputText("\n\noy blushes and shuffles her feet from side to side. \"<i>Up-Up the butt?</i>\" She stammers. \"<i>Like, why would you want it shoved up there?</i>\" She asks, though you can feel her " + joyCockDescript() + " getting hard at the thought.");
-			outputText("\n\nYou explain to her that anal stimulation can feel just as good as vaginal sex. " + (player.hasVagina() ? "" : "Besides you don't really have a pussy for her to stick her dick.") + "");
-			outputText("\n\n\"<i>But still... what if I hurt you? I couldn't bear it if that happened!</i>\" The bimbo herm protests, shaking her head as she pictures you hurt. \"<i>Plus, wouldn't it be all nasty in there?</i>\"");
-			outputText("\n\nYou ask if she's insinuating that you're not clean.");
-			outputText("\n\nAt that, she looks startled. \"<i>Like, no! That's not what I meant! I mean, I...</i>\" She trails off, clearly too confused to really know what to say or do anymore.");
-			outputText("\n\nYou give her junk a soft stroke and turn around; you walk a bit and bend over slightly, then slap your own butt. Finally you look at her and ask her if she really doesn't want a piece of your ass.");
+			if (flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER] == 0) {
+				outputText("\n\nJoy blushes and shuffles her feet from side to side. \"<i>Up-Up the butt?</i>\" She stammers. \"<i>Like, why would you want it shoved up there?</i>\" She asks, though you can feel her " + joyCockDescript() + " getting hard at the thought.");
+				outputText("\n\nYou explain to her that anal stimulation can feel just as good as vaginal sex. " + (player.hasVagina() ? "" : "Besides you don't really have a pussy for her to stick her dick.") + "");
+				outputText("\n\n\"<i>But still... what if I hurt you? I couldn't bear it if that happened!</i>\" The bimbo herm protests, shaking her head as she pictures you hurt. \"<i>Plus, wouldn't it be all nasty in there?</i>\"");
+				outputText("\n\nYou ask if she's insinuating that you're not clean.");
+				outputText("\n\nAt that, she looks startled. \"<i>Like, no! That's not what I meant! I mean, I...</i>\" She trails off, clearly too confused to really know what to say or do anymore.");
+				outputText("\n\nYou give her junk a soft stroke and turn around; you walk a bit and bend over slightly, then slap your own butt. Finally you look at her and ask her if she really doesn't want a piece of your ass.");
+			}
+			else {
+				
+			}
 			outputText("\n\nShe swallows hard, fixated on your " + player.assDescript() + ", " + joyCockDescript() + " hard as you've ever seen it. \"<i>Like, okay, if you're really sure that, y'know, this is what you want...</i>\" She grumbles. \"<i>But I'm not touching that ass until I've, liked, lubed you up good!</i>\" She insists, stamping one little foot for emphasis.");
 			outputText("\n\nYou smile and tell her you wouldn't have it any other way.");
 			outputText("\n\nStill muttering to herself, the mouse herm stalks over to you, stripping her clothes and dropping them in a heap; then gives your left asscheek a stinging slap. Then, she starts to jerk herself off with one hand, the other diving into her ever-wet cunt. \"<i>Gonna lube you up... Like, gonna stuff you fulla pre... make you nice and stretchy for my cock...</i>\" She murmurs to herself. Then, feeling she has enough sexual fluids on her hands, she reaches out and sticks a finger without warning into your asshole.");

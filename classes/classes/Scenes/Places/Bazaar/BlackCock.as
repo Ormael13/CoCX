@@ -1419,13 +1419,13 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].girth < 4) {
-				outputText("\n\nYou cock feels warm. When you reach down to inspect it your suspicions are confirmed. it's gotten thicker.");
+				outputText("\n\nYou cock feels warm. When you reach down to inspect it your suspicions are confirmed; it's gotten thicker.");
 				player.cocks[player.smallestCockIndex()].girth += 0.5;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.balls > 0) {
-				outputText("\n\nYou feel a warmth rising into your face along with a bubbling of alcohol tickling your nose. Oonce it's subsided, you notice your face has a more masculine, angular shape to it.");
-				player.modFem(0, 2 + rand(4));
+				outputText("\n\nYou feel a warmth rising into your face along with a bubbling of alcohol tickling your nose. Once it's subsided, you notice your face has a more masculine, angular shape to it.");
+				//player.modFem(0, 2 + rand(4));
 				dynStats("lus", 20);
 				if (player.cumMultiplier < 10) player.cumMultiplier += 1;
 				if (player.cumMultiplier < 50) player.cumMultiplier += 0.5;
@@ -1525,6 +1525,10 @@ package classes.Scenes.Places.Bazaar
 				outputText("You [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a <b>short stubby goat-like tail</b>.");
 				player.tailType = TAIL_TYPE_GOAT;
 				changes++;
+			}
+			//No changes?
+			if (changes == 0) {
+				outputText("Aside from a mild buzz, the wine has no further effect.");
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}

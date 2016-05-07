@@ -75,7 +75,7 @@ package classes.Scenes
 			addAchievement("Expert", kACHIEVEMENTS.LEVEL_EXPERT, "Get to level 20.");
 			addAchievement("Master", kACHIEVEMENTS.LEVEL_MASTER, "Get to level 30.");
 			addAchievement("Grandmaster", kACHIEVEMENTS.LEVEL_GRANDMASTER, "Get to level 45.");
-			addAchievement("Illuistrous", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS, "Get to level 60.");
+			addAchievement("Illustrious", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS, "Get to level 60.");
 			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to level 100.", "Get to level 100. (Your powers would have surpassed Marae's by now.)", true);
 			
 			titleAchievementSection("Population"); //10 achievements
@@ -205,7 +205,7 @@ package classes.Scenes
 			addAchievement("Now You're Fucking With Portals", kACHIEVEMENTS.GENERAL_FUCK_WITH_PORTALS, "Engage in portal sex with Ceraph.", "", true);
 			addAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD, "Punch a tree until wood falls out... Wait, what?", "", true);
 			addAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER, "Remove cocks from at least three dedickable NPCs. Don't you think they'll miss having their own cocks?", "", true);
-			addAchievement("You Bastard", kACHIEVEMENTS.GENERAL_YOU_BASTARD, "Remove cocks from at least seven dedickable NPCs. Take that, dedickers!", "", true);
+			addAchievement("You Bastard", kACHIEVEMENTS.GENERAL_YOU_BASTARD, "Perform something only someone who's evil would do. Like corrupting NPCs or removing dick from at least 7 dedickable NPCs.", "", true);
 			addAchievement("Up to Eleven", kACHIEVEMENTS.GENERAL_UP_TO_11, "Take your height up to 11 feet.");
 			addAchievement("Off With Her Head!", kACHIEVEMENTS.GENERAL_OFF_WITH_HER_HEAD, "You've managed to behead Lethice and show her head to the demons!", "", true);
 			addAchievement("NOOOOOOOOOOOO!", kACHIEVEMENTS.GENERAL_NOOOOOOO, "You've managed to kill yourself before Lethice takes you as her slave.", "", true);
