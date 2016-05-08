@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4";
-			version = ver + " (<b>Moar Bugfixan</b>)";
+			ver = "0.9.4_mod_Wuxia_0.6a";
+			version = ver + " (<b>Gorgons, Centaurs and little bit of Evangeline</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
