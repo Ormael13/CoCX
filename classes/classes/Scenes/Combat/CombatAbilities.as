@@ -1382,7 +1382,7 @@ package classes.Scenes.Combat
 				case TAIL_TYPE_RACCOON:
 					addButton(button++, "Tail Whip", tailWhipAttack, null, null, null, "Whip your foe with your tail to enrage them and lower their defense!");
 				case TAIL_TYPE_SALAMANDER:
-					addButton(button++, "Tail Slap", tailSlapAttack, null, null, null, "Set ablaze in red-hot lames your tail to whip your foe with it to hurt and burn them!");
+					addButton(button++, "Tail Slap", tailSlapAttack, null, null, null, "Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!");
 				default:
 			}
 			if (player.shield != ShieldLib.NOTHING) {
