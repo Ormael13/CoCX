@@ -2485,6 +2485,13 @@ public function unFuckSave():void
 	if (player.perkv1(PerkLib.AscensionTolerance) > getGame().charCreation.MAX_TOLERANCE_LEVEL) player.setPerkValue(PerkLib.AscensionTolerance, 1, getGame().charCreation.MAX_TOLERANCE_LEVEL);
 	if (player.perkv1(PerkLib.AscensionVirility) > getGame().charCreation.MAX_VIRILITY_LEVEL) player.setPerkValue(PerkLib.AscensionVirility, 1, getGame().charCreation.MAX_VIRILITY_LEVEL);
 	if (player.perkv1(PerkLib.AscensionWisdom) > getGame().charCreation.MAX_WISDOM_LEVEL) player.setPerkValue(PerkLib.AscensionWisdom, 1, getGame().charCreation.MAX_WISDOM_LEVEL);
+	//Rigidly enforce cock size caps
+	if (player.hasCock()) {
+		for (var i:int = 0; i < player.cocks.length; i++) {
+			if (player.cocks[i].cockLength > 499.9) player.cocks[i].cockLength = 499.9;
+			if (player.cocks[i].cockThickness > 99.9) player.cocks[i].cockThickness = 99.9;
+		}
+	}
 	//Unstick shift key flag
 	flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
 }

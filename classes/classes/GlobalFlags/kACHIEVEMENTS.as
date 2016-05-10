@@ -83,7 +83,7 @@ package classes.GlobalFlags
 		public static const DUNGEON_PHOENIX_FALL:int			= 065;
 		public static const DUNGEON_ACCOMPLICE:int				= 066; //shadow achievement
 		public static const DUNGEON_EXTREMELY_CHASTE_DELVER:int	= 067; //shadow achievement
-		public static const DUNGEON_DELVER_APPRENTICE:int			= 068;
+		public static const DUNGEON_DELVER_APPRENTICE:int		= 068;
 		public static const DUNGEON_END_OF_REIGN:int			= 069;
 		
 		//Fashion and Wealth Achievements (070-074)(075-079)
@@ -131,7 +131,7 @@ package classes.GlobalFlags
 		
 		//Challenge Achievements (105-109)
 		public static const CHALLENGE_ULTIMATE_NOOB:int			= 105; //Defeat Lethice at level 1.
-		public static const UNKNOWN_ACHIEVEMENT_106:int			= 106;
+		public static const CHALLENGE_ULTIMATE_MUNDANE:int		= 106; //Defeat Lethice without spells. NOT USED.
 		public static const UNKNOWN_ACHIEVEMENT_107:int			= 107;
 		public static const UNKNOWN_ACHIEVEMENT_108:int			= 108;
 		public static const UNKNOWN_ACHIEVEMENT_109:int			= 109;
@@ -202,7 +202,7 @@ package classes.GlobalFlags
 		public static const GENERAL_ANTWORKS:int				= 171;
 		public static const GENERAL_OFF_WITH_HER_HEAD:int		= 172; //Awarded for beheading Lethice.
 		public static const GENERAL_NOOOOOOO:int				= 173; //Insert Darth Vader voice here.
-		
+		public static const GENERAL_KAIZO_TRAP:int				= 174; //Fall victim to Kaizo Trap. NOT USED.
 	}
 
 }

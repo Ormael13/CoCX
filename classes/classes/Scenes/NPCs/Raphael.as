@@ -875,14 +875,14 @@ private function postRaphaelCoitus():void {
 		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n", false);
 		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
 		inventory.takeItem(weapons.RRAPIER, playerMenu);
-		player.createPerk(PerkLib.RapierTraining,0,0,0,0);
+		if (player.findPerk(PerkLib.RapierTraining) < 0) player.createPerk(PerkLib.RapierTraining,0,0,0,0);
 		outputText("(Gained Perk: Rapier Training!)\n\n");
 	}
 	//({When player has reached the INT Conversation apex} 
 	if (flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
 		outputText("However, you realize he's left you with more than just pleasant memories of sitting with him around the picnic.  Realizing how skillfully you declined him and how deftly you led him around, you realize you may have mastered his art of keeping another's attention and leading them around with cunning and acting.  This misdirection could have great applications in battle.\n\n", false);
 		//Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
-		player.createPerk(PerkLib.Misdirection,0,0,0,0);
+		if (player.findPerk(PerkLib.Misdirection) < 0) player.createPerk(PerkLib.Misdirection,0,0,0,0);
 	}
 	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you.  You can't help but wonder if you'll ever see him again though.\n\n", false);
 	//[Removes Raph from the game. 7 days later, the Quicksilver scene plays out.]

@@ -1413,14 +1413,14 @@ package classes.Scenes.Places.Bazaar
 					dynStats("lib", 1);
 				}
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].length < 12) {
+			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.cocks[player.smallestCockIndex()].cockLength < 12) {
 				outputText("\n\nHeat funnels into your cock as the alcohol flushes through you. Reaching down to inspect it, you find it has grown longer.");
-				player.cocks[player.smallestCockIndex()].length++;
+				player.cocks[player.smallestCockIndex()].cockLength++;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].girth < 4) {
+			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.cocks[player.smallestCockIndex()].cockThickness < 4) {
 				outputText("\n\nYou cock feels warm. When you reach down to inspect it your suspicions are confirmed; it's gotten thicker.");
-				player.cocks[player.smallestCockIndex()].girth += 0.5;
+				player.cocks[player.smallestCockIndex()].cockThickness += 0.5;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.balls > 0) {
@@ -1481,18 +1481,18 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.hornType == HORNS_NONE) {
-				outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
+				outputText("\n\nYou begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
 				player.hornType = HORNS_GOAT;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.hornType != HORNS_GOAT) {
-				outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
+				outputText("\n\nYou begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
 				player.horns = 1;
 				player.hornType = HORNS_GOAT;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.hornType == HORNS_GOAT && player.horns == 1) {
-				outputText("You feel heat blooming in your forehead. Confused you reach up to find your goat horns growing and thickening into a pair of horns with ridges and a slight curve. <b>You now have a pair of tall-standing goat horns.</b>");
+				outputText("\n\nYou feel heat blooming in your forehead. Confused you reach up to find your goat horns growing and thickening into a pair of horns with ridges and a slight curve. <b>You now have a pair of tall-standing goat horns.</b>");
 				player.horns = 2;
 				changes++;
 			}
@@ -1502,12 +1502,12 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() == 1 && player.countCocksOfType(CockTypesEnum.HUMAN) == 0) {
-				outputText("You feel a stirring in your loins as your cock grows rock hard. You " + player.clothedOrNakedLower("pull it out from your [armor], to ") + "take a look. It seems you now <b>have a human dick again</b>.");
+				outputText("\n\nYou feel a stirring in your loins as your cock grows rock hard. You " + player.clothedOrNakedLower("pull it out from your [armor], to ") + "take a look. It seems you now <b>have a human dick again</b>.");
 				player.cocks[0].cockType = CockTypesEnum.HUMAN;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() > 1 && (player.cockTotal() - player.countCocksOfType(CockTypesEnum.HUMAN)) > 0) {
-				outputText("One of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull it out from your [armor], releasing", "notice") + " a plume of thick smoke. When you look down you see it has <b>become a human dick</b>.");
+				outputText("\n\nOne of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull it out from your [armor], releasing", "notice") + " a plume of thick smoke. When you look down you see it has <b>become a human dick</b>.");
 				for (var i:int = 0; i < player.cockTotal(); i++) {
 					if (player.cocks[i].cockType != CockTypesEnum.HUMAN) {
 						player.cocks[i].cockType = CockTypesEnum.HUMAN;
@@ -1517,18 +1517,18 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.tailType == 0) {
-				outputText("You feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a short stubby tail that wags when you're happy. <b>You now have a goat tail.</b>");
+				outputText("\n\nYou feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a short stubby tail that wags when you're happy. <b>You now have a goat tail.</b>");
 				player.tailType = TAIL_TYPE_GOAT;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.tailType > 0 && player.tailType != TAIL_TYPE_GOAT) {
-				outputText("You [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a <b>short stubby goat-like tail</b>.");
+				outputText("\n\nYou [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a <b>short stubby goat-like tail</b>.");
 				player.tailType = TAIL_TYPE_GOAT;
 				changes++;
 			}
 			//No changes?
 			if (changes == 0) {
-				outputText("Aside from a mild buzz, the wine has no further effect.");
+				outputText("\n\nAside from a mild buzz, the wine has no further effect.");
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}

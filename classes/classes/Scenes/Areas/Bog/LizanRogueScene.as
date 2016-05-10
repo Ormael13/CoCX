@@ -76,6 +76,7 @@ package classes.Scenes.Areas.Bog
 		public function winAgainstLizan():void {
 			clearOutput();
 			outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
+			menu();
 			if (player.cor > 30) {
 				if (player.lust >= 33 && player.gender > 0) {
 					outputText("You wonder what you should do to the lizan.");
@@ -92,7 +93,7 @@ package classes.Scenes.Areas.Bog
 			}
 			else {
 				dynStats("str", 1, "tou", 1);
-				if (player.lust >= 33) {
+				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("<b>You could have sex with him if you like to.</b> ");
 					addButton(0, "Sex", haveSexWithLizan, null, null, null, "Have some fun with the oh-so-sexy lizan.");
 					addButton(4, "Leave", leaveLizanAfterCombat);

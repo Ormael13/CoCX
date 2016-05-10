@@ -372,10 +372,10 @@
 				var gameMode:Number = flags[kFLAGS.HUNGER_ENABLED];
 				var hardcoreMode:int = flags[kFLAGS.HARDCORE_MODE];
 				var hardcoreSlot:String = flags[kFLAGS.HARDCORE_SLOT];
+				
 			}
 			//Clear plot storage array!
 			flags = new DefaultDict();
-
 			kGAMECLASS.saves.loadPermObject();
 			//Carry over data if new game plus.
 			if (newGamePlusLevel > 0) {
@@ -384,6 +384,8 @@
 				flags[kFLAGS.HUNGER_ENABLED] = gameMode;
 				flags[kFLAGS.HARDCORE_MODE] = hardcoreMode;
 				flags[kFLAGS.HARDCORE_SLOT] = hardcoreSlot;
+				if (player.findPerk(PerkLib.Misdirection) > 0) flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING];
+				if (player.findPerk(PerkLib.RapierTraining) > 0) flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4;
 			}
 			//Time reset
 			model.time.days = 0;
@@ -776,7 +778,7 @@
 			addButton(3, "Set Height", setHeight);
 			if (player.hasCock()) addButton(5, "Cock Size", menuCockLength);
 			addButton(6, "Breast Size", menuBreastSize);
-			addButton(9, "Done", chooseEndowment, true);
+			addButton(9, "Done", chooseEndowment);
 		}
 
 		//-----------------
@@ -970,234 +972,160 @@
 		//-----------------
 		//-- STARTER PERKS
 		//-----------------
-		private function chooseEndowment(clear:Boolean):void {
-			if (clear) clearOutput();
+		private function chooseEndowment():void {
+			clearOutput();
 			outputText("Every person is born with a gift.  What's yours?");
 			menu();
-			addButton(0, "Strength", confirmEndowmentStrength);
-			addButton(1, "Toughness", confirmEndowmentThoughness);
-			addButton(2, "Speed", confirmEndowmentSpeed);
-			addButton(3, "Smarts", confirmEndowmentSmarts);
-			addButton(4, "Libido", confirmEndowmentLibido);
-			addButton(5, "Touch", confirmEndowmentTouch);
-			addButton(6, "Perversion", confirmEndowmentPerversion);
+			var totalStartingPerks:int = 0;
+			var button:int = 0;
+			//Attribute Perks
+			var buttonTexts:Array = ["Strong", "Tough", "Fast", "Smarts", "Libido", "Touch", "Perversion"];
+			var buttonPerks:Array = [PerkLib.Strong, PerkLib.Tough, PerkLib.Fast, PerkLib.Smart, PerkLib.Lusty, PerkLib.Sensitive, PerkLib.Pervert];
+			//Endowment Perks
 			if (player.hasCock()) {
-				addButton(7, "Big Cock", confirmEndowmentBigCock);
-				addButton(8, "Lots of Jizz", confirmEndowmentMessyOrgasms);
+				buttonTexts.push("Big Cock", "Lots of Jizz");
+				buttonPerks.push(PerkLib.BigCock, PerkLib.MessyOrgasms);
 			}
-			else {
-				addButton(7, "Big Breasts", confirmEndowmentBigBreasts);
-				addButton(8, "Big Clit", confirmEndowmentBigClit);
-				addButton(9, "Fertile", confirmEndowmentFertile);
-				addButton(10, "Wet Vagina", confirmEndowmentWetVagina);
+			if (player.hasVagina()) {
+				buttonTexts.push("Big Breasts", "Big Clit", "Fertile", "Wet Vagina");
+				buttonPerks.push(PerkLib.BigTits, PerkLib.BigClit, PerkLib.Fertile, PerkLib.WetPussy);
 			}
-			if (player.gender == GENDER_HERM)
-			{
-				addButton(7, "Big Cock", confirmEndowmentBigCock);
-				addButton(8, "Lots of Jizz", confirmEndowmentMessyOrgasms);
-				addButton(9, "Big Breasts", confirmEndowmentBigBreasts);
-				addButton(10, "Big Clit", confirmEndowmentBigClit);
-				addButton(11, "Fertile", confirmEndowmentFertile);
-				addButton(12, "Wet Vagina", confirmEndowmentWetVagina);
+			//Add buttons
+			for (var i:int = 0; i < buttonTexts.length; i++) {
+				if (player.findPerk(buttonPerks[i]) < 0) {
+					addButton(button++, buttonTexts[i], confirmEndowment, buttonPerks[i]);
+				}
+				else {
+					addButtonDisabled(button++, buttonTexts[i], "You already have this starting perk.");
+					totalStartingPerks++;
+				}
 			}
+			//Option to skip if you have enough starting perks
+			if (totalStartingPerks >= 4) addButton(14, "Skip", chooseHistory);
 		}
 
-		private function confirmEndowmentStrength():void {
+		private function confirmEndowment(choice:PerkType):void {
 			clearOutput();
-			outputText("Are you stronger than normal? (+5 Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.");
+			switch(choice) {
+				//Attributes
+				case PerkLib.Strong:
+					outputText("Are you stronger than normal? (+5 Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.");
+					break;
+				case PerkLib.Tough:
+					outputText("Are you unusually tough? (+5 Toughness)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.");
+					break;
+				case PerkLib.Fast:
+					outputText("Are you very quick?  (+5 Speed)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.");
+					break;
+				case PerkLib.Smart:
+					outputText("Are you a quick learner?  (+5 Intellect)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.");
+					break;
+				case PerkLib.Lusty:
+					outputText("Do you have an unusually high sex-drive?  (+5 Libido)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...");
+					break;
+				case PerkLib.Sensitive:
+					outputText("Is your skin unusually sensitive?  (+5 Sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.");
+					break;
+				case PerkLib.Pervert:
+					outputText("Are you unusually perverted?  (+5 Corruption)\n\Corruption affects certain scenes and having a higher corruption makes you more prone to Bad Ends.\n", true);
+					break;
+				//Gender-specific
+				case PerkLib.BigCock:
+					outputText("Do you have a big cock?  (+2\" Cock Length)\n\nA bigger cock will make it easier to get off any sexual partners, but only if they can take your size.");
+					break;
+				case PerkLib.MessyOrgasms:
+					outputText("Are your orgasms particularly messy?  (+50% Cum Multiplier)\n\nA higher cum multiplier will cause your orgasms to be messier.");
+					break;
+				case PerkLib.BigTits:
+					outputText("Are your breasts bigger than average? (+1 Cup Size)\n\nLarger breasts will allow you to lactate greater amounts, tit-fuck larger cocks, and generally be a sexy bitch.");
+					break;
+				case PerkLib.BigClit:
+					outputText("Do you have a big clit?  (1\" Long)\n\nA large enough clit may eventually become as large as a cock.  It also makes you gain lust much faster during oral or manual stimulation.");
+					break;
+				case PerkLib.Fertile:
+					outputText("Is your family particularly fertile?  (+15% Fertility)\n\nA high fertility will cause you to become pregnant much more easily.  Pregnancy may result in: Strange children, larger bust, larger hips, a bigger ass, and other weirdness.");
+					break;
+				case PerkLib.WetPussy:
+					outputText("Does your pussy get particularly wet?  (+1 Vaginal Wetness)\n\nVaginal wetness will make it easier to take larger cocks, in turn helping you bring the well-endowed to orgasm quicker.");
+					break;
+			}
 			menu();
-			addButton(0, "Yes", setEndowmentStrength);
-			addButton(1, "No", chooseEndowment, true);
+			addButton(0, "Yes", setEndowment, choice);
+			addButton(1, "No", chooseEndowment);
 		}
 
-		private function confirmEndowmentThoughness():void {
-			clearOutput();
-			outputText("Are you unusually tough? (+5 Toughness)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.");
-			menu();
-			addButton(0, "Yes", setEndowmentToughness);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function confirmEndowmentSpeed():void {
-			clearOutput();
-			outputText("Are you very quick?  (+5 Speed)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.");
-			menu();
-			addButton(0, "Yes", setEndowmentSpeed);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function confirmEndowmentSmarts():void {
-			clearOutput();
-			outputText("Are you a quick learner?  (+5 Intellect)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.");
-			menu();
-			addButton(0, "Yes", setEndowmentSmarts);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function confirmEndowmentLibido():void {
-			clearOutput();
-			outputText("Do you have an unusually high sex-drive?  (+5 Libido)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...");
-			menu();
-			addButton(0, "Yes", setEndowmentLibido);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function confirmEndowmentTouch():void {
-			clearOutput();
-			outputText("Is your skin unusually sensitive?  (+5 Sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.");
-			menu();
-			addButton(0, "Yes", setEndowmentTouch);
-			addButton(1, "No", chooseEndowment, true);
-		}
-		
-		private function confirmEndowmentPerversion():void {
-			clearOutput();
-			outputText("Are you unusually perverted?  (+5 Corruption)\n\Corruption affects certain scenes and having a higher corruption makes you more prone to Bad Ends.\n", true);
-			menu();
-			addButton(0, "Yes", setEndowmentPerversion);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function confirmEndowmentBigCock():void {
-			clearOutput();
-			outputText("Do you have a big cock?  (+2\" Cock Length)\n\nA bigger cock will make it easier to get off any sexual partners, but only if they can take your size.");
-			menu();
-			addButton(0, "Yes", setEndowmentBigCock);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function confirmEndowmentMessyOrgasms():void {
-			clearOutput();
-			outputText("Are your orgasms particularly messy?  (+50% Cum Multiplier)\n\nA higher cum multiplier will cause your orgasms to be messier.");
-			menu();
-			addButton(0, "Yes", setEndowmentMessyOrgasms);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function confirmEndowmentBigBreasts():void {
-			clearOutput();
-			outputText("Are your breasts bigger than average? (DD cups)\n\nLarger breasts will allow you to lactate greater amounts, tit-fuck larger cocks, and generally be a sexy bitch.");
-			menu();
-			addButton(0, "Yes", setEndowmentBigBreasts);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function confirmEndowmentBigClit():void {
-			clearOutput();
-			outputText("Do you have a big clit?  (1\" Long)\n\nA large enough clit may eventually become as large as a cock.  It also makes you gain lust much faster during oral or manual stimulation.");
-			menu();
-			addButton(0, "Yes", setEndowmentBigClit);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function confirmEndowmentFertile():void {
-			clearOutput();
-			outputText("Is your family particularly fertile?  (+15% Fertility)\n\nA high fertility will cause you to become pregnant much more easily.  Pregnancy may result in: Strange children, larger bust, larger hips, a bigger ass, and other weirdness.");
-			menu();
-			addButton(0, "Yes", setEndowmentFertile);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function confirmEndowmentWetVagina():void {
-			clearOutput();
-			outputText("Does your pussy get particularly wet?  (+1 Vaginal Wetness)\n\nVaginal wetness will make it easier to take larger cocks, in turn helping you bring the well-endowed to orgasm quicker.");
-			menu();
-			addButton(0, "Yes", setEndowmentWetVagina);
-			addButton(1, "No", chooseEndowment, true);
-		}
-
-		private function setEndowmentStrength():void {
-			player.str += 5;
-			player.tone += 7;
-			player.thickness += 3;
-			//Add bonus +25% strength gain
-			player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentToughness():void {
-			player.tou += 5;
-			player.tone += 5;
-			player.thickness += 5;
-			player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
-			player.HP = kGAMECLASS.maxHP();
-			chooseHistory();
-		}
-		
-		private function setEndowmentSpeed():void {
-			player.spe += 5;
-			player.tone += 10;
-			player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentSmarts():void {
-			player.inte += 5;
-			player.thickness -= 5;
-			player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentLibido():void {
-			player.lib += 5;
-			player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentTouch():void {
-			player.sens += 5;
-			player.createPerk(PerkLib.Sensitive, 0.25, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentPerversion():void {
-			player.sens += 5;
-			player.createPerk(PerkLib.Pervert, 0.25, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentBigCock():void {
-			player.femininity -= 5;
-			player.cocks[0].cockLength = 8;
-			player.cocks[0].cockThickness = 1.5;
-			trace("Creation - cock modded to 8inches");
-			player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentMessyOrgasms():void {
-			player.femininity -= 2;
-			player.cumMultiplier = 1.5;
-			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentBigBreasts():void {
-			player.femininity += 5;
-			player.breastRows[0].breastRating += 2;
-			player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentBigClit():void {
-			player.femininity -= 5;
-			player.clitLength = 1;
-			player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentFertile():void {
-			player.femininity += 5;
-			player.fertility += 25;
-			player.hipRating += 2;
-			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
-			chooseHistory();
-		}
-		
-		private function setEndowmentWetVagina():void {
-			player.femininity += 7;
-			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
-			player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
+		private function setEndowment(choice:PerkType):void {
+			switch(choice) {
+				//Attribute-specific
+				case PerkLib.Strong:
+					player.str += 5;
+					player.tone += 7;
+					player.thickness += 3;
+					player.createPerk(PerkLib.Strong, 0.25, 0, 0, 0);
+					break;
+				case PerkLib.Tough:
+					player.tou += 5;
+					player.tone += 5;
+					player.thickness += 5;
+					player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
+					player.HP = kGAMECLASS.maxHP();
+					break;
+				case PerkLib.Fast:
+					player.spe += 5;
+					player.tone += 10;
+					player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0);
+					break;
+				case PerkLib.Smart:
+					player.inte += 5;
+					player.thickness -= 5;
+					player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0);
+					break;
+				case PerkLib.Lusty:
+					player.lib += 5;
+					player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0);
+					break;
+				case PerkLib.Sensitive:
+					player.sens += 5;
+					player.createPerk(PerkLib.Sensitive, 0.25, 0, 0, 0);
+					break;
+				case PerkLib.Pervert:
+					player.cor += 5;
+					player.createPerk(PerkLib.Pervert, 0.25, 0, 0, 0);
+					break;
+				//Genital-specific
+				case PerkLib.BigCock:
+					player.femininity -= 5;
+					player.cocks[0].cockLength = 8;
+					player.cocks[0].cockThickness = 1.5;
+					player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
+					break;
+				case PerkLib.MessyOrgasms:
+					player.femininity -= 2;
+					player.cumMultiplier = 1.5;
+					player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
+					break;
+				case PerkLib.BigTits:
+					player.femininity += 5;
+					player.breastRows[0].breastRating += 2;
+					player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
+					break;
+				case PerkLib.BigClit:
+					player.femininity -= 5;
+					player.clitLength = 1;
+					player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
+					break;
+				case PerkLib.Fertile:
+					player.femininity += 5;
+					player.fertility += 25;
+					player.hipRating += 2;
+					player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
+					break;
+				case PerkLib.WetPussy:
+					player.femininity += 7;
+					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+					player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
+					break;
+			}
 			chooseHistory();
 		}
 		
@@ -1211,16 +1139,21 @@
 			}
 			outputText("Before you became a champion, you had other plans for your life.  What were you doing before?");
 			menu();
-			addButton(0, "Alchemy", confirmHistory, PerkLib.HistoryAlchemist);
-			addButton(1, "Fighting", confirmHistory, PerkLib.HistoryFighter);
-			addButton(2, "Healing", confirmHistory, PerkLib.HistoryHealer);
-			addButton(3, "Religion", confirmHistory, PerkLib.HistoryReligious);
-			addButton(4, "Schooling", confirmHistory, PerkLib.HistoryScholar);
-			addButton(5, "Slacking", confirmHistory, PerkLib.HistorySlacker);
-			addButton(6, "Slutting", confirmHistory, PerkLib.HistorySlut);
-			addButton(7, "Smithing", confirmHistory, PerkLib.HistorySmith);
-			addButton(8, "Whoring", confirmHistory, PerkLib.HistoryWhore);
-			addButton(9, "Fortune", confirmHistory, PerkLib.HistoryFortune);
+			var totalHistoryPerks:int = 0;
+			var button:int = 0;
+			//Attribute Perks
+			var buttonTexts:Array = ["Alchemy", "Fighting", "Fortune", "Healing", "Religion", "Schooling", "Slacking", "Slutting", "Smithing", "Whoring"];
+			var buttonPerks:Array = [PerkLib.HistoryAlchemist, PerkLib.HistoryFighter, PerkLib.HistoryFortune, PerkLib.HistoryHealer, PerkLib.HistoryReligious, PerkLib.HistoryScholar, PerkLib.HistorySlacker, PerkLib.HistorySlut, PerkLib.HistorySmith, PerkLib.HistoryWhore];
+			for (var i:int = 0; i < buttonTexts.length; i++) {
+				if (player.findPerk(buttonPerks[i]) < 0) {
+					addButton(button++, buttonTexts[i], confirmHistory, buttonPerks[i]);
+				}
+				else {
+					addButtonDisabled(button++, buttonTexts[i], "You already have this history perk.");
+					totalHistoryPerks++;
+				}
+			}
+			if (totalHistoryPerks >= 3) addButton(14, "Skip", completeCharacterCreation);
 		}
 		
 		private function confirmHistory(choice:PerkType):void {
@@ -1514,21 +1447,35 @@
 			ascensionPerkSelection(perk, maxLevel);
 		}
 		//Perk Permery
-		private function ascensionPermeryMenu():void {
+		private function ascensionPermeryMenu(page:int = 1):void {
 			clearOutput();
 			outputText("For the price of a few points, you can make certain perks permanent and they will carry over in future ascensions. In addition, if the perks come from transformations, they will stay even if you no longer meet the requirements.");
 			outputText("\n\nCurrent Cost: " + permanentizeCost() + " Ascension Points");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			var button:int = 0;
+			var countBeforeAdding:int = (page - 1) * 12;
 			menu();
 			for (var i:int = 0; i < player.perks.length; i++) {
 				if (isPermable(player.perks[i].ptype)) {
-					if (player.perks[i].value4 == 0)
-						addButton(button++, player.perks[i].ptype.id, permanentizePerk, player.perks[i].ptype, null, null, player.perks[i].ptype.desc());
-					else
-						addButtonDisabled(button++, player.perks[i].ptype.id, "This perk is already made permanent and will carry over in all subsequent ascensions.");
+					//Decrement count before adding buttons.
+					if (countBeforeAdding > 0) {
+						countBeforeAdding--;
+					}
+					//Add buttons when the count reaches zero.
+					else {
+						if (player.perks[i].value4 == 0)
+							addButton(button++, player.perks[i].ptype.id, permanentizePerk, player.perks[i].ptype, null, null, player.perks[i].ptype.desc());
+						else
+							addButtonDisabled(button++, player.perks[i].ptype.id, "This perk is already made permanent and will carry over in all subsequent ascensions.");
+					}
 				}
+				//Skip slots reserved for next and previous.
+				if (button == 4) button++;
+				if (button == 9) button++;
 			}
+			//Next and previous page buttons depending on conditions.
+			if (button > 14) addButton(4, "Next", ascensionMenu, page + 1);
+			if (page > 1) addButton(9, "Previous", ascensionMenu, page - 1);
 			addButton(14, "Back", ascensionMenu);
 		}
 		private function permanentizePerk(perk:PerkType):void {
@@ -1544,55 +1491,29 @@
 		private function permanentizeCost():int {
 			var count:int = 1;
 			//Transformation Perks
-			if (player.perkv4(PerkLib.Flexibility) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.SatyrSexuality) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.Lustzerker) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.CorruptedNinetails) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.EnlightenedNinetails) > 0) {
-				count++;
-			}
-			//Event Perks
-			if (player.perkv4(PerkLib.Androgyny) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.MaraesGiftButtslut) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.MaraesGiftFertility) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.MaraesGiftProfractory) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.MaraesGiftStud) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.PurityBlessing) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.MagicalFertility) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.MagicalVirility) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.Hellfire) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.FireLord) > 0) {
-				count++;
-			}
-			if (player.perkv4(PerkLib.Dragonfire) > 0) {
-				count++;
-			}
+			if (player.perkv4(PerkLib.Flexibility) > 0) count++;
+			if (player.perkv4(PerkLib.SatyrSexuality) > 0) count++;
+			if (player.perkv4(PerkLib.Lustzerker) > 0) count++;
+			if (player.perkv4(PerkLib.CorruptedNinetails) > 0) count++;
+			if (player.perkv4(PerkLib.EnlightenedNinetails) > 0) count++;
+			//Marae's Perks
+			if (player.perkv4(PerkLib.MaraesGiftButtslut) > 0) count++;
+			if (player.perkv4(PerkLib.MaraesGiftFertility) > 0) count++;
+			if (player.perkv4(PerkLib.MaraesGiftProfractory) > 0) count++;
+			if (player.perkv4(PerkLib.MaraesGiftStud) > 0) count++;
+			if (player.perkv4(PerkLib.PurityBlessing) > 0) count++;
+			//Fire Breath Perks
+			if (player.perkv4(PerkLib.Hellfire) > 0) count++;
+			if (player.perkv4(PerkLib.FireLord) > 0) count++;
+			if (player.perkv4(PerkLib.Dragonfire) > 0) count++;
+			//Other Perks
+			if (player.perkv4(PerkLib.Androgyny) > 0) count++;
+			if (player.perkv4(PerkLib.MagicalFertility) > 0) count++;
+			if (player.perkv4(PerkLib.MagicalVirility) > 0) count++;
+			if (player.perkv4(PerkLib.MilkMaid) > 0) count++;
+			if (player.perkv4(PerkLib.Misdirection) > 0) count++;
+			if (player.perkv4(PerkLib.RapierTraining) > 0) count++;
+			if (player.perkv4(PerkLib.ThickSkin) > 0) count++;
 			return count;
 		}
 		private function isPermable(perk:PerkType):Boolean {
@@ -1602,18 +1523,23 @@
 			if (perk == PerkLib.Lustzerker) return true;
 			if (perk == PerkLib.CorruptedNinetails) return true;
 			if (perk == PerkLib.EnlightenedNinetails) return true;
-			//Event Perks
-			if (perk == PerkLib.Androgyny) return true;
+			//Marae's Perks
 			if (perk == PerkLib.MaraesGiftButtslut) return true;
 			if (perk == PerkLib.MaraesGiftFertility) return true;
 			if (perk == PerkLib.MaraesGiftProfractory) return true;
 			if (perk == PerkLib.MaraesGiftStud) return true;
-			if (perk == PerkLib.PurityBlessing) return true;
-			if (perk == PerkLib.MagicalFertility) return true;
-			if (perk == PerkLib.MagicalVirility) return true;
+			//Fire Breath Perks
 			if (perk == PerkLib.Hellfire) return true;
 			if (perk == PerkLib.FireLord) return true;
 			if (perk == PerkLib.Dragonfire) return true;
+			//Other Perks
+			if (perk == PerkLib.Androgyny) return true;
+			if (perk == PerkLib.PurityBlessing) return true;
+			if (perk == PerkLib.MagicalFertility) return true;
+			if (perk == PerkLib.MagicalVirility) return true;
+			if (perk == PerkLib.MilkMaid) return true;
+			if (perk == PerkLib.Misdirection) return true;
+			if (perk == PerkLib.ThickSkin) return true;
 			return false;
 		}
 		//Respec

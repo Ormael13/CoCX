@@ -2965,9 +2965,14 @@
 
 		public function purePearl(player:Player):void
 		{
+			if (player.findPerk(PerkLib.PurityBlessing) >= 0) {
+				outputText("As you're about to cram the pearl into your mouth, your instincts remind you that you shouldn't waste the pearl since you already have the perk. You put it back into your pack. ");
+				inventory.takeItem(consumables.P_PEARL, inventory.inventoryMenu);
+				return;
+			}
 			outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.", true);
 			dynStats("lib", -5, "lus", -25, "cor", -10);
-			if (player.findPerk(PerkLib.PurityBlessing) < 0) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
+			player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
 		}
 		
 		public function lactaid(player:Player):void

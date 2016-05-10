@@ -168,7 +168,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText(" shocked");
 			}
-			outputText(" at what you’ve done, but none dare challenge the Champion in [hisHer] moment of victory.");
+			outputText(" at what you’ve done, but none dare challenge the Champion in " + player.mf("his", "her") + " moment of victory.");
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 			menu();
 			addButton(0,"Next",theChoiceDunDunDun);
@@ -196,7 +196,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText(" shocked");
 			}
-			outputText(" at what you’ve done, but none dare challenge the Champion in [hisHer] moment of victory.");
+			outputText(" at what you’ve done, but none dare challenge the Champion in " + player.mf("his", "her") + " moment of victory.");
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 			theChoiceDunDunDun();
 		}
@@ -685,7 +685,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(" too weak to even ball your fists");
 			}
 			outputText(" as the victorious demon strides towards you.");
-			outputText("\n\n<i>“Ah, now <b>that</b> is what I like to see,”</i> she purrs, lifting her arms triumphantly to the gibbering host of demons still crowding around the throne room. <i>“Another would-be savior on [hisHer] knees before me! Once again,”</i> she sneers, turning her gaze down to you, her demonic heels clacking one after the other on the cold floor, <i>“we see that nothing... no one... can stand against me.”</i>");
+			outputText("\n\n<i>“Ah, now <b>that</b> is what I like to see,”</i> she purrs, lifting her arms triumphantly to the gibbering host of demons still crowding around the throne room. <i>“Another would-be savior on " + player.mf("his", "her") + " knees before me! Once again,”</i> she sneers, turning her gaze down to you, her demonic heels clacking one after the other on the cold floor, <i>“we see that nothing... no one... can stand against me.”</i>");
 			outputText("\n\nLethice reaches down, cupping your chin with her long-nailed fingers and tilting your head up. She’s not forceful, more like a mother disappointed in her child, forcing you to confront your misdeeds. In her churchy outfit, you could easily mistake her for one of the priestesses that would teach you and the other children back in Ingnam, save for the tremendous wings and curling horns. She must recognize the look you give her, and she smiles almost beatifically. Beautifully.");
 			outputText("\n\n<i>“So powerful, so self-righteous... and here you are, kneeling before me like so many before you. Still, I have to give you credit, Champion. You got so much further than most: I almost broke a sweat breaking you.");
 			if(monster.lust < 50 && monster.HP > monster.eMaxHP() * 0.5)

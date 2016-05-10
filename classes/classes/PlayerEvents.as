@@ -1022,6 +1022,14 @@ package classes {
 				getGame().forest.beeGirlScene.beeSexForCocks(false);
 				return true;
 			}
+			//Rigidly enforce cock size caps
+			if (player.hasCock()) {
+				for (var i:int = 0; i < player.cocks.length; i++) {
+					if (player.cocks[i].cockLength > 499.9) player.cocks[i].cockLength = 499.9;
+					if (player.cocks[i].cockThickness > 99.9) player.cocks[i].cockThickness = 99.9;
+				}
+			}
+			//Randomly change weather post-game
 			if (flags[kFLAGS.GAME_END] > 0 && flags[kFLAGS.WEATHER_CHANGE_COOLDOWN] <= 0) {
 				var randomWeather:int = rand(100);
 				flags[kFLAGS.WEATHER_CHANGE_COOLDOWN] = 6 + rand(48);
