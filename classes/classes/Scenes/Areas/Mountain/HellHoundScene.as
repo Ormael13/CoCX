@@ -216,7 +216,7 @@ package classes.Scenes.Areas.Mountain
 			//increase lust by 30, corruption by 6, and libido by 3
 			dynStats("lib", 3, "lus", 30, "cor", 6);
 			//player gains hellfire perk.  Hellfire deals physical damage to completely pure foes, lust damage to completely corrupt foes, and a mix for those in between.  Its power is based on the PC's corruption and level.  Appearance is slightly changed to mention that the PC's eyes and mouth occasionally show flicks of fire from within them, text could possibly vary based on corruption.
-			player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
+			if (player.findPerk(PerkLib.Hellfire) < 0) player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
 			//Hellhounds no longer encounterable.
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141]++;
 			doNext(camp.returnToCampUseOneHour);

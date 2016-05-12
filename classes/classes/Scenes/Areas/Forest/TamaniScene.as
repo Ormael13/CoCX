@@ -847,15 +847,16 @@ public function tamaniVictoryMenu():void {
 		outputText("\n\nWhat do you do to her?");
 		menu();
 		addButton(0, "Fuck", tamaniSexWon);
-		addButton(1, "Buttfuck", tamaniAnalShits);
+		if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(1, "Buttfuck", tamaniAnalShits);
+		else addButtonDisabled(1, "Buttfuck", player.cockTotal() == 1 ? "Your cock is too big to fit in Tamani's ass." : "None of your cocks will fit in Tamani's ass.");
 		if (!getGame().forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) addButton(2, "Lay Eggs", tamaniBeaten); //NOT PREGGERS
 		if (flags[kFLAGS.TAMANI_DEFEAT_COUNTER] >= 4 && monster.HP <= 0) addButton(3, "NO MORE!", killTamaniChoice);
 		addButton(4, "Leave", combat.cleanupAfterCombat);
 	}
 	else {
 		if (flags[kFLAGS.TAMANI_DEFEAT_COUNTER] >= 4 && monster.HP <= 0) {
-			outputText(" If you're tired of Tamani trying to force herself upon you, you could kill her.");
-			addButton(3, "Bad-End Her", killTamani);
+			outputText(" If you're tired of Tamani trying to force herself upon you, you could resolve to not see her again.");
+			addButton(3, "NO MORE!", killTamaniChoice);
 			addButton(4, "Leave", combat.cleanupAfterCombat);
 		}
 		else {

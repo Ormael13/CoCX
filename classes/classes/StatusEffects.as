@@ -252,6 +252,11 @@ package classes
 		public static const Vapula:StatusEffectType = mk("Vapula");
 		public static const WhipReady:StatusEffectType = mk("Whip Ready");
 
+		//Plantgirl
+		public static const happy:StatusEffectType = mk("happy");
+		public static const horny:StatusEffectType = mk("horny");
+		public static const grouchy:StatusEffectType = mk("grouchy");
+		
 		// combat
 		public static const AcidSlap:CombatStatusEffect = mk2("Acid Slap");
 		public static const AkbalSpeed:CombatStatusEffect = mk2("Akbal Speed");

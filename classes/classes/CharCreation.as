@@ -1464,7 +1464,7 @@
 					//Add buttons when the count reaches zero.
 					else {
 						if (player.perks[i].value4 == 0)
-							addButton(button++, player.perks[i].ptype.id, permanentizePerk, player.perks[i].ptype, null, null, player.perks[i].ptype.desc());
+							addButton(button++, player.perks[i].ptype.id, permanentizePerk, player.perks[i].ptype, null, null, player.perks[i].ptype.desc(player.perks[i]));
 						else
 							addButtonDisabled(button++, player.perks[i].ptype.id, "This perk is already made permanent and will carry over in all subsequent ascensions.");
 					}
@@ -1492,6 +1492,7 @@
 			var count:int = 1;
 			//Transformation Perks
 			if (player.perkv4(PerkLib.Flexibility) > 0) count++;
+			if (player.perkv4(PerkLib.Incorporeality) > 0) count++;
 			if (player.perkv4(PerkLib.SatyrSexuality) > 0) count++;
 			if (player.perkv4(PerkLib.Lustzerker) > 0) count++;
 			if (player.perkv4(PerkLib.CorruptedNinetails) > 0) count++;
@@ -1519,6 +1520,7 @@
 		private function isPermable(perk:PerkType):Boolean {
 			//Transformation Perks
 			if (perk == PerkLib.Flexibility) return true;
+			if (perk == PerkLib.Incorporeality) return true;
 			if (perk == PerkLib.SatyrSexuality) return true;
 			if (perk == PerkLib.Lustzerker) return true;
 			if (perk == PerkLib.CorruptedNinetails) return true;
