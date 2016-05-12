@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.9.4_mod_Wuxia_0.6a";
-			version = ver + " (<b>Gorgons, Centaurs and little bit of Evangeline</b>)";
+			ver = "1.0.2_mod_Xianxia_0.6b";
+			version = ver + " (<b>Upgrading base to CoC 1.0.2 aka 3 final bosses of D3 added</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
