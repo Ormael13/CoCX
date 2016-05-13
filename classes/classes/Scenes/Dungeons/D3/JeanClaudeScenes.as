@@ -118,19 +118,10 @@
 
 			outputText("\n\n“<i>But now the ball is in the basilisk court, is it not, interloper?</i>” Jean-Claude growls softly, holding your face close, pulling you deeper and deeper into his glow, bathing you in heat. “<i>And the only question now is how I am going to serve you.</i>”");
 
-			if (player.inte >= 80 || player.findPerk(PerkLib.BasiliskResistance) >= 0)
-			{
-				outputText("\n\nThe last of the petrifying curse slips from your limbs and a thought leaps lightning fast through your mind, cutting through the warm haze for a moment. It tells you that you have to act now - with your body free of the grey and your mind still resisting the gold. What do you do in this one, free, desperate moment?");
-				
-				menu();
-				addButton(0, "Taunt", capturedbyBasilisksTaunt);
-				addButton(1, "Run", capturedByBasilisksRun);
-			}
-			else
-			{
-				menu();
-				addButton(0, "Next", basiliskBadEnds);
-			}
+			outputText("\n\nThe last of the petrifying curse slips from your limbs and a thought leaps lightning fast through your mind, cutting through the warm haze for a moment. It tells you that you have to act now - with your body free of the grey and your mind still resisting the gold. What do you do in this one, free, desperate moment?");
+			menu();
+			addButton(0, "Taunt", capturedbyBasilisksTaunt);
+			addButton(1, "Run", capturedByBasilisksRun);
 		}
 		
 		private function capturedByBasilisksRun():void
