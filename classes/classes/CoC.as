@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.6b";
-			version = ver + " (<b>Upgrading base to CoC 1.0.2 aka 3 final bosses of D3 added</b>)";
+			ver = "1.0.2_mod_Xianxia_0.6b_2";
+			version = ver + " (<b>More HP for monsters and Ezekiel Fruit issue fix</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
