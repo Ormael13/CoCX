@@ -15,7 +15,7 @@
     <option name="launchUrl" value="false" />
     <option name="launcherParameters">
       <LauncherParameters>
-        <option name="browserFamily" value="CHROME" />
+        <option name="browser" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
         <option name="launcherType" value="Browser" />
         <option name="newPlayerInstance" value="false" />
         <option name="playerPath" value="C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/player/win/11.4/FlashPlayerDebugger.exe" />
