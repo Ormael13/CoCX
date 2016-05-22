@@ -64,6 +64,7 @@ package classes.Scenes.Places
 			//Done to allow player who has both perks to fight Marae.
 			if ((debug || rand(10) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 2 && flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
 				marae.level3MaraeEncounter();
+				return;
 			}
 			//BUILD LIST OF CHOICES
 			var choice:Array = [0, 1, 2, 3];
